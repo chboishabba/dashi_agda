@@ -1,0 +1,81 @@
+@startuml
+title Balaban RG TOE Max-Cut
+
+left to right direction
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+package "Canonical theorem owners" {
+  component "Beta-driven complete density\nCMP119/CMP122" as Density
+  component "Regular-E projection\nlocalization / continuation" as RegularE
+  component "Compact-simple Casimir\nclassification / orbit factorization" as Casimir
+  component "CMP116 stress\nCauchy / Hilbert bounds" as Stress
+  component "Published finite nonlinear RG" as PublishedRG
+  component "Scale-transfer frontier" as Frontier
+  component "Continuum route boundary" as Continuum
+}
+
+component "DASHI.Unified.\nBalabanRGTOERegression" as Normalized
+
+package "TOE consumers" {
+  component "EverythingTOE\nSymmetryResolved369" as TOE
+  component "DASHI.Unifier" as Unifier
+  component "DASHI.Unified.Physics" as Physics
+}
+
+component "BalabanRGTOE\nMaxCutValidation" as Validation
+
+Density --> Normalized : reuse
+RegularE --> Normalized : reuse
+Casimir --> Normalized : reuse
+Stress --> Normalized : reuse
+PublishedRG --> Normalized : reuse
+Frontier --> Normalized : strict authority
+Continuum --> Normalized : non-promotion
+
+Normalized --> TOE : import / alias
+Normalized --> Unifier : import / alias
+Normalized --> Physics : import / alias
+
+TOE --> Validation : agreement
+Unifier --> Validation : agreement
+Physics --> Validation : agreement
+Normalized --> Validation : receipt fields
+
+note bottom of Frontier
+Preconditions:
+- published finite RG owners exist
+- physical source welds keep their proof levels
+- strict scale-transfer frontier owns promotion status
+
+Invariants:
+- one canonical theorem owner
+- finite != continuum
+- conditional != machineChecked
+- no ESD mutation
+- attribution stays with source owners
+end note
+
+note bottom of Continuum
+Postconditions:
+uniform KP absorption = false
+block-spin transfer = false
+OS/Wightman construction = false
+continuum Yang-Mills = false
+continuum mass gap = false
+terminal promotion = false
+Clay promotion = false
+end note
+
+note bottom of Validation
+ZKP frame:
+O/R/C/S/L/P/G/F reuses the existing
+physicalUniformRGStep preconditions,
+postconditions, and invariants.
+
+This diagram is architecture documentation.
+It is not proof authority.
+end note
+
+@enduml
