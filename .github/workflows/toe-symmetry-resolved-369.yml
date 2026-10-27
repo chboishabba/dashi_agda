@@ -232,6 +232,8 @@ jobs:
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
             DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
