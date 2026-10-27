@@ -376,3 +376,44 @@ unifiedFleetMetaIntrospectorProofNotBorrowed :
   FleetGapTOE.metaIntrospectorProofBorrowed
     FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifiedFleetMetaIntrospectorProofNotBorrowed = refl
+
+------------------------------------------------------------------------
+-- Recognition-objective rechart -> Unified aggregate.
+--
+-- Reuse existing Lacan/Irigaray and feminist recognition owners.
+-- This aggregate preserves separation from legal authority and compliance.
+-- A changed approval objective can change selected conduct.
+-- It does not erase sanctions, desire, symbolic structure, or proof duties.
+------------------------------------------------------------------------
+
+import DASHI.Core.GenderedApprovalObjectiveRechartExact as ApprovalRechart
+import DASHI.Governance.FeministRecognitionAuthorityCrossPollinationExact as FeministRecognition
+
+unifiedApprovalObjectiveRechartBoundary :
+  ApprovalRechart.ApprovalObjectiveRechartBoundary
+unifiedApprovalObjectiveRechartBoundary =
+  ApprovalRechart.canonicalApprovalObjectiveRechartBoundary
+
+unifiedApprovalObjectiveRechartChangesSelectedConduct :
+  ApprovalRechart.chooseByObjective ApprovalRechart.approvalIndexedObjective
+    ≡ ApprovalRechart.chooseByObjective ApprovalRechart.declaredCriterionObjective
+    → ⊥
+unifiedApprovalObjectiveRechartChangesSelectedConduct =
+  ApprovalRechart.objectiveRechartChangesSelectedConduct
+
+unifiedApprovalSupposedAuthorityIsNotVerifiedAuthority =
+  ApprovalRechart.supposedApprovalAuthorityIsNotVerifiedAuthority
+
+unifiedApprovalDesireNeedNotTerminateAtApproval =
+  ApprovalRechart.desireNeedNotTerminateAtApproval
+
+unifiedApprovalBigOtherIsNotLiteralOmniscientApprover =
+  ApprovalRechart.bigOtherIsNotLiteralOmniscientApprover
+
+unifiedApprovalReciprocalContactDoesNotDetermineUniqueHierarchy =
+  ApprovalRechart.reciprocalContactDoesNotDetermineUniqueHierarchy
+
+unifiedFeministRecognitionCrossPollinationBoundary :
+  FeministRecognition.FeministRecognitionCrossPollinationBoundary
+unifiedFeministRecognitionCrossPollinationBoundary =
+  FeministRecognition.canonicalFeministRecognitionCrossPollinationBoundary
