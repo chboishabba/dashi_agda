@@ -395,3 +395,39 @@ toe369YangMillsGoal1C4CommonMetricCompilerLevel =
 
 toe369YangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 toe369YangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut receipt.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+toeBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+toeBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
