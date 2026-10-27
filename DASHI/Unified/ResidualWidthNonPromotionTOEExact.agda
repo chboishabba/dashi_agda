@@ -31,16 +31,22 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPExtensionalCandidateAbstractMachineExact as CandidateMachine
 import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Bits
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
 import DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityResidualWidthWitnessExact as EqualityWidth
 import DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityLinearDecisionSeparationExact as EqualityDecision
+import DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityDirectDPObstructionExact as EqualityDirectDP
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedExhaustiveMergeExact as Root
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1EnumeratedMergedLayerExact as Step
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateExact as Work
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExhaustiveEnumerationCostObstructionExact as Exhaustive
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateConfigurationFutureTransportNoGoExact as Future
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfSpecializationWidthUniversalityNoGoExact as SelfSpecialization
+import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateCoupledFirstStepBoundaryExact as FirstStep
+import DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact as DirectDP
 import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact as Machine
 import DASHI.Mathematics.Complexity.DeterministicMachineToInPExact as ToP
 import DASHI.Mathematics.Complexity.PNotEqualsNPActualMachineStutteringTransportExact as Stutter
@@ -131,6 +137,104 @@ C-orderedWidthDoesNotLowerBoundArbitraryDecisionCount :
   ⊥
 C-orderedWidthDoesNotLowerBoundArbitraryDecisionCount =
   EqualityDecision.noOrderedWidthToDecisionCountTransfer
+
+------------------------------------------------------------------------
+-- ZKP C2 — Conditional direct-DP obstruction.
+--
+-- Preconditions:
+--   The live candidate state is literally attached to the existing block-
+--   equality root and its recursive measure is at most 3 * 2^n.
+--
+-- Invariant:
+--   The residual-width witness stays on that exact live state.
+--
+-- Postcondition:
+--   No charged direct-DP run can inhabit that state.
+--
+-- Non-promotion:
+--   This is conditional on the same-object root attachment. It is not a
+--   theorem that arbitrary SAT machines must expose block-equality width.
+------------------------------------------------------------------------
+
+C2-blockEqualityMeasureBlocksDirectDPRun :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {width : Nat} →
+  EqualityDirectDP.BlockEqualityLiveRoot state width →
+  Q2.recursiveMeasure state
+  ≤
+  Width.triple (Bits.bitCardinality width) →
+  DirectDP.DirectDPChargedConstructionRun state →
+  ⊥
+C2-blockEqualityMeasureBlocksDirectDPRun =
+  EqualityDirectDP.blockEqualityMeasureBlocksDirectDPRun
+
+------------------------------------------------------------------------
+-- ZKP C3 — Self-specialization universality no-go.
+--
+-- Preconditions:
+--   Use the generic finite self-specializing calculus and its fixed echo
+--   primitive semantics.
+--
+-- Invariant:
+--   The fixed-point program can emit the supplied Cook formula unchanged.
+--
+-- Postcondition:
+--   Any supplied residual-width witness occurs in the image of one literal
+--   fixed-point program.
+--
+-- Non-promotion:
+--   Generic self-specialization alone cannot justify a small-width theorem.
+------------------------------------------------------------------------
+
+C3-genericSelfSpecializationDoesNotForceSmallWidth :
+  ∀ {remaining width : Nat}
+    (formula : Cook.BooleanFormula) →
+  Width.ResidualWidthWitness
+    {root = Family.cookIndexedRestrictionRoot formula}
+    remaining
+    width →
+  SelfSpecialization.EchoFixedPointResidualWidth remaining width
+C3-genericSelfSpecializationDoesNotForceSmallWidth =
+  SelfSpecialization.anyResidualWidthOccursInEchoFixedPointImage
+
+------------------------------------------------------------------------
+-- ZKP C4 — Candidate first-step max-cut.
+--
+-- Preconditions:
+--   A candidate-specific first-step coupling debt requires progress.
+--   The same initial root carries a residual-width witness.
+--   The recursive measure is at most three times that width.
+--
+-- Invariant:
+--   No opposite-SAT semantic premise is used.
+--
+-- Postcondition:
+--   The demanded progress is contradictory.
+--
+-- Residual debt:
+--   A future positive P route must derive legitimate first-step progress or
+--   prove a special structural width-avoidance theorem for the actual state.
+------------------------------------------------------------------------
+
+C4-highWidthRefutesCandidateFirstStepDebt :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {constructor : DirectDP.DirectDPChargedStateConstructor}
+    (debt : FirstStep.CandidateFirstStepCouplingDebt candidate constructor)
+    {remaining width : Nat} →
+  Width.ResidualWidthWitness
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula
+          (FirstStep.initial debt))}
+    remaining
+    width →
+  Q2.recursiveMeasure (FirstStep.initial debt)
+  ≤
+  Width.triple width →
+  ⊥
+C4-highWidthRefutesCandidateFirstStepDebt =
+  FirstStep.highWidthRefutesCandidateFirstStepCouplingDebt
 
 ------------------------------------------------------------------------
 -- ZKP S — Scope.
