@@ -80,6 +80,7 @@ import DASHI.Interop.SLRValidationRoadmapPromotionExact as ValidationRoadmap
 import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
 import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as LegalAuthority
 import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as SoftwareValidation
+import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as DbNative
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as SemanticPromotion
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
 
@@ -742,6 +743,7 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact"
     ∷ "DASHI.Interop.SensibLawSemanticPromotionPolicy"
     ∷ "DASHI.Core.BoundAcquisitionDemandExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact"
     ∷ [] )
     ( "Normalize exact theorem aliases only."
     ∷ "Retain the intermediate compliance witness."
@@ -771,6 +773,7 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "Semantic promotion creates no truth authority, legal authority, or generic authority."
     ∷ "Bound acquisition does not pay the requirement or close the consumer."
     ∷ "Producer identity does not identify the residual."
+    ∷ "Exact compiler-product reuse does not create semantic admission, authority, applicability, entity identity, proposition identity, event identity, or claim truth."
     ∷ [] )
     ( "dashi_agda is the formal reference lane."
     ∷ "SensibLaw/SLR owns review, admission, semantic construction, and legal consumer projection."
@@ -794,6 +797,7 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "The TOE root reaches legal semantic admission and software-validation firewalls."
     ∷ "The TOE root reaches canonical semantic-authority non-promotion."
     ∷ "The TOE root reaches exact-live bound-acquisition non-promotion."
+    ∷ "The TOE root reaches exact compiler-product reuse non-promotion."
     ∷ [] )
     ( "ITIL change and service-management lens."
     ∷ "ISO 9000 family quality-management lens."
@@ -816,11 +820,85 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "Reject ESD path changes."
     ∷ "Kernel-check the focused Agda path."
     ∷ "Resolve review, validation, promotion, admission, and software-validation owners with repository intelligence."
+    ∷ "Resolve exact compiler-product reuse with related/discover/lineage before reuse."
     ∷ [] )
     true refl
     false refl
     false refl
     false refl
+
+
+------------------------------------------------------------------------
+-- Exact compiler-product reuse remains below semantic and legal promotion.
+--
+-- Reuse the existing SCALE-1 owner.
+-- Exact replay is an execution optimisation.
+-- It does not create admission, authority, applicability, semantic identity,
+-- event identity, proposition identity, or claim truth.
+------------------------------------------------------------------------
+
+ExactReuseCreatesSemanticAdmission : Set
+ExactReuseCreatesSemanticAdmission =
+  DbNative.ExactReuseCreatesSemanticAdmission
+
+ExactReuseCreatesSemanticAuthority : Set
+ExactReuseCreatesSemanticAuthority =
+  DbNative.ExactReuseCreatesSemanticAuthority
+
+ExactReuseCreatesApplicability : Set
+ExactReuseCreatesApplicability =
+  DbNative.ExactReuseCreatesApplicability
+
+ExactReuseCreatesEntityIdentity : Set
+ExactReuseCreatesEntityIdentity =
+  DbNative.ExactReuseCreatesEntityIdentity
+
+ExactReuseCreatesPropositionIdentity : Set
+ExactReuseCreatesPropositionIdentity =
+  DbNative.ExactReuseCreatesPropositionIdentity
+
+ExactReuseCreatesEventIdentity : Set
+ExactReuseCreatesEventIdentity =
+  DbNative.ExactReuseCreatesEventIdentity
+
+ExactReuseCreatesClaimTruth : Set
+ExactReuseCreatesClaimTruth =
+  DbNative.ExactReuseCreatesClaimTruth
+
+toeExactReuseDoesNotCreateSemanticAdmission :
+  ExactReuseCreatesSemanticAdmission → ⊥
+toeExactReuseDoesNotCreateSemanticAdmission =
+  DbNative.exactReuseDoesNotCreateSemanticAdmission
+
+toeExactReuseDoesNotCreateSemanticAuthority :
+  ExactReuseCreatesSemanticAuthority → ⊥
+toeExactReuseDoesNotCreateSemanticAuthority =
+  DbNative.exactReuseDoesNotCreateSemanticAuthority
+
+toeExactReuseDoesNotCreateApplicability :
+  ExactReuseCreatesApplicability → ⊥
+toeExactReuseDoesNotCreateApplicability =
+  DbNative.exactReuseDoesNotCreateApplicability
+
+toeExactReuseDoesNotCreateEntityIdentity :
+  ExactReuseCreatesEntityIdentity → ⊥
+toeExactReuseDoesNotCreateEntityIdentity =
+  DbNative.exactReuseDoesNotCreateEntityIdentity
+
+toeExactReuseDoesNotCreatePropositionIdentity :
+  ExactReuseCreatesPropositionIdentity → ⊥
+toeExactReuseDoesNotCreatePropositionIdentity =
+  DbNative.exactReuseDoesNotCreatePropositionIdentity
+
+toeExactReuseDoesNotCreateEventIdentity :
+  ExactReuseCreatesEventIdentity → ⊥
+toeExactReuseDoesNotCreateEventIdentity =
+  DbNative.exactReuseDoesNotCreateEventIdentity
+
+toeExactReuseDoesNotCreateClaimTruth :
+  ExactReuseCreatesClaimTruth → ⊥
+toeExactReuseDoesNotCreateClaimTruth =
+  DbNative.exactReuseDoesNotCreateClaimTruth
 
 
 ------------------------------------------------------------------------
@@ -935,6 +1013,34 @@ record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
       KnowledgeIsAuthority →
       ⊥
 
+    exactReuseAdmissionFirewall :
+      ExactReuseCreatesSemanticAdmission →
+      ⊥
+
+    exactReuseAuthorityFirewall :
+      ExactReuseCreatesSemanticAuthority →
+      ⊥
+
+    exactReuseApplicabilityFirewall :
+      ExactReuseCreatesApplicability →
+      ⊥
+
+    exactReuseEntityIdentityFirewall :
+      ExactReuseCreatesEntityIdentity →
+      ⊥
+
+    exactReusePropositionIdentityFirewall :
+      ExactReuseCreatesPropositionIdentity →
+      ⊥
+
+    exactReuseEventIdentityFirewall :
+      ExactReuseCreatesEventIdentity →
+      ⊥
+
+    exactReuseClaimTruthFirewall :
+      ExactReuseCreatesClaimTruth →
+      ⊥
+
 open GovernedLegalWorkflowTOEInvariantHandoff public
 
 canonicalGovernedLegalWorkflowTOEInvariantHandoff :
@@ -965,6 +1071,13 @@ canonicalGovernedLegalWorkflowTOEInvariantHandoff =
     toeCaseySelectionDoesNotCreateWorldTruth
     toeFormalProofDoesNotCreateExternalWorldTruth
     toeKnowledgeDoesNotCreateExecutionAuthority
+    toeExactReuseDoesNotCreateSemanticAdmission
+    toeExactReuseDoesNotCreateSemanticAuthority
+    toeExactReuseDoesNotCreateApplicability
+    toeExactReuseDoesNotCreateEntityIdentity
+    toeExactReuseDoesNotCreatePropositionIdentity
+    toeExactReuseDoesNotCreateEventIdentity
+    toeExactReuseDoesNotCreateClaimTruth
 
 toeProcessContextRefs : List String
 toeProcessContextRefs =
