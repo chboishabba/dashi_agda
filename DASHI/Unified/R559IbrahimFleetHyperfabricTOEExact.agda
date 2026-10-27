@@ -61,6 +61,7 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
+import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
 
 ------------------------------------------------------------------------
 -- Exact existing owners.
@@ -149,8 +150,8 @@ toePadicPrefixCannotRecoverDiscardedDigit =
 
 toeTwoDigitStreamCannotRecoverThird :
   Fabric.ConsumerSufficient
-    (PadicWave.Stream.take 2)
-    (PadicWave.Stream.take 3) → ⊥
+    (Stream.take 2)
+    (Stream.take 3) → ⊥
 toeTwoDigitStreamCannotRecoverThird =
   PadicWave.twoDigitViewCannotAnswerThirdDigit
 
@@ -182,9 +183,13 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     yangMillsReceipt : YM.BalabanR559TOEMaxCutReceipt
     ibrahimFrame : Ibrahim.TOEZKPFrame
     fleetReceipt : Fleet.FleetFormalGapTargetReceipt
-    hyperfabricCore : Set
-    padicWaveAdapter : Set
-    wrongTypeAdapter : Set
+    nineCountProof : Fabric.siteCount 3 2 ≡ 9
+    twentySevenCountProof : Fabric.siteCount 3 3 ≡ 27
+    eightyOneCountProof : Fabric.siteCount 3 4 ≡ 81
+    padicPrefixLoss :
+      Fabric.ConsumerSufficient PadicWave.prefixOne PadicWave.secondDigit → ⊥
+    streamPrefixLoss :
+      Fabric.ConsumerSufficient (Stream.take 2) (Stream.take 3) → ⊥
     targetFormalGaps : Nat
     targetFormalGapsIs58 : targetFormalGaps ≡ 58
     dischargedFibres : Nat
@@ -205,9 +210,11 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   { yangMillsReceipt = r559BalabanReceipt
   ; ibrahimFrame = ibrahimParetoSnowballFrame
   ; fleetReceipt = fleetFormalGapTargetReceipt
-  ; hyperfabricCore = Fabric.IndexedFabric
-  ; padicWaveAdapter = Fabric.Address PadicWave.U.Digit369 2
-  ; wrongTypeAdapter = WrongType.ModeAddress 2
+  ; nineCountProof = toeNineSiteCount
+  ; twentySevenCountProof = toeTwentySevenSiteCount
+  ; eightyOneCountProof = toeEightyOneSiteCount
+  ; padicPrefixLoss = toePadicPrefixCannotRecoverDiscardedDigit
+  ; streamPrefixLoss = toeTwoDigitStreamCannotRecoverThird
   ; targetFormalGaps = fleetFormalGaps
   ; targetFormalGapsIs58 = fleetFormalGapsAre58
   ; dischargedFibres = fleetDischargedFibres
