@@ -469,3 +469,93 @@ def test_direct_legal_governance_regression_binds_unifier_to_bridge():
     ):
         assert token in text
 
+
+
+def test_native_follow_provider_and_expert_firewalls_reach_all_toe_facades():
+    bridge = read(BRIDGE)
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+    regression = read(REGRESSION)
+
+    for token in (
+        "toeNativeLegalFollowDoesNotCreateLegalAuthority",
+        "toeProviderFailureDoesNotMakePropositionFalse",
+        "toeExpertProductionPromotesAnyAuthorityIsFalse",
+        "nativeLegalFollowAuthorityFirewall",
+        "providerFailureNegativeEvidenceFirewall",
+        "expertProductionAuthorityClosed",
+    ):
+        assert token in bridge
+
+    for token in (
+        "toe369NativeLegalFollowDoesNotCreateLegalAuthority",
+        "toe369ProviderFailureDoesNotMakePropositionFalse",
+        "toe369ExpertProductionPromotesAnyAuthorityIsFalse",
+    ):
+        assert token in toe
+
+    for token in (
+        "unifierNativeLegalFollowDoesNotCreateLegalAuthority",
+        "unifierProviderFailureDoesNotMakePropositionFalse",
+        "unifierExpertProductionPromotesAnyAuthorityIsFalse",
+    ):
+        assert token in unifier
+
+    for token in (
+        "governedNativeLegalFollowDoesNotCreateLegalAuthority",
+        "governedProviderFailureDoesNotMakePropositionFalse",
+        "governedExpertProductionPromotesAnyAuthorityIsFalse",
+    ):
+        assert token in unified
+
+    for token in (
+        "unifierNativeLegalFollowAuthorityAliasIsExact",
+        "unifierProviderFailureEvidenceAliasIsExact",
+        "unifierExpertProductionAuthorityAliasIsExact",
+        "invariantHandoffCarriesNativeLegalFollowAuthorityFirewall",
+        "invariantHandoffCarriesProviderFailureEvidenceFirewall",
+        "invariantHandoffCarriesExpertProductionAuthorityClosure",
+    ):
+        assert token in regression
+
+
+def test_full_legal_execution_and_expert_firewall_bundle_reaches_toe_graph():
+    bridge = read(BRIDGE)
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+    regression = read(REGRESSION)
+
+    suffixes = (
+        "SpacyDoesNotCreateLegalAuthority",
+        "SpacyDoesNotCreateLegalConstruction",
+        "LatestKnownSectionDoesNotBecomeHistoricalLaw",
+        "PythonWrapperDoesNotOwnLegalSemantics",
+        "JsonIsNotSemanticCommandAbi",
+        "JsonReviewDoesNotCreateDecision",
+        "JsonReceiptDoesNotCreateTruth",
+        "CliSequenceDoesNotPayResidual",
+        "PinnedStreamDoesNotCreateLegalTruth",
+        "ReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport",
+        "OalcHitDoesNotBecomeBindingAuthority",
+        "OfficialCourtBytesDoNotBecomePropositionCorrespondence",
+        "SameMncDoesNotCollapseSourceRevisions",
+        "SuccessfulOfficialFetchDoesNotBecomeProductionReady",
+        "MultipleReportsDoNotAutomaticallyCreateIndependence",
+        "AgreementDoesNotAutomaticallyCreateIndependentCorroboration",
+        "DependenceDoesNotMeanNoEvidence",
+        "ExpertStatusDoesNotAutomaticallyCreateTruth",
+        "ReportAdmissionDoesNotRepairMissingInput",
+        "CrossExaminationDoesNotAddUnobservedInput",
+        "DisputedRiskDoesNotBecomeIrrelevant",
+        "ObserverDefectDoesNotProveOpinionFalse",
+        "QualificationDoesNotAutomaticallyProveForensicCompliance",
+    )
+
+    for suffix in suffixes:
+        assert f"toe{suffix}" in bridge
+        assert f"toe369{suffix}" in toe
+        assert f"unifier{suffix}" in unifier
+        assert f"governed{suffix}" in unified
+        assert f"unifier{suffix}AliasIsExact" in regression
