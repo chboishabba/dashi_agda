@@ -38,6 +38,8 @@ note right of Fleet
 External fleet counts remain planning receipts.
 Counts do not create proof authority.
 Only the reported 58 formal gaps are targeted.
+Fleet 58 = Gate-4 58 is count equality only.
+Equal cardinality does not select a canonical map.
 end note
 
 note right of Fabric
