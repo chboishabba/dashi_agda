@@ -1380,3 +1380,21 @@ unifierFleetSharedCardinalityDoesNotCreateIdentity :
   FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
 unifierFleetSharedCardinalityDoesNotCreateIdentity =
   FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
+
+
+------------------------------------------------------------------------
+-- Joint Balaban/R559 typed continuum non-promotion.
+-- Reuse the source-owned typed eliminators carried by the canonical max-cut.
+------------------------------------------------------------------------
+
+unifierBalabanR559ContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifierBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559TOE.continuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559DepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifierBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559TOE.depthContinuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
