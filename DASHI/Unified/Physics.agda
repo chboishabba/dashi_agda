@@ -268,6 +268,71 @@ yangMillsBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
 yangMillsBalabanStressCauchyPhysicalInsertionLevel =
   BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
 
+yangMillsBalabanStressCauchyCompletionToMarkedStressLevel : ProofLevel
+yangMillsBalabanStressCauchyCompletionToMarkedStressLevel =
+  BalabanRGTOE.balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+
+yangMillsBalabanStressCompletedMarkedIsClayStressLevel : ProofLevel
+yangMillsBalabanStressCompletedMarkedIsClayStressLevel =
+  BalabanRGTOE.balabanGoal1CCompletedStressIsClayStressLevel
+
+yangMillsBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+yangMillsBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+yangMillsBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+yangMillsBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+yangMillsBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+yangMillsBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+yangMillsBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+yangMillsBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+yangMillsBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+yangMillsBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+yangMillsBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+yangMillsBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+yangMillsBalabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+yangMillsBalabanCPhysicalPackageMaxCutCompilerLevel =
+  BalabanRGTOE.balabanCPhysicalPackageMaxCutCompilerLevel
+
+yangMillsBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+yangMillsBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  BalabanRGTOE.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+yangMillsBalabanC1MarkedCurvatureFamilyLevel : ProofLevel
+yangMillsBalabanC1MarkedCurvatureFamilyLevel =
+  BalabanRGTOE.balabanC1MarkedCurvatureFamilyLevel
+
+yangMillsBalabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+yangMillsBalabanC2PhysicalRemainderSharedTailLevel =
+  BalabanRGTOE.balabanC2PhysicalRemainderSharedTailLevel
+
+yangMillsBalabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+yangMillsBalabanC3OneStepAFRecurrenceIdentificationLevel =
+  BalabanRGTOE.balabanC3OneStepAFRecurrenceIdentificationLevel
+
+yangMillsBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
+yangMillsBalabanC4DensityAnchoredStressLaneLevel =
+  BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
+
+yangMillsBalabanCPhysicalPackageCount : ℕ
+yangMillsBalabanCPhysicalPackageCount =
+  BalabanRGTOE.balabanCPhysicalPackageCount
+
+yangMillsBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+yangMillsBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
+
 yangMillsBalabanStressHilbertBoundCompilerLevel : ProofLevel
 yangMillsBalabanStressHilbertBoundCompilerLevel =
   BalabanRGTOE.balabanStressHilbertBoundCompilerLevel
@@ -689,3 +754,20 @@ navierStokesClayEligibilityStillFalse :
   navierStokesClayEligible ≡ false
 navierStokesClayEligibilityStillFalse =
   NSClayTOE.clayEligibilityStillFalse
+
+
+------------------------------------------------------------------------
+-- Joint Balaban/R559 typed continuum non-promotion.
+------------------------------------------------------------------------
+
+physicsBalabanR559ContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+physicsBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559TOE.continuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+physicsBalabanR559DepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+physicsBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559TOE.depthContinuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
