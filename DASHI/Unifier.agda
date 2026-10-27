@@ -725,3 +725,15 @@ unifierBalabanR559ClayPromotionStillBlocked :
 unifierBalabanR559ClayPromotionStillBlocked =
   BalabanR559TOE.clayPromotionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+------------------------------------------------------------------------
+
+import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
+
+unifierBalabanScaleTransferNonPromotion :
+  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferNonPromotion =
+  RGNonPromotion.balabanRGScaleTransferPromotionImpossibleHere
