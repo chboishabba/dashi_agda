@@ -41,17 +41,17 @@ toe369YangMillsGoal1SameHNontrivialityLevel =
   YMGoal1TOE.goal1SameHNontrivialitySemanticBridgeLevel
 
 toe369YangMillsFlat4DContinuumStillOpen :
-  YMGoal1TOE.Continuum.flat4DContinuumTransferProvedHere ≡ false
+  YMGoal1TOE.flat4DContinuumTransferProvedHere ≡ false
 toe369YangMillsFlat4DContinuumStillOpen =
   YMGoal1TOE.flat4DContinuumTransferStillOpen
 
 toe369YangMillsContinuumMassGapStillNotPromoted :
-  YMGoal1TOE.Continuum.continuumMassGapPromoted ≡ false
+  YMGoal1TOE.continuumMassGapPromoted ≡ false
 toe369YangMillsContinuumMassGapStillNotPromoted =
   YMGoal1TOE.continuumMassGapStillNotPromoted
 
 toe369YangMillsClayStillNotPromoted :
-  YMGoal1TOE.Clay.clayYangMillsPromoted ≡ false
+  YMGoal1TOE.clayYangMillsPromoted ≡ false
 toe369YangMillsClayStillNotPromoted =
   YMGoal1TOE.clayYangMillsStillNotPromoted
 
