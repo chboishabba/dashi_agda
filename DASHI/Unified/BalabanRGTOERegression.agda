@@ -49,6 +49,8 @@ import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as
 import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as StressCauchy
 import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as StressHilbert
+import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as SameFamilyRecovery
+import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as Goal1C
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 import DASHI.Physics.Closure.YMBalabanContinuumLimitReceipt as ContinuumLimit
 import DASHI.Physics.Closure.YMDepthAsContinuumLimitReceipt as DepthContinuum
@@ -239,6 +241,88 @@ balabanStressCauchyPhysicalInsertionLevel : ProofLevel
 balabanStressCauchyPhysicalInsertionLevel =
   StressCauchy.literalStressInsertionIsCMP119LocalInsertionLevel
 
+------------------------------------------------------------------------
+-- Canonical same-family Cauchy / Schwinger stress recovery cut.
+--
+-- Historical round numbers are provenance only.
+-- The source-owned telescope and same-family recovery remove any separate
+-- finite-to-continuum stress convergence payment.
+------------------------------------------------------------------------
+
+open SameFamilyRecovery public using
+  ( r129ExportsLiteralContinuumLimit
+  ; r129ExportsLiteralSchwingerMembership
+  ; r129ExportsLiteralStressDerivative
+  )
+
+balabanSameFamilyRecoveryCompilerLevel : ProofLevel
+balabanSameFamilyRecoveryCompilerLevel =
+  SameFamilyRecovery.r129SameFamilyRecoveryCompilerLevel
+
+balabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+balabanSameFamilyRecoveryPhysicalLevel =
+  SameFamilyRecovery.physicalR129SameFamilyRecoveryLevel
+
+balabanLiteralContinuumLimitIndependentAfterSameFamilyRecoveryIsFalse :
+  SameFamilyRecovery.literalContinuumLimitIndependentAfterR129Recovery ≡ false
+balabanLiteralContinuumLimitIndependentAfterSameFamilyRecoveryIsFalse =
+  SameFamilyRecovery.literalContinuumLimitIndependentAfterR129RecoveryIsFalse
+
+balabanLiteralSchwingerMembershipIndependentAfterSameFamilyRecoveryIsFalse :
+  SameFamilyRecovery.literalSchwingerMembershipIndependentAfterR129Recovery ≡ false
+balabanLiteralSchwingerMembershipIndependentAfterSameFamilyRecoveryIsFalse =
+  SameFamilyRecovery.literalSchwingerMembershipIndependentAfterR129RecoveryIsFalse
+
+balabanLiteralStressDerivativeIndependentAfterSameFamilyRecoveryIsFalse :
+  SameFamilyRecovery.literalStressDerivativeIndependentAfterR129Recovery ≡ false
+balabanLiteralStressDerivativeIndependentAfterSameFamilyRecoveryIsFalse =
+  SameFamilyRecovery.literalStressDerivativeIndependentAfterR129RecoveryIsFalse
+
+balabanGoal1CSourceCutCompilerLevel : ProofLevel
+balabanGoal1CSourceCutCompilerLevel =
+  Goal1C.round475CSourceCutCompilerLevel
+
+balabanGoal1CFiniteStressInsertionIsCMP119LocalLevel : ProofLevel
+balabanGoal1CFiniteStressInsertionIsCMP119LocalLevel =
+  Goal1C.c4FiniteStressInsertionIsCMP119LocalLevel
+
+balabanGoal1CStressCompletionIsCompletedMarkedStressLevel : ProofLevel
+balabanGoal1CStressCompletionIsCompletedMarkedStressLevel =
+  Goal1C.c4StressCompletionIsCompletedMarkedStressLevel
+
+balabanGoal1CCompletedStressIsClayStressLevel : ProofLevel
+balabanGoal1CCompletedStressIsClayStressLevel =
+  Goal1C.c4CompletedStressIsClayStressLevel
+
+balabanGoal1CLiteralDensityMetricDerivativeLevel : ProofLevel
+balabanGoal1CLiteralDensityMetricDerivativeLevel =
+  Goal1C.c4LiteralDensityMetricDerivativeLevel
+
+balabanGoal1CDensityAnchoredLaneInstantiationLevel : ProofLevel
+balabanGoal1CDensityAnchoredLaneInstantiationLevel =
+  Goal1C.c4DensityAnchoredLaneInstantiationLevel
+
+balabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+balabanGoal1CContinuumStressRecoveryCompilerLevel =
+  Goal1C.c4ContinuumStressRecoveryCompilerLevel
+
+balabanGoal1CMetricPairingCompilerLevel : ProofLevel
+balabanGoal1CMetricPairingCompilerLevel =
+  Goal1C.c4MetricPairingCompilerLevel
+
+balabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+balabanGoal1CLiteralSourceInstantiationLevel =
+  Goal1C.literalRound475CSourceInstantiationLevel
+
+balabanLevel2ClayPromotionFlag : Bool
+balabanLevel2ClayPromotionFlag =
+  SameFamilyRecovery.clayPromotion
+
+balabanLevel2ClayPromotionStillFalse :
+  balabanLevel2ClayPromotionFlag ≡ false
+balabanLevel2ClayPromotionStillFalse =
+  SameFamilyRecovery.clayPromotionIsFalse
+
 balabanStressHilbertBoundCompilerLevel : ProofLevel
 balabanStressHilbertBoundCompilerLevel =
   StressHilbert.stressShellEnergyToHilbertCompilerLevel
@@ -341,6 +425,15 @@ balabanRGClayPromotionStillFalse :
 balabanRGClayPromotionStillFalse =
   RGFrontier.canonicalBalabanRGScaleTransferNoClayPromotion
 
+BalabanScaleTransferPromotion : Set
+BalabanScaleTransferPromotion =
+  RGFrontier.BalabanRGScaleTransferPromotion
+
+balabanScaleTransferPromotionImpossible :
+  BalabanScaleTransferPromotion → ⊥
+balabanScaleTransferPromotionImpossible =
+  RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
+
 legacyBalabanLaneAlsoDeclaresNoClayPromotion :
   SUN.clayYangMillsPromoted ≡ false
 legacyBalabanLaneAlsoDeclaresNoClayPromotion =
@@ -440,6 +533,14 @@ record BalabanRGTOEReceipt : Set where
     stressPairingPhysicalWeld : ProofLevel
     stressCauchyModulusCompiler : ProofLevel
     stressCauchyPhysicalInsertion : ProofLevel
+    stressCauchyCompletionToMarkedStress : ProofLevel
+    stressCompletedMarkedIsClayStress : ProofLevel
+    sameFamilyRecoveryCompiler : ProofLevel
+    sameFamilyRecoveryPhysical : ProofLevel
+    goal1CSourceCutCompiler : ProofLevel
+    goal1CContinuumStressRecoveryCompiler : ProofLevel
+    goal1CMetricPairingCompiler : ProofLevel
+    goal1CLiteralSourceInstantiation : ProofLevel
     stressHilbertBoundCompiler : ProofLevel
     stressHilbertPhysicalShell : ProofLevel
 
@@ -535,6 +636,22 @@ canonicalBalabanRGTOEReceipt =
         balabanStressCauchyModulusCompilerLevel
     ; stressCauchyPhysicalInsertion =
         balabanStressCauchyPhysicalInsertionLevel
+    ; stressCauchyCompletionToMarkedStress =
+        balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+    ; stressCompletedMarkedIsClayStress =
+        balabanGoal1CCompletedStressIsClayStressLevel
+    ; sameFamilyRecoveryCompiler =
+        balabanSameFamilyRecoveryCompilerLevel
+    ; sameFamilyRecoveryPhysical =
+        balabanSameFamilyRecoveryPhysicalLevel
+    ; goal1CSourceCutCompiler =
+        balabanGoal1CSourceCutCompilerLevel
+    ; goal1CContinuumStressRecoveryCompiler =
+        balabanGoal1CContinuumStressRecoveryCompilerLevel
+    ; goal1CMetricPairingCompiler =
+        balabanGoal1CMetricPairingCompilerLevel
+    ; goal1CLiteralSourceInstantiation =
+        balabanGoal1CLiteralSourceInstantiationLevel
     ; stressHilbertBoundCompiler =
         balabanStressHilbertBoundCompilerLevel
     ; stressHilbertPhysicalShell =
