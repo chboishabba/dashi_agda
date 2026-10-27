@@ -328,3 +328,19 @@ governedDocumentRoleDoesNotSupplyLegalSourceAuthority =
 governedCanonicalLegalSourceAuthorityBoundary =
   LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
 
+
+
+governedNativeLegalFollowDoesNotCreateLegalAuthority :
+  LegalGovernance.NativeCliAutomaticallyLegalAuthority → ⊥
+governedNativeLegalFollowDoesNotCreateLegalAuthority =
+  LegalGovernance.toeNativeLegalFollowDoesNotCreateLegalAuthority
+
+governedProviderFailureDoesNotMakePropositionFalse :
+  LegalGovernance.ProviderFailureAutomaticallyPropositionFalse → ⊥
+governedProviderFailureDoesNotMakePropositionFalse =
+  LegalGovernance.toeProviderFailureDoesNotMakePropositionFalse
+
+governedExpertProductionPromotesAnyAuthorityIsFalse :
+  LegalGovernance.toeExpertProductionPromotesAnyAuthority ≡ false
+governedExpertProductionPromotesAnyAuthorityIsFalse =
+  LegalGovernance.toeExpertProductionPromotesAnyAuthorityIsFalse
