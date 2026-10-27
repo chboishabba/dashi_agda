@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as Cut
+import DASHI.Core.AuthorityNonPromotionCore as Authority
 
 gate4TargetRemains58 :
   Cut.gate4FormalGapCount ≡ 58
@@ -50,18 +51,18 @@ esdRemainsReadOnly = refl
 
 -- Source-owned promotion policy is reachable through the TOE consumer.
 semanticPromotionCannotCreateLegalAuthority :
-  Cut.Authority.legalAuthorityFlag Cut.toeSemanticPromotionAuthorityBoundary ≡ false
+  Authority.legalAuthorityFlag Cut.toeSemanticPromotionAuthorityBoundary ≡ false
 semanticPromotionCannotCreateLegalAuthority =
   Cut.toeSemanticPromotionCannotCreateLegalAuthority
 
 semanticPromotionCannotCreateAnyAuthority :
-  Cut.Authority.promotesAnyAuthority Cut.toeSemanticPromotionAuthorityBoundary ≡ false
+  Authority.promotesAnyAuthority Cut.toeSemanticPromotionAuthorityBoundary ≡ false
 semanticPromotionCannotCreateAnyAuthority =
   Cut.toeSemanticPromotionCannotCreateAnyAuthority
 
 allCanonicalAuthorityKindsRemainClosed :
-  Cut.Authority.AllAuthorityKindsFalse
-    Cut.Authority.canonicalAuthorityNonPromotionBundle
-    Cut.Authority.canonicalAuthorityKinds
+  Authority.AllAuthorityKindsFalse
+    Authority.canonicalAuthorityNonPromotionBundle
+    Authority.canonicalAuthorityKinds
 allCanonicalAuthorityKindsRemainClosed =
   Cut.toeCanonicalAuthorityKindsRemainClosed
