@@ -10,6 +10,8 @@ module DASHI.Physics.Optics.DiffuserImagingObserverDynamicRangeExact where
 -- analysis below are mathematical reconstruction, not transcript quotations.
 
 open import Agda.Primitive using (Set; Set₁)
+open import Agda.Builtin.String using (String)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (ℕ; zero; suc; _+_; _⊓_)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality
@@ -18,6 +20,46 @@ open import Relation.Binary.PropositionalEquality
 import DASHI.Foundations.HyperformObserverFactorisationExact as Observer
 import DASHI.Physics.Optics.CatastropheDiffractionNormalFormExact as Diffraction
 import DASHI.Physics.Holography.AreaLaw as AreaLaw
+
+------------------------------------------------------------------------
+-- O/R/C/S/L/P/G/F frame.
+------------------------------------------------------------------------
+
+record DiffuserImagingTOEZKPFrame : Set where
+  field
+    O R C S L P G F : String
+    preconditions invariants postconditions : List String
+
+open DiffuserImagingTOEZKPFrame public
+
+canonicalDiffuserImagingTOEZKPFrame : DiffuserImagingTOEZKPFrame
+canonicalDiffuserImagingTOEZKPFrame = record
+  { O = "Normalize calibrated diffuser imaging, redundant recovery, and finite sensor loss into the TOE graph."
+  ; R = "Reuse the existing diffuser, observer-fibre, caustic, diffraction, and zone-plate owners."
+  ; C = "3D scene -> optical code -> finite sensor observation -> restricted decoder."
+  ; S = "Keep local clipping loss distinct from whole-exposure information loss."
+  ; L = "One optics lane owns only computational-imaging observer semantics."
+  ; P = "Expose recoverability, redundancy, saturation, and stability without claiming an uncalibrated physical camera theorem."
+  ; G = "Preserve transcript, Waller-lab, optical-source, and repository attribution boundaries."
+  ; F = "Verify exact finite round trips, non-recovery witnesses, restricted stability, import reachability, and zero trust escapes."
+  ; preconditions =
+      "The selected forward encoder and scene class are explicit."
+      ∷ "Any physical PSF or diffraction law has its own calibration receipt."
+      ∷ "The complete recorded observation is distinguished from a single detector coordinate."
+      ∷ []
+  ; invariants =
+      "A saturated coordinate may lose information while another coordinate retains it."
+      ∷ "Postprocessing cannot recreate a distinction absent from the complete recorded observation."
+      ∷ "Depth-sensitive PSFs alone do not imply stable 3D recovery."
+      ∷ "Coherent field interference is not identified with incoherent intensity addition."
+      ∷ []
+  ; postconditions =
+      "Finite redundant recovery remains constructive on its stated scene class."
+      ∷ "Finite clipping non-recovery remains constructive on its stated projection."
+      ∷ "Stable recovery remains conditional on the selected restricted inverse bound."
+      ∷ "TOE facades can import these owners without duplicating their proof terms."
+      ∷ []
+  }
 
 ------------------------------------------------------------------------
 -- Calibrated physical encoding.  Every law is a field that must be
