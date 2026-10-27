@@ -1057,3 +1057,41 @@ toeBalabanOSWightmanStillBlocked :
 toeBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Current Gate-4 frontier and typed continuum non-promotion.
+------------------------------------------------------------------------
+
+toeBalabanContinuumPromotionImpossible :
+  FleetHyperTOE.BalabanContinuumPromotion → ⊥
+toeBalabanContinuumPromotionImpossible =
+  FleetHyperTOE.toeBalabanContinuumPromotionImpossible
+
+toeDepthContinuumPromotionImpossible :
+  FleetHyperTOE.DepthContinuumPromotion → ⊥
+toeDepthContinuumPromotionImpossible =
+  FleetHyperTOE.toeDepthContinuumPromotionImpossible
+
+toeCurrentGate4FrontierLedgerLevel : ProofLevel
+toeCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+toeCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+toeCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+toeFleetFormalGapTargetSelected : Bool
+toeFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+toeHistoricalGate4CountSelectedAsFleetTarget : Bool
+toeHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.EqualCardinality.equalCardinalitySelectsCanonicalMap
+    FleetHyperTOE.fleetGate4EqualCardinalityBoundary
+  ≡ false
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
