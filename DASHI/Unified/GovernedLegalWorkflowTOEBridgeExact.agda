@@ -1010,3 +1010,15 @@ toeCanonicalLegalSourceAuthorityBoundary :
   LegalAuthority.LegalSourceAuthorityBoundary
 toeCanonicalLegalSourceAuthorityBoundary =
   LegalAuthority.canonicalLegalSourceAuthorityBoundary
+
+
+CandidateSourceIsAuthoritative : Set
+CandidateSourceIsAuthoritative = LegalAuthority.CandidateSourceIsAuthoritative
+
+CurrentValidityAutomaticallyMeansApplicability : Set
+CurrentValidityAutomaticallyMeansApplicability =
+  LegalAuthority.CurrentValidityAutomaticallyMeansApplicability
+
+SemanticAdmissionAuthorityIsLegalSourceAuthority : Set
+SemanticAdmissionAuthorityIsLegalSourceAuthority =
+  LegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority
