@@ -84,6 +84,21 @@ pnfDominationProxyDoesNotProveHamiltonianTheorem =
 pnfFungalNetworkClaimsRequireSpeciesEvidence =
   PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
 
+pnfIdenticalWordsDoNotPayPredicate =
+  PNFSource.identicalWordsDoNotPayPredicate
+
+pnfCommonFingerprintDoesNotCreateTruth =
+  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
+
+pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+pnfRepetitionDoesNotCreateIndependentEvidence =
+  PNFSource.repetitionDoesNotCreateIndependentEvidence
+
+pnfCommonSourceDoesNotEraseEvidence =
+  PNFSource.commonSourceDoesNotEraseEvidence
+
 pnfDistilledNonPromotionBoundary :
   PNFDistilled.PNFDistilledNonPromotionBoundary
 pnfDistilledNonPromotionBoundary =
