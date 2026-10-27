@@ -117,8 +117,6 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
-            DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda
-            DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
@@ -134,6 +132,8 @@ jobs:
           agda --version
           modules=(
             DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
