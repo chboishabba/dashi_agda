@@ -4,6 +4,7 @@ module DASHI.Unified.RepoStateSpaceTOEConvergenceExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.EpistemicSuspensionExact as Suspension
