@@ -89,3 +89,27 @@ unifierFiniteChartFirewallMatches :
   Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
 unifierFiniteChartFirewallMatches =
   Unifier.unifier369FiniteChartDoesNotCreateLinearMultiplicityAction
+
+------------------------------------------------------------------------
+-- Exact finite-27 BIDI validation through both TOE roots.
+------------------------------------------------------------------------
+
+toeFinite27DecodeEncodeBidiMatches :
+  (e : Owner.TernaryEncodedState) →
+  TOE.toe369Ternary27StateDecode (TOE.toe369Ternary27StateCode e) ≡ e
+toeFinite27DecodeEncodeBidiMatches = TOE.toe369Ternary27StateDecodeStateCode
+
+unifierFinite27DecodeEncodeBidiMatches :
+  (e : Owner.TernaryEncodedState) →
+  Unifier.unifier369Ternary27StateDecode (Unifier.unifier369Ternary27StateCode e) ≡ e
+unifierFinite27DecodeEncodeBidiMatches = Unifier.unifier369Ternary27StateDecodeStateCode
+
+toeFinite27EncodeDecodeBidiMatches :
+  (i : Owner.TernaryState27) →
+  TOE.toe369Ternary27StateCode (TOE.toe369Ternary27StateDecode i) ≡ i
+toeFinite27EncodeDecodeBidiMatches = TOE.toe369Ternary27StateCodeStateDecode
+
+unifierFinite27EncodeDecodeBidiMatches :
+  (i : Owner.TernaryState27) →
+  Unifier.unifier369Ternary27StateCode (Unifier.unifier369Ternary27StateDecode i) ≡ i
+unifierFinite27EncodeDecodeBidiMatches = Unifier.unifier369Ternary27StateCodeStateDecode
