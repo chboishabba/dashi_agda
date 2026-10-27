@@ -35,6 +35,8 @@ import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceValidation
 
 
 ------------------------------------------------------------------------
@@ -512,3 +514,92 @@ toe369SemanticAdmissionIsNotLegalAuthority :
   LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 toe369SemanticAdmissionIsNotLegalAuthority =
   LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+------------------------------------------------------------------------
+-- SCALE Evidence Review convergence.
+------------------------------------------------------------------------
+
+toe369SCALEEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+toe369SCALEEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
+
+toe369SCALEReplayDoesNotPromoteSemanticTruth :
+  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
+toe369SCALEReplayDoesNotPromoteSemanticTruth =
+  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
+
+toe369SCALEProductionDoesNotCreateSemanticAuthority :
+  SCALEReview.PerformanceClosureCreatesSemanticAuthority → ⊥
+toe369SCALEProductionDoesNotCreateSemanticAuthority =
+  SCALEReview.productionScaleDoesNotCreateSemanticAuthority
+
+toe369SCALEPNFFingerprintDoesNotCreateClaimTruth :
+  SCALEReview.CommonPnfFingerprintProvesClaimTruth → ⊥
+toe369SCALEPNFFingerprintDoesNotCreateClaimTruth =
+  SCALEReview.commonPnfFingerprintDoesNotCreateClaimTruth
+
+toe369SCALEReviewDoesNotCreateClaimTruth :
+  SCALEReview.EvidenceReviewCreatesClaimTruth → ⊥
+toe369SCALEReviewDoesNotCreateClaimTruth =
+  SCALEReview.reviewedEvidenceDoesNotCreateClaimTruth
+
+toe369SCALEMaboReviewedPaymentDoesNotCreateTruth :
+  SCALEReview.ReviewedPaymentEqualsClaimTruth → ⊥
+toe369SCALEMaboReviewedPaymentDoesNotCreateTruth =
+  SCALEReview.maboReviewedPaymentDoesNotEqualClaimTruth
+
+toe369SCALEPassingControlDoesNotMeanCertified :
+  SCALEReview.PassingControlMeansCertified → ⊥
+toe369SCALEPassingControlDoesNotMeanCertified =
+  SCALEReview.passingControlDoesNotMeanCertified
+
+toe369SCALEFrontierDoesNotGrantAuthorization :
+  SCALEReview.FrontierRouteMeansAuthorized → ⊥
+toe369SCALEFrontierDoesNotGrantAuthorization =
+  SCALEReview.frontierRouteDoesNotGrantAuthorization
+
+toe369SCALEUICannotGeneratePresentSource :
+  SCALEReview.UIGeneratesPresentSource → ⊥
+toe369SCALEUICannotGeneratePresentSource =
+  SCALEReview.uiCannotGeneratePresentSource
+
+toe369SCALEPotentialReopeningDoesNotBecomeActual :
+  SCALEReview.PotentialReopeningIsActual → ⊥
+toe369SCALEPotentialReopeningDoesNotBecomeActual =
+  SCALEReview.potentialReopeningDoesNotBecomeActual
+
+
+------------------------------------------------------------------------
+-- SCALE evidence genealogy firewalls.
+------------------------------------------------------------------------
+
+toe369SCALEPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
+toe369SCALEPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+toe369SCALERepetitionDoesNotCreateIndependentEvidence :
+  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
+toe369SCALERepetitionDoesNotCreateIndependentEvidence =
+  SCALEReview.repetitionDoesNotCreateIndependentEvidence
+
+
+------------------------------------------------------------------------
+-- SCALE physical-economy non-promotion firewalls.
+------------------------------------------------------------------------
+
+toe369SCALEReviewProjectionReuseDoesNotCreateClaimTruth :
+  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
+toe369SCALEReviewProjectionReuseDoesNotCreateClaimTruth =
+  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
+
+toe369SCALECommitCoalescingDoesNotCreateSemanticAuthority :
+  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
+toe369SCALECommitCoalescingDoesNotCreateSemanticAuthority =
+  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
+
+toe369SCALEFewCommitBarriersDoNotProveSemanticIndependence :
+  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
+toe369SCALEFewCommitBarriersDoNotProveSemanticIndependence =
+  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
