@@ -956,11 +956,6 @@ unifierFleetExternalCountDoesNotCreateFormalDischarge :
 unifierFleetExternalCountDoesNotCreateFormalDischarge =
   FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
 
-unifierFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.dischargedFibresRemainDischarged
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifierFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
 
 unifierFleetContradictionGapsRemainSeparate :
   FleetGapTOE.contradictionGapsRemainSeparate
@@ -1431,11 +1426,6 @@ unifierFleetTargetsOnlyUnformalisedFormalGaps :
 unifierFleetTargetsOnlyUnformalisedFormalGaps =
   FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
 
-unifierFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.dischargedFibresRemainDischarged
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifierFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
 
 unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners :
   FleetGapTOE.spectralLabelsIdentifyTheoremOwners
