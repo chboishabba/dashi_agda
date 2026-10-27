@@ -40,6 +40,8 @@ import DASHI.Biology.AnimalCommunicationPassiveAcousticLocalizationExact as Loca
 import DASHI.Cognition.PNF.ContinuousOscillatorSyntheticReceipt as Osc
 import DASHI.Culture.CohnTechnostrategicDiscourseExact as Cohn
 import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact as Philosophy
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Wikimedia.IbrahimSnowballSkepticismExpertiseTrustPropagandaBidiExact as IbrahimTrust
 
 goodmanSource : Attr.AttributedSource
 goodmanSource = Attr.mkDOISource
@@ -519,6 +521,32 @@ acousticFeaturesDoNotDetermineEveryResponse :
   Query.AdequateFor acousticFeatures encounterSemantics responseQuery → ⊥
 acousticFeaturesDoNotDetermineEveryResponse =
   Query.queryAdequacyDefectBlocksFactorisation responseProjectionDefect
+
+------------------------------------------------------------------------
+-- IBRAHIM / SNOWBALL / MEDIA PROVENANCE: EXACT OWNER RE-EXPORT
+--
+-- This is a cross-domain use of pre-existing Ibrahim trust/propaganda
+-- finite proofs. Sound/music circulation, promotional framing, truth and
+-- deceptive intent are distinct queries. These aliases contain NO new
+-- mathematics and claim NO identity with Ibrahim Monster 3B objects.
+--
+-- Source owner:
+-- DASHI.Wikimedia.IbrahimSnowballSkepticismExpertiseTrustPropagandaBidiExact
+------------------------------------------------------------------------
+
+sonicPropagandaIntentCannotDetermineTruth :
+  NF.FactorsThrough
+    IbrahimTrust.propagandaSurface
+    IbrahimTrust.informationTruthStatus → ⊥
+sonicPropagandaIntentCannotDetermineTruth =
+  IbrahimTrust.propagandaIntentCannotFactorTruthStatus
+
+sonicSameContentCannotDetermineDeceptiveIntent :
+  NF.FactorsThrough
+    IbrahimTrust.falseContentSurface
+    IbrahimTrust.intentionReading → ⊥
+sonicSameContentCannotDetermineDeceptiveIntent =
+  IbrahimTrust.falseContentCannotFactorDeceptiveIntent
 
 ------------------------------------------------------------------------
 -- Unsound: distinct statuses. The source does not supply an empirical
