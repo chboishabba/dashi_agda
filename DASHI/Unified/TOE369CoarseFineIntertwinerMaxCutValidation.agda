@@ -20,6 +20,9 @@ import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAc
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZetaMaxCut
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
+import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterIsotypicBypassExact as WholeCharacter
+import DASHI.Wikimedia.IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact as KernelClass20
+import DASHI.Wikimedia.IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact as KernelGauge
 
 originIsFixed :
   Spectral.rotateXYZ Geometry.origin ≡ Geometry.origin
@@ -199,3 +202,60 @@ ternary27ReductionIsNotMonster42SameObject :
   ≡ false
 ternary27ReductionIsNotMonster42SameObject =
   TOE.toeTernary27ReductionIsNotMonster42SameObject
+
+
+------------------------------------------------------------------------
+-- Current Pareto / Snowball / Ibrahim frontier regression.
+------------------------------------------------------------------------
+
+wholeCharacterDirectIsotypicBridgeRemainsOpen :
+  WholeCharacter.WholeCharacterIsotypicBypassBoundary.directWholeCharacterToIsotypicBridgeLocated
+    WholeCharacter.canonicalWholeCharacterIsotypicBypassBoundary
+  ≡ false
+wholeCharacterDirectIsotypicBridgeRemainsOpen =
+  TOE.toeWholeCharacterDirectIsotypicBridgeStillOpen
+
+wholeCharacterActualKernelReplayRemainsOpen :
+  WholeCharacter.WholeCharacterIsotypicBypassBoundary.actualKernelReplayReceiptObserved
+    WholeCharacter.canonicalWholeCharacterIsotypicBypassBoundary
+  ≡ false
+wholeCharacterActualKernelReplayRemainsOpen =
+  TOE.toeWholeCharacterActualKernelReplayStillOpen
+
+primarySupplementKernelClassTwentyRemainsPaid :
+  KernelClass20.PrimarySupplementKernelFrontier.mainClassTwentyCoordinatePaid
+    KernelClass20.currentPrimarySupplementKernelFrontier
+  ≡ true
+primarySupplementKernelClassTwentyRemainsPaid =
+  TOE.toePrimarySupplementKernelClassTwentyPaid
+
+invariantDiagonalKernelSubgroupRemainsPaid :
+  KernelGauge.DiagonalKernelGaugeFrontier.invariantDiagonalKernelSubgroupPaid
+    KernelGauge.currentDiagonalKernelGaugeFrontier
+  ≡ true
+invariantDiagonalKernelSubgroupRemainsPaid =
+  TOE.toeInvariantDiagonalKernelSubgroupPaid
+
+twelveSeventyEightCharacterRemainsPaid :
+  Ibrahim.CorrectedShortestFrontierBoundary.twelveSeventyEightCharacterAlreadyPaid
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ true
+twelveSeventyEightCharacterRemainsPaid =
+  TOE.toeTwelveSeventyEightCharacterAlreadyPaid
+
+actualTwelveSeventyEightLinearIntertwinerRemainsOpen :
+  Ibrahim.CorrectedShortestFrontierBoundary.actualTwelveSeventyEightLinearIntertwinerPaid
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ false
+actualTwelveSeventyEightLinearIntertwinerRemainsOpen =
+  TOE.toeActualTwelveSeventyEightLinearIntertwinerStillOpen
+
+characterEqualityStillDoesNotCreateWholeIso :
+  WholeCharacter.CharacterEqualityAloneCreatesWholeRepresentationIso → ⊥
+characterEqualityStillDoesNotCreateWholeIso =
+  TOE.toeWholeCharacterEqualityDoesNotCreateWholeIso
+
+paidKernelStillDoesNotRequireAbsoluteSignName :
+  KernelGauge.PaidKernelRequiresAbsoluteSignName → ⊥
+paidKernelStillDoesNotRequireAbsoluteSignName =
+  TOE.toePaidKernelDoesNotRequireAbsoluteSignName
