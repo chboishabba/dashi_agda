@@ -1570,14 +1570,3 @@ toeFleetSharedCardinalityDoesNotCreateIdentity :
 toeFleetSharedCardinalityDoesNotCreateIdentity =
   FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
 
-toeBalabanR559ContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-toeBalabanR559ContinuumLimitPromotionImpossible =
-  BalabanR559TOE.continuumLimitPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanR559DepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-toeBalabanR559DepthContinuumLimitPromotionImpossible =
-  BalabanR559TOE.depthContinuumLimitPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
