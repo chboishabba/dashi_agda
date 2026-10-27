@@ -6,6 +6,7 @@ import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -1344,3 +1345,33 @@ unifierExactReuseDoesNotCreateSemanticAuthority :
   GovernanceTOE.ExactReuseCreatesSemanticAuthority → ⊥
 unifierExactReuseDoesNotCreateSemanticAuthority =
   GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
+
+
+------------------------------------------------------------------------
+-- Governed legal-workflow compliance extension.
+------------------------------------------------------------------------
+
+unifierGovernedLegalWorkflowComplianceReceipt :
+  LegalCompliance.GovernedLegalWorkflowComplianceTOEReceipt
+unifierGovernedLegalWorkflowComplianceReceipt =
+  LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+unifierExpertQualificationDoesNotCreateForensicCompliance :
+  LegalCompliance.QualificationAutomaticallyForensicCompliance → ⊥
+unifierExpertQualificationDoesNotCreateForensicCompliance =
+  LegalCompliance.expertQualificationDoesNotCreateForensicCompliance
+
+unifierLegalReviewDoesNotCreateClaimTruth :
+  LegalCompliance.LegalReviewDecisionCreatesClaimTruth → ⊥
+unifierLegalReviewDoesNotCreateClaimTruth =
+  LegalCompliance.legalReviewDoesNotCreateClaimTruth
+
+unifierOfficialLegalSurfaceDoesNotRecoverFineState :
+  LegalCompliance.OfficialLegalSurfaceRecoversFineState → ⊥
+unifierOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalCompliance.officialLegalSurfaceDoesNotRecoverFineState
+
+unifierLegalityAloneDoesNotCreateLegitimacy :
+  LegalCompliance.LegalOnlyCreatesLegitimacy → ⊥
+unifierLegalityAloneDoesNotCreateLegitimacy =
+  LegalCompliance.legalityAloneDoesNotCreateLegitimacy
