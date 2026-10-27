@@ -63,14 +63,14 @@ toeAllAuthorityStillClosed =
   TOE.toeSensibLawSemanticAllAuthorityStillClosed
 
 toeRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.representationEqualityCreatesLegalAuthority
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
     TOE.toeSensibLawDomainTransportReceipt
   ≡ false
 toeRepresentationEqualityDoesNotCreateLegalAuthority =
   TOE.toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority
 
 toeTargetDomainNeedsOwnAuthorityWitness :
-  Domain.targetDomainNeedsOwnAuthorityWitness
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
     TOE.toeSensibLawDomainTransportReceipt
   ≡ true
 toeTargetDomainNeedsOwnAuthorityWitness =
@@ -119,7 +119,7 @@ unifierAllAuthorityStillClosed =
   Unifier.unifierSensibLawSemanticAllAuthorityStillClosed
 
 unifierVendorIdentityDoesNotCreateAuthority :
-  Domain.vendorIdentityCreatesAuthority
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
     Unifier.unifierSensibLawDomainTransportReceipt
   ≡ false
 unifierVendorIdentityDoesNotCreateAuthority =
@@ -168,7 +168,7 @@ unifiedAllAuthorityStillClosed =
   UnifiedPhysics.governanceSensibLawSemanticAllAuthorityStillClosed
 
 unifiedRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.representationEqualityCreatesLegalAuthority
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
     UnifiedPhysics.governanceSensibLawDomainTransportReceipt
   ≡ false
 unifiedRepresentationEqualityDoesNotCreateLegalAuthority =
@@ -186,14 +186,14 @@ semanticPromotionCannotGrantLegalAuthority =
   Governance.governanceSemanticLegalAuthorityStillClosed
 
 runtimeTransportCannotPromoteTruth :
-  LegalRuntime.parserCandidateMayBecomeTruthByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransport
     Governance.governanceLegalRuntimeContract
   ≡ false
 runtimeTransportCannotPromoteTruth =
   Governance.governanceParserCandidateCannotBecomeTruthByTransport
 
 caseManagementReuseRequiresTargetAuthority :
-  Domain.targetDomainNeedsOwnAuthorityWitness
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
     Governance.governanceDomainTransportReceipt
   ≡ true
 caseManagementReuseRequiresTargetAuthority =
