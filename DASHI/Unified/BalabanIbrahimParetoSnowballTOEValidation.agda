@@ -295,3 +295,48 @@ unifierSchrodingerConstructionStillDoesNotBindHomCarrier :
   Owner.SchrodingerConstructionCreatesHomCarrierBinding → ⊥
 unifierSchrodingerConstructionStillDoesNotBindHomCarrier =
   Unifier.unifierIbrahimSchrodingerConstructionDoesNotCreateHomBinding
+
+
+------------------------------------------------------------------------
+-- Residual direct-owner non-promotion regression: historical provenance.
+------------------------------------------------------------------------
+
+toeDeweyStillDoesNotClassifyHistoricalEdge :
+  Owner.DeweyClassifiesHistoricalEdge → ⊥
+toeDeweyStillDoesNotClassifyHistoricalEdge =
+  TOE.toeIbrahimDeweyDoesNotClassifyHistoricalEdge
+
+unifierDeweyStillDoesNotClassifyHistoricalEdge :
+  Owner.DeweyClassifiesHistoricalEdge → ⊥
+unifierDeweyStillDoesNotClassifyHistoricalEdge =
+  Unifier.unifierIbrahimDeweyDoesNotClassifyHistoricalEdge
+
+toeFourEdgesStillDoNotProveCorpus :
+  Owner.FourMatchingEdgesProveWholeCorpus → ⊥
+toeFourEdgesStillDoNotProveCorpus =
+  TOE.toeIbrahimFourEdgesDoNotProveWholeCorpus
+
+unifierFourEdgesStillDoNotProveCorpus :
+  Owner.FourMatchingEdgesProveWholeCorpus → ⊥
+unifierFourEdgesStillDoNotProveCorpus =
+  Unifier.unifierIbrahimFourEdgesDoNotProveWholeCorpus
+
+toeOctoberCommentStillDoesNotOverridePaper :
+  Owner.OctoberCommentOverridesPrimaryPaper → ⊥
+toeOctoberCommentStillDoesNotOverridePaper =
+  TOE.toeIbrahimOctoberCommentDoesNotOverridePrimaryPaper
+
+unifierOctoberCommentStillDoesNotOverridePaper :
+  Owner.OctoberCommentOverridesPrimaryPaper → ⊥
+unifierOctoberCommentStillDoesNotOverridePaper =
+  Unifier.unifierIbrahimOctoberCommentDoesNotOverridePrimaryPaper
+
+toePaperMonthStillDoesNotOverrideBytes :
+  Owner.PaperMonthOverridesExecutedBytes → ⊥
+toePaperMonthStillDoesNotOverrideBytes =
+  TOE.toeIbrahimPaperMonthDoesNotOverrideExecutedBytes
+
+unifierPaperMonthStillDoesNotOverrideBytes :
+  Owner.PaperMonthOverridesExecutedBytes → ⊥
+unifierPaperMonthStillDoesNotOverrideBytes =
+  Unifier.unifierIbrahimPaperMonthDoesNotOverrideExecutedBytes
