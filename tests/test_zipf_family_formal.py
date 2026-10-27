@@ -27,10 +27,17 @@ def test_zipf_shift_never_artificially_equals_unshifted():
     with pytest.raises(ValueError): Z.zipf_mandelbrot(2,1,-1)
 
 def test_hurwitz_tail_rigorous_integral_bounds():
-    lower,upper=Z.hurwitz_tail_bound(2,1,5)
-    approx=sum(1/x**2 for x in range(6,1000000))
-    assert lower<approx<upper
+    # T_n(q,s)=sum_{r=n+1}^infinity (r+q)^(-s). Old test wrongly
+    # evaluated sum from 6 while q=1 implies the first denominator is 7.
+    for s,q,n in ((2,1,5),(2,0,5),(3,10,8),(4,2,4)):
+        lower,upper=Z.hurwitz_tail_bound(s,q,n)
+        independent_partial=sum(1/(r+q)**s for r in range(n+1,100000))
+        # The omitted tail is positive and below integral_{99999}^infinity.
+        omitted_upper=(99999+q)**(1-s)/(s-1)
+        assert lower < independent_partial
+        assert independent_partial+omitted_upper < upper
     with pytest.raises(ValueError): Z.hurwitz_tail_bound(1,1,5)
+    with pytest.raises(ValueError): Z.hurwitz_tail_bound(2,-1,5)
 
 def test_one_percent_rule_is_an_observation_not_a_numeric_identity():
     assert Z.participation_shares([0]*99+[2])==(.01,.99)
