@@ -343,3 +343,29 @@ actionstepVendorClaimDoesNotProveFirmCompliance :
   SensibLawActionstep.ActionstepVendorComplianceClaimProvesFirmCompliance → ⊥
 actionstepVendorClaimDoesNotProveFirmCompliance =
   SensibLawActionstep.actionstepVendorClaimDoesNotProveFirmCompliance
+
+------------------------------------------------------------------------
+-- Missing/deceased scientist Ibrahim/Dewey investigative Pareto TOE handoff.
+------------------------------------------------------------------------
+
+import DASHI.Unified.MissingDeceasedIbrahimDeweyParetoTOEExact as MissingDeceasedIbrahimDewey
+
+missingDeceasedIbrahimDeweyBoundary :
+  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceBoundary
+missingDeceasedIbrahimDeweyBoundary =
+  MissingDeceasedIbrahimDewey.canonicalIbrahimDeweyConvergenceBoundary
+
+missingDeceasedAmyIbrahimDeweyConvergence :
+  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceReceipt
+missingDeceasedAmyIbrahimDeweyConvergence =
+  MissingDeceasedIbrahimDewey.amyConvergence
+
+missingDeceasedMaiwaldIbrahimDeweyConvergence :
+  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceReceipt
+missingDeceasedMaiwaldIbrahimDeweyConvergence =
+  MissingDeceasedIbrahimDewey.maiwaldConvergence
+
+missingDeceasedDualRouteCreatesAuthorityFalse :
+  MissingDeceasedIbrahimDewey.dualRouteAgreementCreatesAuthority ≡ false
+missingDeceasedDualRouteCreatesAuthorityFalse =
+  MissingDeceasedIbrahimDewey.dualRouteAgreementCreatesAuthorityIsFalse
