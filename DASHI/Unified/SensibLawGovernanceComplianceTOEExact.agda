@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as Governance
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as Ibrahim
 import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as Expert
 import DASHI.Law.SensibLawRealMatterReviewDecisionExact as Review
 import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
@@ -139,6 +140,11 @@ record SensibLawGovernanceComplianceTOEReceipt : Set₁ where
     actionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue :
       actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
 
+    ibrahimRecognitionBoundary :
+      Ibrahim.RecognitionRouteParetoBoundary
+    ibrahimSearchPriorityDoesNotCreateProof :
+      Ibrahim.SearchPriorityCreatesProof → ⊥
+
     fleetFormalGapCount : Nat
     fleetFormalGapCountIs58 : fleetFormalGapCount ≡ 58
     fleetDischargedCount : Nat
@@ -186,6 +192,10 @@ canonicalSensibLawGovernanceComplianceReceipt =
           Governance.governanceDomainTransportReceipt
     ; actionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
         Governance.governanceTargetDomainNeedsOwnAuthorityWitness
+    ; ibrahimRecognitionBoundary =
+        Ibrahim.ibrahimRecognitionParetoBoundary
+    ; ibrahimSearchPriorityDoesNotCreateProof =
+        Ibrahim.searchPriorityDoesNotCreateProof
     ; fleetFormalGapCount =
         Fleet.unformalisedFormalGaps Fleet.canonicalFleetFormalGapTargetReceipt
     ; fleetFormalGapCountIs58 = refl
