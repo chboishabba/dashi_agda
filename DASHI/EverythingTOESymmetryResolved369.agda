@@ -715,3 +715,56 @@ toe369LegalGovernanceAllThreeSameCanonical :
   ≡ UnifiedLegalFacade.unifiedGovernedLegalWorkflowAuthorityInvariantHandoff
 toe369LegalGovernanceAllThreeSameCanonical = refl
 
+
+
+------------------------------------------------------------------------
+-- Governance + exact 58-gap + Balaban/Ibrahim convergence.
+-- The canonical theorem owners remain in their source modules.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEExact as GBI58
+
+toeGovernanceBalabanIbrahim58GapReceipt :
+  GBI58.GovernanceBalabanIbrahim58GapTOEReceipt
+toeGovernanceBalabanIbrahim58GapReceipt =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+toeGovernanceBalabanIbrahim58GapZKPFrame :
+  GBI58.GovernanceBalabanIbrahim58GapZKPFrame
+toeGovernanceBalabanIbrahim58GapZKPFrame =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapZKPFrame
+
+toeExactGate4GapCountIs58 :
+  GBI58.gate4GapCount GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt ≡ 58
+toeExactGate4GapCountIs58 =
+  GBI58.gate4CountIsExactly58
+
+toeGate4ConditionalDoesNotSelfPromote =
+  GBI58.gate4StillConditional
+
+toeLegalCandidateDoesNotCreateAuthority =
+  GBI58.legalCandidateDoesNotCreateAuthority
+
+toeLegalSystemMatchDoesNotCreateAuthority =
+  GBI58.legalSystemMatchDoesNotCreateAuthority
+
+toeCurrentValidityDoesNotCreateApplicability =
+  GBI58.currentValidityDoesNotCreateApplicability
+
+toeSemanticAdmissionDoesNotCreateLegalSourceAuthority =
+  GBI58.semanticAdmissionDoesNotCreateLegalSourceAuthority
+
+toeDocumentRoleDoesNotCreateLegalSourceAuthority =
+  GBI58.documentRoleDoesNotCreateLegalSourceAuthority
+
+toeBalaban58GapScaleTransferPromotionImpossible =
+  GBI58.balabanScaleTransferPromotionImpossible
+    GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+toeIbrahim58GapSearchPriorityDoesNotCreateProof =
+  GBI58.ibrahimSearchPriorityDoesNotCreateProof
+    GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+toeIbrahim58GapProducerSourceDoesNotCreateRun =
+  GBI58.ibrahimProducerSourceDoesNotCreateRun
+    GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
