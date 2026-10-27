@@ -1128,6 +1128,14 @@ toeCanonicalLegalSourceAuthorityBoundary =
 CandidateSourceIsAuthoritative : Set
 CandidateSourceIsAuthoritative = LegalAuthority.CandidateSourceIsAuthoritative
 
+SameLegalSystemAutomaticallyMeansAuthority : Set
+SameLegalSystemAutomaticallyMeansAuthority =
+  LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority
+
+DocumentRoleSuppliesLegalSourceAuthority : Set
+DocumentRoleSuppliesLegalSourceAuthority =
+  LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority
+
 CurrentValidityAutomaticallyMeansApplicability : Set
 CurrentValidityAutomaticallyMeansApplicability =
   LegalAuthority.CurrentValidityAutomaticallyMeansApplicability
