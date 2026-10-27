@@ -103,7 +103,7 @@ toeGovernedLegalWorkflowComplianceZKPFrame =
   LegalCompliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
 
 toeReportAdmissionDoesNotRepairMissingInput :
-  DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact.ReportAdmissionRepairsMissingInput → ⊥
+  LegalCompliance.ReportAdmissionRepairsMissingInput → ⊥
 toeReportAdmissionDoesNotRepairMissingInput =
   LegalCompliance.reportAdmissionDoesNotRepairMissingInput
 
