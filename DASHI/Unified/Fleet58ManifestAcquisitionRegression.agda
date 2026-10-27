@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.BoundAcquisitionDemandExact as Bound
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as Manifest
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
@@ -60,11 +61,11 @@ unifierPerGapDispatchStillBlocked =
   Manifest.perGapDispatchEnabledIsFalse
 
 toeAcquisitionDoesNotPayRequirement :
-  Manifest.Bound.BoundDemandAutomaticallyPaysRequirement → ⊥
+  Bound.BoundDemandAutomaticallyPaysRequirement → ⊥
 toeAcquisitionDoesNotPayRequirement =
   TOE.toeFleet58AcquisitionDoesNotPayRequirement
 
 unifierAcquisitionDoesNotPayRequirement :
-  Manifest.Bound.BoundDemandAutomaticallyPaysRequirement → ⊥
+  Bound.BoundDemandAutomaticallyPaysRequirement → ⊥
 unifierAcquisitionDoesNotPayRequirement =
   Unifier.unifierFleet58AcquisitionDoesNotPayRequirement
