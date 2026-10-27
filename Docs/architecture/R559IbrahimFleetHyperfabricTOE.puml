@@ -30,7 +30,7 @@ component "Unified.Everything" as Unified
 component "A-D Validation" as ADValidation
 component "Fleet/Ibrahim Validation" as Validation
 
-YM --> Joint : exact receipt + RG non-promotion
+YM --> Joint : exact receipt + RG non-promotion\nYM --> Joint : Gate-4 58 + paid/open proof posture
 Ibrahim --> Joint : Pareto / snowball boundaries
 Fleet --> Joint : 584 discharged / 44 contradiction / 58 target
 Fabric --> Joint : B^k + factorisation
