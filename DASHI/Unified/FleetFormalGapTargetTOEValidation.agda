@@ -70,3 +70,22 @@ unifierContradictionGapsRemainSeparate :
   Fleet.FleetContradictionGapReclassificationPermission → ⊥
 unifierContradictionGapsRemainSeparate =
   Unifier.unifierFleetContradictionGapsRemainSeparate
+
+-- Verify the selected planning coordinates without treating their values
+-- as scientific or formal proof authority.
+
+fleetTargetIsExactly58 :
+  Fleet.unformalisedFormalGaps Fleet.canonicalFleetFormalGapTargetReceipt ≡ 58
+fleetTargetIsExactly58 = refl
+
+previouslyDischarged584RemainSeparate :
+  Fleet.dischargedCoreKnowledgeFibres Fleet.canonicalFleetFormalGapTargetReceipt ≡ 584
+previouslyDischarged584RemainSeparate = refl
+
+contradictionGaps44RemainSeparate :
+  Fleet.polarityContradictionGaps Fleet.canonicalFleetFormalGapTargetReceipt ≡ 44
+contradictionGaps44RemainSeparate = refl
+
+fleetMacroscopicMotifCountIsThree :
+  Fleet.macroscopicEigenMotifCount Fleet.canonicalFleetFormalGapTargetReceipt ≡ 3
+fleetMacroscopicMotifCountIsThree = refl
