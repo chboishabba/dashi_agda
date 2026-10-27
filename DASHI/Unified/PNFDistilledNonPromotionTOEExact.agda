@@ -34,15 +34,6 @@ canonicalPNFDistilledNonPromotionBoundary :
 canonicalPNFDistilledNonPromotionBoundary =
   Boundary.canonicalPNFSourceBoundaryTOEReceipt
 
-toeKluverCobwebFormConstant =
-  Boundary.kluverCobwebForm
-
-toePsychogeographyWebPublicationIdentifier =
-  Boundary.psychogeographyWebIdentifierKind
-
-toeFungalNetworkClaimsRequireSpeciesEvidence =
-  Boundary.fungalNetworkClaimsRequireSpeciesEvidence
-
 metaIntrospectorAttributionRule : String
 metaIntrospectorAttributionRule =
   Fabric.attributionRule
