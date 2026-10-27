@@ -18,6 +18,7 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 -- Do not replace this import with DASHI.Unifier placeholder axioms.
 import DASHI.Unified.GRQuantumProofTermRegression
 
+import DASHI.Unified.E8ExceptionalActorTOECompatibilityExact as E8ActorTOE
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
@@ -395,3 +396,24 @@ toe369YangMillsGoal1C4CommonMetricCompilerLevel =
 
 toe369YangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 toe369YangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+------------------------------------------------------------------------
+-- E8 local completeness and Monster actor-scope non-promotion.
+------------------------------------------------------------------------
+
+open E8ActorTOE public using
+  ( toeE8IntegerIndexedRootsCompleteForTwoSparseShape
+  ; toeE8RootEnumerationPromotionBoundary
+  ; toeE8UpstreamCompleteReceiptPromotionAudit
+  ; toeE8UpstreamPromotionStillFalse
+  ; toeE8ExactMissingPromotionBlocker
+  ; toeMonster53ActorFrontier
+  ; toeMonsterCentralObserverIs65663
+  ; toeMonsterNormalizerObserverIs65663
+  ; toeMonsterTwelvePlusSeventyEightIsNinety
+  ; toeMonsterNinetyPlusFiftyThreeIsOneFortyThree
+  ; toeArithmetic143DoesNotCreateSuzukiSubmodule
+  ; toeCentralC3ResidualDoesNotCreateNormalizerResidual
+  ; toeCarrier53DoesNotCreateNormalizerAction
+  ; toeExceptional53ArithmeticDoesNotCreateMonsterIntertwiner
+  )
