@@ -91,6 +91,7 @@ import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightW
 import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VOAComposition
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestAction
 import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as ShortestCandidate
+import DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact as RecognitionAcquisition
 
 ------------------------------------------------------------------------
 -- 1. Canonical coarse/fine reopening.
@@ -785,7 +786,40 @@ toeCharacterIsotypyDoesNotCreateBase369Candidate =
 
 
 ------------------------------------------------------------------------
--- 15. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+-- 15. Exact Base369 recognition acquisition wall.
+------------------------------------------------------------------------
+
+toeRecognitionAcquisitionTargetLocalized :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.exactAcquisitionTargetLocalized
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ true
+toeRecognitionAcquisitionTargetLocalized = refl
+
+toeRecognitionCompilerAvailableAtWall :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.base369RecognitionCompilerAvailable
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ true
+toeRecognitionCompilerAvailableAtWall = refl
+
+toeActualBase369RecognitionCandidateStillOpen :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.actualBase369RecognitionCandidatePaid
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ false
+toeActualBase369RecognitionCandidateStillOpen = refl
+
+toeOEISDoesNotCreateBase369RecognitionCandidate :
+  RecognitionAcquisition.OEISCreatesBase369RecognitionCandidate → ⊥
+toeOEISDoesNotCreateBase369RecognitionCandidate =
+  RecognitionAcquisition.oeisDoesNotCreateBase369RecognitionCandidate
+
+toeDimensionDoesNotCreateRecognitionIntertwiners :
+  RecognitionAcquisition.DimensionMatchCreatesOperatorIntertwiners → ⊥
+toeDimensionDoesNotCreateRecognitionIntertwiners =
+  RecognitionAcquisition.dimensionMatchDoesNotCreateOperatorIntertwiners
+
+
+------------------------------------------------------------------------
+-- 16. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
 ------------------------------------------------------------------------
 
 record TOE369MaxCutZKPFrame : Set where
