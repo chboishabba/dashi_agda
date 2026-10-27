@@ -13,7 +13,12 @@ import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
+
+-- Current-master R485/R546/R558 Goal-1/Pareto normalization.
+-- The imported source owners remain theorem authority.
+open YMMaxCut public
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -321,3 +326,7 @@ yangMillsBalabanClayPromotionStillFalse :
   BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
 yangMillsBalabanClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
+
+
+yangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
+yangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
