@@ -1092,3 +1092,15 @@ unifierCurrentIbrahimSearchPriorityDoesNotCreateProof :
   CurrentMaxCut.IbrahimSearchPriorityCreatesProof → ⊥
 unifierCurrentIbrahimSearchPriorityDoesNotCreateProof =
   CurrentMaxCut.ibrahimSearchPriorityCannotCreateProof
+
+
+------------------------------------------------------------------------
+-- Direct legal-governance semantic non-promotion at the TOE consumer.
+-- The theorem owner remains TOECurrentMaxCutGovernanceFleetExact.
+------------------------------------------------------------------------
+
+unifierCurrentLegalAuthorityDoesNotEstablishApplicability :
+  CurrentMaxCut.legalAuthorityCreatesApplicability ≡ false
+unifierCurrentLegalAuthorityDoesNotEstablishApplicability =
+  CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
+
