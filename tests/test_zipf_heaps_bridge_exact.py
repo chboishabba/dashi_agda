@@ -180,3 +180,26 @@ def test_head_conditioning_matches_half_l1_subset_supremum():
                  for subset in combinations(range(len(p)),r)))
         assert 2*sup==H.l1_probability_distance(p,q)
         assert sup==sum(p[keep:],F())
+
+
+def test_canonical_agda_exact_fraction_hurwitz_parity_and_nonzero_denominators():
+    """Bounded execution of the Agda recurrence shape; NOT kernel typecheck.
+
+    Mirrors the existing canonical FiniteFraction addition:
+      (a/b)+(c/d)=(a*d+c*b)/(b*d).
+    In the Zipf finite owner each term is 1/(r+q)^s for 1-based rank.
+    """
+    for exponent in range(7):
+        for shift in range(5):
+            for count in range(9):
+                numerator, denominator = 0, 1
+                for index in range(count):
+                    term_denom = (index + 1 + shift) ** exponent
+                    numerator, denominator = (
+                        numerator * term_denom + denominator,
+                        denominator * term_denom,
+                    )
+                assert denominator > 0
+                assert F(numerator, denominator) == H.finite_hurwitz_sum(
+                    count, exponent, shift
+                )
