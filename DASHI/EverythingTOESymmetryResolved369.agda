@@ -19,6 +19,8 @@ import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact
 import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact
+import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact
 
 -- Reuse the existing exact finite GR/quantum proof-term regression.
 -- It contains a terminal physical non-promotion theorem.
