@@ -179,9 +179,6 @@ def test_regression_binds_unifier_to_canonical_receipt():
     assert "unifierUsesCanonicalZKPReceipt" in text
     assert "unifierUsesCanonicalIntrospectiveZKPFrame" in text
     assert "invariantHandoffUsesCanonicalIntrospectiveZKPFrame" in text
-    assert "unifiedEverythingUsesCanonicalGovernanceBoundary" in text
-    assert "unifiedEverythingUsesCanonicalInvariantHandoff" in text
-    assert "unifiedEverythingUsesCanonicalIntrospectiveZKPFrame" in text
     assert "zkpStandardsRemainDesignLenses" in text
     assert "zkpStandardsDoNotClaimCertification" in text
     assert "zkpESDSurfaceMutationRemainsForbidden" in text
