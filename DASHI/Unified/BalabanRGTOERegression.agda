@@ -520,6 +520,14 @@ record BalabanRGTOEReceipt : Set where
     stressPairingPhysicalWeld : ProofLevel
     stressCauchyModulusCompiler : ProofLevel
     stressCauchyPhysicalInsertion : ProofLevel
+    stressCauchyCompletionToMarkedStress : ProofLevel
+    stressCompletedMarkedIsClayStress : ProofLevel
+    sameFamilyRecoveryCompiler : ProofLevel
+    sameFamilyRecoveryPhysical : ProofLevel
+    goal1CSourceCutCompiler : ProofLevel
+    goal1CContinuumStressRecoveryCompiler : ProofLevel
+    goal1CMetricPairingCompiler : ProofLevel
+    goal1CLiteralSourceInstantiation : ProofLevel
     stressHilbertBoundCompiler : ProofLevel
     stressHilbertPhysicalShell : ProofLevel
 
@@ -615,6 +623,22 @@ canonicalBalabanRGTOEReceipt =
         balabanStressCauchyModulusCompilerLevel
     ; stressCauchyPhysicalInsertion =
         balabanStressCauchyPhysicalInsertionLevel
+    ; stressCauchyCompletionToMarkedStress =
+        balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+    ; stressCompletedMarkedIsClayStress =
+        balabanGoal1CCompletedStressIsClayStressLevel
+    ; sameFamilyRecoveryCompiler =
+        balabanSameFamilyRecoveryCompilerLevel
+    ; sameFamilyRecoveryPhysical =
+        balabanSameFamilyRecoveryPhysicalLevel
+    ; goal1CSourceCutCompiler =
+        balabanGoal1CSourceCutCompilerLevel
+    ; goal1CContinuumStressRecoveryCompiler =
+        balabanGoal1CContinuumStressRecoveryCompilerLevel
+    ; goal1CMetricPairingCompiler =
+        balabanGoal1CMetricPairingCompilerLevel
+    ; goal1CLiteralSourceInstantiation =
+        balabanGoal1CLiteralSourceInstantiationLevel
     ; stressHilbertBoundCompiler =
         balabanStressHilbertBoundCompilerLevel
     ; stressHilbertPhysicalShell =
