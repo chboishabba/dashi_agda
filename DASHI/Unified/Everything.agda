@@ -207,3 +207,30 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Computational-imaging observer unified projection.
+------------------------------------------------------------------------
+
+unifiedDiffuserImagingZKPFrame =
+  Physics.diffuserImagingZKPFrame
+
+open Physics public using
+  ( roundTripImpliesIdentifiable
+  ; noUniversalDecoderAfterClip
+  ; saturatedCollision
+  ; overlapThenClip
+  ; redundantRecovery
+  ; recordedCodeInjective
+  ; firstPixelOnlyCannotRecoverDepth
+  ; depthRecoveryReceipt
+  ; recordedCollisionWouldContradictDepth
+  ; RestrictedInverseBudget
+  ; MeasuredReconstruction
+  ; stableReconstructionBound
+  ; stableWithMatchedResidual
+  ; codedDepthRoundTrip
+  ; noUniversalDepthDecoder
+  ; noRechartRepairsSaturatedDepth
+  )
