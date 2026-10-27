@@ -212,7 +212,7 @@ toeBalabanGoal1CLiteralSourceInstantiationLevel =
   BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
 
 toeBalabanLevel2ClayPromotionStillFalse :
-  BalabanRGTOE.SameFamilyRecovery.clayPromotion ≡ false
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
 toeBalabanLevel2ClayPromotionStillFalse =
   BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
 
