@@ -370,14 +370,6 @@ leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue :
   leanMillenniumPNPTerminalFailureBidiAgdaOwned ≡ true
 leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue = refl
 
--- This import is intentional. It attaches the already-owned Agda P != NP
--- terminal equivalence to the receipt graph without restating its theorem.
-leanMillenniumPNPTerminalEquivalenceOwner :
-  (cost : _) →
-  PNPQ1.UniversalQ1TerminalPackageEquivalence cost
-leanMillenniumPNPTerminalEquivalenceOwner =
-  PNPQ1.canonicalUniversalQ1TerminalPackageEquivalence
-
 leanMillenniumNSReleasedMetadataReportsNoSorry : Bool
 leanMillenniumNSReleasedMetadataReportsNoSorry =
   NSReleased.releasedLeanMetadataReportsNoSorry4
