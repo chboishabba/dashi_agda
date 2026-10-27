@@ -8,6 +8,9 @@ import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
+import DASHI.Biology.PMDDHistamineAmplificationExact as PMDDHistamine
+import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact as PMDDMolecular
+import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact as PMDDIntervention
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -184,6 +187,71 @@ toeBalabanStressCauchyModulusCompilerLevel =
 toeBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
 toeBalabanStressCauchyPhysicalInsertionLevel =
   BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+toeBalabanStressCauchyCompletionToMarkedStressLevel : ProofLevel
+toeBalabanStressCauchyCompletionToMarkedStressLevel =
+  BalabanRGTOE.balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+
+toeBalabanStressCompletedMarkedIsClayStressLevel : ProofLevel
+toeBalabanStressCompletedMarkedIsClayStressLevel =
+  BalabanRGTOE.balabanGoal1CCompletedStressIsClayStressLevel
+
+toeBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+toeBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+toeBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+toeBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+toeBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+toeBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+toeBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+toeBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+toeBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+toeBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+toeBalabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+toeBalabanCPhysicalPackageMaxCutCompilerLevel =
+  BalabanRGTOE.balabanCPhysicalPackageMaxCutCompilerLevel
+
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  BalabanRGTOE.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+toeBalabanC1MarkedCurvatureFamilyLevel : ProofLevel
+toeBalabanC1MarkedCurvatureFamilyLevel =
+  BalabanRGTOE.balabanC1MarkedCurvatureFamilyLevel
+
+toeBalabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+toeBalabanC2PhysicalRemainderSharedTailLevel =
+  BalabanRGTOE.balabanC2PhysicalRemainderSharedTailLevel
+
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel =
+  BalabanRGTOE.balabanC3OneStepAFRecurrenceIdentificationLevel
+
+toeBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
+toeBalabanC4DensityAnchoredStressLaneLevel =
+  BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
+
+toeBalabanCPhysicalPackageCount : ℕ
+toeBalabanCPhysicalPackageCount =
+  BalabanRGTOE.balabanCPhysicalPackageCount
+
+toeBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+toeBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
 
 toeBalabanStressHilbertBoundCompilerLevel : ProofLevel
 toeBalabanStressHilbertBoundCompilerLevel =
@@ -1431,3 +1499,72 @@ toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
 toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+
+------------------------------------------------------------------------
+-- Joint Balaban/R559 typed continuum non-promotion.
+-- Reuse the canonical source-owned eliminators carried by the joint receipt.
+------------------------------------------------------------------------
+
+toeBalabanR559ContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+toeBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559TOE.continuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559DepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+toeBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559TOE.depthContinuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- PMDD / histamine amplifier candidate.
+-- Reuse canonical biology owners. No clinical or diagnostic promotion.
+------------------------------------------------------------------------
+
+toePMDDHistamineAmplificationCandidate :
+  PMDDHistamine.HistamineAmplifiedPMDDCandidate
+toePMDDHistamineAmplificationCandidate =
+  PMDDHistamine.canonicalHistamineAmplifiedPMDDCandidate
+
+toePMDDHistamineMolecularCandidate :
+  PMDDMolecular.MolecularlyInstantiatedPMDDHistamineCandidate
+toePMDDHistamineMolecularCandidate =
+  PMDDMolecular.canonicalMolecularlyInstantiatedPMDDHistamineCandidate
+
+toePMDDHistamineInterventionBoundary :
+  PMDDIntervention.HistamineInterventionIdentificationBoundary
+toePMDDHistamineInterventionBoundary =
+  PMDDIntervention.canonicalHistamineInterventionIdentificationBoundary
+
+toePMDDHistamineUniversalCauseImpossible :
+  PMDDHistamine.HistamineCausesAllPMDD → ⊥
+toePMDDHistamineUniversalCauseImpossible =
+  PMDDHistamine.histamineDoesNotBecomeUniversalCause
+
+toePMDDAntihistamineResponseDiagnosticImpossible :
+  PMDDHistamine.AntihistamineResponseDiagnosesHistaminePMDD → ⊥
+toePMDDAntihistamineResponseDiagnosticImpossible =
+  PMDDHistamine.antihistamineResponseIsNotDiagnosticProof
+
+toePMDDGutRootCausePromotionImpossible :
+  PMDDHistamine.GutDysfunctionIsThePMDDRootCause → ⊥
+toePMDDGutRootCausePromotionImpossible =
+  PMDDHistamine.gutRootCauseNotPromoted
+
+toePMDDH1H2TargetPairEfficacyPromotionImpossible :
+  PMDDMolecular.H1H2TargetPairProvesPMDDEfficacy → ⊥
+toePMDDH1H2TargetPairEfficacyPromotionImpossible =
+  PMDDMolecular.h1h2TargetPairDoesNotProvePMDDEfficacy
+
+toePMDDSymptomResponseMechanismIdentificationImpossible :
+  PMDDIntervention.SymptomResponseDeterminesMechanism → ⊥
+toePMDDSymptomResponseMechanismIdentificationImpossible =
+  PMDDIntervention.symptomResponseDoesNotDetermineMechanism
+
+toePMDDSingleParticipantSubtypePromotionImpossible :
+  PMDDIntervention.SingleParticipantResponseDefinesSubtype → ⊥
+toePMDDSingleParticipantSubtypePromotionImpossible =
+  PMDDIntervention.singleParticipantResponseDoesNotDefineSubtype
