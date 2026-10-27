@@ -3,8 +3,10 @@ module DASHI.Unified.BalabanR559TOEMaxCutValidation where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+import Data.Empty using (⊥)
 
 import DASHI.Unified.BalabanR559TOEMaxCutExact as Joint
+import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
@@ -119,3 +121,18 @@ physicsClayStillBlocked :
   ≡ false
 physicsClayStillBlocked =
   Physics.yangMillsBalabanR559ClayPromotionStillBlocked
+
+
+------------------------------------------------------------------------
+-- Direct constructive scale-transfer non-promotion reachability.
+------------------------------------------------------------------------
+
+rootScaleTransferPromotionEliminates :
+  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+rootScaleTransferPromotionEliminates =
+  TOE.toeBalabanScaleTransferNonPromotion
+
+unifierScaleTransferPromotionEliminates :
+  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+unifierScaleTransferPromotionEliminates =
+  Unifier.unifierBalabanScaleTransferNonPromotion
