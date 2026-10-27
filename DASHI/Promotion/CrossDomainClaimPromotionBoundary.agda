@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
+import Data.Empty
 import DASHI.Promotion.AuthorityGateCore as AuthorityGateCore
 import DASHI.Core.AdapterCanonicalityCore as AdapterCanon
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
@@ -1573,3 +1574,113 @@ canonicalSpatialPracticeDeniedAuthorityTargetCountIs5 :
   listCount (deniedAuthorityTargets spatialPracticeInterpretationExample)
   ≡ suc (suc (suc (suc (suc zero))))
 canonicalSpatialPracticeDeniedAuthorityTargetCountIs5 = refl
+
+
+
+------------------------------------------------------------------------
+-- Technical-service safety non-promotion.
+--
+-- This is the normalized claim boundary extracted from the indoor hose
+-- splitter discussion. It is deliberately product-neutral.
+--
+-- A thread or interface match does not establish continuous-service
+-- suitability. A nominal pressure rating does not establish continuous-
+-- service suitability. Observed open flow does not establish backflow safety.
+-- Each promotion requires its own domain-authoritative receipt.
+------------------------------------------------------------------------
+
+record TechnicalServiceSafetyBoundary : Set where
+  constructor technical-service-safety-boundary
+  field
+    interfaceCompatibilityAlonePromotesContinuousServiceSuitability : Bool
+    interfaceCompatibilityAlonePromotesContinuousServiceSuitabilityIsFalse :
+      interfaceCompatibilityAlonePromotesContinuousServiceSuitability ≡ false
+
+    nominalPressureRatingAlonePromotesContinuousServiceSuitability : Bool
+    nominalPressureRatingAlonePromotesContinuousServiceSuitabilityIsFalse :
+      nominalPressureRatingAlonePromotesContinuousServiceSuitability ≡ false
+
+    observedOpenFlowAlonePromotesBackflowSafety : Bool
+    observedOpenFlowAlonePromotesBackflowSafetyIsFalse :
+      observedOpenFlowAlonePromotesBackflowSafety ≡ false
+
+    continuousServiceAuthorityReceiptRequired : Bool
+    continuousServiceAuthorityReceiptRequiredIsTrue :
+      continuousServiceAuthorityReceiptRequired ≡ true
+
+    backflowSafetyAuthorityReceiptRequired : Bool
+    backflowSafetyAuthorityReceiptRequiredIsTrue :
+      backflowSafetyAuthorityReceiptRequired ≡ true
+
+    productSpecificSafetyClaimMade : Bool
+    productSpecificSafetyClaimMadeIsFalse :
+      productSpecificSafetyClaimMade ≡ false
+
+open TechnicalServiceSafetyBoundary public
+
+canonicalTechnicalServiceSafetyBoundary :
+  TechnicalServiceSafetyBoundary
+canonicalTechnicalServiceSafetyBoundary =
+  technical-service-safety-boundary
+    false refl
+    false refl
+    false refl
+    true refl
+    true refl
+    false refl
+
+InterfaceCompatibilityCreatesContinuousServiceSuitability : Set
+InterfaceCompatibilityCreatesContinuousServiceSuitability =
+  interfaceCompatibilityAlonePromotesContinuousServiceSuitability
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+
+NominalPressureRatingCreatesContinuousServiceSuitability : Set
+NominalPressureRatingCreatesContinuousServiceSuitability =
+  nominalPressureRatingAlonePromotesContinuousServiceSuitability
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+
+ObservedOpenFlowCreatesBackflowSafety : Set
+ObservedOpenFlowCreatesBackflowSafety =
+  observedOpenFlowAlonePromotesBackflowSafety
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+
+interfaceCompatibilityDoesNotPromoteContinuousService :
+  InterfaceCompatibilityCreatesContinuousServiceSuitability →
+  Data.Empty.⊥
+interfaceCompatibilityDoesNotPromoteContinuousService ()
+
+nominalPressureRatingDoesNotPromoteContinuousService :
+  NominalPressureRatingCreatesContinuousServiceSuitability →
+  Data.Empty.⊥
+nominalPressureRatingDoesNotPromoteContinuousService ()
+
+observedOpenFlowDoesNotPromoteBackflowSafety :
+  ObservedOpenFlowCreatesBackflowSafety →
+  Data.Empty.⊥
+observedOpenFlowDoesNotPromoteBackflowSafety ()
+
+technicalServiceContinuousServiceReceiptRequired :
+  continuousServiceAuthorityReceiptRequired
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+technicalServiceContinuousServiceReceiptRequired =
+  continuousServiceAuthorityReceiptRequiredIsTrue
+    canonicalTechnicalServiceSafetyBoundary
+
+technicalServiceBackflowReceiptRequired :
+  backflowSafetyAuthorityReceiptRequired
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+technicalServiceBackflowReceiptRequired =
+  backflowSafetyAuthorityReceiptRequiredIsTrue
+    canonicalTechnicalServiceSafetyBoundary
+
+technicalServiceProductSpecificClaimStillBlocked :
+  productSpecificSafetyClaimMade canonicalTechnicalServiceSafetyBoundary
+  ≡ false
+technicalServiceProductSpecificClaimStillBlocked =
+  productSpecificSafetyClaimMadeIsFalse
+    canonicalTechnicalServiceSafetyBoundary
