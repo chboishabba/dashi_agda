@@ -89,3 +89,58 @@ unifierFleetVectorCoordinateStillNotTruth :
   Unifier.unifierFleetVectorCoordinateDoesNotCreateTruth
   ≡ Fleet.fleetVectorCoordinateDoesNotCreateTruth
 unifierFleetVectorCoordinateStillNotTruth = refl
+
+
+------------------------------------------------------------------------
+-- Reused fleet receipt owners remain exactly the canonical owners.
+------------------------------------------------------------------------
+
+toeFleetCoordinateRebuildabilityReceiptMatchesOwner :
+  TOE.toeFleetCoordinateRebuildabilityReceipt
+  ≡ Fleet.fleetCoordinateRebuildabilityReceipt
+toeFleetCoordinateRebuildabilityReceiptMatchesOwner = refl
+
+unifierFleetCoordinateRebuildabilityReceiptMatchesOwner :
+  Unifier.unifierFleetCoordinateRebuildabilityReceipt
+  ≡ Fleet.fleetCoordinateRebuildabilityReceipt
+unifierFleetCoordinateRebuildabilityReceiptMatchesOwner = refl
+
+toeFleetNumericABIReceiptMatchesOwner :
+  TOE.toeFleetNumericABIReceipt
+  ≡ Fleet.fleetNumericABIReceipt
+toeFleetNumericABIReceiptMatchesOwner = refl
+
+unifierFleetNumericABIReceiptMatchesOwner :
+  Unifier.unifierFleetNumericABIReceipt
+  ≡ Fleet.fleetNumericABIReceipt
+unifierFleetNumericABIReceiptMatchesOwner = refl
+
+toeFleetResidualInvariantReceiptMatchesOwner :
+  TOE.toeFleetResidualInvariantReceipt
+  ≡ Fleet.fleetResidualInvariantReceipt
+toeFleetResidualInvariantReceiptMatchesOwner = refl
+
+unifierFleetResidualInvariantReceiptMatchesOwner :
+  Unifier.unifierFleetResidualInvariantReceipt
+  ≡ Fleet.fleetResidualInvariantReceipt
+unifierFleetResidualInvariantReceiptMatchesOwner = refl
+
+toeFleetPromotionObligationIndexMatchesOwner :
+  TOE.toeFleetPromotionObligationIndex
+  ≡ Fleet.fleetPromotionObligationIndex
+toeFleetPromotionObligationIndexMatchesOwner = refl
+
+unifierFleetPromotionObligationIndexMatchesOwner :
+  Unifier.unifierFleetPromotionObligationIndex
+  ≡ Fleet.fleetPromotionObligationIndex
+unifierFleetPromotionObligationIndexMatchesOwner = refl
+
+toeFleetPlanningTextStillDoesNotCreateFormalResidual :
+  TOE.toeFleetPlanningTextDoesNotCreateFormalResidual
+  ≡ Fleet.fleetPlanningTextDoesNotCreateFormalResidual
+toeFleetPlanningTextStillDoesNotCreateFormalResidual = refl
+
+unifierFleetPlanningTextStillDoesNotCreateFormalResidual :
+  Unifier.unifierFleetPlanningTextDoesNotCreateFormalResidual
+  ≡ Fleet.fleetPlanningTextDoesNotCreateFormalResidual
+unifierFleetPlanningTextStillDoesNotCreateFormalResidual = refl
