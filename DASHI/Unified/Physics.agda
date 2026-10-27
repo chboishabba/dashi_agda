@@ -15,6 +15,28 @@ import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
+
+------------------------------------------------------------------------
+-- Exact Yang-Mills theorem-owner exports.
+------------------------------------------------------------------------
+
+open YMTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
+
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
   Spine.unifiedObjectInvariant
@@ -159,3 +181,11 @@ yangMillsTOETerminalPromotionBlocked :
   YMTOE.toeTerminalPromotion ≡ false
 yangMillsTOETerminalPromotionBlocked =
   YMTOE.toeTerminalPromotionIsFalse
+
+yangMillsTOEUniversalBetaFloorLevel : ProofLevel
+yangMillsTOEUniversalBetaFloorLevel =
+  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
+
+yangMillsTOELiteralUniformRemainderFloorLevel : ProofLevel
+yangMillsTOELiteralUniformRemainderFloorLevel =
+  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
