@@ -1,0 +1,329 @@
+{-# OPTIONS --safe #-}
+module DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact where
+
+------------------------------------------------------------------------
+-- CURRENT TOE MAX-CUT: GOVERNANCE x BALABAN/R559 x IBRAHIM x FLEET
+--
+-- O. Organization.
+-- DASHI TOE current-master normalization.
+--
+-- R. Requirement.
+-- Join already-merged physics, fleet, Pareto/snowball, legal-source authority,
+-- and mandate boundaries without creating a second theorem owner.
+--
+-- C. Code.
+-- Retain canonical receipts. Re-export only bounded status coordinates and
+-- existing non-promotion eliminators.
+--
+-- S. State.
+-- The exact 58-field Gate-4 cutset is the formal target.
+-- The external fleet receipt keeps 584 discharged fibres outside that target.
+-- Finite RG, search priority, legal-source candidates, and formal governance
+-- do not self-promote.
+--
+-- L. Lattice.
+-- Balaban/R559 + Ibrahim/Pareto/snowball + fleet planning + legal authority
+-- + governance mandate -> this read-only TOE consumer.
+--
+-- P. Proposal.
+-- Use one joint receipt as the current cross-domain max-cut handoff.
+--
+-- G. Gap.
+-- Actual discharge of the 58 fields remains outside this normalization.
+-- Continuum Yang-Mills, Monster recognition, legal applicability, and actual
+-- political legitimacy remain separately paid obligations.
+--
+-- F. Follow-up.
+-- Target the 58 formal gaps only. Keep discharged fibres and contradiction
+-- gaps outside the target. Preserve original source attribution.
+--
+-- Attribution.
+-- Tadeusz Bałaban and cited source authors retain mathematical attribution.
+-- Ibrahim/Danforth/Dodds and the existing Monster/source owners retain their
+-- attribution. DASHI owns only this normalization facade.
+-- casey-git-clone, zkSEC, zkperf, zos-server, erdfa-py, and aristotle-cli-rs
+-- retain separate authorship and authority. No theorem from those repositories
+-- is promoted by this module.
+------------------------------------------------------------------------
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as Physics
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as Pareto
+import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
+import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as Legal
+import DASHI.Cognition.PNF.SensibLawSemanticStatusCrossPollinationExact as Semantic
+import DASHI.Governance.AuthorityMandateCore as Governance
+
+------------------------------------------------------------------------
+-- Exact target selection.
+------------------------------------------------------------------------
+
+targetFormalGapCount : Nat
+targetFormalGapCount =
+  Physics.gate4UnresolvedObligationCount
+
+targetFormalGapCountIs58 :
+  targetFormalGapCount ≡ 58
+targetFormalGapCountIs58 =
+  Physics.gate4UnresolvedObligationCountIs58
+
+dischargedFleetFibreCount : Nat
+dischargedFleetFibreCount =
+  Fleet.dischargedCoreKnowledgeFibres
+    Fleet.canonicalFleetFormalGapTargetReceipt
+
+dischargedFleetFibresExcluded : Bool
+dischargedFleetFibresExcluded =
+  Fleet.dischargedFibresRemainDischarged
+    Fleet.canonicalFleetFormalGapTargetReceipt
+
+contradictionGapCount : Nat
+contradictionGapCount =
+  Fleet.polarityContradictionGaps
+    Fleet.canonicalFleetFormalGapTargetReceipt
+
+contradictionGapsRemainSeparate : Bool
+contradictionGapsRemainSeparate =
+  Fleet.contradictionGapsRemainSeparate
+    Fleet.canonicalFleetFormalGapTargetReceipt
+
+macroscopicEigenMotifCount : Nat
+macroscopicEigenMotifCount =
+  Fleet.macroscopicEigenMotifCount
+    Fleet.canonicalFleetFormalGapTargetReceipt
+
+------------------------------------------------------------------------
+-- Direct non-promotion coordinates.
+------------------------------------------------------------------------
+
+finiteRGCreatesContinuumPromotion : Bool
+finiteRGCreatesContinuumPromotion =
+  Physics.publishedContinuumPromotion
+    Physics.canonicalBalabanR559TOEMaxCutReceipt
+
+finiteRGCreatesContinuumPromotionIsFalse :
+  finiteRGCreatesContinuumPromotion ≡ false
+finiteRGCreatesContinuumPromotionIsFalse =
+  Physics.publishedContinuumPromotionIsFalse
+    Physics.canonicalBalabanR559TOEMaxCutReceipt
+
+fleetPriorityCreatesProof : Bool
+fleetPriorityCreatesProof =
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority
+    Fleet.canonicalFleetFormalGapTargetReceipt
+
+fleetPriorityCreatesProofIsFalse :
+  fleetPriorityCreatesProof ≡ false
+fleetPriorityCreatesProofIsFalse = refl
+
+candidateLegalSourceCreatesAuthority : Bool
+candidateLegalSourceCreatesAuthority =
+  Legal.LegalSourceAuthorityBoundary.legalSourceRecordAloneIsAuthority
+    Legal.canonicalLegalSourceAuthorityBoundary
+
+candidateLegalSourceCreatesAuthorityIsFalse :
+  candidateLegalSourceCreatesAuthority ≡ false
+candidateLegalSourceCreatesAuthorityIsFalse = refl
+
+legalAuthorityCreatesApplicability : Bool
+legalAuthorityCreatesApplicability =
+  Legal.LegalSourceAuthorityBoundary.legalSourceAuthorityAloneEstablishesApplicability
+    Legal.canonicalLegalSourceAuthorityBoundary
+
+legalAuthorityCreatesApplicabilityIsFalse :
+  legalAuthorityCreatesApplicability ≡ false
+legalAuthorityCreatesApplicabilityIsFalse = refl
+
+formalGovernanceCreatesPoliticalLegitimacy : Bool
+formalGovernanceCreatesPoliticalLegitimacy =
+  Governance.MandateAuthorityBoundary.formalModelCreatesPopularLegitimacy
+    Governance.canonicalMandateAuthorityBoundary
+
+formalGovernanceCreatesPoliticalLegitimacyIsFalse :
+  formalGovernanceCreatesPoliticalLegitimacy ≡ false
+formalGovernanceCreatesPoliticalLegitimacyIsFalse = refl
+
+ibrahimPriorityCreatesRecognition : Bool
+ibrahimPriorityCreatesRecognition = false
+
+ibrahimPriorityCreatesRecognitionIsFalse :
+  ibrahimPriorityCreatesRecognition ≡ false
+ibrahimPriorityCreatesRecognitionIsFalse = refl
+
+esdSurfaceEdited : Bool
+esdSurfaceEdited = false
+
+esdSurfaceEditedIsFalse :
+  esdSurfaceEdited ≡ false
+esdSurfaceEditedIsFalse = refl
+
+------------------------------------------------------------------------
+-- Reused eliminators.
+------------------------------------------------------------------------
+
+balabanScaleTransferPromotionImpossible :
+  Physics.ScaleTransferPromotion → ⊥
+balabanScaleTransferPromotionImpossible =
+  Physics.eliminateScaleTransferPromotion
+
+fleetEigenPriorityCannotCreateProof :
+  Fleet.FleetEigenPriorityCreatesProof → ⊥
+fleetEigenPriorityCannotCreateProof =
+  Fleet.fleetEigenPriorityDoesNotCreateProof
+
+fleetDischargedFibreCannotBeRetargeted :
+  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+fleetDischargedFibreCannotBeRetargeted =
+  Fleet.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+fleetContradictionGapCannotBeReclassified :
+  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+fleetContradictionGapCannotBeReclassified =
+  Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+candidateSourceCannotCreateLegalAuthority :
+  Legal.CandidateSourceIsAuthoritative → ⊥
+candidateSourceCannotCreateLegalAuthority =
+  Legal.candidateSourceDoesNotCloseAuthority
+
+legalAuthorityCannotCreateApplicability :
+  Legal.CurrentValidityAutomaticallyMeansApplicability → ⊥
+legalAuthorityCannotCreateApplicability =
+  Legal.currentValidityDoesNotAutomaticallyEstablishApplicability
+
+semanticAdmissionCannotBecomeLegalAuthority :
+  Legal.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+semanticAdmissionCannotBecomeLegalAuthority =
+  Legal.semanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+documentRoleCannotSupplyLegalAuthority :
+  Legal.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+documentRoleCannotSupplyLegalAuthority =
+  Legal.documentRoleDoesNotSupplyLegalSourceAuthority
+
+legalAuthorityIsNotPromotionAuthority :
+  Semantic.LegalAuthorityIsPromotionAuthority → ⊥
+legalAuthorityIsNotPromotionAuthority =
+  Semantic.legalAuthorityDoesNotEqualPromotionAuthority
+
+ibrahimSearchPriorityCannotCreateProof :
+  Pareto.SearchPriorityCreatesProof → ⊥
+ibrahimSearchPriorityCannotCreateProof =
+  Pareto.searchPriorityDoesNotCreateProof
+
+ibrahimProducerSourceCannotCreateRun :
+  Pareto.ProducerSourceCreatesRunReceipt → ⊥
+ibrahimProducerSourceCannotCreateRun =
+  Pareto.producerSourceDoesNotCreateRunReceipt
+
+------------------------------------------------------------------------
+-- Canonical current max-cut receipt.
+------------------------------------------------------------------------
+
+record TOECurrentMaxCutGovernanceFleetReceipt : Set where
+  constructor toe-current-max-cut-governance-fleet-receipt
+  field
+    physicsReceipt : Physics.BalabanR559TOEMaxCutReceipt
+    paretoSnowballBoundary : Pareto.TOEZKPFrame
+    fleetReceipt : Fleet.FleetFormalGapTargetReceipt
+    legalAuthorityBoundary : Legal.LegalSourceAuthorityBoundary
+    semanticBoundary : Semantic.CrossPollinationBoundary
+    governanceBoundary : Governance.MandateAuthorityBoundary
+
+    formalGapTarget : Nat
+    formalGapTargetIs58 : formalGapTarget ≡ 58
+    dischargedFleetFibres : Nat
+    dischargedFleetFibresStayExcluded : Bool
+    contradictionGaps : Nat
+    contradictionGapsStaySeparate : Bool
+    eigenMotifs : Nat
+
+    finiteRGPromotesContinuum : Bool
+    finiteRGPromotesContinuumIsFalse :
+      finiteRGPromotesContinuum ≡ false
+    fleetEigenPriorityPromotesProof : Bool
+    fleetEigenPriorityPromotesProofIsFalse :
+      fleetEigenPriorityPromotesProof ≡ false
+    legalCandidatePromotesAuthority : Bool
+    legalCandidatePromotesAuthorityIsFalse :
+      legalCandidatePromotesAuthority ≡ false
+    legalAuthorityPromotesApplicability : Bool
+    legalAuthorityPromotesApplicabilityIsFalse :
+      legalAuthorityPromotesApplicability ≡ false
+    governanceModelPromotesLegitimacy : Bool
+    governanceModelPromotesLegitimacyIsFalse :
+      governanceModelPromotesLegitimacy ≡ false
+    esdEdited : Bool
+    esdEditedIsFalse : esdEdited ≡ false
+
+open TOECurrentMaxCutGovernanceFleetReceipt public
+
+canonicalTOECurrentMaxCutGovernanceFleetReceipt :
+  TOECurrentMaxCutGovernanceFleetReceipt
+canonicalTOECurrentMaxCutGovernanceFleetReceipt =
+  toe-current-max-cut-governance-fleet-receipt
+    Physics.canonicalBalabanR559TOEMaxCutReceipt
+    Pareto.canonicalTOEZKPFrame
+    Fleet.canonicalFleetFormalGapTargetReceipt
+    Legal.canonicalLegalSourceAuthorityBoundary
+    Semantic.canonicalCrossPollinationBoundary
+    Governance.canonicalMandateAuthorityBoundary
+    targetFormalGapCount
+    targetFormalGapCountIs58
+    dischargedFleetFibreCount
+    dischargedFleetFibresExcluded
+    contradictionGapCount
+    contradictionGapsRemainSeparate
+    macroscopicEigenMotifCount
+    finiteRGCreatesContinuumPromotion
+    finiteRGCreatesContinuumPromotionIsFalse
+    fleetPriorityCreatesProof
+    fleetPriorityCreatesProofIsFalse
+    candidateLegalSourceCreatesAuthority
+    candidateLegalSourceCreatesAuthorityIsFalse
+    legalAuthorityCreatesApplicability
+    legalAuthorityCreatesApplicabilityIsFalse
+    formalGovernanceCreatesPoliticalLegitimacy
+    formalGovernanceCreatesPoliticalLegitimacyIsFalse
+    esdSurfaceEdited
+    esdSurfaceEditedIsFalse
+
+------------------------------------------------------------------------
+-- ZKP frame. Standards named here are process lenses only.
+------------------------------------------------------------------------
+
+record TOECurrentMaxCutZKPFrame : Set where
+  constructor toe-current-max-cut-zkp-frame
+  field
+    O-organization : String
+    R-requirement : String
+    C-code : String
+    S-state : String
+    L-lattice : String
+    P-proposal : String
+    G-governance : String
+    F-follow-up : String
+    preconditions : String
+    invariants : String
+    postconditions : String
+
+canonicalTOECurrentMaxCutZKPFrame : TOECurrentMaxCutZKPFrame
+canonicalTOECurrentMaxCutZKPFrame =
+  toe-current-max-cut-zkp-frame
+    "DASHI TOE current-master convergence"
+    "reuse merged Balaban/R559, Ibrahim Pareto/snowball, fleet formal-gap, SensibLaw authority, and governance mandate owners"
+    "one normalization receipt; no duplicate scientific, legal, or governance theorem"
+    "58 formal gaps targeted; 584 discharged fibres excluded; 44 contradiction gaps separate; three fleet motifs remain planning priorities only"
+    "canonical theorem owners -> normalized facades -> TOE roots"
+    "consume the joint receipt as a max-cut handoff; do not infer authority from projection or priority"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, C4/PlantUML, and ASD-STE100 are process or presentation lenses only"
+    "pay the 58 formal obligations at their original owners; retain continuum, recognition, applicability, and legitimacy gates"
+    "current-master owners exist; source attribution remains attached; ESD is read-only"
+    "one theorem keeps one owner; finite does not imply continuum; search does not imply proof; candidate does not imply authority; formal governance does not imply legitimacy"
+    "both TOE roots and Unified expose one current max-cut receipt; no discharged fibre or contradiction gap is retargeted"
