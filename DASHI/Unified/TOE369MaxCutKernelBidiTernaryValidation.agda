@@ -235,3 +235,39 @@ unifierPermutationNonPromotionSourceFirewallMatches :
   Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
 unifierPermutationNonPromotionSourceFirewallMatches =
   Unifier.unifier369PermutationNoGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- Positive same-owner transport.
+-- These checks pin the ternary-27 action facts to the canonical owner.
+------------------------------------------------------------------------
+
+toeTernary27RotationOrderThreeSameOwner :
+  TOE.toe369Ternary27RotationOrderThree
+  ≡ Owner.toe27RotationOrderThree
+toeTernary27RotationOrderThreeSameOwner = refl
+
+unifierTernary27RotationOrderThreeSameOwner :
+  Unifier.unifier369Ternary27RotationOrderThree
+  ≡ Owner.toe27RotationOrderThree
+unifierTernary27RotationOrderThreeSameOwner = refl
+
+toeTernary27OriginFixedSameOwner :
+  TOE.toe369Ternary27OriginFixed
+  ≡ Owner.toe27OriginFixed
+toeTernary27OriginFixedSameOwner = refl
+
+unifierTernary27OriginFixedSameOwner :
+  Unifier.unifier369Ternary27OriginFixed
+  ≡ Owner.toe27OriginFixed
+unifierTernary27OriginFixedSameOwner = refl
+
+toeMonsterPhaseConjugationIntertwinerSameOwner :
+  TOE.toe369MonsterPhaseConjugationIntertwiner
+  ≡ Owner.toe27MonsterPhaseConjugationIntertwiner
+toeMonsterPhaseConjugationIntertwinerSameOwner = refl
+
+unifierMonsterPhaseConjugationIntertwinerSameOwner :
+  Unifier.unifier369MonsterPhaseConjugationIntertwiner
+  ≡ Owner.toe27MonsterPhaseConjugationIntertwiner
+unifierMonsterPhaseConjugationIntertwinerSameOwner = refl
