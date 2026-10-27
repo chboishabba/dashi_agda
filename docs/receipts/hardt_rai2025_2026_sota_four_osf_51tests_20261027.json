@@ -1,0 +1,135 @@
+{
+  "schema": "dashi.hardt.rai2025_2026_sota_source_root_and_estimator.v1",
+  "as_of": "2026-10-27",
+  "pull_request": 1252,
+  "parent_pull_request": 1242,
+  "source_roots": [
+    {
+      "origin": "Rai et al original human audience EEG iScience 2025",
+      "doi": "10.1016/j.isci.2025.112922",
+      "paper_fulltext": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12432844/",
+      "code_citations": [
+        {
+          "role": "paper availability",
+          "url": "https://osf.io/uz573/"
+        },
+        {
+          "role": "STAR key resources",
+          "url": "https://osf.io/ursmc/"
+        },
+        {
+          "role": "CCA method alongside Parra lab methodological resource",
+          "url": "https://osf.io/69gfe/"
+        },
+        {
+          "role": "Granger performance-to-audience method",
+          "url": "https://osf.io/b62d7/"
+        }
+      ],
+      "code_urls_ever_fetched_as_original_bytes": false,
+      "independent_code_roots_verified": false,
+      "original_human_CCA_or_granger_reproduced": false
+    },
+    {
+      "origin": "Lan Jiang, Qingyu Zou and Shuilong Yu 2026 meta-analysis",
+      "doi": "10.1016/j.biopsycho.2026.109367",
+      "original_unique_studies_in_review": 54,
+      "models": [
+        [
+          "core condition",
+          "Hedges g",
+          14,
+          0.887,
+          [
+            0.533,
+            1.241
+          ]
+        ],
+        [
+          "core outcome",
+          "Fisher z",
+          6,
+          0.456,
+          0.426
+        ],
+        [
+          "expanded condition",
+          "Hedges g",
+          36,
+          0.691
+        ],
+        [
+          "expanded outcome",
+          "Fisher z",
+          30,
+          0.474,
+          0.441
+        ],
+        [
+          "restricted outcome",
+          "Fisher z",
+          26,
+          0.418,
+          0.395
+        ]
+      ],
+      "original_meta_supplementary_tables_inspected": false,
+      "prospectively_registered": false,
+      "review_created_new_experimental_subjects": false,
+      "raw_inclusion_overlap_with_Rai_original_verified": false
+    },
+    {
+      "origin": "Giacomo Novembre, Atesh Koul, Felix Bigand 2026 Forum",
+      "doi": "10.1016/j.tins.2026.09.006",
+      "published": "2026-10-07",
+      "publication_type": "Forum/conceptual taxonomy",
+      "new_eeg_participants": false
+    },
+    {
+      "origin": "Ilanit Gordon and Ronny P Bartsch 2026 review",
+      "doi": "10.1038/s44159-026-00535-4",
+      "role": "different review source not independent test of historical event"
+    }
+  ],
+  "execution": {
+    "new_script": "scripts/check_hardt_rai_sota_method_roots.py",
+    "git_blob_sha1": "afe1f9149d400ef5b4ed22dd966e55f935639b30",
+    "new_unittest_wrapper": "tests/test_hardt_rai_sota_method_roots.py",
+    "exact_remote_Git_objects_equal_locally_executed_file_bytes": true,
+    "previous_source_count_tests": 16,
+    "previous_observational_file_tests": 8,
+    "previous_causal_shift_tests": 15,
+    "new_source_method_and_meta_tests": 12,
+    "integrated_command": "python -m unittest discover -s /mnt/data/hardt_maxcut_20261027/full_tests -p 'test_hardt_rai*.py' -q",
+    "integrated_tests_run": 51,
+    "passed": 51,
+    "failed": 0,
+    "original_human_source_dataset_files_downloaded": 0,
+    "original_EEG_results_reproduced": false,
+    "meta_analysis_recomputed": false,
+    "agda_kernel_checked": false,
+    "new_unittest_wrapper_git_blob_sha1": "cb64e8aad909619666d7e8aebabb4ee5858da79c",
+    "provenance_correction_20261027": {
+      "error": "previous new_script SHA incorrectly identified the test wrapper blob",
+      "original_recorded_value": "cb64e8aad909619666d7e8aebabb4ee5858da79c",
+      "corrected_script_blob": "afe1f9149d400ef5b4ed22dd966e55f935639b30",
+      "wrapper_blob": "cb64e8aad909619666d7e8aebabb4ee5858da79c",
+      "nature": "metadata correction only; no fresh 51-test rerun asserted"
+    }
+  },
+  "limitations": [
+    "Four OSF links are four original paper citations, not four verified distinct executables or archived software versions.",
+    "Review k values may overlap and cannot be added as independent trial roots.",
+    "Hedges g and Fisher z are different estimands; Fisher z to r is a deterministic transform, not independent confirmation.",
+    "Published real social synchrony exists but does not prove field-mediated sender/receiver intervention or arbitrary concealed-target communication.",
+    "Original Hardt unpublished reference-10 manuscript and independent alleged event-level records remain unacquired.",
+    "Published UCL deposit version 1 source identity known by DOI and CC0 but actual API, participant time-series, subject crosswalk and OSF code are not acquired in this runtime.",
+    "Python tests prove only source-role schema and finite arithmetic within audited source constants; no postulated nonlocal physics, historical killing or Agda kernel theorem established."
+  ],
+  "pareto_next": [
+    "Obtain authentic OSF uz573/ursmc/69gfe/b62d7 file manifests and source versions, preserving original implementer attribution",
+    "Obtain actual UCL 28508744 v1 file inventory and original EEG source bytes, participant/event identities and timebase rights",
+    "Independently rerun authors' correlated-component/Granger code with original common-source controls and clustered dependence",
+    "Continue original historical manuscript and independent claim-witness acquisition separately from neuroscience"
+  ]
+}

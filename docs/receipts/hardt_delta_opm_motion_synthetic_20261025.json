@@ -1,0 +1,63 @@
+{
+  "schema": "hardt_delta_opm_motion_synthetic_v1",
+  "record_date": "2026-10-25",
+  "origin": "DASHI source-specific synthetic test, with methodology inspired by independently credited 2026 OPM studies",
+  "program_scope": "exact synthetic finite linear algebra and motion/common-cue controls; no human data",
+  "tests": {
+    "linear_rowspace_cases": 2028,
+    "single_sensor_identifies_neural_component": false,
+    "brain_blind_reference_under_declared_calibration_identifies_neural_component": true,
+    "reference_with_same_brain_sensitivity_identifies_neural_component": false,
+    "neural_and_motion_and_ambient_fully_identified": false,
+    "synthetic_harmonic_frequency_hz": 2,
+    "within_delta_band": true,
+    "within_reported_motion_band": true,
+    "fitted_on_confounded_training_accuracy": 1,
+    "heldout_motion_reversal_accuracy": 0,
+    "clean_brain_blind_reference_recovers_source": true,
+    "shared_movie_receivers_have_identical_traces_without_receiver_to_receiver_coupling": true,
+    "missing_empirical_manifest_is_admissible": false,
+    "synthetic_placeholder_hash_manifest_is_admissible": false
+  },
+  "local_execution": {
+    "six_unittest_regressions": "PASS (local equivalent fixture)",
+    "finite_rational_checks": "PASS",
+    "github_exact_blob_executed": false,
+    "agda_kernel_executed": false,
+    "ci_executed": false
+  },
+  "empirical": {
+    "human_opm_dataset_downloaded": false,
+    "omg_meg_analyzed": false,
+    "hardt_claim_tested": false,
+    "remote_influence_observed": false
+  },
+  "original_experimental_donors": [
+    {
+      "authors": "Olivia R. Christiano; Sebastian Michelmann",
+      "doi": "10.1162/IMAG.a.1218",
+      "date": "2026-05-08",
+      "role": "delta OPM test-retest"
+    },
+    {
+      "authors": "Xinchi Yu; Dongxue Zhang et al.",
+      "doi": "10.1016/j.bspc.2026.110149",
+      "role": "low-frequency movement confound"
+    },
+    {
+      "authors": "Lukas Rier; Sebastian Michelmann et al.",
+      "doi": "10.5281/zenodo.7525341",
+      "role": "original approximately 8.2GB OPM movie data, not ingested"
+    },
+    {
+      "authors": "Spedden; Schmidt; O'Neill et al.",
+      "doi": "10.5281/zenodo.20824565",
+      "role": "human brain-spinal OPM and EMG; not ingested"
+    }
+  ],
+  "limitations": [
+    "The local script is an independently executed equivalent and does not constitute exact committed GitHub-byte replay.",
+    "Manifest validation checks syntax of source identifiers, not byte-level custody or modality-specific physical calibration.",
+    "Group synchrony, shared frequency, or positive neural decoding is not an independently verified distant causal effect."
+  ]
+}

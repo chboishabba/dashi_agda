@@ -1,0 +1,122 @@
+{
+  "schema": "dashi.hardt_sota_physical_source_manifest.v1",
+  "date": "2026-10-25",
+  "status": "SOURCE_PAGE_ONLY_NO_BYTES",
+  "provenance_rules": [
+    "Publisher listed original source is a source-claim, not a local file hash receipt",
+    "A derived paper/source model is not the underlying recorded participant time series",
+    "Different DOI, version and experiment have separate physical carriers",
+    "No document describing alleged lethal actions establishes those events"
+  ],
+  "highest_priority_donor": {
+    "source_authors": "Spedden, Schmidt, O'Neill, West, Mellor, Tierney, Alexander, Puvvada, Callaghan, Farmer, Bestmann, Barnes",
+    "published_paper": {
+      "title": "Coherent oscillations across the human brain, spinal cord, and muscle network",
+      "journal": "Current Biology",
+      "online": "2026-09-21",
+      "doi": "10.1016/j.cub.2026.07.070",
+      "main_measured_band_hz": [
+        10,
+        35
+      ],
+      "participants": 9
+    },
+    "deposit_original_version_v2": {
+      "part_1": {
+        "doi": "10.5281/zenodo.20824565",
+        "url": "https://zenodo.org/records/20824565",
+        "persons": 7,
+        "leadfield_archive": "Leadfields meshes.zip",
+        "published_md5": "0b6ceaa0db22ce9cb94ad46ee05deb5a",
+        "publisher_listing_size": "1.4 MB",
+        "expected_members": [
+          "geometries_experimental_withbrain.mat",
+          "leadfield_experimental_bslaw_experimental.mat",
+          "T.mat"
+        ]
+      },
+      "part_2": {
+        "doi": "10.5281/zenodo.20824827",
+        "url": "https://zenodo.org/records/20824827",
+        "persons": 2,
+        "precomputed_figures": "forGeneratingFigures.zip",
+        "published_md5": "56cc961559e47205982c3a8a93b33a3b"
+      },
+      "recorded_opm": {
+        "sensors": 64,
+        "axes_per_sensor": 3,
+        "sample_rate_hz": 1500,
+        "shielding": "MSR",
+        "anatomically_individual_coregistration": "OP00212"
+      },
+      "recorded_emg": {
+        "muscle": "right abductor pollicis brevis",
+        "sample_rate_hz": 1000,
+        "sync": "TTL"
+      },
+      "protocol": {
+        "alternation": "two-minute rest and hand contraction blocks",
+        "cycles": 5
+      },
+      "physical_forward_model": "Biot-Savart three-axis current dipole on spinal centreline",
+      "other_participant_anatomy": "common reference except noted subject",
+      "new_v2_forward_geometry": "replaces v1 BEM leadfield"
+    },
+    "superseded": {
+      "part_2_v1": "10.5281/zenodo.19029856",
+      "original_v1_forward": "BEM leadfield",
+      "relationship": "source version history, not replication"
+    },
+    "source_intake": {
+      "small_original_leadfield_zip_attempted": true,
+      "download_succeeded": false,
+      "reason": "runtime container DNS/network access unavailable; not an absent publisher file",
+      "locally_measured_hash": null,
+      "locally_validated_mat_shapes": null,
+      "participant_data_downloaded": false,
+      "source_reanalysis_completed": false,
+      "rights_checked_for_redistribution": false
+    }
+  },
+  "mechanism_roots": [
+    {
+      "doi": "10.1038/s41598-026-44440-5",
+      "authors": "Fresnel et al.",
+      "kind": "reproduced magnetophosphene human exposure",
+      "units": "20 Hz, 31.5 mT RMS global 50% criterion, distinct frequency/tissue and geometry",
+      "proof_role": "physical response positive comparator only"
+    },
+    {
+      "doi": "10.1038/s41587-026-03158-5",
+      "authors": "Meng, Nie, Berger et al.",
+      "kind": "in vitro flavoprotein spin ODMR and radiofrequency control",
+      "units": "radio/microwave frequencies, light excitation and configured magnetic bias",
+      "proof_role": "molecular receptor physics, not a human long-range delta channel"
+    },
+    {
+      "doi": "10.1152/physrev.00032.2025",
+      "authors": "Lam and Malkemper",
+      "kind": "2026 magnetoreception physiological review",
+      "proof_role": "animal mechanism review with disputed human magnetoreception"
+    },
+    {
+      "doi": "10.1126/sciadv.aeg5281",
+      "authors": "Omar, Benke et al.",
+      "kind": "diamond magnetic sensor cardiac MCG",
+      "proof_role": "detection not neural stimulation"
+    },
+    {
+      "doi": "10.1162/IMAG.a.1218",
+      "authors": "Christiano and Michelmann",
+      "kind": "repeated movie OPM delta EEG-independent neurophysiological observation",
+      "proof_role": "shared-cue/confound control"
+    },
+    {
+      "doi": "10.1103/dd54-6vkw",
+      "authors": "Wilson, Kimball and GNOME collaboration",
+      "kind": "solar axion-specific 0.05-20Hz null",
+      "proof_role": "new-interaction instrumentation, not same source hypothesis"
+    }
+  ],
+  "status_limit": "neither a measured delta brain-to-distant-target field nor an independently blinded causal effect nor the alleged historical operation is verified"
+}

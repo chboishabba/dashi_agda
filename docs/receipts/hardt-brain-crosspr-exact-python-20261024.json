@@ -1,0 +1,54 @@
+{
+  "receipt_schema": "hardt_brain_crosspr_exact_python_v1",
+  "date": "2026-10-24",
+  "branch": "research/hardt-delta-psi-steelman-maxcut-20261024",
+  "purpose": "Reproduce the finite causal/consumer test with original Git-blob-matched runtime files; no empirical neurophysics claims.",
+  "source_files": [
+    {
+      "repository": "chboishabba/dashi_agda",
+      "path": "scripts/check_hardt_brain_crosspr_causal_cut.py",
+      "git_blob_sha1": "18eecf93ccb7d36ed3b4861e19b4928ce92abd7a",
+      "byte_identity_checked": true
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "path": "tests/test_hardt_brain_crosspr_causal_cut.py",
+      "git_blob_sha1": "63edaed47cefc74dfe7326e3fc16d3d95cac87ff",
+      "byte_identity_checked": true
+    },
+    {
+      "repository": "chboishabba/dashiBRAIN",
+      "path": "dashi/analysis/consumer_retention.py",
+      "branch": "agent/brainit-consumer-retention-20261024",
+      "git_blob_sha1": "384a9b1d7082857000128635259c9b1a9d989f80",
+      "byte_identity_checked": true
+    }
+  ],
+  "execution": [
+    {
+      "command": "python -m unittest discover -s /mnt/data/tests -p test_hardt_brain_crosspr_causal_cut.py -v",
+      "observed": "Ran 5 tests in 0.002s; OK (5 passed)",
+      "status": "PASS"
+    },
+    {
+      "command": "python /mnt/data/check_hardt_brain_crosspr_causal_cut.py --brain-runtime /mnt/data/brain_orig/dashi/analysis/consumer_retention.py",
+      "observed": {
+        "worlds": 16,
+        "passive_observation_fibres": 4,
+        "intervention_ambiguous_fibres": 4,
+        "original_runtime_status": "ORIGINAL_RUNTIME_REUSED",
+        "original_runtime_git_blob_verified": true,
+        "coarse_commutation_mismatches": 4,
+        "independent_concealed_target_recoverable": false,
+        "leaked_secret_recoverable": true
+      },
+      "status": "PASS"
+    }
+  ],
+  "precise_limits": [
+    "The finite structural causal models and tests are original/synthetic, not a human intervention, EEG or MEG dataset.",
+    "An Agda exact-head kernel typecheck has NOT been run.",
+    "No Brain-IT fMRI model checkpoint, MaleCNS recording, optical sensor or historical witness data were replayed.",
+    "No physical nonlocal interaction, psychic assassination, or claimed 80 percent success is verified."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "hardt_optogenetics_exact_git_blob_python_20261025",
+  "date": "2026-10-25",
+  "repository": "chboishabba/dashi_agda",
+  "pr": 1252,
+  "source_files": [
+    {
+      "path": "scripts/check_hardt_optogenetic_nobel_causal_cut.py",
+      "git_blob_sha1": "bdd16c634efbb3746dabe5c7d29d18f86e486fd5",
+      "bytes": 8235,
+      "verified": true
+    },
+    {
+      "path": "tests/test_hardt_optogenetic_nobel_causal_cut.py",
+      "git_blob_sha1": "53c49cb82e4acdb524e187e4c2c54779510653de",
+      "bytes": 2302,
+      "verified": true
+    }
+  ],
+  "local_execution": {
+    "python_unittest_cases": 9,
+    "passed": 9,
+    "failed": 0,
+    "status": "PASS",
+    "checker_run": "PASS",
+    "additive_factorial_null_models": 343,
+    "lower_order_three_factor_null_models": 2187,
+    "formal_status": "exact synthetic finite arithmetic, not empirical",
+    "run_context": "locally reconstructed files whose exact Git blob identities were checked"
+  },
+  "original_source_context": [
+    {
+      "author": "Boyden, Zhang, Bamberg, Nagel and Deisseroth",
+      "doi": "10.1038/nn1525",
+      "role": "original physically delivered light neuronal control"
+    },
+    {
+      "author": "Owen, Liu and Kreitzer",
+      "doi": "10.1038/s41593-019-0422-3",
+      "role": "light heating and off-target artefact donor"
+    },
+    {
+      "author": "Abdeladim, Jagadisan, Shin, Ogando, Adesnik et al.",
+      "doi": "10.1038/s41593-026-02350-9",
+      "role": "actual 2026 mouse inter-areal optical holographic experiment"
+    },
+    {
+      "author": "Meng, Nie, Berger et al.",
+      "doi": "10.1038/s41587-026-03158-5",
+      "role": "distinct in-vitro photospin molecular transducer"
+    }
+  ],
+  "missing": [
+    "Agda kernel typecheck (agda binary absent in model container)",
+    "source-bound human or mouse neural datasets",
+    "Nobel paper-independent empirical effect calculation",
+    "physical distant receiver action or historical allegation verification"
+  ],
+  "evidence_boundaries": [
+    "Nine tests count synthetic cases, not nine biological experiments",
+    "Additive model enumerations are mathematical checks, not 343 or 2187 participants",
+    "Exact Git blob match does not certify kernel proofs or experimental adequacy"
+  ],
+  "previous_receipt_claim": "Supersedes earlier pending exact-blob execution status for the TWO optical Python files only."
+}

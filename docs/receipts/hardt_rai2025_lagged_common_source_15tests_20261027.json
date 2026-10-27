@@ -1,0 +1,62 @@
+{
+  "schema": "dashi.hardt.rai2025.common_source_directional_and_shift_null.v1",
+  "date": "2026-10-27",
+  "owner_pr": 1252,
+  "empirical_scope": "original paper method metadata and synthetic countermodels only",
+  "original_source": {
+    "authors": "Laura A. Rai, Haeeun Lee, Emma Becke, Carlos Trenado, Sonia Abad-Hernando, Matthias Sperling, Diego Vidaurre, Melanie Wald-Fuhrmann, Daniel C Richardson, Jamie A Ward, Guido Orgs",
+    "doi": "10.1016/j.isci.2025.112922",
+    "result_type": "published original human audience EEG observation",
+    "source_method": "1–4Hz delta CCA, 5s windows, 80pct overlap, 1000 circular-shift surrogates, 95pct maximum cluster correction",
+    "direct_brain_to_brain_field_test": false
+  },
+  "methodology_roots": [
+    {
+      "authors": "Manuel Varlet; Tijl Grootswagers",
+      "doi": "10.3389/fnhum.2024.1385624",
+      "status": "original EEG simulation and perspective on synchronization versus informational alignment"
+    },
+    {
+      "authors": "Marius Zimmermann; Kathrine Schultz-Nielsen; Guillaume Dumas; Ivana Konvalinka",
+      "doi": "10.1162/imag_a_00350",
+      "status": "original real/synthetic EEG phase-correlation epoch/noise sensitivity (not equivalent to Rai CCA)"
+    },
+    {
+      "authors": "Andrey Markus; Simone G Shamay-Tsoory",
+      "doi": "10.3389/fnhum.2024.1497034",
+      "status": "methodological perspective about hyperscanning causality (not independent experimental replication)"
+    }
+  ],
+  "implementation": {
+    "script": "scripts/check_hardt_rai_lagged_common_source.py",
+    "script_git_blob": "0451fba0d2b9cea2a9d2af5142e375120a823abd",
+    "tests": "tests/test_hardt_rai_lagged_common_source.py",
+    "test_git_blob": "fe15784e71a16e6af950c8a373a16a34df1f5387",
+    "both_remote_blobs_confirmed_against_locally_executed_exact_bytes": true,
+    "python_tests": 15,
+    "passed": 15,
+    "failed": 0,
+    "original_CCA_or_granger_code_run": false,
+    "original_EEG_downloaded": false,
+    "Agda_kernel_run": false
+  },
+  "finite_witness": {
+    "source_model": "Invented common external Z. X[t]=Z[t-1], Y[t]=Z[t-2]; no X->Y structural edge",
+    "train_rows": 55,
+    "heldout_rows": 42,
+    "MSE_Y_lag_only": "2960/2883",
+    "MSE_Y_lag_plus_X_lag": "0",
+    "MSE_Y_lag_plus_true_Z_source": "0",
+    "intervention_do_X_changes_Y": false,
+    "synced_shared_cue_samples": 1009,
+    "circular_shift_null_count": 1000,
+    "null_offsets_all_nonzero_unique": true,
+    "unshifted_pearson_squared": "1",
+    "maximum_shifted_pearson_squared": "841638121/64779412324",
+    "synthetic_permutation_tail": "1/1001",
+    "causal_receiver_channel_observed": false,
+    "statistic_is_Rai_original_CCA": false
+  },
+  "boundary": "A time-shift rejected null may be evidence of shared response to a timed external stimulus, not proof of a physically direct interbrain link. Original Rai study uses CCA/cluster correction, not this Pearson toy. No historical Hardt alleged outcome, attempt denominator, no novel physics or actual human-target measurement authenticated.",
+  "sota_access": "First-party UCL API/OSF code metadata inaccessible from web and local DNS; original v1 dataset catalogue DOI 10.5522/04/28508744.v1 remains accessible as bibliographic metadata, not downloaded files."
+}

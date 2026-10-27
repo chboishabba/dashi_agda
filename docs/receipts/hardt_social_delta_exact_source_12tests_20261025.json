@@ -1,0 +1,104 @@
+{
+  "schema": "dashi.hardt.social_delta.independence.replay.v1",
+  "date": "2026-10-25",
+  "owner": "PR #1252, separate research/prior-art from #1242",
+  "versioned_source": {
+    "path": "scripts/check_hardt_social_delta_root_unit_cut.py",
+    "git_blob_sha1": "2f9a3c677ba4579cedf955fdfee93bf9354bc078",
+    "locally_git_hash_object_verified": true,
+    "remote_github_fetch_sha_verified": true
+  },
+  "execution": {
+    "command": "python /mnt/data/hardt_maxcut_20261025/check_hardt_social_delta_root_unit_cut.py --selftest",
+    "status": "PASS",
+    "python_major_minor": "3.13",
+    "tests_run": 12,
+    "tests_passed": 12,
+    "tests_failed": 0,
+    "source_bytes_exactly_match_git_blob": true,
+    "gh_ci_executed": false,
+    "agda_kernel_executed": false
+  },
+  "synthetic_findings": {
+    "invented_participants": 23,
+    "dependent_pairs": 253,
+    "common_cue_within_group_r_squared": "1",
+    "stimulus_yoked_pseudo_dyad_r_squared": "1",
+    "interaction_specific_synchrony_advantage": "0",
+    "independently_concealed_target_information_bits": 0,
+    "secret_guess_accuracy": "1/2",
+    "postselection_full_attempts": 20,
+    "postselection_full_hits": 10,
+    "postselection_visible_attempts": 10,
+    "postselection_visible_hits": 8,
+    "selection_changed_an_actual_outcome": false,
+    "same_source_protocol_and_calibration_required": true,
+    "repeated_participant_sessions_admitted_as_independent_people": false,
+    "source_actor_hardt_carrier_count": 4,
+    "source_actor_hardt_original_speaker_roots": 1
+  },
+  "attribution": [
+    {
+      "source": "Rai, Lee, Becke, Trenado, Abad-Hernando, Sperling, Vidaurre, Wald-Fuhrmann, Richardson, Ward and Orgs",
+      "doi": "10.1016/j.isci.2025.112922",
+      "status": "original peer-reviewed 2025 audience 1–4Hz EEG engagement/synchrony, up to 23 EEG participants per performance",
+      "measured_by_dashi": false
+    },
+    {
+      "source": "Ciminaghi, Rovelli and Balconi",
+      "doi": "10.1016/j.bandc.2026.106433",
+      "status": "original peer-reviewed 2026 14-dyad EEG PSD dissimilarity; data ethics-controlled on request",
+      "measured_by_dashi": false
+    },
+    {
+      "source": "Frohlich, Toker and Monti",
+      "doi": "10.1093/brain/awab095",
+      "status": "2021 original independent REVIEW (not independent experiment) of conscious delta and 1/f filtering",
+      "measured_by_dashi": false
+    },
+    {
+      "source": "James V. Hardt",
+      "url": "https://ecronicon.net/assets/ecpp/pdf/ECPP-05-00148.pdf",
+      "status": "2017 first-party Opinion; named ref10 unpublished manuscript unacquired; one speaker in subsequent creator and host carriers",
+      "remote_event_corroborated": false
+    }
+  ],
+  "recent_repository_prior_art": [
+    {
+      "pr": 1258,
+      "role": "postselected-vs-unconditioned finite witness"
+    },
+    {
+      "pr": 1253,
+      "role": "source/protocol/calibration and independent factorial units"
+    },
+    {
+      "pr": 1207,
+      "role": "claim-relative verification and selective reopening"
+    },
+    {
+      "pr": 1259,
+      "role": "feature similarity not semantic translation"
+    },
+    {
+      "pr": 1243,
+      "role": "viewed signal decoder not independent secret"
+    },
+    {
+      "pr": 1238,
+      "role": "physical optical intervention and magnetic detection"
+    },
+    {
+      "pr": 1242,
+      "role": "historical author-root and carrier provenance"
+    }
+  ],
+  "limitations": [
+    "All 12 tests are invented binary/rational data, not 12 participants or 12 experimental outcomes.",
+    "253 represents pair combinations for 23 invented people, not statistical independence or a published count of causal trials.",
+    "20/10 reporting selection is a possible mathematical mechanism, not historical evidence Hardt selected outcomes.",
+    "Original 2025 and 2026 EEG data were not downloaded, rerun or audited at raw-event level.",
+    "Matching a Git blob and passing unittest verifies software scope, not physical causal communication.",
+    "Exact real-world Hardt event, original witness, hidden target, source field, receptor and denominator remain unverified."
+  ]
+}
