@@ -1,5 +1,6 @@
 module DASHI.Unified.ArithmeticMoonshine where
 
+import DASHI.Moonshine.OggSSPP2F4CurveShearReflectionExact as F4ShearReflection
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; [])
