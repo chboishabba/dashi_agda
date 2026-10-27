@@ -14,6 +14,8 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
+import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as TOE369MaxCut
+import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation as TOE369MaxCutValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
