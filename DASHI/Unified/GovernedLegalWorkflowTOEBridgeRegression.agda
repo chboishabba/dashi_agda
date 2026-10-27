@@ -298,3 +298,67 @@ unifierSemanticAdmissionIsNotLegalAuthority :
   Bridge.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 unifierSemanticAdmissionIsNotLegalAuthority =
   Unifier.unifierSemanticAdmissionIsNotLegalAuthority
+
+
+------------------------------------------------------------------------
+-- Exact compiler-product reuse regression.
+------------------------------------------------------------------------
+
+unifierExactReuseAdmissionAliasIsExact :
+  Bridge.ExactReuseCreatesSemanticAdmission → ⊥
+unifierExactReuseAdmissionAliasIsExact =
+  Unifier.toeExactReuseDoesNotCreateSemanticAdmission
+
+unifierExactReuseAuthorityAliasIsExact :
+  Bridge.ExactReuseCreatesSemanticAuthority → ⊥
+unifierExactReuseAuthorityAliasIsExact =
+  Unifier.toeExactReuseDoesNotCreateSemanticAuthority
+
+unifierExactReuseApplicabilityAliasIsExact :
+  Bridge.ExactReuseCreatesApplicability → ⊥
+unifierExactReuseApplicabilityAliasIsExact =
+  Unifier.toeExactReuseDoesNotCreateApplicability
+
+unifierExactReuseEntityIdentityAliasIsExact :
+  Bridge.ExactReuseCreatesEntityIdentity → ⊥
+unifierExactReuseEntityIdentityAliasIsExact =
+  Unifier.toeExactReuseDoesNotCreateEntityIdentity
+
+unifierExactReusePropositionIdentityAliasIsExact :
+  Bridge.ExactReuseCreatesPropositionIdentity → ⊥
+unifierExactReusePropositionIdentityAliasIsExact =
+  Unifier.toeExactReuseDoesNotCreatePropositionIdentity
+
+unifierExactReuseEventIdentityAliasIsExact :
+  Bridge.ExactReuseCreatesEventIdentity → ⊥
+unifierExactReuseEventIdentityAliasIsExact =
+  Unifier.toeExactReuseDoesNotCreateEventIdentity
+
+unifierExactReuseClaimTruthAliasIsExact :
+  Bridge.ExactReuseCreatesClaimTruth → ⊥
+unifierExactReuseClaimTruthAliasIsExact =
+  Unifier.toeExactReuseDoesNotCreateClaimTruth
+
+invariantHandoffCarriesExactReuseAdmissionFirewall :
+  Bridge.ExactReuseCreatesSemanticAdmission → ⊥
+invariantHandoffCarriesExactReuseAdmissionFirewall =
+  Bridge.exactReuseAdmissionFirewall
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+invariantHandoffCarriesExactReuseAuthorityFirewall :
+  Bridge.ExactReuseCreatesSemanticAuthority → ⊥
+invariantHandoffCarriesExactReuseAuthorityFirewall =
+  Bridge.exactReuseAuthorityFirewall
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+invariantHandoffCarriesExactReuseApplicabilityFirewall :
+  Bridge.ExactReuseCreatesApplicability → ⊥
+invariantHandoffCarriesExactReuseApplicabilityFirewall =
+  Bridge.exactReuseApplicabilityFirewall
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+invariantHandoffCarriesExactReuseClaimTruthFirewall :
+  Bridge.ExactReuseCreatesClaimTruth → ⊥
+invariantHandoffCarriesExactReuseClaimTruthFirewall =
+  Bridge.exactReuseClaimTruthFirewall
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
