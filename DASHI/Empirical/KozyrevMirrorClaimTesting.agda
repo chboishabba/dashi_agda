@@ -9,6 +9,11 @@ open import Data.Empty using (⊥)
 
 import DASHI.Empirical.GRQuantumPredictionProtocol as PredictionProtocol
 import DASHI.Promotion.CrossDomainClaimPromotionBoundary as ClaimBoundary
+import DASHI.Physics.Foundations.TorqueTrialectic369Exact as Torque369
+import DASHI.Physics.Closure.SignedZeroTorsionReceipt as SignedZero
+import DASHI.Geometry.LorentzianLeviCivitaConditional as LeviCivita
+import DASHI.Physics.YangMills.YangMillsCizekEinsteinCartanClaimAuditExact as EinsteinCartanAudit
+import DASHI.Physics.POAMSScientificMechanismBoundaryExact as POAMS
 
 ------------------------------------------------------------------------
 -- Source-typed Kozyrev mirror claim intake. No new physical law.
@@ -238,3 +243,142 @@ mirrorClinicalPromotionStillBlocked =
 -- PredictionProtocol remains the canonical quantitative/holdout contract.
 -- This module intentionally does not construct a prediction value or proof of
 -- empirical confirmation and does not reclassify any p-adic Kozyrev theorem.
+
+------------------------------------------------------------------------
+-- Repo-native torsion reconciliation (current source owners, not new physics).
+--
+-- Torque369: merged PR #1164, Levi-Civita orientation of ordered r/F axes.
+-- SignedZero: path/arrival-direction bookkeeping (NOT GR connection torsion).
+-- LeviCivita: torsion-free connection as a conditional supplied witness.
+-- EinsteinCartanAudit: open theory/operator/decoupling identity bridges.
+-- POAMS: ordinary angular-momentum law; preliminary claims remain separate.
+--
+-- This is a typed *disambiguation*, not a coupling of the named objects.
+------------------------------------------------------------------------
+
+data TorsionMeaning : Set where
+  mechanicalTwistOrTorque : TorsionMeaning
+  signedZeroPathTorsionSemantics : TorsionMeaning
+  differentialGeometricConnectionTorsion : TorsionMeaning
+  claimedKozyrevInformationTorsion : TorsionMeaning
+  algebraicTwoTorsionUnrelated : TorsionMeaning
+
+mechanicalTorsionIsNotClaimedInformationField :
+  mechanicalTwistOrTorque ≢ claimedKozyrevInformationTorsion
+mechanicalTorsionIsNotClaimedInformationField ()
+
+geometricTorsionIsNotClaimedInformationField :
+  differentialGeometricConnectionTorsion ≢ claimedKozyrevInformationTorsion
+geometricTorsionIsNotClaimedInformationField ()
+
+signedZeroTorsionIsNotGeometricTorsion :
+  signedZeroPathTorsionSemantics ≢ differentialGeometricConnectionTorsion
+signedZeroTorsionIsNotGeometricTorsion ()
+
+ellipticTorsionIsNotMechanicalTorsion :
+  algebraicTwoTorsionUnrelated ≢ mechanicalTwistOrTorque
+ellipticTorsionIsNotMechanicalTorsion ()
+
+-- This function reuses the *real* finite orientation carrier/proof owner.
+-- It proves only swapping the lever/force labels twice preserves that voxel.
+mirrorMechanicalOrientationRoundTrip :
+  (voxel : Torque369.BracketVoxel) →
+  Torque369.swapTorqueInputs (Torque369.swapTorqueInputs voxel) ≡ voxel
+mirrorMechanicalOrientationRoundTrip =
+  Torque369.swapTorqueInputsInvolutive
+
+-- Both directed signed-zero labels have one canonical neutral scalar.
+-- Reuse exactly the existing source theorem's definitional computation.
+mirrorPlusMinusZeroSameScalar :
+  SignedZero.signedZeroScalarValue SignedZero.plusZero
+  ≡ SignedZero.signedZeroScalarValue SignedZero.minusZero
+mirrorPlusMinusZeroSameScalar = refl
+
+-- A conditional torsion-free metric-compatible connection cannot, by name,
+-- serve as evidence of a *nonzero*, apparatus-generated geometric torsion.
+mirrorConditionalConnectionTorsionFreeWasAssumed :
+  LeviCivita.torsionFree LeviCivita.canonicalConditionalConnection ≡ true
+mirrorConditionalConnectionTorsionFreeWasAssumed = refl
+
+-- The source audit has a different object: Einstein-Cartan-YM versus pure YM.
+-- Reuse its original same-theory non-identity proof without renaming it
+-- as an empirical Kozyrev-mirror measurement.
+mirrorEinsteinCartanPureYMNonIdentity :
+  EinsteinCartanAudit.Audit.sourceTheory EinsteinCartanAudit.monographAudit
+  ≡ EinsteinCartanAudit.Audit.pureFourDimensionalYangMills → ⊥
+mirrorEinsteinCartanPureYMNonIdentity =
+  EinsteinCartanAudit.monographTheoryIsNotDefinitionallyPureYM
+
+-- The established angular-momentum comparison is imported from POAMS;
+-- preliminary POAMS data do not validate the mirror or a new coupling.
+mirrorAngularMomentumBaseline :
+  POAMS.S.ScientificMechanismReceipt
+mirrorAngularMomentumBaseline = POAMS.angularMomentumConservation
+
+------------------------------------------------------------------------
+-- Gated bridge request: none of these fields is filled by syntactic reuse.
+-- A real bridge must couple a source, apparatus, calibrated observable,
+-- dimensionful prediction, null model, and independently replicated data.
+------------------------------------------------------------------------
+
+data PhysicalTorsionBridgeRequirement : Set where
+  specifyMetricAndConnectionSource : PhysicalTorsionBridgeRequirement
+  deriveTorsionGeneratingSpinSource : PhysicalTorsionBridgeRequirement
+  deriveApparatusCouplingToConnection : PhysicalTorsionBridgeRequirement
+  specifySIUnitsAndInstrumentResponse : PhysicalTorsionBridgeRequirement
+  deriveQuantitativeNonzeroPrediction : PhysicalTorsionBridgeRequirement
+  establishOrdinaryEMAcousticMechanicalNull : PhysicalTorsionBridgeRequirement
+  preregisterAndFreezeShamRandomization : PhysicalTorsionBridgeRequirement
+  calibrateAndBoundUncertainty : PhysicalTorsionBridgeRequirement
+  independentlyReplicateHeldOutSignal : PhysicalTorsionBridgeRequirement
+  preserveScientificClaimAuthorityReview : PhysicalTorsionBridgeRequirement
+
+canonicalTorsionBridgeRequirements :
+  List PhysicalTorsionBridgeRequirement
+canonicalTorsionBridgeRequirements =
+  specifyMetricAndConnectionSource
+  ∷ deriveTorsionGeneratingSpinSource
+  ∷ deriveApparatusCouplingToConnection
+  ∷ specifySIUnitsAndInstrumentResponse
+  ∷ deriveQuantitativeNonzeroPrediction
+  ∷ establishOrdinaryEMAcousticMechanicalNull
+  ∷ preregisterAndFreezeShamRandomization
+  ∷ calibrateAndBoundUncertainty
+  ∷ independentlyReplicateHeldOutSignal
+  ∷ preserveScientificClaimAuthorityReview
+  ∷ []
+
+record TorsionBridgeReadiness : Set where
+  constructor torsionBridgeReadiness
+  field
+    orientationAndClaimFamiliesDisambiguated : Bool
+    orientationAndClaimFamiliesDisambiguatedIsTrue :
+      orientationAndClaimFamiliesDisambiguated ≡ true
+    geometricConnectionSourceDerivedFromMirror : Bool
+    geometricConnectionSourceDerivedFromMirrorIsFalse :
+      geometricConnectionSourceDerivedFromMirror ≡ false
+    quantitativePhysicalCouplingDerived : Bool
+    quantitativePhysicalCouplingDerivedIsFalse :
+      quantitativePhysicalCouplingDerived ≡ false
+    torsionInstrumentCalibrated : Bool
+    torsionInstrumentCalibratedIsFalse :
+      torsionInstrumentCalibrated ≡ false
+    torsionSignalReplicated : Bool
+    torsionSignalReplicatedIsFalse :
+      torsionSignalReplicated ≡ false
+    torsionFieldPhysicallyPromoted : Bool
+    torsionFieldPhysicallyPromotedIsFalse :
+      torsionFieldPhysicallyPromoted ≡ false
+
+canonicalTorsionBridgeReadiness : TorsionBridgeReadiness
+canonicalTorsionBridgeReadiness =
+  torsionBridgeReadiness
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+-- No empty-space torsion assumption or claimed information-transfer effect
+-- is smuggled in by importing finite kinematics or signed-zero labels.
