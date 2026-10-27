@@ -1370,3 +1370,27 @@ unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess :
   CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
 unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess =
   CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
+
+------------------------------------------------------------------------
+-- Exact finite-27 codec BIDI aliases from the canonical Max Cut owner.
+------------------------------------------------------------------------
+
+unifier369Ternary27StateCode :
+  MaxCut369.TernaryEncodedState → MaxCut369.TernaryState27
+unifier369Ternary27StateCode = MaxCut369.toe27StateCode
+
+unifier369Ternary27StateDecode :
+  MaxCut369.TernaryState27 → MaxCut369.TernaryEncodedState
+unifier369Ternary27StateDecode = MaxCut369.toe27StateDecode
+
+unifier369Ternary27StateDecodeStateCode :
+  (e : MaxCut369.TernaryEncodedState) →
+  unifier369Ternary27StateDecode (unifier369Ternary27StateCode e) ≡ e
+unifier369Ternary27StateDecodeStateCode =
+  MaxCut369.toe27StateDecodeStateCode
+
+unifier369Ternary27StateCodeStateDecode :
+  (i : MaxCut369.TernaryState27) →
+  unifier369Ternary27StateCode (unifier369Ternary27StateDecode i) ≡ i
+unifier369Ternary27StateCodeStateDecode =
+  MaxCut369.toe27StateCodeStateDecode
