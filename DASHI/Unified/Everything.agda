@@ -16,8 +16,6 @@ import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.FleetFormalGapTargetTOEValidation
-import DASHI.Unified.Fleet58ManifestAcquisitionExact
-import DASHI.Unified.Fleet58ManifestAcquisitionRegression
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
 import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
@@ -29,9 +27,6 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
-import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
-import DASHI.Unified.NavierStokesBM2TOEConvergenceValidation
-import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
@@ -211,77 +206,42 @@ unifiedYMImplementAToDMaxCutReceipt :
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-------------------------------------------------------------------------
--- Navier-Stokes B / R571 M2 normalized TOE receipt.
-------------------------------------------------------------------------
-
-unifiedNavierStokesBM2Receipt :
-  NSBM2TOE.NavierStokesBM2TOEReceipt
-unifiedNavierStokesBM2Receipt =
-  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
-
-unifiedNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-unifiedNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
 
 ------------------------------------------------------------------------
--- Typed Balaban continuum and Fleet target aggregate aliases.
+-- Live Gate-4 frontier and fleet-target selection.
 ------------------------------------------------------------------------
 
-unifiedBalabanContinuumLimitReceipt :
-  BalabanRGTOE.BalabanContinuumLimitReceipt
-unifiedBalabanContinuumLimitReceipt =
-  BalabanRGTOE.balabanContinuumLimitReceipt
+unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
+unifiedCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifiedCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+unifiedFleetFormalGapTargetSelected : Bool
+unifiedFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifiedHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Typed continuum no-go is reused from BalabanRGTOERegression.
+------------------------------------------------------------------------
 
 unifiedBalabanContinuumLimitPromotionImpossible :
   BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
 unifiedBalabanContinuumLimitPromotionImpossible =
   BalabanRGTOE.balabanContinuumLimitPromotionImpossible
 
-unifiedDepthContinuumLimitReceipt :
-  BalabanRGTOE.DepthContinuumLimitReceipt
-unifiedDepthContinuumLimitReceipt =
-  BalabanRGTOE.depthContinuumLimitReceipt
-
 unifiedDepthContinuumLimitPromotionImpossible :
   BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
 unifiedDepthContinuumLimitPromotionImpossible =
   BalabanRGTOE.depthContinuumLimitPromotionImpossible
-
-unifiedFleetDischargedCoreKnowledgeFibres : ℕ
-unifiedFleetDischargedCoreKnowledgeFibres =
-  FleetGapTOE.dischargedCoreKnowledgeFibres
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetDischargedCoreKnowledgeFibresIs584 :
-  unifiedFleetDischargedCoreKnowledgeFibres ≡ 584
-unifiedFleetDischargedCoreKnowledgeFibresIs584 =
-  FleetGapTOE.fleetRecordedDischargedCountIs584
-
-unifiedFleetPolarityContradictionGaps : ℕ
-unifiedFleetPolarityContradictionGaps =
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetPolarityContradictionGapsIs44 :
-  unifiedFleetPolarityContradictionGaps ≡ 44
-unifiedFleetPolarityContradictionGapsIs44 =
-  FleetGapTOE.fleetRecordedContradictionCountIs44
-
-unifiedFleetUnformalisedFormalGaps : ℕ
-unifiedFleetUnformalisedFormalGaps =
-  FleetGapTOE.unformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetUnformalisedFormalGapsIs58 :
-  unifiedFleetUnformalisedFormalGaps ≡ 58
-unifiedFleetUnformalisedFormalGapsIs58 =
-  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
-
-unifiedFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-  ≡ true
-unifiedFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
