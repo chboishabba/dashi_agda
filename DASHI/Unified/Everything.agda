@@ -1,4 +1,6 @@
 module DASHI.Unified.Everything where
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -9,6 +11,10 @@ import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
+import DASHI.Unified.FleetFormalGapTargetTOEValidation
+import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
+import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Unified.CarrierGrammar as CarrierGrammar
 import DASHI.Unified.ChemistrySupervoxel as ChemistrySupervoxel
@@ -83,24 +89,30 @@ brainFMRIRemainsNonPromoting =
 navierStokesRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.navierStokesObject ≡ false
 navierStokesRemainsNonPromoting =
+  refl
+
 yangMillsRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.yangMillsObject ≡ false
 yangMillsRemainsNonPromoting =
+  refl
+
 brainFMRIFormalProjectionsRemainNonPromoting :
   ∀ kind →
   Spine.objectProjectionPromotion BrainFMRI.brainFMRIObject kind ≡ false
 brainFMRIFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     BrainFMRI.brainFMRIObject
+
 navierStokesFormalProjectionsRemainNonPromoting :
+  ∀ kind →
   Spine.objectProjectionPromotion Physics.navierStokesObject kind ≡ false
 navierStokesFormalProjectionsRemainNonPromoting =
+  Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.navierStokesObject
+
 yangMillsFormalProjectionsRemainNonPromoting :
+  ∀ kind →
   Spine.objectProjectionPromotion Physics.yangMillsObject kind ≡ false
 yangMillsFormalProjectionsRemainNonPromoting =
+  Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
-import DASHI.Physics.Foundations.Round5FullBoundary as Round5
-      Round5.Round5FullBoundary
-        Round5.canonicalRound5FullBoundary
-        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
