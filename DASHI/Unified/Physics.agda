@@ -46,6 +46,7 @@ open QuantumMetrologyTOE public using
   ; physicalChemistryMetrologyStillNotPromoted
   ; unificationCriticalPathTerminalPromotionStillFalse
   ; fullQuantumGravityStillNotPromoted
+  ; finiteInformationMetricDoesNotCreatePhysicalFisherMetric
   ; exactRationalEinsteinCouplingStillNotClaimed
   ; acceptedMeasuredGCouplingStillRequired
   ; negativeTraceStillDoesNotCloseActiveStress
