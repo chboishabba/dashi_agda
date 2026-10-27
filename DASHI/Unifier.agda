@@ -1304,3 +1304,64 @@ unifierBalabanOSWightmanStillBlocked :
 unifierBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Governed legal workflow x provenance-aware future-safety convergence.
+-- Reuse existing theorem owners. No Actionstep-specific ontology is added.
+------------------------------------------------------------------------
+
+import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as unifierOperational
+import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as unifierReview
+import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as unifierSourceRule
+import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact as unifierApplicability
+import DASHI.Core.ITIRGovernanceControlCaseExact as unifierControl
+import DASHI.Governance.FormalisationGovernanceCapstoneExact as unifierFormalisation
+import DASHI.Core.FrozenProvenanceDynamicRefinementExact as unifierFrozen
+
+unifierTaskCompletionDoesNotCreateTruth :
+  unifierOperational.TaskCompletionCreatesTruth → ⊥
+unifierTaskCompletionDoesNotCreateTruth =
+  unifierOperational.taskCompletionDoesNotCreateTruth
+
+unifierAcceptedReviewDoesNotPayApplicability :
+  unifierReview.AcceptedStatusPaysApplicability → ⊥
+unifierAcceptedReviewDoesNotPayApplicability =
+  unifierReview.acceptedStatusDoesNotPayApplicability
+
+unifierCitationDoesNotRealiseLegalRule :
+  unifierSourceRule.CitationAloneRealisesLegalRule → ⊥
+unifierCitationDoesNotRealiseLegalRule =
+  unifierSourceRule.citationAloneDoesNotRealiseLegalRule
+
+unifierSemanticMeetDoesNotPayApplicability :
+  unifierApplicability.SemanticMeetAloneProvesLegalApplicability → ⊥
+unifierSemanticMeetDoesNotPayApplicability =
+  unifierApplicability.semanticMeetDoesNotAloneProveLegalApplicability
+
+unifierPassingControlDoesNotCreateCertification :
+  unifierControl.PassingControlMeansCertified → ⊥
+unifierPassingControlDoesNotCreateCertification =
+  unifierControl.passingDoesNotMeanCertified
+
+unifierKernelClosureDoesNotCreateSemanticClosure :
+  unifierFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
+    unifierFormalisation.canonicalThreeStoreyBoundary
+  ≡ false
+unifierKernelClosureDoesNotCreateSemanticClosure =
+  unifierFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosureIsFalse
+    unifierFormalisation.canonicalThreeStoreyBoundary
+
+unifierStaticRefinementDoesNotCreateDynamicSafety :
+  unifierFrozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+unifierStaticRefinementDoesNotCreateDynamicSafety =
+  unifierFrozen.staticSeparationDoesNotCreateDynamicSafety
+
+unifierFrozenSelectionDoesNotCreateDynamicSafety :
+  unifierFrozen.FrozenSelectionCreatesDynamicSafetyPermission → ⊥
+unifierFrozenSelectionDoesNotCreateDynamicSafety =
+  unifierFrozen.frozenSelectionDoesNotCreateDynamicSafety
+
+unifierProvenanceDoesNotCreateTruth :
+  unifierFrozen.ProvenanceAxisCreatesTruthPermission → ⊥
+unifierProvenanceDoesNotCreateTruth =
+  unifierFrozen.provenanceAxisDoesNotCreateTruth
