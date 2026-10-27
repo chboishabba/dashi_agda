@@ -104,3 +104,77 @@ import DASHI.Physics.Foundations.Round5FullBoundary as Round5
       Round5.Round5FullBoundary
         Round5.canonicalRound5FullBoundary
         "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
+
+
+------------------------------------------------------------------------
+-- Governed legal workflow + Ibrahim Pareto/snowball + fleet-gap facade.
+------------------------------------------------------------------------
+
+import Data.Empty as UnifiedEmpty
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as IbrahimTOE
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetTOE
+
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff :
+  LegalGovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
+  LegalGovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+unifiedCanonicalLegalSourceAuthorityBoundary :
+  LegalGovernanceTOE.LegalSourceAuthorityBoundary
+unifiedCanonicalLegalSourceAuthorityBoundary =
+  LegalGovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
+
+unifiedCandidateSourceIsNotLegalAuthority :
+  LegalGovernanceTOE.CandidateSourceIsAuthoritative → UnifiedEmpty.⊥
+unifiedCandidateSourceIsNotLegalAuthority =
+  LegalGovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifiedSameLegalSystemIsNotLegalAuthority :
+  LegalGovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → UnifiedEmpty.⊥
+unifiedSameLegalSystemIsNotLegalAuthority =
+  LegalGovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifiedCurrentValidityIsNotApplicability :
+  LegalGovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → UnifiedEmpty.⊥
+unifiedCurrentValidityIsNotApplicability =
+  LegalGovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+unifiedSemanticAdmissionIsNotLegalAuthority :
+  LegalGovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → UnifiedEmpty.⊥
+unifiedSemanticAdmissionIsNotLegalAuthority =
+  LegalGovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+unifiedDocumentRoleIsNotLegalAuthority :
+  LegalGovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → UnifiedEmpty.⊥
+unifiedDocumentRoleIsNotLegalAuthority =
+  LegalGovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+unifiedIbrahimRecognitionParetoBoundary =
+  IbrahimTOE.ibrahimRecognitionParetoBoundary
+
+unifiedIbrahimCharacterExecutionFrontier =
+  IbrahimTOE.ibrahimCharacterExecutionFrontier
+
+unifiedIbrahimPhaseResolutionFrontier =
+  IbrahimTOE.ibrahimPhaseResolutionFrontier
+
+unifiedIbrahimHistoricalDiscriminatorBoundary =
+  IbrahimTOE.ibrahimHistoricalDiscriminatorBoundary
+
+unifiedFleetFormalGapTargetReceipt :
+  FleetTOE.FleetFormalGapTargetReceipt
+unifiedFleetFormalGapTargetReceipt =
+  FleetTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetDischargedCoreKnowledgeFibresIs584 :
+  FleetTOE.dischargedCoreKnowledgeFibres unifiedFleetFormalGapTargetReceipt ≡ 584
+unifiedFleetDischargedCoreKnowledgeFibresIs584 = refl
+
+unifiedFleetPolarityContradictionGapsIs44 :
+  FleetTOE.polarityContradictionGaps unifiedFleetFormalGapTargetReceipt ≡ 44
+unifiedFleetPolarityContradictionGapsIs44 = refl
+
+unifiedFleetUnformalisedFormalGapsIs58 :
+  FleetTOE.unformalisedFormalGaps unifiedFleetFormalGapTargetReceipt ≡ 58
+unifiedFleetUnformalisedFormalGapsIs58 = refl
