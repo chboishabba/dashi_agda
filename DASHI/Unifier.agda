@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumLean
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1830,3 +1831,62 @@ unifierFleetContradictionGapReclassificationImpossible :
   FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
 unifierFleetContradictionGapReclassificationImpossible =
   FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+
+------------------------------------------------------------------------
+-- Exact Lean Millennium external-target reconciliation.
+--
+-- Reuse the existing cross-prover receipt.  These aliases do not transport
+-- Lean proof terms into Agda.  They attach exact source identity, same-object
+-- payments, and non-promotion eliminators to this canonical TOE facade.
+------------------------------------------------------------------------
+
+unifierLeanMillenniumExternalAcceptanceReceipt :
+  MillenniumLean.MillenniumExternalAcceptanceReceipt
+unifierLeanMillenniumExternalAcceptanceReceipt =
+  MillenniumLean.currentMillenniumExternalAcceptanceReceipt
+
+unifierLeanMillenniumRHExactStatementWeldSourceWritten :
+  MillenniumLean.leanMillenniumRHExactStatementWeldSourceWritten ≡ true
+unifierLeanMillenniumRHExactStatementWeldSourceWritten =
+  MillenniumLean.leanMillenniumRHExactStatementWeldSourceWrittenIsTrue
+
+unifierLeanMillenniumNSFeffermanCExactTermSourceWritten :
+  MillenniumLean.leanMillenniumNSFeffermanCExactTermSourceWritten ≡ true
+unifierLeanMillenniumNSFeffermanCExactTermSourceWritten =
+  MillenniumLean.leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue
+
+unifierLeanMillenniumNSFeffermanDExactTermSourceWritten :
+  MillenniumLean.leanMillenniumNSFeffermanDExactTermSourceWritten ≡ true
+unifierLeanMillenniumNSFeffermanDExactTermSourceWritten =
+  MillenniumLean.leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue
+
+unifierLeanMillenniumNSAdapterRequiresNoNewMathematics :
+  MillenniumLean.leanMillenniumNSAdapterRequiresNewMathematics ≡ false
+unifierLeanMillenniumNSAdapterRequiresNoNewMathematics =
+  MillenniumLean.leanMillenniumNSAdapterRequiresNoNewMathematics
+
+unifierLeanMillenniumBSDProjectiveAffineRankWeldSourceWritten :
+  MillenniumLean.leanMillenniumBSDProjectiveAffineRankWeldSourceWritten ≡ true
+unifierLeanMillenniumBSDProjectiveAffineRankWeldSourceWritten =
+  MillenniumLean.leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue
+
+unifierLeanMillenniumPNPTerminalFailureBidiAgdaOwned :
+  MillenniumLean.leanMillenniumPNPTerminalFailureBidiAgdaOwned ≡ true
+unifierLeanMillenniumPNPTerminalFailureBidiAgdaOwned =
+  MillenniumLean.leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue
+
+unifierLeanMillenniumHodgePrizePromotionImpossible :
+  MillenniumLean.LeanMillenniumHodgePrizePromotion → ⊥
+unifierLeanMillenniumHodgePrizePromotionImpossible =
+  MillenniumLean.leanMillenniumHodgePrizePromotionImpossible
+
+unifierLeanMillenniumYangMillsPrizePromotionImpossible :
+  MillenniumLean.LeanMillenniumYangMillsPrizePromotion → ⊥
+unifierLeanMillenniumYangMillsPrizePromotionImpossible =
+  MillenniumLean.leanMillenniumYangMillsPrizePromotionImpossible
+
+unifierLeanMillenniumSourceWrittenKernelPromotionImpossible :
+  MillenniumLean.LeanMillenniumSourceWrittenKernelPromotion → ⊥
+unifierLeanMillenniumSourceWrittenKernelPromotionImpossible =
+  MillenniumLean.leanMillenniumSourceWrittenKernelPromotionImpossible
