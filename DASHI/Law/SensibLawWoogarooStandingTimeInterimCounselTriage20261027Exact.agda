@@ -113,6 +113,39 @@ woogarooCampaignCurrent = Source.mkNoDOISource
   "Campaign identifies Stockland/Cherish EPBC 2019/8575 approved and separate Springfield City Group Scenic Precinct EPBC 2020/8651 pending, and invites public funding/contact. Proves claims published by the campaign, not its incorporation/constitution, dated s487 activity series, particular 2019/8575 decision legality, an already filed lawsuit or public funding distribution."
   Source.publicAttribution
 
+nationalEPAEPOOriginal : Source.AttributedSource
+nationalEPAEPOOriginal = Source.mkNoDOISource
+  "National Environmental Protection Agency"
+  "Compliance outcomes: Environment Protection Order under EPBC s474A"
+  "Original federal regulator compliance register and actual issued EPO entry"
+  "7 October 2026 order; accessed 27 October 2026"
+  "https://www.nationalepa.gov.au/epbc/compliance/audit-outcomes"
+  Source.governmentSource
+  "Section 474A EPO power commenced 24 August 2026; regulator states three threshold beliefs: actual/likely breach, serious environmental harm, necessity. Public register records a real 7 October 2026 EPO concerning Warrengail Pastoral Company / Wombinoo Station. That different-property example proves operation of power, NOT breach at Springfield, approved action 2019/8575, nor EPO for any Woogaroo operator."
+  Source.publicAttribution
+
+nationalEPAReportBreachOriginal : Source.AttributedSource
+nationalEPAReportBreachOriginal = Source.mkNoDOISource
+  "National Environmental Protection Agency"
+  "Report a breach of the EPBC Act"
+  "Original National EPA regulatory allegation/intake procedure"
+  "27 October 2026 access"
+  "https://www.nationalepa.gov.au/epbc/compliance/report-a-breach"
+  Source.governmentSource
+  "The National EPA accepts credible alleged EPBC breaches by web intake (including anonymous), environment.compliance@nationalepa.gov.au and published hotline. It asks for specific locations, maps, time evidence, photos or records; submission does not issue an order, create legal standing, toll court filing periods, or guarantee an investigation or response."
+  Source.publicAttribution
+
+nationalEPARulesOriginal : Source.AttributedSource
+nationalEPARulesOriginal = Source.mkNoDOISource
+  "Minister for the Environment and Water / Commonwealth Federal Register"
+  "National Environmental Protection Agency Rules 2026: registrable decisions"
+  "Original legislative instrument F2026L01105, registered 21 August"
+  "21 August 2026"
+  "https://www.legislation.gov.au/F2026L01105/asmade/2026-08-21/text/original/epub/OEBPS/document_1/document_1.html"
+  Source.governmentSource
+  "Schedule records publication fields for original s474A EPO and s474D variation/revocation. An entry on a register is an identity/status receipt, not proof that other particular premises or actions have been inspected or found to breach EPBC."
+  Source.publicAttribution
+
 data StandingApplicant : Set where
   conservationIndividual : StandingApplicant
   conservationOrganisation : StandingApplicant
@@ -124,6 +157,8 @@ data ProtectionRoute : Set where
   adjrSection15Stay : ProtectionRoute
   epbcSection475ContraventionInjunction : ProtectionRoute
   courtRule701ProspectiveEmergency : ProtectionRoute
+  nationalEPASection474AComplianceOrder : ProtectionRoute
+  nationalEPAReportBreachIntake : ProtectionRoute
 
 data CaseStatus : Set where
   routeAvailableInLaw : CaseStatus
@@ -219,12 +254,33 @@ campaignActivityLead = litigation-gate adjrSection5Review woogarooCampaignCurren
   "Original dated two-year campaign organisational activity, 15 Oct constitution/purposes, actual committee resolution and applicant representation; a website heading does not prove s487 standing or that a Federal Court case was commenced."
   false refl
 
+-- Administrative/CEO enforcement is NOT a litigant-initiated injunction.
+-- Reuse the generic evidence gate as a route inventory; the applicant/decision
+-- maker distinction is encoded in the route and its missing-proof field.
+nationalEPA474AEnforcement : LitigationGate
+nationalEPA474AEnforcement = litigation-gate nationalEPASection474AComplianceOrder nationalEPAEPOOriginal
+  caseSpecificProofOpen
+  "National EPA CEO (not a conservation group or Federal Court) may issue EPBC s474A Environment Protection Order when all statutory beliefs concern actual/likely breach, serious environmental harm and necessity. 14-day short term; possible one extension. Existing 7 Oct Warrengail order is a separate-property example."
+  "Original 15 Oct 2019/8575 conditions; same-area works/photographs, actual threatened conduct, case-specific credible approval-condition/Act breach, risk of serious harm, person against whom an EPO can lawfully issue."
+  false refl
+
+nationalEPAComplianceReport : LitigationGate
+nationalEPAComplianceReport = litigation-gate nationalEPAReportBreachIntake nationalEPAReportBreachOriginal
+  caseSpecificProofOpen
+  "An informant can submit a genuine suspected-breach report to the National EPA, including with documentary proof and optionally anonymously. Regulator independently evaluates any order/audit/investigation."
+  "Dated conduct with precise site and its credible statutory breach nexus, safe collection of original photos/videos/maps, and delivery acknowledgment if actually submitted; no allegation of a 2019/8575 EPO unless register pays it."
+  false refl
+
+ePoPublicationRequirement : Source.AttributedSource
+ePoPublicationRequirement = nationalEPARulesOriginal
+
 triageGates : List LitigationGate
 triageGates =
   individualStanding ∷ organisationStanding ∷ independentAffectedInterest ∷
   section39BAlternative ∷ furnishingClock ∷ stayAfterFiling ∷
   epbcContravention ∷ beforeOriginating ∷ undertakingRisk ∷
-  qutLetterEvidenceLead ∷ campaignActivityLead ∷ []
+  qutLetterEvidenceLead ∷ campaignActivityLead ∷
+  nationalEPA474AEnforcement ∷ nationalEPAComplianceReport ∷ []
 
 -- Existing source and case consumers are genuinely reused. Nothing in their
 -- existence turns a candidate applicant into a qualified litigant.
@@ -253,6 +309,10 @@ data CourtRegistryCanGiveIndividualLegalAdvice : Set where
 data ThisSourceWrittenOwnerIsCourtFinding : Set where
 data OriginalSubmissionAddressedToMinisterProvesSection95BReceipt : Set where
 data CampaignFundingAppealEqualsFiledCourtProceeding : Set where
+data August2026EPOPowerMeansAutomaticWoogarooProtection : Set where
+data OtherPropertyOctoberEPOProvesThisCaseBreach : Set where
+data RegulatorIntakeEqualsCourtStayOrReportDelivery : Set where
+data EPOCanIssueForLawfulApprovedClearingWithoutBreach : Set where
 
 identityNotStanding : ConservationIdentityAloneProvesSection487 → ⊥
 identityNotStanding ()
@@ -293,3 +353,19 @@ addressedLetterNotProvenReceipt ()
 campaignAppealNotLitigation :
   CampaignFundingAppealEqualsFiledCourtProceeding → ⊥
 campaignAppealNotLitigation ()
+
+epoPowerNotAutomaticallySiteProtection :
+  August2026EPOPowerMeansAutomaticWoogarooProtection → ⊥
+epoPowerNotAutomaticallySiteProtection ()
+
+warrengailDifferentFromWoogaroo :
+  OtherPropertyOctoberEPOProvesThisCaseBreach → ⊥
+warrengailDifferentFromWoogaroo ()
+
+complaintNotCourtOrOrder :
+  RegulatorIntakeEqualsCourtStayOrReportDelivery → ⊥
+complaintNotCourtOrOrder ()
+
+lawfulClearingNotAutomaticallyEPOCase :
+  EPOCanIssueForLawfulApprovedClearingWithoutBreach → ⊥
+lawfulClearingNotAutomaticallyEPOCase ()
