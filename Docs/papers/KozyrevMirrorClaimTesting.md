@@ -75,6 +75,91 @@ repository's **syntactic fail-closed non-promotion** receipt. It does
 not prove a physical conservation law, absence of a phenomenon, an
 experimental result, or clinical ineffectiveness.
 
+## Repository-wide spiral/wreath archaeology (2026-10-27)
+
+Search was performed against current-master GitHub code and named pull
+requests. **Conclusion:** do not invent a second spiral calculus, tree action,
+C3 character, winding-state model, or physical torque law.
+
+| Already-owned object | Exact source owner / known statement | Reuse limit |
+| --- | --- | --- |
+| Rooted ternary recursive wreath | `DASHI.Reasoning.TernaryPantsRecursiveWreathActionExact`; `inverseActsLeft`, `sampleInverseRoundTrip`, `actInjective` | Correct **finite tree action**, not a physical rotational actuation or profinite apparatus |
+| Elementary wreath-style refinement | `DASHI.Physics.Common.FiniteWreathRefinementExact`; local transform + index permutation, involution | Finite two-site prototype, not measured spiral material |
+| Rotation/reflection spiral history | `DASHI.Biology.DialecticalSheetSpiralExact`; `projectedReturnAfterFour`, `reflectionFlipsSpiralSense` | Sheet/history model, not millimetre-accurate sheet geometry |
+| Helical mapped-cylinder action | `DASHI.Topology.HelicalWeaveMappingTorusExact`; `threeStepsReturnToSamePhase`, `threeStepsAdvanceProductionRound` | Three-phase monodromy, **not** the apparatus pitch, radius or material |
+| Phase/winding projection | `DASHI.Biology.Physical.Harmonic369HelixLiftExact`; `sameCircularProjectionDifferentHistory`, `helicalHistoriesRemainDistinct` | Exact discrete history separation, not time-machine evidence |
+| Log-polar spiral | `DASHI.Cognition.AnalyticLogPolarSpiralCompilerExact`; exponential/logarithmic radial correspondence under explicit input | Mathematical spiral shape; its affine rearrangement and real apparatus identification are conditional |
+| Spiral-shaped finite vector field | `DASHI.Biology.FiniteTorusVectorWaveGeometryExact`; discrete curl/divergence signatures | Finite wave geometry; not acoustic or EM material scattering |
+| Physical torque orientation | `DASHI.Physics.Foundations.TorqueTrialectic369Exact`; swap-involution, bracket orientation and Hodge/cross product consumers | Mechanics comparator; not a source of Einstein–Cartan torsion |
+| Stationary-phase mirror/grating | `DASHI.Interop.StationaryPhaseMirrorGratingToyReceipt`; `mirrorFermatToySetup` | Selected **toy optical setup**, no intrinsic material reflection data |
+| Maxwell conducting boundary | `DASHI.Physics.QuantumVacuum.PerfectConductorMaxwellSpectrumBidiExact`; `tangentialElectricZero`, `ConductingModeEigenproblem` | **Parallel plates**, not a solved curved spiral enclosure |
+| Magnetic-helicity Fourier laws | `DASHI.Physics.Plasma.MHDMagneticHelicityHelicalWeightExact` | Existing fluid/plasma operator; not physical connection torsion |
+| Source/promotion rules | `DASHI.Promotion.CrossDomainClaimPromotionBoundary` and `DASHI.Empirical.GRQuantumPredictionProtocol` | Existing provenance, preregistration and non-promotion owners |
+
+The updated Kozyrev Agda owner **imports rather than copies** these
+source modules. It directly reuses five theorem/proof values: finite wreath
+involution, recursive wreath inverse, helical monodromy, spiral handedness
+reflection, and winding-projection coincidence. It also names the
+pre-existing optical toy and conducting-boundary categories. These
+imports establish **source-native theorem availability**, not an
+apparatus realisation.
+
+### PR lineage, merge discipline
+
+- [#425](https://github.com/chboishabba/dashi_agda/pull/425)
+  (*ternary harmonic/wreath refinement*) and
+  [#558](https://github.com/chboishabba/dashi_agda/pull/558)
+  (*recursive S3 pants-tree action*) were **closed unmerged**.
+  Their corresponding source-owner modules were nevertheless found on
+  **current master**. Reuse the actual master blob, not the closed PR's
+  merge status as a theorem receipt.
+- [#1020](https://github.com/chboishabba/dashi_agda/pull/1020),
+  *Klüver log-polar projection*, **merged**.
+- [#1164](https://github.com/chboishabba/dashi_agda/pull/1164),
+  *torque/right-hand-rule 369*, **merged**.
+- [#1140](https://github.com/chboishabba/dashi_agda/pull/1140),
+  *Ogg-prime Fourier winding*, **open**. Do not conflate its arithmetic
+  winding with physical spiral rotations, and do not import an unmerged
+  theorem as current-master authority.
+- [#1249](https://github.com/chboishabba/dashi_agda/pull/1249),
+  *signed-zero/hyperfabric wave*, **open**. Existing source owners on master
+  are independent and can be reused.
+
+### The actual shortest unsolved cut
+
+What repo inspection **did not establish** is not a general theory of
+spirals, wreath actions, electromagnetic fields or torsion:
+
+1. **Patent geometry selection:** a measured, edition-qualified metal
+   surface and material parameters, with the 0.5/1.5 mm discrepancy
+   explicitly resolved or analysed as two alternatives.
+2. **Same-object geometric realisation:** a coordinate/inclusion map from
+   that measured surface into *one selected existing* spiral/helical
+   carrier; handedness, winding, units, contact conditions and boundary
+   orientation must commute. A map from a ternary path alone is not
+   sufficient to characterise arbitrary smooth geometry.
+3. **Same-geometry physical boundary-value operator:** restrict existing
+   Maxwell/acoustic/scattering machinery to the selected *curved metallic*
+   enclosure, with measured conductivity, frequency, loss, apertures and
+   material response. The repository's parallel-plate perfect-conductor
+   interface and stationary-phase toy are not already that solution.
+4. **Distinctive predicted observable:** tie a specified existing
+   mechanics/electromagnetism model or an explicitly sourced modified
+   torsion model to calibrated sensor values and a numerical error budget.
+   Prove/test the relevant conservation balance; no free "time energy"
+   detector or causal anomaly is implied by winding algebra.
+5. **Physical evidence receipt:** preregister a same-key sham/active
+   measurement, publish independent data and uncertainty provenance,
+   verify reproducibility, then consider generalisation. No raw
+   calibrated Kozyrev apparatus measurements or external replication
+   were verified by this source audit.
+
+P0/P1 mathematical construction is therefore substantially **reuse
+complete**. P2 is now a **seven-obligation realisation cut** in
+`canonicalExistingGeometryRealisationCut`, not a request to build new
+mathematical spirals or wreaths. P3–P6 are distinct measurement,
+mechanism and safety gates.
+
 ## Phase roadmap and deliverable gates (torsion reuse-first revision)
 
 **Planning baseline: 2026-10-27.** This is a dependency-ordered technical
@@ -86,7 +171,7 @@ the same as meeting its acceptance gate.
 | --- | --- | --- | --- |
 | **P0 — Reuse and provenance** | This document and `KozyrevMirrorClaimTesting.agda`; merge-source ledger for Kozyrev names, patent, signed-zero, torque, Cartan/POAMS and external models | Exact repo/PR source roots and typed non-identity; patent thickness contradiction carried rather than guessed | **Source written**; Agda kernel and full source verification open |
 | **P1 — Typed torsion bridge** | Native `TorsionMeaning`, `canonicalTorsionBridgeRequirements`, orientation and signed-zero reuse | Real imported theorem owners; disjoint meanings; no torsion-field promotion without physical source/coupling/observable | **Source written**; 10 obligations open; Agda kernel open |
-| **P2 — Instrument/geometry null** | Dimensions + uncertainty ledger, analytical energy/torque balances, at least two ordinary geometric controls; pinned 2-D benchmark comparison | Material/scale and 0.5/1.5 mm disagreement resolved or both modeled; known conservation and timestep/mesh convergence tests pass | **Not measured**; no selected instrument or calibrated apparatus |
+| **P2 — Instrument/geometry null** | Select and realise *existing* spiral/wreath/Maxwell/optics owners on measured apparatus; dimensions + uncertainty ledger, analytical energy/torque balances, at least two ordinary geometric controls; pinned 2-D benchmark comparison | Material/scale and 0.5/1.5 mm disagreement resolved or both modeled; known conservation and timestep/mesh convergence tests pass | **Mathematics in repo**; same-apparatus geometry/operator realisation and physical measurements still open |
 | **P3 — Registered bench discrimination** | Timestamped SHA-256 protocol, blinded matched sham/active sequences and immutable raw telemetry; `kozyrev_mirror_claim_test.py` for eligible paired continuous endpoints | Recorded consent when applicable; independent timing and hash checks; sham parity; pre-fixed detectable effect and null rejection; no unplanned model switching | **Runner source written**, no independent registration or physical data |
 | **P4 — Torsion-specific mechanism bridge** | Selected metric/connection model, spin-density source term, constitutive prediction, laboratory observable and nuisance budget | Distinct, dimensionful nonzero prediction; plain mechanical/EM/thermal/acoustic models excluded by preregistered discriminators; independent model reproduction | **OPEN — highest scientific cut** |
 | **P5 — Prospective independent replication** | New apparatus/operator, held-out blinded dataset, error budget, adversarial review and statistical reporting including nulls | Replication on preregistered same observable and matched calibration; no leakage or uncontrolled field coupling | **OPEN** |
