@@ -42,6 +42,26 @@ The focused TOE root imports it directly.
 `DASHI.Unifier` exposes proof aliases only.
 It does not use its historical axiom-shaped interfaces as proof authority.
 
+### Canonical invariant handoff
+
+The bridge also exposes:
+
+`GovernedLegalWorkflowTOEInvariantHandoff`
+
+The canonical inhabitant is:
+
+`canonicalGovernedLegalWorkflowTOEInvariantHandoff`
+
+This handoff binds the existing governance boundary, promotion boundary, and ZKP receipt to the same TOE surface.
+
+It also carries the existing task, review, runtime, admission, publication, Casey, formal-proof, and execution-authority firewalls.
+
+It adds no new legal semantics.
+
+It adds no new proof authority.
+
+The focused TOE root and `DASHI.Unifier` expose aliases to this same canonical inhabitant.
+
 ## S — Safety invariants
 
 - Task completion does not create world truth.
@@ -99,6 +119,14 @@ ITIL, ISO 9000, ISO/IEC 42001, ISO/IEC 27001, ISO/IEC 27701, ISO/IEC 23894, ISO 
 The bridge does not claim certification against those standards.
 
 The bridge does not create a separate standards ontology.
+
+NIST AI RMF remains a risk-management lens.
+
+Its Govern, Map, Measure, and Manage functions do not create certification.
+
+ISO/IEC 42001 remains an AI management-system lens.
+
+ISO/IEC 23894 remains an AI risk-management guidance lens.
 
 The external repositories `meta-introspector/zkperf`, `meta-introspector/zos-server`, `meta-introspector/erdfa-py`, and `meta-introspector/aristotle-cli-rs` remain attributed tooling and process context only.
 
