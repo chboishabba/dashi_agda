@@ -12,8 +12,7 @@ import DASHI.Core.ITIRInvestigationAcquisitionParetoExact as Investigation
 import DASHI.Core.ITIRInvestigationWorkbenchProjectionExact as Workbench
 import DASHI.Interop.SLRReviewedEvidencePaymentExact as ReviewedEvidence
 import DASHI.Wikimedia.MaboReviewedEvidencePaymentExact as MaboEvidence
-import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact as IbrahimIndependence
-import DASHI.Wikimedia.IbrahimSnowballInformationCascadeEvidenceDependencyHyperfabricBidiExact as IbrahimDependency
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Interop.SLRLegalRuntimeCapstoneExact as LegalRuntime
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Cognition.PNF.ITIRRelationalInterlinguaConsumerFibreExact as Relational
@@ -53,15 +52,10 @@ receiptUsesCanonicalMaboReview :
   ≡ MaboEvidence.maboParticipantIdentityReview
 receiptUsesCanonicalMaboReview = refl
 
-receiptUsesCanonicalIbrahimIndependence :
-  TOE.ibrahimSourceIndependenceBoundary TOE.canonicalSCALEEvidenceReviewTOEReceipt
-  ≡ IbrahimIndependence.canonicalEvidenceSynthesisSourceIndependenceParetoBoundary
-receiptUsesCanonicalIbrahimIndependence = refl
-
-receiptUsesCanonicalIbrahimDependency :
-  TOE.ibrahimDependencyBoundary TOE.canonicalSCALEEvidenceReviewTOEReceipt
-  ≡ IbrahimDependency.canonicalInformationCascadeEvidenceDependencyHyperfabricBoundary
-receiptUsesCanonicalIbrahimDependency = refl
+receiptUsesCanonicalPNFSourceBoundary :
+  TOE.pnfSourceBoundary TOE.canonicalSCALEEvidenceReviewTOEReceipt
+  ≡ PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+receiptUsesCanonicalPNFSourceBoundary = refl
 
 receiptUsesCanonicalLegalRuntime :
   TOE.legalRuntimeBoundary TOE.canonicalSCALEEvidenceReviewTOEReceipt
