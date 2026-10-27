@@ -6,6 +6,7 @@ open import Data.Empty using (⊥)
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as Handoff
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as Legal
 import DASHI.Unified.PNFSourceBoundaryTOEExact as Source
+import DASHI.Unifier as Unifier
 
 legalHandoffIsCanonical :
   Handoff.legalWorkflowInvariantHandoff
@@ -53,3 +54,23 @@ admissionAuthorityAliasIsExact :
   Legal.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 admissionAuthorityAliasIsExact =
   Handoff.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
+
+unifierHandoffIsCanonical :
+  Unifier.unifierGovernedLegalWorkflowSourceGenealogyHandoff
+  ≡ Handoff.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+unifierHandoffIsCanonical = refl
+
+unifierPerceivedIndependenceAliasIsExact :
+  Source.PerceivedIndependenceMeansActualIndependence → ⊥
+unifierPerceivedIndependenceAliasIsExact =
+  Unifier.unifierLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence
+
+unifierRepetitionAliasIsExact :
+  Source.RepetitionMeansIndependentEvidence → ⊥
+unifierRepetitionAliasIsExact =
+  Unifier.unifierLegalRepetitionDoesNotCreateIndependentEvidence
+
+unifierCommonSourceAliasIsExact :
+  Source.CommonSourceMeansNoEvidence → ⊥
+unifierCommonSourceAliasIsExact =
+  Unifier.unifierLegalCommonSourceDoesNotEraseEvidence
