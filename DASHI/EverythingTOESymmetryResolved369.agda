@@ -8,3 +8,18 @@ module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
+
+-- Reuse the existing exact finite GR/quantum proof-term regression.
+-- It contains a terminal physical non-promotion theorem.
+-- Do not replace this import with DASHI.Unifier placeholder axioms.
+import DASHI.Unified.GRQuantumProofTermRegression
+import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
+import DASHI.Unified.NSABCDTOENonPromotionBridgeValidation
+
+open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Equality using (_≡_)
+
+toeNavierStokesClayPromotionRemainsFalse :
+  DASHI.Physics.Closure.NSABCDMaxCut20261002Exact.clayPromotion ≡ false
+toeNavierStokesClayPromotionRemainsFalse =
+  NSABCDTOE.nsClayPromotionRemainsFalse
