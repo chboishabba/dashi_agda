@@ -96,17 +96,28 @@ balabanStressPairingPhysicalWeldLevel =
 -- Exact fail-closed RG and continuum boundaries.
 ------------------------------------------------------------------------
 
-balabanRGBlockSpinTransferStillOpen :
+balabanRGBlockSpinTransferOpenFlag : Bool
+balabanRGBlockSpinTransferOpenFlag =
   RGFrontier.balabanBlockSpinTransferProved
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+
+balabanRGContinuumConstructionOpenFlag : Bool
+balabanRGContinuumConstructionOpenFlag =
+  RGFrontier.continuumYangMillsConstructedHere
+    RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+
+balabanRGClayPromotionFlag : Bool
+balabanRGClayPromotionFlag =
+  RGFrontier.clayYangMillsPromoted
+    RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+
+balabanRGBlockSpinTransferStillOpen :
+  balabanRGBlockSpinTransferOpenFlag ≡ false
 balabanRGBlockSpinTransferStillOpen =
   RGFrontier.canonicalBalabanRGScaleTransferBlockSpinStillOpen
 
 balabanRGContinuumConstructionStillOpen :
-  RGFrontier.continuumYangMillsConstructedHere
-    RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+  balabanRGContinuumConstructionOpenFlag ≡ false
 balabanRGContinuumConstructionStillOpen =
   RGFrontier.continuumYangMillsConstructedHereIsFalse
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
@@ -121,9 +132,7 @@ balabanRGContinuumMassGapStillOpen =
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
 
 balabanRGClayPromotionStillFalse :
-  RGFrontier.clayYangMillsPromoted
-    RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+  balabanRGClayPromotionFlag ≡ false
 balabanRGClayPromotionStillFalse =
   RGFrontier.canonicalBalabanRGScaleTransferNoClayPromotion
 
