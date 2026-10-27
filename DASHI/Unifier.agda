@@ -2,6 +2,7 @@ module DASHI.Unifier where
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 import DASHI.Unified.Relate369HyperfabricPantsTOEExact as Relate369PantsTOE
+import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as MaxCutTOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -606,3 +607,168 @@ relate369HyperfabricPantsReceipt :
   Relate369PantsTOE.Relate369HyperfabricPantsTOEReceipt
 relate369HyperfabricPantsReceipt =
   Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEReceipt
+
+
+------------------------------------------------------------------------
+-- Repo state-space formalisation exact facade.
+--
+-- These aliases consume the normalized theorem owner.
+-- Historical Unifier axiom-shaped records remain non-authoritative.
+------------------------------------------------------------------------
+
+import DASHI.Unified.RepoStateSpaceTOEConvergenceExact as RepoStateSpaceTOE
+import DASHI.Interop.PNFHyperfabric369 as RepoStatePNF369
+import DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531Exact as RepoStateNS369
+import DASHI.Physics.Closure.YMClayPromotionBoundary as RepoStateYMClay
+
+unifierRepoStateSpaceZKPFrame :
+  RepoStateSpaceTOE.RepoStateSpaceTOEZKPFrame
+unifierRepoStateSpaceZKPFrame =
+  RepoStateSpaceTOE.canonicalRepoStateSpaceTOEZKPFrame
+
+unifierRepoStateSpaceHyperfabricDoesNotPromote :
+  (object : RepoStatePNF369.HyperfabricObject) →
+  RepoStatePNF369.hyperfabricPromotesExternalTheorem object ≡ false
+unifierRepoStateSpaceHyperfabricDoesNotPromote =
+  RepoStateSpaceTOE.hyperfabricDoesNotPromoteExternalTheorem
+
+unifierRepoStateSpaceNSRawManifoldEqualityStillBlocked :
+  RepoStateNS369.round531RawManifoldPointEqualityClaimed ≡ false
+unifierRepoStateSpaceNSRawManifoldEqualityStillBlocked =
+  RepoStateSpaceTOE.nsRawManifoldEqualityIsNotClaimed
+
+unifierRepoStateSpaceNSClayPromotionStillBlocked :
+  RepoStateNS369.round531ClayPromotion ≡ false
+unifierRepoStateSpaceNSClayPromotionStillBlocked =
+  RepoStateSpaceTOE.nsClayPromotionIsNotCreatedBy369
+
+unifierRepoStateSpaceYMClayPromotionStillBlocked :
+  RepoStateYMClay.clayYangMillsPromoted ≡ false
+unifierRepoStateSpaceYMClayPromotionStillBlocked =
+  RepoStateSpaceTOE.ymClayPromotionStillClosed
+
+
+------------------------------------------------------------------------
+-- Acyclic Max Cut / kernel-BIDI / ternary-27 facade.
+------------------------------------------------------------------------
+
+unifierTOE369MaxCutZKPFrame : MaxCutTOE.TOE369MaxCutZKPFrame
+unifierTOE369MaxCutZKPFrame = MaxCutTOE.canonicalTOE369MaxCutZKPFrame
+
+unifierTOE369MaxCutReceipt : MaxCutTOE.TOE369MaxCutReceipt
+unifierTOE369MaxCutReceipt = MaxCutTOE.canonicalTOE369MaxCutReceipt
+
+open MaxCutTOE public using
+  ( toeFullGradeDimensionDoesNotCreateFaithfulness
+  ; toeFullGradeSameCarrierDoesNotCreateActionAgreement
+  ; toeFullGradeCharacterDoesNotCreateActionAgreement
+  ; toeProjectedDimensionDoesNotCreateAction
+  ; toeCoordinateRetractionDoesNotCreateProjectedAction
+  ; toeProjectedCharacterDoesNotCreateAction
+  ; toeKernelTrace53DoesNotIdentify3B
+  ; toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+  ; toeKernelActualZetaRecognitionStillOpen
+  ; toeSelectedSameElementClass3BStillOpen
+  ; toeSingleActionProducerStillOpen
+  ; toeFiniteChartDoesNotCreateLinearMultiplicityAction
+  ; toeNinetySlicesDoNotCreatePermutationRepresentation
+  ; toeSchrodingerHomBindingsStillOpen
+  ; toeSchrodingerHZetaRecognitionStillOpen
+  ; toeSchrodingerHZetaActionIntertwinerStillOpen
+  ; toeSchrodingerCanonicalHomWeldStillOpen
+  ; toeTernary27PhaseReductionIsNotGlobalInversion
+  ; toeTernary27OrbitIndexingIsNotSemanticIdentity
+  ; toeTernary27ReductionIsNotMonster42SameObject
+  ; literalCFFITheoremWasNotInvented
+  ; toeWholeCharacterEqualityDoesNotCreateWholeIso
+  ; toeWholeIsoDoesNotCreateConcreteActionRecognition
+  ; toeWholeCharacterDirectIsotypicBridgeStillOpen
+  ; toeWholeCharacterActualKernelReplayStillOpen
+  ; toePrimarySupplementKernelClassTwentyPaid
+  ; toeInvariantDiagonalKernelSubgroupPaid
+  ; toePaidKernelDoesNotRequireAbsoluteSignName
+  ; toeTwelveSeventyEightCharacterAlreadyPaid
+  ; toeGenericCharacterMultiplicitySourceWritten
+  ; toeActualTwelveSeventyEightLinearIntertwinerStillOpen
+  ; toeLeanFDRepAdapterSourceWritten
+  ; toeLeanFDRepSubmoduleAdapterSourceWritten
+  ; toeLeanFDRepAdapterKernelReceiptStillUnobserved
+  ; toeLeanFDRepAdapterAgdaTransportStillUnobserved
+  ; toeSimpleSourceClassifierSourceWritten
+  ; toeSimpleSourceClassifierKernelStillUnobserved
+  ; toeCharacterMultiplicityLemmasSourceWritten
+  ; toeCharacterMultiplicityKernelStillUnobserved
+  ; toeTwoIsotypicAgdaTransportStillOpen
+  ; toeActualMonsterFin90SameActionAttachmentStillOpen
+  ; toeCanonicalSelected3BLinearRouteCompilerOutput
+  ; toeNormalizerMonsterCarrierBidiCompilerOutput
+  ; toeOnlyOneSelected3BActionEquationRemainsAfterCore
+  ; toeCanonicalSelected3BLinearCoreStillUninhabited
+  ; toeSelected3BActionIntertwiningStillUninhabited
+  ; toeSelected3BLinearCompletionStillUninhabited
+  ; toeOutgoingLinearAcquisitionStillUninhabited
+  ; toeOutgoingActualLinearActionStillOpen
+  ; toeOutgoingSourceNativeInertiaSameActionStillOpen
+  ; toeOutgoingTwelveSeventyEightIntertwinerStillOpen
+  ; toeAcquisitionCoreCompilerAlreadyOwned
+  ; toeAcquisitionCoreCompilesSameElementComposition
+  ; toeAcquisitionNormalizerCarrierBidiCompilerPaid
+  ; toeAcquisitionOnlyActionIntertwiningRemains
+  ; toeAcquisitionSourceNativePayloadRetained
+  ; toeAcquisitionTwelveSeventyEightPayloadRetained
+  ; toeAcquisitionCoreStillUninhabited
+  ; toeAcquisitionActionIntertwiningStillUninhabited
+  ; toeHistoricalCoreNeedsExplicitHomWeld
+  ; toeHistoricalCorePlusHomWeldCompilesCanonicalCore
+  ; toeHistoricalActionEquationCompilesCanonicalAction
+  ; toePhaseResolvedTwelveMultiplicityPaid
+  ; toePhaseResolvedSeventyEightMultiplicityPaid
+  ; toePhaseResolvedMatricesStillOpen
+  ; toePhaseResolvedSameActionIntertwinerStillOpen
+  ; toeActualLinearActionStillOpen
+  ; toeActualSourceNativeInertiaSameActionStillOpen
+  ; toeActualSameActionTwelveSeventyEightIntertwinerStillOpen
+  ; toeVOAKernelRecognizedAttachmentStillOpen
+  ; toeVOANormalizerMonsterActionWeldStillOpen
+  ; toeVOATwelveSeventyEightIntertwinerStillOpen
+  ; toeShortestSourceContainsActualZetaRecognition
+  ; toeShortestSourceCompilesSingleActionProducer
+  ; toeShortestSourceCompilesActualActionRecognition
+  ; toeSeparateActualActionRecognitionLeafNotNeeded
+  ; toeRecognitionDoesNotCompileMultiplicityInertia
+  ; toeBase369CandidateCompilesRecognition
+  ; toeBase369CandidateCompilesCapstoneTail
+  ; toeBase369ShortestCandidateStillUninhabited
+  ; toeCharacterIsotypyDoesNotCreateBase369Candidate
+  ; toeRecognitionAcquisitionTargetLocalized
+  ; toeRecognitionCompilerAvailableAtWall
+  ; toeActualBase369RecognitionCandidateStillOpen
+  ; toeOEISDoesNotCreateBase369RecognitionCandidate
+  ; toeDimensionDoesNotCreateRecognitionIntertwiners
+  ; toeTernary27OriginPlus26CarrierPaid
+  ; toeTernary27AlbertShapeSameCarrierPaid
+  ; toeTernary27OriginMapsToScalarSummand
+  ; toeTernary27JordanProductStillOpen
+  ; toeTernary27F4ActionStillOpen
+  ; toeTernary27E6ActionStillOpen
+  ; esdSurfaceWasNotEdited
+  )
+
+------------------------------------------------------------------------
+-- Exact non-factorability: loss cannot be repaired by recharting.
+-- Original theorem ownership remains with IntersectionalNonFactorability.
+------------------------------------------------------------------------
+
+open import Data.Empty using (⊥)
+import DASHI.Core.IntersectionalNonFactorability as RepoStateNonFactorUnifier
+
+unifierRechartCannotRecoverErasedPhenomenon :
+  ∀ {Recharted : Set} →
+  (rechart : RepoStateNonFactorUnifier.FlatSingleAxis → Recharted) →
+  RepoStateNonFactorUnifier.FactorsThrough
+    (λ state → rechart (RepoStateNonFactorUnifier.flatProjection state))
+    RepoStateNonFactorUnifier.relationalOutcome →
+  ⊥
+unifierRechartCannotRecoverErasedPhenomenon rechart =
+  RepoStateSpaceTOE.rechartCannotRecoverErasedPhenomenon
+    rechart RepoStateSpaceTOE.canonicalIntersectionalCollision
