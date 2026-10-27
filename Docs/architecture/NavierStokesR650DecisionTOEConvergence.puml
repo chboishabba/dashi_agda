@@ -1,0 +1,54 @@
+@startuml
+title Navier-Stokes R850-R853 decision frontier -> DASHI TOE
+
+package "Canonical theorem owners" {
+  [R850 Snapshot Identification] as R850
+  [R851 Finite-Real Codec] as R851
+  [R852 Degree-Two Coordinates] as R852
+  [R853 Selected-Rate Normal Form] as R853
+}
+
+package "Normalization" {
+  [NavierStokesR650DecisionTOEConvergenceExact] as N
+  [NavierStokesR650DecisionTOEConvergenceValidation] as V
+}
+
+package "TOE facades" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as U
+  [Unified.Physics] as P
+  [Unified.Everything] as E
+}
+
+R850 --> N : snapshot same-object\nstrictly negative at t=0
+R851 --> N : canonical finite-real encoding
+R852 --> N : literal degree <= 2 RHS coordinates
+R853 --> N : general live selected-rate normal form
+N --> TOE
+N --> U
+N --> P
+P --> E
+TOE --> V
+U --> V
+P --> V
+
+note right of N
+Preconditions:
+- R850-R853 owners exist
+
+Invariants:
+- snapshot negativity != real-time counterexample
+- finite-real encoding != Picard/continuation
+- pointwise normal form != integrated R823 decision
+- no ESD mutation
+- Clay promotion remains false
+
+Postconditions:
+- snapshot decision reachable
+- finite-real codec reachable
+- degree-two coordinate surface reachable
+- selected-rate normal form reachable
+- real trajectory weld remains open
+- integrated R823 decision remains open
+end note
+@enduml
