@@ -122,6 +122,7 @@ record YMImplementAToDTOEMaxCutReceipt : Set where
     gate4UnresolvedCountIs58 : gate4UnresolvedCount ≡ 58
     gate4DefinitionLevel : ProofLevel
     gate4InhabitantsLevel : ProofLevel
+    gate4PaidReductionLevel : ProofLevel
 
     -- Exact non-promotion.
     publishedContinuumPromotion : Bool
@@ -224,6 +225,8 @@ canonicalYMImplementAToDTOEMaxCutReceipt = record
       Joint.gate4CutsetDefinitionLevel
   ; gate4InhabitantsLevel =
       Joint.gate4CutsetInhabitantsLevel
+  ; gate4PaidReductionLevel =
+      Joint.gate4PaidReductionLedgerLevel
 
   ; publishedContinuumPromotion =
       Joint.publishedContinuumPromotion
@@ -285,7 +288,7 @@ canonicalYMImplementAToDZKPFrame = record
   ; P-proposal =
       "Expose one A-D receipt through the TOE root, Unifier, Unified.Physics, and Unified.Everything."
   ; G-gap =
-      "Only the canonical 58 Gate-4 physical fields are the requested target scope; continuum, mass-gap, and Clay promotion stay fail-closed."
+      "The Round-6 reduction ledger is paid and machine checked. The canonical 58 Gate-4 physical field inhabitants remain conditional; continuum, mass-gap, and Clay promotion stay fail-closed."
   ; F-follow-up =
       "Run the repository referee and Agda kernel checks on the exact branch head."
   ; reuseFirst = true
