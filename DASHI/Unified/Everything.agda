@@ -1,4 +1,7 @@
 module DASHI.Unified.Everything where
+import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
+import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 
@@ -205,3 +208,59 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- RH transformed-prime / three-tap normalized aggregate reachability.
+------------------------------------------------------------------------
+
+unifiedRHCompletedTraceCrossPollinationBoundary :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
+unifiedRHCompletedTraceCrossPollinationBoundary =
+  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+
+unifiedRHPrimeActivationRequiresFirstPrimeSupport :
+  RHPrimeAudit.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+unifiedRHPrimeActivationRequiresFirstPrimeSupport =
+  RHPrimeAudit.firstPrimeSupportNecessary
+
+unifiedRHHeisenbergTraceTransportStillBlocked :
+  RHPrimeAudit.actualHeisenbergTraceEqualsSelectedZetaFunctional
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifiedRHHeisenbergTraceTransportStillBlocked =
+  RHPrimeAudit.noUnjustifiedAnalyticTransport
+
+unifiedRHThreeTapCurrentLeanFrontier :
+  RHThreeTapFrontier.ThreeTapCurrentLeanFrontier
+unifiedRHThreeTapCurrentLeanFrontier =
+  RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier
+
+unifiedRHThreeTapA2StrictScalarStillOpen :
+  RHThreeTapFrontier.a2StrictScalarPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+unifiedRHThreeTapA2StrictScalarStillOpen =
+  RHThreeTapFrontier.a2ScalarIsStillOpen
+
+unifiedRHSignedFifthRouteStillOpen :
+  RHThreeTapFrontier.routeBEventualGapPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+unifiedRHSignedFifthRouteStillOpen =
+  RHThreeTapFrontier.routeBIsStillOpen
+
+unifiedRHThreeTapTerminalBoundary :
+  RHTerminal.ThreeTapTerminalCompletionBoundary
+unifiedRHThreeTapTerminalBoundary =
+  RHTerminal.canonicalThreeTapTerminalCompletionBoundary
+
+unifiedRHThreeTapTerminalStrictSignStillOpen :
+  RHTerminal.transformedTerminalStrictSignPaid
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+unifiedRHThreeTapTerminalStrictSignStillOpen =
+  RHTerminal.strictTerminalSignStillOpen
+
+unifiedRHThreeTapTerminalDoesNotPromoteRH :
+  RHTerminal.rhDerivedHere
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+unifiedRHThreeTapTerminalDoesNotPromoteRH =
+  RHTerminal.rhStillOpen
