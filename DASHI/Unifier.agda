@@ -1337,8 +1337,6 @@ unifierHistoricalGate4CountSelectedAsFleetTarget =
   FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
 
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.EqualCardinality.equalCardinalitySelectsCanonicalMap
-    FleetHyperTOE.fleetGate4EqualCardinalityBoundary
-  ≡ false
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
