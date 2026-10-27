@@ -52,6 +52,8 @@ import DASHI.Physics.Closure.NSABCDMaxCut20261007Exact as ABCD
 import DASHI.Physics.Closure.NSCanonicalClayResidualExact as Canonical
 import DASHI.Physics.Closure.NSClayDistanceFinalReceipt as Distance
 import DASHI.Physics.Closure.NSAuthorityConsistencyGuard as Guard
+import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as Roadmap
+import DASHI.Physics.Closure.NSClaySubmissionEligibilityRoadmapReceipt as Eligibility
 import DASHI.Physics.Closure.NSTriadKNR650CurrentSharedWeightedWallRound736Exact as R736
 
 open Distance public using (NSClayDistanceFinalPromotion)
@@ -289,6 +291,74 @@ currentSharedWeightedClayPromotionStillFalse :
   currentSharedWeightedClayPromotion ≡ false
 currentSharedWeightedClayPromotionStillFalse =
   R736.round736ClayPromotionIsFalse
+
+------------------------------------------------------------------------
+-- Canonical roadmap and submission-eligibility reconciliation.
+------------------------------------------------------------------------
+
+navierStokesRoadmapReceipt :
+  Roadmap.ClayNSProofRoadmapReceipt
+navierStokesRoadmapReceipt =
+  Roadmap.canonicalClayNSProofRoadmapReceipt
+
+navierStokesRoadmapClayStillFalse :
+  Roadmap.clayNavierStokesPromoted navierStokesRoadmapReceipt ≡ false
+navierStokesRoadmapClayStillFalse =
+  Roadmap.clayNSRoadmapKeepsClayFalse
+
+navierStokesRoadmapTerminalStillFalse :
+  Roadmap.terminalClaimPromoted navierStokesRoadmapReceipt ≡ false
+navierStokesRoadmapTerminalStillFalse =
+  Roadmap.clayNSRoadmapKeepsTerminalFalse
+
+navierStokesSubmissionEligibilityReceipt :
+  Eligibility.NSClaySubmissionEligibilityRoadmapReceipt
+navierStokesSubmissionEligibilityReceipt =
+  Eligibility.canonicalNSClaySubmissionEligibilityRoadmapReceipt
+
+continuumBKMPassageConstructed : Bool
+continuumBKMPassageConstructed =
+  Eligibility.continuumBKMPassageConstructed
+    navierStokesSubmissionEligibilityReceipt
+
+continuumBKMPassageStillOpen :
+  continuumBKMPassageConstructed ≡ false
+continuumBKMPassageStillOpen =
+  Eligibility.continuumBKMPassageConstructedIsFalse
+    navierStokesSubmissionEligibilityReceipt
+
+allDataBridgeConstructed : Bool
+allDataBridgeConstructed =
+  Eligibility.allDataBridgeConstructed
+    navierStokesSubmissionEligibilityReceipt
+
+allDataBridgeStillOpen :
+  allDataBridgeConstructed ≡ false
+allDataBridgeStillOpen =
+  Eligibility.allDataBridgeConstructedIsFalse
+    navierStokesSubmissionEligibilityReceipt
+
+submissionPacketReady : Bool
+submissionPacketReady =
+  Eligibility.submissionPacketReady
+    navierStokesSubmissionEligibilityReceipt
+
+submissionPacketStillNotReady :
+  submissionPacketReady ≡ false
+submissionPacketStillNotReady =
+  Eligibility.submissionPacketReadyIsFalse
+    navierStokesSubmissionEligibilityReceipt
+
+clayEligible : Bool
+clayEligible =
+  Eligibility.clayEligible
+    navierStokesSubmissionEligibilityReceipt
+
+clayEligibilityStillFalse :
+  clayEligible ≡ false
+clayEligibilityStillFalse =
+  Eligibility.clayEligibleIsFalse
+    navierStokesSubmissionEligibilityReceipt
 
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F process frame.
