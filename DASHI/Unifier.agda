@@ -465,3 +465,56 @@ unifierYangMillsStressShellEnergyHilbertLevel =
 unifierYangMillsLiteralStressActivityEntropyLevel : ProofLevel
 unifierYangMillsLiteralStressActivityEntropyLevel =
   YMTOE.toeLiteralStressActivityEntropyInstantiationLevel
+
+
+------------------------------------------------------------------------
+-- Authoritative Goal-1 R474 frontier via normalized R559 owner.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1A1CurrentStepBetaSourceLevel : ProofLevel
+unifierYangMillsGoal1A1CurrentStepBetaSourceLevel =
+  YMTOE.toeGoal1A1CurrentStepBetaSourceLevel
+
+unifierYangMillsGoal1A3SameFamilyContinuumAndOSLevel : ProofLevel
+unifierYangMillsGoal1A3SameFamilyContinuumAndOSLevel =
+  YMTOE.toeGoal1A3SameFamilyContinuumAndOSLevel
+
+unifierYangMillsGoal1BLiteralPublishedSelectedLocalizationLevel : ProofLevel
+unifierYangMillsGoal1BLiteralPublishedSelectedLocalizationLevel =
+  YMTOE.toeGoal1BLiteralPublishedSelectedLocalizationLevel
+
+unifierYangMillsGoal1BPhysicalRateSemanticsLevel : ProofLevel
+unifierYangMillsGoal1BPhysicalRateSemanticsLevel =
+  YMTOE.toeGoal1BPhysicalRateSemanticsLevel
+
+unifierYangMillsGoal1BFiniteToPositiveTransferGapCompilerLevel : ProofLevel
+unifierYangMillsGoal1BFiniteToPositiveTransferGapCompilerLevel =
+  YMTOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
+
+unifierYangMillsGoal1CExactSameFamilySourceCutLevel : ProofLevel
+unifierYangMillsGoal1CExactSameFamilySourceCutLevel =
+  YMTOE.toeGoal1CExactSameFamilySourceCutLevel
+
+unifierYangMillsGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
+unifierYangMillsGoal1G1ArbitraryCompactSimpleSourceMapLevel =
+  YMTOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
+
+unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
+unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel =
+  YMTOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
+
+unifierYangMillsGoal1CurrentFrontierCompilerLevel : ProofLevel
+unifierYangMillsGoal1CurrentFrontierCompilerLevel =
+  YMTOE.toeGoal1CurrentFrontierCompilerLevel
+
+unifierYangMillsGoal1ProjectiveProkhorovMandatory :
+  YMTOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
+unifierYangMillsGoal1ProjectiveProkhorovMandatory = refl
+
+unifierYangMillsGoal1PostHocCMP116MagnitudeEqualityMandatory :
+  YMTOE.toeGoal1PostHocCMP116MagnitudeEqualityMandatory ≡ false
+unifierYangMillsGoal1PostHocCMP116MagnitudeEqualityMandatory = refl
+
+unifierYangMillsGoal1IndependentFourthCumulantMandatory :
+  YMTOE.toeGoal1IndependentFourthCumulantMandatory ≡ false
+unifierYangMillsGoal1IndependentFourthCumulantMandatory = refl
