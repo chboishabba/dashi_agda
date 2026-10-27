@@ -11,6 +11,26 @@ open import Data.Unit using (⊤; tt)
 -- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 
+open BalabanRGTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
+
 balabanRGBlockSpinTransferStillOpen :
   BalabanRGTOE.balabanRGBlockSpinTransferOpenFlag ≡ false
 balabanRGBlockSpinTransferStillOpen =
