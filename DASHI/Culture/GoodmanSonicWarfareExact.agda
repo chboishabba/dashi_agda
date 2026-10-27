@@ -24,6 +24,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -57,7 +58,7 @@ goodmanSources = Attr.mkSourceAtlas
   "Goodman Sonic Warfare"
   "Steve Goodman, MIT Press; DASHI application reconstruction"
   (goodmanSource ∷ [])
-  "34 chapters and conclusion; claims indexed separately in Docs/papers/GoodmanSonicWarfare.md"
+  "34 numbered chapters, including chapter 34 conclusion; all indexed below and in Docs/papers/GoodmanSonicWarfare.md"
 
 sourceCitationDoesNotPromote :
   (validation : String) →
@@ -149,6 +150,250 @@ claims =
     "distinguish masked, inaudible, tactile and not-yet-realised possibilities"
     "a philosophical virtual possibility is not a detected signal"
   ∷ []
+
+------------------------------------------------------------------------
+-- EXHAUSTIVE SOURCE-INDEXED CHAPTER CONSUMER (34 NUMBERED CHAPTERS)
+--
+-- The source's final chapter is its conclusion, not an additional 35th
+-- chapter. Each constructor selects exactly one printed chapter. Total
+-- coverage is a finite registry; it does NOT certify every claim in that
+-- chapter or promote a fictional chapter-date to a historical event.
+------------------------------------------------------------------------
+
+data SonicChapter : Set where
+  chapter01 : SonicChapter
+  chapter02 : SonicChapter
+  chapter03 : SonicChapter
+  chapter04 : SonicChapter
+  chapter05 : SonicChapter
+  chapter06 : SonicChapter
+  chapter07 : SonicChapter
+  chapter08 : SonicChapter
+  chapter09 : SonicChapter
+  chapter10 : SonicChapter
+  chapter11 : SonicChapter
+  chapter12 : SonicChapter
+  chapter13 : SonicChapter
+  chapter14 : SonicChapter
+  chapter15 : SonicChapter
+  chapter16 : SonicChapter
+  chapter17 : SonicChapter
+  chapter18 : SonicChapter
+  chapter19 : SonicChapter
+  chapter20 : SonicChapter
+  chapter21 : SonicChapter
+  chapter22 : SonicChapter
+  chapter23 : SonicChapter
+  chapter24 : SonicChapter
+  chapter25 : SonicChapter
+  chapter26 : SonicChapter
+  chapter27 : SonicChapter
+  chapter28 : SonicChapter
+  chapter29 : SonicChapter
+  chapter30 : SonicChapter
+  chapter31 : SonicChapter
+  chapter32 : SonicChapter
+  chapter33 : SonicChapter
+  chapter34 : SonicChapter
+
+allSonicChapters : List SonicChapter
+allSonicChapters =
+  chapter01 ∷
+  chapter02 ∷
+  chapter03 ∷
+  chapter04 ∷
+  chapter05 ∷
+  chapter06 ∷
+  chapter07 ∷
+  chapter08 ∷
+  chapter09 ∷
+  chapter10 ∷
+  chapter11 ∷
+  chapter12 ∷
+  chapter13 ∷
+  chapter14 ∷
+  chapter15 ∷
+  chapter16 ∷
+  chapter17 ∷
+  chapter18 ∷
+  chapter19 ∷
+  chapter20 ∷
+  chapter21 ∷
+  chapter22 ∷
+  chapter23 ∷
+  chapter24 ∷
+  chapter25 ∷
+  chapter26 ∷
+  chapter27 ∷
+  chapter28 ∷
+  chapter29 ∷
+  chapter30 ∷
+  chapter31 ∷
+  chapter32 ∷
+  chapter33 ∷
+  chapter34 ∷
+  []
+
+chapterPrintedPage : SonicChapter → Nat
+chapterPrintedPage chapter01 = 1
+chapterPrintedPage chapter02 = 5
+chapterPrintedPage chapter03 = 15
+chapterPrintedPage chapter04 = 27
+chapterPrintedPage chapter05 = 31
+chapterPrintedPage chapter06 = 35
+chapterPrintedPage chapter07 = 41
+chapterPrintedPage chapter08 = 45
+chapterPrintedPage chapter09 = 49
+chapterPrintedPage chapter10 = 55
+chapterPrintedPage chapter11 = 59
+chapterPrintedPage chapter12 = 63
+chapterPrintedPage chapter13 = 69
+chapterPrintedPage chapter14 = 75
+chapterPrintedPage chapter15 = 81
+chapterPrintedPage chapter16 = 85
+chapterPrintedPage chapter17 = 91
+chapterPrintedPage chapter18 = 95
+chapterPrintedPage chapter19 = 99
+chapterPrintedPage chapter20 = 105
+chapterPrintedPage chapter21 = 109
+chapterPrintedPage chapter22 = 113
+chapterPrintedPage chapter23 = 117
+chapterPrintedPage chapter24 = 123
+chapterPrintedPage chapter25 = 129
+chapterPrintedPage chapter26 = 133
+chapterPrintedPage chapter27 = 141
+chapterPrintedPage chapter28 = 149
+chapterPrintedPage chapter29 = 155
+chapterPrintedPage chapter30 = 163
+chapterPrintedPage chapter31 = 171
+chapterPrintedPage chapter32 = 177
+chapterPrintedPage chapter33 = 183
+chapterPrintedPage chapter34 = 189
+
+chapterTitle : SonicChapter → String
+chapterTitle chapter01 = "1998: A Conceptual Event"
+chapterTitle chapter02 = "2001: What Is Sonic Warfare?"
+chapterTitle chapter03 = "2400-1400 BC: Project Jericho"
+chapterTitle chapter04 = "1946: Sonic Dominance"
+chapterTitle chapter05 = "1933: Abusing the Military-Entertainment Complex"
+chapterTitle chapter06 = "403-221 BC: The Logistics of Deception"
+chapterTitle chapter07 = "1944: The Ghost Army"
+chapterTitle chapter08 = "1842: Sonic Effects"
+chapterTitle chapter09 = "1977: A Sense of the Future"
+chapterTitle chapter10 = "1913: The Art of War in the Art of Noise"
+chapterTitle chapter11 = "1989: Apocalypse Then"
+chapterTitle chapter12 = "1738: Bad Vibrations"
+chapterTitle chapter13 = "1884: Dark Precursor"
+chapterTitle chapter14 = "1999: Vibrational Anarchitecture"
+chapterTitle chapter15 = "13.7 Billion BC: The Ontology of Vibrational Force"
+chapterTitle chapter16 = "1931: Rhythmanalysis"
+chapterTitle chapter17 = "1900: The Vibrational Nexus"
+chapterTitle chapter18 = "1929: Throbs of Experience"
+chapterTitle chapter19 = "1677: Ecology of Speeds"
+chapterTitle chapter20 = "99-50 BC: Rhythm out of Noise"
+chapterTitle chapter21 = "1992: The Throbbing Crowd"
+chapterTitle chapter22 = "1993: Vorticist Rhythmachines"
+chapterTitle chapter23 = "1946: Virtual Vibrations"
+chapterTitle chapter24 = "2012: Artificial Acoustic Agencies"
+chapterTitle chapter25 = "1877: Capitalism and Schizophonia"
+chapterTitle chapter26 = "1976: Outbreak"
+chapterTitle chapter27 = "1971: The Earworm"
+chapterTitle chapter28 = "2025: Deja Entendu"
+chapterTitle chapter29 = "1985: Dub Virology"
+chapterTitle chapter30 = "1928: Contagious Orality"
+chapterTitle chapter31 = "2020: Planet of Drums"
+chapterTitle chapter32 = "2003: Contagious Transmission"
+chapterTitle chapter33 = "2039: Holosonic Control"
+chapterTitle chapter34 = "Conclusion: Unsound - The (Sub)Politics of Frequency"
+
+chapterTheme : SonicChapter → SonicTheme
+chapterTheme chapter01 = historicalSonicForce
+chapterTheme chapter02 = historicalSonicForce
+chapterTheme chapter03 = historicalSonicForce
+chapterTheme chapter04 = historicalSonicForce
+chapterTheme chapter05 = deceptionAndInstitutionalPower
+chapterTheme chapter06 = deceptionAndInstitutionalPower
+chapterTheme chapter07 = deceptionAndInstitutionalPower
+chapterTheme chapter08 = physicalVibrationalCarrier
+chapterTheme chapter09 = embodiedAffectAndFear
+chapterTheme chapter10 = culturalRepetitionAndDub
+chapterTheme chapter11 = culturalRepetitionAndDub
+chapterTheme chapter12 = physicalVibrationalCarrier
+chapterTheme chapter13 = physicalVibrationalCarrier
+chapterTheme chapter14 = physicalVibrationalCarrier
+chapterTheme chapter15 = physicalVibrationalCarrier
+chapterTheme chapter16 = rhythmAndTemporalOrganisation
+chapterTheme chapter17 = rhythmAndTemporalOrganisation
+chapterTheme chapter18 = embodiedAffectAndFear
+chapterTheme chapter19 = rhythmAndTemporalOrganisation
+chapterTheme chapter20 = rhythmAndTemporalOrganisation
+chapterTheme chapter21 = embodiedAffectAndFear
+chapterTheme chapter22 = culturalRepetitionAndDub
+chapterTheme chapter23 = unsoundAndVirtualPossibility
+chapterTheme chapter24 = artificialAgencyAndBranding
+chapterTheme chapter25 = deceptionAndInstitutionalPower
+chapterTheme chapter26 = disseminationAndTransmission
+chapterTheme chapter27 = embodiedAffectAndFear
+chapterTheme chapter28 = unsoundAndVirtualPossibility
+chapterTheme chapter29 = culturalRepetitionAndDub
+chapterTheme chapter30 = disseminationAndTransmission
+chapterTheme chapter31 = rhythmAndTemporalOrganisation
+chapterTheme chapter32 = disseminationAndTransmission
+chapterTheme chapter33 = speculativeFuture
+chapterTheme chapter34 = unsoundAndVirtualPossibility
+
+chapterStatus : SonicChapter → ClaimStatus
+chapterStatus chapter01 = sourcePhilosophical
+chapterStatus chapter02 = sourcePhilosophical
+chapterStatus chapter03 = sourceHistoricalRequiresIndependentRecord
+chapterStatus chapter04 = sourceHistoricalRequiresIndependentRecord
+chapterStatus chapter05 = sourceHistoricalRequiresIndependentRecord
+chapterStatus chapter06 = sourceHistoricalRequiresIndependentRecord
+chapterStatus chapter07 = sourceHistoricalRequiresIndependentRecord
+chapterStatus chapter08 = sourcePhilosophical
+chapterStatus chapter09 = sourcePhilosophical
+chapterStatus chapter10 = aestheticCulturalInterpretation
+chapterStatus chapter11 = aestheticCulturalInterpretation
+chapterStatus chapter12 = sourcePhilosophical
+chapterStatus chapter13 = sourcePhilosophical
+chapterStatus chapter14 = sourcePhilosophical
+chapterStatus chapter15 = sourcePhilosophical
+chapterStatus chapter16 = sourcePhilosophical
+chapterStatus chapter17 = sourcePhilosophical
+chapterStatus chapter18 = sourcePhilosophical
+chapterStatus chapter19 = sourcePhilosophical
+chapterStatus chapter20 = sourcePhilosophical
+chapterStatus chapter21 = empiricalCandidate
+chapterStatus chapter22 = aestheticCulturalInterpretation
+chapterStatus chapter23 = sourcePhilosophical
+chapterStatus chapter24 = fictionalOrSpeculative
+chapterStatus chapter25 = sourcePhilosophical
+chapterStatus chapter26 = aestheticCulturalInterpretation
+chapterStatus chapter27 = empiricalCandidate
+chapterStatus chapter28 = fictionalOrSpeculative
+chapterStatus chapter29 = aestheticCulturalInterpretation
+chapterStatus chapter30 = aestheticCulturalInterpretation
+chapterStatus chapter31 = fictionalOrSpeculative
+chapterStatus chapter32 = aestheticCulturalInterpretation
+chapterStatus chapter33 = fictionalOrSpeculative
+chapterStatus chapter34 = sourcePhilosophical
+
+evidenceFor : ClaimStatus → String
+evidenceFor sourceHistoricalRequiresIndependentRecord = "Independent archive and event-specific provenance required"
+evidenceFor empiricalCandidate = "Instrument, preregistered question, confounders and independent replication required"
+evidenceFor fictionalOrSpeculative = "No real-world event or mechanism inferred from the source's dated scenario"
+evidenceFor aestheticCulturalInterpretation = "Preserve original musicians, writers, circulation lineage and context"
+evidenceFor sourcePhilosophical = "Source-bound argument; do not treat as physical or clinical measurement"
+evidenceFor dashIFiniteExample = "Constructive DASHI example, not human or historical validation"
+
+indexedChapterClaim : SonicChapter → SonicClaim
+indexedChapterClaim chapter = mkCandidate
+  (chapterTitle chapter)
+  "Source chapter, with exact printed start page in chapterPrintedPage"
+  (chapterTheme chapter)
+  (chapterStatus chapter)
+  (evidenceFor (chapterStatus chapter))
+  "Source-index fixture only; no independent physical, clinical, causal, historical or Monster-object authority"
 
 ------------------------------------------------------------------------
 -- P0 mirror: a surface label cannot establish its underlying referent.
