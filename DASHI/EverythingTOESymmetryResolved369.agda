@@ -556,6 +556,12 @@ toe369FullCubeRotationNotFree =
 toe369MonsterPhaseConjugationIntertwiner =
   MaxCut369.toe27MonsterPhaseConjugationIntertwiner
 
+toe369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+toe369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
 toe369Ternary27PhaseReductionNotGlobalInversion =
   MaxCut369.toe27PhaseReductionNotGlobalInversion
 
@@ -1097,3 +1103,41 @@ toeBalabanPhysicalPromotionCut =
   toeBalabanBlockSpinStillBlocked ,
   (toeBalabanUniformKPStillBlocked ,
    toeBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Fleet named-manifest acquisition boundary.
+------------------------------------------------------------------------
+
+toeFleetManifestAcquisitionDemand =
+  FleetGapTOE.fleetManifestAcquisitionDemand
+
+toeFleetNamedManifestStillMissing :
+  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
+toeFleetNamedManifestStillMissing =
+  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
+
+toeFleetPerGapDispatchStillBlocked :
+  FleetGapTOE.perGapDispatchEnabled ≡ false
+toeFleetPerGapDispatchStillBlocked =
+  FleetGapTOE.perGapDispatchEnabledIsFalse
+
+toeFleetRelatedSymbolsRequired :
+  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
+toeFleetRelatedSymbolsRequired =
+  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
+
+toeFleetDiscoverRequired :
+  FleetGapTOE.fleetDiscoverRequired ≡ true
+toeFleetDiscoverRequired =
+  FleetGapTOE.fleetDiscoverRequiredIsTrue
+
+toeFleetRoundLineageRequired :
+  FleetGapTOE.fleetRoundLineageRequired ≡ true
+toeFleetRoundLineageRequired =
+  FleetGapTOE.fleetRoundLineageRequiredIsTrue
+
+toeFleetCountDoesNotCreateNamedManifest :
+  FleetGapTOE.CountCreatesNamedManifest → ⊥
+toeFleetCountDoesNotCreateNamedManifest =
+  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
