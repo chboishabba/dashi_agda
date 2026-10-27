@@ -8,6 +8,9 @@ open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
 
+-- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
+import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+
 ¬ : Set → Set
 ¬ A = A → ⊥
 
