@@ -7,6 +7,12 @@ on:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/OggSSP2BTOEExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BPostSocleMaxCutExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantWeldLastEquationCompressionExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BTerminalRecognitionProductExact.agda'
+      - 'DASHI/Moonshine/OggSSP2B279FirewalledCrossPollinationExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -32,7 +38,9 @@ jobs:
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+            DASHI/Unified/OggSSP2BTOEExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -41,7 +49,15 @@ jobs:
             fi
           done
 
-      - name: Kernel-check TOE symmetry-resolved aggregate
+      - name: Kernel-check normalized Monster 2B TOE facade
         run: |
           agda --version
+          agda -i . -l standard-library DASHI/Unified/OggSSP2BTOEExact.agda
+
+      - name: Kernel-check TOE symmetry-resolved aggregate
+        run: |
           agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+
+      - name: Kernel-check Unifier consumer
+        run: |
+          agda -i . -l standard-library DASHI/Unifier.agda
