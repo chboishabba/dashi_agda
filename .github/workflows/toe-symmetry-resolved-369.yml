@@ -113,6 +113,15 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+          dashi-repo diagnose DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/ContextualSemanticFractranTOEMaxCutValidation.agda --root .
+          dashi-repo related canonicalContextualSemanticFractranTOEMaxCutReceipt --root . --limit 30
+          dashi-repo related canonicalThreadCoverage --root . --limit 30
+          dashi-repo related canonicalOrderSensitiveParetoTernaryBidiBoundary --root . --limit 30
+          dashi-repo related noAutomaticCoverageMonsterRepresentationPromotion --root . --limit 30
+          dashi-repo discover 'contextual FRACTRAN SSSP consumer quotient Pareto ternary residual Monster non-promotion 58 formal gaps' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.ContextualFractran --root .
+          dashi-repo lineage --prefix DASHI.Computation.SSSP --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -140,6 +149,9 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutValidation.agda
+            DASHI/Unified/PNFHyperfabric.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -163,6 +175,9 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutValidation.agda
+            DASHI/Unified/PNFHyperfabric.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
