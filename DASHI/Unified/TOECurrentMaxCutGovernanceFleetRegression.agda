@@ -8,8 +8,12 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as Cut
 
 gate4TargetRemains58 :
-  Cut.targetFormalGapCount ≡ 58
-gate4TargetRemains58 = Cut.targetFormalGapCountIs58
+  Cut.gate4FormalGapCount ≡ 58
+gate4TargetRemains58 = Cut.gate4FormalGapCountIs58
+
+fleetReportedTargetRemains58 :
+  Cut.fleetReportedFormalGapCount ≡ 58
+fleetReportedTargetRemains58 = Cut.fleetReportedFormalGapCountIs58
 
 dischargedFleetFibresRemainExcluded :
   Cut.dischargedFleetFibresExcluded ≡ true
