@@ -104,6 +104,14 @@ open GroundedAction public
 data ProposalTelemetry : Set where
   proposal-telemetry : String → ProposalTelemetry
 
+data ProposalPromotesGrounding (proposal : ProposalTelemetry) : Set where
+
+proposalTelemetryDoesNotGround :
+  {proposal : ProposalTelemetry} →
+  ProposalPromotesGrounding proposal →
+  ⊥
+proposalTelemetryDoesNotGround ()
+
 record GroundedExecutionReceipt : Set where
   constructor grounded-execution-receipt
   field
@@ -142,6 +150,33 @@ groundedUnauthorizedTransform :
   ⊥
 groundedUnauthorizedTransform policy witness transformDenied admission =
   transformDenied (transformOK admission)
+
+groundedUnauthorizedChannel :
+  (policy : AuthorityPolicy) →
+  (witness : GroundedAction) →
+  (channelAllowed policy (channel (action witness)) → ⊥) →
+  Admissible policy (action witness) →
+  ⊥
+groundedUnauthorizedChannel policy witness channelDenied admission =
+  channelDenied (channelOK admission)
+
+groundedUnauthorizedRing :
+  (policy : AuthorityPolicy) →
+  (witness : GroundedAction) →
+  (ringAllowed policy (ring (action witness)) → ⊥) →
+  Admissible policy (action witness) →
+  ⊥
+groundedUnauthorizedRing policy witness ringDenied admission =
+  ringDenied (ringOK admission)
+
+groundedUnauthorizedReceipt :
+  (policy : AuthorityPolicy) →
+  (witness : GroundedAction) →
+  (receiptAuthorized policy (receiptRef (action witness)) → ⊥) →
+  Admissible policy (action witness) →
+  ⊥
+groundedUnauthorizedReceipt policy witness receiptDenied admission =
+  receiptDenied (receiptOK admission)
 
 ------------------------------------------------------------------------
 -- Trajectory-level first crossing.
@@ -194,6 +229,22 @@ data KnowledgeIsAuthority : Set where
 knowledgeIsNotAuthority : KnowledgeIsAuthority → ⊥
 knowledgeIsNotAuthority ()
 
+record SharedMemoryKnowledge : Set where
+  constructor shared-memory-knowledge
+  field
+    memoryRef : String
+    learnedProcedures : List LearnedProcedure
+
+open SharedMemoryKnowledge public
+
+data SharedMemoryGrantsAuthority (memory : SharedMemoryKnowledge) : Set where
+
+sharedMemoryKnowledgeDoesNotGrantAuthority :
+  {memory : SharedMemoryKnowledge} →
+  SharedMemoryGrantsAuthority memory →
+  ⊥
+sharedMemoryKnowledgeDoesNotGrantAuthority ()
+
 ------------------------------------------------------------------------
 -- ZK-ready trajectory commitments.
 --
@@ -223,3 +274,41 @@ record ViolationProofStatement (policy : AuthorityPolicy) : Set₁ where
     committedAction : GroundedAction
     committedStep : StepCommitment
     denied : Admissible policy (action committedAction) → ⊥
+
+
+------------------------------------------------------------------------
+-- ZKP O/R/C/S/L/P/G/F receipt.
+--
+-- These fields document the construction boundary.  They do not replace the
+-- theorem fields above and they do not import external implementation claims.
+------------------------------------------------------------------------
+
+record AgentAuthorityZKPFrame : Set where
+  constructor agent-authority-zkp-frame
+  field
+    objective : String
+    reuse : String
+    construction : String
+    safety : String
+    lane : String
+    preconditions : String
+    invariants : String
+    postconditions : String
+    governance : String
+    verification : String
+
+open AgentAuthorityZKPFrame public
+
+canonicalAgentAuthorityZKPFrame : AgentAuthorityZKPFrame
+canonicalAgentAuthorityZKPFrame =
+  agent-authority-zkp-frame
+    "Prove grounded unauthorized authority transitions without inferring motive."
+    "Reuse zkSEC capability/channel/ring/receipt geometry and zkperf witness separation as attributed design inputs."
+    "Model grounded action admissibility, first authority crossing, proposal non-promotion, shared-memory non-promotion, and ZK-ready commitments."
+    "Public telemetry remains proposal-only. Knowledge does not create execution authority. No exploit path is fabricated."
+    "One canonical security lane. No ESD surface is edited."
+    "Authority policy, grounded runtime evidence, and explicit receipt predicates are supplied before authority-bearing conclusions."
+    "Every admitted grounded action satisfies capability, channel, ring, destination, transform, and receipt predicates."
+    "Denied grounded axes refute admissibility. First-crossing witnesses refute admission at the crossing. Proposal and memory surfaces do not self-promote."
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only."
+    "Kernel verification is required for theorem authority; implementation traces remain separate runtime evidence."

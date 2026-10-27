@@ -1,5 +1,7 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Security.AgentAuthorityTrajectoryExact as AgentAuthority
+import DASHI.Security.OpenAIAustraliaAgentIncidentAttributionExact as AgentIncident
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -1456,3 +1458,23 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Grounded agent authority trajectory security surface.
+------------------------------------------------------------------------
+
+toeAgentAuthorityZKPFrame :
+  AgentAuthority.AgentAuthorityZKPFrame
+toeAgentAuthorityZKPFrame =
+  AgentAuthority.canonicalAgentAuthorityZKPFrame
+
+toePublicSwarmExactMedicareTraceNotGrounded :
+  AgentIncident.exactMedicareTraceGrounded AgentIncident.publicSwarmProposal ≡ false
+toePublicSwarmExactMedicareTraceNotGrounded =
+  AgentIncident.publicSwarmExactMedicareTraceNotGrounded
+
+toeMedicarePublicReportExactTraceNotGrounded :
+  AgentIncident.exactMedicareTraceGrounded AgentIncident.medicarePublicReportProposal ≡ false
+toeMedicarePublicReportExactTraceNotGrounded =
+  AgentIncident.medicarePublicReportExactTraceNotGrounded
