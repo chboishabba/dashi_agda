@@ -7,6 +7,9 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as Owner
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 
@@ -89,3 +92,251 @@ unifierFiniteChartFirewallMatches :
   Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
 unifierFiniteChartFirewallMatches =
   Unifier.unifier369FiniteChartDoesNotCreateLinearMultiplicityAction
+
+
+toeFullGradeSameCarrierFirewallMatches :
+  FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
+toeFullGradeSameCarrierFirewallMatches =
+  TOE.toe369FullGradeSameCarrierDoesNotCreateActionAgreement
+
+unifierFullGradeSameCarrierFirewallMatches :
+  FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
+unifierFullGradeSameCarrierFirewallMatches =
+  Unifier.unifier369FullGradeSameCarrierDoesNotCreateActionAgreement
+
+toeFullGradeCharacterFirewallMatches :
+  FullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+toeFullGradeCharacterFirewallMatches =
+  TOE.toe369FullGradeCharacterDoesNotCreateActionAgreement
+
+unifierFullGradeCharacterFirewallMatches :
+  FullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+unifierFullGradeCharacterFirewallMatches =
+  Unifier.unifier369FullGradeCharacterDoesNotCreateActionAgreement
+
+toeCoordinateRetractionFirewallMatches :
+  Projected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+toeCoordinateRetractionFirewallMatches =
+  TOE.toe369CoordinateRetractionDoesNotCreateProjectedAction
+
+unifierCoordinateRetractionFirewallMatches :
+  Projected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+unifierCoordinateRetractionFirewallMatches =
+  Unifier.unifier369CoordinateRetractionDoesNotCreateProjectedAction
+
+toeProjectedCharacterFirewallMatches :
+  Projected.CharacterCreatesProjectedAction → ⊥
+toeProjectedCharacterFirewallMatches =
+  TOE.toe369ProjectedCharacterDoesNotCreateAction
+
+unifierProjectedCharacterFirewallMatches :
+  Projected.CharacterCreatesProjectedAction → ⊥
+unifierProjectedCharacterFirewallMatches =
+  Unifier.unifier369ProjectedCharacterDoesNotCreateAction
+
+toeKernelCharacterIntertwinerFirewallMatches :
+  TOE.toe369KernelCharacterIsotypyDoesNotConstructActionIntertwiner
+  ≡ Owner.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+toeKernelCharacterIntertwinerFirewallMatches = refl
+
+unifierKernelCharacterIntertwinerFirewallMatches :
+  Unifier.unifier369KernelCharacterIsotypyDoesNotConstructActionIntertwiner
+  ≡ Owner.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+unifierKernelCharacterIntertwinerFirewallMatches = refl
+
+------------------------------------------------------------------------
+-- Complete the existing selected-3B / ternary non-promotion validation.
+-- These are same-owner transport receipts, not fresh Monster proofs.
+------------------------------------------------------------------------
+
+toeTernary27OrbitIndexingNotSemanticIdentitySameOwner :
+  TOE.toe369Ternary27OrbitIndexingNotSemanticIdentity
+  ≡ Owner.toe27OrbitIndexingNotSemanticIdentity
+toeTernary27OrbitIndexingNotSemanticIdentitySameOwner = refl
+
+unifierTernary27OrbitIndexingNotSemanticIdentitySameOwner :
+  Unifier.unifier369Ternary27OrbitIndexingNotSemanticIdentity
+  ≡ Owner.toe27OrbitIndexingNotSemanticIdentity
+unifierTernary27OrbitIndexingNotSemanticIdentitySameOwner = refl
+
+toeTernary27ReductionNotMonster42SameObjectSameOwner :
+  TOE.toe369Ternary27ReductionNotMonster42SameObject
+  ≡ Owner.toe27ReductionNotMonster42SameObject
+toeTernary27ReductionNotMonster42SameObjectSameOwner = refl
+
+unifierTernary27ReductionNotMonster42SameObjectSameOwner :
+  Unifier.unifier369Ternary27ReductionNotMonster42SameObject
+  ≡ Owner.toe27ReductionNotMonster42SameObject
+unifierTernary27ReductionNotMonster42SameObjectSameOwner = refl
+
+toeKernelActualZetaRecognitionStillOpenSameOwner :
+  TOE.toe369KernelActualZetaRecognitionStillOpen
+  ≡ Owner.toeKernelActualZetaRecognitionStillOpen
+toeKernelActualZetaRecognitionStillOpenSameOwner = refl
+
+unifierKernelActualZetaRecognitionStillOpenSameOwner :
+  Unifier.unifier369KernelActualZetaRecognitionStillOpen
+  ≡ Owner.toeKernelActualZetaRecognitionStillOpen
+unifierKernelActualZetaRecognitionStillOpenSameOwner = refl
+
+toeKernelFullHyperformalActionStillOpenSameOwner :
+  TOE.toe369KernelFullHyperformalActionStillOpen
+  ≡ Owner.toeKernelFullHyperformalActionStillOpen
+toeKernelFullHyperformalActionStillOpenSameOwner = refl
+
+unifierKernelFullHyperformalActionStillOpenSameOwner :
+  Unifier.unifier369KernelFullHyperformalActionStillOpen
+  ≡ Owner.toeKernelFullHyperformalActionStillOpen
+unifierKernelFullHyperformalActionStillOpenSameOwner = refl
+
+toeSelectedSameElementClass3BStillOpenSameOwner :
+  TOE.toe369SelectedSameElementClass3BStillOpen
+  ≡ Owner.toeSelectedSameElementClass3BStillOpen
+toeSelectedSameElementClass3BStillOpenSameOwner = refl
+
+unifierSelectedSameElementClass3BStillOpenSameOwner :
+  Unifier.unifier369SelectedSameElementClass3BStillOpen
+  ≡ Owner.toeSelectedSameElementClass3BStillOpen
+unifierSelectedSameElementClass3BStillOpenSameOwner = refl
+
+toeSingleActionProducerStillOpenSameOwner :
+  TOE.toe369SingleActionProducerStillOpen
+  ≡ Owner.toeSingleActionProducerStillOpen
+toeSingleActionProducerStillOpenSameOwner = refl
+
+unifierSingleActionProducerStillOpenSameOwner :
+  Unifier.unifier369SingleActionProducerStillOpen
+  ≡ Owner.toeSingleActionProducerStillOpen
+unifierSingleActionProducerStillOpenSameOwner = refl
+
+toeNinetySlicesSourceFirewallMatches :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+toeNinetySlicesSourceFirewallMatches =
+  TOE.toe369NinetySlicesDoNotCreatePermutationRepresentation
+
+unifierNinetySlicesSourceFirewallMatches :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+unifierNinetySlicesSourceFirewallMatches =
+  Unifier.unifier369NinetySlicesDoNotCreatePermutationRepresentation
+
+toeCharacterHomSourceFirewallMatches :
+  Ibrahim.CharacterCreatesHomEvaluation → ⊥
+toeCharacterHomSourceFirewallMatches =
+  TOE.toe369CharacterDoesNotCreateHomEvaluation
+
+unifierCharacterHomSourceFirewallMatches :
+  Ibrahim.CharacterCreatesHomEvaluation → ⊥
+unifierCharacterHomSourceFirewallMatches =
+  Unifier.unifier369CharacterDoesNotCreateHomEvaluation
+
+toePermutationNonPromotionSourceFirewallMatches :
+  Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
+toePermutationNonPromotionSourceFirewallMatches =
+  TOE.toe369PermutationNoGoDoesNotCreateLinearAction
+
+unifierPermutationNonPromotionSourceFirewallMatches :
+  Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
+unifierPermutationNonPromotionSourceFirewallMatches =
+  Unifier.unifier369PermutationNoGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- Positive same-owner transport.
+-- These checks pin the ternary-27 action facts to the canonical owner.
+------------------------------------------------------------------------
+
+toeTernary27RotationOrderThreeSameOwner :
+  TOE.toe369Ternary27RotationOrderThree
+  ≡ Owner.toe27RotationOrderThree
+toeTernary27RotationOrderThreeSameOwner = refl
+
+unifierTernary27RotationOrderThreeSameOwner :
+  Unifier.unifier369Ternary27RotationOrderThree
+  ≡ Owner.toe27RotationOrderThree
+unifierTernary27RotationOrderThreeSameOwner = refl
+
+toeTernary27OriginFixedSameOwner :
+  TOE.toe369Ternary27OriginFixed
+  ≡ Owner.toe27OriginFixed
+toeTernary27OriginFixedSameOwner = refl
+
+unifierTernary27OriginFixedSameOwner :
+  Unifier.unifier369Ternary27OriginFixed
+  ≡ Owner.toe27OriginFixed
+unifierTernary27OriginFixedSameOwner = refl
+
+toeMonsterPhaseConjugationIntertwinerSameOwner :
+  TOE.toe369MonsterPhaseConjugationIntertwiner
+  ≡ Owner.toe27MonsterPhaseConjugationIntertwiner
+toeMonsterPhaseConjugationIntertwinerSameOwner = refl
+
+unifierMonsterPhaseConjugationIntertwinerSameOwner :
+  Unifier.unifier369MonsterPhaseConjugationIntertwiner
+  ≡ Owner.toe27MonsterPhaseConjugationIntertwiner
+unifierMonsterPhaseConjugationIntertwinerSameOwner = refl
+
+
+------------------------------------------------------------------------
+-- Exact finite-27 ABI and compiled-host non-promotion.
+-- These checks do not identify the runtime with an Agda FFI proof.
+------------------------------------------------------------------------
+
+toeFinite27ByteABIFirewallMatches :
+  ABI.BoundedABIImpliesRustImplementation → ⊥
+toeFinite27ByteABIFirewallMatches =
+  TOE.toeFinite27ByteABIDoesNotCreateRustImplementation
+
+unifierFinite27ByteABIFirewallMatches :
+  ABI.BoundedABIImpliesRustImplementation → ⊥
+unifierFinite27ByteABIFirewallMatches =
+  Unifier.unifierTriadicFiniteABIImpliesRustImpossible
+
+toeHostByteDeviceFirewallMatches :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+toeHostByteDeviceFirewallMatches =
+  TOE.toeHostByteDoesNotCreateDeviceByte
+
+unifierHostByteDeviceFirewallMatches :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+unifierHostByteDeviceFirewallMatches =
+  Unifier.unifierTriadicHostByteDoesNotCreateDeviceByte
+
+toeRuntimeKernelFirewallMatches :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+toeRuntimeKernelFirewallMatches =
+  TOE.toeHostRuntimeReceiptCannotCreateKernelCertification
+
+unifierRuntimeKernelFirewallMatches :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+unifierRuntimeKernelFirewallMatches =
+  Unifier.unifierTriadicRuntimeSourceDoesNotCreateKernelCertification
+
+toeCompiledScalarRustFirewallMatches :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+toeCompiledScalarRustFirewallMatches =
+  TOE.toeCompiledScalarDoesNotCreateRust
+
+unifierCompiledScalarRustFirewallMatches :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifierCompiledScalarRustFirewallMatches =
+  Unifier.unifierCompiledScalarDoesNotCreateRust
+
+toeCompiledScalarBackendFirewallMatches :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+toeCompiledScalarBackendFirewallMatches =
+  TOE.toeCompiledScalarDoesNotCreateBackendEquivalence
+
+unifierCompiledScalarBackendFirewallMatches :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifierCompiledScalarBackendFirewallMatches =
+  Unifier.unifierCompiledScalarDoesNotCreateBackendEquivalence
+
+toeCompilerKernelFirewallMatches :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toeCompilerKernelFirewallMatches =
+  TOE.toeCompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+unifierCompilerKernelFirewallMatches :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifierCompilerKernelFirewallMatches =
+  Unifier.unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess

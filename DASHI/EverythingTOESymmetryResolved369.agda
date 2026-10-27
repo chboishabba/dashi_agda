@@ -1012,6 +1012,7 @@ toeYMImplementAToDScaleTransferNonPromotion =
 
 import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
 import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as TriadicHost
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 
 toeHostU8RustBindingStillUnpaid :
   TriadicHost.rustU8BindingPaid TriadicHost.currentU8RuntimeBoundary
@@ -1032,6 +1033,22 @@ toeFinite27ByteABIDoesNotCreateRustImplementation :
   TriadicABI.BoundedABIImpliesRustImplementation → ⊥
 toeFinite27ByteABIDoesNotCreateRustImplementation =
   TriadicABI.abiDoesNotCreateRust
+
+
+toeCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+toeCompiledScalarDoesNotCreateRust =
+  CompiledU8.cUint8DoesNotCreateRustBinding
+
+toeCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+toeCompiledScalarDoesNotCreateBackendEquivalence =
+  CompiledU8.scalarExhaustionDoesNotCreateBackendEquivalence
+
+toeCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toeCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
 
 ------------------------------------------------------------------------
 -- Kernel-bidi / ternary-27 / byte-ABI max-cut convergence.

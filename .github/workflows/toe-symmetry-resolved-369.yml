@@ -113,6 +113,36 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda --root .
+          dashi-repo related stateDecode-stateCode --root . --limit 20
+          dashi-repo related compilerSuccessDoesNotCreateKernelSuccess --root . --limit 20
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
+          dashi-repo related toe27RotationOrderThree --root . --limit 20
+          dashi-repo related toe27OriginFixed --root . --limit 20
+          dashi-repo related toe27MonsterPhaseConjugationIntertwiner --root . --limit 20
+          dashi-repo related toe27MonsterRepresentationNotPromoted --root . --limit 20
+          dashi-repo related toe27MonsterEmbeddingNotPromoted --root . --limit 20
+          dashi-repo related toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner --root . --limit 20
+          dashi-repo discover '369 max cut kernel bidi ternary 27 Monster representation embedding non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
+          dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/Fleet58ManifestAcquisitionExact.agda --root .
+          dashi-repo related named58ManifestAcquired --root . --limit 20
+          dashi-repo related perGapDispatchEnabled --root . --limit 20
+          dashi-repo related countIdentifiesNamedRows --root . --limit 20
+          dashi-repo discover 'Fleet 58 named manifest acquisition per-gap dispatch boundary' --root . --limit 40
+          dashi-repo related fleetCoordinateRebuildabilityReceipt --root . --limit 20
+          dashi-repo related fleetNumericABIReceipt --root . --limit 20
+          dashi-repo related fleetResidualInvariantReceipt --root . --limit 20
+          dashi-repo related fleetPromotionObligationIndex --root . --limit 20
+          dashi-repo related fleetVectorCoordinateDoesNotCreateTruth --root . --limit 20
+          dashi-repo related fleetExternalCountDoesNotCreateFormalDischarge --root . --limit 20
+          dashi-repo discover 'fleet 584 discharged 58 unformalised formal gaps eigen priority non-promotion' --root . --limit 40
 
       - name: Reject ESD surface changes
         shell: bash
@@ -125,6 +155,25 @@ jobs:
             exit 1
           fi
 
+      - name: Fast Agda preflight on converged TOE graph
+        run: |
+          files=(
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
+            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
+            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+          )
+          for file in "${files[@]}"; do
+            dashi-agda-preflight --root . "$file"
+          done
+
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
         with:
@@ -134,12 +183,17 @@ jobs:
       - name: Reject trust escapes
         run: |
           sources=(
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -148,7 +202,7 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
-            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
               echo "forbidden trust escape in $source" >&2
               exit 1
             fi
@@ -158,8 +212,16 @@ jobs:
         run: |
           agda --version
           modules=(
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
+            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
+            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
