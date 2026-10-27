@@ -8,6 +8,13 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
+import DASHI.Unified.BalabanR559TOEMaxCutValidation
+import DASHI.Unified.BalabanR559TOEUnifiedEverythingValidation
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
+import DASHI.Unified.SingularBasinCoarseRGTOEValidation
+import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Unified.CarrierGrammar as CarrierGrammar
