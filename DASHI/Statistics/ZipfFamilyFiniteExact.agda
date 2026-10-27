@@ -9,10 +9,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
-open import Data.Rational.Base using (ℚ; 0ℚ)
-import Data.Rational.Base as Rat
-open import Data.Rational as R using (_/_)
-open import Data.Integer using (+_)
+-- Reuse the canonical exact finite numerator/denominator carrier.
+-- We do not invoke rational division on a symbolic natural denominator
+-- until the separate nonzero proof obligation has been discharged.
+import DASHI.Core.FiniteUniformProbabilityNormalizationExact as Exact
 
 data Authority : Set where
   mathematicalIdentity : Authority
@@ -92,8 +92,9 @@ record AttributedObservation : Set where
     proofKernelVerified : Bool
 
 -- Finite rational subfamily. The rank index r=0 denotes rank one.
--- A real exponent, positive mass theorem, normalised PMF/CDF and complex
--- Hurwitz continuation are further analytic/mass proof obligations.
+-- A real exponent, a proof of symbolic denominator positivity,
+-- an equality-normalized PMF/CDF, and complex Hurwitz continuation
+-- are separate proof obligations. The finite fraction owner is reused.
 power : Nat → Nat → Nat
 power base zero = suc zero
 power base (suc exponent) = base * power base exponent
@@ -109,25 +110,46 @@ zipfIsZeroShift : ∀ r exponent →
   mandelbrotDenominator r zero exponent ≡ zipfDenominator r exponent
 zipfIsZeroShift r exponent = refl
 
-finiteMandelbrotTerm : Nat → Nat → Nat → ℚ
+-- Fractions here are unreduced exact numerator/denominator pairs.
+-- Every listed term's mathematical denominator is a positive power of
+-- suc r + shift, but this module does NOT pretend to have built the
+-- rational NonZero typeclass proof. This reuse avoids a duplicate carrier.
+Fraction = Exact.FiniteFraction
+
+zeroFraction : Fraction
+zeroFraction = Exact.finiteFraction zero (suc zero)
+
+oneFraction : Fraction
+oneFraction = Exact.finiteFraction (suc zero) (suc zero)
+
+addFraction : Fraction → Fraction → Fraction
+addFraction a b =
+  Exact.finiteFraction
+    (Exact.numerator a * Exact.denominator b
+      + Exact.numerator b * Exact.denominator a)
+    (Exact.denominator a * Exact.denominator b)
+
+finiteMandelbrotTerm : Nat → Nat → Nat → Fraction
 finiteMandelbrotTerm r shift exponent =
-  (+ 1) R./ mandelbrotDenominator r shift exponent
+  Exact.finiteFraction (suc zero)
+    (mandelbrotDenominator r shift exponent)
 
-sumFirst : (Nat → ℚ) → Nat → ℚ
-sumFirst f zero = 0ℚ
-sumFirst f (suc n) = Rat._+_ (sumFirst f n) (f n)
+sumFirst : (Nat → Fraction) → Nat → Fraction
+sumFirst f zero = zeroFraction
+sumFirst f (suc n) = addFraction (sumFirst f n) (f n)
 
-finiteHurwitz : Nat → Nat → Nat → ℚ
+finiteHurwitz : Nat → Nat → Nat → Fraction
 finiteHurwitz count shift exponent =
   sumFirst (λ r → finiteMandelbrotTerm r shift exponent) count
 
-finiteZipfNormalizer : Nat → Nat → ℚ
+finiteZipfNormalizer : Nat → Nat → Fraction
 finiteZipfNormalizer count exponent = finiteHurwitz count zero exponent
 
 finiteZeroShiftIsZipf : ∀ count exponent →
   sumFirst (λ r → finiteMandelbrotTerm r zero exponent) count
   ≡ finiteZipfNormalizer count exponent
 finiteZeroShiftIsZipf count exponent = refl
+
 
 countIf : ∀ {A : Set} → (A → Bool) → List A → Nat
 countIf predicate [] = zero
