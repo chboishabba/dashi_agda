@@ -18,8 +18,9 @@ module DASHI.Unified.ResidualWidthNonPromotionTOEExact where
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Maybe using (Maybe)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Maybe using (Maybe; nothing)
+open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product using (proj₁; proj₂)
@@ -151,13 +152,13 @@ C-orderedWidthDoesNotLowerBoundArbitraryDecisionCount =
 S-exhaustiveBuilderFailsAtSmallBudget :
   ∀ {rootVariables remaining : Nat}
     {root : SAT.BooleanFormula rootVariables}
-    (previous : Root.DescentPath root (Agda.Builtin.Nat.suc remaining))
+    (previous : Root.DescentPath root (suc remaining))
     (budget : Nat) →
   budget
     ≤ Step.oneLayerEnumerationWork (Root.rootedLayer previous) →
   Work.budgetedRootedKeys (Root.descend previous) budget
     ≡
-    Agda.Builtin.Maybe.nothing
+    nothing
 S-exhaustiveBuilderFailsAtSmallBudget =
   Exhaustive.smallBudgetForcesExhaustiveFailure
 
@@ -224,7 +225,7 @@ P-stutteringPreservesDecision =
 ------------------------------------------------------------------------
 
 G-interpreterWorkLinearBound :
-  (program : Agda.Builtin.List.List Tape.TapeInstruction) →
+  (program : List Tape.TapeInstruction) →
   (steps : Nat) →
   (configuration : Tape.TapeConfiguration) →
   Tape.runInterpreterWork program steps configuration
