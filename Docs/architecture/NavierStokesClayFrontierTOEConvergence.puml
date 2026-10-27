@@ -8,6 +8,8 @@ package "Original theorem owners" {
   [NSCanonicalClayResidualExact] as Residual
   [NSClayDistanceFinalReceipt] as Distance
   [NSAuthorityConsistencyGuard] as Guard
+  [ClayNSProofRoadmapReceipt] as Roadmap
+  [NSClaySubmissionEligibilityRoadmapReceipt] as Eligibility
 }
 
 package "Normalized Unified surface" {
@@ -26,6 +28,8 @@ ABCD --> Facade : A/B/C/D max-cut
 Residual --> Facade : canonical residual gates
 Distance --> Facade : carrier-to-general gap\nterminal promotion -> bottom
 Guard --> Facade : mixed-scope promotion guard
+Roadmap --> Facade : weak/BKM branch + false promotion
+Eligibility --> Facade : BKM/all-data/submission/eligibility gates
 
 Facade --> TOE : exact aliases + non-promotion
 Facade --> Unifier : exact aliases + non-promotion
