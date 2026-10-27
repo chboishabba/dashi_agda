@@ -48,3 +48,94 @@ jobs:
         run: nix develop .# --command bash scripts/check_toe_experiment_architecture.sh
       - name: Run shared effective-source QFT/GR audit
         run: nix develop .# --command bash scripts/check_shared_effective_source_recovery.sh
+
+
+  ym-goal1-r474-toe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install DASHI repository referee
+        run: python -m pip install -e './tools/agda_preflight[test,mcp]'
+
+      - name: Referee R485 to R559 normalization
+        shell: bash
+        run: |
+          set -euo pipefail
+          dashi-repo index --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
+          dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
+          dashi-repo diagnose DASHI/Unified/Physics.agda --root .
+          dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.a1CurrentStepBetaSourceLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.bLiteralPublishedSelectedLocalizationLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.cExactSameFamilySourceCutLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.g2SameSystemClayNontrivialitySemanticsLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 R485 R559 TOE maximum cut non-promotion' --root . --limit 40
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact.familyLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact.round546IrreducibleSourceFamilyCutCompilerLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact.criticalLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact.round558CriticalPathCompilerLevel --root . --limit 20
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsTOEConvergence --root .
+
+      - name: Reject ESD surface changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin agent/ym-toe-convergence-r517-20261027 --depth=1
+          changed="$(git diff --name-only origin/agent/ym-toe-convergence-r517-20261027...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)'; then
+            echo "ESD surface change detected" >&2
+            exit 1
+          fi
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Reject trust escapes
+        shell: bash
+        run: |
+          set -euo pipefail
+          sources=(
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unifier.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Kernel-check R485 Goal-1 TOE graph
+        shell: bash
+        run: |
+          set -euo pipefail
+          modules=(
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unifier.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done

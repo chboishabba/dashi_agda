@@ -40,6 +40,33 @@ open YMTOE public using
   ; uniformRemainderBelowEveryCompactSimpleCoefficient
   )
 
+open YMTOE public using
+  ( SourceFamily
+  ; a1CurrentStepVariation
+  ; a2HistoryCoordinate
+  ; a3ProjectiveRepresentation
+  ; finiteT1AndPublishedOS
+  ; quantitativeT5CMP119Alignment
+  ; bWilsonWEXT
+  ; bSameHamiltonianEnergyDecay
+  ; actualGroupCompleteSource
+  ; densityToNormalizedFiniteMeasure
+  ; c0WilsonLocalObservable
+  ; c1MarkedCurvature
+  ; c2PhysicalRemainderTail
+  ; c3AFRecurrence
+  ; c4DensityAnchoredStress
+  ; CriticalFamily
+  ; a3SelectedRepresentation
+  ; t1FiniteOSSameFamily
+  ; t5QuantitativeSameFamily
+  ; b1SourceFirstWilsonWEXT
+  ; b2SameHamiltonian
+  ; g1ActualCompactSimple
+  ; h6MinimalWardNontriviality
+  )
+
+
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
   Spine.unifiedObjectInvariant
@@ -204,3 +231,87 @@ yangMillsTOEStressShellEnergyHilbertLevel =
 yangMillsTOELiteralStressActivityEntropyLevel : ProofLevel
 yangMillsTOELiteralStressActivityEntropyLevel =
   YMTOE.toeLiteralStressActivityEntropyInstantiationLevel
+
+
+------------------------------------------------------------------------
+-- Authoritative Goal-1 R485 maximum cut via normalized R559 owner.
+------------------------------------------------------------------------
+
+yangMillsTOEGoal1FiniteSymmetryAndRPSourceLevel : ProofLevel
+yangMillsTOEGoal1FiniteSymmetryAndRPSourceLevel =
+  YMTOE.toeGoal1FiniteSymmetryAndRPSourceLevel
+
+yangMillsTOEGoal1A1CurrentStepBetaSourceLevel : ProofLevel
+yangMillsTOEGoal1A1CurrentStepBetaSourceLevel =
+  YMTOE.toeGoal1A1CurrentStepBetaSourceLevel
+
+yangMillsTOEGoal1A3SourceNativeContinuumOSLevel : ProofLevel
+yangMillsTOEGoal1A3SourceNativeContinuumOSLevel =
+  YMTOE.toeGoal1A3SourceNativeContinuumOSLevel
+
+yangMillsTOEGoal1A3CountablyAdditiveRepresentationLevel : ProofLevel
+yangMillsTOEGoal1A3CountablyAdditiveRepresentationLevel =
+  YMTOE.toeGoal1A3CountablyAdditiveRepresentationLevel
+
+yangMillsTOEGoal1A4FiniteRegularityLevel : ProofLevel
+yangMillsTOEGoal1A4FiniteRegularityLevel =
+  YMTOE.toeGoal1A4FiniteRegularityLevel
+
+yangMillsTOEGoal1A5FiniteGrowthLevel : ProofLevel
+yangMillsTOEGoal1A5FiniteGrowthLevel =
+  YMTOE.toeGoal1A5FiniteGrowthLevel
+
+yangMillsTOEGoal1BWilsonTwoInsertionConnectedShellLevel : ProofLevel
+yangMillsTOEGoal1BWilsonTwoInsertionConnectedShellLevel =
+  YMTOE.toeGoal1BWilsonTwoInsertionConnectedShellLevel
+
+yangMillsTOEGoal1BGeometricDecayCompilerLevel : ProofLevel
+yangMillsTOEGoal1BGeometricDecayCompilerLevel =
+  YMTOE.toeGoal1BGeometricDecayCompilerLevel
+
+yangMillsTOEGoal1BStandardSpectralTransferLevel : ProofLevel
+yangMillsTOEGoal1BStandardSpectralTransferLevel =
+  YMTOE.toeGoal1BStandardSpectralTransferLevel
+
+yangMillsTOEGoal1CSameFamilySourceInstantiationLevel : ProofLevel
+yangMillsTOEGoal1CSameFamilySourceInstantiationLevel =
+  YMTOE.toeGoal1CSameFamilySourceInstantiationLevel
+
+yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
+yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel =
+  YMTOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
+
+yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
+yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel =
+  YMTOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
+
+yangMillsTOEGoal1MaximumCutCompilerLevel : ProofLevel
+yangMillsTOEGoal1MaximumCutCompilerLevel =
+  YMTOE.toeGoal1MaximumCutCompilerLevel
+
+yangMillsTOEGoal1ProjectiveProkhorovNotMandatory :
+  YMTOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
+yangMillsTOEGoal1ProjectiveProkhorovNotMandatory = refl
+
+yangMillsTOEGoal1CompatibilityBRouteNotMandatory :
+  YMTOE.toeGoal1CompatibilityBRouteMandatory ≡ false
+yangMillsTOEGoal1CompatibilityBRouteNotMandatory = refl
+
+yangMillsTOEGoal1ClayCompletionNotClaimed :
+  YMTOE.toeGoal1ClayCompletionClaimed ≡ false
+yangMillsTOEGoal1ClayCompletionNotClaimed = refl
+
+
+------------------------------------------------------------------------
+-- Canonical R546/R558 family dispatch via R559.
+------------------------------------------------------------------------
+
+yangMillsTOEIrreducibleFamilyLevel :
+  SourceFamily → ProofLevel
+yangMillsTOEIrreducibleFamilyLevel =
+  YMTOE.toeIrreducibleFamilyLevel
+
+yangMillsTOECriticalFamilyLevel :
+  CriticalFamily → ProofLevel
+yangMillsTOECriticalFamilyLevel =
+  YMTOE.toeCriticalFamilyLevel
