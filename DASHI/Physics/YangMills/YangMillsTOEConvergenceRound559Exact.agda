@@ -51,6 +51,26 @@ module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact where
 -- F. Verification.
 -- Source read-back must find every import and theorem below.
 -- Kernel certification requires an exact-head Agda or CI receipt.
+--
+-- Preconditions.
+-- The canonical source owners already exist in the repository.
+-- Each compiler keeps its original proof level.
+-- Each literal source seam keeps its original proof level.
+-- The TOE graph imports this owner instead of copying source proofs.
+--
+-- Invariants.
+-- One source fact has one canonical theorem owner.
+-- The selected RG density keeps one scale identity across the action and stress lanes.
+-- Finite RG facts do not create a continuum theorem.
+-- Casimir positivity does not create a missing colour-contraction theorem.
+-- Stress compilation does not create a literal stress/OPE source theorem.
+-- ESD and digital_esd surfaces remain unchanged.
+--
+-- Postconditions.
+-- The TOE root reaches the canonical density, action, regular-E, Casimir, and stress owners.
+-- Unified.Physics reaches the same normalized aliases.
+-- Unifier reaches the same normalized aliases.
+-- The continuum, OS/Wightman, mass-gap, and Clay promotion gates remain false.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
