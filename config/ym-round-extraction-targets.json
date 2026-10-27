@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "target_prefix": "DASHI.Physics.YangMills.",
+  "round_regex": "Round[0-9]+",
+  "seed_families": [
+    "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontier",
+    "DASHI.Physics.YangMills.YangMillsClayCriticalPath",
+    "DASHI.Physics.YangMills.BalabanPreferredSourceSemanticsFrontier",
+    "DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontier",
+    "DASHI.Physics.YangMills.BalabanPreferredSourceFrontier",
+    "DASHI.Physics.YangMills.BalabanClayHighestAlpha",
+    "DASHI.Physics.YangMills.BalabanPreferredRowCFrontier",
+    "DASHI.Physics.YangMills.BalabanCMP116R409SelectedTermReplay",
+    "DASHI.Physics.YangMills.BalabanCMP116R429TraceEntropyBudget"
+  ],
+  "candidate_positive_names": [
+    "positiveTransferGap",
+    "literalCMP109BetaDifferenceDecomposition",
+    "literalCMP109GeneratedHistoryResponseProducer",
+    "literalPhysicalCompositeD1ChainRule"
+  ],
+  "status_count_names": [
+    "sourceAttachmentCountIsEighteen"
+  ],
+  "negative_name_terms": [
+    "nogo",
+    "no-go",
+    "firewall",
+    "impossible",
+    "underdetermination",
+    "obstruction"
+  ],
+  "dispositions": [
+    "SUPERSEDED_EXACT",
+    "SUPERSEDED_RENAMED",
+    "CANONICAL_COMPILER_EXISTS",
+    "ALTERNATE_PROOF",
+    "NEGATIVE_RESULT",
+    "STATUS_ONLY",
+    "GENUINE_OPEN_OBLIGATION",
+    "UNRESOLVED"
+  ],
+  "compiler_hints": {
+    "positiveTransferGap": [
+      "positiveTransferGapFromOS4",
+      "physicalContinuumPositiveTransferGap",
+      "OSExponentialClusteringImpliesHamiltonianGap"
+    ]
+  },
+  "canonical_owner_by_name": {
+    "positiveTransferGap": "DASHI.Physics.YangMills.BalabanCanonicalPhysicalTransferGapObligationExact",
+    "literalCMP109BetaDifferenceDecomposition": "DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact",
+    "literalCMP109GeneratedHistoryResponseProducer": "DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact",
+    "literalPhysicalCompositeD1ChainRule": "DASHI.Physics.YangMills.BalabanCMP109CanonicalSourceSemanticsObligationsExact"
+  },
+  "canonical_owner_by_family": {
+    "DASHI.Physics.YangMills.BalabanCMP116R409SelectedTermReplay": "DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedTermReplayExact",
+    "DASHI.Physics.YangMills.BalabanCMP116R429TraceEntropyBudget": "DASHI.Physics.YangMills.BalabanCMP116CanonicalTraceEntropyBudgetExact"
+  },
+  "outputs": {
+    "clusters": ".dashi/round-stranded/ym-package-clusters.jsonl",
+    "receipts": ".dashi/round-stranded/ym-packages.jsonl"
+  },
+  "policy": {
+    "rounds_authoritative_by_default": false,
+    "body_only_equivalence_is_semantic_evidence": false,
+    "renamed_supersession_requires_signature_identity_or_explicit_alias": true,
+    "missing_evidence_disposition": "UNRESOLVED"
+  }
+}

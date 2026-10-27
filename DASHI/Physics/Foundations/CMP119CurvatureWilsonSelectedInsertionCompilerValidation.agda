@@ -1,0 +1,17 @@
+module DASHI.Physics.Foundations.CMP119CurvatureWilsonSelectedInsertionCompilerValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.CMP119CurvatureWilsonSelectedInsertionCompilerExact as Cut
+
+curvaturePaysTenActionVariations :
+  Cut.tenIndependentActionVariationCallbacksRequired ≡ false
+curvaturePaysTenActionVariations = refl
+
+selectedInsertionAndVariationRemain :
+  Cut.selectedInsertionObservableAndMetricVariationStillRequired ≡ true
+selectedInsertionAndVariationRemain = refl
+
+nonlinearCurvatureSameObjectStillRequired :
+  Cut.selectedNonlinearCurvatureRealizationStillRequired ≡ true
+nonlinearCurvatureSameObjectStillRequired = refl

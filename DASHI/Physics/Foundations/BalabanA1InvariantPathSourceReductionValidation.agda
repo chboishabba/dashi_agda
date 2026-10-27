@@ -1,0 +1,21 @@
+module DASHI.Physics.Foundations.BalabanA1InvariantPathSourceReductionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.BalabanA1InvariantPathSourceReductionExact as Cut
+
+p1PaysSignedTensorCovarianceCompiler :
+  Cut.p1InvariantPathPaysSignedTensorCovariance ≡ true
+p1PaysSignedTensorCovarianceCompiler = refl
+
+generalNaturalityNoLongerMinimal :
+  Cut.generalFirstVariationNaturalityIsNotMinimalA1Leaf ≡ true
+generalNaturalityNoLongerMinimal = refl
+
+rationalReadoutIdentificationRemainsSeparate :
+  Cut.rationalFiniteD1ToRealPathDerivativeIdentificationStillSeparate ≡ true
+rationalReadoutIdentificationRemainsSeparate = refl
+
+balabanScalarProjectionDoesNotPayMetricPathNaturality :
+  Cut.cmp109VacuumPolarizationScalarSymmetryDoesNotByItselfPayA1PathNaturality ≡ true
+balabanScalarProjectionDoesNotPayMetricPathNaturality = refl

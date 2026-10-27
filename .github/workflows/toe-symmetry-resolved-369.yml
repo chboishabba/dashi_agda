@@ -2,11 +2,59 @@ name: toe-symmetry-resolved-369
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
+      - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalLiteralRateSourceRound438Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1SameHNontrivialityRound439Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116VariableDomainPreferredR415Round440Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429RootedTraceCountingRound441Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/**'
+      - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
+      - 'DASHI/Unifier.agda'
+      - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/BalabanRGTOERegression.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalLiteralRateSourceRound438Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1SameHNontrivialityRound439Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116VariableDomainPreferredR415Round440Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429RootedTraceCountingRound441Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
+      - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
+      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'DASHI/Unifier.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -20,6 +68,62 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install DASHI repository referee
+        run: python -m pip install -e './tools/agda_preflight[test,mcp]'
+
+      - name: Referee TOE reuse and lineage
+        run: |
+          dashi-repo index --root .
+          dashi-repo diagnose DASHI/Unified/BalabanRGTOERegression.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/Physics.agda --root .
+          dashi-repo related literalRound440VariableDomainCMP116SourceLevel --root . --limit 20
+          dashi-repo related literalRound443FiniteWilsonActionInvarianceLevel --root . --limit 20
+          dashi-repo related literalRound444PeterWeylWilsonIdentificationLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 TOE variable domain Peter Weyl compactness stress non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
+          dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
+          dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo related BalabanRGTOEReceipt --root .
+          dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
+          dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
+          dashi-repo related balabanGeneratedActionStressScaleCompilerLevel --root . --limit 20
+          dashi-repo related balabanPublishedRGPhysicalSameObjectLevel --root . --limit 20
+          dashi-repo related balabanContinuumRouteMassGapPromotionStillOpen --root . --limit 20
+          dashi-repo related balabanScaleDensityFiniteMeasureWeldLevel --root . --limit 20
+          dashi-repo related balabanRegularELocalizationCarrierLevel --root . --limit 20
+          dashi-repo related balabanCasimirLowerBoundTransportLevel --root . --limit 20
+          dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
+          dashi-repo discover 'Balaban scale density regular-E localization Casimir stress RG continuum non-promotion' --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+          dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
+          dashi-repo related round485MaximumCutCompilerLevel --root . --limit 20
+          dashi-repo related round546IrreducibleSourceFamilyCutCompilerLevel --root . --limit 20
+          dashi-repo related round558CriticalPathCompilerLevel --root . --limit 20
+          dashi-repo related toeCriticalFullCLayerRetainedForConservativeClayExistence --root . --limit 20
+          dashi-repo related toeGoal1MaximumCutCompilerLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 R485 R546 R558 maximum cut irreducible critical path R559 TOE' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+
+      - name: Reject ESD surface changes
+        shell: bash
+        run: |
+          git fetch origin master --depth=1
+          changed="$(git diff --name-only origin/master...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)' ; then
+            echo "ESD surface change detected" >&2
+            exit 1
+          fi
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -32,6 +136,15 @@ jobs:
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+            DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
@@ -41,7 +154,21 @@ jobs:
             fi
           done
 
-      - name: Kernel-check TOE symmetry-resolved aggregate
+      - name: Kernel-check connected TOE graph
         run: |
           agda --version
-          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          modules=(
+            DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/Physics.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done

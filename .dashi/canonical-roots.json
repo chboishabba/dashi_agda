@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "roots": [
+    "DASHI.Everything",
+    "DASHI.Physics.YangMills.PostulateInventory",
+    "DASHI.Physics.YangMills.BalabanRGLane",
+    "DASHI.Physics.Closure.NSConcreteLiteralClayABCDRunTargetExact"
+  ],
+  "policy": {
+    "round_regex": "Round[0-9]+",
+    "rounds_authoritative_by_default": false,
+    "body_only_equivalence_is_semantic_evidence": false
+  }
+}
