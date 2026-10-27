@@ -49,7 +49,15 @@ jobs:
             fi
           done
 
-      - name: Kernel-check TOE symmetry-resolved aggregate
+      - name: Kernel-check TOE symmetry-resolved aggregate and direct endpoints
         run: |
           agda --version
-          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          modules=(
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unifier.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done
