@@ -103,6 +103,9 @@ def main() -> None:
     assert "scenicGroupDecember2025" in law and "15 December 2025" in law
     assert "scenicPossinghamJanuary2025" in law and "4 January 2025" in law
     assert "scenicZdenekDecember2025" in law and "14 December 2025" in law
+    assert "no visible wet-ink signature" in law or "not a visible wet-ink signature" in law
+    assert "Source.academicArticleSource" not in law
+    assert law.count("Source.practitionerSource") >= 4
     assert "EPBC 2020/8651" in law and "EPBC 2019/8575" in law
     assert "originalDateBeatsCaption" in law and "qccNotSwfgStanding" in law
     assert "swfgAustralianBusinessRegister" in law and "86 248 330 120" in law
