@@ -6,7 +6,7 @@ import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import Data.Nat.Base using (ℕ)
