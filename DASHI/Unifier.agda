@@ -8,6 +8,9 @@ open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
 
+-- Exact theorem surface. Do not replace with Unifier placeholder axioms.
+import DASHI.Unified.ResidualWidthNonPromotionTOEExact
+
 ¬ : Set → Set
 ¬ A = A → ⊥
 
