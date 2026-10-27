@@ -946,3 +946,19 @@ unifierDocumentRoleDoesNotSupplyLegalSourceAuthority =
 unifierCanonicalLegalSourceAuthorityBoundary =
   GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
 
+
+
+unifierNativeLegalFollowDoesNotCreateLegalAuthority :
+  GovernanceTOE.NativeCliAutomaticallyLegalAuthority → ⊥
+unifierNativeLegalFollowDoesNotCreateLegalAuthority =
+  GovernanceTOE.toeNativeLegalFollowDoesNotCreateLegalAuthority
+
+unifierProviderFailureDoesNotMakePropositionFalse :
+  GovernanceTOE.ProviderFailureAutomaticallyPropositionFalse → ⊥
+unifierProviderFailureDoesNotMakePropositionFalse =
+  GovernanceTOE.toeProviderFailureDoesNotMakePropositionFalse
+
+unifierExpertProductionPromotesAnyAuthorityIsFalse :
+  GovernanceTOE.toeExpertProductionPromotesAnyAuthority ≡ false
+unifierExpertProductionPromotesAnyAuthorityIsFalse =
+  GovernanceTOE.toeExpertProductionPromotesAnyAuthorityIsFalse
