@@ -36,6 +36,7 @@ import DASHI.Physics.YangMills.BalabanPublishedFlowToRegularEProjectionRound241E
 import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as RegularEPredicate
 import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exact as RegularEDecoder
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as PublishedRG
+import DASHI.Physics.YangMills.BalabanTopDownSummableRGIncrementExact as SummableRG
 import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as ContinuumBoundary
 import DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact as DensityDictionary
 import DASHI.Physics.YangMills.BalabanDensityToLiteralFiniteMeasureRound124Exact as Measure
@@ -175,6 +176,21 @@ balabanPublishedNonlinearRGCoreLevel =
 balabanPublishedRGPhysicalSameObjectLevel : ProofLevel
 balabanPublishedRGPhysicalSameObjectLevel =
   PublishedRG.literalPhysicalStateToPublishedRGCarrierLevel
+
+-- The compiler from a source-shaped dyadic increment majorant to a Cauchy
+-- modulus is machine checked. The physical same-family majorant remains an
+-- explicit conditional source-instantiation obligation.
+balabanSummableRGIncrementCauchyCompilerLevel : ProofLevel
+balabanSummableRGIncrementCauchyCompilerLevel =
+  SummableRG.summableRGIncrementCauchyCompilerLevel
+
+balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel : ProofLevel
+balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel =
+  SummableRG.physicalSameFamilyNormalizedCharacteristicIncrementLevel
+
+balabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional :
+  balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel ≡ conditional
+balabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional = refl
 
 balabanScaleDensityFiniteMeasureWeldLevel : ProofLevel
 balabanScaleDensityFiniteMeasureWeldLevel =
