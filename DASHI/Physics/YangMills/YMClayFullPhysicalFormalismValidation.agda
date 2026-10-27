@@ -304,6 +304,17 @@ d2NeedsNoSecondMixingMap :
 d2NeedsNoSecondMixingMap =
   Full.d2SecondMixingMapRequiredIsFalse
 
+
+d2PublishedSourceEntryDoesNotPayNaturality :
+  Full.d2PublishedSourceEntryPaysInsertionNaturality ≡ false
+d2PublishedSourceEntryDoesNotPayNaturality =
+  Full.d2PublishedSourceEntryPaysInsertionNaturalityIsFalse
+
+d2PublishedSourceEntryDoesNotDetermineCompositeInsertion :
+  Full.d2PublishedSourceEntryDeterminesCompositeInsertion ≡ false
+d2PublishedSourceEntryDoesNotDetermineCompositeInsertion =
+  Full.d2PublishedSourceEntryDeterminesCompositeInsertionIsFalse
+
 d2LiteralCoefficientIsNotConstantNatFamily :
   Full.d2LiteralCoefficientIsConstantNatFamily ≡ false
 d2LiteralCoefficientIsNotConstantNatFamily =
