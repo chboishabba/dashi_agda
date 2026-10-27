@@ -1,0 +1,37 @@
+@startuml
+title NS ABCD max-cut to DASHI TOE convergence
+
+package "Existing theorem owners" {
+  [NSABCDMaxCut20261002Exact] as MaxCut
+  [GRQuantumProofTermRegression] as GRQ
+}
+
+package "Normalized DASHI Unified lane" {
+  [NSABCDTOENonPromotionBridgeExact] as Bridge
+  [NSABCDTOENonPromotionBridgeValidation] as Validation
+  [Unified.Physics] as Physics
+}
+
+package "TOE consumers" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as Unifier
+}
+
+MaxCut --> Bridge : exact frontier proofs
+Bridge --> Validation : theorem regression
+Bridge --> Physics : canonical receipt
+Bridge --> TOE : direct import
+Bridge --> Unifier : exact aliases only
+GRQ --> TOE : finite GR/quantum non-promotion
+
+note right of Unifier
+Historical axiom-shaped interfaces remain.
+They do not discharge the NS proofs.
+end note
+
+note bottom of Bridge
+No Clay promotion.
+No ESD mutation.
+Original theorem owners keep attribution.
+end note
+@enduml
