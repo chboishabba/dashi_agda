@@ -234,16 +234,16 @@ unifiedCurrentMaxCutHyperfabricReceipt =
   CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
 
 unifiedCurrentHyperformNineCount :
-  CurrentHyper.Fabric.siteCount 3 2 ≡ 9
+  CurrentHyper.HyperformNineCountProof
 unifiedCurrentHyperformNineCount =
   CurrentHyper.currentHyperformNineCount
 
 unifiedCurrentHyperformTwentySevenCount :
-  CurrentHyper.Fabric.siteCount 3 3 ≡ 27
+  CurrentHyper.HyperformTwentySevenCountProof
 unifiedCurrentHyperformTwentySevenCount =
   CurrentHyper.currentHyperformTwentySevenCount
 
 unifiedCurrentHyperformEightyOneCount :
-  CurrentHyper.Fabric.siteCount 3 4 ≡ 81
+  CurrentHyper.HyperformEightyOneCountProof
 unifiedCurrentHyperformEightyOneCount =
   CurrentHyper.currentHyperformEightyOneCount
