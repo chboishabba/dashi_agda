@@ -11,6 +11,7 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Biology.PMDDHistamineAmplificationExact as PMDDHistamine
 import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact as PMDDMolecular
 import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact as PMDDIntervention
+import DASHI.Culture.ArabicRootPatternMorphologyProcessingBoundaryExact as ArabicMorphology
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1803,3 +1804,37 @@ unifierPMDDSymptomResponseMechanismIdentificationImpossible :
   PMDDIntervention.SymptomResponseDeterminesMechanism → ⊥
 unifierPMDDSymptomResponseMechanismIdentificationImpossible =
   PMDDIntervention.symptomResponseDoesNotDetermineMechanism
+
+
+------------------------------------------------------------------------
+-- Arabic root-pattern morphology exact reopening.
+-- Keep the same owner visible through the Unifier root.
+------------------------------------------------------------------------
+
+unifierArabicRootPatternIntegrationBoundary :
+  ArabicMorphology.ArabicRootPatternIntegrationBoundary
+unifierArabicRootPatternIntegrationBoundary =
+  ArabicMorphology.canonicalArabicRootPatternIntegrationBoundary
+
+unifierArabicKTBRecoverableProjection :
+  ArabicMorphology.Recoverable.DependentExactRecoverableProjection
+    ArabicMorphology.KTBResolvedReading
+    ArabicMorphology.KTBUndiacritizedSurface
+unifierArabicKTBRecoverableProjection =
+  ArabicMorphology.ktbDependentRecoverableProjection
+
+unifierArabicKTBDependentCodeSeparating :
+  ArabicMorphology.Recoverable.DependentCodeSeparating
+    ArabicMorphology.ktbDependentRecoverableProjection
+unifierArabicKTBDependentCodeSeparating =
+  ArabicMorphology.ktbDependentCodeSeparating
+
+unifierArabicSurfaceAloneDoesNotDetermineResolvedReading :
+  ArabicMorphology.SurfaceAloneDeterminesResolvedKTBReading → ⊥
+unifierArabicSurfaceAloneDoesNotDetermineResolvedReading =
+  ArabicMorphology.surfaceAloneDoesNotDetermineResolvedKTBReading
+
+unifierArabicRootPatternZKPFrame :
+  ArabicMorphology.ArabicRootPatternZKPFrame
+unifierArabicRootPatternZKPFrame =
+  ArabicMorphology.canonicalArabicRootPatternZKPFrame
