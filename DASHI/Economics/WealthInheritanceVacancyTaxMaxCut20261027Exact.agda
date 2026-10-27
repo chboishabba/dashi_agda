@@ -26,6 +26,9 @@ data TaxBase : Set where
   gainsRealisedOnSale : TaxBase
   annualChangeInAssetValue : TaxBase
   collateralisedLoanProceeds : TaxBase
+  corporateJurisdictionalGloBEIncome : TaxBase
+  securitiesTransactionValue : TaxBase
+  unimprovedLandSiteValue : TaxBase
 
 data Policy : Set where
   incomeHundredAboveThreshold : Policy
@@ -35,6 +38,9 @@ data Policy : Set where
   vacantHomesStatusLevy : Policy
   realisedGainsLevy : Policy
   markToMarketGainsLevy : Policy
+  multinationalGloBEProfitTopUp : Policy
+  securitiesPurchaseStampDuty : Policy
+  landSiteValueTax : Policy
 
 taxBase : Policy → TaxBase
 taxBase incomeHundredAboveThreshold = annualPersonalIncome
@@ -44,6 +50,9 @@ taxBase inheritanceTransferLevy = wealthTransferredAtDeath
 taxBase vacantHomesStatusLevy = statusOfVacantResidentialProperty
 taxBase realisedGainsLevy = gainsRealisedOnSale
 taxBase markToMarketGainsLevy = annualChangeInAssetValue
+taxBase multinationalGloBEProfitTopUp = corporateJurisdictionalGloBEIncome
+taxBase securitiesPurchaseStampDuty = securitiesTransactionValue
+taxBase landSiteValueTax = unimprovedLandSiteValue
 
 incomeTaxIsNotStockCap :
   incomeHundredAboveThreshold ≡ wealthHundredAboveThreshold → ⊥
@@ -56,6 +65,28 @@ vacancyTaxIsNotWealthCap ()
 inheritanceTaxIsNotAnnualWealthLevy :
   inheritanceTransferLevy ≡ recurringNetWealthLevy → ⊥
 inheritanceTaxIsNotAnnualWealthLevy ()
+
+-- An ownership disclosure mechanism is NOT itself a tax instrument.
+data OwnershipDisclosure : Set where
+  beneficialOwnershipReporting : OwnershipDisclosure
+
+corporateMinimumTaxIsNotPersonalWealthCap :
+  multinationalGloBEProfitTopUp ≡ wealthHundredAboveThreshold → ⊥
+corporateMinimumTaxIsNotPersonalWealthCap ()
+
+securitiesDutyIsNotCapitalGainsTax :
+  securitiesPurchaseStampDuty ≡ realisedGainsLevy → ⊥
+securitiesDutyIsNotCapitalGainsTax ()
+
+landSiteValueIsNotHousingVacancy :
+  landSiteValueTax ≡ vacantHomesStatusLevy → ⊥
+landSiteValueIsNotHousingVacancy ()
+
+-- A disclosure identifier is not a fiscal liability or legal permission.
+data RegistryIdentificationImpliesLegalTaxDue : Set where
+beneficialOwnerNameDoesNotDetermineTaxDue :
+  RegistryIdentificationImpliesLegalTaxDue → ⊥
+beneficialOwnerNameDoesNotDetermineTaxDue ()
 
 ------------------------------------------------------------------------
 -- EXACT FINITE DEFINITIONS: 100% RATE ON AMOUNTS ABOVE A THRESHOLD.
@@ -232,6 +263,56 @@ zucman2024 = tax-source-receipt
   expertPolicyProposal proposedNotEnacted
   "proposes globally coordinated annual minimum tax equal to 2 percent of total wealth for billionaires"
   "proposal is not enacted law; 2 percent minimum is not a 100 percent tax above threshold"
+
+------------------------------------------------------------------------
+-- REUSED REGULATOR / ORIGINAL ECONOMIC AUTHOR PROVENANCE
+-- RATES AND SCOPE ARE SOURCE-RELATIVE. NO UNIVERSAL TAX EFFECT.
+------------------------------------------------------------------------
+
+oecdPillarTwo2026 : TaxSourceReceipt
+oecdPillarTwo2026 = tax-source-receipt
+  "OECD Inclusive Framework"
+  "Global Minimum Tax (Pillar Two), 2026 guidance and model rules"
+  "https://www.oecd.org/en/topics/global-minimum-tax.html"
+  enactedAdministrativePolicy enactedRule
+  "qualified large MNE groups: jurisdictional ETR and 15 percent minimum top-up subject to GloBE base and substance exclusions; application depends on implemented domestic legislation"
+  "not a personal wealth levy, automatic universal participation, or a tax on every firm's turnover"
+
+hmrcSDRT : TaxSourceReceipt
+hmrcSDRT = tax-source-receipt
+  "HM Revenue and Customs, United Kingdom"
+  "Tax when you buy shares: Overview, online guidance accessed 2026-10-27"
+  "https://www.gov.uk/tax-buy-shares"
+  enactedAdministrativePolicy enactedRule
+  "normally 0.5 percent stamp duty or SDRT on specified taxable share purchases, with different rates and exemptions for other transfers"
+  "not a 0.1 percent universal all-derivatives FTT, nor harmless to every investor"
+
+fatfBO2023 : TaxSourceReceipt
+fatfBO2023 = tax-source-receipt
+  "Financial Action Task Force"
+  "Guidance on Beneficial Ownership of Legal Persons, 10 March 2023"
+  "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-Beneficial-Ownership-Legal-Persons.html"
+  expertPolicyProposal historicalAuthoredPosition
+  "Recommendation 24 calls for adequate accurate up-to-date beneficial ownership information accessible to competent authorities; national laws vary"
+  "not proof that each national beneficial-owner register is public or all holdings are found"
+
+henryGeorge1879 : TaxSourceReceipt
+henryGeorge1879 = tax-source-receipt
+  "Henry George"
+  "Progress and Poverty (1879); original complete text reprinted in 1898 edition"
+  "https://www.progress.org/wiki/progress-and-poverty-full-text/"
+  originalPoliticalText historicalAuthoredPosition
+  "land rent / site value and the proposed single tax are distinct from improvements or wealth in general"
+  "not a practical zero-harm proof for all land value tax regimes"
+
+piketty2015 : TaxSourceReceipt
+piketty2015 = tax-source-receipt
+  "Thomas Piketty"
+  "Putting Distribution Back at the Center of Economics (2015); DOI 10.1257/jep.29.1.67"
+  "https://doi.org/10.1257/jep.29.1.67"
+  scholarlyEmpiricalEstimate historicalAuthoredPosition
+  "Piketty's original author clarification: r greater than g is one explanatory force among others, not a uniquely sufficient determinant of inequality"
+  "no mathematically unavoidable cumulative inequality trajectory or particular tax-rate theorem"
 
 ------------------------------------------------------------------------
 -- NO SOURCE OR SCENARIO CAN AUTOMATICALLY CERTIFY A CAUSAL POLICY EFFECT.
