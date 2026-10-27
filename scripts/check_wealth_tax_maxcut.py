@@ -156,6 +156,21 @@ def test_assessment_vs_interim_growth() -> None:
     assert interim == 5 and excess(interim, 3) == 2
     assert wealth_after_tax(NetWealth(interim), 3) == 3
 
+
+@dataclass(frozen=True)
+class ModelAuditCase:
+    public_risk_signal: int
+    legally_assessed_wealth: int
+
+def test_ai_risk_score_does_not_determine_tax_law() -> None:
+    a = ModelAuditCase(7, 2)
+    b = ModelAuditCase(7, 5)
+    assert a.public_risk_signal == b.public_risk_signal
+    assert wealth_excess(NetWealth(a.legally_assessed_wealth), 3) == 0
+    assert wealth_excess(NetWealth(b.legally_assessed_wealth), 3) == 2
+    # A classifier or risk score is not a lawful valuation/assessment.
+    # This negative control does not assert all AI auditors must be inaccurate.
+
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
@@ -166,4 +181,5 @@ if __name__ == "__main__":
     test_assessment_collection_appropriation_are_distinct()
     test_dual_class_voting_post_transfer()
     test_assessment_vs_interim_growth()
-    print("PASS: 8,192 bounded arithmetic pairs + 8 synthetic counterexample suites")
+    test_ai_risk_score_does_not_determine_tax_law()
+    print("PASS: 8,192 bounded arithmetic pairs + 9 synthetic counterexample suites")
