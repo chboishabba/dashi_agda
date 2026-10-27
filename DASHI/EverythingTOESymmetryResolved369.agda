@@ -1166,3 +1166,33 @@ toeSemanticPromotionCannotConferLegalAuthority =
 
 toeSemanticPromotionCannotConferAnyAuthority =
   LegalSemanticTOE.toeSemanticPromotionCannotConferAnyAuthority
+
+
+-- Reuse canonical governed legal compliance and Actionstep-style authority firewalls.
+toeExpertQualificationDoesNotCreateForensicCompliance =
+  LegalSemanticTOE.toeExpertQualificationDoesNotCreateForensicCompliance
+
+toeReportAdmissionDoesNotRepairMissingInput =
+  LegalSemanticTOE.toeReportAdmissionDoesNotRepairMissingInput
+
+toeLegalReviewDoesNotCreateClaimTruth =
+  LegalSemanticTOE.toeLegalReviewDoesNotCreateClaimTruth
+
+toeOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalSemanticTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
+
+toeLegalityAloneDoesNotCreateLegitimacy =
+  LegalSemanticTOE.toeLegalityAloneDoesNotCreateLegitimacy
+
+toeActionstepStyleVendorIdentityCreatesAuthority =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthority
+
+toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+
