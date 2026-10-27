@@ -25,10 +25,25 @@ toeBalabanRGBlockSpinTransferStillOpen :
 toeBalabanRGBlockSpinTransferStillOpen =
   BalabanRGTOE.balabanRGBlockSpinTransferStillOpen
 
+toeBalabanRGUniformKPAbsorptionStillOpen :
+  BalabanRGTOE.RGFrontier.uniformKPAbsorptionThroughBalabanInductionProved
+    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+  ≡ false
+toeBalabanRGUniformKPAbsorptionStillOpen =
+  BalabanRGTOE.balabanRGUniformKPAbsorptionStillOpen
+
 toeBalabanRGContinuumConstructionStillOpen :
   BalabanRGTOE.balabanRGContinuumConstructionOpenFlag ≡ false
 toeBalabanRGContinuumConstructionStillOpen =
   BalabanRGTOE.balabanRGContinuumConstructionStillOpen
+
+toeBalabanRGContinuumMassGapStillOpen :
+  BalabanRGTOE.MassGap.continuumMassGapProvedInDASHI
+    (BalabanRGTOE.RGFrontier.balabanMassGapSurface
+      BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt)
+  ≡ false
+toeBalabanRGContinuumMassGapStillOpen =
+  BalabanRGTOE.balabanRGContinuumMassGapStillOpen
 
 toeBalabanRGClayPromotionStillFalse :
   BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
