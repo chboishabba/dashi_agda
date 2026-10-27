@@ -66,3 +66,32 @@ allCanonicalAuthorityKindsRemainClosed :
     Authority.canonicalAuthorityKinds
 allCanonicalAuthorityKindsRemainClosed =
   Cut.toeCanonicalAuthorityKindsRemainClosed
+
+------------------------------------------------------------------------
+-- Governance and future-safety regression.
+------------------------------------------------------------------------
+
+staticRefinementStillDoesNotCreateDynamicSafety :
+  Cut.Frozen.FrozenProvenanceDynamicBoundary.staticSeparationImpliesDynamicSafety
+    Cut.frozenProvenanceDynamicBoundary
+  ≡ false
+staticRefinementStillDoesNotCreateDynamicSafety = refl
+
+frozenSelectionStillDoesNotCreateDynamicSafety :
+  Cut.Frozen.FrozenProvenanceDynamicBoundary.frozenRuleImpliesDynamicSafety
+    Cut.frozenProvenanceDynamicBoundary
+  ≡ false
+frozenSelectionStillDoesNotCreateDynamicSafety = refl
+
+provenanceStillDoesNotCreateTruthOrAuthority :
+  Cut.Frozen.FrozenProvenanceDynamicBoundary.provenanceCreatesTruthOrAuthority
+    Cut.frozenProvenanceDynamicBoundary
+  ≡ false
+provenanceStillDoesNotCreateTruthOrAuthority = refl
+
+kernelClosureStillDoesNotCreateSemanticClosure :
+  Cut.Formalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
+    Cut.Formalisation.canonicalThreeStoreyBoundary
+  ≡ false
+kernelClosureStillDoesNotCreateSemanticClosure =
+  Cut.kernelClosureStillNotSemanticClosure
