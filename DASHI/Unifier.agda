@@ -1,5 +1,13 @@
 module DASHI.Unifier where
 
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
+open import Agda.Builtin.Bool using (false; true)
+
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -689,3 +697,68 @@ unifierYangMillsGoal1C4CommonMetricCompilerLevel =
 
 unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- SensibLaw / legal governance TOE normalization.
+-- Unifier consumes the theorem owner.  It does not create authority.
+------------------------------------------------------------------------
+
+unifierSensibLawGovernanceSemanticBoundary :
+  Authority.AuthorityNonPromotionBundle
+unifierSensibLawGovernanceSemanticBoundary =
+  GovernanceTOE.governanceSemanticAuthorityBoundary
+
+unifierSensibLawSemanticTruthAuthorityStillClosed :
+  Authority.truthAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
+unifierSensibLawSemanticTruthAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+
+unifierSensibLawSemanticLegalAuthorityStillClosed :
+  Authority.legalAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
+unifierSensibLawSemanticLegalAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
+
+unifierSensibLawSemanticAllAuthorityStillClosed :
+  Authority.promotesAnyAuthority unifierSensibLawGovernanceSemanticBoundary ≡ false
+unifierSensibLawSemanticAllAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
+
+unifierSensibLawLegalAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+unifierSensibLawLegalAuthorityBoundaryReceipt =
+  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
+
+unifierSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+unifierSensibLawLegalRuntimeContract =
+  GovernanceTOE.governanceLegalRuntimeContract
+
+unifierSensibLawDomainTransportReceipt :
+  Domain.DomainTransportReceipt
+unifierSensibLawDomainTransportReceipt =
+  GovernanceTOE.governanceDomainTransportReceipt
+
+unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
+  Domain.representationEqualityCreatesLegalAuthority
+    unifierSensibLawDomainTransportReceipt
+  ≡ false
+unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
+  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+unifierSensibLawVendorIdentityDoesNotCreateAuthority :
+  Domain.vendorIdentityCreatesAuthority unifierSensibLawDomainTransportReceipt
+  ≡ false
+unifierSensibLawVendorIdentityDoesNotCreateAuthority =
+  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+
+unifierSensibLawTargetDomainNeedsOwnAuthorityWitness :
+  Domain.targetDomainNeedsOwnAuthorityWitness unifierSensibLawDomainTransportReceipt
+  ≡ true
+unifierSensibLawTargetDomainNeedsOwnAuthorityWitness =
+  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+
+unifierSensibLawGovernanceZKPFrame :
+  GovernanceTOE.SensibLawGovernanceTOEZKPFrame
+unifierSensibLawGovernanceZKPFrame =
+  GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame
