@@ -97,3 +97,26 @@ unifierProducerSourceStillNotExecution :
   Owner.ProducerSourceCreatesRunReceipt → ⊥
 unifierProducerSourceStillNotExecution =
   Unifier.unifierIbrahimProducerSourceDoesNotCreateRunReceipt
+
+-- Both root faces reject the conjunction without adding a new axiom.
+-- This is a proof-graph wiring receipt, not a new Balaban or
+-- Ibrahim source theorem and not an assertion of continuum physics.
+toeJointNoPromotion :
+  Owner.BalabanScaleTransferPromotion →
+  Owner.SearchPriorityCreatesProof → ⊥
+toeJointNoPromotion = TOE.toeRGAndIbrahimJointPromotionImpossible
+
+unifierJointNoPromotion :
+  Owner.BalabanScaleTransferPromotion →
+  Owner.SearchPriorityCreatesProof → ⊥
+unifierJointNoPromotion = Unifier.unifierRGAndIbrahimJointPromotionImpossible
+
+toeReverseNoPromotion :
+  Owner.SearchPriorityCreatesProof →
+  Owner.BalabanScaleTransferPromotion → ⊥
+toeReverseNoPromotion = TOE.toeRGAndIbrahimSearchPromotionImpossible
+
+unifierReverseNoPromotion :
+  Owner.SearchPriorityCreatesProof →
+  Owner.BalabanScaleTransferPromotion → ⊥
+unifierReverseNoPromotion = Unifier.unifierRGAndIbrahimSearchPromotionImpossible
