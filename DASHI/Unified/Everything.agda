@@ -142,3 +142,22 @@ unifiedTOE369MaxCutZKPFrame =
 unifiedTOE369MaxCutReceipt : MaxCutTOE.TOE369MaxCutReceipt
 unifiedTOE369MaxCutReceipt =
   MaxCutTOE.canonicalTOE369MaxCutReceipt
+
+------------------------------------------------------------------------
+-- Exact non-factorability: loss cannot be repaired by recharting.
+-- Original theorem ownership remains with IntersectionalNonFactorability.
+------------------------------------------------------------------------
+
+open import Data.Empty using (⊥)
+import DASHI.Core.IntersectionalNonFactorability as RepoStateNonFactorUnified
+
+unifiedRechartCannotRecoverErasedPhenomenon :
+  ∀ {Recharted : Set} →
+  (rechart : RepoStateNonFactorUnified.FlatSingleAxis → Recharted) →
+  RepoStateNonFactorUnified.FactorsThrough
+    (λ state → rechart (RepoStateNonFactorUnified.flatProjection state))
+    RepoStateNonFactorUnified.relationalOutcome →
+  ⊥
+unifiedRechartCannotRecoverErasedPhenomenon rechart =
+  RepoStateSpaceTOE.rechartCannotRecoverErasedPhenomenon
+    rechart RepoStateSpaceTOE.canonicalIntersectionalCollision
