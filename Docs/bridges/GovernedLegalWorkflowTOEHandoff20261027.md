@@ -272,3 +272,33 @@ No meta-introspector theorem authority is imported.
 - **F** — Deterministic connector read-back checks: owner imports, all three facades, regression naming, zero banned trust escapes, zero ESD changed paths, ahead-only branch comparison. Local Agda compiler and dashi-agda-preflight are not installed in the execution container. No kernel-check result is claimed.
 
 **Ibrahim/Pareto stopping rule**: #1285 already owns the generic SensibLaw/Actionstep-style workstream. Do not create another bridge or inflate a task acceptance into legal authority. Jurisdiction-specific, matter-specific, and evidence-bound applicability remain consumers that require their own source and acceptance receipts.
+
+
+## 2026-10-27 complete authority invariant handoff
+
+The final same-object handoff is now
+`canonicalGovernedLegalWorkflowAuthorityInvariantHandoff`.
+
+It reuses the existing workflow invariant handoff.
+It also carries the canonical legal-source authority boundary.
+
+The handoff carries all five existing legal-source firewalls.
+
+- Candidate source status does not create legal-source authority.
+- Legal-system identity does not create legal-source authority.
+- Current source validity does not prove case-specific applicability.
+- Semantic admission does not create legal-source authority.
+- Document role does not supply legal-source authority.
+
+`EverythingTOESymmetryResolved369`, `Unifier`, and `Unified.Everything`
+export the same canonical handoff.
+
+This is the generic Actionstep-style workflow boundary.
+It does not create an Actionstep ontology.
+
+The PlantUML view is
+`Docs/diagrams/governed_legal_source_authority_toe.puml`.
+
+No ESD surface is modified.
+No legal rule is added.
+No theorem ownership is reassigned.
