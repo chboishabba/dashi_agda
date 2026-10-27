@@ -964,3 +964,36 @@ toeSelected3BSingleActionProducerStillUninhabited :
     Kernel27TOE.singleProducerBoundary ≡ false
 toeSelected3BSingleActionProducerStillUninhabited =
   Kernel27TOE.singleActionProducerStillUninhabited
+
+
+------------------------------------------------------------------------
+-- Direct TOE proof-term exports for the canonical Max Cut / kernel BIDI /
+-- ternary-27 / Ibrahim separation. Donor modules retain theorem ownership.
+-- No 27-state coincidence is promoted to Monster representation.
+------------------------------------------------------------------------
+
+toeMaxCut27RotationNotFree :
+  MaxCut369.FullCubeRotationFree → ⊥
+toeMaxCut27RotationNotFree =
+  MaxCut369.toe27FullCubeRotationNotFree
+
+toeMaxCutFullGradeDimensionNotFaithfulness :
+  MaxCut369.FullGrade.LinearDimensionCreatesFaithfulness → ⊥
+toeMaxCutFullGradeDimensionNotFaithfulness =
+  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+toeMaxCutIbrahimChartNotAction :
+  MaxCut369.Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+toeMaxCutIbrahimChartNotAction =
+  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+toeMaxCutBalabanScaleTransferNotPromoted :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+toeMaxCutBalabanScaleTransferNotPromoted =
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+
+toeMaxCutFleet58PlanningDoesNotProve :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeMaxCutFleet58PlanningDoesNotProve =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
