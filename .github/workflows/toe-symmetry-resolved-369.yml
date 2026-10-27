@@ -52,6 +52,8 @@ on:
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/SensibLawGovernanceTOEExact.agda'
       - 'DASHI/Unified/SensibLawGovernanceTOEValidation.agda'
+      - 'DASHI/Unified/SensibLawGovernanceComplianceTOEExact.agda'
+      - 'DASHI/Unified/SensibLawGovernanceComplianceTOEValidation.agda'
       - 'DASHI/Interop/SensibLawSemanticPromotionPolicy.agda'
       - 'DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda'
       - 'DASHI/Law/SensibLawITIRParityEverything.agda'
@@ -116,6 +118,14 @@ jobs:
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceComplianceTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceComplianceTOEValidation.agda --root .
+          dashi-repo related qualificationDoesNotAutomaticallyProveForensicCompliance --root . --limit 20
+          dashi-repo related legalReviewDecisionDoesNotCreateApplicability --root . --limit 20
+          dashi-repo related parserCandidateAloneCannotAuthorizeAdmission --root . --limit 20
+          dashi-repo related officialSurfaceCannotRecoverFineLegalState --root . --limit 20
+          dashi-repo related legalOnlyIsNotAdmittedLegitimacy --root . --limit 20
+          dashi-repo discover 'SensibLaw expert review admission legal decision legitimacy compliance governance non-promotion' --root . --limit 40
           dashi-repo related semanticPromotionAuthorityBoundary --root . --limit 20
           dashi-repo related canonicalAgdaFirstLegalRuntimeContract --root . --limit 20
           dashi-repo related canonicalDomainTransportReceipt --root . --limit 20
@@ -168,6 +178,14 @@ jobs:
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/SensibLawGovernanceTOEExact.agda
             DASHI/Unified/SensibLawGovernanceTOEValidation.agda
+            DASHI/Unified/SensibLawGovernanceComplianceTOEExact.agda
+            DASHI/Unified/SensibLawGovernanceComplianceTOEValidation.agda
+            DASHI/Law/SensibLawExpertEvidenceProductionIntegrityExact.agda
+            DASHI/Law/SensibLawRealMatterReviewDecisionExact.agda
+            DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda
+            DASHI/Governance/PromotionSpine.agda
+            DASHI/Governance/LegalDecisionDoubleProjectionExact.agda
+            DASHI/Governance/LegitimacyEvidenceSeparationExact.agda
             DASHI/Interop/SensibLawSemanticPromotionPolicy.agda
             DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda
             DASHI/Law/SensibLawITIRParityEverything.agda
@@ -197,6 +215,8 @@ jobs:
           modules=(
             DASHI/Unified/SensibLawGovernanceTOEExact.agda
             DASHI/Unified/SensibLawGovernanceTOEValidation.agda
+            DASHI/Unified/SensibLawGovernanceComplianceTOEExact.agda
+            DASHI/Unified/SensibLawGovernanceComplianceTOEValidation.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
