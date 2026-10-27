@@ -1205,3 +1205,34 @@ unifierYMImplementAToDScaleTransferNonPromotion :
 unifierYMImplementAToDScaleTransferNonPromotion =
   YMAD.scaleTransferPromotionEliminator
     YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- CONTEXTUAL-SEMANTIC-FRACTRAN-TOE-MAXCUT
+------------------------------------------------------------------------
+
+import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as ContextualTOE
+
+unifierContextualSemanticFractranMaxCutReceipt :
+  ContextualTOE.ContextualSemanticFractranTOEMaxCutReceipt
+unifierContextualSemanticFractranMaxCutReceipt =
+  ContextualTOE.canonicalContextualSemanticFractranTOEMaxCutReceipt
+
+unifierContextualSemanticFractranZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierContextualSemanticFractranZKPFrame =
+  ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
+
+unifierContextualCoverageDoesNotCreateMonsterRepresentation :
+  ContextualTOE.CoverageMonsterRepresentationPromotion → ⊥
+unifierContextualCoverageDoesNotCreateMonsterRepresentation =
+  ContextualTOE.coverageDoesNotCreateMonsterRepresentation
+
+unifierContextualParetoChartDoesNotCreateMonsterRepresentation :
+  ContextualTOE.ParetoTernaryMonsterRepresentationPromotion → ⊥
+unifierContextualParetoChartDoesNotCreateMonsterRepresentation =
+  ContextualTOE.paretoTernaryChartDoesNotCreateMonsterRepresentation
+
+unifierContextualFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+unifierContextualFleetDischargedFibresRemainOutOfTarget =
+  ContextualTOE.fleetDischargedFibresRemainOutOfTarget
