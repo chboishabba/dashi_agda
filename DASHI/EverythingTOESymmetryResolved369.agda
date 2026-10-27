@@ -1,4 +1,6 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+
+import DASHI.Physics.Foundations.PhasedArrayDirectionFindingExact as PlasmaAperture
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1456,3 +1458,20 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Reuse the finite aperture-support discriminator.
+-- The source experiment does not discharge a Maxwell far-field theorem.
+------------------------------------------------------------------------
+
+toeLaserSupportIsNotElectronicWeighting :
+  PlasmaAperture.laserInducedPlasmaSupport ≡
+  PlasmaAperture.electronicallyWeightedSupport → ⊥
+toeLaserSupportIsNotElectronicWeighting =
+  PlasmaAperture.laserSupportIsNotElectronicWeighting
+
+toeNearFieldContrastIsNotFarFieldGain :
+  PlasmaAperture.measuredNearFieldContrast ≡
+  PlasmaAperture.demonstratedFarFieldGain → ⊥
+toeNearFieldContrastIsNotFarFieldGain =
+  PlasmaAperture.nearFieldContrastIsNotFarFieldGain
