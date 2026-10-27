@@ -149,20 +149,6 @@ legalSemanticMeetDoesNotProveApplicability :
 legalSemanticMeetDoesNotProveApplicability =
   Legal.toeSemanticMeetDoesNotProveLegalApplicability
 
-selected3BCanonicalLinearCoreStillUninhabited :
-  MaxCut.LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.canonicalCoreInhabitedHere
-    MaxCut.LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
-  ≡ false
-selected3BCanonicalLinearCoreStillUninhabited =
-  MaxCut.toeCanonicalSelected3BLinearCoreStillUninhabited
-
-selected3BActionIntertwiningStillUninhabited :
-  MaxCut.LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.actionIntertwiningInhabitedHere
-    MaxCut.LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
-  ≡ false
-selected3BActionIntertwiningStillUninhabited =
-  MaxCut.toeSelected3BActionIntertwiningStillUninhabited
-
 balabanScaleTransferPromotionImpossible :
   ParetoSnowball.BalabanScaleTransferPromotion → ⊥
 balabanScaleTransferPromotionImpossible =
