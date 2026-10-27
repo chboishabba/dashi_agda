@@ -26,6 +26,9 @@ import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
+-- Research capsule reuses existing boundaries. It does not promote proxy checks.
+import DASHI.Unified.ResearchCapsuleNonPromotionExact
+
 -- Reuse the existing exact finite GR/quantum proof-term regression.
 -- It contains a terminal physical non-promotion theorem.
 -- Do not replace this import with DASHI.Unifier placeholder axioms.
