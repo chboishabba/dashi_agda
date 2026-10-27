@@ -816,6 +816,24 @@ unifierFleetFormalGapsAre58 :
 unifierFleetFormalGapsAre58 =
   FleetHyperTOE.fleetFormalGapsAre58
 
+unifierYMGate4FormalGapsAre58 :
+  FleetHyperTOE.ymGate4FormalGaps ≡ 58
+unifierYMGate4FormalGapsAre58 =
+  FleetHyperTOE.ymGate4FormalGapsAre58
+
+unifierYMGate4PaidReductionLevel : ProofLevel
+unifierYMGate4PaidReductionLevel =
+  FleetHyperTOE.ymGate4PaidReductionLevel
+
+unifierYMGate4InhabitantsLevel : ProofLevel
+unifierYMGate4InhabitantsLevel =
+  FleetHyperTOE.ymGate4InhabitantsLevel
+
+unifierFleet58DoesNotIdentifyYMGate4 :
+  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
+unifierFleet58DoesNotIdentifyYMGate4 =
+  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
+
 unifierFleetDischargedFibresAre584 :
   FleetHyperTOE.fleetDischargedFibres ≡ 584
 unifierFleetDischargedFibresAre584 =
