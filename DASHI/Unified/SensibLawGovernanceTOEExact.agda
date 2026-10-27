@@ -72,43 +72,43 @@ governanceLegalRuntimeContract =
   LegalRuntime.canonicalAgdaFirstLegalRuntimeContract
 
 governanceRuntimeCannotInventLegalSemantics :
-  LegalRuntime.runtimeMayInventMissingFormalLegalSemantics
+  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemantics
     governanceLegalRuntimeContract
   ≡ false
 governanceRuntimeCannotInventLegalSemantics =
-  LegalRuntime.runtimeMayInventMissingFormalLegalSemanticsIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemanticsIsFalse
     governanceLegalRuntimeContract
 
 governanceParserCandidateCannotBecomeTruthByTransport :
-  LegalRuntime.parserCandidateMayBecomeTruthByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransport
     governanceLegalRuntimeContract
   ≡ false
 governanceParserCandidateCannotBecomeTruthByTransport =
-  LegalRuntime.parserCandidateMayBecomeTruthByTransportIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransportIsFalse
     governanceLegalRuntimeContract
 
 governanceSourceFollowCannotBecomeAuthorityByTransport :
-  LegalRuntime.sourceFollowMayBecomeAuthorityByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransport
     governanceLegalRuntimeContract
   ≡ false
 governanceSourceFollowCannotBecomeAuthorityByTransport =
-  LegalRuntime.sourceFollowMayBecomeAuthorityByTransportIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransportIsFalse
     governanceLegalRuntimeContract
 
 governanceTypedMeetCannotBecomeViolationByTransport :
-  LegalRuntime.typedMeetMayBecomeViolationByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransport
     governanceLegalRuntimeContract
   ≡ false
 governanceTypedMeetCannotBecomeViolationByTransport =
-  LegalRuntime.typedMeetMayBecomeViolationByTransportIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransportIsFalse
     governanceLegalRuntimeContract
 
 governanceElementPaymentCannotBecomeLiabilityByTransport :
-  LegalRuntime.wrongTypeElementPaymentMayBecomeLiabilityByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransport
     governanceLegalRuntimeContract
   ≡ false
 governanceElementPaymentCannotBecomeLiabilityByTransport =
-  LegalRuntime.wrongTypeElementPaymentMayBecomeLiabilityByTransportIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransportIsFalse
     governanceLegalRuntimeContract
 
 governanceITIRParityLegalRuntimeContract :
@@ -135,31 +135,31 @@ governanceDomainTransportReceipt =
   Domain.canonicalDomainTransportReceipt
 
 governanceSameTechnicalGrammarDoesNotImplySameMandate :
-  Domain.sameTechnicalGrammarImpliesSameMandate governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.sameTechnicalGrammarImpliesSameMandate governanceDomainTransportReceipt
   ≡ false
 governanceSameTechnicalGrammarDoesNotImplySameMandate =
   refl
 
 governanceTargetDomainNeedsOwnAuthorityWitness :
-  Domain.targetDomainNeedsOwnAuthorityWitness governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness governanceDomainTransportReceipt
   ≡ true
 governanceTargetDomainNeedsOwnAuthorityWitness =
   refl
 
 governanceRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.representationEqualityCreatesLegalAuthority governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority governanceDomainTransportReceipt
   ≡ false
 governanceRepresentationEqualityDoesNotCreateLegalAuthority =
   refl
 
 governanceVendorIdentityDoesNotCreateAuthority :
-  Domain.vendorIdentityCreatesAuthority governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority governanceDomainTransportReceipt
   ≡ false
 governanceVendorIdentityDoesNotCreateAuthority =
   refl
 
 governanceDomainPermeabilityRequiresReview :
-  Domain.domainPermeabilityRequiresGovernanceReview governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.domainPermeabilityRequiresGovernanceReview governanceDomainTransportReceipt
   ≡ true
 governanceDomainPermeabilityRequiresReview =
   refl
@@ -168,9 +168,9 @@ governanceSameMachineryDoesNotTransportAuthority :
   (Domain.represent Domain.exampleMachinery Domain.sourceDomain Domain.subject
     ≡
    Domain.represent Domain.exampleMachinery Domain.targetDomain Domain.subject →
-   Domain.DomainAuthority.authorised
+   Domain.authorised
      Domain.exampleAuthority Domain.sourceDomain Domain.subject →
-   Domain.DomainAuthority.authorised
+   Domain.authorised
      Domain.exampleAuthority Domain.targetDomain Domain.subject) →
   ⊥
 governanceSameMachineryDoesNotTransportAuthority =
