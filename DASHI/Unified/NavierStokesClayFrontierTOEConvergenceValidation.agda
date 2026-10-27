@@ -179,3 +179,83 @@ adapterSharedWeightedClayStillFalse :
   NSClay.currentSharedWeightedClayPromotion ≡ false
 adapterSharedWeightedClayStillFalse =
   NSClay.currentSharedWeightedClayPromotionStillFalse
+
+
+------------------------------------------------------------------------
+-- Consumer agreement for the current R736 wall.
+------------------------------------------------------------------------
+
+toeSharedWeightedLeafCountMatchesAdapter :
+  TOE.toeNavierStokesSharedWeightedExactlyTwoLeaves
+  ≡ NSClay.currentSharedWeightedExactlyTwoLeaves
+toeSharedWeightedLeafCountMatchesAdapter = refl
+
+toeWeightedPlusEndpointMatchesAdapter :
+  TOE.toeNavierStokesWeightedPlusEndpointClosed
+  ≡ NSClay.currentWeightedPlusEndpointClosed
+toeWeightedPlusEndpointMatchesAdapter = refl
+
+toeAugmentedCriticalWeightedMatchesAdapter :
+  TOE.toeNavierStokesAugmentedCriticalWeightedClosed
+  ≡ NSClay.currentAugmentedCriticalWeightedClosed
+toeAugmentedCriticalWeightedMatchesAdapter = refl
+
+toeSharedWeightedClayMatchesAdapter :
+  TOE.toeNavierStokesSharedWeightedClayPromotion
+  ≡ NSClay.currentSharedWeightedClayPromotion
+toeSharedWeightedClayMatchesAdapter = refl
+
+toeSharedWeightedClayStillFalse :
+  TOE.toeNavierStokesSharedWeightedClayPromotion ≡ false
+toeSharedWeightedClayStillFalse =
+  TOE.toeNavierStokesSharedWeightedClayPromotionStillFalse
+
+unifierSharedWeightedLeafCountMatchesAdapter :
+  U.unifierNavierStokesSharedWeightedExactlyTwoLeaves
+  ≡ NSClay.currentSharedWeightedExactlyTwoLeaves
+unifierSharedWeightedLeafCountMatchesAdapter = refl
+
+unifierWeightedPlusEndpointMatchesAdapter :
+  U.unifierNavierStokesWeightedPlusEndpointClosed
+  ≡ NSClay.currentWeightedPlusEndpointClosed
+unifierWeightedPlusEndpointMatchesAdapter = refl
+
+unifierAugmentedCriticalWeightedMatchesAdapter :
+  U.unifierNavierStokesAugmentedCriticalWeightedClosed
+  ≡ NSClay.currentAugmentedCriticalWeightedClosed
+unifierAugmentedCriticalWeightedMatchesAdapter = refl
+
+unifierSharedWeightedClayMatchesAdapter :
+  U.unifierNavierStokesSharedWeightedClayPromotion
+  ≡ NSClay.currentSharedWeightedClayPromotion
+unifierSharedWeightedClayMatchesAdapter = refl
+
+unifierSharedWeightedClayStillFalse :
+  U.unifierNavierStokesSharedWeightedClayPromotion ≡ false
+unifierSharedWeightedClayStillFalse =
+  U.unifierNavierStokesSharedWeightedClayPromotionStillFalse
+
+physicsSharedWeightedLeafCountMatchesAdapter :
+  Physics.navierStokesSharedWeightedExactlyTwoLeaves
+  ≡ NSClay.currentSharedWeightedExactlyTwoLeaves
+physicsSharedWeightedLeafCountMatchesAdapter = refl
+
+physicsWeightedPlusEndpointMatchesAdapter :
+  Physics.navierStokesWeightedPlusEndpointClosed
+  ≡ NSClay.currentWeightedPlusEndpointClosed
+physicsWeightedPlusEndpointMatchesAdapter = refl
+
+physicsAugmentedCriticalWeightedMatchesAdapter :
+  Physics.navierStokesAugmentedCriticalWeightedClosed
+  ≡ NSClay.currentAugmentedCriticalWeightedClosed
+physicsAugmentedCriticalWeightedMatchesAdapter = refl
+
+physicsSharedWeightedClayMatchesAdapter :
+  Physics.navierStokesSharedWeightedClayPromotion
+  ≡ NSClay.currentSharedWeightedClayPromotion
+physicsSharedWeightedClayMatchesAdapter = refl
+
+physicsSharedWeightedClayStillFalse :
+  Physics.navierStokesSharedWeightedClayPromotion ≡ false
+physicsSharedWeightedClayStillFalse =
+  Physics.navierStokesSharedWeightedClayPromotionStillFalse
