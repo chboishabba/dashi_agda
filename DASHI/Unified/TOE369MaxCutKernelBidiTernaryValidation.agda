@@ -343,3 +343,14 @@ unifierFinite27EncodeDecodeBidiMatches :
     (Unifier.unifier369Ternary27StateDecode i) ≡ i
 unifierFinite27EncodeDecodeBidiMatches =
   Unifier.unifier369Ternary27StateCodeStateDecode
+
+
+toeMaxCutZKPFrameMatches :
+  TOE.toe369MaxCutZKPFrame
+  ≡ Owner.canonicalTOE369MaxCutZKPFrame
+toeMaxCutZKPFrameMatches = refl
+
+unifierMaxCutZKPFrameMatches :
+  Unifier.unifier369MaxCutZKPFrame
+  ≡ Owner.canonicalTOE369MaxCutZKPFrame
+unifierMaxCutZKPFrameMatches = refl
