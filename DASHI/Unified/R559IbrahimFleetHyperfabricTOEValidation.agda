@@ -84,3 +84,23 @@ fleetDischargedFibresStillCannotBeRetargeted :
   Fleet.FleetDischargedFibreRetargetPermission → ⊥
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
+
+toeYMGate4CountIs58 :
+  TOE.toeYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+toeYMGate4CountIs58 = refl
+
+unifierYMGate4CountIs58 :
+  Unifier.unifierYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+unifierYMGate4CountIs58 = refl
+
+toeFleet58DoesNotIdentifyYMGate4 :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+toeFleet58DoesNotIdentifyYMGate4 =
+  TOE.toeFleet58DoesNotIdentifyYMGate4
+
+unifierFleet58DoesNotIdentifyYMGate4 :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+unifierFleet58DoesNotIdentifyYMGate4 =
+  Unifier.unifierFleet58DoesNotIdentifyYMGate4
