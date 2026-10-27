@@ -62,6 +62,8 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.CompositionalComplianceExact as Compliance
 import DASHI.Core.ITIRGovernanceControlCaseExact as Control
+import DASHI.Core.BoundAcquisitionDemandExact as BoundAcquisition
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNonPromotion
 import DASHI.Governance.FormalisationGovernanceCapstoneExact as Formalisation
 import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as Operational
 import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as Review
@@ -77,6 +79,7 @@ import DASHI.Interop.SLRRuntimeValidationHandoffExact as RuntimeValidation
 import DASHI.Interop.SLRValidationRoadmapPromotionExact as ValidationRoadmap
 import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
 import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as SoftwareValidation
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as SemanticPromotion
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
 
 ------------------------------------------------------------------------
@@ -228,6 +231,64 @@ toeKernelClosureDoesNotMeanSemanticClosure :
 toeKernelClosureDoesNotMeanSemanticClosure =
   Formalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosureIsFalse
     Formalisation.canonicalThreeStoreyBoundary
+
+
+------------------------------------------------------------------------
+-- Canonical semantic-authority and bound-acquisition non-promotion.
+--
+-- Reuse the existing owners.
+-- Semantic evidence classification creates no truth or legal authority.
+-- Binding work to an exact residual and producer still does not pay the
+-- requirement or close the consumer.
+------------------------------------------------------------------------
+
+BoundDemandAutomaticallyPaysRequirement : Set
+BoundDemandAutomaticallyPaysRequirement =
+  BoundAcquisition.BoundDemandAutomaticallyPaysRequirement
+
+BoundDemandAutomaticallyClosesConsumer : Set
+BoundDemandAutomaticallyClosesConsumer =
+  BoundAcquisition.BoundDemandAutomaticallyClosesConsumer
+
+SameProducerIdentifiesResidual : Set
+SameProducerIdentifiesResidual =
+  BoundAcquisition.SameProducerIdentifiesResidual
+
+toeSemanticPromotionTruthAuthorityClosed :
+  AuthorityNonPromotion.truthAuthorityFlag
+    SemanticPromotion.semanticPromotionAuthorityBoundary
+  ≡ false
+toeSemanticPromotionTruthAuthorityClosed =
+  SemanticPromotion.semantic-promotion-truth-authority-closed
+
+toeSemanticPromotionLegalAuthorityClosed :
+  AuthorityNonPromotion.legalAuthorityFlag
+    SemanticPromotion.semanticPromotionAuthorityBoundary
+  ≡ false
+toeSemanticPromotionLegalAuthorityClosed =
+  SemanticPromotion.semantic-promotion-legal-authority-closed
+
+toeSemanticPromotionAllAuthorityClosed :
+  AuthorityNonPromotion.promotesAnyAuthority
+    SemanticPromotion.semanticPromotionAuthorityBoundary
+  ≡ false
+toeSemanticPromotionAllAuthorityClosed =
+  SemanticPromotion.semantic-promotion-all-authority-closed
+
+toeBoundAcquisitionDoesNotPayRequirement :
+  BoundDemandAutomaticallyPaysRequirement → ⊥
+toeBoundAcquisitionDoesNotPayRequirement =
+  BoundAcquisition.bindingDoesNotPayRequirement
+
+toeBoundAcquisitionDoesNotCloseConsumer :
+  BoundDemandAutomaticallyClosesConsumer → ⊥
+toeBoundAcquisitionDoesNotCloseConsumer =
+  BoundAcquisition.bindingDoesNotCloseConsumer
+
+toeProducerIdentityDoesNotIdentifyResidual :
+  SameProducerIdentifiesResidual → ⊥
+toeProducerIdentityDoesNotIdentifyResidual =
+  BoundAcquisition.producerIdentityDoesNotIdentifyResidual
 
 ------------------------------------------------------------------------
 -- Existing proof-carrying compliance handoff.
@@ -666,6 +727,8 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "DASHI.Interop.SLRValidationRoadmapPromotionExact"
     ∷ "DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact"
     ∷ "DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact"
+    ∷ "DASHI.Interop.SensibLawSemanticPromotionPolicy"
+    ∷ "DASHI.Core.BoundAcquisitionDemandExact"
     ∷ [] )
     ( "Normalize exact theorem aliases only."
     ∷ "Retain the intermediate compliance witness."
@@ -692,6 +755,9 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "An admission receipt does not authorize publication."
     ∷ "Software validation does not authorize publication."
     ∷ "Later validation does not rewrite the certified baseline."
+    ∷ "Semantic promotion creates no truth authority, legal authority, or generic authority."
+    ∷ "Bound acquisition does not pay the requirement or close the consumer."
+    ∷ "Producer identity does not identify the residual."
     ∷ [] )
     ( "dashi_agda is the formal reference lane."
     ∷ "SensibLaw/SLR owns review, admission, semantic construction, and legal consumer projection."
@@ -713,6 +779,8 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "The TOE root reaches review-to-promotion non-promotion proofs."
     ∷ "The TOE root reaches runtime-validation and roadmap-promotion firewalls."
     ∷ "The TOE root reaches legal semantic admission and software-validation firewalls."
+    ∷ "The TOE root reaches canonical semantic-authority non-promotion."
+    ∷ "The TOE root reaches exact-live bound-acquisition non-promotion."
     ∷ [] )
     ( "ITIL change and service-management lens."
     ∷ "ISO 9000 family quality-management lens."
@@ -815,6 +883,33 @@ record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
       SoftwareValidationAuthorizesPublication →
       ⊥
 
+    semanticPromotionTruthAuthorityClosed :
+      AuthorityNonPromotion.truthAuthorityFlag
+        SemanticPromotion.semanticPromotionAuthorityBoundary
+      ≡ false
+
+    semanticPromotionLegalAuthorityClosed :
+      AuthorityNonPromotion.legalAuthorityFlag
+        SemanticPromotion.semanticPromotionAuthorityBoundary
+      ≡ false
+
+    semanticPromotionAllAuthorityClosed :
+      AuthorityNonPromotion.promotesAnyAuthority
+        SemanticPromotion.semanticPromotionAuthorityBoundary
+      ≡ false
+
+    boundAcquisitionPaymentFirewall :
+      BoundDemandAutomaticallyPaysRequirement →
+      ⊥
+
+    boundAcquisitionClosureFirewall :
+      BoundDemandAutomaticallyClosesConsumer →
+      ⊥
+
+    producerIdentityResidualFirewall :
+      SameProducerIdentifiesResidual →
+      ⊥
+
     caseySelectionTruthFirewall :
       CaseySelectionCreatesWorldTruth →
       ⊥
@@ -848,6 +943,12 @@ canonicalGovernedLegalWorkflowTOEInvariantHandoff =
     toeRuntimeParityDoesNotCreateWorldTruth
     toeParserCandidateDoesNotAuthorizeAdmission
     toeSoftwareValidationDoesNotAuthorizePublication
+    toeSemanticPromotionTruthAuthorityClosed
+    toeSemanticPromotionLegalAuthorityClosed
+    toeSemanticPromotionAllAuthorityClosed
+    toeBoundAcquisitionDoesNotPayRequirement
+    toeBoundAcquisitionDoesNotCloseConsumer
+    toeProducerIdentityDoesNotIdentifyResidual
     toeCaseySelectionDoesNotCreateWorldTruth
     toeFormalProofDoesNotCreateExternalWorldTruth
     toeKnowledgeDoesNotCreateExecutionAuthority
