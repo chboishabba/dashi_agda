@@ -7,7 +7,7 @@ on:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CurrentFrontierRound474Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Unified/Physics.agda'
@@ -66,8 +66,8 @@ jobs:
             DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact.stressCoefficientEnergyUniformBound
             DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toePublishedRGDoesNotPromoteContinuum
             DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1A1CurrentStepBetaSourceLevel
-            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1BLiteralPublishedSelectedLocalizationLevel
-            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1CExactSameFamilySourceCutLevel
+            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1BWilsonTwoInsertionConnectedShellLevel
+            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1CSameFamilySourceInstantiationLevel
             DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1G2SameSystemNontrivialitySemanticsLevel
           )
           for symbol in "${symbols[@]}"; do
