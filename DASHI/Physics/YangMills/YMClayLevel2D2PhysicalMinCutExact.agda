@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.YMClayLevel2R129CompositeOperatorAttachmentExact 
 import DASHI.Physics.YangMills.YMClayLevel2R129LiteralOPECoefficientWeldExact as R129Literal
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as OPE
 import DASHI.Physics.YangMills.YMClayLevel2CompositeTransportABIInsufficiencyExact as Sound
+import DASHI.Physics.YangMills.YMClayLevel2D2SourceEntryInsufficiencyExact as SourceEntrySound
 import DASHI.Physics.YangMills.YMClayLevel2D2R129CompositeConvergenceExact as D2d
 
 ------------------------------------------------------------------------
@@ -169,6 +170,25 @@ physicalD2aRequiresInsertionOrBlockingNaturalityIsTrue :
   physicalD2aRequiresInsertionOrBlockingNaturality ≡ true
 physicalD2aRequiresInsertionOrBlockingNaturalityIsTrue =
   Sound.physicalD2aNeedsInsertionOrBlockingNaturalityIsTrue
+
+
+publishedSourceEntryPaysD2aInsertionNaturality : Bool
+publishedSourceEntryPaysD2aInsertionNaturality =
+  SourceEntrySound.publishedSourceEntryPaysD2aInsertionNaturality
+
+publishedSourceEntryPaysD2aInsertionNaturalityIsFalse :
+  publishedSourceEntryPaysD2aInsertionNaturality ≡ false
+publishedSourceEntryPaysD2aInsertionNaturalityIsFalse =
+  SourceEntrySound.publishedSourceEntryPaysD2aInsertionNaturalityIsFalse
+
+publishedSourceEntryDeterminesCompositeInsertionValue : Bool
+publishedSourceEntryDeterminesCompositeInsertionValue =
+  SourceEntrySound.publishedSourceEntryDeterminesCompositeInsertionValue
+
+publishedSourceEntryDeterminesCompositeInsertionValueIsFalse :
+  publishedSourceEntryDeterminesCompositeInsertionValue ≡ false
+publishedSourceEntryDeterminesCompositeInsertionValueIsFalse =
+  SourceEntrySound.publishedSourceEntryDeterminesCompositeInsertionValueIsFalse
 
 newGlobalAFTheoremRequired : Bool
 newGlobalAFTheoremRequired = false
