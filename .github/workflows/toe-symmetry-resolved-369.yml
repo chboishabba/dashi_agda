@@ -10,6 +10,8 @@ on:
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/SensibLawActionstepGovernanceTOEExact.agda'
       - 'DASHI/Unified/SensibLawActionstepGovernanceTOEValidation.agda'
+      - 'DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEExact.agda'
+      - 'DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEValidation.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -39,6 +41,8 @@ jobs:
             DASHI/Unifier.agda
             DASHI/Unified/SensibLawActionstepGovernanceTOEExact.agda
             DASHI/Unified/SensibLawActionstepGovernanceTOEValidation.agda
+            DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEExact.agda
+            DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEValidation.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -52,3 +56,4 @@ jobs:
           agda --version
           agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
           agda -i . -l standard-library DASHI/Unified/SensibLawActionstepGovernanceTOEValidation.agda
+          agda -i . -l standard-library DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEValidation.agda
