@@ -7,6 +7,7 @@ import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as Exact
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.PNFHyperfabric as PNF
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as Ibrahim
 
 ------------------------------------------------------------------------
 -- Same-owner integration checks.
@@ -79,3 +80,27 @@ unifierDischargedFibresRemainOutOfTarget :
   Exact.FleetDischargedFibreRetargetPermission → ⊥
 unifierDischargedFibresRemainOutOfTarget =
   Unifier.unifierContextualFleetDischargedFibresRemainOutOfTarget
+
+------------------------------------------------------------------------
+-- Ibrahim Pareto / snowball surfaces remain the same owners.
+------------------------------------------------------------------------
+
+ibrahimRecognitionParetoMatchesOwner :
+  Exact.contextualIbrahimRecognitionParetoBoundary
+  ≡ Ibrahim.ibrahimRecognitionParetoBoundary
+ibrahimRecognitionParetoMatchesOwner = refl
+
+ibrahimPhaseResolutionMatchesOwner :
+  Exact.contextualIbrahimPhaseResolutionFrontier
+  ≡ Ibrahim.ibrahimPhaseResolutionFrontier
+ibrahimPhaseResolutionMatchesOwner = refl
+
+contextualSearchPriorityStillNotProof :
+  Ibrahim.SearchPriorityCreatesProof → ⊥
+contextualSearchPriorityStillNotProof =
+  Exact.ibrahimSearchPriorityDoesNotCreateProof
+
+contextualProducerSourceStillNotExecution :
+  Ibrahim.ProducerSourceCreatesRunReceipt → ⊥
+contextualProducerSourceStillNotExecution =
+  Exact.ibrahimProducerSourceDoesNotCreateRunReceipt
