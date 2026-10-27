@@ -313,3 +313,6 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+-- Reuse exact 369/tetration/corner/S3 proofs and explicit non-promotion gates.
+import DASHI.Unified.TOE369TetratedCornerCocycleConvergenceExact
