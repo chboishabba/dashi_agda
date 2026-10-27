@@ -263,3 +263,34 @@ toeResidualFieldStillNotPromoted :
   Fleet.ResidualFieldPromotion → ⊥
 toeResidualFieldStillNotPromoted =
   TOE.toeFleetResidualFieldPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Named-gap dispatch must fail closed until the external producer supplies
+-- the identity of each member of the counted 58-gap class.
+------------------------------------------------------------------------
+
+fleetNamedManifestStillOpen :
+  Fleet.namedFormalGapManifestAvailable ≡ false
+fleetNamedManifestStillOpen =
+  Fleet.namedFormalGapManifestAvailableIsFalse
+
+fleetDispatchRequiresNamedManifest :
+  Fleet.dispatchRequiresNamedFormalGapManifest ≡ true
+fleetDispatchRequiresNamedManifest =
+  Fleet.dispatchRequiresNamedFormalGapManifestIsTrue
+
+fleetCountDoesNotIdentifyGapObjects :
+  Fleet.externalGapCountIdentifiesIndividualGaps ≡ false
+fleetCountDoesNotIdentifyGapObjects =
+  Fleet.externalGapCountIdentifiesIndividualGapsIsFalse
+
+fleetDischargedFibresNotDispatchEligible :
+  Fleet.dischargedFibresEligibleForGapDispatch ≡ false
+fleetDischargedFibresNotDispatchEligible =
+  Fleet.dischargedFibresEligibleForGapDispatchIsFalse
+
+fleetContradictionGapsNotDispatchEligible :
+  Fleet.contradictionGapsEligibleForFormalGapDispatch ≡ false
+fleetContradictionGapsNotDispatchEligible =
+  Fleet.contradictionGapsEligibleForFormalGapDispatchIsFalse
