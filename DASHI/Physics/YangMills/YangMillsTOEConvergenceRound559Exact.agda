@@ -108,6 +108,13 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS1SystemExact a
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact as SelectedB415
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StressCommonCoreExact as PinnedCStress
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact as PinnedCLocal
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealBMinCutExact as PinnedBMinCut
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealR415ClusteringExact as PinnedBR415
+import DASHI.Physics.YangMills.BalabanClayT5SameFamilyContinuumRecoveryRound425Exact as A425
+import DASHI.Physics.YangMills.BalabanClayT5PreferredSameFamilyMeasureRecoveryRound428Exact as A428
+import DASHI.Physics.YangMills.BalabanClayT5WeakMeasureSemanticsRound437Exact as A437
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralStressAttachmentExact as CStressAttachment
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119GRQFTStressExportExact as CGRQFTStress
 
 
 ------------------------------------------------------------------------
@@ -647,6 +654,98 @@ toeLiteralPinnedAFCoefficientIdentificationLevel =
 toeLiteralPinnedStressWardCommonCoreLevel : ProofLevel
 toeLiteralPinnedStressWardCommonCoreLevel =
   PinnedCLocal.literalPinnedStressWardCommonCoreLevel
+
+------------------------------------------------------------------------
+-- Later preferred A/B/C owners discovered on the live branch.
+--
+-- These aliases supersede older scheduling descriptions.
+-- They preserve the same non-promotion boundary.
+------------------------------------------------------------------------
+
+toePinnedRealBPostCoordinateCompilerLevel : ProofLevel
+toePinnedRealBPostCoordinateCompilerLevel =
+  PinnedBMinCut.pinnedCMP119RealBPostCoordinateCompilerLevel
+
+toePinnedRealBSelectedJCoordinateLevel : ProofLevel
+toePinnedRealBSelectedJCoordinateLevel =
+  PinnedBMinCut.pinnedCMP119RealBSelectedJCoordinateLevel
+
+toePinnedRealBSelectedEnvelopeLevel : ProofLevel
+toePinnedRealBSelectedEnvelopeLevel =
+  PinnedBMinCut.pinnedCMP119RealBSelectedEnvelopeLevel
+
+toePinnedRealBAdditionalAnalyticInequalityRequired : Bool
+toePinnedRealBAdditionalAnalyticInequalityRequired =
+  PinnedBMinCut.pinnedCMP119RealBAdditionalAnalyticInequalityRequired
+
+toeR415ToContinuumPhysicalClusteringCompilerLevel : ProofLevel
+toeR415ToContinuumPhysicalClusteringCompilerLevel =
+  PinnedBR415.r415ToContinuumPhysicalClusteringCompilerLevel
+
+toeSameFamilyContinuumRecoveryCompilerLevel : ProofLevel
+toeSameFamilyContinuumRecoveryCompilerLevel =
+  A425.round425SameFamilyContinuumRecoveryCompilerLevel
+
+toeSameFamilyContinuumCoreRecoveryCompilerLevel : ProofLevel
+toeSameFamilyContinuumCoreRecoveryCompilerLevel =
+  A425.round425SameFamilyContinuumCoreRecoveryCompilerLevel
+
+toeCoreRecoveryRequiresClustering : Bool
+toeCoreRecoveryRequiresClustering =
+  A425.round425CoreRecoveryRequiresClustering
+
+toePreferredSameFamilyMeasureCompilerLevel : ProofLevel
+toePreferredSameFamilyMeasureCompilerLevel =
+  A428.round428PreferredSameFamilyMeasureCompilerLevel
+
+toePreferredMeasureConvergenceLevel : ProofLevel
+toePreferredMeasureConvergenceLevel =
+  A428.round428MeasureConvergenceLevel
+
+toePreferredGlobalMomentCompactContainmentLevel : ProofLevel
+toePreferredGlobalMomentCompactContainmentLevel =
+  A428.round428GlobalMomentCompactContainmentLevel
+
+toePreferredSelectedWeakTopologyMeaningLevel : ProofLevel
+toePreferredSelectedWeakTopologyMeaningLevel =
+  A428.round428SelectedWeakExpectationTopologyMeaningLevel
+
+toeWeakMeasurePropertyCompilerLevel : ProofLevel
+toeWeakMeasurePropertyCompilerLevel =
+  A437.round437WeakMeasurePropertyCompilerLevel
+
+toeWeakMeasureFullConvergenceLevel : ProofLevel
+toeWeakMeasureFullConvergenceLevel =
+  A437.round437FullMeasureConvergenceLevel
+
+toeWeakMeasurePreGapCoreCompilerLevel : ProofLevel
+toeWeakMeasurePreGapCoreCompilerLevel =
+  A437.round437PreGapContinuumCoreCompilerLevel
+
+toeWeakMeasureGlobalMomentCompactContainmentLevel : ProofLevel
+toeWeakMeasureGlobalMomentCompactContainmentLevel =
+  A437.round437GlobalMomentCompactContainmentLevel
+
+toeWeakMeasureSelectedTopologyMeaningLevel : ProofLevel
+toeWeakMeasureSelectedTopologyMeaningLevel =
+  A437.round437SelectedWeakTopologyMeaningLevel
+
+toePinnedLiteralStressAttachmentCompilerLevel : ProofLevel
+toePinnedLiteralStressAttachmentCompilerLevel =
+  CStressAttachment.pinnedCMP119LiteralStressAttachmentCompilerLevel
+
+toePinnedGRQFTStressExportLevel : ProofLevel
+toePinnedGRQFTStressExportLevel =
+  CGRQFTStress.pinnedCMP119GRQFTStressExportLevel
+
+toeGRQFTStressWeldPromoted : Bool
+toeGRQFTStressWeldPromoted =
+  CGRQFTStress.grqftStressWeldPromoted
+
+toeGRQFTStressWeldPromotedIsFalse :
+  toeGRQFTStressWeldPromoted ≡ false
+toeGRQFTStressWeldPromotedIsFalse =
+  CGRQFTStress.grqftStressWeldPromotedIsFalse
 
 toeLiteralABCFrontierDoesNotPromoteContinuum :
   toeFlat4DContinuumTransferProvedHere ≡ false
