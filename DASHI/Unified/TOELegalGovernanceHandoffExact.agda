@@ -31,6 +31,8 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as Semantic
 import DASHI.Law.SensibLawITIRParityEverything as Parity
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Algebra.TetralemmaBridge as Tetralemma
 import DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact as Network
 import DASHI.Reasoning.ClaimAuditManifestExact as Audit
 import DASHI.Core.AuthorityNonPromotionCore as Authority
@@ -48,7 +50,7 @@ record ZKPTOELegalGovernanceHandoff : Set₁ where
     F-failureBoundary : List String
 
     semanticPolicy : Semantic.SemanticPromotionPolicySurface
-    legalRuntime : Parity.LegalRuntime.AgdaFirstLegalRuntimeContract
+    legalRuntime : LegalRuntime.AgdaFirstLegalRuntimeContract
     networkBoundary : Network.GovernedLegalNetworkBoundary
     claimAuditBoundary : Audit.ClaimAuditManifestBoundary
 
@@ -57,7 +59,7 @@ record ZKPTOELegalGovernanceHandoff : Set₁ where
       Semantic.promote
         (Semantic.heuristicCandidate
           heuristic-for heuristic-against target source)
-      ≡ Semantic.neither
+      ≡ Tetralemma.neither
 
     heuristicBitsCannotChangePromotion :
       ∀ structural-for structural-against
