@@ -327,6 +327,99 @@ unifierStressPairingPhysicalWeldMatchesOwner :
 unifierStressPairingPhysicalWeldMatchesOwner = refl
 
 
+
+------------------------------------------------------------------------
+-- Unified.Physics agreement for the complete normalized surface.
+------------------------------------------------------------------------
+
+physicsScaleDensityFlowMatchesOwner :
+  Physics.yangMillsBalabanScaleDensityFlowLevel ≡ Balaban.balabanScaleDensityFlowLevel
+physicsScaleDensityFlowMatchesOwner = refl
+
+physicsCompleteDensitySourceShapeMatchesOwner :
+  Physics.yangMillsBalabanCompleteDensitySourceShapeLevel ≡ Balaban.balabanCompleteDensitySourceShapeLevel
+physicsCompleteDensitySourceShapeMatchesOwner = refl
+
+physicsCompleteDensityDerivedSummaryMatchesOwner :
+  Physics.yangMillsBalabanCompleteDensityDerivedSummaryLevel ≡ Balaban.balabanCompleteDensityDerivedSummaryLevel
+physicsCompleteDensityDerivedSummaryMatchesOwner = refl
+
+physicsCompleteDensityPhysicalProjectionBoundsMatchesOwner :
+  Physics.yangMillsBalabanCompleteDensityPhysicalProjectionBoundsLevel ≡ Balaban.balabanCompleteDensityPhysicalProjectionBoundsLevel
+physicsCompleteDensityPhysicalProjectionBoundsMatchesOwner = refl
+
+physicsScaleDensityFiniteMeasureWeldMatchesOwner :
+  Physics.yangMillsBalabanScaleDensityFiniteMeasureWeldLevel ≡ Balaban.balabanScaleDensityFiniteMeasureWeldLevel
+physicsScaleDensityFiniteMeasureWeldMatchesOwner = refl
+
+physicsLiteralGeneratedActionDensityMatchesOwner :
+  Physics.yangMillsBalabanLiteralGeneratedActionDensityLevel ≡ Balaban.balabanLiteralGeneratedActionDensityLevel
+physicsLiteralGeneratedActionDensityMatchesOwner = refl
+
+physicsLiteralCombinedRGEffectiveActionMatchesOwner :
+  Physics.yangMillsBalabanLiteralCombinedRGEffectiveActionLevel ≡ Balaban.balabanLiteralCombinedRGEffectiveActionLevel
+physicsLiteralCombinedRGEffectiveActionMatchesOwner = refl
+
+physicsLiteralGeneratedActionStressScaleMatchesOwner :
+  Physics.yangMillsBalabanLiteralGeneratedActionStressScaleLevel ≡ Balaban.balabanLiteralGeneratedActionStressScaleLevel
+physicsLiteralGeneratedActionStressScaleMatchesOwner = refl
+
+physicsScaleDensityStressLaneCompilerMatchesOwner :
+  Physics.yangMillsBalabanScaleDensityStressLaneCompilerLevel ≡ Balaban.balabanScaleDensityStressLaneCompilerLevel
+physicsScaleDensityStressLaneCompilerMatchesOwner = refl
+
+physicsDensityAnchoredStressLaneCompilerMatchesOwner :
+  Physics.yangMillsBalabanDensityAnchoredStressLaneCompilerLevel ≡ Balaban.balabanDensityAnchoredStressLaneCompilerLevel
+physicsDensityAnchoredStressLaneCompilerMatchesOwner = refl
+
+physicsLiteralDensityAnchoredStressLaneInstantiationMatchesOwner :
+  Physics.yangMillsBalabanLiteralDensityAnchoredStressLaneInstantiationLevel ≡ Balaban.balabanLiteralDensityAnchoredStressLaneInstantiationLevel
+physicsLiteralDensityAnchoredStressLaneInstantiationMatchesOwner = refl
+
+physicsRegularESelectedDensityCompilerMatchesOwner :
+  Physics.yangMillsBalabanRegularESelectedDensityCompilerLevel ≡ Balaban.balabanRegularESelectedDensityCompilerLevel
+physicsRegularESelectedDensityCompilerMatchesOwner = refl
+
+physicsRegularELocalizationSourceMatchesOwner :
+  Physics.yangMillsBalabanRegularELocalizationSourceLevel ≡ Balaban.balabanRegularELocalizationSourceLevel
+physicsRegularELocalizationSourceMatchesOwner = refl
+
+physicsRegularELocalizationCarrierMatchesOwner :
+  Physics.yangMillsBalabanRegularELocalizationCarrierLevel ≡ Balaban.balabanRegularELocalizationCarrierLevel
+physicsRegularELocalizationCarrierMatchesOwner = refl
+
+physicsRegularEContinuationCompilerMatchesOwner :
+  Physics.yangMillsBalabanRegularEContinuationCompilerLevel ≡ Balaban.balabanRegularEContinuationCompilerLevel
+physicsRegularEContinuationCompilerMatchesOwner = refl
+
+physicsHaarCasimirCoefficientMatchesOwner :
+  Physics.yangMillsBalabanHaarCasimirCoefficientLevel ≡ Balaban.balabanHaarCasimirCoefficientLevel
+physicsHaarCasimirCoefficientMatchesOwner = refl
+
+physicsCasimirOrbitFactorizationMatchesOwner :
+  Physics.yangMillsBalabanCasimirOrbitFactorizationLevel ≡ Balaban.balabanCasimirOrbitFactorizationLevel
+physicsCasimirOrbitFactorizationMatchesOwner = refl
+
+physicsCasimirLowerBoundTransportMatchesOwner :
+  Physics.yangMillsBalabanCasimirLowerBoundTransportLevel ≡ Balaban.balabanCasimirLowerBoundTransportLevel
+physicsCasimirLowerBoundTransportMatchesOwner = refl
+
+physicsLiteralCasimirFactorizationMatchesOwner :
+  Physics.yangMillsBalabanLiteralCasimirFactorizationLevel ≡ Balaban.balabanLiteralCasimirFactorizationLevel
+physicsLiteralCasimirFactorizationMatchesOwner = refl
+
+physicsClassifiedCasimirPositivityMatchesOwner :
+  Physics.yangMillsBalabanClassifiedCasimirPositivityLevel ≡ Balaban.balabanClassifiedCasimirPositivityLevel
+physicsClassifiedCasimirPositivityMatchesOwner = refl
+
+physicsStressMarkedShellReuseMatchesOwner :
+  Physics.yangMillsBalabanStressMarkedShellReuseLevel ≡ Balaban.balabanStressMarkedShellReuseLevel
+physicsStressMarkedShellReuseMatchesOwner = refl
+
+physicsStressPairingPhysicalWeldMatchesOwner :
+  Physics.yangMillsBalabanStressPairingPhysicalWeldLevel ≡ Balaban.balabanStressPairingPhysicalWeldLevel
+physicsStressPairingPhysicalWeldMatchesOwner = refl
+
 ------------------------------------------------------------------------
 -- Direct root non-promotion agreement.
 ------------------------------------------------------------------------
