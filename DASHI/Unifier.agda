@@ -1074,3 +1074,16 @@ unifierTwoDigitStreamCannotRecoverThird :
 unifierTwoDigitStreamCannotRecoverThird =
   FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
 
+unifierFleetGate4CountAgreement :
+  FleetHyperTOE.fleetFormalGaps
+  ≡ BalabanR559TOE.gate4UnresolvedCount
+      BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierFleetGate4CountAgreement =
+  FleetHyperTOE.fleetFormalGapCountEqualsGate4Count
+
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.EqualCardinality.equalCardinalitySelectsCanonicalMap
+    FleetHyperTOE.fleetGate4EqualCardinalityBoundary
+  ≡ false
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
