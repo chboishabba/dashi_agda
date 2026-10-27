@@ -313,3 +313,6 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+-- Source-owned Occupy non-factorability and proof-relevant non-domination gate.
+import DASHI.Unified.OccupyNonDominationTOEExact
