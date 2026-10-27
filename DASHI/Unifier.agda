@@ -606,3 +606,42 @@ relate369HyperfabricPantsReceipt :
   Relate369PantsTOE.Relate369HyperfabricPantsTOEReceipt
 relate369HyperfabricPantsReceipt =
   Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEReceipt
+
+
+------------------------------------------------------------------------
+-- Repo state-space formalisation exact facade.
+--
+-- These aliases consume the normalized theorem owner.
+-- Historical Unifier axiom-shaped records remain non-authoritative.
+------------------------------------------------------------------------
+
+import DASHI.Unified.RepoStateSpaceTOEConvergenceExact as RepoStateSpaceTOE
+import DASHI.Interop.PNFHyperfabric369 as RepoStatePNF369
+import DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531Exact as RepoStateNS369
+import DASHI.Physics.Closure.YMClayPromotionBoundary as RepoStateYMClay
+
+unifierRepoStateSpaceZKPFrame :
+  RepoStateSpaceTOE.RepoStateSpaceTOEZKPFrame
+unifierRepoStateSpaceZKPFrame =
+  RepoStateSpaceTOE.canonicalRepoStateSpaceTOEZKPFrame
+
+unifierRepoStateSpaceHyperfabricDoesNotPromote :
+  (object : RepoStatePNF369.HyperfabricObject) →
+  RepoStatePNF369.hyperfabricPromotesExternalTheorem object ≡ false
+unifierRepoStateSpaceHyperfabricDoesNotPromote =
+  RepoStateSpaceTOE.hyperfabricDoesNotPromoteExternalTheorem
+
+unifierRepoStateSpaceNSRawManifoldEqualityStillBlocked :
+  RepoStateNS369.round531RawManifoldPointEqualityClaimed ≡ false
+unifierRepoStateSpaceNSRawManifoldEqualityStillBlocked =
+  RepoStateSpaceTOE.nsRawManifoldEqualityIsNotClaimed
+
+unifierRepoStateSpaceNSClayPromotionStillBlocked :
+  RepoStateNS369.round531ClayPromotion ≡ false
+unifierRepoStateSpaceNSClayPromotionStillBlocked =
+  RepoStateSpaceTOE.nsClayPromotionIsNotCreatedBy369
+
+unifierRepoStateSpaceYMClayPromotionStillBlocked :
+  RepoStateYMClay.clayYangMillsPromoted ≡ false
+unifierRepoStateSpaceYMClayPromotionStillBlocked =
+  RepoStateSpaceTOE.ymClayPromotionStillClosed
