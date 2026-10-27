@@ -50,6 +50,8 @@ jobs:
 
       - name: Run repository discovery referee
         run: |
+          dashi-repo index --root .
+          dashi-repo status --root .
           dashi-repo discover "Balaban RG scale density regular-E Casimir stress continuum non-promotion" --root . --limit 30
 
           symbols=(
@@ -57,6 +59,8 @@ jobs:
             DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact.selectedRegularEIsLocalizedCompositeSum
             DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact.classificationAdjointCasimirAtLeastTwo
             DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact.stressSelectedDensityIndexIsUnifiedActionIndex
+            DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact.sourceDerivativeBelowExistingMarkedShell
+            DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact.stressCoefficientEnergyUniformBound
             DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toePublishedRGDoesNotPromoteContinuum
           )
           for symbol in "${symbols[@]}"; do
