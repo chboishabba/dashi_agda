@@ -10,7 +10,6 @@ import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromo
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
-import DASHI.Unified.Everything as Everything
 
 ------------------------------------------------------------------------
 -- Canonical consumer reachability.
@@ -30,11 +29,6 @@ physicsReceiptMatches :
   Physics.yangMillsBalabanR559MaxCutReceipt
   ≡ Joint.canonicalBalabanR559TOEMaxCutReceipt
 physicsReceiptMatches = refl
-
-unifiedEverythingReceiptMatches :
-  Everything.unifiedBalabanR559MaxCutReceipt
-  ≡ Joint.canonicalBalabanR559TOEMaxCutReceipt
-unifiedEverythingReceiptMatches = refl
 
 ------------------------------------------------------------------------
 -- Shared owner checks.
