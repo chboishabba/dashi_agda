@@ -1852,3 +1852,9 @@ unifierFleet58ProducerDoesNotIdentifyResidual :
 unifierFleet58ProducerDoesNotIdentifyResidual =
   FleetManifestTOE.producerDoesNotIdentifyResidual
 
+
+
+unifier369MaxCutZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifier369MaxCutZKPFrame =
+  MaxCut369.canonicalTOE369MaxCutZKPFrame
