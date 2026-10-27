@@ -414,7 +414,7 @@ fleetSharedCardinalityDoesNotCreateIdentity =
 -- F: Per-row dispatch still requires a checked row-identity attachment.
 ------------------------------------------------------------------------
 
-record FleetR5OrdinalCutReceipt : Set where
+record FleetR5OrdinalCutReceipt : Set₁ where
   constructor fleet-r5-ordinal-cut-receipt
   field
     dischargedOrdinal : Set
