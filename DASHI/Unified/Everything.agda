@@ -530,3 +530,69 @@ unifiedFleet58RoundLineageRequired :
   FleetManifestTOE.roundLineageRequired ≡ true
 unifiedFleet58RoundLineageRequired =
   FleetManifestTOE.roundLineageRequiredIsTrue
+
+------------------------------------------------------------------------
+-- Canonical Balaban same-family / Goal-1C / C-package max-cut.
+------------------------------------------------------------------------
+
+unifiedBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+unifiedBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+unifiedBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+unifiedBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+unifiedBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+unifiedBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+unifiedBalabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+unifiedBalabanCPhysicalPackageMaxCutCompilerLevel =
+  BalabanRGTOE.balabanCPhysicalPackageMaxCutCompilerLevel
+
+unifiedBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+unifiedBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  BalabanRGTOE.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+unifiedBalabanC1MarkedCurvatureFamilyLevel : ProofLevel
+unifiedBalabanC1MarkedCurvatureFamilyLevel =
+  BalabanRGTOE.balabanC1MarkedCurvatureFamilyLevel
+
+unifiedBalabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+unifiedBalabanC2PhysicalRemainderSharedTailLevel =
+  BalabanRGTOE.balabanC2PhysicalRemainderSharedTailLevel
+
+unifiedBalabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+unifiedBalabanC3OneStepAFRecurrenceIdentificationLevel =
+  BalabanRGTOE.balabanC3OneStepAFRecurrenceIdentificationLevel
+
+unifiedBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
+unifiedBalabanC4DensityAnchoredStressLaneLevel =
+  BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
+
+unifiedBalabanCPhysicalPackageCount : ℕ
+unifiedBalabanCPhysicalPackageCount =
+  BalabanRGTOE.balabanCPhysicalPackageCount
+
+unifiedBalabanScaleTransferPromotionImpossible :
+  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
+unifiedBalabanScaleTransferPromotionImpossible =
+  BalabanRGTOE.balabanScaleTransferPromotionImpossible
+
+unifiedBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+unifiedBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
