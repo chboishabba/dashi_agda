@@ -32,3 +32,22 @@ Original mathematical attribution remains with the authors of Navier–Stokes, t
 GitHub source read-back on the working branch checked seven exact import/owner/proof references. All seven were present. No `dashi-agda-preflight related_symbols`, `discover`, or `round_lineage` executable is available here. Agda itself is also unavailable locally. **No kernel typecheck or complete exact-head CI receipt is asserted**.
 
 The independently dated 21 October 2026 Palasek axisymmetric logarithmic circulation theorem remains conditional, and is not a generic 3D regularity producer (arXiv:2610.29012). This paper is an external research reference, not an implementation dependency.
+
+
+## Euler / forced-Euler reconciliation — ZKP O/R/C/S/L/P/G/F
+
+**O — Objective.** Reuse the historical exact Fourier/Galerkin carrier. Connect the external smooth-forced Euler boundary to the TOE graph. Preserve the Navier–Stokes proof-priority search.
+
+**R — Reuse.** Code search and source read-back show that `NSTriadKNComplex3GalerkinEquationAudit` already owns the literal physical output-fibre sum `projectedNonlinearity`. The later `IncompressibleEulerGalerkinCoreExact` file is a compatibility and forcing adapter. It gets no origin credit. `NSTriadKNSmoothForcedBlowupAdversarialBoundaryRound521Exact` already owns the external attribution and forcing-budget firewall.
+
+**C — Concrete change.** The existing TOE 369 bridge imports the historical Galerkin owner, the compatibility adapter, and the Alpöge–Buckmaster external boundary. Seven theorem-level receipts expose the historical carrier and exact non-promotion equalities. No second Euler nonlinear operator was created.
+
+**S — Scope and invariants.** The Euler/Galerkin carrier remains historical DASHI work. Alpöge–Buckmaster retain external theorem and construction attribution. Córdoba and Martínez-Zoroa retain programme-origin credit through R521. External Lean transcription remains false. External construction reproduction remains false. Forced Euler blowup does not pay the unforced Navier–Stokes R406/direct-companion leaf. Shared cancellation structure does not imply theorem identity, access, copying, or priority.
+
+**L — Lane.** PR #1279 owns the TOE bridge. PR #1278 owns the focused TOE aggregate and governance edge. PR #1271 owns the current NS R734/R735 physical counterexample and local/small-data cut. No ESD file is edited. Meta-introspector repositories remain separate attributed sources.
+
+**P — Postconditions.** `EverythingTOESymmetryResolved369` reaches the historical Galerkin carrier and the external forced-Euler non-promotion boundary through the existing TOE bridge. The proof-priority target remains the cutoff-uniform signed spacetime payment for the unforced Navier–Stokes route.
+
+**G — Governance.** This is a scoped import-graph change. It applies evidence identity, claim limits, least mutation, source attribution, and deterministic read-back. References to ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4 describe process controls. They do not claim standards certification.
+
+**F — Verification.** Read-back must find all three imports and all seven theorem receipts. The PR head workflow status is checked separately. No kernel receipt is claimed unless an exact-head Agda workflow succeeds.
