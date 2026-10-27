@@ -11,10 +11,12 @@ module DASHI.Unified.PNFSourceBoundaryTOEExact where
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.GluingOperatorLinearityProxyHarnessResult as Gluing
 import DASHI.Physics.Closure.YMFiniteSelfAdjointHamiltonianProxyHarnessResult as SelfAdjoint
 import DASHI.Physics.Closure.YMHamiltonianDominationProxyHarnessResult as Domination
+import DASHI.Biology.KluverFormConstantPsychedelicBoundaryExact as Kluver
 import DASHI.Biology.Levin.FungalNetworkAgencyBoundary as Fungal
 import DASHI.Biology.PsychogeographyYijingSourceAtlas as Sources
 
@@ -50,3 +52,21 @@ sourceAtlasContainsTenRecords =
 
 -- The normalized result is a collection of independently typed facts.
 -- No implication between the closure, fungal, and atlas owners is asserted.
+
+-- Klüver's cobweb is a form-constant constructor, not a fungal carrier.
+kluverCobwebForm : Kluver.FormConstant
+kluverCobwebForm = Kluver.cobweb
+
+kluverFormDoesNotPromoteUniversalSymbol :
+  Kluver.FormConstantPromotesUniversalSymbol → ⊥
+kluverFormDoesNotPromoteUniversalSymbol =
+  Kluver.formConstantDoesNotPromoteUniversalSymbol
+
+kluverFormDoesNotPromoteRecoveredMemory :
+  Kluver.FormConstantPromotesRecoveredMemory → ⊥
+kluverFormDoesNotPromoteRecoveredMemory =
+  Kluver.formConstantDoesNotPromoteRecoveredMemory
+
+-- Source identifier kinds are bibliography metadata, not theorem receipts.
+psychogeographyWebIdentifierKind : Sources.IdentifierKind
+psychogeographyWebIdentifierKind = Sources.webPublicationIdentifier
