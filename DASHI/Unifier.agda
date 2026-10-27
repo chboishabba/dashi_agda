@@ -849,6 +849,27 @@ unifierSemanticAdmissionIsNotLegalAuthority :
 unifierSemanticAdmissionIsNotLegalAuthority =
   GovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
 
+
+unifierGovernedLegalWorkflowAuthorityInvariantHandoff :
+  GovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
+unifierGovernedLegalWorkflowAuthorityInvariantHandoff =
+  GovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+unifierCanonicalLegalSourceAuthorityBoundary :
+  GovernanceTOE.LegalAuthority.LegalSourceAuthorityBoundary
+unifierCanonicalLegalSourceAuthorityBoundary =
+  GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
+
+unifierSameSystemIsNotLegalAuthority :
+  GovernanceTOE.LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+unifierSameSystemIsNotLegalAuthority =
+  GovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifierDocumentRoleIsNotLegalAuthority :
+  GovernanceTOE.LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+unifierDocumentRoleIsNotLegalAuthority =
+  GovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
 ------------------------------------------------------------------------
 -- SCALE Evidence Review exact facade.
 -- Proof authority remains in the normalized bridge and original donors.
