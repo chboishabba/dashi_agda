@@ -108,3 +108,93 @@ unifierKnowledgeAuthorityAliasIsExact :
   Bridge.KnowledgeIsAuthority → ⊥
 unifierKnowledgeAuthorityAliasIsExact =
   Unifier.toeKnowledgeDoesNotCreateExecutionAuthority
+
+
+------------------------------------------------------------------------
+-- Promotion, validation, and admission regression.
+------------------------------------------------------------------------
+
+unifierUsesCanonicalPromotionBoundary :
+  Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ Bridge.canonicalGovernedLegalWorkflowPromotionBoundary
+unifierUsesCanonicalPromotionBoundary = refl
+
+reviewEligibilityStillDoesNotCreatePromotion :
+  Bridge.reviewEligibilityCreatesPromotion
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+reviewEligibilityStillDoesNotCreatePromotion = refl
+
+runtimeParityStillDoesNotCreateWorldTruth :
+  Bridge.runtimeParityCreatesWorldTruth
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+runtimeParityStillDoesNotCreateWorldTruth = refl
+
+diagnosticStreamStillDoesNotCreateLegalCertification :
+  Bridge.diagnosticStreamCreatesLegalCertification
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+diagnosticStreamStillDoesNotCreateLegalCertification = refl
+
+claimProjectionStillDoesNotCreateTruth :
+  Bridge.claimProjectionCreatesTruth
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+claimProjectionStillDoesNotCreateTruth = refl
+
+reviewRouterStillDoesNotCreateAdequacy :
+  Bridge.reviewRouterCreatesConsumerAdequacy
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+reviewRouterStillDoesNotCreateAdequacy = refl
+
+parserCandidateStillDoesNotAuthorizeAdmission :
+  Bridge.parserCandidateCreatesAdmissionAuthority
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+parserCandidateStillDoesNotAuthorizeAdmission = refl
+
+residualPriorityStillDoesNotCreateTruthConfidence :
+  Bridge.residualPriorityCreatesTruthConfidence
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+residualPriorityStillDoesNotCreateTruthConfidence = refl
+
+admissionReceiptStillDoesNotCreatePublication :
+  Bridge.admissionReceiptCreatesPublicationAuthority
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+admissionReceiptStillDoesNotCreatePublication = refl
+
+softwareValidationStillDoesNotCreatePublication :
+  Bridge.softwareValidationCreatesPublicationAuthority
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+softwareValidationStillDoesNotCreatePublication = refl
+
+laterValidationStillDoesNotRewriteBaseline :
+  Bridge.laterValidationRewritesCertifiedBaseline
+    Unifier.toeGovernedLegalWorkflowPromotionBoundary
+  ≡ false
+laterValidationStillDoesNotRewriteBaseline = refl
+
+unifierReviewEligibilityAliasIsExact :
+  Bridge.ReviewEligibilityCreatesPromotionReceipt → ⊥
+unifierReviewEligibilityAliasIsExact =
+  Unifier.toeReviewEligibilityDoesNotCreatePromotion
+
+unifierRuntimeParityAliasIsExact :
+  Bridge.ZeroParityFailuresMeansWorldTruth → ⊥
+unifierRuntimeParityAliasIsExact =
+  Unifier.toeRuntimeParityDoesNotCreateWorldTruth
+
+unifierAdmissionAliasIsExact :
+  Bridge.ParserCandidateAloneAuthorizesAdmission → ⊥
+unifierAdmissionAliasIsExact =
+  Unifier.toeParserCandidateDoesNotAuthorizeAdmission
+
+unifierSoftwarePublicationAliasIsExact :
+  Bridge.SoftwareValidationAuthorizesPublication → ⊥
+unifierSoftwarePublicationAliasIsExact =
+  Unifier.toeSoftwareValidationDoesNotAuthorizePublication
