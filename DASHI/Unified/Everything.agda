@@ -143,6 +143,42 @@ unifiedTOE369MaxCutReceipt : MaxCutTOE.TOE369MaxCutReceipt
 unifiedTOE369MaxCutReceipt =
   MaxCutTOE.canonicalTOE369MaxCutReceipt
 
+
+unifiedSelected3BAcquisitionCompilerPaid :
+  MaxCutTOE.AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.acquisitionCoreCompilerOwned
+    MaxCutTOE.AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+unifiedSelected3BAcquisitionCompilerPaid =
+  MaxCutTOE.toeAcquisitionCoreCompilerAlreadyOwned
+
+unifiedSelected3BOnlyActionIntertwiningRemains :
+  MaxCutTOE.AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.onlyActionIntertwiningRemainsAfterScaffold
+    MaxCutTOE.AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+unifiedSelected3BOnlyActionIntertwiningRemains =
+  MaxCutTOE.toeAcquisitionOnlyActionIntertwiningRemains
+
+unifiedPhaseResolvedTwelveMultiplicityPaid :
+  MaxCutTOE.PhaseWeld.PhaseCharacterWeldFrontier.twelveMultiplicityAtCharacterLevelPaid
+    MaxCutTOE.PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+unifiedPhaseResolvedTwelveMultiplicityPaid =
+  MaxCutTOE.toePhaseResolvedTwelveMultiplicityPaid
+
+unifiedPhaseResolvedSeventyEightMultiplicityPaid :
+  MaxCutTOE.PhaseWeld.PhaseCharacterWeldFrontier.seventyEightMultiplicityAtCharacterLevelPaid
+    MaxCutTOE.PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+unifiedPhaseResolvedSeventyEightMultiplicityPaid =
+  MaxCutTOE.toePhaseResolvedSeventyEightMultiplicityPaid
+
+unifiedSameActionTwelveSeventyEightIntertwinerStillOpen :
+  MaxCutTOE.ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.actualTwelveSeventyEightIntertwinerPaid
+    MaxCutTOE.ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+unifiedSameActionTwelveSeventyEightIntertwinerStillOpen =
+  MaxCutTOE.toeActualSameActionTwelveSeventyEightIntertwinerStillOpen
+
 ------------------------------------------------------------------------
 -- Exact non-factorability: loss cannot be repaired by recharting.
 -- Original theorem ownership remains with IntersectionalNonFactorability.
