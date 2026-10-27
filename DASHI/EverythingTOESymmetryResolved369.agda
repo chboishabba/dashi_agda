@@ -1,7 +1,7 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
@@ -20,6 +20,7 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Unified.GRQuantumProofTermRegression
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
 
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
@@ -445,3 +446,56 @@ toeBalabanR559ClayPromotionStillBlocked :
 toeBalabanR559ClayPromotionStillBlocked =
   BalabanR559TOE.clayPromotionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Navier-Stokes B / R571 M2 producer-strategy TOE surface.
+------------------------------------------------------------------------
+
+toeNavierStokesBM2FiniteFoldClosed : Bool
+toeNavierStokesBM2FiniteFoldClosed =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosed
+
+toeNavierStokesBM2FiniteFoldClosedIsTrue :
+  toeNavierStokesBM2FiniteFoldClosed ≡ true
+toeNavierStokesBM2FiniteFoldClosedIsTrue =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosedIsTrue
+
+toeNavierStokesBM2SamplewisePaymentStillAnalytic :
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
+toeNavierStokesBM2SamplewisePaymentStillAnalytic =
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
+
+toeNavierStokesBM2GalerkinFoldStillAnalytic :
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
+toeNavierStokesBM2GalerkinFoldStillAnalytic =
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
+  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
+toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
+  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
+
+toeNavierStokesBM2OldPDFB7NotMandatory :
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+toeNavierStokesBM2OldPDFB7NotMandatory =
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
+
+toeNavierStokesBM2ClayPromotion : Bool
+toeNavierStokesBM2ClayPromotion =
+  NSBM2TOE.modernNSClayPromotion
+
+toeNavierStokesBM2ClayPromotionStillFalse :
+  toeNavierStokesBM2ClayPromotion ≡ false
+toeNavierStokesBM2ClayPromotionStillFalse =
+  NSBM2TOE.modernNSClayPromotionStillFalse
+
+toeNavierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+toeNavierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+toeNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+toeNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
