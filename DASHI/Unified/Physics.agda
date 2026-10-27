@@ -29,6 +29,9 @@ open YMTOE public using
   ; selectedDensityRepresentsExactBC1Potential
   ; selectedDensityRepresentsBC2InitialPotential
   ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
   ; selectedRegularEIsLocalizedCompositeSum
   ; universalCompactSimpleCasimirFloor
   ; universalCompactSimpleBetaFloor
@@ -189,3 +192,15 @@ yangMillsTOEUniversalBetaFloorLevel =
 yangMillsTOELiteralUniformRemainderFloorLevel : ProofLevel
 yangMillsTOELiteralUniformRemainderFloorLevel =
   YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
+
+yangMillsTOEStressMarkedShellBoundLevel : ProofLevel
+yangMillsTOEStressMarkedShellBoundLevel =
+  YMTOE.toeStressFirstVariationMarkedShellBoundLevel
+
+yangMillsTOEStressShellEnergyHilbertLevel : ProofLevel
+yangMillsTOEStressShellEnergyHilbertLevel =
+  YMTOE.toeStressShellEnergyToHilbertCompilerLevel
+
+yangMillsTOELiteralStressActivityEntropyLevel : ProofLevel
+yangMillsTOELiteralStressActivityEntropyLevel =
+  YMTOE.toeLiteralStressActivityEntropyInstantiationLevel
