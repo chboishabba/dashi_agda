@@ -10,6 +10,8 @@ on:
       - 'scripts/tests/test_kozyrev_mirror_claim_test.py'
       - 'scripts/kozyrev_mirror_classical_null.py'
       - 'scripts/tests/test_kozyrev_mirror_classical_null.py'
+      - 'scripts/kozyrev_geometry_optimizer.py'
+      - 'scripts/tests/test_kozyrev_geometry_optimizer.py'
       - '.github/workflows/kozyrev-mirror-claim-testing.yml'
   pull_request:
     paths:
@@ -36,6 +38,10 @@ jobs:
         run: |
           python -m unittest discover -s scripts/tests -p 'test_kozyrev_mirror_classical_null.py' -v
           python scripts/kozyrev_mirror_classical_null.py --json
+      - name: Synthetic geometry screening (not patent / Maxwell / torsion validation)
+        run: |
+          python -m unittest discover -s scripts/tests -p 'test_kozyrev_geometry_optimizer.py' -v
+          python scripts/kozyrev_geometry_optimizer.py --samples 720 > /tmp/kozyrev-synthetic-optimum.json
       - name: Preflight (not an Agda kernel proof)
         run: |
           python -m pip install -e tools/agda_preflight
