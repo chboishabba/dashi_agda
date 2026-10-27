@@ -262,6 +262,37 @@ toeProducerSourceDoesNotCreateRun :
 toeProducerSourceDoesNotCreateRun =
   Ibrahim.producerSourceDoesNotCreateRunReceipt
 
+BalabanContinuumPromotion : Set
+BalabanContinuumPromotion =
+  Balaban.BalabanContinuumLimitPromotion
+
+DepthContinuumPromotion : Set
+DepthContinuumPromotion =
+  Balaban.DepthContinuumLimitPromotion
+
+toeBalabanContinuumPromotionImpossible :
+  BalabanContinuumPromotion → ⊥
+toeBalabanContinuumPromotionImpossible =
+  Balaban.balabanContinuumLimitPromotionImpossible
+
+toeDepthContinuumPromotionImpossible :
+  DepthContinuumPromotion → ⊥
+toeDepthContinuumPromotionImpossible =
+  Balaban.depthContinuumLimitPromotionImpossible
+
+currentGate4FrontierLedgerLevel : Proof.ProofLevel
+currentGate4FrontierLedgerLevel =
+  Gate4Current.currentFrontierLedgerTypecheckLevel
+
+currentGate4ClusteringToTransferGapLevel : Proof.ProofLevel
+currentGate4ClusteringToTransferGapLevel =
+  Gate4Current.clusteringToTransferGapReductionTypecheckLevel
+
+currentGate4FrontierDoesNotSelfPromote :
+  Proof.promotable currentGate4FrontierLedgerLevel ≡ false
+currentGate4FrontierDoesNotSelfPromote =
+  Proof.conditionalDoesNotSelfPromote
+
 ------------------------------------------------------------------------
 -- One normalized receipt.
 ------------------------------------------------------------------------
