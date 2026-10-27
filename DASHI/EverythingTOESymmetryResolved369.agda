@@ -1407,3 +1407,30 @@ toeFleetNumericABIRequiresIndependentEvidence :
   FleetGapTOE.SpectralNumericABIPromotion → ⊥
 toeFleetNumericABIRequiresIndependentEvidence =
   FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+------------------------------------------------------------------------
+-- Quantum-mereology selected-atlas / g-TPS terminal boundary.
+------------------------------------------------------------------------
+
+import DASHI.Unified.QuantumMereologyTOEConvergenceExact as QMT
+
+open QMT public using
+  ( physicalSourceGTPSStillOpen
+  ; physicalHamiltonianAttachmentStillOpen
+  ; physicalPointerWeldStillOpen
+  ; minimizerPullbackStillOpen
+  ; algebraSusceptibilityStillOpen
+  ; thermodynamicMQPTStillOpen
+  ; sameStateHolographicWeldStillOpen
+  ; lorentzianEinsteinPromotionStillOpen
+  ; fleetEigenPriorityStillNonPromoting
+  ; fleetSpectralLabelStillDoesNotIdentifyOwner
+  )
+
+toeQuantumMereologyTOEReceipt : QMT.QuantumMereologyTOEReceipt
+toeQuantumMereologyTOEReceipt =
+  QMT.canonicalQuantumMereologyTOEReceipt
+
+toeQuantumMereologyTOEReceiptZKPFrame : ParetoSnowballTOE.TOEZKPFrame
+toeQuantumMereologyTOEReceiptZKPFrame =
+  QMT.canonicalQuantumMereologyTOEZKPFrame
