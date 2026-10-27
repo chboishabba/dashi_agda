@@ -25,6 +25,10 @@ on:
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
+      - 'DASHI/Unified/BalabanR559TOEMaxCutExact.agda'
+      - 'DASHI/Unified/BalabanR559TOEMaxCutValidation.agda'
+      - 'DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda'
+      - 'DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
@@ -52,6 +56,10 @@ on:
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
+      - 'DASHI/Unified/BalabanR559TOEMaxCutExact.agda'
+      - 'DASHI/Unified/BalabanR559TOEMaxCutValidation.agda'
+      - 'DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda'
+      - 'DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
@@ -113,6 +121,13 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+          dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda --root .
+          dashi-repo related scaleTransferPromotionEliminator --root . --limit 20
+          dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
+          dashi-repo discover 'Balaban R559 same owner direct scale transfer non-promotion TOE max cut' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Unified.BalabanR559 --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -140,6 +155,10 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/BalabanR559TOEMaxCutExact.agda
+            DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
+            DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
+            DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -160,6 +179,9 @@ jobs:
           modules=(
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/BalabanR559TOEMaxCutExact.agda
+            DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
+            DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
