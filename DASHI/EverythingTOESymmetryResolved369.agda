@@ -622,16 +622,16 @@ toeGovernanceMaxCutParetoSnowballZKPFrame =
   GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
 
 toeGovernanceMaxCutLegalAuthorityClosed :
-  GovernanceMaxCut.Legal.SemanticPromotionAllAuthorityClosed
+  GovernanceMaxCut.SemanticPromotionAllAuthorityClosed
 toeGovernanceMaxCutLegalAuthorityClosed =
   GovernanceMaxCut.legalSemanticAuthorityClosure
 
 toeGovernanceMaxCutBalabanScaleTransferImpossible :
-  GovernanceMaxCut.ParetoSnowball.BalabanScaleTransferPromotion → ⊥
+  GovernanceMaxCut.BalabanScaleTransferPromotion → ⊥
 toeGovernanceMaxCutBalabanScaleTransferImpossible =
   GovernanceMaxCut.balabanScaleTransferPromotionImpossible
 
 toeGovernanceMaxCutIbrahimSearchPriorityNotProof :
-  GovernanceMaxCut.ParetoSnowball.SearchPriorityCreatesProof → ⊥
+  GovernanceMaxCut.SearchPriorityCreatesProof → ⊥
 toeGovernanceMaxCutIbrahimSearchPriorityNotProof =
   GovernanceMaxCut.ibrahimSearchPriorityDoesNotCreateProof
