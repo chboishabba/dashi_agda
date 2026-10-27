@@ -8,7 +8,7 @@ on:
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
-      - 'DASHI/Unified/Everything.agda'
+      - 'DASHI/Unified/Everything.agda'\n      - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -49,6 +49,7 @@ jobs:
           dashi-repo index --root .
           dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityExact.agda --root .
           dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/Physics.agda --root .
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
           dashi-repo related literalRound437Goal1CSourceLevel --root . --limit 20
@@ -85,6 +86,7 @@ jobs:
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+            DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
           )
