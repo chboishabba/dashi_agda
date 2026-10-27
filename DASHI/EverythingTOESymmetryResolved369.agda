@@ -2,6 +2,9 @@ module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
+import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHG21
+import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RiemannFrontier
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
@@ -16,6 +19,58 @@ open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import Data.Nat.Base using (ℕ)
+
+------------------------------------------------------------------------
+-- Current Lean RH max-cut status mirror.
+-- Real analysis remains owned by dashi_lean4.
+------------------------------------------------------------------------
+
+toeRiemannThreeTapCurrentLeanFrontier :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier
+toeRiemannThreeTapCurrentLeanFrontier =
+  RiemannFrontier.currentThreeTapCurrentLeanFrontier
+
+toeRiemannA1CarrierSummationStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA1CarrierSummationStillOpen =
+  RiemannFrontier.a1CarrierIsStillOpen
+
+toeRiemannA1UniformCurvatureStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1UniformCurvaturePaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA1UniformCurvatureStillOpen =
+  RiemannFrontier.a1UniformCurvatureIsStillOpen
+
+toeRiemannA1CompensationStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CompensationPaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA1CompensationStillOpen =
+  RiemannFrontier.a1CompensationIsStillOpen
+
+toeRiemannA2ScalarStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA2ScalarStillOpen =
+  RiemannFrontier.a2ScalarIsStillOpen
+
+toeRiemannRouteBStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannRouteBStillOpen =
+  RiemannFrontier.routeBIsStillOpen
+
+toeRiemannExactHeadLeanKernelReceiptStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.exactHeadLeanKernelReceipt
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannExactHeadLeanKernelReceiptStillOpen =
+  RiemannFrontier.exactHeadLeanKernelReceiptIsStillOpen
+
+toeRiemannRHStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.rhDerivedHere
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannRHStillOpen =
+  RiemannFrontier.rhNotClaimedByAgdaStatusMirror
 
 ------------------------------------------------------------------------
 -- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
@@ -184,6 +239,43 @@ toeBalabanStressCauchyModulusCompilerLevel =
 toeBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
 toeBalabanStressCauchyPhysicalInsertionLevel =
   BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+toeBalabanStressCauchyCompletionToMarkedStressLevel : ProofLevel
+toeBalabanStressCauchyCompletionToMarkedStressLevel =
+  BalabanRGTOE.balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+
+toeBalabanStressCompletedMarkedIsClayStressLevel : ProofLevel
+toeBalabanStressCompletedMarkedIsClayStressLevel =
+  BalabanRGTOE.balabanGoal1CCompletedStressIsClayStressLevel
+
+toeBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+toeBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+toeBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+toeBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+toeBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+toeBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+toeBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+toeBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+toeBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+toeBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+toeBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+toeBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
 
 toeBalabanStressHilbertBoundCompilerLevel : ProofLevel
 toeBalabanStressHilbertBoundCompilerLevel =
@@ -434,9 +526,9 @@ toe369YangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 ------------------------------------------------------------------------
 
 toeBalabanScaleTransferPromotionImpossible :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
 toeBalabanScaleTransferPromotionImpossible =
-  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+  BalabanRGTOE.balabanScaleTransferPromotionImpossible
 
 toeIbrahimRecognitionParetoBoundary :
   ParetoSnowballTOE.RecognitionRouteParetoBoundary
@@ -793,6 +885,62 @@ toeFleetVectorCoordinateAdmissibilityStillFalse =
 
 toeFleetTextFallbackAuthorityStillFalse =
   FleetGapTOE.fleetTextFallbackAuthorityStillFalse
+
+
+------------------------------------------------------------------------
+-- Fleet R5 exact target and receipt-level non-promotion projection.
+------------------------------------------------------------------------
+
+toeFleetR5OrdinalCutReceipt :
+  FleetGapTOE.FleetR5OrdinalCutReceipt
+toeFleetR5OrdinalCutReceipt =
+  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
+
+toeFleetFormalGapOrdinalCountIs58 :
+  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
+toeFleetFormalGapOrdinalCountIs58 =
+  FleetGapTOE.fleetFormalGapOrdinalCountIs58
+
+toeFleetOrdinalRowIdentityStillUnattached :
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+toeFleetOrdinalRowIdentityStillUnattached =
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+
+toeFleetSharedCardinalityDoesNotCreateIdentity :
+  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
+toeFleetSharedCardinalityDoesNotCreateIdentity =
+  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
+
+toeFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+toeFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+toeFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+toeFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
+
+toeFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.externalPlanningTextCreatesFormalResidual
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
+
 
 ------------------------------------------------------------------------
 -- Fleet 58 named-manifest acquisition wall.
@@ -1456,3 +1604,101 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- RH marked-trace exact non-promotion surface.
+-- The Analysis owner retains theorem and provenance authority.
+------------------------------------------------------------------------
+
+toeRHCompletedTraceCrossPollinationBoundary :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
+toeRHCompletedTraceCrossPollinationBoundary =
+  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+
+toeRHPrimeActivationRequiresFirstPrimeSupport :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+toeRHPrimeActivationRequiresFirstPrimeSupport =
+  RHPrimeAudit.firstPrimeSupportNecessary
+
+toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.selectedUnmarkedTerminalEqualsMarkedArithmetic
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
+  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
+
+toeRHIndependentArithmeticDiagonalProducerStillAbsent :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.independentArithmeticDiagonalProducer
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHIndependentArithmeticDiagonalProducerStillAbsent =
+  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
+
+toeRHHeisenbergTraceTransportStillBlocked :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.actualHeisenbergTraceEqualsSelectedZetaFunctional
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHHeisenbergTraceTransportStillBlocked =
+  RHPrimeAudit.noUnjustifiedAnalyticTransport
+
+toeRHTerminalStrictSignedEstimateStillOpen :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.terminalStrictSignedEstimatePaid
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHTerminalStrictSignedEstimateStillOpen =
+  RHPrimeAudit.terminalStrictSignedEstimateStillOpen
+
+toeRHPrimeAuditDoesNotPromoteRH :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.rhDerived
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHPrimeAuditDoesNotPromoteRH =
+  RHPrimeAudit.noUnjustifiedRH
+
+
+------------------------------------------------------------------------
+-- Riemann G21 direct non-promotion proof terms.
+-- The source receipt remains the theorem owner.
+------------------------------------------------------------------------
+
+toeRHG21StrictTP2Receipt : RHG21.StrictTP2TrancheReceipt
+toeRHG21StrictTP2Receipt = RHG21.canonicalStrictTP2TrancheReceipt
+
+toeRHG21ActualSinhTP2StillOpen :
+  RHG21.StrictTP2TrancheReceipt.actualSinhTP2Derived
+    toeRHG21StrictTP2Receipt ≡ false
+toeRHG21ActualSinhTP2StillOpen =
+  RHG21.StrictTP2TrancheReceipt.actualSinhTP2DerivedIsFalse
+    toeRHG21StrictTP2Receipt
+
+toeRHG21ContinuumMomentSignStillOpen :
+  RHG21.StrictTP2TrancheReceipt.actualOddContinuumSignDerived
+    toeRHG21StrictTP2Receipt ≡ false
+toeRHG21ContinuumMomentSignStillOpen =
+  RHG21.StrictTP2TrancheReceipt.actualOddContinuumSignDerivedIsFalse
+    toeRHG21StrictTP2Receipt
+
+toeRHG21DeterminantRemainderStillOpen :
+  RHG21.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerived
+    toeRHG21StrictTP2Receipt ≡ false
+toeRHG21DeterminantRemainderStillOpen =
+  RHG21.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerivedIsFalse
+    toeRHG21StrictTP2Receipt
+
+toeRHG21FiniteRadiusStillOpen :
+  RHG21.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerived
+    toeRHG21StrictTP2Receipt ≡ false
+toeRHG21FiniteRadiusStillOpen =
+  RHG21.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerivedIsFalse
+    toeRHG21StrictTP2Receipt
+
+toeRHG21PrimeIdentityStillOpen :
+  RHG21.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerived
+    toeRHG21StrictTP2Receipt ≡ false
+toeRHG21PrimeIdentityStillOpen =
+  RHG21.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerivedIsFalse
+    toeRHG21StrictTP2Receipt
+
+toeRHG21RHNotPromoted :
+  RHG21.StrictTP2TrancheReceipt.riemannHypothesisDerived
+    toeRHG21StrictTP2Receipt ≡ false
+toeRHG21RHNotPromoted =
+  RHG21.StrictTP2TrancheReceipt.riemannHypothesisDerivedIsFalse
+    toeRHG21StrictTP2Receipt
