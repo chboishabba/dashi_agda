@@ -1620,3 +1620,9 @@ toeFleet58ProducerDoesNotIdentifyResidual :
 toeFleet58ProducerDoesNotIdentifyResidual =
   FleetManifestTOE.producerDoesNotIdentifyResidual
 
+
+
+toe369MaxCutZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toe369MaxCutZKPFrame =
+  MaxCut369.canonicalTOE369MaxCutZKPFrame
