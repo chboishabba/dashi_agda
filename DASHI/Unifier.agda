@@ -7,6 +7,7 @@ open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 -- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
@@ -71,27 +72,35 @@ balabanRGZKPFrame =
 -- Normalized Balaban density, regular-E, stress, and continuum surfaces.
 ------------------------------------------------------------------------
 
+toeBalabanGeneratedActionDensityCompilerLevel : ProofLevel
 toeBalabanGeneratedActionDensityCompilerLevel =
   BalabanRGTOE.balabanGeneratedActionDensityCompilerLevel
 
+toeBalabanCombinedRGEffectiveActionCompilerLevel : ProofLevel
 toeBalabanCombinedRGEffectiveActionCompilerLevel =
   BalabanRGTOE.balabanCombinedRGEffectiveActionCompilerLevel
 
+toeBalabanGeneratedActionStressScaleCompilerLevel : ProofLevel
 toeBalabanGeneratedActionStressScaleCompilerLevel =
   BalabanRGTOE.balabanGeneratedActionStressScaleCompilerLevel
 
+toeBalabanPublishedFlowRegularEProjectionCompilerLevel : ProofLevel
 toeBalabanPublishedFlowRegularEProjectionCompilerLevel =
   BalabanRGTOE.balabanPublishedFlowRegularEProjectionCompilerLevel
 
+toeBalabanRegularESection2PredicateCompilerLevel : ProofLevel
 toeBalabanRegularESection2PredicateCompilerLevel =
   BalabanRGTOE.balabanRegularESection2PredicateCompilerLevel
 
+toeBalabanConcreteRegularELocalizationWitnessLevel : ProofLevel
 toeBalabanConcreteRegularELocalizationWitnessLevel =
   BalabanRGTOE.balabanConcreteRegularELocalizationWitnessLevel
 
+toeBalabanPublishedNonlinearRGCoreLevel : ProofLevel
 toeBalabanPublishedNonlinearRGCoreLevel =
   BalabanRGTOE.balabanPublishedNonlinearRGCoreLevel
 
+toeBalabanPublishedRGPhysicalSameObjectLevel : ProofLevel
 toeBalabanPublishedRGPhysicalSameObjectLevel =
   BalabanRGTOE.balabanPublishedRGPhysicalSameObjectLevel
 
