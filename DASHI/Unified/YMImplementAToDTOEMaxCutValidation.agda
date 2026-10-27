@@ -70,6 +70,11 @@ gate4CountIs58 :
 gate4CountIs58 =
   AD.gate4UnresolvedCountIs58 AD.canonicalYMImplementAToDTOEMaxCutReceipt
 
+gate4PaidReductionMatchesJoint :
+  AD.gate4PaidReductionLevel AD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ Joint.gate4PaidReductionLedgerLevel
+gate4PaidReductionMatchesJoint = refl
+
 
 gate4PaidReductionLedgerIsMachineChecked :
   Proof.promotable
