@@ -374,3 +374,98 @@ def test_exact_reuse_firewalls_reach_all_toe_facades():
         "invariantHandoffCarriesExactReuseClaimTruthFirewall",
     ):
         assert token in regression
+
+
+def test_direct_legal_governance_firewalls_reach_all_three_toe_facades():
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+    bridge = read(BRIDGE)
+
+    bridge_tokens = (
+        "toeDurableReviewStateDoesNotCreateTruth",
+        "toeAcceptanceReceiptDoesNotMutateMatter",
+        "toeExternalSourceDoesNotAdmitTruth",
+        "toeLegalAuthorityDoesNotCreateTruthStatus",
+        "toePromotionStageDoesNotBypassPromotionAuthority",
+        "toeSourceRealisedWrongTypeDoesNotAutoViolate",
+        "toeElementsDoNotEraseExceptionsOrDefences",
+        "toeKernelClosureDoesNotMeanSemanticClosure",
+        "toeFormalProofDoesNotCreateExternalWorldTruth",
+        "toeSameSystemDoesNotAutomaticallyCloseAuthority",
+        "toeDocumentRoleDoesNotSupplyLegalSourceAuthority",
+        "toeCanonicalLegalSourceAuthorityBoundary",
+    )
+    for token in bridge_tokens:
+        assert token in bridge
+
+    toe_tokens = (
+        "toe369DurableReviewStateDoesNotCreateTruth",
+        "toe369AcceptanceReceiptDoesNotMutateMatter",
+        "toe369ExternalSourceDoesNotAdmitTruth",
+        "toe369LegalAuthorityDoesNotCreateTruthStatus",
+        "toe369PromotionStageDoesNotBypassPromotionAuthority",
+        "toe369SourceRealisedWrongTypeDoesNotAutoViolate",
+        "toe369ElementsDoNotEraseExceptionsOrDefences",
+        "toe369KernelClosureDoesNotMeanSemanticClosure",
+        "toe369FormalProofDoesNotCreateExternalWorldTruth",
+        "toe369ComplianceCompositionRetainsIntermediateWitness",
+        "toe369SameLegalSystemDoesNotCloseAuthority",
+        "toe369DocumentRoleDoesNotSupplyLegalSourceAuthority",
+        "toe369CanonicalLegalSourceAuthorityBoundary",
+    )
+    for token in toe_tokens:
+        assert token in toe
+
+    unifier_tokens = (
+        "unifierDurableReviewStateDoesNotCreateTruth",
+        "unifierAcceptanceReceiptDoesNotMutateMatter",
+        "unifierExternalSourceDoesNotAdmitTruth",
+        "unifierLegalAuthorityDoesNotCreateTruthStatus",
+        "unifierPromotionStageDoesNotBypassPromotionAuthority",
+        "unifierSourceRealisedWrongTypeDoesNotAutoViolate",
+        "unifierElementsDoNotEraseExceptionsOrDefences",
+        "unifierKernelClosureDoesNotMeanSemanticClosure",
+        "unifierFormalProofDoesNotCreateExternalWorldTruth",
+        "unifierComplianceCompositionRetainsIntermediateWitness",
+        "unifierSameLegalSystemDoesNotCloseAuthority",
+        "unifierDocumentRoleDoesNotSupplyLegalSourceAuthority",
+        "unifierCanonicalLegalSourceAuthorityBoundary",
+    )
+    for token in unifier_tokens:
+        assert token in unifier
+
+    unified_tokens = (
+        "governedDurableReviewStateDoesNotCreateTruth",
+        "governedAcceptanceReceiptDoesNotMutateMatter",
+        "governedExternalSourceDoesNotAdmitTruth",
+        "governedLegalAuthorityDoesNotCreateTruthStatus",
+        "governedPromotionStageDoesNotBypassPromotionAuthority",
+        "governedSourceRealisedWrongTypeDoesNotAutoViolate",
+        "governedElementsDoNotEraseExceptionsOrDefences",
+        "governedKernelClosureDoesNotMeanSemanticClosure",
+        "governedFormalProofDoesNotCreateExternalWorldTruth",
+        "governedComplianceCompositionRetainsIntermediateWitness",
+        "governedSameLegalSystemDoesNotCloseAuthority",
+        "governedDocumentRoleDoesNotSupplyLegalSourceAuthority",
+        "governedCanonicalLegalSourceAuthorityBoundary",
+    )
+    for token in unified_tokens:
+        assert token in unified
+
+
+def test_direct_legal_governance_regression_binds_unifier_to_bridge():
+    text = read(REGRESSION)
+    for token in (
+        "unifierDurableReviewTruthAliasIsExact",
+        "unifierAcceptanceMutationAliasIsExact",
+        "unifierExternalSourceTruthAliasIsExact",
+        "unifierLegalAuthorityTruthAliasIsExact",
+        "unifierPromotionAuthorityAliasIsExact",
+        "unifierWrongTypeViolationAliasIsExact",
+        "unifierExceptionsDefencesAliasIsExact",
+        "unifierComplianceWitnessAliasIsCanonical",
+        "unifierCanonicalLegalAuthorityBoundaryIsExact",
+    ):
+        assert token in text
+
