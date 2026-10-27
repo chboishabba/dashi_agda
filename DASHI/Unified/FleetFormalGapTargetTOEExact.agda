@@ -79,6 +79,40 @@ canonicalFleetFormalGapTargetReceipt =
     false
 
 ------------------------------------------------------------------------
+-- Exact values of the recorded external planning receipt.
+-- These equalities validate this DASHI wrapper only.
+-- They do not validate the external producer run.
+------------------------------------------------------------------------
+
+fleetRecordedDischargedCountIs584 :
+  dischargedCoreKnowledgeFibres canonicalFleetFormalGapTargetReceipt ≡ 584
+fleetRecordedDischargedCountIs584 = refl
+
+fleetRecordedContradictionCountIs44 :
+  polarityContradictionGaps canonicalFleetFormalGapTargetReceipt ≡ 44
+fleetRecordedContradictionCountIs44 = refl
+
+fleetRecordedUnformalisedGapCountIs58 :
+  unformalisedFormalGaps canonicalFleetFormalGapTargetReceipt ≡ 58
+fleetRecordedUnformalisedGapCountIs58 = refl
+
+fleetRecordedMacroscopicMotifCountIs3 :
+  macroscopicEigenMotifCount canonicalFleetFormalGapTargetReceipt ≡ 3
+fleetRecordedMacroscopicMotifCountIs3 = refl
+
+fleetTargetsOnlyUnformalisedFormalGaps :
+  targetOnlyUnformalisedFormalGaps canonicalFleetFormalGapTargetReceipt ≡ true
+fleetTargetsOnlyUnformalisedFormalGaps = refl
+
+fleetDoesNotRetargetDischargedFibres :
+  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt ≡ true
+fleetDoesNotRetargetDischargedFibres = refl
+
+fleetKeepsContradictionsSeparate :
+  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt ≡ true
+fleetKeepsContradictionsSeparate = refl
+
+------------------------------------------------------------------------
 -- Reused canonical proof and receipt owners.
 ------------------------------------------------------------------------
 
