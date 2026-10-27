@@ -55,6 +55,9 @@ jobs:
             DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
+            DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda
+            DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda
+            DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda
           )
           for module in "${modules[@]}"; do
             dashi-agda-preflight --root . "$module"
@@ -75,6 +78,9 @@ jobs:
             DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
+            DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda
+            DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda
+            DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -94,6 +100,9 @@ jobs:
             DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
+            DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda
+            DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda
+            DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda
           )
           for module in "${modules[@]}"; do
             agda -i . -l standard-library "$module"
