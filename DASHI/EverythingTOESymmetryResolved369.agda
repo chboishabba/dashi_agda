@@ -18,9 +18,50 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 -- Do not replace this import with DASHI.Unifier placeholder axioms.
 import DASHI.Unified.GRQuantumProofTermRegression
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+import DASHI.Unified.QuantumMetrologyTOEConvergenceExact as QuantumMetrologyTOE
+import DASHI.Unified.QuantumMetrologyTOEConvergenceValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 
 
+
+
+
+------------------------------------------------------------------------
+-- Quantum metrology TOE convergence.
+--
+-- The theorem owner is DASHI.Unified.QuantumMetrologyTOEConvergenceExact.
+-- This facade re-exports exact fail-closed results only.
+------------------------------------------------------------------------
+
+open QuantumMetrologyTOE public using
+  ( clockContractNotExternallyBound
+  ; clockContractClaimsNoExperimentalResult
+  ; clockContractDoesNotPromote
+  ; clockAuthorityReceiptFailsClosed
+  ; siClockBridgeClaimsNoEmpiricalResult
+  ; siClockBridgeClaimsNoPromotion
+  ; siClockBridgeStillRequiresExternalAuthority
+  ; dimensionlessClockLawDoesNotPromoteEmpirically
+  ; dimensionlessClockLawStillRequiresExternalCalibration
+  ; redshiftBridgeDoesNotPromoteEmpirically
+  ; redshiftBridgeDoesNotPromoteGR
+  ; siMetrologyTerminalPromotionStillFalse
+  ; siMetrologyFabricatesNoAuthority
+  ; bornMeasurementAuthorityStillExternal
+  ; unitaryDynamicsAuthorityStillExternal
+  ; finiteQuantumQFTStillNotPromoted
+  ; physicalChemistryMetrologyStillNotPromoted
+  ; unificationCriticalPathTerminalPromotionStillFalse
+  ; fullQuantumGravityStillNotPromoted
+  ; finiteInformationMetricDoesNotCreatePhysicalFisherMetric
+  ; exactRationalEinsteinCouplingStillNotClaimed
+  ; acceptedMeasuredGCouplingStillRequired
+  ; negativeTraceStillDoesNotCloseActiveStress
+  ; traceAnomalyStillDoesNotCloseRepulsionSource
+  ; timelikeEnergyDensityControlStillRequired
+  ; QuantumMetrologyTOEConvergenceReceipt
+  ; canonicalQuantumMetrologyTOEConvergenceReceipt
+  )
 
 ------------------------------------------------------------------------
 -- Exact Yang-Mills theorem-owner exports.
