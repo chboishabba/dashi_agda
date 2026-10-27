@@ -1208,3 +1208,45 @@ unifierCurrent369SynthesisDoesNotEraseComparator :
   CurrentMaxCut.synthesisErasesComparator ≡ false
 unifierCurrent369SynthesisDoesNotEraseComparator =
   CurrentMaxCut.synthesisErasesComparatorIsFalse
+
+------------------------------------------------------------------------
+-- Current max-cut + generic hyperfabric convergence.
+-- Unifier remains a facade over the joint owner.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutHyperfabricExact as CurrentHyper
+
+unifierCurrentMaxCutHyperfabricReceipt :
+  CurrentHyper.TOECurrentMaxCutHyperfabricReceipt
+unifierCurrentMaxCutHyperfabricReceipt =
+  CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
+
+unifierCurrentHyperformNineCount :
+  CurrentHyper.HyperformNineCountProof
+unifierCurrentHyperformNineCount =
+  CurrentHyper.currentHyperformNineCount
+
+unifierCurrentHyperformTwentySevenCount :
+  CurrentHyper.HyperformTwentySevenCountProof
+unifierCurrentHyperformTwentySevenCount =
+  CurrentHyper.currentHyperformTwentySevenCount
+
+unifierCurrentHyperformEightyOneCount :
+  CurrentHyper.HyperformEightyOneCountProof
+unifierCurrentHyperformEightyOneCount =
+  CurrentHyper.currentHyperformEightyOneCount
+
+unifierCurrentPadicPrefixCannotRecoverDiscardedDigit :
+  CurrentHyper.PadicPrefixRecovery → ⊥
+unifierCurrentPadicPrefixCannotRecoverDiscardedDigit =
+  CurrentHyper.currentPadicPrefixCannotRecoverDiscardedDigit
+
+unifierCurrentTwoDigitStreamCannotRecoverThird :
+  CurrentHyper.StreamThirdPrefixRecovery → ⊥
+unifierCurrentTwoDigitStreamCannotRecoverThird =
+  CurrentHyper.currentTwoDigitStreamCannotRecoverThird
+
+unifierCurrentFleet58DoesNotBecomeGate4SameObject :
+  CurrentHyper.Fleet58IsGate4SameObject → ⊥
+unifierCurrentFleet58DoesNotBecomeGate4SameObject =
+  CurrentHyper.currentFleet58DoesNotBecomeGate4SameObject
