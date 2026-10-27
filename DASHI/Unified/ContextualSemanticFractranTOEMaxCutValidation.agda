@@ -71,11 +71,11 @@ unifierParetoChartDoesNotCreateMonsterRepresentation =
   Unifier.unifierContextualParetoChartDoesNotCreateMonsterRepresentation
 
 toeDischargedFibresRemainOutOfTarget :
-  Exact.Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Exact.FleetDischargedFibreRetargetPermission → ⊥
 toeDischargedFibresRemainOutOfTarget =
   TOE.toeContextualFleetDischargedFibresRemainOutOfTarget
 
 unifierDischargedFibresRemainOutOfTarget :
-  Exact.Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Exact.FleetDischargedFibreRetargetPermission → ⊥
 unifierDischargedFibresRemainOutOfTarget =
   Unifier.unifierContextualFleetDischargedFibresRemainOutOfTarget
