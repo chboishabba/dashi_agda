@@ -20,6 +20,26 @@ unifierFullCubeNonPromotionMatches :
 unifierFullCubeNonPromotionMatches =
   Unifier.unifier369FullCubeRotationNotFree
 
+toeMonsterRepresentationNonPromotionMatches :
+  TOE.toe369Ternary27MonsterRepresentationNotPromoted
+  ≡ Owner.toe27MonsterRepresentationNotPromoted
+toeMonsterRepresentationNonPromotionMatches = refl
+
+unifierMonsterRepresentationNonPromotionMatches :
+  Unifier.unifier369Ternary27MonsterRepresentationNotPromoted
+  ≡ Owner.toe27MonsterRepresentationNotPromoted
+unifierMonsterRepresentationNonPromotionMatches = refl
+
+toeMonsterEmbeddingNonPromotionMatches :
+  TOE.toe369Ternary27MonsterEmbeddingNotPromoted
+  ≡ Owner.toe27MonsterEmbeddingNotPromoted
+toeMonsterEmbeddingNonPromotionMatches = refl
+
+unifierMonsterEmbeddingNonPromotionMatches :
+  Unifier.unifier369Ternary27MonsterEmbeddingNotPromoted
+  ≡ Owner.toe27MonsterEmbeddingNotPromoted
+unifierMonsterEmbeddingNonPromotionMatches = refl
+
 toeFullGradeDimensionFirewallMatches :
   FullGrade.LinearDimensionCreatesFaithfulness → ⊥
 toeFullGradeDimensionFirewallMatches =
@@ -69,3 +89,54 @@ unifierFiniteChartFirewallMatches :
   Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
 unifierFiniteChartFirewallMatches =
   Unifier.unifier369FiniteChartDoesNotCreateLinearMultiplicityAction
+
+
+toeFullGradeSameCarrierFirewallMatches :
+  FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
+toeFullGradeSameCarrierFirewallMatches =
+  TOE.toe369FullGradeSameCarrierDoesNotCreateActionAgreement
+
+unifierFullGradeSameCarrierFirewallMatches :
+  FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
+unifierFullGradeSameCarrierFirewallMatches =
+  Unifier.unifier369FullGradeSameCarrierDoesNotCreateActionAgreement
+
+toeFullGradeCharacterFirewallMatches :
+  FullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+toeFullGradeCharacterFirewallMatches =
+  TOE.toe369FullGradeCharacterDoesNotCreateActionAgreement
+
+unifierFullGradeCharacterFirewallMatches :
+  FullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+unifierFullGradeCharacterFirewallMatches =
+  Unifier.unifier369FullGradeCharacterDoesNotCreateActionAgreement
+
+toeCoordinateRetractionFirewallMatches :
+  Projected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+toeCoordinateRetractionFirewallMatches =
+  TOE.toe369CoordinateRetractionDoesNotCreateProjectedAction
+
+unifierCoordinateRetractionFirewallMatches :
+  Projected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+unifierCoordinateRetractionFirewallMatches =
+  Unifier.unifier369CoordinateRetractionDoesNotCreateProjectedAction
+
+toeProjectedCharacterFirewallMatches :
+  Projected.CharacterCreatesProjectedAction → ⊥
+toeProjectedCharacterFirewallMatches =
+  TOE.toe369ProjectedCharacterDoesNotCreateAction
+
+unifierProjectedCharacterFirewallMatches :
+  Projected.CharacterCreatesProjectedAction → ⊥
+unifierProjectedCharacterFirewallMatches =
+  Unifier.unifier369ProjectedCharacterDoesNotCreateAction
+
+toeKernelCharacterIntertwinerFirewallMatches :
+  TOE.toe369KernelCharacterIsotypyDoesNotConstructActionIntertwiner
+  ≡ Owner.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+toeKernelCharacterIntertwinerFirewallMatches = refl
+
+unifierKernelCharacterIntertwinerFirewallMatches :
+  Unifier.unifier369KernelCharacterIsotypyDoesNotConstructActionIntertwiner
+  ≡ Owner.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+unifierKernelCharacterIntertwinerFirewallMatches = refl
