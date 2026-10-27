@@ -237,6 +237,10 @@ yangMillsBalabanCombinedRGEffectiveActionCompilerLevel : ProofLevel
 yangMillsBalabanCombinedRGEffectiveActionCompilerLevel =
   BalabanRGTOE.balabanCombinedRGEffectiveActionCompilerLevel
 
+yangMillsBalabanGeneratedActionStressScaleCompilerLevel : ProofLevel
+yangMillsBalabanGeneratedActionStressScaleCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionStressScaleCompilerLevel
+
 yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel : ProofLevel
 yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel =
   BalabanRGTOE.balabanPublishedFlowRegularEProjectionCompilerLevel
@@ -268,6 +272,10 @@ yangMillsBalabanStressHilbertPhysicalShellLevel =
 yangMillsBalabanPublishedNonlinearRGCoreLevel : ProofLevel
 yangMillsBalabanPublishedNonlinearRGCoreLevel =
   BalabanRGTOE.balabanPublishedNonlinearRGCoreLevel
+
+yangMillsBalabanPublishedRGPhysicalSameObjectLevel : ProofLevel
+yangMillsBalabanPublishedRGPhysicalSameObjectLevel =
+  BalabanRGTOE.balabanPublishedRGPhysicalSameObjectLevel
 
 yangMillsBalabanRGUniformKPAbsorptionStillOpen :
   BalabanRGTOE.balabanRGUniformKPAbsorptionOpenFlag ≡ false
