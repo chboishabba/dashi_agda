@@ -9,7 +9,7 @@ import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTermi
 
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import Data.Nat.Base using (ℕ)
@@ -1078,3 +1078,108 @@ toeRHTerminalStrictSignedEstimateStillOpen :
     RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
 toeRHTerminalStrictSignedEstimateStillOpen =
   RHPrimeAudit.terminalStrictSignedEstimateStillOpen
+
+
+------------------------------------------------------------------------
+-- RH transformed-prime / three-tap non-promotion convergence.
+-- Direct aliases only. Analysis remains the theorem/status owner.
+------------------------------------------------------------------------
+
+toeRHCompletedTraceCrossPollinationBoundary :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
+toeRHCompletedTraceCrossPollinationBoundary =
+  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+
+toeRHSelectedMarkedPrimeAbsent :
+  RHPrimeAudit.selectedMarkedPrimeVanishingSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+toeRHSelectedMarkedPrimeAbsent =
+  RHPrimeAudit.sourcePrimeAbsent
+
+toeRHUnmarkedSelectedPhysicalPrimeAbsent :
+  RHPrimeAudit.unmarkedSelectedPhysicalPrimeVanishingSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+toeRHUnmarkedSelectedPhysicalPrimeAbsent =
+  RHPrimeAudit.unmarkedPrimeAbsent
+
+toeRHPrimeActivationRequiresFirstPrimeSupport :
+  RHPrimeAudit.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+toeRHPrimeActivationRequiresFirstPrimeSupport =
+  RHPrimeAudit.firstPrimeSupportNecessary
+
+toeRHHeisenbergTraceTransportStillBlocked :
+  RHPrimeAudit.actualHeisenbergTraceEqualsSelectedZetaFunctional
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHHeisenbergTraceTransportStillBlocked =
+  RHPrimeAudit.noUnjustifiedAnalyticTransport
+
+toeRHPrimeAuditDoesNotPromoteRH :
+  RHPrimeAudit.rhDerived
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHPrimeAuditDoesNotPromoteRH =
+  RHPrimeAudit.noUnjustifiedRH
+
+toeRHThreeTapCurrentLeanFrontier :
+  RHThreeTapFrontier.ThreeTapCurrentLeanFrontier
+toeRHThreeTapCurrentLeanFrontier =
+  RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier
+
+toeRHThreeTapA1CarrierSummationStillOpen :
+  RHThreeTapFrontier.a1CarrierSummationPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA1CarrierSummationStillOpen =
+  RHThreeTapFrontier.a1CarrierIsStillOpen
+
+toeRHThreeTapA2StrictScalarStillOpen :
+  RHThreeTapFrontier.a2StrictScalarPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA2StrictScalarStillOpen =
+  RHThreeTapFrontier.a2ScalarIsStillOpen
+
+toeRHSignedFifthRouteStillOpen :
+  RHThreeTapFrontier.routeBEventualGapPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHSignedFifthRouteStillOpen =
+  RHThreeTapFrontier.routeBIsStillOpen
+
+toeRHThreeTapFrontierDoesNotPromoteRH :
+  RHThreeTapFrontier.rhDerivedHere
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapFrontierDoesNotPromoteRH =
+  RHThreeTapFrontier.rhNotClaimedByAgdaStatusMirror
+
+toeRHThreeTapTerminalBoundary :
+  RHTerminal.ThreeTapTerminalCompletionBoundary
+toeRHThreeTapTerminalBoundary =
+  RHTerminal.canonicalThreeTapTerminalCompletionBoundary
+
+toeRHThreeTapProjectiveTransportStillUnpaid :
+  RHTerminal.transformedProjectiveM6M8TransportPaid
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapProjectiveTransportStillUnpaid =
+  RHTerminal.projectiveM6M8TransportStillOpen
+
+toeRHThreeTapTerminalStrictSignStillOpen :
+  RHTerminal.transformedTerminalStrictSignPaid
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapTerminalStrictSignStillOpen =
+  RHTerminal.strictTerminalSignStillOpen
+
+toeRHThreeTapResonanceSignStillOpen :
+  RHTerminal.resonanceStrictSignPaid
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapResonanceSignStillOpen =
+  RHTerminal.resonanceSignStillOpen
+
+toeRHThreeTapNearLineCoefficientStillOpen :
+  RHTerminal.nearLineLeadingCoefficientStrictlyPositivePaid
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapNearLineCoefficientStillOpen =
+  RHTerminal.nearLineCoefficientStillOpen
+
+toeRHThreeTapTerminalDoesNotPromoteRH :
+  RHTerminal.rhDerivedHere
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapTerminalDoesNotPromoteRH =
+  RHTerminal.rhStillOpen
