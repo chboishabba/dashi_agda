@@ -225,6 +225,16 @@ toeWorkflowSemanticMeetDoesNotProveLegalApplicability :
 toeWorkflowSemanticMeetDoesNotProveLegalApplicability =
   LegalWorkflow.toeSemanticMeetDoesNotProveLegalApplicability
 
+toeWorkflowControlEvidenceDoesNotCreateTruth :
+  LegalWorkflow.ControlEvidenceCreatesTruth → ⊥
+toeWorkflowControlEvidenceDoesNotCreateTruth =
+  LegalWorkflow.toeControlEvidenceDoesNotCreateTruth
+
+toeWorkflowPassingControlDoesNotMeanCertified :
+  LegalWorkflow.PassingControlMeansCertified → ⊥
+toeWorkflowPassingControlDoesNotMeanCertified =
+  LegalWorkflow.toePassingControlDoesNotMeanCertified
+
 toeWorkflowCaseySelectionDoesNotCreateWorldTruth :
   LegalWorkflow.CaseySelectionCreatesWorldTruth → ⊥
 toeWorkflowCaseySelectionDoesNotCreateWorldTruth =
