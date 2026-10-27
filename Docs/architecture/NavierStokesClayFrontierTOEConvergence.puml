@@ -1,0 +1,63 @@
+@startuml
+title Navier-Stokes canonical Clay frontier -> DASHI TOE
+
+skinparam componentStyle rectangle
+
+package "Original theorem owners" {
+  [NSABCDMaxCut20261007Exact] as ABCD
+  [NSCanonicalClayResidualExact] as Residual
+  [NSClayDistanceFinalReceipt] as Distance
+  [NSAuthorityConsistencyGuard] as Guard
+}
+
+package "Normalized Unified surface" {
+  [NavierStokesClayFrontierTOEConvergenceExact] as Facade
+  [NavierStokesClayFrontierTOEConvergenceValidation] as Validation
+}
+
+package "TOE consumers" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as Unifier
+  [Unified.Physics] as Physics
+  [Unified.Everything] as Everything
+}
+
+ABCD --> Facade : A/B/C/D max-cut
+Residual --> Facade : canonical residual gates
+Distance --> Facade : carrier-to-general gap\nterminal promotion -> bottom
+Guard --> Facade : mixed-scope promotion guard
+
+Facade --> TOE : exact aliases + non-promotion
+Facade --> Unifier : exact aliases + non-promotion
+Facade --> Physics : exact aliases + non-promotion
+
+TOE --> Validation
+Unifier --> Validation
+Physics --> Validation
+Validation --> Everything
+
+note right of Facade
+Preconditions:
+- canonical owners already exist
+- theorem ownership remains unchanged
+- ESD surfaces are read-only
+
+Invariants:
+- A/B stay internal theorem-development lanes
+- C/D stay released-proof audit lanes
+- carrier-structured completion != general NS completion
+- no finite/modeled result promotes Clay
+
+Postconditions:
+- exact terminal non-promotion is TOE-reachable
+- carrier-to-general structural gap is TOE-reachable
+- facade equality is validation-checked
+end note
+
+note bottom of Everything
+Process lenses only:
+ITIL; ISO 9000/42001/27001/27701/23894/9241;
+NIST AI RMF; Six Sigma; C4/PlantUML.
+No certification claim.
+end note
+@enduml
