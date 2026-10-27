@@ -76,3 +76,21 @@ codebook, a sampling-optimal mask, or a guaranteed physical 3D inverse.
   sampling, off-axis response, occlusion and spectral colour mixing.
 * Optimise the *recorded* observation information and reliable precision,
   not the nominal number of continuous-valued voxels in the decoded volume.
+
+
+## 2026 detector-limit cross-pollination
+
+Landrot et al., Journal of Synchrotron Radiation 33 (2026), 1093-1102,
+DOI 10.1107/S1600577526004789, use an FZP as a coded aperture for full-field
+X-ray fluorescence imaging. Their reconstruction is derived from an inline
+holography contrast-transfer approach. The reported limitations include
+detector output linearity, pile-up correction, background treatment, and
+intensity-correction choices.
+
+This is directly relevant to the DASHI boundary:
+
+    physical code -> photon detector -> finite recorded data -> inverse
+
+The paper does not justify identifying an ideal FZP field propagator with the
+digitised detector operator. Keep these maps distinct. It also does not turn
+the repository's entropy-style holographic area law into optical holography.
