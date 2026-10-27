@@ -1649,3 +1649,178 @@ toeFleetNumericABIRequiresIndependentEvidence :
   FleetGapTOE.SpectralNumericABIPromotion → ⊥
 toeFleetNumericABIRequiresIndependentEvidence =
   FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+------------------------------------------------------------------------
+-- SensibLaw / governance direct non-promotion handoff.
+------------------------------------------------------------------------
+
+open import DASHI.Governance.PromotionSpineTests public using
+  ( candidateExampleQuarantines
+  ; candidateExampleAbstains
+  ; citationExampleCannotCloseIdentity
+  ; citationExampleQuarantines
+  ; artifactExamplePromotesWhenAllFiveClose
+  ; artifactExampleAuthorizesGovernedPromotion
+  )
+
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedLegalRuntimeContract
+  ; selectedITIRNormalizedParity
+  ; selectedStageParityWitness
+  ; selectedOwnerParityWitness
+  ; SemanticPromotionPolicySurface
+  ; semanticPromotionPolicySurface
+  ; heuristic-only-abstains
+  ; promotion-ignores-heuristic-bits
+  ; semantic-promotion-truth-authority-closed
+  ; semantic-promotion-legal-authority-closed
+  ; semantic-promotion-all-authority-closed
+  ; LegalCitationBoundary
+  ; canonicalLegalCitationBoundary
+  ; CompositeCompliance
+  ; composeCertifiedStages
+  )
+
+------------------------------------------------------------------------
+-- Fleet formal-gap cut. Reuse the canonical fleet owner.
+------------------------------------------------------------------------
+
+unifierFleetRecordedDischargedCountIs584 :
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
+unifierFleetRecordedDischargedCountIs584 =
+  FleetGapTOE.fleetRecordedDischargedCountIs584
+
+unifierFleetRecordedUnformalisedGapCountIs58 :
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
+unifierFleetRecordedUnformalisedGapCountIs58 =
+  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+
+unifierFleetRecordedContradictionCountIs44 :
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
+unifierFleetRecordedContradictionCountIs44 =
+  FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifierFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifierFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifierFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifierFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetMetaIntrospectorAttributionPreserved = refl
+
+unifierFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetMetaIntrospectorProofNotBorrowed = refl
+
+------------------------------------------------------------------------
+-- Source-owned SLR evidence non-promotion; reused from PR #1343.
+-- No Digital ESD implementation is modified.
+------------------------------------------------------------------------
+
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
+
+unifierEvidenceManifestationDoesNotCreateSemanticAuthority :
+  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
+unifierEvidenceManifestationDoesNotCreateSemanticAuthority =
+  SLREvidence.manifestationDoesNotCreateSemanticAuthority
+
+unifierEvidenceObservationDoesNotCreateClaimTruth :
+  SLREvidence.ObservationCreatesClaimTruth → ⊥
+unifierEvidenceObservationDoesNotCreateClaimTruth =
+  SLREvidence.observationDoesNotCreateClaimTruth
+
+unifierEvidenceObservationDoesNotPromoteApplicability :
+  SLREvidence.ObservationPromotesApplicability → ⊥
+unifierEvidenceObservationDoesNotPromoteApplicability =
+  SLREvidence.observationDoesNotPromoteApplicability
+
+unifierEvidenceDoesNotCreateDigitalESDAdmission :
+  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
+unifierEvidenceDoesNotCreateDigitalESDAdmission =
+  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
+
+------------------------------------------------------------------------
+-- Source-owned SensibLaw governance firewalls.
+-- Re-export one existing parity surface. Do not duplicate theorem owners.
+------------------------------------------------------------------------
+
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedLegalSourceAuthorityBoundary
+  ; selectedDomainTransportReceipt
+  ; selectedAttributionSnowballBoundary
+  ; selectedSnowballLineageBoundary
+  ; selectedNativeLegalFollowBoundary
+  ; selectedProviderFailureCalibration
+  ; selectedExpertProductionBoundary
+  ; selectedCanonicalEvidenceBoundary
+  ; selectedFrozenProvenanceDynamicBoundary
+  ; governanceCandidateSourceDoesNotCloseAuthority
+  ; governanceSameSystemDoesNotCloseAuthority
+  ; governanceCurrentValidityDoesNotEstablishApplicability
+  ; governanceSemanticAdmissionDoesNotCreateLegalAuthority
+  ; governanceDocumentRoleDoesNotCreateLegalAuthority
+  ; governanceRuntimeCannotInventLegalSemantics
+  ; governanceSourceFollowCannotBecomeAuthorityByTransport
+  ; governanceRepresentationEqualityDoesNotCreateLegalAuthority
+  ; governanceVendorIdentityDoesNotCreateAuthority
+  ; governanceTargetDomainNeedsOwnAuthorityWitness
+  ; governanceSnowballCitationDoesNotCreateAuthority
+  ; governanceSnowballCitationDoesNotCreateLegalAuthority
+  ; governanceParetoDirectiveIsNotLegalAuthority
+  ; governanceParetoFrontierDoesNotPrejudgeRetrieval
+  ; governanceNativeCliDoesNotCreateLegalAuthority
+  ; governanceProviderFailureDoesNotMakePropositionFalse
+  ; governanceExpertProductionPromotesNoAuthority
+  ; governanceMultipleReportsDoNotCreateIndependence
+  ; governanceManifestationDoesNotCreateSemanticAuthority
+  ; governanceObservationDoesNotCreateClaimTruth
+  ; governanceObservationDoesNotPromoteApplicability
+  ; governanceCanonicalEvidenceDoesNotCreateDigitalESDAdmission
+  ; governanceStaticSeparationDoesNotCreateDynamicSafety
+  ; governanceFrozenSelectionDoesNotCreateDynamicSafety
+  ; governanceProvenanceAxisDoesNotCreateTruth
+  ; governanceCrossPollinationDoesNotTransferAuthorship
+  )
+
+------------------------------------------------------------------------
+-- Institutional normativity direct TOE handoff.
+-- Source theorem ownership remains in the canonical SensibLaw/Core modules.
+------------------------------------------------------------------------
+
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedInstitutionalNormProductionBoundary
+  ; selectedStatusSignalBoundary
+  ; selectedProximityInfluenceBoundary
+  ; selectedLegalReasonablenessNormativityBoundary
+  ; selectedOperationalLegalityBoundary
+  ; selectedInstitutionalResponsibilityBoundary
+  ; selectedEpistemicConsequenceBoundary
+  ; governanceBaselineDoesNotRecoverProductionHistory
+  ; governanceStatusDoesNotRecoverSubstantiveAdequacy
+  ; governanceProximityDoesNotCreateInfluence
+  ; governanceLegalValidityDoesNotCreatePoliticalNeutrality
+  ; governanceStatusSignalDoesNotCreateSubstantiveAdequacy
+  ; governanceLawfulRangeDoesNotCreatePoliticalNeutrality
+  ; governanceFormalProhibitionDoesNotCreateEffectivePrevention
+  ; governanceAuthorisationDoesNotCreateJustification
+  ; governanceHighUncertaintyDoesNotAutomaticallyEstablishIllegality
+  )

@@ -22,6 +22,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
+      - 'DASHI/Law/SensibLawITIRParityEverything.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
@@ -37,6 +38,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
+      - 'DASHI/Law/SensibLawITIRParityEverything.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
@@ -87,6 +89,11 @@ jobs:
           dashi-repo discover 'Yang Mills Goal1 TOE variable domain Peter Weyl compactness stress non-promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
+          dashi-repo diagnose DASHI/Law/SensibLawITIRParityEverything.agda --root .
+          dashi-repo related semantic-promotion-all-authority-closed --root . --limit 20
+          dashi-repo related candidateExampleQuarantines --root . --limit 20
+          dashi-repo related fleetRecordedUnformalisedGapCountIs58 --root . --limit 20
+          dashi-repo discover 'SensibLaw governance semantic promotion legal citation compositional compliance fleet formal gaps' --root . --limit 40
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
           dashi-repo related BalabanRGTOEReceipt --root .
@@ -145,6 +152,11 @@ jobs:
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
+            DASHI/Governance/PromotionSpineTests.agda
+            DASHI/Interop/SensibLawSemanticPromotionPolicy.agda
+            DASHI/Core/CompositionalComplianceExact.agda
+            DASHI/Law/LegalAuthorityCitationExact.agda
+            DASHI/Law/SensibLawITIRParityEverything.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
@@ -158,6 +170,11 @@ jobs:
         run: |
           agda --version
           modules=(
+            DASHI/Governance/PromotionSpineTests.agda
+            DASHI/Interop/SensibLawSemanticPromotionPolicy.agda
+            DASHI/Core/CompositionalComplianceExact.agda
+            DASHI/Law/LegalAuthorityCitationExact.agda
+            DASHI/Law/SensibLawITIRParityEverything.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
