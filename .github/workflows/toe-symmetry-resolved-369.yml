@@ -20,6 +20,8 @@ on:
       - 'DASHI/Unified/**'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawDbNativeCorpusCompilerRegression.agda'
+      - 'DASHI/Cognition/PNF/SensibLawDbNativeCorpusCompilerExact.agda'
       - 'DASHI/Unified/PNFSourceBoundaryTOEExact.agda'
       - 'DASHI/Unified/PNFSourceBoundaryTOEValidation.agda'
       - 'DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda'
@@ -114,6 +116,10 @@ jobs:
           dashi-repo related canonicalGovernedLegalWorkflowTOEBoundary --root . --limit 20
           dashi-repo related canonicalGovernedLegalWorkflowTOEInvariantHandoff --root . --limit 20
           dashi-repo related canonicalGovernedLegalWorkflowIntrospectiveZKPFrame --root . --limit 20
+          dashi-repo related exactReuseDoesNotCreateSemanticAdmission --root . --limit 20
+          dashi-repo related exactReuseDoesNotCreateSemanticAuthority --root . --limit 20
+          dashi-repo discover 'SensibLaw exact compiler product reuse semantic admission authority applicability identity truth' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompiler --root .
           dashi-repo discover 'SensibLaw governance legal workflow non promotion TOE' --root . --limit 40
           dashi-repo discover 'IntrospectiveProofLoop ZKPFrame governed legal workflow TOE Unified Everything' --root . --limit 40
           dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root . --limit 40
@@ -146,6 +152,12 @@ jobs:
           dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Cognition/PNF/SensibLawDbNativeCorpusCompilerExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Cognition/PNF/SensibLawDbNativeCorpusCompilerRegression.agda
           dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/PNFSourceBoundaryTOEExact.agda
