@@ -324,7 +324,7 @@ yangMillsBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
 yangMillsBalabanC4DensityAnchoredStressLaneLevel =
   BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
 
-yangMillsBalabanCPhysicalPackageCount : Nat
+yangMillsBalabanCPhysicalPackageCount : ℕ
 yangMillsBalabanCPhysicalPackageCount =
   BalabanRGTOE.balabanCPhysicalPackageCount
 
