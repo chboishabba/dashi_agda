@@ -376,11 +376,11 @@ toeGovernedLegalWorkflowZKPReceipt =
   GovernanceTOE.canonicalGovernedLegalWorkflowZKPReceipt
 
 toeCaseySelectionDoesNotCreateWorldTruth :
-  GovernanceTOE.Suite.CaseySelectionCreatesWorldTruth → ⊥
+  GovernanceTOE.CaseySelectionCreatesWorldTruth → ⊥
 toeCaseySelectionDoesNotCreateWorldTruth =
   GovernanceTOE.toeCaseySelectionDoesNotCreateWorldTruth
 
 toeKnowledgeDoesNotCreateExecutionAuthority :
-  GovernanceTOE.Authority.KnowledgeIsAuthority → ⊥
+  GovernanceTOE.KnowledgeIsAuthority → ⊥
 toeKnowledgeDoesNotCreateExecutionAuthority =
   GovernanceTOE.toeKnowledgeDoesNotCreateExecutionAuthority
