@@ -930,3 +930,45 @@ toeCurrent369SynthesisDoesNotEraseComparator :
   CurrentMaxCut.synthesisErasesComparator ≡ false
 toeCurrent369SynthesisDoesNotEraseComparator =
   CurrentMaxCut.synthesisErasesComparatorIsFalse
+
+------------------------------------------------------------------------
+-- Current max-cut + generic hyperfabric convergence.
+-- The joint owner reuses the current governance/fleet/Balaban/Ibrahim receipt.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutHyperfabricExact as CurrentHyper
+
+toeCurrentMaxCutHyperfabricReceipt :
+  CurrentHyper.TOECurrentMaxCutHyperfabricReceipt
+toeCurrentMaxCutHyperfabricReceipt =
+  CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
+
+toeCurrentHyperformNineCount :
+  CurrentHyper.HyperformNineCountProof
+toeCurrentHyperformNineCount =
+  CurrentHyper.currentHyperformNineCount
+
+toeCurrentHyperformTwentySevenCount :
+  CurrentHyper.HyperformTwentySevenCountProof
+toeCurrentHyperformTwentySevenCount =
+  CurrentHyper.currentHyperformTwentySevenCount
+
+toeCurrentHyperformEightyOneCount :
+  CurrentHyper.HyperformEightyOneCountProof
+toeCurrentHyperformEightyOneCount =
+  CurrentHyper.currentHyperformEightyOneCount
+
+toeCurrentPadicPrefixCannotRecoverDiscardedDigit :
+  CurrentHyper.PadicPrefixRecovery → ⊥
+toeCurrentPadicPrefixCannotRecoverDiscardedDigit =
+  CurrentHyper.currentPadicPrefixCannotRecoverDiscardedDigit
+
+toeCurrentTwoDigitStreamCannotRecoverThird :
+  CurrentHyper.StreamThirdPrefixRecovery → ⊥
+toeCurrentTwoDigitStreamCannotRecoverThird =
+  CurrentHyper.currentTwoDigitStreamCannotRecoverThird
+
+toeCurrentFleet58DoesNotBecomeGate4SameObject :
+  CurrentHyper.Fleet58IsGate4SameObject → ⊥
+toeCurrentFleet58DoesNotBecomeGate4SameObject =
+  CurrentHyper.currentFleet58DoesNotBecomeGate4SameObject
