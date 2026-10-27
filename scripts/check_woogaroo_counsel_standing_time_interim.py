@@ -27,11 +27,11 @@ def main() -> None:
         p.read_text(encoding="utf-8")
         for p in (LAW, PREVIOUS, ROLLUP, COUNSEL, REQUEST, RESEARCH, EPO_DRAFT)
     ]
-    assert law.count("Source.mkNoDOISource") == 13
-    assert law.count("Source.publicAttribution") == 13
-    assert law.count("= litigation-gate") == 17
-    assert law.count("→ ⊥") == 20
-    assert law.count("false refl") == 17
+    assert law.count("Source.mkNoDOISource") == 16
+    assert law.count("Source.publicAttribution") == 16
+    assert law.count("= litigation-gate") == 20
+    assert law.count("→ ⊥") == 22
+    assert law.count("false refl") == 20
     assert rollup.count("import DASHI.Law.SensibLawWoogarooStandingTimeInterimCounselTriage20261027Exact") == 1
 
     assert "import DASHI.Law.SensibLawWoogarooEPBC95C135ADecisionFileMaxCut20261027Exact as File" in law
@@ -58,7 +58,9 @@ def main() -> None:
                  "epbcContravention", "beforeOriginating", "undertakingRisk", "qutLetterEvidenceLead", "campaignActivityLead",
                  "nationalEPA474AEnforcement", "nationalEPAComplianceReport",
                  "qccSameCaseSubmissionLead", "swfgScenicStandingActivityLead",
-                 "possinghamScenicActivityLead", "zdenekScenicActivityLead"):
+                 "possinghamScenicActivityLead", "zdenekScenicActivityLead",
+                 "swfgABNOrganisationIdentityLead", "swfgMarch2025PublicPetitionLead",
+                 "swfgJuly2025CampaignSeriesLead"):
         assert name in law, name
 
     for noPromotion in ("identityNotStanding", "onlineNoticeNotFurnishing",
@@ -72,7 +74,8 @@ def main() -> None:
                         "complaintNotCourtOrOrder",
                         "lawfulClearingNotAutomaticallyEPOCase",
                         "scenicNotSpringviewComment", "oneLetterNotSection487Series",
-                        "originalDateBeatsCaption", "qccNotSwfgStanding"):
+                        "originalDateBeatsCaption", "qccNotSwfgStanding",
+                        "abnNoObjectsCertification", "senateThemeNotGroupOrganiser"):
         assert noPromotion in law, noPromotion
 
     # Actual deadlines, eligibility, completed acts and direct payments stay unpaid.
@@ -102,6 +105,11 @@ def main() -> None:
     assert "scenicZdenekDecember2025" in law and "14 December 2025" in law
     assert "EPBC 2020/8651" in law and "EPBC 2019/8575" in law
     assert "originalDateBeatsCaption" in law and "qccNotSwfgStanding" in law
+    assert "swfgAustralianBusinessRegister" in law and "86 248 330 120" in law
+    assert "17 November 2024" in law and "Other Incorporated Entity" in law
+    assert "senateWoogarooPetition2025" in law and "26 March 2025" in law
+    assert "ipswichJuly2025CampaignCoverage" in law and "17 July 2025" in law
+    assert "abnNoObjectsCertification" in law and "senateThemeNotGroupOrganiser" in law
     assert "National EPA compliance order" in memo
     assert "EPBC s474A" in memo
     assert "27 October 2026 CURRENT STATUS" in brief
@@ -117,7 +125,7 @@ def main() -> None:
     for topic in TOPICS:
         assert topic in memo, "missing coverage: " + topic
 
-    print("PASS: thirteen new/owned source roots, seventeen unpaid counsel gates, twenty anti-promotion guards and twenty topic coverage cells")
+    print("PASS: sixteen local source records (two canonical aliases), twenty unpaid counsel gates, twenty-two anti-promotion guards and twenty topic coverage cells")
 
 
 if __name__ == "__main__":
