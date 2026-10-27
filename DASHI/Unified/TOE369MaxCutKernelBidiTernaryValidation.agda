@@ -1,5 +1,7 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation where
 
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -89,3 +91,266 @@ unifierFiniteChartFirewallMatches :
   Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
 unifierFiniteChartFirewallMatches =
   Unifier.unifier369FiniteChartDoesNotCreateLinearMultiplicityAction
+
+toeFullGradeSameCarrierFirewallMatches :
+  FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
+toeFullGradeSameCarrierFirewallMatches =
+  TOE.toe369FullGradeSameCarrierDoesNotCreateActionAgreement
+
+unifierFullGradeSameCarrierFirewallMatches :
+  FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
+unifierFullGradeSameCarrierFirewallMatches =
+  Unifier.unifier369FullGradeSameCarrierDoesNotCreateActionAgreement
+
+toeFullGradeCharacterFirewallMatches :
+  FullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+toeFullGradeCharacterFirewallMatches =
+  TOE.toe369FullGradeCharacterDoesNotCreateActionAgreement
+
+unifierFullGradeCharacterFirewallMatches :
+  FullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+unifierFullGradeCharacterFirewallMatches =
+  Unifier.unifier369FullGradeCharacterDoesNotCreateActionAgreement
+
+toeCoordinateRetractionFirewallMatches :
+  Projected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+toeCoordinateRetractionFirewallMatches =
+  TOE.toe369CoordinateRetractionDoesNotCreateProjectedAction
+
+unifierCoordinateRetractionFirewallMatches :
+  Projected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+unifierCoordinateRetractionFirewallMatches =
+  Unifier.unifier369CoordinateRetractionDoesNotCreateProjectedAction
+
+toeProjectedCharacterFirewallMatches :
+  Projected.CharacterCreatesProjectedAction → ⊥
+toeProjectedCharacterFirewallMatches =
+  TOE.toe369ProjectedCharacterDoesNotCreateAction
+
+unifierProjectedCharacterFirewallMatches :
+  Projected.CharacterCreatesProjectedAction → ⊥
+unifierProjectedCharacterFirewallMatches =
+  Unifier.unifier369ProjectedCharacterDoesNotCreateAction
+
+toeKernelCharacterIntertwinerFirewallMatches :
+  TOE.toe369KernelCharacterIsotypyDoesNotConstructActionIntertwiner
+  ≡ Owner.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+toeKernelCharacterIntertwinerFirewallMatches = refl
+
+unifierKernelCharacterIntertwinerFirewallMatches :
+  Unifier.unifier369KernelCharacterIsotypyDoesNotConstructActionIntertwiner
+  ≡ Owner.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+unifierKernelCharacterIntertwinerFirewallMatches = refl
+
+------------------------------------------------------------------------
+-- Complete the existing selected-3B / ternary non-promotion validation.
+-- These are same-owner transport receipts, not fresh Monster proofs.
+------------------------------------------------------------------------
+
+toeTernary27OrbitIndexingNotSemanticIdentitySameOwner :
+  TOE.toe369Ternary27OrbitIndexingNotSemanticIdentity
+  ≡ Owner.toe27OrbitIndexingNotSemanticIdentity
+toeTernary27OrbitIndexingNotSemanticIdentitySameOwner = refl
+
+unifierTernary27OrbitIndexingNotSemanticIdentitySameOwner :
+  Unifier.unifier369Ternary27OrbitIndexingNotSemanticIdentity
+  ≡ Owner.toe27OrbitIndexingNotSemanticIdentity
+unifierTernary27OrbitIndexingNotSemanticIdentitySameOwner = refl
+
+toeTernary27ReductionNotMonster42SameObjectSameOwner :
+  TOE.toe369Ternary27ReductionNotMonster42SameObject
+  ≡ Owner.toe27ReductionNotMonster42SameObject
+toeTernary27ReductionNotMonster42SameObjectSameOwner = refl
+
+unifierTernary27ReductionNotMonster42SameObjectSameOwner :
+  Unifier.unifier369Ternary27ReductionNotMonster42SameObject
+  ≡ Owner.toe27ReductionNotMonster42SameObject
+unifierTernary27ReductionNotMonster42SameObjectSameOwner = refl
+
+toeKernelActualZetaRecognitionStillOpenSameOwner :
+  TOE.toe369KernelActualZetaRecognitionStillOpen
+  ≡ Owner.toeKernelActualZetaRecognitionStillOpen
+toeKernelActualZetaRecognitionStillOpenSameOwner = refl
+
+unifierKernelActualZetaRecognitionStillOpenSameOwner :
+  Unifier.unifier369KernelActualZetaRecognitionStillOpen
+  ≡ Owner.toeKernelActualZetaRecognitionStillOpen
+unifierKernelActualZetaRecognitionStillOpenSameOwner = refl
+
+toeKernelFullHyperformalActionStillOpenSameOwner :
+  TOE.toe369KernelFullHyperformalActionStillOpen
+  ≡ Owner.toeKernelFullHyperformalActionStillOpen
+toeKernelFullHyperformalActionStillOpenSameOwner = refl
+
+unifierKernelFullHyperformalActionStillOpenSameOwner :
+  Unifier.unifier369KernelFullHyperformalActionStillOpen
+  ≡ Owner.toeKernelFullHyperformalActionStillOpen
+unifierKernelFullHyperformalActionStillOpenSameOwner = refl
+
+toeSelectedSameElementClass3BStillOpenSameOwner :
+  TOE.toe369SelectedSameElementClass3BStillOpen
+  ≡ Owner.toeSelectedSameElementClass3BStillOpen
+toeSelectedSameElementClass3BStillOpenSameOwner = refl
+
+unifierSelectedSameElementClass3BStillOpenSameOwner :
+  Unifier.unifier369SelectedSameElementClass3BStillOpen
+  ≡ Owner.toeSelectedSameElementClass3BStillOpen
+unifierSelectedSameElementClass3BStillOpenSameOwner = refl
+
+toeSingleActionProducerStillOpenSameOwner :
+  TOE.toe369SingleActionProducerStillOpen
+  ≡ Owner.toeSingleActionProducerStillOpen
+toeSingleActionProducerStillOpenSameOwner = refl
+
+unifierSingleActionProducerStillOpenSameOwner :
+  Unifier.unifier369SingleActionProducerStillOpen
+  ≡ Owner.toeSingleActionProducerStillOpen
+unifierSingleActionProducerStillOpenSameOwner = refl
+
+toeNinetySlicesSourceFirewallMatches :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+toeNinetySlicesSourceFirewallMatches =
+  TOE.toe369NinetySlicesDoNotCreatePermutationRepresentation
+
+unifierNinetySlicesSourceFirewallMatches :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+unifierNinetySlicesSourceFirewallMatches =
+  Unifier.unifier369NinetySlicesDoNotCreatePermutationRepresentation
+
+toeCharacterHomSourceFirewallMatches :
+  Ibrahim.CharacterCreatesHomEvaluation → ⊥
+toeCharacterHomSourceFirewallMatches =
+  TOE.toe369CharacterDoesNotCreateHomEvaluation
+
+unifierCharacterHomSourceFirewallMatches :
+  Ibrahim.CharacterCreatesHomEvaluation → ⊥
+unifierCharacterHomSourceFirewallMatches =
+  Unifier.unifier369CharacterDoesNotCreateHomEvaluation
+
+toePermutationNonPromotionSourceFirewallMatches :
+  Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
+toePermutationNonPromotionSourceFirewallMatches =
+  TOE.toe369PermutationNoGoDoesNotCreateLinearAction
+
+unifierPermutationNonPromotionSourceFirewallMatches :
+  Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
+unifierPermutationNonPromotionSourceFirewallMatches =
+  Unifier.unifier369PermutationNoGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- Exact ternary-27 byte ABI / compiled host boundary.
+------------------------------------------------------------------------
+
+toeFiniteStateABIMatches :
+  TOE.toe369Ternary27FiniteStateABIExact
+  ≡ Owner.toe27FiniteStateABIExact
+toeFiniteStateABIMatches = refl
+
+unifierFiniteStateABIMatches :
+  Unifier.unifier369Ternary27FiniteStateABIExact
+  ≡ Owner.toe27FiniteStateABIExact
+unifierFiniteStateABIMatches = refl
+
+toeByteCarrierABIMatches :
+  TOE.toe369Ternary27ByteCarrierABIExact
+  ≡ Owner.toe27ByteCarrierABIExact
+toeByteCarrierABIMatches = refl
+
+unifierByteCarrierABIMatches :
+  Unifier.unifier369Ternary27ByteCarrierABIExact
+  ≡ Owner.toe27ByteCarrierABIExact
+unifierByteCarrierABIMatches = refl
+
+toeCompiledHostU8Matches :
+  TOE.toe369Ternary27CompiledHostU8Exact
+  ≡ Owner.toe27CompiledHostU8Exact
+toeCompiledHostU8Matches = refl
+
+unifierCompiledHostU8Matches :
+  Unifier.unifier369Ternary27CompiledHostU8Exact
+  ≡ Owner.toe27CompiledHostU8Exact
+unifierCompiledHostU8Matches = refl
+
+toeRustBindingBoundaryMatches :
+  TOE.toe369Ternary27RustBindingStillUnpaid
+  ≡ Owner.toe27RustBindingStillUnpaid
+toeRustBindingBoundaryMatches = refl
+
+unifierRustBindingBoundaryMatches :
+  Unifier.unifier369Ternary27RustBindingStillUnpaid
+  ≡ Owner.toe27RustBindingStillUnpaid
+unifierRustBindingBoundaryMatches = refl
+
+toeHostByteDeviceFirewallMatches :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+toeHostByteDeviceFirewallMatches =
+  TOE.toe369Ternary27HostByteDoesNotCreateDeviceByte
+
+unifierHostByteDeviceFirewallMatches :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+unifierHostByteDeviceFirewallMatches =
+  Unifier.unifier369Ternary27HostByteDoesNotCreateDeviceByte
+
+toeRuntimeKernelFirewallMatches :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+toeRuntimeKernelFirewallMatches =
+  TOE.toe369Ternary27RuntimeSourceDoesNotCreateKernelCertification
+
+unifierRuntimeKernelFirewallMatches :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+unifierRuntimeKernelFirewallMatches =
+  Unifier.unifier369Ternary27RuntimeSourceDoesNotCreateKernelCertification
+
+toeCompilerKernelFirewallMatches :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toeCompilerKernelFirewallMatches =
+  TOE.toe369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+unifierCompilerKernelFirewallMatches :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifierCompilerKernelFirewallMatches =
+  Unifier.unifier369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+------------------------------------------------------------------------
+-- Exact finite-27 BIDI validation through both TOE roots.
+------------------------------------------------------------------------
+
+toeFinite27DecodeEncodeBidiMatches :
+  (e : Owner.TernaryEncodedState) →
+  TOE.toe369Ternary27StateDecode
+    (TOE.toe369Ternary27StateCode e) ≡ e
+toeFinite27DecodeEncodeBidiMatches =
+  TOE.toe369Ternary27StateDecodeStateCode
+
+unifierFinite27DecodeEncodeBidiMatches :
+  (e : Owner.TernaryEncodedState) →
+  Unifier.unifier369Ternary27StateDecode
+    (Unifier.unifier369Ternary27StateCode e) ≡ e
+unifierFinite27DecodeEncodeBidiMatches =
+  Unifier.unifier369Ternary27StateDecodeStateCode
+
+toeFinite27EncodeDecodeBidiMatches :
+  (i : Owner.TernaryState27) →
+  TOE.toe369Ternary27StateCode
+    (TOE.toe369Ternary27StateDecode i) ≡ i
+toeFinite27EncodeDecodeBidiMatches =
+  TOE.toe369Ternary27StateCodeStateDecode
+
+unifierFinite27EncodeDecodeBidiMatches :
+  (i : Owner.TernaryState27) →
+  Unifier.unifier369Ternary27StateCode
+    (Unifier.unifier369Ternary27StateDecode i) ≡ i
+unifierFinite27EncodeDecodeBidiMatches =
+  Unifier.unifier369Ternary27StateCodeStateDecode
+
+
+toeMaxCutZKPFrameMatches :
+  TOE.toe369MaxCutZKPFrame
+  ≡ Owner.canonicalTOE369MaxCutZKPFrame
+toeMaxCutZKPFrameMatches = refl
+
+unifierMaxCutZKPFrameMatches :
+  Unifier.unifier369MaxCutZKPFrame
+  ≡ Owner.canonicalTOE369MaxCutZKPFrame
+unifierMaxCutZKPFrameMatches = refl

@@ -62,7 +62,6 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
-import DASHI.Core.RelationalTrialecticDisambiguationExact as IdentityFirewall
 
 ------------------------------------------------------------------------
 -- Exact existing owners.
@@ -102,59 +101,25 @@ fleetContradictionGapsAre44 = refl
 fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
 fleetFormalGapsAre58 = refl
 
-
-ymGate4FormalGaps : Nat
-ymGate4FormalGaps =
-  YM.gate4UnresolvedObligationCount
-
-ymGate4FormalGapsAre58 : ymGate4FormalGaps ≡ 58
-ymGate4FormalGapsAre58 =
-  YM.gate4UnresolvedObligationCountIs58
-
-ymGate4PaidReductionLevel =
-  YM.gate4PaidReductionLedgerLevel
-
-ymGate4InhabitantsLevel =
-  YM.gate4CutsetInhabitantsLevel
-
 fleetEigenPriorityDoesNotCreateProof :
-  Fleet.FleetEigenPriorityCreatesProof → ⊥
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt ≡ false
 fleetEigenPriorityDoesNotCreateProof =
   Fleet.fleetEigenPriorityDoesNotCreateProof
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof fleetFormalGapTargetReceipt ≡ false
 fleetExternalCountDoesNotCreateFormalDischarge =
   Fleet.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStayOutOfTarget :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged fleetFormalGapTargetReceipt ≡ true
 fleetDischargedFibresStayOutOfTarget =
-  Fleet.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+  Fleet.fleetDischargedFibresRemainOutOfTarget
 
 fleetContradictionGapsStaySeparate :
-  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+  Fleet.contradictionGapsRemainSeparate fleetFormalGapTargetReceipt ≡ true
 fleetContradictionGapsStaySeparate =
-  Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
-
-
-Fleet58EqualsYMGate4SameObject : Set
-Fleet58EqualsYMGate4SameObject =
-  IdentityFirewall.SharedCardinalityCreatesIdentity
-
-fleet58CardinalityDoesNotProveYMGate4Identity :
-  Fleet58EqualsYMGate4SameObject → ⊥
-fleet58CardinalityDoesNotProveYMGate4Identity =
-  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
-
-Fleet58Gate458SameIdentityFromCount : Set
-Fleet58Gate458SameIdentityFromCount =
-  Fleet58EqualsYMGate4SameObject
-
-fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
-  Fleet58Gate458SameIdentityFromCount → ⊥
-fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
-  fleet58CardinalityDoesNotProveYMGate4Identity
+  Fleet.fleetContradictionGapsRemainSeparate
 
 ------------------------------------------------------------------------
 -- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
@@ -236,12 +201,14 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     contradictionGaps : Nat
     contradictionGapsIs44 : contradictionGaps ≡ 44
     scaleTransferBlocked : YM.ScaleTransferPromotion → ⊥
+    eigenPriorityNoProof :
+      Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetReceipt ≡ false
     fleetCountDoesNotDischarge :
-      Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+      Fleet.externalCountCreatesFormalProof fleetReceipt ≡ false
     dischargedFibreRetargetBlocked :
-      Fleet.FleetDischargedFibreRetargetPermission → ⊥
+      Fleet.dischargedFibresRemainDischarged fleetReceipt ≡ true
     contradictionReclassificationBlocked :
-      Fleet.FleetContradictionGapReclassificationPermission → ⊥
+      Fleet.contradictionGapsRemainSeparate fleetReceipt ≡ true
 
 canonicalR559IbrahimFleetHyperfabricTOEReceipt :
   R559IbrahimFleetHyperfabricTOEReceipt
@@ -261,7 +228,44 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   ; contradictionGaps = fleetContradictionGaps
   ; contradictionGapsIs44 = fleetContradictionGapsAre44
   ; scaleTransferBlocked = toeScaleTransferPromotionImpossible
+  ; eigenPriorityNoProof = fleetEigenPriorityDoesNotCreateProof
   ; fleetCountDoesNotDischarge = fleetExternalCountDoesNotCreateFormalDischarge
   ; dischargedFibreRetargetBlocked = fleetDischargedFibresStayOutOfTarget
   ; contradictionReclassificationBlocked = fleetContradictionGapsStaySeparate
   }
+
+ymGate4FormalGaps : Nat
+ymGate4FormalGaps =
+  YM.gate4UnresolvedObligationCount
+
+ymGate4FormalGapsAre58 : ymGate4FormalGaps ≡ 58
+ymGate4FormalGapsAre58 =
+  YM.gate4UnresolvedObligationCountIs58
+
+ymGate4PaidReductionLevel =
+  YM.gate4PaidReductionLedgerLevel
+
+ymGate4InhabitantsLevel =
+  YM.gate4CutsetInhabitantsLevel
+
+Fleet58EqualsYMGate4SameObject : Set
+Fleet58EqualsYMGate4SameObject =
+  IdentityFirewall.SharedCardinalityCreatesIdentity
+
+fleet58CardinalityDoesNotProveYMGate4Identity :
+  Fleet58EqualsYMGate4SameObject → ⊥
+fleet58CardinalityDoesNotProveYMGate4Identity =
+  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
+
+Fleet58Gate458SameIdentityFromCount : Set
+Fleet58Gate458SameIdentityFromCount =
+  Fleet58EqualsYMGate4SameObject
+
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
+  Fleet58Gate458SameIdentityFromCount → ⊥
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
+  fleet58CardinalityDoesNotProveYMGate4Identity
+
+------------------------------------------------------------------------
+-- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
+------------------------------------------------------------------------
