@@ -1156,3 +1156,13 @@ toeFleetDispatchRequiresNamedManifest =
 
 toeFleetCountDoesNotIdentifyGapObjects =
   FleetGapTOE.externalGapCountIdentifiesIndividualGapsIsFalse
+
+-- Reuse source-owned semantic classification and non-promotion.
+toeHeuristicOnlyLegalSemanticCandidateAbstains =
+  LegalSemanticTOE.toeHeuristicOnlyLegalSemanticCandidateAbstains
+
+toeSemanticPromotionCannotConferLegalAuthority =
+  LegalSemanticTOE.toeSemanticPromotionCannotConferLegalAuthority
+
+toeSemanticPromotionCannotConferAnyAuthority =
+  LegalSemanticTOE.toeSemanticPromotionCannotConferAnyAuthority
