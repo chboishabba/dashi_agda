@@ -664,29 +664,177 @@ toeFleetFormalGapZKPFrame =
   FleetGapTOE.canonicalFleetFormalGapZKPFrame
 
 toeFleetEigenPriorityDoesNotCreateProof :
-  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 toeFleetEigenPriorityDoesNotCreateProof =
   FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
 
 toeFleetExternalCountDoesNotCreateFormalDischarge :
-  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 toeFleetExternalCountDoesNotCreateFormalDischarge =
   FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
 
 toeFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
 toeFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
 
 toeFleetContradictionGapsRemainSeparate :
-  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
 toeFleetContradictionGapsRemainSeparate =
-  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
 
 toeFleetPlanningTextDoesNotCreateFormalResidual :
-  FleetGapTOE.PlanningSourceTextFormalResidualFlag
+  FleetGapTOE.externalPlanningTextCreatesFormalResidual
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 toeFleetPlanningTextDoesNotCreateFormalResidual =
-  FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
+  FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
+
+
+toeFleetBalabanDischargedOwnerReceipt :
+  FleetGapTOE.BalabanDischargedOwnerReceipt
+toeFleetBalabanDischargedOwnerReceipt =
+  FleetGapTOE.fleetBalabanDischargedOwnerReceipt
+
+toeFleetNSPhysicalM2SummationCompilerStatus :
+  Bool
+toeFleetNSPhysicalM2SummationCompilerStatus =
+  FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
+
+toeFleetNSM2ToR568CompilerStatus :
+  Bool
+toeFleetNSM2ToR568CompilerStatus =
+  FleetGapTOE.fleetNSM2ToR568CompilerStatus
+
+toeFleetQuantumMereologyBoundary :
+  FleetGapTOE.QuantumMereologyDischargedBoundary
+toeFleetQuantumMereologyBoundary =
+  FleetGapTOE.fleetQuantumMereologyBoundary
+
+toeFleetQuantumMereologyAttributionBoundary :
+  FleetGapTOE.QuantumMereologyAttributionBoundary
+toeFleetQuantumMereologyAttributionBoundary =
+  FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+
+toeFleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetSpectralLabelDoesNotIdentifyTheoremOwner =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+
+------------------------------------------------------------------------
+-- Direct residual Ibrahim source-owner firewalls.
+------------------------------------------------------------------------
+
+toeIbrahimOEISDoesNotSelectRepresentationProofRoute :
+  ParetoSnowballTOE.OEISSelectsRepresentationProofRoute → ⊥
+toeIbrahimOEISDoesNotSelectRepresentationProofRoute =
+  ParetoSnowballTOE.oeisDoesNotSelectRepresentationProofRoute
+
+toeIbrahimDimensionDoesNotCloseRepresentationRoute :
+  ParetoSnowballTOE.DimensionClosesRepresentationRoute → ⊥
+toeIbrahimDimensionDoesNotCloseRepresentationRoute =
+  ParetoSnowballTOE.dimensionDoesNotCloseRepresentationRoute
+
+toeIbrahimFailedCoarseRouteDoesNotForceConcreteBasis :
+  ParetoSnowballTOE.FailedCoarseRouteForcesConcreteBasisReconstruction → ⊥
+toeIbrahimFailedCoarseRouteDoesNotForceConcreteBasis =
+  ParetoSnowballTOE.failedCoarseRouteDoesNotForceConcreteBasisReconstruction
+
+toeIbrahimKernelCharacterDoesNotCreateConstituentList :
+  ParetoSnowballTOE.KernelCharacterEqualityCreatesConstituentList → ⊥
+toeIbrahimKernelCharacterDoesNotCreateConstituentList =
+  ParetoSnowballTOE.kernelCharacterEqualityDoesNotCreateConstituentList
+
+toeIbrahimAgdaConsumerDoesNotCreateExternalTheorem :
+  ParetoSnowballTOE.AgdaConsumerRecordCreatesExternalTheorem → ⊥
+toeIbrahimAgdaConsumerDoesNotCreateExternalTheorem =
+  ParetoSnowballTOE.agdaConsumerRecordDoesNotCreateExternalTheorem
+
+toeIbrahimPairDegreeDoesNotCreatePhaseOrientation :
+  ParetoSnowballTOE.PairDegreeCreatesPhaseOrientation → ⊥
+toeIbrahimPairDegreeDoesNotCreatePhaseOrientation =
+  ParetoSnowballTOE.pairDegreeDoesNotCreatePhaseOrientation
+
+toeIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner :
+  ParetoSnowballTOE.TwelveSeventyEightCreatesSameActionIntertwiner → ⊥
+toeIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner =
+  ParetoSnowballTOE.twelveSeventyEightDoesNotCreateSameActionIntertwiner
+
+toeIbrahimCTblLibNameDoesNotCreateActualMonsterAction :
+  ParetoSnowballTOE.CTblLibTableNameCreatesActualMonsterAction → ⊥
+toeIbrahimCTblLibNameDoesNotCreateActualMonsterAction =
+  ParetoSnowballTOE.ctbllibTableNameDoesNotCreateActualMonsterAction
+
+toeIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition :
+  ParetoSnowballTOE.SharedZetaScalarCreatesMonsterHZetaRecognition → ⊥
+toeIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition =
+  ParetoSnowballTOE.sharedZetaScalarDoesNotCreateMonsterHZetaRecognition
+
+toeIbrahimSchrodingerConstructionDoesNotCreateHomBinding :
+  ParetoSnowballTOE.SchrodingerConstructionCreatesHomCarrierBinding → ⊥
+toeIbrahimSchrodingerConstructionDoesNotCreateHomBinding =
+  ParetoSnowballTOE.schrodingerConstructionDoesNotCreateHomCarrierBinding
+
+toeIbrahimDeweyDoesNotClassifyHistoricalEdge :
+  ParetoSnowballTOE.DeweyClassifiesHistoricalEdge → ⊥
+toeIbrahimDeweyDoesNotClassifyHistoricalEdge =
+  ParetoSnowballTOE.deweyDoesNotClassifyHistoricalEdge
+
+toeIbrahimFourEdgesDoNotProveWholeCorpus :
+  ParetoSnowballTOE.FourMatchingEdgesProveWholeCorpus → ⊥
+toeIbrahimFourEdgesDoNotProveWholeCorpus =
+  ParetoSnowballTOE.fourMatchingEdgesDoNotProveWholeCorpus
+
+toeIbrahimOctoberCommentDoesNotOverridePrimaryPaper :
+  ParetoSnowballTOE.OctoberCommentOverridesPrimaryPaper → ⊥
+toeIbrahimOctoberCommentDoesNotOverridePrimaryPaper =
+  ParetoSnowballTOE.octoberCommentDoesNotOverridePrimaryPaper
+
+toeIbrahimPaperMonthDoesNotOverrideExecutedBytes :
+  ParetoSnowballTOE.PaperMonthOverridesExecutedBytes → ⊥
+toeIbrahimPaperMonthDoesNotOverrideExecutedBytes =
+  ParetoSnowballTOE.paperMonthDoesNotOverrideExecutedBytes
+
+------------------------------------------------------------------------
+-- Direct canonical PNF firewalls for fleet R4/R5 selection.
+------------------------------------------------------------------------
+
+toeFleetNonRebuildableCoordinatePromotionImpossible :
+  FleetGapTOE.NonRebuildableCoordinatePromotion → ⊥
+toeFleetNonRebuildableCoordinatePromotionImpossible =
+  FleetGapTOE.fleetNonRebuildableCoordinatePromotionImpossible
+
+toeFleetVectorSpectralAuthorityPromotionImpossible :
+  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
+toeFleetVectorSpectralAuthorityPromotionImpossible =
+  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
+
+toeFleetSpectralNumericABIPromotionImpossible :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+toeFleetSpectralNumericABIPromotionImpossible =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+toeFleetResidualFieldPromotionImpossible :
+  FleetGapTOE.ResidualFieldPromotion → ⊥
+toeFleetResidualFieldPromotionImpossible =
+  FleetGapTOE.fleetResidualFieldPromotionImpossible
+
+toeFleetVectorCoordinateTruthStillFalse =
+  FleetGapTOE.fleetVectorCoordinateTruthStillFalse
+
+toeFleetVectorCoordinateSupportStillFalse =
+  FleetGapTOE.fleetVectorCoordinateSupportStillFalse
+
+toeFleetVectorCoordinateAdmissibilityStillFalse =
+  FleetGapTOE.fleetVectorCoordinateAdmissibilityStillFalse
+
+toeFleetTextFallbackAuthorityStillFalse =
+  FleetGapTOE.fleetTextFallbackAuthorityStillFalse
 
 ------------------------------------------------------------------------
 -- Joint Balaban RG + R559 same-owner max-cut receipt.

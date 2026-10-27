@@ -13,6 +13,10 @@ import DASHI.Interop.PNFResidualFieldInvariants as Residual
 import DASHI.Planning.PlanningPNFClaimBoundaryExact as Planning
 import DASHI.Promotion.ObligationIndex as Obligation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
+import DASHI.Unified.BalabanRGTOERegression as BalabanRG
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
+import DASHI.Quantum.QuantumMereologyExact as QM
+import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -79,6 +83,91 @@ canonicalFleetFormalGapTargetReceipt =
     false
 
 ------------------------------------------------------------------------
+-- Exact values of the recorded external planning receipt.
+-- These equalities validate this DASHI wrapper only.
+-- They do not validate the external producer run.
+------------------------------------------------------------------------
+
+fleetRecordedDischargedCountIs584 :
+  dischargedCoreKnowledgeFibres canonicalFleetFormalGapTargetReceipt ≡ 584
+fleetRecordedDischargedCountIs584 = refl
+
+fleetRecordedContradictionCountIs44 :
+  polarityContradictionGaps canonicalFleetFormalGapTargetReceipt ≡ 44
+fleetRecordedContradictionCountIs44 = refl
+
+fleetRecordedUnformalisedGapCountIs58 :
+  unformalisedFormalGaps canonicalFleetFormalGapTargetReceipt ≡ 58
+fleetRecordedUnformalisedGapCountIs58 = refl
+
+fleetRecordedMacroscopicMotifCountIs3 :
+  macroscopicEigenMotifCount canonicalFleetFormalGapTargetReceipt ≡ 3
+fleetRecordedMacroscopicMotifCountIs3 = refl
+
+fleetTargetsOnlyUnformalisedFormalGaps :
+  targetOnlyUnformalisedFormalGaps canonicalFleetFormalGapTargetReceipt ≡ true
+fleetTargetsOnlyUnformalisedFormalGaps = refl
+
+fleetDoesNotRetargetDischargedFibres :
+  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt ≡ true
+fleetDoesNotRetargetDischargedFibres = refl
+
+fleetKeepsContradictionsSeparate :
+  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt ≡ true
+fleetKeepsContradictionsSeparate = refl
+
+------------------------------------------------------------------------
+-- Existing discharged motif owners.
+--
+-- These references prevent spectral planning labels from becoming new theorem
+-- owners. They do not assert that the external eigenvectors identify these
+-- modules by theorem.
+------------------------------------------------------------------------
+
+BalabanDischargedOwnerReceipt : Set
+BalabanDischargedOwnerReceipt =
+  BalabanRG.BalabanRGTOEReceipt
+
+fleetBalabanDischargedOwnerReceipt :
+  BalabanDischargedOwnerReceipt
+fleetBalabanDischargedOwnerReceipt =
+  BalabanRG.canonicalBalabanRGTOEReceipt
+
+fleetNSPhysicalM2SummationCompilerStatus :
+  Bool
+fleetNSPhysicalM2SummationCompilerStatus =
+  NS.bSamplewiseM2SummationCompilerClosed
+
+fleetNSM2ToR568CompilerStatus :
+  Bool
+fleetNSM2ToR568CompilerStatus =
+  NS.bM2ToR568CompilerClosed
+
+QuantumMereologyDischargedBoundary : Set
+QuantumMereologyDischargedBoundary =
+  QM.QuantumMereologyBoundary
+
+fleetQuantumMereologyBoundary :
+  QuantumMereologyDischargedBoundary
+fleetQuantumMereologyBoundary =
+  QM.canonicalQuantumMereologyBoundary
+
+QuantumMereologyAttributionBoundary : Set
+QuantumMereologyAttributionBoundary =
+  QMSources.QuantumMereologyAttributionBoundary
+
+fleetQuantumMereologyAttributionBoundary :
+  QuantumMereologyAttributionBoundary
+fleetQuantumMereologyAttributionBoundary =
+  QMSources.canonicalQuantumMereologyAttributionBoundary
+
+data FleetSpectralLabelIdentifiesTheoremOwner : Set where
+
+fleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+fleetSpectralLabelDoesNotIdentifyTheoremOwner ()
+
+------------------------------------------------------------------------
 -- Reused canonical proof and receipt owners.
 ------------------------------------------------------------------------
 
@@ -126,31 +215,36 @@ fleetPlanningTextDoesNotCreateFormalResidual =
 
 ------------------------------------------------------------------------
 -- Exact non-promotion gates for the external fleet selection.
+--
+-- These are facts about the canonical receipt fields. They are not vacuous
+-- empty-type eliminators and they do not convert external planning data into
+-- theorem authority.
 ------------------------------------------------------------------------
 
-data FleetEigenPriorityCreatesProof : Set where
-
 fleetEigenPriorityDoesNotCreateProof :
-  FleetEigenPriorityCreatesProof → ⊥
-fleetEigenPriorityDoesNotCreateProof ()
-
-data FleetExternalCountCreatesFormalDischarge : Set where
+  eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetEigenPriorityDoesNotCreateProof = refl
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  FleetExternalCountCreatesFormalDischarge → ⊥
-fleetExternalCountDoesNotCreateFormalDischarge ()
+  externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetExternalCountDoesNotCreateFormalDischarge = refl
 
-data FleetDischargedFibreRetargetPermission : Set where
+fleetDischargedFibresRemainOutOfTarget :
+  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetDischargedFibresRemainOutOfTarget = refl
 
-fleetDischargedFibresCannotBeRetargetedByThisBoundary :
-  FleetDischargedFibreRetargetPermission → ⊥
-fleetDischargedFibresCannotBeRetargetedByThisBoundary ()
+fleetContradictionGapsRemainSeparate :
+  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetContradictionGapsRemainSeparate = refl
 
-data FleetContradictionGapReclassificationPermission : Set where
-
-fleetContradictionsCannotBeRelabelledAsFormalGaps :
-  FleetContradictionGapReclassificationPermission → ⊥
-fleetContradictionsCannotBeRelabelledAsFormalGaps ()
+fleetExternalPlanningTextDoesNotCreateFormalResidual :
+  externalPlanningTextCreatesFormalResidual canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetExternalPlanningTextDoesNotCreateFormalResidual = refl
 
 ------------------------------------------------------------------------
 -- Reuse the existing O/R/C/S/L/P/G/F process carrier.
@@ -172,3 +266,67 @@ canonicalFleetFormalGapZKPFrame =
     false
     false
     false
+
+
+------------------------------------------------------------------------
+-- Direct source-owned PNF non-promotion gates.
+--
+-- The fleet receipt is external planning context. These theorem gates come
+-- from the canonical DASHI PNF owners and remain the proof authority.
+------------------------------------------------------------------------
+
+NonRebuildableCoordinatePromotion : Set
+NonRebuildableCoordinatePromotion =
+  Rebuild.NonRebuildablePromotion
+
+VectorSpectralAuthorityPromotion : Set
+VectorSpectralAuthorityPromotion =
+  Rebuild.VectorAuthorityPromotion
+
+SpectralNumericABIPromotion : Set
+SpectralNumericABIPromotion =
+  Numeric.PNFSpectralNumericABIPromotion
+
+ResidualFieldPromotion : Set
+ResidualFieldPromotion =
+  Residual.PNFResidualFieldInvariantPromotion
+
+fleetNonRebuildableCoordinatePromotionImpossible :
+  NonRebuildableCoordinatePromotion → ⊥
+fleetNonRebuildableCoordinatePromotionImpossible =
+  Rebuild.nonRebuildablePromotionImpossible
+
+fleetVectorSpectralAuthorityPromotionImpossible :
+  VectorSpectralAuthorityPromotion → ⊥
+fleetVectorSpectralAuthorityPromotionImpossible =
+  Rebuild.vectorAuthorityPromotionImpossible
+
+fleetSpectralNumericABIPromotionImpossible :
+  SpectralNumericABIPromotion → ⊥
+fleetSpectralNumericABIPromotionImpossible =
+  Numeric.pnfSpectralNumericABIPromotionImpossible
+
+fleetResidualFieldPromotionImpossible :
+  ResidualFieldPromotion → ⊥
+fleetResidualFieldPromotionImpossible =
+  Residual.pnfResidualFieldInvariantPromotionImpossible
+
+fleetVectorCoordinateTruthStillFalse :
+  Rebuild.vectorCoordinateIsTruth ≡ false
+fleetVectorCoordinateTruthStillFalse =
+  Rebuild.vectorCoordinateTruthFalse
+
+fleetVectorCoordinateSupportStillFalse :
+  Rebuild.vectorCoordinateIsCommittedSupport ≡ false
+fleetVectorCoordinateSupportStillFalse =
+  Rebuild.vectorCoordinateCommittedSupportFalse
+
+fleetVectorCoordinateAdmissibilityStillFalse :
+  Rebuild.vectorCoordinateIsAdmissibility ≡ false
+fleetVectorCoordinateAdmissibilityStillFalse =
+  Rebuild.vectorCoordinateAdmissibilityFalse
+
+fleetTextFallbackAuthorityStillFalse :
+  Rebuild.textFallbackIsCoordinateAuthority ≡ false
+fleetTextFallbackAuthorityStillFalse =
+  Rebuild.textFallbackCoordinateAuthorityFalse
