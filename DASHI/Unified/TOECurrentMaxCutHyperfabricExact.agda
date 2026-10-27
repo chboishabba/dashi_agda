@@ -113,15 +113,24 @@ currentFleet58DoesNotBecomeGate4SameObject =
 -- Existing generic hyperfabric cardinalities.
 ------------------------------------------------------------------------
 
-currentHyperformNineCount : Fabric.siteCount 3 2 ≡ 9
+HyperformNineCountProof : Set
+HyperformNineCountProof = Fabric.siteCount 3 2 ≡ 9
+
+HyperformTwentySevenCountProof : Set
+HyperformTwentySevenCountProof = Fabric.siteCount 3 3 ≡ 27
+
+HyperformEightyOneCountProof : Set
+HyperformEightyOneCountProof = Fabric.siteCount 3 4 ≡ 81
+
+currentHyperformNineCount : HyperformNineCountProof
 currentHyperformNineCount =
   Fabric.threeAxis9
 
-currentHyperformTwentySevenCount : Fabric.siteCount 3 3 ≡ 27
+currentHyperformTwentySevenCount : HyperformTwentySevenCountProof
 currentHyperformTwentySevenCount =
   Fabric.threeAxis27
 
-currentHyperformEightyOneCount : Fabric.siteCount 3 4 ≡ 81
+currentHyperformEightyOneCount : HyperformEightyOneCountProof
 currentHyperformEightyOneCount =
   Fabric.threeAxis81
 
