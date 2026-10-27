@@ -33,6 +33,8 @@ import DASHI.Physics.YangMills.BalabanCompactSimpleCasimirOrbitFactorizationExac
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as CasimirClass
 import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
+import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
+import DASHI.Geometry.Gauge.SUNPrimitives as SUN
 import DASHI.Physics.YangMills.BalabanRGLane as LegacyRGLane
 import DASHI.Physics.YangMills.YangMillsHighestAlphaGateDependencyExact as Gate
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
@@ -54,14 +56,12 @@ balabanScaleDensityStressLaneCompilerLevel : ProofLevel
 balabanScaleDensityStressLaneCompilerLevel =
   MeasureStress.literalFiniteMeasureStressLaneCompilerLevel
 
-balabanRegularESelectedDensityCompilerLevel : ProofLevel
-balabanRegularESelectedDensityCompilerLevel =
-  RegularE.regularEToBC1SameObjectCompilerClosedLevel
-  where
-  -- The existing Round240 owner exposes this compiler as a closed state.
-  -- ProofLevel remains conditional where the physical source input is open.
-  postulate
-    regularEToBC1SameObjectCompilerClosedLevel : ProofLevel
+balabanRegularESelectedDensityCompilerClosed :
+  RegularE.preferredBC1LeafState240
+    RegularE.regularEToBC1SameObjectCompiler
+  ≡ RegularE.closed
+balabanRegularESelectedDensityCompilerClosed =
+  RegularE.regularEToBC1SameObjectCompilerClosed
 
 balabanRegularELocalizationSourceLevel : ProofLevel
 balabanRegularELocalizationSourceLevel =
@@ -115,7 +115,7 @@ balabanRGContinuumConstructionStillOpen =
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
 
 balabanRGContinuumMassGapStillOpen :
-  RGFrontier.Balaban.continuumMassGapProvedInDASHI
+  MassGap.continuumMassGapProvedInDASHI
     (RGFrontier.balabanMassGapSurface
       RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt)
   ≡ false
@@ -131,7 +131,7 @@ balabanRGClayPromotionStillFalse =
   RGFrontier.canonicalBalabanRGScaleTransferNoClayPromotion
 
 legacyBalabanLaneAlsoDeclaresNoClayPromotion :
-  LegacyRGLane.clayYangMillsPromoted ≡ false
+  SUN.clayYangMillsPromoted ≡ false
 legacyBalabanLaneAlsoDeclaresNoClayPromotion =
   LegacyRGLane.noClayPromotion LegacyRGLane.canonicalBalabanRGLane
 
