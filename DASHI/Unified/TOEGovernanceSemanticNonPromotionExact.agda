@@ -12,6 +12,14 @@ import DASHI.Core.ControlCardCore as Control
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Attribution
 import DASHI.Education.DigitalESDNormativeStandardsAtlasExact as Standards
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as SensibLaw
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalWorkflow
+import DASHI.Law.ConsumerAdequacyRuntimeTheoremBridgeExact as Adequacy
+import DASHI.Law.ExactNonFactorabilityResidualCompilerExact as NonFactor
+import DASHI.Law.ConsumerResearchAdmissibilityStopExact as ResearchStop
+import DASHI.Law.ClosedIsNotAdequateExact as Closed
+import DASHI.Law.MaboRevisionReopenExact as MaboRevision
+import DASHI.Law.RevisionReReviewPropagationExact as RevisionReview
+import DASHI.Law.LegalWorldRevisionReconstructionExact as WorldRevision
 
 ------------------------------------------------------------------------
 -- TOE GOVERNANCE HANDOFF.
@@ -92,6 +100,99 @@ citationCannotCreateAuthority :
   Attribution.CitationCreatesDomainAuthority → ⊥
 citationCannotCreateAuthority =
   Attribution.citationDoesNotCreateAuthority
+
+
+------------------------------------------------------------------------
+-- Existing legal/research exact non-promotion owners.
+------------------------------------------------------------------------
+
+toeRuntimeCoordinateCompletenessDoesNotProveFormalAdequacy :
+  Adequacy.runtimeCoordinateCompletenessIsFormalAdequacy
+    Adequacy.canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary
+  ≡ false
+toeRuntimeCoordinateCompletenessDoesNotProveFormalAdequacy =
+  Adequacy.runtimeCoordinateCompletenessIsFormalAdequacyIsFalse
+    Adequacy.canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary
+
+toeTheoremBackedAdequacyRequiresAdequateFor :
+  Adequacy.theoremBackedReceiptRequiresAdequateForInhabitant
+    Adequacy.canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary
+  ≡ true
+toeTheoremBackedAdequacyRequiresAdequateFor =
+  Adequacy.theoremBackedReceiptRequiresAdequateForInhabitantIsTrue
+    Adequacy.canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary
+
+toeApproximateCollisionCannotPromoteExactResidual :
+  NonFactor.approximateCollisionMayPromoteExactResidual
+    NonFactor.canonicalExactNonFactorabilityResidualCompilerBoundary
+  ≡ false
+toeApproximateCollisionCannotPromoteExactResidual =
+  NonFactor.approximateCollisionMayPromoteExactResidualIsFalse
+    NonFactor.canonicalExactNonFactorabilityResidualCompilerBoundary
+
+toeFrontierClosureDoesNotProveConsumerAdequacy :
+  ResearchStop.frontierClosureAloneProvesConsumerAdequacy
+    ResearchStop.canonicalConsumerResearchAdmissibilityStopBoundary
+  ≡ false
+toeFrontierClosureDoesNotProveConsumerAdequacy =
+  ResearchStop.frontierClosureAloneProvesConsumerAdequacyIsFalse
+    ResearchStop.canonicalConsumerResearchAdmissibilityStopBoundary
+
+toeNoFreshDemandDoesNotProveConsumerAdequacy :
+  Closed.noFreshDemandIsConsumerAdequacyProof
+    Closed.canonicalClosedIsNotAdequateBoundary
+  ≡ false
+toeNoFreshDemandDoesNotProveConsumerAdequacy =
+  Closed.noFreshDemandIsConsumerAdequacyProofIsFalse
+    Closed.canonicalClosedIsNotAdequateBoundary
+
+toeExactNonfactorabilityMayReopenClosedFrontier :
+  Closed.exactNonfactorabilityMayReopenClosedFrontier
+    Closed.canonicalClosedIsNotAdequateBoundary
+  ≡ true
+toeExactNonfactorabilityMayReopenClosedFrontier =
+  Closed.exactNonfactorabilityMayReopenClosedFrontierIsTrue
+    Closed.canonicalClosedIsNotAdequateBoundary
+
+toeRevisionChangeReopensContextBeforeIdentity :
+  MaboRevision.revisionChangeReopensContextBeforeIdentity
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ true
+toeRevisionChangeReopensContextBeforeIdentity =
+  MaboRevision.revisionChangeReopensContextBeforeIdentityIsTrue
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+
+toeLatestRevisionLookupDoesNotPayContextReview :
+  MaboRevision.latestRevisionLookupPaysContextReview
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ false
+toeLatestRevisionLookupDoesNotPayContextReview =
+  MaboRevision.latestRevisionLookupPaysContextReviewIsFalse
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+
+toeRevisionReopenDoesNotCreateClaimTruth :
+  MaboRevision.revisionReopenCreatesClaimTruth
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ false
+toeRevisionReopenDoesNotCreateClaimTruth =
+  MaboRevision.revisionReopenCreatesClaimTruthIsFalse
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+
+toeRevisionRereviewDoesNotChangeClaimTruth :
+  RevisionReview.rereviewAutomaticallyChangesClaimTruth
+    RevisionReview.canonicalRevisionReReviewPropagationBoundary
+  ≡ false
+toeRevisionRereviewDoesNotChangeClaimTruth =
+  RevisionReview.rereviewAutomaticallyChangesClaimTruthIsFalse
+    RevisionReview.canonicalRevisionReReviewPropagationBoundary
+
+toeRevisionDoesNotAutomaticallyRefutePriorEvidence :
+  WorldRevision.revisionAutomaticallyRefutesPriorEvidence
+    WorldRevision.canonicalLegalWorldRevisionReconstructionBoundary
+  ≡ false
+toeRevisionDoesNotAutomaticallyRefutePriorEvidence =
+  WorldRevision.revisionAutomaticallyRefutesPriorEvidenceIsFalse
+    WorldRevision.canonicalLegalWorldRevisionReconstructionBoundary
 
 record GovernancePreconditions : Set₁ where
   field
@@ -214,6 +315,22 @@ record TOEGovernanceHandoff : Set₁ where
     standards : List Standards.StandardLens
     attributionBoundary : Attribution.AttributionSnowballBoundary
     postconditions : GovernancePostconditions
+    governedLegalWorkflowBoundary :
+      LegalWorkflow.GovernedLegalWorkflowTOEBoundary
+    consumerAdequacyBoundary :
+      Adequacy.ConsumerAdequacyRuntimeTheoremBridgeBoundary
+    exactNonfactorabilityBoundary :
+      NonFactor.ExactNonFactorabilityResidualCompilerBoundary
+    consumerResearchStopBoundary :
+      ResearchStop.ConsumerResearchAdmissibilityStopBoundary
+    closedIsNotAdequateBoundary :
+      Closed.ClosedIsNotAdequateBoundary
+    maboRevisionReopenBoundary :
+      MaboRevision.MaboRevisionReopenBoundary
+    revisionRereviewBoundary :
+      RevisionReview.RevisionReReviewPropagationBoundary
+    legalWorldRevisionBoundary :
+      WorldRevision.LegalWorldRevisionReconstructionBoundary
 open TOEGovernanceHandoff public
 
 canonicalTOEGovernanceHandoff : TOEGovernanceHandoff
@@ -226,4 +343,20 @@ canonicalTOEGovernanceHandoff =
     ; standards = toeGovernanceStandards
     ; attributionBoundary = Attribution.canonicalAttributionSnowballBoundary
     ; postconditions = canonicalGovernancePostconditions
+    ; governedLegalWorkflowBoundary =
+        LegalWorkflow.canonicalGovernedLegalWorkflowTOEBoundary
+    ; consumerAdequacyBoundary =
+        Adequacy.canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary
+    ; exactNonfactorabilityBoundary =
+        NonFactor.canonicalExactNonFactorabilityResidualCompilerBoundary
+    ; consumerResearchStopBoundary =
+        ResearchStop.canonicalConsumerResearchAdmissibilityStopBoundary
+    ; closedIsNotAdequateBoundary =
+        Closed.canonicalClosedIsNotAdequateBoundary
+    ; maboRevisionReopenBoundary =
+        MaboRevision.canonicalMaboRevisionReopenBoundary
+    ; revisionRereviewBoundary =
+        RevisionReview.canonicalRevisionReReviewPropagationBoundary
+    ; legalWorldRevisionBoundary =
+        WorldRevision.canonicalLegalWorldRevisionReconstructionBoundary
     }
