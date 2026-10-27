@@ -20,6 +20,7 @@ module DASHI.Unified.SensibLawGovernanceTOEExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Promotion.AuthorityBoundaryCore as Boundary
@@ -171,7 +172,7 @@ governanceSameMachineryDoesNotTransportAuthority :
      Domain.exampleAuthority Domain.sourceDomain Domain.subject →
    Domain.DomainAuthority.authorised
      Domain.exampleAuthority Domain.targetDomain Domain.subject) →
-  Data.Empty.⊥
+  ⊥
 governanceSameMachineryDoesNotTransportAuthority =
   Domain.sameMachineryDoesNotTransportAuthority
 
