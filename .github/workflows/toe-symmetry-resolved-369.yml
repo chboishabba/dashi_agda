@@ -11,6 +11,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unifier.agda'
+      - 'Docs/diagrams/ym_toe_r559_convergence.puml'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
