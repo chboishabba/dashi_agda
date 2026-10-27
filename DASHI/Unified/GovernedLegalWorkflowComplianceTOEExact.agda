@@ -36,6 +36,10 @@ LegalReviewDecisionCreatesClaimTruth : Set
 LegalReviewDecisionCreatesClaimTruth =
   Review.LegalReviewDecisionCreatesClaimTruth
 
+ReportAdmissionRepairsMissingInput : Set
+ReportAdmissionRepairsMissingInput =
+  Expert.ReportAdmissionRepairsMissingInput
+
 OfficialLegalSurfaceRecoversFineState : Set
 OfficialLegalSurfaceRecoversFineState =
   NF.FactorsThrough LegalDecision.officialSurface LegalDecision.fineLegalStateOf
