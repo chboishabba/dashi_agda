@@ -5,6 +5,7 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.SensibLawGovernanceTOEExact as SensibLawGovTOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -1075,3 +1076,78 @@ unifierFleetVectorCoordinateAdmissibilityStillFalse =
 
 unifierFleetTextFallbackAuthorityStillFalse =
   FleetGapTOE.fleetTextFallbackAuthorityStillFalse
+
+
+------------------------------------------------------------------------
+-- SensibLaw / legal-governance non-promotion facade.
+------------------------------------------------------------------------
+
+unifierSensibLawSemanticPromotionPolicySurface :
+  SensibLawGovTOE.SemanticPromotionPolicySurface
+unifierSensibLawSemanticPromotionPolicySurface =
+  SensibLawGovTOE.sensibLawSemanticPromotionPolicySurface
+
+unifierSensibLawExpertProductionBoundary :
+  SensibLawGovTOE.ExpertProductionBoundary
+unifierSensibLawExpertProductionBoundary =
+  SensibLawGovTOE.sensibLawExpertProductionBoundary
+
+unifierSensibLawRealMatterReviewBoundary :
+  SensibLawGovTOE.RealMatterReviewBoundary
+unifierSensibLawRealMatterReviewBoundary =
+  SensibLawGovTOE.sensibLawRealMatterReviewBoundary
+
+unifierSensibLawRequirementParetoContract :
+  SensibLawGovTOE.FiniteRequirementParetoContract
+unifierSensibLawRequirementParetoContract =
+  SensibLawGovTOE.sensibLawRequirementParetoContract
+
+unifierSensibLawSnowballLineageBoundary :
+  SensibLawGovTOE.SensibLawSnowballLineageBoundary
+unifierSensibLawSnowballLineageBoundary =
+  SensibLawGovTOE.sensibLawSnowballLineageBoundary
+
+unifierSensibLawGovernanceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierSensibLawGovernanceZKPFrame =
+  SensibLawGovTOE.canonicalSensibLawGovernanceZKPFrame
+
+unifierSensibLawSemanticPromotionLegalAuthorityClosed :
+  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityFlag ≡ false
+unifierSensibLawSemanticPromotionLegalAuthorityClosed =
+  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityClosed
+
+unifierSensibLawExpertProductionAuthorityClosed :
+  SensibLawGovTOE.sensibLawExpertProductionPromotesAnyAuthority ≡ false
+unifierSensibLawExpertProductionAuthorityClosed =
+  SensibLawGovTOE.sensibLawExpertProductionAuthorityClosed
+
+unifierSensibLawReviewDoesNotCreateClaimTruth :
+  SensibLawGovTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
+unifierSensibLawReviewDoesNotCreateClaimTruth =
+  SensibLawGovTOE.sensibLawReviewDoesNotCreateClaimTruth
+
+unifierSensibLawParserCandidateCannotAuthorizeAdmission :
+  SensibLawGovTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+unifierSensibLawParserCandidateCannotAuthorizeAdmission =
+  SensibLawGovTOE.sensibLawParserCandidateCannotAuthorizeAdmission
+
+unifierSensibLawQualificationDoesNotProveForensicCompliance :
+  SensibLawGovTOE.QualificationAutomaticallyForensicCompliance → ⊥
+unifierSensibLawQualificationDoesNotProveForensicCompliance =
+  SensibLawGovTOE.sensibLawQualificationDoesNotProveForensicCompliance
+
+unifierSensibLawOfficialLegalSurfaceCannotRecoverFineState :
+  SensibLawGovTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+unifierSensibLawOfficialLegalSurfaceCannotRecoverFineState =
+  SensibLawGovTOE.sensibLawOfficialLegalSurfaceCannotRecoverFineState
+
+unifierSensibLawLegalOnlyDoesNotCreateLegitimacy :
+  SensibLawGovTOE.LegalOnlyCreatesLegitimacy → ⊥
+unifierSensibLawLegalOnlyDoesNotCreateLegitimacy =
+  SensibLawGovTOE.sensibLawLegalOnlyDoesNotCreateLegitimacy
+
+unifierSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres :
+  SensibLawGovTOE.legalGovernanceLaneRetargetsDischargedFleetFibres ≡ false
+unifierSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres =
+  SensibLawGovTOE.sensibLawLegalLaneDoesNotRetargetDischargedFleetFibres
