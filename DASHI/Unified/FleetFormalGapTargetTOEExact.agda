@@ -173,31 +173,33 @@ fleetPlanningTextDoesNotCreateFormalResidual =
 
 ------------------------------------------------------------------------
 -- Exact non-promotion gates for the external fleet selection.
+--
+-- Use canonical receipt facts. Do not manufacture proof by empty datatype.
 ------------------------------------------------------------------------
 
-data FleetEigenPriorityCreatesProof : Set where
-
 fleetEigenPriorityDoesNotCreateProof :
-  FleetEigenPriorityCreatesProof → ⊥
-fleetEigenPriorityDoesNotCreateProof ()
-
-data FleetExternalCountCreatesFormalDischarge : Set where
+  eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetEigenPriorityDoesNotCreateProof =
+  fleetEigenvalueMagnitudeHasNoProofAuthority
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  FleetExternalCountCreatesFormalDischarge → ⊥
-fleetExternalCountDoesNotCreateFormalDischarge ()
+  externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetExternalCountDoesNotCreateFormalDischarge =
+  fleetExternalCountHasNoFormalProofAuthority
 
-data FleetDischargedFibreRetargetPermission : Set where
+fleetDischargedFibresRemainOutOfTarget :
+  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetDischargedFibresRemainOutOfTarget =
+  fleetDoesNotRetargetDischargedFibres
 
-fleetDischargedFibresCannotBeRetargetedByThisBoundary :
-  FleetDischargedFibreRetargetPermission → ⊥
-fleetDischargedFibresCannotBeRetargetedByThisBoundary ()
-
-data FleetContradictionGapReclassificationPermission : Set where
-
-fleetContradictionsCannotBeRelabelledAsFormalGaps :
-  FleetContradictionGapReclassificationPermission → ⊥
-fleetContradictionsCannotBeRelabelledAsFormalGaps ()
+fleetContradictionGapsRemainSeparate :
+  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetContradictionGapsRemainSeparate =
+  fleetKeepsContradictionsSeparate
 
 ------------------------------------------------------------------------
 -- Reuse the existing O/R/C/S/L/P/G/F process carrier.
