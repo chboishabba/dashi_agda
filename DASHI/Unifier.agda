@@ -1,5 +1,6 @@
 module DASHI.Unifier where
 
+import DASHI.Unified.E8ExceptionalActorTOECompatibilityExact as E8ActorTOE
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -689,3 +690,24 @@ unifierYangMillsGoal1C4CommonMetricCompilerLevel =
 
 unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+------------------------------------------------------------------------
+-- E8 local completeness and Monster actor-scope non-promotion.
+------------------------------------------------------------------------
+
+open E8ActorTOE public using
+  ( toeE8IntegerIndexedRootsCompleteForTwoSparseShape
+  ; toeE8RootEnumerationPromotionBoundary
+  ; toeE8UpstreamCompleteReceiptPromotionAudit
+  ; toeE8UpstreamPromotionStillFalse
+  ; toeE8ExactMissingPromotionBlocker
+  ; toeMonster53ActorFrontier
+  ; toeMonsterCentralObserverIs65663
+  ; toeMonsterNormalizerObserverIs65663
+  ; toeMonsterTwelvePlusSeventyEightIsNinety
+  ; toeMonsterNinetyPlusFiftyThreeIsOneFortyThree
+  ; toeArithmetic143DoesNotCreateSuzukiSubmodule
+  ; toeCentralC3ResidualDoesNotCreateNormalizerResidual
+  ; toeCarrier53DoesNotCreateNormalizerAction
+  ; toeExceptional53ArithmeticDoesNotCreateMonsterIntertwiner
+  )
