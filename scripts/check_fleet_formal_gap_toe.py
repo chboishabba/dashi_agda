@@ -13,6 +13,8 @@ text = "\n".join(path.read_text(encoding="utf-8") for path in PATHS)
 
 required = [
     "canonicalFleetFormalGapReceipt",
+    "canonicalFleetFormalGapMaxCut",
+    "namedFormalGapManifestAcquired",
     "584",
     "44",
     "58",
