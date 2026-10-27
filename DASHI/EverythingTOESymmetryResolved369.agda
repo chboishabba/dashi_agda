@@ -74,3 +74,51 @@ toeBalabanRGZKPFrame =
 toeBalabanRGReceipt : BalabanRGTOE.BalabanRGTOEReceipt
 toeBalabanRGReceipt =
   BalabanRGTOE.canonicalBalabanRGTOEReceipt
+
+------------------------------------------------------------------------
+-- Normalized Balaban density, regular-E, stress, and continuum surfaces.
+------------------------------------------------------------------------
+
+toeBalabanGeneratedActionDensityCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionDensityCompilerLevel
+
+toeBalabanCombinedRGEffectiveActionCompilerLevel =
+  BalabanRGTOE.balabanCombinedRGEffectiveActionCompilerLevel
+
+toeBalabanGeneratedActionStressScaleCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionStressScaleCompilerLevel
+
+toeBalabanPublishedFlowRegularEProjectionCompilerLevel =
+  BalabanRGTOE.balabanPublishedFlowRegularEProjectionCompilerLevel
+
+toeBalabanRegularESection2PredicateCompilerLevel =
+  BalabanRGTOE.balabanRegularESection2PredicateCompilerLevel
+
+toeBalabanConcreteRegularELocalizationWitnessLevel =
+  BalabanRGTOE.balabanConcreteRegularELocalizationWitnessLevel
+
+toeBalabanPublishedNonlinearRGCoreLevel =
+  BalabanRGTOE.balabanPublishedNonlinearRGCoreLevel
+
+toeBalabanPublishedRGPhysicalSameObjectLevel =
+  BalabanRGTOE.balabanPublishedRGPhysicalSameObjectLevel
+
+toeBalabanPublishedRGContinuumTransferStillOpen :
+  BalabanRGTOE.balabanPublishedRGContinuumTransferOpenFlag ≡ false
+toeBalabanPublishedRGContinuumTransferStillOpen =
+  BalabanRGTOE.balabanPublishedRGContinuumTransferStillOpen
+
+toeBalabanOSWightmanContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionOpenFlag ≡ false
+toeBalabanOSWightmanContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionStillOpen
+
+toeBalabanContinuumRouteMassGapPromotionStillOpen :
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionOpenFlag ≡ false
+toeBalabanContinuumRouteMassGapPromotionStillOpen =
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionStillOpen
+
+toeBalabanTerminalPromotionStillOpen :
+  BalabanRGTOE.balabanTerminalPromotionOpenFlag ≡ false
+toeBalabanTerminalPromotionStillOpen =
+  BalabanRGTOE.balabanTerminalPromotionStillOpen
