@@ -1,0 +1,62 @@
+@startuml
+title Current TOE max-cut + generic hyperfabric convergence
+
+skinparam componentStyle rectangle
+
+package "Canonical current max-cut" {
+  component "TOECurrentMaxCutGovernanceFleetExact" as Current
+}
+
+package "Canonical generic owners" {
+  component "IndexedRelationalHyperfabricSpineExact" as Fabric
+  component "IndexedRelationalPadicWaveContinuousAdaptersExact" as PadicWave
+  component "SensibLawWrongTypeGenericHyperfabricAdapterExact" as WrongType
+  component "BalancedTernaryContinuousEnvelope" as Stream
+}
+
+component "TOECurrentMaxCutHyperfabricExact" as Joint
+
+package "TOE facades" {
+  component "EverythingTOESymmetryResolved369" as TOE
+  component "Unifier" as Unifier
+  component "Unified.Everything" as Unified
+}
+
+component "TOECurrentMaxCutHyperfabricValidation" as Validation
+
+Current --> Joint : current 58-gap / governance / RG / Ibrahim receipt
+Fabric --> Joint : exact 9 / 27 / 81 carrier counts
+PadicWave --> Joint : p-adic + stream projection loss
+WrongType --> Joint : generic adapter count parity
+Stream --> Joint : finite symbolic-prefix consumer
+
+Joint --> TOE
+Joint --> Unifier
+Joint --> Unified
+
+TOE --> Validation
+Unifier --> Validation
+Unified --> Validation
+Joint --> Validation
+
+note right of Current
+Gate-4 count = 58.
+Fleet-reported formal-gap count = 58.
+Numeric equality is not same-object identity.
+584 discharged fibres remain excluded.
+44 contradiction gaps remain separate.
+end note
+
+note right of Fabric
+Address cardinality does not create semantics.
+Projection sufficiency remains consumer-relative.
+end note
+
+note bottom of Joint
+Finite RG != continuum Yang-Mills.
+Search priority != proof.
+Fleet priority != theorem authority.
+No ESD mutation.
+end note
+
+@enduml
