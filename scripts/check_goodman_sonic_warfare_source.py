@@ -66,21 +66,21 @@ def check() -> None:
     require(chapter_ids == list(range(1, 35)), "chapter index must be exactly 1..34")
     chapter_rows = [
         (int(m.group(1)), int(m.group(2)))
-        for m in re.finditer(r"(?m)^\\|\\s*(\\d+)\\s*\\|\\s*(\\d+)\\s*\\|", doc)
+        for m in re.finditer(r"(?m)^\|\s*(\d+)\s*\|\s*(\d+)\s*\|", doc)
     ]
     require(len(chapter_rows) == 34, "must have 34 printed-page rows")
     owners = [
-        int(s) for s in re.findall(r"(?m)^\\s+chapter(\\d{2})\\s*:\\s*SonicChapter$", module)
+        int(s) for s in re.findall(r"(?m)^\s+chapter(\d{2})\s*:\s*SonicChapter$", module)
     ]
     require(owners == list(range(1, 35)), "Agda constructors must be exactly chapter01..34")
     pages = [
         (int(ch), int(page)) for ch, page in re.findall(
-            r"(?m)^chapterPrintedPage chapter(\\d{2}) = (\\d+)$", module)
+            r"(?m)^chapterPrintedPage chapter(\d{2}) = (\d+)$", module)
     ]
     require(pages == chapter_rows, "Agda printed start pages must match source table exactly")
     for field in ("chapterTitle", "chapterTheme", "chapterStatus"):
         matches = [int(ch) for ch in re.findall(
-            rf"(?m)^{field} chapter(\\d{{2}}) =", module)]
+            rf"(?m)^{field} chapter(\d{{2}}) =", module)]
         require(matches == list(range(1, 35)), f"missing exhaustive {field} mapping")
     require(
         "sourceCitationDoesNotPromote validation =" in module
