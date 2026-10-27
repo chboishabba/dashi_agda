@@ -632,6 +632,25 @@ unifierClayStillFalse =
   Unifier.balabanRGClayPromotionStillFalse
 
 ------------------------------------------------------------------------
+-- Direct scale-transfer non-promotion reachability.
+------------------------------------------------------------------------
+
+validationBalabanScaleTransferPromotionImpossible :
+  Balaban.BalabanScaleTransferPromotion → ⊥
+validationBalabanScaleTransferPromotionImpossible =
+  Balaban.balabanScaleTransferPromotionImpossible
+
+toeBalabanScaleTransferPromotionImpossible :
+  Balaban.BalabanScaleTransferPromotion → ⊥
+toeBalabanScaleTransferPromotionImpossible =
+  TOE.toeBalabanScaleTransferPromotionImpossible
+
+unifierBalabanScaleTransferPromotionImpossible :
+  Balaban.BalabanScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferPromotionImpossible =
+  Unifier.unifierBalabanScaleTransferPromotionImpossible
+
+------------------------------------------------------------------------
 -- Typed continuum and depth-limit non-promotion reachability.
 ------------------------------------------------------------------------
 
