@@ -101,6 +101,16 @@ jobs:
           dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
           dashi-repo discover 'Balaban scale density regular-E localization Casimir stress RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/Fleet58ManifestAcquisitionExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
+          dashi-repo related fleetRecordedMacroscopicMotifCountIs3 --root . --limit 20
+          dashi-repo related named58ManifestAcquired --root . --limit 20
+          dashi-repo related perGapDispatchEnabled --root . --limit 20
+          dashi-repo related searchPriorityDoesNotCreateProof --root . --limit 20
+          dashi-repo discover 'Fleet 584 44 58 three motifs manifest acquisition target' --root . --limit 50
+          dashi-repo discover 'Ibrahim Pareto snowball Monster 3B non-promotion' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Wikimedia.Ibrahim --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
@@ -137,9 +147,13 @@ jobs:
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/Fleet58ManifestAcquisitionRegression.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
