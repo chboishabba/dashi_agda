@@ -23,8 +23,10 @@ open import Agda.Builtin.String using (String)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
+import DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact as DensityDictionary
 import DASHI.Physics.YangMills.BalabanDensityToLiteralFiniteMeasureRound124Exact as Measure
 import DASHI.Physics.YangMills.BalabanLiteralFiniteMeasureStressLaneRound125Exact as MeasureStress
+import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as StressLane
 import DASHI.Physics.YangMills.BalabanPreferredRegularEFrontierRound240Exact as RegularE
 import DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact as RegularELocalization
 import DASHI.Physics.YangMills.BalabanTheorem1RegularEContinuationRound247Exact as RegularEContinuation
@@ -50,6 +52,18 @@ balabanScaleDensityFlowLevel : ProofLevel
 balabanScaleDensityFlowLevel =
   Density.balabanBetaDrivenSourceFlowLevel
 
+balabanCompleteDensitySourceShapeLevel : ProofLevel
+balabanCompleteDensitySourceShapeLevel =
+  DensityDictionary.cmp119Section2CompleteDensitySourceShapeLevel
+
+balabanCompleteDensityDerivedSummaryLevel : ProofLevel
+balabanCompleteDensityDerivedSummaryLevel =
+  DensityDictionary.cmp119Section2DerivedSummarySameObjectLevel
+
+balabanCompleteDensityPhysicalProjectionBoundsLevel : ProofLevel
+balabanCompleteDensityPhysicalProjectionBoundsLevel =
+  DensityDictionary.cmp119Section2PhysicalProjectionBoundsLevel
+
 balabanScaleDensityFiniteMeasureWeldLevel : ProofLevel
 balabanScaleDensityFiniteMeasureWeldLevel =
   Measure.balabanDensityLiteralFiniteMeasureCompilerLevel
@@ -57,6 +71,14 @@ balabanScaleDensityFiniteMeasureWeldLevel =
 balabanScaleDensityStressLaneCompilerLevel : ProofLevel
 balabanScaleDensityStressLaneCompilerLevel =
   MeasureStress.literalFiniteMeasureStressLaneCompilerLevel
+
+balabanDensityAnchoredStressLaneCompilerLevel : ProofLevel
+balabanDensityAnchoredStressLaneCompilerLevel =
+  StressLane.densityAnchoredCanonicalMetricStressLaneCompilerLevel
+
+balabanLiteralDensityAnchoredStressLaneInstantiationLevel : ProofLevel
+balabanLiteralDensityAnchoredStressLaneInstantiationLevel =
+  StressLane.literalDensityAnchoredStressLaneInstantiationLevel
 
 balabanRegularESelectedDensityCompilerLevel : ProofLevel
 balabanRegularESelectedDensityCompilerLevel =
@@ -81,6 +103,14 @@ balabanHaarCasimirCoefficientLevel =
 balabanCasimirOrbitFactorizationLevel : ProofLevel
 balabanCasimirOrbitFactorizationLevel =
   CasimirOrbit.compactSimpleCasimirOrbitFactorizationLevel
+
+balabanCasimirLowerBoundTransportLevel : ProofLevel
+balabanCasimirLowerBoundTransportLevel =
+  CasimirOrbit.compactSimpleCasimirLowerBoundTransportLevel
+
+balabanLiteralCasimirFactorizationLevel : ProofLevel
+balabanLiteralCasimirFactorizationLevel =
+  CasimirOrbit.literalWilsonGhostHaarCasimirFactorizationLevel
 
 balabanClassifiedCasimirPositivityLevel : ProofLevel
 balabanClassifiedCasimirPositivityLevel =
@@ -127,6 +157,14 @@ balabanRGContinuumConstructionOpenFlag =
 balabanRGClayPromotionFlag : Bool
 balabanRGClayPromotionFlag =
   RGFrontier.clayYangMillsPromoted
+    RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+
+balabanRGUniformKPAbsorptionStillOpen :
+  RGFrontier.uniformKPAbsorptionThroughBalabanInductionProved
+    RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+  ≡ false
+balabanRGUniformKPAbsorptionStillOpen =
+  RGFrontier.uniformKPAbsorptionThroughBalabanInductionProvedIsFalse
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
 
 balabanRGBlockSpinTransferStillOpen :
@@ -183,8 +221,13 @@ legacyFullCertificateIsNotTOEPromotionAuthorityIsTrue = refl
 record BalabanRGTOEReceipt : Set where
   field
     scaleDensityFlow : ProofLevel
+    completeDensitySourceShape : ProofLevel
+    completeDensityDerivedSummary : ProofLevel
+    completeDensityPhysicalProjectionBounds : ProofLevel
     scaleDensityFiniteMeasureWeld : ProofLevel
     scaleDensityStressCompiler : ProofLevel
+    densityAnchoredStressLaneCompiler : ProofLevel
+    literalDensityAnchoredStressLaneInstantiation : ProofLevel
 
     regularELocalizationSource : ProofLevel
     regularELocalizationCarrier : ProofLevel
@@ -192,6 +235,8 @@ record BalabanRGTOEReceipt : Set where
 
     haarCasimirCoefficient : ProofLevel
     casimirOrbitFactorization : ProofLevel
+    casimirLowerBoundTransport : ProofLevel
+    literalCasimirFactorization : ProofLevel
     classifiedCasimirPositivity : ProofLevel
 
     stressMarkedShellReuse : ProofLevel
@@ -220,10 +265,20 @@ canonicalBalabanRGTOEReceipt =
   record
     { scaleDensityFlow =
         balabanScaleDensityFlowLevel
+    ; completeDensitySourceShape =
+        balabanCompleteDensitySourceShapeLevel
+    ; completeDensityDerivedSummary =
+        balabanCompleteDensityDerivedSummaryLevel
+    ; completeDensityPhysicalProjectionBounds =
+        balabanCompleteDensityPhysicalProjectionBoundsLevel
     ; scaleDensityFiniteMeasureWeld =
         balabanScaleDensityFiniteMeasureWeldLevel
     ; scaleDensityStressCompiler =
         balabanScaleDensityStressLaneCompilerLevel
+    ; densityAnchoredStressLaneCompiler =
+        balabanDensityAnchoredStressLaneCompilerLevel
+    ; literalDensityAnchoredStressLaneInstantiation =
+        balabanLiteralDensityAnchoredStressLaneInstantiationLevel
     ; regularELocalizationSource =
         balabanRegularELocalizationSourceLevel
     ; regularELocalizationCarrier =
@@ -234,6 +289,10 @@ canonicalBalabanRGTOEReceipt =
         balabanHaarCasimirCoefficientLevel
     ; casimirOrbitFactorization =
         balabanCasimirOrbitFactorizationLevel
+    ; casimirLowerBoundTransport =
+        balabanCasimirLowerBoundTransportLevel
+    ; literalCasimirFactorization =
+        balabanLiteralCasimirFactorizationLevel
     ; classifiedCasimirPositivity =
         balabanClassifiedCasimirPositivityLevel
     ; stressMarkedShellReuse =
