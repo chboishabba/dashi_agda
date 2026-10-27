@@ -10,6 +10,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
 import DASHI.Cognition.EpsteinPsychedelicNetworkEvidenceExact as Network
 import DASHI.Cognition.DoblinMAPSPublicBenefitPrivateProfitExact as Governance
 import DASHI.Cognition.EpsteinPsychedelicParetoSnowballExact as Route
@@ -68,7 +69,7 @@ sharedMilieuNotCoordination =
   Network.sameMilieuDoesNotEstablishCoordination
 
 oneEdgeNotUniversalNetwork :
-  Network.Genealogy.OneStrongEdgeEstablishesUniversalNetwork → ⊥
+  Genealogy.OneStrongEdgeEstablishesUniversalNetwork → ⊥
 oneEdgeNotUniversalNetwork =
   Network.oneStrongEdgeDoesNotEstablishUniversalNetwork
 
