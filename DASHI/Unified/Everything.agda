@@ -162,3 +162,20 @@ import DASHI.Physics.Foundations.Round5FullBoundary as Round5
       Round5.Round5FullBoundary
         Round5.canonicalRound5FullBoundary
         "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
+
+
+-- Legal authority remains independent of matter workflow and semantic admission.
+unifiedLegalCandidateIsNotAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+unifiedLegalCandidateIsNotAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+
+unifiedLegalValidityIsNotApplicability :
+  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifiedLegalValidityIsNotApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+unifiedSemanticAdmissionIsNotLegalAuthority :
+  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+unifiedSemanticAdmissionIsNotLegalAuthority =
+  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
