@@ -1456,3 +1456,137 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Canonical ternary-27 codec / ABI max-cut.
+-- The codec BIDI is exact. Host/device and kernel promotion remain blocked.
+------------------------------------------------------------------------
+
+toe369Ternary27StateCode :
+  MaxCut369.TernaryEncodedState → MaxCut369.TernaryState27
+toe369Ternary27StateCode = MaxCut369.toe27StateCode
+
+toe369Ternary27StateDecode :
+  MaxCut369.TernaryState27 → MaxCut369.TernaryEncodedState
+toe369Ternary27StateDecode = MaxCut369.toe27StateDecode
+
+toe369Ternary27StateDecodeStateCode :
+  (e : MaxCut369.TernaryEncodedState) →
+  toe369Ternary27StateDecode (toe369Ternary27StateCode e) ≡ e
+toe369Ternary27StateDecodeStateCode =
+  MaxCut369.toe27StateDecodeStateCode
+
+toe369Ternary27StateCodeStateDecode :
+  (i : MaxCut369.TernaryState27) →
+  toe369Ternary27StateCode (toe369Ternary27StateDecode i) ≡ i
+toe369Ternary27StateCodeStateDecode =
+  MaxCut369.toe27StateCodeStateDecode
+
+toe369Ternary27FiniteStateABIExact =
+  MaxCut369.toe27FiniteStateABIExact
+
+toe369Ternary27ByteCarrierABIExact =
+  MaxCut369.toe27ByteCarrierABIExact
+
+toe369Ternary27CompiledHostU8Exact =
+  MaxCut369.toe27CompiledHostU8Exact
+
+toe369Ternary27RustBindingStillUnpaid =
+  MaxCut369.toe27RustBindingStillUnpaid
+
+toe369Ternary27CUDABindingStillUnpaid =
+  MaxCut369.toe27CUDABindingStillUnpaid
+
+toe369Ternary27ROCmBindingStillUnpaid =
+  MaxCut369.toe27ROCmBindingStillUnpaid
+
+toe369Ternary27HostByteDoesNotCreateDeviceByte =
+  MaxCut369.toe27HostByteDoesNotCreateDeviceByte
+
+toe369Ternary27RuntimeSourceDoesNotCreateKernelCertification =
+  MaxCut369.toe27RuntimeSourceDoesNotCreateKernelCertification
+
+toe369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  MaxCut369.toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+------------------------------------------------------------------------
+-- Fleet-58 ordinal max-cut.
+-- Cardinality is exact. Persisted row identity does not follow from cardinality.
+------------------------------------------------------------------------
+
+toeFleetR5OrdinalCutReceipt :
+  FleetGapTOE.FleetR5OrdinalCutReceipt
+toeFleetR5OrdinalCutReceipt =
+  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
+
+toeFleetFormalGapOrdinalCountIs58 :
+  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
+toeFleetFormalGapOrdinalCountIs58 =
+  FleetGapTOE.fleetFormalGapOrdinalCountIs58
+
+toeFleetDischargedOrdinalCountIs584 :
+  FleetGapTOE.fleetDischargedOrdinalCount ≡ 584
+toeFleetDischargedOrdinalCountIs584 =
+  FleetGapTOE.fleetDischargedOrdinalCountIs584
+
+toeFleetContradictionOrdinalCountIs44 :
+  FleetGapTOE.fleetContradictionOrdinalCount ≡ 44
+toeFleetContradictionOrdinalCountIs44 =
+  FleetGapTOE.fleetContradictionOrdinalCountIs44
+
+toeFleetOrdinalRowIdentityStillUnattached :
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+toeFleetOrdinalRowIdentityStillUnattached =
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+
+toeFleetSharedCardinalityDoesNotCreateIdentity :
+  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
+toeFleetSharedCardinalityDoesNotCreateIdentity =
+  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
+
+
+------------------------------------------------------------------------
+-- Current Lean three-route RH max-cut status.
+-- Lean owns the real analysis. This root only exports the exact mirror.
+------------------------------------------------------------------------
+
+toeRiemannThreeTapCurrentLeanFrontier :
+  RiemannThreeTap.ThreeTapCurrentLeanFrontier
+toeRiemannThreeTapCurrentLeanFrontier =
+  RiemannThreeTap.currentThreeTapCurrentLeanFrontier
+
+toeRiemannA2DominantCoefficientPaid :
+  RiemannThreeTap.a2DominantCoefficientPaid
+    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ true
+toeRiemannA2DominantCoefficientPaid =
+  RiemannThreeTap.a2DominantCoefficientIsPaid
+
+toeRiemannA2MuGainPositiveSourceWritten :
+  RiemannThreeTap.a2CanonicalMuGainPositiveSourceWritten
+    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ true
+toeRiemannA2MuGainPositiveSourceWritten =
+  RiemannThreeTap.a2MuGainIsPositiveSourceWritten
+
+toeRiemannA1CarrierSummationStillOpen :
+  RiemannThreeTap.a1CarrierSummationPaid
+    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA1CarrierSummationStillOpen =
+  RiemannThreeTap.a1CarrierIsStillOpen
+
+toeRiemannA2StrictScalarStillOpen :
+  RiemannThreeTap.a2StrictScalarPaid
+    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA2StrictScalarStillOpen =
+  RiemannThreeTap.a2ScalarIsStillOpen
+
+toeRiemannRouteBEventualGapStillOpen :
+  RiemannThreeTap.routeBEventualGapPaid
+    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
+toeRiemannRouteBEventualGapStillOpen =
+  RiemannThreeTap.routeBIsStillOpen
+
+toeRiemannRHNotPromoted :
+  RiemannThreeTap.rhDerivedHere
+    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
+toeRiemannRHNotPromoted =
+  RiemannThreeTap.rhNotClaimedByAgdaStatusMirror
