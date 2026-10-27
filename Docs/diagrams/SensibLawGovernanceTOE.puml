@@ -10,6 +10,9 @@ package "Existing theorem owners" {
   [SensibLawAgdaFirstLegalRuntimeEverything] as Legal
   [SensibLawITIRParityEverything] as Parity
   [DomainPermeabilityAuthorityTransport] as Domain
+  [SnowballAttributionProvenanceInvariantExact] as Snowball
+  [SensibLawSnowballAttributionLineageAdapterExact] as SnowballLineage
+  [SensibLawParetoProofDirectedCorpusSearchEverything] as Pareto
 }
 
 package "Normalization" {
@@ -35,6 +38,10 @@ Boundary --> GovTOE : legal authority boundary
 Legal --> GovTOE : runtime firewalls
 Parity --> GovTOE : invariant handoff
 Domain --> GovTOE : case-management authority transport
+Snowball --> SnowballLineage : source-role attribution
+Snowball --> GovTOE : citation proof/authority firewall
+SnowballLineage --> GovTOE : legal claim-stage separation
+Pareto --> GovTOE : scheduling is not legal authority
 
 GovTOE --> Root : normalized exports
 GovTOE --> Unifier : normalized exports
