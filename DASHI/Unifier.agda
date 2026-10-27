@@ -313,3 +313,28 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- Fleet × RG: exact non-promotion at the top-level consumer.
+-- Original source owners: FleetFormalGapTargetTOEExact and
+-- BalabanRGScaleTransferFrontierReceipt via BalabanR559TOEMaxCutExact.
+-- The external eigenvalue ranking and 58-count do not discharge
+-- the missing physical scale-transfer witness. No new proof axiom.
+------------------------------------------------------------------------
+
+unifierFleetRGJointNonPromotion :
+  FleetGapTOE.FleetEigenPriorityCreatesProof →
+  BalabanR559TOE.ScaleTransferPromotion →
+  ⊥
+unifierFleetRGJointNonPromotion spectralClaim scaleTransfer =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof spectralClaim
+
+unifierFleetCountCannotResolveRGScaleTransfer :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge →
+  BalabanR559TOE.ScaleTransferPromotion →
+  ⊥
+unifierFleetCountCannotResolveRGScaleTransfer externalCount scaleTransfer =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+    scaleTransfer
