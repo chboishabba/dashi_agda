@@ -16,6 +16,7 @@ import DASHI.Physics.Unification.QGFrontierLedger as QG
 import DASHI.Physics.Laws.PhysicalLawCore as Law
 import DASHI.Physics.Foundations.CMP119AntigravityPhysicalEinsteinCalibrationExact as GravityCalibration
 import DASHI.Physics.Foundations.CMP119AntigravityTraceVsActiveStressFirewallExact as Trace
+import DASHI.Physics.Foundations.ParameterInformationGeometryExact as InfoGeometry
 
 ------------------------------------------------------------------------
 -- QUANTUM METROLOGY -> DASHI TOE CONVERGENCE
@@ -187,6 +188,15 @@ acceptedMeasuredGCouplingStillRequired :
 acceptedMeasuredGCouplingStillRequired =
   GravityCalibration.acceptedMeasuredGCouplingStillRequiredIsTrue
 
+
+finiteInformationMetricDoesNotCreatePhysicalFisherMetric :
+  InfoGeometry.finiteMetricExampleDerivesPhysicalFisherMetric
+    InfoGeometry.canonicalParameterInformationGeometryBoundary
+  ≡ false
+finiteInformationMetricDoesNotCreatePhysicalFisherMetric =
+  InfoGeometry.finiteMetricExampleDerivesPhysicalFisherMetricIsFalse
+    InfoGeometry.canonicalParameterInformationGeometryBoundary
+
 negativeTraceStillDoesNotCloseActiveStress :
   Trace.negativeTraceAloneClosesNegativeActiveStress ≡ false
 negativeTraceStillDoesNotCloseActiveStress =
@@ -245,6 +255,11 @@ record QuantumMetrologyTOEConvergenceReceipt : Set where
     invariantMeasuredGCouplingStillRequired :
       GravityCalibration.acceptedMeasuredGCouplingStillRequired ≡ true
 
+    invariantFiniteMetricNotPhysicalFisher :
+      InfoGeometry.finiteMetricExampleDerivesPhysicalFisherMetric
+        InfoGeometry.canonicalParameterInformationGeometryBoundary
+      ≡ false
+
     invariantTraceNotActiveStress :
       Trace.negativeTraceAloneClosesNegativeActiveStress ≡ false
 
@@ -283,6 +298,8 @@ canonicalQuantumMetrologyTOEConvergenceReceipt = record
       redshiftBridgeDoesNotPromoteGR
   ; invariantMeasuredGCouplingStillRequired =
       acceptedMeasuredGCouplingStillRequired
+  ; invariantFiniteMetricNotPhysicalFisher =
+      finiteInformationMetricDoesNotCreatePhysicalFisherMetric
   ; invariantTraceNotActiveStress =
       negativeTraceStillDoesNotCloseActiveStress
   ; postconditionSIMetrologyTerminalPromotionFalse =
