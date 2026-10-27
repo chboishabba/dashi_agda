@@ -23,7 +23,10 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda'
       - 'DASHI/Unified/**'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEValidation.agda'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -38,6 +41,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
@@ -89,6 +93,18 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo related fleetFormalGapOrdinalCount --root . --limit 20
+          dashi-repo related fleetSharedCardinalityDoesNotCreateIdentity --root . --limit 20
+          dashi-repo discover 'Fleet 58 formal gap target ordinal non-promotion spectral identity firewall' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.Fleet --root .
+          dashi-repo diagnose DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda --root .
+          dashi-repo related a1UniformCurvatureIsStillOpen --root . --limit 20
+          dashi-repo related a1CompensationIsStillOpen --root . --limit 20
+          dashi-repo related exactHeadLeanKernelReceiptIsStillOpen --root . --limit 20
+          dashi-repo discover 'Riemann three tap current Lean frontier inverse-square curvature compensation signed fifth non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Analysis.RiemannThreeTap --root .
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
@@ -140,6 +156,9 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -148,7 +167,7 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
-            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NON_TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
               echo "forbidden trust escape in $source" >&2
               exit 1
             fi
@@ -160,6 +179,9 @@ jobs:
           modules=(
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
