@@ -2,6 +2,7 @@ module DASHI.Unified.Physics where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.SensibLawResidualLattice as Residual
