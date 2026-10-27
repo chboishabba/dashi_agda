@@ -86,6 +86,26 @@ toeBalabanRGClayPromotionStillFalse :
 toeBalabanRGClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
+toeBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+toeBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
+
+toeBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+toeBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+toeDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+toeDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
+
+toeDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+toeDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
 toeBalabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
 toeBalabanRGZKPFrame =
   BalabanRGTOE.canonicalBalabanTOEZKPFrame
