@@ -251,3 +251,15 @@ unifierVectorSpectralAuthorityStillNotPromoted :
   Fleet.VectorSpectralAuthorityPromotion → ⊥
 unifierVectorSpectralAuthorityStillNotPromoted =
   Unifier.unifierFleetVectorSpectralAuthorityPromotionImpossible
+
+
+toeNumericABIStillNotPromoted :
+  Fleet.SpectralNumericABIPromotion → ⊥
+toeNumericABIStillNotPromoted =
+  TOE.toeFleetSpectralNumericABIPromotionImpossible
+
+
+toeResidualFieldStillNotPromoted :
+  Fleet.ResidualFieldPromotion → ⊥
+toeResidualFieldStillNotPromoted =
+  TOE.toeFleetResidualFieldPromotionImpossible
