@@ -4,6 +4,9 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Biology.PMDDHistamineAmplificationExact as PMDDHistamine
+import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact as PMDDMolecular
+import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact as PMDDIntervention
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1683,3 +1686,65 @@ unifierNavierStokesClayEligibilityStillFalse :
   unifierNavierStokesClayEligible ≡ false
 unifierNavierStokesClayEligibilityStillFalse =
   NSClayTOE.clayEligibilityStillFalse
+
+
+------------------------------------------------------------------------
+-- Joint Balaban/R559 typed continuum non-promotion.
+------------------------------------------------------------------------
+
+unifierBalabanR559ContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifierBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559TOE.continuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559DepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifierBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559TOE.depthContinuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- PMDD / histamine canonical biology handoff.
+------------------------------------------------------------------------
+
+unifierPMDDHistamineAmplificationCandidate :
+  PMDDHistamine.HistamineAmplifiedPMDDCandidate
+unifierPMDDHistamineAmplificationCandidate =
+  PMDDHistamine.canonicalHistamineAmplifiedPMDDCandidate
+
+unifierPMDDHistamineMolecularCandidate :
+  PMDDMolecular.MolecularlyInstantiatedPMDDHistamineCandidate
+unifierPMDDHistamineMolecularCandidate =
+  PMDDMolecular.canonicalMolecularlyInstantiatedPMDDHistamineCandidate
+
+unifierPMDDHistamineInterventionBoundary :
+  PMDDIntervention.HistamineInterventionIdentificationBoundary
+unifierPMDDHistamineInterventionBoundary =
+  PMDDIntervention.canonicalHistamineInterventionIdentificationBoundary
+
+unifierPMDDHistamineUniversalCauseImpossible :
+  PMDDHistamine.HistamineCausesAllPMDD → ⊥
+unifierPMDDHistamineUniversalCauseImpossible =
+  PMDDHistamine.histamineDoesNotBecomeUniversalCause
+
+unifierPMDDAntihistamineResponseDiagnosticImpossible :
+  PMDDHistamine.AntihistamineResponseDiagnosesHistaminePMDD → ⊥
+unifierPMDDAntihistamineResponseDiagnosticImpossible =
+  PMDDHistamine.antihistamineResponseIsNotDiagnosticProof
+
+unifierPMDDGutRootCausePromotionImpossible :
+  PMDDHistamine.GutDysfunctionIsThePMDDRootCause → ⊥
+unifierPMDDGutRootCausePromotionImpossible =
+  PMDDHistamine.gutRootCauseNotPromoted
+
+unifierPMDDH1H2TargetPairEfficacyPromotionImpossible :
+  PMDDMolecular.H1H2TargetPairProvesPMDDEfficacy → ⊥
+unifierPMDDH1H2TargetPairEfficacyPromotionImpossible =
+  PMDDMolecular.h1h2TargetPairDoesNotProvePMDDEfficacy
+
+unifierPMDDSymptomResponseMechanismIdentificationImpossible :
+  PMDDIntervention.SymptomResponseDeterminesMechanism → ⊥
+unifierPMDDSymptomResponseMechanismIdentificationImpossible =
+  PMDDIntervention.symptomResponseDoesNotDetermineMechanism
