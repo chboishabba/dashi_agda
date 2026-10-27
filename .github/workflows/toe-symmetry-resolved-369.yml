@@ -55,6 +55,10 @@ jobs:
           dashi-repo index --root .
           dashi-repo status --root .
           dashi-repo discover "Balaban Goal1 RG scale density regular-E Casimir stress continuum non-promotion" --root . --limit 30
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact.familyLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact.round546IrreducibleSourceFamilyCutCompilerLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact.criticalLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact.round558CriticalPathCompilerLevel --root . --limit 20
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
 
           symbols=(
