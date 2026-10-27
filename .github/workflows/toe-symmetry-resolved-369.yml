@@ -231,6 +231,10 @@ jobs:
             DASHI/Unified/Everything.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
             DASHI/Unifier.agda
