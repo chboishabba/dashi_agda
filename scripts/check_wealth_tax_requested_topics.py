@@ -28,6 +28,7 @@ OWNERS = (
     "DASHI/Economics/WealthInheritanceVacancyTaxMaxCut20261027Exact.agda",
     "DASHI/Economics/WealthTaxPowerCareSociologyBidi20261027Exact.agda",
     "DASHI/Economics/WealthTaxFiscalTransmissionControlBidi20261027Exact.agda",
+    "DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda",
 )
 PHILOSOPHY_OR_SOCIETY = (
     "Marx", "Engels", "anarch", "postmodern", "Lyotard", "Baudrillard",
@@ -70,10 +71,35 @@ def main() -> None:
     for symbol in ("test_finite_caps", "test_assessment_collection_appropriation_are_distinct",
                    "test_dual_class_voting_post_transfer", "test_assessment_vs_interim_growth"):
         assert symbol in script, f"missing bounded regression: {symbol}"
+    root_source = (ROOT / "DASHI/Everything.agda").read_text(encoding="utf-8")
+    bridge_module = "import DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact"
+    assert bridge_module in root_source, "TOE consumer not attached to canonical import graph"
+    bridge = (ROOT / OWNERS[-1]).read_text(encoding="utf-8")
+    for symbol in (
+        "toeWealthIsNotIncomeTax",
+        "toeTaxReceiptDoesNotDetermineVoting",
+        "toeTaxReceiptDoesNotDetermineCare",
+        "toeAssessmentDoesNotDetermineCashCollection",
+        "toeCashCollectionDoesNotDetermineCareAppropriation",
+        "toeAIRiskScoreDoesNotDetermineTaxLiability",
+        "toeFiniteWorldsDoNotProvePolicyCausation",
+    ):
+        assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
+    workflow = (ROOT / ".github/workflows/philosophy.yml").read_text(encoding="utf-8")
+    assert "dashi-agda-preflight --root ." in workflow, "semantic preflight no longer scheduled"
+    assert "agda $AGDA_FLAGS DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda" in workflow, (
+        "TOE bridge has no compiler-stage gate"
+    )
+    for owner in OWNERS:
+        assert owner in workflow, f"no CI reference for Agda owner: {owner}"
+    for label in ("oecdSocialProtection2026", "fagerengGuisoRing2026",
+                  "chatzouzIMF2026", "euCommissionWealthTax2026"):
+        source = (ROOT / OWNERS[0]).read_text(encoding="utf-8")
+        assert label in source, f"missing 2026 independent economic source: {label}"
     statuses = Counter(status for _, _, status, _, _ in rows)
     print(f"PASS: {len(rows)} distinct sourced/typed topic rows; "
           f"statuses {dict(sorted(statuses.items()))}; "
-          "three existing Agda owner paths; four Python regression names.")
+          "three source Agda owners and one TOE bridge; semantic/compiler CI gates.")
     print("This is a coverage receipt, NOT a truth or Agda kernel receipt.")
 
 if __name__ == "__main__":
