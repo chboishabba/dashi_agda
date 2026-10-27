@@ -1,4 +1,5 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExact as MillenniumResidual
 import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHFrontier
 import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumLean
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
@@ -1709,3 +1710,45 @@ toeRHClayNotPromoted :
 toeRHClayNotPromoted =
   RHFrontier.StrictTP2TrancheReceipt.riemannHypothesisDerivedIsFalse
     toeRHStrictTP2Receipt
+
+
+------------------------------------------------------------------------
+-- Millennium residual classifier non-promotion.
+-- Reuse the canonical classifier.  These are status theorems, not replacement
+-- proofs for the domain programmes.
+------------------------------------------------------------------------
+
+toeMillenniumResidualClassifierBoundary :
+  MillenniumResidual.MillenniumResidualClassifierBoundary
+toeMillenniumResidualClassifierBoundary =
+  MillenniumResidual.canonicalMillenniumResidualClassifierBoundary
+
+toeMillenniumHodgeAlgebraicLiftStillNotConstructed :
+  MillenniumResidual.hodgeAlgebraicLiftConstructed
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+toeMillenniumHodgeAlgebraicLiftStillNotConstructed =
+  MillenniumResidual.millenniumHodgeAlgebraicLiftStillNotConstructed
+
+toeMillenniumBSDRankWeldStillNotUnconditional :
+  MillenniumResidual.bsdRankWeldConstructedUnconditionally
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+toeMillenniumBSDRankWeldStillNotUnconditional =
+  MillenniumResidual.millenniumBSDRankWeldStillNotUnconditional
+
+toeMillenniumPolynomialAlgorithmCoverageStillNotConstructed :
+  MillenniumResidual.polynomialAlgorithmFamilyExhaustionConstructed
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+toeMillenniumPolynomialAlgorithmCoverageStillNotConstructed =
+  MillenniumResidual.millenniumPolynomialAlgorithmCoverageStillNotConstructed
+
+toeMillenniumResidualClassifierDoesNotSolveAnyProblem :
+  MillenniumResidual.anyOfThreeMillenniumProblemsSolvedHere
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+toeMillenniumResidualClassifierDoesNotSolveAnyProblem =
+  MillenniumResidual.millenniumResidualClassifierDoesNotSolveAnyProblem
+
+toeMillenniumPvsNPNotDerivedFromNonDescentGrammar :
+  MillenniumResidual.pNotEqualsNPDerived
+    MillenniumResidual.canonicalPvsNPUniformNonDescentResearchBoundary ≡ false
+toeMillenniumPvsNPNotDerivedFromNonDescentGrammar =
+  MillenniumResidual.millenniumPvsNPNotDerivedFromNonDescentGrammar
