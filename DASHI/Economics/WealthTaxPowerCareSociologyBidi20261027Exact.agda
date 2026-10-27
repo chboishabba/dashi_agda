@@ -180,6 +180,8 @@ data PhilosophicalSourceRole : Set where
   corporateSovereigntyNormativeProposal : PhilosophicalSourceRole
   pluralAnarchistPropertyPositions : PhilosophicalSourceRole
   onlineFatalismDescription : PhilosophicalSourceRole
+  criticalFeministPoliticalTheory : PhilosophicalSourceRole
+  signValueSimulationTheory : PhilosophicalSourceRole
 
 record PhilosophicalSourceReceipt : Set where
   constructor philosophical-source-receipt
@@ -242,6 +244,33 @@ collinsStandpointPrimary = philosophical-source-receipt
 -- The following source texts are competing interpretations, not reusable
 -- empirical causal identifications or universal tax/AI prescriptions.
 ------------------------------------------------------------------------
+
+bellHooks2000 : PhilosophicalSourceReceipt
+bellHooks2000 = philosophical-source-receipt
+  "bell hooks (Gloria Jean Watkins)"
+  "Feminism Is for Everybody: Passionate Politics; South End Press 2000"
+  "https://www.plutobooks.com/product/feminism-is-for-everybody/"
+  criticalFeministPoliticalTheory
+  "original critique of sexism, class, race, feminism and social institutions; not a mathematical demonstration of an optimal billionaire tax"
+  true
+
+baudrillard1981 : PhilosophicalSourceReceipt
+baudrillard1981 = philosophical-source-receipt
+  "Jean Baudrillard"
+  "Simulacres et simulation; Editions Galilee, Paris, 1981"
+  "https://catalogue.bnf.fr/ark:/12148/cb34681600h"
+  signValueSimulationTheory
+  "original philosophical treatment of simulacra/simulation; does not imply share ownership, accounting assets or public institutions are legally imaginary"
+  true
+
+kropotkin1892 : PhilosophicalSourceReceipt
+kropotkin1892 = philosophical-source-receipt
+  "Peter Kropotkin"
+  "The Conquest of Bread; French La Conquete du pain 1892"
+  "https://www.marxists.org/reference/archive/kropotkin-peter/1892/bread.htm"
+  pluralAnarchistPropertyPositions
+  "original anarchist-communist case for social possession of production and provision of housing, bread and basic needs; it is not an enacted 2026 tax system"
+  true
 
 lyotard1979 : PhilosophicalSourceReceipt
 lyotard1979 = philosophical-source-receipt
