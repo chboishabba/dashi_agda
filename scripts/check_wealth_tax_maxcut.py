@@ -171,6 +171,22 @@ def test_ai_risk_score_does_not_determine_tax_law() -> None:
     # A classifier or risk score is not a lawful valuation/assessment.
     # This negative control does not assert all AI auditors must be inaccurate.
 
+
+def proposed_idle_equity_rate_bps(consecutive_year: int) -> int:
+    # Purely hypothetical 1% / 2% / 5% rule in the pasted AI exchange.
+    # It has no named law, administrative assessment or verified "idle" test.
+    assert consecutive_year >= 1
+    return 100 if consecutive_year == 1 else 200 if consecutive_year == 2 else 500
+
+def test_ai_proposed_idle_equity_schedule_is_not_victoria_vrlt() -> None:
+    assert [proposed_idle_equity_rate_bps(y) for y in range(1, 6)] == [
+        100, 200, 500, 500, 500
+    ]
+    # Ordinary Victoria VRLT: 1% / 2% / 3%, exceptions apply.
+    assert proposed_idle_equity_rate_bps(3) != 300
+    # Same first two bps are numerical coincidences, not identical tax bases.
+    assert proposed_idle_equity_rate_bps(1) == 100
+
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
@@ -182,4 +198,5 @@ if __name__ == "__main__":
     test_dual_class_voting_post_transfer()
     test_assessment_vs_interim_growth()
     test_ai_risk_score_does_not_determine_tax_law()
-    print("PASS: 8,192 bounded arithmetic pairs + 9 synthetic counterexample suites")
+    test_ai_proposed_idle_equity_schedule_is_not_victoria_vrlt()
+    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites")
