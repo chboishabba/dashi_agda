@@ -1769,3 +1769,50 @@ unifierPMDDSymptomResponseMechanismIdentificationImpossible :
   PMDDIntervention.SymptomResponseDeterminesMechanism → ⊥
 unifierPMDDSymptomResponseMechanismIdentificationImpossible =
   PMDDIntervention.symptomResponseDoesNotDetermineMechanism
+
+
+------------------------------------------------------------------------
+-- Fleet R5 ordinal cut and joint Balaban/R559 continuum firewalls.
+------------------------------------------------------------------------
+
+unifierFleetR5OrdinalCutReceipt :
+  FleetGapTOE.FleetR5OrdinalCutReceipt
+unifierFleetR5OrdinalCutReceipt =
+  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
+
+unifierFleetFormalGapOrdinalCountIs58 :
+  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
+unifierFleetFormalGapOrdinalCountIs58 =
+  FleetGapTOE.fleetFormalGapOrdinalCountIs58
+
+unifierFleetDischargedOrdinalCountIs584 :
+  FleetGapTOE.fleetDischargedOrdinalCount ≡ 584
+unifierFleetDischargedOrdinalCountIs584 =
+  FleetGapTOE.fleetDischargedOrdinalCountIs584
+
+unifierFleetContradictionOrdinalCountIs44 :
+  FleetGapTOE.fleetContradictionOrdinalCount ≡ 44
+unifierFleetContradictionOrdinalCountIs44 =
+  FleetGapTOE.fleetContradictionOrdinalCountIs44
+
+unifierFleetOrdinalRowIdentityStillUnattached :
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+unifierFleetOrdinalRowIdentityStillUnattached =
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+
+unifierFleetSharedCardinalityDoesNotCreateIdentity :
+  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
+unifierFleetSharedCardinalityDoesNotCreateIdentity =
+  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
+
+unifierBalabanR559ContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifierBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559TOE.continuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559DepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifierBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559TOE.depthContinuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
