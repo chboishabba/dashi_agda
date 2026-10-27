@@ -2,12 +2,66 @@ module DASHI.Unifier where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RiemannFrontier
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
+
+
+------------------------------------------------------------------------
+-- Current Lean RH max-cut status mirror.
+-- This is provenance/status only. Lean owns the real analysis.
+------------------------------------------------------------------------
+
+unifierRiemannThreeTapCurrentLeanFrontier :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier
+unifierRiemannThreeTapCurrentLeanFrontier =
+  RiemannFrontier.currentThreeTapCurrentLeanFrontier
+
+unifierRiemannA1CarrierSummationStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
+    unifierRiemannThreeTapCurrentLeanFrontier ≡ false
+unifierRiemannA1CarrierSummationStillOpen =
+  RiemannFrontier.a1CarrierIsStillOpen
+
+unifierRiemannA1UniformCurvatureStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1UniformCurvaturePaid
+    unifierRiemannThreeTapCurrentLeanFrontier ≡ false
+unifierRiemannA1UniformCurvatureStillOpen =
+  RiemannFrontier.a1UniformCurvatureIsStillOpen
+
+unifierRiemannA1CompensationStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CompensationPaid
+    unifierRiemannThreeTapCurrentLeanFrontier ≡ false
+unifierRiemannA1CompensationStillOpen =
+  RiemannFrontier.a1CompensationIsStillOpen
+
+unifierRiemannA2ScalarStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
+    unifierRiemannThreeTapCurrentLeanFrontier ≡ false
+unifierRiemannA2ScalarStillOpen =
+  RiemannFrontier.a2ScalarIsStillOpen
+
+unifierRiemannRouteBStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
+    unifierRiemannThreeTapCurrentLeanFrontier ≡ false
+unifierRiemannRouteBStillOpen =
+  RiemannFrontier.routeBIsStillOpen
+
+unifierRiemannExactHeadLeanKernelReceiptStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.exactHeadLeanKernelReceipt
+    unifierRiemannThreeTapCurrentLeanFrontier ≡ false
+unifierRiemannExactHeadLeanKernelReceiptStillOpen =
+  RiemannFrontier.exactHeadLeanKernelReceiptIsStillOpen
+
+unifierRiemannRHStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.rhDerivedHere
+    unifierRiemannThreeTapCurrentLeanFrontier ≡ false
+unifierRiemannRHStillOpen =
+  RiemannFrontier.rhNotClaimedByAgdaStatusMirror
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
