@@ -93,6 +93,10 @@ jobs:
           dashi-repo related terminalClayPromotionImpossible --root . --limit 20
           dashi-repo related carrierToGeneralNSImplicationStillOpen --root . --limit 20
           dashi-repo related navierStokesPromotionGuardStillFalse --root . --limit 20
+          dashi-repo related continuumBKMPassageStillOpen --root . --limit 20
+          dashi-repo related allDataBridgeStillOpen --root . --limit 20
+          dashi-repo related clayEligibilityStillFalse --root . --limit 20
+          dashi-repo discover 'Navier Stokes roadmap Gate 1 Gate 2 BKM all-data gateway submission eligibility' --root . --limit 40
           dashi-repo discover 'Navier Stokes A B C D canonical Clay frontier carrier-to-general non-promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Physics.Closure.NSCanonical --root .
           dashi-repo lineage --prefix DASHI.Physics.Closure.NSClay --root .
