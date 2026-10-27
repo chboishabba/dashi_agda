@@ -143,15 +143,21 @@ toeWrongTypeCubeCount = WrongType.canonicalCubeCount
 toeWrongTypeFourthAxisCount : Fabric.siteCount 3 4 ≡ 81
 toeWrongTypeFourthAxisCount = WrongType.canonicalFourthAxisCount
 
+PadicPrefixRecovery : Set₁
+PadicPrefixRecovery =
+  Fabric.ConsumerSufficient PadicWave.prefixOne PadicWave.secondDigit
+
 toePadicPrefixCannotRecoverDiscardedDigit :
-  Fabric.ConsumerSufficient PadicWave.prefixOne PadicWave.secondDigit → ⊥
+  PadicPrefixRecovery → ⊥
 toePadicPrefixCannotRecoverDiscardedDigit =
   PadicWave.padicPrefixCannotDetermineDiscardedDigit
 
+StreamThirdPrefixRecovery : Set₁
+StreamThirdPrefixRecovery =
+  Fabric.ConsumerSufficient (Stream.take 2) (Stream.take 3)
+
 toeTwoDigitStreamCannotRecoverThird :
-  Fabric.ConsumerSufficient
-    (Stream.take 2)
-    (Stream.take 3) → ⊥
+  StreamThirdPrefixRecovery → ⊥
 toeTwoDigitStreamCannotRecoverThird =
   PadicWave.twoDigitViewCannotAnswerThirdDigit
 
@@ -186,10 +192,8 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     nineCountProof : Fabric.siteCount 3 2 ≡ 9
     twentySevenCountProof : Fabric.siteCount 3 3 ≡ 27
     eightyOneCountProof : Fabric.siteCount 3 4 ≡ 81
-    padicPrefixLoss :
-      Fabric.ConsumerSufficient PadicWave.prefixOne PadicWave.secondDigit → ⊥
-    streamPrefixLoss :
-      Fabric.ConsumerSufficient (Stream.take 2) (Stream.take 3) → ⊥
+    padicPrefixLoss : PadicPrefixRecovery → ⊥
+    streamPrefixLoss : StreamThirdPrefixRecovery → ⊥
     targetFormalGaps : Nat
     targetFormalGapsIs58 : targetFormalGaps ≡ 58
     dischargedFibres : Nat
