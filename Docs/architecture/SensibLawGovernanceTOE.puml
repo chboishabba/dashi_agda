@@ -1,0 +1,76 @@
+@startuml SensibLawGovernanceTOE
+title SensibLaw governance convergence into DASHI TOE
+
+skinparam componentStyle rectangle
+
+package "Source-owned legal and governance proofs" {
+  [SensibLawSemanticPromotionPolicy] as Semantic
+  [SensibLawExpertEvidenceProductionIntegrityExact] as Expert
+  [SensibLawRealMatterReviewDecisionExact] as Review
+  [SensibLawLegalSemanticAdmissionFrontierExact] as Admission
+  [SensibLawFiniteRequirementParetoFrontierContractExact] as Pareto
+  [SensibLawSnowballAttributionLineageAdapterExact] as Snowball
+  [PromotionSpine] as Promotion
+  [LegalDecisionDoubleProjectionExact] as LegalDecision
+  [LegitimacyEvidenceSeparationExact] as Legitimacy
+}
+
+package "TOE normalization lane" {
+  [SensibLawGovernanceTOEExact] as Bridge
+  [SensibLawGovernanceTOEValidation] as Validation
+}
+
+package "TOE roots" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as Unifier
+  [Unified.Everything] as Unified
+}
+
+package "Fleet planning boundary" {
+  [FleetFormalGapTargetTOEExact] as Fleet
+}
+
+Semantic --> Bridge : structural semantics
+no authority promotion
+Expert --> Bridge : production integrity
+no automatic compliance
+Review --> Bridge : durable review
+no truth promotion
+Admission --> Bridge : receipt-gated admission
+Pareto --> Bridge : work selection
+not requirement discharge
+Snowball --> Bridge : source role + lineage
+no citation authority
+Promotion --> Bridge : fail-closed promotion
+LegalDecision --> Bridge : coarse official surface
+non-factorability
+Legitimacy --> Bridge : legality != legitimacy
+Fleet --> Bridge : 58-gap scheduling context
+584 discharged stay excluded
+
+Bridge --> TOE
+Bridge --> Unifier
+Bridge --> Validation
+TOE --> Validation
+Unifier --> Validation
+Bridge --> Unified
+Validation --> Unified
+
+note right of Bridge
+O: converge existing owners
+R: reuse before construction
+C: one normalization facade
+S: preserve non-promotion
+L: one disjoint legal-governance lane
+P: existing owners + read-only ESD
+G: standards are process lenses only
+F: root agreement + preflight + trust scan
+end note
+
+note bottom of Bridge
+No Actionstep-specific Agda adapter is asserted here.
+A future exact adapter must preserve the same authority boundaries.
+No ESD or digital_esd module is modified.
+end note
+
+@enduml
