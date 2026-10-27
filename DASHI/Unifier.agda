@@ -43,6 +43,10 @@ open BalabanRGTOE public using
   ; classificationAdjointCasimirAtLeastTwo
   ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
   ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  ; r129ExportsLiteralContinuumLimit
+  ; r129ExportsLiteralSchwingerMembership
+  ; r129ExportsLiteralStressDerivative
+  ; r129ExportsCompositeMarkedSourceData
   )
 
 balabanRGBlockSpinTransferStillOpen :
