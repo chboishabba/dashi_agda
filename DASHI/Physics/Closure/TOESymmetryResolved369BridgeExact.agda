@@ -17,6 +17,7 @@ import DASHI.Physics.Closure.NSTriadKN369HighHighGramBridgeReceipt as NSGram
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Galerkin
 import DASHI.Physics.Closure.IncompressibleEulerGalerkinCoreExact as EulerCompat
 import DASHI.Physics.Closure.AlpogeBuckmasterSmoothForcedEulerBlowupBoundaryExact as ABEuler
+import DASHI.Physics.Closure.NSJul26ScalarisationToSignedCriticalProductionSnowballExact as NSSnowball
 import DASHI.Foundations.Base369MobiusTransport as Mobius
 
 ------------------------------------------------------------------------
@@ -362,3 +363,30 @@ toeForcedEulerBlowupDoesNotPayUnforcedNSLeaf :
   ABEuler.forcedEulerBlowupPaysUnforcedNSLeafA ≡ false
 toeForcedEulerBlowupDoesNotPayUnforcedNSLeaf =
   ABEuler.forcedEulerBlowupPaysUnforcedNSLeafAIsFalse
+
+
+------------------------------------------------------------------------
+-- 7. Reuse the existing NS proof-archaeology owner at the TOE boundary.
+--
+-- This does not prove the open signed spacetime estimate. It records the
+-- exact result of the snowball: same-object plumbing is recovered, while the
+-- cutoff-uniform signed payment remains the live analytic target.
+------------------------------------------------------------------------
+
+toeNSOldGramLeafEqualsModernDirectCompanionLeaf :
+  NSSnowball.oldGramLeafToModernDirectCompanionSameObjectRecovered ≡ true
+toeNSOldGramLeafEqualsModernDirectCompanionLeaf =
+  NSSnowball.oldR394WeightedRemainderAndModernDirectCompanionAreSameAnalyticLeafIsTrue
+
+toeNSSameObjectRepresentationPlumbingRecovered :
+  NSSnowball.sameObjectRepresentationPlumbingRecovered ≡ true
+toeNSSameObjectRepresentationPlumbingRecovered = refl
+
+toeNSCutoffUniformSignedSpacetimePaymentNotYetRecovered :
+  NSSnowball.cutoffUniformSignedSpacetimePaymentRecoveredInThisPass ≡ false
+toeNSCutoffUniformSignedSpacetimePaymentNotYetRecovered =
+  NSSnowball.cutoffUniformSignedSpacetimePaymentRecoveredInThisPassIsFalse
+
+toeNSRemainingNovelObjectIsCutoffUniformSignedPayment :
+  NSSnowball.remainingNovelObjectIsCutoffUniformSignedPayment ≡ true
+toeNSRemainingNovelObjectIsCutoffUniformSignedPayment = refl
