@@ -28,6 +28,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attr
+import DASHI.Core.GenericReceipt as Receipt
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Physics.ObserverConditionedTransportBridge as Transport
 import DASHI.Physics.Units.SI as SI
@@ -60,9 +61,10 @@ goodmanSources = Attr.mkSourceAtlas
 
 sourceCitationDoesNotPromote :
   (validation : String) →
+  Receipt.promotesClaim
+    (Attr.attributedSourceAtlasReceipt goodmanSources validation) ≡ false
+sourceCitationDoesNotPromote validation =
   Attr.attributedSourceAtlasReceiptNonPromoting goodmanSources validation
-  ≡ Attr.attributedSourceAtlasReceiptNonPromoting goodmanSources validation
-sourceCitationDoesNotPromote validation = refl
 
 ------------------------------------------------------------------------
 -- Claim families and provenance; labels are NOT observations or causes.
