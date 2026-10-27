@@ -1,5 +1,11 @@
 module DASHI.Unified.Physics where
 
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; [])
@@ -321,3 +327,69 @@ yangMillsBalabanClayPromotionStillFalse :
   BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
 yangMillsBalabanClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
+
+
+------------------------------------------------------------------------
+-- Cross-domain governance facade.
+-- This facade exposes legal-governance non-promotion beside physics.
+-- It does not turn governance evidence into physics or legal authority.
+------------------------------------------------------------------------
+
+governanceSensibLawSemanticBoundary :
+  Authority.AuthorityNonPromotionBundle
+governanceSensibLawSemanticBoundary =
+  GovernanceTOE.governanceSemanticAuthorityBoundary
+
+governanceSensibLawSemanticTruthAuthorityStillClosed :
+  Authority.truthAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
+governanceSensibLawSemanticTruthAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+
+governanceSensibLawSemanticLegalAuthorityStillClosed :
+  Authority.legalAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
+governanceSensibLawSemanticLegalAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
+
+governanceSensibLawSemanticAllAuthorityStillClosed :
+  Authority.promotesAnyAuthority governanceSensibLawSemanticBoundary ≡ false
+governanceSensibLawSemanticAllAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
+
+governanceSensibLawLegalAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+governanceSensibLawLegalAuthorityBoundaryReceipt =
+  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
+
+governanceSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+governanceSensibLawLegalRuntimeContract =
+  GovernanceTOE.governanceLegalRuntimeContract
+
+governanceSensibLawDomainTransportReceipt :
+  Domain.DomainTransportReceipt
+governanceSensibLawDomainTransportReceipt =
+  GovernanceTOE.governanceDomainTransportReceipt
+
+governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
+  Domain.representationEqualityCreatesLegalAuthority
+    governanceSensibLawDomainTransportReceipt
+  ≡ false
+governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
+  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+governanceSensibLawVendorIdentityDoesNotCreateAuthority :
+  Domain.vendorIdentityCreatesAuthority governanceSensibLawDomainTransportReceipt
+  ≡ false
+governanceSensibLawVendorIdentityDoesNotCreateAuthority =
+  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+
+governanceSensibLawTargetDomainNeedsOwnAuthorityWitness :
+  Domain.targetDomainNeedsOwnAuthorityWitness governanceSensibLawDomainTransportReceipt
+  ≡ true
+governanceSensibLawTargetDomainNeedsOwnAuthorityWitness =
+  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+
+governanceSensibLawZKPFrame :
+  GovernanceTOE.SensibLawGovernanceTOEZKPFrame
+governanceSensibLawZKPFrame =
+  GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame
