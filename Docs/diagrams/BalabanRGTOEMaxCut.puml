@@ -16,6 +16,7 @@ package "Canonical theorem owners" {
   component "Continuum route boundary" as Continuum
 }
 
+component "TopDownSummableRGIncrement\nchecked tail compiler / conditional physical majorant" as SummableRG
 component "DASHI.Unified.\nBalabanRGTOERegression" as Normalized
 
 package "TOE consumers" {
@@ -28,6 +29,7 @@ component "BalabanRGTOE\nMaxCutValidation" as Validation
 
 Density --> Normalized : reuse
 RegularE --> Normalized : reuse
+SummableRG --> Normalized : reuse / no source promotion
 Casimir --> Normalized : reuse
 Stress --> Normalized : reuse
 PublishedRG --> Normalized : reuse
