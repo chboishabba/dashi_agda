@@ -11,6 +11,10 @@ module DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Attributed
+import DASHI.Core.EvidenceHyperfabricExact as Evidence
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Economics.SourceAttributionPromotionBoundaryExact as Sources
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact as Base
 import DASHI.Economics.WealthTaxPowerCareSociologyBidi20261027Exact as Soc
@@ -88,6 +92,46 @@ toeInequalityTheoryDoesNotFixUniversalTaxRate :
   Soc.SocialTheoryDictatesOneTaxRate → ⊥
 toeInequalityTheoryDoesNotFixUniversalTaxRate =
   Soc.socialTheoryDoesNotDictateOneTaxRate
+
+-- Reuse the CORE attributed-source and evidence proof owners.
+-- Neither a bibliography entry nor a duplicated report can supply
+-- independent confirmation, empirical effect or Agda theorem authority.
+toeAnyAttributedCitationImportsNoTheorem :
+  (source : Attributed.AttributedSource) →
+  Attributed.citationImportsProof source ≡ false
+toeAnyAttributedCitationImportsNoTheorem =
+  Attributed.citationImportsProofIsFalse
+
+toeAnyAttributedCitationCreatesNoAuthority :
+  (source : Attributed.AttributedSource) →
+  Attributed.citationCreatesAuthority source ≡ false
+toeAnyAttributedCitationCreatesNoAuthority =
+  Attributed.citationCreatesAuthorityIsFalse
+
+toeSnowballCitationDoesNotProveTaxEffect :
+  Snowball.CitationCreatesProof → ⊥
+toeSnowballCitationDoesNotProveTaxEffect =
+  Snowball.citationDoesNotCreateProof
+
+toeSourceStatementDoesNotEstablishSystemicEffect :
+  Sources.SourcePropositionImpliesSystemicClassificationPermission → ⊥
+toeSourceStatementDoesNotEstablishSystemicEffect =
+  Sources.sourcePropositionDoesNotAutoPromoteToSystemicClassification
+
+toeSecondaryReportDoesNotBecomeIndependentStudy :
+  Sources.SameContentImpliesIndependentProducerPermission → ⊥
+toeSecondaryReportDoesNotBecomeIndependentStudy =
+  Sources.sameContentDoesNotAutoPromoteToIndependentProducer
+
+toeRepublishedOECDChapterIsNotNewIndependentProducer :
+  Evidence.independent ≡ Evidence.sharedLineage → ⊥
+toeRepublishedOECDChapterIsNotNewIndependentProducer =
+  Evidence.independent≠sharedLineage
+
+toePaperCannotSupplyKernelCertification :
+  Sources.SourceReceiptImpliesPromotionStepPermission → ⊥
+toePaperCannotSupplyKernelCertification =
+  Sources.sourceReceiptDoesNotAutoPromoteToPromotionStep
 
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
