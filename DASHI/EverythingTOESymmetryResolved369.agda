@@ -679,3 +679,39 @@ toe369DocumentRoleDoesNotSupplyLegalSourceAuthority =
 toe369CanonicalLegalSourceAuthorityBoundary =
   LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
 
+
+------------------------------------------------------------------------
+-- Fleet R5 formal-gap convergence.
+------------------------------------------------------------------------
+
+toeFleetFormalGapReceipt :
+  FleetFormalGap.FleetFormalGapTOEReceipt
+toeFleetFormalGapReceipt =
+  FleetFormalGap.canonicalFleetFormalGapReceipt
+
+toeFleetOnlyFormalResidualDispatches :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.unformalisedFormalGap ≡ true
+toeFleetOnlyFormalResidualDispatches = refl
+
+toeFleetDischargedFibresDoNotRedispatch :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.dischargedCoreKnowledge ≡ false
+toeFleetDischargedFibresDoNotRedispatch = refl
+
+toeFleetContradictionsRemainSeparate :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.polarityContradictionGap ≡ false
+toeFleetContradictionsRemainSeparate = refl
+
+toeFleetSpectralMotifDoesNotCreateTruth :
+  FleetFormalGap.SpectralMotifCreatesTruth → ⊥
+toeFleetSpectralMotifDoesNotCreateTruth =
+  FleetFormalGap.spectralMotifDoesNotCreateTruth
+
+toeFleetGapCountDoesNotCreateProof :
+  FleetFormalGap.FormalGapCountCreatesProof → ⊥
+toeFleetGapCountDoesNotCreateProof =
+  FleetFormalGap.formalGapCountDoesNotCreateProof
+
+toeFleetGapCountDoesNotDetermineIdentity :
+  FleetFormalGap.GapCountDeterminesGapIdentity → ⊥
+toeFleetGapCountDoesNotDetermineIdentity =
+  FleetFormalGap.gapCountDoesNotDetermineGapIdentity
