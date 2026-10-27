@@ -677,6 +677,143 @@ toe369DocumentRoleDoesNotSupplyLegalSourceAuthority =
 toe369CanonicalLegalSourceAuthorityBoundary =
   LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
 
+
+
+toe369NativeLegalFollowDoesNotCreateLegalAuthority :
+  LegalGovernance.NativeCliAutomaticallyLegalAuthority → ⊥
+toe369NativeLegalFollowDoesNotCreateLegalAuthority =
+  LegalGovernance.toeNativeLegalFollowDoesNotCreateLegalAuthority
+
+toe369ProviderFailureDoesNotMakePropositionFalse :
+  LegalGovernance.ProviderFailureAutomaticallyPropositionFalse → ⊥
+toe369ProviderFailureDoesNotMakePropositionFalse =
+  LegalGovernance.toeProviderFailureDoesNotMakePropositionFalse
+
+toe369ExpertProductionPromotesAnyAuthorityIsFalse :
+  LegalGovernance.toeExpertProductionPromotesAnyAuthority ≡ false
+toe369ExpertProductionPromotesAnyAuthorityIsFalse =
+  LegalGovernance.toeExpertProductionPromotesAnyAuthorityIsFalse
+
+
+------------------------------------------------------------------------
+-- Direct legal execution and expert-evidence non-promotion aliases.
+------------------------------------------------------------------------
+
+toe369SpacyDoesNotCreateLegalAuthority :
+  LegalGovernance.SpacyParserAutomaticallyLegalAuthority → ⊥
+toe369SpacyDoesNotCreateLegalAuthority =
+  LegalGovernance.toeSpacyDoesNotCreateLegalAuthority
+
+toe369SpacyDoesNotCreateLegalConstruction :
+  LegalGovernance.SpacyParserAutomaticallyLegalConstruction → ⊥
+toe369SpacyDoesNotCreateLegalConstruction =
+  LegalGovernance.toeSpacyDoesNotCreateLegalConstruction
+
+toe369LatestKnownSectionDoesNotBecomeHistoricalLaw :
+  LegalGovernance.SectionSliceAutomaticallyHistoricalLaw → ⊥
+toe369LatestKnownSectionDoesNotBecomeHistoricalLaw =
+  LegalGovernance.toeLatestKnownSectionDoesNotBecomeHistoricalLaw
+
+toe369PythonWrapperDoesNotOwnLegalSemantics :
+  LegalGovernance.PythonWrapperOwnsLegalSemantics → ⊥
+toe369PythonWrapperDoesNotOwnLegalSemantics =
+  LegalGovernance.toePythonWrapperDoesNotOwnLegalSemantics
+
+toe369JsonIsNotSemanticCommandAbi :
+  LegalGovernance.JsonArtifactIsSemanticCommandAbi → ⊥
+toe369JsonIsNotSemanticCommandAbi =
+  LegalGovernance.toeJsonIsNotSemanticCommandAbi
+
+toe369JsonReviewDoesNotCreateDecision :
+  LegalGovernance.JsonReviewFileAutomaticallyReviewerDecision → ⊥
+toe369JsonReviewDoesNotCreateDecision =
+  LegalGovernance.toeJsonReviewDoesNotCreateDecision
+
+toe369JsonReceiptDoesNotCreateTruth :
+  LegalGovernance.JsonReceiptAutomaticallyClaimTruth → ⊥
+toe369JsonReceiptDoesNotCreateTruth =
+  LegalGovernance.toeJsonReceiptDoesNotCreateTruth
+
+toe369CliSequenceDoesNotPayResidual :
+  LegalGovernance.CliSequenceAutomaticallyPaysOpenResidual → ⊥
+toe369CliSequenceDoesNotPayResidual =
+  LegalGovernance.toeCliSequenceDoesNotPayResidual
+
+toe369PinnedStreamDoesNotCreateLegalTruth :
+  LegalGovernance.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+toe369PinnedStreamDoesNotCreateLegalTruth =
+  LegalGovernance.toePinnedStreamDoesNotCreateLegalTruth
+
+toe369ReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
+  LegalGovernance.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+toe369ReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
+  LegalGovernance.toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
+
+toe369OalcHitDoesNotBecomeBindingAuthority :
+  LegalGovernance.OalcHitAutomaticallyBindingAuthority → ⊥
+toe369OalcHitDoesNotBecomeBindingAuthority =
+  LegalGovernance.toeOalcHitDoesNotBecomeBindingAuthority
+
+toe369OfficialCourtBytesDoNotBecomePropositionCorrespondence :
+  LegalGovernance.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+toe369OfficialCourtBytesDoNotBecomePropositionCorrespondence =
+  LegalGovernance.toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
+
+toe369SameMncDoesNotCollapseSourceRevisions :
+  LegalGovernance.SameMncAutomaticallySameSourceRevision → ⊥
+toe369SameMncDoesNotCollapseSourceRevisions =
+  LegalGovernance.toeSameMncDoesNotCollapseSourceRevisions
+
+toe369SuccessfulOfficialFetchDoesNotBecomeProductionReady :
+  LegalGovernance.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+toe369SuccessfulOfficialFetchDoesNotBecomeProductionReady =
+  LegalGovernance.toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
+
+toe369MultipleReportsDoNotAutomaticallyCreateIndependence :
+  LegalGovernance.MultipleReportsAutomaticallyIndependent → ⊥
+toe369MultipleReportsDoNotAutomaticallyCreateIndependence =
+  LegalGovernance.toeMultipleReportsDoNotAutomaticallyCreateIndependence
+
+toe369AgreementDoesNotAutomaticallyCreateIndependentCorroboration :
+  LegalGovernance.AgreementAutomaticallyIndependentCorroboration → ⊥
+toe369AgreementDoesNotAutomaticallyCreateIndependentCorroboration =
+  LegalGovernance.toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
+
+toe369DependenceDoesNotMeanNoEvidence :
+  LegalGovernance.DependenceMeansNoEvidence → ⊥
+toe369DependenceDoesNotMeanNoEvidence =
+  LegalGovernance.toeDependenceDoesNotMeanNoEvidence
+
+toe369ExpertStatusDoesNotAutomaticallyCreateTruth :
+  LegalGovernance.ExpertStatusAutomaticallyTruth → ⊥
+toe369ExpertStatusDoesNotAutomaticallyCreateTruth =
+  LegalGovernance.toeExpertStatusDoesNotAutomaticallyCreateTruth
+
+toe369ReportAdmissionDoesNotRepairMissingInput :
+  LegalGovernance.ReportAdmissionRepairsMissingInput → ⊥
+toe369ReportAdmissionDoesNotRepairMissingInput =
+  LegalGovernance.toeReportAdmissionDoesNotRepairMissingInput
+
+toe369CrossExaminationDoesNotAddUnobservedInput :
+  LegalGovernance.CrossExaminationAddsUnobservedInput → ⊥
+toe369CrossExaminationDoesNotAddUnobservedInput =
+  LegalGovernance.toeCrossExaminationDoesNotAddUnobservedInput
+
+toe369DisputedRiskDoesNotBecomeIrrelevant :
+  LegalGovernance.DisputedRiskIsIrrelevant → ⊥
+toe369DisputedRiskDoesNotBecomeIrrelevant =
+  LegalGovernance.toeDisputedRiskDoesNotBecomeIrrelevant
+
+toe369ObserverDefectDoesNotProveOpinionFalse :
+  LegalGovernance.ObserverDefectMakesOpinionFalse → ⊥
+toe369ObserverDefectDoesNotProveOpinionFalse =
+  LegalGovernance.toeObserverDefectDoesNotProveOpinionFalse
+
+toe369QualificationDoesNotAutomaticallyProveForensicCompliance :
+  LegalGovernance.QualificationAutomaticallyForensicCompliance → ⊥
+toe369QualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernance.toeQualificationDoesNotAutomaticallyProveForensicCompliance
+
 ------------------------------------------------------------------------
 -- Governed legal workflow / source-genealogy handoff.
 -- The handoff reuses the canonical legal-governance and PNF source owners.
