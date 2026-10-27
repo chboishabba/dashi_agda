@@ -1,5 +1,6 @@
 module DASHI.Unifier where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NSCut
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
@@ -1343,3 +1344,51 @@ unifierBalabanPhysicalPromotionCut =
   unifierBalabanBlockSpinStillBlocked ,
   (unifierBalabanUniformKPStillBlocked ,
    unifierBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Navier-Stokes native-proof max-cut consumer facade.
+------------------------------------------------------------------------
+
+unifierNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
+unifierNSABCDMaxCutReceipt =
+  NSCut.canonicalNSABCDTOEMaxCutReceipt
+
+unifierNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
+unifierNSABCDZKPFrame =
+  NSCut.canonicalNSABCDTOEZKPFrame
+
+unifierNSR540OrderedOffDiagonalM2CompilerClosed :
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosed ≡ true
+unifierNSR540OrderedOffDiagonalM2CompilerClosed =
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosedIsTrue
+
+unifierNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+unifierNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
+
+unifierNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+unifierNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+unifierNSPhysicalWeightedSecondMomentPaymentStillOpen :
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosed ≡ false
+unifierNSPhysicalWeightedSecondMomentPaymentStillOpen =
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosedIsFalse
+
+unifierNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+unifierNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
+
+unifierNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+unifierNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
+
+unifierNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+unifierNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse
