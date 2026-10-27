@@ -3,6 +3,7 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Unified.SensibLawGovernanceTOEExact as SensibLawGovTOE
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (Bool; false)
@@ -824,3 +825,79 @@ toeFleetVectorCoordinateAdmissibilityStillFalse =
 
 toeFleetTextFallbackAuthorityStillFalse =
   FleetGapTOE.fleetTextFallbackAuthorityStillFalse
+
+
+------------------------------------------------------------------------
+-- SensibLaw / legal-governance non-promotion facade.
+-- The source modules remain theorem owners.
+------------------------------------------------------------------------
+
+toeSensibLawSemanticPromotionPolicySurface :
+  SensibLawGovTOE.SemanticPromotionPolicySurface
+toeSensibLawSemanticPromotionPolicySurface =
+  SensibLawGovTOE.sensibLawSemanticPromotionPolicySurface
+
+toeSensibLawExpertProductionBoundary :
+  SensibLawGovTOE.ExpertProductionBoundary
+toeSensibLawExpertProductionBoundary =
+  SensibLawGovTOE.sensibLawExpertProductionBoundary
+
+toeSensibLawRealMatterReviewBoundary :
+  SensibLawGovTOE.RealMatterReviewBoundary
+toeSensibLawRealMatterReviewBoundary =
+  SensibLawGovTOE.sensibLawRealMatterReviewBoundary
+
+toeSensibLawRequirementParetoContract :
+  SensibLawGovTOE.FiniteRequirementParetoContract
+toeSensibLawRequirementParetoContract =
+  SensibLawGovTOE.sensibLawRequirementParetoContract
+
+toeSensibLawSnowballLineageBoundary :
+  SensibLawGovTOE.SensibLawSnowballLineageBoundary
+toeSensibLawSnowballLineageBoundary =
+  SensibLawGovTOE.sensibLawSnowballLineageBoundary
+
+toeSensibLawGovernanceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeSensibLawGovernanceZKPFrame =
+  SensibLawGovTOE.canonicalSensibLawGovernanceZKPFrame
+
+toeSensibLawSemanticPromotionLegalAuthorityClosed :
+  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityFlag ≡ false
+toeSensibLawSemanticPromotionLegalAuthorityClosed =
+  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityClosed
+
+toeSensibLawExpertProductionAuthorityClosed :
+  SensibLawGovTOE.sensibLawExpertProductionPromotesAnyAuthority ≡ false
+toeSensibLawExpertProductionAuthorityClosed =
+  SensibLawGovTOE.sensibLawExpertProductionAuthorityClosed
+
+toeSensibLawReviewDoesNotCreateClaimTruth :
+  SensibLawGovTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
+toeSensibLawReviewDoesNotCreateClaimTruth =
+  SensibLawGovTOE.sensibLawReviewDoesNotCreateClaimTruth
+
+toeSensibLawParserCandidateCannotAuthorizeAdmission :
+  SensibLawGovTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+toeSensibLawParserCandidateCannotAuthorizeAdmission =
+  SensibLawGovTOE.sensibLawParserCandidateCannotAuthorizeAdmission
+
+toeSensibLawQualificationDoesNotProveForensicCompliance :
+  SensibLawGovTOE.QualificationAutomaticallyForensicCompliance → ⊥
+toeSensibLawQualificationDoesNotProveForensicCompliance =
+  SensibLawGovTOE.sensibLawQualificationDoesNotProveForensicCompliance
+
+toeSensibLawOfficialLegalSurfaceCannotRecoverFineState :
+  SensibLawGovTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+toeSensibLawOfficialLegalSurfaceCannotRecoverFineState =
+  SensibLawGovTOE.sensibLawOfficialLegalSurfaceCannotRecoverFineState
+
+toeSensibLawLegalOnlyDoesNotCreateLegitimacy :
+  SensibLawGovTOE.LegalOnlyCreatesLegitimacy → ⊥
+toeSensibLawLegalOnlyDoesNotCreateLegitimacy =
+  SensibLawGovTOE.sensibLawLegalOnlyDoesNotCreateLegitimacy
+
+toeSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres :
+  SensibLawGovTOE.legalGovernanceLaneRetargetsDischargedFleetFibres ≡ false
+toeSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres =
+  SensibLawGovTOE.sensibLawLegalLaneDoesNotRetargetDischargedFleetFibres
