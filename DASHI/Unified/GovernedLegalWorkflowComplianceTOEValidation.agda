@@ -75,3 +75,48 @@ toeFleetContradictionsStill44 :
     Compliance.canonicalGovernedLegalWorkflowComplianceReceipt
   ≡ 44
 toeFleetContradictionsStill44 = refl
+
+
+toeComplianceZKPMatchesOwner :
+  TOE.toeGovernedLegalWorkflowComplianceZKPFrame
+  ≡ Compliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
+toeComplianceZKPMatchesOwner = refl
+
+unifierComplianceZKPMatchesOwner :
+  Unifier.unifierGovernedLegalWorkflowComplianceZKPFrame
+  ≡ Compliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
+unifierComplianceZKPMatchesOwner = refl
+
+toeReportAdmissionFirewall :
+  Compliance.ReportAdmissionRepairsMissingInput → ⊥
+toeReportAdmissionFirewall =
+  TOE.toeReportAdmissionDoesNotRepairMissingInput
+
+unifierReportAdmissionFirewall :
+  Compliance.ReportAdmissionRepairsMissingInput → ⊥
+unifierReportAdmissionFirewall =
+  Unifier.unifierReportAdmissionDoesNotRepairMissingInput
+
+toeCMP119PreferredSourcePackageCountIsFour :
+  TOE.toeCMP119PreferredSourcePackageCount ≡ 4
+toeCMP119PreferredSourcePackageCountIsFour = refl
+
+unifierCMP119PreferredSourcePackageCountIsFour :
+  Unifier.unifierCMP119PreferredSourcePackageCount ≡ 4
+unifierCMP119PreferredSourcePackageCountIsFour = refl
+
+toeCMP119PreferredAdapterDebtIsZero :
+  TOE.toeCMP119PreferredAdapterDebt ≡ 0
+toeCMP119PreferredAdapterDebtIsZero = refl
+
+unifierCMP119PreferredAdapterDebtIsZero :
+  Unifier.unifierCMP119PreferredAdapterDebt ≡ 0
+unifierCMP119PreferredAdapterDebtIsZero = refl
+
+toeCMP119ConditionalPromotionStillBlocked :
+  TOE.toeCMP119NoConditionalSourceLeafPromoted ≡ true
+toeCMP119ConditionalPromotionStillBlocked = refl
+
+unifierCMP119ConditionalPromotionStillBlocked :
+  Unifier.unifierCMP119NoConditionalSourceLeafPromoted ≡ true
+unifierCMP119ConditionalPromotionStillBlocked = refl
