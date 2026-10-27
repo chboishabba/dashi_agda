@@ -104,6 +104,14 @@ embeddingDoesNotCreateLegalAuthority :
   EmbeddingCreatesLegalAuthority → ⊥
 embeddingDoesNotCreateLegalAuthority ()
 
+-- Current EO audits can recover geographic information from embeddings.
+-- That fact does not identify a learned coordinate with a physical variable.
+data GeographicRecoverabilityCreatesPhysicalIdentity : Set where
+
+geographicRecoverabilityDoesNotCreatePhysicalIdentity :
+  GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
+geographicRecoverabilityDoesNotCreatePhysicalIdentity ()
+
 canonicalWoogarooInterpretabilityProtocol :
   Interpretation.WoogarooInterpretabilityProtocol
 canonicalWoogarooInterpretabilityProtocol =
@@ -188,7 +196,7 @@ canonicalEarthEmbeddingTOEZKPFrame =
     "converge learned Earth-embedding acquisition, physical probing, local geometry, and Woogaroo validation into the DASHI TOE"
     "reuse existing EarthEmbedding, source-atlas, LES/Woogaroo, Pareto/Snowball process, and attribution owners before extending them"
     "normalize one terminal Earth-embedding receipt and expose exact non-promotion eliminators through the TOE aggregates"
-    "learned coordinates, gradients, co-location, prefix performance, and model outputs do not create physical identity, causal effect, independent field measurement, legal authority, or continuum physics"
+    "learned coordinates, gradients, co-location, recoverable geographic location, prefix performance, and model outputs do not create physical identity, causal effect, independent field measurement, legal authority, or continuum physics"
     "one Earth-observation interpretation and evidence lane; Fleet-58 identities remain fail-closed"
     "verified model and preprocessing identity, exact acquisition provenance, independent labels, spatial/temporal holdout, and existing theorem owners are required; ESD surfaces are read-only"
     "original AlphaEarth, TESSERA, Rahman, Ou/Zheng, Woogaroo, Ibrahim, Balaban, and meta-introspector attribution remains separate; standards are process lenses only"
