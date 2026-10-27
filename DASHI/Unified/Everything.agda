@@ -2,6 +2,9 @@ module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
+import DASHI.Biology.PMDDHistamineAmplificationExact as PMDDHistamine
+import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact as PMDDMolecular
+import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact as PMDDIntervention
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -167,6 +170,95 @@ unifiedBalabanScaleTransferNonPromotion =
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 ------------------------------------------------------------------------
+-- Canonical Balaban continuum and same-family stress convergence.
+------------------------------------------------------------------------
+
+unifiedBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+unifiedBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
+
+unifiedBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifiedBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+unifiedDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+unifiedDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
+
+unifiedDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifiedDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
+unifiedBalabanStressCauchyCompletionToMarkedStressLevel : ProofLevel
+unifiedBalabanStressCauchyCompletionToMarkedStressLevel =
+  BalabanRGTOE.balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+
+unifiedBalabanStressCompletedMarkedIsClayStressLevel : ProofLevel
+unifiedBalabanStressCompletedMarkedIsClayStressLevel =
+  BalabanRGTOE.balabanGoal1CCompletedStressIsClayStressLevel
+
+unifiedBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+unifiedBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+unifiedBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+unifiedBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+unifiedBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+unifiedBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+unifiedBalabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+unifiedBalabanCPhysicalPackageMaxCutCompilerLevel =
+  BalabanRGTOE.balabanCPhysicalPackageMaxCutCompilerLevel
+
+unifiedBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+unifiedBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  BalabanRGTOE.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+unifiedBalabanC1MarkedCurvatureFamilyLevel : ProofLevel
+unifiedBalabanC1MarkedCurvatureFamilyLevel =
+  BalabanRGTOE.balabanC1MarkedCurvatureFamilyLevel
+
+unifiedBalabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+unifiedBalabanC2PhysicalRemainderSharedTailLevel =
+  BalabanRGTOE.balabanC2PhysicalRemainderSharedTailLevel
+
+unifiedBalabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+unifiedBalabanC3OneStepAFRecurrenceIdentificationLevel =
+  BalabanRGTOE.balabanC3OneStepAFRecurrenceIdentificationLevel
+
+unifiedBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
+unifiedBalabanC4DensityAnchoredStressLaneLevel =
+  BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
+
+unifiedBalabanCPhysicalPackageCount : ℕ
+unifiedBalabanCPhysicalPackageCount =
+  BalabanRGTOE.balabanCPhysicalPackageCount
+
+unifiedBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+unifiedBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
+
+------------------------------------------------------------------------
 -- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
 ------------------------------------------------------------------------
 
@@ -195,10 +287,37 @@ unifiedFleet58DoesNotIdentifyYMGate4 :
 unifiedFleet58DoesNotIdentifyYMGate4 =
   FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
 
+unifiedFleetDischargedFibresAre584 :
+  FleetHyperTOE.fleetDischargedFibres ≡ 584
+unifiedFleetDischargedFibresAre584 =
+  FleetHyperTOE.fleetDischargedFibresAre584
+
+unifiedFleetContradictionGapsAre44 :
+  FleetHyperTOE.fleetContradictionGaps ≡ 44
+unifiedFleetContradictionGapsAre44 =
+  FleetHyperTOE.fleetContradictionGapsAre44
+
 unifiedFleetFormalGapsAre58 :
   FleetHyperTOE.fleetFormalGaps ≡ 58
 unifiedFleetFormalGapsAre58 =
   FleetHyperTOE.fleetFormalGapsAre58
+
+unifiedFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+unifiedFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+unifiedFleetDischargedFibresCannotBeRetargeted :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+unifiedFleetDischargedFibresCannotBeRetargeted =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+unifiedFleetContradictionsCannotBecomeFormalGaps :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+unifiedFleetContradictionsCannotBecomeFormalGaps =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
 
 ------------------------------------------------------------------------
 -- Implement-A-to-D terminal unified validation.
@@ -379,3 +498,65 @@ unified369Ternary27MonsterRepresentationNotPromoted =
 
 unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+
+------------------------------------------------------------------------
+-- Joint Balaban/R559 typed continuum non-promotion.
+------------------------------------------------------------------------
+
+unifiedBalabanR559ContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifiedBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559TOE.continuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifiedBalabanR559DepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifiedBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559TOE.depthContinuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- PMDD / histamine canonical biology handoff.
+------------------------------------------------------------------------
+
+unifiedPMDDHistamineAmplificationCandidate :
+  PMDDHistamine.HistamineAmplifiedPMDDCandidate
+unifiedPMDDHistamineAmplificationCandidate =
+  PMDDHistamine.canonicalHistamineAmplifiedPMDDCandidate
+
+unifiedPMDDHistamineMolecularCandidate :
+  PMDDMolecular.MolecularlyInstantiatedPMDDHistamineCandidate
+unifiedPMDDHistamineMolecularCandidate =
+  PMDDMolecular.canonicalMolecularlyInstantiatedPMDDHistamineCandidate
+
+unifiedPMDDHistamineInterventionBoundary :
+  PMDDIntervention.HistamineInterventionIdentificationBoundary
+unifiedPMDDHistamineInterventionBoundary =
+  PMDDIntervention.canonicalHistamineInterventionIdentificationBoundary
+
+unifiedPMDDHistamineUniversalCauseImpossible :
+  PMDDHistamine.HistamineCausesAllPMDD → ⊥
+unifiedPMDDHistamineUniversalCauseImpossible =
+  PMDDHistamine.histamineDoesNotBecomeUniversalCause
+
+unifiedPMDDAntihistamineResponseDiagnosticImpossible :
+  PMDDHistamine.AntihistamineResponseDiagnosesHistaminePMDD → ⊥
+unifiedPMDDAntihistamineResponseDiagnosticImpossible =
+  PMDDHistamine.antihistamineResponseIsNotDiagnosticProof
+
+unifiedPMDDGutRootCausePromotionImpossible :
+  PMDDHistamine.GutDysfunctionIsThePMDDRootCause → ⊥
+unifiedPMDDGutRootCausePromotionImpossible =
+  PMDDHistamine.gutRootCauseNotPromoted
+
+unifiedPMDDH1H2TargetPairEfficacyPromotionImpossible :
+  PMDDMolecular.H1H2TargetPairProvesPMDDEfficacy → ⊥
+unifiedPMDDH1H2TargetPairEfficacyPromotionImpossible =
+  PMDDMolecular.h1h2TargetPairDoesNotProvePMDDEfficacy
+
+unifiedPMDDSymptomResponseMechanismIdentificationImpossible :
+  PMDDIntervention.SymptomResponseDeterminesMechanism → ⊥
+unifiedPMDDSymptomResponseMechanismIdentificationImpossible =
+  PMDDIntervention.symptomResponseDoesNotDetermineMechanism
