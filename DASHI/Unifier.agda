@@ -1673,3 +1673,58 @@ toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
 toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+
+------------------------------------------------------------------------
+-- Fleet max-cut: planning counts, named-manifest wall, and attribution.
+------------------------------------------------------------------------
+
+unifierFleetMacroscopicEigenMotifsAre3 :
+  FleetGapTOE.macroscopicEigenMotifCount FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifierFleetMacroscopicEigenMotifsAre3 = FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifierFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetTargetsOnlyUnformalisedFormalGaps = FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners = FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifierFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetMetaIntrospectorAttributionPreserved = refl
+
+unifierFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetMetaIntrospectorProofNotBorrowed = refl
+
+unifierFleetESDSurfaceUnedited :
+  FleetGapTOE.esdSurfaceEdited FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetESDSurfaceUnedited = refl
+
+unifierFleet58ManifestAbsent : FleetManifestTOE.named58ManifestAcquired ≡ false
+unifierFleet58ManifestAbsent = FleetManifestTOE.named58ManifestAcquiredIsFalse
+
+unifierFleet58CountDoesNotNameRows : FleetManifestTOE.countIdentifiesNamedRows ≡ false
+unifierFleet58CountDoesNotNameRows = FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+
+unifierFleet58PerGapDispatchDisabled : FleetManifestTOE.perGapDispatchEnabled ≡ false
+unifierFleet58PerGapDispatchDisabled = FleetManifestTOE.perGapDispatchEnabledIsFalse
+
+unifierFleet58RelatedSymbolsRequired : FleetManifestTOE.relatedSymbolsRequired ≡ true
+unifierFleet58RelatedSymbolsRequired = FleetManifestTOE.relatedSymbolsRequiredIsTrue
+
+unifierFleet58DiscoverRequired : FleetManifestTOE.discoverRequired ≡ true
+unifierFleet58DiscoverRequired = FleetManifestTOE.discoverRequiredIsTrue
+
+unifierFleet58RoundLineageRequired : FleetManifestTOE.roundLineageRequired ≡ true
+unifierFleet58RoundLineageRequired = FleetManifestTOE.roundLineageRequiredIsTrue
+
+unifierFleet58AcquisitionDoesNotCloseConsumer :
+  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+unifierFleet58AcquisitionDoesNotCloseConsumer = FleetManifestTOE.acquisitionDoesNotCloseConsumer
+
+unifierFleet58ProducerDoesNotIdentifyResidual :
+  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
+unifierFleet58ProducerDoesNotIdentifyResidual = FleetManifestTOE.producerDoesNotIdentifyResidual
