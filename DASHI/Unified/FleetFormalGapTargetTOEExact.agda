@@ -335,3 +335,79 @@ fleetTextFallbackAuthorityStillFalse :
   Rebuild.textFallbackIsCoordinateAuthority ≡ false
 fleetTextFallbackAuthorityStillFalse =
   Rebuild.textFallbackCoordinateAuthorityFalse
+
+
+------------------------------------------------------------------------
+-- Named Fleet-58 dispatch boundary.
+--
+-- The external producer pays the count class. It does not provide a named
+-- 58-row manifest on the verified source surface. Count equality is not
+-- object identity. Dispatch therefore remains closed.
+------------------------------------------------------------------------
+
+record FleetFormalGapDispatchBoundary : Set where
+  constructor fleet-formal-gap-dispatch-boundary
+  field
+    countedFormalGapClassAvailable : Bool
+    namedFormalGapManifestAvailable : Bool
+    dispatchRequiresNamedFormalGapManifest : Bool
+    externalGapCountIdentifiesIndividualGaps : Bool
+    dischargedFibresEligibleForGapDispatch : Bool
+    contradictionGapsEligibleForFormalGapDispatch : Bool
+
+open FleetFormalGapDispatchBoundary public
+
+canonicalFleetFormalGapDispatchBoundary : FleetFormalGapDispatchBoundary
+canonicalFleetFormalGapDispatchBoundary =
+  fleet-formal-gap-dispatch-boundary
+    true
+    false
+    true
+    false
+    false
+    false
+
+namedFormalGapManifestAvailable : Bool
+namedFormalGapManifestAvailable =
+  FleetFormalGapDispatchBoundary.namedFormalGapManifestAvailable
+    canonicalFleetFormalGapDispatchBoundary
+
+namedFormalGapManifestAvailableIsFalse :
+  namedFormalGapManifestAvailable ≡ false
+namedFormalGapManifestAvailableIsFalse = refl
+
+dispatchRequiresNamedFormalGapManifest : Bool
+dispatchRequiresNamedFormalGapManifest =
+  FleetFormalGapDispatchBoundary.dispatchRequiresNamedFormalGapManifest
+    canonicalFleetFormalGapDispatchBoundary
+
+dispatchRequiresNamedFormalGapManifestIsTrue :
+  dispatchRequiresNamedFormalGapManifest ≡ true
+dispatchRequiresNamedFormalGapManifestIsTrue = refl
+
+externalGapCountIdentifiesIndividualGaps : Bool
+externalGapCountIdentifiesIndividualGaps =
+  FleetFormalGapDispatchBoundary.externalGapCountIdentifiesIndividualGaps
+    canonicalFleetFormalGapDispatchBoundary
+
+externalGapCountIdentifiesIndividualGapsIsFalse :
+  externalGapCountIdentifiesIndividualGaps ≡ false
+externalGapCountIdentifiesIndividualGapsIsFalse = refl
+
+dischargedFibresEligibleForGapDispatch : Bool
+dischargedFibresEligibleForGapDispatch =
+  FleetFormalGapDispatchBoundary.dischargedFibresEligibleForGapDispatch
+    canonicalFleetFormalGapDispatchBoundary
+
+dischargedFibresEligibleForGapDispatchIsFalse :
+  dischargedFibresEligibleForGapDispatch ≡ false
+dischargedFibresEligibleForGapDispatchIsFalse = refl
+
+contradictionGapsEligibleForFormalGapDispatch : Bool
+contradictionGapsEligibleForFormalGapDispatch =
+  FleetFormalGapDispatchBoundary.contradictionGapsEligibleForFormalGapDispatch
+    canonicalFleetFormalGapDispatchBoundary
+
+contradictionGapsEligibleForFormalGapDispatchIsFalse :
+  contradictionGapsEligibleForFormalGapDispatch ≡ false
+contradictionGapsEligibleForFormalGapDispatchIsFalse = refl
