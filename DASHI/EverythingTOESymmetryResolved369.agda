@@ -371,32 +371,27 @@ toe369MaxCutZKPFrame = MaxCutTOE.canonicalTOE369MaxCutZKPFrame
 toe369MaxCutReceipt : MaxCutTOE.TOE369MaxCutReceipt
 toe369MaxCutReceipt = MaxCutTOE.canonicalTOE369MaxCutReceipt
 
-toe369MaxCutFullGradeDimensionDoesNotCreateFaithfulness =
-  MaxCutTOE.toeFullGradeDimensionDoesNotCreateFaithfulness
-
-toe369MaxCutProjectedDimensionDoesNotCreateAction =
-  MaxCutTOE.toeProjectedDimensionDoesNotCreateAction
-
-toe369MaxCutKernelCharacterDoesNotCreateAction =
-  MaxCutTOE.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
-
-toe369MaxCutSelectedSameElementRecognitionStillOpen =
-  MaxCutTOE.toeSelectedSameElementClass3BStillOpen
-
-toe369MaxCutSingleActionProducerStillOpen =
-  MaxCutTOE.toeSingleActionProducerStillOpen
-
-toe369MaxCutSchrodingerRecognitionStillOpen =
-  MaxCutTOE.toeSchrodingerHZetaRecognitionStillOpen
-
-toe369MaxCutTernary27ReductionIsNotGlobalInversion =
-  MaxCutTOE.toeTernary27PhaseReductionIsNotGlobalInversion
-
-toe369MaxCutTernary27ReductionIsNotMonster42SameObject =
-  MaxCutTOE.toeTernary27ReductionIsNotMonster42SameObject
-
-toe369MaxCutFiniteChartDoesNotCreateLinearAction =
-  MaxCutTOE.toeFiniteChartDoesNotCreateLinearMultiplicityAction
-
-toe369MaxCutLiteralCFFITheoremWasNotInvented =
-  MaxCutTOE.literalCFFITheoremWasNotInvented
+open MaxCutTOE public using
+  ( toeFullGradeDimensionDoesNotCreateFaithfulness
+  ; toeFullGradeSameCarrierDoesNotCreateActionAgreement
+  ; toeFullGradeCharacterDoesNotCreateActionAgreement
+  ; toeProjectedDimensionDoesNotCreateAction
+  ; toeCoordinateRetractionDoesNotCreateProjectedAction
+  ; toeProjectedCharacterDoesNotCreateAction
+  ; toeKernelTrace53DoesNotIdentify3B
+  ; toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+  ; toeKernelActualZetaRecognitionStillOpen
+  ; toeSelectedSameElementClass3BStillOpen
+  ; toeSingleActionProducerStillOpen
+  ; toeFiniteChartDoesNotCreateLinearMultiplicityAction
+  ; toeNinetySlicesDoNotCreatePermutationRepresentation
+  ; toeSchrodingerHomBindingsStillOpen
+  ; toeSchrodingerHZetaRecognitionStillOpen
+  ; toeSchrodingerHZetaActionIntertwinerStillOpen
+  ; toeSchrodingerCanonicalHomWeldStillOpen
+  ; toeTernary27PhaseReductionIsNotGlobalInversion
+  ; toeTernary27OrbitIndexingIsNotSemanticIdentity
+  ; toeTernary27ReductionIsNotMonster42SameObject
+  ; literalCFFITheoremWasNotInvented
+  ; esdSurfaceWasNotEdited
+  )
