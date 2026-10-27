@@ -690,3 +690,38 @@ criticalFamilyCountProofAliasMatches :
 criticalFamilyCountProofAliasMatches =
   TOE.toeCriticalFamilyCountIsSeven
 
+
+
+------------------------------------------------------------------------
+-- R546 firewall validation.
+------------------------------------------------------------------------
+
+opaqueEndpointPredicatesMatchR546 :
+  TOE.toeOpaqueEndpointPredicatesRemaining
+  ≡ R546.opaqueEndpointPredicatesRemaining
+opaqueEndpointPredicatesMatchR546 = refl
+
+opaqueEndpointPredicatesRemainFalse :
+  TOE.toeOpaqueEndpointPredicatesRemaining ≡ false
+opaqueEndpointPredicatesRemainFalse =
+  TOE.toeOpaqueEndpointPredicatesRemainingIsFalse
+
+constructorChoiceEqualitiesMatchR546 :
+  TOE.toeConstructorChoiceEqualitiesRemaining
+  ≡ R546.constructorChoiceEqualitiesRemaining
+constructorChoiceEqualitiesMatchR546 = refl
+
+constructorChoiceEqualitiesRemainFalse :
+  TOE.toeConstructorChoiceEqualitiesRemaining ≡ false
+constructorChoiceEqualitiesRemainFalse =
+  TOE.toeConstructorChoiceEqualitiesRemainingIsFalse
+
+allRemainingFamiliesProvedFlagMatchesR546 :
+  TOE.toeAllRemainingFamiliesAlreadyProved
+  ≡ R546.allRemainingFamiliesAreAlreadyProved
+allRemainingFamiliesProvedFlagMatchesR546 = refl
+
+allRemainingFamiliesAreNotAlreadyProved :
+  TOE.toeAllRemainingFamiliesAlreadyProved ≡ false
+allRemainingFamiliesAreNotAlreadyProved =
+  TOE.toeAllRemainingFamiliesAlreadyProvedIsFalse
