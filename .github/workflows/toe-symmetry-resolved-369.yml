@@ -100,6 +100,7 @@ jobs:
           dashi-repo related balabanCPhysicalPackageMaxCutCompilerLevel --root . --limit 20
           dashi-repo related balabanC4DensityAnchoredStressLaneLevel --root . --limit 20
           dashi-repo related r129ExportsLiteralSchwingerMembership --root . --limit 20
+          dashi-repo related r129ExportsCompositeMarkedSourceData --root . --limit 20
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
           dashi-repo related balabanGeneratedActionStressScaleCompilerLevel --root . --limit 20
           dashi-repo related balabanPublishedRGPhysicalSameObjectLevel --root . --limit 20
