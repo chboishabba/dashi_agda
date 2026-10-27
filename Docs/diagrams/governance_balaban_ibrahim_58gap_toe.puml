@@ -1,0 +1,48 @@
+@startuml
+title DASHI TOE governance + exact 58-gap + Balaban/Ibrahim convergence
+
+package "Legal governance" {
+  [SensibLaw legal-source authority]
+  [Governed legal workflow handoff]
+  [SensibLaw legal-source authority] --> [Governed legal workflow handoff]
+}
+
+package "Yang-Mills max-cut" {
+  [Gate-4 round-six cutset]
+  [Submission cardinality]
+  [Balaban scale-transfer frontier]
+  [Submission cardinality] --> [Gate-4 round-six cutset] : exact count = 58
+}
+
+package "Ibrahim / Pareto / Snowball" {
+  [Recognition Pareto]
+  [Character execution]
+  [Phase resolution]
+  [Historical discriminator]
+}
+
+[Governed legal workflow handoff] --> [GovernanceBalabanIbrahim58GapTOEExact]
+[Gate-4 round-six cutset] --> [GovernanceBalabanIbrahim58GapTOEExact]
+[Balaban scale-transfer frontier] --> [GovernanceBalabanIbrahim58GapTOEExact]
+[Recognition Pareto] --> [GovernanceBalabanIbrahim58GapTOEExact]
+[Character execution] --> [GovernanceBalabanIbrahim58GapTOEExact]
+[Phase resolution] --> [GovernanceBalabanIbrahim58GapTOEExact]
+[Historical discriminator] --> [GovernanceBalabanIbrahim58GapTOEExact]
+
+[GovernanceBalabanIbrahim58GapTOEExact] --> [EverythingTOESymmetryResolved369]
+[GovernanceBalabanIbrahim58GapTOEExact] --> [Unifier]
+[GovernanceBalabanIbrahim58GapTOEExact] --> [Unified.Everything]
+
+note right of [Gate-4 round-six cutset]
+This is the exact repository-native 58 count.
+No same-object proof identifies it with
+the stated 584-fibre fleet ledger.
+end note
+
+note bottom of [GovernanceBalabanIbrahim58GapTOEExact]
+No ESD mutation.
+No certification claim.
+No finite-to-continuum promotion.
+No source/search-to-proof promotion.
+end note
+@enduml
