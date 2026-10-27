@@ -28,6 +28,9 @@ import DASHI.Interop.SensibLawSemanticPromotionPolicy as Semantic
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
 import DASHI.Law.SensibLawITIRParityEverything as Parity
 import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact as SnowballLineage
+import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything as ParetoSearch
 
 ------------------------------------------------------------------------
 -- Reused canonical owners.
@@ -177,6 +180,64 @@ governanceSameMachineryDoesNotTransportAuthority =
   Domain.sameMachineryDoesNotTransportAuthority
 
 ------------------------------------------------------------------------
+-- Pareto / snowball governance reuse.
+--
+-- These owners are already used across SensibLaw and Ibrahim snowball lanes.
+-- This normalization keeps attribution and legal authority separate.
+------------------------------------------------------------------------
+
+governanceAttributionSnowballBoundary :
+  Snowball.AttributionSnowballBoundary
+governanceAttributionSnowballBoundary =
+  Snowball.canonicalAttributionSnowballBoundary
+
+governanceSnowballCitationDoesNotPromoteProof :
+  Snowball.citationMayPromoteProof governanceAttributionSnowballBoundary
+  ≡ false
+governanceSnowballCitationDoesNotPromoteProof =
+  refl
+
+governanceSnowballCitationDoesNotCreateAuthority :
+  Snowball.citationMayCreateAuthority governanceAttributionSnowballBoundary
+  ≡ false
+governanceSnowballCitationDoesNotCreateAuthority =
+  refl
+
+governanceSensibLawSnowballLineageBoundary :
+  SnowballLineage.SensibLawSnowballLineageBoundary
+governanceSensibLawSnowballLineageBoundary =
+  SnowballLineage.canonicalSensibLawSnowballLineageBoundary
+
+governanceSnowballCitationDoesNotCreateLegalAuthority :
+  SnowballLineage.SensibLawSnowballLineageBoundary.citationCreatesLegalAuthority
+    governanceSensibLawSnowballLineageBoundary
+  ≡ false
+governanceSnowballCitationDoesNotCreateLegalAuthority =
+  refl
+
+governanceSnowballSameSourceIdentityDoesNotDetermineClaimStage :
+  SnowballLineage.SensibLawSnowballLineageBoundary.sameSourceIdentityDeterminesClaimStage
+    governanceSensibLawSnowballLineageBoundary
+  ≡ false
+governanceSnowballSameSourceIdentityDoesNotDetermineClaimStage =
+  refl
+
+governanceParetoDirectiveIsNotLegalAuthority :
+  ParetoSearch.SearchDirectiveIsLegalAuthority → ⊥
+governanceParetoDirectiveIsNotLegalAuthority =
+  ParetoSearch.directiveIsNotAuthority
+
+governanceParetoFrontierDoesNotPrejudgeRetrieval :
+  ParetoSearch.FrontierCertificateMakesRetrievedSourceTrue → ⊥
+governanceParetoFrontierDoesNotPrejudgeRetrieval =
+  ParetoSearch.frontierCertificateDoesNotPrejudgeRetrieval
+
+governanceParetoFeedbackClosureStillNeedsActionAuthority :
+  ParetoSearch.FeedbackClosureAutomaticallyAuthorisesAction → ⊥
+governanceParetoFeedbackClosureStillNeedsActionAuthority =
+  ParetoSearch.feedbackClosureStillNeedsActionAuthority
+
+------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F control frame.
 ------------------------------------------------------------------------
 
@@ -218,7 +279,7 @@ canonicalSensibLawGovernanceTOEZKPFrame =
     { O-objective =
         "Normalize existing SensibLaw, legal-runtime, parity, and authority non-promotion proofs into the DASHI TOE graph."
     ; R-reuse =
-        "Reuse AuthorityNonPromotionCore, AuthorityBoundaryCore, SensibLawSemanticPromotionPolicy, SensibLawAgdaFirstLegalRuntimeEverything, SensibLawITIRParityEverything, and DomainPermeabilityAuthorityTransport."
+        "Reuse AuthorityNonPromotionCore, AuthorityBoundaryCore, SensibLawSemanticPromotionPolicy, SensibLawAgdaFirstLegalRuntimeEverything, SensibLawITIRParityEverything, DomainPermeabilityAuthorityTransport, SnowballAttributionProvenanceInvariantExact, SensibLawSnowballAttributionLineageAdapterExact, and SensibLawParetoProofDirectedCorpusSearchEverything."
     ; C-construction =
         "Add only a theorem-thin normalization owner and facade agreement. Do not duplicate semantic or legal proofs."
     ; S-safety =
