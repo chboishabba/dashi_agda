@@ -881,6 +881,38 @@ unifier369PermutationNoGoDoesNotCreateLinearAction =
 
 
 ------------------------------------------------------------------------
+-- Ternary-27 ABI / compiled-host non-promotion handoff.
+------------------------------------------------------------------------
+
+unifier369Ternary27FiniteStateABIExact =
+  MaxCut369.toe27FiniteStateABIExact
+
+unifier369Ternary27ByteCarrierABIExact =
+  MaxCut369.toe27ByteCarrierABIExact
+
+unifier369Ternary27CompiledHostU8Exact =
+  MaxCut369.toe27CompiledHostU8Exact
+
+unifier369Ternary27RustBindingStillUnpaid =
+  MaxCut369.toe27RustBindingStillUnpaid
+
+unifier369Ternary27CUDABindingStillUnpaid =
+  MaxCut369.toe27CUDABindingStillUnpaid
+
+unifier369Ternary27ROCmBindingStillUnpaid =
+  MaxCut369.toe27ROCmBindingStillUnpaid
+
+unifier369Ternary27HostByteDoesNotCreateDeviceByte =
+  MaxCut369.toe27HostByteDoesNotCreateDeviceByte
+
+unifier369Ternary27RuntimeSourceDoesNotCreateKernelCertification =
+  MaxCut369.toe27RuntimeSourceDoesNotCreateKernelCertification
+
+unifier369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  MaxCut369.toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+
+------------------------------------------------------------------------
 -- Singular-basin / coarse-RG obstruction consumer facade.
 ------------------------------------------------------------------------
 
