@@ -18,6 +18,9 @@ import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selecte
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F.
@@ -185,6 +188,53 @@ toeSingleActionProducerStillOpen :
     SingleAction.canonicalSingleActionProducerBoundary
   ≡ false
 toeSingleActionProducerStillOpen = refl
+
+------------------------------------------------------------------------
+-- Ternary-27 byte ABI / compiled host boundary.
+--
+-- Reuse the existing ABI and runtime owners. The finite codec and compiled
+-- host byte are paid. Rust, CUDA, ROCm, device equivalence, and Agda-kernel
+-- promotion remain unpaid. This is the normalized CFFI/kernel-BIDI boundary.
+------------------------------------------------------------------------
+
+toe27FiniteStateABIExact :
+  ABI.finite27StateIndexPaid ABI.canonicalTriadicByteABIBoundary ≡ true
+toe27FiniteStateABIExact = refl
+
+toe27ByteCarrierABIExact :
+  ABI.byteSizedFiniteCarrierPaid ABI.canonicalTriadicByteABIBoundary ≡ true
+toe27ByteCarrierABIExact = refl
+
+toe27CompiledHostU8Exact :
+  CompiledU8.compiledHostU8Oracle CompiledU8.currentRuntimeRoadmapAdvance ≡ true
+toe27CompiledHostU8Exact = refl
+
+toe27RustBindingStillUnpaid :
+  ABI.rustU8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
+toe27RustBindingStillUnpaid = refl
+
+toe27CUDABindingStillUnpaid :
+  ABI.cudaUint8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
+toe27CUDABindingStillUnpaid = refl
+
+toe27ROCmBindingStillUnpaid :
+  ABI.rocmUint8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
+toe27ROCmBindingStillUnpaid = refl
+
+toe27HostByteDoesNotCreateDeviceByte :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+toe27HostByteDoesNotCreateDeviceByte =
+  HostU8.hostByteDoesNotCreateDeviceByte
+
+toe27RuntimeSourceDoesNotCreateKernelCertification :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+toe27RuntimeSourceDoesNotCreateKernelCertification =
+  HostU8.runtimeSourceDoesNotCreateKernelCertification
+
+toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
 
 ------------------------------------------------------------------------
 -- Ibrahim non-promotion partitions.
