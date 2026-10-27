@@ -30,6 +30,7 @@ on:
       - 'DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda'
       - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
       - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda'
+      - 'DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda'
       - 'Docs/architecture/YMGoal1R559IbrahimTOE.puml'
       - 'DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda'
       - 'DASHI/Unifier.agda'
@@ -133,6 +134,7 @@ jobs:
           dashi-repo lineage --prefix DASHI.Unified.BalabanR559 --root .
           dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda --root .
           dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
           dashi-repo related canonicalRecognitionRouteParetoBoundary --root . --limit 20
           dashi-repo related currentMonster3BCharacterExecutionFrontier --root . --limit 20
@@ -171,6 +173,7 @@ jobs:
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda
             DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
