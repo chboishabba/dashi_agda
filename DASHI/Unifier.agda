@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1698,3 +1699,17 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- R2P2 source-typed optical-clock comparison; do not promote quantum gravity.
+------------------------------------------------------------------------
+
+unifierR2P2NoQGDiscovery :
+  R2P2.quantumGravityEstablishedHere R2P2.canonicalR2P2ClockComparisonBoundary ≡ false
+unifierR2P2NoQGDiscovery =
+  R2P2.r2p2HasNoClaimedQGDiscovery
+
+unifierR2P2NoAcceptedClockRatio :
+  R2P2.fullClockComparisonUncertaintyAcceptedHere R2P2.canonicalR2P2ClockComparisonBoundary ≡ false
+unifierR2P2NoAcceptedClockRatio =
+  R2P2.r2p2HasNoAcceptedClockRatio
