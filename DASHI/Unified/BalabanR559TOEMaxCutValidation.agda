@@ -9,6 +9,9 @@ import DASHI.Unified.BalabanR559TOEMaxCutExact as Joint
 import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
+import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
@@ -78,6 +81,54 @@ stressHilbertOwnerAgreementIsExact :
   ≡ Joint.r559StressHilbertCompiler Joint.canonicalBalabanR559TOEMaxCutReceipt
 stressHilbertOwnerAgreementIsExact =
   Joint.stressHilbertOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Canonical 58-field Gate-4 unresolved-cut boundary.
+------------------------------------------------------------------------
+
+jointGate4CountIsCanonical :
+  Joint.gate4UnresolvedCount Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Counts.gate4ObligationCount
+jointGate4CountIsCanonical = refl
+
+jointGate4CountIs58 :
+  Joint.gate4UnresolvedCount Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ 58
+jointGate4CountIs58 =
+  Joint.gate4UnresolvedCountIs58 Joint.canonicalBalabanR559TOEMaxCutReceipt
+
+jointGate4DefinitionLevelMatchesOwner :
+  Joint.gate4DefinitionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Gate4.physicalClosureRound6CutsetDefinitionLevel
+jointGate4DefinitionLevelMatchesOwner = refl
+
+jointGate4InhabitantsLevelMatchesOwner :
+  Joint.gate4InhabitantsLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Gate4.physicalClosureRound6CutsetInhabitantsLevel
+jointGate4InhabitantsLevelMatchesOwner = refl
+
+jointGate4InhabitantsDoNotSelfPromote :
+  Proof.promotable
+    (Joint.gate4InhabitantsLevel Joint.canonicalBalabanR559TOEMaxCutReceipt)
+  ≡ false
+jointGate4InhabitantsDoNotSelfPromote =
+  Proof.conditionalDoesNotSelfPromote
+
+rootGate4CountIs58 :
+  TOE.toeBalabanR559Gate4UnresolvedCount ≡ 58
+rootGate4CountIs58 =
+  TOE.toeBalabanR559Gate4UnresolvedCountIs58
+
+unifierGate4CountIs58 :
+  Unifier.unifierBalabanR559Gate4UnresolvedCount ≡ 58
+unifierGate4CountIs58 =
+  Unifier.unifierBalabanR559Gate4UnresolvedCountIs58
+
+physicsGate4CountIs58 :
+  Physics.yangMillsBalabanR559Gate4UnresolvedCount ≡ 58
+physicsGate4CountIs58 =
+  Physics.yangMillsBalabanR559Gate4UnresolvedCountIs58
 
 ------------------------------------------------------------------------
 -- Fail-closed promotion checks.
