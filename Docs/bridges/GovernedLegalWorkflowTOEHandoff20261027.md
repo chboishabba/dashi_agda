@@ -302,3 +302,25 @@ The PlantUML view is
 No ESD surface is modified.
 No legal rule is added.
 No theorem ownership is reassigned.
+
+## 27 October 2026 — three-TOE-facade same-object closure
+
+**O — Objective.** Connect one existing canonical governed legal-source authority handoff across `DASHI/EverythingTOESymmetryResolved369.agda`, `DASHI/Unifier.agda`, and `DASHI/Unified/Everything.agda`. This does not create a new legal rule or vendor ontology.
+
+**R — Reuse.** Keep the original `SensibLawLegalSourceAuthorityEvidenceExact` owner, existing `GovernedLegalWorkflowTOEBridgeExact` canonical handoff, and existing three facade aliases. GitHub search and the latest #1285, #1306, #1308, and #1304 PRs were checked before editing. #1304 owns the Balaban/Ibrahim/Snowball lane and is not merged into this legal lane.
+
+**C — Construction.** The top-level 369 root now imports both facade modules by name and exposes three direct definitional equalities: `toe369LegalGovernanceUnifierSameObject`, `toe369LegalGovernanceUnifiedSameObject`, and `toe369LegalGovernanceAllThreeSameCanonical`. All have `refl` bodies. This is one source-level convergence claim, not a new independent theorem owner. The existing convergence test now checks both import names, all three equalities, the exact canonical aliases, and trust-escape absence.
+
+**S — Safety.** The canonical owner keeps five firewalls. A candidate source does not establish legal authority. A legal-system match does not establish legal authority. Current validity does not establish case-specific applicability. Semantic admission does not establish legal-source authority. Document role does not establish legal authority. A complete Actionstep-like task or matter workflow does not establish truth. Source-level equality cannot confer law, certification, or factual authority.
+
+**L — Lane.** One legal-governance facade lane only. The ESD repository, `*digital_esd*` files, and `*ESD*` modules were not edited. This lane retains original SensibLaw contributors' theorem provenance. The process roles of `casey-git-clone`, `zkSEC`, and `meta-introspector/zkperf`, `zos-server`, `erdfa-py`, and `aristotle-cli-rs` remain credited in the original bridge. No external contributor is assigned new mathematical proof ownership.
+
+**P — Preconditions.** All three facade values are aliases of `canonicalGovernedLegalWorkflowAuthorityInvariantHandoff`. The canonical bridge is already in the TOE import graph. The root imports the existing regression. No new Actionstep-specific ontology exists in this change.
+
+**P — Invariants.** The three aliases are definitionally equal to one constructor. Source validity, legal authority, applicability, and verified case facts stay separate. The 584 discharged fibres and 58 fleet formal gaps are user-provided planning context. This lane neither verifies that denominator nor claims to discharge additional unrelated fleet gaps. The three cited macro-eigenvalues are not physical theorems merely because they were supplied.
+
+**P — Postconditions.** All three same-object equality declarations are written to the root. The deterministic source regression is present. No duplicate implementation, unmerged PR sibling import, or ESD mutation is introduced.
+
+**G — Governance.** ITIL, ISO 9000, ISO/IEC 42001, 27001, 27701, 23894, ISO 9241, NIST AI RMF, Six Sigma, and C4/PlantUML remain design and audit lenses only. This commit does not award a certification.
+
+**F — Verification.** Exact current GitHub readback confirms each imported symbol and canonical alias. The edited root has no `postulate`, `allow-unsolved-metas`, `TERMINATING`, `NO_POSITIVITY_CHECK`, or unsolved hole syntax. This runtime lacks `agda` and a repository checkout. The new equalities are therefore **source-written and readback-verified**, **not kernel-verified**. Do not report the new test as executed merely because its declaration is committed. A source-tree typecheck remains a required separate receipt.
