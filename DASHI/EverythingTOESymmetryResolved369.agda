@@ -19,6 +19,7 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Unified.GRQuantumProofTermRegression
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.Relate369HyperfabricPantsTOEExact as Relate369PantsTOE
 
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
@@ -280,3 +281,52 @@ toe369YangMillsGoal1C4LiteralSectorRecoveryLevel =
 toe369YangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 toe369YangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+------------------------------------------------------------------------
+-- Relate 369 / hyperfabric / pants gluing normalized non-promotion surface.
+------------------------------------------------------------------------
+
+toe369PantsSeamDoesNotRewriteTopology :
+  Relate369PantsTOE.TypedPants.interfaceMatchAutomaticallyRewritesIncidence
+    Relate369PantsTOE.typedPantsBoundary
+  ≡ false
+toe369PantsSeamDoesNotRewriteTopology =
+  Relate369PantsTOE.pantsSeamDoesNotRewriteTopology
+
+toe369FinitePantsPathStillNotSmoothSurface :
+  Relate369PantsTOE.Pants369.finitePantsPathIsSmoothPantsSurface
+    Relate369PantsTOE.Pants369.canonicalColourWheelNinePantsBoundary
+  ≡ false
+toe369FinitePantsPathStillNotSmoothSurface =
+  Relate369PantsTOE.finitePantsPathIsNotSmoothPantsSurface
+
+toe369CardinalityDoesNotCreateAdmissibleGluing :
+  Relate369PantsTOE.Sheaf369.cardinalityAloneCreatesAdmissibleGluing
+    Relate369PantsTOE.Sheaf369.canonicalJSheafHyperformDescentFrontier
+  ≡ false
+toe369CardinalityDoesNotCreateAdmissibleGluing =
+  Relate369PantsTOE.sheafCardinalityAloneDoesNotCreateAdmissibleGluing
+
+toe369AxisTwelveDoesNotBecomeModularWeightTwelve :
+  Relate369PantsTOE.Sheaf369.axisTwelveEqualsModularWeightTwelveByDefinition
+    Relate369PantsTOE.Sheaf369.canonicalJSheafHyperformDescentFrontier
+  ≡ false
+toe369AxisTwelveDoesNotBecomeModularWeightTwelve =
+  Relate369PantsTOE.axisTwelveDoesNotEqualModularWeightTwelveByDefinition
+
+toe369SharedHyperformalCarrierDoesNotPromoteExternalTheorem :
+  (object : Relate369PantsTOE.PNF369.HyperfabricObject) →
+  Relate369PantsTOE.PNF369.hyperfabricPromotesExternalTheorem object ≡ false
+toe369SharedHyperformalCarrierDoesNotPromoteExternalTheorem =
+  Relate369PantsTOE.sharedHyperformalCarrierDoesNotPromoteExternalTheorem
+
+toe369RelateHyperfabricPantsZKPFrame :
+  Relate369PantsTOE.Relate369HyperfabricPantsTOEZKPFrame
+toe369RelateHyperfabricPantsZKPFrame =
+  Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEZKPFrame
+
+toe369RelateHyperfabricPantsReceipt :
+  Relate369PantsTOE.Relate369HyperfabricPantsTOEReceipt
+toe369RelateHyperfabricPantsReceipt =
+  Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEReceipt
