@@ -23,6 +23,11 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'DASHI/Analysis/Everything.agda'
+      - 'DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda'
+      - 'DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda'
+      - 'DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda'
       - 'DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
@@ -41,6 +46,11 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'DASHI/Analysis/Everything.agda'
+      - 'DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda'
+      - 'DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda'
+      - 'DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda'
       - 'DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
@@ -105,6 +115,16 @@ jobs:
           dashi-repo related exactHeadLeanKernelReceiptIsStillOpen --root . --limit 20
           dashi-repo discover 'Riemann three tap current Lean frontier inverse-square curvature compensation signed fifth non-promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Analysis.RiemannThreeTap --root .
+          dashi-repo diagnose DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda --root .
+          dashi-repo related selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic --root . --limit 20
+          dashi-repo related independentArithmeticDiagonalProducerStillAbsent --root . --limit 20
+          dashi-repo diagnose DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda --root .
+          dashi-repo related canonicalStrictTP2TrancheReceipt --root . --limit 20
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
+          dashi-repo related searchPriorityDoesNotCreateProof --root . --limit 20
+          dashi-repo related degree729DoesNotCreateMonsterHZetaRecognition --root . --limit 20
+          dashi-repo discover 'Ibrahim Pareto snowball Monster 3B historical discriminator non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
@@ -141,6 +161,25 @@ jobs:
             exit 1
           fi
 
+      - name: Fast Agda preflight on converged max-cut graph
+        run: |
+          files=(
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Analysis/Everything.agda
+            DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda
+            DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda
+            DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda
+            DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+          )
+          for file in "${files[@]}"; do
+            dashi-agda-preflight --root . "$file"
+          done
+
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
         with:
@@ -157,6 +196,11 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda
+            DASHI/Analysis/Everything.agda
+            DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda
+            DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda
+            DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
@@ -180,6 +224,11 @@ jobs:
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda
+            DASHI/Analysis/Everything.agda
+            DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda
+            DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda
+            DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
