@@ -8,6 +8,7 @@ import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as Handoff
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as Distilled
 import DASHI.Unifier as Unifier
+import DASHI.EverythingTOESymmetryResolved369 as TOE
 
 legalSourceHandoffIsCanonical :
   Handoff.legalSourceGenealogyHandoff
@@ -93,3 +94,24 @@ actionstepStyleTargetStillNeedsOwnAuthorityWitness :
   Handoff.toeActionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
 actionstepStyleTargetStillNeedsOwnAuthorityWitness =
   Handoff.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+
+
+toeExpertQualificationFirewallUsesCanonicalOwner :
+  Handoff.QualificationAutomaticallyForensicCompliance → ⊥
+toeExpertQualificationFirewallUsesCanonicalOwner =
+  TOE.toeExpertQualificationDoesNotCreateForensicCompliance
+
+unifierExpertQualificationFirewallUsesCanonicalOwner :
+  Handoff.QualificationAutomaticallyForensicCompliance → ⊥
+unifierExpertQualificationFirewallUsesCanonicalOwner =
+  Unifier.unifierExpertQualificationDoesNotCreateForensicCompliance
+
+toeActionstepVendorIdentityFirewallMatchesHandoff :
+  TOE.toeActionstepStyleVendorIdentityCreatesAuthority
+  ≡ Handoff.toeActionstepStyleVendorIdentityCreatesAuthority
+toeActionstepVendorIdentityFirewallMatchesHandoff = refl
+
+unifierActionstepAuthorityWitnessMatchesHandoff :
+  Unifier.unifierActionstepStyleTargetNeedsOwnAuthorityWitness
+  ≡ Handoff.toeActionstepStyleTargetNeedsOwnAuthorityWitness
+unifierActionstepAuthorityWitnessMatchesHandoff = refl
