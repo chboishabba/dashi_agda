@@ -812,3 +812,81 @@ toeTwoDigitStreamCannotRecoverThird :
   FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
 toeTwoDigitStreamCannotRecoverThird =
   FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
+
+------------------------------------------------------------------------
+-- Implement-A-to-D reuse-only TOE normalization.
+------------------------------------------------------------------------
+
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+
+toeYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+toeYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
+toeYMImplementAToDZKPFrame =
+  YMAD.canonicalYMImplementAToDZKPFrame
+
+toeYMImplementAToDGate4UnresolvedCount : ℕ
+toeYMImplementAToDGate4UnresolvedCount =
+  YMAD.gate4UnresolvedCount YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDGate4UnresolvedCountIs58 :
+  toeYMImplementAToDGate4UnresolvedCount ≡ 58
+toeYMImplementAToDGate4UnresolvedCountIs58 =
+  YMAD.gate4UnresolvedCountIs58 YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDPublishedContinuumStillBlocked :
+  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+toeYMImplementAToDPublishedContinuumStillBlocked =
+  YMAD.publishedContinuumPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDContinuumMassGapStillBlocked :
+  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+toeYMImplementAToDContinuumMassGapStillBlocked =
+  YMAD.continuumMassGapPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+toeYMImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+toeYMImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Kernel-bidi / ternary-27 / byte-ABI max-cut convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEExact as Kernel27TOE
+
+toeR559IbrahimFleetKernelBidiTernary27Receipt :
+  Kernel27TOE.R559IbrahimFleetKernelBidiTernary27TOEReceipt
+toeR559IbrahimFleetKernelBidiTernary27Receipt =
+  Kernel27TOE.canonicalR559IbrahimFleetKernelBidiTernary27TOEReceipt
+
+toeTriadicRustBindingStillUnpaid :
+  Kernel27TOE.ABI.rustU8BindingPaid Kernel27TOE.triadicByteBoundary ≡ false
+toeTriadicRustBindingStillUnpaid =
+  Kernel27TOE.rustU8BindingStillUnpaid
+
+toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner :
+  Kernel27TOE.KernelBidi.characterIsotypyConstructsActionIntertwiner
+    Kernel27TOE.kernelBidiBoundary ≡ false
+toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner =
+  Kernel27TOE.kernelCharacterIsotypyStillDoesNotConstructActionIntertwiner
+
+toeSelected3BSingleActionProducerStillUninhabited :
+  Kernel27TOE.SingleProducer.actualSingleProducerInhabitedHere
+    Kernel27TOE.singleProducerBoundary ≡ false
+toeSelected3BSingleActionProducerStillUninhabited =
+  Kernel27TOE.singleActionProducerStillUninhabited
