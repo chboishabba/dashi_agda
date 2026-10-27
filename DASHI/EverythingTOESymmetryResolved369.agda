@@ -21,6 +21,31 @@ import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 
 
+
+------------------------------------------------------------------------
+-- Exact Yang-Mills theorem-owner exports.
+--
+-- These names come from the normalized YM TOE owner.
+-- No proof is copied here.
+------------------------------------------------------------------------
+
+open YMTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
+
 ------------------------------------------------------------------------
 -- Direct Yang-Mills TOE exports.
 --
@@ -93,3 +118,11 @@ toe369YangMillsClayNotPromoted :
   YMTOE.toeClayYangMillsPromoted ≡ false
 toe369YangMillsClayNotPromoted =
   YMTOE.toeClayYangMillsPromotedIsFalse
+
+toe369YangMillsUniversalBetaFloorLevel : ProofLevel
+toe369YangMillsUniversalBetaFloorLevel =
+  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
+
+toe369YangMillsLiteralUniformRemainderFloorLevel : ProofLevel
+toe369YangMillsLiteralUniformRemainderFloorLevel =
+  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
