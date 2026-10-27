@@ -121,6 +121,8 @@ record YMImplementAToDTOEMaxCutReceipt : Set where
     dCylinderBooleanAlgebra : ProofLevel
 
     -- Canonical Gate-4 scope.
+    -- Fleet target cardinality and Gate-4 cardinality are separate provenance surfaces.
+    -- Equal cardinality does not establish same-object identity.
     gate4UnresolvedCount : ℕ
     gate4UnresolvedCountIs58 : gate4UnresolvedCount ≡ 58
     gate4DefinitionLevel : ProofLevel
