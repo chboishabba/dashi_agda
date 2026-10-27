@@ -94,6 +94,22 @@ toeBalabanGeneratedActionStressScaleCompilerLevel : ProofLevel
 toeBalabanGeneratedActionStressScaleCompilerLevel =
   BalabanRGTOE.balabanGeneratedActionStressScaleCompilerLevel
 
+toeBalabanStressCauchyModulusCompilerLevel : ProofLevel
+toeBalabanStressCauchyModulusCompilerLevel =
+  BalabanRGTOE.balabanStressCauchyModulusCompilerLevel
+
+toeBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
+toeBalabanStressCauchyPhysicalInsertionLevel =
+  BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+toeBalabanStressHilbertBoundCompilerLevel : ProofLevel
+toeBalabanStressHilbertBoundCompilerLevel =
+  BalabanRGTOE.balabanStressHilbertBoundCompilerLevel
+
+toeBalabanStressHilbertPhysicalShellLevel : ProofLevel
+toeBalabanStressHilbertPhysicalShellLevel =
+  BalabanRGTOE.balabanStressHilbertPhysicalShellLevel
+
 toeBalabanPublishedFlowRegularEProjectionCompilerLevel : ProofLevel
 toeBalabanPublishedFlowRegularEProjectionCompilerLevel =
   BalabanRGTOE.balabanPublishedFlowRegularEProjectionCompilerLevel
