@@ -70,3 +70,22 @@ unifierContradictionGapsRemainSeparate :
   Fleet.FleetContradictionGapReclassificationPermission → ⊥
 unifierContradictionGapsRemainSeparate =
   Unifier.unifierFleetContradictionGapsRemainSeparate
+
+
+toeFleetPlanningBoundaryMatchesOwner :
+  TOE.toeFleetPlanningBoundary ≡ Fleet.fleetPlanningBoundary
+toeFleetPlanningBoundaryMatchesOwner = refl
+
+unifierFleetPlanningBoundaryMatchesOwner :
+  Unifier.unifierFleetPlanningBoundary ≡ Fleet.fleetPlanningBoundary
+unifierFleetPlanningBoundaryMatchesOwner = refl
+
+toeFleetVectorCoordinateStillNotTruth :
+  TOE.toeFleetVectorCoordinateDoesNotCreateTruth
+  ≡ Fleet.fleetVectorCoordinateDoesNotCreateTruth
+toeFleetVectorCoordinateStillNotTruth = refl
+
+unifierFleetVectorCoordinateStillNotTruth :
+  Unifier.unifierFleetVectorCoordinateDoesNotCreateTruth
+  ≡ Fleet.fleetVectorCoordinateDoesNotCreateTruth
+unifierFleetVectorCoordinateStillNotTruth = refl
