@@ -29,6 +29,19 @@ toeGloBEIsNotPersonalStockCap :
 toeGloBEIsNotPersonalStockCap =
   Base.corporateMinimumTaxIsNotPersonalWealthCap
 
+-- Hypothetical idle equity and statutory vacant residential property do not
+-- share a legal taxable object merely because first-year rates can match.
+toeProposedIdleEquityLevyIsNotVacancyTax :
+  Base.proposedDurationEscalatingIdleEquityLevy ≡
+  Base.vacantHomesStatusLevy → ⊥
+toeProposedIdleEquityLevyIsNotVacancyTax =
+  Base.idleEquityIsNotVacantHouse
+
+toeIdleEquityAIScheduleDoesNotCreateStatute :
+  Base.AIIdleEquityProposalIsEnactedLaw → ⊥
+toeIdleEquityAIScheduleDoesNotCreateStatute =
+  Base.aiIdleEquitySuggestionCannotSelfEnact
+
 -- Source-written exact witness: one tax observation cannot recover votes.
 toeTaxReceiptDoesNotDetermineVoting :
   INF.FactorsThrough Soc.assessedTax Soc.controllingVotes → ⊥
