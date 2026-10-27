@@ -204,6 +204,58 @@ levels. Nothing is imported as theorem authority merely because a
 simulation uses the word `spiral`. See the repository's
 same-object/Monster/Ibrahim attribution rules.
 
+### Pareto / snowball / Ibrahim check against latest PR work
+
+Source-read comparisons were made with
+[#1272](https://github.com/chboishabba/dashi_agda/pull/1272)
+(Fourier-pixel same-device phase/inverse-identifiability),
+[#1246](https://github.com/chboishabba/dashi_agda/pull/1246)
+(Ferrocell classical control and inverse ambiguity),
+[#1252](https://github.com/chboishabba/dashi_agda/pull/1252)
+(psychotronics strongest-admissible local-mechanism steelman),
+[#1241](https://github.com/chboishabba/dashi_agda/pull/1241)
+(KK physical source-to-observable BIDI), and
+[#1402](https://github.com/chboishabba/dashi_agda/pull/1402)
+(current TOE source-owner/no-continuum-promotion convergence).
+These PRs are separate **open** branches. Their methods are useful,
+but no unmerged files or proofs are silently adopted.
+
+The **existing master** Ibrahim owner is
+`DASHI.Wikimedia.IbrahimSnowballAtomicClaimIntentExperimentAdequacyBidiExact`.
+Its canonical chain is:
+
+```text
+user's claimed effect -> atomic assertion -> formal constructor
+ -> measurable operationalisation -> actual test design
+ -> selected consumer -> executed result
+```
+
+We apply its original-owner rule rather than create a second
+Ibrahim/Monster or experiment adequacy ontology. The
+`scripts/kozyrev_mirror_classical_null.py` consumer is **exactly**
+*independent-ray conservation/parity under specular reflection of a
+synthetic polygon*. It is **not** the patent focus, a 3D wave
+boundary problem, an electromagnetic shield, a rotating platform
+measurement, a remote-information claim, medical efficacy, or
+geometric-torsion observation. Success for this consumer cannot
+be reported as success for any of those downstream questions.
+
+The second canonical owner
+`DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact` already
+aggregates the original source/author-preserving Pareto, snowball
+and identity firewalls. This Kozyrev cut does **not** amend, fork,
+re-own or import Monster 3B representation claims. The Ibrahim
+Monster 3B priority and exact-character evidence boundaries remain
+untouched; neither `S3` wreath alignment nor a shared `C3`
+phase is a proof of the *same object*.
+
+The next source-acquisition snowball, in order of information gain,
+is **patent original diagrams and plate curvature**, **measured
+sample/material**, **single accepted physical field operator and
+observable**, **numerical method and convergence**, **independently
+locked experimental protocol**, **a second operator's data**.
+This ordering prevents cycling through generic spiral foundations.
+
 ### What P2-A closes and what P2-B still needs
 
 **P2-A completed as executed synthetic fixture:** specular parity,
