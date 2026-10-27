@@ -44,7 +44,7 @@ module DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact where
 -- Kernel certification requires an exact-head Agda or CI receipt.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -61,6 +61,8 @@ import DASHI.Moonshine.C3FourierConjugationExact as Fourier
 import DASHI.Moonshine.Monster3BPhaseTransportExact as Monster
 import DASHI.Base369Ternary27SpectralGeometryValidation as SpectralValidation
 import DASHI.Core.CoarseFineFabricCalculusRegression as CoarseValidation
+import DASHI.Wikimedia.IbrahimMonster3BRecognitionRouteParetoExact as Pareto
+import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact as Selected3B
 
 ------------------------------------------------------------------------
 -- 1. Legacy Unifier ternary carrier <-> canonical SSP trit.
@@ -199,3 +201,34 @@ toeBase369IsNotGenericFabric :
   ≡ false
 toeBase369IsNotGenericFabric =
   CoarseValidation.base369IsInstanceNotGenericFabric
+
+------------------------------------------------------------------------
+-- 5. Pareto / Snowball / Ibrahim recognition frontier.
+--
+-- The phase intertwiner above is not an action-recognition theorem.
+-- Reuse the current recognition Pareto owner and corrected selected-3B max-cut.
+------------------------------------------------------------------------
+
+toeMonsterActualActionRecognitionStillOpen :
+  Pareto.RecognitionRouteParetoBoundary.actualActionRecognitionObserved
+    Pareto.canonicalRecognitionRouteParetoBoundary
+  ≡ false
+toeMonsterActualActionRecognitionStillOpen = refl
+
+toeSelected3BOnlyRetractionAndProjectedActionRemain :
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.onlyLinearRetractionAndProjectedActionRemain
+    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary
+  ≡ true
+toeSelected3BOnlyRetractionAndProjectedActionRemain = refl
+
+toeSelected3BActualRetractionStillOpen :
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.actualLinearRetractionInhabitedHere
+    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary
+  ≡ false
+toeSelected3BActualRetractionStillOpen = refl
+
+toeSelected3BProjectedActionStillOpen :
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.projectedActionInputInhabitedHere
+    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary
+  ≡ false
+toeSelected3BProjectedActionStillOpen = refl
