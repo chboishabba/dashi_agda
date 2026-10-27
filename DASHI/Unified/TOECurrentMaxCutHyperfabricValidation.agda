@@ -59,11 +59,11 @@ unifierStreamPrefixLossMatchesOwner =
   Unifier.unifierCurrentTwoDigitStreamCannotRecoverThird
 
 toeFleetGate4SameObjectStillBlocked :
-  Owner.Current.Fleet58IsGate4SameObject → ⊥
+  Owner.Fleet58IsGate4SameObject → ⊥
 toeFleetGate4SameObjectStillBlocked =
   TOE.toeCurrentFleet58DoesNotBecomeGate4SameObject
 
 unifierFleetGate4SameObjectStillBlocked :
-  Owner.Current.Fleet58IsGate4SameObject → ⊥
+  Owner.Fleet58IsGate4SameObject → ⊥
 unifierFleetGate4SameObjectStillBlocked =
   Unifier.unifierCurrentFleet58DoesNotBecomeGate4SameObject
