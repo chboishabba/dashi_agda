@@ -89,6 +89,8 @@ import DASHI.Reasoning.Trialectic369Selected3BLinearCoreCompatibilityExact as Co
 import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as ActualAcquisition
 import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as PhaseWeld
 import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VOAComposition
+import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestAction
+import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as ShortestCandidate
 
 ------------------------------------------------------------------------
 -- 1. Canonical coarse/fine reopening.
@@ -721,7 +723,69 @@ toeVOATwelveSeventyEightIntertwinerStillOpen = refl
 
 
 ------------------------------------------------------------------------
--- 14. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+-- 14. Shortest-source action-recognition compiler max cut.
+--
+-- Recognition is compiler output once the shortest source is inhabited.
+-- The upstream Base369 candidate and downstream Fin90 inertia action remain
+-- distinct payments.
+------------------------------------------------------------------------
+
+toeShortestSourceContainsActualZetaRecognition :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.shortestSourceContainsActualZetaRecognition
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ true
+toeShortestSourceContainsActualZetaRecognition = refl
+
+toeShortestSourceCompilesSingleActionProducer :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.singleActionProducerCompiled
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ true
+toeShortestSourceCompilesSingleActionProducer = refl
+
+toeShortestSourceCompilesActualActionRecognition :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.actualActionRecognitionCompiled
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ true
+toeShortestSourceCompilesActualActionRecognition = refl
+
+toeSeparateActualActionRecognitionLeafNotNeeded :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.separateTrialecticActualActionRecognitionLeafNeeded
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ false
+toeSeparateActualActionRecognitionLeafNotNeeded = refl
+
+toeRecognitionDoesNotCompileMultiplicityInertia :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.multiplicityInertiaAttachmentCompiledFromRecognitionAlone
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ false
+toeRecognitionDoesNotCompileMultiplicityInertia = refl
+
+toeBase369CandidateCompilesRecognition :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.base369CandidateCompilesRecognition
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ true
+toeBase369CandidateCompilesRecognition = refl
+
+toeBase369CandidateCompilesCapstoneTail :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.capstoneTailBecomesCompilerOutput
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ true
+toeBase369CandidateCompilesCapstoneTail = refl
+
+toeBase369ShortestCandidateStillUninhabited :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.base369CandidateInhabitedHere
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ false
+toeBase369ShortestCandidateStillUninhabited = refl
+
+toeCharacterIsotypyDoesNotCreateBase369Candidate :
+  ShortestCandidate.CharacterIsotypyCreatesBase369Candidate → ⊥
+toeCharacterIsotypyDoesNotCreateBase369Candidate =
+  ShortestCandidate.characterIsotypyDoesNotCreateBase369Candidate
+
+
+------------------------------------------------------------------------
+-- 15. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
 ------------------------------------------------------------------------
 
 record TOE369MaxCutZKPFrame : Set where
