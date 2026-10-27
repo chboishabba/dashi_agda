@@ -93,3 +93,17 @@ unifierProducerSourceStillNotExecution :
   Ibrahim.ProducerSourceCreatesRunReceipt → ⊥
 unifierProducerSourceStillNotExecution =
   Unifier.unifierIbrahimProducerSourceDoesNotCreateRunReceipt
+
+------------------------------------------------------------------------
+-- Canonical 27-state proofs remain the same functions in both TOE roots.
+-- No carrier identity between the recoverable code and the face model follows.
+------------------------------------------------------------------------
+
+toeTernary27NonDescentIsSameOwner :
+  TOE.toeTernary27FaceCannotDescend ≡ Unifier.toeTernary27FaceCannotDescend
+toeTernary27NonDescentIsSameOwner = refl
+
+toeTernary27ConsumerRecoveryIsSameOwner :
+  TOE.toeTernary27DependentCodePreservesConsumer
+  ≡ Unifier.toeTernary27DependentCodePreservesConsumer
+toeTernary27ConsumerRecoveryIsSameOwner = refl
