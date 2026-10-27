@@ -512,6 +512,15 @@ thicknessTenthsMillimetre : PatentThicknessReading → Nat
 thicknessTenthsMillimetre englishAbstractHalfMillimetre = 5
 thicknessTenthsMillimetre patentDescriptionClaimOnePointFiveMillimetre = 15
 
+-- Optional motor rotation is described as 1-3 metres PER MINUTE.
+-- Linear speed does not supply angular speed without a measured radius.
+-- Do not use a stated transport speed as 1-3 revolutions per minute.
+patentOptionalMotorLinearSpeedMinimumMillimetresPerMinute : Nat
+patentOptionalMotorLinearSpeedMinimumMillimetresPerMinute = 1000
+
+patentOptionalMotorLinearSpeedMaximumMillimetresPerMinute : Nat
+patentOptionalMotorLinearSpeedMaximumMillimetresPerMinute = 3000
+
 patentThicknessReadingsConflict :
   thicknessTenthsMillimetre englishAbstractHalfMillimetre
   ≢ thicknessTenthsMillimetre patentDescriptionClaimOnePointFiveMillimetre
