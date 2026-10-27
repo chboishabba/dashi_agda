@@ -525,15 +525,15 @@ criticalPathCompilerIsChecked :
 criticalPathCompilerIsChecked = refl
 
 criticalSeparateWilsonFamilyNotRequired :
-  TOE.toeSeparateContinuumWilsonFamilyRequired ≡ false
+  TOE.toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired ≡ false
 criticalSeparateWilsonFamilyNotRequired = refl
 
 criticalFiniteMoscoRouteNotRequired :
-  TOE.toeFiniteHamiltonianMoscoRouteRequired ≡ false
+  TOE.toeCriticalFiniteHamiltonianMoscoRouteRequired ≡ false
 criticalFiniteMoscoRouteNotRequired = refl
 
 criticalConservativeClayKeepsFullC :
-  TOE.toeFullCLayerRetainedForConservativeClayExistence ≡ true
+  TOE.toeCriticalFullCLayerRetainedForConservativeClayExistence ≡ true
 criticalConservativeClayKeepsFullC = refl
 
 
