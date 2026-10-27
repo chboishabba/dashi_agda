@@ -316,3 +316,29 @@ unifiedCurrent369SynthesisDoesNotEraseComparator :
   CurrentMaxCut.synthesisErasesComparator ≡ false
 unifiedCurrent369SynthesisDoesNotEraseComparator =
   CurrentMaxCut.synthesisErasesComparatorIsFalse
+
+------------------------------------------------------------------------
+-- Current max-cut + generic hyperfabric convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutHyperfabricExact as CurrentHyper
+
+unifiedCurrentMaxCutHyperfabricReceipt :
+  CurrentHyper.TOECurrentMaxCutHyperfabricReceipt
+unifiedCurrentMaxCutHyperfabricReceipt =
+  CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
+
+unifiedCurrentHyperformNineCount :
+  CurrentHyper.HyperformNineCountProof
+unifiedCurrentHyperformNineCount =
+  CurrentHyper.currentHyperformNineCount
+
+unifiedCurrentHyperformTwentySevenCount :
+  CurrentHyper.HyperformTwentySevenCountProof
+unifiedCurrentHyperformTwentySevenCount =
+  CurrentHyper.currentHyperformTwentySevenCount
+
+unifiedCurrentHyperformEightyOneCount :
+  CurrentHyper.HyperformEightyOneCountProof
+unifiedCurrentHyperformEightyOneCount =
+  CurrentHyper.currentHyperformEightyOneCount
