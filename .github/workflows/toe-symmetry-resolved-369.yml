@@ -172,6 +172,8 @@ jobs:
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/GovernedLegalWorkflowComplianceTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowComplianceTOEValidation.agda
           dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
@@ -197,6 +199,8 @@ jobs:
             DASHI/Unified/Everything.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/GovernedLegalWorkflowComplianceTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowComplianceTOEValidation.agda
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
@@ -224,6 +228,8 @@ jobs:
             DASHI/Unifier.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/GovernedLegalWorkflowComplianceTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowComplianceTOEValidation.agda
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
