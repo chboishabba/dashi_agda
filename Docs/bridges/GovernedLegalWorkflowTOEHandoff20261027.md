@@ -246,3 +246,29 @@ The exact branch remains fail-closed.
 No ESD path is changed.
 No standards certification is claimed.
 No meta-introspector theorem authority is imported.
+
+
+## 2026-10-27 source-authority Pareto completion
+
+**Original owner reused**: `DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact`. This owner already proves the negative boundaries:
+- candidate recognition is not legal-source authority;
+- same jurisdiction/system does not independently create legal authority;
+- a currently valid text does not establish application to a particular legal question;
+- semantic admission authority is not the authority of a legal source;
+- document role does not supply legal-source authority.
+
+`DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact` now imports the existing owner. It adds only aliases and a canonical boundary value. No duplicate `LegalSourceAuthorityReceiptInState`, jurisdiction logic, authority evaluator, Actionstep semantics, or new theorem is invented.
+
+**Three direct facades**: `DASHI.EverythingTOESymmetryResolved369`, `DASHI.Unifier`, and `DASHI.Unified.Everything` expose the same inherited proof terms for candidate, validity and admission non-promotion. `DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression` checks the Unifier aliases against the owner. `tests/test_governed_legal_workflow_toe_convergence.py` covers all three facade names and original import.
+
+**ZKP O/R/C/S/L/P/G/F**
+- **O** — Connect actual workflow operations and accepted legal source authority without conflation.
+- **R** — Reuse `SensibLawSemanticPromotionPolicy`, `SensibLawLegalSemanticAdmissionFrontierExact`, `SensibLawLegalSourceAuthorityEvidenceExact`, and the existing governed-workflow bridge.
+- **C** — Add only exact proof aliases to existing graph owners.
+- **S** — Candidate, current validity, jurisdiction match and semantic admission never independently confer legal authority or applicability.
+- **L** — One focused legal-authority handoff lane. No edits to ESD/digital_esd or unmerged physics/PNF/historical branches.
+- **P** — Preconditions: imported proofs exist and legal status/evidence source stays canonical. Postconditions: all three roots expose the same exact non-promotion propositions; Actionstep remains generic workflow context without a fabricated vendor ontology.
+- **G** — Control mapping: ITIL, ISO 9000, ISO/IEC 42001/27001/27701/23894, ISO 9241, NIST AI RMF Govern/Map/Measure/Manage, Six Sigma DMAIC and C4/PlantUML are process and verification lenses, not certifications. Original authors retain their original claims. JMD/meta-introspector and zkSEC remain context owners, not Agda theorem owners.
+- **F** — Deterministic connector read-back checks: owner imports, all three facades, regression naming, zero banned trust escapes, zero ESD changed paths, ahead-only branch comparison. Local Agda compiler and dashi-agda-preflight are not installed in the execution container. No kernel-check result is claimed.
+
+**Ibrahim/Pareto stopping rule**: #1285 already owns the generic SensibLaw/Actionstep-style workstream. Do not create another bridge or inflate a task acceptance into legal authority. Jurisdiction-specific, matter-specific, and evidence-bound applicability remain consumers that require their own source and acceptance receipts.
