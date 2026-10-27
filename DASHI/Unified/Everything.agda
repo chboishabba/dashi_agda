@@ -159,3 +159,44 @@ unifiedBalabanScaleTransferNonPromotion :
 unifiedBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Current-master governance x fleet x Balaban/R559 x Ibrahim max-cut.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
+
+unifiedCurrentMaxCutGovernanceFleetReceipt :
+  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
+unifiedCurrentMaxCutGovernanceFleetReceipt =
+  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
+
+unifiedCurrentFormalGapTarget : ℕ
+unifiedCurrentFormalGapTarget =
+  CurrentMaxCut.targetFormalGapCount
+
+unifiedCurrentFormalGapTargetIs58 :
+  unifiedCurrentFormalGapTarget ≡ 58
+unifiedCurrentFormalGapTargetIs58 =
+  CurrentMaxCut.targetFormalGapCountIs58
+
+unifiedCurrentFleetDischargedFibresExcluded :
+  CurrentMaxCut.dischargedFleetFibresExcluded ≡ true
+unifiedCurrentFleetDischargedFibresExcluded = refl
+
+unifiedCurrentFiniteRGStillDoesNotPromoteContinuum :
+  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
+unifiedCurrentFiniteRGStillDoesNotPromoteContinuum =
+  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
+
+unifiedCurrentCandidateLegalSourceStillDoesNotCreateAuthority :
+  CurrentMaxCut.candidateLegalSourceCreatesAuthority ≡ false
+unifiedCurrentCandidateLegalSourceStillDoesNotCreateAuthority =
+  CurrentMaxCut.candidateLegalSourceCreatesAuthorityIsFalse
+
+unifiedCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy :
+  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacy ≡ false
+unifiedCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy =
+  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacyIsFalse
