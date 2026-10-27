@@ -952,3 +952,18 @@ unifierCriticalDispatchMatchesTOE :
     TOE.b2SameHamiltonian
   ≡ TOE.toeCriticalFamilyLevel TOE.b2SameHamiltonian
 unifierCriticalDispatchMatchesTOE = refl
+
+
+------------------------------------------------------------------------
+-- Count-proof alias regressions.
+------------------------------------------------------------------------
+
+irreducibleFamilyCountProofAliasMatches :
+  TOE.toeIrreducibleSourceFamilyCount ≡ 14
+irreducibleFamilyCountProofAliasMatches =
+  TOE.toeIrreducibleSourceFamilyCountIsFourteen
+
+criticalFamilyCountProofAliasMatches :
+  TOE.toeCriticalFamilyCount ≡ 7
+criticalFamilyCountProofAliasMatches =
+  TOE.toeCriticalFamilyCountIsSeven
