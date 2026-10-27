@@ -16,6 +16,7 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.YMBlockDMaxCutTOEExact as YMBlockD
+import DASHI.Unified.YMCMP119ResidualWeldTOEExact as YMResidualWeld
 import DASHI.Unified.YMBalabanRGPhysicalBoundaryTOEExact as YMBoundary
 
 ------------------------------------------------------------------------
@@ -146,3 +147,50 @@ toe369YangMillsBlockDClayStillNotPromoted :
   YMTOE.toeClayYangMillsPromoted ≡ false
 toe369YangMillsBlockDClayStillNotPromoted =
   YMBlockD.blockDClayYangMillsStillNotPromoted
+
+
+------------------------------------------------------------------------
+-- Yang-Mills CMP119 literal residual-weld source frontier.
+------------------------------------------------------------------------
+
+toe369YMResidualWeldCompilerLevel : ProofLevel
+toe369YMResidualWeldCompilerLevel =
+  YMResidualWeld.toeResidualWeldCompilerLevel
+
+toe369YMRegularEComponentPeriodicSupportDictionaryLevel : ProofLevel
+toe369YMRegularEComponentPeriodicSupportDictionaryLevel =
+  YMResidualWeld.toeRegularEComponentPeriodicSupportDictionaryLevel
+
+toe369YMRegularEOneSidedActivityReflectionLevel : ProofLevel
+toe369YMRegularEOneSidedActivityReflectionLevel =
+  YMResidualWeld.toeRegularEOneSidedActivityReflectionLevel
+
+toe369YMRegularECrossingKernelRPLevel : ProofLevel
+toe369YMRegularECrossingKernelRPLevel =
+  YMResidualWeld.toeRegularECrossingKernelRPLevel
+
+toe369YMROperationPublishedPolymerDictionaryLevel : ProofLevel
+toe369YMROperationPublishedPolymerDictionaryLevel =
+  YMResidualWeld.toeROperationPublishedPolymerDictionaryLevel
+
+toe369YMBoundaryPublishedPolymerDictionaryLevel : ProofLevel
+toe369YMBoundaryPublishedPolymerDictionaryLevel =
+  YMResidualWeld.toeBoundaryPublishedPolymerDictionaryLevel
+
+toe369YMCommonERBPeriodicSupportToSelectedShellCarrierLevel : ProofLevel
+toe369YMCommonERBPeriodicSupportToSelectedShellCarrierLevel =
+  YMResidualWeld.toeCommonERBPeriodicSupportToSelectedShellCarrierLevel
+
+toe369YMFullResidualEqualsSelectedFiniteShellTailLevel : ProofLevel
+toe369YMFullResidualEqualsSelectedFiniteShellTailLevel =
+  YMResidualWeld.toeFullResidualEqualsSelectedFiniteShellTailLevel
+
+toe369YMResidualWeldContinuumStillOpen :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+toe369YMResidualWeldContinuumStillOpen =
+  YMResidualWeld.toeResidualWeldDoesNotPromoteContinuum
+
+toe369YMResidualWeldClayStillNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+toe369YMResidualWeldClayStillNotPromoted =
+  YMResidualWeld.toeResidualWeldDoesNotPromoteClay
