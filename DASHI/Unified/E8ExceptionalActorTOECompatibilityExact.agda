@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Unified.E8ExceptionalActorTOECompatibilityExact where
 
 ------------------------------------------------------------------------
