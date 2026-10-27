@@ -714,6 +714,107 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     false refl
     false refl
 
+
+------------------------------------------------------------------------
+-- Canonical governance invariant handoff.
+--
+-- This record unifies existing exact proof owners.
+-- It adds no new legal semantics.
+-- It adds no new authority.
+-- It keeps the ZKP control receipt, governance boundaries, and non-promotion
+-- theorems on one same-object TOE surface.
+------------------------------------------------------------------------
+
+record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
+  constructor governed-legal-workflow-toe-invariant-handoff
+  field
+    governanceBoundary :
+      GovernedLegalWorkflowTOEBoundary
+
+    governanceBoundaryIsCanonical :
+      governanceBoundary
+      ≡
+      canonicalGovernedLegalWorkflowTOEBoundary
+
+    promotionBoundary :
+      GovernedLegalWorkflowPromotionBoundary
+
+    promotionBoundaryIsCanonical :
+      promotionBoundary
+      ≡
+      canonicalGovernedLegalWorkflowPromotionBoundary
+
+    zkpReceipt :
+      GovernedLegalWorkflowZKPReceipt
+
+    zkpReceiptIsCanonical :
+      zkpReceipt
+      ≡
+      canonicalGovernedLegalWorkflowZKPReceipt
+
+    taskCompletionNonPromotion :
+      TaskCompletionCreatesTruth →
+      ⊥
+
+    databaseCommitNonPromotion :
+      DatabaseCommitCreatesSemanticAuthority →
+      ⊥
+
+    acceptedReviewApplicabilityFirewall :
+      AcceptedStatusPaysApplicability →
+      ⊥
+
+    reviewEligibilityPromotionFirewall :
+      ReviewEligibilityCreatesPromotionReceipt →
+      ⊥
+
+    runtimeParityTruthFirewall :
+      ZeroParityFailuresMeansWorldTruth →
+      ⊥
+
+    parserAdmissionFirewall :
+      ParserCandidateAloneAuthorizesAdmission →
+      ⊥
+
+    softwarePublicationFirewall :
+      SoftwareValidationAuthorizesPublication →
+      ⊥
+
+    caseySelectionTruthFirewall :
+      CaseySelectionCreatesWorldTruth →
+      ⊥
+
+    formalProofExternalTruthFirewall :
+      Suite.FormalProofCreatesExternalWorldTruth →
+      ⊥
+
+    knowledgeExecutionAuthorityFirewall :
+      KnowledgeIsAuthority →
+      ⊥
+
+open GovernedLegalWorkflowTOEInvariantHandoff public
+
+canonicalGovernedLegalWorkflowTOEInvariantHandoff :
+  GovernedLegalWorkflowTOEInvariantHandoff
+canonicalGovernedLegalWorkflowTOEInvariantHandoff =
+  governed-legal-workflow-toe-invariant-handoff
+    canonicalGovernedLegalWorkflowTOEBoundary
+    refl
+    canonicalGovernedLegalWorkflowPromotionBoundary
+    refl
+    canonicalGovernedLegalWorkflowZKPReceipt
+    refl
+    toeTaskCompletionDoesNotCreateTruth
+    toeDatabaseCommitDoesNotCreateSemanticAuthority
+    toeAcceptedReviewDoesNotPayApplicability
+    toeReviewEligibilityDoesNotCreatePromotion
+    toeRuntimeParityDoesNotCreateWorldTruth
+    toeParserCandidateDoesNotAuthorizeAdmission
+    toeSoftwareValidationDoesNotAuthorizePublication
+    toeCaseySelectionDoesNotCreateWorldTruth
+    toeFormalProofDoesNotCreateExternalWorldTruth
+    toeKnowledgeDoesNotCreateExecutionAuthority
+
 toeProcessContextRefs : List String
 toeProcessContextRefs =
   "meta-introspector/zkperf — process and tooling context; no theorem copied"
