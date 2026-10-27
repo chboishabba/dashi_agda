@@ -21,6 +21,10 @@ import DASHI.Wikimedia.IbrahimFirstLinkHistoricalDiscriminatorParetoExact as His
 -- DASHI owns only this normalization facade.
 ------------------------------------------------------------------------
 
+BalabanScaleTransferPromotion : Set
+BalabanScaleTransferPromotion =
+  BalabanTransfer.BalabanRGScaleTransferPromotion
+
 balabanScaleTransferFrontier :
   BalabanTransfer.BalabanRGScaleTransferFrontierReceipt
 balabanScaleTransferFrontier =
