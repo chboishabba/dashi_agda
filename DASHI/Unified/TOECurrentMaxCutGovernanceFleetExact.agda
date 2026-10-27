@@ -70,6 +70,19 @@ import DASHI.Governance.FormalisationGovernanceCapstoneExact as Formalisation
 import DASHI.Core.FrozenProvenanceDynamicRefinementExact as Frozen
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as Promotion
+import DASHI.Core.ContextIndexedPNFComparisonTransportExact as Context
+import DASHI.Core.GovernanceTrajectoryRealisationExact as Trajectory
+import DASHI.Foundations.SSPTritCarrier as SSP
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
+import DASHI.Foundations.Base369Ternary27StratifiedAppraisalFibreExact as Fibre
+import DASHI.Reasoning.TernaryComparisonSynthesisExact as Synthesis
+import DASHI.Reasoning.TernarySynthesisCellComplexExact as SynthesisCell
+import DASHI.Reasoning.RelationalLensSynthesisCore as Lens
+import DASHI.Moonshine.Base369Ternary27StratifiedFibreHolonomyExact as Holonomy
+import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as Wave
+import DASHI.Reasoning.TernarySynthesisTransportWeldExact as WaveTransport
+import DASHI.Physics.ShiftDiscreteWaveStep as DiscreteWave
+open import Data.Integer using (+_; -[1+_])
 
 ------------------------------------------------------------------------
 -- Exact target selection.
@@ -565,3 +578,238 @@ documentRoleAuthorityNonPromotion :
   DocumentRoleIsLegalSourceAuthority → ⊥
 documentRoleAuthorityNonPromotion =
   Legal.documentRoleDoesNotSupplyLegalSourceAuthority
+
+
+------------------------------------------------------------------------
+-- Context-indexed 369 sheet -> cube -> appraisal-fibre transport weld.
+--
+-- Reuse only.
+-- The 9-state comparison is a 3 x 3 sheet.
+-- Synthesis adds one retained ternary coordinate and yields the 27-state cube.
+-- Appraisal remains a dependent fibre over the interaction cube.
+-- A positive action coordinate does not erase a negative comparison.
+-- Transport order and phase can retain information that a coarse endpoint loses.
+------------------------------------------------------------------------
+
+decisionSheetStateCount : Nat
+decisionSheetStateCount = Synthesis.comparisonDimension
+
+decisionSheetStateCountIsNine :
+  decisionSheetStateCount ≡ 9
+decisionSheetStateCountIsNine =
+  Synthesis.comparisonDimensionIsNine
+
+interactionCubeStateCount : Nat
+interactionCubeStateCount = Geometry.hypervoxelStateCount
+
+interactionCubeStateCountIsTwentySeven :
+  interactionCubeStateCount ≡ 27
+interactionCubeStateCountIsTwentySeven =
+  Geometry.hypervoxelStateCountIs27
+
+appraisalFibreStateCount : Nat
+appraisalFibreStateCount = Geometry.appraisalFibreStateCount
+
+appraisalFibreStateCountIsSevenHundredTwentyNine :
+  appraisalFibreStateCount ≡ 729
+appraisalFibreStateCountIsSevenHundredTwentyNine =
+  Geometry.appraisalFibreStateCountIs729
+
+record ContextIndexedComparisonSheet : Set where
+  constructor context-indexed-comparison-sheet
+  field
+    sheetContext : Context.ConsumerFrame
+    sheetPoint : Synthesis.Comparison9
+
+open ContextIndexedComparisonSheet public
+
+record ContextIndexedSynthesisCube : Set where
+  constructor context-indexed-synthesis-cube
+  field
+    cubeContext : Context.ConsumerFrame
+    cubePoint : Synthesis.SynthesisChoice27
+
+open ContextIndexedSynthesisCube public
+
+liftSheetWithSynthesis :
+  Synthesis.TotalSynthesisRule →
+  ContextIndexedComparisonSheet →
+  ContextIndexedSynthesisCube
+liftSheetWithSynthesis rule
+  (context-indexed-comparison-sheet frame comparison) =
+  context-indexed-synthesis-cube
+    frame
+    (Synthesis.applySynthesisRule rule comparison)
+
+projectCubeToSheet :
+  ContextIndexedSynthesisCube →
+  ContextIndexedComparisonSheet
+projectCubeToSheet cube =
+  context-indexed-comparison-sheet
+    (cubeContext cube)
+    (Synthesis.comparisonOfSynthesis (cubePoint cube))
+
+liftedSynthesisRetainsContextualSheet :
+  (rule : Synthesis.TotalSynthesisRule) →
+  (sheet : ContextIndexedComparisonSheet) →
+  projectCubeToSheet (liftSheetWithSynthesis rule sheet) ≡ sheet
+liftedSynthesisRetainsContextualSheet rule
+  (context-indexed-comparison-sheet frame comparison)
+  rewrite Synthesis.everyComparisonReceivesSynthesis rule comparison =
+  refl
+
+relativeOrientationTrit :
+  Trajectory.ProposalOrientation →
+  SSP.SSPTrit
+relativeOrientationTrit Trajectory.supports = SSP.sspPosOne
+relativeOrientationTrit Trajectory.neutral = SSP.sspZero
+relativeOrientationTrit Trajectory.counters = SSP.sspNegOne
+
+supportOrientationIsPositive :
+  relativeOrientationTrit Trajectory.supports ≡ SSP.sspPosOne
+supportOrientationIsPositive = refl
+
+neutralOrientationIsZero :
+  relativeOrientationTrit Trajectory.neutral ≡ SSP.sspZero
+neutralOrientationIsZero = refl
+
+counterOrientationIsNegative :
+  relativeOrientationTrit Trajectory.counters ≡ SSP.sspNegOne
+counterOrientationIsNegative = refl
+
+contextualRelativeSign :
+  {Frame Proposal : Set} →
+  Trajectory.ContextualProposalSystem Frame Proposal →
+  Frame →
+  Proposal →
+  SSP.SSPTrit
+contextualRelativeSign system frame proposal =
+  relativeOrientationTrit
+    (Trajectory.orientationIn system frame proposal)
+
+sameProposalCanBePositiveInOneFrame :
+  contextualRelativeSign
+    Trajectory.demoProposalSystem
+    Trajectory.immediateOutcome
+    Trajectory.sameProposal
+  ≡ SSP.sspPosOne
+sameProposalCanBePositiveInOneFrame = refl
+
+sameProposalCanBeNegativeInAnotherFrame :
+  contextualRelativeSign
+    Trajectory.demoProposalSystem
+    Trajectory.futureReachability
+    Trajectory.sameProposal
+  ≡ SSP.sspNegOne
+sameProposalCanBeNegativeInAnotherFrame = refl
+
+negativeCounterSignDoesNotBecomeLogicalNegation :
+  Lens.contextualCounterpositionRole ≡ Lens.logicalNegationRole → ⊥
+negativeCounterSignDoesNotBecomeLogicalNegation =
+  Lens.contextualCounterpositionIsNotLogicalNegationByRole
+
+synthesisErasesComparator : Bool
+synthesisErasesComparator =
+  Synthesis.synthesisErasesComparisonBoundary
+    Synthesis.canonicalTernaryComparisonSynthesisBoundary
+
+synthesisErasesComparatorIsFalse :
+  synthesisErasesComparator ≡ false
+synthesisErasesComparatorIsFalse =
+  Synthesis.synthesisErasesComparisonBoundaryIsFalse
+    Synthesis.canonicalTernaryComparisonSynthesisBoundary
+
+synthesisTwoCellExists : Bool
+synthesisTwoCellExists =
+  SynthesisCell.localTwoCellConstructed
+    SynthesisCell.canonicalTernarySynthesisCellBoundary
+
+synthesisTwoCellExistsIsTrue :
+  synthesisTwoCellExists ≡ true
+synthesisTwoCellExistsIsTrue =
+  SynthesisCell.localTwoCellConstructedIsTrue
+    SynthesisCell.canonicalTernarySynthesisCellBoundary
+
+synthesisKeepsOriginalComparator : Bool
+synthesisKeepsOriginalComparator =
+  SynthesisCell.originalTensionEdgeErasedByFilling
+    SynthesisCell.canonicalTernarySynthesisCellBoundary
+
+synthesisKeepsOriginalComparatorIsFalse :
+  synthesisKeepsOriginalComparator ≡ false
+synthesisKeepsOriginalComparatorIsFalse =
+  SynthesisCell.originalTensionEdgeErasedByFillingIsFalse
+    SynthesisCell.canonicalTernarySynthesisCellBoundary
+
+sameInteractionBaseCanCarryDifferentFibreEndpoints :
+  Holonomy.flipThenSwapEndpoint ≡ Holonomy.swapThenFlipEndpoint → ⊥
+sameInteractionBaseCanCarryDifferentFibreEndpoints =
+  Holonomy.orderedFibreEndpointsDiffer
+
+sameInteractionBaseIsRetainedAcrossThoseEndpoints :
+  Geometry.projectInteractionVoxel Holonomy.flipThenSwapEndpoint
+  ≡
+  Geometry.projectInteractionVoxel Holonomy.swapThenFlipEndpoint
+sameInteractionBaseIsRetainedAcrossThoseEndpoints =
+  Holonomy.orderedEndpointsShareInteractionBase
+
+coarseStratumCannotRecoverTransportOrder :
+  Holonomy.FactorsTransportOrderThroughStratum → ⊥
+coarseStratumCannotRecoverTransportOrder =
+  Holonomy.stratumCannotRecoverTransportOrder
+
+continuousSymbolicCodingRetainsExactCarrier :
+  {Carrier : Set} →
+  (coding : Wave.SymbolicCoding Carrier) →
+  (state : Carrier) →
+  Wave.decode (Wave.encode coding state) ≡ state
+continuousSymbolicCodingRetainsExactCarrier =
+  Wave.decodeAfterEncode
+
+canonicalSynthesisTransportDefectIsZero :
+  WaveTransport.transportDefect WaveTransport.canonicalOneToThreeSynthesis
+  ≡ DiscreteWave.mkDiscreteWave (+ 0) (+ 0)
+canonicalSynthesisTransportDefectIsZero =
+  WaveTransport.canonicalSynthesisDefectIsZero
+
+phaseChangedSynthesisTransportDefectIsExact :
+  WaveTransport.transportDefect WaveTransport.phaseChangedSynthesis
+  ≡ DiscreteWave.mkDiscreteWave (-[1+ 0 ]) (+ 1)
+phaseChangedSynthesisTransportDefectIsExact =
+  WaveTransport.phaseChangedSynthesisDefectExact
+
+record TOE369ContextualFibreWeldReceipt : Set where
+  constructor toe-369-contextual-fibre-weld-receipt
+  field
+    contextualRoleBoundary :
+      Trajectory.GovernanceTrajectoryBoundary
+    comparisonSynthesisBoundary :
+      Synthesis.TernaryComparisonSynthesisBoundary
+    synthesisCellBoundary :
+      SynthesisCell.TernarySynthesisCellBoundary
+    appraisalFibreBoundary :
+      Fibre.StratifiedAppraisalFibreBoundary
+    holonomyBoundary :
+      Holonomy.StratifiedFibreHolonomyBoundary
+    sheetStates : Nat
+    sheetStatesAreNine : sheetStates ≡ 9
+    cubeStates : Nat
+    cubeStatesAreTwentySeven : cubeStates ≡ 27
+    appraisalStates : Nat
+    appraisalStatesAreSevenHundredTwentyNine : appraisalStates ≡ 729
+
+canonicalTOE369ContextualFibreWeldReceipt :
+  TOE369ContextualFibreWeldReceipt
+canonicalTOE369ContextualFibreWeldReceipt =
+  toe-369-contextual-fibre-weld-receipt
+    Trajectory.canonicalGovernanceTrajectoryBoundary
+    Synthesis.canonicalTernaryComparisonSynthesisBoundary
+    SynthesisCell.canonicalTernarySynthesisCellBoundary
+    Fibre.canonicalStratifiedAppraisalFibreBoundary
+    Holonomy.canonicalStratifiedFibreHolonomyBoundary
+    decisionSheetStateCount
+    decisionSheetStateCountIsNine
+    interactionCubeStateCount
+    interactionCubeStateCountIsTwentySeven
+    appraisalFibreStateCount
+    appraisalFibreStateCountIsSevenHundredTwentyNine
