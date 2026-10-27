@@ -29,3 +29,22 @@ sourceAtlasFacadeExact :
   TOE.sourceAtlasContainsTenRecords
   ≡ Unifier.sourceAtlasContainsTenRecords
 sourceAtlasFacadeExact = refl
+
+kluverCobwebFacadeExact :
+  TOE.kluverCobwebForm ≡ Unifier.kluverCobwebForm
+kluverCobwebFacadeExact = refl
+
+kluverSymbolNonPromotionFacadeExact :
+  TOE.kluverFormDoesNotPromoteUniversalSymbol
+  ≡ Boundary.kluverFormDoesNotPromoteUniversalSymbol
+kluverSymbolNonPromotionFacadeExact = refl
+
+kluverMemoryNonPromotionFacadeExact :
+  Unifier.kluverFormDoesNotPromoteRecoveredMemory
+  ≡ Boundary.kluverFormDoesNotPromoteRecoveredMemory
+kluverMemoryNonPromotionFacadeExact = refl
+
+webIdentifierFacadeExact :
+  TOE.psychogeographyWebIdentifierKind
+  ≡ Unifier.psychogeographyWebIdentifierKind
+webIdentifierFacadeExact = refl
