@@ -1410,6 +1410,9 @@ def test_toe369_bom_and_gas_proofs_reuse_original_owners():
         "ClimateSame25PcDoesNotIdentifyTaxDesign": "same25PcHeadlineDoesNotIdentifyTaxDesign",
         "Industry21Point9BDoesNotIdentifyForecastStatus": "same21Point9BNumberDoesNotEstablishActualityStatus",
         "ThinkTankProximityDoesNotProveDirection": "influenceDoesNotFactorThroughProximity",
+        "GlobalOneFilmThreeClaimsNotThreeIndependentModels": "globalOneFilmThreeClaimsNotThreeIndependentModels",
+        "GlobalPlantFertilisationIsNotNetClimateImpact": "globalPositiveFertilisationIsNotNetClimateHarmEvaluation",
+        "Global1975CoolingMediaIsNotConsensus": "global1975MediaArticleIsNotContemporaryScienceCensus",
     }
     for suffix, owner in symbol_pairs.items():
         a, b = "toe" + suffix, "toe369" + suffix
@@ -1417,6 +1420,7 @@ def test_toe369_bom_and_gas_proofs_reuse_original_owners():
         assert toe.count(b + " :") == 1
         assert b + " =\n  U." + a in toe
         assert owner in (bom + genealogy + proximity)
+    assert len(symbol_pairs) == 13
     assert "import DASHI.Unifier as U" in toe
     assert "import DASHI.Governance.BOMFordhamMediaClaimAuditValidation as BOMCheck" in unifier
     assert "import DASHI.Governance.EmpiricalGenealogyRound3Regression as Origins" in unifier
