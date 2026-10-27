@@ -17,7 +17,8 @@ python3 -m pytest -q \
   tests/test_zipf_occupancy_collisions_exact.py \
   tests/test_pareto_benford_lorenz_bridge.py \
   tests/test_zipf_family_coverage_gates.py \
-  tests/test_zipf_family_severe_coverage.py
+  tests/test_zipf_family_severe_coverage.py \
+  tests/test_zipf_rank_model_evidence_exact.py
 printf '%s\n' 'FINITE_PYTHON_TESTS_PASSED'
 if ! command -v agda >/dev/null 2>&1; then
   printf '%s\n' 'AGDA_KERNEL_PENDING: Agda binary unavailable (overall acceptance withheld)' >&2
