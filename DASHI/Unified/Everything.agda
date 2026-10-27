@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumLean
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Biology.PMDDHistamineAmplificationExact as PMDDHistamine
@@ -19,6 +20,7 @@ import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.FleetFormalGapTargetTOEValidation
+import DASHI.Mathematics.CrossPollination.MillenniumThreeLaneContinuationValidation
 import DASHI.Unified.Fleet58ManifestAcquisitionExact
 import DASHI.Unified.Fleet58ManifestAcquisitionRegression
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
@@ -532,3 +534,62 @@ unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
   ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
 unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
   ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- Exact Lean Millennium external-target reconciliation.
+--
+-- Reuse the existing cross-prover receipt.  These aliases do not transport
+-- Lean proof terms into Agda.  They attach exact source identity, same-object
+-- payments, and non-promotion eliminators to this canonical TOE facade.
+------------------------------------------------------------------------
+
+unifiedLeanMillenniumExternalAcceptanceReceipt :
+  MillenniumLean.MillenniumExternalAcceptanceReceipt
+unifiedLeanMillenniumExternalAcceptanceReceipt =
+  MillenniumLean.currentMillenniumExternalAcceptanceReceipt
+
+unifiedLeanMillenniumRHExactStatementWeldSourceWritten :
+  MillenniumLean.leanMillenniumRHExactStatementWeldSourceWritten ≡ true
+unifiedLeanMillenniumRHExactStatementWeldSourceWritten =
+  MillenniumLean.leanMillenniumRHExactStatementWeldSourceWrittenIsTrue
+
+unifiedLeanMillenniumNSFeffermanCExactTermSourceWritten :
+  MillenniumLean.leanMillenniumNSFeffermanCExactTermSourceWritten ≡ true
+unifiedLeanMillenniumNSFeffermanCExactTermSourceWritten =
+  MillenniumLean.leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue
+
+unifiedLeanMillenniumNSFeffermanDExactTermSourceWritten :
+  MillenniumLean.leanMillenniumNSFeffermanDExactTermSourceWritten ≡ true
+unifiedLeanMillenniumNSFeffermanDExactTermSourceWritten =
+  MillenniumLean.leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue
+
+unifiedLeanMillenniumNSAdapterRequiresNoNewMathematics :
+  MillenniumLean.leanMillenniumNSAdapterRequiresNewMathematics ≡ false
+unifiedLeanMillenniumNSAdapterRequiresNoNewMathematics =
+  MillenniumLean.leanMillenniumNSAdapterRequiresNoNewMathematics
+
+unifiedLeanMillenniumBSDProjectiveAffineRankWeldSourceWritten :
+  MillenniumLean.leanMillenniumBSDProjectiveAffineRankWeldSourceWritten ≡ true
+unifiedLeanMillenniumBSDProjectiveAffineRankWeldSourceWritten =
+  MillenniumLean.leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue
+
+unifiedLeanMillenniumPNPTerminalFailureBidiAgdaOwned :
+  MillenniumLean.leanMillenniumPNPTerminalFailureBidiAgdaOwned ≡ true
+unifiedLeanMillenniumPNPTerminalFailureBidiAgdaOwned =
+  MillenniumLean.leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue
+
+unifiedLeanMillenniumHodgePrizePromotionImpossible :
+  MillenniumLean.LeanMillenniumHodgePrizePromotion → ⊥
+unifiedLeanMillenniumHodgePrizePromotionImpossible =
+  MillenniumLean.leanMillenniumHodgePrizePromotionImpossible
+
+unifiedLeanMillenniumYangMillsPrizePromotionImpossible :
+  MillenniumLean.LeanMillenniumYangMillsPrizePromotion → ⊥
+unifiedLeanMillenniumYangMillsPrizePromotionImpossible =
+  MillenniumLean.leanMillenniumYangMillsPrizePromotionImpossible
+
+unifiedLeanMillenniumSourceWrittenKernelPromotionImpossible :
+  MillenniumLean.LeanMillenniumSourceWrittenKernelPromotion → ⊥
+unifiedLeanMillenniumSourceWrittenKernelPromotionImpossible =
+  MillenniumLean.leanMillenniumSourceWrittenKernelPromotionImpossible
