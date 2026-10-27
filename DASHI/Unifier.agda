@@ -729,11 +729,11 @@ unifierBalabanR559ClayPromotionStillBlocked =
 
 ------------------------------------------------------------------------
 -- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The joint receipt is the normalized facade path.
 ------------------------------------------------------------------------
 
-import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
-
 unifierBalabanScaleTransferNonPromotion :
-  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
 unifierBalabanScaleTransferNonPromotion =
-  RGNonPromotion.balabanRGScaleTransferPromotionImpossibleHere
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
