@@ -88,24 +88,30 @@ brainFMRIRemainsNonPromoting =
 navierStokesRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.navierStokesObject ≡ false
 navierStokesRemainsNonPromoting =
+  refl
+
 yangMillsRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.yangMillsObject ≡ false
 yangMillsRemainsNonPromoting =
+  refl
+
 brainFMRIFormalProjectionsRemainNonPromoting :
   ∀ kind →
   Spine.objectProjectionPromotion BrainFMRI.brainFMRIObject kind ≡ false
 brainFMRIFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     BrainFMRI.brainFMRIObject
+
 navierStokesFormalProjectionsRemainNonPromoting :
+  ∀ kind →
   Spine.objectProjectionPromotion Physics.navierStokesObject kind ≡ false
 navierStokesFormalProjectionsRemainNonPromoting =
+  Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.navierStokesObject
+
 yangMillsFormalProjectionsRemainNonPromoting :
+  ∀ kind →
   Spine.objectProjectionPromotion Physics.yangMillsObject kind ≡ false
 yangMillsFormalProjectionsRemainNonPromoting =
+  Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
-import DASHI.Physics.Foundations.Round5FullBoundary as Round5
-      Round5.Round5FullBoundary
-        Round5.canonicalRound5FullBoundary
-        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
