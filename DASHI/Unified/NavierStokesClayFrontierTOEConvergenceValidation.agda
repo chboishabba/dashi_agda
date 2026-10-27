@@ -259,3 +259,50 @@ physicsSharedWeightedClayStillFalse :
   Physics.navierStokesSharedWeightedClayPromotion ≡ false
 physicsSharedWeightedClayStillFalse =
   Physics.navierStokesSharedWeightedClayPromotionStillFalse
+
+roadmapContinuumBKMStillOpen :
+  NSClay.continuumBKMPassageConstructed ≡ false
+roadmapContinuumBKMStillOpen =
+  NSClay.continuumBKMPassageStillOpen
+
+roadmapAllDataBridgeStillOpen :
+  NSClay.allDataBridgeConstructed ≡ false
+roadmapAllDataBridgeStillOpen =
+  NSClay.allDataBridgeStillOpen
+
+roadmapSubmissionPacketStillNotReady :
+  NSClay.submissionPacketReady ≡ false
+roadmapSubmissionPacketStillNotReady =
+  NSClay.submissionPacketStillNotReady
+
+roadmapClayEligibilityStillFalse :
+  NSClay.clayEligible ≡ false
+roadmapClayEligibilityStillFalse =
+  NSClay.clayEligibilityStillFalse
+
+toeRoadmapClayEligibilityMatchesAdapter :
+  TOE.toeNavierStokesClayEligible ≡ NSClay.clayEligible
+toeRoadmapClayEligibilityMatchesAdapter = refl
+
+unifierRoadmapClayEligibilityMatchesAdapter :
+  U.unifierNavierStokesClayEligible ≡ NSClay.clayEligible
+unifierRoadmapClayEligibilityMatchesAdapter = refl
+
+physicsRoadmapClayEligibilityMatchesAdapter :
+  Physics.navierStokesClayEligible ≡ NSClay.clayEligible
+physicsRoadmapClayEligibilityMatchesAdapter = refl
+
+toeRoadmapContinuumBKMMatchesAdapter :
+  TOE.toeNavierStokesContinuumBKMPassageConstructed
+  ≡ NSClay.continuumBKMPassageConstructed
+toeRoadmapContinuumBKMMatchesAdapter = refl
+
+unifierRoadmapAllDataMatchesAdapter :
+  U.unifierNavierStokesAllDataBridgeConstructed
+  ≡ NSClay.allDataBridgeConstructed
+unifierRoadmapAllDataMatchesAdapter = refl
+
+physicsRoadmapSubmissionMatchesAdapter :
+  Physics.navierStokesSubmissionPacketReady
+  ≡ NSClay.submissionPacketReady
+physicsRoadmapSubmissionMatchesAdapter = refl
