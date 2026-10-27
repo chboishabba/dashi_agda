@@ -1324,3 +1324,31 @@ unifierBalabanOSWightmanStillBlocked :
 unifierBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Fleet 58 named-manifest acquisition gate.
+------------------------------------------------------------------------
+
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as Fleet58Manifest
+import DASHI.Unified.Fleet58ManifestAcquisitionRegression
+
+unifierFleet58ManifestAcquisitionReceipt :
+  Fleet58Manifest.Fleet58ManifestAcquisitionReceipt
+unifierFleet58ManifestAcquisitionReceipt =
+  Fleet58Manifest.canonicalFleet58ManifestAcquisitionReceipt
+
+unifierFleet58ManifestStillMissing :
+  Fleet58Manifest.named58ManifestAcquired ≡ false
+unifierFleet58ManifestStillMissing =
+  Fleet58Manifest.named58ManifestAcquiredIsFalse
+
+unifierFleet58PerGapDispatchStillBlocked :
+  Fleet58Manifest.perGapDispatchEnabled ≡ false
+unifierFleet58PerGapDispatchStillBlocked =
+  Fleet58Manifest.perGapDispatchEnabledIsFalse
+
+unifierFleet58SearchPriorityDoesNotCreateProof :
+  Fleet58Manifest.SearchPriorityCreatesProof → ⊥
+unifierFleet58SearchPriorityDoesNotCreateProof =
+  Fleet58Manifest.searchPriorityDoesNotCreateProof
