@@ -1,5 +1,6 @@
 module DASHI.Unified.Everything where
 
+import DASHI.Unified.TOELegalGovernanceHandoffExact as TOELegalGovernance
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
