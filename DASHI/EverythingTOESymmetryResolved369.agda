@@ -44,11 +44,11 @@ toeGovernedLegalWorkflowZKPReceipt =
   LegalGovernance.canonicalGovernedLegalWorkflowZKPReceipt
 
 toeCaseySelectionDoesNotCreateWorldTruth :
-  LegalGovernance.Suite.CaseySelectionCreatesWorldTruth → ⊥
+  LegalGovernance.CaseySelectionCreatesWorldTruth → ⊥
 toeCaseySelectionDoesNotCreateWorldTruth =
   LegalGovernance.toeCaseySelectionDoesNotCreateWorldTruth
 
 toeKnowledgeDoesNotCreateExecutionAuthority :
-  LegalGovernance.Authority.KnowledgeIsAuthority → ⊥
+  LegalGovernance.KnowledgeIsAuthority → ⊥
 toeKnowledgeDoesNotCreateExecutionAuthority =
   LegalGovernance.toeKnowledgeDoesNotCreateExecutionAuthority
