@@ -8,6 +8,14 @@ open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
 
+------------------------------------------------------------------------
+-- Exact Collatz/Syracuse theorem owners.
+------------------------------------------------------------------------
+
+import DASHI.Unified.CollatzSyracuseTOEMaxCutExact as CollatzTOE
+import DASHI.Analysis.CollatzSyracuseSameObjectMaxCutExact as CollatzMaxCut
+import DASHI.Analysis.CollatzSyracuseTerminalParityMaxCutExact as CollatzTerminal
+
 ¬ : Set → Set
 ¬ A = A → ⊥
 
@@ -313,3 +321,54 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- Collatz/Syracuse exact TOE surface.
+--
+-- These values reuse theorem-bearing owners.
+-- They do not use the placeholder interfaces above.
+------------------------------------------------------------------------
+
+unifierCollatzSyracuseMaxCutReceipt :
+  CollatzTOE.CollatzSyracuseTOEMaxCutReceipt
+unifierCollatzSyracuseMaxCutReceipt =
+  CollatzTOE.canonicalCollatzSyracuseTOEMaxCutReceipt
+
+unifierCollatzCylinderForwardPaid :
+  CollatzMaxCut.cutStatus CollatzMaxCut.C3-residueCylinderForward
+  ≡ CollatzMaxCut.proved
+unifierCollatzCylinderForwardPaid =
+  CollatzTOE.collatzCylinderForwardPaid
+
+unifierCollatzAffineIteratePaid :
+  CollatzMaxCut.cutStatus CollatzMaxCut.C6-affineIterate
+  ≡ CollatzMaxCut.proved
+unifierCollatzAffineIteratePaid =
+  CollatzTOE.collatzAffineIteratePaid
+
+unifierCollatzDirectBernoulliLawPaid :
+  CollatzMaxCut.cutStatus CollatzMaxCut.C12a-directParityBernoulliLaw
+  ≡ CollatzMaxCut.proved
+unifierCollatzDirectBernoulliLawPaid =
+  CollatzTOE.collatzDirectBernoulliLawPaid
+
+unifierCollatzStrictDescentTerminalWallOpen :
+  CollatzMaxCut.cutStatus CollatzMaxCut.C13d-allStartsStrictDescentProducer
+  ≡ CollatzMaxCut.sourceSpecificOpen
+unifierCollatzStrictDescentTerminalWallOpen =
+  CollatzTOE.collatzStrictDescentTerminalWallOpen
+
+unifierCollatzAllStartsFiniteBarrierProducerStillOpen :
+  CollatzTerminal.TerminalParityMaxCutBoundary.allStartsFiniteBarrierProducerPaid
+    CollatzTerminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 0
+unifierCollatzAllStartsFiniteBarrierProducerStillOpen =
+  CollatzTOE.collatzAllStartsFiniteBarrierProducerStillOpen
+
+unifierCollatzFiniteSearchDoesNotPromoteUniversalStopping :
+  CollatzTerminal.TerminalParityMaxCutBoundary.finiteSearchPromotesUniversalStopping
+    CollatzTerminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 0
+unifierCollatzFiniteSearchDoesNotPromoteUniversalStopping =
+  CollatzTOE.collatzFiniteSearchDoesNotPromoteUniversalStopping
