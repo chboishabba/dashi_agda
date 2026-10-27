@@ -1,9 +1,11 @@
 module DASHI.Unifier where
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.Relate369HyperfabricPantsTOEExact as Relate369PantsTOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -574,3 +576,40 @@ unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
 unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 unifierYangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+------------------------------------------------------------------------
+-- Relate 369 / hyperfabric / pants gluing TOE facade.
+------------------------------------------------------------------------
+
+relate369PantsSeamDoesNotRewriteTopology :
+  Relate369PantsTOE.TypedPants.interfaceMatchAutomaticallyRewritesIncidence
+    Relate369PantsTOE.typedPantsBoundary
+  ≡ false
+relate369PantsSeamDoesNotRewriteTopology =
+  Relate369PantsTOE.pantsSeamDoesNotRewriteTopology
+
+relate369FinitePantsPathStillNotSmoothSurface :
+  Relate369PantsTOE.Pants369.finitePantsPathIsSmoothPantsSurface
+    Relate369PantsTOE.Pants369.canonicalColourWheelNinePantsBoundary
+  ≡ false
+relate369FinitePantsPathStillNotSmoothSurface =
+  Relate369PantsTOE.finitePantsPathIsNotSmoothPantsSurface
+
+relate369CardinalityDoesNotCreateAdmissibleGluing :
+  Relate369PantsTOE.Sheaf369.cardinalityAloneCreatesAdmissibleGluing
+    Relate369PantsTOE.Sheaf369.canonicalJSheafHyperformDescentFrontier
+  ≡ false
+relate369CardinalityDoesNotCreateAdmissibleGluing =
+  Relate369PantsTOE.sheafCardinalityAloneDoesNotCreateAdmissibleGluing
+
+relate369SharedCarrierDoesNotPromoteExternalTheorem :
+  (object : Relate369PantsTOE.PNF369.HyperfabricObject) →
+  Relate369PantsTOE.PNF369.hyperfabricPromotesExternalTheorem object ≡ false
+relate369SharedCarrierDoesNotPromoteExternalTheorem =
+  Relate369PantsTOE.sharedHyperformalCarrierDoesNotPromoteExternalTheorem
+
+relate369HyperfabricPantsReceipt :
+  Relate369PantsTOE.Relate369HyperfabricPantsTOEReceipt
+relate369HyperfabricPantsReceipt =
+  Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEReceipt
