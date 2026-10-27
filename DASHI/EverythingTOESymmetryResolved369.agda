@@ -32,6 +32,7 @@ toeKernelProofDoesNotEstablishSourceSemantics :
 toeKernelProofDoesNotEstablishSourceSemantics =
   Governance.kernelClosureIsNotSemanticExhaustiveness
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.GovernanceMaxCutParetoSnowballTOEConvergenceExact as GovernanceMaxCut
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
@@ -604,3 +605,33 @@ toeExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 toeExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+
+------------------------------------------------------------------------
+-- Governance + max-cut/Pareto/snowball convergence receipt.
+------------------------------------------------------------------------
+
+toeGovernanceMaxCutParetoSnowballReceipt :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballTOEReceipt
+toeGovernanceMaxCutParetoSnowballReceipt =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballTOEReceipt
+
+toeGovernanceMaxCutParetoSnowballZKPFrame :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballZKPFrame
+toeGovernanceMaxCutParetoSnowballZKPFrame =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
+
+toeGovernanceMaxCutLegalAuthorityClosed :
+  GovernanceMaxCut.Legal.SemanticPromotionAllAuthorityClosed
+toeGovernanceMaxCutLegalAuthorityClosed =
+  GovernanceMaxCut.legalSemanticAuthorityClosure
+
+toeGovernanceMaxCutBalabanScaleTransferImpossible :
+  GovernanceMaxCut.ParetoSnowball.BalabanScaleTransferPromotion → ⊥
+toeGovernanceMaxCutBalabanScaleTransferImpossible =
+  GovernanceMaxCut.balabanScaleTransferPromotionImpossible
+
+toeGovernanceMaxCutIbrahimSearchPriorityNotProof :
+  GovernanceMaxCut.ParetoSnowball.SearchPriorityCreatesProof → ⊥
+toeGovernanceMaxCutIbrahimSearchPriorityNotProof =
+  GovernanceMaxCut.ibrahimSearchPriorityDoesNotCreateProof
