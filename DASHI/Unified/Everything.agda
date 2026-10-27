@@ -596,3 +596,34 @@ unifiedBalabanLevel2ClayPromotionStillFalse :
   BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
 unifiedBalabanLevel2ClayPromotionStillFalse =
   BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
+
+------------------------------------------------------------------------
+-- Mabo citation-use max-cut.
+------------------------------------------------------------------------
+
+unifiedYindjibarndiCitationSeedDoesNotCreateMaboJoin =
+  LegalGovernance.selectedYindjibarndiCitationSeedDoesNotCreateMaboJoin
+
+unifiedMunkaraNativeTitleAtomDoesNotPayOffshoreElement =
+  LegalGovernance.selectedMunkaraNativeTitleAtomDoesNotPayOffshoreElement
+
+unifiedMunkaraSharedCountryConceptDoesNotCollapseWrongType =
+  LegalGovernance.selectedMunkaraSharedCountryConceptDoesNotCollapseWrongType
+
+unifiedPabaiMaboAnalogyStillNonPromoting =
+  LegalGovernance.selectedPabaiMaboAnalogyStillNonPromoting
+
+unifiedMaboIsNotClimateNegligencePrecedent =
+  LegalGovernance.selectedMaboIsNotClimateNegligencePrecedent
+
+unifiedMaboStructureDoesNotProveClimateDoctrine =
+  LegalGovernance.selectedMaboStructureDoesNotProveClimateDoctrine
+
+unifiedAmoduCitationDoesNotMeanWholesaleAdoption =
+  LegalGovernance.selectedAmoduCitationDoesNotMeanWholesaleAdoption
+
+unifiedPabaiCurrentRouteStillUnreachable =
+  LegalGovernance.selectedPabaiCurrentRouteStillUnreachable
+
+unifiedPabaiSearchStillRequiresProof =
+  LegalGovernance.selectedPabaiSearchStillRequiresProof
