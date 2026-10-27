@@ -7,7 +7,8 @@ module DASHI.Unified.GraphenePhysicalNonPromotionTOEExact where
 -- Existing numerical replays are not experimental measurements.
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)\nopen import Data.Empty using (⊥-elim)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.CondensedMatter.FlatBandTwistronicsFe5GeTe2CrossPollinationExact as Graphene
 import DASHI.Physics.CondensedMatter.FlatBandObservableFibreExact as Fibre
@@ -21,9 +22,9 @@ flatBandConsumerCannotDescendThroughCoarseEnergy :
   (order : Momentum → Order) →
   Fibre.FlatBandPhaseSplitWitness band order →
   Fibre.PhaseDescendsThroughEnergy band order →
-  Agda.Builtin.Equality._≡_ false true
-flatBandConsumerCannotDescendThroughCoarseEnergy band order witness descent =
-  ⊥-elim (Graphene.flatPairSplitByOrderRequiresMoreThanEnergy band order witness descent)
+  ⊥
+flatBandConsumerCannotDescendThroughCoarseEnergy =
+  Graphene.flatPairSplitByOrderRequiresMoreThanEnergy
 
 -- The existing physical validation theorems are the proof owners.
 syntheticQTMRemainsNonPromoting :
