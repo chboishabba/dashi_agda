@@ -1,0 +1,32 @@
+name: Goodman Sonic Warfare source contract
+
+# Source-only contract. This is NOT an Agda typecheck or experimental receipt.
+on:
+  pull_request:
+    paths:
+      - "DASHI/Culture/GoodmanSonicWarfareExact.agda"
+      - "DASHI/EverythingTOESymmetryResolved369.agda"
+      - "DASHI/Unifier.agda"
+      - "DASHI/Unified/Everything.agda"
+      - "DASHI/Culture/Everything.agda"
+      - "Docs/papers/GoodmanSonicWarfare.md"
+      - "scripts/check_goodman_sonic_warfare_source.py"
+      - ".github/workflows/goodman-sonic-warfare.yml"
+  push:
+    branches:
+      - "feat/goodman-sonic-warfare-reuse-maxcut"
+    paths:
+      - "DASHI/Culture/GoodmanSonicWarfareExact.agda"
+      - "Docs/papers/GoodmanSonicWarfare.md"
+      - "scripts/check_goodman_sonic_warfare_source.py"
+
+permissions:
+  contents: read
+
+jobs:
+  source-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source, 34-chapter index, root imports and non-promotion
+        run: python3 scripts/check_goodman_sonic_warfare_source.py
