@@ -72,6 +72,11 @@ import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact
 import DASHI.Interop.ITIRFederatedTypedWorldProjectionExact as Suite
 import DASHI.Interop.DistributedEpistemicFabricSourceAtlasExact as Fabric
 import DASHI.Security.AgentAuthorityTrajectoryExact as Authority
+import DASHI.Interop.SLRReviewPromoteAbstainConsumerExact as PromotionReview
+import DASHI.Interop.SLRRuntimeValidationHandoffExact as RuntimeValidation
+import DASHI.Interop.SLRValidationRoadmapPromotionExact as ValidationRoadmap
+import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
+import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as SoftwareValidation
 
 ------------------------------------------------------------------------
 -- Type aliases keep Unifier thin.
@@ -256,6 +261,200 @@ toeComposeCertifiedStages :
     (Compliance.output right)
 toeComposeCertifiedStages =
   Compliance.composeCertifiedStages
+
+------------------------------------------------------------------------
+-- Promotion, validation, and admission non-promotion handoff.
+--
+-- Reuse exact owners.
+-- Review eligibility is not promotion.
+-- Runtime parity is not world truth.
+-- Implementation is not runtime certification.
+-- Parser output is not admission authority.
+-- Software validation is not publication authority.
+------------------------------------------------------------------------
+
+ReviewEligibilityCreatesPromotionReceipt : Set
+ReviewEligibilityCreatesPromotionReceipt =
+  PromotionReview.ReviewEligibilityCreatesPromotionReceipt
+
+EligibilityMeansTruth : Set
+EligibilityMeansTruth =
+  PromotionReview.EligibilityMeansTruth
+
+ZeroParityFailuresMeansWorldTruth : Set
+ZeroParityFailuresMeansWorldTruth =
+  RuntimeValidation.ZeroParityFailuresMeansWorldTruth
+
+DiagnosticLegalStreamMeansLegalCertification : Set
+DiagnosticLegalStreamMeansLegalCertification =
+  RuntimeValidation.DiagnosticLegalStreamMeansLegalCertification
+
+CanonicalClaimProjectionPaysClaimTruth : Set
+CanonicalClaimProjectionPaysClaimTruth =
+  ValidationRoadmap.CanonicalClaimProjectionPaysClaimTruth
+
+ReviewRouterImplementationPaysConsumerAdequacy : Set
+ReviewRouterImplementationPaysConsumerAdequacy =
+  ValidationRoadmap.ReviewRouterImplementationPaysConsumerAdequacy
+
+ParserCandidateAloneAuthorizesAdmission : Set
+ParserCandidateAloneAuthorizesAdmission =
+  Admission.ParserCandidateAloneAuthorizesAdmission
+
+ResidualPriorityScoreIsTruthConfidence : Set
+ResidualPriorityScoreIsTruthConfidence =
+  Admission.ResidualPriorityScoreIsTruthConfidence
+
+AdmissionReceiptPublishesGeneration : Set
+AdmissionReceiptPublishesGeneration =
+  Admission.AdmissionReceiptPublishesGeneration
+
+SoftwareValidationAuthorizesPublication : Set
+SoftwareValidationAuthorizesPublication =
+  SoftwareValidation.SoftwareValidationAuthorizesPublication
+
+LaterValidatedHeadRetroactivelyChangesCertifiedBaseline : Set
+LaterValidatedHeadRetroactivelyChangesCertifiedBaseline =
+  SoftwareValidation.LaterValidatedHeadRetroactivelyChangesCertifiedBaseline
+
+toeReviewEligibilityDoesNotCreatePromotion :
+  ReviewEligibilityCreatesPromotionReceipt → ⊥
+toeReviewEligibilityDoesNotCreatePromotion =
+  PromotionReview.eligibilityCannotManufacturePromotion
+
+toeReviewEligibilityDoesNotCreateTruth :
+  EligibilityMeansTruth → ⊥
+toeReviewEligibilityDoesNotCreateTruth =
+  PromotionReview.eligibilityDoesNotMeanTruth
+
+toeRuntimeParityDoesNotCreateWorldTruth :
+  ZeroParityFailuresMeansWorldTruth → ⊥
+toeRuntimeParityDoesNotCreateWorldTruth =
+  RuntimeValidation.zeroParityFailuresDoNotMeanWorldTruth
+
+toeDiagnosticStreamDoesNotCreateLegalCertification :
+  DiagnosticLegalStreamMeansLegalCertification → ⊥
+toeDiagnosticStreamDoesNotCreateLegalCertification =
+  RuntimeValidation.diagnosticStreamDoesNotMeanLegalCertification
+
+toeProjectionDoesNotCreateClaimTruth :
+  CanonicalClaimProjectionPaysClaimTruth → ⊥
+toeProjectionDoesNotCreateClaimTruth =
+  ValidationRoadmap.projectionDoesNotPayClaimTruth
+
+toeReviewRouterDoesNotCreateConsumerAdequacy :
+  ReviewRouterImplementationPaysConsumerAdequacy → ⊥
+toeReviewRouterDoesNotCreateConsumerAdequacy =
+  ValidationRoadmap.routerDoesNotPayAdequacy
+
+toeParserCandidateDoesNotAuthorizeAdmission :
+  ParserCandidateAloneAuthorizesAdmission → ⊥
+toeParserCandidateDoesNotAuthorizeAdmission =
+  Admission.parserCandidateAloneCannotAuthorizeAdmission
+
+toeResidualPriorityDoesNotCreateTruthConfidence :
+  ResidualPriorityScoreIsTruthConfidence → ⊥
+toeResidualPriorityDoesNotCreateTruthConfidence =
+  Admission.residualPriorityIsNotTruthConfidence
+
+toeAdmissionReceiptDoesNotPublishGeneration :
+  AdmissionReceiptPublishesGeneration → ⊥
+toeAdmissionReceiptDoesNotPublishGeneration =
+  Admission.admissionReceiptDoesNotPublishGeneration
+
+toeSoftwareValidationDoesNotAuthorizePublication :
+  SoftwareValidationAuthorizesPublication → ⊥
+toeSoftwareValidationDoesNotAuthorizePublication =
+  SoftwareValidation.softwareValidationDoesNotAuthorizePublication
+
+toeLaterValidationDoesNotRewriteCertifiedBaseline :
+  LaterValidatedHeadRetroactivelyChangesCertifiedBaseline → ⊥
+toeLaterValidationDoesNotRewriteCertifiedBaseline =
+  SoftwareValidation.laterValidationDoesNotRewriteCertifiedBaseline
+
+toeRuntimeReviewContract : PromotionReview.RuntimeReviewContract
+toeRuntimeReviewContract =
+  PromotionReview.canonicalRuntimeReviewContract
+
+toeRuntimeValidationBoundary : RuntimeValidation.SLRValidationBoundary
+toeRuntimeValidationBoundary =
+  RuntimeValidation.canonicalSLRValidationBoundary
+
+toeValidationPromotionBoundary :
+  ValidationRoadmap.ValidationPromotionBoundary
+toeValidationPromotionBoundary =
+  ValidationRoadmap.canonicalValidationPromotionBoundary
+
+toeLegalSemanticAdmissionFrontier :
+  Admission.LegalSemanticAdmissionFrontier
+toeLegalSemanticAdmissionFrontier =
+  Admission.currentLegalSemanticAdmissionFrontier
+
+toeSemanticExpansionValidationReceipt :
+  SoftwareValidation.SemanticExpansionSoftwareValidationReceipt
+toeSemanticExpansionValidationReceipt =
+  SoftwareValidation.semanticExpansionSoftwareValidation
+
+record GovernedLegalWorkflowPromotionBoundary : Set where
+  constructor governed-legal-workflow-promotion-boundary
+  field
+    reviewEligibilityCreatesPromotion : Bool
+    reviewEligibilityCreatesPromotionIsFalse :
+      reviewEligibilityCreatesPromotion ≡ false
+
+    runtimeParityCreatesWorldTruth : Bool
+    runtimeParityCreatesWorldTruthIsFalse :
+      runtimeParityCreatesWorldTruth ≡ false
+
+    diagnosticStreamCreatesLegalCertification : Bool
+    diagnosticStreamCreatesLegalCertificationIsFalse :
+      diagnosticStreamCreatesLegalCertification ≡ false
+
+    claimProjectionCreatesTruth : Bool
+    claimProjectionCreatesTruthIsFalse :
+      claimProjectionCreatesTruth ≡ false
+
+    reviewRouterCreatesConsumerAdequacy : Bool
+    reviewRouterCreatesConsumerAdequacyIsFalse :
+      reviewRouterCreatesConsumerAdequacy ≡ false
+
+    parserCandidateCreatesAdmissionAuthority : Bool
+    parserCandidateCreatesAdmissionAuthorityIsFalse :
+      parserCandidateCreatesAdmissionAuthority ≡ false
+
+    residualPriorityCreatesTruthConfidence : Bool
+    residualPriorityCreatesTruthConfidenceIsFalse :
+      residualPriorityCreatesTruthConfidence ≡ false
+
+    admissionReceiptCreatesPublicationAuthority : Bool
+    admissionReceiptCreatesPublicationAuthorityIsFalse :
+      admissionReceiptCreatesPublicationAuthority ≡ false
+
+    softwareValidationCreatesPublicationAuthority : Bool
+    softwareValidationCreatesPublicationAuthorityIsFalse :
+      softwareValidationCreatesPublicationAuthority ≡ false
+
+    laterValidationRewritesCertifiedBaseline : Bool
+    laterValidationRewritesCertifiedBaselineIsFalse :
+      laterValidationRewritesCertifiedBaseline ≡ false
+
+open GovernedLegalWorkflowPromotionBoundary public
+
+canonicalGovernedLegalWorkflowPromotionBoundary :
+  GovernedLegalWorkflowPromotionBoundary
+canonicalGovernedLegalWorkflowPromotionBoundary =
+  governed-legal-workflow-promotion-boundary
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+
 
 ------------------------------------------------------------------------
 -- Normalized TOE boundary.
