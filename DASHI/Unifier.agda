@@ -468,32 +468,48 @@ unifierYangMillsLiteralStressActivityEntropyLevel =
 
 
 ------------------------------------------------------------------------
--- Authoritative Goal-1 R474 frontier via normalized R559 owner.
+-- Authoritative Goal-1 R485 maximum cut via normalized R559 owner.
 ------------------------------------------------------------------------
+
+unifierYangMillsGoal1FiniteSymmetryAndRPSourceLevel : ProofLevel
+unifierYangMillsGoal1FiniteSymmetryAndRPSourceLevel =
+  YMTOE.toeGoal1FiniteSymmetryAndRPSourceLevel
 
 unifierYangMillsGoal1A1CurrentStepBetaSourceLevel : ProofLevel
 unifierYangMillsGoal1A1CurrentStepBetaSourceLevel =
   YMTOE.toeGoal1A1CurrentStepBetaSourceLevel
 
-unifierYangMillsGoal1A3SameFamilyContinuumAndOSLevel : ProofLevel
-unifierYangMillsGoal1A3SameFamilyContinuumAndOSLevel =
-  YMTOE.toeGoal1A3SameFamilyContinuumAndOSLevel
+unifierYangMillsGoal1A3SourceNativeContinuumOSLevel : ProofLevel
+unifierYangMillsGoal1A3SourceNativeContinuumOSLevel =
+  YMTOE.toeGoal1A3SourceNativeContinuumOSLevel
 
-unifierYangMillsGoal1BLiteralPublishedSelectedLocalizationLevel : ProofLevel
-unifierYangMillsGoal1BLiteralPublishedSelectedLocalizationLevel =
-  YMTOE.toeGoal1BLiteralPublishedSelectedLocalizationLevel
+unifierYangMillsGoal1A3CountablyAdditiveRepresentationLevel : ProofLevel
+unifierYangMillsGoal1A3CountablyAdditiveRepresentationLevel =
+  YMTOE.toeGoal1A3CountablyAdditiveRepresentationLevel
 
-unifierYangMillsGoal1BPhysicalRateSemanticsLevel : ProofLevel
-unifierYangMillsGoal1BPhysicalRateSemanticsLevel =
-  YMTOE.toeGoal1BPhysicalRateSemanticsLevel
+unifierYangMillsGoal1A4FiniteRegularityLevel : ProofLevel
+unifierYangMillsGoal1A4FiniteRegularityLevel =
+  YMTOE.toeGoal1A4FiniteRegularityLevel
 
-unifierYangMillsGoal1BFiniteToPositiveTransferGapCompilerLevel : ProofLevel
-unifierYangMillsGoal1BFiniteToPositiveTransferGapCompilerLevel =
-  YMTOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
+unifierYangMillsGoal1A5FiniteGrowthLevel : ProofLevel
+unifierYangMillsGoal1A5FiniteGrowthLevel =
+  YMTOE.toeGoal1A5FiniteGrowthLevel
 
-unifierYangMillsGoal1CExactSameFamilySourceCutLevel : ProofLevel
-unifierYangMillsGoal1CExactSameFamilySourceCutLevel =
-  YMTOE.toeGoal1CExactSameFamilySourceCutLevel
+unifierYangMillsGoal1BWilsonTwoInsertionConnectedShellLevel : ProofLevel
+unifierYangMillsGoal1BWilsonTwoInsertionConnectedShellLevel =
+  YMTOE.toeGoal1BWilsonTwoInsertionConnectedShellLevel
+
+unifierYangMillsGoal1BGeometricDecayCompilerLevel : ProofLevel
+unifierYangMillsGoal1BGeometricDecayCompilerLevel =
+  YMTOE.toeGoal1BGeometricDecayCompilerLevel
+
+unifierYangMillsGoal1BStandardSpectralTransferLevel : ProofLevel
+unifierYangMillsGoal1BStandardSpectralTransferLevel =
+  YMTOE.toeGoal1BStandardSpectralTransferLevel
+
+unifierYangMillsGoal1CSameFamilySourceInstantiationLevel : ProofLevel
+unifierYangMillsGoal1CSameFamilySourceInstantiationLevel =
+  YMTOE.toeGoal1CSameFamilySourceInstantiationLevel
 
 unifierYangMillsGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
 unifierYangMillsGoal1G1ArbitraryCompactSimpleSourceMapLevel =
@@ -503,18 +519,18 @@ unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
 unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel =
   YMTOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
 
-unifierYangMillsGoal1CurrentFrontierCompilerLevel : ProofLevel
-unifierYangMillsGoal1CurrentFrontierCompilerLevel =
-  YMTOE.toeGoal1CurrentFrontierCompilerLevel
+unifierYangMillsGoal1MaximumCutCompilerLevel : ProofLevel
+unifierYangMillsGoal1MaximumCutCompilerLevel =
+  YMTOE.toeGoal1MaximumCutCompilerLevel
 
-unifierYangMillsGoal1ProjectiveProkhorovMandatory :
+unifierYangMillsGoal1ProjectiveProkhorovNotMandatory :
   YMTOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
-unifierYangMillsGoal1ProjectiveProkhorovMandatory = refl
+unifierYangMillsGoal1ProjectiveProkhorovNotMandatory = refl
 
-unifierYangMillsGoal1PostHocCMP116MagnitudeEqualityMandatory :
-  YMTOE.toeGoal1PostHocCMP116MagnitudeEqualityMandatory ≡ false
-unifierYangMillsGoal1PostHocCMP116MagnitudeEqualityMandatory = refl
+unifierYangMillsGoal1CompatibilityBRouteNotMandatory :
+  YMTOE.toeGoal1CompatibilityBRouteMandatory ≡ false
+unifierYangMillsGoal1CompatibilityBRouteNotMandatory = refl
 
-unifierYangMillsGoal1IndependentFourthCumulantMandatory :
-  YMTOE.toeGoal1IndependentFourthCumulantMandatory ≡ false
-unifierYangMillsGoal1IndependentFourthCumulantMandatory = refl
+unifierYangMillsGoal1ClayCompletionNotClaimed :
+  YMTOE.toeGoal1ClayCompletionClaimed ≡ false
+unifierYangMillsGoal1ClayCompletionNotClaimed = refl
