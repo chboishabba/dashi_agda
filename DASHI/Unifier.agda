@@ -1036,3 +1036,49 @@ unifierBalabanScaleTransferNonPromotion :
 unifierBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Current-master governance x fleet x Balaban/R559 x Ibrahim max-cut.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
+
+unifierCurrentMaxCutGovernanceFleetReceipt :
+  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
+unifierCurrentMaxCutGovernanceFleetReceipt =
+  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
+
+unifierCurrentFormalGapTarget : ℕ
+unifierCurrentFormalGapTarget =
+  CurrentMaxCut.targetFormalGapCount
+
+unifierCurrentFormalGapTargetIs58 :
+  unifierCurrentFormalGapTarget ≡ 58
+unifierCurrentFormalGapTargetIs58 =
+  CurrentMaxCut.targetFormalGapCountIs58
+
+unifierCurrentFleetDischargedFibresExcluded :
+  CurrentMaxCut.dischargedFleetFibresExcluded ≡ true
+unifierCurrentFleetDischargedFibresExcluded = refl
+
+unifierCurrentFiniteRGStillDoesNotPromoteContinuum :
+  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
+unifierCurrentFiniteRGStillDoesNotPromoteContinuum =
+  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
+
+unifierCurrentCandidateLegalSourceStillDoesNotCreateAuthority :
+  CurrentMaxCut.candidateLegalSourceCreatesAuthority ≡ false
+unifierCurrentCandidateLegalSourceStillDoesNotCreateAuthority =
+  CurrentMaxCut.candidateLegalSourceCreatesAuthorityIsFalse
+
+unifierCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy :
+  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacy ≡ false
+unifierCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy =
+  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacyIsFalse
+
+unifierCurrentIbrahimSearchPriorityDoesNotCreateProof :
+  CurrentMaxCut.Pareto.SearchPriorityCreatesProof → ⊥
+unifierCurrentIbrahimSearchPriorityDoesNotCreateProof =
+  CurrentMaxCut.ibrahimSearchPriorityCannotCreateProof
