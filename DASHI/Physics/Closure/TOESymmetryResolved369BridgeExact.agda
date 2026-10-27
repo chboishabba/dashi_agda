@@ -375,8 +375,7 @@ toeForcedEulerBlowupDoesNotPayUnforcedNSLeaf =
 
 toeNSOldGramLeafEqualsModernDirectCompanionLeaf :
   NSSnowball.oldGramLeafToModernDirectCompanionSameObjectRecovered ≡ true
-toeNSOldGramLeafEqualsModernDirectCompanionLeaf =
-  NSSnowball.oldR394WeightedRemainderAndModernDirectCompanionAreSameAnalyticLeafIsTrue
+toeNSOldGramLeafEqualsModernDirectCompanionLeaf = refl
 
 toeNSSameObjectRepresentationPlumbingRecovered :
   NSSnowball.sameObjectRepresentationPlumbingRecovered ≡ true
