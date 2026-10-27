@@ -107,6 +107,7 @@ import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
 import DASHI.Physics.Closure.YMClayPromotionBoundary as Promotion
 import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as ContinuumBoundary
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR413FourStageConstructorExact as TwoWilsonR413
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR415CompletionExact as TwoWilsonR415
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR556CompletionExact as TwoWilsonR556
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonGeneralGeometricTrajectoryExact as TwoWilsonGeneral
 
@@ -168,6 +169,26 @@ open BetaFloor public using
 -- The general geometric family removes the artificial quarter/half constants
 -- when a source-native amplitude and ratio are available.
 ------------------------------------------------------------------------
+
+toeLiteralTwoWilsonR415CompilerLevel : ProofLevel
+toeLiteralTwoWilsonR415CompilerLevel =
+  TwoWilsonR415.literalTwoWilsonR415CompilerLevel
+
+toeLiteralTwoWilsonR444TermConstructionLevel : ProofLevel
+toeLiteralTwoWilsonR444TermConstructionLevel =
+  TwoWilsonR415.literalTwoWilsonR444TermConstructionLevel
+
+toeLiteralTwoWilsonR445MixedLogIdentificationLevel : ProofLevel
+toeLiteralTwoWilsonR445MixedLogIdentificationLevel =
+  TwoWilsonR415.literalTwoWilsonR445MixedLogIdentificationLevel
+
+toeLiteralTwoWilsonR453ConnectedCoreLevel : ProofLevel
+toeLiteralTwoWilsonR453ConnectedCoreLevel =
+  TwoWilsonR415.literalTwoWilsonR453ConnectedCoreLevel
+
+toeLiteralTwoWilsonR451PhysicalCalibrationLevel : ProofLevel
+toeLiteralTwoWilsonR451PhysicalCalibrationLevel =
+  TwoWilsonR415.literalTwoWilsonR451PhysicalCalibrationLevel
 
 open TwoWilsonR413 public
   using (LiteralTwoWilsonR413FourStageSource)
