@@ -313,3 +313,10 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+-- Reuse the proved IIT/ternary-cube owners. These imports add no physical
+-- promotion and do not depend on any ESD surface.
+import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact
+import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact
+import DASHI.Biology.IITHigherOrderGluingDiscriminationExact
+import DASHI.Biology.IITParityGluingConjectureMaxCutExact
