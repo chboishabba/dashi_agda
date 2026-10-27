@@ -15,6 +15,7 @@ import DASHI.Physics.Unification.QGFrontierLedger as QG
 import DASHI.Physics.Laws.PhysicalLawCore as Law
 import DASHI.Physics.Foundations.CMP119AntigravityPhysicalEinsteinCalibrationExact as GravityCalibration
 import DASHI.Physics.Foundations.CMP119AntigravityTraceVsActiveStressFirewallExact as Trace
+import DASHI.Physics.Foundations.ParameterInformationGeometryExact as InfoGeometry
 
 ------------------------------------------------------------------------
 -- Focused theorem regression.
@@ -93,6 +94,14 @@ measuredGCouplingRegression :
   GravityCalibration.acceptedMeasuredGCouplingStillRequired ≡ true
 measuredGCouplingRegression =
   Bridge.acceptedMeasuredGCouplingStillRequired
+
+
+fisherMetricRegression :
+  InfoGeometry.finiteMetricExampleDerivesPhysicalFisherMetric
+    InfoGeometry.canonicalParameterInformationGeometryBoundary
+  ≡ false
+fisherMetricRegression =
+  Bridge.finiteInformationMetricDoesNotCreatePhysicalFisherMetric
 
 traceActiveStressRegression :
   Trace.negativeTraceAloneClosesNegativeActiveStress ≡ false
