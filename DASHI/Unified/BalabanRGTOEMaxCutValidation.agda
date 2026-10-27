@@ -2,7 +2,7 @@
 module DASHI.Unified.BalabanRGTOEMaxCutValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (false)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
@@ -633,7 +633,7 @@ unifierClayStillFalse =
 
 ------------------------------------------------------------------------
 -- Direct fleet planning-owner agreement.
--- These checks keep the fleet 58 separate from the Yang-Mills Gate-4 58.
+-- Fleet 58 remains distinct from Yang-Mills Gate-4 58.
 ------------------------------------------------------------------------
 
 toeFleetFormalGapReceiptMatchesOwner :
