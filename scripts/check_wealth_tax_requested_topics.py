@@ -107,7 +107,7 @@ def main() -> None:
         )
         owner_path = ROOT / (owner_module.replace(".", "/") + ".agda")
         assert owner_path.is_file(), f"source/evidence owner absent: {owner_path}"
-    assert not re.search(r"(?m)^\\s*(postulate|{-#\\s*TERMINATING)", bridge), (
+    assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", bridge), (
         "thin TOE bridge must use source-owned theorem aliases, not axioms"
     )
     workflow = (ROOT / ".github/workflows/philosophy.yml").read_text(encoding="utf-8")
