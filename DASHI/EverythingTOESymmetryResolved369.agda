@@ -8,3 +8,6 @@ module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
+
+-- Source-owned Occupy non-factorability and proof-relevant non-domination gate.
+import DASHI.Unified.OccupyNonDominationTOEExact
