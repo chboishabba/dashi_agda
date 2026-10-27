@@ -931,3 +931,59 @@ A new government-original [seven-page Office of Impact Analysis Dashboard IA, au
 - The IA explicitly calls future impact attribution challenging and lists physical diagnostics: sufficiency of delivered domestic supply, domestic price/volatility relative to benchmarks, volumes/durations of domestic supply contracts, and gas-production investment. This is an original *evaluation plan*, not independently verified measurements.
 
 The same Agda case owner implements RC-21 (government regulatory burden versus unrelated ADL export-revenue model) and RC-22 (January versus July 2027 source contradiction), with regression checks and no alleged transfer direction. The source-ledger is now **57 purposively selected appearances, 25 proposition families**. The broader [roadmap](../../Docs/roadmaps/ClimateClaimOriginConcentration20261027.md) and reproducible [alias/source counter](../../scripts/climate_claim_origin_audit.py) use these counts. **Structural/source verification is not full pytest, independent reproduction of IA maths or Agda kernel checking.**
+
+
+---
+
+## 27 October 2026 — DASHI TOE 369 / Unifier convergence, ZKP case receipt
+
+This lane touches the original **BOM and gas-source genealogy proof consumers** and the two existing TOE entrypoints. It does **not** edit `dashi_digital_esd`, any `*digital_esd*` module, or any `*ESD*` module. The latest upstream TOE PRs #1283, #1285, #1286 and #1287 use theorem-owner import and aggregation, rather than duplicate physical proof or placeholder axioms. This branch predates some of those upstream imports; it must be forward-merged without deleting the newer upstream TOE graph.
+
+### ZKP O/R/C/S/L/P/G/F
+
+**O — Objective.** Connect the exact non-promotion results from *Fact check BOM scandal* to `DASHI/Unifier.agda` and `DASHI/EverythingTOESymmetryResolved369.agda`. Preserve the original proofs and factual limits.
+
+**R — Reuse and preconditions.** Search the repository for exact symbols and related import paths first. Reuse `BOMFordhamMediaClaimAuditExact`, `BOMFordhamMediaClaimAuditValidation`, `EmpiricalGenealogyRound3Regression`, `ClimateGenealogyTypedCasesExact`, `Core.IntersectionalNonFactorability` and `Core.InstitutionalProximityInfluenceAdequacyExact`. The original modules must remain unchanged on the branch. Local `dashi-agda-preflight related_symbols/discover/round_lineage` was **not available** in the remote-connector session. GitHub search, source readback and dependency scan were used instead. Do not represent these checks as a preflight execution.
+
+**C — Construction.** Add 10 directly typed aliases to the *existing Unifier* and 10 corresponding aliases to the focused TOE aggregate. Every alias cites the proof owned by the original BOM or genealogy module. There is **no new Agda module**. A user-facing claim is not an original researcher; original author, document, publication and evidence role remain separate.
+
+**S — Safety invariants.** Confirmed digital transcription error does not establish fraud. Editorial ownership does not establish command. Shared rhetoric does not establish coordination. An unpublished audit remains unacquired. Corrections require same-object comparison. Rounded Palmerville temperatures do not recover original sub-degree measurements or their probability. A $17 billion figure does not identify its number of independent estimators. A 25% label does not identify whether a tax replaces or supplements PRRT. A rounded $21.9 billion tax statement does not establish whether it was originally a forecast or final reported payment. Think-tank, wealth or political access alone does not prove decision control.
+
+**L — Lane.** Single nonblocking governance lane. Changes to `Unifier`, `EverythingTOESymmetryResolved369`, the existing BOM regression Python tests and this audit only. This is **not** an assertion about the physical TOE, a computation of historical climate causation or an edit to ESD. Other latest-PR TOE lanes and meta-introspector repositories remain independent upstream work. Their original authors and tool maintainers retain credit.
+
+**P — Postconditions.** TOE consumers can import the ten bounded theorem statements from the focused 369 aggregate. The Unifier aliases refer directly to canonical owners. The aggregate aliases refer to the Unifier. Source references are not erased. No open real-world factual question becomes resolved because the alias typechecks.
+
+**G — Governance and quality lenses.** Source record and scope tracking use ITIL-style ownership/change control, ISO 9000 traceability, ISO/IEC 42001 AI governance, ISO/IEC 27001 security, ISO/IEC 27701 privacy, ISO/IEC 23894 and NIST AI RMF risk documentation, ISO 9241 task clarity, and Six Sigma repeatable defect checks. These are **design mappings**, not audited conformance, certification or access to copyrighted full standards. NIST RMF control families are Govern/Map/Measure/Manage, as defined by NIST. The same-object boundary and no unearned promotion are the measured control properties. A legal or scientific conclusion requires independent world evidence.
+
+**F — Verification and forward merge.** Read back exact branch files, check every imported owner and alias, check DAG for no `Unifier → EverythingTOE` cycle and ensure forbidden ESD paths are untouched. Static deterministic checks do not replace an Agda kernel run. Check the exact branch graph before merging with current default-branch TOE PRs; the older branch's short aggregate must not overwrite newer current TOE imports. The local Agda executable, repo clone and local preflight are absent in this session. Do not claim either Agda kernel certification or a full pytest execution.
+
+### C4 / PlantUML import graph
+
+```plantuml
+@startuml
+left to right direction
+component "BOM source owner" as B
+component "BOM validation" as V
+component "Climate genealogy source owner" as C
+component "Empirical regression" as R
+component "Nonfactorability owner" as N
+component "Institutional proximity owner" as P
+component "DASHI.Unifier" as U
+component "DASHI.EverythingTOESymmetryResolved369" as T
+B --> V
+C --> R
+N --> V
+N --> R
+P --> R
+V --> U
+R --> U
+P --> U
+U --> T
+@enduml
+```
+
+The 369 TOE consumer binds to the exact imported proofs. It does not use `DASHI-Unification-Theorem`'s axiomatized older interface as the source of governance truth. The governance proof lane carries no digital-ESD imports.
+
+### Source and attribution ledger
+
+BOM owns the institutional statement about digitisation errors; Berger and Sherrington own their reported audit hypotheses; Graham Readfearn owns the methodological critique; the original economic modeller owns each forecast; the API, tobacco and GCC plan authors own their original documents; the DASHI PR owns only typed source genealogy and proof composition. The case-graded historical estimates, including royalty-free percentages, possible tax revenue and commissioned think-tank rhetoric, remain conditional on their original inputs. This source-policy control is compatible with user safety and source provenance but cannot identify the financiers of a particular later sentence without that sentence's actual commissioning record.
