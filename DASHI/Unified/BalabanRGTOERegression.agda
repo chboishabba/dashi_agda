@@ -1,6 +1,8 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.BalabanRGTOERegression where
 
+open import Agda.Primitive using (Setω)
+
 ------------------------------------------------------------------------
 -- TOE NORMALIZATION FOR THE BALABAN YANG--MILLS LANE
 --
@@ -19,6 +21,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -47,6 +50,8 @@ import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105E
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as StressCauchy
 import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as StressHilbert
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
+import DASHI.Physics.Closure.YMBalabanContinuumLimitReceipt as ContinuumLimit
+import DASHI.Physics.Closure.YMDepthAsContinuumLimitReceipt as DepthContinuum
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
 import DASHI.Geometry.Gauge.SUNPrimitives as SUN
 import DASHI.Physics.YangMills.BalabanRGLane as LegacyRGLane
@@ -340,6 +345,40 @@ legacyBalabanLaneAlsoDeclaresNoClayPromotion :
   SUN.clayYangMillsPromoted ≡ false
 legacyBalabanLaneAlsoDeclaresNoClayPromotion =
   LegacyRGLane.noClayPromotion LegacyRGLane.canonicalBalabanRGLane
+
+------------------------------------------------------------------------
+-- Reused typed continuum and RG-flow non-promotion owners.
+------------------------------------------------------------------------
+
+BalabanContinuumLimitReceipt : Setω
+BalabanContinuumLimitReceipt = ContinuumLimit.YMBalabanContinuumLimitReceipt
+
+BalabanContinuumLimitPromotion : Set
+BalabanContinuumLimitPromotion = ContinuumLimit.YMBalabanContinuumLimitPromotion
+
+balabanContinuumLimitPromotionImpossible :
+  BalabanContinuumLimitPromotion → ⊥
+balabanContinuumLimitPromotionImpossible =
+  ContinuumLimit.ymBalabanContinuumLimitPromotionImpossibleHere
+
+DepthContinuumLimitReceipt : Setω
+DepthContinuumLimitReceipt = DepthContinuum.YMDepthAsContinuumLimitReceipt
+
+DepthContinuumLimitPromotion : Set
+DepthContinuumLimitPromotion = DepthContinuum.YMDepthContinuumLimitPromotion
+
+depthContinuumLimitPromotionImpossible :
+  DepthContinuumLimitPromotion → ⊥
+depthContinuumLimitPromotionImpossible =
+  DepthContinuum.ymDepthContinuumLimitPromotionImpossibleHere
+
+balabanContinuumLimitReceipt : ContinuumLimit.YMBalabanContinuumLimitReceipt
+balabanContinuumLimitReceipt =
+  ContinuumLimit.canonicalYMBalabanContinuumLimitReceipt
+
+depthContinuumLimitReceipt : DepthContinuum.YMDepthAsContinuumLimitReceipt
+depthContinuumLimitReceipt =
+  DepthContinuum.canonicalYMDepthAsContinuumLimitReceipt
 
 ------------------------------------------------------------------------
 -- Normalize authority on the stricter frontier.
