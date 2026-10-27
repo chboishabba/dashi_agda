@@ -102,6 +102,15 @@ def test_bridge_is_attached_to_toe_root_and_unifier():
     assert "toeGovernedLegalWorkflowZKPReceipt" in toe
     assert "toeCaseySelectionDoesNotCreateWorldTruth" in toe
     assert "toeKnowledgeDoesNotCreateExecutionAuthority" in toe
+    assert "toeGovernedLegalWorkflowBoundary" in toe
+    assert "toeWorkflowTaskCompletionDoesNotCreateTruth" in toe
+    assert "toeDatabaseCommitDoesNotCreateSemanticAuthority" in toe
+    assert "toeAcceptedReviewDoesNotPayApplicability" in toe
+    assert "toeMatterAcceptanceDoesNotCreateTruth" in toe
+    assert "toeCitationAloneDoesNotRealiseLegalRule" in toe
+    assert "toeSemanticMeetDoesNotProveLegalApplicability" in toe
+    assert "toeControlEvidenceDoesNotCreateTruth" in toe
+    assert "toePassingControlDoesNotMeanCertified" in toe
     assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE" in unifier
     assert "toeGovernedLegalWorkflowZKPReceipt" in unifier
 
