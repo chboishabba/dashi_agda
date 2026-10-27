@@ -107,6 +107,11 @@ jobs:
           dashi-repo related toeRecognitionAcquisitionTargetLocalized --root . --limit 20
           dashi-repo related toeActualBase369RecognitionCandidateStillOpen --root . --limit 20
           dashi-repo related toeOEISDoesNotCreateBase369RecognitionCandidate --root . --limit 20
+          dashi-repo related toeTernary27OriginPlus26CarrierPaid --root . --limit 20
+          dashi-repo related toeTernary27JordanProductStillOpen --root . --limit 20
+          dashi-repo related toeTernary27F4ActionStillOpen --root . --limit 20
+          dashi-repo discover 'ternary 27 origin 26 Albert shape Jordan F4 E6 same carrier BIDI' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact --root .
           dashi-repo discover 'A025616 Base369 recognition acquisition W_zeta appraisal fibre Fin90 translation modulation intertwiner' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact --root .
           dashi-repo discover 'shortest 3B source Base369 recognition candidate action recognition multiplicity inertia' --root . --limit 40
