@@ -3,6 +3,7 @@ module DASHI.Unified.Physics where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; [])
+import Data.Empty
 
 import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.UnifiedMathLanguageAssertedProofs as Asserted
@@ -465,3 +466,8 @@ navierStokesClayFrontierZKPFrame :
   NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
 navierStokesClayFrontierZKPFrame =
   NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+navierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → Data.Empty.⊥
+navierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
