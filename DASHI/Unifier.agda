@@ -1383,3 +1383,60 @@ unifierBalabanPhysicalPromotionCut =
   unifierBalabanBlockSpinStillBlocked ,
   (unifierBalabanUniformKPStillBlocked ,
    unifierBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Current-master cross-domain max-cut and contextual 369 handoff.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
+import DASHI.Core.GovernanceTrajectoryRealisationExact as CurrentTrajectory
+import DASHI.Foundations.SSPTritCarrier as CurrentSSP
+
+unifierCurrentMaxCutGovernanceFleetReceipt :
+  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
+unifierCurrentMaxCutGovernanceFleetReceipt =
+  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
+
+unifierCurrent369ContextualFibreWeldReceipt :
+  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
+unifierCurrent369ContextualFibreWeldReceipt =
+  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
+
+unifierCurrent369DecisionSheetStatesIsNine :
+  CurrentMaxCut.decisionSheetStateCount ≡ 9
+unifierCurrent369DecisionSheetStatesIsNine =
+  CurrentMaxCut.decisionSheetStateCountIsNine
+
+unifierCurrent369InteractionCubeStatesIsTwentySeven :
+  CurrentMaxCut.interactionCubeStateCount ≡ 27
+unifierCurrent369InteractionCubeStatesIsTwentySeven =
+  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
+
+unifierCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
+  CurrentMaxCut.appraisalFibreStateCount ≡ 729
+unifierCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
+  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
+
+unifierCurrent369SupportIsPositive :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.supports
+  ≡ CurrentSSP.sspPosOne
+unifierCurrent369SupportIsPositive =
+  CurrentMaxCut.supportOrientationIsPositive
+
+unifierCurrent369CounterIsNegative :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.counters
+  ≡ CurrentSSP.sspNegOne
+unifierCurrent369CounterIsNegative =
+  CurrentMaxCut.counterOrientationIsNegative
+
+unifierCurrent369SynthesisDoesNotEraseComparator :
+  CurrentMaxCut.synthesisErasesComparator ≡ false
+unifierCurrent369SynthesisDoesNotEraseComparator =
+  CurrentMaxCut.synthesisErasesComparatorIsFalse
+
+unifierCurrentFiniteRGStillDoesNotPromoteContinuum :
+  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
+unifierCurrentFiniteRGStillDoesNotPromoteContinuum =
+  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
