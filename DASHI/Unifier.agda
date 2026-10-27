@@ -979,6 +979,19 @@ unifierReviewedGenealogyDoesNotPayApplicability =
 unifierGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
   LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
 
+
+unifierGenealogyCandidateSourceDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
+
+unifierGenealogySameLegalSystemDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
+
+unifierGenealogyCurrentValidityDoesNotCreateApplicability =
+  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
+
+unifierGenealogyDocumentRoleDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
+
 ------------------------------------------------------------------------
 -- Governed legal/source/semantic non-promotion handoff.
 ------------------------------------------------------------------------
