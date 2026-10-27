@@ -46,12 +46,6 @@ pantsSeamDoesNotConstructNewHyperfabric :
 pantsSeamDoesNotConstructNewHyperfabric =
   TypedPants.seamDoesNotAutomaticallyConstructNewHyperfabric
 
-finiteNineSheetPantsRoundTrip :
-  (sheet : DASHI.Foundations.SSPTriadicKernel.NineSheet) →
-  Pants369.pants2ToNine (Pants369.nineToPants2 sheet) ≡ sheet
-finiteNineSheetPantsRoundTrip =
-  Pants369.ninePantsRoundTrip
-
 finitePantsPathIsNotSmoothPantsSurface :
   Pants369.finitePantsPathIsSmoothPantsSurface
     Pants369.canonicalColourWheelNinePantsBoundary
