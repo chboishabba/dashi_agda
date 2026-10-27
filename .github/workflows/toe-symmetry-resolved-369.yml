@@ -100,6 +100,13 @@ jobs:
           dashi-repo related toePhaseResolvedSeventyEightMultiplicityPaid --root . --limit 20
           dashi-repo related toeActualSameActionTwelveSeventyEightIntertwinerStillOpen --root . --limit 20
           dashi-repo related toeVOAKernelRecognizedAttachmentStillOpen --root . --limit 20
+          dashi-repo related toeShortestSourceCompilesActualActionRecognition --root . --limit 20
+          dashi-repo related toeSeparateActualActionRecognitionLeafNotNeeded --root . --limit 20
+          dashi-repo related toeBase369CandidateCompilesRecognition --root . --limit 20
+          dashi-repo related toeBase369ShortestCandidateStillUninhabited --root . --limit 20
+          dashi-repo discover 'shortest 3B source Base369 recognition candidate action recognition multiplicity inertia' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact --root .
+          dashi-repo lineage --prefix DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact --root .
           dashi-repo discover 'selected 3B linear acquisition completion normalizer action phase resolved 12 78 same action intertwiner' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact --root .
           dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact --root .
