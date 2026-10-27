@@ -74,3 +74,43 @@ unifierCommonSourceAliasIsExact :
   Source.CommonSourceMeansNoEvidence → ⊥
 unifierCommonSourceAliasIsExact =
   Unifier.unifierLegalCommonSourceDoesNotEraseEvidence
+
+candidateSourceAuthorityAliasIsExact :
+  Legal.CandidateSourceIsAuthoritative → ⊥
+candidateSourceAuthorityAliasIsExact =
+  Handoff.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
+
+sameLegalSystemAuthorityAliasIsExact :
+  Legal.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+sameLegalSystemAuthorityAliasIsExact =
+  Handoff.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
+
+currentValidityApplicabilityAliasIsExact :
+  Legal.CurrentValidityAutomaticallyMeansApplicability → ⊥
+currentValidityApplicabilityAliasIsExact =
+  Handoff.toeGenealogyCurrentValidityDoesNotCreateApplicability
+
+documentRoleAuthorityAliasIsExact :
+  Legal.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+documentRoleAuthorityAliasIsExact =
+  Handoff.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
+
+unifierCandidateSourceAuthorityAliasIsExact :
+  Legal.CandidateSourceIsAuthoritative → ⊥
+unifierCandidateSourceAuthorityAliasIsExact =
+  Unifier.unifierGenealogyCandidateSourceDoesNotCreateLegalAuthority
+
+unifierSameLegalSystemAuthorityAliasIsExact :
+  Legal.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+unifierSameLegalSystemAuthorityAliasIsExact =
+  Unifier.unifierGenealogySameLegalSystemDoesNotCreateLegalAuthority
+
+unifierCurrentValidityApplicabilityAliasIsExact :
+  Legal.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifierCurrentValidityApplicabilityAliasIsExact =
+  Unifier.unifierGenealogyCurrentValidityDoesNotCreateApplicability
+
+unifierDocumentRoleAuthorityAliasIsExact :
+  Legal.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+unifierDocumentRoleAuthorityAliasIsExact =
+  Unifier.unifierGenealogyDocumentRoleDoesNotCreateLegalAuthority
