@@ -55,21 +55,29 @@ equal58DoesNotIdentifyObjects =
   Owner.equal58CardinalityDoesNotCreateSameObject
 
 fleetEigenPriorityStillNotProof :
-  Fleet.FleetEigenPriorityCreatesProof → ⊥
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ false
 fleetEigenPriorityStillNotProof =
   Fleet.fleetEigenPriorityDoesNotCreateProof
 
 fleetExternalCountStillNotFormalDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ false
 fleetExternalCountStillNotFormalDischarge =
   Fleet.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStillProtected :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
 fleetDischargedFibresStillProtected =
-  Fleet.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+  Fleet.fleetDischargedFibresRemainOutOfTarget
 
 fleetContradictionsStaySeparate :
-  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+  Fleet.contradictionGapsRemainSeparate
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
 fleetContradictionsStaySeparate =
-  Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
+  Fleet.fleetContradictionGapsRemainSeparate
