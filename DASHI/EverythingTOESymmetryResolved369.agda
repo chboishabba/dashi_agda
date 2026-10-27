@@ -1,5 +1,6 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NSCut
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
@@ -1097,3 +1098,52 @@ toeBalabanPhysicalPromotionCut =
   toeBalabanBlockSpinStillBlocked ,
   (toeBalabanUniformKPStillBlocked ,
    toeBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Navier-Stokes A/B/C/D native-proof max-cut.
+-- Source owner remains NSABCDConcentratedCompletionCutExact.
+------------------------------------------------------------------------
+
+toeNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
+toeNSABCDMaxCutReceipt =
+  NSCut.canonicalNSABCDTOEMaxCutReceipt
+
+toeNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
+toeNSABCDZKPFrame =
+  NSCut.canonicalNSABCDTOEZKPFrame
+
+toeNSR540OrderedOffDiagonalM2CompilerClosed :
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosed ≡ true
+toeNSR540OrderedOffDiagonalM2CompilerClosed =
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosedIsTrue
+
+toeNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+toeNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
+
+toeNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+toeNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+toeNSPhysicalWeightedSecondMomentPaymentStillOpen :
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosed ≡ false
+toeNSPhysicalWeightedSecondMomentPaymentStillOpen =
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosedIsFalse
+
+toeNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+toeNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
+
+toeNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+toeNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
+
+toeNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+toeNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse
