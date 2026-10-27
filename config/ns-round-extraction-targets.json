@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "target_prefixes": [
+    "DASHI.Physics.Closure.",
+    "DASHI.Papers.NavierStokes."
+  ],
+  "package_namespace": "ns-round-package",
+  "round_regex": "Round[0-9]+",
+  "candidate_positive_names": [],
+  "status_count_names": [],
+  "status_name_patterns": [
+    "IsFalse$",
+    "IsTrue$",
+    "CountIs",
+    "Regression",
+    "StillOpen$"
+  ],
+  "negative_name_terms": [
+    "nogo",
+    "no-go",
+    "firewall",
+    "impossible",
+    "underdetermination",
+    "obstruction"
+  ],
+  "priority_families": [
+    "DASHI.Papers.NavierStokes.TheoremInterface",
+    "DASHI.Physics.Closure.NSTriadKNClayFrontier"
+  ],
+  "compiler_hints": {},
+  "canonical_owner_by_name": {},
+  "canonical_owner_by_family": {},
+  "canonical_endpoint_names": [],
+  "provenance_only_names": [],
+  "nonround_match_sample_limit": 10,
+  "outputs": {
+    "clusters": ".dashi/round-stranded/ns-package-clusters.jsonl",
+    "receipts": ".dashi/round-stranded/ns-packages.jsonl"
+  },
+  "policy": {
+    "rounds_authoritative_by_default": false,
+    "body_only_equivalence_is_semantic_evidence": false,
+    "renamed_supersession_requires_signature_identity_or_explicit_alias": true,
+    "missing_evidence_disposition": "UNRESOLVED"
+  }
+}

@@ -4,17 +4,20 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dashi-agda-preflight"
-version = "0.1.0"
-description = "Fast tree-sitter based Agda semantic preflight checks for DASHI"
+version = "0.2.0"
+description = "DASHI repository intelligence core: semantic preflight, discovery, history and provenance"
 requires-python = ">=3.9"
 dependencies = [
-  # tree-sitter-agda 1.3.3 exposes its language through the PyCapsule API,
-  # which requires the 0.25 runtime line.
   "tree-sitter>=0.25,<0.27",
   "tree-sitter-agda[core]>=1.3.3,<2",
 ]
 
 [project.scripts]
+dashi-repo = "agda_preflight.product_cli:main"
+dashi-repo-formal-evidence = "agda_preflight.external_evidence_cli:main"
+dashi-repo-kernel-certify = "agda_preflight.kernel_certification_cli:main"
+dashi-repo-formal-evidence-from-kernel = "agda_preflight.external_evidence_from_kernel_cli:main"
+dashi-repo-mcp = "agda_preflight.repository_mcp:main"
 dashi-agda = "agda_preflight.interactive_cli:main"
 dashi-agda-server = "agda_preflight.service:main"
 dashi-agda-mcp = "agda_preflight.mcp_server:main"
@@ -29,7 +32,6 @@ include = ["agda_preflight*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-
 
 [project.optional-dependencies]
 test = [

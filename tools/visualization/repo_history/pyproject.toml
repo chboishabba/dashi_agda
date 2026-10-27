@@ -4,24 +4,35 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dashi-repo-history"
-version = "0.1.0"
-description = "Temporal repository and semantic-symbol graph extraction for dashi_agda"
+version = "0.2.0"
+description = "Temporal and visualization frontend for the DASHI repository-intelligence database"
 requires-python = ">=3.11"
-dependencies = [
-  "tree-sitter>=0.22,<0.23",
-  "tree-sitter-agda==1.3.3",
-  "networkx>=3.2",
-  "manim>=0.21,<0.22",
-]
+dependencies = []
 
 [project.scripts]
 dashi-repo-history = "dashi_repo_history.cli:main"
+dashi-repo-narrative = "dashi_repo_history.narrative_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+legacy-agda = [
+  "tree-sitter>=0.25,<0.27",
+  "tree-sitter-agda[core]>=1.3.3,<2",
+]
+visualize = [
+  "networkx>=3.2",
+  "manim>=0.21,<0.22",
+]
+full = [
+  "pytest>=8",
+  "tree-sitter>=0.25,<0.27",
+  "tree-sitter-agda[core]>=1.3.3,<2",
+  "networkx>=3.2",
+  "manim>=0.21,<0.22",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

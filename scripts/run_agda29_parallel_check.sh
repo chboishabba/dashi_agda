@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-JOBS="${AGDA_JOBS:-4}"
+JOBS="${AGDA_JOBS:-0}"
 AGDA_FLAKE="${AGDA_FLAKE:-/home/c/Documents/code/agda#debug.bin}"
 # Protect ordinary direct checks too.  A pathological elaboration should stop
 # before it can drive a 32 GiB workstation into swap thrash.  Callers may
@@ -82,7 +82,7 @@ if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && [ -t 0 ] && command
   rm -f "$STATUS_FILE"
   exit "$rc"
 fi
-REPO_ROOT="${DASHI_REPO_ROOT:-/home/c/Documents/code/dashi_agda}"
+REPO_ROOT="${DASHI_REPO_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 STDLIB_SRC="${AGDA_STDLIB_SRC_29:-${AGDA_STDLIB_SRC:-}}"
 STDLIB_REPO="${AGDA_STDLIB_REPO:-https://github.com/agda/agda-stdlib.git}"
 STDLIB_REF="${AGDA_STDLIB_REF:-experimental}"
@@ -338,17 +338,14 @@ if [ -n "${AGDA_PROFILE:-}" ]; then
   fi
 fi
 
-AGDA_RTS_ARGS=()
-if [ -n "${AGDA_RTS_HEAP:-}" ] || [ "${AGDA_RTS_STATS:-0}" = "1" ]; then
-  AGDA_RTS_ARGS=(+RTS)
-  if [ -n "${AGDA_RTS_HEAP:-}" ]; then
-    AGDA_RTS_ARGS+=("-M${AGDA_RTS_HEAP}")
-  fi
-  if [ "${AGDA_RTS_STATS:-0}" = "1" ]; then
-    AGDA_RTS_ARGS+=(-s)
-  fi
-  AGDA_RTS_ARGS+=(-RTS)
+AGDA_RTS_ARGS=(+RTS -N)
+if [ -n "${AGDA_RTS_HEAP:-}" ]; then
+  AGDA_RTS_ARGS+=("-M${AGDA_RTS_HEAP}")
 fi
+if [ "${AGDA_RTS_STATS:-0}" = "1" ]; then
+  AGDA_RTS_ARGS+=(-s)
+fi
+AGDA_RTS_ARGS+=(-RTS)
 
 AGDA_RUN=("$AGDA_BIN" "${AGDA_RTS_ARGS[@]}" \
   --no-libraries --no-default-libraries \
