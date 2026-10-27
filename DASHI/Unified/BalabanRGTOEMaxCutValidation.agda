@@ -3,6 +3,7 @@ module DASHI.Unified.BalabanRGTOEMaxCutValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
@@ -630,6 +631,70 @@ unifierClayStillFalse :
   Balaban.balabanRGClayPromotionFlag ≡ false
 unifierClayStillFalse =
   Unifier.balabanRGClayPromotionStillFalse
+
+------------------------------------------------------------------------
+-- Typed continuum and depth-limit non-promotion reachability.
+------------------------------------------------------------------------
+
+toeBalabanContinuumLimitReceiptMatchesOwner :
+  TOE.toeBalabanContinuumLimitReceipt
+  ≡ Balaban.balabanContinuumLimitReceipt
+toeBalabanContinuumLimitReceiptMatchesOwner = refl
+
+unifierBalabanContinuumLimitReceiptMatchesOwner :
+  Unifier.unifierBalabanContinuumLimitReceipt
+  ≡ Balaban.balabanContinuumLimitReceipt
+unifierBalabanContinuumLimitReceiptMatchesOwner = refl
+
+physicsBalabanContinuumLimitReceiptMatchesOwner :
+  Physics.yangMillsBalabanContinuumLimitReceipt
+  ≡ Balaban.balabanContinuumLimitReceipt
+physicsBalabanContinuumLimitReceiptMatchesOwner = refl
+
+toeBalabanContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+toeBalabanContinuumLimitPromotionImpossible =
+  TOE.toeBalabanContinuumLimitPromotionImpossible
+
+unifierBalabanContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+unifierBalabanContinuumLimitPromotionImpossible =
+  Unifier.unifierBalabanContinuumLimitPromotionImpossible
+
+physicsBalabanContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+physicsBalabanContinuumLimitPromotionImpossible =
+  Physics.yangMillsBalabanContinuumLimitPromotionImpossible
+
+toeDepthContinuumLimitReceiptMatchesOwner :
+  TOE.toeDepthContinuumLimitReceipt
+  ≡ Balaban.depthContinuumLimitReceipt
+toeDepthContinuumLimitReceiptMatchesOwner = refl
+
+unifierDepthContinuumLimitReceiptMatchesOwner :
+  Unifier.unifierDepthContinuumLimitReceipt
+  ≡ Balaban.depthContinuumLimitReceipt
+unifierDepthContinuumLimitReceiptMatchesOwner = refl
+
+physicsDepthContinuumLimitReceiptMatchesOwner :
+  Physics.yangMillsDepthContinuumLimitReceipt
+  ≡ Balaban.depthContinuumLimitReceipt
+physicsDepthContinuumLimitReceiptMatchesOwner = refl
+
+toeDepthContinuumLimitPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+toeDepthContinuumLimitPromotionImpossible =
+  TOE.toeDepthContinuumLimitPromotionImpossible
+
+unifierDepthContinuumLimitPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+unifierDepthContinuumLimitPromotionImpossible =
+  Unifier.unifierDepthContinuumLimitPromotionImpossible
+
+physicsDepthContinuumLimitPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+physicsDepthContinuumLimitPromotionImpossible =
+  Physics.yangMillsDepthContinuumLimitPromotionImpossible
 
 ------------------------------------------------------------------------
 -- Direct fleet planning-owner agreement.
