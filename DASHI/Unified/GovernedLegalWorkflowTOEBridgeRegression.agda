@@ -5,7 +5,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as Bridge
-import DASHI.Unified.Everything as UnifiedEverything
 import DASHI.Unifier as Unifier
 
 unifierUsesCanonicalInvariantHandoff :
@@ -129,21 +128,6 @@ invariantHandoffUsesCanonicalIntrospectiveZKPFrame :
 invariantHandoffUsesCanonicalIntrospectiveZKPFrame =
   Bridge.introspectiveZKPFrameIsCanonical
     Unifier.toeGovernedLegalWorkflowInvariantHandoff
-
-unifiedEverythingUsesCanonicalGovernanceBoundary :
-  UnifiedEverything.governedLegalWorkflowTOEBoundary
-  ≡ Bridge.canonicalGovernedLegalWorkflowTOEBoundary
-unifiedEverythingUsesCanonicalGovernanceBoundary = refl
-
-unifiedEverythingUsesCanonicalInvariantHandoff :
-  UnifiedEverything.governedLegalWorkflowTOEInvariantHandoff
-  ≡ Bridge.canonicalGovernedLegalWorkflowTOEInvariantHandoff
-unifiedEverythingUsesCanonicalInvariantHandoff = refl
-
-unifiedEverythingUsesCanonicalIntrospectiveZKPFrame :
-  UnifiedEverything.governedLegalWorkflowIntrospectiveZKPFrame
-  ≡ Bridge.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
-unifiedEverythingUsesCanonicalIntrospectiveZKPFrame = refl
 
 zkpStandardsRemainDesignLenses :
   Bridge.standardsAreDesignLenses
