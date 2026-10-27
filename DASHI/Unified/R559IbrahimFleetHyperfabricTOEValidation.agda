@@ -11,6 +11,7 @@ import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as Owner
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
 import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
 import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as U8Runtime
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 
 toeReceiptMatchesOwner :
   TOE.toeR559IbrahimFleetHyperfabricReceipt
@@ -128,3 +129,52 @@ unifiedRuntimeSourceDoesNotCreateKernelCertification :
   U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
 unifiedRuntimeSourceDoesNotCreateKernelCertification =
   Unified.unifiedTriadicRuntimeSourceDoesNotCreateKernelCertification
+
+------------------------------------------------------------------------
+-- Compiled scalar runtime firewalls.
+------------------------------------------------------------------------
+
+toeCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+toeCompiledScalarDoesNotCreateRust =
+  TOE.toeCompiledScalarDoesNotCreateRust
+
+unifierCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifierCompiledScalarDoesNotCreateRust =
+  Unifier.unifierCompiledScalarDoesNotCreateRust
+
+unifiedCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifiedCompiledScalarDoesNotCreateRust =
+  Unified.unifiedCompiledScalarDoesNotCreateRust
+
+toeCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+toeCompiledScalarDoesNotCreateBackendEquivalence =
+  TOE.toeCompiledScalarDoesNotCreateBackendEquivalence
+
+unifierCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifierCompiledScalarDoesNotCreateBackendEquivalence =
+  Unifier.unifierCompiledScalarDoesNotCreateBackendEquivalence
+
+unifiedCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifiedCompiledScalarDoesNotCreateBackendEquivalence =
+  Unified.unifiedCompiledScalarDoesNotCreateBackendEquivalence
+
+toeCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toeCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  TOE.toeCompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  Unifier.unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  Unified.unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess
