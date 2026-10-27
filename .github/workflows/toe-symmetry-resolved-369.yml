@@ -28,6 +28,9 @@ on:
       - 'DASHI/Unified/BalabanR559TOEMaxCutExact.agda'
       - 'DASHI/Unified/BalabanR559TOEMaxCutValidation.agda'
       - 'DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda'
+      - 'Docs/architecture/YMGoal1R559IbrahimTOE.puml'
       - 'DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -128,6 +131,14 @@ jobs:
           dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
           dashi-repo discover 'Balaban R559 same owner direct scale transfer non-promotion TOE max cut' --root . --limit 50
           dashi-repo lineage --prefix DASHI.Unified.BalabanR559 --root .
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda --root .
+          dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
+          dashi-repo related canonicalRecognitionRouteParetoBoundary --root . --limit 20
+          dashi-repo related currentMonster3BCharacterExecutionFrontier --root . --limit 20
+          dashi-repo related canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary --root . --limit 20
+          dashi-repo discover 'Balaban R559 Goal1 max cut Ibrahim Pareto snowball Monster 3B H-zeta non-promotion' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -158,6 +169,8 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutExact.agda
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
             DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
@@ -182,6 +195,8 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutExact.agda
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
