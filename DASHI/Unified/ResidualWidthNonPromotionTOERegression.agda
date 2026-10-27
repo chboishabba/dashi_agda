@@ -13,51 +13,51 @@ import DASHI.Unified.ResidualWidthNonPromotionTOEExact as TOE
 import DASHI.Unifier as Unifier
 
 unifierResidualWidthOwnerIsExact :
-  Unifier.O-residualWidthWitness
-  ≡ TOE.O-residualWidthWitness
+  Unifier.toeBlockEqualityResidualWidthWitness
+  ≡ TOE.toeBlockEqualityResidualWidthWitness
 unifierResidualWidthOwnerIsExact = refl
 
 unifierWidthNonPromotionOwnerIsExact :
-  Unifier.C-orderedWidthDoesNotLowerBoundArbitraryDecisionCount
-  ≡ TOE.C-orderedWidthDoesNotLowerBoundArbitraryDecisionCount
+  Unifier.toeOrderedWidthDoesNotLowerBoundArbitraryDecisionCount
+  ≡ TOE.toeOrderedWidthDoesNotLowerBoundArbitraryDecisionCount
 unifierWidthNonPromotionOwnerIsExact = refl
 
 unifierDirectDPObstructionOwnerIsExact :
-  Unifier.C2-blockEqualityMeasureBlocksDirectDPRun
-  ≡ TOE.C2-blockEqualityMeasureBlocksDirectDPRun
+  Unifier.toeBlockEqualityConditionalDirectDPObstruction
+  ≡ TOE.toeBlockEqualityConditionalDirectDPObstruction
 unifierDirectDPObstructionOwnerIsExact = refl
 
 unifierSelfSpecializationNoGoOwnerIsExact :
-  Unifier.C3-genericSelfSpecializationDoesNotForceSmallWidth
-  ≡ TOE.C3-genericSelfSpecializationDoesNotForceSmallWidth
+  Unifier.toeGenericSelfSpecializationDoesNotForceSmallWidth
+  ≡ TOE.toeGenericSelfSpecializationDoesNotForceSmallWidth
 unifierSelfSpecializationNoGoOwnerIsExact = refl
 
 unifierCandidateFirstStepBoundaryOwnerIsExact :
-  Unifier.C4-highWidthRefutesCandidateFirstStepDebt
-  ≡ TOE.C4-highWidthRefutesCandidateFirstStepDebt
+  Unifier.toeCandidateHighWidthRefutesRequiredFirstStep
+  ≡ TOE.toeCandidateHighWidthRefutesRequiredFirstStep
 unifierCandidateFirstStepBoundaryOwnerIsExact = refl
 
 unifierExhaustiveFailureOwnerIsExact :
-  Unifier.S-exhaustiveBuilderFailsAtSmallBudget
-  ≡ TOE.S-exhaustiveBuilderFailsAtSmallBudget
+  Unifier.toeExhaustiveBuilderFailsAtSmallBudget
+  ≡ TOE.toeExhaustiveBuilderFailsAtSmallBudget
 unifierExhaustiveFailureOwnerIsExact = refl
 
 unifierFutureTransportOwnerIsExact :
-  Unifier.L-candidateQuotedOutputCannotDetermineFuture
-  ≡ TOE.L-candidateQuotedOutputCannotDetermineFuture
+  Unifier.toeCandidateOutputDoesNotDetermineFuture
+  ≡ TOE.toeCandidateOutputDoesNotDetermineFuture
 unifierFutureTransportOwnerIsExact = refl
 
 unifierStutteringPreservationOwnerIsExact :
-  Unifier.P-stutteringPreservesDecision
-  ≡ TOE.P-stutteringPreservesDecision
+  Unifier.toeStutteringPreservesDecision
+  ≡ TOE.toeStutteringPreservesDecision
 unifierStutteringPreservationOwnerIsExact = refl
 
 unifierInterpreterBudgetOwnerIsExact :
-  Unifier.G-interpreterWorkLinearBound
-  ≡ TOE.G-interpreterWorkLinearBound
+  Unifier.toeInterpreterWorkLinearBound
+  ≡ TOE.toeInterpreterWorkLinearBound
 unifierInterpreterBudgetOwnerIsExact = refl
 
 unifierCookLevinWeldOwnerIsExact :
-  Unifier.F-sameMachineProgramCookLevin
-  ≡ TOE.F-sameMachineProgramCookLevin
+  Unifier.toeSameMachineProgramCookLevin
+  ≡ TOE.toeSameMachineProgramCookLevin
 unifierCookLevinWeldOwnerIsExact = refl
