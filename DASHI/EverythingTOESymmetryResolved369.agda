@@ -467,3 +467,38 @@ toeRGAndIbrahimSearchPromotionImpossible :
   ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
 toeRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
   toeIbrahimSearchPriorityDoesNotCreateProof sourcePriority
+
+
+------------------------------------------------------------------------
+-- Complete direct Balaban/Ibrahim Pareto-snowball exports.
+------------------------------------------------------------------------
+
+toeBalabanScaleTransferFrontier :
+  ParetoSnowballTOE.BalabanScaleTransferFrontierReceipt
+toeBalabanScaleTransferFrontier =
+  ParetoSnowballTOE.balabanScaleTransferFrontier
+
+toeIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
+  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
+toeIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
+  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+
+toeIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
+  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
+toeIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
+  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+
+toeIbrahimOEISDoesNotCreateMultiplicityAction :
+  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+toeIbrahimOEISDoesNotCreateMultiplicityAction =
+  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+
+toeIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+toeIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+toeIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
+  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
+toeIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
+  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
