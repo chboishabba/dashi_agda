@@ -13,6 +13,7 @@ import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Physics.Closure.NSABCDMaxCut20261002Exact as NSMaxCut
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
+import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact as NSTOE
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -82,3 +83,19 @@ navierStokesClayPromotionRemainsFalse :
   NSMaxCut.clayPromotion ≡ false
 navierStokesClayPromotionRemainsFalse =
   NSABCDTOE.nsClayPromotionRemainsFalse
+
+
+navierStokesR650CombinedSelfExternalRecombined :
+  NSTOE.NSR650.round650SelfExternalRecombineToSingleGlobalCommutator ≡ true
+navierStokesR650CombinedSelfExternalRecombined =
+  NSTOE.toeNSR650CombinedSelfExternalRecombined
+
+navierStokesR650CombinedPaymentRemainsOpen :
+  NSTOE.NSR650.round650CombinedSelfExternalCutoffUniformPaymentClosed ≡ false
+navierStokesR650CombinedPaymentRemainsOpen =
+  NSTOE.toeNSR650CombinedCutoffUniformPaymentRemainsOpen
+
+navierStokesR650ClayPromotionRemainsFalse :
+  NSTOE.NSR650.round650ClayPromotion ≡ false
+navierStokesR650ClayPromotionRemainsFalse =
+  NSTOE.toeNSR650ClayPromotionRemainsFalse
