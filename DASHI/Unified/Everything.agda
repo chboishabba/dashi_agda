@@ -122,6 +122,31 @@ yangMillsFormalProjectionsRemainNonPromoting =
     Physics.yangMillsObject
 
 ------------------------------------------------------------------------
+-- Typed Balaban continuum non-promotion.
+-- Reuse the constructorless owners already normalized by BalabanRGTOERegression.
+------------------------------------------------------------------------
+
+unifiedBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+unifiedBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
+
+unifiedBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifiedBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+unifiedDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+unifiedDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
+
+unifiedDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifiedDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
+------------------------------------------------------------------------
 -- Joint Yang-Mills Balaban/R559 TOE receipt.
 ------------------------------------------------------------------------
 
@@ -193,6 +218,40 @@ unifiedFleetFormalGapsAre58 :
   FleetHyperTOE.fleetFormalGaps ≡ 58
 unifiedFleetFormalGapsAre58 =
   FleetHyperTOE.fleetFormalGapsAre58
+
+unifiedFleetDischargedCoreKnowledgeFibres : ℕ
+unifiedFleetDischargedCoreKnowledgeFibres =
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetDischargedCoreKnowledgeFibresIs584 :
+  unifiedFleetDischargedCoreKnowledgeFibres ≡ 584
+unifiedFleetDischargedCoreKnowledgeFibresIs584 = refl
+
+unifiedFleetPolarityContradictionGaps : ℕ
+unifiedFleetPolarityContradictionGaps =
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetPolarityContradictionGapsIs44 :
+  unifiedFleetPolarityContradictionGaps ≡ 44
+unifiedFleetPolarityContradictionGapsIs44 = refl
+
+unifiedFleetUnformalisedFormalGaps : ℕ
+unifiedFleetUnformalisedFormalGaps =
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetUnformalisedFormalGapsIs58 :
+  unifiedFleetUnformalisedFormalGaps ≡ 58
+unifiedFleetUnformalisedFormalGapsIs58 = refl
+
+unifiedFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+unifiedFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
 
 ------------------------------------------------------------------------
 -- Implement-A-to-D terminal unified validation.
