@@ -658,26 +658,27 @@ unifierTOE369MaxCutZKPFrame = MaxCutTOE.canonicalTOE369MaxCutZKPFrame
 unifierTOE369MaxCutReceipt : MaxCutTOE.TOE369MaxCutReceipt
 unifierTOE369MaxCutReceipt = MaxCutTOE.canonicalTOE369MaxCutReceipt
 
-unifierTOE369MaxCutFullGradeDimensionDoesNotCreateFaithfulness =
-  MaxCutTOE.toeFullGradeDimensionDoesNotCreateFaithfulness
-
-unifierTOE369MaxCutProjectedDimensionDoesNotCreateAction =
-  MaxCutTOE.toeProjectedDimensionDoesNotCreateAction
-
-unifierTOE369MaxCutKernelCharacterDoesNotCreateAction =
-  MaxCutTOE.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
-
-unifierTOE369MaxCutSelectedSameElementRecognitionStillOpen =
-  MaxCutTOE.toeSelectedSameElementClass3BStillOpen
-
-unifierTOE369MaxCutSchrodingerRecognitionStillOpen =
-  MaxCutTOE.toeSchrodingerHZetaRecognitionStillOpen
-
-unifierTOE369MaxCutTernary27ReductionIsNotGlobalInversion =
-  MaxCutTOE.toeTernary27PhaseReductionIsNotGlobalInversion
-
-unifierTOE369MaxCutTernary27ReductionIsNotMonster42SameObject =
-  MaxCutTOE.toeTernary27ReductionIsNotMonster42SameObject
-
-unifierTOE369MaxCutLiteralCFFITheoremWasNotInvented =
-  MaxCutTOE.literalCFFITheoremWasNotInvented
+open MaxCutTOE public using
+  ( toeFullGradeDimensionDoesNotCreateFaithfulness
+  ; toeFullGradeSameCarrierDoesNotCreateActionAgreement
+  ; toeFullGradeCharacterDoesNotCreateActionAgreement
+  ; toeProjectedDimensionDoesNotCreateAction
+  ; toeCoordinateRetractionDoesNotCreateProjectedAction
+  ; toeProjectedCharacterDoesNotCreateAction
+  ; toeKernelTrace53DoesNotIdentify3B
+  ; toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+  ; toeKernelActualZetaRecognitionStillOpen
+  ; toeSelectedSameElementClass3BStillOpen
+  ; toeSingleActionProducerStillOpen
+  ; toeFiniteChartDoesNotCreateLinearMultiplicityAction
+  ; toeNinetySlicesDoNotCreatePermutationRepresentation
+  ; toeSchrodingerHomBindingsStillOpen
+  ; toeSchrodingerHZetaRecognitionStillOpen
+  ; toeSchrodingerHZetaActionIntertwinerStillOpen
+  ; toeSchrodingerCanonicalHomWeldStillOpen
+  ; toeTernary27PhaseReductionIsNotGlobalInversion
+  ; toeTernary27OrbitIndexingIsNotSemanticIdentity
+  ; toeTernary27ReductionIsNotMonster42SameObject
+  ; literalCFFITheoremWasNotInvented
+  ; esdSurfaceWasNotEdited
+  )
