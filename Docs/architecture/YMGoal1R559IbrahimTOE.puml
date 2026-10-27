@@ -1,0 +1,76 @@
+@startuml
+title YM Goal-1 R559 + Ibrahim Pareto/Snowball TOE convergence
+
+package "Yang-Mills theorem owners" {
+  [R485 Goal-1 max-cut] as R485
+  [R546 irreducible source families] as R546
+  [R558 critical path] as R558
+  [R559 TOE convergence] as R559
+  [Balaban RG TOE regression] as BRG
+  [Balaban scale-transfer frontier] as BFront
+}
+
+package "Ibrahim / recognition owners" {
+  [Recognition Pareto boundary] as Rec
+  [Character execution snowball] as Exec
+  [Phase resolution snowball] as Phase
+  [Schrodinger H-zeta max-cut] as HZ
+  [Historical discriminator] as Hist
+}
+
+package "Normalized Unified facades" {
+  [BalabanR559TOEMaxCutExact] as JointYM
+  [BalabanIbrahimParetoSnowballTOEExact] as JointI
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as Unifier
+  [Unified.Physics] as Physics
+  [Unified.Everything] as Everything
+}
+
+R485 --> R559
+R546 --> R559
+R558 --> R559
+BRG --> JointYM
+R559 --> JointYM
+BFront --> JointYM : exact non-promotion
+
+Rec --> JointI
+Exec --> JointI
+Phase --> JointI
+HZ --> JointI
+Hist --> JointI
+BFront --> JointI : exact non-promotion
+
+JointYM --> TOE
+JointYM --> Unifier
+JointYM --> Physics
+
+JointI --> TOE
+JointI --> Unifier
+
+TOE --> Everything : validation reachability
+Physics --> Everything
+JointI --> Everything : validation
+
+note right of JointYM
+Finite RG remains finite.
+Continuum YM is not promoted.
+Mass gap is not promoted by facade.
+Clay completion remains false.
+end note
+
+note right of JointI
+Search priority is not proof.
+Source presence is not execution.
+OEIS/degree coincidences are not Monster actions.
+Historical identifiers remain source-gated.
+end note
+
+note bottom of Everything
+O/R/C/S/L/P/G/F
+Preconditions: canonical owners already exist.
+Invariants: ownership, attribution, ESD isolation.
+Postconditions: both TOE roots reach the same owners.
+Verification: repo-referee + trust scan + Agda kernel.
+end note
+@enduml
