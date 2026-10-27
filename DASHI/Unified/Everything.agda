@@ -29,7 +29,7 @@ import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
 import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact
 import DASHI.Unified.GovernedLegalWorkflowComplianceTOEValidation
-import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261008AAExact as CMP119Preferred
+import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
@@ -80,7 +80,7 @@ unifiedCMP119PreferredWorkIsPhysicalSourcePackages =
   CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
 
 unifiedCMP119NoConditionalSourceLeafPromoted =
-  CMP119Preferred.noConditionalSourceLeafPromoted
+  CMP119Preferred.noSyntheticPhysicalIdentificationAdded
 
 unifiedCMP119RepresentationOnlySameObjectDebtRemains =
   CMP119Preferred.representationOnlySameObjectDebtRemains
