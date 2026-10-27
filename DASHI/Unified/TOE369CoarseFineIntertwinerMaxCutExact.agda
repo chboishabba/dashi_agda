@@ -63,6 +63,12 @@ import DASHI.Base369Ternary27SpectralGeometryValidation as SpectralValidation
 import DASHI.Core.CoarseFineFabricCalculusRegression as CoarseValidation
 import DASHI.Wikimedia.IbrahimMonster3BRecognitionRouteParetoExact as Pareto
 import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact as Selected3B
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as KernelSame
+import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as SelectedSame
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
 
 ------------------------------------------------------------------------
 -- 1. Legacy Unifier ternary carrier <-> canonical SSP trit.
@@ -232,3 +238,125 @@ toeSelected3BProjectedActionStillOpen :
     Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary
   ≡ false
 toeSelected3BProjectedActionStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- 6. Reconciled selected-3B max cuts and kernel-BIDI firewalls.
+--
+-- These declarations are aliases of existing proof owners.
+-- They do not create a new representation or action.
+------------------------------------------------------------------------
+
+toeFullGradeDimensionDoesNotCreateFaithfulness :
+  FullGrade.LinearDimensionCreatesFaithfulness → ⊥
+toeFullGradeDimensionDoesNotCreateFaithfulness =
+  FullGrade.dimensionDoesNotCreateFaithfulness
+
+toeFullGradeSameCarrierDoesNotCreateActionAgreement :
+  FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
+toeFullGradeSameCarrierDoesNotCreateActionAgreement =
+  FullGrade.sameCarrierDoesNotCreateActionAgreement
+
+toeFullGradeCharacterDoesNotCreateActionAgreement :
+  FullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+toeFullGradeCharacterDoesNotCreateActionAgreement =
+  FullGrade.characterDoesNotCreateActionAgreement
+
+toeProjectedDimensionDoesNotCreateAction :
+  Projected.DirectSumDimensionCreatesProjectedAction → ⊥
+toeProjectedDimensionDoesNotCreateAction =
+  Projected.dimensionDoesNotCreateProjectedAction
+
+toeCoordinateRetractionDoesNotCreateProjectedAction :
+  Projected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+toeCoordinateRetractionDoesNotCreateProjectedAction =
+  Projected.coordinateRetractionDoesNotCreateProjectedAction
+
+toeProjectedCharacterDoesNotCreateAction :
+  Projected.CharacterCreatesProjectedAction → ⊥
+toeProjectedCharacterDoesNotCreateAction =
+  Projected.characterDoesNotCreateProjectedAction
+
+toeFullGradeInclusionFaithfulnessStillOpen :
+  FullGrade.Trialectic369Selected3BFullGradeActionMaxCutBoundary.inclusionFaithfulnessInhabitedHere
+    FullGrade.canonicalTrialectic369Selected3BFullGradeActionMaxCutBoundary
+  ≡ false
+toeFullGradeInclusionFaithfulnessStillOpen = refl
+
+toeFullGradeSelectedAgreementStillOpen :
+  FullGrade.Trialectic369Selected3BFullGradeActionMaxCutBoundary.selectedFullGradeAgreementInhabitedHere
+    FullGrade.canonicalTrialectic369Selected3BFullGradeActionMaxCutBoundary
+  ≡ false
+toeFullGradeSelectedAgreementStillOpen = refl
+
+toeProjectedActionEquationStillOpen :
+  Projected.Trialectic369Selected3BProjectedActionMaxCutBoundary.actualProjectedActionEquationInhabitedHere
+    Projected.canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary
+  ≡ false
+toeProjectedActionEquationStillOpen = refl
+
+toeProjectedCompletionStillOpen :
+  Projected.Trialectic369Selected3BProjectedActionMaxCutBoundary.canonicalCompletionInhabitedHere
+    Projected.canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary
+  ≡ false
+toeProjectedCompletionStillOpen = refl
+
+toeKernelTrace53DoesNotIdentify3B :
+  KernelSame.Actual3BKernelSameElementBoundary.trace53AloneIdentifiesMonster3B
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+toeKernelTrace53DoesNotIdentify3B = refl
+
+toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner :
+  KernelSame.Actual3BKernelSameElementBoundary.characterIsotypyConstructsActionIntertwiner
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner = refl
+
+toeKernelActualZetaRecognitionStillOpen :
+  KernelSame.Actual3BKernelSameElementBoundary.actualZetaRecognitionProvedHere
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+toeKernelActualZetaRecognitionStillOpen = refl
+
+toeKernelFullHyperformalActionStillOpen :
+  KernelSame.Actual3BKernelSameElementBoundary.fullHyperfabricMonsterActionProvedHere
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+toeKernelFullHyperformalActionStillOpen = refl
+
+toeSelectedSameElementClass3BStillOpen :
+  SelectedSame.Selected3BSameElementBoundary.selectedElementProvedMonsterClass3BHere
+    SelectedSame.canonicalSelected3BSameElementBoundary
+  ≡ false
+toeSelectedSameElementClass3BStillOpen = refl
+
+toeSingleActionProducerStillOpen :
+  SingleAction.SingleActionProducerBoundary.actualSingleProducerInhabitedHere
+    SingleAction.canonicalSingleActionProducerBoundary
+  ≡ false
+toeSingleActionProducerStillOpen = refl
+
+------------------------------------------------------------------------
+-- 7. Ibrahim / Snowball non-promotion aliases.
+------------------------------------------------------------------------
+
+toeFiniteChartDoesNotCreateLinearMultiplicityAction :
+  Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+toeFiniteChartDoesNotCreateLinearMultiplicityAction =
+  Ibrahim.finiteChartDoesNotCreateLinearMultiplicityAction
+
+toeNinetySlicesDoNotCreatePermutationRepresentation :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+toeNinetySlicesDoNotCreatePermutationRepresentation =
+  Ibrahim.ninetySlicesDoNotCreatePermutationRepresentation
+
+toeCharacterDoesNotCreateHomEvaluation :
+  Ibrahim.CharacterCreatesHomEvaluation → ⊥
+toeCharacterDoesNotCreateHomEvaluation =
+  Ibrahim.characterDoesNotCreateHomEvaluation
+
+toePermutationNoGoDoesNotCreateLinearAction :
+  Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
+toePermutationNoGoDoesNotCreateLinearAction =
+  Ibrahim.noGoDoesNotCreateLinearAction
