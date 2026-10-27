@@ -444,6 +444,15 @@ open MaxCutTOE public using
   ; toeVOAKernelRecognizedAttachmentStillOpen
   ; toeVOANormalizerMonsterActionWeldStillOpen
   ; toeVOATwelveSeventyEightIntertwinerStillOpen
+  ; toeShortestSourceContainsActualZetaRecognition
+  ; toeShortestSourceCompilesSingleActionProducer
+  ; toeShortestSourceCompilesActualActionRecognition
+  ; toeSeparateActualActionRecognitionLeafNotNeeded
+  ; toeRecognitionDoesNotCompileMultiplicityInertia
+  ; toeBase369CandidateCompilesRecognition
+  ; toeBase369CandidateCompilesCapstoneTail
+  ; toeBase369ShortestCandidateStillUninhabited
+  ; toeCharacterIsotypyDoesNotCreateBase369Candidate
   ; esdSurfaceWasNotEdited
   )
 
