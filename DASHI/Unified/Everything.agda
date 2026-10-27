@@ -1,6 +1,7 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 
 open import Agda.Primitive using (Setω)
@@ -379,6 +380,247 @@ unified369Ternary27MonsterRepresentationNotPromoted =
 
 unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+
+import DASHI.Law.SensibLawITIRParityEverything as LegalGovernance
+
+------------------------------------------------------------------------
+-- Canonical legal-governance, Fleet motif, and evidence handoff.
+------------------------------------------------------------------------
+
+open import DASHI.Governance.PromotionSpineTests public using
+  ( candidateExampleQuarantines
+  ; candidateExampleAbstains
+  ; citationExampleCannotCloseIdentity
+  ; citationExampleQuarantines
+  ; artifactExamplePromotesWhenAllFiveClose
+  ; artifactExampleAuthorizesGovernedPromotion
+  )
+
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedLegalRuntimeContract
+  ; selectedITIRNormalizedParity
+  ; selectedStageParityWitness
+  ; selectedOwnerParityWitness
+  ; SemanticPromotionPolicySurface
+  ; semanticPromotionPolicySurface
+  ; heuristic-only-abstains
+  ; promotion-ignores-heuristic-bits
+  ; semantic-promotion-truth-authority-closed
+  ; semantic-promotion-legal-authority-closed
+  ; semantic-promotion-all-authority-closed
+  ; LegalCitationBoundary
+  ; canonicalLegalCitationBoundary
+  ; CompositeCompliance
+  ; composeCertifiedStages
+  ; selectedDomainTransportReceipt
+  ; selectedRepresentationEqualityCreatesLegalAuthorityIsFalse
+  ; selectedVendorIdentityCreatesAuthorityIsFalse
+  ; selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue
+  )
+
+unifiedFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifiedFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifiedFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetMetaIntrospectorAttributionPreserved = refl
+
+unifiedFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetMetaIntrospectorProofNotBorrowed = refl
+
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
+
+unifiedEvidenceManifestationDoesNotCreateSemanticAuthority :
+  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
+unifiedEvidenceManifestationDoesNotCreateSemanticAuthority =
+  SLREvidence.manifestationDoesNotCreateSemanticAuthority
+
+unifiedEvidenceObservationDoesNotCreateClaimTruth :
+  SLREvidence.ObservationCreatesClaimTruth → ⊥
+unifiedEvidenceObservationDoesNotCreateClaimTruth =
+  SLREvidence.observationDoesNotCreateClaimTruth
+
+unifiedEvidenceObservationDoesNotPromoteApplicability :
+  SLREvidence.ObservationPromotesApplicability → ⊥
+unifiedEvidenceObservationDoesNotPromoteApplicability =
+  SLREvidence.observationDoesNotPromoteApplicability
+
+unifiedEvidenceDoesNotCreateDigitalESDAdmission :
+  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
+unifiedEvidenceDoesNotCreateDigitalESDAdmission =
+  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
+
+------------------------------------------------------------------------
+-- Exact legal/compliance non-promotion projection.
+------------------------------------------------------------------------
+
+unifiedLegalReviewDoesNotCreateClaimTruth =
+  LegalGovernance.selectedLegalReviewDoesNotCreateClaimTruth
+
+unifiedQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernance.selectedQualificationDoesNotAutomaticallyProveForensicCompliance
+
+unifiedReportAdmissionDoesNotRepairMissingInput =
+  LegalGovernance.selectedReportAdmissionDoesNotRepairMissingInput
+
+unifiedOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalGovernance.selectedOfficialLegalSurfaceDoesNotRecoverFineState
+
+unifiedOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalGovernance.selectedOfficialActionDoesNotRecoverAutonomyAndAuthority
+
+unifiedLegalityAloneDoesNotCreateLegitimacy =
+  LegalGovernance.selectedLegalityAloneDoesNotCreateLegitimacy
+
+unifiedMissingAdmissibilityStillAbstains =
+  LegalGovernance.selectedMissingAdmissibilityStillAbstains
+
+unifiedMissingValidationStillAbstains =
+  LegalGovernance.selectedMissingValidationStillAbstains
+
+------------------------------------------------------------------------
+-- Fleet-58 acquisition max-cut.
+------------------------------------------------------------------------
+
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifiedFleet58ManifestAbsent :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+unifiedFleet58ManifestAbsent =
+  FleetManifestTOE.named58ManifestAcquiredIsFalse
+
+unifiedFleet58CountDoesNotNameRows :
+  FleetManifestTOE.countIdentifiesNamedRows ≡ false
+unifiedFleet58CountDoesNotNameRows =
+  FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+
+unifiedFleet58PerGapDispatchDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+unifiedFleet58PerGapDispatchDisabled =
+  FleetManifestTOE.perGapDispatchEnabledIsFalse
+
+unifiedFleet58RelatedSymbolsRequired :
+  FleetManifestTOE.relatedSymbolsRequired ≡ true
+unifiedFleet58RelatedSymbolsRequired =
+  FleetManifestTOE.relatedSymbolsRequiredIsTrue
+
+unifiedFleet58DiscoverRequired :
+  FleetManifestTOE.discoverRequired ≡ true
+unifiedFleet58DiscoverRequired =
+  FleetManifestTOE.discoverRequiredIsTrue
+
+unifiedFleet58RoundLineageRequired :
+  FleetManifestTOE.roundLineageRequired ≡ true
+unifiedFleet58RoundLineageRequired =
+  FleetManifestTOE.roundLineageRequiredIsTrue
+
+------------------------------------------------------------------------
+-- Canonical Balaban same-family / Goal-1C / C-package max-cut.
+------------------------------------------------------------------------
+
+unifiedBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+unifiedBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+unifiedBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+unifiedBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+unifiedBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+unifiedBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+unifiedBalabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+unifiedBalabanCPhysicalPackageMaxCutCompilerLevel =
+  BalabanRGTOE.balabanCPhysicalPackageMaxCutCompilerLevel
+
+unifiedBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+unifiedBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  BalabanRGTOE.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+unifiedBalabanC1MarkedCurvatureFamilyLevel : ProofLevel
+unifiedBalabanC1MarkedCurvatureFamilyLevel =
+  BalabanRGTOE.balabanC1MarkedCurvatureFamilyLevel
+
+unifiedBalabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+unifiedBalabanC2PhysicalRemainderSharedTailLevel =
+  BalabanRGTOE.balabanC2PhysicalRemainderSharedTailLevel
+
+unifiedBalabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+unifiedBalabanC3OneStepAFRecurrenceIdentificationLevel =
+  BalabanRGTOE.balabanC3OneStepAFRecurrenceIdentificationLevel
+
+unifiedBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
+unifiedBalabanC4DensityAnchoredStressLaneLevel =
+  BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
+
+unifiedBalabanCPhysicalPackageCount : ℕ
+unifiedBalabanCPhysicalPackageCount =
+  BalabanRGTOE.balabanCPhysicalPackageCount
+
+unifiedBalabanScaleTransferPromotionImpossible :
+  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
+unifiedBalabanScaleTransferPromotionImpossible =
+  BalabanRGTOE.balabanScaleTransferPromotionImpossible
+
+unifiedBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+unifiedBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
+
+------------------------------------------------------------------------
+-- Mabo citation-use max-cut.
+------------------------------------------------------------------------
+
+unifiedYindjibarndiCitationSeedDoesNotCreateMaboJoin =
+  LegalGovernance.selectedYindjibarndiCitationSeedDoesNotCreateMaboJoin
+
+unifiedMunkaraNativeTitleAtomDoesNotPayOffshoreElement =
+  LegalGovernance.selectedMunkaraNativeTitleAtomDoesNotPayOffshoreElement
+
+unifiedMunkaraSharedCountryConceptDoesNotCollapseWrongType =
+  LegalGovernance.selectedMunkaraSharedCountryConceptDoesNotCollapseWrongType
+
+unifiedPabaiMaboAnalogyStillNonPromoting =
+  LegalGovernance.selectedPabaiMaboAnalogyStillNonPromoting
+
+unifiedMaboIsNotClimateNegligencePrecedent =
+  LegalGovernance.selectedMaboIsNotClimateNegligencePrecedent
+
+unifiedMaboStructureDoesNotProveClimateDoctrine =
+  LegalGovernance.selectedMaboStructureDoesNotProveClimateDoctrine
+
+unifiedAmoduCitationDoesNotMeanWholesaleAdoption =
+  LegalGovernance.selectedAmoduCitationDoesNotMeanWholesaleAdoption
+
+unifiedPabaiCurrentRouteStillUnreachable =
+  LegalGovernance.selectedPabaiCurrentRouteStillUnreachable
+
+unifiedPabaiSearchStillRequiresProof =
+  LegalGovernance.selectedPabaiSearchStillRequiresProof
 
 ------------------------------------------------------------------------
 -- Live Gate-4 frontier and Fleet target selection.

@@ -59,6 +59,10 @@ open BalabanRGTOE public using
   ; classificationAdjointCasimirAtLeastTwo
   ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
   ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  ; r129ExportsLiteralContinuumLimit
+  ; r129ExportsLiteralSchwingerMembership
+  ; r129ExportsLiteralStressDerivative
+  ; r129ExportsCompositeMarkedSourceData
   )
 
 toeBalabanRGBlockSpinTransferStillOpen :
@@ -184,6 +188,71 @@ toeBalabanStressCauchyModulusCompilerLevel =
 toeBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
 toeBalabanStressCauchyPhysicalInsertionLevel =
   BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+toeBalabanStressCauchyCompletionToMarkedStressLevel : ProofLevel
+toeBalabanStressCauchyCompletionToMarkedStressLevel =
+  BalabanRGTOE.balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+
+toeBalabanStressCompletedMarkedIsClayStressLevel : ProofLevel
+toeBalabanStressCompletedMarkedIsClayStressLevel =
+  BalabanRGTOE.balabanGoal1CCompletedStressIsClayStressLevel
+
+toeBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+toeBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+toeBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+toeBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+toeBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+toeBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+toeBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+toeBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+toeBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+toeBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+toeBalabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+toeBalabanCPhysicalPackageMaxCutCompilerLevel =
+  BalabanRGTOE.balabanCPhysicalPackageMaxCutCompilerLevel
+
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  BalabanRGTOE.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+toeBalabanC1MarkedCurvatureFamilyLevel : ProofLevel
+toeBalabanC1MarkedCurvatureFamilyLevel =
+  BalabanRGTOE.balabanC1MarkedCurvatureFamilyLevel
+
+toeBalabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+toeBalabanC2PhysicalRemainderSharedTailLevel =
+  BalabanRGTOE.balabanC2PhysicalRemainderSharedTailLevel
+
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel =
+  BalabanRGTOE.balabanC3OneStepAFRecurrenceIdentificationLevel
+
+toeBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
+toeBalabanC4DensityAnchoredStressLaneLevel =
+  BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
+
+toeBalabanCPhysicalPackageCount : ℕ
+toeBalabanCPhysicalPackageCount =
+  BalabanRGTOE.balabanCPhysicalPackageCount
+
+toeBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+toeBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
 
 toeBalabanStressHilbertBoundCompilerLevel : ProofLevel
 toeBalabanStressHilbertBoundCompilerLevel =
@@ -434,9 +503,9 @@ toe369YangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 ------------------------------------------------------------------------
 
 toeBalabanScaleTransferPromotionImpossible :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
 toeBalabanScaleTransferPromotionImpossible =
-  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+  BalabanRGTOE.balabanScaleTransferPromotionImpossible
 
 toeIbrahimRecognitionParetoBoundary :
   ParetoSnowballTOE.RecognitionRouteParetoBoundary
@@ -1431,6 +1500,198 @@ toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
 toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+
+import DASHI.Law.SensibLawITIRParityEverything as LegalGovernance
+
+------------------------------------------------------------------------
+-- Canonical legal-governance, Fleet motif, and evidence handoff.
+------------------------------------------------------------------------
+
+open import DASHI.Governance.PromotionSpineTests public using
+  ( candidateExampleQuarantines
+  ; candidateExampleAbstains
+  ; citationExampleCannotCloseIdentity
+  ; citationExampleQuarantines
+  ; artifactExamplePromotesWhenAllFiveClose
+  ; artifactExampleAuthorizesGovernedPromotion
+  )
+
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedLegalRuntimeContract
+  ; selectedITIRNormalizedParity
+  ; selectedStageParityWitness
+  ; selectedOwnerParityWitness
+  ; SemanticPromotionPolicySurface
+  ; semanticPromotionPolicySurface
+  ; heuristic-only-abstains
+  ; promotion-ignores-heuristic-bits
+  ; semantic-promotion-truth-authority-closed
+  ; semantic-promotion-legal-authority-closed
+  ; semantic-promotion-all-authority-closed
+  ; LegalCitationBoundary
+  ; canonicalLegalCitationBoundary
+  ; CompositeCompliance
+  ; composeCertifiedStages
+  ; selectedDomainTransportReceipt
+  ; selectedRepresentationEqualityCreatesLegalAuthorityIsFalse
+  ; selectedVendorIdentityCreatesAuthorityIsFalse
+  ; selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue
+  )
+
+toeFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+toeFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+toeFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetMetaIntrospectorAttributionPreserved = refl
+
+toeFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetMetaIntrospectorProofNotBorrowed = refl
+
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
+
+toeEvidenceManifestationDoesNotCreateSemanticAuthority :
+  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
+toeEvidenceManifestationDoesNotCreateSemanticAuthority =
+  SLREvidence.manifestationDoesNotCreateSemanticAuthority
+
+toeEvidenceObservationDoesNotCreateClaimTruth :
+  SLREvidence.ObservationCreatesClaimTruth → ⊥
+toeEvidenceObservationDoesNotCreateClaimTruth =
+  SLREvidence.observationDoesNotCreateClaimTruth
+
+toeEvidenceObservationDoesNotPromoteApplicability :
+  SLREvidence.ObservationPromotesApplicability → ⊥
+toeEvidenceObservationDoesNotPromoteApplicability =
+  SLREvidence.observationDoesNotPromoteApplicability
+
+toeEvidenceDoesNotCreateDigitalESDAdmission :
+  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
+toeEvidenceDoesNotCreateDigitalESDAdmission =
+  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
+
+------------------------------------------------------------------------
+-- Exact legal/compliance non-promotion projection.
+------------------------------------------------------------------------
+
+toeLegalReviewDoesNotCreateClaimTruth =
+  LegalGovernance.selectedLegalReviewDoesNotCreateClaimTruth
+
+toeQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernance.selectedQualificationDoesNotAutomaticallyProveForensicCompliance
+
+toeReportAdmissionDoesNotRepairMissingInput =
+  LegalGovernance.selectedReportAdmissionDoesNotRepairMissingInput
+
+toeOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalGovernance.selectedOfficialLegalSurfaceDoesNotRecoverFineState
+
+toeOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalGovernance.selectedOfficialActionDoesNotRecoverAutonomyAndAuthority
+
+toeLegalityAloneDoesNotCreateLegitimacy =
+  LegalGovernance.selectedLegalityAloneDoesNotCreateLegitimacy
+
+toeMissingAdmissibilityStillAbstains =
+  LegalGovernance.selectedMissingAdmissibilityStillAbstains
+
+toeMissingValidationStillAbstains =
+  LegalGovernance.selectedMissingValidationStillAbstains
+
+------------------------------------------------------------------------
+-- Fleet-58 acquisition max-cut.
+-- Count metadata does not name the 58 formal gap objects.
+------------------------------------------------------------------------
+
+toeFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+toeFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+toeFleet58ManifestAbsent :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+toeFleet58ManifestAbsent =
+  FleetManifestTOE.named58ManifestAcquiredIsFalse
+
+toeFleet58CountDoesNotNameRows :
+  FleetManifestTOE.countIdentifiesNamedRows ≡ false
+toeFleet58CountDoesNotNameRows =
+  FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+
+toeFleet58PerGapDispatchDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+toeFleet58PerGapDispatchDisabled =
+  FleetManifestTOE.perGapDispatchEnabledIsFalse
+
+toeFleet58RelatedSymbolsRequired :
+  FleetManifestTOE.relatedSymbolsRequired ≡ true
+toeFleet58RelatedSymbolsRequired =
+  FleetManifestTOE.relatedSymbolsRequiredIsTrue
+
+toeFleet58DiscoverRequired :
+  FleetManifestTOE.discoverRequired ≡ true
+toeFleet58DiscoverRequired =
+  FleetManifestTOE.discoverRequiredIsTrue
+
+toeFleet58RoundLineageRequired :
+  FleetManifestTOE.roundLineageRequired ≡ true
+toeFleet58RoundLineageRequired =
+  FleetManifestTOE.roundLineageRequiredIsTrue
+
+toeFleet58AcquisitionDoesNotCloseConsumer :
+  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+toeFleet58AcquisitionDoesNotCloseConsumer =
+  FleetManifestTOE.acquisitionDoesNotCloseConsumer
+
+toeFleet58ProducerDoesNotIdentifyResidual :
+  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
+toeFleet58ProducerDoesNotIdentifyResidual =
+  FleetManifestTOE.producerDoesNotIdentifyResidual
+
+------------------------------------------------------------------------
+-- Mabo citation-use max-cut.
+------------------------------------------------------------------------
+
+toeYindjibarndiCitationSeedDoesNotCreateMaboJoin =
+  LegalGovernance.selectedYindjibarndiCitationSeedDoesNotCreateMaboJoin
+
+toeMunkaraNativeTitleAtomDoesNotPayOffshoreElement =
+  LegalGovernance.selectedMunkaraNativeTitleAtomDoesNotPayOffshoreElement
+
+toeMunkaraSharedCountryConceptDoesNotCollapseWrongType =
+  LegalGovernance.selectedMunkaraSharedCountryConceptDoesNotCollapseWrongType
+
+toePabaiMaboAnalogyStillNonPromoting =
+  LegalGovernance.selectedPabaiMaboAnalogyStillNonPromoting
+
+toeMaboIsNotClimateNegligencePrecedent =
+  LegalGovernance.selectedMaboIsNotClimateNegligencePrecedent
+
+toeMaboStructureDoesNotProveClimateDoctrine =
+  LegalGovernance.selectedMaboStructureDoesNotProveClimateDoctrine
+
+toeAmoduCitationDoesNotMeanWholesaleAdoption =
+  LegalGovernance.selectedAmoduCitationDoesNotMeanWholesaleAdoption
+
+toePabaiCurrentRouteStillUnreachable =
+  LegalGovernance.selectedPabaiCurrentRouteStillUnreachable
+
+toePabaiSearchStillRequiresProof =
+  LegalGovernance.selectedPabaiSearchStillRequiresProof
 
 ------------------------------------------------------------------------
 -- Live Gate-4 frontier and Fleet target selection.
