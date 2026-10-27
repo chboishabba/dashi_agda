@@ -4,6 +4,8 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Moonshine.Base369Monster3BSeventyEightExceptionalE6BidiExact as E6F3Five
+import DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact as E8E6A2
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
@@ -1431,3 +1433,40 @@ toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
 toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+
+------------------------------------------------------------------------
+-- E6 / F3^5 quadratic and E8 / E6 x A2 comparison max-cut.
+-- Owner modules retain theorem authority.
+------------------------------------------------------------------------
+
+toeE6F3FiveQuadraticBoundary :
+  E6F3Five.E6F3FiveQuadraticBoundary
+toeE6F3FiveQuadraticBoundary =
+  E6F3Five.canonicalE6F3FiveQuadraticBoundary
+
+toeE6F3FivePartition :
+  E6F3Five.fiveTritCarrierCount
+  ≡ E6F3Five.fiveTritZeroCount
+    + E6F3Five.fiveTritNonzeroIsotropicCount
+    + E6F3Five.fiveTritNormOneCount
+    + E6F3Five.fiveTritNormTwoCount
+toeE6F3FivePartition =
+  E6F3Five.fiveTritQuadraticPartition
+
+toeE6F3FiveCardinalityDoesNotCreateRecognition :
+  E6F3Five.F3FiveCardinalityCreatesE6RootRecognition → ⊥
+toeE6F3FiveCardinalityDoesNotCreateRecognition =
+  E6F3Five.f3FiveCardinalityDoesNotCreateE6RootRecognition
+
+toeE8E6A2RootArithmeticBoundary :
+  E8E6A2.E8E6A2RootArithmeticBoundary
+toeE8E6A2RootArithmeticBoundary =
+  E8E6A2.canonicalE8E6A2RootArithmeticBoundary
+
+toeE8RootArithmeticAsE6PlusA2Orbits :
+  E8E6A2.e8RootCount
+  ≡ E8E6A2.eSixFixedRootCount
+    + E8E6A2.aTwoOrderThreeOrbitCount * 3
+toeE8RootArithmeticAsE6PlusA2Orbits =
+  E8E6A2.eEightRootCountAsE6PlusA2Orbits
