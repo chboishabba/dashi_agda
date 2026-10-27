@@ -13,7 +13,7 @@ package "Canonical theorem owners" {
   component "BalabanRGTOERegression\nmerged density / regular-E /\nCasimir / stress / non-promotion" as BRG
 }
 
-component "R559\nGoal-1 + Pareto\nnormalization owner" as R559
+component "R559\nGoal-1 + Pareto\nnormalization owner" as R559\ncomponent "BalabanR559TOEMaxCutExact\nsame-owner weld +\nnon-promotion receipt" as Joint
 
 package "TOE facades" {
   component "EverythingTOESymmetryResolved369" as ROOT
