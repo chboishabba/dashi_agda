@@ -58,8 +58,7 @@ import DASHI.Unified.RepoStateSpaceTOEConvergenceExact as StateSpace
 -- No standards certification is claimed.
 --
 -- F. Verification.
--- Reject postulates, unsolved metas, TERMINATING, NO_POSITIVITY_CHECK,
--- and ESD-path changes.
+-- Reject all theorem-escape directives, unresolved goals, and ESD-path changes.
 -- Kernel success requires an exact-head Agda receipt.
 ------------------------------------------------------------------------
 
