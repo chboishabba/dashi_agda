@@ -530,6 +530,14 @@ toeCriticalMinimalH6CompilerLevel : ProofLevel
 toeCriticalMinimalH6CompilerLevel =
   R558.minimalH6CompilerLevel
 
+toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired : Bool
+toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired =
+  R558.separateContinuumWilsonConvergenceFamilyRequired
+
+toeCriticalFiniteHamiltonianMoscoRouteRequired : Bool
+toeCriticalFiniteHamiltonianMoscoRouteRequired =
+  R558.finiteHamiltonianMoscoRouteRequired
+
 toeCriticalPrintedJRouteRequired : Bool
 toeCriticalPrintedJRouteRequired =
   R558.printedJRouteRequired
@@ -541,6 +549,10 @@ toeCriticalFullCLayerRequiredForMassGap =
 toeCriticalFullCLayerRequiredForMinimalH6 : Bool
 toeCriticalFullCLayerRequiredForMinimalH6 =
   R558.fullCLayerRequiredForMinimalH6
+
+toeCriticalFullCLayerRetainedForConservativeClayExistence : Bool
+toeCriticalFullCLayerRetainedForConservativeClayExistence =
+  R558.fullCLayerRetainedForConservativeClayExistence
 
 toeCriticalPathCompilerLevel : ProofLevel
 toeCriticalPathCompilerLevel =
