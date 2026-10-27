@@ -8,5 +8,3 @@ module DASHI.EverythingSSPRepresentationReductionRound9 where
 import DASHI.EverythingSSPJProfiniteOrthogonalComplexityRound8
 import DASHI.Moonshine.OggRepresentationReductionEverything
 import DASHI.Moonshine.OggRepresentationReductionRegression
-import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact
-import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation
