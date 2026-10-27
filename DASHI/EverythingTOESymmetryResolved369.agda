@@ -814,3 +814,15 @@ toeCurrentIbrahimSearchPriorityDoesNotCreateProof :
   CurrentMaxCut.IbrahimSearchPriorityCreatesProof → ⊥
 toeCurrentIbrahimSearchPriorityDoesNotCreateProof =
   CurrentMaxCut.ibrahimSearchPriorityCannotCreateProof
+
+
+------------------------------------------------------------------------
+-- Direct legal-governance semantic non-promotion at the TOE consumer.
+-- The theorem owner remains TOECurrentMaxCutGovernanceFleetExact.
+------------------------------------------------------------------------
+
+toeCurrentLegalAuthorityDoesNotEstablishApplicability :
+  CurrentMaxCut.legalAuthorityCreatesApplicability ≡ false
+toeCurrentLegalAuthorityDoesNotEstablishApplicability =
+  CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
+
