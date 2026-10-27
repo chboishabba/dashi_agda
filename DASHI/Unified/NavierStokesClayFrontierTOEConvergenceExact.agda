@@ -52,6 +52,7 @@ import DASHI.Physics.Closure.NSABCDMaxCut20261007Exact as ABCD
 import DASHI.Physics.Closure.NSCanonicalClayResidualExact as Canonical
 import DASHI.Physics.Closure.NSClayDistanceFinalReceipt as Distance
 import DASHI.Physics.Closure.NSAuthorityConsistencyGuard as Guard
+import DASHI.Physics.Closure.NSTriadKNR650CurrentSharedWeightedWallRound736Exact as R736
 
 open Distance public using (NSClayDistanceFinalPromotion)
 
@@ -187,6 +188,107 @@ releasedHeadDoesNotRequireReopeningCoordinateAudit :
   releasedHeadRequiresReopeningCoordinateAudit ≡ false
 releasedHeadDoesNotRequireReopeningCoordinateAudit =
   ABCD.cdCurrentHeadRequiresReopeningCoordinateAuditIsFalse
+
+
+------------------------------------------------------------------------
+-- Current periodic-B shared weighted wall.
+--
+-- R736 is the preferred current periodic analytic max-cut.
+-- It supersedes older producer-coordinate cuts without changing theorem
+-- ownership or promotion status.
+------------------------------------------------------------------------
+
+currentSharedWeightedLeafCount = R736.currentSharedWeightedLeafCount
+
+currentSharedWeightedExactlyTwoLeaves : Bool
+currentSharedWeightedExactlyTwoLeaves =
+  R736.round736ExactlyTwoPreferredAnalyticLeaves
+
+currentSharedWeightedExactlyTwoLeavesIsTrue :
+  currentSharedWeightedExactlyTwoLeaves ≡ true
+currentSharedWeightedExactlyTwoLeavesIsTrue =
+  R736.round736ExactlyTwoPreferredAnalyticLeavesIsTrue
+
+currentSharedWeightedSameCarrier : Bool
+currentSharedWeightedSameCarrier =
+  R736.round736BothLeavesUseSameWeightedCarrier
+
+currentSharedWeightedSameCarrierIsTrue :
+  currentSharedWeightedSameCarrier ≡ true
+currentSharedWeightedSameCarrierIsTrue =
+  R736.round736BothLeavesUseSameWeightedCarrierIsTrue
+
+currentSharedWeightedCarrierIsInputLaplacian : Bool
+currentSharedWeightedCarrierIsInputLaplacian =
+  R736.round736WeightedCarrierIsInputLaplacianWork
+
+currentSharedWeightedCarrierIsInputLaplacianIsTrue :
+  currentSharedWeightedCarrierIsInputLaplacian ≡ true
+currentSharedWeightedCarrierIsInputLaplacianIsTrue =
+  R736.round736WeightedCarrierIsInputLaplacianWorkIsTrue
+
+currentWeightedPlusEndpointClosed : Bool
+currentWeightedPlusEndpointClosed =
+  R736.round736WeightedPlusEndpointClosed
+
+currentWeightedPlusEndpointStillOpen :
+  currentWeightedPlusEndpointClosed ≡ false
+currentWeightedPlusEndpointStillOpen =
+  R736.round736WeightedPlusEndpointClosedIsFalse
+
+currentAugmentedCriticalWeightedClosed : Bool
+currentAugmentedCriticalWeightedClosed =
+  R736.round736AugmentedCriticalWeightedClosed
+
+currentAugmentedCriticalWeightedStillOpen :
+  currentAugmentedCriticalWeightedClosed ≡ false
+currentAugmentedCriticalWeightedStillOpen =
+  R736.round736AugmentedCriticalWeightedClosedIsFalse
+
+currentSharedWeightedLeavesBuildBarrier : Bool
+currentSharedWeightedLeavesBuildBarrier =
+  R736.round736TwoLeavesBuildCriticalBarrier
+
+currentSharedWeightedLeavesBuildBarrierIsTrue :
+  currentSharedWeightedLeavesBuildBarrier ≡ true
+currentSharedWeightedLeavesBuildBarrierIsTrue =
+  R736.round736TwoLeavesBuildCriticalBarrierIsTrue
+
+legacyR726IndependentLeafRequired : Bool
+legacyR726IndependentLeafRequired =
+  R736.round736R726IndependentLeafRequired
+
+legacyR726IndependentLeafNotRequired :
+  legacyR726IndependentLeafRequired ≡ false
+legacyR726IndependentLeafNotRequired =
+  R736.round736R726IndependentLeafRequiredIsFalse
+
+legacyStrictMarginR406IndependentLeafRequired : Bool
+legacyStrictMarginR406IndependentLeafRequired =
+  R736.round736StrictMarginR406IndependentLeafRequired
+
+legacyStrictMarginR406IndependentLeafNotRequired :
+  legacyStrictMarginR406IndependentLeafRequired ≡ false
+legacyStrictMarginR406IndependentLeafNotRequired =
+  R736.round736StrictMarginR406IndependentLeafRequiredIsFalse
+
+barrierDependentQPlusMinusShortcutAdmissible : Bool
+barrierDependentQPlusMinusShortcutAdmissible =
+  R736.round736BarrierDependentQPlusMinusShortcutAdmissible
+
+barrierDependentQPlusMinusShortcutStillCircular :
+  barrierDependentQPlusMinusShortcutAdmissible ≡ false
+barrierDependentQPlusMinusShortcutStillCircular =
+  R736.round736BarrierDependentQPlusMinusShortcutAdmissibleIsFalse
+
+currentSharedWeightedClayPromotion : Bool
+currentSharedWeightedClayPromotion =
+  R736.round736ClayPromotion
+
+currentSharedWeightedClayPromotionStillFalse :
+  currentSharedWeightedClayPromotion ≡ false
+currentSharedWeightedClayPromotionStillFalse =
+  R736.round736ClayPromotionIsFalse
 
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F process frame.
