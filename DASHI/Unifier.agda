@@ -3,6 +3,7 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261008AAExact as CMP119Preferred
 
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
@@ -1371,3 +1372,41 @@ unifierLegalityAloneDoesNotCreateLegitimacy :
   LegalCompliance.LegalOnlyCreatesLegitimacy → ⊥
 unifierLegalityAloneDoesNotCreateLegitimacy =
   LegalCompliance.legalityAloneDoesNotCreateLegitimacy
+
+
+unifierGovernedLegalWorkflowComplianceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierGovernedLegalWorkflowComplianceZKPFrame =
+  LegalCompliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
+
+unifierReportAdmissionDoesNotRepairMissingInput :
+  DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact.ReportAdmissionRepairsMissingInput → ⊥
+unifierReportAdmissionDoesNotRepairMissingInput =
+  LegalCompliance.reportAdmissionDoesNotRepairMissingInput
+
+unifierActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalCompliance.actionstepStyleVendorIdentityCreatesAuthorityIsFalse
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+unifierActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalCompliance.actionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+------------------------------------------------------------------------
+-- Current CMP119 preferred source frontier.
+------------------------------------------------------------------------
+
+unifierCMP119PreferredSourcePackageCount =
+  CMP119Preferred.remainingPreferredPackageCount
+
+unifierCMP119PreferredAdapterDebt =
+  CMP119Preferred.remainingAdapterDebt
+
+unifierCMP119PreferredWorkIsPhysicalSourcePackages =
+  CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
+
+unifierCMP119NoConditionalSourceLeafPromoted =
+  CMP119Preferred.noConditionalSourceLeafPromoted
+
+unifierCMP119RepresentationOnlySameObjectDebtRemains =
+  CMP119Preferred.representationOnlySameObjectDebtRemains
