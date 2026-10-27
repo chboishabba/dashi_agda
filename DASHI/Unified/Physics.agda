@@ -11,6 +11,7 @@ import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Unified.BalabanRGTOEConvergenceExact as BalabanTOE
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -65,3 +66,23 @@ yangMillsPostureIsApproaching :
   Spine.proofPosture yangMillsObject ≡ Asserted.approachingClosedProof
 yangMillsPostureIsApproaching =
   refl
+
+
+------------------------------------------------------------------------
+-- Bałaban RG convergence is attached to the Unified Yang-Mills parent.
+------------------------------------------------------------------------
+
+yangMillsBalabanRGTOESurface :
+  BalabanTOE.BalabanRGTOEConvergenceSurface
+yangMillsBalabanRGTOESurface =
+  BalabanTOE.canonicalBalabanRGTOEConvergenceSurface
+
+yangMillsBalabanFiniteToContinuumPromotionBlocked :
+  BalabanTOE.continuumPromotion yangMillsBalabanRGTOESurface ≡ false
+yangMillsBalabanFiniteToContinuumPromotionBlocked =
+  BalabanTOE.continuumPromotionIsFalse yangMillsBalabanRGTOESurface
+
+yangMillsBalabanTerminalPromotionBlocked :
+  BalabanTOE.terminalPromotion yangMillsBalabanRGTOESurface ≡ false
+yangMillsBalabanTerminalPromotionBlocked =
+  BalabanTOE.terminalPromotionIsFalse yangMillsBalabanRGTOESurface
