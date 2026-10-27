@@ -66,6 +66,7 @@ jobs:
         run: |
           dashi-repo index --root .
           dashi-repo related canonicalGovernedLegalWorkflowTOEBoundary --root .
+          dashi-repo related canonicalGovernedLegalWorkflowTOEInvariantHandoff --root .
           dashi-repo related canonicalGovernedLegalWorkflowZKPReceipt --root .
           dashi-repo related toeCaseySelectionDoesNotCreateWorldTruth --root .
           dashi-repo related toeKnowledgeDoesNotCreateExecutionAuthority --root .
@@ -75,6 +76,7 @@ jobs:
           dashi-repo related toeParserCandidateDoesNotAuthorizeAdmission --root .
           dashi-repo related toeSoftwareValidationDoesNotAuthorizePublication --root .
           dashi-repo discover 'SensibLaw governance legal workflow non promotion TOE' --root .
+          dashi-repo discover 'canonical governance invariant handoff same object TOE Unifier' --root .
           dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root .
           dashi-repo discover 'review eligibility promotion runtime validation claim truth admission authority software publication' --root .
           dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
