@@ -965,6 +965,214 @@ toeExpertProductionBoundary :
 toeExpertProductionBoundary =
   ExpertProduction.canonicalExpertProductionBoundary
 
+
+SpacyParserAutomaticallyLegalAuthority : Set
+SpacyParserAutomaticallyLegalAuthority =
+  NativeLegalFollow.SpacyParserAutomaticallyLegalAuthority
+
+SpacyParserAutomaticallyLegalConstruction : Set
+SpacyParserAutomaticallyLegalConstruction =
+  NativeLegalFollow.SpacyParserAutomaticallyLegalConstruction
+
+SectionSliceAutomaticallyHistoricalLaw : Set
+SectionSliceAutomaticallyHistoricalLaw =
+  NativeLegalFollow.SectionSliceAutomaticallyHistoricalLaw
+
+PythonWrapperOwnsLegalSemantics : Set
+PythonWrapperOwnsLegalSemantics =
+  NativeLegalFollow.PythonWrapperOwnsLegalSemantics
+
+JsonArtifactIsSemanticCommandAbi : Set
+JsonArtifactIsSemanticCommandAbi =
+  NativeLegalFollow.JsonArtifactIsSemanticCommandAbi
+
+JsonReviewFileAutomaticallyReviewerDecision : Set
+JsonReviewFileAutomaticallyReviewerDecision =
+  NativeLegalFollow.JsonReviewFileAutomaticallyReviewerDecision
+
+JsonReceiptAutomaticallyClaimTruth : Set
+JsonReceiptAutomaticallyClaimTruth =
+  NativeLegalFollow.JsonReceiptAutomaticallyClaimTruth
+
+CliSequenceAutomaticallyPaysOpenResidual : Set
+CliSequenceAutomaticallyPaysOpenResidual =
+  NativeLegalFollow.CliSequenceAutomaticallyPaysOpenResidual
+
+PinnedOalcStreamingAutomaticallyLegalTruth : Set
+PinnedOalcStreamingAutomaticallyLegalTruth =
+  NativeLegalFollow.PinnedOalcStreamingAutomaticallyLegalTruth
+
+ReviewedHopJsonBecomesCanonicalSemanticTransport : Set
+ReviewedHopJsonBecomesCanonicalSemanticTransport =
+  NativeLegalFollow.ReviewedHopJsonBecomesCanonicalSemanticTransport
+
+OalcHitAutomaticallyBindingAuthority : Set
+OalcHitAutomaticallyBindingAuthority =
+  ProviderAcquisition.OalcHitAutomaticallyBindingAuthority
+
+OfficialCourtBytesAutomaticallyPropositionCorrespondence : Set
+OfficialCourtBytesAutomaticallyPropositionCorrespondence =
+  ProviderAcquisition.OfficialCourtBytesAutomaticallyPropositionCorrespondence
+
+SameMncAutomaticallySameSourceRevision : Set
+SameMncAutomaticallySameSourceRevision =
+  ProviderAcquisition.SameMncAutomaticallySameSourceRevision
+
+SuccessfulOfficialFetchAutomaticallyProductionReady : Set
+SuccessfulOfficialFetchAutomaticallyProductionReady =
+  ProviderAcquisition.SuccessfulOfficialFetchAutomaticallyProductionReady
+
+MultipleReportsAutomaticallyIndependent : Set
+MultipleReportsAutomaticallyIndependent =
+  ExpertProduction.MultipleReportsAutomaticallyIndependent
+
+AgreementAutomaticallyIndependentCorroboration : Set
+AgreementAutomaticallyIndependentCorroboration =
+  ExpertProduction.AgreementAutomaticallyIndependentCorroboration
+
+DependenceMeansNoEvidence : Set
+DependenceMeansNoEvidence =
+  ExpertProduction.DependenceMeansNoEvidence
+
+ExpertStatusAutomaticallyTruth : Set
+ExpertStatusAutomaticallyTruth =
+  ExpertProduction.ExpertStatusAutomaticallyTruth
+
+ReportAdmissionRepairsMissingInput : Set
+ReportAdmissionRepairsMissingInput =
+  ExpertProduction.ReportAdmissionRepairsMissingInput
+
+CrossExaminationAddsUnobservedInput : Set
+CrossExaminationAddsUnobservedInput =
+  ExpertProduction.CrossExaminationAddsUnobservedInput
+
+DisputedRiskIsIrrelevant : Set
+DisputedRiskIsIrrelevant =
+  ExpertProduction.DisputedRiskIsIrrelevant
+
+ObserverDefectMakesOpinionFalse : Set
+ObserverDefectMakesOpinionFalse =
+  ExpertProduction.ObserverDefectMakesOpinionFalse
+
+QualificationAutomaticallyForensicCompliance : Set
+QualificationAutomaticallyForensicCompliance =
+  ExpertProduction.QualificationAutomaticallyForensicCompliance
+
+toeSpacyDoesNotCreateLegalAuthority :
+  SpacyParserAutomaticallyLegalAuthority → ⊥
+toeSpacyDoesNotCreateLegalAuthority =
+  NativeLegalFollow.spacyDoesNotCreateLegalAuthority
+
+toeSpacyDoesNotCreateLegalConstruction :
+  SpacyParserAutomaticallyLegalConstruction → ⊥
+toeSpacyDoesNotCreateLegalConstruction =
+  NativeLegalFollow.spacyDoesNotCreateLegalConstruction
+
+toeLatestKnownSectionDoesNotBecomeHistoricalLaw :
+  SectionSliceAutomaticallyHistoricalLaw → ⊥
+toeLatestKnownSectionDoesNotBecomeHistoricalLaw =
+  NativeLegalFollow.latestKnownSectionDoesNotBecomeHistoricalLaw
+
+toePythonWrapperDoesNotOwnLegalSemantics :
+  PythonWrapperOwnsLegalSemantics → ⊥
+toePythonWrapperDoesNotOwnLegalSemantics =
+  NativeLegalFollow.pythonWrapperDoesNotOwnLegalSemantics
+
+toeJsonIsNotSemanticCommandAbi :
+  JsonArtifactIsSemanticCommandAbi → ⊥
+toeJsonIsNotSemanticCommandAbi =
+  NativeLegalFollow.jsonIsNotSemanticCommandAbi
+
+toeJsonReviewDoesNotCreateDecision :
+  JsonReviewFileAutomaticallyReviewerDecision → ⊥
+toeJsonReviewDoesNotCreateDecision =
+  NativeLegalFollow.jsonReviewDoesNotCreateDecision
+
+toeJsonReceiptDoesNotCreateTruth :
+  JsonReceiptAutomaticallyClaimTruth → ⊥
+toeJsonReceiptDoesNotCreateTruth =
+  NativeLegalFollow.jsonReceiptDoesNotCreateTruth
+
+toeCliSequenceDoesNotPayResidual :
+  CliSequenceAutomaticallyPaysOpenResidual → ⊥
+toeCliSequenceDoesNotPayResidual =
+  NativeLegalFollow.cliSequenceDoesNotPayResidual
+
+toePinnedStreamDoesNotCreateLegalTruth :
+  PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+toePinnedStreamDoesNotCreateLegalTruth =
+  NativeLegalFollow.pinnedStreamDoesNotCreateLegalTruth
+
+toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
+  ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
+  NativeLegalFollow.reviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
+
+toeOalcHitDoesNotBecomeBindingAuthority :
+  OalcHitAutomaticallyBindingAuthority → ⊥
+toeOalcHitDoesNotBecomeBindingAuthority =
+  ProviderAcquisition.oalcHitDoesNotBecomeBindingAuthority
+
+toeOfficialCourtBytesDoNotBecomePropositionCorrespondence :
+  OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+toeOfficialCourtBytesDoNotBecomePropositionCorrespondence =
+  ProviderAcquisition.officialCourtBytesDoNotBecomePropositionCorrespondence
+
+toeSameMncDoesNotCollapseSourceRevisions :
+  SameMncAutomaticallySameSourceRevision → ⊥
+toeSameMncDoesNotCollapseSourceRevisions =
+  ProviderAcquisition.sameMncDoesNotCollapseSourceRevisions
+
+toeSuccessfulOfficialFetchDoesNotBecomeProductionReady :
+  SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+toeSuccessfulOfficialFetchDoesNotBecomeProductionReady =
+  ProviderAcquisition.successfulOfficialFetchDoesNotBecomeProductionReady
+
+toeMultipleReportsDoNotAutomaticallyCreateIndependence :
+  MultipleReportsAutomaticallyIndependent → ⊥
+toeMultipleReportsDoNotAutomaticallyCreateIndependence =
+  ExpertProduction.multipleReportsDoNotAutomaticallyCreateIndependence
+
+toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration :
+  AgreementAutomaticallyIndependentCorroboration → ⊥
+toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration =
+  ExpertProduction.agreementDoesNotAutomaticallyCreateIndependentCorroboration
+
+toeDependenceDoesNotMeanNoEvidence :
+  DependenceMeansNoEvidence → ⊥
+toeDependenceDoesNotMeanNoEvidence =
+  ExpertProduction.dependenceDoesNotMeanNoEvidence
+
+toeExpertStatusDoesNotAutomaticallyCreateTruth :
+  ExpertStatusAutomaticallyTruth → ⊥
+toeExpertStatusDoesNotAutomaticallyCreateTruth =
+  ExpertProduction.expertStatusDoesNotAutomaticallyCreateTruth
+
+toeReportAdmissionDoesNotRepairMissingInput :
+  ReportAdmissionRepairsMissingInput → ⊥
+toeReportAdmissionDoesNotRepairMissingInput =
+  ExpertProduction.reportAdmissionDoesNotRepairMissingInput
+
+toeCrossExaminationDoesNotAddUnobservedInput :
+  CrossExaminationAddsUnobservedInput → ⊥
+toeCrossExaminationDoesNotAddUnobservedInput =
+  ExpertProduction.crossExaminationDoesNotAddUnobservedInput
+
+toeDisputedRiskDoesNotBecomeIrrelevant :
+  DisputedRiskIsIrrelevant → ⊥
+toeDisputedRiskDoesNotBecomeIrrelevant =
+  ExpertProduction.disputedRiskDoesNotBecomeIrrelevant
+
+toeObserverDefectDoesNotProveOpinionFalse :
+  ObserverDefectMakesOpinionFalse → ⊥
+toeObserverDefectDoesNotProveOpinionFalse =
+  ExpertProduction.observerDefectDoesNotProveOpinionFalse
+
+toeQualificationDoesNotAutomaticallyProveForensicCompliance :
+  QualificationAutomaticallyForensicCompliance → ⊥
+toeQualificationDoesNotAutomaticallyProveForensicCompliance =
+  ExpertProduction.qualificationDoesNotAutomaticallyProveForensicCompliance
+
 ------------------------------------------------------------------------
 -- Canonical governance invariant handoff.
 --
@@ -1088,6 +1296,75 @@ record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
     expertProductionAuthorityClosed :
       toeExpertProductionPromotesAnyAuthority ≡ false
 
+    spacyLegalAuthorityFirewall :
+      SpacyParserAutomaticallyLegalAuthority → ⊥
+
+    spacyLegalConstructionFirewall :
+      SpacyParserAutomaticallyLegalConstruction → ⊥
+
+    latestSectionHistoricalLawFirewall :
+      SectionSliceAutomaticallyHistoricalLaw → ⊥
+
+    pythonLegalSemanticsFirewall :
+      PythonWrapperOwnsLegalSemantics → ⊥
+
+    jsonSemanticCommandFirewall :
+      JsonArtifactIsSemanticCommandAbi → ⊥
+
+    jsonReviewDecisionFirewall :
+      JsonReviewFileAutomaticallyReviewerDecision → ⊥
+
+    jsonClaimTruthFirewall :
+      JsonReceiptAutomaticallyClaimTruth → ⊥
+
+    cliResidualPaymentFirewall :
+      CliSequenceAutomaticallyPaysOpenResidual → ⊥
+
+    pinnedStreamLegalTruthFirewall :
+      PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+
+    reviewedHopJsonSemanticTransportFirewall :
+      ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+
+    oalcBindingAuthorityFirewall :
+      OalcHitAutomaticallyBindingAuthority → ⊥
+
+    officialBytesCorrespondenceFirewall :
+      OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+
+    sourceRevisionCollapseFirewall :
+      SameMncAutomaticallySameSourceRevision → ⊥
+
+    officialFetchProductionReadinessFirewall :
+      SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+
+    reportMultiplicityIndependenceFirewall :
+      MultipleReportsAutomaticallyIndependent → ⊥
+
+    agreementIndependentCorroborationFirewall :
+      AgreementAutomaticallyIndependentCorroboration → ⊥
+
+    dependenceNoEvidenceFirewall :
+      DependenceMeansNoEvidence → ⊥
+
+    expertStatusTruthFirewall :
+      ExpertStatusAutomaticallyTruth → ⊥
+
+    reportAdmissionRepairFirewall :
+      ReportAdmissionRepairsMissingInput → ⊥
+
+    crossExaminationObservationFirewall :
+      CrossExaminationAddsUnobservedInput → ⊥
+
+    disputedRiskRelevanceFirewall :
+      DisputedRiskIsIrrelevant → ⊥
+
+    observerDefectTruthFirewall :
+      ObserverDefectMakesOpinionFalse → ⊥
+
+    qualificationForensicComplianceFirewall :
+      QualificationAutomaticallyForensicCompliance → ⊥
+
     exactReuseAdmissionFirewall :
       ExactReuseCreatesSemanticAdmission →
       ⊥
@@ -1149,6 +1426,29 @@ canonicalGovernedLegalWorkflowTOEInvariantHandoff =
     toeNativeLegalFollowDoesNotCreateLegalAuthority
     toeProviderFailureDoesNotMakePropositionFalse
     toeExpertProductionPromotesAnyAuthorityIsFalse
+    toeSpacyDoesNotCreateLegalAuthority
+    toeSpacyDoesNotCreateLegalConstruction
+    toeLatestKnownSectionDoesNotBecomeHistoricalLaw
+    toePythonWrapperDoesNotOwnLegalSemantics
+    toeJsonIsNotSemanticCommandAbi
+    toeJsonReviewDoesNotCreateDecision
+    toeJsonReceiptDoesNotCreateTruth
+    toeCliSequenceDoesNotPayResidual
+    toePinnedStreamDoesNotCreateLegalTruth
+    toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
+    toeOalcHitDoesNotBecomeBindingAuthority
+    toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
+    toeSameMncDoesNotCollapseSourceRevisions
+    toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
+    toeMultipleReportsDoNotAutomaticallyCreateIndependence
+    toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
+    toeDependenceDoesNotMeanNoEvidence
+    toeExpertStatusDoesNotAutomaticallyCreateTruth
+    toeReportAdmissionDoesNotRepairMissingInput
+    toeCrossExaminationDoesNotAddUnobservedInput
+    toeDisputedRiskDoesNotBecomeIrrelevant
+    toeObserverDefectDoesNotProveOpinionFalse
+    toeQualificationDoesNotAutomaticallyProveForensicCompliance
     toeExactReuseDoesNotCreateSemanticAdmission
     toeExactReuseDoesNotCreateSemanticAuthority
     toeExactReuseDoesNotCreateApplicability
