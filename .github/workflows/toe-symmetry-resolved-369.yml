@@ -16,6 +16,12 @@ on:
       - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPublishedWilsonRPRound461Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119ReflectionMaxCut20261002Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119ROperationReflectionSupportMaxCut20261003Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsProjectiveCylinderMeasureRepresentationRound534Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
@@ -56,12 +62,20 @@ on:
       - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPublishedWilsonRPRound461Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119ReflectionMaxCut20261002Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119ROperationReflectionSupportMaxCut20261003Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsProjectiveCylinderMeasureRepresentationRound534Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unified/BalabanR559TOEMaxCutExact.agda'
       - 'DASHI/Unified/BalabanR559TOEMaxCutValidation.agda'
       - 'DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda'
+      - 'DASHI/Unified/YMImplementAToDTOEMaxCutExact.agda'
+      - 'DASHI/Unified/YMImplementAToDTOEMaxCutValidation.agda'
       - 'DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
@@ -127,6 +141,15 @@ jobs:
           dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutExact.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMImplementAToDTOEMaxCutExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMImplementAToDTOEMaxCutValidation.agda --root .
+          dashi-repo related cmp119ERBReflectionCertificateLevel --root . --limit 20
+          dashi-repo related fullResidualEqualsSelectedFiniteShellTailLevel --root . --limit 20
+          dashi-repo related literalRound534ProjectiveContinuityAtEmptyLevel --root . --limit 20
+          dashi-repo related literalRound461PublishedWilsonSameObjectApplicationLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills A D finite Wilson reflection CMP119 residual weld projective continuum non-promotion' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP119Reflection --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsProjectiveCylinder --root .
           dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6Ledger.agda --root .
           dashi-repo related physicalClosureRound6LedgerLevel --root . --limit 20
@@ -168,6 +191,8 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutExact.agda
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
+            DASHI/Unified/YMImplementAToDTOEMaxCutExact.agda
+            DASHI/Unified/YMImplementAToDTOEMaxCutValidation.agda
             DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
             DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6Ledger.agda
             DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
@@ -195,6 +220,8 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutExact.agda
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
+            DASHI/Unified/YMImplementAToDTOEMaxCutExact.agda
+            DASHI/Unified/YMImplementAToDTOEMaxCutValidation.agda
             DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
             DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
