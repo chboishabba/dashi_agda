@@ -8,6 +8,9 @@ open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
 
+import DASHI.Physics.Closure.NSABCDMaxCut20261002Exact as NSMaxCut
+import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
+
 ¬ : Set → Set
 ¬ A = A → ⊥
 
@@ -313,3 +316,31 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- Exact theorem-bearing NS TOE attachment.
+--
+-- The historical axiom-shaped interfaces above remain compatibility surfaces.
+-- They are not proof authority for the declarations below.
+------------------------------------------------------------------------
+
+nsABCDTOEConvergenceReceipt :
+  NSABCDTOE.NSABCDTOEConvergenceReceipt
+nsABCDTOEConvergenceReceipt =
+  NSABCDTOE.canonicalNSABCDTOEConvergenceReceipt
+
+nsABCDClayPromotionRemainsFalse :
+  NSMaxCut.clayPromotion ≡ false
+nsABCDClayPromotionRemainsFalse =
+  NSABCDTOE.nsClayPromotionRemainsFalse
+
+nsR823NeedsNoAdditionalReserveEstimateAfterDecisionLeaves :
+  NSMaxCut.r823AdditionalReserveEstimateNeededAfterDecisionLeaves ≡ false
+nsR823NeedsNoAdditionalReserveEstimateAfterDecisionLeaves =
+  NSABCDTOE.r823NeedsNoAdditionalReserveEstimateAfterDecisionLeaves
+
+nsGlobalRationalHelicalProjectorLawsDoNotGateR829Decision :
+  NSMaxCut.globalRationalHelicalProjectorLawsGateR829Decision ≡ false
+nsGlobalRationalHelicalProjectorLawsDoNotGateR829Decision =
+  NSABCDTOE.globalRationalHelicalProjectorLawsDoNotGateR829Decision
