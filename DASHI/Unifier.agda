@@ -4,6 +4,7 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Geo.EarthEmbeddingAcquisitionExact as EarthEmbeddingTOE
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -101,6 +102,55 @@ balabanRGTOEReceipt =
 balabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
 balabanRGZKPFrame =
   BalabanRGTOE.canonicalBalabanTOEZKPFrame
+
+------------------------------------------------------------------------
+-- Learned Earth-embedding TOE convergence.
+--
+-- Reuse the canonical acquisition/interpretability owner. This facade does
+-- not assign physical meaning to individual learned coordinates.
+------------------------------------------------------------------------
+
+unifierEarthEmbeddingReceipt :
+  EarthEmbeddingTOE.EarthEmbeddingTOEReceipt
+unifierEarthEmbeddingReceipt =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt
+
+unifierEarthEmbeddingZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierEarthEmbeddingZKPFrame =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEZKPFrame
+
+unifierAlphaEarthDimensionIs64 :
+  EarthEmbeddingTOE.alphaEarthDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 64
+unifierAlphaEarthDimensionIs64 =
+  EarthEmbeddingTOE.alphaEarthDimensionIs64
+
+unifierTesseraDimensionIs128 :
+  EarthEmbeddingTOE.tesseraDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 128
+unifierTesseraDimensionIs128 =
+  EarthEmbeddingTOE.tesseraDimensionIs128
+
+unifierLearnedCoordinateDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.LearnedCoordinateCreatesPhysicalIdentity → ⊥
+unifierLearnedCoordinateDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.learnedCoordinateDoesNotCreatePhysicalIdentity
+
+unifierGradientDoesNotCreateCausalEnvironmentalEffect :
+  EarthEmbeddingTOE.GradientCreatesCausalEnvironmentalEffect → ⊥
+unifierGradientDoesNotCreateCausalEnvironmentalEffect =
+  EarthEmbeddingTOE.gradientDoesNotCreateCausalEnvironmentalEffect
+
+unifierModelOutputDoesNotCreateIndependentFieldMeasurement :
+  EarthEmbeddingTOE.ModelOutputCreatesIndependentFieldMeasurement → ⊥
+unifierModelOutputDoesNotCreateIndependentFieldMeasurement =
+  EarthEmbeddingTOE.modelOutputDoesNotCreateIndependentFieldMeasurement
+
+unifierEmbeddingDoesNotCreateLegalAuthority :
+  EarthEmbeddingTOE.EmbeddingCreatesLegalAuthority → ⊥
+unifierEmbeddingDoesNotCreateLegalAuthority =
+  EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
 
 ------------------------------------------------------------------------
 -- Normalized Balaban density, regular-E, stress, and continuum surfaces.
@@ -722,9 +772,11 @@ unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 ------------------------------------------------------------------------
 
 unifierBalabanScaleTransferPromotionImpossible :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+  
+  BalabanRGTOE.BalabanRGScaleTransferPromotion → ⊥
 unifierBalabanScaleTransferPromotionImpossible =
-  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+  
+  BalabanRGTOE.balabanRGScaleTransferPromotionImpossible
 
 unifierIbrahimRecognitionParetoBoundary =
   ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
