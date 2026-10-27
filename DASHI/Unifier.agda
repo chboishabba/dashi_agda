@@ -1143,26 +1143,26 @@ unifierCurrentFleet58CannotPromoteToGate4SameObject =
 ------------------------------------------------------------------------
 
 unifierCurrentTaskCompletionDoesNotCreateTruth :
-  CurrentMaxCut.Operational.TaskCompletionCreatesTruth → ⊥
+  CurrentMaxCut.TaskCompletionCreatesTruth → ⊥
 unifierCurrentTaskCompletionDoesNotCreateTruth =
   CurrentMaxCut.taskCompletionCannotCreateTruth
 
 unifierCurrentAcceptedReviewDoesNotPayApplicability :
-  CurrentMaxCut.Review.AcceptedStatusPaysApplicability → ⊥
+  CurrentMaxCut.AcceptedStatusPaysApplicability → ⊥
 unifierCurrentAcceptedReviewDoesNotPayApplicability =
   CurrentMaxCut.acceptedReviewCannotPayApplicability
 
 unifierCurrentCitationDoesNotRealiseLegalRule :
-  CurrentMaxCut.SourceRule.CitationAloneRealisesLegalRule → ⊥
+  CurrentMaxCut.CitationAloneRealisesLegalRule → ⊥
 unifierCurrentCitationDoesNotRealiseLegalRule =
   CurrentMaxCut.citationCannotRealiseLegalRule
 
 unifierCurrentStaticRefinementDoesNotCreateDynamicSafety :
-  CurrentMaxCut.Frozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+  CurrentMaxCut.StaticSeparationCreatesDynamicSafetyPermission → ⊥
 unifierCurrentStaticRefinementDoesNotCreateDynamicSafety =
   CurrentMaxCut.staticObserverSeparationStillDoesNotCreateDynamicSafety
 
 unifierCurrentProvenanceDoesNotCreateTruth :
-  CurrentMaxCut.Frozen.ProvenanceAxisCreatesTruthPermission → ⊥
+  CurrentMaxCut.ProvenanceAxisCreatesTruthPermission → ⊥
 unifierCurrentProvenanceDoesNotCreateTruth =
   CurrentMaxCut.provenanceAxisStillDoesNotCreateTruth
