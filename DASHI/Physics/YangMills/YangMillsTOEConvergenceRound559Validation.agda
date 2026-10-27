@@ -436,3 +436,63 @@ goal1PostHocMagnitudeEqualityNotMandatory = refl
 goal1IndependentFourthCumulantNotMandatory :
   TOE.toeGoal1IndependentFourthCumulantMandatory ≡ false
 goal1IndependentFourthCumulantNotMandatory = refl
+
+
+------------------------------------------------------------------------
+-- Goal-1 normalized facade regressions.
+------------------------------------------------------------------------
+
+unifiedPhysicsGoal1A1MatchesTOE :
+  UnifiedPhysics.yangMillsTOEGoal1A1CurrentStepBetaSourceLevel
+  ≡ TOE.toeGoal1A1CurrentStepBetaSourceLevel
+unifiedPhysicsGoal1A1MatchesTOE = refl
+
+unifiedPhysicsGoal1A3MatchesTOE :
+  UnifiedPhysics.yangMillsTOEGoal1A3SameFamilyContinuumAndOSLevel
+  ≡ TOE.toeGoal1A3SameFamilyContinuumAndOSLevel
+unifiedPhysicsGoal1A3MatchesTOE = refl
+
+unifiedPhysicsGoal1BSelectedMatchesTOE :
+  UnifiedPhysics.yangMillsTOEGoal1BLiteralPublishedSelectedLocalizationLevel
+  ≡ TOE.toeGoal1BLiteralPublishedSelectedLocalizationLevel
+unifiedPhysicsGoal1BSelectedMatchesTOE = refl
+
+unifiedPhysicsGoal1BGapMatchesTOE :
+  UnifiedPhysics.yangMillsTOEGoal1BFiniteToPositiveTransferGapCompilerLevel
+  ≡ TOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
+unifiedPhysicsGoal1BGapMatchesTOE = refl
+
+unifiedPhysicsGoal1CMatchesTOE :
+  UnifiedPhysics.yangMillsTOEGoal1CExactSameFamilySourceCutLevel
+  ≡ TOE.toeGoal1CExactSameFamilySourceCutLevel
+unifiedPhysicsGoal1CMatchesTOE = refl
+
+unifiedPhysicsGoal1G1MatchesTOE :
+  UnifiedPhysics.yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel
+  ≡ TOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
+unifiedPhysicsGoal1G1MatchesTOE = refl
+
+unifiedPhysicsGoal1G2MatchesTOE :
+  UnifiedPhysics.yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel
+  ≡ TOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
+unifiedPhysicsGoal1G2MatchesTOE = refl
+
+unifierGoal1A1MatchesTOE :
+  U.unifierYangMillsGoal1A1CurrentStepBetaSourceLevel
+  ≡ TOE.toeGoal1A1CurrentStepBetaSourceLevel
+unifierGoal1A1MatchesTOE = refl
+
+unifierGoal1BGapMatchesTOE :
+  U.unifierYangMillsGoal1BFiniteToPositiveTransferGapCompilerLevel
+  ≡ TOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
+unifierGoal1BGapMatchesTOE = refl
+
+unifierGoal1CMatchesTOE :
+  U.unifierYangMillsGoal1CExactSameFamilySourceCutLevel
+  ≡ TOE.toeGoal1CExactSameFamilySourceCutLevel
+unifierGoal1CMatchesTOE = refl
+
+unifierGoal1G2MatchesTOE :
+  U.unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel
+  ≡ TOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
+unifierGoal1G2MatchesTOE = refl
