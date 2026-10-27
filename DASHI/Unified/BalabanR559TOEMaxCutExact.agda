@@ -64,41 +64,11 @@ import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 
 ------------------------------------------------------------------------
--- Same-owner equalities.
-------------------------------------------------------------------------
-
-densityFlowSameOwner :
-  Balaban.balabanScaleDensityFlowLevel
-  ≡ R559.toeBetaDrivenSourceFlowLevel
-densityFlowSameOwner = refl
-
-regularELocalizationSameOwner :
-  Balaban.balabanRegularELocalizationSourceLevel
-  ≡ R559.toeCMP119RegularELocalizationSourceLevel
-regularELocalizationSameOwner = refl
-
-stressMarkedShellSameOwner :
-  Balaban.balabanStressMarkedShellReuseLevel
-  ≡ R559.toeStressFirstVariationMarkedShellBoundLevel
-stressMarkedShellSameOwner = refl
-
-stressHilbertCompilerSameOwner :
-  Balaban.balabanStressHilbertBoundCompilerLevel
-  ≡ R559.toeStressShellEnergyToHilbertCompilerLevel
-stressHilbertCompilerSameOwner = refl
-
-publishedContinuumBoundarySameOwner :
-  Balaban.balabanPublishedRGContinuumTransferOpenFlag
-  ≡ R559.toeFlat4DContinuumTransferProvedHere
-publishedContinuumBoundarySameOwner = refl
-
-continuumRouteMassGapBoundarySameOwner :
-  Balaban.balabanContinuumRouteMassGapPromotionOpenFlag
-  ≡ R559.toeContinuumMassGapPromoted
-continuumRouteMassGapBoundarySameOwner = refl
-
-------------------------------------------------------------------------
--- Exact non-promotion reuse.
+-- Canonical owner separation.
+--
+-- Balaban owns the RG density, regular-E, Casimir, and stress contracts.
+-- R559 owns the Goal-1 max-cut and scheduling quotients.
+-- These surfaces are jointly reachable but are not identified by equality.
 ------------------------------------------------------------------------
 
 ScaleTransferPromotion : Set
@@ -110,21 +80,20 @@ eliminateScaleTransferPromotion :
 eliminateScaleTransferPromotion =
   RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
 
-
 jointPublishedContinuumStillOpen :
-  R559.toeFlat4DContinuumTransferProvedHere ≡ false
+  Balaban.balabanPublishedRGContinuumTransferOpenFlag ≡ false
 jointPublishedContinuumStillOpen =
-  R559.toePublishedRGDoesNotPromoteContinuum
+  Balaban.balabanPublishedRGContinuumTransferStillOpen
 
 jointContinuumMassGapStillBlocked :
-  R559.toeContinuumMassGapPromoted ≡ false
+  Balaban.balabanContinuumRouteMassGapPromotionOpenFlag ≡ false
 jointContinuumMassGapStillBlocked =
-  R559.toeContinuumMassGapPromotedIsFalse
+  Balaban.balabanContinuumRouteMassGapPromotionStillOpen
 
 jointClayPromotionStillBlocked :
-  R559.toeClayYangMillsPromoted ≡ false
+  R559.toeGoal1ClayCompletionClaimed ≡ false
 jointClayPromotionStillBlocked =
-  R559.toeClayYangMillsPromotedIsFalse
+  refl
 
 jointBalabanBlockSpinStillOpen :
   Balaban.balabanRGBlockSpinTransferOpenFlag ≡ false
@@ -141,14 +110,8 @@ jointBalabanOSWightmanStillOpen :
 jointBalabanOSWightmanStillOpen =
   Balaban.balabanOSWightmanContinuumConstructionStillOpen
 
-------------------------------------------------------------------------
--- Joint normalized receipt.
-------------------------------------------------------------------------
-
 record BalabanR559TOEMaxCutReceipt : Set where
   field
-    -- Parent receipts keep the complete normalized surfaces reachable.
-    -- Do not copy their full coordinate sets here.
     balabanCompleteReceipt :
       Balaban.BalabanRGTOEReceipt
 
@@ -159,28 +122,13 @@ record BalabanR559TOEMaxCutReceipt : Set where
       R559.Goal1ParetoTOEZKPFrame
 
     balabanDensityFlow : ProofLevel
-    r559DensityFlow : ProofLevel
-    densityOwnerAgreement :
-      balabanDensityFlow ≡ r559DensityFlow
-
     balabanRegularELocalization : ProofLevel
-    r559RegularELocalization : ProofLevel
-    regularEOwnerAgreement :
-      balabanRegularELocalization ≡ r559RegularELocalization
-
-    balabanStressMarkedShell : ProofLevel
-    r559StressMarkedShell : ProofLevel
-    stressMarkedShellOwnerAgreement :
-      balabanStressMarkedShell ≡ r559StressMarkedShell
-
-    balabanStressHilbertCompiler : ProofLevel
-    r559StressHilbertCompiler : ProofLevel
-    stressHilbertOwnerAgreement :
-      balabanStressHilbertCompiler ≡ r559StressHilbertCompiler
-
     balabanCasimirLowerBoundTransport : ProofLevel
-    r559StrictCasimirCarrierCompiler : ProofLevel
+    balabanStressMarkedShell : ProofLevel
+    balabanStressHilbertCompiler : ProofLevel
 
+    r559CurrentStepBetaSource : ProofLevel
+    r559StressDensityFiniteMeasure : ProofLevel
     goal1MaximumCutCompiler : ProofLevel
     irreducibleSourceFamilyCutCompiler : ProofLevel
     criticalPathCompiler : ProofLevel
@@ -224,32 +172,18 @@ canonicalBalabanR559TOEMaxCutReceipt = record
       R559.canonicalGoal1ParetoTOEZKPFrame
   ; balabanDensityFlow =
       Balaban.balabanScaleDensityFlowLevel
-  ; r559DensityFlow =
-      R559.toeBetaDrivenSourceFlowLevel
-  ; densityOwnerAgreement =
-      densityFlowSameOwner
   ; balabanRegularELocalization =
       Balaban.balabanRegularELocalizationSourceLevel
-  ; r559RegularELocalization =
-      R559.toeCMP119RegularELocalizationSourceLevel
-  ; regularEOwnerAgreement =
-      regularELocalizationSameOwner
-  ; balabanStressMarkedShell =
-      Balaban.balabanStressMarkedShellReuseLevel
-  ; r559StressMarkedShell =
-      R559.toeStressFirstVariationMarkedShellBoundLevel
-  ; stressMarkedShellOwnerAgreement =
-      stressMarkedShellSameOwner
-  ; balabanStressHilbertCompiler =
-      Balaban.balabanStressHilbertBoundCompilerLevel
-  ; r559StressHilbertCompiler =
-      R559.toeStressShellEnergyToHilbertCompilerLevel
-  ; stressHilbertOwnerAgreement =
-      stressHilbertCompilerSameOwner
   ; balabanCasimirLowerBoundTransport =
       Balaban.balabanCasimirLowerBoundTransportLevel
-  ; r559StrictCasimirCarrierCompiler =
-      R559.toeStrictCasimirCarrierCompilerLevel
+  ; balabanStressMarkedShell =
+      Balaban.balabanStressMarkedShellReuseLevel
+  ; balabanStressHilbertCompiler =
+      Balaban.balabanStressHilbertBoundCompilerLevel
+  ; r559CurrentStepBetaSource =
+      R559.toeGoal1A1CurrentStepBetaSourceLevel
+  ; r559StressDensityFiniteMeasure =
+      R559.toeGoal1A3StressDensityIsLiteralFiniteMeasureLevel
   ; goal1MaximumCutCompiler =
       R559.toeGoal1MaximumCutCompilerLevel
   ; irreducibleSourceFamilyCutCompiler =
@@ -257,15 +191,15 @@ canonicalBalabanR559TOEMaxCutReceipt = record
   ; criticalPathCompiler =
       R559.toeCriticalPathCompilerLevel
   ; publishedContinuumPromotion =
-      R559.toeFlat4DContinuumTransferProvedHere
+      Balaban.balabanPublishedRGContinuumTransferOpenFlag
   ; publishedContinuumPromotionIsFalse =
       jointPublishedContinuumStillOpen
   ; continuumMassGapPromotion =
-      R559.toeContinuumMassGapPromoted
+      Balaban.balabanContinuumRouteMassGapPromotionOpenFlag
   ; continuumMassGapPromotionIsFalse =
       jointContinuumMassGapStillBlocked
   ; clayPromotion =
-      R559.toeClayYangMillsPromoted
+      R559.toeGoal1ClayCompletionClaimed
   ; clayPromotionIsFalse =
       jointClayPromotionStillBlocked
   ; balabanBlockSpinTransfer =
