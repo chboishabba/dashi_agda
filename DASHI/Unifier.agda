@@ -3,6 +3,7 @@ module DASHI.Unifier where
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
@@ -847,3 +848,83 @@ unifierSemanticAdmissionIsNotLegalAuthority :
   GovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 unifierSemanticAdmissionIsNotLegalAuthority =
   GovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+------------------------------------------------------------------------
+-- SCALE Evidence Review exact facade.
+-- Proof authority remains in the normalized bridge and original donors.
+------------------------------------------------------------------------
+
+unifierSCALEEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+unifierSCALEEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
+
+unifierSCALEReplayDoesNotPromoteSemanticTruth :
+  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
+unifierSCALEReplayDoesNotPromoteSemanticTruth =
+  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
+
+unifierSCALEProductionDoesNotCreateSemanticAuthority :
+  SCALEReview.PerformanceClosureCreatesSemanticAuthority → ⊥
+unifierSCALEProductionDoesNotCreateSemanticAuthority =
+  SCALEReview.productionScaleDoesNotCreateSemanticAuthority
+
+unifierSCALEPNFFingerprintDoesNotCreateClaimTruth :
+  SCALEReview.CommonPnfFingerprintProvesClaimTruth → ⊥
+unifierSCALEPNFFingerprintDoesNotCreateClaimTruth =
+  SCALEReview.commonPnfFingerprintDoesNotCreateClaimTruth
+
+unifierSCALEReviewDoesNotCreateClaimTruth :
+  SCALEReview.EvidenceReviewCreatesClaimTruth → ⊥
+unifierSCALEReviewDoesNotCreateClaimTruth =
+  SCALEReview.reviewedEvidenceDoesNotCreateClaimTruth
+
+unifierSCALEPassingControlDoesNotMeanCertified :
+  SCALEReview.PassingControlMeansCertified → ⊥
+unifierSCALEPassingControlDoesNotMeanCertified =
+  SCALEReview.passingControlDoesNotMeanCertified
+
+unifierSCALEFrontierDoesNotGrantAuthorization :
+  SCALEReview.FrontierRouteMeansAuthorized → ⊥
+unifierSCALEFrontierDoesNotGrantAuthorization =
+  SCALEReview.frontierRouteDoesNotGrantAuthorization
+
+unifierSCALEUICannotGeneratePresentSource :
+  SCALEReview.UIGeneratesPresentSource → ⊥
+unifierSCALEUICannotGeneratePresentSource =
+  SCALEReview.uiCannotGeneratePresentSource
+
+
+------------------------------------------------------------------------
+-- SCALE evidence genealogy firewalls.
+------------------------------------------------------------------------
+
+unifierSCALEPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
+unifierSCALEPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+unifierSCALERepetitionDoesNotCreateIndependentEvidence :
+  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
+unifierSCALERepetitionDoesNotCreateIndependentEvidence =
+  SCALEReview.repetitionDoesNotCreateIndependentEvidence
+
+
+------------------------------------------------------------------------
+-- SCALE physical-economy non-promotion firewalls.
+------------------------------------------------------------------------
+
+unifierSCALEReviewProjectionReuseDoesNotCreateClaimTruth :
+  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
+unifierSCALEReviewProjectionReuseDoesNotCreateClaimTruth =
+  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
+
+unifierSCALECommitCoalescingDoesNotCreateSemanticAuthority :
+  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
+unifierSCALECommitCoalescingDoesNotCreateSemanticAuthority =
+  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
+
+unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence :
+  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
+unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence =
+  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
