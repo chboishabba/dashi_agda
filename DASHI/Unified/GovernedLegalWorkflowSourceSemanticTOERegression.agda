@@ -2,6 +2,7 @@ module DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOERegression where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as Handoff
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSource
@@ -52,3 +53,43 @@ unifierHandoffIsCanonical :
   Unifier.unifierGovernedLegalWorkflowSourceSemanticHandoff
   ≡ Handoff.canonicalGovernedLegalWorkflowSourceSemanticHandoff
 unifierHandoffIsCanonical = refl
+
+
+------------------------------------------------------------------------
+-- Compliance and vendor-neutral workflow authority regression.
+------------------------------------------------------------------------
+
+expertQualificationStillDoesNotCreateForensicCompliance :
+  Handoff.QualificationAutomaticallyForensicCompliance → ⊥
+expertQualificationStillDoesNotCreateForensicCompliance =
+  Handoff.toeExpertQualificationDoesNotCreateForensicCompliance
+
+reportAdmissionStillDoesNotRepairMissingInput :
+  Handoff.ReportAdmissionRepairsMissingInput → ⊥
+reportAdmissionStillDoesNotRepairMissingInput =
+  Handoff.toeReportAdmissionDoesNotRepairMissingInput
+
+legalReviewStillDoesNotCreateClaimTruth :
+  Handoff.LegalReviewDecisionCreatesClaimTruth → ⊥
+legalReviewStillDoesNotCreateClaimTruth =
+  Handoff.toeLegalReviewDoesNotCreateClaimTruth
+
+officialLegalSurfaceStillDoesNotRecoverFineState :
+  Handoff.OfficialLegalSurfaceRecoversFineState → ⊥
+officialLegalSurfaceStillDoesNotRecoverFineState =
+  Handoff.toeOfficialLegalSurfaceDoesNotRecoverFineState
+
+legalityAloneStillDoesNotCreateLegitimacy :
+  Handoff.LegalOnlyCreatesLegitimacy → ⊥
+legalityAloneStillDoesNotCreateLegitimacy =
+  Handoff.toeLegalityAloneDoesNotCreateLegitimacy
+
+actionstepStyleVendorIdentityStillCreatesNoAuthority :
+  Handoff.toeActionstepStyleVendorIdentityCreatesAuthority ≡ false
+actionstepStyleVendorIdentityStillCreatesNoAuthority =
+  Handoff.toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse
+
+actionstepStyleTargetStillNeedsOwnAuthorityWitness :
+  Handoff.toeActionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
+actionstepStyleTargetStillNeedsOwnAuthorityWitness =
+  Handoff.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
