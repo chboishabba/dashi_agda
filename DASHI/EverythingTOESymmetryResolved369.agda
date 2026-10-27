@@ -1,4 +1,5 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false)
@@ -386,3 +387,33 @@ toe369YangMillsGoal1C4LiteralSectorRecoveryLevel =
 toe369YangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 toe369YangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+------------------------------------------------------------------------
+-- Direct RG non-promotion and Pareto/snowball/Ibrahim TOE convergence.
+------------------------------------------------------------------------
+
+toeBalabanScaleTransferPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+toeBalabanScaleTransferPromotionImpossible =
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+
+toeIbrahimRecognitionParetoBoundary :
+  ParetoSnowballTOE.Recognition.RecognitionRouteParetoBoundary
+toeIbrahimRecognitionParetoBoundary =
+  ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
+
+toeIbrahimCharacterExecutionFrontier :
+  ParetoSnowballTOE.Execution.Monster3BCharacterExecutionFrontier
+toeIbrahimCharacterExecutionFrontier =
+  ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
+
+toeIbrahimSchrodingerHZetaMaxCutBoundary :
+  ParetoSnowballTOE.HZeta.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+toeIbrahimSchrodingerHZetaMaxCutBoundary =
+  ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
+
+toeBalabanIbrahimParetoSnowballZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeBalabanIbrahimParetoSnowballZKPFrame =
+  ParetoSnowballTOE.canonicalTOEZKPFrame
