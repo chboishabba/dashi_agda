@@ -37,23 +37,23 @@ balabanScaleTransferPromotionImpossible =
 
 RecognitionRouteParetoBoundary : Set
 RecognitionRouteParetoBoundary =
-  RecognitionRouteParetoBoundary
+  Recognition.RecognitionRouteParetoBoundary
 
 Monster3BCharacterExecutionFrontier : Set
 Monster3BCharacterExecutionFrontier =
-  Monster3BCharacterExecutionFrontier
+  Execution.Monster3BCharacterExecutionFrontier
 
 InertiaPhaseResolutionFrontier : Set
 InertiaPhaseResolutionFrontier =
-  InertiaPhaseResolutionFrontier
+  Phase.InertiaPhaseResolutionFrontier
 
 SchrodingerHZetaRecognitionMaxCutBoundary : Set
 SchrodingerHZetaRecognitionMaxCutBoundary =
-  SchrodingerHZetaRecognitionMaxCutBoundary
+  HZeta.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary
 
 HistoricalDiscriminatorBoundary : Set
 HistoricalDiscriminatorBoundary =
-  HistoricalDiscriminatorBoundary
+  Historical.HistoricalDiscriminatorBoundary
 
 ibrahimRecognitionParetoBoundary :
   Recognition.RecognitionRouteParetoBoundary
