@@ -113,10 +113,10 @@ unifierCMP119PreferredAdapterDebtIsZero :
   Unifier.unifierCMP119PreferredAdapterDebt ≡ 0
 unifierCMP119PreferredAdapterDebtIsZero = refl
 
-toeCMP119ConditionalPromotionStillBlocked :
-  TOE.toeCMP119NoConditionalSourceLeafPromoted ≡ true
-toeCMP119ConditionalPromotionStillBlocked = refl
+toeCMP119SyntheticPhysicalIdentificationStillBlocked :
+  TOE.toeCMP119NoSyntheticPhysicalIdentificationAdded ≡ true
+toeCMP119SyntheticPhysicalIdentificationStillBlocked = refl
 
-unifierCMP119ConditionalPromotionStillBlocked :
-  Unifier.unifierCMP119NoConditionalSourceLeafPromoted ≡ true
-unifierCMP119ConditionalPromotionStillBlocked = refl
+unifierCMP119SyntheticPhysicalIdentificationStillBlocked :
+  Unifier.unifierCMP119NoSyntheticPhysicalIdentificationAdded ≡ true
+unifierCMP119SyntheticPhysicalIdentificationStillBlocked = refl
