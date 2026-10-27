@@ -223,7 +223,7 @@ qldOFTAssociationFileAcquisition = Source.mkNoDOISource
   "Request information about an incorporated association"
   "Original Queensland register and lodged-document access instructions"
   "28 October 2026 access"
-  "https://www.qld.gov.au/community/fair-trading/associations-charities-and-not-for-profits/incorporated-associations/request-information-about-an-incorporated-association"
+  "https://www.qld.gov.au/community/fair-trading/associations-charities-and-non-for-profits/incorporated-associations/request-information-about-an-incorporated-association"
   Source.governmentSource
   "OFT supplies association extract (name, address, committee history and lodged-document list), certified incorporation certificate, registered rules, amendments, annual returns and committee changes for a fee. Original guidance states an ordinary ~10 working day retrieval. SWFG 15 Oct 2026 governing objects and members cannot be reconstructed from an ABN, future amendments or presumed model rules."
   Source.publicAttribution
@@ -234,7 +234,7 @@ qldOFTCurrentRules = Source.mkNoDOISource
   "Rules for associations — governing objects and historical approval"
   "Original Queensland association rules guidance"
   "28 October 2026 access"
-  "https://www.qld.gov.au/community/fair-trading/associations-charities-and-not-for-profits/incorporated-associations/running-an-incorporated-association/rules-for-associations"
+  "https://www.qld.gov.au/community/fair-trading/associations-charities-and-non-for-profits/incorporated-associations/running-an-incorporated-association/rules-for-associations"
   Source.governmentSource
   "OFT: associations must lodge rules; both model and own rules must state objects; own rules amendments require approval by OFT and take effect when approved. Demand applicable ORIGINAL approved rules/version on 15 October 2026, not online model text. A future replacement is not automatically retrospective."
   Source.publicAttribution
@@ -245,7 +245,7 @@ qldOFT2026Fees = Source.mkNoDOISource
   "Fair trading fees — 2026 incorporated-association document access"
   "Original QLD price list updated 1 July 2026"
   "1 July 2026"
-  "https://www.qld.gov.au/community/fair-trading/associations-charities-and-not-for-profits/fair-trading-fees"
+  "https://www.qld.gov.au/community/fair-trading/associations-charities-and-non-for-profits/fair-trading-fees"
   Source.governmentSource
   "Public 2026 prices: AUD 9 association/charity file retrieval, AUD 4.20 per photocopied page, AUD 28.85 certified incorporation certificate. These are acquisition fees, NOT development infrastructure charges, public assistance or litigation costs."
   Source.publicAttribution
@@ -280,7 +280,7 @@ springfieldFeb2026CommentInvitation = Source.mkNoDOISource
   "13 February–12 March 2026"
   "https://epbcpublicportal.environment.gov.au/_entity/sharepointdocumentlocation/4f8edc14-9ffb-ee11-9f89-00224892a860/2ab10dab-d681-4911-b881-cc99413f07b6?file=2019-8575-Draft-PD.pdf"
   Source.practitionerSource
-  "Original PDF page 1 visually checked: s95A(3) invites comments on EPBC 2019/8575 13 February–12 March 2026; submissions directed to epbc@springfieldresidential.com or 9 Thompson Street Bowen Hills. Portal file is a ONE-PAGE INVITATION, NOT actual full Draft PD, received proponent inbox, 1,786 individual comments, final s95B response or Secretary s95C recommendation. Request original server/post logs and transmitted copies, not an assumed Minister direct-email receipt."
+  "Original one-page invitation PDF visually checked: s95A(3) invites comments on EPBC 2019/8575 13 February–12 March 2026; submissions directed to epbc@springfieldresidential.com or 9 Thompson Street Bowen Hills. Portal file is a ONE-PAGE INVITATION, NOT actual full Draft PD, received proponent inbox, 1,786 individual comments, final s95B response or Secretary s95C recommendation. Request original server/post logs and transmitted copies, not an assumed Minister direct-email receipt."
   Source.publicAttribution
 
 data StandingApplicant : Set where
