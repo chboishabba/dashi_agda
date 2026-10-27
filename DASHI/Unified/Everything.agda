@@ -19,6 +19,8 @@ import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceValidation
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 governedLegalWorkflowTOEBoundary :
@@ -94,6 +96,21 @@ pnfDistilledReuseZKPReceipt :
 pnfDistilledReuseZKPReceipt =
   PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
 
+scaleEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+scaleEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
+
+scaleEvidenceReviewDoesNotPromoteSemanticTruth :
+  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
+scaleEvidenceReviewDoesNotPromoteSemanticTruth =
+  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
+
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
+  SCALEReview.FrontierRouteMeansAuthorized → ⊥
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
+  SCALEReview.frontierRouteDoesNotGrantAuthorization
+
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
   CarrierGrammar.carrierGrammarObject
@@ -159,27 +176,33 @@ brainFMRIRemainsNonPromoting =
 navierStokesRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.navierStokesObject ≡ false
 navierStokesRemainsNonPromoting =
+  Physics.navierStokesJPromotionBlocked
+
 yangMillsRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.yangMillsObject ≡ false
 yangMillsRemainsNonPromoting =
+  Physics.yangMillsJPromotionBlocked
+
 brainFMRIFormalProjectionsRemainNonPromoting :
   ∀ kind →
   Spine.objectProjectionPromotion BrainFMRI.brainFMRIObject kind ≡ false
 brainFMRIFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     BrainFMRI.brainFMRIObject
+
 navierStokesFormalProjectionsRemainNonPromoting :
+  ∀ kind →
   Spine.objectProjectionPromotion Physics.navierStokesObject kind ≡ false
 navierStokesFormalProjectionsRemainNonPromoting =
+  Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.navierStokesObject
+
 yangMillsFormalProjectionsRemainNonPromoting :
+  ∀ kind →
   Spine.objectProjectionPromotion Physics.yangMillsObject kind ≡ false
 yangMillsFormalProjectionsRemainNonPromoting =
+  Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
-import DASHI.Physics.Foundations.Round5FullBoundary as Round5
-      Round5.Round5FullBoundary
-        Round5.canonicalRound5FullBoundary
-        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
 
 
 -- Legal authority remains independent of matter workflow and semantic admission.
@@ -197,3 +220,37 @@ unifiedSemanticAdmissionIsNotLegalAuthority :
   LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 unifiedSemanticAdmissionIsNotLegalAuthority =
   LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+------------------------------------------------------------------------
+-- SCALE evidence genealogy firewalls.
+------------------------------------------------------------------------
+
+scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
+scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence :
+  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
+scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence =
+  SCALEReview.repetitionDoesNotCreateIndependentEvidence
+
+
+------------------------------------------------------------------------
+-- SCALE physical-economy non-promotion firewalls.
+------------------------------------------------------------------------
+
+scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth :
+  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
+scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth =
+  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
+
+scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority :
+  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
+scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority =
+  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
+
+scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence :
+  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
+scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence =
+  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
