@@ -861,3 +861,56 @@ physicsCPackageCountMatchesOwner :
   Physics.yangMillsBalabanCPhysicalPackageCount
   ≡ Balaban.balabanCPhysicalPackageCount
 physicsCPackageCountMatchesOwner = refl
+
+
+------------------------------------------------------------------------
+-- Source-shaped summable RG increment boundary.
+--
+-- The compiler is machine checked.
+-- The physical source-to-same-family dyadic majorant remains conditional.
+------------------------------------------------------------------------
+
+summableRGIncrementCompilerMatchesOwner :
+  TOE.toeBalabanSummableRGIncrementCauchyCompilerLevel
+  ≡ Balaban.balabanSummableRGIncrementCauchyCompilerLevel
+summableRGIncrementCompilerMatchesOwner = refl
+
+unifierSummableRGIncrementCompilerMatchesOwner :
+  Unifier.toeBalabanSummableRGIncrementCauchyCompilerLevel
+  ≡ Balaban.balabanSummableRGIncrementCauchyCompilerLevel
+unifierSummableRGIncrementCompilerMatchesOwner = refl
+
+physicsSummableRGIncrementCompilerMatchesOwner :
+  Physics.yangMillsBalabanSummableRGIncrementCauchyCompilerLevel
+  ≡ Balaban.balabanSummableRGIncrementCauchyCompilerLevel
+physicsSummableRGIncrementCompilerMatchesOwner = refl
+
+physicalSameFamilyIncrementStatusMatchesOwner :
+  TOE.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+  ≡ Balaban.balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+physicalSameFamilyIncrementStatusMatchesOwner = refl
+
+unifierPhysicalSameFamilyIncrementStatusMatchesOwner :
+  Unifier.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+  ≡ Balaban.balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+unifierPhysicalSameFamilyIncrementStatusMatchesOwner = refl
+
+physicsPhysicalSameFamilyIncrementStatusMatchesOwner :
+  Physics.yangMillsBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+  ≡ Balaban.balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+physicsPhysicalSameFamilyIncrementStatusMatchesOwner = refl
+
+toePhysicalSameFamilyIncrementStillConditional :
+  TOE.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel ≡ conditional
+toePhysicalSameFamilyIncrementStillConditional =
+  TOE.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional
+
+unifierPhysicalSameFamilyIncrementStillConditional :
+  Unifier.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel ≡ conditional
+unifierPhysicalSameFamilyIncrementStillConditional =
+  Unifier.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional
+
+physicsPhysicalSameFamilyIncrementStillConditional :
+  Physics.yangMillsBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel ≡ conditional
+physicsPhysicalSameFamilyIncrementStillConditional =
+  Physics.yangMillsBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional
