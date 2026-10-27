@@ -10,7 +10,6 @@ import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromo
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
-import DASHI.Unified.Everything as UnifiedEverything
 
 ------------------------------------------------------------------------
 -- Canonical consumer reachability.
@@ -138,10 +137,6 @@ physicsScaleTransferPromotionEliminates :
 physicsScaleTransferPromotionEliminates =
   Physics.yangMillsBalabanScaleTransferNonPromotion
 
-unifiedEverythingScaleTransferPromotionEliminates :
-  Joint.ScaleTransferPromotion → ⊥
-unifiedEverythingScaleTransferPromotionEliminates =
-  UnifiedEverything.unifiedBalabanScaleTransferNonPromotion
 
 jointReceiptScaleTransferPromotionEliminates :
   Joint.ScaleTransferPromotion → ⊥
