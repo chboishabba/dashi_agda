@@ -255,6 +255,7 @@ open SameFamilyRecovery public using
   ( r129ExportsLiteralContinuumLimit
   ; r129ExportsLiteralSchwingerMembership
   ; r129ExportsLiteralStressDerivative
+  ; r129ExportsCompositeMarkedSourceData
   )
 
 balabanSameFamilyRecoveryCompilerLevel : ProofLevel
