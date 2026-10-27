@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Finance.SolarBatteryArbitrageFeasibilityExact as BatteryArbitrageTOE
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1698,3 +1699,58 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Solar / battery / grid arbitrage feasibility boundary.
+------------------------------------------------------------------------
+
+toeBatteryArbitrageZKPFrame :
+  BatteryArbitrageTOE.BatteryArbitrageZKPFrame
+toeBatteryArbitrageZKPFrame =
+  BatteryArbitrageTOE.canonicalBatteryArbitrageZKPFrame
+
+toeBatteryGrossSpreadDoesNotCreateNetProfit :
+  BatteryArbitrageTOE.GrossSpreadCreatesNetProfit → ⊥
+toeBatteryGrossSpreadDoesNotCreateNetProfit =
+  BatteryArbitrageTOE.grossSpreadDoesNotCreateNetProfit
+
+toeBatteryLowHouseholdLoadDoesNotCapTradableThroughput :
+  BatteryArbitrageTOE.LowHouseholdLoadCapsTradableThroughput → ⊥
+toeBatteryLowHouseholdLoadDoesNotCapTradableThroughput =
+  BatteryArbitrageTOE.lowHouseholdLoadDoesNotCapTradableThroughput
+
+toeBatteryTariffSnapshotDoesNotCreateFutureTariff :
+  BatteryArbitrageTOE.TariffSnapshotCreatesFutureTariff → ⊥
+toeBatteryTariffSnapshotDoesNotCreateFutureTariff =
+  BatteryArbitrageTOE.tariffSnapshotDoesNotCreateFutureTariff
+
+toeBatterySmartMeterDoesNotCreateSavings :
+  BatteryArbitrageTOE.SmartMeterCreatesSavings → ⊥
+toeBatterySmartMeterDoesNotCreateSavings =
+  BatteryArbitrageTOE.smartMeterDoesNotCreateSavings
+
+toeBatterySeparateEVNMIDoesNotCreateApartmentTariffEligibility :
+  BatteryArbitrageTOE.SeparateEVNMICreatesApartmentTariffEligibility → ⊥
+toeBatterySeparateEVNMIDoesNotCreateApartmentTariffEligibility =
+  BatteryArbitrageTOE.separateEVNMIDoesNotCreateApartmentTariffEligibility
+
+toeBatteryCommonPropertySolarDoesNotCreateApartmentAccess :
+  BatteryArbitrageTOE.CommonPropertySolarCreatesApartmentAccess → ⊥
+toeBatteryCommonPropertySolarDoesNotCreateApartmentAccess =
+  BatteryArbitrageTOE.commonPropertySolarDoesNotCreateApartmentAccess
+
+toeBatteryExistingConduitDoesNotCreateElectricalCompatibility :
+  BatteryArbitrageTOE.ExistingConduitCreatesElectricalCompatibility → ⊥
+toeBatteryExistingConduitDoesNotCreateElectricalCompatibility =
+  BatteryArbitrageTOE.existingConduitDoesNotCreateElectricalCompatibility
+
+toeBatteryRetailerIncentiveDoesNotCreateGuaranteedPayback :
+  BatteryArbitrageTOE.RetailerIncentiveCreatesGuaranteedPayback → ⊥
+toeBatteryRetailerIncentiveDoesNotCreateGuaranteedPayback =
+  BatteryArbitrageTOE.retailerIncentiveDoesNotCreateGuaranteedPayback
+
+toeBatterySourceExampleDoesNotCreateUniversalOptimalBatterySize :
+  BatteryArbitrageTOE.SourceExampleCreatesUniversalOptimalBatterySize → ⊥
+toeBatterySourceExampleDoesNotCreateUniversalOptimalBatterySize =
+  BatteryArbitrageTOE.sourceExampleDoesNotCreateUniversalOptimalBatterySize
+
