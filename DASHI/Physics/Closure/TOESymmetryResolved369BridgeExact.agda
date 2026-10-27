@@ -18,6 +18,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Galerkin
 import DASHI.Physics.Closure.IncompressibleEulerGalerkinCoreExact as EulerCompat
 import DASHI.Physics.Closure.AlpogeBuckmasterSmoothForcedEulerBlowupBoundaryExact as ABEuler
 import DASHI.Physics.Closure.NSJul26ScalarisationToSignedCriticalProductionSnowballExact as NSSnowball
+import DASHI.Physics.Closure.NSOpenAI2026EulerToClayFourAlternativeBidiExact as OpenAIEuler
 import DASHI.Foundations.Base369MobiusTransport as Mobius
 
 ------------------------------------------------------------------------
@@ -389,3 +390,26 @@ toeNSCutoffUniformSignedSpacetimePaymentNotYetRecovered =
 toeNSRemainingNovelObjectIsCutoffUniformSignedPayment :
   NSSnowball.remainingNovelObjectIsCutoffUniformSignedPayment ≡ true
 toeNSRemainingNovelObjectIsCutoffUniformSignedPayment = refl
+
+
+------------------------------------------------------------------------
+-- 8. Reuse the existing released OpenAI unforced-Euler source boundary.
+--
+-- The external Euler proof remains external. Its source integration is useful
+-- for adversarial comparison. It does not become a positive-viscosity NS proof.
+------------------------------------------------------------------------
+
+toeOpenAIUnforcedEulerSourceAlreadyIntegrated :
+  OpenAIEuler.releasedEulerSourceIntegrated ≡ true
+toeOpenAIUnforcedEulerSourceAlreadyIntegrated =
+  OpenAIEuler.releasedEulerSourceIntegratedIsTrue
+
+toeOpenAIEulerSameObjectWeldNotClosed :
+  OpenAIEuler.releasedEulerSameObjectWeldClosed ≡ false
+toeOpenAIEulerSameObjectWeldNotClosed =
+  OpenAIEuler.releasedEulerSameObjectWeldClosedIsFalse
+
+toeOpenAIEulerDoesNotDirectlyPayClayNS :
+  OpenAIEuler.releasedEulerPaysClayAlternativeDirectly ≡ false
+toeOpenAIEulerDoesNotDirectlyPayClayNS =
+  OpenAIEuler.releasedEulerPaysClayAlternativeDirectlyIsFalse
