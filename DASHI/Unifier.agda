@@ -43,6 +43,10 @@ open BalabanRGTOE public using
   ; classificationAdjointCasimirAtLeastTwo
   ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
   ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  ; r129ExportsLiteralContinuumLimit
+  ; r129ExportsLiteralSchwingerMembership
+  ; r129ExportsLiteralStressDerivative
+  ; r129ExportsCompositeMarkedSourceData
   )
 
 balabanRGBlockSpinTransferStillOpen :
@@ -181,6 +185,34 @@ toeBalabanGoal1CMetricPairingCompilerLevel =
 toeBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
 toeBalabanGoal1CLiteralSourceInstantiationLevel =
   BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+toeBalabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+toeBalabanCPhysicalPackageMaxCutCompilerLevel =
+  BalabanRGTOE.balabanCPhysicalPackageMaxCutCompilerLevel
+
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  BalabanRGTOE.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+toeBalabanC1MarkedCurvatureFamilyLevel : ProofLevel
+toeBalabanC1MarkedCurvatureFamilyLevel =
+  BalabanRGTOE.balabanC1MarkedCurvatureFamilyLevel
+
+toeBalabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+toeBalabanC2PhysicalRemainderSharedTailLevel =
+  BalabanRGTOE.balabanC2PhysicalRemainderSharedTailLevel
+
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel =
+  BalabanRGTOE.balabanC3OneStepAFRecurrenceIdentificationLevel
+
+toeBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
+toeBalabanC4DensityAnchoredStressLaneLevel =
+  BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
+
+toeBalabanCPhysicalPackageCount : ℕ
+toeBalabanCPhysicalPackageCount =
+  BalabanRGTOE.balabanCPhysicalPackageCount
 
 toeBalabanLevel2ClayPromotionStillFalse :
   BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
