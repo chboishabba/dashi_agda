@@ -8,3 +8,10 @@ module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
+
+-- Reuse the proved IIT/ternary-cube owners. These imports add no physical
+-- promotion and do not depend on any ESD surface.
+import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact
+import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact
+import DASHI.Biology.IITHigherOrderGluingDiscriminationExact
+import DASHI.Biology.IITParityGluingConjectureMaxCutExact
