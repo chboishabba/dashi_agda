@@ -59,6 +59,15 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
 import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as Legal
 import DASHI.Cognition.PNF.SensibLawSemanticStatusCrossPollinationExact as Semantic
 import DASHI.Governance.AuthorityMandateCore as Governance
+import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as Operational
+import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as Review
+import DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact as Matter
+import DASHI.Cognition.PNF.SensibLawProvenanceSemanticStatusOrthogonalityExact as Status
+import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
+import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact as Applicability
+import DASHI.Core.ITIRGovernanceControlCaseExact as Control
+import DASHI.Governance.FormalisationGovernanceCapstoneExact as Formalisation
+import DASHI.Core.FrozenProvenanceDynamicRefinementExact as Frozen
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as Promotion
 
@@ -289,6 +298,102 @@ toeCanonicalAuthorityKindsRemainClosed =
   Authority.canonicalAuthorityKindsFalse
 
 ------------------------------------------------------------------------
+-- Direct governed workflow and observer-future-safety handoff.
+--
+-- Actionstep-style workflow state uses the existing generic task, review, and
+-- matter carriers. This module creates no Actionstep-specific legal ontology.
+-- These are aliases to existing theorem owners only.
+------------------------------------------------------------------------
+
+taskCompletionCannotCreateTruth :
+  Operational.TaskCompletionCreatesTruth → ⊥
+taskCompletionCannotCreateTruth =
+  Operational.taskCompletionDoesNotCreateTruth
+
+durableReviewCannotCreateTruth :
+  Review.DurableReviewStateCreatesTruth → ⊥
+durableReviewCannotCreateTruth =
+  Review.durableReviewStateDoesNotCreateTruth
+
+databaseCommitCannotCreateSemanticAuthority :
+  Review.DatabaseCommitCreatesSemanticAuthority → ⊥
+databaseCommitCannotCreateSemanticAuthority =
+  Review.databaseCommitDoesNotCreateSemanticAuthority
+
+acceptedReviewCannotPayApplicability :
+  Review.AcceptedStatusPaysApplicability → ⊥
+acceptedReviewCannotPayApplicability =
+  Review.acceptedStatusDoesNotPayApplicability
+
+acceptanceReceiptCannotMutateMatter :
+  Matter.AcceptanceReceiptMutatesMatter → ⊥
+acceptanceReceiptCannotMutateMatter =
+  Matter.acceptanceReceiptDoesNotMutateMatter
+
+externalSourceCannotAdmitTruth :
+  Status.ExternalSourceClaimImpliesTruthAdmitted → ⊥
+externalSourceCannotAdmitTruth =
+  Status.externalSourceDoesNotAdmitTruth
+
+citationCannotRealiseLegalRule :
+  SourceRule.CitationAloneRealisesLegalRule → ⊥
+citationCannotRealiseLegalRule =
+  SourceRule.citationAloneDoesNotRealiseLegalRule
+
+semanticMeetCannotPayApplicability :
+  Applicability.SemanticMeetAloneProvesLegalApplicability → ⊥
+semanticMeetCannotPayApplicability =
+  Applicability.semanticMeetDoesNotAloneProveLegalApplicability
+
+sourceRealisedWrongTypeCannotAutoViolate :
+  Applicability.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
+sourceRealisedWrongTypeCannotAutoViolate =
+  Applicability.sourceRealisedWrongTypeDoesNotAutoViolate
+
+provedElementsCannotEraseExceptionsOrDefences :
+  Applicability.AllElementsProvedIgnoresExceptionsDefences → ⊥
+provedElementsCannotEraseExceptionsOrDefences =
+  Applicability.allElementsDoNotEraseExceptionsDefences
+
+passingControlCannotCreateCertification :
+  Control.PassingControlMeansCertified → ⊥
+passingControlCannotCreateCertification =
+  Control.passingDoesNotMeanCertified
+
+controlEvidenceCannotCreateTruth :
+  Control.ControlEvidenceCreatesTruth → ⊥
+controlEvidenceCannotCreateTruth =
+  Control.controlEvidenceDoesNotCreateTruth
+
+kernelClosureStillNotSemanticClosure :
+  Formalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
+    Formalisation.canonicalThreeStoreyBoundary
+  ≡ false
+kernelClosureStillNotSemanticClosure =
+  Formalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosureIsFalse
+    Formalisation.canonicalThreeStoreyBoundary
+
+frozenProvenanceDynamicBoundary :
+  Frozen.FrozenProvenanceDynamicBoundary
+frozenProvenanceDynamicBoundary =
+  Frozen.canonicalFrozenProvenanceDynamicBoundary
+
+staticObserverSeparationStillDoesNotCreateDynamicSafety :
+  Frozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+staticObserverSeparationStillDoesNotCreateDynamicSafety =
+  Frozen.staticSeparationDoesNotCreateDynamicSafety
+
+frozenSelectionStillDoesNotCreateDynamicSafety :
+  Frozen.FrozenSelectionCreatesDynamicSafetyPermission → ⊥
+frozenSelectionStillDoesNotCreateDynamicSafety =
+  Frozen.frozenSelectionDoesNotCreateDynamicSafety
+
+provenanceAxisStillDoesNotCreateTruth :
+  Frozen.ProvenanceAxisCreatesTruthPermission → ⊥
+provenanceAxisStillDoesNotCreateTruth =
+  Frozen.provenanceAxisDoesNotCreateTruth
+
+------------------------------------------------------------------------
 -- Canonical current max-cut receipt.
 ------------------------------------------------------------------------
 
@@ -301,6 +406,7 @@ record TOECurrentMaxCutGovernanceFleetReceipt : Set where
     legalAuthorityBoundary : Legal.LegalSourceAuthorityBoundary
     semanticBoundary : Semantic.CrossPollinationBoundary
     governanceBoundary : Governance.MandateAuthorityBoundary
+    observerFutureSafetyBoundary : Frozen.FrozenProvenanceDynamicBoundary
 
     gate4GapCount : Nat
     gate4GapCountIs58 : gate4GapCount ≡ 58
@@ -342,6 +448,7 @@ canonicalTOECurrentMaxCutGovernanceFleetReceipt =
     Legal.canonicalLegalSourceAuthorityBoundary
     Semantic.canonicalCrossPollinationBoundary
     Governance.canonicalMandateAuthorityBoundary
+    Frozen.canonicalFrozenProvenanceDynamicBoundary
     gate4FormalGapCount
     gate4FormalGapCountIs58
     fleetReportedFormalGapCount
