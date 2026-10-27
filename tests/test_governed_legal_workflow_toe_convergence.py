@@ -29,6 +29,11 @@ def test_bridge_reuses_existing_owners():
         "ITIRFederatedTypedWorldProjectionExact",
         "DistributedEpistemicFabricSourceAtlasExact",
         "AgentAuthorityTrajectoryExact",
+        "SLRReviewPromoteAbstainConsumerExact",
+        "SLRRuntimeValidationHandoffExact",
+        "SLRValidationRoadmapPromotionExact",
+        "SensibLawLegalSemanticAdmissionFrontierExact",
+        "SensibLawSemanticExpansionSoftwareValidationExact",
     ):
         assert token in text
 
@@ -111,8 +116,24 @@ def test_bridge_is_attached_to_toe_root_and_unifier():
     assert "toeSemanticMeetDoesNotProveLegalApplicability" in toe
     assert "toeControlEvidenceDoesNotCreateTruth" in toe
     assert "toePassingControlDoesNotMeanCertified" in toe
+    assert "toeGovernedLegalWorkflowPromotionBoundary" in toe
+    assert "toeReviewEligibilityDoesNotCreatePromotion" in toe
+    assert "toeRuntimeParityDoesNotCreateWorldTruth" in toe
+    assert "toeDiagnosticStreamDoesNotCreateLegalCertification" in toe
+    assert "toeProjectionDoesNotCreateClaimTruth" in toe
+    assert "toeReviewRouterDoesNotCreateConsumerAdequacy" in toe
+    assert "toeParserCandidateDoesNotAuthorizeAdmission" in toe
+    assert "toeResidualPriorityDoesNotCreateTruthConfidence" in toe
+    assert "toeAdmissionReceiptDoesNotPublishGeneration" in toe
+    assert "toeSoftwareValidationDoesNotAuthorizePublication" in toe
+    assert "toeLaterValidationDoesNotRewriteCertifiedBaseline" in toe
     assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE" in unifier
     assert "toeGovernedLegalWorkflowZKPReceipt" in unifier
+    assert "toeGovernedLegalWorkflowPromotionBoundary" in unifier
+    assert "toeReviewEligibilityDoesNotCreatePromotion" in unifier
+    assert "toeRuntimeParityDoesNotCreateWorldTruth" in unifier
+    assert "toeParserCandidateDoesNotAuthorizeAdmission" in unifier
+    assert "toeSoftwareValidationDoesNotAuthorizePublication" in unifier
 
 
 def test_regression_binds_unifier_to_canonical_receipt():
@@ -121,6 +142,11 @@ def test_regression_binds_unifier_to_canonical_receipt():
     assert "zkpStandardsRemainDesignLenses" in text
     assert "zkpStandardsDoNotClaimCertification" in text
     assert "zkpESDSurfaceMutationRemainsForbidden" in text
+    assert "unifierUsesCanonicalPromotionBoundary" in text
+    assert "reviewEligibilityStillDoesNotCreatePromotion" in text
+    assert "runtimeParityStillDoesNotCreateWorldTruth" in text
+    assert "parserCandidateStillDoesNotAuthorizeAdmission" in text
+    assert "softwareValidationStillDoesNotCreatePublication" in text
 
 
 def test_new_governance_sources_have_no_trust_escape():
