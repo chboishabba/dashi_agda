@@ -178,6 +178,39 @@ scenicZdenekDecember2025 = Source.mkNoDOISource
   "Original PDF p1 visually checked: exact EPBC 2020/8651, Lots 51 and 50, NOT 2019/8575. The printed 14 Dec 2025 is prior environmental advocacy and a research witness locator, NOT proof it was received, a group activity, or same-parcel impact."
   Source.publicAttribution
 
+swfgAustralianBusinessRegister : Source.AttributedSource
+swfgAustralianBusinessRegister = Source.mkNoDOISource
+  "Australian Business Register / Australian Taxation Office"
+  "ABN 86 248 330 120 — Save Woogaroo Forest Group Inc"
+  "Original Commonwealth ABN Lookup, details last updated 21 Nov 2024"
+  "17 November 2024 (ABN active-from date, NOT legal commencement certificate)"
+  "https://abr.business.gov.au/ABN/View?id=86248330120"
+  Source.governmentSource
+  "ABR authoritative entry reports exact entity name, active ABN from 17 Nov 2024, Other Incorporated Entity, main QLD 4300, no DGR. It is a positive identity/form lead, NOT an incorporated-associations register extract, its governing objects at 15 Oct 2026, authority to sue, or proof of all EPBC s487 conditions."
+  Source.publicAttribution
+
+senateWoogarooPetition2025 : Source.AttributedSource
+senateWoogarooPetition2025 = Source.mkNoDOISource
+  "Parliament of Australia — Australian Senate"
+  "Senate Daily Summary 25–26 March 2025: petitioning document about koalas of Woogaroo Forest"
+  "Official Senate chamber daily summary"
+  "26 March 2025"
+  "https://www.aph.gov.au/Parliamentary_Business/Chamber_documents/Senate_chamber_documents/sds/Archive/2025/Senate_Daily_Summary_-_25_to_26_March_2025"
+  Source.governmentSource
+  "Senator Waters tabled a petitioning document relating to koalas of Woogaroo Forest. Parliamentary event and date identified. The original summary does NOT identify SWFG as the organiser or author, give signature total, certify its objects, identify a litigant, or prove s95B receipt for 2019/8575."
+  Source.publicAttribution
+
+ipswichJuly2025CampaignCoverage : Source.AttributedSource
+ipswichJuly2025CampaignCoverage = Source.mkNoDOISource
+  "Rowan Anderson / Local Ipswich News"
+  "International conservation group visits to support green corridor"
+  "Original contemporaneous local reporting naming Save Woogaroo Forest Group Inc."
+  "17 July 2025"
+  "https://localipswichnews.com.au/news/woogaroo-forest-campaign/"
+  Source.newsSource
+  "Dated report documents campaign activity and a group spokesperson, and describes expert site visits. This is secondary corroboration distinct from the original December 2025 SWFG submission, NOT the original association constitution or primary scientific measurements. Check underlying campaign records if relied upon for s487 activity-series proof."
+  Source.publicAttribution
+
 data StandingApplicant : Set where
   conservationIndividual : StandingApplicant
   conservationOrganisation : StandingApplicant
@@ -336,6 +369,27 @@ zdenekScenicActivityLead = litigation-gate adjrSection5Review scenicZdenekDecemb
   "Obtain provenance, recipient delivery and individual's own complete statutory standing evidence; keep 2020/8651 science and location separate from 2019/8575."
   false refl
 
+swfgABNOrganisationIdentityLead : LitigationGate
+swfgABNOrganisationIdentityLead = litigation-gate adjrSection5Review swfgAustralianBusinessRegister
+  caseSpecificProofOpen
+  "ABR identifies Save Woogaroo Forest Group Inc, ABN 86 248 330 120, as an Other Incorporated Entity and active since 17 November 2024 in QLD; materially stronger entity identity than website alone."
+  "Acquire actual Queensland incorporated-association registration/historical rules and objects as on decision date 15 Oct 2026, capacity and authorised court applicant; ABN record is not a certificate of objects."
+  false refl
+
+swfgMarch2025PublicPetitionLead : LitigationGate
+swfgMarch2025PublicPetitionLead = litigation-gate adjrSection5Review senateWoogarooPetition2025
+  caseSpecificProofOpen
+  "Official Senate daily summary says Senator Waters tabled a petition concerning Woogaroo koalas in March 2025, within the two-year s487 environmental-activity period."
+  "Actual petition original and sponsor/organiser records naming the group; do NOT assign Senate event to SWFG organisational acts from geographic theme or 15,000 reported signatures alone."
+  false refl
+
+swfgJuly2025CampaignSeriesLead : LitigationGate
+swfgJuly2025CampaignSeriesLead = litigation-gate adjrSection5Review ipswichJuly2025CampaignCoverage
+  caseSpecificProofOpen
+  "17 July 2025 contemporaneous report identifies SWFG Inc conservation campaign, spokesperson and group-linked expert visit; distinct date/medium from its authored 15 Dec 2025 Scenic submission."
+  "Original SWFG event announcement, organiser records and legally admissible witnesses; find full activity chronology and objects rather than claim standing final."
+  false refl
+
 triageGates : List LitigationGate
 triageGates =
   individualStanding ∷ organisationStanding ∷ independentAffectedInterest ∷
@@ -344,7 +398,9 @@ triageGates =
   qutLetterEvidenceLead ∷ campaignActivityLead ∷
   nationalEPA474AEnforcement ∷ nationalEPAComplianceReport ∷
   qccSameCaseSubmissionLead ∷ swfgScenicStandingActivityLead ∷
-  possinghamScenicActivityLead ∷ zdenekScenicActivityLead ∷ []
+  possinghamScenicActivityLead ∷ zdenekScenicActivityLead ∷
+  swfgABNOrganisationIdentityLead ∷ swfgMarch2025PublicPetitionLead ∷
+  swfgJuly2025CampaignSeriesLead ∷ []
 
 -- Existing source and case consumers are genuinely reused. Nothing in their
 -- existence turns a candidate applicant into a qualified litigant.
@@ -381,6 +437,8 @@ data Scenic20208651SubmissionsAreSpringview20198575Comments : Set where
 data DatedOneAssociationLetterProvesFullSection487Standing : Set where
 data CampaignDownloadCaptionOverridesOriginalPrintedDate : Set where
 data QCCSubmissionProvesSWFGGroupStanding : Set where
+data ABNEntryProvesSection487ObjectsAtDecision : Set where
+data SenatePetitionAboutWoogarooProvesSWFGOrganisedIt : Set where
 
 identityNotStanding : ConservationIdentityAloneProvesSection487 → ⊥
 identityNotStanding ()
@@ -453,3 +511,10 @@ originalDateBeatsCaption ()
 qccNotSwfgStanding :
   QCCSubmissionProvesSWFGGroupStanding → ⊥
 qccNotSwfgStanding ()
+
+abnNoObjectsCertification : ABNEntryProvesSection487ObjectsAtDecision → ⊥
+abnNoObjectsCertification ()
+
+senateThemeNotGroupOrganiser :
+  SenatePetitionAboutWoogarooProvesSWFGOrganisedIt → ⊥
+senateThemeNotGroupOrganiser ()
