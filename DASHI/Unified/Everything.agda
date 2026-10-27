@@ -361,6 +361,19 @@ governedReviewedGenealogyDoesNotPayApplicability =
 governedGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
   LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
 
+
+governedGenealogyCandidateSourceDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
+
+governedGenealogySameLegalSystemDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
+
+governedGenealogyCurrentValidityDoesNotCreateApplicability =
+  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
+
+governedGenealogyDocumentRoleDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
+
 ------------------------------------------------------------------------
 -- Governed legal/source/semantic non-promotion handoff.
 ------------------------------------------------------------------------
