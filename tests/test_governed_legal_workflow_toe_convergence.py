@@ -6,6 +6,7 @@ BRIDGE = ROOT / "DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda"
 REGRESSION = ROOT / "DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda"
 TOE = ROOT / "DASHI/EverythingTOESymmetryResolved369.agda"
 UNIFIER = ROOT / "DASHI/Unifier.agda"
+UNIFIED_EVERYTHING = ROOT / "DASHI/Unified/Everything.agda"
 WORKFLOW = ROOT / ".github/workflows/toe-symmetry-resolved-369.yml"
 
 
@@ -61,6 +62,9 @@ def test_bridge_exposes_normalized_zkp_receipt():
     for token in (
         "GovernedLegalWorkflowZKPReceipt",
         "canonicalGovernedLegalWorkflowZKPReceipt",
+        "GovernedLegalWorkflowIntrospectiveZKPFrame",
+        "canonicalGovernedLegalWorkflowIntrospectiveZKPFrame",
+        "IntrospectiveProofLoopExact",
         "objectiveRefs",
         "reuseRefs",
         "constructionRefs",
@@ -124,6 +128,7 @@ def test_bridge_is_attached_to_toe_root_and_unifier():
     assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance" in toe
     assert "toeGovernedLegalWorkflowInvariantHandoff" in toe
     assert "toeGovernedLegalWorkflowZKPReceipt" in toe
+    assert "toeGovernedLegalWorkflowIntrospectiveZKPFrame" in toe
     assert "toeCaseySelectionDoesNotCreateWorldTruth" in toe
     assert "toeKnowledgeDoesNotCreateExecutionAuthority" in toe
     assert "toeGovernedLegalWorkflowBoundary" in toe
@@ -149,11 +154,20 @@ def test_bridge_is_attached_to_toe_root_and_unifier():
     assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE" in unifier
     assert "toeGovernedLegalWorkflowInvariantHandoff" in unifier
     assert "toeGovernedLegalWorkflowZKPReceipt" in unifier
+    assert "toeGovernedLegalWorkflowIntrospectiveZKPFrame" in unifier
     assert "toeGovernedLegalWorkflowPromotionBoundary" in unifier
     assert "toeReviewEligibilityDoesNotCreatePromotion" in unifier
     assert "toeRuntimeParityDoesNotCreateWorldTruth" in unifier
     assert "toeParserCandidateDoesNotAuthorizeAdmission" in unifier
     assert "toeSoftwareValidationDoesNotAuthorizePublication" in unifier
+
+
+def test_bridge_is_attached_to_unified_everything():
+    text = read(UNIFIED_EVERYTHING)
+    assert "GovernedLegalWorkflowTOEBridgeExact as LegalGovernance" in text
+    assert "governedLegalWorkflowTOEBoundary" in text
+    assert "governedLegalWorkflowTOEInvariantHandoff" in text
+    assert "governedLegalWorkflowIntrospectiveZKPFrame" in text
 
 
 def test_regression_binds_unifier_to_canonical_receipt():
@@ -163,6 +177,11 @@ def test_regression_binds_unifier_to_canonical_receipt():
     assert "invariantHandoffUsesCanonicalPromotionBoundary" in text
     assert "invariantHandoffUsesCanonicalZKPReceipt" in text
     assert "unifierUsesCanonicalZKPReceipt" in text
+    assert "unifierUsesCanonicalIntrospectiveZKPFrame" in text
+    assert "invariantHandoffUsesCanonicalIntrospectiveZKPFrame" in text
+    assert "unifiedEverythingUsesCanonicalGovernanceBoundary" in text
+    assert "unifiedEverythingUsesCanonicalInvariantHandoff" in text
+    assert "unifiedEverythingUsesCanonicalIntrospectiveZKPFrame" in text
     assert "zkpStandardsRemainDesignLenses" in text
     assert "zkpStandardsDoNotClaimCertification" in text
     assert "zkpESDSurfaceMutationRemainsForbidden" in text
