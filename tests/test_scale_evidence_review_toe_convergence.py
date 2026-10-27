@@ -109,6 +109,7 @@ def test_attached_to_all_three_toe_surfaces():
     unified = read(UNIFIED)
     assert "SCALEEvidenceReviewTOEConvergenceExact as SCALEReview" in toe
     assert "toe369SCALEEvidenceReviewTOEReceipt" in toe
+    assert "toe369SCALEEvidenceReviewTOEZKPFrame" in toe
     assert "toe369SCALEReviewDoesNotCreateClaimTruth" in toe
     assert "toe369SCALEReviewProjectionReuseDoesNotCreateClaimTruth" in toe
     assert "toe369SCALECommitCoalescingDoesNotCreateSemanticAuthority" in toe
@@ -116,6 +117,7 @@ def test_attached_to_all_three_toe_surfaces():
     assert "toe369SCALERepetitionDoesNotCreateIndependentEvidence" in toe
     assert "SCALEEvidenceReviewTOEConvergenceExact as SCALEReview" in unifier
     assert "unifierSCALEEvidenceReviewTOEReceipt" in unifier
+    assert "unifierSCALEEvidenceReviewTOEZKPFrame" in unifier
     assert "unifierSCALEFrontierDoesNotGrantAuthorization" in unifier
     assert "unifierSCALEReviewProjectionReuseDoesNotCreateClaimTruth" in unifier
     assert "unifierSCALECommitCoalescingDoesNotCreateSemanticAuthority" in unifier
@@ -123,6 +125,7 @@ def test_attached_to_all_three_toe_surfaces():
     assert "unifierSCALERepetitionDoesNotCreateIndependentEvidence" in unifier
     assert "SCALEEvidenceReviewTOEConvergenceExact as SCALEReview" in unified
     assert "scaleEvidenceReviewTOEReceipt" in unified
+    assert "scaleEvidenceReviewTOEZKPFrame" in unified
     assert "scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth" in unified
     assert "scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority" in unified
     assert "scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence" in unified
