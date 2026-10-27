@@ -6,6 +6,8 @@ skinparam componentStyle rectangle
 component "SensibLaw / legal workflow\ncanonical owners" as Legal
 component "PNF source genealogy\ncanonical owner" as Source
 component "PNF distilled non-promotion\ncompatibility/process facade" as Distilled
+component "Agda-first legal runtime\ncanonical contract" as Runtime
+component "Domain authority transport\ncanonical receipt" as Domain
 component "GovernedLegalWorkflow\nSourceGenealogyTOEExact" as LegalSource
 component "GovernedLegalWorkflow\nSourceSemanticTOEExact" as Join
 component "EverythingTOE\nSymmetryResolved369" as Root
@@ -16,6 +18,8 @@ Legal --> LegalSource : exact inherited proofs
 Source --> LegalSource : provenance firewalls
 Source --> Distilled : canonical receipt
 Distilled --> Join : false-by-construction process flags
+Runtime --> Join : runtime transport firewalls
+Domain --> Join : authority transport firewalls
 LegalSource --> Join : same-object legal/source handoff
 
 Join --> Root
@@ -35,6 +39,11 @@ Invariants:
 - shared lexeme != semantic identity
 - diagnostic check != theorem promotion
 - identifier != proof authority
+- runtime transport != legal semantics
+- source follow != authority
+- representation equality != legal authority
+- vendor identity != authority
+- target domain needs its own authority witness
 - ESD mutation forbidden
 
 Postcondition:
