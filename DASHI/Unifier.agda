@@ -1,6 +1,7 @@
 module DASHI.Unifier where
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+import DASHI.Unified.GovernanceMaxCutParetoSnowballTOEConvergenceExact as GovernanceMaxCut
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 
@@ -886,3 +887,28 @@ toeExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 toeExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+
+------------------------------------------------------------------------
+-- Governance + max-cut/Pareto/snowball convergence facade.
+------------------------------------------------------------------------
+
+unifierGovernanceMaxCutParetoSnowballReceipt :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballTOEReceipt
+unifierGovernanceMaxCutParetoSnowballReceipt =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballTOEReceipt
+
+unifierGovernanceMaxCutParetoSnowballZKPFrame :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballZKPFrame
+unifierGovernanceMaxCutParetoSnowballZKPFrame =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
+
+unifierGovernanceMaxCutBalabanScaleTransferImpossible :
+  GovernanceMaxCut.ParetoSnowball.BalabanScaleTransferPromotion → ⊥
+unifierGovernanceMaxCutBalabanScaleTransferImpossible =
+  GovernanceMaxCut.balabanScaleTransferPromotionImpossible
+
+unifierGovernanceMaxCutIbrahimSearchPriorityNotProof :
+  GovernanceMaxCut.ParetoSnowball.SearchPriorityCreatesProof → ⊥
+unifierGovernanceMaxCutIbrahimSearchPriorityNotProof =
+  GovernanceMaxCut.ibrahimSearchPriorityDoesNotCreateProof
