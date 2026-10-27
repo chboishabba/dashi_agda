@@ -170,6 +170,19 @@ def test_bridge_is_attached_to_unified_everything():
     assert "governedLegalWorkflowIntrospectiveZKPFrame" in text
 
 
+def test_governance_restack_preserves_current_toe_donors():
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+    for token in (
+        "YMGoal1TOECompatibilityExact",
+        "BalabanRGTOERegression",
+    ):
+        assert token in toe
+        assert token in unifier
+    assert "BalabanRGTOERegression" in unified
+
+
 def test_regression_binds_unifier_to_canonical_receipt():
     text = read(REGRESSION)
     assert "unifierUsesCanonicalInvariantHandoff" in text
