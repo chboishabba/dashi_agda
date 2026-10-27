@@ -796,3 +796,16 @@ toeTwoDigitStreamCannotRecoverThird :
 toeTwoDigitStreamCannotRecoverThird =
   FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
 
+toeFleetGate4CountAgreement :
+  FleetHyperTOE.fleetFormalGaps
+  ≡ BalabanR559TOE.gate4UnresolvedCount
+      BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeFleetGate4CountAgreement =
+  FleetHyperTOE.fleetFormalGapCountEqualsGate4Count
+
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.EqualCardinality.equalCardinalitySelectsCanonicalMap
+    FleetHyperTOE.fleetGate4EqualCardinalityBoundary
+  ≡ false
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
