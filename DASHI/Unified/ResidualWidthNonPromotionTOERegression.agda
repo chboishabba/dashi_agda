@@ -22,6 +22,21 @@ unifierWidthNonPromotionOwnerIsExact :
   ≡ TOE.C-orderedWidthDoesNotLowerBoundArbitraryDecisionCount
 unifierWidthNonPromotionOwnerIsExact = refl
 
+unifierDirectDPObstructionOwnerIsExact :
+  Unifier.C2-blockEqualityMeasureBlocksDirectDPRun
+  ≡ TOE.C2-blockEqualityMeasureBlocksDirectDPRun
+unifierDirectDPObstructionOwnerIsExact = refl
+
+unifierSelfSpecializationNoGoOwnerIsExact :
+  Unifier.C3-genericSelfSpecializationDoesNotForceSmallWidth
+  ≡ TOE.C3-genericSelfSpecializationDoesNotForceSmallWidth
+unifierSelfSpecializationNoGoOwnerIsExact = refl
+
+unifierCandidateFirstStepBoundaryOwnerIsExact :
+  Unifier.C4-highWidthRefutesCandidateFirstStepDebt
+  ≡ TOE.C4-highWidthRefutesCandidateFirstStepDebt
+unifierCandidateFirstStepBoundaryOwnerIsExact = refl
+
 unifierExhaustiveFailureOwnerIsExact :
   Unifier.S-exhaustiveBuilderFailsAtSmallBudget
   ≡ TOE.S-exhaustiveBuilderFailsAtSmallBudget
