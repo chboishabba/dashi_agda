@@ -444,20 +444,20 @@ toeSensibLawDomainTransportReceipt =
   GovernanceTOE.governanceDomainTransportReceipt
 
 toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.representationEqualityCreatesLegalAuthority
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
     toeSensibLawDomainTransportReceipt
   ≡ false
 toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
   GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
 
 toeSensibLawVendorIdentityDoesNotCreateAuthority :
-  Domain.vendorIdentityCreatesAuthority toeSensibLawDomainTransportReceipt
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority toeSensibLawDomainTransportReceipt
   ≡ false
 toeSensibLawVendorIdentityDoesNotCreateAuthority =
   GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
 
 toeSensibLawTargetDomainNeedsOwnAuthorityWitness :
-  Domain.targetDomainNeedsOwnAuthorityWitness toeSensibLawDomainTransportReceipt
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness toeSensibLawDomainTransportReceipt
   ≡ true
 toeSensibLawTargetDomainNeedsOwnAuthorityWitness =
   GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
