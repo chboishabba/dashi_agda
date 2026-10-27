@@ -1,7 +1,7 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
 open import Agda.Builtin.Bool using (false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Unified.OggSSP2BTOEExact as TwoBTOE
 
@@ -25,7 +25,9 @@ toe2BResidualCountIsThree =
   TwoBTOE.normalizedTwoBResidualCountIsThree
 
 toe2BRepresentationDiscoveryClosed :
-  TwoBTOE.canonicalOggSSP2BTOEReceipt .representationDiscoveryLeaves ≡ 0
+  TwoBTOE.OggSSP2BTOEReceipt.representationDiscoveryLeaves
+    TwoBTOE.canonicalOggSSP2BTOEReceipt
+  ≡ 0
 toe2BRepresentationDiscoveryClosed = refl
 
 toe2BFormalSourceActionStillOpen :
