@@ -23,6 +23,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Geo/EarthEmbedding*.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unifier.agda'
@@ -38,6 +39,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Geo/EarthEmbedding*.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
@@ -101,6 +103,12 @@ jobs:
           dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
           dashi-repo discover 'Balaban scale density regular-E localization Casimir stress RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+          dashi-repo related canonicalEarthEmbeddingTOEReceipt --root . --limit 20
+          dashi-repo related learnedCoordinateDoesNotCreatePhysicalIdentity --root . --limit 20
+          dashi-repo related gradientDoesNotCreateCausalEnvironmentalEffect --root . --limit 20
+          dashi-repo discover 'Earth embedding TESSERA AlphaEarth learned coordinates gradients physical interpretation Woogaroo non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Geo.EarthEmbedding --root .
+          dashi-repo diagnose DASHI/Geo/EarthEmbeddingAcquisitionExact.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
@@ -140,6 +148,11 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Geo/EarthEmbeddingWoogarooExact.agda
+            DASHI/Geo/EarthEmbeddingGeometryExact.agda
+            DASHI/Geo/EarthEmbeddingAttributedSourcesExact.agda
+            DASHI/Geo/EarthEmbeddingInterpretabilityExact.agda
+            DASHI/Geo/EarthEmbeddingAcquisitionExact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -164,6 +177,7 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
+            DASHI/Geo/EarthEmbeddingAcquisitionExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
             DASHI/Unified/Everything.agda
