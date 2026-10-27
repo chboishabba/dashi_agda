@@ -9,6 +9,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
+open import Data.Nat.Base as Nat using (NonZero; _^_)
+import Data.Nat.Properties as NatP
 -- Reuse the canonical exact finite numerator/denominator carrier.
 -- We do not invoke rational division on a symbolic natural denominator
 -- until the separate nonzero proof obligation has been discharged.
@@ -99,12 +101,27 @@ power : Nat → Nat → Nat
 power base zero = suc zero
 power base (suc exponent) = base * power base exponent
 
+-- The private power agrees definitionally with the standard-library
+-- natural exponentiation. NonZero is the *actual* denominator constraint,
+-- not a Boolean flag, synthetic receipt, or assumed rational division.
+powerMatchesNat : ∀ base exponent →
+  power base exponent ≡ Nat._^_ base exponent
+powerMatchesNat base exponent = refl
+
 zipfDenominator : Nat → Nat → Nat
 zipfDenominator r exponent = power (suc r) exponent
 
 mandelbrotDenominator : Nat → Nat → Nat → Nat
 mandelbrotDenominator r shift exponent =
   power (suc r + shift) exponent
+
+-- Nonzero-denominator witness for each source-ranked positive term.
+-- Positive base is definitionally suc (r + shift), so the library's
+-- actual exponentiation theorem applies.
+mandelbrotDenominatorNonZero : ∀ r shift exponent →
+  Nat.NonZero (mandelbrotDenominator r shift exponent)
+mandelbrotDenominatorNonZero r shift exponent =
+  NatP.m^n≢0 (suc r + shift) exponent
 
 zipfIsZeroShift : ∀ r exponent →
   mandelbrotDenominator r zero exponent ≡ zipfDenominator r exponent
@@ -138,9 +155,31 @@ sumFirst : (Nat → Fraction) → Nat → Fraction
 sumFirst f zero = zeroFraction
 sumFirst f (suc n) = addFraction (sumFirst f n) (f n)
 
+-- All exact finite-fraction sums have nonzero product denominators.
+-- This lemma is a constructive precondition for later ℚ interpretation;
+-- it does not by itself prove PMF normalization, nonnegative numerators,
+-- analytic continuation, or any empirical Zipf law.
+sumFirstDenominatorNonZero :
+  (f : Nat → Fraction) (count : Nat) →
+  ((r : Nat) → Nat.NonZero (Exact.denominator (f r))) →
+  Nat.NonZero (Exact.denominator (sumFirst f count))
+sumFirstDenominatorNonZero f zero each = _
+sumFirstDenominatorNonZero f (suc n) each =
+  NatP.m*n≢0
+    (Exact.denominator (sumFirst f n))
+    (Exact.denominator (f n))
+    {{sumFirstDenominatorNonZero f n each}} {{each n}}
+
 finiteHurwitz : Nat → Nat → Nat → Fraction
 finiteHurwitz count shift exponent =
   sumFirst (λ r → finiteMandelbrotTerm r shift exponent) count
+
+finiteHurwitzDenominatorNonZero : ∀ count shift exponent →
+  Nat.NonZero (Exact.denominator (finiteHurwitz count shift exponent))
+finiteHurwitzDenominatorNonZero count shift exponent =
+  sumFirstDenominatorNonZero
+    (λ r → finiteMandelbrotTerm r shift exponent) count
+    (λ r → mandelbrotDenominatorNonZero r shift exponent)
 
 finiteZipfNormalizer : Nat → Nat → Fraction
 finiteZipfNormalizer count exponent = finiteHurwitz count zero exponent
