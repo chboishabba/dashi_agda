@@ -13,6 +13,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 -- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
 
 open BalabanRGTOE public using
   ( sourceCouplingIsBetaHistoryCoupling
@@ -680,3 +681,55 @@ unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
 unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 unifierYangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+
+------------------------------------------------------------------------
+-- Direct constructive RG scale-transfer non-promotion facade.
+------------------------------------------------------------------------
+
+unifierBalabanScaleTransferNonPromotion :
+  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferNonPromotion =
+  RGNonPromotion.balabanRGScaleTransferPromotionImpossibleHere
+
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 maximum-cut facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+unifierBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+unifierBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ZKPFrame :
+  BalabanR559TOE.BalabanR559ZKPFrame
+unifierBalabanR559ZKPFrame =
+  BalabanR559TOE.canonicalBalabanR559ZKPFrame
+
+unifierBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
