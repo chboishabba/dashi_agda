@@ -145,6 +145,272 @@ physicsClayStillFalse :
 physicsClayStillFalse =
   Physics.yangMillsBalabanClayPromotionStillFalse
 
+
+------------------------------------------------------------------------
+-- Complete normalized proof-level consumer agreement.
+------------------------------------------------------------------------
+
+toeScaleDensityFlowMatchesOwner :
+  TOE.toeBalabanScaleDensityFlowLevel ≡ Balaban.balabanScaleDensityFlowLevel
+toeScaleDensityFlowMatchesOwner = refl
+
+unifierScaleDensityFlowMatchesOwner :
+  Unifier.toeBalabanScaleDensityFlowLevel ≡ Balaban.balabanScaleDensityFlowLevel
+unifierScaleDensityFlowMatchesOwner = refl
+
+toeCompleteDensitySourceShapeMatchesOwner :
+  TOE.toeBalabanCompleteDensitySourceShapeLevel ≡ Balaban.balabanCompleteDensitySourceShapeLevel
+toeCompleteDensitySourceShapeMatchesOwner = refl
+
+unifierCompleteDensitySourceShapeMatchesOwner :
+  Unifier.toeBalabanCompleteDensitySourceShapeLevel ≡ Balaban.balabanCompleteDensitySourceShapeLevel
+unifierCompleteDensitySourceShapeMatchesOwner = refl
+
+toeCompleteDensityDerivedSummaryMatchesOwner :
+  TOE.toeBalabanCompleteDensityDerivedSummaryLevel ≡ Balaban.balabanCompleteDensityDerivedSummaryLevel
+toeCompleteDensityDerivedSummaryMatchesOwner = refl
+
+unifierCompleteDensityDerivedSummaryMatchesOwner :
+  Unifier.toeBalabanCompleteDensityDerivedSummaryLevel ≡ Balaban.balabanCompleteDensityDerivedSummaryLevel
+unifierCompleteDensityDerivedSummaryMatchesOwner = refl
+
+toeCompleteDensityPhysicalProjectionBoundsMatchesOwner :
+  TOE.toeBalabanCompleteDensityPhysicalProjectionBoundsLevel ≡ Balaban.balabanCompleteDensityPhysicalProjectionBoundsLevel
+toeCompleteDensityPhysicalProjectionBoundsMatchesOwner = refl
+
+unifierCompleteDensityPhysicalProjectionBoundsMatchesOwner :
+  Unifier.toeBalabanCompleteDensityPhysicalProjectionBoundsLevel ≡ Balaban.balabanCompleteDensityPhysicalProjectionBoundsLevel
+unifierCompleteDensityPhysicalProjectionBoundsMatchesOwner = refl
+
+toeScaleDensityFiniteMeasureWeldMatchesOwner :
+  TOE.toeBalabanScaleDensityFiniteMeasureWeldLevel ≡ Balaban.balabanScaleDensityFiniteMeasureWeldLevel
+toeScaleDensityFiniteMeasureWeldMatchesOwner = refl
+
+unifierScaleDensityFiniteMeasureWeldMatchesOwner :
+  Unifier.toeBalabanScaleDensityFiniteMeasureWeldLevel ≡ Balaban.balabanScaleDensityFiniteMeasureWeldLevel
+unifierScaleDensityFiniteMeasureWeldMatchesOwner = refl
+
+toeLiteralGeneratedActionDensityMatchesOwner :
+  TOE.toeBalabanLiteralGeneratedActionDensityLevel ≡ Balaban.balabanLiteralGeneratedActionDensityLevel
+toeLiteralGeneratedActionDensityMatchesOwner = refl
+
+unifierLiteralGeneratedActionDensityMatchesOwner :
+  Unifier.toeBalabanLiteralGeneratedActionDensityLevel ≡ Balaban.balabanLiteralGeneratedActionDensityLevel
+unifierLiteralGeneratedActionDensityMatchesOwner = refl
+
+toeLiteralCombinedRGEffectiveActionMatchesOwner :
+  TOE.toeBalabanLiteralCombinedRGEffectiveActionLevel ≡ Balaban.balabanLiteralCombinedRGEffectiveActionLevel
+toeLiteralCombinedRGEffectiveActionMatchesOwner = refl
+
+unifierLiteralCombinedRGEffectiveActionMatchesOwner :
+  Unifier.toeBalabanLiteralCombinedRGEffectiveActionLevel ≡ Balaban.balabanLiteralCombinedRGEffectiveActionLevel
+unifierLiteralCombinedRGEffectiveActionMatchesOwner = refl
+
+toeLiteralGeneratedActionStressScaleMatchesOwner :
+  TOE.toeBalabanLiteralGeneratedActionStressScaleLevel ≡ Balaban.balabanLiteralGeneratedActionStressScaleLevel
+toeLiteralGeneratedActionStressScaleMatchesOwner = refl
+
+unifierLiteralGeneratedActionStressScaleMatchesOwner :
+  Unifier.toeBalabanLiteralGeneratedActionStressScaleLevel ≡ Balaban.balabanLiteralGeneratedActionStressScaleLevel
+unifierLiteralGeneratedActionStressScaleMatchesOwner = refl
+
+toeScaleDensityStressLaneCompilerMatchesOwner :
+  TOE.toeBalabanScaleDensityStressLaneCompilerLevel ≡ Balaban.balabanScaleDensityStressLaneCompilerLevel
+toeScaleDensityStressLaneCompilerMatchesOwner = refl
+
+unifierScaleDensityStressLaneCompilerMatchesOwner :
+  Unifier.toeBalabanScaleDensityStressLaneCompilerLevel ≡ Balaban.balabanScaleDensityStressLaneCompilerLevel
+unifierScaleDensityStressLaneCompilerMatchesOwner = refl
+
+toeDensityAnchoredStressLaneCompilerMatchesOwner :
+  TOE.toeBalabanDensityAnchoredStressLaneCompilerLevel ≡ Balaban.balabanDensityAnchoredStressLaneCompilerLevel
+toeDensityAnchoredStressLaneCompilerMatchesOwner = refl
+
+unifierDensityAnchoredStressLaneCompilerMatchesOwner :
+  Unifier.toeBalabanDensityAnchoredStressLaneCompilerLevel ≡ Balaban.balabanDensityAnchoredStressLaneCompilerLevel
+unifierDensityAnchoredStressLaneCompilerMatchesOwner = refl
+
+toeLiteralDensityAnchoredStressLaneInstantiationMatchesOwner :
+  TOE.toeBalabanLiteralDensityAnchoredStressLaneInstantiationLevel ≡ Balaban.balabanLiteralDensityAnchoredStressLaneInstantiationLevel
+toeLiteralDensityAnchoredStressLaneInstantiationMatchesOwner = refl
+
+unifierLiteralDensityAnchoredStressLaneInstantiationMatchesOwner :
+  Unifier.toeBalabanLiteralDensityAnchoredStressLaneInstantiationLevel ≡ Balaban.balabanLiteralDensityAnchoredStressLaneInstantiationLevel
+unifierLiteralDensityAnchoredStressLaneInstantiationMatchesOwner = refl
+
+toeRegularESelectedDensityCompilerMatchesOwner :
+  TOE.toeBalabanRegularESelectedDensityCompilerLevel ≡ Balaban.balabanRegularESelectedDensityCompilerLevel
+toeRegularESelectedDensityCompilerMatchesOwner = refl
+
+unifierRegularESelectedDensityCompilerMatchesOwner :
+  Unifier.toeBalabanRegularESelectedDensityCompilerLevel ≡ Balaban.balabanRegularESelectedDensityCompilerLevel
+unifierRegularESelectedDensityCompilerMatchesOwner = refl
+
+toeRegularELocalizationSourceMatchesOwner :
+  TOE.toeBalabanRegularELocalizationSourceLevel ≡ Balaban.balabanRegularELocalizationSourceLevel
+toeRegularELocalizationSourceMatchesOwner = refl
+
+unifierRegularELocalizationSourceMatchesOwner :
+  Unifier.toeBalabanRegularELocalizationSourceLevel ≡ Balaban.balabanRegularELocalizationSourceLevel
+unifierRegularELocalizationSourceMatchesOwner = refl
+
+toeRegularELocalizationCarrierMatchesOwner :
+  TOE.toeBalabanRegularELocalizationCarrierLevel ≡ Balaban.balabanRegularELocalizationCarrierLevel
+toeRegularELocalizationCarrierMatchesOwner = refl
+
+unifierRegularELocalizationCarrierMatchesOwner :
+  Unifier.toeBalabanRegularELocalizationCarrierLevel ≡ Balaban.balabanRegularELocalizationCarrierLevel
+unifierRegularELocalizationCarrierMatchesOwner = refl
+
+toeRegularEContinuationCompilerMatchesOwner :
+  TOE.toeBalabanRegularEContinuationCompilerLevel ≡ Balaban.balabanRegularEContinuationCompilerLevel
+toeRegularEContinuationCompilerMatchesOwner = refl
+
+unifierRegularEContinuationCompilerMatchesOwner :
+  Unifier.toeBalabanRegularEContinuationCompilerLevel ≡ Balaban.balabanRegularEContinuationCompilerLevel
+unifierRegularEContinuationCompilerMatchesOwner = refl
+
+toeHaarCasimirCoefficientMatchesOwner :
+  TOE.toeBalabanHaarCasimirCoefficientLevel ≡ Balaban.balabanHaarCasimirCoefficientLevel
+toeHaarCasimirCoefficientMatchesOwner = refl
+
+unifierHaarCasimirCoefficientMatchesOwner :
+  Unifier.toeBalabanHaarCasimirCoefficientLevel ≡ Balaban.balabanHaarCasimirCoefficientLevel
+unifierHaarCasimirCoefficientMatchesOwner = refl
+
+toeCasimirOrbitFactorizationMatchesOwner :
+  TOE.toeBalabanCasimirOrbitFactorizationLevel ≡ Balaban.balabanCasimirOrbitFactorizationLevel
+toeCasimirOrbitFactorizationMatchesOwner = refl
+
+unifierCasimirOrbitFactorizationMatchesOwner :
+  Unifier.toeBalabanCasimirOrbitFactorizationLevel ≡ Balaban.balabanCasimirOrbitFactorizationLevel
+unifierCasimirOrbitFactorizationMatchesOwner = refl
+
+toeCasimirLowerBoundTransportMatchesOwner :
+  TOE.toeBalabanCasimirLowerBoundTransportLevel ≡ Balaban.balabanCasimirLowerBoundTransportLevel
+toeCasimirLowerBoundTransportMatchesOwner = refl
+
+unifierCasimirLowerBoundTransportMatchesOwner :
+  Unifier.toeBalabanCasimirLowerBoundTransportLevel ≡ Balaban.balabanCasimirLowerBoundTransportLevel
+unifierCasimirLowerBoundTransportMatchesOwner = refl
+
+toeLiteralCasimirFactorizationMatchesOwner :
+  TOE.toeBalabanLiteralCasimirFactorizationLevel ≡ Balaban.balabanLiteralCasimirFactorizationLevel
+toeLiteralCasimirFactorizationMatchesOwner = refl
+
+unifierLiteralCasimirFactorizationMatchesOwner :
+  Unifier.toeBalabanLiteralCasimirFactorizationLevel ≡ Balaban.balabanLiteralCasimirFactorizationLevel
+unifierLiteralCasimirFactorizationMatchesOwner = refl
+
+toeClassifiedCasimirPositivityMatchesOwner :
+  TOE.toeBalabanClassifiedCasimirPositivityLevel ≡ Balaban.balabanClassifiedCasimirPositivityLevel
+toeClassifiedCasimirPositivityMatchesOwner = refl
+
+unifierClassifiedCasimirPositivityMatchesOwner :
+  Unifier.toeBalabanClassifiedCasimirPositivityLevel ≡ Balaban.balabanClassifiedCasimirPositivityLevel
+unifierClassifiedCasimirPositivityMatchesOwner = refl
+
+toeStressMarkedShellReuseMatchesOwner :
+  TOE.toeBalabanStressMarkedShellReuseLevel ≡ Balaban.balabanStressMarkedShellReuseLevel
+toeStressMarkedShellReuseMatchesOwner = refl
+
+unifierStressMarkedShellReuseMatchesOwner :
+  Unifier.toeBalabanStressMarkedShellReuseLevel ≡ Balaban.balabanStressMarkedShellReuseLevel
+unifierStressMarkedShellReuseMatchesOwner = refl
+
+toeStressPairingPhysicalWeldMatchesOwner :
+  TOE.toeBalabanStressPairingPhysicalWeldLevel ≡ Balaban.balabanStressPairingPhysicalWeldLevel
+toeStressPairingPhysicalWeldMatchesOwner = refl
+
+unifierStressPairingPhysicalWeldMatchesOwner :
+  Unifier.toeBalabanStressPairingPhysicalWeldLevel ≡ Balaban.balabanStressPairingPhysicalWeldLevel
+unifierStressPairingPhysicalWeldMatchesOwner = refl
+
+
+------------------------------------------------------------------------
+-- Direct root non-promotion agreement.
+------------------------------------------------------------------------
+
+toeUniformKPStillOpen :
+  Balaban.balabanRGUniformKPAbsorptionOpenFlag ≡ false
+toeUniformKPStillOpen =
+  TOE.toeBalabanRGUniformKPAbsorptionStillOpen
+
+unifierUniformKPStillOpen :
+  Balaban.balabanRGUniformKPAbsorptionOpenFlag ≡ false
+unifierUniformKPStillOpen =
+  Unifier.balabanRGUniformKPAbsorptionStillOpen
+
+toeBlockSpinStillOpen :
+  Balaban.balabanRGBlockSpinTransferOpenFlag ≡ false
+toeBlockSpinStillOpen =
+  TOE.toeBalabanRGBlockSpinTransferStillOpen
+
+unifierBlockSpinStillOpen :
+  Balaban.balabanRGBlockSpinTransferOpenFlag ≡ false
+unifierBlockSpinStillOpen =
+  Unifier.balabanRGBlockSpinTransferStillOpen
+
+toePublishedRGContinuumStillOpen :
+  Balaban.balabanPublishedRGContinuumTransferOpenFlag ≡ false
+toePublishedRGContinuumStillOpen =
+  TOE.toeBalabanPublishedRGContinuumTransferStillOpen
+
+unifierPublishedRGContinuumStillOpen :
+  Balaban.balabanPublishedRGContinuumTransferOpenFlag ≡ false
+unifierPublishedRGContinuumStillOpen =
+  Unifier.toeBalabanPublishedRGContinuumTransferStillOpen
+
+toeOSWightmanStillOpen :
+  Balaban.balabanOSWightmanContinuumConstructionOpenFlag ≡ false
+toeOSWightmanStillOpen =
+  TOE.toeBalabanOSWightmanContinuumConstructionStillOpen
+
+unifierOSWightmanStillOpen :
+  Balaban.balabanOSWightmanContinuumConstructionOpenFlag ≡ false
+unifierOSWightmanStillOpen =
+  Unifier.toeBalabanOSWightmanContinuumConstructionStillOpen
+
+toeContinuumYangMillsStillOpen :
+  Balaban.balabanRGContinuumConstructionOpenFlag ≡ false
+toeContinuumYangMillsStillOpen =
+  TOE.toeBalabanRGContinuumConstructionStillOpen
+
+unifierContinuumYangMillsStillOpen :
+  Balaban.balabanRGContinuumConstructionOpenFlag ≡ false
+unifierContinuumYangMillsStillOpen =
+  Unifier.balabanRGContinuumConstructionStillOpen
+
+toeContinuumMassGapStillOpen :
+  Balaban.balabanRGContinuumMassGapOpenFlag ≡ false
+toeContinuumMassGapStillOpen =
+  TOE.toeBalabanRGContinuumMassGapStillOpen
+
+unifierContinuumMassGapStillOpen :
+  Balaban.balabanRGContinuumMassGapOpenFlag ≡ false
+unifierContinuumMassGapStillOpen =
+  Unifier.balabanRGContinuumMassGapStillOpen
+
+toeTerminalStillOpen :
+  Balaban.balabanTerminalPromotionOpenFlag ≡ false
+toeTerminalStillOpen =
+  TOE.toeBalabanTerminalPromotionStillOpen
+
+unifierTerminalStillOpen :
+  Balaban.balabanTerminalPromotionOpenFlag ≡ false
+unifierTerminalStillOpen =
+  Unifier.toeBalabanTerminalPromotionStillOpen
+
+toeClayStillFalse :
+  Balaban.balabanRGClayPromotionFlag ≡ false
+toeClayStillFalse =
+  TOE.toeBalabanRGClayPromotionStillFalse
+
+unifierClayStillFalse :
+  Balaban.balabanRGClayPromotionFlag ≡ false
+unifierClayStillFalse =
+  Unifier.balabanRGClayPromotionStillFalse
+
 ------------------------------------------------------------------------
 -- ZKP frame remains the existing typed contract.
 ------------------------------------------------------------------------
