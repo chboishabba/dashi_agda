@@ -61,10 +61,16 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119ResidualFamilyRound219Exact as R219
 import DASHI.Physics.YangMills.BalabanPreferredRegularEFrontierRound225Exact as R225
+import DASHI.Physics.YangMills.BalabanPublishedFlowToRegularEProjectionRound241Exact as R241
+import DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact as R244
+import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as R246
+import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exact as R248
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as PublishedRG
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as Casimir
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as Stress106
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExact as Stress84
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAttackExact as Stress85
 import DASHI.Physics.YangMills.YangMillsClayConcreteSemanticsResidualRound521Exact as R521
 import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact as R546
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
@@ -115,6 +121,34 @@ toeRegularEPhysicalSourceClosureIsFalse :
   toeRegularEPhysicalSourceClosure ≡ false
 toeRegularEPhysicalSourceClosureIsFalse =
   R225.round225PhysicalSourceClosureIsFalse
+
+------------------------------------------------------------------------
+-- Source-native regular-E normalization.
+--
+-- These aliases keep the older preferred frontier for compatibility.
+-- They also expose the later source-native path that starts from the literal
+-- published density, selected regular-E coordinate, and active localization.
+------------------------------------------------------------------------
+
+toePublishedFlowToRegularEProjectionCompilerLevel : ProofLevel
+toePublishedFlowToRegularEProjectionCompilerLevel =
+  R241.publishedFlowToRegularEProjectionCompilerLevel
+
+toeCMP119RegularELocalizationSourceLevel : ProofLevel
+toeCMP119RegularELocalizationSourceLevel =
+  R244.cmp119RegularELocalizationSourceLevel
+
+toeLiteralCMP119RegularELocalizationCarrierLevel : ProofLevel
+toeLiteralCMP119RegularELocalizationCarrierLevel =
+  R244.literalCMP119RegularELocalizationCarrierLevel
+
+toeRegularESection2PredicateCompilerLevel : ProofLevel
+toeRegularESection2PredicateCompilerLevel =
+  R246.regularESection2PredicateCompilerLevel
+
+toeConcreteELocalizationSourceWitnessLevel : ProofLevel
+toeConcreteELocalizationSourceWitnessLevel =
+  R248.literalCMP122Theorem1OnConcreteELocalizationPredicateLevel
 
 ------------------------------------------------------------------------
 -- Published nonlinear RG and continuum non-promotion.
@@ -190,6 +224,50 @@ toeStressLevel2SameFamilyRecoveryLevel =
 toeStressLevel2ShortDistanceOPELevel : ProofLevel
 toeStressLevel2ShortDistanceOPELevel =
   StressPareto.level2ShortDistanceOPEStressAFLevel
+
+------------------------------------------------------------------------
+-- Current Casimir/stress hard-analysis cutset.
+--
+-- Round84 keeps the conservative six-family count.
+-- Round85 exposes the exact remaining physical leaves.
+-- Downstream compiler facts stay distinct from those leaves.
+------------------------------------------------------------------------
+
+toeHardAnalyticLemmaUpperCount : Nat
+toeHardAnalyticLemmaUpperCount =
+  Stress84.round84HardAnalyticLemmaUpperCount
+
+toeHardAnalyticLemmaUpperCountIsSix :
+  toeHardAnalyticLemmaUpperCount ≡ 6
+toeHardAnalyticLemmaUpperCountIsSix = refl
+
+toeLiteralWilsonFPHaarFourJointOrbitHalfEnclosuresLevel : ProofLevel
+toeLiteralWilsonFPHaarFourJointOrbitHalfEnclosuresLevel =
+  Stress85.literalWilsonFPHaarFourJointOrbitHalfEnclosuresLevel
+
+toePhysicalMarkedCoordinateRadiusProjectionAndCompositeHilbertModulusLevel : ProofLevel
+toePhysicalMarkedCoordinateRadiusProjectionAndCompositeHilbertModulusLevel =
+  Stress85.physicalMarkedCoordinateRadiusProjectionAndCompositeHilbertModulusLevel
+
+toePhysicalPerShellHeatHessianDebtLevel : ProofLevel
+toePhysicalPerShellHeatHessianDebtLevel =
+  Stress85.physicalPerShellHeatHessianDebtLevel
+
+toePhysicalSameFamilyOPEProductAndOneStepAFIdentificationLevel : ProofLevel
+toePhysicalSameFamilyOPEProductAndOneStepAFIdentificationLevel =
+  Stress85.physicalSameFamilyOPEProductAndOneStepAFIdentificationLevel
+
+toePhysicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel : ProofLevel
+toePhysicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel =
+  Stress85.physicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel
+
+toeCompactSimpleUniversalCasimirFloorLevel : ProofLevel
+toeCompactSimpleUniversalCasimirFloorLevel =
+  Stress85.compactSimpleUniversalCasimirFloorLevel
+
+toeStressChargeLocalCoreCutoffRemovalLevel : ProofLevel
+toeStressChargeLocalCoreCutoffRemovalLevel =
+  Stress85.stressChargeLocalCoreCutoffRemovalLevel
 
 ------------------------------------------------------------------------
 -- Current normalized source frontier.
