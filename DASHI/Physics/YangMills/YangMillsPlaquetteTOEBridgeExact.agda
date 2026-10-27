@@ -56,6 +56,7 @@ module DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -64,6 +65,7 @@ import DASHI.Physics.YangMills.SUNWilsonAction as WilsonAction
 import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact as Jet
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatWilsonCurlIdentificationExact as Flat
 import DASHI.Physics.YangMills.BalabanPlaquetteCrossChargeZeroFloorNoGoExact as ZeroFloor
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonIncidenceExact as Incidence
 import DASHI.Physics.YangMills.BalabanClayT4BetaNormalizationConventionExact as Beta
 import DASHI.Physics.YangMills.YMClayFullPhysicalFormalismExact as Full
 import DASHI.Physics.Closure.YangMillsMassGapBoundary as GapBoundary
@@ -91,7 +93,7 @@ toeZeroPhysicalFieldCrossChargeLevel =
 
 toeZeroPhysicalFieldCrossCharge :
   ∀ left right site →
-  ZeroFloor.Incidence.plaquetteCrossCharge
+  Incidence.plaquetteCrossCharge
     ZeroFloor.zeroPhysicalField left right site
   ≡ 0ℚ
 toeZeroPhysicalFieldCrossCharge =
@@ -215,7 +217,7 @@ toeClayYangMillsPromotedIsFalse =
     Promotion.clayPromotionBoundary
 
 toeNoClayPromotionPossibleHere :
-  Promotion.ClayYangMillsPromotion → Promotion.⊥
+  Promotion.ClayYangMillsPromotion → ⊥
 toeNoClayPromotionPossibleHere =
   Promotion.ClayPromotionBoundary.noPromotionPossibleHere
     Promotion.clayPromotionBoundary
