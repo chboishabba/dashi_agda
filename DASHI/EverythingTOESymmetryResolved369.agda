@@ -16,8 +16,9 @@ import DASHI.Unified.GRQuantumProofTermRegression
 import DASHI.Physics.Closure.NSABCDMaxCut20261002Exact as NSMaxCut
 import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
 import DASHI.Unified.NSABCDTOENonPromotionBridgeValidation
+import DASHI.Unified.NavierStokesR650DecisionTOEConvergenceExact as NSDecisionTOE
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
 
 toeNavierStokesClayPromotionRemainsFalse :
