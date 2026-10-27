@@ -297,6 +297,11 @@ yangMillsBalabanOSWightmanContinuumConstructionStillOpen :
 yangMillsBalabanOSWightmanContinuumConstructionStillOpen =
   BalabanRGTOE.balabanOSWightmanContinuumConstructionStillOpen
 
+yangMillsBalabanContinuumRouteMassGapPromotionStillOpen :
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionOpenFlag ≡ false
+yangMillsBalabanContinuumRouteMassGapPromotionStillOpen =
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionStillOpen
+
 yangMillsBalabanRGContinuumConstructionStillOpen :
   BalabanRGTOE.balabanRGContinuumConstructionOpenFlag ≡ false
 yangMillsBalabanRGContinuumConstructionStillOpen =
