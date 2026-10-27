@@ -1,0 +1,59 @@
+@startuml
+title DASHI Yang-Mills TOE convergence
+
+left to right direction
+skinparam componentStyle rectangle
+
+package "Canonical Yang-Mills owners" {
+  component "Beta-driven density flow" as Beta
+  component "Canonical complete density" as Density
+  component "Regular-E localization" as RegularE
+  component "Compact-simple Casimir / beta floor" as Casimir
+  component "CMP116 stress marked-shell bound" as StressShell
+  component "Stress shell-energy / Hilbert bound" as StressHilbert
+  component "Continuum / Clay non-promotion" as NonPromotion
+}
+
+component "Pinned CMP119 concrete OS1" as AOS1
+component "Selected CMP116 R410 source decay" as B415
+component "Pinned CMP119 concrete local C" as CLocal
+component "YangMillsTOEConvergenceRound559Exact" as YMTOE
+component "EverythingTOESymmetryResolved369" as Root
+component "Unified.Physics" as UnifiedPhysics
+component "Unifier\n(carrier/facade only)" as Unifier
+
+Beta --> YMTOE : exact owner reuse
+Density --> YMTOE : exact owner reuse
+RegularE --> YMTOE : exact owner reuse
+Casimir --> YMTOE : exact owner reuse
+StressShell --> YMTOE : exact owner reuse
+StressHilbert --> YMTOE : exact owner reuse
+NonPromotion --> YMTOE : fail-closed gates
+AOS1 --> YMTOE : finite action -> continuum OS1
+B415 --> YMTOE : R410 -> selected source decay
+CLocal --> YMTOE : AF/stress same-H adapters
+
+YMTOE --> Root : TOE import edge
+YMTOE --> UnifiedPhysics : normalized physics facade
+YMTOE --> Unifier : exact re-export only
+
+note bottom of YMTOE
+Preconditions:
+canonical owners exist.
+
+Invariants:
+finite RG is not continuum YM.
+Casimir floor is not the missing Wilson/FP/Haar estimate.
+stress compiler/bounds are not literal physical source closure.
+proof ownership stays with canonical modules.
+
+Postconditions:
+root, Unified.Physics, and Unifier expose one YM TOE surface.
+continuum, OS/Wightman, mass-gap, and Clay promotion stay blocked.
+A/B/C compiler aliases do not promote their remaining physical leaves.
+end note
+
+note bottom of Unifier
+Legacy placeholder interfaces are not proof authority.
+end note
+@enduml
