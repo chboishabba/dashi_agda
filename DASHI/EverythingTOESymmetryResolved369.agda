@@ -608,3 +608,30 @@ toeYMImplementAToDScaleTransferNonPromotion =
   YMAD.scaleTransferPromotionEliminator
     YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
+------------------------------------------------------------------------
+-- Kernel-bidi / ternary-27 / byte-ABI max-cut convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEExact as Kernel27TOE
+
+toeR559IbrahimFleetKernelBidiTernary27Receipt :
+  Kernel27TOE.R559IbrahimFleetKernelBidiTernary27TOEReceipt
+toeR559IbrahimFleetKernelBidiTernary27Receipt =
+  Kernel27TOE.canonicalR559IbrahimFleetKernelBidiTernary27TOEReceipt
+
+toeTriadicRustBindingStillUnpaid :
+  Kernel27TOE.ABI.rustU8BindingPaid Kernel27TOE.triadicByteBoundary ≡ false
+toeTriadicRustBindingStillUnpaid =
+  Kernel27TOE.rustU8BindingStillUnpaid
+
+toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner :
+  Kernel27TOE.KernelBidi.characterIsotypyConstructsActionIntertwiner
+    Kernel27TOE.kernelBidiBoundary ≡ false
+toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner =
+  Kernel27TOE.kernelCharacterIsotypyStillDoesNotConstructActionIntertwiner
+
+toeSelected3BSingleActionProducerStillUninhabited :
+  Kernel27TOE.SingleProducer.actualSingleProducerInhabitedHere
+    Kernel27TOE.singleProducerBoundary ≡ false
+toeSelected3BSingleActionProducerStillUninhabited =
+  Kernel27TOE.singleActionProducerStillUninhabited
