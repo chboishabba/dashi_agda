@@ -48,3 +48,94 @@ jobs:
         run: nix develop .# --command bash scripts/check_toe_experiment_architecture.sh
       - name: Run shared effective-source QFT/GR audit
         run: nix develop .# --command bash scripts/check_shared_effective_source_recovery.sh
+
+
+  ym-goal1-toe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install DASHI repository referee
+        run: python -m pip install -e './tools/agda_preflight[test,mcp]'
+
+      - name: Referee Goal-1 TOE reuse
+        shell: bash
+        run: |
+          set -euo pipefail
+          dashi-repo index --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/Physics.agda --root .
+          dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
+          dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo related literalRound440VariableDomainCMP116SourceLevel --root . --limit 20
+          dashi-repo related literalRound441R429RootedTraceEncodingLevel --root . --limit 20
+          dashi-repo related literalRound442SourceDecayReserveLevel --root . --limit 20
+          dashi-repo related literalRound443FiniteWilsonActionInvarianceLevel --root . --limit 20
+          dashi-repo related literalRound444PeterWeylWilsonIdentificationLevel --root . --limit 20
+          dashi-repo related physicalSameFamilyOPECoefficientOneStepAFIdentificationLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 TOE variable domain Peter Weyl compactness stress non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
+
+      - name: Reject ESD surface changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin master --depth=1
+          changed="$(git diff --name-only origin/master...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)'; then
+            echo "ESD surface change detected" >&2
+            exit 1
+          fi
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Reject trust escapes
+        shell: bash
+        run: |
+          set -euo pipefail
+          sources=(
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+            DASHI/Unified/Physics.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Kernel-check Goal-1 TOE graph
+        shell: bash
+        run: |
+          set -euo pipefail
+          modules=(
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/Physics.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done
