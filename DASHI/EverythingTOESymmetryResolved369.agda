@@ -557,6 +557,12 @@ toe369FullCubeRotationNotFree =
 toe369MonsterPhaseConjugationIntertwiner =
   MaxCut369.toe27MonsterPhaseConjugationIntertwiner
 
+toe369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+toe369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
 toe369Ternary27PhaseReductionNotGlobalInversion =
   MaxCut369.toe27PhaseReductionNotGlobalInversion
 
