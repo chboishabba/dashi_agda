@@ -1,6 +1,7 @@
 module DASHI.Unifier where
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+import DASHI.Unified.YMBlockDMaxCutTOEExact as YMBlockD
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -11,6 +12,41 @@ open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
+
+------------------------------------------------------------------------
+-- Normalized Yang-Mills Block-D TOE exports.
+-- The theorem owners remain in YMBlockD and its imported source modules.
+------------------------------------------------------------------------
+
+unifierYangMillsBlockDProjectiveCarrierLevel : ProofLevel
+unifierYangMillsBlockDProjectiveCarrierLevel =
+  YMBlockD.blockDProjectiveFiniteMarginalCarrierCompilerLevel
+
+unifierYangMillsBlockDProjectivePhysicalMomentInputsLevel : ProofLevel
+unifierYangMillsBlockDProjectivePhysicalMomentInputsLevel =
+  YMBlockD.blockDProjectivePhysicalMomentCompactnessInputsLevel
+
+unifierYangMillsBlockDSelectedMarginalDictionaryLevel : ProofLevel
+unifierYangMillsBlockDSelectedMarginalDictionaryLevel =
+  YMBlockD.blockDSelectedCMP119ToProjectiveMarginalDictionaryLevel
+
+unifierYangMillsBlockDGlobalContainmentProducerLevel : ProofLevel
+unifierYangMillsBlockDGlobalContainmentProducerLevel =
+  YMBlockD.blockDGlobalSelectedContainmentProducerLevel
+
+unifierYangMillsBlockDContinuumStillOpen :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsBlockDContinuumStillOpen =
+  YMBlockD.blockDFlat4DContinuumTransferStillOpen
+
+unifierYangMillsBlockDClayStillNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+unifierYangMillsBlockDClayStillNotPromoted =
+  YMBlockD.blockDClayYangMillsStillNotPromoted
+
+------------------------------------------------------------------------
+-- Legacy carrier surface starts below.
+------------------------------------------------------------------------
 
 ¬ : Set → Set
 ¬ A = A → ⊥
