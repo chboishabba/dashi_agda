@@ -4,9 +4,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 BRIDGE = ROOT / "DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda"
 REGRESSION = ROOT / "DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda"
+CANONICAL = ROOT / "DASHI/Unified/TOEGovernanceSemanticNonPromotionExact.agda"
+VALIDATION = ROOT / "DASHI/Unified/TOEGovernanceSemanticNonPromotionValidation.agda"
 TOE = ROOT / "DASHI/EverythingTOESymmetryResolved369.agda"
 UNIFIER = ROOT / "DASHI/Unifier.agda"
-WORKFLOW = ROOT / ".github/workflows/toe-symmetry-resolved-369.yml"
+UNIFIED_EVERYTHING = ROOT / "DASHI/Unified/DASHITOEEverything.agda"
+TERMINAL = ROOT / "DASHI/Unified/DASHITOETerminalMaxCutExact.agda"
 
 
 def read(path: Path) -> str:
@@ -95,24 +98,43 @@ def test_authority_firewalls_are_exact_reuse():
         assert token in text
 
 
-def test_bridge_is_attached_to_toe_root_and_unifier():
+def test_focused_bridge_is_normalized_through_canonical_toe_owner():
+    canonical = read(CANONICAL)
     toe = read(TOE)
     unifier = read(UNIFIER)
-    assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance" in toe
-    assert "toeGovernedLegalWorkflowZKPReceipt" in toe
-    assert "toeCaseySelectionDoesNotCreateWorldTruth" in toe
-    assert "toeKnowledgeDoesNotCreateExecutionAuthority" in toe
-    assert "toeGovernedLegalWorkflowBoundary" in toe
-    assert "toeWorkflowTaskCompletionDoesNotCreateTruth" in toe
-    assert "toeDatabaseCommitDoesNotCreateSemanticAuthority" in toe
-    assert "toeAcceptedReviewDoesNotPayApplicability" in toe
-    assert "toeMatterAcceptanceDoesNotCreateTruth" in toe
-    assert "toeCitationAloneDoesNotRealiseLegalRule" in toe
-    assert "toeSemanticMeetDoesNotProveLegalApplicability" in toe
-    assert "toeControlEvidenceDoesNotCreateTruth" in toe
-    assert "toePassingControlDoesNotMeanCertified" in toe
-    assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE" in unifier
-    assert "toeGovernedLegalWorkflowZKPReceipt" in unifier
+    unified_everything = read(UNIFIED_EVERYTHING)
+    terminal = read(TERMINAL)
+
+    assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalWorkflow" in canonical
+    for token in (
+        "canonicalGovernedLegalWorkflowTOEBoundary",
+        "canonicalGovernedLegalWorkflowZKPReceipt",
+        "canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary",
+        "canonicalExactNonFactorabilityResidualCompilerBoundary",
+        "canonicalConsumerResearchAdmissibilityStopBoundary",
+        "canonicalClosedIsNotAdequateBoundary",
+        "canonicalMaboRevisionReopenBoundary",
+        "canonicalRevisionReReviewPropagationBoundary",
+        "canonicalLegalWorldRevisionReconstructionBoundary",
+    ):
+        assert token in canonical
+
+    assert "import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact as Governance" in toe
+    assert "toeGovernanceHandoff" in toe
+    assert "toeNoFreshDemandDoesNotProveConsumerAdequacy" in toe
+    assert "toeExactNonfactorabilityMayReopenClosedFrontier" in toe
+    assert "toeRevisionChangeReopensContextBeforeIdentity" in toe
+    assert "toeLatestRevisionLookupDoesNotPayContextReview" in toe
+
+    assert "import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact as GovernanceTOE" in unifier
+    assert "toeGovernanceHandoff" in unifier
+    assert "toeWorkflowTaskCompletionDoesNotCreateTruth" in unifier
+    assert "toeNoFreshDemandDoesNotProveConsumerAdequacy" in unifier
+    assert "toeExactNonfactorabilityMayReopenClosedFrontier" in unifier
+
+    assert "open import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact public" in unified_everything
+    assert "governanceHandoff : Governance.TOEGovernanceHandoff" in terminal
+    assert "Governance.canonicalTOEGovernanceHandoff" in terminal
 
 
 def test_regression_binds_unifier_to_canonical_receipt():
@@ -123,6 +145,15 @@ def test_regression_binds_unifier_to_canonical_receipt():
     assert "zkpESDSurfaceMutationRemainsForbidden" in text
 
 
+def test_canonical_owner_keeps_esd_import_only_and_attribution():
+    text = read(CANONICAL)
+    assert "import DASHI.Education.DigitalESDNormativeStandardsAtlasExact as Standards" in text
+    assert "standardMentionCannotCreateConformity" in text
+    assert "citationCannotCreateProof" in text
+    assert "citationCannotCreateAuthority" in text
+    assert "attributionBoundary = Attribution.canonicalAttributionSnowballBoundary" in text
+
+
 def test_new_governance_sources_have_no_trust_escape():
     forbidden = (
         "postulate",
@@ -131,19 +162,24 @@ def test_new_governance_sources_have_no_trust_escape():
         "NO_POSITIVITY_CHECK",
         "{!!}",
     )
-    for path in (BRIDGE, REGRESSION, TOE):
+    for path in (BRIDGE, REGRESSION, CANONICAL, VALIDATION, TOE, UNIFIER):
         text = read(path)
         for token in forbidden:
             assert token not in text, f"{token} found in {path.relative_to(ROOT)}"
 
 
-def test_focused_workflow_contains_repo_intelligence_and_esd_guard():
-    text = read(WORKFLOW)
+def test_canonical_validation_checks_exact_owner_types():
+    text = read(VALIDATION)
     for token in (
-        "dashi-repo related",
-        "dashi-repo discover",
-        "dashi-repo lineage",
-        "dashi-agda-preflight",
-        "ESD surface changed",
+        "Governance.toeRuntimeCoordinateCompletenessDoesNotProveFormalAdequacy",
+        "Governance.toeTheoremBackedAdequacyRequiresAdequateFor",
+        "Governance.toeApproximateCollisionCannotPromoteExactResidual",
+        "Governance.toeFrontierClosureDoesNotProveConsumerAdequacy",
+        "Governance.toeNoFreshDemandDoesNotProveConsumerAdequacy",
+        "Governance.toeExactNonfactorabilityMayReopenClosedFrontier",
+        "Governance.toeRevisionChangeReopensContextBeforeIdentity",
+        "Governance.toeLatestRevisionLookupDoesNotPayContextReview",
+        "Governance.toeRevisionReopenDoesNotCreateClaimTruth",
+        "Governance.toeRevisionRereviewDoesNotChangeClaimTruth",
     ):
         assert token in text
