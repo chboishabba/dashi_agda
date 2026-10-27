@@ -568,6 +568,27 @@ toe369SemanticAdmissionIsNotLegalAuthority :
 toe369SemanticAdmissionIsNotLegalAuthority =
   LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
 
+
+toe369GovernedLegalWorkflowAuthorityInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowAuthorityInvariantHandoff
+toe369GovernedLegalWorkflowAuthorityInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+toe369CanonicalLegalSourceAuthorityBoundary :
+  LegalGovernance.LegalAuthority.LegalSourceAuthorityBoundary
+toe369CanonicalLegalSourceAuthorityBoundary =
+  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
+
+toe369SameSystemIsNotLegalAuthority :
+  LegalGovernance.LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+toe369SameSystemIsNotLegalAuthority =
+  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+toe369DocumentRoleIsNotLegalAuthority :
+  LegalGovernance.LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+toe369DocumentRoleIsNotLegalAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
 ------------------------------------------------------------------------
 -- SCALE Evidence Review convergence.
 ------------------------------------------------------------------------
