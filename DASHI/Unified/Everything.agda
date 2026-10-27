@@ -205,3 +205,43 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Live Gate-4 frontier and fleet-target selection.
+------------------------------------------------------------------------
+
+unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
+unifiedCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifiedCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+unifiedFleetFormalGapTargetSelected : Bool
+unifiedFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifiedHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Typed continuum no-go is reused from BalabanRGTOERegression.
+------------------------------------------------------------------------
+
+unifiedBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifiedBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+unifiedDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifiedDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
