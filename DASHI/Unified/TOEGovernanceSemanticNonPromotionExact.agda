@@ -194,6 +194,47 @@ toeRevisionDoesNotAutomaticallyRefutePriorEvidence =
   WorldRevision.revisionAutomaticallyRefutesPriorEvidenceIsFalse
     WorldRevision.canonicalLegalWorldRevisionReconstructionBoundary
 
+
+toeWorkflowTaskCompletionDoesNotCreateTruth :
+  LegalWorkflow.TaskCompletionCreatesTruth → ⊥
+toeWorkflowTaskCompletionDoesNotCreateTruth =
+  LegalWorkflow.toeTaskCompletionDoesNotCreateTruth
+
+toeWorkflowDatabaseCommitDoesNotCreateSemanticAuthority :
+  LegalWorkflow.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeWorkflowDatabaseCommitDoesNotCreateSemanticAuthority =
+  LegalWorkflow.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+toeWorkflowAcceptedReviewDoesNotPayApplicability :
+  LegalWorkflow.AcceptedStatusPaysApplicability → ⊥
+toeWorkflowAcceptedReviewDoesNotPayApplicability =
+  LegalWorkflow.toeAcceptedReviewDoesNotPayApplicability
+
+toeWorkflowMatterAcceptanceDoesNotCreateTruth :
+  LegalWorkflow.AcceptanceRoleCreatesTruth → ⊥
+toeWorkflowMatterAcceptanceDoesNotCreateTruth =
+  LegalWorkflow.toeMatterAcceptanceDoesNotCreateTruth
+
+toeWorkflowCitationAloneDoesNotRealiseLegalRule :
+  LegalWorkflow.CitationAloneRealisesLegalRule → ⊥
+toeWorkflowCitationAloneDoesNotRealiseLegalRule =
+  LegalWorkflow.toeCitationAloneDoesNotRealiseLegalRule
+
+toeWorkflowSemanticMeetDoesNotProveLegalApplicability :
+  LegalWorkflow.SemanticMeetAloneProvesLegalApplicability → ⊥
+toeWorkflowSemanticMeetDoesNotProveLegalApplicability =
+  LegalWorkflow.toeSemanticMeetDoesNotProveLegalApplicability
+
+toeWorkflowCaseySelectionDoesNotCreateWorldTruth :
+  LegalWorkflow.CaseySelectionCreatesWorldTruth → ⊥
+toeWorkflowCaseySelectionDoesNotCreateWorldTruth =
+  LegalWorkflow.toeCaseySelectionDoesNotCreateWorldTruth
+
+toeWorkflowKnowledgeDoesNotCreateExecutionAuthority :
+  LegalWorkflow.KnowledgeIsAuthority → ⊥
+toeWorkflowKnowledgeDoesNotCreateExecutionAuthority =
+  LegalWorkflow.toeKnowledgeDoesNotCreateExecutionAuthority
+
 record GovernancePreconditions : Set₁ where
   field
     semanticPolicy : SensibLaw.SemanticPromotionPolicySurface
@@ -317,6 +358,8 @@ record TOEGovernanceHandoff : Set₁ where
     postconditions : GovernancePostconditions
     governedLegalWorkflowBoundary :
       LegalWorkflow.GovernedLegalWorkflowTOEBoundary
+    governedLegalWorkflowZKPReceipt :
+      LegalWorkflow.GovernedLegalWorkflowZKPReceipt
     consumerAdequacyBoundary :
       Adequacy.ConsumerAdequacyRuntimeTheoremBridgeBoundary
     exactNonfactorabilityBoundary :
@@ -345,6 +388,8 @@ canonicalTOEGovernanceHandoff =
     ; postconditions = canonicalGovernancePostconditions
     ; governedLegalWorkflowBoundary =
         LegalWorkflow.canonicalGovernedLegalWorkflowTOEBoundary
+    ; governedLegalWorkflowZKPReceipt =
+        LegalWorkflow.canonicalGovernedLegalWorkflowZKPReceipt
     ; consumerAdequacyBoundary =
         Adequacy.canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary
     ; exactNonfactorabilityBoundary =
