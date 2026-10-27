@@ -901,25 +901,14 @@ unifierYMImplementAToDScaleTransferNonPromotion =
 
 import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEExact as Kernel27TOE
 
-unifierR559IbrahimFleetKernelBidiTernary27Receipt :
-  Kernel27TOE.R559IbrahimFleetKernelBidiTernary27TOEReceipt
 unifierR559IbrahimFleetKernelBidiTernary27Receipt =
   Kernel27TOE.canonicalR559IbrahimFleetKernelBidiTernary27TOEReceipt
 
-unifierTriadicMachineBindingStillUnpaid :
-  Kernel27TOE.ABIRoadmap.threeTritMachineU8BindingPaid
-    Kernel27TOE.triadicABIRoadmap ≡ false
 unifierTriadicMachineBindingStillUnpaid =
   Kernel27TOE.roadmapMachineU8BindingStillUnpaid
 
-unifierKernelActionIntertwinerStillUnpaid :
-  Kernel27TOE.KernelBidi.characterIsotypyConstructsActionIntertwiner
-    Kernel27TOE.kernelBidiBoundary ≡ false
 unifierKernelActionIntertwinerStillUnpaid =
   Kernel27TOE.kernelCharacterIsotypyStillDoesNotConstructActionIntertwiner
 
-unifierTernary27UniversalHaltingStillNotClaimed :
-  Kernel27TOE.Ternary27.universalHaltingClaimed
-    Kernel27TOE.ternary27Boundary ≡ false
 unifierTernary27UniversalHaltingStillNotClaimed =
   Kernel27TOE.ternary27UniversalHaltingStillNotClaimed
