@@ -205,3 +205,130 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Canonical SensibLaw / case-management / legal-governance handoff.
+--
+-- Reuse only. These owners already exist in-repo.
+-- A case-management vendor name, including Actionstep, does not transport
+-- legal authority. Operational completion does not create semantic truth.
+-- Passing a governance control does not create certification.
+-- Standards remain process lenses. No standards certification is claimed.
+------------------------------------------------------------------------
+
+import DASHI.Core.AuthorityNonPromotionCore as LegalAuthority
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as LegalSemantic
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Law.SensibLawITIRParityEverything as LegalParity
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as DomainAuthority
+import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as OperationalBoundary
+import DASHI.Core.ITIRGovernanceControlCaseExact as GovernanceControl
+
+unifiedSensibLawSemanticAuthorityBoundary =
+  LegalSemantic.semanticPromotionAuthorityBoundary
+
+unifiedSensibLawSemanticTruthAuthorityStillClosed :
+  LegalAuthority.truthAuthorityFlag unifiedSensibLawSemanticAuthorityBoundary ≡ false
+unifiedSensibLawSemanticTruthAuthorityStillClosed =
+  LegalSemantic.semantic-promotion-truth-authority-closed
+
+unifiedSensibLawSemanticLegalAuthorityStillClosed :
+  LegalAuthority.legalAuthorityFlag unifiedSensibLawSemanticAuthorityBoundary ≡ false
+unifiedSensibLawSemanticLegalAuthorityStillClosed =
+  LegalSemantic.semantic-promotion-legal-authority-closed
+
+unifiedSensibLawSemanticAllAuthorityStillClosed :
+  LegalAuthority.promotesAnyAuthority unifiedSensibLawSemanticAuthorityBoundary ≡ false
+unifiedSensibLawSemanticAllAuthorityStillClosed =
+  LegalSemantic.semantic-promotion-all-authority-closed
+
+unifiedSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+unifiedSensibLawLegalRuntimeContract =
+  LegalRuntime.canonicalAgdaFirstLegalRuntimeContract
+
+unifiedSensibLawITIRLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+unifiedSensibLawITIRLegalRuntimeContract =
+  LegalParity.selectedLegalRuntimeContract
+
+unifiedLegalRuntimeCannotInventMissingSemantics :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemantics
+    unifiedSensibLawLegalRuntimeContract
+  ≡ false
+unifiedLegalRuntimeCannotInventMissingSemantics =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemanticsIsFalse
+    unifiedSensibLawLegalRuntimeContract
+
+unifiedParserCandidateDoesNotBecomeTruthByTransport :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransport
+    unifiedSensibLawLegalRuntimeContract
+  ≡ false
+unifiedParserCandidateDoesNotBecomeTruthByTransport =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransportIsFalse
+    unifiedSensibLawLegalRuntimeContract
+
+unifiedSourceFollowDoesNotBecomeAuthorityByTransport :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransport
+    unifiedSensibLawLegalRuntimeContract
+  ≡ false
+unifiedSourceFollowDoesNotBecomeAuthorityByTransport =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransportIsFalse
+    unifiedSensibLawLegalRuntimeContract
+
+unifiedTypedMeetDoesNotBecomeViolationByTransport :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransport
+    unifiedSensibLawLegalRuntimeContract
+  ≡ false
+unifiedTypedMeetDoesNotBecomeViolationByTransport =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransportIsFalse
+    unifiedSensibLawLegalRuntimeContract
+
+unifiedWrongTypeElementPaymentDoesNotBecomeLiability :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransport
+    unifiedSensibLawLegalRuntimeContract
+  ≡ false
+unifiedWrongTypeElementPaymentDoesNotBecomeLiability =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransportIsFalse
+    unifiedSensibLawLegalRuntimeContract
+
+unifiedCaseManagementDomainTransportReceipt :
+  DomainAuthority.DomainTransportReceipt
+unifiedCaseManagementDomainTransportReceipt =
+  DomainAuthority.canonicalDomainTransportReceipt
+
+unifiedCaseManagementRepresentationDoesNotCreateLegalAuthority :
+  DomainAuthority.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    unifiedCaseManagementDomainTransportReceipt
+  ≡ false
+unifiedCaseManagementRepresentationDoesNotCreateLegalAuthority = refl
+
+unifiedCaseManagementVendorIdentityDoesNotCreateAuthority :
+  DomainAuthority.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    unifiedCaseManagementDomainTransportReceipt
+  ≡ false
+unifiedCaseManagementVendorIdentityDoesNotCreateAuthority = refl
+
+unifiedTaskCompletionDoesNotCreateTruth :
+  OperationalBoundary.TaskCompletionCreatesTruth → ⊥
+unifiedTaskCompletionDoesNotCreateTruth =
+  OperationalBoundary.taskCompletionDoesNotCreateTruth
+
+unifiedPassingControlDoesNotCreateCertification :
+  GovernanceControl.PassingControlMeansCertified → ⊥
+unifiedPassingControlDoesNotCreateCertification =
+  GovernanceControl.passingDoesNotMeanCertified
+
+unifiedControlEvidenceDoesNotCreateTruth :
+  GovernanceControl.ControlEvidenceCreatesTruth → ⊥
+unifiedControlEvidenceDoesNotCreateTruth =
+  GovernanceControl.controlEvidenceDoesNotCreateTruth
+
+unifiedGovernanceStandardsCertificationStillFalse :
+  GovernanceControl.GOV1Boundary.standardsCertificationClaimed
+    GovernanceControl.canonicalGOV1Boundary
+  ≡ false
+unifiedGovernanceStandardsCertificationStillFalse =
+  GovernanceControl.GOV1Boundary.standardsCertificationClaimedIsFalse
+    GovernanceControl.canonicalGOV1Boundary
+
