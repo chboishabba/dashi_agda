@@ -12,6 +12,7 @@ import DASHI.Unified.ChemistrySupervoxel as ChemistrySupervoxel
 import DASHI.Unified.CrossScaleMatterPhysics as CrossScaleMatterPhysics
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernedLegalWorkflow
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
