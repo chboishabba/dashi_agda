@@ -313,6 +313,72 @@ canonicalFleetFormalGapReceipt =
     refl
 
 ------------------------------------------------------------------------
+-- Pareto / Snowball / Ibrahim max-cut boundary.
+--
+-- The Fleet source pays the residual counts.
+-- It does not publish a named 58-row formal-gap manifest in the cited file.
+-- Therefore no per-gap theorem dispatch can be proved from the count alone.
+------------------------------------------------------------------------
+
+record FleetFormalGapMaxCut : Set where
+  constructor fleet-formal-gap-max-cut
+  field
+    countedPartitionPaid : Bool
+    countedPartitionPaidIsTrue :
+      countedPartitionPaid ≡ true
+
+    namedFormalGapManifestAcquired : Bool
+    namedFormalGapManifestAcquiredIsFalse :
+      namedFormalGapManifestAcquired ≡ false
+
+    relatedSymbolsRequiredBeforeConstruction : Bool
+    relatedSymbolsRequiredBeforeConstructionIsTrue :
+      relatedSymbolsRequiredBeforeConstruction ≡ true
+
+    discoverRequiredBeforeConstruction : Bool
+    discoverRequiredBeforeConstructionIsTrue :
+      discoverRequiredBeforeConstruction ≡ true
+
+    roundLineageRequiredBeforeConstruction : Bool
+    roundLineageRequiredBeforeConstructionIsTrue :
+      roundLineageRequiredBeforeConstruction ≡ true
+
+    siblingIbrahimTOENormalizationImportedAsAuthority : Bool
+    siblingIbrahimTOENormalizationImportedAsAuthorityIsFalse :
+      siblingIbrahimTOENormalizationImportedAsAuthority ≡ false
+
+    nextAcquisition : String
+
+open FleetFormalGapMaxCut public
+
+canonicalFleetFormalGapMaxCut : FleetFormalGapMaxCut
+canonicalFleetFormalGapMaxCut =
+  fleet-formal-gap-max-cut
+    true
+    refl
+    false
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    "Acquire the named 58-gap manifest from the Fleet source store. For each named gap run related_symbols, discover, and round_lineage. Reuse first. Unify duplicates second. Extend third. Construct only when no owner exists."
+
+fleetParetoRefs : List String
+fleetParetoRefs =
+  "PR #1306 is the governed legal-workflow base for this lane."
+  ∷ "PR #1305 is the SCALE evidence-review sibling and is not imported as theorem authority."
+  ∷ "PR #1304 is the Balaban/Ibrahim Pareto-snowball sibling and is not imported as theorem authority."
+  ∷ "The 584 discharged class is cited through existing DASHI owners and is not redispatched."
+  ∷ "The 44 contradiction class remains a separate resolution frontier."
+  ∷ "The 58 formal-gap class is the only proving frontier, pending named identities."
+  ∷ []
+
+------------------------------------------------------------------------
 -- Attribution and process receipt.
 ------------------------------------------------------------------------
 
