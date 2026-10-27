@@ -11,6 +11,7 @@ on:
       - "DASHI/Culture/Everything.agda"
       - "Docs/papers/GoodmanSonicWarfare.md"
       - "scripts/check_goodman_sonic_warfare_source.py"
+      - "scripts/check_goodman_sonic_warfare_finite.py"
       - ".github/workflows/goodman-sonic-warfare.yml"
   push:
     branches:
@@ -19,6 +20,7 @@ on:
       - "DASHI/Culture/GoodmanSonicWarfareExact.agda"
       - "Docs/papers/GoodmanSonicWarfare.md"
       - "scripts/check_goodman_sonic_warfare_source.py"
+      - "scripts/check_goodman_sonic_warfare_finite.py"
 
 permissions:
   contents: read
@@ -30,3 +32,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify source, 34-chapter index, root imports and non-promotion
         run: python3 scripts/check_goodman_sonic_warfare_source.py
+      - name: Enumerate finite Goodman / Ibrahim counterexamples (not Agda)
+        run: python3 scripts/check_goodman_sonic_warfare_finite.py
