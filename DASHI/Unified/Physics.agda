@@ -12,6 +12,7 @@ import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 navierStokesObject : Spine.UnifiedObjectInvariant
@@ -128,3 +129,190 @@ yangMillsGoal1ClayStillBlocked :
   YMGoal1TOE.clayYangMillsPromoted ≡ false
 yangMillsGoal1ClayStillBlocked =
   YMGoal1TOE.clayYangMillsStillNotPromoted
+
+
+------------------------------------------------------------------------
+-- Canonical Balaban RG TOE facade.
+-- Proof ownership remains in the imported Balaban and compact-Lie owners.
+------------------------------------------------------------------------
+
+yangMillsBalabanRGReceipt : BalabanRGTOE.BalabanRGTOEReceipt
+yangMillsBalabanRGReceipt =
+  BalabanRGTOE.canonicalBalabanRGTOEReceipt
+
+
+yangMillsBalabanScaleDensityFlowLevel : ProofLevel
+yangMillsBalabanScaleDensityFlowLevel =
+  BalabanRGTOE.balabanScaleDensityFlowLevel
+
+yangMillsBalabanCompleteDensitySourceShapeLevel : ProofLevel
+yangMillsBalabanCompleteDensitySourceShapeLevel =
+  BalabanRGTOE.balabanCompleteDensitySourceShapeLevel
+
+yangMillsBalabanCompleteDensityDerivedSummaryLevel : ProofLevel
+yangMillsBalabanCompleteDensityDerivedSummaryLevel =
+  BalabanRGTOE.balabanCompleteDensityDerivedSummaryLevel
+
+yangMillsBalabanCompleteDensityPhysicalProjectionBoundsLevel : ProofLevel
+yangMillsBalabanCompleteDensityPhysicalProjectionBoundsLevel =
+  BalabanRGTOE.balabanCompleteDensityPhysicalProjectionBoundsLevel
+
+yangMillsBalabanScaleDensityFiniteMeasureWeldLevel : ProofLevel
+yangMillsBalabanScaleDensityFiniteMeasureWeldLevel =
+  BalabanRGTOE.balabanScaleDensityFiniteMeasureWeldLevel
+
+yangMillsBalabanLiteralGeneratedActionDensityLevel : ProofLevel
+yangMillsBalabanLiteralGeneratedActionDensityLevel =
+  BalabanRGTOE.balabanLiteralGeneratedActionDensityLevel
+
+yangMillsBalabanLiteralCombinedRGEffectiveActionLevel : ProofLevel
+yangMillsBalabanLiteralCombinedRGEffectiveActionLevel =
+  BalabanRGTOE.balabanLiteralCombinedRGEffectiveActionLevel
+
+yangMillsBalabanLiteralGeneratedActionStressScaleLevel : ProofLevel
+yangMillsBalabanLiteralGeneratedActionStressScaleLevel =
+  BalabanRGTOE.balabanLiteralGeneratedActionStressScaleLevel
+
+yangMillsBalabanScaleDensityStressLaneCompilerLevel : ProofLevel
+yangMillsBalabanScaleDensityStressLaneCompilerLevel =
+  BalabanRGTOE.balabanScaleDensityStressLaneCompilerLevel
+
+yangMillsBalabanDensityAnchoredStressLaneCompilerLevel : ProofLevel
+yangMillsBalabanDensityAnchoredStressLaneCompilerLevel =
+  BalabanRGTOE.balabanDensityAnchoredStressLaneCompilerLevel
+
+yangMillsBalabanLiteralDensityAnchoredStressLaneInstantiationLevel : ProofLevel
+yangMillsBalabanLiteralDensityAnchoredStressLaneInstantiationLevel =
+  BalabanRGTOE.balabanLiteralDensityAnchoredStressLaneInstantiationLevel
+
+yangMillsBalabanRegularESelectedDensityCompilerLevel : ProofLevel
+yangMillsBalabanRegularESelectedDensityCompilerLevel =
+  BalabanRGTOE.balabanRegularESelectedDensityCompilerLevel
+
+yangMillsBalabanRegularELocalizationSourceLevel : ProofLevel
+yangMillsBalabanRegularELocalizationSourceLevel =
+  BalabanRGTOE.balabanRegularELocalizationSourceLevel
+
+yangMillsBalabanRegularELocalizationCarrierLevel : ProofLevel
+yangMillsBalabanRegularELocalizationCarrierLevel =
+  BalabanRGTOE.balabanRegularELocalizationCarrierLevel
+
+yangMillsBalabanRegularEContinuationCompilerLevel : ProofLevel
+yangMillsBalabanRegularEContinuationCompilerLevel =
+  BalabanRGTOE.balabanRegularEContinuationCompilerLevel
+
+yangMillsBalabanHaarCasimirCoefficientLevel : ProofLevel
+yangMillsBalabanHaarCasimirCoefficientLevel =
+  BalabanRGTOE.balabanHaarCasimirCoefficientLevel
+
+yangMillsBalabanCasimirOrbitFactorizationLevel : ProofLevel
+yangMillsBalabanCasimirOrbitFactorizationLevel =
+  BalabanRGTOE.balabanCasimirOrbitFactorizationLevel
+
+yangMillsBalabanCasimirLowerBoundTransportLevel : ProofLevel
+yangMillsBalabanCasimirLowerBoundTransportLevel =
+  BalabanRGTOE.balabanCasimirLowerBoundTransportLevel
+
+yangMillsBalabanLiteralCasimirFactorizationLevel : ProofLevel
+yangMillsBalabanLiteralCasimirFactorizationLevel =
+  BalabanRGTOE.balabanLiteralCasimirFactorizationLevel
+
+yangMillsBalabanClassifiedCasimirPositivityLevel : ProofLevel
+yangMillsBalabanClassifiedCasimirPositivityLevel =
+  BalabanRGTOE.balabanClassifiedCasimirPositivityLevel
+
+yangMillsBalabanStressMarkedShellReuseLevel : ProofLevel
+yangMillsBalabanStressMarkedShellReuseLevel =
+  BalabanRGTOE.balabanStressMarkedShellReuseLevel
+
+yangMillsBalabanStressPairingPhysicalWeldLevel : ProofLevel
+yangMillsBalabanStressPairingPhysicalWeldLevel =
+  BalabanRGTOE.balabanStressPairingPhysicalWeldLevel
+
+yangMillsBalabanGeneratedActionDensityCompilerLevel : ProofLevel
+yangMillsBalabanGeneratedActionDensityCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionDensityCompilerLevel
+
+yangMillsBalabanCombinedRGEffectiveActionCompilerLevel : ProofLevel
+yangMillsBalabanCombinedRGEffectiveActionCompilerLevel =
+  BalabanRGTOE.balabanCombinedRGEffectiveActionCompilerLevel
+
+yangMillsBalabanGeneratedActionStressScaleCompilerLevel : ProofLevel
+yangMillsBalabanGeneratedActionStressScaleCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionStressScaleCompilerLevel
+
+yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel : ProofLevel
+yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel =
+  BalabanRGTOE.balabanPublishedFlowRegularEProjectionCompilerLevel
+
+yangMillsBalabanRegularESection2PredicateCompilerLevel : ProofLevel
+yangMillsBalabanRegularESection2PredicateCompilerLevel =
+  BalabanRGTOE.balabanRegularESection2PredicateCompilerLevel
+
+yangMillsBalabanConcreteRegularELocalizationWitnessLevel : ProofLevel
+yangMillsBalabanConcreteRegularELocalizationWitnessLevel =
+  BalabanRGTOE.balabanConcreteRegularELocalizationWitnessLevel
+
+yangMillsBalabanStressCauchyModulusCompilerLevel : ProofLevel
+yangMillsBalabanStressCauchyModulusCompilerLevel =
+  BalabanRGTOE.balabanStressCauchyModulusCompilerLevel
+
+yangMillsBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
+yangMillsBalabanStressCauchyPhysicalInsertionLevel =
+  BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+yangMillsBalabanStressHilbertBoundCompilerLevel : ProofLevel
+yangMillsBalabanStressHilbertBoundCompilerLevel =
+  BalabanRGTOE.balabanStressHilbertBoundCompilerLevel
+
+yangMillsBalabanStressHilbertPhysicalShellLevel : ProofLevel
+yangMillsBalabanStressHilbertPhysicalShellLevel =
+  BalabanRGTOE.balabanStressHilbertPhysicalShellLevel
+
+yangMillsBalabanPublishedNonlinearRGCoreLevel : ProofLevel
+yangMillsBalabanPublishedNonlinearRGCoreLevel =
+  BalabanRGTOE.balabanPublishedNonlinearRGCoreLevel
+
+yangMillsBalabanPublishedRGPhysicalSameObjectLevel : ProofLevel
+yangMillsBalabanPublishedRGPhysicalSameObjectLevel =
+  BalabanRGTOE.balabanPublishedRGPhysicalSameObjectLevel
+
+yangMillsBalabanRGUniformKPAbsorptionStillOpen :
+  BalabanRGTOE.balabanRGUniformKPAbsorptionOpenFlag ≡ false
+yangMillsBalabanRGUniformKPAbsorptionStillOpen =
+  BalabanRGTOE.balabanRGUniformKPAbsorptionStillOpen
+
+yangMillsBalabanRGBlockSpinTransferStillOpen :
+  BalabanRGTOE.balabanRGBlockSpinTransferOpenFlag ≡ false
+yangMillsBalabanRGBlockSpinTransferStillOpen =
+  BalabanRGTOE.balabanRGBlockSpinTransferStillOpen
+
+yangMillsBalabanPublishedRGContinuumTransferStillOpen :
+  BalabanRGTOE.balabanPublishedRGContinuumTransferOpenFlag ≡ false
+yangMillsBalabanPublishedRGContinuumTransferStillOpen =
+  BalabanRGTOE.balabanPublishedRGContinuumTransferStillOpen
+
+yangMillsBalabanOSWightmanContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionOpenFlag ≡ false
+yangMillsBalabanOSWightmanContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionStillOpen
+
+yangMillsBalabanRGContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanRGContinuumConstructionOpenFlag ≡ false
+yangMillsBalabanRGContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanRGContinuumConstructionStillOpen
+
+yangMillsBalabanContinuumMassGapStillOpen :
+  BalabanRGTOE.balabanRGContinuumMassGapOpenFlag ≡ false
+yangMillsBalabanContinuumMassGapStillOpen =
+  BalabanRGTOE.balabanRGContinuumMassGapStillOpen
+
+yangMillsBalabanTerminalPromotionStillOpen :
+  BalabanRGTOE.balabanTerminalPromotionOpenFlag ≡ false
+yangMillsBalabanTerminalPromotionStillOpen =
+  BalabanRGTOE.balabanTerminalPromotionStillOpen
+
+yangMillsBalabanClayPromotionStillFalse :
+  BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
+yangMillsBalabanClayPromotionStillFalse =
+  BalabanRGTOE.balabanRGClayPromotionStillFalse

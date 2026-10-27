@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Unified.CarrierGrammar as CarrierGrammar
 import DASHI.Unified.ChemistrySupervoxel as ChemistrySupervoxel

@@ -18,6 +18,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/**'
+      - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
@@ -38,6 +39,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
+      - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
@@ -76,8 +78,17 @@ jobs:
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
           dashi-repo related BalabanRGTOEReceipt --root .
-          dashi-repo discover 'Balaban regular-E localization Casimir stress RG' --root .
+          dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
+          dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
+          dashi-repo related balabanGeneratedActionStressScaleCompilerLevel --root . --limit 20
+          dashi-repo related balabanPublishedRGPhysicalSameObjectLevel --root . --limit 20
+          dashi-repo related balabanScaleDensityFiniteMeasureWeldLevel --root . --limit 20
+          dashi-repo related balabanRegularELocalizationCarrierLevel --root . --limit 20
+          dashi-repo related balabanCasimirLowerBoundTransportLevel --root . --limit 20
+          dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
+          dashi-repo discover 'Balaban scale density regular-E localization Casimir stress RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+          dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -104,6 +115,7 @@ jobs:
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
@@ -121,6 +133,7 @@ jobs:
           agda --version
           modules=(
             DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
