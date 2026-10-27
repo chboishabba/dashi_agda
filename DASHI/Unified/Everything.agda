@@ -175,3 +175,9 @@ unifiedFleetFormalGapsAre58 :
 unifiedFleetFormalGapsAre58 =
   FleetHyperTOE.fleetFormalGapsAre58
 
+unifiedFleetGate4CountAgreement :
+  FleetHyperTOE.fleetFormalGaps
+  ≡ BalabanR559TOE.gate4UnresolvedCount
+      BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifiedFleetGate4CountAgreement =
+  FleetHyperTOE.fleetFormalGapCountEqualsGate4Count
