@@ -758,3 +758,49 @@ toeBalabanScaleTransferNonPromotion :
 toeBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Current-master governance x fleet x Balaban/R559 x Ibrahim max-cut.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
+
+toeCurrentMaxCutGovernanceFleetReceipt :
+  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
+toeCurrentMaxCutGovernanceFleetReceipt =
+  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
+
+toeCurrentFormalGapTarget : ℕ
+toeCurrentFormalGapTarget =
+  CurrentMaxCut.targetFormalGapCount
+
+toeCurrentFormalGapTargetIs58 :
+  toeCurrentFormalGapTarget ≡ 58
+toeCurrentFormalGapTargetIs58 =
+  CurrentMaxCut.targetFormalGapCountIs58
+
+toeCurrentFleetDischargedFibresExcluded :
+  CurrentMaxCut.dischargedFleetFibresExcluded ≡ true
+toeCurrentFleetDischargedFibresExcluded = refl
+
+toeCurrentFiniteRGStillDoesNotPromoteContinuum :
+  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
+toeCurrentFiniteRGStillDoesNotPromoteContinuum =
+  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
+
+toeCurrentCandidateLegalSourceStillDoesNotCreateAuthority :
+  CurrentMaxCut.candidateLegalSourceCreatesAuthority ≡ false
+toeCurrentCandidateLegalSourceStillDoesNotCreateAuthority =
+  CurrentMaxCut.candidateLegalSourceCreatesAuthorityIsFalse
+
+toeCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy :
+  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacy ≡ false
+toeCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy =
+  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacyIsFalse
+
+toeCurrentIbrahimSearchPriorityDoesNotCreateProof :
+  CurrentMaxCut.Pareto.SearchPriorityCreatesProof → ⊥
+toeCurrentIbrahimSearchPriorityDoesNotCreateProof =
+  CurrentMaxCut.ibrahimSearchPriorityCannotCreateProof
