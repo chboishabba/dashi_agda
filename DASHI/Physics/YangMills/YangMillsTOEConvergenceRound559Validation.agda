@@ -243,3 +243,36 @@ unifierTerminalNonPromotionMatchesTOE :
   U.unifierYangMillsTerminalPromotionBlocked
   ≡ TOE.toeTerminalPromotionIsFalse
 unifierTerminalNonPromotionMatchesTOE = refl
+
+
+------------------------------------------------------------------------
+-- Exact bound and owner-export regressions.
+------------------------------------------------------------------------
+
+universalBetaFloorCompilerIsChecked :
+  TOE.toeCompactSimpleUniversalBetaFloorLevel ≡ machineChecked
+universalBetaFloorCompilerIsChecked = refl
+
+literalUniformRemainderFloorRemainsConditional :
+  TOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel ≡ conditional
+literalUniformRemainderFloorRemainsConditional = refl
+
+unifiedPhysicsUniversalBetaFloorMatchesTOE :
+  UnifiedPhysics.yangMillsTOEUniversalBetaFloorLevel
+  ≡ TOE.toeCompactSimpleUniversalBetaFloorLevel
+unifiedPhysicsUniversalBetaFloorMatchesTOE = refl
+
+unifierUniversalBetaFloorMatchesTOE :
+  U.unifierYangMillsUniversalBetaFloorLevel
+  ≡ TOE.toeCompactSimpleUniversalBetaFloorLevel
+unifierUniversalBetaFloorMatchesTOE = refl
+
+unifiedPhysicsRemainderFloorBoundaryMatchesTOE :
+  UnifiedPhysics.yangMillsTOELiteralUniformRemainderFloorLevel
+  ≡ TOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
+unifiedPhysicsRemainderFloorBoundaryMatchesTOE = refl
+
+unifierRemainderFloorBoundaryMatchesTOE :
+  U.unifierYangMillsLiteralUniformRemainderFloorLevel
+  ≡ TOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
+unifierRemainderFloorBoundaryMatchesTOE = refl
