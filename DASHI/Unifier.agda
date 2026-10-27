@@ -3,7 +3,7 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261008AAExact as CMP119Preferred
+import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
 
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
@@ -1406,7 +1406,7 @@ unifierCMP119PreferredWorkIsPhysicalSourcePackages =
   CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
 
 unifierCMP119NoConditionalSourceLeafPromoted =
-  CMP119Preferred.noConditionalSourceLeafPromoted
+  CMP119Preferred.noSyntheticPhysicalIdentificationAdded
 
 unifierCMP119RepresentationOnlySameObjectDebtRemains =
   CMP119Preferred.representationOnlySameObjectDebtRemains
