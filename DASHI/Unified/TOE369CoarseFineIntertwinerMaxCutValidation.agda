@@ -33,6 +33,8 @@ import DASHI.Reasoning.Trialectic369Selected3BLinearCoreCompatibilityExact as Co
 import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as ActualAcquisition
 import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as PhaseWeld
 import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VOAComposition
+import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestAction
+import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as ShortestCandidate
 
 originIsFixed :
   Spectral.rotateXYZ Geometry.origin ≡ Geometry.origin
@@ -452,3 +454,39 @@ voaKernelRecognizedAttachmentRemainsOpen :
   ≡ false
 voaKernelRecognizedAttachmentRemainsOpen =
   TOE.toeVOAKernelRecognizedAttachmentStillOpen
+
+
+shortestSourceCompilesActualActionRecognition :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.actualActionRecognitionCompiled
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ true
+shortestSourceCompilesActualActionRecognition =
+  TOE.toeShortestSourceCompilesActualActionRecognition
+
+separateActionRecognitionLeafIsNotNeeded :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.separateTrialecticActualActionRecognitionLeafNeeded
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ false
+separateActionRecognitionLeafIsNotNeeded =
+  TOE.toeSeparateActualActionRecognitionLeafNotNeeded
+
+recognitionAloneDoesNotCompileMultiplicityInertia :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.multiplicityInertiaAttachmentCompiledFromRecognitionAlone
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ false
+recognitionAloneDoesNotCompileMultiplicityInertia =
+  TOE.toeRecognitionDoesNotCompileMultiplicityInertia
+
+base369CandidateCompilesRecognition :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.base369CandidateCompilesRecognition
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ true
+base369CandidateCompilesRecognition =
+  TOE.toeBase369CandidateCompilesRecognition
+
+base369ShortestCandidateRemainsUninhabited :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.base369CandidateInhabitedHere
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ false
+base369ShortestCandidateRemainsUninhabited =
+  TOE.toeBase369ShortestCandidateStillUninhabited
