@@ -1,6 +1,7 @@
 module DASHI.Unifier where
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound578Exact as YMCritical
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -562,6 +563,56 @@ unifierYangMillsGoal1ClayCompletionNotClaimed :
   YMTOE.toeGoal1ClayCompletionClaimed ≡ false
 unifierYangMillsGoal1ClayCompletionNotClaimed = refl
 
+
+
+------------------------------------------------------------------------
+-- Current R578 Yang-Mills critical-path overlay.
+-- R559 remains the canonical TOE owner.
+------------------------------------------------------------------------
+
+unifierYangMillsCurrentT1FiniteOSLevel : ProofLevel
+unifierYangMillsCurrentT1FiniteOSLevel =
+  YMCritical.criticalLevel YMCritical.t1FiniteOSSameFamily
+
+unifierYangMillsCurrentT5LiteralMomentProducerLevel : ProofLevel
+unifierYangMillsCurrentT5LiteralMomentProducerLevel =
+  YMCritical.t5LiteralMomentProducerLevel
+
+unifierYangMillsCurrentB1PointwiseWilsonLocalizationLevel : ProofLevel
+unifierYangMillsCurrentB1PointwiseWilsonLocalizationLevel =
+  YMCritical.b1PointwiseWilsonJetLocalizationLevel
+
+unifierYangMillsCurrentB1ConnectingWeightTailLevel : ProofLevel
+unifierYangMillsCurrentB1ConnectingWeightTailLevel =
+  YMCritical.b1ConnectingWeightTailLevel
+
+unifierYangMillsCurrentB2SameHamiltonianTransferLevel : ProofLevel
+unifierYangMillsCurrentB2SameHamiltonianTransferLevel =
+  YMCritical.b2TransferCoordinateOfReconstructedHamiltonianLevel
+
+unifierYangMillsCurrentG1QuantitativeBoundsLevel : ProofLevel
+unifierYangMillsCurrentG1QuantitativeBoundsLevel =
+  YMCritical.g1ActualQuantitativeBoundsLevel
+
+unifierYangMillsCurrentH6WardKernelLevel : ProofLevel
+unifierYangMillsCurrentH6WardKernelLevel =
+  YMCritical.h6SameFamilyWardKernelLevel
+
+unifierYangMillsCurrentCriticalPathCompilerLevel : ProofLevel
+unifierYangMillsCurrentCriticalPathCompilerLevel =
+  YMCritical.round578CriticalPathCompilerLevel
+
+unifierYangMillsCurrentArbitraryObservableDetourRequired :
+  YMCritical.arbitraryObservableRepresentationRequired ≡ false
+unifierYangMillsCurrentArbitraryObservableDetourRequired = refl
+
+unifierYangMillsCurrentFiniteHamiltonianMoscoDetourRequired :
+  YMCritical.finiteHamiltonianMoscoRouteRequired ≡ false
+unifierYangMillsCurrentFiniteHamiltonianMoscoDetourRequired = refl
+
+unifierYangMillsCurrentSU2ToGenericPromotionRequired :
+  YMCritical.su2ToGenericPromotionRequired ≡ false
+unifierYangMillsCurrentSU2ToGenericPromotionRequired = refl
 
 ------------------------------------------------------------------------
 -- Canonical R546/R558 family dispatch via R559.
