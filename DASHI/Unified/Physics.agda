@@ -11,6 +11,8 @@ import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -65,3 +67,57 @@ yangMillsPostureIsApproaching :
   Spine.proofPosture yangMillsObject ≡ Asserted.approachingClosedProof
 yangMillsPostureIsApproaching =
   refl
+
+------------------------------------------------------------------------
+-- Reuse the canonical Yang-Mills TOE convergence boundary.
+------------------------------------------------------------------------
+
+yangMillsTOEClayPromotionBlocked :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+yangMillsTOEClayPromotionBlocked =
+  YMTOE.toeClayYangMillsPromotedIsFalse
+
+yangMillsTOECriticalFamilyCountIsSeven :
+  YMTOE.toeCriticalFamilyCount ≡ 7
+yangMillsTOECriticalFamilyCountIsSeven =
+  YMTOE.toeCriticalFamilyCountIsSeven
+
+yangMillsTOEIrreducibleFamilyCountIsFourteen :
+  YMTOE.toeIrreducibleSourceFamilyCount ≡ 14
+yangMillsTOEIrreducibleFamilyCountIsFourteen =
+  YMTOE.toeIrreducibleSourceFamilyCountIsFourteen
+
+
+yangMillsTOEPublishedRGDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+yangMillsTOEPublishedRGDoesNotPromoteContinuum =
+  YMTOE.toePublishedRGDoesNotPromoteContinuum
+
+yangMillsTOEContinuumMassGapBlocked :
+  YMTOE.toeContinuumMassGapPromoted ≡ false
+yangMillsTOEContinuumMassGapBlocked =
+  YMTOE.toeContinuumMassGapPromotedIsFalse
+
+------------------------------------------------------------------------
+-- Antigravity S4 / P3G normalized TOE surface.
+------------------------------------------------------------------------
+
+yangMillsTOEAntigravityS4CompilerLevel :
+  ProofLevel
+yangMillsTOEAntigravityS4CompilerLevel =
+  YMTOE.toeAntigravityS4PhysicalMinCutCompilerLevel
+
+yangMillsTOEAntigravityP3GCompilerLevel :
+  ProofLevel
+yangMillsTOEAntigravityP3GCompilerLevel =
+  YMTOE.toeAntigravityP3GPhysicalProducerCompilerLevel
+
+yangMillsTOEAntigravityInitialSharedCouplingLevel :
+  ProofLevel
+yangMillsTOEAntigravityInitialSharedCouplingLevel =
+  YMTOE.toeAntigravityP3GInitialSharedCouplingLevel
+
+yangMillsTOEAntigravityLocalRemainderLevel :
+  ProofLevel
+yangMillsTOEAntigravityLocalRemainderLevel =
+  YMTOE.toeAntigravityP3GLocalRemainderLevel
