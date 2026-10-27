@@ -471,3 +471,94 @@ navierStokesTerminalPromotionImpossible :
   NSClayTOE.NSClayDistanceFinalPromotion → Data.Empty.⊥
 navierStokesTerminalPromotionImpossible =
   NSClayTOE.terminalClayPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Current periodic-B shared weighted wall from R736.
+-- Proof ownership remains in R736 through the canonical NS Clay facade.
+------------------------------------------------------------------------
+
+navierStokesSharedWeightedExactlyTwoLeaves : Bool
+navierStokesSharedWeightedExactlyTwoLeaves =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
+
+navierStokesSharedWeightedExactlyTwoLeavesIsTrue :
+  navierStokesSharedWeightedExactlyTwoLeaves ≡ true
+navierStokesSharedWeightedExactlyTwoLeavesIsTrue =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+navierStokesSharedWeightedSameCarrier : Bool
+navierStokesSharedWeightedSameCarrier =
+  NSClayTOE.currentSharedWeightedSameCarrier
+
+navierStokesSharedWeightedSameCarrierIsTrue :
+  navierStokesSharedWeightedSameCarrier ≡ true
+navierStokesSharedWeightedSameCarrierIsTrue =
+  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+
+navierStokesSharedWeightedCarrierIsInputLaplacian : Bool
+navierStokesSharedWeightedCarrierIsInputLaplacian =
+  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+
+navierStokesWeightedPlusEndpointClosed : Bool
+navierStokesWeightedPlusEndpointClosed =
+  NSClayTOE.currentWeightedPlusEndpointClosed
+
+navierStokesWeightedPlusEndpointStillOpen :
+  navierStokesWeightedPlusEndpointClosed ≡ false
+navierStokesWeightedPlusEndpointStillOpen =
+  NSClayTOE.currentWeightedPlusEndpointStillOpen
+
+navierStokesAugmentedCriticalWeightedClosed : Bool
+navierStokesAugmentedCriticalWeightedClosed =
+  NSClayTOE.currentAugmentedCriticalWeightedClosed
+
+navierStokesAugmentedCriticalWeightedStillOpen :
+  navierStokesAugmentedCriticalWeightedClosed ≡ false
+navierStokesAugmentedCriticalWeightedStillOpen =
+  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
+
+navierStokesSharedWeightedLeavesBuildBarrier : Bool
+navierStokesSharedWeightedLeavesBuildBarrier =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+
+navierStokesSharedWeightedLeavesBuildBarrierIsTrue :
+  navierStokesSharedWeightedLeavesBuildBarrier ≡ true
+navierStokesSharedWeightedLeavesBuildBarrierIsTrue =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+navierStokesR726IndependentLeafRequired : Bool
+navierStokesR726IndependentLeafRequired =
+  NSClayTOE.legacyR726IndependentLeafRequired
+
+navierStokesR726IndependentLeafNotRequired :
+  navierStokesR726IndependentLeafRequired ≡ false
+navierStokesR726IndependentLeafNotRequired =
+  NSClayTOE.legacyR726IndependentLeafNotRequired
+
+navierStokesStrictMarginR406IndependentLeafRequired : Bool
+navierStokesStrictMarginR406IndependentLeafRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+
+navierStokesStrictMarginR406IndependentLeafNotRequired :
+  navierStokesStrictMarginR406IndependentLeafRequired ≡ false
+navierStokesStrictMarginR406IndependentLeafNotRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+
+navierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
+navierStokesBarrierDependentQPlusMinusShortcutAdmissible =
+  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+
+navierStokesBarrierDependentQPlusMinusShortcutStillCircular :
+  navierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
+navierStokesBarrierDependentQPlusMinusShortcutStillCircular =
+  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+
+navierStokesSharedWeightedClayPromotion : Bool
+navierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+navierStokesSharedWeightedClayPromotionStillFalse :
+  navierStokesSharedWeightedClayPromotion ≡ false
+navierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
