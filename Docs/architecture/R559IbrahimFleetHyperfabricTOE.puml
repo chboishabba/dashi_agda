@@ -17,6 +17,13 @@ component "EverythingTOESymmetryResolved369" as TOE
 component "Unifier" as Unifier
 component "Unified.Everything" as Unified
 component "R559IbrahimFleetHyperfabricTOEValidation" as Validation
+component "TriadicFin27Byte256ABIExact" as ABI27
+component "TriadicByteABIRoadmapWeldExact" as ABIRoadmap
+component "Ternary27ResidualProgramDecisionBridgeExact" as Ternary27
+component "MonsterGradedVOAActual3BKernelSameElementBidiExact" as KernelBidi
+component "Base369Monster3BSingleActionProducerBidiExact" as ProducerBidi
+component "R559IbrahimFleetKernelBidiTernary27TOEExact" as KernelBidiTernary27
+component "R559IbrahimFleetKernelBidiTernary27TOEValidation" as KernelBidiTernary27Validation
 
 YM --> Joint : exact receipt + RG non-promotion
 Ibrahim --> Joint : Pareto / snowball boundaries
@@ -34,6 +41,17 @@ Unifier --> Validation
 Unified --> Validation
 Joint --> Validation
 
+Joint --> KernelBidiTernary27 : inherited 58 / 584 / RG / Ibrahim receipt
+ABI27 --> KernelBidiTernary27 : exact Fin27 -> Fin256 ABI
+ABIRoadmap --> KernelBidiTernary27 : runtime binding firewall
+Ternary27 --> KernelBidiTernary27 : exact dependent 27-state consumer code
+KernelBidi --> KernelBidiTernary27 : character/isotypy non-promotion
+ProducerBidi --> KernelBidiTernary27 : single-action producer boundary
+KernelBidiTernary27 --> TOE
+KernelBidiTernary27 --> Unifier
+KernelBidiTernary27 --> Unified
+KernelBidiTernary27 --> KernelBidiTernary27Validation
+
 note right of Fleet
 External fleet counts remain planning receipts.
 Counts do not create proof authority.
@@ -50,6 +68,13 @@ Finite RG != continuum Yang-Mills.
 Search priority != proof.
 Arithmetic coincidence != Monster recognition.
 No ESD mutation.
+end note
+
+note right of KernelBidiTernary27
+No literal CFFI theorem owner was found.
+Fin27/Fin256 ABI is exact.
+Rust/CUDA/ROCm machine bindings remain unpaid.
+Kernel character isotypy does not construct an action intertwiner.
 end note
 
 @enduml
