@@ -1649,3 +1649,62 @@ toeFleetNumericABIRequiresIndependentEvidence :
   FleetGapTOE.SpectralNumericABIPromotion → ⊥
 toeFleetNumericABIRequiresIndependentEvidence =
   FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+------------------------------------------------------------------------
+-- Current Gate-4 frontier, Fleet target split, and manifest boundary.
+------------------------------------------------------------------------
+
+unifierCurrentGate4FrontierLedgerLevel : ProofLevel
+unifierCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifierCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+unifierFleetFormalGapTargetSelected : Bool
+unifierFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifierHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+unifierFleetManifestAcquisitionDemand =
+  FleetGapTOE.fleetManifestAcquisitionDemand
+
+unifierFleetNamedManifestStillMissing :
+  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
+unifierFleetNamedManifestStillMissing =
+  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
+
+unifierFleetPerGapDispatchStillBlocked :
+  FleetGapTOE.perGapDispatchEnabled ≡ false
+unifierFleetPerGapDispatchStillBlocked =
+  FleetGapTOE.perGapDispatchEnabledIsFalse
+
+unifierFleetRelatedSymbolsRequired :
+  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
+unifierFleetRelatedSymbolsRequired =
+  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
+
+unifierFleetDiscoverRequired :
+  FleetGapTOE.fleetDiscoverRequired ≡ true
+unifierFleetDiscoverRequired =
+  FleetGapTOE.fleetDiscoverRequiredIsTrue
+
+unifierFleetRoundLineageRequired :
+  FleetGapTOE.fleetRoundLineageRequired ≡ true
+unifierFleetRoundLineageRequired =
+  FleetGapTOE.fleetRoundLineageRequiredIsTrue
+
+unifierFleetCountDoesNotCreateNamedManifest :
+  FleetGapTOE.CountCreatesNamedManifest → ⊥
+unifierFleetCountDoesNotCreateNamedManifest =
+  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
+
