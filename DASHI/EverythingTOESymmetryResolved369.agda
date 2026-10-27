@@ -8,3 +8,7 @@ module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
+
+-- Exact Yang-Mills finite plaquette and non-promotion convergence.
+import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact
+import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeValidation
