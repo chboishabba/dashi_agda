@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+"""Finite truth-table regression for the Goodman Sonic Warfare source bridge.
+
+Exact enumeration of explicitly synthetic finite carriers only.
+NO Agda kernel check. NO physical experiment, human affect inference,
+operational acoustics, clinical inference or historical verification.
+"""
+from itertools import product
+from json import dumps
+
+
+def attempts(states, project, answer):
+    """Exhaustively enumerate functions O -> A agreeing with answers on states."""
+    observations = tuple(sorted(set(project[s] for s in states)))
+    answers = tuple(sorted(set(answer[s] for s in states)))
+    successes = []
+    count = 0
+    for mapped in product(answers, repeat=len(observations)):
+        count += 1
+        mapping = dict(zip(observations, mapped))
+        if all(mapping[project[s]] == answer[s] for s in states):
+            successes.append(mapping)
+    return count, successes
+
+
+def test_case(name, states, project, query_answers, expected):
+    count, witnesses = attempts(states, project, query_answers)
+    observed = bool(witnesses)
+    assert observed == expected, (
+        f"{name}: factorization={observed}, expected {expected}")
+    return {"case": name, "candidate_functions_exhausted": count,
+            "factors": observed, "expected": expected,
+            "successful_functions": len(witnesses)}
+
+
+def run():
+    out = []
+    mirrors = ('reflection', 'echo', 'figurative', 'kozyrev-candidate')
+    mirror_surface = dict.fromkeys(mirrors, 'mirror')
+    out.append(test_case('mirror label is adequate for name', mirrors,
+        mirror_surface, dict.fromkeys(mirrors, 'mirror'), True))
+    out.append(test_case('mirror label is inadequate for mechanism', mirrors,
+        mirror_surface, {'reflection': 'ordinary', 'echo': 'ordinary',
+            'figurative': 'not-established', 'kozyrev-candidate': 'not-established'}, False))
+
+    encounters = ('low', 'high')
+    common_features = dict.fromkeys(encounters, 'same-selected-acoustic-features')
+    out.append(test_case('features adequately describe selected features', encounters,
+        common_features, dict.fromkeys(encounters, 'feature'), True))
+    out.append(test_case('selected features do not determine response', encounters,
+        common_features, {'low': 'low-response', 'high': 'high-response'}, False))
+
+    propaganda = ('persuasion-with-supported-content', 'persuasion-with-false-content')
+    common_intent = dict.fromkeys(propaganda, 'same-persuasive-intent')
+    out.append(test_case('propaganda intent does not determine truth', propaganda,
+        common_intent, dict(zip(propaganda, ('supported', 'false-or-misleading'))), False))
+
+    shared_content = ('deceptive-intent-unpaid', 'deceptive-intent-paid')
+    same_content = dict.fromkeys(shared_content, 'same-content')
+    out.append(test_case('same content does not determine deception', shared_content,
+        same_content, dict(zip(shared_content, ('intent-unpaid', 'intent-paid'))), False))
+
+    assert len(out) == 6
+    print(dumps({"mode": "finite-exhaustive-synthetic-only",
+                 "all_passed": True, "tests": out,
+                 "non_promotion": ["not-Agda-kernel", "not-measured-acoustics",
+                                   "not-human-affect", "not-historical-evidence",
+                                   "not-Monster-same-object"]}, indent=2))
+
+
+if __name__ == '__main__':
+    run()
