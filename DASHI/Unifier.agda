@@ -313,3 +313,35 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+------------------------------------------------------------------------
+-- SensibLaw / Actionstep governed legal-runtime TOE handoff.
+------------------------------------------------------------------------
+
+import DASHI.Unified.SensibLawActionstepGovernanceTOEExact as SensibLawActionstep
+
+SensibLawActionstepGovernanceTOEReceipt : Set₁
+SensibLawActionstepGovernanceTOEReceipt =
+  SensibLawActionstep.SensibLawActionstepGovernanceTOEReceipt
+
+sensibLawActionstepGovernanceTOEReceipt :
+  SensibLawActionstepGovernanceTOEReceipt
+sensibLawActionstepGovernanceTOEReceipt =
+  SensibLawActionstep.canonicalSensibLawActionstepGovernanceTOEReceipt
+
+sensibLawSemanticPromotionDoesNotCreateLegalAuthority :
+  SensibLawActionstep.Semantic.legalAuthorityFlag
+    SensibLawActionstep.Semantic.semanticPromotionAuthorityBoundary
+  ≡ false
+sensibLawSemanticPromotionDoesNotCreateLegalAuthority =
+  SensibLawActionstep.semanticPromotionDoesNotCreateLegalAuthority
+
+actionstepWorkflowDoesNotCreateLegalApplicability :
+  SensibLawActionstep.ActionstepWorkflowCreatesLegalApplicability → ⊥
+actionstepWorkflowDoesNotCreateLegalApplicability =
+  SensibLawActionstep.actionstepWorkflowDoesNotCreateLegalApplicability
+
+actionstepVendorClaimDoesNotProveFirmCompliance :
+  SensibLawActionstep.ActionstepVendorComplianceClaimProvesFirmCompliance → ⊥
+actionstepVendorClaimDoesNotProveFirmCompliance =
+  SensibLawActionstep.actionstepVendorClaimDoesNotProveFirmCompliance
