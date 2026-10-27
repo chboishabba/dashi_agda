@@ -81,6 +81,14 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda --root .
+          dashi-repo related terminalClayPromotionImpossible --root . --limit 20
+          dashi-repo related carrierToGeneralNSImplicationStillOpen --root . --limit 20
+          dashi-repo related navierStokesPromotionGuardStillFalse --root . --limit 20
+          dashi-repo discover 'Navier Stokes A B C D canonical Clay frontier carrier-to-general non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSCanonical --root .
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSClay --root .
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
@@ -133,6 +141,8 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/BalabanR559TOEMaxCutExact.agda
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
@@ -155,6 +165,8 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutExact.agda
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
