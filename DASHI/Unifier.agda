@@ -12,23 +12,17 @@ open import Data.Unit using (⊤; tt)
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 
 balabanRGBlockSpinTransferStillOpen :
-  BalabanRGTOE.RGFrontier.balabanBlockSpinTransferProved
-    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+  BalabanRGTOE.balabanRGBlockSpinTransferOpenFlag ≡ false
 balabanRGBlockSpinTransferStillOpen =
   BalabanRGTOE.balabanRGBlockSpinTransferStillOpen
 
 balabanRGContinuumConstructionStillOpen :
-  BalabanRGTOE.RGFrontier.continuumYangMillsConstructedHere
-    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+  BalabanRGTOE.balabanRGContinuumConstructionOpenFlag ≡ false
 balabanRGContinuumConstructionStillOpen =
   BalabanRGTOE.balabanRGContinuumConstructionStillOpen
 
 balabanRGClayPromotionStillFalse :
-  BalabanRGTOE.RGFrontier.clayYangMillsPromoted
-    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+  BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
 balabanRGClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
