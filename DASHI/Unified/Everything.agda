@@ -222,3 +222,28 @@ unifiedCurrentLegalAuthorityDoesNotEstablishApplicability :
 unifiedCurrentLegalAuthorityDoesNotEstablishApplicability =
   CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
 
+------------------------------------------------------------------------
+-- Current max-cut + generic hyperfabric convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutHyperfabricExact as CurrentHyper
+
+unifiedCurrentMaxCutHyperfabricReceipt :
+  CurrentHyper.TOECurrentMaxCutHyperfabricReceipt
+unifiedCurrentMaxCutHyperfabricReceipt =
+  CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
+
+unifiedCurrentHyperformNineCount :
+  CurrentHyper.Fabric.siteCount 3 2 ≡ 9
+unifiedCurrentHyperformNineCount =
+  CurrentHyper.currentHyperformNineCount
+
+unifiedCurrentHyperformTwentySevenCount :
+  CurrentHyper.Fabric.siteCount 3 3 ≡ 27
+unifiedCurrentHyperformTwentySevenCount =
+  CurrentHyper.currentHyperformTwentySevenCount
+
+unifiedCurrentHyperformEightyOneCount :
+  CurrentHyper.Fabric.siteCount 3 4 ≡ 81
+unifiedCurrentHyperformEightyOneCount =
+  CurrentHyper.currentHyperformEightyOneCount
