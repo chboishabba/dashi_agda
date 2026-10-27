@@ -1,0 +1,75 @@
+# Exact-checkout Zipf family P0. Python and Agda are separate jobs.
+# No synthetic fixture can substitute for kernel verification.
+name: Zipf family exact-head P0
+on:
+  push:
+    branches:
+      - chatgpt/zipf-family-27-law-maxcut-20261027
+    paths:
+      - 'DASHI/Statistics/Zipf*.agda'
+      - 'scripts/zipf*.py'
+      - 'scripts/pareto_benford_lorenz_bridge.py'
+      - 'tests/test_zipf*.py'
+      - 'tests/test_pareto_benford_lorenz_bridge.py'
+      - '.github/workflows/zipf_family_p0.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Statistics/Zipf*.agda'
+      - 'scripts/zipf*.py'
+      - 'scripts/pareto_benford_lorenz_bridge.py'
+      - 'tests/test_zipf*.py'
+      - 'tests/test_pareto_benford_lorenz_bridge.py'
+      - '.github/workflows/zipf_family_p0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-exact-checkout:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install test runner
+        run: python -m pip install 'pytest>=8,<10'
+      - name: Bind claim to exact checkout
+        run: |
+          git rev-parse HEAD
+          git status --porcelain
+      - name: Execute all 27-subject finite and adversarial suites
+        env:
+          PYTHONPATH: ${{ github.workspace }}/scripts
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python -m pytest -q \
+            tests/test_zipf_family_formal.py \
+            tests/test_zipf_family_crosslaw.py \
+            tests/test_zipf_heaps_bridge_exact.py \
+            tests/test_zipf_occupancy_collisions_exact.py \
+            tests/test_pareto_benford_lorenz_bridge.py \
+            tests/test_zipf_family_coverage_gates.py \
+            tests/test_zipf_family_severe_coverage.py
+
+  agda-kernel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install distro Agda and standard library
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends agda agda-stdlib
+          agda --version
+      - name: Compile canonical 27-topic import closure
+        run: |
+          set -eu
+          LIB=$(find /usr/share -name standard-library.agda-lib -print -quit)
+          test -n "$LIB"
+          mkdir -p ~/.agda
+          printf '%s\n' "$LIB" > ~/.agda/libraries
+          git rev-parse HEAD
+          agda -i . -i /usr/share/agda-stdlib DASHI/Statistics/ZipfFamilyEverything.agda
