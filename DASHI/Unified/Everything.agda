@@ -114,3 +114,16 @@ relate369HyperfabricPantsTOEZKPFrame :
   Relate369PantsTOE.Relate369HyperfabricPantsTOEZKPFrame
 relate369HyperfabricPantsTOEZKPFrame =
   Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Repo state-space formalisation TOE convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.RepoStateSpaceTOEConvergenceExact as RepoStateSpaceTOE
+import DASHI.Unified.RepoStateSpaceTOEConvergenceValidation
+
+repoStateSpaceTOEZKPFrame :
+  RepoStateSpaceTOE.RepoStateSpaceTOEZKPFrame
+repoStateSpaceTOEZKPFrame =
+  RepoStateSpaceTOE.canonicalRepoStateSpaceTOEZKPFrame
