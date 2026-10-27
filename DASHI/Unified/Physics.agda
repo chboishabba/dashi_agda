@@ -85,3 +85,14 @@ yangMillsTOEIrreducibleFamilyCountIsFourteen :
   YMTOE.toeIrreducibleSourceFamilyCount ≡ 14
 yangMillsTOEIrreducibleFamilyCountIsFourteen =
   YMTOE.toeIrreducibleSourceFamilyCountIsFourteen
+
+
+yangMillsTOEPublishedRGDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+yangMillsTOEPublishedRGDoesNotPromoteContinuum =
+  YMTOE.toePublishedRGDoesNotPromoteContinuum
+
+yangMillsTOEContinuumMassGapBlocked :
+  YMTOE.toeContinuumMassGapPromoted ≡ false
+yangMillsTOEContinuumMassGapBlocked =
+  YMTOE.toeContinuumMassGapPromotedIsFalse
