@@ -104,6 +104,19 @@ goal1SameHNontrivialitySemanticBridgeLevel =
 -- Exact non-promotion theorem reuse.
 ------------------------------------------------------------------------
 
+flat4DContinuumTransferProvedHere : Bool
+flat4DContinuumTransferProvedHere =
+  Continuum.flat4DContinuumTransferProvedHere
+
+continuumMassGapPromoted : Bool
+continuumMassGapPromoted =
+  Continuum.continuumMassGapPromoted
+
+clayYangMillsPromoted : Bool
+clayYangMillsPromoted =
+  Clay.clayYangMillsPromoted
+
+
 yangMillsFormalProjectionRemainsNonPromoting :
   ∀ kind →
   Spine.objectProjectionPromotion UnifiedPhysics.yangMillsObject kind ≡ false
@@ -120,17 +133,17 @@ yangMillsMassGapBoundaryStillNotPromoted =
     MassGap.canonicalYangMillsMassGapBoundaryReceipt
 
 flat4DContinuumTransferStillOpen :
-  Continuum.flat4DContinuumTransferProvedHere ≡ false
+  flat4DContinuumTransferProvedHere ≡ false
 flat4DContinuumTransferStillOpen =
   Continuum.flat4DContinuumTransferProvedHereIsFalse
 
 continuumMassGapStillNotPromoted :
-  Continuum.continuumMassGapPromoted ≡ false
+  continuumMassGapPromoted ≡ false
 continuumMassGapStillNotPromoted =
   Continuum.continuumMassGapPromotedIsFalse
 
 clayYangMillsStillNotPromoted :
-  Clay.clayYangMillsPromoted ≡ false
+  clayYangMillsPromoted ≡ false
 clayYangMillsStillNotPromoted =
   Clay.ClayPromotionBoundary.noClayPromotion
     Clay.clayPromotionBoundary
@@ -194,8 +207,8 @@ canonicalYMGoal1TOEZKPFrame = record
   ; noNewScientificTheoremIsTrue = refl
   ; laterSourceNativeRoutePreferred = true
   ; laterSourceNativeRoutePreferredIsTrue = refl
-  ; continuumPromotionBlocked = Continuum.flat4DContinuumTransferProvedHere
+  ; continuumPromotionBlocked = flat4DContinuumTransferProvedHere
   ; continuumPromotionBlockedIsFalse = flat4DContinuumTransferStillOpen
-  ; clayPromotionBlocked = Clay.clayYangMillsPromoted
+  ; clayPromotionBlocked = clayYangMillsPromoted
   ; clayPromotionBlockedIsFalse = clayYangMillsStillNotPromoted
   }
