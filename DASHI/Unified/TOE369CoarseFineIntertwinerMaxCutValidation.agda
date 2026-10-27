@@ -1,0 +1,201 @@
+{-# OPTIONS --safe #-}
+module DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as TOE
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
+import DASHI.Foundations.Base369CoarseFineFabricAdapterExact as Fabric
+import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spectral
+import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed
+import DASHI.Wikimedia.IbrahimMonster3BRecognitionRouteParetoExact as Pareto
+import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact as Selected3B
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as KernelSame
+import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as SelectedSame
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZetaMaxCut
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
+
+originIsFixed :
+  Spectral.rotateXYZ Geometry.origin ≡ Geometry.origin
+originIsFixed = TOE.toeTernary27OriginFixed
+
+fullRotationCannotBeFree :
+  TOE.FullCubeRotationFree → ⊥
+fullRotationCannotBeFree = TOE.fullCubeRotationIsNotFree
+
+fullDFTRemainsUnclaimed :
+  Spectral.Base369Ternary27SpectralSymmetryBoundary.fullTwentySevenPointDFTConstructed
+    Spectral.canonicalBase369Ternary27SpectralSymmetryBoundary ≡ false
+fullDFTRemainsUnclaimed = TOE.toeFullDFTNotClaimed
+
+monsterRepresentationRemainsUnclaimed :
+  Signed.SignedTernaryVoxelSymmetryBoundary.voxelRepresentationOfMonsterEstablished
+    Signed.canonicalSignedTernaryVoxelSymmetryBoundary ≡ false
+monsterRepresentationRemainsUnclaimed =
+  TOE.toeMonsterRepresentationNotClaimed
+
+monsterEmbeddingRemainsUnclaimed :
+  Signed.SignedTernaryVoxelSymmetryBoundary.signedPermutationGroupEmbeddedInMonster
+    Signed.canonicalSignedTernaryVoxelSymmetryBoundary ≡ false
+monsterEmbeddingRemainsUnclaimed =
+  TOE.toeMonsterEmbeddingNotClaimed
+
+base369RemainsAnInstanceNotGenericFabric :
+  Fabric.Base369CoarseFineBoundary.base369IsGenericFabric
+    Fabric.canonicalBase369CoarseFineBoundary ≡ false
+base369RemainsAnInstanceNotGenericFabric =
+  TOE.toeBase369IsNotGenericFabric
+
+monsterPhaseIntertwinerRemainsExact :
+  Signed.SignedTernaryVoxelSymmetryBoundary.monster3BPhaseInversionMatchesFrequencyConjugation
+    Signed.canonicalSignedTernaryVoxelSymmetryBoundary ≡ true
+monsterPhaseIntertwinerRemainsExact = refl
+
+actualMonsterActionRecognitionRemainsOpen :
+  Pareto.RecognitionRouteParetoBoundary.actualActionRecognitionObserved
+    Pareto.canonicalRecognitionRouteParetoBoundary ≡ false
+actualMonsterActionRecognitionRemainsOpen =
+  TOE.toeMonsterActualActionRecognitionStillOpen
+
+selected3BMinCutHasTwoSourceLeaves :
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.onlyLinearRetractionAndProjectedActionRemain
+    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ true
+selected3BMinCutHasTwoSourceLeaves =
+  TOE.toeSelected3BOnlyRetractionAndProjectedActionRemain
+
+selected3BRetractionRemainsOpen :
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.actualLinearRetractionInhabitedHere
+    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ false
+selected3BRetractionRemainsOpen =
+  TOE.toeSelected3BActualRetractionStillOpen
+
+selected3BProjectedActionRemainsOpen :
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.projectedActionInputInhabitedHere
+    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ false
+selected3BProjectedActionRemainsOpen =
+  TOE.toeSelected3BProjectedActionStillOpen
+
+
+fullGradeDimensionCannotPromoteFaithfulness :
+  FullGrade.LinearDimensionCreatesFaithfulness → ⊥
+fullGradeDimensionCannotPromoteFaithfulness =
+  TOE.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+fullGradeCarrierCannotPromoteAgreement :
+  FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
+fullGradeCarrierCannotPromoteAgreement =
+  TOE.toeFullGradeSameCarrierDoesNotCreateActionAgreement
+
+fullGradeCharacterCannotPromoteAgreement :
+  FullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+fullGradeCharacterCannotPromoteAgreement =
+  TOE.toeFullGradeCharacterDoesNotCreateActionAgreement
+
+projectedDimensionCannotPromoteAction :
+  Projected.DirectSumDimensionCreatesProjectedAction → ⊥
+projectedDimensionCannotPromoteAction =
+  TOE.toeProjectedDimensionDoesNotCreateAction
+
+projectedRetractionCannotPromoteAction :
+  Projected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+projectedRetractionCannotPromoteAction =
+  TOE.toeCoordinateRetractionDoesNotCreateProjectedAction
+
+projectedCharacterCannotPromoteAction :
+  Projected.CharacterCreatesProjectedAction → ⊥
+projectedCharacterCannotPromoteAction =
+  TOE.toeProjectedCharacterDoesNotCreateAction
+
+fullGradeInclusionFaithfulnessRemainsOpen :
+  FullGrade.Trialectic369Selected3BFullGradeActionMaxCutBoundary.inclusionFaithfulnessInhabitedHere
+    FullGrade.canonicalTrialectic369Selected3BFullGradeActionMaxCutBoundary
+  ≡ false
+fullGradeInclusionFaithfulnessRemainsOpen =
+  TOE.toeFullGradeInclusionFaithfulnessStillOpen
+
+projectedActionEquationRemainsOpen :
+  Projected.Trialectic369Selected3BProjectedActionMaxCutBoundary.actualProjectedActionEquationInhabitedHere
+    Projected.canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary
+  ≡ false
+projectedActionEquationRemainsOpen =
+  TOE.toeProjectedActionEquationStillOpen
+
+kernelTrace53CannotPromote3BRecognition :
+  KernelSame.Actual3BKernelSameElementBoundary.trace53AloneIdentifiesMonster3B
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+kernelTrace53CannotPromote3BRecognition =
+  TOE.toeKernelTrace53DoesNotIdentify3B
+
+kernelCharacterIsotypyCannotPromoteAction :
+  KernelSame.Actual3BKernelSameElementBoundary.characterIsotypyConstructsActionIntertwiner
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+kernelCharacterIsotypyCannotPromoteAction =
+  TOE.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+kernelRecognitionRemainsOpen :
+  KernelSame.Actual3BKernelSameElementBoundary.actualZetaRecognitionProvedHere
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+kernelRecognitionRemainsOpen =
+  TOE.toeKernelActualZetaRecognitionStillOpen
+
+selectedSameElementClassRecognitionRemainsOpen :
+  SelectedSame.Selected3BSameElementBoundary.selectedElementProvedMonsterClass3BHere
+    SelectedSame.canonicalSelected3BSameElementBoundary
+  ≡ false
+selectedSameElementClassRecognitionRemainsOpen =
+  TOE.toeSelectedSameElementClass3BStillOpen
+
+singleActionProducerRemainsOpen :
+  SingleAction.SingleActionProducerBoundary.actualSingleProducerInhabitedHere
+    SingleAction.canonicalSingleActionProducerBoundary
+  ≡ false
+singleActionProducerRemainsOpen =
+  TOE.toeSingleActionProducerStillOpen
+
+ibrahimFiniteChartCannotPromoteLinearMultiplicityAction :
+  Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+ibrahimFiniteChartCannotPromoteLinearMultiplicityAction =
+  TOE.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+ibrahimNinetySlicesCannotPromotePermutationRepresentation :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+ibrahimNinetySlicesCannotPromotePermutationRepresentation =
+  TOE.toeNinetySlicesDoNotCreatePermutationRepresentation
+
+
+schrodingerHZetaRecognitionRemainsOpen :
+  HZetaMaxCut.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaRecognitionInhabitedHere
+    HZetaMaxCut.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+schrodingerHZetaRecognitionRemainsOpen =
+  TOE.toeSchrodingerHZetaRecognitionStillOpen
+
+schrodingerActionIntertwinerRemainsOpen :
+  HZetaMaxCut.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaActionIntertwinerInhabitedHere
+    HZetaMaxCut.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+schrodingerActionIntertwinerRemainsOpen =
+  TOE.toeSchrodingerHZetaActionIntertwinerStillOpen
+
+ternary27PhaseReductionIsNotGlobalInversion :
+  TernaryReduction.phasePreservingReductionEqualsFullGlobalInversion
+    TernaryReduction.currentTernary27ReductionBoundary
+  ≡ false
+ternary27PhaseReductionIsNotGlobalInversion =
+  TOE.toeTernary27PhaseReductionIsNotGlobalInversion
+
+ternary27ReductionIsNotMonster42SameObject :
+  TernaryReduction.reducedFifteenIsMonster42dSameObject
+    TernaryReduction.currentTernary27ReductionBoundary
+  ≡ false
+ternary27ReductionIsNotMonster42SameObject =
+  TOE.toeTernary27ReductionIsNotMonster42SameObject
