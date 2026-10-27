@@ -11,6 +11,7 @@ import DASHI.Physics.YangMills.BalabanCMP119ReflectionMaxCut20261002Exact as B
 import DASHI.Physics.YangMills.BalabanCMP119LiteralResidualWeldMaxCut20261002Exact as C
 import DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact as D534
 import DASHI.Unified.BalabanR559TOEMaxCutExact as Joint
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6Ledger as Gate4Ledger
 import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
@@ -72,7 +73,7 @@ gate4CountIs58 =
 
 gate4PaidReductionMatchesJoint :
   AD.gate4PaidReductionLevel AD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ Joint.gate4PaidReductionLedgerLevel
+  ≡ Gate4Ledger.physicalClosureRound6LedgerLevel
 gate4PaidReductionMatchesJoint = refl
 
 
