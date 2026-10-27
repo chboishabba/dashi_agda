@@ -99,6 +99,7 @@ import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as Co
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExact as Stress84
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAttackExact as Stress85
+import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact as R474
 import DASHI.Physics.YangMills.YangMillsClayConcreteSemanticsResidualRound521Exact as R521
 import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact as R546
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
@@ -474,6 +475,109 @@ toeCompactSimpleUniversalCasimirFloorLevel =
 toeStressChargeLocalCoreCutoffRemovalLevel : ProofLevel
 toeStressChargeLocalCoreCutoffRemovalLevel =
   Stress85.stressChargeLocalCoreCutoffRemovalLevel
+
+------------------------------------------------------------------------
+-- Current Goal-1 Clay frontier.
+--
+-- R474 is the preferred least-privilege Goal-1 route.
+-- R546/R558 remain the broader normalized source-family and critical-path views.
+------------------------------------------------------------------------
+
+toeGoal1FiniteSymmetryAndRPApplicationLevel : ProofLevel
+toeGoal1FiniteSymmetryAndRPApplicationLevel =
+  R474.aFiniteSymmetryAndRPApplicationLevel
+
+toeGoal1A1CurrentStepBetaSourceLevel : ProofLevel
+toeGoal1A1CurrentStepBetaSourceLevel =
+  R474.a1CurrentStepBetaSourceLevel
+
+toeGoal1A2HistoryBetaShellSameObjectLevel : ProofLevel
+toeGoal1A2HistoryBetaShellSameObjectLevel =
+  R474.a2HistoryBetaShellSameObjectLevel
+
+toeGoal1A3SameFamilyContinuumAndOSLevel : ProofLevel
+toeGoal1A3SameFamilyContinuumAndOSLevel =
+  R474.a3SameFamilyContinuumAndOSLevel
+
+toeGoal1A45MomentToOS05Level : ProofLevel
+toeGoal1A45MomentToOS05Level =
+  R474.a45MomentToOS05Level
+
+toeGoal1BLiteralPublishedSelectedLocalizationLevel : ProofLevel
+toeGoal1BLiteralPublishedSelectedLocalizationLevel =
+  R474.bLiteralPublishedSelectedLocalizationLevel
+
+toeGoal1BPhysicalRateSemanticsLevel : ProofLevel
+toeGoal1BPhysicalRateSemanticsLevel =
+  R474.bPhysicalRateSemanticsLevel
+
+toeGoal1BFiniteToPositiveTransferGapCompilerLevel : ProofLevel
+toeGoal1BFiniteToPositiveTransferGapCompilerLevel =
+  R474.bFiniteToPositiveTransferGapCompilerLevel
+
+toeGoal1BLiteralClayT2SemanticsLevel : ProofLevel
+toeGoal1BLiteralClayT2SemanticsLevel =
+  R474.bLiteralClayT2SemanticsLevel
+
+toeGoal1CStressFiniteSameFamilySourceLevel : ProofLevel
+toeGoal1CStressFiniteSameFamilySourceLevel =
+  R474.cStressFiniteSameFamilySourceLevel
+
+toeGoal1CStressLiteralDensityDerivativeLevel : ProofLevel
+toeGoal1CStressLiteralDensityDerivativeLevel =
+  R474.cStressLiteralDensityDerivativeLevel
+
+toeGoal1CStressSameFamilyOSRecoveryLevel : ProofLevel
+toeGoal1CStressSameFamilyOSRecoveryLevel =
+  R474.cStressSameFamilyOSRecoveryLevel
+
+toeGoal1CPhysicalOPERemainderIsMarkedTailLevel : ProofLevel
+toeGoal1CPhysicalOPERemainderIsMarkedTailLevel =
+  R474.cPhysicalOPERemainderIsMarkedTailLevel
+
+toeGoal1COneStepAFRGIdentificationLevel : ProofLevel
+toeGoal1COneStepAFRGIdentificationLevel =
+  R474.cOneStepAFRGIdentificationLevel
+
+toeGoal1CExactSameFamilySourceCutLevel : ProofLevel
+toeGoal1CExactSameFamilySourceCutLevel =
+  R474.cExactSameFamilySourceCutLevel
+
+toeGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
+toeGoal1G1ArbitraryCompactSimpleSourceMapLevel =
+  R474.g1ArbitraryCompactSimpleSelectedBackgroundSourceMapLevel
+
+toeGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
+toeGoal1G2SameSystemNontrivialitySemanticsLevel =
+  R474.g2SameSystemClayNontrivialitySemanticsLevel
+
+toeGoal1TerminalCompilerLevel : ProofLevel
+toeGoal1TerminalCompilerLevel =
+  R474.round474TerminalCompilerLevel
+
+toeGoal1CurrentFrontierCompilerLevel : ProofLevel
+toeGoal1CurrentFrontierCompilerLevel =
+  R474.round474CurrentFrontierCompilerLevel
+
+toeGoal1ExplicitPeterWeylRPMandatory : Bool
+toeGoal1ExplicitPeterWeylRPMandatory =
+  R474.explicitPeterWeylRPMandatory
+
+toeGoal1ProjectiveProkhorovMandatory : Bool
+toeGoal1ProjectiveProkhorovMandatory =
+  R474.projectiveProkhorovMandatory
+
+toeGoal1IndependentKPDatumSelectionMandatory : Bool
+toeGoal1IndependentKPDatumSelectionMandatory =
+  R474.independentKPDatumSelectionMandatory
+
+toeGoal1PostHocCMP116MagnitudeEqualityMandatory : Bool
+toeGoal1PostHocCMP116MagnitudeEqualityMandatory =
+  R474.postHocCMP116MagnitudeEqualityMandatory
+
+toeGoal1IndependentFourthCumulantMandatory : Bool
+toeGoal1IndependentFourthCumulantMandatory =
+  R474.independentFourthCumulantMandatory
 
 ------------------------------------------------------------------------
 -- Current normalized source frontier.
