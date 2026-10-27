@@ -95,6 +95,11 @@ C3 character, winding-state model, or physical torque law.
 | Maxwell conducting boundary | `DASHI.Physics.QuantumVacuum.PerfectConductorMaxwellSpectrumBidiExact`; `tangentialElectricZero`, `ConductingModeEigenproblem` | **Parallel plates**, not a solved curved spiral enclosure |
 | Magnetic-helicity Fourier laws | `DASHI.Physics.Plasma.MHDMagneticHelicityHelicalWeightExact` | Existing fluid/plasma operator; not physical connection torsion |
 | Source/promotion rules | `DASHI.Promotion.CrossDomainClaimPromotionBoundary` and `DASHI.Empirical.GRQuantumPredictionProtocol` | Existing provenance, preregistration and non-promotion owners |
+| Calibrated helical screw frame | `DASHI.Biology.Physical.BDNACalibratedHelicalGeometryExact`; `HelicalFrame`, `composeHelical`, pitch/twist reference regression | **Existing physical-unit calibration pattern**, DNA values are not valid aluminium apparatus parameters |
+| Ordered rigid-motion / SE(3) | `DASHI.Biology.Physical.BDNAStepSE3CompositionExact` and `DASHI.Geometry.RigidMotionSemidirectProductExact`; rigid-step product, associativity | Reuse the rigid-motion **group law** without carrying DNA chemistry or biological parameters |
+| Observer-conditioned optical measurement | `DASHI.Physics.Textile.TextileOpticalTransportBridgeExact`; illumination, material calibration, transport and observer readout | Exact reusable **observation architecture**; textile fibre optical coefficients are not an aluminium BRDF |
+| Generic physical EM coupling | `DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact` and `DASHI.Promotion.MaxwellExteriorCalculusAdapter` | Existing Maxwell field/method sockets; curved-metal validation remains apparatus-specific |
+| Acoustic/RF phase network | `DASHI.Physics.Foundations.ResonantFlightAcoustomechanicalCrossPollinationExact` | Existing coupling roles; structural acoustic/RF equivalence is explicitly blocked |
 
 The updated Kozyrev Agda owner **imports rather than copies** these
 source modules. It directly reuses five theorem/proof values: finite wreath
@@ -128,7 +133,8 @@ apparatus realisation.
 ### The actual shortest unsolved cut
 
 What repo inspection **did not establish** is not a general theory of
-spirals, wreath actions, electromagnetic fields or torsion:
+spirals, wreath actions, rigid-motion frames, observation systems,
+electromagnetic fields or torsion:
 
 1. **Patent geometry selection:** a measured, edition-qualified metal
    surface and material parameters, with the 0.5/1.5 mm discrepancy
@@ -138,8 +144,8 @@ spirals, wreath actions, electromagnetic fields or torsion:
    carrier; handedness, winding, units, contact conditions and boundary
    orientation must commute. A map from a ternary path alone is not
    sufficient to characterise arbitrary smooth geometry.
-3. **Same-geometry physical boundary-value operator:** restrict existing
-   Maxwell/acoustic/scattering machinery to the selected *curved metallic*
+3. **Same-geometry physical boundary-value operator:** instantiate existing
+   Maxwell/acoustic/scattering machinery on the selected *curved metallic*
    enclosure, with measured conductivity, frequency, loss, apertures and
    material response. The repository's parallel-plate perfect-conductor
    interface and stationary-phase toy are not already that solution.
@@ -155,7 +161,9 @@ spirals, wreath actions, electromagnetic fields or torsion:
    were verified by this source audit.
 
 P0/P1 mathematical construction is therefore substantially **reuse
-complete**. P2 is now a **seven-obligation realisation cut** in
+complete**. Existing calibrated SE(3) and observer-transport *interfaces*
+also make the P2 implementation an instantiation task, not a new
+physics framework. P2 is now a **seven-obligation realisation cut** in
 `canonicalExistingGeometryRealisationCut`, not a request to build new
 mathematical spirals or wreaths. P3–P6 are distinct measurement,
 mechanism and safety gates.
