@@ -126,6 +126,14 @@ fiveTritQuadraticPartition :
     + fiveTritNormTwoCount
 fiveTritQuadraticPartition = refl
 
+fiveTritCarrierCountAsThreePowerFive :
+  fiveTritCarrierCount ≡ 3 * 3 * 3 * 3 * 3
+fiveTritCarrierCountAsThreePowerFive = refl
+
+threeTimesNonzeroIsotropicCountIs240 :
+  3 * fiveTritNonzeroIsotropicCount ≡ 240
+threeTimesNonzeroIsotropicCountIs240 = refl
+
 puncturedFourTritCount : Nat
 puncturedFourTritCount = 80
 
