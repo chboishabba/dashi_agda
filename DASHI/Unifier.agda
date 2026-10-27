@@ -313,3 +313,12 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+------------------------------------------------------------------------
+-- Source-audit evidence boundary: exact imported proof owners.
+-- These imports make source-truth and causal-identifiability limits visible
+-- at the unifier root. No ESD implementation or interface is changed.
+------------------------------------------------------------------------
+import DASHI.Wikimedia.IbrahimSnowballInvestigativeClaimSourceLineageBidiExact as SourceGenealogy
+import DASHI.Cognition.HardtIbrahimSourceRootMaxCutExact as HardtSourceCase
+import DASHI.Cognition.HardtBrainInterventionNonidentifiabilityExact as HardtCausalCase
