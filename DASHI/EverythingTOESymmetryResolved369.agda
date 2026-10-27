@@ -7,7 +7,7 @@ module DASHI.EverythingTOESymmetryResolved369 where
 
 import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
-import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
+import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact as NSTOE
 
 -- Reuse the existing exact finite GR/quantum proof-term regression.
 -- It contains a terminal physical non-promotion theorem.
@@ -24,3 +24,19 @@ toeNavierStokesClayPromotionRemainsFalse :
   NSMaxCut.clayPromotion ≡ false
 toeNavierStokesClayPromotionRemainsFalse =
   NSABCDTOE.nsClayPromotionRemainsFalse
+
+
+toeNavierStokesR650CombinedSelfExternalRecombined :
+  NSTOE.NSR650.round650SelfExternalRecombineToSingleGlobalCommutator ≡ true
+toeNavierStokesR650CombinedSelfExternalRecombined =
+  NSTOE.toeNSR650CombinedSelfExternalRecombined
+
+toeNavierStokesR650CombinedPaymentRemainsOpen :
+  NSTOE.NSR650.round650CombinedSelfExternalCutoffUniformPaymentClosed ≡ false
+toeNavierStokesR650CombinedPaymentRemainsOpen =
+  NSTOE.toeNSR650CombinedCutoffUniformPaymentRemainsOpen
+
+toeNavierStokesR650ClayPromotionRemainsFalse :
+  NSTOE.NSR650.round650ClayPromotion ≡ false
+toeNavierStokesR650ClayPromotionRemainsFalse =
+  NSTOE.toeNSR650ClayPromotionRemainsFalse
