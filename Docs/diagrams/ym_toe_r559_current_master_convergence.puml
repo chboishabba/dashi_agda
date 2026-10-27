@@ -32,7 +32,7 @@ R558 --> R559 : canonical CriticalFamily
 
 R559 --> Joint : Pareto / max-cut view
 BRG --> Joint : density / regular-E / Casimir / stress
-RGFrontier --> Joint : direct non-promotion theorem
+RGFrontier --> Joint : direct non-promotion theorem\nG58 --> Joint : exact 58-count + proof posture
 
 R559 --> ROOT : public normalized surface
 R559 --> UNI : public normalized surface
@@ -61,7 +61,7 @@ Clay completion remains false.
 No ESD or digital_esd mutation.
 end note
 
-note bottom of BRG
+note bottom of G58\nThe cutset definition is machine checked.\nThe inhabitants remain conditional.\nNo field is discharged by this TOE weld.\nend note\n\nnote bottom of BRG
 Tadeusz Balaban and existing
 compact-Lie/Casimir source owners
 retain attribution.
