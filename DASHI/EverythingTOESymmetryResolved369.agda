@@ -1,3 +1,4 @@
+import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
@@ -1131,3 +1132,33 @@ toeExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 toeExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+
+------------------------------------------------------------------------
+-- Governed legal-workflow compliance extension.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowComplianceReceipt :
+  LegalCompliance.GovernedLegalWorkflowComplianceTOEReceipt
+toeGovernedLegalWorkflowComplianceReceipt =
+  LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+toeExpertQualificationDoesNotCreateForensicCompliance :
+  LegalCompliance.QualificationAutomaticallyForensicCompliance → ⊥
+toeExpertQualificationDoesNotCreateForensicCompliance =
+  LegalCompliance.expertQualificationDoesNotCreateForensicCompliance
+
+toeLegalReviewDoesNotCreateClaimTruth :
+  LegalCompliance.LegalReviewDecisionCreatesClaimTruth → ⊥
+toeLegalReviewDoesNotCreateClaimTruth =
+  LegalCompliance.legalReviewDoesNotCreateClaimTruth
+
+toeOfficialLegalSurfaceDoesNotRecoverFineState :
+  LegalCompliance.OfficialLegalSurfaceRecoversFineState → ⊥
+toeOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalCompliance.officialLegalSurfaceDoesNotRecoverFineState
+
+toeLegalityAloneDoesNotCreateLegitimacy :
+  LegalCompliance.LegalOnlyCreatesLegitimacy → ⊥
+toeLegalityAloneDoesNotCreateLegitimacy =
+  LegalCompliance.legalityAloneDoesNotCreateLegitimacy
