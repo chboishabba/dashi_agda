@@ -18,6 +18,8 @@ import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selecte
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
+import DASHI.ComputerScience.TriadicScalarCompactCodecReferenceExact as CodecRef
 
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F.
@@ -209,3 +211,33 @@ toePermutationNoGoDoesNotCreateLinearAction :
   Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
 toePermutationNoGoDoesNotCreateLinearAction =
   Ibrahim.noGoDoesNotCreateLinearAction
+
+------------------------------------------------------------------------
+-- Exact finite-27 codec BIDI normalization.
+--
+-- Reuse the canonical ABI functions and both inverse laws. This pays the
+-- finite Agda carrier BIDI coordinate only. Runtime and device promotion are
+-- separate claims and are not inferred here.
+------------------------------------------------------------------------
+
+TernaryEncodedState : Set
+TernaryEncodedState = CodecRef.Encoded3
+
+TernaryState27 : Set
+TernaryState27 = ABI.State27
+
+toe27StateCode : TernaryEncodedState → TernaryState27
+toe27StateCode = ABI.stateCode
+
+toe27StateDecode : TernaryState27 → TernaryEncodedState
+toe27StateDecode = ABI.stateDecode
+
+toe27StateDecodeStateCode :
+  (e : TernaryEncodedState) →
+  toe27StateDecode (toe27StateCode e) ≡ e
+toe27StateDecodeStateCode = ABI.stateDecode-stateCode
+
+toe27StateCodeStateDecode :
+  (i : TernaryState27) →
+  toe27StateCode (toe27StateDecode i) ≡ i
+toe27StateCodeStateDecode = ABI.stateCode-stateDecode
