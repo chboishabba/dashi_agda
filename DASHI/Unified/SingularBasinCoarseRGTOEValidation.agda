@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.SingularBasinCoarseRGTOEValidation where
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as Owner
