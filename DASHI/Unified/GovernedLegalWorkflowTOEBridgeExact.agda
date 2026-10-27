@@ -320,14 +320,6 @@ toeProducerIdentityDoesNotIdentifyResidual =
 -- They add no Actionstep ontology and no new legal semantics.
 ------------------------------------------------------------------------
 
-QualificationAutomaticallyForensicCompliance : Set
-QualificationAutomaticallyForensicCompliance =
-  ExpertProduction.QualificationAutomaticallyForensicCompliance
-
-ReportAdmissionRepairsMissingInput : Set
-ReportAdmissionRepairsMissingInput =
-  ExpertProduction.ReportAdmissionRepairsMissingInput
-
 LegalReviewDecisionCreatesClaimTruth : Set
 LegalReviewDecisionCreatesClaimTruth =
   RealReview.LegalReviewDecisionCreatesClaimTruth
@@ -341,14 +333,9 @@ LegalOnlyCreatesLegitimacy =
   Legitimacy.AdmittedLegitimacy Legitimacy.demoEvidence Legitimacy.legalOnly
 
 toeExpertQualificationDoesNotCreateForensicCompliance :
-  QualificationAutomaticallyForensicCompliance → ⊥
+  ExpertProduction.QualificationAutomaticallyForensicCompliance → ⊥
 toeExpertQualificationDoesNotCreateForensicCompliance =
   ExpertProduction.qualificationDoesNotAutomaticallyProveForensicCompliance
-
-toeReportAdmissionDoesNotRepairMissingInput :
-  ReportAdmissionRepairsMissingInput → ⊥
-toeReportAdmissionDoesNotRepairMissingInput =
-  ExpertProduction.reportAdmissionDoesNotRepairMissingInput
 
 toeLegalReviewDoesNotCreateClaimTruth :
   LegalReviewDecisionCreatesClaimTruth → ⊥
