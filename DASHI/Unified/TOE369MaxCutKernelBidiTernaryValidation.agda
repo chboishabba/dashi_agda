@@ -89,3 +89,44 @@ unifierFiniteChartFirewallMatches :
   Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
 unifierFiniteChartFirewallMatches =
   Unifier.unifier369FiniteChartDoesNotCreateLinearMultiplicityAction
+
+------------------------------------------------------------------------
+-- Exact finite-27 codec BIDI and compiled-host non-promotion regression.
+------------------------------------------------------------------------
+
+ownerStateDecodeStateCode :
+  (e : Owner.TernaryEncodedState) →
+  Owner.toe27StateDecode (Owner.toe27StateCode e) ≡ e
+ownerStateDecodeStateCode =
+  Owner.toe27StateDecodeStateCode
+
+ownerStateCodeStateDecode :
+  (i : Owner.TernaryState27) →
+  Owner.toe27StateCode (Owner.toe27StateDecode i) ≡ i
+ownerStateCodeStateDecode =
+  Owner.toe27StateCodeStateDecode
+
+toeStateCodeStateDecode :
+  (i : Owner.TernaryState27) →
+  TOE.toe369Ternary27StateCode (TOE.toe369Ternary27StateDecode i) ≡ i
+toeStateCodeStateDecode =
+  TOE.toe369Ternary27StateCodeStateDecode
+
+unifierStateCodeStateDecode :
+  (i : Owner.TernaryState27) →
+  Unifier.unifier369Ternary27StateCode
+    (Unifier.unifier369Ternary27StateDecode i) ≡ i
+unifierStateCodeStateDecode =
+  Unifier.unifier369Ternary27StateCodeStateDecode
+
+toeRuntimeSourceStillDoesNotCreateKernelCertification =
+  TOE.toe369Ternary27RuntimeSourceDoesNotCreateKernelCertification
+
+unifierRuntimeSourceStillDoesNotCreateKernelCertification =
+  Unifier.unifier369Ternary27RuntimeSourceDoesNotCreateKernelCertification
+
+toeCompilerSuccessStillDoesNotCreateAgdaKernelSuccess =
+  TOE.toe369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+unifierCompilerSuccessStillDoesNotCreateAgdaKernelSuccess =
+  Unifier.unifier369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess
