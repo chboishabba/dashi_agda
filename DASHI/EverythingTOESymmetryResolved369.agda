@@ -656,3 +656,13 @@ toe369SCALEFewCommitBarriersDoNotProveSemanticIndependence :
   SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
 toe369SCALEFewCommitBarriersDoNotProveSemanticIndependence =
   SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
+
+
+------------------------------------------------------------------------
+-- SCALE Evidence Review ZKP frame.
+------------------------------------------------------------------------
+
+toe369SCALEEvidenceReviewTOEZKPFrame :
+  SCALEReview.SCALEEvidenceReviewTOEZKPFrame
+toe369SCALEEvidenceReviewTOEZKPFrame =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
