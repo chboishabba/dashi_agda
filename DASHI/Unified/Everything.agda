@@ -268,3 +268,63 @@ governedExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 governedExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+------------------------------------------------------------------------
+-- Direct governed legal-workflow firewall facade.
+-- This facade adds no workflow, Actionstep, legal-rule, or authority semantics.
+------------------------------------------------------------------------
+
+governedDurableReviewStateDoesNotCreateTruth :
+  LegalGovernance.DurableReviewStateCreatesTruth → ⊥
+governedDurableReviewStateDoesNotCreateTruth =
+  LegalGovernance.toeDurableReviewStateDoesNotCreateTruth
+
+governedAcceptanceReceiptDoesNotMutateMatter :
+  LegalGovernance.AcceptanceReceiptMutatesMatter → ⊥
+governedAcceptanceReceiptDoesNotMutateMatter =
+  LegalGovernance.toeAcceptanceReceiptDoesNotMutateMatter
+
+governedExternalSourceDoesNotAdmitTruth :
+  LegalGovernance.ExternalSourceClaimImpliesTruthAdmitted → ⊥
+governedExternalSourceDoesNotAdmitTruth =
+  LegalGovernance.toeExternalSourceDoesNotAdmitTruth
+
+governedLegalAuthorityDoesNotCreateTruthStatus :
+  LegalGovernance.LegalAuthorityCreatesTruthStatus → ⊥
+governedLegalAuthorityDoesNotCreateTruthStatus =
+  LegalGovernance.toeLegalAuthorityDoesNotCreateTruthStatus
+
+governedPromotionStageDoesNotBypassPromotionAuthority :
+  LegalGovernance.PromotionStageMaySkipPromotionAuthority → ⊥
+governedPromotionStageDoesNotBypassPromotionAuthority =
+  LegalGovernance.toePromotionStageDoesNotBypassPromotionAuthority
+
+governedSourceRealisedWrongTypeDoesNotAutoViolate :
+  LegalGovernance.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
+governedSourceRealisedWrongTypeDoesNotAutoViolate =
+  LegalGovernance.toeSourceRealisedWrongTypeDoesNotAutoViolate
+
+governedElementsDoNotEraseExceptionsOrDefences :
+  LegalGovernance.AllElementsProvedIgnoresExceptionsDefences → ⊥
+governedElementsDoNotEraseExceptionsOrDefences =
+  LegalGovernance.toeElementsDoNotEraseExceptionsOrDefences
+
+governedKernelClosureDoesNotMeanSemanticClosure =
+  LegalGovernance.toeKernelClosureDoesNotMeanSemanticClosure
+
+governedFormalProofDoesNotCreateExternalWorldTruth =
+  LegalGovernance.toeFormalProofDoesNotCreateExternalWorldTruth
+
+governedComplianceCompositionRetainsIntermediateWitness =
+  LegalGovernance.complianceCompositionRetainsIntermediateWitnessIsTrue
+    LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
+
+governedSameLegalSystemDoesNotCloseAuthority =
+  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+governedDocumentRoleDoesNotSupplyLegalSourceAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+governedCanonicalLegalSourceAuthorityBoundary =
+  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
+
