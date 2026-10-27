@@ -362,3 +362,55 @@ invariantHandoffCarriesExactReuseClaimTruthFirewall :
 invariantHandoffCarriesExactReuseClaimTruthFirewall =
   Bridge.exactReuseClaimTruthFirewall
     Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+------------------------------------------------------------------------
+-- Direct legal-governance firewall regression.
+------------------------------------------------------------------------
+
+unifierDurableReviewTruthAliasIsExact :
+  Bridge.DurableReviewStateCreatesTruth → ⊥
+unifierDurableReviewTruthAliasIsExact =
+  Unifier.unifierDurableReviewStateDoesNotCreateTruth
+
+unifierAcceptanceMutationAliasIsExact :
+  Bridge.AcceptanceReceiptMutatesMatter → ⊥
+unifierAcceptanceMutationAliasIsExact =
+  Unifier.unifierAcceptanceReceiptDoesNotMutateMatter
+
+unifierExternalSourceTruthAliasIsExact :
+  Bridge.ExternalSourceClaimImpliesTruthAdmitted → ⊥
+unifierExternalSourceTruthAliasIsExact =
+  Unifier.unifierExternalSourceDoesNotAdmitTruth
+
+unifierLegalAuthorityTruthAliasIsExact :
+  Bridge.LegalAuthorityCreatesTruthStatus → ⊥
+unifierLegalAuthorityTruthAliasIsExact =
+  Unifier.unifierLegalAuthorityDoesNotCreateTruthStatus
+
+unifierPromotionAuthorityAliasIsExact :
+  Bridge.PromotionStageMaySkipPromotionAuthority → ⊥
+unifierPromotionAuthorityAliasIsExact =
+  Unifier.unifierPromotionStageDoesNotBypassPromotionAuthority
+
+unifierWrongTypeViolationAliasIsExact :
+  Bridge.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
+unifierWrongTypeViolationAliasIsExact =
+  Unifier.unifierSourceRealisedWrongTypeDoesNotAutoViolate
+
+unifierExceptionsDefencesAliasIsExact :
+  Bridge.AllElementsProvedIgnoresExceptionsDefences → ⊥
+unifierExceptionsDefencesAliasIsExact =
+  Unifier.unifierElementsDoNotEraseExceptionsOrDefences
+
+unifierComplianceWitnessAliasIsCanonical :
+  Unifier.unifierComplianceCompositionRetainsIntermediateWitness
+  ≡
+  Bridge.complianceCompositionRetainsIntermediateWitnessIsTrue
+    Bridge.canonicalGovernedLegalWorkflowTOEBoundary
+unifierComplianceWitnessAliasIsCanonical = refl
+
+unifierCanonicalLegalAuthorityBoundaryIsExact :
+  Unifier.unifierCanonicalLegalSourceAuthorityBoundary
+  ≡ Bridge.toeCanonicalLegalSourceAuthorityBoundary
+unifierCanonicalLegalAuthorityBoundaryIsExact = refl
+
