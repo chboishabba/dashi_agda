@@ -7,6 +7,7 @@ on:
       - chatgpt/zipf-family-27-law-maxcut-20261027
     paths:
       - 'DASHI/Statistics/Zipf*.agda'
+      - 'DASHI/Everything.agda'
       - 'scripts/zipf*.py'
       - 'scripts/pareto_benford_lorenz_bridge.py'
       - 'tests/test_zipf*.py'
@@ -15,6 +16,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Statistics/Zipf*.agda'
+      - 'DASHI/Everything.agda'
       - 'scripts/zipf*.py'
       - 'scripts/pareto_benford_lorenz_bridge.py'
       - 'tests/test_zipf*.py'
@@ -64,6 +66,8 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends agda agda-stdlib
           agda --version
+      - name: Confirm main import graph links the scoped umbrella
+        run: grep -Fx 'import DASHI.Statistics.ZipfFamilyEverything' DASHI/Everything.agda
       - name: Compile canonical 27-topic import closure
         run: |
           set -eu
