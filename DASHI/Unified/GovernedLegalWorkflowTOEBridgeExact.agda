@@ -56,6 +56,8 @@ module DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.CompositionalComplianceExact as Compliance
@@ -67,6 +69,9 @@ import DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact as Matter
 import DASHI.Cognition.PNF.SensibLawProvenanceSemanticStatusOrthogonalityExact as Status
 import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
 import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact as Applicability
+import DASHI.Interop.ITIRFederatedTypedWorldProjectionExact as Suite
+import DASHI.Interop.DistributedEpistemicFabricSourceAtlasExact as Fabric
+import DASHI.Security.AgentAuthorityTrajectoryExact as Authority
 
 ------------------------------------------------------------------------
 -- Type aliases keep Unifier thin.
@@ -330,3 +335,164 @@ canonicalGovernedLegalWorkflowTOEBoundary =
     false refl
     false refl
     true refl
+
+
+------------------------------------------------------------------------
+-- Cross-suite authority handoff.
+--
+-- Reuse existing owners.
+-- Do not infer new authority from workflow state.
+------------------------------------------------------------------------
+
+toeSuiteRoleMap : Suite.SuiteRoleMap
+toeSuiteRoleMap = Suite.canonicalSuiteRoleMap
+
+toeCaseySelectionDoesNotCreateWorldTruth :
+  Suite.CaseySelectionCreatesWorldTruth → ⊥
+toeCaseySelectionDoesNotCreateWorldTruth =
+  Suite.caseySelectionIsNotWorldTruth
+
+toeFormalProofDoesNotCreateExternalWorldTruth :
+  Suite.FormalProofCreatesExternalWorldTruth → ⊥
+toeFormalProofDoesNotCreateExternalWorldTruth =
+  Suite.formalProofIsNotExternalWorldTruth
+
+toeKnowledgeDoesNotCreateExecutionAuthority :
+  Authority.KnowledgeIsAuthority → ⊥
+toeKnowledgeDoesNotCreateExecutionAuthority =
+  Authority.knowledgeIsNotAuthority
+
+toeMetaIntrospectorContribution : Fabric.ContributionAttribution
+toeMetaIntrospectorContribution =
+  Fabric.jmdRepositoryContribution
+
+toeMetaIntrospectorAttributionRule : String
+toeMetaIntrospectorAttributionRule =
+  Fabric.attributionRule
+
+------------------------------------------------------------------------
+-- ZKP O/R/C/S/L/P/G/F control receipt.
+--
+-- This record is process metadata.
+-- It adds no legal rule.
+-- It adds no semantic authority.
+-- It adds no standards certification.
+------------------------------------------------------------------------
+
+record GovernedLegalWorkflowZKPReceipt : Set where
+  constructor governed-legal-workflow-zkp-receipt
+  field
+    objectiveRefs : List String
+    reuseRefs : List String
+    constructionRefs : List String
+    safetyInvariantRefs : List String
+    laneRefs : List String
+    preconditionRefs : List String
+    postconditionRefs : List String
+    governanceRefs : List String
+    verificationRefs : List String
+
+    standardsAreDesignLenses : Bool
+    standardsAreDesignLensesIsTrue :
+      standardsAreDesignLenses ≡ true
+
+    standardsCertificationClaimed : Bool
+    standardsCertificationClaimedIsFalse :
+      standardsCertificationClaimed ≡ false
+
+    esdSurfaceMutationAllowed : Bool
+    esdSurfaceMutationAllowedIsFalse :
+      esdSurfaceMutationAllowed ≡ false
+
+    metaIntrospectorRepositoriesOwnDASHITheorems : Bool
+    metaIntrospectorRepositoriesOwnDASHITheoremsIsFalse :
+      metaIntrospectorRepositoriesOwnDASHITheorems ≡ false
+
+open GovernedLegalWorkflowZKPReceipt public
+
+canonicalGovernedLegalWorkflowZKPReceipt :
+  GovernedLegalWorkflowZKPReceipt
+canonicalGovernedLegalWorkflowZKPReceipt =
+  governed-legal-workflow-zkp-receipt
+    ( "Converge exact SensibLaw and legal-workflow governance proofs into the focused DASHI TOE import graph."
+    ∷ [] )
+    ( "DASHI.Core.CompositionalComplianceExact"
+    ∷ "DASHI.Core.ITIRGovernanceControlCaseExact"
+    ∷ "DASHI.Governance.FormalisationGovernanceCapstoneExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawProvenanceSemanticStatusOrthogonalityExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact"
+    ∷ "DASHI.Interop.ITIRFederatedTypedWorldProjectionExact"
+    ∷ "DASHI.Security.AgentAuthorityTrajectoryExact"
+    ∷ [] )
+    ( "Normalize exact theorem aliases only."
+    ∷ "Retain the intermediate compliance witness."
+    ∷ "Expose the existing cross-suite role map."
+    ∷ [] )
+    ( "Task completion does not create truth."
+    ∷ "Database commit does not create semantic authority."
+    ∷ "Accepted review does not pay legal applicability."
+    ∷ "Matter acceptance does not create truth."
+    ∷ "Citation does not realise a legal rule by itself."
+    ∷ "A semantic meet does not prove legal applicability by itself."
+    ∷ "Control evidence does not create truth."
+    ∷ "A passing control does not create certification."
+    ∷ "Casey selection does not create world truth."
+    ∷ "Knowledge does not create execution authority."
+    ∷ "Kernel closure does not create semantic closure."
+    ∷ [] )
+    ( "dashi_agda is the formal reference lane."
+    ∷ "SensibLaw/SLR owns review, admission, semantic construction, and legal consumer projection."
+    ∷ "casey-git-clone owns candidate, workspace, selection, collapse, and build authority."
+    ∷ "Meta-introspector repositories remain process and implementation context only."
+    ∷ "ESD surfaces are import-only for this TOE lane."
+    ∷ [] )
+    ( "Every imported proof owner exists."
+    ∷ "The focused TOE root imports the normalized bridge."
+    ∷ "DASHI.Unifier exposes aliases only."
+    ∷ "No ESD or digital_esd path is edited."
+    ∷ "No trust escape is introduced."
+    ∷ [] )
+    ( "The TOE root reaches the exact governance non-promotion proofs."
+    ∷ "The TOE root reaches the cross-suite authority firewalls."
+    ∷ "Original theorem owners keep proof ownership."
+    ∷ "Meta-introspector repositories keep source attribution."
+    ∷ "Standards remain control lenses only."
+    ∷ [] )
+    ( "ITIL change and service-management lens."
+    ∷ "ISO 9000 family quality-management lens."
+    ∷ "ISO/IEC 42001 AI-management lens."
+    ∷ "ISO/IEC 27001 information-security lens."
+    ∷ "ISO/IEC 27701 privacy-information lens."
+    ∷ "ISO/IEC 23894 AI-risk lens."
+    ∷ "ISO 9241 human-system interaction lens."
+    ∷ "NIST AI RMF Govern, Map, Measure, and Manage lens."
+    ∷ "Six Sigma DMAIC quality-control lens."
+    ∷ "C4 and PlantUML architecture-view lens."
+    ∷ "ASD-STE100 plain-language writing lens."
+    ∷ [] )
+    ( "Run dashi-repo related for reused theorem owners."
+    ∷ "Run dashi-repo discover for the governance handoff."
+    ∷ "Run dashi-repo lineage for SensibLaw and Unified owners."
+    ∷ "Run the focused static contract."
+    ∷ "Run dashi-agda-preflight on the bridge, regression, TOE root, and Unifier."
+    ∷ "Reject trust escapes."
+    ∷ "Reject ESD path changes."
+    ∷ "Kernel-check the focused Agda path."
+    ∷ [] )
+    true refl
+    false refl
+    false refl
+    false refl
+
+toeProcessContextRefs : List String
+toeProcessContextRefs =
+  "meta-introspector/zkperf — process and tooling context; no theorem copied"
+  ∷ "meta-introspector/zos-server — reconciliation/runtime context; original attribution retained"
+  ∷ "meta-introspector/erdfa-py — process/tooling context; original attribution retained"
+  ∷ "meta-introspector/aristotle-cli-rs — proof-project tooling context; original attribution retained"
+  ∷ "chboishabba/zkSEC — authority/receipt process context; no theorem copied"
+  ∷ []
