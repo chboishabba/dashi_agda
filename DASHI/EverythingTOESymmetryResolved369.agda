@@ -124,7 +124,7 @@ toeCMP119PreferredAdapterDebt =
 toeCMP119PreferredWorkIsPhysicalSourcePackages =
   CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
 
-toeCMP119NoConditionalSourceLeafPromoted =
+toeCMP119NoSyntheticPhysicalIdentificationAdded =
   CMP119Preferred.noSyntheticPhysicalIdentificationAdded
 
 toeCMP119RepresentationOnlySameObjectDebtRemains =
