@@ -13,6 +13,7 @@ package "Existing DASHI owners" {
 }
 
 package "Normalized acquisition boundary" {
+  component "Fleet R5 ordinal cut\nFin 584 / Fin 44 / Fin 58\nno persisted row identity" as Ordinal
   component "Fleet58ManifestAcquisitionExact" as Manifest
   component "Fleet58ManifestAcquisitionRegression" as Regression
 }
@@ -25,6 +26,8 @@ package "DASHI TOE consumers" {
 
 R5 --> Fleet : count/class receipt only
 Graph --> Manifest : source graph identity only
+Fleet --> Ordinal : exact finite carriers
+Ordinal --> Manifest : 58 target slots only
 Fleet --> Manifest : canonical 584 / 44 / 58 partition
 Bound --> Manifest : exact acquisition alignment
 Pareto --> Manifest : search priority does not create proof
@@ -42,6 +45,8 @@ Preconditions:
 - source-controlled 58-row manifest is absent
 
 Invariants:
+- Fin 58 is the target ordinal only
+- shared cardinality does not create row identity
 - count 58 does not identify named rows
 - 584 discharged fibres stay discharged
 - 44 contradiction gaps stay separate
@@ -52,7 +57,8 @@ Invariants:
 
 Postcondition:
 - per-gap dispatch stays false until the named manifest is acquired
-- after acquisition, run related_symbols, discover, and round_lineage
+- referee runs related_symbols, discover, round_lineage, and preflight on the canonical graph
+- after named-manifest acquisition, per-gap dispatch may be evaluated
 end note
 
 @enduml
