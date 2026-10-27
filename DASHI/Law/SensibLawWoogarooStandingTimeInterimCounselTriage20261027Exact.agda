@@ -121,7 +121,7 @@ nationalEPAEPOOriginal = Source.mkNoDOISource
   "7 October 2026 order; accessed 27 October 2026"
   "https://www.nationalepa.gov.au/epbc/compliance/audit-outcomes"
   Source.governmentSource
-  "Section 474A EPO power commenced 24 August 2026; regulator states three threshold beliefs: actual/likely breach, serious environmental harm, necessity. Public register records a real 7 October 2026 EPO concerning Warrengail Pastoral Company / Wombinoo Station. That different-property example proves operation of power, NOT breach at Springfield, approved action 2019/8575, nor EPO for any Woogaroo operator."
+  "Section 474A EPO power commenced 24 August 2026; regulator states three threshold beliefs: actual/likely breach, serious damage or imminent risk to the exact protected matter under s474A(2), and necessity. Public register records a real 7 October 2026 EPO concerning Warrengail Pastoral Company / Wombinoo Station. That different-property example proves operation of power, NOT breach at Springfield, approved action 2019/8575, nor EPO for any Woogaroo operator."
   Source.publicAttribution
 
 nationalEPAReportBreachOriginal : Source.AttributedSource
@@ -260,8 +260,8 @@ campaignActivityLead = litigation-gate adjrSection5Review woogarooCampaignCurren
 nationalEPA474AEnforcement : LitigationGate
 nationalEPA474AEnforcement = litigation-gate nationalEPASection474AComplianceOrder nationalEPAEPOOriginal
   caseSpecificProofOpen
-  "National EPA CEO (not a conservation group or Federal Court) may issue EPBC s474A Environment Protection Order when all statutory beliefs concern actual/likely breach, serious environmental harm and necessity. 14-day short term; possible one extension. Existing 7 Oct Warrengail order is a separate-property example."
-  "Original 15 Oct 2019/8575 conditions; same-area works/photographs, actual threatened conduct, case-specific credible approval-condition/Act breach, risk of serious harm, person against whom an EPO can lawfully issue."
+  "National EPA CEO (not a conservation group or Federal Court) may issue EPBC s474A Environment Protection Order when all statutory beliefs concern actual/likely breach, serious damage or imminent risk to a protected matter under s474A(2), and necessity. 14-day short term; possible one extension. Existing 7 Oct Warrengail order is a separate-property example."
+  "Original 15 Oct 2026 approval conditions for referral 2019/8575; same-area works, identified conduct/date, specific probable approval-condition/Act contravention, serious damage or imminent risk to a protected matter under s474A(2), CEO necessity and person lawfully subject to EPO. Original C70 Volume 3 s474A pages 107-108 and s474D page 111 visually checked."
   false refl
 
 nationalEPAComplianceReport : LitigationGate
