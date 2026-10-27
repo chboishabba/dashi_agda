@@ -117,3 +117,71 @@ psychogeographyWebIdentifierKind :
   Sources.IdentifierKind
 psychogeographyWebIdentifierKind =
   Sources.webPublicationIdentifier
+
+
+------------------------------------------------------------------------
+-- Canonical same-object receipt.
+--
+-- This record packages existing facts only.
+-- It does not introduce a cross-domain carrier.
+------------------------------------------------------------------------
+
+record PNFSourceBoundaryTOEReceipt : Set₁ where
+  constructor pnf-source-boundary-toe-receipt
+  field
+    gluingTrueLinearityStillOpen :
+      Gluing.trueGluingLinearityProvedHere ≡ false
+
+    gluingTerminalPromotionStillFalse :
+      Gluing.terminalPromotion ≡ false
+
+    selfAdjointFiniteTheoremStillOpen :
+      SelfAdjoint.finiteSelfAdjointTheoremProvedField
+        SelfAdjoint.canonicalYMFiniteSelfAdjointHamiltonianProxyHarnessResult
+      ≡ false
+
+    selfAdjointTerminalPromotionStillFalse :
+      SelfAdjoint.terminalPromotion ≡ false
+
+    dominationTheoremStillOpen :
+      Domination.hamiltonianDominationTheoremProvedField
+        Domination.canonicalYMHamiltonianDominationProxyHarnessResult
+      ≡ false
+
+    dominationTerminalPromotionStillFalse :
+      Domination.terminalPromotion ≡ false
+
+    fungalSpeciesEvidenceRequired :
+      Fungal.FungalNetworkAgencyBoundary.forestWideWoodWebClaimsNeedSpeciesSpecificEvidence
+        Fungal.canonicalFungalNetworkAgencyBoundary
+      ≡ true
+
+    fungalInternetBrainIdentityRejected :
+      Fungal.FungalNetworkAgencyBoundary.myceliumNotInternetOrBrainByDefinition
+        Fungal.canonicalFungalNetworkAgencyBoundary
+      ≡ true
+
+    kluverUniversalSymbolPromotionRejected :
+      Kluver.FormConstantPromotesUniversalSymbol →
+      ⊥
+
+    kluverRecoveredMemoryPromotionRejected :
+      Kluver.FormConstantPromotesRecoveredMemory →
+      ⊥
+
+open PNFSourceBoundaryTOEReceipt public
+
+canonicalPNFSourceBoundaryTOEReceipt :
+  PNFSourceBoundaryTOEReceipt
+canonicalPNFSourceBoundaryTOEReceipt =
+  pnf-source-boundary-toe-receipt
+    gluingProxyDoesNotProveTrueLinearity
+    gluingProxyDoesNotPromoteTerminalUnification
+    selfAdjointProxyDoesNotProveFiniteTheorem
+    selfAdjointProxyDoesNotPromoteTerminalUnification
+    dominationProxyDoesNotProveHamiltonianTheorem
+    dominationProxyDoesNotPromoteTerminalUnification
+    fungalNetworkClaimsRequireSpeciesEvidence
+    fungalMyceliumIsNotInternetOrBrain
+    kluverFormDoesNotPromoteUniversalSymbol
+    kluverFormDoesNotPromoteRecoveredMemory
