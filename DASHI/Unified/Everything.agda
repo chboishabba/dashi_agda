@@ -14,6 +14,7 @@ import DASHI.Unified.CrossScaleMatterPhysics as CrossScaleMatterPhysics
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
+import DASHI.Unified.Relate369HyperfabricPantsTOEExact as Relate369PantsTOE
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
@@ -102,3 +103,14 @@ import DASHI.Physics.Foundations.Round5FullBoundary as Round5
       Round5.Round5FullBoundary
         Round5.canonicalRound5FullBoundary
         "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
+
+
+relate369HyperfabricPantsTOEReceipt :
+  Relate369PantsTOE.Relate369HyperfabricPantsTOEReceipt
+relate369HyperfabricPantsTOEReceipt =
+  Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEReceipt
+
+relate369HyperfabricPantsTOEZKPFrame :
+  Relate369PantsTOE.Relate369HyperfabricPantsTOEZKPFrame
+relate369HyperfabricPantsTOEZKPFrame =
+  Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEZKPFrame
