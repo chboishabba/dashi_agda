@@ -1,0 +1,62 @@
+@startuml
+title DASHI TOE Balaban / fleet dual-58 convergence
+left to right direction
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+package "Canonical owners" {
+  component "BalabanRGTOERegression\ndensity / regular-E / Casimir / stress" as Balaban
+  component "FleetFormalGapTargetTOEExact\n584 discharged / 58 formal / 44 contradiction" as Fleet
+  component "GovernanceBalabanIbrahim58GapTOEExact\nindependent Gate-4 58" as Gate4
+}
+
+component "BalabanFleetDual58TOEExact" as Dual
+
+package "TOE facades" {
+  component "EverythingTOESymmetryResolved369" as Root
+  component "Unifier" as Unifier
+  component "Unified.Everything" as Unified
+}
+
+component "BalabanFleetDual58TOEValidation" as Validation
+
+Balaban --> Dual : reuse
+Fleet --> Dual : reuse
+Gate4 --> Dual : reuse
+Dual --> Root : canonical receipt
+Dual --> Unifier : canonical receipt
+Dual --> Unified : canonical receipt
+Root --> Validation : same owner
+Unifier --> Validation : same owner
+Unified --> Validation : same owner
+
+note bottom of Fleet
+External fleet planning receipt.
+Eigenvalues are routing metadata.
+584 discharged fibres stay discharged.
+44 contradiction gaps stay separate.
+Target only 58 formal gaps.
+end note
+
+note bottom of Gate4
+Repository-native Yang-Mills Gate-4 count.
+5 + 10 + 5 + 8 + 12 + 18 = 58.
+Equal cardinality does not identify it
+with the fleet formal-gap set.
+end note
+
+note bottom of Balaban
+Finite RG stays finite.
+Continuum transfer remains false.
+OS/Wightman construction remains false.
+Continuum Yang-Mills remains false.
+Mass-gap and Clay promotion remain false.
+end note
+
+note bottom of Dual
+ZKP O/R/C/S/L/P/G/F.
+No ESD mutation.
+No trust escape.
+Source ownership remains unchanged.
+end note
+@enduml
