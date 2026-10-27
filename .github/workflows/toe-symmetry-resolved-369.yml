@@ -47,6 +47,24 @@ jobs:
             dashi-agda-preflight --root . "$module"
           done
 
+
+      - name: Run repository discovery referee
+        run: |
+          dashi-repo discover "Balaban RG scale density regular-E Casimir stress continuum non-promotion" --root . --limit 30
+
+          symbols=(
+            DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact.sourceCouplingIsBetaHistoryCoupling
+            DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact.selectedRegularEIsLocalizedCompositeSum
+            DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact.classificationAdjointCasimirAtLeastTwo
+            DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact.stressSelectedDensityIndexIsUnifiedActionIndex
+            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toePublishedRGDoesNotPromoteContinuum
+          )
+          for symbol in "${symbols[@]}"; do
+            dashi-repo related "$symbol" --root . --limit 20
+          done
+
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+
       - name: Reject trust escapes
         run: |
           sources=(
