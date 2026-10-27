@@ -11,3 +11,6 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
 -- Source-typed banking, Palantir, and systemic-incidence non-promotion.
 import DASHI.Unified.RescueFinancePalantirTOENonPromotionExact
+
+-- Exact MAPS/Epstein source and governance non-promotion adapter.
+import DASHI.Unified.MAPSEpsteinTOENonPromotionExact
