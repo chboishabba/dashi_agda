@@ -1146,6 +1146,8 @@ toeBalabanPhysicalPromotionCut =
 
 import DASHI.Unified.Physics as UnifiedPhysicsOptics
 
+toeDiffuserImagingZKPFrame :
+  UnifiedPhysicsOptics.DiffuserImagingTOEZKPFrame
 toeDiffuserImagingZKPFrame =
   UnifiedPhysicsOptics.diffuserImagingZKPFrame
 
