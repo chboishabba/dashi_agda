@@ -82,6 +82,51 @@ toeBalabanRGReceipt =
 -- Normalized Balaban density, regular-E, stress, and continuum surfaces.
 ------------------------------------------------------------------------
 
+
+toeBalabanScaleDensityFlowLevel : ProofLevel
+toeBalabanScaleDensityFlowLevel =
+  BalabanRGTOE.balabanScaleDensityFlowLevel
+
+toeBalabanCompleteDensitySourceShapeLevel : ProofLevel
+toeBalabanCompleteDensitySourceShapeLevel =
+  BalabanRGTOE.balabanCompleteDensitySourceShapeLevel
+
+toeBalabanCompleteDensityDerivedSummaryLevel : ProofLevel
+toeBalabanCompleteDensityDerivedSummaryLevel =
+  BalabanRGTOE.balabanCompleteDensityDerivedSummaryLevel
+
+toeBalabanCompleteDensityPhysicalProjectionBoundsLevel : ProofLevel
+toeBalabanCompleteDensityPhysicalProjectionBoundsLevel =
+  BalabanRGTOE.balabanCompleteDensityPhysicalProjectionBoundsLevel
+
+toeBalabanScaleDensityFiniteMeasureWeldLevel : ProofLevel
+toeBalabanScaleDensityFiniteMeasureWeldLevel =
+  BalabanRGTOE.balabanScaleDensityFiniteMeasureWeldLevel
+
+toeBalabanLiteralGeneratedActionDensityLevel : ProofLevel
+toeBalabanLiteralGeneratedActionDensityLevel =
+  BalabanRGTOE.balabanLiteralGeneratedActionDensityLevel
+
+toeBalabanLiteralCombinedRGEffectiveActionLevel : ProofLevel
+toeBalabanLiteralCombinedRGEffectiveActionLevel =
+  BalabanRGTOE.balabanLiteralCombinedRGEffectiveActionLevel
+
+toeBalabanLiteralGeneratedActionStressScaleLevel : ProofLevel
+toeBalabanLiteralGeneratedActionStressScaleLevel =
+  BalabanRGTOE.balabanLiteralGeneratedActionStressScaleLevel
+
+toeBalabanScaleDensityStressLaneCompilerLevel : ProofLevel
+toeBalabanScaleDensityStressLaneCompilerLevel =
+  BalabanRGTOE.balabanScaleDensityStressLaneCompilerLevel
+
+toeBalabanDensityAnchoredStressLaneCompilerLevel : ProofLevel
+toeBalabanDensityAnchoredStressLaneCompilerLevel =
+  BalabanRGTOE.balabanDensityAnchoredStressLaneCompilerLevel
+
+toeBalabanLiteralDensityAnchoredStressLaneInstantiationLevel : ProofLevel
+toeBalabanLiteralDensityAnchoredStressLaneInstantiationLevel =
+  BalabanRGTOE.balabanLiteralDensityAnchoredStressLaneInstantiationLevel
+
 toeBalabanGeneratedActionDensityCompilerLevel : ProofLevel
 toeBalabanGeneratedActionDensityCompilerLevel =
   BalabanRGTOE.balabanGeneratedActionDensityCompilerLevel
@@ -94,6 +139,22 @@ toeBalabanGeneratedActionStressScaleCompilerLevel : ProofLevel
 toeBalabanGeneratedActionStressScaleCompilerLevel =
   BalabanRGTOE.balabanGeneratedActionStressScaleCompilerLevel
 
+toeBalabanStressCauchyModulusCompilerLevel : ProofLevel
+toeBalabanStressCauchyModulusCompilerLevel =
+  BalabanRGTOE.balabanStressCauchyModulusCompilerLevel
+
+toeBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
+toeBalabanStressCauchyPhysicalInsertionLevel =
+  BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+toeBalabanStressHilbertBoundCompilerLevel : ProofLevel
+toeBalabanStressHilbertBoundCompilerLevel =
+  BalabanRGTOE.balabanStressHilbertBoundCompilerLevel
+
+toeBalabanStressHilbertPhysicalShellLevel : ProofLevel
+toeBalabanStressHilbertPhysicalShellLevel =
+  BalabanRGTOE.balabanStressHilbertPhysicalShellLevel
+
 toeBalabanPublishedFlowRegularEProjectionCompilerLevel : ProofLevel
 toeBalabanPublishedFlowRegularEProjectionCompilerLevel =
   BalabanRGTOE.balabanPublishedFlowRegularEProjectionCompilerLevel
@@ -105,6 +166,51 @@ toeBalabanRegularESection2PredicateCompilerLevel =
 toeBalabanConcreteRegularELocalizationWitnessLevel : ProofLevel
 toeBalabanConcreteRegularELocalizationWitnessLevel =
   BalabanRGTOE.balabanConcreteRegularELocalizationWitnessLevel
+
+
+toeBalabanRegularESelectedDensityCompilerLevel : ProofLevel
+toeBalabanRegularESelectedDensityCompilerLevel =
+  BalabanRGTOE.balabanRegularESelectedDensityCompilerLevel
+
+toeBalabanRegularELocalizationSourceLevel : ProofLevel
+toeBalabanRegularELocalizationSourceLevel =
+  BalabanRGTOE.balabanRegularELocalizationSourceLevel
+
+toeBalabanRegularELocalizationCarrierLevel : ProofLevel
+toeBalabanRegularELocalizationCarrierLevel =
+  BalabanRGTOE.balabanRegularELocalizationCarrierLevel
+
+toeBalabanRegularEContinuationCompilerLevel : ProofLevel
+toeBalabanRegularEContinuationCompilerLevel =
+  BalabanRGTOE.balabanRegularEContinuationCompilerLevel
+
+toeBalabanHaarCasimirCoefficientLevel : ProofLevel
+toeBalabanHaarCasimirCoefficientLevel =
+  BalabanRGTOE.balabanHaarCasimirCoefficientLevel
+
+toeBalabanCasimirOrbitFactorizationLevel : ProofLevel
+toeBalabanCasimirOrbitFactorizationLevel =
+  BalabanRGTOE.balabanCasimirOrbitFactorizationLevel
+
+toeBalabanCasimirLowerBoundTransportLevel : ProofLevel
+toeBalabanCasimirLowerBoundTransportLevel =
+  BalabanRGTOE.balabanCasimirLowerBoundTransportLevel
+
+toeBalabanLiteralCasimirFactorizationLevel : ProofLevel
+toeBalabanLiteralCasimirFactorizationLevel =
+  BalabanRGTOE.balabanLiteralCasimirFactorizationLevel
+
+toeBalabanClassifiedCasimirPositivityLevel : ProofLevel
+toeBalabanClassifiedCasimirPositivityLevel =
+  BalabanRGTOE.balabanClassifiedCasimirPositivityLevel
+
+toeBalabanStressMarkedShellReuseLevel : ProofLevel
+toeBalabanStressMarkedShellReuseLevel =
+  BalabanRGTOE.balabanStressMarkedShellReuseLevel
+
+toeBalabanStressPairingPhysicalWeldLevel : ProofLevel
+toeBalabanStressPairingPhysicalWeldLevel =
+  BalabanRGTOE.balabanStressPairingPhysicalWeldLevel
 
 toeBalabanPublishedNonlinearRGCoreLevel : ProofLevel
 toeBalabanPublishedNonlinearRGCoreLevel =

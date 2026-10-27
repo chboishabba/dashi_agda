@@ -391,6 +391,10 @@ record BalabanRGTOEReceipt : Set where
 
     stressMarkedShellReuse : ProofLevel
     stressPairingPhysicalWeld : ProofLevel
+    stressCauchyModulusCompiler : ProofLevel
+    stressCauchyPhysicalInsertion : ProofLevel
+    stressHilbertBoundCompiler : ProofLevel
+    stressHilbertPhysicalShell : ProofLevel
 
     publishedNonlinearRGCore : ProofLevel
     publishedRGPhysicalSameObject : ProofLevel
@@ -398,6 +402,14 @@ record BalabanRGTOEReceipt : Set where
     publishedRGContinuumTransferProved : Bool
     publishedRGContinuumTransferProvedIsFalse :
       publishedRGContinuumTransferProved ≡ false
+
+    osWightmanContinuumConstructionProved : Bool
+    osWightmanContinuumConstructionProvedIsFalse :
+      osWightmanContinuumConstructionProved ≡ false
+
+    uniformKPAbsorptionProved : Bool
+    uniformKPAbsorptionProvedIsFalse :
+      uniformKPAbsorptionProved ≡ false
 
     blockSpinTransferProved : Bool
     blockSpinTransferProvedIsFalse :
@@ -410,6 +422,10 @@ record BalabanRGTOEReceipt : Set where
     continuumMassGapProved : Bool
     continuumMassGapProvedIsFalse :
       continuumMassGapProved ≡ false
+
+    terminalPromotion : Bool
+    terminalPromotionIsFalse :
+      terminalPromotion ≡ false
 
     clayPromotion : Bool
     clayPromotionIsFalse :
@@ -468,6 +484,14 @@ canonicalBalabanRGTOEReceipt =
         balabanStressMarkedShellReuseLevel
     ; stressPairingPhysicalWeld =
         balabanStressPairingPhysicalWeldLevel
+    ; stressCauchyModulusCompiler =
+        balabanStressCauchyModulusCompilerLevel
+    ; stressCauchyPhysicalInsertion =
+        balabanStressCauchyPhysicalInsertionLevel
+    ; stressHilbertBoundCompiler =
+        balabanStressHilbertBoundCompilerLevel
+    ; stressHilbertPhysicalShell =
+        balabanStressHilbertPhysicalShellLevel
     ; publishedNonlinearRGCore =
         balabanPublishedNonlinearRGCoreLevel
     ; publishedRGPhysicalSameObject =
@@ -476,6 +500,14 @@ canonicalBalabanRGTOEReceipt =
         balabanPublishedRGContinuumTransferOpenFlag
     ; publishedRGContinuumTransferProvedIsFalse =
         balabanPublishedRGContinuumTransferStillOpen
+    ; osWightmanContinuumConstructionProved =
+        balabanOSWightmanContinuumConstructionOpenFlag
+    ; osWightmanContinuumConstructionProvedIsFalse =
+        balabanOSWightmanContinuumConstructionStillOpen
+    ; uniformKPAbsorptionProved =
+        balabanRGUniformKPAbsorptionOpenFlag
+    ; uniformKPAbsorptionProvedIsFalse =
+        balabanRGUniformKPAbsorptionStillOpen
     ; blockSpinTransferProved =
         RGFrontier.balabanBlockSpinTransferProved
           RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
@@ -492,6 +524,10 @@ canonicalBalabanRGTOEReceipt =
             RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt)
     ; continuumMassGapProvedIsFalse =
         balabanRGContinuumMassGapStillOpen
+    ; terminalPromotion =
+        balabanTerminalPromotionOpenFlag
+    ; terminalPromotionIsFalse =
+        balabanTerminalPromotionStillOpen
     ; clayPromotion =
         RGFrontier.clayYangMillsPromoted
           RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
