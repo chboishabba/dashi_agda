@@ -113,6 +113,15 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
+          dashi-repo related toe27MonsterPhaseConjugationIntertwiner --root . --limit 20
+          dashi-repo related toe27MonsterRepresentationNotPromoted --root . --limit 20
+          dashi-repo related toe27MonsterEmbeddingNotPromoted --root . --limit 20
+          dashi-repo related toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner --root . --limit 20
+          dashi-repo discover '369 max cut kernel bidi ternary 27 Monster representation embedding non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
+          dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -140,6 +149,8 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -160,6 +171,8 @@ jobs:
           modules=(
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
