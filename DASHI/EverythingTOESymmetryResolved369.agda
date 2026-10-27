@@ -19,6 +19,7 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Unified.GRQuantumProofTermRegression
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 import DASHI.Unified.QuantumMetrologyTOEConvergenceExact as QuantumMetrologyTOE
+import DASHI.Unified.QuantumMetrologyTOEConvergenceValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 
 
