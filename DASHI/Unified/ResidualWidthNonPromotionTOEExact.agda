@@ -50,8 +50,9 @@ module DASHI.Unified.ResidualWidthNonPromotionTOEExact where
 -- G. Governance.
 -- Original theorem owners retain proof ownership.
 -- Existing source modules remain the mathematical authorities.
--- Meta-introspector repositories remain attributed tooling/process donors only
--- unless a future theorem imports their code explicitly.
+-- The meta-introspector zkperf, zos-server, erdfa-py, and aristotle-cli-rs
+-- repositories remain attributed tooling/process donors only.
+-- No theorem body or source code is copied from them here.
 --
 -- F. Verification.
 -- The regression module checks that Unifier re-exports these exact owners.
