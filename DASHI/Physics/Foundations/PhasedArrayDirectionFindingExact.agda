@@ -107,3 +107,42 @@ open SteeringDFFirewall public
 canonicalSteeringDFFirewall : SteeringDFFirewall
 canonicalSteeringDFFirewall =
   steering-df-firewall true refl true refl false refl
+
+------------------------------------------------------------------------
+-- Field-induced antenna support.  Darshni, Dogariu, Franzon (2026).
+-- IEEE Journal of Microwaves 6(5), 1174-1183.
+-- DOI: 10.1109/JMW.2026.3722433.
+-- The 30 MHz experiment is near-field.  It does not prove far-field gain.
+-- This is a finite classification theorem, not a plasma Maxwell solver.
+------------------------------------------------------------------------
+
+data ApertureSupportMode : Set where
+  fixedMaterialSupport : ApertureSupportMode
+  electronicallyWeightedSupport : ApertureSupportMode
+  laserInducedPlasmaSupport : ApertureSupportMode
+
+laserSupportIsNotElectronicWeighting :
+  laserInducedPlasmaSupport ≡ electronicallyWeightedSupport → ⊥
+laserSupportIsNotElectronicWeighting ()
+
+laserSupportIsNotFixedMaterial :
+  laserInducedPlasmaSupport ≡ fixedMaterialSupport → ⊥
+laserSupportIsNotFixedMaterial ()
+
+data PlasmaAntennaClaim : Set where
+  measuredNearFieldContrast : PlasmaAntennaClaim
+  demonstratedFarFieldGain : PlasmaAntennaClaim
+  demonstratedReception : PlasmaAntennaClaim
+  demonstratedBroadbandOperation : PlasmaAntennaClaim
+
+nearFieldContrastIsNotFarFieldGain :
+  measuredNearFieldContrast ≡ demonstratedFarFieldGain → ⊥
+nearFieldContrastIsNotFarFieldGain ()
+
+nearFieldContrastIsNotReception :
+  measuredNearFieldContrast ≡ demonstratedReception → ⊥
+nearFieldContrastIsNotReception ()
+
+nearFieldContrastIsNotBroadbandProof :
+  measuredNearFieldContrast ≡ demonstratedBroadbandOperation → ⊥
+nearFieldContrastIsNotBroadbandProof ()
