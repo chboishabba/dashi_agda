@@ -240,3 +240,58 @@ unifierAgdaConsumerStillDoesNotCreateExternalTheorem :
   Owner.AgdaConsumerRecordCreatesExternalTheorem → ⊥
 unifierAgdaConsumerStillDoesNotCreateExternalTheorem =
   Unifier.unifierIbrahimAgdaConsumerDoesNotCreateExternalTheorem
+
+
+------------------------------------------------------------------------
+-- Residual direct-owner non-promotion regression: phase and H-zeta.
+------------------------------------------------------------------------
+
+toePairDegreeStillDoesNotOrientPhase :
+  Owner.PairDegreeCreatesPhaseOrientation → ⊥
+toePairDegreeStillDoesNotOrientPhase =
+  TOE.toeIbrahimPairDegreeDoesNotCreatePhaseOrientation
+
+unifierPairDegreeStillDoesNotOrientPhase :
+  Owner.PairDegreeCreatesPhaseOrientation → ⊥
+unifierPairDegreeStillDoesNotOrientPhase =
+  Unifier.unifierIbrahimPairDegreeDoesNotCreatePhaseOrientation
+
+toeTwelveSeventyEightStillDoesNotCreateIntertwiner :
+  Owner.TwelveSeventyEightCreatesSameActionIntertwiner → ⊥
+toeTwelveSeventyEightStillDoesNotCreateIntertwiner =
+  TOE.toeIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner
+
+unifierTwelveSeventyEightStillDoesNotCreateIntertwiner :
+  Owner.TwelveSeventyEightCreatesSameActionIntertwiner → ⊥
+unifierTwelveSeventyEightStillDoesNotCreateIntertwiner =
+  Unifier.unifierIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner
+
+toeCTblLibStillDoesNotCreateMonsterAction :
+  Owner.CTblLibTableNameCreatesActualMonsterAction → ⊥
+toeCTblLibStillDoesNotCreateMonsterAction =
+  TOE.toeIbrahimCTblLibNameDoesNotCreateActualMonsterAction
+
+unifierCTblLibStillDoesNotCreateMonsterAction :
+  Owner.CTblLibTableNameCreatesActualMonsterAction → ⊥
+unifierCTblLibStillDoesNotCreateMonsterAction =
+  Unifier.unifierIbrahimCTblLibNameDoesNotCreateActualMonsterAction
+
+toeSharedZetaScalarStillDoesNotRecognizeMonster :
+  Owner.SharedZetaScalarCreatesMonsterHZetaRecognition → ⊥
+toeSharedZetaScalarStillDoesNotRecognizeMonster =
+  TOE.toeIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition
+
+unifierSharedZetaScalarStillDoesNotRecognizeMonster :
+  Owner.SharedZetaScalarCreatesMonsterHZetaRecognition → ⊥
+unifierSharedZetaScalarStillDoesNotRecognizeMonster =
+  Unifier.unifierIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition
+
+toeSchrodingerConstructionStillDoesNotBindHomCarrier :
+  Owner.SchrodingerConstructionCreatesHomCarrierBinding → ⊥
+toeSchrodingerConstructionStillDoesNotBindHomCarrier =
+  TOE.toeIbrahimSchrodingerConstructionDoesNotCreateHomBinding
+
+unifierSchrodingerConstructionStillDoesNotBindHomCarrier :
+  Owner.SchrodingerConstructionCreatesHomCarrierBinding → ⊥
+unifierSchrodingerConstructionStillDoesNotBindHomCarrier =
+  Unifier.unifierIbrahimSchrodingerConstructionDoesNotCreateHomBinding
