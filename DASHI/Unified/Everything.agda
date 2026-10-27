@@ -174,6 +174,12 @@ unifiedEmbeddingDoesNotCreateLegalAuthority :
 unifiedEmbeddingDoesNotCreateLegalAuthority =
   EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
 
+
+unifiedGeographicRecoverabilityDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
+unifiedGeographicRecoverabilityDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.geographicRecoverabilityDoesNotCreatePhysicalIdentity
+
 unifiedBalabanDirectScaleTransferNonPromotion :
   BalabanRGTOE.BalabanRGScaleTransferPromotion → ⊥
 unifiedBalabanDirectScaleTransferNonPromotion =
