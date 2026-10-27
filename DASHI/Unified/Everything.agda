@@ -17,7 +17,7 @@ import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.FleetFormalGapTargetTOEValidation
-import DASHI.Unified.Fleet58ManifestAcquisitionExact
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionRegression
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
 import DASHI.Unified.SingularBasinCoarseRGTOEValidation
@@ -379,3 +379,106 @@ unified369Ternary27MonsterRepresentationNotPromoted =
 
 unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+
+------------------------------------------------------------------------
+-- Canonical Balaban physics and Fleet manifest reachability.
+------------------------------------------------------------------------
+
+open Physics public using
+  ( yangMillsBalabanRGReceipt
+  ; yangMillsBalabanScaleDensityFlowLevel
+  ; yangMillsBalabanCompleteDensitySourceShapeLevel
+  ; yangMillsBalabanCompleteDensityDerivedSummaryLevel
+  ; yangMillsBalabanCompleteDensityPhysicalProjectionBoundsLevel
+  ; yangMillsBalabanScaleDensityFiniteMeasureWeldLevel
+  ; yangMillsBalabanLiteralGeneratedActionDensityLevel
+  ; yangMillsBalabanLiteralCombinedRGEffectiveActionLevel
+  ; yangMillsBalabanLiteralGeneratedActionStressScaleLevel
+  ; yangMillsBalabanScaleDensityStressLaneCompilerLevel
+  ; yangMillsBalabanDensityAnchoredStressLaneCompilerLevel
+  ; yangMillsBalabanLiteralDensityAnchoredStressLaneInstantiationLevel
+  ; yangMillsBalabanRegularESelectedDensityCompilerLevel
+  ; yangMillsBalabanRegularELocalizationSourceLevel
+  ; yangMillsBalabanRegularELocalizationCarrierLevel
+  ; yangMillsBalabanRegularEContinuationCompilerLevel
+  ; yangMillsBalabanHaarCasimirCoefficientLevel
+  ; yangMillsBalabanCasimirOrbitFactorizationLevel
+  ; yangMillsBalabanCasimirLowerBoundTransportLevel
+  ; yangMillsBalabanLiteralCasimirFactorizationLevel
+  ; yangMillsBalabanClassifiedCasimirPositivityLevel
+  ; yangMillsBalabanStressMarkedShellReuseLevel
+  ; yangMillsBalabanStressPairingPhysicalWeldLevel
+  ; yangMillsBalabanGeneratedActionDensityCompilerLevel
+  ; yangMillsBalabanCombinedRGEffectiveActionCompilerLevel
+  ; yangMillsBalabanGeneratedActionStressScaleCompilerLevel
+  ; yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel
+  ; yangMillsBalabanRegularESection2PredicateCompilerLevel
+  ; yangMillsBalabanConcreteRegularELocalizationWitnessLevel
+  ; yangMillsBalabanStressCauchyModulusCompilerLevel
+  ; yangMillsBalabanStressCauchyPhysicalInsertionLevel
+  ; yangMillsBalabanStressHilbertBoundCompilerLevel
+  ; yangMillsBalabanStressHilbertPhysicalShellLevel
+  ; yangMillsBalabanPublishedNonlinearRGCoreLevel
+  ; yangMillsBalabanPublishedRGPhysicalSameObjectLevel
+  ; yangMillsBalabanContinuumLimitReceipt
+  ; yangMillsBalabanContinuumLimitPromotionImpossible
+  ; yangMillsDepthContinuumLimitReceipt
+  ; yangMillsDepthContinuumLimitPromotionImpossible
+  ; yangMillsBalabanScaleTransferNonPromotion
+  )
+
+unifiedFleetRecordedDischargedFibresAre584 :
+  FleetGapTOE.dischargedCoreKnowledgeFibres FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
+unifiedFleetRecordedDischargedFibresAre584 = FleetGapTOE.fleetRecordedDischargedCountIs584
+
+unifiedFleetRecordedFormalGapsAre58 :
+  FleetGapTOE.unformalisedFormalGaps FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
+unifiedFleetRecordedFormalGapsAre58 = FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+
+unifiedFleetRecordedContradictionGapsAre44 :
+  FleetGapTOE.polarityContradictionGaps FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
+unifiedFleetRecordedContradictionGapsAre44 = FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifiedFleetMacroscopicEigenMotifsAre3 :
+  FleetGapTOE.macroscopicEigenMotifCount FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifiedFleetMacroscopicEigenMotifsAre3 = FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners = FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifiedFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetMetaIntrospectorAttributionPreserved = refl
+
+unifiedFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetMetaIntrospectorProofNotBorrowed = refl
+
+unifiedFleetESDSurfaceUnedited :
+  FleetGapTOE.esdSurfaceEdited FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetESDSurfaceUnedited = refl
+
+unifiedFleet58ManifestAcquisitionReceipt :
+  FleetManifestTOE.Fleet58ManifestAcquisitionReceipt
+unifiedFleet58ManifestAcquisitionReceipt =
+  FleetManifestTOE.canonicalFleet58ManifestAcquisitionReceipt
+
+unifiedFleet58ManifestAbsent : FleetManifestTOE.named58ManifestAcquired ≡ false
+unifiedFleet58ManifestAbsent = FleetManifestTOE.named58ManifestAcquiredIsFalse
+
+unifiedFleet58CountDoesNotNameRows : FleetManifestTOE.countIdentifiesNamedRows ≡ false
+unifiedFleet58CountDoesNotNameRows = FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+
+unifiedFleet58PerGapDispatchDisabled : FleetManifestTOE.perGapDispatchEnabled ≡ false
+unifiedFleet58PerGapDispatchDisabled = FleetManifestTOE.perGapDispatchEnabledIsFalse
+
+unifiedFleet58RelatedSymbolsRequired : FleetManifestTOE.relatedSymbolsRequired ≡ true
+unifiedFleet58RelatedSymbolsRequired = FleetManifestTOE.relatedSymbolsRequiredIsTrue
+
+unifiedFleet58DiscoverRequired : FleetManifestTOE.discoverRequired ≡ true
+unifiedFleet58DiscoverRequired = FleetManifestTOE.discoverRequiredIsTrue
+
+unifiedFleet58RoundLineageRequired : FleetManifestTOE.roundLineageRequired ≡ true
+unifiedFleet58RoundLineageRequired = FleetManifestTOE.roundLineageRequiredIsTrue
