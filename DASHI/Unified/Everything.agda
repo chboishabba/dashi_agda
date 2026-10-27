@@ -286,11 +286,11 @@ unifiedGovernanceMaxCutParetoSnowballZKPFrame =
   GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
 
 unifiedGovernanceMaxCutBalabanScaleTransferImpossible :
-  GovernanceMaxCut.ParetoSnowball.BalabanScaleTransferPromotion → ⊥
+  GovernanceMaxCut.BalabanScaleTransferPromotion → ⊥
 unifiedGovernanceMaxCutBalabanScaleTransferImpossible =
   GovernanceMaxCut.balabanScaleTransferPromotionImpossible
 
 unifiedGovernanceMaxCutIbrahimSearchPriorityNotProof :
-  GovernanceMaxCut.ParetoSnowball.SearchPriorityCreatesProof → ⊥
+  GovernanceMaxCut.SearchPriorityCreatesProof → ⊥
 unifiedGovernanceMaxCutIbrahimSearchPriorityNotProof =
   GovernanceMaxCut.ibrahimSearchPriorityDoesNotCreateProof
