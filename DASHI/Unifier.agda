@@ -3,6 +3,8 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGradeCut
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as IbrahimCut
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1219,12 +1221,12 @@ toeMaxCut27RotationNotFree =
   MaxCut369.toe27FullCubeRotationNotFree
 
 toeMaxCutFullGradeDimensionNotFaithfulness :
-  MaxCut369.FullGrade.LinearDimensionCreatesFaithfulness → ⊥
+  FullGradeCut.LinearDimensionCreatesFaithfulness → ⊥
 toeMaxCutFullGradeDimensionNotFaithfulness =
   MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
 
 toeMaxCutIbrahimChartNotAction :
-  MaxCut369.Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+  IbrahimCut.FiniteChartCreatesLinearMultiplicityAction → ⊥
 toeMaxCutIbrahimChartNotAction =
   MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
 
