@@ -3,6 +3,7 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false)
+open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 ------------------------------------------------------------------------
@@ -399,17 +400,17 @@ toeBalabanScaleTransferPromotionImpossible =
   ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
 
 toeIbrahimRecognitionParetoBoundary :
-  ParetoSnowballTOE.Recognition.RecognitionRouteParetoBoundary
+  ParetoSnowballTOE.RecognitionRouteParetoBoundary
 toeIbrahimRecognitionParetoBoundary =
   ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
 
 toeIbrahimCharacterExecutionFrontier :
-  ParetoSnowballTOE.Execution.Monster3BCharacterExecutionFrontier
+  ParetoSnowballTOE.Monster3BCharacterExecutionFrontier
 toeIbrahimCharacterExecutionFrontier =
   ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
 
 toeIbrahimSchrodingerHZetaMaxCutBoundary :
-  ParetoSnowballTOE.HZeta.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ParetoSnowballTOE.SchrodingerHZetaRecognitionMaxCutBoundary
 toeIbrahimSchrodingerHZetaMaxCutBoundary =
   ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
 
