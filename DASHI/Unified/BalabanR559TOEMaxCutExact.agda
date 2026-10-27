@@ -147,6 +147,17 @@ jointBalabanOSWightmanStillOpen =
 
 record BalabanR559TOEMaxCutReceipt : Set where
   field
+    -- Parent receipts keep the complete normalized surfaces reachable.
+    -- Do not copy their full coordinate sets here.
+    balabanCompleteReceipt :
+      Balaban.BalabanRGTOEReceipt
+
+    balabanTypedZKPFrame :
+      Balaban.BalabanTOEZKPFrame
+
+    r559ParetoZKPFrame :
+      R559.Goal1ParetoTOEZKPFrame
+
     balabanDensityFlow : ProofLevel
     r559DensityFlow : ProofLevel
     densityOwnerAgreement :
@@ -205,7 +216,13 @@ open BalabanR559TOEMaxCutReceipt public
 
 canonicalBalabanR559TOEMaxCutReceipt : BalabanR559TOEMaxCutReceipt
 canonicalBalabanR559TOEMaxCutReceipt = record
-  { balabanDensityFlow =
+  { balabanCompleteReceipt =
+      Balaban.canonicalBalabanRGTOEReceipt
+  ; balabanTypedZKPFrame =
+      Balaban.canonicalBalabanTOEZKPFrame
+  ; r559ParetoZKPFrame =
+      R559.canonicalGoal1ParetoTOEZKPFrame
+  ; balabanDensityFlow =
       Balaban.balabanScaleDensityFlowLevel
   ; r559DensityFlow =
       R559.toeBetaDrivenSourceFlowLevel
