@@ -1399,3 +1399,28 @@ toeNavierStokesClayEligibilityStillFalse :
   toeNavierStokesClayEligible ≡ false
 toeNavierStokesClayEligibilityStillFalse =
   NSClayTOE.clayEligibilityStillFalse
+
+------------------------------------------------------------------------
+-- Canonical Pareto / Ibrahim / fleet non-promotion gates.
+-- These are direct aliases of proof owners. No new theorem authority.
+------------------------------------------------------------------------
+
+toeParetoSearchPriorityCannotPayProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeParetoSearchPriorityCannotPayProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+toeIbrahimDegree729CannotPayMonsterRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+toeIbrahimDegree729CannotPayMonsterRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+toeFleetSpectralRankCannotPayAuthority :
+  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
+toeFleetSpectralRankCannotPayAuthority =
+  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
+
+toeFleetNumericABIRequiresIndependentEvidence :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+toeFleetNumericABIRequiresIndependentEvidence =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
