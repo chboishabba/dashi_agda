@@ -35,6 +35,7 @@ import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightW
 import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VOAComposition
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestAction
 import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as ShortestCandidate
+import DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact as RecognitionAcquisition
 
 originIsFixed :
   Spectral.rotateXYZ Geometry.origin ≡ Geometry.origin
@@ -490,3 +491,23 @@ base369ShortestCandidateRemainsUninhabited :
   ≡ false
 base369ShortestCandidateRemainsUninhabited =
   TOE.toeBase369ShortestCandidateStillUninhabited
+
+
+recognitionAcquisitionTargetRemainsLocalized :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.exactAcquisitionTargetLocalized
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ true
+recognitionAcquisitionTargetRemainsLocalized =
+  TOE.toeRecognitionAcquisitionTargetLocalized
+
+actualBase369RecognitionCandidateRemainsOpen :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.actualBase369RecognitionCandidatePaid
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ false
+actualBase369RecognitionCandidateRemainsOpen =
+  TOE.toeActualBase369RecognitionCandidateStillOpen
+
+oeisStillDoesNotCreateRecognitionCandidate :
+  RecognitionAcquisition.OEISCreatesBase369RecognitionCandidate → ⊥
+oeisStillDoesNotCreateRecognitionCandidate =
+  TOE.toeOEISDoesNotCreateBase369RecognitionCandidate
