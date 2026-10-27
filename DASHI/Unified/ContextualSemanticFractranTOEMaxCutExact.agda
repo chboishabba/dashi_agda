@@ -119,6 +119,10 @@ ParetoDialecticalSynthesisPromotion : Set
 ParetoDialecticalSynthesisPromotion =
   Pareto.ParetoIncomparabilityAutomaticallyCreatesProductiveDialecticalJoin
 
+FleetDischargedFibreRetargetPermission : Set
+FleetDischargedFibreRetargetPermission =
+  Fleet.FleetDischargedFibreRetargetPermission
+
 
 coverageDoesNotCreateMonsterRepresentation :
   MonsterBoundary.AutomaticCoverageMonsterRepresentationPromotion → ⊥
