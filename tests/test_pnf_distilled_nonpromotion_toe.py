@@ -26,6 +26,9 @@ def test_canonical_source_boundary_reuses_capsule_owners():
         "KluverFormConstantPsychedelicBoundaryExact",
         "FungalNetworkAgencyBoundary",
         "PsychogeographyYijingSourceAtlas",
+        "ITIRRelationalInterlinguaConsumerFibreExact",
+        "IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact",
+        "IbrahimSnowballInformationCascadeEvidenceDependencyHyperfabricBidiExact",
     ):
         assert token in text
 
@@ -42,6 +45,11 @@ def test_canonical_source_boundary_preserves_exact_facts():
         "formConstantDoesNotPromoteRecoveredMemory",
         "webPublicationIdentifier",
         "canonicalPNFSourceBoundaryTOEReceipt",
+        "wordsDoNotPayPredicate",
+        "pnfCandidateNotTruth",
+        "perceivedIndependenceDoesNotCreateActualIndependence",
+        "repetitionDoesNotMeanIndependentEvidence",
+        "commonSourceDoesNotMeanNoEvidence",
     ):
         assert token in text
 
@@ -101,6 +109,11 @@ def test_source_validation_binds_unifier_to_canonical_source_owner():
         "fungalFacadeExact",
         "kluverCobwebFacadeExact",
         "webIdentifierFacadeExact",
+        "identicalWordsFirewallFacadeExact",
+        "commonFingerprintFirewallFacadeExact",
+        "perceivedIndependenceFirewallFacadeExact",
+        "repetitionFirewallFacadeExact",
+        "commonSourceFirewallFacadeExact",
     ):
         assert token in text
 
@@ -152,3 +165,12 @@ def test_focused_workflow_covers_canonical_and_compatibility_lanes():
         "ESD surface change detected",
     ):
         assert token in text
+
+
+def test_unified_aggregate_inherited_compile_blockers_are_repaired():
+    text = read(UNIFIED)
+    assert "navierStokesRemainsNonPromoting =\n  Physics.navierStokesJPromotionBlocked" in text
+    assert "yangMillsRemainsNonPromoting =\n  Physics.yangMillsJPromotionBlocked" in text
+    assert "navierStokesFormalProjectionsRemainNonPromoting :\n  ∀ kind →" in text
+    assert "yangMillsFormalProjectionsRemainNonPromoting :\n  ∀ kind →" in text
+    assert "import DASHI.Physics.Foundations.Round5FullBoundary as Round5" not in text
