@@ -1412,3 +1412,33 @@ unifierSemanticPromotionCannotConferLegalAuthority =
 
 unifierSemanticPromotionCannotConferAnyAuthority =
   LegalSemanticTOE.toeSemanticPromotionCannotConferAnyAuthority
+
+
+-- Unifier facade over canonical governed legal compliance firewalls.
+unifierExpertQualificationDoesNotCreateForensicCompliance =
+  LegalSemanticTOE.toeExpertQualificationDoesNotCreateForensicCompliance
+
+unifierReportAdmissionDoesNotRepairMissingInput =
+  LegalSemanticTOE.toeReportAdmissionDoesNotRepairMissingInput
+
+unifierLegalReviewDoesNotCreateClaimTruth =
+  LegalSemanticTOE.toeLegalReviewDoesNotCreateClaimTruth
+
+unifierOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalSemanticTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
+
+unifierLegalityAloneDoesNotCreateLegitimacy =
+  LegalSemanticTOE.toeLegalityAloneDoesNotCreateLegitimacy
+
+unifierActionstepStyleVendorIdentityCreatesAuthority =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthority
+
+unifierActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse
+
+unifierActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
+
+unifierActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+
