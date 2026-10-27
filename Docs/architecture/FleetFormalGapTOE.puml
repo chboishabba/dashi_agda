@@ -1,0 +1,52 @@
+@startuml
+title Fleet R5 Formal Gap -> DASHI TOE
+
+package "ITIR Fleet source receipt" {
+  component "R4 spectral receipt\n3 macroscopic motifs" as R4
+  component "R5 partition\n584 discharged\n44 contradiction\n58 formal gaps" as R5
+}
+
+package "Existing DASHI owners" {
+  component "CandidateInvalidation" as Invalid
+  component "Hecke.PNFResidualBridge" as Hecke
+  component "PNFSpectralCoordinateRebuildability" as Spectral
+  component "PNFSpectralNumericABICore" as Numeric
+  component "BalabanRGTOERegression" as Balaban
+  component "NSABCDConcentratedCompletionCutExact" as NS
+  component "QuantumMereologyExact" as QM
+  component "GovernedLegalWorkflowTOEBridgeExact" as Legal
+}
+
+component "DASHI.Unified.\nFleetFormalGapTOEExact" as Fleet
+
+package "TOE consumers" {
+  component "EverythingTOE\nSymmetryResolved369" as TOE
+  component "Unifier" as U
+  component "Unified.Everything" as UE
+}
+
+R4 --> Spectral : source calibration
+R4 --> Numeric : ABI boundary
+R5 --> Fleet : counted residual receipt
+
+Invalid --> Fleet : reuse
+Hecke --> Fleet : reuse
+Spectral --> Fleet : reuse
+Numeric --> Fleet : reuse
+Balaban --> Fleet : discharged owner
+NS --> Fleet : discharged BM2 owner
+QM --> Fleet : discharged boundary
+Legal --> Fleet : governance handoff
+
+Fleet --> TOE
+Fleet --> U
+Fleet --> UE
+
+note right of Fleet
+Only the 58 formal-gap class is dispatchable.
+The source does not enumerate 58 gap identities.
+Counts do not create proofs or semantic identity.
+No ESD surface is edited.
+end note
+
+@enduml
