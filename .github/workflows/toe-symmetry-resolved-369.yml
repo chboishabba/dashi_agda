@@ -25,6 +25,12 @@ on:
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
+      - 'DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda'
+      - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
+      - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
+      - 'Docs/architecture/R559IbrahimFleetHyperfabricTOE.puml'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
@@ -52,6 +58,12 @@ on:
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
+      - 'DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda'
+      - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
+      - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
+      - 'Docs/architecture/R559IbrahimFleetHyperfabricTOE.puml'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
@@ -127,6 +139,13 @@ jobs:
           dashi-repo related fleetVectorCoordinateDoesNotCreateTruth --root . --limit 20
           dashi-repo related fleetExternalCountDoesNotCreateFormalDischarge --root . --limit 20
           dashi-repo discover 'fleet 584 discharged 58 unformalised formal gaps eigen priority non-promotion' --root . --limit 40
+          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda --root .
+          dashi-repo related canonicalR559IbrahimFleetHyperfabricTOEReceipt --root . --limit 20
+          dashi-repo related toePadicPrefixCannotRecoverDiscardedDigit --root . --limit 20
+          dashi-repo related toeTwoDigitStreamCannotRecoverThird --root . --limit 20
+          dashi-repo discover 'R559 Ibrahim fleet 58 hyperfabric p-adic wave WrongType exact non-promotion' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Core.IndexedRelational --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -138,6 +157,23 @@ jobs:
             echo "ESD surface change detected" >&2
             exit 1
           fi
+
+      - name: Fast Agda preflight on converged TOE graph
+        run: |
+          files=(
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+          )
+          for file in "${files[@]}"; do
+            dashi-agda-preflight --root . "$file"
+          done
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -165,7 +201,7 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
-            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
               echo "forbidden trust escape in $source" >&2
               exit 1
             fi
@@ -179,7 +215,10 @@ jobs:
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
