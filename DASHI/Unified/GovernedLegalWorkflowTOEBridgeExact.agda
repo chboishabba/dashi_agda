@@ -78,6 +78,7 @@ import DASHI.Interop.SLRReviewPromoteAbstainConsumerExact as PromotionReview
 import DASHI.Interop.SLRRuntimeValidationHandoffExact as RuntimeValidation
 import DASHI.Interop.SLRValidationRoadmapPromotionExact as ValidationRoadmap
 import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
+import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as LegalAuthority
 import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as SoftwareValidation
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as SemanticPromotion
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
@@ -973,3 +974,39 @@ toeProcessContextRefs =
   ∷ "meta-introspector/aristotle-cli-rs — proof-project tooling context; original attribution retained"
   ∷ "chboishabba/zkSEC — authority/receipt process context; no theorem copied"
   ∷ []
+
+
+------------------------------------------------------------------------
+-- Reuse legal-source authority and applicability non-promotion.
+-- An Actionstep-style matter action is not a legal authority certificate.
+------------------------------------------------------------------------
+
+toeCandidateSourceDoesNotCloseAuthority :
+  LegalAuthority.CandidateSourceIsAuthoritative → ⊥
+toeCandidateSourceDoesNotCloseAuthority =
+  LegalAuthority.candidateSourceDoesNotCloseAuthority
+
+toeSameSystemDoesNotAutomaticallyCloseAuthority :
+  LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+toeSameSystemDoesNotAutomaticallyCloseAuthority =
+  LegalAuthority.sameSystemDoesNotAutomaticallyCloseAuthority
+
+toeCurrentValidityDoesNotAutomaticallyEstablishApplicability :
+  LegalAuthority.CurrentValidityAutomaticallyMeansApplicability → ⊥
+toeCurrentValidityDoesNotAutomaticallyEstablishApplicability =
+  LegalAuthority.currentValidityDoesNotAutomaticallyEstablishApplicability
+
+toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority :
+  LegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority =
+  LegalAuthority.semanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+toeDocumentRoleDoesNotSupplyLegalSourceAuthority :
+  LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+toeDocumentRoleDoesNotSupplyLegalSourceAuthority =
+  LegalAuthority.documentRoleDoesNotSupplyLegalSourceAuthority
+
+toeCanonicalLegalSourceAuthorityBoundary :
+  LegalAuthority.LegalSourceAuthorityBoundary
+toeCanonicalLegalSourceAuthorityBoundary =
+  LegalAuthority.canonicalLegalSourceAuthorityBoundary
