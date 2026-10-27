@@ -1431,3 +1431,25 @@ toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
 toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+------------------------------------------------------------------------
+-- Exact finite-27 codec BIDI aliases from the canonical Max Cut owner.
+------------------------------------------------------------------------
+
+toe369Ternary27StateCode :
+  MaxCut369.TernaryEncodedState → MaxCut369.TernaryState27
+toe369Ternary27StateCode = MaxCut369.toe27StateCode
+
+toe369Ternary27StateDecode :
+  MaxCut369.TernaryState27 → MaxCut369.TernaryEncodedState
+toe369Ternary27StateDecode = MaxCut369.toe27StateDecode
+
+toe369Ternary27StateDecodeStateCode :
+  (e : MaxCut369.TernaryEncodedState) →
+  toe369Ternary27StateDecode (toe369Ternary27StateCode e) ≡ e
+toe369Ternary27StateDecodeStateCode = MaxCut369.toe27StateDecodeStateCode
+
+toe369Ternary27StateCodeStateDecode :
+  (i : MaxCut369.TernaryState27) →
+  toe369Ternary27StateCode (toe369Ternary27StateDecode i) ≡ i
+toe369Ternary27StateCodeStateDecode = MaxCut369.toe27StateCodeStateDecode
