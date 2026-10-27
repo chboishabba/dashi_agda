@@ -90,6 +90,10 @@ jobs:
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
           dashi-repo related BalabanRGTOEReceipt --root .
+          dashi-repo related BalabanScaleTransferPromotion --root . --limit 20
+          dashi-repo related balabanScaleTransferPromotionImpossible --root . --limit 20
+          dashi-repo related fleetRecordedUnformalisedGapCountIs58 --root . --limit 20
+          dashi-repo discover 'Balaban scale transfer promotion continuum non-promotion Fleet 58 canonical owner' --root . --limit 40
           dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
           dashi-repo related balabanSameFamilyRecoveryCompilerLevel --root . --limit 20
           dashi-repo related balabanGoal1CSourceCutCompilerLevel --root . --limit 20
