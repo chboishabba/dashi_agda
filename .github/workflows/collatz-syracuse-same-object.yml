@@ -9,6 +9,10 @@ on:
       - 'DASHI/NumberTheory/Collatz/**'
       - 'DASHI/Analysis/CollatzSyracuse*.agda'
       - 'DASHI/Core/BinaryWordIntegerChernoffExact.agda'
+      - 'DASHI/Unified/CollatzSyracuseTOEMaxCut*.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unifier.agda'
+      - 'Docs/architecture/CollatzSyracuseTOEMaxCut.puml'
       - 'scripts/check_collatz_syracuse_*.py'
       - 'scripts/check_collatz_syracuse_*.sh'
       - '.github/workflows/collatz-syracuse-same-object.yml'
@@ -25,6 +29,45 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install repository referee
+        run: python3 -m pip install -e tools/agda_preflight
+      - name: Build repository semantic index
+        run: dashi-repo index --root .
+      - name: Discover existing Collatz Syracuse theorem surface
+        run: dashi-repo discover "Collatz Syracuse terminal max-cut universal stopping" --root . --limit 50
+      - name: Check related terminal-wall symbols
+        run: dashi-repo related "DASHI.Analysis.CollatzSyracuseSameObjectMaxCutExact.strictDescentTerminalWallVisible" --root . --limit 50
+      - name: Check Collatz Syracuse round lineage
+        run: dashi-repo lineage --prefix DASHI.Analysis.CollatzSyracuse --root .
+      - name: Preflight Collatz TOE convergence lane
+        run: |
+          dashi-agda-preflight --root . DASHI/Unified/CollatzSyracuseTOEMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Unified/CollatzSyracuseTOEMaxCutValidation.agda
+          dashi-agda-preflight --root . DASHI/EverythingTOESymmetryResolved369.agda
+          dashi-agda-preflight --root . DASHI/Unifier.agda
+      - name: Reject trust escapes in Collatz TOE lane
+        run: |
+          targets=(
+            DASHI/Unified/CollatzSyracuseTOEMaxCutExact.agda
+            DASHI/Unified/CollatzSyracuseTOEMaxCutValidation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+          )
+          if grep -En '(^|[^[:alnum:]_])(postulate|TERMINATING|NO_POSITIVITY_CHECK)([^[:alnum:]_]|$)|allow-unsolved-metas' "${targets[@]}"; then
+            echo "trust escape found in Collatz TOE lane" >&2
+            exit 1
+          fi
+      - name: Reject ESD surface edits
+        run: |
+          base="origin/${{ github.event.repository.default_branch }}"
+          if git diff --name-only "${base}...HEAD" | grep -Ei 'digital_esd|(^|/)ESD'; then
+            echo "ESD surface edit detected" >&2
+            exit 1
+          fi
       - name: Materialize Agda source dependencies
         run: git submodule update --init --depth 1 DCHoTT-Agda cubical
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342
@@ -115,3 +158,5 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
       - name: Typecheck Collatz/Syracuse max-cut root
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+      - name: Typecheck Collatz/Syracuse TOE validation root
+        run: nix develop .# --command agda -i . DASHI/Unified/CollatzSyracuseTOEMaxCutValidation.agda
