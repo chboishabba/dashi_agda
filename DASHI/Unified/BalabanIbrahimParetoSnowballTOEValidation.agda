@@ -185,3 +185,58 @@ unifierCurrentQidStillNotHistoricalTitle :
   Owner.CurrentQidIdentifiesHistoricalTitle → ⊥
 unifierCurrentQidStillNotHistoricalTitle =
   Unifier.unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- Residual direct-owner non-promotion regression: route and execution.
+------------------------------------------------------------------------
+
+toeOEISRouteStillNotProof :
+  Owner.OEISSelectsRepresentationProofRoute → ⊥
+toeOEISRouteStillNotProof =
+  TOE.toeIbrahimOEISDoesNotSelectRepresentationProofRoute
+
+unifierOEISRouteStillNotProof :
+  Owner.OEISSelectsRepresentationProofRoute → ⊥
+unifierOEISRouteStillNotProof =
+  Unifier.unifierIbrahimOEISDoesNotSelectRepresentationProofRoute
+
+toeDimensionStillDoesNotCloseRoute :
+  Owner.DimensionClosesRepresentationRoute → ⊥
+toeDimensionStillDoesNotCloseRoute =
+  TOE.toeIbrahimDimensionDoesNotCloseRepresentationRoute
+
+unifierDimensionStillDoesNotCloseRoute :
+  Owner.DimensionClosesRepresentationRoute → ⊥
+unifierDimensionStillDoesNotCloseRoute =
+  Unifier.unifierIbrahimDimensionDoesNotCloseRepresentationRoute
+
+toeFailedCoarseStillDoesNotForceBasis :
+  Owner.FailedCoarseRouteForcesConcreteBasisReconstruction → ⊥
+toeFailedCoarseStillDoesNotForceBasis =
+  TOE.toeIbrahimFailedCoarseRouteDoesNotForceConcreteBasis
+
+unifierFailedCoarseStillDoesNotForceBasis :
+  Owner.FailedCoarseRouteForcesConcreteBasisReconstruction → ⊥
+unifierFailedCoarseStillDoesNotForceBasis =
+  Unifier.unifierIbrahimFailedCoarseRouteDoesNotForceConcreteBasis
+
+toeKernelCharacterStillDoesNotCreateConstituents :
+  Owner.KernelCharacterEqualityCreatesConstituentList → ⊥
+toeKernelCharacterStillDoesNotCreateConstituents =
+  TOE.toeIbrahimKernelCharacterDoesNotCreateConstituentList
+
+unifierKernelCharacterStillDoesNotCreateConstituents :
+  Owner.KernelCharacterEqualityCreatesConstituentList → ⊥
+unifierKernelCharacterStillDoesNotCreateConstituents =
+  Unifier.unifierIbrahimKernelCharacterDoesNotCreateConstituentList
+
+toeAgdaConsumerStillDoesNotCreateExternalTheorem :
+  Owner.AgdaConsumerRecordCreatesExternalTheorem → ⊥
+toeAgdaConsumerStillDoesNotCreateExternalTheorem =
+  TOE.toeIbrahimAgdaConsumerDoesNotCreateExternalTheorem
+
+unifierAgdaConsumerStillDoesNotCreateExternalTheorem :
+  Owner.AgdaConsumerRecordCreatesExternalTheorem → ⊥
+unifierAgdaConsumerStillDoesNotCreateExternalTheorem =
+  Unifier.unifierIbrahimAgdaConsumerDoesNotCreateExternalTheorem
