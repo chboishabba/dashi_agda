@@ -1,4 +1,7 @@
 module DASHI.Unifier where
+import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHFrontier
+import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExact as MillenniumResidual
+import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumLean
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1852,3 +1855,224 @@ unifierArabicRootPatternZKPFrame :
   ArabicMorphology.ArabicRootPatternZKPFrame
 unifierArabicRootPatternZKPFrame =
   ArabicMorphology.canonicalArabicRootPatternZKPFrame
+
+
+------------------------------------------------------------------------
+-- Lean Millennium external-target reconciliation.
+------------------------------------------------------------------------
+
+unifierLeanMillenniumExternalAcceptanceReceipt :
+  MillenniumLean.MillenniumExternalAcceptanceReceipt
+unifierLeanMillenniumExternalAcceptanceReceipt =
+  MillenniumLean.currentMillenniumExternalAcceptanceReceipt
+
+unifierLeanMillenniumRHExactStatementWeldSourceWritten :
+  MillenniumLean.leanMillenniumRHExactStatementWeldSourceWritten ≡ true
+unifierLeanMillenniumRHExactStatementWeldSourceWritten =
+  MillenniumLean.leanMillenniumRHExactStatementWeldSourceWrittenIsTrue
+
+unifierLeanMillenniumNSFeffermanCExactTermSourceWritten :
+  MillenniumLean.leanMillenniumNSFeffermanCExactTermSourceWritten ≡ true
+unifierLeanMillenniumNSFeffermanCExactTermSourceWritten =
+  MillenniumLean.leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue
+
+unifierLeanMillenniumNSFeffermanDExactTermSourceWritten :
+  MillenniumLean.leanMillenniumNSFeffermanDExactTermSourceWritten ≡ true
+unifierLeanMillenniumNSFeffermanDExactTermSourceWritten =
+  MillenniumLean.leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue
+
+unifierLeanMillenniumNSAdapterRequiresNoNewMathematics :
+  MillenniumLean.leanMillenniumNSAdapterRequiresNewMathematics ≡ false
+unifierLeanMillenniumNSAdapterRequiresNoNewMathematics =
+  MillenniumLean.leanMillenniumNSAdapterRequiresNoNewMathematics
+
+unifierLeanMillenniumBSDProjectiveAffineRankWeldSourceWritten :
+  MillenniumLean.leanMillenniumBSDProjectiveAffineRankWeldSourceWritten ≡ true
+unifierLeanMillenniumBSDProjectiveAffineRankWeldSourceWritten =
+  MillenniumLean.leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue
+
+unifierLeanMillenniumPNPTerminalFailureBidiAgdaOwned :
+  MillenniumLean.leanMillenniumPNPTerminalFailureBidiAgdaOwned ≡ true
+unifierLeanMillenniumPNPTerminalFailureBidiAgdaOwned =
+  MillenniumLean.leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue
+
+unifierLeanMillenniumHodgePrizePromotionImpossible :
+  MillenniumLean.LeanMillenniumHodgePrizePromotion → ⊥
+unifierLeanMillenniumHodgePrizePromotionImpossible =
+  MillenniumLean.leanMillenniumHodgePrizePromotionImpossible
+
+unifierLeanMillenniumYangMillsPrizePromotionImpossible :
+  MillenniumLean.LeanMillenniumYangMillsPrizePromotion → ⊥
+unifierLeanMillenniumYangMillsPrizePromotionImpossible =
+  MillenniumLean.leanMillenniumYangMillsPrizePromotionImpossible
+
+unifierLeanMillenniumSourceWrittenKernelPromotionImpossible :
+  MillenniumLean.LeanMillenniumSourceWrittenKernelPromotion → ⊥
+unifierLeanMillenniumSourceWrittenKernelPromotionImpossible =
+  MillenniumLean.leanMillenniumSourceWrittenKernelPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Millennium residual-classifier non-promotion.
+------------------------------------------------------------------------
+
+unifierMillenniumResidualClassifierBoundary :
+  MillenniumResidual.MillenniumResidualClassifierBoundary
+unifierMillenniumResidualClassifierBoundary =
+  MillenniumResidual.canonicalMillenniumResidualClassifierBoundary
+
+unifierMillenniumHodgeAlgebraicLiftStillNotConstructed :
+  MillenniumResidual.hodgeAlgebraicLiftConstructed
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+unifierMillenniumHodgeAlgebraicLiftStillNotConstructed =
+  MillenniumResidual.millenniumHodgeAlgebraicLiftStillNotConstructed
+
+unifierMillenniumBSDRankWeldStillNotUnconditional :
+  MillenniumResidual.bsdRankWeldConstructedUnconditionally
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+unifierMillenniumBSDRankWeldStillNotUnconditional =
+  MillenniumResidual.millenniumBSDRankWeldStillNotUnconditional
+
+unifierMillenniumPolynomialAlgorithmCoverageStillNotConstructed :
+  MillenniumResidual.polynomialAlgorithmFamilyExhaustionConstructed
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+unifierMillenniumPolynomialAlgorithmCoverageStillNotConstructed =
+  MillenniumResidual.millenniumPolynomialAlgorithmCoverageStillNotConstructed
+
+unifierMillenniumResidualClassifierDoesNotSolveAnyProblem :
+  MillenniumResidual.anyOfThreeMillenniumProblemsSolvedHere
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+unifierMillenniumResidualClassifierDoesNotSolveAnyProblem =
+  MillenniumResidual.millenniumResidualClassifierDoesNotSolveAnyProblem
+
+unifierMillenniumPvsNPNotDerivedFromNonDescentGrammar :
+  MillenniumResidual.pNotEqualsNPDerived
+    MillenniumResidual.canonicalPvsNPUniformNonDescentResearchBoundary ≡ false
+unifierMillenniumPvsNPNotDerivedFromNonDescentGrammar =
+  MillenniumResidual.millenniumPvsNPNotDerivedFromNonDescentGrammar
+
+
+------------------------------------------------------------------------
+-- Riemann G21 canonical non-promotion.
+------------------------------------------------------------------------
+
+unifierRHStrictTP2Receipt : RHFrontier.StrictTP2TrancheReceipt
+unifierRHStrictTP2Receipt = RHFrontier.canonicalStrictTP2TrancheReceipt
+
+unifierRHActualSinhTP2StillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.actualSinhTP2Derived
+    unifierRHStrictTP2Receipt ≡ false
+unifierRHActualSinhTP2StillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.actualSinhTP2DerivedIsFalse
+    unifierRHStrictTP2Receipt
+
+unifierRHContinuumMomentSignStillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.actualOddContinuumSignDerived
+    unifierRHStrictTP2Receipt ≡ false
+unifierRHContinuumMomentSignStillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.actualOddContinuumSignDerivedIsFalse
+    unifierRHStrictTP2Receipt
+
+unifierRHDeterminantRemainderStillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerived
+    unifierRHStrictTP2Receipt ≡ false
+unifierRHDeterminantRemainderStillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerivedIsFalse
+    unifierRHStrictTP2Receipt
+
+unifierRHFiniteRadiusStillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerived
+    unifierRHStrictTP2Receipt ≡ false
+unifierRHFiniteRadiusStillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerivedIsFalse
+    unifierRHStrictTP2Receipt
+
+unifierRHPrimeIdentityStillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerived
+    unifierRHStrictTP2Receipt ≡ false
+unifierRHPrimeIdentityStillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerivedIsFalse
+    unifierRHStrictTP2Receipt
+
+unifierRHClayNotPromoted :
+  RHFrontier.StrictTP2TrancheReceipt.riemannHypothesisDerived
+    unifierRHStrictTP2Receipt ≡ false
+unifierRHClayNotPromoted =
+  RHFrontier.StrictTP2TrancheReceipt.riemannHypothesisDerivedIsFalse
+    unifierRHStrictTP2Receipt
+
+
+------------------------------------------------------------------------
+-- Live Gate-4 frontier and Fleet target selection.
+------------------------------------------------------------------------
+
+unifierCurrentGate4FrontierLedgerLevel : ProofLevel
+unifierCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifierCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+unifierFleetFormalGapTargetSelected : Bool
+unifierFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifierHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- R829-vector instantaneous snapshot and exact non-promotion boundary.
+------------------------------------------------------------------------
+
+unifierNavierStokesInstantaneousVectorSnapshotClosed : Bool
+unifierNavierStokesInstantaneousVectorSnapshotClosed =
+  NSClayTOE.instantaneousVectorSnapshotClosed
+
+unifierNavierStokesInstantaneousVectorSnapshotClosedIsTrue :
+  unifierNavierStokesInstantaneousVectorSnapshotClosed ≡ true
+unifierNavierStokesInstantaneousVectorSnapshotClosedIsTrue =
+  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
+
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegative =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
+
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
+  unifierNavierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+unifierNavierStokesRealFiniteODETransportClosed : Bool
+unifierNavierStokesRealFiniteODETransportClosed =
+  NSClayTOE.realFiniteODETransportClosed
+
+unifierNavierStokesRealFiniteODETransportStillOpen :
+  unifierNavierStokesRealFiniteODETransportClosed ≡ false
+unifierNavierStokesRealFiniteODETransportStillOpen =
+  NSClayTOE.realFiniteODETransportStillOpen
+
+unifierNavierStokesUniversalR823IntegratedReserveRefuted : Bool
+unifierNavierStokesUniversalR823IntegratedReserveRefuted =
+  NSClayTOE.universalR823IntegratedReserveRefuted
+
+unifierNavierStokesUniversalR823IntegratedReserveStillUnrefuted :
+  unifierNavierStokesUniversalR823IntegratedReserveRefuted ≡ false
+unifierNavierStokesUniversalR823IntegratedReserveStillUnrefuted =
+  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
+
+unifierNavierStokesInstantaneousSnapshotClayPromotion : Bool
+unifierNavierStokesInstantaneousSnapshotClayPromotion =
+  NSClayTOE.instantaneousSnapshotClayPromotion
+
+unifierNavierStokesInstantaneousSnapshotClayPromotionStillFalse :
+  unifierNavierStokesInstantaneousSnapshotClayPromotion ≡ false
+unifierNavierStokesInstantaneousSnapshotClayPromotionStillFalse =
+  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
