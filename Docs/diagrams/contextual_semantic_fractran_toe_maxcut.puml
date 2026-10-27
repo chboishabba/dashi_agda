@@ -1,0 +1,49 @@
+@startuml
+title Contextual semantic FRACTRAN TOE max-cut
+
+package "Canonical theorem owners" {
+  [Contextual FRACTRAN hyperformalism] as Contextual
+  [SSSP semantic/FRACTRAN coverage] as SSSP
+  [Order-sensitive Pareto ternary BIDI] as Pareto
+  [spaCy 369 Monster boundary] as Monster
+  [Fleet formal-gap target] as Fleet
+}
+
+package "TOE normalization" {
+  [ContextualSemanticFractranTOEMaxCutExact] as Joint
+  [ContextualSemanticFractranTOEMaxCutValidation] as Validation
+}
+
+package "Canonical consumers" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as Unifier
+  [Unified.PNFHyperfabric] as PNF
+  [Unified.Everything] as Everything
+}
+
+Contextual --> Joint : reuse
+SSSP --> Joint : consumer quotient
+Pareto --> Joint : ternary + residual
+Monster --> Joint : non-promotion
+Fleet --> Joint : 584 discharged\n44 contradictions\n58 target gaps
+
+Joint --> TOE
+Joint --> Unifier
+Joint --> PNF
+TOE --> Validation
+Unifier --> Validation
+PNF --> Validation
+Validation --> Everything
+
+note right of Joint
+Invariants:
+- same trit != same world/future
+- transpose != semantic inverse without law
+- 729/carrier match != Monster representation
+- eigen priority/count != proof
+- 584 discharged fibres stay excluded
+- 44 contradiction gaps stay separate
+- ESD is read-only
+end note
+
+@enduml
