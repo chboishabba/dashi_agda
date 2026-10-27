@@ -315,3 +315,62 @@ def test_legal_source_authority_handoff_is_exact():
         "unifierSemanticAdmissionIsNotLegalAuthority",
     ):
         assert token in regression
+
+
+def test_exact_reuse_firewalls_reach_all_toe_facades():
+    bridge = read(BRIDGE)
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+    regression = read(REGRESSION)
+
+    for token in (
+        "SensibLawDbNativeCorpusCompilerExact as DbNative",
+        "toeExactReuseDoesNotCreateSemanticAdmission",
+        "toeExactReuseDoesNotCreateSemanticAuthority",
+        "toeExactReuseDoesNotCreateApplicability",
+        "toeExactReuseDoesNotCreateEntityIdentity",
+        "toeExactReuseDoesNotCreatePropositionIdentity",
+        "toeExactReuseDoesNotCreateEventIdentity",
+        "toeExactReuseDoesNotCreateClaimTruth",
+        "exactReuseAdmissionFirewall",
+        "exactReuseAuthorityFirewall",
+        "exactReuseApplicabilityFirewall",
+        "exactReuseClaimTruthFirewall",
+    ):
+        assert token in bridge
+
+    for token in (
+        "toeExactReuseDoesNotCreateSemanticAdmission",
+        "toeExactReuseDoesNotCreateSemanticAuthority",
+        "toeExactReuseDoesNotCreateApplicability",
+        "toeExactReuseDoesNotCreateEntityIdentity",
+        "toeExactReuseDoesNotCreatePropositionIdentity",
+        "toeExactReuseDoesNotCreateEventIdentity",
+        "toeExactReuseDoesNotCreateClaimTruth",
+    ):
+        assert token in toe
+        assert token in unifier
+
+    for token in (
+        "governedExactReuseDoesNotCreateSemanticAdmission",
+        "governedExactReuseDoesNotCreateSemanticAuthority",
+        "governedExactReuseDoesNotCreateApplicability",
+        "governedExactReuseDoesNotCreateEntityIdentity",
+        "governedExactReuseDoesNotCreatePropositionIdentity",
+        "governedExactReuseDoesNotCreateEventIdentity",
+        "governedExactReuseDoesNotCreateClaimTruth",
+    ):
+        assert token in unified
+
+    for token in (
+        "unifierExactReuseAdmissionAliasIsExact",
+        "unifierExactReuseAuthorityAliasIsExact",
+        "unifierExactReuseApplicabilityAliasIsExact",
+        "unifierExactReuseClaimTruthAliasIsExact",
+        "invariantHandoffCarriesExactReuseAdmissionFirewall",
+        "invariantHandoffCarriesExactReuseAuthorityFirewall",
+        "invariantHandoffCarriesExactReuseApplicabilityFirewall",
+        "invariantHandoffCarriesExactReuseClaimTruthFirewall",
+    ):
+        assert token in regression
