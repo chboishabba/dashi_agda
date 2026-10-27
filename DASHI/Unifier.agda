@@ -856,17 +856,17 @@ unifierGovernedLegalWorkflowAuthorityInvariantHandoff =
   GovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
 
 unifierCanonicalLegalSourceAuthorityBoundary :
-  GovernanceTOE.LegalAuthority.LegalSourceAuthorityBoundary
+  GovernanceTOE.LegalSourceAuthorityBoundary
 unifierCanonicalLegalSourceAuthorityBoundary =
   GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
 
 unifierSameSystemIsNotLegalAuthority :
-  GovernanceTOE.LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+  GovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → ⊥
 unifierSameSystemIsNotLegalAuthority =
   GovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
 
 unifierDocumentRoleIsNotLegalAuthority :
-  GovernanceTOE.LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+  GovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → ⊥
 unifierDocumentRoleIsNotLegalAuthority =
   GovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
 
