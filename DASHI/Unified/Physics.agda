@@ -784,3 +784,53 @@ physicsBalabanR559DepthContinuumLimitPromotionImpossible :
 physicsBalabanR559DepthContinuumLimitPromotionImpossible =
   BalabanR559TOE.depthContinuumLimitPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- R829-vector instantaneous snapshot and exact non-promotion boundary.
+------------------------------------------------------------------------
+
+navierStokesInstantaneousVectorSnapshotClosed : Bool
+navierStokesInstantaneousVectorSnapshotClosed =
+  NSClayTOE.instantaneousVectorSnapshotClosed
+
+navierStokesInstantaneousVectorSnapshotClosedIsTrue :
+  navierStokesInstantaneousVectorSnapshotClosed ≡ true
+navierStokesInstantaneousVectorSnapshotClosedIsTrue =
+  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
+
+navierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
+navierStokesInstantaneousRepositoryRateStrictlyNegative =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
+
+navierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
+  navierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
+navierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+navierStokesRealFiniteODETransportClosed : Bool
+navierStokesRealFiniteODETransportClosed =
+  NSClayTOE.realFiniteODETransportClosed
+
+navierStokesRealFiniteODETransportStillOpen :
+  navierStokesRealFiniteODETransportClosed ≡ false
+navierStokesRealFiniteODETransportStillOpen =
+  NSClayTOE.realFiniteODETransportStillOpen
+
+navierStokesUniversalR823IntegratedReserveRefuted : Bool
+navierStokesUniversalR823IntegratedReserveRefuted =
+  NSClayTOE.universalR823IntegratedReserveRefuted
+
+navierStokesUniversalR823IntegratedReserveStillUnrefuted :
+  navierStokesUniversalR823IntegratedReserveRefuted ≡ false
+navierStokesUniversalR823IntegratedReserveStillUnrefuted =
+  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
+
+navierStokesInstantaneousSnapshotClayPromotion : Bool
+navierStokesInstantaneousSnapshotClayPromotion =
+  NSClayTOE.instantaneousSnapshotClayPromotion
+
+navierStokesInstantaneousSnapshotClayPromotionStillFalse :
+  navierStokesInstantaneousSnapshotClayPromotion ≡ false
+navierStokesInstantaneousSnapshotClayPromotionStillFalse =
+  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
