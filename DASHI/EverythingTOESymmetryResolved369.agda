@@ -463,6 +463,11 @@ toeBalabanR559Gate4InhabitantsLevel =
   BalabanR559TOE.gate4InhabitantsLevel
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
+toeBalabanR559Gate4PaidReductionLedgerLevel : ProofLevel
+toeBalabanR559Gate4PaidReductionLedgerLevel =
+  BalabanR559TOE.gate4PaidReductionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
 toeBalabanScaleTransferNonPromotion :
   BalabanR559TOE.ScaleTransferPromotion → ⊥
 toeBalabanScaleTransferNonPromotion =
