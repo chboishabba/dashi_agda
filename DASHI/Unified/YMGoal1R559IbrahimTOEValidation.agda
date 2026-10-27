@@ -64,6 +64,26 @@ unifierHistoricalDiscriminatorMatchesOwner :
   ≡ Ibrahim.ibrahimHistoricalDiscriminatorBoundary
 unifierHistoricalDiscriminatorMatchesOwner = refl
 
+toeGate4CountIs58 :
+  TOE.toeBalabanR559Gate4UnresolvedCount ≡ 58
+toeGate4CountIs58 =
+  TOE.toeBalabanR559Gate4UnresolvedCountIs58
+
+unifierGate4CountIs58 :
+  Unifier.unifierBalabanR559Gate4UnresolvedCount ≡ 58
+unifierGate4CountIs58 =
+  Unifier.unifierBalabanR559Gate4UnresolvedCountIs58
+
+toeGate4DefinitionLevelMatchesJoint :
+  TOE.toeBalabanR559Gate4DefinitionLevel
+  ≡ YM.gate4DefinitionLevel YM.canonicalBalabanR559TOEMaxCutReceipt
+toeGate4DefinitionLevelMatchesJoint = refl
+
+toeGate4InhabitantsLevelMatchesJoint :
+  TOE.toeBalabanR559Gate4InhabitantsLevel
+  ≡ YM.gate4InhabitantsLevel YM.canonicalBalabanR559TOEMaxCutReceipt
+toeGate4InhabitantsLevelMatchesJoint = refl
+
 toeScaleTransferPromotionStillImpossible :
   YM.ScaleTransferPromotion → ⊥
 toeScaleTransferPromotionStillImpossible =
