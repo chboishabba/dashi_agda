@@ -300,3 +300,42 @@ def test_september_smith_style_amendment_attempt_is_not_assented_act():
         "NOT law",
     ):
         assert k in s
+
+
+def test_toe_roots_import_source_owner_bridge_exactly_once():
+    module = "import DASHI.Unified.AustralianProvenanceTOENonPromotionExact"
+    for path in (
+        "DASHI/EverythingTOESymmetryResolved369.agda",
+        "DASHI/Unifier.agda",
+        "DASHI/Unified/Everything.agda",
+    ):
+        text = (ROOT / path).read_text()
+        assert text.split(module).__len__() == 2, path
+
+
+def test_toe_bridge_reuses_existing_nonfactorability_and_no_promotion_proofs():
+    src = (ROOT / "DASHI/Unified/AustralianProvenanceTOENonPromotionExact.agda").read_text()
+    for token in (
+        "import DASHI.Core.IntersectionalNonFactorability as NF",
+        "import DASHI.Cognition.EpsteinBankingInfrastructureAcquisitionExact as Banking",
+        "import DASHI.Cognition.AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact as Aus",
+        "import DASHI.Cognition.AquinoMaxwellEpsteinCAMaxCutExact as Case",
+        "federalTitleOnlyDecoderImpossible =",
+        "Banking.nameOnlyFederalCaseIdentityImpossible",
+        "caseIDRichDecoderExists =",
+        "Banking.originalCaseKeyConsumerFactors",
+        "ftcInquiryDoesNotPayIndividualLiability =",
+        "Case.ftcBannonCivilCIDIsNotAdjudicatedGuilt",
+        "reportedAustralianSupportDoesNotProvePolicyControl =",
+        "Aus.australianMaterialSupportDoesNotProvePolicyCapture",
+        "australianDeploymentOfKoganRiponNotPaid =",
+        "Aus.australianCampaignToKoganScoresUnpaid",
+        "australiaUSCommonCommandNotPaid =",
+        "Aus.australiaGlobalCommonProgrammeNotEstablished",
+        "chainReactionHomonymCannotPromoteDEAOutcome =",
+        "Banking.hsiCounterfeitCasesDoNotDisposeDEAInquiry",
+    ):
+        assert token in src
+    assert "import DASHI.Unifier" not in src
+    assert "import DASHI.Unified.Everything" not in src
+    assert "dashi_digital_esd" not in src
