@@ -131,6 +131,32 @@ canonicalCompleteDensityCouplingIsChecked :
   TOE.toeBetaHistoryToCanonicalCompleteDensityLevel ≡ machineChecked
 canonicalCompleteDensityCouplingIsChecked = refl
 
+generatedActionDensityCompilerIsChecked :
+  TOE.toeUnifiedGeneratedActionDensityCompilerLevel ≡ machineChecked
+generatedActionDensityCompilerIsChecked = refl
+
+generatedActionDensityLiteralSourceRemainsConditional :
+  TOE.toeLiteralUnifiedGeneratedActionDensityLevel ≡ conditional
+generatedActionDensityLiteralSourceRemainsConditional = refl
+
+combinedRGUnifiedActionCompilerIsChecked :
+  TOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel ≡ machineChecked
+combinedRGUnifiedActionCompilerIsChecked = refl
+
+combinedRGUnifiedActionLiteralSourceRemainsConditional :
+  TOE.toeLiteralCompleteDensityEffectiveActionRealizationLevel ≡ conditional
+combinedRGUnifiedActionLiteralSourceRemainsConditional = refl
+
+generatedActionDensityStillDoesNotPromoteContinuum :
+  TOE.toeFlat4DContinuumTransferProvedHere ≡ false
+generatedActionDensityStillDoesNotPromoteContinuum =
+  TOE.toeGeneratedActionDensityDoesNotPromoteContinuum
+
+combinedRGUnifiedActionStillDoesNotPromoteContinuum :
+  TOE.toeFlat4DContinuumTransferProvedHere ≡ false
+combinedRGUnifiedActionStillDoesNotPromoteContinuum =
+  TOE.toeCombinedRGUnifiedActionDoesNotPromoteContinuum
+
 stressScaleCompilerIsChecked :
   TOE.toeUnifiedGeneratedActionStressScaleCompilerLevel ≡ machineChecked
 stressScaleCompilerIsChecked = refl
@@ -187,6 +213,26 @@ unifierStressScaleMatchesTOE :
   U.unifierYangMillsStressScaleCompilerLevel
   ≡ TOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
 unifierStressScaleMatchesTOE = refl
+
+unifiedPhysicsGeneratedActionDensityMatchesTOE :
+  UnifiedPhysics.yangMillsTOEGeneratedActionDensityCompilerLevel
+  ≡ TOE.toeUnifiedGeneratedActionDensityCompilerLevel
+unifiedPhysicsGeneratedActionDensityMatchesTOE = refl
+
+unifiedPhysicsCombinedRGUnifiedActionMatchesTOE :
+  UnifiedPhysics.yangMillsTOECombinedRGUnifiedActionCompilerLevel
+  ≡ TOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
+unifiedPhysicsCombinedRGUnifiedActionMatchesTOE = refl
+
+unifierGeneratedActionDensityMatchesTOE :
+  U.unifierYangMillsGeneratedActionDensityCompilerLevel
+  ≡ TOE.toeUnifiedGeneratedActionDensityCompilerLevel
+unifierGeneratedActionDensityMatchesTOE = refl
+
+unifierCombinedRGUnifiedActionMatchesTOE :
+  U.unifierYangMillsCombinedRGUnifiedActionCompilerLevel
+  ≡ TOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
+unifierCombinedRGUnifiedActionMatchesTOE = refl
 
 unifierStrictCasimirCarrierMatchesTOE :
   U.unifierYangMillsStrictCasimirCarrierLevel
