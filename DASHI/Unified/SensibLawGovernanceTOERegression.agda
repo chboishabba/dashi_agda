@@ -2,9 +2,8 @@
 module DASHI.Unified.SensibLawGovernanceTOERegression where
 
 open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.String using (String)
-
+open import Agda.Builtin.Equality using (_≡_; refl)
+import DASHI.Algebra.TetralemmaBridge as Tetralemma
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as Semantic
 import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as Legal
@@ -51,21 +50,21 @@ candidateLegalSourceDoesNotCreateAuthority :
     Legal.canonicalLegalSourceAuthorityBoundary
   ≡ false
 candidateLegalSourceDoesNotCreateAuthority =
-  Agda.Builtin.Equality.refl
+  refl
 
 semanticAdmissionCannotSubstituteForLegalAuthority :
   Legal.semanticAdmissionAuthorityCanSubstitute
     Legal.canonicalLegalSourceAuthorityBoundary
   ≡ false
 semanticAdmissionCannotSubstituteForLegalAuthority =
-  Agda.Builtin.Equality.refl
+  refl
 
 legalAuthorityAloneDoesNotEstablishApplicability :
   Legal.legalSourceAuthorityAloneEstablishesApplicability
     Legal.canonicalLegalSourceAuthorityBoundary
   ≡ false
 legalAuthorityAloneDoesNotEstablishApplicability =
-  Agda.Builtin.Equality.refl
+  refl
 
 legalFollowAcquisitionDoesNotPayResidual :
   Follow.acquisitionEqualsResidualPayment
@@ -96,13 +95,13 @@ governancePromotionDoesNotCreatePoliticalAuthority :
     Governance.canonicalConsumerSafeGovernancePromotionBoundary
   ≡ false
 governancePromotionDoesNotCreatePoliticalAuthority =
-  Agda.Builtin.Equality.refl
+  refl
 
 heuristicEvidenceCannotPromote :
   ∀ heuristicFor heuristicAgainst target source →
   Semantic.promote
     (Semantic.heuristicCandidate heuristicFor heuristicAgainst target source)
-  ≡ DASHI.Algebra.TetralemmaBridge.neither
+  ≡ Tetralemma.neither
 heuristicEvidenceCannotPromote =
   Semantic.heuristic-only-abstains
 
@@ -259,7 +258,7 @@ record SensibLawGovernanceTOEContract : Set₁ where
       Semantic.promote
         (Semantic.heuristicCandidate
           heuristicFor heuristicAgainst target source)
-      ≡ DASHI.Algebra.TetralemmaBridge.neither
+      ≡ Tetralemma.neither
 
     legalAuthorityClosureInvariant :
       legalAuthorityPromoted ≡ false
