@@ -19,6 +19,7 @@ module DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.NSTriadKNR571PreferredOneSidedSecondMomentExact as BSharp
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalWeightedSecondMomentEndgameExact as BEnd
@@ -683,3 +684,114 @@ externalReceiptPromotedToAgdaProofIsFalse = refl
 
 aDerivedFromBIsFalse : aDerivedFromB ≡ false
 aDerivedFromBIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- TOE convergence receipt: current NS A/B/C/D max-cut.
+--
+-- This record does not prove a Clay alternative.
+-- It packages the current theorem-bearing compiler surface and the exact
+-- non-promotion boundary for direct reuse by the TOE roots.
+------------------------------------------------------------------------
+
+bR540OrderedOffDiagonalM2CompilerClosedIsTrue :
+  bR540OrderedOffDiagonalM2CompilerClosed ≡ true
+bR540OrderedOffDiagonalM2CompilerClosedIsTrue =
+  BOffdiagM2.r540OrderedOffDiagonalM2CompilerClosedIsTrue
+
+bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse :
+  bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse =
+  BOffdiagM2.r567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+bM2ToR568CompilerClosedIsTrue :
+  bM2ToR568CompilerClosed ≡ true
+bM2ToR568CompilerClosedIsTrue =
+  BR568.r571PhysicalM2ToR568CompilerClosedIsTrue
+
+bPhysicalWeightedSecondMomentPaymentClosedIsFalse :
+  bPhysicalWeightedSecondMomentPaymentClosed ≡ false
+bPhysicalWeightedSecondMomentPaymentClosedIsFalse = refl
+
+record NSABCDTOEMaxCutReceipt : Set where
+  constructor ns-abcd-toe-max-cut-receipt
+  field
+    r540OrderedOffDiagonalM2CompilerClosed : Bool
+    r540OrderedOffDiagonalM2CompilerClosedProof :
+      r540OrderedOffDiagonalM2CompilerClosed ≡ true
+
+    m2ToR568CompilerClosed : Bool
+    m2ToR568CompilerClosedProof :
+      m2ToR568CompilerClosed ≡ true
+
+    r567FullSquareIsCanonicalM2Consumer : Bool
+    r567FullSquareIsCanonicalM2ConsumerProof :
+      r567FullSquareIsCanonicalM2Consumer ≡ false
+
+    physicalWeightedSecondMomentPaymentClosed : Bool
+    physicalWeightedSecondMomentPaymentClosedProof :
+      physicalWeightedSecondMomentPaymentClosed ≡ false
+
+    literalAlternativeClosedInAgda : Bool
+    literalAlternativeClosedInAgdaProof :
+      literalAlternativeClosedInAgda ≡ false
+
+    externalReceiptPromotedToAgdaProof : Bool
+    externalReceiptPromotedToAgdaProofProof :
+      externalReceiptPromotedToAgdaProof ≡ false
+
+    wholeSpaceDerivedFromPeriodic : Bool
+    wholeSpaceDerivedFromPeriodicProof :
+      wholeSpaceDerivedFromPeriodic ≡ false
+
+open NSABCDTOEMaxCutReceipt public
+
+canonicalNSABCDTOEMaxCutReceipt : NSABCDTOEMaxCutReceipt
+canonicalNSABCDTOEMaxCutReceipt =
+  ns-abcd-toe-max-cut-receipt
+    bR540OrderedOffDiagonalM2CompilerClosed
+    bR540OrderedOffDiagonalM2CompilerClosedIsTrue
+    bM2ToR568CompilerClosed
+    bM2ToR568CompilerClosedIsTrue
+    bR567FullSquarePointwiseM2IsCanonicalConsumer
+    bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+    bPhysicalWeightedSecondMomentPaymentClosed
+    bPhysicalWeightedSecondMomentPaymentClosedIsFalse
+    anyLiteralAlternativeClosedInAgdaHere
+    anyLiteralAlternativeClosedInAgdaHereIsFalse
+    externalReceiptPromotedToAgdaProof
+    externalReceiptPromotedToAgdaProofIsFalse
+    aDerivedFromB
+    aDerivedFromBIsFalse
+
+record NSABCDTOEZKPFrame : Set where
+  constructor ns-abcd-toe-zkp-frame
+  field
+    objective : String
+    reuse : String
+    construction : String
+    safetyInvariant : String
+    lane : String
+    preconditions : String
+    governance : String
+    postconditions : String
+    verification : String
+    esdMutationAllowed : Bool
+    createsClayPromotion : Bool
+    promotesExternalReceipt : Bool
+
+canonicalNSABCDTOEZKPFrame : NSABCDTOEZKPFrame
+canonicalNSABCDTOEZKPFrame =
+  ns-abcd-toe-zkp-frame
+    "converge the existing native Navier-Stokes A/B/C/D proof cut into the DASHI TOE roots"
+    "reuse R540 ordered-off-diagonal M2, R571 physical second moment, R568 compiler, and native C/D reconstruction owners"
+    "package the current compiler and non-promotion facts; add only TOE reachability"
+    "R567 full-square is not the canonical M2 consumer; external receipts do not become Agda proofs; A is not derived from B; open analytic leaves remain open"
+    "one disjoint Navier-Stokes TOE reconciliation lane"
+    "canonical owners already exist on current master; ESD is read-only; theorem ownership and attribution remain unchanged"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, C4/PlantUML, and ASD-STE100 are process and presentation lenses only"
+    "TOE root, Unifier, and Unified aggregate reach the same canonical NS max-cut and exact non-promotion proofs"
+    "code search, related-symbol lineage, trust-escape scan, ESD diff audit, duplicate-signature audit, and exact-head Agda kernel check"
+    false
+    false
+    false
