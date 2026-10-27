@@ -92,3 +92,37 @@ comparison between a diffuser, a zone plate and a focused lens, evaluated
 with depth accuracy, reconstruction error, saturation rate, and reliable
 faint-on-bright contrast. The uniform restricted-stability condition for
 that same calibrated instrument is the mathematical closure target.
+
+
+## 2026 cross-pollination
+
+These sources motivate tests. They do not discharge the formal physical
+obligations above.
+
+- *Large-scale compressive microscopy via diffractive multiplexing across a
+  sensor array*, Nature Photonics (2026), DOI / article identifier
+  s41566-026-01974-4. The reported instrument combines 48 independent sensors
+  with a diffractive optical element that creates a multi-impulse PSF. The
+  stated design goal is minimally ambiguous computational reconstruction of
+  information falling between physical sensor regions. This is a physical
+  example of the distinction formalized here: one local observation can omit a
+  scene distinction while a richer joint optical code can preserve it.
+- Landrot et al. (2026), *Full-field X-ray fluorescence imaging using a
+  Fresnel zone plate as a coded aperture: optimized reconstruction algorithm
+  and first trial of hyperspectral XANES mapping*, Journal of Synchrotron
+  Radiation 33, 1093-1102, DOI 10.1107/S1600577526004789. The paper reports
+  detector-linearity and pile-up correction issues and sensitivity to
+  background and intensity-correction choices. These observations support
+  keeping the finite sensor channel separate from the ideal optical encoder.
+- Kawachi et al. (2026), *Single-Image Depth From Defocus With Coded Aperture
+  and Diffusion Posterior Sampling*, IEEE Transactions on Computational
+  Imaging 12, 1034-1045, DOI 10.1109/TCI.2026.3697618. The method combines a
+  differentiable physical forward model with an explicit image prior. This is
+  evidence that single-image depth recovery can require both a physical code
+  and a constrained scene model. It is not evidence for unrestricted inverse
+  recovery.
+
+The formal consequence remains unchanged. Evaluate the information content of
+the complete recorded observation. Do not infer whole-camera non-injectivity
+from one saturated coordinate. Do not infer stable recovery merely from
+multiple encodings.
