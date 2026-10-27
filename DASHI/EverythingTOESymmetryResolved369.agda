@@ -13,3 +13,8 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 -- It contains a terminal physical non-promotion theorem.
 -- Do not replace this import with DASHI.Unifier placeholder axioms.
 import DASHI.Unified.GRQuantumProofTermRegression
+
+-- Reuse exact current YM/RH non-promotion proofs.
+-- The bridge imports theorem-bearing owners only.
+-- It does not identify YM with RH and does not promote either lane to TOE.
+import DASHI.Unified.YMRHNonPromotionTOEBridgeExact
