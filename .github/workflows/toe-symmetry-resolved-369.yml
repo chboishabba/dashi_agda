@@ -21,6 +21,8 @@ on:
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda'
       - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
@@ -44,6 +46,8 @@ on:
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -94,6 +98,16 @@ jobs:
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
+          dashi-repo related monsterAxisReflectionIntertwines --root . --limit 20
+          dashi-repo related dimensionDoesNotCreateFaithfulness --root . --limit 20
+          dashi-repo related dimensionDoesNotCreateProjectedAction --root . --limit 20
+          dashi-repo related canonicalActual3BKernelSameElementBoundary --root . --limit 20
+          dashi-repo related phasePreservingReductionEqualsFullGlobalInversionIsFalse --root . --limit 20
+          dashi-repo discover 'ternary 27 selected 3B max cut kernel BIDI phase intertwiner non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
+          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
           dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
           dashi-repo related canonicalRecognitionRouteParetoBoundary --root . --limit 20
           dashi-repo related currentMonster3BCharacterExecutionFrontier --root . --limit 20
@@ -129,6 +143,8 @@ jobs:
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
@@ -149,6 +165,8 @@ jobs:
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
