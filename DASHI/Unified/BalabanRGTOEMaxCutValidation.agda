@@ -3,6 +3,7 @@ module DASHI.Unified.BalabanRGTOEMaxCutValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
@@ -629,6 +630,64 @@ unifierClayStillFalse :
   Balaban.balabanRGClayPromotionFlag ≡ false
 unifierClayStillFalse =
   Unifier.balabanRGClayPromotionStillFalse
+
+------------------------------------------------------------------------
+-- Typed continuum/RG non-promotion reachability.
+------------------------------------------------------------------------
+
+toeBalabanContinuumLimitReceiptMatchesOwner :
+  TOE.toeBalabanContinuumLimitReceipt ≡ Balaban.balabanContinuumLimitReceipt
+toeBalabanContinuumLimitReceiptMatchesOwner = refl
+
+unifierBalabanContinuumLimitReceiptMatchesOwner :
+  Unifier.unifierBalabanContinuumLimitReceipt ≡ Balaban.balabanContinuumLimitReceipt
+unifierBalabanContinuumLimitReceiptMatchesOwner = refl
+
+toeBalabanContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+toeBalabanContinuumLimitPromotionImpossible =
+  TOE.toeBalabanContinuumLimitPromotionImpossible
+
+unifierBalabanContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+unifierBalabanContinuumLimitPromotionImpossible =
+  Unifier.unifierBalabanContinuumLimitPromotionImpossible
+
+toeDepthContinuumLimitReceiptMatchesOwner :
+  TOE.toeDepthContinuumLimitReceipt ≡ Balaban.depthContinuumLimitReceipt
+toeDepthContinuumLimitReceiptMatchesOwner = refl
+
+unifierDepthContinuumLimitReceiptMatchesOwner :
+  Unifier.unifierDepthContinuumLimitReceipt ≡ Balaban.depthContinuumLimitReceipt
+unifierDepthContinuumLimitReceiptMatchesOwner = refl
+
+toeDepthContinuumLimitPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+toeDepthContinuumLimitPromotionImpossible =
+  TOE.toeDepthContinuumLimitPromotionImpossible
+
+unifierDepthContinuumLimitPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+unifierDepthContinuumLimitPromotionImpossible =
+  Unifier.unifierDepthContinuumLimitPromotionImpossible
+
+physicsBalabanContinuumLimitReceiptMatchesOwner :
+  Physics.yangMillsBalabanContinuumLimitReceipt ≡ Balaban.balabanContinuumLimitReceipt
+physicsBalabanContinuumLimitReceiptMatchesOwner = refl
+
+physicsBalabanContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+physicsBalabanContinuumLimitPromotionImpossible =
+  Physics.yangMillsBalabanContinuumLimitPromotionImpossible
+
+physicsDepthContinuumLimitReceiptMatchesOwner :
+  Physics.yangMillsDepthContinuumLimitReceipt ≡ Balaban.depthContinuumLimitReceipt
+physicsDepthContinuumLimitReceiptMatchesOwner = refl
+
+physicsDepthContinuumLimitPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+physicsDepthContinuumLimitPromotionImpossible =
+  Physics.yangMillsDepthContinuumLimitPromotionImpossible
 
 ------------------------------------------------------------------------
 -- ZKP frame remains the existing typed contract.
