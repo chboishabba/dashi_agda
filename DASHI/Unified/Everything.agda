@@ -15,12 +15,36 @@ import DASHI.Unified.CrossScaleMatterPhysics as CrossScaleMatterPhysics
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.FleetFormalGapTOEExact as FleetFormalGap
+import DASHI.Unified.FleetFormalGapTOERegression
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
+
+------------------------------------------------------------------------
+-- Fleet R5 formal-gap convergence.
+------------------------------------------------------------------------
+
+fleetFormalGapTOEReceipt :
+  FleetFormalGap.FleetFormalGapTOEReceipt
+fleetFormalGapTOEReceipt =
+  FleetFormalGap.canonicalFleetFormalGapReceipt
+
+fleetOnlyFormalResidualDispatches :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.unformalisedFormalGap ≡ true
+fleetOnlyFormalResidualDispatches = refl
+
+fleetDischargedFibresDoNotRedispatch :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.dischargedCoreKnowledge ≡ false
+fleetDischargedFibresDoNotRedispatch = refl
+
+fleetContradictionsRemainSeparate :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.polarityContradictionGap ≡ false
+fleetContradictionsRemainSeparate = refl
+
 governedLegalWorkflowTOEBoundary :
   LegalGovernance.GovernedLegalWorkflowTOEBoundary
 governedLegalWorkflowTOEBoundary =
