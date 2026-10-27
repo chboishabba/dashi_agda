@@ -1,4 +1,9 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+import DASHI.ComputerScience.TekumDASHIRoundingAssemblyExact
+import DASHI.ComputerScience.TekumDASHIRoundingBoundaryExact as TekumRoundingTOE
+import DASHI.ComputerScience.TekumProposition5FiniteNearestNoGoExact as TekumP5
+import DASHI.ComputerScience.TekumRawNearestCorrectionExact as TekumRaw
+import DASHI.ComputerScience.TekumNearestNoDoubleRoundingExact as TekumNoDouble
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1431,3 +1436,38 @@ toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
 toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+------------------------------------------------------------------------
+-- Canonical Tékum exact-nearest / raw-rounding non-promotion convergence.
+-- Reuse the existing DASHI-owned rounding boundary from PR #1102.
+------------------------------------------------------------------------
+
+toeTekumDASHIRoundingBoundary :
+  TekumRoundingTOE.TekumDASHIRoundingBoundary
+toeTekumDASHIRoundingBoundary =
+  TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary
+
+toeTekumHunholdFiniteRepairImpossible :
+  TekumP5.RawTruncationNearestOnFiniteClosure → ⊥
+toeTekumHunholdFiniteRepairImpossible =
+  TekumRoundingTOE.hunholdFiniteRepairStillRefuted
+
+toeTekumRadiusOneRawCorrectionImpossible :
+  TekumRaw.UniformRadiusOneRawCorrection → ⊥
+toeTekumRadiusOneRawCorrectionImpossible =
+  TekumRoundingTOE.rawRadiusOneStillRefuted
+
+toeTekumNoDoubleFinalEqualityImpossible :
+  TekumNoDouble.twoStageFinal8 ≡ TekumNoDouble.directFinal8 → ⊥
+toeTekumNoDoubleFinalEqualityImpossible =
+  TekumNoDouble.universalNoDoubleRoundingRefuted
+
+toeTekumNearestExistenceStillOpen :
+  TekumRoundingTOE.nearestExistencePaid
+    TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary ≡ false
+toeTekumNearestExistenceStillOpen = refl
+
+toeTekumNearestNoDoubleRefuted :
+  TekumRoundingTOE.nearestNoDoubleRoundingRefuted
+    TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary ≡ true
+toeTekumNearestNoDoubleRefuted = refl
