@@ -199,8 +199,6 @@ jobs:
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda
-            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda
-            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda
           dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda
@@ -233,6 +231,8 @@ jobs:
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
             DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda
             DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
             DASHI/Unifier.agda
@@ -254,6 +254,8 @@ jobs:
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
             DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda
             DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
