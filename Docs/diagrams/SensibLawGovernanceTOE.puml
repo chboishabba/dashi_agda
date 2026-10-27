@@ -1,0 +1,70 @@
+@startuml
+title SensibLaw / Legal Governance -> DASHI TOE normalization
+
+skinparam componentStyle rectangle
+
+package "Existing theorem owners" {
+  [AuthorityNonPromotionCore] as Authority
+  [AuthorityBoundaryCore] as Boundary
+  [SensibLawSemanticPromotionPolicy] as Semantic
+  [SensibLawAgdaFirstLegalRuntimeEverything] as Legal
+  [SensibLawITIRParityEverything] as Parity
+  [DomainPermeabilityAuthorityTransport] as Domain
+  [SnowballAttributionProvenanceInvariantExact] as Snowball
+  [SensibLawSnowballAttributionLineageAdapterExact] as SnowballLineage
+  [SensibLawParetoProofDirectedCorpusSearchEverything] as Pareto
+}
+
+package "Normalization" {
+  [SensibLawGovernanceTOEExact] as GovTOE
+}
+
+package "TOE facades" {
+  [EverythingTOESymmetryResolved369] as Root
+  [Unifier] as Unifier
+  [Unified.Physics] as Physics
+}
+
+package "Regression" {
+  [SensibLawGovernanceTOEValidation] as Validation
+  [Unified.Everything] as UnifiedEverything
+}
+
+Authority --> Boundary : fail-closed authority bundle
+Authority --> Semantic : authority non-promotion
+Legal --> Parity : legal runtime contract
+Semantic --> GovTOE : semantic non-promotion
+Boundary --> GovTOE : legal authority boundary
+Legal --> GovTOE : runtime firewalls
+Parity --> GovTOE : invariant handoff
+Domain --> GovTOE : case-management authority transport
+Snowball --> SnowballLineage : source-role attribution
+Snowball --> GovTOE : citation proof/authority firewall
+SnowballLineage --> GovTOE : legal claim-stage separation
+Pareto --> GovTOE : scheduling is not legal authority
+
+GovTOE --> Root : normalized exports
+GovTOE --> Unifier : normalized exports
+GovTOE --> Physics : normalized exports
+
+Root --> Validation
+Unifier --> Validation
+Physics --> Validation
+Validation --> UnifiedEverything
+
+note right of Domain
+Reuse of one case-management representation
+does not transport source-domain authority.
+A target domain needs its own authority witness.
+Named vendor identity does not create authority.
+end note
+
+note bottom of GovTOE
+O/R/C/S/L/P/G/F frame.
+ITIL, ISO 9000, ISO/IEC 42001/27001/27701/23894,
+ISO 9241, NIST AI RMF, Six Sigma, and C4/PlantUML
+are process lenses only.
+No certification claim.
+No ESD mutation.
+end note
+@enduml
