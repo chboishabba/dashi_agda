@@ -32,6 +32,7 @@ on:
       - 'DASHI/Interop/SLRRuntimeValidationHandoffExact.agda'
       - 'DASHI/Interop/SLRValidationRoadmapPromotionExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSourceAuthorityEvidenceExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
       - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
       - 'tests/test_governed_legal_workflow_toe_convergence.py'
@@ -73,6 +74,7 @@ on:
       - 'DASHI/Interop/SLRRuntimeValidationHandoffExact.agda'
       - 'DASHI/Interop/SLRValidationRoadmapPromotionExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSourceAuthorityEvidenceExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
       - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
       - 'tests/test_governed_legal_workflow_toe_convergence.py'
@@ -119,10 +121,13 @@ jobs:
           dashi-repo diagnose DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda --root .
           dashi-repo related canonicalGovernedLegalWorkflowTOEBoundary --root . --limit 20
           dashi-repo related canonicalGovernedLegalWorkflowTOEInvariantHandoff --root . --limit 20
+          dashi-repo related canonicalGovernedLegalWorkflowAuthorityInvariantHandoff --root . --limit 20
+          dashi-repo related canonicalLegalSourceAuthorityBoundary --root . --limit 20
           dashi-repo related canonicalGovernedLegalWorkflowIntrospectiveZKPFrame --root . --limit 20
           dashi-repo discover 'SensibLaw governance legal workflow non promotion TOE' --root . --limit 40
           dashi-repo discover 'IntrospectiveProofLoop ZKPFrame governed legal workflow TOE Unified Everything' --root . --limit 40
           dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root . --limit 40
+          dashi-repo discover 'SensibLaw legal source authority current validity document role applicability non promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
           dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
           dashi-repo diagnose DASHI/Unified/PNFSourceBoundaryTOEExact.agda --root .
