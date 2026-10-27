@@ -157,3 +157,20 @@ unifiedYMImplementAToDMaxCutReceipt :
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
+------------------------------------------------------------------------
+-- Kernel-bidi / ternary-27 / byte-ABI convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEExact as Kernel27TOE
+import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEValidation
+
+unifiedR559IbrahimFleetKernelBidiTernary27Receipt :
+  Kernel27TOE.R559IbrahimFleetKernelBidiTernary27TOEReceipt
+unifiedR559IbrahimFleetKernelBidiTernary27Receipt =
+  Kernel27TOE.canonicalR559IbrahimFleetKernelBidiTernary27TOEReceipt
+
+unifiedKernelActionIntertwinerStillUnpaid :
+  Kernel27TOE.KernelBidi.characterIsotypyConstructsActionIntertwiner
+    Kernel27TOE.kernelBidiBoundary ≡ false
+unifiedKernelActionIntertwinerStillUnpaid =
+  Kernel27TOE.kernelCharacterIsotypyStillDoesNotConstructActionIntertwiner
