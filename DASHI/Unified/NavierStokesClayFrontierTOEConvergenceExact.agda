@@ -371,6 +371,8 @@ record NavierStokesClayFrontierTOEZKPFrame : Set where
     constructionRule : String
     scopeRule : String
     laneRule : String
+    preconditionRule : String
+    invariantRule : String
     postconditionRule : String
     governanceRule : String
     verificationRule : String
@@ -396,15 +398,19 @@ canonicalNavierStokesClayFrontierTOEZKPFrame =
     { objective =
         "Normalize the canonical Navier-Stokes Clay frontier and exact non-promotion theorems into the DASHI TOE graph."
     ; reuseRule =
-        "Reuse the A/B/C/D max-cut, canonical residual scheduler, final Clay-distance receipt, and authority guard before adding any adapter."
+        "Reuse the A/B/C/D max-cut, R736 shared weighted wall, canonical residual scheduler, final Clay-distance receipt, and authority guard before adding any adapter."
     ; constructionRule =
         "Expose exact owner aliases and theorem-level non-promotion only."
     ; scopeRule =
-        "Keep A/B internal theorem development separate from released C/D audit and from carrier-structured completion."
+        "Treat R736 as the preferred periodic-B analytic max-cut. Keep its two weighted leaves open. Keep A/B internal theorem development separate from released C/D audit and from carrier-structured completion."
     ; laneRule =
         "Use one Navier-Stokes normalization lane and keep ESD surfaces unchanged."
+    ; preconditionRule =
+        "Require the canonical R736 owner, A/B/C/D max-cut, residual scheduler, Clay-distance receipt, authority guard, roadmap, and submission-eligibility owners to exist before normalization."
+    ; invariantRule =
+        "Preserve theorem ownership. Preserve exactly two preferred R736 analytic leaves. Preserve the shared weighted/input-Laplacian carrier. Do not promote producer strategies, circular Q-plus-minus shortcuts, finite carriers, or released C/D audit facts into a Clay proof."
     ; postconditionRule =
-        "Make the structural gap and exact false promotion gates reachable from TOE consumers."
+        "Expose the R736 shared wall, both open leaves, barrier compiler, structural gap, and exact false promotion gates through TOE, Unifier, and Unified.Physics."
     ; governanceRule =
         "Preserve theorem ownership, source attribution, A/B/C/D lane separation, and failure-closed promotion."
     ; verificationRule =
