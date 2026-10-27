@@ -96,6 +96,11 @@ jobs:
           dashi-repo related balabanCPhysicalPackageMaxCutCompilerLevel --root . --limit 20
           dashi-repo related balabanC4DensityAnchoredStressLaneLevel --root . --limit 20
           dashi-repo related r129ExportsLiteralSchwingerMembership --root . --limit 20
+          dashi-repo related ktbDependentRecoverableProjection --root . --limit 20
+          dashi-repo related ktbDependentCodeSeparating --root . --limit 20
+          dashi-repo discover 'Arabic root pattern undiacritized surface dependent residual exact reopening non-promotion' --root .
+          dashi-repo lineage --prefix DASHI.Culture.ArabicRootPattern --root .
+          dashi-repo diagnose DASHI/Culture/ArabicRootPatternMorphologyProcessingBoundaryExact.agda --root .
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
           dashi-repo related balabanGeneratedActionStressScaleCompilerLevel --root . --limit 20
           dashi-repo related balabanPublishedRGPhysicalSameObjectLevel --root . --limit 20
