@@ -8,6 +8,7 @@ PREVIOUS = ROOT / "DASHI/Law/SensibLawWoogarooEPBC95C135ADecisionFileMaxCut20261
 ROLLUP = ROOT / "DASHI/Law/SensibLawWoogarooPreservationEverything.agda"
 COUNSEL = ROOT / "Docs/SaveWoogarooForestUrgentCounselStandingFilingInterimAssessment20261027.md"
 EPO_DRAFT = ROOT / "Docs/SaveWoogarooNationalEPA474AConditionalRegulatorNotice20261027.md"
+LEGAL_TEAM = ROOT / "Docs/SaveWoogarooForestLegalTeamBrief.md"
 REQUEST = ROOT / "Docs/SaveWoogarooForestEPBC95C135ARequest20261027.md"
 RESEARCH = ROOT / "docs/research/WoogarooPostApprovalGasHousingBenefitMaxCut20261027.md"
 
@@ -21,8 +22,8 @@ TOPICS = [
 ]
 
 def main() -> None:
-    assert all(p.is_file() for p in (LAW, PREVIOUS, ROLLUP, COUNSEL, REQUEST, RESEARCH, EPO_DRAFT))
-    law, previous, rollup, memo, request, research, epo = [
+    assert all(p.is_file() for p in (LAW, PREVIOUS, ROLLUP, COUNSEL, REQUEST, RESEARCH, EPO_DRAFT, LEGAL_TEAM))
+    law, previous, rollup, memo, request, research, epo, brief = [
         p.read_text(encoding="utf-8")
         for p in (LAW, PREVIOUS, ROLLUP, COUNSEL, REQUEST, RESEARCH, EPO_DRAFT)
     ]
@@ -91,6 +92,13 @@ def main() -> None:
     assert "nationalEPAReportBreachOriginal" in law
     assert "National EPA compliance order" in memo
     assert "EPBC s474A" in memo
+    assert "27 October 2026 CURRENT STATUS" in brief
+    assert "APPROVED WITH CONDITIONS on 15 October 2026" in brief
+    assert "## 15 September 2026" in brief  # dated historical snapshot preserved
+    assert "Unsent EDO/barrister intake" in brief
+    assert "EPBC s474A Environment Protection Order" in brief
+    assert "20-row case matrix" in brief
+
 
     assert "Source.mkNoDOISource" not in memo
 
