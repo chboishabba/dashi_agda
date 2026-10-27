@@ -329,6 +329,18 @@ yangMillsBalabanClayPromotionStillFalse :
 yangMillsBalabanClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
+yangMillsBalabanContinuumLimitReceipt : BalabanRGTOE.BalabanContinuumLimitReceipt
+yangMillsBalabanContinuumLimitReceipt = BalabanRGTOE.balabanContinuumLimitReceipt
+
+yangMillsBalabanContinuumLimitPromotionImpossible : BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+yangMillsBalabanContinuumLimitPromotionImpossible = BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+yangMillsDepthContinuumLimitReceipt : BalabanRGTOE.DepthContinuumLimitReceipt
+yangMillsDepthContinuumLimitReceipt = BalabanRGTOE.depthContinuumLimitReceipt
+
+yangMillsDepthContinuumLimitPromotionImpossible : BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+yangMillsDepthContinuumLimitPromotionImpossible = BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
 
 yangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 yangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
