@@ -1,4 +1,8 @@
 module DASHI.Unifier where
+import DASHI.Unified.TOEExistingNonPromotionReuseExact as ExistingBoundary
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityOwner
+import DASHI.Unified.GRQuantumProofTerms as GRTypes
+import DASHI.Physics.Closure.FiniteRegionalSpectrum as UVSpectrum
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -1205,3 +1209,19 @@ unifierYMImplementAToDScaleTransferNonPromotion :
 unifierYMImplementAToDScaleTransferNonPromotion =
   YMAD.scaleTransferPromotionEliminator
     YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Direct non-promotion of finite-model and authority receipts.
+-- Proof ownership remains with the existing canonical source modules.
+------------------------------------------------------------------------
+
+unifierAuthorityBundleCannotPromote :
+  AuthorityOwner.promotesAnyAuthority
+    ExistingBoundary.toeAuthorityBundle ≡ false
+unifierAuthorityBundleCannotPromote =
+  ExistingBoundary.toeAuthorityDoesNotPromote
+
+unifierFiniteUVCannotCloseTerminalPhysicalMatch :
+  GRTypes.UVSpectralClosed UVSpectrum.regulatedUVSurface → ⊥
+unifierFiniteUVCannotCloseTerminalPhysicalMatch =
+  ExistingBoundary.toeFiniteUVDoesNotCreateTerminalPhysicalMatch
