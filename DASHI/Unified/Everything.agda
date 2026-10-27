@@ -175,12 +175,22 @@ unifiedCurrentMaxCutGovernanceFleetReceipt =
 
 unifiedCurrentFormalGapTarget : ℕ
 unifiedCurrentFormalGapTarget =
-  CurrentMaxCut.targetFormalGapCount
+  CurrentMaxCut.gate4FormalGapCount
 
 unifiedCurrentFormalGapTargetIs58 :
   unifiedCurrentFormalGapTarget ≡ 58
 unifiedCurrentFormalGapTargetIs58 =
-  CurrentMaxCut.targetFormalGapCountIs58
+  CurrentMaxCut.gate4FormalGapCountIs58
+
+unifiedCurrentFleetReportedFormalGapTarget : ℕ
+unifiedCurrentFleetReportedFormalGapTarget =
+  CurrentMaxCut.fleetReportedFormalGapCount
+
+unifiedCurrentFleetReportedFormalGapTargetIs58 :
+  unifiedCurrentFleetReportedFormalGapTarget ≡ 58
+unifiedCurrentFleetReportedFormalGapTargetIs58 =
+  CurrentMaxCut.fleetReportedFormalGapCountIs58
+
 
 unifiedCurrentFleetDischargedFibresExcluded :
   CurrentMaxCut.dischargedFleetFibresExcluded ≡ true
