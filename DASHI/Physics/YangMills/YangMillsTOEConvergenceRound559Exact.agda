@@ -15,10 +15,8 @@ module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact where
 -- CompactSimpleClassificationAdjointCasimirExact owns exact C_A positivity.
 -- Round106 owns the canonical metric-stress representation compiler.
 -- YMClayOSLiteralStressRouteParetoExact owns stress/OPE route separation.
--- R521 owns the concrete-semantics residual with zero opaque endpoint leaves.
--- R546 owns the authoritative fourteen-family irreducible source frontier.
--- R558 owns the seven-family critical mass-gap/nontriviality path.
 -- YMClayPromotionBoundary owns the terminal fail-closed Clay boundary.
+-- The antigravity S4/P3G files own the current local same-object min-cut.
 --
 -- C. Concrete result.
 -- This file exposes exact theorem levels, current family counts, current
@@ -39,9 +37,8 @@ module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact where
 -- It does not copy code from meta-introspector repositories.
 --
 -- P. Postcondition.
--- TOE consumers reach canonical RG, regular-E, Casimir, stress, irreducible
--- source-family, critical-path, concrete-semantics, and Clay-boundary owners
--- through one normalized surface.
+-- TOE consumers reach canonical RG, regular-E, Casimir, stress, antigravity
+-- S4/P3G, continuum non-promotion, and Clay-boundary owners through one surface.
 --
 -- G. Governance.
 -- One claim uses one canonical owner.
@@ -65,9 +62,6 @@ import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact a
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as Casimir
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as Stress106
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
-import DASHI.Physics.YangMills.YangMillsClayConcreteSemanticsResidualRound521Exact as R521
-import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact as R546
-import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
 import DASHI.Physics.Closure.YMClayPromotionBoundary as Promotion
 import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as ContinuumBoundary
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4PhysicalMinCutExact as AntigravityS4
@@ -192,94 +186,6 @@ toeStressLevel2SameFamilyRecoveryLevel =
 toeStressLevel2ShortDistanceOPELevel : ProofLevel
 toeStressLevel2ShortDistanceOPELevel =
   StressPareto.level2ShortDistanceOPEStressAFLevel
-
-------------------------------------------------------------------------
--- Current normalized source frontier.
-------------------------------------------------------------------------
-
-toeIrreducibleSourceFamilyCount : Nat
-toeIrreducibleSourceFamilyCount =
-  R546.preferredSourceFamilyCount
-
-toeIrreducibleSourceFamilyCountIsFourteen :
-  toeIrreducibleSourceFamilyCount ≡ 14
-toeIrreducibleSourceFamilyCountIsFourteen = refl
-
-toeCriticalFamilyCount : Nat
-toeCriticalFamilyCount =
-  R558.criticalFamilyCount
-
-toeCriticalFamilyCountIsSeven :
-  toeCriticalFamilyCount ≡ 7
-toeCriticalFamilyCountIsSeven = refl
-
-toeOpaqueEndpointPredicatesRemaining : Bool
-toeOpaqueEndpointPredicatesRemaining =
-  R546.opaqueEndpointPredicatesRemaining
-
-toeOpaqueEndpointPredicatesRemainingIsFalse :
-  toeOpaqueEndpointPredicatesRemaining ≡ false
-toeOpaqueEndpointPredicatesRemainingIsFalse = refl
-
-toeConstructorChoiceEqualitiesRemaining : Bool
-toeConstructorChoiceEqualitiesRemaining =
-  R546.constructorChoiceEqualitiesRemaining
-
-toeConstructorChoiceEqualitiesRemainingIsFalse :
-  toeConstructorChoiceEqualitiesRemaining ≡ false
-toeConstructorChoiceEqualitiesRemainingIsFalse = refl
-
-toeAllRemainingFamiliesAlreadyProved : Bool
-toeAllRemainingFamiliesAlreadyProved =
-  R546.allRemainingFamiliesAreAlreadyProved
-
-toeAllRemainingFamiliesAlreadyProvedIsFalse :
-  toeAllRemainingFamiliesAlreadyProved ≡ false
-toeAllRemainingFamiliesAlreadyProvedIsFalse = refl
-
-------------------------------------------------------------------------
--- Concrete semantics residual.
-------------------------------------------------------------------------
-
-toeConcreteSemanticResidualCount : Nat
-toeConcreteSemanticResidualCount =
-  R521.residualLeafCount
-
-toeConcreteSemanticResidualCountIsThirtyThree :
-  toeConcreteSemanticResidualCount ≡ 33
-toeConcreteSemanticResidualCountIsThirtyThree = refl
-
-toeEndpointSemanticResidualCount : Nat
-toeEndpointSemanticResidualCount =
-  R521.endpointSemanticLeafCount
-
-toeEndpointSemanticResidualCountIsZero :
-  toeEndpointSemanticResidualCount ≡ 0
-toeEndpointSemanticResidualCountIsZero = refl
-
-------------------------------------------------------------------------
--- Critical-path exclusions.
-------------------------------------------------------------------------
-
-toeSeparateContinuumWilsonFamilyRequired : Bool
-toeSeparateContinuumWilsonFamilyRequired =
-  R558.separateContinuumWilsonConvergenceFamilyRequired
-
-toeSeparateContinuumWilsonFamilyRequiredIsFalse :
-  toeSeparateContinuumWilsonFamilyRequired ≡ false
-toeSeparateContinuumWilsonFamilyRequiredIsFalse = refl
-
-toeFiniteHamiltonianMoscoRouteRequired : Bool
-toeFiniteHamiltonianMoscoRouteRequired =
-  R558.finiteHamiltonianMoscoRouteRequired
-
-toeFiniteHamiltonianMoscoRouteRequiredIsFalse :
-  toeFiniteHamiltonianMoscoRouteRequired ≡ false
-toeFiniteHamiltonianMoscoRouteRequiredIsFalse = refl
-
-toeFullCLayerRetainedForConservativeClayExistence : Bool
-toeFullCLayerRetainedForConservativeClayExistence =
-  R558.fullCLayerRetainedForConservativeClayExistence
 
 ------------------------------------------------------------------------
 -- Antigravity S4 / P3G same-object min-cut.
