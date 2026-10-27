@@ -20,6 +20,8 @@ import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as Ker
 import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as SelectedSame
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZetaMaxCut
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
 
 legacyNegativeRoundTrip :
   TOE.sspToLegacy (TOE.legacyToSSP Legacy.neg) ≡ Legacy.neg
@@ -178,3 +180,32 @@ ibrahimNinetySlicesCannotPromotePermutationRepresentation :
   Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
 ibrahimNinetySlicesCannotPromotePermutationRepresentation =
   TOE.toeNinetySlicesDoNotCreatePermutationRepresentation
+
+
+schrodingerHZetaRecognitionRemainsOpen :
+  HZetaMaxCut.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaRecognitionInhabitedHere
+    HZetaMaxCut.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+schrodingerHZetaRecognitionRemainsOpen =
+  TOE.toeSchrodingerHZetaRecognitionStillOpen
+
+schrodingerActionIntertwinerRemainsOpen :
+  HZetaMaxCut.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaActionIntertwinerInhabitedHere
+    HZetaMaxCut.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+schrodingerActionIntertwinerRemainsOpen =
+  TOE.toeSchrodingerHZetaActionIntertwinerStillOpen
+
+ternary27PhaseReductionIsNotGlobalInversion :
+  TernaryReduction.phasePreservingReductionEqualsFullGlobalInversion
+    TernaryReduction.currentTernary27ReductionBoundary
+  ≡ false
+ternary27PhaseReductionIsNotGlobalInversion =
+  TOE.toeTernary27PhaseReductionIsNotGlobalInversion
+
+ternary27ReductionIsNotMonster42SameObject :
+  TernaryReduction.reducedFifteenIsMonster42dSameObject
+    TernaryReduction.currentTernary27ReductionBoundary
+  ≡ false
+ternary27ReductionIsNotMonster42SameObject =
+  TOE.toeTernary27ReductionIsNotMonster42SameObject
