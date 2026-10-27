@@ -131,6 +131,11 @@ jobs:
           dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/Fleet58ManifestAcquisitionExact.agda --root .
+          dashi-repo related named58ManifestAcquired --root . --limit 20
+          dashi-repo related perGapDispatchEnabled --root . --limit 20
+          dashi-repo related countIdentifiesNamedRows --root . --limit 20
+          dashi-repo discover 'Fleet 58 named manifest acquisition per-gap dispatch boundary' --root . --limit 40
           dashi-repo related fleetCoordinateRebuildabilityReceipt --root . --limit 20
           dashi-repo related fleetNumericABIReceipt --root . --limit 20
           dashi-repo related fleetResidualInvariantReceipt --root . --limit 20
@@ -153,6 +158,7 @@ jobs:
       - name: Fast Agda preflight on converged TOE graph
         run: |
           files=(
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
             DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
             DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
             DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
@@ -177,6 +183,7 @@ jobs:
       - name: Reject trust escapes
         run: |
           sources=(
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
@@ -205,6 +212,7 @@ jobs:
         run: |
           agda --version
           modules=(
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
             DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
             DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
             DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
