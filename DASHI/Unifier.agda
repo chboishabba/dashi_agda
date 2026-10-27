@@ -1,5 +1,7 @@
 module DASHI.Unifier where
 
+open import Agda.Builtin.Bool using (false; true)
+
 import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
