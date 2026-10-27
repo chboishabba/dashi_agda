@@ -11,6 +11,7 @@ import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Law.SensibLawWoogarooEPBC95C135ADecisionFileMaxCut20261027Exact as File
 import DASHI.Law.SensibLawWoogarooLegalPriorityRoadmapExact as Legal
 import DASHI.Law.SensibLawWoogarooGainLossSnowballAdapterExact as Distribution
+import DASHI.Law.SensibLawWoogarooKoalaPopulationConnectivitySnowballExact as Koala
 
 ------------------------------------------------------------------------
 -- LAW P0: ACTUAL STANDING / FURNISHING / INTERIM PROCEDURAL VEHICLES.
@@ -91,16 +92,12 @@ edoIntake = Source.mkNoDOISource
   "Environmental law advice application requires urgency stated; assesses intake/conflicts and availability, does not promise to represent applicant or file. Separate from court registry procedural access."
   Source.publicAttribution
 
+-- Existing canonical original authorship source. No duplicate source root.
 qutLegalAcademicsMarch2026 : Source.AttributedSource
-qutLegalAcademicsMarch2026 = Source.mkNoDOISource
-  "Monica Taylor; Rowena Maguire; Bridget Lewis (QUT School of Law legal academics)"
-  "Letter to Environment Minister re EPBC 2019/8575 — 12 March 2026"
-  "Four-page signed original submission publicly hosted by Save Woogaroo Forest"
-  "12 March 2026"
-  "https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/QUT%20LTR%20EPBC%20referral%20Woogaroo%20-%2012032026.pdf"
-  Source.practitionerSource
-  "Original signed author letter inspected PDF pages 1 and 4 (zero indices 0 and 3): specifically argues koala habitat, cumulative local population effects, mature canopy and offset irreversibility, and requests refusal of 2019/8575. Named academic authors retain claims; a copy addressed/CCd to named recipients does NOT establish proof of email receipt, s95B inclusion, Secretary reading, QUT institutional adoption beyond signatories, or any other individual's s487 activity series."
-  Source.publicAttribution
+qutLegalAcademicsMarch2026 = Koala.qutCurrentSubmission
+
+qccSpringviewMarch2026 : Source.AttributedSource
+qccSpringviewMarch2026 = Koala.qccCurrentSubmission
 
 woogarooCampaignCurrent : Source.AttributedSource
 woogarooCampaignCurrent = Source.mkNoDOISource
@@ -144,6 +141,41 @@ nationalEPARulesOriginal = Source.mkNoDOISource
   "https://www.legislation.gov.au/F2026L01105/asmade/2026-08-21/text/original/epub/OEBPS/document_1/document_1.html"
   Source.governmentSource
   "Schedule records publication fields for original s474A EPO and s474D variation/revocation. An entry on a register is an identity/status receipt, not proof that other particular premises or actions have been inspected or found to breach EPBC."
+  Source.publicAttribution
+
+-- A campaign webpage mixed primary files for distinct controlled actions.
+-- The letter's own referral/parcel/date overrides the webpage download label.
+scenicGroupDecember2025 : Source.AttributedSource
+scenicGroupDecember2025 = Source.mkNoDOISource
+  "Save Woogaroo Forest Group Inc.; signed Keith McCosh, President"
+  "Response on Scenic Precinct, EPBC 2020/8651, Lot 51 SP242316"
+  "Original five-page association-author submission, posted among multi-project campaign submissions"
+  "15 December 2025"
+  "https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/downloads/5b140ad8-accf-4ef6-971d-07dc07d315ea/Response%20by%20SWF%20on%20Scenic%208651.pdf?ver=1792152994924"
+  Source.communitySource
+  "Original PDF pp1 and 5 visually inspected. Names Save Woogaroo Forest Group Inc. and president Keith McCosh, refers ONLY to 2020/8651 Scenic Precinct and 24ha Lot 51. It is evidence of a dated association-authored environmental activity, NOT an ASIC/Queensland incorporation certificate, the association's objects, a second activity, receipt by Department, or the separate Springview 2019/8575 s95B bundle."
+  Source.publicAttribution
+
+scenicPossinghamJanuary2025 : Source.AttributedSource
+scenicPossinghamJanuary2025 = Source.mkNoDOISource
+  "Hugh Possingham"
+  "Scenic Precinct EPBC 2020/8651 original ecological submission"
+  "Original two-page authored submission; campaign download caption says January 2026"
+  "4 January 2025 (date actually printed in original; caption inconsistent)"
+  "https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/downloads/4c22fc2f-3955-4ff9-bdb7-f47767fa6783/Hugh%20Possingham%20submission-Jan%202026.pdf?ver=1792152994924"
+  Source.academicArticleSource
+  "Original PDF p1 visually checked: address to Springfield City Group and subject EPBC 2020/8651, 24.2ha Lot 51. Printed 4 Jan 2025 within s487 15 Oct 2024–2026 window, but actual signature/dispatch/date must be corroborated if disputed. NOT direct objection submitted under EPBC 2019/8575."
+  Source.publicAttribution
+
+scenicZdenekDecember2025 : Source.AttributedSource
+scenicZdenekDecember2025 = Source.mkNoDOISource
+  "Christina N. Zdenek"
+  "Scenic Precinct EPBC 2020/8651 original ecological submission"
+  "Original four-page authored submission; campaign download caption says January 2026"
+  "14 December 2025 (date actually printed in original)"
+  "https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/downloads/321ec662-92cb-49d8-8588-8b237e8fc4f3/Dr%20Christina%20Zdenek%20submission-Jan%202026.pdf?ver=1792152994924"
+  Source.academicArticleSource
+  "Original PDF p1 visually checked: exact EPBC 2020/8651, Lots 51 and 50, NOT 2019/8575. The printed 14 Dec 2025 is prior environmental advocacy and a research witness locator, NOT proof it was received, a group activity, or same-parcel impact."
   Source.publicAttribution
 
 data StandingApplicant : Set where
@@ -274,13 +306,45 @@ nationalEPAComplianceReport = litigation-gate nationalEPAReportBreachIntake nati
 ePoPublicationRequirement : Source.AttributedSource
 ePoPublicationRequirement = nationalEPARulesOriginal
 
+-- Same-action ecology is reused from an existing source owner; a letter
+-- signed and publicly posted is not yet a s95B transmission receipt.
+qccSameCaseSubmissionLead : LitigationGate
+qccSameCaseSubmissionLead = litigation-gate adjrSection5Review qccSpringviewMarch2026
+  caseSpecificProofOpen
+  "12 March 2026 QCC original signed submission, Anthony Gough acting director, names EPBC 2019/8575 and Woogaroo Creek–Opossum Creek connectivity. This source is already owned by the KoalaPopulationConnectivity module."
+  "Confirm actual s95B public-comment delivery to Minister, full QCC activity/objects and correct applicant identity. QCC as a separate legal person does not pay SWFG standing or plaintiff status."
+  false refl
+
+swfgScenicStandingActivityLead : LitigationGate
+swfgScenicStandingActivityLead = litigation-gate adjrSection5Review scenicGroupDecember2025
+  caseSpecificProofOpen
+  "A 15 Dec 2025 dated response expressly names Save Woogaroo Forest Group Inc. and president Keith McCosh for separate EPBC 2020/8651, providing one original organisational environmental activity in the pre-15 Oct 2026 two-year window."
+  "Association incorporation certificate and constitution/objects as at 15 Oct, dated series of environmental activities rather than a single letter, actual signatory's authority, submission dispatch/receipt and board litigation authorisation."
+  false refl
+
+possinghamScenicActivityLead : LitigationGate
+possinghamScenicActivityLead = litigation-gate adjrSection5Review scenicPossinghamJanuary2025
+  caseSpecificProofOpen
+  "The original Hugh Possingham submission is labelled EPBC 2020/8651 and printed 4 Jan 2025 despite website link title Jan 2026; distinct scientific author/environment activity witness lead."
+  "Verify original dispatch/author confirmation before relying on date; separate proof of any candidate individual's citizenship/residency and two-year series; neither this letter nor its science proves 2019/8575 legal invalidity."
+  false refl
+
+zdenekScenicActivityLead : LitigationGate
+zdenekScenicActivityLead = litigation-gate adjrSection5Review scenicZdenekDecember2025
+  caseSpecificProofOpen
+  "Christina Zdenek's original submission is internally dated 14 Dec 2025, names 2020/8651 and 24.2ha, even though the campaign labels its download Jan 2026."
+  "Obtain provenance, recipient delivery and individual's own complete statutory standing evidence; keep 2020/8651 science and location separate from 2019/8575."
+  false refl
+
 triageGates : List LitigationGate
 triageGates =
   individualStanding ∷ organisationStanding ∷ independentAffectedInterest ∷
   section39BAlternative ∷ furnishingClock ∷ stayAfterFiling ∷
   epbcContravention ∷ beforeOriginating ∷ undertakingRisk ∷
   qutLetterEvidenceLead ∷ campaignActivityLead ∷
-  nationalEPA474AEnforcement ∷ nationalEPAComplianceReport ∷ []
+  nationalEPA474AEnforcement ∷ nationalEPAComplianceReport ∷
+  qccSameCaseSubmissionLead ∷ swfgScenicStandingActivityLead ∷
+  possinghamScenicActivityLead ∷ zdenekScenicActivityLead ∷ []
 
 -- Existing source and case consumers are genuinely reused. Nothing in their
 -- existence turns a candidate applicant into a qualified litigant.
@@ -313,6 +377,10 @@ data August2026EPOPowerMeansAutomaticWoogarooProtection : Set where
 data OtherPropertyOctoberEPOProvesThisCaseBreach : Set where
 data RegulatorIntakeEqualsCourtStayOrReportDelivery : Set where
 data EPOCanIssueForLawfulApprovedClearingWithoutBreach : Set where
+data Scenic20208651SubmissionsAreSpringview20198575Comments : Set where
+data DatedOneAssociationLetterProvesFullSection487Standing : Set where
+data CampaignDownloadCaptionOverridesOriginalPrintedDate : Set where
+data QCCSubmissionProvesSWFGGroupStanding : Set where
 
 identityNotStanding : ConservationIdentityAloneProvesSection487 → ⊥
 identityNotStanding ()
@@ -369,3 +437,19 @@ complaintNotCourtOrOrder ()
 lawfulClearingNotAutomaticallyEPOCase :
   EPOCanIssueForLawfulApprovedClearingWithoutBreach → ⊥
 lawfulClearingNotAutomaticallyEPOCase ()
+
+scenicNotSpringviewComment :
+  Scenic20208651SubmissionsAreSpringview20198575Comments → ⊥
+scenicNotSpringviewComment ()
+
+oneLetterNotSection487Series :
+  DatedOneAssociationLetterProvesFullSection487Standing → ⊥
+oneLetterNotSection487Series ()
+
+originalDateBeatsCaption :
+  CampaignDownloadCaptionOverridesOriginalPrintedDate → ⊥
+originalDateBeatsCaption ()
+
+qccNotSwfgStanding :
+  QCCSubmissionProvesSWFGGroupStanding → ⊥
+qccNotSwfgStanding ()
