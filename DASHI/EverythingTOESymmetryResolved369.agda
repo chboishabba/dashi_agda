@@ -548,8 +548,12 @@ toeFleetContradictionGapsAre44 :
 toeFleetContradictionGapsAre44 =
   FleetHyperTOE.fleetContradictionGapsAre44
 
+toePadicPrefixCannotRecoverDiscardedDigit :
+  FleetHyperTOE.PadicPrefixRecovery → ⊥
 toePadicPrefixCannotRecoverDiscardedDigit =
   FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
 
+toeTwoDigitStreamCannotRecoverThird :
+  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
 toeTwoDigitStreamCannotRecoverThird =
   FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
