@@ -281,3 +281,20 @@ unifierProducerIdentityResidualAliasIsExact :
   Bridge.SameProducerIdentifiesResidual → ⊥
 unifierProducerIdentityResidualAliasIsExact =
   Unifier.toeProducerIdentityDoesNotIdentifyResidual
+
+
+-- Exact aliases cannot create new legal-source authority.
+unifierLegalCandidateIsNotAuthority :
+  Bridge.CandidateSourceIsAuthoritative → ⊥
+unifierLegalCandidateIsNotAuthority =
+  Unifier.unifierLegalCandidateIsNotAuthority
+
+unifierLegalValidityIsNotApplicability :
+  Bridge.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifierLegalValidityIsNotApplicability =
+  Unifier.unifierLegalValidityIsNotApplicability
+
+unifierSemanticAdmissionIsNotLegalAuthority :
+  Bridge.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+unifierSemanticAdmissionIsNotLegalAuthority =
+  Unifier.unifierSemanticAdmissionIsNotLegalAuthority
