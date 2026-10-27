@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Promotion.CrossDomainClaimPromotionBoundary as TechnicalSafety
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -404,3 +405,55 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+
+------------------------------------------------------------------------
+-- Technical-service safety non-promotion.
+-- Re-export the canonical cross-domain owner. No product-specific safety
+-- claim and no Fleet-gap discharge is introduced here.
+------------------------------------------------------------------------
+
+unifiedTechnicalServiceSafetyBoundary :
+  TechnicalSafety.TechnicalServiceSafetyBoundary
+unifiedTechnicalServiceSafetyBoundary =
+  TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
+
+unifiedInterfaceCompatibilityDoesNotPromoteContinuousService :
+  TechnicalSafety.InterfaceCompatibilityCreatesContinuousServiceSuitability →
+  ⊥
+unifiedInterfaceCompatibilityDoesNotPromoteContinuousService =
+  TechnicalSafety.interfaceCompatibilityDoesNotPromoteContinuousService
+
+unifiedNominalPressureRatingDoesNotPromoteContinuousService :
+  TechnicalSafety.NominalPressureRatingCreatesContinuousServiceSuitability →
+  ⊥
+unifiedNominalPressureRatingDoesNotPromoteContinuousService =
+  TechnicalSafety.nominalPressureRatingDoesNotPromoteContinuousService
+
+unifiedObservedOpenFlowDoesNotPromoteBackflowSafety :
+  TechnicalSafety.ObservedOpenFlowCreatesBackflowSafety →
+  ⊥
+unifiedObservedOpenFlowDoesNotPromoteBackflowSafety =
+  TechnicalSafety.observedOpenFlowDoesNotPromoteBackflowSafety
+
+unifiedTechnicalServiceContinuousServiceReceiptRequired :
+  TechnicalSafety.continuousServiceAuthorityReceiptRequired
+    TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+unifiedTechnicalServiceContinuousServiceReceiptRequired =
+  TechnicalSafety.technicalServiceContinuousServiceReceiptRequired
+
+unifiedTechnicalServiceBackflowReceiptRequired :
+  TechnicalSafety.backflowSafetyAuthorityReceiptRequired
+    TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+unifiedTechnicalServiceBackflowReceiptRequired =
+  TechnicalSafety.technicalServiceBackflowReceiptRequired
+
+unifiedTechnicalServiceProductSpecificClaimStillBlocked :
+  TechnicalSafety.productSpecificSafetyClaimMade
+    TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
+  ≡ false
+unifiedTechnicalServiceProductSpecificClaimStillBlocked =
+  TechnicalSafety.technicalServiceProductSpecificClaimStillBlocked
