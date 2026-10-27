@@ -305,8 +305,25 @@ toeCanonicalAuthorityKindsRemainClosed =
 -- These are aliases to existing theorem owners only.
 ------------------------------------------------------------------------
 
+TaskCompletionCreatesTruth : Set
+TaskCompletionCreatesTruth = Operational.TaskCompletionCreatesTruth
+
+AcceptedStatusPaysApplicability : Set
+AcceptedStatusPaysApplicability = Review.AcceptedStatusPaysApplicability
+
+CitationAloneRealisesLegalRule : Set
+CitationAloneRealisesLegalRule = SourceRule.CitationAloneRealisesLegalRule
+
+StaticSeparationCreatesDynamicSafetyPermission : Set
+StaticSeparationCreatesDynamicSafetyPermission =
+  Frozen.StaticSeparationCreatesDynamicSafetyPermission
+
+ProvenanceAxisCreatesTruthPermission : Set
+ProvenanceAxisCreatesTruthPermission =
+  Frozen.ProvenanceAxisCreatesTruthPermission
+
 taskCompletionCannotCreateTruth :
-  Operational.TaskCompletionCreatesTruth → ⊥
+  TaskCompletionCreatesTruth → ⊥
 taskCompletionCannotCreateTruth =
   Operational.taskCompletionDoesNotCreateTruth
 
@@ -321,7 +338,7 @@ databaseCommitCannotCreateSemanticAuthority =
   Review.databaseCommitDoesNotCreateSemanticAuthority
 
 acceptedReviewCannotPayApplicability :
-  Review.AcceptedStatusPaysApplicability → ⊥
+  AcceptedStatusPaysApplicability → ⊥
 acceptedReviewCannotPayApplicability =
   Review.acceptedStatusDoesNotPayApplicability
 
@@ -336,7 +353,7 @@ externalSourceCannotAdmitTruth =
   Status.externalSourceDoesNotAdmitTruth
 
 citationCannotRealiseLegalRule :
-  SourceRule.CitationAloneRealisesLegalRule → ⊥
+  CitationAloneRealisesLegalRule → ⊥
 citationCannotRealiseLegalRule =
   SourceRule.citationAloneDoesNotRealiseLegalRule
 
@@ -379,7 +396,7 @@ frozenProvenanceDynamicBoundary =
   Frozen.canonicalFrozenProvenanceDynamicBoundary
 
 staticObserverSeparationStillDoesNotCreateDynamicSafety :
-  Frozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+  StaticSeparationCreatesDynamicSafetyPermission → ⊥
 staticObserverSeparationStillDoesNotCreateDynamicSafety =
   Frozen.staticSeparationDoesNotCreateDynamicSafety
 
@@ -389,7 +406,7 @@ frozenSelectionStillDoesNotCreateDynamicSafety =
   Frozen.frozenSelectionDoesNotCreateDynamicSafety
 
 provenanceAxisStillDoesNotCreateTruth :
-  Frozen.ProvenanceAxisCreatesTruthPermission → ⊥
+  ProvenanceAxisCreatesTruthPermission → ⊥
 provenanceAxisStillDoesNotCreateTruth =
   Frozen.provenanceAxisDoesNotCreateTruth
 
