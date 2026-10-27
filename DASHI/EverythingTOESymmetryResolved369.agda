@@ -1039,3 +1039,31 @@ toeExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 toeExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+
+------------------------------------------------------------------------
+-- Fleet 58 named-manifest acquisition gate.
+------------------------------------------------------------------------
+
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as Fleet58Manifest
+import DASHI.Unified.Fleet58ManifestAcquisitionRegression
+
+toeFleet58ManifestAcquisitionReceipt :
+  Fleet58Manifest.Fleet58ManifestAcquisitionReceipt
+toeFleet58ManifestAcquisitionReceipt =
+  Fleet58Manifest.canonicalFleet58ManifestAcquisitionReceipt
+
+toeFleet58ManifestStillMissing :
+  Fleet58Manifest.named58ManifestAcquired ≡ false
+toeFleet58ManifestStillMissing =
+  Fleet58Manifest.named58ManifestAcquiredIsFalse
+
+toeFleet58PerGapDispatchStillBlocked :
+  Fleet58Manifest.perGapDispatchEnabled ≡ false
+toeFleet58PerGapDispatchStillBlocked =
+  Fleet58Manifest.perGapDispatchEnabledIsFalse
+
+toeFleet58SearchPriorityDoesNotCreateProof :
+  Fleet58Manifest.SearchPriorityCreatesProof → ⊥
+toeFleet58SearchPriorityDoesNotCreateProof =
+  Fleet58Manifest.searchPriorityDoesNotCreateProof
