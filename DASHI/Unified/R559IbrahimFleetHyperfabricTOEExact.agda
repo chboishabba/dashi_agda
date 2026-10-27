@@ -165,24 +165,24 @@ ymGate4InhabitantsLevel =
   YM.gate4CutsetInhabitantsLevel
 
 fleetEigenPriorityDoesNotCreateProof :
-  Fleet.FleetEigenPriorityCreatesProof → ⊥
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt ≡ false
 fleetEigenPriorityDoesNotCreateProof =
   Fleet.fleetEigenPriorityDoesNotCreateProof
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof fleetFormalGapTargetReceipt ≡ false
 fleetExternalCountDoesNotCreateFormalDischarge =
   Fleet.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStayOutOfTarget :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged fleetFormalGapTargetReceipt ≡ true
 fleetDischargedFibresStayOutOfTarget =
-  Fleet.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+  Fleet.fleetDischargedFibresRemainOutOfTarget
 
 fleetContradictionGapsStaySeparate :
-  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+  Fleet.contradictionGapsRemainSeparate fleetFormalGapTargetReceipt ≡ true
 fleetContradictionGapsStaySeparate =
-  Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
+  Fleet.fleetContradictionGapsRemainSeparate
 
 
 Fleet58EqualsYMGate4SameObject : Set
@@ -332,12 +332,14 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     currentGate4FrontierSelfPromotion :
       Proof.promotable currentGate4Frontier ≡ false
     scaleTransferBlocked : YM.ScaleTransferPromotion → ⊥
+    eigenPriorityNoProof :
+      Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetReceipt ≡ false
     fleetCountDoesNotDischarge :
-      Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+      Fleet.externalCountCreatesFormalProof fleetReceipt ≡ false
     dischargedFibreRetargetBlocked :
-      Fleet.FleetDischargedFibreRetargetPermission → ⊥
+      Fleet.dischargedFibresRemainDischarged fleetReceipt ≡ true
     contradictionReclassificationBlocked :
-      Fleet.FleetContradictionGapReclassificationPermission → ⊥
+      Fleet.contradictionGapsRemainSeparate fleetReceipt ≡ true
 
 canonicalR559IbrahimFleetHyperfabricTOEReceipt :
   R559IbrahimFleetHyperfabricTOEReceipt
@@ -378,6 +380,7 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   ; currentGate4FrontierSelfPromotion =
       currentGate4FrontierDoesNotSelfPromote
   ; scaleTransferBlocked = toeScaleTransferPromotionImpossible
+  ; eigenPriorityNoProof = fleetEigenPriorityDoesNotCreateProof
   ; fleetCountDoesNotDischarge = fleetExternalCountDoesNotCreateFormalDischarge
   ; dischargedFibreRetargetBlocked = fleetDischargedFibresStayOutOfTarget
   ; contradictionReclassificationBlocked = fleetContradictionGapsStaySeparate
