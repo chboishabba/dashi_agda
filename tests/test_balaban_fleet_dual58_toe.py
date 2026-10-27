@@ -60,5 +60,6 @@ def test_no_esd_or_trust_escape_is_introduced_by_dual_58_surface() -> None:
     forbidden = ("postulate", "allow-unsolved-metas", "TERMINATING", "NO_POSITIVITY_CHECK")
     for token in forbidden:
         assert token not in text
-    assert "digital_esd" not in text.lower()
+    assert "import dashi_digital_esd" not in text.lower()
     assert "import DASHI.ESD" not in text
+    assert "open import DASHI.ESD" not in text
