@@ -1,12 +1,44 @@
 module DASHI.Unifier where
 
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
+
+
+------------------------------------------------------------------------
+-- Exact Yang-Mills theorem-owner exports.
+--
+-- The legacy Unifier remains a carrier surface.
+-- These proofs are owned by the normalized Yang-Mills TOE module.
+------------------------------------------------------------------------
+
+open YMTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
 
 ¬ : Set → Set
 ¬ A = A → ⊥
@@ -313,3 +345,123 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- TOE Yang-Mills non-promotion reuse.
+------------------------------------------------------------------------
+
+unifierYangMillsPublishedRGDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsPublishedRGDoesNotPromoteContinuum =
+  YMTOE.toePublishedRGDoesNotPromoteContinuum
+
+unifierYangMillsGeneratedActionDensityDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsGeneratedActionDensityDoesNotPromoteContinuum =
+  YMTOE.toeGeneratedActionDensityDoesNotPromoteContinuum
+
+unifierYangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum =
+  YMTOE.toeCombinedRGUnifiedActionDoesNotPromoteContinuum
+
+unifierYangMillsContinuumMassGapNotPromoted :
+  YMTOE.toeContinuumMassGapPromoted ≡ false
+unifierYangMillsContinuumMassGapNotPromoted =
+  YMTOE.toeContinuumMassGapPromotedIsFalse
+
+unifierYangMillsClayNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+unifierYangMillsClayNotPromoted =
+  YMTOE.toeClayYangMillsPromotedIsFalse
+
+
+------------------------------------------------------------------------
+-- Normalized Yang-Mills TOE research frontier.
+--
+-- These are aliases only.
+-- The theorem owners remain in the Yang-Mills source lane.
+------------------------------------------------------------------------
+
+unifierYangMillsRegularEProjectionCompilerLevel :
+  ProofLevel
+unifierYangMillsRegularEProjectionCompilerLevel =
+  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
+
+unifierYangMillsRegularELocalizationSourceLevel :
+  ProofLevel
+unifierYangMillsRegularELocalizationSourceLevel =
+  YMTOE.toeCMP119RegularELocalizationSourceLevel
+
+unifierYangMillsHardAnalyticLemmaUpperCount : ℕ
+unifierYangMillsHardAnalyticLemmaUpperCount =
+  YMTOE.toeHardAnalyticLemmaUpperCount
+
+unifierYangMillsHardAnalyticLemmaUpperCountIsSix :
+  unifierYangMillsHardAnalyticLemmaUpperCount ≡ 6
+unifierYangMillsHardAnalyticLemmaUpperCountIsSix =
+  YMTOE.toeHardAnalyticLemmaUpperCountIsSix
+
+
+------------------------------------------------------------------------
+-- Normalized Yang-Mills scale-density-stress convergence.
+------------------------------------------------------------------------
+
+unifierYangMillsBetaDrivenSourceFlowLevel : ProofLevel
+unifierYangMillsBetaDrivenSourceFlowLevel =
+  YMTOE.toeBetaDrivenSourceFlowLevel
+
+unifierYangMillsBetaHistorySameStateCouplingLevel : ProofLevel
+unifierYangMillsBetaHistorySameStateCouplingLevel =
+  YMTOE.toeBetaHistorySameStateCouplingLevel
+
+unifierYangMillsCanonicalCompleteDensityLevel : ProofLevel
+unifierYangMillsCanonicalCompleteDensityLevel =
+  YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
+
+unifierYangMillsGeneratedActionDensityCompilerLevel : ProofLevel
+unifierYangMillsGeneratedActionDensityCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
+
+unifierYangMillsCombinedRGUnifiedActionCompilerLevel : ProofLevel
+unifierYangMillsCombinedRGUnifiedActionCompilerLevel =
+  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
+
+unifierYangMillsStressScaleCompilerLevel : ProofLevel
+unifierYangMillsStressScaleCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
+
+unifierYangMillsStrictCasimirCarrierLevel : ProofLevel
+unifierYangMillsStrictCasimirCarrierLevel =
+  YMTOE.toeStrictCasimirCarrierCompilerLevel
+
+unifierYangMillsOSWightmanContinuumNotConstructed :
+  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
+unifierYangMillsOSWightmanContinuumNotConstructed =
+  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+
+unifierYangMillsTerminalPromotionBlocked :
+  YMTOE.toeTerminalPromotion ≡ false
+unifierYangMillsTerminalPromotionBlocked =
+  YMTOE.toeTerminalPromotionIsFalse
+
+unifierYangMillsUniversalBetaFloorLevel : ProofLevel
+unifierYangMillsUniversalBetaFloorLevel =
+  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
+
+unifierYangMillsLiteralUniformRemainderFloorLevel : ProofLevel
+unifierYangMillsLiteralUniformRemainderFloorLevel =
+  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
+
+unifierYangMillsStressMarkedShellBoundLevel : ProofLevel
+unifierYangMillsStressMarkedShellBoundLevel =
+  YMTOE.toeStressFirstVariationMarkedShellBoundLevel
+
+unifierYangMillsStressShellEnergyHilbertLevel : ProofLevel
+unifierYangMillsStressShellEnergyHilbertLevel =
+  YMTOE.toeStressShellEnergyToHilbertCompilerLevel
+
+unifierYangMillsLiteralStressActivityEntropyLevel : ProofLevel
+unifierYangMillsLiteralStressActivityEntropyLevel =
+  YMTOE.toeLiteralStressActivityEntropyInstantiationLevel

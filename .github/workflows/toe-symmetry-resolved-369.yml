@@ -7,6 +7,11 @@ on:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Unifier.agda'
+      - 'Docs/diagrams/ym_toe_r559_convergence.puml'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -27,12 +32,54 @@ jobs:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
 
+      - name: Install DASHI Agda preflight
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Run DASHI Agda preflight
+        run: |
+          modules=(
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unifier.agda
+          )
+          for module in "${modules[@]}"; do
+            dashi-agda-preflight --root . "$module"
+          done
+
+
+      - name: Run repository discovery referee
+        run: |
+          dashi-repo index --root .
+          dashi-repo status --root .
+          dashi-repo discover "Balaban RG scale density regular-E Casimir stress continuum non-promotion" --root . --limit 30
+
+          symbols=(
+            DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact.sourceCouplingIsBetaHistoryCoupling
+            DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact.selectedRegularEIsLocalizedCompositeSum
+            DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact.classificationAdjointCasimirAtLeastTwo
+            DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact.stressSelectedDensityIndexIsUnifiedActionIndex
+            DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact.sourceDerivativeBelowExistingMarkedShell
+            DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact.stressCoefficientEnergyUniformBound
+            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toePublishedRGDoesNotPromoteContinuum
+          )
+          for symbol in "${symbols[@]}"; do
+            dashi-repo related "$symbol" --root . --limit 20
+          done
+
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+
       - name: Reject trust escapes
         run: |
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -41,7 +88,15 @@ jobs:
             fi
           done
 
-      - name: Kernel-check TOE symmetry-resolved aggregate
+      - name: Kernel-check TOE symmetry-resolved aggregate and direct endpoints
         run: |
           agda --version
-          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          modules=(
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unifier.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done
