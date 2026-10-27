@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Unified.TOE369EisensteinReuseExact where
 
 ------------------------------------------------------------------------
@@ -15,7 +14,7 @@ module DASHI.Unified.TOE369EisensteinReuseExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false)
-open import Data.Rational.Base using (ℚ; 0ℚ)
+open import Data.Rational.Base using (0ℚ; _+_)
 
 import DASHI.Biology.EisensteinNineRingInterferenceExact as Ring
 import DASHI.Biology.EisensteinThreeSixSymmetryExact as ThreeSix
@@ -49,7 +48,7 @@ toeEisensteinThreePhaseCancellationOmega =
 toeEisensteinInterference :
   (wave : Ring.HostGuestWave) →
   Ring.joinedIntensity wave
-  ≡ Ring.separateIntensity wave Data.Rational.Base._+_ Ring.interferenceContribution wave
+  ≡ Ring.separateIntensity wave + Ring.interferenceContribution wave
 toeEisensteinInterference = Ring.hostGuestInterferenceIdentity
 
 toeEisensteinThreeNotOrderedScale :
