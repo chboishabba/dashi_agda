@@ -849,3 +849,13 @@ toeCurrentDocumentRoleCannotCreateLegalAuthority :
   CurrentMaxCut.DocumentRoleIsLegalSourceAuthority → ⊥
 toeCurrentDocumentRoleCannotCreateLegalAuthority =
   CurrentMaxCut.documentRoleAuthorityNonPromotion
+
+------------------------------------------------------------------------
+-- Numeric equality is not same-object identification.
+-- Reuse current master's existing theorem owner without a new carrier.
+------------------------------------------------------------------------
+
+toeCurrentFleet58CannotPromoteToGate4SameObject :
+  CurrentMaxCut.Fleet58IsGate4SameObject → ⊥
+toeCurrentFleet58CannotPromoteToGate4SameObject =
+  CurrentMaxCut.fleet58DoesNotBecomeGate4SameObject
