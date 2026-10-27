@@ -1544,3 +1544,79 @@ toe369Ternary27StateCodeStateDecode :
   toe369Ternary27StateCode (toe369Ternary27StateDecode i) ≡ i
 toe369Ternary27StateCodeStateDecode =
   MaxCut369.toe27StateCodeStateDecode
+
+------------------------------------------------------------------------
+-- Fleet max-cut promotion and manifest firewalls.
+------------------------------------------------------------------------
+
+toeFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+toeFleetESDSurfaceUnedited :
+  FleetGapTOE.esdSurfaceEdited
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetESDSurfaceUnedited = refl
+
+toeFleetEigenPriorityPromotionImpossible :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+toeFleetEigenPriorityPromotionImpossible =
+  FleetGapTOE.fleetEigenPriorityPromotionImpossible
+
+toeFleetExternalCountPromotionImpossible :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+toeFleetExternalCountPromotionImpossible =
+  FleetGapTOE.fleetExternalCountPromotionImpossible
+
+toeFleetDischargedFibreRetargetImpossible :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+toeFleetDischargedFibreRetargetImpossible =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+toeFleetContradictionGapReclassificationImpossible :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+toeFleetContradictionGapReclassificationImpossible =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+toeFleet58ManifestAbsent :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+toeFleet58ManifestAbsent =
+  FleetManifestTOE.named58ManifestAcquiredIsFalse
+
+toeFleet58CountDoesNotNameRows :
+  FleetManifestTOE.countIdentifiesNamedRows ≡ false
+toeFleet58CountDoesNotNameRows =
+  FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+
+toeFleet58PerGapDispatchDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+toeFleet58PerGapDispatchDisabled =
+  FleetManifestTOE.perGapDispatchEnabledIsFalse
+
+toeFleet58RelatedSymbolsRequired :
+  FleetManifestTOE.relatedSymbolsRequired ≡ true
+toeFleet58RelatedSymbolsRequired =
+  FleetManifestTOE.relatedSymbolsRequiredIsTrue
+
+toeFleet58DiscoverRequired :
+  FleetManifestTOE.discoverRequired ≡ true
+toeFleet58DiscoverRequired =
+  FleetManifestTOE.discoverRequiredIsTrue
+
+toeFleet58RoundLineageRequired :
+  FleetManifestTOE.roundLineageRequired ≡ true
+toeFleet58RoundLineageRequired =
+  FleetManifestTOE.roundLineageRequiredIsTrue
+
+toeFleet58AcquisitionDoesNotCloseConsumer :
+  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+toeFleet58AcquisitionDoesNotCloseConsumer =
+  FleetManifestTOE.acquisitionDoesNotCloseConsumer
+
+toeFleet58ProducerDoesNotIdentifyResidual :
+  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
+toeFleet58ProducerDoesNotIdentifyResidual =
+  FleetManifestTOE.producerDoesNotIdentifyResidual
+
