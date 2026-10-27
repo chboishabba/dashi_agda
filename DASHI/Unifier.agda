@@ -1,6 +1,10 @@
 module DASHI.Unifier where
 
 import DASHI.Unified.ForecastComparativeNonPromotionTOEBridgeExact as ForecastTOE
+import DASHI.Statistics.ForecastVerificationKernelExact as ForecastKernel
+import DASHI.Core.ProviderNeutralWorldQueryAlgebraExact as ForecastQuery
+import DASHI.Law.SensibLawWorldMonitorComparativeAdapterExact as ForecastWorldMonitor
+import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as ForecastTrade
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -326,35 +330,35 @@ DASHI-Unification-Theorem = DASHIUnificationAxiom
 ------------------------------------------------------------------------
 
 toeForecastProbabilityIsNotWorldState :
-  ForecastTOE.Kernel.ForecastVerificationKernelBoundary.probabilityIsWorldState
+  ForecastKernel.ForecastVerificationKernelBoundary.probabilityIsWorldState
     ForecastTOE.forecastKernelBoundary
   ≡ false
 toeForecastProbabilityIsNotWorldState =
   ForecastTOE.toeProbabilityIsNotWorldState
 
 toeForecastScoreIsNotTruth :
-  ForecastTOE.Kernel.ForecastVerificationKernelBoundary.scoreIsForecastTruth
+  ForecastKernel.ForecastVerificationKernelBoundary.scoreIsForecastTruth
     ForecastTOE.forecastKernelBoundary
   ≡ false
 toeForecastScoreIsNotTruth =
   ForecastTOE.toeScoreIsNotForecastTruth
 
 toeForecastSearchHitDoesNotPayResidual :
-  ForecastTOE.Query.ProviderNeutralWorldQueryBoundary.searchHitEqualsPayment
+  ForecastQuery.ProviderNeutralWorldQueryBoundary.searchHitEqualsPayment
     ForecastTOE.worldQueryBoundary
   ≡ false
 toeForecastSearchHitDoesNotPayResidual =
   ForecastTOE.toeSearchHitDoesNotPayResidual
 
 toeForecastChangeDoesNotAutomaticallyChangeWorld :
-  ForecastTOE.WorldMonitor.WorldMonitorComparativeBoundary.forecastChangeAutomaticallyChangesWorld
+  ForecastWorldMonitor.WorldMonitorComparativeBoundary.forecastChangeAutomaticallyChangesWorld
     ForecastTOE.worldMonitorBoundary
   ≡ false
 toeForecastChangeDoesNotAutomaticallyChangeWorld =
   ForecastTOE.toeForecastChangeDoesNotAutomaticallyChangeWorld
 
 toeTradeJustificationDoesNotCreateCausalProof :
-  ForecastTOE.Trade.DashiTradeComparativeBoundary.justificationChainCreatesCausalProof
+  ForecastTrade.DashiTradeComparativeBoundary.justificationChainCreatesCausalProof
     ForecastTOE.tradeBoundary
   ≡ false
 toeTradeJustificationDoesNotCreateCausalProof =
