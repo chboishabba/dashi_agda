@@ -196,3 +196,45 @@ yangMillsTOESelectedBSourceDecayCompilerLevel =
 yangMillsTOEPinnedCStressSameHamiltonianCompilerLevel : ProofLevel
 yangMillsTOEPinnedCStressSameHamiltonianCompilerLevel =
   YMTOE.toePinnedConcreteStressSameHamiltonianAdapterLevel
+
+
+------------------------------------------------------------------------
+-- Later preferred A/B/C convergence aliases.
+------------------------------------------------------------------------
+
+yangMillsTOEPinnedRealBPostCoordinateCompilerLevel : ProofLevel
+yangMillsTOEPinnedRealBPostCoordinateCompilerLevel =
+  YMTOE.toePinnedRealBPostCoordinateCompilerLevel
+
+yangMillsTOER415ToContinuumPhysicalClusteringCompilerLevel : ProofLevel
+yangMillsTOER415ToContinuumPhysicalClusteringCompilerLevel =
+  YMTOE.toeR415ToContinuumPhysicalClusteringCompilerLevel
+
+yangMillsTOESameFamilyContinuumCoreRecoveryCompilerLevel : ProofLevel
+yangMillsTOESameFamilyContinuumCoreRecoveryCompilerLevel =
+  YMTOE.toeSameFamilyContinuumCoreRecoveryCompilerLevel
+
+yangMillsTOEPreferredSameFamilyMeasureCompilerLevel : ProofLevel
+yangMillsTOEPreferredSameFamilyMeasureCompilerLevel =
+  YMTOE.toePreferredSameFamilyMeasureCompilerLevel
+
+yangMillsTOEWeakMeasureFullConvergenceLevel : ProofLevel
+yangMillsTOEWeakMeasureFullConvergenceLevel =
+  YMTOE.toeWeakMeasureFullConvergenceLevel
+
+yangMillsTOEWeakMeasurePreGapCoreCompilerLevel : ProofLevel
+yangMillsTOEWeakMeasurePreGapCoreCompilerLevel =
+  YMTOE.toeWeakMeasurePreGapCoreCompilerLevel
+
+yangMillsTOEPinnedLiteralStressAttachmentCompilerLevel : ProofLevel
+yangMillsTOEPinnedLiteralStressAttachmentCompilerLevel =
+  YMTOE.toePinnedLiteralStressAttachmentCompilerLevel
+
+yangMillsTOEPinnedGRQFTStressExportLevel : ProofLevel
+yangMillsTOEPinnedGRQFTStressExportLevel =
+  YMTOE.toePinnedGRQFTStressExportLevel
+
+yangMillsTOEGRQFTStressWeldNotPromoted :
+  YMTOE.toeGRQFTStressWeldPromoted ≡ false
+yangMillsTOEGRQFTStressWeldNotPromoted =
+  YMTOE.toeGRQFTStressWeldPromotedIsFalse
