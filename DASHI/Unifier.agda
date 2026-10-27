@@ -826,8 +826,12 @@ unifierFleetContradictionGapsAre44 :
 unifierFleetContradictionGapsAre44 =
   FleetHyperTOE.fleetContradictionGapsAre44
 
+unifierPadicPrefixCannotRecoverDiscardedDigit :
+  FleetHyperTOE.PadicPrefixRecovery → ⊥
 unifierPadicPrefixCannotRecoverDiscardedDigit =
   FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
 
+unifierTwoDigitStreamCannotRecoverThird :
+  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
 unifierTwoDigitStreamCannotRecoverThird =
   FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
