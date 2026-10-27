@@ -16,6 +16,7 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.YMBlockDMaxCutTOEExact as YMBlockD
+import DASHI.Unified.YMBalabanRGPhysicalBoundaryTOEExact as YMBoundary
 
 ------------------------------------------------------------------------
 -- Yang-Mills TOE fail-closed root facts.
@@ -30,6 +31,75 @@ toeYangMillsClayPromotionRemainsFalse :
   YMTOE.toeClayYangMillsPromoted ≡ false
 toeYangMillsClayPromotionRemainsFalse =
   YMTOE.toeClayYangMillsPromotedIsFalse
+
+
+------------------------------------------------------------------------
+-- Yang-Mills normalized Bałaban RG physical boundary.
+------------------------------------------------------------------------
+
+toe369CMP119SourceNativeStateLevel : ProofLevel
+toe369CMP119SourceNativeStateLevel =
+  YMBoundary.toeBoundaryCMP119SourceNativeStateLevel
+
+toe369CMP119LiteralCompleteDensityLevel : ProofLevel
+toe369CMP119LiteralCompleteDensityLevel =
+  YMBoundary.toeBoundaryCMP119LiteralCompleteDensityLevel
+
+toe369RegularEFunctionalToRawCompilerLevel : ProofLevel
+toe369RegularEFunctionalToRawCompilerLevel =
+  YMBoundary.toeBoundaryRegularEFunctionalToRawCompilerLevel
+
+toe369RegularELiteralLocalizationLevel : ProofLevel
+toe369RegularELiteralLocalizationLevel =
+  YMBoundary.toeBoundaryRegularELiteralLocalizationLevel
+
+toe369ActiveRawToBC1CompilerLevel : ProofLevel
+toe369ActiveRawToBC1CompilerLevel =
+  YMBoundary.toeBoundaryActiveRawToBC1CompilerLevel
+
+toe369ActiveRawSameRegularELevel : ProofLevel
+toe369ActiveRawSameRegularELevel =
+  YMBoundary.toeBoundaryActiveRawSameRegularELevel
+
+toe369AdjointCasimirStrictPositivityLevel : ProofLevel
+toe369AdjointCasimirStrictPositivityLevel =
+  YMBoundary.toeBoundaryAdjointCasimirStrictPositivityLevel
+
+toe369MetricStressCompilerLevel : ProofLevel
+toe369MetricStressCompilerLevel =
+  YMBoundary.toeBoundaryMetricStressCompilerLevel
+
+toe369LiteralMetricStressLevel : ProofLevel
+toe369LiteralMetricStressLevel =
+  YMBoundary.toeBoundaryLiteralMetricStressLevel
+
+toe369RGSlopeMayReplaceInverseCouplingValue : Bool
+toe369RGSlopeMayReplaceInverseCouplingValue =
+  YMBoundary.toeBoundaryRGSlopeMayReplaceInverseCouplingValue
+
+toe369RGSlopeMayReplaceInverseCouplingValueIsFalse :
+  toe369RGSlopeMayReplaceInverseCouplingValue ≡ false
+toe369RGSlopeMayReplaceInverseCouplingValueIsFalse =
+  YMBoundary.toeBoundaryRGSlopeMayReplaceInverseCouplingValueIsFalse
+
+toe369NegativeTraceAloneClosesNegativeActiveStress : Bool
+toe369NegativeTraceAloneClosesNegativeActiveStress =
+  YMBoundary.toeBoundaryNegativeTraceAloneClosesNegativeActiveStress
+
+toe369NegativeTraceAloneClosesNegativeActiveStressIsFalse :
+  toe369NegativeTraceAloneClosesNegativeActiveStress ≡ false
+toe369NegativeTraceAloneClosesNegativeActiveStressIsFalse =
+  YMBoundary.toeBoundaryNegativeTraceAloneClosesNegativeActiveStressIsFalse
+
+toe369PhysicalBoundaryContinuumStillOpen :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+toe369PhysicalBoundaryContinuumStillOpen =
+  YMBoundary.toeBoundaryFlat4DContinuumPromotedIsFalse
+
+toe369PhysicalBoundaryClayStillNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+toe369PhysicalBoundaryClayStillNotPromoted =
+  YMBoundary.toeBoundaryClayYangMillsPromotedIsFalse
 
 
 ------------------------------------------------------------------------
