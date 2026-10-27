@@ -205,3 +205,46 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Governed legal workflow / Ibrahim genealogy / semantic non-promotion.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSemanticTOE
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOERegression
+
+unifiedGovernedLegalWorkflowSourceSemanticHandoff :
+  LegalSemanticTOE.GovernedLegalWorkflowSourceSemanticHandoff
+unifiedGovernedLegalWorkflowSourceSemanticHandoff =
+  LegalSemanticTOE.canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+unifiedLegalSemanticSharedLexemeFirewall =
+  LegalSemanticTOE.toeSharedLexemeDoesNotCreateSemanticIdentity
+
+unifiedLegalSemanticDiagnosticPromotionFirewall =
+  LegalSemanticTOE.toeDiagnosticCheckDoesNotCreateTheoremPromotion
+
+unifiedLegalSemanticIdentifierAuthorityFirewall =
+  LegalSemanticTOE.toeSourceIdentifierDoesNotCreateProofAuthority
+
+unifiedLegalSemanticESDMutationForbidden =
+  LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
+
+------------------------------------------------------------------------
+-- Fleet-58 named-manifest dispatch boundary.
+------------------------------------------------------------------------
+
+unifiedFleetGapDispatchBoundary :
+  FleetGapTOE.FleetFormalGapDispatchBoundary
+unifiedFleetGapDispatchBoundary =
+  FleetGapTOE.canonicalFleetFormalGapDispatchBoundary
+
+unifiedFleetNamedManifestStillOpen =
+  FleetGapTOE.namedFormalGapManifestAvailableIsFalse
+
+unifiedFleetDispatchRequiresNamedManifest =
+  FleetGapTOE.dispatchRequiresNamedFormalGapManifestIsTrue
+
+unifiedFleetCountDoesNotIdentifyGapObjects =
+  FleetGapTOE.externalGapCountIdentifiesIndividualGapsIsFalse
