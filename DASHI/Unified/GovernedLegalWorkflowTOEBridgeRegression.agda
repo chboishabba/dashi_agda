@@ -246,3 +246,38 @@ unifierSoftwarePublicationAliasIsExact :
   Bridge.SoftwareValidationAuthorizesPublication → ⊥
 unifierSoftwarePublicationAliasIsExact =
   Unifier.toeSoftwareValidationDoesNotAuthorizePublication
+
+
+------------------------------------------------------------------------
+-- Canonical semantic-authority and exact-live acquisition regressions.
+------------------------------------------------------------------------
+
+unifierSemanticPromotionTruthAuthorityAliasIsExact :
+  Bridge.SemanticPromotionTruthAuthorityClosed
+unifierSemanticPromotionTruthAuthorityAliasIsExact =
+  Unifier.toeSemanticPromotionTruthAuthorityClosed
+
+unifierSemanticPromotionLegalAuthorityAliasIsExact :
+  Bridge.SemanticPromotionLegalAuthorityClosed
+unifierSemanticPromotionLegalAuthorityAliasIsExact =
+  Unifier.toeSemanticPromotionLegalAuthorityClosed
+
+unifierSemanticPromotionAllAuthorityAliasIsExact :
+  Bridge.SemanticPromotionAllAuthorityClosed
+unifierSemanticPromotionAllAuthorityAliasIsExact =
+  Unifier.toeSemanticPromotionAllAuthorityClosed
+
+unifierBoundAcquisitionPaymentAliasIsExact :
+  Bridge.BoundDemandAutomaticallyPaysRequirement → ⊥
+unifierBoundAcquisitionPaymentAliasIsExact =
+  Unifier.toeBoundAcquisitionDoesNotPayRequirement
+
+unifierBoundAcquisitionClosureAliasIsExact :
+  Bridge.BoundDemandAutomaticallyClosesConsumer → ⊥
+unifierBoundAcquisitionClosureAliasIsExact =
+  Unifier.toeBoundAcquisitionDoesNotCloseConsumer
+
+unifierProducerIdentityResidualAliasIsExact :
+  Bridge.SameProducerIdentifiesResidual → ⊥
+unifierProducerIdentityResidualAliasIsExact =
+  Unifier.toeProducerIdentityDoesNotIdentifyResidual
