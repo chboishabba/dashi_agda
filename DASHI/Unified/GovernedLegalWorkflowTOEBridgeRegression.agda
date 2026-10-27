@@ -298,3 +298,62 @@ unifierSemanticAdmissionIsNotLegalAuthority :
   Bridge.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 unifierSemanticAdmissionIsNotLegalAuthority =
   Unifier.unifierSemanticAdmissionIsNotLegalAuthority
+
+
+------------------------------------------------------------------------
+-- Legal-source authority invariant handoff regression.
+------------------------------------------------------------------------
+
+unifierUsesCanonicalAuthorityInvariantHandoff :
+  Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+  ≡
+  Bridge.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+unifierUsesCanonicalAuthorityInvariantHandoff = refl
+
+authorityHandoffUsesCanonicalWorkflowHandoff :
+  Bridge.workflowInvariantHandoff
+    Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+  ≡
+  Bridge.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+authorityHandoffUsesCanonicalWorkflowHandoff =
+  Bridge.workflowInvariantHandoffIsCanonical
+    Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+
+authorityHandoffUsesCanonicalLegalSourceBoundary :
+  Bridge.legalSourceAuthorityBoundary
+    Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+  ≡
+  Bridge.toeCanonicalLegalSourceAuthorityBoundary
+authorityHandoffUsesCanonicalLegalSourceBoundary =
+  Bridge.legalSourceAuthorityBoundaryIsCanonical
+    Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+
+authorityHandoffCandidateFirewallIsExact :
+  Bridge.CandidateSourceIsAuthoritative → ⊥
+authorityHandoffCandidateFirewallIsExact =
+  Bridge.candidateSourceAuthorityFirewall
+    Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+
+authorityHandoffSameSystemFirewallIsExact :
+  Bridge.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+authorityHandoffSameSystemFirewallIsExact =
+  Bridge.sameSystemAuthorityFirewall
+    Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+
+authorityHandoffValidityFirewallIsExact :
+  Bridge.CurrentValidityAutomaticallyMeansApplicability → ⊥
+authorityHandoffValidityFirewallIsExact =
+  Bridge.currentValidityApplicabilityFirewall
+    Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+
+authorityHandoffAdmissionFirewallIsExact :
+  Bridge.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+authorityHandoffAdmissionFirewallIsExact =
+  Bridge.semanticAdmissionAuthorityFirewall
+    Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+
+authorityHandoffDocumentRoleFirewallIsExact :
+  Bridge.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+authorityHandoffDocumentRoleFirewallIsExact =
+  Bridge.documentRoleAuthorityFirewall
+    Unifier.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
