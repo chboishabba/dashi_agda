@@ -368,3 +368,19 @@ toeSemanticMeetDoesNotProveLegalApplicability :
 toeSemanticMeetDoesNotProveLegalApplicability =
   GovernanceTOE.toeSemanticMeetDoesNotProveLegalApplicability
 
+
+
+toeGovernedLegalWorkflowZKPReceipt :
+  GovernanceTOE.GovernedLegalWorkflowZKPReceipt
+toeGovernedLegalWorkflowZKPReceipt =
+  GovernanceTOE.canonicalGovernedLegalWorkflowZKPReceipt
+
+toeCaseySelectionDoesNotCreateWorldTruth :
+  GovernanceTOE.Suite.CaseySelectionCreatesWorldTruth → ⊥
+toeCaseySelectionDoesNotCreateWorldTruth =
+  GovernanceTOE.toeCaseySelectionDoesNotCreateWorldTruth
+
+toeKnowledgeDoesNotCreateExecutionAuthority :
+  GovernanceTOE.Authority.KnowledgeIsAuthority → ⊥
+toeKnowledgeDoesNotCreateExecutionAuthority =
+  GovernanceTOE.toeKnowledgeDoesNotCreateExecutionAuthority
