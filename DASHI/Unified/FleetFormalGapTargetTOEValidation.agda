@@ -89,3 +89,130 @@ contradictionGaps44RemainSeparate = refl
 fleetMacroscopicMotifCountIsThree :
   Fleet.macroscopicEigenMotifCount Fleet.canonicalFleetFormalGapTargetReceipt ≡ 3
 fleetMacroscopicMotifCountIsThree = refl
+
+
+------------------------------------------------------------------------
+-- Existing PNF owner and motif-owner identity.
+------------------------------------------------------------------------
+
+toeFleetCoordinateReceiptMatchesOwner :
+  TOE.toeFleetCoordinateRebuildabilityReceipt
+  ≡ Fleet.fleetCoordinateRebuildabilityReceipt
+toeFleetCoordinateReceiptMatchesOwner = refl
+
+unifierFleetCoordinateReceiptMatchesOwner :
+  Unifier.unifierFleetCoordinateRebuildabilityReceipt
+  ≡ Fleet.fleetCoordinateRebuildabilityReceipt
+unifierFleetCoordinateReceiptMatchesOwner = refl
+
+toeFleetNumericABIReceiptMatchesOwner :
+  TOE.toeFleetNumericABIReceipt
+  ≡ Fleet.fleetNumericABIReceipt
+toeFleetNumericABIReceiptMatchesOwner = refl
+
+unifierFleetNumericABIReceiptMatchesOwner :
+  Unifier.unifierFleetNumericABIReceipt
+  ≡ Fleet.fleetNumericABIReceipt
+unifierFleetNumericABIReceiptMatchesOwner = refl
+
+toeFleetResidualReceiptMatchesOwner :
+  TOE.toeFleetResidualInvariantReceipt
+  ≡ Fleet.fleetResidualInvariantReceipt
+toeFleetResidualReceiptMatchesOwner = refl
+
+unifierFleetResidualReceiptMatchesOwner :
+  Unifier.unifierFleetResidualInvariantReceipt
+  ≡ Fleet.fleetResidualInvariantReceipt
+unifierFleetResidualReceiptMatchesOwner = refl
+
+toeFleetPromotionIndexMatchesOwner :
+  TOE.toeFleetPromotionObligationIndex
+  ≡ Fleet.fleetPromotionObligationIndex
+toeFleetPromotionIndexMatchesOwner = refl
+
+unifierFleetPromotionIndexMatchesOwner :
+  Unifier.unifierFleetPromotionObligationIndex
+  ≡ Fleet.fleetPromotionObligationIndex
+unifierFleetPromotionIndexMatchesOwner = refl
+
+toeFleetBalabanOwnerMatches :
+  TOE.toeFleetBalabanDischargedOwnerReceipt
+  ≡ Fleet.fleetBalabanDischargedOwnerReceipt
+toeFleetBalabanOwnerMatches = refl
+
+unifierFleetBalabanOwnerMatches :
+  Unifier.unifierFleetBalabanDischargedOwnerReceipt
+  ≡ Fleet.fleetBalabanDischargedOwnerReceipt
+unifierFleetBalabanOwnerMatches = refl
+
+toeFleetNSM2StatusMatches :
+  TOE.toeFleetNSPhysicalM2SummationCompilerStatus
+  ≡ Fleet.fleetNSPhysicalM2SummationCompilerStatus
+toeFleetNSM2StatusMatches = refl
+
+unifierFleetNSM2StatusMatches :
+  Unifier.unifierFleetNSPhysicalM2SummationCompilerStatus
+  ≡ Fleet.fleetNSPhysicalM2SummationCompilerStatus
+unifierFleetNSM2StatusMatches = refl
+
+toeFleetQuantumMereologyBoundaryMatches :
+  TOE.toeFleetQuantumMereologyBoundary
+  ≡ Fleet.fleetQuantumMereologyBoundary
+toeFleetQuantumMereologyBoundaryMatches = refl
+
+unifierFleetQuantumMereologyBoundaryMatches :
+  Unifier.unifierFleetQuantumMereologyBoundary
+  ≡ Fleet.fleetQuantumMereologyBoundary
+unifierFleetQuantumMereologyBoundaryMatches = refl
+
+toeFleetQuantumMereologyAttributionMatches :
+  TOE.toeFleetQuantumMereologyAttributionBoundary
+  ≡ Fleet.fleetQuantumMereologyAttributionBoundary
+toeFleetQuantumMereologyAttributionMatches = refl
+
+unifierFleetQuantumMereologyAttributionMatches :
+  Unifier.unifierFleetQuantumMereologyAttributionBoundary
+  ≡ Fleet.fleetQuantumMereologyAttributionBoundary
+unifierFleetQuantumMereologyAttributionMatches = refl
+
+toeFleetPlanningTextStillNotResidual :
+  Fleet.PlanningSourceTextFormalResidualFlag
+toeFleetPlanningTextStillNotResidual =
+  TOE.toeFleetPlanningTextDoesNotCreateFormalResidual
+
+unifierFleetPlanningTextStillNotResidual :
+  Fleet.PlanningSourceTextFormalResidualFlag
+unifierFleetPlanningTextStillNotResidual =
+  Unifier.unifierFleetPlanningTextDoesNotCreateFormalResidual
+
+toeSpectralLabelStillNotOwnerIdentity :
+  Fleet.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+toeSpectralLabelStillNotOwnerIdentity =
+  TOE.toeFleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifierSpectralLabelStillNotOwnerIdentity :
+  Fleet.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+unifierSpectralLabelStillNotOwnerIdentity =
+  Unifier.unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+------------------------------------------------------------------------
+-- Selection booleans use the canonical owner proofs.
+------------------------------------------------------------------------
+
+fleetTargetOnlyFlagIsTrue :
+  Fleet.targetOnlyUnformalisedFormalGaps Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetTargetOnlyFlagIsTrue =
+  Fleet.fleetTargetsOnlyUnformalisedFormalGaps
+
+fleetDischargedFlagIsTrue :
+  Fleet.dischargedFibresRemainDischarged Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetDischargedFlagIsTrue =
+  Fleet.fleetDoesNotRetargetDischargedFibres
+
+fleetContradictionSeparationFlagIsTrue :
+  Fleet.contradictionGapsRemainSeparate Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetContradictionSeparationFlagIsTrue =
+  Fleet.fleetKeepsContradictionsSeparate
