@@ -11,7 +11,7 @@ package "Canonical Yang-Mills owners" {
   component "Compact-simple Casimir / beta floor" as Casimir
   component "CMP116 stress marked-shell bound" as StressShell
   component "Stress shell-energy / Hilbert bound" as StressHilbert
-  component "Goal-1 current frontier R474" as Goal1
+  component "Goal-1 maximum cut R485" as Goal1
   component "Continuum / Clay non-promotion" as NonPromotion
 }
 
@@ -35,7 +35,7 @@ YMTOE --> Unifier : exact re-export only
 
 note bottom of YMTOE
 Preconditions:
-canonical owners exist.\nR474 is the current Goal-1 frontier.\n
+canonical owners exist.\nR485 is the current representation-safe Goal-1 maximum cut.\n
 Invariants:
 finite RG is not continuum YM.
 Casimir floor is not the missing Wilson/FP/Haar estimate.
@@ -43,7 +43,7 @@ stress compiler/bounds are not literal physical source closure.
 proof ownership stays with canonical modules.
 
 Postconditions:
-root, Unified.Physics, and Unifier expose one YM TOE surface.\nR474 Goal-1 facts flow through R559 only.\ncontinuum, OS/Wightman, mass-gap, and Clay promotion stay blocked.
+root, Unified.Physics, and Unifier expose one YM TOE surface.\nR485 Goal-1 max-cut facts flow through R559 only.\ncontinuum, OS/Wightman, mass-gap, and Clay promotion stay blocked.
 end note
 
 note bottom of Unifier
