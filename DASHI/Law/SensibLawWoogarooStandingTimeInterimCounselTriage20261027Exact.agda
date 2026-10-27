@@ -147,13 +147,13 @@ nationalEPARulesOriginal = Source.mkNoDOISource
 -- The letter's own referral/parcel/date overrides the webpage download label.
 scenicGroupDecember2025 : Source.AttributedSource
 scenicGroupDecember2025 = Source.mkNoDOISource
-  "Save Woogaroo Forest Group Inc.; signed Keith McCosh, President"
+  "Save Woogaroo Forest Group Inc.; Keith McCosh, President (printed attribution)"
   "Response on Scenic Precinct, EPBC 2020/8651, Lot 51 SP242316"
-  "Original five-page association-author submission, posted among multi-project campaign submissions"
+  "Original five-page organisation-attributed submission, posted among multi-project campaign submissions"
   "15 December 2025"
   "https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/downloads/5b140ad8-accf-4ef6-971d-07dc07d315ea/Response%20by%20SWF%20on%20Scenic%208651.pdf?ver=1792152994924"
   Source.communitySource
-  "Original PDF pp1 and 5 visually inspected. Names Save Woogaroo Forest Group Inc. and president Keith McCosh, refers ONLY to 2020/8651 Scenic Precinct and 24ha Lot 51. It is evidence of a dated association-authored environmental activity, NOT an ASIC/Queensland incorporation certificate, the association's objects, a second activity, receipt by Department, or the separate Springview 2019/8575 s95B bundle."
+  "Original PDF pp1 and 5 visually inspected. Names Save Woogaroo Forest Group Inc. and president Keith McCosh IN PRINT (not a visible wet-ink signature), refers ONLY to 2020/8651 Scenic Precinct and 24ha Lot 51. It is evidence of a dated association-authored environmental activity, NOT an ASIC/Queensland incorporation certificate, the association's objects, a second activity, receipt by Department, or the separate Springview 2019/8575 s95B bundle."
   Source.publicAttribution
 
 scenicPossinghamJanuary2025 : Source.AttributedSource
@@ -163,7 +163,7 @@ scenicPossinghamJanuary2025 = Source.mkNoDOISource
   "Original two-page authored submission; campaign download caption says January 2026"
   "4 January 2025 (date actually printed in original; caption inconsistent)"
   "https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/downloads/4c22fc2f-3955-4ff9-bdb7-f47767fa6783/Hugh%20Possingham%20submission-Jan%202026.pdf?ver=1792152994924"
-  Source.academicArticleSource
+  Source.practitionerSource
   "Original PDF p1 visually checked: address to Springfield City Group and subject EPBC 2020/8651, 24.2ha Lot 51. Printed 4 Jan 2025 within s487 15 Oct 2024–2026 window, but actual signature/dispatch/date must be corroborated if disputed. NOT direct objection submitted under EPBC 2019/8575."
   Source.publicAttribution
 
@@ -174,7 +174,7 @@ scenicZdenekDecember2025 = Source.mkNoDOISource
   "Original four-page authored submission; campaign download caption says January 2026"
   "14 December 2025 (date actually printed in original)"
   "https://img1.wsimg.com/blobby/go/c204ebbc-02bb-46d9-ad71-ed7d494e752a/downloads/321ec662-92cb-49d8-8588-8b237e8fc4f3/Dr%20Christina%20Zdenek%20submission-Jan%202026.pdf?ver=1792152994924"
-  Source.academicArticleSource
+  Source.practitionerSource
   "Original PDF p1 visually checked: exact EPBC 2020/8651, Lots 51 and 50, NOT 2019/8575. The printed 14 Dec 2025 is prior environmental advocacy and a research witness locator, NOT proof it was received, a group activity, or same-parcel impact."
   Source.publicAttribution
 
