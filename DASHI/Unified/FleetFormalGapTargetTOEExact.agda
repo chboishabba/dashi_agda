@@ -13,6 +13,7 @@ import DASHI.Interop.PNFResidualFieldInvariants as Residual
 import DASHI.Planning.PlanningPNFClaimBoundaryExact as Planning
 import DASHI.Promotion.ObligationIndex as Obligation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
+import DASHI.Core.BoundAcquisitionDemandExact as Bound
 import DASHI.Unified.BalabanRGTOERegression as BalabanRG
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
 import DASHI.Quantum.QuantumMereologyExact as QM
@@ -335,3 +336,108 @@ fleetTextFallbackAuthorityStillFalse :
   Rebuild.textFallbackIsCoordinateAuthority ≡ false
 fleetTextFallbackAuthorityStillFalse =
   Rebuild.textFallbackCoordinateAuthorityFalse
+
+
+------------------------------------------------------------------------
+-- Named Fleet-gap manifest acquisition boundary.
+--
+-- The external receipt gives the count 58. It does not give 58 named rows.
+-- Per-gap search and dispatch stay blocked until that artifact is acquired.
+-- This section reuses the generic acquisition carrier. It creates no gap row.
+------------------------------------------------------------------------
+
+data FleetManifestRequirement : Set where
+  namedFormalGapManifest : FleetManifestRequirement
+
+data FleetManifestResidual : Set where
+  unnamedFormalGapIdentities : FleetManifestResidual
+
+data FleetManifestProducer : Set where
+  externalFleetSourceStore : FleetManifestProducer
+
+data FleetManifestAcquisition : Set where
+  acquireNamedFormalGapManifest : FleetManifestAcquisition
+
+fleetManifestAlignment :
+  Bound.AcquisitionAlignment
+    FleetManifestRequirement
+    FleetManifestResidual
+    FleetManifestProducer
+    FleetManifestAcquisition
+fleetManifestAlignment =
+  Bound.acquisition-alignment
+    (λ _ → unnamedFormalGapIdentities)
+    (λ _ → externalFleetSourceStore)
+    (λ _ → unnamedFormalGapIdentities)
+    (λ _ → externalFleetSourceStore)
+
+fleetManifestAcquisitionDemand :
+  Bound.BoundAcquisitionDemand
+    fleetManifestAlignment
+    namedFormalGapManifest
+    unnamedFormalGapIdentities
+fleetManifestAcquisitionDemand =
+  Bound.bound-acquisition-demand
+    acquireNamedFormalGapManifest
+    refl
+    refl
+    refl
+
+namedFormalGapManifestAcquired : Bool
+namedFormalGapManifestAcquired = false
+
+namedFormalGapManifestAcquiredIsFalse :
+  namedFormalGapManifestAcquired ≡ false
+namedFormalGapManifestAcquiredIsFalse = refl
+
+perGapDispatchEnabled : Bool
+perGapDispatchEnabled = false
+
+perGapDispatchEnabledIsFalse :
+  perGapDispatchEnabled ≡ false
+perGapDispatchEnabledIsFalse = refl
+
+fleetRelatedSymbolsRequired : Bool
+fleetRelatedSymbolsRequired = true
+
+fleetRelatedSymbolsRequiredIsTrue :
+  fleetRelatedSymbolsRequired ≡ true
+fleetRelatedSymbolsRequiredIsTrue = refl
+
+fleetDiscoverRequired : Bool
+fleetDiscoverRequired = true
+
+fleetDiscoverRequiredIsTrue :
+  fleetDiscoverRequired ≡ true
+fleetDiscoverRequiredIsTrue = refl
+
+fleetRoundLineageRequired : Bool
+fleetRoundLineageRequired = true
+
+fleetRoundLineageRequiredIsTrue :
+  fleetRoundLineageRequired ≡ true
+fleetRoundLineageRequiredIsTrue = refl
+
+CountCreatesNamedManifest : Set
+CountCreatesNamedManifest =
+  Bound.BoundDemandAutomaticallyPaysRequirement
+
+fleetCountDoesNotCreateNamedManifest :
+  CountCreatesNamedManifest → ⊥
+fleetCountDoesNotCreateNamedManifest =
+  Bound.bindingDoesNotPayRequirement
+
+fleetManifestAcquisitionDoesNotCloseConsumer :
+  Bound.BoundDemandAutomaticallyClosesConsumer → ⊥
+fleetManifestAcquisitionDoesNotCloseConsumer =
+  Bound.bindingDoesNotCloseConsumer
+
+fleetManifestProducerDoesNotIdentifyResidual :
+  Bound.SameProducerIdentifiesResidual → ⊥
+fleetManifestProducerDoesNotIdentifyResidual =
+  Bound.producerIdentityDoesNotIdentifyResidual
+
+fleetManifestSearchPriorityDoesNotCreateProof :
+  ParetoSnowball.SearchPriorityCreatesProof → ⊥
+fleetManifestSearchPriorityDoesNotCreateProof =
+  ParetoSnowball.searchPriorityDoesNotCreateProof
