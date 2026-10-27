@@ -9,7 +9,7 @@ open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
 
 -- Exact theorem surface. Do not replace with Unifier placeholder axioms.
-import DASHI.Unified.ResidualWidthNonPromotionTOEExact
+open import DASHI.Unified.ResidualWidthNonPromotionTOEExact public
 
 ¬ : Set → Set
 ¬ A = A → ⊥
