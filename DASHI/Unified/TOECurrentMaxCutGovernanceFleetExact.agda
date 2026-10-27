@@ -395,6 +395,26 @@ frozenProvenanceDynamicBoundary :
 frozenProvenanceDynamicBoundary =
   Frozen.canonicalFrozenProvenanceDynamicBoundary
 
+staticRefinementCreatesDynamicSafety : Bool
+staticRefinementCreatesDynamicSafety =
+  Frozen.FrozenProvenanceDynamicBoundary.staticSeparationImpliesDynamicSafety
+    frozenProvenanceDynamicBoundary
+
+frozenRuleCreatesDynamicSafety : Bool
+frozenRuleCreatesDynamicSafety =
+  Frozen.FrozenProvenanceDynamicBoundary.frozenRuleImpliesDynamicSafety
+    frozenProvenanceDynamicBoundary
+
+provenanceCreatesTruthOrAuthority : Bool
+provenanceCreatesTruthOrAuthority =
+  Frozen.FrozenProvenanceDynamicBoundary.provenanceCreatesTruthOrAuthority
+    frozenProvenanceDynamicBoundary
+
+kernelClosureCreatesSemanticClosure : Bool
+kernelClosureCreatesSemanticClosure =
+  Formalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
+    Formalisation.canonicalThreeStoreyBoundary
+
 staticObserverSeparationStillDoesNotCreateDynamicSafety :
   StaticSeparationCreatesDynamicSafetyPermission → ⊥
 staticObserverSeparationStillDoesNotCreateDynamicSafety =
