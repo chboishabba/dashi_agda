@@ -32,6 +32,22 @@ routeSDoesNotNeedDenseL2 :
 routeSDoesNotNeedDenseL2 =
   TOE.toeRouteSRequiresDenseL2NormalizationIsFalse
 
+
+routeSH1HasOneTheoremBearingField :
+  TOE.toeRouteSH1HasOneTheoremBearingField ≡ true
+routeSH1HasOneTheoremBearingField =
+  TOE.toeRouteSH1HasOneTheoremBearingFieldIsTrue
+
+routeSH1NeedsNoHistoricalPublishedWrapper :
+  TOE.toeRouteSH1RequiresHistoricalPublishedWrapper ≡ false
+routeSH1NeedsNoHistoricalPublishedWrapper =
+  TOE.toeRouteSH1RequiresHistoricalPublishedWrapperIsFalse
+
+routeSH1ToR387NeedsNoSourceEnvelope :
+  TOE.toeRouteSH1ToR387RequiresSourceEnvelope ≡ false
+routeSH1ToR387NeedsNoSourceEnvelope =
+  TOE.toeRouteSH1ToR387RequiresSourceEnvelopeIsFalse
+
 d1NeedsNoNewAnalyticInequality :
   TOE.toeD1NewAnalyticInequalityRequired ≡ false
 d1NeedsNoNewAnalyticInequality =
@@ -41,6 +57,22 @@ d2NeedsNoSecondMixingMap :
   TOE.toeD2SecondMixingMapRequired ≡ false
 d2NeedsNoSecondMixingMap =
   TOE.toeD2SecondMixingMapRequiredIsFalse
+
+
+d2BareTransportDoesNotPayPhysicalMixing :
+  TOE.toeD2BareTransportABIPaysPhysicalMixing ≡ false
+d2BareTransportDoesNotPayPhysicalMixing =
+  TOE.toeD2BareTransportABIPaysPhysicalMixingIsFalse
+
+d2NeedsNoIndependentPhysicalOneStepRecurrence :
+  TOE.toeD2IndependentPhysicalOneStepRecurrenceRequired ≡ false
+d2NeedsNoIndependentPhysicalOneStepRecurrence =
+  TOE.toeD2IndependentPhysicalOneStepRecurrenceRequiredIsFalse
+
+d2SameFamilyCompositeConvergenceRemainsPhysical :
+  TOE.toeD2SameFamilyCompositeConvergenceStillPhysical ≡ true
+d2SameFamilyCompositeConvergenceRemainsPhysical =
+  TOE.toeD2SameFamilyCompositeConvergenceStillPhysicalIsTrue
 
 d2ForbidsParallelCompositeTheory :
   TOE.toeD2ParallelCompositeOperatorTheoryAllowed ≡ false
