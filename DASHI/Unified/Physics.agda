@@ -204,3 +204,56 @@ yangMillsTOEStressShellEnergyHilbertLevel =
 yangMillsTOELiteralStressActivityEntropyLevel : ProofLevel
 yangMillsTOELiteralStressActivityEntropyLevel =
   YMTOE.toeLiteralStressActivityEntropyInstantiationLevel
+
+
+------------------------------------------------------------------------
+-- Authoritative Goal-1 R474 frontier via normalized R559 owner.
+------------------------------------------------------------------------
+
+yangMillsTOEGoal1A1CurrentStepBetaSourceLevel : ProofLevel
+yangMillsTOEGoal1A1CurrentStepBetaSourceLevel =
+  YMTOE.toeGoal1A1CurrentStepBetaSourceLevel
+
+yangMillsTOEGoal1A3SameFamilyContinuumAndOSLevel : ProofLevel
+yangMillsTOEGoal1A3SameFamilyContinuumAndOSLevel =
+  YMTOE.toeGoal1A3SameFamilyContinuumAndOSLevel
+
+yangMillsTOEGoal1BLiteralPublishedSelectedLocalizationLevel : ProofLevel
+yangMillsTOEGoal1BLiteralPublishedSelectedLocalizationLevel =
+  YMTOE.toeGoal1BLiteralPublishedSelectedLocalizationLevel
+
+yangMillsTOEGoal1BPhysicalRateSemanticsLevel : ProofLevel
+yangMillsTOEGoal1BPhysicalRateSemanticsLevel =
+  YMTOE.toeGoal1BPhysicalRateSemanticsLevel
+
+yangMillsTOEGoal1BFiniteToPositiveTransferGapCompilerLevel : ProofLevel
+yangMillsTOEGoal1BFiniteToPositiveTransferGapCompilerLevel =
+  YMTOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
+
+yangMillsTOEGoal1CExactSameFamilySourceCutLevel : ProofLevel
+yangMillsTOEGoal1CExactSameFamilySourceCutLevel =
+  YMTOE.toeGoal1CExactSameFamilySourceCutLevel
+
+yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
+yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel =
+  YMTOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
+
+yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
+yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel =
+  YMTOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
+
+yangMillsTOEGoal1CurrentFrontierCompilerLevel : ProofLevel
+yangMillsTOEGoal1CurrentFrontierCompilerLevel =
+  YMTOE.toeGoal1CurrentFrontierCompilerLevel
+
+yangMillsTOEGoal1ProjectiveProkhorovMandatory :
+  YMTOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
+yangMillsTOEGoal1ProjectiveProkhorovMandatory = refl
+
+yangMillsTOEGoal1PostHocCMP116MagnitudeEqualityMandatory :
+  YMTOE.toeGoal1PostHocCMP116MagnitudeEqualityMandatory ≡ false
+yangMillsTOEGoal1PostHocCMP116MagnitudeEqualityMandatory = refl
+
+yangMillsTOEGoal1IndependentFourthCumulantMandatory :
+  YMTOE.toeGoal1IndependentFourthCumulantMandatory ≡ false
+yangMillsTOEGoal1IndependentFourthCumulantMandatory = refl
