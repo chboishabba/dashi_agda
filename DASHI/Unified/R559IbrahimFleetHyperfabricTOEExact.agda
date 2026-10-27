@@ -124,10 +124,13 @@ fleetGate4EqualCardinalityBoundary :
 fleetGate4EqualCardinalityBoundary =
   EqualCardinality.canonicalEqualCardinalityBoundary
 
-fleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+fleetGate4EqualCardinalitySelectsCanonicalMap : Bool
+fleetGate4EqualCardinalitySelectsCanonicalMap =
   EqualCardinality.equalCardinalitySelectsCanonicalMap
     fleetGate4EqualCardinalityBoundary
-  ≡ false
+
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 fleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   EqualCardinality.equalCardinalitySelectsCanonicalMapIsFalse
     fleetGate4EqualCardinalityBoundary
