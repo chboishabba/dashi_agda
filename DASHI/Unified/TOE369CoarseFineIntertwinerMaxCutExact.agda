@@ -52,6 +52,7 @@ module DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact where
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
@@ -381,3 +382,64 @@ toeTernary27ReductionIsNotMonster42SameObject :
   ≡ false
 toeTernary27ReductionIsNotMonster42SameObject =
   TernaryReduction.reducedFifteenIsMonster42dSameObjectIsFalse
+
+
+------------------------------------------------------------------------
+-- 10. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+------------------------------------------------------------------------
+
+record TOE369MaxCutZKPFrame : Set where
+  constructor toe369-max-cut-zkp-frame
+  field
+    O-objective : String
+    R-reuse : String
+    C-construction : String
+    S-safety : String
+    L-lane : String
+    P-preconditions : String
+    P-invariants : String
+    P-postconditions : String
+    G-governance : String
+    F-verification : String
+
+canonicalTOE369MaxCutZKPFrame : TOE369MaxCutZKPFrame
+canonicalTOE369MaxCutZKPFrame =
+  toe369-max-cut-zkp-frame
+    "Converge Base369 coarse/fine, ternary-27, selected-3B max-cut, kernel-BIDI, Pareto, Snowball, and Ibrahim theorem owners onto one acyclic TOE surface."
+    "Reuse the existing coarse/fine reopening, C3 symmetry, signed phase intertwiner, selected-3B max-cut, same-element BIDI, single-action producer, H-zeta recognition, and Ibrahim reduction owners."
+    "Expose aliases only. Remove the legacy Unifier import from the theorem-bearing core so every TOE facade can consume the same owner without an import cycle."
+    "Keep dimension, character, carrier equality, phase reduction, and finite indexing non-promoting. Do not invent a CFFI theorem. Do not edit ESD or digital_esd surfaces."
+    "This lane owns only TOE normalization of the existing Max Cut and kernel-BIDI surfaces."
+    "All donor owners exist. The requested CFFI label has no literal repository theorem owner, so the exact existing kernel-BIDI owners are the only admissible proof authority."
+    "One result keeps one canonical owner. A character does not create an action. A finite chart does not create a representation. A phase-preserving reduction is not global inversion. Same dimension is not same object."
+    "The focused TOE root, Unifier, and Unified aggregate reach the same exact non-promotion and open-frontier terms with no legacy import cycle."
+    "Original mathematical authors and repository theorem owners retain attribution. Meta-introspector repositories remain source context and do not gain DASHI theorem ownership."
+    "Run related-symbol, discover, lineage, preflight, trust-escape, ESD-diff, validation, and focused Agda checks. Claim kernel success only from an observed exact-head receipt."
+
+record TOE369MaxCutReceipt : Set where
+  constructor toe369-max-cut-receipt
+  field
+    coarseFineExact : Bool
+    ternary27Exact : Bool
+    kernelBidiReused : Bool
+    selected3BMaxCutReused : Bool
+    paretoIbrahimReused : Bool
+    literalCFFITheoremInvented : Bool
+    esdEdited : Bool
+
+canonicalTOE369MaxCutReceipt : TOE369MaxCutReceipt
+canonicalTOE369MaxCutReceipt =
+  toe369-max-cut-receipt
+    true true true true true false false
+
+literalCFFITheoremWasNotInvented :
+  TOE369MaxCutReceipt.literalCFFITheoremInvented
+    canonicalTOE369MaxCutReceipt
+  ≡ false
+literalCFFITheoremWasNotInvented = refl
+
+esdSurfaceWasNotEdited :
+  TOE369MaxCutReceipt.esdEdited
+    canonicalTOE369MaxCutReceipt
+  ≡ false
+esdSurfaceWasNotEdited = refl
