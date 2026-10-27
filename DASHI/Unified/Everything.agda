@@ -1,4 +1,9 @@
 module DASHI.Unified.Everything where
+import DASHI.ComputerScience.TekumDASHIRoundingAssemblyExact
+import DASHI.ComputerScience.TekumDASHIRoundingBoundaryExact as TekumRoundingTOE
+import DASHI.ComputerScience.TekumProposition5FiniteNearestNoGoExact as TekumP5
+import DASHI.ComputerScience.TekumRawNearestCorrectionExact as TekumRaw
+import DASHI.ComputerScience.TekumNearestNoDoubleRoundingExact as TekumNoDouble
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -379,3 +384,32 @@ unified369Ternary27MonsterRepresentationNotPromoted =
 
 unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+------------------------------------------------------------------------
+-- Canonical Tékum exact-nearest / raw-rounding non-promotion convergence.
+------------------------------------------------------------------------
+
+unifiedTekumDASHIRoundingBoundary :
+  TekumRoundingTOE.TekumDASHIRoundingBoundary
+unifiedTekumDASHIRoundingBoundary =
+  TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary
+
+unifiedTekumHunholdFiniteRepairImpossible :
+  TekumP5.RawTruncationNearestOnFiniteClosure → ⊥
+unifiedTekumHunholdFiniteRepairImpossible =
+  TekumRoundingTOE.hunholdFiniteRepairStillRefuted
+
+unifiedTekumRadiusOneRawCorrectionImpossible :
+  TekumRaw.UniformRadiusOneRawCorrection → ⊥
+unifiedTekumRadiusOneRawCorrectionImpossible =
+  TekumRoundingTOE.rawRadiusOneStillRefuted
+
+unifiedTekumNoDoubleFinalEqualityImpossible :
+  TekumNoDouble.twoStageFinal8 ≡ TekumNoDouble.directFinal8 → ⊥
+unifiedTekumNoDoubleFinalEqualityImpossible =
+  TekumNoDouble.universalNoDoubleRoundingRefuted
+
+unifiedTekumNearestExistenceStillOpen :
+  TekumRoundingTOE.nearestExistencePaid
+    TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary ≡ false
+unifiedTekumNearestExistenceStillOpen = refl
