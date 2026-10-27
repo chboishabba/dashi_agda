@@ -13,6 +13,9 @@ on:
       - 'DASHI/Physics/Foundations/CMP119AntigravityP3GPhysicalProducerMinCutExact.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'DASHI/Unified/YMBlockDMaxCutTOEValidation.agda'
+      - 'DASHI/Unified/YMBlockDMaxCutTOEExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -45,6 +48,9 @@ jobs:
             DASHI/Physics/Foundations/CMP119AntigravityCanonicalS4PhysicalMinCutExact.agda
             DASHI/Physics/Foundations/CMP119AntigravityP3GPhysicalProducerMinCutExact.agda
             DASHI/Unified/Physics.agda
+            DASHI/Unified/YMBlockDMaxCutTOEExact.agda
+            DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
+            DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
           )
           for module in "${modules[@]}"; do
@@ -62,6 +68,9 @@ jobs:
             DASHI/Physics/Foundations/CMP119AntigravityCanonicalS4PhysicalMinCutExact.agda
             DASHI/Physics/Foundations/CMP119AntigravityP3GPhysicalProducerMinCutExact.agda
             DASHI/Unified/Physics.agda
+            DASHI/Unified/YMBlockDMaxCutTOEExact.agda
+            DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
+            DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
@@ -78,6 +87,9 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
+            DASHI/Unified/YMBlockDMaxCutTOEExact.agda
+            DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
+            DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
           )
           for module in "${modules[@]}"; do
