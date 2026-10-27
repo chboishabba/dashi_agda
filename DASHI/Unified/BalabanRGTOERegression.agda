@@ -347,6 +347,22 @@ legacyBalabanLaneAlsoDeclaresNoClayPromotion =
   LegacyRGLane.noClayPromotion LegacyRGLane.canonicalBalabanRGLane
 
 ------------------------------------------------------------------------
+-- Direct typed scale-transfer non-promotion owner.
+--
+-- Keep this gate beside the normalized density, regular-E, Casimir, stress,
+-- and continuum owners. TOE consumers do not need a Pareto/Snowball detour.
+------------------------------------------------------------------------
+
+BalabanRGScaleTransferPromotion : Set
+BalabanRGScaleTransferPromotion =
+  RGFrontier.BalabanRGScaleTransferPromotion
+
+balabanRGScaleTransferPromotionImpossible :
+  BalabanRGScaleTransferPromotion → ⊥
+balabanRGScaleTransferPromotionImpossible =
+  RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
+
+------------------------------------------------------------------------
 -- Reused typed continuum and RG-flow non-promotion owners.
 --
 -- The constructorless promotion types remain owned by their source receipts.
