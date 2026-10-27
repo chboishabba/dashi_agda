@@ -51,7 +51,7 @@ module DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
@@ -62,6 +62,7 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
+import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
 
 ------------------------------------------------------------------------
 -- Exact existing owners.
@@ -100,6 +101,32 @@ fleetContradictionGapsAre44 = refl
 
 fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
 fleetFormalGapsAre58 = refl
+
+-- The fleet target count and the repository-native Yang-Mills Gate-4 count
+-- are numerically equal. This equality is a count equality only.
+fleetFormalGapCountEqualsGate4Count :
+  fleetFormalGaps
+  ≡ YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
+fleetFormalGapCountEqualsGate4Count =
+  trans
+    fleetFormalGapsAre58
+    (sym
+      (YM.gate4UnresolvedCountIs58
+        YM.canonicalBalabanR559TOEMaxCutReceipt))
+
+fleetGate4EqualCardinalityBoundary :
+  EqualCardinality.EqualCardinalityBoundary
+fleetGate4EqualCardinalityBoundary =
+  EqualCardinality.canonicalEqualCardinalityBoundary
+
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  EqualCardinality.equalCardinalitySelectsCanonicalMap
+    fleetGate4EqualCardinalityBoundary
+  ≡ false
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  EqualCardinality.equalCardinalitySelectsCanonicalMapIsFalse
+    fleetGate4EqualCardinalityBoundary
+
 
 fleetEigenPriorityDoesNotCreateProof :
   Fleet.FleetEigenPriorityCreatesProof → ⊥
@@ -200,6 +227,10 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     dischargedFibresIs584 : dischargedFibres ≡ 584
     contradictionGaps : Nat
     contradictionGapsIs44 : contradictionGaps ≡ 44
+    fleetGate4CountAgreement :
+      targetFormalGaps
+      ≡ YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
+    equalCardinalityBoundary : EqualCardinality.EqualCardinalityBoundary
     scaleTransferBlocked : YM.ScaleTransferPromotion → ⊥
     fleetCountDoesNotDischarge :
       Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
@@ -225,6 +256,8 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   ; dischargedFibresIs584 = fleetDischargedFibresAre584
   ; contradictionGaps = fleetContradictionGaps
   ; contradictionGapsIs44 = fleetContradictionGapsAre44
+  ; fleetGate4CountAgreement = fleetFormalGapCountEqualsGate4Count
+  ; equalCardinalityBoundary = fleetGate4EqualCardinalityBoundary
   ; scaleTransferBlocked = toeScaleTransferPromotionImpossible
   ; fleetCountDoesNotDischarge = fleetExternalCountDoesNotCreateFormalDischarge
   ; dischargedFibreRetargetBlocked = fleetDischargedFibresStayOutOfTarget
