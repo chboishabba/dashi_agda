@@ -64,6 +64,17 @@ d2BareTransportDoesNotPayPhysicalMixing :
 d2BareTransportDoesNotPayPhysicalMixing =
   TOE.toeD2BareTransportABIPaysPhysicalMixingIsFalse
 
+
+d2PublishedSourceEntryDoesNotPayNaturality :
+  TOE.toeD2PublishedSourceEntryPaysInsertionNaturality ≡ false
+d2PublishedSourceEntryDoesNotPayNaturality =
+  TOE.toeD2PublishedSourceEntryPaysInsertionNaturalityIsFalse
+
+d2PublishedSourceEntryDoesNotDetermineCompositeInsertion :
+  TOE.toeD2PublishedSourceEntryDeterminesCompositeInsertion ≡ false
+d2PublishedSourceEntryDoesNotDetermineCompositeInsertion =
+  TOE.toeD2PublishedSourceEntryDeterminesCompositeInsertionIsFalse
+
 d2NeedsNoIndependentPhysicalOneStepRecurrence :
   TOE.toeD2IndependentPhysicalOneStepRecurrenceRequired ≡ false
 d2NeedsNoIndependentPhysicalOneStepRecurrence =
