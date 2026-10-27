@@ -12,6 +12,31 @@ open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
 
+
+------------------------------------------------------------------------
+-- Exact Yang-Mills theorem-owner exports.
+--
+-- The legacy Unifier remains a carrier surface.
+-- These proofs are owned by the normalized Yang-Mills TOE module.
+------------------------------------------------------------------------
+
+open YMTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
+
 ¬ : Set → Set
 ¬ A = A → ⊥
 
@@ -417,3 +442,11 @@ unifierYangMillsTerminalPromotionBlocked :
   YMTOE.toeTerminalPromotion ≡ false
 unifierYangMillsTerminalPromotionBlocked =
   YMTOE.toeTerminalPromotionIsFalse
+
+unifierYangMillsUniversalBetaFloorLevel : ProofLevel
+unifierYangMillsUniversalBetaFloorLevel =
+  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
+
+unifierYangMillsLiteralUniformRemainderFloorLevel : ProofLevel
+unifierYangMillsLiteralUniformRemainderFloorLevel =
+  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
