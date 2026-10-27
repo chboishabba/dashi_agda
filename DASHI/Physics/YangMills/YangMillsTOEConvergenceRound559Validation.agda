@@ -1,11 +1,13 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as TOE
 import DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact as R485
+import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact as R546
+import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
 import DASHI.Unified.Physics as UnifiedPhysics
 import DASHI.Unifier as U
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -644,3 +646,170 @@ goal1CMP109PolarizationDetourNotMandatory = refl
 goal1PrintedBalabanJEqualsWilsonNotMandatory :
   TOE.toeGoal1PrintedBalabanJEqualsWilsonObservableMandatory ≡ false
 goal1PrintedBalabanJEqualsWilsonNotMandatory = refl
+
+
+------------------------------------------------------------------------
+-- R546 irreducible source-family normalization regressions.
+------------------------------------------------------------------------
+
+irreducibleA3PositiveEventMatchesR546 :
+  TOE.toeIrreducibleA3PositiveEventSemanticsLevel
+  ≡ R546.a3PositiveEventSemanticsLevel
+irreducibleA3PositiveEventMatchesR546 = refl
+
+irreducibleA3BooleanMatchesR546 :
+  TOE.toeIrreducibleA3EventBooleanAlgebraLevel
+  ≡ R546.a3EventBooleanAlgebraLevel
+irreducibleA3BooleanMatchesR546 = refl
+
+irreducibleA3ProjectiveMatchesR546 :
+  TOE.toeIrreducibleA3ProjectiveConsistencyLevel
+  ≡ R546.a3ProjectiveConsistencyLevel
+irreducibleA3ProjectiveMatchesR546 = refl
+
+irreducibleA3ContinuityMatchesR546 :
+  TOE.toeIrreducibleA3ContinuityAtEmptyLevel
+  ≡ R546.a3ContinuityAtEmptyLevel
+irreducibleA3ContinuityMatchesR546 = refl
+
+irreducibleA3IntegralMatchesR546 :
+  TOE.toeIrreducibleA3ExpectationIntegralIdentificationLevel
+  ≡ R546.a3ExpectationIntegralIdentificationLevel
+irreducibleA3IntegralMatchesR546 = refl
+
+irreducibleFiniteOSBosonicMatchesR546 :
+  TOE.toeIrreducibleFiniteOSBosonicAttachmentLevel
+  ≡ R546.finiteOSBosonicAttachmentLevel
+irreducibleFiniteOSBosonicMatchesR546 = refl
+
+irreducibleFiniteT1BundleMatchesR546 :
+  TOE.toeIrreducibleFiniteT1SourceBundleLevel
+  ≡ R546.finiteT1SourceBundleLevel
+irreducibleFiniteT1BundleMatchesR546 = refl
+
+irreducibleAllGroupStructuralMatchesR546 :
+  TOE.toeIrreducibleAllGroupStructuralWitnessLevel
+  ≡ R546.allGroupStructuralWitnessLevel
+irreducibleAllGroupStructuralMatchesR546 = refl
+
+irreducibleAllGroupAlignmentMatchesR546 :
+  TOE.toeIrreducibleAllGroupActualAlignmentLevel
+  ≡ R546.allGroupActualAlignmentLevel
+irreducibleAllGroupAlignmentMatchesR546 = refl
+
+irreducibleAllGroupFiveBlockMatchesR546 :
+  TOE.toeIrreducibleAllGroupFiveBlockSourceLevel
+  ≡ R546.allGroupFiveBlockSourceLevel
+irreducibleAllGroupFiveBlockMatchesR546 = refl
+
+irreducibleWEXTTwoMarkMatchesR546 :
+  TOE.toeIrreducibleWEXTTwoMarkExpansionLevel
+  ≡ R546.wextTwoMarkExpansionLevel
+irreducibleWEXTTwoMarkMatchesR546 = refl
+
+irreducibleWEXTTailMatchesR546 :
+  TOE.toeIrreducibleWEXTConnectingWeightTailLevel
+  ≡ R546.wextConnectingWeightTailLevel
+irreducibleWEXTTailMatchesR546 = refl
+
+irreducibleWholeMeasureEqualitiesAreGone :
+  TOE.toeIrreducibleWholeMeasureRecordEqualitiesRemaining ≡ false
+irreducibleWholeMeasureEqualitiesAreGone = refl
+
+irreducibleIndependentGroupSelectionsAreGone :
+  TOE.toeIrreducibleIndependentGroupSelectionsRemaining ≡ false
+irreducibleIndependentGroupSelectionsAreGone = refl
+
+irreducibleSU2PromotionIsGone :
+  TOE.toeIrreducibleSU2PromotionRemaining ≡ false
+irreducibleSU2PromotionIsGone = refl
+
+irreducibleSingleCutoffExtensionIsGone :
+  TOE.toeIrreducibleSingleCutoffMeasureExtensionRemaining ≡ false
+irreducibleSingleCutoffExtensionIsGone = refl
+
+irreducibleCutCompilerIsChecked :
+  TOE.toeIrreducibleSourceFamilyCutCompilerLevel ≡ machineChecked
+irreducibleCutCompilerIsChecked = refl
+
+------------------------------------------------------------------------
+-- R558 critical-path normalization regressions.
+------------------------------------------------------------------------
+
+criticalA3PositiveEventMatchesR558 :
+  TOE.toeCriticalA3PositiveEventSemanticsLevel
+  ≡ R558.a3PositiveEventSemanticsLevel
+criticalA3PositiveEventMatchesR558 = refl
+
+criticalA3BooleanMatchesR558 :
+  TOE.toeCriticalA3BooleanAlgebraLevel
+  ≡ R558.a3BooleanAlgebraLevel
+criticalA3BooleanMatchesR558 = refl
+
+criticalA3ProjectiveMatchesR558 :
+  TOE.toeCriticalA3ProjectiveConsistencyLevel
+  ≡ R558.a3ProjectiveConsistencyLevel
+criticalA3ProjectiveMatchesR558 = refl
+
+criticalA3ContinuityMatchesR558 :
+  TOE.toeCriticalA3ContinuityAtEmptyLevel
+  ≡ R558.a3ContinuityAtEmptyLevel
+criticalA3ContinuityMatchesR558 = refl
+
+criticalA3GeneratorRepresentationMatchesR558 :
+  TOE.toeCriticalA3CylinderGeneratorRepresentationLevel
+  ≡ R558.a3CylinderGeneratorRepresentationLevel
+criticalA3GeneratorRepresentationMatchesR558 = refl
+
+criticalWEXTTwoMarkMatchesR558 :
+  TOE.toeCriticalWEXTTwoMarkExpansionLevel
+  ≡ R558.wextTwoMarkExpansionLevel
+criticalWEXTTwoMarkMatchesR558 = refl
+
+criticalWEXTTailMatchesR558 :
+  TOE.toeCriticalWEXTConnectingWeightTailLevel
+  ≡ R558.wextConnectingWeightTailLevel
+criticalWEXTTailMatchesR558 = refl
+
+criticalWilsonCovarianceMatchesR558 :
+  TOE.toeCriticalFiniteToContinuumWilsonCovarianceLevel
+  ≡ R558.finiteToContinuumWilsonCovarianceLevel
+criticalWilsonCovarianceMatchesR558 = refl
+
+criticalMassGapCompilerMatchesR558 :
+  TOE.toeCriticalMassGapCompilerLevel
+  ≡ R558.massGapCompilerLevel
+criticalMassGapCompilerMatchesR558 = refl
+
+criticalMinimalH6CompilerMatchesR558 :
+  TOE.toeCriticalMinimalH6CompilerLevel
+  ≡ R558.minimalH6CompilerLevel
+criticalMinimalH6CompilerMatchesR558 = refl
+
+criticalPrintedJRouteNotRequired :
+  TOE.toeCriticalPrintedJRouteRequired ≡ false
+criticalPrintedJRouteNotRequired = refl
+
+criticalMassGapDoesNotNeedFullC :
+  TOE.toeCriticalFullCLayerRequiredForMassGap ≡ false
+criticalMassGapDoesNotNeedFullC = refl
+
+criticalMinimalH6DoesNotNeedFullC :
+  TOE.toeCriticalFullCLayerRequiredForMinimalH6 ≡ false
+criticalMinimalH6DoesNotNeedFullC = refl
+
+criticalPathCompilerIsChecked :
+  TOE.toeCriticalPathCompilerLevel ≡ machineChecked
+criticalPathCompilerIsChecked = refl
+
+criticalSeparateWilsonFamilyNotRequired :
+  TOE.toeSeparateContinuumWilsonFamilyRequired ≡ false
+criticalSeparateWilsonFamilyNotRequired = refl
+
+criticalFiniteMoscoRouteNotRequired :
+  TOE.toeFiniteHamiltonianMoscoRouteRequired ≡ false
+criticalFiniteMoscoRouteNotRequired = refl
+
+criticalConservativeClayKeepsFullC :
+  TOE.toeFullCLayerRetainedForConservativeClayExistence ≡ true
+criticalConservativeClayKeepsFullC = refl
