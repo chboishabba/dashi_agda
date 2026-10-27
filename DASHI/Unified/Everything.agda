@@ -32,6 +32,7 @@ import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
 import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
 import DASHI.Unified.NavierStokesBM2TOEConvergenceValidation
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
 import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
@@ -225,6 +226,55 @@ unifiedNavierStokesBM2ZKPFrame :
   NSBM2TOE.NavierStokesBM2TOEZKPFrame
 unifiedNavierStokesBM2ZKPFrame =
   NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Navier-Stokes R829-vector instantaneous snapshot boundary.
+------------------------------------------------------------------------
+
+unifiedNavierStokesInstantaneousVectorSnapshotClosed : Bool
+unifiedNavierStokesInstantaneousVectorSnapshotClosed =
+  NSClayTOE.instantaneousVectorSnapshotClosed
+
+unifiedNavierStokesInstantaneousVectorSnapshotClosedIsTrue :
+  unifiedNavierStokesInstantaneousVectorSnapshotClosed ≡ true
+unifiedNavierStokesInstantaneousVectorSnapshotClosedIsTrue =
+  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
+
+unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
+unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegative =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
+
+unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
+  unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
+unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+unifiedNavierStokesRealFiniteODETransportClosed : Bool
+unifiedNavierStokesRealFiniteODETransportClosed =
+  NSClayTOE.realFiniteODETransportClosed
+
+unifiedNavierStokesRealFiniteODETransportStillOpen :
+  unifiedNavierStokesRealFiniteODETransportClosed ≡ false
+unifiedNavierStokesRealFiniteODETransportStillOpen =
+  NSClayTOE.realFiniteODETransportStillOpen
+
+unifiedNavierStokesUniversalR823IntegratedReserveRefuted : Bool
+unifiedNavierStokesUniversalR823IntegratedReserveRefuted =
+  NSClayTOE.universalR823IntegratedReserveRefuted
+
+unifiedNavierStokesUniversalR823IntegratedReserveStillUnrefuted :
+  unifiedNavierStokesUniversalR823IntegratedReserveRefuted ≡ false
+unifiedNavierStokesUniversalR823IntegratedReserveStillUnrefuted =
+  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
+
+unifiedNavierStokesInstantaneousSnapshotClayPromotion : Bool
+unifiedNavierStokesInstantaneousSnapshotClayPromotion =
+  NSClayTOE.instantaneousSnapshotClayPromotion
+
+unifiedNavierStokesInstantaneousSnapshotClayPromotionStillFalse :
+  unifiedNavierStokesInstantaneousSnapshotClayPromotion ≡ false
+unifiedNavierStokesInstantaneousSnapshotClayPromotionStillFalse =
+  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
 
 ------------------------------------------------------------------------
 -- Typed Balaban continuum and Fleet target aggregate aliases.
