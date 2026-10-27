@@ -73,6 +73,27 @@ balabanRGClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
 
+unifierBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+unifierBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
+
+unifierBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifierBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+unifierDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+unifierDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
+
+unifierDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifierDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
+
 balabanRGTOEReceipt : BalabanRGTOE.BalabanRGTOEReceipt
 balabanRGTOEReceipt =
   BalabanRGTOE.canonicalBalabanRGTOEReceipt
@@ -926,6 +947,40 @@ unifierFleetFormalGapTargetReceipt :
   FleetGapTOE.FleetFormalGapTargetReceipt
 unifierFleetFormalGapTargetReceipt =
   FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+
+unifierFleetDischargedCoreKnowledgeFibres : ℕ
+unifierFleetDischargedCoreKnowledgeFibres =
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifierFleetDischargedCoreKnowledgeFibresIs584 :
+  unifierFleetDischargedCoreKnowledgeFibres ≡ 584
+unifierFleetDischargedCoreKnowledgeFibresIs584 = refl
+
+unifierFleetPolarityContradictionGaps : ℕ
+unifierFleetPolarityContradictionGaps =
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifierFleetPolarityContradictionGapsIs44 :
+  unifierFleetPolarityContradictionGaps ≡ 44
+unifierFleetPolarityContradictionGapsIs44 = refl
+
+unifierFleetUnformalisedFormalGaps : ℕ
+unifierFleetUnformalisedFormalGaps =
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifierFleetUnformalisedFormalGapsIs58 :
+  unifierFleetUnformalisedFormalGaps ≡ 58
+unifierFleetUnformalisedFormalGapsIs58 = refl
+
+unifierFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+unifierFleetTargetsOnlyUnformalisedFormalGaps = refl
 
 unifierFleetCoordinateRebuildabilityReceipt =
   FleetGapTOE.fleetCoordinateRebuildabilityReceipt
