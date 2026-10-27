@@ -18,6 +18,7 @@ import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as UnifiedPhysics
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
 
 ------------------------------------------------------------------------
 -- Root agreement.
@@ -185,10 +186,11 @@ semanticPromotionCannotGrantLegalAuthority =
   Governance.governanceSemanticLegalAuthorityStillClosed
 
 runtimeTransportCannotPromoteTruth :
-  Governance.governanceParserCandidateCannotBecomeTruthByTransport
-  ≡ Governance.governanceParserCandidateCannotBecomeTruthByTransport
+  LegalRuntime.parserCandidateMayBecomeTruthByTransport
+    Governance.governanceLegalRuntimeContract
+  ≡ false
 runtimeTransportCannotPromoteTruth =
-  refl
+  Governance.governanceParserCandidateCannotBecomeTruthByTransport
 
 caseManagementReuseRequiresTargetAuthority :
   Domain.targetDomainNeedsOwnAuthorityWitness
