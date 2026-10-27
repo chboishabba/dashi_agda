@@ -114,6 +114,11 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
           dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda --root .
+          dashi-repo related stateDecode-stateCode --root . --limit 20
+          dashi-repo related compilerSuccessDoesNotCreateKernelSuccess --root . --limit 20
           dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
           dashi-repo related toe27RotationOrderThree --root . --limit 20
           dashi-repo related toe27OriginFixed --root . --limit 20
@@ -145,6 +150,24 @@ jobs:
             exit 1
           fi
 
+      - name: Fast Agda preflight on converged TOE graph
+        run: |
+          files=(
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
+            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
+            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+          )
+          for file in "${files[@]}"; do
+            dashi-agda-preflight --root . "$file"
+          done
+
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
         with:
@@ -172,7 +195,7 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
-            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
               echo "forbidden trust escape in $source" >&2
               exit 1
             fi
@@ -182,6 +205,9 @@ jobs:
         run: |
           agda --version
           modules=(
+            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
+            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
