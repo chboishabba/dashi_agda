@@ -1090,8 +1090,6 @@ toeHistoricalGate4CountSelectedAsFleetTarget =
   FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
 
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.EqualCardinality.equalCardinalitySelectsCanonicalMap
-    FleetHyperTOE.fleetGate4EqualCardinalityBoundary
-  ≡ false
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
