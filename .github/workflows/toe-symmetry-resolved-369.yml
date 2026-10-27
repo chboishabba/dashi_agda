@@ -22,6 +22,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6Ledger.agda'
       - 'DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
@@ -127,6 +128,8 @@ jobs:
           dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6Ledger.agda --root .
+          dashi-repo related physicalClosureRound6LedgerLevel --root . --limit 20
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda --root .
           dashi-repo related physicalClosureRound6CutsetInhabitantsLevel --root . --limit 20
           dashi-repo related gate4ObligationCount --root . --limit 20
@@ -166,6 +169,7 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
             DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
+            DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6Ledger.agda
             DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
             DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
