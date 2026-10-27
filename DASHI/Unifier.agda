@@ -320,3 +320,5 @@ import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact
 import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact
 import DASHI.Biology.IITHigherOrderGluingDiscriminationExact
 import DASHI.Biology.IITParityGluingConjectureMaxCutExact
+
+import DASHI.Unified.IITExactNonPromotion
