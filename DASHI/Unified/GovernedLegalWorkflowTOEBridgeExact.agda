@@ -1513,3 +1513,15 @@ CurrentValidityAutomaticallyMeansApplicability =
 SemanticAdmissionAuthorityIsLegalSourceAuthority : Set
 SemanticAdmissionAuthorityIsLegalSourceAuthority =
   LegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority
+
+------------------------------------------------------------------------
+-- Legal-source authority type aliases required by normalized handoffs.
+------------------------------------------------------------------------
+
+SameLegalSystemAutomaticallyMeansAuthority : Set
+SameLegalSystemAutomaticallyMeansAuthority =
+  LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority
+
+DocumentRoleSuppliesLegalSourceAuthority : Set
+DocumentRoleSuppliesLegalSourceAuthority =
+  LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority
