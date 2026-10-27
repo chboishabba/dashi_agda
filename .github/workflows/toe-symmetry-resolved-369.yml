@@ -128,6 +128,15 @@ jobs:
           dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
           dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/Fleet58ManifestAcquisitionExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
+          dashi-repo related fleetRecordedMacroscopicMotifCountIs3 --root . --limit 20
+          dashi-repo related named58ManifestAcquired --root . --limit 20
+          dashi-repo related perGapDispatchEnabled --root . --limit 20
+          dashi-repo related searchPriorityDoesNotCreateProof --root . --limit 20
+          dashi-repo discover 'Fleet 584 44 58 three motifs manifest acquisition target' --root . --limit 50
+          dashi-repo discover 'Ibrahim Pareto snowball Monster 3B non-promotion' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Wikimedia.Ibrahim --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda --root .
@@ -152,6 +161,9 @@ jobs:
       - name: Fast Agda preflight on converged TOE graph
         run: |
           files=(
+            DASHI/Unified/Fleet58ManifestAcquisitionRegression.agda
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
             DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
             DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
