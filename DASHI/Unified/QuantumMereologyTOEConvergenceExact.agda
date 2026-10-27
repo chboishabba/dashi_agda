@@ -50,9 +50,9 @@ zanardiDallasAndreadakisMetricAttribution =
   Metric.zanardiDallasAndreadakisUnitaryMetricExternalClaim
 
 finiteGTPSCarrierPaid :
-  Selection.OperatorAlgebraGTPSCarrierPaid selectionGeometryStatus ≡ false
-  → ⊥
-finiteGTPSCarrierPaid ()
+  Selection.OperatorAlgebraGTPSCarrierPaid selectionGeometryStatus ≡ true
+finiteGTPSCarrierPaid =
+  Selection.OperatorAlgebraGTPSCarrierPaidIsTrue selectionGeometryStatus
 
 physicalSourceGTPSStillOpen :
   Atlas.PhysicalSourceGTPSIdentificationPaid selectedAtlasStatus ≡ false
