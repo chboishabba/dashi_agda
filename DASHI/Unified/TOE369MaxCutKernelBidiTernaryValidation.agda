@@ -7,6 +7,9 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as Owner
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 
@@ -271,3 +274,69 @@ unifierMonsterPhaseConjugationIntertwinerSameOwner :
   Unifier.unifier369MonsterPhaseConjugationIntertwiner
   ≡ Owner.toe27MonsterPhaseConjugationIntertwiner
 unifierMonsterPhaseConjugationIntertwinerSameOwner = refl
+
+
+------------------------------------------------------------------------
+-- Exact finite-27 ABI and compiled-host non-promotion.
+-- These checks do not identify the runtime with an Agda FFI proof.
+------------------------------------------------------------------------
+
+toeFinite27ByteABIFirewallMatches :
+  ABI.BoundedABIImpliesRustImplementation → ⊥
+toeFinite27ByteABIFirewallMatches =
+  TOE.toeFinite27ByteABIDoesNotCreateRustImplementation
+
+unifierFinite27ByteABIFirewallMatches :
+  ABI.BoundedABIImpliesRustImplementation → ⊥
+unifierFinite27ByteABIFirewallMatches =
+  Unifier.unifierTriadicFiniteABIImpliesRustImpossible
+
+toeHostByteDeviceFirewallMatches :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+toeHostByteDeviceFirewallMatches =
+  TOE.toeHostByteDoesNotCreateDeviceByte
+
+unifierHostByteDeviceFirewallMatches :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+unifierHostByteDeviceFirewallMatches =
+  Unifier.unifierTriadicHostByteDoesNotCreateDeviceByte
+
+toeRuntimeKernelFirewallMatches :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+toeRuntimeKernelFirewallMatches =
+  TOE.toeHostRuntimeReceiptCannotCreateKernelCertification
+
+unifierRuntimeKernelFirewallMatches :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+unifierRuntimeKernelFirewallMatches =
+  Unifier.unifierTriadicRuntimeSourceDoesNotCreateKernelCertification
+
+toeCompiledScalarRustFirewallMatches :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+toeCompiledScalarRustFirewallMatches =
+  TOE.toeCompiledScalarDoesNotCreateRust
+
+unifierCompiledScalarRustFirewallMatches :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifierCompiledScalarRustFirewallMatches =
+  Unifier.unifierCompiledScalarDoesNotCreateRust
+
+toeCompiledScalarBackendFirewallMatches :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+toeCompiledScalarBackendFirewallMatches =
+  TOE.toeCompiledScalarDoesNotCreateBackendEquivalence
+
+unifierCompiledScalarBackendFirewallMatches :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifierCompiledScalarBackendFirewallMatches =
+  Unifier.unifierCompiledScalarDoesNotCreateBackendEquivalence
+
+toeCompilerKernelFirewallMatches :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toeCompilerKernelFirewallMatches =
+  TOE.toeCompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+unifierCompilerKernelFirewallMatches :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifierCompilerKernelFirewallMatches =
+  Unifier.unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess
