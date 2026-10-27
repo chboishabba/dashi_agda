@@ -370,6 +370,11 @@ toeSemanticMeetDoesNotProveLegalApplicability =
 
 
 
+toeGovernedLegalWorkflowInvariantHandoff :
+  GovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
+toeGovernedLegalWorkflowInvariantHandoff =
+  GovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
 toeGovernedLegalWorkflowZKPReceipt :
   GovernanceTOE.GovernedLegalWorkflowZKPReceipt
 toeGovernedLegalWorkflowZKPReceipt =
