@@ -8,6 +8,7 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
+import DASHI.Unified.BalabanAntigravityTOEConvergenceExact as BalabanAntiTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Unified.CarrierGrammar as CarrierGrammar
 import DASHI.Unified.ChemistrySupervoxel as ChemistrySupervoxel
@@ -17,6 +18,11 @@ import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
+balabanAntigravityTOEReceipt :
+  BalabanAntiTOE.BalabanAntigravityTOEReceipt
+balabanAntigravityTOEReceipt =
+  BalabanAntiTOE.canonicalBalabanAntigravityTOEReceipt
+
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
   CarrierGrammar.carrierGrammarObject
