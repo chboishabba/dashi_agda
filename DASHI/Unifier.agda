@@ -10,6 +10,7 @@ open import Data.Unit using (⊤; tt)
 
 import DASHI.Physics.Closure.NSABCDMaxCut20261002Exact as NSMaxCut
 import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
+import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact as NSTOE
 
 ¬ : Set → Set
 ¬ A = A → ⊥
@@ -344,3 +345,36 @@ nsGlobalRationalHelicalProjectorLawsDoNotGateR829Decision :
   NSMaxCut.globalRationalHelicalProjectorLawsGateR829Decision ≡ false
 nsGlobalRationalHelicalProjectorLawsDoNotGateR829Decision =
   NSABCDTOE.globalRationalHelicalProjectorLawsDoNotGateR829Decision
+
+
+------------------------------------------------------------------------
+-- Exact theorem-bearing live periodic NS TOE attachment.
+--
+-- The historical placeholder interfaces above remain compatibility surfaces.
+-- They do not discharge the open R650 analytic payment.
+------------------------------------------------------------------------
+
+nsR650CombinedSelfExternalRecombined :
+  NSTOE.NSR650.round650SelfExternalRecombineToSingleGlobalCommutator ≡ true
+nsR650CombinedSelfExternalRecombined =
+  NSTOE.toeNSR650CombinedSelfExternalRecombined
+
+nsR650SeparateSelfPaymentNotRequired :
+  NSTOE.NSR650.round650SeparateSelfCancellationRequiredAfterRecombination ≡ false
+nsR650SeparateSelfPaymentNotRequired =
+  NSTOE.toeNSR650SeparateSelfPaymentNotRequired
+
+nsR650SeparateExternalPaymentNotRequired :
+  NSTOE.NSR650.round650SeparateExternalPaymentRequiredAfterRecombination ≡ false
+nsR650SeparateExternalPaymentNotRequired =
+  NSTOE.toeNSR650SeparateExternalPaymentNotRequired
+
+nsR650CombinedCutoffUniformPaymentRemainsOpen :
+  NSTOE.NSR650.round650CombinedSelfExternalCutoffUniformPaymentClosed ≡ false
+nsR650CombinedCutoffUniformPaymentRemainsOpen =
+  NSTOE.toeNSR650CombinedCutoffUniformPaymentRemainsOpen
+
+nsR650ClayPromotionRemainsFalse :
+  NSTOE.NSR650.round650ClayPromotion ≡ false
+nsR650ClayPromotionRemainsFalse =
+  NSTOE.toeNSR650ClayPromotionRemainsFalse
