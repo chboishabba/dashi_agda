@@ -32,6 +32,8 @@ toeKernelProofDoesNotEstablishSourceSemantics :
 toeKernelProofDoesNotEstablishSourceSemantics =
   Governance.kernelClosureIsNotSemanticExhaustiveness
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unifier as UnifierLegalFacade
+import DASHI.Unified.Everything as UnifiedLegalFacade
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
@@ -568,6 +570,27 @@ toe369SemanticAdmissionIsNotLegalAuthority :
 toe369SemanticAdmissionIsNotLegalAuthority =
   LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
 
+
+toe369GovernedLegalWorkflowAuthorityInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowAuthorityInvariantHandoff
+toe369GovernedLegalWorkflowAuthorityInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+toe369CanonicalLegalSourceAuthorityBoundary :
+  LegalGovernance.LegalSourceAuthorityBoundary
+toe369CanonicalLegalSourceAuthorityBoundary =
+  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
+
+toe369SameSystemIsNotLegalAuthority :
+  LegalGovernance.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+toe369SameSystemIsNotLegalAuthority =
+  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+toe369DocumentRoleIsNotLegalAuthority :
+  LegalGovernance.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+toe369DocumentRoleIsNotLegalAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
 ------------------------------------------------------------------------
 -- SCALE Evidence Review convergence.
 ------------------------------------------------------------------------
@@ -666,3 +689,29 @@ toe369SCALEEvidenceReviewTOEZKPFrame :
   SCALEReview.SCALEEvidenceReviewTOEZKPFrame
 toe369SCALEEvidenceReviewTOEZKPFrame =
   SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
+
+------------------------------------------------------------------------
+-- EXACT THREE-FACADE GOVERNANCE SAME-OBJECT CONSISTENCY.
+--
+-- The Unifier, 369 root and Unified Everything reuse the same canonical
+-- legal authority handoff. This is definitional equality, not a new
+-- legislative or Actionstep vendor fact.
+-- ESD surfaces are unchanged. Original proof ownership stays in the
+-- existing SensibLaw legal-source authority module.
+------------------------------------------------------------------------
+
+toe369LegalGovernanceUnifierSameObject :
+  toe369GovernedLegalWorkflowAuthorityInvariantHandoff
+  ≡ UnifierLegalFacade.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+toe369LegalGovernanceUnifierSameObject = refl
+
+toe369LegalGovernanceUnifiedSameObject :
+  toe369GovernedLegalWorkflowAuthorityInvariantHandoff
+  ≡ UnifiedLegalFacade.unifiedGovernedLegalWorkflowAuthorityInvariantHandoff
+toe369LegalGovernanceUnifiedSameObject = refl
+
+toe369LegalGovernanceAllThreeSameCanonical :
+  UnifierLegalFacade.unifierGovernedLegalWorkflowAuthorityInvariantHandoff
+  ≡ UnifiedLegalFacade.unifiedGovernedLegalWorkflowAuthorityInvariantHandoff
+toe369LegalGovernanceAllThreeSameCanonical = refl
+

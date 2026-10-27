@@ -739,6 +739,7 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "DASHI.Interop.SLRRuntimeValidationHandoffExact"
     ∷ "DASHI.Interop.SLRValidationRoadmapPromotionExact"
     ∷ "DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact"
     ∷ "DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact"
     ∷ "DASHI.Interop.SensibLawSemanticPromotionPolicy"
     ∷ "DASHI.Core.BoundAcquisitionDemandExact"
@@ -771,6 +772,11 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "Semantic promotion creates no truth authority, legal authority, or generic authority."
     ∷ "Bound acquisition does not pay the requirement or close the consumer."
     ∷ "Producer identity does not identify the residual."
+    ∷ "A candidate source does not create legal-source authority."
+    ∷ "A legal-system match does not create legal-source authority."
+    ∷ "Current source validity does not prove case-specific applicability."
+    ∷ "Semantic admission does not create legal-source authority."
+    ∷ "Document role does not supply legal-source authority."
     ∷ [] )
     ( "dashi_agda is the formal reference lane."
     ∷ "SensibLaw/SLR owns review, admission, semantic construction, and legal consumer projection."
@@ -794,6 +800,8 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "The TOE root reaches legal semantic admission and software-validation firewalls."
     ∷ "The TOE root reaches canonical semantic-authority non-promotion."
     ∷ "The TOE root reaches exact-live bound-acquisition non-promotion."
+    ∷ "The TOE root reaches the canonical legal-source authority boundary."
+    ∷ "The TOE root reaches all five legal-source authority non-promotion proofs."
     ∷ [] )
     ( "ITIL change and service-management lens."
     ∷ "ISO 9000 family quality-management lens."
@@ -1022,3 +1030,78 @@ CurrentValidityAutomaticallyMeansApplicability =
 SemanticAdmissionAuthorityIsLegalSourceAuthority : Set
 SemanticAdmissionAuthorityIsLegalSourceAuthority =
   LegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority
+
+
+------------------------------------------------------------------------
+-- Final legal-source authority invariant handoff.
+--
+-- Reuse the canonical workflow handoff and the exact legal-source authority
+-- owner.  This closes the facade asymmetry without changing legal semantics.
+------------------------------------------------------------------------
+
+LegalSourceAuthorityBoundary : Set
+LegalSourceAuthorityBoundary =
+  LegalAuthority.LegalSourceAuthorityBoundary
+
+SameLegalSystemAutomaticallyMeansAuthority : Set
+SameLegalSystemAutomaticallyMeansAuthority =
+  LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority
+
+DocumentRoleSuppliesLegalSourceAuthority : Set
+DocumentRoleSuppliesLegalSourceAuthority =
+  LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority
+
+record GovernedLegalWorkflowAuthorityInvariantHandoff : Set₁ where
+  constructor governed-legal-workflow-authority-invariant-handoff
+  field
+    workflowInvariantHandoff :
+      GovernedLegalWorkflowTOEInvariantHandoff
+
+    workflowInvariantHandoffIsCanonical :
+      workflowInvariantHandoff
+      ≡
+      canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+    legalSourceAuthorityBoundary :
+      LegalAuthority.LegalSourceAuthorityBoundary
+
+    legalSourceAuthorityBoundaryIsCanonical :
+      legalSourceAuthorityBoundary
+      ≡
+      LegalAuthority.canonicalLegalSourceAuthorityBoundary
+
+    candidateSourceAuthorityFirewall :
+      LegalAuthority.CandidateSourceIsAuthoritative →
+      ⊥
+
+    sameSystemAuthorityFirewall :
+      LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority →
+      ⊥
+
+    currentValidityApplicabilityFirewall :
+      LegalAuthority.CurrentValidityAutomaticallyMeansApplicability →
+      ⊥
+
+    semanticAdmissionAuthorityFirewall :
+      LegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority →
+      ⊥
+
+    documentRoleAuthorityFirewall :
+      LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority →
+      ⊥
+
+open GovernedLegalWorkflowAuthorityInvariantHandoff public
+
+canonicalGovernedLegalWorkflowAuthorityInvariantHandoff :
+  GovernedLegalWorkflowAuthorityInvariantHandoff
+canonicalGovernedLegalWorkflowAuthorityInvariantHandoff =
+  governed-legal-workflow-authority-invariant-handoff
+    canonicalGovernedLegalWorkflowTOEInvariantHandoff
+    refl
+    LegalAuthority.canonicalLegalSourceAuthorityBoundary
+    refl
+    toeCandidateSourceDoesNotCloseAuthority
+    toeSameSystemDoesNotAutomaticallyCloseAuthority
+    toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+    toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+    toeDocumentRoleDoesNotSupplyLegalSourceAuthority

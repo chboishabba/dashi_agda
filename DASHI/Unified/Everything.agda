@@ -247,6 +247,27 @@ unifiedSemanticAdmissionIsNotLegalAuthority :
 unifiedSemanticAdmissionIsNotLegalAuthority =
   LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
 
+
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowAuthorityInvariantHandoff
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+unifiedCanonicalLegalSourceAuthorityBoundary :
+  LegalGovernance.LegalSourceAuthorityBoundary
+unifiedCanonicalLegalSourceAuthorityBoundary =
+  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
+
+unifiedSameSystemIsNotLegalAuthority :
+  LegalGovernance.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+unifiedSameSystemIsNotLegalAuthority =
+  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifiedDocumentRoleIsNotLegalAuthority :
+  LegalGovernance.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+unifiedDocumentRoleIsNotLegalAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
 ------------------------------------------------------------------------
 -- SCALE evidence genealogy firewalls.
 ------------------------------------------------------------------------
