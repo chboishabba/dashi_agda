@@ -356,3 +356,53 @@ unifierYangMillsClayStillNotPromoted :
   YMGoal1TOE.clayYangMillsPromoted ≡ false
 unifierYangMillsClayStillNotPromoted =
   YMGoal1TOE.clayYangMillsStillNotPromoted
+
+
+------------------------------------------------------------------------
+-- Preferred R440--R444 Goal-1 source cuts.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel =
+  YMGoal1TOE.goal1FiniteA1WilsonActionInvarianceLevel
+
+unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel =
+  YMGoal1TOE.goal1FiniteA1ProductHaarInvarianceLevel
+
+unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel =
+  YMGoal1TOE.goal1FiniteA1DensityInvariantCompilerLevel
+
+unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel : ProofLevel
+unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel =
+  YMGoal1TOE.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+
+unifierYangMillsGoal1FiniteA2SquareCompilerLevel : ProofLevel
+unifierYangMillsGoal1FiniteA2SquareCompilerLevel =
+  YMGoal1TOE.goal1FiniteA2SquareCompilerLevel
+
+unifierYangMillsGoal1PreferredVariableDomainBSourceLevel : ProofLevel
+unifierYangMillsGoal1PreferredVariableDomainBSourceLevel =
+  YMGoal1TOE.goal1PreferredVariableDomainBSourceLevel
+
+unifierYangMillsGoal1R429RootedTraceEncodingLevel : ProofLevel
+unifierYangMillsGoal1R429RootedTraceEncodingLevel =
+  YMGoal1TOE.goal1R429RootedTraceEncodingLevel
+
+unifierYangMillsGoal1R429RootedTraceCountCompilerLevel : ProofLevel
+unifierYangMillsGoal1R429RootedTraceCountCompilerLevel =
+  YMGoal1TOE.goal1R429RootedTraceCountCompilerLevel
+
+unifierYangMillsGoal1R429SourceDecayReserveLevel : ProofLevel
+unifierYangMillsGoal1R429SourceDecayReserveLevel =
+  YMGoal1TOE.goal1R429SourceDecayReserveLevel
+
+unifierYangMillsGoal1R429EntropyBudgetCompilerLevel : ProofLevel
+unifierYangMillsGoal1R429EntropyBudgetCompilerLevel =
+  YMGoal1TOE.goal1R429EntropyBudgetCompilerLevel
+
+unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred :
+  YMGoal1TOE.legacyGlobalTreeMetricPreferred ≡ false
+unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred =
+  YMGoal1TOE.legacyGlobalTreeMetricPreferredIsFalse
