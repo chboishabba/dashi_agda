@@ -11,6 +11,8 @@ import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -65,3 +67,64 @@ yangMillsPostureIsApproaching :
   Spine.proofPosture yangMillsObject ≡ Asserted.approachingClosedProof
 yangMillsPostureIsApproaching =
   refl
+
+
+------------------------------------------------------------------------
+-- Canonical Yang-Mills Goal-1 TOE facade.
+-- Proof ownership remains in the imported Yang-Mills owners.
+------------------------------------------------------------------------
+
+yangMillsGoal1PreferredVariableDomainBSourceLevel : ProofLevel
+yangMillsGoal1PreferredVariableDomainBSourceLevel =
+  YMGoal1TOE.goal1PreferredVariableDomainBSourceLevel
+
+yangMillsGoal1FiniteA1WilsonActionInvarianceLevel : ProofLevel
+yangMillsGoal1FiniteA1WilsonActionInvarianceLevel =
+  YMGoal1TOE.goal1FiniteA1WilsonActionInvarianceLevel
+
+yangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel : ProofLevel
+yangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel =
+  YMGoal1TOE.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+
+yangMillsGoal1A3UniformCompactContainmentLevel : ProofLevel
+yangMillsGoal1A3UniformCompactContainmentLevel =
+  YMGoal1TOE.goal1A3UniformCompactContainmentLevel
+
+yangMillsGoal1A4FiniteRegularityLevel : ProofLevel
+yangMillsGoal1A4FiniteRegularityLevel =
+  YMGoal1TOE.goal1A4FiniteRegularityLevel
+
+yangMillsGoal1A5FiniteGrowthControlLevel : ProofLevel
+yangMillsGoal1A5FiniteGrowthControlLevel =
+  YMGoal1TOE.goal1A5FiniteGrowthControlLevel
+
+yangMillsGoal1LocalQFTCSourceLevel : ProofLevel
+yangMillsGoal1LocalQFTCSourceLevel =
+  YMGoal1TOE.goal1LocalQFTCSourceLevel
+
+yangMillsGoal1C3OneStepAFIdentificationLevel : ProofLevel
+yangMillsGoal1C3OneStepAFIdentificationLevel =
+  YMGoal1TOE.goal1C3OneStepAFIdentificationLevel
+
+yangMillsGoal1C4SectorRecoveryCompilerLevel : ProofLevel
+yangMillsGoal1C4SectorRecoveryCompilerLevel =
+  YMGoal1TOE.goal1C4SectorRecoveryCompilerLevel
+
+yangMillsGoal1SameHNontrivialityLevel : ProofLevel
+yangMillsGoal1SameHNontrivialityLevel =
+  YMGoal1TOE.goal1SameHNontrivialitySemanticBridgeLevel
+
+yangMillsGoal1ContinuumStillOpen :
+  YMGoal1TOE.flat4DContinuumTransferProvedHere ≡ false
+yangMillsGoal1ContinuumStillOpen =
+  YMGoal1TOE.flat4DContinuumTransferStillOpen
+
+yangMillsGoal1ContinuumMassGapStillBlocked :
+  YMGoal1TOE.continuumMassGapPromoted ≡ false
+yangMillsGoal1ContinuumMassGapStillBlocked =
+  YMGoal1TOE.continuumMassGapStillNotPromoted
+
+yangMillsGoal1ClayStillBlocked :
+  YMGoal1TOE.clayYangMillsPromoted ≡ false
+yangMillsGoal1ClayStillBlocked =
+  YMGoal1TOE.clayYangMillsStillNotPromoted
