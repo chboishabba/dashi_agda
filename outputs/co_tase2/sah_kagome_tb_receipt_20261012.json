@@ -1,0 +1,29 @@
+{
+  "source_doi": "10.1038/s41535-026-00885-5",
+  "equation": 1,
+  "grid_n": 41,
+  "hexagonal": {
+    "tprime_over_t": 1.0,
+    "eps1_over_t": 0.0,
+    "upper_bandwidth_over_t": 0.9979752583428891
+  },
+  "kagome_like": {
+    "tprime_over_t": -0.4,
+    "eps1_over_t": -2.2,
+    "upper_bandwidth_over_t": 0.11087558714197643
+  },
+  "ideal_kagome": {
+    "tprime_over_t": 0.0,
+    "eps1_over_t": -100.0,
+    "decoupled_site_bandwidth_over_t": 0.0,
+    "flat_band_min_over_t": 1.9999999999999987,
+    "flat_band_max_over_t": 2.0000000000000013,
+    "flat_band_bandwidth_over_t": 2.6645352591003757e-15
+  },
+  "assertions": {
+    "hamiltonian_hermitian_over_grid": true,
+    "ideal_kagome_has_flat_plus_2t_band": true,
+    "source_kagome_like_choice_flattens_upper_band_vs_hexagonal": true
+  },
+  "epistemic_boundary": "Execution of Sah et al. Eq. (1) qualitative four-site donor only; not a CoTa4Se8 ab-initio/Wannier Hamiltonian and not a Sprague ARPES fit."
+}

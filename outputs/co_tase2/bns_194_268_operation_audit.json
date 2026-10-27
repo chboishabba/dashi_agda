@@ -1,0 +1,15 @@
+{
+  "authority_sha256": "32377c575e20bb24b243ee3a4b4b97f2c195058d4886798a18496b1d95d2085c",
+  "authority": "MAGNDATA - Collection of Magnetic Structures, entry 0.118",
+  "authority_url": "https://www.cryst.ehu.es/magndata/index.php?index=0.118",
+  "bns_number": "194.268",
+  "independent_operation_count": 24,
+  "modeled_operation_count": 24,
+  "unitary_operations": 12,
+  "antiunitary_operations": 12,
+  "exact_operation_table_match": true,
+  "missing_from_model": [],
+  "extra_in_model": [],
+  "audit_date": "2026-10-12",
+  "audit_note": "Set equality of (spatial triplet, antiunitary parity) against Gemmi-derived P63/mmc + staggered-Co moment tagging."
+}
