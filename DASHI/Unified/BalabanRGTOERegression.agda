@@ -32,6 +32,8 @@ import DASHI.Physics.YangMills.BalabanCompactSimpleHaarQuadraticCasimirExact as 
 import DASHI.Physics.YangMills.BalabanCompactSimpleCasimirOrbitFactorizationExact as CasimirOrbit
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as CasimirClass
 import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress
+import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as StressCauchy
+import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as StressHilbert
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
 import DASHI.Geometry.Gauge.SUNPrimitives as SUN
@@ -91,6 +93,22 @@ balabanStressMarkedShellReuseLevel =
 balabanStressPairingPhysicalWeldLevel : ProofLevel
 balabanStressPairingPhysicalWeldLevel =
   Stress.literalCMP116FirstVariationStressPairingLevel
+
+balabanStressCauchyModulusCompilerLevel : ProofLevel
+balabanStressCauchyModulusCompilerLevel =
+  StressCauchy.stressResponseCauchyModulusCompilerLevel
+
+balabanStressCauchyPhysicalInsertionLevel : ProofLevel
+balabanStressCauchyPhysicalInsertionLevel =
+  StressCauchy.literalStressInsertionIsCMP119LocalInsertionLevel
+
+balabanStressHilbertBoundCompilerLevel : ProofLevel
+balabanStressHilbertBoundCompilerLevel =
+  StressHilbert.stressShellEnergyToHilbertCompilerLevel
+
+balabanStressHilbertPhysicalShellLevel : ProofLevel
+balabanStressHilbertPhysicalShellLevel =
+  StressHilbert.literalStressCoefficientEnergyIsShellPrefixLevel
 
 ------------------------------------------------------------------------
 -- Exact fail-closed RG and continuum boundaries.
