@@ -418,3 +418,50 @@ navierStokesBM2ZKPFrame :
   NSBM2TOE.NavierStokesBM2TOEZKPFrame
 navierStokesBM2ZKPFrame =
   NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Canonical Navier-Stokes Clay frontier facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
+
+navierStokesClayPromotion : Bool
+navierStokesClayPromotion =
+  NSClayTOE.navierStokesABCDClayPromotion
+
+navierStokesClayPromotionStillFalse :
+  navierStokesClayPromotion ≡ false
+navierStokesClayPromotionStillFalse =
+  NSClayTOE.navierStokesABCDClayPromotionStillFalse
+
+navierStokesGeneralRegularityComplete : Bool
+navierStokesGeneralRegularityComplete =
+  NSClayTOE.generalNSGlobalRegularityComplete
+
+navierStokesGeneralRegularityStillOpen :
+  navierStokesGeneralRegularityComplete ≡ false
+navierStokesGeneralRegularityStillOpen =
+  NSClayTOE.generalNSGlobalRegularityStillOpen
+
+navierStokesCarrierToGeneralImplicationProved : Bool
+navierStokesCarrierToGeneralImplicationProved =
+  NSClayTOE.carrierToGeneralNSImplicationProved
+
+navierStokesCarrierToGeneralImplicationStillOpen :
+  navierStokesCarrierToGeneralImplicationProved ≡ false
+navierStokesCarrierToGeneralImplicationStillOpen =
+  NSClayTOE.carrierToGeneralNSImplicationStillOpen
+
+navierStokesAuthorityPromotionGuard : Bool
+navierStokesAuthorityPromotionGuard =
+  NSClayTOE.navierStokesPromotionGuard
+
+navierStokesAuthorityPromotionGuardStillFalse :
+  navierStokesAuthorityPromotionGuard ≡ false
+navierStokesAuthorityPromotionGuardStillFalse =
+  NSClayTOE.navierStokesPromotionGuardStillFalse
+
+navierStokesClayFrontierZKPFrame :
+  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
+navierStokesClayFrontierZKPFrame =
+  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
