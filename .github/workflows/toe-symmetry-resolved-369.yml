@@ -88,6 +88,9 @@ jobs:
           dashi-repo diagnose DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda --root .
           dashi-repo related toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner --root . --limit 20
           dashi-repo related toeTernary27PhaseReductionIsNotGlobalInversion --root . --limit 20
+          dashi-repo related toeWholeCharacterDirectIsotypicBridgeStillOpen --root . --limit 20
+          dashi-repo related toeInvariantDiagonalKernelSubgroupPaid --root . --limit 20
+          dashi-repo related toeActualTwelveSeventyEightLinearIntertwinerStillOpen --root . --limit 20
           dashi-repo discover 'Max Cut kernel BIDI ternary 27 selected 3B Pareto Ibrahim Snowball non-promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
           dashi-repo lineage --prefix DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact --root .
