@@ -1017,6 +1017,32 @@ unifierFleetVectorCoordinateAdmissibilityStillFalse =
 unifierFleetTextFallbackAuthorityStillFalse =
   FleetGapTOE.fleetTextFallbackAuthorityStillFalse
 
+
+unifierFleetBalabanDischargedOwnerReceipt :
+  FleetGapTOE.BalabanDischargedOwnerReceipt
+unifierFleetBalabanDischargedOwnerReceipt =
+  FleetGapTOE.fleetBalabanDischargedOwnerReceipt
+
+unifierFleetNSPhysicalM2SummationCompilerStatus :
+  Bool
+unifierFleetNSPhysicalM2SummationCompilerStatus =
+  FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
+
+unifierFleetNSM2ToR568CompilerStatus :
+  Bool
+unifierFleetNSM2ToR568CompilerStatus =
+  FleetGapTOE.fleetNSM2ToR568CompilerStatus
+
+unifierFleetQuantumMereologyBoundary :
+  FleetGapTOE.QuantumMereologyDischargedBoundary
+unifierFleetQuantumMereologyBoundary =
+  FleetGapTOE.fleetQuantumMereologyBoundary
+
+unifierFleetQuantumMereologyAttributionBoundary :
+  FleetGapTOE.QuantumMereologyAttributionBoundary
+unifierFleetQuantumMereologyAttributionBoundary =
+  FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+
 ------------------------------------------------------------------------
 -- Joint Balaban RG + R559 same-owner max-cut facade.
 ------------------------------------------------------------------------
