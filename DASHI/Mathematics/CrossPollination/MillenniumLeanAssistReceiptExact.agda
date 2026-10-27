@@ -26,8 +26,8 @@ module DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TerminalSemanticsDecisionFailureExact as PNPQ1
@@ -229,64 +229,44 @@ currentMillenniumLeanAssistReceipt =
 
 
 ------------------------------------------------------------------------
--- CURRENT LEAN MILLENNIUM EXTERNAL ACCEPTANCE RECEIPT
+-- CURRENT LEAN MILLENNIUM EXTERNAL-ACCEPTANCE CUSTODY
 --
--- O: Reconcile the exact LeanDojo targets with existing DASHI theorem owners.
--- R: Reuse PR #45, the Agda P != NP terminal equivalence, and released NS C/D.
--- C: Record exact source identity and typed non-promotion only.
--- S: Source-written Lean is not an observed Lean kernel or Agda proof.
--- L: LeanDojo -> dashi_lean4 exact target surface -> this receipt -> TOE roots.
--- P: Existing same-object and physical-object welds are preconditions.
--- G: LeanDojo, OpenAI, Mathlib, and DASHI keep separate theorem attribution.
--- F: Hodge/YM incomplete targets and missing kernel receipts cannot promote.
+-- This receipt updates external target custody without replacing the older
+-- theorem-source receipt above. It records the exact independent target pin,
+-- the existing DASHI same-object weld reuse rule, and the fail-closed status
+-- of targets that LeanDojo marks as incomplete.
 --
--- Preconditions:
--- * Lean PR #45 owns the exact pinned target surface and same-object max-cut.
--- * Agda already owns Q1 terminal-package <-> concrete SAT decision failure.
--- * The released NS source receipt pins the independent C/D proof source.
---
--- Invariants:
--- * same name != same object;
--- * source-written != kernel-observed;
--- * incomplete external statement != prize-acceptance target;
--- * external theorem authority != Agda theorem authority.
---
--- Postconditions:
--- * the TOE can cite the exact Lean target/source boundary without reopening
---   discharged same-object mathematics;
--- * Hodge/YM external non-promotion is a proof term;
--- * NS adapter mathematics is recorded as already paid at the Lean source layer.
+-- Attribution:
+--   * LeanDojo and its contributors own the external Lean statements.
+--   * Existing DASHI Lean/Agda theorem owners retain proof ownership.
+--   * This Agda owner records custody and non-promotion only.
 ------------------------------------------------------------------------
 
 record MillenniumExternalAcceptanceReceipt : Set where
   constructor millennium-external-acceptance-receipt
   field
-    repository : String
-    branch : String
-    pullRequest : String
-    observedHead : String
-
+    leanRepository : String
+    leanPullRequest : String
+    leanBranch : String
+    leanObservedHead : String
     leanDojoRepository : String
     leanDojoCommit : String
-
-    exactTargetSurface : String
-    sameObjectMaxCutSurface : String
-    completionMaxCutSurface : String
-    bsdProjectiveRankWeldSurface : String
-
-    leanDojoVendoredAtExactCommit : Bool
-    rhClayMathlibBidirectionalWeldSourceWritten : Bool
-    nsFeffermanCExactTermSourceWritten : Bool
-    nsFeffermanDExactTermSourceWritten : Bool
-    nsExternalAdapterRequiresNewMathematics : Bool
-    bsdProjectiveAffineRankWeldSourceWritten : Bool
-    pnpTerminalPackageDecisionFailureBidiAgdaOwned : Bool
-
-    hodgeExternalFaithfulPrizeTarget : Bool
-    yangMillsExternalFaithfulPrizeTarget : Bool
-
-    exactHeadLeanKernelReceiptObserved : Bool
-    serializedLeanToAgdaProofTransportObserved : Bool
+    leanDojoVendorPath : String
+    riemannExternalTarget : String
+    navierStokesExternalTargets : String
+    bsdExternalTarget : String
+    hodgeExternalTarget : String
+    yangMillsExternalTarget : String
+    riemannExistingTerminalSource : String
+    navierStokesLiteralTerminalSource : String
+    bsdExistingRankWeldSource : String
+    yangMillsExistingPhysicalWeldSource : String
+    exactExternalDeclarationsPinned : Bool
+    existingSameObjectWeldsReused : Bool
+    hodgeExternalTargetValid : Bool
+    yangMillsExternalTargetValid : Bool
+    directCrossToolchainAdapterKernelChecked : Bool
+    receiptCreatesPrizeProof : Bool
 
 open MillenniumExternalAcceptanceReceipt public
 
@@ -295,20 +275,21 @@ currentMillenniumExternalAcceptanceReceipt :
 currentMillenniumExternalAcceptanceReceipt =
   millennium-external-acceptance-receipt
     "chboishabba/dashi_lean4"
-    "agent/millennium-external-target-adapters-20261006"
     "#45"
+    "agent/millennium-external-target-adapters-20261006"
     "9ab3f6a852af95061cd7ba5a890767ba7c1a1817"
     "lean-dojo/LeanMillenniumPrizeProblems"
     "603053dc267cf3efe422f438eb78098c0ececd6f"
-    "MillenniumExternal/ExactTargetSurface.lean"
-    "MillenniumExternal/SameObjectMaxCut.lean"
-    "MillenniumExternal/CompletionMaxCut.lean"
-    "Synthesis/MillenniumBSDProjectiveRankWeld.lean"
-    true
-    true
-    true
-    true
-    false
+    "vendor/LeanMillenniumPrizeProblems"
+    "Millennium.ClayRiemannHypothesis"
+    "MillenniumNavierStokes.FeffermanA|B|C|D"
+    "MillenniumBirchSwinnertonDyer.ClayBirchSwinnertonDyer"
+    "MillenniumHodge.ClayHodge"
+    "MillenniumYangMills.ClayYangMills"
+    "Synthesis.RiemannSelectedRHMaxCutFrontier"
+    "ExternalClayNS/LiteralABCD.lean"
+    "Synthesis/MillenniumBSDUniversalRankWeld.lean"
+    "Welds/YMClayAssembly.lean"
     true
     true
     false
@@ -316,55 +297,76 @@ currentMillenniumExternalAcceptanceReceipt =
     false
     false
 
+millenniumExternalDeclarationsPinned :
+  exactExternalDeclarationsPinned currentMillenniumExternalAcceptanceReceipt ≡ true
+millenniumExternalDeclarationsPinned = refl
+
+millenniumExistingSameObjectWeldsReused :
+  existingSameObjectWeldsReused currentMillenniumExternalAcceptanceReceipt ≡ true
+millenniumExistingSameObjectWeldsReused = refl
+
+millenniumHodgeExternalTargetInvalid :
+  hodgeExternalTargetValid currentMillenniumExternalAcceptanceReceipt ≡ false
+millenniumHodgeExternalTargetInvalid = refl
+
+millenniumYangMillsExternalTargetInvalid :
+  yangMillsExternalTargetValid currentMillenniumExternalAcceptanceReceipt ≡ false
+millenniumYangMillsExternalTargetInvalid = refl
+
+millenniumCrossToolchainAdapterStillNotKernelChecked :
+  directCrossToolchainAdapterKernelChecked currentMillenniumExternalAcceptanceReceipt ≡ false
+millenniumCrossToolchainAdapterStillNotKernelChecked = refl
+
+millenniumExternalReceiptDoesNotCreatePrizeProof :
+  receiptCreatesPrizeProof currentMillenniumExternalAcceptanceReceipt ≡ false
+millenniumExternalReceiptDoesNotCreatePrizeProof = refl
+
+
+------------------------------------------------------------------------
+-- Current PR #45 max-cut details.
+--
+-- These are derived custody facts. They do not create Lean or Agda proof
+-- authority. Existing same-object and physical-object theorem owners remain
+-- authoritative.
+------------------------------------------------------------------------
+
 leanMillenniumRHExactStatementWeldSourceWritten : Bool
-leanMillenniumRHExactStatementWeldSourceWritten =
-  rhClayMathlibBidirectionalWeldSourceWritten
-    currentMillenniumExternalAcceptanceReceipt
+leanMillenniumRHExactStatementWeldSourceWritten = true
 
 leanMillenniumRHExactStatementWeldSourceWrittenIsTrue :
   leanMillenniumRHExactStatementWeldSourceWritten ≡ true
 leanMillenniumRHExactStatementWeldSourceWrittenIsTrue = refl
 
 leanMillenniumNSFeffermanCExactTermSourceWritten : Bool
-leanMillenniumNSFeffermanCExactTermSourceWritten =
-  nsFeffermanCExactTermSourceWritten
-    currentMillenniumExternalAcceptanceReceipt
+leanMillenniumNSFeffermanCExactTermSourceWritten = true
 
 leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue :
   leanMillenniumNSFeffermanCExactTermSourceWritten ≡ true
 leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue = refl
 
 leanMillenniumNSFeffermanDExactTermSourceWritten : Bool
-leanMillenniumNSFeffermanDExactTermSourceWritten =
-  nsFeffermanDExactTermSourceWritten
-    currentMillenniumExternalAcceptanceReceipt
+leanMillenniumNSFeffermanDExactTermSourceWritten = true
 
 leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue :
   leanMillenniumNSFeffermanDExactTermSourceWritten ≡ true
 leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue = refl
 
 leanMillenniumNSAdapterRequiresNewMathematics : Bool
-leanMillenniumNSAdapterRequiresNewMathematics =
-  nsExternalAdapterRequiresNewMathematics
-    currentMillenniumExternalAcceptanceReceipt
+leanMillenniumNSAdapterRequiresNewMathematics = false
 
 leanMillenniumNSAdapterRequiresNoNewMathematics :
   leanMillenniumNSAdapterRequiresNewMathematics ≡ false
 leanMillenniumNSAdapterRequiresNoNewMathematics = refl
 
 leanMillenniumBSDProjectiveAffineRankWeldSourceWritten : Bool
-leanMillenniumBSDProjectiveAffineRankWeldSourceWritten =
-  bsdProjectiveAffineRankWeldSourceWritten
-    currentMillenniumExternalAcceptanceReceipt
+leanMillenniumBSDProjectiveAffineRankWeldSourceWritten = true
 
 leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue :
   leanMillenniumBSDProjectiveAffineRankWeldSourceWritten ≡ true
 leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue = refl
 
 leanMillenniumPNPTerminalFailureBidiAgdaOwned : Bool
-leanMillenniumPNPTerminalFailureBidiAgdaOwned =
-  pnpTerminalPackageDecisionFailureBidiAgdaOwned
-    currentMillenniumExternalAcceptanceReceipt
+leanMillenniumPNPTerminalFailureBidiAgdaOwned = true
 
 leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue :
   leanMillenniumPNPTerminalFailureBidiAgdaOwned ≡ true
@@ -380,12 +382,12 @@ leanMillenniumNSReleasedMetadataReportsNoSorryIsTrue = refl
 
 leanMillenniumHodgeFaithfulPrizeTarget : Bool
 leanMillenniumHodgeFaithfulPrizeTarget =
-  hodgeExternalFaithfulPrizeTarget
-    currentMillenniumExternalAcceptanceReceipt
+  hodgeExternalTargetValid currentMillenniumExternalAcceptanceReceipt
 
 leanMillenniumHodgeFaithfulPrizeTargetIsFalse :
   leanMillenniumHodgeFaithfulPrizeTarget ≡ false
-leanMillenniumHodgeFaithfulPrizeTargetIsFalse = refl
+leanMillenniumHodgeFaithfulPrizeTargetIsFalse =
+  millenniumHodgeExternalTargetInvalid
 
 LeanMillenniumHodgePrizePromotion : Set
 LeanMillenniumHodgePrizePromotion =
@@ -397,12 +399,12 @@ leanMillenniumHodgePrizePromotionImpossible ()
 
 leanMillenniumYangMillsFaithfulPrizeTarget : Bool
 leanMillenniumYangMillsFaithfulPrizeTarget =
-  yangMillsExternalFaithfulPrizeTarget
-    currentMillenniumExternalAcceptanceReceipt
+  yangMillsExternalTargetValid currentMillenniumExternalAcceptanceReceipt
 
 leanMillenniumYangMillsFaithfulPrizeTargetIsFalse :
   leanMillenniumYangMillsFaithfulPrizeTarget ≡ false
-leanMillenniumYangMillsFaithfulPrizeTargetIsFalse = refl
+leanMillenniumYangMillsFaithfulPrizeTargetIsFalse =
+  millenniumYangMillsExternalTargetInvalid
 
 LeanMillenniumYangMillsPrizePromotion : Set
 LeanMillenniumYangMillsPrizePromotion =
@@ -414,12 +416,13 @@ leanMillenniumYangMillsPrizePromotionImpossible ()
 
 leanMillenniumExactHeadKernelReceiptObserved : Bool
 leanMillenniumExactHeadKernelReceiptObserved =
-  exactHeadLeanKernelReceiptObserved
+  directCrossToolchainAdapterKernelChecked
     currentMillenniumExternalAcceptanceReceipt
 
 leanMillenniumExactHeadKernelReceiptStillUnobserved :
   leanMillenniumExactHeadKernelReceiptObserved ≡ false
-leanMillenniumExactHeadKernelReceiptStillUnobserved = refl
+leanMillenniumExactHeadKernelReceiptStillUnobserved =
+  millenniumCrossToolchainAdapterStillNotKernelChecked
 
 LeanMillenniumSourceWrittenKernelPromotion : Set
 LeanMillenniumSourceWrittenKernelPromotion =
