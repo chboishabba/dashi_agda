@@ -16,6 +16,7 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 governedLegalWorkflowTOEBoundary :
@@ -63,6 +64,16 @@ governedProducerIdentityDoesNotIdentifyResidual :
   LegalGovernance.SameProducerIdentifiesResidual → ⊥
 governedProducerIdentityDoesNotIdentifyResidual =
   LegalGovernance.toeProducerIdentityDoesNotIdentifyResidual
+
+pnfDistilledNonPromotionBoundary :
+  PNFDistilled.PNFDistilledNonPromotionBoundary
+pnfDistilledNonPromotionBoundary =
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
+
+pnfDistilledReuseZKPReceipt :
+  PNFDistilled.PNFDistilledReuseZKPReceipt
+pnfDistilledReuseZKPReceipt =
+  PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
 
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
