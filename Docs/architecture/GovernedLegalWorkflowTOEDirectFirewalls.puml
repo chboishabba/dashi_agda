@@ -1,0 +1,47 @@
+@startuml
+title Governed legal workflow -> focused DASHI TOE
+
+skinparam componentStyle rectangle
+
+package "Canonical theorem owners" {
+  [SensibLaw operational / review / matter]
+  [Legal source authority / applicability]
+  [Compositional compliance]
+  [ITIR governance controls]
+  [Semantic promotion / acquisition]
+  [Formalisation / external-world boundary]
+}
+
+component "GovernedLegalWorkflowTOEBridgeExact" as Bridge
+component "EverythingTOESymmetryResolved369" as TOE
+component "DASHI.Unifier" as Unifier
+component "DASHI.Unified.Everything" as Unified
+
+[SensibLaw operational / review / matter] --> Bridge : exact reuse
+[Legal source authority / applicability] --> Bridge : exact reuse
+[Compositional compliance] --> Bridge : witness-preserving composition
+[ITIR governance controls] --> Bridge : controls are not certification
+[Semantic promotion / acquisition] --> Bridge : non-promotion
+[Formalisation / external-world boundary] --> Bridge : proof is not world truth
+
+Bridge --> TOE : direct fail-closed aliases
+Bridge --> Unifier : direct fail-closed aliases
+Bridge --> Unified : direct fail-closed aliases
+
+note right of Bridge
+O: normalize existing governance proofs
+R: reuse canonical owners
+C: aliases only
+S: workflow state cannot promote truth or authority
+L: one governance normalization lane
+P: preserve intermediate compliance witness
+G: standards are lenses, not certification
+F: referee/preflight/kernel checks remain separate receipts
+end note
+
+note bottom of TOE
+No Actionstep-specific ontology is introduced.
+Matter/task/workflow product state is consumed
+through the existing generic legal-workflow owners.
+end note
+@enduml
