@@ -50,7 +50,7 @@ module DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact where
 -- Kernel certification requires an exact-head Agda or CI receipt.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
