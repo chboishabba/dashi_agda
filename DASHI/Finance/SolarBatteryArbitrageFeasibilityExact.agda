@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Nat.Base using (ℕ; _<_)
+open import Data.Nat.Base using (ℕ; _<_; _+_)
 
 import DASHI.Cognition.CausalRegimeMeasureFrame as Frames
 import DASHI.Finance.DeepStatArbFibrePipelineExact as StatArb
@@ -134,6 +134,8 @@ currentTariffSourceAtlas =
 record StorageArbitrageInputs : Set where
   constructor storageArbitrageInputs
   field
+    rawChargePriceMilliCentsPerKWh : ℕ
+    roundTripEfficiencyPermille : ℕ
     deliveredChargeCostMilliCentsPerKWh : ℕ
     dischargeValueMilliCentsPerKWh : ℕ
     usableCapacityWh : ℕ
@@ -164,7 +166,7 @@ record NetProfitReceipt (state : StorageArbitrageInputs) : Set where
     realisedVariableCostCents : ℕ
     realisedFixedCostCents : ℕ
     totalCostBelowRevenue :
-      realisedVariableCostCents
+      realisedVariableCostCents + realisedFixedCostCents
       < realisedRevenueCents
 
 open NetProfitReceipt public
