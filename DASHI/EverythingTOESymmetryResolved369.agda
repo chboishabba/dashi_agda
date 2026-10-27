@@ -560,3 +560,29 @@ toeTernary27DependentCodePreservesConsumer :
   ∀ {Outcome : Set} → (consumer : TOE27Orbit.TritTriple → Outcome) →
   TOE27Descent.ConsumerSufficient Recoverable27TOE.ternary27ExactCodeObserver consumer
 toeTernary27DependentCodePreservesConsumer = Recoverable27TOE.ternary27ExactCodeAdequateForEveryConsumer
+
+
+------------------------------------------------------------------------
+-- Current Navier--Stokes A/B/C/D terminal convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesABCDTerminalTOEExact as NSABCDTerminal
+
+toeNavierStokesABCDTerminalReceipt :
+  NSABCDTerminal.NSABCDTerminalTOEReceipt
+toeNavierStokesABCDTerminalReceipt =
+  NSABCDTerminal.canonicalNSABCDTerminalTOEReceipt
+
+toeNavierStokesABCDTerminalZKPFrame :
+  NSABCDTerminal.NSABCDTerminalZKPFrame
+toeNavierStokesABCDTerminalZKPFrame =
+  NSABCDTerminal.canonicalNSABCDTerminalZKPFrame
+
+toeNavierStokesBReserveStillOpen =
+  NSABCDTerminal.toeBReserveStillOpen
+
+toeNavierStokesBW1StillOpen =
+  NSABCDTerminal.toeBW1StillOpen
+
+toeNavierStokesBContinuationStillOpen =
+  NSABCDTerminal.toeBContinuationStillOpen
