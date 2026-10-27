@@ -27,6 +27,7 @@ on:
       - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
       - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
+      - 'tests/test_governed_legal_workflow_toe_convergence.py'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
 concurrency:
