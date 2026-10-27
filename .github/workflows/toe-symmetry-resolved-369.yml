@@ -7,6 +7,10 @@ on:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
+      - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
       - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
@@ -34,6 +38,8 @@ jobs:
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
