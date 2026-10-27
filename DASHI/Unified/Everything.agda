@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Unified.CollatzSyracuseTOEMaxCutExact as CollatzTOE
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 
@@ -205,3 +206,13 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Literal Collatz/Syracuse TOE max-cut receipt.
+------------------------------------------------------------------------
+
+unifiedCollatzSyracuseMaxCutReceipt :
+  CollatzTOE.CollatzSyracuseTOEMaxCutReceipt
+unifiedCollatzSyracuseMaxCutReceipt =
+  CollatzTOE.canonicalCollatzSyracuseTOEMaxCutReceipt
