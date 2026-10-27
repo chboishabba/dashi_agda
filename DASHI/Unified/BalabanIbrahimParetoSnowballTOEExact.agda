@@ -84,6 +84,20 @@ ibrahimHistoricalDiscriminatorBoundary =
 -- Existing non-promotion proofs remain owned by their source modules.
 ------------------------------------------------------------------------
 
+SearchPriorityCreatesProof : Set
+SearchPriorityCreatesProof = Recognition.SearchPriorityCreatesProof
+
+ProducerSourceCreatesRunReceipt : Set
+ProducerSourceCreatesRunReceipt = Phase.ProducerSourceCreatesRunReceipt
+
+Degree729CreatesMonsterHZetaRecognition : Set
+Degree729CreatesMonsterHZetaRecognition =
+  HZeta.Degree729CreatesMonsterHZetaRecognition
+
+PaperOracleIdentifiesDump : Set
+PaperOracleIdentifiesDump = Historical.PaperOracleIdentifiesDump
+
+
 searchPriorityDoesNotCreateProof :
   Recognition.SearchPriorityCreatesProof → ⊥
 searchPriorityDoesNotCreateProof =
