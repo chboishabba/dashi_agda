@@ -115,6 +115,8 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
           dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
           dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
+          dashi-repo related toe27RotationOrderThree --root . --limit 20
+          dashi-repo related toe27OriginFixed --root . --limit 20
           dashi-repo related toe27MonsterPhaseConjugationIntertwiner --root . --limit 20
           dashi-repo related toe27MonsterRepresentationNotPromoted --root . --limit 20
           dashi-repo related toe27MonsterEmbeddingNotPromoted --root . --limit 20
@@ -124,6 +126,10 @@ jobs:
           dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo related fleetCoordinateRebuildabilityReceipt --root . --limit 20
+          dashi-repo related fleetNumericABIReceipt --root . --limit 20
+          dashi-repo related fleetResidualInvariantReceipt --root . --limit 20
+          dashi-repo related fleetPromotionObligationIndex --root . --limit 20
           dashi-repo related fleetVectorCoordinateDoesNotCreateTruth --root . --limit 20
           dashi-repo related fleetExternalCountDoesNotCreateFormalDischarge --root . --limit 20
           dashi-repo discover 'fleet 584 discharged 58 unformalised formal gaps eigen priority non-promotion' --root . --limit 40
