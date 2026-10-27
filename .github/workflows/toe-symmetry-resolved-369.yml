@@ -23,6 +23,11 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'DASHI/Analysis/Everything.agda'
+      - 'DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda'
+      - 'DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda'
+      - 'DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unifier.agda'
@@ -38,6 +43,11 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'DASHI/Analysis/Everything.agda'
+      - 'DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda'
+      - 'DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda'
+      - 'DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
@@ -96,6 +106,13 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo diagnose DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda --root .
+          dashi-repo diagnose DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda --root .
+          dashi-repo diagnose DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda --root .
+          dashi-repo related currentThreeTapCurrentLeanFrontier --root . --limit 20
+          dashi-repo related rhNotClaimedByAgdaStatusMirror --root . --limit 20
+          dashi-repo discover 'Riemann three tap inverse square A1 A2 signed fifth non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Analysis.RiemannThreeTap --root .
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
@@ -129,6 +146,13 @@ jobs:
           dashi-repo discover '369 max cut kernel bidi ternary 27 codec ABI Monster non-promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
           dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
+          dashi-repo related searchPriorityDoesNotCreateProof --root . --limit 20
+          dashi-repo related degree729DoesNotCreateMonsterHZetaRecognition --root . --limit 20
+          dashi-repo related currentQidDoesNotIdentifyHistoricalTitle --root . --limit 20
+          dashi-repo discover 'Ibrahim Pareto snowball Monster 3B historical discriminator non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimFirstLink --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
@@ -161,9 +185,14 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
             DASHI/Unified/Everything.agda
-          )
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Analysis/Everything.agda
+            DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda
+            DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda
+            DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+          )
           for file in "${files[@]}"; do
             dashi-agda-preflight --root . "$file"
           done
@@ -187,11 +216,16 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Analysis/Everything.agda
+            DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda
+            DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda
+            DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
-          )
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+          )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
               echo "forbidden trust escape in $source" >&2
@@ -219,10 +253,15 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
             DASHI/Unified/Everything.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Analysis/Everything.agda
+            DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda
+            DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda
+            DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
-          )
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+          )
           for module in "${modules[@]}"; do
             agda -i . -l standard-library "$module"
           done

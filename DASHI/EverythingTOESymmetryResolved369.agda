@@ -3,6 +3,9 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
+import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
+import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
@@ -1590,3 +1593,113 @@ toeRiemannRHNotPromoted :
     RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
 toeRiemannRHNotPromoted =
   RiemannThreeTap.rhNotClaimedByAgdaStatusMirror
+
+------------------------------------------------------------------------
+-- RH transformed-prime and current Route-A/Route-B max-cut convergence.
+-- Analysis modules remain the theorem and provenance owners.
+------------------------------------------------------------------------
+
+toeRHCompletedTraceCrossPollinationBoundary :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
+toeRHCompletedTraceCrossPollinationBoundary =
+  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+
+toeRHPrimeActivationRequiresFirstPrimeSupport :
+  RHPrimeAudit.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+toeRHPrimeActivationRequiresFirstPrimeSupport =
+  RHPrimeAudit.firstPrimeSupportNecessary
+
+toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
+  RHPrimeAudit.selectedUnmarkedTerminalEqualsMarkedArithmetic
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
+  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
+
+toeRHIndependentArithmeticDiagonalProducerStillAbsent :
+  RHPrimeAudit.independentArithmeticDiagonalProducer
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHIndependentArithmeticDiagonalProducerStillAbsent =
+  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
+
+toeRHHeisenbergTraceTransportStillBlocked :
+  RHPrimeAudit.actualHeisenbergTraceEqualsSelectedZetaFunctional
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHHeisenbergTraceTransportStillBlocked =
+  RHPrimeAudit.noUnjustifiedAnalyticTransport
+
+toeRHPrimeAuditDoesNotPromoteRH :
+  RHPrimeAudit.rhDerived
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHPrimeAuditDoesNotPromoteRH =
+  RHPrimeAudit.noUnjustifiedRH
+
+toeRHThreeTapCurrentLeanFrontier :
+  RHThreeTapFrontier.ThreeTapCurrentLeanFrontier
+toeRHThreeTapCurrentLeanFrontier =
+  RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier
+
+toeRHThreeTapA1FiniteAndDecayPaid :
+  RHThreeTapFrontier.a1FiniteAndDecaySourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+toeRHThreeTapA1FiniteAndDecayPaid =
+  RHThreeTapFrontier.a1FiniteAndDecayPaid
+
+toeRHThreeTapA1InverseSquareWindowsPaid :
+  RHThreeTapFrontier.a1LiteralWindowMachinerySourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+toeRHThreeTapA1InverseSquareWindowsPaid =
+  RHThreeTapFrontier.a1LiteralWindowsPaid
+
+toeRHThreeTapA1DyadicSeriesPaid :
+  RHThreeTapFrontier.a1DyadicSeriesSourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+toeRHThreeTapA1DyadicSeriesPaid =
+  RHThreeTapFrontier.a1SeriesPaid
+
+toeRHThreeTapA1CarrierToTailCompilerPaid :
+  RHThreeTapFrontier.a1CarrierToTailCompilerSourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+toeRHThreeTapA1CarrierToTailCompilerPaid =
+  RHThreeTapFrontier.a1ConditionalTailCompilerPaid
+
+toeRHThreeTapA1CarrierSummationStillOpen :
+  RHThreeTapFrontier.a1CarrierSummationPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA1CarrierSummationStillOpen =
+  RHThreeTapFrontier.a1CarrierIsStillOpen
+
+toeRHThreeTapA1UniformCurvatureStillOpen :
+  RHThreeTapFrontier.a1UniformCurvaturePaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA1UniformCurvatureStillOpen =
+  RHThreeTapFrontier.a1CurvatureStillOpen
+
+toeRHThreeTapA1CompensationStillOpen :
+  RHThreeTapFrontier.a1CompensationPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA1CompensationStillOpen =
+  RHThreeTapFrontier.a1CompensationStillOpen
+
+toeRHThreeTapA2StrictScalarStillOpen :
+  RHThreeTapFrontier.a2StrictScalarPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA2StrictScalarStillOpen =
+  RHThreeTapFrontier.a2ScalarIsStillOpen
+
+toeRHSignedFifthRouteStillOpen :
+  RHThreeTapFrontier.routeBEventualGapPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHSignedFifthRouteStillOpen =
+  RHThreeTapFrontier.routeBIsStillOpen
+
+toeRHThreeTapFrontierDoesNotPromoteRH :
+  RHThreeTapFrontier.rhDerivedHere
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapFrontierDoesNotPromoteRH =
+  RHThreeTapFrontier.rhNotClaimedByAgdaStatusMirror
+
+toeRHThreeTapTerminalBoundary :
+  RHTerminal.ThreeTapTerminalCompletionBoundary
+toeRHThreeTapTerminalBoundary =
+  RHTerminal.canonicalThreeTapTerminalCompletionBoundary
