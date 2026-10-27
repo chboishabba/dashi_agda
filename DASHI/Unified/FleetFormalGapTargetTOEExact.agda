@@ -266,3 +266,67 @@ canonicalFleetFormalGapZKPFrame =
     false
     false
     false
+
+
+------------------------------------------------------------------------
+-- Direct source-owned PNF non-promotion gates.
+--
+-- The fleet receipt is external planning context. These theorem gates come
+-- from the canonical DASHI PNF owners and remain the proof authority.
+------------------------------------------------------------------------
+
+NonRebuildableCoordinatePromotion : Set
+NonRebuildableCoordinatePromotion =
+  Rebuild.NonRebuildablePromotion
+
+VectorSpectralAuthorityPromotion : Set
+VectorSpectralAuthorityPromotion =
+  Rebuild.VectorAuthorityPromotion
+
+SpectralNumericABIPromotion : Set
+SpectralNumericABIPromotion =
+  Numeric.PNFSpectralNumericABIPromotion
+
+ResidualFieldPromotion : Set
+ResidualFieldPromotion =
+  Residual.PNFResidualFieldInvariantPromotion
+
+fleetNonRebuildableCoordinatePromotionImpossible :
+  NonRebuildableCoordinatePromotion → ⊥
+fleetNonRebuildableCoordinatePromotionImpossible =
+  Rebuild.nonRebuildablePromotionImpossible
+
+fleetVectorSpectralAuthorityPromotionImpossible :
+  VectorSpectralAuthorityPromotion → ⊥
+fleetVectorSpectralAuthorityPromotionImpossible =
+  Rebuild.vectorAuthorityPromotionImpossible
+
+fleetSpectralNumericABIPromotionImpossible :
+  SpectralNumericABIPromotion → ⊥
+fleetSpectralNumericABIPromotionImpossible =
+  Numeric.pnfSpectralNumericABIPromotionImpossible
+
+fleetResidualFieldPromotionImpossible :
+  ResidualFieldPromotion → ⊥
+fleetResidualFieldPromotionImpossible =
+  Residual.pnfResidualFieldInvariantPromotionImpossible
+
+fleetVectorCoordinateTruthStillFalse :
+  Rebuild.vectorCoordinateIsTruth ≡ false
+fleetVectorCoordinateTruthStillFalse =
+  Rebuild.vectorCoordinateTruthFalse
+
+fleetVectorCoordinateSupportStillFalse :
+  Rebuild.vectorCoordinateIsCommittedSupport ≡ false
+fleetVectorCoordinateSupportStillFalse =
+  Rebuild.vectorCoordinateCommittedSupportFalse
+
+fleetVectorCoordinateAdmissibilityStillFalse :
+  Rebuild.vectorCoordinateIsAdmissibility ≡ false
+fleetVectorCoordinateAdmissibilityStillFalse =
+  Rebuild.vectorCoordinateAdmissibilityFalse
+
+fleetTextFallbackAuthorityStillFalse :
+  Rebuild.textFallbackIsCoordinateAuthority ≡ false
+fleetTextFallbackAuthorityStillFalse =
+  Rebuild.textFallbackCoordinateAuthorityFalse
