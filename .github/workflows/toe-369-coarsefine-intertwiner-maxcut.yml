@@ -1,0 +1,77 @@
+name: toe-369-coarsefine-intertwiner-maxcut
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda'
+      - 'DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda'
+      - 'DASHI/EverythingSSPRepresentationReductionRound9.agda'
+      - 'DASHI/Foundations/Base369CoarseFineFabricAdapterExact.agda'
+      - 'DASHI/Moonshine/Base369Ternary27SpectralSymmetryIrrepBridgeExact.agda'
+      - 'DASHI/Moonshine/Base369Ternary27SignedSymmetryMonsterIntertwinerExact.agda'
+      - '.github/workflows/toe-369-coarsefine-intertwiner-maxcut.yml'
+
+concurrency:
+  group: toe-369-coarsefine-intertwiner-maxcut-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Install DASHI repository intelligence
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Index and inspect related symbols
+        run: |
+          dashi-repo index --root .
+          dashi-repo related base369CoarseFineReopening --root .
+          dashi-repo related rotateXYZOrderThree --root .
+          dashi-repo related monsterAxisReflectionIntertwines --root .
+          dashi-repo discover 'ternary 27 coarse fine intertwiner' --root .
+          dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
+
+      - name: Run structural preflight
+        run: |
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda
+
+      - name: Reject trust escapes and ESD edits
+        run: |
+          sources=(
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda
+            DASHI/EverythingSSPRepresentationReductionRound9.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+          if git diff --name-only origin/master...HEAD | grep -Ei '(^|/)(dashi_digital_esd|[^/]*digital_esd[^/]*|[^/]*ESD[^/]*)'; then
+            echo "ESD surface changed" >&2
+            exit 1
+          fi
+
+      - name: Kernel-check normalized TOE path
+        run: |
+          agda --version
+          agda -i . -l standard-library DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda
+          agda -i . -l standard-library DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda
+          agda -i . -l standard-library DASHI/EverythingSSPRepresentationReductionRound9.agda
+          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
