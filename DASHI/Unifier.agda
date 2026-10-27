@@ -928,3 +928,13 @@ unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence :
   SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
 unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence =
   SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
+
+
+------------------------------------------------------------------------
+-- SCALE Evidence Review ZKP frame.
+------------------------------------------------------------------------
+
+unifierSCALEEvidenceReviewTOEZKPFrame :
+  SCALEReview.SCALEEvidenceReviewTOEZKPFrame
+unifierSCALEEvidenceReviewTOEZKPFrame =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
