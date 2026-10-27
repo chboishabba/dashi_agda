@@ -65,6 +65,7 @@ import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
 import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
+import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as CurrentGate4
 
 ------------------------------------------------------------------------
 -- Canonical owner separation.
@@ -138,6 +139,8 @@ record BalabanR559TOEMaxCutReceipt : Set where
       gate4UnresolvedCount ≡ 58
     gate4DefinitionLevel : ProofLevel
     gate4InhabitantsLevel : ProofLevel
+    currentGate4FrontierLedgerLevel : ProofLevel
+    currentGate4PostulateFreeSurfaceLevel : ProofLevel
 
     goal1MaximumCutCompiler : ProofLevel
     irreducibleSourceFamilyCutCompiler : ProofLevel
@@ -202,6 +205,10 @@ canonicalBalabanR559TOEMaxCutReceipt = record
       Gate4.physicalClosureRound6CutsetDefinitionLevel
   ; gate4InhabitantsLevel =
       Gate4.physicalClosureRound6CutsetInhabitantsLevel
+  ; currentGate4FrontierLedgerLevel =
+      CurrentGate4.currentFrontierLedgerTypecheckLevel
+  ; currentGate4PostulateFreeSurfaceLevel =
+      CurrentGate4.currentSurfacePostulateFreeLevel
   ; goal1MaximumCutCompiler =
       R559.toeGoal1MaximumCutCompilerLevel
   ; irreducibleSourceFamilyCutCompiler =
