@@ -458,6 +458,12 @@ open MaxCutTOE public using
   ; toeActualBase369RecognitionCandidateStillOpen
   ; toeOEISDoesNotCreateBase369RecognitionCandidate
   ; toeDimensionDoesNotCreateRecognitionIntertwiners
+  ; toeTernary27OriginPlus26CarrierPaid
+  ; toeTernary27AlbertShapeSameCarrierPaid
+  ; toeTernary27OriginMapsToScalarSummand
+  ; toeTernary27JordanProductStillOpen
+  ; toeTernary27F4ActionStillOpen
+  ; toeTernary27E6ActionStillOpen
   ; esdSurfaceWasNotEdited
   )
 
