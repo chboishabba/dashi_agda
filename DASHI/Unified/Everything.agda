@@ -205,3 +205,64 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Governed legal workflow x provenance-aware future-safety convergence.
+-- Reuse existing theorem owners. No Actionstep-specific ontology is added.
+------------------------------------------------------------------------
+
+import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as unifiedOperational
+import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as unifiedReview
+import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as unifiedSourceRule
+import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact as unifiedApplicability
+import DASHI.Core.ITIRGovernanceControlCaseExact as unifiedControl
+import DASHI.Governance.FormalisationGovernanceCapstoneExact as unifiedFormalisation
+import DASHI.Core.FrozenProvenanceDynamicRefinementExact as unifiedFrozen
+
+unifiedTaskCompletionDoesNotCreateTruth :
+  unifiedOperational.TaskCompletionCreatesTruth → ⊥
+unifiedTaskCompletionDoesNotCreateTruth =
+  unifiedOperational.taskCompletionDoesNotCreateTruth
+
+unifiedAcceptedReviewDoesNotPayApplicability :
+  unifiedReview.AcceptedStatusPaysApplicability → ⊥
+unifiedAcceptedReviewDoesNotPayApplicability =
+  unifiedReview.acceptedStatusDoesNotPayApplicability
+
+unifiedCitationDoesNotRealiseLegalRule :
+  unifiedSourceRule.CitationAloneRealisesLegalRule → ⊥
+unifiedCitationDoesNotRealiseLegalRule =
+  unifiedSourceRule.citationAloneDoesNotRealiseLegalRule
+
+unifiedSemanticMeetDoesNotPayApplicability :
+  unifiedApplicability.SemanticMeetAloneProvesLegalApplicability → ⊥
+unifiedSemanticMeetDoesNotPayApplicability =
+  unifiedApplicability.semanticMeetDoesNotAloneProveLegalApplicability
+
+unifiedPassingControlDoesNotCreateCertification :
+  unifiedControl.PassingControlMeansCertified → ⊥
+unifiedPassingControlDoesNotCreateCertification =
+  unifiedControl.passingDoesNotMeanCertified
+
+unifiedKernelClosureDoesNotCreateSemanticClosure :
+  unifiedFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
+    unifiedFormalisation.canonicalThreeStoreyBoundary
+  ≡ false
+unifiedKernelClosureDoesNotCreateSemanticClosure =
+  unifiedFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosureIsFalse
+    unifiedFormalisation.canonicalThreeStoreyBoundary
+
+unifiedStaticRefinementDoesNotCreateDynamicSafety :
+  unifiedFrozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+unifiedStaticRefinementDoesNotCreateDynamicSafety =
+  unifiedFrozen.staticSeparationDoesNotCreateDynamicSafety
+
+unifiedFrozenSelectionDoesNotCreateDynamicSafety :
+  unifiedFrozen.FrozenSelectionCreatesDynamicSafetyPermission → ⊥
+unifiedFrozenSelectionDoesNotCreateDynamicSafety =
+  unifiedFrozen.frozenSelectionDoesNotCreateDynamicSafety
+
+unifiedProvenanceDoesNotCreateTruth :
+  unifiedFrozen.ProvenanceAxisCreatesTruthPermission → ⊥
+unifiedProvenanceDoesNotCreateTruth =
+  unifiedFrozen.provenanceAxisDoesNotCreateTruth
