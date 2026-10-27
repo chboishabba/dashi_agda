@@ -17,6 +17,14 @@ import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorPar
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
+import DASHI.Law.SensibLawRealMatterReviewDecisionExact as RealMatterReview
+import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as ExpertProduction
+import DASHI.Governance.LegalDecisionDoubleProjectionExact as LegalDecision
+import DASHI.Governance.LegitimacyEvidenceSeparationExact as Legitimacy
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Governance.PromotionSpine as Promotion
+import DASHI.Foundations.CanonicalProvenancePromotion as Canonical
+import DASHI.Governance.GovernedArtifactCore as Governed
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -146,3 +154,61 @@ selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue :
   Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
     selectedDomainTransportReceipt ≡ true
 selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue = refl
+
+------------------------------------------------------------------------
+-- Exact legal/compliance non-promotion handoff.
+-- Reuse canonical owners. These proofs do not create vendor semantics.
+------------------------------------------------------------------------
+
+selectedLegalReviewDoesNotCreateClaimTruth :
+  RealMatterReview.LegalReviewDecisionCreatesClaimTruth → ⊥
+selectedLegalReviewDoesNotCreateClaimTruth =
+  RealMatterReview.legalReviewDecisionDoesNotCreateClaimTruth
+
+selectedQualificationDoesNotAutomaticallyProveForensicCompliance :
+  ExpertProduction.QualificationAutomaticallyForensicCompliance → ⊥
+selectedQualificationDoesNotAutomaticallyProveForensicCompliance =
+  ExpertProduction.qualificationDoesNotAutomaticallyProveForensicCompliance
+
+selectedReportAdmissionDoesNotRepairMissingInput :
+  ExpertProduction.ReportAdmissionRepairsMissingInput → ⊥
+selectedReportAdmissionDoesNotRepairMissingInput =
+  ExpertProduction.reportAdmissionDoesNotRepairMissingInput
+
+selectedOfficialLegalSurfaceDoesNotRecoverFineState :
+  NF.FactorsThrough
+    LegalDecision.officialSurface
+    LegalDecision.fineLegalStateOf
+  → ⊥
+selectedOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalDecision.officialSurfaceCannotRecoverFineLegalState
+
+selectedOfficialActionDoesNotRecoverAutonomyAndAuthority :
+  NF.FactorsThrough
+    LegalDecision.autonomyOfficialSurface
+    LegalDecision.fineAutonomyLegalStateOf
+  → ⊥
+selectedOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalDecision.officialActionCannotRecoverAutonomyAndAuthority
+
+selectedLegalityAloneDoesNotCreateLegitimacy :
+  Legitimacy.AdmittedLegitimacy
+    Legitimacy.demoEvidence
+    Legitimacy.legalOnly
+  → ⊥
+selectedLegalityAloneDoesNotCreateLegitimacy =
+  Legitimacy.legalOnlyIsNotAdmittedLegitimacy
+
+selectedMissingAdmissibilityStillAbstains :
+  Promotion.authorizationFromObligations
+    (Canonical.promotionObligations true false true true true)
+  ≡ Governed.abstain
+selectedMissingAdmissibilityStillAbstains =
+  Promotion.missingAdmissibilityAbstains
+
+selectedMissingValidationStillAbstains :
+  Promotion.authorizationFromObligations
+    (Canonical.promotionObligations true true true true false)
+  ≡ Governed.abstain
+selectedMissingValidationStillAbstains =
+  Promotion.missingValidationAbstains
