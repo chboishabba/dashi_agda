@@ -1036,3 +1036,39 @@ unifierBalabanScaleTransferNonPromotion :
 unifierBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Governed legal-source authority handoff.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
+
+unifierGovernedLegalWorkflowAuthorityInvariantHandoff :
+  LegalGovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
+unifierGovernedLegalWorkflowAuthorityInvariantHandoff =
+  LegalGovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+unifierCandidateSourceIsNotLegalAuthority :
+  LegalGovernanceTOE.CandidateSourceIsAuthoritative → ⊥
+unifierCandidateSourceIsNotLegalAuthority =
+  LegalGovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifierSameLegalSystemIsNotLegalAuthority :
+  LegalGovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+unifierSameLegalSystemIsNotLegalAuthority =
+  LegalGovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifierCurrentValidityIsNotApplicability :
+  LegalGovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifierCurrentValidityIsNotApplicability =
+  LegalGovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+unifierSemanticAdmissionIsNotLegalAuthority :
+  LegalGovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+unifierSemanticAdmissionIsNotLegalAuthority =
+  LegalGovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+unifierDocumentRoleIsNotLegalAuthority :
+  LegalGovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+unifierDocumentRoleIsNotLegalAuthority =
+  LegalGovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
