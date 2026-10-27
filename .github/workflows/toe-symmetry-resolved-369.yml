@@ -37,6 +37,8 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
       - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
       - 'tests/test_governed_legal_workflow_toe_convergence.py'
+      - 'tests/test_governed_legal_workflow_source_genealogy_toe.py'
+      - 'tests/test_governed_legal_workflow_source_semantic_toe.py'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
     paths:
@@ -75,6 +77,12 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
       - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
       - 'tests/test_governed_legal_workflow_toe_convergence.py'
+      - 'DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda'
+      - 'DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda'
+      - 'DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda'
+      - 'DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda'
+      - 'tests/test_governed_legal_workflow_source_genealogy_toe.py'
+      - 'tests/test_governed_legal_workflow_source_semantic_toe.py'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -129,6 +137,14 @@ jobs:
           dashi-repo related canonicalPNFSourceBoundaryTOEReceipt --root . --limit 20
           dashi-repo discover 'PNF source boundary diagnostic proxy fungal species evidence Kluver form constant web identifier' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Unified.PNFSourceBoundaryTOE --root .
+          dashi-repo diagnose DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda --root .
+          dashi-repo related canonicalGovernedLegalWorkflowSourceGenealogyHandoff --root . --limit 20
+          dashi-repo discover 'governed legal workflow source genealogy provenance independence repetition applicability authority TOE' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOE --root .
+          dashi-repo diagnose DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda --root .
+          dashi-repo related canonicalGovernedLegalWorkflowSourceSemanticHandoff --root . --limit 20
+          dashi-repo discover 'governed legal workflow source genealogy distilled semantic non promotion authority TOE' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOE --root .
           dashi-repo diagnose DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda --root .
           dashi-repo related canonicalPNFDistilledNonPromotionBoundary --root . --limit 20
           dashi-repo related canonicalPNFDistilledReuseZKPReceipt --root . --limit 20
@@ -140,6 +156,12 @@ jobs:
 
       - name: Verify PNF distilled non-promotion convergence
         run: python -m pytest -q tests/test_pnf_distilled_nonpromotion_toe.py
+
+      - name: Verify governed legal-workflow source-genealogy convergence
+        run: python -m pytest -q tests/test_governed_legal_workflow_source_genealogy_toe.py
+
+      - name: Verify governed legal-workflow source-semantic convergence
+        run: python -m pytest -q tests/test_governed_legal_workflow_source_semantic_toe.py
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -173,6 +195,18 @@ jobs:
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda
 
       - name: Reject ESD surface changes
         shell: bash
@@ -197,6 +231,10 @@ jobs:
             DASHI/Unified/Everything.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
             DASHI/Unifier.agda
@@ -216,6 +254,10 @@ jobs:
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda
+            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
