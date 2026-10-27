@@ -2,6 +2,7 @@ module DASHI.Unifier where
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 import DASHI.Unified.Relate369HyperfabricPantsTOEExact as Relate369PantsTOE
+import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as MaxCutTOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -645,3 +646,38 @@ unifierRepoStateSpaceYMClayPromotionStillBlocked :
   RepoStateYMClay.clayYangMillsPromoted ≡ false
 unifierRepoStateSpaceYMClayPromotionStillBlocked =
   RepoStateSpaceTOE.ymClayPromotionStillClosed
+
+
+------------------------------------------------------------------------
+-- Acyclic Max Cut / kernel-BIDI / ternary-27 facade.
+------------------------------------------------------------------------
+
+unifierTOE369MaxCutZKPFrame : MaxCutTOE.TOE369MaxCutZKPFrame
+unifierTOE369MaxCutZKPFrame = MaxCutTOE.canonicalTOE369MaxCutZKPFrame
+
+unifierTOE369MaxCutReceipt : MaxCutTOE.TOE369MaxCutReceipt
+unifierTOE369MaxCutReceipt = MaxCutTOE.canonicalTOE369MaxCutReceipt
+
+unifierTOE369MaxCutFullGradeDimensionDoesNotCreateFaithfulness =
+  MaxCutTOE.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+unifierTOE369MaxCutProjectedDimensionDoesNotCreateAction =
+  MaxCutTOE.toeProjectedDimensionDoesNotCreateAction
+
+unifierTOE369MaxCutKernelCharacterDoesNotCreateAction =
+  MaxCutTOE.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+unifierTOE369MaxCutSelectedSameElementRecognitionStillOpen =
+  MaxCutTOE.toeSelectedSameElementClass3BStillOpen
+
+unifierTOE369MaxCutSchrodingerRecognitionStillOpen =
+  MaxCutTOE.toeSchrodingerHZetaRecognitionStillOpen
+
+unifierTOE369MaxCutTernary27ReductionIsNotGlobalInversion =
+  MaxCutTOE.toeTernary27PhaseReductionIsNotGlobalInversion
+
+unifierTOE369MaxCutTernary27ReductionIsNotMonster42SameObject =
+  MaxCutTOE.toeTernary27ReductionIsNotMonster42SameObject
+
+unifierTOE369MaxCutLiteralCFFITheoremWasNotInvented =
+  MaxCutTOE.literalCFFITheoremWasNotInvented
