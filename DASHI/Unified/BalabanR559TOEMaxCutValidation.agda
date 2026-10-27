@@ -10,6 +10,7 @@ import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6Ledger as Gate4Ledger
 import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
 import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.EverythingTOESymmetryResolved369 as TOE
@@ -107,6 +108,34 @@ jointGate4InhabitantsLevelMatchesOwner :
   Joint.gate4InhabitantsLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
   ≡ Gate4.physicalClosureRound6CutsetInhabitantsLevel
 jointGate4InhabitantsLevelMatchesOwner = refl
+
+
+jointGate4PaidReductionLevelMatchesOwner :
+  Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Gate4Ledger.physicalClosureRound6LedgerLevel
+jointGate4PaidReductionLevelMatchesOwner = refl
+
+jointGate4PaidReductionLedgerPromotesLocally :
+  Proof.promotable
+    (Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt)
+  ≡ true
+jointGate4PaidReductionLedgerPromotesLocally =
+  Proof.machineCheckedPromotes
+
+rootGate4PaidReductionLevelMatchesJoint :
+  TOE.toeBalabanR559Gate4PaidReductionLedgerLevel
+  ≡ Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+rootGate4PaidReductionLevelMatchesJoint = refl
+
+unifierGate4PaidReductionLevelMatchesJoint :
+  Unifier.unifierBalabanR559Gate4PaidReductionLedgerLevel
+  ≡ Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+unifierGate4PaidReductionLevelMatchesJoint = refl
+
+physicsGate4PaidReductionLevelMatchesJoint :
+  Physics.yangMillsBalabanR559Gate4PaidReductionLedgerLevel
+  ≡ Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+physicsGate4PaidReductionLevelMatchesJoint = refl
 
 jointGate4InhabitantsDoNotSelfPromote :
   Proof.promotable
