@@ -393,6 +393,16 @@ open MaxCutTOE public using
   ; toeTernary27OrbitIndexingIsNotSemanticIdentity
   ; toeTernary27ReductionIsNotMonster42SameObject
   ; literalCFFITheoremWasNotInvented
+  ; toeWholeCharacterEqualityDoesNotCreateWholeIso
+  ; toeWholeIsoDoesNotCreateConcreteActionRecognition
+  ; toeWholeCharacterDirectIsotypicBridgeStillOpen
+  ; toeWholeCharacterActualKernelReplayStillOpen
+  ; toePrimarySupplementKernelClassTwentyPaid
+  ; toeInvariantDiagonalKernelSubgroupPaid
+  ; toePaidKernelDoesNotRequireAbsoluteSignName
+  ; toeTwelveSeventyEightCharacterAlreadyPaid
+  ; toeGenericCharacterMultiplicitySourceWritten
+  ; toeActualTwelveSeventyEightLinearIntertwinerStillOpen
   ; esdSurfaceWasNotEdited
   )
 
