@@ -553,3 +553,8 @@ toeNavierStokesClayFrontierZKPFrame :
   NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
 toeNavierStokesClayFrontierZKPFrame =
   NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+toeNavierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
+toeNavierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
