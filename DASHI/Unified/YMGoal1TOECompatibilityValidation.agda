@@ -68,3 +68,58 @@ unifierClayStillBlocked :
   Goal1.clayYangMillsPromoted ≡ false
 unifierClayStillBlocked =
   U.unifierYangMillsClayStillNotPromoted
+
+
+------------------------------------------------------------------------
+-- Preferred R440--R444 route regressions.
+------------------------------------------------------------------------
+
+preferredVariableDomainBMatchesAdapter :
+  TOE.toe369YangMillsGoal1PreferredVariableDomainBSourceLevel
+  ≡ Goal1.goal1PreferredVariableDomainBSourceLevel
+preferredVariableDomainBMatchesAdapter = refl
+
+rootedTraceEncodingMatchesAdapter :
+  TOE.toe369YangMillsGoal1R429RootedTraceEncodingLevel
+  ≡ Goal1.goal1R429RootedTraceEncodingLevel
+rootedTraceEncodingMatchesAdapter = refl
+
+rootedTraceCountCompilerMatchesAdapter :
+  TOE.toe369YangMillsGoal1R429RootedTraceCountCompilerLevel
+  ≡ Goal1.goal1R429RootedTraceCountCompilerLevel
+rootedTraceCountCompilerMatchesAdapter = refl
+
+entropyReserveMatchesAdapter :
+  TOE.toe369YangMillsGoal1R429SourceDecayReserveLevel
+  ≡ Goal1.goal1R429SourceDecayReserveLevel
+entropyReserveMatchesAdapter = refl
+
+entropyCompilerMatchesAdapter :
+  TOE.toe369YangMillsGoal1R429EntropyBudgetCompilerLevel
+  ≡ Goal1.goal1R429EntropyBudgetCompilerLevel
+entropyCompilerMatchesAdapter = refl
+
+finiteA1WilsonMatchesAdapter :
+  TOE.toe369YangMillsGoal1FiniteA1WilsonActionInvarianceLevel
+  ≡ Goal1.goal1FiniteA1WilsonActionInvarianceLevel
+finiteA1WilsonMatchesAdapter = refl
+
+finiteA1HaarMatchesAdapter :
+  TOE.toe369YangMillsGoal1FiniteA1ProductHaarInvarianceLevel
+  ≡ Goal1.goal1FiniteA1ProductHaarInvarianceLevel
+finiteA1HaarMatchesAdapter = refl
+
+finiteA2PeterWeylMatchesAdapter :
+  TOE.toe369YangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel
+  ≡ Goal1.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+finiteA2PeterWeylMatchesAdapter = refl
+
+legacyGlobalTreeMetricCannotRegainPreference :
+  Goal1.legacyGlobalTreeMetricPreferred ≡ false
+legacyGlobalTreeMetricCannotRegainPreference =
+  TOE.toe369YangMillsGoal1LegacyGlobalTreeMetricNotPreferred
+
+unifierPreferredVariableDomainBMatchesAdapter :
+  U.unifierYangMillsGoal1PreferredVariableDomainBSourceLevel
+  ≡ Goal1.goal1PreferredVariableDomainBSourceLevel
+unifierPreferredVariableDomainBMatchesAdapter = refl
