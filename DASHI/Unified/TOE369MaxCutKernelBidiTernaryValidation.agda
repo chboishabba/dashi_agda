@@ -140,3 +140,98 @@ unifierKernelCharacterIntertwinerFirewallMatches :
   Unifier.unifier369KernelCharacterIsotypyDoesNotConstructActionIntertwiner
   ≡ Owner.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
 unifierKernelCharacterIntertwinerFirewallMatches = refl
+
+------------------------------------------------------------------------
+-- Complete the existing selected-3B / ternary non-promotion validation.
+-- These are same-owner transport receipts, not fresh Monster proofs.
+------------------------------------------------------------------------
+
+toeTernary27OrbitIndexingNotSemanticIdentitySameOwner :
+  TOE.toe369Ternary27OrbitIndexingNotSemanticIdentity
+  ≡ Owner.toe27OrbitIndexingNotSemanticIdentity
+toeTernary27OrbitIndexingNotSemanticIdentitySameOwner = refl
+
+unifierTernary27OrbitIndexingNotSemanticIdentitySameOwner :
+  Unifier.unifier369Ternary27OrbitIndexingNotSemanticIdentity
+  ≡ Owner.toe27OrbitIndexingNotSemanticIdentity
+unifierTernary27OrbitIndexingNotSemanticIdentitySameOwner = refl
+
+toeTernary27ReductionNotMonster42SameObjectSameOwner :
+  TOE.toe369Ternary27ReductionNotMonster42SameObject
+  ≡ Owner.toe27ReductionNotMonster42SameObject
+toeTernary27ReductionNotMonster42SameObjectSameOwner = refl
+
+unifierTernary27ReductionNotMonster42SameObjectSameOwner :
+  Unifier.unifier369Ternary27ReductionNotMonster42SameObject
+  ≡ Owner.toe27ReductionNotMonster42SameObject
+unifierTernary27ReductionNotMonster42SameObjectSameOwner = refl
+
+toeKernelActualZetaRecognitionStillOpenSameOwner :
+  TOE.toe369KernelActualZetaRecognitionStillOpen
+  ≡ Owner.toeKernelActualZetaRecognitionStillOpen
+toeKernelActualZetaRecognitionStillOpenSameOwner = refl
+
+unifierKernelActualZetaRecognitionStillOpenSameOwner :
+  Unifier.unifier369KernelActualZetaRecognitionStillOpen
+  ≡ Owner.toeKernelActualZetaRecognitionStillOpen
+unifierKernelActualZetaRecognitionStillOpenSameOwner = refl
+
+toeKernelFullHyperformalActionStillOpenSameOwner :
+  TOE.toe369KernelFullHyperformalActionStillOpen
+  ≡ Owner.toeKernelFullHyperformalActionStillOpen
+toeKernelFullHyperformalActionStillOpenSameOwner = refl
+
+unifierKernelFullHyperformalActionStillOpenSameOwner :
+  Unifier.unifier369KernelFullHyperformalActionStillOpen
+  ≡ Owner.toeKernelFullHyperformalActionStillOpen
+unifierKernelFullHyperformalActionStillOpenSameOwner = refl
+
+toeSelectedSameElementClass3BStillOpenSameOwner :
+  TOE.toe369SelectedSameElementClass3BStillOpen
+  ≡ Owner.toeSelectedSameElementClass3BStillOpen
+toeSelectedSameElementClass3BStillOpenSameOwner = refl
+
+unifierSelectedSameElementClass3BStillOpenSameOwner :
+  Unifier.unifier369SelectedSameElementClass3BStillOpen
+  ≡ Owner.toeSelectedSameElementClass3BStillOpen
+unifierSelectedSameElementClass3BStillOpenSameOwner = refl
+
+toeSingleActionProducerStillOpenSameOwner :
+  TOE.toe369SingleActionProducerStillOpen
+  ≡ Owner.toeSingleActionProducerStillOpen
+toeSingleActionProducerStillOpenSameOwner = refl
+
+unifierSingleActionProducerStillOpenSameOwner :
+  Unifier.unifier369SingleActionProducerStillOpen
+  ≡ Owner.toeSingleActionProducerStillOpen
+unifierSingleActionProducerStillOpenSameOwner = refl
+
+toeNinetySlicesSourceFirewallMatches :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+toeNinetySlicesSourceFirewallMatches =
+  TOE.toe369NinetySlicesDoNotCreatePermutationRepresentation
+
+unifierNinetySlicesSourceFirewallMatches :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+unifierNinetySlicesSourceFirewallMatches =
+  Unifier.unifier369NinetySlicesDoNotCreatePermutationRepresentation
+
+toeCharacterHomSourceFirewallMatches :
+  Ibrahim.CharacterCreatesHomEvaluation → ⊥
+toeCharacterHomSourceFirewallMatches =
+  TOE.toe369CharacterDoesNotCreateHomEvaluation
+
+unifierCharacterHomSourceFirewallMatches :
+  Ibrahim.CharacterCreatesHomEvaluation → ⊥
+unifierCharacterHomSourceFirewallMatches =
+  Unifier.unifier369CharacterDoesNotCreateHomEvaluation
+
+toePermutationNonPromotionSourceFirewallMatches :
+  Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
+toePermutationNonPromotionSourceFirewallMatches =
+  TOE.toe369PermutationNoGoDoesNotCreateLinearAction
+
+unifierPermutationNonPromotionSourceFirewallMatches :
+  Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
+unifierPermutationNonPromotionSourceFirewallMatches =
+  Unifier.unifier369PermutationNoGoDoesNotCreateLinearAction
