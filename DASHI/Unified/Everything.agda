@@ -1,6 +1,7 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumExternal
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -337,3 +338,50 @@ unifiedFleetMetaIntrospectorProofNotBorrowed :
   FleetGapTOE.metaIntrospectorProofBorrowed
     FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifiedFleetMetaIntrospectorProofNotBorrowed = refl
+
+
+------------------------------------------------------------------------
+-- Lean Millennium external-target custody and exact non-promotion.
+-- The canonical owner remains MillenniumLeanAssistReceiptExact.
+------------------------------------------------------------------------
+
+unifiedMillenniumExternalAcceptanceReceipt :
+  MillenniumExternal.MillenniumExternalAcceptanceReceipt
+unifiedMillenniumExternalAcceptanceReceipt =
+  MillenniumExternal.currentMillenniumExternalAcceptanceReceipt
+
+unifiedMillenniumExternalDeclarationsPinned :
+  MillenniumExternal.exactExternalDeclarationsPinned
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ true
+unifiedMillenniumExternalDeclarationsPinned =
+  MillenniumExternal.millenniumExternalDeclarationsPinned
+
+unifiedMillenniumExistingSameObjectWeldsReused :
+  MillenniumExternal.existingSameObjectWeldsReused
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ true
+unifiedMillenniumExistingSameObjectWeldsReused =
+  MillenniumExternal.millenniumExistingSameObjectWeldsReused
+
+unifiedMillenniumHodgeExternalTargetInvalid :
+  MillenniumExternal.hodgeExternalTargetValid
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifiedMillenniumHodgeExternalTargetInvalid =
+  MillenniumExternal.millenniumHodgeExternalTargetInvalid
+
+unifiedMillenniumYangMillsExternalTargetInvalid :
+  MillenniumExternal.yangMillsExternalTargetValid
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifiedMillenniumYangMillsExternalTargetInvalid =
+  MillenniumExternal.millenniumYangMillsExternalTargetInvalid
+
+unifiedMillenniumCrossToolchainAdapterStillNotKernelChecked :
+  MillenniumExternal.directCrossToolchainAdapterKernelChecked
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifiedMillenniumCrossToolchainAdapterStillNotKernelChecked =
+  MillenniumExternal.millenniumCrossToolchainAdapterStillNotKernelChecked
+
+unifiedMillenniumExternalReceiptDoesNotCreatePrizeProof :
+  MillenniumExternal.receiptCreatesPrizeProof
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifiedMillenniumExternalReceiptDoesNotCreatePrizeProof =
+  MillenniumExternal.millenniumExternalReceiptDoesNotCreatePrizeProof
