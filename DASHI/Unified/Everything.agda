@@ -1,6 +1,7 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -287,3 +288,44 @@ unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess :
   CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
 unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess =
   CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
+
+
+------------------------------------------------------------------------
+-- Fleet 58 named-manifest acquisition boundary.
+-- The recorded count does not identify the 58 rows.
+------------------------------------------------------------------------
+
+unifiedFleet58ManifestAcquisitionReceipt :
+  FleetManifestTOE.Fleet58ManifestAcquisitionReceipt
+unifiedFleet58ManifestAcquisitionReceipt =
+  FleetManifestTOE.canonicalFleet58ManifestAcquisitionReceipt
+
+unifiedFleet58ManifestPresent :
+  Bool
+unifiedFleet58ManifestPresent =
+  FleetManifestTOE.named58ManifestAcquired
+
+unifiedFleet58CountIdentifiesNamedRows :
+  Bool
+unifiedFleet58CountIdentifiesNamedRows =
+  FleetManifestTOE.countIdentifiesNamedRows
+
+unifiedFleet58PerGapDispatchEnabled :
+  Bool
+unifiedFleet58PerGapDispatchEnabled =
+  FleetManifestTOE.perGapDispatchEnabled
+
+unifiedFleet58ManifestZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifiedFleet58ManifestZKPFrame =
+  FleetManifestTOE.canonicalFleet58ManifestZKPFrame
+
+unifiedFleet58AcquisitionDoesNotPayRequirement :
+  FleetManifestTOE.BoundDemandAutomaticallyPaysRequirement → ⊥
+unifiedFleet58AcquisitionDoesNotPayRequirement =
+  FleetManifestTOE.acquisitionDoesNotPayRequirement
+
+unifiedFleet58SearchPriorityDoesNotCreateProof :
+  FleetManifestTOE.SearchPriorityCreatesProof → ⊥
+unifiedFleet58SearchPriorityDoesNotCreateProof =
+  FleetManifestTOE.searchPriorityDoesNotCreateProof
