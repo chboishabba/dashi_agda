@@ -14,7 +14,6 @@ import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
-import DASHI.Unified.SensibLawGovernanceTOERegression as SensibLawTOE
 
 ------------------------------------------------------------------------
 -- Current-branch Yang-Mills Goal-1 compatibility exports.
@@ -162,29 +161,3 @@ toe369YangMillsGoal1C4LiteralSectorRecoveryLevel =
 toe369YangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 toe369YangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
-
-
-------------------------------------------------------------------------
--- SensibLaw / legal-follow governance compatibility exports.
--- Exact non-promotion is imported from the unified governance theorem owner.
-------------------------------------------------------------------------
-
-toe369SensibLawLegalAuthorityRemainsClosed :
-  SensibLawTOE.legalAuthorityPromoted ≡ false
-toe369SensibLawLegalAuthorityRemainsClosed =
-  SensibLawTOE.legalAuthorityRemainsClosed
-
-toe369SensibLawGovernancePostconditions :
-  SensibLawTOE.SensibLawGovernanceTOEPostconditions
-toe369SensibLawGovernancePostconditions =
-  SensibLawTOE.canonicalSensibLawGovernanceTOEPostconditions
-
-toe369SensibLawGovernanceZKPFrame :
-  SensibLawTOE.SensibLawGovernanceTOEZKPFrame
-toe369SensibLawGovernanceZKPFrame =
-  SensibLawTOE.canonicalSensibLawGovernanceTOEZKPFrame
-
-toe369SensibLawGovernanceContract :
-  SensibLawTOE.SensibLawGovernanceTOEContract
-toe369SensibLawGovernanceContract =
-  SensibLawTOE.canonicalSensibLawGovernanceTOEContract
