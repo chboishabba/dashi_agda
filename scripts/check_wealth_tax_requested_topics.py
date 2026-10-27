@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DOC = ROOT / "Docs/economics/WealthTaxOriginalConversationsFullCoverage20261027.md"
 
 ROW = re.compile(
-    r"^\| (T[0-9]{2}) \| (COVERED_SOURCE_BOUND|FORMAL_FINITE|OPEN_EMPIRICAL) "
+    r"^\| (T[0-9]{2}) ([^|\n]+?) \| (COVERED_SOURCE_BOUND|FORMAL_FINITE|OPEN_EMPIRICAL) "
     r"\| ([^\n]+?) \| ([^\n]+?) \|$",
     re.MULTILINE,
 )
@@ -39,14 +39,14 @@ POLICY_AND_HISTORY = (
     "Musk", "Piketty", "Henry George", "Adam Smith", "Roosevelt",
     "94%", "buy, borrow, die", "Vancouver", "Victoria", "AI",
     "inheritance", "Samsung", "Pillar Two", "UK SDRT",
-    "Beneficial ownership", "tax assessed", "tax collected",
+    "Beneficial ownership", "assessed", "collected",
     "causal", "Ibrahim",
 )
 
 def main() -> None:
     text = DOC.read_text(encoding="utf-8")
     rows = ROW.findall(text)
-    observed = Counter(id for id, _, _, _ in rows)
+    observed = Counter(id for id, _, _, _, _ in rows)
     missing = EXPECTED - observed.keys()
     unexpected = observed.keys() - EXPECTED
     duplicates = {id: count for id, count in observed.items() if count != 1}
@@ -54,7 +54,7 @@ def main() -> None:
     assert not unexpected, f"Unknown topic IDs: {sorted(unexpected)}"
     assert not duplicates, f"Duplicate topic IDs: {duplicates}"
     assert len(rows) == 42, f"expected 42 rows, got {len(rows)}"
-    for id, status, claim, source in rows:
+    for id, label, status, claim, source in rows:
         assert len(claim.strip()) > 35, f"{id} missing substantive scope"
         assert len(source.strip()) > 30, f"{id} missing source/boundary"
         if status == "OPEN_EMPIRICAL":
@@ -70,7 +70,7 @@ def main() -> None:
     for symbol in ("test_finite_caps", "test_assessment_collection_appropriation_are_distinct",
                    "test_dual_class_voting_post_transfer", "test_assessment_vs_interim_growth"):
         assert symbol in script, f"missing bounded regression: {symbol}"
-    statuses = Counter(status for _, status, _, _ in rows)
+    statuses = Counter(status for _, _, status, _, _ in rows)
     print(f"PASS: {len(rows)} distinct sourced/typed topic rows; "
           f"statuses {dict(sorted(statuses.items()))}; "
           "three existing Agda owner paths; four Python regression names.")
