@@ -575,17 +575,17 @@ toe369GovernedLegalWorkflowAuthorityInvariantHandoff =
   LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
 
 toe369CanonicalLegalSourceAuthorityBoundary :
-  LegalGovernance.LegalAuthority.LegalSourceAuthorityBoundary
+  LegalGovernance.LegalSourceAuthorityBoundary
 toe369CanonicalLegalSourceAuthorityBoundary =
   LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
 
 toe369SameSystemIsNotLegalAuthority :
-  LegalGovernance.LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+  LegalGovernance.SameLegalSystemAutomaticallyMeansAuthority → ⊥
 toe369SameSystemIsNotLegalAuthority =
   LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
 
 toe369DocumentRoleIsNotLegalAuthority :
-  LegalGovernance.LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+  LegalGovernance.DocumentRoleSuppliesLegalSourceAuthority → ⊥
 toe369DocumentRoleIsNotLegalAuthority =
   LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
 
