@@ -718,3 +718,39 @@ toeLaterValidationDoesNotRewriteCertifiedBaseline :
 toeLaterValidationDoesNotRewriteCertifiedBaseline =
   GovernanceTOE.toeLaterValidationDoesNotRewriteCertifiedBaseline
 
+
+------------------------------------------------------------------------
+-- Canonical semantic-authority and exact-live acquisition firewalls.
+-- Exact proof authority remains in GovernedLegalWorkflowTOEBridgeExact.
+------------------------------------------------------------------------
+
+toeSemanticPromotionTruthAuthorityClosed :
+  GovernanceTOE.SemanticPromotionTruthAuthorityClosed
+toeSemanticPromotionTruthAuthorityClosed =
+  GovernanceTOE.toeSemanticPromotionTruthAuthorityClosed
+
+toeSemanticPromotionLegalAuthorityClosed :
+  GovernanceTOE.SemanticPromotionLegalAuthorityClosed
+toeSemanticPromotionLegalAuthorityClosed =
+  GovernanceTOE.toeSemanticPromotionLegalAuthorityClosed
+
+toeSemanticPromotionAllAuthorityClosed :
+  GovernanceTOE.SemanticPromotionAllAuthorityClosed
+toeSemanticPromotionAllAuthorityClosed =
+  GovernanceTOE.toeSemanticPromotionAllAuthorityClosed
+
+toeBoundAcquisitionDoesNotPayRequirement :
+  GovernanceTOE.BoundDemandAutomaticallyPaysRequirement → ⊥
+toeBoundAcquisitionDoesNotPayRequirement =
+  GovernanceTOE.toeBoundAcquisitionDoesNotPayRequirement
+
+toeBoundAcquisitionDoesNotCloseConsumer :
+  GovernanceTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+toeBoundAcquisitionDoesNotCloseConsumer =
+  GovernanceTOE.toeBoundAcquisitionDoesNotCloseConsumer
+
+toeProducerIdentityDoesNotIdentifyResidual :
+  GovernanceTOE.SameProducerIdentifiesResidual → ⊥
+toeProducerIdentityDoesNotIdentifyResidual =
+  GovernanceTOE.toeProducerIdentityDoesNotIdentifyResidual
+
