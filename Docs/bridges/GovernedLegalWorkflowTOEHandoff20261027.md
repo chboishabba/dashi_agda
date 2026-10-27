@@ -22,7 +22,8 @@ PR #1278 already owns kernel-closure versus semantic-closure reuse.
 This tranche stacks on that result.
 
 No Actionstep-specific Agda ontology was found.
-The existing operational, review, and matter owners already cover the required workflow boundary.
+The existing operational, review, matter, admission, and compliance owners already cover the required workflow boundary.
+Current Actionstep product documentation uses matters, tasks, and ordered workflow steps with task assignment and progression gates. This supports the generic workflow mapping only. It is not DASHI theorem authority.
 
 ## C — Construction
 
@@ -52,7 +53,7 @@ The canonical inhabitant is:
 
 `canonicalGovernedLegalWorkflowTOEInvariantHandoff`
 
-This handoff binds the existing governance boundary, promotion boundary, and ZKP receipt to the same TOE surface.
+This handoff binds the existing governance boundary, promotion boundary, detailed ZKP control receipt, and the repository-wide `DASHI.Interop.IntrospectiveProofLoopExact.ZKPFrame` to the same TOE surface.
 
 It also carries the existing task, review, runtime, admission, publication, Casey, formal-proof, and execution-authority firewalls.
 
@@ -61,6 +62,8 @@ It adds no new legal semantics.
 It adds no new proof authority.
 
 The focused TOE root and `DASHI.Unifier` expose aliases to this same canonical inhabitant.
+
+`DASHI.Unified.Everything` imports the same bridge and exposes the canonical governance boundary, invariant handoff, and generic ZKP frame. The focused regression does not depend on the whole aggregate because that aggregate carries unrelated legacy debt.
 
 ## S — Safety invariants
 
@@ -119,6 +122,8 @@ ITIL, ISO 9000, ISO/IEC 42001, ISO/IEC 27001, ISO/IEC 27701, ISO/IEC 23894, ISO 
 The bridge does not claim certification against those standards.
 
 The bridge does not create a separate standards ontology.
+
+The current ISO/IEC 42001 publication describes an AI management system and continual improvement. The current NIST AI RMF page states that AI RMF 1.0 is voluntary and is under revision in 2026. These observations reinforce the non-certification boundary. They do not create formal proof authority.
 
 NIST AI RMF remains a risk-management lens.
 
@@ -179,8 +184,10 @@ package "Existing semantic owners" {
 
 package "Normalized TOE surface" {
   [GovernedLegalWorkflowTOEBridgeExact] as Bridge
+  [DASHI.Unified.Everything] as UnifiedEverything
   [DASHI.Unifier aliases] as Unifier
   [EverythingTOESymmetryResolved369] as TOE
+  [IntrospectiveProofLoopExact.ZKPFrame] as ZKP
 }
 
 Ops --> Bridge : non-promotion theorem
@@ -194,6 +201,8 @@ Compliance --> Bridge : witness-preserving composition
 [ITIRFederatedTypedWorldProjectionExact] --> Bridge : suite role and Casey authority firewall
 [AgentAuthorityTrajectoryExact] --> Bridge : knowledge / execution authority firewall
 [DistributedEpistemicFabricSourceAtlasExact] --> Bridge : source attribution
+ZKP --> Bridge : canonical O/R/C/S/L/P/G/F frame
+Bridge --> UnifiedEverything : normalized Unified import
 Bridge --> Unifier : exact aliases
 Bridge --> TOE : direct import
 Unifier --> TOE : facade compatibility
