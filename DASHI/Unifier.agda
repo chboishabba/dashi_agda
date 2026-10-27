@@ -1392,6 +1392,8 @@ unifierBalabanPhysicalPromotionCut =
 
 import DASHI.Unified.Physics as UnifiedPhysicsOptics
 
+unifierDiffuserImagingZKPFrame :
+  UnifiedPhysicsOptics.DiffuserImagingTOEZKPFrame
 unifierDiffuserImagingZKPFrame =
   UnifiedPhysicsOptics.diffuserImagingZKPFrame
 
