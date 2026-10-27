@@ -8,6 +8,11 @@ on:
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Validation.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
+      - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
 concurrency:
@@ -27,12 +32,34 @@ jobs:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
 
+      - name: Install DASHI Agda preflight
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Run DASHI Agda preflight
+        run: |
+          modules=(
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Exact.agda
+            DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Validation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+          )
+          for module in "${modules[@]}"; do
+            dashi-agda-preflight --root . "$module"
+          done
+
       - name: Reject trust escapes
         run: |
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Exact.agda
+            DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Validation.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -41,7 +68,15 @@ jobs:
             fi
           done
 
-      - name: Kernel-check TOE symmetry-resolved aggregate
+      - name: Kernel-check TOE symmetry-resolved aggregate and YM frontier
         run: |
           agda --version
-          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          modules=(
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Validation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done
