@@ -7,6 +7,13 @@ import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as SensibLaw
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
 import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact as Governance
+import DASHI.Law.ConsumerAdequacyRuntimeTheoremBridgeExact as Adequacy
+import DASHI.Law.ExactNonFactorabilityResidualCompilerExact as NonFactor
+import DASHI.Law.ConsumerResearchAdmissibilityStopExact as ResearchStop
+import DASHI.Law.ClosedIsNotAdequateExact as Closed
+import DASHI.Law.MaboRevisionReopenExact as MaboRevision
+import DASHI.Law.RevisionReReviewPropagationExact as RevisionReview
+import DASHI.Law.LegalWorldRevisionReconstructionExact as WorldRevision
 
 _ :
   Authority.legalAuthorityFlag
@@ -35,57 +42,69 @@ _ = Governance.actionstepAnyAuthorityClosed
 -- Legal/research normalized non-promotion checks.
 ------------------------------------------------------------------------
 
-_ :
-  Governance.toeRuntimeCoordinateCompletenessDoesNotProveFormalAdequacy
-  ≡ Governance.toeRuntimeCoordinateCompletenessDoesNotProveFormalAdequacy
-_ = refl
 
 _ :
-  Governance.toeTheoremBackedAdequacyRequiresAdequateFor
-  ≡ Governance.toeTheoremBackedAdequacyRequiresAdequateFor
-_ = refl
+  Adequacy.runtimeCoordinateCompletenessIsFormalAdequacy
+    Adequacy.canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary
+  ≡ false
+_ = Governance.toeRuntimeCoordinateCompletenessDoesNotProveFormalAdequacy
 
 _ :
-  Governance.toeApproximateCollisionCannotPromoteExactResidual
-  ≡ Governance.toeApproximateCollisionCannotPromoteExactResidual
-_ = refl
+  Adequacy.theoremBackedReceiptRequiresAdequateForInhabitant
+    Adequacy.canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary
+  ≡ true
+_ = Governance.toeTheoremBackedAdequacyRequiresAdequateFor
 
 _ :
-  Governance.toeFrontierClosureDoesNotProveConsumerAdequacy
-  ≡ Governance.toeFrontierClosureDoesNotProveConsumerAdequacy
-_ = refl
+  NonFactor.approximateCollisionMayPromoteExactResidual
+    NonFactor.canonicalExactNonFactorabilityResidualCompilerBoundary
+  ≡ false
+_ = Governance.toeApproximateCollisionCannotPromoteExactResidual
 
 _ :
-  Governance.toeNoFreshDemandDoesNotProveConsumerAdequacy
-  ≡ Governance.toeNoFreshDemandDoesNotProveConsumerAdequacy
-_ = refl
+  ResearchStop.frontierClosureAloneProvesConsumerAdequacy
+    ResearchStop.canonicalConsumerResearchAdmissibilityStopBoundary
+  ≡ false
+_ = Governance.toeFrontierClosureDoesNotProveConsumerAdequacy
 
 _ :
-  Governance.toeExactNonfactorabilityMayReopenClosedFrontier
-  ≡ Governance.toeExactNonfactorabilityMayReopenClosedFrontier
-_ = refl
+  Closed.noFreshDemandIsConsumerAdequacyProof
+    Closed.canonicalClosedIsNotAdequateBoundary
+  ≡ false
+_ = Governance.toeNoFreshDemandDoesNotProveConsumerAdequacy
 
 _ :
-  Governance.toeRevisionChangeReopensContextBeforeIdentity
-  ≡ Governance.toeRevisionChangeReopensContextBeforeIdentity
-_ = refl
+  Closed.exactNonfactorabilityMayReopenClosedFrontier
+    Closed.canonicalClosedIsNotAdequateBoundary
+  ≡ true
+_ = Governance.toeExactNonfactorabilityMayReopenClosedFrontier
 
 _ :
-  Governance.toeLatestRevisionLookupDoesNotPayContextReview
-  ≡ Governance.toeLatestRevisionLookupDoesNotPayContextReview
-_ = refl
+  MaboRevision.revisionChangeReopensContextBeforeIdentity
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ true
+_ = Governance.toeRevisionChangeReopensContextBeforeIdentity
 
 _ :
-  Governance.toeRevisionReopenDoesNotCreateClaimTruth
-  ≡ Governance.toeRevisionReopenDoesNotCreateClaimTruth
-_ = refl
+  MaboRevision.latestRevisionLookupPaysContextReview
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ false
+_ = Governance.toeLatestRevisionLookupDoesNotPayContextReview
 
 _ :
-  Governance.toeRevisionRereviewDoesNotChangeClaimTruth
-  ≡ Governance.toeRevisionRereviewDoesNotChangeClaimTruth
-_ = refl
+  MaboRevision.revisionReopenCreatesClaimTruth
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ false
+_ = Governance.toeRevisionReopenDoesNotCreateClaimTruth
 
 _ :
-  Governance.toeRevisionDoesNotAutomaticallyRefutePriorEvidence
-  ≡ Governance.toeRevisionDoesNotAutomaticallyRefutePriorEvidence
-_ = refl
+  RevisionReview.rereviewAutomaticallyChangesClaimTruth
+    RevisionReview.canonicalRevisionReReviewPropagationBoundary
+  ≡ false
+_ = Governance.toeRevisionRereviewDoesNotChangeClaimTruth
+
+_ :
+  WorldRevision.revisionAutomaticallyRefutesPriorEvidence
+    WorldRevision.canonicalLegalWorldRevisionReconstructionBoundary
+  ≡ false
+_ = Governance.toeRevisionDoesNotAutomaticallyRefutePriorEvidence
