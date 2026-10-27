@@ -313,3 +313,6 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+-- Evidence and governance proof boundary. Does not discharge placeholder QG axioms.
+import DASHI.Unified.RescueFinancePalantirTOENonPromotionExact
