@@ -29,8 +29,7 @@ def test_bridge_reuses_existing_scale_review_owners():
         "ITIRInvestigationWorkbenchProjectionExact",
         "SLRReviewedEvidencePaymentExact",
         "MaboReviewedEvidencePaymentExact",
-        "IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact",
-        "IbrahimSnowballInformationCascadeEvidenceDependencyHyperfabricBidiExact",
+        "PNFSourceBoundaryTOEExact",
         "SLRLegalRuntimeCapstoneExact",
         "GovernedLegalWorkflowTOEBridgeExact",
     ):
@@ -97,8 +96,7 @@ def test_validation_reopens_canonical_owners():
         "receiptUsesCanonicalWorkbench",
         "receiptUsesCanonicalReviewedEvidence",
         "receiptUsesCanonicalMaboReview",
-        "receiptUsesCanonicalIbrahimIndependence",
-        "receiptUsesCanonicalIbrahimDependency",
+        "receiptUsesCanonicalPNFSourceBoundary",
         "receiptUsesCanonicalLegalRuntime",
         "receiptUsesCanonicalLegalWorkflow",
     ):
@@ -161,3 +159,14 @@ def test_unified_facade_reuses_existing_physics_nonpromotion_owners():
     assert "Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections\n    Physics.navierStokesObject" in text
     assert "Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections\n    Physics.yangMillsObject" in text
     assert "import DASHI.Physics.Foundations.Round5FullBoundary as Round5" not in text
+
+
+def test_source_genealogy_reuses_normalized_pnf_source_boundary():
+    text = read(BRIDGE)
+    assert "import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource" in text
+    assert "IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact as IbrahimIndependence" not in text
+    assert "IbrahimSnowballInformationCascadeEvidenceDependencyHyperfabricBidiExact as IbrahimDependency" not in text
+    assert "PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth" in text
+    assert "PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence" in text
+    assert "PNFSource.repetitionDoesNotCreateIndependentEvidence" in text
+    assert "PNFSource.commonSourceDoesNotEraseEvidence" in text
