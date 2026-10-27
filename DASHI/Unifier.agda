@@ -1383,3 +1383,33 @@ unifierBalabanPhysicalPromotionCut =
   unifierBalabanBlockSpinStillBlocked ,
   (unifierBalabanUniformKPStillBlocked ,
    unifierBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Computational-imaging observer unifier projection.
+-- Reuse the normalized Unified.Physics facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.Physics as UnifiedPhysicsOptics
+
+unifierDiffuserImagingZKPFrame =
+  UnifiedPhysicsOptics.diffuserImagingZKPFrame
+
+open UnifiedPhysicsOptics public using
+  ( roundTripImpliesIdentifiable
+  ; noUniversalDecoderAfterClip
+  ; saturatedCollision
+  ; overlapThenClip
+  ; redundantRecovery
+  ; recordedCodeInjective
+  ; firstPixelOnlyCannotRecoverDepth
+  ; depthRecoveryReceipt
+  ; recordedCollisionWouldContradictDepth
+  ; RestrictedInverseBudget
+  ; MeasuredReconstruction
+  ; stableReconstructionBound
+  ; stableWithMatchedResidual
+  ; codedDepthRoundTrip
+  ; noUniversalDepthDecoder
+  ; noRechartRepairsSaturatedDepth
+  )
