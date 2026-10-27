@@ -1158,3 +1158,38 @@ unifierFleetVectorCoordinateAdmissibilityStillFalse =
 
 unifierFleetTextFallbackAuthorityStillFalse =
   FleetGapTOE.fleetTextFallbackAuthorityStillFalse
+
+------------------------------------------------------------------------
+-- Fleet discharged-motif owner aliases.
+-- The spectral labels remain planning context only.
+------------------------------------------------------------------------
+
+unifierFleetBalabanDischargedOwnerReceipt :
+  FleetGapTOE.BalabanDischargedOwnerReceipt
+unifierFleetBalabanDischargedOwnerReceipt =
+  FleetGapTOE.fleetBalabanDischargedOwnerReceipt
+
+unifierFleetNSPhysicalM2SummationCompilerStatus :
+  Bool
+unifierFleetNSPhysicalM2SummationCompilerStatus =
+  FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
+
+unifierFleetNSM2ToR568CompilerStatus :
+  Bool
+unifierFleetNSM2ToR568CompilerStatus =
+  FleetGapTOE.fleetNSM2ToR568CompilerStatus
+
+unifierFleetQuantumMereologyBoundary :
+  FleetGapTOE.QuantumMereologyDischargedBoundary
+unifierFleetQuantumMereologyBoundary =
+  FleetGapTOE.fleetQuantumMereologyBoundary
+
+unifierFleetQuantumMereologyAttributionBoundary :
+  FleetGapTOE.QuantumMereologyAttributionBoundary
+unifierFleetQuantumMereologyAttributionBoundary =
+  FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetGapTOE.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
