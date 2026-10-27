@@ -4,9 +4,9 @@ Source: Aaron Clauset, Cosma R. Shalizi, M. E. J. Newman (2009),
 https://aaronclauset.github.io/powerlaws/data/words.txt
 Catalogue: https://aaronclauset.github.io/powerlaws/data.htm
 Original novel: Herman Melville, Moby-Dick (1851).
-Source catalogue attributes the original frequency compilation to M. E. J.
-Newman's (2005) work. Our derivative consists ONLY of the first 30 observed
-numeric rank counts. It has NOT ingested or verified all 18855 source rows.
+The catalogue cites M. E. J. Newman (2005) for this frequency series;
+that bibliographic citation alone does not identify a file tokenizer.
+Our derivative contains ONLY the first 30 observed numeric rank counts. It has NOT ingested or verified all 18855 source rows.
 
 Original textual/statistical ownership remains with Melville/Newman/Clauset
 and colleagues; this 2026 fixture/diagnostic is source-written by
