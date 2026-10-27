@@ -2,6 +2,7 @@
 module DASHI.Unified.R559IbrahimFleetHyperfabricTOEValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false; true)
 open import Data.Empty using (⊥)
 
 import DASHI.EverythingTOESymmetryResolved369 as TOE
@@ -75,15 +76,29 @@ unifierStreamLossStillExact :
 unifierStreamLossStillExact =
   Unifier.unifierTwoDigitStreamCannotRecoverThird
 
+fleetEigenPriorityStillDoesNotCreateProof :
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority
+    Owner.fleetFormalGapTargetReceipt ≡ false
+fleetEigenPriorityStillDoesNotCreateProof =
+  Owner.fleetEigenPriorityDoesNotCreateProof
+
 fleetCountStillDoesNotCreateFormalDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof
+    Owner.fleetFormalGapTargetReceipt ≡ false
 fleetCountStillDoesNotCreateFormalDischarge =
   Owner.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStillCannotBeRetargeted :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged
+    Owner.fleetFormalGapTargetReceipt ≡ true
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
+
+fleetContradictionGapsStillStaySeparate :
+  Fleet.contradictionGapsRemainSeparate
+    Owner.fleetFormalGapTargetReceipt ≡ true
+fleetContradictionGapsStillStaySeparate =
+  Owner.fleetContradictionGapsStaySeparate
 
 toeYMGate4CountIs58 :
   TOE.toeYMGate4FormalGapsAre58
