@@ -82,6 +82,7 @@ jobs:
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
           dashi-repo related balabanGeneratedActionStressScaleCompilerLevel --root . --limit 20
           dashi-repo related balabanPublishedRGPhysicalSameObjectLevel --root . --limit 20
+          dashi-repo related balabanContinuumRouteMassGapPromotionStillOpen --root . --limit 20
           dashi-repo related balabanScaleDensityFiniteMeasureWeldLevel --root . --limit 20
           dashi-repo related balabanRegularELocalizationCarrierLevel --root . --limit 20
           dashi-repo related balabanCasimirLowerBoundTransportLevel --root . --limit 20
