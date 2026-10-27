@@ -966,7 +966,7 @@ unifierFleetPlanningTextDoesNotCreateFormalResidual =
   FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
 
 unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner :
-  FleetGapTOE.spectralLabelIdentifiesTheoremOwner
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
     FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner =
   FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
