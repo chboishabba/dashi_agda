@@ -211,6 +211,78 @@ ipswichJuly2025CampaignCoverage = Source.mkNoDOISource
   "Dated report documents campaign activity and a group spokesperson, and describes expert site visits. This is secondary corroboration distinct from the original December 2025 SWFG submission, NOT the original association constitution or primary scientific measurements. Check underlying campaign records if relied upon for s487 activity-series proof."
   Source.publicAttribution
 
+------------------------------------------------------------------------
+-- Original documentary retrieval + actual Federal Court standing PLEADINGS.
+-- Court-filed Form 66 originals show legal arguments raised by applicants;
+-- they are NOT a court holding, successful stay or same-project evidence.
+------------------------------------------------------------------------
+
+qldOFTAssociationFileAcquisition : Source.AttributedSource
+qldOFTAssociationFileAcquisition = Source.mkNoDOISource
+  "Queensland Office of Fair Trading"
+  "Request information about an incorporated association"
+  "Original Queensland register and lodged-document access instructions"
+  "28 October 2026 access"
+  "https://www.qld.gov.au/community/fair-trading/associations-charities-and-not-for-profits/incorporated-associations/request-information-about-an-incorporated-association"
+  Source.governmentSource
+  "OFT supplies association extract (name, address, committee history and lodged-document list), certified incorporation certificate, registered rules, amendments, annual returns and committee changes for a fee. Original guidance states an ordinary ~10 working day retrieval. SWFG 15 Oct 2026 governing objects and members cannot be reconstructed from an ABN, future amendments or presumed model rules."
+  Source.publicAttribution
+
+qldOFTCurrentRules : Source.AttributedSource
+qldOFTCurrentRules = Source.mkNoDOISource
+  "Queensland Office of Fair Trading"
+  "Rules for associations — governing objects and historical approval"
+  "Original Queensland association rules guidance"
+  "28 October 2026 access"
+  "https://www.qld.gov.au/community/fair-trading/associations-charities-and-not-for-profits/incorporated-associations/running-an-incorporated-association/rules-for-associations"
+  Source.governmentSource
+  "OFT: associations must lodge rules; both model and own rules must state objects; own rules amendments require approval by OFT and take effect when approved. Demand applicable ORIGINAL approved rules/version on 15 October 2026, not online model text. A future replacement is not automatically retrospective."
+  Source.publicAttribution
+
+qldOFT2026Fees : Source.AttributedSource
+qldOFT2026Fees = Source.mkNoDOISource
+  "Queensland Office of Fair Trading"
+  "Fair trading fees — 2026 incorporated-association document access"
+  "Original QLD price list updated 1 July 2026"
+  "1 July 2026"
+  "https://www.qld.gov.au/community/fair-trading/associations-charities-and-not-for-profits/fair-trading-fees"
+  Source.governmentSource
+  "Public 2026 prices: AUD 9 association/charity file retrieval, AUD 4.20 per photocopied page, AUD 28.85 certified incorporation certificate. These are acquisition fees, NOT development infrastructure charges, public assistance or litigation costs."
+  Source.publicAttribution
+
+federalCourtFriendsRockArt2026Form66 : Source.AttributedSource
+federalCourtFriendsRockArt2026Form66 = Source.mkNoDOISource
+  "Friends of Australian Rock Art Inc (applicant); Federal Court of Australia (filed record)"
+  "VID1357/2025 — amended Form 66, filed 13 March 2026"
+  "Original Court-hosted, filed and amended originating application, not judgment"
+  "13 March 2026"
+  "https://www.fedcourt.gov.au/__data/assets/pdf_file/0004/596038/2026-03-13_Originating-Application-for-Judicial-Review-Form-66-Rule-31.011_E5530476_v1.pdf"
+  Source.governmentSource
+  "Federal Court original PDF page 3 (zero-index 2) visually inspected: applicant PLEADS s487(3) Australian incorporation, environmental activities in two years before its September 2025 NWS decision, and environmental objects in rules at decision date, in ADJR s5 and Judiciary Act s39B proceeding. This is applicant allegation and permissible procedural template, NOT decided standing, law on Woogaroo, a precedent ratio, or an injunction."
+  Source.publicAttribution
+
+federalCourtACF2026Form66 : Source.AttributedSource
+federalCourtACF2026Form66 = Source.mkNoDOISource
+  "Australian Conservation Foundation Inc (applicant); Federal Court of Australia (filed record)"
+  "VID1356/2025 — amended Form 66 dated 26 February 2026"
+  "Original Court-hosted originating application, not judicial reasons"
+  "26 February–2 March 2026 (lodged/accepted)"
+  "https://www.fedcourt.gov.au/__data/assets/pdf_file/0009/596025/2026-02-27_Originating-Application-for-Judicial-Review-Form-66-Rule-31.011_E5471674_v1.pdf"
+  Source.governmentSource
+  "Original Court PDF page 3 (zero-index 2) visually checked. ACF pleads ACT incorporation, 2-year series with public submissions, letters and an expert report, and constitution's environmental objects to assert s487(3) standing in a separate North West Shelf case. A pleading is a claim by a party; NOT a judicial determination, evidence SWFG did those same activities, or precedent deciding how many activities satisfy s487."
+  Source.publicAttribution
+
+springfieldFeb2026CommentInvitation : Source.AttributedSource
+springfieldFeb2026CommentInvitation = Source.mkNoDOISource
+  "Cherish Enterprises Pty Ltd / Saunders Havill (proponent notice)"
+  "Original s95A(3) invitation for EPBC 2019/8575 public comment"
+  "Original one-page project invitation via Commonwealth EPBC public portal"
+  "13 February–12 March 2026"
+  "https://epbcpublicportal.environment.gov.au/_entity/sharepointdocumentlocation/4f8edc14-9ffb-ee11-9f89-00224892a860/2ab10dab-d681-4911-b881-cc99413f07b6?file=2019-8575-Draft-PD.pdf"
+  Source.practitionerSource
+  "Original PDF page 1 visually checked: s95A(3) invites comments on EPBC 2019/8575 13 February–12 March 2026; submissions directed to epbc@springfieldresidential.com or 9 Thompson Street Bowen Hills. Portal file is a ONE-PAGE INVITATION, NOT actual full Draft PD, received proponent inbox, 1,786 individual comments, final s95B response or Secretary s95C recommendation. Request original server/post logs and transmitted copies, not an assumed Minister direct-email receipt."
+  Source.publicAttribution
+
 data StandingApplicant : Set where
   conservationIndividual : StandingApplicant
   conservationOrganisation : StandingApplicant
@@ -390,6 +462,41 @@ swfgJuly2025CampaignSeriesLead = litigation-gate adjrSection5Review ipswichJuly2
   "Original SWFG event announcement, organiser records and legally admissible witnesses; find full activity chronology and objects rather than claim standing final."
   false refl
 
+qldOFTRulesDecisionDateCut : LitigationGate
+qldOFTRulesDecisionDateCut = litigation-gate adjrSection5Review qldOFTAssociationFileAcquisition
+  caseSpecificProofOpen
+  "Queensland OFT original has a paid extracts/file/certificate process identifying actual objects and committee history. It generally reports a 10-working-day retrieval; parallel urgent counsel required."
+  "SWFG registration number/extract, certified incorporation and historic approved rules in force at 15 Oct 2026, any amendments with approval-effective dates, committee and valid proceedings authorisation."
+  false refl
+
+qldOFTVersionAndFeeCut : LitigationGate
+qldOFTVersionAndFeeCut = litigation-gate adjrSection5Review qldOFTCurrentRules
+  caseSpecificProofOpen
+  "QLD original requires environmental objects in actual approved association rules and states rule amendments take effect on approval. Published 2026 rates from a distinct OFT original are AUD 9 file, AUD 4.20 per page, AUD 28.85 certified incorporation."
+  "Request/receipt and applicable 15 Oct 2026 adopted version, not a downloaded model-rule default; collect original amendment dates and payment receipt only if actually made."
+  false refl
+
+filedStandingComparatorCut : LitigationGate
+filedStandingComparatorCut = litigation-gate adjrSection5Review federalCourtFriendsRockArt2026Form66
+  caseSpecificProofOpen
+  "Court-filed 13 Mar 2026 original amended Form 66 in VID1357/2025 pleads association s487(3) three limbs, ADJR s5 and possible s39B against a wholly DIFFERENT NWS action."
+  "Actual SWFG objects, series and form of standing evidence; counsel must verify right grounds/proceeding parties and current applicable court rules. No judgment in this downloaded source."
+  false refl
+
+acfConstitutionActivitiesComparatorCut : LitigationGate
+acfConstitutionActivitiesComparatorCut = litigation-gate adjrSection5Review federalCourtACF2026Form66
+  caseSpecificProofOpen
+  "ACF's separate amended NWS Form 66 in VID1356/2025 pleads dated ministerial letters/submissions/expert report and constitutional purposes as its s487(3) case."
+  "Actual SWFG activity exhibits with original authors, at-decision constitution and legitimate plaintiff authority; ACF's assertions cannot substitute for evidence or outcome."
+  false refl
+
+proponentInboxMarch2026Cut : LitigationGate
+proponentInboxMarch2026Cut = litigation-gate adjrSection5Review springfieldFeb2026CommentInvitation
+  caseSpecificProofOpen
+  "Original 2019/8575 s95A invitation directs comments to epbc@springfieldresidential.com or 9 Thompson Street by 12 March 2026, not to an automatic Minister public-email channel."
+  "QUT/QCC sender dispatch, project inbox/mail delivery and logs, full individual comment inventory, s95B(1)(b)(ii) proponent-to-Minister package and final response, plus signed decision file."
+  false refl
+
 triageGates : List LitigationGate
 triageGates =
   individualStanding ∷ organisationStanding ∷ independentAffectedInterest ∷
@@ -400,7 +507,10 @@ triageGates =
   qccSameCaseSubmissionLead ∷ swfgScenicStandingActivityLead ∷
   possinghamScenicActivityLead ∷ zdenekScenicActivityLead ∷
   swfgABNOrganisationIdentityLead ∷ swfgMarch2025PublicPetitionLead ∷
-  swfgJuly2025CampaignSeriesLead ∷ []
+  swfgJuly2025CampaignSeriesLead ∷
+  qldOFTRulesDecisionDateCut ∷ qldOFTVersionAndFeeCut ∷
+  filedStandingComparatorCut ∷ acfConstitutionActivitiesComparatorCut ∷
+  proponentInboxMarch2026Cut ∷ []
 
 -- Existing source and case consumers are genuinely reused. Nothing in their
 -- existence turns a candidate applicant into a qualified litigant.
@@ -439,6 +549,12 @@ data CampaignDownloadCaptionOverridesOriginalPrintedDate : Set where
 data QCCSubmissionProvesSWFGGroupStanding : Set where
 data ABNEntryProvesSection487ObjectsAtDecision : Set where
 data SenatePetitionAboutWoogarooProvesSWFGOrganisedIt : Set where
+data OFTModelRulesAreSWFGObjectsAtDecision : Set where
+data ABNAndLaterRulesProveHistoricAssociationObjects : Set where
+data OtherAssociationFiledForm66IsCourtHoldingForSWFG : Set where
+data PublicCourtPleadingEqualsJudiciallySuccessfulOutcome : Set where
+data ProponentInvitationMeansQUTAndQCCCommentsDelivered : Set where
+data DocumentRetrievalRequestStopsFederalCourtTime : Set where
 
 identityNotStanding : ConservationIdentityAloneProvesSection487 → ⊥
 identityNotStanding ()
@@ -518,3 +634,26 @@ abnNoObjectsCertification ()
 senateThemeNotGroupOrganiser :
   SenatePetitionAboutWoogarooProvesSWFGOrganisedIt → ⊥
 senateThemeNotGroupOrganiser ()
+
+noDefaultSWFGRules : OFTModelRulesAreSWFGObjectsAtDecision → ⊥
+noDefaultSWFGRules ()
+
+notRetrospectiveAssociationObjects :
+  ABNAndLaterRulesProveHistoricAssociationObjects → ⊥
+notRetrospectiveAssociationObjects ()
+
+otherCaseFormNotSWFGStanding :
+  OtherAssociationFiledForm66IsCourtHoldingForSWFG → ⊥
+otherCaseFormNotSWFGStanding ()
+
+pleadingNotJudgment :
+  PublicCourtPleadingEqualsJudiciallySuccessfulOutcome → ⊥
+pleadingNotJudgment ()
+
+invitationNotDeliveredComments :
+  ProponentInvitationMeansQUTAndQCCCommentsDelivered → ⊥
+invitationNotDeliveredComments ()
+
+paidFileRequestNotTimeStop :
+  DocumentRetrievalRequestStopsFederalCourtTime → ⊥
+paidFileRequestNotTimeStop ()
