@@ -31,6 +31,12 @@ on:
       - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
       - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda'
       - 'DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
+      - 'DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda'
+      - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
+      - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
       - 'Docs/architecture/YMGoal1R559IbrahimTOE.puml'
       - 'DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda'
       - 'DASHI/Unifier.agda'
@@ -141,6 +147,15 @@ jobs:
           dashi-repo related canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary --root . --limit 20
           dashi-repo discover 'Balaban R559 Goal1 max cut Ibrahim Pareto snowball Monster 3B H-zeta non-promotion' --root . --limit 50
           dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda --root .
+          dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
+          dashi-repo related collisionRefutesSufficiency --root . --limit 20
+          dashi-repo related padicPrefixCannotDetermineDiscardedDigit --root . --limit 20
+          dashi-repo discover 'fleet 58 formal gaps 584 discharged 44 contradiction R559 Ibrahim hyperfabric p-adic projection loss' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Core.IndexedRelational --root .
+          dashi-agda-preflight DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -174,6 +189,12 @@ jobs:
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
             DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+            DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda
+            DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda
+            DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda
             DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
@@ -200,6 +221,12 @@ jobs:
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+            DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda
+            DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda
+            DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
