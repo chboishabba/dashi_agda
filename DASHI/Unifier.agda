@@ -4,6 +4,13 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
 
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
