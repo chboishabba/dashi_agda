@@ -839,17 +839,17 @@ toeCurrentMaxCutHyperfabricReceipt =
   CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
 
 toeCurrentHyperformNineCount :
-  CurrentHyper.Fabric.siteCount 3 2 ≡ 9
+  CurrentHyper.HyperformNineCountProof
 toeCurrentHyperformNineCount =
   CurrentHyper.currentHyperformNineCount
 
 toeCurrentHyperformTwentySevenCount :
-  CurrentHyper.Fabric.siteCount 3 3 ≡ 27
+  CurrentHyper.HyperformTwentySevenCountProof
 toeCurrentHyperformTwentySevenCount =
   CurrentHyper.currentHyperformTwentySevenCount
 
 toeCurrentHyperformEightyOneCount :
-  CurrentHyper.Fabric.siteCount 3 4 ≡ 81
+  CurrentHyper.HyperformEightyOneCountProof
 toeCurrentHyperformEightyOneCount =
   CurrentHyper.currentHyperformEightyOneCount
 
