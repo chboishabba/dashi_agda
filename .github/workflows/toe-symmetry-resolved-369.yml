@@ -104,6 +104,11 @@ jobs:
           dashi-repo related toeSeparateActualActionRecognitionLeafNotNeeded --root . --limit 20
           dashi-repo related toeBase369CandidateCompilesRecognition --root . --limit 20
           dashi-repo related toeBase369ShortestCandidateStillUninhabited --root . --limit 20
+          dashi-repo related toeRecognitionAcquisitionTargetLocalized --root . --limit 20
+          dashi-repo related toeActualBase369RecognitionCandidateStillOpen --root . --limit 20
+          dashi-repo related toeOEISDoesNotCreateBase369RecognitionCandidate --root . --limit 20
+          dashi-repo discover 'A025616 Base369 recognition acquisition W_zeta appraisal fibre Fin90 translation modulation intertwiner' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact --root .
           dashi-repo discover 'shortest 3B source Base369 recognition candidate action recognition multiplicity inertia' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact --root .
           dashi-repo lineage --prefix DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact --root .
