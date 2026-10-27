@@ -236,7 +236,7 @@ toeBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
 toeBalabanC4DensityAnchoredStressLaneLevel =
   BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
 
-toeBalabanCPhysicalPackageCount : Nat
+toeBalabanCPhysicalPackageCount : ℕ
 toeBalabanCPhysicalPackageCount =
   BalabanRGTOE.balabanCPhysicalPackageCount
 
