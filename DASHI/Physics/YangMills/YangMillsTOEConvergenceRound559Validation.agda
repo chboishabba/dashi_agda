@@ -813,3 +813,113 @@ criticalFiniteMoscoRouteNotRequired = refl
 criticalConservativeClayKeepsFullC :
   TOE.toeFullCLayerRetainedForConservativeClayExistence ≡ true
 criticalConservativeClayKeepsFullC = refl
+
+
+------------------------------------------------------------------------
+-- Canonical family-dispatch normalization regressions.
+------------------------------------------------------------------------
+
+irreducibleFamilyDispatchA1MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.a1CurrentStepVariation
+  ≡ R546.familyLevel R546.a1CurrentStepVariation
+irreducibleFamilyDispatchA1MatchesR546 = refl
+
+irreducibleFamilyDispatchA2MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.a2HistoryCoordinate
+  ≡ R546.familyLevel R546.a2HistoryCoordinate
+irreducibleFamilyDispatchA2MatchesR546 = refl
+
+irreducibleFamilyDispatchA3MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.a3ProjectiveRepresentation
+  ≡ R546.familyLevel R546.a3ProjectiveRepresentation
+irreducibleFamilyDispatchA3MatchesR546 = refl
+
+irreducibleFamilyDispatchFiniteT1MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.finiteT1AndPublishedOS
+  ≡ R546.familyLevel R546.finiteT1AndPublishedOS
+irreducibleFamilyDispatchFiniteT1MatchesR546 = refl
+
+irreducibleFamilyDispatchQuantitativeT5MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.quantitativeT5CMP119Alignment
+  ≡ R546.familyLevel R546.quantitativeT5CMP119Alignment
+irreducibleFamilyDispatchQuantitativeT5MatchesR546 = refl
+
+irreducibleFamilyDispatchWEXTMatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.bWilsonWEXT
+  ≡ R546.familyLevel R546.bWilsonWEXT
+irreducibleFamilyDispatchWEXTMatchesR546 = refl
+
+irreducibleFamilyDispatchSameHMatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.bSameHamiltonianEnergyDecay
+  ≡ R546.familyLevel R546.bSameHamiltonianEnergyDecay
+irreducibleFamilyDispatchSameHMatchesR546 = refl
+
+irreducibleFamilyDispatchAllGroupMatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.actualGroupCompleteSource
+  ≡ R546.familyLevel R546.actualGroupCompleteSource
+irreducibleFamilyDispatchAllGroupMatchesR546 = refl
+
+irreducibleFamilyDispatchDensityMeasureMatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.densityToNormalizedFiniteMeasure
+  ≡ R546.familyLevel R546.densityToNormalizedFiniteMeasure
+irreducibleFamilyDispatchDensityMeasureMatchesR546 = refl
+
+irreducibleFamilyDispatchC0MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.c0WilsonLocalObservable
+  ≡ R546.familyLevel R546.c0WilsonLocalObservable
+irreducibleFamilyDispatchC0MatchesR546 = refl
+
+irreducibleFamilyDispatchC1MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.c1MarkedCurvature
+  ≡ R546.familyLevel R546.c1MarkedCurvature
+irreducibleFamilyDispatchC1MatchesR546 = refl
+
+irreducibleFamilyDispatchC2MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.c2PhysicalRemainderTail
+  ≡ R546.familyLevel R546.c2PhysicalRemainderTail
+irreducibleFamilyDispatchC2MatchesR546 = refl
+
+irreducibleFamilyDispatchC3MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.c3AFRecurrence
+  ≡ R546.familyLevel R546.c3AFRecurrence
+irreducibleFamilyDispatchC3MatchesR546 = refl
+
+irreducibleFamilyDispatchC4MatchesR546 :
+  TOE.toeIrreducibleFamilyLevel TOE.c4DensityAnchoredStress
+  ≡ R546.familyLevel R546.c4DensityAnchoredStress
+irreducibleFamilyDispatchC4MatchesR546 = refl
+
+criticalFamilyDispatchA3MatchesR558 :
+  TOE.toeCriticalFamilyLevel TOE.a3SelectedRepresentation
+  ≡ R558.criticalLevel R558.a3SelectedRepresentation
+criticalFamilyDispatchA3MatchesR558 = refl
+
+criticalFamilyDispatchT1MatchesR558 :
+  TOE.toeCriticalFamilyLevel TOE.t1FiniteOSSameFamily
+  ≡ R558.criticalLevel R558.t1FiniteOSSameFamily
+criticalFamilyDispatchT1MatchesR558 = refl
+
+criticalFamilyDispatchT5MatchesR558 :
+  TOE.toeCriticalFamilyLevel TOE.t5QuantitativeSameFamily
+  ≡ R558.criticalLevel R558.t5QuantitativeSameFamily
+criticalFamilyDispatchT5MatchesR558 = refl
+
+criticalFamilyDispatchB1MatchesR558 :
+  TOE.toeCriticalFamilyLevel TOE.b1SourceFirstWilsonWEXT
+  ≡ R558.criticalLevel R558.b1SourceFirstWilsonWEXT
+criticalFamilyDispatchB1MatchesR558 = refl
+
+criticalFamilyDispatchB2MatchesR558 :
+  TOE.toeCriticalFamilyLevel TOE.b2SameHamiltonian
+  ≡ R558.criticalLevel R558.b2SameHamiltonian
+criticalFamilyDispatchB2MatchesR558 = refl
+
+criticalFamilyDispatchG1MatchesR558 :
+  TOE.toeCriticalFamilyLevel TOE.g1ActualCompactSimple
+  ≡ R558.criticalLevel R558.g1ActualCompactSimple
+criticalFamilyDispatchG1MatchesR558 = refl
+
+criticalFamilyDispatchH6MatchesR558 :
+  TOE.toeCriticalFamilyLevel TOE.h6MinimalWardNontriviality
+  ≡ R558.criticalLevel R558.h6MinimalWardNontriviality
+criticalFamilyDispatchH6MatchesR558 = refl
