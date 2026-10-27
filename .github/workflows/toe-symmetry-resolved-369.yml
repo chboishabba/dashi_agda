@@ -122,6 +122,11 @@ jobs:
           dashi-repo discover '369 max cut kernel bidi ternary 27 Monster representation embedding non-promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
           dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo related fleetVectorCoordinateDoesNotCreateTruth --root . --limit 20
+          dashi-repo related fleetExternalCountDoesNotCreateFormalDischarge --root . --limit 20
+          dashi-repo discover 'fleet 584 discharged 58 unformalised formal gaps eigen priority non-promotion' --root . --limit 40
 
       - name: Reject ESD surface changes
         shell: bash
@@ -151,6 +156,7 @@ jobs:
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -173,6 +179,7 @@ jobs:
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
