@@ -1442,3 +1442,9 @@ unifierFleetMetaIntrospectorProofNotBorrowed :
   FleetGapTOE.metaIntrospectorProofBorrowed
     FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierFleetMetaIntrospectorProofNotBorrowed = refl
+
+unifierFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
