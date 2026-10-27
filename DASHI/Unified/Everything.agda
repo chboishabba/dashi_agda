@@ -1,4 +1,8 @@
 module DASHI.Unified.Everything where
+
+-- TOE ternary-27: retain dependent residual; never identify a three-edge boundary with its face.
+import DASHI.ComputerScience.Ternary27ResidualProgramDecisionBridgeExact as Recoverable27TOE
+import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Face27TOE
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 
 open import Agda.Primitive using (Setω)
