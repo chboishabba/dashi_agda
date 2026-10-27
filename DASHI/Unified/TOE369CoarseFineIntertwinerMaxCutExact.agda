@@ -840,13 +840,13 @@ canonicalTOE369MaxCutZKPFrame : TOE369MaxCutZKPFrame
 canonicalTOE369MaxCutZKPFrame =
   toe369-max-cut-zkp-frame
     "Converge Base369 coarse/fine, ternary-27, selected-3B max-cut, kernel-BIDI, Pareto, Snowball, and Ibrahim theorem owners onto one acyclic TOE surface."
-    "Reuse the existing coarse/fine reopening, C3 symmetry, signed phase intertwiner, selected-3B max-cut, same-element BIDI, single-action producer, H-zeta recognition, whole-character Pareto, class-20 kernel Snowball, and Ibrahim reduction owners."
-    "Expose aliases only. Remove the legacy Unifier import from the theorem-bearing core so every TOE facade can consume the same owner without an import cycle."
+    "Reuse the existing coarse/fine reopening, C3 symmetry, signed phase intertwiner, selected-3B max-cut, same-element BIDI, linear-acquisition compiler, shortest-source action-recognition compiler, phase-resolved 12+78 character weld, Base369 recognition acquisition wall, whole-character Pareto, class-20 kernel Snowball, and Ibrahim owners."
+    "Expose aliases only. Reconcile stale frontier splits: action recognition is compiler output from a shortest source; the first constructive recognition wall is the same-source Base369RecognitionCandidate; the same-action Fin90 inertia and 12+78 intertwiner remain downstream."
     "Keep dimension, character, carrier equality, phase reduction, and finite indexing non-promoting. Do not invent a CFFI theorem. Do not edit ESD or digital_esd surfaces."
     "This lane owns only TOE normalization of the existing Max Cut and kernel-BIDI surfaces."
     "All donor owners exist. The requested CFFI label has no literal repository theorem owner, so the exact existing kernel-BIDI owners are the only admissible proof authority."
     "One result keeps one canonical owner. A character does not create an action. A finite chart does not create a representation. A phase-preserving reduction is not global inversion. Same dimension is not same object."
-    "The focused TOE root, Unifier, and Unified aggregate reach the same exact non-promotion and open-frontier terms with no legacy import cycle."
+    "The focused TOE root, Unifier, and Unified aggregate reach the same paid compiler terms and the same exact Base369-recognition and same-action open frontiers with no legacy import cycle."
     "Original mathematical authors and repository theorem owners retain attribution. Meta-introspector repositories remain source context and do not gain DASHI theorem ownership."
     "Run related-symbol, discover, lineage, preflight, trust-escape, ESD-diff, validation, and focused Agda checks. Claim kernel success only from an observed exact-head receipt."
 
