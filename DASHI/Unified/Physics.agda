@@ -388,6 +388,16 @@ yangMillsBalabanR559Gate4InhabitantsLevel : ProofLevel
 yangMillsBalabanR559Gate4InhabitantsLevel =
   BalabanR559TOE.gate4InhabitantsLevel
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+yangMillsBalabanR559CurrentGate4FrontierLedgerLevel : ProofLevel
+yangMillsBalabanR559CurrentGate4FrontierLedgerLevel =
+  BalabanR559TOE.currentGate4FrontierLedgerLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559CurrentGate4PostulateFreeSurfaceLevel : ProofLevel
+yangMillsBalabanR559CurrentGate4PostulateFreeSurfaceLevel =
+  BalabanR559TOE.currentGate4PostulateFreeSurfaceLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
 
 yangMillsBalabanScaleTransferNonPromotion :
   BalabanR559TOE.ScaleTransferPromotion → ⊥
