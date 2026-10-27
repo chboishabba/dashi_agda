@@ -9,3 +9,6 @@ import DASHI.Unified.TOELegalGovernanceHandoffExact
 import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
+
+import DASHI.Unified.ArithmeticMoonshine
+import DASHI.Moonshine.OggSSPP2F4CurveShearReflectionExact
