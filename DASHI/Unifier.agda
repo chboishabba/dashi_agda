@@ -886,3 +886,63 @@ toeExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 toeExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+------------------------------------------------------------------------
+-- Direct governed legal-workflow firewalls.
+-- Proof authority remains in GovernanceTOE and its original donors.
+------------------------------------------------------------------------
+
+unifierDurableReviewStateDoesNotCreateTruth :
+  GovernanceTOE.DurableReviewStateCreatesTruth → ⊥
+unifierDurableReviewStateDoesNotCreateTruth =
+  GovernanceTOE.toeDurableReviewStateDoesNotCreateTruth
+
+unifierAcceptanceReceiptDoesNotMutateMatter :
+  GovernanceTOE.AcceptanceReceiptMutatesMatter → ⊥
+unifierAcceptanceReceiptDoesNotMutateMatter =
+  GovernanceTOE.toeAcceptanceReceiptDoesNotMutateMatter
+
+unifierExternalSourceDoesNotAdmitTruth :
+  GovernanceTOE.ExternalSourceClaimImpliesTruthAdmitted → ⊥
+unifierExternalSourceDoesNotAdmitTruth =
+  GovernanceTOE.toeExternalSourceDoesNotAdmitTruth
+
+unifierLegalAuthorityDoesNotCreateTruthStatus :
+  GovernanceTOE.LegalAuthorityCreatesTruthStatus → ⊥
+unifierLegalAuthorityDoesNotCreateTruthStatus =
+  GovernanceTOE.toeLegalAuthorityDoesNotCreateTruthStatus
+
+unifierPromotionStageDoesNotBypassPromotionAuthority :
+  GovernanceTOE.PromotionStageMaySkipPromotionAuthority → ⊥
+unifierPromotionStageDoesNotBypassPromotionAuthority =
+  GovernanceTOE.toePromotionStageDoesNotBypassPromotionAuthority
+
+unifierSourceRealisedWrongTypeDoesNotAutoViolate :
+  GovernanceTOE.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
+unifierSourceRealisedWrongTypeDoesNotAutoViolate =
+  GovernanceTOE.toeSourceRealisedWrongTypeDoesNotAutoViolate
+
+unifierElementsDoNotEraseExceptionsOrDefences :
+  GovernanceTOE.AllElementsProvedIgnoresExceptionsDefences → ⊥
+unifierElementsDoNotEraseExceptionsOrDefences =
+  GovernanceTOE.toeElementsDoNotEraseExceptionsOrDefences
+
+unifierKernelClosureDoesNotMeanSemanticClosure =
+  GovernanceTOE.toeKernelClosureDoesNotMeanSemanticClosure
+
+unifierFormalProofDoesNotCreateExternalWorldTruth =
+  GovernanceTOE.toeFormalProofDoesNotCreateExternalWorldTruth
+
+unifierComplianceCompositionRetainsIntermediateWitness =
+  GovernanceTOE.complianceCompositionRetainsIntermediateWitnessIsTrue
+    GovernanceTOE.canonicalGovernedLegalWorkflowTOEBoundary
+
+unifierSameLegalSystemDoesNotCloseAuthority =
+  GovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifierDocumentRoleDoesNotSupplyLegalSourceAuthority =
+  GovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+unifierCanonicalLegalSourceAuthorityBoundary =
+  GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
+
