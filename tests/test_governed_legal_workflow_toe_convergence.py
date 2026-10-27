@@ -280,3 +280,38 @@ def test_unified_facade_reexports_new_governance_firewalls():
         "governedProducerIdentityDoesNotIdentifyResidual",
     ):
         assert token in unified
+
+
+def test_legal_source_authority_handoff_is_exact():
+    bridge = read(BRIDGE)
+    regression = read(REGRESSION)
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+
+    assert "SensibLawLegalSourceAuthorityEvidenceExact as LegalAuthority" in bridge
+    for token in (
+        "toeCandidateSourceDoesNotCloseAuthority",
+        "toeCurrentValidityDoesNotAutomaticallyEstablishApplicability",
+        "toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority",
+    ):
+        assert token in bridge
+
+    for text, prefix in (
+        (toe, "toe369"),
+        (unifier, "unifier"),
+        (unified, "unified"),
+    ):
+        for suffix in (
+            "LegalCandidateIsNotAuthority",
+            "LegalValidityIsNotApplicability",
+            "SemanticAdmissionIsNotLegalAuthority",
+        ):
+            assert prefix + suffix in text
+
+    for token in (
+        "unifierLegalCandidateIsNotAuthority",
+        "unifierLegalValidityIsNotApplicability",
+        "unifierSemanticAdmissionIsNotLegalAuthority",
+    ):
+        assert token in regression
