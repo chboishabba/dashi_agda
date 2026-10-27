@@ -61,6 +61,16 @@ paretoTernaryBidiBoundary :
 paretoTernaryBidiBoundary =
   Pareto.canonicalOrderSensitiveParetoTernaryBidiBoundary
 
+contextualIbrahimRecognitionParetoBoundary :
+  ZKP.RecognitionRouteParetoBoundary
+contextualIbrahimRecognitionParetoBoundary =
+  ZKP.ibrahimRecognitionParetoBoundary
+
+contextualIbrahimPhaseResolutionFrontier :
+  ZKP.InertiaPhaseResolutionFrontier
+contextualIbrahimPhaseResolutionFrontier =
+  ZKP.ibrahimPhaseResolutionFrontier
+
 spacy369MonsterBoundary :
   MonsterBoundary.Spacy369CoverageHyperfabricMonsterBoundary
 spacy369MonsterBoundary =
@@ -164,6 +174,16 @@ fleetContradictionGapsRemainSeparate :
 fleetContradictionGapsRemainSeparate =
   Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
 
+ibrahimSearchPriorityDoesNotCreateProof :
+  ZKP.SearchPriorityCreatesProof → ⊥
+ibrahimSearchPriorityDoesNotCreateProof =
+  ZKP.searchPriorityDoesNotCreateProof
+
+ibrahimProducerSourceDoesNotCreateRunReceipt :
+  ZKP.ProducerSourceCreatesRunReceipt → ⊥
+ibrahimProducerSourceDoesNotCreateRunReceipt =
+  ZKP.producerSourceDoesNotCreateRunReceipt
+
 ------------------------------------------------------------------------
 -- Normalized receipt.
 ------------------------------------------------------------------------
@@ -183,6 +203,10 @@ record ContextualSemanticFractranTOEMaxCutReceipt : Set₁ where
       SSSP.ThreadCoverage
     paretoBoundary :
       Pareto.OrderSensitiveParetoTernaryBidiBoundary
+    ibrahimRecognitionPareto :
+      ZKP.RecognitionRouteParetoBoundary
+    ibrahimPhaseResolution :
+      ZKP.InertiaPhaseResolutionFrontier
     monsterBoundary :
       MonsterBoundary.Spacy369CoverageHyperfabricMonsterBoundary
     fleetBoundary :
@@ -209,6 +233,8 @@ canonicalContextualSemanticFractranTOEMaxCutReceipt =
     antisymmetricRelationFractranBoundary
     ssspSemanticFractranCoverage
     paretoTernaryBidiBoundary
+    contextualIbrahimRecognitionParetoBoundary
+    contextualIbrahimPhaseResolutionFrontier
     spacy369MonsterBoundary
     fleetScope
     fleetDischargedFibreCount
