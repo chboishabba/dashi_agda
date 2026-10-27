@@ -275,9 +275,9 @@ currentMillenniumExternalAcceptanceReceipt :
 currentMillenniumExternalAcceptanceReceipt =
   millennium-external-acceptance-receipt
     "chboishabba/dashi_lean4"
-    "#45"
-    "agent/millennium-external-target-adapters-20261006"
-    "9ab3f6a852af95061cd7ba5a890767ba7c1a1817"
+    "#53"
+    "agent/millennium-submission-maxcut-restacked-20261007"
+    "e34477885ad64cb569a17e1a663092cd3fd783d3"
     "lean-dojo/LeanMillenniumPrizeProblems"
     "603053dc267cf3efe422f438eb78098c0ececd6f"
     "vendor/LeanMillenniumPrizeProblems"
@@ -286,9 +286,9 @@ currentMillenniumExternalAcceptanceReceipt =
     "MillenniumBirchSwinnertonDyer.ClayBirchSwinnertonDyer"
     "MillenniumHodge.ClayHodge"
     "MillenniumYangMills.ClayYangMills"
-    "Synthesis.RiemannSelectedRHMaxCutFrontier"
-    "ExternalClayNS/LiteralABCD.lean"
-    "Synthesis/MillenniumBSDUniversalRankWeld.lean"
+    "MillenniumExternal/ExactTargetSurface.lean"
+    "ExternalClayNS/LeanDojoExactTerminal.lean"
+    "Synthesis/MillenniumBSDProjectiveRankWeld.lean"
     "Welds/YMClayAssembly.lean"
     true
     true
