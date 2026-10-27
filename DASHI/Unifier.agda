@@ -1,5 +1,6 @@
 module DASHI.Unifier where
 
+import DASHI.Unified.TOELegalGovernanceHandoffExact as TOELegalGovernance
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
