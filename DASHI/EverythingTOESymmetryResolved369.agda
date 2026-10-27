@@ -807,3 +807,34 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4CountEqualitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Typed Balaban continuum no-go and live Gate-4 frontier.
+------------------------------------------------------------------------
+
+toeBalabanContinuumPromotionImpossible :
+  FleetHyperTOE.BalabanContinuumPromotion → ⊥
+toeBalabanContinuumPromotionImpossible =
+  FleetHyperTOE.toeBalabanContinuumPromotionImpossible
+
+toeDepthContinuumPromotionImpossible :
+  FleetHyperTOE.DepthContinuumPromotion → ⊥
+toeDepthContinuumPromotionImpossible =
+  FleetHyperTOE.toeDepthContinuumPromotionImpossible
+
+toeCurrentGate4FrontierLedgerLevel : ProofLevel
+toeCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+toeCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+toeCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+toeFleetFormalGapTargetSelected : Bool
+toeFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+toeHistoricalGate4CountSelectedAsFleetTarget : Bool
+toeHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
