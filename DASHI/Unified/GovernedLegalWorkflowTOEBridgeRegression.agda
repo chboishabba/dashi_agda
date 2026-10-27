@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression where
 
 open import Agda.Builtin.Bool using (false; true)
