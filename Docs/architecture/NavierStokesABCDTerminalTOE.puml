@@ -1,0 +1,55 @@
+@startuml
+title DASHI TOE — NS ABCD terminal convergence
+
+package "Canonical theorem owners" {
+  component "NSClayFacingABCDProofStatusExact" as ABCD
+  component "NSClayFacingBPureAnalysisFrontier20261005Exact" as B
+  component "R823 SignedComparableReserve" as R823
+  component "R853 CanonicalSelectedRateNormalForm" as R853
+  component "BalabanIbrahimParetoSnowballTOEExact" as BI
+}
+
+package "TOE normalization" {
+  component "NavierStokesABCDTerminalTOEExact" as T
+  component "NavierStokesABCDTerminalTOEValidation" as V
+}
+
+package "Root consumers" {
+  component "EverythingTOESymmetryResolved369" as E
+  component "Unifier" as U
+  component "Unified.Everything" as UE
+}
+
+ABCD --> T : A/B/C/D authority + status
+B --> T : current B pure-analysis frontier
+R823 --> T : reserve/demand analytic leaf
+R853 --> T : selected-rate normal form
+BI --> T : Balaban non-promotion + Ibrahim Pareto/snowball
+
+T --> E : canonical receipt
+T --> U : canonical receipt
+T --> UE : canonical receipt
+
+E --> V
+U --> V
+UE --> V
+T --> V
+
+note right of T
+O: converge terminal proof status
+R: reuse canonical owners
+C: one facade only
+S: no false promotion
+L: disjoint TOE lane
+P: owners exist, ESD read-only
+G: governance lenses are not certification
+F: roots agree, open leaves remain open
+end note
+
+note bottom of T
+No ESD mutation.
+No Clay promotion.
+No Balaban continuum promotion.
+No Monster recognition promotion.
+end note
+@enduml
