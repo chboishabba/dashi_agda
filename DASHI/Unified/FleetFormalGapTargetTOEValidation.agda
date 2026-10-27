@@ -32,45 +32,52 @@ unifierFleetZKPFrameMatchesOwner :
 unifierFleetZKPFrameMatchesOwner = refl
 
 toeEigenPriorityStillNotProof :
-  Fleet.FleetEigenPriorityCreatesProof → ⊥
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 toeEigenPriorityStillNotProof =
   TOE.toeFleetEigenPriorityDoesNotCreateProof
 
 unifierEigenPriorityStillNotProof :
-  Fleet.FleetEigenPriorityCreatesProof → ⊥
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierEigenPriorityStillNotProof =
   Unifier.unifierFleetEigenPriorityDoesNotCreateProof
 
 toeExternalCountStillNotDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 toeExternalCountStillNotDischarge =
   TOE.toeFleetExternalCountDoesNotCreateFormalDischarge
 
 unifierExternalCountStillNotDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierExternalCountStillNotDischarge =
   Unifier.unifierFleetExternalCountDoesNotCreateFormalDischarge
 
 toeDischargedFibresRemainExcluded :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ true
 toeDischargedFibresRemainExcluded =
   TOE.toeFleetDischargedFibresRemainOutOfTarget
 
 unifierDischargedFibresRemainExcluded :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ true
 unifierDischargedFibresRemainExcluded =
   Unifier.unifierFleetDischargedFibresRemainOutOfTarget
 
 toeContradictionGapsRemainSeparate :
-  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+  Fleet.contradictionGapsRemainSeparate
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ true
 toeContradictionGapsRemainSeparate =
   TOE.toeFleetContradictionGapsRemainSeparate
 
 unifierContradictionGapsRemainSeparate :
-  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+  Fleet.contradictionGapsRemainSeparate
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ true
 unifierContradictionGapsRemainSeparate =
   Unifier.unifierFleetContradictionGapsRemainSeparate
-
 
 toeFleetPlanningBoundaryMatchesOwner :
   TOE.toeFleetPlanningBoundary ≡ Fleet.fleetPlanningBoundary
