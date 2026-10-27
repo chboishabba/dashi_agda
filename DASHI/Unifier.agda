@@ -2,6 +2,8 @@ module DASHI.Unifier where
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -313,3 +315,29 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- ZKP convergence frame.
+--
+-- This is an organizational carrier only.
+-- It does not create mathematical or external authority.
+-- O/R/C/S/L/P/G/F follow the repository semantic-promotion convention.
+------------------------------------------------------------------------
+
+record ZKPConvergenceFrame : Set where
+  constructor zkpConvergenceFrame
+  field
+    O : String
+    R : String
+    C : String
+    S : String
+    L : String
+    P : String
+    G : String
+    F : String
+    preconditions : List String
+    invariants : List String
+    postconditions : List String
+
+open ZKPConvergenceFrame public
