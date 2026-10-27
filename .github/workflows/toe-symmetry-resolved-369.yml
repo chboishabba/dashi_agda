@@ -104,12 +104,14 @@ jobs:
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
           dashi-repo related balabanGeneratedActionStressScaleCompilerLevel --root . --limit 20
           dashi-repo related balabanPublishedRGPhysicalSameObjectLevel --root . --limit 20
+          dashi-repo related balabanSummableRGIncrementCauchyCompilerLevel --root . --limit 20
+          dashi-repo related balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel --root . --limit 20
           dashi-repo related balabanContinuumRouteMassGapPromotionStillOpen --root . --limit 20
           dashi-repo related balabanScaleDensityFiniteMeasureWeldLevel --root . --limit 20
           dashi-repo related balabanRegularELocalizationCarrierLevel --root . --limit 20
           dashi-repo related balabanCasimirLowerBoundTransportLevel --root . --limit 20
           dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
-          dashi-repo discover 'Balaban scale density regular-E localization Casimir stress Cauchy telescope Schwinger same-family RG continuum non-promotion' --root .
+          dashi-repo discover 'Balaban scale density regular-E localization Casimir stress Cauchy telescope Schwinger same-family summable increment dyadic RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
