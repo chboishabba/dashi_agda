@@ -134,6 +134,14 @@ yangMillsTOECanonicalCompleteDensityLevel : ProofLevel
 yangMillsTOECanonicalCompleteDensityLevel =
   YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
 
+yangMillsTOEGeneratedActionDensityCompilerLevel : ProofLevel
+yangMillsTOEGeneratedActionDensityCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
+
+yangMillsTOECombinedRGUnifiedActionCompilerLevel : ProofLevel
+yangMillsTOECombinedRGUnifiedActionCompilerLevel =
+  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
+
 yangMillsTOEStressScaleCompilerLevel : ProofLevel
 yangMillsTOEStressScaleCompilerLevel =
   YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
