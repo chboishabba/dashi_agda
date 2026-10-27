@@ -170,6 +170,9 @@ jobs:
           dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
+          dashi-repo related fleet58CardinalityDoesNotProveYMGate4Identity --root . --limit 20
+          dashi-repo related ymGate4PaidReductionLevel --root . --limit 20
+          dashi-repo discover 'fleet 584 discharged 44 contradiction 58 formal gaps Yang Mills Gate 4 same object non promotion Ibrahim' --root . --limit 50
           dashi-repo diagnose DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda --root .
           dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
           dashi-repo related collisionRefutesSufficiency --root . --limit 20
