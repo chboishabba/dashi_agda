@@ -209,3 +209,40 @@ Unifier --> TOE : facade compatibility
 
 @enduml
 ```
+
+
+## Exact-live acquisition and semantic-authority max-cut
+
+The final reuse audit found two newer canonical owners already present on the branch.
+
+- `DASHI.Interop.SensibLawSemanticPromotionPolicy`
+- `DASHI.Core.BoundAcquisitionDemandExact`
+
+The normalized bridge now reuses their exact proof terms.
+
+It proves that semantic promotion creates no truth authority.
+It proves that semantic promotion creates no legal authority.
+It proves that semantic promotion creates no generic authority.
+It proves that a bound acquisition does not pay its selected requirement.
+It proves that a bound acquisition does not close its consumer.
+It proves that producer identity does not identify a residual.
+
+These results are direct aliases.
+The bridge adds no new semantic or legal rule.
+
+The same proof terms are reachable through:
+
+- `DASHI.EverythingTOESymmetryResolved369`
+- `DASHI.Unifier`
+- `DASHI.Unified.Everything`
+
+The regression binds the Unifier aliases to the canonical bridge.
+The deterministic Python contract checks all three facade surfaces.
+
+This closes the generic Actionstep-style handoff at the existing task, review, matter, admission, applicability, semantic-promotion, and exact-live acquisition boundaries.
+No Actionstep-specific ontology is added.
+
+The exact branch remains fail-closed.
+No ESD path is changed.
+No standards certification is claimed.
+No meta-introspector theorem authority is imported.
