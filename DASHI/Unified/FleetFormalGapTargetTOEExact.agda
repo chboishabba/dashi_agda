@@ -112,10 +112,14 @@ fleetVectorCoordinateDoesNotCreateTruth :
 fleetVectorCoordinateDoesNotCreateTruth =
   Rebuild.vectorCoordinateTruthFalse
 
-fleetPlanningTextDoesNotCreateFormalResidual :
+PlanningSourceTextFormalResidualFlag : Set
+PlanningSourceTextFormalResidualFlag =
   Planning.PNFPlanningAdapterBoundary.sourceTextAloneCreatesFormalResidual
     Planning.canonicalPNFPlanningAdapterBoundary
   ≡ false
+
+fleetPlanningTextDoesNotCreateFormalResidual :
+  PlanningSourceTextFormalResidualFlag
 fleetPlanningTextDoesNotCreateFormalResidual =
   Planning.PNFPlanningAdapterBoundary.sourceTextAloneCreatesFormalResidualIsFalse
     Planning.canonicalPNFPlanningAdapterBoundary
