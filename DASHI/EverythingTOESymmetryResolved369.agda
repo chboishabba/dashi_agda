@@ -804,8 +804,6 @@ toeFleetGate4CountAgreement =
   FleetHyperTOE.fleetFormalGapCountEqualsGate4Count
 
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.EqualCardinality.equalCardinalitySelectsCanonicalMap
-    FleetHyperTOE.fleetGate4EqualCardinalityBoundary
-  ≡ false
+  FleetHyperTOE.fleetGate4CountEqualitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
