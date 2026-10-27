@@ -69,14 +69,17 @@ def check_s3():
                 correction(tau, abc) + correction(sigma, act(tau, abc)))
             assert torque(act(sigma, abc)) == parity(sigma) * torque(abc)
     assert Counter(map(torque, DIGITS)) == {0: 21, 1: 3, -1: 3}
-    # The six ABC permutations on every all-distinct ordered cube
-    # yield six different (orientation parity, C3 carry-correction)
-    # pairs. A set-level C2 x C3 chart, NOT a group-law equality.
+    # IMPORTANT: S3 has six elements, but its (orientation parity,
+    # C3 address correction) image is generally NOT injective.
+    # Keep the full permutation or a consumer-sufficient residual.
+    image_sizes=[]
     for abc in DIGITS:
-        if len(set(abc)) < 3: continue
-        pairs={(parity(p), correction(p, abc)) for p in PERMS}
-        assert pairs == {(sign, Fraction(k, 3)) for sign in (-1, 1) for k in range(3)}
-    print("PASS six (C2 parity, C3 carry) charts on nondegenerate ABC cubes")
+        if len(set(abc))<3: continue
+        pairs={(parity(p), correction(p,abc)) for p in PERMS}
+        image_sizes.append(len(pairs))
+        assert 2 <= len(pairs) < 6
+    assert sorted(image_sizes)==[2,2,4,4,4,4]
+    print("PASS: all-distinct ABC signed/carry collisions retained", sorted(image_sizes))
     print("PASS S3 ABC composition / additive phase cocycle / torque sign")
 
 def check_99_and_reflection():
