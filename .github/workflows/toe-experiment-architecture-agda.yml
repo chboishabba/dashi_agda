@@ -68,7 +68,7 @@ jobs:
       - name: Install DASHI repository referee
         run: python -m pip install -e './tools/agda_preflight[test,mcp]'
 
-      - name: Referee R474 to R559 normalization
+      - name: Referee R485 to R559 normalization
         shell: bash
         run: |
           set -euo pipefail
@@ -78,11 +78,11 @@ jobs:
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unified/Physics.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact.a1CurrentStepBetaSourceLevel --root . --limit 20
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact.bLiteralPublishedSelectedLocalizationLevel --root . --limit 20
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact.cExactSameFamilySourceCutLevel --root . --limit 20
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact.g2SameSystemClayNontrivialitySemanticsLevel --root . --limit 20
-          dashi-repo discover 'Yang Mills Goal1 R474 R559 TOE current frontier non-promotion' --root . --limit 40
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.a1CurrentStepBetaSourceLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.bLiteralPublishedSelectedLocalizationLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.cExactSameFamilySourceCutLevel --root . --limit 20
+          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.g2SameSystemClayNontrivialitySemanticsLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 R485 R559 TOE maximum cut non-promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsTOEConvergence --root .
 
@@ -122,7 +122,7 @@ jobs:
             fi
           done
 
-      - name: Kernel-check R474 Goal-1 TOE graph
+      - name: Kernel-check R485 Goal-1 TOE graph
         shell: bash
         run: |
           set -euo pipefail
