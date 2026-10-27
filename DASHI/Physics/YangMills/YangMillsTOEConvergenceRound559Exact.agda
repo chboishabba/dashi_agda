@@ -537,6 +537,58 @@ toeGoal1A5FiniteGrowthLevel : ProofLevel
 toeGoal1A5FiniteGrowthLevel =
   R485.a5FiniteGrowthFromQuantitativeBoundsLevel
 
+toeGoal1FiniteEuclideanSameObjectAttachmentLevel : ProofLevel
+toeGoal1FiniteEuclideanSameObjectAttachmentLevel =
+  R485.aFiniteEuclideanSameObjectAttachmentLevel
+
+toeGoal1FiniteBosonicSameObjectAttachmentLevel : ProofLevel
+toeGoal1FiniteBosonicSameObjectAttachmentLevel =
+  R485.aFiniteBosonicSameObjectAttachmentLevel
+
+toeGoal1FiniteWilsonRPSameObjectAttachmentLevel : ProofLevel
+toeGoal1FiniteWilsonRPSameObjectAttachmentLevel =
+  R485.aFiniteWilsonRPSameObjectAttachmentLevel
+
+toeGoal1A3StressDensityIsLiteralFiniteMeasureLevel : ProofLevel
+toeGoal1A3StressDensityIsLiteralFiniteMeasureLevel =
+  R485.a3StressDensityIsLiteralFiniteMeasureLevel
+
+toeGoal1A3FiniteFamilyContinuumLimitLevel : ProofLevel
+toeGoal1A3FiniteFamilyContinuumLimitLevel =
+  R485.a3FiniteFamilyContinuumLimitLevel
+
+toeGoal1A3LiteralSchwingerBelongsLevel : ProofLevel
+toeGoal1A3LiteralSchwingerBelongsLevel =
+  R485.a3LiteralSchwingerBelongsLevel
+
+toeGoal1A3SourceOSIsLiteralSchwingerLevel : ProofLevel
+toeGoal1A3SourceOSIsLiteralSchwingerLevel =
+  R485.a3SourceOSIsLiteralSchwingerLevel
+
+toeGoal1A3FiniteProjectiveCylinderPremeasureLevel : ProofLevel
+toeGoal1A3FiniteProjectiveCylinderPremeasureLevel =
+  R485.a3FiniteProjectiveCylinderPremeasureLevel
+
+toeGoal1A3RepresentedLiteralSemanticsLevel : ProofLevel
+toeGoal1A3RepresentedLiteralSemanticsLevel =
+  R485.a3RepresentedLiteralSemanticsLevel
+
+toeGoal1A45QuantitativeFiniteExpectationAttachmentLevel : ProofLevel
+toeGoal1A45QuantitativeFiniteExpectationAttachmentLevel =
+  R485.a45QuantitativeFiniteExpectationAttachmentLevel
+
+toeGoal1A45RepresentedOSPredicateExtensionalityLevel : ProofLevel
+toeGoal1A45RepresentedOSPredicateExtensionalityLevel =
+  R485.a45RepresentedOSPredicateExtensionalityLevel
+
+toeGoal1A4RepresentedRegularityExtensionalityLevel : ProofLevel
+toeGoal1A4RepresentedRegularityExtensionalityLevel =
+  R485.a4RepresentedRegularityExtensionalityLevel
+
+toeGoal1A5RepresentedGrowthExtensionalityLevel : ProofLevel
+toeGoal1A5RepresentedGrowthExtensionalityLevel =
+  R485.a5RepresentedGrowthExtensionalityLevel
+
 toeGoal1BWilsonTwoInsertionConnectedShellLevel : ProofLevel
 toeGoal1BWilsonTwoInsertionConnectedShellLevel =
   R485.bWilsonTwoInsertionConnectedShellLevel
@@ -605,6 +657,10 @@ toeGoal1PostHocContinuumMeasureWeldMandatory : Bool
 toeGoal1PostHocContinuumMeasureWeldMandatory =
   R485.postHocContinuumMeasureFunctionalWeldMandatory
 
+toeGoal1PostHocSchwingerEqualityMandatory : Bool
+toeGoal1PostHocSchwingerEqualityMandatory =
+  R485.postHocSchwingerEqualityMandatory
+
 toeGoal1HistoricalSelectedJMinCutMandatory : Bool
 toeGoal1HistoricalSelectedJMinCutMandatory =
   R485.historicalSelectedJMinCutMandatory
@@ -616,6 +672,14 @@ toeGoal1CompatibilityBRouteMandatory =
 toeGoal1ArbitraryPositiveGapTokenMandatory : Bool
 toeGoal1ArbitraryPositiveGapTokenMandatory =
   R485.arbitraryPositiveGapTokenMandatory
+
+toeGoal1CMP109PolarizationDetourMandatory : Bool
+toeGoal1CMP109PolarizationDetourMandatory =
+  R485.cmp109PolarizationDetourMandatory
+
+toeGoal1PrintedBalabanJEqualsWilsonObservableMandatory : Bool
+toeGoal1PrintedBalabanJEqualsWilsonObservableMandatory =
+  R485.printedBalabanJEqualsWilsonObservableMandatory
 
 toeGoal1SU2ValidationMandatoryForGenericG : Bool
 toeGoal1SU2ValidationMandatoryForGenericG =
