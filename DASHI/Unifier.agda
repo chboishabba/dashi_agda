@@ -1675,6 +1675,8 @@ toeBrainJPromotionBlocked :
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
 
 
+import DASHI.Law.SensibLawITIRParityEverything as LegalGovernance
+
 ------------------------------------------------------------------------
 -- Canonical legal-governance, Fleet motif, and evidence handoff.
 ------------------------------------------------------------------------
@@ -1747,3 +1749,31 @@ unifierEvidenceDoesNotCreateDigitalESDAdmission :
   SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
 unifierEvidenceDoesNotCreateDigitalESDAdmission =
   SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
+
+------------------------------------------------------------------------
+-- Exact legal/compliance non-promotion projection.
+------------------------------------------------------------------------
+
+unifierLegalReviewDoesNotCreateClaimTruth =
+  LegalGovernance.selectedLegalReviewDoesNotCreateClaimTruth
+
+unifierQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernance.selectedQualificationDoesNotAutomaticallyProveForensicCompliance
+
+unifierReportAdmissionDoesNotRepairMissingInput =
+  LegalGovernance.selectedReportAdmissionDoesNotRepairMissingInput
+
+unifierOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalGovernance.selectedOfficialLegalSurfaceDoesNotRecoverFineState
+
+unifierOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalGovernance.selectedOfficialActionDoesNotRecoverAutonomyAndAuthority
+
+unifierLegalityAloneDoesNotCreateLegitimacy =
+  LegalGovernance.selectedLegalityAloneDoesNotCreateLegitimacy
+
+unifierMissingAdmissibilityStillAbstains =
+  LegalGovernance.selectedMissingAdmissibilityStillAbstains
+
+unifierMissingValidationStillAbstains =
+  LegalGovernance.selectedMissingValidationStillAbstains
