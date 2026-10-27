@@ -185,7 +185,78 @@ downstream279IsNotAThirdProducer :
 downstream279IsNotAThirdProducer = refl
 
 ------------------------------------------------------------------------
--- 4. ZKP O/R/C/S/L/P/G/F frame.
+-- 4. Stable normalized flags for TOE consumers.
+------------------------------------------------------------------------
+
+bareM22FivePairCompletionPaidFlag : Bool
+bareM22FivePairCompletionPaidFlag =
+  M22.M22RuntimeMaxCutStatus.bareM22FivePairCompletionObserved
+    M22.canonicalM22RuntimeMaxCutStatus
+
+bareM22FivePairCompletionPaidFlagIsFalse :
+  bareM22FivePairCompletionPaidFlag ≡ false
+bareM22FivePairCompletionPaidFlagIsFalse = refl
+
+formalSourceActionPaidFlag : Bool
+formalSourceActionPaidFlag =
+  EqWeld.EquivariantWeldCompressionStatus.formalSourceNativeCentralizerActionObjectInstantiated
+    EqWeld.canonicalEquivariantWeldCompressionStatus
+
+formalSourceActionPaidFlagIsFalse :
+  formalSourceActionPaidFlag ≡ false
+formalSourceActionPaidFlagIsFalse =
+  formalSourceActionStillOpen
+
+weldEquivariancePaidFlag : Bool
+weldEquivariancePaidFlag =
+  EqWeld.EquivariantWeldCompressionStatus.literalTateExteriorWeldEquivariancePaid
+    EqWeld.canonicalEquivariantWeldCompressionStatus
+
+weldEquivariancePaidFlagIsFalse :
+  weldEquivariancePaidFlag ≡ false
+weldEquivariancePaidFlagIsFalse =
+  weldEquivarianceStillOpen
+
+terminalQ10RecognitionPaidFlag : Bool
+terminalQ10RecognitionPaidFlag =
+  Terminal.Terminal2BMaxCut.sameObjectQ10AndOuterDescentPaid
+    Terminal.canonicalTerminal2BMaxCut
+
+terminalQ10RecognitionPaidFlagIsFalse :
+  terminalQ10RecognitionPaidFlag ≡ false
+terminalQ10RecognitionPaidFlagIsFalse =
+  terminalQ10SameObjectStillOpen
+
+terminalDefectSourcePaidFlag : Bool
+terminalDefectSourcePaidFlag =
+  Terminal.Terminal2BMaxCut.independentTwoBitDefectSourcePaid
+    Terminal.canonicalTerminal2BMaxCut
+
+terminalDefectSourcePaidFlagIsFalse :
+  terminalDefectSourcePaidFlag ≡ false
+terminalDefectSourcePaidFlagIsFalse =
+  terminalDefectSourceStillOpen
+
+p31SameObjectPromotionPaidFlag : Bool
+p31SameObjectPromotionPaidFlag =
+  PostSocle.PostSocleMaxCutStatus.downstream31Paid
+    PostSocle.canonicalPostSocleMaxCutStatus
+
+p31SameObjectPromotionPaidFlagIsFalse :
+  p31SameObjectPromotionPaidFlag ≡ false
+p31SameObjectPromotionPaidFlagIsFalse = refl
+
+twoSevenNineSameObjectPromotionPaidFlag : Bool
+twoSevenNineSameObjectPromotionPaidFlag =
+  PostSocle.PostSocleMaxCutStatus.downstream279Paid
+    PostSocle.canonicalPostSocleMaxCutStatus
+
+twoSevenNineSameObjectPromotionPaidFlagIsFalse :
+  twoSevenNineSameObjectPromotionPaidFlag ≡ false
+twoSevenNineSameObjectPromotionPaidFlagIsFalse = refl
+
+------------------------------------------------------------------------
+-- 5. ZKP O/R/C/S/L/P/G/F frame.
 ------------------------------------------------------------------------
 
 record OggSSP2BTOEZKPFrame : Set where
@@ -217,7 +288,7 @@ canonicalOggSSP2BTOEZKPFrame =
     "Verify owner reuse, exact residual counts, fail-closed 31/279 gates, trust-escape absence, ESD diff absence, and exact-head Agda checks."
 
 ------------------------------------------------------------------------
--- 5. Compact normalized receipt.
+-- 6. Compact normalized receipt.
 ------------------------------------------------------------------------
 
 record OggSSP2BTOEReceipt : Set where
