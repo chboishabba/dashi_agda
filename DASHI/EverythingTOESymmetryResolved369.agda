@@ -1137,3 +1137,60 @@ toeBalabanPhysicalPromotionCut =
   toeBalabanBlockSpinStillBlocked ,
   (toeBalabanUniformKPStillBlocked ,
    toeBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Current-master cross-domain max-cut and contextual 369 handoff.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
+import DASHI.Core.GovernanceTrajectoryRealisationExact as CurrentTrajectory
+import DASHI.Foundations.SSPTritCarrier as CurrentSSP
+
+toeCurrentMaxCutGovernanceFleetReceipt :
+  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
+toeCurrentMaxCutGovernanceFleetReceipt =
+  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
+
+toeCurrent369ContextualFibreWeldReceipt :
+  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
+toeCurrent369ContextualFibreWeldReceipt =
+  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
+
+toeCurrent369DecisionSheetStatesIsNine :
+  CurrentMaxCut.decisionSheetStateCount ≡ 9
+toeCurrent369DecisionSheetStatesIsNine =
+  CurrentMaxCut.decisionSheetStateCountIsNine
+
+toeCurrent369InteractionCubeStatesIsTwentySeven :
+  CurrentMaxCut.interactionCubeStateCount ≡ 27
+toeCurrent369InteractionCubeStatesIsTwentySeven =
+  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
+
+toeCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
+  CurrentMaxCut.appraisalFibreStateCount ≡ 729
+toeCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
+  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
+
+toeCurrent369SupportIsPositive :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.supports
+  ≡ CurrentSSP.sspPosOne
+toeCurrent369SupportIsPositive =
+  CurrentMaxCut.supportOrientationIsPositive
+
+toeCurrent369CounterIsNegative :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.counters
+  ≡ CurrentSSP.sspNegOne
+toeCurrent369CounterIsNegative =
+  CurrentMaxCut.counterOrientationIsNegative
+
+toeCurrent369SynthesisDoesNotEraseComparator :
+  CurrentMaxCut.synthesisErasesComparator ≡ false
+toeCurrent369SynthesisDoesNotEraseComparator =
+  CurrentMaxCut.synthesisErasesComparatorIsFalse
+
+toeCurrentFiniteRGStillDoesNotPromoteContinuum :
+  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
+toeCurrentFiniteRGStillDoesNotPromoteContinuum =
+  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
