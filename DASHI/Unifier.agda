@@ -13,6 +13,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 -- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
 
 open BalabanRGTOE public using
   ( sourceCouplingIsBetaHistoryCoupling
@@ -680,6 +681,17 @@ unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
 unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 unifierYangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+
+------------------------------------------------------------------------
+-- Direct constructive RG scale-transfer non-promotion facade.
+------------------------------------------------------------------------
+
+unifierBalabanScaleTransferNonPromotion :
+  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferNonPromotion =
+  RGNonPromotion.balabanRGScaleTransferPromotionImpossibleHere
 
 
 ------------------------------------------------------------------------
