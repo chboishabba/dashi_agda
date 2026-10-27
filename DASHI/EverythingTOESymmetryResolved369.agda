@@ -1057,3 +1057,64 @@ toeBalabanOSWightmanStillBlocked :
 toeBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Governed legal workflow x provenance-aware future-safety convergence.
+-- Reuse existing theorem owners. No Actionstep-specific ontology is added.
+------------------------------------------------------------------------
+
+import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as toeOperational
+import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as toeReview
+import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as toeSourceRule
+import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact as toeApplicability
+import DASHI.Core.ITIRGovernanceControlCaseExact as toeControl
+import DASHI.Governance.FormalisationGovernanceCapstoneExact as toeFormalisation
+import DASHI.Core.FrozenProvenanceDynamicRefinementExact as toeFrozen
+
+toeTaskCompletionDoesNotCreateTruth :
+  toeOperational.TaskCompletionCreatesTruth → ⊥
+toeTaskCompletionDoesNotCreateTruth =
+  toeOperational.taskCompletionDoesNotCreateTruth
+
+toeAcceptedReviewDoesNotPayApplicability :
+  toeReview.AcceptedStatusPaysApplicability → ⊥
+toeAcceptedReviewDoesNotPayApplicability =
+  toeReview.acceptedStatusDoesNotPayApplicability
+
+toeCitationDoesNotRealiseLegalRule :
+  toeSourceRule.CitationAloneRealisesLegalRule → ⊥
+toeCitationDoesNotRealiseLegalRule =
+  toeSourceRule.citationAloneDoesNotRealiseLegalRule
+
+toeSemanticMeetDoesNotPayApplicability :
+  toeApplicability.SemanticMeetAloneProvesLegalApplicability → ⊥
+toeSemanticMeetDoesNotPayApplicability =
+  toeApplicability.semanticMeetDoesNotAloneProveLegalApplicability
+
+toePassingControlDoesNotCreateCertification :
+  toeControl.PassingControlMeansCertified → ⊥
+toePassingControlDoesNotCreateCertification =
+  toeControl.passingDoesNotMeanCertified
+
+toeKernelClosureDoesNotCreateSemanticClosure :
+  toeFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
+    toeFormalisation.canonicalThreeStoreyBoundary
+  ≡ false
+toeKernelClosureDoesNotCreateSemanticClosure =
+  toeFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosureIsFalse
+    toeFormalisation.canonicalThreeStoreyBoundary
+
+toeStaticRefinementDoesNotCreateDynamicSafety :
+  toeFrozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+toeStaticRefinementDoesNotCreateDynamicSafety =
+  toeFrozen.staticSeparationDoesNotCreateDynamicSafety
+
+toeFrozenSelectionDoesNotCreateDynamicSafety :
+  toeFrozen.FrozenSelectionCreatesDynamicSafetyPermission → ⊥
+toeFrozenSelectionDoesNotCreateDynamicSafety =
+  toeFrozen.frozenSelectionDoesNotCreateDynamicSafety
+
+toeProvenanceDoesNotCreateTruth :
+  toeFrozen.ProvenanceAxisCreatesTruthPermission → ⊥
+toeProvenanceDoesNotCreateTruth =
+  toeFrozen.provenanceAxisDoesNotCreateTruth
