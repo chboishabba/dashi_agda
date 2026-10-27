@@ -158,3 +158,29 @@ These are engineering process mappings. They are not certification claims.
 - ISO 9241: simple status language and one canonical navigation path.
 - Six Sigma: remove duplicate theorem carriers and reduce handoff defects.
 - C4 and PlantUML: keep the dependency path inspectable.
+
+
+## D2 source-entry soundness result
+
+Published source entry does not pay D2a.
+
+`BalabanSourceNativePublishedFlowEntryExact` proves that the strong state uses the published CMP119/CMP122 density and source coordinates.
+
+The strong-state record stores the composite insertion as an extra consumer coordinate.
+
+`YMClayLevel2D2SourceEntryInsufficiencyExact` proves this separation constructively.
+
+It replaces the composite insertion while preserving every other strong-state coordinate.
+
+The exact published-flow entry then recompiles.
+
+Therefore:
+
+- published source entry does not determine the composite insertion value;
+- published source entry does not prove composite insertion/blocking naturality;
+- D2a still needs the actual one-step insertion/blocking law;
+- no second state-entry theorem is needed.
+
+This is a non-implication theorem.
+
+It does not add a new physical hypothesis.
