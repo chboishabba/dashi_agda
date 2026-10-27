@@ -1,0 +1,247 @@
+{-# OPTIONS --safe #-}
+module DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact where
+
+------------------------------------------------------------------------
+-- NAVIER-STOKES CLAY FRONTIER / TOE CONVERGENCE
+--
+-- O. Objective.
+-- Reuse the current canonical Navier-Stokes A/B/C/D max-cut, canonical Clay
+-- residual scheduler, final Clay-distance receipt, and authority guard in the
+-- focused DASHI TOE graph.
+--
+-- R. Reuse.
+-- NSABCDMaxCut20261007Exact owns the irreducible A/B/C/D programme split.
+-- NSCanonicalClayResidualExact owns the canonical typed residual scheduler.
+-- NSClayDistanceFinalReceipt owns the later carrier-to-general structural gap.
+-- NSAuthorityConsistencyGuard owns the mixed-scope promotion guard.
+--
+-- C. Construction.
+-- This module exports exact aliases and non-promotion theorems only.
+-- It adds no Navier-Stokes estimate and no new Clay theorem.
+--
+-- S. Scope.
+-- A/B remain internal theorem-development lanes.
+-- C/D remain released-proof audit lanes.
+-- Carrier-structured completion does not imply general NS completion.
+-- No closed finite or modeled result promotes the Clay target.
+--
+-- L. Lane.
+-- One NS-frontier-to-TOE normalization lane.
+-- No ESD or digital_esd surface is edited.
+--
+-- P. Postcondition.
+-- The focused TOE graph reaches the authoritative A/B/C/D cut, canonical
+-- residual scheduler, structural gap, and exact non-promotion theorems.
+--
+-- G. Governance.
+-- Original mathematical authors and existing DASHI theorem owners retain
+-- authority.  This file owns normalization only.
+-- Meta-introspector repositories retain separate attribution and authority.
+--
+-- F. Verification.
+-- Validation must prove definitional agreement with every reused owner.
+-- Kernel-green status requires an exact-head Agda/CI receipt.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+
+import DASHI.Physics.Closure.NSABCDMaxCut20261007Exact as ABCD
+import DASHI.Physics.Closure.NSCanonicalClayResidualExact as Canonical
+import DASHI.Physics.Closure.NSClayDistanceFinalReceipt as Distance
+import DASHI.Physics.Closure.NSAuthorityConsistencyGuard as Guard
+
+------------------------------------------------------------------------
+-- Exact reused frontier state.
+------------------------------------------------------------------------
+
+navierStokesABCDClayPromotion : Bool
+navierStokesABCDClayPromotion =
+  ABCD.clayPromotion
+
+navierStokesABCDClayPromotionStillFalse :
+  navierStokesABCDClayPromotion ≡ false
+navierStokesABCDClayPromotionStillFalse =
+  ABCD.clayPromotionIsFalse
+
+canonicalSchedulerClayPromotion : Bool
+canonicalSchedulerClayPromotion =
+  Canonical.clayPromotion
+
+canonicalSchedulerClayPromotionStillFalse :
+  canonicalSchedulerClayPromotion ≡ false
+canonicalSchedulerClayPromotionStillFalse =
+  Canonical.clayPromotionIsFalse
+
+canonicalSchedulerNavierStokesPromoted : Bool
+canonicalSchedulerNavierStokesPromoted =
+  Canonical.clayNavierStokesPromoted
+
+canonicalSchedulerNavierStokesStillNotPromoted :
+  canonicalSchedulerNavierStokesPromoted ≡ false
+canonicalSchedulerNavierStokesStillNotPromoted =
+  Canonical.clayNavierStokesPromotedIsFalse
+
+unresolvedHistoricalPackagesDischarged : Bool
+unresolvedHistoricalPackagesDischarged =
+  Canonical.unresolvedPackagesDischarged
+
+unresolvedHistoricalPackagesStillNotDischarged :
+  unresolvedHistoricalPackagesDischarged ≡ false
+unresolvedHistoricalPackagesStillNotDischarged =
+  Canonical.unresolvedPackagesDischargedIsFalse
+
+------------------------------------------------------------------------
+-- Final structural gap and direct non-promotion theorem.
+------------------------------------------------------------------------
+
+navierStokesClayDistanceReceipt :
+  Distance.NSClayDistanceFinalReceipt
+navierStokesClayDistanceReceipt =
+  Distance.canonicalNSClayDistanceFinalReceipt
+
+generalNSGlobalRegularityComplete : Bool
+generalNSGlobalRegularityComplete =
+  Distance.generalNSGlobalRegularityComplete
+    navierStokesClayDistanceReceipt
+
+generalNSGlobalRegularityStillOpen :
+  generalNSGlobalRegularityComplete ≡ false
+generalNSGlobalRegularityStillOpen =
+  Distance.generalNSGlobalRegularityCompleteIsFalseHere
+    navierStokesClayDistanceReceipt
+
+carrierToGeneralNSImplicationProved : Bool
+carrierToGeneralNSImplicationProved =
+  Distance.carrierToGeneralNSImplicationProved
+    navierStokesClayDistanceReceipt
+
+carrierToGeneralNSImplicationStillOpen :
+  carrierToGeneralNSImplicationProved ≡ false
+carrierToGeneralNSImplicationStillOpen =
+  Distance.carrierToGeneralNSImplicationProvedIsFalseHere
+    navierStokesClayDistanceReceipt
+
+terminalClayPromotionImpossible :
+  Distance.NSClayDistanceFinalPromotion → ⊥
+terminalClayPromotionImpossible =
+  Distance.nsClayDistanceFinalPromotionImpossibleHere
+
+------------------------------------------------------------------------
+-- Mixed-scope authority guard.
+------------------------------------------------------------------------
+
+navierStokesAuthorityGuard :
+  Guard.NSAuthorityConsistencyGuard
+navierStokesAuthorityGuard =
+  Guard.canonicalNSAuthorityConsistencyGuard
+
+navierStokesPromotionGuard : Bool
+navierStokesPromotionGuard =
+  Guard.canonicalNSPromotionGuard
+
+navierStokesPromotionGuardStillFalse :
+  navierStokesPromotionGuard ≡ false
+navierStokesPromotionGuardStillFalse =
+  Guard.canonicalNSPromotionGuardIsFalse
+
+------------------------------------------------------------------------
+-- Current released C/D audit receipts.
+------------------------------------------------------------------------
+
+releasedCSourceAuditClosed : Bool
+releasedCSourceAuditClosed =
+  ABCD.releasedCSourceAuditClosed
+
+releasedDSourceAuditClosed : Bool
+releasedDSourceAuditClosed =
+  ABCD.releasedDSourceAuditClosed
+
+releasedCHeadStatementStable : Bool
+releasedCHeadStatementStable =
+  ABCD.cCurrentReleasedHeadStatementStable
+
+releasedDHeadStatementStable : Bool
+releasedDHeadStatementStable =
+  ABCD.dCurrentReleasedHeadStatementStable
+
+releasedCHeadStatementStableIsTrue :
+  releasedCHeadStatementStable ≡ true
+releasedCHeadStatementStableIsTrue =
+  ABCD.cCurrentReleasedHeadStatementStableIsTrue
+
+releasedDHeadStatementStableIsTrue :
+  releasedDHeadStatementStable ≡ true
+releasedDHeadStatementStableIsTrue =
+  ABCD.dCurrentReleasedHeadStatementStableIsTrue
+
+releasedHeadRequiresReopeningCoordinateAudit : Bool
+releasedHeadRequiresReopeningCoordinateAudit =
+  ABCD.cdCurrentHeadRequiresReopeningCoordinateAudit
+
+releasedHeadDoesNotRequireReopeningCoordinateAudit :
+  releasedHeadRequiresReopeningCoordinateAudit ≡ false
+releasedHeadDoesNotRequireReopeningCoordinateAudit =
+  ABCD.cdCurrentHeadRequiresReopeningCoordinateAuditIsFalse
+
+------------------------------------------------------------------------
+-- ZKP O/R/C/S/L/P/G/F process frame.
+------------------------------------------------------------------------
+
+record NavierStokesClayFrontierTOEZKPFrame : Set where
+  field
+    objective : String
+    reuseRule : String
+    constructionRule : String
+    scopeRule : String
+    laneRule : String
+    postconditionRule : String
+    governanceRule : String
+    verificationRule : String
+
+    ownersExist : Bool
+    ownersExistIsTrue : ownersExist ≡ true
+
+    noNewPDETheorem : Bool
+    noNewPDETheoremIsTrue : noNewPDETheorem ≡ true
+
+    exactNonPromotionReachable : Bool
+    exactNonPromotionReachableIsTrue : exactNonPromotionReachable ≡ true
+
+    clayPromotionBlocked : Bool
+    clayPromotionBlockedIsFalse : clayPromotionBlocked ≡ false
+
+open NavierStokesClayFrontierTOEZKPFrame public
+
+canonicalNavierStokesClayFrontierTOEZKPFrame :
+  NavierStokesClayFrontierTOEZKPFrame
+canonicalNavierStokesClayFrontierTOEZKPFrame =
+  record
+    { objective =
+        "Normalize the canonical Navier-Stokes Clay frontier and exact non-promotion theorems into the DASHI TOE graph."
+    ; reuseRule =
+        "Reuse the A/B/C/D max-cut, canonical residual scheduler, final Clay-distance receipt, and authority guard before adding any adapter."
+    ; constructionRule =
+        "Expose exact owner aliases and theorem-level non-promotion only."
+    ; scopeRule =
+        "Keep A/B internal theorem development separate from released C/D audit and from carrier-structured completion."
+    ; laneRule =
+        "Use one Navier-Stokes normalization lane and keep ESD surfaces unchanged."
+    ; postconditionRule =
+        "Make the structural gap and exact false promotion gates reachable from TOE consumers."
+    ; governanceRule =
+        "Preserve theorem ownership, source attribution, A/B/C/D lane separation, and failure-closed promotion."
+    ; verificationRule =
+        "Require focused definitional validation and an exact-head Agda/CI receipt before kernel-green claims."
+    ; ownersExist = true
+    ; ownersExistIsTrue = refl
+    ; noNewPDETheorem = true
+    ; noNewPDETheoremIsTrue = refl
+    ; exactNonPromotionReachable = true
+    ; exactNonPromotionReachableIsTrue = refl
+    ; clayPromotionBlocked = navierStokesABCDClayPromotion
+    ; clayPromotionBlockedIsFalse =
+        navierStokesABCDClayPromotionStillFalse
+    }
