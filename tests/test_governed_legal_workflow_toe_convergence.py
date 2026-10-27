@@ -369,3 +369,29 @@ def test_actionstep_style_workflow_stays_generic():
     assert "Actionstep-style task and matter workflow state is represented by the" in bridge
     assert "A candidate source does not create legal-source authority." in bridge
     assert "Current source validity does not prove case-specific applicability." in bridge
+
+
+def test_all_three_legal_authority_facades_are_definitionally_one_object():
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+    bridge = read(BRIDGE)
+    for s in (
+        "import DASHI.Unifier as UnifierLegalFacade",
+        "import DASHI.Unified.Everything as UnifiedLegalFacade",
+        "toe369LegalGovernanceUnifierSameObject = refl",
+        "toe369LegalGovernanceUnifiedSameObject = refl",
+        "toe369LegalGovernanceAllThreeSameCanonical = refl",
+        "UnifierLegalFacade.unifierGovernedLegalWorkflowAuthorityInvariantHandoff",
+        "UnifiedLegalFacade.unifiedGovernedLegalWorkflowAuthorityInvariantHandoff",
+    ):
+        assert s in toe
+    assert ("unifierGovernedLegalWorkflowAuthorityInvariantHandoff =\n"
+            "  GovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff") in unifier
+    assert ("unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =\n"
+            "  LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff") in unified
+    assert ("canonicalGovernedLegalWorkflowAuthorityInvariantHandoff =\n"
+            "  governed-legal-workflow-authority-invariant-handoff") in bridge
+    for forbidden in ("postulate", "allow-unsolved-metas", "TERMINATING",
+                      "NO_POSITIVITY_CHECK", "{!!}"):
+        assert forbidden not in toe
