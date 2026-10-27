@@ -29,3 +29,5 @@ toeKernelProofDoesNotEstablishSourceSemantics :
     Closure.criticalCapstoneStatus ≡ false
 toeKernelProofDoesNotEstablishSourceSemantics =
   Governance.kernelClosureIsNotSemanticExhaustiveness
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
