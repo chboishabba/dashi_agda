@@ -770,3 +770,20 @@ toeProducerIdentityDoesNotIdentifyResidual :
 toeProducerIdentityDoesNotIdentifyResidual =
   GovernanceTOE.toeProducerIdentityDoesNotIdentifyResidual
 
+
+
+-- Legal authority remains independent of matter workflow and semantic admission.
+unifierLegalCandidateIsNotAuthority :
+  GovernanceTOE.CandidateSourceIsAuthoritative → ⊥
+unifierLegalCandidateIsNotAuthority =
+  GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifierLegalValidityIsNotApplicability :
+  GovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifierLegalValidityIsNotApplicability =
+  GovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+unifierSemanticAdmissionIsNotLegalAuthority :
+  GovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+unifierSemanticAdmissionIsNotLegalAuthority =
+  GovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
