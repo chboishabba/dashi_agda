@@ -1,5 +1,9 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- TOE ternary-27: retain dependent residual; never identify a three-edge boundary with its face.
+import DASHI.ComputerScience.Ternary27ResidualProgramDecisionBridgeExact as Recoverable27TOE
+import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Face27TOE
+
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -520,3 +524,16 @@ toeRGAndIbrahimSearchPromotionImpossible :
   ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
 toeRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
   toeIbrahimSearchPriorityDoesNotCreateProof sourcePriority
+
+-- These are two independent 27-state owners. No same-carrier assertion follows.
+import DASHI.Core.ConsumerDescentMinimalObserverExact as TOE27Descent
+import Data.Empty as TOE27Empty
+
+toeTernary27FaceCannotDescend :
+  TOE27Descent.FactorsThrough Face27TOE.boundaryObserver Face27TOE.faceConsumer → TOE27Empty.⊥
+toeTernary27FaceCannotDescend = Face27TOE.triadicFaceCannotFactorThroughThreeEdges
+
+toeTernary27DependentCodePreservesConsumer :
+  ∀ {Outcome : Set} → (consumer : Recoverable27TOE.Orbit.TritTriple → Outcome) →
+  Recoverable27TOE.Descent.ConsumerSufficient Recoverable27TOE.ternary27ExactCodeObserver consumer
+toeTernary27DependentCodePreservesConsumer = Recoverable27TOE.ternary27ExactCodeAdequateForEveryConsumer
