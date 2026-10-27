@@ -86,6 +86,11 @@ import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
 import DASHI.Law.SensibLawNativeLegalFollowCLIExact as NativeLegalFollow
 import DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact as ProviderAcquisition
 import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as ExpertProduction
+import DASHI.Law.SensibLawRealMatterReviewDecisionExact as RealReview
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Governance.LegalDecisionDoubleProjectionExact as LegalDecision
+import DASHI.Governance.LegitimacyEvidenceSeparationExact as Legitimacy
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
 
 ------------------------------------------------------------------------
 -- Type aliases keep Unifier thin.
@@ -306,6 +311,77 @@ toeProducerIdentityDoesNotIdentifyResidual :
   SameProducerIdentifiesResidual → ⊥
 toeProducerIdentityDoesNotIdentifyResidual =
   BoundAcquisition.producerIdentityDoesNotIdentifyResidual
+
+
+------------------------------------------------------------------------
+-- Exact compliance and vendor-neutral workflow authority firewalls.
+--
+-- These are aliases of existing canonical theorem owners.
+-- They add no Actionstep ontology and no new legal semantics.
+------------------------------------------------------------------------
+
+QualificationAutomaticallyForensicCompliance : Set
+QualificationAutomaticallyForensicCompliance =
+  ExpertProduction.QualificationAutomaticallyForensicCompliance
+
+ReportAdmissionRepairsMissingInput : Set
+ReportAdmissionRepairsMissingInput =
+  ExpertProduction.ReportAdmissionRepairsMissingInput
+
+LegalReviewDecisionCreatesClaimTruth : Set
+LegalReviewDecisionCreatesClaimTruth =
+  RealReview.LegalReviewDecisionCreatesClaimTruth
+
+OfficialLegalSurfaceRecoversFineState : Set
+OfficialLegalSurfaceRecoversFineState =
+  NF.FactorsThrough LegalDecision.officialSurface LegalDecision.fineLegalStateOf
+
+LegalOnlyCreatesLegitimacy : Set₁
+LegalOnlyCreatesLegitimacy =
+  Legitimacy.AdmittedLegitimacy Legitimacy.demoEvidence Legitimacy.legalOnly
+
+toeExpertQualificationDoesNotCreateForensicCompliance :
+  QualificationAutomaticallyForensicCompliance → ⊥
+toeExpertQualificationDoesNotCreateForensicCompliance =
+  ExpertProduction.qualificationDoesNotAutomaticallyProveForensicCompliance
+
+toeReportAdmissionDoesNotRepairMissingInput :
+  ReportAdmissionRepairsMissingInput → ⊥
+toeReportAdmissionDoesNotRepairMissingInput =
+  ExpertProduction.reportAdmissionDoesNotRepairMissingInput
+
+toeLegalReviewDoesNotCreateClaimTruth :
+  LegalReviewDecisionCreatesClaimTruth → ⊥
+toeLegalReviewDoesNotCreateClaimTruth =
+  RealReview.legalReviewDecisionDoesNotCreateClaimTruth
+
+toeOfficialLegalSurfaceDoesNotRecoverFineState :
+  OfficialLegalSurfaceRecoversFineState → ⊥
+toeOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalDecision.officialSurfaceCannotRecoverFineLegalState
+
+toeLegalityAloneDoesNotCreateLegitimacy :
+  LegalOnlyCreatesLegitimacy → ⊥
+toeLegalityAloneDoesNotCreateLegitimacy =
+  Legitimacy.legalOnlyIsNotAdmittedLegitimacy
+
+toeActionstepStyleVendorIdentityCreatesAuthority : Bool
+toeActionstepStyleVendorIdentityCreatesAuthority =
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    Domain.canonicalDomainTransportReceipt
+
+toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse :
+  toeActionstepStyleVendorIdentityCreatesAuthority ≡ false
+toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse = refl
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitness : Bool
+toeActionstepStyleTargetNeedsOwnAuthorityWitness =
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
+    Domain.canonicalDomainTransportReceipt
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue :
+  toeActionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
+toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue = refl
 
 ------------------------------------------------------------------------
 -- Existing proof-carrying compliance handoff.
