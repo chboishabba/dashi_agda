@@ -8,6 +8,7 @@ package "Original theorem owners" {
   [NSCanonicalClayResidualExact] as Residual
   [NSClayDistanceFinalReceipt] as Distance
   [NSAuthorityConsistencyGuard] as Guard
+  [NSTriadKNR650CurrentSharedWeightedWallRound736Exact] as R736
   [ClayNSProofRoadmapReceipt] as Roadmap
   [NSClaySubmissionEligibilityRoadmapReceipt] as Eligibility
 }
@@ -28,6 +29,7 @@ ABCD --> Facade : A/B/C/D max-cut
 Residual --> Facade : canonical residual gates
 Distance --> Facade : carrier-to-general gap\nterminal promotion -> bottom
 Guard --> Facade : mixed-scope promotion guard
+R736 --> Facade : current periodic-B max-cut\n2 shared weighted leaves\nClay promotion = false
 Roadmap --> Facade : weak/BKM branch + false promotion
 Eligibility --> Facade : BKM/all-data/submission/eligibility gates
 
@@ -49,10 +51,18 @@ Preconditions:
 Invariants:
 - A/B stay internal theorem-development lanes
 - C/D stay released-proof audit lanes
+- R736 has exactly two preferred analytic leaves
+- both R736 leaves use one weighted/input-Laplacian carrier
+- both R736 leaves remain open
+- R726 and strict-margin R406 are not independent mandatory leaves
+- the barrier-dependent Q+- shortcut remains circular
 - carrier-structured completion != general NS completion
 - no finite/modeled result promotes Clay
 
 Postconditions:
+- R736 shared wall is TOE-reachable
+- both open R736 leaves are TOE-reachable
+- the exact R736 non-promotion theorem is TOE-reachable
 - exact terminal non-promotion is TOE-reachable
 - carrier-to-general structural gap is TOE-reachable
 - facade equality is validation-checked
