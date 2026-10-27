@@ -152,8 +152,10 @@ claims =
 
 ------------------------------------------------------------------------
 -- P0 mirror: a surface label cannot establish its underlying referent.
--- "Acoustic mirror" is an engineering example, not a Goodman physical claim
--- and not evidence of an alleged Kozyrev effect.
+-- Goodman chapter 29 (printed pp. 159-160) describes dub echo/delay/
+-- reverberation and simulated physical reflections. That source observation
+-- is distinct from calibrated acoustic reflection and from a claimed
+-- Kozyrev mechanism. This finite example establishes only label ambiguity.
 ------------------------------------------------------------------------
 
 data MirrorReferent : Set where
