@@ -18,6 +18,7 @@ module DASHI.Unified.BalabanRGTOERegression where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -48,6 +49,7 @@ import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exa
 import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as StressHilbert
 import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as SameFamilyRecovery
 import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as Goal1C
+import DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact as CMaxCut
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
 import DASHI.Geometry.Gauge.SUNPrimitives as SUN
@@ -248,6 +250,7 @@ open SameFamilyRecovery public using
   ( r129ExportsLiteralContinuumLimit
   ; r129ExportsLiteralSchwingerMembership
   ; r129ExportsLiteralStressDerivative
+  ; r129ExportsCompositeMarkedSourceData
   )
 
 balabanSameFamilyRecoveryCompilerLevel : ProofLevel
@@ -308,6 +311,39 @@ balabanGoal1CMetricPairingCompilerLevel =
 balabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
 balabanGoal1CLiteralSourceInstantiationLevel =
   Goal1C.literalRound475CSourceInstantiationLevel
+
+------------------------------------------------------------------------
+-- Canonical five-package C max-cut.
+-- Historical round labels remain provenance only.
+------------------------------------------------------------------------
+
+balabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+balabanCPhysicalPackageMaxCutCompilerLevel =
+  CMaxCut.round527CPhysicalPackageMaxCutCompilerLevel
+
+balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  CMaxCut.c0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+balabanC1MarkedCurvatureFamilyLevel : ProofLevel
+balabanC1MarkedCurvatureFamilyLevel =
+  CMaxCut.c1MarkedCurvatureFamilyLevel
+
+balabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+balabanC2PhysicalRemainderSharedTailLevel =
+  CMaxCut.c2PhysicalRemainderSharedTailLevel
+
+balabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+balabanC3OneStepAFRecurrenceIdentificationLevel =
+  CMaxCut.c3OneStepAFRecurrenceIdentificationLevel
+
+balabanC4DensityAnchoredStressLaneLevel : ProofLevel
+balabanC4DensityAnchoredStressLaneLevel =
+  CMaxCut.c4DensityAnchoredStressLaneLevel
+
+balabanCPhysicalPackageCount : Nat
+balabanCPhysicalPackageCount =
+  CMaxCut.cPhysicalPackageCount
 
 balabanLevel2ClayPromotionFlag : Bool
 balabanLevel2ClayPromotionFlag =
@@ -494,6 +530,13 @@ record BalabanRGTOEReceipt : Set where
     goal1CContinuumStressRecoveryCompiler : ProofLevel
     goal1CMetricPairingCompiler : ProofLevel
     goal1CLiteralSourceInstantiation : ProofLevel
+    cPhysicalPackageMaxCutCompiler : ProofLevel
+    c0LiteralGaugeInvariantLocalObservableFamily : ProofLevel
+    c1MarkedCurvatureFamily : ProofLevel
+    c2PhysicalRemainderSharedTail : ProofLevel
+    c3OneStepAFRecurrenceIdentification : ProofLevel
+    c4DensityAnchoredStressLane : ProofLevel
+    cPhysicalPackageCount : Nat
     stressHilbertBoundCompiler : ProofLevel
     stressHilbertPhysicalShell : ProofLevel
 
@@ -605,6 +648,20 @@ canonicalBalabanRGTOEReceipt =
         balabanGoal1CMetricPairingCompilerLevel
     ; goal1CLiteralSourceInstantiation =
         balabanGoal1CLiteralSourceInstantiationLevel
+    ; cPhysicalPackageMaxCutCompiler =
+        balabanCPhysicalPackageMaxCutCompilerLevel
+    ; c0LiteralGaugeInvariantLocalObservableFamily =
+        balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+    ; c1MarkedCurvatureFamily =
+        balabanC1MarkedCurvatureFamilyLevel
+    ; c2PhysicalRemainderSharedTail =
+        balabanC2PhysicalRemainderSharedTailLevel
+    ; c3OneStepAFRecurrenceIdentification =
+        balabanC3OneStepAFRecurrenceIdentificationLevel
+    ; c4DensityAnchoredStressLane =
+        balabanC4DensityAnchoredStressLaneLevel
+    ; cPhysicalPackageCount =
+        balabanCPhysicalPackageCount
     ; stressHilbertBoundCompiler =
         balabanStressHilbertBoundCompilerLevel
     ; stressHilbertPhysicalShell =
