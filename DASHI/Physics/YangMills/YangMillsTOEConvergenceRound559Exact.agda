@@ -61,6 +61,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119ResidualFamilyRound219Exact as R219
 import DASHI.Physics.YangMills.BalabanPreferredRegularEFrontierRound225Exact as R225
+import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as PublishedRG
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as Casimir
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as Stress106
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
@@ -68,6 +69,7 @@ import DASHI.Physics.YangMills.YangMillsClayConcreteSemanticsResidualRound521Exa
 import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact as R546
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
 import DASHI.Physics.Closure.YMClayPromotionBoundary as Promotion
+import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as ContinuumBoundary
 
 ------------------------------------------------------------------------
 -- Balaban RG density and regular-E localization.
@@ -85,6 +87,18 @@ toeLiteralBetaDrivenResidualFamilyLevel : ProofLevel
 toeLiteralBetaDrivenResidualFamilyLevel =
   R219.literalBetaDrivenCMP119ResidualFamilyLevel
 
+toeLiteralBetaDrivenDifferentiatedCoordinateLevel : ProofLevel
+toeLiteralBetaDrivenDifferentiatedCoordinateLevel =
+  R219.literalBetaDrivenCMP119DifferentiatedCoordinateLevel
+
+toeRegularESourceProjectionLevel : ProofLevel
+toeRegularESourceProjectionLevel =
+  R225.regularESourceProjectionLevel
+
+toeRegularEPointwiseLocalizationLevel : ProofLevel
+toeRegularEPointwiseLocalizationLevel =
+  R225.regularEPointwiseLocalizationLevel
+
 toeRegularEContinuationCompilerLevel : ProofLevel
 toeRegularEContinuationCompilerLevel =
   R225.regularEContinuationCompilerLevel
@@ -101,6 +115,44 @@ toeRegularEPhysicalSourceClosureIsFalse :
   toeRegularEPhysicalSourceClosure ≡ false
 toeRegularEPhysicalSourceClosureIsFalse =
   R225.round225PhysicalSourceClosureIsFalse
+
+------------------------------------------------------------------------
+-- Published nonlinear RG and continuum non-promotion.
+------------------------------------------------------------------------
+
+toePublishedFourDimensionalNonlinearRGCoreLevel : ProofLevel
+toePublishedFourDimensionalNonlinearRGCoreLevel =
+  PublishedRG.publishedFourDimensionalNonlinearRGCoreLevel
+
+toePublishedRGPhysicalSameObjectLevel : ProofLevel
+toePublishedRGPhysicalSameObjectLevel =
+  PublishedRG.literalPhysicalStateToPublishedRGCarrierLevel
+
+toeFlat4DContinuumTransferProvedHere : Bool
+toeFlat4DContinuumTransferProvedHere =
+  ContinuumBoundary.flat4DContinuumTransferProvedHere
+
+toeFlat4DContinuumTransferProvedHereIsFalse :
+  toeFlat4DContinuumTransferProvedHere ≡ false
+toeFlat4DContinuumTransferProvedHereIsFalse =
+  refl
+
+toeContinuumMassGapPromoted : Bool
+toeContinuumMassGapPromoted =
+  ContinuumBoundary.continuumMassGapPromoted
+
+toeContinuumMassGapPromotedIsFalse :
+  toeContinuumMassGapPromoted ≡ false
+toeContinuumMassGapPromotedIsFalse =
+  refl
+
+-- Exact non-promotion theorem.
+-- A published finite RG stability owner does not construct the missing
+-- four-dimensional continuum-transfer theorem.
+toePublishedRGDoesNotPromoteContinuum :
+  toeFlat4DContinuumTransferProvedHere ≡ false
+toePublishedRGDoesNotPromoteContinuum =
+  toeFlat4DContinuumTransferProvedHereIsFalse
 
 ------------------------------------------------------------------------
 -- Compact-simple Casimir and stress.
@@ -130,6 +182,14 @@ toeStressRouteClayPromotionIsFalse :
   toeStressRouteClayPromotion ≡ false
 toeStressRouteClayPromotionIsFalse =
   StressPareto.clayPromotionIsFalse
+
+toeStressLevel2SameFamilyRecoveryLevel : ProofLevel
+toeStressLevel2SameFamilyRecoveryLevel =
+  StressPareto.level2SameFamilyRecoveryLevel
+
+toeStressLevel2ShortDistanceOPELevel : ProofLevel
+toeStressLevel2ShortDistanceOPELevel =
+  StressPareto.level2ShortDistanceOPEStressAFLevel
 
 ------------------------------------------------------------------------
 -- Current normalized source frontier.
