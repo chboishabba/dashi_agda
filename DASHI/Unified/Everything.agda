@@ -224,3 +224,31 @@ unifiedNavierStokesBM2ZKPFrame :
   NSBM2TOE.NavierStokesBM2TOEZKPFrame
 unifiedNavierStokesBM2ZKPFrame =
   NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifest
+
+
+------------------------------------------------------------------------
+-- Governed Fleet residual handoff.
+------------------------------------------------------------------------
+
+unifiedGovernedFleetResidualTOEHandoff :
+  GovernedFleet.GovernedFleetResidualTOEHandoff
+unifiedGovernedFleetResidualTOEHandoff =
+  GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
+
+unifiedFleetNamedManifestStillMissing :
+  FleetManifest.named58ManifestAcquired ≡ false
+unifiedFleetNamedManifestStillMissing =
+  GovernedFleet.namedManifestStillMissing
+
+unifiedFleetPerGapDispatchStillDisabled :
+  FleetManifest.perGapDispatchEnabled ≡ false
+unifiedFleetPerGapDispatchStillDisabled =
+  GovernedFleet.perGapDispatchStillDisabled
