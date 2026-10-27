@@ -74,3 +74,37 @@ unifierControlCertificationAliasIsExact :
   Bridge.PassingControlMeansCertified → ⊥
 unifierControlCertificationAliasIsExact =
   Unifier.toePassingControlDoesNotMeanCertified
+
+
+unifierUsesCanonicalZKPReceipt :
+  Unifier.toeGovernedLegalWorkflowZKPReceipt
+  ≡ Bridge.canonicalGovernedLegalWorkflowZKPReceipt
+unifierUsesCanonicalZKPReceipt = refl
+
+zkpStandardsRemainDesignLenses :
+  Bridge.standardsAreDesignLenses
+    Unifier.toeGovernedLegalWorkflowZKPReceipt
+  ≡ true
+zkpStandardsRemainDesignLenses = refl
+
+zkpStandardsDoNotClaimCertification :
+  Bridge.standardsCertificationClaimed
+    Unifier.toeGovernedLegalWorkflowZKPReceipt
+  ≡ false
+zkpStandardsDoNotClaimCertification = refl
+
+zkpESDSurfaceMutationRemainsForbidden :
+  Bridge.esdSurfaceMutationAllowed
+    Unifier.toeGovernedLegalWorkflowZKPReceipt
+  ≡ false
+zkpESDSurfaceMutationRemainsForbidden = refl
+
+unifierCaseyAuthorityAliasIsExact :
+  Bridge.CaseySelectionCreatesWorldTruth → ⊥
+unifierCaseyAuthorityAliasIsExact =
+  Unifier.toeCaseySelectionDoesNotCreateWorldTruth
+
+unifierKnowledgeAuthorityAliasIsExact :
+  Bridge.KnowledgeIsAuthority → ⊥
+unifierKnowledgeAuthorityAliasIsExact =
+  Unifier.toeKnowledgeDoesNotCreateExecutionAuthority
