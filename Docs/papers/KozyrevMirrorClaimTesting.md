@@ -75,6 +75,159 @@ repository's **syntactic fail-closed non-promotion** receipt. It does
 not prove a physical conservation law, absence of a phenomenon, an
 experimental result, or clinical ineffectiveness.
 
+## P2 max-cut: exact apparatus inventory, synthetic classical null and executed tests
+
+**Execution date: 27 October 2026. Status: SYNTHETIC CALCULATION EXECUTED;
+real physical surface/operator/data NOT identified; Agda KERNEL UNVERIFIED.**
+
+### Primary patent dimensions, with ambiguity preserved
+
+The original Russian-language claims and translated text are available at
+https://patents.google.com/patent/RU2122446C1/en
+(Kaznacheev / Trofimov, filed 1996-07-02; published 1998-11-27).
+
+| Physical input | Patent statement | Correct representation |
+| --- | --- | --- |
+| Material | Polished aluminium alloy | Alloy, conductivity, roughness and optical/acoustic response still **unmeasured** |
+| Panel height | Up to 280 cm | **2800 mm upper bound**, not measured installed height |
+| Panel width | 120 cm | **1200 mm stated nominal width** |
+| Panel thickness | English abstract **0.5 mm**; specification/claims **1.5 mm** | Two alternative `PatentThicknessReading` values: **5/15 tenths of mm**, exact distinctness |
+| Intended focus | 50 cm from working surface | **500 mm reported focus**, no specified wavelength, beam, curvature profile or reliable lens equation |
+| Open cylindrical build | Four or six elements | `openCylinderFourPanels`, `openCylinderSixPanels` |
+| Left-/right-handed spiral | Eight to ten elements | Explicit 8/9/10 `leftSpiral` and `rightSpiral` constructors |
+| Optional powered platform | 1–3 m/min reported motion speed | **1000–3000 mm/min linear speed**. **Not RPM**; angular speed needs radius and axis |
+| Drawings/assembly | 4 figures; concave plates, seams/fasteners | Need source drawing reconciliation and actual point-cloud/profile. No patent-to-mesh theorem claimed |
+
+The Agda candidate now gives a finite `PhaseChartChoice` identity-vs-C3
+rotation separating two unfixed coordinate placements under identical
+metadata. This is a **chart-choice witness**, not a proof that two
+physically distinct, equally focusing patent surfaces exist. A
+`SelectedPatentCandidateSurface` must explicitly supply a point
+carrier, phase-to-surface chart, material and provenance. Nothing in
+this PR inhabits it with a measured Kozyrev apparatus.
+
+### Executed, minimal existing-law discriminator (P2-A)
+
+**Producer:** `scripts/kozyrev_mirror_classical_null.py`
+(the script is an independent DASHI source-written toy based on standard
+specular reflection and angular-momentum balance; **not copied from
+Broken Branch**).
+
+**Checker:** `scripts/tests/test_kozyrev_mirror_classical_null.py`.
+
+This chooses an intentionally *synthetic* four-direction, widening
+polygon, a horizontally reflected handedness pair, and a
+constant-radius **diamond-shaped** control. It fires independent equal
+direction/momentum rays at each segment **midpoint**. It assumes
+specular, lossless reflection, neglects shadowing, and does not
+trace rays between surfaces.
+
+For an incident vector `d` and nonzero segment tangent `t`:
+
+```text
+d_out = 2 (d . t)/(t . t) t - d
+p_wall = d - d_out
+L_wall = midpoint_x * p_wall_y - midpoint_y * p_wall_x
+```
+
+Exact `fractions.Fraction` arithmetic verifies `|d_out|²=|d|²`
+and `d_out+p_wall=d`. Reflection through the y-axis changes
+`L_wall` sign when **both** the geometry and incident ray are
+reflected. The term `L_wall` is a dimensionless fixture angular
+**impulse proxy**, not physical `N·m` steady torque.
+
+**Locally executed, exact committed-source content verified:** five
+Python standard-library tests **PASS** and JSON report emitted.
+The committed Python files were compared with the locally executed
+copies using lengths and independent 32-bit polynomial checksums
+(5435 / 2790 bytes; checksum 795084313 / 642951860 respectively).
+Their local SHA-256 hashes are
+`dfdb3ec0a681e81afa86c8e59a695ef3e2988fc386bc2d08e3952265b22ad700`
+and
+`73c4591547fb05b913448ca0329f4cab6528c0f2e08ac3224ba515a98b40a2d9`.
+
+```sh
+python3 -m unittest discover -s scripts/tests \
+  -p 'test_kozyrev_mirror_classical_null.py' -v
+python3 scripts/kozyrev_mirror_classical_null.py --json
+```
+
+Exact synthetic fixture result:
+- 12 independent segment-midpoint rays;
+- squared-direction conservation **true** for spiral, reflected spiral
+  and constant-radius diamond control;
+- wall momentum conservation **true**;
+- chirality reflection anti-symmetry **true**;
+- summed spiral wall angular impulse
+  `-14836561284940776619812/411027158523357468998425`;
+- reflected case has the exact opposite value;
+- diamond control fixture sum **zero**.
+
+**IMPORTANT NEGATIVE INTERPRETATION:** The nonzero fixture sum follows
+from a chosen asymmetric source/ray assignment to a chosen toy polygon.
+It does not assert spontaneous torque, driven-rotor behavior,
+thermal-equilibrium work, 3D acoustic radiation, a calibrated
+reflector, time anomaly or a torsion field. No model of temperature
+or material dissipation appears. The reflected configuration also
+reflects its **incoming wave direction**, as required by parity.
+
+### Direct 2026 literature comparison and attribution
+
+- **Original patent/inventors** (source geometry and alleged clinical
+  effects only): https://patents.google.com/patent/RU2122446C1/en
+- **Broken Branch, HI-1** (2026-09-28; *external 2-D wave calculation*):
+  https://www.brokenbranch.dev/labs/as-seen-on-tv/honest-spiral/
+  It reports ordinary reflection-induced outgoing angular momentum,
+  vanishing equilibrium net torque in its model, and correction of
+  an unstable integrator's apparent effect.
+- **Broken Branch, HI-2** (2026-10-06; external acoustic rotor):
+  https://www.brokenbranch.dev/labs/as-seen-on-tv/the-sound-windmill/
+  Separates powered internal-source recoil, beam-driven weathervane,
+  dissipative drive, equilibrium thermal nulls; four of its 16
+  preregistered gates failed. Do **not** silently upgrade it to a
+  fully passed independent replication.
+- **Broken Branch, HI-12** (2026-10-06; external density-of-states/probe
+  study): https://www.brokenbranch.dev/labs/as-seen-on-tv/does-the-mirror-focus/
+  Ordinary scattering can alter local field energy without net power
+  to an equal-temperature probe. One convergence gate failed on a
+  control geometry. A bright local fluctuation is not total energy.
+- **2026 spiral engineering comparison**:
+  *Spiral tuning of wire-metamaterial cavity for a plasma haloscope*,
+  *Phys. Rev. Applied* **25**, 024073 (2026),
+  DOI https://doi.org/10.1103/n1hb-9d3p.
+  Published spiral-wire cavity tuning is prior art for **ordinary**
+  electromagnetic geometry control; it is neither a Kozyrev apparatus
+  nor evidence of new gravitational torsion.
+
+These are separate external authors, devices, codes and evidentiary
+levels. Nothing is imported as theorem authority merely because a
+simulation uses the word `spiral`. See the repository's
+same-object/Monster/Ibrahim attribution rules.
+
+### What P2-A closes and what P2-B still needs
+
+**P2-A completed as executed synthetic fixture:** specular parity,
+energy/momentum bookkeeping, a handedness control, patent dimension
+alternatives, strict distinction between source geometry and sampled
+polygon. The exact script files and tests were committed and read back.
+
+**P2-B still OPEN:** digitised actual apparatus geometry or an
+explicitly accepted hypothetical profile family; incident spectrum;
+metal constitutive response; validated wave or electromagnetic
+boundary-value solver on that **same** surface; mesh/timestep
+convergence; field/probe observables; matched sham conditions;
+calibrated SI uncertainties. Do not conflate mathematical conservation
+under independently chosen rays with global equilibrium radiation.
+
+**P2-C still OPEN:** falsification against a distinct proposed
+geometric-torsion model. An equation relating spin source to
+connection torsion and a source-to-detector coupling is needed.
+Mechanical helical orientation does not supply that equation.
+
+**P3–P6 remain gated:** a synthetic numerical test is not a real
+preregistered bench test, independent replication or human efficacy
+trial.
+
 ## Repository-wide spiral/wreath archaeology (2026-10-27)
 
 Search was performed against current-master GitHub code and named pull
@@ -179,7 +332,7 @@ the same as meeting its acceptance gate.
 | --- | --- | --- | --- |
 | **P0 — Reuse and provenance** | This document and `KozyrevMirrorClaimTesting.agda`; merge-source ledger for Kozyrev names, patent, signed-zero, torque, Cartan/POAMS and external models | Exact repo/PR source roots and typed non-identity; patent thickness contradiction carried rather than guessed | **Source written**; Agda kernel and full source verification open |
 | **P1 — Typed torsion bridge** | Native `TorsionMeaning`, `canonicalTorsionBridgeRequirements`, orientation and signed-zero reuse | Real imported theorem owners; disjoint meanings; no torsion-field promotion without physical source/coupling/observable | **Source written**; 10 obligations open; Agda kernel open |
-| **P2 — Instrument/geometry null** | Select and realise *existing* spiral/wreath/Maxwell/optics owners on measured apparatus; dimensions + uncertainty ledger, analytical energy/torque balances, at least two ordinary geometric controls; pinned 2-D benchmark comparison | Material/scale and 0.5/1.5 mm disagreement resolved or both modeled; known conservation and timestep/mesh convergence tests pass | **Mathematics in repo**; same-apparatus geometry/operator realisation and physical measurements still open |
+| **P2 — Instrument/geometry null** | P2-A synthetic exact polygon reflection/parity/momentum fixture; P2-B existing spiral/SE(3)/Maxwell/optics selected on one measured apparatus and controls | Synthetic tests execute; for physical P2 closure require real surface/material and wave-solver convergence, calibrated prediction | **P2-A executed (5 tests PASS); P2-B and P2-C OPEN** |
 | **P3 — Registered bench discrimination** | Timestamped SHA-256 protocol, blinded matched sham/active sequences and immutable raw telemetry; `kozyrev_mirror_claim_test.py` for eligible paired continuous endpoints | Recorded consent when applicable; independent timing and hash checks; sham parity; pre-fixed detectable effect and null rejection; no unplanned model switching | **Runner source written**, no independent registration or physical data |
 | **P4 — Torsion-specific mechanism bridge** | Selected metric/connection model, spin-density source term, constitutive prediction, laboratory observable and nuisance budget | Distinct, dimensionful nonzero prediction; plain mechanical/EM/thermal/acoustic models excluded by preregistered discriminators; independent model reproduction | **OPEN — highest scientific cut** |
 | **P5 — Prospective independent replication** | New apparatus/operator, held-out blinded dataset, error budget, adversarial review and statistical reporting including nulls | Replication on preregistered same observable and matched calibration; no leakage or uncontrolled field coupling | **OPEN** |
