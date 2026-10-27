@@ -634,6 +634,11 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact"
     ∷ "DASHI.Interop.ITIRFederatedTypedWorldProjectionExact"
     ∷ "DASHI.Security.AgentAuthorityTrajectoryExact"
+    ∷ "DASHI.Interop.SLRReviewPromoteAbstainConsumerExact"
+    ∷ "DASHI.Interop.SLRRuntimeValidationHandoffExact"
+    ∷ "DASHI.Interop.SLRValidationRoadmapPromotionExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact"
     ∷ [] )
     ( "Normalize exact theorem aliases only."
     ∷ "Retain the intermediate compliance witness."
@@ -650,6 +655,16 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "Casey selection does not create world truth."
     ∷ "Knowledge does not create execution authority."
     ∷ "Kernel closure does not create semantic closure."
+    ∷ "Review eligibility does not create promotion or truth."
+    ∷ "Runtime parity does not create world truth."
+    ∷ "A diagnostic legal stream does not create legal certification."
+    ∷ "Claim projection does not create claim truth."
+    ∷ "A review router does not create consumer adequacy."
+    ∷ "A parser candidate does not authorize admission."
+    ∷ "Residual priority does not create truth confidence."
+    ∷ "An admission receipt does not authorize publication."
+    ∷ "Software validation does not authorize publication."
+    ∷ "Later validation does not rewrite the certified baseline."
     ∷ [] )
     ( "dashi_agda is the formal reference lane."
     ∷ "SensibLaw/SLR owns review, admission, semantic construction, and legal consumer projection."
@@ -668,6 +683,9 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "Original theorem owners keep proof ownership."
     ∷ "Meta-introspector repositories keep source attribution."
     ∷ "Standards remain control lenses only."
+    ∷ "The TOE root reaches review-to-promotion non-promotion proofs."
+    ∷ "The TOE root reaches runtime-validation and roadmap-promotion firewalls."
+    ∷ "The TOE root reaches legal semantic admission and software-validation firewalls."
     ∷ [] )
     ( "ITIL change and service-management lens."
     ∷ "ISO 9000 family quality-management lens."
@@ -689,6 +707,7 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "Reject trust escapes."
     ∷ "Reject ESD path changes."
     ∷ "Kernel-check the focused Agda path."
+    ∷ "Resolve review, validation, promotion, admission, and software-validation owners with repository intelligence."
     ∷ [] )
     true refl
     false refl
