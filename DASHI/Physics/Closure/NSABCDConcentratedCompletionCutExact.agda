@@ -19,6 +19,7 @@ module DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.NSTriadKNR571PreferredOneSidedSecondMomentExact as BSharp
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalWeightedSecondMomentEndgameExact as BEnd
@@ -48,6 +49,9 @@ import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact 
 import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact as BR540Physical
 import DASHI.Physics.Closure.NSTriadKNFourSignInnerFibreGramBoundaryRound577Exact as BR577
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact as BFold
+import DASHI.Physics.Closure.NSTriadKNLiteralFixedOutputCovarianceM2PaymentExact as BFixedM2
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarRateWeightedWorkRound664Exact as BWeightedWork
+import DASHI.Physics.Closure.NSTriadKNR650LiveRateKernelCrossGradientRound682Exact as BCrossGradient
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact as ADom
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationProducerExact as ADomProducer
 import DASHI.Physics.Closure.NSWholeSpaceActualPhysicalCompensatedFieldExact as AActualField
@@ -515,6 +519,93 @@ bR567CellBelowR571PairedMagnitudeClosed = false
 bForcingSquareBelowLiteralM2Closed : Bool
 bForcingSquareBelowLiteralM2Closed = false
 
+bLiteralFixedOutputCovarianceM2PaymentClosed : Bool
+bLiteralFixedOutputCovarianceM2PaymentClosed =
+  BFixedM2.literalFixedOutputCovarianceM2PaymentClosed
+
+bLiteralFixedOutputCovarianceM2AddsCardinalityFactor : Bool
+bLiteralFixedOutputCovarianceM2AddsCardinalityFactor =
+  BFixedM2.literalFixedOutputCovarianceM2AddsCardinalityFactor
+
+bLiteralFixedOutputCovarianceM2UsesTaylorCurvature : Bool
+bLiteralFixedOutputCovarianceM2UsesTaylorCurvature =
+  BFixedM2.literalFixedOutputCovarianceM2UsesTaylorCurvature
+
+bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue :
+  bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
+bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue = refl
+
+bLiteralFixedOutputCovarianceM2AddsCardinalityFactorIsFalse :
+  bLiteralFixedOutputCovarianceM2AddsCardinalityFactor ≡ false
+bLiteralFixedOutputCovarianceM2AddsCardinalityFactorIsFalse = refl
+
+bLiteralFixedOutputCovarianceM2UsesTaylorCurvatureIsFalse :
+  bLiteralFixedOutputCovarianceM2UsesTaylorCurvature ≡ false
+bLiteralFixedOutputCovarianceM2UsesTaylorCurvatureIsFalse = refl
+
+bLiveResidualWeightedWorkIdentityClosed : Bool
+bLiveResidualWeightedWorkIdentityClosed =
+  BWeightedWork.round664LiveR661ResidualWeightedWorkIdentityClosed
+
+bSelfRateIsIndependentAnalyticLeaf : Bool
+bSelfRateIsIndependentAnalyticLeaf =
+  BWeightedWork.round664SelfRateIsIndependentAnalyticLeaf
+
+bCanonicalRouteRequiresM2Majorant : Bool
+bCanonicalRouteRequiresM2Majorant =
+  BWeightedWork.round664M2MajorantRequiredForCanonicalRoute
+
+bLiveResidualCrossGradientNormalFormClosed : Bool
+bLiveResidualCrossGradientNormalFormClosed =
+  BCrossGradient.round682LiveResidualCrossGradientNormalFormClosed
+
+bRemainingCoordinateUsesLiteralPDotQ : Bool
+bRemainingCoordinateUsesLiteralPDotQ =
+  BCrossGradient.round682RemainingCoordinateUsesLiteralPDotQ
+
+bCrossGradientQuantitativePaymentClosed : Bool
+bCrossGradientQuantitativePaymentClosed =
+  BCrossGradient.round682CrossGradientQuantitativePaymentClosed
+
+bCrossGradientCutoffUniformAggregationClosed : Bool
+bCrossGradientCutoffUniformAggregationClosed =
+  BCrossGradient.round682CutoffUniformAggregationClosed
+
+bLiveResidualWeightedWorkIdentityClosedIsTrue :
+  bLiveResidualWeightedWorkIdentityClosed ≡ true
+bLiveResidualWeightedWorkIdentityClosedIsTrue =
+  BWeightedWork.round664LiveR661ResidualWeightedWorkIdentityClosedIsTrue
+
+bSelfRateIsIndependentAnalyticLeafIsFalse :
+  bSelfRateIsIndependentAnalyticLeaf ≡ false
+bSelfRateIsIndependentAnalyticLeafIsFalse =
+  BWeightedWork.round664SelfRateIsIndependentAnalyticLeafIsFalse
+
+bCanonicalRouteRequiresM2MajorantIsFalse :
+  bCanonicalRouteRequiresM2Majorant ≡ false
+bCanonicalRouteRequiresM2MajorantIsFalse =
+  BWeightedWork.round664M2MajorantRequiredForCanonicalRouteIsFalse
+
+bLiveResidualCrossGradientNormalFormClosedIsTrue :
+  bLiveResidualCrossGradientNormalFormClosed ≡ true
+bLiveResidualCrossGradientNormalFormClosedIsTrue =
+  BCrossGradient.round682LiveResidualCrossGradientNormalFormClosedIsTrue
+
+bRemainingCoordinateUsesLiteralPDotQIsTrue :
+  bRemainingCoordinateUsesLiteralPDotQ ≡ true
+bRemainingCoordinateUsesLiteralPDotQIsTrue =
+  BCrossGradient.round682RemainingCoordinateUsesLiteralPDotQIsTrue
+
+bCrossGradientQuantitativePaymentClosedIsFalse :
+  bCrossGradientQuantitativePaymentClosed ≡ false
+bCrossGradientQuantitativePaymentClosedIsFalse =
+  BCrossGradient.round682CrossGradientQuantitativePaymentClosedIsFalse
+
+bCrossGradientCutoffUniformAggregationClosedIsFalse :
+  bCrossGradientCutoffUniformAggregationClosed ≡ false
+bCrossGradientCutoffUniformAggregationClosedIsFalse =
+  BCrossGradient.round682CutoffUniformAggregationClosedIsFalse
+
 bCardinalityFreeM2DissipationFoldCompilerClosed : Bool
 bCardinalityFreeM2DissipationFoldCompilerClosed =
   BFold.cardinalityFreeFiniteFoldClosed
@@ -683,3 +774,127 @@ externalReceiptPromotedToAgdaProofIsFalse = refl
 
 aDerivedFromBIsFalse : aDerivedFromB ≡ false
 aDerivedFromBIsFalse = refl
+
+bR540OrderedOffDiagonalM2CompilerClosedIsTrue :
+  bR540OrderedOffDiagonalM2CompilerClosed ≡ true
+bR540OrderedOffDiagonalM2CompilerClosedIsTrue =
+  BOffdiagM2.r540OrderedOffDiagonalM2CompilerClosedIsTrue
+
+bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse :
+  bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse =
+  BOffdiagM2.r567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+bPhysicalWeightedSecondMomentPaymentClosedIsFalse :
+  bPhysicalWeightedSecondMomentPaymentClosed ≡ false
+bPhysicalWeightedSecondMomentPaymentClosedIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- TOE convergence receipt: current NS A/B/C/D max-cut.
+------------------------------------------------------------------------
+
+record NSABCDTOEMaxCutReceipt : Set where
+  constructor ns-abcd-toe-max-cut-receipt
+  field
+    r540OrderedOffDiagonalM2CompilerClosed : Bool
+    r540OrderedOffDiagonalM2CompilerClosedProof :
+      r540OrderedOffDiagonalM2CompilerClosed ≡ true
+    m2ToR568CompilerClosed : Bool
+    m2ToR568CompilerClosedProof :
+      m2ToR568CompilerClosed ≡ true
+    literalFixedOutputCovarianceM2PaymentClosed : Bool
+    literalFixedOutputCovarianceM2PaymentClosedProof :
+      literalFixedOutputCovarianceM2PaymentClosed ≡ true
+    liveResidualWeightedWorkIdentityClosed : Bool
+    liveResidualWeightedWorkIdentityClosedProof :
+      liveResidualWeightedWorkIdentityClosed ≡ true
+    selfRateIsIndependentAnalyticLeaf : Bool
+    selfRateIsIndependentAnalyticLeafProof :
+      selfRateIsIndependentAnalyticLeaf ≡ false
+    canonicalRouteRequiresM2Majorant : Bool
+    canonicalRouteRequiresM2MajorantProof :
+      canonicalRouteRequiresM2Majorant ≡ false
+    liveResidualCrossGradientNormalFormClosed : Bool
+    liveResidualCrossGradientNormalFormClosedProof :
+      liveResidualCrossGradientNormalFormClosed ≡ true
+    remainingCoordinateUsesLiteralPDotQ : Bool
+    remainingCoordinateUsesLiteralPDotQProof :
+      remainingCoordinateUsesLiteralPDotQ ≡ true
+    crossGradientQuantitativePaymentClosed : Bool
+    crossGradientQuantitativePaymentClosedProof :
+      crossGradientQuantitativePaymentClosed ≡ false
+    crossGradientCutoffUniformAggregationClosed : Bool
+    crossGradientCutoffUniformAggregationClosedProof :
+      crossGradientCutoffUniformAggregationClosed ≡ false
+    r567FullSquareIsCanonicalM2Consumer : Bool
+    r567FullSquareIsCanonicalM2ConsumerProof :
+      r567FullSquareIsCanonicalM2Consumer ≡ false
+    physicalWeightedSecondMomentPaymentClosed : Bool
+    physicalWeightedSecondMomentPaymentClosedProof :
+      physicalWeightedSecondMomentPaymentClosed ≡ false
+    literalAlternativeClosedInAgda : Bool
+    literalAlternativeClosedInAgdaProof :
+      literalAlternativeClosedInAgda ≡ false
+    externalReceiptPromotedToAgdaProof : Bool
+    externalReceiptPromotedToAgdaProofProof :
+      externalReceiptPromotedToAgdaProof ≡ false
+    wholeSpaceDerivedFromPeriodic : Bool
+    wholeSpaceDerivedFromPeriodicProof :
+      wholeSpaceDerivedFromPeriodic ≡ false
+
+open NSABCDTOEMaxCutReceipt public
+
+canonicalNSABCDTOEMaxCutReceipt : NSABCDTOEMaxCutReceipt
+canonicalNSABCDTOEMaxCutReceipt =
+  ns-abcd-toe-max-cut-receipt
+    bR540OrderedOffDiagonalM2CompilerClosed
+    bR540OrderedOffDiagonalM2CompilerClosedIsTrue
+    bM2ToR568CompilerClosed
+    bM2ToR568CompilerClosedIsTrue
+    bLiteralFixedOutputCovarianceM2PaymentClosed
+    bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue
+    bLiveResidualWeightedWorkIdentityClosed
+    bLiveResidualWeightedWorkIdentityClosedIsTrue
+    bSelfRateIsIndependentAnalyticLeaf
+    bSelfRateIsIndependentAnalyticLeafIsFalse
+    bCanonicalRouteRequiresM2Majorant
+    bCanonicalRouteRequiresM2MajorantIsFalse
+    bLiveResidualCrossGradientNormalFormClosed
+    bLiveResidualCrossGradientNormalFormClosedIsTrue
+    bRemainingCoordinateUsesLiteralPDotQ
+    bRemainingCoordinateUsesLiteralPDotQIsTrue
+    bCrossGradientQuantitativePaymentClosed
+    bCrossGradientQuantitativePaymentClosedIsFalse
+    bCrossGradientCutoffUniformAggregationClosed
+    bCrossGradientCutoffUniformAggregationClosedIsFalse
+    bR567FullSquarePointwiseM2IsCanonicalConsumer
+    bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+    bPhysicalWeightedSecondMomentPaymentClosed
+    bPhysicalWeightedSecondMomentPaymentClosedIsFalse
+    anyLiteralAlternativeClosedInAgdaHere
+    anyLiteralAlternativeClosedInAgdaHereIsFalse
+    externalReceiptPromotedToAgdaProof
+    externalReceiptPromotedToAgdaProofIsFalse
+    aDerivedFromB
+    aDerivedFromBIsFalse
+
+record NSABCDTOEZKPFrame : Set where
+  constructor ns-abcd-toe-zkp-frame
+  field
+    objective reuse construction safetyInvariant lane preconditions governance postconditions verification : String
+    esdMutationAllowed createsClayPromotion promotesExternalReceipt : Bool
+
+canonicalNSABCDTOEZKPFrame : NSABCDTOEZKPFrame
+canonicalNSABCDTOEZKPFrame =
+  ns-abcd-toe-zkp-frame
+    "converge the existing native Navier-Stokes A/B/C/D proof cut into the DASHI TOE roots"
+    "reuse the literal fixed-output covariance M2 payment, R664 weighted-work identity, R682 live cross-gradient normal form, R568 compiler, and native C/D reconstruction owners"
+    "package the current compiler and non-promotion facts; add only TOE reachability"
+    "the canonical B route no longer treats self-rate or M2 majorization as independent leaves; the live residual is reduced to literal p-dot-q cross-gradient work; external receipts do not become Agda proofs; A is not derived from B; open quantitative and cutoff-uniform leaves remain open"
+    "one disjoint Navier-Stokes TOE reconciliation lane"
+    "canonical owners already exist on current master; ESD is read-only; theorem ownership and attribution remain unchanged"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, C4/PlantUML, and ASD-STE100 are process and presentation lenses only"
+    "TOE root, Unifier, and Unified aggregate reach the same canonical NS max-cut and exact non-promotion proofs"
+    "code search, related-symbol lineage, trust-escape scan, ESD diff audit, duplicate-signature audit, and exact-head Agda kernel check"
+    false false false
