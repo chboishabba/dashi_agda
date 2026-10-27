@@ -38,6 +38,7 @@ on:
       - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
       - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
       - 'Docs/architecture/YMGoal1R559IbrahimTOE.puml'
+      - 'Docs/architecture/R559IbrahimFleetHyperfabricTOE.puml'
       - 'DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
