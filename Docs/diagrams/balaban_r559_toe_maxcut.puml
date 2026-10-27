@@ -14,6 +14,7 @@ package "Canonical source owners" {
 }
 
 component "BalabanRGTOERegression" as Balaban
+component "BalabanRGScaleTransferFrontierReceipt" as RGNonPromotion
 component "YangMillsTOEConvergenceRound559Exact" as R559
 component "BalabanR559TOEMaxCutExact" as Joint
 component "EverythingTOESymmetryResolved369" as Root
@@ -37,6 +38,8 @@ Joint --> Root : canonical TOE receipt
 Joint --> Physics : physics facade
 Joint --> Unifier : facade only
 Joint --> Everything : unified aggregate
+RGNonPromotion --> Root : promotion token -> bottom
+RGNonPromotion --> Unifier : facade re-export only
 
 note bottom of Joint
 ZKP O/R/C/S/L/P/G/F:
@@ -47,6 +50,7 @@ S: finite/conditional state stays finite/conditional
 L: Balaban and R559 remain separate theorem owners
 P: one joint max-cut receipt
 G: continuum, mass gap, Clay, block-spin, KP, OS/Wightman stay blocked
+Direct frontier theorem: proposed scale-transfer promotion token -> bottom.
 F: exact-head referee + Agda kernel check
 
 Preconditions:
