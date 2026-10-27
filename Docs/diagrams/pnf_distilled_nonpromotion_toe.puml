@@ -1,0 +1,47 @@
+@startuml
+title PNF-distilled non-promotion convergence to DASHI TOE
+
+package "Existing exact owners" {
+  [Gluing proxy harness] as Gluing
+  [Finite self-adjoint Hamiltonian proxy] as SelfAdjoint
+  [Hamiltonian domination proxy] as Domination
+  [Kluver form-constant boundary] as Kluver
+  [Fungal network agency boundary] as Fungal
+  [Psychogeography/Yijing source atlas] as Atlas
+  [Distributed epistemic source atlas] as Attribution
+}
+
+package "Normalized Unified surface" {
+  [PNFDistilledNonPromotionTOEExact] as Bridge
+  [PNFDistilledNonPromotionTOEValidation] as Validation
+}
+
+package "TOE roots" {
+  [DASHI.Unified.Everything] as Unified
+  [DASHI.Unifier] as Unifier
+  [EverythingTOESymmetryResolved369] as TOE
+}
+
+Gluing --> Bridge : promotion=false
+SelfAdjoint --> Bridge : promotion=false
+Domination --> Bridge : promotion=false
+Kluver --> Bridge : exact non-promotion theorem
+Fungal --> Bridge : species-specific evidence boundary
+Atlas --> Bridge : typed identifier coordinate
+Attribution --> Bridge : attribution rule
+
+Bridge --> Validation : canonical object
+Bridge --> Unified : direct import
+Bridge --> Unifier : exact alias
+Bridge --> TOE : direct import
+Unifier --> Validation : canonical identity check
+Validation --> TOE : regression import
+
+note bottom of Bridge
+Shared words do not create semantic identity.
+Diagnostic checks do not create theorem promotion.
+Source identifiers do not create proof authority.
+ESD surfaces remain read-only.
+end note
+
+@enduml
