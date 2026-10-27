@@ -1,6 +1,7 @@
 module DASHI.Unifier where
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Unified.SensibLawGovernanceComplianceTOEExact as ComplianceTOE
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
@@ -1108,3 +1109,38 @@ unifierSensibLawGovernanceZKPFrame :
   GovernanceTOE.SensibLawGovernanceTOEZKPFrame
 unifierSensibLawGovernanceZKPFrame =
   GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Direct SensibLaw legal-compliance firewalls.
+------------------------------------------------------------------------
+
+unifierSensibLawGovernanceComplianceReceipt :
+  ComplianceTOE.SensibLawGovernanceComplianceTOEReceipt
+unifierSensibLawGovernanceComplianceReceipt =
+  ComplianceTOE.canonicalSensibLawGovernanceComplianceReceipt
+
+unifierSensibLawQualificationDoesNotCreateForensicCompliance :
+  ComplianceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+unifierSensibLawQualificationDoesNotCreateForensicCompliance =
+  ComplianceTOE.sensibLawQualificationDoesNotCreateForensicCompliance
+
+unifierSensibLawReviewDoesNotCreateApplicability :
+  ComplianceTOE.LegalReviewDecisionCreatesApplicability → ⊥
+unifierSensibLawReviewDoesNotCreateApplicability =
+  ComplianceTOE.sensibLawReviewDoesNotCreateApplicability
+
+unifierSensibLawParserCandidateDoesNotAuthorizeAdmission :
+  ComplianceTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+unifierSensibLawParserCandidateDoesNotAuthorizeAdmission =
+  ComplianceTOE.sensibLawParserCandidateDoesNotAuthorizeAdmission
+
+unifierSensibLawOfficialSurfaceDoesNotRecoverFineLegalState :
+  ComplianceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+unifierSensibLawOfficialSurfaceDoesNotRecoverFineLegalState =
+  ComplianceTOE.sensibLawOfficialSurfaceDoesNotRecoverFineLegalState
+
+unifierSensibLawLegalityAloneDoesNotCreateLegitimacy :
+  ComplianceTOE.LegalOnlyCreatesLegitimacy → ⊥
+unifierSensibLawLegalityAloneDoesNotCreateLegitimacy =
+  ComplianceTOE.sensibLawLegalityAloneDoesNotCreateLegitimacy
