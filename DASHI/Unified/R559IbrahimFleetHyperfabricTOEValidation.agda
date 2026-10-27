@@ -85,22 +85,67 @@ fleetDischargedFibresStillCannotBeRetargeted :
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
 
-toeYMGate4CountIs58 :
-  TOE.toeYMGate4FormalGapsAre58
-  ≡ Owner.ymGate4FormalGapsAre58
-toeYMGate4CountIs58 = refl
 
-unifierYMGate4CountIs58 :
-  Unifier.unifierYMGate4FormalGapsAre58
-  ≡ Owner.ymGate4FormalGapsAre58
-unifierYMGate4CountIs58 = refl
+------------------------------------------------------------------------
+-- Live frontier, target split, and canonical continuum no-go validation.
+------------------------------------------------------------------------
 
-toeFleet58DoesNotIdentifyYMGate4 :
-  Owner.Fleet58EqualsYMGate4SameObject → ⊥
-toeFleet58DoesNotIdentifyYMGate4 =
-  TOE.toeFleet58DoesNotIdentifyYMGate4
+toeCurrentGate4FrontierMatchesOwner :
+  TOE.toeCurrentGate4FrontierLedgerLevel
+  ≡ Owner.currentGate4FrontierLedgerLevel
+toeCurrentGate4FrontierMatchesOwner = refl
 
-unifierFleet58DoesNotIdentifyYMGate4 :
-  Owner.Fleet58EqualsYMGate4SameObject → ⊥
-unifierFleet58DoesNotIdentifyYMGate4 =
-  Unifier.unifierFleet58DoesNotIdentifyYMGate4
+unifierCurrentGate4FrontierMatchesOwner :
+  Unifier.unifierCurrentGate4FrontierLedgerLevel
+  ≡ Owner.currentGate4FrontierLedgerLevel
+unifierCurrentGate4FrontierMatchesOwner = refl
+
+unifiedCurrentGate4FrontierMatchesOwner :
+  Unified.unifiedCurrentGate4FrontierLedgerLevel
+  ≡ Owner.currentGate4FrontierLedgerLevel
+unifiedCurrentGate4FrontierMatchesOwner = refl
+
+toeFleetTargetSelectionMatchesOwner :
+  TOE.toeFleetFormalGapTargetSelected
+  ≡ Owner.fleetFormalGapTargetSelected
+toeFleetTargetSelectionMatchesOwner = refl
+
+unifierFleetTargetSelectionMatchesOwner :
+  Unifier.unifierFleetFormalGapTargetSelected
+  ≡ Owner.fleetFormalGapTargetSelected
+unifierFleetTargetSelectionMatchesOwner = refl
+
+unifiedFleetTargetSelectionMatchesOwner :
+  Unified.unifiedFleetFormalGapTargetSelected
+  ≡ Owner.fleetFormalGapTargetSelected
+unifiedFleetTargetSelectionMatchesOwner = refl
+
+rootBalabanContinuumNoGoReachable :
+  Owner.BalabanContinuumPromotion → ⊥
+rootBalabanContinuumNoGoReachable =
+  TOE.toeBalabanContinuumLimitPromotionImpossible
+
+unifierBalabanContinuumNoGoReachable :
+  Owner.BalabanContinuumPromotion → ⊥
+unifierBalabanContinuumNoGoReachable =
+  Unifier.unifierBalabanContinuumLimitPromotionImpossible
+
+unifiedBalabanContinuumNoGoReachable :
+  Owner.BalabanContinuumPromotion → ⊥
+unifiedBalabanContinuumNoGoReachable =
+  Unified.unifiedBalabanContinuumLimitPromotionImpossible
+
+rootDepthContinuumNoGoReachable :
+  Owner.DepthContinuumPromotion → ⊥
+rootDepthContinuumNoGoReachable =
+  TOE.toeDepthContinuumLimitPromotionImpossible
+
+unifierDepthContinuumNoGoReachable :
+  Owner.DepthContinuumPromotion → ⊥
+unifierDepthContinuumNoGoReachable =
+  Unifier.unifierDepthContinuumLimitPromotionImpossible
+
+unifiedDepthContinuumNoGoReachable :
+  Owner.DepthContinuumPromotion → ⊥
+unifiedDepthContinuumNoGoReachable =
+  Unified.unifiedDepthContinuumLimitPromotionImpossible
