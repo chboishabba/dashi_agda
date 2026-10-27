@@ -6,6 +6,9 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact.agda'
+      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Unifier.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -32,6 +35,8 @@ jobs:
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
@@ -41,7 +46,20 @@ jobs:
             fi
           done
 
+      - name: Install semantic preflight
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Semantic preflight normalized NS TOE surfaces
+        run: |
+          dashi-agda-preflight --root . DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+          dashi-agda-preflight --root . DASHI/Unified/Physics.agda
+          dashi-agda-preflight --root . DASHI/Unifier.agda
+          dashi-agda-preflight --root . DASHI/EverythingTOESymmetryResolved369.agda
+
       - name: Kernel-check TOE symmetry-resolved aggregate
         run: |
           agda --version
+          agda -i . -l standard-library DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+          agda -i . -l standard-library DASHI/Unified/Physics.agda
+          agda -i . -l standard-library DASHI/Unifier.agda
           agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
