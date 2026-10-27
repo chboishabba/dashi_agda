@@ -689,3 +689,30 @@ navierStokesClayEligibilityStillFalse :
   navierStokesClayEligible ≡ false
 navierStokesClayEligibilityStillFalse =
   NSClayTOE.clayEligibilityStillFalse
+
+------------------------------------------------------------------------
+-- Quantum-mereology selected-atlas / g-TPS terminal boundary.
+------------------------------------------------------------------------
+
+import DASHI.Unified.QuantumMereologyTOEConvergenceExact as QMT
+
+open QMT public using
+  ( physicalSourceGTPSStillOpen
+  ; physicalHamiltonianAttachmentStillOpen
+  ; physicalPointerWeldStillOpen
+  ; minimizerPullbackStillOpen
+  ; algebraSusceptibilityStillOpen
+  ; thermodynamicMQPTStillOpen
+  ; sameStateHolographicWeldStillOpen
+  ; lorentzianEinsteinPromotionStillOpen
+  ; fleetEigenPriorityStillNonPromoting
+  ; fleetSpectralLabelStillDoesNotIdentifyOwner
+  )
+
+quantumMereologyTOEReceipt : QMT.QuantumMereologyTOEReceipt
+quantumMereologyTOEReceipt =
+  QMT.canonicalQuantumMereologyTOEReceipt
+
+quantumMereologyTOEReceiptZKPFrame : ParetoSnowballTOE.TOEZKPFrame
+quantumMereologyTOEReceiptZKPFrame =
+  QMT.canonicalQuantumMereologyTOEZKPFrame
