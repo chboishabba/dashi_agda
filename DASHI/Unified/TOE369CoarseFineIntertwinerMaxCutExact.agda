@@ -56,6 +56,9 @@ import DASHI.Foundations.Base369CoarseFineFabricAdapterExact as Fabric
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spectral
 import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed
+import DASHI.Moonshine.Base369Ternary27CharacterAdjacencyEquivarianceExact as Character
+import DASHI.Moonshine.C3FourierConjugationExact as Fourier
+import DASHI.Moonshine.Monster3BPhaseTransportExact as Monster
 import DASHI.Base369Ternary27SpectralGeometryValidation as SpectralValidation
 import DASHI.Core.CoarseFineFabricCalculusRegression as CoarseValidation
 
@@ -141,6 +144,16 @@ toeTernary27OriginFixed :
 toeTernary27OriginFixed =
   Spectral.originFixedByRotation
 
+toeMonsterPhaseConjugationIntertwiner :
+  (frequency : Spectral.AxisFrequency) →
+  (trit : SSP.SSPTrit) →
+  Fourier.phaseToMonster
+    (Character.axisCharacterValue
+      (Spectral.conjugateFrequency frequency) trit)
+  ≡
+  Monster.transportPhase Monster.invertsGenerator
+    (Fourier.phaseToMonster
+      (Character.axisCharacterValue frequency trit))
 toeMonsterPhaseConjugationIntertwiner =
   Signed.monsterAxisReflectionIntertwines
 
