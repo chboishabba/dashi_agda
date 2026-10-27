@@ -406,3 +406,56 @@ unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred :
   YMGoal1TOE.legacyGlobalTreeMetricPreferred ≡ false
 unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred =
   YMGoal1TOE.legacyGlobalTreeMetricPreferredIsFalse
+
+
+------------------------------------------------------------------------
+-- Reused A3/A4/A5 and C3/C4 canonical owner exports.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1A3UniformCompactContainmentLevel : ProofLevel
+unifierYangMillsGoal1A3UniformCompactContainmentLevel =
+  YMGoal1TOE.goal1A3UniformCompactContainmentLevel
+
+unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel : ProofLevel
+unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel =
+  YMGoal1TOE.goal1A3ExtractedClusterCylinderAgreementLevel
+
+unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel : ProofLevel
+unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel =
+  YMGoal1TOE.goal1A3TightnessSubsequenceCompilerLevel
+
+unifierYangMillsGoal1A4FiniteRegularityLevel : ProofLevel
+unifierYangMillsGoal1A4FiniteRegularityLevel =
+  YMGoal1TOE.goal1A4FiniteRegularityLevel
+
+unifierYangMillsGoal1A5FiniteGrowthControlLevel : ProofLevel
+unifierYangMillsGoal1A5FiniteGrowthControlLevel =
+  YMGoal1TOE.goal1A5FiniteGrowthControlLevel
+
+unifierYangMillsGoal1A45OSLimitCompilerLevel : ProofLevel
+unifierYangMillsGoal1A45OSLimitCompilerLevel =
+  YMGoal1TOE.goal1A45OSLimitCompilerLevel
+
+unifierYangMillsGoal1C3OneStepAFIdentificationLevel : ProofLevel
+unifierYangMillsGoal1C3OneStepAFIdentificationLevel =
+  YMGoal1TOE.goal1C3OneStepAFIdentificationLevel
+
+unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel : ProofLevel
+unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel =
+  YMGoal1TOE.goal1C3AllDepthCoefficientCompilerLevel
+
+unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel : ProofLevel
+unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel =
+  YMGoal1TOE.goal1C4DensityAnchoredStressInstantiationLevel
+
+unifierYangMillsGoal1C4SectorRecoveryCompilerLevel : ProofLevel
+unifierYangMillsGoal1C4SectorRecoveryCompilerLevel =
+  YMGoal1TOE.goal1C4SectorRecoveryCompilerLevel
+
+unifierYangMillsGoal1C4LiteralSectorRecoveryLevel : ProofLevel
+unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
+  YMGoal1TOE.goal1C4LiteralSectorRecoveryLevel
+
+unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
+unifierYangMillsGoal1C4CommonMetricCompilerLevel =
+  YMGoal1TOE.goal1C4CommonMetricCompilerLevel
