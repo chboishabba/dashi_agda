@@ -953,3 +953,9 @@ unifierFleetContradictionGapsRemainSeparate :
   FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
 unifierFleetContradictionGapsRemainSeparate =
   FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+
+unifierFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.PlanningSourceTextFormalResidualFlag
+unifierFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
