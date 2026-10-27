@@ -335,7 +335,8 @@ toeHistoricalProjectedGalerkinSumAlreadyConstructed =
 
 toeEulerCompatibilityAdapterDoesNotOriginateCarrier :
   EulerCompat.thisAdapterOriginatesEulerGalerkinCarrier ≡ false
-toeEulerCompatibilityAdapterDoesNotOriginateCarrier = refl
+toeEulerCompatibilityAdapterDoesNotOriginateCarrier =
+  EulerCompat.thisAdapterOriginatesEulerGalerkinCarrierIsFalse
 
 toeEulerCompatibilityAdapterGetsNoOriginPriority :
   EulerCompat.thisAdapterGetsEulerOriginPriorityCredit ≡ false
