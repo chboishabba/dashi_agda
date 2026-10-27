@@ -308,7 +308,31 @@ record OggSSP2BTOEReceipt : Set where
 
 canonicalOggSSP2BTOEReceipt : OggSSP2BTOEReceipt
 canonicalOggSSP2BTOEReceipt =
-  ogg-ssp2b-toe-receipt
-    true true true
-    0 1 2 3
-    false false false false
+  record
+    { brauerIngressPaid =
+        PostSocle.PostSocleMaxCutStatus.tateBrauerIngressPaid
+          PostSocle.canonicalPostSocleMaxCutStatus
+    ; finiteTenFactorsPaid =
+        PostSocle.PostSocleMaxCutStatus.finiteTenFactorsPaid
+          PostSocle.canonicalPostSocleMaxCutStatus
+    ; finiteOuterJ2x5Paid =
+        PostSocle.PostSocleMaxCutStatus.finiteOuterJ2x5Paid
+          PostSocle.canonicalPostSocleMaxCutStatus
+    ; representationDiscoveryLeaves =
+        EqWeld.EquivariantWeldCompressionStatus.remainingScientificRepresentationDiscoveryLeaves
+          EqWeld.canonicalEquivariantWeldCompressionStatus
+    ; sourceActionEquivarianceLeaves =
+        formalSourceActionEquivarianceLeaves
+    ; defectSourceBits =
+        remainingDefectSourceBits
+    ; normalizedResidualCount =
+        normalizedTwoBResidualCount
+    ; terminalQ10RecognitionPaid =
+        terminalQ10RecognitionPaidFlag
+    ; terminalDefectSourcePaid =
+        terminalDefectSourcePaidFlag
+    ; p31SameObjectPromotionPaid =
+        p31SameObjectPromotionPaidFlag
+    ; twoSevenNineSameObjectPromotionPaid =
+        twoSevenNineSameObjectPromotionPaidFlag
+    }
