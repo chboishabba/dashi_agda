@@ -50,11 +50,13 @@ module DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact where
 -- and kernel checks remain separate deterministic receipts.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as Distilled
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
 
 record GovernedLegalWorkflowSourceSemanticHandoff : Set₁ where
   constructor governed-legal-workflow-source-semantic-handoff
@@ -85,6 +87,37 @@ record GovernedLegalWorkflowSourceSemanticHandoff : Set₁ where
         distilledNonPromotionReceipt
       ≡ false
 
+    legalRuntimeContract :
+      LegalRuntime.AgdaFirstLegalRuntimeContract
+
+    runtimeInventsLegalSemanticsIsFalse :
+      LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemantics
+        legalRuntimeContract
+      ≡ false
+
+    sourceFollowCreatesAuthorityIsFalse :
+      LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransport
+        legalRuntimeContract
+      ≡ false
+
+    domainTransportReceipt :
+      Domain.DomainTransportReceipt
+
+    targetDomainNeedsOwnAuthorityWitnessIsTrue :
+      Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
+        domainTransportReceipt
+      ≡ true
+
+    representationEqualityCreatesLegalAuthorityIsFalse :
+      Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+        domainTransportReceipt
+      ≡ false
+
+    vendorIdentityCreatesAuthorityIsFalse :
+      Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
+        domainTransportReceipt
+      ≡ false
+
 open GovernedLegalWorkflowSourceSemanticHandoff public
 
 canonicalGovernedLegalWorkflowSourceSemanticHandoff :
@@ -101,6 +134,15 @@ canonicalGovernedLegalWorkflowSourceSemanticHandoff =
       Distilled.canonicalPNFDistilledReuseZKPReceipt)
     (Distilled.esdSurfaceMutationAllowedIsFalse
       Distilled.canonicalPNFDistilledReuseZKPReceipt)
+    LegalRuntime.canonicalAgdaFirstLegalRuntimeContract
+    (LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemanticsIsFalse
+      LegalRuntime.canonicalAgdaFirstLegalRuntimeContract)
+    (LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransportIsFalse
+      LegalRuntime.canonicalAgdaFirstLegalRuntimeContract)
+    Domain.canonicalDomainTransportReceipt
+    refl
+    refl
+    refl
 
 toeSharedLexemeDoesNotCreateSemanticIdentity :
   Distilled.sharedLexemeCreatesSemanticIdentity
@@ -136,4 +178,44 @@ toeESDSurfaceMutationRemainsForbidden :
   ≡ false
 toeESDSurfaceMutationRemainsForbidden =
   esdSurfaceMutationAllowedIsFalse
+    canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+toeRuntimeCannotInventLegalSemantics :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemantics
+    (legalRuntimeContract canonicalGovernedLegalWorkflowSourceSemanticHandoff)
+  ≡ false
+toeRuntimeCannotInventLegalSemantics =
+  runtimeInventsLegalSemanticsIsFalse
+    canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+toeSourceFollowCannotCreateAuthorityByTransport :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransport
+    (legalRuntimeContract canonicalGovernedLegalWorkflowSourceSemanticHandoff)
+  ≡ false
+toeSourceFollowCannotCreateAuthorityByTransport =
+  sourceFollowCreatesAuthorityIsFalse
+    canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+toeTargetDomainNeedsOwnAuthorityWitness :
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
+    (domainTransportReceipt canonicalGovernedLegalWorkflowSourceSemanticHandoff)
+  ≡ true
+toeTargetDomainNeedsOwnAuthorityWitness =
+  targetDomainNeedsOwnAuthorityWitnessIsTrue
+    canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+toeRepresentationEqualityDoesNotCreateLegalAuthority :
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    (domainTransportReceipt canonicalGovernedLegalWorkflowSourceSemanticHandoff)
+  ≡ false
+toeRepresentationEqualityDoesNotCreateLegalAuthority =
+  representationEqualityCreatesLegalAuthorityIsFalse
+    canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+toeVendorIdentityDoesNotCreateAuthority :
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    (domainTransportReceipt canonicalGovernedLegalWorkflowSourceSemanticHandoff)
+  ≡ false
+toeVendorIdentityDoesNotCreateAuthority =
+  vendorIdentityCreatesAuthorityIsFalse
     canonicalGovernedLegalWorkflowSourceSemanticHandoff
