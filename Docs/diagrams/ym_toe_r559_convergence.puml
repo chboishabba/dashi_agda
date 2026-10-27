@@ -1,0 +1,76 @@
+@startuml
+title DASHI Yang-Mills TOE convergence
+
+left to right direction
+skinparam componentStyle rectangle
+
+package "Canonical Yang-Mills owners" {
+  component "Beta-driven density flow" as Beta
+  component "Canonical complete density" as Density
+  component "Regular-E localization" as RegularE
+  component "Compact-simple Casimir / beta floor" as Casimir
+  component "CMP116 stress marked-shell bound" as StressShell
+  component "Stress shell-energy / Hilbert bound" as StressHilbert
+  component "Goal-1 maximum cut R485" as Goal1
+  component "Irreducible 14-family view R546" as Irreducible
+  component "Critical 7-family path R558" as Critical
+  component "Continuum / Clay non-promotion" as NonPromotion
+}
+
+component "YangMillsTOEConvergenceRound559Exact" as YMTOE
+component "EverythingTOESymmetryResolved369" as Root
+component "Unified.Physics" as UnifiedPhysics
+component "Unifier\n(carrier/facade only)" as Unifier
+
+Beta --> YMTOE : exact owner reuse
+Density --> YMTOE : exact owner reuse
+RegularE --> YMTOE : exact owner reuse
+Casimir --> YMTOE : exact owner reuse
+StressShell --> YMTOE : exact owner reuse
+StressHilbert --> YMTOE : exact owner reuse
+Goal1 --> YMTOE : representation-safe maximum cut
+Irreducible --> YMTOE : source-family quotient
+Critical --> YMTOE : mass-gap / H6 critical path
+NonPromotion --> YMTOE : fail-closed gates
+
+YMTOE --> Root : TOE import edge
+YMTOE --> UnifiedPhysics : normalized physics facade
+YMTOE --> Unifier : exact re-export only
+
+note bottom of YMTOE
+Preconditions:
+canonical owners exist.\nR485 is the current representation-safe Goal-1 maximum cut.\n
+Invariants:
+finite RG is not continuum YM.
+Casimir floor is not the missing Wilson/FP/Haar estimate.
+stress compiler/bounds are not literal physical source closure.
+proof ownership stays with canonical modules.
+
+Postconditions:
+root, Unified.Physics, and Unifier expose one YM TOE surface.\nR485 Goal-1 max-cut facts flow through R559 only.\ncontinuum, OS/Wightman, mass-gap, and Clay promotion stay blocked.
+end note
+
+note bottom of Unifier
+Legacy placeholder interfaces are not proof authority.
+end note
+
+package "Literal two-Wilson source path" {
+  [TwoWilsonR413] as W413
+  [R444 twice-marked carrier] as W444
+  [R556 finite covariance] as W556
+  [General geometric trajectory] as WGeo
+}
+
+W413 --> W444 : source replay
+W444 --> W556 : quarter-dyadic family
+W444 --> WGeo : general A q^d family
+W556 --> R559 : exact finite covariance owner
+WGeo --> R559 : route-neutral decay owner
+
+note right of W413
+  Original source attribution stays with
+  Bałaban CMP99/CMP109/CMP116 owners.
+  DASHI owns only the typed composition.
+end note
+
+@enduml
