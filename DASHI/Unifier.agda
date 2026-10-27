@@ -1,6 +1,7 @@
 module DASHI.Unifier where
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+import DASHI.Unified.QuantumMetrologyTOEConvergenceExact as QuantumMetrologyTOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -12,6 +13,44 @@ open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
 
+
+
+
+------------------------------------------------------------------------
+-- Quantum metrology TOE convergence.
+--
+-- The theorem owner is DASHI.Unified.QuantumMetrologyTOEConvergenceExact.
+-- This facade re-exports exact fail-closed results only.
+------------------------------------------------------------------------
+
+open QuantumMetrologyTOE public using
+  ( clockContractNotExternallyBound
+  ; clockContractClaimsNoExperimentalResult
+  ; clockContractDoesNotPromote
+  ; clockAuthorityReceiptFailsClosed
+  ; siClockBridgeClaimsNoEmpiricalResult
+  ; siClockBridgeClaimsNoPromotion
+  ; siClockBridgeStillRequiresExternalAuthority
+  ; dimensionlessClockLawDoesNotPromoteEmpirically
+  ; dimensionlessClockLawStillRequiresExternalCalibration
+  ; redshiftBridgeDoesNotPromoteEmpirically
+  ; redshiftBridgeDoesNotPromoteGR
+  ; siMetrologyTerminalPromotionStillFalse
+  ; siMetrologyFabricatesNoAuthority
+  ; bornMeasurementAuthorityStillExternal
+  ; unitaryDynamicsAuthorityStillExternal
+  ; finiteQuantumQFTStillNotPromoted
+  ; physicalChemistryMetrologyStillNotPromoted
+  ; unificationCriticalPathTerminalPromotionStillFalse
+  ; fullQuantumGravityStillNotPromoted
+  ; exactRationalEinsteinCouplingStillNotClaimed
+  ; acceptedMeasuredGCouplingStillRequired
+  ; negativeTraceStillDoesNotCloseActiveStress
+  ; traceAnomalyStillDoesNotCloseRepulsionSource
+  ; timelikeEnergyDensityControlStillRequired
+  ; QuantumMetrologyTOEConvergenceReceipt
+  ; canonicalQuantumMetrologyTOEConvergenceReceipt
+  )
 
 ------------------------------------------------------------------------
 -- Exact Yang-Mills theorem-owner exports.
