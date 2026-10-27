@@ -1,6 +1,7 @@
 module DASHI.Unifier where
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+import DASHI.Unified.FleetFormalGapTOEExact as FleetFormalGap
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 
@@ -946,3 +947,40 @@ unifierDocumentRoleDoesNotSupplyLegalSourceAuthority =
 unifierCanonicalLegalSourceAuthorityBoundary =
   GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
 
+
+------------------------------------------------------------------------
+-- Fleet R5 formal-gap convergence.
+-- Unifier is a consumer and does not own the Fleet source receipt.
+------------------------------------------------------------------------
+
+unifierFleetFormalGapReceipt :
+  FleetFormalGap.FleetFormalGapTOEReceipt
+unifierFleetFormalGapReceipt =
+  FleetFormalGap.canonicalFleetFormalGapReceipt
+
+unifierFleetOnlyFormalResidualDispatches :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.unformalisedFormalGap ≡ true
+unifierFleetOnlyFormalResidualDispatches = refl
+
+unifierFleetDischargedFibresDoNotRedispatch :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.dischargedCoreKnowledge ≡ false
+unifierFleetDischargedFibresDoNotRedispatch = refl
+
+unifierFleetContradictionsRemainSeparate :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.polarityContradictionGap ≡ false
+unifierFleetContradictionsRemainSeparate = refl
+
+unifierFleetSpectralMotifDoesNotCreateTruth :
+  FleetFormalGap.SpectralMotifCreatesTruth → ⊥
+unifierFleetSpectralMotifDoesNotCreateTruth =
+  FleetFormalGap.spectralMotifDoesNotCreateTruth
+
+unifierFleetGapCountDoesNotCreateProof :
+  FleetFormalGap.FormalGapCountCreatesProof → ⊥
+unifierFleetGapCountDoesNotCreateProof =
+  FleetFormalGap.formalGapCountDoesNotCreateProof
+
+unifierFleetGapCountDoesNotDetermineIdentity :
+  FleetFormalGap.GapCountDeterminesGapIdentity → ⊥
+unifierFleetGapCountDoesNotDetermineIdentity =
+  FleetFormalGap.gapCountDoesNotDetermineGapIdentity
