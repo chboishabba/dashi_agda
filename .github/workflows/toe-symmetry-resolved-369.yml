@@ -22,6 +22,8 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda'
       - 'DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
@@ -47,6 +49,8 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda'
       - 'DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
@@ -136,6 +140,11 @@ jobs:
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda --root .
           dashi-repo related physicalClosureRound6CutsetInhabitantsLevel --root . --limit 20
           dashi-repo related gate4ObligationCount --root . --limit 20
+          dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda --root .
+          dashi-repo related currentFrontierLedgerTypecheckLevel --root . --limit 20
+          dashi-repo related currentSurfacePostulateFreeLevel --root . --limit 20
+          dashi-repo discover 'Balaban Gate4 current frontier completion ledger physical analytic residual' --root . --limit 50
           dashi-repo discover 'Yang Mills Gate 4 58 unresolved cutset CMP109 Bishop Federbush background gauge Hessian polymer' --root . --limit 50
           dashi-repo related scaleTransferPromotionEliminator --root . --limit 20
           dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
@@ -181,6 +190,8 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
             DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
+            DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda
+            DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda
             DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
@@ -210,6 +221,8 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
             DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
+            DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda
+            DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda
             DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
