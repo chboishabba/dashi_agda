@@ -1,7 +1,11 @@
 module DASHI.Unifier where
 
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -313,3 +317,43 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- TOE Yang-Mills non-promotion reuse.
+------------------------------------------------------------------------
+
+unifierYangMillsPublishedRGDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsPublishedRGDoesNotPromoteContinuum =
+  YMTOE.toePublishedRGDoesNotPromoteContinuum
+
+unifierYangMillsContinuumMassGapNotPromoted :
+  YMTOE.toeContinuumMassGapPromoted ≡ false
+unifierYangMillsContinuumMassGapNotPromoted =
+  YMTOE.toeContinuumMassGapPromotedIsFalse
+
+unifierYangMillsClayNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+unifierYangMillsClayNotPromoted =
+  YMTOE.toeClayYangMillsPromotedIsFalse
+
+------------------------------------------------------------------------
+-- Antigravity S4 / P3G TOE reuse.
+------------------------------------------------------------------------
+
+unifierYangMillsAntigravityS4CompilerLevel : ProofLevel
+unifierYangMillsAntigravityS4CompilerLevel =
+  YMTOE.toeAntigravityS4PhysicalMinCutCompilerLevel
+
+unifierYangMillsAntigravityP3GCompilerLevel : ProofLevel
+unifierYangMillsAntigravityP3GCompilerLevel =
+  YMTOE.toeAntigravityP3GPhysicalProducerCompilerLevel
+
+unifierYangMillsAntigravityInitialSharedCouplingLevel : ProofLevel
+unifierYangMillsAntigravityInitialSharedCouplingLevel =
+  YMTOE.toeAntigravityP3GInitialSharedCouplingLevel
+
+unifierYangMillsAntigravityLocalRemainderLevel : ProofLevel
+unifierYangMillsAntigravityLocalRemainderLevel =
+  YMTOE.toeAntigravityP3GLocalRemainderLevel
