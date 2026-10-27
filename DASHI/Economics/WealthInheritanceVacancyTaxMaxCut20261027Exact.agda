@@ -29,6 +29,7 @@ data TaxBase : Set where
   corporateJurisdictionalGloBEIncome : TaxBase
   securitiesTransactionValue : TaxBase
   unimprovedLandSiteValue : TaxBase
+  unverifiedIdleCorporateEquityStatus : TaxBase
 
 data Policy : Set where
   incomeHundredAboveThreshold : Policy
@@ -41,6 +42,7 @@ data Policy : Set where
   multinationalGloBEProfitTopUp : Policy
   securitiesPurchaseStampDuty : Policy
   landSiteValueTax : Policy
+  proposedDurationEscalatingIdleEquityLevy : Policy
 
 taxBase : Policy → TaxBase
 taxBase incomeHundredAboveThreshold = annualPersonalIncome
@@ -53,6 +55,7 @@ taxBase markToMarketGainsLevy = annualChangeInAssetValue
 taxBase multinationalGloBEProfitTopUp = corporateJurisdictionalGloBEIncome
 taxBase securitiesPurchaseStampDuty = securitiesTransactionValue
 taxBase landSiteValueTax = unimprovedLandSiteValue
+taxBase proposedDurationEscalatingIdleEquityLevy = unverifiedIdleCorporateEquityStatus
 
 incomeTaxIsNotStockCap :
   incomeHundredAboveThreshold ≡ wealthHundredAboveThreshold → ⊥
@@ -65,6 +68,35 @@ vacancyTaxIsNotWealthCap ()
 inheritanceTaxIsNotAnnualWealthLevy :
   inheritanceTransferLevy ≡ recurringNetWealthLevy → ⊥
 inheritanceTaxIsNotAnnualWealthLevy ()
+
+-- Three consecutive-year PROPOSAL-ONLY rates found in a supplied AI text:
+-- 1%, 2%, then 5%. This is NOT Victoria VRLT's normal 1%, 2%, 3%.
+-- Neither the legal definition of "idle equity" nor a public revenue
+-- receipt is specified in the source. The result below is only a rate
+-- numerator in basis points. There is NO legal tax instrument here.
+data ProposalTenure : Set where
+  firstProposalYear : ProposalTenure
+  secondProposalYear : ProposalTenure
+  laterProposalYear : ProposalTenure
+
+proposalIdleEquityRateBasisPoints : ProposalTenure → Nat
+proposalIdleEquityRateBasisPoints firstProposalYear = 100
+proposalIdleEquityRateBasisPoints secondProposalYear = 200
+proposalIdleEquityRateBasisPoints laterProposalYear = 500
+
+sourceAIProposedRatesAreNotVictoriaLaw :
+  proposalIdleEquityRateBasisPoints laterProposalYear ≡ 300 → ⊥
+sourceAIProposedRatesAreNotVictoriaLaw ()
+
+idleEquityIsNotVacantHouse :
+  proposedDurationEscalatingIdleEquityLevy ≡
+  vacantHomesStatusLevy → ⊥
+idleEquityIsNotVacantHouse ()
+
+data AIIdleEquityProposalIsEnactedLaw : Set where
+aiIdleEquitySuggestionCannotSelfEnact :
+  AIIdleEquityProposalIsEnactedLaw → ⊥
+aiIdleEquitySuggestionCannotSelfEnact ()
 
 -- An ownership disclosure mechanism is NOT itself a tax instrument.
 data OwnershipDisclosure : Set where
