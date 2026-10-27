@@ -16,6 +16,7 @@ import DASHI.Unified.TOEQuantumInhabitantsExact as QuantumInhabitants
 import DASHI.Unified.TOEGaugeInhabitantsExact as GaugeInhabitants
 import DASHI.Unified.TOEOpenAIMathAcceleratorExact as OpenAI
 import DASHI.Unified.TOEPrimitiveMaxCutExact as Primitive
+import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact as Governance
 
 data TOECandidateStatus : Set where
   candidateConstructed : TOECandidateStatus
@@ -75,6 +76,7 @@ record TOECandidate : Setω where
     concreteInhabitants : Inhabitants.TOEConcreteInhabitantBundle
     theoremDonorInhabitants : List OpenAI.OpenAITheoremInhabitant
     primitiveMaxCut : Primitive.CurrentPrimitiveMaxCut
+    governanceHandoff : Governance.TOEGovernanceHandoff
     monsterVertical : Monster.MonsterPhysicalRealizationSocket
     gaugeQFTGRVertical : Gauge.GaugeQFTGRRealization
     arithmeticCMVertical : Arithmetic.ArithmeticCMRealization
@@ -92,6 +94,7 @@ currentTOECandidate =
     ; concreteInhabitants = Inhabitants.canonicalTOEConcreteInhabitantBundle
     ; theoremDonorInhabitants = OpenAI.canonicalOpenAITheoremInhabitants
     ; primitiveMaxCut = Primitive.currentPrimitiveMaxCut
+    ; governanceHandoff = Governance.canonicalTOEGovernanceHandoff
     ; monsterVertical = Monster.canonicalMonsterPhysicalRealization
     ; gaugeQFTGRVertical = Gauge.canonicalGaugeQFTGRRealization
     ; arithmeticCMVertical = Arithmetic.canonicalArithmeticCMRealization
