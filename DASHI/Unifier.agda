@@ -380,6 +380,11 @@ toeGovernedLegalWorkflowZKPReceipt :
 toeGovernedLegalWorkflowZKPReceipt =
   GovernanceTOE.canonicalGovernedLegalWorkflowZKPReceipt
 
+toeGovernedLegalWorkflowIntrospectiveZKPFrame :
+  GovernanceTOE.GovernedLegalWorkflowIntrospectiveZKPFrame
+toeGovernedLegalWorkflowIntrospectiveZKPFrame =
+  GovernanceTOE.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
+
 toeCaseySelectionDoesNotCreateWorldTruth :
   GovernanceTOE.CaseySelectionCreatesWorldTruth → ⊥
 toeCaseySelectionDoesNotCreateWorldTruth =
