@@ -330,9 +330,7 @@ sensibLawActionstepGovernanceTOEReceipt =
   SensibLawActionstep.canonicalSensibLawActionstepGovernanceTOEReceipt
 
 sensibLawSemanticPromotionDoesNotCreateLegalAuthority :
-  SensibLawActionstep.Semantic.legalAuthorityFlag
-    SensibLawActionstep.Semantic.semanticPromotionAuthorityBoundary
-  ≡ false
+  SensibLawActionstep.SemanticPromotionLegalAuthorityClosed
 sensibLawSemanticPromotionDoesNotCreateLegalAuthority =
   SensibLawActionstep.semanticPromotionDoesNotCreateLegalAuthority
 
