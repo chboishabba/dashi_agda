@@ -2,6 +2,7 @@ module DASHI.EverythingTOESymmetryResolved369 where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false)
+open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
@@ -29,5 +30,25 @@ toeKernelProofDoesNotEstablishSourceSemantics :
     Closure.criticalCapstoneStatus ≡ false
 toeKernelProofDoesNotEstablishSourceSemantics =
   Governance.kernelClosureIsNotSemanticExhaustiveness
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
+
+
+------------------------------------------------------------------------
+-- Governed legal-workflow TOE receipt.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowZKPReceipt :
+  LegalGovernance.GovernedLegalWorkflowZKPReceipt
+toeGovernedLegalWorkflowZKPReceipt =
+  LegalGovernance.canonicalGovernedLegalWorkflowZKPReceipt
+
+toeCaseySelectionDoesNotCreateWorldTruth :
+  LegalGovernance.Suite.CaseySelectionCreatesWorldTruth → ⊥
+toeCaseySelectionDoesNotCreateWorldTruth =
+  LegalGovernance.toeCaseySelectionDoesNotCreateWorldTruth
+
+toeKnowledgeDoesNotCreateExecutionAuthority :
+  LegalGovernance.Authority.KnowledgeIsAuthority → ⊥
+toeKnowledgeDoesNotCreateExecutionAuthority =
+  LegalGovernance.toeKnowledgeDoesNotCreateExecutionAuthority
