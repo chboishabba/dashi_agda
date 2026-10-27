@@ -104,7 +104,7 @@ def report():
     vertices = synthetic_profile()
     ordinary = ray_fixture(vertices)
     mirrored = ray_fixture([parity(v) for v in vertices], parity((Q(3), Q(1))))
-    circular = ray_fixture(synthetic_profile(radial_step=Q(0)))
+    diamond = ray_fixture(synthetic_profile(radial_step=Q(0)))
     return {
         "source_constraints": source,
         "limits": [
@@ -115,12 +115,12 @@ def report():
             "parity is exact; physical 3D, absorption, temperature, frequency and shadowing absent",
         ],
         "segments": len(ordinary),
-        "energy_conservation_all": all(x["ray_energy_before"] == x["ray_energy_after"] for x in ordinary + mirrored + circular),
-        "momentum_balance_all": all(add(x["outgoing"], x["wall_impulse"]) == x["incoming"] for x in ordinary + mirrored + circular),
+        "energy_conservation_all": all(x["ray_energy_before"] == x["ray_energy_after"] for x in ordinary + mirrored + diamond),
+        "momentum_balance_all": all(add(x["outgoing"], x["wall_impulse"]) == x["incoming"] for x in ordinary + mirrored + diamond),
         "parity_torque_reversal_all": all(a["wall_torque"] == -b["wall_torque"] for a, b in zip(ordinary, mirrored)),
         "spiral_wall_torque_sum": fraction_str(sum((x["wall_torque"] for x in ordinary), Q(0))),
         "mirrored_wall_torque_sum": fraction_str(sum((x["wall_torque"] for x in mirrored), Q(0))),
-        "circular_control_wall_torque_sum": fraction_str(sum((x["wall_torque"] for x in circular), Q(0))),
+        "constant_radius_diamond_control_wall_torque_sum": fraction_str(sum((x["wall_torque"] for x in diamond), Q(0))),
         "physical_effect_established": False,
         "novel_torsion_effect_established": False,
         "patented_apparatus_geometry_identified": False,
