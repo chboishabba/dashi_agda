@@ -390,6 +390,11 @@ yangMillsBalabanR559Gate4InhabitantsLevel =
   BalabanR559TOE.gate4InhabitantsLevel
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
+yangMillsBalabanR559Gate4PaidReductionLedgerLevel : ProofLevel
+yangMillsBalabanR559Gate4PaidReductionLedgerLevel =
+  BalabanR559TOE.gate4PaidReductionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
 yangMillsBalabanScaleTransferNonPromotion :
   BalabanR559TOE.ScaleTransferPromotion → ⊥
 yangMillsBalabanScaleTransferNonPromotion =
