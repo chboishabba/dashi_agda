@@ -2,7 +2,7 @@
 module DASHI.Unified.ForecastComparativeNonPromotionTOEBridgeRegression where
 
 open import Agda.Builtin.Bool using (false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Unified.ForecastComparativeNonPromotionTOEBridgeExact as TOE
 import DASHI.Statistics.ForecastVerificationKernelExact as Kernel
@@ -11,6 +11,7 @@ import DASHI.Core.ProviderNeutralWorldQueryAlgebraExact as Query
 import DASHI.Law.SensibLawWorldMonitorComparativeAdapterExact as WorldMonitor
 import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as Trade
 import DASHI.Law.SensibLawDashiTradeTypedExplanationExact as TradeExplain
+import DASHI.Unifier as LegacyUnifier
 
 probabilityStillNotWorldState :
   Kernel.ForecastVerificationKernelBoundary.probabilityIsWorldState
@@ -81,3 +82,24 @@ typedTradeExplanationStillDoesNotPredictOutcome :
   ≡ false
 typedTradeExplanationStillDoesNotPredictOutcome =
   TOE.toeTypedTradeExplanationDoesNotPredictOutcome
+
+
+unifierProbabilityAliasUsesExactOwner :
+  LegacyUnifier.toeForecastProbabilityIsNotWorldState
+  ≡ TOE.toeProbabilityIsNotWorldState
+unifierProbabilityAliasUsesExactOwner = refl
+
+unifierScoreAliasUsesExactOwner :
+  LegacyUnifier.toeForecastScoreIsNotTruth
+  ≡ TOE.toeScoreIsNotForecastTruth
+unifierScoreAliasUsesExactOwner = refl
+
+unifierSearchPaymentAliasUsesExactOwner :
+  LegacyUnifier.toeForecastSearchHitDoesNotPayResidual
+  ≡ TOE.toeSearchHitDoesNotPayResidual
+unifierSearchPaymentAliasUsesExactOwner = refl
+
+unifierTradeCausationAliasUsesExactOwner :
+  LegacyUnifier.toeTradeJustificationDoesNotCreateCausalProof
+  ≡ TOE.toeTradeJustificationDoesNotCreateCausalProof
+unifierTradeCausationAliasUsesExactOwner = refl
