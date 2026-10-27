@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHFrontier
 import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumLean
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
@@ -593,3 +594,53 @@ unifiedLeanMillenniumSourceWrittenKernelPromotionImpossible :
   MillenniumLean.LeanMillenniumSourceWrittenKernelPromotion → ⊥
 unifiedLeanMillenniumSourceWrittenKernelPromotionImpossible =
   MillenniumLean.leanMillenniumSourceWrittenKernelPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Riemann G21 canonical non-promotion.
+------------------------------------------------------------------------
+
+unifiedRHStrictTP2Receipt : RHFrontier.StrictTP2TrancheReceipt
+unifiedRHStrictTP2Receipt = RHFrontier.canonicalStrictTP2TrancheReceipt
+
+unifiedRHActualSinhTP2StillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.actualSinhTP2Derived
+    unifiedRHStrictTP2Receipt ≡ false
+unifiedRHActualSinhTP2StillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.actualSinhTP2DerivedIsFalse
+    unifiedRHStrictTP2Receipt
+
+unifiedRHContinuumMomentSignStillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.actualOddContinuumSignDerived
+    unifiedRHStrictTP2Receipt ≡ false
+unifiedRHContinuumMomentSignStillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.actualOddContinuumSignDerivedIsFalse
+    unifiedRHStrictTP2Receipt
+
+unifiedRHDeterminantRemainderStillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerived
+    unifiedRHStrictTP2Receipt ≡ false
+unifiedRHDeterminantRemainderStillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerivedIsFalse
+    unifiedRHStrictTP2Receipt
+
+unifiedRHFiniteRadiusStillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerived
+    unifiedRHStrictTP2Receipt ≡ false
+unifiedRHFiniteRadiusStillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerivedIsFalse
+    unifiedRHStrictTP2Receipt
+
+unifiedRHPrimeIdentityStillOpen :
+  RHFrontier.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerived
+    unifiedRHStrictTP2Receipt ≡ false
+unifiedRHPrimeIdentityStillOpen =
+  RHFrontier.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerivedIsFalse
+    unifiedRHStrictTP2Receipt
+
+unifiedRHClayNotPromoted :
+  RHFrontier.StrictTP2TrancheReceipt.riemannHypothesisDerived
+    unifiedRHStrictTP2Receipt ≡ false
+unifiedRHClayNotPromoted =
+  RHFrontier.StrictTP2TrancheReceipt.riemannHypothesisDerivedIsFalse
+    unifiedRHStrictTP2Receipt
