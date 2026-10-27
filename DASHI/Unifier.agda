@@ -1,5 +1,8 @@
 module DASHI.Unifier where
 
+-- Reuse source-owned legal governance non-promotion proofs.
+import DASHI.Unified.LegalGovernanceNonPromotionTOEExact
+
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
