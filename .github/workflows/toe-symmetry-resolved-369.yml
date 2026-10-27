@@ -7,6 +7,7 @@ on:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CurrentFrontierRound474Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Unified/Physics.agda'
@@ -53,7 +54,8 @@ jobs:
         run: |
           dashi-repo index --root .
           dashi-repo status --root .
-          dashi-repo discover "Balaban RG scale density regular-E Casimir stress continuum non-promotion" --root . --limit 30
+          dashi-repo discover "Balaban Goal1 RG scale density regular-E Casimir stress continuum non-promotion" --root . --limit 30
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
 
           symbols=(
             DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact.sourceCouplingIsBetaHistoryCoupling
@@ -63,6 +65,10 @@ jobs:
             DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact.sourceDerivativeBelowExistingMarkedShell
             DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact.stressCoefficientEnergyUniformBound
             DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toePublishedRGDoesNotPromoteContinuum
+            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1A1CurrentStepBetaSourceLevel
+            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1BLiteralPublishedSelectedLocalizationLevel
+            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1CExactSameFamilySourceCutLevel
+            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toeGoal1G2SameSystemNontrivialitySemanticsLevel
           )
           for symbol in "${symbols[@]}"; do
             dashi-repo related "$symbol" --root . --limit 20
