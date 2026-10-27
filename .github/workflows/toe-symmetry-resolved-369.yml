@@ -20,6 +20,8 @@ on:
       - 'DASHI/Unified/**'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
+      - 'DASHI/Unified/PNFSourceBoundaryTOEExact.agda'
+      - 'DASHI/Unified/PNFSourceBoundaryTOEValidation.agda'
       - 'DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda'
       - 'DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda'
       - 'tests/test_pnf_distilled_nonpromotion_toe.py'
@@ -56,6 +58,8 @@ on:
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
+      - 'DASHI/Unified/PNFSourceBoundaryTOEExact.agda'
+      - 'DASHI/Unified/PNFSourceBoundaryTOEValidation.agda'
       - 'DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda'
       - 'DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda'
       - 'tests/test_pnf_distilled_nonpromotion_toe.py'
@@ -115,6 +119,10 @@ jobs:
           dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
           dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
+          dashi-repo diagnose DASHI/Unified/PNFSourceBoundaryTOEExact.agda --root .
+          dashi-repo related canonicalPNFSourceBoundaryTOEReceipt --root . --limit 20
+          dashi-repo discover 'PNF source boundary diagnostic proxy fungal species evidence Kluver form constant web identifier' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.PNFSourceBoundaryTOE --root .
           dashi-repo diagnose DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda --root .
           dashi-repo related canonicalPNFDistilledNonPromotionBoundary --root . --limit 20
           dashi-repo related canonicalPNFDistilledReuseZKPReceipt --root . --limit 20
@@ -138,6 +146,12 @@ jobs:
           dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFSourceBoundaryTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFSourceBoundaryTOEValidation.agda
           dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
