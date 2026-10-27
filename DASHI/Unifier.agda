@@ -956,25 +956,28 @@ unifierFleetFormalGapZKPFrame =
   FleetGapTOE.canonicalFleetFormalGapZKPFrame
 
 unifierFleetEigenPriorityDoesNotCreateProof :
-  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierFleetEigenPriorityDoesNotCreateProof =
   FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
 
 unifierFleetExternalCountDoesNotCreateFormalDischarge :
-  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierFleetExternalCountDoesNotCreateFormalDischarge =
   FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
 
 unifierFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
 unifierFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
 
 unifierFleetContradictionGapsRemainSeparate :
-  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
 unifierFleetContradictionGapsRemainSeparate =
-  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
-
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
 
 unifierFleetPlanningTextDoesNotCreateFormalResidual :
   FleetGapTOE.PlanningSourceTextFormalResidualFlag
