@@ -1,5 +1,8 @@
 module DASHI.Unified.Everything where
 
+-- Reuse source-owned legal governance non-promotion proofs.
+import DASHI.Unified.LegalGovernanceNonPromotionTOEExact
+
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
