@@ -224,3 +224,28 @@ fleetContradictionSeparationFlagIsTrue :
   ≡ true
 fleetContradictionSeparationFlagIsTrue =
   Fleet.fleetKeepsContradictionsSeparate
+
+
+------------------------------------------------------------------------
+-- Direct canonical PNF non-promotion regression.
+------------------------------------------------------------------------
+
+toeNonRebuildableCoordinateStillNotPromoted :
+  Fleet.NonRebuildableCoordinatePromotion → ⊥
+toeNonRebuildableCoordinateStillNotPromoted =
+  TOE.toeFleetNonRebuildableCoordinatePromotionImpossible
+
+unifierNonRebuildableCoordinateStillNotPromoted :
+  Fleet.NonRebuildableCoordinatePromotion → ⊥
+unifierNonRebuildableCoordinateStillNotPromoted =
+  Unifier.unifierFleetNonRebuildableCoordinatePromotionImpossible
+
+toeVectorSpectralAuthorityStillNotPromoted :
+  Fleet.VectorSpectralAuthorityPromotion → ⊥
+toeVectorSpectralAuthorityStillNotPromoted =
+  TOE.toeFleetVectorSpectralAuthorityPromotionImpossible
+
+unifierVectorSpectralAuthorityStillNotPromoted :
+  Fleet.VectorSpectralAuthorityPromotion → ⊥
+unifierVectorSpectralAuthorityStillNotPromoted =
+  Unifier.unifierFleetVectorSpectralAuthorityPromotionImpossible
