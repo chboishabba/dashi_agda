@@ -12,9 +12,25 @@ import DASHI.Unified.ChemistrySupervoxel as ChemistrySupervoxel
 import DASHI.Unified.CrossScaleMatterPhysics as CrossScaleMatterPhysics
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
+governedLegalWorkflowTOEBoundary :
+  LegalGovernance.GovernedLegalWorkflowTOEBoundary
+governedLegalWorkflowTOEBoundary =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
+
+governedLegalWorkflowTOEInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+governedLegalWorkflowTOEInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+governedLegalWorkflowIntrospectiveZKPFrame :
+  LegalGovernance.GovernedLegalWorkflowIntrospectiveZKPFrame
+governedLegalWorkflowIntrospectiveZKPFrame =
+  LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
+
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
   CarrierGrammar.carrierGrammarObject
