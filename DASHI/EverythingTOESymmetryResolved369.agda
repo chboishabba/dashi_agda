@@ -9,6 +9,7 @@ import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObse
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
 
+import DASHI.Promotion.CrossDomainClaimPromotionBoundary as CrossDomainBoundary
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -1456,3 +1457,48 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Fermentation control observation and non-promotion surface.
+------------------------------------------------------------------------
+
+toeFermentationControlBoundary :
+  CrossDomainBoundary.FermentationControlBoundary
+toeFermentationControlBoundary =
+  CrossDomainBoundary.canonicalFermentationControlBoundary
+
+toeFermentationControlZKPFrame :
+  CrossDomainBoundary.FermentationControlZKPFrame
+toeFermentationControlZKPFrame =
+  CrossDomainBoundary.canonicalFermentationControlZKPFrame
+
+toeClockElapsedDoesNotCreateFeedReadiness :
+  CrossDomainBoundary.ClockElapsedCreatesFeedReadiness → ⊥
+toeClockElapsedDoesNotCreateFeedReadiness =
+  CrossDomainBoundary.clockElapsedDoesNotCreateFeedReadiness
+
+toeVisibleVolumeDoesNotCreateSubstrateDepletion :
+  CrossDomainBoundary.VisibleVolumeCreatesSubstrateDepletion → ⊥
+toeVisibleVolumeDoesNotCreateSubstrateDepletion =
+  CrossDomainBoundary.visibleVolumeDoesNotCreateSubstrateDepletion
+
+toePHDoesNotCreateTotalTitratableAcidity :
+  CrossDomainBoundary.PHCreatesTotalTitratableAcidity → ⊥
+toePHDoesNotCreateTotalTitratableAcidity =
+  CrossDomainBoundary.pHDoesNotCreateTotalTitratableAcidity
+
+toeActivationProtocolDoesNotCreateMaintenancePolicy :
+  CrossDomainBoundary.ActivationProtocolCreatesMaintenancePolicy → ⊥
+toeActivationProtocolDoesNotCreateMaintenancePolicy =
+  CrossDomainBoundary.activationProtocolDoesNotCreateMaintenancePolicy
+
+toeHighHydrationPreferenceDoesNotCreateMachineAdmissibility :
+  CrossDomainBoundary.HighHydrationPreferenceCreatesMachineAdmissibility → ⊥
+toeHighHydrationPreferenceDoesNotCreateMachineAdmissibility =
+  CrossDomainBoundary.highHydrationPreferenceDoesNotCreateMachineAdmissibility
+
+toeSingleTrajectoryDoesNotCreateOptimalFeedPolicy :
+  CrossDomainBoundary.SingleTrajectoryCreatesOptimalFeedPolicy → ⊥
+toeSingleTrajectoryDoesNotCreateOptimalFeedPolicy =
+  CrossDomainBoundary.singleTrajectoryDoesNotCreateOptimalFeedPolicy
