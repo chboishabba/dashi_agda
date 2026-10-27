@@ -1,84 +1,91 @@
 module DASHI.Unified.PNFDistilledNonPromotionTOEValidation where
 
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Unified.PNFDistilledNonPromotionTOEExact as Bridge
+import DASHI.Unified.PNFSourceBoundaryTOEExact as Boundary
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as Distilled
 import DASHI.Unifier as Unifier
 
-unifierUsesCanonicalPNFDistilledBoundary :
-  Unifier.toePNFDistilledNonPromotionBoundary
+unifierUsesCanonicalPNFSourceBoundaryReceipt :
+  Unifier.toePNFSourceBoundaryReceipt
   ≡
-  Bridge.canonicalPNFDistilledNonPromotionBoundary
-unifierUsesCanonicalPNFDistilledBoundary =
+  Boundary.canonicalPNFSourceBoundaryTOEReceipt
+unifierUsesCanonicalPNFSourceBoundaryReceipt =
   refl
 
 unifierUsesCanonicalPNFDistilledZKPReceipt :
   Unifier.toePNFDistilledReuseZKPReceipt
   ≡
-  Bridge.canonicalPNFDistilledReuseZKPReceipt
+  Distilled.canonicalPNFDistilledReuseZKPReceipt
 unifierUsesCanonicalPNFDistilledZKPReceipt =
   refl
 
-gluingDiagnosticRemainsNonPromoting :
-  Bridge.gluingDiagnosticPromotionIsFalse
-    Unifier.toePNFDistilledNonPromotionBoundary
+unifierGluingFactIsCanonical :
+  Unifier.toePNFGluingProxyDoesNotProveTrueLinearity
   ≡
-  Bridge.gluingDiagnosticPromotionIsFalse
-    Bridge.canonicalPNFDistilledNonPromotionBoundary
-gluingDiagnosticRemainsNonPromoting =
+  Boundary.gluingProxyDoesNotProveTrueLinearity
+unifierGluingFactIsCanonical =
   refl
 
-selfAdjointDiagnosticRemainsNonPromoting :
-  Bridge.selfAdjointDiagnosticPromotionIsFalse
-    Unifier.toePNFDistilledNonPromotionBoundary
+unifierSelfAdjointFactIsCanonical :
+  Unifier.toePNFSelfAdjointProxyDoesNotProveFiniteTheorem
   ≡
-  Bridge.selfAdjointDiagnosticPromotionIsFalse
-    Bridge.canonicalPNFDistilledNonPromotionBoundary
-selfAdjointDiagnosticRemainsNonPromoting =
+  Boundary.selfAdjointProxyDoesNotProveFiniteTheorem
+unifierSelfAdjointFactIsCanonical =
   refl
 
-dominationDiagnosticRemainsNonPromoting :
-  Bridge.dominationDiagnosticPromotionIsFalse
-    Unifier.toePNFDistilledNonPromotionBoundary
+unifierDominationFactIsCanonical :
+  Unifier.toePNFDominationProxyDoesNotProveHamiltonianTheorem
   ≡
-  Bridge.dominationDiagnosticPromotionIsFalse
-    Bridge.canonicalPNFDistilledNonPromotionBoundary
-dominationDiagnosticRemainsNonPromoting =
+  Boundary.dominationProxyDoesNotProveHamiltonianTheorem
+unifierDominationFactIsCanonical =
   refl
 
-fungalEvidenceRequirementRemainsTrue :
-  Bridge.fungalWoodWebNeedsSpeciesEvidence
-    Unifier.toePNFDistilledNonPromotionBoundary
+unifierFungalEvidenceFactIsCanonical :
+  Unifier.toePNFFungalNetworkClaimsRequireSpeciesEvidence
   ≡
-  Bridge.fungalWoodWebNeedsSpeciesEvidence
-    Bridge.canonicalPNFDistilledNonPromotionBoundary
-fungalEvidenceRequirementRemainsTrue =
+  Boundary.fungalNetworkClaimsRequireSpeciesEvidence
+unifierFungalEvidenceFactIsCanonical =
+  refl
+
+unifierKluverCobwebCoordinateIsCanonical :
+  Unifier.toePNFKluverCobwebForm
+  ≡
+  Boundary.kluverCobwebForm
+unifierKluverCobwebCoordinateIsCanonical =
+  refl
+
+unifierWebIdentifierCoordinateIsCanonical :
+  Unifier.toePNFPsychogeographyWebIdentifierKind
+  ≡
+  Boundary.psychogeographyWebIdentifierKind
+unifierWebIdentifierCoordinateIsCanonical =
   refl
 
 sharedLexemeDoesNotCreateSemanticIdentity :
-  Bridge.sharedLexemeCreatesSemanticIdentity
+  Distilled.sharedLexemeCreatesSemanticIdentity
     Unifier.toePNFDistilledReuseZKPReceipt
   ≡ false
 sharedLexemeDoesNotCreateSemanticIdentity =
   refl
 
 diagnosticCheckDoesNotCreateTheoremPromotion :
-  Bridge.diagnosticCheckCreatesTheoremPromotion
+  Distilled.diagnosticCheckCreatesTheoremPromotion
     Unifier.toePNFDistilledReuseZKPReceipt
   ≡ false
 diagnosticCheckDoesNotCreateTheoremPromotion =
   refl
 
 sourceIdentifierDoesNotCreateProofAuthority :
-  Bridge.sourceIdentifierCreatesProofAuthority
+  Distilled.sourceIdentifierCreatesProofAuthority
     Unifier.toePNFDistilledReuseZKPReceipt
   ≡ false
 sourceIdentifierDoesNotCreateProofAuthority =
   refl
 
 esdMutationRemainsForbidden :
-  Bridge.esdSurfaceMutationAllowed
+  Distilled.esdSurfaceMutationAllowed
     Unifier.toePNFDistilledReuseZKPReceipt
   ≡ false
 esdMutationRemainsForbidden =
