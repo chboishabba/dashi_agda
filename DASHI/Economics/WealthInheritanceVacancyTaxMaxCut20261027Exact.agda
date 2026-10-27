@@ -305,6 +305,15 @@ henryGeorge1879 = tax-source-receipt
   "land rent / site value and the proposed single tax are distinct from improvements or wealth in general"
   "not a practical zero-harm proof for all land value tax regimes"
 
+smithWealthNations1776 : TaxSourceReceipt
+smithWealthNations1776 = tax-source-receipt
+  "Adam Smith"
+  "An Inquiry into the Nature and Causes of the Wealth of Nations (1776), Book V, Chapter II, Part II, Article I"
+  "https://en.wikisource.org/wiki/The_Wealth_of_Nations/Book_V/Chapter_2"
+  originalPoliticalText historicalAuthoredPosition
+  "distinguishes rent from profit and wages, favours taxing ground rent as a public-finance source, and says uninhabited houses ought to pay no house-rent tax"
+  "Smith's 1776 normative view of house-rent taxation does not invalidate, establish effects of, or describe enacted modern Vancouver vacancy taxes"
+
 piketty2015 : TaxSourceReceipt
 piketty2015 = tax-source-receipt
   "Thomas Piketty"
