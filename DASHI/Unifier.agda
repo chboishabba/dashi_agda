@@ -7,6 +7,122 @@ open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
 open import Data.Unit using (⊤; tt)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
+
+-- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
+import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+
+open BalabanRGTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
+
+balabanRGBlockSpinTransferStillOpen :
+  BalabanRGTOE.balabanRGBlockSpinTransferOpenFlag ≡ false
+balabanRGBlockSpinTransferStillOpen =
+  BalabanRGTOE.balabanRGBlockSpinTransferStillOpen
+
+balabanRGUniformKPAbsorptionStillOpen :
+  BalabanRGTOE.balabanRGUniformKPAbsorptionOpenFlag
+  ≡ false
+balabanRGUniformKPAbsorptionStillOpen =
+  BalabanRGTOE.balabanRGUniformKPAbsorptionStillOpen
+
+balabanRGContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanRGContinuumConstructionOpenFlag ≡ false
+balabanRGContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanRGContinuumConstructionStillOpen
+
+balabanRGContinuumMassGapStillOpen :
+  BalabanRGTOE.balabanRGContinuumMassGapOpenFlag
+  ≡ false
+balabanRGContinuumMassGapStillOpen =
+  BalabanRGTOE.balabanRGContinuumMassGapStillOpen
+
+balabanRGClayPromotionStillFalse :
+  BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
+balabanRGClayPromotionStillFalse =
+  BalabanRGTOE.balabanRGClayPromotionStillFalse
+
+
+balabanRGTOEReceipt : BalabanRGTOE.BalabanRGTOEReceipt
+balabanRGTOEReceipt =
+  BalabanRGTOE.canonicalBalabanRGTOEReceipt
+
+balabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
+balabanRGZKPFrame =
+  BalabanRGTOE.canonicalBalabanTOEZKPFrame
+
+------------------------------------------------------------------------
+-- Normalized Balaban density, regular-E, stress, and continuum surfaces.
+------------------------------------------------------------------------
+
+toeBalabanGeneratedActionDensityCompilerLevel : ProofLevel
+toeBalabanGeneratedActionDensityCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionDensityCompilerLevel
+
+toeBalabanCombinedRGEffectiveActionCompilerLevel : ProofLevel
+toeBalabanCombinedRGEffectiveActionCompilerLevel =
+  BalabanRGTOE.balabanCombinedRGEffectiveActionCompilerLevel
+
+toeBalabanGeneratedActionStressScaleCompilerLevel : ProofLevel
+toeBalabanGeneratedActionStressScaleCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionStressScaleCompilerLevel
+
+toeBalabanPublishedFlowRegularEProjectionCompilerLevel : ProofLevel
+toeBalabanPublishedFlowRegularEProjectionCompilerLevel =
+  BalabanRGTOE.balabanPublishedFlowRegularEProjectionCompilerLevel
+
+toeBalabanRegularESection2PredicateCompilerLevel : ProofLevel
+toeBalabanRegularESection2PredicateCompilerLevel =
+  BalabanRGTOE.balabanRegularESection2PredicateCompilerLevel
+
+toeBalabanConcreteRegularELocalizationWitnessLevel : ProofLevel
+toeBalabanConcreteRegularELocalizationWitnessLevel =
+  BalabanRGTOE.balabanConcreteRegularELocalizationWitnessLevel
+
+toeBalabanPublishedNonlinearRGCoreLevel : ProofLevel
+toeBalabanPublishedNonlinearRGCoreLevel =
+  BalabanRGTOE.balabanPublishedNonlinearRGCoreLevel
+
+toeBalabanPublishedRGPhysicalSameObjectLevel : ProofLevel
+toeBalabanPublishedRGPhysicalSameObjectLevel =
+  BalabanRGTOE.balabanPublishedRGPhysicalSameObjectLevel
+
+toeBalabanPublishedRGContinuumTransferStillOpen :
+  BalabanRGTOE.balabanPublishedRGContinuumTransferOpenFlag ≡ false
+toeBalabanPublishedRGContinuumTransferStillOpen =
+  BalabanRGTOE.balabanPublishedRGContinuumTransferStillOpen
+
+toeBalabanOSWightmanContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionOpenFlag ≡ false
+toeBalabanOSWightmanContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionStillOpen
+
+toeBalabanContinuumRouteMassGapPromotionStillOpen :
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionOpenFlag ≡ false
+toeBalabanContinuumRouteMassGapPromotionStillOpen =
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionStillOpen
+
+toeBalabanTerminalPromotionStillOpen :
+  BalabanRGTOE.balabanTerminalPromotionOpenFlag ≡ false
+toeBalabanTerminalPromotionStillOpen =
+  BalabanRGTOE.balabanTerminalPromotionStillOpen
 
 ¬ : Set → Set
 ¬ A = A → ⊥
