@@ -107,6 +107,7 @@ jobs:
           dashi-repo related round485MaximumCutCompilerLevel --root . --limit 20
           dashi-repo related round546IrreducibleSourceFamilyCutCompilerLevel --root . --limit 20
           dashi-repo related round558CriticalPathCompilerLevel --root . --limit 20
+          dashi-repo related toeCriticalFullCLayerRetainedForConservativeClayExistence --root . --limit 20
           dashi-repo related toeGoal1MaximumCutCompilerLevel --root . --limit 20
           dashi-repo discover 'Yang Mills Goal1 R485 R546 R558 maximum cut irreducible critical path R559 TOE' --root . --limit 50
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
