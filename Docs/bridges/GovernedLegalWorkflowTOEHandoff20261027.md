@@ -36,7 +36,8 @@ The regression owner is:
 
 The focused TOE root imports both modules.
 
-`DASHI.Unified.Everything` imports the exact bridge.
+The normalized bridge lives in `DASHI/Unified/`.
+The focused TOE root imports it directly.
 
 `DASHI.Unifier` exposes proof aliases only.
 It does not use its historical axiom-shaped interfaces as proof authority.
@@ -111,14 +112,22 @@ Its observer-only handoff posture is context only.
 
 ## F — Verification
 
-The focused TOE workflow kernel-checks `DASHI/EverythingTOESymmetryResolved369.agda`.
+The focused TOE workflow installs the existing repository-intelligence package.
 
-The workflow also rejects trust escapes in the new bridge and regression.
+It runs `dashi-repo related`, `dashi-repo discover`, and `dashi-repo lineage`.
 
-The branch diff must contain no ESD path.
+It runs the focused deterministic Python contract.
 
-The local `dashi-agda-preflight` referee was not available in this execution environment.
-No local-preflight receipt is claimed.
+It runs `dashi-agda-preflight` on the bridge, regression, TOE root, and Unifier.
+
+It rejects trust escapes.
+
+It rejects ESD path changes.
+
+It kernel-checks the bridge, regression, TOE root, and Unifier.
+
+A workflow definition is not a kernel receipt.
+Only an exact-head successful run may be cited as kernel verification.
 
 ## C4 / PlantUML view
 
@@ -154,6 +163,9 @@ Rule --> Bridge : citation/rule boundary
 Applicability --> Bridge : applicability boundary
 Governance --> Bridge : control/certification boundary
 Compliance --> Bridge : witness-preserving composition
+[ITIRFederatedTypedWorldProjectionExact] --> Bridge : suite role and Casey authority firewall
+[AgentAuthorityTrajectoryExact] --> Bridge : knowledge / execution authority firewall
+[DistributedEpistemicFabricSourceAtlasExact] --> Bridge : source attribution
 Bridge --> Unifier : exact aliases
 Bridge --> TOE : direct import
 Unifier --> TOE : facade compatibility
