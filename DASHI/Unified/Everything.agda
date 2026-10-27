@@ -13,6 +13,8 @@ open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Geo.EarthEmbeddingAcquisitionExact as EarthEmbeddingTOE
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballFrame
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
@@ -126,6 +128,62 @@ yangMillsFormalProjectionsRemainNonPromoting :
 yangMillsFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
+
+------------------------------------------------------------------------
+-- Learned Earth-embedding TOE convergence.
+------------------------------------------------------------------------
+
+unifiedEarthEmbeddingReceipt :
+  EarthEmbeddingTOE.EarthEmbeddingTOEReceipt
+unifiedEarthEmbeddingReceipt =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt
+
+unifiedEarthEmbeddingZKPFrame :
+  ParetoSnowballFrame.TOEZKPFrame
+unifiedEarthEmbeddingZKPFrame =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEZKPFrame
+
+unifiedAlphaEarthDimensionIs64 :
+  EarthEmbeddingTOE.alphaEarthDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 64
+unifiedAlphaEarthDimensionIs64 =
+  EarthEmbeddingTOE.alphaEarthDimensionIs64
+
+unifiedTesseraDimensionIs128 :
+  EarthEmbeddingTOE.tesseraDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 128
+unifiedTesseraDimensionIs128 =
+  EarthEmbeddingTOE.tesseraDimensionIs128
+
+unifiedLearnedCoordinateDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.LearnedCoordinateCreatesPhysicalIdentity → ⊥
+unifiedLearnedCoordinateDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.learnedCoordinateDoesNotCreatePhysicalIdentity
+
+unifiedGradientDoesNotCreateCausalEnvironmentalEffect :
+  EarthEmbeddingTOE.GradientCreatesCausalEnvironmentalEffect → ⊥
+unifiedGradientDoesNotCreateCausalEnvironmentalEffect =
+  EarthEmbeddingTOE.gradientDoesNotCreateCausalEnvironmentalEffect
+
+unifiedModelOutputDoesNotCreateIndependentFieldMeasurement :
+  EarthEmbeddingTOE.ModelOutputCreatesIndependentFieldMeasurement → ⊥
+unifiedModelOutputDoesNotCreateIndependentFieldMeasurement =
+  EarthEmbeddingTOE.modelOutputDoesNotCreateIndependentFieldMeasurement
+
+unifiedEmbeddingDoesNotCreateLegalAuthority :
+  EarthEmbeddingTOE.EmbeddingCreatesLegalAuthority → ⊥
+unifiedEmbeddingDoesNotCreateLegalAuthority =
+  EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
+
+unifiedGeographicRecoverabilityDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
+unifiedGeographicRecoverabilityDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.geographicRecoverabilityDoesNotCreatePhysicalIdentity
+
+unifiedBalabanDirectScaleTransferNonPromotion :
+  BalabanRGTOE.BalabanRGScaleTransferPromotion → ⊥
+unifiedBalabanDirectScaleTransferNonPromotion =
+  BalabanRGTOE.balabanRGScaleTransferPromotionImpossible
 
 ------------------------------------------------------------------------
 -- Joint Yang-Mills Balaban/R559 TOE receipt.
