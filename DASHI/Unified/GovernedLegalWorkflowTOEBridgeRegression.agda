@@ -7,6 +7,40 @@ open import Data.Empty using (⊥)
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as Bridge
 import DASHI.Unifier as Unifier
 
+unifierUsesCanonicalInvariantHandoff :
+  Unifier.toeGovernedLegalWorkflowInvariantHandoff
+  ≡
+  Bridge.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+unifierUsesCanonicalInvariantHandoff =
+  refl
+
+invariantHandoffUsesCanonicalGovernanceBoundary :
+  Bridge.governanceBoundary
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+  ≡
+  Bridge.canonicalGovernedLegalWorkflowTOEBoundary
+invariantHandoffUsesCanonicalGovernanceBoundary =
+  Bridge.governanceBoundaryIsCanonical
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+invariantHandoffUsesCanonicalPromotionBoundary :
+  Bridge.promotionBoundary
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+  ≡
+  Bridge.canonicalGovernedLegalWorkflowPromotionBoundary
+invariantHandoffUsesCanonicalPromotionBoundary =
+  Bridge.promotionBoundaryIsCanonical
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+invariantHandoffUsesCanonicalZKPReceipt :
+  Bridge.zkpReceipt
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+  ≡
+  Bridge.canonicalGovernedLegalWorkflowZKPReceipt
+invariantHandoffUsesCanonicalZKPReceipt =
+  Bridge.zkpReceiptIsCanonical
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
 unifierUsesCanonicalGovernedLegalWorkflowBoundary :
   Unifier.toeGovernedLegalWorkflowBoundary
   ≡ Bridge.canonicalGovernedLegalWorkflowTOEBoundary
