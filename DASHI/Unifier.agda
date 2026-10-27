@@ -364,3 +364,38 @@ unifierYangMillsHardAnalyticLemmaUpperCountIsSix :
   unifierYangMillsHardAnalyticLemmaUpperCount ≡ 6
 unifierYangMillsHardAnalyticLemmaUpperCountIsSix =
   YMTOE.toeHardAnalyticLemmaUpperCountIsSix
+
+
+------------------------------------------------------------------------
+-- Normalized Yang-Mills scale-density-stress convergence.
+------------------------------------------------------------------------
+
+unifierYangMillsBetaDrivenSourceFlowLevel : ProofLevel
+unifierYangMillsBetaDrivenSourceFlowLevel =
+  YMTOE.toeBetaDrivenSourceFlowLevel
+
+unifierYangMillsBetaHistorySameStateCouplingLevel : ProofLevel
+unifierYangMillsBetaHistorySameStateCouplingLevel =
+  YMTOE.toeBetaHistorySameStateCouplingLevel
+
+unifierYangMillsCanonicalCompleteDensityLevel : ProofLevel
+unifierYangMillsCanonicalCompleteDensityLevel =
+  YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
+
+unifierYangMillsStressScaleCompilerLevel : ProofLevel
+unifierYangMillsStressScaleCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
+
+unifierYangMillsStrictCasimirCarrierLevel : ProofLevel
+unifierYangMillsStrictCasimirCarrierLevel =
+  YMTOE.toeStrictCasimirCarrierCompilerLevel
+
+unifierYangMillsOSWightmanContinuumNotConstructed :
+  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
+unifierYangMillsOSWightmanContinuumNotConstructed =
+  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+
+unifierYangMillsTerminalPromotionBlocked :
+  YMTOE.toeTerminalPromotion ≡ false
+unifierYangMillsTerminalPromotionBlocked =
+  YMTOE.toeTerminalPromotionIsFalse
