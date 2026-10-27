@@ -79,3 +79,22 @@ toe369ThinkTankProximityDoesNotProveDirection :
   Proximity.InfluenceThroughProximity → ⊥
 toe369ThinkTankProximityDoesNotProveDirection =
   U.toeThinkTankProximityDoesNotProveDirection
+
+
+toe369GlobalOneFilmThreeClaimsNotThreeIndependentModels :
+  INF.FactorsThrough
+    Climate.threeTalkingPointsObserved Climate.originalObjectsForTalkingPoints → ⊥
+toe369GlobalOneFilmThreeClaimsNotThreeIndependentModels =
+  U.toeGlobalOneFilmThreeClaimsNotThreeIndependentModels
+
+toe369GlobalPlantFertilisationIsNotNetClimateImpact :
+  INF.FactorsThrough
+    Climate.observedPlantFertilisation Climate.wholeClimateOutcome → ⊥
+toe369GlobalPlantFertilisationIsNotNetClimateImpact =
+  U.toeGlobalPlantFertilisationIsNotNetClimateImpact
+
+toe369Global1975CoolingMediaIsNotConsensus :
+  INF.FactorsThrough
+    Climate.sampledHistoricalMediaPresence Climate.hypotheticalScientificMajority → ⊥
+toe369Global1975CoolingMediaIsNotConsensus =
+  U.toeGlobal1975CoolingMediaIsNotConsensus
