@@ -50,6 +50,18 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
+      - 'DASHI/Unified/SensibLawGovernanceTOEExact.agda'
+      - 'DASHI/Unified/SensibLawGovernanceTOEValidation.agda'
+      - 'DASHI/Interop/SensibLawSemanticPromotionPolicy.agda'
+      - 'DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda'
+      - 'DASHI/Law/SensibLawITIRParityEverything.agda'
+      - 'DASHI/Governance/DomainPermeabilityAuthorityTransport.agda'
+      - 'DASHI/Core/AuthorityNonPromotionCore.agda'
+      - 'DASHI/Promotion/AuthorityBoundaryCore.agda'
+      - 'DASHI/Core/SnowballAttributionProvenanceInvariantExact.agda'
+      - 'DASHI/Interop/SensibLawSnowballAttributionLineageAdapterExact.agda'
+      - 'DASHI/Law/SensibLawParetoProofDirectedCorpusSearchEverything.agda'
+      - 'Docs/diagrams/SensibLawGovernanceTOE.puml'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unified/Physics.agda'
@@ -102,6 +114,20 @@ jobs:
           dashi-repo discover 'Balaban scale density regular-E localization Casimir stress RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEValidation.agda --root .
+          dashi-repo related semanticPromotionAuthorityBoundary --root . --limit 20
+          dashi-repo related canonicalAgdaFirstLegalRuntimeContract --root . --limit 20
+          dashi-repo related canonicalDomainTransportReceipt --root . --limit 20
+          dashi-repo related canonicalLegalAuthorityBoundaryReceipt --root . --limit 20
+          dashi-repo discover 'SensibLaw legal runtime semantic promotion authority non-promotion case-management transport governance' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Interop.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Law.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Governance.DomainPermeability --root .
+          dashi-repo related canonicalAttributionSnowballBoundary --root . --limit 20
+          dashi-repo related canonicalSensibLawSnowballLineageBoundary --root . --limit 20
+          dashi-repo related directiveIsNotAuthority --root . --limit 20
+          dashi-repo discover 'SensibLaw Pareto snowball attribution lineage authority firewall Ibrahim provenance' --root . --limit 40
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
           dashi-repo related round485MaximumCutCompilerLevel --root . --limit 20
@@ -140,6 +166,17 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/SensibLawGovernanceTOEExact.agda
+            DASHI/Unified/SensibLawGovernanceTOEValidation.agda
+            DASHI/Interop/SensibLawSemanticPromotionPolicy.agda
+            DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda
+            DASHI/Law/SensibLawITIRParityEverything.agda
+            DASHI/Governance/DomainPermeabilityAuthorityTransport.agda
+            DASHI/Core/AuthorityNonPromotionCore.agda
+            DASHI/Promotion/AuthorityBoundaryCore.agda
+            DASHI/Core/SnowballAttributionProvenanceInvariantExact.agda
+            DASHI/Interop/SensibLawSnowballAttributionLineageAdapterExact.agda
+            DASHI/Law/SensibLawParetoProofDirectedCorpusSearchEverything.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -158,6 +195,8 @@ jobs:
         run: |
           agda --version
           modules=(
+            DASHI/Unified/SensibLawGovernanceTOEExact.agda
+            DASHI/Unified/SensibLawGovernanceTOEValidation.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
