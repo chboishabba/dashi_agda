@@ -253,6 +253,12 @@ record BalabanR559TOEMaxCutReceipt : Set where
     scaleTransferPromotionEliminator :
       ScaleTransferPromotion → ⊥
 
+    continuumLimitPromotionEliminator :
+      Balaban.BalabanContinuumLimitPromotion → ⊥
+
+    depthContinuumLimitPromotionEliminator :
+      Balaban.DepthContinuumLimitPromotion → ⊥
+
 open BalabanR559TOEMaxCutReceipt public
 
 canonicalBalabanR559TOEMaxCutReceipt : BalabanR559TOEMaxCutReceipt
@@ -333,6 +339,10 @@ canonicalBalabanR559TOEMaxCutReceipt = record
       jointBalabanOSWightmanStillOpen
   ; scaleTransferPromotionEliminator =
       eliminateScaleTransferPromotion
+  ; continuumLimitPromotionEliminator =
+      Balaban.balabanContinuumLimitPromotionImpossible
+  ; depthContinuumLimitPromotionEliminator =
+      Balaban.depthContinuumLimitPromotionImpossible
   }
 
 ------------------------------------------------------------------------
