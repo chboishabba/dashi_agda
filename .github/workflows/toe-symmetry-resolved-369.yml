@@ -13,6 +13,13 @@ on:
       - 'DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedExpansionRound415Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119StressCommonCoreExact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119ConcreteLocalCExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119GRQFTStressExportExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119LiteralStressAttachmentExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5WeakMeasureSemanticsRound437Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5PreferredSameFamilyMeasureRecoveryRound428Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5SameFamilyContinuumRecoveryRound425Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealR415ClusteringExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealBMinCutExact.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unifier.agda'
       - 'Docs/diagrams/ym_toe_r559_convergence.puml'
@@ -49,6 +56,13 @@ jobs:
             DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedExpansionRound415Exact.agda
             DASHI/Physics/YangMills/YangMillsClayPinnedCMP119StressCommonCoreExact.agda
             DASHI/Physics/YangMills/YangMillsClayPinnedCMP119ConcreteLocalCExact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealBMinCutExact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealR415ClusteringExact.agda
+            DASHI/Physics/YangMills/BalabanClayT5SameFamilyContinuumRecoveryRound425Exact.agda
+            DASHI/Physics/YangMills/BalabanClayT5PreferredSameFamilyMeasureRecoveryRound428Exact.agda
+            DASHI/Physics/YangMills/BalabanClayT5WeakMeasureSemanticsRound437Exact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119LiteralStressAttachmentExact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119GRQFTStressExportExact.agda
             DASHI/Unified/Physics.agda
             DASHI/Unifier.agda
           )
