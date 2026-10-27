@@ -10,6 +10,7 @@ import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation
+import DASHI.Unified.TOE369EisensteinReuseExact
 
 -- Reuse the existing exact finite GR/quantum proof-term regression.
 -- It contains a terminal physical non-promotion theorem.
