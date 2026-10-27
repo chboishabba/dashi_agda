@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannQuarticSignedPoleFourierTerminalLeanDonorExact as Terminal
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as Current
 
 ------------------------------------------------------------------------
 -- RH THREE-TAP TERMINAL COMPLETION DONOR
@@ -247,7 +248,7 @@ canonicalThreeTapTerminalCompletionBoundary =
     refl refl refl refl refl refl
     refl refl refl
 
-    "The exact transformed selected-zero target, physical/normalized projective rescale, actual transformed endpoint projective-profile objects, support-envelope M6/M8 bounds, exact physical/normalized M6/M8 rescaling, adaptive alpha/q local domain, complete mixed eighth-order remainder, normalized J2 phase normal form, unique exceptional-strength classification, and the exact transformed degree-six jet with its live M2 term are source-written. Exact projective-shift commutation remains intentionally unproved and unnecessary. The transformed signed J2 coordinate is now an exact epsilon-polynomial with zero baseline and its sign problem has been reduced to normalized radius one. The transformed off-ordinate carrier is now welded to the reflection-paired Zeta23 projective channel, the finite adaptive local debt is source-written, and a canonical capture index removes the artificial cutoff from the transformed local slack and terminal scalar. Remaining mathematics is no longer carrier architecture: determine/sign the live M2/M4/M6 adaptive jet (equivalently the explicit normalized J2 phase polynomial at leading order), evaluate the completed resonance scalar, and prove or refute the first nonzero near-line terminal coefficient."
+    "Current Lean frontier: A1 finite O(log t/t), q^-2 pair decay, literal inverse-square window machinery, dyadic numerical series, boundary-safe complement geometry, and the conditional carrier-to-tail compiler are source-written. A2 correct-polarity fourth-angular control, the selected negative M6 certificate, dominant-coefficient payment, debt-minus-smooth-mu normal form, and positive canonical smooth-mu gain are source-written. Route B has the exact gap and direct physical-cap normal form. Remaining mathematics: A1 countable chart-to-shell carrier summation, fixed-width witness or compact-alpha uniform curvature, and translated gamma+pole gain versus local slack; A2 the final strict lower-order/far/compensation scalar; Route B eventual gap nonnegativity. Mid-strip stays downstream of a real near-line PASS. RH remains unpromoted."
     "The physical shift log 2 is not O(1) in the normalized quartic variable: it is B(t)=(t/16)log2 and already exceeds pi+1 for t>=200. Reusing the original support/M6/M8 constants would be a same-object error. Also, projectiveProfile(T_eps g) must not be identified with T_eps(projectiveProfile g) without a theorem; Lean now records that commutation only as an unpaid proposition."
     "If one-scale three-tap fails, reuse the same normalized-shift and moment-transport interfaces for the log2/log3 two-scale operator; do not create a parallel budget formalism."
     "Keep the signed fifth-cap/RvM correlation route independent.  It targets the same canonical high cut and remains a separate analytic producer."
@@ -271,3 +272,52 @@ rhStillOpen :
   ThreeTapTerminalCompletionBoundary.rhDerivedHere
     canonicalThreeTapTerminalCompletionBoundary ≡ false
 rhStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- Current Lean frontier projection.
+-- This updates status only. Lean remains the real-analysis theorem owner.
+------------------------------------------------------------------------
+
+currentLeanFrontierMirror : Current.ThreeTapCurrentLeanFrontier
+currentLeanFrontierMirror = Current.currentThreeTapCurrentLeanFrontier
+
+currentA1FiniteAndDecayPaid :
+  Current.a1FiniteAndDecaySourceWritten Current.currentThreeTapCurrentLeanFrontier ≡ true
+currentA1FiniteAndDecayPaid = Current.a1FiniteAndDecayPaid
+
+currentA1InverseSquareWindowsPaid :
+  Current.a1LiteralWindowMachinerySourceWritten Current.currentThreeTapCurrentLeanFrontier ≡ true
+currentA1InverseSquareWindowsPaid = Current.a1LiteralWindowsPaid
+
+currentA1DyadicSeriesPaid :
+  Current.a1DyadicSeriesSourceWritten Current.currentThreeTapCurrentLeanFrontier ≡ true
+currentA1DyadicSeriesPaid = Current.a1SeriesPaid
+
+currentA1TailCompilerPaid :
+  Current.a1CarrierToTailCompilerSourceWritten Current.currentThreeTapCurrentLeanFrontier ≡ true
+currentA1TailCompilerPaid = Current.a1ConditionalTailCompilerPaid
+
+currentA1CarrierSummationStillOpen :
+  Current.a1CarrierSummationPaid Current.currentThreeTapCurrentLeanFrontier ≡ false
+currentA1CarrierSummationStillOpen = Current.a1CarrierIsStillOpen
+
+currentA1UniformCurvatureStillOpen :
+  Current.a1UniformCurvaturePaid Current.currentThreeTapCurrentLeanFrontier ≡ false
+currentA1UniformCurvatureStillOpen = Current.a1UniformCurvatureIsStillOpen
+
+currentA1CompensationStillOpen :
+  Current.a1CompensationPaid Current.currentThreeTapCurrentLeanFrontier ≡ false
+currentA1CompensationStillOpen = Current.a1CompensationIsStillOpen
+
+currentA2StrictScalarStillOpen :
+  Current.a2StrictScalarPaid Current.currentThreeTapCurrentLeanFrontier ≡ false
+currentA2StrictScalarStillOpen = Current.a2ScalarIsStillOpen
+
+currentRouteBEventualGapStillOpen :
+  Current.routeBEventualGapPaid Current.currentThreeTapCurrentLeanFrontier ≡ false
+currentRouteBEventualGapStillOpen = Current.routeBIsStillOpen
+
+currentFrontierDoesNotPromoteRH :
+  Current.rhDerivedHere Current.currentThreeTapCurrentLeanFrontier ≡ false
+currentFrontierDoesNotPromoteRH = Current.rhNotClaimedByAgdaStatusMirror
