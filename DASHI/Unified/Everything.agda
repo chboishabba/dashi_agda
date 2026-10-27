@@ -277,3 +277,64 @@ unifiedNavierStokesBM2ZKPFrame :
   NSBM2TOE.NavierStokesBM2TOEZKPFrame
 unifiedNavierStokesBM2ZKPFrame =
   NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Typed Balaban continuum and Fleet target aggregate aliases.
+------------------------------------------------------------------------
+
+unifiedBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+unifiedBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
+
+unifiedBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifiedBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+unifiedDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+unifiedDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
+
+unifiedDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifiedDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
+unifiedFleetDischargedCoreKnowledgeFibres : ℕ
+unifiedFleetDischargedCoreKnowledgeFibres =
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetDischargedCoreKnowledgeFibresIs584 :
+  unifiedFleetDischargedCoreKnowledgeFibres ≡ 584
+unifiedFleetDischargedCoreKnowledgeFibresIs584 =
+  FleetGapTOE.fleetRecordedDischargedCountIs584
+
+unifiedFleetPolarityContradictionGaps : ℕ
+unifiedFleetPolarityContradictionGaps =
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetPolarityContradictionGapsIs44 :
+  unifiedFleetPolarityContradictionGaps ≡ 44
+unifiedFleetPolarityContradictionGapsIs44 =
+  FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifiedFleetUnformalisedFormalGaps : ℕ
+unifiedFleetUnformalisedFormalGaps =
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetUnformalisedFormalGapsIs58 :
+  unifiedFleetUnformalisedFormalGaps ≡ 58
+unifiedFleetUnformalisedFormalGapsIs58 =
+  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+
+unifiedFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+unifiedFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
