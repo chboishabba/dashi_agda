@@ -2,6 +2,7 @@ module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RiemannFrontier
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
@@ -16,6 +17,58 @@ open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import Data.Nat.Base using (ℕ)
+
+------------------------------------------------------------------------
+-- Current Lean RH max-cut status mirror.
+-- Real analysis remains owned by dashi_lean4.
+------------------------------------------------------------------------
+
+toeRiemannThreeTapCurrentLeanFrontier :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier
+toeRiemannThreeTapCurrentLeanFrontier =
+  RiemannFrontier.currentThreeTapCurrentLeanFrontier
+
+toeRiemannA1CarrierSummationStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA1CarrierSummationStillOpen =
+  RiemannFrontier.a1CarrierIsStillOpen
+
+toeRiemannA1UniformCurvatureStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1UniformCurvaturePaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA1UniformCurvatureStillOpen =
+  RiemannFrontier.a1UniformCurvatureIsStillOpen
+
+toeRiemannA1CompensationStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CompensationPaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA1CompensationStillOpen =
+  RiemannFrontier.a1CompensationIsStillOpen
+
+toeRiemannA2ScalarStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannA2ScalarStillOpen =
+  RiemannFrontier.a2ScalarIsStillOpen
+
+toeRiemannRouteBStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannRouteBStillOpen =
+  RiemannFrontier.routeBIsStillOpen
+
+toeRiemannExactHeadLeanKernelReceiptStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.exactHeadLeanKernelReceipt
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannExactHeadLeanKernelReceiptStillOpen =
+  RiemannFrontier.exactHeadLeanKernelReceiptIsStillOpen
+
+toeRiemannRHStillOpen :
+  RiemannFrontier.ThreeTapCurrentLeanFrontier.rhDerivedHere
+    toeRiemannThreeTapCurrentLeanFrontier ≡ false
+toeRiemannRHStillOpen =
+  RiemannFrontier.rhNotClaimedByAgdaStatusMirror
 
 ------------------------------------------------------------------------
 -- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
