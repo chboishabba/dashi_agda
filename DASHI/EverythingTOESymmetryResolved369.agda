@@ -774,12 +774,22 @@ toeCurrentMaxCutGovernanceFleetReceipt =
 
 toeCurrentFormalGapTarget : ℕ
 toeCurrentFormalGapTarget =
-  CurrentMaxCut.targetFormalGapCount
+  CurrentMaxCut.gate4FormalGapCount
 
 toeCurrentFormalGapTargetIs58 :
   toeCurrentFormalGapTarget ≡ 58
 toeCurrentFormalGapTargetIs58 =
-  CurrentMaxCut.targetFormalGapCountIs58
+  CurrentMaxCut.gate4FormalGapCountIs58
+
+toeCurrentFleetReportedFormalGapTarget : ℕ
+toeCurrentFleetReportedFormalGapTarget =
+  CurrentMaxCut.fleetReportedFormalGapCount
+
+toeCurrentFleetReportedFormalGapTargetIs58 :
+  toeCurrentFleetReportedFormalGapTarget ≡ 58
+toeCurrentFleetReportedFormalGapTargetIs58 =
+  CurrentMaxCut.fleetReportedFormalGapCountIs58
+
 
 toeCurrentFleetDischargedFibresExcluded :
   CurrentMaxCut.dischargedFleetFibresExcluded ≡ true
@@ -801,6 +811,6 @@ toeCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy =
   CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacyIsFalse
 
 toeCurrentIbrahimSearchPriorityDoesNotCreateProof :
-  CurrentMaxCut.Pareto.SearchPriorityCreatesProof → ⊥
+  CurrentMaxCut.IbrahimSearchPriorityCreatesProof → ⊥
 toeCurrentIbrahimSearchPriorityDoesNotCreateProof =
   CurrentMaxCut.ibrahimSearchPriorityCannotCreateProof
