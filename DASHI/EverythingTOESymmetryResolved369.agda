@@ -2,6 +2,7 @@ module DASHI.EverythingTOESymmetryResolved369 where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false)
+import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 ------------------------------------------------------------------------
@@ -22,6 +23,7 @@ import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
 
 open BalabanRGTOE public using
   ( sourceCouplingIsBetaHistoryCoupling
@@ -386,6 +388,22 @@ toe369YangMillsGoal1C4LiteralSectorRecoveryLevel =
 toe369YangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 toe369YangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+
+------------------------------------------------------------------------
+-- Direct constructive RG scale-transfer non-promotion.
+--
+-- Precondition: a proposed Balaban scale-transfer promotion token.
+-- Invariant: the canonical frontier defines no constructor for that token.
+-- Postcondition: any proposed token yields contradiction.
+-- This is a frontier theorem. It is not an impossibility theorem for continuum RG.
+------------------------------------------------------------------------
+
+toeBalabanScaleTransferNonPromotion :
+  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+toeBalabanScaleTransferNonPromotion =
+  RGNonPromotion.balabanRGScaleTransferPromotionImpossibleHere
 
 
 ------------------------------------------------------------------------
