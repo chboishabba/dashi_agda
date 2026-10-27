@@ -106,6 +106,49 @@ fleetContradictionGapsAre44 = refl
 fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
 fleetFormalGapsAre58 = refl
 
+historicalGate4GapCount : Nat
+historicalGate4GapCount =
+  YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
+
+historicalGate4GapCountIs58 : historicalGate4GapCount ≡ 58
+historicalGate4GapCountIs58 =
+  YM.gate4UnresolvedCountIs58 YM.canonicalBalabanR559TOEMaxCutReceipt
+
+fleetFormalGapCountEqualsHistoricalGate4Count :
+  fleetFormalGaps ≡ historicalGate4GapCount
+fleetFormalGapCountEqualsHistoricalGate4Count =
+  trans fleetFormalGapsAre58 (sym historicalGate4GapCountIs58)
+
+fleetGate4EqualCardinalityBoundary :
+  EqualCardinality.EqualCardinalityBoundary
+fleetGate4EqualCardinalityBoundary =
+  EqualCardinality.canonicalEqualCardinalityBoundary
+
+fleetGate4EqualCardinalitySelectsCanonicalMap : Bool
+fleetGate4EqualCardinalitySelectsCanonicalMap =
+  EqualCardinality.equalCardinalitySelectsCanonicalMap
+    fleetGate4EqualCardinalityBoundary
+
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  EqualCardinality.equalCardinalitySelectsCanonicalMapIsFalse
+    fleetGate4EqualCardinalityBoundary
+
+fleetFormalGapTargetSelected : Bool
+fleetFormalGapTargetSelected = true
+
+fleetFormalGapTargetSelectedIsTrue :
+  fleetFormalGapTargetSelected ≡ true
+fleetFormalGapTargetSelectedIsTrue = refl
+
+historicalGate4CountSelectedAsFleetTarget : Bool
+historicalGate4CountSelectedAsFleetTarget = false
+
+historicalGate4CountSelectedAsFleetTargetIsFalse :
+  historicalGate4CountSelectedAsFleetTarget ≡ false
+historicalGate4CountSelectedAsFleetTargetIsFalse = refl
+
 
 ymGate4FormalGaps : Nat
 ymGate4FormalGaps =
