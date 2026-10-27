@@ -423,6 +423,27 @@ open MaxCutTOE public using
   ; toeOutgoingActualLinearActionStillOpen
   ; toeOutgoingSourceNativeInertiaSameActionStillOpen
   ; toeOutgoingTwelveSeventyEightIntertwinerStillOpen
+  ; toeAcquisitionCoreCompilerAlreadyOwned
+  ; toeAcquisitionCoreCompilesSameElementComposition
+  ; toeAcquisitionNormalizerCarrierBidiCompilerPaid
+  ; toeAcquisitionOnlyActionIntertwiningRemains
+  ; toeAcquisitionSourceNativePayloadRetained
+  ; toeAcquisitionTwelveSeventyEightPayloadRetained
+  ; toeAcquisitionCoreStillUninhabited
+  ; toeAcquisitionActionIntertwiningStillUninhabited
+  ; toeHistoricalCoreNeedsExplicitHomWeld
+  ; toeHistoricalCorePlusHomWeldCompilesCanonicalCore
+  ; toeHistoricalActionEquationCompilesCanonicalAction
+  ; toePhaseResolvedTwelveMultiplicityPaid
+  ; toePhaseResolvedSeventyEightMultiplicityPaid
+  ; toePhaseResolvedMatricesStillOpen
+  ; toePhaseResolvedSameActionIntertwinerStillOpen
+  ; toeActualLinearActionStillOpen
+  ; toeActualSourceNativeInertiaSameActionStillOpen
+  ; toeActualSameActionTwelveSeventyEightIntertwinerStillOpen
+  ; toeVOAKernelRecognizedAttachmentStillOpen
+  ; toeVOANormalizerMonsterActionWeldStillOpen
+  ; toeVOATwelveSeventyEightIntertwinerStillOpen
   ; esdSurfaceWasNotEdited
   )
 
