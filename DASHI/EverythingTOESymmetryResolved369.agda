@@ -11,6 +11,11 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation
 import DASHI.Unified.TOE369EisensteinReuseExact
+-- Reuse existing selected-3B full-grade and projected-action NO-PROMOTION
+-- proofs. A character or 90-dimensional carrier is not an action witness.
+-- These imports are read-only. The original theorem owners are unchanged.
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact
 
 -- Reuse the existing exact finite GR/quantum proof-term regression.
 -- It contains a terminal physical non-promotion theorem.
