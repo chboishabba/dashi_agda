@@ -449,3 +449,21 @@ toeIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
   ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
 toeIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
   ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+
+------------------------------------------------------------------------
+-- Joint non-promotion: two independent blocked proof routes.
+-- Do not infer either proof from a search score, a source alias, or
+-- the other's conditional result. Reuse both canonical owner proofs.
+------------------------------------------------------------------------
+
+toeRGAndIbrahimJointPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion →
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeRGAndIbrahimJointPromotionImpossible rg sourcePriority =
+  toeBalabanScaleTransferPromotionImpossible rg
+
+toeRGAndIbrahimSearchPromotionImpossible :
+  ParetoSnowballTOE.SearchPriorityCreatesProof →
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+toeRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
+  toeIbrahimSearchPriorityDoesNotCreateProof sourcePriority
