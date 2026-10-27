@@ -147,6 +147,16 @@ a1CarrierIsStillOpen :
     currentThreeTapCurrentLeanFrontier ≡ false
 a1CarrierIsStillOpen = refl
 
+a1UniformCurvatureIsStillOpen :
+  ThreeTapCurrentLeanFrontier.a1UniformCurvaturePaid
+    currentThreeTapCurrentLeanFrontier ≡ false
+a1UniformCurvatureIsStillOpen = refl
+
+a1CompensationIsStillOpen :
+  ThreeTapCurrentLeanFrontier.a1CompensationPaid
+    currentThreeTapCurrentLeanFrontier ≡ false
+a1CompensationIsStillOpen = refl
+
 a2ScalarIsStillOpen :
   ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
     currentThreeTapCurrentLeanFrontier ≡ false
@@ -156,6 +166,11 @@ routeBIsStillOpen :
   ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
     currentThreeTapCurrentLeanFrontier ≡ false
 routeBIsStillOpen = refl
+
+exactHeadLeanKernelReceiptIsStillOpen :
+  ThreeTapCurrentLeanFrontier.exactHeadLeanKernelReceipt
+    currentThreeTapCurrentLeanFrontier ≡ false
+exactHeadLeanKernelReceiptIsStillOpen = refl
 
 rhNotClaimedByAgdaStatusMirror :
   ThreeTapCurrentLeanFrontier.rhDerivedHere
