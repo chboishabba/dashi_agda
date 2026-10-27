@@ -16,6 +16,8 @@ import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.FleetFormalGapTargetTOEValidation
+import DASHI.Unified.Fleet58ManifestAcquisitionExact
+import DASHI.Unified.Fleet58ManifestAcquisitionRegression
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
 import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
@@ -27,6 +29,9 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
+import DASHI.Unified.NavierStokesBM2TOEConvergenceValidation
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
@@ -205,3 +210,17 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Navier-Stokes B / R571 M2 normalized TOE receipt.
+------------------------------------------------------------------------
+
+unifiedNavierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+unifiedNavierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+unifiedNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+unifiedNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
