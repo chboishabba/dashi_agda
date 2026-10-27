@@ -13,3 +13,12 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 -- It contains a terminal physical non-promotion theorem.
 -- Do not replace this import with DASHI.Unifier placeholder axioms.
 import DASHI.Unified.GRQuantumProofTermRegression
+
+-- Exact antigravity fail-closed convergence.
+-- The imported receipt is theorem-owned outside DASHI.Unifier.
+import DASHI.Unified.AntigravityTOENonPromotionBridgeExact as AntigravityTOE
+
+antigravityTOEConvergenceReceipt :
+  AntigravityTOE.AntigravityTOEConvergenceReceipt
+antigravityTOEConvergenceReceipt =
+  AntigravityTOE.canonicalAntigravityTOEConvergenceReceipt
