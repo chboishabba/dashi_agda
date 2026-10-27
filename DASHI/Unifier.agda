@@ -5,6 +5,7 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
 
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -1304,3 +1305,42 @@ unifierBalabanOSWightmanStillBlocked :
 unifierBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Governed legal-workflow convergence.
+------------------------------------------------------------------------
+
+unifierGovernedLegalWorkflowInvariantHandoff :
+  GovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
+unifierGovernedLegalWorkflowInvariantHandoff =
+  GovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+unifierTaskCompletionDoesNotCreateTruth :
+  GovernanceTOE.TaskCompletionCreatesTruth → ⊥
+unifierTaskCompletionDoesNotCreateTruth =
+  GovernanceTOE.toeTaskCompletionDoesNotCreateTruth
+
+unifierDatabaseCommitDoesNotCreateSemanticAuthority :
+  GovernanceTOE.DatabaseCommitCreatesSemanticAuthority → ⊥
+unifierDatabaseCommitDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+unifierAcceptedReviewDoesNotPayApplicability :
+  GovernanceTOE.AcceptedStatusPaysApplicability → ⊥
+unifierAcceptedReviewDoesNotPayApplicability =
+  GovernanceTOE.toeAcceptedReviewDoesNotPayApplicability
+
+unifierSemanticPromotionTruthAuthorityClosed :
+  GovernanceTOE.SemanticPromotionTruthAuthorityClosed
+unifierSemanticPromotionTruthAuthorityClosed =
+  GovernanceTOE.toeSemanticPromotionTruthAuthorityClosed
+
+unifierLegalCandidateSourceDoesNotCloseAuthority :
+  GovernanceTOE.CandidateSourceIsAuthoritative → ⊥
+unifierLegalCandidateSourceDoesNotCloseAuthority =
+  GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifierExactReuseDoesNotCreateSemanticAuthority :
+  GovernanceTOE.ExactReuseCreatesSemanticAuthority → ⊥
+unifierExactReuseDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
