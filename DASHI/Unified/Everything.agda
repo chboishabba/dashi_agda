@@ -142,6 +142,11 @@ unifiedBalabanR559Gate4InhabitantsLevel =
   BalabanR559TOE.gate4InhabitantsLevel
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
+unifiedBalabanR559Gate4PaidReductionLedgerLevel : ProofLevel
+unifiedBalabanR559Gate4PaidReductionLedgerLevel =
+  BalabanR559TOE.gate4PaidReductionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
 unifiedBalabanScaleTransferNonPromotion :
   BalabanR559TOE.ScaleTransferPromotion → ⊥
 unifiedBalabanScaleTransferNonPromotion =
