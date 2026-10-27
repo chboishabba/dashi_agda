@@ -604,3 +604,76 @@ toeExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 toeExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+------------------------------------------------------------------------
+-- Direct governed legal-workflow firewalls.
+--
+-- Reuse only. The theorem owner remains
+-- GovernedLegalWorkflowTOEBridgeExact and its original donor modules.
+-- An Actionstep-style task, matter, review, or document role does not gain
+-- product-specific legal meaning from this TOE alias surface.
+------------------------------------------------------------------------
+
+toe369DurableReviewStateDoesNotCreateTruth :
+  LegalGovernance.DurableReviewStateCreatesTruth → ⊥
+toe369DurableReviewStateDoesNotCreateTruth =
+  LegalGovernance.toeDurableReviewStateDoesNotCreateTruth
+
+toe369AcceptanceReceiptDoesNotMutateMatter :
+  LegalGovernance.AcceptanceReceiptMutatesMatter → ⊥
+toe369AcceptanceReceiptDoesNotMutateMatter =
+  LegalGovernance.toeAcceptanceReceiptDoesNotMutateMatter
+
+toe369ExternalSourceDoesNotAdmitTruth :
+  LegalGovernance.ExternalSourceClaimImpliesTruthAdmitted → ⊥
+toe369ExternalSourceDoesNotAdmitTruth =
+  LegalGovernance.toeExternalSourceDoesNotAdmitTruth
+
+toe369LegalAuthorityDoesNotCreateTruthStatus :
+  LegalGovernance.LegalAuthorityCreatesTruthStatus → ⊥
+toe369LegalAuthorityDoesNotCreateTruthStatus =
+  LegalGovernance.toeLegalAuthorityDoesNotCreateTruthStatus
+
+toe369PromotionStageDoesNotBypassPromotionAuthority :
+  LegalGovernance.PromotionStageMaySkipPromotionAuthority → ⊥
+toe369PromotionStageDoesNotBypassPromotionAuthority =
+  LegalGovernance.toePromotionStageDoesNotBypassPromotionAuthority
+
+toe369SourceRealisedWrongTypeDoesNotAutoViolate :
+  LegalGovernance.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
+toe369SourceRealisedWrongTypeDoesNotAutoViolate =
+  LegalGovernance.toeSourceRealisedWrongTypeDoesNotAutoViolate
+
+toe369ElementsDoNotEraseExceptionsOrDefences :
+  LegalGovernance.AllElementsProvedIgnoresExceptionsDefences → ⊥
+toe369ElementsDoNotEraseExceptionsOrDefences =
+  LegalGovernance.toeElementsDoNotEraseExceptionsOrDefences
+
+toe369KernelClosureDoesNotMeanSemanticClosure =
+  LegalGovernance.toeKernelClosureDoesNotMeanSemanticClosure
+
+toe369FormalProofDoesNotCreateExternalWorldTruth =
+  LegalGovernance.toeFormalProofDoesNotCreateExternalWorldTruth
+
+toe369ComplianceCompositionRetainsIntermediateWitness =
+  LegalGovernance.complianceCompositionRetainsIntermediateWitnessIsTrue
+    LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
+
+toe369LegalCandidateSourceDoesNotCloseAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+
+toe369SameLegalSystemDoesNotCloseAuthority =
+  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+toe369CurrentValidityDoesNotEstablishApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+toe369SemanticAdmissionDoesNotCreateLegalSourceAuthority =
+  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+toe369DocumentRoleDoesNotSupplyLegalSourceAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+toe369CanonicalLegalSourceAuthorityBoundary =
+  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
+
