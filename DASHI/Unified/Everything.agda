@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Interop.SLRSemanticWorldClosureExact as LegalSemanticClosure
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -404,3 +405,30 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- SensibLaw semantic governance: imported proof ownership stays in SLR.
+-- Propagated QID evidence is not a target-surface assertion or legal truth.
+-- These direct eliminators do not confer legal or external authority.
+------------------------------------------------------------------------
+
+unifiedLegalSourceNonPromotion :
+  LegalSemanticClosure.PropagationRewritesSource → ⊥
+unifiedLegalSourceNonPromotion =
+  LegalSemanticClosure.propagationDoesNotRewriteSource
+
+unifiedLegalIdentityNonPromotion :
+  LegalSemanticClosure.SharedQidCreatesSemanticEquivalence → ⊥
+unifiedLegalIdentityNonPromotion =
+  LegalSemanticClosure.sharedQidDoesNotCreateSemanticEquivalence
+
+unifiedLegalClaimTruthNonPromotion :
+  LegalSemanticClosure.ArticleLinkCreatesClaimTruth → ⊥
+unifiedLegalClaimTruthNonPromotion =
+  LegalSemanticClosure.articleLinkDoesNotCreateClaimTruth
+
+unifiedLegalUnweldedFactNonPromotion :
+  LegalSemanticClosure.UnweldedPnfMayBecomeSharedFact → ⊥
+unifiedLegalUnweldedFactNonPromotion =
+  LegalSemanticClosure.unweldedPnfDoesNotBecomeSharedFact
