@@ -749,6 +749,138 @@ toeAllRemainingFamiliesAlreadyProvedIsFalse :
 toeAllRemainingFamiliesAlreadyProvedIsFalse = refl
 
 ------------------------------------------------------------------------
+-- R546 irreducible source-family subcuts.
+------------------------------------------------------------------------
+
+toeIrreducibleA3PositiveEventSemanticsLevel : ProofLevel
+toeIrreducibleA3PositiveEventSemanticsLevel =
+  R546.a3PositiveEventSemanticsLevel
+
+toeIrreducibleA3EventBooleanAlgebraLevel : ProofLevel
+toeIrreducibleA3EventBooleanAlgebraLevel =
+  R546.a3EventBooleanAlgebraLevel
+
+toeIrreducibleA3ProjectiveConsistencyLevel : ProofLevel
+toeIrreducibleA3ProjectiveConsistencyLevel =
+  R546.a3ProjectiveConsistencyLevel
+
+toeIrreducibleA3ContinuityAtEmptyLevel : ProofLevel
+toeIrreducibleA3ContinuityAtEmptyLevel =
+  R546.a3ContinuityAtEmptyLevel
+
+toeIrreducibleA3ExpectationIntegralIdentificationLevel : ProofLevel
+toeIrreducibleA3ExpectationIntegralIdentificationLevel =
+  R546.a3ExpectationIntegralIdentificationLevel
+
+toeIrreducibleFiniteOSBosonicAttachmentLevel : ProofLevel
+toeIrreducibleFiniteOSBosonicAttachmentLevel =
+  R546.finiteOSBosonicAttachmentLevel
+
+toeIrreducibleFiniteT1SourceBundleLevel : ProofLevel
+toeIrreducibleFiniteT1SourceBundleLevel =
+  R546.finiteT1SourceBundleLevel
+
+toeIrreducibleAllGroupStructuralWitnessLevel : ProofLevel
+toeIrreducibleAllGroupStructuralWitnessLevel =
+  R546.allGroupStructuralWitnessLevel
+
+toeIrreducibleAllGroupActualAlignmentLevel : ProofLevel
+toeIrreducibleAllGroupActualAlignmentLevel =
+  R546.allGroupActualAlignmentLevel
+
+toeIrreducibleAllGroupFiveBlockSourceLevel : ProofLevel
+toeIrreducibleAllGroupFiveBlockSourceLevel =
+  R546.allGroupFiveBlockSourceLevel
+
+toeIrreducibleWEXTTwoMarkExpansionLevel : ProofLevel
+toeIrreducibleWEXTTwoMarkExpansionLevel =
+  R546.wextTwoMarkExpansionLevel
+
+toeIrreducibleWEXTConnectingWeightTailLevel : ProofLevel
+toeIrreducibleWEXTConnectingWeightTailLevel =
+  R546.wextConnectingWeightTailLevel
+
+toeIrreducibleWholeMeasureRecordEqualitiesRemaining : Bool
+toeIrreducibleWholeMeasureRecordEqualitiesRemaining =
+  R546.wholeMeasureRecordEqualitiesRemaining
+
+toeIrreducibleIndependentGroupSelectionsRemaining : Bool
+toeIrreducibleIndependentGroupSelectionsRemaining =
+  R546.independentStructuralAndQuantitativeGroupSelectionsRemaining
+
+toeIrreducibleSU2PromotionRemaining : Bool
+toeIrreducibleSU2PromotionRemaining =
+  R546.su2PromotionRemaining
+
+toeIrreducibleSingleCutoffMeasureExtensionRemaining : Bool
+toeIrreducibleSingleCutoffMeasureExtensionRemaining =
+  R546.singleCutoffMeasureExtensionRemaining
+
+toeIrreducibleSourceFamilyCutCompilerLevel : ProofLevel
+toeIrreducibleSourceFamilyCutCompilerLevel =
+  R546.round546IrreducibleSourceFamilyCutCompilerLevel
+
+------------------------------------------------------------------------
+-- R558 critical-path subcuts.
+------------------------------------------------------------------------
+
+toeCriticalA3PositiveEventSemanticsLevel : ProofLevel
+toeCriticalA3PositiveEventSemanticsLevel =
+  R558.a3PositiveEventSemanticsLevel
+
+toeCriticalA3BooleanAlgebraLevel : ProofLevel
+toeCriticalA3BooleanAlgebraLevel =
+  R558.a3BooleanAlgebraLevel
+
+toeCriticalA3ProjectiveConsistencyLevel : ProofLevel
+toeCriticalA3ProjectiveConsistencyLevel =
+  R558.a3ProjectiveConsistencyLevel
+
+toeCriticalA3ContinuityAtEmptyLevel : ProofLevel
+toeCriticalA3ContinuityAtEmptyLevel =
+  R558.a3ContinuityAtEmptyLevel
+
+toeCriticalA3CylinderGeneratorRepresentationLevel : ProofLevel
+toeCriticalA3CylinderGeneratorRepresentationLevel =
+  R558.a3CylinderGeneratorRepresentationLevel
+
+toeCriticalWEXTTwoMarkExpansionLevel : ProofLevel
+toeCriticalWEXTTwoMarkExpansionLevel =
+  R558.wextTwoMarkExpansionLevel
+
+toeCriticalWEXTConnectingWeightTailLevel : ProofLevel
+toeCriticalWEXTConnectingWeightTailLevel =
+  R558.wextConnectingWeightTailLevel
+
+toeCriticalFiniteToContinuumWilsonCovarianceLevel : ProofLevel
+toeCriticalFiniteToContinuumWilsonCovarianceLevel =
+  R558.finiteToContinuumWilsonCovarianceLevel
+
+toeCriticalMassGapCompilerLevel : ProofLevel
+toeCriticalMassGapCompilerLevel =
+  R558.massGapCompilerLevel
+
+toeCriticalMinimalH6CompilerLevel : ProofLevel
+toeCriticalMinimalH6CompilerLevel =
+  R558.minimalH6CompilerLevel
+
+toeCriticalPrintedJRouteRequired : Bool
+toeCriticalPrintedJRouteRequired =
+  R558.printedJRouteRequired
+
+toeCriticalFullCLayerRequiredForMassGap : Bool
+toeCriticalFullCLayerRequiredForMassGap =
+  R558.fullCLayerRequiredForMassGap
+
+toeCriticalFullCLayerRequiredForMinimalH6 : Bool
+toeCriticalFullCLayerRequiredForMinimalH6 =
+  R558.fullCLayerRequiredForMinimalH6
+
+toeCriticalPathCompilerLevel : ProofLevel
+toeCriticalPathCompilerLevel =
+  R558.round558CriticalPathCompilerLevel
+
+------------------------------------------------------------------------
 -- Concrete semantics residual.
 ------------------------------------------------------------------------
 
