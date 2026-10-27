@@ -109,6 +109,61 @@ jmdSourceDoesNotOwnDASHIBridgeTheorem :
 jmdSourceDoesNotOwnDASHIBridgeTheorem =
   SourceAtlas.jmdSourceDoesNotOwnDASHIBridgeTheorem
 
+
+------------------------------------------------------------------------
+-- Normalized downstream flags.
+------------------------------------------------------------------------
+
+pantsSeamRewritesTopologyFlag : Bool
+pantsSeamRewritesTopologyFlag =
+  TypedPants.interfaceMatchAutomaticallyRewritesIncidence typedPantsBoundary
+
+pantsSeamRewritesTopologyFlagIsFalse :
+  pantsSeamRewritesTopologyFlag ≡ false
+pantsSeamRewritesTopologyFlagIsFalse =
+  pantsSeamDoesNotRewriteTopology
+
+finitePantsPathSmoothSurfaceFlag : Bool
+finitePantsPathSmoothSurfaceFlag =
+  Pants369.finitePantsPathIsSmoothPantsSurface
+    Pants369.canonicalColourWheelNinePantsBoundary
+
+finitePantsPathSmoothSurfaceFlagIsFalse :
+  finitePantsPathSmoothSurfaceFlag ≡ false
+finitePantsPathSmoothSurfaceFlagIsFalse =
+  finitePantsPathIsNotSmoothPantsSurface
+
+cardinalityCreatesAdmissibleGluingFlag : Bool
+cardinalityCreatesAdmissibleGluingFlag =
+  Sheaf369.cardinalityAloneCreatesAdmissibleGluing
+    Sheaf369.canonicalJSheafHyperformDescentFrontier
+
+cardinalityCreatesAdmissibleGluingFlagIsFalse :
+  cardinalityCreatesAdmissibleGluingFlag ≡ false
+cardinalityCreatesAdmissibleGluingFlagIsFalse =
+  sheafCardinalityAloneDoesNotCreateAdmissibleGluing
+
+axisTwelveEqualsWeightTwelveByDefinitionFlag : Bool
+axisTwelveEqualsWeightTwelveByDefinitionFlag =
+  Sheaf369.axisTwelveEqualsModularWeightTwelveByDefinition
+    Sheaf369.canonicalJSheafHyperformDescentFrontier
+
+axisTwelveEqualsWeightTwelveByDefinitionFlagIsFalse :
+  axisTwelveEqualsWeightTwelveByDefinitionFlag ≡ false
+axisTwelveEqualsWeightTwelveByDefinitionFlagIsFalse =
+  axisTwelveDoesNotEqualModularWeightTwelveByDefinition
+
+universal369PromotesExternalTheoremFlag : Bool
+universal369PromotesExternalTheoremFlag =
+  PNF369.hyperfabricPromotesExternalTheorem
+    PNF369.universalMathLanguageHyperfabric
+
+universal369PromotesExternalTheoremFlagIsFalse :
+  universal369PromotesExternalTheoremFlag ≡ false
+universal369PromotesExternalTheoremFlagIsFalse =
+  PNF369.hyperfabricDoesNotPromoteExternalTheorem
+    PNF369.universalMathLanguageHyperfabric
+
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F receipt.
 ------------------------------------------------------------------------
