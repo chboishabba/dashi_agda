@@ -518,3 +518,44 @@ def test_native_follow_provider_and_expert_firewalls_reach_all_toe_facades():
         "invariantHandoffCarriesExpertProductionAuthorityClosure",
     ):
         assert token in regression
+
+
+def test_full_legal_execution_and_expert_firewall_bundle_reaches_toe_graph():
+    bridge = read(BRIDGE)
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+    regression = read(REGRESSION)
+
+    suffixes = (
+        "SpacyDoesNotCreateLegalAuthority",
+        "SpacyDoesNotCreateLegalConstruction",
+        "LatestKnownSectionDoesNotBecomeHistoricalLaw",
+        "PythonWrapperDoesNotOwnLegalSemantics",
+        "JsonIsNotSemanticCommandAbi",
+        "JsonReviewDoesNotCreateDecision",
+        "JsonReceiptDoesNotCreateTruth",
+        "CliSequenceDoesNotPayResidual",
+        "PinnedStreamDoesNotCreateLegalTruth",
+        "ReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport",
+        "OalcHitDoesNotBecomeBindingAuthority",
+        "OfficialCourtBytesDoNotBecomePropositionCorrespondence",
+        "SameMncDoesNotCollapseSourceRevisions",
+        "SuccessfulOfficialFetchDoesNotBecomeProductionReady",
+        "MultipleReportsDoNotAutomaticallyCreateIndependence",
+        "AgreementDoesNotAutomaticallyCreateIndependentCorroboration",
+        "DependenceDoesNotMeanNoEvidence",
+        "ExpertStatusDoesNotAutomaticallyCreateTruth",
+        "ReportAdmissionDoesNotRepairMissingInput",
+        "CrossExaminationDoesNotAddUnobservedInput",
+        "DisputedRiskDoesNotBecomeIrrelevant",
+        "ObserverDefectDoesNotProveOpinionFalse",
+        "QualificationDoesNotAutomaticallyProveForensicCompliance",
+    )
+
+    for suffix in suffixes:
+        assert f"toe{suffix}" in bridge
+        assert f"toe369{suffix}" in toe
+        assert f"unifier{suffix}" in unifier
+        assert f"governed{suffix}" in unified
+        assert f"unifier{suffix}AliasIsExact" in regression
