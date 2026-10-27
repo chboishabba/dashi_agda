@@ -51,6 +51,7 @@ import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exa
 import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as StressHilbert
 import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as SameFamilyRecovery
 import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as Goal1C
+import DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact as CMaxCut
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 import DASHI.Physics.Closure.YMBalabanContinuumLimitReceipt as ContinuumLimit
 import DASHI.Physics.Closure.YMDepthAsContinuumLimitReceipt as DepthContinuum
@@ -313,6 +314,41 @@ balabanGoal1CMetricPairingCompilerLevel =
 balabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
 balabanGoal1CLiteralSourceInstantiationLevel =
   Goal1C.literalRound475CSourceInstantiationLevel
+
+------------------------------------------------------------------------
+-- Current C physical max-cut.
+--
+-- The five physical packages are the authoritative C research cut.
+-- Round labels remain provenance only.
+------------------------------------------------------------------------
+
+balabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+balabanCPhysicalPackageMaxCutCompilerLevel =
+  CMaxCut.round527CPhysicalPackageMaxCutCompilerLevel
+
+balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  CMaxCut.c0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+balabanC1MarkedCurvatureFamilyLevel : ProofLevel
+balabanC1MarkedCurvatureFamilyLevel =
+  CMaxCut.c1MarkedCurvatureFamilyLevel
+
+balabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+balabanC2PhysicalRemainderSharedTailLevel =
+  CMaxCut.c2PhysicalRemainderSharedTailLevel
+
+balabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+balabanC3OneStepAFRecurrenceIdentificationLevel =
+  CMaxCut.c3OneStepAFRecurrenceIdentificationLevel
+
+balabanC4DensityAnchoredStressLaneLevel : ProofLevel
+balabanC4DensityAnchoredStressLaneLevel =
+  CMaxCut.c4DensityAnchoredStressLaneLevel
+
+balabanCPhysicalPackageCount : Nat
+balabanCPhysicalPackageCount =
+  CMaxCut.cPhysicalPackageCount
 
 balabanLevel2ClayPromotionFlag : Bool
 balabanLevel2ClayPromotionFlag =
