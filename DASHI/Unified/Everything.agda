@@ -393,12 +393,6 @@ unifiedE6F3FiveQuadraticBoundary :
 unifiedE6F3FiveQuadraticBoundary =
   E6F3Five.canonicalE6F3FiveQuadraticBoundary
 
-unifiedE6F3FivePartition :
-  E6F3Five.fiveTritCarrierCount
-  ≡ E6F3Five.fiveTritZeroCount
-    + E6F3Five.fiveTritNonzeroIsotropicCount
-    + E6F3Five.fiveTritNormOneCount
-    + E6F3Five.fiveTritNormTwoCount
 unifiedE6F3FivePartition =
   E6F3Five.fiveTritQuadraticPartition
 
@@ -412,9 +406,10 @@ unifiedE8E6A2RootArithmeticBoundary :
 unifiedE8E6A2RootArithmeticBoundary =
   E8E6A2.canonicalE8E6A2RootArithmeticBoundary
 
-unifiedE8RootArithmeticAsE6PlusA2Orbits :
-  E8E6A2.e8RootCount
-  ≡ E8E6A2.eSixFixedRootCount
-    + E8E6A2.aTwoOrderThreeOrbitCount * 3
 unifiedE8RootArithmeticAsE6PlusA2Orbits =
   E8E6A2.eEightRootCountAsE6PlusA2Orbits
+
+unifiedE8E6A2ArithmeticDoesNotCreateF3FiveRecognition :
+  E8E6A2.E6A2ArithmeticCreatesF3FiveE8Recognition → ⊥
+unifiedE8E6A2ArithmeticDoesNotCreateF3FiveRecognition =
+  E8E6A2.e6A2ArithmeticDoesNotCreateF3FiveE8Recognition
