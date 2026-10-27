@@ -22,6 +22,13 @@ import DASHI.Unified.GRQuantumProofTermRegression
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
 
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
