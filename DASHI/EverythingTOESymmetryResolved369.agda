@@ -17,6 +17,7 @@ import DASHI.Cognition.HardtBrainInterventionNonidentifiabilityExact as NeuralCa
 
 -- Exact non-promotion results exposed at the TOE aggregate.
 -- Their proofs belong to the imported canonical source and causal modules.
+open import DASHI.Core.Prelude
 open import Data.Empty using (⊥)
 
 toeCitationIsNotInspection :
