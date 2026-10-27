@@ -313,3 +313,102 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- 11. TOE 369 exact max-cut facade.
+--
+-- This section does not use the historical axiom-shaped interfaces above as
+-- proof authority.  It imports the existing theorem owners directly.
+-- Character, dimension, carrier coincidence, and finite charts remain
+-- non-promoting.  No ESD surface is imported or edited.
+------------------------------------------------------------------------
+
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as TOEFullGrade
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as TOEProjected
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as TOEKernelSame
+import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as TOESelectedSame
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as TOESingleAction
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as TOEIbrahim
+import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as TOEHZeta
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TOETernary27
+
+toe369FullGradeDimensionDoesNotCreateFaithfulness :
+  TOEFullGrade.LinearDimensionCreatesFaithfulness → ⊥
+toe369FullGradeDimensionDoesNotCreateFaithfulness =
+  TOEFullGrade.dimensionDoesNotCreateFaithfulness
+
+toe369FullGradeCharacterDoesNotCreateActionAgreement :
+  TOEFullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+toe369FullGradeCharacterDoesNotCreateActionAgreement =
+  TOEFullGrade.characterDoesNotCreateActionAgreement
+
+toe369ProjectedDimensionDoesNotCreateAction :
+  TOEProjected.DirectSumDimensionCreatesProjectedAction → ⊥
+toe369ProjectedDimensionDoesNotCreateAction =
+  TOEProjected.dimensionDoesNotCreateProjectedAction
+
+toe369ProjectedRetractionDoesNotCreateAction :
+  TOEProjected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+toe369ProjectedRetractionDoesNotCreateAction =
+  TOEProjected.coordinateRetractionDoesNotCreateProjectedAction
+
+toe369KernelTrace53DoesNotIdentify3B :
+  TOEKernelSame.Actual3BKernelSameElementBoundary.trace53AloneIdentifiesMonster3B
+    TOEKernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+toe369KernelTrace53DoesNotIdentify3B = refl
+
+toe369KernelCharacterIsotypyDoesNotCreateAction :
+  TOEKernelSame.Actual3BKernelSameElementBoundary.characterIsotypyConstructsActionIntertwiner
+    TOEKernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+toe369KernelCharacterIsotypyDoesNotCreateAction = refl
+
+toe369SelectedSameElementClassRecognitionStillOpen :
+  TOESelectedSame.Selected3BSameElementBoundary.selectedElementProvedMonsterClass3BHere
+    TOESelectedSame.canonicalSelected3BSameElementBoundary
+  ≡ false
+toe369SelectedSameElementClassRecognitionStillOpen = refl
+
+toe369SingleActionProducerStillOpen :
+  TOESingleAction.SingleActionProducerBoundary.actualSingleProducerInhabitedHere
+    TOESingleAction.canonicalSingleActionProducerBoundary
+  ≡ false
+toe369SingleActionProducerStillOpen = refl
+
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction :
+  TOEIbrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  TOEIbrahim.finiteChartDoesNotCreateLinearMultiplicityAction
+
+toe369NinetySlicesDoNotCreatePermutationRepresentation :
+  TOEIbrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+toe369NinetySlicesDoNotCreatePermutationRepresentation =
+  TOEIbrahim.ninetySlicesDoNotCreatePermutationRepresentation
+
+toe369SchrodingerHZetaRecognitionStillOpen :
+  TOEHZeta.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaRecognitionInhabitedHere
+    TOEHZeta.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+toe369SchrodingerHZetaRecognitionStillOpen = refl
+
+toe369SchrodingerActionIntertwinerStillOpen :
+  TOEHZeta.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaActionIntertwinerInhabitedHere
+    TOEHZeta.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+toe369SchrodingerActionIntertwinerStillOpen = refl
+
+toe369Ternary27PhaseReductionIsNotGlobalInversion :
+  TOETernary27.phasePreservingReductionEqualsFullGlobalInversion
+    TOETernary27.currentTernary27ReductionBoundary
+  ≡ false
+toe369Ternary27PhaseReductionIsNotGlobalInversion =
+  TOETernary27.phasePreservingReductionEqualsFullGlobalInversionIsFalse
+
+toe369Ternary27ReductionIsNotMonster42SameObject :
+  TOETernary27.reducedFifteenIsMonster42dSameObject
+    TOETernary27.currentTernary27ReductionBoundary
+  ≡ false
+toe369Ternary27ReductionIsNotMonster42SameObject =
+  TOETernary27.reducedFifteenIsMonster42dSameObjectIsFalse
