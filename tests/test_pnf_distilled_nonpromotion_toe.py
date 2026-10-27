@@ -2,8 +2,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-BRIDGE = ROOT / "DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda"
-VALIDATION = ROOT / "DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda"
+SOURCE = ROOT / "DASHI/Unified/PNFSourceBoundaryTOEExact.agda"
+SOURCE_VALIDATION = ROOT / "DASHI/Unified/PNFSourceBoundaryTOEValidation.agda"
+DISTILLED = ROOT / "DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda"
+DISTILLED_VALIDATION = ROOT / "DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda"
 UNIFIED = ROOT / "DASHI/Unified/Everything.agda"
 TOE = ROOT / "DASHI/EverythingTOESymmetryResolved369.agda"
 UNIFIER = ROOT / "DASHI/Unifier.agda"
@@ -15,8 +17,8 @@ def read(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="strict")
 
 
-def test_bridge_reuses_capsule_owners_without_duplicate_carriers():
-    text = read(BRIDGE)
+def test_canonical_source_boundary_reuses_capsule_owners():
+    text = read(SOURCE)
     for token in (
         "GluingOperatorLinearityProxyHarnessResult",
         "YMFiniteSelfAdjointHamiltonianProxyHarnessResult",
@@ -24,62 +26,90 @@ def test_bridge_reuses_capsule_owners_without_duplicate_carriers():
         "KluverFormConstantPsychedelicBoundaryExact",
         "FungalNetworkAgencyBoundary",
         "PsychogeographyYijingSourceAtlas",
-        "DistributedEpistemicFabricSourceAtlasExact",
     ):
         assert token in text
 
 
-def test_bridge_preserves_exact_nonpromotion_facts():
-    text = read(BRIDGE)
+def test_canonical_source_boundary_preserves_exact_facts():
+    text = read(SOURCE)
     for token in (
-        "Gluing.promotion_is_false",
-        "Gluing.terminalPromotionIsFalse",
-        "SelfAdjoint.promotion_is_false",
-        "SelfAdjoint.terminalPromotionIsFalse",
-        "Domination.promotion_is_false",
-        "Domination.terminalPromotionIsFalse",
-        "Kluver.formConstantDoesNotPromoteUniversalSymbol",
-        "Kluver.formConstantDoesNotPromoteRecoveredMemory",
+        "canonicalGluingHarnessDoesNotProveTrueLinearity",
+        "canonicalHarnessFiniteSelfAdjointTheoremFalse",
+        "canonicalHamiltonianDominationProxyTheoremFalse",
         "forestWideWoodWebClaimsNeedSpeciesSpecificEvidence",
         "myceliumNotInternetOrBrainByDefinition",
-        "Psychogeography.webPublicationIdentifier",
-        "Fabric.attributionRule",
+        "formConstantDoesNotPromoteUniversalSymbol",
+        "formConstantDoesNotPromoteRecoveredMemory",
+        "webPublicationIdentifier",
+        "canonicalPNFSourceBoundaryTOEReceipt",
     ):
         assert token in text
+
+
+def test_distilled_facade_reuses_canonical_source_boundary_only():
+    text = read(DISTILLED)
+    assert "import DASHI.Unified.PNFSourceBoundaryTOEExact as Boundary" in text
+    assert "DistributedEpistemicFabricSourceAtlasExact" in text
+    assert "canonicalPNFSourceBoundaryTOEReceipt" in text
+
+    # The compatibility facade must not recreate the donor theorem package.
+    for token in (
+        "import DASHI.Physics.Closure.GluingOperatorLinearityProxyHarnessResult",
+        "import DASHI.Physics.Closure.YMFiniteSelfAdjointHamiltonianProxyHarnessResult",
+        "import DASHI.Physics.Closure.YMHamiltonianDominationProxyHarnessResult",
+        "import DASHI.Biology.KluverFormConstantPsychedelicBoundaryExact",
+        "import DASHI.Biology.Levin.FungalNetworkAgencyBoundary",
+        "import DASHI.Biology.PsychogeographyYijingSourceAtlas",
+    ):
+        assert token not in text
 
 
 def test_zkp_receipt_is_fail_closed():
-    text = read(BRIDGE)
+    text = read(DISTILLED)
     for token in (
         "PNFDistilledReuseZKPReceipt",
         "sharedLexemeCreatesSemanticIdentityIsFalse",
         "diagnosticCheckCreatesTheoremPromotionIsFalse",
         "sourceIdentifierCreatesProofAuthorityIsFalse",
         "esdSurfaceMutationAllowedIsFalse",
+        "Fabric.attributionRule",
     ):
         assert token in text
 
 
-def test_toe_surfaces_use_same_canonical_boundary():
+def test_all_three_toe_facades_use_canonical_source_boundary():
     unified = read(UNIFIED)
     toe = read(TOE)
     unifier = read(UNIFIER)
+
     for text in (unified, toe, unifier):
-        assert "PNFDistilledNonPromotionTOEExact" in text
-        assert "canonicalPNFDistilledNonPromotionBoundary" in text
-    assert "PNFDistilledNonPromotionTOEValidation" in unified
-    assert "PNFDistilledNonPromotionTOEValidation" in toe
+        assert "PNFSourceBoundaryTOEExact" in text
+        assert "canonicalPNFSourceBoundaryTOEReceipt" in text
+
+    assert "toePNFSourceBoundaryReceipt" in toe
+    assert "toePNFSourceBoundaryReceipt" in unifier
+    assert "pnfSourceBoundaryReceipt" in unified
 
 
-def test_validation_binds_unifier_to_canonical_objects():
-    text = read(VALIDATION)
+def test_source_validation_binds_unifier_to_canonical_source_owner():
+    text = read(SOURCE_VALIDATION)
     for token in (
-        "unifierUsesCanonicalPNFDistilledBoundary",
+        "unifierUsesCanonicalPNFSourceBoundaryReceipt",
+        "gluingFacadeExact",
+        "selfAdjointFacadeExact",
+        "dominationFacadeExact",
+        "fungalFacadeExact",
+        "kluverCobwebFacadeExact",
+        "webIdentifierFacadeExact",
+    ):
+        assert token in text
+
+
+def test_distilled_validation_only_checks_process_firewalls():
+    text = read(DISTILLED_VALIDATION)
+    assert "import DASHI.Unified.PNFSourceBoundaryTOEValidation" in text
+    for token in (
         "unifierUsesCanonicalPNFDistilledZKPReceipt",
-        "gluingDiagnosticRemainsNonPromoting",
-        "selfAdjointDiagnosticRemainsNonPromoting",
-        "dominationDiagnosticRemainsNonPromoting",
-        "fungalEvidenceRequirementRemainsTrue",
         "sharedLexemeDoesNotCreateSemanticIdentity",
         "diagnosticCheckDoesNotCreateTheoremPromotion",
         "sourceIdentifierDoesNotCreateProofAuthority",
@@ -96,20 +126,29 @@ def test_agda_surfaces_have_no_trust_escape():
         "NO_POSITIVITY_CHECK",
         "{!!}",
     )
-    for path in (BRIDGE, VALIDATION, TOE):
+    for path in (
+        SOURCE,
+        SOURCE_VALIDATION,
+        DISTILLED,
+        DISTILLED_VALIDATION,
+        TOE,
+    ):
         text = read(path)
         for token in forbidden:
             assert token not in text, f"{token} found in {path.relative_to(ROOT)}"
 
 
-def test_focused_workflow_covers_pnf_lane():
+def test_focused_workflow_covers_canonical_and_compatibility_lanes():
     text = read(WORKFLOW)
     for token in (
+        "PNFSourceBoundaryTOEExact.agda",
+        "PNFSourceBoundaryTOEValidation.agda",
         "PNFDistilledNonPromotionTOEExact.agda",
         "PNFDistilledNonPromotionTOEValidation.agda",
         "test_pnf_distilled_nonpromotion_toe.py",
-        "canonicalPNFDistilledNonPromotionBoundary",
+        "canonicalPNFSourceBoundaryTOEReceipt",
+        "canonicalPNFDistilledReuseZKPReceipt",
         "dashi-agda-preflight",
-        "ESD surface changed",
+        "ESD surface change detected",
     ):
         assert token in text
