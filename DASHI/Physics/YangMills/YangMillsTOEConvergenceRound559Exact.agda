@@ -749,6 +749,50 @@ toeAllRemainingFamiliesAlreadyProvedIsFalse :
 toeAllRemainingFamiliesAlreadyProvedIsFalse = refl
 
 ------------------------------------------------------------------------
+-- Canonical R546 and R558 scheduling quotients.
+--
+-- Re-export the owner enums.
+-- Do not define duplicate family types.
+------------------------------------------------------------------------
+
+open R546 public using
+  ( SourceFamily
+  ; a1CurrentStepVariation
+  ; a2HistoryCoordinate
+  ; a3ProjectiveRepresentation
+  ; finiteT1AndPublishedOS
+  ; quantitativeT5CMP119Alignment
+  ; bWilsonWEXT
+  ; bSameHamiltonianEnergyDecay
+  ; actualGroupCompleteSource
+  ; densityToNormalizedFiniteMeasure
+  ; c0WilsonLocalObservable
+  ; c1MarkedCurvature
+  ; c2PhysicalRemainderTail
+  ; c3AFRecurrence
+  ; c4DensityAnchoredStress
+  )
+
+toeIrreducibleFamilyLevel : SourceFamily → ProofLevel
+toeIrreducibleFamilyLevel =
+  R546.familyLevel
+
+open R558 public using
+  ( CriticalFamily
+  ; a3SelectedRepresentation
+  ; t1FiniteOSSameFamily
+  ; t5QuantitativeSameFamily
+  ; b1SourceFirstWilsonWEXT
+  ; b2SameHamiltonian
+  ; g1ActualCompactSimple
+  ; h6MinimalWardNontriviality
+  )
+
+toeCriticalFamilyLevel : CriticalFamily → ProofLevel
+toeCriticalFamilyLevel =
+  R558.criticalLevel
+
+------------------------------------------------------------------------
 -- R546 irreducible source-family subcuts.
 ------------------------------------------------------------------------
 
