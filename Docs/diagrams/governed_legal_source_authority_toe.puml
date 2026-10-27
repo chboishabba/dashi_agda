@@ -1,0 +1,48 @@
+@startuml
+title Governed legal-source authority invariant handoff to DASHI TOE
+
+package "Existing exact owners" {
+  [SensibLaw operational boundary] as Operational
+  [Review / matter / admission] as Workflow
+  [Semantic promotion policy] as Semantic
+  [Bound acquisition demand] as Acquisition
+  [Legal source authority evidence] as LegalAuthority
+  [Compliance + governance controls] as Governance
+}
+
+package "Normalized Unified surface" {
+  [GovernedLegalWorkflowTOEBridgeExact] as Bridge
+  [GovernedLegalWorkflowAuthorityInvariantHandoff] as AuthorityHandoff
+  [GovernedLegalWorkflowTOEBridgeRegression] as Regression
+}
+
+package "TOE roots" {
+  [DASHI.Unified.Everything] as Unified
+  [DASHI.Unifier] as Unifier
+  [EverythingTOESymmetryResolved369] as TOE
+}
+
+Operational --> Bridge : task/workflow non-promotion
+Workflow --> Bridge : review/admission non-promotion
+Semantic --> Bridge : semantic authority closed
+Acquisition --> Bridge : binding does not pay residual
+LegalAuthority --> AuthorityHandoff : five legal-source firewalls
+Governance --> Bridge : controls + compliance witness
+Bridge --> AuthorityHandoff : canonical workflow handoff
+
+AuthorityHandoff --> Unified : canonical object
+AuthorityHandoff --> Unifier : exact alias
+AuthorityHandoff --> TOE : exact alias
+Unifier --> Regression : definitional equality checks
+
+note bottom of AuthorityHandoff
+Candidate source != legal authority.
+Legal-system match != legal authority.
+Current validity != case-specific applicability.
+Semantic admission != legal-source authority.
+Document role != legal-source authority.
+Actionstep-style workflow remains generic.
+ESD surfaces remain read-only.
+end note
+
+@enduml
