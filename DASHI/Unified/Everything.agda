@@ -15,6 +15,7 @@ import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
 import DASHI.Unified.SensibLawActionstepGovernanceTOEExact as SensibLawActionstepGovernance
+import DASHI.Unified.MissingDeceasedIbrahimDeweyParetoTOEExact as MissingDeceasedIbrahimDeweyPareto
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
