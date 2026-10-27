@@ -212,3 +212,59 @@ selectedMissingValidationStillAbstains :
   ≡ Governed.abstain
 selectedMissingValidationStillAbstains =
   Promotion.missingValidationAbstains
+
+------------------------------------------------------------------------
+-- Mabo citation-use and cross-matter non-promotion handoff.
+--
+-- Reuse the existing case battery and Mabo/Pabai owners.
+-- A citation seed is a navigation coordinate.
+-- Shared Country context does not discharge a different statutory element.
+-- Structural analogy does not transfer substantive doctrine.
+------------------------------------------------------------------------
+
+import DASHI.Law.SensibLawLegalCaseBatteryExact as CaseBattery
+import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as MaboPabai
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionCreationFootholdExact as MaboFoothold
+
+selectedYindjibarndiCitationSeedDoesNotCreateMaboJoin :
+  CaseBattery.YunupinguSeedAutomaticallyMaboJoin → ⊥
+selectedYindjibarndiCitationSeedDoesNotCreateMaboJoin =
+  CaseBattery.yunupinguSeedDoesNotCreateMaboJoin
+
+selectedMunkaraNativeTitleAtomDoesNotPayOffshoreElement :
+  CaseBattery.NativeTitleAtomPaysOffshorePetroleumElement → ⊥
+selectedMunkaraNativeTitleAtomDoesNotPayOffshoreElement =
+  CaseBattery.nativeTitleAtomDoesNotPayOffshoreElement
+
+selectedMunkaraSharedCountryConceptDoesNotCollapseWrongType :
+  CaseBattery.SharedCountryConceptCollapsesWrongType → ⊥
+selectedMunkaraSharedCountryConceptDoesNotCollapseWrongType =
+  CaseBattery.sharedConceptDoesNotCollapseWrongType
+
+selectedPabaiMaboAnalogyStillNonPromoting :
+  MaboPabai.MaboPabaiSearchBoundary.maboAnalogyAutomaticallyTransfersDoctrine
+    MaboPabai.canonicalMaboPabaiSearchBoundary
+  ≡ false
+selectedPabaiMaboAnalogyStillNonPromoting =
+  CaseBattery.pabaiMaboAnalogyStillNonPromoting
+
+selectedMaboIsNotClimateNegligencePrecedent :
+  MaboPabai.MaboIsClimateNegligencePrecedent → ⊥
+selectedMaboIsNotClimateNegligencePrecedent =
+  MaboPabai.maboIsNotPromotedToClimateNegligencePrecedent
+
+selectedMaboStructureDoesNotProveClimateDoctrine :
+  MaboFoothold.MaboFootholdAutomaticallyTransfersToClimateNegligence → ⊥
+selectedMaboStructureDoesNotProveClimateDoctrine =
+  MaboFoothold.maboStructureDoesNotProveClimateDoctrine
+
+selectedAmoduCitationDoesNotMeanWholesaleAdoption :
+  MaboPabai.AmoduCitationMeansMaboAdoptedEveryAmoduProposition → ⊥
+selectedAmoduCitationDoesNotMeanWholesaleAdoption =
+  MaboPabai.amoduCitationDoesNotMeanWholesaleAdoption
+
+selectedPabaiCurrentRouteStillUnreachable =
+  MaboPabai.pabaiCurrentRouteStillUnreachable
+
+selectedPabaiSearchStillRequiresProof =
+  MaboPabai.pabaiSearchStillRequiresProof
