@@ -1345,6 +1345,7 @@ unifierBalabanOSWightmanStillBlocked =
 
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalGenealogyTOE
 import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSemanticTOE
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
 
 unifierGovernedLegalWorkflowSourceSemanticHandoff :
   LegalSemanticTOE.GovernedLegalWorkflowSourceSemanticHandoff
@@ -1377,6 +1378,46 @@ unifierLegalSemanticIdentifierAuthorityFirewall =
 
 unifierLegalSemanticESDMutationForbidden =
   LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
+
+unifierGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
+unifierGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+unifierQualificationDoesNotAutomaticallyProveForensicCompliance :
+  LegalGovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+unifierQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
+
+unifierLegalReviewDoesNotCreateClaimTruth :
+  LegalGovernanceTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
+unifierLegalReviewDoesNotCreateClaimTruth =
+  LegalGovernanceTOE.toeLegalReviewDoesNotCreateClaimTruth
+
+unifierOfficialLegalSurfaceDoesNotRecoverFineState :
+  LegalGovernanceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+unifierOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalGovernanceTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
+
+unifierOfficialActionDoesNotRecoverAutonomyAndAuthority :
+  LegalGovernanceTOE.OfficialActionRecoversAutonomyAndAuthority → ⊥
+unifierOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalGovernanceTOE.toeOfficialActionDoesNotRecoverAutonomyAndAuthority
+
+unifierLegalityAloneDoesNotCreateLegitimacy :
+  LegalGovernanceTOE.LegalOnlyCreatesLegitimacy → ⊥
+unifierLegalityAloneDoesNotCreateLegitimacy =
+  LegalGovernanceTOE.toeLegalityAloneDoesNotCreateLegitimacy
+
+unifierActionstepStyleVendorIdentityDoesNotCreateAuthority :
+  LegalGovernanceTOE.actionstepStyleVendorIdentityCreatesAuthority ≡ false
+unifierActionstepStyleVendorIdentityDoesNotCreateAuthority =
+  LegalGovernanceTOE.toeActionstepStyleVendorIdentityCreatesAuthority
+
+unifierActionstepStyleTargetNeedsOwnAuthorityWitness :
+  LegalGovernanceTOE.actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
+unifierActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalGovernanceTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
 
 
 ------------------------------------------------------------------------
