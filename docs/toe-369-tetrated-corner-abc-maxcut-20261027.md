@@ -32,10 +32,12 @@ No ESD repository or ESD module was changed.
   before a symmetry quotient may be admitted.
 - **G / Guarantees:** Import reachability, reuse of exact finite carrier
   laws and explicit non-promotion constraints. No sine-sign oracle.
-- **F / Falsification:** The ABC six permutations do not give six distinct
-  parity/carry images on each nondegenerate cube; exact collisions falsify
-  this stronger claim. This was corrected in
-  `scripts/check_pickover_abc_s3_signed_cocycle.py`.
+- **F / Falsification:** The six S3 permutations do yield six distinct
+  (orientation parity, rational C3 phase correction) labels on each
+  nondegenerate ABC cube. Coarse torque parity alone still collides.
+  An earlier integer-floor phase projection wrongly suggested a collision;
+  exact rational modulo-one verification falsified that intermediate claim.
+  `scripts/check_pickover_abc_s3_signed_cocycle.py` retains exact fractions.
 
 ## Structural distinction
 
