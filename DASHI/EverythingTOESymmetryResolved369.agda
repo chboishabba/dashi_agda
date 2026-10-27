@@ -175,6 +175,41 @@ toeLaterValidationDoesNotRewriteCertifiedBaseline =
   LegalGovernance.toeLaterValidationDoesNotRewriteCertifiedBaseline
 
 
+------------------------------------------------------------------------
+-- Canonical semantic-authority and exact-live acquisition firewalls.
+------------------------------------------------------------------------
+
+toeSemanticPromotionTruthAuthorityClosed :
+  LegalGovernance.SemanticPromotionTruthAuthorityClosed
+toeSemanticPromotionTruthAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
+
+toeSemanticPromotionLegalAuthorityClosed :
+  LegalGovernance.SemanticPromotionLegalAuthorityClosed
+toeSemanticPromotionLegalAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
+
+toeSemanticPromotionAllAuthorityClosed :
+  LegalGovernance.SemanticPromotionAllAuthorityClosed
+toeSemanticPromotionAllAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionAllAuthorityClosed
+
+toeBoundAcquisitionDoesNotPayRequirement :
+  LegalGovernance.BoundDemandAutomaticallyPaysRequirement → ⊥
+toeBoundAcquisitionDoesNotPayRequirement =
+  LegalGovernance.toeBoundAcquisitionDoesNotPayRequirement
+
+toeBoundAcquisitionDoesNotCloseConsumer :
+  LegalGovernance.BoundDemandAutomaticallyClosesConsumer → ⊥
+toeBoundAcquisitionDoesNotCloseConsumer =
+  LegalGovernance.toeBoundAcquisitionDoesNotCloseConsumer
+
+toeProducerIdentityDoesNotIdentifyResidual :
+  LegalGovernance.SameProducerIdentifiesResidual → ⊥
+toeProducerIdentityDoesNotIdentifyResidual =
+  LegalGovernance.toeProducerIdentityDoesNotIdentifyResidual
+
+
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
