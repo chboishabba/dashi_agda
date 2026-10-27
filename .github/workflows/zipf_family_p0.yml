@@ -54,7 +54,8 @@ jobs:
             tests/test_zipf_occupancy_collisions_exact.py \
             tests/test_pareto_benford_lorenz_bridge.py \
             tests/test_zipf_family_coverage_gates.py \
-            tests/test_zipf_family_severe_coverage.py
+            tests/test_zipf_family_severe_coverage.py \
+            tests/test_zipf_rank_model_evidence_exact.py
 
   agda-kernel:
     runs-on: ubuntu-24.04
