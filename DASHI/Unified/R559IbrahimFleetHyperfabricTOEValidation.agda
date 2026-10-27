@@ -84,3 +84,33 @@ fleetDischargedFibresStillCannotBeRetargeted :
   Fleet.FleetDischargedFibreRetargetPermission → ⊥
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
+
+------------------------------------------------------------------------
+-- Equal count does not create same-object identity.
+------------------------------------------------------------------------
+
+toeFleetGate4CountAgreementMatchesOwner :
+  TOE.toeFleetGate4CountAgreement
+  ≡ Owner.fleetFormalGapCountEqualsGate4Count
+toeFleetGate4CountAgreementMatchesOwner = refl
+
+unifierFleetGate4CountAgreementMatchesOwner :
+  Unifier.unifierFleetGate4CountAgreement
+  ≡ Owner.fleetFormalGapCountEqualsGate4Count
+unifierFleetGate4CountAgreementMatchesOwner = refl
+
+unifiedFleetGate4CountAgreementMatchesOwner :
+  Unified.unifiedFleetGate4CountAgreement
+  ≡ Owner.fleetFormalGapCountEqualsGate4Count
+unifiedFleetGate4CountAgreementMatchesOwner = refl
+
+toeFleetGate4NonidentityMatchesOwner :
+  TOE.toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+  ≡ Owner.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+toeFleetGate4NonidentityMatchesOwner = refl
+
+unifierFleetGate4NonidentityMatchesOwner :
+  Unifier.unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+  ≡ Owner.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+unifierFleetGate4NonidentityMatchesOwner = refl
+
