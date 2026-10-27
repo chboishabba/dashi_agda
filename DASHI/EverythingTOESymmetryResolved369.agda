@@ -321,3 +321,40 @@ toe369RelateHyperfabricPantsReceipt :
   Relate369PantsTOE.Relate369HyperfabricPantsTOEReceipt
 toe369RelateHyperfabricPantsReceipt =
   Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEReceipt
+
+
+------------------------------------------------------------------------
+-- Repo state-space formalisation convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.RepoStateSpaceTOEConvergenceExact as RepoStateSpaceTOE
+import DASHI.Unified.RepoStateSpaceTOEConvergenceValidation
+import DASHI.Interop.PNFHyperfabric369 as RepoStatePNF369
+import DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531Exact as RepoStateNS369
+import DASHI.Physics.Closure.YMClayPromotionBoundary as RepoStateYMClay
+
+toe369RepoStateSpaceZKPFrame :
+  RepoStateSpaceTOE.RepoStateSpaceTOEZKPFrame
+toe369RepoStateSpaceZKPFrame =
+  RepoStateSpaceTOE.canonicalRepoStateSpaceTOEZKPFrame
+
+toe369RepoStateSpaceHyperfabricDoesNotPromote :
+  (object : RepoStatePNF369.HyperfabricObject) →
+  RepoStatePNF369.hyperfabricPromotesExternalTheorem object ≡ false
+toe369RepoStateSpaceHyperfabricDoesNotPromote =
+  RepoStateSpaceTOE.hyperfabricDoesNotPromoteExternalTheorem
+
+toe369RepoStateSpaceNSRawManifoldEqualityStillBlocked :
+  RepoStateNS369.round531RawManifoldPointEqualityClaimed ≡ false
+toe369RepoStateSpaceNSRawManifoldEqualityStillBlocked =
+  RepoStateSpaceTOE.nsRawManifoldEqualityIsNotClaimed
+
+toe369RepoStateSpaceNSClayPromotionStillBlocked :
+  RepoStateNS369.round531ClayPromotion ≡ false
+toe369RepoStateSpaceNSClayPromotionStillBlocked =
+  RepoStateSpaceTOE.nsClayPromotionIsNotCreatedBy369
+
+toe369RepoStateSpaceYMClayPromotionStillBlocked :
+  RepoStateYMClay.clayYangMillsPromoted ≡ false
+toe369RepoStateSpaceYMClayPromotionStillBlocked =
+  RepoStateSpaceTOE.ymClayPromotionStillClosed
