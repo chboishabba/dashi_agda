@@ -1057,3 +1057,63 @@ toeBalabanOSWightmanStillBlocked :
 toeBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Governed legal workflow -> Ibrahim source genealogy -> semantic boundary.
+-- Reuse-only. Original theorem owners retain proof authority.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalGenealogyTOE
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSemanticTOE
+
+toeGovernedLegalWorkflowSourceSemanticHandoff :
+  LegalSemanticTOE.GovernedLegalWorkflowSourceSemanticHandoff
+toeGovernedLegalWorkflowSourceSemanticHandoff =
+  LegalSemanticTOE.canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+toeLegalGenealogyPerceivedIndependenceFirewall =
+  LegalGenealogyTOE.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
+
+toeLegalGenealogyRepetitionFirewall =
+  LegalGenealogyTOE.toeRepetitionDoesNotCreateIndependentLegalEvidence
+
+toeLegalGenealogyCandidateAuthorityFirewall =
+  LegalGenealogyTOE.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
+
+toeLegalGenealogyValidityApplicabilityFirewall =
+  LegalGenealogyTOE.toeGenealogyCurrentValidityDoesNotCreateApplicability
+
+toeLegalGenealogyAdmissionAuthorityFirewall =
+  LegalGenealogyTOE.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
+
+toeLegalSemanticSharedLexemeFirewall =
+  LegalSemanticTOE.toeSharedLexemeDoesNotCreateSemanticIdentity
+
+toeLegalSemanticDiagnosticPromotionFirewall =
+  LegalSemanticTOE.toeDiagnosticCheckDoesNotCreateTheoremPromotion
+
+toeLegalSemanticIdentifierAuthorityFirewall =
+  LegalSemanticTOE.toeSourceIdentifierDoesNotCreateProofAuthority
+
+toeLegalSemanticESDMutationForbidden =
+  LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
+
+
+------------------------------------------------------------------------
+-- Fleet-58 named-manifest dispatch boundary.
+------------------------------------------------------------------------
+
+toeFleetGapDispatchBoundary :
+  FleetGapTOE.FleetFormalGapDispatchBoundary
+toeFleetGapDispatchBoundary =
+  FleetGapTOE.canonicalFleetFormalGapDispatchBoundary
+
+toeFleetNamedManifestStillOpen =
+  FleetGapTOE.namedFormalGapManifestAvailableIsFalse
+
+toeFleetDispatchRequiresNamedManifest =
+  FleetGapTOE.dispatchRequiresNamedFormalGapManifestIsTrue
+
+toeFleetCountDoesNotIdentifyGapObjects =
+  FleetGapTOE.externalGapCountIdentifiesIndividualGapsIsFalse
