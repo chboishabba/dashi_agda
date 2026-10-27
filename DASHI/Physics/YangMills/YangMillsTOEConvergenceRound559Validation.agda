@@ -107,3 +107,51 @@ clayYangMillsNotPromoted =
 toeConvergenceCompilerMachineChecked :
   TOE.round559TOEConvergenceCompilerLevel ≡ machineChecked
 toeConvergenceCompilerMachineChecked = refl
+
+
+------------------------------------------------------------------------
+-- Same-object scale-density-stress convergence regressions.
+------------------------------------------------------------------------
+
+betaDrivenSourceFlowIsChecked :
+  TOE.toeBetaDrivenSourceFlowLevel ≡ machineChecked
+betaDrivenSourceFlowIsChecked = refl
+
+betaHistoryIsLiteralCMP122CouplingIsChecked :
+  TOE.toeBetaHistoryIsLiteralCMP122CouplingLevel ≡ machineChecked
+betaHistoryIsLiteralCMP122CouplingIsChecked = refl
+
+betaHistorySameStateCouplingIsChecked :
+  TOE.toeBetaHistorySameStateCouplingLevel ≡ machineChecked
+betaHistorySameStateCouplingIsChecked = refl
+
+canonicalCompleteDensityCouplingIsChecked :
+  TOE.toeBetaHistoryToCanonicalCompleteDensityLevel ≡ machineChecked
+canonicalCompleteDensityCouplingIsChecked = refl
+
+stressScaleCompilerIsChecked :
+  TOE.toeUnifiedGeneratedActionStressScaleCompilerLevel ≡ machineChecked
+stressScaleCompilerIsChecked = refl
+
+literalStressScaleRemainsConditional :
+  TOE.toeLiteralUnifiedGeneratedActionStressScaleLevel ≡ conditional
+literalStressScaleRemainsConditional = refl
+
+strictCasimirCarrierIsChecked :
+  TOE.toeStrictCasimirCarrierCompilerLevel ≡ machineChecked
+strictCasimirCarrierIsChecked = refl
+
+depthLimitStillNotPromoted :
+  TOE.toeDepthLimitNoSpectralPollutionProvedHere ≡ false
+depthLimitStillNotPromoted =
+  TOE.toeDepthLimitNoSpectralPollutionProvedHereIsFalse
+
+osWightmanContinuumStillNotConstructed :
+  TOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
+osWightmanContinuumStillNotConstructed =
+  TOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+
+terminalPromotionStillBlocked :
+  TOE.toeTerminalPromotion ≡ false
+terminalPromotionStillBlocked =
+  TOE.toeTerminalPromotionIsFalse
