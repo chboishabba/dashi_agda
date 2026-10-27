@@ -2,6 +2,7 @@ module DASHI.Unified.Physics where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.SensibLawResidualLattice as Residual
@@ -11,6 +12,8 @@ import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact as PlaquetteTOE
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.InvariantSpine as Spine
 
 navierStokesObject : Spine.UnifiedObjectInvariant
@@ -96,3 +99,100 @@ yangMillsD2PublishedSourceEntryDoesNotPayInsertionNaturality :
   PlaquetteTOE.toeD2PublishedSourceEntryPaysInsertionNaturality ≡ false
 yangMillsD2PublishedSourceEntryDoesNotPayInsertionNaturality =
   PlaquetteTOE.toeD2PublishedSourceEntryPaysInsertionNaturalityIsFalse
+
+
+------------------------------------------------------------------------
+-- Normalized Yang-Mills TOE convergence facade.
+------------------------------------------------------------------------
+
+open YMTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
+
+yangMillsTOEPublishedRGDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+yangMillsTOEPublishedRGDoesNotPromoteContinuum =
+  YMTOE.toePublishedRGDoesNotPromoteContinuum
+
+yangMillsTOEContinuumMassGapBlocked :
+  YMTOE.toeContinuumMassGapPromoted ≡ false
+yangMillsTOEContinuumMassGapBlocked =
+  YMTOE.toeContinuumMassGapPromotedIsFalse
+
+yangMillsTOEClayPromotionBlocked :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+yangMillsTOEClayPromotionBlocked =
+  YMTOE.toeClayYangMillsPromotedIsFalse
+
+yangMillsTOEBetaHistorySameStateCouplingLevel : ProofLevel
+yangMillsTOEBetaHistorySameStateCouplingLevel =
+  YMTOE.toeBetaHistorySameStateCouplingLevel
+
+yangMillsTOEGeneratedActionDensityCompilerLevel : ProofLevel
+yangMillsTOEGeneratedActionDensityCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
+
+yangMillsTOECombinedRGUnifiedActionCompilerLevel : ProofLevel
+yangMillsTOECombinedRGUnifiedActionCompilerLevel =
+  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
+
+yangMillsTOERegularEProjectionCompilerLevel : ProofLevel
+yangMillsTOERegularEProjectionCompilerLevel =
+  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
+
+yangMillsTOEStressScaleCompilerLevel : ProofLevel
+yangMillsTOEStressScaleCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
+
+yangMillsTOEStrictCasimirCarrierLevel : ProofLevel
+yangMillsTOEStrictCasimirCarrierLevel =
+  YMTOE.toeStrictCasimirCarrierCompilerLevel
+
+yangMillsTOEUniversalBetaFloorLevel : ProofLevel
+yangMillsTOEUniversalBetaFloorLevel =
+  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
+
+yangMillsTOELiteralUniformRemainderFloorLevel : ProofLevel
+yangMillsTOELiteralUniformRemainderFloorLevel =
+  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
+
+yangMillsTOEStressMarkedShellBoundLevel : ProofLevel
+yangMillsTOEStressMarkedShellBoundLevel =
+  YMTOE.toeStressFirstVariationMarkedShellBoundLevel
+
+yangMillsTOEStressShellEnergyHilbertLevel : ProofLevel
+yangMillsTOEStressShellEnergyHilbertLevel =
+  YMTOE.toeStressShellEnergyToHilbertCompilerLevel
+
+yangMillsTOEOSWightmanContinuumBlocked :
+  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
+yangMillsTOEOSWightmanContinuumBlocked =
+  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+
+yangMillsTOEPinnedAOS1CompilerLevel : ProofLevel
+yangMillsTOEPinnedAOS1CompilerLevel =
+  YMTOE.toePinnedAOS1LimitCompilerLevel
+
+yangMillsTOESelectedBSourceDecayCompilerLevel : ProofLevel
+yangMillsTOESelectedBSourceDecayCompilerLevel =
+  YMTOE.toeSelectedCMP116SourceDecayCompilerLevel
+
+yangMillsTOEPinnedCStressSameHamiltonianCompilerLevel : ProofLevel
+yangMillsTOEPinnedCStressSameHamiltonianCompilerLevel =
+  YMTOE.toePinnedConcreteStressSameHamiltonianAdapterLevel
