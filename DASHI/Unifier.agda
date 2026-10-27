@@ -700,6 +700,16 @@ open MaxCutTOE public using
   ; toeCharacterMultiplicityKernelStillUnobserved
   ; toeTwoIsotypicAgdaTransportStillOpen
   ; toeActualMonsterFin90SameActionAttachmentStillOpen
+  ; toeCanonicalSelected3BLinearRouteCompilerOutput
+  ; toeNormalizerMonsterCarrierBidiCompilerOutput
+  ; toeOnlyOneSelected3BActionEquationRemainsAfterCore
+  ; toeCanonicalSelected3BLinearCoreStillUninhabited
+  ; toeSelected3BActionIntertwiningStillUninhabited
+  ; toeSelected3BLinearCompletionStillUninhabited
+  ; toeOutgoingLinearAcquisitionStillUninhabited
+  ; toeOutgoingActualLinearActionStillOpen
+  ; toeOutgoingSourceNativeInertiaSameActionStillOpen
+  ; toeOutgoingTwelveSeventyEightIntertwinerStillOpen
   ; esdSurfaceWasNotEdited
   )
 
