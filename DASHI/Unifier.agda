@@ -1,6 +1,9 @@
 module DASHI.Unifier where
 
+import DASHI.Unified.OggSSP2BTOEExact as TwoBTOE
+
 open import Agda.Primitive using (Level; lzero; lsuc)
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
@@ -313,3 +316,52 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- Monster 2B TOE facade.
+-- The original Moonshine/runtime owners retain theorem authority.
+------------------------------------------------------------------------
+
+unifier2BResidualCountIsThree :
+  TwoBTOE.normalizedTwoBResidualCount ≡ 3
+unifier2BResidualCountIsThree =
+  TwoBTOE.normalizedTwoBResidualCountIsThree
+
+unifier2BFormalSourceActionStillOpen :
+  TwoBTOE.formalSourceActionPaidFlag ≡ false
+unifier2BFormalSourceActionStillOpen =
+  TwoBTOE.formalSourceActionPaidFlagIsFalse
+
+unifier2BWeldEquivarianceStillOpen :
+  TwoBTOE.weldEquivariancePaidFlag ≡ false
+unifier2BWeldEquivarianceStillOpen =
+  TwoBTOE.weldEquivariancePaidFlagIsFalse
+
+unifier2BTerminalQ10RecognitionStillOpen :
+  TwoBTOE.terminalQ10RecognitionPaidFlag ≡ false
+unifier2BTerminalQ10RecognitionStillOpen =
+  TwoBTOE.terminalQ10RecognitionPaidFlagIsFalse
+
+unifier2BTerminalDefectSourceStillOpen :
+  TwoBTOE.terminalDefectSourcePaidFlag ≡ false
+unifier2BTerminalDefectSourceStillOpen =
+  TwoBTOE.terminalDefectSourcePaidFlagIsFalse
+
+unifier2BP31SameObjectPromotionStillBlocked :
+  TwoBTOE.p31SameObjectPromotionPaidFlag ≡ false
+unifier2BP31SameObjectPromotionStillBlocked =
+  TwoBTOE.p31SameObjectPromotionPaidFlagIsFalse
+
+unifier2B279SameObjectPromotionStillBlocked :
+  TwoBTOE.twoSevenNineSameObjectPromotionPaidFlag ≡ false
+unifier2B279SameObjectPromotionStillBlocked =
+  TwoBTOE.twoSevenNineSameObjectPromotionPaidFlagIsFalse
+
+unifier2BZKPFrame : TwoBTOE.OggSSP2BTOEZKPFrame
+unifier2BZKPFrame =
+  TwoBTOE.canonicalOggSSP2BTOEZKPFrame
+
+unifier2BReceipt : TwoBTOE.OggSSP2BTOEReceipt
+unifier2BReceipt =
+  TwoBTOE.canonicalOggSSP2BTOEReceipt
