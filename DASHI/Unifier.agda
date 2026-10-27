@@ -1405,7 +1405,7 @@ unifierCMP119PreferredAdapterDebt =
 unifierCMP119PreferredWorkIsPhysicalSourcePackages =
   CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
 
-unifierCMP119NoConditionalSourceLeafPromoted =
+unifierCMP119NoSyntheticPhysicalIdentificationAdded =
   CMP119Preferred.noSyntheticPhysicalIdentificationAdded
 
 unifierCMP119RepresentationOnlySameObjectDebtRemains =
