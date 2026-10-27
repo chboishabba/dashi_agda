@@ -86,3 +86,45 @@ provenanceStillDoesNotCreateTruthOrAuthority = refl
 kernelClosureStillDoesNotCreateSemanticClosure :
   Cut.kernelClosureCreatesSemanticClosure ≡ false
 kernelClosureStillDoesNotCreateSemanticClosure = refl
+
+
+------------------------------------------------------------------------
+-- 369 contextual sheet/cube/fibre regression.
+------------------------------------------------------------------------
+
+decisionSheetRemainsNine :
+  Cut.decisionSheetStateCount ≡ 9
+decisionSheetRemainsNine =
+  Cut.decisionSheetStateCountIsNine
+
+interactionCubeRemainsTwentySeven :
+  Cut.interactionCubeStateCount ≡ 27
+interactionCubeRemainsTwentySeven =
+  Cut.interactionCubeStateCountIsTwentySeven
+
+appraisalFibreRemainsSevenHundredTwentyNine :
+  Cut.appraisalFibreStateCount ≡ 729
+appraisalFibreRemainsSevenHundredTwentyNine =
+  Cut.appraisalFibreStateCountIsSevenHundredTwentyNine
+
+supportRemainsPositive :
+  Cut.relativeOrientationTrit Cut.Trajectory.supports
+  ≡ Cut.SSP.sspPosOne
+supportRemainsPositive =
+  Cut.supportOrientationIsPositive
+
+counterRemainsNegative :
+  Cut.relativeOrientationTrit Cut.Trajectory.counters
+  ≡ Cut.SSP.sspNegOne
+counterRemainsNegative =
+  Cut.counterOrientationIsNegative
+
+synthesisDoesNotEraseComparator :
+  Cut.synthesisErasesComparator ≡ false
+synthesisDoesNotEraseComparator =
+  Cut.synthesisErasesComparatorIsFalse
+
+contextualFibreWeldReceiptReachable :
+  Cut.TOE369ContextualFibreWeldReceipt
+contextualFibreWeldReceiptReachable =
+  Cut.canonicalTOE369ContextualFibreWeldReceipt
