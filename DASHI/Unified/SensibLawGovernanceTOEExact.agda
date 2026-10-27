@@ -36,6 +36,33 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as TOEFrame
 -- ESD surfaces are not imported as proof authority and are never edited here.
 ------------------------------------------------------------------------
 
+SemanticPromotionPolicySurface : Set₁
+SemanticPromotionPolicySurface = Semantic.SemanticPromotionPolicySurface
+
+ExpertProductionBoundary : Set
+ExpertProductionBoundary = Expert.ExpertProductionBoundary
+
+RealMatterReviewBoundary : Set
+RealMatterReviewBoundary = Review.RealMatterReviewBoundary
+
+ReviewedResumeBoundary : Set
+ReviewedResumeBoundary = Resume.ReviewedResumeBoundary
+
+LegalSemanticAdmissionFrontier : Set
+LegalSemanticAdmissionFrontier = Admission.LegalSemanticAdmissionFrontier
+
+FiniteRequirementParetoContract : Set
+FiniteRequirementParetoContract = RequirementPareto.FiniteRequirementParetoContract
+
+SensibLawSnowballLineageBoundary : Set
+SensibLawSnowballLineageBoundary = Snowball.SensibLawSnowballLineageBoundary
+
+LegitimacyBoundary : Set
+LegitimacyBoundary = Legitimacy.LegitimacyBoundary
+
+FleetFormalGapTargetReceipt : Set
+FleetFormalGapTargetReceipt = Fleet.FleetFormalGapTargetReceipt
+
 sensibLawSemanticPromotionPolicySurface :
   Semantic.SemanticPromotionPolicySurface
 sensibLawSemanticPromotionPolicySurface =
