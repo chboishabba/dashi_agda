@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -9,6 +10,7 @@ open import Data.Empty using (⊥)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Unified.CarrierGrammar as CarrierGrammar
