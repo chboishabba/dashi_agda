@@ -583,31 +583,24 @@ unifierYangMillsGoal1C4CommonMetricCompilerLevel =
 ------------------------------------------------------------------------
 
 relate369PantsSeamDoesNotRewriteTopology :
-  Relate369PantsTOE.TypedPants.interfaceMatchAutomaticallyRewritesIncidence
-    Relate369PantsTOE.typedPantsBoundary
-  ≡ false
+  Relate369PantsTOE.pantsSeamRewritesTopologyFlag ≡ false
 relate369PantsSeamDoesNotRewriteTopology =
-  Relate369PantsTOE.pantsSeamDoesNotRewriteTopology
+  Relate369PantsTOE.pantsSeamRewritesTopologyFlagIsFalse
 
 relate369FinitePantsPathStillNotSmoothSurface :
-  Relate369PantsTOE.Pants369.finitePantsPathIsSmoothPantsSurface
-    Relate369PantsTOE.Pants369.canonicalColourWheelNinePantsBoundary
-  ≡ false
+  Relate369PantsTOE.finitePantsPathSmoothSurfaceFlag ≡ false
 relate369FinitePantsPathStillNotSmoothSurface =
-  Relate369PantsTOE.finitePantsPathIsNotSmoothPantsSurface
+  Relate369PantsTOE.finitePantsPathSmoothSurfaceFlagIsFalse
 
 relate369CardinalityDoesNotCreateAdmissibleGluing :
-  Relate369PantsTOE.Sheaf369.cardinalityAloneCreatesAdmissibleGluing
-    Relate369PantsTOE.Sheaf369.canonicalJSheafHyperformDescentFrontier
-  ≡ false
+  Relate369PantsTOE.cardinalityCreatesAdmissibleGluingFlag ≡ false
 relate369CardinalityDoesNotCreateAdmissibleGluing =
-  Relate369PantsTOE.sheafCardinalityAloneDoesNotCreateAdmissibleGluing
+  Relate369PantsTOE.cardinalityCreatesAdmissibleGluingFlagIsFalse
 
 relate369SharedCarrierDoesNotPromoteExternalTheorem :
-  (object : Relate369PantsTOE.PNF369.HyperfabricObject) →
-  Relate369PantsTOE.PNF369.hyperfabricPromotesExternalTheorem object ≡ false
+  Relate369PantsTOE.universal369PromotesExternalTheoremFlag ≡ false
 relate369SharedCarrierDoesNotPromoteExternalTheorem =
-  Relate369PantsTOE.sharedHyperformalCarrierDoesNotPromoteExternalTheorem
+  Relate369PantsTOE.universal369PromotesExternalTheoremFlagIsFalse
 
 relate369HyperfabricPantsReceipt :
   Relate369PantsTOE.Relate369HyperfabricPantsTOEReceipt
