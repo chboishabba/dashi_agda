@@ -11,6 +11,7 @@ module DASHI.Unified.SensibLawGovernanceTOEValidation where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as Governance
 import DASHI.EverythingTOESymmetryResolved369 as TOE
@@ -19,6 +20,9 @@ import DASHI.Unified.Physics as UnifiedPhysics
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact as SnowballLineage
+import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything as ParetoSearch
 
 ------------------------------------------------------------------------
 -- Root agreement.
@@ -198,3 +202,33 @@ caseManagementReuseRequiresTargetAuthority :
   ≡ true
 caseManagementReuseRequiresTargetAuthority =
   Governance.governanceTargetDomainNeedsOwnAuthorityWitness
+
+
+snowballCitationDoesNotCreateAuthority :
+  Snowball.citationMayCreateAuthority
+    Governance.governanceAttributionSnowballBoundary
+  ≡ false
+snowballCitationDoesNotCreateAuthority =
+  Governance.governanceSnowballCitationDoesNotCreateAuthority
+
+snowballCitationDoesNotCreateLegalAuthority :
+  SnowballLineage.SensibLawSnowballLineageBoundary.citationCreatesLegalAuthority
+    Governance.governanceSensibLawSnowballLineageBoundary
+  ≡ false
+snowballCitationDoesNotCreateLegalAuthority =
+  Governance.governanceSnowballCitationDoesNotCreateLegalAuthority
+
+paretoDirectiveIsNotLegalAuthority :
+  ParetoSearch.SearchDirectiveIsLegalAuthority → ⊥
+paretoDirectiveIsNotLegalAuthority =
+  Governance.governanceParetoDirectiveIsNotLegalAuthority
+
+paretoFrontierDoesNotPrejudgeRetrieval :
+  ParetoSearch.FrontierCertificateMakesRetrievedSourceTrue → ⊥
+paretoFrontierDoesNotPrejudgeRetrieval =
+  Governance.governanceParetoFrontierDoesNotPrejudgeRetrieval
+
+paretoFeedbackClosureStillNeedsActionAuthority :
+  ParetoSearch.FeedbackClosureAutomaticallyAuthorisesAction → ⊥
+paretoFeedbackClosureStillNeedsActionAuthority =
+  Governance.governanceParetoFeedbackClosureStillNeedsActionAuthority
