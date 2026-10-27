@@ -76,6 +76,9 @@ import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAc
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZetaMaxCut
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
+import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterIsotypicBypassExact as WholeCharacter
+import DASHI.Wikimedia.IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact as KernelClass20
+import DASHI.Wikimedia.IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact as KernelGauge
 
 ------------------------------------------------------------------------
 -- 1. Canonical coarse/fine reopening.
@@ -385,7 +388,68 @@ toeTernary27ReductionIsNotMonster42SameObject =
 
 
 ------------------------------------------------------------------------
--- 10. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+-- 10. Pareto / Snowball / Ibrahim current source frontier.
+------------------------------------------------------------------------
+
+toeWholeCharacterEqualityDoesNotCreateWholeIso :
+  WholeCharacter.CharacterEqualityAloneCreatesWholeRepresentationIso → ⊥
+toeWholeCharacterEqualityDoesNotCreateWholeIso =
+  WholeCharacter.characterEqualityAloneDoesNotCreateWholeIso
+
+toeWholeIsoDoesNotCreateConcreteActionRecognition :
+  WholeCharacter.WholeRepresentationIsoCreatesConcreteActionRecognition → ⊥
+toeWholeIsoDoesNotCreateConcreteActionRecognition =
+  WholeCharacter.wholeIsoDoesNotCreateConcreteActionRecognition
+
+toeWholeCharacterDirectIsotypicBridgeStillOpen :
+  WholeCharacter.WholeCharacterIsotypicBypassBoundary.directWholeCharacterToIsotypicBridgeLocated
+    WholeCharacter.canonicalWholeCharacterIsotypicBypassBoundary
+  ≡ false
+toeWholeCharacterDirectIsotypicBridgeStillOpen = refl
+
+toeWholeCharacterActualKernelReplayStillOpen :
+  WholeCharacter.WholeCharacterIsotypicBypassBoundary.actualKernelReplayReceiptObserved
+    WholeCharacter.canonicalWholeCharacterIsotypicBypassBoundary
+  ≡ false
+toeWholeCharacterActualKernelReplayStillOpen = refl
+
+toePrimarySupplementKernelClassTwentyPaid :
+  KernelClass20.PrimarySupplementKernelFrontier.mainClassTwentyCoordinatePaid
+    KernelClass20.currentPrimarySupplementKernelFrontier
+  ≡ true
+toePrimarySupplementKernelClassTwentyPaid = refl
+
+toeInvariantDiagonalKernelSubgroupPaid :
+  KernelGauge.DiagonalKernelGaugeFrontier.invariantDiagonalKernelSubgroupPaid
+    KernelGauge.currentDiagonalKernelGaugeFrontier
+  ≡ true
+toeInvariantDiagonalKernelSubgroupPaid = refl
+
+toePaidKernelDoesNotRequireAbsoluteSignName :
+  KernelGauge.PaidKernelRequiresAbsoluteSignName → ⊥
+toePaidKernelDoesNotRequireAbsoluteSignName =
+  KernelGauge.paidKernelDoesNotRequireSignName
+
+toeTwelveSeventyEightCharacterAlreadyPaid :
+  Ibrahim.CorrectedShortestFrontierBoundary.twelveSeventyEightCharacterAlreadyPaid
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ true
+toeTwelveSeventyEightCharacterAlreadyPaid = refl
+
+toeGenericCharacterMultiplicitySourceWritten :
+  Ibrahim.CorrectedShortestFrontierBoundary.genericCharacterMultiplicitySourceWritten
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ true
+toeGenericCharacterMultiplicitySourceWritten = refl
+
+toeActualTwelveSeventyEightLinearIntertwinerStillOpen :
+  Ibrahim.CorrectedShortestFrontierBoundary.actualTwelveSeventyEightLinearIntertwinerPaid
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ false
+toeActualTwelveSeventyEightLinearIntertwinerStillOpen = refl
+
+------------------------------------------------------------------------
+-- 11. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
 ------------------------------------------------------------------------
 
 record TOE369MaxCutZKPFrame : Set where
@@ -406,7 +470,7 @@ canonicalTOE369MaxCutZKPFrame : TOE369MaxCutZKPFrame
 canonicalTOE369MaxCutZKPFrame =
   toe369-max-cut-zkp-frame
     "Converge Base369 coarse/fine, ternary-27, selected-3B max-cut, kernel-BIDI, Pareto, Snowball, and Ibrahim theorem owners onto one acyclic TOE surface."
-    "Reuse the existing coarse/fine reopening, C3 symmetry, signed phase intertwiner, selected-3B max-cut, same-element BIDI, single-action producer, H-zeta recognition, and Ibrahim reduction owners."
+    "Reuse the existing coarse/fine reopening, C3 symmetry, signed phase intertwiner, selected-3B max-cut, same-element BIDI, single-action producer, H-zeta recognition, whole-character Pareto, class-20 kernel Snowball, and Ibrahim reduction owners."
     "Expose aliases only. Remove the legacy Unifier import from the theorem-bearing core so every TOE facade can consume the same owner without an import cycle."
     "Keep dimension, character, carrier equality, phase reduction, and finite indexing non-promoting. Do not invent a CFFI theorem. Do not edit ESD or digital_esd surfaces."
     "This lane owns only TOE normalization of the existing Max Cut and kernel-BIDI surfaces."
