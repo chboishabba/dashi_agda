@@ -674,8 +674,6 @@ toeFleetContradictionGapsRemainSeparate =
   FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
 
 toeFleetPlanningTextDoesNotCreateFormalResidual :
-  FleetGapTOE.Planning.PNFPlanningAdapterBoundary.sourceTextAloneCreatesFormalResidual
-    FleetGapTOE.Planning.canonicalPNFPlanningAdapterBoundary
-  ≡ false
+  FleetGapTOE.PlanningSourceTextFormalResidualFlag
 toeFleetPlanningTextDoesNotCreateFormalResidual =
   FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
