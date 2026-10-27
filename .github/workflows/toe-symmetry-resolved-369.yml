@@ -186,6 +186,14 @@ jobs:
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
             DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda
+            DASHI/Physics/Dynamics/SingularBasinReductionExact.agda
+            DASHI/Physics/Dynamics/SingularBasinFiniteWitnessExact.agda
+            DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda
+            DASHI/Physics/Dynamics/SingularBasinResolutionWitnessExact.agda
+            DASHI/Physics/Dynamics/SingularBasinValidatedNumericsArtifactExact.agda
+            DASHI/Physics/Dynamics/BasinSeparatingStableManifoldExact.agda
+            DASHI/Physics/Dynamics/StableManifoldCrossingValidatedArtifactExact.agda
+            DASHI/Physics/Dynamics/YanchukStableManifoldCrossingTargetExact.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
