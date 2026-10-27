@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
+open import Data.Empty using (⊥)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
@@ -117,3 +118,9 @@ unifiedBalabanR559MaxCutReceipt :
   BalabanR559TOE.BalabanR559TOEMaxCutReceipt
 unifiedBalabanR559MaxCutReceipt =
   BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifiedBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifiedBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
