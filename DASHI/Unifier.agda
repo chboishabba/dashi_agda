@@ -1,5 +1,6 @@
 module DASHI.Unifier where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
@@ -783,3 +784,79 @@ unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
   ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
 unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
   ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- 369 max-cut / kernel-BIDI / ternary-27 consumer facade.
+------------------------------------------------------------------------
+
+unifier369Ternary27RotationOrderThree =
+  MaxCut369.toe27RotationOrderThree
+
+unifier369Ternary27OriginFixed =
+  MaxCut369.toe27OriginFixed
+
+unifier369FullCubeRotationNotFree :
+  MaxCut369.FullCubeRotationFree → ⊥
+unifier369FullCubeRotationNotFree =
+  MaxCut369.toe27FullCubeRotationNotFree
+
+unifier369MonsterPhaseConjugationIntertwiner =
+  MaxCut369.toe27MonsterPhaseConjugationIntertwiner
+
+unifier369Ternary27PhaseReductionNotGlobalInversion =
+  MaxCut369.toe27PhaseReductionNotGlobalInversion
+
+unifier369Ternary27OrbitIndexingNotSemanticIdentity =
+  MaxCut369.toe27OrbitIndexingNotSemanticIdentity
+
+unifier369Ternary27ReductionNotMonster42SameObject =
+  MaxCut369.toe27ReductionNotMonster42SameObject
+
+unifier369FullGradeDimensionDoesNotCreateFaithfulness =
+  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+unifier369FullGradeSameCarrierDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeSameCarrierDoesNotCreateActionAgreement
+
+unifier369FullGradeCharacterDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeCharacterDoesNotCreateActionAgreement
+
+unifier369ProjectedDimensionDoesNotCreateAction =
+  MaxCut369.toeProjectedDimensionDoesNotCreateAction
+
+unifier369CoordinateRetractionDoesNotCreateProjectedAction =
+  MaxCut369.toeCoordinateRetractionDoesNotCreateProjectedAction
+
+unifier369ProjectedCharacterDoesNotCreateAction =
+  MaxCut369.toeProjectedCharacterDoesNotCreateAction
+
+unifier369KernelTrace53DoesNotIdentify3B =
+  MaxCut369.toeKernelTrace53DoesNotIdentify3B
+
+unifier369KernelCharacterIsotypyDoesNotConstructActionIntertwiner =
+  MaxCut369.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+unifier369KernelActualZetaRecognitionStillOpen =
+  MaxCut369.toeKernelActualZetaRecognitionStillOpen
+
+unifier369KernelFullHyperformalActionStillOpen =
+  MaxCut369.toeKernelFullHyperformalActionStillOpen
+
+unifier369SelectedSameElementClass3BStillOpen =
+  MaxCut369.toeSelectedSameElementClass3BStillOpen
+
+unifier369SingleActionProducerStillOpen =
+  MaxCut369.toeSingleActionProducerStillOpen
+
+unifier369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+unifier369NinetySlicesDoNotCreatePermutationRepresentation =
+  MaxCut369.toeNinetySlicesDoNotCreatePermutationRepresentation
+
+unifier369CharacterDoesNotCreateHomEvaluation =
+  MaxCut369.toeCharacterDoesNotCreateHomEvaluation
+
+unifier369PermutationNoGoDoesNotCreateLinearAction =
+  MaxCut369.toePermutationNoGoDoesNotCreateLinearAction
