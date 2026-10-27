@@ -68,7 +68,7 @@ rhoAffineCoordinates :
   (p : AffineF4Point) →
   Curve.affineCoordinates (rhoAffine p)
   ≡
-  ((Curve.zeta₄ Curve.*₄
+  ((Curve._*₄_ Curve.zeta₄
     (proj₁ (Curve.affineCoordinates p))) ,
   (proj₂ (Curve.affineCoordinates p)))
 rhoAffineCoordinates Curve.p00 = refl
