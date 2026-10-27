@@ -154,15 +154,24 @@ balabanRGContinuumConstructionOpenFlag =
   RGFrontier.continuumYangMillsConstructedHere
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
 
+balabanRGUniformKPAbsorptionOpenFlag : Bool
+balabanRGUniformKPAbsorptionOpenFlag =
+  RGFrontier.uniformKPAbsorptionThroughBalabanInductionProved
+    RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+
+balabanRGContinuumMassGapOpenFlag : Bool
+balabanRGContinuumMassGapOpenFlag =
+  MassGap.continuumMassGapProvedInDASHI
+    (RGFrontier.balabanMassGapSurface
+      RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt)
+
 balabanRGClayPromotionFlag : Bool
 balabanRGClayPromotionFlag =
   RGFrontier.clayYangMillsPromoted
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
 
 balabanRGUniformKPAbsorptionStillOpen :
-  RGFrontier.uniformKPAbsorptionThroughBalabanInductionProved
-    RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+  balabanRGUniformKPAbsorptionOpenFlag ≡ false
 balabanRGUniformKPAbsorptionStillOpen =
   RGFrontier.uniformKPAbsorptionThroughBalabanInductionProvedIsFalse
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
@@ -179,10 +188,7 @@ balabanRGContinuumConstructionStillOpen =
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
 
 balabanRGContinuumMassGapStillOpen :
-  MassGap.continuumMassGapProvedInDASHI
-    (RGFrontier.balabanMassGapSurface
-      RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt)
-  ≡ false
+  balabanRGContinuumMassGapOpenFlag ≡ false
 balabanRGContinuumMassGapStillOpen =
   RGFrontier.balabanContinuumMassGapStillFalse
     RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
