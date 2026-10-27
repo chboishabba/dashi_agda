@@ -5,7 +5,7 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
@@ -685,12 +685,12 @@ toeFleetBalabanDischargedOwnerReceipt =
   FleetGapTOE.fleetBalabanDischargedOwnerReceipt
 
 toeFleetNSPhysicalM2SummationCompilerStatus :
-  Agda.Builtin.Bool.Bool
+  Bool
 toeFleetNSPhysicalM2SummationCompilerStatus =
   FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
 
 toeFleetNSM2ToR568CompilerStatus :
-  Agda.Builtin.Bool.Bool
+  Bool
 toeFleetNSM2ToR568CompilerStatus =
   FleetGapTOE.fleetNSM2ToR568CompilerStatus
 
