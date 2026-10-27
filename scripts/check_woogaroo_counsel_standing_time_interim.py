@@ -16,7 +16,8 @@ TOPICS = [
     "Habitat/koala", "signatory", "Santoro", "Cherish/Stockland",
     "Housing policy/HAFF", "First/second/third-order", "Utility infrastructure",
     "Orion/BlackRock", "Polaris", "standing/time/interim", "Court proceeding",
-    "Authorship"
+    "Authorship", "Santos/Santoro", "Scenic Precinct",
+    "QUT legal-academics", "National EPA compliance order"
 ]
 
 def main() -> None:
@@ -96,7 +97,7 @@ def main() -> None:
     for topic in TOPICS:
         assert topic in memo, "missing coverage: " + topic
 
-    print("PASS: eleven original-source roots, thirteen unpaid counsel gates, sixteen anti-promotion guards and sixteen topic coverage cells")
+    print("PASS: eleven original-source roots, thirteen unpaid counsel gates, sixteen anti-promotion guards and twenty topic coverage cells")
 
 
 if __name__ == "__main__":
