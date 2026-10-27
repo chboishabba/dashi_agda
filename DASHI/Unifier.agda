@@ -1,5 +1,7 @@
 module DASHI.Unifier where
 
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+import DASHI.Unified.FleetFormalGapTOEExact as FleetFormalGap
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -689,3 +691,70 @@ unifierYangMillsGoal1C4CommonMetricCompilerLevel =
 
 unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Governed legal-workflow and Fleet residual convergence.
+------------------------------------------------------------------------
+
+unifierGovernedLegalWorkflowInvariantHandoff :
+  GovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
+unifierGovernedLegalWorkflowInvariantHandoff =
+  GovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+unifierTaskCompletionDoesNotCreateTruth :
+  GovernanceTOE.TaskCompletionCreatesTruth → ⊥
+unifierTaskCompletionDoesNotCreateTruth =
+  GovernanceTOE.toeTaskCompletionDoesNotCreateTruth
+
+unifierDatabaseCommitDoesNotCreateSemanticAuthority :
+  GovernanceTOE.DatabaseCommitCreatesSemanticAuthority → ⊥
+unifierDatabaseCommitDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+unifierAcceptedReviewDoesNotPayApplicability :
+  GovernanceTOE.AcceptedStatusPaysApplicability → ⊥
+unifierAcceptedReviewDoesNotPayApplicability =
+  GovernanceTOE.toeAcceptedReviewDoesNotPayApplicability
+
+unifierSemanticPromotionTruthAuthorityClosed :
+  GovernanceTOE.SemanticPromotionTruthAuthorityClosed
+unifierSemanticPromotionTruthAuthorityClosed =
+  GovernanceTOE.toeSemanticPromotionTruthAuthorityClosed
+
+unifierLegalCandidateSourceDoesNotCloseAuthority :
+  GovernanceTOE.CandidateSourceIsAuthoritative → ⊥
+unifierLegalCandidateSourceDoesNotCloseAuthority =
+  GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifierExactReuseDoesNotCreateSemanticAuthority :
+  GovernanceTOE.ExactReuseCreatesSemanticAuthority → ⊥
+unifierExactReuseDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
+
+unifierFleetFormalGapReceipt :
+  FleetFormalGap.FleetFormalGapTOEReceipt
+unifierFleetFormalGapReceipt =
+  FleetFormalGap.canonicalFleetFormalGapReceipt
+
+unifierFleetFormalGapMaxCut :
+  FleetFormalGap.FleetFormalGapMaxCut
+unifierFleetFormalGapMaxCut =
+  FleetFormalGap.canonicalFleetFormalGapMaxCut
+
+unifierFleetOnlyFormalResidualDispatches :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.unformalisedFormalGap ≡ true
+unifierFleetOnlyFormalResidualDispatches = refl
+
+unifierFleetDischargedFibresDoNotRedispatch :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.dischargedCoreKnowledge ≡ false
+unifierFleetDischargedFibresDoNotRedispatch = refl
+
+unifierFleetContradictionsRemainSeparate :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.polarityContradictionGap ≡ false
+unifierFleetContradictionsRemainSeparate = refl
+
+unifierFleetGapCountDoesNotDetermineIdentity :
+  FleetFormalGap.GapCountDeterminesGapIdentity → ⊥
+unifierFleetGapCountDoesNotDetermineIdentity =
+  FleetFormalGap.gapCountDoesNotDetermineGapIdentity
