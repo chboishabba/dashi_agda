@@ -130,6 +130,14 @@ blockDProjectiveFiniteMarginalsRemainLive :
 blockDProjectiveFiniteMarginalsRemainLive =
   Projective.projectiveFiniteMarginalsRemainLive
 
+
+blockDBoundedPlaquettePromotionAllowed : Bool
+blockDBoundedPlaquettePromotionAllowed = false
+
+blockDBoundedPlaquettePromotionAllowedIsFalse :
+  blockDBoundedPlaquettePromotionAllowed ≡ false
+blockDBoundedPlaquettePromotionAllowedIsFalse = refl
+
 blockDPath4CannotBePromotedToFinalGlobalObservable :
   Scalar.path4MayBeFinalGlobalObservable ≡ false
 blockDPath4CannotBePromotedToFinalGlobalObservable =
