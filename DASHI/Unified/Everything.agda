@@ -231,6 +231,36 @@ unifiedLegalSemanticIdentifierAuthorityFirewall =
 unifiedLegalSemanticESDMutationForbidden =
   LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
 
+
+-- Unified aggregate aliases the same canonical legal compliance owner.
+unifiedExpertQualificationDoesNotCreateForensicCompliance =
+  LegalSemanticTOE.toeExpertQualificationDoesNotCreateForensicCompliance
+
+unifiedReportAdmissionDoesNotRepairMissingInput =
+  LegalSemanticTOE.toeReportAdmissionDoesNotRepairMissingInput
+
+unifiedLegalReviewDoesNotCreateClaimTruth =
+  LegalSemanticTOE.toeLegalReviewDoesNotCreateClaimTruth
+
+unifiedOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalSemanticTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
+
+unifiedLegalityAloneDoesNotCreateLegitimacy =
+  LegalSemanticTOE.toeLegalityAloneDoesNotCreateLegitimacy
+
+unifiedActionstepStyleVendorIdentityCreatesAuthority =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthority
+
+unifiedActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse
+
+unifiedActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
+
+unifiedActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+
+
 ------------------------------------------------------------------------
 -- Fleet-58 named-manifest dispatch boundary.
 ------------------------------------------------------------------------
