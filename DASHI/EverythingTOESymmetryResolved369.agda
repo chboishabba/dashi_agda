@@ -15,5 +15,6 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Unified.GRQuantumProofTermRegression
 
 -- Reuse exact forecast and comparative non-promotion owners.
+-- The regression also checks the exact Unifier aliases.
 import DASHI.Unified.ForecastComparativeNonPromotionTOEBridgeExact
 import DASHI.Unified.ForecastComparativeNonPromotionTOEBridgeRegression
