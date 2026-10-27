@@ -344,11 +344,19 @@ canonicalGovernedLegalWorkflowTOEBoundary =
 -- Do not infer new authority from workflow state.
 ------------------------------------------------------------------------
 
+CaseySelectionCreatesWorldTruth : Set
+CaseySelectionCreatesWorldTruth =
+  Suite.CaseySelectionCreatesWorldTruth
+
+KnowledgeIsAuthority : Set
+KnowledgeIsAuthority =
+  Authority.KnowledgeIsAuthority
+
 toeSuiteRoleMap : Suite.SuiteRoleMap
 toeSuiteRoleMap = Suite.canonicalSuiteRoleMap
 
 toeCaseySelectionDoesNotCreateWorldTruth :
-  Suite.CaseySelectionCreatesWorldTruth → ⊥
+  CaseySelectionCreatesWorldTruth → ⊥
 toeCaseySelectionDoesNotCreateWorldTruth =
   Suite.caseySelectionIsNotWorldTruth
 
@@ -358,7 +366,7 @@ toeFormalProofDoesNotCreateExternalWorldTruth =
   Suite.formalProofIsNotExternalWorldTruth
 
 toeKnowledgeDoesNotCreateExecutionAuthority :
-  Authority.KnowledgeIsAuthority → ⊥
+  KnowledgeIsAuthority → ⊥
 toeKnowledgeDoesNotCreateExecutionAuthority =
   Authority.knowledgeIsNotAuthority
 
