@@ -14,6 +14,7 @@ on:
       - 'DASHI/Law/SensibLawITIRParityEverything.agda'
       - 'DASHI/Interop/SensibLawSemanticPromotionPolicy.agda'
       - 'DASHI/Unified/TOELegalGovernanceHandoffExact.agda'
+      - 'DASHI/Unified/TOE369InvariantRegressionExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -42,6 +43,7 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Moonshine/OggSSPP2F4CurveShearReflectionExact.agda
             DASHI/Unified/TOELegalGovernanceHandoffExact.agda
+            DASHI/Unified/TOE369InvariantRegressionExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
