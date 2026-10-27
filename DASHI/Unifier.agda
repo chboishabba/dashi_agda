@@ -11,6 +11,31 @@ open import Data.Unit using (⊤; tt)
 -- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 
+balabanRGBlockSpinTransferStillOpen :
+  BalabanRGTOE.RGFrontier.balabanBlockSpinTransferProved
+    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+  ≡ false
+balabanRGBlockSpinTransferStillOpen =
+  BalabanRGTOE.balabanRGBlockSpinTransferStillOpen
+
+balabanRGContinuumConstructionStillOpen :
+  BalabanRGTOE.RGFrontier.continuumYangMillsConstructedHere
+    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+  ≡ false
+balabanRGContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanRGContinuumConstructionStillOpen
+
+balabanRGClayPromotionStillFalse :
+  BalabanRGTOE.RGFrontier.clayYangMillsPromoted
+    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+  ≡ false
+balabanRGClayPromotionStillFalse =
+  BalabanRGTOE.balabanRGClayPromotionStillFalse
+
+balabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
+balabanRGZKPFrame =
+  BalabanRGTOE.canonicalBalabanTOEZKPFrame
+
 ¬ : Set → Set
 ¬ A = A → ⊥
 
