@@ -1057,3 +1057,53 @@ toeBalabanOSWightmanStillBlocked :
 toeBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Current-master SensibLaw governance / fleet target normalization.
+------------------------------------------------------------------------
+
+import DASHI.Unified.SensibLawGovernanceFleetTOEExact as GovernanceFleet
+
+toeSensibLawGovernanceFleetReceipt :
+  GovernanceFleet.SensibLawGovernanceFleetTOEReceipt
+toeSensibLawGovernanceFleetReceipt =
+  GovernanceFleet.canonicalSensibLawGovernanceFleetTOEReceipt
+
+toeSensibLawSemanticAuthorityRemainsClosed =
+  GovernanceFleet.governanceSemanticAllAuthorityStillClosed
+
+toeSensibLawCandidateSourceDoesNotCreateAuthority =
+  GovernanceFleet.governanceCandidateSourceDoesNotCloseAuthority
+
+toeSensibLawCurrentValidityDoesNotCreateApplicability =
+  GovernanceFleet.governanceCurrentValidityDoesNotEstablishApplicability
+
+toeSensibLawRuntimeDoesNotInventLegalSemantics =
+  GovernanceFleet.governanceRuntimeCannotInventLegalSemantics
+
+toeSensibLawRepresentationDoesNotCreateLegalAuthority =
+  GovernanceFleet.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+toeSensibLawSnowballCitationDoesNotCreateAuthority =
+  GovernanceFleet.governanceSnowballCitationDoesNotCreateAuthority
+
+toeSensibLawParetoDirectiveIsNotLegalAuthority =
+  GovernanceFleet.governanceParetoDirectiveIsNotLegalAuthority
+
+toeSensibLawProviderFailureDoesNotCreateNegativeEvidence =
+  GovernanceFleet.governanceProviderFailureDoesNotMakePropositionFalse
+
+toeSensibLawExpertProductionPromotesNoAuthority =
+  GovernanceFleet.governanceExpertProductionPromotesNoAuthority
+
+toeGovernanceFleetDischargedFibresAre584 =
+  GovernanceFleet.governanceFleetDischargedFibresAre584
+
+toeGovernanceFleetContradictionGapsAre44 =
+  GovernanceFleet.governanceFleetContradictionGapsAre44
+
+toeGovernanceFleetFormalGapsAre58 =
+  GovernanceFleet.governanceFleetFormalGapsAre58
+
+toeGovernanceFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  GovernanceFleet.governanceFleetSpectralLabelsDoNotIdentifyTheoremOwners
