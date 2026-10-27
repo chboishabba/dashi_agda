@@ -8,3 +8,6 @@ module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
+
+-- Source-typed banking, Palantir, and systemic-incidence non-promotion.
+import DASHI.Unified.RescueFinancePalantirTOENonPromotionExact
