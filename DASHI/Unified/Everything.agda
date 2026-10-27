@@ -1,6 +1,7 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
 import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RiemannFrontier
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 
@@ -547,3 +548,50 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- RH marked-trace exact non-promotion surface.
+-- The Analysis owner retains theorem and provenance authority.
+------------------------------------------------------------------------
+
+unifiedRHCompletedTraceCrossPollinationBoundary :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
+unifiedRHCompletedTraceCrossPollinationBoundary =
+  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+
+unifiedRHPrimeActivationRequiresFirstPrimeSupport :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+unifiedRHPrimeActivationRequiresFirstPrimeSupport =
+  RHPrimeAudit.firstPrimeSupportNecessary
+
+unifiedRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.selectedUnmarkedTerminalEqualsMarkedArithmetic
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifiedRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
+  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
+
+unifiedRHIndependentArithmeticDiagonalProducerStillAbsent :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.independentArithmeticDiagonalProducer
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifiedRHIndependentArithmeticDiagonalProducerStillAbsent =
+  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
+
+unifiedRHHeisenbergTraceTransportStillBlocked :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.actualHeisenbergTraceEqualsSelectedZetaFunctional
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifiedRHHeisenbergTraceTransportStillBlocked =
+  RHPrimeAudit.noUnjustifiedAnalyticTransport
+
+unifiedRHTerminalStrictSignedEstimateStillOpen :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.terminalStrictSignedEstimatePaid
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifiedRHTerminalStrictSignedEstimateStillOpen =
+  RHPrimeAudit.terminalStrictSignedEstimateStillOpen
+
+unifiedRHPrimeAuditDoesNotPromoteRH :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.rhDerived
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifiedRHPrimeAuditDoesNotPromoteRH =
+  RHPrimeAudit.noUnjustifiedRH
