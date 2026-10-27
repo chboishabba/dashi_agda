@@ -55,33 +55,47 @@ r559ParetoZKPFrameIsCanonical :
 r559ParetoZKPFrameIsCanonical = refl
 
 ------------------------------------------------------------------------
--- Shared owner checks.
+-- Canonical owner reachability.
+--
+-- Balaban and R559 remain distinct theorem owners.
+-- The joint receipt proves reachability to each canonical owner.
 ------------------------------------------------------------------------
 
-densityOwnerAgreementIsExact :
+jointBalabanDensityMatchesOwner :
   Joint.balabanDensityFlow Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Joint.r559DensityFlow Joint.canonicalBalabanR559TOEMaxCutReceipt
-densityOwnerAgreementIsExact =
-  Joint.densityOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanScaleDensityFlowLevel
+jointBalabanDensityMatchesOwner = refl
 
-regularEOwnerAgreementIsExact :
+jointBalabanRegularEMatchesOwner :
   Joint.balabanRegularELocalization Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Joint.r559RegularELocalization Joint.canonicalBalabanR559TOEMaxCutReceipt
-regularEOwnerAgreementIsExact =
-  Joint.regularEOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanRegularELocalizationSourceLevel
+jointBalabanRegularEMatchesOwner = refl
 
-stressMarkedShellOwnerAgreementIsExact :
+jointBalabanCasimirMatchesOwner :
+  Joint.balabanCasimirLowerBoundTransport
+    Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanCasimirLowerBoundTransportLevel
+jointBalabanCasimirMatchesOwner = refl
+
+jointBalabanMarkedShellStressMatchesOwner :
   Joint.balabanStressMarkedShell Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Joint.r559StressMarkedShell Joint.canonicalBalabanR559TOEMaxCutReceipt
-stressMarkedShellOwnerAgreementIsExact =
-  Joint.stressMarkedShellOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanStressMarkedShellReuseLevel
+jointBalabanMarkedShellStressMatchesOwner = refl
 
-stressHilbertOwnerAgreementIsExact :
+jointBalabanHilbertStressMatchesOwner :
   Joint.balabanStressHilbertCompiler Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Joint.r559StressHilbertCompiler Joint.canonicalBalabanR559TOEMaxCutReceipt
-stressHilbertOwnerAgreementIsExact =
-  Joint.stressHilbertOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanStressHilbertBoundCompilerLevel
+jointBalabanHilbertStressMatchesOwner = refl
 
+jointR559BetaSourceMatchesOwner :
+  Joint.r559CurrentStepBetaSource Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ R559.toeGoal1A1CurrentStepBetaSourceLevel
+jointR559BetaSourceMatchesOwner = refl
+
+jointR559StressDensityMatchesOwner :
+  Joint.r559StressDensityFiniteMeasure Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ R559.toeGoal1A3StressDensityIsLiteralFiniteMeasureLevel
+jointR559StressDensityMatchesOwner = refl
 
 ------------------------------------------------------------------------
 -- Canonical 58-field Gate-4 unresolved-cut boundary.
