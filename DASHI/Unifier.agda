@@ -152,6 +152,12 @@ unifierEmbeddingDoesNotCreateLegalAuthority :
 unifierEmbeddingDoesNotCreateLegalAuthority =
   EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
 
+
+unifierGeographicRecoverabilityDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
+unifierGeographicRecoverabilityDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.geographicRecoverabilityDoesNotCreatePhysicalIdentity
+
 ------------------------------------------------------------------------
 -- Normalized Balaban density, regular-E, stress, and continuum surfaces.
 ------------------------------------------------------------------------
