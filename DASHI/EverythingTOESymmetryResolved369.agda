@@ -65,18 +65,28 @@ toePNFKluverCobwebForm =
 toePNFPsychogeographyWebIdentifierKind =
   PNFSource.psychogeographyWebIdentifierKind
 
+toePNFIdenticalWordsDoNotPayPredicate :
+  PNFSource.IdenticalWordsProveSamePredicate → ⊥
 toePNFIdenticalWordsDoNotPayPredicate =
   PNFSource.identicalWordsDoNotPayPredicate
 
+toePNFCommonFingerprintDoesNotCreateTruth :
+  PNFSource.CommonPnfFingerprintProvesClaimTruth → ⊥
 toePNFCommonFingerprintDoesNotCreateTruth =
   PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
 
+toePNFPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  PNFSource.PerceivedIndependenceMeansActualIndependence → ⊥
 toePNFPerceivedIndependenceDoesNotCreateProvenanceIndependence =
   PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
 
+toePNFRepetitionDoesNotCreateIndependentEvidence :
+  PNFSource.RepetitionMeansIndependentEvidence → ⊥
 toePNFRepetitionDoesNotCreateIndependentEvidence =
   PNFSource.repetitionDoesNotCreateIndependentEvidence
 
+toePNFCommonSourceDoesNotEraseEvidence :
+  PNFSource.CommonSourceMeansNoEvidence → ⊥
 toePNFCommonSourceDoesNotEraseEvidence =
   PNFSource.commonSourceDoesNotEraseEvidence
 
