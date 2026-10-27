@@ -16,6 +16,9 @@ import DASHI.Unified.TOE369EisensteinReuseExact
 -- These imports are read-only. The original theorem owners are unchanged.
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact
 
 -- Reuse the existing exact finite GR/quantum proof-term regression.
 -- It contains a terminal physical non-promotion theorem.
