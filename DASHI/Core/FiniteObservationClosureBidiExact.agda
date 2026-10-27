@@ -2,6 +2,7 @@ module DASHI.Core.FiniteObservationClosureBidiExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 -- Shared theorem-shape only.  This does not equate kinetic truncation,
 -- spectroscopy, astronomical filtering, biological screening, or sensor fusion.
