@@ -8,6 +8,7 @@ on:
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Interop/SLRReviewPromoteAbstainConsumerExact.agda'
@@ -27,6 +28,7 @@ on:
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Interop/SLRReviewPromoteAbstainConsumerExact.agda'
@@ -68,6 +70,7 @@ jobs:
           dashi-repo related canonicalGovernedLegalWorkflowTOEBoundary --root .
           dashi-repo related canonicalGovernedLegalWorkflowTOEInvariantHandoff --root .
           dashi-repo related canonicalGovernedLegalWorkflowZKPReceipt --root .
+          dashi-repo related canonicalGovernedLegalWorkflowIntrospectiveZKPFrame --root .
           dashi-repo related toeCaseySelectionDoesNotCreateWorldTruth --root .
           dashi-repo related toeKnowledgeDoesNotCreateExecutionAuthority --root .
           dashi-repo related canonicalGovernedLegalWorkflowPromotionBoundary --root .
@@ -77,6 +80,7 @@ jobs:
           dashi-repo related toeSoftwareValidationDoesNotAuthorizePublication --root .
           dashi-repo discover 'SensibLaw governance legal workflow non promotion TOE' --root .
           dashi-repo discover 'canonical governance invariant handoff same object TOE Unifier' --root .
+          dashi-repo discover 'IntrospectiveProofLoop ZKPFrame governed legal workflow TOE Unified Everything' --root .
           dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root .
           dashi-repo discover 'review eligibility promotion runtime validation claim truth admission authority software publication' --root .
           dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
@@ -100,6 +104,9 @@ jobs:
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/EverythingTOESymmetryResolved369.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/Everything.agda
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unifier.agda
@@ -131,4 +138,5 @@ jobs:
           agda -i . -l standard-library DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
           agda -i . -l standard-library DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
           agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          agda -i . -l standard-library DASHI/Unified/Everything.agda
           agda -i . -l standard-library DASHI/Unifier.agda
