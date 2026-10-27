@@ -6,6 +6,8 @@ on:
       - "DASHI/Philosophy/**"
       - "DASHI/Economics/Wealth*20261027Exact.agda"
       - "DASHI/Economics/Everything.agda"
+      - "DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda"
+      - "DASHI/Everything.agda"
       - "Docs/economics/WealthInheritanceVacancyTaxMaxCut20261027.md"
       - "scripts/check_wealth_tax_maxcut.py"
       - "Docs/economics/WealthTaxOriginalConversationsFullCoverage20261027.md"
@@ -38,11 +40,20 @@ jobs:
         run: python3 scripts/check_wealth_tax_maxcut.py
       - name: Audit all 42 requested wealth and philosophy subjects
         run: python3 scripts/check_wealth_tax_requested_topics.py
+      - name: Install canonical Agda semantic preflight
+        run: python3 -m pip install -e tools/agda_preflight
+      - name: Check existing economics owners and TOE bridge without synthetic receipts
+        run: |
+          dashi-agda-preflight --root . DASHI/Economics/WealthInheritanceVacancyTaxMaxCut20261027Exact.agda
+          dashi-agda-preflight --root . DASHI/Economics/WealthTaxPowerCareSociologyBidi20261027Exact.agda
+          dashi-agda-preflight --root . DASHI/Economics/WealthTaxFiscalTransmissionControlBidi20261027Exact.agda
+          dashi-agda-preflight --root . DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda
       - name: Typecheck fiscal transmission tax max-cut
         run: |
           agda $AGDA_FLAGS DASHI/Economics/WealthInheritanceVacancyTaxMaxCut20261027Exact.agda
           agda $AGDA_FLAGS DASHI/Economics/WealthTaxPowerCareSociologyBidi20261027Exact.agda
           agda $AGDA_FLAGS DASHI/Economics/WealthTaxFiscalTransmissionControlBidi20261027Exact.agda
+          agda $AGDA_FLAGS DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda
       - name: Typecheck original philosophy regression
         run: agda $AGDA_FLAGS DASHI/Philosophy/PhilosophyRegression.agda
       - name: Typecheck closure-law regression
