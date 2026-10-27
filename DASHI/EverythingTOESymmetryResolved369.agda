@@ -964,3 +964,78 @@ toeSelected3BSingleActionProducerStillUninhabited :
     Kernel27TOE.singleProducerBoundary ≡ false
 toeSelected3BSingleActionProducerStillUninhabited =
   Kernel27TOE.singleActionProducerStillUninhabited
+
+------------------------------------------------------------------------
+-- Governed legal-workflow convergence.
+-- Proof authority remains in the imported owners.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+toeGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+toeGovernedLegalWorkflowZKPReceipt :
+  LegalGovernance.GovernedLegalWorkflowZKPReceipt
+toeGovernedLegalWorkflowZKPReceipt =
+  LegalGovernance.canonicalGovernedLegalWorkflowZKPReceipt
+
+toeWorkflowTaskCompletionDoesNotCreateTruth :
+  LegalGovernance.TaskCompletionCreatesTruth → ⊥
+toeWorkflowTaskCompletionDoesNotCreateTruth =
+  LegalGovernance.toeTaskCompletionDoesNotCreateTruth
+
+toeDatabaseCommitDoesNotCreateSemanticAuthority :
+  LegalGovernance.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeDatabaseCommitDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+toeAcceptedReviewDoesNotPayApplicability :
+  LegalGovernance.AcceptedStatusPaysApplicability → ⊥
+toeAcceptedReviewDoesNotPayApplicability =
+  LegalGovernance.toeAcceptedReviewDoesNotPayApplicability
+
+toeCitationAloneDoesNotRealiseLegalRule :
+  LegalGovernance.CitationAloneRealisesLegalRule → ⊥
+toeCitationAloneDoesNotRealiseLegalRule =
+  LegalGovernance.toeCitationAloneDoesNotRealiseLegalRule
+
+toeSemanticMeetDoesNotProveLegalApplicability :
+  LegalGovernance.SemanticMeetAloneProvesLegalApplicability → ⊥
+toeSemanticMeetDoesNotProveLegalApplicability =
+  LegalGovernance.toeSemanticMeetDoesNotProveLegalApplicability
+
+toeSemanticPromotionTruthAuthorityClosed :
+  LegalGovernance.SemanticPromotionTruthAuthorityClosed
+toeSemanticPromotionTruthAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
+
+toeSemanticPromotionLegalAuthorityClosed :
+  LegalGovernance.SemanticPromotionLegalAuthorityClosed
+toeSemanticPromotionLegalAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
+
+toeLegalCandidateSourceDoesNotCloseAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+toeLegalCandidateSourceDoesNotCloseAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+
+toeCurrentValidityDoesNotEstablishApplicability :
+  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
+toeCurrentValidityDoesNotEstablishApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+toeExactReuseDoesNotCreateSemanticAdmission :
+  LegalGovernance.ExactReuseCreatesSemanticAdmission → ⊥
+toeExactReuseDoesNotCreateSemanticAdmission =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAdmission
+
+toeExactReuseDoesNotCreateSemanticAuthority :
+  LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
+toeExactReuseDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
+
+toeExactReuseDoesNotCreateClaimTruth :
+  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
+toeExactReuseDoesNotCreateClaimTruth =
+  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
