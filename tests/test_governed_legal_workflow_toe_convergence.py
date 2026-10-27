@@ -227,3 +227,43 @@ def test_focused_workflow_contains_repo_intelligence_and_esd_guard():
         "ESD surface changed",
     ):
         assert token in text
+
+
+def test_semantic_authority_and_bound_acquisition_are_in_toe_graph():
+    bridge = read(BRIDGE)
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    regression = read(REGRESSION)
+
+    for token in (
+        "DASHI.Interop.SensibLawSemanticPromotionPolicy",
+        "DASHI.Core.BoundAcquisitionDemandExact",
+        "toeSemanticPromotionTruthAuthorityClosed",
+        "toeSemanticPromotionLegalAuthorityClosed",
+        "toeSemanticPromotionAllAuthorityClosed",
+        "toeBoundAcquisitionDoesNotPayRequirement",
+        "toeBoundAcquisitionDoesNotCloseConsumer",
+        "toeProducerIdentityDoesNotIdentifyResidual",
+    ):
+        assert token in bridge
+
+    for text in (toe, unifier):
+        for token in (
+            "toeSemanticPromotionTruthAuthorityClosed",
+            "toeSemanticPromotionLegalAuthorityClosed",
+            "toeSemanticPromotionAllAuthorityClosed",
+            "toeBoundAcquisitionDoesNotPayRequirement",
+            "toeBoundAcquisitionDoesNotCloseConsumer",
+            "toeProducerIdentityDoesNotIdentifyResidual",
+        ):
+            assert token in text
+
+    for token in (
+        "unifierSemanticPromotionTruthAuthorityAliasIsExact",
+        "unifierSemanticPromotionLegalAuthorityAliasIsExact",
+        "unifierSemanticPromotionAllAuthorityAliasIsExact",
+        "unifierBoundAcquisitionPaymentAliasIsExact",
+        "unifierBoundAcquisitionClosureAliasIsExact",
+        "unifierProducerIdentityResidualAliasIsExact",
+    ):
+        assert token in regression
