@@ -15,7 +15,7 @@ module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact where
 -- CompactSimpleClassificationAdjointCasimirExact owns exact C_A positivity.
 -- Round106 owns the canonical metric-stress representation compiler.
 -- YMClayOSLiteralStressRouteParetoExact owns stress/OPE route separation.
--- R474 owns the authoritative least-privilege Goal-1 Clay frontier.
+-- R485 owns the representation-safe authoritative Goal-1 maximum cut.
 -- R521 owns the concrete-semantics residual with zero opaque endpoint leaves.
 -- R546 owns the authoritative fourteen-family irreducible source frontier.
 -- R558 owns the seven-family critical mass-gap/nontriviality path.
@@ -100,7 +100,7 @@ import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as Co
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExact as Stress84
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAttackExact as Stress85
-import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact as R474
+import DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact as R485
 import DASHI.Physics.YangMills.YangMillsClayConcreteSemanticsResidualRound521Exact as R521
 import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact as R546
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
@@ -478,107 +478,167 @@ toeStressChargeLocalCoreCutoffRemovalLevel =
   Stress85.stressChargeLocalCoreCutoffRemovalLevel
 
 ------------------------------------------------------------------------
--- Current Goal-1 Clay frontier.
+-- Current Goal-1 Clay maximum cut.
 --
--- R474 is the preferred least-privilege Goal-1 route.
--- R546/R558 remain the broader normalized source-family and critical-path views.
+-- R485 is the representation-safe least-privilege Goal-1 route.
+-- It consumes the historical R474 frontier and the R476--R506 specialization
+-- tranche.  Re-export source mathematics and compiler closures separately.
 ------------------------------------------------------------------------
 
-toeGoal1FiniteSymmetryAndRPApplicationLevel : ProofLevel
-toeGoal1FiniteSymmetryAndRPApplicationLevel =
-  R474.aFiniteSymmetryAndRPApplicationLevel
+toeGoal1FiniteSymmetryAndRPSourceLevel : ProofLevel
+toeGoal1FiniteSymmetryAndRPSourceLevel =
+  R485.aFiniteSymmetryAndRPSourceLevel
 
 toeGoal1A1CurrentStepBetaSourceLevel : ProofLevel
 toeGoal1A1CurrentStepBetaSourceLevel =
-  R474.a1CurrentStepBetaSourceLevel
+  R485.a1CurrentStepBetaSourceLevel
 
-toeGoal1A2HistoryBetaShellSameObjectLevel : ProofLevel
-toeGoal1A2HistoryBetaShellSameObjectLevel =
-  R474.a2HistoryBetaShellSameObjectLevel
+toeGoal1A2GeneratedHistoryShellLevel : ProofLevel
+toeGoal1A2GeneratedHistoryShellLevel =
+  R485.a2GeneratedHistoryShellIsCMP116BetaMarkLevel
 
-toeGoal1A3SameFamilyContinuumAndOSLevel : ProofLevel
-toeGoal1A3SameFamilyContinuumAndOSLevel =
-  R474.a3SameFamilyContinuumAndOSLevel
+toeGoal1A3SourceNativeContinuumOSLevel : ProofLevel
+toeGoal1A3SourceNativeContinuumOSLevel =
+  R485.a3SourceNativeSameFamilyContinuumOSLevel
 
-toeGoal1A45MomentToOS05Level : ProofLevel
-toeGoal1A45MomentToOS05Level =
-  R474.a45MomentToOS05Level
+toeGoal1A3CountablyAdditiveRepresentationLevel : ProofLevel
+toeGoal1A3CountablyAdditiveRepresentationLevel =
+  R485.a3CountablyAdditiveRepresentationLevel
 
-toeGoal1BLiteralPublishedSelectedLocalizationLevel : ProofLevel
-toeGoal1BLiteralPublishedSelectedLocalizationLevel =
-  R474.bLiteralPublishedSelectedLocalizationLevel
+toeGoal1A3CylinderEventIndicatorSemanticsLevel : ProofLevel
+toeGoal1A3CylinderEventIndicatorSemanticsLevel =
+  R485.a3CylinderEventIndicatorSemanticsLevel
 
-toeGoal1BPhysicalRateSemanticsLevel : ProofLevel
-toeGoal1BPhysicalRateSemanticsLevel =
-  R474.bPhysicalRateSemanticsLevel
+toeGoal1A3ProjectiveExpectationConsistencyLevel : ProofLevel
+toeGoal1A3ProjectiveExpectationConsistencyLevel =
+  R485.a3ProjectiveEventExpectationConsistencyLevel
 
-toeGoal1BFiniteToPositiveTransferGapCompilerLevel : ProofLevel
-toeGoal1BFiniteToPositiveTransferGapCompilerLevel =
-  R474.bFiniteToPositiveTransferGapCompilerLevel
+toeGoal1A3ContinuityAtEmptyLevel : ProofLevel
+toeGoal1A3ContinuityAtEmptyLevel =
+  R485.a3ContinuityAtEmptyLevel
 
-toeGoal1BLiteralClayT2SemanticsLevel : ProofLevel
-toeGoal1BLiteralClayT2SemanticsLevel =
-  R474.bLiteralClayT2SemanticsLevel
+toeGoal1A3CaratheodoryExtensionLevel : ProofLevel
+toeGoal1A3CaratheodoryExtensionLevel =
+  R485.a3CaratheodoryExtensionLevel
 
-toeGoal1CStressFiniteSameFamilySourceLevel : ProofLevel
-toeGoal1CStressFiniteSameFamilySourceLevel =
-  R474.cStressFiniteSameFamilySourceLevel
+toeGoal1A3CylinderExpectationIntegralLevel : ProofLevel
+toeGoal1A3CylinderExpectationIntegralLevel =
+  R485.a3CylinderExpectationIntegralIdentificationLevel
 
-toeGoal1CStressLiteralDensityDerivativeLevel : ProofLevel
-toeGoal1CStressLiteralDensityDerivativeLevel =
-  R474.cStressLiteralDensityDerivativeLevel
+toeGoal1A45QuantitativeMomentToFiniteOS05Level : ProofLevel
+toeGoal1A45QuantitativeMomentToFiniteOS05Level =
+  R485.a45QuantitativeMomentToFiniteOS05Level
 
-toeGoal1CStressSameFamilyOSRecoveryLevel : ProofLevel
-toeGoal1CStressSameFamilyOSRecoveryLevel =
-  R474.cStressSameFamilyOSRecoveryLevel
+toeGoal1A4FiniteRegularityLevel : ProofLevel
+toeGoal1A4FiniteRegularityLevel =
+  R485.a4FiniteRegularityFromQuantitativeBoundsLevel
 
-toeGoal1CPhysicalOPERemainderIsMarkedTailLevel : ProofLevel
-toeGoal1CPhysicalOPERemainderIsMarkedTailLevel =
-  R474.cPhysicalOPERemainderIsMarkedTailLevel
+toeGoal1A5FiniteGrowthLevel : ProofLevel
+toeGoal1A5FiniteGrowthLevel =
+  R485.a5FiniteGrowthFromQuantitativeBoundsLevel
 
-toeGoal1COneStepAFRGIdentificationLevel : ProofLevel
-toeGoal1COneStepAFRGIdentificationLevel =
-  R474.cOneStepAFRGIdentificationLevel
+toeGoal1BWilsonTwoInsertionConnectedShellLevel : ProofLevel
+toeGoal1BWilsonTwoInsertionConnectedShellLevel =
+  R485.bWilsonTwoInsertionConnectedShellLevel
 
-toeGoal1CExactSameFamilySourceCutLevel : ProofLevel
-toeGoal1CExactSameFamilySourceCutLevel =
-  R474.cExactSameFamilySourceCutLevel
+toeGoal1BWilsonTwoMarkExpansionLevel : ProofLevel
+toeGoal1BWilsonTwoMarkExpansionLevel =
+  R485.bWilsonTwoMarkExpansionLevel
+
+toeGoal1BWilsonConnectingWeightTailLevel : ProofLevel
+toeGoal1BWilsonConnectingWeightTailLevel =
+  R485.bWilsonConnectingWeightTailLevel
+
+toeGoal1BWEXTAssemblyCompilerLevel : ProofLevel
+toeGoal1BWEXTAssemblyCompilerLevel =
+  R485.bWilsonWEXTAssemblyCompilerLevel
+
+toeGoal1BSameHamiltonianTransferCoordinateLevel : ProofLevel
+toeGoal1BSameHamiltonianTransferCoordinateLevel =
+  R485.bSameHamiltonianTransferCoordinateLevel
+
+toeGoal1BGeometricDecayCompilerLevel : ProofLevel
+toeGoal1BGeometricDecayCompilerLevel =
+  R485.bGeometricDecayCompilerLevel
+
+toeGoal1BStandardSpectralTransferLevel : ProofLevel
+toeGoal1BStandardSpectralTransferLevel =
+  R485.bStandardSpectralTransferLevel
+
+toeGoal1BLiteralHamiltonianGapSemanticsLevel : ProofLevel
+toeGoal1BLiteralHamiltonianGapSemanticsLevel =
+  R485.bLiteralHamiltonianGapSemanticsLevel
+
+toeGoal1CSameFamilySourceInstantiationLevel : ProofLevel
+toeGoal1CSameFamilySourceInstantiationLevel =
+  R485.cSameFamilySourceInstantiationLevel
 
 toeGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
 toeGoal1G1ArbitraryCompactSimpleSourceMapLevel =
-  R474.g1ArbitraryCompactSimpleSelectedBackgroundSourceMapLevel
+  R485.gArbitraryCompactSimpleSourceMapLevel
 
 toeGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
 toeGoal1G2SameSystemNontrivialitySemanticsLevel =
-  R474.g2SameSystemClayNontrivialitySemanticsLevel
+  R485.gSameSystemNontrivialitySemanticsLevel
 
-toeGoal1TerminalCompilerLevel : ProofLevel
-toeGoal1TerminalCompilerLevel =
-  R474.round474TerminalCompilerLevel
+toeGoal1RepresentedTerminalCompilerLevel : ProofLevel
+toeGoal1RepresentedTerminalCompilerLevel =
+  R485.round485RepresentedTerminalCompilerLevel
 
-toeGoal1CurrentFrontierCompilerLevel : ProofLevel
-toeGoal1CurrentFrontierCompilerLevel =
-  R474.round474CurrentFrontierCompilerLevel
+toeGoal1TerminalContractSemanticInventoryLevel : ProofLevel
+toeGoal1TerminalContractSemanticInventoryLevel =
+  R485.terminalContractSemanticInventoryLevel
 
-toeGoal1ExplicitPeterWeylRPMandatory : Bool
-toeGoal1ExplicitPeterWeylRPMandatory =
-  R474.explicitPeterWeylRPMandatory
+toeGoal1MaximumCutCompilerLevel : ProofLevel
+toeGoal1MaximumCutCompilerLevel =
+  R485.round485MaximumCutCompilerLevel
 
 toeGoal1ProjectiveProkhorovMandatory : Bool
 toeGoal1ProjectiveProkhorovMandatory =
-  R474.projectiveProkhorovMandatory
+  R485.projectiveProkhorovMandatory
 
-toeGoal1IndependentKPDatumSelectionMandatory : Bool
-toeGoal1IndependentKPDatumSelectionMandatory =
-  R474.independentKPDatumSelectionMandatory
+toeGoal1GlobalCoerciveCompactnessMandatory : Bool
+toeGoal1GlobalCoerciveCompactnessMandatory =
+  R485.globalCoerciveCompactnessRouteMandatory
 
-toeGoal1PostHocCMP116MagnitudeEqualityMandatory : Bool
-toeGoal1PostHocCMP116MagnitudeEqualityMandatory =
-  R474.postHocCMP116MagnitudeEqualityMandatory
+toeGoal1PostHocContinuumMeasureWeldMandatory : Bool
+toeGoal1PostHocContinuumMeasureWeldMandatory =
+  R485.postHocContinuumMeasureFunctionalWeldMandatory
+
+toeGoal1HistoricalSelectedJMinCutMandatory : Bool
+toeGoal1HistoricalSelectedJMinCutMandatory =
+  R485.historicalSelectedJMinCutMandatory
+
+toeGoal1CompatibilityBRouteMandatory : Bool
+toeGoal1CompatibilityBRouteMandatory =
+  R485.r454R455CompatibilityBRouteMandatory
+
+toeGoal1ArbitraryPositiveGapTokenMandatory : Bool
+toeGoal1ArbitraryPositiveGapTokenMandatory =
+  R485.arbitraryPositiveGapTokenMandatory
+
+toeGoal1SU2ValidationMandatoryForGenericG : Bool
+toeGoal1SU2ValidationMandatoryForGenericG =
+  R485.su2ValidationMandatoryForGenericG
+
+toeGoal1UniformConstantsAcrossAllGroupsMandatory : Bool
+toeGoal1UniformConstantsAcrossAllGroupsMandatory =
+  R485.uniformConstantsAcrossAllCompactSimpleGroupsMandatory
+
+toeGoal1FreshContinuumStressLimitMandatory : Bool
+toeGoal1FreshContinuumStressLimitMandatory =
+  R485.freshContinuumStressLimitMandatory
 
 toeGoal1IndependentFourthCumulantMandatory : Bool
 toeGoal1IndependentFourthCumulantMandatory =
-  R474.independentFourthCumulantMandatory
+  R485.independentFourthCumulantMandatory
+
+toeGoal1ClayCompletionClaimed : Bool
+toeGoal1ClayCompletionClaimed =
+  R485.clayCompletionClaimed
+
+round559Goal1MaximumCutNormalizationCompilerLevel : ProofLevel
+round559Goal1MaximumCutNormalizationCompilerLevel = machineChecked
 
 ------------------------------------------------------------------------
 -- Current normalized source frontier.
