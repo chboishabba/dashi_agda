@@ -92,6 +92,7 @@ import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VO
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestAction
 import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as ShortestCandidate
 import DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact as RecognitionAcquisition
+import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as Albert27
 
 ------------------------------------------------------------------------
 -- 1. Canonical coarse/fine reopening.
@@ -819,7 +820,51 @@ toeDimensionDoesNotCreateRecognitionIntertwiners =
 
 
 ------------------------------------------------------------------------
--- 16. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+-- 16. Ternary-27 origin + 26 Albert-shape BIDI max cut.
+--
+-- The carrier bijection is paid on the same ternary-27 object.
+-- Jordan product and exceptional actions are not paid by the shape.
+------------------------------------------------------------------------
+
+toeTernary27OriginPlus26CarrierPaid :
+  Albert27.Ternary27AlbertShapeFrontier.originPlus26BijectionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+toeTernary27OriginPlus26CarrierPaid = refl
+
+toeTernary27AlbertShapeSameCarrierPaid :
+  Albert27.Ternary27AlbertShapeFrontier.albert27ShapeInstantiatedOnSameCarrier
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+toeTernary27AlbertShapeSameCarrierPaid = refl
+
+toeTernary27OriginMapsToScalarSummand :
+  Albert27.Ternary27AlbertShapeFrontier.originMapsToScalarSummand
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+toeTernary27OriginMapsToScalarSummand = refl
+
+toeTernary27JordanProductStillOpen :
+  Albert27.Ternary27AlbertShapeFrontier.jordanProductPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+toeTernary27JordanProductStillOpen = refl
+
+toeTernary27F4ActionStillOpen :
+  Albert27.Ternary27AlbertShapeFrontier.f4ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+toeTernary27F4ActionStillOpen = refl
+
+toeTernary27E6ActionStillOpen :
+  Albert27.Ternary27AlbertShapeFrontier.e6ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+toeTernary27E6ActionStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- 17. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
 ------------------------------------------------------------------------
 
 record TOE369MaxCutZKPFrame : Set where
