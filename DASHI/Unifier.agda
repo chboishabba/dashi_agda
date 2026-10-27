@@ -965,6 +965,12 @@ unifierFleetPlanningTextDoesNotCreateFormalResidual :
 unifierFleetPlanningTextDoesNotCreateFormalResidual =
   FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
 
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetGapTOE.spectralLabelIdentifiesTheoremOwner
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
 
 ------------------------------------------------------------------------
 -- Direct residual Ibrahim source-owner firewalls.
