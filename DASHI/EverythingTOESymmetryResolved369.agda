@@ -33,7 +33,29 @@ toeKernelProofDoesNotEstablishSourceSemantics =
   Governance.kernelClosureIsNotSemanticExhaustiveness
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 
+
+------------------------------------------------------------------------
+-- PNF-distilled fail-closed reuse boundary.
+------------------------------------------------------------------------
+
+toePNFDistilledNonPromotionBoundary :
+  PNFDistilled.PNFDistilledNonPromotionBoundary
+toePNFDistilledNonPromotionBoundary =
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
+
+toePNFDistilledReuseZKPReceipt :
+  PNFDistilled.PNFDistilledReuseZKPReceipt
+toePNFDistilledReuseZKPReceipt =
+  PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
+
+toePNFDistilledBoundaryIsCanonical :
+  toePNFDistilledNonPromotionBoundary
+  ≡
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
+toePNFDistilledBoundaryIsCanonical =
+  refl
 
 ------------------------------------------------------------------------
 -- Governed legal-workflow TOE receipt.
