@@ -10,6 +10,7 @@ import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
+import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact as PlaquetteTOE
 import DASHI.Unified.InvariantSpine as Spine
 
 navierStokesObject : Spine.UnifiedObjectInvariant
@@ -65,3 +66,22 @@ yangMillsPostureIsApproaching :
   Spine.proofPosture yangMillsObject ≡ Asserted.approachingClosedProof
 yangMillsPostureIsApproaching =
   refl
+
+------------------------------------------------------------------------
+-- Exact Yang-Mills plaquette-to-TOE non-promotion projections.
+------------------------------------------------------------------------
+
+yangMillsPlaquetteTOEMassGapPromotionBlocked :
+  PlaquetteTOE.toeMassGapPromoted ≡ false
+yangMillsPlaquetteTOEMassGapPromotionBlocked =
+  PlaquetteTOE.toeMassGapPromotedIsFalse
+
+yangMillsPlaquetteTOEClayPromotionBlocked :
+  PlaquetteTOE.toeClayYangMillsPromoted ≡ false
+yangMillsPlaquetteTOEClayPromotionBlocked =
+  PlaquetteTOE.toeClayYangMillsPromotedIsFalse
+
+yangMillsPlaquetteTOEBridgeAddsNoNewPhysicalTheorem :
+  PlaquetteTOE.plaquetteTOEBridgeAddsNewPhysicalTheorem ≡ false
+yangMillsPlaquetteTOEBridgeAddsNoNewPhysicalTheorem =
+  PlaquetteTOE.plaquetteTOEBridgeAddsNewPhysicalTheoremIsFalse
