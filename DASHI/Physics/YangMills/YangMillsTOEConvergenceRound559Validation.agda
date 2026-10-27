@@ -517,3 +517,130 @@ unifierGoal1G2MatchesTOE :
   U.unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel
   ≡ TOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
 unifierGoal1G2MatchesTOE = refl
+
+
+------------------------------------------------------------------------
+-- Full R485 inventory coverage regressions.
+------------------------------------------------------------------------
+
+goal1FiniteEuclideanAttachmentMatchesR485 :
+  TOE.toeGoal1FiniteEuclideanSameObjectAttachmentLevel
+  ≡ R485.aFiniteEuclideanSameObjectAttachmentLevel
+goal1FiniteEuclideanAttachmentMatchesR485 = refl
+
+goal1FiniteBosonicAttachmentMatchesR485 :
+  TOE.toeGoal1FiniteBosonicSameObjectAttachmentLevel
+  ≡ R485.aFiniteBosonicSameObjectAttachmentLevel
+goal1FiniteBosonicAttachmentMatchesR485 = refl
+
+goal1FiniteWilsonRPAttachmentMatchesR485 :
+  TOE.toeGoal1FiniteWilsonRPSameObjectAttachmentLevel
+  ≡ R485.aFiniteWilsonRPSameObjectAttachmentLevel
+goal1FiniteWilsonRPAttachmentMatchesR485 = refl
+
+goal1A3StressDensityMeasureMatchesR485 :
+  TOE.toeGoal1A3StressDensityIsLiteralFiniteMeasureLevel
+  ≡ R485.a3StressDensityIsLiteralFiniteMeasureLevel
+goal1A3StressDensityMeasureMatchesR485 = refl
+
+goal1A3FiniteContinuumLimitMatchesR485 :
+  TOE.toeGoal1A3FiniteFamilyContinuumLimitLevel
+  ≡ R485.a3FiniteFamilyContinuumLimitLevel
+goal1A3FiniteContinuumLimitMatchesR485 = refl
+
+goal1A3LiteralSchwingerMatchesR485 :
+  TOE.toeGoal1A3LiteralSchwingerBelongsLevel
+  ≡ R485.a3LiteralSchwingerBelongsLevel
+goal1A3LiteralSchwingerMatchesR485 = refl
+
+goal1A3SourceOSMatchesLiteralSchwingerR485 :
+  TOE.toeGoal1A3SourceOSIsLiteralSchwingerLevel
+  ≡ R485.a3SourceOSIsLiteralSchwingerLevel
+goal1A3SourceOSMatchesLiteralSchwingerR485 = refl
+
+goal1A3ProjectivePremeasureMatchesR485 :
+  TOE.toeGoal1A3FiniteProjectiveCylinderPremeasureLevel
+  ≡ R485.a3FiniteProjectiveCylinderPremeasureLevel
+goal1A3ProjectivePremeasureMatchesR485 = refl
+
+goal1A3CylinderEventSemanticsMatchesR485 :
+  TOE.toeGoal1A3CylinderEventIndicatorSemanticsLevel
+  ≡ R485.a3CylinderEventIndicatorSemanticsLevel
+goal1A3CylinderEventSemanticsMatchesR485 = refl
+
+goal1A3ProjectiveExpectationMatchesR485 :
+  TOE.toeGoal1A3ProjectiveExpectationConsistencyLevel
+  ≡ R485.a3ProjectiveEventExpectationConsistencyLevel
+goal1A3ProjectiveExpectationMatchesR485 = refl
+
+goal1A3ContinuityAtEmptyMatchesR485 :
+  TOE.toeGoal1A3ContinuityAtEmptyLevel
+  ≡ R485.a3ContinuityAtEmptyLevel
+goal1A3ContinuityAtEmptyMatchesR485 = refl
+
+goal1A3CaratheodoryMatchesR485 :
+  TOE.toeGoal1A3CaratheodoryExtensionLevel
+  ≡ R485.a3CaratheodoryExtensionLevel
+goal1A3CaratheodoryMatchesR485 = refl
+
+goal1A3CylinderIntegralMatchesR485 :
+  TOE.toeGoal1A3CylinderExpectationIntegralLevel
+  ≡ R485.a3CylinderExpectationIntegralIdentificationLevel
+goal1A3CylinderIntegralMatchesR485 = refl
+
+goal1A3RepresentedLiteralMatchesR485 :
+  TOE.toeGoal1A3RepresentedLiteralSemanticsLevel
+  ≡ R485.a3RepresentedLiteralSemanticsLevel
+goal1A3RepresentedLiteralMatchesR485 = refl
+
+goal1A45MomentMatchesR485 :
+  TOE.toeGoal1A45QuantitativeMomentToFiniteOS05Level
+  ≡ R485.a45QuantitativeMomentToFiniteOS05Level
+goal1A45MomentMatchesR485 = refl
+
+goal1A45ExpectationAttachmentMatchesR485 :
+  TOE.toeGoal1A45QuantitativeFiniteExpectationAttachmentLevel
+  ≡ R485.a45QuantitativeFiniteExpectationAttachmentLevel
+goal1A45ExpectationAttachmentMatchesR485 = refl
+
+goal1A45RepresentedOSExtensionalityMatchesR485 :
+  TOE.toeGoal1A45RepresentedOSPredicateExtensionalityLevel
+  ≡ R485.a45RepresentedOSPredicateExtensionalityLevel
+goal1A45RepresentedOSExtensionalityMatchesR485 = refl
+
+goal1A4RepresentedExtensionalityMatchesR485 :
+  TOE.toeGoal1A4RepresentedRegularityExtensionalityLevel
+  ≡ R485.a4RepresentedRegularityExtensionalityLevel
+goal1A4RepresentedExtensionalityMatchesR485 = refl
+
+goal1A5RepresentedExtensionalityMatchesR485 :
+  TOE.toeGoal1A5RepresentedGrowthExtensionalityLevel
+  ≡ R485.a5RepresentedGrowthExtensionalityLevel
+goal1A5RepresentedExtensionalityMatchesR485 = refl
+
+goal1BLiteralGapSemanticsMatchesR485 :
+  TOE.toeGoal1BLiteralHamiltonianGapSemanticsLevel
+  ≡ R485.bLiteralHamiltonianGapSemanticsLevel
+goal1BLiteralGapSemanticsMatchesR485 = refl
+
+goal1RepresentedTerminalMatchesR485 :
+  TOE.toeGoal1RepresentedTerminalCompilerLevel
+  ≡ R485.round485RepresentedTerminalCompilerLevel
+goal1RepresentedTerminalMatchesR485 = refl
+
+goal1TerminalContractInventoryMatchesR485 :
+  TOE.toeGoal1TerminalContractSemanticInventoryLevel
+  ≡ R485.terminalContractSemanticInventoryLevel
+goal1TerminalContractInventoryMatchesR485 = refl
+
+goal1PostHocSchwingerEqualityNotMandatory :
+  TOE.toeGoal1PostHocSchwingerEqualityMandatory ≡ false
+goal1PostHocSchwingerEqualityNotMandatory = refl
+
+goal1CMP109PolarizationDetourNotMandatory :
+  TOE.toeGoal1CMP109PolarizationDetourMandatory ≡ false
+goal1CMP109PolarizationDetourNotMandatory = refl
+
+goal1PrintedBalabanJEqualsWilsonNotMandatory :
+  TOE.toeGoal1PrintedBalabanJEqualsWilsonObservableMandatory ≡ false
+goal1PrintedBalabanJEqualsWilsonNotMandatory = refl
