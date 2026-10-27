@@ -1,5 +1,8 @@
 module DASHI.Unifier where
 
+-- Reuse-only PNF boundary normalization. No source theorem is promoted.
+open import DASHI.Unified.PNFSourceBoundaryTOEExact public
+
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
