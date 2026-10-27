@@ -1104,3 +1104,44 @@ unifierCurrentLegalAuthorityDoesNotEstablishApplicability :
 unifierCurrentLegalAuthorityDoesNotEstablishApplicability =
   CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
 
+------------------------------------------------------------------------
+-- Current max-cut + generic hyperfabric convergence.
+-- Unifier remains a facade over the joint owner.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutHyperfabricExact as CurrentHyper
+
+unifierCurrentMaxCutHyperfabricReceipt :
+  CurrentHyper.TOECurrentMaxCutHyperfabricReceipt
+unifierCurrentMaxCutHyperfabricReceipt =
+  CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
+
+unifierCurrentHyperformNineCount :
+  CurrentHyper.Fabric.siteCount 3 2 ≡ 9
+unifierCurrentHyperformNineCount =
+  CurrentHyper.currentHyperformNineCount
+
+unifierCurrentHyperformTwentySevenCount :
+  CurrentHyper.Fabric.siteCount 3 3 ≡ 27
+unifierCurrentHyperformTwentySevenCount =
+  CurrentHyper.currentHyperformTwentySevenCount
+
+unifierCurrentHyperformEightyOneCount :
+  CurrentHyper.Fabric.siteCount 3 4 ≡ 81
+unifierCurrentHyperformEightyOneCount =
+  CurrentHyper.currentHyperformEightyOneCount
+
+unifierCurrentPadicPrefixCannotRecoverDiscardedDigit :
+  CurrentHyper.PadicPrefixRecovery → ⊥
+unifierCurrentPadicPrefixCannotRecoverDiscardedDigit =
+  CurrentHyper.currentPadicPrefixCannotRecoverDiscardedDigit
+
+unifierCurrentTwoDigitStreamCannotRecoverThird :
+  CurrentHyper.StreamThirdPrefixRecovery → ⊥
+unifierCurrentTwoDigitStreamCannotRecoverThird =
+  CurrentHyper.currentTwoDigitStreamCannotRecoverThird
+
+unifierCurrentFleet58DoesNotBecomeGate4SameObject :
+  CurrentHyper.Fleet58IsGate4SameObject → ⊥
+unifierCurrentFleet58DoesNotBecomeGate4SameObject =
+  CurrentHyper.currentFleet58DoesNotBecomeGate4SameObject
