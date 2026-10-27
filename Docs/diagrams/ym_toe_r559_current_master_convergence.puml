@@ -1,0 +1,59 @@
+@startuml
+title DASHI Yang-Mills Goal-1 / Pareto TOE convergence
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam packageStyle rectangle
+left to right direction
+
+package "Canonical theorem owners" {
+  component "R485\nGoal-1 representation-safe\nmaximum cut" as R485
+  component "R546\n14-family irreducible\nsource frontier" as R546
+  component "R558\n7-family critical path" as R558
+  component "BalabanRGTOERegression\nmerged density / regular-E /\nCasimir / stress / non-promotion" as BRG
+}
+
+component "R559\nGoal-1 + Pareto\nnormalization owner" as R559
+
+package "TOE facades" {
+  component "EverythingTOESymmetryResolved369" as ROOT
+  component "Unifier" as UNI
+  component "Unified.Physics" as PHY
+  component "Unified.Everything" as UE
+}
+
+component "R559Validation\nidentity + firewall +\n14/7 dispatch checks" as VAL
+
+R485 --> R559 : exact owner reuse
+R546 --> R559 : canonical SourceFamily
+R558 --> R559 : canonical CriticalFamily
+
+R559 --> ROOT : public normalized surface
+R559 --> UNI : public normalized surface
+R559 --> PHY : public normalized surface
+
+BRG --> ROOT : merged Balaban RG surface
+BRG --> UNI : merged Balaban RG surface
+BRG --> PHY : merged Balaban RG surface
+
+ROOT --> VAL : facade agreement
+UNI --> VAL : facade agreement
+PHY --> VAL : facade agreement
+VAL --> UE : focused regression import
+PHY --> UE : unified physics graph
+
+note bottom of R559
+No theorem ownership transfer.
+Conditional stays conditional.
+Finite/represented does not imply continuum.
+Clay completion remains false.
+No ESD or digital_esd mutation.
+end note
+
+note bottom of BRG
+Tadeusz Balaban and existing
+compact-Lie/Casimir source owners
+retain attribution.
+end note
+
+@enduml
