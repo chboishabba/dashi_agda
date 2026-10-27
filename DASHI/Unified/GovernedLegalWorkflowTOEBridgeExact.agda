@@ -163,6 +163,22 @@ OfficialLegalSurfaceRecoversFineState =
     LegalDecision.officialSurface
     LegalDecision.fineLegalStateOf
 
+OfficialActionRecoversAutonomyAndAuthority : Set
+OfficialActionRecoversAutonomyAndAuthority =
+  NF.FactorsThrough
+    LegalDecision.autonomyOfficialSurface
+    LegalDecision.fineAutonomyLegalStateOf
+
+actionstepStyleVendorIdentityCreatesAuthority : Bool
+actionstepStyleVendorIdentityCreatesAuthority =
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    Domain.canonicalDomainTransportReceipt
+
+actionstepStyleTargetNeedsOwnAuthorityWitness : Bool
+actionstepStyleTargetNeedsOwnAuthorityWitness =
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
+    Domain.canonicalDomainTransportReceipt
+
 LegalOnlyCreatesLegitimacy : Set₁
 LegalOnlyCreatesLegitimacy =
   Legitimacy.AdmittedLegitimacy
@@ -1208,10 +1224,7 @@ toeOfficialLegalSurfaceDoesNotRecoverFineState =
   LegalDecision.officialSurfaceCannotRecoverFineLegalState
 
 toeOfficialActionDoesNotRecoverAutonomyAndAuthority :
-  NF.FactorsThrough
-    LegalDecision.autonomyOfficialSurface
-    LegalDecision.fineAutonomyLegalStateOf
-  → ⊥
+  OfficialActionRecoversAutonomyAndAuthority → ⊥
 toeOfficialActionDoesNotRecoverAutonomyAndAuthority =
   LegalDecision.officialActionCannotRecoverAutonomyAndAuthority
 
@@ -1235,15 +1248,11 @@ toeMissingValidationStillAbstains =
   Promotion.missingValidationAbstains
 
 toeActionstepStyleVendorIdentityCreatesAuthority :
-  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
-    Domain.canonicalDomainTransportReceipt
-  ≡ false
+  actionstepStyleVendorIdentityCreatesAuthority ≡ false
 toeActionstepStyleVendorIdentityCreatesAuthority = refl
 
 toeActionstepStyleTargetNeedsOwnAuthorityWitness :
-  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
-    Domain.canonicalDomainTransportReceipt
-  ≡ true
+  actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
 toeActionstepStyleTargetNeedsOwnAuthorityWitness = refl
 
 ------------------------------------------------------------------------
@@ -1445,10 +1454,7 @@ record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
       OfficialLegalSurfaceRecoversFineState → ⊥
 
     officialActionAutonomyAuthorityFirewall :
-      NF.FactorsThrough
-        LegalDecision.autonomyOfficialSurface
-        LegalDecision.fineAutonomyLegalStateOf
-      → ⊥
+      OfficialActionRecoversAutonomyAndAuthority → ⊥
 
     legalityLegitimacyFirewall :
       LegalOnlyCreatesLegitimacy → ⊥
@@ -1464,14 +1470,10 @@ record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
       ≡ Governed.abstain
 
     actionstepStyleVendorAuthorityFirewall :
-      Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
-        Domain.canonicalDomainTransportReceipt
-      ≡ false
+      actionstepStyleVendorIdentityCreatesAuthority ≡ false
 
     actionstepStyleTargetAuthorityWitnessRequired :
-      Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
-        Domain.canonicalDomainTransportReceipt
-      ≡ true
+      actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
 
     exactReuseAdmissionFirewall :
       ExactReuseCreatesSemanticAdmission →
