@@ -936,58 +936,31 @@ unifierFleetFormalGapZKPFrame =
   FleetGapTOE.canonicalFleetFormalGapZKPFrame
 
 unifierFleetEigenPriorityDoesNotCreateProof :
-  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierFleetEigenPriorityDoesNotCreateProof =
   FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
 
 unifierFleetExternalCountDoesNotCreateFormalDischarge :
-  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierFleetExternalCountDoesNotCreateFormalDischarge =
   FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
 
 unifierFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
 unifierFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
 
 unifierFleetContradictionGapsRemainSeparate :
-  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
 unifierFleetContradictionGapsRemainSeparate =
-  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
-
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
 
 unifierFleetPlanningTextDoesNotCreateFormalResidual :
-  FleetGapTOE.PlanningSourceTextFormalResidualFlag
+  FleetGapTOE.externalPlanningTextCreatesFormalResidual
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierFleetPlanningTextDoesNotCreateFormalResidual =
-  FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
-
-
-unifierFleetBalabanDischargedOwnerReceipt :
-  FleetGapTOE.BalabanDischargedOwnerReceipt
-unifierFleetBalabanDischargedOwnerReceipt =
-  FleetGapTOE.fleetBalabanDischargedOwnerReceipt
-
-unifierFleetNSPhysicalM2SummationCompilerStatus :
-  Bool
-unifierFleetNSPhysicalM2SummationCompilerStatus =
-  FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
-
-unifierFleetNSM2ToR568CompilerStatus :
-  Bool
-unifierFleetNSM2ToR568CompilerStatus =
-  FleetGapTOE.fleetNSM2ToR568CompilerStatus
-
-unifierFleetQuantumMereologyBoundary :
-  FleetGapTOE.QuantumMereologyDischargedBoundary
-unifierFleetQuantumMereologyBoundary =
-  FleetGapTOE.fleetQuantumMereologyBoundary
-
-unifierFleetQuantumMereologyAttributionBoundary :
-  FleetGapTOE.QuantumMereologyAttributionBoundary
-unifierFleetQuantumMereologyAttributionBoundary =
-  FleetGapTOE.fleetQuantumMereologyAttributionBoundary
-
-unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner :
-  FleetGapTOE.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
-unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner =
-  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+  FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
