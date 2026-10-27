@@ -352,3 +352,27 @@ canonicalTOECurrentMaxCutZKPFrame =
     "current-master owners exist; source attribution remains attached; ESD is read-only"
     "one theorem keeps one owner; finite does not imply continuum; search does not imply proof; candidate does not imply authority; formal governance does not imply legitimacy"
     "both TOE roots and Unified expose one current max-cut receipt; no discharged fibre or contradiction gap is retargeted"
+
+
+------------------------------------------------------------------------
+-- Canonical names for legal semantic non-promotion consumers.
+-- Keep the proof terms with their existing source owner.
+------------------------------------------------------------------------
+
+SemanticAdmissionIsLegalSourceAuthority : Set
+SemanticAdmissionIsLegalSourceAuthority =
+  Legal.SemanticAdmissionAuthorityIsLegalSourceAuthority
+
+DocumentRoleIsLegalSourceAuthority : Set
+DocumentRoleIsLegalSourceAuthority =
+  Legal.DocumentRoleSuppliesLegalSourceAuthority
+
+semanticAdmissionAuthorityNonPromotion :
+  SemanticAdmissionIsLegalSourceAuthority → ⊥
+semanticAdmissionAuthorityNonPromotion =
+  Legal.semanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+documentRoleAuthorityNonPromotion :
+  DocumentRoleIsLegalSourceAuthority → ⊥
+documentRoleAuthorityNonPromotion =
+  Legal.documentRoleDoesNotSupplyLegalSourceAuthority
