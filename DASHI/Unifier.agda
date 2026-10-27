@@ -1,5 +1,7 @@
 module DASHI.Unifier where
 
+import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -429,3 +431,146 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+------------------------------------------------------------------------
+-- Exact Yang-Mills Goal-1 compatibility exports.
+-- Unifier is a consumer. It is not the proof authority.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1FiniteASourceLevel : ProofLevel
+unifierYangMillsGoal1FiniteASourceLevel =
+  YMGoal1TOE.goal1FiniteASourceLevel
+
+unifierYangMillsGoal1CanonicalSelectedBSourceLevel : ProofLevel
+unifierYangMillsGoal1CanonicalSelectedBSourceLevel =
+  YMGoal1TOE.goal1CanonicalSelectedBSourceLevel
+
+unifierYangMillsGoal1LiteralCMP116RateSourceLevel : ProofLevel
+unifierYangMillsGoal1LiteralCMP116RateSourceLevel =
+  YMGoal1TOE.goal1LiteralCMP116RateSourceLevel
+
+unifierYangMillsGoal1LocalQFTCSourceLevel : ProofLevel
+unifierYangMillsGoal1LocalQFTCSourceLevel =
+  YMGoal1TOE.goal1LocalQFTCSourceLevel
+
+unifierYangMillsGoal1SameHNontrivialityLevel : ProofLevel
+unifierYangMillsGoal1SameHNontrivialityLevel =
+  YMGoal1TOE.goal1SameHNontrivialitySemanticBridgeLevel
+
+unifierYangMillsFlat4DContinuumStillOpen :
+  YMGoal1TOE.flat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsFlat4DContinuumStillOpen =
+  YMGoal1TOE.flat4DContinuumTransferStillOpen
+
+unifierYangMillsContinuumMassGapStillNotPromoted :
+  YMGoal1TOE.continuumMassGapPromoted ≡ false
+unifierYangMillsContinuumMassGapStillNotPromoted =
+  YMGoal1TOE.continuumMassGapStillNotPromoted
+
+unifierYangMillsClayStillNotPromoted :
+  YMGoal1TOE.clayYangMillsPromoted ≡ false
+unifierYangMillsClayStillNotPromoted =
+  YMGoal1TOE.clayYangMillsStillNotPromoted
+
+
+------------------------------------------------------------------------
+-- Preferred R440--R444 Goal-1 source cuts.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel =
+  YMGoal1TOE.goal1FiniteA1WilsonActionInvarianceLevel
+
+unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel =
+  YMGoal1TOE.goal1FiniteA1ProductHaarInvarianceLevel
+
+unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel =
+  YMGoal1TOE.goal1FiniteA1DensityInvariantCompilerLevel
+
+unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel : ProofLevel
+unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel =
+  YMGoal1TOE.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+
+unifierYangMillsGoal1FiniteA2SquareCompilerLevel : ProofLevel
+unifierYangMillsGoal1FiniteA2SquareCompilerLevel =
+  YMGoal1TOE.goal1FiniteA2SquareCompilerLevel
+
+unifierYangMillsGoal1PreferredVariableDomainBSourceLevel : ProofLevel
+unifierYangMillsGoal1PreferredVariableDomainBSourceLevel =
+  YMGoal1TOE.goal1PreferredVariableDomainBSourceLevel
+
+unifierYangMillsGoal1R429RootedTraceEncodingLevel : ProofLevel
+unifierYangMillsGoal1R429RootedTraceEncodingLevel =
+  YMGoal1TOE.goal1R429RootedTraceEncodingLevel
+
+unifierYangMillsGoal1R429RootedTraceCountCompilerLevel : ProofLevel
+unifierYangMillsGoal1R429RootedTraceCountCompilerLevel =
+  YMGoal1TOE.goal1R429RootedTraceCountCompilerLevel
+
+unifierYangMillsGoal1R429SourceDecayReserveLevel : ProofLevel
+unifierYangMillsGoal1R429SourceDecayReserveLevel =
+  YMGoal1TOE.goal1R429SourceDecayReserveLevel
+
+unifierYangMillsGoal1R429EntropyBudgetCompilerLevel : ProofLevel
+unifierYangMillsGoal1R429EntropyBudgetCompilerLevel =
+  YMGoal1TOE.goal1R429EntropyBudgetCompilerLevel
+
+unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred :
+  YMGoal1TOE.legacyGlobalTreeMetricPreferred ≡ false
+unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred =
+  YMGoal1TOE.legacyGlobalTreeMetricPreferredIsFalse
+
+
+------------------------------------------------------------------------
+-- Reused A3/A4/A5 and C3/C4 canonical owner exports.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1A3UniformCompactContainmentLevel : ProofLevel
+unifierYangMillsGoal1A3UniformCompactContainmentLevel =
+  YMGoal1TOE.goal1A3UniformCompactContainmentLevel
+
+unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel : ProofLevel
+unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel =
+  YMGoal1TOE.goal1A3ExtractedClusterCylinderAgreementLevel
+
+unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel : ProofLevel
+unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel =
+  YMGoal1TOE.goal1A3TightnessSubsequenceCompilerLevel
+
+unifierYangMillsGoal1A4FiniteRegularityLevel : ProofLevel
+unifierYangMillsGoal1A4FiniteRegularityLevel =
+  YMGoal1TOE.goal1A4FiniteRegularityLevel
+
+unifierYangMillsGoal1A5FiniteGrowthControlLevel : ProofLevel
+unifierYangMillsGoal1A5FiniteGrowthControlLevel =
+  YMGoal1TOE.goal1A5FiniteGrowthControlLevel
+
+unifierYangMillsGoal1A45OSLimitCompilerLevel : ProofLevel
+unifierYangMillsGoal1A45OSLimitCompilerLevel =
+  YMGoal1TOE.goal1A45OSLimitCompilerLevel
+
+unifierYangMillsGoal1C3OneStepAFIdentificationLevel : ProofLevel
+unifierYangMillsGoal1C3OneStepAFIdentificationLevel =
+  YMGoal1TOE.goal1C3OneStepAFIdentificationLevel
+
+unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel : ProofLevel
+unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel =
+  YMGoal1TOE.goal1C3AllDepthCoefficientCompilerLevel
+
+unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel : ProofLevel
+unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel =
+  YMGoal1TOE.goal1C4DensityAnchoredStressInstantiationLevel
+
+unifierYangMillsGoal1C4SectorRecoveryCompilerLevel : ProofLevel
+unifierYangMillsGoal1C4SectorRecoveryCompilerLevel =
+  YMGoal1TOE.goal1C4SectorRecoveryCompilerLevel
+
+unifierYangMillsGoal1C4LiteralSectorRecoveryLevel : ProofLevel
+unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
+  YMGoal1TOE.goal1C4LiteralSectorRecoveryLevel
+
+unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
+unifierYangMillsGoal1C4CommonMetricCompilerLevel =
+  YMGoal1TOE.goal1C4CommonMetricCompilerLevel
