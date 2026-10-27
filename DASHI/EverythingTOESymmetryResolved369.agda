@@ -677,3 +677,34 @@ toeFleetPlanningTextDoesNotCreateFormalResidual :
   FleetGapTOE.PlanningSourceTextFormalResidualFlag
 toeFleetPlanningTextDoesNotCreateFormalResidual =
   FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
+
+
+toeFleetBalabanDischargedOwnerReceipt :
+  FleetGapTOE.BalabanDischargedOwnerReceipt
+toeFleetBalabanDischargedOwnerReceipt =
+  FleetGapTOE.fleetBalabanDischargedOwnerReceipt
+
+toeFleetNSPhysicalM2SummationCompilerStatus :
+  Agda.Builtin.Bool.Bool
+toeFleetNSPhysicalM2SummationCompilerStatus =
+  FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
+
+toeFleetNSM2ToR568CompilerStatus :
+  Agda.Builtin.Bool.Bool
+toeFleetNSM2ToR568CompilerStatus =
+  FleetGapTOE.fleetNSM2ToR568CompilerStatus
+
+toeFleetQuantumMereologyBoundary :
+  FleetGapTOE.QuantumMereologyDischargedBoundary
+toeFleetQuantumMereologyBoundary =
+  FleetGapTOE.fleetQuantumMereologyBoundary
+
+toeFleetQuantumMereologyAttributionBoundary :
+  FleetGapTOE.QuantumMereologyAttributionBoundary
+toeFleetQuantumMereologyAttributionBoundary =
+  FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+
+toeFleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetGapTOE.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+toeFleetSpectralLabelDoesNotIdentifyTheoremOwner =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
