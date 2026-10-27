@@ -38,6 +38,16 @@ remainingFamiliesAreNotAllProved :
 remainingFamiliesAreNotAllProved =
   TOE.toeAllRemainingFamiliesAlreadyProvedIsFalse
 
+publishedRGDoesNotPromoteContinuum :
+  TOE.toeFlat4DContinuumTransferProvedHere ≡ false
+publishedRGDoesNotPromoteContinuum =
+  TOE.toePublishedRGDoesNotPromoteContinuum
+
+continuumMassGapRemainsNonPromoted :
+  TOE.toeContinuumMassGapPromoted ≡ false
+continuumMassGapRemainsNonPromoted =
+  TOE.toeContinuumMassGapPromotedIsFalse
+
 regularESourceClosureRemainsOpen :
   TOE.toeRegularEPhysicalSourceClosure ≡ false
 regularESourceClosureRemainsOpen =
