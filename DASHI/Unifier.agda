@@ -1,5 +1,10 @@
 module DASHI.Unifier where
 
+import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact as GovernanceTOE
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalWorkflow
+import DASHI.Law.ClosedIsNotAdequateExact as Closed
+import DASHI.Law.MaboRevisionReopenExact as MaboRevision
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -313,3 +318,54 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- Exact TOE governance aliases.
+--
+-- These aliases reuse canonical theorem owners.
+-- DASHI.Unifier does not create proof authority.
+------------------------------------------------------------------------
+
+toeGovernanceHandoff :
+  GovernanceTOE.TOEGovernanceHandoff
+toeGovernanceHandoff =
+  GovernanceTOE.canonicalTOEGovernanceHandoff
+
+toeWorkflowTaskCompletionDoesNotCreateTruth :
+  LegalWorkflow.TaskCompletionCreatesTruth → ⊥
+toeWorkflowTaskCompletionDoesNotCreateTruth =
+  GovernanceTOE.toeWorkflowTaskCompletionDoesNotCreateTruth
+
+toeWorkflowDatabaseCommitDoesNotCreateSemanticAuthority :
+  LegalWorkflow.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeWorkflowDatabaseCommitDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeWorkflowDatabaseCommitDoesNotCreateSemanticAuthority
+
+toeNoFreshDemandDoesNotProveConsumerAdequacy :
+  Closed.noFreshDemandIsConsumerAdequacyProof
+    Closed.canonicalClosedIsNotAdequateBoundary
+  ≡ false
+toeNoFreshDemandDoesNotProveConsumerAdequacy =
+  GovernanceTOE.toeNoFreshDemandDoesNotProveConsumerAdequacy
+
+toeExactNonfactorabilityMayReopenClosedFrontier :
+  Closed.exactNonfactorabilityMayReopenClosedFrontier
+    Closed.canonicalClosedIsNotAdequateBoundary
+  ≡ true
+toeExactNonfactorabilityMayReopenClosedFrontier =
+  GovernanceTOE.toeExactNonfactorabilityMayReopenClosedFrontier
+
+toeRevisionChangeReopensContextBeforeIdentity :
+  MaboRevision.revisionChangeReopensContextBeforeIdentity
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ true
+toeRevisionChangeReopensContextBeforeIdentity =
+  GovernanceTOE.toeRevisionChangeReopensContextBeforeIdentity
+
+toeLatestRevisionLookupDoesNotPayContextReview :
+  MaboRevision.latestRevisionLookupPaysContextReview
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ false
+toeLatestRevisionLookupDoesNotPayContextReview =
+  GovernanceTOE.toeLatestRevisionLookupDoesNotPayContextReview
