@@ -5,6 +5,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Unified/AntigravityTOENonPromotionBridgeExact.agda'
+      - 'DASHI/Unified/AntigravityTOENonPromotionBridgeValidation.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/Physics.agda'
@@ -58,12 +59,16 @@ jobs:
             DASHI/Unified/AntigravityTOENonPromotionBridgeExact.agda
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/AntigravityTOENonPromotionBridgeValidation.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
             DASHI/EverythingTOESymmetryResolved369.agda
 
       - name: Reject trust escapes and ESD edits
         run: |
           sources=(
             DASHI/Unified/AntigravityTOENonPromotionBridgeExact.agda
+            DASHI/Unified/AntigravityTOENonPromotionBridgeValidation.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
             DASHI/Unified/Physics.agda
@@ -83,6 +88,7 @@ jobs:
         run: |
           agda --version
           agda -i . -l standard-library DASHI/Unified/AntigravityTOENonPromotionBridgeExact.agda
+          agda -i . -l standard-library DASHI/Unified/AntigravityTOENonPromotionBridgeValidation.agda
           agda -i . -l standard-library DASHI/Unified/Physics.agda
           agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
           agda -i . -l standard-library DASHI/Unifier.agda
