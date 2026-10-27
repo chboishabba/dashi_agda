@@ -252,6 +252,27 @@ unifiedBalabanCPhysicalPackageCount : ℕ
 unifiedBalabanCPhysicalPackageCount =
   BalabanRGTOE.balabanCPhysicalPackageCount
 
+
+unifiedBalabanCriticalPathCompilerLevel : ProofLevel
+unifiedBalabanCriticalPathCompilerLevel =
+  BalabanRGTOE.balabanCriticalPathCompilerLevel
+
+unifiedBalabanCriticalFamilyCount : ℕ
+unifiedBalabanCriticalFamilyCount =
+  BalabanRGTOE.balabanCriticalFamilyCount
+
+unifiedBalabanFullCLayerRequiredForMassGapCompiler : Bool
+unifiedBalabanFullCLayerRequiredForMassGapCompiler =
+  BalabanRGTOE.balabanFullCLayerRequiredForMassGapCompiler
+
+unifiedBalabanFullCLayerRequiredForMinimalH6Contradiction : Bool
+unifiedBalabanFullCLayerRequiredForMinimalH6Contradiction =
+  BalabanRGTOE.balabanFullCLayerRequiredForMinimalH6Contradiction
+
+unifiedBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence : Bool
+unifiedBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence =
+  BalabanRGTOE.balabanFullCLayerRetainedForConservativeClayLocalFieldExistence
+
 unifiedBalabanLevel2ClayPromotionStillFalse :
   BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
 unifiedBalabanLevel2ClayPromotionStillFalse =
