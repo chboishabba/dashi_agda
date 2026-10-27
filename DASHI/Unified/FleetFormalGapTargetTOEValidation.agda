@@ -32,78 +32,86 @@ unifierFleetZKPFrameMatchesOwner :
 unifierFleetZKPFrameMatchesOwner = refl
 
 toeEigenPriorityStillNotProof :
-  Fleet.FleetEigenPriorityCreatesProof → ⊥
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 toeEigenPriorityStillNotProof =
   TOE.toeFleetEigenPriorityDoesNotCreateProof
 
 unifierEigenPriorityStillNotProof :
-  Fleet.FleetEigenPriorityCreatesProof → ⊥
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierEigenPriorityStillNotProof =
   Unifier.unifierFleetEigenPriorityDoesNotCreateProof
 
 toeExternalCountStillNotDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 toeExternalCountStillNotDischarge =
   TOE.toeFleetExternalCountDoesNotCreateFormalDischarge
 
 unifierExternalCountStillNotDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierExternalCountStillNotDischarge =
   Unifier.unifierFleetExternalCountDoesNotCreateFormalDischarge
 
 toeDischargedFibresRemainExcluded :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ true
 toeDischargedFibresRemainExcluded =
   TOE.toeFleetDischargedFibresRemainOutOfTarget
 
 unifierDischargedFibresRemainExcluded :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ true
 unifierDischargedFibresRemainExcluded =
   Unifier.unifierFleetDischargedFibresRemainOutOfTarget
 
 toeContradictionGapsRemainSeparate :
-  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+  Fleet.contradictionGapsRemainSeparate
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ true
 toeContradictionGapsRemainSeparate =
   TOE.toeFleetContradictionGapsRemainSeparate
 
 unifierContradictionGapsRemainSeparate :
-  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+  Fleet.contradictionGapsRemainSeparate
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ true
 unifierContradictionGapsRemainSeparate =
   Unifier.unifierFleetContradictionGapsRemainSeparate
 
+-- Verify the selected planning coordinates without treating their values
+-- as scientific or formal proof authority.
 
-toeFleetPlanningBoundaryMatchesOwner :
-  TOE.toeFleetPlanningBoundary ≡ Fleet.fleetPlanningBoundary
-toeFleetPlanningBoundaryMatchesOwner = refl
+fleetTargetIsExactly58 :
+  Fleet.unformalisedFormalGaps Fleet.canonicalFleetFormalGapTargetReceipt ≡ 58
+fleetTargetIsExactly58 = refl
 
-unifierFleetPlanningBoundaryMatchesOwner :
-  Unifier.unifierFleetPlanningBoundary ≡ Fleet.fleetPlanningBoundary
-unifierFleetPlanningBoundaryMatchesOwner = refl
+previouslyDischarged584RemainSeparate :
+  Fleet.dischargedCoreKnowledgeFibres Fleet.canonicalFleetFormalGapTargetReceipt ≡ 584
+previouslyDischarged584RemainSeparate = refl
 
-toeFleetVectorCoordinateStillNotTruth :
-  TOE.toeFleetVectorCoordinateDoesNotCreateTruth
-  ≡ Fleet.fleetVectorCoordinateDoesNotCreateTruth
-toeFleetVectorCoordinateStillNotTruth = refl
+contradictionGaps44RemainSeparate :
+  Fleet.polarityContradictionGaps Fleet.canonicalFleetFormalGapTargetReceipt ≡ 44
+contradictionGaps44RemainSeparate = refl
 
-unifierFleetVectorCoordinateStillNotTruth :
-  Unifier.unifierFleetVectorCoordinateDoesNotCreateTruth
-  ≡ Fleet.fleetVectorCoordinateDoesNotCreateTruth
-unifierFleetVectorCoordinateStillNotTruth = refl
+fleetMacroscopicMotifCountIsThree :
+  Fleet.macroscopicEigenMotifCount Fleet.canonicalFleetFormalGapTargetReceipt ≡ 3
+fleetMacroscopicMotifCountIsThree = refl
 
 
 ------------------------------------------------------------------------
--- Reused fleet receipt owners remain exactly the canonical owners.
+-- Existing PNF owner and motif-owner identity.
 ------------------------------------------------------------------------
 
-toeFleetCoordinateRebuildabilityReceiptMatchesOwner :
+toeFleetCoordinateReceiptMatchesOwner :
   TOE.toeFleetCoordinateRebuildabilityReceipt
   ≡ Fleet.fleetCoordinateRebuildabilityReceipt
-toeFleetCoordinateRebuildabilityReceiptMatchesOwner = refl
+toeFleetCoordinateReceiptMatchesOwner = refl
 
-unifierFleetCoordinateRebuildabilityReceiptMatchesOwner :
+unifierFleetCoordinateReceiptMatchesOwner :
   Unifier.unifierFleetCoordinateRebuildabilityReceipt
   ≡ Fleet.fleetCoordinateRebuildabilityReceipt
-unifierFleetCoordinateRebuildabilityReceiptMatchesOwner = refl
+unifierFleetCoordinateReceiptMatchesOwner = refl
 
 toeFleetNumericABIReceiptMatchesOwner :
   TOE.toeFleetNumericABIReceipt
@@ -115,32 +123,143 @@ unifierFleetNumericABIReceiptMatchesOwner :
   ≡ Fleet.fleetNumericABIReceipt
 unifierFleetNumericABIReceiptMatchesOwner = refl
 
-toeFleetResidualInvariantReceiptMatchesOwner :
+toeFleetResidualReceiptMatchesOwner :
   TOE.toeFleetResidualInvariantReceipt
   ≡ Fleet.fleetResidualInvariantReceipt
-toeFleetResidualInvariantReceiptMatchesOwner = refl
+toeFleetResidualReceiptMatchesOwner = refl
 
-unifierFleetResidualInvariantReceiptMatchesOwner :
+unifierFleetResidualReceiptMatchesOwner :
   Unifier.unifierFleetResidualInvariantReceipt
   ≡ Fleet.fleetResidualInvariantReceipt
-unifierFleetResidualInvariantReceiptMatchesOwner = refl
+unifierFleetResidualReceiptMatchesOwner = refl
 
-toeFleetPromotionObligationIndexMatchesOwner :
+toeFleetPromotionIndexMatchesOwner :
   TOE.toeFleetPromotionObligationIndex
   ≡ Fleet.fleetPromotionObligationIndex
-toeFleetPromotionObligationIndexMatchesOwner = refl
+toeFleetPromotionIndexMatchesOwner = refl
 
-unifierFleetPromotionObligationIndexMatchesOwner :
+unifierFleetPromotionIndexMatchesOwner :
   Unifier.unifierFleetPromotionObligationIndex
   ≡ Fleet.fleetPromotionObligationIndex
-unifierFleetPromotionObligationIndexMatchesOwner = refl
+unifierFleetPromotionIndexMatchesOwner = refl
 
-toeFleetPlanningTextStillDoesNotCreateFormalResidual :
+toeFleetBalabanOwnerMatches :
+  TOE.toeFleetBalabanDischargedOwnerReceipt
+  ≡ Fleet.fleetBalabanDischargedOwnerReceipt
+toeFleetBalabanOwnerMatches = refl
+
+unifierFleetBalabanOwnerMatches :
+  Unifier.unifierFleetBalabanDischargedOwnerReceipt
+  ≡ Fleet.fleetBalabanDischargedOwnerReceipt
+unifierFleetBalabanOwnerMatches = refl
+
+toeFleetNSM2StatusMatches :
+  TOE.toeFleetNSPhysicalM2SummationCompilerStatus
+  ≡ Fleet.fleetNSPhysicalM2SummationCompilerStatus
+toeFleetNSM2StatusMatches = refl
+
+unifierFleetNSM2StatusMatches :
+  Unifier.unifierFleetNSPhysicalM2SummationCompilerStatus
+  ≡ Fleet.fleetNSPhysicalM2SummationCompilerStatus
+unifierFleetNSM2StatusMatches = refl
+
+toeFleetQuantumMereologyBoundaryMatches :
+  TOE.toeFleetQuantumMereologyBoundary
+  ≡ Fleet.fleetQuantumMereologyBoundary
+toeFleetQuantumMereologyBoundaryMatches = refl
+
+unifierFleetQuantumMereologyBoundaryMatches :
+  Unifier.unifierFleetQuantumMereologyBoundary
+  ≡ Fleet.fleetQuantumMereologyBoundary
+unifierFleetQuantumMereologyBoundaryMatches = refl
+
+toeFleetQuantumMereologyAttributionMatches :
+  TOE.toeFleetQuantumMereologyAttributionBoundary
+  ≡ Fleet.fleetQuantumMereologyAttributionBoundary
+toeFleetQuantumMereologyAttributionMatches = refl
+
+unifierFleetQuantumMereologyAttributionMatches :
+  Unifier.unifierFleetQuantumMereologyAttributionBoundary
+  ≡ Fleet.fleetQuantumMereologyAttributionBoundary
+unifierFleetQuantumMereologyAttributionMatches = refl
+
+toeFleetPlanningTextStillNotResidual :
+  Fleet.PlanningSourceTextFormalResidualFlag
+toeFleetPlanningTextStillNotResidual =
   TOE.toeFleetPlanningTextDoesNotCreateFormalResidual
-  ≡ Fleet.fleetPlanningTextDoesNotCreateFormalResidual
-toeFleetPlanningTextStillDoesNotCreateFormalResidual = refl
 
-unifierFleetPlanningTextStillDoesNotCreateFormalResidual :
+unifierFleetPlanningTextStillNotResidual :
+  Fleet.PlanningSourceTextFormalResidualFlag
+unifierFleetPlanningTextStillNotResidual =
   Unifier.unifierFleetPlanningTextDoesNotCreateFormalResidual
-  ≡ Fleet.fleetPlanningTextDoesNotCreateFormalResidual
-unifierFleetPlanningTextStillDoesNotCreateFormalResidual = refl
+
+toeSpectralLabelStillNotOwnerIdentity :
+  Fleet.spectralLabelsIdentifyTheoremOwners
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
+toeSpectralLabelStillNotOwnerIdentity =
+  TOE.toeFleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifierSpectralLabelStillNotOwnerIdentity :
+  Fleet.spectralLabelsIdentifyTheoremOwners
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierSpectralLabelStillNotOwnerIdentity =
+  Unifier.unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+------------------------------------------------------------------------
+-- Selection booleans use the canonical owner proofs.
+------------------------------------------------------------------------
+
+fleetTargetOnlyFlagIsTrue :
+  Fleet.targetOnlyUnformalisedFormalGaps Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetTargetOnlyFlagIsTrue =
+  Fleet.fleetTargetsOnlyUnformalisedFormalGaps
+
+fleetDischargedFlagIsTrue :
+  Fleet.dischargedFibresRemainDischarged Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetDischargedFlagIsTrue =
+  Fleet.fleetDoesNotRetargetDischargedFibres
+
+fleetContradictionSeparationFlagIsTrue :
+  Fleet.contradictionGapsRemainSeparate Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetContradictionSeparationFlagIsTrue =
+  Fleet.fleetKeepsContradictionsSeparate
+
+
+------------------------------------------------------------------------
+-- Direct canonical PNF non-promotion regression.
+------------------------------------------------------------------------
+
+toeNonRebuildableCoordinateStillNotPromoted :
+  Fleet.NonRebuildableCoordinatePromotion → ⊥
+toeNonRebuildableCoordinateStillNotPromoted =
+  TOE.toeFleetNonRebuildableCoordinatePromotionImpossible
+
+unifierNonRebuildableCoordinateStillNotPromoted :
+  Fleet.NonRebuildableCoordinatePromotion → ⊥
+unifierNonRebuildableCoordinateStillNotPromoted =
+  Unifier.unifierFleetNonRebuildableCoordinatePromotionImpossible
+
+toeVectorSpectralAuthorityStillNotPromoted :
+  Fleet.VectorSpectralAuthorityPromotion → ⊥
+toeVectorSpectralAuthorityStillNotPromoted =
+  TOE.toeFleetVectorSpectralAuthorityPromotionImpossible
+
+unifierVectorSpectralAuthorityStillNotPromoted :
+  Fleet.VectorSpectralAuthorityPromotion → ⊥
+unifierVectorSpectralAuthorityStillNotPromoted =
+  Unifier.unifierFleetVectorSpectralAuthorityPromotionImpossible
+
+
+toeNumericABIStillNotPromoted :
+  Fleet.SpectralNumericABIPromotion → ⊥
+toeNumericABIStillNotPromoted =
+  TOE.toeFleetSpectralNumericABIPromotionImpossible
+
+
+toeResidualFieldStillNotPromoted :
+  Fleet.ResidualFieldPromotion → ⊥
+toeResidualFieldStillNotPromoted =
+  TOE.toeFleetResidualFieldPromotionImpossible
