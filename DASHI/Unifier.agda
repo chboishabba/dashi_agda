@@ -316,3 +316,6 @@ DASHI-Unification-Theorem = DASHIUnificationAxiom
 
 -- Evidence and governance proof boundary. Does not discharge placeholder QG axioms.
 import DASHI.Unified.RescueFinancePalantirTOENonPromotionExact
+
+-- Exact MAPS/Epstein source and governance non-promotion adapter.
+import DASHI.Unified.MAPSEpsteinTOENonPromotionExact
