@@ -816,6 +816,14 @@ unifier369FullCubeRotationNotFree =
 unifier369MonsterPhaseConjugationIntertwiner =
   MaxCut369.toe27MonsterPhaseConjugationIntertwiner
 
+-- Source-owned signed ternary/Monster non-promotion (no new action proof).
+-- Original Ibrahim 3B ownership and the existing Signed theorem remain distinct.
+unifier369MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+unifier369MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
 unifier369Ternary27PhaseReductionNotGlobalInversion =
   MaxCut369.toe27PhaseReductionNotGlobalInversion
 
