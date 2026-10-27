@@ -33,6 +33,10 @@ def test_handoff_preserves_source_and_legal_nonpromotion():
         "legalAuthorityTruthFirewall",
         "acceptedReviewApplicabilityFirewall",
         "semanticAdmissionLegalAuthorityFirewall",
+        "candidateSourceLegalAuthorityFirewall",
+        "sameLegalSystemAuthorityFirewall",
+        "currentValidityApplicabilityFirewall",
+        "documentRoleLegalAuthorityFirewall",
         "canonicalGovernedLegalWorkflowSourceGenealogyHandoff",
     ):
         assert token in text
@@ -48,6 +52,27 @@ def test_handoff_reaches_all_required_toe_facades():
     assert "unifierGovernedLegalWorkflowSourceGenealogyHandoff" in unifier
     assert "GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy" in unified
     assert "governedLegalWorkflowSourceGenealogyHandoff" in unified
+    for token in (
+        "toeGenealogyCandidateSourceDoesNotCreateLegalAuthority",
+        "toeGenealogySameLegalSystemDoesNotCreateLegalAuthority",
+        "toeGenealogyCurrentValidityDoesNotCreateApplicability",
+        "toeGenealogyDocumentRoleDoesNotCreateLegalAuthority",
+    ):
+        assert token in root
+    for token in (
+        "unifierGenealogyCandidateSourceDoesNotCreateLegalAuthority",
+        "unifierGenealogySameLegalSystemDoesNotCreateLegalAuthority",
+        "unifierGenealogyCurrentValidityDoesNotCreateApplicability",
+        "unifierGenealogyDocumentRoleDoesNotCreateLegalAuthority",
+    ):
+        assert token in unifier
+    for token in (
+        "governedGenealogyCandidateSourceDoesNotCreateLegalAuthority",
+        "governedGenealogySameLegalSystemDoesNotCreateLegalAuthority",
+        "governedGenealogyCurrentValidityDoesNotCreateApplicability",
+        "governedGenealogyDocumentRoleDoesNotCreateLegalAuthority",
+    ):
+        assert token in unified
 
 
 def test_regression_binds_unifier_to_canonical_handoff():
@@ -59,6 +84,10 @@ def test_regression_binds_unifier_to_canonical_handoff():
         "unifierPerceivedIndependenceAliasIsExact",
         "unifierRepetitionAliasIsExact",
         "unifierCommonSourceAliasIsExact",
+        "candidateSourceAuthorityAliasIsExact",
+        "sameLegalSystemAuthorityAliasIsExact",
+        "currentValidityApplicabilityAliasIsExact",
+        "documentRoleAuthorityAliasIsExact",
     ):
         assert token in text
 
