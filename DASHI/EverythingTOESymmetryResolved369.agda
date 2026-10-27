@@ -162,6 +162,12 @@ toeEmbeddingDoesNotCreateLegalAuthority :
 toeEmbeddingDoesNotCreateLegalAuthority =
   EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
 
+
+toeGeographicRecoverabilityDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
+toeGeographicRecoverabilityDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.geographicRecoverabilityDoesNotCreatePhysicalIdentity
+
 ------------------------------------------------------------------------
 -- Normalized Balaban density, regular-E, stress, and continuum surfaces.
 ------------------------------------------------------------------------
