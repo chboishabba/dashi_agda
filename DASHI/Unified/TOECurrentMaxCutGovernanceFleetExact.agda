@@ -64,14 +64,31 @@ import DASHI.Governance.AuthorityMandateCore as Governance
 -- Exact target selection.
 ------------------------------------------------------------------------
 
-targetFormalGapCount : Nat
-targetFormalGapCount =
+gate4FormalGapCount : Nat
+gate4FormalGapCount =
   Physics.gate4UnresolvedObligationCount
 
-targetFormalGapCountIs58 :
-  targetFormalGapCount ≡ 58
-targetFormalGapCountIs58 =
+gate4FormalGapCountIs58 :
+  gate4FormalGapCount ≡ 58
+gate4FormalGapCountIs58 =
   Physics.gate4UnresolvedObligationCountIs58
+
+fleetReportedFormalGapCount : Nat
+fleetReportedFormalGapCount =
+  Fleet.unformalisedFormalGaps
+    Fleet.canonicalFleetFormalGapTargetReceipt
+
+fleetReportedFormalGapCountIs58 :
+  fleetReportedFormalGapCount ≡ 58
+fleetReportedFormalGapCountIs58 = refl
+
+-- The two counts agree numerically. This module does not identify their
+-- underlying obligation carriers.
+data Fleet58IsGate4SameObject : Set where
+
+fleet58DoesNotBecomeGate4SameObject :
+  Fleet58IsGate4SameObject → ⊥
+fleet58DoesNotBecomeGate4SameObject ()
 
 dischargedFleetFibreCount : Nat
 dischargedFleetFibreCount =
@@ -148,6 +165,10 @@ formalGovernanceCreatesPoliticalLegitimacy =
 formalGovernanceCreatesPoliticalLegitimacyIsFalse :
   formalGovernanceCreatesPoliticalLegitimacy ≡ false
 formalGovernanceCreatesPoliticalLegitimacyIsFalse = refl
+
+IbrahimSearchPriorityCreatesProof : Set
+IbrahimSearchPriorityCreatesProof =
+  Pareto.SearchPriorityCreatesProof
 
 ibrahimPriorityCreatesRecognition : Bool
 ibrahimPriorityCreatesRecognition = false
@@ -236,8 +257,10 @@ record TOECurrentMaxCutGovernanceFleetReceipt : Set where
     semanticBoundary : Semantic.CrossPollinationBoundary
     governanceBoundary : Governance.MandateAuthorityBoundary
 
-    formalGapTarget : Nat
-    formalGapTargetIs58 : formalGapTarget ≡ 58
+    gate4GapCount : Nat
+    gate4GapCountIs58 : gate4GapCount ≡ 58
+    fleetReportedGapCount : Nat
+    fleetReportedGapCountIs58 : fleetReportedGapCount ≡ 58
     dischargedFleetFibres : Nat
     dischargedFleetFibresStayExcluded : Bool
     contradictionGaps : Nat
@@ -274,8 +297,10 @@ canonicalTOECurrentMaxCutGovernanceFleetReceipt =
     Legal.canonicalLegalSourceAuthorityBoundary
     Semantic.canonicalCrossPollinationBoundary
     Governance.canonicalMandateAuthorityBoundary
-    targetFormalGapCount
-    targetFormalGapCountIs58
+    gate4FormalGapCount
+    gate4FormalGapCountIs58
+    fleetReportedFormalGapCount
+    fleetReportedFormalGapCountIs58
     dischargedFleetFibreCount
     dischargedFleetFibresExcluded
     contradictionGapCount
