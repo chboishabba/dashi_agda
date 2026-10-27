@@ -50,7 +50,7 @@ module DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact where
 -- remain the certification gate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
@@ -118,24 +118,28 @@ ymGate4InhabitantsLevel =
   YM.gate4CutsetInhabitantsLevel
 
 fleetEigenPriorityDoesNotCreateProof :
-  Fleet.FleetEigenPriorityCreatesProof → ⊥
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt
+  ≡ false
 fleetEigenPriorityDoesNotCreateProof =
   Fleet.fleetEigenPriorityDoesNotCreateProof
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof fleetFormalGapTargetReceipt
+  ≡ false
 fleetExternalCountDoesNotCreateFormalDischarge =
   Fleet.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStayOutOfTarget :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged fleetFormalGapTargetReceipt
+  ≡ true
 fleetDischargedFibresStayOutOfTarget =
-  Fleet.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+  Fleet.fleetDischargedFibresRemainOutOfTarget
 
 fleetContradictionGapsStaySeparate :
-  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+  Fleet.contradictionGapsRemainSeparate fleetFormalGapTargetReceipt
+  ≡ true
 fleetContradictionGapsStaySeparate =
-  Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
+  Fleet.fleetContradictionGapsRemainSeparate
 
 
 Fleet58EqualsYMGate4SameObject : Set
@@ -237,11 +241,11 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     contradictionGapsIs44 : contradictionGaps ≡ 44
     scaleTransferBlocked : YM.ScaleTransferPromotion → ⊥
     fleetCountDoesNotDischarge :
-      Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+      Fleet.externalCountCreatesFormalProof fleetReceipt ≡ false
     dischargedFibreRetargetBlocked :
-      Fleet.FleetDischargedFibreRetargetPermission → ⊥
+      Fleet.dischargedFibresRemainDischarged fleetReceipt ≡ true
     contradictionReclassificationBlocked :
-      Fleet.FleetContradictionGapReclassificationPermission → ⊥
+      Fleet.contradictionGapsRemainSeparate fleetReceipt ≡ true
 
 canonicalR559IbrahimFleetHyperfabricTOEReceipt :
   R559IbrahimFleetHyperfabricTOEReceipt
