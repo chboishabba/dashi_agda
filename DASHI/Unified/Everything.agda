@@ -11,6 +11,7 @@ import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
+import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Unified.CarrierGrammar as CarrierGrammar
 import DASHI.Unified.ChemistrySupervoxel as ChemistrySupervoxel
