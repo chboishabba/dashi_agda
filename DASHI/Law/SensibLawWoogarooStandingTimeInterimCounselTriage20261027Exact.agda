@@ -257,7 +257,7 @@ federalCourtFriendsRockArt2026Form66 = Source.mkNoDOISource
   "Original Court-hosted, filed and amended originating application, not judgment"
   "13 March 2026"
   "https://www.fedcourt.gov.au/__data/assets/pdf_file/0004/596038/2026-03-13_Originating-Application-for-Judicial-Review-Form-66-Rule-31.011_E5530476_v1.pdf"
-  Source.governmentSource
+  Source.practitionerSource
   "Federal Court original PDF page 3 (zero-index 2) visually inspected: applicant PLEADS s487(3) Australian incorporation, environmental activities in two years before its September 2025 NWS decision, and environmental objects in rules at decision date, in ADJR s5 and Judiciary Act s39B proceeding. This is applicant allegation and permissible procedural template, NOT decided standing, law on Woogaroo, a precedent ratio, or an injunction."
   Source.publicAttribution
 
@@ -268,7 +268,7 @@ federalCourtACF2026Form66 = Source.mkNoDOISource
   "Original Court-hosted originating application, not judicial reasons"
   "26 February–2 March 2026 (lodged/accepted)"
   "https://www.fedcourt.gov.au/__data/assets/pdf_file/0009/596025/2026-02-27_Originating-Application-for-Judicial-Review-Form-66-Rule-31.011_E5471674_v1.pdf"
-  Source.governmentSource
+  Source.practitionerSource
   "Original Court PDF page 3 (zero-index 2) visually checked. ACF pleads ACT incorporation, 2-year series with public submissions, letters and an expert report, and constitution's environmental objects to assert s487(3) standing in a separate North West Shelf case. A pleading is a claim by a party; NOT a judicial determination, evidence SWFG did those same activities, or precedent deciding how many activities satisfy s487."
   Source.publicAttribution
 
