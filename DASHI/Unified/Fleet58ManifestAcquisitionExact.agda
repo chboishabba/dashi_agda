@@ -187,22 +187,34 @@ esdSurfaceEditedIsFalse :
   esdSurfaceEdited ≡ false
 esdSurfaceEditedIsFalse = refl
 
+BoundDemandAutomaticallyPaysRequirement : Set
+BoundDemandAutomaticallyPaysRequirement =
+  Bound.BoundDemandAutomaticallyPaysRequirement
+
+BoundDemandAutomaticallyClosesConsumer : Set
+BoundDemandAutomaticallyClosesConsumer =
+  Bound.BoundDemandAutomaticallyClosesConsumer
+
+SameProducerIdentifiesResidual : Set
+SameProducerIdentifiesResidual =
+  Bound.SameProducerIdentifiesResidual
+
 ------------------------------------------------------------------------
 -- Reused non-promotion theorems.
 ------------------------------------------------------------------------
 
 acquisitionDoesNotPayRequirement :
-  Bound.BoundDemandAutomaticallyPaysRequirement → ⊥
+  BoundDemandAutomaticallyPaysRequirement → ⊥
 acquisitionDoesNotPayRequirement =
   Bound.bindingDoesNotPayRequirement
 
 acquisitionDoesNotCloseConsumer :
-  Bound.BoundDemandAutomaticallyClosesConsumer → ⊥
+  BoundDemandAutomaticallyClosesConsumer → ⊥
 acquisitionDoesNotCloseConsumer =
   Bound.bindingDoesNotCloseConsumer
 
 producerDoesNotIdentifyResidual :
-  Bound.SameProducerIdentifiesResidual → ⊥
+  SameProducerIdentifiesResidual → ⊥
 producerDoesNotIdentifyResidual =
   Bound.producerIdentityDoesNotIdentifyResidual
 
@@ -322,4 +334,4 @@ canonicalFleet58ManifestZKPFrame =
 
 attributionBoundary : String
 attributionBoundary =
-  "ITIR-suite owns the Fleet R4/R5 execution and planning receipt. Existing DASHI theorem owners retain proof authority. Tadeusz Balaban and cited source authors retain mathematical attribution. Ibrahim/Danforth/Dodds and existing Monster/source owners retain attribution. casey-git-clone, zkSEC, zkperf, zos-server, erdfa-py, and aristotle-cli-rs retain separate authorship and authority. No theorem authority is imported from those repositories by this module."
+  "ITIR-suite owns the Fleet R4/R5 execution and planning receipt. Existing DASHI theorem owners retain proof authority. Tadeusz Bałaban and cited source authors retain mathematical attribution. Ibrahim/Danforth/Dodds and existing Monster/source owners retain attribution. casey-git-clone, zkSEC, zkperf, zos-server, erdfa-py, and aristotle-cli-rs retain separate authorship and authority. No theorem authority is imported from those repositories by this module."
