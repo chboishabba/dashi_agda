@@ -208,3 +208,137 @@ FiniteIrreducibilityCreatesMonsterHZetaRecognition =
 CurrentQidIdentifiesHistoricalTitle : Set
 CurrentQidIdentifiesHistoricalTitle =
   Historical.CurrentQidIdentifiesHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- Residual source-owned Ibrahim non-promotion cuts.
+--
+-- Reuse the exact owner propositions. Do not introduce facade-local
+-- substitutes for these proof obligations.
+------------------------------------------------------------------------
+
+OEISSelectsRepresentationProofRoute : Set
+OEISSelectsRepresentationProofRoute =
+  Recognition.OEISSelectsRepresentationProofRoute
+
+DimensionClosesRepresentationRoute : Set
+DimensionClosesRepresentationRoute =
+  Recognition.DimensionClosesRepresentationRoute
+
+FailedCoarseRouteForcesConcreteBasisReconstruction : Set
+FailedCoarseRouteForcesConcreteBasisReconstruction =
+  Recognition.FailedCoarseRouteForcesConcreteBasisReconstruction
+
+KernelCharacterEqualityCreatesConstituentList : Set
+KernelCharacterEqualityCreatesConstituentList =
+  Execution.KernelCharacterEqualityCreatesConstituentList
+
+AgdaConsumerRecordCreatesExternalTheorem : Set
+AgdaConsumerRecordCreatesExternalTheorem =
+  Execution.AgdaConsumerRecordCreatesExternalTheorem
+
+PairDegreeCreatesPhaseOrientation : Set
+PairDegreeCreatesPhaseOrientation =
+  Phase.PairDegreeCreatesPhaseOrientation
+
+TwelveSeventyEightCreatesSameActionIntertwiner : Set
+TwelveSeventyEightCreatesSameActionIntertwiner =
+  Phase.TwelveSeventyEightCreatesSameActionIntertwiner
+
+CTblLibTableNameCreatesActualMonsterAction : Set
+CTblLibTableNameCreatesActualMonsterAction =
+  Phase.CTblLibTableNameCreatesActualMonsterAction
+
+SharedZetaScalarCreatesMonsterHZetaRecognition : Set
+SharedZetaScalarCreatesMonsterHZetaRecognition =
+  HZeta.SharedZetaScalarCreatesMonsterHZetaRecognition
+
+SchrodingerConstructionCreatesHomCarrierBinding : Set
+SchrodingerConstructionCreatesHomCarrierBinding =
+  HZeta.SchrodingerConstructionCreatesHomCarrierBinding
+
+DeweyClassifiesHistoricalEdge : Set
+DeweyClassifiesHistoricalEdge =
+  Historical.DeweyClassifiesHistoricalEdge
+
+FourMatchingEdgesProveWholeCorpus : Set
+FourMatchingEdgesProveWholeCorpus =
+  Historical.FourMatchingEdgesProveWholeCorpus
+
+OctoberCommentOverridesPrimaryPaper : Set
+OctoberCommentOverridesPrimaryPaper =
+  Historical.OctoberCommentOverridesPrimaryPaper
+
+PaperMonthOverridesExecutedBytes : Set
+PaperMonthOverridesExecutedBytes =
+  Historical.PaperMonthOverridesExecutedBytes
+
+oeisDoesNotSelectRepresentationProofRoute :
+  OEISSelectsRepresentationProofRoute → ⊥
+oeisDoesNotSelectRepresentationProofRoute =
+  Recognition.oeisDoesNotSelectRepresentationRoute
+
+dimensionDoesNotCloseRepresentationRoute :
+  DimensionClosesRepresentationRoute → ⊥
+dimensionDoesNotCloseRepresentationRoute =
+  Recognition.dimensionDoesNotCloseRoute
+
+failedCoarseRouteDoesNotForceConcreteBasisReconstruction :
+  FailedCoarseRouteForcesConcreteBasisReconstruction → ⊥
+failedCoarseRouteDoesNotForceConcreteBasisReconstruction =
+  Recognition.failedCoarseRouteDoesNotForceConcreteBasis
+
+kernelCharacterEqualityDoesNotCreateConstituentList :
+  KernelCharacterEqualityCreatesConstituentList → ⊥
+kernelCharacterEqualityDoesNotCreateConstituentList =
+  Execution.characterEqualityDoesNotCreateConstituentList
+
+agdaConsumerRecordDoesNotCreateExternalTheorem :
+  AgdaConsumerRecordCreatesExternalTheorem → ⊥
+agdaConsumerRecordDoesNotCreateExternalTheorem =
+  Execution.agdaConsumerDoesNotCreateExternalTheorem
+
+pairDegreeDoesNotCreatePhaseOrientation :
+  PairDegreeCreatesPhaseOrientation → ⊥
+pairDegreeDoesNotCreatePhaseOrientation =
+  Phase.pairDegreeDoesNotCreatePhaseOrientation
+
+twelveSeventyEightDoesNotCreateSameActionIntertwiner :
+  TwelveSeventyEightCreatesSameActionIntertwiner → ⊥
+twelveSeventyEightDoesNotCreateSameActionIntertwiner =
+  Phase.twelveSeventyEightDoesNotCreateIntertwiner
+
+ctbllibTableNameDoesNotCreateActualMonsterAction :
+  CTblLibTableNameCreatesActualMonsterAction → ⊥
+ctbllibTableNameDoesNotCreateActualMonsterAction =
+  Phase.ctbllibNameDoesNotCreateActualAction
+
+sharedZetaScalarDoesNotCreateMonsterHZetaRecognition :
+  SharedZetaScalarCreatesMonsterHZetaRecognition → ⊥
+sharedZetaScalarDoesNotCreateMonsterHZetaRecognition =
+  HZeta.sameScalarDoesNotCreateRecognition
+
+schrodingerConstructionDoesNotCreateHomCarrierBinding :
+  SchrodingerConstructionCreatesHomCarrierBinding → ⊥
+schrodingerConstructionDoesNotCreateHomCarrierBinding =
+  HZeta.constructionDoesNotCreateHomBinding
+
+deweyDoesNotClassifyHistoricalEdge :
+  DeweyClassifiesHistoricalEdge → ⊥
+deweyDoesNotClassifyHistoricalEdge =
+  Historical.deweyDoesNotClassifyHistoricalEdge
+
+fourMatchingEdgesDoNotProveWholeCorpus :
+  FourMatchingEdgesProveWholeCorpus → ⊥
+fourMatchingEdgesDoNotProveWholeCorpus =
+  Historical.fourEdgesDoNotProveWholeCorpus
+
+octoberCommentDoesNotOverridePrimaryPaper :
+  OctoberCommentOverridesPrimaryPaper → ⊥
+octoberCommentDoesNotOverridePrimaryPaper =
+  Historical.octoberCommentDoesNotOverridePaper
+
+paperMonthDoesNotOverrideExecutedBytes :
+  PaperMonthOverridesExecutedBytes → ⊥
+paperMonthDoesNotOverrideExecutedBytes =
+  Historical.paperMonthDoesNotOverrideBytes
