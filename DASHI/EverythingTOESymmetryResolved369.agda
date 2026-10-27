@@ -964,3 +964,34 @@ toeSelected3BSingleActionProducerStillUninhabited :
     Kernel27TOE.singleProducerBoundary ≡ false
 toeSelected3BSingleActionProducerStillUninhabited =
   Kernel27TOE.singleActionProducerStillUninhabited
+
+------------------------------------------------------------------------
+-- CONTEXTUAL-SEMANTIC-FRACTRAN-TOE-MAXCUT
+------------------------------------------------------------------------
+
+import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as ContextualTOE
+
+toeContextualSemanticFractranMaxCutReceipt :
+  ContextualTOE.ContextualSemanticFractranTOEMaxCutReceipt
+toeContextualSemanticFractranMaxCutReceipt =
+  ContextualTOE.canonicalContextualSemanticFractranTOEMaxCutReceipt
+
+toeContextualSemanticFractranZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeContextualSemanticFractranZKPFrame =
+  ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
+
+toeContextualCoverageDoesNotCreateMonsterRepresentation :
+  ContextualTOE.CoverageMonsterRepresentationPromotion → ⊥
+toeContextualCoverageDoesNotCreateMonsterRepresentation =
+  ContextualTOE.coverageDoesNotCreateMonsterRepresentation
+
+toeContextualParetoChartDoesNotCreateMonsterRepresentation :
+  ContextualTOE.ParetoTernaryMonsterRepresentationPromotion → ⊥
+toeContextualParetoChartDoesNotCreateMonsterRepresentation =
+  ContextualTOE.paretoTernaryChartDoesNotCreateMonsterRepresentation
+
+toeContextualFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+toeContextualFleetDischargedFibresRemainOutOfTarget =
+  ContextualTOE.fleetDischargedFibresRemainOutOfTarget
