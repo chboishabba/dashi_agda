@@ -826,3 +826,44 @@ toeCurrentLegalAuthorityDoesNotEstablishApplicability :
 toeCurrentLegalAuthorityDoesNotEstablishApplicability =
   CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
 
+------------------------------------------------------------------------
+-- Current max-cut + generic hyperfabric convergence.
+-- The joint owner reuses the current governance/fleet/Balaban/Ibrahim receipt.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutHyperfabricExact as CurrentHyper
+
+toeCurrentMaxCutHyperfabricReceipt :
+  CurrentHyper.TOECurrentMaxCutHyperfabricReceipt
+toeCurrentMaxCutHyperfabricReceipt =
+  CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
+
+toeCurrentHyperformNineCount :
+  CurrentHyper.Fabric.siteCount 3 2 ≡ 9
+toeCurrentHyperformNineCount =
+  CurrentHyper.currentHyperformNineCount
+
+toeCurrentHyperformTwentySevenCount :
+  CurrentHyper.Fabric.siteCount 3 3 ≡ 27
+toeCurrentHyperformTwentySevenCount =
+  CurrentHyper.currentHyperformTwentySevenCount
+
+toeCurrentHyperformEightyOneCount :
+  CurrentHyper.Fabric.siteCount 3 4 ≡ 81
+toeCurrentHyperformEightyOneCount =
+  CurrentHyper.currentHyperformEightyOneCount
+
+toeCurrentPadicPrefixCannotRecoverDiscardedDigit :
+  CurrentHyper.PadicPrefixRecovery → ⊥
+toeCurrentPadicPrefixCannotRecoverDiscardedDigit =
+  CurrentHyper.currentPadicPrefixCannotRecoverDiscardedDigit
+
+toeCurrentTwoDigitStreamCannotRecoverThird :
+  CurrentHyper.StreamThirdPrefixRecovery → ⊥
+toeCurrentTwoDigitStreamCannotRecoverThird =
+  CurrentHyper.currentTwoDigitStreamCannotRecoverThird
+
+toeCurrentFleet58DoesNotBecomeGate4SameObject :
+  CurrentHyper.Fleet58IsGate4SameObject → ⊥
+toeCurrentFleet58DoesNotBecomeGate4SameObject =
+  CurrentHyper.currentFleet58DoesNotBecomeGate4SameObject
