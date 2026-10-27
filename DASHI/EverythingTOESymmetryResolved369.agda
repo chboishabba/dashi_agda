@@ -43,6 +43,52 @@ toeGovernedLegalWorkflowZKPReceipt :
 toeGovernedLegalWorkflowZKPReceipt =
   LegalGovernance.canonicalGovernedLegalWorkflowZKPReceipt
 
+
+toeGovernedLegalWorkflowBoundary :
+  LegalGovernance.GovernedLegalWorkflowTOEBoundary
+toeGovernedLegalWorkflowBoundary =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
+
+toeWorkflowTaskCompletionDoesNotCreateTruth :
+  LegalGovernance.TaskCompletionCreatesTruth → ⊥
+toeWorkflowTaskCompletionDoesNotCreateTruth =
+  LegalGovernance.toeTaskCompletionDoesNotCreateTruth
+
+toeDatabaseCommitDoesNotCreateSemanticAuthority :
+  LegalGovernance.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeDatabaseCommitDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+toeAcceptedReviewDoesNotPayApplicability :
+  LegalGovernance.AcceptedStatusPaysApplicability → ⊥
+toeAcceptedReviewDoesNotPayApplicability =
+  LegalGovernance.toeAcceptedReviewDoesNotPayApplicability
+
+toeMatterAcceptanceDoesNotCreateTruth :
+  LegalGovernance.AcceptanceRoleCreatesTruth → ⊥
+toeMatterAcceptanceDoesNotCreateTruth =
+  LegalGovernance.toeMatterAcceptanceDoesNotCreateTruth
+
+toeCitationAloneDoesNotRealiseLegalRule :
+  LegalGovernance.CitationAloneRealisesLegalRule → ⊥
+toeCitationAloneDoesNotRealiseLegalRule =
+  LegalGovernance.toeCitationAloneDoesNotRealiseLegalRule
+
+toeSemanticMeetDoesNotProveLegalApplicability :
+  LegalGovernance.SemanticMeetAloneProvesLegalApplicability → ⊥
+toeSemanticMeetDoesNotProveLegalApplicability =
+  LegalGovernance.toeSemanticMeetDoesNotProveLegalApplicability
+
+toeControlEvidenceDoesNotCreateTruth :
+  LegalGovernance.ControlEvidenceCreatesTruth → ⊥
+toeControlEvidenceDoesNotCreateTruth =
+  LegalGovernance.toeControlEvidenceDoesNotCreateTruth
+
+toePassingControlDoesNotMeanCertified :
+  LegalGovernance.PassingControlMeansCertified → ⊥
+toePassingControlDoesNotMeanCertified =
+  LegalGovernance.toePassingControlDoesNotMeanCertified
+
 toeCaseySelectionDoesNotCreateWorldTruth :
   LegalGovernance.CaseySelectionCreatesWorldTruth → ⊥
 toeCaseySelectionDoesNotCreateWorldTruth =
