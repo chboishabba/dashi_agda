@@ -1166,6 +1166,41 @@ unifierTwoDigitStreamCannotRecoverThird =
   FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
 
 ------------------------------------------------------------------------
+-- Reuse existing byte-ABI and host execution boundary.
+-- A finite 27-state carrier and a Python uint8 receipt do not prove a
+-- Rust/CUDA/ROCm binding. Keep this boundary aligned with the TOE root.
+-- The original source modules own all proof terms.
+------------------------------------------------------------------------
+
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as TriadicHost
+
+unifierTriadicRustBindingStillUnpaid :
+  TriadicABI.rustU8BindingPaid TriadicABI.canonicalTriadicByteABIBoundary
+  ≡ false
+unifierTriadicRustBindingStillUnpaid = refl
+
+unifierTriadicHostRustBindingStillUnpaid :
+  TriadicHost.rustU8BindingPaid TriadicHost.currentU8RuntimeBoundary
+  ≡ false
+unifierTriadicHostRustBindingStillUnpaid = refl
+
+unifierTriadicHostByteDoesNotCreateDeviceByte :
+  TriadicHost.HostByteImpliesDeviceByte → ⊥
+unifierTriadicHostByteDoesNotCreateDeviceByte =
+  TriadicHost.hostByteDoesNotCreateDeviceByte
+
+unifierTriadicRuntimeSourceDoesNotCreateKernelCertification :
+  TriadicHost.RuntimeSourceImpliesKernelCertification → ⊥
+unifierTriadicRuntimeSourceDoesNotCreateKernelCertification =
+  TriadicHost.runtimeSourceDoesNotCreateKernelCertification
+
+unifierTriadicFiniteABIImpliesRustImpossible :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+unifierTriadicFiniteABIImpliesRustImpossible =
+  TriadicABI.abiDoesNotCreateRust
+
+------------------------------------------------------------------------
 -- Implement-A-to-D reuse-only TOE facade.
 ------------------------------------------------------------------------
 
