@@ -56,12 +56,15 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Nat.Base using (ℕ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
+import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
 
 ------------------------------------------------------------------------
 -- Same-owner equalities.
@@ -142,6 +145,32 @@ jointBalabanOSWightmanStillOpen =
   Balaban.balabanOSWightmanContinuumConstructionStillOpen
 
 ------------------------------------------------------------------------
+-- Canonical 58-field Gate-4 cutset boundary.
+--
+-- The count is exact.
+-- The cutset type is machine checked.
+-- Its inhabitants remain conditional.
+-- This surface does not discharge any of the 58 fields.
+------------------------------------------------------------------------
+
+gate4UnresolvedObligationCount : ℕ
+gate4UnresolvedObligationCount =
+  Counts.gate4ObligationCount
+
+gate4UnresolvedObligationCountIs58 :
+  gate4UnresolvedObligationCount ≡ 58
+gate4UnresolvedObligationCountIs58 =
+  Counts.gate4ObligationCountExact
+
+gate4CutsetDefinitionLevel : ProofLevel
+gate4CutsetDefinitionLevel =
+  Gate4.physicalClosureRound6CutsetDefinitionLevel
+
+gate4CutsetInhabitantsLevel : ProofLevel
+gate4CutsetInhabitantsLevel =
+  Gate4.physicalClosureRound6CutsetInhabitantsLevel
+
+------------------------------------------------------------------------
 -- Joint normalized receipt.
 ------------------------------------------------------------------------
 
@@ -184,6 +213,12 @@ record BalabanR559TOEMaxCutReceipt : Set where
     goal1MaximumCutCompiler : ProofLevel
     irreducibleSourceFamilyCutCompiler : ProofLevel
     criticalPathCompiler : ProofLevel
+
+    gate4UnresolvedCount : ℕ
+    gate4UnresolvedCountIs58 :
+      gate4UnresolvedCount ≡ 58
+    gate4DefinitionLevel : ProofLevel
+    gate4InhabitantsLevel : ProofLevel
 
     publishedContinuumPromotion : Bool
     publishedContinuumPromotionIsFalse :
@@ -256,6 +291,14 @@ canonicalBalabanR559TOEMaxCutReceipt = record
       R559.toeIrreducibleSourceFamilyCutCompilerLevel
   ; criticalPathCompiler =
       R559.toeCriticalPathCompilerLevel
+  ; gate4UnresolvedCount =
+      gate4UnresolvedObligationCount
+  ; gate4UnresolvedCountIs58 =
+      gate4UnresolvedObligationCountIs58
+  ; gate4DefinitionLevel =
+      gate4CutsetDefinitionLevel
+  ; gate4InhabitantsLevel =
+      gate4CutsetInhabitantsLevel
   ; publishedContinuumPromotion =
       R559.toeFlat4DContinuumTransferProvedHere
   ; publishedContinuumPromotionIsFalse =
@@ -334,7 +377,7 @@ canonicalBalabanR559ZKPFrame = record
   ; P-proposal =
       "Use this joint receipt as the TOE max-cut surface without merging theorem ownership."
   ; G-gap =
-      "Block-spin transfer, uniform KP absorption, OS/Wightman continuum construction, continuum mass gap, and Clay completion remain unpaid."
+      "The canonical 58-field Gate-4 cutset remains conditional. Block-spin transfer, uniform KP absorption, OS/Wightman continuum construction, continuum mass gap, and Clay completion remain unpaid."
   ; F-follow-up =
       "Require exact-head Agda verification and preserve the ESD and attribution firewalls."
   ; ownersExist = true
