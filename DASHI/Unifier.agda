@@ -313,3 +313,7 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+-- Reuse graphene fibre obstruction and source-bounded physical non-promotion.
+import DASHI.Unified.GraphenePhysicalNonPromotionTOEExact
+import DASHI.Unified.GraphenePhysicalNonPromotionTOEValidation
