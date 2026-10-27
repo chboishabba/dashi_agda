@@ -13,6 +13,8 @@ import DASHI.Physics.Foundations.TorqueTrialectic369Exact as Torque369
 import DASHI.Physics.Closure.SignedZeroTorsionReceipt as SignedZero
 import DASHI.Geometry.LorentzianLeviCivitaConditional as LeviCivita
 import DASHI.Physics.YangMills.YangMillsCizekEinsteinCartanClaimAuditExact as EinsteinCartanAudit
+import DASHI.Physics.YangMills.YangMillsPaperClaimAuditCarrierExact as PaperAudit
+import DASHI.Core.ScientificMechanismEvidenceBidiExact as Science
 import DASHI.Physics.POAMSScientificMechanismBoundaryExact as POAMS
 
 ------------------------------------------------------------------------
@@ -304,15 +306,15 @@ mirrorConditionalConnectionTorsionFreeWasAssumed = refl
 -- Reuse its original same-theory non-identity proof without renaming it
 -- as an empirical Kozyrev-mirror measurement.
 mirrorEinsteinCartanPureYMNonIdentity :
-  EinsteinCartanAudit.Audit.sourceTheory EinsteinCartanAudit.monographAudit
-  ≡ EinsteinCartanAudit.Audit.pureFourDimensionalYangMills → ⊥
+  PaperAudit.sourceTheory EinsteinCartanAudit.monographAudit
+  ≡ PaperAudit.pureFourDimensionalYangMills → ⊥
 mirrorEinsteinCartanPureYMNonIdentity =
   EinsteinCartanAudit.monographTheoryIsNotDefinitionallyPureYM
 
 -- The established angular-momentum comparison is imported from POAMS;
 -- preliminary POAMS data do not validate the mirror or a new coupling.
 mirrorAngularMomentumBaseline :
-  POAMS.S.ScientificMechanismReceipt
+  Science.ScientificMechanismReceipt
 mirrorAngularMomentumBaseline = POAMS.angularMomentumConservation
 
 ------------------------------------------------------------------------
