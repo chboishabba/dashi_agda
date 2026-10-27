@@ -495,3 +495,20 @@ toe369YangMillsGoal1C4LiteralSectorRecoveryLevel =
 toe369YangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 toe369YangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+-- Legal authority remains independent of matter workflow and semantic admission.
+toe369LegalCandidateIsNotAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+toe369LegalCandidateIsNotAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+
+toe369LegalValidityIsNotApplicability :
+  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
+toe369LegalValidityIsNotApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+toe369SemanticAdmissionIsNotLegalAuthority :
+  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+toe369SemanticAdmissionIsNotLegalAuthority =
+  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
