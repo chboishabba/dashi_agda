@@ -343,16 +343,16 @@ unifierYangMillsGoal1SameHNontrivialityLevel =
   YMGoal1TOE.goal1SameHNontrivialitySemanticBridgeLevel
 
 unifierYangMillsFlat4DContinuumStillOpen :
-  YMGoal1TOE.Continuum.flat4DContinuumTransferProvedHere ≡ false
+  YMGoal1TOE.flat4DContinuumTransferProvedHere ≡ false
 unifierYangMillsFlat4DContinuumStillOpen =
   YMGoal1TOE.flat4DContinuumTransferStillOpen
 
 unifierYangMillsContinuumMassGapStillNotPromoted :
-  YMGoal1TOE.Continuum.continuumMassGapPromoted ≡ false
+  YMGoal1TOE.continuumMassGapPromoted ≡ false
 unifierYangMillsContinuumMassGapStillNotPromoted =
   YMGoal1TOE.continuumMassGapStillNotPromoted
 
 unifierYangMillsClayStillNotPromoted :
-  YMGoal1TOE.Clay.clayYangMillsPromoted ≡ false
+  YMGoal1TOE.clayYangMillsPromoted ≡ false
 unifierYangMillsClayStillNotPromoted =
   YMGoal1TOE.clayYangMillsStillNotPromoted
