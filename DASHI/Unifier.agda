@@ -1054,12 +1054,12 @@ unifierContextualSemanticFractranZKPFrame =
   ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
 
 unifierContextualCoverageDoesNotCreateMonsterRepresentation :
-  ContextualTOE.MonsterBoundary.AutomaticCoverageMonsterRepresentationPromotion → ⊥
+  ContextualTOE.CoverageMonsterRepresentationPromotion → ⊥
 unifierContextualCoverageDoesNotCreateMonsterRepresentation =
   ContextualTOE.coverageDoesNotCreateMonsterRepresentation
 
 unifierContextualParetoChartDoesNotCreateMonsterRepresentation :
-  ContextualTOE.Pareto.ParetoTernaryChartCreatesMonsterRepresentation → ⊥
+  ContextualTOE.ParetoTernaryMonsterRepresentationPromotion → ⊥
 unifierContextualParetoChartDoesNotCreateMonsterRepresentation =
   ContextualTOE.paretoTernaryChartDoesNotCreateMonsterRepresentation
 
