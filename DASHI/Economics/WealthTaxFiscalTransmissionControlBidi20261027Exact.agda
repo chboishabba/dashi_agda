@@ -267,6 +267,56 @@ nextAssessmentAgainThree :
 nextAssessmentAgainThree = refl
 
 ------------------------------------------------------------------------
+-- AI/AUDIT RISK SIGNAL IS NOT TAXABLE WEALTH OR A LEGAL ASSESSMENT.
+-- Two profiles can have equal model output and distinct legally assumed
+-- assessed tax bases. Access to new lawful evidence MAY distinguish them.
+------------------------------------------------------------------------
+
+record ModelAuditCase : Set where
+  constructor model-audit-case
+  field
+    publicRiskSignal : Nat
+    legallyAssessedWealth : Nat
+open ModelAuditCase public
+
+noDueAuditCase : ModelAuditCase
+noDueAuditCase = model-audit-case 7 2
+
+someDueAuditCase : ModelAuditCase
+someDueAuditCase = model-audit-case 7 5
+
+auditSignal : ModelAuditCase → Nat
+auditSignal c = publicRiskSignal c
+
+auditedIllustrativeWealthLiability : ModelAuditCase → Nat
+auditedIllustrativeWealthLiability c =
+  Tax.hundredPercentWealthExcess 3
+    (Tax.owned-net-wealth (legallyAssessedWealth c))
+
+sameRiskSignal : auditSignal noDueAuditCase ≡ auditSignal someDueAuditCase
+sameRiskSignal = refl
+
+differentTaxableLiability :
+  auditedIllustrativeWealthLiability noDueAuditCase ≡
+  auditedIllustrativeWealthLiability someDueAuditCase → ⊥
+differentTaxableLiability ()
+
+riskFeatureLosesTaxBaseInformation :
+  INF.NonFactorabilityWitness
+    auditSignal auditedIllustrativeWealthLiability
+riskFeatureLosesTaxBaseInformation =
+  INF.nonFactorabilityWitness
+    noDueAuditCase someDueAuditCase
+    sameRiskSignal differentTaxableLiability
+
+riskSignalAloneIsNotTaxAuthority :
+  INF.FactorsThrough
+    auditSignal auditedIllustrativeWealthLiability → ⊥
+riskSignalAloneIsNotTaxAuthority =
+  INF.witnessRulesOutEveryFlatFactorisation
+    riskFeatureLosesTaxBaseInformation
+
+------------------------------------------------------------------------
 -- Non-promotion fences. This module makes no assertion about collection
 -- probabilities, fiscal multipliers, real companies, or achieved care.
 ------------------------------------------------------------------------
