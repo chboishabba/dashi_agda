@@ -84,3 +84,68 @@ fleetDischargedFibresStillCannotBeRetargeted :
   Fleet.FleetDischargedFibreRetargetPermission → ⊥
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
+
+
+------------------------------------------------------------------------
+-- Current frontier and typed continuum no-go agreement.
+------------------------------------------------------------------------
+
+toeCurrentGate4FrontierMatchesOwner :
+  TOE.toeCurrentGate4FrontierLedgerLevel
+  ≡ Owner.currentGate4FrontierLedgerLevel
+toeCurrentGate4FrontierMatchesOwner = refl
+
+unifierCurrentGate4FrontierMatchesOwner :
+  Unifier.unifierCurrentGate4FrontierLedgerLevel
+  ≡ Owner.currentGate4FrontierLedgerLevel
+unifierCurrentGate4FrontierMatchesOwner = refl
+
+unifiedCurrentGate4FrontierMatchesOwner :
+  Unified.unifiedCurrentGate4FrontierLedgerLevel
+  ≡ Owner.currentGate4FrontierLedgerLevel
+unifiedCurrentGate4FrontierMatchesOwner = refl
+
+toeFleetTargetSelectionMatchesOwner :
+  TOE.toeFleetFormalGapTargetSelected
+  ≡ Owner.fleetFormalGapTargetSelected
+toeFleetTargetSelectionMatchesOwner = refl
+
+unifierFleetTargetSelectionMatchesOwner :
+  Unifier.unifierFleetFormalGapTargetSelected
+  ≡ Owner.fleetFormalGapTargetSelected
+unifierFleetTargetSelectionMatchesOwner = refl
+
+unifiedFleetTargetSelectionMatchesOwner :
+  Unified.unifiedFleetFormalGapTargetSelected
+  ≡ Owner.fleetFormalGapTargetSelected
+unifiedFleetTargetSelectionMatchesOwner = refl
+
+toeBalabanContinuumNoGoReachable :
+  Owner.BalabanContinuumPromotion → ⊥
+toeBalabanContinuumNoGoReachable =
+  TOE.toeBalabanContinuumPromotionImpossible
+
+unifierBalabanContinuumNoGoReachable :
+  Owner.BalabanContinuumPromotion → ⊥
+unifierBalabanContinuumNoGoReachable =
+  Unifier.unifierBalabanContinuumPromotionImpossible
+
+unifiedBalabanContinuumNoGoReachable :
+  Owner.BalabanContinuumPromotion → ⊥
+unifiedBalabanContinuumNoGoReachable =
+  Unified.unifiedBalabanContinuumPromotionImpossible
+
+toeDepthContinuumNoGoReachable :
+  Owner.DepthContinuumPromotion → ⊥
+toeDepthContinuumNoGoReachable =
+  TOE.toeDepthContinuumPromotionImpossible
+
+unifierDepthContinuumNoGoReachable :
+  Owner.DepthContinuumPromotion → ⊥
+unifierDepthContinuumNoGoReachable =
+  Unifier.unifierDepthContinuumPromotionImpossible
+
+unifiedDepthContinuumNoGoReachable :
+  Owner.DepthContinuumPromotion → ⊥
+unifiedDepthContinuumNoGoReachable =
+  Unified.unifiedDepthContinuumPromotionImpossible
