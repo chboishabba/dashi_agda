@@ -154,6 +154,8 @@ jobs:
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda
             DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
