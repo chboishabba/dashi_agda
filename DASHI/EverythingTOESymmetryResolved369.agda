@@ -1752,3 +1752,79 @@ toeMillenniumPvsNPNotDerivedFromNonDescentGrammar :
     MillenniumResidual.canonicalPvsNPUniformNonDescentResearchBoundary ≡ false
 toeMillenniumPvsNPNotDerivedFromNonDescentGrammar =
   MillenniumResidual.millenniumPvsNPNotDerivedFromNonDescentGrammar
+
+
+------------------------------------------------------------------------
+-- Live Gate-4 frontier and Fleet target selection.
+------------------------------------------------------------------------
+
+toeCurrentGate4FrontierLedgerLevel : ProofLevel
+toeCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+toeCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+toeCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+toeFleetFormalGapTargetSelected : Bool
+toeFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+toeHistoricalGate4CountSelectedAsFleetTarget : Bool
+toeHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- R829-vector instantaneous snapshot and exact non-promotion boundary.
+------------------------------------------------------------------------
+
+toeNavierStokesInstantaneousVectorSnapshotClosed : Bool
+toeNavierStokesInstantaneousVectorSnapshotClosed =
+  NSClayTOE.instantaneousVectorSnapshotClosed
+
+toeNavierStokesInstantaneousVectorSnapshotClosedIsTrue :
+  toeNavierStokesInstantaneousVectorSnapshotClosed ≡ true
+toeNavierStokesInstantaneousVectorSnapshotClosedIsTrue =
+  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
+
+toeNavierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
+toeNavierStokesInstantaneousRepositoryRateStrictlyNegative =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
+
+toeNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
+  toeNavierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
+toeNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+toeNavierStokesRealFiniteODETransportClosed : Bool
+toeNavierStokesRealFiniteODETransportClosed =
+  NSClayTOE.realFiniteODETransportClosed
+
+toeNavierStokesRealFiniteODETransportStillOpen :
+  toeNavierStokesRealFiniteODETransportClosed ≡ false
+toeNavierStokesRealFiniteODETransportStillOpen =
+  NSClayTOE.realFiniteODETransportStillOpen
+
+toeNavierStokesUniversalR823IntegratedReserveRefuted : Bool
+toeNavierStokesUniversalR823IntegratedReserveRefuted =
+  NSClayTOE.universalR823IntegratedReserveRefuted
+
+toeNavierStokesUniversalR823IntegratedReserveStillUnrefuted :
+  toeNavierStokesUniversalR823IntegratedReserveRefuted ≡ false
+toeNavierStokesUniversalR823IntegratedReserveStillUnrefuted =
+  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
+
+toeNavierStokesInstantaneousSnapshotClayPromotion : Bool
+toeNavierStokesInstantaneousSnapshotClayPromotion =
+  NSClayTOE.instantaneousSnapshotClayPromotion
+
+toeNavierStokesInstantaneousSnapshotClayPromotionStillFalse :
+  toeNavierStokesInstantaneousSnapshotClayPromotion ≡ false
+toeNavierStokesInstantaneousSnapshotClayPromotionStillFalse =
+  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
