@@ -56,6 +56,7 @@ module DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact where
 -- Reject trust escapes.
 -- Reject ESD-path changes.
 -- Kernel-check exact heads before claiming formal verification.
+-- Stable verification base: f739af341145d927507d0c0a83fd9784e95ad5dd.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
