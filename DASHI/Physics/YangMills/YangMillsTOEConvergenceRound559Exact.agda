@@ -91,6 +91,8 @@ import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact a
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as Casimir
 import DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact as BetaFloor
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as Stress106
+import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress105
+import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as Stress112
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as GeneratedDensity132
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as StressScale135
 import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as CombinedAction141
@@ -129,6 +131,15 @@ open GeneratedDensity132 public using
 
 open StressScale135 public using
   ( stressSelectedDensityIndexIsUnifiedActionIndex
+  )
+
+open Stress105 public using
+  ( sourceDerivativeBelowExistingMarkedShell
+  )
+
+open Stress112 public using
+  ( stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
   )
 
 open R244 public using
@@ -369,6 +380,31 @@ toeMetricStressRepresentationCompilerLevel =
 toeLiteralMetricStressRepresentationLevel : ProofLevel
 toeLiteralMetricStressRepresentationLevel =
   Stress106.literalCMP116MetricStressRepresentationLevel
+
+
+toeStressFirstVariationMarkedShellBoundLevel : ProofLevel
+toeStressFirstVariationMarkedShellBoundLevel =
+  Stress105.cmp116StressReusesFirstGradientMarkedShellLevel
+
+toeLiteralStressMetricSourceCoordinateWeldLevel : ProofLevel
+toeLiteralStressMetricSourceCoordinateWeldLevel =
+  Stress105.literalCMP116MetricSourceCoordinateWeldLevel
+
+toeLiteralFirstVariationStressPairingLevel : ProofLevel
+toeLiteralFirstVariationStressPairingLevel =
+  Stress105.literalCMP116FirstVariationStressPairingLevel
+
+toeStressShellEnergyToHilbertCompilerLevel : ProofLevel
+toeStressShellEnergyToHilbertCompilerLevel =
+  Stress112.stressShellEnergyToHilbertCompilerLevel
+
+toeLiteralStressActivityEntropyInstantiationLevel : ProofLevel
+toeLiteralStressActivityEntropyInstantiationLevel =
+  Stress112.literalStressCMP116ActivityEntropyInstantiationLevel
+
+toeLiteralStressCoefficientEnergyShellPrefixLevel : ProofLevel
+toeLiteralStressCoefficientEnergyShellPrefixLevel =
+  Stress112.literalStressCoefficientEnergyIsShellPrefixLevel
 
 toeUnifiedGeneratedActionStressScaleCompilerLevel : ProofLevel
 toeUnifiedGeneratedActionStressScaleCompilerLevel =
