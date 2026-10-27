@@ -40,6 +40,33 @@ open YMTOE public using
   ; uniformRemainderBelowEveryCompactSimpleCoefficient
   )
 
+open YMTOE public using
+  ( SourceFamily
+  ; a1CurrentStepVariation
+  ; a2HistoryCoordinate
+  ; a3ProjectiveRepresentation
+  ; finiteT1AndPublishedOS
+  ; quantitativeT5CMP119Alignment
+  ; bWilsonWEXT
+  ; bSameHamiltonianEnergyDecay
+  ; actualGroupCompleteSource
+  ; densityToNormalizedFiniteMeasure
+  ; c0WilsonLocalObservable
+  ; c1MarkedCurvature
+  ; c2PhysicalRemainderTail
+  ; c3AFRecurrence
+  ; c4DensityAnchoredStress
+  ; CriticalFamily
+  ; a3SelectedRepresentation
+  ; t1FiniteOSSameFamily
+  ; t5QuantitativeSameFamily
+  ; b1SourceFirstWilsonWEXT
+  ; b2SameHamiltonian
+  ; g1ActualCompactSimple
+  ; h6MinimalWardNontriviality
+  )
+
+
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
   Spine.unifiedObjectInvariant
@@ -273,3 +300,18 @@ yangMillsTOEGoal1CompatibilityBRouteNotMandatory = refl
 yangMillsTOEGoal1ClayCompletionNotClaimed :
   YMTOE.toeGoal1ClayCompletionClaimed ≡ false
 yangMillsTOEGoal1ClayCompletionNotClaimed = refl
+
+
+------------------------------------------------------------------------
+-- Canonical R546/R558 family dispatch via R559.
+------------------------------------------------------------------------
+
+yangMillsTOEIrreducibleFamilyLevel :
+  SourceFamily → ProofLevel
+yangMillsTOEIrreducibleFamilyLevel =
+  YMTOE.toeIrreducibleFamilyLevel
+
+yangMillsTOECriticalFamilyLevel :
+  CriticalFamily → ProofLevel
+yangMillsTOECriticalFamilyLevel =
+  YMTOE.toeCriticalFamilyLevel
