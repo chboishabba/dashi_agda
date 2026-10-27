@@ -106,6 +106,9 @@ import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exa
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
 import DASHI.Physics.Closure.YMClayPromotionBoundary as Promotion
 import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as ContinuumBoundary
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR413FourStageConstructorExact as TwoWilsonR413
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR556CompletionExact as TwoWilsonR556
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonGeneralGeometricTrajectoryExact as TwoWilsonGeneral
 
 
 ------------------------------------------------------------------------
@@ -155,6 +158,41 @@ open BetaFloor public using
   ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
   ; uniformRemainderBelowEveryCompactSimpleCoefficient
   )
+
+------------------------------------------------------------------------
+-- Literal two-Wilson marked localization.
+--
+-- Reuse the current source-native constructors.
+-- R413 removes the post-hoc R410 replay seam.
+-- R556 is the finite covariance consumer used by the critical route.
+-- The general geometric family removes the artificial quarter/half constants
+-- when a source-native amplitude and ratio are available.
+------------------------------------------------------------------------
+
+open TwoWilsonR413 public
+  using (LiteralTwoWilsonR413FourStageSource)
+  renaming
+    ( asCanonicalTwiceMarkedFourStage
+        to toeLiteralTwoWilsonR413ToR444
+    )
+
+open TwoWilsonR556 public
+  using (LiteralTwoWilsonQuarterDyadicFamily)
+  renaming
+    ( asR556
+        to toeLiteralTwoWilsonQuarterDyadicToR556
+    ; finiteCovarianceBelowCanonicalDyadicShell
+        to toeLiteralTwoWilsonFiniteCovarianceBelowCanonicalDyadicShell
+    )
+
+open TwoWilsonGeneral public
+  using (LiteralTwoWilsonGeneralGeometricFamily)
+  renaming
+    ( finiteCovarianceGeneralGeometricBound
+        to toeLiteralTwoWilsonFiniteCovarianceGeneralGeometricBound
+    ; asQuantitativeCorrelationDecayTrajectory
+        to toeLiteralTwoWilsonGeneralGeometricTrajectory
+    )
 
 ------------------------------------------------------------------------
 -- Balaban RG density and regular-E localization.
