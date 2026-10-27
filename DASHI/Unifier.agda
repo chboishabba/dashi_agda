@@ -2,6 +2,7 @@ module DASHI.Unifier where
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 import DASHI.Unified.YMBlockDMaxCutTOEExact as YMBlockD
+import DASHI.Unified.YMCMP119ResidualWeldTOEExact as YMResidualWeld
 import DASHI.Unified.YMBalabanRGPhysicalBoundaryTOEExact as YMBoundary
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -105,6 +106,42 @@ unifierPhysicalBoundaryClayStillNotPromoted :
 unifierPhysicalBoundaryClayStillNotPromoted =
   YMBoundary.toeBoundaryClayYangMillsPromotedIsFalse
 
+
+------------------------------------------------------------------------
+-- Normalized CMP119 residual-weld source frontier.
+------------------------------------------------------------------------
+
+unifierYMResidualWeldCompilerLevel : ProofLevel
+unifierYMResidualWeldCompilerLevel =
+  YMResidualWeld.toeResidualWeldCompilerLevel
+
+unifierYMRegularEComponentPeriodicSupportDictionaryLevel : ProofLevel
+unifierYMRegularEComponentPeriodicSupportDictionaryLevel =
+  YMResidualWeld.toeRegularEComponentPeriodicSupportDictionaryLevel
+
+unifierYMRegularEOneSidedActivityReflectionLevel : ProofLevel
+unifierYMRegularEOneSidedActivityReflectionLevel =
+  YMResidualWeld.toeRegularEOneSidedActivityReflectionLevel
+
+unifierYMRegularECrossingKernelRPLevel : ProofLevel
+unifierYMRegularECrossingKernelRPLevel =
+  YMResidualWeld.toeRegularECrossingKernelRPLevel
+
+unifierYMROperationPublishedPolymerDictionaryLevel : ProofLevel
+unifierYMROperationPublishedPolymerDictionaryLevel =
+  YMResidualWeld.toeROperationPublishedPolymerDictionaryLevel
+
+unifierYMBoundaryPublishedPolymerDictionaryLevel : ProofLevel
+unifierYMBoundaryPublishedPolymerDictionaryLevel =
+  YMResidualWeld.toeBoundaryPublishedPolymerDictionaryLevel
+
+unifierYMCommonERBPeriodicSupportToSelectedShellCarrierLevel : ProofLevel
+unifierYMCommonERBPeriodicSupportToSelectedShellCarrierLevel =
+  YMResidualWeld.toeCommonERBPeriodicSupportToSelectedShellCarrierLevel
+
+unifierYMFullResidualEqualsSelectedFiniteShellTailLevel : ProofLevel
+unifierYMFullResidualEqualsSelectedFiniteShellTailLevel =
+  YMResidualWeld.toeFullResidualEqualsSelectedFiniteShellTailLevel
 
 ------------------------------------------------------------------------
 -- Legacy carrier surface starts below.
