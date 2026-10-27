@@ -859,3 +859,32 @@ toeCurrentFleet58CannotPromoteToGate4SameObject :
   CurrentMaxCut.Fleet58IsGate4SameObject → ⊥
 toeCurrentFleet58CannotPromoteToGate4SameObject =
   CurrentMaxCut.fleet58DoesNotBecomeGate4SameObject
+
+------------------------------------------------------------------------
+-- Direct governed workflow and observer future-safety firewalls.
+------------------------------------------------------------------------
+
+toeCurrentTaskCompletionDoesNotCreateTruth :
+  CurrentMaxCut.Operational.TaskCompletionCreatesTruth → ⊥
+toeCurrentTaskCompletionDoesNotCreateTruth =
+  CurrentMaxCut.taskCompletionCannotCreateTruth
+
+toeCurrentAcceptedReviewDoesNotPayApplicability :
+  CurrentMaxCut.Review.AcceptedStatusPaysApplicability → ⊥
+toeCurrentAcceptedReviewDoesNotPayApplicability =
+  CurrentMaxCut.acceptedReviewCannotPayApplicability
+
+toeCurrentCitationDoesNotRealiseLegalRule :
+  CurrentMaxCut.SourceRule.CitationAloneRealisesLegalRule → ⊥
+toeCurrentCitationDoesNotRealiseLegalRule =
+  CurrentMaxCut.citationCannotRealiseLegalRule
+
+toeCurrentStaticRefinementDoesNotCreateDynamicSafety :
+  CurrentMaxCut.Frozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+toeCurrentStaticRefinementDoesNotCreateDynamicSafety =
+  CurrentMaxCut.staticObserverSeparationStillDoesNotCreateDynamicSafety
+
+toeCurrentProvenanceDoesNotCreateTruth :
+  CurrentMaxCut.Frozen.ProvenanceAxisCreatesTruthPermission → ⊥
+toeCurrentProvenanceDoesNotCreateTruth =
+  CurrentMaxCut.provenanceAxisStillDoesNotCreateTruth
