@@ -280,3 +280,13 @@ scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence :
   SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
 scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence =
   SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
+
+
+------------------------------------------------------------------------
+-- SCALE Evidence Review ZKP frame.
+------------------------------------------------------------------------
+
+scaleEvidenceReviewTOEZKPFrame :
+  SCALEReview.SCALEEvidenceReviewTOEZKPFrame
+scaleEvidenceReviewTOEZKPFrame =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
