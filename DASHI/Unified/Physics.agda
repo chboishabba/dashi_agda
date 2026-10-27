@@ -562,3 +562,39 @@ navierStokesSharedWeightedClayPromotionStillFalse :
   navierStokesSharedWeightedClayPromotion ≡ false
 navierStokesSharedWeightedClayPromotionStillFalse =
   NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+navierStokesContinuumBKMPassageConstructed : Bool
+navierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+navierStokesContinuumBKMPassageStillOpen :
+  navierStokesContinuumBKMPassageConstructed ≡ false
+navierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+navierStokesAllDataBridgeConstructed : Bool
+navierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+navierStokesAllDataBridgeStillOpen :
+  navierStokesAllDataBridgeConstructed ≡ false
+navierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+navierStokesSubmissionPacketReady : Bool
+navierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+navierStokesSubmissionPacketStillNotReady :
+  navierStokesSubmissionPacketReady ≡ false
+navierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+navierStokesClayEligible : Bool
+navierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+navierStokesClayEligibilityStillFalse :
+  navierStokesClayEligible ≡ false
+navierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
