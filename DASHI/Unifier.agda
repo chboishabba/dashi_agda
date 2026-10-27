@@ -429,3 +429,45 @@ unifierYangMillsSelectedBSourceDecayCompilerLevel =
 unifierYangMillsPinnedCStressSameHamiltonianCompilerLevel : ProofLevel
 unifierYangMillsPinnedCStressSameHamiltonianCompilerLevel =
   YMTOE.toePinnedConcreteStressSameHamiltonianAdapterLevel
+
+
+------------------------------------------------------------------------
+-- Later preferred A/B/C convergence aliases.
+------------------------------------------------------------------------
+
+unifierYangMillsPinnedRealBPostCoordinateCompilerLevel : ProofLevel
+unifierYangMillsPinnedRealBPostCoordinateCompilerLevel =
+  YMTOE.toePinnedRealBPostCoordinateCompilerLevel
+
+unifierYangMillsR415ToContinuumPhysicalClusteringCompilerLevel : ProofLevel
+unifierYangMillsR415ToContinuumPhysicalClusteringCompilerLevel =
+  YMTOE.toeR415ToContinuumPhysicalClusteringCompilerLevel
+
+unifierYangMillsSameFamilyContinuumCoreRecoveryCompilerLevel : ProofLevel
+unifierYangMillsSameFamilyContinuumCoreRecoveryCompilerLevel =
+  YMTOE.toeSameFamilyContinuumCoreRecoveryCompilerLevel
+
+unifierYangMillsPreferredSameFamilyMeasureCompilerLevel : ProofLevel
+unifierYangMillsPreferredSameFamilyMeasureCompilerLevel =
+  YMTOE.toePreferredSameFamilyMeasureCompilerLevel
+
+unifierYangMillsWeakMeasureFullConvergenceLevel : ProofLevel
+unifierYangMillsWeakMeasureFullConvergenceLevel =
+  YMTOE.toeWeakMeasureFullConvergenceLevel
+
+unifierYangMillsWeakMeasurePreGapCoreCompilerLevel : ProofLevel
+unifierYangMillsWeakMeasurePreGapCoreCompilerLevel =
+  YMTOE.toeWeakMeasurePreGapCoreCompilerLevel
+
+unifierYangMillsPinnedLiteralStressAttachmentCompilerLevel : ProofLevel
+unifierYangMillsPinnedLiteralStressAttachmentCompilerLevel =
+  YMTOE.toePinnedLiteralStressAttachmentCompilerLevel
+
+unifierYangMillsPinnedGRQFTStressExportLevel : ProofLevel
+unifierYangMillsPinnedGRQFTStressExportLevel =
+  YMTOE.toePinnedGRQFTStressExportLevel
+
+unifierYangMillsGRQFTStressWeldNotPromoted :
+  YMTOE.toeGRQFTStressWeldPromoted ≡ false
+unifierYangMillsGRQFTStressWeldNotPromoted =
+  YMTOE.toeGRQFTStressWeldPromotedIsFalse
