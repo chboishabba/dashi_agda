@@ -48,3 +48,28 @@ record ReverseClosureObligation : Set where
     whatItCannotPromote : String
 
 open ReverseClosureObligation public
+
+
+------------------------------------------------------------------------
+-- Generic observation-to-latent-state non-promotion.
+--
+-- A finite observable may constrain a latent state.
+-- It does not identify the complete latent state without a domain producer.
+
+data FiniteObservationCreatesFullLatentState : Set where
+
+finiteObservationDoesNotCreateFullLatentState :
+  FiniteObservationCreatesFullLatentState → ⊥
+finiteObservationDoesNotCreateFullLatentState ()
+
+data SameObservationCreatesSameLatentState : Set where
+
+sameObservationDoesNotCreateSameLatentState :
+  SameObservationCreatesSameLatentState → ⊥
+sameObservationDoesNotCreateSameLatentState ()
+
+data InferenceCreatesDirectMeasurement : Set where
+
+inferenceDoesNotCreateDirectMeasurement :
+  InferenceCreatesDirectMeasurement → ⊥
+inferenceDoesNotCreateDirectMeasurement ()
