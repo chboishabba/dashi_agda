@@ -349,26 +349,6 @@ unifiedNavierStokesBM2ZKPFrame =
 -- Typed Balaban continuum and Fleet target aggregate aliases.
 ------------------------------------------------------------------------
 
-unifiedBalabanContinuumLimitReceipt :
-  BalabanRGTOE.BalabanContinuumLimitReceipt
-unifiedBalabanContinuumLimitReceipt =
-  BalabanRGTOE.balabanContinuumLimitReceipt
-
-unifiedBalabanContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-unifiedBalabanContinuumLimitPromotionImpossible =
-  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
-
-unifiedDepthContinuumLimitReceipt :
-  BalabanRGTOE.DepthContinuumLimitReceipt
-unifiedDepthContinuumLimitReceipt =
-  BalabanRGTOE.depthContinuumLimitReceipt
-
-unifiedDepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-unifiedDepthContinuumLimitPromotionImpossible =
-  BalabanRGTOE.depthContinuumLimitPromotionImpossible
-
 unifiedFleetDischargedCoreKnowledgeFibres : ℕ
 unifiedFleetDischargedCoreKnowledgeFibres =
   FleetGapTOE.dischargedCoreKnowledgeFibres
@@ -398,14 +378,6 @@ unifiedFleetUnformalisedFormalGapsIs58 :
   unifiedFleetUnformalisedFormalGaps ≡ 58
 unifiedFleetUnformalisedFormalGapsIs58 =
   FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
-
-unifiedFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-  ≡ true
-unifiedFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
-
 
 ------------------------------------------------------------------------
 -- Fleet named-manifest acquisition boundary.
