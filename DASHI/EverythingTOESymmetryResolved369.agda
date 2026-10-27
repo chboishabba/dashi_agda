@@ -21,23 +21,17 @@ import DASHI.Unified.GRQuantumProofTermRegression
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 
 toeBalabanRGBlockSpinTransferStillOpen :
-  BalabanRGTOE.RGFrontier.balabanBlockSpinTransferProved
-    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+  BalabanRGTOE.balabanRGBlockSpinTransferOpenFlag ≡ false
 toeBalabanRGBlockSpinTransferStillOpen =
   BalabanRGTOE.balabanRGBlockSpinTransferStillOpen
 
 toeBalabanRGContinuumConstructionStillOpen :
-  BalabanRGTOE.RGFrontier.continuumYangMillsConstructedHere
-    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+  BalabanRGTOE.balabanRGContinuumConstructionOpenFlag ≡ false
 toeBalabanRGContinuumConstructionStillOpen =
   BalabanRGTOE.balabanRGContinuumConstructionStillOpen
 
 toeBalabanRGClayPromotionStillFalse :
-  BalabanRGTOE.RGFrontier.clayYangMillsPromoted
-    BalabanRGTOE.RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
-  ≡ false
+  BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
 toeBalabanRGClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
