@@ -613,6 +613,21 @@ toePNFKluverFormDoesNotPromoteRecoveredMemory =
 toePNFPsychogeographyWebIdentifierKind =
   PNFSource.psychogeographyWebIdentifierKind
 
+toePNFIdenticalWordsDoNotPayPredicate =
+  PNFSource.identicalWordsDoNotPayPredicate
+
+toePNFCommonFingerprintDoesNotCreateTruth =
+  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
+
+toePNFPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+toePNFRepetitionDoesNotCreateIndependentEvidence =
+  PNFSource.repetitionDoesNotCreateIndependentEvidence
+
+toePNFCommonSourceDoesNotEraseEvidence =
+  PNFSource.commonSourceDoesNotEraseEvidence
+
 ------------------------------------------------------------------------
 -- PNF-distilled fail-closed reuse aliases.
 -- Exact proof authority remains in the imported native owners.
