@@ -13,6 +13,7 @@ import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Unified.CarrierGrammar as CarrierGrammar
 import DASHI.Unified.ChemistrySupervoxel as ChemistrySupervoxel
 import DASHI.Unified.CrossScaleMatterPhysics as CrossScaleMatterPhysics
+import DASHI.Unified.E8ExceptionalActorTOECompatibilityExact as E8ActorTOE
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
@@ -104,3 +105,18 @@ import DASHI.Physics.Foundations.Round5FullBoundary as Round5
       Round5.Round5FullBoundary
         Round5.canonicalRound5FullBoundary
         "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
+
+------------------------------------------------------------------------
+-- Exceptional finite boundary reuse.
+------------------------------------------------------------------------
+
+open E8ActorTOE public using
+  ( toeE8RootEnumerationPromotionBoundary
+  ; toeE8UpstreamCompleteReceiptPromotionAudit
+  ; toeE8UpstreamPromotionStillFalse
+  ; toeMonster53ActorFrontier
+  ; toeArithmetic143DoesNotCreateSuzukiSubmodule
+  ; toeCentralC3ResidualDoesNotCreateNormalizerResidual
+  ; toeCarrier53DoesNotCreateNormalizerAction
+  ; toeExceptional53ArithmeticDoesNotCreateMonsterIntertwiner
+  )
