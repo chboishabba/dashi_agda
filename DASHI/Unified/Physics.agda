@@ -116,3 +116,38 @@ yangMillsTOEHardAnalyticLemmaUpperCountIsSix :
   yangMillsTOEHardAnalyticLemmaUpperCount ≡ 6
 yangMillsTOEHardAnalyticLemmaUpperCountIsSix =
   YMTOE.toeHardAnalyticLemmaUpperCountIsSix
+
+
+------------------------------------------------------------------------
+-- Canonical Yang-Mills scale-density-stress convergence.
+------------------------------------------------------------------------
+
+yangMillsTOEBetaDrivenSourceFlowLevel : ProofLevel
+yangMillsTOEBetaDrivenSourceFlowLevel =
+  YMTOE.toeBetaDrivenSourceFlowLevel
+
+yangMillsTOEBetaHistorySameStateCouplingLevel : ProofLevel
+yangMillsTOEBetaHistorySameStateCouplingLevel =
+  YMTOE.toeBetaHistorySameStateCouplingLevel
+
+yangMillsTOECanonicalCompleteDensityLevel : ProofLevel
+yangMillsTOECanonicalCompleteDensityLevel =
+  YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
+
+yangMillsTOEStressScaleCompilerLevel : ProofLevel
+yangMillsTOEStressScaleCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
+
+yangMillsTOEStrictCasimirCarrierLevel : ProofLevel
+yangMillsTOEStrictCasimirCarrierLevel =
+  YMTOE.toeStrictCasimirCarrierCompilerLevel
+
+yangMillsTOEOSWightmanContinuumBlocked :
+  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
+yangMillsTOEOSWightmanContinuumBlocked =
+  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+
+yangMillsTOETerminalPromotionBlocked :
+  YMTOE.toeTerminalPromotion ≡ false
+yangMillsTOETerminalPromotionBlocked =
+  YMTOE.toeTerminalPromotionIsFalse
