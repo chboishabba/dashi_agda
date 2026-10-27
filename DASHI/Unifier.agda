@@ -1,4 +1,9 @@
 module DASHI.Unifier where
+import DASHI.ComputerScience.TekumDASHIRoundingAssemblyExact
+import DASHI.ComputerScience.TekumDASHIRoundingBoundaryExact as TekumRoundingTOE
+import DASHI.ComputerScience.TekumProposition5FiniteNearestNoGoExact as TekumP5
+import DASHI.ComputerScience.TekumRawNearestCorrectionExact as TekumRaw
+import DASHI.ComputerScience.TekumNearestNoDoubleRoundingExact as TekumNoDouble
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1649,3 +1654,32 @@ toeFleetNumericABIRequiresIndependentEvidence :
   FleetGapTOE.SpectralNumericABIPromotion → ⊥
 toeFleetNumericABIRequiresIndependentEvidence =
   FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+------------------------------------------------------------------------
+-- Canonical Tékum exact-nearest / raw-rounding non-promotion convergence.
+------------------------------------------------------------------------
+
+unifierTekumDASHIRoundingBoundary :
+  TekumRoundingTOE.TekumDASHIRoundingBoundary
+unifierTekumDASHIRoundingBoundary =
+  TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary
+
+unifierTekumHunholdFiniteRepairImpossible :
+  TekumP5.RawTruncationNearestOnFiniteClosure → ⊥
+unifierTekumHunholdFiniteRepairImpossible =
+  TekumRoundingTOE.hunholdFiniteRepairStillRefuted
+
+unifierTekumRadiusOneRawCorrectionImpossible :
+  TekumRaw.UniformRadiusOneRawCorrection → ⊥
+unifierTekumRadiusOneRawCorrectionImpossible =
+  TekumRoundingTOE.rawRadiusOneStillRefuted
+
+unifierTekumNoDoubleFinalEqualityImpossible :
+  TekumNoDouble.twoStageFinal8 ≡ TekumNoDouble.directFinal8 → ⊥
+unifierTekumNoDoubleFinalEqualityImpossible =
+  TekumNoDouble.universalNoDoubleRoundingRefuted
+
+unifierTekumNearestExistenceStillOpen :
+  TekumRoundingTOE.nearestExistencePaid
+    TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary ≡ false
+unifierTekumNearestExistenceStillOpen = refl
