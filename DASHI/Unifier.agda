@@ -682,3 +682,22 @@ open MaxCutTOE public using
   ; literalCFFITheoremWasNotInvented
   ; esdSurfaceWasNotEdited
   )
+
+------------------------------------------------------------------------
+-- Exact non-factorability: loss cannot be repaired by recharting.
+-- Original theorem ownership remains with IntersectionalNonFactorability.
+------------------------------------------------------------------------
+
+open import Data.Empty using (⊥)
+import DASHI.Core.IntersectionalNonFactorability as RepoStateNonFactorUnifier
+
+unifierRechartCannotRecoverErasedPhenomenon :
+  ∀ {Recharted : Set} →
+  (rechart : RepoStateNonFactorUnifier.FlatSingleAxis → Recharted) →
+  RepoStateNonFactorUnifier.FactorsThrough
+    (λ state → rechart (RepoStateNonFactorUnifier.flatProjection state))
+    RepoStateNonFactorUnifier.relationalOutcome →
+  ⊥
+unifierRechartCannotRecoverErasedPhenomenon rechart =
+  RepoStateSpaceTOE.rechartCannotRecoverErasedPhenomenon
+    rechart RepoStateSpaceTOE.canonicalIntersectionalCollision
