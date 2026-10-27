@@ -53,10 +53,51 @@ regularESourceClosureRemainsOpen :
 regularESourceClosureRemainsOpen =
   TOE.toeRegularEPhysicalSourceClosureIsFalse
 
+sourceNativeRegularEProjectionCompilerIsChecked :
+  TOE.toePublishedFlowToRegularEProjectionCompilerLevel ≡ machineChecked
+sourceNativeRegularEProjectionCompilerIsChecked = refl
+
+regularESection2PredicateCompilerIsChecked :
+  TOE.toeRegularESection2PredicateCompilerLevel ≡ machineChecked
+regularESection2PredicateCompilerIsChecked = refl
+
+regularELocalizationSourceIsImported :
+  TOE.toeCMP119RegularELocalizationSourceLevel ≡ standardImported
+regularELocalizationSourceIsImported = refl
+
+regularELocalizationCarrierRemainsConditional :
+  TOE.toeLiteralCMP119RegularELocalizationCarrierLevel ≡ conditional
+regularELocalizationCarrierRemainsConditional = refl
+
+concreteELocalizationSourceWitnessRemainsConditional :
+  TOE.toeConcreteELocalizationSourceWitnessLevel ≡ conditional
+concreteELocalizationSourceWitnessRemainsConditional = refl
+
 stressRouteDoesNotPromoteClay :
   TOE.toeStressRouteClayPromotion ≡ false
 stressRouteDoesNotPromoteClay =
   TOE.toeStressRouteClayPromotionIsFalse
+
+currentHardAnalyticCutsetIsSix :
+  TOE.toeHardAnalyticLemmaUpperCount ≡ 6
+currentHardAnalyticCutsetIsSix =
+  TOE.toeHardAnalyticLemmaUpperCountIsSix
+
+casimirFloorCompilerIsChecked :
+  TOE.toeCompactSimpleUniversalCasimirFloorLevel ≡ machineChecked
+casimirFloorCompilerIsChecked = refl
+
+stressChargeCutoffRemovalCompilerIsChecked :
+  TOE.toeStressChargeLocalCoreCutoffRemovalLevel ≡ machineChecked
+stressChargeCutoffRemovalCompilerIsChecked = refl
+
+literalWilsonFPHaarLeafRemainsConditional :
+  TOE.toeLiteralWilsonFPHaarFourJointOrbitHalfEnclosuresLevel ≡ conditional
+literalWilsonFPHaarLeafRemainsConditional = refl
+
+physicalStressWardLeafRemainsConditional :
+  TOE.toePhysicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel ≡ conditional
+physicalStressWardLeafRemainsConditional = refl
 
 clayYangMillsNotPromoted :
   TOE.toeClayYangMillsPromoted ≡ false
