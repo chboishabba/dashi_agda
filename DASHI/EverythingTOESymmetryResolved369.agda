@@ -1,6 +1,6 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false)
 open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
@@ -34,6 +34,7 @@ toeKernelProofDoesNotEstablishSourceSemantics =
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
 
 
 ------------------------------------------------------------------------
