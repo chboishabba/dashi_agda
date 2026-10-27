@@ -2,13 +2,79 @@ name: toe-symmetry-resolved-369
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
+      - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalLiteralRateSourceRound438Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1SameHNontrivialityRound439Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116VariableDomainPreferredR415Round440Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429RootedTraceCountingRound441Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/**'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawDbNativeCorpusCompilerRegression.agda'
+      - 'DASHI/Cognition/PNF/SensibLawDbNativeCorpusCompilerExact.agda'
+      - 'DASHI/Unified/PNFSourceBoundaryTOEExact.agda'
+      - 'DASHI/Unified/PNFSourceBoundaryTOEValidation.agda'
+      - 'DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda'
+      - 'DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda'
+      - 'tests/test_pnf_distilled_nonpromotion_toe.py'
+      - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
+      - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
+      - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
+      - 'DASHI/Interop/SLRReviewPromoteAbstainConsumerExact.agda'
+      - 'DASHI/Interop/SLRRuntimeValidationHandoffExact.agda'
+      - 'DASHI/Interop/SLRValidationRoadmapPromotionExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
+      - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
+      - 'tests/test_governed_legal_workflow_toe_convergence.py'
+      - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/BalabanRGTOERegression.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalLiteralRateSourceRound438Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1SameHNontrivialityRound439Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116VariableDomainPreferredR415Round440Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429RootedTraceCountingRound441Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
+      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
+      - 'DASHI/Unified/PNFSourceBoundaryTOEExact.agda'
+      - 'DASHI/Unified/PNFSourceBoundaryTOEValidation.agda'
+      - 'DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda'
+      - 'DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda'
+      - 'tests/test_pnf_distilled_nonpromotion_toe.py'
+      - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
       - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
       - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
+      - 'DASHI/Interop/SLRReviewPromoteAbstainConsumerExact.agda'
+      - 'DASHI/Interop/SLRRuntimeValidationHandoffExact.agda'
+      - 'DASHI/Interop/SLRValidationRoadmapPromotionExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
+      - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
+      - 'tests/test_governed_legal_workflow_toe_convergence.py'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -22,6 +88,58 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install DASHI repository referee
+        run: python -m pip install -e './tools/agda_preflight[test,mcp]'
+
+      - name: Referee TOE reuse and lineage
+        run: |
+          dashi-repo index --root .
+          dashi-repo diagnose DASHI/Unified/BalabanRGTOERegression.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/Physics.agda --root .
+          dashi-repo related literalRound440VariableDomainCMP116SourceLevel --root . --limit 20
+          dashi-repo related literalRound443FiniteWilsonActionInvarianceLevel --root . --limit 20
+          dashi-repo related literalRound444PeterWeylWilsonIdentificationLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 TOE variable domain Peter Weyl compactness stress non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
+          dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
+          dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo related BalabanRGTOEReceipt --root .
+          dashi-repo discover 'Balaban regular-E localization Casimir stress RG' --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+          dashi-repo diagnose DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda --root .
+          dashi-repo related canonicalGovernedLegalWorkflowTOEBoundary --root . --limit 20
+          dashi-repo related canonicalGovernedLegalWorkflowTOEInvariantHandoff --root . --limit 20
+          dashi-repo related canonicalGovernedLegalWorkflowIntrospectiveZKPFrame --root . --limit 20
+          dashi-repo related exactReuseDoesNotCreateSemanticAdmission --root . --limit 20
+          dashi-repo related exactReuseDoesNotCreateSemanticAuthority --root . --limit 20
+          dashi-repo discover 'SensibLaw exact compiler product reuse semantic admission authority applicability identity truth' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompiler --root .
+          dashi-repo discover 'SensibLaw governance legal workflow non promotion TOE' --root . --limit 40
+          dashi-repo discover 'IntrospectiveProofLoop ZKPFrame governed legal workflow TOE Unified Everything' --root . --limit 40
+          dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
+          dashi-repo diagnose DASHI/Unified/PNFSourceBoundaryTOEExact.agda --root .
+          dashi-repo related canonicalPNFSourceBoundaryTOEReceipt --root . --limit 20
+          dashi-repo discover 'PNF source boundary diagnostic proxy fungal species evidence Kluver form constant web identifier' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.PNFSourceBoundaryTOE --root .
+          dashi-repo diagnose DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda --root .
+          dashi-repo related canonicalPNFDistilledNonPromotionBoundary --root . --limit 20
+          dashi-repo related canonicalPNFDistilledReuseZKPReceipt --root . --limit 20
+          dashi-repo discover 'PNF distilled diagnostic check cobweb fungal web publication identifier non promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.PNFDistilledNonPromotionTOE --root .
+
+      - name: Verify governed legal-workflow convergence
+        run: python -m pytest -q tests/test_governed_legal_workflow_toe_convergence.py
+
+      - name: Verify PNF distilled non-promotion convergence
+        run: python -m pytest -q tests/test_pnf_distilled_nonpromotion_toe.py
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -29,11 +147,59 @@ jobs:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
 
+      - name: Preflight governed legal-workflow TOE path
+        run: |
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Cognition/PNF/SensibLawDbNativeCorpusCompilerExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Cognition/PNF/SensibLawDbNativeCorpusCompilerRegression.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFSourceBoundaryTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFSourceBoundaryTOEValidation.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+
+      - name: Reject ESD surface changes
+        shell: bash
+        run: |
+          git fetch origin master --depth=1
+          changed="$(git diff --name-only origin/master...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)' ; then
+            echo "ESD surface change detected" >&2
+            exit 1
+          fi
+
       - name: Reject trust escapes
         run: |
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+            DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
+            DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
@@ -43,7 +209,22 @@ jobs:
             fi
           done
 
-      - name: Kernel-check TOE symmetry-resolved aggregate
+      - name: Kernel-check connected TOE graph
         run: |
           agda --version
-          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          modules=(
+            DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/Physics.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done
