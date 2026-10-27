@@ -1,7 +1,6 @@
 module DASHI.Unifier where
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
-import DASHI.Unified.SensibLawGovernanceTOERegression as SensibLawTOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -460,29 +459,3 @@ unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
 unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 unifierYangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
-
-
-------------------------------------------------------------------------
--- SensibLaw / legal-follow governance compatibility exports.
--- Unifier consumes the exact theorem owner. It creates no legal authority.
-------------------------------------------------------------------------
-
-unifierSensibLawLegalAuthorityRemainsClosed :
-  SensibLawTOE.legalAuthorityPromoted ≡ false
-unifierSensibLawLegalAuthorityRemainsClosed =
-  SensibLawTOE.legalAuthorityRemainsClosed
-
-unifierSensibLawGovernancePostconditions :
-  SensibLawTOE.SensibLawGovernanceTOEPostconditions
-unifierSensibLawGovernancePostconditions =
-  SensibLawTOE.canonicalSensibLawGovernanceTOEPostconditions
-
-unifierSensibLawGovernanceZKPFrame :
-  SensibLawTOE.SensibLawGovernanceTOEZKPFrame
-unifierSensibLawGovernanceZKPFrame =
-  SensibLawTOE.canonicalSensibLawGovernanceTOEZKPFrame
-
-unifierSensibLawGovernanceContract :
-  SensibLawTOE.SensibLawGovernanceTOEContract
-unifierSensibLawGovernanceContract =
-  SensibLawTOE.canonicalSensibLawGovernanceTOEContract
