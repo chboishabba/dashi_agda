@@ -2,6 +2,7 @@ module DASHI.Unifier where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
+import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHG21
 import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
 import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RiemannFrontier
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -1893,3 +1894,54 @@ unifierRHPrimeAuditDoesNotPromoteRH :
     RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
 unifierRHPrimeAuditDoesNotPromoteRH =
   RHPrimeAudit.noUnjustifiedRH
+
+
+------------------------------------------------------------------------
+-- Riemann G21 direct non-promotion proof terms.
+-- The source receipt remains the theorem owner.
+------------------------------------------------------------------------
+
+unifierRHG21StrictTP2Receipt : RHG21.StrictTP2TrancheReceipt
+unifierRHG21StrictTP2Receipt = RHG21.canonicalStrictTP2TrancheReceipt
+
+unifierRHG21ActualSinhTP2StillOpen :
+  RHG21.StrictTP2TrancheReceipt.actualSinhTP2Derived
+    unifierRHG21StrictTP2Receipt ≡ false
+unifierRHG21ActualSinhTP2StillOpen =
+  RHG21.StrictTP2TrancheReceipt.actualSinhTP2DerivedIsFalse
+    unifierRHG21StrictTP2Receipt
+
+unifierRHG21ContinuumMomentSignStillOpen :
+  RHG21.StrictTP2TrancheReceipt.actualOddContinuumSignDerived
+    unifierRHG21StrictTP2Receipt ≡ false
+unifierRHG21ContinuumMomentSignStillOpen =
+  RHG21.StrictTP2TrancheReceipt.actualOddContinuumSignDerivedIsFalse
+    unifierRHG21StrictTP2Receipt
+
+unifierRHG21DeterminantRemainderStillOpen :
+  RHG21.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerived
+    unifierRHG21StrictTP2Receipt ≡ false
+unifierRHG21DeterminantRemainderStillOpen =
+  RHG21.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerivedIsFalse
+    unifierRHG21StrictTP2Receipt
+
+unifierRHG21FiniteRadiusStillOpen :
+  RHG21.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerived
+    unifierRHG21StrictTP2Receipt ≡ false
+unifierRHG21FiniteRadiusStillOpen =
+  RHG21.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerivedIsFalse
+    unifierRHG21StrictTP2Receipt
+
+unifierRHG21PrimeIdentityStillOpen :
+  RHG21.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerived
+    unifierRHG21StrictTP2Receipt ≡ false
+unifierRHG21PrimeIdentityStillOpen =
+  RHG21.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerivedIsFalse
+    unifierRHG21StrictTP2Receipt
+
+unifierRHG21RHNotPromoted :
+  RHG21.StrictTP2TrancheReceipt.riemannHypothesisDerived
+    unifierRHG21StrictTP2Receipt ≡ false
+unifierRHG21RHNotPromoted =
+  RHG21.StrictTP2TrancheReceipt.riemannHypothesisDerivedIsFalse
+    unifierRHG21StrictTP2Receipt
