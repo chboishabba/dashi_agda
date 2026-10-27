@@ -453,6 +453,11 @@ open MaxCutTOE public using
   ; toeBase369CandidateCompilesCapstoneTail
   ; toeBase369ShortestCandidateStillUninhabited
   ; toeCharacterIsotypyDoesNotCreateBase369Candidate
+  ; toeRecognitionAcquisitionTargetLocalized
+  ; toeRecognitionCompilerAvailableAtWall
+  ; toeActualBase369RecognitionCandidateStillOpen
+  ; toeOEISDoesNotCreateBase369RecognitionCandidate
+  ; toeDimensionDoesNotCreateRecognitionIntertwiners
   ; esdSurfaceWasNotEdited
   )
 
