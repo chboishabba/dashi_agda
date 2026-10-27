@@ -417,3 +417,47 @@ unifiedFeministRecognitionCrossPollinationBoundary :
   FeministRecognition.FeministRecognitionCrossPollinationBoundary
 unifiedFeministRecognitionCrossPollinationBoundary =
   FeministRecognition.canonicalFeministRecognitionCrossPollinationBoundary
+
+------------------------------------------------------------------------
+-- Governed legal workflow -> Unified invariant handoff.
+--
+-- Reuse the canonical owner used by the TOE root and Unifier.
+-- Actionstep-style workflow state does not create legal authority.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
+
+unifiedGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
+unifiedGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+unifiedQualificationDoesNotAutomaticallyProveForensicCompliance :
+  LegalGovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+unifiedQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
+
+unifiedLegalReviewDoesNotCreateClaimTruth :
+  LegalGovernanceTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
+unifiedLegalReviewDoesNotCreateClaimTruth =
+  LegalGovernanceTOE.toeLegalReviewDoesNotCreateClaimTruth
+
+unifiedOfficialLegalSurfaceDoesNotRecoverFineState :
+  LegalGovernanceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+unifiedOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalGovernanceTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
+
+unifiedLegalityAloneDoesNotCreateLegitimacy :
+  LegalGovernanceTOE.LegalOnlyCreatesLegitimacy → ⊥
+unifiedLegalityAloneDoesNotCreateLegitimacy =
+  LegalGovernanceTOE.toeLegalityAloneDoesNotCreateLegitimacy
+
+unifiedActionstepStyleVendorIdentityDoesNotCreateAuthority :
+  LegalGovernanceTOE.actionstepStyleVendorIdentityCreatesAuthority ≡ false
+unifiedActionstepStyleVendorIdentityDoesNotCreateAuthority =
+  LegalGovernanceTOE.toeActionstepStyleVendorIdentityCreatesAuthority
+
+unifiedActionstepStyleTargetNeedsOwnAuthorityWitness :
+  LegalGovernanceTOE.actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
+unifiedActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalGovernanceTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
