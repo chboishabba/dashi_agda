@@ -1,7 +1,13 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 ------------------------------------------------------------------------
@@ -395,3 +401,68 @@ toe369YangMillsGoal1C4CommonMetricCompilerLevel =
 
 toe369YangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 toe369YangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- SensibLaw / legal governance TOE normalization.
+-- The imported governance owner remains the theorem authority.
+------------------------------------------------------------------------
+
+toeSensibLawGovernanceSemanticBoundary :
+  Authority.AuthorityNonPromotionBundle
+toeSensibLawGovernanceSemanticBoundary =
+  GovernanceTOE.governanceSemanticAuthorityBoundary
+
+toeSensibLawSemanticTruthAuthorityStillClosed :
+  Authority.truthAuthorityFlag toeSensibLawGovernanceSemanticBoundary ≡ false
+toeSensibLawSemanticTruthAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+
+toeSensibLawSemanticLegalAuthorityStillClosed :
+  Authority.legalAuthorityFlag toeSensibLawGovernanceSemanticBoundary ≡ false
+toeSensibLawSemanticLegalAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
+
+toeSensibLawSemanticAllAuthorityStillClosed :
+  Authority.promotesAnyAuthority toeSensibLawGovernanceSemanticBoundary ≡ false
+toeSensibLawSemanticAllAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
+
+toeSensibLawLegalAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+toeSensibLawLegalAuthorityBoundaryReceipt =
+  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
+
+toeSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+toeSensibLawLegalRuntimeContract =
+  GovernanceTOE.governanceLegalRuntimeContract
+
+toeSensibLawDomainTransportReceipt :
+  Domain.DomainTransportReceipt
+toeSensibLawDomainTransportReceipt =
+  GovernanceTOE.governanceDomainTransportReceipt
+
+toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
+  Domain.representationEqualityCreatesLegalAuthority
+    toeSensibLawDomainTransportReceipt
+  ≡ false
+toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
+  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+toeSensibLawVendorIdentityDoesNotCreateAuthority :
+  Domain.vendorIdentityCreatesAuthority toeSensibLawDomainTransportReceipt
+  ≡ false
+toeSensibLawVendorIdentityDoesNotCreateAuthority =
+  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+
+toeSensibLawTargetDomainNeedsOwnAuthorityWitness :
+  Domain.targetDomainNeedsOwnAuthorityWitness toeSensibLawDomainTransportReceipt
+  ≡ true
+toeSensibLawTargetDomainNeedsOwnAuthorityWitness =
+  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+
+toeSensibLawGovernanceZKPFrame :
+  GovernanceTOE.SensibLawGovernanceTOEZKPFrame
+toeSensibLawGovernanceZKPFrame =
+  GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame
