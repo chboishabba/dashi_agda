@@ -5,6 +5,8 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as TOE
+import DASHI.Unified.Physics as UnifiedPhysics
+import DASHI.Unifier as U
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 irreducibleFamilyCountIsFourteen :
@@ -155,3 +157,43 @@ terminalPromotionStillBlocked :
   TOE.toeTerminalPromotion ≡ false
 terminalPromotionStillBlocked =
   TOE.toeTerminalPromotionIsFalse
+
+
+------------------------------------------------------------------------
+-- Normalized facade regressions.
+------------------------------------------------------------------------
+
+unifiedPhysicsBetaHistorySameStateCouplingMatchesTOE :
+  UnifiedPhysics.yangMillsTOEBetaHistorySameStateCouplingLevel
+  ≡ TOE.toeBetaHistorySameStateCouplingLevel
+unifiedPhysicsBetaHistorySameStateCouplingMatchesTOE = refl
+
+unifiedPhysicsStressScaleMatchesTOE :
+  UnifiedPhysics.yangMillsTOEStressScaleCompilerLevel
+  ≡ TOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
+unifiedPhysicsStressScaleMatchesTOE = refl
+
+unifiedPhysicsOSWightmanBoundaryMatchesTOE :
+  UnifiedPhysics.yangMillsTOEOSWightmanContinuumBlocked
+  ≡ TOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+unifiedPhysicsOSWightmanBoundaryMatchesTOE = refl
+
+unifierBetaHistorySameStateCouplingMatchesTOE :
+  U.unifierYangMillsBetaHistorySameStateCouplingLevel
+  ≡ TOE.toeBetaHistorySameStateCouplingLevel
+unifierBetaHistorySameStateCouplingMatchesTOE = refl
+
+unifierStressScaleMatchesTOE :
+  U.unifierYangMillsStressScaleCompilerLevel
+  ≡ TOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
+unifierStressScaleMatchesTOE = refl
+
+unifierStrictCasimirCarrierMatchesTOE :
+  U.unifierYangMillsStrictCasimirCarrierLevel
+  ≡ TOE.toeStrictCasimirCarrierCompilerLevel
+unifierStrictCasimirCarrierMatchesTOE = refl
+
+unifierTerminalNonPromotionMatchesTOE :
+  U.unifierYangMillsTerminalPromotionBlocked
+  ≡ TOE.toeTerminalPromotionIsFalse
+unifierTerminalNonPromotionMatchesTOE = refl
