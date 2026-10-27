@@ -11,6 +11,7 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Biology.PMDDHistamineAmplificationExact as PMDDHistamine
 import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact as PMDDMolecular
 import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact as PMDDIntervention
+import DASHI.Culture.ArabicRootPatternMorphologyProcessingBoundaryExact as ArabicMorphology
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -1568,3 +1569,37 @@ toePMDDSingleParticipantSubtypePromotionImpossible :
   PMDDIntervention.SingleParticipantResponseDefinesSubtype → ⊥
 toePMDDSingleParticipantSubtypePromotionImpossible =
   PMDDIntervention.singleParticipantResponseDoesNotDefineSubtype
+
+
+------------------------------------------------------------------------
+-- Arabic root-pattern morphology exact reopening.
+-- Reuse the culture owner and the generic dependent residual architecture.
+------------------------------------------------------------------------
+
+toeArabicRootPatternIntegrationBoundary :
+  ArabicMorphology.ArabicRootPatternIntegrationBoundary
+toeArabicRootPatternIntegrationBoundary =
+  ArabicMorphology.canonicalArabicRootPatternIntegrationBoundary
+
+toeArabicKTBRecoverableProjection :
+  ArabicMorphology.Recoverable.DependentExactRecoverableProjection
+    ArabicMorphology.KTBResolvedReading
+    ArabicMorphology.KTBUndiacritizedSurface
+toeArabicKTBRecoverableProjection =
+  ArabicMorphology.ktbDependentRecoverableProjection
+
+toeArabicKTBDependentCodeSeparating :
+  ArabicMorphology.Recoverable.DependentCodeSeparating
+    ArabicMorphology.ktbDependentRecoverableProjection
+toeArabicKTBDependentCodeSeparating =
+  ArabicMorphology.ktbDependentCodeSeparating
+
+toeArabicSurfaceAloneDoesNotDetermineResolvedReading :
+  ArabicMorphology.SurfaceAloneDeterminesResolvedKTBReading → ⊥
+toeArabicSurfaceAloneDoesNotDetermineResolvedReading =
+  ArabicMorphology.surfaceAloneDoesNotDetermineResolvedKTBReading
+
+toeArabicRootPatternZKPFrame :
+  ArabicMorphology.ArabicRootPatternZKPFrame
+toeArabicRootPatternZKPFrame =
+  ArabicMorphology.canonicalArabicRootPatternZKPFrame
