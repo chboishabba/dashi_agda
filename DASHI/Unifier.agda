@@ -1117,17 +1117,17 @@ unifierCurrentMaxCutHyperfabricReceipt =
   CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
 
 unifierCurrentHyperformNineCount :
-  CurrentHyper.Fabric.siteCount 3 2 ≡ 9
+  CurrentHyper.HyperformNineCountProof
 unifierCurrentHyperformNineCount =
   CurrentHyper.currentHyperformNineCount
 
 unifierCurrentHyperformTwentySevenCount :
-  CurrentHyper.Fabric.siteCount 3 3 ≡ 27
+  CurrentHyper.HyperformTwentySevenCountProof
 unifierCurrentHyperformTwentySevenCount =
   CurrentHyper.currentHyperformTwentySevenCount
 
 unifierCurrentHyperformEightyOneCount :
-  CurrentHyper.Fabric.siteCount 3 4 ≡ 81
+  CurrentHyper.HyperformEightyOneCountProof
 unifierCurrentHyperformEightyOneCount =
   CurrentHyper.currentHyperformEightyOneCount
 
