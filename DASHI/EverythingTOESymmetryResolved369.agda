@@ -782,6 +782,27 @@ toeFleetVectorCoordinateAdmissibilityStillFalse =
 toeFleetTextFallbackAuthorityStillFalse =
   FleetGapTOE.fleetTextFallbackAuthorityStillFalse
 
+
+toeFleetEigenPriorityPromotionImpossible :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+toeFleetEigenPriorityPromotionImpossible =
+  FleetGapTOE.fleetEigenPriorityPromotionImpossible
+
+toeFleetExternalCountPromotionImpossible :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+toeFleetExternalCountPromotionImpossible =
+  FleetGapTOE.fleetExternalCountPromotionImpossible
+
+toeFleetDischargedFibreRetargetImpossible :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+toeFleetDischargedFibreRetargetImpossible =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+toeFleetContradictionGapReclassificationImpossible :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+toeFleetContradictionGapReclassificationImpossible =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
 ------------------------------------------------------------------------
 -- Joint Balaban RG + R559 same-owner max-cut receipt.
 ------------------------------------------------------------------------
