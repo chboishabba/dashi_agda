@@ -13,5 +13,5 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 -- It contains a terminal physical non-promotion theorem.
 -- Do not replace this import with DASHI.Unifier placeholder axioms.
 import DASHI.Unified.GRQuantumProofTermRegression
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound517Exact
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound517Validation
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
