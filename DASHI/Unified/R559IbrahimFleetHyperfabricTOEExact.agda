@@ -54,6 +54,7 @@ open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Unified.BalabanR559TOEMaxCutExact as YM
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as Ibrahim
@@ -120,6 +121,33 @@ fleetContradictionGapsStaySeparate :
   Fleet.FleetContradictionGapReclassificationPermission → ⊥
 fleetContradictionGapsStaySeparate =
   Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+
+------------------------------------------------------------------------
+-- Equal cardinality is not same-object identity.
+------------------------------------------------------------------------
+
+ymGate4FormalGaps : Nat
+ymGate4FormalGaps =
+  YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
+
+ymGate4FormalGapsAre58 : ymGate4FormalGaps ≡ 58
+ymGate4FormalGapsAre58 =
+  YM.gate4UnresolvedCountIs58 YM.canonicalBalabanR559TOEMaxCutReceipt
+
+ymGate4PaidReductionLevel : ProofLevel
+ymGate4PaidReductionLevel =
+  YM.gate4PaidReductionLevel YM.canonicalBalabanR559TOEMaxCutReceipt
+
+ymGate4InhabitantsLevel : ProofLevel
+ymGate4InhabitantsLevel =
+  YM.gate4InhabitantsLevel YM.canonicalBalabanR559TOEMaxCutReceipt
+
+data Fleet58EqualsYMGate4SameObject : Set where
+
+fleet58CardinalityDoesNotProveYMGate4Identity :
+  Fleet58EqualsYMGate4SameObject → ⊥
+fleet58CardinalityDoesNotProveYMGate4Identity ()
 
 ------------------------------------------------------------------------
 -- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
@@ -200,6 +228,12 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     dischargedFibresIs584 : dischargedFibres ≡ 584
     contradictionGaps : Nat
     contradictionGapsIs44 : contradictionGaps ≡ 44
+    ymGate4GapCount : Nat
+    ymGate4GapCountIs58 : ymGate4GapCount ≡ 58
+    ymGate4PaidReduction : ProofLevel
+    ymGate4Inhabitants : ProofLevel
+    fleet58DoesNotIdentifyYMGate4 :
+      Fleet58EqualsYMGate4SameObject → ⊥
     scaleTransferBlocked : YM.ScaleTransferPromotion → ⊥
     fleetCountDoesNotDischarge :
       Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
@@ -225,6 +259,12 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   ; dischargedFibresIs584 = fleetDischargedFibresAre584
   ; contradictionGaps = fleetContradictionGaps
   ; contradictionGapsIs44 = fleetContradictionGapsAre44
+  ; ymGate4GapCount = ymGate4FormalGaps
+  ; ymGate4GapCountIs58 = ymGate4FormalGapsAre58
+  ; ymGate4PaidReduction = ymGate4PaidReductionLevel
+  ; ymGate4Inhabitants = ymGate4InhabitantsLevel
+  ; fleet58DoesNotIdentifyYMGate4 =
+      fleet58CardinalityDoesNotProveYMGate4Identity
   ; scaleTransferBlocked = toeScaleTransferPromotionImpossible
   ; fleetCountDoesNotDischarge = fleetExternalCountDoesNotCreateFormalDischarge
   ; dischargedFibreRetargetBlocked = fleetDischargedFibresStayOutOfTarget
