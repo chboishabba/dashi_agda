@@ -274,3 +274,45 @@ unifiedCurrentProvenanceDoesNotCreateTruth :
   CurrentMaxCut.ProvenanceAxisCreatesTruthPermission → ⊥
 unifiedCurrentProvenanceDoesNotCreateTruth =
   CurrentMaxCut.provenanceAxisStillDoesNotCreateTruth
+
+
+------------------------------------------------------------------------
+-- Context-indexed 369 sheet/cube/appraisal-fibre Unified handoff.
+------------------------------------------------------------------------
+
+unifiedCurrent369ContextualFibreWeldReceipt :
+  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
+unifiedCurrent369ContextualFibreWeldReceipt =
+  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
+
+unifiedCurrent369DecisionSheetStates : ℕ
+unifiedCurrent369DecisionSheetStates =
+  CurrentMaxCut.decisionSheetStateCount
+
+unifiedCurrent369DecisionSheetStatesIsNine :
+  unifiedCurrent369DecisionSheetStates ≡ 9
+unifiedCurrent369DecisionSheetStatesIsNine =
+  CurrentMaxCut.decisionSheetStateCountIsNine
+
+unifiedCurrent369InteractionCubeStates : ℕ
+unifiedCurrent369InteractionCubeStates =
+  CurrentMaxCut.interactionCubeStateCount
+
+unifiedCurrent369InteractionCubeStatesIsTwentySeven :
+  unifiedCurrent369InteractionCubeStates ≡ 27
+unifiedCurrent369InteractionCubeStatesIsTwentySeven =
+  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
+
+unifiedCurrent369AppraisalFibreStates : ℕ
+unifiedCurrent369AppraisalFibreStates =
+  CurrentMaxCut.appraisalFibreStateCount
+
+unifiedCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
+  unifiedCurrent369AppraisalFibreStates ≡ 729
+unifiedCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
+  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
+
+unifiedCurrent369SynthesisDoesNotEraseComparator :
+  CurrentMaxCut.synthesisErasesComparator ≡ false
+unifiedCurrent369SynthesisDoesNotEraseComparator =
+  CurrentMaxCut.synthesisErasesComparatorIsFalse
