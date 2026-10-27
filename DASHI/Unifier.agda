@@ -1,5 +1,7 @@
 module DASHI.Unifier where
 
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound517Exact
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
