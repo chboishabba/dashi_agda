@@ -23,6 +23,10 @@ open import Agda.Builtin.String using (String)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
+import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as GeneratedDensity
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as StressScale
+import DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact as BetaFloor
 import DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact as DensityDictionary
 import DASHI.Physics.YangMills.BalabanDensityToLiteralFiniteMeasureRound124Exact as Measure
 import DASHI.Physics.YangMills.BalabanLiteralFiniteMeasureStressLaneRound125Exact as MeasureStress
@@ -43,6 +47,54 @@ import DASHI.Physics.YangMills.BalabanRGLane as LegacyRGLane
 import DASHI.Physics.YangMills.YangMillsHighestAlphaGateDependencyExact as Gate
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
 import DASHI.Physics.YangMills.YangMillsConstructivePathPrePostInvariantExact as Path
+
+------------------------------------------------------------------------
+-- Exact theorem-owner re-exports.
+--
+-- Re-export canonical owners.
+-- Do not duplicate their proofs.
+------------------------------------------------------------------------
+
+open Density public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  )
+
+open CanonicalDensity public using
+  ( betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  )
+
+open GeneratedDensity public using
+  ( selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  )
+
+open StressScale public using
+  ( stressSelectedDensityIndexIsUnifiedActionIndex
+  )
+
+open Stress public using
+  ( sourceDerivativeBelowExistingMarkedShell
+  )
+
+open StressHilbert public using
+  ( stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  )
+
+open RegularELocalization public using
+  ( selectedRegularEIsLocalizedCompositeSum
+  )
+
+open BetaFloor public using
+  ( universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
 
 ------------------------------------------------------------------------
 -- Reused proof levels.
