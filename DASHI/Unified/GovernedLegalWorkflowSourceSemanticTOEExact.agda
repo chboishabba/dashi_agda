@@ -52,8 +52,10 @@ module DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
 
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSource
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalWorkflow
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as Distilled
 
 record GovernedLegalWorkflowSourceSemanticHandoff : Set₁ where
@@ -161,3 +163,65 @@ toeSemanticPromotionCannotConferAnyAuthority :
     SensibLawPromotion.semanticPromotionAuthorityBoundary ≡ false
 toeSemanticPromotionCannotConferAnyAuthority =
   SensibLawPromotion.semantic-promotion-all-authority-closed
+
+------------------------------------------------------------------------
+-- Exact governed legal compliance aliases.
+------------------------------------------------------------------------
+
+QualificationAutomaticallyForensicCompliance : Set
+QualificationAutomaticallyForensicCompliance =
+  LegalWorkflow.QualificationAutomaticallyForensicCompliance
+
+ReportAdmissionRepairsMissingInput : Set
+ReportAdmissionRepairsMissingInput =
+  LegalWorkflow.ReportAdmissionRepairsMissingInput
+
+LegalReviewDecisionCreatesClaimTruth : Set
+LegalReviewDecisionCreatesClaimTruth =
+  LegalWorkflow.LegalReviewDecisionCreatesClaimTruth
+
+OfficialLegalSurfaceRecoversFineState : Set
+OfficialLegalSurfaceRecoversFineState =
+  LegalWorkflow.OfficialLegalSurfaceRecoversFineState
+
+LegalOnlyCreatesLegitimacy : Set₁
+LegalOnlyCreatesLegitimacy =
+  LegalWorkflow.LegalOnlyCreatesLegitimacy
+
+toeExpertQualificationDoesNotCreateForensicCompliance :
+  QualificationAutomaticallyForensicCompliance → ⊥
+toeExpertQualificationDoesNotCreateForensicCompliance =
+  LegalWorkflow.toeExpertQualificationDoesNotCreateForensicCompliance
+
+toeReportAdmissionDoesNotRepairMissingInput :
+  ReportAdmissionRepairsMissingInput → ⊥
+toeReportAdmissionDoesNotRepairMissingInput =
+  LegalWorkflow.toeReportAdmissionDoesNotRepairMissingInput
+
+toeLegalReviewDoesNotCreateClaimTruth :
+  LegalReviewDecisionCreatesClaimTruth → ⊥
+toeLegalReviewDoesNotCreateClaimTruth =
+  LegalWorkflow.toeLegalReviewDoesNotCreateClaimTruth
+
+toeOfficialLegalSurfaceDoesNotRecoverFineState :
+  OfficialLegalSurfaceRecoversFineState → ⊥
+toeOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalWorkflow.toeOfficialLegalSurfaceDoesNotRecoverFineState
+
+toeLegalityAloneDoesNotCreateLegitimacy :
+  LegalOnlyCreatesLegitimacy → ⊥
+toeLegalityAloneDoesNotCreateLegitimacy =
+  LegalWorkflow.toeLegalityAloneDoesNotCreateLegitimacy
+
+toeActionstepStyleVendorIdentityCreatesAuthority =
+  LegalWorkflow.toeActionstepStyleVendorIdentityCreatesAuthority
+
+toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalWorkflow.toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalWorkflow.toeActionstepStyleTargetNeedsOwnAuthorityWitness
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalWorkflow.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+
