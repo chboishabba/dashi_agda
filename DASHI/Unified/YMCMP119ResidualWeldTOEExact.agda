@@ -41,9 +41,12 @@ module DASHI.Unified.YMCMP119ResidualWeldTOEExact where
 -- Preflight and Agda must accept this module and the TOE root.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Physics.YangMills.BalabanCMP119LiteralResidualWeldMaxCut20261002Exact as Weld
+import DASHI.Physics.YangMills.BalabanCMP119RegularEReflectionSupportCutExact as ESupport
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 
 ------------------------------------------------------------------------
@@ -100,11 +103,11 @@ toeRegularEComponentPeriodicSupportDictionaryLevel =
 
 toeRegularEOneSidedActivityReflectionLevel : ProofLevel
 toeRegularEOneSidedActivityReflectionLevel =
-  Weld.ESupport.cmp119RegularEOneSidedActivityReflectionLevel
+  ESupport.cmp119RegularEOneSidedActivityReflectionLevel
 
 toeRegularECrossingKernelRPLevel : ProofLevel
 toeRegularECrossingKernelRPLevel =
-  Weld.ESupport.cmp119RegularECrossingKernelRPLevel
+  ESupport.cmp119RegularECrossingKernelRPLevel
 
 toeROperationPublishedPolymerDictionaryLevel : ProofLevel
 toeROperationPublishedPolymerDictionaryLevel =
@@ -140,12 +143,12 @@ toeFullResidualEqualsSelectedFiniteShellTailLevel =
 
 toeResidualWeldDoesNotPromoteContinuum :
   YMTOE.toeFlat4DContinuumTransferProvedHere
-    ≡ Agda.Builtin.Bool.false
+    ≡ false
 toeResidualWeldDoesNotPromoteContinuum =
   YMTOE.toeFlat4DContinuumTransferProvedHereIsFalse
 
 toeResidualWeldDoesNotPromoteClay :
   YMTOE.toeClayYangMillsPromoted
-    ≡ Agda.Builtin.Bool.false
+    ≡ false
 toeResidualWeldDoesNotPromoteClay =
   YMTOE.toeClayYangMillsPromotedIsFalse
