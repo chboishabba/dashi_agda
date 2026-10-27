@@ -103,7 +103,7 @@ currentTOECandidate =
     ; retainsConjecturalSockets = true
     ; retainsNegativeKnowledge = true
     ; reading =
-        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. Major downstream sectors are inhabited at their declared authority. The terminal is now primitive-leaf exact: Monster starts at actual weight-two/literal-zeta and actual classifier inputs; selected GRQFT starts at the pinned Yang-Mills object plus R114/R119/R122/R124/R127 and pinned-literal=qftTarget, because Round131/R457 wrapper equalities are compiler-owned; arithmetic starts at cube-fibre/cubic-Jacobi evaluation; quantum starts at the physical Hilbert/g-TPS/Hamiltonian attachment. Sibling source receipts remain attribution/provenance and never become local Agda theorems."
+        "One DASHI candidate physical theory with 369/C3 as universal refinement-orientation substrate. Major downstream sectors are inhabited at their declared authority. The terminal is now primitive-leaf exact: Monster starts at actual weight-two/literal-zeta and actual classifier inputs; selected GRQFT starts at the pinned Yang-Mills object plus R114/R119/R122/R124/R127 and pinned-literal=qftTarget, because Round131/R457 wrapper equalities are compiler-owned; arithmetic starts at cube-fibre/cubic-Jacobi evaluation; quantum starts at the physical Hilbert/g-TPS/Hamiltonian attachment. Governance is attached through the exact SensibLaw/ControlCard/authority handoff; workflow labels, standards references and citations remain non-promoting. Sibling source receipts remain attribution/provenance and never become local Agda theorems."
     }
 
 currentTOECandidateStatus : TOECandidateStatus
