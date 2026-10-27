@@ -328,6 +328,48 @@ piketty2015 = tax-source-receipt
   "no mathematically unavoidable cumulative inequality trajectory or particular tax-rate theorem"
 
 ------------------------------------------------------------------------
+-- 2026 PARETO SNOWBALL: DISTINCT MODEL / PANEL / ADMINISTRATIVE ROOTS
+-- These are independent author teams/data surfaces, not three replications
+-- of any one policy estimate. Do not promote working papers into enacted law.
+------------------------------------------------------------------------
+
+oecdSocialProtection2026 : TaxSourceReceipt
+oecdSocialProtection2026 = tax-source-receipt
+  "Organisation for Economic Co-operation and Development"
+  "Financing of Social Protection, Chapter 3 (9 September 2026), DOI 10.1787/b384fd31-en"
+  "https://www.oecd.org/en/publications/financing-of-social-protection_b384fd31-en/full-report/securing-the-revenue-base-for-social-protection_fee691c9.html"
+  governmentObservedSeries administrativeObservation
+  "2024 OECD unweighted average recurrent net-wealth taxes at 0.4 percent of revenue, estate/inheritance/gift taxes at 0.4 percent; discusses AI labour-share pressure and comparative funding bases"
+  "descriptive 2024 revenue shares do not measure a hypothetical 100 percent threshold levy or predict AI job displacement"
+
+fagerengGuisoRing2026 : TaxSourceReceipt
+fagerengGuisoRing2026 = tax-source-receipt
+  "Andreas Fagereng; Luigi Guiso; Marius A. K. Ring"
+  "How Much and How Fast Do Investors Respond to Equity Premium Changes? Evidence from Wealth Taxation, NBER Working Paper 35262 (May 2026), DOI 10.3386/w35262"
+  "https://www.nber.org/papers/w35262"
+  scholarlyEmpiricalEstimate conditionalResearchEstimate
+  "Norwegian administrative portfolio study reports initially small but slower larger portfolio adjustments from tax-induced equity-premium changes"
+  "not a kernel theorem, not necessarily peer reviewed, and not the measured effect of a 100 percent stock ceiling"
+
+chatzouzIMF2026 : TaxSourceReceipt
+chatzouzIMF2026 = tax-source-receipt
+  "Moustafa Chatzouz"
+  "Public Debt, Wealth Inequality, and the Burden of Taxation, IMF Working Paper (14 August 2026), DOI 10.5089/9798229055925.001"
+  "https://www.imf.org/en/publications/wp/issues/2026/08/14/public-debt-wealth-inequality-and-the-burden-of-taxation-578868"
+  scholarlyEmpiricalEstimate conditionalResearchEstimate
+  "regime-conditional stylised overlapping-generations model and cross-country supporting evidence of public-debt/tax-progressivity/wealth-inequality mechanisms"
+  "IMF working-paper author view and model-conditioned result; not IMF institutional policy or universal debt-to-inequality law"
+
+euCommissionWealthTax2026 : TaxSourceReceipt
+euCommissionWealthTax2026 = tax-source-receipt
+  "European Commission Directorate-General for Taxation and Customs Union; CASE; WIFO; PwC; IEB; ifo; VATT; Robaszewski et al."
+  "Wealth Taxation, including net wealth, capital and exit taxes, Volume I, published 15 April 2026, DOI 10.2778/0817231"
+  "https://op.europa.eu/en/publication-detail/-/publication/b3294f0c-386f-11f1-be39-01aa75ed71a1/language-en"
+  scholarlyEmpiricalEstimate conditionalResearchEstimate
+  "2026 comparative wealth-related-tax designs and jurisdictional examples; existence of review does not establish effects for each instrument"
+  "individual authors and European Commission sponsor retain original work; the report does not prove that a synthetic hard cap works"
+
+------------------------------------------------------------------------
 -- NO SOURCE OR SCENARIO CAN AUTOMATICALLY CERTIFY A CAUSAL POLICY EFFECT.
 ------------------------------------------------------------------------
 
