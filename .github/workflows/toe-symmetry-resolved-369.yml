@@ -23,6 +23,9 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unifier.agda'
@@ -38,6 +41,9 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
@@ -89,6 +95,25 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo diagnose DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda --root .
+          dashi-repo diagnose DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda --root .
+          dashi-repo diagnose DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda --root .
+          dashi-repo related currentMillenniumExternalAcceptanceReceipt --root . --limit 30
+          dashi-repo related leanMillenniumHodgePrizePromotionImpossible --root . --limit 30
+          dashi-repo related leanMillenniumYangMillsPrizePromotionImpossible --root . --limit 30
+          dashi-repo related leanMillenniumNSAdapterRequiresNoNewMathematics --root . --limit 30
+          dashi-repo discover 'Lean Millennium external target same object physical object Riemann Navier Stokes BSD P versus NP Hodge Yang Mills non-promotion' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Mathematics.CrossPollination.Millennium --root .
+          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda --root .
+          dashi-repo related currentGate4FrontierLedgerLevel --root . --limit 30
+          dashi-repo related historicalGate4CountSelectedAsFleetTarget --root . --limit 30
+          dashi-repo discover 'live Gate 4 Fleet 58 equal cardinality target selection clustering transfer non-promotion' --root . --limit 40
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda --root .
+          dashi-repo related instantaneousVectorSnapshotClosed --root . --limit 30
+          dashi-repo related instantaneousRepositoryRateStrictlyNegative --root . --limit 30
+          dashi-repo discover 'Navier Stokes R829 vector instantaneous snapshot signed rate finite ODE integrated reserve Clay non-promotion' --root . --limit 40
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
           dashi-repo related balabanSameFamilyRecoveryCompilerLevel --root . --limit 20
@@ -149,6 +174,13 @@ jobs:
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda
+            DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda
+            DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
@@ -160,7 +192,7 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
-            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NON_TERMINATING|NO_POSITIVITY_CHECK|\{!|!\}' "$source"; then
               echo "forbidden trust escape in $source" >&2
               exit 1
             fi
@@ -175,6 +207,13 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda
+            DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda
+            DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
