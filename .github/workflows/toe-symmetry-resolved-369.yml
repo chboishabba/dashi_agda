@@ -22,6 +22,9 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
+      - 'DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
@@ -37,6 +40,9 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
+      - 'DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
@@ -113,6 +119,14 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
+          dashi-repo related stateDecode-stateCode --root . --limit 20
+          dashi-repo related stateCode-stateDecode --root . --limit 20
+          dashi-repo discover 'finite 27 ternary state code decode bidirectional ABI max cut TOE' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.ComputerScience.Triadic --root .
+          dashi-repo lineage --prefix DASHI.Unified.TOE369MaxCutKernelBidiTernary --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -134,6 +148,9 @@ jobs:
       - name: Reject trust escapes
         run: |
           sources=(
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
@@ -158,6 +175,9 @@ jobs:
         run: |
           agda --version
           modules=(
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
