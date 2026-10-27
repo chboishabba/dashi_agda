@@ -254,24 +254,36 @@ SameProducerIdentifiesResidual : Set
 SameProducerIdentifiesResidual =
   BoundAcquisition.SameProducerIdentifiesResidual
 
-toeSemanticPromotionTruthAuthorityClosed :
+SemanticPromotionTruthAuthorityClosed : Set
+SemanticPromotionTruthAuthorityClosed =
   AuthorityNonPromotion.truthAuthorityFlag
     SemanticPromotion.semanticPromotionAuthorityBoundary
   ≡ false
+
+SemanticPromotionLegalAuthorityClosed : Set
+SemanticPromotionLegalAuthorityClosed =
+  AuthorityNonPromotion.legalAuthorityFlag
+    SemanticPromotion.semanticPromotionAuthorityBoundary
+  ≡ false
+
+SemanticPromotionAllAuthorityClosed : Set
+SemanticPromotionAllAuthorityClosed =
+  AuthorityNonPromotion.promotesAnyAuthority
+    SemanticPromotion.semanticPromotionAuthorityBoundary
+  ≡ false
+
+toeSemanticPromotionTruthAuthorityClosed :
+  SemanticPromotionTruthAuthorityClosed
 toeSemanticPromotionTruthAuthorityClosed =
   SemanticPromotion.semantic-promotion-truth-authority-closed
 
 toeSemanticPromotionLegalAuthorityClosed :
-  AuthorityNonPromotion.legalAuthorityFlag
-    SemanticPromotion.semanticPromotionAuthorityBoundary
-  ≡ false
+  SemanticPromotionLegalAuthorityClosed
 toeSemanticPromotionLegalAuthorityClosed =
   SemanticPromotion.semantic-promotion-legal-authority-closed
 
 toeSemanticPromotionAllAuthorityClosed :
-  AuthorityNonPromotion.promotesAnyAuthority
-    SemanticPromotion.semanticPromotionAuthorityBoundary
-  ≡ false
+  SemanticPromotionAllAuthorityClosed
 toeSemanticPromotionAllAuthorityClosed =
   SemanticPromotion.semantic-promotion-all-authority-closed
 
