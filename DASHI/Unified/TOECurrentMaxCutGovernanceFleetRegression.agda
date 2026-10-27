@@ -72,26 +72,17 @@ allCanonicalAuthorityKindsRemainClosed =
 ------------------------------------------------------------------------
 
 staticRefinementStillDoesNotCreateDynamicSafety :
-  Cut.Frozen.FrozenProvenanceDynamicBoundary.staticSeparationImpliesDynamicSafety
-    Cut.frozenProvenanceDynamicBoundary
-  ≡ false
+  Cut.staticRefinementCreatesDynamicSafety ≡ false
 staticRefinementStillDoesNotCreateDynamicSafety = refl
 
 frozenSelectionStillDoesNotCreateDynamicSafety :
-  Cut.Frozen.FrozenProvenanceDynamicBoundary.frozenRuleImpliesDynamicSafety
-    Cut.frozenProvenanceDynamicBoundary
-  ≡ false
+  Cut.frozenRuleCreatesDynamicSafety ≡ false
 frozenSelectionStillDoesNotCreateDynamicSafety = refl
 
 provenanceStillDoesNotCreateTruthOrAuthority :
-  Cut.Frozen.FrozenProvenanceDynamicBoundary.provenanceCreatesTruthOrAuthority
-    Cut.frozenProvenanceDynamicBoundary
-  ≡ false
+  Cut.provenanceCreatesTruthOrAuthority ≡ false
 provenanceStillDoesNotCreateTruthOrAuthority = refl
 
 kernelClosureStillDoesNotCreateSemanticClosure :
-  Cut.Formalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
-    Cut.Formalisation.canonicalThreeStoreyBoundary
-  ≡ false
-kernelClosureStillDoesNotCreateSemanticClosure =
-  Cut.kernelClosureStillNotSemanticClosure
+  Cut.kernelClosureCreatesSemanticClosure ≡ false
+kernelClosureStillDoesNotCreateSemanticClosure = refl
