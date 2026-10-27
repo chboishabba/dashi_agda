@@ -725,3 +725,35 @@ allRemainingFamiliesAreNotAlreadyProved :
   TOE.toeAllRemainingFamiliesAlreadyProved ≡ false
 allRemainingFamiliesAreNotAlreadyProved =
   TOE.toeAllRemainingFamiliesAlreadyProvedIsFalse
+
+
+------------------------------------------------------------------------
+-- R558 route-firewall max-cut validation.
+------------------------------------------------------------------------
+
+criticalSeparateContinuumWilsonMatchesR558 :
+  TOE.toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired
+  ≡ R558.separateContinuumWilsonConvergenceFamilyRequired
+criticalSeparateContinuumWilsonMatchesR558 = refl
+
+criticalSeparateContinuumWilsonNotRequired :
+  TOE.toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired ≡ false
+criticalSeparateContinuumWilsonNotRequired = refl
+
+criticalFiniteHamiltonianMoscoMatchesR558 :
+  TOE.toeCriticalFiniteHamiltonianMoscoRouteRequired
+  ≡ R558.finiteHamiltonianMoscoRouteRequired
+criticalFiniteHamiltonianMoscoMatchesR558 = refl
+
+criticalFiniteHamiltonianMoscoNotRequired :
+  TOE.toeCriticalFiniteHamiltonianMoscoRouteRequired ≡ false
+criticalFiniteHamiltonianMoscoNotRequired = refl
+
+criticalConservativeFullCLayerMatchesR558 :
+  TOE.toeCriticalFullCLayerRetainedForConservativeClayExistence
+  ≡ R558.fullCLayerRetainedForConservativeClayExistence
+criticalConservativeFullCLayerMatchesR558 = refl
+
+criticalConservativeFullCLayerRetained :
+  TOE.toeCriticalFullCLayerRetainedForConservativeClayExistence ≡ true
+criticalConservativeFullCLayerRetained = refl
