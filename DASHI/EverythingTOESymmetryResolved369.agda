@@ -838,3 +838,14 @@ toeCurrentLegalAuthorityDoesNotEstablishApplicability :
 toeCurrentLegalAuthorityDoesNotEstablishApplicability =
   CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
 
+
+
+toeCurrentSemanticAdmissionCannotCreateLegalAuthority :
+  CurrentMaxCut.SemanticAdmissionIsLegalSourceAuthority → ⊥
+toeCurrentSemanticAdmissionCannotCreateLegalAuthority =
+  CurrentMaxCut.semanticAdmissionAuthorityNonPromotion
+
+toeCurrentDocumentRoleCannotCreateLegalAuthority :
+  CurrentMaxCut.DocumentRoleIsLegalSourceAuthority → ⊥
+toeCurrentDocumentRoleCannotCreateLegalAuthority =
+  CurrentMaxCut.documentRoleAuthorityNonPromotion
