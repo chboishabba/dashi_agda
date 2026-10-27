@@ -6,7 +6,7 @@ import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
 import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; [])
 
