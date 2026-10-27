@@ -107,7 +107,6 @@ jobs:
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
-            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
@@ -128,6 +127,7 @@ jobs:
           agda --version
           modules=(
             DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
