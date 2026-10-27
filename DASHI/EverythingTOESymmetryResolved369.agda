@@ -1,5 +1,6 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
@@ -623,3 +624,58 @@ toeSingularBasinZKPFrame :
   SingularBasinTOE.SingularBasinTOEZKPFrame
 toeSingularBasinZKPFrame =
   SingularBasinTOE.canonicalSingularBasinTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Fleet R4/R5 formal-gap selection boundary.
+-- External spectral priority is planning context only.
+------------------------------------------------------------------------
+
+toeFleetFormalGapTargetReceipt :
+  FleetGapTOE.FleetFormalGapTargetReceipt
+toeFleetFormalGapTargetReceipt =
+  FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetCoordinateRebuildabilityReceipt =
+  FleetGapTOE.fleetCoordinateRebuildabilityReceipt
+
+toeFleetNumericABIReceipt =
+  FleetGapTOE.fleetNumericABIReceipt
+
+toeFleetResidualInvariantReceipt =
+  FleetGapTOE.fleetResidualInvariantReceipt
+
+toeFleetPromotionObligationIndex =
+  FleetGapTOE.fleetPromotionObligationIndex
+
+toeFleetFormalGapZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeFleetFormalGapZKPFrame =
+  FleetGapTOE.canonicalFleetFormalGapZKPFrame
+
+toeFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+toeFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+toeFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+toeFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+toeFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+toeFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+toeFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+toeFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+toeFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.Planning.PNFPlanningAdapterBoundary.sourceTextAloneCreatesFormalResidual
+    FleetGapTOE.Planning.canonicalPNFPlanningAdapterBoundary
+  ≡ false
+toeFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
