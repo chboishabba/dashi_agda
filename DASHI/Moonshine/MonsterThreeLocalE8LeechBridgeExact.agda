@@ -48,6 +48,7 @@ module DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Empty using (⊥)
 
 import DASHI.Biology.ExceptionalLatticeGrokkingProtocolExact as Existing
 
@@ -186,6 +187,16 @@ eEightRootCountAsE6PlusA2Orbits = refl
 nonE6RootCountAsOrderThreeOrbits :
   eEightNonE6RootCount ≡ aTwoOrderThreeOrbitCount * 3
 nonE6RootCountAsOrderThreeOrbits = refl
+
+eEightRootCountAsThreeTimesEighty :
+  e8RootCount ≡ 3 * 80
+eEightRootCountAsThreeTimesEighty = refl
+
+data E6A2ArithmeticCreatesF3FiveE8Recognition : Set where
+
+e6A2ArithmeticDoesNotCreateF3FiveE8Recognition :
+  E6A2ArithmeticCreatesF3FiveE8Recognition → ⊥
+e6A2ArithmeticDoesNotCreateF3FiveE8Recognition ()
 
 record E8E6A2RootArithmeticBoundary : Set where
   constructor e8E6A2RootArithmeticBoundary
