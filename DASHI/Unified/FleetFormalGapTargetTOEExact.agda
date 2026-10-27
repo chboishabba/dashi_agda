@@ -6,6 +6,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Fin.Base using (Fin)
 
 import DASHI.Interop.PNFSpectralCoordinateRebuildability as Rebuild
 import DASHI.Interop.PNFSpectralNumericABICore as Numeric
@@ -17,6 +18,7 @@ import DASHI.Unified.BalabanRGTOERegression as BalabanRG
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
 import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
+import DASHI.Core.RelationalTrialecticDisambiguationExact as Disambiguation
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -335,3 +337,101 @@ fleetTextFallbackAuthorityStillFalse :
   Rebuild.textFallbackIsCoordinateAuthority ≡ false
 fleetTextFallbackAuthorityStillFalse =
   Rebuild.textFallbackCoordinateAuthorityFalse
+
+
+------------------------------------------------------------------------
+-- Exact Fleet R5 ordinal cut.
+--
+-- The carrier ranges over exactly the 58 reported unformalised gaps.
+-- It carries no persisted row name or theorem authority.
+-- The discharged 584 and contradiction 44 remain separate carriers.
+------------------------------------------------------------------------
+
+FleetDischargedOrdinal : Set
+FleetDischargedOrdinal = Fin 584
+
+FleetContradictionOrdinal : Set
+FleetContradictionOrdinal = Fin 44
+
+FleetFormalGapOrdinal : Set
+FleetFormalGapOrdinal = Fin 58
+
+fleetFormalGapOrdinalCount : Nat
+fleetFormalGapOrdinalCount =
+  unformalisedFormalGaps canonicalFleetFormalGapTargetReceipt
+
+fleetFormalGapOrdinalCountIs58 :
+  fleetFormalGapOrdinalCount ≡ 58
+fleetFormalGapOrdinalCountIs58 =
+  fleetRecordedUnformalisedGapCountIs58
+
+fleetDischargedOrdinalCount : Nat
+fleetDischargedOrdinalCount =
+  dischargedCoreKnowledgeFibres canonicalFleetFormalGapTargetReceipt
+
+fleetDischargedOrdinalCountIs584 :
+  fleetDischargedOrdinalCount ≡ 584
+fleetDischargedOrdinalCountIs584 =
+  fleetRecordedDischargedCountIs584
+
+fleetContradictionOrdinalCount : Nat
+fleetContradictionOrdinalCount =
+  polarityContradictionGaps canonicalFleetFormalGapTargetReceipt
+
+fleetContradictionOrdinalCountIs44 :
+  fleetContradictionOrdinalCount ≡ 44
+fleetContradictionOrdinalCountIs44 =
+  fleetRecordedContradictionCountIs44
+
+fleetOrdinalCarriesPersistedRowIdentity : Bool
+fleetOrdinalCarriesPersistedRowIdentity = false
+
+fleetOrdinalCarriesPersistedRowIdentityIsFalse :
+  fleetOrdinalCarriesPersistedRowIdentity ≡ false
+fleetOrdinalCarriesPersistedRowIdentityIsFalse = refl
+
+FleetSharedCardinalityCreatesIdentity : Set
+FleetSharedCardinalityCreatesIdentity =
+  Disambiguation.SharedCardinalityCreatesIdentity
+
+fleetSharedCardinalityDoesNotCreateIdentity :
+  FleetSharedCardinalityCreatesIdentity → ⊥
+fleetSharedCardinalityDoesNotCreateIdentity =
+  Disambiguation.sharedCardinalityDoesNotCreateIdentity
+
+record FleetR5OrdinalCutReceipt : Set₁ where
+  constructor fleet-r5-ordinal-cut-receipt
+  field
+    targetOrdinal : Set
+    targetOrdinalIsCanonical : targetOrdinal ≡ FleetFormalGapOrdinal
+    targetCount : Nat
+    targetCountIs58 : targetCount ≡ 58
+    dischargedCount : Nat
+    dischargedCountIs584 : dischargedCount ≡ 584
+    contradictionCount : Nat
+    contradictionCountIs44 : contradictionCount ≡ 44
+    ordinalCarriesPersistedIdentity : Bool
+    ordinalCarriesPersistedIdentityIsFalse :
+      ordinalCarriesPersistedIdentity ≡ false
+    sharedCardinalityIdentityFirewall :
+      FleetSharedCardinalityCreatesIdentity → ⊥
+
+open FleetR5OrdinalCutReceipt public
+
+canonicalFleetR5OrdinalCutReceipt : FleetR5OrdinalCutReceipt
+canonicalFleetR5OrdinalCutReceipt = record
+  { targetOrdinal = FleetFormalGapOrdinal
+  ; targetOrdinalIsCanonical = refl
+  ; targetCount = fleetFormalGapOrdinalCount
+  ; targetCountIs58 = fleetFormalGapOrdinalCountIs58
+  ; dischargedCount = fleetDischargedOrdinalCount
+  ; dischargedCountIs584 = fleetDischargedOrdinalCountIs584
+  ; contradictionCount = fleetContradictionOrdinalCount
+  ; contradictionCountIs44 = fleetContradictionOrdinalCountIs44
+  ; ordinalCarriesPersistedIdentity =
+      fleetOrdinalCarriesPersistedRowIdentity
+  ; ordinalCarriesPersistedIdentityIsFalse =
+      fleetOrdinalCarriesPersistedRowIdentityIsFalse
+  ; sharedCardinalityIdentityFirewall =
+      fleetSharedCardinalityDoesNotCreateIdentity
+  }
