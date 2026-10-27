@@ -120,3 +120,68 @@ unifierReverseNoPromotion :
   Owner.SearchPriorityCreatesProof →
   Owner.BalabanScaleTransferPromotion → ⊥
 unifierReverseNoPromotion = Unifier.unifierRGAndIbrahimSearchPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Complete direct-root agreement for the residual non-promotion cut.
+------------------------------------------------------------------------
+
+toeBalabanScaleTransferFrontierMatchesOwner :
+  TOE.toeBalabanScaleTransferFrontier
+  ≡ Owner.balabanScaleTransferFrontier
+toeBalabanScaleTransferFrontierMatchesOwner = refl
+
+unifierBalabanScaleTransferFrontierMatchesOwner :
+  Unifier.unifierBalabanScaleTransferFrontier
+  ≡ Owner.balabanScaleTransferFrontier
+unifierBalabanScaleTransferFrontierMatchesOwner = refl
+
+toeRoutePreferenceStillNotExecution :
+  Owner.RoutePreferenceCreatesExecutionReceipt → ⊥
+toeRoutePreferenceStillNotExecution =
+  TOE.toeIbrahimRoutePreferenceDoesNotCreateExecutionReceipt
+
+unifierRoutePreferenceStillNotExecution :
+  Owner.RoutePreferenceCreatesExecutionReceipt → ⊥
+unifierRoutePreferenceStillNotExecution =
+  Unifier.unifierIbrahimRoutePreferenceDoesNotCreateExecutionReceipt
+
+toeMergedLeanStillNotKernelReceipt :
+  Owner.MergedLeanSourceCreatesKernelReceipt → ⊥
+toeMergedLeanStillNotKernelReceipt =
+  TOE.toeIbrahimMergedLeanSourceDoesNotCreateKernelReceipt
+
+unifierMergedLeanStillNotKernelReceipt :
+  Owner.MergedLeanSourceCreatesKernelReceipt → ⊥
+unifierMergedLeanStillNotKernelReceipt =
+  Unifier.unifierIbrahimMergedLeanSourceDoesNotCreateKernelReceipt
+
+toeOEISStillNotMultiplicityAction :
+  Owner.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+toeOEISStillNotMultiplicityAction =
+  TOE.toeIbrahimOEISDoesNotCreateMultiplicityAction
+
+unifierOEISStillNotMultiplicityAction :
+  Owner.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+unifierOEISStillNotMultiplicityAction =
+  Unifier.unifierIbrahimOEISDoesNotCreateMultiplicityAction
+
+toeFiniteIrreducibilityStillNotRecognition :
+  Owner.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+toeFiniteIrreducibilityStillNotRecognition =
+  TOE.toeIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+unifierFiniteIrreducibilityStillNotRecognition :
+  Owner.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+unifierFiniteIrreducibilityStillNotRecognition =
+  Unifier.unifierIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+toeCurrentQidStillNotHistoricalTitle :
+  Owner.CurrentQidIdentifiesHistoricalTitle → ⊥
+toeCurrentQidStillNotHistoricalTitle =
+  TOE.toeIbrahimCurrentQidDoesNotIdentifyHistoricalTitle
+
+unifierCurrentQidStillNotHistoricalTitle :
+  Owner.CurrentQidIdentifiesHistoricalTitle → ⊥
+unifierCurrentQidStillNotHistoricalTitle =
+  Unifier.unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle
