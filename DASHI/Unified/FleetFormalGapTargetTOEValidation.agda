@@ -2,6 +2,7 @@
 module DASHI.Unified.FleetFormalGapTargetTOEValidation where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
@@ -263,3 +264,54 @@ toeResidualFieldStillNotPromoted :
   Fleet.ResidualFieldPromotion → ⊥
 toeResidualFieldStillNotPromoted =
   TOE.toeFleetResidualFieldPromotionImpossible
+
+
+toeFleetDischargedCountMatchesOwner :
+  TOE.toeFleetDischargedCoreKnowledgeFibres
+  ≡ Fleet.dischargedCoreKnowledgeFibres
+      Fleet.canonicalFleetFormalGapTargetReceipt
+toeFleetDischargedCountMatchesOwner = refl
+
+unifierFleetDischargedCountMatchesOwner :
+  Unifier.unifierFleetDischargedCoreKnowledgeFibres
+  ≡ Fleet.dischargedCoreKnowledgeFibres
+      Fleet.canonicalFleetFormalGapTargetReceipt
+unifierFleetDischargedCountMatchesOwner = refl
+
+toeFleetContradictionCountMatchesOwner :
+  TOE.toeFleetPolarityContradictionGaps
+  ≡ Fleet.polarityContradictionGaps
+      Fleet.canonicalFleetFormalGapTargetReceipt
+toeFleetContradictionCountMatchesOwner = refl
+
+unifierFleetContradictionCountMatchesOwner :
+  Unifier.unifierFleetPolarityContradictionGaps
+  ≡ Fleet.polarityContradictionGaps
+      Fleet.canonicalFleetFormalGapTargetReceipt
+unifierFleetContradictionCountMatchesOwner = refl
+
+toeFleetFormalGapCountMatchesOwner :
+  TOE.toeFleetUnformalisedFormalGaps
+  ≡ Fleet.unformalisedFormalGaps
+      Fleet.canonicalFleetFormalGapTargetReceipt
+toeFleetFormalGapCountMatchesOwner = refl
+
+unifierFleetFormalGapCountMatchesOwner :
+  Unifier.unifierFleetUnformalisedFormalGaps
+  ≡ Fleet.unformalisedFormalGaps
+      Fleet.canonicalFleetFormalGapTargetReceipt
+unifierFleetFormalGapCountMatchesOwner = refl
+
+toeFleetTargetsOnlyFormalResidual :
+  Fleet.targetOnlyUnformalisedFormalGaps
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+toeFleetTargetsOnlyFormalResidual =
+  TOE.toeFleetTargetsOnlyUnformalisedFormalGaps
+
+unifierFleetTargetsOnlyFormalResidual :
+  Fleet.targetOnlyUnformalisedFormalGaps
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+unifierFleetTargetsOnlyFormalResidual =
+  Unifier.unifierFleetTargetsOnlyUnformalisedFormalGaps
