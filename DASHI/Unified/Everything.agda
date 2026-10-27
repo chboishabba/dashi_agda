@@ -213,6 +213,8 @@ unifiedYMImplementAToDMaxCutReceipt =
 -- Computational-imaging observer unified projection.
 ------------------------------------------------------------------------
 
+unifiedDiffuserImagingZKPFrame :
+  Physics.DiffuserImagingTOEZKPFrame
 unifiedDiffuserImagingZKPFrame =
   Physics.diffuserImagingZKPFrame
 
