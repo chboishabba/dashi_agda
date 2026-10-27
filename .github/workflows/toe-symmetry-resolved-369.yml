@@ -172,3 +172,107 @@ jobs:
           for module in "${modules[@]}"; do
             agda -i . -l standard-library "$module"
           done
+
+
+  governance-ibrahim-fleet-maxcut:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install DASHI repository referee
+        run: python -m pip install -e './tools/agda_preflight[test,mcp]'
+
+      - name: Referee reuse, duplicates, and lineage
+        run: |
+          dashi-repo index --root .
+          dashi-repo related canonicalGovernedLegalWorkflowAuthorityInvariantHandoff --root . --limit 20
+          dashi-repo related canonicalLegalSourceAuthorityBoundary --root . --limit 20
+          dashi-repo related canonicalRecognitionRouteParetoBoundary --root . --limit 20
+          dashi-repo related currentMonster3BCharacterExecutionFrontier --root . --limit 20
+          dashi-repo related currentInertiaPhaseResolutionFrontier --root . --limit 20
+          dashi-repo related canonicalHistoricalDiscriminatorBoundary --root . --limit 20
+          dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
+          dashi-repo discover 'SensibLaw Actionstep legal compliance governance non promotion TOE' --root . --limit 40
+          dashi-repo discover 'Ibrahim Pareto snowball Monster 3B recognition execution historical discriminator' --root . --limit 40
+          dashi-repo discover 'fleet 584 44 58 Marchenko Pastur formal gap target PNF spectral' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Wikimedia.Ibrahim --root .
+          dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
+          dashi-repo lineage --prefix DASHI.Unified.BalabanIbrahimParetoSnowballTOE --root .
+
+      - name: Static convergence contract
+        run: python -m pytest -q tests/test_toe_governance_ibrahim_fleet_maxcut.py
+
+      - name: Preflight connected max-cut
+        run: |
+          modules=(
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/GovernedLegalFleetIbrahimTOEValidation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+          )
+          for module in "${modules[@]}"; do
+            dashi-agda-preflight --root . "$module"
+          done
+
+      - name: Reject ESD surface changes
+        shell: bash
+        run: |
+          git fetch origin master --depth=1
+          changed="$(git diff --name-only origin/master...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)' ; then
+            echo "ESD surface change detected" >&2
+            exit 1
+          fi
+
+      - name: Reject trust escapes
+        run: |
+          sources=(
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/GovernedLegalFleetIbrahimTOEValidation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Kernel-check connected max-cut
+        run: |
+          modules=(
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unified/GovernedLegalFleetIbrahimTOEValidation.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done
