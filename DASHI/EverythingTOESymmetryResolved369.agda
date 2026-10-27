@@ -5,7 +5,7 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
@@ -1097,3 +1097,130 @@ toeBalabanPhysicalPromotionCut =
   toeBalabanBlockSpinStillBlocked ,
   (toeBalabanUniformKPStillBlocked ,
    toeBalabanOSWightmanStillBlocked)
+
+------------------------------------------------------------------------
+-- Canonical SensibLaw / case-management / legal-governance handoff.
+--
+-- Reuse only. These owners already exist in-repo.
+-- A case-management vendor name, including Actionstep, does not transport
+-- legal authority. Operational completion does not create semantic truth.
+-- Passing a governance control does not create certification.
+-- Standards remain process lenses. No standards certification is claimed.
+------------------------------------------------------------------------
+
+import DASHI.Core.AuthorityNonPromotionCore as LegalAuthority
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as LegalSemantic
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Law.SensibLawITIRParityEverything as LegalParity
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as DomainAuthority
+import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as OperationalBoundary
+import DASHI.Core.ITIRGovernanceControlCaseExact as GovernanceControl
+
+toeSensibLawSemanticAuthorityBoundary =
+  LegalSemantic.semanticPromotionAuthorityBoundary
+
+toeSensibLawSemanticTruthAuthorityStillClosed :
+  LegalAuthority.truthAuthorityFlag toeSensibLawSemanticAuthorityBoundary ≡ false
+toeSensibLawSemanticTruthAuthorityStillClosed =
+  LegalSemantic.semantic-promotion-truth-authority-closed
+
+toeSensibLawSemanticLegalAuthorityStillClosed :
+  LegalAuthority.legalAuthorityFlag toeSensibLawSemanticAuthorityBoundary ≡ false
+toeSensibLawSemanticLegalAuthorityStillClosed =
+  LegalSemantic.semantic-promotion-legal-authority-closed
+
+toeSensibLawSemanticAllAuthorityStillClosed :
+  LegalAuthority.promotesAnyAuthority toeSensibLawSemanticAuthorityBoundary ≡ false
+toeSensibLawSemanticAllAuthorityStillClosed =
+  LegalSemantic.semantic-promotion-all-authority-closed
+
+toeSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+toeSensibLawLegalRuntimeContract =
+  LegalRuntime.canonicalAgdaFirstLegalRuntimeContract
+
+toeSensibLawITIRLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+toeSensibLawITIRLegalRuntimeContract =
+  LegalParity.selectedLegalRuntimeContract
+
+toeLegalRuntimeCannotInventMissingSemantics :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemantics
+    toeSensibLawLegalRuntimeContract
+  ≡ false
+toeLegalRuntimeCannotInventMissingSemantics =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemanticsIsFalse
+    toeSensibLawLegalRuntimeContract
+
+toeParserCandidateDoesNotBecomeTruthByTransport :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransport
+    toeSensibLawLegalRuntimeContract
+  ≡ false
+toeParserCandidateDoesNotBecomeTruthByTransport =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransportIsFalse
+    toeSensibLawLegalRuntimeContract
+
+toeSourceFollowDoesNotBecomeAuthorityByTransport :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransport
+    toeSensibLawLegalRuntimeContract
+  ≡ false
+toeSourceFollowDoesNotBecomeAuthorityByTransport =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransportIsFalse
+    toeSensibLawLegalRuntimeContract
+
+toeTypedMeetDoesNotBecomeViolationByTransport :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransport
+    toeSensibLawLegalRuntimeContract
+  ≡ false
+toeTypedMeetDoesNotBecomeViolationByTransport =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransportIsFalse
+    toeSensibLawLegalRuntimeContract
+
+toeWrongTypeElementPaymentDoesNotBecomeLiability :
+  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransport
+    toeSensibLawLegalRuntimeContract
+  ≡ false
+toeWrongTypeElementPaymentDoesNotBecomeLiability =
+  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransportIsFalse
+    toeSensibLawLegalRuntimeContract
+
+toeCaseManagementDomainTransportReceipt :
+  DomainAuthority.DomainTransportReceipt
+toeCaseManagementDomainTransportReceipt =
+  DomainAuthority.canonicalDomainTransportReceipt
+
+toeCaseManagementRepresentationDoesNotCreateLegalAuthority :
+  DomainAuthority.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    toeCaseManagementDomainTransportReceipt
+  ≡ false
+toeCaseManagementRepresentationDoesNotCreateLegalAuthority = refl
+
+toeCaseManagementVendorIdentityDoesNotCreateAuthority :
+  DomainAuthority.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    toeCaseManagementDomainTransportReceipt
+  ≡ false
+toeCaseManagementVendorIdentityDoesNotCreateAuthority = refl
+
+toeTaskCompletionDoesNotCreateTruth :
+  OperationalBoundary.TaskCompletionCreatesTruth → ⊥
+toeTaskCompletionDoesNotCreateTruth =
+  OperationalBoundary.taskCompletionDoesNotCreateTruth
+
+toePassingControlDoesNotCreateCertification :
+  GovernanceControl.PassingControlMeansCertified → ⊥
+toePassingControlDoesNotCreateCertification =
+  GovernanceControl.passingDoesNotMeanCertified
+
+toeControlEvidenceDoesNotCreateTruth :
+  GovernanceControl.ControlEvidenceCreatesTruth → ⊥
+toeControlEvidenceDoesNotCreateTruth =
+  GovernanceControl.controlEvidenceDoesNotCreateTruth
+
+toeGovernanceStandardsCertificationStillFalse :
+  GovernanceControl.GOV1Boundary.standardsCertificationClaimed
+    GovernanceControl.canonicalGOV1Boundary
+  ≡ false
+toeGovernanceStandardsCertificationStillFalse =
+  GovernanceControl.GOV1Boundary.standardsCertificationClaimedIsFalse
+    GovernanceControl.canonicalGOV1Boundary
+

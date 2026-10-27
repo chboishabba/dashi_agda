@@ -113,6 +113,21 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+          dashi-repo diagnose DASHI/Interop/SensibLawSemanticPromotionPolicy.agda --root .
+          dashi-repo diagnose DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda --root .
+          dashi-repo diagnose DASHI/Law/SensibLawITIRParityEverything.agda --root .
+          dashi-repo diagnose DASHI/Governance/DomainPermeabilityAuthorityTransport.agda --root .
+          dashi-repo diagnose DASHI/Cognition/PNF/SensibLawOperationalSemanticBoundaryExact.agda --root .
+          dashi-repo diagnose DASHI/Core/ITIRGovernanceControlCaseExact.agda --root .
+          dashi-repo related semanticPromotionAuthorityBoundary --root . --limit 20
+          dashi-repo related canonicalAgdaFirstLegalRuntimeContract --root . --limit 20
+          dashi-repo related canonicalDomainTransportReceipt --root . --limit 20
+          dashi-repo related taskCompletionDoesNotCreateTruth --root . --limit 20
+          dashi-repo related passingDoesNotMeanCertified --root . --limit 20
+          dashi-repo discover 'SensibLaw Actionstep case management legal compliance authority semantic promotion governance non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Law.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Interop.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Governance.DomainPermeabilityAuthorityTransport --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -145,6 +160,12 @@ jobs:
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
+            DASHI/Interop/SensibLawSemanticPromotionPolicy.agda
+            DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda
+            DASHI/Law/SensibLawITIRParityEverything.agda
+            DASHI/Governance/DomainPermeabilityAuthorityTransport.agda
+            DASHI/Cognition/PNF/SensibLawOperationalSemanticBoundaryExact.agda
+            DASHI/Core/ITIRGovernanceControlCaseExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
