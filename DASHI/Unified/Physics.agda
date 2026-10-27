@@ -327,3 +327,12 @@ open YMTOE public using
   ; toeLiteralTwoWilsonFiniteCovarianceGeneralGeometricBound
   ; toeLiteralTwoWilsonGeneralGeometricTrajectory
   )
+
+
+open YMTOE public using
+  ( toeLiteralTwoWilsonR415CompilerLevel
+  ; toeLiteralTwoWilsonR444TermConstructionLevel
+  ; toeLiteralTwoWilsonR445MixedLogIdentificationLevel
+  ; toeLiteralTwoWilsonR453ConnectedCoreLevel
+  ; toeLiteralTwoWilsonR451PhysicalCalibrationLevel
+  )
