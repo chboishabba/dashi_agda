@@ -184,3 +184,47 @@ Therefore:
 This is a non-implication theorem.
 
 It does not add a new physical hypothesis.
+
+
+## Current literal-Wilson Route-S max-cut
+
+The current full formalism contains a newer literal-Wilson cross-prover recut.
+
+The physical cut has exactly three input classes.
+
+1. Finite literal Wilson clustering remains physical.
+2. The grouped literal Wilson expectation-limit payment remains physical.
+3. Same reconstructed OS correlation identification remains physical.
+
+These older leaves are not independent research payments on that route:
+
+- literal Euclidean-time semantics;
+- literal Wilson presentation;
+- marked-source covariance identity;
+- covariance-limit algebra;
+- terminal spectral assembly.
+
+The historical native H1 route remains a valid producer and compatibility path.
+
+Its canonical H1 object has one theorem-bearing field.
+
+Its published-localization wrapper and source envelope are not mandatory terminal inputs.
+
+## Final D2a max-cut
+
+The repository now proves two independent insufficiency facts.
+
+A bare `CompositeRGParallelTransport` can be manufactured from an arbitrary trajectory.
+
+Published CMP119/CMP122 source entry survives replacement of the stored composite insertion.
+
+Therefore neither object pays physical D2a.
+
+The remaining D2a theorem is exact:
+
+- use the actual source-native one-step RG state law;
+- transport the actual composite insertion through that step;
+- prove insertion or blocking naturality;
+- connect that same trajectory to the completed R129 composite through the existing convergence surface.
+
+No independent physical one-step coefficient recurrence theorem remains.
