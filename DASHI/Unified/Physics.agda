@@ -14,6 +14,7 @@ import DASHI.Physics.Closure.NSABCDMaxCut20261002Exact as NSMaxCut
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact as NSTOE
+import DASHI.Unified.NavierStokesR650DecisionTOEConvergenceExact as NSDecisionTOE
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
