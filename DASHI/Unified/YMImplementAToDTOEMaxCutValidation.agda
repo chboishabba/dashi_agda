@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.YMImplementAToDTOEMaxCutValidation where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -11,6 +11,7 @@ import DASHI.Physics.YangMills.BalabanCMP119ReflectionMaxCut20261002Exact as B
 import DASHI.Physics.YangMills.BalabanCMP119LiteralResidualWeldMaxCut20261002Exact as C
 import DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact as D534
 import DASHI.Unified.BalabanR559TOEMaxCutExact as Joint
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
@@ -68,6 +69,21 @@ gate4CountIs58 :
   ≡ 58
 gate4CountIs58 =
   AD.gate4UnresolvedCountIs58 AD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+gate4PaidReductionLedgerIsMachineChecked :
+  Proof.promotable
+    (AD.gate4PaidReductionLevel AD.canonicalYMImplementAToDTOEMaxCutReceipt)
+  ≡ true
+gate4PaidReductionLedgerIsMachineChecked =
+  Proof.machineCheckedPromotes
+
+gate4InhabitantsRemainConditional :
+  Proof.promotable
+    (AD.gate4InhabitantsLevel AD.canonicalYMImplementAToDTOEMaxCutReceipt)
+  ≡ false
+gate4InhabitantsRemainConditional =
+  Proof.conditionalDoesNotSelfPromote
 
 rootContinuumStillBlocked :
   AD.publishedContinuumPromotion AD.canonicalYMImplementAToDTOEMaxCutReceipt
