@@ -75,6 +75,124 @@ repository's **syntactic fail-closed non-promotion** receipt. It does
 not prove a physical conservation law, absence of a phenomenon, an
 experimental result, or clinical ineffectiveness.
 
+## Phase roadmap and deliverable gates (torsion reuse-first revision)
+
+**Planning baseline: 2026-10-27.** This is a dependency-ordered technical
+roadmap. A phase is **complete** only when its named artifacts, execution
+receipts and exit tests exist. Writing a target or source document is not
+the same as meeting its acceptance gate.
+
+| Phase | Deliverable with owner | Pass / exit evidence | Present status |
+| --- | --- | --- | --- |
+| **P0 — Reuse and provenance** | This document and `KozyrevMirrorClaimTesting.agda`; merge-source ledger for Kozyrev names, patent, signed-zero, torque, Cartan/POAMS and external models | Exact repo/PR source roots and typed non-identity; patent thickness contradiction carried rather than guessed | **Source written**; Agda kernel and full source verification open |
+| **P1 — Typed torsion bridge** | Native `TorsionMeaning`, `canonicalTorsionBridgeRequirements`, orientation and signed-zero reuse | Real imported theorem owners; disjoint meanings; no torsion-field promotion without physical source/coupling/observable | **Source written**; 10 obligations open; Agda kernel open |
+| **P2 — Instrument/geometry null** | Dimensions + uncertainty ledger, analytical energy/torque balances, at least two ordinary geometric controls; pinned 2-D benchmark comparison | Material/scale and 0.5/1.5 mm disagreement resolved or both modeled; known conservation and timestep/mesh convergence tests pass | **Not measured**; no selected instrument or calibrated apparatus |
+| **P3 — Registered bench discrimination** | Timestamped SHA-256 protocol, blinded matched sham/active sequences and immutable raw telemetry; `kozyrev_mirror_claim_test.py` for eligible paired continuous endpoints | Recorded consent when applicable; independent timing and hash checks; sham parity; pre-fixed detectable effect and null rejection; no unplanned model switching | **Runner source written**, no independent registration or physical data |
+| **P4 — Torsion-specific mechanism bridge** | Selected metric/connection model, spin-density source term, constitutive prediction, laboratory observable and nuisance budget | Distinct, dimensionful nonzero prediction; plain mechanical/EM/thermal/acoustic models excluded by preregistered discriminators; independent model reproduction | **OPEN — highest scientific cut** |
+| **P5 — Prospective independent replication** | New apparatus/operator, held-out blinded dataset, error budget, adversarial review and statistical reporting including nulls | Replication on preregistered same observable and matched calibration; no leakage or uncontrolled field coupling | **OPEN** |
+| **P6 — Human/clinical extension** | Ethics-authorised independent human protocol, sham validated masking, stopping rules and adverse-event data | Approval **before** enrolment, primary endpoint and power/uncertainty locked, independent replication; no treatment-authority promotion on a source report | **DEFERRED**; cannot depend on P1 toy semantics alone |
+
+### Max-cut / Pareto stop–go ordering
+
+1. Reuse the **merged** source owners first. The highest-value completed
+   mathematical donor is [PR #1164](https://github.com/chboishabba/dashi_agda/pull/1164)
+   (`TorqueTrialectic369Exact`, real finite SO(3) orientation, cross product
+   and right-hand rule). Its exact swap-involution is consumed by the new
+   bridge. **This is a kinematic orientation fact, not a mirror-field effect.**
+2. Treat [PR #1249](https://github.com/chboishabba/dashi_agda/pull/1249)
+   (signed-zero/path-wave hyperfabric) as **open sibling PR**. The reused
+   `SignedZeroTorsionReceipt` is available in current master independently;
+   do not assume new #1249 branch theorems are merged, or confuse
+   signed-arrival metadata with spacetime torsion.
+3. Reuse `LorentzianLeviCivitaConditional` as a **torsion-free supplied
+   hypothesis**, and `YangMillsCizekEinsteinCartanClaimAuditExact` as an
+   explicit Einstein–Cartan claim audit. The latter was cross-pollinated
+   through [PR #466](https://github.com/chboishabba/dashi_agda/pull/466),
+   which is **closed, unmerged**. The existing source-audit module remains
+   usable on master; PR branch status is not proof authority.
+4. Reuse **merged** [PR #714](https://github.com/chboishabba/dashi_agda/pull/714)
+   `ScientificMechanismEvidenceBidiExact` and
+   `POAMSScientificMechanismBoundaryExact` for the ordinary
+   angular-momentum conservation comparator. The preliminary POAMS
+   report is not the Kozyrev apparatus or an independent torsion detection.
+5. Use [PR #1246](https://github.com/chboishabba/dashi_agda/pull/1246)
+   (open Ferrocell geometry/null-model branch) as **analogy and reusable
+   methodology only** unless a specific theorem/code file is independently
+   selected, reviewed and intentionally transferred. The native
+   `CrossDomainClaimPromotionBoundary` remains authoritative.
+6. Only after P2 / P3 controls work, attempt P4. Stop if the hypothesised
+   mechanism cannot supply a measurable unit, a calibrated detector,
+   a source term, an uncertainty budget or a predicted deviation beyond
+   ordinary physics. A *negative* test is reportable; do not repeatedly
+   tune the prediction against the same data.
+7. P5 independently reproduces a specific model-sensitive result.
+   P6 is optional and safety-gated, not an automatic consequence of P5.
+
+### Explicit physical torsion bridge, not mere vocabulary
+
+For a connection `∇`, geometric torsion is
+`T(X,Y) = ∇_X Y - ∇_Y X - [X,Y]`; in coordinate basis the last bracket
+term vanishes. This is not the mechanical twist of an aluminium sheet,
+not signed-zero path orientation, and not a two-torsion elliptic-curve
+group law. Sources:
+[Cartan torsion review](https://www.mdpi.com/2218-1997/5/10/206)
+and [Einstein–Cartan matter review](https://doi.org/10.1103/PhysRevD.104.064036).
+
+The **minimal** Einstein–Cartan model ties torsion algebraically to spin
+density; it is not a free propagating, mirror-generated information field.
+A stronger/different proposed model must explicitly specify new
+dynamics and face all known constraints. Do not relabel
+`TorquеTrialectic369Exact`, signed-zero orientation or a torsion-free
+Levi-Civita hypothesis as a nonzero gravitational torsion producer.
+
+The torsion-specific discriminator is a frozen tuple:
+
+```text
+(source spin density, constitutive equation, material geometry,
+ coupling law, metric/connection, predicted detector observable,
+ physical unit, calibration, null field response, nuisance model,
+ effect threshold, preregistration, blind dataset, independent replay)
+```
+
+A finite symbolic proof of the algebra does not discharge the measured
+coupling, instrument and source-field requirements. The existing Agda
+`canonicalTorsionBridgeReadiness` records **false** for coupling,
+calibration, replication and physical promotion.
+
+### Phase exit commands and provenance
+
+```sh
+# Existing source-written Python synthetic fixtures; not physical evidence.
+python3 -m unittest discover -s scripts/tests -p 'test_kozyrev_mirror_claim_test.py' -v
+
+# Structural/syntax preflight is weaker than kernel validation.
+dashi-agda-preflight --root . DASHI/Empirical/KozyrevMirrorClaimTesting.agda
+
+# Execute with repository-pinned standard library and full Agda kernel:
+agda -i . -i <repo-standard-library-path> DASHI/Empirical/KozyrevMirrorClaimTesting.agda
+```
+
+Record the exact Git SHA, python/Agda versions, runner log hash,
+preregistration hash and independent verification identity before
+claiming **executed** or **kernel checked**. Current PR #1404 has no
+verified external experimental measurements.
+
+### Attribution and model-identity invariants
+
+- [PR #1164](https://github.com/chboishabba/dashi_agda/pull/1164)
+  owns the pre-existing torque/Hodge/369 derivations. This change only
+  instantiates its swap theorem on the Kozyrev candidate vocabulary.
+- Cartan/Einstein–Cartan historical mathematics belongs to the cited
+  original authors. Current external source papers are attributed as
+  external theory/model, never as a proof the mirror is effective.
+- Kaznacheev/Trofimov own their source/patent claims. Broken Branch
+  owns its external toy simulation and numerical correction. No code/data
+  is copied from either.
+- The repository's exact same-object / Max Cut, Pareto, snowball, Ibrahim,
+  Monster 3B and ESD attribution rules are unchanged. No shared word,
+  character, cardinality, phase or torsion orientation proves the
+  source and target are the same physical or mathematical object.
+
 ## Max-cut claim matrix
 
 | ID | Distinct question | Ordinary explanation / control | Promotion status |
@@ -85,7 +203,7 @@ experimental result, or clinical ineffectiveness.
 | KM-CLINICAL | Is a validated clinical endpoint improved beyond sham? | Human ethics review, medication controls, adverse-event surveillance, statistical multiplicity | Untested; no therapeutic promotion |
 | KM-REMOTE | Can blinded targets be identified above locked chance? | Independent random target generator, cryptographic precommitment, leakage audit, decoys | Untested |
 | KM-TIME | Is there a reproducible clock/causal deviation? | Traceable clocks, EM/temperature/pressure/vibration/drift controls | Untested |
-| KM-TORSION | Is a distinct torsion/time-energy variable measurable? | Define detector response, units, calibrated null and prediction *first* | Not operationalised; excluded |
+| KM-TORSION | Can any explicit torsion model predict a measurable nonzero deviation? | Define detector response, units, calibrated null and prediction *first* | Bridge P4 open; measurement unselected |
 
 **Do not conflate** an ordinary scattered wave, simulated acoustic torque,
 subjective report, instrumental clock drift, information leakage, treatment
