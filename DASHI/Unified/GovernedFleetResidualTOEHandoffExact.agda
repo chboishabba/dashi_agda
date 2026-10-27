@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.GovernedFleetResidualTOEHandoffExact where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -184,4 +184,4 @@ canonicalGovernedFleetResidualTOEZKPFrame :
   GovernedFleetResidualTOEZKPFrame
 canonicalGovernedFleetResidualTOEZKPFrame =
   governed-fleet-residual-toe-zkp-frame
-    false false false false false false false false false false
+    true true true true true true true true true true
