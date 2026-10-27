@@ -1082,3 +1082,53 @@ unifierQualificationDoesNotAutomaticallyProveForensicCompliance :
   GovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
 unifierQualificationDoesNotAutomaticallyProveForensicCompliance =
   GovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
+
+------------------------------------------------------------------------
+-- Governed legal workflow / source-genealogy handoff.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
+
+unifierGovernedLegalWorkflowSourceGenealogyHandoff :
+  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
+unifierGovernedLegalWorkflowSourceGenealogyHandoff =
+  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+
+unifierLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
+unifierLegalRepetitionDoesNotCreateIndependentEvidence =
+  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
+unifierLegalCommonSourceDoesNotEraseEvidence =
+  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
+unifierSourceMultiplicityDoesNotAdmitTruth =
+  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
+unifierGenealogyDoesNotPromoteLegalAuthorityTruth =
+  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
+unifierReviewedGenealogyDoesNotPayApplicability =
+  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
+unifierGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
+  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
+unifierGenealogyCandidateSourceDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
+unifierGenealogySameLegalSystemDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
+unifierGenealogyCurrentValidityDoesNotCreateApplicability =
+  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
+unifierGenealogyDocumentRoleDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
+
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
+
+unifierGovernedLegalWorkflowSourceSemanticHandoff :
+  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
+unifierGovernedLegalWorkflowSourceSemanticHandoff =
+  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+unifierGovernedSharedLexemeDoesNotCreateSemanticIdentity =
+  LegalSourceSemantic.toeSharedLexemeDoesNotCreateSemanticIdentity
+unifierGovernedDiagnosticCheckDoesNotCreateTheoremPromotion =
+  LegalSourceSemantic.toeDiagnosticCheckDoesNotCreateTheoremPromotion
+unifierGovernedSourceIdentifierDoesNotCreateProofAuthority =
+  LegalSourceSemantic.toeSourceIdentifierDoesNotCreateProofAuthority
+unifierGovernedESDSurfaceMutationRemainsForbidden =
+  LegalSourceSemantic.toeESDSurfaceMutationRemainsForbidden
