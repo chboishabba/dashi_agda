@@ -14,6 +14,12 @@ import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spect
 import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed
 import DASHI.Wikimedia.IbrahimMonster3BRecognitionRouteParetoExact as Pareto
 import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact as Selected3B
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as KernelSame
+import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as SelectedSame
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
 
 legacyNegativeRoundTrip :
   TOE.sspToLegacy (TOE.legacyToSSP Legacy.neg) ≡ Legacy.neg
@@ -82,3 +88,93 @@ selected3BProjectedActionRemainsOpen :
     Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ false
 selected3BProjectedActionRemainsOpen =
   TOE.toeSelected3BProjectedActionStillOpen
+
+
+fullGradeDimensionCannotPromoteFaithfulness :
+  FullGrade.LinearDimensionCreatesFaithfulness → ⊥
+fullGradeDimensionCannotPromoteFaithfulness =
+  TOE.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+fullGradeCarrierCannotPromoteAgreement :
+  FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
+fullGradeCarrierCannotPromoteAgreement =
+  TOE.toeFullGradeSameCarrierDoesNotCreateActionAgreement
+
+fullGradeCharacterCannotPromoteAgreement :
+  FullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+fullGradeCharacterCannotPromoteAgreement =
+  TOE.toeFullGradeCharacterDoesNotCreateActionAgreement
+
+projectedDimensionCannotPromoteAction :
+  Projected.DirectSumDimensionCreatesProjectedAction → ⊥
+projectedDimensionCannotPromoteAction =
+  TOE.toeProjectedDimensionDoesNotCreateAction
+
+projectedRetractionCannotPromoteAction :
+  Projected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+projectedRetractionCannotPromoteAction =
+  TOE.toeCoordinateRetractionDoesNotCreateProjectedAction
+
+projectedCharacterCannotPromoteAction :
+  Projected.CharacterCreatesProjectedAction → ⊥
+projectedCharacterCannotPromoteAction =
+  TOE.toeProjectedCharacterDoesNotCreateAction
+
+fullGradeInclusionFaithfulnessRemainsOpen :
+  FullGrade.Trialectic369Selected3BFullGradeActionMaxCutBoundary.inclusionFaithfulnessInhabitedHere
+    FullGrade.canonicalTrialectic369Selected3BFullGradeActionMaxCutBoundary
+  ≡ false
+fullGradeInclusionFaithfulnessRemainsOpen =
+  TOE.toeFullGradeInclusionFaithfulnessStillOpen
+
+projectedActionEquationRemainsOpen :
+  Projected.Trialectic369Selected3BProjectedActionMaxCutBoundary.actualProjectedActionEquationInhabitedHere
+    Projected.canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary
+  ≡ false
+projectedActionEquationRemainsOpen =
+  TOE.toeProjectedActionEquationStillOpen
+
+kernelTrace53CannotPromote3BRecognition :
+  KernelSame.Actual3BKernelSameElementBoundary.trace53AloneIdentifiesMonster3B
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+kernelTrace53CannotPromote3BRecognition =
+  TOE.toeKernelTrace53DoesNotIdentify3B
+
+kernelCharacterIsotypyCannotPromoteAction :
+  KernelSame.Actual3BKernelSameElementBoundary.characterIsotypyConstructsActionIntertwiner
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+kernelCharacterIsotypyCannotPromoteAction =
+  TOE.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+kernelRecognitionRemainsOpen :
+  KernelSame.Actual3BKernelSameElementBoundary.actualZetaRecognitionProvedHere
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+kernelRecognitionRemainsOpen =
+  TOE.toeKernelActualZetaRecognitionStillOpen
+
+selectedSameElementClassRecognitionRemainsOpen :
+  SelectedSame.Selected3BSameElementBoundary.selectedElementProvedMonsterClass3BHere
+    SelectedSame.canonicalSelected3BSameElementBoundary
+  ≡ false
+selectedSameElementClassRecognitionRemainsOpen =
+  TOE.toeSelectedSameElementClass3BStillOpen
+
+singleActionProducerRemainsOpen :
+  SingleAction.SingleActionProducerBoundary.actualSingleProducerInhabitedHere
+    SingleAction.canonicalSingleActionProducerBoundary
+  ≡ false
+singleActionProducerRemainsOpen =
+  TOE.toeSingleActionProducerStillOpen
+
+ibrahimFiniteChartCannotPromoteLinearMultiplicityAction :
+  Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+ibrahimFiniteChartCannotPromoteLinearMultiplicityAction =
+  TOE.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+ibrahimNinetySlicesCannotPromotePermutationRepresentation :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+ibrahimNinetySlicesCannotPromotePermutationRepresentation =
+  TOE.toeNinetySlicesDoNotCreatePermutationRepresentation
