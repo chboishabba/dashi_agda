@@ -143,6 +143,11 @@ jobs:
           dashi-repo related canonicalGovernedLegalWorkflowSourceSemanticHandoff --root . --limit 20
           dashi-repo discover 'governed legal workflow source genealogy distilled semantic non promotion authority TOE' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOE --root .
+          dashi-repo related canonicalAgdaFirstLegalRuntimeContract --root . --limit 20
+          dashi-repo related canonicalDomainTransportReceipt --root . --limit 20
+          dashi-repo discover 'SensibLaw legal runtime transport source follow authority domain permeability vendor representation authority' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Law.SensibLawAgdaFirstLegalRuntime --root .
+          dashi-repo lineage --prefix DASHI.Governance.DomainPermeabilityAuthorityTransport --root .
           dashi-repo diagnose DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda --root .
           dashi-repo related canonicalPNFDistilledNonPromotionBoundary --root . --limit 20
           dashi-repo related canonicalPNFDistilledReuseZKPReceipt --root . --limit 20
