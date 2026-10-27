@@ -11,6 +11,7 @@ import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
 import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
+import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as CurrentGate4
 import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
@@ -128,6 +129,37 @@ jointGate4InhabitantsDoNotSelfPromote :
   ≡ false
 jointGate4InhabitantsDoNotSelfPromote =
   Proof.conditionalDoesNotSelfPromote
+
+
+jointCurrentGate4LedgerMatchesOwner :
+  Joint.currentGate4FrontierLedgerLevel
+    Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ CurrentGate4.currentFrontierLedgerTypecheckLevel
+jointCurrentGate4LedgerMatchesOwner = refl
+
+jointCurrentGate4PostulateFreeSurfaceMatchesOwner :
+  Joint.currentGate4PostulateFreeSurfaceLevel
+    Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ CurrentGate4.currentSurfacePostulateFreeLevel
+jointCurrentGate4PostulateFreeSurfaceMatchesOwner = refl
+
+rootCurrentGate4LedgerMatchesJoint :
+  TOE.toeBalabanR559CurrentGate4FrontierLedgerLevel
+  ≡ Joint.currentGate4FrontierLedgerLevel
+      Joint.canonicalBalabanR559TOEMaxCutReceipt
+rootCurrentGate4LedgerMatchesJoint = refl
+
+unifierCurrentGate4LedgerMatchesJoint :
+  Unifier.unifierBalabanR559CurrentGate4FrontierLedgerLevel
+  ≡ Joint.currentGate4FrontierLedgerLevel
+      Joint.canonicalBalabanR559TOEMaxCutReceipt
+unifierCurrentGate4LedgerMatchesJoint = refl
+
+physicsCurrentGate4LedgerMatchesJoint :
+  Physics.yangMillsBalabanR559CurrentGate4FrontierLedgerLevel
+  ≡ Joint.currentGate4FrontierLedgerLevel
+      Joint.canonicalBalabanR559TOEMaxCutReceipt
+physicsCurrentGate4LedgerMatchesJoint = refl
 
 rootGate4CountIs58 :
   TOE.toeBalabanR559Gate4UnresolvedCount ≡ 58
