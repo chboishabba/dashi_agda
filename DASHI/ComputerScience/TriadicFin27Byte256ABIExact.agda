@@ -120,43 +120,6 @@ stateDecode-stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.positive Re
 stateDecode-stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.positive Ref.MaskSign.positive) = refl
 
 ------------------------------------------------------------------------
--- Reverse dense-index round trip.
---
--- This completes the exact finite 27-state codec BIDI law.  It is a theorem
--- about the existing Agda carrier only.  It does not promote the carrier to a
--- Rust, CUDA, ROCm, C ABI, device representation, or Agda FFI certificate.
-------------------------------------------------------------------------
-
-stateCode-stateDecode : (i : State27) → stateCode (stateDecode i) ≡ i
-stateCode-stateDecode (zero) = refl
-stateCode-stateDecode (suc zero) = refl
-stateCode-stateDecode (suc (suc zero)) = refl
-stateCode-stateDecode (suc (suc (suc zero))) = refl
-stateCode-stateDecode (suc (suc (suc (suc zero)))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc zero))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc zero)))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc zero))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))))) = refl
-stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))))) = refl
-
-------------------------------------------------------------------------
 -- Byte-sized embedding.  The 229 upper values are intentionally reserved.
 ------------------------------------------------------------------------
 
@@ -207,3 +170,36 @@ abiDoesNotCreateRust ()
 sameNumericByteDoesNotFixDeviceRepresentation :
   SameNumericByteImpliesSameDeviceRepresentation → ⊥
 sameNumericByteDoesNotFixDeviceRepresentation ()
+
+stateCode-stateDecode : (i : State27) → stateCode (stateDecode i) ≡ i
+stateCode-stateDecode (zero) = refl
+stateCode-stateDecode (suc zero) = refl
+stateCode-stateDecode (suc (suc zero)) = refl
+stateCode-stateDecode (suc (suc (suc zero))) = refl
+stateCode-stateDecode (suc (suc (suc (suc zero)))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc zero))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc zero)))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc zero))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))))) = refl
+
+------------------------------------------------------------------------
+-- Byte-sized embedding.  The 229 upper values are intentionally reserved.
+------------------------------------------------------------------------

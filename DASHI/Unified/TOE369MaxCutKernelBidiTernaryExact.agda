@@ -1,5 +1,8 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
 
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -18,10 +21,6 @@ import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selecte
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
-import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
-import DASHI.ComputerScience.TriadicScalarCompactCodecReferenceExact as CodecRef
-import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
-import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F.
@@ -191,12 +190,28 @@ toeSingleActionProducerStillOpen :
 toeSingleActionProducerStillOpen = refl
 
 ------------------------------------------------------------------------
--- Exact finite-27 codec BIDI normalization.
---
--- Reuse the canonical ABI functions and both inverse laws.  This pays the
--- finite Agda carrier BIDI coordinate only.  Runtime and device promotion
--- remain governed by the non-promotion theorems below.
+-- Ibrahim non-promotion partitions.
 ------------------------------------------------------------------------
+
+toeFiniteChartDoesNotCreateLinearMultiplicityAction :
+  Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+toeFiniteChartDoesNotCreateLinearMultiplicityAction =
+  Ibrahim.finiteChartDoesNotCreateLinearMultiplicityAction
+
+toeNinetySlicesDoNotCreatePermutationRepresentation :
+  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+toeNinetySlicesDoNotCreatePermutationRepresentation =
+  Ibrahim.ninetySlicesDoNotCreatePermutationRepresentation
+
+toeCharacterDoesNotCreateHomEvaluation :
+  Ibrahim.CharacterCreatesHomEvaluation → ⊥
+toeCharacterDoesNotCreateHomEvaluation =
+  Ibrahim.characterDoesNotCreateHomEvaluation
+
+toePermutationNoGoDoesNotCreateLinearAction :
+  Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
+toePermutationNoGoDoesNotCreateLinearAction =
+  Ibrahim.noGoDoesNotCreateLinearAction
 
 TernaryEncodedState : Set
 TernaryEncodedState = CodecRef.Encoded3
@@ -270,23 +285,3 @@ toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
 ------------------------------------------------------------------------
 -- Ibrahim non-promotion partitions.
 ------------------------------------------------------------------------
-
-toeFiniteChartDoesNotCreateLinearMultiplicityAction :
-  Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
-toeFiniteChartDoesNotCreateLinearMultiplicityAction =
-  Ibrahim.finiteChartDoesNotCreateLinearMultiplicityAction
-
-toeNinetySlicesDoNotCreatePermutationRepresentation :
-  Ibrahim.NinetySlicesCreatePermutationRepresentation → ⊥
-toeNinetySlicesDoNotCreatePermutationRepresentation =
-  Ibrahim.ninetySlicesDoNotCreatePermutationRepresentation
-
-toeCharacterDoesNotCreateHomEvaluation :
-  Ibrahim.CharacterCreatesHomEvaluation → ⊥
-toeCharacterDoesNotCreateHomEvaluation =
-  Ibrahim.characterDoesNotCreateHomEvaluation
-
-toePermutationNoGoDoesNotCreateLinearAction :
-  Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
-toePermutationNoGoDoesNotCreateLinearAction =
-  Ibrahim.noGoDoesNotCreateLinearAction

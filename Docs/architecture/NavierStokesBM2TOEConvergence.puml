@@ -1,0 +1,50 @@
+@startuml
+title Navier-Stokes B R571 M2 -> DASHI TOE normalization
+
+package "Canonical theorem owners" {
+  [R571 Physical M2 Dissipation Fold] as R571
+  [NS Paper Theorem Interface / R650] as R650
+}
+
+package "Normalization" {
+  [NavierStokesBM2TOEConvergenceExact] as N
+  [NavierStokesBM2TOEConvergenceValidation] as V
+}
+
+package "TOE facades" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as U
+  [Unified.Physics] as P
+  [Unified.Everything] as E
+}
+
+R571 --> N : exact fold theorem\nfinite fold closed
+R650 --> N : producer-strategy status\nlegacy cut retired\nClay false
+N --> TOE
+N --> U
+N --> P
+TOE --> V
+U --> V
+P --> V
+V --> E
+
+note right of N
+Preconditions:
+- R571 owner exists
+- canonical NS paper interface exists
+
+Invariants:
+- no theorem promotion
+- finite fold != physical inhabitance
+- producer strategy != Clay obligation
+- A/B/C/D separation
+- no ESD mutation
+
+Postconditions:
+- fold theorem reachable
+- samplewise payment remains analytic
+- Galerkin fold remains analytic
+- old PDF B1-B4/B7 not mandatory
+- Clay promotion remains false
+end note
+@enduml
