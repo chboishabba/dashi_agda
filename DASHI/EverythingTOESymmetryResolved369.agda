@@ -1,5 +1,8 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- Reuse-only PNF boundary normalization. No source theorem is promoted.
+open import DASHI.Unified.PNFSourceBoundaryTOEExact public
+
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
