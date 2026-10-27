@@ -15,3 +15,4 @@ import DASHI.Unified.GRQuantumProofTermRegression
 
 -- Exact complexity non-promotion and simulation-preservation gates.
 import DASHI.Unified.ResidualWidthNonPromotionTOEExact
+import DASHI.Unified.ResidualWidthNonPromotionTOERegression
