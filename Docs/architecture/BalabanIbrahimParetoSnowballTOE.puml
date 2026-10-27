@@ -1,0 +1,73 @@
+@startuml
+title DASHI TOE — Balaban + Ibrahim Pareto/Snowball convergence
+
+skinparam componentStyle rectangle
+
+package "Canonical theorem owners" {
+  component "BalabanRGScaleTransferFrontierReceipt" as Balaban
+  component "Ibrahim 3B RecognitionRoutePareto" as Pareto
+  component "Ibrahim 3B CharacterExecutionCutsetSnowball" as Snowball
+  component "Ibrahim 3B InertiaPhaseResolutionProducer" as Phase
+  component "Trialectic369 Schrodinger H-zeta MaxCut" as HZeta
+  component "Ibrahim FirstLink HistoricalDiscriminatorPareto" as Historical
+  component "Base369 Ternary27 spectral/signed owners" as Ternary27
+  component "Selected3B full/projected MaxCut owners" as Selected3B
+  component "Monster3B kernel same-element BIDI owners" as KernelBidi
+}
+
+package "Normalized DASHI/Unified facade" {
+  component "BalabanIbrahimParetoSnowballTOEExact" as Facade
+  component "BalabanIbrahimParetoSnowballTOEValidation" as Validation
+  component "TOE369MaxCutKernelBidiTernaryExact" as MaxCutFacade
+  component "TOE369MaxCutKernelBidiTernaryValidation" as MaxCutValidation
+}
+
+package "TOE consumers" {
+  component "EverythingTOESymmetryResolved369" as TOE
+  component "Unifier" as Unifier
+  component "Unified.Everything" as Unified
+}
+
+Balaban --> Facade : exact non-promotion theorem
+Pareto --> Facade : recognition Pareto boundary
+Snowball --> Facade : execution frontier
+Phase --> Facade : phase-resolution frontier
+HZeta --> Facade : explicit H-zeta max-cut
+Historical --> Facade : historical discriminator
+Ternary27 --> MaxCutFacade : C3 action + phase intertwiner
+Selected3B --> MaxCutFacade : exact non-promotion cuts
+KernelBidi --> MaxCutFacade : same-element BIDI firewalls
+
+Facade --> TOE
+Facade --> Unifier
+Facade --> Unified
+MaxCutFacade --> TOE
+MaxCutFacade --> Unifier
+MaxCutFacade --> Unified
+MaxCutFacade --> MaxCutValidation
+TOE --> MaxCutValidation
+Unifier --> MaxCutValidation
+TOE --> Validation
+Unifier --> Validation
+Facade --> Validation
+
+note bottom of Facade
+Preconditions:
+- canonical owners exist
+- attribution retained
+- ESD surfaces read-only
+
+Invariants:
+- finite/candidate/search/source facts do not promote truth
+- arithmetic does not identify same-object action
+- source presence does not create execution receipt
+- RG finite control does not create continuum transfer
+
+Postconditions:
+- TOE and Unifier expose same exact owners
+- direct Balaban scale-transfer non-promotion is reachable
+- Ibrahim Pareto/snowball/max-cut boundaries are reachable
+- ternary-27 and kernel-BIDI non-promotion cuts are reachable
+end note
+
+@enduml
