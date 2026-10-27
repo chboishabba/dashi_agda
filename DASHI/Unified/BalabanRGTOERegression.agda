@@ -56,12 +56,9 @@ balabanScaleDensityStressLaneCompilerLevel : ProofLevel
 balabanScaleDensityStressLaneCompilerLevel =
   MeasureStress.literalFiniteMeasureStressLaneCompilerLevel
 
-balabanRegularESelectedDensityCompilerClosed :
-  RegularE.preferredBC1LeafState240
-    RegularE.regularEToBC1SameObjectCompiler
-  ≡ RegularE.closed
-balabanRegularESelectedDensityCompilerClosed =
-  RegularE.regularEToBC1SameObjectCompilerClosed
+balabanRegularESelectedDensityCompilerLevel : ProofLevel
+balabanRegularESelectedDensityCompilerLevel =
+  RegularE.regularESourceProjectionLevel
 
 balabanRegularELocalizationSourceLevel : ProofLevel
 balabanRegularELocalizationSourceLevel =
