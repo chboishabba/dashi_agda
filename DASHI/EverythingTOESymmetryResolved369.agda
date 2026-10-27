@@ -1137,3 +1137,33 @@ toeBalabanPhysicalPromotionCut =
   toeBalabanBlockSpinStillBlocked ,
   (toeBalabanUniformKPStillBlocked ,
    toeBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Computational-imaging observer TOE projection.
+-- Unified.Physics remains the normalized facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.Physics as UnifiedPhysicsOptics
+
+toeDiffuserImagingZKPFrame =
+  UnifiedPhysicsOptics.diffuserImagingZKPFrame
+
+open UnifiedPhysicsOptics public using
+  ( roundTripImpliesIdentifiable
+  ; noUniversalDecoderAfterClip
+  ; saturatedCollision
+  ; overlapThenClip
+  ; redundantRecovery
+  ; recordedCodeInjective
+  ; firstPixelOnlyCannotRecoverDepth
+  ; depthRecoveryReceipt
+  ; recordedCollisionWouldContradictDepth
+  ; RestrictedInverseBudget
+  ; MeasuredReconstruction
+  ; stableReconstructionBound
+  ; stableWithMatchedResidual
+  ; codedDepthRoundTrip
+  ; noUniversalDepthDecoder
+  ; noRechartRepairsSaturatedDepth
+  )
