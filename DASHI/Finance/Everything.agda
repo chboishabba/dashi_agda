@@ -3,6 +3,7 @@ module DASHI.Finance.Everything where
 import DASHI.Finance.TemporalMarketFibreExact
 import DASHI.Finance.PointInTimeUniverseFibreExact
 import DASHI.Finance.DeepStatArbFibrePipelineExact
+import DASHI.Finance.SolarBatteryArbitrageFeasibilityExact
 import DASHI.Finance.MarketBraidCrossPollinationExact
 import DASHI.Finance.UniverseLeakageResidualDependencyExact
 import DASHI.Finance.DashiTradeFibreBridgeExact
