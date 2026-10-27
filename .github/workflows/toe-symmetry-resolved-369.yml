@@ -115,9 +115,17 @@ jobs:
           dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
           dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
+          dashi-repo diagnose DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda --root .
+          dashi-repo related canonicalPNFDistilledNonPromotionBoundary --root . --limit 20
+          dashi-repo related canonicalPNFDistilledReuseZKPReceipt --root . --limit 20
+          dashi-repo discover 'PNF distilled diagnostic check cobweb fungal web publication identifier non promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.PNFDistilledNonPromotionTOE --root .
 
       - name: Verify governed legal-workflow convergence
         run: python -m pytest -q tests/test_governed_legal_workflow_toe_convergence.py
+
+      - name: Verify PNF distilled non-promotion convergence
+        run: python -m pytest -q tests/test_pnf_distilled_nonpromotion_toe.py
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -139,8 +147,6 @@ jobs:
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
-            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
-            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
 
       - name: Reject ESD surface changes
         shell: bash
@@ -165,6 +171,8 @@ jobs:
             DASHI/Unified/Everything.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
@@ -182,6 +190,8 @@ jobs:
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
