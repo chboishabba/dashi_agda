@@ -11,6 +11,7 @@ import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound517Exact as YMTOE
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -65,3 +66,17 @@ yangMillsPostureIsApproaching :
   Spine.proofPosture yangMillsObject ≡ Asserted.approachingClosedProof
 yangMillsPostureIsApproaching =
   refl
+
+------------------------------------------------------------------------
+-- Reuse the canonical Yang-Mills TOE convergence boundary.
+------------------------------------------------------------------------
+
+yangMillsTOEClayPromotionBlocked :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+yangMillsTOEClayPromotionBlocked =
+  YMTOE.toeClayYangMillsPromotedIsFalse
+
+yangMillsTOEResidualCountIsFiftyFour :
+  YMTOE.toeTotalResidualCount ≡ 54
+yangMillsTOEResidualCountIsFiftyFour =
+  YMTOE.toeTotalResidualCountIsFiftyFour
