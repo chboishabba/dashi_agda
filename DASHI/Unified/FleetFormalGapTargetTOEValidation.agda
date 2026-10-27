@@ -194,12 +194,14 @@ unifierFleetPlanningTextStillNotResidual =
   Unifier.unifierFleetPlanningTextDoesNotCreateFormalResidual
 
 toeSpectralLabelStillNotOwnerIdentity :
-  Fleet.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+  Fleet.spectralLabelIdentifiesTheoremOwner
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 toeSpectralLabelStillNotOwnerIdentity =
   TOE.toeFleetSpectralLabelDoesNotIdentifyTheoremOwner
 
 unifierSpectralLabelStillNotOwnerIdentity :
-  Fleet.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+  Fleet.spectralLabelIdentifiesTheoremOwner
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierSpectralLabelStillNotOwnerIdentity =
   Unifier.unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner
 
