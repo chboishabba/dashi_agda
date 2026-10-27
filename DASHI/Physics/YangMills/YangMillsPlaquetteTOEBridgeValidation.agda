@@ -48,6 +48,52 @@ routeSH1ToR387NeedsNoSourceEnvelope :
 routeSH1ToR387NeedsNoSourceEnvelope =
   TOE.toeRouteSH1ToR387RequiresSourceEnvelopeIsFalse
 
+
+routeSCrossProverCutHasExactlyThreeClasses :
+  TOE.toeRouteSCrossProverPhysicalCutHasExactlyThreeClasses ≡ true
+routeSCrossProverCutHasExactlyThreeClasses =
+  TOE.toeRouteSCrossProverPhysicalCutHasExactlyThreeClassesIsTrue
+
+routeSLiteralEuclideanTimeIsNotIndependent :
+  TOE.toeRouteSLiteralEuclideanTimeIsIndependentResearchLeaf ≡ false
+routeSLiteralEuclideanTimeIsNotIndependent =
+  TOE.toeRouteSLiteralEuclideanTimeIsIndependentResearchLeafIsFalse
+
+routeSLiteralWilsonPresentationIsNotIndependent :
+  TOE.toeRouteSLiteralWilsonPresentationIsIndependentResearchLeaf ≡ false
+routeSLiteralWilsonPresentationIsNotIndependent =
+  TOE.toeRouteSLiteralWilsonPresentationIsIndependentResearchLeafIsFalse
+
+routeSMarkedSourceIdentityIsNotIndependent :
+  TOE.toeRouteSMarkedSourceIdentityIsIndependentResearchLeaf ≡ false
+routeSMarkedSourceIdentityIsNotIndependent =
+  TOE.toeRouteSMarkedSourceIdentityIsIndependentResearchLeafIsFalse
+
+routeSCovarianceLimitAlgebraIsNotIndependent :
+  TOE.toeRouteSCovarianceLimitAlgebraIsIndependentResearchLeaf ≡ false
+routeSCovarianceLimitAlgebraIsNotIndependent =
+  TOE.toeRouteSCovarianceLimitAlgebraIsIndependentResearchLeafIsFalse
+
+routeSTerminalAssemblyIsNotIndependent :
+  TOE.toeRouteSTerminalAssemblyIsIndependentResearchLeaf ≡ false
+routeSTerminalAssemblyIsNotIndependent =
+  TOE.toeRouteSTerminalAssemblyIsIndependentResearchLeafIsFalse
+
+routeSFiniteLiteralClusteringRemainsPhysical :
+  TOE.toeRouteSFiniteLiteralClusteringStillPhysical ≡ true
+routeSFiniteLiteralClusteringRemainsPhysical =
+  TOE.toeRouteSFiniteLiteralClusteringStillPhysicalIsTrue
+
+routeSThreeExpectationLimitsRemainPhysical :
+  TOE.toeRouteSThreeExpectationLimitsStillPhysical ≡ true
+routeSThreeExpectationLimitsRemainPhysical =
+  TOE.toeRouteSThreeExpectationLimitsStillPhysicalIsTrue
+
+routeSSameOSCorrelationRemainsPhysical :
+  TOE.toeRouteSSameOSCorrelationStillPhysical ≡ true
+routeSSameOSCorrelationRemainsPhysical =
+  TOE.toeRouteSSameOSCorrelationStillPhysicalIsTrue
+
 d1NeedsNoNewAnalyticInequality :
   TOE.toeD1NewAnalyticInequalityRequired ≡ false
 d1NeedsNoNewAnalyticInequality =
