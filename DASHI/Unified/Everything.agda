@@ -489,12 +489,6 @@ unifiedMissingValidationStillAbstains =
 -- Fleet-58 acquisition max-cut.
 ------------------------------------------------------------------------
 
-unifiedFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifiedFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
-
 unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
   FleetGapTOE.spectralLabelsIdentifyTheoremOwners
     FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
