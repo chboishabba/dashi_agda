@@ -165,8 +165,7 @@ collatzExternalSourcesDoNotImportProof :
   SOTA.CollatzSOTA2026Boundary.externalSourcesImportCollatzProof
     SOTA.canonicalCollatzSOTA2026Boundary
   ≡ 0
-collatzExternalSourcesDoNotImportProof =
-  SOTA.sourcesDoNotImportProof
+collatzExternalSourcesDoNotImportProof = refl
 
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F normalization receipt.
