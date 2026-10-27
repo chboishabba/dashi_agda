@@ -527,6 +527,7 @@ toeRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
 
 -- These are two independent 27-state owners. No same-carrier assertion follows.
 import DASHI.Core.ConsumerDescentMinimalObserverExact as TOE27Descent
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as TOE27Orbit
 import Data.Empty as TOE27Empty
 
 toeTernary27FaceCannotDescend :
@@ -534,6 +535,6 @@ toeTernary27FaceCannotDescend :
 toeTernary27FaceCannotDescend = Face27TOE.triadicFaceCannotFactorThroughThreeEdges
 
 toeTernary27DependentCodePreservesConsumer :
-  ∀ {Outcome : Set} → (consumer : Recoverable27TOE.Orbit.TritTriple → Outcome) →
-  Recoverable27TOE.Descent.ConsumerSufficient Recoverable27TOE.ternary27ExactCodeObserver consumer
+  ∀ {Outcome : Set} → (consumer : TOE27Orbit.TritTriple → Outcome) →
+  TOE27Descent.ConsumerSufficient Recoverable27TOE.ternary27ExactCodeObserver consumer
 toeTernary27DependentCodePreservesConsumer = Recoverable27TOE.ternary27ExactCodeAdequateForEveryConsumer
