@@ -266,3 +266,24 @@ unifiedTriadicRuntimeSourceDoesNotCreateKernelCertification :
   U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
 unifiedTriadicRuntimeSourceDoesNotCreateKernelCertification =
   U8Runtime.runtimeSourceDoesNotCreateKernelCertification
+
+------------------------------------------------------------------------
+-- Compiled scalar byte-runtime non-promotion.
+------------------------------------------------------------------------
+
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
+
+unifiedCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifiedCompiledScalarDoesNotCreateRust =
+  CompiledU8.cUint8DoesNotCreateRustBinding
+
+unifiedCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifiedCompiledScalarDoesNotCreateBackendEquivalence =
+  CompiledU8.scalarExhaustionDoesNotCreateBackendEquivalence
+
+unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
