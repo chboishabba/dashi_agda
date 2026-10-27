@@ -1,5 +1,7 @@
 module DASHI.Unifier where
 
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -313,3 +315,56 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+------------------------------------------------------------------------
+-- Exact governed legal-workflow TOE reuse.
+--
+-- These are aliases to canonical proof owners reached through the Unified TOE
+-- bridge. The historical axiom-shaped interfaces above are not proof authority.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowBoundary :
+  GovernanceTOE.GovernedLegalWorkflowTOEBoundary
+toeGovernedLegalWorkflowBoundary =
+  GovernanceTOE.canonicalGovernedLegalWorkflowTOEBoundary
+
+toeWorkflowTaskCompletionDoesNotCreateTruth :
+  GovernanceTOE.TaskCompletionCreatesTruth → ⊥
+toeWorkflowTaskCompletionDoesNotCreateTruth =
+  GovernanceTOE.toeTaskCompletionDoesNotCreateTruth
+
+toeReviewActivityNeedsSeparateAdmission :
+  GovernanceTOE.ReviewActivityCreatesAdmission → ⊥
+toeReviewActivityNeedsSeparateAdmission =
+  GovernanceTOE.toeReviewActivityNeedsSeparateAdmissionReceipt
+
+toeDatabaseCommitDoesNotCreateSemanticAuthority :
+  GovernanceTOE.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeDatabaseCommitDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+toeAcceptedReviewDoesNotPayApplicability :
+  GovernanceTOE.AcceptedStatusPaysApplicability → ⊥
+toeAcceptedReviewDoesNotPayApplicability =
+  GovernanceTOE.toeAcceptedReviewDoesNotPayApplicability
+
+toeControlEvidenceDoesNotCreateTruth :
+  GovernanceTOE.ControlEvidenceCreatesTruth → ⊥
+toeControlEvidenceDoesNotCreateTruth =
+  GovernanceTOE.toeControlEvidenceDoesNotCreateTruth
+
+toePassingControlDoesNotMeanCertified :
+  GovernanceTOE.PassingControlMeansCertified → ⊥
+toePassingControlDoesNotMeanCertified =
+  GovernanceTOE.toePassingControlDoesNotMeanCertified
+
+toeCitationAloneDoesNotRealiseLegalRule :
+  GovernanceTOE.CitationAloneRealisesLegalRule → ⊥
+toeCitationAloneDoesNotRealiseLegalRule =
+  GovernanceTOE.toeCitationAloneDoesNotRealiseLegalRule
+
+toeSemanticMeetDoesNotProveLegalApplicability :
+  GovernanceTOE.SemanticMeetAloneProvesLegalApplicability → ⊥
+toeSemanticMeetDoesNotProveLegalApplicability =
+  GovernanceTOE.toeSemanticMeetDoesNotProveLegalApplicability
+
