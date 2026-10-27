@@ -1,7 +1,8 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 ------------------------------------------------------------------------
 -- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
@@ -37,31 +38,34 @@ toeYangMillsClayPromotionRemainsFalse =
 ------------------------------------------------------------------------
 
 toe369YangMillsBlockDProjectiveCarrierLevel :
-  DASHI.Physics.YangMills.CompactLieProofLevel.ProofLevel
+  ProofLevel
 toe369YangMillsBlockDProjectiveCarrierLevel =
   YMBlockD.blockDProjectiveFiniteMarginalCarrierCompilerLevel
 
 toe369YangMillsBlockDProjectivePhysicalMomentInputsLevel :
-  DASHI.Physics.YangMills.CompactLieProofLevel.ProofLevel
+  ProofLevel
 toe369YangMillsBlockDProjectivePhysicalMomentInputsLevel =
   YMBlockD.blockDProjectivePhysicalMomentCompactnessInputsLevel
 
 toe369YangMillsBlockDSelectedMarginalDictionaryLevel :
-  DASHI.Physics.YangMills.CompactLieProofLevel.ProofLevel
+  ProofLevel
 toe369YangMillsBlockDSelectedMarginalDictionaryLevel =
   YMBlockD.blockDSelectedCMP119ToProjectiveMarginalDictionaryLevel
 
 toe369YangMillsBlockDGlobalContainmentProducerLevel :
-  DASHI.Physics.YangMills.CompactLieProofLevel.ProofLevel
+  ProofLevel
 toe369YangMillsBlockDGlobalContainmentProducerLevel =
   YMBlockD.blockDGlobalSelectedContainmentProducerLevel
 
-toe369YangMillsBlockDBoundedPlaquetteDoesNotPayContinuum :
-  YMBlockD.Projective.routeDisposition
-    YMBlockD.Projective.boundedPlaquetteMoment
-  ≡ YMBlockD.Projective.insufficientForContinuumContainment
-toe369YangMillsBlockDBoundedPlaquetteDoesNotPayContinuum =
-  YMBlockD.blockDBoundedPlaquetteMomentInsufficient
+toe369YangMillsBlockDBoundedPlaquettePromotionAllowed :
+  Bool
+toe369YangMillsBlockDBoundedPlaquettePromotionAllowed =
+  YMBlockD.blockDBoundedPlaquettePromotionAllowed
+
+toe369YangMillsBlockDBoundedPlaquettePromotionAllowedIsFalse :
+  toe369YangMillsBlockDBoundedPlaquettePromotionAllowed ≡ false
+toe369YangMillsBlockDBoundedPlaquettePromotionAllowedIsFalse =
+  YMBlockD.blockDBoundedPlaquettePromotionAllowedIsFalse
 
 toe369YangMillsBlockDContinuumStillOpen :
   YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
