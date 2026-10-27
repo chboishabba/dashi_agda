@@ -92,6 +92,27 @@ missingValidationStillAbstains =
   Promotion.missingValidationAbstains
 
 ------------------------------------------------------------------------
+-- ZKP O/R/C/S/L/P/G/F frame.
+--
+-- Reuse the shared TOE process receipt. This frame records process constraints.
+-- It does not create legal, physical, historical, or Monster authority.
+------------------------------------------------------------------------
+
+canonicalGovernedLegalWorkflowComplianceZKPFrame : Ibrahim.TOEZKPFrame
+canonicalGovernedLegalWorkflowComplianceZKPFrame =
+  Ibrahim.toe-zkp-frame
+    "converge SensibLaw and Actionstep-style governance invariants into the existing DASHI TOE roots"
+    "reuse canonical legal, promotion, Fleet, and Ibrahim theorem owners before any extension"
+    "coalesce exact non-promotion firewalls into the existing governed legal workflow compliance owner"
+    "workflow state, vendor identity, review state, exact reuse, spectral priority, and external counts do not create truth or authority"
+    "one disjoint legal-governance normalization lane; physics, Fleet, and Ibrahim owners remain separate"
+    "canonical owners exist; the 584 discharged fibres remain discharged; only the 58 formal gaps remain targetable; ESD surfaces are read-only"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only"
+    "TOE root, Unified facade, and Unifier expose the same legal firewalls and Fleet/Ibrahim boundaries"
+    "kernel check, exact-owner read-back, trust-escape audit, ESD diff audit, and lineage/referee checks"
+    false false false false
+
+------------------------------------------------------------------------
 -- One receipt. The existing owners retain theorem authority.
 ------------------------------------------------------------------------
 
