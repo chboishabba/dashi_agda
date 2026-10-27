@@ -26,6 +26,8 @@ import DASHI.Wikimedia.IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExac
 import DASHI.Wikimedia.IbrahimMonster3BFDRepGroupAlgebraAdapterReceiptExact as FDRepReceipt
 import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterSimpleSubobjectClassificationExact as SimpleClassifier
 import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact as TwoIsotypic
+import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
+import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 
 originIsFixed :
   Spectral.rotateXYZ Geometry.origin ≡ Geometry.origin
@@ -316,3 +318,50 @@ actualMonsterFin90SameActionAttachmentRemainsOpen :
   ≡ false
 actualMonsterFin90SameActionAttachmentRemainsOpen =
   TOE.toeActualMonsterFin90SameActionAttachmentStillOpen
+
+
+------------------------------------------------------------------------
+-- Canonical selected-3B linear max-cut regression.
+------------------------------------------------------------------------
+
+canonicalSelected3BLinearRouteCompilerRemainsAvailable :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.canonicalLinearRouteCompilerOutput
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+canonicalSelected3BLinearRouteCompilerRemainsAvailable =
+  TOE.toeCanonicalSelected3BLinearRouteCompilerOutput
+
+normalizerMonsterCarrierBidiCompilerRemainsAvailable :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.normalizerMonsterCarrierBidiCompilerOutput
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+normalizerMonsterCarrierBidiCompilerRemainsAvailable =
+  TOE.toeNormalizerMonsterCarrierBidiCompilerOutput
+
+onlyOneSelected3BActionEquationRemainsAfterCore :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.onlyOneActionEquationRemainsAfterCore
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+onlyOneSelected3BActionEquationRemainsAfterCore =
+  TOE.toeOnlyOneSelected3BActionEquationRemainsAfterCore
+
+canonicalSelected3BLinearCoreRemainsUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.canonicalCoreInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+canonicalSelected3BLinearCoreRemainsUninhabited =
+  TOE.toeCanonicalSelected3BLinearCoreStillUninhabited
+
+selected3BActionIntertwiningRemainsUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.actionIntertwiningInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+selected3BActionIntertwiningRemainsUninhabited =
+  TOE.toeSelected3BActionIntertwiningStillUninhabited
+
+outgoingLinearAcquisitionRemainsUninhabited :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.acquisitionInhabitedHere
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+outgoingLinearAcquisitionRemainsUninhabited =
+  TOE.toeOutgoingLinearAcquisitionStillUninhabited
