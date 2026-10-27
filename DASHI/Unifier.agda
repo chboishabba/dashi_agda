@@ -946,3 +946,35 @@ unifierDocumentRoleDoesNotSupplyLegalSourceAuthority =
 unifierCanonicalLegalSourceAuthorityBoundary =
   GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
 
+------------------------------------------------------------------------
+-- Governed legal workflow / source-genealogy handoff.
+-- This is a theorem facade.  Unifier does not become proof authority.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
+
+unifierGovernedLegalWorkflowSourceGenealogyHandoff :
+  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
+unifierGovernedLegalWorkflowSourceGenealogyHandoff =
+  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+
+unifierLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
+
+unifierLegalRepetitionDoesNotCreateIndependentEvidence =
+  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
+
+unifierLegalCommonSourceDoesNotEraseEvidence =
+  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
+
+unifierSourceMultiplicityDoesNotAdmitTruth =
+  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
+
+unifierGenealogyDoesNotPromoteLegalAuthorityTruth =
+  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
+
+unifierReviewedGenealogyDoesNotPayApplicability =
+  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
+
+unifierGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
+  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
