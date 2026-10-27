@@ -7,6 +7,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Empty using (⊥)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
@@ -139,6 +140,24 @@ unifiedR559IbrahimFleetHyperfabricReceipt :
   FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
 unifiedR559IbrahimFleetHyperfabricReceipt =
   FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
+
+unifiedYMGate4FormalGapsAre58 :
+  FleetHyperTOE.ymGate4FormalGaps ≡ 58
+unifiedYMGate4FormalGapsAre58 =
+  FleetHyperTOE.ymGate4FormalGapsAre58
+
+unifiedYMGate4PaidReductionLevel : ProofLevel
+unifiedYMGate4PaidReductionLevel =
+  FleetHyperTOE.ymGate4PaidReductionLevel
+
+unifiedYMGate4InhabitantsLevel : ProofLevel
+unifiedYMGate4InhabitantsLevel =
+  FleetHyperTOE.ymGate4InhabitantsLevel
+
+unifiedFleet58DoesNotIdentifyYMGate4 :
+  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
+unifiedFleet58DoesNotIdentifyYMGate4 =
+  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
 
 unifiedFleetFormalGapsAre58 :
   FleetHyperTOE.fleetFormalGaps ≡ 58
