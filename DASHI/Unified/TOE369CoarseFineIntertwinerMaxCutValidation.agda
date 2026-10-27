@@ -36,6 +36,7 @@ import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VO
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestAction
 import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as ShortestCandidate
 import DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact as RecognitionAcquisition
+import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as Albert27
 
 originIsFixed :
   Spectral.rotateXYZ Geometry.origin ≡ Geometry.origin
@@ -511,3 +512,39 @@ oeisStillDoesNotCreateRecognitionCandidate :
   RecognitionAcquisition.OEISCreatesBase369RecognitionCandidate → ⊥
 oeisStillDoesNotCreateRecognitionCandidate =
   TOE.toeOEISDoesNotCreateBase369RecognitionCandidate
+
+
+ternary27OriginPlus26CarrierRemainsPaid :
+  Albert27.Ternary27AlbertShapeFrontier.originPlus26BijectionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+ternary27OriginPlus26CarrierRemainsPaid =
+  TOE.toeTernary27OriginPlus26CarrierPaid
+
+ternary27AlbertShapeRemainsSameCarrier :
+  Albert27.Ternary27AlbertShapeFrontier.albert27ShapeInstantiatedOnSameCarrier
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+ternary27AlbertShapeRemainsSameCarrier =
+  TOE.toeTernary27AlbertShapeSameCarrierPaid
+
+ternary27JordanProductRemainsOpen :
+  Albert27.Ternary27AlbertShapeFrontier.jordanProductPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+ternary27JordanProductRemainsOpen =
+  TOE.toeTernary27JordanProductStillOpen
+
+ternary27F4ActionRemainsOpen :
+  Albert27.Ternary27AlbertShapeFrontier.f4ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+ternary27F4ActionRemainsOpen =
+  TOE.toeTernary27F4ActionStillOpen
+
+ternary27E6ActionRemainsOpen :
+  Albert27.Ternary27AlbertShapeFrontier.e6ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+ternary27E6ActionRemainsOpen =
+  TOE.toeTernary27E6ActionStillOpen
