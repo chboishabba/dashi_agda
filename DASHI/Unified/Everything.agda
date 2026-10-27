@@ -20,6 +20,7 @@ import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as AcquisitionCompletion
 import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as PhaseWeld
 import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as ActualAcquisition
+import DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact as RecognitionAcquisition
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
@@ -181,6 +182,21 @@ unifiedSameActionTwelveSeventyEightIntertwinerStillOpen :
   ≡ false
 unifiedSameActionTwelveSeventyEightIntertwinerStillOpen =
   MaxCutTOE.toeActualSameActionTwelveSeventyEightIntertwinerStillOpen
+
+
+unifiedRecognitionAcquisitionTargetLocalized :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.exactAcquisitionTargetLocalized
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ true
+unifiedRecognitionAcquisitionTargetLocalized =
+  MaxCutTOE.toeRecognitionAcquisitionTargetLocalized
+
+unifiedActualBase369RecognitionCandidateStillOpen :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.actualBase369RecognitionCandidatePaid
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ false
+unifiedActualBase369RecognitionCandidateStillOpen =
+  MaxCutTOE.toeActualBase369RecognitionCandidateStillOpen
 
 ------------------------------------------------------------------------
 -- Exact non-factorability: loss cannot be repaired by recharting.
