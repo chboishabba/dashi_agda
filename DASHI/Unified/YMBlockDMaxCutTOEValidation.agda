@@ -39,6 +39,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Unified.YMBlockDMaxCutTOEExact as BlockD
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as U
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 
 toeProjectiveCarrierMatchesBlockD :
   TOE.toe369YangMillsBlockDProjectiveCarrierLevel
@@ -81,21 +82,21 @@ boundedPlaquettePromotionRemainsFalse =
   BlockD.blockDBoundedPlaquettePromotionAllowedIsFalse
 
 toeContinuumPromotionRemainsFalse :
-  BlockD.YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
 toeContinuumPromotionRemainsFalse =
   TOE.toe369YangMillsBlockDContinuumStillOpen
 
 unifierContinuumPromotionRemainsFalse :
-  BlockD.YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
 unifierContinuumPromotionRemainsFalse =
   U.unifierYangMillsBlockDContinuumStillOpen
 
 toeClayPromotionRemainsFalse :
-  BlockD.YMTOE.toeClayYangMillsPromoted ≡ false
+  YMTOE.toeClayYangMillsPromoted ≡ false
 toeClayPromotionRemainsFalse =
   TOE.toe369YangMillsBlockDClayStillNotPromoted
 
 unifierClayPromotionRemainsFalse :
-  BlockD.YMTOE.toeClayYangMillsPromoted ≡ false
+  YMTOE.toeClayYangMillsPromoted ≡ false
 unifierClayPromotionRemainsFalse =
   U.unifierYangMillsBlockDClayStillNotPromoted
