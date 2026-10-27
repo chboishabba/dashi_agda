@@ -159,16 +159,6 @@ unifiedBalabanScaleTransferPromotionImpossible :
 unifiedBalabanScaleTransferPromotionImpossible =
   BalabanRGTOE.balabanScaleTransferPromotionImpossible
 
-unifiedBalabanContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-unifiedBalabanContinuumLimitPromotionImpossible =
-  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
-
-unifiedBalabanDepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-unifiedBalabanDepthContinuumLimitPromotionImpossible =
-  BalabanRGTOE.depthContinuumLimitPromotionImpossible
-
 ------------------------------------------------------------------------
 -- Joint Yang-Mills Balaban/R559 TOE receipt.
 ------------------------------------------------------------------------
