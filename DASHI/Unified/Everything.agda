@@ -165,8 +165,6 @@ unifiedBalabanScaleTransferNonPromotion =
 ------------------------------------------------------------------------
 
 import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
-import DASHI.Unified.R559IbrahimFleetHyperfabricTOEValidation
-
 unifiedR559IbrahimFleetHyperfabricReceipt :
   FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
 unifiedR559IbrahimFleetHyperfabricReceipt =
