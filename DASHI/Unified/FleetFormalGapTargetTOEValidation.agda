@@ -263,3 +263,58 @@ toeResidualFieldStillNotPromoted :
   Fleet.ResidualFieldPromotion → ⊥
 toeResidualFieldStillNotPromoted =
   TOE.toeFleetResidualFieldPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Named-manifest acquisition remains fail-closed at both TOE facades.
+------------------------------------------------------------------------
+
+toeFleetNamedManifestStillMissingMatches :
+  Fleet.namedFormalGapManifestAcquired ≡ false
+toeFleetNamedManifestStillMissingMatches =
+  TOE.toeFleetNamedManifestStillMissing
+
+unifierFleetNamedManifestStillMissingMatches :
+  Fleet.namedFormalGapManifestAcquired ≡ false
+unifierFleetNamedManifestStillMissingMatches =
+  Unifier.unifierFleetNamedManifestStillMissing
+
+toeFleetPerGapDispatchStillBlockedMatches :
+  Fleet.perGapDispatchEnabled ≡ false
+toeFleetPerGapDispatchStillBlockedMatches =
+  TOE.toeFleetPerGapDispatchStillBlocked
+
+unifierFleetPerGapDispatchStillBlockedMatches :
+  Fleet.perGapDispatchEnabled ≡ false
+unifierFleetPerGapDispatchStillBlockedMatches =
+  Unifier.unifierFleetPerGapDispatchStillBlocked
+
+toeFleetRelatedSymbolsRequiredMatches :
+  Fleet.fleetRelatedSymbolsRequired ≡ true
+toeFleetRelatedSymbolsRequiredMatches =
+  TOE.toeFleetRelatedSymbolsRequired
+
+unifierFleetRelatedSymbolsRequiredMatches :
+  Fleet.fleetRelatedSymbolsRequired ≡ true
+unifierFleetRelatedSymbolsRequiredMatches =
+  Unifier.unifierFleetRelatedSymbolsRequired
+
+toeFleetDiscoverRequiredMatches :
+  Fleet.fleetDiscoverRequired ≡ true
+toeFleetDiscoverRequiredMatches =
+  TOE.toeFleetDiscoverRequired
+
+unifierFleetDiscoverRequiredMatches :
+  Fleet.fleetDiscoverRequired ≡ true
+unifierFleetDiscoverRequiredMatches =
+  Unifier.unifierFleetDiscoverRequired
+
+toeFleetRoundLineageRequiredMatches :
+  Fleet.fleetRoundLineageRequired ≡ true
+toeFleetRoundLineageRequiredMatches =
+  TOE.toeFleetRoundLineageRequired
+
+unifierFleetRoundLineageRequiredMatches :
+  Fleet.fleetRoundLineageRequired ≡ true
+unifierFleetRoundLineageRequiredMatches =
+  Unifier.unifierFleetRoundLineageRequired
