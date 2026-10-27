@@ -38,6 +38,8 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
+      - 'DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda'
+      - 'DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
@@ -78,6 +80,13 @@ jobs:
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo discover 'Balaban regular-E localization Casimir stress RG' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+          dashi-repo diagnose DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda --root .
+          dashi-repo related rechartingCannotRecoverErasedPhenomenon --root . --limit 20
+          dashi-repo related round531PeriodicFourierSignQuotientIsBase369Carrier --root . --limit 20
+          dashi-repo discover 'dialectic ternary projection residual nonfactorability hyperfabric memory proof search Monster 196883 NS YM 369' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Core.IntersectionalNonFactorability --root .
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531Exact --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -102,10 +111,14 @@ jobs:
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
