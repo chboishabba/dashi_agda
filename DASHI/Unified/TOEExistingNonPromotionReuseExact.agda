@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Unified.TOEExistingNonPromotionReuseExact where
 
 open import Agda.Builtin.Equality using (_≡_)
