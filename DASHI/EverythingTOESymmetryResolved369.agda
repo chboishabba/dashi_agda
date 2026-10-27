@@ -435,12 +435,14 @@ toeBalabanR559ClayPromotionStillBlocked =
 
 ------------------------------------------------------------------------
 -- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The theorem owner remains the scale-transfer frontier.
+-- The joint receipt is the normalized TOE path.
 ------------------------------------------------------------------------
 
-import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
 import Data.Empty using (⊥)
 
 toeBalabanScaleTransferNonPromotion :
-  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
 toeBalabanScaleTransferNonPromotion =
-  RGNonPromotion.balabanRGScaleTransferPromotionImpossibleHere
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
