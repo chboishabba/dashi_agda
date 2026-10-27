@@ -1431,3 +1431,28 @@ toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
 toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+------------------------------------------------------------------------
+-- Live Gate-4 frontier and Fleet target selection.
+------------------------------------------------------------------------
+
+toeCurrentGate4FrontierLedgerLevel : ProofLevel
+toeCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+toeCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+toeCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+toeFleetFormalGapTargetSelected : Bool
+toeFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+toeHistoricalGate4CountSelectedAsFleetTarget : Bool
+toeHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
