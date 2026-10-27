@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Unified.Relate369HyperfabricPantsTOEExact where
 
 open import DASHI.Core.Prelude
