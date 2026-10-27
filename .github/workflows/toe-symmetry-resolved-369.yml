@@ -26,6 +26,16 @@ on:
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unifier.agda'
+      - 'Docs/bridges/GovernedLegalWorkflowTOEHandoff20261027.md'
+      - 'Docs/diagrams/governed_legal_source_authority_toe.puml'
+      - 'Docs/diagrams/pnf_distilled_nonpromotion_toe.puml'
+      - 'Docs/diagrams/governance_balaban_ibrahim_58gap_toe.puml'
+      - 'Docs/architecture/BalabanFleetDual58TOE.puml'
+      - 'tests/test_governed_legal_workflow_toe_convergence.py'
+      - 'tests/test_pnf_distilled_nonpromotion_toe.py'
+      - 'tests/test_scale_evidence_review_toe_convergence.py'
+      - 'tests/test_governance_balaban_ibrahim_58gap_toe.py'
+      - 'tests/test_balaban_fleet_dual58_toe.py'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
     paths:
@@ -56,6 +66,16 @@ on:
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
+      - 'Docs/bridges/GovernedLegalWorkflowTOEHandoff20261027.md'
+      - 'Docs/diagrams/governed_legal_source_authority_toe.puml'
+      - 'Docs/diagrams/pnf_distilled_nonpromotion_toe.puml'
+      - 'Docs/diagrams/governance_balaban_ibrahim_58gap_toe.puml'
+      - 'Docs/architecture/BalabanFleetDual58TOE.puml'
+      - 'tests/test_governed_legal_workflow_toe_convergence.py'
+      - 'tests/test_pnf_distilled_nonpromotion_toe.py'
+      - 'tests/test_scale_evidence_review_toe_convergence.py'
+      - 'tests/test_governance_balaban_ibrahim_58gap_toe.py'
+      - 'tests/test_balaban_fleet_dual58_toe.py'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
 concurrency:
@@ -113,6 +133,58 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+          dashi-repo diagnose DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/PNFSourceBoundaryTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanFleetDual58TOEExact.agda --root .
+          dashi-repo related canonicalGovernedLegalWorkflowTOEInvariantHandoff --root . --limit 20
+          dashi-repo related canonicalSCALEEvidenceReviewTOEReceipt --root . --limit 20
+          dashi-repo related gate4ObligationCount --root . --limit 20
+          dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
+          dashi-repo related canonicalBalabanFleetDual58TOEReceipt --root . --limit 20
+          dashi-repo discover 'legal source authority SensibLaw SCALE PNF fleet 584 44 58 Balaban Ibrahim Pareto snowball TOE non promotion' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflow --root .
+          dashi-repo lineage --prefix DASHI.Wikimedia.Ibrahim --root .
+
+      - name: Verify governed legal-workflow convergence
+        run: python -m pytest -q tests/test_governed_legal_workflow_toe_convergence.py
+
+      - name: Verify PNF distilled non-promotion convergence
+        run: python -m pytest -q tests/test_pnf_distilled_nonpromotion_toe.py
+
+      - name: Verify SCALE evidence-review convergence
+        run: python -m pytest -q tests/test_scale_evidence_review_toe_convergence.py
+
+      - name: Verify governance / Gate-4 58 convergence
+        run: python -m pytest -q tests/test_governance_balaban_ibrahim_58gap_toe.py
+
+      - name: Verify fleet / Gate-4 dual-58 convergence
+        run: python -m pytest -q tests/test_balaban_fleet_dual58_toe.py
+
+      - name: Preflight added TOE governance graph
+        run: |
+          modules=(
+            DASHI/Unified/PNFSourceBoundaryTOEExact.agda
+            DASHI/Unified/PNFSourceBoundaryTOEValidation.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda
+            DASHI/Unified/BalabanFleetDual58TOEExact.agda
+            DASHI/Unified/BalabanFleetDual58TOEValidation.agda
+          )
+          for module in "${modules[@]}"; do
+            dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+              --agda-extra-args='-i . -l standard-library' \
+              "$module"
+          done
 
       - name: Reject ESD surface changes
         shell: bash
@@ -144,6 +216,18 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
+            DASHI/Unified/PNFSourceBoundaryTOEExact.agda
+            DASHI/Unified/PNFSourceBoundaryTOEValidation.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda
+            DASHI/Unified/BalabanFleetDual58TOEExact.agda
+            DASHI/Unified/BalabanFleetDual58TOEValidation.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
@@ -168,6 +252,18 @@ jobs:
             DASHI/Unifier.agda
             DASHI/Unified/Everything.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+            DASHI/Unified/PNFSourceBoundaryTOEExact.agda
+            DASHI/Unified/PNFSourceBoundaryTOEValidation.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda
+            DASHI/Unified/BalabanFleetDual58TOEExact.agda
+            DASHI/Unified/BalabanFleetDual58TOEValidation.agda
           )
           for module in "${modules[@]}"; do
             agda -i . -l standard-library "$module"
