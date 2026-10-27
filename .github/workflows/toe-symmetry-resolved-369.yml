@@ -80,7 +80,11 @@ jobs:
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
-          dashi-repo discover 'Balaban regular-E localization Casimir stress RG continuum non-promotion' --root .
+          dashi-repo related balabanScaleDensityFiniteMeasureWeldLevel --root . --limit 20
+          dashi-repo related balabanRegularELocalizationCarrierLevel --root . --limit 20
+          dashi-repo related balabanCasimirLowerBoundTransportLevel --root . --limit 20
+          dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
+          dashi-repo discover 'Balaban scale density regular-E localization Casimir stress RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
 
