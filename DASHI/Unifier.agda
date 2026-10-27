@@ -1,6 +1,7 @@
 module DASHI.Unifier where
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -577,6 +578,40 @@ unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
 unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 unifierYangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+------------------------------------------------------------------------
+-- Canonical PNF source-boundary aliases.
+-- Exact proof authority remains in the native imported owners.
+------------------------------------------------------------------------
+
+toePNFSourceBoundaryReceipt :
+  PNFSource.PNFSourceBoundaryTOEReceipt
+toePNFSourceBoundaryReceipt =
+  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+
+toePNFGluingProxyDoesNotProveTrueLinearity =
+  PNFSource.gluingProxyDoesNotProveTrueLinearity
+
+toePNFSelfAdjointProxyDoesNotProveFiniteTheorem =
+  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
+
+toePNFDominationProxyDoesNotProveHamiltonianTheorem =
+  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
+
+toePNFFungalNetworkClaimsRequireSpeciesEvidence =
+  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
+
+toePNFKluverCobwebForm =
+  PNFSource.kluverCobwebForm
+
+toePNFKluverFormDoesNotPromoteUniversalSymbol =
+  PNFSource.kluverFormDoesNotPromoteUniversalSymbol
+
+toePNFKluverFormDoesNotPromoteRecoveredMemory =
+  PNFSource.kluverFormDoesNotPromoteRecoveredMemory
+
+toePNFPsychogeographyWebIdentifierKind =
+  PNFSource.psychogeographyWebIdentifierKind
 
 ------------------------------------------------------------------------
 -- PNF-distilled fail-closed reuse aliases.
