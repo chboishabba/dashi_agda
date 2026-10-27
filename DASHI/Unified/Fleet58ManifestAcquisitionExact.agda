@@ -174,6 +174,10 @@ roundLineageRequiredIsTrue =
   Fleet.roundLineageRequiredBeforeConstructionIsTrue
     Fleet.canonicalFleetFormalGapMaxCut
 
+SearchPriorityCreatesProof : Set
+SearchPriorityCreatesProof =
+  Pareto.SearchPriorityCreatesProof
+
 searchPriorityCreatesProof : Bool
 searchPriorityCreatesProof = false
 
