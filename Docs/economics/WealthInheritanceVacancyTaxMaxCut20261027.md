@@ -230,3 +230,21 @@ Observed GitHub current relevant PRs: #1275 source-typed Zipf family and strict 
 
 **Expected highest-value next consumer:** one linked identity- and time-indexed graph containing (a) original legal tax instrument, base/jurisdiction/rate, (b) assessed asset and owner, (c) realised payment/appeal, (d) voting instrument and control agreements, (e) appropriation, expenditure and effective care outcome, (f) the contrasted population/time/control. Absence of that empirical graph is an actual wall: constructing more synthetic snapshots does not resolve causation.
 
+## 9. Requested-topic inventory and exact status (27 Oct 2026)
+
+**All 42 subjects in both user-supplied transcripts** now have an explicit ID, claim-strength category, underlying root or unfilled source obligation, and bounded counterargument in the adjacent audit:
+
+[WealthTaxOriginalConversationsFullCoverage20261027.md](WealthTaxOriginalConversationsFullCoverage20261027.md).
+
+An executable structural completeness check lives at \`scripts/check_wealth_tax_requested_topics.py\`, registered in the existing philosophy/economics workflow. Its receipt only proves inventory presence and source/claim-ceiling text; it **does not certify original research, facts, Agda theorem verification or causal predictions**.
+
+### Three particularly consequential corrections
+
+1. **Adam Smith versus vacancy taxes.** *Wealth of Nations* (1776), Book V, Chapter II, Part II identifies rent, profits and wages as distinct income categories, discusses ground-rent taxation, and argues uninhabited houses should not incur the cited house-rent tax. That is a primary historical normative view, not a proof that current Vancouver/Victoria vacancy schemes fail or are unjustified. Transcribed root: https://en.wikisource.org/wiki/The_Wealth_of_Nations/Book_V/Chapter_2 . Separate modern statutory taxable object from eighteenth-century house-rent category.
+2. **Curtis Yarvin's Patchwork** (13 Nov 2008) explicitly suggests a self-assessed property tax for corporate-sovereign realms. This falsifies any blanket attribution that Yarvin's *own particular proposed design* contains no taxation. It does **not** justify Yarvin's political preferences or conflate him with anarcho-capitalism. Primary authored root: https://www.unqualified-reservations.org/2008/11/patchwork-positive-vision-part-1/ .
+3. **Thomas Piketty** clarifies in his own 2015 *JEP* article (DOI 10.1257/jep.29.1.67) that \`r > g\` is neither the only nor primary factor for every wealth inequality trend, so it is **not** an absolute mathematical inevitability proof. This is an authorial original, not a generic paper replacing an original citation.
+
+**Previously omitted instruments/source roles:** OECD Pillar Two corporate GloBE profit top-up (not personal wealth), HMRC share stamp duty (normally 0.5%, not a universal 0.1% FTT), FATF beneficial-ownership reporting (competent-authority access rather than universal public data), Henry George's site-value/rent tax, and 2013 left versus 1994/1997 Landian versus 2022 e/acc accelerationist author groups. The new receipts are in the existing two economics application modules, not in new discipline owners.
+
+**Quality status:** 42 rows inventoried and checked structurally in an exact GitHub blob; original/source/claim-ceiling audit remains a reading document. Full empirical settlement is limited by 10 open-evidence subjects after paying the Smith passage, including shifting billionaire valuation, FDR causality, AI audit performance, Samsung control, France mobility/administration data, algorithmic harassment tax effects and blackpill/doomerism author-specific claims. Open is not "missing topic"; it means **the relevant claimed effect has no admissible same-object proof receipt**.
+
