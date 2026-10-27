@@ -1504,6 +1504,56 @@ unifierNavierStokesTerminalPromotionImpossible =
 
 
 ------------------------------------------------------------------------
+-- R829-vector instantaneous snapshot and exact non-promotion boundary.
+------------------------------------------------------------------------
+
+unifierNavierStokesInstantaneousVectorSnapshotClosed : Bool
+unifierNavierStokesInstantaneousVectorSnapshotClosed =
+  NSClayTOE.instantaneousVectorSnapshotClosed
+
+unifierNavierStokesInstantaneousVectorSnapshotClosedIsTrue :
+  unifierNavierStokesInstantaneousVectorSnapshotClosed ≡ true
+unifierNavierStokesInstantaneousVectorSnapshotClosedIsTrue =
+  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
+
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegative =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
+
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
+  unifierNavierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+unifierNavierStokesRealFiniteODETransportClosed : Bool
+unifierNavierStokesRealFiniteODETransportClosed =
+  NSClayTOE.realFiniteODETransportClosed
+
+unifierNavierStokesRealFiniteODETransportStillOpen :
+  unifierNavierStokesRealFiniteODETransportClosed ≡ false
+unifierNavierStokesRealFiniteODETransportStillOpen =
+  NSClayTOE.realFiniteODETransportStillOpen
+
+unifierNavierStokesUniversalR823IntegratedReserveRefuted : Bool
+unifierNavierStokesUniversalR823IntegratedReserveRefuted =
+  NSClayTOE.universalR823IntegratedReserveRefuted
+
+unifierNavierStokesUniversalR823IntegratedReserveStillUnrefuted :
+  unifierNavierStokesUniversalR823IntegratedReserveRefuted ≡ false
+unifierNavierStokesUniversalR823IntegratedReserveStillUnrefuted =
+  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
+
+unifierNavierStokesInstantaneousSnapshotClayPromotion : Bool
+unifierNavierStokesInstantaneousSnapshotClayPromotion =
+  NSClayTOE.instantaneousSnapshotClayPromotion
+
+unifierNavierStokesInstantaneousSnapshotClayPromotionStillFalse :
+  unifierNavierStokesInstantaneousSnapshotClayPromotion ≡ false
+unifierNavierStokesInstantaneousSnapshotClayPromotionStillFalse =
+  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
+
+
+------------------------------------------------------------------------
 -- Current periodic-B shared weighted wall from R736.
 -- Proof ownership remains in R736 through the canonical NS Clay facade.
 ------------------------------------------------------------------------
