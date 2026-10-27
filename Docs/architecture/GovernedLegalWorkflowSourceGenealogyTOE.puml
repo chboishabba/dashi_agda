@@ -30,6 +30,10 @@ No new source ontology.
 No new Actionstep ontology.
 No source multiplicity -> truth.
 No ranking -> authority.
+No candidate source -> authority.
+No same legal system -> authority.
+No current validity -> applicability.
+No document role -> legal authority.
 No review visibility -> applicability.
 ESD surfaces remain import-only.
 end note
