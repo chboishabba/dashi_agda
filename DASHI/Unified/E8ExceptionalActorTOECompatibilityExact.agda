@@ -39,8 +39,8 @@ module DASHI.Unified.E8ExceptionalActorTOECompatibilityExact where
 -- Arithmetic equalities do not manufacture invariant submodules.
 --
 -- F. Verification.
--- This adapter contains no postulate, TERMINATING pragma, NO_POSITIVITY_CHECK,
--- or allow-unsolved-metas escape.
+-- This adapter uses only ordinary total definitions and imported theorem owners.
+-- It adds no local trust escape.
 -- Kernel status is inherited only after exact-head Agda checking.
 --
 -- Preconditions.
