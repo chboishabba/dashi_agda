@@ -15,6 +15,7 @@ import DASHI.Unified.CrossScaleMatterPhysics as CrossScaleMatterPhysics
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.GovernanceMaxCutParetoSnowballTOEConvergenceExact as GovernanceMaxCut
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
@@ -268,3 +269,28 @@ governedExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 governedExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+
+------------------------------------------------------------------------
+-- Governance + max-cut/Pareto/snowball convergence facade.
+------------------------------------------------------------------------
+
+unifiedGovernanceMaxCutParetoSnowballReceipt :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballTOEReceipt
+unifiedGovernanceMaxCutParetoSnowballReceipt =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballTOEReceipt
+
+unifiedGovernanceMaxCutParetoSnowballZKPFrame :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballZKPFrame
+unifiedGovernanceMaxCutParetoSnowballZKPFrame =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
+
+unifiedGovernanceMaxCutBalabanScaleTransferImpossible :
+  GovernanceMaxCut.BalabanScaleTransferPromotion → ⊥
+unifiedGovernanceMaxCutBalabanScaleTransferImpossible =
+  GovernanceMaxCut.balabanScaleTransferPromotionImpossible
+
+unifiedGovernanceMaxCutIbrahimSearchPriorityNotProof :
+  GovernanceMaxCut.SearchPriorityCreatesProof → ⊥
+unifiedGovernanceMaxCutIbrahimSearchPriorityNotProof =
+  GovernanceMaxCut.ibrahimSearchPriorityDoesNotCreateProof
