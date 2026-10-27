@@ -1,6 +1,7 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
@@ -782,6 +783,45 @@ toeFleetVectorCoordinateAdmissibilityStillFalse =
 
 toeFleetTextFallbackAuthorityStillFalse =
   FleetGapTOE.fleetTextFallbackAuthorityStillFalse
+
+------------------------------------------------------------------------
+-- Fleet 58 named-manifest acquisition wall.
+------------------------------------------------------------------------
+
+toeFleet58ManifestAcquisitionReceipt :
+  FleetManifestTOE.Fleet58ManifestAcquisitionReceipt
+toeFleet58ManifestAcquisitionReceipt =
+  FleetManifestTOE.canonicalFleet58ManifestAcquisitionReceipt
+
+toeFleet58ManifestPresent :
+  Bool
+toeFleet58ManifestPresent =
+  FleetManifestTOE.named58ManifestAcquired
+
+toeFleet58CountIdentifiesNamedRows :
+  Bool
+toeFleet58CountIdentifiesNamedRows =
+  FleetManifestTOE.countIdentifiesNamedRows
+
+toeFleet58PerGapDispatchEnabled :
+  Bool
+toeFleet58PerGapDispatchEnabled =
+  FleetManifestTOE.perGapDispatchEnabled
+
+toeFleet58ManifestZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeFleet58ManifestZKPFrame =
+  FleetManifestTOE.canonicalFleet58ManifestZKPFrame
+
+toeFleet58AcquisitionDoesNotPayRequirement :
+  FleetManifestTOE.BoundDemandAutomaticallyPaysRequirement → ⊥
+toeFleet58AcquisitionDoesNotPayRequirement =
+  FleetManifestTOE.acquisitionDoesNotPayRequirement
+
+toeFleet58SearchPriorityDoesNotCreateProof :
+  FleetManifestTOE.SearchPriorityCreatesProof → ⊥
+toeFleet58SearchPriorityDoesNotCreateProof =
+  FleetManifestTOE.searchPriorityDoesNotCreateProof
 
 ------------------------------------------------------------------------
 -- Joint Balaban RG + R559 same-owner max-cut receipt.
