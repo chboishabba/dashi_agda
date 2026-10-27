@@ -293,3 +293,33 @@ This pass re-inspected the two **user-supplied original pasted conversations**, 
 
 **Bounded interpretation:** The direct pasted texts are observations of earlier assistant responses, not authoritative historians or lawmakers. The new code demonstrates precise *nonidentity* and source attribution, not enactment, empirical causation, or ideological universality. The existing T17, T30, T32 and T39 inventory rows are expanded without treating additional detail as four new mathematical theorems. No unrelated PR or ESD module is modified.
 
+## 12. Attribution-source proof reuse: citation, independence and result authority (28 October 2026)
+
+**Owner quotient, not a new source ontology.** The thin TOE consumer `DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda` now imports four pre-existing sources of proof obligations without modifying their owners:
+
+1. `DASHI.Core.AttributedSourceCore` supplies `citationImportsProofIsFalse` and `citationCreatesAuthorityIsFalse`. The consumer explicitly aliases both for **every** inhabitant of the existing `AttributedSource` type. Named bibliography entries therefore remain attribution metadata and do not themselves import mathematical, statistical or legal authority.
+2. `DASHI.Core.SnowballAttributionProvenanceInvariantExact` supplies `citationDoesNotCreateProof` and already tracks author, year, DOI, publication, access carrier, source type, formalisation role, visibility and non-promotion as separate relevance axes. It does **not** make a bibliography into an independent proof.
+3. `DASHI.Core.EvidenceHyperfabricExact` supplies the proof that `independent` and `sharedLineage` are different source relations. The September OECD report, its chapter 3 on wealth-taxation revenue, and press articles derived from the same chapter are **one report producer/lineage**, not additional studies that corroborate one another. This use of the existing theorem is a source-lineage statement, not a universal source-independence classifier.
+4. `DASHI.Economics.SourceAttributionPromotionBoundaryExact` already rules out promoting identical text into independent verification, a source assertion into systemic classification, or a source-use receipt into a promotion-step producer. These are directly re-exported instead of creating economics-local duplicates.
+
+The local [42-topic audit](WealthTaxOriginalConversationsFullCoverage20261027.md) and `scripts/check_wealth_tax_requested_topics.py` now require the direct imported owners, named proof aliases, and a source bridge with no new `postulate` or `TERMINATING` shortcuts. They check that the proof-**source text** remains present. **This is not the same as checking those expressions in the Agda kernel.**
+
+### 12.1 Severe source-first comparisons, without false independence
+
+| Hypothesis | Admitted original root | Required test | False promotion rejected |
+|---|---|---|---|
+| Taxation raises money for care | OECD `Financing of Social Protection` (9 Sep 2026); its administrative funding accounts | Match enacted tax object, actual collection, net admin cost, funded services, population access and time | `assessed liability = realised care` |
+| Investors adapt to wealth taxation | Fagereng, Guiso and Ring, NBER WP 35262 (May 2026) | Portfolio composition, investment horizon and identification, **not** taxpayer migration alone | `portfolio reallocation = economy-wide collapse` |
+| Rich taxpayers change legal residence | Jakobsen, Kleven, Kolsrud, Landais and Munoz, `AER` 116(10) (Oct 2026) | Residence/wealth thresholds, years, destination, macro contribution and extrapolation | `migration = all-tax invalidity` |
+| A hard cap breaks firm control | ASIC corporate share classes, AASB 10 contractual control standard, and company-specific voting instruments | Actual beneficiary registry, share classes, voting agreements, threshold, tax payment and after-transfer majority | `assessed wealth reduction = transferred control` |
+| A fiscal rule changes who decides | Nancy Fraser 2003/2009, Sherry Arnstein 1969, Patricia Hill Collins 1986, plus institution-specific primary decisions | Observed redistribution, recognition and representation independently; compare policy governance | `progressive tax rate = democratic self-rule` |
+| A distribution is inevitable | Thomas Piketty 2015 clarification; separately PR #1275 Zipf/Pareto source-typed models | Calibrated dynamics of growth, returns, shocks, gifts, institutions and regression tests | `r > g` or 80/20 fit `= physical inevitability` |
+
+These are **alternative causal/mechanism tests**, not six statistics independent of their original producers. In particular the 2026 NBER Norwegian portfolio paper and 2026 AER Scandinavian migration paper ask different outcome questions even though they concern overlapping policy mechanisms.
+
+### 12.2 Latest PR cross-pollination and exact stopping gate
+
+PR [#1406](https://github.com/chboishabba/dashi_agda/pull/1406) reuses existing mathematics for a 2026 non-Archimedean paper; PR [#1405](https://github.com/chboishabba/dashi_agda/pull/1405) uses original-source ownership and query-indexed philosophy claims; PR [#1404](https://github.com/chboishabba/dashi_agda/pull/1404) separates test protocols from empirical receipts; PR [#1396](https://github.com/chboishabba/dashi_agda/pull/1396) brings existing `EvidenceHyperfabricExact` non-promotion into specialised TOE roots. Only **the method of source reuse** is transferred here. No sound-wave experiment, non-Archimedean spectral theorem, Monster 3B character or Kozyrev patent is a source for economic causation.
+
+**Stop conditions:** GitHub Actions must actually run the relevant Python script, semantic preflight and Agda; the proof-source path must typecheck against the exact PR head. Current branch still does not modify the newer specialised TOE roots because their current master versions contain extensive independent work absent from the older branch snapshot. Attribution, empirical test data and kernel certification remain separate obligations.
+
