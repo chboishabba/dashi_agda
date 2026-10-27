@@ -19,6 +19,7 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Unified.GRQuantumProofTermRegression
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.Relate369HyperfabricPantsTOEExact as Relate369PantsTOE
 
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
@@ -280,3 +281,43 @@ toe369YangMillsGoal1C4LiteralSectorRecoveryLevel =
 toe369YangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 toe369YangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+------------------------------------------------------------------------
+-- Relate 369 / hyperfabric / pants gluing normalized non-promotion surface.
+------------------------------------------------------------------------
+
+toe369PantsSeamDoesNotRewriteTopology :
+  Relate369PantsTOE.pantsSeamRewritesTopologyFlag ≡ false
+toe369PantsSeamDoesNotRewriteTopology =
+  Relate369PantsTOE.pantsSeamRewritesTopologyFlagIsFalse
+
+toe369FinitePantsPathStillNotSmoothSurface :
+  Relate369PantsTOE.finitePantsPathSmoothSurfaceFlag ≡ false
+toe369FinitePantsPathStillNotSmoothSurface =
+  Relate369PantsTOE.finitePantsPathSmoothSurfaceFlagIsFalse
+
+toe369CardinalityDoesNotCreateAdmissibleGluing :
+  Relate369PantsTOE.cardinalityCreatesAdmissibleGluingFlag ≡ false
+toe369CardinalityDoesNotCreateAdmissibleGluing =
+  Relate369PantsTOE.cardinalityCreatesAdmissibleGluingFlagIsFalse
+
+toe369AxisTwelveDoesNotBecomeModularWeightTwelve :
+  Relate369PantsTOE.axisTwelveEqualsWeightTwelveByDefinitionFlag ≡ false
+toe369AxisTwelveDoesNotBecomeModularWeightTwelve =
+  Relate369PantsTOE.axisTwelveEqualsWeightTwelveByDefinitionFlagIsFalse
+
+toe369SharedHyperformalCarrierDoesNotPromoteExternalTheorem :
+  Relate369PantsTOE.universal369PromotesExternalTheoremFlag ≡ false
+toe369SharedHyperformalCarrierDoesNotPromoteExternalTheorem =
+  Relate369PantsTOE.universal369PromotesExternalTheoremFlagIsFalse
+
+toe369RelateHyperfabricPantsZKPFrame :
+  Relate369PantsTOE.Relate369HyperfabricPantsTOEZKPFrame
+toe369RelateHyperfabricPantsZKPFrame =
+  Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEZKPFrame
+
+toe369RelateHyperfabricPantsReceipt :
+  Relate369PantsTOE.Relate369HyperfabricPantsTOEReceipt
+toe369RelateHyperfabricPantsReceipt =
+  Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEReceipt
