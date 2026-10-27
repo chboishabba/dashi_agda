@@ -1,5 +1,9 @@
 module DASHI.Unifier where
 
+-- Import exact theorem owners only.  Do not use the historical axiom-shaped
+-- interfaces below as promotion authority.
+import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
