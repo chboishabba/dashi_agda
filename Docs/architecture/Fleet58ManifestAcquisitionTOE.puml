@@ -1,0 +1,58 @@
+@startuml Fleet58ManifestAcquisitionTOE
+skinparam componentStyle rectangle
+
+package "External Fleet R4/R5 context" {
+  component "ITIR-suite R5 receipt\n584 discharged / 44 contradiction / 58 formal gaps" as R5
+  component "pnf-document-graph:d14f...56fc7" as Graph
+}
+
+package "Existing DASHI owners" {
+  component "FleetFormalGapTargetTOEExact" as Fleet
+  component "BoundAcquisitionDemandExact" as Bound
+  component "BalabanIbrahimParetoSnowballTOEExact" as Pareto
+}
+
+package "Normalized acquisition boundary" {
+  component "Fleet58ManifestAcquisitionExact" as Manifest
+  component "Fleet58ManifestAcquisitionRegression" as Regression
+}
+
+package "DASHI TOE consumers" {
+  component "EverythingTOESymmetryResolved369" as TOE
+  component "Unifier" as Unifier
+  component "Unified.Everything" as Unified
+}
+
+R5 --> Fleet : count/class receipt only
+Graph --> Manifest : source graph identity only
+Fleet --> Manifest : canonical 584 / 44 / 58 partition
+Bound --> Manifest : exact acquisition alignment
+Pareto --> Manifest : search priority does not create proof
+
+Manifest --> TOE
+Manifest --> Unifier
+Manifest --> Unified
+Manifest --> Regression
+TOE --> Regression
+Unifier --> Regression
+
+note bottom of Manifest
+Preconditions:
+- canonical Fleet partition exists
+- source-controlled 58-row manifest is absent
+
+Invariants:
+- count 58 does not identify named rows
+- 584 discharged fibres stay discharged
+- 44 contradiction gaps stay separate
+- acquisition does not pay the requirement
+- search priority does not create proof
+- ESD surfaces remain read-only
+- meta-introspector repositories keep separate authority
+
+Postcondition:
+- per-gap dispatch stays false until the named manifest is acquired
+- after acquisition, run related_symbols, discover, and round_lineage
+end note
+
+@enduml
