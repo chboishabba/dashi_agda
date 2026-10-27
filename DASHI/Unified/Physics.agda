@@ -315,3 +315,15 @@ yangMillsTOECriticalFamilyLevel :
   CriticalFamily → ProofLevel
 yangMillsTOECriticalFamilyLevel =
   YMTOE.toeCriticalFamilyLevel
+
+-- Literal two-Wilson source-native path.
+open YMTOE public using
+  ( LiteralTwoWilsonR413FourStageSource
+  ; toeLiteralTwoWilsonR413ToR444
+  ; LiteralTwoWilsonQuarterDyadicFamily
+  ; toeLiteralTwoWilsonQuarterDyadicToR556
+  ; toeLiteralTwoWilsonFiniteCovarianceBelowCanonicalDyadicShell
+  ; LiteralTwoWilsonGeneralGeometricFamily
+  ; toeLiteralTwoWilsonFiniteCovarianceGeneralGeometricBound
+  ; toeLiteralTwoWilsonGeneralGeometricTrajectory
+  )
