@@ -49,6 +49,7 @@ import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact 
 import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact as BR540Physical
 import DASHI.Physics.Closure.NSTriadKNFourSignInnerFibreGramBoundaryRound577Exact as BR577
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact as BFold
+import DASHI.Physics.Closure.NSTriadKNLiteralFixedOutputCovarianceM2PaymentExact as BFixedM2
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact as ADom
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationProducerExact as ADomProducer
 import DASHI.Physics.Closure.NSWholeSpaceActualPhysicalCompensatedFieldExact as AActualField
@@ -515,6 +516,30 @@ bR567CellBelowR571PairedMagnitudeClosed = false
 
 bForcingSquareBelowLiteralM2Closed : Bool
 bForcingSquareBelowLiteralM2Closed = false
+
+bLiteralFixedOutputCovarianceM2PaymentClosed : Bool
+bLiteralFixedOutputCovarianceM2PaymentClosed =
+  BFixedM2.literalFixedOutputCovarianceM2PaymentClosed
+
+bLiteralFixedOutputCovarianceM2AddsCardinalityFactor : Bool
+bLiteralFixedOutputCovarianceM2AddsCardinalityFactor =
+  BFixedM2.literalFixedOutputCovarianceM2AddsCardinalityFactor
+
+bLiteralFixedOutputCovarianceM2UsesTaylorCurvature : Bool
+bLiteralFixedOutputCovarianceM2UsesTaylorCurvature =
+  BFixedM2.literalFixedOutputCovarianceM2UsesTaylorCurvature
+
+bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue :
+  bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
+bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue = refl
+
+bLiteralFixedOutputCovarianceM2AddsCardinalityFactorIsFalse :
+  bLiteralFixedOutputCovarianceM2AddsCardinalityFactor ≡ false
+bLiteralFixedOutputCovarianceM2AddsCardinalityFactorIsFalse = refl
+
+bLiteralFixedOutputCovarianceM2UsesTaylorCurvatureIsFalse :
+  bLiteralFixedOutputCovarianceM2UsesTaylorCurvature ≡ false
+bLiteralFixedOutputCovarianceM2UsesTaylorCurvatureIsFalse = refl
 
 bCardinalityFreeM2DissipationFoldCompilerClosed : Bool
 bCardinalityFreeM2DissipationFoldCompilerClosed =
