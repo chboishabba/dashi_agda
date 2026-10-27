@@ -14,6 +14,9 @@ import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 import DASHI.Physics.Closure.NSTriadKNStage3Ternary369Ledger as NS369
 import DASHI.Physics.Closure.NSCross369OrientationBridgeExact as NSCross
 import DASHI.Physics.Closure.NSTriadKN369HighHighGramBridgeReceipt as NSGram
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Galerkin
+import DASHI.Physics.Closure.IncompressibleEulerGalerkinCoreExact as EulerCompat
+import DASHI.Physics.Closure.AlpogeBuckmasterSmoothForcedEulerBlowupBoundaryExact as ABEuler
 import DASHI.Foundations.Base369MobiusTransport as Mobius
 
 ------------------------------------------------------------------------
@@ -304,3 +307,57 @@ toeNS369ClayNotPromoted =
 toeNS369ComplexThreeNotCyclicC3 :
   NSCross.nsComplex3CarrierPromotedToCyclicC3 ≡ false
 toeNS369ComplexThreeNotCyclicC3 = refl
+
+
+------------------------------------------------------------------------
+-- 6. Reuse the historical Euler/Galerkin carrier and external blowup boundary.
+--
+-- Preconditions:
+--   * Galerkin.projectedNonlinearity is the existing physical Fourier owner.
+--   * EulerCompat is only a zero-origin compatibility adapter.
+--   * ABEuler is an external-result boundary with explicit non-promotion.
+--
+-- Invariants:
+--   * this TOE edge does not reassign Euler/Galerkin priority;
+--   * an external Lean proof is not a DASHI proof term;
+--   * an external smooth-forced Euler blowup theorem does not pay the
+--     unforced Navier--Stokes signed R406 / direct-companion leaf.
+--
+-- Postcondition:
+--   the focused TOE import graph reaches the canonical Galerkin owner and the
+--   exact external non-promotion theorems without a second PDE ontology.
+------------------------------------------------------------------------
+
+toeHistoricalProjectedGalerkinSumAlreadyConstructed :
+  Galerkin.literalProjectedGalerkinSumConstructed ≡ true
+toeHistoricalProjectedGalerkinSumAlreadyConstructed =
+  Galerkin.literalProjectedGalerkinSumConstructedIsTrue
+
+toeEulerCompatibilityAdapterDoesNotOriginateCarrier :
+  EulerCompat.thisAdapterOriginatesEulerGalerkinCarrier ≡ false
+toeEulerCompatibilityAdapterDoesNotOriginateCarrier = refl
+
+toeEulerCompatibilityAdapterGetsNoOriginPriority :
+  EulerCompat.thisAdapterGetsEulerOriginPriorityCredit ≡ false
+toeEulerCompatibilityAdapterGetsNoOriginPriority =
+  EulerCompat.thisAdapterGetsEulerOriginPriorityCreditIsFalse
+
+toeAlpogeBuckmasterAdapterGetsNoEulerOriginPriority :
+  ABEuler.thisAdapterReceivesEulerOriginPriorityCredit ≡ false
+toeAlpogeBuckmasterAdapterGetsNoEulerOriginPriority =
+  ABEuler.thisAdapterReceivesEulerOriginPriorityCreditIsFalse
+
+toeExternalEulerLeanProofNotTranscribed :
+  ABEuler.externalLeanProofTranscribedIntoDASHIHere ≡ false
+toeExternalEulerLeanProofNotTranscribed =
+  ABEuler.externalLeanProofTranscribedIntoDASHIHereIsFalse
+
+toeExternalEulerConstructionNotReproduced :
+  ABEuler.externalConstructionMechanismReproducedHere ≡ false
+toeExternalEulerConstructionNotReproduced =
+  ABEuler.externalConstructionMechanismReproducedHereIsFalse
+
+toeForcedEulerBlowupDoesNotPayUnforcedNSLeaf :
+  ABEuler.forcedEulerBlowupPaysUnforcedNSLeafA ≡ false
+toeForcedEulerBlowupDoesNotPayUnforcedNSLeaf =
+  ABEuler.forcedEulerBlowupPaysUnforcedNSLeafAIsFalse
