@@ -83,6 +83,13 @@ jobs:
           dashi-repo diagnose DASHI/Unifier.agda --root .
           dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda --root .
           dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda --root .
+          dashi-repo diagnose DASHI/Physics/Closure/NSTriadKNR650CurrentSharedWeightedWallRound736Exact.agda --root .
+          dashi-repo related round736ExactlyTwoPreferredAnalyticLeaves --root . --limit 20
+          dashi-repo related round736BothLeavesUseSameWeightedCarrier --root . --limit 20
+          dashi-repo related round736WeightedCarrierIsInputLaplacianWork --root . --limit 20
+          dashi-repo related round736ClayPromotion --root . --limit 20
+          dashi-repo discover 'Navier Stokes R736 shared weighted quartic input Laplacian two leaf Clay non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKNR650 --root .
           dashi-repo related terminalClayPromotionImpossible --root . --limit 20
           dashi-repo related carrierToGeneralNSImplicationStillOpen --root . --limit 20
           dashi-repo related navierStokesPromotionGuardStillFalse --root . --limit 20
