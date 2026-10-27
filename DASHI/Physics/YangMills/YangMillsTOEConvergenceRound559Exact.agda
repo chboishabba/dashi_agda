@@ -15,6 +15,7 @@ module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact where
 -- CompactSimpleClassificationAdjointCasimirExact owns exact C_A positivity.
 -- Round106 owns the canonical metric-stress representation compiler.
 -- YMClayOSLiteralStressRouteParetoExact owns stress/OPE route separation.
+-- R474 owns the authoritative least-privilege Goal-1 Clay frontier.
 -- R521 owns the concrete-semantics residual with zero opaque endpoint leaves.
 -- R546 owns the authoritative fourteen-family irreducible source frontier.
 -- R558 owns the seven-family critical mass-gap/nontriviality path.
@@ -40,7 +41,7 @@ module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact where
 --
 -- P. Postcondition.
 -- TOE consumers reach canonical RG, regular-E, Casimir, stress, irreducible
--- source-family, critical-path, concrete-semantics, and Clay-boundary owners
+-- Goal-1, source-family, critical-path, concrete-semantics, and Clay-boundary owners
 -- through one normalized surface.
 --
 -- G. Governance.
@@ -67,7 +68,7 @@ module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact where
 -- ESD and digital_esd surfaces remain unchanged.
 --
 -- Postconditions.
--- The TOE root reaches the canonical density, action, regular-E, Casimir, and stress owners.
+-- The TOE root reaches the canonical Goal-1, density, action, regular-E, Casimir, and stress owners.
 -- Unified.Physics reaches the same normalized aliases.
 -- Unifier reaches the same normalized aliases.
 -- The continuum, OS/Wightman, mass-gap, and Clay promotion gates remain false.
