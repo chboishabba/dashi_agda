@@ -174,8 +174,12 @@ canonicalSensibLawActionstepGovernanceTOEReceipt =
 -- Existing SensibLaw non-promotion laws remain the theorem owners.
 ------------------------------------------------------------------------
 
-semanticPromotionDoesNotCreateLegalAuthority :
+SemanticPromotionLegalAuthorityClosed : Set
+SemanticPromotionLegalAuthorityClosed =
   Semantic.legalAuthorityFlag Semantic.semanticPromotionAuthorityBoundary ≡ false
+
+semanticPromotionDoesNotCreateLegalAuthority :
+  SemanticPromotionLegalAuthorityClosed
 semanticPromotionDoesNotCreateLegalAuthority =
   Semantic.semantic-promotion-legal-authority-closed
 
