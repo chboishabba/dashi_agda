@@ -1380,7 +1380,7 @@ unifierGovernedLegalWorkflowComplianceZKPFrame =
   LegalCompliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
 
 unifierReportAdmissionDoesNotRepairMissingInput :
-  DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact.ReportAdmissionRepairsMissingInput → ⊥
+  LegalCompliance.ReportAdmissionRepairsMissingInput → ⊥
 unifierReportAdmissionDoesNotRepairMissingInput =
   LegalCompliance.reportAdmissionDoesNotRepairMissingInput
 
