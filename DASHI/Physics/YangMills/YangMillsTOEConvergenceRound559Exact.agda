@@ -70,7 +70,9 @@ import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exac
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as PublishedRG
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as Casimir
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as Stress106
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as GeneratedDensity132
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as StressScale135
+import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as CombinedAction141
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExact as Stress84
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAttackExact as Stress85
@@ -119,6 +121,29 @@ toeBetaHistorySameStateCouplingLevel =
 toeBetaHistoryToCanonicalCompleteDensityLevel : ProofLevel
 toeBetaHistoryToCanonicalCompleteDensityLevel =
   CanonicalDensity.balabanBetaHistoryToCanonicalCompleteDensityLevel
+
+-- Round132 is the canonical same-action weld.
+-- It maps the selected beta-driven density to the exact BC1/BC2 effective potential.
+-- The compiler is checked.
+-- The literal source realization remains conditional.
+toeUnifiedGeneratedActionDensityCompilerLevel : ProofLevel
+toeUnifiedGeneratedActionDensityCompilerLevel =
+  GeneratedDensity132.unifiedGeneratedActionDensityCompilerLevel
+
+toeLiteralUnifiedGeneratedActionDensityLevel : ProofLevel
+toeLiteralUnifiedGeneratedActionDensityLevel =
+  GeneratedDensity132.literalUnifiedGeneratedActionDensityLevel
+
+-- Round141 reuses the existing CombinedRG trajectory.
+-- It connects the complete density to the same effective-action realization.
+-- It does not create a second RG state.
+toeCompleteDensityEffectiveActionRealizationCompilerLevel : ProofLevel
+toeCompleteDensityEffectiveActionRealizationCompilerLevel =
+  CombinedAction141.completeDensityEffectiveActionRealizationCompilerLevel
+
+toeLiteralCompleteDensityEffectiveActionRealizationLevel : ProofLevel
+toeLiteralCompleteDensityEffectiveActionRealizationLevel =
+  CombinedAction141.literalCompleteDensityEffectiveActionRealizationLevel
 
 toeRegularESourceProjectionLevel : ProofLevel
 toeRegularESourceProjectionLevel =
@@ -209,6 +234,19 @@ toeContinuumMassGapPromotedIsFalse =
 toePublishedRGDoesNotPromoteContinuum :
   toeFlat4DContinuumTransferProvedHere ≡ false
 toePublishedRGDoesNotPromoteContinuum =
+  toeFlat4DContinuumTransferProvedHereIsFalse
+
+-- The same boundary applies after the density/action normalization.
+-- Round132 and Round141 are finite same-object compilers.
+-- They do not construct the missing continuum transfer.
+toeGeneratedActionDensityDoesNotPromoteContinuum :
+  toeFlat4DContinuumTransferProvedHere ≡ false
+toeGeneratedActionDensityDoesNotPromoteContinuum =
+  toeFlat4DContinuumTransferProvedHereIsFalse
+
+toeCombinedRGUnifiedActionDoesNotPromoteContinuum :
+  toeFlat4DContinuumTransferProvedHere ≡ false
+toeCombinedRGUnifiedActionDoesNotPromoteContinuum =
   toeFlat4DContinuumTransferProvedHereIsFalse
 
 toeDepthLimitNoSpectralPollutionProvedHere : Bool
