@@ -495,3 +495,79 @@ unifiedFleet58SearchPriorityDoesNotCreateProof :
   FleetManifestTOE.SearchPriorityCreatesProof → ⊥
 unifiedFleet58SearchPriorityDoesNotCreateProof =
   FleetManifestTOE.searchPriorityDoesNotCreateProof
+
+------------------------------------------------------------------------
+-- Fleet max-cut promotion and manifest firewalls.
+------------------------------------------------------------------------
+
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifiedFleetESDSurfaceUnedited :
+  FleetGapTOE.esdSurfaceEdited
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetESDSurfaceUnedited = refl
+
+unifiedFleetEigenPriorityPromotionImpossible :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+unifiedFleetEigenPriorityPromotionImpossible =
+  FleetGapTOE.fleetEigenPriorityPromotionImpossible
+
+unifiedFleetExternalCountPromotionImpossible :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+unifiedFleetExternalCountPromotionImpossible =
+  FleetGapTOE.fleetExternalCountPromotionImpossible
+
+unifiedFleetDischargedFibreRetargetImpossible :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+unifiedFleetDischargedFibreRetargetImpossible =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+unifiedFleetContradictionGapReclassificationImpossible :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+unifiedFleetContradictionGapReclassificationImpossible =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+unifiedFleet58ManifestAbsent :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+unifiedFleet58ManifestAbsent =
+  FleetManifestTOE.named58ManifestAcquiredIsFalse
+
+unifiedFleet58CountDoesNotNameRows :
+  FleetManifestTOE.countIdentifiesNamedRows ≡ false
+unifiedFleet58CountDoesNotNameRows =
+  FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+
+unifiedFleet58PerGapDispatchDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+unifiedFleet58PerGapDispatchDisabled =
+  FleetManifestTOE.perGapDispatchEnabledIsFalse
+
+unifiedFleet58RelatedSymbolsRequired :
+  FleetManifestTOE.relatedSymbolsRequired ≡ true
+unifiedFleet58RelatedSymbolsRequired =
+  FleetManifestTOE.relatedSymbolsRequiredIsTrue
+
+unifiedFleet58DiscoverRequired :
+  FleetManifestTOE.discoverRequired ≡ true
+unifiedFleet58DiscoverRequired =
+  FleetManifestTOE.discoverRequiredIsTrue
+
+unifiedFleet58RoundLineageRequired :
+  FleetManifestTOE.roundLineageRequired ≡ true
+unifiedFleet58RoundLineageRequired =
+  FleetManifestTOE.roundLineageRequiredIsTrue
+
+unifiedFleet58AcquisitionDoesNotCloseConsumer :
+  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+unifiedFleet58AcquisitionDoesNotCloseConsumer =
+  FleetManifestTOE.acquisitionDoesNotCloseConsumer
+
+unifiedFleet58ProducerDoesNotIdentifyResidual :
+  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
+unifiedFleet58ProducerDoesNotIdentifyResidual =
+  FleetManifestTOE.producerDoesNotIdentifyResidual
+
