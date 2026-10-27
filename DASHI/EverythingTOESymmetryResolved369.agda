@@ -288,38 +288,29 @@ toe369YangMillsGoal1C4CommonMetricCompilerLevel =
 ------------------------------------------------------------------------
 
 toe369PantsSeamDoesNotRewriteTopology :
-  Relate369PantsTOE.TypedPants.interfaceMatchAutomaticallyRewritesIncidence
-    Relate369PantsTOE.typedPantsBoundary
-  ≡ false
+  Relate369PantsTOE.pantsSeamRewritesTopologyFlag ≡ false
 toe369PantsSeamDoesNotRewriteTopology =
-  Relate369PantsTOE.pantsSeamDoesNotRewriteTopology
+  Relate369PantsTOE.pantsSeamRewritesTopologyFlagIsFalse
 
 toe369FinitePantsPathStillNotSmoothSurface :
-  Relate369PantsTOE.Pants369.finitePantsPathIsSmoothPantsSurface
-    Relate369PantsTOE.Pants369.canonicalColourWheelNinePantsBoundary
-  ≡ false
+  Relate369PantsTOE.finitePantsPathSmoothSurfaceFlag ≡ false
 toe369FinitePantsPathStillNotSmoothSurface =
-  Relate369PantsTOE.finitePantsPathIsNotSmoothPantsSurface
+  Relate369PantsTOE.finitePantsPathSmoothSurfaceFlagIsFalse
 
 toe369CardinalityDoesNotCreateAdmissibleGluing :
-  Relate369PantsTOE.Sheaf369.cardinalityAloneCreatesAdmissibleGluing
-    Relate369PantsTOE.Sheaf369.canonicalJSheafHyperformDescentFrontier
-  ≡ false
+  Relate369PantsTOE.cardinalityCreatesAdmissibleGluingFlag ≡ false
 toe369CardinalityDoesNotCreateAdmissibleGluing =
-  Relate369PantsTOE.sheafCardinalityAloneDoesNotCreateAdmissibleGluing
+  Relate369PantsTOE.cardinalityCreatesAdmissibleGluingFlagIsFalse
 
 toe369AxisTwelveDoesNotBecomeModularWeightTwelve :
-  Relate369PantsTOE.Sheaf369.axisTwelveEqualsModularWeightTwelveByDefinition
-    Relate369PantsTOE.Sheaf369.canonicalJSheafHyperformDescentFrontier
-  ≡ false
+  Relate369PantsTOE.axisTwelveEqualsWeightTwelveByDefinitionFlag ≡ false
 toe369AxisTwelveDoesNotBecomeModularWeightTwelve =
-  Relate369PantsTOE.axisTwelveDoesNotEqualModularWeightTwelveByDefinition
+  Relate369PantsTOE.axisTwelveEqualsWeightTwelveByDefinitionFlagIsFalse
 
 toe369SharedHyperformalCarrierDoesNotPromoteExternalTheorem :
-  (object : Relate369PantsTOE.PNF369.HyperfabricObject) →
-  Relate369PantsTOE.PNF369.hyperfabricPromotesExternalTheorem object ≡ false
+  Relate369PantsTOE.universal369PromotesExternalTheoremFlag ≡ false
 toe369SharedHyperformalCarrierDoesNotPromoteExternalTheorem =
-  Relate369PantsTOE.sharedHyperformalCarrierDoesNotPromoteExternalTheorem
+  Relate369PantsTOE.universal369PromotesExternalTheoremFlagIsFalse
 
 toe369RelateHyperfabricPantsZKPFrame :
   Relate369PantsTOE.Relate369HyperfabricPantsTOEZKPFrame
