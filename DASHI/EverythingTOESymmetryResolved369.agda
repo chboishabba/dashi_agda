@@ -40,6 +40,14 @@ toe369YangMillsCanonicalCompleteDensityLevel : ProofLevel
 toe369YangMillsCanonicalCompleteDensityLevel =
   YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
 
+toe369YangMillsGeneratedActionDensityCompilerLevel : ProofLevel
+toe369YangMillsGeneratedActionDensityCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
+
+toe369YangMillsCombinedRGUnifiedActionCompilerLevel : ProofLevel
+toe369YangMillsCombinedRGUnifiedActionCompilerLevel =
+  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
+
 toe369YangMillsRegularEProjectionLevel : ProofLevel
 toe369YangMillsRegularEProjectionLevel =
   YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
@@ -60,6 +68,16 @@ toe369YangMillsPublishedRGDoesNotPromoteContinuum :
   YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
 toe369YangMillsPublishedRGDoesNotPromoteContinuum =
   YMTOE.toePublishedRGDoesNotPromoteContinuum
+
+toe369YangMillsGeneratedActionDensityDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+toe369YangMillsGeneratedActionDensityDoesNotPromoteContinuum =
+  YMTOE.toeGeneratedActionDensityDoesNotPromoteContinuum
+
+toe369YangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+toe369YangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum =
+  YMTOE.toeCombinedRGUnifiedActionDoesNotPromoteContinuum
 
 toe369YangMillsOSWightmanContinuumNotConstructed :
   YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
