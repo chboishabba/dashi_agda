@@ -44,7 +44,8 @@ def test_unseen_positive_tail_not_logical_absence():
 def test_zero_observations_is_not_universal_model_evidence():
     models=(('g',E.finite_geometric_probabilities(3,F(1,2))),
             ('z',finite_rank_probabilities(3,1,0)))
-    assert E.select_finite_rank_model((0,0,0),models)==('g',F(1))
+    with pytest.raises(ValueError, match='no held-out observations'):
+        E.select_finite_rank_model((0,0,0),models)
 
 
 def test_zero_likelihood_does_not_get_logged_or_divided():
