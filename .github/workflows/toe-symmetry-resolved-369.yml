@@ -13,6 +13,7 @@ on:
       - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
       - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
+      - 'tests/test_governed_legal_workflow_toe_convergence.py'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
   pull_request:
@@ -38,12 +39,48 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
         with:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
+
+      - name: Install DASHI repository intelligence
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Search related symbols and lineage
+        run: |
+          dashi-repo index --root .
+          dashi-repo related canonicalGovernedLegalWorkflowTOEBoundary --root .
+          dashi-repo related canonicalGovernedLegalWorkflowZKPReceipt --root .
+          dashi-repo related toeCaseySelectionDoesNotCreateWorldTruth --root .
+          dashi-repo related toeKnowledgeDoesNotCreateExecutionAuthority --root .
+          dashi-repo discover 'SensibLaw governance legal workflow non promotion TOE' --root .
+          dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root .
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
+          dashi-repo lineage --prefix DASHI.Interop.ITIRFederatedTypedWorldProjection --root .
+
+      - name: Run deterministic static contract
+        run: python -m pytest -q tests/test_governed_legal_workflow_toe_convergence.py
+
+      - name: Run structural preflight
+        run: |
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/EverythingTOESymmetryResolved369.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unifier.agda
 
       - name: Reject trust escapes
         run: |
@@ -53,6 +90,7 @@ jobs:
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -60,8 +98,15 @@ jobs:
               exit 1
             fi
           done
+          if git diff --name-only "origin/${GITHUB_BASE_REF}...HEAD" | grep -Ei '(^|/)(dashi_digital_esd|[^/]*digital_esd[^/]*|[^/]*ESD[^/]*)'; then
+            echo "ESD surface changed" >&2
+            exit 1
+          fi
 
       - name: Kernel-check TOE symmetry-resolved aggregate
         run: |
           agda --version
+          agda -i . -l standard-library DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+          agda -i . -l standard-library DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
           agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          agda -i . -l standard-library DASHI/Unifier.agda
