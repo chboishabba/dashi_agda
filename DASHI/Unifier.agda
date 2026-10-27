@@ -9,7 +9,7 @@ import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -1205,3 +1205,238 @@ unifierYMImplementAToDScaleTransferNonPromotion :
 unifierYMImplementAToDScaleTransferNonPromotion =
   YMAD.scaleTransferPromotionEliminator
     YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
+
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+------------------------------------------------------------------------
+-- Navier-Stokes B / R571 M2 producer-strategy facade.
+------------------------------------------------------------------------
+
+unifierNavierStokesBM2FiniteFoldClosed : Bool
+unifierNavierStokesBM2FiniteFoldClosed =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosed
+
+unifierNavierStokesBM2SamplewisePaymentStillAnalytic :
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
+unifierNavierStokesBM2SamplewisePaymentStillAnalytic =
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
+
+unifierNavierStokesBM2GalerkinFoldStillAnalytic :
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
+unifierNavierStokesBM2GalerkinFoldStillAnalytic =
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
+  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
+unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
+  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
+
+unifierNavierStokesBM2OldPDFB7NotMandatory :
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+unifierNavierStokesBM2OldPDFB7NotMandatory =
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
+
+unifierNavierStokesBM2ClayPromotion : Bool
+unifierNavierStokesBM2ClayPromotion =
+  NSBM2TOE.modernNSClayPromotion
+
+unifierNavierStokesBM2ClayPromotionStillFalse :
+  unifierNavierStokesBM2ClayPromotion ≡ false
+unifierNavierStokesBM2ClayPromotionStillFalse =
+  NSBM2TOE.modernNSClayPromotionStillFalse
+
+unifierNavierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+unifierNavierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+unifierNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+unifierNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Canonical Navier-Stokes Clay frontier.
+-- Unifier consumes theorem-bearing owners through the normalized facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
+
+unifierNavierStokesClayPromotion : Bool
+unifierNavierStokesClayPromotion =
+  NSClayTOE.navierStokesABCDClayPromotion
+
+unifierNavierStokesClayPromotionStillFalse :
+  unifierNavierStokesClayPromotion ≡ false
+unifierNavierStokesClayPromotionStillFalse =
+  NSClayTOE.navierStokesABCDClayPromotionStillFalse
+
+unifierNavierStokesGeneralRegularityComplete : Bool
+unifierNavierStokesGeneralRegularityComplete =
+  NSClayTOE.generalNSGlobalRegularityComplete
+
+unifierNavierStokesGeneralRegularityStillOpen :
+  unifierNavierStokesGeneralRegularityComplete ≡ false
+unifierNavierStokesGeneralRegularityStillOpen =
+  NSClayTOE.generalNSGlobalRegularityStillOpen
+
+unifierNavierStokesCarrierToGeneralImplicationProved : Bool
+unifierNavierStokesCarrierToGeneralImplicationProved =
+  NSClayTOE.carrierToGeneralNSImplicationProved
+
+unifierNavierStokesCarrierToGeneralImplicationStillOpen :
+  unifierNavierStokesCarrierToGeneralImplicationProved ≡ false
+unifierNavierStokesCarrierToGeneralImplicationStillOpen =
+  NSClayTOE.carrierToGeneralNSImplicationStillOpen
+
+unifierNavierStokesAuthorityPromotionGuard : Bool
+unifierNavierStokesAuthorityPromotionGuard =
+  NSClayTOE.navierStokesPromotionGuard
+
+unifierNavierStokesAuthorityPromotionGuardStillFalse :
+  unifierNavierStokesAuthorityPromotionGuard ≡ false
+unifierNavierStokesAuthorityPromotionGuardStillFalse =
+  NSClayTOE.navierStokesPromotionGuardStillFalse
+
+unifierNavierStokesClayFrontierZKPFrame :
+  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
+unifierNavierStokesClayFrontierZKPFrame =
+  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+unifierNavierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
+unifierNavierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Current periodic-B shared weighted wall from R736.
+-- Proof ownership remains in R736 through the canonical NS Clay facade.
+------------------------------------------------------------------------
+
+unifierNavierStokesSharedWeightedExactlyTwoLeaves : Bool
+unifierNavierStokesSharedWeightedExactlyTwoLeaves =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
+
+unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
+  unifierNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
+unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+unifierNavierStokesSharedWeightedSameCarrier : Bool
+unifierNavierStokesSharedWeightedSameCarrier =
+  NSClayTOE.currentSharedWeightedSameCarrier
+
+unifierNavierStokesSharedWeightedSameCarrierIsTrue :
+  unifierNavierStokesSharedWeightedSameCarrier ≡ true
+unifierNavierStokesSharedWeightedSameCarrierIsTrue =
+  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+
+unifierNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
+unifierNavierStokesSharedWeightedCarrierIsInputLaplacian =
+  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+
+unifierNavierStokesWeightedPlusEndpointClosed : Bool
+unifierNavierStokesWeightedPlusEndpointClosed =
+  NSClayTOE.currentWeightedPlusEndpointClosed
+
+unifierNavierStokesWeightedPlusEndpointStillOpen :
+  unifierNavierStokesWeightedPlusEndpointClosed ≡ false
+unifierNavierStokesWeightedPlusEndpointStillOpen =
+  NSClayTOE.currentWeightedPlusEndpointStillOpen
+
+unifierNavierStokesAugmentedCriticalWeightedClosed : Bool
+unifierNavierStokesAugmentedCriticalWeightedClosed =
+  NSClayTOE.currentAugmentedCriticalWeightedClosed
+
+unifierNavierStokesAugmentedCriticalWeightedStillOpen :
+  unifierNavierStokesAugmentedCriticalWeightedClosed ≡ false
+unifierNavierStokesAugmentedCriticalWeightedStillOpen =
+  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
+
+unifierNavierStokesSharedWeightedLeavesBuildBarrier : Bool
+unifierNavierStokesSharedWeightedLeavesBuildBarrier =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+
+unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
+  unifierNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
+unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+unifierNavierStokesR726IndependentLeafRequired : Bool
+unifierNavierStokesR726IndependentLeafRequired =
+  NSClayTOE.legacyR726IndependentLeafRequired
+
+unifierNavierStokesR726IndependentLeafNotRequired :
+  unifierNavierStokesR726IndependentLeafRequired ≡ false
+unifierNavierStokesR726IndependentLeafNotRequired =
+  NSClayTOE.legacyR726IndependentLeafNotRequired
+
+unifierNavierStokesStrictMarginR406IndependentLeafRequired : Bool
+unifierNavierStokesStrictMarginR406IndependentLeafRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+
+unifierNavierStokesStrictMarginR406IndependentLeafNotRequired :
+  unifierNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
+unifierNavierStokesStrictMarginR406IndependentLeafNotRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+
+unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
+unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
+  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+
+unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
+  unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
+unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
+  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+
+unifierNavierStokesSharedWeightedClayPromotion : Bool
+unifierNavierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+unifierNavierStokesSharedWeightedClayPromotionStillFalse :
+  unifierNavierStokesSharedWeightedClayPromotion ≡ false
+unifierNavierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+unifierNavierStokesContinuumBKMPassageConstructed : Bool
+unifierNavierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+unifierNavierStokesContinuumBKMPassageStillOpen :
+  unifierNavierStokesContinuumBKMPassageConstructed ≡ false
+unifierNavierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+unifierNavierStokesAllDataBridgeConstructed : Bool
+unifierNavierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+unifierNavierStokesAllDataBridgeStillOpen :
+  unifierNavierStokesAllDataBridgeConstructed ≡ false
+unifierNavierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+unifierNavierStokesSubmissionPacketReady : Bool
+unifierNavierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+unifierNavierStokesSubmissionPacketStillNotReady :
+  unifierNavierStokesSubmissionPacketReady ≡ false
+unifierNavierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+unifierNavierStokesClayEligible : Bool
+unifierNavierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+unifierNavierStokesClayEligibilityStillFalse :
+  unifierNavierStokesClayEligible ≡ false
+unifierNavierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
