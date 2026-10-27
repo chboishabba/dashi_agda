@@ -1098,6 +1098,7 @@ toeBalabanOSWightmanStillBlocked =
 
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalGenealogyTOE
 import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSemanticTOE
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
 
 toeGovernedLegalWorkflowSourceSemanticHandoff :
   LegalSemanticTOE.GovernedLegalWorkflowSourceSemanticHandoff
@@ -1130,6 +1131,46 @@ toeLegalSemanticIdentifierAuthorityFirewall =
 
 toeLegalSemanticESDMutationForbidden =
   LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
+
+toeGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
+toeGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+toeQualificationDoesNotAutomaticallyProveForensicCompliance :
+  LegalGovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+toeQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
+
+toeLegalReviewDoesNotCreateClaimTruth :
+  LegalGovernanceTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
+toeLegalReviewDoesNotCreateClaimTruth =
+  LegalGovernanceTOE.toeLegalReviewDoesNotCreateClaimTruth
+
+toeOfficialLegalSurfaceDoesNotRecoverFineState :
+  LegalGovernanceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+toeOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalGovernanceTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
+
+toeOfficialActionDoesNotRecoverAutonomyAndAuthority :
+  LegalGovernanceTOE.OfficialActionRecoversAutonomyAndAuthority → ⊥
+toeOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalGovernanceTOE.toeOfficialActionDoesNotRecoverAutonomyAndAuthority
+
+toeLegalityAloneDoesNotCreateLegitimacy :
+  LegalGovernanceTOE.LegalOnlyCreatesLegitimacy → ⊥
+toeLegalityAloneDoesNotCreateLegitimacy =
+  LegalGovernanceTOE.toeLegalityAloneDoesNotCreateLegitimacy
+
+toeActionstepStyleVendorIdentityDoesNotCreateAuthority :
+  LegalGovernanceTOE.actionstepStyleVendorIdentityCreatesAuthority ≡ false
+toeActionstepStyleVendorIdentityDoesNotCreateAuthority =
+  LegalGovernanceTOE.toeActionstepStyleVendorIdentityCreatesAuthority
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitness :
+  LegalGovernanceTOE.actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
+toeActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalGovernanceTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
 
 
 ------------------------------------------------------------------------
