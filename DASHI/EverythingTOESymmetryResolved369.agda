@@ -894,6 +894,6 @@ toeFleet58PerGapDispatchStillBlocked =
   Fleet58Manifest.perGapDispatchEnabledIsFalse
 
 toeFleet58SearchPriorityDoesNotCreateProof :
-  Fleet58Manifest.Pareto.SearchPriorityCreatesProof → ⊥
+  Fleet58Manifest.SearchPriorityCreatesProof → ⊥
 toeFleet58SearchPriorityDoesNotCreateProof =
   Fleet58Manifest.searchPriorityDoesNotCreateProof
