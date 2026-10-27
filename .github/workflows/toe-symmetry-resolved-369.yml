@@ -30,7 +30,7 @@ on:
       - 'DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda'
       - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
       - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
-      - 'Docs/architecture/R559IbrahimFleetHyperfabricTOE.puml'
+      - 'Docs/architecture/R559IbrahimFleetTernaryHyperfabricTOE.puml'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
@@ -63,7 +63,7 @@ on:
       - 'DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda'
       - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
       - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
-      - 'Docs/architecture/R559IbrahimFleetHyperfabricTOE.puml'
+      - 'Docs/architecture/R559IbrahimFleetTernaryHyperfabricTOE.puml'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
