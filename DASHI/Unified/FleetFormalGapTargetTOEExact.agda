@@ -13,6 +13,10 @@ import DASHI.Interop.PNFResidualFieldInvariants as Residual
 import DASHI.Planning.PlanningPNFClaimBoundaryExact as Planning
 import DASHI.Promotion.ObligationIndex as Obligation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
+import DASHI.Unified.BalabanRGTOERegression as BalabanRG
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
+import DASHI.Quantum.QuantumMereologyExact as QM
+import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -111,6 +115,45 @@ fleetDoesNotRetargetDischargedFibres = refl
 fleetKeepsContradictionsSeparate :
   contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt ≡ true
 fleetKeepsContradictionsSeparate = refl
+
+------------------------------------------------------------------------
+-- Existing discharged motif owners.
+--
+-- These references prevent spectral planning labels from becoming new theorem
+-- owners. They do not assert that the external eigenvectors identify these
+-- modules by theorem.
+------------------------------------------------------------------------
+
+fleetBalabanDischargedOwnerReceipt :
+  BalabanRG.BalabanRGTOEReceipt
+fleetBalabanDischargedOwnerReceipt =
+  BalabanRG.canonicalBalabanRGTOEReceipt
+
+fleetNSPhysicalM2SummationCompilerStatus :
+  Bool
+fleetNSPhysicalM2SummationCompilerStatus =
+  NS.bSamplewiseM2SummationCompilerClosed
+
+fleetNSM2ToR568CompilerStatus :
+  Bool
+fleetNSM2ToR568CompilerStatus =
+  NS.bM2ToR568CompilerClosed
+
+fleetQuantumMereologyBoundary :
+  QM.QuantumMereologyBoundary
+fleetQuantumMereologyBoundary =
+  QM.canonicalQuantumMereologyBoundary
+
+fleetQuantumMereologyAttributionBoundary :
+  QMSources.QuantumMereologyAttributionBoundary
+fleetQuantumMereologyAttributionBoundary =
+  QMSources.canonicalQuantumMereologyAttributionBoundary
+
+data FleetSpectralLabelIdentifiesTheoremOwner : Set where
+
+fleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+fleetSpectralLabelDoesNotIdentifyTheoremOwner ()
 
 ------------------------------------------------------------------------
 -- Reused canonical proof and receipt owners.
