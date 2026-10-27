@@ -35,6 +35,9 @@ import DASHI.Physics.Closure.YMHamiltonianDominationProxyHarnessResult as Domina
 import DASHI.Biology.KluverFormConstantPsychedelicBoundaryExact as Kluver
 import DASHI.Biology.Levin.FungalNetworkAgencyBoundary as Fungal
 import DASHI.Biology.PsychogeographyYijingSourceAtlas as Sources
+import DASHI.Cognition.PNF.ITIRRelationalInterlinguaConsumerFibreExact as Relational
+import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact as IbrahimIndependence
+import DASHI.Wikimedia.IbrahimSnowballInformationCascadeEvidenceDependencyHyperfabricBidiExact as IbrahimDependency
 
 gluingProxyDoesNotProveTrueLinearity :
   Gluing.trueGluingLinearityProvedHere ≡ false
@@ -120,6 +123,61 @@ psychogeographyWebIdentifierKind =
 
 
 ------------------------------------------------------------------------
+-- Exact relational and provenance non-promotion firewalls.
+------------------------------------------------------------------------
+
+IdenticalWordsProveSamePredicate : Set
+IdenticalWordsProveSamePredicate =
+  Relational.IdenticalWordsProveSamePredicate
+
+CommonPnfFingerprintProvesClaimTruth : Set
+CommonPnfFingerprintProvesClaimTruth =
+  Relational.CommonPnfFingerprintProvesClaimTruth
+
+PerceivedIndependenceMeansActualIndependence : Set
+PerceivedIndependenceMeansActualIndependence =
+  IbrahimIndependence.PerceivedIndependenceMeansActualIndependence
+
+RepetitionMeansIndependentEvidence : Set
+RepetitionMeansIndependentEvidence =
+  IbrahimDependency.RepetitionMeansIndependentEvidence
+
+CommonSourceMeansNoEvidence : Set
+CommonSourceMeansNoEvidence =
+  IbrahimDependency.CommonSourceMeansNoEvidence
+
+identicalWordsDoNotPayPredicate :
+  IdenticalWordsProveSamePredicate →
+  ⊥
+identicalWordsDoNotPayPredicate =
+  Relational.wordsDoNotPayPredicate
+
+commonPnfFingerprintDoesNotCreateClaimTruth :
+  CommonPnfFingerprintProvesClaimTruth →
+  ⊥
+commonPnfFingerprintDoesNotCreateClaimTruth =
+  Relational.pnfCandidateNotTruth
+
+perceivedIndependenceDoesNotCreateProvenanceIndependence :
+  PerceivedIndependenceMeansActualIndependence →
+  ⊥
+perceivedIndependenceDoesNotCreateProvenanceIndependence =
+  IbrahimIndependence.perceivedIndependenceDoesNotCreateActualIndependence
+
+repetitionDoesNotCreateIndependentEvidence :
+  RepetitionMeansIndependentEvidence →
+  ⊥
+repetitionDoesNotCreateIndependentEvidence =
+  IbrahimDependency.repetitionDoesNotMeanIndependentEvidence
+
+commonSourceDoesNotEraseEvidence :
+  CommonSourceMeansNoEvidence →
+  ⊥
+commonSourceDoesNotEraseEvidence =
+  IbrahimDependency.commonSourceDoesNotMeanNoEvidence
+
+
+------------------------------------------------------------------------
 -- Canonical same-object receipt.
 --
 -- This record packages existing facts only.
@@ -169,6 +227,27 @@ record PNFSourceBoundaryTOEReceipt : Set₁ where
       Kluver.FormConstantPromotesRecoveredMemory →
       ⊥
 
+
+    identicalWordsPredicatePromotionRejected :
+      IdenticalWordsProveSamePredicate →
+      ⊥
+
+    commonPnfFingerprintTruthPromotionRejected :
+      CommonPnfFingerprintProvesClaimTruth →
+      ⊥
+
+    perceivedIndependencePromotionRejected :
+      PerceivedIndependenceMeansActualIndependence →
+      ⊥
+
+    repetitionIndependencePromotionRejected :
+      RepetitionMeansIndependentEvidence →
+      ⊥
+
+    commonSourceEvidenceErasureRejected :
+      CommonSourceMeansNoEvidence →
+      ⊥
+
 open PNFSourceBoundaryTOEReceipt public
 
 canonicalPNFSourceBoundaryTOEReceipt :
@@ -185,3 +264,8 @@ canonicalPNFSourceBoundaryTOEReceipt =
     fungalMyceliumIsNotInternetOrBrain
     kluverFormDoesNotPromoteUniversalSymbol
     kluverFormDoesNotPromoteRecoveredMemory
+    identicalWordsDoNotPayPredicate
+    commonPnfFingerprintDoesNotCreateClaimTruth
+    perceivedIndependenceDoesNotCreateProvenanceIndependence
+    repetitionDoesNotCreateIndependentEvidence
+    commonSourceDoesNotEraseEvidence
