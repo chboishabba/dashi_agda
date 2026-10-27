@@ -181,6 +181,8 @@ data EvidenceKind : Set where
   governmentObservedSeries : EvidenceKind
   scholarlyEmpiricalEstimate : EvidenceKind
   expertPolicyProposal : EvidenceKind
+  internationalModelRule : EvidenceKind
+  internationalStandardsGuidance : EvidenceKind
 
 data ClaimStrength : Set where
   enactedRule : ClaimStrength
@@ -188,6 +190,8 @@ data ClaimStrength : Set where
   conditionalResearchEstimate : ClaimStrength
   historicalAuthoredPosition : ClaimStrength
   proposedNotEnacted : ClaimStrength
+  adoptionDependsOnDomesticLaw : ClaimStrength
+  guidanceNotBindingByItself : ClaimStrength
 
 record TaxSourceReceipt : Set where
   constructor tax-source-receipt
@@ -274,7 +278,7 @@ oecdPillarTwo2026 = tax-source-receipt
   "OECD Inclusive Framework"
   "Global Minimum Tax (Pillar Two), 2026 guidance and model rules"
   "https://www.oecd.org/en/topics/global-minimum-tax.html"
-  enactedAdministrativePolicy enactedRule
+  internationalModelRule adoptionDependsOnDomesticLaw
   "qualified large MNE groups: jurisdictional ETR and 15 percent minimum top-up subject to GloBE base and substance exclusions; application depends on implemented domestic legislation"
   "not a personal wealth levy, automatic universal participation, or a tax on every firm's turnover"
 
@@ -292,7 +296,7 @@ fatfBO2023 = tax-source-receipt
   "Financial Action Task Force"
   "Guidance on Beneficial Ownership of Legal Persons, 10 March 2023"
   "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-Beneficial-Ownership-Legal-Persons.html"
-  expertPolicyProposal historicalAuthoredPosition
+  internationalStandardsGuidance guidanceNotBindingByItself
   "Recommendation 24 calls for adequate accurate up-to-date beneficial ownership information accessible to competent authorities; national laws vary"
   "not proof that each national beneficial-owner register is public or all holdings are found"
 
