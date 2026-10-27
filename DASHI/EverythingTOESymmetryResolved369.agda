@@ -22,6 +22,7 @@ import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Unified.BalabanAntigravityTOEConvergenceExact as BalabanAntiTOE
 
 open BalabanRGTOE public using
   ( sourceCouplingIsBetaHistoryCoupling
@@ -73,6 +74,19 @@ toeBalabanRGClayPromotionStillFalse =
 toeBalabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
 toeBalabanRGZKPFrame =
   BalabanRGTOE.canonicalBalabanTOEZKPFrame
+
+toeBalabanAntigravityReceipt :
+  BalabanAntiTOE.BalabanAntigravityTOEReceipt
+toeBalabanAntigravityReceipt =
+  BalabanAntiTOE.canonicalBalabanAntigravityTOEReceipt
+
+toeBalabanAntigravityS4CompilerLevel : ProofLevel
+toeBalabanAntigravityS4CompilerLevel =
+  BalabanAntiTOE.balabanAntigravityS4CompilerLevel
+
+toeBalabanAntigravityP3GCompilerLevel : ProofLevel
+toeBalabanAntigravityP3GCompilerLevel =
+  BalabanAntiTOE.balabanAntigravityP3GCompilerLevel
 
 toeBalabanRGReceipt : BalabanRGTOE.BalabanRGTOEReceipt
 toeBalabanRGReceipt =
