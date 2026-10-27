@@ -249,3 +249,20 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Byte-ABI / runtime non-promotion facade.
+------------------------------------------------------------------------
+
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as U8Runtime
+
+unifiedTriadicBoundedABIDoesNotCreateRust :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+unifiedTriadicBoundedABIDoesNotCreateRust =
+  TriadicABI.abiDoesNotCreateRust
+
+unifiedTriadicRuntimeSourceDoesNotCreateKernelCertification :
+  U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
+unifiedTriadicRuntimeSourceDoesNotCreateKernelCertification =
+  U8Runtime.runtimeSourceDoesNotCreateKernelCertification
