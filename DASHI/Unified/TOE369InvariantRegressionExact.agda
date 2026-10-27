@@ -24,27 +24,31 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Unified.TOELegalGovernanceHandoffExact as Legal
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as Semantic
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact as Network
+import DASHI.Reasoning.ClaimAuditManifestExact as Audit
 import DASHI.Unified.ArithmeticMoonshine as Arithmetic
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Moonshine.OggSSPP2F4CurveShearReflectionExact as CurveS3
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as Curve
 
 legalAuthorityRemainsClosed :
-  Legal.Authority.promotesAnyAuthority
-    Legal.Semantic.semanticPromotionAuthorityBoundary
+  Authority.promotesAnyAuthority
+    Semantic.semanticPromotionAuthorityBoundary
   ≡ false
 legalAuthorityRemainsClosed =
   Legal.toeLegalGovernancePostcondition
 
 legalNetworkCrawlingRemainsClosed :
-  Legal.Network.GovernedLegalNetworkBoundary.crawlingPermitted
+  Network.GovernedLegalNetworkBoundary.crawlingPermitted
     (Legal.networkBoundary Legal.canonicalZKPTOELegalGovernanceHandoff)
   ≡ false
 legalNetworkCrawlingRemainsClosed =
   Legal.toeLegalGovernanceNetworkPostcondition
 
 partialClaimCoverageRemainsNonTerminal :
-  Legal.Audit.ClaimAuditManifestBoundary.partialObligationCoverageEqualsWholeClaimSupport
+  Audit.ClaimAuditManifestBoundary.partialObligationCoverageEqualsWholeClaimSupport
     (Legal.claimAuditBoundary Legal.canonicalZKPTOELegalGovernanceHandoff)
   ≡ false
 partialClaimCoverageRemainsNonTerminal =
