@@ -1777,3 +1777,59 @@ unifierMissingAdmissibilityStillAbstains =
 
 unifierMissingValidationStillAbstains =
   LegalGovernance.selectedMissingValidationStillAbstains
+
+------------------------------------------------------------------------
+-- Fleet-58 acquisition max-cut.
+------------------------------------------------------------------------
+
+unifierFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifierFleet58ManifestAbsent :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+unifierFleet58ManifestAbsent =
+  FleetManifestTOE.named58ManifestAcquiredIsFalse
+
+unifierFleet58CountDoesNotNameRows :
+  FleetManifestTOE.countIdentifiesNamedRows ≡ false
+unifierFleet58CountDoesNotNameRows =
+  FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+
+unifierFleet58PerGapDispatchDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+unifierFleet58PerGapDispatchDisabled =
+  FleetManifestTOE.perGapDispatchEnabledIsFalse
+
+unifierFleet58RelatedSymbolsRequired :
+  FleetManifestTOE.relatedSymbolsRequired ≡ true
+unifierFleet58RelatedSymbolsRequired =
+  FleetManifestTOE.relatedSymbolsRequiredIsTrue
+
+unifierFleet58DiscoverRequired :
+  FleetManifestTOE.discoverRequired ≡ true
+unifierFleet58DiscoverRequired =
+  FleetManifestTOE.discoverRequiredIsTrue
+
+unifierFleet58RoundLineageRequired :
+  FleetManifestTOE.roundLineageRequired ≡ true
+unifierFleet58RoundLineageRequired =
+  FleetManifestTOE.roundLineageRequiredIsTrue
+
+unifierFleet58AcquisitionDoesNotCloseConsumer :
+  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+unifierFleet58AcquisitionDoesNotCloseConsumer =
+  FleetManifestTOE.acquisitionDoesNotCloseConsumer
+
+unifierFleet58ProducerDoesNotIdentifyResidual :
+  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
+unifierFleet58ProducerDoesNotIdentifyResidual =
+  FleetManifestTOE.producerDoesNotIdentifyResidual
