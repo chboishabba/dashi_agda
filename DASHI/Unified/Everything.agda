@@ -1,5 +1,6 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NSCut
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 
@@ -379,3 +380,78 @@ unified369Ternary27MonsterRepresentationNotPromoted =
 
 unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+------------------------------------------------------------------------
+-- Navier-Stokes A/B/C/D native-proof max-cut.
+------------------------------------------------------------------------
+
+unifiedNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
+unifiedNSABCDMaxCutReceipt = NSCut.canonicalNSABCDTOEMaxCutReceipt
+
+unifiedNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
+unifiedNSABCDZKPFrame = NSCut.canonicalNSABCDTOEZKPFrame
+
+unifiedNSLiteralFixedOutputCovarianceM2PaymentClosed :
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
+unifiedNSLiteralFixedOutputCovarianceM2PaymentClosed =
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue
+
+unifiedNSLiveResidualWeightedWorkIdentityClosed :
+  NSCut.bLiveResidualWeightedWorkIdentityClosed ≡ true
+unifiedNSLiveResidualWeightedWorkIdentityClosed =
+  NSCut.bLiveResidualWeightedWorkIdentityClosedIsTrue
+
+unifiedNSSelfRateNotIndependentAnalyticLeaf :
+  NSCut.bSelfRateIsIndependentAnalyticLeaf ≡ false
+unifiedNSSelfRateNotIndependentAnalyticLeaf =
+  NSCut.bSelfRateIsIndependentAnalyticLeafIsFalse
+
+unifiedNSCanonicalRouteDoesNotRequireM2Majorant :
+  NSCut.bCanonicalRouteRequiresM2Majorant ≡ false
+unifiedNSCanonicalRouteDoesNotRequireM2Majorant =
+  NSCut.bCanonicalRouteRequiresM2MajorantIsFalse
+
+unifiedNSLiveResidualCrossGradientNormalFormClosed :
+  NSCut.bLiveResidualCrossGradientNormalFormClosed ≡ true
+unifiedNSLiveResidualCrossGradientNormalFormClosed =
+  NSCut.bLiveResidualCrossGradientNormalFormClosedIsTrue
+
+unifiedNSRemainingCoordinateUsesLiteralPDotQ :
+  NSCut.bRemainingCoordinateUsesLiteralPDotQ ≡ true
+unifiedNSRemainingCoordinateUsesLiteralPDotQ =
+  NSCut.bRemainingCoordinateUsesLiteralPDotQIsTrue
+
+unifiedNSCrossGradientQuantitativePaymentStillOpen :
+  NSCut.bCrossGradientQuantitativePaymentClosed ≡ false
+unifiedNSCrossGradientQuantitativePaymentStillOpen =
+  NSCut.bCrossGradientQuantitativePaymentClosedIsFalse
+
+unifiedNSCrossGradientCutoffUniformAggregationStillOpen :
+  NSCut.bCrossGradientCutoffUniformAggregationClosed ≡ false
+unifiedNSCrossGradientCutoffUniformAggregationStillOpen =
+  NSCut.bCrossGradientCutoffUniformAggregationClosedIsFalse
+
+unifiedNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+unifiedNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
+
+unifiedNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+unifiedNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+unifiedNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+unifiedNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
+
+unifiedNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+unifiedNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
+
+unifiedNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+unifiedNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse
