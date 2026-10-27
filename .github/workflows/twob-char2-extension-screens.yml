@@ -1,0 +1,151 @@
+name: 2B characteristic-two extension screens
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/2b-same-object-final-maxcut-20261007
+    paths:
+      - 'scripts/m22d2_276_ten_factor_identification_screen.g'
+      - 'scripts/check_m22d2_276_ten_factor_identification_screen.sh'
+      - 'scripts/m22d2_duad276_extension_fingerprint_screen.g'
+      - 'scripts/check_m22d2_duad276_extension_fingerprint_screen.sh'
+      - 'scripts/m22d2_outer_class_m24_cycle_tate_defect_screen.g'
+      - 'scripts/check_m22d2_outer_class_m24_cycle_tate_defect_screen.sh'
+      - 'scripts/twob_local_outer_lift_monster_class_probe.g'
+      - 'scripts/check_twob_local_outer_lift_monster_class_probe.sh'
+      - 'scripts/m24_exterior_square24_duad276_screen.g'
+      - 'scripts/check_m24_exterior_square24_duad276_screen.sh'
+      - 'scripts/co1_f2_24_exterior_square276_fingerprint.g'
+      - 'scripts/check_co1_f2_24_exterior_square276_fingerprint.sh'
+      - 'scripts/co1_f2_symmetric_square_300_to_exterior276_screen.g'
+      - 'scripts/co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.g'
+      - 'scripts/check_co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.sh'
+      - 'scripts/co1_normal2pow24_augmentation_hom_screen.g'
+      - 'scripts/check_co1_normal2pow24_augmentation_hom_screen.sh'
+      - 'scripts/twob_centralizer_virtual_24_276_brauer_identity.g'
+      - 'scripts/check_twob_centralizer_virtual_24_276_brauer_identity.sh'
+      - 'scripts/twob_centralizer_mod2_decomposition_cancellation_screen.g'
+      - 'scripts/check_twob_centralizer_mod2_decomposition_cancellation_screen.sh'
+      - 'scripts/twob_2pow24_co1_char2_rep_probe.g'
+      - 'scripts/check_twob_2pow24_co1_char2_rep_probe.sh'
+      - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
+      - 'scripts/check_fi22d2_2pow10_m22d2_natural_module_screen.sh'
+      - 'scripts/render_twob_char2_extension_runtime_certificate.py'
+      - 'scripts/render_twob_co1_factorthrough_runtime_certificate.py'
+      - '.github/workflows/twob-char2-extension-screens.yml'
+  pull_request:
+    paths:
+      - 'scripts/m22d2_276_ten_factor_identification_screen.g'
+      - 'scripts/check_m22d2_276_ten_factor_identification_screen.sh'
+      - 'scripts/m22d2_duad276_extension_fingerprint_screen.g'
+      - 'scripts/check_m22d2_duad276_extension_fingerprint_screen.sh'
+      - 'scripts/m22d2_outer_class_m24_cycle_tate_defect_screen.g'
+      - 'scripts/check_m22d2_outer_class_m24_cycle_tate_defect_screen.sh'
+      - 'scripts/twob_local_outer_lift_monster_class_probe.g'
+      - 'scripts/check_twob_local_outer_lift_monster_class_probe.sh'
+      - 'scripts/m24_exterior_square24_duad276_screen.g'
+      - 'scripts/check_m24_exterior_square24_duad276_screen.sh'
+      - 'scripts/co1_f2_24_exterior_square276_fingerprint.g'
+      - 'scripts/check_co1_f2_24_exterior_square276_fingerprint.sh'
+      - 'scripts/co1_f2_symmetric_square_300_to_exterior276_screen.g'
+      - 'scripts/co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.g'
+      - 'scripts/check_co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.sh'
+      - 'scripts/co1_normal2pow24_augmentation_hom_screen.g'
+      - 'scripts/check_co1_normal2pow24_augmentation_hom_screen.sh'
+      - 'scripts/twob_centralizer_virtual_24_276_brauer_identity.g'
+      - 'scripts/check_twob_centralizer_virtual_24_276_brauer_identity.sh'
+      - 'scripts/twob_centralizer_mod2_decomposition_cancellation_screen.g'
+      - 'scripts/check_twob_centralizer_mod2_decomposition_cancellation_screen.sh'
+      - 'scripts/twob_2pow24_co1_char2_rep_probe.g'
+      - 'scripts/check_twob_2pow24_co1_char2_rep_probe.sh'
+      - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
+      - 'scripts/check_fi22d2_2pow10_m22d2_natural_module_screen.sh'
+      - 'scripts/render_twob_char2_extension_runtime_certificate.py'
+      - 'scripts/render_twob_co1_factorthrough_runtime_certificate.py'
+      - '.github/workflows/twob-char2-extension-screens.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  char2-extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: DeterminateSystems/nix-installer-action@v17
+      - name: Install GAP AtlasRep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gap gap-atlasrep gap-ctbllib python3
+      - name: Identify M22:2 stable ten-subquotient inside duad 276
+        run: bash scripts/check_m22d2_276_ten_factor_identification_screen.sh
+      - name: Compute M22:2 duad-276 extension fingerprint
+        run: bash scripts/check_m22d2_duad276_extension_fingerprint_screen.sh
+      - name: Compute outer-class M24 cycle / iterated-Tate defect targets
+        run: bash scripts/check_m22d2_outer_class_m24_cycle_tate_defect_screen.sh
+      - name: Probe full local lift and Monster class ambiguity
+        run: bash scripts/check_twob_local_outer_lift_monster_class_probe.sh
+      - name: Verify exterior-square 24 equals duad-276 over GF2
+        run: bash scripts/check_m24_exterior_square24_duad276_screen.sh
+      - name: Compute Co1 exterior-square 276 extension fingerprint
+        run: bash scripts/check_co1_f2_24_exterior_square276_fingerprint.sh
+      - name: Verify Co1 Sym2(24) quotient is exterior-square 276
+        run: gap -q scripts/co1_f2_symmetric_square_300_to_exterior276_screen.g
+      - name: Test uniqueness of Co1 Frobenius 24 in Sym2(24)
+        run: bash scripts/check_co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.sh
+      - name: Test Co1 augmentation Hom obstruction for normal 2^24 action
+        run: bash scripts/check_co1_normal2pow24_augmentation_hom_screen.sh
+      - name: Test 2B-centralizer virtual 24/276 Brauer identity
+        run: bash scripts/check_twob_centralizer_virtual_24_276_brauer_identity.sh
+      - name: Test 2B-centralizer mod-2 decomposition cancellation
+        run: bash scripts/check_twob_centralizer_mod2_decomposition_cancellation_screen.sh
+      - name: Render Co1 factor-through runtime certificate
+        run: |
+          python3 scripts/render_twob_co1_factorthrough_runtime_certificate.py \
+            build/co1_f2_24_exterior_square276_fingerprint.json \
+            build/twob_centralizer_virtual_24_276_brauer_identity.json \
+            build/co1_normal2pow24_augmentation_hom_screen.json \
+            build/co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.json \
+            build/twob_centralizer_mod2_decomposition_cancellation_screen.json \
+            DASHI/Moonshine/Generated/TwoBCo1FactorThroughRuntimeCertificate.agda
+      - name: Typecheck Co1 factor-through runtime certificate
+        run: |
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Moonshine/Generated/TwoBCo1FactorThroughRuntimeCertificate.agda
+      - name: Probe 2^24.Co1 characteristic-two representations
+        run: bash scripts/check_twob_2pow24_co1_char2_rep_probe.sh
+      - name: Identify Fi22:2 natural 2^10 Completion10 donor
+        run: bash scripts/check_fi22d2_2pow10_m22d2_natural_module_screen.sh
+      - name: Render exact Agda runtime certificate
+        run: |
+          python3 scripts/render_twob_char2_extension_runtime_certificate.py \
+            build/m22d2_276_ten_factor_identification_screen.json \
+            build/fi22d2_2pow10_m22d2_natural_module_screen.json \
+            DASHI/Moonshine/Generated/TwoBChar2ExtensionRuntimeCertificate.agda
+      - name: Typecheck generated runtime certificate
+        run: |
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Moonshine/Generated/TwoBChar2ExtensionRuntimeCertificate.agda
+      - name: Upload characteristic-two runtime receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: twob-char2-extension-runtime
+          path: |
+            build/m22d2_276_ten_factor_identification_screen.json
+            build/m22d2_duad276_extension_fingerprint_screen.json
+            build/m22d2_outer_class_m24_cycle_tate_defect_screen.json
+            build/twob_local_outer_lift_monster_class_probe.json
+            build/m24_exterior_square24_duad276_screen.json
+            build/co1_f2_24_exterior_square276_fingerprint.json
+            build/co1_f2_symmetric_square_300_to_exterior276_screen.json
+            build/co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.json
+            build/co1_normal2pow24_augmentation_hom_screen.json
+            build/twob_centralizer_virtual_24_276_brauer_identity.json
+            build/twob_centralizer_mod2_decomposition_cancellation_screen.json
+            build/twob_2pow24_co1_char2_rep_probe.json
+            build/fi22d2_2pow10_m22d2_natural_module_screen.json
+            DASHI/Moonshine/Generated/TwoBCo1FactorThroughRuntimeCertificate.agda
+            DASHI/Moonshine/Generated/TwoBChar2ExtensionRuntimeCertificate.agda
