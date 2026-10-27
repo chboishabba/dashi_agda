@@ -15,6 +15,8 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Relate369HyperfabricPantsTOEExact as Relate369PantsTOE
+import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as MaxCutTOE
+import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
@@ -127,3 +129,16 @@ repoStateSpaceTOEZKPFrame :
   RepoStateSpaceTOE.RepoStateSpaceTOEZKPFrame
 repoStateSpaceTOEZKPFrame =
   RepoStateSpaceTOE.canonicalRepoStateSpaceTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Reconciled Max Cut / kernel-BIDI / ternary-27 aggregate.
+------------------------------------------------------------------------
+
+unifiedTOE369MaxCutZKPFrame : MaxCutTOE.TOE369MaxCutZKPFrame
+unifiedTOE369MaxCutZKPFrame =
+  MaxCutTOE.canonicalTOE369MaxCutZKPFrame
+
+unifiedTOE369MaxCutReceipt : MaxCutTOE.TOE369MaxCutReceipt
+unifiedTOE369MaxCutReceipt =
+  MaxCutTOE.canonicalTOE369MaxCutReceipt
