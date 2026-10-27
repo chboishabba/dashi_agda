@@ -53,3 +53,39 @@ webIdentifierFacadeExact :
   Boundary.psychogeographyWebIdentifierKind
 webIdentifierFacadeExact =
   refl
+
+
+identicalWordsFirewallFacadeExact :
+  Unifier.toePNFIdenticalWordsDoNotPayPredicate
+  ≡
+  Boundary.identicalWordsDoNotPayPredicate
+identicalWordsFirewallFacadeExact =
+  refl
+
+commonFingerprintFirewallFacadeExact :
+  Unifier.toePNFCommonFingerprintDoesNotCreateTruth
+  ≡
+  Boundary.commonPnfFingerprintDoesNotCreateClaimTruth
+commonFingerprintFirewallFacadeExact =
+  refl
+
+perceivedIndependenceFirewallFacadeExact :
+  Unifier.toePNFPerceivedIndependenceDoesNotCreateProvenanceIndependence
+  ≡
+  Boundary.perceivedIndependenceDoesNotCreateProvenanceIndependence
+perceivedIndependenceFirewallFacadeExact =
+  refl
+
+repetitionFirewallFacadeExact :
+  Unifier.toePNFRepetitionDoesNotCreateIndependentEvidence
+  ≡
+  Boundary.repetitionDoesNotCreateIndependentEvidence
+repetitionFirewallFacadeExact =
+  refl
+
+commonSourceFirewallFacadeExact :
+  Unifier.toePNFCommonSourceDoesNotEraseEvidence
+  ≡
+  Boundary.commonSourceDoesNotEraseEvidence
+commonSourceFirewallFacadeExact =
+  refl
