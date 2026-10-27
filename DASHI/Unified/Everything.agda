@@ -5,6 +5,7 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Biology.PMDDHistamineAmplificationExact as PMDDHistamine
 import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact as PMDDMolecular
 import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact as PMDDIntervention
+import DASHI.Culture.ArabicRootPatternMorphologyProcessingBoundaryExact as ArabicMorphology
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -532,3 +533,31 @@ unifiedPMDDSymptomResponseMechanismIdentificationImpossible :
   PMDDIntervention.SymptomResponseDeterminesMechanism → ⊥
 unifiedPMDDSymptomResponseMechanismIdentificationImpossible =
   PMDDIntervention.symptomResponseDoesNotDetermineMechanism
+
+
+------------------------------------------------------------------------
+-- Culture-to-Unified attachment for Arabic root-pattern exact reopening.
+------------------------------------------------------------------------
+
+unifiedArabicRootPatternIntegrationBoundary :
+  ArabicMorphology.ArabicRootPatternIntegrationBoundary
+unifiedArabicRootPatternIntegrationBoundary =
+  ArabicMorphology.canonicalArabicRootPatternIntegrationBoundary
+
+unifiedArabicKTBRecoverableProjection :
+  ArabicMorphology.Recoverable.DependentExactRecoverableProjection
+    ArabicMorphology.KTBResolvedReading
+    ArabicMorphology.KTBUndiacritizedSurface
+unifiedArabicKTBRecoverableProjection =
+  ArabicMorphology.ktbDependentRecoverableProjection
+
+unifiedArabicKTBDependentCodeSeparating :
+  ArabicMorphology.Recoverable.DependentCodeSeparating
+    ArabicMorphology.ktbDependentRecoverableProjection
+unifiedArabicKTBDependentCodeSeparating =
+  ArabicMorphology.ktbDependentCodeSeparating
+
+unifiedArabicRootPatternZKPFrame :
+  ArabicMorphology.ArabicRootPatternZKPFrame
+unifiedArabicRootPatternZKPFrame =
+  ArabicMorphology.canonicalArabicRootPatternZKPFrame
