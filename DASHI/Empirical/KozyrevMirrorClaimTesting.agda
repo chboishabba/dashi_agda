@@ -15,6 +15,13 @@ import DASHI.Geometry.LorentzianLeviCivitaConditional as LeviCivita
 import DASHI.Physics.YangMills.YangMillsCizekEinsteinCartanClaimAuditExact as EinsteinCartanAudit
 import DASHI.Physics.YangMills.YangMillsPaperClaimAuditCarrierExact as PaperAudit
 import DASHI.Core.ScientificMechanismEvidenceBidiExact as Science
+import DASHI.Reasoning.TernaryPantsRecursiveWreathActionExact as ExistingWreath
+import DASHI.Physics.Common.FiniteWreathRefinementExact as ExistingFiniteWreath
+import DASHI.Topology.HelicalWeaveMappingTorusExact as ExistingHelix
+import DASHI.Biology.DialecticalSheetSpiralExact as ExistingSpiral
+import DASHI.Biology.Physical.Harmonic369HelixLiftExact as ExistingWinding
+import DASHI.Interop.StationaryPhaseMirrorGratingToyReceipt as ExistingOptics
+import DASHI.Physics.QuantumVacuum.PerfectConductorMaxwellSpectrumBidiExact as ExistingMaxwell
 import DASHI.Physics.POAMSScientificMechanismBoundaryExact as POAMS
 
 ------------------------------------------------------------------------
@@ -384,3 +391,107 @@ canonicalTorsionBridgeReadiness =
 
 -- No empty-space torsion assumption or claimed information-transfer effect
 -- is smuggled in by importing finite kinematics or signed-zero labels.
+
+------------------------------------------------------------------------
+-- Discovery cut: inherited spiral/wreath/helix/mirror-owner exact results.
+--
+-- No new spiral parameterisation, wreath multiplication or reflection
+-- calculus is constructed in the Kozyrev case owner.
+------------------------------------------------------------------------
+
+mirrorExistingFiniteWreathRoundTrip :
+  (assignment : ExistingFiniteWreath.Assignment) →
+  (site : ExistingFiniteWreath.TwoSite) →
+  ExistingFiniteWreath.localPermutationStep
+    (ExistingFiniteWreath.localPermutationStep assignment) site
+  ≡ assignment site
+mirrorExistingFiniteWreathRoundTrip =
+  ExistingFiniteWreath.localPermutationStepTwiceAt
+
+mirrorExistingRecursiveWreathInverse :
+  ExistingWreath.act
+    (ExistingWreath.inverseAut ExistingWreath.canonicalDepthTwoAut)
+    (ExistingWreath.act
+      ExistingWreath.canonicalDepthTwoAut ExistingWreath.samplePath)
+  ≡ ExistingWreath.samplePath
+mirrorExistingRecursiveWreathInverse =
+  ExistingWreath.sampleInverseRoundTrip
+
+mirrorExistingHelicalPhaseReturn :
+  (site : ExistingHelix.HelicalSite) →
+  ExistingHelix.stitchPhase (ExistingHelix.helicalThreeSteps site)
+  ≡ ExistingHelix.stitchPhase site
+mirrorExistingHelicalPhaseReturn =
+  ExistingHelix.threeStepsReturnToSamePhase
+
+mirrorExistingSpiralSenseParity :
+  (state : ExistingSpiral.SpiralState) →
+  ExistingSpiral.spiralSense (ExistingSpiral.liftReflection state)
+  ≡ ExistingSpiral.flipSense (ExistingSpiral.spiralSense state)
+mirrorExistingSpiralSenseParity =
+  ExistingSpiral.reflectionFlipsSpiralSense
+
+mirrorExistingWindingProjectionNoninjectiveWitness :
+  ExistingWinding.nineToSixForgetsWinding ExistingWinding.sampleHelixZero
+  ≡ ExistingWinding.nineToSixForgetsWinding ExistingWinding.sampleHelixOne
+mirrorExistingWindingProjectionNoninjectiveWitness =
+  ExistingWinding.sameCircularProjectionDifferentHistory
+
+mirrorExistingStationaryPhaseMirrorSetup :
+  ExistingOptics.StationaryPhaseToySetup
+mirrorExistingStationaryPhaseMirrorSetup =
+  ExistingOptics.mirrorFermatToySetup
+
+mirrorExistingPerfectConductorBoundaryKind :
+  ExistingMaxwell.BoundaryConditionClass
+mirrorExistingPerfectConductorBoundaryKind =
+  ExistingMaxwell.tangentialElectricZero
+
+------------------------------------------------------------------------
+-- These exact imported theorems prove their own source-native semantics.
+-- No source-native theorem states that a metal enclosure implements a
+-- particular wreath automorphism, log-polar spiral, Maxwell spectrum or
+-- physical spacetime-torsion source. An explicit, calibrated realisation
+-- and boundary-value problem must supply those identifications.
+------------------------------------------------------------------------
+
+data ExistingGeometryKozyrevRealisationRequirement : Set where
+  selectPatentEditionAndMeasuredSurface : ExistingGeometryKozyrevRealisationRequirement
+  supplySurfaceCoordinateMapIntoExistingGeometry : ExistingGeometryKozyrevRealisationRequirement
+  proveHandednessAndBoundaryTransport : ExistingGeometryKozyrevRealisationRequirement
+  identifyPhysicalMaterialConstitutiveParameters : ExistingGeometryKozyrevRealisationRequirement
+  identifyMaxwellOrAcousticOperatorOnSameGeometry : ExistingGeometryKozyrevRealisationRequirement
+  supplyInstrumentResponseAndUncertainty : ExistingGeometryKozyrevRealisationRequirement
+  compareHeldOutShamAndActiveOnSameObservable : ExistingGeometryKozyrevRealisationRequirement
+
+canonicalExistingGeometryRealisationCut :
+  List ExistingGeometryKozyrevRealisationRequirement
+canonicalExistingGeometryRealisationCut =
+  selectPatentEditionAndMeasuredSurface
+  ∷ supplySurfaceCoordinateMapIntoExistingGeometry
+  ∷ proveHandednessAndBoundaryTransport
+  ∷ identifyPhysicalMaterialConstitutiveParameters
+  ∷ identifyMaxwellOrAcousticOperatorOnSameGeometry
+  ∷ supplyInstrumentResponseAndUncertainty
+  ∷ compareHeldOutShamAndActiveOnSameObservable
+  ∷ []
+
+record ExistingGeometryReuseBoundary : Set where
+  constructor existingGeometryReuseBoundary
+  field
+    spiralAndWreathMathematicsAvailable : Bool
+    spiralAndWreathMathematicsAvailableIsTrue :
+      spiralAndWreathMathematicsAvailable ≡ true
+    measuredMirrorSurfaceSelected : Bool
+    measuredMirrorSurfaceSelectedIsFalse :
+      measuredMirrorSurfaceSelected ≡ false
+    exactMaterialBoundaryOperatorRealised : Bool
+    exactMaterialBoundaryOperatorRealisedIsFalse :
+      exactMaterialBoundaryOperatorRealised ≡ false
+    physicalTorsionPredictionDerived : Bool
+    physicalTorsionPredictionDerivedIsFalse :
+      physicalTorsionPredictionDerived ≡ false
+
+canonicalExistingGeometryReuseBoundary : ExistingGeometryReuseBoundary
+canonicalExistingGeometryReuseBoundary =
+  existingGeometryReuseBoundary true refl false refl false refl false refl
