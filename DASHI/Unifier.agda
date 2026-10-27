@@ -941,6 +941,12 @@ unifierFleetNumericABIReceipt =
 unifierFleetResidualInvariantReceipt =
   FleetGapTOE.fleetResidualInvariantReceipt
 
+unifierFleetPlanningBoundary =
+  FleetGapTOE.fleetPlanningBoundary
+
+unifierFleetVectorCoordinateDoesNotCreateTruth =
+  FleetGapTOE.fleetVectorCoordinateDoesNotCreateTruth
+
 unifierFleetPromotionObligationIndex =
   FleetGapTOE.fleetPromotionObligationIndex
 
