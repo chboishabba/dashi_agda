@@ -1,7 +1,16 @@
 module DASHI.Unifier where
 
+-- TOE governance lane. Reuse original proof owners; no ESD modifications.
+import DASHI.Governance.BOMFordhamMediaClaimAuditExact as BOM
+import DASHI.Governance.BOMFordhamMediaClaimAuditValidation as BOMCheck
+import DASHI.Governance.EmpiricalGenealogyRound3Regression as Origins
+import DASHI.Governance.ClimateGenealogyTypedCasesExact as Climate
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false; true)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -313,3 +322,68 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- Fact check BOM scandal: proof-preserving aliases from original owners.
+-- A reported error is not fraud. Repetition is not independent evidence.
+-- Shared policy headlines do not identify original source or tax design.
+------------------------------------------------------------------------
+
+toeBOMHistoricalErrorDoesNotProveFraud :
+  BOM.rawDigitisationErrorImpliesDeliberateFraud
+    BOM.canonicalNonPromotionBoundary ≡ false
+toeBOMHistoricalErrorDoesNotProveFraud =
+  BOMCheck.historicalErrorCannotProveFraud
+
+toeBOMMediaOwnershipDoesNotProveCommand :
+  BOM.publisherOwnershipProvesEditorialDirection
+    BOM.canonicalNonPromotionBoundary ≡ false
+toeBOMMediaOwnershipDoesNotProveCommand =
+  BOMCheck.ownershipDoesNotEstablishCommand
+
+toeBOMRhetoricDoesNotProveCoordination :
+  BOM.sameRhetoricProvesTPUSAOrBannonControl
+    BOM.canonicalNonPromotionBoundary ≡ false
+toeBOMRhetoricDoesNotProveCoordination =
+  BOMCheck.similarRhetoricDoesNotProveNetwork
+
+toeBOMOriginalAuditRemainsUnacquired :
+  BOM.canonicalOriginalAuditStatus ≡ BOM.notAcquired
+toeBOMOriginalAuditRemainsUnacquired =
+  BOMCheck.unseenAuditIsNotAcquired
+
+toeBOMCorrectionRequiresSameObject :
+  BOM.correctionNeedsSameObjectDataComparison
+    BOM.canonicalNonPromotionBoundary ≡ true
+toeBOMCorrectionRequiresSameObject =
+  BOMCheck.correctionRequiresSameObjectComparison
+
+toeBOMPalmervilleRoundedDataCannotRecoverExactDay :
+  INF.FactorsThrough
+    BOM.roundedSeventeenDayObservation BOM.firstDayTenths → ⊥
+toeBOMPalmervilleRoundedDataCannotRecoverExactDay =
+  BOMCheck.palmervilleMeasurementPrecisionNotAProbability
+
+toeClimateRepeated17BDoesNotIdentifySourceCount :
+  INF.FactorsThrough
+    Climate.same17BPrinted Climate.namedModelSourceCount → ⊥
+toeClimateRepeated17BDoesNotIdentifySourceCount =
+  Origins.same17BHeadlineDoesNotIdentifyNamedModelCount
+
+toeClimateSame25PcDoesNotIdentifyTaxDesign :
+  INF.FactorsThrough
+    Climate.taxRateLabel Climate.taxPolicyMeaning → ⊥
+toeClimateSame25PcDoesNotIdentifyTaxDesign =
+  Origins.same25PcHeadlineDoesNotIdentifyTaxDesign
+
+toeIndustry21Point9BDoesNotIdentifyForecastStatus :
+  INF.FactorsThrough
+    Climate.same21BPrinted Climate.reportedStatusFor21B → ⊥
+toeIndustry21Point9BDoesNotIdentifyForecastStatus =
+  Origins.same21Point9BNumberDoesNotEstablishActualityStatus
+
+toeThinkTankProximityDoesNotProveDirection :
+  Proximity.InfluenceThroughProximity → ⊥
+toeThinkTankProximityDoesNotProveDirection =
+  Proximity.influenceDoesNotFactorThroughProximity
