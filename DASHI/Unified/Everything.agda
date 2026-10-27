@@ -21,6 +21,7 @@ import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact a
 import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as PhaseWeld
 import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as ActualAcquisition
 import DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact as RecognitionAcquisition
+import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as Albert27
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
@@ -197,6 +198,42 @@ unifiedActualBase369RecognitionCandidateStillOpen :
   ≡ false
 unifiedActualBase369RecognitionCandidateStillOpen =
   MaxCutTOE.toeActualBase369RecognitionCandidateStillOpen
+
+
+unifiedTernary27OriginPlus26CarrierPaid :
+  Albert27.Ternary27AlbertShapeFrontier.originPlus26BijectionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+unifiedTernary27OriginPlus26CarrierPaid =
+  MaxCutTOE.toeTernary27OriginPlus26CarrierPaid
+
+unifiedTernary27AlbertShapeSameCarrierPaid :
+  Albert27.Ternary27AlbertShapeFrontier.albert27ShapeInstantiatedOnSameCarrier
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+unifiedTernary27AlbertShapeSameCarrierPaid =
+  MaxCutTOE.toeTernary27AlbertShapeSameCarrierPaid
+
+unifiedTernary27JordanProductStillOpen :
+  Albert27.Ternary27AlbertShapeFrontier.jordanProductPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+unifiedTernary27JordanProductStillOpen =
+  MaxCutTOE.toeTernary27JordanProductStillOpen
+
+unifiedTernary27F4ActionStillOpen :
+  Albert27.Ternary27AlbertShapeFrontier.f4ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+unifiedTernary27F4ActionStillOpen =
+  MaxCutTOE.toeTernary27F4ActionStillOpen
+
+unifiedTernary27E6ActionStillOpen :
+  Albert27.Ternary27AlbertShapeFrontier.e6ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+unifiedTernary27E6ActionStillOpen =
+  MaxCutTOE.toeTernary27E6ActionStillOpen
 
 ------------------------------------------------------------------------
 -- Exact non-factorability: loss cannot be repaired by recharting.
