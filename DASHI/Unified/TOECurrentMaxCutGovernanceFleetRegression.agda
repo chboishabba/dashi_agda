@@ -46,3 +46,22 @@ ibrahimSearchPriorityDoesNotCreateRecognition = refl
 esdRemainsReadOnly :
   Cut.esdSurfaceEdited ≡ false
 esdRemainsReadOnly = refl
+
+
+-- Source-owned promotion policy is reachable through the TOE consumer.
+semanticPromotionCannotCreateLegalAuthority :
+  Cut.Authority.legalAuthorityFlag Cut.toeSemanticPromotionAuthorityBoundary ≡ false
+semanticPromotionCannotCreateLegalAuthority =
+  Cut.toeSemanticPromotionCannotCreateLegalAuthority
+
+semanticPromotionCannotCreateAnyAuthority :
+  Cut.Authority.promotesAnyAuthority Cut.toeSemanticPromotionAuthorityBoundary ≡ false
+semanticPromotionCannotCreateAnyAuthority =
+  Cut.toeSemanticPromotionCannotCreateAnyAuthority
+
+allCanonicalAuthorityKindsRemainClosed :
+  Cut.Authority.AllAuthorityKindsFalse
+    Cut.Authority.canonicalAuthorityNonPromotionBundle
+    Cut.Authority.canonicalAuthorityKinds
+allCanonicalAuthorityKindsRemainClosed =
+  Cut.toeCanonicalAuthorityKindsRemainClosed
