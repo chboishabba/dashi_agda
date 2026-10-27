@@ -55,6 +55,7 @@ module DASHI.Unified.BalabanR559TOEMaxCutExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
@@ -62,6 +63,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
+import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
 
 ------------------------------------------------------------------------
 -- Canonical owner separation.
@@ -129,6 +132,13 @@ record BalabanR559TOEMaxCutReceipt : Set where
 
     r559CurrentStepBetaSource : ProofLevel
     r559StressDensityFiniteMeasure : ProofLevel
+
+    gate4UnresolvedCount : Nat
+    gate4UnresolvedCountIs58 :
+      gate4UnresolvedCount ≡ 58
+    gate4DefinitionLevel : ProofLevel
+    gate4InhabitantsLevel : ProofLevel
+
     goal1MaximumCutCompiler : ProofLevel
     irreducibleSourceFamilyCutCompiler : ProofLevel
     criticalPathCompiler : ProofLevel
@@ -184,6 +194,14 @@ canonicalBalabanR559TOEMaxCutReceipt = record
       R559.toeGoal1A1CurrentStepBetaSourceLevel
   ; r559StressDensityFiniteMeasure =
       R559.toeGoal1A3StressDensityIsLiteralFiniteMeasureLevel
+  ; gate4UnresolvedCount =
+      Counts.gate4ObligationCount
+  ; gate4UnresolvedCountIs58 =
+      refl
+  ; gate4DefinitionLevel =
+      Gate4.physicalClosureRound6CutsetDefinitionLevel
+  ; gate4InhabitantsLevel =
+      Gate4.physicalClosureRound6CutsetInhabitantsLevel
   ; goal1MaximumCutCompiler =
       R559.toeGoal1MaximumCutCompilerLevel
   ; irreducibleSourceFamilyCutCompiler =
@@ -276,15 +294,15 @@ canonicalBalabanR559ZKPFrame = record
   ; noNewScientificTheorem = true
   ; noNewScientificTheoremIsTrue = refl
   ; publishedContinuumBlocked =
-      R559.toeFlat4DContinuumTransferProvedHere
+      Balaban.balabanPublishedRGContinuumTransferOpenFlag
   ; publishedContinuumBlockedIsFalse =
       jointPublishedContinuumStillOpen
   ; continuumMassGapBlocked =
-      R559.toeContinuumMassGapPromoted
+      Balaban.balabanContinuumRouteMassGapPromotionOpenFlag
   ; continuumMassGapBlockedIsFalse =
       jointContinuumMassGapStillBlocked
   ; clayPromotionBlocked =
-      R559.toeClayYangMillsPromoted
+      R559.toeGoal1ClayCompletionClaimed
   ; clayPromotionBlockedIsFalse =
       jointClayPromotionStillBlocked
   }
