@@ -2048,11 +2048,11 @@ unifierGovernedFleetResidualTOEHandoff =
   GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
 
 unifierFleetNamedManifestStillMissing :
-  GovernedFleet.Manifest.named58ManifestAcquired ≡ false
+  FleetManifest.named58ManifestAcquired ≡ false
 unifierFleetNamedManifestStillMissing =
   GovernedFleet.namedManifestStillMissing
 
 unifierFleetPerGapDispatchStillDisabled :
-  GovernedFleet.Manifest.perGapDispatchEnabled ≡ false
+  FleetManifest.perGapDispatchEnabled ≡ false
 unifierFleetPerGapDispatchStillDisabled =
   GovernedFleet.perGapDispatchStillDisabled
