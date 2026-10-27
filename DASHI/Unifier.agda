@@ -387,3 +387,25 @@ toeThinkTankProximityDoesNotProveDirection :
   Proximity.InfluenceThroughProximity → ⊥
 toeThinkTankProximityDoesNotProveDirection =
   Proximity.influenceDoesNotFactorThroughProximity
+
+
+-- Global original-claim genealogy, not a gas-tax-as-climate-denial shortcut.
+-- Preserve one WFA film as one evidence object with several propositions.
+
+toeGlobalOneFilmThreeClaimsNotThreeIndependentModels :
+  INF.FactorsThrough
+    Climate.threeTalkingPointsObserved Climate.originalObjectsForTalkingPoints → ⊥
+toeGlobalOneFilmThreeClaimsNotThreeIndependentModels =
+  Origins.globalOneFilmThreeClaimsNotThreeIndependentModels
+
+toeGlobalPlantFertilisationIsNotNetClimateImpact :
+  INF.FactorsThrough
+    Climate.observedPlantFertilisation Climate.wholeClimateOutcome → ⊥
+toeGlobalPlantFertilisationIsNotNetClimateImpact =
+  Origins.globalPositiveFertilisationIsNotNetClimateHarmEvaluation
+
+toeGlobal1975CoolingMediaIsNotConsensus :
+  INF.FactorsThrough
+    Climate.sampledHistoricalMediaPresence Climate.hypotheticalScientificMajority → ⊥
+toeGlobal1975CoolingMediaIsNotConsensus =
+  Origins.global1975MediaArticleIsNotContemporaryScienceCensus
