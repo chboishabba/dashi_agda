@@ -90,7 +90,16 @@ record BalabanFleetDual58TOEReceipt : Set₁ where
       Equal58CardinalityCreatesSameObject → ⊥
 
     fleetEigenPriorityDoesNotCreateProof :
-      Fleet.FleetEigenPriorityCreatesProof → ⊥
+      Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetReceipt ≡ false
+
+    fleetExternalCountDoesNotCreateFormalDischarge :
+      Fleet.externalCountCreatesFormalProof fleetReceipt ≡ false
+
+    fleetDischargedFibresRemainProtected :
+      Fleet.dischargedFibresRemainDischarged fleetReceipt ≡ true
+
+    fleetContradictionGapsRemainSeparate :
+      Fleet.contradictionGapsRemainSeparate fleetReceipt ≡ true
 
     finiteRGDoesNotPromoteContinuum :
       Balaban.publishedRGContinuumTransferProved balabanReceipt ≡ false
@@ -137,6 +146,12 @@ canonicalBalabanFleetDual58TOEReceipt =
         equal58CardinalityDoesNotCreateSameObject
     ; fleetEigenPriorityDoesNotCreateProof =
         Fleet.fleetEigenPriorityDoesNotCreateProof
+    ; fleetExternalCountDoesNotCreateFormalDischarge =
+        Fleet.fleetExternalCountDoesNotCreateFormalDischarge
+    ; fleetDischargedFibresRemainProtected =
+        Fleet.fleetDischargedFibresRemainOutOfTarget
+    ; fleetContradictionGapsRemainSeparate =
+        Fleet.fleetContradictionGapsRemainSeparate
     ; finiteRGDoesNotPromoteContinuum =
         Balaban.publishedRGContinuumTransferProvedIsFalse
           Balaban.canonicalBalabanRGTOEReceipt
