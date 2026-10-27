@@ -904,11 +904,11 @@ unifierGovernanceMaxCutParetoSnowballZKPFrame =
   GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
 
 unifierGovernanceMaxCutBalabanScaleTransferImpossible :
-  GovernanceMaxCut.ParetoSnowball.BalabanScaleTransferPromotion → ⊥
+  GovernanceMaxCut.BalabanScaleTransferPromotion → ⊥
 unifierGovernanceMaxCutBalabanScaleTransferImpossible =
   GovernanceMaxCut.balabanScaleTransferPromotionImpossible
 
 unifierGovernanceMaxCutIbrahimSearchPriorityNotProof :
-  GovernanceMaxCut.ParetoSnowball.SearchPriorityCreatesProof → ⊥
+  GovernanceMaxCut.SearchPriorityCreatesProof → ⊥
 unifierGovernanceMaxCutIbrahimSearchPriorityNotProof =
   GovernanceMaxCut.ibrahimSearchPriorityDoesNotCreateProof
