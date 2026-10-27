@@ -207,32 +207,48 @@ yangMillsTOELiteralStressActivityEntropyLevel =
 
 
 ------------------------------------------------------------------------
--- Authoritative Goal-1 R474 frontier via normalized R559 owner.
+-- Authoritative Goal-1 R485 maximum cut via normalized R559 owner.
 ------------------------------------------------------------------------
+
+yangMillsTOEGoal1FiniteSymmetryAndRPSourceLevel : ProofLevel
+yangMillsTOEGoal1FiniteSymmetryAndRPSourceLevel =
+  YMTOE.toeGoal1FiniteSymmetryAndRPSourceLevel
 
 yangMillsTOEGoal1A1CurrentStepBetaSourceLevel : ProofLevel
 yangMillsTOEGoal1A1CurrentStepBetaSourceLevel =
   YMTOE.toeGoal1A1CurrentStepBetaSourceLevel
 
-yangMillsTOEGoal1A3SameFamilyContinuumAndOSLevel : ProofLevel
-yangMillsTOEGoal1A3SameFamilyContinuumAndOSLevel =
-  YMTOE.toeGoal1A3SameFamilyContinuumAndOSLevel
+yangMillsTOEGoal1A3SourceNativeContinuumOSLevel : ProofLevel
+yangMillsTOEGoal1A3SourceNativeContinuumOSLevel =
+  YMTOE.toeGoal1A3SourceNativeContinuumOSLevel
 
-yangMillsTOEGoal1BLiteralPublishedSelectedLocalizationLevel : ProofLevel
-yangMillsTOEGoal1BLiteralPublishedSelectedLocalizationLevel =
-  YMTOE.toeGoal1BLiteralPublishedSelectedLocalizationLevel
+yangMillsTOEGoal1A3CountablyAdditiveRepresentationLevel : ProofLevel
+yangMillsTOEGoal1A3CountablyAdditiveRepresentationLevel =
+  YMTOE.toeGoal1A3CountablyAdditiveRepresentationLevel
 
-yangMillsTOEGoal1BPhysicalRateSemanticsLevel : ProofLevel
-yangMillsTOEGoal1BPhysicalRateSemanticsLevel =
-  YMTOE.toeGoal1BPhysicalRateSemanticsLevel
+yangMillsTOEGoal1A4FiniteRegularityLevel : ProofLevel
+yangMillsTOEGoal1A4FiniteRegularityLevel =
+  YMTOE.toeGoal1A4FiniteRegularityLevel
 
-yangMillsTOEGoal1BFiniteToPositiveTransferGapCompilerLevel : ProofLevel
-yangMillsTOEGoal1BFiniteToPositiveTransferGapCompilerLevel =
-  YMTOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
+yangMillsTOEGoal1A5FiniteGrowthLevel : ProofLevel
+yangMillsTOEGoal1A5FiniteGrowthLevel =
+  YMTOE.toeGoal1A5FiniteGrowthLevel
 
-yangMillsTOEGoal1CExactSameFamilySourceCutLevel : ProofLevel
-yangMillsTOEGoal1CExactSameFamilySourceCutLevel =
-  YMTOE.toeGoal1CExactSameFamilySourceCutLevel
+yangMillsTOEGoal1BWilsonTwoInsertionConnectedShellLevel : ProofLevel
+yangMillsTOEGoal1BWilsonTwoInsertionConnectedShellLevel =
+  YMTOE.toeGoal1BWilsonTwoInsertionConnectedShellLevel
+
+yangMillsTOEGoal1BGeometricDecayCompilerLevel : ProofLevel
+yangMillsTOEGoal1BGeometricDecayCompilerLevel =
+  YMTOE.toeGoal1BGeometricDecayCompilerLevel
+
+yangMillsTOEGoal1BStandardSpectralTransferLevel : ProofLevel
+yangMillsTOEGoal1BStandardSpectralTransferLevel =
+  YMTOE.toeGoal1BStandardSpectralTransferLevel
+
+yangMillsTOEGoal1CSameFamilySourceInstantiationLevel : ProofLevel
+yangMillsTOEGoal1CSameFamilySourceInstantiationLevel =
+  YMTOE.toeGoal1CSameFamilySourceInstantiationLevel
 
 yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
 yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel =
@@ -242,18 +258,18 @@ yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
 yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel =
   YMTOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
 
-yangMillsTOEGoal1CurrentFrontierCompilerLevel : ProofLevel
-yangMillsTOEGoal1CurrentFrontierCompilerLevel =
-  YMTOE.toeGoal1CurrentFrontierCompilerLevel
+yangMillsTOEGoal1MaximumCutCompilerLevel : ProofLevel
+yangMillsTOEGoal1MaximumCutCompilerLevel =
+  YMTOE.toeGoal1MaximumCutCompilerLevel
 
-yangMillsTOEGoal1ProjectiveProkhorovMandatory :
+yangMillsTOEGoal1ProjectiveProkhorovNotMandatory :
   YMTOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
-yangMillsTOEGoal1ProjectiveProkhorovMandatory = refl
+yangMillsTOEGoal1ProjectiveProkhorovNotMandatory = refl
 
-yangMillsTOEGoal1PostHocCMP116MagnitudeEqualityMandatory :
-  YMTOE.toeGoal1PostHocCMP116MagnitudeEqualityMandatory ≡ false
-yangMillsTOEGoal1PostHocCMP116MagnitudeEqualityMandatory = refl
+yangMillsTOEGoal1CompatibilityBRouteNotMandatory :
+  YMTOE.toeGoal1CompatibilityBRouteMandatory ≡ false
+yangMillsTOEGoal1CompatibilityBRouteNotMandatory = refl
 
-yangMillsTOEGoal1IndependentFourthCumulantMandatory :
-  YMTOE.toeGoal1IndependentFourthCumulantMandatory ≡ false
-yangMillsTOEGoal1IndependentFourthCumulantMandatory = refl
+yangMillsTOEGoal1ClayCompletionNotClaimed :
+  YMTOE.toeGoal1ClayCompletionClaimed ≡ false
+yangMillsTOEGoal1ClayCompletionNotClaimed = refl
