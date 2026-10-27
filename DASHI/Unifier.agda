@@ -13,6 +13,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 -- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
+
+-- Current-master R485/R546/R558 Goal-1/Pareto normalization.
+-- The imported source owners remain theorem authority.
+open YMMaxCut public
 
 open BalabanRGTOE public using
   ( sourceCouplingIsBetaHistoryCoupling
@@ -680,3 +685,7 @@ unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
 unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 unifierYangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
+unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
