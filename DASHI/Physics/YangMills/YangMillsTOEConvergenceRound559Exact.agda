@@ -60,6 +60,8 @@ open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119ResidualFamilyRound219Exact as R219
+import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
+import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
 import DASHI.Physics.YangMills.BalabanPreferredRegularEFrontierRound225Exact as R225
 import DASHI.Physics.YangMills.BalabanPublishedFlowToRegularEProjectionRound241Exact as R241
 import DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact as R244
@@ -68,6 +70,7 @@ import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exac
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as PublishedRG
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as Casimir
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as Stress106
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as StressScale135
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExact as Stress84
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAttackExact as Stress85
@@ -96,6 +99,26 @@ toeLiteralBetaDrivenResidualFamilyLevel =
 toeLiteralBetaDrivenDifferentiatedCoordinateLevel : ProofLevel
 toeLiteralBetaDrivenDifferentiatedCoordinateLevel =
   R219.literalBetaDrivenCMP119DifferentiatedCoordinateLevel
+
+-- Exact same-object RG density/coupling owners.
+-- These are not new RG facts.
+-- They expose the canonical repository identity between the finite beta history,
+-- the CMP122 effective-density flow, and the canonical complete-density state.
+toeBetaDrivenSourceFlowLevel : ProofLevel
+toeBetaDrivenSourceFlowLevel =
+  BetaDensity.balabanBetaDrivenSourceFlowLevel
+
+toeBetaHistoryIsLiteralCMP122CouplingLevel : ProofLevel
+toeBetaHistoryIsLiteralCMP122CouplingLevel =
+  BetaDensity.balabanBetaHistoryIsLiteralCMP122CouplingLevel
+
+toeBetaHistorySameStateCouplingLevel : ProofLevel
+toeBetaHistorySameStateCouplingLevel =
+  CanonicalDensity.balabanBetaHistorySameStateCouplingLevel
+
+toeBetaHistoryToCanonicalCompleteDensityLevel : ProofLevel
+toeBetaHistoryToCanonicalCompleteDensityLevel =
+  CanonicalDensity.balabanBetaHistoryToCanonicalCompleteDensityLevel
 
 toeRegularESourceProjectionLevel : ProofLevel
 toeRegularESourceProjectionLevel =
@@ -188,6 +211,33 @@ toePublishedRGDoesNotPromoteContinuum :
 toePublishedRGDoesNotPromoteContinuum =
   toeFlat4DContinuumTransferProvedHereIsFalse
 
+toeDepthLimitNoSpectralPollutionProvedHere : Bool
+toeDepthLimitNoSpectralPollutionProvedHere =
+  ContinuumBoundary.depthLimitNoSpectralPollutionProvedHere
+
+toeDepthLimitNoSpectralPollutionProvedHereIsFalse :
+  toeDepthLimitNoSpectralPollutionProvedHere ≡ false
+toeDepthLimitNoSpectralPollutionProvedHereIsFalse =
+  ContinuumBoundary.depthLimitNoSpectralPollutionProvedHereIsFalse
+
+toeOSWightmanContinuumConstructionProvedHere : Bool
+toeOSWightmanContinuumConstructionProvedHere =
+  ContinuumBoundary.osWightmanContinuumConstructionProvedHere
+
+toeOSWightmanContinuumConstructionProvedHereIsFalse :
+  toeOSWightmanContinuumConstructionProvedHere ≡ false
+toeOSWightmanContinuumConstructionProvedHereIsFalse =
+  ContinuumBoundary.osWightmanContinuumConstructionProvedHereIsFalse
+
+toeTerminalPromotion : Bool
+toeTerminalPromotion =
+  ContinuumBoundary.terminalPromotion
+
+toeTerminalPromotionIsFalse :
+  toeTerminalPromotion ≡ false
+toeTerminalPromotionIsFalse =
+  ContinuumBoundary.terminalPromotionIsFalse
+
 ------------------------------------------------------------------------
 -- Compact-simple Casimir and stress.
 ------------------------------------------------------------------------
@@ -200,6 +250,10 @@ toeWilsonGhostHaarToClassifiedCasimirLevel : ProofLevel
 toeWilsonGhostHaarToClassifiedCasimirLevel =
   Casimir.literalWilsonGhostHaarToClassifiedCasimirLevel
 
+toeStrictCasimirCarrierCompilerLevel : ProofLevel
+toeStrictCasimirCarrierCompilerLevel =
+  Casimir.classificationToStrictCasimirCarrierLevel
+
 toeMetricStressRepresentationCompilerLevel : ProofLevel
 toeMetricStressRepresentationCompilerLevel =
   Stress106.canonicalMetricStressRepresentationCompilerLevel
@@ -207,6 +261,14 @@ toeMetricStressRepresentationCompilerLevel =
 toeLiteralMetricStressRepresentationLevel : ProofLevel
 toeLiteralMetricStressRepresentationLevel =
   Stress106.literalCMP116MetricStressRepresentationLevel
+
+toeUnifiedGeneratedActionStressScaleCompilerLevel : ProofLevel
+toeUnifiedGeneratedActionStressScaleCompilerLevel =
+  StressScale135.unifiedGeneratedActionStressScaleCompilerLevel
+
+toeLiteralUnifiedGeneratedActionStressScaleLevel : ProofLevel
+toeLiteralUnifiedGeneratedActionStressScaleLevel =
+  StressScale135.literalUnifiedGeneratedActionStressScaleLevel
 
 toeStressRouteClayPromotion : Bool
 toeStressRouteClayPromotion =
