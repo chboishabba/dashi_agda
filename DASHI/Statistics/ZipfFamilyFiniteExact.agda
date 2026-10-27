@@ -9,7 +9,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
-open import Data.Nat.Base as Nat using (NonZero; _^_)
+open import Data.Nat.Base as Nat using (NonZero; nonZero; _^_)
 import Data.Nat.Properties as NatP
 -- Reuse the canonical exact finite numerator/denominator carrier.
 -- We do not invoke rational division on a symbolic natural denominator
@@ -163,7 +163,7 @@ sumFirstDenominatorNonZero :
   (f : Nat → Fraction) (count : Nat) →
   ((r : Nat) → Nat.NonZero (Exact.denominator (f r))) →
   Nat.NonZero (Exact.denominator (sumFirst f count))
-sumFirstDenominatorNonZero f zero each = _
+sumFirstDenominatorNonZero f zero each = Nat.nonZero
 sumFirstDenominatorNonZero f (suc n) each =
   NatP.m*n≢0
     (Exact.denominator (sumFirst f n))
