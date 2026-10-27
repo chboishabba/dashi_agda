@@ -675,11 +675,6 @@ toeFleetExternalCountDoesNotCreateFormalDischarge :
 toeFleetExternalCountDoesNotCreateFormalDischarge =
   FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
 
-toeFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.dischargedFibresRemainDischarged
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-toeFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
 
 toeFleetContradictionGapsRemainSeparate :
   FleetGapTOE.contradictionGapsRemainSeparate
@@ -1189,11 +1184,6 @@ toeFleetTargetsOnlyUnformalisedFormalGaps :
 toeFleetTargetsOnlyUnformalisedFormalGaps =
   FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
 
-toeFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.dischargedFibresRemainDischarged
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-toeFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
 
 toeFleetSpectralLabelsDoNotIdentifyTheoremOwners :
   FleetGapTOE.spectralLabelsIdentifyTheoremOwners
