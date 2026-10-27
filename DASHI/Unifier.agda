@@ -5,6 +5,10 @@ import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 import DASHI.Geo.EarthEmbeddingAcquisitionExact as EarthEmbeddingTOE
+import DASHI.Unified.BrainFMRI as BrainFMRI
+import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
+import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
+import DASHI.Unified.InvariantSpine as BrainSpine
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -151,7 +155,6 @@ unifierEmbeddingDoesNotCreateLegalAuthority :
   EarthEmbeddingTOE.EmbeddingCreatesLegalAuthority → ⊥
 unifierEmbeddingDoesNotCreateLegalAuthority =
   EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
-
 
 unifierGeographicRecoverabilityDoesNotCreatePhysicalIdentity :
   EarthEmbeddingTOE.GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
@@ -778,11 +781,9 @@ unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 ------------------------------------------------------------------------
 
 unifierBalabanScaleTransferPromotionImpossible :
-  
-  BalabanRGTOE.BalabanRGScaleTransferPromotion → ⊥
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
 unifierBalabanScaleTransferPromotionImpossible =
-  
-  BalabanRGTOE.balabanRGScaleTransferPromotionImpossible
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
 
 unifierIbrahimRecognitionParetoBoundary =
   ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
@@ -1707,3 +1708,23 @@ toeFleetNumericABIRequiresIndependentEvidence :
   FleetGapTOE.SpectralNumericABIPromotion → ⊥
 toeFleetNumericABIRequiresIndependentEvidence =
   FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+------------------------------------------------------------------------
+-- Canonical brain/connectome/fMRI quotient boundary.
+-- The observation owners retain authority. This facade adds no empirical proof.
+------------------------------------------------------------------------
+
+toeBrainFirstMissing : BrainObservation.BrainObservationFirstMissing
+toeBrainFirstMissing = BrainFMRI.brainFirstMissing
+
+toeBrainBidirectionalFirstMissing :
+  BrainBidirectional.BidirectionalObservationFirstMissing
+toeBrainBidirectionalFirstMissing = BrainFMRI.bidirectionalFirstMissing
+
+toeBrainObservationNonPromotion :
+  BrainBidirectional.NonPromotionBoundary
+toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
+
+toeBrainJPromotionBlocked :
+  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
