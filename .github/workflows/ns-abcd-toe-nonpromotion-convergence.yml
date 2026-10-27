@@ -1,0 +1,104 @@
+name: ns-abcd-toe-nonpromotion-convergence
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Unified/NSABCDTOENonPromotionBridgeExact.agda'
+      - 'DASHI/Unified/NSABCDTOENonPromotionBridgeValidation.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Physics/Closure/NSABCDMaxCut20261002Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345DecisionMaxCutRound832Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda'
+      - 'tests/test_ns_abcd_toe_nonpromotion_convergence.py'
+      - '.github/workflows/ns-abcd-toe-nonpromotion-convergence.yml'
+  push:
+    branches:
+      - 'agent/ns-r655-remote-collar-transport'
+    paths:
+      - 'DASHI/Unified/NSABCDTOENonPromotionBridgeExact.agda'
+      - 'DASHI/Unified/NSABCDTOENonPromotionBridgeValidation.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Physics/Closure/NSABCDMaxCut20261002Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345DecisionMaxCutRound832Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda'
+      - 'tests/test_ns_abcd_toe_nonpromotion_convergence.py'
+      - '.github/workflows/ns-abcd-toe-nonpromotion-convergence.yml'
+
+concurrency:
+  group: ns-abcd-toe-nonpromotion-convergence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Install DASHI repository intelligence
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Discover related symbols and round lineage
+        run: |
+          dashi-repo index --root .
+          dashi-repo related canonicalNSABCDTOEConvergenceReceipt --root .
+          dashi-repo related nsClayPromotionRemainsFalse --root .
+          dashi-repo related r823NeedsNoAdditionalReserveEstimateAfterDecisionLeaves --root .
+          dashi-repo discover 'Navier Stokes ABCD max cut TOE non promotion R823 R829' --root .
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSABCDMaxCut --root .
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKNR650Rational345 --root .
+          dashi-repo lineage --prefix DASHI.Unified.NSABCDTOE --root .
+
+      - name: Run deterministic static contract
+        run: python -m pytest -q tests/test_ns_abcd_toe_nonpromotion_convergence.py
+
+      - name: Run structural preflight
+        run: |
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/NSABCDTOENonPromotionBridgeExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/NSABCDTOENonPromotionBridgeValidation.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/EverythingTOESymmetryResolved369.agda
+
+      - name: Reject trust escapes and ESD edits
+        run: |
+          sources=(
+            DASHI/Unified/NSABCDTOENonPromotionBridgeExact.agda
+            DASHI/Unified/NSABCDTOENonPromotionBridgeValidation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unified/Physics.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+          if git diff --name-only origin/master...HEAD | grep -Ei '(^|/)(dashi_digital_esd|[^/]*digital_esd[^/]*|[^/]*ESD[^/]*)'; then
+            echo "ESD surface changed" >&2
+            exit 1
+          fi
+
+      - name: Kernel-check NS TOE path
+        run: |
+          agda --version
+          agda -i . -l standard-library DASHI/Unified/NSABCDTOENonPromotionBridgeExact.agda
+          agda -i . -l standard-library DASHI/Unified/NSABCDTOENonPromotionBridgeValidation.agda
+          agda -i . -l standard-library DASHI/Unified/Physics.agda
+          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          agda -i . -l standard-library DASHI/Unifier.agda
