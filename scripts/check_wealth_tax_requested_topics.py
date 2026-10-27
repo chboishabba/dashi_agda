@@ -83,8 +83,33 @@ def main() -> None:
         "toeCashCollectionDoesNotDetermineCareAppropriation",
         "toeAIRiskScoreDoesNotDetermineTaxLiability",
         "toeFiniteWorldsDoNotProvePolicyCausation",
+        "toeAnyAttributedCitationImportsNoTheorem",
+        "toeAnyAttributedCitationCreatesNoAuthority",
+        "toeSnowballCitationDoesNotProveTaxEffect",
+        "toeSourceStatementDoesNotEstablishSystemicEffect",
+        "toeSecondaryReportDoesNotBecomeIndependentStudy",
+        "toeRepublishedOECDChapterIsNotNewIndependentProducer",
+        "toePaperCannotSupplyKernelCertification",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
+    # These are direct aliases of EXISTING source and evidence owners.
+    # A missing owner defeats provenance reachability even when the alias
+    # name remains present in the TOE consumer.
+    for owner_module in (
+        "DASHI.Core.AttributedSourceCore",
+        "DASHI.Core.EvidenceHyperfabricExact",
+        "DASHI.Core.SnowballAttributionProvenanceInvariantExact",
+        "DASHI.Economics.SourceAttributionPromotionBoundaryExact",
+    ):
+        expected_import = "import " + owner_module
+        assert expected_import in bridge, (
+            f"source-owned non-promotion module is no longer imported: {owner_module}"
+        )
+        owner_path = ROOT / (owner_module.replace(".", "/") + ".agda")
+        assert owner_path.is_file(), f"source/evidence owner absent: {owner_path}"
+    assert not re.search(r"(?m)^\\s*(postulate|{-#\\s*TERMINATING)", bridge), (
+        "thin TOE bridge must use source-owned theorem aliases, not axioms"
+    )
     workflow = (ROOT / ".github/workflows/philosophy.yml").read_text(encoding="utf-8")
     assert "dashi-agda-preflight --root ." in workflow, "semantic preflight no longer scheduled"
     assert "agda $AGDA_FLAGS DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda" in workflow, (
