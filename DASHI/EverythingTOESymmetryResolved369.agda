@@ -20,6 +20,26 @@ import DASHI.Unified.GRQuantumProofTermRegression
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 
+open BalabanRGTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
+
 toeBalabanRGBlockSpinTransferStillOpen :
   BalabanRGTOE.balabanRGBlockSpinTransferOpenFlag ≡ false
 toeBalabanRGBlockSpinTransferStillOpen =
