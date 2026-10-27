@@ -76,6 +76,13 @@ import DASHI.Physics.YangMills.BalabanCMP116R429RootedTraceCountingRound441Exact
 import DASHI.Physics.YangMills.BalabanCMP116R429TraceEntropyBudgetRound442Exact as R442
 import DASHI.Physics.YangMills.YangMillsCMP119WilsonGibbsHaarActionRound443Exact as R443
 import DASHI.Physics.YangMills.YangMillsCMP119PeterWeylWilsonSquareRound444Exact as R444
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119UniformProjectiveCompactnessExact as AProjective
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OS05CanonicalLimitExact as AOS05
+import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as AFiniteLimit
+import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as C123
+import DASHI.Physics.YangMills.BalabanSectorQFTRecoveryExportRound129Exact as C129
+import DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact as C131
+import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as COPE
 
 import DASHI.Physics.Closure.YangMillsMassGapBoundary as MassGap
 import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as Continuum
@@ -164,6 +171,79 @@ variableDomainR440Preferred = true
 variableDomainR440PreferredIsTrue :
   variableDomainR440Preferred ≡ true
 variableDomainR440PreferredIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- Reused A3/A4/A5 continuum and regularity owners.
+------------------------------------------------------------------------
+
+goal1A3UniformCompactContainmentLevel : ProofLevel
+goal1A3UniformCompactContainmentLevel =
+  AProjective.literalCMP119UniformCompactContainmentLevel
+
+goal1A3ExtractedClusterCylinderAgreementLevel : ProofLevel
+goal1A3ExtractedClusterCylinderAgreementLevel =
+  AProjective.literalCMP119ExtractedClusterCylinderAgreementLevel
+
+goal1A3TightnessSubsequenceCompilerLevel : ProofLevel
+goal1A3TightnessSubsequenceCompilerLevel =
+  AProjective.cmp119UniformTightnessSubsequenceCompilerLevel
+
+goal1A4FiniteRegularityLevel : ProofLevel
+goal1A4FiniteRegularityLevel =
+  AOS05.literalCMP119FiniteRegularityLevel
+
+goal1A5FiniteGrowthControlLevel : ProofLevel
+goal1A5FiniteGrowthControlLevel =
+  AOS05.literalCMP119FiniteGrowthControlLevel
+
+goal1A45OSLimitCompilerLevel : ProofLevel
+goal1A45OSLimitCompilerLevel =
+  AOS05.canonicalOS05LimitAssemblyLevel
+
+goal1AExpectationLimitCompilerLevel : ProofLevel
+goal1AExpectationLimitCompilerLevel =
+  AFiniteLimit.finitePhysicalExpectationLimitCompilerLevel
+
+goal1ANormalizationCompilerLevel : ProofLevel
+goal1ANormalizationCompilerLevel =
+  AFiniteLimit.continuumPhysicalMeasureNormalizationCompilerLevel
+
+------------------------------------------------------------------------
+-- Reused C3/C4 same-family owners.
+------------------------------------------------------------------------
+
+goal1C3OneStepAFIdentificationLevel : ProofLevel
+goal1C3OneStepAFIdentificationLevel =
+  COPE.physicalSameFamilyOPECoefficientOneStepAFIdentificationLevel
+
+goal1C3AllDepthCoefficientCompilerLevel : ProofLevel
+goal1C3AllDepthCoefficientCompilerLevel =
+  COPE.coefficientRGRecurrenceUniquenessLevel
+
+goal1C4DensityAnchoredStressInstantiationLevel : ProofLevel
+goal1C4DensityAnchoredStressInstantiationLevel =
+  C123.literalDensityAnchoredStressLaneInstantiationLevel
+
+goal1C4DensityAnchoredStressCompilerLevel : ProofLevel
+goal1C4DensityAnchoredStressCompilerLevel =
+  C123.densityAnchoredCanonicalMetricStressLaneCompilerLevel
+
+goal1C4SectorRecoveryCompilerLevel : ProofLevel
+goal1C4SectorRecoveryCompilerLevel =
+  C129.balabanSectorQFTRecoveryExportCompilerLevel
+
+goal1C4LiteralSectorRecoveryLevel : ProofLevel
+goal1C4LiteralSectorRecoveryLevel =
+  C129.literalBalabanSectorQFTRecoveryExportLevel
+
+goal1C4CommonMetricCompilerLevel : ProofLevel
+goal1C4CommonMetricCompilerLevel =
+  C131.commonMetricReadyBalabanSectorCompilerLevel
+
+goal1C4LiteralCommonMetricRecoveryLevel : ProofLevel
+goal1C4LiteralCommonMetricRecoveryLevel =
+  C131.literalCommonMetricReadyBalabanSectorLevel
 
 ------------------------------------------------------------------------
 -- Exact non-promotion theorem reuse.
