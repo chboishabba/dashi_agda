@@ -96,6 +96,22 @@ def main() -> None:
                   "chatzouzIMF2026", "euCommissionWealthTax2026"):
         source = (ROOT / OWNERS[0]).read_text(encoding="utf-8")
         assert label in source, f"missing 2026 independent economic source: {label}"
+    # Claim-specific original-root coverage, not evidence of empirical truth.
+    tax_source = (ROOT / OWNERS[0]).read_text(encoding="utf-8")
+    social_source = (ROOT / OWNERS[1]).read_text(encoding="utf-8")
+    for symbol in ("proposedDurationEscalatingIdleEquityLevy",
+                   "proposalIdleEquityRateBasisPoints",
+                   "sourceAIProposedRatesAreNotVictoriaLaw"):
+        assert symbol in tax_source, f"pasted 1/2/5 proposal lost: {symbol}"
+    for symbol in ("bellHooks2000", "baudrillard1981", "kropotkin1892"):
+        assert symbol in social_source, f"original philosophical author omitted: {symbol}"
+    assert "test_ai_proposed_idle_equity_schedule_is_not_victoria_vrlt" in script, (
+        "proposal versus actual-law negative-control regression absent"
+    )
+    for term in ("1%/2%/5%", "1%/2%/3%", "bell hooks", "Baudrillard", "Kropotkin"):
+        assert term.casefold() in text.casefold(), (
+            f"requested original-source or proposal detail omitted: {term}"
+        )
     statuses = Counter(status for _, _, status, _, _ in rows)
     print(f"PASS: {len(rows)} distinct sourced/typed topic rows; "
           f"statuses {dict(sorted(statuses.items()))}; "
