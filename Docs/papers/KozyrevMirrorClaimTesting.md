@@ -75,6 +75,186 @@ repository's **syntactic fail-closed non-promotion** receipt. It does
 not prove a physical conservation law, absence of a phenomenon, an
 experimental result, or clinical ineffectiveness.
 
+## 2026-10-28: Published geometry vs golden-ratio optimisation
+
+### What primary and secondary evidence actually specifies
+
+**Primary patent RU2122446C1** (Kaznacheev and Trofimov; filed
+1996-07-02, published 1998-11-27):
+https://patents.google.com/patent/RU2122446C1/en
+describes polished aluminium alloy panels, up to 280 cm high,
+120 cm wide, a reported focal distance of 50 cm from the working
+surface, and cylindrical or spiral assemblies of 4/6 and 8–10 panels.
+The abstract says 0.5 mm thickness; description/claim says 1.5 mm.
+There is **no primary claim of a unique Archimedean differential
+equation, golden ratio, optimum growth factor or precisely 1.5 turns**.
+
+**Distinct original patent RU2141357C1** (Kaznacheev and
+Shatarnin; filed 1997-02-03, published 1999-11-20):
+https://patents.google.com/patent/RU2141357C1/en
+is a **horizontal cylindrical** laser-containing enclosure with
+different 1.5–2 mm thickness and at least 110 cm width/200 cm length.
+Do **not** transfer its dimensions or laser apparatus into the original
+vertical Kaznacheev–Trofimov spiral.
+
+**Retrospective/institute-attributed 2020 description:**
+https://al-flogiston.ru/zerkala-kozyreva-1/
+states that clockwise/counterclockwise spirals were open for **1.5
+turns**. This is a traceable later description, **not a demonstrated
+engineering optimum** and not the original patent's formula.
+
+**Secondary nine-sheet construction drawing:**
+https://texnoved.ru/kak-sdelat-zerkalo-kozyreva-certeez/
+depicts approximately 3200 mm outer / 2002 mm inner spans, nine
+labelled sheets, 2800 mm height. It is useful for candidate
+manufacturing coordinates but no drawing-source chain proves it is
+the inventors' historical as-built device or fits an experimentally
+validated 50 cm focus.
+
+**Alternative self-published geometrical critique:**
+https://www.alsuprun.com/files/Kozyrev-Mirror-Biotron.pdf
+(argues central focusing of a full spiral is poor and proposes
+individually positioned concave sectors). Its quoted 13–15% and
+8× efficiency numbers are **the author's unreplicated claims**, not
+ground truth. It directly motivates a **fourth search family**:
+independent finite curved sectors, with their own optical solver and
+constraint model; the initial optimiser below does **not yet
+implement that family**.
+
+The user's attached AI-search transcript proposes an Archimedean
+spiral, exactly 1.5 turns and global `f=R/2`. Those statements
+are hypotheses or secondary approximations, not proven unique
+patent geometry. `f=R/2` is a *paraxial spherical/circular mirror*
+relation, not an exact common-focus theorem for a spiral with
+changing curvature. Source claims about "time energy" and unusual
+medical or remote-information effects remain nonpromoted.
+
+### Golden growth cannot fit a compact 1.5-turn spiral at normal inner radius
+
+Let `phi=(1+sqrt(5))/2`. A **true golden logarithmic** spiral
+increases radius by exactly `phi` every quarter turn.
+There are **six quarter-turns in 1.5 turns**. Thus for
+`r_inner = 0.75 m`:
+
+```text
+r_outer_true_golden = r_inner * phi^6 = 13.4582039325 m
+r_outer_available  = 1.55 m (illustrative compact envelope)
+required ratio     = phi^6 ~= 17.94427191
+available ratio    = 1.55 / 0.75 ~= 2.06666667
+```
+
+A true golden spiral with that inner clearance would require a
+very large outer radius, inconsistent with the *illustrative*
+1.55 m boundary. A 'correction exponent' to fit 1.55 m is
+
+```text
+beta = log(r_outer/r_inner)/(6*log(phi))
+     = 0.2514266987284
+r(theta)= r_inner * phi^(beta * theta/(pi/2))
+```
+
+This simplification is exactly the **ordinary endpoint-matched
+logarithmic spiral**. Golden phi mathematically cancels; it does
+not uniquely pick the optimum. A curve based on a *normalised*
+exponential `(exp(k t)-1)/(exp(k)-1)` with
+`k=6 log(phi)` can fit both endpoints, but after that affine
+normalisation it **is not** a true golden logarithmic spiral.
+
+### Implemented candidate-screening optimiser (synthetic, SOURCE-WRITTEN)
+
+File: `scripts/kozyrev_geometry_optimizer.py`.
+
+Same frozen model across candidates:
+- 2D 9-segment spiral, 1.5 turns, illustrative
+  0.75/1.55 m inner/outer radial endpoints;
+- three isotropic point sources at `(0.25,0)`, `(0.21,0.1)`,
+  `(0.21,-0.1)` metres;
+- one first-hit **lossless specular** bounce per ray; all
+  unreflected rays count zero towards return;
+- central circular receiver of radius 0.10 m;
+- objective: **maximise the worst-case one-bounce receiver-hit
+  fraction across those three source positions**;
+- a small 55-candidate grid over log-profile shape `k`
+  and sinusoidal endpoint-fixed correction `c`, with monotonic
+  radial increments and total sheet-polyline length
+  <= 110% of Archimedean reference; **not a global optimiser**;
+- also stores `p_wall=p_in-p_out`, `L_z=x p_y-y p_x`,
+  energy and momentum residuals, adopting the sign convention
+  in existing `ContinuousSO3Torque369BridgeExact` and
+  `TorqueTrialectic369Exact` without duplicating their proofs.
+
+**Executed local Python 3.13.5**, 720 rays/source results:
+
+| Candidate | Worst receiver-hit fraction | Mean fraction | Polyline length |
+| --- | ---: | ---: | ---: |
+| Archimedean `k=0,c=0` | 0.113889 | 0.114815 | 10.374 m |
+| True compact logarithmic `k=ln(1.55/0.75),c=0` | 0.113889 | 0.116667 | 9.948 m |
+| Golden-*indexed*, endpoint-normalised `k=6ln(phi),c=0` | 0.130556 | 0.132407 | 8.875 m |
+| Grid-selected `k=4,c=0` | 0.136111 | 0.137037 | 8.489 m |
+
+The selected `k=4` hits the **maximum k in this grid**.
+A wider probe through `k=12` increased the *same toy objective*
+to 0.147222 worst capture, so **no converged or real-world optimum**
+is claimed. This is direct evidence that unconstrained optimisers
+can reward pathological profile growth or source-specific geometry.
+The example **does not enforce individual 1.2 m curved panel widths,
+minimum human access/clearance, local curvature/stress, sheet joins,
+true metal losses, polarization, temperature, airflow, acoustic
+frequencies, occlusion beyond one bounce, equilibrium fluctuation–
+dissipation, diffraction, or 3D wave fields**.
+
+**Executed local check: five standard-library tests PASS**
+(`scripts/tests/test_kozyrev_geometry_optimizer.py`):
+true golden radius mismatch, radial endpoints/monotonicity,
+simple reflection energy and impulse ledger, parity-odd wall
+angular impulse when geometry and ray are both mirrored, and
+explicit nonpromotion/optimisation contract. Source files are
+committed to the PR, but GitHub Actions/Agda kernel are separate
+receipts and are not claimed on this local execution alone.
+
+```sh
+python3 -m unittest discover -s scripts/tests \
+  -p 'test_kozyrev_geometry_optimizer.py' -v
+python3 scripts/kozyrev_geometry_optimizer.py --samples 720
+python3 scripts/kozyrev_geometry_optimizer.py --panels 8 --turns 1.0
+python3 scripts/kozyrev_geometry_optimizer.py --panels 10 --turns 1.5
+```
+
+### Updated Pareto/max-cut
+
+P2-A now has two source-written and locally executed *synthetic*
+consumers: (1) exact Fraction momentum/parity laws for a selected
+toy polygon, and (2) a numerical geometry candidate screen whose
+objective and limitations are explicitly logged.
+
+**P2-B next:** selected **published** drawing digitisation with
+as-built provenance; manufacturing constraints; calibratable
+frequency-specific **Maxwell/acoustic** problem on the *same* mesh;
+curved sections and a genuine sector comparator; convergence; robust
+multisource/multifrequency Pareto set; full torque/energy flux ledger.
+Only after P2-B could one claim an *ordinary-physics* optimiser
+selected a useful physical apparatus, and only after measured same
+device testing could it be called validated.
+
+**P2-C/P4:** a separately sourced nonstandard field/coupling with
+an observable distinct from all ordinary acoustic/EM/thermal
+candidates. Existing torque/right-hand-rule math is mathematically
+sound, but right-handedness itself is **not** a new torsion force.
+
+**Attribution/ownership:** original patents: Kaznacheev–Trofimov,
+Kaznacheev–Shatarnin. Retrospective institute narration and
+third-party drawing: their own derivative origins. Sector critique:
+its external author owns its analysis. Existing DASHI torque
+theorems: original PR
+[#1164](https://github.com/chboishabba/dashi_agda/pull/1164)
+(merged), source modules `TorqueTrialectic369Exact`,
+`OrientedThreeAxisBracket369Exact`,
+`ContinuousSO3Torque369BridgeExact`,
+`RightHandRule369Exact`. New 2D synthetic optimisation code:
+PR #1404 only. Ibrahim/Monster 3B ownership remains fully
+unchanged; analogy/character/count coincidence cannot promote a
+same-object representation. No ESD edits or clinical result.
+
 ## P2 max-cut: exact apparatus inventory, synthetic classical null and executed tests
 
 **Execution date: 27 October 2026. Status: SYNTHETIC CALCULATION EXECUTED;
