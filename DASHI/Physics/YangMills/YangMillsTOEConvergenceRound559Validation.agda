@@ -365,3 +365,81 @@ literalABCFrontierDoesNotPromoteContinuum :
   TOE.toeFlat4DContinuumTransferProvedHere ≡ false
 literalABCFrontierDoesNotPromoteContinuum =
   TOE.toeLiteralABCFrontierDoesNotPromoteContinuum
+
+
+------------------------------------------------------------------------
+-- Later preferred A/B/C owner regressions.
+------------------------------------------------------------------------
+
+pinnedRealBPostCoordinateCompilerIsChecked :
+  TOE.toePinnedRealBPostCoordinateCompilerLevel ≡ machineChecked
+pinnedRealBPostCoordinateCompilerIsChecked = refl
+
+pinnedRealBAdditionalAnalyticInequalityIsNotRequired :
+  TOE.toePinnedRealBAdditionalAnalyticInequalityRequired ≡ false
+pinnedRealBAdditionalAnalyticInequalityIsNotRequired = refl
+
+r415ToContinuumPhysicalClusteringCompilerIsChecked :
+  TOE.toeR415ToContinuumPhysicalClusteringCompilerLevel ≡ machineChecked
+r415ToContinuumPhysicalClusteringCompilerIsChecked = refl
+
+sameFamilyContinuumRecoveryCompilerIsChecked :
+  TOE.toeSameFamilyContinuumRecoveryCompilerLevel ≡ machineChecked
+sameFamilyContinuumRecoveryCompilerIsChecked = refl
+
+sameFamilyContinuumCoreRecoveryCompilerIsChecked :
+  TOE.toeSameFamilyContinuumCoreRecoveryCompilerLevel ≡ machineChecked
+sameFamilyContinuumCoreRecoveryCompilerIsChecked = refl
+
+coreRecoveryDoesNotRequireClustering :
+  TOE.toeCoreRecoveryRequiresClustering ≡ false
+coreRecoveryDoesNotRequireClustering = refl
+
+preferredSameFamilyMeasureCompilerIsChecked :
+  TOE.toePreferredSameFamilyMeasureCompilerLevel ≡ machineChecked
+preferredSameFamilyMeasureCompilerIsChecked = refl
+
+preferredMeasureConvergenceIsChecked :
+  TOE.toePreferredMeasureConvergenceLevel ≡ machineChecked
+preferredMeasureConvergenceIsChecked = refl
+
+preferredGlobalMomentCompactContainmentRemainsConditional :
+  TOE.toePreferredGlobalMomentCompactContainmentLevel ≡ conditional
+preferredGlobalMomentCompactContainmentRemainsConditional = refl
+
+preferredSelectedWeakTopologyMeaningRemainsConditional :
+  TOE.toePreferredSelectedWeakTopologyMeaningLevel ≡ conditional
+preferredSelectedWeakTopologyMeaningRemainsConditional = refl
+
+weakMeasurePropertyCompilerIsChecked :
+  TOE.toeWeakMeasurePropertyCompilerLevel ≡ machineChecked
+weakMeasurePropertyCompilerIsChecked = refl
+
+weakMeasureFullConvergenceIsChecked :
+  TOE.toeWeakMeasureFullConvergenceLevel ≡ machineChecked
+weakMeasureFullConvergenceIsChecked = refl
+
+weakMeasurePreGapCoreCompilerIsChecked :
+  TOE.toeWeakMeasurePreGapCoreCompilerLevel ≡ machineChecked
+weakMeasurePreGapCoreCompilerIsChecked = refl
+
+weakMeasureGlobalMomentCompactContainmentRemainsConditional :
+  TOE.toeWeakMeasureGlobalMomentCompactContainmentLevel ≡ conditional
+weakMeasureGlobalMomentCompactContainmentRemainsConditional = refl
+
+weakMeasureSelectedTopologyMeaningRemainsConditional :
+  TOE.toeWeakMeasureSelectedTopologyMeaningLevel ≡ conditional
+weakMeasureSelectedTopologyMeaningRemainsConditional = refl
+
+pinnedLiteralStressAttachmentCompilerIsChecked :
+  TOE.toePinnedLiteralStressAttachmentCompilerLevel ≡ machineChecked
+pinnedLiteralStressAttachmentCompilerIsChecked = refl
+
+pinnedGRQFTStressExportIsChecked :
+  TOE.toePinnedGRQFTStressExportLevel ≡ machineChecked
+pinnedGRQFTStressExportIsChecked = refl
+
+grqftStressWeldRemainsNonPromoted :
+  TOE.toeGRQFTStressWeldPromoted ≡ false
+grqftStressWeldRemainsNonPromoted =
+  TOE.toeGRQFTStressWeldPromotedIsFalse
