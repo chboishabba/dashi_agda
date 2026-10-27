@@ -1,5 +1,8 @@
 module DASHI.Unifier where
 
+import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -313,3 +316,43 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+------------------------------------------------------------------------
+-- Exact Yang-Mills Goal-1 compatibility exports.
+-- Unifier is a consumer. It is not the proof authority.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1FiniteASourceLevel : ProofLevel
+unifierYangMillsGoal1FiniteASourceLevel =
+  YMGoal1TOE.goal1FiniteASourceLevel
+
+unifierYangMillsGoal1CanonicalSelectedBSourceLevel : ProofLevel
+unifierYangMillsGoal1CanonicalSelectedBSourceLevel =
+  YMGoal1TOE.goal1CanonicalSelectedBSourceLevel
+
+unifierYangMillsGoal1LiteralCMP116RateSourceLevel : ProofLevel
+unifierYangMillsGoal1LiteralCMP116RateSourceLevel =
+  YMGoal1TOE.goal1LiteralCMP116RateSourceLevel
+
+unifierYangMillsGoal1LocalQFTCSourceLevel : ProofLevel
+unifierYangMillsGoal1LocalQFTCSourceLevel =
+  YMGoal1TOE.goal1LocalQFTCSourceLevel
+
+unifierYangMillsGoal1SameHNontrivialityLevel : ProofLevel
+unifierYangMillsGoal1SameHNontrivialityLevel =
+  YMGoal1TOE.goal1SameHNontrivialitySemanticBridgeLevel
+
+unifierYangMillsFlat4DContinuumStillOpen :
+  YMGoal1TOE.Continuum.flat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsFlat4DContinuumStillOpen =
+  YMGoal1TOE.flat4DContinuumTransferStillOpen
+
+unifierYangMillsContinuumMassGapStillNotPromoted :
+  YMGoal1TOE.Continuum.continuumMassGapPromoted ≡ false
+unifierYangMillsContinuumMassGapStillNotPromoted =
+  YMGoal1TOE.continuumMassGapStillNotPromoted
+
+unifierYangMillsClayStillNotPromoted :
+  YMGoal1TOE.Clay.clayYangMillsPromoted ≡ false
+unifierYangMillsClayStillNotPromoted =
+  YMGoal1TOE.clayYangMillsStillNotPromoted
