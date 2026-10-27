@@ -79,6 +79,9 @@ import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionE
 import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterIsotypicBypassExact as WholeCharacter
 import DASHI.Wikimedia.IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact as KernelClass20
 import DASHI.Wikimedia.IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact as KernelGauge
+import DASHI.Wikimedia.IbrahimMonster3BFDRepGroupAlgebraAdapterReceiptExact as FDRepReceipt
+import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterSimpleSubobjectClassificationExact as SimpleClassifier
+import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact as TwoIsotypic
 
 ------------------------------------------------------------------------
 -- 1. Canonical coarse/fine reopening.
@@ -449,7 +452,71 @@ toeActualTwelveSeventyEightLinearIntertwinerStillOpen :
 toeActualTwelveSeventyEightLinearIntertwinerStillOpen = refl
 
 ------------------------------------------------------------------------
--- 11. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+-- 11. Cross-prover generic representation receipts.
+------------------------------------------------------------------------
+
+toeLeanFDRepAdapterSourceWritten :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.leanAdapterSourceWritten
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ true
+toeLeanFDRepAdapterSourceWritten = refl
+
+toeLeanFDRepSubmoduleAdapterSourceWritten :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.submoduleStabilityAdapterSourceWritten
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ true
+toeLeanFDRepSubmoduleAdapterSourceWritten = refl
+
+toeLeanFDRepAdapterKernelReceiptStillUnobserved :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.leanKernelReceiptObserved
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ false
+toeLeanFDRepAdapterKernelReceiptStillUnobserved = refl
+
+toeLeanFDRepAdapterAgdaTransportStillUnobserved :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.agdaTransportObserved
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ false
+toeLeanFDRepAdapterAgdaTransportStillUnobserved = refl
+
+toeSimpleSourceClassifierSourceWritten :
+  SimpleClassifier.SimpleSubobjectClassificationBoundary.leanSourceWritten
+    SimpleClassifier.canonicalSimpleSubobjectClassificationBoundary
+  ≡ true
+toeSimpleSourceClassifierSourceWritten = refl
+
+toeSimpleSourceClassifierKernelStillUnobserved :
+  SimpleClassifier.SimpleSubobjectClassificationBoundary.leanKernelReceiptObserved
+    SimpleClassifier.canonicalSimpleSubobjectClassificationBoundary
+  ≡ false
+toeSimpleSourceClassifierKernelStillUnobserved = refl
+
+toeCharacterMultiplicityLemmasSourceWritten :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.multiplicityLemmasSourceWritten
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ true
+toeCharacterMultiplicityLemmasSourceWritten = refl
+
+toeCharacterMultiplicityKernelStillUnobserved :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.multiplicityLemmasLeanKernelChecked
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+toeCharacterMultiplicityKernelStillUnobserved = refl
+
+toeTwoIsotypicAgdaTransportStillOpen :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.fullTwoSimpleCompilerTransportedToAgda
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+toeTwoIsotypicAgdaTransportStillOpen = refl
+
+toeActualMonsterFin90SameActionAttachmentStillOpen :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.actualMonsterFin90SameActionAttachmentPaid
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+toeActualMonsterFin90SameActionAttachmentStillOpen = refl
+
+------------------------------------------------------------------------
+-- 12. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
 ------------------------------------------------------------------------
 
 record TOE369MaxCutZKPFrame : Set where
