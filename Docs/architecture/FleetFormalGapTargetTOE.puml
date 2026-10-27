@@ -1,0 +1,65 @@
+@startuml
+title DASHI TOE — fleet formal-gap target boundary
+
+skinparam componentStyle rectangle
+
+package "External planning receipt" {
+  component "ITIR-suite R4/R5 context\n584 discharged\n44 contradiction gaps\n58 formal gaps\n3 eigen motifs" as FleetContext
+}
+
+package "Existing DASHI owners" {
+  component "PNFSpectralCoordinateRebuildability" as Rebuild
+  component "PNFSpectralNumericABICore" as Numeric
+  component "PNFResidualFieldInvariants" as Residual
+  component "PlanningPNFClaimBoundaryExact" as Planning
+  component "Promotion.ObligationIndex" as Obligation
+  component "Balaban/Ibrahim Pareto-Snowball TOE" as Pareto
+}
+
+package "Normalized DASHI/Unified surface" {
+  component "FleetFormalGapTargetTOEExact" as Facade
+  component "FleetFormalGapTargetTOEValidation" as Validation
+}
+
+package "TOE consumers" {
+  component "EverythingTOESymmetryResolved369" as TOE
+  component "Unifier" as Unifier
+  component "Unified.Everything" as Unified
+}
+
+FleetContext ..> Facade : external planning values only
+Rebuild --> Facade
+Numeric --> Facade
+Residual --> Facade
+Planning --> Facade
+Obligation --> Facade
+Pareto --> Facade : O/R/C/S/L/P/G/F carrier
+
+Facade --> TOE
+Facade --> Unifier
+TOE --> Validation
+Unifier --> Validation
+Validation --> Unified
+
+note bottom of Facade
+Preconditions:
+- external R4/R5 receipt is context, not proof authority
+- canonical DASHI owners remain theorem authority
+- ESD surfaces remain read-only
+
+Invariants:
+- target only 58 unformalised formal gaps
+- 584 discharged fibres stay outside the target
+- 44 contradiction gaps stay separate
+- 3 eigen motifs set search priority only
+- eigenvalue magnitude does not create proof
+- external counts do not create discharge
+
+Postconditions:
+- TOE and Unifier expose the same owner receipt
+- exact 58/584/44/3 values are regression-checked
+- no ESD mutation
+- no theorem ownership transfer
+end note
+
+@enduml
