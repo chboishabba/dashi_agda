@@ -10,6 +10,7 @@ import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
+import DASHI.Physics.Closure.NSABCDMaxCut20261002Exact as NSMaxCut
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
 
@@ -78,6 +79,6 @@ navierStokesABCDTOEConvergenceReceipt =
   NSABCDTOE.canonicalNSABCDTOEConvergenceReceipt
 
 navierStokesClayPromotionRemainsFalse :
-  DASHI.Physics.Closure.NSABCDMaxCut20261002Exact.clayPromotion ≡ false
+  NSMaxCut.clayPromotion ≡ false
 navierStokesClayPromotionRemainsFalse =
   NSABCDTOE.nsClayPromotionRemainsFalse
