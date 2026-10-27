@@ -89,6 +89,7 @@ import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exa
 import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exact as R248
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as PublishedRG
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as Casimir
+import DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact as BetaFloor
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as Stress106
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as GeneratedDensity132
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as StressScale135
@@ -101,6 +102,46 @@ import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exa
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
 import DASHI.Physics.Closure.YMClayPromotionBoundary as Promotion
 import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as ContinuumBoundary
+
+
+------------------------------------------------------------------------
+-- Exact theorem-owner re-exports.
+--
+-- Re-export canonical theorem owners.
+-- Do not duplicate their proofs.
+------------------------------------------------------------------------
+
+open BetaDensity public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  )
+
+open CanonicalDensity public using
+  ( betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  )
+
+open GeneratedDensity132 public using
+  ( selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  )
+
+open StressScale135 public using
+  ( stressSelectedDensityIndexIsUnifiedActionIndex
+  )
+
+open R244 public using
+  ( selectedRegularEIsLocalizedCompositeSum
+  )
+
+open BetaFloor public using
+  ( universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
 
 ------------------------------------------------------------------------
 -- Balaban RG density and regular-E localization.
@@ -303,6 +344,15 @@ toeTerminalPromotionIsFalse =
 toeAdjointCasimirStrictPositivityLevel : ProofLevel
 toeAdjointCasimirStrictPositivityLevel =
   Casimir.classificationAdjointCasimirStrictPositivityLevel
+
+
+toeCompactSimpleUniversalBetaFloorLevel : ProofLevel
+toeCompactSimpleUniversalBetaFloorLevel =
+  BetaFloor.compactSimpleUniversalBetaFloorLevel
+
+toeLiteralUniformRegularRemainderBelowUniversalFloorLevel : ProofLevel
+toeLiteralUniformRegularRemainderBelowUniversalFloorLevel =
+  BetaFloor.literalUniformRegularRemainderBelowUniversalFloorLevel
 
 toeWilsonGhostHaarToClassifiedCasimirLevel : ProofLevel
 toeWilsonGhostHaarToClassifiedCasimirLevel =
