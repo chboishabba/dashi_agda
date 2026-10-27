@@ -26,6 +26,11 @@ balabanRGClayPromotionStillFalse :
 balabanRGClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
+
+balabanRGTOEReceipt : BalabanRGTOE.BalabanRGTOEReceipt
+balabanRGTOEReceipt =
+  BalabanRGTOE.canonicalBalabanRGTOEReceipt
+
 balabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
 balabanRGZKPFrame =
   BalabanRGTOE.canonicalBalabanTOEZKPFrame
