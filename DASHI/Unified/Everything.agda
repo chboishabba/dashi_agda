@@ -2,6 +2,8 @@ module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
+import DASHI.Moonshine.Base369Monster3BSeventyEightExceptionalE6BidiExact as E6F3Five
+import DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact as E8E6A2
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -379,3 +381,35 @@ unified369Ternary27MonsterRepresentationNotPromoted =
 
 unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+
+------------------------------------------------------------------------
+-- E6 / F3^5 quadratic and E8 / E6 x A2 comparison max-cut.
+-- Owner modules retain theorem authority.
+------------------------------------------------------------------------
+
+unifiedE6F3FiveQuadraticBoundary :
+  E6F3Five.E6F3FiveQuadraticBoundary
+unifiedE6F3FiveQuadraticBoundary =
+  E6F3Five.canonicalE6F3FiveQuadraticBoundary
+
+unifiedE6F3FivePartition =
+  E6F3Five.fiveTritQuadraticPartition
+
+unifiedE6F3FiveCardinalityDoesNotCreateRecognition :
+  E6F3Five.F3FiveCardinalityCreatesE6RootRecognition → ⊥
+unifiedE6F3FiveCardinalityDoesNotCreateRecognition =
+  E6F3Five.f3FiveCardinalityDoesNotCreateE6RootRecognition
+
+unifiedE8E6A2RootArithmeticBoundary :
+  E8E6A2.E8E6A2RootArithmeticBoundary
+unifiedE8E6A2RootArithmeticBoundary =
+  E8E6A2.canonicalE8E6A2RootArithmeticBoundary
+
+unifiedE8RootArithmeticAsE6PlusA2Orbits =
+  E8E6A2.eEightRootCountAsE6PlusA2Orbits
+
+unifiedE8E6A2ArithmeticDoesNotCreateF3FiveRecognition :
+  E8E6A2.E6A2ArithmeticCreatesF3FiveE8Recognition → ⊥
+unifiedE8E6A2ArithmeticDoesNotCreateF3FiveRecognition =
+  E8E6A2.e6A2ArithmeticDoesNotCreateF3FiveE8Recognition
