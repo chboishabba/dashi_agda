@@ -56,3 +56,44 @@ unifierBalabanScaleTransferStillImpossible :
   Owner.BalabanScaleTransferPromotion → ⊥
 unifierBalabanScaleTransferStillImpossible =
   Unifier.unifierBalabanScaleTransferPromotionImpossible
+
+
+toePhaseResolutionMatchesOwner :
+  TOE.toeIbrahimPhaseResolutionFrontier
+  ≡ Owner.ibrahimPhaseResolutionFrontier
+toePhaseResolutionMatchesOwner = refl
+
+unifierPhaseResolutionMatchesOwner :
+  Unifier.unifierIbrahimPhaseResolutionFrontier
+  ≡ Owner.ibrahimPhaseResolutionFrontier
+unifierPhaseResolutionMatchesOwner = refl
+
+toeHistoricalDiscriminatorMatchesOwner :
+  TOE.toeIbrahimHistoricalDiscriminatorBoundary
+  ≡ Owner.ibrahimHistoricalDiscriminatorBoundary
+toeHistoricalDiscriminatorMatchesOwner = refl
+
+unifierHistoricalDiscriminatorMatchesOwner :
+  Unifier.unifierIbrahimHistoricalDiscriminatorBoundary
+  ≡ Owner.ibrahimHistoricalDiscriminatorBoundary
+unifierHistoricalDiscriminatorMatchesOwner = refl
+
+toeSearchPriorityStillNonPromoting :
+  Owner.SearchPriorityCreatesProof → ⊥
+toeSearchPriorityStillNonPromoting =
+  TOE.toeIbrahimSearchPriorityDoesNotCreateProof
+
+unifierSearchPriorityStillNonPromoting :
+  Owner.SearchPriorityCreatesProof → ⊥
+unifierSearchPriorityStillNonPromoting =
+  Unifier.unifierIbrahimSearchPriorityDoesNotCreateProof
+
+toeProducerSourceStillNotExecution :
+  Owner.ProducerSourceCreatesRunReceipt → ⊥
+toeProducerSourceStillNotExecution =
+  TOE.toeIbrahimProducerSourceDoesNotCreateRunReceipt
+
+unifierProducerSourceStillNotExecution :
+  Owner.ProducerSourceCreatesRunReceipt → ⊥
+unifierProducerSourceStillNotExecution =
+  Unifier.unifierIbrahimProducerSourceDoesNotCreateRunReceipt
