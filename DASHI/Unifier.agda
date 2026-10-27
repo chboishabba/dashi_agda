@@ -1,6 +1,7 @@
 module DASHI.Unifier where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
@@ -1126,6 +1127,47 @@ unifierFleetQuantumMereologyAttributionBoundary :
   FleetGapTOE.QuantumMereologyAttributionBoundary
 unifierFleetQuantumMereologyAttributionBoundary =
   FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+
+
+------------------------------------------------------------------------
+-- Fleet 58 named-manifest acquisition boundary.
+-- The recorded count does not identify the 58 rows.
+------------------------------------------------------------------------
+
+unifierFleet58ManifestAcquisitionReceipt :
+  FleetManifestTOE.Fleet58ManifestAcquisitionReceipt
+unifierFleet58ManifestAcquisitionReceipt =
+  FleetManifestTOE.canonicalFleet58ManifestAcquisitionReceipt
+
+unifierFleet58ManifestPresent :
+  Bool
+unifierFleet58ManifestPresent =
+  FleetManifestTOE.named58ManifestAcquired
+
+unifierFleet58CountIdentifiesNamedRows :
+  Bool
+unifierFleet58CountIdentifiesNamedRows =
+  FleetManifestTOE.countIdentifiesNamedRows
+
+unifierFleet58PerGapDispatchEnabled :
+  Bool
+unifierFleet58PerGapDispatchEnabled =
+  FleetManifestTOE.perGapDispatchEnabled
+
+unifierFleet58ManifestZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierFleet58ManifestZKPFrame =
+  FleetManifestTOE.canonicalFleet58ManifestZKPFrame
+
+unifierFleet58AcquisitionDoesNotPayRequirement :
+  FleetManifestTOE.BoundDemandAutomaticallyPaysRequirement → ⊥
+unifierFleet58AcquisitionDoesNotPayRequirement =
+  FleetManifestTOE.acquisitionDoesNotPayRequirement
+
+unifierFleet58SearchPriorityDoesNotCreateProof :
+  FleetManifestTOE.SearchPriorityCreatesProof → ⊥
+unifierFleet58SearchPriorityDoesNotCreateProof =
+  FleetManifestTOE.searchPriorityDoesNotCreateProof
 
 ------------------------------------------------------------------------
 -- Joint Balaban RG + R559 same-owner max-cut facade.
