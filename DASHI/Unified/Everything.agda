@@ -310,6 +310,12 @@ unifiedFleetCountDoesNotCreateNamedManifest =
 -- Canonical owners retain theorem authority.
 ------------------------------------------------------------------------
 
+unifiedBalabanScaleTransferPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+unifiedBalabanScaleTransferPromotionImpossible =
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+
+
 unifiedIbrahimSearchPriorityDoesNotCreateProof :
   ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
 unifiedIbrahimSearchPriorityDoesNotCreateProof =
