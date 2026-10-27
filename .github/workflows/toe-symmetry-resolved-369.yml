@@ -18,6 +18,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound555Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
@@ -94,6 +95,8 @@ jobs:
           dashi-repo related balabanSameFamilyRecoveryCompilerLevel --root . --limit 20
           dashi-repo related balabanGoal1CSourceCutCompilerLevel --root . --limit 20
           dashi-repo related balabanCPhysicalPackageMaxCutCompilerLevel --root . --limit 20
+          dashi-repo related balabanCriticalPathCompilerLevel --root . --limit 20
+          dashi-repo related round555CriticalPathCompilerLevel --root . --limit 20
           dashi-repo related balabanC4DensityAnchoredStressLaneLevel --root . --limit 20
           dashi-repo related r129ExportsLiteralSchwingerMembership --root . --limit 20
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
