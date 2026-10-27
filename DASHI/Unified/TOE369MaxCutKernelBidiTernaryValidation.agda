@@ -7,6 +7,8 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as Owner
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 
@@ -235,3 +237,78 @@ unifierPermutationNonPromotionSourceFirewallMatches :
   Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
 unifierPermutationNonPromotionSourceFirewallMatches =
   Unifier.unifier369PermutationNoGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- Exact ternary-27 byte ABI / compiled host boundary.
+------------------------------------------------------------------------
+
+toeFiniteStateABIMatches :
+  TOE.toe369Ternary27FiniteStateABIExact
+  ≡ Owner.toe27FiniteStateABIExact
+toeFiniteStateABIMatches = refl
+
+unifierFiniteStateABIMatches :
+  Unifier.unifier369Ternary27FiniteStateABIExact
+  ≡ Owner.toe27FiniteStateABIExact
+unifierFiniteStateABIMatches = refl
+
+toeByteCarrierABIMatches :
+  TOE.toe369Ternary27ByteCarrierABIExact
+  ≡ Owner.toe27ByteCarrierABIExact
+toeByteCarrierABIMatches = refl
+
+unifierByteCarrierABIMatches :
+  Unifier.unifier369Ternary27ByteCarrierABIExact
+  ≡ Owner.toe27ByteCarrierABIExact
+unifierByteCarrierABIMatches = refl
+
+toeCompiledHostU8Matches :
+  TOE.toe369Ternary27CompiledHostU8Exact
+  ≡ Owner.toe27CompiledHostU8Exact
+toeCompiledHostU8Matches = refl
+
+unifierCompiledHostU8Matches :
+  Unifier.unifier369Ternary27CompiledHostU8Exact
+  ≡ Owner.toe27CompiledHostU8Exact
+unifierCompiledHostU8Matches = refl
+
+toeRustBindingBoundaryMatches :
+  TOE.toe369Ternary27RustBindingStillUnpaid
+  ≡ Owner.toe27RustBindingStillUnpaid
+toeRustBindingBoundaryMatches = refl
+
+unifierRustBindingBoundaryMatches :
+  Unifier.unifier369Ternary27RustBindingStillUnpaid
+  ≡ Owner.toe27RustBindingStillUnpaid
+unifierRustBindingBoundaryMatches = refl
+
+toeHostByteDeviceFirewallMatches :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+toeHostByteDeviceFirewallMatches =
+  TOE.toe369Ternary27HostByteDoesNotCreateDeviceByte
+
+unifierHostByteDeviceFirewallMatches :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+unifierHostByteDeviceFirewallMatches =
+  Unifier.unifier369Ternary27HostByteDoesNotCreateDeviceByte
+
+toeRuntimeKernelFirewallMatches :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+toeRuntimeKernelFirewallMatches =
+  TOE.toe369Ternary27RuntimeSourceDoesNotCreateKernelCertification
+
+unifierRuntimeKernelFirewallMatches :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+unifierRuntimeKernelFirewallMatches =
+  Unifier.unifier369Ternary27RuntimeSourceDoesNotCreateKernelCertification
+
+toeCompilerKernelFirewallMatches :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toeCompilerKernelFirewallMatches =
+  TOE.toe369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+unifierCompilerKernelFirewallMatches :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifierCompilerKernelFirewallMatches =
+  Unifier.unifier369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess
