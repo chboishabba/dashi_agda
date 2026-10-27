@@ -1,0 +1,46 @@
+@startuml
+title Governed Fleet residual TOE handoff
+
+package "Legal governance" {
+  [SensibLaw legal-source authority]
+  [GovernedLegalWorkflowTOEBridgeExact]
+  [SensibLaw legal-source authority] --> [GovernedLegalWorkflowTOEBridgeExact]
+}
+
+package "Fleet / R559 / Ibrahim" {
+  [FleetFormalGapTargetTOEExact]
+  [Fleet58ManifestAcquisitionExact]
+  [R559IbrahimFleetHyperfabricTOEExact]
+  [FleetFormalGapTargetTOEExact] --> [Fleet58ManifestAcquisitionExact]
+  [FleetFormalGapTargetTOEExact] --> [R559IbrahimFleetHyperfabricTOEExact]
+}
+
+package "NS motif" {
+  [NavierStokesBM2TOEConvergenceExact]
+}
+
+[GovernedLegalWorkflowTOEBridgeExact] --> [GovernedFleetResidualTOEHandoffExact]
+[R559IbrahimFleetHyperfabricTOEExact] --> [GovernedFleetResidualTOEHandoffExact]
+[Fleet58ManifestAcquisitionExact] --> [GovernedFleetResidualTOEHandoffExact]
+[NavierStokesBM2TOEConvergenceExact] --> [GovernedFleetResidualTOEHandoffExact]
+
+[GovernedFleetResidualTOEHandoffExact] --> [EverythingTOESymmetryResolved369]
+[GovernedFleetResidualTOEHandoffExact] --> [Unifier]
+[GovernedFleetResidualTOEHandoffExact] --> [Unified.Everything]
+
+note right of [Fleet58ManifestAcquisitionExact]
+584 discharged fibres remain discharged.
+44 contradiction gaps remain separate.
+58 is the selected formal-gap count.
+Named 58-row manifest is absent.
+Per-gap dispatch remains disabled.
+end note
+
+note bottom of [GovernedFleetResidualTOEHandoffExact]
+Workflow state does not create truth.
+Legal authority remains explicit.
+Equal cardinality does not create identity.
+No ESD mutation.
+No standards certification claim.
+end note
+@enduml
