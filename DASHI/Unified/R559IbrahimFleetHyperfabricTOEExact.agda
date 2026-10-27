@@ -218,6 +218,14 @@ toeProducerSourceDoesNotCreateRun =
 -- Typed continuum non-promotion and live Gate-4 frontier reuse.
 ------------------------------------------------------------------------
 
+BalabanContinuumPromotion : Set
+BalabanContinuumPromotion =
+  Continuum.YMBalabanContinuumLimitPromotion
+
+DepthContinuumPromotion : Set
+DepthContinuumPromotion =
+  Depth.YMDepthContinuumLimitPromotion
+
 toeBalabanContinuumPromotionImpossible :
   Continuum.YMBalabanContinuumLimitPromotion → ⊥
 toeBalabanContinuumPromotionImpossible =
