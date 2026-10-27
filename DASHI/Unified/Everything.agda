@@ -205,3 +205,54 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Current-master SensibLaw governance / fleet target normalization.
+------------------------------------------------------------------------
+
+import DASHI.Unified.SensibLawGovernanceFleetTOEExact as GovernanceFleet
+
+unifiedSensibLawGovernanceFleetReceipt :
+  GovernanceFleet.SensibLawGovernanceFleetTOEReceipt
+unifiedSensibLawGovernanceFleetReceipt =
+  GovernanceFleet.canonicalSensibLawGovernanceFleetTOEReceipt
+
+unifiedSensibLawSemanticAuthorityRemainsClosed =
+  GovernanceFleet.governanceSemanticAllAuthorityStillClosed
+
+unifiedSensibLawCandidateSourceDoesNotCreateAuthority =
+  GovernanceFleet.governanceCandidateSourceDoesNotCloseAuthority
+
+unifiedSensibLawCurrentValidityDoesNotCreateApplicability =
+  GovernanceFleet.governanceCurrentValidityDoesNotEstablishApplicability
+
+unifiedSensibLawRuntimeDoesNotInventLegalSemantics =
+  GovernanceFleet.governanceRuntimeCannotInventLegalSemantics
+
+unifiedSensibLawRepresentationDoesNotCreateLegalAuthority =
+  GovernanceFleet.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+unifiedSensibLawSnowballCitationDoesNotCreateAuthority =
+  GovernanceFleet.governanceSnowballCitationDoesNotCreateAuthority
+
+unifiedSensibLawParetoDirectiveIsNotLegalAuthority =
+  GovernanceFleet.governanceParetoDirectiveIsNotLegalAuthority
+
+unifiedSensibLawProviderFailureDoesNotCreateNegativeEvidence =
+  GovernanceFleet.governanceProviderFailureDoesNotMakePropositionFalse
+
+unifiedSensibLawExpertProductionPromotesNoAuthority =
+  GovernanceFleet.governanceExpertProductionPromotesNoAuthority
+
+unifiedGovernanceFleetDischargedFibresAre584 =
+  GovernanceFleet.governanceFleetDischargedFibresAre584
+
+unifiedGovernanceFleetContradictionGapsAre44 =
+  GovernanceFleet.governanceFleetContradictionGapsAre44
+
+unifiedGovernanceFleetFormalGapsAre58 =
+  GovernanceFleet.governanceFleetFormalGapsAre58
+
+unifiedGovernanceFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  GovernanceFleet.governanceFleetSpectralLabelsDoNotIdentifyTheoremOwners
