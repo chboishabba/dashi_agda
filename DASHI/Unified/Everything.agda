@@ -1,8 +1,10 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
-import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as U8Runtime
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -17,6 +19,8 @@ import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.FleetFormalGapTargetTOEValidation
+import DASHI.Unified.Fleet58ManifestAcquisitionExact
+import DASHI.Unified.Fleet58ManifestAcquisitionRegression
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
 import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
@@ -28,6 +32,9 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
+import DASHI.Unified.NavierStokesBM2TOEConvergenceValidation
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
@@ -123,50 +130,6 @@ yangMillsFormalProjectionsRemainNonPromoting =
     Physics.yangMillsObject
 
 ------------------------------------------------------------------------
--- Fleet formal-gap accounting and provenance projection.
-------------------------------------------------------------------------
-
-unifiedFleetRecordedDischargedCountIs584 :
-  FleetGapTOE.dischargedCoreKnowledgeFibres
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
-unifiedFleetRecordedDischargedCountIs584 =
-  FleetGapTOE.fleetRecordedDischargedCountIs584
-
-unifiedFleetRecordedUnformalisedGapCountIs58 :
-  FleetGapTOE.unformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
-unifiedFleetRecordedUnformalisedGapCountIs58 =
-  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
-
-unifiedFleetRecordedContradictionCountIs44 :
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
-unifiedFleetRecordedContradictionCountIs44 =
-  FleetGapTOE.fleetRecordedContradictionCountIs44
-
-unifiedFleetRecordedMacroscopicMotifCountIs3 :
-  FleetGapTOE.macroscopicEigenMotifCount
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
-unifiedFleetRecordedMacroscopicMotifCountIs3 =
-  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
-
-unifiedFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifiedFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
-
-unifiedFleetMetaIntrospectorAttributionPreserved :
-  FleetGapTOE.metaIntrospectorAttributionPreserved
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifiedFleetMetaIntrospectorAttributionPreserved = refl
-
-unifiedFleetMetaIntrospectorProofNotBorrowed :
-  FleetGapTOE.metaIntrospectorProofBorrowed
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifiedFleetMetaIntrospectorProofNotBorrowed = refl
-
-------------------------------------------------------------------------
 -- Joint Yang-Mills Balaban/R559 TOE receipt.
 ------------------------------------------------------------------------
 
@@ -252,11 +215,120 @@ unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
 ------------------------------------------------------------------------
--- Byte-ABI / runtime non-promotion facade.
+-- Navier-Stokes B / R571 M2 normalized TOE receipt.
 ------------------------------------------------------------------------
 
-import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
-import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as U8Runtime
+unifiedNavierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+unifiedNavierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+unifiedNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+unifiedNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Typed Balaban continuum and Fleet target aggregate aliases.
+------------------------------------------------------------------------
+
+unifiedBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+unifiedBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
+
+unifiedBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifiedBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+unifiedDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+unifiedDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
+
+unifiedDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifiedDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
+unifiedFleetDischargedCoreKnowledgeFibres : ℕ
+unifiedFleetDischargedCoreKnowledgeFibres =
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetDischargedCoreKnowledgeFibresIs584 :
+  unifiedFleetDischargedCoreKnowledgeFibres ≡ 584
+unifiedFleetDischargedCoreKnowledgeFibresIs584 =
+  FleetGapTOE.fleetRecordedDischargedCountIs584
+
+unifiedFleetPolarityContradictionGaps : ℕ
+unifiedFleetPolarityContradictionGaps =
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetPolarityContradictionGapsIs44 :
+  unifiedFleetPolarityContradictionGaps ≡ 44
+unifiedFleetPolarityContradictionGapsIs44 =
+  FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifiedFleetUnformalisedFormalGaps : ℕ
+unifiedFleetUnformalisedFormalGaps =
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetUnformalisedFormalGapsIs58 :
+  unifiedFleetUnformalisedFormalGaps ≡ 58
+unifiedFleetUnformalisedFormalGapsIs58 =
+  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+
+unifiedFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+unifiedFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+unifiedFleetRecordedDischargedCountIs584 :
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
+unifiedFleetRecordedDischargedCountIs584 =
+  FleetGapTOE.fleetRecordedDischargedCountIs584
+
+unifiedFleetRecordedUnformalisedGapCountIs58 :
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
+unifiedFleetRecordedUnformalisedGapCountIs58 =
+  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+
+unifiedFleetRecordedContradictionCountIs44 :
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
+unifiedFleetRecordedContradictionCountIs44 =
+  FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifiedFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifiedFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifiedFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetMetaIntrospectorAttributionPreserved = refl
+
+unifiedFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetMetaIntrospectorProofNotBorrowed = refl
+
+------------------------------------------------------------------------
+-- Joint Yang-Mills Balaban/R559 TOE receipt.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+import DASHI.Unified.BalabanR559TOEMaxCutValidation
 
 unifiedTriadicBoundedABIDoesNotCreateRust :
   TriadicABI.BoundedABIImpliesRustImplementation → ⊥

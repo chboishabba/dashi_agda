@@ -1,5 +1,7 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation where
 
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -7,8 +9,6 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as Owner
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
-import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
-import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 
@@ -91,7 +91,6 @@ unifierFiniteChartFirewallMatches :
   Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
 unifierFiniteChartFirewallMatches =
   Unifier.unifier369FiniteChartDoesNotCreateLinearMultiplicityAction
-
 
 toeFullGradeSameCarrierFirewallMatches :
   FullGrade.SameCarrierCreatesFullGradeActionAgreement → ⊥
