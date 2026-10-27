@@ -661,6 +661,12 @@ toeFleetNumericABIReceipt =
 toeFleetResidualInvariantReceipt =
   FleetGapTOE.fleetResidualInvariantReceipt
 
+toeFleetPlanningBoundary =
+  FleetGapTOE.fleetPlanningBoundary
+
+toeFleetVectorCoordinateDoesNotCreateTruth =
+  FleetGapTOE.fleetVectorCoordinateDoesNotCreateTruth
+
 toeFleetPromotionObligationIndex =
   FleetGapTOE.fleetPromotionObligationIndex
 
