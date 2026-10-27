@@ -1,5 +1,6 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NSCut
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 
 open import Agda.Primitive using (Setω)
@@ -205,3 +206,51 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Navier-Stokes A/B/C/D native-proof max-cut.
+------------------------------------------------------------------------
+
+unifiedNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
+unifiedNSABCDMaxCutReceipt =
+  NSCut.canonicalNSABCDTOEMaxCutReceipt
+
+unifiedNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
+unifiedNSABCDZKPFrame =
+  NSCut.canonicalNSABCDTOEZKPFrame
+
+unifiedNSR540OrderedOffDiagonalM2CompilerClosed :
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosed ≡ true
+unifiedNSR540OrderedOffDiagonalM2CompilerClosed =
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosedIsTrue
+
+unifiedNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+unifiedNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
+
+unifiedNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+unifiedNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+unifiedNSPhysicalWeightedSecondMomentPaymentStillOpen :
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosed ≡ false
+unifiedNSPhysicalWeightedSecondMomentPaymentStillOpen =
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosedIsFalse
+
+unifiedNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+unifiedNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
+
+unifiedNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+unifiedNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
+
+unifiedNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+unifiedNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse
