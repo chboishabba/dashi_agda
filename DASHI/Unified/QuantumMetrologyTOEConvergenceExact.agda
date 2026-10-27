@@ -147,6 +147,30 @@ unificationCriticalPathTerminalPromotionStillFalse :
 unificationCriticalPathTerminalPromotionStillFalse =
   Critical.canonicalUnificationCriticalPathTerminalPromotionFalse
 
+
+bornMeasurementAuthorityStillExternal :
+  QG.QGFrontierLedger.bornMeasurementAuthority QG.canonicalQGFrontier
+  ≡ Law.externalAuthorityRequired
+bornMeasurementAuthorityStillExternal = refl
+
+unitaryDynamicsAuthorityStillExternal :
+  QG.QGFrontierLedger.unitaryDynamics QG.canonicalQGFrontier
+  ≡ Law.externalAuthorityRequired
+unitaryDynamicsAuthorityStillExternal = refl
+
+finiteQuantumQFTStillNotPromoted :
+  Critical.qftPromotion Critical.canonicalUnificationCriticalPathReceipt
+  ≡ false
+finiteQuantumQFTStillNotPromoted =
+  Critical.qftPromotionIsFalse Critical.canonicalUnificationCriticalPathReceipt
+
+physicalChemistryMetrologyStillNotPromoted :
+  Critical.physicalChemistryPromotion Critical.canonicalUnificationCriticalPathReceipt
+  ≡ false
+physicalChemistryMetrologyStillNotPromoted =
+  Critical.physicalChemistryPromotionIsFalse
+    Critical.canonicalUnificationCriticalPathReceipt
+
 fullQuantumGravityStillNotPromoted :
   QG.QGFrontierLedger.unifiedQuantumGravity QG.canonicalQGFrontier
   ≡ Law.notPromoted
@@ -200,6 +224,18 @@ record QuantumMetrologyTOEConvergenceReceipt : Set where
       SIDAG.noAuthorityFabricated SIDAG.canonicalSIMetrologyPayloadDependencyDAG
       ≡ true
 
+    invariantBornMeasurementAuthorityExternal :
+      QG.QGFrontierLedger.bornMeasurementAuthority QG.canonicalQGFrontier
+      ≡ Law.externalAuthorityRequired
+
+    invariantFiniteQuantumQFTNotPromoted :
+      Critical.qftPromotion Critical.canonicalUnificationCriticalPathReceipt
+      ≡ false
+
+    invariantChemistryMetrologyNotPromoted :
+      Critical.physicalChemistryPromotion Critical.canonicalUnificationCriticalPathReceipt
+      ≡ false
+
     invariantGRNotPromotedByClockRedshift :
       Redshift.grPromotionClaimed
         (Redshift.failClosedGuards
@@ -237,6 +273,12 @@ canonicalQuantumMetrologyTOEConvergenceReceipt = record
       dimensionlessClockLawStillRequiresExternalCalibration
   ; invariantSIAuthorityNotFabricated =
       siMetrologyFabricatesNoAuthority
+  ; invariantBornMeasurementAuthorityExternal =
+      bornMeasurementAuthorityStillExternal
+  ; invariantFiniteQuantumQFTNotPromoted =
+      finiteQuantumQFTStillNotPromoted
+  ; invariantChemistryMetrologyNotPromoted =
+      physicalChemistryMetrologyStillNotPromoted
   ; invariantGRNotPromotedByClockRedshift =
       redshiftBridgeDoesNotPromoteGR
   ; invariantMeasuredGCouplingStillRequired =
