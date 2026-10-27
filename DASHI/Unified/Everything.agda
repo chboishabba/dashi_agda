@@ -328,3 +328,35 @@ governedDocumentRoleDoesNotSupplyLegalSourceAuthority =
 governedCanonicalLegalSourceAuthorityBoundary =
   LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
 
+------------------------------------------------------------------------
+-- Governed legal workflow / source-genealogy normalized facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
+import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOERegression
+
+governedLegalWorkflowSourceGenealogyHandoff :
+  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
+governedLegalWorkflowSourceGenealogyHandoff =
+  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+
+governedLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
+
+governedLegalRepetitionDoesNotCreateIndependentEvidence =
+  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
+
+governedLegalCommonSourceDoesNotEraseEvidence =
+  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
+
+governedSourceMultiplicityDoesNotAdmitTruth =
+  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
+
+governedGenealogyDoesNotPromoteLegalAuthorityTruth =
+  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
+
+governedReviewedGenealogyDoesNotPayApplicability =
+  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
+
+governedGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
+  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
