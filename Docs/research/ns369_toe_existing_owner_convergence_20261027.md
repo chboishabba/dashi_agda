@@ -51,3 +51,21 @@ The independently dated 21 October 2026 Palasek axisymmetric logarithmic circula
 **G — Governance.** This is a scoped import-graph change. It applies evidence identity, claim limits, least mutation, source attribution, and deterministic read-back. References to ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4 describe process controls. They do not claim standards certification.
 
 **F — Verification.** Read-back must find all three imports and all seven theorem receipts. The PR head workflow status is checked separately. No kernel receipt is claimed unless an exact-head Agda workflow succeeds.
+
+
+## External Euler comparison and priority rule
+
+OpenAI's released unforced-Euler result already has an in-repo source boundary in `NSOpenAI2026EulerToClayFourAlternativeBidiExact`. The owner pins the external source and records that the external Euler result does not pay positive-viscosity Navier–Stokes. The TOE bridge now reuses that owner.
+
+The Alpöge–Buckmaster smooth-forced Euler boundary remains external. R521 retains Buckmaster, Alpöge, Córdoba, and Martínez-Zoroa attribution. The later DASHI adapter gets no Euler origin credit.
+
+Priority claims use this order:
+1. identify the exact mathematical carrier;
+2. identify the theorem-bearing source term;
+3. record the source commit time;
+4. record public PR exposure separately;
+5. record merge separately;
+6. require same-object proof before comparing theorem priority;
+7. never infer access, copying, training use, or influence from chronology.
+
+The current DASHI proof-priority target is still the cutoff-uniform signed spacetime payment on the literal unforced Navier–Stokes carrier. A compiler, a reformulation, an external Euler theorem, or a later false W2 route cannot substitute for that theorem.
