@@ -161,6 +161,45 @@ unifiedBalabanScaleTransferNonPromotion =
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 ------------------------------------------------------------------------
+-- Canonical Balaban RG same-family stress recovery.
+-- Historical round identifiers stay inside the source owners.
+------------------------------------------------------------------------
+
+unifiedBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+unifiedBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+unifiedBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+unifiedBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+unifiedBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+unifiedBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+unifiedBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+unifiedBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
+
+unifiedBalabanDirectScaleTransferPromotionImpossible :
+  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
+unifiedBalabanDirectScaleTransferPromotionImpossible =
+  BalabanRGTOE.balabanScaleTransferPromotionImpossible
+
+------------------------------------------------------------------------
 -- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
 ------------------------------------------------------------------------
 
