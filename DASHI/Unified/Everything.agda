@@ -224,3 +224,14 @@ unifiedCurrentLegalAuthorityDoesNotEstablishApplicability :
 unifiedCurrentLegalAuthorityDoesNotEstablishApplicability =
   CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
 
+
+
+unifiedCurrentSemanticAdmissionCannotCreateLegalAuthority :
+  CurrentMaxCut.SemanticAdmissionIsLegalSourceAuthority → ⊥
+unifiedCurrentSemanticAdmissionCannotCreateLegalAuthority =
+  CurrentMaxCut.semanticAdmissionAuthorityNonPromotion
+
+unifiedCurrentDocumentRoleCannotCreateLegalAuthority :
+  CurrentMaxCut.DocumentRoleIsLegalSourceAuthority → ⊥
+unifiedCurrentDocumentRoleCannotCreateLegalAuthority =
+  CurrentMaxCut.documentRoleAuthorityNonPromotion
