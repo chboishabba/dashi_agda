@@ -1129,6 +1129,6 @@ unifierFleet58PerGapDispatchStillBlocked =
   Fleet58Manifest.perGapDispatchEnabledIsFalse
 
 unifierFleet58SearchPriorityDoesNotCreateProof :
-  Fleet58Manifest.Pareto.SearchPriorityCreatesProof → ⊥
+  Fleet58Manifest.SearchPriorityCreatesProof → ⊥
 unifierFleet58SearchPriorityDoesNotCreateProof =
   Fleet58Manifest.searchPriorityDoesNotCreateProof
