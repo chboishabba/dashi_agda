@@ -369,3 +369,41 @@ toeLatestRevisionLookupDoesNotPayContextReview :
   ≡ false
 toeLatestRevisionLookupDoesNotPayContextReview =
   GovernanceTOE.toeLatestRevisionLookupDoesNotPayContextReview
+
+
+------------------------------------------------------------------------
+-- Compatibility aliases for the focused governed legal-workflow bridge.
+-- These values project from the canonical TOE governance handoff.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowBoundary :
+  LegalWorkflow.GovernedLegalWorkflowTOEBoundary
+toeGovernedLegalWorkflowBoundary =
+  GovernanceTOE.governedLegalWorkflowBoundary
+    GovernanceTOE.canonicalTOEGovernanceHandoff
+
+toeGovernedLegalWorkflowZKPReceipt :
+  LegalWorkflow.GovernedLegalWorkflowZKPReceipt
+toeGovernedLegalWorkflowZKPReceipt =
+  GovernanceTOE.governedLegalWorkflowZKPReceipt
+    GovernanceTOE.canonicalTOEGovernanceHandoff
+
+toeAcceptedReviewDoesNotPayApplicability :
+  LegalWorkflow.AcceptedStatusPaysApplicability → ⊥
+toeAcceptedReviewDoesNotPayApplicability =
+  GovernanceTOE.toeWorkflowAcceptedReviewDoesNotPayApplicability
+
+toePassingControlDoesNotMeanCertified :
+  LegalWorkflow.PassingControlMeansCertified → ⊥
+toePassingControlDoesNotMeanCertified =
+  GovernanceTOE.toeWorkflowPassingControlDoesNotMeanCertified
+
+toeCaseySelectionDoesNotCreateWorldTruth :
+  LegalWorkflow.CaseySelectionCreatesWorldTruth → ⊥
+toeCaseySelectionDoesNotCreateWorldTruth =
+  GovernanceTOE.toeWorkflowCaseySelectionDoesNotCreateWorldTruth
+
+toeKnowledgeDoesNotCreateExecutionAuthority :
+  LegalWorkflow.KnowledgeIsAuthority → ⊥
+toeKnowledgeDoesNotCreateExecutionAuthority =
+  GovernanceTOE.toeWorkflowKnowledgeDoesNotCreateExecutionAuthority
