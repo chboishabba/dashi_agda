@@ -16,6 +16,9 @@ on:
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unified/YMBlockDMaxCutTOEValidation.agda'
       - 'DASHI/Unified/YMBlockDMaxCutTOEExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda'
+      - 'DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
