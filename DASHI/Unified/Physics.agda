@@ -11,6 +11,7 @@ import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -65,3 +66,18 @@ yangMillsPostureIsApproaching :
   Spine.proofPosture yangMillsObject ≡ Asserted.approachingClosedProof
 yangMillsPostureIsApproaching =
   refl
+
+
+------------------------------------------------------------------------
+-- Exact NS max-cut TOE attachment.
+------------------------------------------------------------------------
+
+navierStokesABCDTOEConvergenceReceipt :
+  NSABCDTOE.NSABCDTOEConvergenceReceipt
+navierStokesABCDTOEConvergenceReceipt =
+  NSABCDTOE.canonicalNSABCDTOEConvergenceReceipt
+
+navierStokesClayPromotionRemainsFalse :
+  DASHI.Physics.Closure.NSABCDMaxCut20261002Exact.clayPromotion ≡ false
+navierStokesClayPromotionRemainsFalse =
+  NSABCDTOE.nsClayPromotionRemainsFalse
