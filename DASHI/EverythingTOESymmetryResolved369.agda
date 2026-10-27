@@ -758,3 +758,34 @@ toeBalabanScaleTransferNonPromotion :
 toeBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- CONTEXTUAL-SEMANTIC-FRACTRAN-TOE-MAXCUT
+------------------------------------------------------------------------
+
+import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as ContextualTOE
+
+toeContextualSemanticFractranMaxCutReceipt :
+  ContextualTOE.ContextualSemanticFractranTOEMaxCutReceipt
+toeContextualSemanticFractranMaxCutReceipt =
+  ContextualTOE.canonicalContextualSemanticFractranTOEMaxCutReceipt
+
+toeContextualSemanticFractranZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeContextualSemanticFractranZKPFrame =
+  ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
+
+toeContextualCoverageDoesNotCreateMonsterRepresentation :
+  ContextualTOE.MonsterBoundary.AutomaticCoverageMonsterRepresentationPromotion → ⊥
+toeContextualCoverageDoesNotCreateMonsterRepresentation =
+  ContextualTOE.coverageDoesNotCreateMonsterRepresentation
+
+toeContextualParetoChartDoesNotCreateMonsterRepresentation :
+  ContextualTOE.Pareto.ParetoTernaryChartCreatesMonsterRepresentation → ⊥
+toeContextualParetoChartDoesNotCreateMonsterRepresentation =
+  ContextualTOE.paretoTernaryChartDoesNotCreateMonsterRepresentation
+
+toeContextualFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+toeContextualFleetDischargedFibresRemainOutOfTarget =
+  ContextualTOE.fleetDischargedFibresRemainOutOfTarget
