@@ -865,26 +865,26 @@ toeCurrentFleet58CannotPromoteToGate4SameObject =
 ------------------------------------------------------------------------
 
 toeCurrentTaskCompletionDoesNotCreateTruth :
-  CurrentMaxCut.Operational.TaskCompletionCreatesTruth → ⊥
+  CurrentMaxCut.TaskCompletionCreatesTruth → ⊥
 toeCurrentTaskCompletionDoesNotCreateTruth =
   CurrentMaxCut.taskCompletionCannotCreateTruth
 
 toeCurrentAcceptedReviewDoesNotPayApplicability :
-  CurrentMaxCut.Review.AcceptedStatusPaysApplicability → ⊥
+  CurrentMaxCut.AcceptedStatusPaysApplicability → ⊥
 toeCurrentAcceptedReviewDoesNotPayApplicability =
   CurrentMaxCut.acceptedReviewCannotPayApplicability
 
 toeCurrentCitationDoesNotRealiseLegalRule :
-  CurrentMaxCut.SourceRule.CitationAloneRealisesLegalRule → ⊥
+  CurrentMaxCut.CitationAloneRealisesLegalRule → ⊥
 toeCurrentCitationDoesNotRealiseLegalRule =
   CurrentMaxCut.citationCannotRealiseLegalRule
 
 toeCurrentStaticRefinementDoesNotCreateDynamicSafety :
-  CurrentMaxCut.Frozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+  CurrentMaxCut.StaticSeparationCreatesDynamicSafetyPermission → ⊥
 toeCurrentStaticRefinementDoesNotCreateDynamicSafety =
   CurrentMaxCut.staticObserverSeparationStillDoesNotCreateDynamicSafety
 
 toeCurrentProvenanceDoesNotCreateTruth :
-  CurrentMaxCut.Frozen.ProvenanceAxisCreatesTruthPermission → ⊥
+  CurrentMaxCut.ProvenanceAxisCreatesTruthPermission → ⊥
 toeCurrentProvenanceDoesNotCreateTruth =
   CurrentMaxCut.provenanceAxisStillDoesNotCreateTruth
