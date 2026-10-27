@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -51,3 +51,8 @@ base369RemainsAnInstanceNotGenericFabric :
     Fabric.canonicalBase369CoarseFineBoundary ≡ false
 base369RemainsAnInstanceNotGenericFabric =
   TOE.toeBase369IsNotGenericFabric
+
+monsterPhaseIntertwinerRemainsExact :
+  Signed.SignedTernaryVoxelSymmetryBoundary.monster3BPhaseInversionMatchesFrequencyConjugation
+    Signed.canonicalSignedTernaryVoxelSymmetryBoundary ≡ true
+monsterPhaseIntertwinerRemainsExact = refl
