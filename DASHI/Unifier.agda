@@ -1673,3 +1673,77 @@ toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
 toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+
+------------------------------------------------------------------------
+-- Canonical legal-governance, Fleet motif, and evidence handoff.
+------------------------------------------------------------------------
+
+open import DASHI.Governance.PromotionSpineTests public using
+  ( candidateExampleQuarantines
+  ; candidateExampleAbstains
+  ; citationExampleCannotCloseIdentity
+  ; citationExampleQuarantines
+  ; artifactExamplePromotesWhenAllFiveClose
+  ; artifactExampleAuthorizesGovernedPromotion
+  )
+
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedLegalRuntimeContract
+  ; selectedITIRNormalizedParity
+  ; selectedStageParityWitness
+  ; selectedOwnerParityWitness
+  ; SemanticPromotionPolicySurface
+  ; semanticPromotionPolicySurface
+  ; heuristic-only-abstains
+  ; promotion-ignores-heuristic-bits
+  ; semantic-promotion-truth-authority-closed
+  ; semantic-promotion-legal-authority-closed
+  ; semantic-promotion-all-authority-closed
+  ; LegalCitationBoundary
+  ; canonicalLegalCitationBoundary
+  ; CompositeCompliance
+  ; composeCertifiedStages
+  ; selectedDomainTransportReceipt
+  ; selectedRepresentationEqualityCreatesLegalAuthorityIsFalse
+  ; selectedVendorIdentityCreatesAuthorityIsFalse
+  ; selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue
+  )
+
+unifierFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifierFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifierFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetMetaIntrospectorAttributionPreserved = refl
+
+unifierFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetMetaIntrospectorProofNotBorrowed = refl
+
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
+
+unifierEvidenceManifestationDoesNotCreateSemanticAuthority :
+  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
+unifierEvidenceManifestationDoesNotCreateSemanticAuthority =
+  SLREvidence.manifestationDoesNotCreateSemanticAuthority
+
+unifierEvidenceObservationDoesNotCreateClaimTruth :
+  SLREvidence.ObservationCreatesClaimTruth → ⊥
+unifierEvidenceObservationDoesNotCreateClaimTruth =
+  SLREvidence.observationDoesNotCreateClaimTruth
+
+unifierEvidenceObservationDoesNotPromoteApplicability :
+  SLREvidence.ObservationPromotesApplicability → ⊥
+unifierEvidenceObservationDoesNotPromoteApplicability =
+  SLREvidence.observationDoesNotPromoteApplicability
+
+unifierEvidenceDoesNotCreateDigitalESDAdmission :
+  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
+unifierEvidenceDoesNotCreateDigitalESDAdmission =
+  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
