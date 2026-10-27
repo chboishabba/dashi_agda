@@ -1389,3 +1389,59 @@ def test_original_oia_burden_and_conflicting_2027_commencement():
     assert "officialOIARegulatoryBurdenNotADLRevenueTax" in regress
     assert "oiaAndKingsCommencementStatementsConflictButAreSourceAttributed" in regress
     assert "oiaVersionMismatchIsNotProofOfHistoricalTransfer" in regress
+
+
+def test_toe369_bom_and_gas_proofs_reuse_original_owners():
+    """Exact source-symbol and TOE wiring check; not an Agda kernel check."""
+    toe = (ROOT / "DASHI/EverythingTOESymmetryResolved369.agda").read_text()
+    unifier = (ROOT / "DASHI/Unifier.agda").read_text()
+    bom = VALIDATION.read_text()
+    original = OWNER.read_text()
+    genealogy = (ROOT / "DASHI/Governance/EmpiricalGenealogyRound3Regression.agda").read_text()
+    proximity = (ROOT / "DASHI/Core/InstitutionalProximityInfluenceAdequacyExact.agda").read_text()
+    symbol_pairs = {
+        "BOMHistoricalErrorDoesNotProveFraud": "historicalErrorCannotProveFraud",
+        "BOMMediaOwnershipDoesNotProveCommand": "ownershipDoesNotEstablishCommand",
+        "BOMRhetoricDoesNotProveCoordination": "similarRhetoricDoesNotProveNetwork",
+        "BOMOriginalAuditRemainsUnacquired": "unseenAuditIsNotAcquired",
+        "BOMCorrectionRequiresSameObject": "correctionRequiresSameObjectComparison",
+        "BOMPalmervilleRoundedDataCannotRecoverExactDay": "palmervilleMeasurementPrecisionNotAProbability",
+        "ClimateRepeated17BDoesNotIdentifySourceCount": "same17BHeadlineDoesNotIdentifyNamedModelCount",
+        "ClimateSame25PcDoesNotIdentifyTaxDesign": "same25PcHeadlineDoesNotIdentifyTaxDesign",
+        "Industry21Point9BDoesNotIdentifyForecastStatus": "same21Point9BNumberDoesNotEstablishActualityStatus",
+        "ThinkTankProximityDoesNotProveDirection": "influenceDoesNotFactorThroughProximity",
+    }
+    for suffix, owner in symbol_pairs.items():
+        a, b = "toe" + suffix, "toe369" + suffix
+        assert unifier.count(a + " :") == 1
+        assert toe.count(b + " :") == 1
+        assert b + " =\n  U." + a in toe
+        assert owner in (bom + genealogy + proximity)
+    assert "import DASHI.Unifier as U" in toe
+    assert "import DASHI.Governance.BOMFordhamMediaClaimAuditValidation as BOMCheck" in unifier
+    assert "import DASHI.Governance.EmpiricalGenealogyRound3Regression as Origins" in unifier
+    assert "import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity" in unifier
+    assert "import DASHI.Unifier" not in genealogy
+    assert "import DASHI.Unifier" not in bom
+    assert "import DASHI.EverythingTOESymmetryResolved369" not in genealogy
+    assert "import DASHI.EverythingTOESymmetryResolved369" not in bom
+    assert "canonicalOriginalAuditStatus = notAcquired" in original
+    assert "DASHI-Unification-Theorem" in unifier
+    # New consumer aliases never read the older axiom as proof authority.
+    after = unifier.split("-- Fact check BOM scandal:")[1]
+    assert "DASHI-Unification-Theorem" not in after
+    assert "postulate" not in after
+    assert "{!!}" not in after
+    assert "?" not in after
+
+
+def test_toe369_governance_boundary_no_esd_surface_edits():
+    toe = (ROOT / "DASHI/EverythingTOESymmetryResolved369.agda").read_text()
+    unifier = (ROOT / "DASHI/Unifier.agda").read_text()
+    assert "import DASHI.Unifier as U" in toe
+    assert "toe369BOMHistoricalErrorDoesNotProveFraud" in toe
+    for forbidden in ("dashi_digital_esd", "DASHI.DigitalESD", "DASHI.ESD"):
+        assert forbidden not in toe
+        assert forbidden not in unifier
+    assert "toeThinkTankProximityDoesNotProveDirection" in unifier
+    assert "toe369ThinkTankProximityDoesNotProveDirection" in toe
