@@ -1661,3 +1661,34 @@ toeFleet58ProducerDoesNotIdentifyResidual :
   FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
 toeFleet58ProducerDoesNotIdentifyResidual =
   FleetManifestTOE.producerDoesNotIdentifyResidual
+
+------------------------------------------------------------------------
+-- Mabo citation-use max-cut.
+------------------------------------------------------------------------
+
+toeYindjibarndiCitationSeedDoesNotCreateMaboJoin =
+  LegalGovernance.selectedYindjibarndiCitationSeedDoesNotCreateMaboJoin
+
+toeMunkaraNativeTitleAtomDoesNotPayOffshoreElement =
+  LegalGovernance.selectedMunkaraNativeTitleAtomDoesNotPayOffshoreElement
+
+toeMunkaraSharedCountryConceptDoesNotCollapseWrongType =
+  LegalGovernance.selectedMunkaraSharedCountryConceptDoesNotCollapseWrongType
+
+toePabaiMaboAnalogyStillNonPromoting =
+  LegalGovernance.selectedPabaiMaboAnalogyStillNonPromoting
+
+toeMaboIsNotClimateNegligencePrecedent =
+  LegalGovernance.selectedMaboIsNotClimateNegligencePrecedent
+
+toeMaboStructureDoesNotProveClimateDoctrine =
+  LegalGovernance.selectedMaboStructureDoesNotProveClimateDoctrine
+
+toeAmoduCitationDoesNotMeanWholesaleAdoption =
+  LegalGovernance.selectedAmoduCitationDoesNotMeanWholesaleAdoption
+
+toePabaiCurrentRouteStillUnreachable =
+  LegalGovernance.selectedPabaiCurrentRouteStillUnreachable
+
+toePabaiSearchStillRequiresProof =
+  LegalGovernance.selectedPabaiSearchStillRequiresProof
