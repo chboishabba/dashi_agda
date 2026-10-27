@@ -144,3 +144,16 @@ unifiedFleetFormalGapsAre58 :
   FleetHyperTOE.fleetFormalGaps ≡ 58
 unifiedFleetFormalGapsAre58 =
   FleetHyperTOE.fleetFormalGapsAre58
+
+------------------------------------------------------------------------
+-- Implement-A-to-D terminal unified validation.
+------------------------------------------------------------------------
+
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+import DASHI.Unified.YMImplementAToDTOEMaxCutValidation
+
+unifiedYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+unifiedYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
