@@ -19,7 +19,11 @@ module DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact where
 -- Add one exact chart between the concrete legacy Unifier trit and SSPTrit.
 -- No Unifier axiom-shaped theorem is used as proof authority.
 --
--- S. Safety invariants.
+-- S. Safety.
+-- Preconditions: canonical donor modules exist on the selected branch.
+-- Preconditions: legacy Unifier.T is used only as a carrier chart.
+-- Invariants: proof ownership remains in donor modules.
+-- Invariants: ESD and digital_esd surfaces remain read-only.
 -- The 27-state cube is not a free C3 torsor because the origin is fixed.
 -- The signed ternary symmetry is not promoted to a Monster representation.
 -- Base369 is an instance of the coarse/fine fabric, not the generic fabric.
@@ -31,6 +35,8 @@ module DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact where
 -- It does not copy code from meta-introspector repositories.
 --
 -- P. Postconditions.
+-- The focused TOE root reaches each normalized exact theorem or firewall.
+-- No false Monster, DFT, action, recognition, or same-object promotion is added.
 -- TOE consumers get one normalized surface for the exact coarse/fine reopening,
 -- the ternary C3 action, the Monster phase-conjugation intertwiner, and the
 -- exact non-promotion boundaries.
@@ -69,6 +75,8 @@ import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as Ker
 import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as SelectedSame
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZetaMaxCut
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
 
 ------------------------------------------------------------------------
 -- 1. Legacy Unifier ternary carrier <-> canonical SSP trit.
@@ -360,3 +368,57 @@ toePermutationNoGoDoesNotCreateLinearAction :
   Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
 toePermutationNoGoDoesNotCreateLinearAction =
   Ibrahim.noGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- 8. Schrodinger H-zeta recognition max cut.
+------------------------------------------------------------------------
+
+toeSchrodingerHomBindingsStillOpen :
+  HZetaMaxCut.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.homCarrierBindingsInhabitedHere
+    HZetaMaxCut.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+toeSchrodingerHomBindingsStillOpen = refl
+
+toeSchrodingerHZetaRecognitionStillOpen :
+  HZetaMaxCut.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaRecognitionInhabitedHere
+    HZetaMaxCut.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+toeSchrodingerHZetaRecognitionStillOpen = refl
+
+toeSchrodingerHZetaActionIntertwinerStillOpen :
+  HZetaMaxCut.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaActionIntertwinerInhabitedHere
+    HZetaMaxCut.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+toeSchrodingerHZetaActionIntertwinerStillOpen = refl
+
+toeSchrodingerCanonicalHomWeldStillOpen :
+  HZetaMaxCut.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.canonicalHomWeldInhabitedHere
+    HZetaMaxCut.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
+  ≡ false
+toeSchrodingerCanonicalHomWeldStillOpen = refl
+
+------------------------------------------------------------------------
+-- 9. Ternary-27 phase-preserving reduction non-promotion.
+------------------------------------------------------------------------
+
+toeTernary27PhaseReductionIsNotGlobalInversion :
+  TernaryReduction.phasePreservingReductionEqualsFullGlobalInversion
+    TernaryReduction.currentTernary27ReductionBoundary
+  ≡ false
+toeTernary27PhaseReductionIsNotGlobalInversion =
+  TernaryReduction.phasePreservingReductionEqualsFullGlobalInversionIsFalse
+
+toeTernary27OrbitIndexingIsNotSemanticIdentity :
+  TernaryReduction.orbitToComplementModeIndexingIsSemanticIdentity
+    TernaryReduction.currentTernary27ReductionBoundary
+  ≡ false
+toeTernary27OrbitIndexingIsNotSemanticIdentity =
+  TernaryReduction.orbitToComplementModeIndexingIsSemanticIdentityIsFalse
+
+toeTernary27ReductionIsNotMonster42SameObject :
+  TernaryReduction.reducedFifteenIsMonster42dSameObject
+    TernaryReduction.currentTernary27ReductionBoundary
+  ≡ false
+toeTernary27ReductionIsNotMonster42SameObject =
+  TernaryReduction.reducedFifteenIsMonster42dSameObjectIsFalse
