@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Unified.QuantumMetrologyTOEConvergenceExact as Bridge
 import DASHI.Physics.Closure.QuantumClockObservableContract as Clock
+import DASHI.Physics.Closure.QuantumClockAuthorityReceipt as ClockAuthority
 import DASHI.Physics.Closure.QuantumClockSIObservableBridge as ClockSI
 import DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw as Dimensionless
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
@@ -26,6 +27,71 @@ clockBindingRegression :
   ≡ false
 clockBindingRegression =
   Bridge.clockContractNotExternallyBound
+
+
+clockExperimentalResultRegression :
+  Clock.experimentalResultClaimedHere Clock.canonicalQuantumClockObservableContract
+  ≡ false
+clockExperimentalResultRegression =
+  Bridge.clockContractClaimsNoExperimentalResult
+
+clockAuthorityRegression :
+  ClockAuthority.externalMeasurementBound
+    (ClockAuthority.failClosedExternalMeasurementBinding
+      ClockAuthority.canonicalQuantumClockAuthorityReceipt)
+  ≡ false
+clockAuthorityRegression =
+  Bridge.clockAuthorityReceiptFailsClosed
+
+siClockEmpiricalResultRegression :
+  ClockSI.empiricalClockResultClaimed ClockSI.canonicalQuantumClockSIObservableBridge
+  ≡ false
+siClockEmpiricalResultRegression =
+  Bridge.siClockBridgeClaimsNoEmpiricalResult
+
+siClockExternalAuthorityRegression :
+  ClockSI.externalAuthorityStillRequired ClockSI.canonicalQuantumClockSIObservableBridge
+  ≡ true
+siClockExternalAuthorityRegression =
+  Bridge.siClockBridgeStillRequiresExternalAuthority
+
+dimensionlessPromotionRegression :
+  Dimensionless.empiricalPromotionClaimed
+    (Dimensionless.failClosedGuards
+      Dimensionless.canonicalQuantumClockDimensionlessObservableLaw)
+  ≡ false
+dimensionlessPromotionRegression =
+  Bridge.dimensionlessClockLawDoesNotPromoteEmpirically
+
+redshiftEmpiricalPromotionRegression :
+  Redshift.empiricalPromotionClaimed
+    (Redshift.failClosedGuards
+      Redshift.canonicalQuantumClockProperTimeRedshiftBridge)
+  ≡ false
+redshiftEmpiricalPromotionRegression =
+  Bridge.redshiftBridgeDoesNotPromoteEmpirically
+
+siAuthorityFabricationRegression :
+  SIDAG.noAuthorityFabricated SIDAG.canonicalSIMetrologyPayloadDependencyDAG
+  ≡ true
+siAuthorityFabricationRegression =
+  Bridge.siMetrologyFabricatesNoAuthority
+
+unitaryAuthorityRegression :
+  QG.QGFrontierLedger.unitaryDynamics QG.canonicalQGFrontier
+  ≡ Law.externalAuthorityRequired
+unitaryAuthorityRegression =
+  Bridge.unitaryDynamicsAuthorityStillExternal
+
+exactRationalEinsteinCouplingRegression :
+  GravityCalibration.exactRationalPhysicalEinsteinCouplingClaimed ≡ false
+exactRationalEinsteinCouplingRegression =
+  Bridge.exactRationalEinsteinCouplingStillNotClaimed
+
+timelikeControlRegression :
+  Trace.timelikeEnergyDensityControlStillRequired ≡ true
+timelikeControlRegression =
+  Bridge.timelikeEnergyDensityControlStillRequired
 
 clockPromotionRegression :
   Clock.promoted Clock.canonicalQuantumClockObservableContract ≡ false
