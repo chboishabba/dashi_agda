@@ -128,6 +128,39 @@ yangMillsFormalProjectionsRemainNonPromoting =
     Physics.yangMillsObject
 
 ------------------------------------------------------------------------
+-- Canonical Balaban RG / localization / stress / non-promotion surface.
+------------------------------------------------------------------------
+
+unifiedBalabanScaleDensityFiniteMeasureWeldLevel : ProofLevel
+unifiedBalabanScaleDensityFiniteMeasureWeldLevel =
+  BalabanRGTOE.balabanScaleDensityFiniteMeasureWeldLevel
+
+unifiedBalabanRegularELocalizationCarrierLevel : ProofLevel
+unifiedBalabanRegularELocalizationCarrierLevel =
+  BalabanRGTOE.balabanRegularELocalizationCarrierLevel
+
+unifiedBalabanCasimirLowerBoundTransportLevel : ProofLevel
+unifiedBalabanCasimirLowerBoundTransportLevel =
+  BalabanRGTOE.balabanCasimirLowerBoundTransportLevel
+
+unifiedBalabanDensityAnchoredStressLaneCompilerLevel : ProofLevel
+unifiedBalabanDensityAnchoredStressLaneCompilerLevel =
+  BalabanRGTOE.balabanDensityAnchoredStressLaneCompilerLevel
+
+unifiedBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+unifiedBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+unifiedBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+unifiedBalabanScaleTransferPromotionImpossible :
+  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
+unifiedBalabanScaleTransferPromotionImpossible =
+  BalabanRGTOE.balabanScaleTransferPromotionImpossible
+
+------------------------------------------------------------------------
 -- Joint Yang-Mills Balaban/R559 TOE receipt.
 ------------------------------------------------------------------------
 

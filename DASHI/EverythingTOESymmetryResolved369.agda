@@ -185,6 +185,43 @@ toeBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
 toeBalabanStressCauchyPhysicalInsertionLevel =
   BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
 
+toeBalabanStressCauchyCompletionToMarkedStressLevel : ProofLevel
+toeBalabanStressCauchyCompletionToMarkedStressLevel =
+  BalabanRGTOE.balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+
+toeBalabanStressCompletedMarkedIsClayStressLevel : ProofLevel
+toeBalabanStressCompletedMarkedIsClayStressLevel =
+  BalabanRGTOE.balabanGoal1CCompletedStressIsClayStressLevel
+
+toeBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+toeBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+toeBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+toeBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+toeBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+toeBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+toeBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+toeBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+toeBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+toeBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+toeBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+toeBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
+
 toeBalabanStressHilbertBoundCompilerLevel : ProofLevel
 toeBalabanStressHilbertBoundCompilerLevel =
   BalabanRGTOE.balabanStressHilbertBoundCompilerLevel
@@ -434,9 +471,9 @@ toe369YangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 ------------------------------------------------------------------------
 
 toeBalabanScaleTransferPromotionImpossible :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
 toeBalabanScaleTransferPromotionImpossible =
-  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+  BalabanRGTOE.balabanScaleTransferPromotionImpossible
 
 toeIbrahimRecognitionParetoBoundary :
   ParetoSnowballTOE.RecognitionRouteParetoBoundary
