@@ -725,18 +725,28 @@ unifierBalabanScaleTransferPromotionImpossible :
 unifierBalabanScaleTransferPromotionImpossible =
   ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
 
+unifierIbrahimRecognitionParetoBoundary :
+  ParetoSnowballTOE.RecognitionRouteParetoBoundary
 unifierIbrahimRecognitionParetoBoundary =
   ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
 
+unifierIbrahimCharacterExecutionFrontier :
+  ParetoSnowballTOE.Monster3BCharacterExecutionFrontier
 unifierIbrahimCharacterExecutionFrontier =
   ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
 
+unifierIbrahimPhaseResolutionFrontier :
+  ParetoSnowballTOE.InertiaPhaseResolutionFrontier
 unifierIbrahimPhaseResolutionFrontier =
   ParetoSnowballTOE.ibrahimPhaseResolutionFrontier
 
+unifierIbrahimSchrodingerHZetaMaxCutBoundary :
+  ParetoSnowballTOE.SchrodingerHZetaRecognitionMaxCutBoundary
 unifierIbrahimSchrodingerHZetaMaxCutBoundary =
   ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
 
+unifierIbrahimHistoricalDiscriminatorBoundary :
+  ParetoSnowballTOE.HistoricalDiscriminatorBoundary
 unifierIbrahimHistoricalDiscriminatorBoundary =
   ParetoSnowballTOE.ibrahimHistoricalDiscriminatorBoundary
 
