@@ -90,3 +90,36 @@ selectedFriendlyjordiesResidualAcquisitionClosure :
   FriendlyjordiesSourceTotality.ResidualAcquisitionClosure
 selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
+
+
+------------------------------------------------------------------------
+-- Canonical legal-governance semantic handoff.
+--
+-- Reuse existing owners. Do not create an Actionstep-specific ontology.
+-- Runtime parity, semantic promotion, legal citation, and compliance remain
+-- separate proof coordinates.
+------------------------------------------------------------------------
+
+open import DASHI.Interop.SensibLawSemanticPromotionPolicy public using
+  ( SemanticPromotionPolicySurface
+  ; semanticPromotionPolicySurface
+  ; heuristic-only-abstains
+  ; promotion-ignores-heuristic-bits
+  ; semantic-promotion-truth-authority-closed
+  ; semantic-promotion-legal-authority-closed
+  ; semantic-promotion-all-authority-closed
+  )
+
+open import DASHI.Core.CompositionalComplianceExact public using
+  ( CertifiedStage
+  ; CompositeCompliance
+  ; composeCertifiedStages
+  ; DependentCertifiedStage
+  )
+
+open import DASHI.Law.LegalAuthorityCitationExact public using
+  ( LegalCitation
+  ; LegalAuthorityUseReceipt
+  ; LegalCitationBoundary
+  ; canonicalLegalCitationBoundary
+  )
