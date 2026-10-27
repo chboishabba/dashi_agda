@@ -50,8 +50,8 @@ module DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact where
 -- remain the certification gate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
@@ -62,6 +62,11 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
+import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
+import DASHI.Physics.Closure.YMBalabanContinuumLimitReceipt as Continuum
+import DASHI.Physics.Closure.YMDepthAsContinuumLimitReceipt as Depth
+import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as Gate4Current
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 
 ------------------------------------------------------------------------
 -- Exact existing owners.
@@ -100,6 +105,46 @@ fleetContradictionGapsAre44 = refl
 
 fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
 fleetFormalGapsAre58 = refl
+
+historicalGate4GapCount : Nat
+historicalGate4GapCount =
+  YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
+
+historicalGate4GapCountIs58 : historicalGate4GapCount ≡ 58
+historicalGate4GapCountIs58 =
+  YM.gate4UnresolvedCountIs58 YM.canonicalBalabanR559TOEMaxCutReceipt
+
+fleetFormalGapCountEqualsHistoricalGate4Count :
+  fleetFormalGaps ≡ historicalGate4GapCount
+fleetFormalGapCountEqualsHistoricalGate4Count =
+  trans fleetFormalGapsAre58 (sym historicalGate4GapCountIs58)
+
+fleetGate4EqualCardinalityBoundary :
+  EqualCardinality.EqualCardinalityBoundary
+fleetGate4EqualCardinalityBoundary =
+  EqualCardinality.canonicalEqualCardinalityBoundary
+
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  EqualCardinality.equalCardinalitySelectsCanonicalMap
+    fleetGate4EqualCardinalityBoundary
+  ≡ false
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  EqualCardinality.equalCardinalitySelectsCanonicalMapIsFalse
+    fleetGate4EqualCardinalityBoundary
+
+fleetFormalGapTargetSelected : Bool
+fleetFormalGapTargetSelected = true
+
+fleetFormalGapTargetSelectedIsTrue :
+  fleetFormalGapTargetSelected ≡ true
+fleetFormalGapTargetSelectedIsTrue = refl
+
+historicalGate4CountSelectedAsFleetTarget : Bool
+historicalGate4CountSelectedAsFleetTarget = false
+
+historicalGate4CountSelectedAsFleetTargetIsFalse :
+  historicalGate4CountSelectedAsFleetTarget ≡ false
+historicalGate4CountSelectedAsFleetTargetIsFalse = refl
 
 fleetEigenPriorityDoesNotCreateProof :
   Fleet.FleetEigenPriorityCreatesProof → ⊥
@@ -179,6 +224,37 @@ toeProducerSourceDoesNotCreateRun :
   Ibrahim.ProducerSourceCreatesRunReceipt → ⊥
 toeProducerSourceDoesNotCreateRun =
   Ibrahim.producerSourceDoesNotCreateRunReceipt
+
+BalabanContinuumPromotion : Set
+BalabanContinuumPromotion =
+  Continuum.YMBalabanContinuumLimitPromotion
+
+DepthContinuumPromotion : Set
+DepthContinuumPromotion =
+  Depth.YMDepthContinuumLimitPromotion
+
+toeBalabanContinuumPromotionImpossible :
+  BalabanContinuumPromotion → ⊥
+toeBalabanContinuumPromotionImpossible =
+  Continuum.ymBalabanContinuumLimitPromotionImpossibleHere
+
+toeDepthContinuumPromotionImpossible :
+  DepthContinuumPromotion → ⊥
+toeDepthContinuumPromotionImpossible =
+  Depth.ymDepthContinuumLimitPromotionImpossibleHere
+
+currentGate4FrontierLedgerLevel : Proof.ProofLevel
+currentGate4FrontierLedgerLevel =
+  Gate4Current.currentFrontierLedgerTypecheckLevel
+
+currentGate4ClusteringToTransferGapLevel : Proof.ProofLevel
+currentGate4ClusteringToTransferGapLevel =
+  Gate4Current.clusteringToTransferGapReductionTypecheckLevel
+
+currentGate4FrontierDoesNotSelfPromote :
+  Proof.promotable currentGate4FrontierLedgerLevel ≡ false
+currentGate4FrontierDoesNotSelfPromote =
+  Proof.conditionalDoesNotSelfPromote
 
 ------------------------------------------------------------------------
 -- One normalized receipt.
