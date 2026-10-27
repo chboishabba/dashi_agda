@@ -23,6 +23,9 @@ import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionE
 import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterIsotypicBypassExact as WholeCharacter
 import DASHI.Wikimedia.IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact as KernelClass20
 import DASHI.Wikimedia.IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact as KernelGauge
+import DASHI.Wikimedia.IbrahimMonster3BFDRepGroupAlgebraAdapterReceiptExact as FDRepReceipt
+import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterSimpleSubobjectClassificationExact as SimpleClassifier
+import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact as TwoIsotypic
 
 originIsFixed :
   Spectral.rotateXYZ Geometry.origin ≡ Geometry.origin
@@ -259,3 +262,57 @@ paidKernelStillDoesNotRequireAbsoluteSignName :
   KernelGauge.PaidKernelRequiresAbsoluteSignName → ⊥
 paidKernelStillDoesNotRequireAbsoluteSignName =
   TOE.toePaidKernelDoesNotRequireAbsoluteSignName
+
+
+------------------------------------------------------------------------
+-- Cross-prover generic representation receipt regression.
+------------------------------------------------------------------------
+
+leanFDRepAdapterSourceRemainsWritten :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.leanAdapterSourceWritten
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ true
+leanFDRepAdapterSourceRemainsWritten =
+  TOE.toeLeanFDRepAdapterSourceWritten
+
+leanFDRepAdapterKernelReceiptRemainsUnobserved :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.leanKernelReceiptObserved
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ false
+leanFDRepAdapterKernelReceiptRemainsUnobserved =
+  TOE.toeLeanFDRepAdapterKernelReceiptStillUnobserved
+
+leanFDRepAdapterAgdaTransportRemainsUnobserved :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.agdaTransportObserved
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ false
+leanFDRepAdapterAgdaTransportRemainsUnobserved =
+  TOE.toeLeanFDRepAdapterAgdaTransportStillUnobserved
+
+simpleSourceClassifierRemainsSourceWritten :
+  SimpleClassifier.SimpleSubobjectClassificationBoundary.leanSourceWritten
+    SimpleClassifier.canonicalSimpleSubobjectClassificationBoundary
+  ≡ true
+simpleSourceClassifierRemainsSourceWritten =
+  TOE.toeSimpleSourceClassifierSourceWritten
+
+characterMultiplicityLemmasRemainSourceWritten :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.multiplicityLemmasSourceWritten
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ true
+characterMultiplicityLemmasRemainSourceWritten =
+  TOE.toeCharacterMultiplicityLemmasSourceWritten
+
+twoIsotypicAgdaTransportRemainsOpen :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.fullTwoSimpleCompilerTransportedToAgda
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+twoIsotypicAgdaTransportRemainsOpen =
+  TOE.toeTwoIsotypicAgdaTransportStillOpen
+
+actualMonsterFin90SameActionAttachmentRemainsOpen :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.actualMonsterFin90SameActionAttachmentPaid
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+actualMonsterFin90SameActionAttachmentRemainsOpen =
+  TOE.toeActualMonsterFin90SameActionAttachmentStillOpen
