@@ -495,3 +495,127 @@ record ExistingGeometryReuseBoundary : Set where
 canonicalExistingGeometryReuseBoundary : ExistingGeometryReuseBoundary
 canonicalExistingGeometryReuseBoundary =
   existingGeometryReuseBoundary true refl false refl false refl false refl
+
+------------------------------------------------------------------------
+-- Original patent RU2122446C1: edition-labelled dimensional metadata.
+-- This is NOT a measured surface or empirical therapeutic receipt.
+-- Dimensions in integer millimetres, thickness in tenths of a millimetre.
+-- 0.5 mm in translated English abstract conflicts with 1.5 mm in claims.
+-- 280cm height is an upper bound, not a uniquely measured panel height.
+------------------------------------------------------------------------
+
+data PatentThicknessReading : Set where
+  englishAbstractHalfMillimetre : PatentThicknessReading
+  patentDescriptionClaimOnePointFiveMillimetre : PatentThicknessReading
+
+thicknessTenthsMillimetre : PatentThicknessReading → Nat
+thicknessTenthsMillimetre englishAbstractHalfMillimetre = 5
+thicknessTenthsMillimetre patentDescriptionClaimOnePointFiveMillimetre = 15
+
+patentThicknessReadingsConflict :
+  thicknessTenthsMillimetre englishAbstractHalfMillimetre
+  ≢ thicknessTenthsMillimetre patentDescriptionClaimOnePointFiveMillimetre
+patentThicknessReadingsConflict ()
+
+patentMaximumPanelHeightMillimetre : Nat
+patentMaximumPanelHeightMillimetre = 2800
+
+patentNominalPanelWidthMillimetre : Nat
+patentNominalPanelWidthMillimetre = 1200
+
+patentClaimedFocalDistanceMillimetre : Nat
+patentClaimedFocalDistanceMillimetre = 500
+
+data PatentAssembly : Set where
+  openCylinderFourPanels : PatentAssembly
+  openCylinderSixPanels : PatentAssembly
+  leftSpiralEightPanels : PatentAssembly
+  leftSpiralNinePanels : PatentAssembly
+  leftSpiralTenPanels : PatentAssembly
+  rightSpiralEightPanels : PatentAssembly
+  rightSpiralNinePanels : PatentAssembly
+  rightSpiralTenPanels : PatentAssembly
+
+patentPanelCount : PatentAssembly → Nat
+patentPanelCount openCylinderFourPanels = 4
+patentPanelCount openCylinderSixPanels = 6
+patentPanelCount leftSpiralEightPanels = 8
+patentPanelCount leftSpiralNinePanels = 9
+patentPanelCount leftSpiralTenPanels = 10
+patentPanelCount rightSpiralEightPanels = 8
+patentPanelCount rightSpiralNinePanels = 9
+patentPanelCount rightSpiralTenPanels = 10
+
+data PatentConstructionRole : Set where
+  openCylinderConstruction : PatentConstructionRole
+  spiralConstruction : PatentConstructionRole
+
+patentConstructionRole : PatentAssembly → PatentConstructionRole
+patentConstructionRole openCylinderFourPanels = openCylinderConstruction
+patentConstructionRole openCylinderSixPanels = openCylinderConstruction
+patentConstructionRole leftSpiralEightPanels = spiralConstruction
+patentConstructionRole leftSpiralNinePanels = spiralConstruction
+patentConstructionRole leftSpiralTenPanels = spiralConstruction
+patentConstructionRole rightSpiralEightPanels = spiralConstruction
+patentConstructionRole rightSpiralNinePanels = spiralConstruction
+patentConstructionRole rightSpiralTenPanels = spiralConstruction
+
+spiralEightPanelsNotCylinderFour :
+  patentConstructionRole leftSpiralEightPanels
+  ≢ patentConstructionRole openCylinderFourPanels
+spiralEightPanelsNotCylinderFour ()
+
+-- An existing helix phase coordinate can index a *candidate* chart.
+-- A particular metal enclosure cannot be selected from plate counts,
+-- envelope dimensions and phase alone; its measured point map is a separate
+-- supplied datum, with a separate authority/uncertainty requirement.
+record SelectedPatentCandidateSurface : Set₁ where
+  field
+    assembly : PatentAssembly
+    thicknessReading : PatentThicknessReading
+    SurfacePoint : Set
+    mapPhaseToSurfacePoint : ExistingHelix.HelicalSite → SurfacePoint
+    chartDefinition : String
+    materialConstitutiveReference : String
+    geometryProvenance : String
+
+-- Two syntactically different unwrapped chart placements share all the
+-- named patent metadata. This is only a finite chart non-uniqueness witness;
+-- it does NOT show two distinct physical surfaces satisfying the patent's
+-- unspecified optical-focusing condition.
+data PhaseChartChoice : Set where
+  phaseIdentityChart : PhaseChartChoice
+  phaseRotationChart : PhaseChartChoice
+
+phaseChart : PhaseChartChoice → ExistingHelix.Phase3 → ExistingHelix.Phase3
+phaseChart phaseIdentityChart phase = phase
+phaseChart phaseRotationChart phase = ExistingHelix.rotatePhase phase
+
+phaseChartsDifferAtZero :
+  phaseChart phaseRotationChart ExistingHelix.phase0
+  ≢ phaseChart phaseIdentityChart ExistingHelix.phase0
+phaseChartsDifferAtZero =
+  ExistingHelix.rotationIsNontrivialAtPhaseZero
+
+data PhysicalApparatusValidationGate : Set where
+  patentTranslationAndDrawingsReconciled : PhysicalApparatusValidationGate
+  surfaceShapeAndDimensionsDigitised : PhysicalApparatusValidationGate
+  constitutiveAluminiumResponseCalibrated : PhysicalApparatusValidationGate
+  boundaryOperatorSelectedOnMeasuredSurface : PhysicalApparatusValidationGate
+  computedRayOrWaveSignalValidatedAgainstIndependentSolver :
+    PhysicalApparatusValidationGate
+  negativeControlAndShamSameObservable : PhysicalApparatusValidationGate
+  measuredInstrumentPrecisionAndTiming : PhysicalApparatusValidationGate
+  uncertaintyAndReplicationAudited : PhysicalApparatusValidationGate
+
+canonicalPhysicalApparatusValidationGates : List PhysicalApparatusValidationGate
+canonicalPhysicalApparatusValidationGates =
+  patentTranslationAndDrawingsReconciled
+  ∷ surfaceShapeAndDimensionsDigitised
+  ∷ constitutiveAluminiumResponseCalibrated
+  ∷ boundaryOperatorSelectedOnMeasuredSurface
+  ∷ computedRayOrWaveSignalValidatedAgainstIndependentSolver
+  ∷ negativeControlAndShamSameObservable
+  ∷ measuredInstrumentPrecisionAndTiming
+  ∷ uncertaintyAndReplicationAudited
+  ∷ []
