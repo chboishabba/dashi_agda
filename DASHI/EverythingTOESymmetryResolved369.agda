@@ -600,6 +600,38 @@ toe369PermutationNoGoDoesNotCreateLinearAction =
 
 
 ------------------------------------------------------------------------
+-- Ternary-27 ABI / compiled-host non-promotion handoff.
+------------------------------------------------------------------------
+
+toe369Ternary27FiniteStateABIExact =
+  MaxCut369.toe27FiniteStateABIExact
+
+toe369Ternary27ByteCarrierABIExact =
+  MaxCut369.toe27ByteCarrierABIExact
+
+toe369Ternary27CompiledHostU8Exact =
+  MaxCut369.toe27CompiledHostU8Exact
+
+toe369Ternary27RustBindingStillUnpaid =
+  MaxCut369.toe27RustBindingStillUnpaid
+
+toe369Ternary27CUDABindingStillUnpaid =
+  MaxCut369.toe27CUDABindingStillUnpaid
+
+toe369Ternary27ROCmBindingStillUnpaid =
+  MaxCut369.toe27ROCmBindingStillUnpaid
+
+toe369Ternary27HostByteDoesNotCreateDeviceByte =
+  MaxCut369.toe27HostByteDoesNotCreateDeviceByte
+
+toe369Ternary27RuntimeSourceDoesNotCreateKernelCertification =
+  MaxCut369.toe27RuntimeSourceDoesNotCreateKernelCertification
+
+toe369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  MaxCut369.toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+
+------------------------------------------------------------------------
 -- Singular-basin / coarse-RG obstruction convergence.
 ------------------------------------------------------------------------
 
