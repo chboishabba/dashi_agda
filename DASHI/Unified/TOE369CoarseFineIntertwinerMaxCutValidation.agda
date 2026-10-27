@@ -28,6 +28,11 @@ import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterSimpleSubobjectClassificati
 import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact as TwoIsotypic
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
+import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as AcquisitionCompletion
+import DASHI.Reasoning.Trialectic369Selected3BLinearCoreCompatibilityExact as CoreCompatibility
+import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as ActualAcquisition
+import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as PhaseWeld
+import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VOAComposition
 
 originIsFixed :
   Spectral.rotateXYZ Geometry.origin ≡ Geometry.origin
@@ -365,3 +370,85 @@ outgoingLinearAcquisitionRemainsUninhabited :
   ≡ false
 outgoingLinearAcquisitionRemainsUninhabited =
   TOE.toeOutgoingLinearAcquisitionStillUninhabited
+
+
+------------------------------------------------------------------------
+-- Reused acquisition compiler and phase-resolved 12+78 regression.
+------------------------------------------------------------------------
+
+acquisitionCoreCompilerRemainsOwned :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.acquisitionCoreCompilerOwned
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+acquisitionCoreCompilerRemainsOwned =
+  TOE.toeAcquisitionCoreCompilerAlreadyOwned
+
+acquisitionOnlyActionIntertwiningRemains :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.onlyActionIntertwiningRemainsAfterScaffold
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+acquisitionOnlyActionIntertwiningRemains =
+  TOE.toeAcquisitionOnlyActionIntertwiningRemains
+
+acquisitionSourceNativePayloadRemainsRetained :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.sourceNativeInertiaPayloadRetained
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+acquisitionSourceNativePayloadRemainsRetained =
+  TOE.toeAcquisitionSourceNativePayloadRetained
+
+acquisitionTwelveSeventyEightPayloadRemainsRetained :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.twelveSeventyEightIntertwinerPayloadRetained
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+acquisitionTwelveSeventyEightPayloadRemainsRetained =
+  TOE.toeAcquisitionTwelveSeventyEightPayloadRetained
+
+historicalCorePlusHomWeldStillCompilesCanonicalCore :
+  CoreCompatibility.Trialectic369Selected3BLinearCoreCompatibilityBoundary.historicalCorePlusHomWeldCompilesCanonicalCore
+    CoreCompatibility.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
+  ≡ true
+historicalCorePlusHomWeldStillCompilesCanonicalCore =
+  TOE.toeHistoricalCorePlusHomWeldCompilesCanonicalCore
+
+phaseResolvedTwelveMultiplicityRemainsPaid :
+  PhaseWeld.PhaseCharacterWeldFrontier.twelveMultiplicityAtCharacterLevelPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+phaseResolvedTwelveMultiplicityRemainsPaid =
+  TOE.toePhaseResolvedTwelveMultiplicityPaid
+
+phaseResolvedSeventyEightMultiplicityRemainsPaid :
+  PhaseWeld.PhaseCharacterWeldFrontier.seventyEightMultiplicityAtCharacterLevelPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+phaseResolvedSeventyEightMultiplicityRemainsPaid =
+  TOE.toePhaseResolvedSeventyEightMultiplicityPaid
+
+phaseResolvedSameActionIntertwinerRemainsOpen :
+  PhaseWeld.PhaseCharacterWeldFrontier.sameActionTwelveSeventyEightIntertwinerPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ false
+phaseResolvedSameActionIntertwinerRemainsOpen =
+  TOE.toePhaseResolvedSameActionIntertwinerStillOpen
+
+actualLinearActionRemainsOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.actualLinearActionPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+actualLinearActionRemainsOpen =
+  TOE.toeActualLinearActionStillOpen
+
+actualSourceNativeInertiaSameActionRemainsOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.sourceNativeInertiaSameActionPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+actualSourceNativeInertiaSameActionRemainsOpen =
+  TOE.toeActualSourceNativeInertiaSameActionStillOpen
+
+voaKernelRecognizedAttachmentRemainsOpen :
+  VOAComposition.ActualVOASelected3BCompositionFrontier.kernelRecognizedAttachmentInhabitedHere
+    VOAComposition.currentActualVOASelected3BCompositionFrontier
+  ≡ false
+voaKernelRecognizedAttachmentRemainsOpen =
+  TOE.toeVOAKernelRecognizedAttachmentStillOpen
