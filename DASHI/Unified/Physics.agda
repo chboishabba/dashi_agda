@@ -2,6 +2,7 @@ module DASHI.Unified.Physics where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Nat.Base using (ℕ)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
@@ -366,6 +367,27 @@ yangMillsBalabanR559ClayPromotionStillBlocked :
   ≡ false
 yangMillsBalabanR559ClayPromotionStillBlocked =
   BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4UnresolvedCount : ℕ
+yangMillsBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4UnresolvedCountIs58 :
+  yangMillsBalabanR559Gate4UnresolvedCount ≡ 58
+yangMillsBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4DefinitionLevel : ProofLevel
+yangMillsBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4InhabitantsLevel : ProofLevel
+yangMillsBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 yangMillsBalabanScaleTransferNonPromotion :
