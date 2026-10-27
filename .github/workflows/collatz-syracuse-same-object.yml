@@ -10,6 +10,7 @@ on:
       - 'DASHI/Analysis/CollatzSyracuse*.agda'
       - 'DASHI/Core/BinaryWordIntegerChernoffExact.agda'
       - 'DASHI/Unified/CollatzSyracuseTOEMaxCut*.agda'
+      - 'DASHI/Unified/Everything.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
       - 'Docs/architecture/CollatzSyracuseTOEMaxCut.puml'
@@ -47,6 +48,7 @@ jobs:
         run: |
           dashi-agda-preflight --root . DASHI/Unified/CollatzSyracuseTOEMaxCutExact.agda
           dashi-agda-preflight --root . DASHI/Unified/CollatzSyracuseTOEMaxCutValidation.agda
+          dashi-agda-preflight --root . DASHI/Unified/Everything.agda
           dashi-agda-preflight --root . DASHI/EverythingTOESymmetryResolved369.agda
           dashi-agda-preflight --root . DASHI/Unifier.agda
       - name: Reject trust escapes in Collatz TOE lane
