@@ -53,6 +53,8 @@ import DASHI.Physics.Closure.NSCanonicalClayResidualExact as Canonical
 import DASHI.Physics.Closure.NSClayDistanceFinalReceipt as Distance
 import DASHI.Physics.Closure.NSAuthorityConsistencyGuard as Guard
 
+open Distance public using (NSClayDistanceFinalPromotion)
+
 ------------------------------------------------------------------------
 -- Exact reused frontier state.
 ------------------------------------------------------------------------
