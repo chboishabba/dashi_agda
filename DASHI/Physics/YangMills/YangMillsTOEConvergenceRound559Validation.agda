@@ -952,3 +952,48 @@ unifierCriticalDispatchMatchesTOE :
     TOE.b2SameHamiltonian
   ≡ TOE.toeCriticalFamilyLevel TOE.b2SameHamiltonian
 unifierCriticalDispatchMatchesTOE = refl
+
+
+------------------------------------------------------------------------
+-- Literal two-Wilson R413/R415/R556 convergence.
+------------------------------------------------------------------------
+
+literalTwoWilsonCompilerIsChecked :
+  TOE.toeLiteralTwoWilsonR415CompilerLevel ≡ machineChecked
+literalTwoWilsonCompilerIsChecked = refl
+
+literalTwoWilsonR444SourceRemainsConditional :
+  TOE.toeLiteralTwoWilsonR444TermConstructionLevel ≡ conditional
+literalTwoWilsonR444SourceRemainsConditional = refl
+
+literalTwoWilsonR445SameObjectRemainsConditional :
+  TOE.toeLiteralTwoWilsonR445MixedLogIdentificationLevel ≡ conditional
+literalTwoWilsonR445SameObjectRemainsConditional = refl
+
+literalTwoWilsonR453ConnectedCoreRemainsConditional :
+  TOE.toeLiteralTwoWilsonR453ConnectedCoreLevel ≡ conditional
+literalTwoWilsonR453ConnectedCoreRemainsConditional = refl
+
+literalTwoWilsonR451PhysicalCalibrationRemainsConditional :
+  TOE.toeLiteralTwoWilsonR451PhysicalCalibrationLevel ≡ conditional
+literalTwoWilsonR451PhysicalCalibrationRemainsConditional = refl
+
+unifiedPhysicsTwoWilsonCompilerMatchesTOE :
+  UnifiedPhysics.toeLiteralTwoWilsonR415CompilerLevel
+  ≡ TOE.toeLiteralTwoWilsonR415CompilerLevel
+unifiedPhysicsTwoWilsonCompilerMatchesTOE = refl
+
+unifierTwoWilsonCompilerMatchesTOE :
+  U.toeLiteralTwoWilsonR415CompilerLevel
+  ≡ TOE.toeLiteralTwoWilsonR415CompilerLevel
+unifierTwoWilsonCompilerMatchesTOE = refl
+
+unifiedPhysicsTwoWilsonR445MatchesTOE :
+  UnifiedPhysics.toeLiteralTwoWilsonR445MixedLogIdentificationLevel
+  ≡ TOE.toeLiteralTwoWilsonR445MixedLogIdentificationLevel
+unifiedPhysicsTwoWilsonR445MatchesTOE = refl
+
+unifierTwoWilsonR445MatchesTOE :
+  U.toeLiteralTwoWilsonR445MixedLogIdentificationLevel
+  ≡ TOE.toeLiteralTwoWilsonR445MixedLogIdentificationLevel
+unifierTwoWilsonR445MatchesTOE = refl
