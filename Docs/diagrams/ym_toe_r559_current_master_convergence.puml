@@ -7,6 +7,13 @@ skinparam packageStyle rectangle
 left to right direction
 
 package "Canonical theorem owners" {
+  component "R443\nWilson/Gibbs Haar action" as R443
+  component "R444\nPeter-Weyl Wilson square" as R444
+  component "R461\npublished Wilson RP application" as R461
+  component "CMP119 reflection max-cut\nE/R/B certificates stay explicit" as BREF
+  component "CMP119 literal residual weld\nEq.2.23 / E/R/B/V same-object cut" as CWELD
+  component "R534\nprojective measure extension" as R534
+  component "R535\nphysical projective representation" as R535
   component "R485\nGoal-1 representation-safe\nmaximum cut" as R485
   component "R546\n14-family irreducible\nsource frontier" as R546
   component "R558\n7-family critical path" as R558
@@ -31,6 +38,14 @@ R546 --> R559 : canonical SourceFamily
 R558 --> R559 : canonical CriticalFamily
 
 R559 --> Joint : Pareto / max-cut view
+R443 --> AD : A Wilson/Gibbs compiler
+R444 --> AD : A Peter-Weyl square
+R461 --> AD : A published Wilson RP
+BREF --> AD : B E/R/B reflection cut
+CWELD --> AD : C residual weld
+R534 --> AD : D projective extension
+R535 --> AD : D physical representation
+Joint --> AD : 58-gap + non-promotion boundary
 BRG --> Joint : density / regular-E / Casimir / stress
 RGFrontier --> Joint : direct non-promotion theorem\nG6L --> Joint : paid reduction proof level\nG58 --> Joint : exact 58-count + proof posture
 
@@ -38,6 +53,10 @@ R559 --> ROOT : public normalized surface
 R559 --> UNI : public normalized surface
 R559 --> PHY : public normalized surface
 
+AD --> ROOT : A-D receipt + firewall
+AD --> UNI : A-D receipt + firewall
+AD --> PHY : A-D receipt + firewall
+AD --> UE : validated aggregate
 Joint --> ROOT : joint receipt + eliminator
 Joint --> UNI : joint receipt + eliminator
 Joint --> PHY : joint receipt + eliminator
