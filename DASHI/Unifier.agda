@@ -3,6 +3,8 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumExternal
+import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExact as MillenniumResidual
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1442,3 +1444,86 @@ unifierFleetMetaIntrospectorProofNotBorrowed :
   FleetGapTOE.metaIntrospectorProofBorrowed
     FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierFleetMetaIntrospectorProofNotBorrowed = refl
+
+
+------------------------------------------------------------------------
+-- Lean Millennium external-target custody and exact non-promotion.
+-- The canonical owner remains MillenniumLeanAssistReceiptExact.
+------------------------------------------------------------------------
+
+unifierMillenniumExternalAcceptanceReceipt :
+  MillenniumExternal.MillenniumExternalAcceptanceReceipt
+unifierMillenniumExternalAcceptanceReceipt =
+  MillenniumExternal.currentMillenniumExternalAcceptanceReceipt
+
+unifierMillenniumExternalDeclarationsPinned :
+  MillenniumExternal.exactExternalDeclarationsPinned
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ true
+unifierMillenniumExternalDeclarationsPinned =
+  MillenniumExternal.millenniumExternalDeclarationsPinned
+
+unifierMillenniumExistingSameObjectWeldsReused :
+  MillenniumExternal.existingSameObjectWeldsReused
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ true
+unifierMillenniumExistingSameObjectWeldsReused =
+  MillenniumExternal.millenniumExistingSameObjectWeldsReused
+
+unifierMillenniumHodgeExternalTargetInvalid :
+  MillenniumExternal.hodgeExternalTargetValid
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifierMillenniumHodgeExternalTargetInvalid =
+  MillenniumExternal.millenniumHodgeExternalTargetInvalid
+
+unifierMillenniumYangMillsExternalTargetInvalid :
+  MillenniumExternal.yangMillsExternalTargetValid
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifierMillenniumYangMillsExternalTargetInvalid =
+  MillenniumExternal.millenniumYangMillsExternalTargetInvalid
+
+unifierMillenniumCrossToolchainAdapterStillNotKernelChecked :
+  MillenniumExternal.directCrossToolchainAdapterKernelChecked
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifierMillenniumCrossToolchainAdapterStillNotKernelChecked =
+  MillenniumExternal.millenniumCrossToolchainAdapterStillNotKernelChecked
+
+unifierMillenniumExternalReceiptDoesNotCreatePrizeProof :
+  MillenniumExternal.receiptCreatesPrizeProof
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifierMillenniumExternalReceiptDoesNotCreatePrizeProof =
+  MillenniumExternal.millenniumExternalReceiptDoesNotCreatePrizeProof
+
+
+unifierMillenniumResidualClassifierBoundary :
+  MillenniumResidual.MillenniumResidualClassifierBoundary
+unifierMillenniumResidualClassifierBoundary =
+  MillenniumResidual.canonicalMillenniumResidualClassifierBoundary
+
+unifierMillenniumHodgeAlgebraicLiftStillNotConstructed :
+  MillenniumResidual.hodgeAlgebraicLiftConstructed
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+unifierMillenniumHodgeAlgebraicLiftStillNotConstructed =
+  MillenniumResidual.millenniumHodgeAlgebraicLiftStillNotConstructed
+
+unifierMillenniumBSDRankWeldStillNotUnconditional :
+  MillenniumResidual.bsdRankWeldConstructedUnconditionally
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+unifierMillenniumBSDRankWeldStillNotUnconditional =
+  MillenniumResidual.millenniumBSDRankWeldStillNotUnconditional
+
+unifierMillenniumPolynomialAlgorithmCoverageStillNotConstructed :
+  MillenniumResidual.polynomialAlgorithmFamilyExhaustionConstructed
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+unifierMillenniumPolynomialAlgorithmCoverageStillNotConstructed =
+  MillenniumResidual.millenniumPolynomialAlgorithmCoverageStillNotConstructed
+
+unifierMillenniumResidualClassifierDoesNotSolveAnyProblem :
+  MillenniumResidual.anyOfThreeMillenniumProblemsSolvedHere
+    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
+unifierMillenniumResidualClassifierDoesNotSolveAnyProblem =
+  MillenniumResidual.millenniumResidualClassifierDoesNotSolveAnyProblem
+
+unifierMillenniumPvsNPNotDerivedFromNonDescentGrammar :
+  MillenniumResidual.pNotEqualsNPDerived
+    MillenniumResidual.canonicalPvsNPUniformNonDescentResearchBoundary ≡ false
+unifierMillenniumPvsNPNotDerivedFromNonDescentGrammar =
+  MillenniumResidual.millenniumPvsNPNotDerivedFromNonDescentGrammar
