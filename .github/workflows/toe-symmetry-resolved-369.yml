@@ -2,12 +2,30 @@ name: toe-symmetry-resolved-369
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
+      - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'DASHI/Unifier.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Physics/Closure/Everything.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalLiteralRateSourceRound438Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1SameHNontrivialityRound439Exact.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
 concurrency:
@@ -20,6 +38,34 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install DASHI repository referee
+        run: python -m pip install -e './tools/agda_preflight[test,mcp]'
+
+      - name: Referee TOE reuse and lineage
+        run: |
+          dashi-repo index --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityValidation.agda --root .
+          dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
+          dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo related literalRound437Goal1CSourceLevel --root . --limit 20
+          dashi-repo related literalRound438CanonicalCMP116RateTheoremLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 TOE continuum mass gap non-promotion' --root . --limit 30
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
+
+      - name: Reject ESD surface changes
+        shell: bash
+        run: |
+          git fetch origin master --depth=1
+          changed="$(git diff --name-only origin/master...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)'; then
+            echo "ESD surface change detected" >&2
+            exit 1
+          fi
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -32,7 +78,10 @@ jobs:
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -41,7 +90,16 @@ jobs:
             fi
           done
 
-      - name: Kernel-check TOE symmetry-resolved aggregate
+      - name: Kernel-check TOE Goal-1 compatibility graph
         run: |
           agda --version
-          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          modules=(
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done
