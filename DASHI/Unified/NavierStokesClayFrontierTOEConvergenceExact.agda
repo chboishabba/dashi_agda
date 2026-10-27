@@ -46,6 +46,7 @@ module DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSABCDMaxCut20261007Exact as ABCD
@@ -200,6 +201,7 @@ releasedHeadDoesNotRequireReopeningCoordinateAudit =
 -- ownership or promotion status.
 ------------------------------------------------------------------------
 
+currentSharedWeightedLeafCount : Nat
 currentSharedWeightedLeafCount = R736.currentSharedWeightedLeafCount
 
 currentSharedWeightedExactlyTwoLeaves : Bool
