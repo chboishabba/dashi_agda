@@ -8,10 +8,12 @@ module DASHI.Unified.TOE369TetratedCornerCocycleConvergenceExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false)
 
 import DASHI.Foundations.Base369NonaryTritSquareExact as Square
 import DASHI.Moonshine.Base369Pointed729CornerTritSquareBidiExact as Corner
 import DASHI.Biology.SelfIndexedParetoHyperfabricTetrationExact as Tower
+import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Moonshine.Monster369NDimParetoTetrationBridgeExact as MonsterTower
 import DASHI.Core.ParetoSymmetryQuotientAdmissionExact as Admission
 import DASHI.Moonshine.Monster369DiscriminatorSymmetryBoundaryExact as Guard
@@ -40,7 +42,7 @@ toeNineAxisSeed = Tower.paretoAxisCountOne
 toeNineTetrationRecurrence :
   (n : Nat) →
   Tower.paretoAxisCount (suc n)
-  ≡ DASHI.Biology.TernaryHypercubeHyperfabricExact.powNat 9
+  ≡ Hyper.powNat 9
       (Tower.paretoAxisCount n)
 toeNineTetrationRecurrence = Tower.paretoAxisCountRecurrence
 
