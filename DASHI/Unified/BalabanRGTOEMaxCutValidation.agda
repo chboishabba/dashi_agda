@@ -702,3 +702,162 @@ physicsDepthContinuumLimitPromotionImpossible =
 validationZKPFrame : Balaban.BalabanTOEZKPFrame
 validationZKPFrame =
   Balaban.canonicalBalabanTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Same-family Cauchy / Schwinger stress recovery agreement.
+------------------------------------------------------------------------
+
+receiptStressCauchyCompletionMatchesOwner :
+  Balaban.stressCauchyCompletionToMarkedStress Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+receiptStressCauchyCompletionMatchesOwner = refl
+
+receiptStressCompletedMarkedMatchesOwner :
+  Balaban.stressCompletedMarkedIsClayStress Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanGoal1CCompletedStressIsClayStressLevel
+receiptStressCompletedMarkedMatchesOwner = refl
+
+receiptSameFamilyRecoveryCompilerMatchesOwner :
+  Balaban.sameFamilyRecoveryCompiler Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanSameFamilyRecoveryCompilerLevel
+receiptSameFamilyRecoveryCompilerMatchesOwner = refl
+
+receiptSameFamilyRecoveryPhysicalMatchesOwner :
+  Balaban.sameFamilyRecoveryPhysical Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanSameFamilyRecoveryPhysicalLevel
+receiptSameFamilyRecoveryPhysicalMatchesOwner = refl
+
+receiptGoal1CSourceCutCompilerMatchesOwner :
+  Balaban.goal1CSourceCutCompiler Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
+receiptGoal1CSourceCutCompilerMatchesOwner = refl
+
+receiptGoal1CContinuumStressCompilerMatchesOwner :
+  Balaban.goal1CContinuumStressRecoveryCompiler Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanGoal1CContinuumStressRecoveryCompilerLevel
+receiptGoal1CContinuumStressCompilerMatchesOwner = refl
+
+receiptGoal1CMetricPairingCompilerMatchesOwner :
+  Balaban.goal1CMetricPairingCompiler Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanGoal1CMetricPairingCompilerLevel
+receiptGoal1CMetricPairingCompilerMatchesOwner = refl
+
+receiptGoal1CLiteralSourceMatchesOwner :
+  Balaban.goal1CLiteralSourceInstantiation Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanGoal1CLiteralSourceInstantiationLevel
+receiptGoal1CLiteralSourceMatchesOwner = refl
+
+toeSameFamilyRecoveryCompilerMatchesOwner :
+  TOE.toeBalabanSameFamilyRecoveryCompilerLevel
+  ≡ Balaban.balabanSameFamilyRecoveryCompilerLevel
+toeSameFamilyRecoveryCompilerMatchesOwner = refl
+
+unifierSameFamilyRecoveryCompilerMatchesOwner :
+  Unifier.toeBalabanSameFamilyRecoveryCompilerLevel
+  ≡ Balaban.balabanSameFamilyRecoveryCompilerLevel
+unifierSameFamilyRecoveryCompilerMatchesOwner = refl
+
+physicsSameFamilyRecoveryCompilerMatchesOwner :
+  Physics.yangMillsBalabanSameFamilyRecoveryCompilerLevel
+  ≡ Balaban.balabanSameFamilyRecoveryCompilerLevel
+physicsSameFamilyRecoveryCompilerMatchesOwner = refl
+
+toeGoal1CSourceCutCompilerMatchesOwner :
+  TOE.toeBalabanGoal1CSourceCutCompilerLevel
+  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
+toeGoal1CSourceCutCompilerMatchesOwner = refl
+
+unifierGoal1CSourceCutCompilerMatchesOwner :
+  Unifier.toeBalabanGoal1CSourceCutCompilerLevel
+  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
+unifierGoal1CSourceCutCompilerMatchesOwner = refl
+
+physicsGoal1CSourceCutCompilerMatchesOwner :
+  Physics.yangMillsBalabanGoal1CSourceCutCompilerLevel
+  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
+physicsGoal1CSourceCutCompilerMatchesOwner = refl
+
+toeLevel2ClayPromotionStillFalse :
+  Balaban.balabanLevel2ClayPromotionFlag ≡ false
+toeLevel2ClayPromotionStillFalse =
+  TOE.toeBalabanLevel2ClayPromotionStillFalse
+
+unifierLevel2ClayPromotionStillFalse :
+  Balaban.balabanLevel2ClayPromotionFlag ≡ false
+unifierLevel2ClayPromotionStillFalse =
+  Unifier.toeBalabanLevel2ClayPromotionStillFalse
+
+physicsLevel2ClayPromotionStillFalse :
+  Balaban.balabanLevel2ClayPromotionFlag ≡ false
+physicsLevel2ClayPromotionStillFalse =
+  Physics.yangMillsBalabanLevel2ClayPromotionStillFalse
+
+------------------------------------------------------------------------
+-- Current five-package C max-cut agreement.
+------------------------------------------------------------------------
+
+receiptCPhysicalPackageMaxCutMatchesOwner :
+  Balaban.cPhysicalPackageMaxCutCompiler Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
+receiptCPhysicalPackageMaxCutMatchesOwner = refl
+
+receiptC0MatchesOwner :
+  Balaban.c0LiteralGaugeInvariantLocalObservableFamily Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+receiptC0MatchesOwner = refl
+
+receiptC1MatchesOwner :
+  Balaban.c1MarkedCurvatureFamily Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanC1MarkedCurvatureFamilyLevel
+receiptC1MatchesOwner = refl
+
+receiptC2MatchesOwner :
+  Balaban.c2PhysicalRemainderSharedTail Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanC2PhysicalRemainderSharedTailLevel
+receiptC2MatchesOwner = refl
+
+receiptC3MatchesOwner :
+  Balaban.c3OneStepAFRecurrenceIdentification Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanC3OneStepAFRecurrenceIdentificationLevel
+receiptC3MatchesOwner = refl
+
+receiptC4MatchesOwner :
+  Balaban.c4DensityAnchoredStressLane Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanC4DensityAnchoredStressLaneLevel
+receiptC4MatchesOwner = refl
+
+receiptCPackageCountMatchesOwner :
+  Balaban.cPhysicalPackageCount Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanCPhysicalPackageCount
+receiptCPackageCountMatchesOwner = refl
+
+toeCPhysicalPackageMaxCutMatchesOwner :
+  TOE.toeBalabanCPhysicalPackageMaxCutCompilerLevel
+  ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
+toeCPhysicalPackageMaxCutMatchesOwner = refl
+
+unifierCPhysicalPackageMaxCutMatchesOwner :
+  Unifier.toeBalabanCPhysicalPackageMaxCutCompilerLevel
+  ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
+unifierCPhysicalPackageMaxCutMatchesOwner = refl
+
+physicsCPhysicalPackageMaxCutMatchesOwner :
+  Physics.yangMillsBalabanCPhysicalPackageMaxCutCompilerLevel
+  ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
+physicsCPhysicalPackageMaxCutMatchesOwner = refl
+
+toeCPackageCountMatchesOwner :
+  TOE.toeBalabanCPhysicalPackageCount
+  ≡ Balaban.balabanCPhysicalPackageCount
+toeCPackageCountMatchesOwner = refl
+
+unifierCPackageCountMatchesOwner :
+  Unifier.toeBalabanCPhysicalPackageCount
+  ≡ Balaban.balabanCPhysicalPackageCount
+unifierCPackageCountMatchesOwner = refl
+
+physicsCPackageCountMatchesOwner :
+  Physics.yangMillsBalabanCPhysicalPackageCount
+  ≡ Balaban.balabanCPhysicalPackageCount
+physicsCPackageCountMatchesOwner = refl
