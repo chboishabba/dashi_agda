@@ -4,6 +4,7 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261008AAExact as CMP119Preferred
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -90,6 +91,44 @@ toeBalabanRGZKPFrame =
 toeBalabanRGReceipt : BalabanRGTOE.BalabanRGTOEReceipt
 toeBalabanRGReceipt =
   BalabanRGTOE.canonicalBalabanRGTOEReceipt
+
+
+------------------------------------------------------------------------
+-- Current governed legal/compliance and CMP119 preferred-source handoffs.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowComplianceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeGovernedLegalWorkflowComplianceZKPFrame =
+  LegalCompliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
+
+toeReportAdmissionDoesNotRepairMissingInput :
+  DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact.ReportAdmissionRepairsMissingInput → ⊥
+toeReportAdmissionDoesNotRepairMissingInput =
+  LegalCompliance.reportAdmissionDoesNotRepairMissingInput
+
+toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalCompliance.actionstepStyleVendorIdentityCreatesAuthorityIsFalse
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalCompliance.actionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+toeCMP119PreferredSourcePackageCount =
+  CMP119Preferred.remainingPreferredPackageCount
+
+toeCMP119PreferredAdapterDebt =
+  CMP119Preferred.remainingAdapterDebt
+
+toeCMP119PreferredWorkIsPhysicalSourcePackages =
+  CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
+
+toeCMP119NoConditionalSourceLeafPromoted =
+  CMP119Preferred.noConditionalSourceLeafPromoted
+
+toeCMP119RepresentationOnlySameObjectDebtRemains =
+  CMP119Preferred.representationOnlySameObjectDebtRemains
 
 ------------------------------------------------------------------------
 -- Normalized Balaban density, regular-E, stress, and continuum surfaces.
