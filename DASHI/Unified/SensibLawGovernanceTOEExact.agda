@@ -19,6 +19,7 @@ import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as Expert
 import DASHI.Law.SensibLawRealMatterReviewDecisionExact as Review
 import DASHI.Law.SensibLawRealMatterReviewedResumeExact as Resume
 import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
+import DASHI.Cognition.PNF.PackedNormativeSparseAdmissionExact as Sparse
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierContractExact as RequirementPareto
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as TOEFrame
@@ -133,12 +134,6 @@ sensibLawSemanticPromotionAllAuthorityClosed :
 sensibLawSemanticPromotionAllAuthorityClosed =
   Semantic.semantic-promotion-all-authority-closed
 
-sensibLawHeuristicOnlyAbstains =
-  Semantic.heuristic-only-abstains
-
-sensibLawHeuristicBitsCannotChangePromotion =
-  Semantic.promotion-ignores-heuristic-bits
-
 ------------------------------------------------------------------------
 -- Expert-evidence production integrity.
 ------------------------------------------------------------------------
@@ -222,7 +217,7 @@ sensibLawParserCandidateCannotAuthorizeAdmission =
   Admission.parserCandidateAloneCannotAuthorizeAdmission
 
 sensibLawSparseAdmissionCannotCreateAuthority :
-  Admission.Sparse.SparseAdmissionChangesSemanticAuthority → ⊥
+  Sparse.SparseAdmissionChangesSemanticAuthority → ⊥
 sensibLawSparseAdmissionCannotCreateAuthority =
   Admission.sparseAdmissionStillCannotCreateAuthority
 
@@ -303,7 +298,7 @@ sensibLawOfficialActionCannotRecoverAutonomyAndAuthority =
 -- Legality is one evidence coordinate.  It is not legitimacy.
 ------------------------------------------------------------------------
 
-LegalOnlyCreatesLegitimacy : Set
+LegalOnlyCreatesLegitimacy : Set₁
 LegalOnlyCreatesLegitimacy =
   Legitimacy.AdmittedLegitimacy Legitimacy.demoEvidence Legitimacy.legalOnly
 
