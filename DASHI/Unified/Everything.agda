@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
+open import Data.Empty using (⊥)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
@@ -31,6 +32,37 @@ governedLegalWorkflowIntrospectiveZKPFrame :
   LegalGovernance.GovernedLegalWorkflowIntrospectiveZKPFrame
 governedLegalWorkflowIntrospectiveZKPFrame =
   LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
+
+
+governedSemanticPromotionTruthAuthorityClosed :
+  LegalGovernance.SemanticPromotionTruthAuthorityClosed
+governedSemanticPromotionTruthAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
+
+governedSemanticPromotionLegalAuthorityClosed :
+  LegalGovernance.SemanticPromotionLegalAuthorityClosed
+governedSemanticPromotionLegalAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
+
+governedSemanticPromotionAllAuthorityClosed :
+  LegalGovernance.SemanticPromotionAllAuthorityClosed
+governedSemanticPromotionAllAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionAllAuthorityClosed
+
+governedBoundAcquisitionDoesNotPayRequirement :
+  LegalGovernance.BoundDemandAutomaticallyPaysRequirement → ⊥
+governedBoundAcquisitionDoesNotPayRequirement =
+  LegalGovernance.toeBoundAcquisitionDoesNotPayRequirement
+
+governedBoundAcquisitionDoesNotCloseConsumer :
+  LegalGovernance.BoundDemandAutomaticallyClosesConsumer → ⊥
+governedBoundAcquisitionDoesNotCloseConsumer =
+  LegalGovernance.toeBoundAcquisitionDoesNotCloseConsumer
+
+governedProducerIdentityDoesNotIdentifyResidual :
+  LegalGovernance.SameProducerIdentifiesResidual → ⊥
+governedProducerIdentityDoesNotIdentifyResidual =
+  LegalGovernance.toeProducerIdentityDoesNotIdentifyResidual
 
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
