@@ -55,11 +55,13 @@ module DASHI.Unified.BalabanR559TOEMaxCutExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
+import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 
 ------------------------------------------------------------------------
 -- Same-owner equalities.
@@ -98,6 +100,16 @@ continuumRouteMassGapBoundarySameOwner = refl
 ------------------------------------------------------------------------
 -- Exact non-promotion reuse.
 ------------------------------------------------------------------------
+
+ScaleTransferPromotion : Set
+ScaleTransferPromotion =
+  RGFrontier.BalabanRGScaleTransferPromotion
+
+eliminateScaleTransferPromotion :
+  ScaleTransferPromotion → ⊥
+eliminateScaleTransferPromotion =
+  RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
+
 
 jointPublishedContinuumStillOpen :
   R559.toeFlat4DContinuumTransferProvedHere ≡ false
@@ -186,6 +198,9 @@ record BalabanR559TOEMaxCutReceipt : Set where
     balabanOSWightmanConstructionIsFalse :
       balabanOSWightmanConstruction ≡ false
 
+    scaleTransferPromotionEliminator :
+      ScaleTransferPromotion → ⊥
+
 open BalabanR559TOEMaxCutReceipt public
 
 canonicalBalabanR559TOEMaxCutReceipt : BalabanR559TOEMaxCutReceipt
@@ -248,6 +263,8 @@ canonicalBalabanR559TOEMaxCutReceipt = record
       Balaban.balabanOSWightmanContinuumConstructionOpenFlag
   ; balabanOSWightmanConstructionIsFalse =
       jointBalabanOSWightmanStillOpen
+  ; scaleTransferPromotionEliminator =
+      eliminateScaleTransferPromotion
   }
 
 ------------------------------------------------------------------------
