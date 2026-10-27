@@ -11,6 +11,7 @@ EPO_DRAFT = ROOT / "Docs/SaveWoogarooNationalEPA474AConditionalRegulatorNotice20
 LEGAL_TEAM = ROOT / "Docs/SaveWoogarooForestLegalTeamBrief.md"
 REQUEST = ROOT / "Docs/SaveWoogarooForestEPBC95C135ARequest20261027.md"
 RESEARCH = ROOT / "docs/research/WoogarooPostApprovalGasHousingBenefitMaxCut20261027.md"
+OFT_REQUEST = ROOT / "Docs/SaveWoogarooForestOFTStandingEvidenceRequest20261028.md"
 
 TOPICS = [
     "EPBC identity", "1997 Springfield DCP", "9281/9293", "functional cumulative",
@@ -22,16 +23,16 @@ TOPICS = [
 ]
 
 def main() -> None:
-    assert all(p.is_file() for p in (LAW, PREVIOUS, ROLLUP, COUNSEL, REQUEST, RESEARCH, EPO_DRAFT, LEGAL_TEAM))
-    law, previous, rollup, memo, request, research, epo, brief = [
+    assert all(p.is_file() for p in (LAW, PREVIOUS, ROLLUP, COUNSEL, REQUEST, RESEARCH, EPO_DRAFT, LEGAL_TEAM, OFT_REQUEST))
+    law, previous, rollup, memo, request, research, epo, brief, oft = [
         p.read_text(encoding="utf-8")
-        for p in (LAW, PREVIOUS, ROLLUP, COUNSEL, REQUEST, RESEARCH, EPO_DRAFT)
+        for p in (LAW, PREVIOUS, ROLLUP, COUNSEL, REQUEST, RESEARCH, EPO_DRAFT, LEGAL_TEAM, OFT_REQUEST)
     ]
-    assert law.count("Source.mkNoDOISource") == 16
-    assert law.count("Source.publicAttribution") == 16
-    assert law.count("= litigation-gate") == 20
-    assert law.count("→ ⊥") == 22
-    assert law.count("false refl") == 20
+    assert law.count("Source.mkNoDOISource") == 22
+    assert law.count("Source.publicAttribution") == 22
+    assert law.count("= litigation-gate") == 25
+    assert law.count("→ ⊥") == 28
+    assert law.count("false refl") == 25
     assert rollup.count("import DASHI.Law.SensibLawWoogarooStandingTimeInterimCounselTriage20261027Exact") == 1
 
     assert "import DASHI.Law.SensibLawWoogarooEPBC95C135ADecisionFileMaxCut20261027Exact as File" in law
@@ -60,7 +61,10 @@ def main() -> None:
                  "qccSameCaseSubmissionLead", "swfgScenicStandingActivityLead",
                  "possinghamScenicActivityLead", "zdenekScenicActivityLead",
                  "swfgABNOrganisationIdentityLead", "swfgMarch2025PublicPetitionLead",
-                 "swfgJuly2025CampaignSeriesLead"):
+                 "swfgJuly2025CampaignSeriesLead",
+                 "qldOFTRulesDecisionDateCut", "qldOFTVersionAndFeeCut",
+                 "filedStandingComparatorCut", "acfConstitutionActivitiesComparatorCut",
+                 "proponentInboxMarch2026Cut"):
         assert name in law, name
 
     for noPromotion in ("identityNotStanding", "onlineNoticeNotFurnishing",
@@ -75,7 +79,10 @@ def main() -> None:
                         "lawfulClearingNotAutomaticallyEPOCase",
                         "scenicNotSpringviewComment", "oneLetterNotSection487Series",
                         "originalDateBeatsCaption", "qccNotSwfgStanding",
-                        "abnNoObjectsCertification", "senateThemeNotGroupOrganiser"):
+                        "abnNoObjectsCertification", "senateThemeNotGroupOrganiser",
+                        "noDefaultSWFGRules", "notRetrospectiveAssociationObjects",
+                        "otherCaseFormNotSWFGStanding", "pleadingNotJudgment",
+                        "invitationNotDeliveredComments", "paidFileRequestNotTimeStop"):
         assert noPromotion in law, noPromotion
 
     # Actual deadlines, eligibility, completed acts and direct payments stay unpaid.
@@ -121,6 +128,18 @@ def main() -> None:
     assert "Unsent EDO/barrister intake" in brief
     assert "EPBC s474A Environment Protection Order" in brief
     assert "20-row case matrix" in brief
+    assert "28 October primary-source standing and filing-precedent upgrade" in memo
+    assert "OFTStandingEvidenceRequest20261028" in brief
+    assert "NOT SENT" in oft and "28 October 2026" in oft
+    assert "VID1357/2025" in oft and "VID1356/2025" in oft and "VID1400/2025" in oft
+    assert "epbc@springfieldresidential.com" in oft
+    assert "4.20" in oft and "28.85" in oft and "10 working days" in oft
+    assert "qldOFTAssociationFileAcquisition" in law
+    assert "federalCourtFriendsRockArt2026Form66" in law
+    assert "federalCourtACF2026Form66" in law
+    assert "springfieldFeb2026CommentInvitation" in law
+    assert "qldOFT2026Fees" in law
+    assert "noDefaultSWFGRules" in law and "invitationNotDeliveredComments" in law
 
 
     assert "Source.mkNoDOISource" not in memo
@@ -128,7 +147,7 @@ def main() -> None:
     for topic in TOPICS:
         assert topic in memo, "missing coverage: " + topic
 
-    print("PASS: sixteen local source records (two canonical aliases), twenty unpaid counsel gates, twenty-two anti-promotion guards and twenty topic coverage cells")
+    print("PASS: twenty-two local original-source records (two canonical aliases), twenty-five unpaid counsel gates, twenty-eight anti-promotion guards and twenty topic coverage cells")
 
 
 if __name__ == "__main__":
