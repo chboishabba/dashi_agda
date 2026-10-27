@@ -124,3 +124,58 @@ releasedHeadCoordinateAuditNeedNotReopen :
   NSClay.releasedHeadRequiresReopeningCoordinateAudit ≡ false
 releasedHeadCoordinateAuditNeedNotReopen =
   NSClay.releasedHeadDoesNotRequireReopeningCoordinateAudit
+
+
+------------------------------------------------------------------------
+-- R736 current periodic-B shared weighted wall.
+------------------------------------------------------------------------
+
+adapterSharedWeightedExactlyTwoLeaves :
+  NSClay.currentSharedWeightedExactlyTwoLeaves ≡ true
+adapterSharedWeightedExactlyTwoLeaves =
+  NSClay.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+adapterSharedWeightedSameCarrier :
+  NSClay.currentSharedWeightedSameCarrier ≡ true
+adapterSharedWeightedSameCarrier =
+  NSClay.currentSharedWeightedSameCarrierIsTrue
+
+adapterSharedWeightedCarrierIsInputLaplacian :
+  NSClay.currentSharedWeightedCarrierIsInputLaplacian ≡ true
+adapterSharedWeightedCarrierIsInputLaplacian =
+  NSClay.currentSharedWeightedCarrierIsInputLaplacianIsTrue
+
+adapterWeightedPlusEndpointStillOpen :
+  NSClay.currentWeightedPlusEndpointClosed ≡ false
+adapterWeightedPlusEndpointStillOpen =
+  NSClay.currentWeightedPlusEndpointStillOpen
+
+adapterAugmentedCriticalWeightedStillOpen :
+  NSClay.currentAugmentedCriticalWeightedClosed ≡ false
+adapterAugmentedCriticalWeightedStillOpen =
+  NSClay.currentAugmentedCriticalWeightedStillOpen
+
+adapterSharedWeightedLeavesBuildBarrier :
+  NSClay.currentSharedWeightedLeavesBuildBarrier ≡ true
+adapterSharedWeightedLeavesBuildBarrier =
+  NSClay.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+adapterR726NotIndependent :
+  NSClay.legacyR726IndependentLeafRequired ≡ false
+adapterR726NotIndependent =
+  NSClay.legacyR726IndependentLeafNotRequired
+
+adapterStrictMarginR406NotIndependent :
+  NSClay.legacyStrictMarginR406IndependentLeafRequired ≡ false
+adapterStrictMarginR406NotIndependent =
+  NSClay.legacyStrictMarginR406IndependentLeafNotRequired
+
+adapterQPlusMinusShortcutStillCircular :
+  NSClay.barrierDependentQPlusMinusShortcutAdmissible ≡ false
+adapterQPlusMinusShortcutStillCircular =
+  NSClay.barrierDependentQPlusMinusShortcutStillCircular
+
+adapterSharedWeightedClayStillFalse :
+  NSClay.currentSharedWeightedClayPromotion ≡ false
+adapterSharedWeightedClayStillFalse =
+  NSClay.currentSharedWeightedClayPromotionStillFalse
