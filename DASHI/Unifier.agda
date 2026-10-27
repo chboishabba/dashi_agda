@@ -1194,6 +1194,7 @@ unifierTwoDigitStreamCannotRecoverThird =
 
 import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
 import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as TriadicHost
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 
 unifierTriadicRustBindingStillUnpaid :
   TriadicABI.rustU8BindingPaid TriadicABI.canonicalTriadicByteABIBoundary
@@ -1219,6 +1220,22 @@ unifierTriadicFiniteABIImpliesRustImpossible :
   TriadicABI.BoundedABIImpliesRustImplementation → ⊥
 unifierTriadicFiniteABIImpliesRustImpossible =
   TriadicABI.abiDoesNotCreateRust
+
+
+unifierCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifierCompiledScalarDoesNotCreateRust =
+  CompiledU8.cUint8DoesNotCreateRustBinding
+
+unifierCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifierCompiledScalarDoesNotCreateBackendEquivalence =
+  CompiledU8.scalarExhaustionDoesNotCreateBackendEquivalence
+
+unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
 
 ------------------------------------------------------------------------
 -- Implement-A-to-D reuse-only TOE facade.
