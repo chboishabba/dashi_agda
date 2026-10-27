@@ -1456,3 +1456,19 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+-- Reuse the original evidence hyperfabric owner.  This witness blocks
+-- universal promotion from a public or incomplete premise to a stronger claim.
+-- It does not decide a concrete archive or geolocation case.
+import DASHI.Core.EvidenceHyperfabricExact as ArchiveEvidence
+
+toeArchiveEvidenceBoundary : ArchiveEvidence.EvidenceBoundary
+toeArchiveEvidenceBoundary = ArchiveEvidence.canonicalEvidenceBoundary
+
+toeArchiveUniversalPromotionImpossible :
+  ∀ {State : Set} {Premise Conclusion : State → Set} →
+  ArchiveEvidence.NonPromotion Premise Conclusion →
+  (∀ state → Premise state → Conclusion state) → ⊥
+toeArchiveUniversalPromotionImpossible =
+  ArchiveEvidence.nonPromotionRefutesUniversalPromotion
