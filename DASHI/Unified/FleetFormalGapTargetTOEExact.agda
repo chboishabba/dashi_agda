@@ -51,6 +51,7 @@ record FleetFormalGapTargetReceipt : Set where
     dischargedFibresRemainDischarged : Bool
     contradictionGapsRemainSeparate : Bool
     eigenvalueMagnitudeCreatesProofAuthority : Bool
+    spectralLabelsIdentifyTheoremOwners : Bool
     externalCountCreatesFormalProof : Bool
     externalPlanningTextCreatesFormalResidual : Bool
     metaIntrospectorReferenceRepos : String
@@ -78,6 +79,7 @@ canonicalFleetFormalGapTargetReceipt =
     true
     true
     true
+    false
     false
     false
     false
