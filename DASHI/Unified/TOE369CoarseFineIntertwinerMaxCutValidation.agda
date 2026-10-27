@@ -12,6 +12,8 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geomet
 import DASHI.Foundations.Base369CoarseFineFabricAdapterExact as Fabric
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spectral
 import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed
+import DASHI.Wikimedia.IbrahimMonster3BRecognitionRouteParetoExact as Pareto
+import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact as Selected3B
 
 legacyNegativeRoundTrip :
   TOE.sspToLegacy (TOE.legacyToSSP Legacy.neg) ≡ Legacy.neg
@@ -56,3 +58,27 @@ monsterPhaseIntertwinerRemainsExact :
   Signed.SignedTernaryVoxelSymmetryBoundary.monster3BPhaseInversionMatchesFrequencyConjugation
     Signed.canonicalSignedTernaryVoxelSymmetryBoundary ≡ true
 monsterPhaseIntertwinerRemainsExact = refl
+
+actualMonsterActionRecognitionRemainsOpen :
+  Pareto.RecognitionRouteParetoBoundary.actualActionRecognitionObserved
+    Pareto.canonicalRecognitionRouteParetoBoundary ≡ false
+actualMonsterActionRecognitionRemainsOpen =
+  TOE.toeMonsterActualActionRecognitionStillOpen
+
+selected3BMinCutHasTwoSourceLeaves :
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.onlyLinearRetractionAndProjectedActionRemain
+    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ true
+selected3BMinCutHasTwoSourceLeaves =
+  TOE.toeSelected3BOnlyRetractionAndProjectedActionRemain
+
+selected3BRetractionRemainsOpen :
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.actualLinearRetractionInhabitedHere
+    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ false
+selected3BRetractionRemainsOpen =
+  TOE.toeSelected3BActualRetractionStillOpen
+
+selected3BProjectedActionRemainsOpen :
+  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.projectedActionInputInhabitedHere
+    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ false
+selected3BProjectedActionRemainsOpen =
+  TOE.toeSelected3BProjectedActionStillOpen
