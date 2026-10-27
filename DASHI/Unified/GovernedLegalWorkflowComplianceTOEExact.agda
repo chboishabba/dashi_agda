@@ -163,14 +163,14 @@ canonicalGovernedLegalWorkflowComplianceReceipt =
         legalityAloneDoesNotCreateLegitimacy
     ; actionstepStyleVendorIdentityCreatesAuthority =
         Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
-          Workflow.toeDomainTransportReceipt
+          Domain.canonicalDomainTransportReceipt
     ; actionstepStyleVendorIdentityCreatesAuthorityIsFalse =
-        Workflow.toeVendorIdentityDoesNotCreateAuthority
+        refl
     ; actionstepStyleTargetNeedsOwnAuthorityWitness =
         Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
-          Workflow.toeDomainTransportReceipt
+          Domain.canonicalDomainTransportReceipt
     ; actionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
-        Workflow.toeTargetDomainNeedsOwnAuthorityWitness
+        refl
     ; ibrahimRecognitionBoundary =
         Ibrahim.ibrahimRecognitionParetoBoundary
     ; ibrahimSearchPriorityFirewall =
