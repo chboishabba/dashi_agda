@@ -12,6 +12,8 @@ package "Canonical Yang-Mills owners" {
   component "CMP116 stress marked-shell bound" as StressShell
   component "Stress shell-energy / Hilbert bound" as StressHilbert
   component "Goal-1 maximum cut R485" as Goal1
+  component "Irreducible 14-family view R546" as Irreducible
+  component "Critical 7-family path R558" as Critical
   component "Continuum / Clay non-promotion" as NonPromotion
 }
 
@@ -26,7 +28,9 @@ RegularE --> YMTOE : exact owner reuse
 Casimir --> YMTOE : exact owner reuse
 StressShell --> YMTOE : exact owner reuse
 StressHilbert --> YMTOE : exact owner reuse
-Goal1 --> YMTOE : least-privilege Goal-1 frontier
+Goal1 --> YMTOE : representation-safe maximum cut
+Irreducible --> YMTOE : source-family quotient
+Critical --> YMTOE : mass-gap / H6 critical path
 NonPromotion --> YMTOE : fail-closed gates
 
 YMTOE --> Root : TOE import edge
