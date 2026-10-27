@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Nat.Base using (ℕ)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Empty using (⊥)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
