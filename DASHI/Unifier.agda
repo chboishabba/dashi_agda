@@ -1,4 +1,11 @@
 module DASHI.Unifier where
+import DASHI.Unified.TOEExistingNonPromotionReuseExact as ExistingBoundary
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityBoundary
+import DASHI.Unified.GRQuantumProofTerms as GRBoundaryTypes
+import DASHI.Physics.Closure.FiniteRegionalSpectrum as UVBoundarySpectrum
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (false)
+open import Data.Empty using (⊥)
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -313,3 +320,16 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+-- Exact, source-owned non-promotion results; no new independent theorem owner.
+unifierExistingAuthorityIsNotPromoted :
+  AuthorityBoundary.promotesAnyAuthority
+    ExistingBoundary.toeAuthorityBundle ≡ false
+unifierExistingAuthorityIsNotPromoted =
+  ExistingBoundary.toeAuthorityDoesNotPromote
+
+unifierFiniteUVDoesNotProveTerminalPhysics :
+  GRBoundaryTypes.UVSpectralClosed
+    UVBoundarySpectrum.regulatedUVSurface → ⊥
+unifierFiniteUVDoesNotProveTerminalPhysics =
+  ExistingBoundary.toeFiniteUVDoesNotCreateTerminalPhysicalMatch
