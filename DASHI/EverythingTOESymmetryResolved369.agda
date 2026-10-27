@@ -1,6 +1,6 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
@@ -395,3 +395,112 @@ toe369YangMillsGoal1C4CommonMetricCompilerLevel =
 
 toe369YangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 toe369YangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Governed legal workflow + Ibrahim Pareto/snowball + fleet-gap cut.
+--
+-- These are exact aliases to existing owners.
+-- The facade does not create legal, scientific, historical, or proof authority.
+------------------------------------------------------------------------
+
+import Data.Empty as TOEEmpty
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as IbrahimTOE
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetTOE
+
+toe369GovernedLegalWorkflowAuthorityInvariantHandoff :
+  LegalGovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
+toe369GovernedLegalWorkflowAuthorityInvariantHandoff =
+  LegalGovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+toe369CanonicalLegalSourceAuthorityBoundary :
+  LegalGovernanceTOE.LegalSourceAuthorityBoundary
+toe369CanonicalLegalSourceAuthorityBoundary =
+  LegalGovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
+
+toe369CandidateSourceIsNotLegalAuthority :
+  LegalGovernanceTOE.CandidateSourceIsAuthoritative → TOEEmpty.⊥
+toe369CandidateSourceIsNotLegalAuthority =
+  LegalGovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+toe369SameLegalSystemIsNotLegalAuthority :
+  LegalGovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → TOEEmpty.⊥
+toe369SameLegalSystemIsNotLegalAuthority =
+  LegalGovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+toe369CurrentValidityIsNotApplicability :
+  LegalGovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → TOEEmpty.⊥
+toe369CurrentValidityIsNotApplicability =
+  LegalGovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+toe369SemanticAdmissionIsNotLegalAuthority :
+  LegalGovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → TOEEmpty.⊥
+toe369SemanticAdmissionIsNotLegalAuthority =
+  LegalGovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+toe369DocumentRoleIsNotLegalAuthority :
+  LegalGovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → TOEEmpty.⊥
+toe369DocumentRoleIsNotLegalAuthority =
+  LegalGovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+toe369IbrahimRecognitionParetoBoundary =
+  IbrahimTOE.ibrahimRecognitionParetoBoundary
+
+toe369IbrahimCharacterExecutionFrontier =
+  IbrahimTOE.ibrahimCharacterExecutionFrontier
+
+toe369IbrahimPhaseResolutionFrontier =
+  IbrahimTOE.ibrahimPhaseResolutionFrontier
+
+toe369IbrahimSchrodingerHZetaMaxCutBoundary =
+  IbrahimTOE.ibrahimSchrodingerHZetaMaxCutBoundary
+
+toe369IbrahimHistoricalDiscriminatorBoundary =
+  IbrahimTOE.ibrahimHistoricalDiscriminatorBoundary
+
+toe369IbrahimSearchPriorityDoesNotCreateProof :
+  IbrahimTOE.SearchPriorityCreatesProof → TOEEmpty.⊥
+toe369IbrahimSearchPriorityDoesNotCreateProof =
+  IbrahimTOE.searchPriorityDoesNotCreateProof
+
+toe369IbrahimProducerSourceDoesNotCreateRunReceipt :
+  IbrahimTOE.ProducerSourceCreatesRunReceipt → TOEEmpty.⊥
+toe369IbrahimProducerSourceDoesNotCreateRunReceipt =
+  IbrahimTOE.producerSourceDoesNotCreateRunReceipt
+
+toe369FleetFormalGapTargetReceipt :
+  FleetTOE.FleetFormalGapTargetReceipt
+toe369FleetFormalGapTargetReceipt =
+  FleetTOE.canonicalFleetFormalGapTargetReceipt
+
+toe369FleetDischargedCoreKnowledgeFibresIs584 :
+  FleetTOE.dischargedCoreKnowledgeFibres toe369FleetFormalGapTargetReceipt ≡ 584
+toe369FleetDischargedCoreKnowledgeFibresIs584 = refl
+
+toe369FleetPolarityContradictionGapsIs44 :
+  FleetTOE.polarityContradictionGaps toe369FleetFormalGapTargetReceipt ≡ 44
+toe369FleetPolarityContradictionGapsIs44 = refl
+
+toe369FleetUnformalisedFormalGapsIs58 :
+  FleetTOE.unformalisedFormalGaps toe369FleetFormalGapTargetReceipt ≡ 58
+toe369FleetUnformalisedFormalGapsIs58 = refl
+
+toe369FleetDischargedFibresStayOutOfTarget :
+  FleetTOE.FleetDischargedFibreRetargetPermission → TOEEmpty.⊥
+toe369FleetDischargedFibresStayOutOfTarget =
+  FleetTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+toe369FleetContradictionsStaySeparate :
+  FleetTOE.FleetContradictionGapReclassificationPermission → TOEEmpty.⊥
+toe369FleetContradictionsStaySeparate =
+  FleetTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+toe369FleetExternalCountDoesNotCreateFormalDischarge :
+  FleetTOE.FleetExternalCountCreatesFormalDischarge → TOEEmpty.⊥
+toe369FleetExternalCountDoesNotCreateFormalDischarge =
+  FleetTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+toe369FleetFormalGapZKPFrame : IbrahimTOE.TOEZKPFrame
+toe369FleetFormalGapZKPFrame =
+  FleetTOE.canonicalFleetFormalGapZKPFrame
