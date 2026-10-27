@@ -62,6 +62,7 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
+import DASHI.Core.RelationalTrialecticDisambiguationExact as IdentityFirewall
 
 ------------------------------------------------------------------------
 -- Exact existing owners.
@@ -120,6 +121,16 @@ fleetContradictionGapsStaySeparate :
   Fleet.FleetContradictionGapReclassificationPermission → ⊥
 fleetContradictionGapsStaySeparate =
   Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+
+Fleet58Gate458SameIdentityFromCount : Set
+Fleet58Gate458SameIdentityFromCount =
+  IdentityFirewall.SharedCardinalityCreatesIdentity
+
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
+  Fleet58Gate458SameIdentityFromCount → ⊥
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
+  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
 
 ------------------------------------------------------------------------
 -- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
