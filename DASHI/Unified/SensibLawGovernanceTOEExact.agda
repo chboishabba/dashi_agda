@@ -268,6 +268,14 @@ record SensibLawGovernanceTOEZKPFrame : Set where
     invariantCaseManagementReuseDoesNotTransportAuthorityIsTrue :
       invariantCaseManagementReuseDoesNotTransportAuthority ≡ true
 
+    invariantSnowballCitationDoesNotCreateAuthority : Bool
+    invariantSnowballCitationDoesNotCreateAuthorityIsTrue :
+      invariantSnowballCitationDoesNotCreateAuthority ≡ true
+
+    invariantParetoSchedulingDoesNotCreateLegalAuthority : Bool
+    invariantParetoSchedulingDoesNotCreateLegalAuthorityIsTrue :
+      invariantParetoSchedulingDoesNotCreateLegalAuthority ≡ true
+
     postconditionTOENormalizationOnly : Bool
     postconditionTOENormalizationOnlyIsTrue :
       postconditionTOENormalizationOnly ≡ true
@@ -300,6 +308,10 @@ canonicalSensibLawGovernanceTOEZKPFrame =
     ; invariantRuntimeTransportDoesNotCreateLegalTruthIsTrue = refl
     ; invariantCaseManagementReuseDoesNotTransportAuthority = true
     ; invariantCaseManagementReuseDoesNotTransportAuthorityIsTrue = refl
+    ; invariantSnowballCitationDoesNotCreateAuthority = true
+    ; invariantSnowballCitationDoesNotCreateAuthorityIsTrue = refl
+    ; invariantParetoSchedulingDoesNotCreateLegalAuthority = true
+    ; invariantParetoSchedulingDoesNotCreateLegalAuthorityIsTrue = refl
     ; postconditionTOENormalizationOnly = true
     ; postconditionTOENormalizationOnlyIsTrue = refl
     }
