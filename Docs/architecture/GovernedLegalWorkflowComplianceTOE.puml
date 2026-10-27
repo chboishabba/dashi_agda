@@ -1,0 +1,73 @@
+@startuml GovernedLegalWorkflowComplianceTOE
+title Governed legal workflow compliance extension
+
+skinparam componentStyle rectangle
+
+package "Current-master governed legal workflow" {
+  [GovernedLegalWorkflowTOEBridgeExact] as Workflow
+}
+
+package "Existing source owners" {
+  [ExpertEvidenceProductionIntegrity] as Expert
+  [RealMatterReviewDecision] as Review
+  [PromotionSpine] as Promotion
+  [LegalDecisionDoubleProjection] as Decision
+  [LegitimacyEvidenceSeparation] as Legitimacy
+  [DomainPermeabilityAuthorityTransport] as Domain
+  [BalabanIbrahimParetoSnowballTOEExact] as Ibrahim
+  [FleetFormalGapTargetTOEExact] as Fleet
+  [CMP119CosmologyLatestParetoFrontierExact] as CMP119
+}
+
+package "Unique compliance extension" {
+  [GovernedLegalWorkflowComplianceTOEExact] as Compliance
+  [GovernedLegalWorkflowComplianceTOEValidation] as Validation
+}
+
+package "Canonical TOE roots" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as Unifier
+  [Unified.Everything] as Unified
+}
+
+Workflow --> Compliance : canonical legal workflow handoff
+Expert --> Compliance : qualification != forensic compliance
+Review --> Compliance : review != claim truth
+Promotion --> Compliance : missing gate -> abstain
+Decision --> Compliance : official surface != fine state
+Legitimacy --> Compliance : legality != legitimacy
+Domain --> Compliance : vendor identity != authority
+Ibrahim --> Compliance : search priority != proof
+Fleet --> Compliance : 584 closed / 44 separate / 58 target
+CMP119 --> TOE : 4 physical/source packages / 0 adapter debt
+CMP119 --> Unifier : canonical Pareto frontier
+CMP119 --> Unified : canonical Pareto frontier
+
+Compliance --> TOE
+Compliance --> Unifier
+Compliance --> Validation
+TOE --> Validation
+Unifier --> Validation
+Compliance --> Unified
+Validation --> Unified
+
+note right of Compliance
+ZKP O/R/C/S/L/P/G/F is explicit.
+Process lenses do not create certification.
+No Actionstep ontology is created.
+Actionstep-style workflow reuse uses the vendor-neutral domain transport owner.
+end note
+
+note bottom of CMP119
+Historical A1/A2/B1/B2 overlays are provenance only.
+The canonical latest frontier owns current status.
+Representation-only same-object debt is false.
+end note
+
+note bottom of Fleet
+The fleet count is not a named gap manifest.
+Per-gap dispatch remains blocked until the named manifest exists.
+Equal cardinality does not create same-object identity.
+end note
+
+@enduml

@@ -3,9 +3,11 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
 
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -1344,3 +1346,67 @@ unifierExactReuseDoesNotCreateSemanticAuthority :
   GovernanceTOE.ExactReuseCreatesSemanticAuthority → ⊥
 unifierExactReuseDoesNotCreateSemanticAuthority =
   GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
+
+
+unifierGovernedLegalWorkflowComplianceReceipt :
+  LegalCompliance.GovernedLegalWorkflowComplianceTOEReceipt
+unifierGovernedLegalWorkflowComplianceReceipt =
+  LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+unifierExpertQualificationDoesNotCreateForensicCompliance :
+  LegalCompliance.QualificationAutomaticallyForensicCompliance → ⊥
+unifierExpertQualificationDoesNotCreateForensicCompliance =
+  LegalCompliance.expertQualificationDoesNotCreateForensicCompliance
+
+unifierLegalReviewDoesNotCreateClaimTruth :
+  LegalCompliance.LegalReviewDecisionCreatesClaimTruth → ⊥
+unifierLegalReviewDoesNotCreateClaimTruth =
+  LegalCompliance.legalReviewDoesNotCreateClaimTruth
+
+unifierOfficialLegalSurfaceDoesNotRecoverFineState :
+  LegalCompliance.OfficialLegalSurfaceRecoversFineState → ⊥
+unifierOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalCompliance.officialLegalSurfaceDoesNotRecoverFineState
+
+unifierLegalityAloneDoesNotCreateLegitimacy :
+  LegalCompliance.LegalOnlyCreatesLegitimacy → ⊥
+unifierLegalityAloneDoesNotCreateLegitimacy =
+  LegalCompliance.legalityAloneDoesNotCreateLegitimacy
+
+
+unifierGovernedLegalWorkflowComplianceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierGovernedLegalWorkflowComplianceZKPFrame =
+  LegalCompliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
+
+unifierReportAdmissionDoesNotRepairMissingInput :
+  LegalCompliance.ReportAdmissionRepairsMissingInput → ⊥
+unifierReportAdmissionDoesNotRepairMissingInput =
+  LegalCompliance.reportAdmissionDoesNotRepairMissingInput
+
+unifierActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalCompliance.actionstepStyleVendorIdentityCreatesAuthorityIsFalse
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+unifierActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalCompliance.actionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+------------------------------------------------------------------------
+-- Current CMP119 preferred source frontier.
+------------------------------------------------------------------------
+
+unifierCMP119PreferredSourcePackageCount =
+  CMP119Preferred.remainingPreferredPackageCount
+
+unifierCMP119PreferredAdapterDebt =
+  CMP119Preferred.remainingAdapterDebt
+
+unifierCMP119PreferredWorkIsPhysicalSourcePackages =
+  CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
+
+unifierCMP119NoSyntheticPhysicalIdentificationAdded =
+  CMP119Preferred.noSyntheticPhysicalIdentificationAdded
+
+unifierCMP119RepresentationOnlySameObjectDebtRemains =
+  CMP119Preferred.representationOnlySameObjectDebtRemains

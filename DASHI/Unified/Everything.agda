@@ -27,6 +27,9 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
+import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact
+import DASHI.Unified.GovernedLegalWorkflowComplianceTOEValidation
+import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
@@ -54,6 +57,33 @@ governedExactReuseDoesNotCreateSemanticAuthority :
   LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
 governedExactReuseDoesNotCreateSemanticAuthority =
   LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
+
+
+unifiedGovernedLegalWorkflowComplianceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifiedGovernedLegalWorkflowComplianceZKPFrame =
+  DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact.canonicalGovernedLegalWorkflowComplianceZKPFrame
+
+------------------------------------------------------------------------
+-- Current CMP119 preferred source frontier.
+-- Historical numbered overlays remain provenance only.
+-- The latest owner carries zero adapter debt and four physical/source packages.
+------------------------------------------------------------------------
+
+unifiedCMP119PreferredSourcePackageCount =
+  CMP119Preferred.remainingPreferredPackageCount
+
+unifiedCMP119PreferredAdapterDebt =
+  CMP119Preferred.remainingAdapterDebt
+
+unifiedCMP119PreferredWorkIsPhysicalSourcePackages =
+  CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
+
+unifiedCMP119NoSyntheticPhysicalIdentificationAdded =
+  CMP119Preferred.noSyntheticPhysicalIdentificationAdded
+
+unifiedCMP119RepresentationOnlySameObjectDebtRemains =
+  CMP119Preferred.representationOnlySameObjectDebtRemains
 
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
