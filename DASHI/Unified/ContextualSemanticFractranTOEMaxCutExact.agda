@@ -84,8 +84,41 @@ fleetTargetFormalGapCount =
   Fleet.unformalisedFormalGaps fleetScope
 
 ------------------------------------------------------------------------
+-- Exact scope equalities.
+------------------------------------------------------------------------
+
+fleetDischargedFibreCountIs584 :
+  fleetDischargedFibreCount ≡ 584
+fleetDischargedFibreCountIs584 = refl
+
+fleetContradictionGapCountIs44 :
+  fleetContradictionGapCount ≡ 44
+fleetContradictionGapCountIs44 = refl
+
+fleetTargetFormalGapCountIs58 :
+  fleetTargetFormalGapCount ≡ 58
+fleetTargetFormalGapCountIs58 = refl
+
+------------------------------------------------------------------------
 -- Exact non-promotion aliases.
 ------------------------------------------------------------------------
+
+CoverageMonsterRepresentationPromotion : Set
+CoverageMonsterRepresentationPromotion =
+  MonsterBoundary.AutomaticCoverageMonsterRepresentationPromotion
+
+ParetoTernaryMonsterRepresentationPromotion : Set
+ParetoTernaryMonsterRepresentationPromotion =
+  Pareto.ParetoTernaryChartCreatesMonsterRepresentation
+
+ParetoResidualCyclicC6Promotion : Set
+ParetoResidualCyclicC6Promotion =
+  Pareto.ParetoResidualProductIsCyclicBase369C6
+
+ParetoDialecticalSynthesisPromotion : Set
+ParetoDialecticalSynthesisPromotion =
+  Pareto.ParetoIncomparabilityAutomaticallyCreatesProductiveDialecticalJoin
+
 
 coverageDoesNotCreateMonsterRepresentation :
   MonsterBoundary.AutomaticCoverageMonsterRepresentationPromotion → ⊥
