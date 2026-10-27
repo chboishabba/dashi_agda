@@ -157,6 +157,15 @@ jobs:
           dashi-repo discover 'fleet 58 formal gaps 584 discharged 44 contradiction R559 Ibrahim hyperfabric p-adic projection loss' --root . --limit 50
           dashi-repo lineage --prefix DASHI.Core.IndexedRelational --root .
           dashi-agda-preflight DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetKernelBidiTernary27TOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetKernelBidiTernary27TOEValidation.agda --root .
+          dashi-repo related canonicalTriadicByteABIBoundary --root . --limit 20
+          dashi-repo related canonicalActual3BKernelSameElementBoundary --root . --limit 20
+          dashi-repo related canonicalTernary27ResidualProgramDecisionBoundary --root . --limit 20
+          dashi-repo discover 'ternary 27 byte ABI kernel bidi selected 3B action intertwiner non-promotion' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.ComputerScience.Triadic --root .
+          dashi-repo lineage --prefix DASHI.Moonshine.MonsterGradedVOAActual3B --root .
+          dashi-agda-preflight DASHI/Unified/R559IbrahimFleetKernelBidiTernary27TOEValidation.agda --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -193,6 +202,13 @@ jobs:
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+            DASHI/Unified/R559IbrahimFleetKernelBidiTernary27TOEExact.agda
+            DASHI/Unified/R559IbrahimFleetKernelBidiTernary27TOEValidation.agda
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
+            DASHI/ComputerScience/TriadicByteABIRoadmapWeldExact.agda
+            DASHI/ComputerScience/Ternary27ResidualProgramDecisionBridgeExact.agda
+            DASHI/Moonshine/MonsterGradedVOAActual3BKernelSameElementBidiExact.agda
+            DASHI/Moonshine/Base369Monster3BSingleActionProducerBidiExact.agda
             DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda
             DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda
             DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda
