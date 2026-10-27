@@ -43,6 +43,8 @@ def exact_rank_likelihood(counts:Sequence[int],masses:Sequence[Fraction])->Fract
 def select_finite_rank_model(counts:Sequence[int],candidates:Sequence[tuple[str,tuple[Fraction,...]]])->tuple[str,Fraction]:
     """Compare predeclared candidate models on fixed-rank held-out counts."""
     c=_counts(counts);options=tuple(candidates)
+    if sum(c)==0:
+        raise ValueError('no held-out observations: model selection is not evidence')
     if not options or len({label for label,_ in options})!=len(options):
         raise ValueError('nonempty unique preregistered candidate identifiers')
     scores=[(label,exact_rank_likelihood(c,pmf)) for label,pmf in options]
