@@ -1116,3 +1116,14 @@ unifierCurrentLegalAuthorityDoesNotEstablishApplicability :
 unifierCurrentLegalAuthorityDoesNotEstablishApplicability =
   CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
 
+
+
+unifierCurrentSemanticAdmissionCannotCreateLegalAuthority :
+  CurrentMaxCut.SemanticAdmissionIsLegalSourceAuthority → ⊥
+unifierCurrentSemanticAdmissionCannotCreateLegalAuthority =
+  CurrentMaxCut.semanticAdmissionAuthorityNonPromotion
+
+unifierCurrentDocumentRoleCannotCreateLegalAuthority :
+  CurrentMaxCut.DocumentRoleIsLegalSourceAuthority → ⊥
+unifierCurrentDocumentRoleCannotCreateLegalAuthority =
+  CurrentMaxCut.documentRoleAuthorityNonPromotion
