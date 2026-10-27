@@ -37,3 +37,20 @@ pnfHyperfabricJPromotionBlocked :
   Spine.objectExternalJPromotion pnfHyperfabricObject ≡ false
 pnfHyperfabricJPromotionBlocked =
   refl
+
+------------------------------------------------------------------------
+-- Contextual semantic FRACTRAN / SSSP max-cut normalization.
+-- The theorem owner remains DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact.
+------------------------------------------------------------------------
+
+import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as ContextualTOE
+
+pnfContextualSemanticFractranMaxCutReceipt :
+  ContextualTOE.ContextualSemanticFractranTOEMaxCutReceipt
+pnfContextualSemanticFractranMaxCutReceipt =
+  ContextualTOE.canonicalContextualSemanticFractranTOEMaxCutReceipt
+
+pnfContextualSemanticFractranZKPFrame :
+  ContextualTOE.ZKP.TOEZKPFrame
+pnfContextualSemanticFractranZKPFrame =
+  ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
