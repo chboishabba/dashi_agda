@@ -398,17 +398,6 @@ unifiedGovernedFleetResidualTOEHandoff :
 unifiedGovernedFleetResidualTOEHandoff =
   GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
 
-unifiedFleetNamedManifestStillMissing :
-  FleetManifest.named58ManifestAcquired ≡ false
-unifiedFleetNamedManifestStillMissing =
-  GovernedFleet.namedManifestStillMissing
-
-unifiedFleetPerGapDispatchStillDisabled :
-  FleetManifest.perGapDispatchEnabled ≡ false
-unifiedFleetPerGapDispatchStillDisabled =
-  GovernedFleet.perGapDispatchStillDisabled
-
-
 governedLegalWorkflowTOEBoundary :
   LegalGovernance.GovernedLegalWorkflowTOEBoundary
 governedLegalWorkflowTOEBoundary =
