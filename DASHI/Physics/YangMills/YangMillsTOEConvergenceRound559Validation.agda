@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as TOE
+import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact as R474
 import DASHI.Unified.Physics as UnifiedPhysics
 import DASHI.Unifier as U
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -315,3 +316,123 @@ unifierStressMarkedShellMatchesTOE :
   U.unifierYangMillsStressMarkedShellBoundLevel
   ≡ TOE.toeStressFirstVariationMarkedShellBoundLevel
 unifierStressMarkedShellMatchesTOE = refl
+
+
+------------------------------------------------------------------------
+-- Goal-1 R474 -> R559 normalization regressions.
+------------------------------------------------------------------------
+
+goal1FiniteSymmetryAndRPMatchesR474 :
+  TOE.toeGoal1FiniteSymmetryAndRPApplicationLevel
+  ≡ R474.aFiniteSymmetryAndRPApplicationLevel
+goal1FiniteSymmetryAndRPMatchesR474 = refl
+
+goal1A1CurrentStepMatchesR474 :
+  TOE.toeGoal1A1CurrentStepBetaSourceLevel
+  ≡ R474.a1CurrentStepBetaSourceLevel
+goal1A1CurrentStepMatchesR474 = refl
+
+goal1A2SameObjectMatchesR474 :
+  TOE.toeGoal1A2HistoryBetaShellSameObjectLevel
+  ≡ R474.a2HistoryBetaShellSameObjectLevel
+goal1A2SameObjectMatchesR474 = refl
+
+goal1A3ContinuumMatchesR474 :
+  TOE.toeGoal1A3SameFamilyContinuumAndOSLevel
+  ≡ R474.a3SameFamilyContinuumAndOSLevel
+goal1A3ContinuumMatchesR474 = refl
+
+goal1A45MatchesR474 :
+  TOE.toeGoal1A45MomentToOS05Level
+  ≡ R474.a45MomentToOS05Level
+goal1A45MatchesR474 = refl
+
+goal1BSelectedLocalizationMatchesR474 :
+  TOE.toeGoal1BLiteralPublishedSelectedLocalizationLevel
+  ≡ R474.bLiteralPublishedSelectedLocalizationLevel
+goal1BSelectedLocalizationMatchesR474 = refl
+
+goal1BPhysicalRateMatchesR474 :
+  TOE.toeGoal1BPhysicalRateSemanticsLevel
+  ≡ R474.bPhysicalRateSemanticsLevel
+goal1BPhysicalRateMatchesR474 = refl
+
+goal1BGapCompilerMatchesR474 :
+  TOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
+  ≡ R474.bFiniteToPositiveTransferGapCompilerLevel
+goal1BGapCompilerMatchesR474 = refl
+
+goal1BT2SemanticsMatchesR474 :
+  TOE.toeGoal1BLiteralClayT2SemanticsLevel
+  ≡ R474.bLiteralClayT2SemanticsLevel
+goal1BT2SemanticsMatchesR474 = refl
+
+goal1CStressSourceMatchesR474 :
+  TOE.toeGoal1CStressFiniteSameFamilySourceLevel
+  ≡ R474.cStressFiniteSameFamilySourceLevel
+goal1CStressSourceMatchesR474 = refl
+
+goal1CDensityDerivativeMatchesR474 :
+  TOE.toeGoal1CStressLiteralDensityDerivativeLevel
+  ≡ R474.cStressLiteralDensityDerivativeLevel
+goal1CDensityDerivativeMatchesR474 = refl
+
+goal1COSRecoveryMatchesR474 :
+  TOE.toeGoal1CStressSameFamilyOSRecoveryLevel
+  ≡ R474.cStressSameFamilyOSRecoveryLevel
+goal1COSRecoveryMatchesR474 = refl
+
+goal1COpeTailMatchesR474 :
+  TOE.toeGoal1CPhysicalOPERemainderIsMarkedTailLevel
+  ≡ R474.cPhysicalOPERemainderIsMarkedTailLevel
+goal1COpeTailMatchesR474 = refl
+
+goal1CAFMatchesR474 :
+  TOE.toeGoal1COneStepAFRGIdentificationLevel
+  ≡ R474.cOneStepAFRGIdentificationLevel
+goal1CAFMatchesR474 = refl
+
+goal1CSourceCutMatchesR474 :
+  TOE.toeGoal1CExactSameFamilySourceCutLevel
+  ≡ R474.cExactSameFamilySourceCutLevel
+goal1CSourceCutMatchesR474 = refl
+
+goal1G1MatchesR474 :
+  TOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
+  ≡ R474.g1ArbitraryCompactSimpleSelectedBackgroundSourceMapLevel
+goal1G1MatchesR474 = refl
+
+goal1G2MatchesR474 :
+  TOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
+  ≡ R474.g2SameSystemClayNontrivialitySemanticsLevel
+goal1G2MatchesR474 = refl
+
+goal1TerminalCompilerMatchesR474 :
+  TOE.toeGoal1TerminalCompilerLevel
+  ≡ R474.round474TerminalCompilerLevel
+goal1TerminalCompilerMatchesR474 = refl
+
+goal1CurrentFrontierCompilerMatchesR474 :
+  TOE.toeGoal1CurrentFrontierCompilerLevel
+  ≡ R474.round474CurrentFrontierCompilerLevel
+goal1CurrentFrontierCompilerMatchesR474 = refl
+
+goal1PeterWeylReconstructionNotMandatory :
+  TOE.toeGoal1ExplicitPeterWeylRPMandatory ≡ false
+goal1PeterWeylReconstructionNotMandatory = refl
+
+goal1ProjectiveProkhorovNotMandatory :
+  TOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
+goal1ProjectiveProkhorovNotMandatory = refl
+
+goal1IndependentKPSelectionNotMandatory :
+  TOE.toeGoal1IndependentKPDatumSelectionMandatory ≡ false
+goal1IndependentKPSelectionNotMandatory = refl
+
+goal1PostHocMagnitudeEqualityNotMandatory :
+  TOE.toeGoal1PostHocCMP116MagnitudeEqualityMandatory ≡ false
+goal1PostHocMagnitudeEqualityNotMandatory = refl
+
+goal1IndependentFourthCumulantNotMandatory :
+  TOE.toeGoal1IndependentFourthCumulantMandatory ≡ false
+goal1IndependentFourthCumulantNotMandatory = refl
