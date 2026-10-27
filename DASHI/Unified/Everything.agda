@@ -19,6 +19,8 @@ import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceValidation
 import DASHI.Unified.Physics as Physics
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 governedLegalWorkflowTOEBoundary :
@@ -118,6 +120,21 @@ pnfDistilledReuseZKPReceipt :
   PNFDistilled.PNFDistilledReuseZKPReceipt
 pnfDistilledReuseZKPReceipt =
   PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
+
+scaleEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+scaleEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
+
+scaleEvidenceReviewDoesNotPromoteSemanticTruth :
+  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
+scaleEvidenceReviewDoesNotPromoteSemanticTruth =
+  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
+
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
+  SCALEReview.FrontierRouteMeansAuthorized → ⊥
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
+  SCALEReview.frontierRouteDoesNotGrantAuthorization
 
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
@@ -229,3 +246,37 @@ unifiedSemanticAdmissionIsNotLegalAuthority :
   LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 unifiedSemanticAdmissionIsNotLegalAuthority =
   LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+------------------------------------------------------------------------
+-- SCALE evidence genealogy firewalls.
+------------------------------------------------------------------------
+
+scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
+scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence :
+  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
+scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence =
+  SCALEReview.repetitionDoesNotCreateIndependentEvidence
+
+
+------------------------------------------------------------------------
+-- SCALE physical-economy non-promotion firewalls.
+------------------------------------------------------------------------
+
+scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth :
+  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
+scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth =
+  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
+
+scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority :
+  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
+scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority =
+  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
+
+scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence :
+  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
+scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence =
+  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
