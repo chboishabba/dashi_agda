@@ -959,3 +959,55 @@ unifierSCALEEvidenceReviewTOEZKPFrame :
   SCALEReview.SCALEEvidenceReviewTOEZKPFrame
 unifierSCALEEvidenceReviewTOEZKPFrame =
   SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Governance + exact 58-gap + Balaban/Ibrahim normalized facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEExact as GBI58
+
+unifierGovernanceBalabanIbrahim58GapReceipt :
+  GBI58.GovernanceBalabanIbrahim58GapTOEReceipt
+unifierGovernanceBalabanIbrahim58GapReceipt =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+unifierGovernanceBalabanIbrahim58GapZKPFrame :
+  GBI58.GovernanceBalabanIbrahim58GapZKPFrame
+unifierGovernanceBalabanIbrahim58GapZKPFrame =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapZKPFrame
+
+unifierExactGate4GapCountIs58 :
+  GBI58.gate4GapCount GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt ≡ 58
+unifierExactGate4GapCountIs58 =
+  GBI58.gate4CountIsExactly58
+
+unifierGate4ConditionalDoesNotSelfPromote =
+  GBI58.gate4StillConditional
+
+unifierLegalCandidateDoesNotCreateAuthority =
+  GBI58.legalCandidateDoesNotCreateAuthority
+
+unifierLegalSystemMatchDoesNotCreateAuthority =
+  GBI58.legalSystemMatchDoesNotCreateAuthority
+
+unifierCurrentValidityDoesNotCreateApplicability =
+  GBI58.currentValidityDoesNotCreateApplicability
+
+unifierSemanticAdmissionDoesNotCreateLegalSourceAuthority =
+  GBI58.semanticAdmissionDoesNotCreateLegalSourceAuthority
+
+unifierDocumentRoleDoesNotCreateLegalSourceAuthority =
+  GBI58.documentRoleDoesNotCreateLegalSourceAuthority
+
+unifierBalaban58GapScaleTransferPromotionImpossible =
+  GBI58.balabanScaleTransferPromotionImpossible
+    GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+unifierIbrahim58GapSearchPriorityDoesNotCreateProof =
+  GBI58.ibrahimSearchPriorityDoesNotCreateProof
+    GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+unifierIbrahim58GapProducerSourceDoesNotCreateRun =
+  GBI58.ibrahimProducerSourceDoesNotCreateRun
+    GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
