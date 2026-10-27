@@ -63,6 +63,18 @@ import DASHI.Unified.RepoStateSpaceTOEConvergenceExact as StateSpace
 -- Kernel success requires an exact-head Agda receipt.
 ------------------------------------------------------------------------
 
+SemanticPromotionAllAuthorityClosed : Set
+SemanticPromotionAllAuthorityClosed =
+  Legal.SemanticPromotionAllAuthorityClosed
+
+BalabanScaleTransferPromotion : Set
+BalabanScaleTransferPromotion =
+  ParetoSnowball.BalabanScaleTransferPromotion
+
+SearchPriorityCreatesProof : Set
+SearchPriorityCreatesProof =
+  ParetoSnowball.SearchPriorityCreatesProof
+
 record GovernanceMaxCutParetoSnowballTOEReceipt : Set₁ where
   constructor governance-maxcut-pareto-snowball-toe-receipt
   field
@@ -130,7 +142,7 @@ esdRemainsReadOnly :
 esdRemainsReadOnly = refl
 
 legalSemanticAuthorityClosure :
-  Legal.SemanticPromotionAllAuthorityClosed
+  SemanticPromotionAllAuthorityClosed
 legalSemanticAuthorityClosure =
   Legal.toeSemanticPromotionAllAuthorityClosed
 
@@ -150,12 +162,12 @@ legalSemanticMeetDoesNotProveApplicability =
   Legal.toeSemanticMeetDoesNotProveLegalApplicability
 
 balabanScaleTransferPromotionImpossible :
-  ParetoSnowball.BalabanScaleTransferPromotion → ⊥
+  BalabanScaleTransferPromotion → ⊥
 balabanScaleTransferPromotionImpossible =
   ParetoSnowball.balabanScaleTransferPromotionImpossible
 
 ibrahimSearchPriorityDoesNotCreateProof :
-  ParetoSnowball.SearchPriorityCreatesProof → ⊥
+  SearchPriorityCreatesProof → ⊥
 ibrahimSearchPriorityDoesNotCreateProof =
   ParetoSnowball.searchPriorityDoesNotCreateProof
 
