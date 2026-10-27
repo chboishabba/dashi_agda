@@ -801,3 +801,20 @@ W4 source calibration, W5/PDF, W6 runtime, and GR metric recovery.
 After every gate closes, the target claim can become:
 
 > DASHI is complete and verified physics unification.
+
+
+## TOE direct fleet-gap / Balaban convergence implementation plan
+
+**Goal.** Expose the canonical fleet formal-gap receipt directly through `DASHI/EverythingTOESymmetryResolved369.agda` and `DASHI/Unifier.agda`, while retaining the existing Balaban RG normalization and all non-promotion gates.
+
+**Architecture.** Reuse `DASHI.Unified.FleetFormalGapTargetTOEExact` as the sole fleet planning owner. Reuse `DASHI.Unified.BalabanRGTOERegression` and `DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact` as proof owners. Add aliases only. Do not create a new theorem family.
+
+**Global constraints.** Do not edit ESD or digital_esd surfaces. Add no postulate, allow-unsolved-metas, TERMINATING, or NO_POSITIVITY_CHECK. Preserve source attribution. Keep the fleet 58 distinct from the Yang-Mills Gate-4 58. Keep the 584 discharged fibres outside the target. Keep the 44 contradiction gaps separate. Treat the three eigen-motif labels as planning labels, not theorem-owner identification.
+
+**Task 1.** Extend `DASHI/Unified/BalabanRGTOEMaxCutValidation.agda` first with root and Unifier assertions for the direct fleet owner. Verify that the test fails before the aliases exist.
+
+**Task 2.** Add direct aliases in `DASHI/EverythingTOESymmetryResolved369.agda` and `DASHI/Unifier.agda` for the canonical fleet receipt, 58 target, 584 discharged count, 44 contradiction count, 3 motif count, target-only invariant, non-identification invariant, and the existing Balaban, NS BM2, and Quantum Mereology discharged-owner witnesses.
+
+**Task 3.** Run the focused TOE workflow. Require repository referee discovery, preflight, trust-escape rejection, ESD rejection, and Agda kernel checks. Keep the existing direct Balaban density, regular-E, Casimir, stress, and continuum non-promotion aliases unchanged unless verification proves a defect.
+
+**Review focus.** Reject any same-object inference from equal cardinality. Reject any promotion from spectral magnitude. Reject any retargeting of discharged fibres. Reject any duplicate theorem owner. Reject any ESD change.
