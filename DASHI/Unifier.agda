@@ -1,6 +1,7 @@
 module DASHI.Unifier where
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -346,12 +347,12 @@ unifierYangMillsClayNotPromoted =
 ------------------------------------------------------------------------
 
 unifierYangMillsRegularEProjectionCompilerLevel :
-  YMTOE.ProofLevel
+  ProofLevel
 unifierYangMillsRegularEProjectionCompilerLevel =
   YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
 
 unifierYangMillsRegularELocalizationSourceLevel :
-  YMTOE.ProofLevel
+  ProofLevel
 unifierYangMillsRegularELocalizationSourceLevel =
   YMTOE.toeCMP119RegularELocalizationSourceLevel
 
