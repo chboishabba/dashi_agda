@@ -8,6 +8,7 @@ on:
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/ResidualWidthNonPromotionTOEExact.agda'
+      - 'DASHI/Unified/ResidualWidthNonPromotionTOERegression.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -36,6 +37,7 @@ jobs:
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unified/ResidualWidthNonPromotionTOEExact.agda
+            DASHI/Unified/ResidualWidthNonPromotionTOERegression.agda
             DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
