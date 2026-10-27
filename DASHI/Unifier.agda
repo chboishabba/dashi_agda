@@ -2,6 +2,7 @@ module DASHI.Unifier where
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 import DASHI.Unified.YMBlockDMaxCutTOEExact as YMBlockD
+import DASHI.Unified.YMBalabanRGPhysicalBoundaryTOEExact as YMBoundary
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -43,6 +44,67 @@ unifierYangMillsBlockDClayStillNotPromoted :
   YMTOE.toeClayYangMillsPromoted ≡ false
 unifierYangMillsBlockDClayStillNotPromoted =
   YMBlockD.blockDClayYangMillsStillNotPromoted
+
+------------------------------------------------------------------------
+-- Normalized Bałaban RG physical-boundary TOE exports.
+------------------------------------------------------------------------
+
+unifierCMP119SourceNativeStateLevel : ProofLevel
+unifierCMP119SourceNativeStateLevel =
+  YMBoundary.toeBoundaryCMP119SourceNativeStateLevel
+
+unifierCMP119LiteralCompleteDensityLevel : ProofLevel
+unifierCMP119LiteralCompleteDensityLevel =
+  YMBoundary.toeBoundaryCMP119LiteralCompleteDensityLevel
+
+unifierRegularEFunctionalToRawCompilerLevel : ProofLevel
+unifierRegularEFunctionalToRawCompilerLevel =
+  YMBoundary.toeBoundaryRegularEFunctionalToRawCompilerLevel
+
+unifierRegularELiteralLocalizationLevel : ProofLevel
+unifierRegularELiteralLocalizationLevel =
+  YMBoundary.toeBoundaryRegularELiteralLocalizationLevel
+
+unifierActiveRawToBC1CompilerLevel : ProofLevel
+unifierActiveRawToBC1CompilerLevel =
+  YMBoundary.toeBoundaryActiveRawToBC1CompilerLevel
+
+unifierActiveRawSameRegularELevel : ProofLevel
+unifierActiveRawSameRegularELevel =
+  YMBoundary.toeBoundaryActiveRawSameRegularELevel
+
+unifierAdjointCasimirStrictPositivityLevel : ProofLevel
+unifierAdjointCasimirStrictPositivityLevel =
+  YMBoundary.toeBoundaryAdjointCasimirStrictPositivityLevel
+
+unifierMetricStressCompilerLevel : ProofLevel
+unifierMetricStressCompilerLevel =
+  YMBoundary.toeBoundaryMetricStressCompilerLevel
+
+unifierLiteralMetricStressLevel : ProofLevel
+unifierLiteralMetricStressLevel =
+  YMBoundary.toeBoundaryLiteralMetricStressLevel
+
+unifierRGSlopeMayReplaceInverseCouplingValue :
+  YMBoundary.toeBoundaryRGSlopeMayReplaceInverseCouplingValue ≡ false
+unifierRGSlopeMayReplaceInverseCouplingValue =
+  YMBoundary.toeBoundaryRGSlopeMayReplaceInverseCouplingValueIsFalse
+
+unifierNegativeTraceAloneClosesNegativeActiveStress :
+  YMBoundary.toeBoundaryNegativeTraceAloneClosesNegativeActiveStress ≡ false
+unifierNegativeTraceAloneClosesNegativeActiveStress =
+  YMBoundary.toeBoundaryNegativeTraceAloneClosesNegativeActiveStressIsFalse
+
+unifierPhysicalBoundaryContinuumStillOpen :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierPhysicalBoundaryContinuumStillOpen =
+  YMBoundary.toeBoundaryFlat4DContinuumPromotedIsFalse
+
+unifierPhysicalBoundaryClayStillNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+unifierPhysicalBoundaryClayStillNotPromoted =
+  YMBoundary.toeBoundaryClayYangMillsPromotedIsFalse
+
 
 ------------------------------------------------------------------------
 -- Legacy carrier surface starts below.
