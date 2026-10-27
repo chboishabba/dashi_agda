@@ -263,3 +263,68 @@ toeResidualFieldStillNotPromoted :
   Fleet.ResidualFieldPromotion → ⊥
 toeResidualFieldStillNotPromoted =
   TOE.toeFleetResidualFieldPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Exact R5 ordinal-cut regression.
+------------------------------------------------------------------------
+
+fleetOrdinalCutTargetsExactly58 :
+  Fleet.fleetFormalGapOrdinalCount ≡ 58
+fleetOrdinalCutTargetsExactly58 =
+  Fleet.fleetFormalGapOrdinalCountIs58
+
+fleetOrdinalCutExcludesExactly584Discharged :
+  Fleet.fleetDischargedOrdinalCount ≡ 584
+fleetOrdinalCutExcludesExactly584Discharged =
+  Fleet.fleetDischargedOrdinalCountIs584
+
+fleetOrdinalCutSeparatesExactly44Contradictions :
+  Fleet.fleetContradictionOrdinalCount ≡ 44
+fleetOrdinalCutSeparatesExactly44Contradictions =
+  Fleet.fleetContradictionOrdinalCountIs44
+
+fleetOrdinalCutDoesNotClaimPersistedRowIdentity :
+  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+fleetOrdinalCutDoesNotClaimPersistedRowIdentity =
+  Fleet.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+
+toeFleetOrdinalCutMatchesOwner :
+  TOE.toeFleetR5OrdinalCutReceipt
+  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
+toeFleetOrdinalCutMatchesOwner = refl
+
+unifierFleetOrdinalCutMatchesOwner :
+  Unifier.unifierFleetR5OrdinalCutReceipt
+  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
+unifierFleetOrdinalCutMatchesOwner = refl
+
+toeFleetOrdinalTargetCountMatchesOwner :
+  TOE.toeFleetFormalGapOrdinalCountIs58
+  ≡ Fleet.fleetFormalGapOrdinalCountIs58
+toeFleetOrdinalTargetCountMatchesOwner = refl
+
+unifierFleetOrdinalTargetCountMatchesOwner :
+  Unifier.unifierFleetFormalGapOrdinalCountIs58
+  ≡ Fleet.fleetFormalGapOrdinalCountIs58
+unifierFleetOrdinalTargetCountMatchesOwner = refl
+
+toeFleetOrdinalRowIdentityBoundaryMatchesOwner :
+  TOE.toeFleetOrdinalRowIdentityStillUnattached
+  ≡ Fleet.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+toeFleetOrdinalRowIdentityBoundaryMatchesOwner = refl
+
+unifierFleetOrdinalRowIdentityBoundaryMatchesOwner :
+  Unifier.unifierFleetOrdinalRowIdentityStillUnattached
+  ≡ Fleet.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+unifierFleetOrdinalRowIdentityBoundaryMatchesOwner = refl
+
+toeFleetSharedCardinalityStillDoesNotCreateIdentity :
+  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
+toeFleetSharedCardinalityStillDoesNotCreateIdentity =
+  TOE.toeFleetSharedCardinalityDoesNotCreateIdentity
+
+unifierFleetSharedCardinalityStillDoesNotCreateIdentity :
+  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
+unifierFleetSharedCardinalityStillDoesNotCreateIdentity =
+  Unifier.unifierFleetSharedCardinalityDoesNotCreateIdentity
