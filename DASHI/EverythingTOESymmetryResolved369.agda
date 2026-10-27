@@ -677,3 +677,19 @@ toe369DocumentRoleDoesNotSupplyLegalSourceAuthority =
 toe369CanonicalLegalSourceAuthorityBoundary =
   LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
 
+
+
+toe369NativeLegalFollowDoesNotCreateLegalAuthority :
+  LegalGovernance.NativeCliAutomaticallyLegalAuthority → ⊥
+toe369NativeLegalFollowDoesNotCreateLegalAuthority =
+  LegalGovernance.toeNativeLegalFollowDoesNotCreateLegalAuthority
+
+toe369ProviderFailureDoesNotMakePropositionFalse :
+  LegalGovernance.ProviderFailureAutomaticallyPropositionFalse → ⊥
+toe369ProviderFailureDoesNotMakePropositionFalse =
+  LegalGovernance.toeProviderFailureDoesNotMakePropositionFalse
+
+toe369ExpertProductionPromotesAnyAuthorityIsFalse :
+  LegalGovernance.toeExpertProductionPromotesAnyAuthority ≡ false
+toe369ExpertProductionPromotesAnyAuthorityIsFalse =
+  LegalGovernance.toeExpertProductionPromotesAnyAuthorityIsFalse
