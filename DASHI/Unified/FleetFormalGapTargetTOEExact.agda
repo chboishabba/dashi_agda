@@ -215,31 +215,36 @@ fleetPlanningTextDoesNotCreateFormalResidual =
 
 ------------------------------------------------------------------------
 -- Exact non-promotion gates for the external fleet selection.
+--
+-- These are facts about the canonical receipt fields. They are not vacuous
+-- empty-type eliminators and they do not convert external planning data into
+-- theorem authority.
 ------------------------------------------------------------------------
 
-data FleetEigenPriorityCreatesProof : Set where
-
 fleetEigenPriorityDoesNotCreateProof :
-  FleetEigenPriorityCreatesProof → ⊥
-fleetEigenPriorityDoesNotCreateProof ()
-
-data FleetExternalCountCreatesFormalDischarge : Set where
+  eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetEigenPriorityDoesNotCreateProof = refl
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  FleetExternalCountCreatesFormalDischarge → ⊥
-fleetExternalCountDoesNotCreateFormalDischarge ()
+  externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetExternalCountDoesNotCreateFormalDischarge = refl
 
-data FleetDischargedFibreRetargetPermission : Set where
+fleetDischargedFibresRemainOutOfTarget :
+  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetDischargedFibresRemainOutOfTarget = refl
 
-fleetDischargedFibresCannotBeRetargetedByThisBoundary :
-  FleetDischargedFibreRetargetPermission → ⊥
-fleetDischargedFibresCannotBeRetargetedByThisBoundary ()
+fleetContradictionGapsRemainSeparate :
+  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetContradictionGapsRemainSeparate = refl
 
-data FleetContradictionGapReclassificationPermission : Set where
-
-fleetContradictionsCannotBeRelabelledAsFormalGaps :
-  FleetContradictionGapReclassificationPermission → ⊥
-fleetContradictionsCannotBeRelabelledAsFormalGaps ()
+fleetExternalPlanningTextDoesNotCreateFormalResidual :
+  externalPlanningTextCreatesFormalResidual canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetExternalPlanningTextDoesNotCreateFormalResidual = refl
 
 ------------------------------------------------------------------------
 -- Reuse the existing O/R/C/S/L/P/G/F process carrier.
