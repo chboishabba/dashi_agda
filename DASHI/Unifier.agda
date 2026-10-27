@@ -709,3 +709,24 @@ unifierIbrahimHistoricalDiscriminatorBoundary =
 
 unifierBalabanIbrahimParetoSnowballZKPFrame =
   ParetoSnowballTOE.canonicalTOEZKPFrame
+
+
+unifierIbrahimSearchPriorityDoesNotCreateProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+unifierIbrahimSearchPriorityDoesNotCreateProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+unifierIbrahimProducerSourceDoesNotCreateRunReceipt :
+  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
+unifierIbrahimProducerSourceDoesNotCreateRunReceipt =
+  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+
+unifierIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+unifierIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+unifierIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
+  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
+unifierIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
+  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
