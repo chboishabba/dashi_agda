@@ -84,6 +84,11 @@ import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterSimpleSubobjectClassificati
 import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact as TwoIsotypic
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
+import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as AcquisitionCompletion
+import DASHI.Reasoning.Trialectic369Selected3BLinearCoreCompatibilityExact as CoreCompatibility
+import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as ActualAcquisition
+import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as PhaseWeld
+import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VOAComposition
 
 ------------------------------------------------------------------------
 -- 1. Canonical coarse/fine reopening.
@@ -582,7 +587,141 @@ toeOutgoingTwelveSeventyEightIntertwinerStillOpen :
 toeOutgoingTwelveSeventyEightIntertwinerStillOpen = refl
 
 ------------------------------------------------------------------------
--- 13. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+-- 13. Reused selected-3B acquisition compiler and phase-resolved 12+78 cut.
+--
+-- The compiler debt is paid in existing owners.
+-- The action-level inhabitant is not paid.
+------------------------------------------------------------------------
+
+toeAcquisitionCoreCompilerAlreadyOwned :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.acquisitionCoreCompilerOwned
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionCoreCompilerAlreadyOwned = refl
+
+toeAcquisitionCoreCompilesSameElementComposition :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.coreCompilesSameElementComposition
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionCoreCompilesSameElementComposition = refl
+
+toeAcquisitionNormalizerCarrierBidiCompilerPaid :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.normalizerMonsterCarrierBidiCompilerOutput
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionNormalizerCarrierBidiCompilerPaid = refl
+
+toeAcquisitionOnlyActionIntertwiningRemains :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.onlyActionIntertwiningRemainsAfterScaffold
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionOnlyActionIntertwiningRemains = refl
+
+toeAcquisitionSourceNativePayloadRetained :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.sourceNativeInertiaPayloadRetained
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionSourceNativePayloadRetained = refl
+
+toeAcquisitionTwelveSeventyEightPayloadRetained :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.twelveSeventyEightIntertwinerPayloadRetained
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionTwelveSeventyEightPayloadRetained = refl
+
+toeAcquisitionCoreStillUninhabited :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.acquisitionCoreInhabitedHere
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ false
+toeAcquisitionCoreStillUninhabited = refl
+
+toeAcquisitionActionIntertwiningStillUninhabited :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.actionIntertwiningInhabitedHere
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ false
+toeAcquisitionActionIntertwiningStillUninhabited = refl
+
+toeHistoricalCoreNeedsExplicitHomWeld :
+  CoreCompatibility.Trialectic369Selected3BLinearCoreCompatibilityBoundary.historicalCoreAloneSufficesForCanonicalCore
+    CoreCompatibility.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
+  ≡ false
+toeHistoricalCoreNeedsExplicitHomWeld = refl
+
+toeHistoricalCorePlusHomWeldCompilesCanonicalCore :
+  CoreCompatibility.Trialectic369Selected3BLinearCoreCompatibilityBoundary.historicalCorePlusHomWeldCompilesCanonicalCore
+    CoreCompatibility.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
+  ≡ true
+toeHistoricalCorePlusHomWeldCompilesCanonicalCore = refl
+
+toeHistoricalActionEquationCompilesCanonicalAction :
+  CoreCompatibility.Trialectic369Selected3BLinearCoreCompatibilityBoundary.historicalActionEquationCompilesCanonicalAction
+    CoreCompatibility.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
+  ≡ true
+toeHistoricalActionEquationCompilesCanonicalAction = refl
+
+toePhaseResolvedTwelveMultiplicityPaid :
+  PhaseWeld.PhaseCharacterWeldFrontier.twelveMultiplicityAtCharacterLevelPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+toePhaseResolvedTwelveMultiplicityPaid = refl
+
+toePhaseResolvedSeventyEightMultiplicityPaid :
+  PhaseWeld.PhaseCharacterWeldFrontier.seventyEightMultiplicityAtCharacterLevelPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+toePhaseResolvedSeventyEightMultiplicityPaid = refl
+
+toePhaseResolvedMatricesStillOpen :
+  PhaseWeld.PhaseCharacterWeldFrontier.concretePhaseResolvedMatricesPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ false
+toePhaseResolvedMatricesStillOpen = refl
+
+toePhaseResolvedSameActionIntertwinerStillOpen :
+  PhaseWeld.PhaseCharacterWeldFrontier.sameActionTwelveSeventyEightIntertwinerPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ false
+toePhaseResolvedSameActionIntertwinerStillOpen = refl
+
+toeActualLinearActionStillOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.actualLinearActionPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+toeActualLinearActionStillOpen = refl
+
+toeActualSourceNativeInertiaSameActionStillOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.sourceNativeInertiaSameActionPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+toeActualSourceNativeInertiaSameActionStillOpen = refl
+
+toeActualSameActionTwelveSeventyEightIntertwinerStillOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.actualTwelveSeventyEightIntertwinerPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+toeActualSameActionTwelveSeventyEightIntertwinerStillOpen = refl
+
+toeVOAKernelRecognizedAttachmentStillOpen :
+  VOAComposition.ActualVOASelected3BCompositionFrontier.kernelRecognizedAttachmentInhabitedHere
+    VOAComposition.currentActualVOASelected3BCompositionFrontier
+  ≡ false
+toeVOAKernelRecognizedAttachmentStillOpen = refl
+
+toeVOANormalizerMonsterActionWeldStillOpen :
+  VOAComposition.ActualVOASelected3BCompositionFrontier.normalizerMonsterActionWeldPaidHere
+    VOAComposition.currentActualVOASelected3BCompositionFrontier
+  ≡ false
+toeVOANormalizerMonsterActionWeldStillOpen = refl
+
+toeVOATwelveSeventyEightIntertwinerStillOpen :
+  VOAComposition.ActualVOASelected3BCompositionFrontier.twelveSeventyEightIntertwinerPaidHere
+    VOAComposition.currentActualVOASelected3BCompositionFrontier
+  ≡ false
+toeVOATwelveSeventyEightIntertwinerStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- 14. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
 ------------------------------------------------------------------------
 
 record TOE369MaxCutZKPFrame : Set where
