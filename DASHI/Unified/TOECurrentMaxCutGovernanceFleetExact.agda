@@ -59,6 +59,8 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
 import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as Legal
 import DASHI.Cognition.PNF.SensibLawSemanticStatusCrossPollinationExact as Semantic
 import DASHI.Governance.AuthorityMandateCore as Governance
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as Promotion
 
 ------------------------------------------------------------------------
 -- Exact target selection.
@@ -242,6 +244,49 @@ ibrahimProducerSourceCannotCreateRun :
   Pareto.ProducerSourceCreatesRunReceipt → ⊥
 ibrahimProducerSourceCannotCreateRun =
   Pareto.producerSourceDoesNotCreateRunReceipt
+
+------------------------------------------------------------------------
+-- Direct SensibLaw semantic and authority non-promotion.
+-- Source owners supply both proof terms.
+------------------------------------------------------------------------
+
+toeSemanticPromotionAuthorityBoundary : Authority.AuthorityNonPromotionBundle
+toeSemanticPromotionAuthorityBoundary =
+  Promotion.semanticPromotionAuthorityBoundary
+
+toeHeuristicEvidenceCannotChangePromotion :
+  ∀ structural-for structural-against
+    heuristic-for₁ heuristic-against₁
+    heuristic-for₂ heuristic-against₂
+    target source →
+  Promotion.promote
+    (Promotion.mixedCandidate
+      structural-for structural-against
+      heuristic-for₁ heuristic-against₁ target source)
+  ≡
+  Promotion.promote
+    (Promotion.mixedCandidate
+      structural-for structural-against
+      heuristic-for₂ heuristic-against₂ target source)
+toeHeuristicEvidenceCannotChangePromotion =
+  Promotion.promotion-ignores-heuristic-bits
+
+toeSemanticPromotionCannotCreateLegalAuthority :
+  Authority.legalAuthorityFlag toeSemanticPromotionAuthorityBoundary ≡ false
+toeSemanticPromotionCannotCreateLegalAuthority =
+  Promotion.semantic-promotion-legal-authority-closed
+
+toeSemanticPromotionCannotCreateAnyAuthority :
+  Authority.promotesAnyAuthority toeSemanticPromotionAuthorityBoundary ≡ false
+toeSemanticPromotionCannotCreateAnyAuthority =
+  Promotion.semantic-promotion-all-authority-closed
+
+toeCanonicalAuthorityKindsRemainClosed :
+  Authority.AllAuthorityKindsFalse
+    Authority.canonicalAuthorityNonPromotionBundle
+    Authority.canonicalAuthorityKinds
+toeCanonicalAuthorityKindsRemainClosed =
+  Authority.canonicalAuthorityKindsFalse
 
 ------------------------------------------------------------------------
 -- Canonical current max-cut receipt.
