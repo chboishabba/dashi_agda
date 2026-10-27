@@ -165,11 +165,10 @@ fleetQuantumMereologyAttributionBoundary :
 fleetQuantumMereologyAttributionBoundary =
   QMSources.canonicalQuantumMereologyAttributionBoundary
 
-data FleetSpectralLabelIdentifiesTheoremOwner : Set where
-
 fleetSpectralLabelDoesNotIdentifyTheoremOwner :
-  FleetSpectralLabelIdentifiesTheoremOwner → ⊥
-fleetSpectralLabelDoesNotIdentifyTheoremOwner ()
+  spectralLabelIdentifiesTheoremOwner canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetSpectralLabelDoesNotIdentifyTheoremOwner = refl
 
 ------------------------------------------------------------------------
 -- Reused canonical proof and receipt owners.
