@@ -276,3 +276,42 @@ unifierRemainderFloorBoundaryMatchesTOE :
   U.unifierYangMillsLiteralUniformRemainderFloorLevel
   ≡ TOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
 unifierRemainderFloorBoundaryMatchesTOE = refl
+
+
+------------------------------------------------------------------------
+-- Stress-bound regressions.
+------------------------------------------------------------------------
+
+stressMarkedShellBoundCompilerIsChecked :
+  TOE.toeStressFirstVariationMarkedShellBoundLevel ≡ machineChecked
+stressMarkedShellBoundCompilerIsChecked = refl
+
+stressShellEnergyHilbertCompilerIsChecked :
+  TOE.toeStressShellEnergyToHilbertCompilerLevel ≡ machineChecked
+stressShellEnergyHilbertCompilerIsChecked = refl
+
+literalStressMetricSourceWeldRemainsConditional :
+  TOE.toeLiteralStressMetricSourceCoordinateWeldLevel ≡ conditional
+literalStressMetricSourceWeldRemainsConditional = refl
+
+literalFirstVariationStressPairingRemainsConditional :
+  TOE.toeLiteralFirstVariationStressPairingLevel ≡ conditional
+literalFirstVariationStressPairingRemainsConditional = refl
+
+literalStressActivityEntropyInstantiationRemainsConditional :
+  TOE.toeLiteralStressActivityEntropyInstantiationLevel ≡ conditional
+literalStressActivityEntropyInstantiationRemainsConditional = refl
+
+literalStressCoefficientEnergyShellPrefixRemainsConditional :
+  TOE.toeLiteralStressCoefficientEnergyShellPrefixLevel ≡ conditional
+literalStressCoefficientEnergyShellPrefixRemainsConditional = refl
+
+unifiedPhysicsStressMarkedShellMatchesTOE :
+  UnifiedPhysics.yangMillsTOEStressMarkedShellBoundLevel
+  ≡ TOE.toeStressFirstVariationMarkedShellBoundLevel
+unifiedPhysicsStressMarkedShellMatchesTOE = refl
+
+unifierStressMarkedShellMatchesTOE :
+  U.unifierYangMillsStressMarkedShellBoundLevel
+  ≡ TOE.toeStressFirstVariationMarkedShellBoundLevel
+unifierStressMarkedShellMatchesTOE = refl
