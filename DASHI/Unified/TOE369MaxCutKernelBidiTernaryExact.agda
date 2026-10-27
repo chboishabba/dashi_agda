@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spectral
 import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed
@@ -61,6 +62,16 @@ toe27FullCubeRotationNotFree :
 toe27FullCubeRotationNotFree free =
   free Geometry.origin toe27OriginFixed
 
+toe27MonsterPhaseConjugationIntertwiner :
+  (frequency : Spectral.AxisFrequency) →
+  (trit : SSP.SSPTrit) →
+  Fourier.phaseToMonster
+    (Character.axisCharacterValue
+      (Spectral.conjugateFrequency frequency) trit)
+  ≡
+  Monster.transportPhase Monster.invertsGenerator
+    (Fourier.phaseToMonster
+      (Character.axisCharacterValue frequency trit))
 toe27MonsterPhaseConjugationIntertwiner =
   Signed.monsterAxisReflectionIntertwines
 
