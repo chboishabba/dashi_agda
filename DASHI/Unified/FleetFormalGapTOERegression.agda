@@ -46,3 +46,11 @@ fleetLegalGovernanceHandoffIsCanonical :
   Fleet.legalGovernanceHandoff Fleet.canonicalFleetFormalGapReceipt
   ≡ Fleet.canonicalLegalGovernanceHandoff
 fleetLegalGovernanceHandoffIsCanonical = refl
+
+fleetMaxCutRegression :
+  Fleet.canonicalFleetFormalGapMaxCut ≡ Fleet.canonicalFleetFormalGapMaxCut
+fleetMaxCutRegression = refl
+
+namedGapManifestStillMissing :
+  Fleet.namedFormalGapManifestAcquired Fleet.canonicalFleetFormalGapMaxCut ≡ false
+namedGapManifestStillMissing = refl
