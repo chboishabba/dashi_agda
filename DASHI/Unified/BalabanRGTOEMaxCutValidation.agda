@@ -125,6 +125,11 @@ physicsOSWightmanStillOpen :
 physicsOSWightmanStillOpen =
   Physics.yangMillsBalabanOSWightmanContinuumConstructionStillOpen
 
+physicsContinuumRouteMassGapPromotionStillOpen :
+  Balaban.balabanContinuumRouteMassGapPromotionOpenFlag ≡ false
+physicsContinuumRouteMassGapPromotionStillOpen =
+  Physics.yangMillsBalabanContinuumRouteMassGapPromotionStillOpen
+
 physicsContinuumStillOpen :
   Balaban.balabanRGContinuumConstructionOpenFlag ≡ false
 physicsContinuumStillOpen =
