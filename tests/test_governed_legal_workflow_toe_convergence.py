@@ -267,3 +267,16 @@ def test_semantic_authority_and_bound_acquisition_are_in_toe_graph():
         "unifierProducerIdentityResidualAliasIsExact",
     ):
         assert token in regression
+
+
+def test_unified_facade_reexports_new_governance_firewalls():
+    unified = read(UNIFIED_EVERYTHING)
+    for token in (
+        "governedSemanticPromotionTruthAuthorityClosed",
+        "governedSemanticPromotionLegalAuthorityClosed",
+        "governedSemanticPromotionAllAuthorityClosed",
+        "governedBoundAcquisitionDoesNotPayRequirement",
+        "governedBoundAcquisitionDoesNotCloseConsumer",
+        "governedProducerIdentityDoesNotIdentifyResidual",
+    ):
+        assert token in unified
