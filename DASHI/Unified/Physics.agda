@@ -473,7 +473,8 @@ diffuserImagingZKPFrame =
   DiffuserImaging.canonicalDiffuserImagingTOEZKPFrame
 
 open DiffuserImaging public using
-  ( roundTripImpliesIdentifiable
+  ( DiffuserImagingTOEZKPFrame
+  ; roundTripImpliesIdentifiable
   ; noUniversalDecoderAfterClip
   ; saturatedCollision
   ; overlapThenClip
