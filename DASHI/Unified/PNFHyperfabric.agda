@@ -9,6 +9,7 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.UnifiedMathLanguageAssertedProofs as Asserted
 import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 
 pnfHyperfabricSurface : Hyperfabric.PNFHyperfabric369Surface
 pnfHyperfabricSurface =
@@ -37,3 +38,19 @@ pnfHyperfabricJPromotionBlocked :
   Spine.objectExternalJPromotion pnfHyperfabricObject ≡ false
 pnfHyperfabricJPromotionBlocked =
   refl
+
+------------------------------------------------------------------------
+-- CONTEXTUAL-SEMANTIC-FRACTRAN-TOE-MAXCUT
+------------------------------------------------------------------------
+
+import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as ContextualTOE
+
+pnfContextualSemanticFractranMaxCutReceipt :
+  ContextualTOE.ContextualSemanticFractranTOEMaxCutReceipt
+pnfContextualSemanticFractranMaxCutReceipt =
+  ContextualTOE.canonicalContextualSemanticFractranTOEMaxCutReceipt
+
+pnfContextualSemanticFractranZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+pnfContextualSemanticFractranZKPFrame =
+  ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
