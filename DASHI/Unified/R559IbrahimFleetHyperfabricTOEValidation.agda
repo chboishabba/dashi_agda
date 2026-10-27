@@ -9,6 +9,8 @@ import DASHI.Unifier as Unifier
 import DASHI.Unified.Everything as Unified
 import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as Owner
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as U8Runtime
 
 toeReceiptMatchesOwner :
   TOE.toeR559IbrahimFleetHyperfabricReceipt
@@ -92,3 +94,37 @@ fleetDischargedFibresStillCannotBeRetargeted :
     Owner.fleetFormalGapTargetReceipt ≡ true
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
+
+------------------------------------------------------------------------
+-- Canonical byte-ABI/runtime non-promotion reaches every TOE facade.
+------------------------------------------------------------------------
+
+toeTriadicBoundedABIDoesNotCreateRust :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+toeTriadicBoundedABIDoesNotCreateRust =
+  TOE.toeTriadicBoundedABIDoesNotCreateRust
+
+unifierTriadicBoundedABIDoesNotCreateRust :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+unifierTriadicBoundedABIDoesNotCreateRust =
+  Unifier.unifierTriadicBoundedABIDoesNotCreateRust
+
+unifiedTriadicBoundedABIDoesNotCreateRust :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+unifiedTriadicBoundedABIDoesNotCreateRust =
+  Unified.unifiedTriadicBoundedABIDoesNotCreateRust
+
+toeRuntimeSourceDoesNotCreateKernelCertification :
+  U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
+toeRuntimeSourceDoesNotCreateKernelCertification =
+  TOE.toeTriadicRuntimeSourceDoesNotCreateKernelCertification
+
+unifierRuntimeSourceDoesNotCreateKernelCertification :
+  U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
+unifierRuntimeSourceDoesNotCreateKernelCertification =
+  Unifier.unifierTriadicRuntimeSourceDoesNotCreateKernelCertification
+
+unifiedRuntimeSourceDoesNotCreateKernelCertification :
+  U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
+unifiedRuntimeSourceDoesNotCreateKernelCertification =
+  Unified.unifiedTriadicRuntimeSourceDoesNotCreateKernelCertification
