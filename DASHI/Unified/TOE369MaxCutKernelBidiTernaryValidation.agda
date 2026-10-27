@@ -4,6 +4,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as Owner
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 
@@ -18,22 +21,22 @@ unifierFullCubeNonPromotionMatches =
   Unifier.unifier369FullCubeRotationNotFree
 
 toeFullGradeDimensionFirewallMatches :
-  Owner.FullGrade.LinearDimensionCreatesFaithfulness → ⊥
+  FullGrade.LinearDimensionCreatesFaithfulness → ⊥
 toeFullGradeDimensionFirewallMatches =
   TOE.toe369FullGradeDimensionDoesNotCreateFaithfulness
 
 unifierFullGradeDimensionFirewallMatches :
-  Owner.FullGrade.LinearDimensionCreatesFaithfulness → ⊥
+  FullGrade.LinearDimensionCreatesFaithfulness → ⊥
 unifierFullGradeDimensionFirewallMatches =
   Unifier.unifier369FullGradeDimensionDoesNotCreateFaithfulness
 
 toeProjectedDimensionFirewallMatches :
-  Owner.Projected.DirectSumDimensionCreatesProjectedAction → ⊥
+  Projected.DirectSumDimensionCreatesProjectedAction → ⊥
 toeProjectedDimensionFirewallMatches =
   TOE.toe369ProjectedDimensionDoesNotCreateAction
 
 unifierProjectedDimensionFirewallMatches :
-  Owner.Projected.DirectSumDimensionCreatesProjectedAction → ⊥
+  Projected.DirectSumDimensionCreatesProjectedAction → ⊥
 unifierProjectedDimensionFirewallMatches =
   Unifier.unifier369ProjectedDimensionDoesNotCreateAction
 
@@ -58,11 +61,11 @@ unifierTernaryPhaseReductionFirewallMatches :
 unifierTernaryPhaseReductionFirewallMatches = refl
 
 toeFiniteChartFirewallMatches :
-  Owner.Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+  Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
 toeFiniteChartFirewallMatches =
   TOE.toe369FiniteChartDoesNotCreateLinearMultiplicityAction
 
 unifierFiniteChartFirewallMatches :
-  Owner.Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+  Ibrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
 unifierFiniteChartFirewallMatches =
   Unifier.unifier369FiniteChartDoesNotCreateLinearMultiplicityAction
