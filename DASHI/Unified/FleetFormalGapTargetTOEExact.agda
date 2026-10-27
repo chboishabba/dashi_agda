@@ -53,6 +53,8 @@ record FleetFormalGapTargetReceipt : Set where
     eigenvalueMagnitudeCreatesProofAuthority : Bool
     externalCountCreatesFormalProof : Bool
     externalPlanningTextCreatesFormalResidual : Bool
+    metaIntrospectorReferenceRepos : String
+    metaIntrospectorProofBorrowed : Bool
     metaIntrospectorAttributionPreserved : Bool
     esdSurfaceEdited : Bool
 
@@ -78,6 +80,8 @@ canonicalFleetFormalGapTargetReceipt =
     true
     false
     false
+    false
+    "meta-introspector/zkperf; meta-introspector/zos-server; meta-introspector/erdfa-py; meta-introspector/aristotle-cli-rs"
     false
     true
     false
