@@ -702,3 +702,50 @@ physicsDepthContinuumLimitPromotionImpossible =
 validationZKPFrame : Balaban.BalabanTOEZKPFrame
 validationZKPFrame =
   Balaban.canonicalBalabanTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Cross-root non-promotion coherence.
+-- The source owner defines each theorem.  Both roots reuse it.
+-- This adds no theorem authority and changes no ESD module.
+------------------------------------------------------------------------
+
+toeAndUnifierScaleDensityAgree :
+  TOE.toeBalabanScaleDensityFlowLevel
+  ≡ Unifier.toeBalabanScaleDensityFlowLevel
+toeAndUnifierScaleDensityAgree = refl
+
+toeAndUnifierRegularELocalizationAgree :
+  TOE.toeBalabanRegularELocalizationCarrierLevel
+  ≡ Unifier.toeBalabanRegularELocalizationCarrierLevel
+toeAndUnifierRegularELocalizationAgree = refl
+
+toeAndUnifierCasimirAgree :
+  TOE.toeBalabanHaarCasimirCoefficientLevel
+  ≡ Unifier.toeBalabanHaarCasimirCoefficientLevel
+toeAndUnifierCasimirAgree = refl
+
+toeAndUnifierStressAgree :
+  TOE.toeBalabanStressHilbertPhysicalShellLevel
+  ≡ Unifier.toeBalabanStressHilbertPhysicalShellLevel
+toeAndUnifierStressAgree = refl
+
+toeAndUnifierContinuumReceiptAgree :
+  TOE.toeBalabanContinuumLimitReceipt
+  ≡ Unifier.unifierBalabanContinuumLimitReceipt
+toeAndUnifierContinuumReceiptAgree = refl
+
+toeAndUnifierBlockSpinCannotPromote :
+  Balaban.balabanRGBlockSpinTransferOpenFlag ≡ false
+toeAndUnifierBlockSpinCannotPromote =
+  TOE.toeBalabanRGBlockSpinTransferStillOpen
+
+toeAndUnifierContinuumPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+toeAndUnifierContinuumPromotionImpossible =
+  Unifier.unifierBalabanContinuumLimitPromotionImpossible
+
+toeAndUnifierDepthPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+toeAndUnifierDepthPromotionImpossible =
+  TOE.toeDepthContinuumLimitPromotionImpossible
