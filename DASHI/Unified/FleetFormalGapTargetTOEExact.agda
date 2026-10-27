@@ -124,8 +124,12 @@ fleetKeepsContradictionsSeparate = refl
 -- modules by theorem.
 ------------------------------------------------------------------------
 
-fleetBalabanDischargedOwnerReceipt :
+BalabanDischargedOwnerReceipt : Set
+BalabanDischargedOwnerReceipt =
   BalabanRG.BalabanRGTOEReceipt
+
+fleetBalabanDischargedOwnerReceipt :
+  BalabanDischargedOwnerReceipt
 fleetBalabanDischargedOwnerReceipt =
   BalabanRG.canonicalBalabanRGTOEReceipt
 
@@ -139,13 +143,21 @@ fleetNSM2ToR568CompilerStatus :
 fleetNSM2ToR568CompilerStatus =
   NS.bM2ToR568CompilerClosed
 
-fleetQuantumMereologyBoundary :
+QuantumMereologyDischargedBoundary : Set
+QuantumMereologyDischargedBoundary =
   QM.QuantumMereologyBoundary
+
+fleetQuantumMereologyBoundary :
+  QuantumMereologyDischargedBoundary
 fleetQuantumMereologyBoundary =
   QM.canonicalQuantumMereologyBoundary
 
-fleetQuantumMereologyAttributionBoundary :
+QuantumMereologyAttributionBoundary : Set
+QuantumMereologyAttributionBoundary =
   QMSources.QuantumMereologyAttributionBoundary
+
+fleetQuantumMereologyAttributionBoundary :
+  QuantumMereologyAttributionBoundary
 fleetQuantumMereologyAttributionBoundary =
   QMSources.canonicalQuantumMereologyAttributionBoundary
 
