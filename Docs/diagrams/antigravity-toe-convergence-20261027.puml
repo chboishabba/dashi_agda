@@ -1,0 +1,48 @@
+@startuml
+title Antigravity -> DASHI TOE convergence
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+package "C4 Context: DASHI TOE" {
+  component "EverythingTOESymmetryResolved369" as TOE
+  component "DASHI.Unifier
+legacy facade" as UNIFIER
+  component "DASHI.Unified.Physics" as UPhysics
+}
+
+package "C4 Container: normalized bridge" {
+  component "AntigravityTOENonPromotionBridgeExact" as Bridge
+}
+
+package "C4 Components: exact theorem owners" {
+  component "AntigravityMaterialBidiCrossPollinationExact" as Claims
+  component "AntigravityUnificationInteractionExact" as Interaction
+  component "AntigravityResearchPromotionCutExact" as Research
+  component "AntigravityStrongestConditionalTheoremExact" as Strong
+  component "CMP119AntigravityTraceVsActiveStressFirewallExact" as Trace
+  component "GRQFTMereologyBridgeExact" as Mereology
+}
+
+Claims --> Bridge : typed claim boundary
+Interaction --> Bridge : terminal non-promotion
+Research --> Bridge : empirical promotion boundary
+Strong --> Bridge : conditional theorem firewall
+Trace --> Bridge : trace != active stress
+Mereology --> Bridge : same-object stress weld boundary
+
+Bridge --> TOE : exact import
+Bridge --> UNIFIER : exact import only
+Bridge --> UPhysics : exact import
+
+note right of UNIFIER
+Historical placeholder interfaces
+remain non-authoritative.
+The bridge does not use them.
+end note
+
+note bottom of Bridge
+No ESD dependency.
+No new physics.
+No terminal TOE promotion.
+end note
+@enduml
