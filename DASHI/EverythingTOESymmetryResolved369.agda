@@ -1431,3 +1431,68 @@ toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
 toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
+
+------------------------------------------------------------------------
+-- Governed legal / PNF / SCALE / Fleet residual convergence.
+------------------------------------------------------------------------
+
+toePNFSourceBoundaryReceipt :
+  PNFSource.PNFSourceBoundaryTOEReceipt
+toePNFSourceBoundaryReceipt =
+  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+
+toePNFDistilledNonPromotionBoundary :
+  PNFDistilled.PNFDistilledNonPromotionBoundary
+toePNFDistilledNonPromotionBoundary =
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
+
+toe369SCALEEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+toe369SCALEEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
+
+toeGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+toeGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+toeGovernedLegalCandidateDoesNotCreateAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+toeGovernedLegalCandidateDoesNotCreateAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+
+toeGovernedCurrentValidityDoesNotCreateApplicability :
+  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
+toeGovernedCurrentValidityDoesNotCreateApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+toeGovernedSemanticAdmissionDoesNotCreateLegalAuthority :
+  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+toeGovernedSemanticAdmissionDoesNotCreateLegalAuthority =
+  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+toeGovernedDocumentRoleDoesNotCreateLegalAuthority :
+  LegalGovernance.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+toeGovernedDocumentRoleDoesNotCreateLegalAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+toeGovernedFleetResidualTOEHandoff :
+  GovernedFleet.GovernedFleetResidualTOEHandoff
+toeGovernedFleetResidualTOEHandoff =
+  GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
+
+toeFleetNamedManifestStillMissing :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+toeFleetNamedManifestStillMissing =
+  GovernedFleet.namedManifestStillMissing
+
+toeFleetPerGapDispatchStillDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+toeFleetPerGapDispatchStillDisabled =
+  GovernedFleet.perGapDispatchStillDisabled
