@@ -13,6 +13,7 @@ import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as Pants36
 import DASHI.Moonshine.JInvariantSheafHyperformAdmissibleDescentExact as Sheaf369
 import DASHI.Interop.PNFHyperfabric369 as PNF369
 import DASHI.Unified.PNFHyperfabric as UnifiedPNF
+import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Authority369
 import DASHI.Interop.DistributedEpistemicFabricSourceAtlasExact as SourceAtlas
 
@@ -95,7 +96,7 @@ sharedHyperformalCarrierDoesNotPromoteExternalTheorem =
   Authority369.sharedHyperformalCarrierDoesNotPromoteExternalTheorem
 
 pnfHyperfabricJProjectionStillBlocked :
-  DASHI.Unified.InvariantSpine.objectExternalJPromotion
+  Spine.objectExternalJPromotion
     UnifiedPNF.pnfHyperfabricObject
   ≡ false
 pnfHyperfabricJProjectionStillBlocked =
