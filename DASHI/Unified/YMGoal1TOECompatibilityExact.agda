@@ -71,6 +71,11 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CanonicalASourceRound436
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as R437
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalLiteralRateSourceRound438Exact as R438
 import DASHI.Physics.YangMills.YangMillsClayGoal1SameHNontrivialityRound439Exact as R439
+import DASHI.Physics.YangMills.BalabanCMP116VariableDomainPreferredR415Round440Exact as R440
+import DASHI.Physics.YangMills.BalabanCMP116R429RootedTraceCountingRound441Exact as R441
+import DASHI.Physics.YangMills.BalabanCMP116R429TraceEntropyBudgetRound442Exact as R442
+import DASHI.Physics.YangMills.YangMillsCMP119WilsonGibbsHaarActionRound443Exact as R443
+import DASHI.Physics.YangMills.YangMillsCMP119PeterWeylWilsonSquareRound444Exact as R444
 
 import DASHI.Physics.Closure.YangMillsMassGapBoundary as MassGap
 import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as Continuum
@@ -99,6 +104,66 @@ goal1LocalQFTCSourceLevel =
 goal1SameHNontrivialitySemanticBridgeLevel : ProofLevel
 goal1SameHNontrivialitySemanticBridgeLevel =
   R439.literalRound439SameSystemSemanticBridgeLevel
+
+
+------------------------------------------------------------------------
+-- Preferred current-branch Goal-1 cuts.
+-- These supersede the coarse global-tree compatibility route where noted.
+------------------------------------------------------------------------
+
+goal1FiniteA1WilsonActionInvarianceLevel : ProofLevel
+goal1FiniteA1WilsonActionInvarianceLevel =
+  R443.literalRound443FiniteWilsonActionInvarianceLevel
+
+goal1FiniteA1ProductHaarInvarianceLevel : ProofLevel
+goal1FiniteA1ProductHaarInvarianceLevel =
+  R443.literalRound443FiniteProductHaarInvarianceLevel
+
+goal1FiniteA1DensityInvariantCompilerLevel : ProofLevel
+goal1FiniteA1DensityInvariantCompilerLevel =
+  R443.round443WilsonActionToDensityInvariantCompilerLevel
+
+goal1FiniteA2PeterWeylWilsonIdentificationLevel : ProofLevel
+goal1FiniteA2PeterWeylWilsonIdentificationLevel =
+  R444.literalRound444PeterWeylWilsonIdentificationLevel
+
+goal1FiniteA2SquareCompilerLevel : ProofLevel
+goal1FiniteA2SquareCompilerLevel =
+  R444.round444StandaloneWilsonSquareCompilerLevel
+
+goal1PreferredVariableDomainBSourceLevel : ProofLevel
+goal1PreferredVariableDomainBSourceLevel =
+  R440.literalRound440VariableDomainCMP116SourceLevel
+
+goal1R429RootedTraceEncodingLevel : ProofLevel
+goal1R429RootedTraceEncodingLevel =
+  R441.literalRound441R429RootedTraceEncodingLevel
+
+goal1R429RootedTraceCountCompilerLevel : ProofLevel
+goal1R429RootedTraceCountCompilerLevel =
+  R441.round441InjectiveTraceShellCountCompilerLevel
+
+goal1R429SourceDecayReserveLevel : ProofLevel
+goal1R429SourceDecayReserveLevel =
+  R442.literalRound442SourceDecayReserveLevel
+
+goal1R429EntropyBudgetCompilerLevel : ProofLevel
+goal1R429EntropyBudgetCompilerLevel =
+  R442.round442R429ShellEntropyBudgetCompilerLevel
+
+legacyGlobalTreeMetricPreferred : Bool
+legacyGlobalTreeMetricPreferred = false
+
+legacyGlobalTreeMetricPreferredIsFalse :
+  legacyGlobalTreeMetricPreferred ≡ false
+legacyGlobalTreeMetricPreferredIsFalse = refl
+
+variableDomainR440Preferred : Bool
+variableDomainR440Preferred = true
+
+variableDomainR440PreferredIsTrue :
+  variableDomainR440Preferred ≡ true
+variableDomainR440PreferredIsTrue = refl
 
 ------------------------------------------------------------------------
 -- Exact non-promotion theorem reuse.
@@ -192,7 +257,7 @@ canonicalYMGoal1TOEZKPFrame = record
   ; constructionRule =
       "Export aliases and exact non-promotion proofs only."
   ; scopeRule =
-      "Treat R435-R439 as branch compatibility surfaces; prefer the later source-native R474/R559 lineage when available."
+      "Use R440 variable-domain d_k(Y), R441 rooted traces, R442 entropy, R443 Haar action, and R444 Peter-Weyl as the preferred current-branch route. Treat R438 global-tree geometry as compatibility only. Prefer later R474/R559 source-native owners when available."
   ; laneRule =
       "Keep Yang-Mills theorem ownership in the Yang-Mills lane and keep ESD surfaces unchanged."
   ; postconditionRule =
