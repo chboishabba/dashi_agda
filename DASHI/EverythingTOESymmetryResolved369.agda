@@ -33,9 +33,37 @@ toeKernelProofDoesNotEstablishSourceSemantics =
   Governance.kernelClosureIsNotSemanticExhaustiveness
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
 
+
+------------------------------------------------------------------------
+-- Canonical PNF source boundary.
+------------------------------------------------------------------------
+
+toePNFSourceBoundaryReceipt :
+  PNFSource.PNFSourceBoundaryTOEReceipt
+toePNFSourceBoundaryReceipt =
+  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+
+toePNFGluingProxyDoesNotProveTrueLinearity =
+  PNFSource.gluingProxyDoesNotProveTrueLinearity
+
+toePNFSelfAdjointProxyDoesNotProveFiniteTheorem =
+  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
+
+toePNFDominationProxyDoesNotProveHamiltonianTheorem =
+  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
+
+toePNFFungalNetworkClaimsRequireSpeciesEvidence =
+  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
+
+toePNFKluverCobwebForm =
+  PNFSource.kluverCobwebForm
+
+toePNFPsychogeographyWebIdentifierKind =
+  PNFSource.psychogeographyWebIdentifierKind
 
 ------------------------------------------------------------------------
 -- PNF-distilled fail-closed reuse boundary.
