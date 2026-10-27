@@ -50,7 +50,7 @@ data ClaimFamily : Set where
   physiologicalOrClinicalEffect : ClaimFamily
   remoteInformationTransfer : ClaimFamily
   clockOrCausalityAnomaly : ClaimFamily
-  undefinedTorsionOrTimeEnergy : ClaimFamily
+  unbridgedKozyrevTorsionOrTimeEnergy : ClaimFamily
 
 data EvidencePosture : Set where
   sourceDescribesDesign : EvidencePosture
@@ -121,12 +121,12 @@ canonicalClaimIntake =
     "No calibrated clock anomaly or falsifiable time-energy measurand has been established by the cited model."
   ∷ sourceTypedClaim
     "KM-TORSION"
-    undefinedTorsionOrTimeEnergy
+    unbridgedKozyrevTorsionOrTimeEnergy
     "Kozyrev mirror claims, as later recounted"
     2026
     "https://www.brokenbranch.dev/labs/as-seen-on-tv/does-the-mirror-focus/"
     unoperationalisedClaim
-    "Define a unit, detector response, calibration, null and predicted effect before a test is meaningful."
+    "Related mechanical and Einstein-Cartan torsion is already formalised in DASHI. No same-object apparatus-to-geometric-torsion source, coupling, unit, calibration, null, or predicted effect is supplied yet."
   ∷ []
 
 ------------------------------------------------------------------------
@@ -176,9 +176,9 @@ canonicalTestTargets =
     "EM, thermal, vibration, pressure, timing-network and drift controls"
     "Any deviation lies within calibrated uncertainty"
   ∷ testTarget
-    undefinedTorsionOrTimeEnergy
-    "No admissible observable until measurand and unit are specified"
-    "Not yet test-ready"
+    unbridgedKozyrevTorsionOrTimeEnergy
+    "Existing torsion mathematics admitted; requested mirror-specific observable and units remain open"
+    "Bridge under P4; instrument-only test may proceed separately"
     "Require a detector calibrated against known physical interactions"
     "Reject uninterpretable readings until a quantitative prediction exists"
   ∷ []
