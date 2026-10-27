@@ -311,3 +311,21 @@ scaleEvidenceReviewTOEZKPFrame :
   SCALEReview.SCALEEvidenceReviewTOEZKPFrame
 scaleEvidenceReviewTOEZKPFrame =
   SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Governance + exact 58-gap + Balaban/Ibrahim TOE convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEExact as GBI58
+import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEValidation
+
+unifiedGovernanceBalabanIbrahim58GapReceipt :
+  GBI58.GovernanceBalabanIbrahim58GapTOEReceipt
+unifiedGovernanceBalabanIbrahim58GapReceipt =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+unifiedGovernanceBalabanIbrahim58GapZKPFrame :
+  GBI58.GovernanceBalabanIbrahim58GapZKPFrame
+unifiedGovernanceBalabanIbrahim58GapZKPFrame =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapZKPFrame
