@@ -19,6 +19,8 @@ on:
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
@@ -90,6 +92,14 @@ jobs:
           dashi-repo discover 'Balaban scale density regular-E localization Casimir stress RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda --root .
+          dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
+          dashi-repo related canonicalRecognitionRouteParetoBoundary --root . --limit 20
+          dashi-repo related currentMonster3BCharacterExecutionFrontier --root . --limit 20
+          dashi-repo related canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary --root . --limit 20
+          dashi-repo discover 'Balaban RG scale transfer non-promotion Ibrahim Pareto snowball Monster 3B H-zeta recognition' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -117,6 +127,8 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
@@ -135,6 +147,8 @@ jobs:
           modules=(
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
