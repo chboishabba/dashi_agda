@@ -210,3 +210,15 @@ unifiedCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy :
   CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacy ≡ false
 unifiedCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy =
   CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacyIsFalse
+
+
+------------------------------------------------------------------------
+-- Direct legal-governance semantic non-promotion at the TOE consumer.
+-- The theorem owner remains TOECurrentMaxCutGovernanceFleetExact.
+------------------------------------------------------------------------
+
+unifiedCurrentLegalAuthorityDoesNotEstablishApplicability :
+  CurrentMaxCut.legalAuthorityCreatesApplicability ≡ false
+unifiedCurrentLegalAuthorityDoesNotEstablishApplicability =
+  CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
+
