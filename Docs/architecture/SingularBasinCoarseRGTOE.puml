@@ -1,0 +1,60 @@
+@startuml
+title DASHI TOE — singular-basin / coarse-RG obstruction convergence
+
+skinparam componentStyle rectangle
+
+package "Existing theorem owners" {
+  component "SingularBasinReductionExact" as Reduction
+  component "SingularBasinFiniteWitnessExact" as Finite
+  component "BasinResolutionRobustnessExact" as Resolution
+  component "SingularBasinResolutionWitnessExact" as ResolutionWitness
+  component "SingularBasinValidatedNumericsArtifactExact" as Validated
+  component "YanchukStableManifoldCrossingTargetExact" as Yanchuk
+  component "RGObservableInvariance" as PositiveRG
+}
+
+package "Normalized DASHI/Unified facade" {
+  component "SingularBasinCoarseRGTOEExact" as Facade
+  component "SingularBasinCoarseRGTOEValidation" as Validation
+}
+
+package "TOE consumers" {
+  component "EverythingTOESymmetryResolved369" as TOE
+  component "Unifier" as Unifier
+  component "Unified.Everything" as Unified
+}
+
+Reduction --> Facade : generic non-preservation
+Finite --> Facade : exact finite collision
+Resolution --> Facade : resolution robustness
+ResolutionWitness --> Facade : exact obstruction witness
+Validated --> Facade : checker-soundness boundary
+Yanchuk --> Facade : selected physical proof wall
+PositiveRG ..> Facade : preservation surface; obstruction dual
+
+Facade --> TOE
+Facade --> Unifier
+TOE --> Validation
+Unifier --> Validation
+Validation --> Unified
+
+note bottom of Facade
+Preconditions:
+- canonical theorem owners already exist
+- source attribution stays unchanged
+- ESD surfaces are read-only
+
+Invariants:
+- finite witness is not the Yanchuk ODE
+- numerical receipts do not create analytic theorems
+- coarse projection does not imply basin-label preservation
+- same reduced state plus different basin membership blocks exact factorisation
+
+Postconditions:
+- TOE and Unifier expose the same exact obstruction owners
+- resolution non-robustness is reachable from the TOE graph
+- interval ODE checker, checkerSound, interval manifold tube,
+  and two-sided basin separation remain explicit open obligations
+end note
+
+@enduml
