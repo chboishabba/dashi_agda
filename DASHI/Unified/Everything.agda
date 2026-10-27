@@ -254,17 +254,17 @@ unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
   LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
 
 unifiedCanonicalLegalSourceAuthorityBoundary :
-  LegalGovernance.LegalAuthority.LegalSourceAuthorityBoundary
+  LegalGovernance.LegalSourceAuthorityBoundary
 unifiedCanonicalLegalSourceAuthorityBoundary =
   LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
 
 unifiedSameSystemIsNotLegalAuthority :
-  LegalGovernance.LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+  LegalGovernance.SameLegalSystemAutomaticallyMeansAuthority → ⊥
 unifiedSameSystemIsNotLegalAuthority =
   LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
 
 unifiedDocumentRoleIsNotLegalAuthority :
-  LegalGovernance.LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+  LegalGovernance.DocumentRoleSuppliesLegalSourceAuthority → ⊥
 unifiedDocumentRoleIsNotLegalAuthority =
   LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
 
