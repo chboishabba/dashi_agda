@@ -31,6 +31,8 @@ on:
       - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda'
       - 'DASHI/Unified/SingularBasinCoarseRGTOEExact.agda'
       - 'DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda'
+      - 'DASHI/Unified/SensibLawGovernanceTOEExact.agda'
+      - 'DASHI/Unified/SensibLawGovernanceTOEValidation.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
@@ -119,6 +121,15 @@ jobs:
           dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/SingularBasinCoarseRGTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEValidation.agda --root .
+          dashi-repo related semantic-promotion-legal-authority-closed --root . --limit 20
+          dashi-repo related qualificationDoesNotAutomaticallyProveForensicCompliance --root . --limit 20
+          dashi-repo related parserCandidateAloneCannotAuthorizeAdmission --root . --limit 20
+          dashi-repo related officialSurfaceCannotRecoverFineLegalState --root . --limit 20
+          dashi-repo discover 'SensibLaw semantic promotion legal authority expert compliance review admission Pareto snowball governance non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Interop.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Law.SensibLaw --root .
           dashi-repo related finiteReductionNotBasinPreserving --root . --limit 20
           dashi-repo related selectedProjectionNotResolutionAdequate --root . --limit 20
           dashi-repo discover 'singular basin coarse RG projection basin preservation resolution robustness non-promotion' --root . --limit 40
