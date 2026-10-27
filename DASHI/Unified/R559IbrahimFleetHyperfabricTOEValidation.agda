@@ -108,3 +108,35 @@ sameCardinalityDoesNotIdentifyFleetAndGate4 :
 sameCardinalityDoesNotIdentifyFleetAndGate4 =
   Owner.fleet58CardinalityDoesNotProveYMGate4Identity
 
+
+
+toeYMGate4GapCountMatchesOwner :
+  TOE.toeYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+toeYMGate4GapCountMatchesOwner = refl
+
+unifierYMGate4GapCountMatchesOwner :
+  Unifier.unifierYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+unifierYMGate4GapCountMatchesOwner = refl
+
+unifiedYMGate4GapCountMatchesOwner :
+  Unified.unifiedYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+unifiedYMGate4GapCountMatchesOwner = refl
+
+toeFleet58IdentityFirewallMatchesOwner :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+toeFleet58IdentityFirewallMatchesOwner =
+  TOE.toeFleet58DoesNotIdentifyYMGate4
+
+unifierFleet58IdentityFirewallMatchesOwner :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+unifierFleet58IdentityFirewallMatchesOwner =
+  Unifier.unifierFleet58DoesNotIdentifyYMGate4
+
+unifiedFleet58IdentityFirewallMatchesOwner :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+unifiedFleet58IdentityFirewallMatchesOwner =
+  Unified.unifiedFleet58DoesNotIdentifyYMGate4
+
