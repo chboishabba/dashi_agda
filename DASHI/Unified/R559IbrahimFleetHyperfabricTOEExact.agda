@@ -50,8 +50,8 @@ module DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact where
 -- remain the certification gate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
@@ -63,6 +63,10 @@ import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
 import DASHI.Core.RelationalTrialecticDisambiguationExact as IdentityFirewall
+import DASHI.Unified.BalabanRGTOERegression as Balaban
+import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
+import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as Gate4Current
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 
 ------------------------------------------------------------------------
 -- Exact existing owners.
