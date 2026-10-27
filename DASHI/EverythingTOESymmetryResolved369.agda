@@ -1535,3 +1535,60 @@ toeMissingAdmissibilityStillAbstains =
 
 toeMissingValidationStillAbstains =
   LegalGovernance.selectedMissingValidationStillAbstains
+
+------------------------------------------------------------------------
+-- Fleet-58 acquisition max-cut.
+-- Count metadata does not name the 58 formal gap objects.
+------------------------------------------------------------------------
+
+toeFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+toeFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+toeFleet58ManifestAbsent :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+toeFleet58ManifestAbsent =
+  FleetManifestTOE.named58ManifestAcquiredIsFalse
+
+toeFleet58CountDoesNotNameRows :
+  FleetManifestTOE.countIdentifiesNamedRows ≡ false
+toeFleet58CountDoesNotNameRows =
+  FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+
+toeFleet58PerGapDispatchDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+toeFleet58PerGapDispatchDisabled =
+  FleetManifestTOE.perGapDispatchEnabledIsFalse
+
+toeFleet58RelatedSymbolsRequired :
+  FleetManifestTOE.relatedSymbolsRequired ≡ true
+toeFleet58RelatedSymbolsRequired =
+  FleetManifestTOE.relatedSymbolsRequiredIsTrue
+
+toeFleet58DiscoverRequired :
+  FleetManifestTOE.discoverRequired ≡ true
+toeFleet58DiscoverRequired =
+  FleetManifestTOE.discoverRequiredIsTrue
+
+toeFleet58RoundLineageRequired :
+  FleetManifestTOE.roundLineageRequired ≡ true
+toeFleet58RoundLineageRequired =
+  FleetManifestTOE.roundLineageRequiredIsTrue
+
+toeFleet58AcquisitionDoesNotCloseConsumer :
+  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+toeFleet58AcquisitionDoesNotCloseConsumer =
+  FleetManifestTOE.acquisitionDoesNotCloseConsumer
+
+toeFleet58ProducerDoesNotIdentifyResidual :
+  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
+toeFleet58ProducerDoesNotIdentifyResidual =
+  FleetManifestTOE.producerDoesNotIdentifyResidual
