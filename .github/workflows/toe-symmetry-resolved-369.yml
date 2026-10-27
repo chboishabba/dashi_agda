@@ -10,6 +10,11 @@ on:
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
+      - 'DASHI/Interop/SLRReviewPromoteAbstainConsumerExact.agda'
+      - 'DASHI/Interop/SLRRuntimeValidationHandoffExact.agda'
+      - 'DASHI/Interop/SLRValidationRoadmapPromotionExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
       - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
       - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
@@ -24,6 +29,11 @@ on:
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
+      - 'DASHI/Interop/SLRReviewPromoteAbstainConsumerExact.agda'
+      - 'DASHI/Interop/SLRRuntimeValidationHandoffExact.agda'
+      - 'DASHI/Interop/SLRValidationRoadmapPromotionExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
       - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
       - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
@@ -59,11 +69,20 @@ jobs:
           dashi-repo related canonicalGovernedLegalWorkflowZKPReceipt --root .
           dashi-repo related toeCaseySelectionDoesNotCreateWorldTruth --root .
           dashi-repo related toeKnowledgeDoesNotCreateExecutionAuthority --root .
+          dashi-repo related canonicalGovernedLegalWorkflowPromotionBoundary --root .
+          dashi-repo related toeReviewEligibilityDoesNotCreatePromotion --root .
+          dashi-repo related toeRuntimeParityDoesNotCreateWorldTruth --root .
+          dashi-repo related toeParserCandidateDoesNotAuthorizeAdmission --root .
+          dashi-repo related toeSoftwareValidationDoesNotAuthorizePublication --root .
           dashi-repo discover 'SensibLaw governance legal workflow non promotion TOE' --root .
           dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root .
+          dashi-repo discover 'review eligibility promotion runtime validation claim truth admission authority software publication' --root .
           dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
           dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
           dashi-repo lineage --prefix DASHI.Interop.ITIRFederatedTypedWorldProjection --root .
+          dashi-repo lineage --prefix DASHI.Interop.SLRReviewPromoteAbstainConsumer --root .
+          dashi-repo lineage --prefix DASHI.Interop.SLRValidationRoadmapPromotion --root .
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontier --root .
 
       - name: Run deterministic static contract
         run: python -m pytest -q tests/test_governed_legal_workflow_toe_convergence.py
