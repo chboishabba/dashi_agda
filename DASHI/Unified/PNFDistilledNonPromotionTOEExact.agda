@@ -1,168 +1,57 @@
 module DASHI.Unified.PNFDistilledNonPromotionTOEExact where
 
 ------------------------------------------------------------------------
--- ZKP O/R/C/S/L/P/G/F
+-- Compatibility and process facade for the PNF-distilled capsule.
 --
--- O. Objective.
--- Normalize the supplied PNF-distilled reuse capsule onto existing theorem
--- owners and attach only exact fail-closed non-promotion facts to the TOE.
+-- Mathematical and source-boundary proof authority lives in:
 --
--- R. Reuse.
--- Reuse the three finite proxy-harness result owners.
--- Reuse the Kluver form-constant boundary.
--- Reuse the fungal-network agency boundary.
--- Reuse the psychogeography/Yijing source atlas.
--- Reuse the distributed epistemic source-attribution rule.
+--   DASHI.Unified.PNFSourceBoundaryTOEExact
 --
--- C. Construction.
--- Expose one typed non-promotion boundary.
--- Keep every imported object at its native type.
--- Do not identify objects because labels share words such as check, web, or
--- cobweb.
---
--- S. Safety invariants.
--- A diagnostic check does not promote a theorem.
--- A form-constant name does not create a universal-symbol theorem.
--- A fungal-network metaphor does not create internet or brain identity.
--- A web-publication identifier is bibliographic metadata.
--- Source coordinates do not create proof authority.
---
--- L. Lane.
--- This owner is a Unified normalization lane only.
--- It does not edit ESD surfaces.
---
--- P. Preconditions and postconditions.
--- Preconditions: all imported exact owners exist and remain canonical.
--- Postconditions: TOE consumers can reach the exact non-promotion facts
--- without semantic promotion or duplicate algebraic carriers.
---
--- G. Governance.
--- Existing attribution stays with original theorem and repository owners.
--- Standards remain control lenses only.
---
--- F. Verification.
--- Read back all imported owners.
--- Check exact aliases.
--- Reject trust escapes.
--- Check the TOE root and Unifier imports.
+-- This module adds only the capsule ZKP/process receipt and the existing
+-- meta-introspector attribution coordinate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
 
-import DASHI.Physics.Closure.GluingOperatorLinearityProxyHarnessResult as Gluing
-import DASHI.Physics.Closure.YMFiniteSelfAdjointHamiltonianProxyHarnessResult as SelfAdjoint
-import DASHI.Physics.Closure.YMHamiltonianDominationProxyHarnessResult as Domination
-import DASHI.Biology.KluverFormConstantPsychedelicBoundaryExact as Kluver
-import DASHI.Biology.Levin.FungalNetworkAgencyBoundary as Fungal
-import DASHI.Biology.PsychogeographyYijingSourceAtlas as Psychogeography
+import DASHI.Unified.PNFSourceBoundaryTOEExact as Boundary
 import DASHI.Interop.DistributedEpistemicFabricSourceAtlasExact as Fabric
 
 ------------------------------------------------------------------------
--- Exact reused non-promotion boundary.
+-- Compatibility aliases.
+--
+-- No duplicate theorem logic is defined here.
 ------------------------------------------------------------------------
 
-record PNFDistilledNonPromotionBoundary : Set₁ where
-  constructor pnf-distilled-non-promotion-boundary
-  field
-    gluingDiagnosticPromotionIsFalse :
-      Gluing.promotion ≡ false
-
-    gluingTerminalPromotionIsFalse :
-      Gluing.terminalPromotion ≡ false
-
-    selfAdjointDiagnosticPromotionIsFalse :
-      SelfAdjoint.promotion ≡ false
-
-    selfAdjointTerminalPromotionIsFalse :
-      SelfAdjoint.terminalPromotion ≡ false
-
-    dominationDiagnosticPromotionIsFalse :
-      Domination.promotion ≡ false
-
-    dominationTerminalPromotionIsFalse :
-      Domination.terminalPromotion ≡ false
-
-    formConstantDoesNotCreateUniversalSymbol :
-      Kluver.FormConstantPromotesUniversalSymbol →
-      ⊥
-
-    formConstantDoesNotCreateRecoveredMemory :
-      Kluver.FormConstantPromotesRecoveredMemory →
-      ⊥
-
-    fungalWoodWebNeedsSpeciesEvidence :
-      Fungal.FungalNetworkAgencyBoundary.forestWideWoodWebClaimsNeedSpeciesSpecificEvidence
-        Fungal.canonicalFungalNetworkAgencyBoundary
-      ≡ true
-
-    fungalMyceliumIsNotInternetOrBrainByDefinition :
-      Fungal.FungalNetworkAgencyBoundary.myceliumNotInternetOrBrainByDefinition
-        Fungal.canonicalFungalNetworkAgencyBoundary
-      ≡ true
-
-    webPublicationIdentifierCoordinate :
-      Psychogeography.IdentifierKind
-
-    webPublicationIdentifierCoordinateIsCanonical :
-      webPublicationIdentifierCoordinate
-      ≡ Psychogeography.webPublicationIdentifier
-
-    metaIntrospectorAttributionRule :
-      String
-
-    metaIntrospectorAttributionRuleIsCanonical :
-      metaIntrospectorAttributionRule
-      ≡ Fabric.attributionRule
-
-open PNFDistilledNonPromotionBoundary public
+PNFDistilledNonPromotionBoundary : Set₁
+PNFDistilledNonPromotionBoundary =
+  Boundary.PNFSourceBoundaryTOEReceipt
 
 canonicalPNFDistilledNonPromotionBoundary :
   PNFDistilledNonPromotionBoundary
 canonicalPNFDistilledNonPromotionBoundary =
-  pnf-distilled-non-promotion-boundary
-    Gluing.promotion_is_false
-    Gluing.terminalPromotionIsFalse
-    SelfAdjoint.promotion_is_false
-    SelfAdjoint.terminalPromotionIsFalse
-    Domination.promotion_is_false
-    Domination.terminalPromotionIsFalse
-    Kluver.formConstantDoesNotPromoteUniversalSymbol
-    Kluver.formConstantDoesNotPromoteRecoveredMemory
-    refl
-    refl
-    Psychogeography.webPublicationIdentifier
-    refl
-    Fabric.attributionRule
-    refl
+  Boundary.canonicalPNFSourceBoundaryTOEReceipt
 
-------------------------------------------------------------------------
--- Native typed coordinates from the capsule.
---
--- These aliases preserve type boundaries.
--- They do not assert cross-domain semantic identity.
-------------------------------------------------------------------------
-
-toeKluverCobwebFormConstant :
-  Kluver.FormConstant
 toeKluverCobwebFormConstant =
-  Kluver.cobweb
+  Boundary.kluverCobwebForm
 
-toePsychogeographyWebPublicationIdentifier :
-  Psychogeography.IdentifierKind
 toePsychogeographyWebPublicationIdentifier =
-  Psychogeography.webPublicationIdentifier
+  Boundary.psychogeographyWebIdentifierKind
 
-toeFungalNetworkAgencyBoundary :
-  Fungal.FungalNetworkAgencyBoundary
-toeFungalNetworkAgencyBoundary =
-  Fungal.canonicalFungalNetworkAgencyBoundary
+toeFungalNetworkClaimsRequireSpeciesEvidence =
+  Boundary.fungalNetworkClaimsRequireSpeciesEvidence
+
+metaIntrospectorAttributionRule : String
+metaIntrospectorAttributionRule =
+  Fabric.attributionRule
 
 ------------------------------------------------------------------------
--- ZKP process receipt.
+-- ZKP O/R/C/S/L/P/G/F process receipt.
+--
+-- This receipt is governance metadata.
+-- It does not create mathematical or source authority.
 ------------------------------------------------------------------------
 
 record PNFDistilledReuseZKPReceipt : Set₁ where
@@ -200,42 +89,34 @@ canonicalPNFDistilledReuseZKPReceipt :
   PNFDistilledReuseZKPReceipt
 canonicalPNFDistilledReuseZKPReceipt =
   pnf-distilled-reuse-zkp-receipt
-    ( "Normalize the supplied PNF reuse capsule onto exact in-repo owners."
+    ( "Normalize the PNF-distilled capsule onto the canonical PNF source boundary."
     ∷ [] )
-    ( "DASHI.Physics.Closure.GluingOperatorLinearityProxyHarnessResult"
-    ∷ "DASHI.Physics.Closure.YMFiniteSelfAdjointHamiltonianProxyHarnessResult"
-    ∷ "DASHI.Physics.Closure.YMHamiltonianDominationProxyHarnessResult"
-    ∷ "DASHI.Biology.KluverFormConstantPsychedelicBoundaryExact"
-    ∷ "DASHI.Biology.Levin.FungalNetworkAgencyBoundary"
-    ∷ "DASHI.Biology.PsychogeographyYijingSourceAtlas"
+    ( "DASHI.Unified.PNFSourceBoundaryTOEExact"
     ∷ "DASHI.Interop.DistributedEpistemicFabricSourceAtlasExact"
     ∷ [] )
-    ( "Reuse exact proof terms."
-    ∷ "Keep imported coordinates at native types."
-    ∷ "Expose one Unified non-promotion boundary."
+    ( "Reuse the canonical PNF source-boundary receipt."
+    ∷ "Add process metadata only."
     ∷ [] )
-    ( "Diagnostic checks do not promote theorems."
-    ∷ "Shared words do not create semantic identity."
-    ∷ "Fungal network metaphors remain bounded by species-specific evidence."
+    ( "Shared words do not create semantic identity."
+    ∷ "Diagnostic checks do not create theorem promotion."
     ∷ "Bibliographic identifiers do not create proof authority."
-    ∷ "Source attribution remains separate from DASHI theorem ownership."
+    ∷ "Meta-introspector attribution remains source attribution."
     ∷ [] )
-    ( "One disjoint Unified PNF normalization lane."
+    ( "One compatibility and governance lane."
     ∷ "ESD surfaces remain read-only."
     ∷ [] )
-    ( "Every reused exact owner exists."
+    ( "The canonical PNF source-boundary owner exists."
     ∷ "No lexical match is treated as a theorem join."
-    ∷ "Original proof ownership remains unchanged."
     ∷ [] )
-    ( "The focused TOE root imports this bridge."
-    ∷ "DASHI.Unifier exposes the same canonical boundary."
-    ∷ "No diagnostic receipt gains theorem promotion."
+    ( "The focused TOE root reaches the canonical PNF source boundary."
+    ∷ "DASHI.Unifier reaches the same canonical receipt."
+    ∷ "The distilled facade contains no duplicate theorem logic."
     ∷ [] )
     ( "ITIL, ISO, NIST AI RMF, Six Sigma, C4, PlantUML, and ASD-STE100 remain process or presentation lenses."
-    ∷ "Meta-introspector repositories retain source attribution."
+    ∷ "Original theorem owners and meta-introspector sources retain attribution."
     ∷ [] )
-    ( "Run repository related/discover/lineage checks."
-    ∷ "Run structural preflight on this bridge and TOE roots."
+    ( "Run repository related, discover, and lineage checks."
+    ∷ "Run structural preflight on the canonical boundary and validation."
     ∷ "Reject trust escapes."
     ∷ "Reject ESD path changes."
     ∷ "Kernel-check only on an exact-head receipt."
