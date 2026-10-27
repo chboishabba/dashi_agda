@@ -381,6 +381,8 @@ unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
 
 
+import DASHI.Law.SensibLawITIRParityEverything as LegalGovernance
+
 ------------------------------------------------------------------------
 -- Canonical legal-governance, Fleet motif, and evidence handoff.
 ------------------------------------------------------------------------
@@ -453,3 +455,31 @@ unifiedEvidenceDoesNotCreateDigitalESDAdmission :
   SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
 unifiedEvidenceDoesNotCreateDigitalESDAdmission =
   SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
+
+------------------------------------------------------------------------
+-- Exact legal/compliance non-promotion projection.
+------------------------------------------------------------------------
+
+unifiedLegalReviewDoesNotCreateClaimTruth =
+  LegalGovernance.selectedLegalReviewDoesNotCreateClaimTruth
+
+unifiedQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernance.selectedQualificationDoesNotAutomaticallyProveForensicCompliance
+
+unifiedReportAdmissionDoesNotRepairMissingInput =
+  LegalGovernance.selectedReportAdmissionDoesNotRepairMissingInput
+
+unifiedOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalGovernance.selectedOfficialLegalSurfaceDoesNotRecoverFineState
+
+unifiedOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalGovernance.selectedOfficialActionDoesNotRecoverAutonomyAndAuthority
+
+unifiedLegalityAloneDoesNotCreateLegitimacy =
+  LegalGovernance.selectedLegalityAloneDoesNotCreateLegitimacy
+
+unifiedMissingAdmissibilityStillAbstains =
+  LegalGovernance.selectedMissingAdmissibilityStillAbstains
+
+unifiedMissingValidationStillAbstains =
+  LegalGovernance.selectedMissingValidationStillAbstains
