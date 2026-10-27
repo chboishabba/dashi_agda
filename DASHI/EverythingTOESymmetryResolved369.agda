@@ -19,6 +19,8 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Unified.GRQuantumProofTermRegression
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
+import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound578Exact as YMCritical
+import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound578Validation
 
 
 
@@ -238,6 +240,57 @@ toe369YangMillsGoal1ClayCompletionNotClaimed :
   YMTOE.toeGoal1ClayCompletionClaimed ≡ false
 toe369YangMillsGoal1ClayCompletionNotClaimed = refl
 
+
+
+------------------------------------------------------------------------
+-- Current R578 Yang-Mills critical-path overlay.
+-- R559 remains the canonical TOE owner.
+-- R578 supplies the current shortest-source frontier.
+------------------------------------------------------------------------
+
+toe369YangMillsCurrentT1FiniteOSLevel : ProofLevel
+toe369YangMillsCurrentT1FiniteOSLevel =
+  YMCritical.criticalLevel YMCritical.t1FiniteOSSameFamily
+
+toe369YangMillsCurrentT5LiteralMomentProducerLevel : ProofLevel
+toe369YangMillsCurrentT5LiteralMomentProducerLevel =
+  YMCritical.t5LiteralMomentProducerLevel
+
+toe369YangMillsCurrentB1PointwiseWilsonLocalizationLevel : ProofLevel
+toe369YangMillsCurrentB1PointwiseWilsonLocalizationLevel =
+  YMCritical.b1PointwiseWilsonJetLocalizationLevel
+
+toe369YangMillsCurrentB1ConnectingWeightTailLevel : ProofLevel
+toe369YangMillsCurrentB1ConnectingWeightTailLevel =
+  YMCritical.b1ConnectingWeightTailLevel
+
+toe369YangMillsCurrentB2SameHamiltonianTransferLevel : ProofLevel
+toe369YangMillsCurrentB2SameHamiltonianTransferLevel =
+  YMCritical.b2TransferCoordinateOfReconstructedHamiltonianLevel
+
+toe369YangMillsCurrentG1QuantitativeBoundsLevel : ProofLevel
+toe369YangMillsCurrentG1QuantitativeBoundsLevel =
+  YMCritical.g1ActualQuantitativeBoundsLevel
+
+toe369YangMillsCurrentH6WardKernelLevel : ProofLevel
+toe369YangMillsCurrentH6WardKernelLevel =
+  YMCritical.h6SameFamilyWardKernelLevel
+
+toe369YangMillsCurrentCriticalPathCompilerLevel : ProofLevel
+toe369YangMillsCurrentCriticalPathCompilerLevel =
+  YMCritical.round578CriticalPathCompilerLevel
+
+toe369YangMillsCurrentArbitraryObservableDetourRequired :
+  YMCritical.arbitraryObservableRepresentationRequired ≡ false
+toe369YangMillsCurrentArbitraryObservableDetourRequired = refl
+
+toe369YangMillsCurrentFiniteHamiltonianMoscoDetourRequired :
+  YMCritical.finiteHamiltonianMoscoRouteRequired ≡ false
+toe369YangMillsCurrentFiniteHamiltonianMoscoDetourRequired = refl
+
+toe369YangMillsCurrentSU2ToGenericPromotionRequired :
+  YMCritical.su2ToGenericPromotionRequired ≡ false
+toe369YangMillsCurrentSU2ToGenericPromotionRequired = refl
 
 ------------------------------------------------------------------------
 -- Canonical R546/R558 family dispatch via R559.
