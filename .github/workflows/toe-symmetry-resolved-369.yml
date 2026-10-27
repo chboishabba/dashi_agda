@@ -21,6 +21,8 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda'
+      - 'DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/**'
@@ -44,6 +46,8 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda'
+      - 'DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
@@ -128,6 +132,11 @@ jobs:
           dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutExact.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda --root .
+          dashi-repo related physicalClosureRound6CutsetInhabitantsLevel --root . --limit 20
+          dashi-repo related gate4ObligationCount --root . --limit 20
+          dashi-repo discover 'Yang Mills Gate 4 58 unresolved cutset CMP109 Bishop Federbush background gauge Hessian polymer' --root . --limit 50
           dashi-repo related scaleTransferPromotionEliminator --root . --limit 20
           dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
           dashi-repo discover 'Balaban R559 same owner direct scale transfer non-promotion TOE max cut' --root . --limit 50
@@ -171,6 +180,8 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutExact.agda
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
+            DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
+            DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
             DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda
@@ -198,6 +209,8 @@ jobs:
             DASHI/Unified/BalabanR559TOEMaxCutExact.agda
             DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
+            DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
+            DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
