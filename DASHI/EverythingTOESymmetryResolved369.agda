@@ -82,26 +82,6 @@ toeBalabanRGClayPromotionStillFalse :
 toeBalabanRGClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
-toeBalabanContinuumLimitReceipt :
-  BalabanRGTOE.BalabanContinuumLimitReceipt
-toeBalabanContinuumLimitReceipt =
-  BalabanRGTOE.balabanContinuumLimitReceipt
-
-toeBalabanContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-toeBalabanContinuumLimitPromotionImpossible =
-  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
-
-toeDepthContinuumLimitReceipt :
-  BalabanRGTOE.DepthContinuumLimitReceipt
-toeDepthContinuumLimitReceipt =
-  BalabanRGTOE.depthContinuumLimitReceipt
-
-toeDepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-toeDepthContinuumLimitPromotionImpossible =
-  BalabanRGTOE.depthContinuumLimitPromotionImpossible
-
 toeBalabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
 toeBalabanRGZKPFrame =
   BalabanRGTOE.canonicalBalabanTOEZKPFrame
@@ -1077,3 +1057,77 @@ toeBalabanOSWightmanStillBlocked :
 toeBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Governed legal-workflow convergence.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+toeGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+toeGovernedLegalWorkflowZKPReceipt :
+  LegalGovernance.GovernedLegalWorkflowZKPReceipt
+toeGovernedLegalWorkflowZKPReceipt =
+  LegalGovernance.canonicalGovernedLegalWorkflowZKPReceipt
+
+toeWorkflowTaskCompletionDoesNotCreateTruth :
+  LegalGovernance.TaskCompletionCreatesTruth → ⊥
+toeWorkflowTaskCompletionDoesNotCreateTruth =
+  LegalGovernance.toeTaskCompletionDoesNotCreateTruth
+
+toeDatabaseCommitDoesNotCreateSemanticAuthority :
+  LegalGovernance.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeDatabaseCommitDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+toeAcceptedReviewDoesNotPayApplicability :
+  LegalGovernance.AcceptedStatusPaysApplicability → ⊥
+toeAcceptedReviewDoesNotPayApplicability =
+  LegalGovernance.toeAcceptedReviewDoesNotPayApplicability
+
+toeCitationAloneDoesNotRealiseLegalRule :
+  LegalGovernance.CitationAloneRealisesLegalRule → ⊥
+toeCitationAloneDoesNotRealiseLegalRule =
+  LegalGovernance.toeCitationAloneDoesNotRealiseLegalRule
+
+toeSemanticMeetDoesNotProveLegalApplicability :
+  LegalGovernance.SemanticMeetAloneProvesLegalApplicability → ⊥
+toeSemanticMeetDoesNotProveLegalApplicability =
+  LegalGovernance.toeSemanticMeetDoesNotProveLegalApplicability
+
+toeSemanticPromotionTruthAuthorityClosed :
+  LegalGovernance.SemanticPromotionTruthAuthorityClosed
+toeSemanticPromotionTruthAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
+
+toeSemanticPromotionLegalAuthorityClosed :
+  LegalGovernance.SemanticPromotionLegalAuthorityClosed
+toeSemanticPromotionLegalAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
+
+toeLegalCandidateSourceDoesNotCloseAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+toeLegalCandidateSourceDoesNotCloseAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+
+toeCurrentValidityDoesNotEstablishApplicability :
+  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
+toeCurrentValidityDoesNotEstablishApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+toeExactReuseDoesNotCreateSemanticAdmission :
+  LegalGovernance.ExactReuseCreatesSemanticAdmission → ⊥
+toeExactReuseDoesNotCreateSemanticAdmission =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAdmission
+
+toeExactReuseDoesNotCreateSemanticAuthority :
+  LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
+toeExactReuseDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
+
+toeExactReuseDoesNotCreateClaimTruth :
+  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
+toeExactReuseDoesNotCreateClaimTruth =
+  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
