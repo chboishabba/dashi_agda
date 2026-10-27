@@ -680,3 +680,18 @@ unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
 unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
 unifierYangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+------------------------------------------------------------------------
+-- Direct constructive non-promotion theorem from the existing RG owner.
+-- Preconditions: a proposed scale-transfer promotion token.
+-- Invariant: the current Balaban frontier supplies no such token.
+-- Postcondition: any proposed token yields a contradiction.
+-- This does not assert that continuum RG construction is impossible.
+------------------------------------------------------------------------
+
+import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
+
+
+unifierBalabanScaleTransferNonPromotion :
+  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferNonPromotion = RGNonPromotion.balabanRGScaleTransferPromotionImpossibleHere
