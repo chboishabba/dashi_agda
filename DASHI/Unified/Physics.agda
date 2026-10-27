@@ -301,7 +301,7 @@ yangMillsBalabanGoal1CLiteralSourceInstantiationLevel =
   BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
 
 yangMillsBalabanLevel2ClayPromotionStillFalse :
-  BalabanRGTOE.SameFamilyRecovery.clayPromotion ≡ false
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
 yangMillsBalabanLevel2ClayPromotionStillFalse =
   BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
 
