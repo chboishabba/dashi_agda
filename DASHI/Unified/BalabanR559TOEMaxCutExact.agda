@@ -64,6 +64,7 @@ import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6Ledger as Gate4Ledger
 import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
 
 ------------------------------------------------------------------------
@@ -170,6 +171,10 @@ gate4CutsetInhabitantsLevel : ProofLevel
 gate4CutsetInhabitantsLevel =
   Gate4.physicalClosureRound6CutsetInhabitantsLevel
 
+gate4PaidReductionLedgerLevel : ProofLevel
+gate4PaidReductionLedgerLevel =
+  Gate4Ledger.physicalClosureRound6LedgerLevel
+
 ------------------------------------------------------------------------
 -- Joint normalized receipt.
 ------------------------------------------------------------------------
@@ -219,6 +224,7 @@ record BalabanR559TOEMaxCutReceipt : Set where
       gate4UnresolvedCount ≡ 58
     gate4DefinitionLevel : ProofLevel
     gate4InhabitantsLevel : ProofLevel
+    gate4PaidReductionLevel : ProofLevel
 
     publishedContinuumPromotion : Bool
     publishedContinuumPromotionIsFalse :
@@ -299,6 +305,8 @@ canonicalBalabanR559TOEMaxCutReceipt = record
       gate4CutsetDefinitionLevel
   ; gate4InhabitantsLevel =
       gate4CutsetInhabitantsLevel
+  ; gate4PaidReductionLevel =
+      gate4PaidReductionLedgerLevel
   ; publishedContinuumPromotion =
       R559.toeFlat4DContinuumTransferProvedHere
   ; publishedContinuumPromotionIsFalse =
