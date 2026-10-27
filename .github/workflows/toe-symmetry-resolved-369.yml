@@ -39,6 +39,16 @@ on:
       - 'DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda'
       - 'DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda'
       - 'tests/test_scale_evidence_review_toe_convergence.py'
+      - 'DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda'
+      - 'DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'tests/test_governance_balaban_ibrahim_58gap_toe.py'
+      - 'Docs/diagrams/governance_balaban_ibrahim_58gap_toe.puml'
+      - 'DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda'
+      - 'DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'tests/test_governance_balaban_ibrahim_58gap_toe.py'
+      - 'Docs/diagrams/governance_balaban_ibrahim_58gap_toe.puml'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
     paths:
@@ -146,6 +156,12 @@ jobs:
           dashi-repo discover 'SCALE evidence review replay projection commit economy REL INV GOV Mabo Ibrahim source independence non promotion TOE' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLawScale1 --root .
           dashi-repo lineage --prefix DASHI.Unified.SCALEEvidenceReviewTOE --root .
+          dashi-repo diagnose DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda --root .
+          dashi-repo related canonicalGovernanceBalabanIbrahim58GapTOEReceipt --root . --limit 20
+          dashi-repo related gate4ObligationCount --root . --limit 20
+          dashi-repo discover 'Gate 4 58 cutset Balaban Ibrahim Pareto snowball legal governance non promotion TOE' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanClayGate4 --root .
+          dashi-repo lineage --prefix DASHI.Wikimedia.Ibrahim --root .
 
       - name: Verify governed legal-workflow convergence
         run: python -m pytest -q tests/test_governed_legal_workflow_toe_convergence.py
@@ -155,6 +171,9 @@ jobs:
 
       - name: Verify SCALE evidence-review convergence
         run: python -m pytest -q tests/test_scale_evidence_review_toe_convergence.py
+
+      - name: Verify governance Balaban Ibrahim 58-gap convergence
+        run: python -m pytest -q tests/test_governance_balaban_ibrahim_58gap_toe.py
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -181,6 +200,9 @@ jobs:
             DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
             DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda
             DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
@@ -190,6 +212,12 @@ jobs:
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
             DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda
 
       - name: Reject ESD surface changes
         shell: bash
