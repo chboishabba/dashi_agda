@@ -7,7 +7,7 @@ import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
 import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 ------------------------------------------------------------------------
