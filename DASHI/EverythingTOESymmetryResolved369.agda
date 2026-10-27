@@ -5,7 +5,7 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false)
 open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
@@ -81,6 +81,27 @@ toeBalabanRGClayPromotionStillFalse :
   BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
 toeBalabanRGClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
+
+
+toeBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+toeBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
+
+toeBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+toeBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+toeDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+toeDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
+
+toeDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+toeDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
 
 toeBalabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
 toeBalabanRGZKPFrame =
@@ -645,6 +666,40 @@ toeFleetFormalGapTargetReceipt :
   FleetGapTOE.FleetFormalGapTargetReceipt
 toeFleetFormalGapTargetReceipt =
   FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+
+toeFleetDischargedCoreKnowledgeFibres : ℕ
+toeFleetDischargedCoreKnowledgeFibres =
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetDischargedCoreKnowledgeFibresIs584 :
+  toeFleetDischargedCoreKnowledgeFibres ≡ 584
+toeFleetDischargedCoreKnowledgeFibresIs584 = refl
+
+toeFleetPolarityContradictionGaps : ℕ
+toeFleetPolarityContradictionGaps =
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetPolarityContradictionGapsIs44 :
+  toeFleetPolarityContradictionGaps ≡ 44
+toeFleetPolarityContradictionGapsIs44 = refl
+
+toeFleetUnformalisedFormalGaps : ℕ
+toeFleetUnformalisedFormalGaps =
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetUnformalisedFormalGapsIs58 :
+  toeFleetUnformalisedFormalGaps ≡ 58
+toeFleetUnformalisedFormalGapsIs58 = refl
+
+toeFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+toeFleetTargetsOnlyUnformalisedFormalGaps = refl
 
 toeFleetCoordinateRebuildabilityReceipt =
   FleetGapTOE.fleetCoordinateRebuildabilityReceipt
