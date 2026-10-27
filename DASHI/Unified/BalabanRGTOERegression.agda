@@ -27,6 +27,12 @@ import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityE
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as GeneratedDensity
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as StressScale
 import DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact as BetaFloor
+import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as CombinedAction
+import DASHI.Physics.YangMills.BalabanPublishedFlowToRegularEProjectionRound241Exact as PublishedRegularE
+import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as RegularEPredicate
+import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exact as RegularEDecoder
+import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as PublishedRG
+import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as ContinuumBoundary
 import DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact as DensityDictionary
 import DASHI.Physics.YangMills.BalabanDensityToLiteralFiniteMeasureRound124Exact as Measure
 import DASHI.Physics.YangMills.BalabanLiteralFiniteMeasureStressLaneRound125Exact as MeasureStress
@@ -116,6 +122,50 @@ balabanCompleteDensityPhysicalProjectionBoundsLevel : ProofLevel
 balabanCompleteDensityPhysicalProjectionBoundsLevel =
   DensityDictionary.cmp119Section2PhysicalProjectionBoundsLevel
 
+balabanGeneratedActionDensityCompilerLevel : ProofLevel
+balabanGeneratedActionDensityCompilerLevel =
+  GeneratedDensity.unifiedGeneratedActionDensityCompilerLevel
+
+balabanLiteralGeneratedActionDensityLevel : ProofLevel
+balabanLiteralGeneratedActionDensityLevel =
+  GeneratedDensity.literalUnifiedGeneratedActionDensityLevel
+
+balabanCombinedRGEffectiveActionCompilerLevel : ProofLevel
+balabanCombinedRGEffectiveActionCompilerLevel =
+  CombinedAction.completeDensityEffectiveActionRealizationCompilerLevel
+
+balabanLiteralCombinedRGEffectiveActionLevel : ProofLevel
+balabanLiteralCombinedRGEffectiveActionLevel =
+  CombinedAction.literalCompleteDensityEffectiveActionRealizationLevel
+
+balabanGeneratedActionStressScaleCompilerLevel : ProofLevel
+balabanGeneratedActionStressScaleCompilerLevel =
+  StressScale.unifiedGeneratedActionStressScaleCompilerLevel
+
+balabanLiteralGeneratedActionStressScaleLevel : ProofLevel
+balabanLiteralGeneratedActionStressScaleLevel =
+  StressScale.literalUnifiedGeneratedActionStressScaleLevel
+
+balabanPublishedFlowRegularEProjectionCompilerLevel : ProofLevel
+balabanPublishedFlowRegularEProjectionCompilerLevel =
+  PublishedRegularE.publishedFlowToRegularEProjectionCompilerLevel
+
+balabanRegularESection2PredicateCompilerLevel : ProofLevel
+balabanRegularESection2PredicateCompilerLevel =
+  RegularEPredicate.regularESection2PredicateCompilerLevel
+
+balabanConcreteRegularELocalizationWitnessLevel : ProofLevel
+balabanConcreteRegularELocalizationWitnessLevel =
+  RegularEDecoder.literalCMP122Theorem1OnConcreteELocalizationPredicateLevel
+
+balabanPublishedNonlinearRGCoreLevel : ProofLevel
+balabanPublishedNonlinearRGCoreLevel =
+  PublishedRG.publishedFourDimensionalNonlinearRGCoreLevel
+
+balabanPublishedRGPhysicalSameObjectLevel : ProofLevel
+balabanPublishedRGPhysicalSameObjectLevel =
+  PublishedRG.literalPhysicalStateToPublishedRGCarrierLevel
+
 balabanScaleDensityFiniteMeasureWeldLevel : ProofLevel
 balabanScaleDensityFiniteMeasureWeldLevel =
   Measure.balabanDensityLiteralFiniteMeasureCompilerLevel
@@ -195,6 +245,42 @@ balabanStressHilbertPhysicalShellLevel =
 ------------------------------------------------------------------------
 -- Exact fail-closed RG and continuum boundaries.
 ------------------------------------------------------------------------
+
+balabanPublishedRGContinuumTransferOpenFlag : Bool
+balabanPublishedRGContinuumTransferOpenFlag =
+  ContinuumBoundary.flat4DContinuumTransferProvedHere
+
+balabanPublishedRGContinuumTransferStillOpen :
+  balabanPublishedRGContinuumTransferOpenFlag ≡ false
+balabanPublishedRGContinuumTransferStillOpen =
+  ContinuumBoundary.flat4DContinuumTransferProvedHereIsFalse
+
+balabanOSWightmanContinuumConstructionOpenFlag : Bool
+balabanOSWightmanContinuumConstructionOpenFlag =
+  ContinuumBoundary.osWightmanContinuumConstructionProvedHere
+
+balabanOSWightmanContinuumConstructionStillOpen :
+  balabanOSWightmanContinuumConstructionOpenFlag ≡ false
+balabanOSWightmanContinuumConstructionStillOpen =
+  ContinuumBoundary.osWightmanContinuumConstructionProvedHereIsFalse
+
+balabanContinuumRouteMassGapPromotionOpenFlag : Bool
+balabanContinuumRouteMassGapPromotionOpenFlag =
+  ContinuumBoundary.continuumMassGapPromoted
+
+balabanContinuumRouteMassGapPromotionStillOpen :
+  balabanContinuumRouteMassGapPromotionOpenFlag ≡ false
+balabanContinuumRouteMassGapPromotionStillOpen =
+  ContinuumBoundary.continuumMassGapPromotedIsFalse
+
+balabanTerminalPromotionOpenFlag : Bool
+balabanTerminalPromotionOpenFlag =
+  ContinuumBoundary.terminalPromotion
+
+balabanTerminalPromotionStillOpen :
+  balabanTerminalPromotionOpenFlag ≡ false
+balabanTerminalPromotionStillOpen =
+  ContinuumBoundary.terminalPromotionIsFalse
 
 balabanRGBlockSpinTransferOpenFlag : Bool
 balabanRGBlockSpinTransferOpenFlag =
@@ -283,12 +369,18 @@ record BalabanRGTOEReceipt : Set where
     completeDensityDerivedSummary : ProofLevel
     completeDensityPhysicalProjectionBounds : ProofLevel
     scaleDensityFiniteMeasureWeld : ProofLevel
+    generatedActionDensityCompiler : ProofLevel
+    combinedRGEffectiveActionCompiler : ProofLevel
+    generatedActionStressScaleCompiler : ProofLevel
     scaleDensityStressCompiler : ProofLevel
     densityAnchoredStressLaneCompiler : ProofLevel
     literalDensityAnchoredStressLaneInstantiation : ProofLevel
 
+    publishedFlowRegularEProjectionCompiler : ProofLevel
     regularELocalizationSource : ProofLevel
     regularELocalizationCarrier : ProofLevel
+    regularESection2PredicateCompiler : ProofLevel
+    concreteRegularELocalizationWitness : ProofLevel
     regularEContinuationCompiler : ProofLevel
 
     haarCasimirCoefficient : ProofLevel
@@ -299,6 +391,13 @@ record BalabanRGTOEReceipt : Set where
 
     stressMarkedShellReuse : ProofLevel
     stressPairingPhysicalWeld : ProofLevel
+
+    publishedNonlinearRGCore : ProofLevel
+    publishedRGPhysicalSameObject : ProofLevel
+
+    publishedRGContinuumTransferProved : Bool
+    publishedRGContinuumTransferProvedIsFalse :
+      publishedRGContinuumTransferProved ≡ false
 
     blockSpinTransferProved : Bool
     blockSpinTransferProvedIsFalse :
@@ -331,16 +430,28 @@ canonicalBalabanRGTOEReceipt =
         balabanCompleteDensityPhysicalProjectionBoundsLevel
     ; scaleDensityFiniteMeasureWeld =
         balabanScaleDensityFiniteMeasureWeldLevel
+    ; generatedActionDensityCompiler =
+        balabanGeneratedActionDensityCompilerLevel
+    ; combinedRGEffectiveActionCompiler =
+        balabanCombinedRGEffectiveActionCompilerLevel
+    ; generatedActionStressScaleCompiler =
+        balabanGeneratedActionStressScaleCompilerLevel
     ; scaleDensityStressCompiler =
         balabanScaleDensityStressLaneCompilerLevel
     ; densityAnchoredStressLaneCompiler =
         balabanDensityAnchoredStressLaneCompilerLevel
     ; literalDensityAnchoredStressLaneInstantiation =
         balabanLiteralDensityAnchoredStressLaneInstantiationLevel
+    ; publishedFlowRegularEProjectionCompiler =
+        balabanPublishedFlowRegularEProjectionCompilerLevel
     ; regularELocalizationSource =
         balabanRegularELocalizationSourceLevel
     ; regularELocalizationCarrier =
         balabanRegularELocalizationCarrierLevel
+    ; regularESection2PredicateCompiler =
+        balabanRegularESection2PredicateCompilerLevel
+    ; concreteRegularELocalizationWitness =
+        balabanConcreteRegularELocalizationWitnessLevel
     ; regularEContinuationCompiler =
         balabanRegularEContinuationCompilerLevel
     ; haarCasimirCoefficient =
@@ -357,6 +468,14 @@ canonicalBalabanRGTOEReceipt =
         balabanStressMarkedShellReuseLevel
     ; stressPairingPhysicalWeld =
         balabanStressPairingPhysicalWeldLevel
+    ; publishedNonlinearRGCore =
+        balabanPublishedNonlinearRGCoreLevel
+    ; publishedRGPhysicalSameObject =
+        balabanPublishedRGPhysicalSameObjectLevel
+    ; publishedRGContinuumTransferProved =
+        balabanPublishedRGContinuumTransferOpenFlag
+    ; publishedRGContinuumTransferProvedIsFalse =
+        balabanPublishedRGContinuumTransferStillOpen
     ; blockSpinTransferProved =
         RGFrontier.balabanBlockSpinTransferProved
           RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
@@ -420,7 +539,7 @@ canonicalBalabanTOEZKPFrame =
     ; P-proposal =
         "Use the strict scale-transfer frontier as authority. Keep the legacy RG lane as a source-intake facade."
     ; G-governance =
-        "Fail closed. Preserve source authorship. Separate machine-checked compiler facts from conditional physical welds and continuum claims."
+        "Fail closed. Preserve source authorship. Use ITIL change control, ISO 9000 evidence identity, ISO/IEC 42001 and 23894 claim limits, ISO/IEC 27001 and 27701 repository boundaries, NIST AI RMF risk gates, ISO 9241 clarity, Six Sigma deterministic checks, and C4/PlantUML import-graph discipline. This is process mapping, not standards certification."
     ; F-gap =
         "Open producers are nonperturbative block-spin transfer, uniform KP absorption, continuum construction, and mass-gap promotion."
     ; preconditions =
