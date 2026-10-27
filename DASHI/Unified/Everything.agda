@@ -1,4 +1,6 @@
 module DASHI.Unified.Everything where
+-- Reuse source-typed finite Sonic Warfare witness; no external promotion.
+import DASHI.Culture.GoodmanSonicWarfareExact as GoodmanSonicWarfare
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
