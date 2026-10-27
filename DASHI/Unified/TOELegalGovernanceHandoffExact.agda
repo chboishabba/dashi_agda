@@ -113,6 +113,9 @@ record ZKPTOELegalGovernanceHandoff : Set₁ where
         claimAuditBoundary
       ≡ false
 
+    actionstepOperationalReferenceFound : Bool
+    actionstepOperationalReferenceFoundIsTrue :
+      actionstepOperationalReferenceFound ≡ true
     actionstepSpecificOwnerResolved : Bool
     actionstepSpecificOwnerResolvedIsFalse :
       actionstepSpecificOwnerResolved ≡ false
@@ -131,6 +134,7 @@ canonicalZKPTOELegalGovernanceHandoff =
     ∷ "DASHI.Law.SensibLawITIRParityEverything"
     ∷ "DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact"
     ∷ "DASHI.Reasoning.ClaimAuditManifestExact"
+    ∷ "chboishabba/ITIR-suite scripts/run_tranche_convergence.py at 96d4611d: Actionstep appears as an operational convergence instruction only"
     ∷ [] )
     ( "Typed structural evidence must exist before semantic promotion."
     ∷ "The legal runtime contract must remain the canonical Agda-first owner."
@@ -145,7 +149,8 @@ canonicalZKPTOELegalGovernanceHandoff =
     ∷ "Audit maturity is not truth status."
     ∷ "Partial obligation coverage is not whole-claim support."
     ∷ [] )
-    ( "No Actionstep-specific owner was found by repository search, so no Actionstep equivalence or authority claim is introduced."
+    ( "Actionstep is referenced by the ITIR-suite convergence runner, but no typed Actionstep contract was found by repository search."
+    ∷ "No Actionstep equivalence or authority claim is introduced."
     ∷ "No ESD surface is edited or used as an ownership source."
     ∷ "No cross-domain analogy upgrades legal authority."
     ∷ [] )
@@ -164,6 +169,8 @@ canonicalZKPTOELegalGovernanceHandoff =
       Network.canonicalGovernedLegalNetworkBoundary
     refl
     refl
+    refl
+    true
     refl
     false
     refl
