@@ -38,3 +38,7 @@ toeBalabanRGClayPromotionStillFalse =
 toeBalabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
 toeBalabanRGZKPFrame =
   BalabanRGTOE.canonicalBalabanTOEZKPFrame
+
+toeBalabanRGReceipt : BalabanRGTOE.BalabanRGTOEReceipt
+toeBalabanRGReceipt =
+  BalabanRGTOE.canonicalBalabanRGTOEReceipt
