@@ -104,12 +104,12 @@ fleetFormalGapsAre58 = refl
 fleetEigenPriorityDoesNotCreateProof :
   Fleet.FleetEigenPriorityCreatesProof → ⊥
 fleetEigenPriorityDoesNotCreateProof =
-  Fleet.fleetEigenPriorityDoesNotCreateProof
+  Fleet.fleetEigenPriorityPromotionImpossible
 
 fleetExternalCountDoesNotCreateFormalDischarge :
   Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
 fleetExternalCountDoesNotCreateFormalDischarge =
-  Fleet.fleetExternalCountDoesNotCreateFormalDischarge
+  Fleet.fleetExternalCountPromotionImpossible
 
 fleetDischargedFibresStayOutOfTarget :
   Fleet.FleetDischargedFibreRetargetPermission → ⊥
