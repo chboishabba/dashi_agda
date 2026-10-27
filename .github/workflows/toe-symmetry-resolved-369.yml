@@ -6,6 +6,10 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/Dynamics/SingularBasin*.agda'
+      - 'DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda'
+      - 'DASHI/Physics/Dynamics/BasinSeparatingStableManifoldExact.agda'
+      - 'DASHI/Physics/Dynamics/YanchukStableManifoldCrossingTargetExact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
@@ -137,6 +141,13 @@ jobs:
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
             DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda
+            DASHI/Physics/Dynamics/SingularBasinReductionExact.agda
+            DASHI/Physics/Dynamics/SingularBasinFiniteWitnessExact.agda
+            DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda
+            DASHI/Physics/Dynamics/SingularBasinResolutionWitnessExact.agda
+            DASHI/Physics/Dynamics/YanchukStableManifoldCrossingTargetExact.agda
+            DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
+            DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
           )
@@ -197,6 +208,8 @@ jobs:
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
+            DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
