@@ -776,12 +776,12 @@ toeContextualSemanticFractranZKPFrame =
   ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
 
 toeContextualCoverageDoesNotCreateMonsterRepresentation :
-  ContextualTOE.MonsterBoundary.AutomaticCoverageMonsterRepresentationPromotion → ⊥
+  ContextualTOE.CoverageMonsterRepresentationPromotion → ⊥
 toeContextualCoverageDoesNotCreateMonsterRepresentation =
   ContextualTOE.coverageDoesNotCreateMonsterRepresentation
 
 toeContextualParetoChartDoesNotCreateMonsterRepresentation :
-  ContextualTOE.Pareto.ParetoTernaryChartCreatesMonsterRepresentation → ⊥
+  ContextualTOE.ParetoTernaryMonsterRepresentationPromotion → ⊥
 toeContextualParetoChartDoesNotCreateMonsterRepresentation =
   ContextualTOE.paretoTernaryChartDoesNotCreateMonsterRepresentation
 
