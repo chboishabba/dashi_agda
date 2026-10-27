@@ -164,6 +164,23 @@ jobs:
       - name: Verify fleet / Gate-4 dual-58 convergence
         run: python -m pytest -q tests/test_balaban_fleet_dual58_toe.py
 
+      - name: Reject ESD surface changes
+        shell: bash
+        run: |
+          git fetch origin master --depth=1
+          changed="$(git diff --name-only origin/master...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)' ; then
+            echo "ESD surface change detected" >&2
+            exit 1
+          fi
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
       - name: Preflight added TOE governance graph
         run: |
           modules=(
@@ -186,22 +203,6 @@ jobs:
               "$module"
           done
 
-      - name: Reject ESD surface changes
-        shell: bash
-        run: |
-          git fetch origin master --depth=1
-          changed="$(git diff --name-only origin/master...HEAD)"
-          printf '%s\n' "$changed"
-          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)' ; then
-            echo "ESD surface change detected" >&2
-            exit 1
-          fi
-
-      - name: Install Agda and standard library
-        uses: wenkokke/setup-agda@v2
-        with:
-          agda-version: '2.6.4.3'
-          agda-stdlib-version: '2.1'
 
       - name: Reject trust escapes
         run: |
