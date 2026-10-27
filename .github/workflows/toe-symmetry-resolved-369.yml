@@ -158,8 +158,6 @@ jobs:
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
-            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
-            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
