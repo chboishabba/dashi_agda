@@ -1331,6 +1331,24 @@ unifierRHHeisenbergTraceTransportStillBlocked :
 unifierRHHeisenbergTraceTransportStillBlocked =
   RHPrimeAudit.noUnjustifiedAnalyticTransport
 
+
+unifierRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
+  RHPrimeAudit.selectedUnmarkedTerminalEqualsMarkedArithmetic
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifierRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
+  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
+
+unifierRHIndependentArithmeticDiagonalProducerStillAbsent :
+  RHPrimeAudit.independentArithmeticDiagonalProducer
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifierRHIndependentArithmeticDiagonalProducerStillAbsent =
+  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
+
+unifierRHTerminalStrictSignedEstimateStillOpen :
+  RHPrimeAudit.terminalStrictSignedEstimatePaid
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifierRHTerminalStrictSignedEstimateStillOpen =
+  RHPrimeAudit.terminalStrictSignedEstimateStillOpen
 unifierRHPrimeAuditDoesNotPromoteRH :
   RHPrimeAudit.rhDerived
     RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
