@@ -321,3 +321,44 @@ yangMillsBalabanClayPromotionStillFalse :
   BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
 yangMillsBalabanClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
+
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 maximum-cut physics facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+yangMillsBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+yangMillsBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559ZKPFrame :
+  BalabanR559TOE.BalabanR559ZKPFrame
+yangMillsBalabanR559ZKPFrame =
+  BalabanR559TOE.canonicalBalabanR559ZKPFrame
+
+yangMillsBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+yangMillsBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+yangMillsBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+yangMillsBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
