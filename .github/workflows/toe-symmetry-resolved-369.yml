@@ -7,6 +7,13 @@ on:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Moonshine/OggSSPP2F4CurveShearReflectionExact.agda'
+      - 'DASHI/Unified/ArithmeticMoonshine.agda'
+      - 'DASHI/Reasoning/ClaimAuditManifestExact.agda'
+      - 'DASHI/Law/SensibLawGovernedLegalNetworkStrategyExact.agda'
+      - 'DASHI/Law/SensibLawITIRParityEverything.agda'
+      - 'DASHI/Interop/SensibLawSemanticPromotionPolicy.agda'
+      - 'DASHI/Unified/TOELegalGovernanceHandoffExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -33,6 +40,8 @@ jobs:
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Moonshine/OggSSPP2F4CurveShearReflectionExact.agda
+            DASHI/Unified/TOELegalGovernanceHandoffExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
