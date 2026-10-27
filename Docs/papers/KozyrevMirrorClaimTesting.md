@@ -142,7 +142,7 @@ The **minimal** Einstein–Cartan model ties torsion algebraically to spin
 density; it is not a free propagating, mirror-generated information field.
 A stronger/different proposed model must explicitly specify new
 dynamics and face all known constraints. Do not relabel
-`TorquеTrialectic369Exact`, signed-zero orientation or a torsion-free
+`TorqueTrialectic369Exact`, signed-zero orientation or a torsion-free
 Levi-Civita hypothesis as a nonzero gravitational torsion producer.
 
 The torsion-specific discriminator is a frozen tuple:
