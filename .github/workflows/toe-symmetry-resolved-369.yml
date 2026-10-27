@@ -100,6 +100,11 @@ jobs:
           dashi-repo related balabanCasimirLowerBoundTransportLevel --root . --limit 20
           dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
           dashi-repo discover 'Balaban scale density regular-E localization Casimir stress RG continuum non-promotion' --root .
+          dashi-repo related balabanContinuumLimitPromotionImpossible --root . --limit 20
+          dashi-repo related depthContinuumLimitPromotionImpossible --root . --limit 20
+          dashi-repo related toeFleetUnformalisedFormalGaps --root . --limit 20
+          dashi-repo related toeFleetDischargedCoreKnowledgeFibres --root . --limit 20
+          dashi-repo discover 'Balaban continuum limit depth continuum promotion impossible fleet 584 44 58 formal gaps' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
