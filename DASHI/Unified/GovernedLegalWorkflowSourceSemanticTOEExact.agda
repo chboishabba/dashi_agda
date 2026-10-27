@@ -137,3 +137,27 @@ toeESDSurfaceMutationRemainsForbidden :
 toeESDSurfaceMutationRemainsForbidden =
   esdSurfaceMutationAllowedIsFalse
     canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+-- Reuse source-owned semantic classification and non-promotion.
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as SensibLawPromotion
+
+toeHeuristicOnlyLegalSemanticCandidateAbstains :
+  ∀ heuristic-for heuristic-against target source →
+  SensibLawPromotion.promote
+    (SensibLawPromotion.heuristicCandidate
+      heuristic-for heuristic-against target source)
+  ≡ SensibLawPromotion.neither
+toeHeuristicOnlyLegalSemanticCandidateAbstains =
+  SensibLawPromotion.heuristic-only-abstains
+
+toeSemanticPromotionCannotConferLegalAuthority :
+  SensibLawPromotion.legalAuthorityFlag
+    SensibLawPromotion.semanticPromotionAuthorityBoundary ≡ false
+toeSemanticPromotionCannotConferLegalAuthority =
+  SensibLawPromotion.semantic-promotion-legal-authority-closed
+
+toeSemanticPromotionCannotConferAnyAuthority :
+  SensibLawPromotion.promotesAnyAuthority
+    SensibLawPromotion.semanticPromotionAuthorityBoundary ≡ false
+toeSemanticPromotionCannotConferAnyAuthority =
+  SensibLawPromotion.semantic-promotion-all-authority-closed
