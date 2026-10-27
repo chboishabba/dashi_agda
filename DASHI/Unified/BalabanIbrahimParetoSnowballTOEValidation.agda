@@ -58,6 +58,47 @@ unifierBalabanScaleTransferStillImpossible =
   Unifier.unifierBalabanScaleTransferPromotionImpossible
 
 
+toeBalabanContinuumLimitStillImpossible :
+  Owner.BalabanContinuumLimitPromotion → ⊥
+toeBalabanContinuumLimitStillImpossible =
+  TOE.toeBalabanContinuumLimitPromotionImpossible
+
+unifierBalabanContinuumLimitStillImpossible :
+  Owner.BalabanContinuumLimitPromotion → ⊥
+unifierBalabanContinuumLimitStillImpossible =
+  Unifier.unifierBalabanContinuumLimitPromotionImpossible
+
+toeDepthContinuumLimitStillImpossible :
+  Owner.DepthContinuumLimitPromotion → ⊥
+toeDepthContinuumLimitStillImpossible =
+  TOE.toeDepthContinuumLimitPromotionImpossible
+
+unifierDepthContinuumLimitStillImpossible :
+  Owner.DepthContinuumLimitPromotion → ⊥
+unifierDepthContinuumLimitStillImpossible =
+  Unifier.unifierDepthContinuumLimitPromotionImpossible
+
+toeBalabanContinuumReceiptMatchesParetoOwner :
+  TOE.toeBalabanContinuumLimitReceipt
+  ≡ Owner.balabanContinuumLimitReceipt
+toeBalabanContinuumReceiptMatchesParetoOwner = refl
+
+unifierBalabanContinuumReceiptMatchesParetoOwner :
+  Unifier.unifierBalabanContinuumLimitReceipt
+  ≡ Owner.balabanContinuumLimitReceipt
+unifierBalabanContinuumReceiptMatchesParetoOwner = refl
+
+toeDepthContinuumReceiptMatchesParetoOwner :
+  TOE.toeDepthContinuumLimitReceipt
+  ≡ Owner.depthContinuumLimitReceipt
+toeDepthContinuumReceiptMatchesParetoOwner = refl
+
+unifierDepthContinuumReceiptMatchesParetoOwner :
+  Unifier.unifierDepthContinuumLimitReceipt
+  ≡ Owner.depthContinuumLimitReceipt
+unifierDepthContinuumReceiptMatchesParetoOwner = refl
+
+
 toePhaseResolutionMatchesOwner :
   TOE.toeIbrahimPhaseResolutionFrontier
   ≡ Owner.ibrahimPhaseResolutionFrontier
