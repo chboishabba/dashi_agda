@@ -847,3 +847,42 @@ unifierSemanticAdmissionIsNotLegalAuthority :
   GovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 unifierSemanticAdmissionIsNotLegalAuthority =
   GovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+------------------------------------------------------------------------
+-- Exact compiler-product reuse remains execution-only.
+------------------------------------------------------------------------
+
+toeExactReuseDoesNotCreateSemanticAdmission :
+  LegalGovernance.ExactReuseCreatesSemanticAdmission → ⊥
+toeExactReuseDoesNotCreateSemanticAdmission =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAdmission
+
+toeExactReuseDoesNotCreateSemanticAuthority :
+  LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
+toeExactReuseDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
+
+toeExactReuseDoesNotCreateApplicability :
+  LegalGovernance.ExactReuseCreatesApplicability → ⊥
+toeExactReuseDoesNotCreateApplicability =
+  LegalGovernance.toeExactReuseDoesNotCreateApplicability
+
+toeExactReuseDoesNotCreateEntityIdentity :
+  LegalGovernance.ExactReuseCreatesEntityIdentity → ⊥
+toeExactReuseDoesNotCreateEntityIdentity =
+  LegalGovernance.toeExactReuseDoesNotCreateEntityIdentity
+
+toeExactReuseDoesNotCreatePropositionIdentity :
+  LegalGovernance.ExactReuseCreatesPropositionIdentity → ⊥
+toeExactReuseDoesNotCreatePropositionIdentity =
+  LegalGovernance.toeExactReuseDoesNotCreatePropositionIdentity
+
+toeExactReuseDoesNotCreateEventIdentity :
+  LegalGovernance.ExactReuseCreatesEventIdentity → ⊥
+toeExactReuseDoesNotCreateEventIdentity =
+  LegalGovernance.toeExactReuseDoesNotCreateEventIdentity
+
+toeExactReuseDoesNotCreateClaimTruth :
+  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
+toeExactReuseDoesNotCreateClaimTruth =
+  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
