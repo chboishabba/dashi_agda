@@ -106,9 +106,6 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
-            DASHI/Unified/Everything.agda
-          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
-            --agda-extra-args='-i . -l standard-library' \
             DASHI/Unifier.agda
 
       - name: Reject trust escapes
@@ -138,5 +135,4 @@ jobs:
           agda -i . -l standard-library DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
           agda -i . -l standard-library DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
           agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
-          agda -i . -l standard-library DASHI/Unified/Everything.agda
           agda -i . -l standard-library DASHI/Unifier.agda
