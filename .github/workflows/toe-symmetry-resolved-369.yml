@@ -6,6 +6,9 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Unified/YMRHNonPromotionTOEBridgeExact.agda'
+      - 'DASHI/Physics/Closure/YangMillsMassGapBoundary.agda'
+      - 'DASHI/Analysis/RiemannG2CurrentDirectOneLeafFrontierExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -32,6 +35,7 @@ jobs:
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+            DASHI/Unified/YMRHNonPromotionTOEBridgeExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
