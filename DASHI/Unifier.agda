@@ -328,6 +328,16 @@ unifierYangMillsPublishedRGDoesNotPromoteContinuum :
 unifierYangMillsPublishedRGDoesNotPromoteContinuum =
   YMTOE.toePublishedRGDoesNotPromoteContinuum
 
+unifierYangMillsGeneratedActionDensityDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsGeneratedActionDensityDoesNotPromoteContinuum =
+  YMTOE.toeGeneratedActionDensityDoesNotPromoteContinuum
+
+unifierYangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum =
+  YMTOE.toeCombinedRGUnifiedActionDoesNotPromoteContinuum
+
 unifierYangMillsContinuumMassGapNotPromoted :
   YMTOE.toeContinuumMassGapPromoted ≡ false
 unifierYangMillsContinuumMassGapNotPromoted =
@@ -381,6 +391,14 @@ unifierYangMillsBetaHistorySameStateCouplingLevel =
 unifierYangMillsCanonicalCompleteDensityLevel : ProofLevel
 unifierYangMillsCanonicalCompleteDensityLevel =
   YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
+
+unifierYangMillsGeneratedActionDensityCompilerLevel : ProofLevel
+unifierYangMillsGeneratedActionDensityCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
+
+unifierYangMillsCombinedRGUnifiedActionCompilerLevel : ProofLevel
+unifierYangMillsCombinedRGUnifiedActionCompilerLevel =
+  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
 
 unifierYangMillsStressScaleCompilerLevel : ProofLevel
 unifierYangMillsStressScaleCompilerLevel =
