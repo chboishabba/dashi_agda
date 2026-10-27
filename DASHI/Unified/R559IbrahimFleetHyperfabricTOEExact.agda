@@ -102,24 +102,24 @@ fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
 fleetFormalGapsAre58 = refl
 
 fleetEigenPriorityDoesNotCreateProof :
-  Fleet.FleetEigenPriorityCreatesProof → ⊥
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt ≡ false
 fleetEigenPriorityDoesNotCreateProof =
   Fleet.fleetEigenPriorityDoesNotCreateProof
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof fleetFormalGapTargetReceipt ≡ false
 fleetExternalCountDoesNotCreateFormalDischarge =
   Fleet.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStayOutOfTarget :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged fleetFormalGapTargetReceipt ≡ true
 fleetDischargedFibresStayOutOfTarget =
-  Fleet.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+  Fleet.fleetDischargedFibresRemainOutOfTarget
 
 fleetContradictionGapsStaySeparate :
-  Fleet.FleetContradictionGapReclassificationPermission → ⊥
+  Fleet.contradictionGapsRemainSeparate fleetFormalGapTargetReceipt ≡ true
 fleetContradictionGapsStaySeparate =
-  Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
+  Fleet.fleetContradictionGapsRemainSeparate
 
 ------------------------------------------------------------------------
 -- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
@@ -201,12 +201,14 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     contradictionGaps : Nat
     contradictionGapsIs44 : contradictionGaps ≡ 44
     scaleTransferBlocked : YM.ScaleTransferPromotion → ⊥
+    eigenPriorityNoProof :
+      Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetReceipt ≡ false
     fleetCountDoesNotDischarge :
-      Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+      Fleet.externalCountCreatesFormalProof fleetReceipt ≡ false
     dischargedFibreRetargetBlocked :
-      Fleet.FleetDischargedFibreRetargetPermission → ⊥
+      Fleet.dischargedFibresRemainDischarged fleetReceipt ≡ true
     contradictionReclassificationBlocked :
-      Fleet.FleetContradictionGapReclassificationPermission → ⊥
+      Fleet.contradictionGapsRemainSeparate fleetReceipt ≡ true
 
 canonicalR559IbrahimFleetHyperfabricTOEReceipt :
   R559IbrahimFleetHyperfabricTOEReceipt
@@ -226,6 +228,7 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   ; contradictionGaps = fleetContradictionGaps
   ; contradictionGapsIs44 = fleetContradictionGapsAre44
   ; scaleTransferBlocked = toeScaleTransferPromotionImpossible
+  ; eigenPriorityNoProof = fleetEigenPriorityDoesNotCreateProof
   ; fleetCountDoesNotDischarge = fleetExternalCountDoesNotCreateFormalDischarge
   ; dischargedFibreRetargetBlocked = fleetDischargedFibresStayOutOfTarget
   ; contradictionReclassificationBlocked = fleetContradictionGapsStaySeparate
