@@ -1456,3 +1456,377 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
+
+------------------------------------------------------------------------
+
+toePNFSourceBoundaryReceipt :
+  PNFSource.PNFSourceBoundaryTOEReceipt
+toePNFSourceBoundaryReceipt =
+  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+
+toePNFGluingProxyDoesNotProveTrueLinearity =
+  PNFSource.gluingProxyDoesNotProveTrueLinearity
+
+toePNFSelfAdjointProxyDoesNotProveFiniteTheorem =
+  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
+
+toePNFDominationProxyDoesNotProveHamiltonianTheorem =
+  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
+
+toePNFFungalNetworkClaimsRequireSpeciesEvidence =
+  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
+
+toePNFKluverCobwebForm =
+  PNFSource.kluverCobwebForm
+
+toePNFPsychogeographyWebIdentifierKind =
+  PNFSource.psychogeographyWebIdentifierKind
+
+toePNFIdenticalWordsDoNotPayPredicate :
+  PNFSource.IdenticalWordsProveSamePredicate → ⊥
+toePNFIdenticalWordsDoNotPayPredicate =
+  PNFSource.identicalWordsDoNotPayPredicate
+
+toePNFCommonFingerprintDoesNotCreateTruth :
+  PNFSource.CommonPnfFingerprintProvesClaimTruth → ⊥
+toePNFCommonFingerprintDoesNotCreateTruth =
+  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
+
+toePNFPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  PNFSource.PerceivedIndependenceMeansActualIndependence → ⊥
+toePNFPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+toePNFRepetitionDoesNotCreateIndependentEvidence :
+  PNFSource.RepetitionMeansIndependentEvidence → ⊥
+toePNFRepetitionDoesNotCreateIndependentEvidence =
+  PNFSource.repetitionDoesNotCreateIndependentEvidence
+
+toePNFCommonSourceDoesNotEraseEvidence :
+  PNFSource.CommonSourceMeansNoEvidence → ⊥
+toePNFCommonSourceDoesNotEraseEvidence =
+  PNFSource.commonSourceDoesNotEraseEvidence
+
+------------------------------------------------------------------------
+-- PNF-distilled fail-closed reuse boundary.
+
+------------------------------------------------------------------------
+
+toePNFDistilledNonPromotionBoundary :
+  PNFDistilled.PNFDistilledNonPromotionBoundary
+toePNFDistilledNonPromotionBoundary =
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
+
+toePNFDistilledReuseZKPReceipt :
+  PNFDistilled.PNFDistilledReuseZKPReceipt
+toePNFDistilledReuseZKPReceipt =
+  PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
+
+toePNFDistilledBoundaryIsCanonical :
+  toePNFDistilledNonPromotionBoundary
+  ≡
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
+toePNFDistilledBoundaryIsCanonical =
+  refl
+
+------------------------------------------------------------------------
+-- Governed legal-workflow TOE receipt.
+
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+toeGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+toeGovernedLegalWorkflowZKPReceipt :
+  LegalGovernance.GovernedLegalWorkflowZKPReceipt
+toeGovernedLegalWorkflowZKPReceipt =
+  LegalGovernance.canonicalGovernedLegalWorkflowZKPReceipt
+
+toeGovernedLegalWorkflowIntrospectiveZKPFrame :
+  LegalGovernance.GovernedLegalWorkflowIntrospectiveZKPFrame
+toeGovernedLegalWorkflowIntrospectiveZKPFrame =
+  LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
+
+
+toeGovernedLegalWorkflowBoundary :
+  LegalGovernance.GovernedLegalWorkflowTOEBoundary
+toeGovernedLegalWorkflowBoundary =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
+
+toeWorkflowTaskCompletionDoesNotCreateTruth :
+  LegalGovernance.TaskCompletionCreatesTruth → ⊥
+toeWorkflowTaskCompletionDoesNotCreateTruth =
+  LegalGovernance.toeTaskCompletionDoesNotCreateTruth
+
+toeDatabaseCommitDoesNotCreateSemanticAuthority :
+  LegalGovernance.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeDatabaseCommitDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+toeAcceptedReviewDoesNotPayApplicability :
+  LegalGovernance.AcceptedStatusPaysApplicability → ⊥
+toeAcceptedReviewDoesNotPayApplicability =
+  LegalGovernance.toeAcceptedReviewDoesNotPayApplicability
+
+toeMatterAcceptanceDoesNotCreateTruth :
+  LegalGovernance.AcceptanceRoleCreatesTruth → ⊥
+toeMatterAcceptanceDoesNotCreateTruth =
+  LegalGovernance.toeMatterAcceptanceDoesNotCreateTruth
+
+toeCitationAloneDoesNotRealiseLegalRule :
+  LegalGovernance.CitationAloneRealisesLegalRule → ⊥
+toeCitationAloneDoesNotRealiseLegalRule =
+  LegalGovernance.toeCitationAloneDoesNotRealiseLegalRule
+
+toeSemanticMeetDoesNotProveLegalApplicability :
+  LegalGovernance.SemanticMeetAloneProvesLegalApplicability → ⊥
+toeSemanticMeetDoesNotProveLegalApplicability =
+  LegalGovernance.toeSemanticMeetDoesNotProveLegalApplicability
+
+toeControlEvidenceDoesNotCreateTruth :
+  LegalGovernance.ControlEvidenceCreatesTruth → ⊥
+toeControlEvidenceDoesNotCreateTruth =
+  LegalGovernance.toeControlEvidenceDoesNotCreateTruth
+
+toePassingControlDoesNotMeanCertified :
+  LegalGovernance.PassingControlMeansCertified → ⊥
+toePassingControlDoesNotMeanCertified =
+  LegalGovernance.toePassingControlDoesNotMeanCertified
+
+toeCaseySelectionDoesNotCreateWorldTruth :
+  LegalGovernance.CaseySelectionCreatesWorldTruth → ⊥
+toeCaseySelectionDoesNotCreateWorldTruth =
+  LegalGovernance.toeCaseySelectionDoesNotCreateWorldTruth
+
+toeKnowledgeDoesNotCreateExecutionAuthority :
+  LegalGovernance.KnowledgeIsAuthority → ⊥
+toeKnowledgeDoesNotCreateExecutionAuthority =
+  LegalGovernance.toeKnowledgeDoesNotCreateExecutionAuthority
+
+------------------------------------------------------------------------
+-- Promotion, runtime-validation, and semantic-admission governance aliases.
+
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowPromotionBoundary :
+  LegalGovernance.GovernedLegalWorkflowPromotionBoundary
+toeGovernedLegalWorkflowPromotionBoundary =
+  LegalGovernance.canonicalGovernedLegalWorkflowPromotionBoundary
+
+toeReviewEligibilityDoesNotCreatePromotion :
+  LegalGovernance.ReviewEligibilityCreatesPromotionReceipt → ⊥
+toeReviewEligibilityDoesNotCreatePromotion =
+  LegalGovernance.toeReviewEligibilityDoesNotCreatePromotion
+
+toeReviewEligibilityDoesNotCreateTruth :
+  LegalGovernance.EligibilityMeansTruth → ⊥
+toeReviewEligibilityDoesNotCreateTruth =
+  LegalGovernance.toeReviewEligibilityDoesNotCreateTruth
+
+toeRuntimeParityDoesNotCreateWorldTruth :
+  LegalGovernance.ZeroParityFailuresMeansWorldTruth → ⊥
+toeRuntimeParityDoesNotCreateWorldTruth =
+  LegalGovernance.toeRuntimeParityDoesNotCreateWorldTruth
+
+toeDiagnosticStreamDoesNotCreateLegalCertification :
+  LegalGovernance.DiagnosticLegalStreamMeansLegalCertification → ⊥
+toeDiagnosticStreamDoesNotCreateLegalCertification =
+  LegalGovernance.toeDiagnosticStreamDoesNotCreateLegalCertification
+
+toeProjectionDoesNotCreateClaimTruth :
+  LegalGovernance.CanonicalClaimProjectionPaysClaimTruth → ⊥
+toeProjectionDoesNotCreateClaimTruth =
+  LegalGovernance.toeProjectionDoesNotCreateClaimTruth
+
+toeReviewRouterDoesNotCreateConsumerAdequacy :
+  LegalGovernance.ReviewRouterImplementationPaysConsumerAdequacy → ⊥
+toeReviewRouterDoesNotCreateConsumerAdequacy =
+  LegalGovernance.toeReviewRouterDoesNotCreateConsumerAdequacy
+
+toeParserCandidateDoesNotAuthorizeAdmission :
+  LegalGovernance.ParserCandidateAloneAuthorizesAdmission → ⊥
+toeParserCandidateDoesNotAuthorizeAdmission =
+  LegalGovernance.toeParserCandidateDoesNotAuthorizeAdmission
+
+toeResidualPriorityDoesNotCreateTruthConfidence :
+  LegalGovernance.ResidualPriorityScoreIsTruthConfidence → ⊥
+toeResidualPriorityDoesNotCreateTruthConfidence =
+  LegalGovernance.toeResidualPriorityDoesNotCreateTruthConfidence
+
+toeAdmissionReceiptDoesNotPublishGeneration :
+  LegalGovernance.AdmissionReceiptPublishesGeneration → ⊥
+toeAdmissionReceiptDoesNotPublishGeneration =
+  LegalGovernance.toeAdmissionReceiptDoesNotPublishGeneration
+
+toeSoftwareValidationDoesNotAuthorizePublication :
+  LegalGovernance.SoftwareValidationAuthorizesPublication → ⊥
+toeSoftwareValidationDoesNotAuthorizePublication =
+  LegalGovernance.toeSoftwareValidationDoesNotAuthorizePublication
+
+toeLaterValidationDoesNotRewriteCertifiedBaseline :
+  LegalGovernance.LaterValidatedHeadRetroactivelyChangesCertifiedBaseline → ⊥
+toeLaterValidationDoesNotRewriteCertifiedBaseline =
+  LegalGovernance.toeLaterValidationDoesNotRewriteCertifiedBaseline
+
+------------------------------------------------------------------------
+-- Canonical semantic-authority and exact-live acquisition firewalls.
+
+------------------------------------------------------------------------
+
+toeSemanticPromotionTruthAuthorityClosed :
+  LegalGovernance.SemanticPromotionTruthAuthorityClosed
+toeSemanticPromotionTruthAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
+
+toeSemanticPromotionLegalAuthorityClosed :
+  LegalGovernance.SemanticPromotionLegalAuthorityClosed
+toeSemanticPromotionLegalAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
+
+toeSemanticPromotionAllAuthorityClosed :
+  LegalGovernance.SemanticPromotionAllAuthorityClosed
+toeSemanticPromotionAllAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionAllAuthorityClosed
+
+toeBoundAcquisitionDoesNotPayRequirement :
+  LegalGovernance.BoundDemandAutomaticallyPaysRequirement → ⊥
+toeBoundAcquisitionDoesNotPayRequirement =
+  LegalGovernance.toeBoundAcquisitionDoesNotPayRequirement
+
+toeBoundAcquisitionDoesNotCloseConsumer :
+  LegalGovernance.BoundDemandAutomaticallyClosesConsumer → ⊥
+toeBoundAcquisitionDoesNotCloseConsumer =
+  LegalGovernance.toeBoundAcquisitionDoesNotCloseConsumer
+
+toeProducerIdentityDoesNotIdentifyResidual :
+  LegalGovernance.SameProducerIdentifiesResidual → ⊥
+toeProducerIdentityDoesNotIdentifyResidual =
+  LegalGovernance.toeProducerIdentityDoesNotIdentifyResidual
+
+
+------------------------------------------------------------------------
+-- SCALE Evidence Review convergence.
+
+------------------------------------------------------------------------
+
+toe369SCALEEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+toe369SCALEEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
+
+toe369SCALEReplayDoesNotPromoteSemanticTruth :
+  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
+toe369SCALEReplayDoesNotPromoteSemanticTruth =
+  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
+
+toe369SCALEProductionDoesNotCreateSemanticAuthority :
+  SCALEReview.PerformanceClosureCreatesSemanticAuthority → ⊥
+toe369SCALEProductionDoesNotCreateSemanticAuthority =
+  SCALEReview.productionScaleDoesNotCreateSemanticAuthority
+
+toe369SCALEPNFFingerprintDoesNotCreateClaimTruth :
+  SCALEReview.CommonPnfFingerprintProvesClaimTruth → ⊥
+toe369SCALEPNFFingerprintDoesNotCreateClaimTruth =
+  SCALEReview.commonPnfFingerprintDoesNotCreateClaimTruth
+
+toe369SCALEReviewDoesNotCreateClaimTruth :
+  SCALEReview.EvidenceReviewCreatesClaimTruth → ⊥
+toe369SCALEReviewDoesNotCreateClaimTruth =
+  SCALEReview.reviewedEvidenceDoesNotCreateClaimTruth
+
+toe369SCALEMaboReviewedPaymentDoesNotCreateTruth :
+  SCALEReview.ReviewedPaymentEqualsClaimTruth → ⊥
+toe369SCALEMaboReviewedPaymentDoesNotCreateTruth =
+  SCALEReview.maboReviewedPaymentDoesNotEqualClaimTruth
+
+toe369SCALEPassingControlDoesNotMeanCertified :
+  SCALEReview.PassingControlMeansCertified → ⊥
+toe369SCALEPassingControlDoesNotMeanCertified =
+  SCALEReview.passingControlDoesNotMeanCertified
+
+toe369SCALEFrontierDoesNotGrantAuthorization :
+  SCALEReview.FrontierRouteMeansAuthorized → ⊥
+toe369SCALEFrontierDoesNotGrantAuthorization =
+  SCALEReview.frontierRouteDoesNotGrantAuthorization
+
+toe369SCALEUICannotGeneratePresentSource :
+  SCALEReview.UIGeneratesPresentSource → ⊥
+toe369SCALEUICannotGeneratePresentSource =
+  SCALEReview.uiCannotGeneratePresentSource
+
+toe369SCALEPotentialReopeningDoesNotBecomeActual :
+  SCALEReview.PotentialReopeningIsActual → ⊥
+toe369SCALEPotentialReopeningDoesNotBecomeActual =
+  SCALEReview.potentialReopeningDoesNotBecomeActual
+
+------------------------------------------------------------------------
+-- SCALE evidence genealogy firewalls.
+
+------------------------------------------------------------------------
+
+toe369SCALEPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
+toe369SCALEPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+toe369SCALERepetitionDoesNotCreateIndependentEvidence :
+  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
+toe369SCALERepetitionDoesNotCreateIndependentEvidence =
+  SCALEReview.repetitionDoesNotCreateIndependentEvidence
+
+------------------------------------------------------------------------
+-- SCALE physical-economy non-promotion firewalls.
+
+------------------------------------------------------------------------
+
+toe369SCALEReviewProjectionReuseDoesNotCreateClaimTruth :
+  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
+toe369SCALEReviewProjectionReuseDoesNotCreateClaimTruth =
+  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
+
+toe369SCALECommitCoalescingDoesNotCreateSemanticAuthority :
+  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
+toe369SCALECommitCoalescingDoesNotCreateSemanticAuthority =
+  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
+
+toe369SCALEFewCommitBarriersDoNotProveSemanticIndependence :
+  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
+toe369SCALEFewCommitBarriersDoNotProveSemanticIndependence =
+  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
+
+------------------------------------------------------------------------
+-- SCALE Evidence Review ZKP frame.
+
+------------------------------------------------------------------------
+
+toe369SCALEEvidenceReviewTOEZKPFrame :
+  SCALEReview.SCALEEvidenceReviewTOEZKPFrame
+toe369SCALEEvidenceReviewTOEZKPFrame =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
+
+------------------------------------------------------------------------
+-- Governed Fleet residual handoff.
+------------------------------------------------------------------------
+
+toeGovernedFleetResidualTOEHandoff :
+  GovernedFleet.GovernedFleetResidualTOEHandoff
+toeGovernedFleetResidualTOEHandoff =
+  GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
+
+toeFleetNamedManifestStillMissing :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+toeFleetNamedManifestStillMissing =
+  GovernedFleet.namedManifestStillMissing
+
+toeFleetPerGapDispatchStillDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+toeFleetPerGapDispatchStillDisabled =
+  GovernedFleet.perGapDispatchStillDisabled
