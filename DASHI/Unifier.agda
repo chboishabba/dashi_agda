@@ -1052,12 +1052,22 @@ unifierCurrentMaxCutGovernanceFleetReceipt =
 
 unifierCurrentFormalGapTarget : ℕ
 unifierCurrentFormalGapTarget =
-  CurrentMaxCut.targetFormalGapCount
+  CurrentMaxCut.gate4FormalGapCount
 
 unifierCurrentFormalGapTargetIs58 :
   unifierCurrentFormalGapTarget ≡ 58
 unifierCurrentFormalGapTargetIs58 =
-  CurrentMaxCut.targetFormalGapCountIs58
+  CurrentMaxCut.gate4FormalGapCountIs58
+
+unifierCurrentFleetReportedFormalGapTarget : ℕ
+unifierCurrentFleetReportedFormalGapTarget =
+  CurrentMaxCut.fleetReportedFormalGapCount
+
+unifierCurrentFleetReportedFormalGapTargetIs58 :
+  unifierCurrentFleetReportedFormalGapTarget ≡ 58
+unifierCurrentFleetReportedFormalGapTargetIs58 =
+  CurrentMaxCut.fleetReportedFormalGapCountIs58
+
 
 unifierCurrentFleetDischargedFibresExcluded :
   CurrentMaxCut.dischargedFleetFibresExcluded ≡ true
@@ -1079,6 +1089,6 @@ unifierCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy =
   CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacyIsFalse
 
 unifierCurrentIbrahimSearchPriorityDoesNotCreateProof :
-  CurrentMaxCut.Pareto.SearchPriorityCreatesProof → ⊥
+  CurrentMaxCut.IbrahimSearchPriorityCreatesProof → ⊥
 unifierCurrentIbrahimSearchPriorityDoesNotCreateProof =
   CurrentMaxCut.ibrahimSearchPriorityCannotCreateProof
