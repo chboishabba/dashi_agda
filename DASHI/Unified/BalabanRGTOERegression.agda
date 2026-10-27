@@ -425,6 +425,15 @@ balabanRGClayPromotionStillFalse :
 balabanRGClayPromotionStillFalse =
   RGFrontier.canonicalBalabanRGScaleTransferNoClayPromotion
 
+BalabanScaleTransferPromotion : Set
+BalabanScaleTransferPromotion =
+  RGFrontier.BalabanRGScaleTransferPromotion
+
+balabanScaleTransferPromotionImpossible :
+  BalabanScaleTransferPromotion → ⊥
+balabanScaleTransferPromotionImpossible =
+  RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
+
 legacyBalabanLaneAlsoDeclaresNoClayPromotion :
   SUN.clayYangMillsPromoted ≡ false
 legacyBalabanLaneAlsoDeclaresNoClayPromotion =
