@@ -6,6 +6,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as Owner
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
+import DASHI.Physics.Dynamics.SingularBasinReductionExact as Reduction
+import DASHI.Physics.Dynamics.SingularBasinFiniteWitnessExact as Finite
+import DASHI.Physics.Dynamics.BasinResolutionRobustnessExact as Resolution
+import DASHI.Physics.Dynamics.SingularBasinResolutionWitnessExact as ResolutionWitness
+import DASHI.Physics.Dynamics.YanchukStableManifoldCrossingTargetExact as Yanchuk
 
 toeFiniteReductionMatchesOwner :
   TOE.toeSingularBasinFiniteReduction
@@ -18,70 +23,70 @@ unifierFiniteReductionMatchesOwner :
 unifierFiniteReductionMatchesOwner = refl
 
 toeFiniteReductionStillNotBasinPreserving :
-  ¬ Owner.Reduction.BasinPreserving Owner.finiteReduction
+  ¬ Reduction.BasinPreserving Owner.finiteReduction
 toeFiniteReductionStillNotBasinPreserving =
   TOE.toeSingularBasinFiniteReductionNotBasinPreserving
 
 unifierFiniteReductionStillNotBasinPreserving :
-  ¬ Owner.Reduction.BasinPreserving Owner.finiteReduction
+  ¬ Reduction.BasinPreserving Owner.finiteReduction
 unifierFiniteReductionStillNotBasinPreserving =
   Unifier.unifierSingularBasinFiniteReductionNotBasinPreserving
 
 toeFiniteBasinStillDoesNotFactor :
-  ¬ Owner.Reduction.PredicateFactorisation
-      Owner.Finite.project
-      Owner.Finite.FullInBasin
+  ¬ Reduction.PredicateFactorisation
+      Finite.project
+      Finite.FullInBasin
 toeFiniteBasinStillDoesNotFactor =
   TOE.toeSingularBasinFiniteFullBasinDoesNotFactor
 
 unifierFiniteBasinStillDoesNotFactor :
-  ¬ Owner.Reduction.PredicateFactorisation
-      Owner.Finite.project
-      Owner.Finite.FullInBasin
+  ¬ Reduction.PredicateFactorisation
+      Finite.project
+      Finite.FullInBasin
 unifierFiniteBasinStillDoesNotFactor =
   Unifier.unifierSingularBasinFiniteFullBasinDoesNotFactor
 
 toeSelectedResolutionStillNotRobust :
-  ¬ Owner.Resolution.RobustAt
-      Owner.ResolutionWitness.finiteResolutionGeometry
-      Owner.Finite.FullInBasin
-      Owner.ResolutionWitness.selectedResolution
-      Owner.Finite.funnelState
+  ¬ Resolution.RobustAt
+      ResolutionWitness.finiteResolutionGeometry
+      Finite.FullInBasin
+      ResolutionWitness.selectedResolution
+      Finite.funnelState
 toeSelectedResolutionStillNotRobust =
   TOE.toeSingularBasinSelectedResolutionNotRobust
 
 unifierSelectedResolutionStillNotRobust :
-  ¬ Owner.Resolution.RobustAt
-      Owner.ResolutionWitness.finiteResolutionGeometry
-      Owner.Finite.FullInBasin
-      Owner.ResolutionWitness.selectedResolution
-      Owner.Finite.funnelState
+  ¬ Resolution.RobustAt
+      ResolutionWitness.finiteResolutionGeometry
+      Finite.FullInBasin
+      ResolutionWitness.selectedResolution
+      Finite.funnelState
 unifierSelectedResolutionStillNotRobust =
   Unifier.unifierSingularBasinSelectedResolutionNotRobust
 
 toeStableManifoldTubeStillOpen :
-  Owner.Yanchuk.intervalStableManifoldTubeCertified
+  Yanchuk.intervalStableManifoldTubeCertified
     Owner.yanchukStableManifoldValidationBoundary
   ≡ false
 toeStableManifoldTubeStillOpen =
   TOE.toeYanchukIntervalStableManifoldTubeStillMissing
 
 unifierStableManifoldTubeStillOpen :
-  Owner.Yanchuk.intervalStableManifoldTubeCertified
+  Yanchuk.intervalStableManifoldTubeCertified
     Owner.yanchukStableManifoldValidationBoundary
   ≡ false
 unifierStableManifoldTubeStillOpen =
   Unifier.unifierYanchukIntervalStableManifoldTubeStillMissing
 
 toeBasinSeparationStillOpen :
-  Owner.Yanchuk.basinSeparationTheoremCertified
+  Yanchuk.basinSeparationTheoremCertified
     Owner.yanchukStableManifoldValidationBoundary
   ≡ false
 toeBasinSeparationStillOpen =
   TOE.toeYanchukBasinSeparationTheoremStillMissing
 
 unifierBasinSeparationStillOpen :
-  Owner.Yanchuk.basinSeparationTheoremCertified
+  Yanchuk.basinSeparationTheoremCertified
     Owner.yanchukStableManifoldValidationBoundary
   ≡ false
 unifierBasinSeparationStillOpen =
