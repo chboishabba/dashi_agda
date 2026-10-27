@@ -171,6 +171,15 @@ data PhilosophicalSourceRole : Set where
   feministLabourPoliticalArgument : PhilosophicalSourceRole
   participationPowerTypology : PhilosophicalSourceRole
   situatedStandpointTheory : PhilosophicalSourceRole
+  landRentDistributionTheory : PhilosophicalSourceRole
+  criticalNarrativeLegitimation : PhilosophicalSourceRole
+  leftAccelerationistInstitutionalProposal : PhilosophicalSourceRole
+  rightAccelerationistTechnocapitalInterpretation : PhilosophicalSourceRole
+  effectiveAccelerationismMovementText : PhilosophicalSourceRole
+  platformCloudRentCriticalTheory : PhilosophicalSourceRole
+  corporateSovereigntyNormativeProposal : PhilosophicalSourceRole
+  pluralAnarchistPropertyPositions : PhilosophicalSourceRole
+  onlineFatalismDescription : PhilosophicalSourceRole
 
 record PhilosophicalSourceReceipt : Set where
   constructor philosophical-source-receipt
@@ -227,6 +236,108 @@ collinsStandpointPrimary = philosophical-source-receipt
   situatedStandpointTheory
   "original sociological claim for outsider-within positionality and knowledge; not a rule that social location itself certifies truth"
   true
+
+------------------------------------------------------------------------
+-- PHILOSOPHY / SOCIOLOGY SOURCE-ORIGINAL SEPARATION
+-- The following source texts are competing interpretations, not reusable
+-- empirical causal identifications or universal tax/AI prescriptions.
+------------------------------------------------------------------------
+
+lyotard1979 : PhilosophicalSourceReceipt
+lyotard1979 = philosophical-source-receipt
+  "Jean-Francois Lyotard"
+  "La Condition postmoderne: Rapport sur le savoir (1979)"
+  "https://plato.stanford.edu/entries/lyotard/"
+  criticalNarrativeLegitimation
+  "critique of universal metanarrative/knowledge legitimation; SEP provides historical bibliographic and interpretive context; it does not deny the material existence of shares"
+  true
+
+williamsSrnicek2013 : PhilosophicalSourceReceipt
+williamsSrnicek2013 = philosophical-source-receipt
+  "Alex Williams; Nick Srnicek"
+  "A #ACCELERATE MANIFESTO for an Accelerationist Politics (14 May 2013)"
+  "https://criticallegalthinking.com/2013/05/14/accelerate-manifesto-for-an-accelerationist-politics/"
+  leftAccelerationistInstitutionalProposal
+  "explicit left accelerationist strategy against austerity and for transforming technological and institutional capacity; not Nick Land's doctrine"
+  true
+
+landMeltdown1994 : PhilosophicalSourceReceipt
+landMeltdown1994 = philosophical-source-receipt
+  "Nick Land"
+  "Meltdown, delivered Warwick Virtual Futures May 1994; first published Abstract Culture/CCRU 1997"
+  "https://ccru.pw/posts/essays/"
+  rightAccelerationistTechnocapitalInterpretation
+  "speculative technocapital and runaway-process narrative; distinguish original reading, later edits, and any predictive tests"
+  true
+
+effectiveAccelerationism2022 : PhilosophicalSourceReceipt
+effectiveAccelerationism2022 = philosophical-source-receipt
+  "BasedBeffJezos; bayeslord; earlier co-credit zestular and creatine_cycle"
+  "Notes on e/acc principles and tenets, 2022; repost dated 31 October 2022"
+  "https://effectiveaccelerationism.substack.com/p/repost-notes-on-eacc-principles-and"
+  effectiveAccelerationismMovementText
+  "optimistic energy/market/technology acceleration; pseudonymous source lineage, not same-object equivalence with Land or a legislative tax proposal"
+  true
+
+varoufakis2023 : PhilosophicalSourceReceipt
+varoufakis2023 = philosophical-source-receipt
+  "Yanis Varoufakis"
+  "Technofeudalism: What Killed Capitalism (2023), author-hosted preface 7 September 2023"
+  "https://www.yanisvaroufakis.eu/2023/09/07/technofeudalism-has-just-arrived/"
+  platformCloudRentCriticalTheory
+  "hypothesis concerning cloud capital, cloud rent and corporate platform sovereignty; no measured conclusion for every platform"
+  true
+
+yarvinPatchwork2008 : PhilosophicalSourceReceipt
+yarvinPatchwork2008 = philosophical-source-receipt
+  "Curtis Yarvin (published as Mencius Moldbug)"
+  "Patchwork: a positive vision, Part 1, 13 November 2008"
+  "https://www.unqualified-reservations.org/2008/11/patchwork-positive-vision-part-1/"
+  corporateSovereigntyNormativeProposal
+  "original pro-corporate sovereign realms proposal explicitly mentions self-assessed property taxes; NOT a universal no-tax claim; objectionable statements are authored positions, not prescriptions here"
+  true
+
+stanfordAnarchism : PhilosophicalSourceReceipt
+stanfordAnarchism = philosophical-source-receipt
+  "Andrew Fiala; Stanford Encyclopedia of Philosophy"
+  "Anarchism, original 2017; substantive revision 4 December 2025"
+  "https://plato.stanford.edu/entries/anarchism/"
+  pluralAnarchistPropertyPositions
+  "secondary scholarly taxonomy differentiating socialist/communist, individualist, market and philosophical anarchisms; not every participant holds the same property or fiscal stance"
+  true
+
+-- Broad internet labels are tracked as the USER'S inquiry, not as an
+-- original school with one identified canonical author or tax conclusion.
+data InternetFatalismSourceProvesGlobalInevitability : Set where
+data PostmodernNarrativeCritiqueProvesAssetValueZero : Set where
+data AllAnarchistsChooseOneTaxProgramme : Set where
+data AccelerationismsHaveIdenticalPolitics : Set where
+data HistoricalParetoFrequencyImposesMoralRule : Set where
+data CorporateSovereigntyIsDemocraticRepresentation : Set where
+
+fatalismDoesNotProveWorldTrajectory :
+  InternetFatalismSourceProvesGlobalInevitability → ⊥
+fatalismDoesNotProveWorldTrajectory ()
+
+postmodernismDoesNotDeleteAssets :
+  PostmodernNarrativeCritiqueProvesAssetValueZero → ⊥
+postmodernismDoesNotDeleteAssets ()
+
+anarchismIsNotOneProgramme :
+  AllAnarchistsChooseOneTaxProgramme → ⊥
+anarchismIsNotOneProgramme ()
+
+accelerationismsNeedSeparateAuthors :
+  AccelerationismsHaveIdenticalPolitics → ⊥
+accelerationismsNeedSeparateAuthors ()
+
+paretoLawCannotAuthoriseOligarchy :
+  HistoricalParetoFrequencyImposesMoralRule → ⊥
+paretoLawCannotAuthoriseOligarchy ()
+
+corporateSovereigntyIsNotAutomaticallyRepresentation :
+  CorporateSovereigntyIsDemocraticRepresentation → ⊥
+corporateSovereigntyIsNotAutomaticallyRepresentation ()
 
 ------------------------------------------------------------------------
 -- REUSE / NON-PROMOTION BOUNDARIES FROM PHILOSOPHY + SOCIAL THEORY.
