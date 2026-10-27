@@ -403,6 +403,16 @@ open MaxCutTOE public using
   ; toeTwelveSeventyEightCharacterAlreadyPaid
   ; toeGenericCharacterMultiplicitySourceWritten
   ; toeActualTwelveSeventyEightLinearIntertwinerStillOpen
+  ; toeLeanFDRepAdapterSourceWritten
+  ; toeLeanFDRepSubmoduleAdapterSourceWritten
+  ; toeLeanFDRepAdapterKernelReceiptStillUnobserved
+  ; toeLeanFDRepAdapterAgdaTransportStillUnobserved
+  ; toeSimpleSourceClassifierSourceWritten
+  ; toeSimpleSourceClassifierKernelStillUnobserved
+  ; toeCharacterMultiplicityLemmasSourceWritten
+  ; toeCharacterMultiplicityKernelStillUnobserved
+  ; toeTwoIsotypicAgdaTransportStillOpen
+  ; toeActualMonsterFin90SameActionAttachmentStillOpen
   ; esdSurfaceWasNotEdited
   )
 
