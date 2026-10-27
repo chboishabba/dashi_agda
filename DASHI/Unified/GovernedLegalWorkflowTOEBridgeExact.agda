@@ -77,6 +77,7 @@ import DASHI.Interop.SLRRuntimeValidationHandoffExact as RuntimeValidation
 import DASHI.Interop.SLRValidationRoadmapPromotionExact as ValidationRoadmap
 import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
 import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as SoftwareValidation
+import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
 
 ------------------------------------------------------------------------
 -- Type aliases keep Unifier thin.
@@ -577,6 +578,32 @@ toeMetaIntrospectorAttributionRule : String
 toeMetaIntrospectorAttributionRule =
   Fabric.attributionRule
 
+
+------------------------------------------------------------------------
+-- Canonical generic ZKP frame.
+--
+-- Reuse the existing IntrospectiveProofLoopExact ZKPFrame.
+-- The legal-workflow receipt below remains the detailed control ledger.
+-- This value binds that ledger to the repository-wide O/R/C/S/L/P/G/F frame.
+------------------------------------------------------------------------
+
+GovernedLegalWorkflowIntrospectiveZKPFrame : Set
+GovernedLegalWorkflowIntrospectiveZKPFrame =
+  Introspection.ZKPFrame
+
+canonicalGovernedLegalWorkflowIntrospectiveZKPFrame :
+  GovernedLegalWorkflowIntrospectiveZKPFrame
+canonicalGovernedLegalWorkflowIntrospectiveZKPFrame =
+  Introspection.zkp-frame
+    "dashi_agda focused DASHI TOE legal-governance lane"
+    "Converge SensibLaw and Actionstep-style legal workflow governance into existing TOE owners."
+    "DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact"
+    "canonicalGovernedLegalWorkflowTOEInvariantHandoff"
+    "SensibLaw residual, review, admission, compliance, and authority non-promotion surfaces"
+    "Reuse exact owners; expose one bridge through Unified.Everything, Unifier, and EverythingTOESymmetryResolved369."
+    "One canonical governed legal-workflow handoff with fail-closed semantic and authority promotion."
+    "Jurisdiction-specific evidence, exact-head kernel receipt, and external empirical receipts remain open."
+
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F control receipt.
 --
@@ -752,6 +779,14 @@ record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
       ≡
       canonicalGovernedLegalWorkflowZKPReceipt
 
+    introspectiveZKPFrame :
+      GovernedLegalWorkflowIntrospectiveZKPFrame
+
+    introspectiveZKPFrameIsCanonical :
+      introspectiveZKPFrame
+      ≡
+      canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
+
     taskCompletionNonPromotion :
       TaskCompletionCreatesTruth →
       ⊥
@@ -803,6 +838,8 @@ canonicalGovernedLegalWorkflowTOEInvariantHandoff =
     canonicalGovernedLegalWorkflowPromotionBoundary
     refl
     canonicalGovernedLegalWorkflowZKPReceipt
+    refl
+    canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
     refl
     toeTaskCompletionDoesNotCreateTruth
     toeDatabaseCommitDoesNotCreateSemanticAuthority
