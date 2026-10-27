@@ -313,3 +313,18 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+------------------------------------------------------------------------
+-- Exact imported antigravity TOE boundary.
+--
+-- This import does not use DASHIUnificationAxiom or any placeholder interface
+-- above as proof authority.  It exposes the current theorem-owned fail-closed
+-- antigravity convergence receipt to legacy Unifier consumers.
+------------------------------------------------------------------------
+
+import DASHI.Unified.AntigravityTOENonPromotionBridgeExact as AntigravityTOE
+
+antigravityTOENonPromotionReceipt :
+  AntigravityTOE.AntigravityTOEConvergenceReceipt
+antigravityTOENonPromotionReceipt =
+  AntigravityTOE.canonicalAntigravityTOEConvergenceReceipt
