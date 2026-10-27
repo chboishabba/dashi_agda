@@ -1,5 +1,20 @@
 # Save Woogaroo Forest — legal-team handoff brief
 
+## 27 October 2026 CURRENT STATUS — supersedes the historical September decision clock
+
+**Original primary status:** [Commonwealth all-notices original](https://eap-cp.powerappsportals.com/all-notices/) records **EPBC 2019/8575 Springfield Residential Development — APPROVED WITH CONDITIONS on 15 October 2026**. The earlier 1 October signed federal extension was superseded by the 25 September extension through **16 October**; actual decision occurred 15 October. The body below is an **historical 15 September evidence cut** and must NOT be read as today's pending-federal-decision or current legal deadline. The final signed federal approval, specific authorised footprint/conditions/delegate and Secretary's s95C recommendation report are **not acquired**.
+
+**Current P0 legal packet:** [Urgent standing / filing / interim counsel assessment](SaveWoogarooForestUrgentCounselStandingFilingInterimAssessment20261027.md) (in-force ADJR **C134 29 September 2026**, EPBC **C70 24 August**, individual/organisation s487 standing, applicant-specific furnishing clock, s475 injunction requiring actual/proposed breach, ADJR s15 stay not automatic, and undertaking/court forms). [Unsent EDO/barrister intake](SaveWoogarooForestUrgentCounselIntakeDraft20261027.md). [Unsent s135A(2) request for the s95C Secretary recommendation and separate s95B comment bundle/signed instrument](SaveWoogarooForestEPBC95C135ARequest20261027.md).
+
+**New implemented federal compliance cut:** National EPA **EPBC s474A Environment Protection Order** power operated from 24 August and has an [actual, different-site EPO example issued 7 October 2026](https://www.nationalepa.gov.au/epbc/compliance/audit-outcomes). The CEO requires a credible actual/likely contravention, serious damage or imminent risk to a matter covered by the Act, and order necessity. Maximum initial 14-day term and one statutory extension. See [conditional regulator packet — NOT SENT](SaveWoogarooNationalEPA474AConditionalRegulatorNotice20261027.md). This is NOT a guaranteed stop-work remedy, is **separate from** private s475 court injunction, ADJR s15 stay and Queensland planning/NCA conservation remedies. Project-specific **conditions and suspected breach are currently NOT source-paid**. [National EPA reporting](https://www.nationalepa.gov.au/epbc/compliance/report-a-breach) is available only for bona fide noncompliance evidence.
+
+**All topic coverage:** the [current 20-row case matrix](SaveWoogarooForestUrgentCounselStandingFilingInterimAssessment20261027.md) covers local development plans, case-law history, original ecology/koala/cumulative impacts, offset burden, QUT authors, Santoro/Santos and state diaries, political housing/HAFF claims, first-/second-/third-order land/infrastructure/equity/corporate benefits, separate data-centre referrals, title/consents, statutory decision file, urgent legal procedures and attribution. Retain project IDs and dated physical evidence separately. The publicly described approved action is **not yet an authenticated signed condition instrument**.
+
+**Urgency is conditional on original facts:** confirm the prospective litigant, s487 or ordinary standing, actual furnishing/deemed service, exact works commencement and threatened conduct, serious risk, and original operative duties. A report request, agency complaint or emailed lawyer inquiry does **not** file a court case, stay an approval or stop any filing time. Seek qualified counsel promptly. **No actual legal filing or EPA complaint is reported by this repo work.**
+
+---
+
+
 ## Purpose
 
 This brief is for Save Woogaroo Forest and lawyers assisting the group. It is **not legal advice**. It compresses the current source/proof state into a lawyer-usable gap analysis while keeping source identity, statutory authority, inference and unresolved facts separate.
