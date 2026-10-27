@@ -7,6 +7,8 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as Cut
 import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Core.GovernanceTrajectoryRealisationExact as Trajectory
+import DASHI.Foundations.SSPTritCarrier as SSP
 
 gate4TargetRemains58 :
   Cut.gate4FormalGapCount ≡ 58
@@ -108,14 +110,14 @@ appraisalFibreRemainsSevenHundredTwentyNine =
   Cut.appraisalFibreStateCountIsSevenHundredTwentyNine
 
 supportRemainsPositive :
-  Cut.relativeOrientationTrit Cut.Trajectory.supports
-  ≡ Cut.SSP.sspPosOne
+  Cut.relativeOrientationTrit Trajectory.supports
+  ≡ SSP.sspPosOne
 supportRemainsPositive =
   Cut.supportOrientationIsPositive
 
 counterRemainsNegative :
-  Cut.relativeOrientationTrit Cut.Trajectory.counters
-  ≡ Cut.SSP.sspNegOne
+  Cut.relativeOrientationTrit Trajectory.counters
+  ≡ SSP.sspNegOne
 counterRemainsNegative =
   Cut.counterOrientationIsNegative
 
@@ -128,3 +130,13 @@ contextualFibreWeldReceiptReachable :
   Cut.TOE369ContextualFibreWeldReceipt
 contextualFibreWeldReceiptReachable =
   Cut.canonicalTOE369ContextualFibreWeldReceipt
+
+
+sameProposalCanChangeSignByFrame :
+  Cut.contextualRelativeSign
+    Trajectory.demoProposalSystem
+    Trajectory.immediateOutcome
+    Trajectory.sameProposal
+  ≡ SSP.sspPosOne
+sameProposalCanChangeSignByFrame =
+  Cut.sameProposalCanBePositiveInOneFrame
