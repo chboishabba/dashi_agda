@@ -336,3 +336,30 @@ unifierYangMillsClayNotPromoted :
   YMTOE.toeClayYangMillsPromoted ≡ false
 unifierYangMillsClayNotPromoted =
   YMTOE.toeClayYangMillsPromotedIsFalse
+
+
+------------------------------------------------------------------------
+-- Normalized Yang-Mills TOE research frontier.
+--
+-- These are aliases only.
+-- The theorem owners remain in the Yang-Mills source lane.
+------------------------------------------------------------------------
+
+unifierYangMillsRegularEProjectionCompilerLevel :
+  YMTOE.ProofLevel
+unifierYangMillsRegularEProjectionCompilerLevel =
+  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
+
+unifierYangMillsRegularELocalizationSourceLevel :
+  YMTOE.ProofLevel
+unifierYangMillsRegularELocalizationSourceLevel =
+  YMTOE.toeCMP119RegularELocalizationSourceLevel
+
+unifierYangMillsHardAnalyticLemmaUpperCount : ℕ
+unifierYangMillsHardAnalyticLemmaUpperCount =
+  YMTOE.toeHardAnalyticLemmaUpperCount
+
+unifierYangMillsHardAnalyticLemmaUpperCountIsSix :
+  unifierYangMillsHardAnalyticLemmaUpperCount ≡ 6
+unifierYangMillsHardAnalyticLemmaUpperCountIsSix =
+  YMTOE.toeHardAnalyticLemmaUpperCountIsSix
