@@ -1,4 +1,25 @@
 module DASHI.Unifier where
+import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
+
+-- September 2026 source-typed finite spectral closure and fail-closed gates.
+-- Reuse the existing NonArchimedean owner; do not rebuild source Lean proofs.
+open AdelicSpectralTOE public using
+  ( toeFiniteSpatialCircleClosed
+  ; toeFiniteTwistedPowerClosed
+  ; toeLiteralSpectrumTowerClosed
+  ; toePrefactoredFiniteMixingClosed
+  ; toeConstructiveFiniteStoppingTailClosed
+  ; toeDirectedSizeSigmaHalfRejected
+  ; toeArbitraryDAGCoverNeedsConstruction
+  ; toeDepthSparsityNeedsQuantitativeBound
+  ; toeBoundaryEntropyNeedsSameObjectWeld
+  ; toeRoPEOptimalityNeedsModelConsumer
+  ; toeMultiPrimeSparsityNonPromotion
+  ; toeHolographySameObjectNonPromotion
+  ; toeNoAutomaticSpectralToRoPETransfer
+  ; toeOriginalAdvertisedChainHasNoLiveProducer
+  )
+
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
