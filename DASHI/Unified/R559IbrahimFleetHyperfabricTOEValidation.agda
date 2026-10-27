@@ -75,12 +75,20 @@ unifierStreamLossStillExact :
 unifierStreamLossStillExact =
   Unifier.unifierTwoDigitStreamCannotRecoverThird
 
+fleetEigenPriorityStillHasNoProofAuthority :
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority
+    Owner.fleetFormalGapTargetReceipt ≡ false
+fleetEigenPriorityStillHasNoProofAuthority =
+  Owner.fleetEigenPriorityDoesNotCreateProof
+
 fleetCountStillDoesNotCreateFormalDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof
+    Owner.fleetFormalGapTargetReceipt ≡ false
 fleetCountStillDoesNotCreateFormalDischarge =
   Owner.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStillCannotBeRetargeted :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged
+    Owner.fleetFormalGapTargetReceipt ≡ true
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
