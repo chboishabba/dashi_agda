@@ -13,6 +13,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
+import DASHI.Unified.SensibLawGovernanceTOEExact as SensibLawGovernanceTOE
+import DASHI.Unified.SensibLawGovernanceTOEValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.FleetFormalGapTargetTOEValidation
