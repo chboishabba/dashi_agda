@@ -838,3 +838,8 @@ unifierNavierStokesClayFrontierZKPFrame :
   NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
 unifierNavierStokesClayFrontierZKPFrame =
   NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+unifierNavierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
+unifierNavierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
