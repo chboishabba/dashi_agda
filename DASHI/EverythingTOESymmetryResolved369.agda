@@ -745,3 +745,19 @@ toeGovernedSourceIdentifierDoesNotCreateProofAuthority =
 
 toeGovernedESDSurfaceMutationRemainsForbidden =
   LegalSourceSemantic.toeESDSurfaceMutationRemainsForbidden
+
+
+toeGovernedRuntimeCannotInventLegalSemantics =
+  LegalSourceSemantic.toeRuntimeCannotInventLegalSemantics
+
+toeGovernedSourceFollowCannotCreateAuthorityByTransport =
+  LegalSourceSemantic.toeSourceFollowCannotCreateAuthorityByTransport
+
+toeGovernedTargetDomainNeedsOwnAuthorityWitness =
+  LegalSourceSemantic.toeTargetDomainNeedsOwnAuthorityWitness
+
+toeGovernedRepresentationEqualityDoesNotCreateLegalAuthority =
+  LegalSourceSemantic.toeRepresentationEqualityDoesNotCreateLegalAuthority
+
+toeGovernedVendorIdentityDoesNotCreateAuthority =
+  LegalSourceSemantic.toeVendorIdentityDoesNotCreateAuthority
