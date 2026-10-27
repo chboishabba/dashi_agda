@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as Owner
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as Legal
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as Manifest
+import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as Fleet
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Everything as Unified
@@ -27,17 +28,17 @@ unifiedHandoffMatchesOwner :
 unifiedHandoffMatchesOwner = refl
 
 fleetFormalGapCountRemains58 :
-  Owner.Fleet.fleetFormalGaps ≡ 58
+  Fleet.fleetFormalGaps ≡ 58
 fleetFormalGapCountRemains58 =
   Owner.fleetFormalGapCountIs58
 
 fleetDischargedFibresRemain584 :
-  Owner.Fleet.fleetDischargedFibres ≡ 584
+  Fleet.fleetDischargedFibres ≡ 584
 fleetDischargedFibresRemain584 =
   Owner.fleetDischargedFibresRemain584
 
 fleetContradictionGapsRemain44 :
-  Owner.Fleet.fleetContradictionGaps ≡ 44
+  Fleet.fleetContradictionGaps ≡ 44
 fleetContradictionGapsRemain44 =
   Owner.fleetContradictionGapsRemain44
 
@@ -62,6 +63,6 @@ semanticAdmissionStillDoesNotCreateLegalAuthority =
   TOE.toeGovernedSemanticAdmissionDoesNotCreateLegalAuthority
 
 equal58CardinalityStillDoesNotIdentifyGapObjects :
-  Owner.Fleet.Fleet58Gate458SameIdentityFromCount → ⊥
+  Fleet.Fleet58Gate458SameIdentityFromCount → ⊥
 equal58CardinalityStillDoesNotIdentifyGapObjects =
   Owner.fleet58DoesNotIdentifyYMGate458
