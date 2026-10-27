@@ -72,6 +72,9 @@ import DASHI.Physics.YangMills.BalabanCMP119LiteralResidualWeldMaxCut20261002Exa
 import DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact as D534
 import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as D535
 import DASHI.Unified.BalabanR559TOEMaxCutExact as Joint
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6Ledger as Gate4Ledger
+import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
 
 record YMImplementAToDTOEMaxCutReceipt : Set where
   field
@@ -218,15 +221,15 @@ canonicalYMImplementAToDTOEMaxCutReceipt = record
       D535.literalRound535CylinderEventBooleanAlgebraLevel
 
   ; gate4UnresolvedCount =
-      Joint.gate4UnresolvedObligationCount
+      Counts.gate4ObligationCount
   ; gate4UnresolvedCountIs58 =
-      Joint.gate4UnresolvedObligationCountIs58
+      Counts.gate4ObligationCountExact
   ; gate4DefinitionLevel =
-      Joint.gate4CutsetDefinitionLevel
+      Gate4.physicalClosureRound6CutsetDefinitionLevel
   ; gate4InhabitantsLevel =
-      Joint.gate4CutsetInhabitantsLevel
+      Gate4.physicalClosureRound6CutsetInhabitantsLevel
   ; gate4PaidReductionLevel =
-      Joint.gate4PaidReductionLedgerLevel
+      Gate4Ledger.physicalClosureRound6LedgerLevel
 
   ; publishedContinuumPromotion =
       Joint.publishedContinuumPromotion
