@@ -816,6 +816,12 @@ unifier369FullCubeRotationNotFree =
 unifier369MonsterPhaseConjugationIntertwiner =
   MaxCut369.toe27MonsterPhaseConjugationIntertwiner
 
+unifier369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+unifier369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
 unifier369Ternary27PhaseReductionNotGlobalInversion =
   MaxCut369.toe27PhaseReductionNotGlobalInversion
 
@@ -935,6 +941,12 @@ unifierFleetNumericABIReceipt =
 
 unifierFleetResidualInvariantReceipt =
   FleetGapTOE.fleetResidualInvariantReceipt
+
+unifierFleetPlanningBoundary =
+  FleetGapTOE.fleetPlanningBoundary
+
+unifierFleetVectorCoordinateDoesNotCreateTruth =
+  FleetGapTOE.fleetVectorCoordinateDoesNotCreateTruth
 
 unifierFleetPromotionObligationIndex =
   FleetGapTOE.fleetPromotionObligationIndex
