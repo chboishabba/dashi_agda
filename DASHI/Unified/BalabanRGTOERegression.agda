@@ -314,8 +314,12 @@ balabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
 balabanGoal1CLiteralSourceInstantiationLevel =
   Goal1C.literalRound475CSourceInstantiationLevel
 
+balabanLevel2ClayPromotionFlag : Bool
+balabanLevel2ClayPromotionFlag =
+  SameFamilyRecovery.clayPromotion
+
 balabanLevel2ClayPromotionStillFalse :
-  SameFamilyRecovery.clayPromotion ≡ false
+  balabanLevel2ClayPromotionFlag ≡ false
 balabanLevel2ClayPromotionStillFalse =
   SameFamilyRecovery.clayPromotionIsFalse
 
