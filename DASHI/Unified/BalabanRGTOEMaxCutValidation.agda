@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Unified.BalabanRGTOERegression as Balaban
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
@@ -702,3 +703,40 @@ physicsDepthContinuumLimitPromotionImpossible =
 validationZKPFrame : Balaban.BalabanTOEZKPFrame
 validationZKPFrame =
   Balaban.canonicalBalabanTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Joint Balaban/R559 receipt carries the typed continuum firewalls.
+------------------------------------------------------------------------
+
+jointBalabanR559ContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+jointBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559.continuumLimitPromotionEliminator
+    BalabanR559.canonicalBalabanR559TOEMaxCutReceipt
+
+jointBalabanR559DepthContinuumLimitPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+jointBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559.depthContinuumLimitPromotionEliminator
+    BalabanR559.canonicalBalabanR559TOEMaxCutReceipt
+
+toeJointContinuumLimitPromotionMatchesJointOwner :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+toeJointContinuumLimitPromotionMatchesJointOwner =
+  TOE.toeBalabanR559ContinuumLimitPromotionImpossible
+
+unifierJointContinuumLimitPromotionMatchesJointOwner :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+unifierJointContinuumLimitPromotionMatchesJointOwner =
+  Unifier.unifierBalabanR559ContinuumLimitPromotionImpossible
+
+toeJointDepthContinuumLimitPromotionMatchesJointOwner :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+toeJointDepthContinuumLimitPromotionMatchesJointOwner =
+  TOE.toeBalabanR559DepthContinuumLimitPromotionImpossible
+
+unifierJointDepthContinuumLimitPromotionMatchesJointOwner :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+unifierJointDepthContinuumLimitPromotionMatchesJointOwner =
+  Unifier.unifierBalabanR559DepthContinuumLimitPromotionImpossible
