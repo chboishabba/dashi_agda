@@ -2,6 +2,7 @@ module DASHI.Mathematics.CrossPollination.MillenniumThreeLaneContinuationValidat
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as PNP
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHomogeneousCoordinatesExact as Hodge
@@ -820,3 +821,63 @@ hodgeCellularPointGeneratorWeldPaid :
   ≡ HodgeCell.cellularPointGenerator
 hodgeCellularPointGeneratorWeldPaid =
   HodgeCell.pointCycleClassWeldsToCellularGenerator
+
+
+------------------------------------------------------------------------
+-- CURRENT EXTERNAL MILLENNIUM ACCEPTANCE REGRESSION
+------------------------------------------------------------------------
+
+leanMillenniumExactRHStatementWeldPaid :
+  LeanAssist.leanMillenniumRHExactStatementWeldSourceWritten ≡ true
+leanMillenniumExactRHStatementWeldPaid =
+  LeanAssist.leanMillenniumRHExactStatementWeldSourceWrittenIsTrue
+
+leanMillenniumNSFeffermanCExactSourcePaid :
+  LeanAssist.leanMillenniumNSFeffermanCExactTermSourceWritten ≡ true
+leanMillenniumNSFeffermanCExactSourcePaid =
+  LeanAssist.leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue
+
+leanMillenniumNSFeffermanDExactSourcePaid :
+  LeanAssist.leanMillenniumNSFeffermanDExactTermSourceWritten ≡ true
+leanMillenniumNSFeffermanDExactSourcePaid =
+  LeanAssist.leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue
+
+leanMillenniumNSExternalAdapterNeedsNoNewMathematics :
+  LeanAssist.leanMillenniumNSAdapterRequiresNewMathematics ≡ false
+leanMillenniumNSExternalAdapterNeedsNoNewMathematics =
+  LeanAssist.leanMillenniumNSAdapterRequiresNoNewMathematics
+
+leanMillenniumBSDProjectiveAffineRankWeldPaid :
+  LeanAssist.leanMillenniumBSDProjectiveAffineRankWeldSourceWritten ≡ true
+leanMillenniumBSDProjectiveAffineRankWeldPaid =
+  LeanAssist.leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue
+
+leanMillenniumPNPTerminalFailureBidiOwned :
+  LeanAssist.leanMillenniumPNPTerminalFailureBidiAgdaOwned ≡ true
+leanMillenniumPNPTerminalFailureBidiOwned =
+  LeanAssist.leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue
+
+leanMillenniumHodgePrizeTargetStillIncomplete :
+  LeanAssist.leanMillenniumHodgeFaithfulPrizeTarget ≡ false
+leanMillenniumHodgePrizeTargetStillIncomplete =
+  LeanAssist.leanMillenniumHodgeFaithfulPrizeTargetIsFalse
+
+leanMillenniumHodgePrizePromotionBlocked :
+  LeanAssist.LeanMillenniumHodgePrizePromotion → ⊥
+leanMillenniumHodgePrizePromotionBlocked =
+  LeanAssist.leanMillenniumHodgePrizePromotionImpossible
+
+leanMillenniumYangMillsPrizeTargetStillIncomplete :
+  LeanAssist.leanMillenniumYangMillsFaithfulPrizeTarget ≡ false
+leanMillenniumYangMillsPrizeTargetStillIncomplete =
+  LeanAssist.leanMillenniumYangMillsFaithfulPrizeTargetIsFalse
+
+leanMillenniumYangMillsPrizePromotionBlocked :
+  LeanAssist.LeanMillenniumYangMillsPrizePromotion → ⊥
+leanMillenniumYangMillsPrizePromotionBlocked =
+  LeanAssist.leanMillenniumYangMillsPrizePromotionImpossible
+
+leanMillenniumKernelPromotionStillBlocked :
+  LeanAssist.LeanMillenniumSourceWrittenKernelPromotion → ⊥
+leanMillenniumKernelPromotionStillBlocked =
+  LeanAssist.leanMillenniumSourceWrittenKernelPromotionImpossible
