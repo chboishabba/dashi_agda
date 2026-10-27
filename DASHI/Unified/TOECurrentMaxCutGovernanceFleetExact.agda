@@ -82,6 +82,7 @@ import DASHI.Moonshine.Base369Ternary27StratifiedFibreHolonomyExact as Holonomy
 import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as Wave
 import DASHI.Reasoning.TernarySynthesisTransportWeldExact as WaveTransport
 import DASHI.Physics.ShiftDiscreteWaveStep as DiscreteWave
+import DASHI.Biology.TriadicBraidDialecticExact as Braid
 open import Data.Integer using (+_; -[1+_])
 
 ------------------------------------------------------------------------
@@ -730,16 +731,43 @@ synthesisTwoCellExistsIsTrue =
   SynthesisCell.localTwoCellConstructedIsTrue
     SynthesisCell.canonicalTernarySynthesisCellBoundary
 
-synthesisKeepsOriginalComparator : Bool
-synthesisKeepsOriginalComparator =
+synthesisErasesOriginalComparator : Bool
+synthesisErasesOriginalComparator =
   SynthesisCell.originalTensionEdgeErasedByFilling
     SynthesisCell.canonicalTernarySynthesisCellBoundary
 
-synthesisKeepsOriginalComparatorIsFalse :
-  synthesisKeepsOriginalComparator ≡ false
-synthesisKeepsOriginalComparatorIsFalse =
+synthesisErasesOriginalComparatorIsFalse :
+  synthesisErasesOriginalComparator ≡ false
+synthesisErasesOriginalComparatorIsFalse =
   SynthesisCell.originalTensionEdgeErasedByFillingIsFalse
     SynthesisCell.canonicalTernarySynthesisCellBoundary
+
+record ContextIndexedAppraisalState : Set where
+  constructor context-indexed-appraisal-state
+  field
+    appraisalContext : Context.ConsumerFrame
+    interactionBase : Geometry.Ternary27Point
+    appraisalOverBase : Fibre.AppraisalFibreOver interactionBase
+
+open ContextIndexedAppraisalState public
+
+assembleContextIndexedAppraisal :
+  ContextIndexedAppraisalState →
+  Geometry.TernaryHyperformalPoint
+assembleContextIndexedAppraisal state =
+  Fibre.assembleOver
+    (interactionBase state)
+    (appraisalOverBase state)
+
+assembledAppraisalRetainsInteractionBase :
+  (state : ContextIndexedAppraisalState) →
+  Geometry.projectInteractionVoxel
+    (assembleContextIndexedAppraisal state)
+  ≡ interactionBase state
+assembledAppraisalRetainsInteractionBase state =
+  Fibre.assembleProjectsToBase
+    (interactionBase state)
+    (appraisalOverBase state)
 
 sameInteractionBaseCanCarryDifferentFibreEndpoints :
   Holonomy.flipThenSwapEndpoint ≡ Holonomy.swapThenFlipEndpoint → ⊥
@@ -778,6 +806,28 @@ phaseChangedSynthesisTransportDefectIsExact :
 phaseChangedSynthesisTransportDefectIsExact =
   WaveTransport.phaseChangedSynthesisDefectExact
 
+
+braidEquivalentEndpointDoesNotEraseHistory :
+  Braid.wordKind (Braid.residual Braid.leftTransition)
+  ≡ Braid.wordKind (Braid.residual Braid.rightTransition)
+  → ⊥
+braidEquivalentEndpointDoesNotEraseHistory =
+  Braid.braidRelationRetainsDistinctWordResidual
+
+braidEndpointsCanAgree :
+  Braid.endpoint Braid.leftTransition
+  ≡ Braid.endpoint Braid.rightTransition
+braidEndpointsCanAgree =
+  Braid.braidRelationSharesEndpoint
+
+mediatingStrandDoesNotGuaranteeResolution :
+  Braid.mediatingStrandAlwaysResolvesOpposition
+    Braid.canonicalTriadicBraidBoundary
+  ≡ false
+mediatingStrandDoesNotGuaranteeResolution =
+  Braid.mediatingStrandAlwaysResolvesOppositionIsFalse
+    Braid.canonicalTriadicBraidBoundary
+
 record TOE369ContextualFibreWeldReceipt : Set where
   constructor toe-369-contextual-fibre-weld-receipt
   field
@@ -791,6 +841,8 @@ record TOE369ContextualFibreWeldReceipt : Set where
       Fibre.StratifiedAppraisalFibreBoundary
     holonomyBoundary :
       Holonomy.StratifiedFibreHolonomyBoundary
+    triadicBraidBoundary :
+      Braid.TriadicBraidBoundary
     sheetStates : Nat
     sheetStatesAreNine : sheetStates ≡ 9
     cubeStates : Nat
@@ -807,6 +859,7 @@ canonicalTOE369ContextualFibreWeldReceipt =
     SynthesisCell.canonicalTernarySynthesisCellBoundary
     Fibre.canonicalStratifiedAppraisalFibreBoundary
     Holonomy.canonicalStratifiedFibreHolonomyBoundary
+    Braid.canonicalTriadicBraidBoundary
     decisionSheetStateCount
     decisionSheetStateCountIsNine
     interactionCubeStateCount
