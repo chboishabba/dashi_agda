@@ -20,6 +20,26 @@ unifierFullCubeNonPromotionMatches :
 unifierFullCubeNonPromotionMatches =
   Unifier.unifier369FullCubeRotationNotFree
 
+toeMonsterRepresentationNonPromotionMatches :
+  TOE.toe369Ternary27MonsterRepresentationNotPromoted
+  ≡ Owner.toe27MonsterRepresentationNotPromoted
+toeMonsterRepresentationNonPromotionMatches = refl
+
+unifierMonsterRepresentationNonPromotionMatches :
+  Unifier.unifier369Ternary27MonsterRepresentationNotPromoted
+  ≡ Owner.toe27MonsterRepresentationNotPromoted
+unifierMonsterRepresentationNonPromotionMatches = refl
+
+toeMonsterEmbeddingNonPromotionMatches :
+  TOE.toe369Ternary27MonsterEmbeddingNotPromoted
+  ≡ Owner.toe27MonsterEmbeddingNotPromoted
+toeMonsterEmbeddingNonPromotionMatches = refl
+
+unifierMonsterEmbeddingNonPromotionMatches :
+  Unifier.unifier369Ternary27MonsterEmbeddingNotPromoted
+  ≡ Owner.toe27MonsterEmbeddingNotPromoted
+unifierMonsterEmbeddingNonPromotionMatches = refl
+
 toeFullGradeDimensionFirewallMatches :
   FullGrade.LinearDimensionCreatesFaithfulness → ⊥
 toeFullGradeDimensionFirewallMatches =
