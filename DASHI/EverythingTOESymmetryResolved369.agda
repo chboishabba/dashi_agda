@@ -48,6 +48,11 @@ toeGovernedLegalWorkflowZKPReceipt :
 toeGovernedLegalWorkflowZKPReceipt =
   LegalGovernance.canonicalGovernedLegalWorkflowZKPReceipt
 
+toeGovernedLegalWorkflowIntrospectiveZKPFrame :
+  LegalGovernance.GovernedLegalWorkflowIntrospectiveZKPFrame
+toeGovernedLegalWorkflowIntrospectiveZKPFrame =
+  LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
+
 
 toeGovernedLegalWorkflowBoundary :
   LegalGovernance.GovernedLegalWorkflowTOEBoundary
