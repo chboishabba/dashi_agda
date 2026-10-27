@@ -83,6 +83,9 @@ import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as 
 import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as DbNative
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as SemanticPromotion
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
+import DASHI.Law.SensibLawNativeLegalFollowCLIExact as NativeLegalFollow
+import DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact as ProviderAcquisition
+import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as ExpertProduction
 
 ------------------------------------------------------------------------
 -- Type aliases keep Unifier thin.
@@ -744,6 +747,9 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "DASHI.Interop.SensibLawSemanticPromotionPolicy"
     ∷ "DASHI.Core.BoundAcquisitionDemandExact"
     ∷ "DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact"
+    ∷ "DASHI.Law.SensibLawNativeLegalFollowCLIExact"
+    ∷ "DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact"
+    ∷ "DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact"
     ∷ [] )
     ( "Normalize exact theorem aliases only."
     ∷ "Retain the intermediate compliance witness."
@@ -774,6 +780,9 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "Bound acquisition does not pay the requirement or close the consumer."
     ∷ "Producer identity does not identify the residual."
     ∷ "Exact compiler-product reuse does not create semantic admission, authority, applicability, entity identity, proposition identity, event identity, or claim truth."
+    ∷ "Native legal-follow orchestration does not create legal authority."
+    ∷ "Provider failure is not negative legal evidence."
+    ∷ "Expert production does not create truth, legal, admissibility, empirical, clinical, or other authority."
     ∷ [] )
     ( "dashi_agda is the formal reference lane."
     ∷ "SensibLaw/SLR owns review, admission, semantic construction, and legal consumer projection."
@@ -798,6 +807,8 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "The TOE root reaches canonical semantic-authority non-promotion."
     ∷ "The TOE root reaches exact-live bound-acquisition non-promotion."
     ∷ "The TOE root reaches exact compiler-product reuse non-promotion."
+    ∷ "The TOE root reaches native legal-follow orchestration non-promotion."
+    ∷ "The TOE root reaches provider-access non-evidence and expert-production non-promotion."
     ∷ [] )
     ( "ITIL change and service-management lens."
     ∷ "ISO 9000 family quality-management lens."
@@ -900,6 +911,59 @@ toeExactReuseDoesNotCreateClaimTruth :
 toeExactReuseDoesNotCreateClaimTruth =
   DbNative.exactReuseDoesNotCreateClaimTruth
 
+
+
+------------------------------------------------------------------------
+-- Native legal-follow, provider-access, and expert-production firewalls.
+--
+-- Reuse exact theorem owners.
+-- Orchestration does not create legal authority.
+-- Provider failure is not negative legal evidence.
+-- Expert production does not create authority.
+------------------------------------------------------------------------
+
+NativeCliAutomaticallyLegalAuthority : Set
+NativeCliAutomaticallyLegalAuthority =
+  NativeLegalFollow.NativeCliAutomaticallyLegalAuthority
+
+ProviderFailureAutomaticallyPropositionFalse : Set
+ProviderFailureAutomaticallyPropositionFalse =
+  ProviderAcquisition.ProviderFailureAutomaticallyPropositionFalse
+
+toeNativeLegalFollowDoesNotCreateLegalAuthority :
+  NativeCliAutomaticallyLegalAuthority → ⊥
+toeNativeLegalFollowDoesNotCreateLegalAuthority =
+  NativeLegalFollow.nativeCliDoesNotCreateAuthority
+
+toeProviderFailureDoesNotMakePropositionFalse :
+  ProviderFailureAutomaticallyPropositionFalse → ⊥
+toeProviderFailureDoesNotMakePropositionFalse =
+  ProviderAcquisition.providerFailureDoesNotMakePropositionFalse
+
+toeExpertProductionPromotesAnyAuthority :
+  Bool
+toeExpertProductionPromotesAnyAuthority =
+  ExpertProduction.expertProductionPromotesAnyAuthority
+
+toeExpertProductionPromotesAnyAuthorityIsFalse :
+  toeExpertProductionPromotesAnyAuthority ≡ false
+toeExpertProductionPromotesAnyAuthorityIsFalse =
+  ExpertProduction.expertProductionPromotesAnyAuthorityIsFalse
+
+toeNativeLegalFollowCliBoundary :
+  NativeLegalFollow.NativeLegalFollowCliBoundary
+toeNativeLegalFollowCliBoundary =
+  NativeLegalFollow.canonicalNativeLegalFollowCliBoundary
+
+toeProviderFailureCalibration :
+  ProviderAcquisition.ProviderFailureCalibration
+toeProviderFailureCalibration =
+  ProviderAcquisition.canonicalProviderFailureCalibration
+
+toeExpertProductionBoundary :
+  ExpertProduction.ExpertProductionBoundary
+toeExpertProductionBoundary =
+  ExpertProduction.canonicalExpertProductionBoundary
 
 ------------------------------------------------------------------------
 -- Canonical governance invariant handoff.
@@ -1013,6 +1077,17 @@ record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
       KnowledgeIsAuthority →
       ⊥
 
+    nativeLegalFollowAuthorityFirewall :
+      NativeCliAutomaticallyLegalAuthority →
+      ⊥
+
+    providerFailureNegativeEvidenceFirewall :
+      ProviderFailureAutomaticallyPropositionFalse →
+      ⊥
+
+    expertProductionAuthorityClosed :
+      toeExpertProductionPromotesAnyAuthority ≡ false
+
     exactReuseAdmissionFirewall :
       ExactReuseCreatesSemanticAdmission →
       ⊥
@@ -1071,6 +1146,9 @@ canonicalGovernedLegalWorkflowTOEInvariantHandoff =
     toeCaseySelectionDoesNotCreateWorldTruth
     toeFormalProofDoesNotCreateExternalWorldTruth
     toeKnowledgeDoesNotCreateExecutionAuthority
+    toeNativeLegalFollowDoesNotCreateLegalAuthority
+    toeProviderFailureDoesNotMakePropositionFalse
+    toeExpertProductionPromotesAnyAuthorityIsFalse
     toeExactReuseDoesNotCreateSemanticAdmission
     toeExactReuseDoesNotCreateSemanticAuthority
     toeExactReuseDoesNotCreateApplicability
