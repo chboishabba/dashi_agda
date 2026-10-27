@@ -1402,3 +1402,13 @@ unifierFleetDispatchRequiresNamedManifest =
 
 unifierFleetCountDoesNotIdentifyGapObjects =
   FleetGapTOE.externalGapCountIdentifiesIndividualGapsIsFalse
+
+-- Reuse source-owned semantic classification and non-promotion.
+unifierHeuristicOnlyLegalSemanticCandidateAbstains =
+  LegalSemanticTOE.toeHeuristicOnlyLegalSemanticCandidateAbstains
+
+unifierSemanticPromotionCannotConferLegalAuthority =
+  LegalSemanticTOE.toeSemanticPromotionCannotConferLegalAuthority
+
+unifierSemanticPromotionCannotConferAnyAuthority =
+  LegalSemanticTOE.toeSemanticPromotionCannotConferAnyAuthority
