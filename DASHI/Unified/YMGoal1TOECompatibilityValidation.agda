@@ -8,6 +8,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.YMGoal1TOECompatibilityExact as Goal1
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as U
+import DASHI.Unified.Physics as UnifiedPhysics
 
 toeFiniteAMatchesAdapter :
   TOE.toe369YangMillsGoal1FiniteASourceLevel
@@ -123,3 +124,53 @@ unifierPreferredVariableDomainBMatchesAdapter :
   U.unifierYangMillsGoal1PreferredVariableDomainBSourceLevel
   ≡ Goal1.goal1PreferredVariableDomainBSourceLevel
 unifierPreferredVariableDomainBMatchesAdapter = refl
+
+
+------------------------------------------------------------------------
+-- Unified.Physics facade regressions.
+------------------------------------------------------------------------
+
+unifiedPhysicsPreferredVariableDomainBMatchesAdapter :
+  UnifiedPhysics.yangMillsGoal1PreferredVariableDomainBSourceLevel
+  ≡ Goal1.goal1PreferredVariableDomainBSourceLevel
+unifiedPhysicsPreferredVariableDomainBMatchesAdapter = refl
+
+unifiedPhysicsFiniteA1MatchesAdapter :
+  UnifiedPhysics.yangMillsGoal1FiniteA1WilsonActionInvarianceLevel
+  ≡ Goal1.goal1FiniteA1WilsonActionInvarianceLevel
+unifiedPhysicsFiniteA1MatchesAdapter = refl
+
+unifiedPhysicsFiniteA2MatchesAdapter :
+  UnifiedPhysics.yangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel
+  ≡ Goal1.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+unifiedPhysicsFiniteA2MatchesAdapter = refl
+
+unifiedPhysicsA3MatchesAdapter :
+  UnifiedPhysics.yangMillsGoal1A3UniformCompactContainmentLevel
+  ≡ Goal1.goal1A3UniformCompactContainmentLevel
+unifiedPhysicsA3MatchesAdapter = refl
+
+unifiedPhysicsLocalCMatchesAdapter :
+  UnifiedPhysics.yangMillsGoal1LocalQFTCSourceLevel
+  ≡ Goal1.goal1LocalQFTCSourceLevel
+unifiedPhysicsLocalCMatchesAdapter = refl
+
+unifiedPhysicsC3MatchesAdapter :
+  UnifiedPhysics.yangMillsGoal1C3OneStepAFIdentificationLevel
+  ≡ Goal1.goal1C3OneStepAFIdentificationLevel
+unifiedPhysicsC3MatchesAdapter = refl
+
+unifiedPhysicsC4CompilerMatchesAdapter :
+  UnifiedPhysics.yangMillsGoal1C4SectorRecoveryCompilerLevel
+  ≡ Goal1.goal1C4SectorRecoveryCompilerLevel
+unifiedPhysicsC4CompilerMatchesAdapter = refl
+
+unifiedPhysicsContinuumStillBlocked :
+  Goal1.flat4DContinuumTransferProvedHere ≡ false
+unifiedPhysicsContinuumStillBlocked =
+  UnifiedPhysics.yangMillsGoal1ContinuumStillOpen
+
+unifiedPhysicsClayStillBlocked :
+  Goal1.clayYangMillsPromoted ≡ false
+unifiedPhysicsClayStillBlocked =
+  UnifiedPhysics.yangMillsGoal1ClayStillBlocked
