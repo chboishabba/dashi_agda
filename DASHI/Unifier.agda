@@ -9,7 +9,7 @@ import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -1343,3 +1343,183 @@ unifierBalabanPhysicalPromotionCut =
   unifierBalabanBlockSpinStillBlocked ,
   (unifierBalabanUniformKPStillBlocked ,
    unifierBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- SensibLaw / Actionstep-style legal-governance direct handoff.
+--
+-- Reuse existing theorem owners.
+-- Actionstep-style workflow uses the generic domain-transport boundary.
+-- This aggregate creates no vendor ontology and no new legal semantics.
+------------------------------------------------------------------------
+
+
+import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as SLWorkflow
+import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as SLReview
+import DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact as SLMatter
+import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as SLLegalAuthority
+import DASHI.Core.ITIRGovernanceControlCaseExact as SLControl
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as SLDomain
+import DASHI.Governance.FormalisationGovernanceCapstoneExact as SLFormalisation
+import DASHI.Core.AuthorityNonPromotionCore as SLAuthority
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as SLSemanticPromotion
+
+unifierLegalTaskCompletionDoesNotCreateTruth :
+  SLWorkflow.TaskCompletionCreatesTruth → ⊥
+unifierLegalTaskCompletionDoesNotCreateTruth =
+  SLWorkflow.taskCompletionDoesNotCreateTruth
+
+unifierLegalDurableReviewDoesNotCreateTruth :
+  SLReview.DurableReviewStateCreatesTruth → ⊥
+unifierLegalDurableReviewDoesNotCreateTruth =
+  SLReview.durableReviewStateDoesNotCreateTruth
+
+unifierLegalDatabaseCommitDoesNotCreateSemanticAuthority :
+  SLReview.DatabaseCommitCreatesSemanticAuthority → ⊥
+unifierLegalDatabaseCommitDoesNotCreateSemanticAuthority =
+  SLReview.databaseCommitDoesNotCreateSemanticAuthority
+
+unifierLegalAcceptedReviewDoesNotPayApplicability :
+  SLReview.AcceptedStatusPaysApplicability → ⊥
+unifierLegalAcceptedReviewDoesNotPayApplicability =
+  SLReview.acceptedStatusDoesNotPayApplicability
+
+unifierLegalMatterAcceptanceDoesNotMutateMatter :
+  SLMatter.AcceptanceReceiptMutatesMatter → ⊥
+unifierLegalMatterAcceptanceDoesNotMutateMatter =
+  SLMatter.acceptanceReceiptDoesNotMutateMatter
+
+unifierLegalCandidateSourceDoesNotCreateAuthority :
+  SLLegalAuthority.CandidateSourceIsAuthoritative → ⊥
+unifierLegalCandidateSourceDoesNotCreateAuthority =
+  SLLegalAuthority.candidateSourceDoesNotCloseAuthority
+
+unifierLegalSameSystemDoesNotCreateAuthority :
+  SLLegalAuthority.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+unifierLegalSameSystemDoesNotCreateAuthority =
+  SLLegalAuthority.sameSystemDoesNotAutomaticallyCloseAuthority
+
+unifierLegalCurrentValidityDoesNotCreateApplicability :
+  SLLegalAuthority.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifierLegalCurrentValidityDoesNotCreateApplicability =
+  SLLegalAuthority.currentValidityDoesNotAutomaticallyEstablishApplicability
+
+unifierLegalSemanticAdmissionDoesNotCreateLegalAuthority :
+  SLLegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+unifierLegalSemanticAdmissionDoesNotCreateLegalAuthority =
+  SLLegalAuthority.semanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+unifierLegalDocumentRoleDoesNotCreateLegalAuthority :
+  SLLegalAuthority.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+unifierLegalDocumentRoleDoesNotCreateLegalAuthority =
+  SLLegalAuthority.documentRoleDoesNotSupplyLegalSourceAuthority
+
+unifierLegalControlEvidenceDoesNotCreateTruth :
+  SLControl.ControlEvidenceCreatesTruth → ⊥
+unifierLegalControlEvidenceDoesNotCreateTruth =
+  SLControl.controlEvidenceDoesNotCreateTruth
+
+unifierLegalPassingControlDoesNotCreateCertification :
+  SLControl.PassingControlMeansCertified → ⊥
+unifierLegalPassingControlDoesNotCreateCertification =
+  SLControl.passingDoesNotMeanCertified
+
+unifierActionstepStyleDomainTransport :
+  SLDomain.DomainTransportReceipt
+unifierActionstepStyleDomainTransport =
+  SLDomain.canonicalDomainTransportReceipt
+
+unifierActionstepStyleVendorIdentityDoesNotCreateAuthority :
+  SLDomain.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    unifierActionstepStyleDomainTransport
+  ≡ false
+unifierActionstepStyleVendorIdentityDoesNotCreateAuthority = refl
+
+unifierActionstepStyleRepresentationDoesNotCreateLegalAuthority :
+  SLDomain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    unifierActionstepStyleDomainTransport
+  ≡ false
+unifierActionstepStyleRepresentationDoesNotCreateLegalAuthority = refl
+
+unifierActionstepStyleTargetNeedsOwnAuthorityWitness :
+  SLDomain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
+    unifierActionstepStyleDomainTransport
+  ≡ true
+unifierActionstepStyleTargetNeedsOwnAuthorityWitness = refl
+
+unifierActionstepStyleReuseRequiresGovernanceReview :
+  SLDomain.DomainTransportReceipt.domainPermeabilityRequiresGovernanceReview
+    unifierActionstepStyleDomainTransport
+  ≡ true
+unifierActionstepStyleReuseRequiresGovernanceReview = refl
+
+unifierSemanticPromotionAuthorityBoundary :
+  SLAuthority.AuthorityNonPromotionBundle
+unifierSemanticPromotionAuthorityBoundary =
+  SLSemanticPromotion.semanticPromotionAuthorityBoundary
+
+unifierSemanticPromotionDoesNotCreateAnyAuthority :
+  SLAuthority.promotesAnyAuthority
+    unifierSemanticPromotionAuthorityBoundary
+  ≡ false
+unifierSemanticPromotionDoesNotCreateAnyAuthority =
+  SLSemanticPromotion.semantic-promotion-all-authority-closed
+
+unifierKernelClosureDoesNotCreateSemanticClosure :
+  SLFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
+    SLFormalisation.canonicalThreeStoreyBoundary
+  ≡ false
+unifierKernelClosureDoesNotCreateSemanticClosure =
+  SLFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosureIsFalse
+    SLFormalisation.canonicalThreeStoreyBoundary
+
+
+------------------------------------------------------------------------
+-- ZKP O/R/C/S/L/P/G/F for the legal-governance convergence.
+--
+-- O: Connect legal workflow governance to the current TOE.
+-- R: Reuse SensibLaw, governance, Pareto, snowball, and Fleet owners.
+-- C: Export theorem-thin aliases from existing canonical modules.
+-- S: Keep workflow, review, source, search, and vendor state non-promoting.
+-- L: Use one aggregate-only lane. Do not add a vendor ontology.
+-- P: Preconditions are existing canonical owners and read-only ESD surfaces.
+-- P: Invariants keep truth, authority, applicability, and proof separate.
+-- P: Postconditions expose the same firewalls through this TOE aggregate.
+-- G: Standards are process lenses only. No certification is claimed.
+-- F: Verify imports, trust escapes, ESD isolation, and exact branch ancestry.
+------------------------------------------------------------------------
+
+import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything as SLPareto
+import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact as SLSnowball
+
+unifierLegalParetoDirectiveDoesNotCreateAuthority :
+  SLPareto.SearchDirectiveIsLegalAuthority → ⊥
+unifierLegalParetoDirectiveDoesNotCreateAuthority =
+  SLPareto.directiveIsNotAuthority
+
+unifierLegalParetoFrontierDoesNotCreateSourceTruth :
+  SLPareto.FrontierCertificateMakesRetrievedSourceTrue → ⊥
+unifierLegalParetoFrontierDoesNotCreateSourceTruth =
+  SLPareto.frontierCertificateDoesNotPrejudgeRetrieval
+
+unifierLegalParetoFeedbackDoesNotAuthoriseAction :
+  SLPareto.FeedbackClosureAutomaticallyAuthorisesAction → ⊥
+unifierLegalParetoFeedbackDoesNotAuthoriseAction =
+  SLPareto.feedbackClosureStillNeedsActionAuthority
+
+unifierLegalSnowballBoundary :
+  SLSnowball.SensibLawSnowballLineageBoundary
+unifierLegalSnowballBoundary =
+  SLSnowball.canonicalSensibLawSnowballLineageBoundary
+
+unifierLegalSnowballCitationDoesNotCreateAuthority :
+  SLSnowball.SensibLawSnowballLineageBoundary.citationCreatesLegalAuthority
+    unifierLegalSnowballBoundary
+  ≡ false
+unifierLegalSnowballCitationDoesNotCreateAuthority = refl
+
+unifierLegalSnowballSourceIdentityDoesNotSetClaimStage :
+  SLSnowball.SensibLawSnowballLineageBoundary.sameSourceIdentityDeterminesClaimStage
+    unifierLegalSnowballBoundary
+  ≡ false
+unifierLegalSnowballSourceIdentityDoesNotSetClaimStage = refl

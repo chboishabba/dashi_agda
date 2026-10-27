@@ -5,8 +5,8 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
@@ -1097,3 +1097,183 @@ toeBalabanPhysicalPromotionCut =
   toeBalabanBlockSpinStillBlocked ,
   (toeBalabanUniformKPStillBlocked ,
    toeBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- SensibLaw / Actionstep-style legal-governance direct handoff.
+--
+-- Reuse existing theorem owners.
+-- Actionstep-style workflow uses the generic domain-transport boundary.
+-- This aggregate creates no vendor ontology and no new legal semantics.
+------------------------------------------------------------------------
+
+
+import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as SLWorkflow
+import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as SLReview
+import DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact as SLMatter
+import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as SLLegalAuthority
+import DASHI.Core.ITIRGovernanceControlCaseExact as SLControl
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as SLDomain
+import DASHI.Governance.FormalisationGovernanceCapstoneExact as SLFormalisation
+import DASHI.Core.AuthorityNonPromotionCore as SLAuthority
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as SLSemanticPromotion
+
+toeLegalTaskCompletionDoesNotCreateTruth :
+  SLWorkflow.TaskCompletionCreatesTruth → ⊥
+toeLegalTaskCompletionDoesNotCreateTruth =
+  SLWorkflow.taskCompletionDoesNotCreateTruth
+
+toeLegalDurableReviewDoesNotCreateTruth :
+  SLReview.DurableReviewStateCreatesTruth → ⊥
+toeLegalDurableReviewDoesNotCreateTruth =
+  SLReview.durableReviewStateDoesNotCreateTruth
+
+toeLegalDatabaseCommitDoesNotCreateSemanticAuthority :
+  SLReview.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeLegalDatabaseCommitDoesNotCreateSemanticAuthority =
+  SLReview.databaseCommitDoesNotCreateSemanticAuthority
+
+toeLegalAcceptedReviewDoesNotPayApplicability :
+  SLReview.AcceptedStatusPaysApplicability → ⊥
+toeLegalAcceptedReviewDoesNotPayApplicability =
+  SLReview.acceptedStatusDoesNotPayApplicability
+
+toeLegalMatterAcceptanceDoesNotMutateMatter :
+  SLMatter.AcceptanceReceiptMutatesMatter → ⊥
+toeLegalMatterAcceptanceDoesNotMutateMatter =
+  SLMatter.acceptanceReceiptDoesNotMutateMatter
+
+toeLegalCandidateSourceDoesNotCreateAuthority :
+  SLLegalAuthority.CandidateSourceIsAuthoritative → ⊥
+toeLegalCandidateSourceDoesNotCreateAuthority =
+  SLLegalAuthority.candidateSourceDoesNotCloseAuthority
+
+toeLegalSameSystemDoesNotCreateAuthority :
+  SLLegalAuthority.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+toeLegalSameSystemDoesNotCreateAuthority =
+  SLLegalAuthority.sameSystemDoesNotAutomaticallyCloseAuthority
+
+toeLegalCurrentValidityDoesNotCreateApplicability :
+  SLLegalAuthority.CurrentValidityAutomaticallyMeansApplicability → ⊥
+toeLegalCurrentValidityDoesNotCreateApplicability =
+  SLLegalAuthority.currentValidityDoesNotAutomaticallyEstablishApplicability
+
+toeLegalSemanticAdmissionDoesNotCreateLegalAuthority :
+  SLLegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+toeLegalSemanticAdmissionDoesNotCreateLegalAuthority =
+  SLLegalAuthority.semanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+toeLegalDocumentRoleDoesNotCreateLegalAuthority :
+  SLLegalAuthority.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+toeLegalDocumentRoleDoesNotCreateLegalAuthority =
+  SLLegalAuthority.documentRoleDoesNotSupplyLegalSourceAuthority
+
+toeLegalControlEvidenceDoesNotCreateTruth :
+  SLControl.ControlEvidenceCreatesTruth → ⊥
+toeLegalControlEvidenceDoesNotCreateTruth =
+  SLControl.controlEvidenceDoesNotCreateTruth
+
+toeLegalPassingControlDoesNotCreateCertification :
+  SLControl.PassingControlMeansCertified → ⊥
+toeLegalPassingControlDoesNotCreateCertification =
+  SLControl.passingDoesNotMeanCertified
+
+toeActionstepStyleDomainTransport :
+  SLDomain.DomainTransportReceipt
+toeActionstepStyleDomainTransport =
+  SLDomain.canonicalDomainTransportReceipt
+
+toeActionstepStyleVendorIdentityDoesNotCreateAuthority :
+  SLDomain.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    toeActionstepStyleDomainTransport
+  ≡ false
+toeActionstepStyleVendorIdentityDoesNotCreateAuthority = refl
+
+toeActionstepStyleRepresentationDoesNotCreateLegalAuthority :
+  SLDomain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    toeActionstepStyleDomainTransport
+  ≡ false
+toeActionstepStyleRepresentationDoesNotCreateLegalAuthority = refl
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitness :
+  SLDomain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
+    toeActionstepStyleDomainTransport
+  ≡ true
+toeActionstepStyleTargetNeedsOwnAuthorityWitness = refl
+
+toeActionstepStyleReuseRequiresGovernanceReview :
+  SLDomain.DomainTransportReceipt.domainPermeabilityRequiresGovernanceReview
+    toeActionstepStyleDomainTransport
+  ≡ true
+toeActionstepStyleReuseRequiresGovernanceReview = refl
+
+toeSemanticPromotionAuthorityBoundary :
+  SLAuthority.AuthorityNonPromotionBundle
+toeSemanticPromotionAuthorityBoundary =
+  SLSemanticPromotion.semanticPromotionAuthorityBoundary
+
+toeSemanticPromotionDoesNotCreateAnyAuthority :
+  SLAuthority.promotesAnyAuthority
+    toeSemanticPromotionAuthorityBoundary
+  ≡ false
+toeSemanticPromotionDoesNotCreateAnyAuthority =
+  SLSemanticPromotion.semantic-promotion-all-authority-closed
+
+toeKernelClosureDoesNotCreateSemanticClosure :
+  SLFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
+    SLFormalisation.canonicalThreeStoreyBoundary
+  ≡ false
+toeKernelClosureDoesNotCreateSemanticClosure =
+  SLFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosureIsFalse
+    SLFormalisation.canonicalThreeStoreyBoundary
+
+
+------------------------------------------------------------------------
+-- ZKP O/R/C/S/L/P/G/F for the legal-governance convergence.
+--
+-- O: Connect legal workflow governance to the current TOE.
+-- R: Reuse SensibLaw, governance, Pareto, snowball, and Fleet owners.
+-- C: Export theorem-thin aliases from existing canonical modules.
+-- S: Keep workflow, review, source, search, and vendor state non-promoting.
+-- L: Use one aggregate-only lane. Do not add a vendor ontology.
+-- P: Preconditions are existing canonical owners and read-only ESD surfaces.
+-- P: Invariants keep truth, authority, applicability, and proof separate.
+-- P: Postconditions expose the same firewalls through this TOE aggregate.
+-- G: Standards are process lenses only. No certification is claimed.
+-- F: Verify imports, trust escapes, ESD isolation, and exact branch ancestry.
+------------------------------------------------------------------------
+
+import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything as SLPareto
+import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact as SLSnowball
+
+toeLegalParetoDirectiveDoesNotCreateAuthority :
+  SLPareto.SearchDirectiveIsLegalAuthority → ⊥
+toeLegalParetoDirectiveDoesNotCreateAuthority =
+  SLPareto.directiveIsNotAuthority
+
+toeLegalParetoFrontierDoesNotCreateSourceTruth :
+  SLPareto.FrontierCertificateMakesRetrievedSourceTrue → ⊥
+toeLegalParetoFrontierDoesNotCreateSourceTruth =
+  SLPareto.frontierCertificateDoesNotPrejudgeRetrieval
+
+toeLegalParetoFeedbackDoesNotAuthoriseAction :
+  SLPareto.FeedbackClosureAutomaticallyAuthorisesAction → ⊥
+toeLegalParetoFeedbackDoesNotAuthoriseAction =
+  SLPareto.feedbackClosureStillNeedsActionAuthority
+
+toeLegalSnowballBoundary :
+  SLSnowball.SensibLawSnowballLineageBoundary
+toeLegalSnowballBoundary =
+  SLSnowball.canonicalSensibLawSnowballLineageBoundary
+
+toeLegalSnowballCitationDoesNotCreateAuthority :
+  SLSnowball.SensibLawSnowballLineageBoundary.citationCreatesLegalAuthority
+    toeLegalSnowballBoundary
+  ≡ false
+toeLegalSnowballCitationDoesNotCreateAuthority = refl
+
+toeLegalSnowballSourceIdentityDoesNotSetClaimStage :
+  SLSnowball.SensibLawSnowballLineageBoundary.sameSourceIdentityDeterminesClaimStage
+    toeLegalSnowballBoundary
+  ≡ false
+toeLegalSnowballSourceIdentityDoesNotSetClaimStage = refl
