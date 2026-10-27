@@ -5,7 +5,7 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as TOE
-import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact as R474
+import DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact as R485
 import DASHI.Unified.Physics as UnifiedPhysics
 import DASHI.Unifier as U
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -319,124 +319,145 @@ unifierStressMarkedShellMatchesTOE = refl
 
 
 ------------------------------------------------------------------------
--- Goal-1 R474 -> R559 normalization regressions.
+-- Goal-1 R485 -> R559 maximum-cut normalization regressions.
 ------------------------------------------------------------------------
 
-goal1FiniteSymmetryAndRPMatchesR474 :
-  TOE.toeGoal1FiniteSymmetryAndRPApplicationLevel
-  ≡ R474.aFiniteSymmetryAndRPApplicationLevel
-goal1FiniteSymmetryAndRPMatchesR474 = refl
+goal1FiniteSymmetryAndRPMatchesR485 :
+  TOE.toeGoal1FiniteSymmetryAndRPSourceLevel
+  ≡ R485.aFiniteSymmetryAndRPSourceLevel
+goal1FiniteSymmetryAndRPMatchesR485 = refl
 
-goal1A1CurrentStepMatchesR474 :
+goal1A1MatchesR485 :
   TOE.toeGoal1A1CurrentStepBetaSourceLevel
-  ≡ R474.a1CurrentStepBetaSourceLevel
-goal1A1CurrentStepMatchesR474 = refl
+  ≡ R485.a1CurrentStepBetaSourceLevel
+goal1A1MatchesR485 = refl
 
-goal1A2SameObjectMatchesR474 :
-  TOE.toeGoal1A2HistoryBetaShellSameObjectLevel
-  ≡ R474.a2HistoryBetaShellSameObjectLevel
-goal1A2SameObjectMatchesR474 = refl
+goal1A2MatchesR485 :
+  TOE.toeGoal1A2GeneratedHistoryShellLevel
+  ≡ R485.a2GeneratedHistoryShellIsCMP116BetaMarkLevel
+goal1A2MatchesR485 = refl
 
-goal1A3ContinuumMatchesR474 :
-  TOE.toeGoal1A3SameFamilyContinuumAndOSLevel
-  ≡ R474.a3SameFamilyContinuumAndOSLevel
-goal1A3ContinuumMatchesR474 = refl
+goal1A3MatchesR485 :
+  TOE.toeGoal1A3SourceNativeContinuumOSLevel
+  ≡ R485.a3SourceNativeSameFamilyContinuumOSLevel
+goal1A3MatchesR485 = refl
 
-goal1A45MatchesR474 :
-  TOE.toeGoal1A45MomentToOS05Level
-  ≡ R474.a45MomentToOS05Level
-goal1A45MatchesR474 = refl
+goal1A3RepresentationMatchesR485 :
+  TOE.toeGoal1A3CountablyAdditiveRepresentationLevel
+  ≡ R485.a3CountablyAdditiveRepresentationLevel
+goal1A3RepresentationMatchesR485 = refl
 
-goal1BSelectedLocalizationMatchesR474 :
-  TOE.toeGoal1BLiteralPublishedSelectedLocalizationLevel
-  ≡ R474.bLiteralPublishedSelectedLocalizationLevel
-goal1BSelectedLocalizationMatchesR474 = refl
+goal1A4MatchesR485 :
+  TOE.toeGoal1A4FiniteRegularityLevel
+  ≡ R485.a4FiniteRegularityFromQuantitativeBoundsLevel
+goal1A4MatchesR485 = refl
 
-goal1BPhysicalRateMatchesR474 :
-  TOE.toeGoal1BPhysicalRateSemanticsLevel
-  ≡ R474.bPhysicalRateSemanticsLevel
-goal1BPhysicalRateMatchesR474 = refl
+goal1A5MatchesR485 :
+  TOE.toeGoal1A5FiniteGrowthLevel
+  ≡ R485.a5FiniteGrowthFromQuantitativeBoundsLevel
+goal1A5MatchesR485 = refl
 
-goal1BGapCompilerMatchesR474 :
-  TOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
-  ≡ R474.bFiniteToPositiveTransferGapCompilerLevel
-goal1BGapCompilerMatchesR474 = refl
+goal1BWilsonShellMatchesR485 :
+  TOE.toeGoal1BWilsonTwoInsertionConnectedShellLevel
+  ≡ R485.bWilsonTwoInsertionConnectedShellLevel
+goal1BWilsonShellMatchesR485 = refl
 
-goal1BT2SemanticsMatchesR474 :
-  TOE.toeGoal1BLiteralClayT2SemanticsLevel
-  ≡ R474.bLiteralClayT2SemanticsLevel
-goal1BT2SemanticsMatchesR474 = refl
+goal1BTwoMarkMatchesR485 :
+  TOE.toeGoal1BWilsonTwoMarkExpansionLevel
+  ≡ R485.bWilsonTwoMarkExpansionLevel
+goal1BTwoMarkMatchesR485 = refl
 
-goal1CStressSourceMatchesR474 :
-  TOE.toeGoal1CStressFiniteSameFamilySourceLevel
-  ≡ R474.cStressFiniteSameFamilySourceLevel
-goal1CStressSourceMatchesR474 = refl
+goal1BWeightTailMatchesR485 :
+  TOE.toeGoal1BWilsonConnectingWeightTailLevel
+  ≡ R485.bWilsonConnectingWeightTailLevel
+goal1BWeightTailMatchesR485 = refl
 
-goal1CDensityDerivativeMatchesR474 :
-  TOE.toeGoal1CStressLiteralDensityDerivativeLevel
-  ≡ R474.cStressLiteralDensityDerivativeLevel
-goal1CDensityDerivativeMatchesR474 = refl
+goal1BWEXTCompilerMatchesR485 :
+  TOE.toeGoal1BWEXTAssemblyCompilerLevel
+  ≡ R485.bWilsonWEXTAssemblyCompilerLevel
+goal1BWEXTCompilerMatchesR485 = refl
 
-goal1COSRecoveryMatchesR474 :
-  TOE.toeGoal1CStressSameFamilyOSRecoveryLevel
-  ≡ R474.cStressSameFamilyOSRecoveryLevel
-goal1COSRecoveryMatchesR474 = refl
+goal1BSameHMatchesR485 :
+  TOE.toeGoal1BSameHamiltonianTransferCoordinateLevel
+  ≡ R485.bSameHamiltonianTransferCoordinateLevel
+goal1BSameHMatchesR485 = refl
 
-goal1COpeTailMatchesR474 :
-  TOE.toeGoal1CPhysicalOPERemainderIsMarkedTailLevel
-  ≡ R474.cPhysicalOPERemainderIsMarkedTailLevel
-goal1COpeTailMatchesR474 = refl
+goal1BGeometricDecayMatchesR485 :
+  TOE.toeGoal1BGeometricDecayCompilerLevel
+  ≡ R485.bGeometricDecayCompilerLevel
+goal1BGeometricDecayMatchesR485 = refl
 
-goal1CAFMatchesR474 :
-  TOE.toeGoal1COneStepAFRGIdentificationLevel
-  ≡ R474.cOneStepAFRGIdentificationLevel
-goal1CAFMatchesR474 = refl
+goal1BSpectralTransferMatchesR485 :
+  TOE.toeGoal1BStandardSpectralTransferLevel
+  ≡ R485.bStandardSpectralTransferLevel
+goal1BSpectralTransferMatchesR485 = refl
 
-goal1CSourceCutMatchesR474 :
-  TOE.toeGoal1CExactSameFamilySourceCutLevel
-  ≡ R474.cExactSameFamilySourceCutLevel
-goal1CSourceCutMatchesR474 = refl
+goal1CMatchesR485 :
+  TOE.toeGoal1CSameFamilySourceInstantiationLevel
+  ≡ R485.cSameFamilySourceInstantiationLevel
+goal1CMatchesR485 = refl
 
-goal1G1MatchesR474 :
+goal1G1MatchesR485 :
   TOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
-  ≡ R474.g1ArbitraryCompactSimpleSelectedBackgroundSourceMapLevel
-goal1G1MatchesR474 = refl
+  ≡ R485.gArbitraryCompactSimpleSourceMapLevel
+goal1G1MatchesR485 = refl
 
-goal1G2MatchesR474 :
+goal1G2MatchesR485 :
   TOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
-  ≡ R474.g2SameSystemClayNontrivialitySemanticsLevel
-goal1G2MatchesR474 = refl
+  ≡ R485.gSameSystemNontrivialitySemanticsLevel
+goal1G2MatchesR485 = refl
 
-goal1TerminalCompilerMatchesR474 :
-  TOE.toeGoal1TerminalCompilerLevel
-  ≡ R474.round474TerminalCompilerLevel
-goal1TerminalCompilerMatchesR474 = refl
+goal1MaximumCutCompilerIsChecked :
+  TOE.toeGoal1MaximumCutCompilerLevel ≡ machineChecked
+goal1MaximumCutCompilerIsChecked = refl
 
-goal1CurrentFrontierCompilerMatchesR474 :
-  TOE.toeGoal1CurrentFrontierCompilerLevel
-  ≡ R474.round474CurrentFrontierCompilerLevel
-goal1CurrentFrontierCompilerMatchesR474 = refl
-
-goal1PeterWeylReconstructionNotMandatory :
-  TOE.toeGoal1ExplicitPeterWeylRPMandatory ≡ false
-goal1PeterWeylReconstructionNotMandatory = refl
+goal1NormalizationCompilerIsChecked :
+  TOE.round559Goal1MaximumCutNormalizationCompilerLevel ≡ machineChecked
+goal1NormalizationCompilerIsChecked = refl
 
 goal1ProjectiveProkhorovNotMandatory :
   TOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
 goal1ProjectiveProkhorovNotMandatory = refl
 
-goal1IndependentKPSelectionNotMandatory :
-  TOE.toeGoal1IndependentKPDatumSelectionMandatory ≡ false
-goal1IndependentKPSelectionNotMandatory = refl
+goal1GlobalCoerciveCompactnessNotMandatory :
+  TOE.toeGoal1GlobalCoerciveCompactnessMandatory ≡ false
+goal1GlobalCoerciveCompactnessNotMandatory = refl
 
-goal1PostHocMagnitudeEqualityNotMandatory :
-  TOE.toeGoal1PostHocCMP116MagnitudeEqualityMandatory ≡ false
-goal1PostHocMagnitudeEqualityNotMandatory = refl
+goal1PostHocMeasureWeldNotMandatory :
+  TOE.toeGoal1PostHocContinuumMeasureWeldMandatory ≡ false
+goal1PostHocMeasureWeldNotMandatory = refl
+
+goal1HistoricalSelectedJNotMandatory :
+  TOE.toeGoal1HistoricalSelectedJMinCutMandatory ≡ false
+goal1HistoricalSelectedJNotMandatory = refl
+
+goal1CompatibilityBRouteNotMandatory :
+  TOE.toeGoal1CompatibilityBRouteMandatory ≡ false
+goal1CompatibilityBRouteNotMandatory = refl
+
+goal1ArbitraryPositiveGapTokenNotMandatory :
+  TOE.toeGoal1ArbitraryPositiveGapTokenMandatory ≡ false
+goal1ArbitraryPositiveGapTokenNotMandatory = refl
+
+goal1SU2ValidationNotMandatoryForGenericG :
+  TOE.toeGoal1SU2ValidationMandatoryForGenericG ≡ false
+goal1SU2ValidationNotMandatoryForGenericG = refl
+
+goal1UniformConstantsAcrossAllGroupsNotMandatory :
+  TOE.toeGoal1UniformConstantsAcrossAllGroupsMandatory ≡ false
+goal1UniformConstantsAcrossAllGroupsNotMandatory = refl
+
+goal1FreshContinuumStressLimitNotMandatory :
+  TOE.toeGoal1FreshContinuumStressLimitMandatory ≡ false
+goal1FreshContinuumStressLimitNotMandatory = refl
 
 goal1IndependentFourthCumulantNotMandatory :
   TOE.toeGoal1IndependentFourthCumulantMandatory ≡ false
 goal1IndependentFourthCumulantNotMandatory = refl
 
+goal1ClayCompletionStillNotClaimed :
+  TOE.toeGoal1ClayCompletionClaimed ≡ false
+goal1ClayCompletionStillNotClaimed = refl
 
 ------------------------------------------------------------------------
 -- Goal-1 normalized facade regressions.
@@ -448,23 +469,23 @@ unifiedPhysicsGoal1A1MatchesTOE :
 unifiedPhysicsGoal1A1MatchesTOE = refl
 
 unifiedPhysicsGoal1A3MatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1A3SameFamilyContinuumAndOSLevel
-  ≡ TOE.toeGoal1A3SameFamilyContinuumAndOSLevel
+  UnifiedPhysics.yangMillsTOEGoal1A3SourceNativeContinuumOSLevel
+  ≡ TOE.toeGoal1A3SourceNativeContinuumOSLevel
 unifiedPhysicsGoal1A3MatchesTOE = refl
 
 unifiedPhysicsGoal1BSelectedMatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1BLiteralPublishedSelectedLocalizationLevel
-  ≡ TOE.toeGoal1BLiteralPublishedSelectedLocalizationLevel
+  UnifiedPhysics.yangMillsTOEGoal1BWilsonTwoInsertionConnectedShellLevel
+  ≡ TOE.toeGoal1BWilsonTwoInsertionConnectedShellLevel
 unifiedPhysicsGoal1BSelectedMatchesTOE = refl
 
 unifiedPhysicsGoal1BGapMatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1BFiniteToPositiveTransferGapCompilerLevel
-  ≡ TOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
+  UnifiedPhysics.yangMillsTOEGoal1BGeometricDecayCompilerLevel
+  ≡ TOE.toeGoal1BGeometricDecayCompilerLevel
 unifiedPhysicsGoal1BGapMatchesTOE = refl
 
 unifiedPhysicsGoal1CMatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1CExactSameFamilySourceCutLevel
-  ≡ TOE.toeGoal1CExactSameFamilySourceCutLevel
+  UnifiedPhysics.yangMillsTOEGoal1CSameFamilySourceInstantiationLevel
+  ≡ TOE.toeGoal1CSameFamilySourceInstantiationLevel
 unifiedPhysicsGoal1CMatchesTOE = refl
 
 unifiedPhysicsGoal1G1MatchesTOE :
@@ -483,13 +504,13 @@ unifierGoal1A1MatchesTOE :
 unifierGoal1A1MatchesTOE = refl
 
 unifierGoal1BGapMatchesTOE :
-  U.unifierYangMillsGoal1BFiniteToPositiveTransferGapCompilerLevel
-  ≡ TOE.toeGoal1BFiniteToPositiveTransferGapCompilerLevel
+  U.unifierYangMillsGoal1BGeometricDecayCompilerLevel
+  ≡ TOE.toeGoal1BGeometricDecayCompilerLevel
 unifierGoal1BGapMatchesTOE = refl
 
 unifierGoal1CMatchesTOE :
-  U.unifierYangMillsGoal1CExactSameFamilySourceCutLevel
-  ≡ TOE.toeGoal1CExactSameFamilySourceCutLevel
+  U.unifierYangMillsGoal1CSameFamilySourceInstantiationLevel
+  ≡ TOE.toeGoal1CSameFamilySourceInstantiationLevel
 unifierGoal1CMatchesTOE = refl
 
 unifierGoal1G2MatchesTOE :
