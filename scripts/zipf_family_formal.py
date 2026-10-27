@@ -77,10 +77,19 @@ def finite_hurwitz(s:int,shift:int,n:int)->Fraction:
     return sum((Fraction(1,(r+shift)**s) for r in range(1,n+1)),Fraction())
 
 def hurwitz_tail_bound(s:float,q:float,n:int)->tuple[float,float]:
-    if not isfinite(s) or s<=1 or not isfinite(q) or q<=0 or n<1:
-        raise ValueError('s>1,q>0,n>=1')
-    integral=(q+n)**(1-s)/(s-1)
-    return integral, integral+(q+n)**(-s)
+    """Bounds on sum_{r=n+1}^infinity (r+q)^(-s), not on its partial sum.
+
+    For s>1, q>=0, integer n>=1, the decreasing-integrand comparison is
+    integral_{n+1}^infinity f <= sum_{r=n+1}^infinity f(r)
+    <= integral_n^infinity f.  Neither endpoint is the tail itself.
+    Original mathematics: classical integral comparison; DLMF 25.11.
+    """
+    if (not isfinite(s) or s<=1 or not isfinite(q) or q<0
+            or type(n) is not int or n<1):
+        raise ValueError('s>1,q>=0,n>=1')
+    lower=(q+n+1)**(1-s)/(s-1)
+    upper=(q+n)**(1-s)/(s-1)
+    return lower, upper
 
 def corpus_counts(tokens:Sequence[str])->Counter[str]:
     return Counter(tokens)
