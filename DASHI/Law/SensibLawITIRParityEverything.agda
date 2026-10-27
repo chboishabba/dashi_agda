@@ -1,6 +1,8 @@
 module DASHI.Law.SensibLawITIRParityEverything where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
 import DASHI.Interop.ITIRSuiteNormalizedCompilerParityExact as ITIRParity
@@ -90,3 +92,57 @@ selectedFriendlyjordiesResidualAcquisitionClosure :
   FriendlyjordiesSourceTotality.ResidualAcquisitionClosure
 selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
+
+
+------------------------------------------------------------------------
+-- Canonical legal-governance semantic handoff.
+--
+-- Reuse existing owners.
+-- Do not create an Actionstep-specific ontology.
+-- Runtime parity, semantic promotion, legal citation, compliance, and domain
+-- authority remain separate proof coordinates.
+------------------------------------------------------------------------
+
+open import DASHI.Interop.SensibLawSemanticPromotionPolicy public using
+  ( SemanticPromotionPolicySurface
+  ; semanticPromotionPolicySurface
+  ; heuristic-only-abstains
+  ; promotion-ignores-heuristic-bits
+  ; semantic-promotion-truth-authority-closed
+  ; semantic-promotion-legal-authority-closed
+  ; semantic-promotion-all-authority-closed
+  )
+
+open import DASHI.Core.CompositionalComplianceExact public using
+  ( CertifiedStage
+  ; CompositeCompliance
+  ; composeCertifiedStages
+  ; DependentCertifiedStage
+  )
+
+open import DASHI.Law.LegalAuthorityCitationExact public using
+  ( LegalCitation
+  ; LegalAuthorityUseReceipt
+  ; LegalCitationBoundary
+  ; canonicalLegalCitationBoundary
+  )
+
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
+selectedDomainTransportReceipt : Domain.DomainTransportReceipt
+selectedDomainTransportReceipt = Domain.canonicalDomainTransportReceipt
+
+selectedRepresentationEqualityCreatesLegalAuthorityIsFalse :
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    selectedDomainTransportReceipt ≡ false
+selectedRepresentationEqualityCreatesLegalAuthorityIsFalse = refl
+
+selectedVendorIdentityCreatesAuthorityIsFalse :
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    selectedDomainTransportReceipt ≡ false
+selectedVendorIdentityCreatesAuthorityIsFalse = refl
+
+selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue :
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
+    selectedDomainTransportReceipt ≡ true
+selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue = refl
