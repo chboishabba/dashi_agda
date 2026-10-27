@@ -362,3 +362,214 @@ invariantHandoffCarriesExactReuseClaimTruthFirewall :
 invariantHandoffCarriesExactReuseClaimTruthFirewall =
   Bridge.exactReuseClaimTruthFirewall
     Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+------------------------------------------------------------------------
+-- Direct legal-governance firewall regression.
+------------------------------------------------------------------------
+
+unifierDurableReviewTruthAliasIsExact :
+  Bridge.DurableReviewStateCreatesTruth → ⊥
+unifierDurableReviewTruthAliasIsExact =
+  Unifier.unifierDurableReviewStateDoesNotCreateTruth
+
+unifierAcceptanceMutationAliasIsExact :
+  Bridge.AcceptanceReceiptMutatesMatter → ⊥
+unifierAcceptanceMutationAliasIsExact =
+  Unifier.unifierAcceptanceReceiptDoesNotMutateMatter
+
+unifierExternalSourceTruthAliasIsExact :
+  Bridge.ExternalSourceClaimImpliesTruthAdmitted → ⊥
+unifierExternalSourceTruthAliasIsExact =
+  Unifier.unifierExternalSourceDoesNotAdmitTruth
+
+unifierLegalAuthorityTruthAliasIsExact :
+  Bridge.LegalAuthorityCreatesTruthStatus → ⊥
+unifierLegalAuthorityTruthAliasIsExact =
+  Unifier.unifierLegalAuthorityDoesNotCreateTruthStatus
+
+unifierPromotionAuthorityAliasIsExact :
+  Bridge.PromotionStageMaySkipPromotionAuthority → ⊥
+unifierPromotionAuthorityAliasIsExact =
+  Unifier.unifierPromotionStageDoesNotBypassPromotionAuthority
+
+unifierWrongTypeViolationAliasIsExact :
+  Bridge.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
+unifierWrongTypeViolationAliasIsExact =
+  Unifier.unifierSourceRealisedWrongTypeDoesNotAutoViolate
+
+unifierExceptionsDefencesAliasIsExact :
+  Bridge.AllElementsProvedIgnoresExceptionsDefences → ⊥
+unifierExceptionsDefencesAliasIsExact =
+  Unifier.unifierElementsDoNotEraseExceptionsOrDefences
+
+unifierComplianceWitnessAliasIsCanonical :
+  Unifier.unifierComplianceCompositionRetainsIntermediateWitness
+  ≡
+  Bridge.complianceCompositionRetainsIntermediateWitnessIsTrue
+    Bridge.canonicalGovernedLegalWorkflowTOEBoundary
+unifierComplianceWitnessAliasIsCanonical = refl
+
+unifierCanonicalLegalAuthorityBoundaryIsExact :
+  Unifier.unifierCanonicalLegalSourceAuthorityBoundary
+  ≡ Bridge.toeCanonicalLegalSourceAuthorityBoundary
+unifierCanonicalLegalAuthorityBoundaryIsExact = refl
+
+
+
+------------------------------------------------------------------------
+-- Native legal-follow, provider-access, and expert-production regression.
+------------------------------------------------------------------------
+
+unifierNativeLegalFollowAuthorityAliasIsExact :
+  Bridge.NativeCliAutomaticallyLegalAuthority → ⊥
+unifierNativeLegalFollowAuthorityAliasIsExact =
+  Unifier.unifierNativeLegalFollowDoesNotCreateLegalAuthority
+
+unifierProviderFailureEvidenceAliasIsExact :
+  Bridge.ProviderFailureAutomaticallyPropositionFalse → ⊥
+unifierProviderFailureEvidenceAliasIsExact =
+  Unifier.unifierProviderFailureDoesNotMakePropositionFalse
+
+unifierExpertProductionAuthorityAliasIsExact :
+  Unifier.unifierExpertProductionPromotesAnyAuthorityIsFalse
+  ≡ Bridge.toeExpertProductionPromotesAnyAuthorityIsFalse
+unifierExpertProductionAuthorityAliasIsExact =
+  refl
+
+invariantHandoffCarriesNativeLegalFollowAuthorityFirewall :
+  Bridge.NativeCliAutomaticallyLegalAuthority → ⊥
+invariantHandoffCarriesNativeLegalFollowAuthorityFirewall =
+  Bridge.nativeLegalFollowAuthorityFirewall
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+invariantHandoffCarriesProviderFailureEvidenceFirewall :
+  Bridge.ProviderFailureAutomaticallyPropositionFalse → ⊥
+invariantHandoffCarriesProviderFailureEvidenceFirewall =
+  Bridge.providerFailureNegativeEvidenceFirewall
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+invariantHandoffCarriesExpertProductionAuthorityClosure :
+  Bridge.toeExpertProductionPromotesAnyAuthority ≡ false
+invariantHandoffCarriesExpertProductionAuthorityClosure =
+  Bridge.expertProductionAuthorityClosed
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+
+------------------------------------------------------------------------
+-- Full legal execution and expert firewall regression.
+------------------------------------------------------------------------
+
+unifierSpacyDoesNotCreateLegalAuthorityAliasIsExact :
+  Bridge.SpacyParserAutomaticallyLegalAuthority → ⊥
+unifierSpacyDoesNotCreateLegalAuthorityAliasIsExact =
+  Unifier.unifierSpacyDoesNotCreateLegalAuthority
+
+unifierSpacyDoesNotCreateLegalConstructionAliasIsExact :
+  Bridge.SpacyParserAutomaticallyLegalConstruction → ⊥
+unifierSpacyDoesNotCreateLegalConstructionAliasIsExact =
+  Unifier.unifierSpacyDoesNotCreateLegalConstruction
+
+unifierLatestKnownSectionDoesNotBecomeHistoricalLawAliasIsExact :
+  Bridge.SectionSliceAutomaticallyHistoricalLaw → ⊥
+unifierLatestKnownSectionDoesNotBecomeHistoricalLawAliasIsExact =
+  Unifier.unifierLatestKnownSectionDoesNotBecomeHistoricalLaw
+
+unifierPythonWrapperDoesNotOwnLegalSemanticsAliasIsExact :
+  Bridge.PythonWrapperOwnsLegalSemantics → ⊥
+unifierPythonWrapperDoesNotOwnLegalSemanticsAliasIsExact =
+  Unifier.unifierPythonWrapperDoesNotOwnLegalSemantics
+
+unifierJsonIsNotSemanticCommandAbiAliasIsExact :
+  Bridge.JsonArtifactIsSemanticCommandAbi → ⊥
+unifierJsonIsNotSemanticCommandAbiAliasIsExact =
+  Unifier.unifierJsonIsNotSemanticCommandAbi
+
+unifierJsonReviewDoesNotCreateDecisionAliasIsExact :
+  Bridge.JsonReviewFileAutomaticallyReviewerDecision → ⊥
+unifierJsonReviewDoesNotCreateDecisionAliasIsExact =
+  Unifier.unifierJsonReviewDoesNotCreateDecision
+
+unifierJsonReceiptDoesNotCreateTruthAliasIsExact :
+  Bridge.JsonReceiptAutomaticallyClaimTruth → ⊥
+unifierJsonReceiptDoesNotCreateTruthAliasIsExact =
+  Unifier.unifierJsonReceiptDoesNotCreateTruth
+
+unifierCliSequenceDoesNotPayResidualAliasIsExact :
+  Bridge.CliSequenceAutomaticallyPaysOpenResidual → ⊥
+unifierCliSequenceDoesNotPayResidualAliasIsExact =
+  Unifier.unifierCliSequenceDoesNotPayResidual
+
+unifierPinnedStreamDoesNotCreateLegalTruthAliasIsExact :
+  Bridge.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+unifierPinnedStreamDoesNotCreateLegalTruthAliasIsExact =
+  Unifier.unifierPinnedStreamDoesNotCreateLegalTruth
+
+unifierReviewedHopJsonDoesNotBecomeCanonicalSemanticTransportAliasIsExact :
+  Bridge.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+unifierReviewedHopJsonDoesNotBecomeCanonicalSemanticTransportAliasIsExact =
+  Unifier.unifierReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
+
+unifierOalcHitDoesNotBecomeBindingAuthorityAliasIsExact :
+  Bridge.OalcHitAutomaticallyBindingAuthority → ⊥
+unifierOalcHitDoesNotBecomeBindingAuthorityAliasIsExact =
+  Unifier.unifierOalcHitDoesNotBecomeBindingAuthority
+
+unifierOfficialCourtBytesDoNotBecomePropositionCorrespondenceAliasIsExact :
+  Bridge.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+unifierOfficialCourtBytesDoNotBecomePropositionCorrespondenceAliasIsExact =
+  Unifier.unifierOfficialCourtBytesDoNotBecomePropositionCorrespondence
+
+unifierSameMncDoesNotCollapseSourceRevisionsAliasIsExact :
+  Bridge.SameMncAutomaticallySameSourceRevision → ⊥
+unifierSameMncDoesNotCollapseSourceRevisionsAliasIsExact =
+  Unifier.unifierSameMncDoesNotCollapseSourceRevisions
+
+unifierSuccessfulOfficialFetchDoesNotBecomeProductionReadyAliasIsExact :
+  Bridge.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+unifierSuccessfulOfficialFetchDoesNotBecomeProductionReadyAliasIsExact =
+  Unifier.unifierSuccessfulOfficialFetchDoesNotBecomeProductionReady
+
+unifierMultipleReportsDoNotAutomaticallyCreateIndependenceAliasIsExact :
+  Bridge.MultipleReportsAutomaticallyIndependent → ⊥
+unifierMultipleReportsDoNotAutomaticallyCreateIndependenceAliasIsExact =
+  Unifier.unifierMultipleReportsDoNotAutomaticallyCreateIndependence
+
+unifierAgreementDoesNotAutomaticallyCreateIndependentCorroborationAliasIsExact :
+  Bridge.AgreementAutomaticallyIndependentCorroboration → ⊥
+unifierAgreementDoesNotAutomaticallyCreateIndependentCorroborationAliasIsExact =
+  Unifier.unifierAgreementDoesNotAutomaticallyCreateIndependentCorroboration
+
+unifierDependenceDoesNotMeanNoEvidenceAliasIsExact :
+  Bridge.DependenceMeansNoEvidence → ⊥
+unifierDependenceDoesNotMeanNoEvidenceAliasIsExact =
+  Unifier.unifierDependenceDoesNotMeanNoEvidence
+
+unifierExpertStatusDoesNotAutomaticallyCreateTruthAliasIsExact :
+  Bridge.ExpertStatusAutomaticallyTruth → ⊥
+unifierExpertStatusDoesNotAutomaticallyCreateTruthAliasIsExact =
+  Unifier.unifierExpertStatusDoesNotAutomaticallyCreateTruth
+
+unifierReportAdmissionDoesNotRepairMissingInputAliasIsExact :
+  Bridge.ReportAdmissionRepairsMissingInput → ⊥
+unifierReportAdmissionDoesNotRepairMissingInputAliasIsExact =
+  Unifier.unifierReportAdmissionDoesNotRepairMissingInput
+
+unifierCrossExaminationDoesNotAddUnobservedInputAliasIsExact :
+  Bridge.CrossExaminationAddsUnobservedInput → ⊥
+unifierCrossExaminationDoesNotAddUnobservedInputAliasIsExact =
+  Unifier.unifierCrossExaminationDoesNotAddUnobservedInput
+
+unifierDisputedRiskDoesNotBecomeIrrelevantAliasIsExact :
+  Bridge.DisputedRiskIsIrrelevant → ⊥
+unifierDisputedRiskDoesNotBecomeIrrelevantAliasIsExact =
+  Unifier.unifierDisputedRiskDoesNotBecomeIrrelevant
+
+unifierObserverDefectDoesNotProveOpinionFalseAliasIsExact :
+  Bridge.ObserverDefectMakesOpinionFalse → ⊥
+unifierObserverDefectDoesNotProveOpinionFalseAliasIsExact =
+  Unifier.unifierObserverDefectDoesNotProveOpinionFalse
+
+unifierQualificationDoesNotAutomaticallyProveForensicComplianceAliasIsExact :
+  Bridge.QualificationAutomaticallyForensicCompliance → ⊥
+unifierQualificationDoesNotAutomaticallyProveForensicComplianceAliasIsExact =
+  Unifier.unifierQualificationDoesNotAutomaticallyProveForensicCompliance

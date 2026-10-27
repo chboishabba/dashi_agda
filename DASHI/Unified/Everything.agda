@@ -268,3 +268,199 @@ governedExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 governedExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+------------------------------------------------------------------------
+-- Direct governed legal-workflow firewall facade.
+-- This facade adds no workflow, Actionstep, legal-rule, or authority semantics.
+------------------------------------------------------------------------
+
+governedDurableReviewStateDoesNotCreateTruth :
+  LegalGovernance.DurableReviewStateCreatesTruth → ⊥
+governedDurableReviewStateDoesNotCreateTruth =
+  LegalGovernance.toeDurableReviewStateDoesNotCreateTruth
+
+governedAcceptanceReceiptDoesNotMutateMatter :
+  LegalGovernance.AcceptanceReceiptMutatesMatter → ⊥
+governedAcceptanceReceiptDoesNotMutateMatter =
+  LegalGovernance.toeAcceptanceReceiptDoesNotMutateMatter
+
+governedExternalSourceDoesNotAdmitTruth :
+  LegalGovernance.ExternalSourceClaimImpliesTruthAdmitted → ⊥
+governedExternalSourceDoesNotAdmitTruth =
+  LegalGovernance.toeExternalSourceDoesNotAdmitTruth
+
+governedLegalAuthorityDoesNotCreateTruthStatus :
+  LegalGovernance.LegalAuthorityCreatesTruthStatus → ⊥
+governedLegalAuthorityDoesNotCreateTruthStatus =
+  LegalGovernance.toeLegalAuthorityDoesNotCreateTruthStatus
+
+governedPromotionStageDoesNotBypassPromotionAuthority :
+  LegalGovernance.PromotionStageMaySkipPromotionAuthority → ⊥
+governedPromotionStageDoesNotBypassPromotionAuthority =
+  LegalGovernance.toePromotionStageDoesNotBypassPromotionAuthority
+
+governedSourceRealisedWrongTypeDoesNotAutoViolate :
+  LegalGovernance.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
+governedSourceRealisedWrongTypeDoesNotAutoViolate =
+  LegalGovernance.toeSourceRealisedWrongTypeDoesNotAutoViolate
+
+governedElementsDoNotEraseExceptionsOrDefences :
+  LegalGovernance.AllElementsProvedIgnoresExceptionsDefences → ⊥
+governedElementsDoNotEraseExceptionsOrDefences =
+  LegalGovernance.toeElementsDoNotEraseExceptionsOrDefences
+
+governedKernelClosureDoesNotMeanSemanticClosure =
+  LegalGovernance.toeKernelClosureDoesNotMeanSemanticClosure
+
+governedFormalProofDoesNotCreateExternalWorldTruth =
+  LegalGovernance.toeFormalProofDoesNotCreateExternalWorldTruth
+
+governedComplianceCompositionRetainsIntermediateWitness =
+  LegalGovernance.complianceCompositionRetainsIntermediateWitnessIsTrue
+    LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
+
+governedSameLegalSystemDoesNotCloseAuthority =
+  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+governedDocumentRoleDoesNotSupplyLegalSourceAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+governedCanonicalLegalSourceAuthorityBoundary =
+  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
+
+
+
+governedNativeLegalFollowDoesNotCreateLegalAuthority :
+  LegalGovernance.NativeCliAutomaticallyLegalAuthority → ⊥
+governedNativeLegalFollowDoesNotCreateLegalAuthority =
+  LegalGovernance.toeNativeLegalFollowDoesNotCreateLegalAuthority
+
+governedProviderFailureDoesNotMakePropositionFalse :
+  LegalGovernance.ProviderFailureAutomaticallyPropositionFalse → ⊥
+governedProviderFailureDoesNotMakePropositionFalse =
+  LegalGovernance.toeProviderFailureDoesNotMakePropositionFalse
+
+governedExpertProductionPromotesAnyAuthorityIsFalse :
+  LegalGovernance.toeExpertProductionPromotesAnyAuthority ≡ false
+governedExpertProductionPromotesAnyAuthorityIsFalse =
+  LegalGovernance.toeExpertProductionPromotesAnyAuthorityIsFalse
+
+
+------------------------------------------------------------------------
+-- Direct legal execution and expert-evidence non-promotion aliases.
+------------------------------------------------------------------------
+
+governedSpacyDoesNotCreateLegalAuthority :
+  LegalGovernance.SpacyParserAutomaticallyLegalAuthority → ⊥
+governedSpacyDoesNotCreateLegalAuthority =
+  LegalGovernance.toeSpacyDoesNotCreateLegalAuthority
+
+governedSpacyDoesNotCreateLegalConstruction :
+  LegalGovernance.SpacyParserAutomaticallyLegalConstruction → ⊥
+governedSpacyDoesNotCreateLegalConstruction =
+  LegalGovernance.toeSpacyDoesNotCreateLegalConstruction
+
+governedLatestKnownSectionDoesNotBecomeHistoricalLaw :
+  LegalGovernance.SectionSliceAutomaticallyHistoricalLaw → ⊥
+governedLatestKnownSectionDoesNotBecomeHistoricalLaw =
+  LegalGovernance.toeLatestKnownSectionDoesNotBecomeHistoricalLaw
+
+governedPythonWrapperDoesNotOwnLegalSemantics :
+  LegalGovernance.PythonWrapperOwnsLegalSemantics → ⊥
+governedPythonWrapperDoesNotOwnLegalSemantics =
+  LegalGovernance.toePythonWrapperDoesNotOwnLegalSemantics
+
+governedJsonIsNotSemanticCommandAbi :
+  LegalGovernance.JsonArtifactIsSemanticCommandAbi → ⊥
+governedJsonIsNotSemanticCommandAbi =
+  LegalGovernance.toeJsonIsNotSemanticCommandAbi
+
+governedJsonReviewDoesNotCreateDecision :
+  LegalGovernance.JsonReviewFileAutomaticallyReviewerDecision → ⊥
+governedJsonReviewDoesNotCreateDecision =
+  LegalGovernance.toeJsonReviewDoesNotCreateDecision
+
+governedJsonReceiptDoesNotCreateTruth :
+  LegalGovernance.JsonReceiptAutomaticallyClaimTruth → ⊥
+governedJsonReceiptDoesNotCreateTruth =
+  LegalGovernance.toeJsonReceiptDoesNotCreateTruth
+
+governedCliSequenceDoesNotPayResidual :
+  LegalGovernance.CliSequenceAutomaticallyPaysOpenResidual → ⊥
+governedCliSequenceDoesNotPayResidual =
+  LegalGovernance.toeCliSequenceDoesNotPayResidual
+
+governedPinnedStreamDoesNotCreateLegalTruth :
+  LegalGovernance.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+governedPinnedStreamDoesNotCreateLegalTruth =
+  LegalGovernance.toePinnedStreamDoesNotCreateLegalTruth
+
+governedReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
+  LegalGovernance.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+governedReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
+  LegalGovernance.toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
+
+governedOalcHitDoesNotBecomeBindingAuthority :
+  LegalGovernance.OalcHitAutomaticallyBindingAuthority → ⊥
+governedOalcHitDoesNotBecomeBindingAuthority =
+  LegalGovernance.toeOalcHitDoesNotBecomeBindingAuthority
+
+governedOfficialCourtBytesDoNotBecomePropositionCorrespondence :
+  LegalGovernance.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+governedOfficialCourtBytesDoNotBecomePropositionCorrespondence =
+  LegalGovernance.toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
+
+governedSameMncDoesNotCollapseSourceRevisions :
+  LegalGovernance.SameMncAutomaticallySameSourceRevision → ⊥
+governedSameMncDoesNotCollapseSourceRevisions =
+  LegalGovernance.toeSameMncDoesNotCollapseSourceRevisions
+
+governedSuccessfulOfficialFetchDoesNotBecomeProductionReady :
+  LegalGovernance.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+governedSuccessfulOfficialFetchDoesNotBecomeProductionReady =
+  LegalGovernance.toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
+
+governedMultipleReportsDoNotAutomaticallyCreateIndependence :
+  LegalGovernance.MultipleReportsAutomaticallyIndependent → ⊥
+governedMultipleReportsDoNotAutomaticallyCreateIndependence =
+  LegalGovernance.toeMultipleReportsDoNotAutomaticallyCreateIndependence
+
+governedAgreementDoesNotAutomaticallyCreateIndependentCorroboration :
+  LegalGovernance.AgreementAutomaticallyIndependentCorroboration → ⊥
+governedAgreementDoesNotAutomaticallyCreateIndependentCorroboration =
+  LegalGovernance.toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
+
+governedDependenceDoesNotMeanNoEvidence :
+  LegalGovernance.DependenceMeansNoEvidence → ⊥
+governedDependenceDoesNotMeanNoEvidence =
+  LegalGovernance.toeDependenceDoesNotMeanNoEvidence
+
+governedExpertStatusDoesNotAutomaticallyCreateTruth :
+  LegalGovernance.ExpertStatusAutomaticallyTruth → ⊥
+governedExpertStatusDoesNotAutomaticallyCreateTruth =
+  LegalGovernance.toeExpertStatusDoesNotAutomaticallyCreateTruth
+
+governedReportAdmissionDoesNotRepairMissingInput :
+  LegalGovernance.ReportAdmissionRepairsMissingInput → ⊥
+governedReportAdmissionDoesNotRepairMissingInput =
+  LegalGovernance.toeReportAdmissionDoesNotRepairMissingInput
+
+governedCrossExaminationDoesNotAddUnobservedInput :
+  LegalGovernance.CrossExaminationAddsUnobservedInput → ⊥
+governedCrossExaminationDoesNotAddUnobservedInput =
+  LegalGovernance.toeCrossExaminationDoesNotAddUnobservedInput
+
+governedDisputedRiskDoesNotBecomeIrrelevant :
+  LegalGovernance.DisputedRiskIsIrrelevant → ⊥
+governedDisputedRiskDoesNotBecomeIrrelevant =
+  LegalGovernance.toeDisputedRiskDoesNotBecomeIrrelevant
+
+governedObserverDefectDoesNotProveOpinionFalse :
+  LegalGovernance.ObserverDefectMakesOpinionFalse → ⊥
+governedObserverDefectDoesNotProveOpinionFalse =
+  LegalGovernance.toeObserverDefectDoesNotProveOpinionFalse
+
+governedQualificationDoesNotAutomaticallyProveForensicCompliance :
+  LegalGovernance.QualificationAutomaticallyForensicCompliance → ⊥
+governedQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernance.toeQualificationDoesNotAutomaticallyProveForensicCompliance

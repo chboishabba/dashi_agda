@@ -886,3 +886,199 @@ toeExactReuseDoesNotCreateClaimTruth :
   LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
 toeExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+------------------------------------------------------------------------
+-- Direct governed legal-workflow firewalls.
+-- Proof authority remains in GovernanceTOE and its original donors.
+------------------------------------------------------------------------
+
+unifierDurableReviewStateDoesNotCreateTruth :
+  GovernanceTOE.DurableReviewStateCreatesTruth → ⊥
+unifierDurableReviewStateDoesNotCreateTruth =
+  GovernanceTOE.toeDurableReviewStateDoesNotCreateTruth
+
+unifierAcceptanceReceiptDoesNotMutateMatter :
+  GovernanceTOE.AcceptanceReceiptMutatesMatter → ⊥
+unifierAcceptanceReceiptDoesNotMutateMatter =
+  GovernanceTOE.toeAcceptanceReceiptDoesNotMutateMatter
+
+unifierExternalSourceDoesNotAdmitTruth :
+  GovernanceTOE.ExternalSourceClaimImpliesTruthAdmitted → ⊥
+unifierExternalSourceDoesNotAdmitTruth =
+  GovernanceTOE.toeExternalSourceDoesNotAdmitTruth
+
+unifierLegalAuthorityDoesNotCreateTruthStatus :
+  GovernanceTOE.LegalAuthorityCreatesTruthStatus → ⊥
+unifierLegalAuthorityDoesNotCreateTruthStatus =
+  GovernanceTOE.toeLegalAuthorityDoesNotCreateTruthStatus
+
+unifierPromotionStageDoesNotBypassPromotionAuthority :
+  GovernanceTOE.PromotionStageMaySkipPromotionAuthority → ⊥
+unifierPromotionStageDoesNotBypassPromotionAuthority =
+  GovernanceTOE.toePromotionStageDoesNotBypassPromotionAuthority
+
+unifierSourceRealisedWrongTypeDoesNotAutoViolate :
+  GovernanceTOE.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
+unifierSourceRealisedWrongTypeDoesNotAutoViolate =
+  GovernanceTOE.toeSourceRealisedWrongTypeDoesNotAutoViolate
+
+unifierElementsDoNotEraseExceptionsOrDefences :
+  GovernanceTOE.AllElementsProvedIgnoresExceptionsDefences → ⊥
+unifierElementsDoNotEraseExceptionsOrDefences =
+  GovernanceTOE.toeElementsDoNotEraseExceptionsOrDefences
+
+unifierKernelClosureDoesNotMeanSemanticClosure =
+  GovernanceTOE.toeKernelClosureDoesNotMeanSemanticClosure
+
+unifierFormalProofDoesNotCreateExternalWorldTruth =
+  GovernanceTOE.toeFormalProofDoesNotCreateExternalWorldTruth
+
+unifierComplianceCompositionRetainsIntermediateWitness =
+  GovernanceTOE.complianceCompositionRetainsIntermediateWitnessIsTrue
+    GovernanceTOE.canonicalGovernedLegalWorkflowTOEBoundary
+
+unifierSameLegalSystemDoesNotCloseAuthority =
+  GovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifierDocumentRoleDoesNotSupplyLegalSourceAuthority =
+  GovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+unifierCanonicalLegalSourceAuthorityBoundary =
+  GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
+
+
+
+unifierNativeLegalFollowDoesNotCreateLegalAuthority :
+  GovernanceTOE.NativeCliAutomaticallyLegalAuthority → ⊥
+unifierNativeLegalFollowDoesNotCreateLegalAuthority =
+  GovernanceTOE.toeNativeLegalFollowDoesNotCreateLegalAuthority
+
+unifierProviderFailureDoesNotMakePropositionFalse :
+  GovernanceTOE.ProviderFailureAutomaticallyPropositionFalse → ⊥
+unifierProviderFailureDoesNotMakePropositionFalse =
+  GovernanceTOE.toeProviderFailureDoesNotMakePropositionFalse
+
+unifierExpertProductionPromotesAnyAuthorityIsFalse :
+  GovernanceTOE.toeExpertProductionPromotesAnyAuthority ≡ false
+unifierExpertProductionPromotesAnyAuthorityIsFalse =
+  GovernanceTOE.toeExpertProductionPromotesAnyAuthorityIsFalse
+
+
+------------------------------------------------------------------------
+-- Direct legal execution and expert-evidence non-promotion aliases.
+------------------------------------------------------------------------
+
+unifierSpacyDoesNotCreateLegalAuthority :
+  GovernanceTOE.SpacyParserAutomaticallyLegalAuthority → ⊥
+unifierSpacyDoesNotCreateLegalAuthority =
+  GovernanceTOE.toeSpacyDoesNotCreateLegalAuthority
+
+unifierSpacyDoesNotCreateLegalConstruction :
+  GovernanceTOE.SpacyParserAutomaticallyLegalConstruction → ⊥
+unifierSpacyDoesNotCreateLegalConstruction =
+  GovernanceTOE.toeSpacyDoesNotCreateLegalConstruction
+
+unifierLatestKnownSectionDoesNotBecomeHistoricalLaw :
+  GovernanceTOE.SectionSliceAutomaticallyHistoricalLaw → ⊥
+unifierLatestKnownSectionDoesNotBecomeHistoricalLaw =
+  GovernanceTOE.toeLatestKnownSectionDoesNotBecomeHistoricalLaw
+
+unifierPythonWrapperDoesNotOwnLegalSemantics :
+  GovernanceTOE.PythonWrapperOwnsLegalSemantics → ⊥
+unifierPythonWrapperDoesNotOwnLegalSemantics =
+  GovernanceTOE.toePythonWrapperDoesNotOwnLegalSemantics
+
+unifierJsonIsNotSemanticCommandAbi :
+  GovernanceTOE.JsonArtifactIsSemanticCommandAbi → ⊥
+unifierJsonIsNotSemanticCommandAbi =
+  GovernanceTOE.toeJsonIsNotSemanticCommandAbi
+
+unifierJsonReviewDoesNotCreateDecision :
+  GovernanceTOE.JsonReviewFileAutomaticallyReviewerDecision → ⊥
+unifierJsonReviewDoesNotCreateDecision =
+  GovernanceTOE.toeJsonReviewDoesNotCreateDecision
+
+unifierJsonReceiptDoesNotCreateTruth :
+  GovernanceTOE.JsonReceiptAutomaticallyClaimTruth → ⊥
+unifierJsonReceiptDoesNotCreateTruth =
+  GovernanceTOE.toeJsonReceiptDoesNotCreateTruth
+
+unifierCliSequenceDoesNotPayResidual :
+  GovernanceTOE.CliSequenceAutomaticallyPaysOpenResidual → ⊥
+unifierCliSequenceDoesNotPayResidual =
+  GovernanceTOE.toeCliSequenceDoesNotPayResidual
+
+unifierPinnedStreamDoesNotCreateLegalTruth :
+  GovernanceTOE.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+unifierPinnedStreamDoesNotCreateLegalTruth =
+  GovernanceTOE.toePinnedStreamDoesNotCreateLegalTruth
+
+unifierReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
+  GovernanceTOE.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+unifierReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
+  GovernanceTOE.toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
+
+unifierOalcHitDoesNotBecomeBindingAuthority :
+  GovernanceTOE.OalcHitAutomaticallyBindingAuthority → ⊥
+unifierOalcHitDoesNotBecomeBindingAuthority =
+  GovernanceTOE.toeOalcHitDoesNotBecomeBindingAuthority
+
+unifierOfficialCourtBytesDoNotBecomePropositionCorrespondence :
+  GovernanceTOE.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+unifierOfficialCourtBytesDoNotBecomePropositionCorrespondence =
+  GovernanceTOE.toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
+
+unifierSameMncDoesNotCollapseSourceRevisions :
+  GovernanceTOE.SameMncAutomaticallySameSourceRevision → ⊥
+unifierSameMncDoesNotCollapseSourceRevisions =
+  GovernanceTOE.toeSameMncDoesNotCollapseSourceRevisions
+
+unifierSuccessfulOfficialFetchDoesNotBecomeProductionReady :
+  GovernanceTOE.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+unifierSuccessfulOfficialFetchDoesNotBecomeProductionReady =
+  GovernanceTOE.toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
+
+unifierMultipleReportsDoNotAutomaticallyCreateIndependence :
+  GovernanceTOE.MultipleReportsAutomaticallyIndependent → ⊥
+unifierMultipleReportsDoNotAutomaticallyCreateIndependence =
+  GovernanceTOE.toeMultipleReportsDoNotAutomaticallyCreateIndependence
+
+unifierAgreementDoesNotAutomaticallyCreateIndependentCorroboration :
+  GovernanceTOE.AgreementAutomaticallyIndependentCorroboration → ⊥
+unifierAgreementDoesNotAutomaticallyCreateIndependentCorroboration =
+  GovernanceTOE.toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
+
+unifierDependenceDoesNotMeanNoEvidence :
+  GovernanceTOE.DependenceMeansNoEvidence → ⊥
+unifierDependenceDoesNotMeanNoEvidence =
+  GovernanceTOE.toeDependenceDoesNotMeanNoEvidence
+
+unifierExpertStatusDoesNotAutomaticallyCreateTruth :
+  GovernanceTOE.ExpertStatusAutomaticallyTruth → ⊥
+unifierExpertStatusDoesNotAutomaticallyCreateTruth =
+  GovernanceTOE.toeExpertStatusDoesNotAutomaticallyCreateTruth
+
+unifierReportAdmissionDoesNotRepairMissingInput :
+  GovernanceTOE.ReportAdmissionRepairsMissingInput → ⊥
+unifierReportAdmissionDoesNotRepairMissingInput =
+  GovernanceTOE.toeReportAdmissionDoesNotRepairMissingInput
+
+unifierCrossExaminationDoesNotAddUnobservedInput :
+  GovernanceTOE.CrossExaminationAddsUnobservedInput → ⊥
+unifierCrossExaminationDoesNotAddUnobservedInput =
+  GovernanceTOE.toeCrossExaminationDoesNotAddUnobservedInput
+
+unifierDisputedRiskDoesNotBecomeIrrelevant :
+  GovernanceTOE.DisputedRiskIsIrrelevant → ⊥
+unifierDisputedRiskDoesNotBecomeIrrelevant =
+  GovernanceTOE.toeDisputedRiskDoesNotBecomeIrrelevant
+
+unifierObserverDefectDoesNotProveOpinionFalse :
+  GovernanceTOE.ObserverDefectMakesOpinionFalse → ⊥
+unifierObserverDefectDoesNotProveOpinionFalse =
+  GovernanceTOE.toeObserverDefectDoesNotProveOpinionFalse
+
+unifierQualificationDoesNotAutomaticallyProveForensicCompliance :
+  GovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+unifierQualificationDoesNotAutomaticallyProveForensicCompliance =
+  GovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
