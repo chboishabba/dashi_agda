@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
+import DASHI.Unified.Everything as Unified
 import DASHI.Unified.CollatzSyracuseTOEMaxCutExact as Owner
 import DASHI.Analysis.CollatzSyracuseSameObjectMaxCutExact as MaxCut
 import DASHI.Analysis.CollatzSyracuseTerminalParityMaxCutExact as Terminal
@@ -17,6 +18,11 @@ unifierReceiptMatchesOwner :
   Unifier.unifierCollatzSyracuseMaxCutReceipt
   ≡ Owner.canonicalCollatzSyracuseTOEMaxCutReceipt
 unifierReceiptMatchesOwner = refl
+
+unifiedReceiptMatchesOwner :
+  Unified.unifiedCollatzSyracuseMaxCutReceipt
+  ≡ Owner.canonicalCollatzSyracuseTOEMaxCutReceipt
+unifiedReceiptMatchesOwner = refl
 
 toeCylinderForwardPaid :
   MaxCut.cutStatus MaxCut.C3-residueCylinderForward ≡ MaxCut.proved
