@@ -171,3 +171,20 @@ unifiedNavierStokesABCDTerminalZKPFrame :
   NSABCDTerminal.NSABCDTerminalZKPFrame
 unifiedNavierStokesABCDTerminalZKPFrame =
   NSABCDTerminal.canonicalNSABCDTerminalZKPFrame
+
+
+------------------------------------------------------------------------
+-- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
+
+unifiedR559IbrahimFleetHyperfabricReceipt :
+  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
+unifiedR559IbrahimFleetHyperfabricReceipt =
+  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
+
+unifiedFleetFormalGapsAre58 :
+  FleetHyperTOE.fleetFormalGaps ≡ 58
+unifiedFleetFormalGapsAre58 =
+  FleetHyperTOE.fleetFormalGapsAre58
