@@ -133,6 +133,34 @@ toeRouteSRequiresDenseL2NormalizationIsFalse :
 toeRouteSRequiresDenseL2NormalizationIsFalse =
   Full.routeSRequiresDenseL2NormalizationIsFalse
 
+
+toeRouteSH1HasOneTheoremBearingField : Bool
+toeRouteSH1HasOneTheoremBearingField =
+  Full.routeSH1HasOneTheoremBearingField
+
+toeRouteSH1HasOneTheoremBearingFieldIsTrue :
+  toeRouteSH1HasOneTheoremBearingField ≡ true
+toeRouteSH1HasOneTheoremBearingFieldIsTrue =
+  Full.routeSH1HasOneTheoremBearingFieldIsTrue
+
+toeRouteSH1RequiresHistoricalPublishedWrapper : Bool
+toeRouteSH1RequiresHistoricalPublishedWrapper =
+  Full.routeSH1RequiresHistoricalPublishedWrapper
+
+toeRouteSH1RequiresHistoricalPublishedWrapperIsFalse :
+  toeRouteSH1RequiresHistoricalPublishedWrapper ≡ false
+toeRouteSH1RequiresHistoricalPublishedWrapperIsFalse =
+  Full.routeSH1RequiresHistoricalPublishedWrapperIsFalse
+
+toeRouteSH1ToR387RequiresSourceEnvelope : Bool
+toeRouteSH1ToR387RequiresSourceEnvelope =
+  Full.routeSH1ToR387RequiresSourceEnvelope
+
+toeRouteSH1ToR387RequiresSourceEnvelopeIsFalse :
+  toeRouteSH1ToR387RequiresSourceEnvelope ≡ false
+toeRouteSH1ToR387RequiresSourceEnvelopeIsFalse =
+  Full.routeSH1ToR387RequiresSourceEnvelopeIsFalse
+
 toeD1NewAnalyticInequalityRequired : Bool
 toeD1NewAnalyticInequalityRequired =
   Full.d1NewAnalyticInequalityRequired
@@ -150,6 +178,34 @@ toeD2SecondMixingMapRequiredIsFalse :
   toeD2SecondMixingMapRequired ≡ false
 toeD2SecondMixingMapRequiredIsFalse =
   Full.d2SecondMixingMapRequiredIsFalse
+
+
+toeD2BareTransportABIPaysPhysicalMixing : Bool
+toeD2BareTransportABIPaysPhysicalMixing =
+  Full.d2BareTransportABIPaysPhysicalMixing
+
+toeD2BareTransportABIPaysPhysicalMixingIsFalse :
+  toeD2BareTransportABIPaysPhysicalMixing ≡ false
+toeD2BareTransportABIPaysPhysicalMixingIsFalse =
+  Full.d2BareTransportABIPaysPhysicalMixingIsFalse
+
+toeD2IndependentPhysicalOneStepRecurrenceRequired : Bool
+toeD2IndependentPhysicalOneStepRecurrenceRequired =
+  Full.d2IndependentPhysicalOneStepRecurrenceRequired
+
+toeD2IndependentPhysicalOneStepRecurrenceRequiredIsFalse :
+  toeD2IndependentPhysicalOneStepRecurrenceRequired ≡ false
+toeD2IndependentPhysicalOneStepRecurrenceRequiredIsFalse =
+  Full.d2IndependentPhysicalOneStepRecurrenceRequiredIsFalse
+
+toeD2SameFamilyCompositeConvergenceStillPhysical : Bool
+toeD2SameFamilyCompositeConvergenceStillPhysical =
+  Full.d2SameFamilyCompositeConvergenceStillPhysical
+
+toeD2SameFamilyCompositeConvergenceStillPhysicalIsTrue :
+  toeD2SameFamilyCompositeConvergenceStillPhysical ≡ true
+toeD2SameFamilyCompositeConvergenceStillPhysicalIsTrue =
+  Full.d2SameFamilyCompositeConvergenceStillPhysicalIsTrue
 
 toeD2ParallelCompositeOperatorTheoryAllowed : Bool
 toeD2ParallelCompositeOperatorTheoryAllowed =
