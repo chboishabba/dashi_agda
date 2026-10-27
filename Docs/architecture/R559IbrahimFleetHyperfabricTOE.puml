@@ -1,9 +1,10 @@
 @startuml
-title R559 / Ibrahim / Fleet / Hyperfabric TOE convergence
+title R559 / Ibrahim / Fleet / Yang-Mills A-D / Hyperfabric TOE convergence
 
 skinparam componentStyle rectangle
+skinparam shadowing false
 
-package "Canonical owners" {
+package "Canonical normalization owners" {
   component "BalabanR559TOEMaxCutExact" as YM
   component "BalabanIbrahimParetoSnowballTOEExact" as Ibrahim
   component "FleetFormalGapTargetTOEExact" as Fleet
@@ -12,18 +13,22 @@ package "Canonical owners" {
   component "SensibLawWrongTypeGenericHyperfabricAdapterExact" as WrongType
 }
 
+package "Yang-Mills A-D theorem owners" {
+  component "R443 / R444 / R461\nfinite Wilson OS owners" as A
+  component "CMP119 reflection max-cut\nE/R/B crossing certificates explicit" as B
+  component "CMP119 literal residual weld\nEq.2.23 E/R/B/V same-object cut" as C
+  component "R534 / R535\nprojective continuum representation" as D
+  component "Gate4 Round6 ledger + cutset\npaid reductions + 58 conditional fields" as G58
+}
+
+component "YMImplementAToDTOEMaxCutExact\nreuse-only A-D receipt" as AD
 component "R559IbrahimFleetHyperfabricTOEExact" as Joint
 component "EverythingTOESymmetryResolved369" as TOE
 component "Unifier" as Unifier
+component "Unified.Physics" as Physics
 component "Unified.Everything" as Unified
-component "R559IbrahimFleetHyperfabricTOEValidation" as Validation
-component "TriadicFin27Byte256ABIExact" as ABI27
-component "TriadicByteABIRoadmapWeldExact" as ABIRoadmap
-component "Ternary27ResidualProgramDecisionBridgeExact" as Ternary27
-component "MonsterGradedVOAActual3BKernelSameElementBidiExact" as KernelBidi
-component "Base369Monster3BSingleActionProducerBidiExact" as ProducerBidi
-component "R559IbrahimFleetKernelBidiTernary27TOEExact" as KernelBidiTernary27
-component "R559IbrahimFleetKernelBidiTernary27TOEValidation" as KernelBidiTernary27Validation
+component "A-D Validation" as ADValidation
+component "Fleet/Ibrahim Validation" as Validation
 
 YM --> Joint : exact receipt + RG non-promotion
 Ibrahim --> Joint : Pareto / snowball boundaries
@@ -32,49 +37,58 @@ Fabric --> Joint : B^k + factorisation
 PadicWave --> Joint : prefix / stream projection loss
 WrongType --> Joint : legal adapter only
 
+A --> AD : existing finite OS levels
+B --> AD : existing complete-action RP audit
+C --> AD : existing selected residual weld
+D --> AD : existing projective representation
+G58 --> AD : exact Gate-4 scope and paid reductions
+YM --> AD : scale-transfer and terminal non-promotion
+
 Joint --> TOE
 Joint --> Unifier
 Joint --> Unified
+
+AD --> TOE
+AD --> Unifier
+AD --> Physics
+AD --> Unified
+
+TOE --> ADValidation
+Unifier --> ADValidation
+Physics --> ADValidation
+AD --> ADValidation
 
 TOE --> Validation
 Unifier --> Validation
 Unified --> Validation
 Joint --> Validation
 
-Joint --> KernelBidiTernary27 : inherited 58 / 584 / RG / Ibrahim receipt
-ABI27 --> KernelBidiTernary27 : exact Fin27 -> Fin256 ABI
-ABIRoadmap --> KernelBidiTernary27 : runtime binding firewall
-Ternary27 --> KernelBidiTernary27 : exact dependent 27-state consumer code
-KernelBidi --> KernelBidiTernary27 : character/isotypy non-promotion
-ProducerBidi --> KernelBidiTernary27 : single-action producer boundary
-KernelBidiTernary27 --> TOE
-KernelBidiTernary27 --> Unifier
-KernelBidiTernary27 --> Unified
-KernelBidiTernary27 --> KernelBidiTernary27Validation
-
 note right of Fleet
-External fleet counts remain planning receipts.
-Counts do not create proof authority.
-Only the reported 58 formal gaps are targeted.
+The fleet receipt is external planning context.
+584 discharged fibres stay discharged.
+44 contradiction gaps stay separate.
+58 target gaps remain the fleet target.
+Three eigen-motif labels do not create proof authority.
 end note
 
-note right of Fabric
-Address count does not create semantics.
-Projection sufficiency is consumer-relative.
+note right of G58
+The Yang-Mills Gate-4 count is also 58.
+Equal cardinality does not prove same-object identity.
+The round-six ledger records paid reductions.
+The cutset inhabitants remain conditional.
+end note
+
+note right of AD
+A-D reuses theorem owners.
+Localization does not imply reflection positivity.
+Projective compilers do not imply continuum Yang-Mills.
 end note
 
 note bottom of Joint
-Finite RG != continuum Yang-Mills.
-Search priority != proof.
-Arithmetic coincidence != Monster recognition.
+Finite RG does not imply continuum Yang-Mills.
+Search priority does not imply proof.
+Arithmetic coincidence does not imply Monster recognition.
 No ESD mutation.
-end note
-
-note right of KernelBidiTernary27
-No literal CFFI theorem owner was found.
-Fin27/Fin256 ABI is exact.
-Rust/CUDA/ROCm machine bindings remain unpaid.
-Kernel character isotypy does not construct an action intertwiner.
 end note
 
 @enduml
