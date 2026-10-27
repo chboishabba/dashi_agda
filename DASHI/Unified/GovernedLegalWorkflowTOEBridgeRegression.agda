@@ -414,3 +414,42 @@ unifierCanonicalLegalAuthorityBoundaryIsExact :
   ≡ Bridge.toeCanonicalLegalSourceAuthorityBoundary
 unifierCanonicalLegalAuthorityBoundaryIsExact = refl
 
+
+
+------------------------------------------------------------------------
+-- Native legal-follow, provider-access, and expert-production regression.
+------------------------------------------------------------------------
+
+unifierNativeLegalFollowAuthorityAliasIsExact :
+  Bridge.NativeCliAutomaticallyLegalAuthority → ⊥
+unifierNativeLegalFollowAuthorityAliasIsExact =
+  Unifier.unifierNativeLegalFollowDoesNotCreateLegalAuthority
+
+unifierProviderFailureEvidenceAliasIsExact :
+  Bridge.ProviderFailureAutomaticallyPropositionFalse → ⊥
+unifierProviderFailureEvidenceAliasIsExact =
+  Unifier.unifierProviderFailureDoesNotMakePropositionFalse
+
+unifierExpertProductionAuthorityAliasIsExact :
+  Unifier.unifierExpertProductionPromotesAnyAuthorityIsFalse
+  ≡ Bridge.toeExpertProductionPromotesAnyAuthorityIsFalse
+unifierExpertProductionAuthorityAliasIsExact =
+  refl
+
+invariantHandoffCarriesNativeLegalFollowAuthorityFirewall :
+  Bridge.NativeCliAutomaticallyLegalAuthority → ⊥
+invariantHandoffCarriesNativeLegalFollowAuthorityFirewall =
+  Bridge.nativeLegalFollowAuthorityFirewall
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+invariantHandoffCarriesProviderFailureEvidenceFirewall :
+  Bridge.ProviderFailureAutomaticallyPropositionFalse → ⊥
+invariantHandoffCarriesProviderFailureEvidenceFirewall =
+  Bridge.providerFailureNegativeEvidenceFirewall
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
+
+invariantHandoffCarriesExpertProductionAuthorityClosure :
+  Bridge.toeExpertProductionPromotesAnyAuthority ≡ false
+invariantHandoffCarriesExpertProductionAuthorityClosure =
+  Bridge.expertProductionAuthorityClosed
+    Unifier.toeGovernedLegalWorkflowInvariantHandoff
