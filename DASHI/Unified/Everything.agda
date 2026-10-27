@@ -12,6 +12,7 @@ import DASHI.Unified.BalabanR559TOEMaxCutValidation
 import DASHI.Unified.BalabanR559TOEUnifiedEverythingValidation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Unified.FleetFormalGapTargetTOEValidation
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
 import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
