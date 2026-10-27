@@ -1,0 +1,44 @@
+@startuml
+title Collatz / Syracuse TOE max-cut convergence
+
+skinparam componentStyle rectangle
+
+package "DASHI TOE roots" {
+  [DASHI.EverythingTOESymmetryResolved369] as TOE
+  [DASHI.Unifier] as Unifier
+}
+
+package "DASHI.Unified" {
+  [CollatzSyracuseTOEMaxCutExact] as Facade
+  [CollatzSyracuseTOEMaxCutValidation] as Validation
+}
+
+package "Existing theorem owners" {
+  [CollatzSyracuseSameObjectMaxCutExact] as MaxCut
+  [CollatzSyracuseTerminalParityMaxCutExact] as Terminal
+  [CollatzSyracuseSOTA2026Exact] as SOTA
+}
+
+TOE --> Facade : exact receipt
+Unifier --> Facade : exact receipt
+Facade --> MaxCut : reuse
+Facade --> Terminal : reuse
+Facade --> SOTA : attribution
+Validation --> TOE
+Validation --> Unifier
+Validation --> Facade
+
+note right of Terminal
+Open leaf:
+all-start finite-barrier /
+literal residual elimination producer.
+Finite search, density and the old
+spectral relation do not promote it.
+end note
+
+note bottom of Facade
+No ESD mutation.
+No new mathematical theorem owner.
+No universal-stopping promotion.
+end note
+@enduml
