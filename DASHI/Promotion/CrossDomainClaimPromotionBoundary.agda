@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Empty using (⊥)
 import DASHI.Promotion.AuthorityGateCore as AuthorityGateCore
 import DASHI.Core.AdapterCanonicalityCore as AdapterCanon
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
