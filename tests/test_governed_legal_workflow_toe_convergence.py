@@ -469,3 +469,52 @@ def test_direct_legal_governance_regression_binds_unifier_to_bridge():
     ):
         assert token in text
 
+
+
+def test_native_follow_provider_and_expert_firewalls_reach_all_toe_facades():
+    bridge = read(BRIDGE)
+    toe = read(TOE)
+    unifier = read(UNIFIER)
+    unified = read(UNIFIED_EVERYTHING)
+    regression = read(REGRESSION)
+
+    for token in (
+        "toeNativeLegalFollowDoesNotCreateLegalAuthority",
+        "toeProviderFailureDoesNotMakePropositionFalse",
+        "toeExpertProductionPromotesAnyAuthorityIsFalse",
+        "nativeLegalFollowAuthorityFirewall",
+        "providerFailureNegativeEvidenceFirewall",
+        "expertProductionAuthorityClosed",
+    ):
+        assert token in bridge
+
+    for token in (
+        "toe369NativeLegalFollowDoesNotCreateLegalAuthority",
+        "toe369ProviderFailureDoesNotMakePropositionFalse",
+        "toe369ExpertProductionPromotesAnyAuthorityIsFalse",
+    ):
+        assert token in toe
+
+    for token in (
+        "unifierNativeLegalFollowDoesNotCreateLegalAuthority",
+        "unifierProviderFailureDoesNotMakePropositionFalse",
+        "unifierExpertProductionPromotesAnyAuthorityIsFalse",
+    ):
+        assert token in unifier
+
+    for token in (
+        "governedNativeLegalFollowDoesNotCreateLegalAuthority",
+        "governedProviderFailureDoesNotMakePropositionFalse",
+        "governedExpertProductionPromotesAnyAuthorityIsFalse",
+    ):
+        assert token in unified
+
+    for token in (
+        "unifierNativeLegalFollowAuthorityAliasIsExact",
+        "unifierProviderFailureEvidenceAliasIsExact",
+        "unifierExpertProductionAuthorityAliasIsExact",
+        "invariantHandoffCarriesNativeLegalFollowAuthorityFirewall",
+        "invariantHandoffCarriesProviderFailureEvidenceFirewall",
+        "invariantHandoffCarriesExpertProductionAuthorityClosure",
+    ):
+        assert token in regression
