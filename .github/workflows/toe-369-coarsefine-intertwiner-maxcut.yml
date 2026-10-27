@@ -6,6 +6,9 @@ on:
     paths:
       - 'DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda'
       - 'DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda'
+      - 'DASHI/Unified/TOE369RootUnifierConvergenceValidation.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/EverythingSSPRepresentationReductionRound9.agda'
       - 'DASHI/Foundations/Base369CoarseFineFabricAdapterExact.agda'
       - 'DASHI/Moonshine/Base369Ternary27SpectralSymmetryIrrepBridgeExact.agda'
@@ -55,6 +58,9 @@ jobs:
           sources=(
             DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda
             DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda
+            DASHI/Unified/TOE369RootUnifierConvergenceValidation.agda
+            DASHI/Unifier.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/EverythingSSPRepresentationReductionRound9.agda
           )
           for source in "${sources[@]}"; do
@@ -73,5 +79,7 @@ jobs:
           agda --version
           agda -i . -l standard-library DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda
           agda -i . -l standard-library DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda
+          agda -i . -l standard-library DASHI/Unified/TOE369RootUnifierConvergenceValidation.agda
+          agda -i . -l standard-library DASHI/Unifier.agda
           agda -i . -l standard-library DASHI/EverythingSSPRepresentationReductionRound9.agda
           agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
