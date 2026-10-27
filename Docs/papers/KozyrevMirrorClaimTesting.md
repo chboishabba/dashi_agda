@@ -41,6 +41,22 @@ claims/drawings and recording a reconciled edition, units and translation.
 A patent is evidence of a described device and dated inventor attribution,
 not of treatment efficacy.
 
+## Related external PRs (cross-pollination, not appropriation)
+
+- [benskamps/wormhole-playground #4](https://github.com/benskamps/wormhole-playground/pull/4):
+  corrects an earlier spiral angular-momentum assertion to an unstable
+  integrator artifact. Reuse the lesson: calibration, stability and
+  conservation controls precede any extraordinary interpretation.
+- [Lucent-Financial-Group/Zeta #1855](https://github.com/Lucent-Financial-Group/Zeta/pull/1855):
+  records a distinct **Kozyrev Mirror / BFT immune-system** *governance
+  analogy*, including a three-node threshold claim. It is not
+  a physical experiment or an identity bridge. Retain the original
+  PR author's ownership; do not promote shared terminology into
+  the same apparatus, causal mechanism, mathematical object or result.
+- [DavJ/padiclab #9](https://github.com/DavJ/padiclab/pull/9):
+  Kozyrev *wavelets* and Vladimirov operators are mathematical prior
+  art in a different domain, not a replicate of the mirror.
+
 ## Existing repository reuse
 
 - Canonical theorem owner: `DASHI/Empirical/KozyrevMirrorClaimTesting.agda`.
