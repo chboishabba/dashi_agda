@@ -102,6 +102,21 @@ fleetContradictionGapsAre44 = refl
 fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
 fleetFormalGapsAre58 = refl
 
+
+ymGate4FormalGaps : Nat
+ymGate4FormalGaps =
+  YM.gate4UnresolvedObligationCount
+
+ymGate4FormalGapsAre58 : ymGate4FormalGaps ≡ 58
+ymGate4FormalGapsAre58 =
+  YM.gate4UnresolvedObligationCountIs58
+
+ymGate4PaidReductionLevel =
+  YM.gate4PaidReductionLedgerLevel
+
+ymGate4InhabitantsLevel =
+  YM.gate4CutsetInhabitantsLevel
+
 fleetEigenPriorityDoesNotCreateProof :
   Fleet.FleetEigenPriorityCreatesProof → ⊥
 fleetEigenPriorityDoesNotCreateProof =
@@ -123,14 +138,23 @@ fleetContradictionGapsStaySeparate =
   Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
 
 
+Fleet58EqualsYMGate4SameObject : Set
+Fleet58EqualsYMGate4SameObject =
+  IdentityFirewall.SharedCardinalityCreatesIdentity
+
+fleet58CardinalityDoesNotProveYMGate4Identity :
+  Fleet58EqualsYMGate4SameObject → ⊥
+fleet58CardinalityDoesNotProveYMGate4Identity =
+  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
+
 Fleet58Gate458SameIdentityFromCount : Set
 Fleet58Gate458SameIdentityFromCount =
-  IdentityFirewall.SharedCardinalityCreatesIdentity
+  Fleet58EqualsYMGate4SameObject
 
 fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
   Fleet58Gate458SameIdentityFromCount → ⊥
 fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
-  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
+  fleet58CardinalityDoesNotProveYMGate4Identity
 
 ------------------------------------------------------------------------
 -- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
