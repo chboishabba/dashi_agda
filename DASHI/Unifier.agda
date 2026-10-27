@@ -978,3 +978,26 @@ unifierReviewedGenealogyDoesNotPayApplicability =
 
 unifierGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
   LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
+
+------------------------------------------------------------------------
+-- Governed legal/source/semantic non-promotion handoff.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
+
+unifierGovernedLegalWorkflowSourceSemanticHandoff :
+  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
+unifierGovernedLegalWorkflowSourceSemanticHandoff =
+  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
+unifierGovernedSharedLexemeDoesNotCreateSemanticIdentity =
+  LegalSourceSemantic.toeSharedLexemeDoesNotCreateSemanticIdentity
+
+unifierGovernedDiagnosticCheckDoesNotCreateTheoremPromotion =
+  LegalSourceSemantic.toeDiagnosticCheckDoesNotCreateTheoremPromotion
+
+unifierGovernedSourceIdentifierDoesNotCreateProofAuthority =
+  LegalSourceSemantic.toeSourceIdentifierDoesNotCreateProofAuthority
+
+unifierGovernedESDSurfaceMutationRemainsForbidden =
+  LegalSourceSemantic.toeESDSurfaceMutationRemainsForbidden
