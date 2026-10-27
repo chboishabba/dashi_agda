@@ -13,6 +13,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 -- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Unified.BalabanAntigravityTOEConvergenceExact as BalabanAntiTOE
 
 open BalabanRGTOE public using
   ( sourceCouplingIsBetaHistoryCoupling
@@ -61,6 +62,19 @@ balabanRGClayPromotionStillFalse :
 balabanRGClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
+
+balabanAntigravityTOEReceipt :
+  BalabanAntiTOE.BalabanAntigravityTOEReceipt
+balabanAntigravityTOEReceipt =
+  BalabanAntiTOE.canonicalBalabanAntigravityTOEReceipt
+
+balabanAntigravityS4CompilerLevel : ProofLevel
+balabanAntigravityS4CompilerLevel =
+  BalabanAntiTOE.balabanAntigravityS4CompilerLevel
+
+balabanAntigravityP3GCompilerLevel : ProofLevel
+balabanAntigravityP3GCompilerLevel =
+  BalabanAntiTOE.balabanAntigravityP3GCompilerLevel
 
 balabanRGTOEReceipt : BalabanRGTOE.BalabanRGTOEReceipt
 balabanRGTOEReceipt =
