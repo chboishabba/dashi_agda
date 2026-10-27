@@ -20,6 +20,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -577,6 +578,13 @@ record BalabanRGTOEReceipt : Set where
     goal1CContinuumStressRecoveryCompiler : ProofLevel
     goal1CMetricPairingCompiler : ProofLevel
     goal1CLiteralSourceInstantiation : ProofLevel
+    cPhysicalPackageMaxCutCompiler : ProofLevel
+    c0LiteralGaugeInvariantLocalObservableFamily : ProofLevel
+    c1MarkedCurvatureFamily : ProofLevel
+    c2PhysicalRemainderSharedTail : ProofLevel
+    c3OneStepAFRecurrenceIdentification : ProofLevel
+    c4DensityAnchoredStressLane : ProofLevel
+    cPhysicalPackageCount : Nat
     stressHilbertBoundCompiler : ProofLevel
     stressHilbertPhysicalShell : ProofLevel
 
@@ -688,6 +696,20 @@ canonicalBalabanRGTOEReceipt =
         balabanGoal1CMetricPairingCompilerLevel
     ; goal1CLiteralSourceInstantiation =
         balabanGoal1CLiteralSourceInstantiationLevel
+    ; cPhysicalPackageMaxCutCompiler =
+        balabanCPhysicalPackageMaxCutCompilerLevel
+    ; c0LiteralGaugeInvariantLocalObservableFamily =
+        balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+    ; c1MarkedCurvatureFamily =
+        balabanC1MarkedCurvatureFamilyLevel
+    ; c2PhysicalRemainderSharedTail =
+        balabanC2PhysicalRemainderSharedTailLevel
+    ; c3OneStepAFRecurrenceIdentification =
+        balabanC3OneStepAFRecurrenceIdentificationLevel
+    ; c4DensityAnchoredStressLane =
+        balabanC4DensityAnchoredStressLaneLevel
+    ; cPhysicalPackageCount =
+        balabanCPhysicalPackageCount
     ; stressHilbertBoundCompiler =
         balabanStressHilbertBoundCompilerLevel
     ; stressHilbertPhysicalShell =
