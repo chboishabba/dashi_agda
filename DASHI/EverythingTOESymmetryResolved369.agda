@@ -431,3 +431,16 @@ toeBalabanR559ClayPromotionStillBlocked :
 toeBalabanR559ClayPromotionStillBlocked =
   BalabanR559TOE.clayPromotionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+------------------------------------------------------------------------
+
+import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
+import Data.Empty using (⊥)
+
+toeBalabanScaleTransferNonPromotion :
+  RGNonPromotion.BalabanRGScaleTransferPromotion → ⊥
+toeBalabanScaleTransferNonPromotion =
+  RGNonPromotion.balabanRGScaleTransferPromotionImpossibleHere
