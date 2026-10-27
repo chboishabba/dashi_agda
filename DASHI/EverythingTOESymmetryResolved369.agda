@@ -38,6 +38,11 @@ import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
 -- Governed legal-workflow TOE receipt.
 ------------------------------------------------------------------------
 
+toeGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+toeGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
 toeGovernedLegalWorkflowZKPReceipt :
   LegalGovernance.GovernedLegalWorkflowZKPReceipt
 toeGovernedLegalWorkflowZKPReceipt =
