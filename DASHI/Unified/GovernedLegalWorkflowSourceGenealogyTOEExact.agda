@@ -87,6 +87,18 @@ record GovernedLegalWorkflowSourceGenealogyHandoff : Set₁ where
     semanticAdmissionLegalAuthorityFirewall :
       Legal.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 
+    candidateSourceLegalAuthorityFirewall :
+      Legal.CandidateSourceIsAuthoritative → ⊥
+
+    sameLegalSystemAuthorityFirewall :
+      Legal.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+
+    currentValidityApplicabilityFirewall :
+      Legal.CurrentValidityAutomaticallyMeansApplicability → ⊥
+
+    documentRoleLegalAuthorityFirewall :
+      Legal.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+
 open GovernedLegalWorkflowSourceGenealogyHandoff public
 
 canonicalGovernedLegalWorkflowSourceGenealogyHandoff :
@@ -102,6 +114,10 @@ canonicalGovernedLegalWorkflowSourceGenealogyHandoff =
     Legal.toeLegalAuthorityDoesNotCreateTruthStatus
     Legal.toeAcceptedReviewDoesNotPayApplicability
     Legal.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+    Legal.toeCandidateSourceDoesNotCloseAuthority
+    Legal.toeSameSystemDoesNotAutomaticallyCloseAuthority
+    Legal.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+    Legal.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
 
 ------------------------------------------------------------------------
 -- Thin aliases for TOE consumers.
@@ -147,4 +163,28 @@ toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority :
   Legal.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
   semanticAdmissionLegalAuthorityFirewall
+    canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+
+toeGenealogyCandidateSourceDoesNotCreateLegalAuthority :
+  Legal.CandidateSourceIsAuthoritative → ⊥
+toeGenealogyCandidateSourceDoesNotCreateLegalAuthority =
+  candidateSourceLegalAuthorityFirewall
+    canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+
+toeGenealogySameLegalSystemDoesNotCreateLegalAuthority :
+  Legal.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+toeGenealogySameLegalSystemDoesNotCreateLegalAuthority =
+  sameLegalSystemAuthorityFirewall
+    canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+
+toeGenealogyCurrentValidityDoesNotCreateApplicability :
+  Legal.CurrentValidityAutomaticallyMeansApplicability → ⊥
+toeGenealogyCurrentValidityDoesNotCreateApplicability =
+  currentValidityApplicabilityFirewall
+    canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+
+toeGenealogyDocumentRoleDoesNotCreateLegalAuthority :
+  Legal.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+toeGenealogyDocumentRoleDoesNotCreateLegalAuthority =
+  documentRoleLegalAuthorityFirewall
     canonicalGovernedLegalWorkflowSourceGenealogyHandoff
