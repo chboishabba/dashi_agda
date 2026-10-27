@@ -82,6 +82,8 @@ import DASHI.Wikimedia.IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExac
 import DASHI.Wikimedia.IbrahimMonster3BFDRepGroupAlgebraAdapterReceiptExact as FDRepReceipt
 import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterSimpleSubobjectClassificationExact as SimpleClassifier
 import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact as TwoIsotypic
+import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
+import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 
 ------------------------------------------------------------------------
 -- 1. Canonical coarse/fine reopening.
@@ -516,7 +518,71 @@ toeActualMonsterFin90SameActionAttachmentStillOpen :
 toeActualMonsterFin90SameActionAttachmentStillOpen = refl
 
 ------------------------------------------------------------------------
--- 12. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+-- 12. Canonical selected-3B linear same-object max cut.
+------------------------------------------------------------------------
+
+toeCanonicalSelected3BLinearRouteCompilerOutput :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.canonicalLinearRouteCompilerOutput
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+toeCanonicalSelected3BLinearRouteCompilerOutput = refl
+
+toeNormalizerMonsterCarrierBidiCompilerOutput :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.normalizerMonsterCarrierBidiCompilerOutput
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+toeNormalizerMonsterCarrierBidiCompilerOutput = refl
+
+toeOnlyOneSelected3BActionEquationRemainsAfterCore :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.onlyOneActionEquationRemainsAfterCore
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+toeOnlyOneSelected3BActionEquationRemainsAfterCore = refl
+
+toeCanonicalSelected3BLinearCoreStillUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.canonicalCoreInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+toeCanonicalSelected3BLinearCoreStillUninhabited = refl
+
+toeSelected3BActionIntertwiningStillUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.actionIntertwiningInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+toeSelected3BActionIntertwiningStillUninhabited = refl
+
+toeSelected3BLinearCompletionStillUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.completionInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+toeSelected3BLinearCompletionStillUninhabited = refl
+
+toeOutgoingLinearAcquisitionStillUninhabited :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.acquisitionInhabitedHere
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+toeOutgoingLinearAcquisitionStillUninhabited = refl
+
+toeOutgoingActualLinearActionStillOpen :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.actualLinearActionPaid
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+toeOutgoingActualLinearActionStillOpen = refl
+
+toeOutgoingSourceNativeInertiaSameActionStillOpen :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.sourceNativeInertiaSameActionPaid
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+toeOutgoingSourceNativeInertiaSameActionStillOpen = refl
+
+toeOutgoingTwelveSeventyEightIntertwinerStillOpen :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.actualTwelveSeventyEightIntertwinerPaid
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+toeOutgoingTwelveSeventyEightIntertwinerStillOpen = refl
+
+------------------------------------------------------------------------
+-- 13. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
 ------------------------------------------------------------------------
 
 record TOE369MaxCutZKPFrame : Set where
