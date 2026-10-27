@@ -1,5 +1,8 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- Reuse source-owned legal governance non-promotion proofs.
+import DASHI.Unified.LegalGovernanceNonPromotionTOEExact
+
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
