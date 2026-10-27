@@ -18,6 +18,8 @@ def test_fleet_58_gap_surface_is_connected():
     text = combined()
     required = [
         "canonicalFleetFormalGapReceipt",
+        "canonicalFleetFormalGapMaxCut",
+        "namedFormalGapManifestAcquired",
         "dischargedCoreKnowledgeCount",
         "polarityContradictionCount",
         "unformalisedFormalGapCount",
