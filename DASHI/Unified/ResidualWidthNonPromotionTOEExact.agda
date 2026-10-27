@@ -1,19 +1,62 @@
 module DASHI.Unified.ResidualWidthNonPromotionTOEExact where
 
 ------------------------------------------------------------------------
--- TOE NORMALIZATION: residual-width results and exact non-promotion gates.
+-- ZKP O/R/C/S/L/P/G/F
 --
--- Reuse order:
---   1. Existing residual-width witness.
---   2. Existing same-formula linear evaluator.
---   3. Existing exhaustive-builder budget failure.
---   4. Existing future-transport no-go theorem.
---   5. Existing stuttering preservation theorem.
---   6. Existing finite-interpreter work bound.
---   7. Existing same-machine program/Cook--Levin weld.
+-- O. Objective.
+-- Connect the exact residual-width derivations, resource obstructions, and
+-- non-promotion theorems to the focused DASHI TOE graph.
 --
--- No theorem below promotes ordered residual width to arbitrary decision time.
--- No theorem below promotes one exhaustive Q1 compiler to all SAT machines.
+-- R. Reuse.
+-- Reuse the literal block-equality residual-width witness.
+-- Reuse the same-formula linear decision separation theorem.
+-- Reuse the conditional direct-DP width obstruction.
+-- Reuse the generic self-specialization width-universality no-go theorem.
+-- Reuse the candidate-first-step coupling boundary.
+-- Reuse the exhaustive rooted-builder budget failure theorem.
+-- Reuse the candidate future-transport no-go theorem.
+-- Reuse the stuttering decision-preservation theorem.
+-- Reuse the finite-interpreter linear work bound.
+-- Reuse the same-machine finite-program/Cook--Levin weld.
+--
+-- C. Construction.
+-- Expose theorem-bearing aliases only.
+-- Add no new residual-width theorem.
+-- Add no new SAT lower-bound theorem.
+-- Add no new Q1 authority.
+--
+-- S. Safety invariants.
+-- Ordered residual width is not arbitrary deterministic decision time.
+-- A block-equality direct-DP obstruction requires the same-object live root.
+-- Generic self-specialization does not force small Shannon width.
+-- High width only refutes a first step when that first step is independently
+-- required on the same candidate-derived state.
+-- Failure of one exhaustive Q1 builder is not failure of every SAT algorithm.
+-- Present Boolean output is not a future-safe quotient of machine state.
+-- Stuttering is a semantics-preserving representation change.
+-- Interpreter work remains explicitly charged.
+-- Finite program serialization and Cook--Levin reduction stay on one machine.
+--
+-- L. Lane.
+-- This module owns only complexity non-promotion normalization.
+-- It does not edit ESD or digital_esd modules.
+-- It does not copy code from casey-git-clone, zkSEC, or meta-introspector.
+--
+-- P. Postconditions.
+-- TOE consumers reach one normalized exact surface for residual width,
+-- conditional direct-DP obstruction, non-promotion, machine preservation,
+-- interpreter work, and the same-machine Cook--Levin weld.
+--
+-- G. Governance.
+-- Original theorem owners retain proof ownership.
+-- Existing source modules remain the mathematical authorities.
+-- Meta-introspector repositories remain attributed tooling/process donors only
+-- unless a future theorem imports their code explicitly.
+--
+-- F. Verification.
+-- The regression module checks that Unifier re-exports these exact owners.
+-- Source read-back checks every import and trust-escape boundary.
+-- Kernel certification still requires an exact-head Agda or CI receipt.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
@@ -58,43 +101,19 @@ import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact as Weld
 
 ------------------------------------------------------------------------
--- ZKP O — Object.
---
--- Preconditions:
---   The object is the same literal block-equality formula used by the width
---   witness and the direct evaluator.
---
--- Invariant:
---   The Shannon residual witness stays attached to that exact formula root.
---
--- Postcondition:
---   The repository exposes a literal 2^n residual-width witness.
+-- Exact source theorems, normalized for TOE consumers.
 ------------------------------------------------------------------------
 
-O-residualWidthWitness :
+toeBlockEqualityResidualWidthWitness :
   (width : Nat) →
   Width.ResidualWidthWitness
     {root = EqualityWidth.blockEqualityFormula width}
     width
     (Bits.bitCardinality width)
-O-residualWidthWitness =
+toeBlockEqualityResidualWidthWitness =
   EqualityWidth.blockEqualityResidualWidthWitness
 
-------------------------------------------------------------------------
--- ZKP R — Response.
---
--- Preconditions:
---   The two input vectors have the same width.
---
--- Invariant:
---   The direct evaluator computes the same Boolean value as SAT.evaluate on
---   the exact block-equality formula.
---
--- Postcondition:
---   The direct comparison count is exactly the input width.
-------------------------------------------------------------------------
-
-R-decisionMatchesSameFormula :
+toeSameFormulaDecisionExact :
   ∀ {width : Nat}
     (left right : Vec Bool width) →
   proj₁ (EqualityDecision.equalityDecisionWithCount left right)
@@ -102,32 +121,18 @@ R-decisionMatchesSameFormula :
   SAT.evaluate
     (EqualityWidth.blockEqualityFormula width)
     (EqualityWidth.blockAssignment left right)
-R-decisionMatchesSameFormula =
+toeSameFormulaDecisionExact =
   EqualityDecision.linearDecisionAgreesWithBlockEqualityFormula
 
-R-decisionCountExact :
+toeDecisionCountExact :
   ∀ {width : Nat}
     (left right : Vec Bool width) →
   proj₂ (EqualityDecision.equalityDecisionWithCount left right)
   ≡ width
-R-decisionCountExact =
+toeDecisionCountExact =
   EqualityDecision.equalityDecisionCountExact
 
-------------------------------------------------------------------------
--- ZKP C — Constraint.
---
--- Preconditions:
---   A proposed theorem claims ordered residual width always lower-bounds the
---   comparison count of the direct evaluator.
---
--- Invariant:
---   The witness and evaluator use the same formula family.
---
--- Postcondition:
---   The proposed universal promotion is contradictory.
-------------------------------------------------------------------------
-
-C-orderedWidthDoesNotLowerBoundArbitraryDecisionCount :
+toeOrderedWidthDoesNotLowerBoundArbitraryDecisionCount :
   ((width : Nat)
    (left right : Vec Bool width) →
    Bits.bitCardinality width
@@ -135,28 +140,10 @@ C-orderedWidthDoesNotLowerBoundArbitraryDecisionCount :
    proj₂ (EqualityDecision.equalityDecisionWithCount left right))
   →
   ⊥
-C-orderedWidthDoesNotLowerBoundArbitraryDecisionCount =
+toeOrderedWidthDoesNotLowerBoundArbitraryDecisionCount =
   EqualityDecision.noOrderedWidthToDecisionCountTransfer
 
-------------------------------------------------------------------------
--- ZKP C2 — Conditional direct-DP obstruction.
---
--- Preconditions:
---   The live candidate state is literally attached to the existing block-
---   equality root and its recursive measure is at most 3 * 2^n.
---
--- Invariant:
---   The residual-width witness stays on that exact live state.
---
--- Postcondition:
---   No charged direct-DP run can inhabit that state.
---
--- Non-promotion:
---   This is conditional on the same-object root attachment. It is not a
---   theorem that arbitrary SAT machines must expose block-equality width.
-------------------------------------------------------------------------
-
-C2-blockEqualityMeasureBlocksDirectDPRun :
+toeBlockEqualityConditionalDirectDPObstruction :
   ∀ {state : Q2.BoundedSelfReferenceState}
     {width : Nat} →
   EqualityDirectDP.BlockEqualityLiveRoot state width →
@@ -165,28 +152,10 @@ C2-blockEqualityMeasureBlocksDirectDPRun :
   Width.triple (Bits.bitCardinality width) →
   DirectDP.DirectDPChargedConstructionRun state →
   ⊥
-C2-blockEqualityMeasureBlocksDirectDPRun =
+toeBlockEqualityConditionalDirectDPObstruction =
   EqualityDirectDP.blockEqualityMeasureBlocksDirectDPRun
 
-------------------------------------------------------------------------
--- ZKP C3 — Self-specialization universality no-go.
---
--- Preconditions:
---   Use the generic finite self-specializing calculus and its fixed echo
---   primitive semantics.
---
--- Invariant:
---   The fixed-point program can emit the supplied Cook formula unchanged.
---
--- Postcondition:
---   Any supplied residual-width witness occurs in the image of one literal
---   fixed-point program.
---
--- Non-promotion:
---   Generic self-specialization alone cannot justify a small-width theorem.
-------------------------------------------------------------------------
-
-C3-genericSelfSpecializationDoesNotForceSmallWidth :
+toeGenericSelfSpecializationDoesNotForceSmallWidth :
   ∀ {remaining width : Nat}
     (formula : Cook.BooleanFormula) →
   Width.ResidualWidthWitness
@@ -194,29 +163,10 @@ C3-genericSelfSpecializationDoesNotForceSmallWidth :
     remaining
     width →
   SelfSpecialization.EchoFixedPointResidualWidth remaining width
-C3-genericSelfSpecializationDoesNotForceSmallWidth =
+toeGenericSelfSpecializationDoesNotForceSmallWidth =
   SelfSpecialization.anyResidualWidthOccursInEchoFixedPointImage
 
-------------------------------------------------------------------------
--- ZKP C4 — Candidate first-step max-cut.
---
--- Preconditions:
---   A candidate-specific first-step coupling debt requires progress.
---   The same initial root carries a residual-width witness.
---   The recursive measure is at most three times that width.
---
--- Invariant:
---   No opposite-SAT semantic premise is used.
---
--- Postcondition:
---   The demanded progress is contradictory.
---
--- Residual debt:
---   A future positive P route must derive legitimate first-step progress or
---   prove a special structural width-avoidance theorem for the actual state.
-------------------------------------------------------------------------
-
-C4-highWidthRefutesCandidateFirstStepDebt :
+toeCandidateHighWidthRefutesRequiredFirstStep :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     {candidate : Direct.PolynomialSATDeciderCandidate cost}
     {constructor : DirectDP.DirectDPChargedStateConstructor}
@@ -233,27 +183,10 @@ C4-highWidthRefutesCandidateFirstStepDebt :
   ≤
   Width.triple width →
   ⊥
-C4-highWidthRefutesCandidateFirstStepDebt =
+toeCandidateHighWidthRefutesRequiredFirstStep =
   FirstStep.highWidthRefutesCandidateFirstStepCouplingDebt
 
-------------------------------------------------------------------------
--- ZKP S — Scope.
---
--- Preconditions:
---   The constructor is the existing exhaustive rooted Shannon builder.
---   The strict budget does not exceed the latest raw child enumeration work.
---
--- Invariant:
---   Raw children are enumerated before semantic merging.
---
--- Postcondition:
---   This constructor returns nothing.
---
--- Scope rule:
---   This says nothing about a different generative quotient algorithm.
-------------------------------------------------------------------------
-
-S-exhaustiveBuilderFailsAtSmallBudget :
+toeExhaustiveBuilderFailsAtSmallBudget :
   ∀ {rootVariables remaining : Nat}
     {root : SAT.BooleanFormula rootVariables}
     (previous : Root.DescentPath root (suc remaining))
@@ -263,24 +196,10 @@ S-exhaustiveBuilderFailsAtSmallBudget :
   Work.budgetedRootedKeys (Root.descend previous) budget
     ≡
     nothing
-S-exhaustiveBuilderFailsAtSmallBudget =
+toeExhaustiveBuilderFailsAtSmallBudget =
   Exhaustive.smallBudgetForcesExhaustiveFailure
 
-------------------------------------------------------------------------
--- ZKP L — Lineage.
---
--- Preconditions:
---   The observer is only the present Boolean output of the actual candidate
---   configuration machine.
---
--- Invariant:
---   The witness uses Q2.currentFormula of the supplied candidate state.
---
--- Postcondition:
---   No next-configuration function can factor through that output alone.
-------------------------------------------------------------------------
-
-L-candidateQuotedOutputCannotDetermineFuture :
+toeCandidateOutputDoesNotDetermineFuture :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     (candidate : Direct.PolynomialSATDeciderCandidate cost)
     (state : Q2.BoundedSelfReferenceState)
@@ -289,70 +208,29 @@ L-candidateQuotedOutputCannotDetermineFuture :
     Future.candidateTransition candidate configuration
     ≡ advance (Future.candidatePresentOutput candidate configuration)) →
   ⊥
-L-candidateQuotedOutputCannotDetermineFuture =
+toeCandidateOutputDoesNotDetermineFuture =
   Future.candidateQuotedRootOutputTransportFails
 
-------------------------------------------------------------------------
--- ZKP P — Preservation.
---
--- Preconditions:
---   A clocked deterministic Boolean execution is supplied.
---
--- Invariant:
---   Stuttering retains the full original configuration in ready/pending form.
---
--- Postcondition:
---   The transformed execution returns the same decision.
-------------------------------------------------------------------------
-
-P-stutteringPreservesDecision :
+toeStutteringPreservesDecision :
   ∀ {machine : Machine.DeterministicMachine}
     (execution : ToP.ClockedDeterministicBooleanExecution machine)
     (input : Machine.dInput machine) →
   ToP.clockedDecision (Stutter.stutteringExecution execution) input
   ≡
   ToP.clockedDecision execution input
-P-stutteringPreservesDecision =
+toeStutteringPreservesDecision =
   Stutter.stutteringPreservesDecision
 
-------------------------------------------------------------------------
--- ZKP G — Gas / operational work.
---
--- Preconditions:
---   The finite instruction list and requested transition count are explicit.
---
--- Invariant:
---   Instruction fetch scans the finite program data.
---
--- Postcondition:
---   Total declared interpreter work is bounded by the linear program budget.
-------------------------------------------------------------------------
-
-G-interpreterWorkLinearBound :
+toeInterpreterWorkLinearBound :
   (program : List Tape.TapeInstruction) →
   (steps : Nat) →
   (configuration : Tape.TapeConfiguration) →
   Tape.runInterpreterWork program steps configuration
   ≤ Tape.linearInterpreterBudget program steps
-G-interpreterWorkLinearBound =
+toeInterpreterWorkLinearBound =
   Tape.runInterpreterWorkLinearBound
 
-------------------------------------------------------------------------
--- ZKP F — Final same-object weld.
---
--- Preconditions:
---   One ConcreteTapeMachine has complete finite state/symbol coverage,
---   a nonempty rule table, one input, and one step budget.
---
--- Invariant:
---   Static program serialization and Cook--Levin use the same machine object.
---
--- Postcondition:
---   The exact finite program description and exact Cook--Levin certificate
---   are packaged together without an isomorphic-surrogate gap.
-------------------------------------------------------------------------
-
-F-sameMachineProgramCookLevin :
+toeSameMachineProgramCookLevin :
   ∀ (machine : Local.ConcreteTapeMachine)
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
@@ -363,23 +241,28 @@ F-sameMachineProgramCookLevin :
     (steps : Nat) →
   Weld.SameMachineProgramCookLevinCertificate
     machine stateCoverage symbolCoverage nonempty input steps
-F-sameMachineProgramCookLevin =
+toeSameMachineProgramCookLevin =
   Weld.sameMachineProgramCookLevinCertificate
 
 ------------------------------------------------------------------------
--- TOE non-promotion summary.
+-- MAX-CUT RESULT.
 --
--- Preconditions:
---   Use the exact theorem owners above.
+-- Positive exact result:
+--   literal block equality has 2^n ordered residual width.
 --
--- Invariants:
---   Preserve same-object identity.
---   Preserve operational cost.
---   Preserve future semantics.
+-- Exact non-promotion results:
+--   that width is not an arbitrary decision-time lower bound;
+--   generic self-specialization does not force small width;
+--   one exhaustive builder can fail without proving SAT lower bounds;
+--   present output does not determine future machine state.
 --
--- Postconditions:
---   Ordered residual width is not arbitrary decision time.
---   Exhaustive-constructor failure is not a universal SAT lower bound.
---   Present output is not a future-safe machine quotient.
---   Polynomial-overhead representation changes remain explicit.
+-- Exact conditional obstruction:
+--   same-object high width plus a small direct-DP measure blocks that run;
+--   if an independent candidate-first-step theorem requires progress on the
+--   same state, high width refutes that progress.
+--
+-- Preserved positive infrastructure:
+--   stuttering preserves decisions;
+--   finite interpreter work has an explicit linear program bound;
+--   finite program code and Cook--Levin use one ConcreteTapeMachine.
 ------------------------------------------------------------------------
