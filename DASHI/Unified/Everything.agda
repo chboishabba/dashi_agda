@@ -264,3 +264,41 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Fleet named-manifest acquisition boundary.
+------------------------------------------------------------------------
+
+unifiedFleetManifestAcquisitionDemand =
+  FleetGapTOE.fleetManifestAcquisitionDemand
+
+unifiedFleetNamedManifestStillMissing :
+  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
+unifiedFleetNamedManifestStillMissing =
+  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
+
+unifiedFleetPerGapDispatchStillBlocked :
+  FleetGapTOE.perGapDispatchEnabled ≡ false
+unifiedFleetPerGapDispatchStillBlocked =
+  FleetGapTOE.perGapDispatchEnabledIsFalse
+
+unifiedFleetRelatedSymbolsRequired :
+  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
+unifiedFleetRelatedSymbolsRequired =
+  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
+
+unifiedFleetDiscoverRequired :
+  FleetGapTOE.fleetDiscoverRequired ≡ true
+unifiedFleetDiscoverRequired =
+  FleetGapTOE.fleetDiscoverRequiredIsTrue
+
+unifiedFleetRoundLineageRequired :
+  FleetGapTOE.fleetRoundLineageRequired ≡ true
+unifiedFleetRoundLineageRequired =
+  FleetGapTOE.fleetRoundLineageRequiredIsTrue
+
+unifiedFleetCountDoesNotCreateNamedManifest :
+  FleetGapTOE.CountCreatesNamedManifest → ⊥
+unifiedFleetCountDoesNotCreateNamedManifest =
+  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
