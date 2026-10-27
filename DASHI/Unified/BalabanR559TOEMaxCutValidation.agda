@@ -6,6 +6,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Empty using (⊥)
 
 import DASHI.Unified.BalabanR559TOEMaxCutExact as Joint
+import DASHI.Unified.BalabanRGTOERegression as Balaban
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
@@ -29,6 +31,25 @@ physicsReceiptMatches :
   Physics.yangMillsBalabanR559MaxCutReceipt
   ≡ Joint.canonicalBalabanR559TOEMaxCutReceipt
 physicsReceiptMatches = refl
+
+------------------------------------------------------------------------
+-- Parent receipt checks.
+------------------------------------------------------------------------
+
+completeBalabanReceiptIsCanonical :
+  Joint.balabanCompleteReceipt Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.canonicalBalabanRGTOEReceipt
+completeBalabanReceiptIsCanonical = refl
+
+typedBalabanZKPFrameIsCanonical :
+  Joint.balabanTypedZKPFrame Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.canonicalBalabanTOEZKPFrame
+typedBalabanZKPFrameIsCanonical = refl
+
+r559ParetoZKPFrameIsCanonical :
+  Joint.r559ParetoZKPFrame Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ R559.canonicalGoal1ParetoTOEZKPFrame
+r559ParetoZKPFrameIsCanonical = refl
 
 ------------------------------------------------------------------------
 -- Shared owner checks.
