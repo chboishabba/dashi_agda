@@ -12,6 +12,7 @@ import DASHI.Biology.PMDDHistamineAmplificationExact as PMDDHistamine
 import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact as PMDDMolecular
 import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact as PMDDIntervention
 import DASHI.Culture.ArabicRootPatternMorphologyProcessingBoundaryExact as ArabicMorphology
+import DASHI.Core.DependentRecoverableProjectionExact as Recoverable
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1817,14 +1818,14 @@ unifierArabicRootPatternIntegrationBoundary =
   ArabicMorphology.canonicalArabicRootPatternIntegrationBoundary
 
 unifierArabicKTBRecoverableProjection :
-  ArabicMorphology.Recoverable.DependentExactRecoverableProjection
+  Recoverable.DependentExactRecoverableProjection
     ArabicMorphology.KTBResolvedReading
     ArabicMorphology.KTBUndiacritizedSurface
 unifierArabicKTBRecoverableProjection =
   ArabicMorphology.ktbDependentRecoverableProjection
 
 unifierArabicKTBDependentCodeSeparating :
-  ArabicMorphology.Recoverable.DependentCodeSeparating
+  Recoverable.DependentCodeSeparating
     ArabicMorphology.ktbDependentRecoverableProjection
 unifierArabicKTBDependentCodeSeparating =
   ArabicMorphology.ktbDependentCodeSeparating
