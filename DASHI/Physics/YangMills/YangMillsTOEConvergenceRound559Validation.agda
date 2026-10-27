@@ -923,3 +923,32 @@ criticalFamilyDispatchH6MatchesR558 :
   TOE.toeCriticalFamilyLevel TOE.h6MinimalWardNontriviality
   ≡ R558.criticalLevel R558.h6MinimalWardNontriviality
 criticalFamilyDispatchH6MatchesR558 = refl
+
+
+------------------------------------------------------------------------
+-- Canonical family dispatch facade regressions.
+------------------------------------------------------------------------
+
+unifiedPhysicsIrreducibleDispatchMatchesTOE :
+  UnifiedPhysics.yangMillsTOEIrreducibleFamilyLevel
+    TOE.a1CurrentStepVariation
+  ≡ TOE.toeIrreducibleFamilyLevel TOE.a1CurrentStepVariation
+unifiedPhysicsIrreducibleDispatchMatchesTOE = refl
+
+unifiedPhysicsCriticalDispatchMatchesTOE :
+  UnifiedPhysics.yangMillsTOECriticalFamilyLevel
+    TOE.h6MinimalWardNontriviality
+  ≡ TOE.toeCriticalFamilyLevel TOE.h6MinimalWardNontriviality
+unifiedPhysicsCriticalDispatchMatchesTOE = refl
+
+unifierIrreducibleDispatchMatchesTOE :
+  U.unifierYangMillsIrreducibleFamilyLevel
+    TOE.bWilsonWEXT
+  ≡ TOE.toeIrreducibleFamilyLevel TOE.bWilsonWEXT
+unifierIrreducibleDispatchMatchesTOE = refl
+
+unifierCriticalDispatchMatchesTOE :
+  U.unifierYangMillsCriticalFamilyLevel
+    TOE.b2SameHamiltonian
+  ≡ TOE.toeCriticalFamilyLevel TOE.b2SameHamiltonian
+unifierCriticalDispatchMatchesTOE = refl
