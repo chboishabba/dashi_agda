@@ -172,3 +172,63 @@ jobs:
           for module in "${modules[@]}"; do
             agda -i . -l standard-library "$module"
           done
+
+
+  governed-legal-current-maxcut:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install repository referee
+        run: python -m pip install -e './tools/agda_preflight[test,mcp]'
+
+      - name: Search reuse and lineage
+        run: |
+          dashi-repo index --root .
+          dashi-repo related canonicalGovernedLegalWorkflowAuthorityInvariantHandoff --root . --limit 20
+          dashi-repo related canonicalLegalSourceAuthorityBoundary --root . --limit 20
+          dashi-repo discover 'SensibLaw Actionstep legal compliance governance authority non promotion' --root . --limit 40
+          dashi-repo discover 'Ibrahim Pareto snowball fleet formal gap target' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
+
+      - name: Preflight exact connected surfaces
+        run: |
+          for module in             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda             DASHI/Unified/GovernedLegalCurrentTOEValidation.agda             DASHI/EverythingTOESymmetryResolved369.agda             DASHI/Unifier.agda             DASHI/Unified/Everything.agda
+          do
+            dashi-agda-preflight --root . "$module"
+          done
+
+      - name: Reject ESD changes
+        run: |
+          git fetch origin master --depth=1
+          changed="$(git diff --name-only origin/master...HEAD)"
+          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)'; then
+            echo "ESD surface change detected" >&2
+            exit 1
+          fi
+
+      - name: Reject trust escapes
+        run: |
+          for source in             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda             DASHI/Unified/GovernedLegalCurrentTOEValidation.agda             DASHI/EverythingTOESymmetryResolved369.agda             DASHI/Unifier.agda             DASHI/Unified/Everything.agda
+          do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              exit 1
+            fi
+          done
+
+      - name: Install Agda
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Kernel check current legal governance cut
+        run: |
+          for module in             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda             DASHI/EverythingTOESymmetryResolved369.agda             DASHI/Unifier.agda             DASHI/Unified/Everything.agda             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda             DASHI/Unified/GovernedLegalCurrentTOEValidation.agda
+          do
+            agda -i . -l standard-library "$module"
+          done
