@@ -1,0 +1,64 @@
+@startuml
+title DASHI TOE Yang-Mills Balaban + R559 Max-Cut
+
+skinparam componentStyle rectangle
+
+package "Canonical source owners" {
+  component "Balaban beta-density flow" as Density
+  component "CMP119 regular-E localization" as RegularE
+  component "Compact-simple Casimir owners" as Casimir
+  component "CMP116 stress owners" as Stress
+  component "R485 Goal-1 maximum cut" as R485
+  component "R546 irreducible source families" as R546
+  component "R558 critical path" as R558
+}
+
+component "BalabanRGTOERegression" as Balaban
+component "YangMillsTOEConvergenceRound559Exact" as R559
+component "BalabanR559TOEMaxCutExact" as Joint
+component "EverythingTOESymmetryResolved369" as Root
+component "Unified.Physics" as Physics
+component "Unifier" as Unifier
+component "Unified.Everything" as Everything
+
+Density --> Balaban : exact owner reuse
+RegularE --> Balaban : exact owner reuse
+Casimir --> Balaban : exact owner reuse
+Stress --> Balaban : exact owner reuse
+
+R485 --> R559 : representation-safe max-cut
+R546 --> R559 : 14-family quotient
+R558 --> R559 : 7-family critical path
+
+Balaban --> Joint : source/RG normalization
+R559 --> Joint : current Goal-1 views
+
+Joint --> Root : canonical TOE receipt
+Joint --> Physics : physics facade
+Joint --> Unifier : facade only
+Joint --> Everything : unified aggregate
+
+note bottom of Joint
+ZKP O/R/C/S/L/P/G/F:
+O: DASHI TOE / Yang-Mills
+R: reuse canonical owners
+C: aliases + exact same-owner equalities only
+S: finite/conditional state stays finite/conditional
+L: Balaban and R559 remain separate theorem owners
+P: one joint max-cut receipt
+G: continuum, mass gap, Clay, block-spin, KP, OS/Wightman stay blocked
+F: exact-head referee + Agda kernel check
+
+Preconditions:
+canonical owners exist.
+
+Invariants:
+no ESD mutation.
+no attribution collapse.
+no finite-to-continuum promotion.
+
+Postconditions:
+root, Physics, Unifier, and Unified.Everything reach one joint receipt.
+end note
+
+@enduml
