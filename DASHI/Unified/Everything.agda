@@ -288,6 +288,27 @@ unifiedFleetTargetsOnlyUnformalisedFormalGaps =
   FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
 
 
+unifiedFleetEigenPriorityPromotionImpossible :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+unifiedFleetEigenPriorityPromotionImpossible =
+  FleetGapTOE.fleetEigenPriorityPromotionImpossible
+
+unifiedFleetExternalCountPromotionImpossible :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+unifiedFleetExternalCountPromotionImpossible =
+  FleetGapTOE.fleetExternalCountPromotionImpossible
+
+unifiedFleetDischargedFibreRetargetImpossible :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+unifiedFleetDischargedFibreRetargetImpossible =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+unifiedFleetContradictionGapReclassificationImpossible :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+unifiedFleetContradictionGapReclassificationImpossible =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+
 ------------------------------------------------------------------------
 -- Fleet named-manifest acquisition boundary.
 ------------------------------------------------------------------------

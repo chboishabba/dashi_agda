@@ -1074,6 +1074,27 @@ unifierFleetQuantumMereologyAttributionBoundary :
 unifierFleetQuantumMereologyAttributionBoundary =
   FleetGapTOE.fleetQuantumMereologyAttributionBoundary
 
+
+unifierFleetEigenPriorityPromotionImpossible :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+unifierFleetEigenPriorityPromotionImpossible =
+  FleetGapTOE.fleetEigenPriorityPromotionImpossible
+
+unifierFleetExternalCountPromotionImpossible :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+unifierFleetExternalCountPromotionImpossible =
+  FleetGapTOE.fleetExternalCountPromotionImpossible
+
+unifierFleetDischargedFibreRetargetImpossible :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+unifierFleetDischargedFibreRetargetImpossible =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+unifierFleetContradictionGapReclassificationImpossible :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+unifierFleetContradictionGapReclassificationImpossible =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
 ------------------------------------------------------------------------
 -- Fleet 58 named-manifest acquisition wall.
 ------------------------------------------------------------------------
