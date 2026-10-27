@@ -178,6 +178,9 @@ jobs:
       - name: Reject trust escapes
         run: |
           sources=(
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
+            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
+            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
@@ -202,6 +205,9 @@ jobs:
         run: |
           agda --version
           modules=(
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
+            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
+            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
