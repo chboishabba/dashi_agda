@@ -938,6 +938,35 @@ toeYMImplementAToDScaleTransferNonPromotion =
     YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
 ------------------------------------------------------------------------
+-- Direct proof-bearing byte-ABI and host/device promotion cut.
+-- Reuse original finite codec and actual host runtime owners.
+-- The 58 planning gaps are not discharged by a host byte witness.
+------------------------------------------------------------------------
+
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as TriadicHost
+
+toeHostU8RustBindingStillUnpaid :
+  TriadicHost.rustU8BindingPaid TriadicHost.currentU8RuntimeBoundary
+  ≡ false
+toeHostU8RustBindingStillUnpaid = refl
+
+toeHostByteDoesNotCreateDeviceByte :
+  TriadicHost.HostByteImpliesDeviceByte → ⊥
+toeHostByteDoesNotCreateDeviceByte =
+  TriadicHost.hostByteDoesNotCreateDeviceByte
+
+toeHostRuntimeReceiptCannotCreateKernelCertification :
+  TriadicHost.RuntimeSourceImpliesKernelCertification → ⊥
+toeHostRuntimeReceiptCannotCreateKernelCertification =
+  TriadicHost.runtimeSourceDoesNotCreateKernelCertification
+
+toeFinite27ByteABIDoesNotCreateRustImplementation :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+toeFinite27ByteABIDoesNotCreateRustImplementation =
+  TriadicABI.abiDoesNotCreateRust
+
+------------------------------------------------------------------------
 -- Kernel-bidi / ternary-27 / byte-ABI max-cut convergence.
 ------------------------------------------------------------------------
 
