@@ -150,6 +150,93 @@ legacyFullCertificateIsNotTOEPromotionAuthorityIsTrue :
 legacyFullCertificateIsNotTOEPromotionAuthorityIsTrue = refl
 
 ------------------------------------------------------------------------
+-- Canonical normalized receipt.
+------------------------------------------------------------------------
+
+record BalabanRGTOEReceipt : Set where
+  field
+    scaleDensityFlow : ProofLevel
+    scaleDensityFiniteMeasureWeld : ProofLevel
+    scaleDensityStressCompiler : ProofLevel
+
+    regularELocalizationSource : ProofLevel
+    regularELocalizationCarrier : ProofLevel
+    regularEContinuationCompiler : ProofLevel
+
+    haarCasimirCoefficient : ProofLevel
+    casimirOrbitFactorization : ProofLevel
+    classifiedCasimirPositivity : ProofLevel
+
+    stressMarkedShellReuse : ProofLevel
+    stressPairingPhysicalWeld : ProofLevel
+
+    blockSpinTransferProved : Bool
+    blockSpinTransferProvedIsFalse :
+      blockSpinTransferProved ≡ false
+
+    continuumYangMillsConstructed : Bool
+    continuumYangMillsConstructedIsFalse :
+      continuumYangMillsConstructed ≡ false
+
+    continuumMassGapProved : Bool
+    continuumMassGapProvedIsFalse :
+      continuumMassGapProved ≡ false
+
+    clayPromotion : Bool
+    clayPromotionIsFalse :
+      clayPromotion ≡ false
+
+open BalabanRGTOEReceipt public
+
+canonicalBalabanRGTOEReceipt : BalabanRGTOEReceipt
+canonicalBalabanRGTOEReceipt =
+  record
+    { scaleDensityFlow =
+        balabanScaleDensityFlowLevel
+    ; scaleDensityFiniteMeasureWeld =
+        balabanScaleDensityFiniteMeasureWeldLevel
+    ; scaleDensityStressCompiler =
+        balabanScaleDensityStressLaneCompilerLevel
+    ; regularELocalizationSource =
+        balabanRegularELocalizationSourceLevel
+    ; regularELocalizationCarrier =
+        balabanRegularELocalizationCarrierLevel
+    ; regularEContinuationCompiler =
+        balabanRegularEContinuationCompilerLevel
+    ; haarCasimirCoefficient =
+        balabanHaarCasimirCoefficientLevel
+    ; casimirOrbitFactorization =
+        balabanCasimirOrbitFactorizationLevel
+    ; classifiedCasimirPositivity =
+        balabanClassifiedCasimirPositivityLevel
+    ; stressMarkedShellReuse =
+        balabanStressMarkedShellReuseLevel
+    ; stressPairingPhysicalWeld =
+        balabanStressPairingPhysicalWeldLevel
+    ; blockSpinTransferProved =
+        RGFrontier.balabanBlockSpinTransferProved
+          RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+    ; blockSpinTransferProvedIsFalse =
+        balabanRGBlockSpinTransferStillOpen
+    ; continuumYangMillsConstructed =
+        RGFrontier.continuumYangMillsConstructedHere
+          RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+    ; continuumYangMillsConstructedIsFalse =
+        balabanRGContinuumConstructionStillOpen
+    ; continuumMassGapProved =
+        MassGap.continuumMassGapProvedInDASHI
+          (RGFrontier.balabanMassGapSurface
+            RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt)
+    ; continuumMassGapProvedIsFalse =
+        balabanRGContinuumMassGapStillOpen
+    ; clayPromotion =
+        RGFrontier.clayYangMillsPromoted
+          RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
+    ; clayPromotionIsFalse =
+        balabanRGClayPromotionStillFalse
+    }
+
+------------------------------------------------------------------------
 -- ZKP orchestration frame.
 --
 -- O/R/C/S/L/P/G/F are governance labels.
