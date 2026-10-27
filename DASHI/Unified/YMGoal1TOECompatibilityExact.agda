@@ -63,9 +63,6 @@ open import Agda.Builtin.String using (String)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
-import DASHI.Unified.InvariantSpine as Spine
-import DASHI.Unified.Physics as UnifiedPhysics
-
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedBSourceRound435Exact as R435
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CanonicalASourceRound436Exact as R436
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as R437
@@ -261,13 +258,6 @@ clayYangMillsPromoted : Bool
 clayYangMillsPromoted =
   Clay.clayYangMillsPromoted
 
-
-yangMillsFormalProjectionRemainsNonPromoting :
-  ∀ kind →
-  Spine.objectProjectionPromotion UnifiedPhysics.yangMillsObject kind ≡ false
-yangMillsFormalProjectionRemainsNonPromoting =
-  Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
-    UnifiedPhysics.yangMillsObject
 
 yangMillsMassGapBoundaryStillNotPromoted :
   MassGap.YangMillsMassGapBoundaryReceipt.massGapPromoted
