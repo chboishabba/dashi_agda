@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.BalabanR559TOEMaxCutValidation where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Empty using (⊥)
 
