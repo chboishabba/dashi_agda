@@ -710,7 +710,8 @@ toeFleetQuantumMereologyAttributionBoundary =
   FleetGapTOE.fleetQuantumMereologyAttributionBoundary
 
 toeFleetSpectralLabelDoesNotIdentifyTheoremOwner :
-  FleetGapTOE.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+  FleetGapTOE.spectralLabelIdentifiesTheoremOwner
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
 toeFleetSpectralLabelDoesNotIdentifyTheoremOwner =
   FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
 
