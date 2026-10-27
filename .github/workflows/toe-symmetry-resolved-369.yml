@@ -25,6 +25,8 @@ on:
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda'
       - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEValidation.agda'
       - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda'
       - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda'
       - 'DASHI/Unified/SingularBasinCoarseRGTOEExact.agda'
@@ -50,6 +52,8 @@ on:
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEValidation.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda'
@@ -106,6 +110,11 @@ jobs:
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
+          dashi-repo related fleetEigenPriorityDoesNotCreateProof --root . --limit 20
+          dashi-repo discover 'fleet formal gap target spectral numeric ABI discharged fibres contradiction gaps non-promotion' --root . --limit 40
           dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
           dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/SingularBasinCoarseRGTOEExact.agda --root .
@@ -130,31 +139,6 @@ jobs:
           dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
 
       - name: Reject ESD surface changes
-      - name: Fast Agda preflight on connected TOE graph
-        run: |
-          files=(
-            DASHI/Unified/BalabanRGTOERegression.agda
-            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
-            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
-            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
-            DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
-            DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda
-            DASHI/Physics/Dynamics/SingularBasinReductionExact.agda
-            DASHI/Physics/Dynamics/SingularBasinFiniteWitnessExact.agda
-            DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda
-            DASHI/Physics/Dynamics/SingularBasinResolutionWitnessExact.agda
-            DASHI/Physics/Dynamics/YanchukStableManifoldCrossingTargetExact.agda
-            DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
-            DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda
-            DASHI/EverythingTOESymmetryResolved369.agda
-            DASHI/Unifier.agda
-          )
-          for file in "${files[@]}"; do
-            dashi-agda-preflight --root . "$file"
-          done
-
         shell: bash
         run: |
           git fetch origin master --depth=1
@@ -164,6 +148,34 @@ jobs:
             echo "ESD surface change detected" >&2
             exit 1
           fi
+
+      - name: Fast Agda preflight on connected TOE graph
+        run: |
+          files=(
+            DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
+            DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda
+            DASHI/Physics/Dynamics/SingularBasinReductionExact.agda
+            DASHI/Physics/Dynamics/SingularBasinFiniteWitnessExact.agda
+            DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda
+            DASHI/Physics/Dynamics/SingularBasinResolutionWitnessExact.agda
+            DASHI/Physics/Dynamics/YanchukStableManifoldCrossingTargetExact.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+          )
+          for file in "${files[@]}"; do
+            dashi-agda-preflight --root . "$file"
+          done
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -182,6 +194,8 @@ jobs:
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/SingularBasinCoarseRGTOEExact.agda
@@ -200,7 +214,7 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
           )
           for source in "${sources[@]}"; do
-            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
               echo "forbidden trust escape in $source" >&2
               exit 1
             fi
