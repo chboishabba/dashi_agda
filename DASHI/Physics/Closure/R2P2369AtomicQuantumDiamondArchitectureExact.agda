@@ -20,6 +20,7 @@ import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as BilinearP
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit729Owner
 import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as Hermitian729
 import DASHI.Physics.Closure.R2P227729HermitianConvolutionTransportExact as HermitianConv729
+import DASHI.Physics.Closure.R2P281PlaneHermitianFiveOrbitConvolutionExact as HermitianPlane81
 import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as Antipodal729
 import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourPareto
 import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as C3Fourier
@@ -924,3 +925,22 @@ fullArchitectureCompact13PairsPreserveFiveGridFull :
     ≡ HermitianConv729.originalFullBilinearAt a b target
 fullArchitectureCompact13PairsPreserveFiveGridFull =
   HermitianConv729.compact13PairsPreserveFiveGridFullQuadratic
+
+
+------------------------------------------------------------------------
+-- Source five antipodal classes of the 9-plane: one real centre
+-- plus FOUR complex Qω conjugate pairs; all 81 ordered input products.
+-- Original D4 nine-cell irrep decomposition remains independent.
+------------------------------------------------------------------------
+
+fullArchitectureFiveInNineHermitian81PairConvolution :
+  (a b : Hermitian729.Hermitian9)
+  (target : HermitianPlane81.WidePlane25) →
+  HermitianPlane81.packedFivePlaneBilinearAt
+    (Hermitian729.packHermitian9 a)
+    (Hermitian729.packHermitian9 b) target
+    ≡ HermitianPlane81.truePlaneBilinearAt
+        (Hermitian729.coefficient9 a)
+        (Hermitian729.coefficient9 b) target
+fullArchitectureFiveInNineHermitian81PairConvolution =
+  HermitianPlane81.fiveOrbitPlaneCodecPreservesAll25QuadraticOutputs
