@@ -40,6 +40,12 @@ class OpticalLedger(unittest.TestCase):
             values.append(z['wall_torque_Nm']/k)
             self.assertLess(abs(z['angular_residual_Nm']),1e-15)
         self.assertAlmostEqual(max(values),min(values),places=14)
+    def test_reject_disconnected_event(self):
+        r=RayLedger.emit((0.,0.),(1.,0.),200.)
+        with self.assertRaises(ValueError):
+            r.hit((0.,1.),(-1.,0.),1.)
+        with self.assertRaises(ValueError):
+            r.close('escape',(0.,1.))
     def test_reject_invalid_reflection(self):
         with self.assertRaises(ValueError):specular((1.,0.),(2.,0.))
 if __name__=='__main__':unittest.main()
