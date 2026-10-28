@@ -28,6 +28,10 @@ open Ternary270CRT public using
   ( cubeToWheel270
   ; wheel270ToCube
   ; wheel270DecodeEncode
+  ; cubeToWheel270Injective
+  ; cube270GlobalAntipodeInvolutive
+  ; wheel270CentreCodeIs269
+  ; wheel270CentreFixedByAntipode
   ; cube270GlobalAntipode
   ; wheel270AffinePairReversal
   ; wheel270ModTwo
