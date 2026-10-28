@@ -334,7 +334,7 @@ firstApplicableNumericSound [] n ()
 firstApplicableNumericSound (rule ∷ rest) n {after} equality
   with exactFractionApplies? n rule
 ... | yes applicable with equality
-...   | refl = First.choose-head applicable
+... | yes applicable | refl = First.choose-head applicable
 ... | no blocked =
   First.skip-head blocked
     (firstApplicableNumericSound rest n equality)
@@ -347,7 +347,7 @@ firstApplicableNumericHalt [] n equal = tt
 firstApplicableNumericHalt (rule ∷ rest) n equal
   with exactFractionApplies? n rule
 ... | yes applicable with equal
-...   | ()
+... | yes applicable | ()
 ... | no blocked =
   blocked , firstApplicableNumericHalt rest n equal
 
