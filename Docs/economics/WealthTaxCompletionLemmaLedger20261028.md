@@ -1,6 +1,6 @@
 # Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
 
-Created 2026-10-28. **77 named formal obligations** across nine groups: 37 already source-written (D), 9 owned by existing reusable sources (R), 31 new required proofs/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+Created 2026-10-28. **77 named formal obligations** across nine groups: 39 already source-written (D), 9 owned by existing reusable sources (R), 29 new required proofs/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
 
 Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
 
@@ -105,9 +105,9 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **I03 [N]** `finitePolicyStateTransitionPreservesAccounting` — Across-period wealth/debt/security/care stocks balance.
 - **I04 [N]** `behaviouralResponseParametersAreExplicitAssumptions` — Migration, credit and investor behaviour are not given theorems.
 - **I05 [N]** `sameInitialStateDifferentInterventionComparison` — Explicit baseline and treatment labels.
-- **I06 [N]** `paretoDominancePreorder` — Reflexive and transitive objective-vector comparison.
+- **I06 [D]** `paretoDominancePreorder` — Reflexive and transitive objective-vector comparison.
 - **I07 [N]** `finiteParetoFrontierIsNonempty` — Nonempty finite feasible choice set has non-dominated element.
-- **I08 [N]** `noUniqueOptimalTaxRateFromParetoOrderAlone` — Partial ordering does not select welfare weights.
+- **I08 [D]** `noUniqueOptimalTaxRateFromParetoOrderAlone` — Partial ordering does not select welfare weights.
 - **I09 [N]** `syntheticModelCannotIdentifyObservedCausalEffect` — Separate case-study, controls and causal identification receipts.
 
 ## External independent evidence obligations (not Agda lemmas)
@@ -148,3 +148,12 @@ The next pass constructs nine conditional general results by reusing the Agda st
 - G04-G05: physical plant has its own before, commissioning, retirement and after-stock accounting. Actual care service hours are separately bounded by supplied staff and equipment capacities.
 
 All these records are model-conditional. No actual tax, legal control, worker, energy or machine state is inferred. No new unsafe Agda options or protected ESD edits. The standalone shadow Python suite was independently re-executed with 36 passing tests and remains unchanged.
+
+
+## Pareto source-owner continuation, 2026-10-28
+
+The existing DASHI.Core.AdmissibleConsumerMDLHyperfabricExact owns the multi-axis WeaklyDominates definition. The economics adapter now imports it and supplies paretoDominanceReflexive and paretoDominanceTransitive. A two-option synthetic cost-vector example proves that two distinct feasible-looking options can be incomparable when lower administration costs compete against increased care capacity. This is source-written, not an observed Agda kernel result.
+
+I06 and the finite incomparability component of I08 are source-written; I08 must not be misconstrued as a proof of the real-world unique optimum of any enacted tax. I07 (existence of an undominated point in nonempty finite feasible set) remains open. No source, proof-author or Ibrahim 3B ownership was reassigned.
+
+**Ledger: 39 D, 9 R, 29 N.**
