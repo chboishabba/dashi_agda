@@ -53,6 +53,9 @@ def check() -> None:
         "noEventFromFictionalDate",
         "sonicPropagandaIntentCannotDetermineTruth",
         "sonicSameContentCannotDetermineDeceptiveIntent",
+        "signalAloneCannotDetermineContextualResponse",
+        "contextAloneCannotDetermineContextualResponse",
+        "jointSignalContextDeterminesSyntheticResponse",
         "allSonicChapters",
         "indexedChapterClaim",
     ]:
@@ -87,6 +90,17 @@ def check() -> None:
         and "Attr.attributedSourceAtlasReceiptNonPromoting goodmanSources validation" in module,
         "source attribution non-promotion must reuse inherited owner"
     )
+    # M1 finite four-state interaction must be total at source level.
+    for label in (
+        "signalOnly", "contextOnly", "jointSignalContext",
+        "contextualResponse", "jointResponse",
+    ):
+        decls = re.findall(rf"(?m)^{label} (\w+) = ", module)
+        require(len(decls) == 4 and len(set(decls)) == 4,
+                f"M1 {label} must exhaust four distinct cases")
+    require("IbrahimTrust.propagandaIntentCannotFactorTruthStatus" in module
+            and "IbrahimTrust.falseContentCannotFactorDeceptiveIntent" in module,
+            "M1/Ibrahim cross-pollination must remain owner-owned")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
