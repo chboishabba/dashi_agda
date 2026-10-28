@@ -255,3 +255,15 @@ The existing DASHI.Economics.SourceAttributionPromotionBoundaryExact owner alrea
 
 **Verification ceiling:** commits establish repository source writing only. No Agda compiler is installed in this execution environment; exact-head Agda kernel checking is NOT observed. Static guards and bounded Python arithmetic checks are not interchangeable with typechecking. No production or real-world observations follow.
 
+## 2026-10-28 I07 constructive ranked finite-frontier partial proof
+
+The original multi-axis Pareto hyperfabric owner is unchanged. The existing economics application now includes a generic structurally recursive finite arg-minimum construction:
+
+- RankedMember: source-local proof of membership in a finite list.
+- FiniteRankMinimum and finiteNonemptyRankMinimum: for any Nat ranking of any nonempty finite population, return a member with no larger rank than any other listed member, using standard-library ≤-total, ≤-trans, ≤-refl.
+- rankOrderCannotCycle: rejects a ≤ cycle with one strict successor step.
+- StrictlyDominatesAdmissible: interprets strict improvement using the original Pareto.WeaklyDominates on Pareto.AdmissibleStratumPoint, which already carries feasibility and consumer adequacy.
+- finiteParetoFrontierNonemptyGivenStrictRank: takes a supplied rank-decrease hypothesis for every strict Pareto improvement and constructs a listed admissible member that cannot be strictly dominated by another listed admissible member.
+
+**Proof scope:** This is an arbitrary-list constructive theorem with an EXTRA assumption: a Nat ranking strictly decreasing on strict Pareto improvements. It does **not** prove that such a rank exists for an arbitrary finite multi-axis cost fabric, that the list enumerates every feasible alternative, or that the rank faithfully reflects measured costs. I07 therefore **remains N** for the unrestricted nonempty finite feasible-frontier theorem. This partial source construction does not change 59 D / 11 R / 7 N. No Agda kernel typecheck was observed, and none of the model examples selects a real tax rate.
+
