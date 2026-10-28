@@ -358,6 +358,12 @@ def check() -> None:
         require(symbol + " :" in sonic_cube, f"missing finite T11 theorem {symbol}")
     require("GoodmanSonicNumerologyObservationCubeExact" in transport,
             "T11 theorem must remain reachable from TOE")
+    c3_source = (ROOT / "DASHI/Culture/GoodmanSonicWaveC3EquivarianceExact.agda").read_text(encoding="utf-8")
+    for c3_symbol in ("rotate3ThreeTimes", "transport3CommutesWithRotate3"):
+        require(c3_symbol + " :" in c3_source, f"missing C3 wave equivariance {c3_symbol}")
+    require("GoodmanSonicWaveC3EquivarianceExact" in transport,
+            "C3 wave bridge missing from TOE graph")
+    require("T15 homogeneous C3" in doc, "missing conditional C3 wave provenance")
     require("T11 numerological cross-pollination" in doc and "PR #1414" in doc,
             "missing T11 numerology provenance memo")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
