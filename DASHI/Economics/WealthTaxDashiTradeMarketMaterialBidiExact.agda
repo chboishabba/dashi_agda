@@ -13,8 +13,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Nat using (_≤_)
-open import Data.Nat.Properties using (m≤m+n; ≤-trans; +-assoc; +-comm)
+open import Data.Nat using (_≤_; _∸_)
+open import Data.Nat.Properties using (m≤m+n; ≤-trans; +-assoc; +-comm; m+n∸n≡m)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
 open import Data.Empty using (⊥)
 
@@ -832,3 +832,52 @@ sellerBuyerTotalIsConserved :
     + buyerUnitsAfter twoOrdinarySharesTransferred
 sellerBuyerTotalIsConserved =
   shareClassTransferPreservesIssuedSupply twoOrdinarySharesTransferred
+
+
+------------------------------------------------------------------------
+-- CONDITIONAL PHYSICAL STOCK/FLOW AND SERVICE THROUGHPUT (G04, G05).
+-- Financial cash rights are NOT data of this record. This is a capacity
+-- reconciliation requirement. It never asserts observed commissioning.
+------------------------------------------------------------------------
+
+record PhysicalCapacityPeriod : Set where
+  constructor physical-capacity-period
+  field
+    installedBefore : Nat
+    commissionedUnits : Nat
+    retiredUnits : Nat
+    installedAfter : Nat
+    stockBalance :
+      installedAfter + retiredUnits ≡ installedBefore + commissionedUnits
+open PhysicalCapacityPeriod public
+
+physicalCapitalStockFlowConservation :
+  (period : PhysicalCapacityPeriod) →
+  installedAfter period
+    ≡ (installedBefore period + commissionedUnits period) ∸ retiredUnits period
+physicalCapitalStockFlowConservation period =
+  trans
+    (sym (m+n∸n≡m (installedAfter period) (retiredUnits period)))
+    (cong (_∸ retiredUnits period) (stockBalance period))
+
+record DeliveredCareCapacity : Set where
+  constructor delivered-care-capacity
+  field
+    actualStaffHours : Nat
+    equipmentServiceHourCapacity : Nat
+    actuallyDeliveredHours : Nat
+    staffBound :
+      actuallyDeliveredHours ≤ actualStaffHours
+    equipmentBound :
+      actuallyDeliveredHours ≤ equipmentServiceHourCapacity
+open DeliveredCareCapacity public
+
+deliveredCareHoursBoundedByStaffAndEquipment :
+  (service : DeliveredCareCapacity) →
+  actuallyDeliveredHours service ≤ actualStaffHours service
+deliveredCareHoursBoundedByStaffAndEquipment service = staffBound service
+
+deliveredCareHoursBoundedByEquipment :
+  (service : DeliveredCareCapacity) →
+  actuallyDeliveredHours service ≤ equipmentServiceHourCapacity service
+deliveredCareHoursBoundedByEquipment service = equipmentBound service
