@@ -328,7 +328,8 @@ def test_official_settlement_receipt_backout_and_coherent_route() -> None:
 
     dispositions = ("due", "backed_out", "completed")
     checked = 0
-    for status, officially_valid, holder_same, class_same, sale_cash,             route_sale_cash, settlement_epoch, payment_epoch in product(
+    for (status, officially_valid, holder_same, class_same, sale_cash,
+         route_sale_cash, settlement_epoch, payment_epoch) in product(
                 dispositions, (False, True), (False, True), (False, True),
                 range(4), range(4), range(7), range(7)):
         is_final = status == "completed"
