@@ -38,6 +38,7 @@ import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as Indexed
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Physics.ShiftWaveRefinementSeam as Seam
 import DASHI.Physics.Base369PhaseBridge as Phase369
+import DASHI.Foundations.Base369AddressSymmetryAndBranchGeometryExact as Geometry
 import DASHI.Physics.WaveAlgorithmLift as Algorithm
 import DASHI.Physics.Closure.Base369PolyphaseKernelBoundary as Phase
 import DASHI.Foundations.Base369PolyphaseCharacters as Characters
@@ -198,6 +199,29 @@ nonaryBlockCoarsePhaseRotationObstruction :
   ⊥
 nonaryBlockCoarsePhaseRotationObstruction =
   Phase369.coarseNonaryBlock-rotate-obstruction
+
+-- The original 369 address/branch geometry already separates
+-- a local swap symmetry from symmetry after context-dependent propagation.
+-- This is the appropriate *logical caution* when reading two-way optical
+-- links: reciprocal local algebra does not establish atmospheric/fibre
+-- reciprocity through time and geometry. It is NOT a calibrated link test.
+sourceLocalSwapIsEquivariant :
+  (pair : Geometry.PairState) →
+  Geometry.swapPair (Geometry.negatePair pair)
+    ≡ Geometry.negatePair (Geometry.swapPair pair)
+sourceLocalSwapIsEquivariant =
+  Geometry.localSwapEquivariance
+
+sourcePropagatedSwapCanFail :
+  Geometry.swapPair
+    (Geometry.contextualPropagate Geometry.roleA Geometry.asymmetryWitness)
+    ≡
+  Geometry.contextualPropagate Geometry.roleB
+    (Geometry.swapPair Geometry.asymmetryWitness)
+    →
+  Geometry.Empty
+sourcePropagatedSwapCanFail =
+  Geometry.propagatedSymmetryBrokenAtWitness
 
 -- Wave algorithm's generic Hilbert/unitarity obligations were not solved
 -- by finite synthetic beat witnesses.
