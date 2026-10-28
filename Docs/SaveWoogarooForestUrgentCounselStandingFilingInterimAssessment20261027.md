@@ -125,6 +125,8 @@ The [source-exact DASHI/SensibLaw/SLR case bridge](SaveWoogarooSLRSensibLawCaseI
 
 A closer **favourable-but-qualified** comparison is [Parliament's 2015 Mackay Conservation Group court order summary](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/EPBC_Standing_Bill/Report/c01): Federal Court consent orders set aside an approval after parties agreed approved species conservation advice was not before the Minister. [Original parliamentary dissent](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/EPBC_Standing_Bill/Report/d01) expressly says **no judge issued a contested judgment or findings**, and the mine was re-approved. The 2013 Schedule 1 proposal to neutralise approval invalidity for this error was *not* enacted. For Woogaroo this pays only a legal comparison, not actual 2026 advice omission, validity or court outcome.
 
+**Production-source correction 28 October:** The original SensibLaw Python prototype is retained as predecessor only; the case-specific prototype PR #500 is [closed without merge](https://github.com/chboishabba/SensibLaw/pull/500). The ongoing case intake is implemented solely in the native Rust SLR [Matter PR #59](https://github.com/chboishabba/slr/pull/59). Seven unresolved grounds, actual counsel/applicant filing clock, signed conditions, same-stage works and actual 2022 advice-consideration remain separate. No section 95C receipt, real legal filing, source review or standing proven.
+ 
 ## Legal grounds — bounded screening, not pleaded allegations
 
 | Candidate legal issue | Current source-positive evidence | Missing proof / severe falsifier |
