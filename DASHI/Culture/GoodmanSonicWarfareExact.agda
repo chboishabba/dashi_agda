@@ -93,6 +93,81 @@ goodmanCitationDoesNotCreateAuthority :
   Snowball.authorityNonCreationRetained goodmanSnowballRole ≡ true
 goodmanCitationDoesNotCreateAuthority = refl
 
+
+------------------------------------------------------------------------
+-- INDEPENDENT EMPIRICAL AND STANDARD SOURCES (NOT GOODMAN'S RESULTS)
+--
+-- Each source has its own original author/date/role. These references
+-- inform the proposed soundscape measurement lane. They are not proofs of
+-- the Goodman finite model, nor do pooled associations supply individual
+-- causal or clinical authority. ISO text is NOT copied here.
+------------------------------------------------------------------------
+
+zhangContextReview2025 : Attr.AttributedSource
+zhangContextReview2025 = Attr.mkDOISource
+  "Ruining Zhang; Hui Ma; Chao Wang; Yuan Zhang; Jian Kang"
+  "Soundscape and its context: A framework based on a systematic review"
+  "Journal of the Acoustical Society of America 157, 4417-4436"
+  "2025"
+  "10.1121/10.0036882"
+  "https://doi.org/10.1121/10.0036882"
+  Attr.academicArticleSource
+  "14 theoretical and 52 empirical papers reviewed; source context taxonomy, not a proof of a DASHI response function"
+  Attr.publicAttribution
+
+guoUrbanSoundscape2026 : Attr.AttributedSource
+guoUrbanSoundscape2026 = Attr.mkDOISource
+  "Xuan Guo; Stefan Schmidt; Zhu Chen; Ling Yang; Jiang Liu; Christian Albert"
+  "Beyond noise and silence: urban soundscapes and their contribution to human well-being - a systematic review and meta-analysis"
+  "npj Urban Sustainability 6, article 130; 17 October 2026"
+  "2026"
+  "10.1038/s42949-026-00482-2"
+  "https://doi.org/10.1038/s42949-026-00482-2"
+  Attr.academicArticleSource
+  "194-review-study and 66-meta-analysis-study synthesis; heterogeneous associations and context moderators, not a universal sound intervention theorem"
+  Attr.publicAttribution
+
+isoNonAcousticContext2025 : Attr.AttributedSource
+isoNonAcousticContext2025 = Attr.mkNoDOISource
+  "ISO/TC 43/SC 1"
+  "ISO/TS 16755-1:2025 - Non-acoustic factors, Part 1"
+  "International Organization for Standardization; first edition, May 2025"
+  "2025"
+  "https://www.iso.org/standard/84809.html"
+  Attr.technicalStandardSource
+  "Non-acoustic factor definitions and categorisation; neither an applied human study nor an Agda theorem"
+  Attr.publicAttribution
+
+isoSoundscapeAnalysis2025 : Attr.AttributedSource
+isoSoundscapeAnalysis2025 = Attr.mkNoDOISource
+  "ISO/TC 43/SC 1"
+  "ISO/TS 12913-3:2025 - Soundscape, Part 3: Data analysis"
+  "International Organization for Standardization; second edition, May 2025"
+  "2025"
+  "https://www.iso.org/standard/86955.html"
+  Attr.technicalStandardSource
+  "Standards provenance for in-situ soundscape analysis; successor to 2019 edition, not clinical or causal proof"
+  Attr.publicAttribution
+
+soundscapeComparatorSources : Attr.AttributedSourceAtlas
+soundscapeComparatorSources = Attr.mkSourceAtlas
+  "2025-2026 independent soundscape comparison sources"
+  "Original review authors and ISO; DASHI citation/provenance only"
+  (zhangContextReview2025 ∷
+   guoUrbanSoundscape2026 ∷
+   isoNonAcousticContext2025 ∷
+   isoSoundscapeAnalysis2025 ∷ [])
+  "Independently authored sources for context and measurement design; not proof of Sonic Warfare or a novel force"
+
+soundscapeComparatorsCannotPromote :
+  (validation : String) →
+  Receipt.promotesClaim
+    (Attr.attributedSourceAtlasReceipt soundscapeComparatorSources validation)
+  ≡ false
+soundscapeComparatorsCannotPromote validation =
+  Attr.attributedSourceAtlasReceiptNonPromoting
+    soundscapeComparatorSources validation
+
 ------------------------------------------------------------------------
 -- Claim families and provenance; labels are NOT observations or causes.
 ------------------------------------------------------------------------
