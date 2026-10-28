@@ -26,6 +26,30 @@ import DASHI.Cognition.RecursiveFibreTower as Tower
 Address : Nat → Set
 Address = Native.BalancedLevel
 
+-- Explicit Trit <-> C3 chart. The raw signed digit is not silently
+-- identified with a group element; these are constructor-level inverses.
+tritToPhase : Trit.Trit → C3.C3
+tritToPhase Trit.neg = C3.c2
+tritToPhase Trit.zero = C3.c0
+tritToPhase Trit.pos = C3.c1
+
+phaseToTrit : C3.C3 → Trit.Trit
+phaseToTrit C3.c0 = Trit.zero
+phaseToTrit C3.c1 = Trit.pos
+phaseToTrit C3.c2 = Trit.neg
+
+tritToPhaseRoundTrip : (v : Trit.Trit) →
+  phaseToTrit (tritToPhase v) ≡ v
+tritToPhaseRoundTrip Trit.neg = refl
+tritToPhaseRoundTrip Trit.zero = refl
+tritToPhaseRoundTrip Trit.pos = refl
+
+phaseToTritRoundTrip : (v : C3.C3) →
+  tritToPhase (phaseToTrit v) ≡ v
+phaseToTritRoundTrip C3.c0 = refl
+phaseToTritRoundTrip C3.c1 = refl
+phaseToTritRoundTrip C3.c2 = refl
+
 LocalPhase : Nat → Set
 LocalPhase n = Address n → C3.C3
 
