@@ -24,13 +24,15 @@ module DASHI.Arithmetic.PrimegameTypedNumericFirstApplicableBidiExact where
 -- This is source-written / Agda-kernel pending; no ESD edits.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Product using (_×_; _,_; Σ; proj₁; proj₂)
 open import Relation.Nullary using (¬_)
-open import Relation.Binary.PropositionalEquality using (_≢_; subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≢_; cong; trans; subst; sym)
+open import Data.Empty using (⊥-elim)
+import Data.Nat.DivMod as DivMod
 
 import DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact as Guy
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
@@ -219,3 +221,62 @@ guyExactGuardPriorityBackward evaluator =
 
 historicalRuleCount : Signed.listCount Guy.guyFourteenTyped ≡ 14
 historicalRuleCount = Guy.guyProgrammeRuleCountIsFourteen
+
+------------------------------------------------------------------------
+-- CONCRETE ARITHMETIC EVALUATOR. The canonical stdlib quotient
+-- closes the exact Nat successor, with *no* action oracle.
+-- Only the signed-SSP/FRACDASH state alignment remains separate.
+------------------------------------------------------------------------
+
+exactNumericNext : Nat → RuleNumbers → Nat
+exactNumericNext n (a , zero) = zero
+exactNumericNext n (a , suc d) = (n * a) DivMod./ suc d
+
+-- For d>0 with m*d=n*a, division's remainder vanishes. Reuse
+-- the canonical division algorithm and multiple-modulo theorem.
+exactNumericNextIsCorrect :
+  (n : Nat) (rule : RuleNumbers) →
+  ExactFractionApplies n rule →
+  exactNumericNext n rule * proj₂ rule ≡ n * proj₁ rule
+exactNumericNextIsCorrect n (a , zero) (nonzero , _) =
+  ⊥-elim (nonzero refl)
+exactNumericNextIsCorrect n (a , suc d)
+    (_ , (integralNext , productEq)) =
+  sym
+    (trans
+      (DivMod.m≡m%n+[m/n]*n (n * a) (suc d))
+      (trans
+        (cong
+          (λ r → r + ((n * a) DivMod./ suc d) * suc d)
+          (trans
+            (cong (λ v → v DivMod.% suc d) (sym productEq))
+            (DivMod.m*n%n≡0 integralNext (suc d))))
+        refl))
+
+concreteExactFractionEvaluator : ExactFractionEvaluator
+concreteExactFractionEvaluator = record
+  { next = exactNumericNext
+  ; preservesExactValue = exactNumericNextIsCorrect
+  }
+
+guyConcreteExactPriorityForward :
+  {before after : Nat} →
+  First.FirstApplicableStep
+    TypedExactFractionApplies (TypedApply exactNumericNext)
+    Guy.guyFourteenTyped before after →
+  First.FirstApplicableStep
+    ExactFractionApplies exactNumericNext
+    Guy.guyFourteenNumeric before after
+guyConcreteExactPriorityForward =
+  guyExactGuardPriorityForward concreteExactFractionEvaluator
+
+guyConcreteExactPriorityBackward :
+  {before after : Nat} →
+  First.FirstApplicableStep
+    ExactFractionApplies exactNumericNext
+    Guy.guyFourteenNumeric before after →
+  First.FirstApplicableStep
+    TypedExactFractionApplies (TypedApply exactNumericNext)
+    Guy.guyFourteenTyped before after
+guyConcreteExactPriorityBackward =
+  guyExactGuardPriorityBackward concreteExactFractionEvaluator
