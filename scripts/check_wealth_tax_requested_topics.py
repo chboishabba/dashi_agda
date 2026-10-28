@@ -275,6 +275,9 @@ def main() -> None:
         "finiteParetoFrontierIsNonempty",
         "policyTradeoffAxisCoverage",
         "twoAxisPolicyFrontierIsNonempty",
+        "finiteAxisCostSum",
+        "finiteAxisCostSumMonotone",
+        "strictImprovedAxisFromFiniteCoverage",
         "finiteAxisSumStrict",
         "finiteAxesReverseOrStrict",
     ):
