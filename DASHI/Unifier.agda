@@ -23,6 +23,8 @@ open SignedPrimeReadout public using
   ; pairSieveInvariantUnderEqualReadout
   ; pairSieveInvariantUnderEqualReadoutBack
   ; certifiedNeighboursAreTwinPrimes
+  ; natPrimeAppearsAtOwnCutoff
+  ; everyPrimeCodeAppearsAtOwnCutoff
   )
 open PairCRTPeriod public using
   ( localKPeriod
