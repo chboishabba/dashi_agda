@@ -342,3 +342,275 @@ fundamental-group proof; Mathlib original compactness/De Morgan;
 DASHI #1244 current relative-ambient adapter and finite tests.
 Prior Ibrahim Monster 3B proof ownership untouched. Kernel/physical
 claims remain fail-closed.
+
+
+## 2026-10-28 full steelman, balanced ternary, zeta commuting squares and orbifold reuse
+
+**User-authorized full-scope roadmap consolidation.** This section is a
+consumer-first restatement of the full 10-part steelman and of the
+additional balanced-ternary, 13/27–5/9, completed-zeta/RH, and existing
+orbifold requirements. Canonical earlier sections and their original
+ownership are RETAINED rather than replaced. This update reuses the
+existing #1244 / #1254 / #1260 / #1414 and master proof owners. It does
+not merge stacked PRs, change ESD surfaces, claim Monster 3B same-object
+identity, or upgrade source-written modules to Agda/Lean kernel receipts.
+
+### A. Source object, topology and exact algebra
+
+Retain Hatcher's decreasing linked handlebodies `X_n`, increasing
+open exteriors `Y_n=R³\\X_n`, and injected
+`π₁(Y_n)=F_(2^n)` with child commutator meridian map.
+Distinguish finite tame `B_n` from linked `X_n` and the wild
+`B=intersection(X_n)`. Our direct-limit three-root algebra is
+
+```text
+G_n = F< x_(c,w) | c in C3, w in {0,1}^n >, rank 3*2^n
+x_(c,w) -> [ x_(c,w0), x_(c,w1) ]
+G_infty = colim(G_n) ≅ G_A * G_A * G_A
+G_infty != 1, G_infty^ab = 1, rot(x_(c,w)) = x_(c+1,w)
+C3 -> Out(G_infty) is injective (free-factor retraction).
+```
+
+These are the SOURCE-SIDE algebra and original Hatcher prior art.
+The assertion `π₁(E)=G_infty` for the particular chosen three-arm
+wild (B) is CONDITIONAL on a genuine same-object relative
+collar and meridian equivalence and exact-head verification.
+
+### B. Selected geometric cover and homotopy transport
+
+Use `c_i=9e_i`, `r_-=15/4`, `r_+=17/4`,
+`x0=(20,20,20)`, `p_i=13e_i`, and the actual exterior
+`E=R³\\B`. The relative open sets
+`C=E∩⋂_i{d(x,c_i)>r_-}`,
+`S_i=E∩{d(x,c_i)<r_+}`,
+`U_i=C∪S_i` cover E, have `U_i∩U_j=C`,
+and source-specific pierced-shell overlap
+`C∩S_i ≅ (15/4,17/4)×D²_open` in the prescribed
+straight-tube scaffold.
+Use the EXISTING `ThreeArmRadiusConnectedHatcherTransport`,
+`ThreeArmCentralPi1Reduction`,
+`ThreeArmHatcherPathTransport` and
+`HatcherOpenExhaustionCompactAbsorption` rather than constructing
+yet another van Kampen theorem. Required source geometrical data:
+`IsPathConnected C`, `π₁(C)=1`, `IsPathConnected S_i`,
+actual X-valued overlap witness `p_i`,
+`W_i ≃_h U_i`, meridian naturality, and fixed-point C3 action.
+The concrete relative source maps `W_i→U_i` remain the P0 wall.
+Hatcher's compact-open exhaustion does not automatically instantiate
+the chosen `X_n` or a relative cap slide.
+
+### C. Binary Hatcher topology versus NEW balanced ternary observers
+
+**Existing owners (DO NOT REIMPLEMENT):**
+
+- Parent `AlexanderHornedBinaryTernaryExistingCodecWeldExact`
+  already embeds the true horn two-child alphabet into nonzero
+  balanced trits, has a two-bit all-trit code, rejects the zero
+  trit as a literal geometric horn child, and reuses the
+  `Base369BinaryTernaryRefinement` square:
+  binary-then-ternary = ternary-then-binary on RESOLUTION counts.
+- Stacked #1254 `ExoticBalancedTernaryPantsWeldExact`,
+  `ExoticBinaryTernaryPantsCodecExact`, and
+  `TernaryCylinderPantsGeometryExact` own literal balanced
+  3/6/9 address, prefix-ultrametric, variable-length prefix-free
+  code 3->0,6->10,9->11, and two-pants 1->3 surface layout.
+  The ordinary Hatcher horn stays TWO-child: 1->3 is a
+  DIFFERENT geometric consumer requiring its own surface maps.
+- Existing `BalancedTernaryUltrametricExact` owns the depth
+  3^-n prefix observer, not a false topological-group isomorphism
+  `Z_2 ≅ Z_3`. The same Cantor *topological-space type*
+  does not establish isomorphism of the 2-adic/3-adic ADDITIVE
+  topological groups or equal ambient 3D linking.
+
+**NEW parent proof** `AlexanderHornedBalancedTernaryRiemannSquareExact.agda`:
+a literal trit observer `{-1,0,+1}` over the existing
+Horn.Bit, injective `left→-1,right→+1` with a
+surjective collapse `-1,0→left; +1→right`.
+It proves the one-sided retract on digits, words and
+sector addresses, plus the external C3 commuting square.
+The zero digit remains a REAL third observer state: the
+collapse is explicitly noninjective, not a branch-isomorphism.
+It keeps newest-first Horn words and does not silently
+replace them by chronological streams.
+
+At finite depth n there are `3*2^n` actual horn
+meridian labels but `3*3^n` three-sector balanced-trit
+OBSERVATION labels. For independent UNIFORM trits,
+the collapse pushes the measure to binary Bernoulli
+`P(left)=2/3, P(right)=1/3`, NOT the original
+uniform Hatcher binary cylinder law. To recover
+uniform binary measure requires a chosen nonuniform
+trit law or an alternative code; that is extra
+measure data, not topology.
+
+**NEW 13/27 and 5/9 severe symmetry discriminator**:
+the involution on `Trit^2` fixes one zero word and
+has four negative-positive pairs, hence exactly FIVE
+orbits on NINE words. On `Trit^3` it fixes one word,
+has THIRTEEN pairs, hence FOURTEEN orbits on 27
+words. But `C3_sector × Trit^2` also has 27
+words and *three* zero-fibre fixed points under
+FIBREWISE balanced sign reversal; it has TWELVE
+pairs and FIFTEEN orbits. Thus even an exact 27
+cardinality match does not supply an equivariant
+bijection. This is a precise receiver for earlier
+13-in-27, 5-in-9, 3^5-versus-5^3, 369 and trialectic
+work. It is **not** an identification with a
+physical 27-dimensional spin, cube, Monster carrier
+or new third Hatcher child.
+
+### D. Zeta commuting square and RH (properly typed)
+
+Reuse EXISTING:
+`RiemannXiSymmetryExact` (rational coordinate involutions
+and the zero-quartet criterion),
+`C3RiemannConjugationBridgeExact` (critical-line
+reflection/conjugation coincidence),
+`RiemannReflectionOrbitDefectExact` (reflection-even
+alpha²), `RiemannReflectionC3OrbitShapeBridgeExact`
+(shared fixed-plus-pair orbit SHAPE), and the
+`RiemannCompletedZetaBoundary` / analytic programme.
+
+For `s=σ+it`, the classical completed xi satisfies
+`xi(s)=xi(1-s)` (Riemann 1859, DLMF §25.4).
+The rational coordinate transformations are
+```text
+F(s)=1-s,       K(s)=conjugate(s),
+R(s)=1-conjugate(s) = K(F(s)) = F(K(s)).
+R(s)=s iff Re(s)=1/2.
+```
+This is a TRUE commuting square, but it is not RH:
+symmetric entire functions may have OFF-LINE zeros.
+For example `f(s)=(s-1/4)(s-3/4)`
+satisfies `f(1-s)=f(s)`, is conjugation
+compatible, and has two off-critical zeros.
+`RiemannXiSymmetryExact` already distinguishes
+zero-quartet symmetry from locating all zeros.
+The NEW ternary-Xi state proves commuting external
+sector rotation with the **product** of sign
+reversal and critical reflection, plus the
+balanced-zero/critical-line fixed locus. No
+analytic zero or Monster action is thereby
+identified with an indexed trit.
+
+Further #1260 Pickover `exp(i99^(9999!))` is a
+real-angle, non-torsion phase. CRT/μ9999
+projections, `C3` roots and SU2 central -I are
+NOT substitutes for the unknown sine sign.
+
+### E. Already-owned orbifold/outer-semiproduct theorem
+
+**DO NOT INTRODUCE A NEW SEMIDIRECT PRODUCT as a novelty.**
+The original #1244 geometry/roadmap already states that
+for a connected C3-invariant exterior E with a rotation-fixed
+basepoint, the global-quotient orbifold group is the
+SPLIT extension `π₁^orb([E/C3]) ≅ π₁(E) ⋊ C3`.
+After the CONDITIONAL geometric identification, this is
+`(G_A*G_A*G_A) ⋊ C3`. Independently,
+the abstract free-factor rotation is already known to
+give `C3 → Out(G_infty)` injectively.
+The source of C3 orbifold isotropy is EXTERNAL;
+there is no hidden order-three torsion of G_A.
+An exact-head internal orbifold-fundamental-group
+homotopy quotient proof/instance is NOT confirmed:
+retain the classical theorem vs implemented abstract
+action distinction. Monster 3B/Z3 VOA orbifold
+constructions share selected C3 scalar roots but
+are NOT the same geometric orbifold.
+
+### F. Homology, spin and scalar/nonabelian holonomy
+
+Conditional on the SAME E, `H1(E;Z)=0` and
+all FLAT abelian U1 characters vanish, even though
+the source fundamental group is nontrivial.
+For the R3 complement `H2(E;Z)=Z` by Alexander
+duality, while the S3 complement is reduced-acyclic.
+The orientable open R3 exterior has trivial tangent
+bundle and unique spin structure from `H1(E;Z2)=0`.
+Its inherited Euclidean spin connection is flat and
+trivial; the chosen (2I⊂SU2) holonomy is an
+AUXILIARY gauge connection, not spontaneous
+720-degree holonomy. A nonflat U1 bundle/curvature
+is a different observable from flat U1 characters.
+
+Existing `AlexanderHornedAbelianHolonomyBIDIExact`
+proves the source-meridian abelian blindness
+conditional on those relations. The 120-element
+binary-icosahedral commutator section constructs
+compatible nonabelian target values and
+`q=(1+i+j+k)/2`, `q³=-1`, `q⁶=1`.
+The orbifold-compatible FINITE actor
+`(2I)^3 ⋊ C3 → U6` is faithful in its selected
+three-two-dimensional-channel implementation;
+the chosen root-cube first-channel trace is -1
+but six-dimensional normalized trace is 1/3.
+Reuse #1414's 720-degree SU2/SO3 quaternion
+lift AS A SEPARATE proof owner; 3^5=243 vs
+5^3=125 and the 27-cell Fourier counts are
+distinct typed carriers, not additional
+wild-group representations by coincidence.
+
+### G. Finite experiment, uncertainty and physical boundary
+
+The selected ideal depth-n root-cube loop uses
+`L_n=3*4^n` physical gates. Under independent
+isotropic Gaussian angle errors of variance
+σ² per gate, the finite model predicts
+`E[W_n]=-exp(-3*4^n*σ²/8)`.
+It requires separate coherent/correlated-noise,
+identity, commuting U1, Q8, noncentral 2I,
+scrambled-child, plaquette-flatness, readout
+and gauge-conjugation controls. A simulated
+Wilson sign is NOT a measured wild-exterior
+flat connection, a Dirac spectrum, Casimir
+shift, Maxwell anomaly or new propulsion.
+Finite tame horned balls `B_n`, handlebody
+exteriors `Y_n` and the ideal wild limit B
+remain three distinct experimental carriers.
+A valid Maxwell/Dirac self-adjoint operator
+and falsifiable spectral prediction need a
+specified domain and boundary conditions.
+
+### H. Precise remaining cutset, test and attribution
+
+P0: Source-faithful Hatcher X_n maps, stationary
+cap/collar relative homeomorphism into our chosen
+satellite S_i, induced generators, and compact
+direct-limit identification. Then the existing
+Lean central `π₁(C)=1`, cover-connectedness
+and based homotopy transport are applied.
+P0: Exact-head Lean/Agda compiler receipts
+are missing, but **CI is not an obstacle to
+source-writing**; never label these proofs
+kernel-checked without compiler logs.
+P1: Carry the ternary observer as a faithful
+distinct data type across the existing
+binary/ternary and zeta commuting squares;
+the middle zero fibre must remain visible,
+and finite frequencies/measures must
+not be interchanged across encodings.
+P1: Test generic involution/role analogy against
+the explicit off-line symmetric polynomial
+and 27-cardinality/fixed-point counterexamples.
+P1: Preserve independently authored
+Monster/Ibrahim 3B same-object and VOA ownership:
+identical zeta glyph or orbit fingerprints
+cannot promote a same-object representation.
+P2: Finite gate emulator and laboratory protocol
+must retain physical calibration and flatness
+receipts; analytical Pickover real-angle sign,
+RH location and physical operator tests remain
+independent P0 scientific questions.
+
+New finite negative-control script:
+`scripts/alexander_horned_balanced_ternary_xi_severe_controls.py`.
+Original source authorship, inherited repo owners,
+source-written code, locally run checks, exact
+compiler receipts, and real experimental
+measurements are separate status types.
+
+**New code status this cut:** two files added,
+no postulates or escape hatches; Agda is
+source-written, not kernel typechecked.
+The integer/rational finite script is
+a test of exact finite consequences only.
