@@ -78,3 +78,14 @@ interp (addFraction a b) (productNonZero ha hb)
 where `interp` is the actual standard-library normalized rational quotient `normalize (numerator a) (denominator a)` and `ha,hb` are valid nonzero-denominator witnesses. Only then instantiate `PositiveFractionInterpretation`, prove each term's correspondence with `rawTerm`, and obtain unconditional `sourceHurwitzEqualsRationalFold` on a kernel-checked type.
 
 Do not mark F13b complete from passing Python, a conditional record, syntactic import, matching eigen-motif, source-written lemma, or test fixture. Following this, work on H08 constructive all-prefix extremality, S23 two-sampler stochastic dominance, S24 joint prefix coupling and C17 rare-tail instability. Retain every named primary author and each independent repository/PR proof owner. No protected ESD path was edited.
+
+
+## Follow-through: specialized quotient interpreter, leaving one premise
+
+The conditional fold proof now also exports an **actual candidate rational interpretation**:
+
+`concreteInterpret a ha = Data.Rational.Base.normalize (numerator a) (denominator a) {{ha}}`.
+
+The source `ConcreteAddLaw` is the single remaining algebraic premise on explicitly positive-denominator inputs. `concreteZeroPreserved` is the definitional rational zero identity; `concreteRankTermPreserved` reuses the existing `rawTermMatchesSource` identity (with symmetry). Under a separately supplied `ConcreteAddLaw`, the already-written `concreteSourceHurwitzEqualsRationalFold` specializes the whole finite Hurwitz sum to the actual rational evaluator. **This is a conditional result; no value inhabiting `ConcreteAddLaw` has been committed or tested by the Agda compiler.**
+
+This specialization narrows the true remaining formal obligation from three hypothetical interpretation laws to **one concrete cross-multiplication/addition compatibility theorem** plus Agda typechecking and any compiler-driven repairs. It does not constitute an unconditional F13b payment, so the original adapter's `finiteZipfWeightIdentificationPaid=false` remains correct.
