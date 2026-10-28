@@ -1,4 +1,16 @@
 module DASHI.Unifier where
+
+-- Source-typed Gamma-factorial, Pickover phase, Hatcher perfect-group
+-- observer and signed-quaternion quotient bridges.
+import DASHI.Foundations.PolynomialPickoverFactorialGammaDegreeExact as FactorialPhase
+import DASHI.Foundations.PolynomialHornedPerfectGroupObserverExact as HornedPerfect
+import DASHI.Foundations.PolynomialHornedSpinSignNonDescentExact as HornedSpin
+open FactorialPhase public using
+  ( factorialRecurrence ; gammaAt10000Is9999Factorial
+  ; degreeResidueAtEvenPositivePower ; radianPickoverSignIsNotProved )
+open HornedPerfect public using
+  ( everyCommutatorGeneratedGroupAbelianObserverIsTrivial )
+open HornedSpin public using ( noUniversalReconstructionFromV4 )
 import DASHI.Foundations.PolynomialC3FourierTrialecticChartExact as RootFourier
 
 -- Separate 120↔60×2 quintic parity atlas, exact arithmetic/369 identities,
