@@ -8,12 +8,13 @@ sys.path.insert(0,str(ROOT/"scripts"))
 from r2p2_13in27_5in9_hermitian_symmetry import (  # noqa: E402
     CUBE27, PLANE9, PAIRS729,
     neg, representative, conjugate, sample_hermitian,
-    pack_hermitian, unpack_hermitian, convolution, audit,
+    pack_hermitian, unpack_hermitian, convolution, plane_convolution, audit,
 )
 
 SOURCE=ROOT/"DASHI/Physics/Closure/R2P227729AntipodalThirteenFiveOrbitFourierCutExact.agda"
 CODEC=ROOT/"DASHI/Physics/Closure/R2P227729HermitianThirteenPairFourierCodecExact.agda"
 TRANSPORT=ROOT/"DASHI/Physics/Closure/R2P227729HermitianConvolutionTransportExact.agda"
+PLANE_TRANSPORT=ROOT/"DASHI/Physics/Closure/R2P281PlaneHermitianFiveOrbitConvolutionExact.agda"
 ROOTS=[
  ROOT/"DASHI/EverythingTOESymmetryResolved369.agda",
  ROOT/"DASHI/Unifier.agda",
@@ -48,6 +49,18 @@ class AntipodalFourierTests(unittest.TestCase):
             convolution(
                 unpack_hermitian(pack_hermitian(left,CUBE27),CUBE27),
                 unpack_hermitian(pack_hermitian(right,CUBE27),CUBE27)))
+
+    def test_five_in_nine_quadratic_plane_81_pairs(self):
+        left=sample_hermitian(PLANE9)
+        right=sample_hermitian(PLANE9,variant=2)
+        self.assertNotEqual(left,right)
+        output=plane_convolution(left,right)
+        self.assertEqual(len(output),25)
+        self.assertTrue(all(output[neg(k)]==conjugate(v) for k,v in output.items()))
+        self.assertEqual(
+            output,plane_convolution(
+                unpack_hermitian(pack_hermitian(left,PLANE9),PLANE9),
+                unpack_hermitian(pack_hermitian(right,PLANE9),PLANE9)))
 
     def test_orbit_labels_drop_pair_sum_orientation(self):
         plus=(1,0,0); minus=(-1,0,0)
@@ -87,7 +100,12 @@ class AntipodalFourierTests(unittest.TestCase):
                       "compact13PairsPreserveFiveGridFullQuadratic",
                       "sumUsingCong"):
             self.assertIn(token,transport)
-        for src in (code,codec,transport):
+        plane_transport=PLANE_TRANSPORT.read_text(encoding="utf-8")
+        for token in ("planePairCountEightyOne",
+                      "fiveOrbitPlaneCodecPreservesAll25QuadraticOutputs",
+                      "packedPlanePairTermMatchesSource"):
+            self.assertIn(token,plane_transport)
+        for src in (code,codec,transport,plane_transport):
             for escape in ("{!!}","postulate\n","{-# TERMINATING #-}",
                            "{-# NO_POSITIVITY_CHECK #-}","allow-unsolved-metas"):
                 self.assertNotIn(escape,src)
@@ -99,6 +117,7 @@ class AntipodalFourierTests(unittest.TestCase):
                 self.assertIn("R2P227729AntipodalThirteenFiveOrbitFourierCutExact",content)
                 self.assertIn("R2P227729HermitianThirteenPairFourierCodecExact",content)
                 self.assertIn("R2P227729HermitianConvolutionTransportExact",content)
+                self.assertIn("R2P281PlaneHermitianFiveOrbitConvolutionExact",content)
                 self.assertIn("Hermitian",content)
                 self.assertIn("Antipodal",content)
 
