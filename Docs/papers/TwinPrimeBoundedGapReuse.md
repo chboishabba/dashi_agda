@@ -447,3 +447,51 @@ orientation residual are required for lossless arithmetic input.
 No branch-only #1244/#1275 module is imported into #1408.
 See 24 named Q-series obligations in the existing 75-lemma matrix.
 All new Agda source remains kernel-pending. No CI or ESD edits.
+
+## New constructive all-Nat arithmetic residual codec — 29 October 2026
+
+`TwinPrimeNat270PeriodResidualBidiExact.agda` closes the
+losslessness obligation exposed by 59 and 329 (same
+`n mod 270=59`, differing prime-pair answers). It **reuses**
+`Data.Nat.DivMod`, `Data.Fin.Properties`, the earlier
+`TwinPrimeTernary270AffineCRTCodecExact`, and the 270-case
+survivor-coverage theorem.
+
+For EVERY natural n, `encodeNatPeriod270 n` is the genuine
+pair `(n/270, Fin270(n mod270))`. Its inverse
+`decodeNatPeriod270` reconstructs the whole unbounded integer:
+`toℕ residue + period*270`. Both directions are
+SOURCE-WRITTEN theorems:
+`decodeEncodeNatPeriod270` and `encodeDecodeNatPeriod270`.
+The converse uses an explicitly justified
+`+-distrib-/-∣ʳ` quotient law, `m<n⇒m/n≡0`,
+`m*n/n≡m` and `Fin.toℕ-injective`, following the
+original `GodelArithmeticBase12StreamStepExact` pattern.
+
+On the genuine 27-survivor residues,
+`encodeCertifiedCubePeriod270` reuses the existing exact
+270-completeness proof and returns a Cartesian cube plus
+unbounded period with a proof its decoded Nat equals the input.
+`cubePeriodResidueRoundTrip` recovers the residue, and
+`cubePeriodDecodeToCube` recovers its actual original cube.
+No `Fin 270` residue outside the 27 admissible inputs is
+falsely turned into a typed cube.
+
+At the same time, the original #1244 source now includes
+`AlexanderHornedS3SignQuotientSetoidBidiExact`, a genuine
+all-depth normal form with S3-orbit iff sign-orbit equivalence,
+zero-anchored section, observer factorization and recurrence
+`2r_n=3^n+1`. This is a **cross-PR source-owned** result.
+Do not import the unmerged #1244 branch into #1408 as if these
+were the same tracked proof.
+
+Independent local arithmetic: all 270 residues across 5
+unbounded period choices, the full S3 action on all words
+through n=6, 59/209 and 59/329 collisions: PASS.
+The 2026 reported H₁≤186 bounded-gap result and older
+Polymath8b H₁≤246 are not unconditional gap-2 theorems;
+these results do not supply F02/F04/F06/F07 or G01.
+All Agda sources remain kernel pending; neither CI nor
+Agda compiler was run. No ESD edits; original Ibrahim Monster
+3B, Guy/Conway, Pólya/Burnside, Zipf/Heaps source authorship
+and prior PR ownership remain untouched.
