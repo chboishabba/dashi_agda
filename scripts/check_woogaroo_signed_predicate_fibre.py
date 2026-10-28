@@ -26,12 +26,18 @@ PREDICATES = (
     "reviewed-original", "same-project-stage", "independent-mediation",
 )
 
-def route(defect: str, synthetic_review: bool) -> str:
-    if defect == "both":
+def route(vector: tuple[str, ...], synthetic_review: bool) -> str:
+    if "both" in vector:
         return "reconcile-contradiction"
-    if synthetic_review and defect == "positive":
+    common = (synthetic_review
+              and vector[0] == "positive"
+              and vector[6] == "positive"
+              and vector[7] == "positive")
+    if not common:
+        return "acquire-originals"
+    if vector[1] == "positive" and vector[2] == "positive" and vector[3] != "positive":
         return "applicant-defeater-search"
-    if synthetic_review and defect == "negative":
+    if vector[1] == "negative" and vector[3] == "positive":
         return "respondent-counter-defeater-search"
     return "acquire-originals"
 
@@ -49,27 +55,29 @@ def verify() -> dict:
         image[img] += 1
         assert len(img) == 9
         for synthetic_review in (False, True):
-            label = route(vector[1], synthetic_review)
+            label = route(vector, synthetic_review)
             route_counts[(synthetic_review, label)] += 1
             assert label != "legal-merits-proved"
-            if vector[1] == "both":
+            if "both" in vector:
                 assert label == "reconcile-contradiction"
             if vector[1] == "neither":
                 assert label == "acquire-originals"
-            if vector[1] == "negative" and synthetic_review:
-                assert label == "respondent-counter-defeater-search"
+            if not synthetic_review and "both" not in vector:
+                assert label == "acquire-originals"
 
     assert fine_count == 4**9 == 262144
     assert len(image) == 3**9 == 19683
     assert sum(image.values()) == 4**9
     assert max(image.values()) == 2**9
     assert image[(0,) * 9] == 2**9
-    assert route_counts[(False, "acquire-originals")] == 3 * 4**8
-    for label in (
-        "acquire-originals", "applicant-defeater-search",
-        "respondent-counter-defeater-search", "reconcile-contradiction",
-    ):
-        assert route_counts[(True, label)] == 4**8
+    assert route_counts[(False, "acquire-originals")] == 3**9
+    assert route_counts[(False, "reconcile-contradiction")] == 4**9 - 3**9
+    assert route_counts[(True, "applicant-defeater-search")] == 54
+    assert route_counts[(True, "respondent-counter-defeater-search")] == 81
+    assert route_counts[(True, "acquire-originals")] == 19548
+    assert route_counts[(True, "reconcile-contradiction")] == 4**9 - 3**9
+    assert route(("neither",)*9, True) == "acquire-originals"
+    assert route(("neither","negative") + ("neither",)*7, True) == "acquire-originals"
 
     # p-adic/CylinderSystem depth is a declared one-branch PREFIX only.
     # Refinement appends one finer digit, so projecting back is exact.
@@ -85,7 +93,11 @@ def verify() -> dict:
         "coarse_ternary_codes": len(image),
         "many_to_one_fine_residuals": fine_count - len(image),
         "maximum_coarse_preimages": max(image.values()),
-        "synthetic_review_true_count_per_search_role": 4**8,
+        "synthetic_review_true_routes": {
+            name: route_counts[(True, name)] for name in (
+                "acquire-originals", "applicant-defeater-search",
+                "respondent-counter-defeater-search", "reconcile-contradiction")
+        },
         "actual_evidence_paid": False,
         "legal_merits_proved": False,
         "triadic_face_glued": False,
