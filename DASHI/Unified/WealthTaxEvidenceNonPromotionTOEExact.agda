@@ -519,3 +519,76 @@ toeDerivedSummaryDoesNotBecomeOriginalEvidence :
 toeDerivedSummaryDoesNotBecomeOriginalEvidence =
   Sources.secondaryReportDoesNotAutoPromoteToPrimaryAuthority
 
+-- 2026-10-28 scoped, source-owned valuation / identity / policy exports.
+-- Delegating exports. The implementation and proof provenance stay in the
+-- existing economics module. Source reachability is NOT kernel verification.
+open DashiTradeTax public using
+  ( ScopedNetWealthSnapshot
+  ; netWealthBalanceIsWellTyped
+  ; TransferWithUnalteredPlant
+  ; disposalPreservesExternalAssetTransferAccounting
+  ; controllingVotesRequireVerifiedRightsAndAgreements
+  ; persistentTransactionIdentityCannotFollowFromValueOrDigest
+  ; OfficialSettlementAdmission
+  ; actualSettlementFinalityRequiresOfficialReceipt
+  ; financialClaimChangeDoesNotIdentifyPhysicalOutput
+  ; RivalTaxBaseComparison
+  ; rivalPolicyTaxBasesRemainComparableButDistinct
+  ; TaggedPolicyScenario
+  ; StatutoryPolicyAdmission
+  ; policyScenarioRequiresStatuteOrHypotheticalTag
+  ; FinitePolicyAccountingPeriod
+  ; finitePolicyStateTransitionPreservesAccounting
+  ; ExplicitBehaviourAssumptions
+  ; behaviouralResponseParametersAreExplicitAssumptions
+  ; SharedInitialPolicyComparison
+  ; sameInitialStateDifferentInterventionComparison
+  ; syntheticModelCannotIdentifyObservedCausalEffect
+  ; TaggedFundingReceipt
+  ; cashSourceUseIsSingleCounted
+  ; FinancedRouteAdmission
+  ; routeFundingFeasibleGivenLiquidityCollateralAndTiming
+  ; OwnerIssuerSecurityAdmission
+  ; authenticatedOwnerIssuerInstrumentClassKey
+  ; MatchedPolicyEffectAdmission
+  ; measuredPolicyEffectRequiresSameObjectInputs
+  ; noUniqueOptimalTaxRateFromParetoOrderAlone
+  )
+
+-- Explicit boundary aliases stay close to TOE use sites.
+toeVotesAloneCannotDetermineLegalControl :
+  INF.FactorsThrough
+    DashiTradeTax.arithmeticVotes
+    DashiTradeTax.externallyAssumedEffectiveControl → ⊥
+toeVotesAloneCannotDetermineLegalControl =
+  DashiTradeTax.controllingVotesRequireVerifiedRightsAndAgreements
+
+toeDigestAloneCannotIdentifyHistoricalTransaction :
+  INF.FactorsThrough
+    DashiTradeTax.arbitraryDigestLabel
+    DashiTradeTax.distinctHistoricalEventLabel → ⊥
+toeDigestAloneCannotIdentifyHistoricalTransaction =
+  DashiTradeTax.persistentTransactionIdentityCannotFollowFromValueOrDigest
+
+toeFinancialClaimAloneCannotDetermineRealOutput :
+  INF.FactorsThrough
+    DashiTradeTax.investorFinancialClaimUnits
+    DashiTradeTax.physicalOutputUnits → ⊥
+toeFinancialClaimAloneCannotDetermineRealOutput =
+  DashiTradeTax.financialClaimChangeDoesNotIdentifyPhysicalOutput
+
+toeSyntheticForecastCannotEstablishObservedEffect :
+  INF.FactorsThrough
+    DashiTradeTax.modelPredictionUnits
+    DashiTradeTax.independentlySuppliedOutcomeUnits → ⊥
+toeSyntheticForecastCannotEstablishObservedEffect =
+  DashiTradeTax.syntheticModelCannotIdentifyObservedCausalEffect
+
+toeEvenTwoPolicyOptionsMayHaveDifferentParetoMinimalRates :
+  ((candidate : DashiTradeTax.HypotheticalPolicyOutcome) →
+    DashiTradeTax.TwoOptionUndominated candidate →
+    DashiTradeTax.rateTagForOutcome candidate
+      ≡ DashiTradeTax.exampleZeroRate) → ⊥
+toeEvenTwoPolicyOptionsMayHaveDifferentParetoMinimalRates =
+  DashiTradeTax.noUniqueOptimalTaxRateFromParetoOrderAlone
+
