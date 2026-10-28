@@ -104,7 +104,31 @@ def run():
     out.append(test_case('controlled intervention distinguishes toy mechanisms', models,
         active, active, True))
 
-    assert len(out) == 15
+    # T1: A binary toy transfer environment can mask source activity at
+    # one receiver. This fixture is NOT a calibrated wave equation.
+    transport_states = ('trans-off', 'trans-on', 'absorb-off', 'absorb-on')
+    receiver = {
+        'trans-off': 'silent', 'trans-on': 'signal',
+        'absorb-off': 'silent', 'absorb-on': 'silent',
+    }
+    emitter = {
+        'trans-off': 'off', 'trans-on': 'on',
+        'absorb-off': 'off', 'absorb-on': 'on',
+    }
+    out.append(test_case('receiver projection adequately answers receiver', transport_states,
+        receiver, receiver, True))
+    out.append(test_case('receiver silence does not determine source activity', transport_states,
+        receiver, emitter, False))
+    for setting in ('trans', 'absorb'):
+        for before in ('off', 'on'):
+            for source in ('off', 'on'):
+                after = f'{setting}-{source}'
+                assert after in receiver
+                assert emitter[after] == source
+    assert receiver['trans-off'] != receiver['trans-on']
+    assert receiver['absorb-off'] == receiver['absorb-on']
+
+    assert len(out) == 17
     print(dumps({"mode": "finite-exhaustive-synthetic-only",
                  "all_passed": True, "tests": out,
                  "non_promotion": ["not-Agda-kernel", "not-measured-acoustics",
