@@ -345,11 +345,13 @@ def main() -> None:
         "equalWeightCostCollapsesIncomparablePolicies",
         "equalCostTotalDoesNotRecoverAdministrativeCost",
         "rechartingTotalCostCannotRecoverAdministrativeAxis",
+        "equalCostTotalIsParetoMonotone",
         "equalCostTotalCannotReflectParetoOrder",
         "policyWeightedTwoAxisCost",
         "careHeavyWeightsPreferCareByScalar",
         "administrationHeavyWeightsPreferCheapAdministrationByScalar",
         "toeEqualScalarCannotRecoverPolicyAdminAxis",
+        "toeParetoDominanceImpliesNoHigherTotalCost",
         "toeScalarTotalCannotReflectActualParetoDominance",
         "toeRechartOfScalarCannotRecoverAdminAxis",
     ):
