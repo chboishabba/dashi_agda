@@ -18,6 +18,7 @@ python3 -m pytest -q \
   tests/test_zipf_first_discovery_plackett_luce_exact.py \
   tests/test_zipf_abc_six_order_receipt.py \
   tests/test_zipf_full_heaps_path_distribution_exact.py \
+  tests/test_zipf_s24_monotone_path_transport_exact.py \
   tests/test_zipf_family_crosslaw.py \
   tests/test_zipf_heaps_bridge_exact.py \
   tests/test_zipf_heaps_extremal_profiles.py \
