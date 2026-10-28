@@ -85,3 +85,51 @@ The existing `DASHI.Analysis.NatPrimeCountingInstance.natPrimesUpTo` and `DASHI.
 - `everyPrimeCodeAppearsAtOwnCutoff`: preserves membership through the map, for every certified prime `2+n`.
 
 This **source-written genuine universal finite-code coverage lemma** is not the signed machine's **reachability** or **termination/prime-emission** theorem. The difference is the uninstantiated `ArithmeticPrimeEmitter.coversEveryPrime` field. Consequently update Phase C: finite arithmetic prime-code list completeness is SOURCE; actual signed-SSP FRACTRAN reachability/computational equivalence remains OPEN. The theorem targets were added to both the canonical TOE roots and the pinned source scan, but no Agda kernel success has been observed.
+
+## 2026-10-28 third max-cut: retain arithmetic residual or lose twin primality
+
+This pass searched the actual repository theorem owners first. No duplicate prime-counting engine, FRACTRAN interpreter, lossless SSP codec, or CRT coordinate system was constructed. Relevant older sources not covered in the first roadmap:
+
+- `DASHI.Combinatorics.FractranComputationEquivalence` defines `SameOutcome` and conditional `FractranRepresentation`, with explicit halt, step, and whole-run preservation. Same output does not imply same trace.
+- `DASHI.Combinatorics.SSP15FractranCompression` defines `SSP15ResidualCodec` and `codec-roundtrip`; a bare 15-way label is not presumed lossless. This is a stronger existing machine semantics donor than a symbolic orientation analogy.
+- `DASHI.Interop.VerifiedFractranCrankPipeline` supplies a general compiler/trace/proposal separation. Reuse it for verified machine lowering; it does not construct a prime-number-theoretic distribution law.
+- `DASHI.Analysis.PrimeCountingFunction` already has an abstract proof-bearing finite predicate enumerator and `primeListCountExact`.
+
+### New conditional positive theorem
+
+`DASHI.Arithmetic.SignedSSPTwinObservableTransportExact` reuses the above owners to show:
+- **lossless SSP15 label-plus-residual round trip preserves arbitrary arithmetic readout**;
+- therefore a correctly decoded lossless state preserves both the exact `TwinPrimeAt` proposition and its true finite counting indicator;
+- `SameOutcome` of two concrete FRACTRAN states implies agreement of any deterministic terminal-state twin-primality observable. It proves nothing about equal traces or general source-compiler semantics.
+
+These proofs are source-written and imported into the three canonical TOE roots. `SSP15ResidualCodec` is an uninstantiated record: the proof does not magically supply a concrete lossless SSP15 compression or an end-to-end signed prime enumerator.
+
+### New executable prime-pair owner
+
+`DASHI.Arithmetic.TwinPrimeCertifiedEnumeratorExact` instantiates `PrimeCountingFunction.PrimePredicate` with the *real* predicate `TwinPrimeAt n = Prime n × Prime (n+2)`, using two independently proved `Data.Nat.Primality.prime?` decisions. It exposes:
+- `twinPrimeAt?`, including all arithmetic small-prime exceptions;
+- `twinStartsUpTo` and `twinPairCountLE`, using existing recursion;
+- `twinStartListCountExact` via the existing abstract counting owner's cardinality proof;
+- `certifiedTwinFromSeparatePrimeProofs` and its inverse projection.
+
+This closes **finite arithmetic twin-start classification/counting at source level**. It does not claim infinitely many starts, or that the signed SSP runtime generates every such pair.
+
+### New impossibility theorem for orientation-only classification
+
+`DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact` constructs a precise counterexample. Both arithmetic values 5 and 7 have the positive signed SSP orientation, while `TwinPrimeAt 5` is true (5,7) and `TwinPrimeAt 7` is false (7,9). It proves `orientationAloneCannotDecideTwinPrimality`: *no total classifier factoring solely through the three-way signed orientation can agree with the actual twin-prime predicate on all natural numbers*. This is a finite logical no-go theorem, **not** a no-go for a full signed SSP state retaining a sufficient arithmetic residual.
+
+Executed local Python regression `scripts/check_signed_ssp_twin_information_loss.py`: true twin starts with lower endpoint ≤100,000 are **1,224**, including (3,5). This corrects the earlier count **1,223**, which did not include all lower endpoints; there are **1,223 consecutive differences between those 1,224 starts**, a different statistic. All odd tested prime moduli had `p−2` local survivor residues, while p=2 retained exactly one. This is a bounded executable check only.
+
+### 4B material: source-controlled triage
+
+The repository's Monster `4B` content is a conjugacy-class / moonshine datum, not an additional arithmetic prime modulus. Established source roots include Conway–Norton (1979) for monstrous moonshine, with Wilson's class-representative work and later source tables. Its natural power-to-class map must not be identified with `p±2` arithmetic or an actual FRACTRAN prime emitter without a separate semantics-preserving map and representation theorem. Keep inherited Ibrahim Monster 3B ownership intact and treat class names, frame shapes, and prime-exponent encodings only as *source-attributed test cases for the lossless-codec boundary*, not as prime-correlation evidence.
+
+### Next cut
+
+1. Fix/elaborate the added Agda sources against the repository's pinned standard-library API. No kernel acceptance has been observed; do not infer it from Python scripts.
+2. Supply an actual `SSP15ResidualCodec` instance for the real signed FRACDASH carrier; discharge round-trip, step, halting and run preservation using `FractranComputationEquivalence` or `VerifiedFractranCrankPipeline`.
+3. Supply an actual `ArithmeticPrimeEmitter` from the concrete signed SSP initial state. Code-enumeration completeness does **not** fill its reachability field.
+4. Complete arithmetic coprime CRT inverse and exact local-count theorem (`p=2` vs odd p).
+5. If claiming a new twin-prime result, prove a quantitative prime-pair correlation estimate that survives decoded arithmetic and is not reducible to parity-limited sieve data. No such result was discovered in #1409–#1413 or current 4B material.
+
+Owner status update: A03,A08,A10 (runtime compiler) remain open; B02/B03 readout now have conditional codec transport but no concrete full-machine instance; C04–C08 remain to be kernel-linked/instantiated; E02–E04 verified by finite Python but not Agda general proof; D06 and exact finite twin enumeration have source-level owners; F05 has a rigorous **orientation-only negative** special case, richer signed invariants remain research. The G01 twin infinitude target is unchanged.
