@@ -32,6 +32,7 @@ import DASHI.Algebra.BalancedTernary as T
 import DASHI.Reasoning.TernaryComparisonSynthesisExact as Syn
 import DASHI.Mathematics.Topology.AlexanderHornedNativeBalancedTernaryEndTowerExact as End
 import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryFibreActionExact as Native
+import DASHI.Cognition.RecursiveFibreTower as Tower
 
 sectorToTruth : C3.C3 → Base.TriTruth
 sectorToTruth C3.c0 = Base.tri-low
@@ -170,3 +171,61 @@ gaugeGroupLawIntertwines g h x = refl
 
 -- This is a CHOSEN chart, not the assertion that the two carriers
 -- have the same geometric or philosophical interpretation.
+
+
+------------------------------------------------------------------------
+-- ACTUAL THIRD-LEVEL TERNARY PREDICATE SPACE, not only 3^27 counts.
+--
+-- This is a genuine NEW two-sided chart layered on the ALREADY OWNED
+-- native/trialectic 27-state chart above. No parallel codebook added.
+-- Each C3-valued local field becomes a ternary predicate on 27
+-- level-two codes. This is the same pointwise function-space structure
+-- whose sizes form the original RecursiveFibreTower tetration.
+------------------------------------------------------------------------
+
+ThirdPredicateTable : Set
+ThirdPredicateTable = Syn.SynthesisChoice27 → Base.TriTruth
+
+thirdLevelFromNativeGauge :
+  Native.FibreAction 2 → ThirdPredicateTable
+thirdLevelFromNativeGauge g code =
+  sectorToTruth (toTrialecticGauge g code)
+
+nativeGaugeFromThirdLevel :
+  ThirdPredicateTable → Native.FibreAction 2
+nativeGaugeFromThirdLevel h address =
+  truthToSector (h (toTrialectic address))
+
+thirdLevelNativeGaugeRoundTrip :
+  (g : Native.FibreAction 2) (address : End.BalancedLevel 2) →
+  nativeGaugeFromThirdLevel (thirdLevelFromNativeGauge g) address
+    ≡ g address
+thirdLevelNativeGaugeRoundTrip g address
+  rewrite nativeTrialecticRoundTrip address
+        | sectorRoundTrip (g address) = refl
+
+nativeGaugeThirdLevelRoundTrip :
+  (h : ThirdPredicateTable) (code : Syn.SynthesisChoice27) →
+  thirdLevelFromNativeGauge (nativeGaugeFromThirdLevel h) code
+    ≡ h code
+nativeGaugeThirdLevelRoundTrip h code
+  rewrite trialecticNativeRoundTrip code
+        | truthSectorRoundTrip (h code) = refl
+
+actualThirdPredicateCardinality :
+  Tower.pow 3 (3 * Tower.pow 3 2) ≡ Tower.tetration 3 3
+actualThirdPredicateCardinality =
+  End.ternaryConfigurationTetration
+
+-- A SECOND application of the predicate-space constructor gives the
+-- FOURTH tetration level; this does not refine the ADDRESS depth.
+FourthPredicateTable : Set
+FourthPredicateTable = ThirdPredicateTable → Base.TriTruth
+
+fourthPredicateCardinalityRecurrence :
+  Tower.tetration 3 4 ≡ Tower.pow 3 (Tower.tetration 3 3)
+fourthPredicateCardinalityRecurrence =
+  Tower.tetrationStep 3 3
+
+-- Spatial refinement X2 -> X3 instead gives 81 addresses and
+-- field-group order 3^81. These two recursion axes must not collapse.
