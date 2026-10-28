@@ -308,3 +308,19 @@ The original `policyTradeoffCosts` hyperfabric has exactly two axes, `administra
 
 **Still N:** A05, C09, E07, F07, H08. A same-taxpayer, same-tax-event, same-settled-sale and same-physical-outcome claim needs independent source authority. No ESD surface or live dashiTRADE executor was edited. No observed Agda compiler pass. All 42 original inventory rows remain.
 
+## 2026-10-28 canonical funding route exact same-batch weld
+
+The former C06 finite source partition and C01 funding-route cash identity were separately valid conditional contracts. This pass connects them through a single batch-specific instance.
+
+- fundingCashSubtotal, fundingLoanSubtotal and fundingSaleSubtotal fold the previously typed exclusive channel selector over a finite list.
+- CanonicalFundingRouteWeld contains an original CanonicalFundingBatch and an original FundingRoute, with four explicit equations: each of the three channel totals must match the corresponding route field, and the *same full partition* must match the route's combined funding total. No totals-only name matching or concatenation is silently accepted.
+- canonicalFundingBatchExactlyFundsTaxPaymentAndFees composes the original canonicalFundingTotalsReconcile and original FundingRoute.fundingBalances. Thus the sum of each declared canonical source exactly equals the *same joined route's* tax cash plus execution fee, conditional on the weld.
+- fixtureSaleRouteWeld reuses the pre-existing assetSaleFunded route. The sample sale-source receipt is three units, modeled tax cash two, modeled fee one. It does not assert that any securities have been sold in reality.
+- toeCanonicalSourcesFundExactlyOneJoinedRoute re-exports the same theorem from its economics owner, rather than duplicating an arithmetic derivation.
+
+**Same-object and proof-level ceiling:** this joins mathematical values, not a verified source revision, bank account, held security, broker order or actual CHESS settlement. Reusing a scalar 3 is not independent evidence. External X02-X06 remain unpaid, as do A05/C09/E07/F07/H08. No status change from 61 D / 11 R / 5 N.
+
+**Snowball/Ibrahim reuse:** The TOE consumer now imports the *existing* SnowballExternalIdentityAvailabilityExact owner and re-exports p854CandidateStillNeedsInspection, qidDoesNotPaySourceTruth, unresolvedQidIsNotEntityAbsence, and verifiedRelevantIdentityMustSnowball as four non-promotion boundaries. Candidate external identifiers, QIDs or a hash do not pay real-transaction or source-truth authority. These are exact inherited source-owner proofs, NOT four new wealth-tax lemma obligations or new ownership of Ibrahim's 2017 FLN and Monster 3B results. The distinction follows the shared reviewed-evidence reducer pattern in dashi_agda PR #1411, without editing the reducer or claiming its runtime is present in this branch.
+
+**Execution status:** 40,440 bounded Python model-oracle cases passed for canonical source partition and token aliases. An Agda compiler/typecheck was not available in the current environment. The test exercises arithmetic semantics only. The fiscal model remains hypothetical; no live trade, primary taxpayer record, physical capital observation or measured causal effect follows.
+
