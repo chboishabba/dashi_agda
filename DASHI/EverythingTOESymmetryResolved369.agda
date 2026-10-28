@@ -1,5 +1,13 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- C3 character/Fourier and trialectic 27-Cube chart, with two-sided inverses.
+import DASHI.Foundations.PolynomialC3FourierTrialecticChartExact as RootFourier
+open RootFourier public using
+  ( phaseCharacterRoundTrip ; characterPhaseRoundTrip
+  ; c3ProductIntertwinesFourierPhase ; c3FourierConjugateRows
+  ; synthesisFourierRoundTrip ; fourierSynthesisRoundTrip
+  ; cubeCharacterHomomorphismReused )
+
 -- Separate 120↔60×2 quintic parity atlas, exact arithmetic/369 identities,
 -- and attribution-preserving Ibrahim Pareto/snowball non-promotion gate.
 import DASHI.Foundations.QuinticPermutationTripleOrientationAtlasExact as QuinticAtlas
