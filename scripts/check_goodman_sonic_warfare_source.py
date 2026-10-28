@@ -148,6 +148,7 @@ def check() -> None:
         ("applySource", 8),
         ("toyMicrophoneReadout", 8),
         ("sourceActivity", 4),
+        ("toyMedium", 4),
         ("readAnswer", 8),
     ):
         matches = re.findall(rf"(?m)^{name} (.+?) =", transport)
@@ -159,6 +160,11 @@ def check() -> None:
         "jointReceiverAndSourceMonitor",
         "sourceMonitorAdequateForEmitterQuestion",
         "sourceMonitorStrictlyRefinesSelectedReceiver",
+        "jointObserverDoesNotIdentifyWholeWorld",
+        "fullObserverStrictlyRefinesJointObserver",
+        "fullObserverSeparatesToyWorlds",
+        "sameReceiverAndSourceReadingForDifferentMedia",
+        "differentMediaInSilentWorlds",
         "Observer.strictPairRefinement",
         "sourceMonitorSeparatesSilentSourceCollision",
         "receiverProjectionAdequateForReceiverQuestion",
@@ -169,6 +175,13 @@ def check() -> None:
         "toySourceOnProducesSignalInTransmittingCase",
     ):
         require(theorem in transport, f"missing finite transport theorem {theorem}")
+    # T4: Reject accidental partial case-splits in the full triple observer.
+    full_cases = re.findall(
+        r"(?m)^fullObserverSeparatesToyWorlds (\w+) (\w+) ", transport)
+    require(len(full_cases) == 16 and len(set(full_cases)) == 16,
+            "full observer must cover each of the sixteen ordered world pairs")
+    require("Observer.strictPairRefinement" in transport,
+            "T4 strict refinement must delegate to its original owner")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
