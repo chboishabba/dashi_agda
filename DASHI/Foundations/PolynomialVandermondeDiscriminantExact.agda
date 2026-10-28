@@ -1,0 +1,87 @@
+module DASHI.Foundations.PolynomialVandermondeDiscriminantExact where
+
+------------------------------------------------------------------------
+-- VIETE / VANDERMONDE / DISCRIMINANT: THE ACTUAL S3 ROOT BRANCH CUT.
+--
+-- Classical roots: Vandermonde (1770), Lagrange (1770-71), Galois
+-- (1830-32), and the standard discriminant. This exact rational
+-- three-root polynomial is an algebraic finite foundation for the
+-- video's branch-point discussion, NOT a complex covering theorem.
+--
+-- V=(a-b)(a-c)(b-c) has a sign representation of S3:
+-- EVEN C3 preserves V; ODD swaps negate V.
+-- Δ=V² is invariant under ALL six root permutations.
+-- Δ vanishes whenever any two of the three roots coincide.
+-- This is a genuine equivariant map separating A3 from odd S3,
+-- unlike the numeric 3^5/5^3/wave-operator analogies.
+--
+-- Proof uses the original rational-ring tactic and original Vieta/S3
+-- roots, never duplicates permutation or polynomial coefficients.
+-- All claims SOURCE-WRITTEN / AGDA KERNEL PENDING.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _-_; -_)
+import Data.Rational.Tactic.RingSolver as Ring
+
+import DASHI.Foundations.PolynomialVietaRootSymmetryExact as Vieta
+import DASHI.Foundations.TernaryEndomorphismConjugacyExact as S3
+
+vandermonde : Vieta.ThreeRoots → ℚ
+vandermonde (Vieta.roots a b c) =
+  (a - b) * (a - c) * (b - c)
+
+discriminant : Vieta.ThreeRoots → ℚ
+discriminant r = vandermonde r * vandermonde r
+
+isOdd : S3.TriPermutation → ℚ → ℚ
+isOdd S3.permIdentity x = x
+isOdd S3.permRotate x = x
+isOdd S3.permRotate2 x = x
+isOdd S3.permSwapLowMid x = - x
+isOdd S3.permSwapLowHigh x = - x
+isOdd S3.permSwapMidHigh x = - x
+
+-- This is the six-permutation sign character on the alternating
+-- root product. Odd swaps cannot preserve V generically.
+vandermondeTransformsByParity :
+  (p : S3.TriPermutation) (r : Vieta.ThreeRoots) →
+  vandermonde (Vieta.permuteRoots p r)
+  ≡ isOdd p (vandermonde r)
+vandermondeTransformsByParity S3.permIdentity r = refl
+vandermondeTransformsByParity S3.permRotate (Vieta.roots a b c) = Ring.solve-∀ a b c
+vandermondeTransformsByParity S3.permRotate2 (Vieta.roots a b c) = Ring.solve-∀ a b c
+vandermondeTransformsByParity S3.permSwapLowMid (Vieta.roots a b c) = Ring.solve-∀ a b c
+vandermondeTransformsByParity S3.permSwapLowHigh (Vieta.roots a b c) = Ring.solve-∀ a b c
+vandermondeTransformsByParity S3.permSwapMidHigh (Vieta.roots a b c) = Ring.solve-∀ a b c
+
+discriminantInvariant :
+  (p : S3.TriPermutation) (r : Vieta.ThreeRoots) →
+  discriminant (Vieta.permuteRoots p r)
+  ≡ discriminant r
+discriminantInvariant S3.permIdentity r = refl
+discriminantInvariant S3.permRotate (Vieta.roots a b c) = Ring.solve-∀ a b c
+discriminantInvariant S3.permRotate2 (Vieta.roots a b c) = Ring.solve-∀ a b c
+discriminantInvariant S3.permSwapLowMid (Vieta.roots a b c) = Ring.solve-∀ a b c
+discriminantInvariant S3.permSwapLowHigh (Vieta.roots a b c) = Ring.solve-∀ a b c
+discriminantInvariant S3.permSwapMidHigh (Vieta.roots a b c) = Ring.solve-∀ a b c
+
+firstSecondCollisionGivesZero :
+  (a c : ℚ) →
+  discriminant (Vieta.roots a a c) ≡ 0ℚ
+firstSecondCollisionGivesZero a c = Ring.solve-∀ a c
+
+firstThirdCollisionGivesZero :
+  (a b : ℚ) →
+  discriminant (Vieta.roots a b a) ≡ 0ℚ
+firstThirdCollisionGivesZero a b = Ring.solve-∀ a b
+
+secondThirdCollisionGivesZero :
+  (a b : ℚ) →
+  discriminant (Vieta.roots a b b) ≡ 0ℚ
+secondThirdCollisionGivesZero a b = Ring.solve-∀ a b
+
+-- This is a concrete discriminant vanishing implication. The
+-- converse (Δ=0 -> collision) and a nonzero complex coefficient
+-- covering/path-lift require field integral-domain and topology
+-- proofs, not finite root permutation tables alone.
