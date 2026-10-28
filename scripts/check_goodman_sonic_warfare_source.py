@@ -11,6 +11,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 MODULE = ROOT / "DASHI/Culture/GoodmanSonicWarfareExact.agda"
 RHYTHM = ROOT / "DASHI/Culture/GoodmanSonicWarfareRhythmInterventionExact.agda"
+TRANSPORT = ROOT / "DASHI/Culture/GoodmanSonicWarfareTransportExact.agda"
 DOC = ROOT / "Docs/papers/GoodmanSonicWarfare.md"
 ROOTS = [
     ROOT / "DASHI/EverythingTOESymmetryResolved369.agda",
@@ -29,10 +30,12 @@ def check() -> None:
     module = MODULE.read_text(encoding="utf-8")
     doc = DOC.read_text(encoding="utf-8")
     rhythm = RHYTHM.read_text(encoding="utf-8")
+    transport = TRANSPORT.read_text(encoding="utf-8")
     for owner in [
         "DASHI.Core.AttributedSourceCore",
         "DASHI.Core.SnowballAttributionProvenanceInvariantExact",
         "DASHI.Culture.GoodmanSonicWarfareRhythmInterventionExact",
+        "DASHI.Culture.GoodmanSonicWarfareTransportExact",
         "DASHI.Core.QueryIndexedProjectionAdequacyExact",
         "DASHI.Physics.ObserverConditionedTransportBridge",
         "DASHI.Biology.BioacousticMultimodalLagFactorisationExact",
@@ -132,6 +135,33 @@ def check() -> None:
             "causal readout must cover six distinct design-by-model cases")
     require("Hernan" in doc or "Hernán" in doc,
             "source report should attribute causal inference authors")
+    for owner in (
+        "DASHI.Physics.ObserverConditionedTransportBridge",
+        "DASHI.Core.QueryIndexedProjectionAdequacyExact",
+    ):
+        require(f"import {owner}" in transport,
+                f"transport must import inherited theorem owner {owner}")
+    require(not re.search(r"(?m)^\s*postulate\b", transport),
+            "new finite transport owner must not add postulates")
+    for name, expected in (
+        ("applySource", 8),
+        ("toyMicrophoneReadout", 4),
+        ("sourceActivity", 4),
+        ("readAnswer", 8),
+    ):
+        matches = re.findall(rf"(?m)^{name} (.+?) =", transport)
+        require(len(matches) == expected and len(set(matches)) == expected,
+                f"transport {name} must enumerate {expected} unique cases")
+    for theorem in (
+        "toyTransportSystem",
+        "receiverProjectionAdequateForReceiverQuestion",
+        "sourceActivityCollision",
+        "sameReceiverReadoutCannotRecoverEmitterActivity",
+        "sameSampleAtSelectedObserver",
+        "toySourceOnVsOffObservable",
+        "toySourceOnProducesSignalInTransmittingCase",
+    ):
+        require(theorem in transport, f"missing finite transport theorem {theorem}")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
