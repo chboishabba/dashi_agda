@@ -231,6 +231,39 @@ def main() -> None:
         "joinedIdentityAndCashReconcile", "syntheticPriceIdentityBatch",
     ):
         assert theorem in dashi_tax_bridge, "missing tax-market gate: " + theorem
+    # Follow-on must remain within the original application and TOE
+    # owner, with no synthetic receipt upgraded to verified market evidence.
+    for symbol in (
+        "ScopedNetWealthSnapshot",
+        "cashSourceUseIsSingleCounted",
+        "disposalPreservesExternalAssetTransferAccounting",
+        "routeFundingFeasibleGivenLiquidityCollateralAndTiming",
+        "controllingVotesRequireVerifiedRightsAndAgreements",
+        "persistentTransactionIdentityCannotFollowFromValueOrDigest",
+        "actualSettlementFinalityRequiresOfficialReceipt",
+        "financialClaimChangeDoesNotIdentifyPhysicalOutput",
+        "rivalPolicyTaxBasesRemainComparableButDistinct",
+        "StatutoryPolicyAdmission",
+        "finitePolicyStateTransitionPreservesAccounting",
+        "ExplicitBehaviourAssumptions",
+        "sameInitialStateDifferentInterventionComparison",
+        "syntheticModelCannotIdentifyObservedCausalEffect",
+        "authenticatedOwnerIssuerInstrumentClassKey",
+        "measuredPolicyEffectRequiresSameObjectInputs",
+        "noUniqueOptimalTaxRateFromParetoOrderAlone",
+    ):
+        assert symbol in dashi_tax_bridge, f"missing source-owned economy gate: {symbol}"
+    for symbol in (
+        "toeVotesAloneCannotDetermineLegalControl",
+        "toeDigestAloneCannotIdentifyHistoricalTransaction",
+        "toeFinancialClaimAloneCannotDetermineRealOutput",
+        "toeSyntheticForecastCannotEstablishObservedEffect",
+        "toeEvenTwoPolicyOptionsMayHaveDifferentParetoMinimalRates",
+    ):
+        assert symbol in bridge, f"missing TOE evidence firewall: {symbol}"
+    assert "open DashiTradeTax public using" in bridge, (
+        "follow-on sources not reachable from original TOE consumer"
+    )
     assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", dashi_tax_bridge), (
         "cross-domain application must not introduce axioms or termination bypass"
     )
