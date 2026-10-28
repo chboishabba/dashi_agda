@@ -165,16 +165,36 @@ packedAtOrbitAfterPacking source Orbit.thirdPositive27 = refl
 decodeAfterEncodeHermitian27 :
   (source : Hermitian27) (mode : I.ModeCube27) →
   packedMode (packHermitian27 source) mode ≡ coefficient source mode
-decodeAfterEncodeHermitian27 source mode with positiveSide mode
-... | true
-  rewrite packedAtOrbitAfterPacking source (Ant.antipodalClass27 mode)
-        | representativeMatchesSelectedOrientation mode = refl
-... | false
-  rewrite packedAtOrbitAfterPacking source (Ant.antipodalClass27 mode)
-        | representativeMatchesSelectedOrientation mode =
+decodeAfterEncodeHermitian27 source (I.modeCube M.modePlus b c)
+  rewrite packedAtOrbitAfterPacking source (Ant.antipodalClass27 (I.modeCube M.modePlus b c))
+        | representativeMatchesSelectedOrientation (I.modeCube M.modePlus b c) = refl
+decodeAfterEncodeHermitian27 source (I.modeCube M.modeMinus b c)
+  rewrite packedAtOrbitAfterPacking source (Ant.antipodalClass27 (I.modeCube M.modeMinus b c))
+        | representativeMatchesSelectedOrientation (I.modeCube M.modeMinus b c) =
   trans
-    (cong C3.conjC (conjugateAtNegative source mode))
-    (C3.conjugationInvolutive (coefficient source mode))
+    (cong C3.conjC (conjugateAtNegative source (I.modeCube M.modeMinus b c)))
+    (C3.conjugationInvolutive (coefficient source (I.modeCube M.modeMinus b c)))
+decodeAfterEncodeHermitian27 source (I.modeCube M.modeZero M.modePlus c)
+  rewrite packedAtOrbitAfterPacking source (Ant.antipodalClass27 (I.modeCube M.modeZero M.modePlus c))
+        | representativeMatchesSelectedOrientation (I.modeCube M.modeZero M.modePlus c) = refl
+decodeAfterEncodeHermitian27 source (I.modeCube M.modeZero M.modeMinus c)
+  rewrite packedAtOrbitAfterPacking source (Ant.antipodalClass27 (I.modeCube M.modeZero M.modeMinus c))
+        | representativeMatchesSelectedOrientation (I.modeCube M.modeZero M.modeMinus c) =
+  trans
+    (cong C3.conjC (conjugateAtNegative source (I.modeCube M.modeZero M.modeMinus c)))
+    (C3.conjugationInvolutive (coefficient source (I.modeCube M.modeZero M.modeMinus c)))
+decodeAfterEncodeHermitian27 source (I.modeCube M.modeZero M.modeZero M.modePlus)
+  rewrite packedAtOrbitAfterPacking source (Ant.antipodalClass27 (I.modeCube M.modeZero M.modeZero M.modePlus))
+        | representativeMatchesSelectedOrientation (I.modeCube M.modeZero M.modeZero M.modePlus) = refl
+decodeAfterEncodeHermitian27 source (I.modeCube M.modeZero M.modeZero M.modeMinus)
+  rewrite packedAtOrbitAfterPacking source (Ant.antipodalClass27 (I.modeCube M.modeZero M.modeZero M.modeMinus))
+        | representativeMatchesSelectedOrientation (I.modeCube M.modeZero M.modeZero M.modeMinus) =
+  trans
+    (cong C3.conjC (conjugateAtNegative source (I.modeCube M.modeZero M.modeZero M.modeMinus)))
+    (C3.conjugationInvolutive (coefficient source (I.modeCube M.modeZero M.modeZero M.modeMinus)))
+decodeAfterEncodeHermitian27 source (I.modeCube M.modeZero M.modeZero M.modeZero)
+  rewrite packedAtOrbitAfterPacking source (Ant.antipodalClass27 (I.modeCube M.modeZero M.modeZero M.modeZero))
+        | representativeMatchesSelectedOrientation (I.modeCube M.modeZero M.modeZero M.modeZero) = refl
 
 -- Source 13 nonzero orbits + one centre: a storage symmetry, not a
 -- quotient group operation or a reduction of real Fourier dimensions.
@@ -297,16 +317,45 @@ packedNineAtOrbitAfterPacking source Orbit.oppositeSignDiagonal9 = refl
 decodeAfterEncodeHermitian9 :
   (source : Hermitian9) (plane : Ant.Plane9) →
   packedPlane9 (packHermitian9 source) plane ≡ coefficient9 source plane
-decodeAfterEncodeHermitian9 source plane with planePositiveSide plane
-... | true
-  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 plane)
-        | planeRepresentativeMatchesSelectedOrientation plane = refl
-... | false
-  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 plane)
-        | planeRepresentativeMatchesSelectedOrientation plane =
+decodeAfterEncodeHermitian9 source (M.modeMinus , M.modeMinus)
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 (M.modeMinus , M.modeMinus))
+        | planeRepresentativeMatchesSelectedOrientation (M.modeMinus , M.modeMinus) =
   trans
-    (cong C3.conjC (conjugateAtNegative9 source plane))
-    (C3.conjugationInvolutive (coefficient9 source plane))
+    (cong C3.conjC (conjugateAtNegative9 source (M.modeMinus , M.modeMinus)))
+    (C3.conjugationInvolutive (coefficient9 source (M.modeMinus , M.modeMinus)))
+decodeAfterEncodeHermitian9 source (M.modeMinus , M.modeZero)
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 (M.modeMinus , M.modeZero))
+        | planeRepresentativeMatchesSelectedOrientation (M.modeMinus , M.modeZero) =
+  trans
+    (cong C3.conjC (conjugateAtNegative9 source (M.modeMinus , M.modeZero)))
+    (C3.conjugationInvolutive (coefficient9 source (M.modeMinus , M.modeZero)))
+decodeAfterEncodeHermitian9 source (M.modeMinus , M.modePlus)
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 (M.modeMinus , M.modePlus))
+        | planeRepresentativeMatchesSelectedOrientation (M.modeMinus , M.modePlus) =
+  trans
+    (cong C3.conjC (conjugateAtNegative9 source (M.modeMinus , M.modePlus)))
+    (C3.conjugationInvolutive (coefficient9 source (M.modeMinus , M.modePlus)))
+decodeAfterEncodeHermitian9 source (M.modeZero , M.modeMinus)
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 (M.modeZero , M.modeMinus))
+        | planeRepresentativeMatchesSelectedOrientation (M.modeZero , M.modeMinus) =
+  trans
+    (cong C3.conjC (conjugateAtNegative9 source (M.modeZero , M.modeMinus)))
+    (C3.conjugationInvolutive (coefficient9 source (M.modeZero , M.modeMinus)))
+decodeAfterEncodeHermitian9 source (M.modeZero , M.modeZero)
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 (M.modeZero , M.modeZero))
+        | planeRepresentativeMatchesSelectedOrientation (M.modeZero , M.modeZero) = refl
+decodeAfterEncodeHermitian9 source (M.modeZero , M.modePlus)
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 (M.modeZero , M.modePlus))
+        | planeRepresentativeMatchesSelectedOrientation (M.modeZero , M.modePlus) = refl
+decodeAfterEncodeHermitian9 source (M.modePlus , M.modeMinus)
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 (M.modePlus , M.modeMinus))
+        | planeRepresentativeMatchesSelectedOrientation (M.modePlus , M.modeMinus) = refl
+decodeAfterEncodeHermitian9 source (M.modePlus , M.modeZero)
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 (M.modePlus , M.modeZero))
+        | planeRepresentativeMatchesSelectedOrientation (M.modePlus , M.modeZero) = refl
+decodeAfterEncodeHermitian9 source (M.modePlus , M.modePlus)
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 (M.modePlus , M.modePlus))
+        | planeRepresentativeMatchesSelectedOrientation (M.modePlus , M.modePlus) = refl
 
 storedIndependentComplexPlanePairs : 4 ≡ 4
 storedIndependentComplexPlanePairs = refl
