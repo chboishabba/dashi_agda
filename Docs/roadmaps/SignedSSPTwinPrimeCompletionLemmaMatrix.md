@@ -172,7 +172,7 @@ twin-prime proof. The 75-ID architecture tally is unchanged.
 | E11 | Duplicate prime filter idempotence | S: same owner |
 | E12 | Fresh filters only remove candidates | P: monotonicity theorem / explicit refinement import |
 | E13 | Genuine twin p,p+2 passes each proper finite small-modulus filter | N: handle modulus equal to endpoint and range assumptions correctly |
-| E14 | For every finite certified prime sieve and every bound N, exhibit n≥N with both n and n+2 genuinely composite and all finite filters passed | S: for each nonempty list, `everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor`; uses exact `2P−1` baseline, true stdlib `Composite`, parameter bound. Empty list handled trivially; exact-head Agda kernel receipt pending |
+| E14 | ∀ finite certified-prime axis lists and N, construct n≥N with both endpoints Composite, and all local pair filters passed | S (kernel pending): `everyFinitePrimeSieveHasLargeDoubleCompositeSurvivor` covers empty and nonempty lists; no CRT inverse, coprimality or fixed SSP15 limit |
 | E15 | FRACTRAN decoded-exponent / CRT commuting square | S: signed ±2 both sides; raw (2^p) parity no-go; full VM interface outstanding |
 
 ## E14 max-cut: factorable double-composite family, no CRT inverse
@@ -223,6 +223,14 @@ merely numerical intuition. In
 - `everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor`
   packages **∀N, ∃n≥N** satisfying all finite sieve predicates
   while carrying `Composite n × Composite(n+2)`.
+
+The exported wrapper `everyFinitePrimeSieveHasLargeDoubleCompositeSurvivor`
+now completes the **empty-list** branch explicitly with baseline
+`r=2`, `P=1`, `t=N+1`. Its nonempty branch consumes the
+previous nonempty theorem, so the type quantifies over **all**
+finite certified-prime axis lists with no nonemptiness condition.
+The additional lemma has no new mathematical assumptions or
+postulates. All claims remain Agda **source-written only**.
 
 These are constructive finite-sieve obstruction theorems at the
 **source-written** level. They do not require a CRT inverse and do
