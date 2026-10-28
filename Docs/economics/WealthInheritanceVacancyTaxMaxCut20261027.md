@@ -366,3 +366,33 @@ Original independent roots: OECD *Financing of Social Protection* (9 Sep 2026, D
 P0: 42/42 requested source topics classified. P1: new Agda cross-domain source and shadow-only Python suite written, but exact-head Agda and GitHub CI run must be observed. P2: obtain same-object ownership, legal assessment, tax receipts, actual trades/refinancing, physical construction/worker-hour data; still open. P3: competing-policy causal/negative-control tests; still open. P4: selectively integrate into current-master specialist TOE roots and preserve Ibrahim first-link history and Monster 3B proof ownership; still open.
 
 **No policy authorisation, live trading, measured capacity, scientific discovery or economic causal validation is inferred from the synthetic examples.**
+
+## 14. Pareto/snowball increment: how tax receipts are financed and resources are produced
+
+The cross-repository tax/dashiTRADE owner is extended **in place**, not cloned into a new source ontology. The new Agda application FundingRoute explicitly supplies cash resources, newly borrowed funds, gross asset-sale proceeds, share counts, execution costs, and installed physical production units.
+
+For every synthetic funding fixture it requires the exact equality:
+
+    unrestricted_cash + new_loan_cash + gross_asset_sale_cash
+      = tax_cash_collected + execution_cost_cash
+
+Five Agda world fixtures reuse the same paid hypothetical tax but select different cash, loan, sale, execution-cost, and machine-capacity coordinates. Generic IntersectionalNonFactorability supplies three source-owned theorem applications:
+
+- paidTaxCannotDetermineUnitsSold: two worlds collect identical cash yet report zero versus two share units sold.
+- saleVolumeCannotDetermineExecutionCost: two worlds sell the same number of shares but incur distinct costs.
+- saleVolumeCannotDeterminePhysicalCapacity: two worlds sell two shares but carry different externally specified installed-machine stocks.
+
+The thin TOE consumer now re-exports these **existing-owner-based** negative results. This eliminates the unwarranted policy-chain inference from assessed liability to automatic forced sale, price impact or actual construction. A bounded accounting equality is not sufficient to infer borrowing capacity, actual sale volume, market-clearing prices, corporate control, or physical output. The model does not include market equilibrium, and these are not causal empirical statements.
+
+The standalone [dashiTRADE PR #3](https://github.com/chboishabba/dashiTRADE/pull/3) mirrors the same distinction with an immutable PaymentFundingRoute, strict exact-decimal input checks, a balance requirement and synthetic fixture tests. The new code is shadow-only and does not modify intent, execution, live controls or order routing.
+
+### Severe independent-original-source discrimination
+
+1. [Fagereng, Guiso and Ring, NBER WP 35262 (May 2026)](https://www.nber.org/papers/w35262) study slow portfolio allocation changes and different participation margins after actual Norway wealth-tax-induced equity-premium shifts. This does not imply every payment is funded by forced liquidations.
+2. [Minsoo Kim, Fund Flows, Liquidity, and Asset Prices, Management Science (11 June 2026), DOI 10.1287/mnsc.2025.01690](https://doi.org/10.1287/mnsc.2025.01690) studies forced selling **by bond mutual funds experiencing redemption shocks**, and bond liquidity. It provides a credible microstructure mechanism, not a measured effect of a personal wealth-tax ceiling or a validation of a dashiTRADE fill model.
+3. [Francesco Bianchi, Nicolò Ceneri, Leonardo Melosi and Alessandro T. Villa, Fiscal Policy and the Saving Glut of the Rich, NBER WP 35715 (September 2026)](https://www.nber.org/papers/w35715) study debt- versus inflation-financed transfers and wealth distribution through a structural macroeconomic model. It motivates separating **who holds new debt** from nominal spending and asset valuation, not an automatic welfare or market-price forecast.
+4. [OECD, Financing of Social Protection (9 September 2026)](https://doi.org/10.1787/b384fd31-en) records social-protection finance instruments and their different administrative/behavioural distortions. Collected money is not directly a quantified care-hour outcome.
+
+There is no source-independent observed estimate here of a hypothetical 100% annual billionaire ceiling. Repeated original-paper abstracts, provider page mirrors and code comments remain the same source lineage. Existing Ibrahim first-link navigation, Pareto/Zipf prior theorem owners and Monster 3B same-object constraints are not converted to finance experiments. Previous Crenshaw, Fraser, Marx, Georgist and feminist original authorship is preserved.
+
+The exact source-written implementation and independently specified negative controls are a **finite algebraic model**, not a physically measured system. The next frontier is an executed same-actor, same-date cash/borrowing/security-sale trace, institutional control documentation, and separate installation/workforce service-outcome measurements.
