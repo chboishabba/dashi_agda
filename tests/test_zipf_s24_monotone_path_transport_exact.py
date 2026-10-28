@@ -134,9 +134,9 @@ def test_dual_hall_cut_exactly_explains_marginal_equality_no_go():
     a,up,delta=cut
     assert delta==F(1,2)
     assert sum((x[z] for z in a),F())-sum((y[z] for z in up),F())==delta
-    assert all(not(any(v<=w for v,w in zip(z,right))
-                       and len(z)==len(right))
-                   for z in a if z==(0,1,2,2,3) for right in y)
+    assert all(not (len(z)==len(right)
+                    and all(v<=w for v,w in zip(z,right)))
+               for z in a if z==(0,1,2,2,3) for right in y)
 
 
 def test_dual_hall_cut_is_absent_for_true_majorization_couplings():
