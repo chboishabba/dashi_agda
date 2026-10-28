@@ -12,6 +12,7 @@ on:
       - "Docs/papers/GoodmanSonicWarfare.md"
       - "scripts/check_goodman_sonic_warfare_source.py"
       - "scripts/check_goodman_sonic_warfare_finite.py"
+      - "scripts/check_goodman_inverse_stability_finite.py"
       - ".github/workflows/goodman-sonic-warfare.yml"
   push:
     branches:
@@ -21,6 +22,7 @@ on:
       - "Docs/papers/GoodmanSonicWarfare.md"
       - "scripts/check_goodman_sonic_warfare_source.py"
       - "scripts/check_goodman_sonic_warfare_finite.py"
+      - "scripts/check_goodman_inverse_stability_finite.py"
 
 permissions:
   contents: read
@@ -34,3 +36,5 @@ jobs:
         run: python3 scripts/check_goodman_sonic_warfare_source.py
       - name: Enumerate finite Goodman / Ibrahim counterexamples (not Agda)
         run: python3 scripts/check_goodman_sonic_warfare_finite.py
+      - name: Enumerate rational inverse conditioning (not Agda or acoustics)
+        run: python3 scripts/check_goodman_inverse_stability_finite.py
