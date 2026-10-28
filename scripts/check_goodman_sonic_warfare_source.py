@@ -241,6 +241,8 @@ def check() -> None:
         "determinant = F(1, n)",
         "assert hidden_error / measurement_error == n",
         "assert condition == 2*(n+1)",
+        "two_channel_checks",
+        "assert two_channel_checks == 24",
         '"not_verified": [',
         '"Agda kernel"',
         '"calibrated sound"',
@@ -268,6 +270,9 @@ def check() -> None:
         "calibratedInverseRoundtrip",
         "ringPerturbation",
         "calibratedPerturbation",
+        "twoChannelRingPerturbation",
+        "calibratedTwoChannelPerturbation",
+        "commonModeSecondCoordinateRecovers",
     ):
         require(theorem in rational, f"missing T7 rational theorem {theorem}")
     require(rational.count("r * q ≡ 1ℚ") == 2,
@@ -281,6 +286,7 @@ def check() -> None:
     for assertion in (
         "calibratedInverseRoundtrip",
         "calibratedPerturbation",
+        "calibratedTwoChannelPerturbation",
         "Jacques Hadamard",
     ):
         require(assertion in doc, f"missing T7 proof/attribution memo {assertion}")
