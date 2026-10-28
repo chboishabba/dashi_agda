@@ -325,3 +325,65 @@ The complete updated per-ID dependency matrix remains
 The final frontier is concrete all-step Agda integer↔valuation
 equivalence and signed VM compilation, then number-theoretic pair
 correlation; no twin-prime theorem is claimed.
+
+
+## 2026-10-28 numerology max-cut: source-typed x/y/z and arithmetic CRT C2
+
+Further reuse searched the existing Ibrahim, Pareto, 369,
+Ogg/Monster and ternary-residual owners before constructing new
+arithmetic bridges. Full details, explicit map, primary-author roots,
+and every proof-status boundary:
+[SignedSSPPrimeNumerologyCrossPollinationLedger.md](SignedSSPPrimeNumerologyCrossPollinationLedger.md).
+
+The old `Ternary27Point` is **three independent balanced trits**
+`(x,y,z)` and already had `3×3×3=27`. Two different existing
+quotients must not be confused:
+- global strict antipodal: `27 = 1+13×2`, giving **14** orbit classes;
+- Ibrahim phase preserving: `T×(T²/C₂)`, giving `3×5=15`,
+  retaining the outer x phase but dropping one inner sign choice.
+
+New `TwinPrimeThreeAxisLocalThreeOrbitExact` gives an exact arithmetic
+interpretation of the prime-3 slice x=−1:
+`n=−1+3y+9z(mod27)` gives the nine representatives
+`2,5,8,11,14,17,20,23,26`, each with left/right residues
+`2,1(mod3)`. Swapping prime endpoints by `n↦−n−2(mod27)`
+is exactly the two-axis sign antipode, hence one centre + four
+two-point pairs = **five** local orbits. This imports the Ibrahim
+inner-orbit and source-owned actual certified-prime test.
+
+New `TwinPrime369IbrahimQuotientBoundaryExact` proves a **real
+arithmetic information-loss collision**: residues 5 and 20 have the
+same Ibrahim phase orbit but opposite true twin-start decisions.
+The quotient alone cannot decide primality; the older
+`BalancedTernaryAntipodalResidualCodecExact` full code restores
+the original three axes. Equal numeric counts (14 historical Guy
+FRACTRAN instructions, 14 global orbits, 15 Ogg carrier primes,
+15 Ibrahim inner-phase orbit names, 10 factors used by PRIMEGAME)
+do not create cross-object identity.
+
+New `TwinPrimeTernary270AffineCRTCodecExact` goes beyond
+coincidence: the actual 2/3/5 arithmetic finite sieve has **27**
+residue survivors modulo `270=27×2×5`. A concrete affine map
+from x/y/z cube points is
+`n=(41+108d(x)+30d(y)+90d(z)) mod270`, with
+`d(−1)=0,d(0)=1,d(+1)=2`. A 27-case lookup gives a
+source-written left inverse; all 27 cases pass the true
+`LocalPairSurvives` for certified 2,3,5 axes. Global sign inversion
+corresponds to affine endpoint swap `n↦−n−2(mod270)`.
+There is one fixed residue, 269, plus thirteen opposite pairs.
+Independent local exhaustive Python checks establish that the
+image equals ALL 27 finite arithmetic survivors. **The Agda file
+does not yet have a theorem of surjectivity onto the entire
+modulo-270 arithmetic survivor set**. General CRT and prime
+correlation remain open.
+
+A source-owned nine-axis Pareto chart has 3+3+3 axes and
+`3⁹=19683`; the exceptional five-trit `3⁵=243` owner in PR #1389
+is a different mathematical object, and `5³=125` is numerically
+different. These counts furnish typed diagnostics, not
+a new prime-distribution estimate. No CI, ESD edits, postulates,
+Ibrahim 3B ownership transfer, or Monster same-object promotions.
+
+The 75-ID completion matrix marks E05/E06 as having a **finite
+special case** only; the general CRT inverse and numeric signed
+FRACTRAN→prime-output machine simulation remain outstanding.
