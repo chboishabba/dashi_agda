@@ -21,6 +21,7 @@ module DASHI.Foundations.PolynomialVandermondeDiscriminantExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
 
@@ -127,8 +128,6 @@ discriminantDependsOnlyOnVietaCoefficients
 -- We do not misreport this as an unconditional proof until the two
 -- rational laws are instantiated with the installed stdlib version.
 ------------------------------------------------------------------------
-
-open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 record RationalDomainLawWitness : Set where
   field
