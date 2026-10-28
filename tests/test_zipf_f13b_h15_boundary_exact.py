@@ -101,6 +101,9 @@ def test_guarded_agda_source_has_no_unsafe_axiom_or_false_promotion():
             assert banned not in content
     assert 'Nat.NonZero (Fraction.denominator a)' in guarded
     assert 'addition-preserved' in guarded and 'sourceHurwitzEqualsRationalFold' in guarded
+    assert 'ConcreteAddLaw : Set' in guarded
+    assert 'concreteRankTermPreserved' in guarded
+    assert 'concreteSourceHurwitzEqualsRationalFold' in guarded
     assert 'fullCurveCannotRecoverRepeatedIdentity' in h15
     assert 'finiteZipfWeightIdentificationPaid' not in f13 or 'false' in f13
     for name in ('ZipfFractionFoldConditionalExact',
