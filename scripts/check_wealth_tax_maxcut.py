@@ -187,6 +187,50 @@ def test_ai_proposed_idle_equity_schedule_is_not_victoria_vrlt() -> None:
     # Same first two bps are numerical coincidences, not identical tax bases.
     assert proposed_idle_equity_rate_bps(1) == 100
 
+
+def test_constructive_finite_axis_pareto() -> None:
+    """Independent bounded oracle for finite nonempty Pareto existence.
+
+    This tests the numeric interpretation of the Agda finite-axis summed
+    rank, not its Agda syntax, kernel validity or a welfare-policy outcome.
+    The candidate set is explicitly enumerated; every coordinate is
+    included in the rank. No infeasible candidate is admitted.
+    """
+    from itertools import product
+    from random import Random
+
+    def dominated_by(other: tuple[int, ...], selected: tuple[int, ...]) -> bool:
+        return (all(x <= y for x, y in zip(other, selected))
+                and any(x < y for x, y in zip(other, selected)))
+
+    total = 0
+    for axes, candidates in ((0, 4), (1, 4), (2, 4), (3, 3)):
+        for flattened in product(range(3), repeat=axes * candidates):
+            points = [tuple(flattened[i * axes:(i + 1) * axes])
+                      for i in range(candidates)]
+            ranked = min(range(candidates), key=lambda i: sum(points[i]))
+            assert not any(dominated_by(other, points[ranked])
+                           for other in points)
+            total += 1
+
+    rng = Random(20261028)
+    for _ in range(2048):
+        n_axes = rng.randrange(1, 9)
+        n_candidates = rng.randrange(1, 19)
+        points = [tuple(rng.randrange(100) for _ in range(n_axes))
+                  for _ in range(n_candidates)]
+        ranked = min(range(n_candidates), key=lambda i: sum(points[i]))
+        assert not any(dominated_by(other, points[ranked])
+                       for other in points)
+        total += 1
+
+    # If the axis enumeration is incomplete, an unlisted-axis improvement
+    # may leave identical selected ranks and invalidate Pareto minimality.
+    omitted_axis_worlds = ((0, 9), (0, 0))
+    assert sum(omitted_axis_worlds[0][:1]) == sum(omitted_axis_worlds[1][:1])
+    assert dominated_by(omitted_axis_worlds[1], omitted_axis_worlds[0])
+    assert total == 3**0 + 3**4 + 3**8 + 3**9 + 2048
+
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
@@ -199,4 +243,5 @@ if __name__ == "__main__":
     test_assessment_vs_interim_growth()
     test_ai_risk_score_does_not_determine_tax_law()
     test_ai_proposed_idle_equity_schedule_is_not_victoria_vrlt()
-    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites")
+    test_constructive_finite_axis_pareto()
+    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto exhaustive/random oracle")
