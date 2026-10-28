@@ -1,4 +1,24 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+
+-- Sourced finite polynomial-root monodromy / 243-vs-125 / quaternion C3 lift.
+-- The same owner carries explicit non-promotion flags for quintic and topology.
+import DASHI.Foundations.PolynomialMonodromyTernaryQuaternionBridgeExact as PolynomialMonodromy
+open PolynomialMonodromy public using
+  ( adjacentSwapsCommutatorIsThreeCycle
+  ; c3CannotProduceAnAdjacentSwap
+  ; coefficientReturnsAfterLabelMotion
+  ; swapChangesIdentityLabelling
+  ; fiveTritCountIs243
+  ; threeFiveModeCountIs125
+  ; differentArithmeticCounts
+  ; spinThirdTurnHasUnitNorm
+  ; spinConjugationIntertwinesABCThreeCycle
+  ; spinThreeStepsCentralMinus
+  ; spinSixStepsIdentity
+  ; finiteQ8CentralSignIsInvisible
+  ; actualComplexMonodromyNotConstructed
+  ; quinticUnsolvabilityNotConstructed
+  )
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
