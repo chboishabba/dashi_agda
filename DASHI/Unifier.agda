@@ -1872,3 +1872,12 @@ unifierThreeModeBinaryTernaryDoesNotProveNS :
     ModeNSCut.canonicalThreeModeCodecNSAuthority ≡ false
 unifierThreeModeBinaryTernaryDoesNotProveNS =
   ModeNSCut.threeModeCodecIsNotAnNSProof
+
+-- Existing framed-27 trit codec is a basis-label representation.
+-- Exact NS k in Z^3 must not be confused with its C3^3 sample residue.
+unifierNS27ModeCubeQuadraticAlias :
+  ModeNSCut.threeAxisPeriodicallyAliasedPlusXSquare
+    ≡ ModeNSCut.threeAxisBalancedModeCube
+        ModeNSCut.modeMinus ModeNSCut.modeZero ModeNSCut.modeZero
+unifierNS27ModeCubeQuadraticAlias =
+  ModeNSCut.periodicThreeAxisPositiveXSquareWrapsToNegativeX
