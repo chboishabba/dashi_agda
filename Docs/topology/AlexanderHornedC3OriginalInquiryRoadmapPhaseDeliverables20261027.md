@@ -614,3 +614,95 @@ no postulates or escape hatches; Agda is
 source-written, not kernel typechecked.
 The integer/rational finite script is
 a test of exact finite consequences only.
+
+
+### I. Separate true ternary commutator tower: optional algebraic research lane
+
+The previous balanced trit code is an observer/retraction on Hatcher's
+**binary** horned source; it does not change geometry. To honour the
+stronger user question ("what IF balanced ternary is an actual
+refinement?"), we now also build a distinct three-child group tower:
+
+```text
+T_n = F< y_(c,w) | c in C3, w in {-1,0,+1}^n >
+rank(T_n) = 3 * 3^n
+psi_n(y_(c,w)) =
+    [y_(c,w-), y_(c,w0)] [y_(c,w0), y_(c,w+)]
+          = a b A c B C           (free reduced word)
+```
+
+The word length of the image of a generator is exactly SIX.
+For each distinct source letter, the three descendant generators
+occupy a disjoint F3 free-product block. A reduced source word
+cannot acquire cancellation at block boundaries: different
+parent blocks have disjoint letters; consecutive same-sign
+occurrences in the same block end/start in different children;
+inverse adjacent occurrences were excluded by source reduction.
+Thus the expansion of a reduced word of length L has length
+**6L**. This supplies an all-depth PAPER NORMAL-FORM proof
+that every `psi_n` is injective. Because all images lie in
+the commutator subgroup, `colim T_n` has trivial abelianisation;
+injectivity preserves nontriviality. The three external sector
+permutations commute with the ternary substitution.
+The existing free-factor argument gives an outer C3 on this
+**new abstract tower**, conditional only on its algebraic
+factor-group construction.
+
+NEW source:
+`AlexanderHornedBalancedTernaryCommutatorTowerExact.agda`
+constructs this syntax/sector action and rotation/refinement
+commuting square. Its finite normal-form consumer
+`scripts/alexander_horned_balanced_ternary_commutator_tower.py`
+was independently replayed locally: 7000 reduced-word test
+cases across stages 0..3, no cancellation, sixfold length,
+C3 equivariance and zero abelianisation, PASS. Exact root word
+lengths at stage 0..5 are `1,6,36,216,1296,7776`.
+These are tests of a theorem supported by the above direct
+normal-form proof, NOT Agda kernel or ambient topology receipts.
+
+The physical fully expanded selected root-cube circuit would
+have `3*6^n` word gates under this alternative, rather than
+the original binary `3*4^n`. One must not reuse the
+binary per-gate noise-depth curve without replacing its
+gate-count and validating any physical compilation.
+
+**P0 gap remains:** a three-child geometric 3D
+wild-handlebody tower with actual van Kampen inclusions
+realizing the selected commutator word. The #1254
+1->3 two-pants surface is a **2D cobordism**, not
+a proof of this specific 3D meridian relation.
+The new ternary tower is therefore an alternative
+mathematical research object, not a new proof of
+Hatcher's original `G_A` or a geometric realization
+of the same (B).
+
+### J. New source and proof receivers
+
+The canonical `DASHI/EverythingTOESymmetryResolved369.agda`
+now IMPORTS (without copying proof bodies) the two new
+horn-balanced-ternary modules. No protected ESD
+module, `DASHI/Unifier.agda` placeholder surface,
+VOA same-object receiver or Ibrahim Monster 3B
+proof ownership is changed. In particular, the
+actual signed fibre, sector C3 and rational xi
+involutions meet only through the proved PRODUCT
+commuting square, not through a representation
+isomorphism between Riemann zeros, Monster phases,
+Z3 orbifold inertia and Hatcher meridians.
+
+**Non-promotion acceptance:** there are TWO valid
+binary/ternary paths with different semantic types:
+
+1. `Hatcher binary source -> embedded nonzero trits ->
+   balanced full observer (with zero fibre)`, a chosen
+   symbolic encoding with left-inverse.
+2. `new ternary free tower -> C3 action / six-letter
+   commutator substitution`, its own distinct
+   algebraic group and as-yet UNSUPPLIED 3D geometry.
+
+Do not collapse these, or identify two abstract
+semidirect products merely because both have an
+external C3. For genuine orbifold completion, retain
+the original split exact sequence plus geometric
+homotopy quotient instance as a separately audited
+target; the paper formula already exists.
