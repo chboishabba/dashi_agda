@@ -2557,7 +2557,7 @@ fundingEntryMemberProjects :
   RankedMember candidate entries →
   RankedMember (taggedFunding candidate) (fundingEntryTags entries)
 fundingEntryMemberProjects candidate [] ()
-fundingEntryMemberProjects candidate (candidate ∷ rest) ranked-here =
+fundingEntryMemberProjects .candidate (candidate ∷ rest) ranked-here =
   ranked-here
 fundingEntryMemberProjects candidate (first ∷ rest)
   (ranked-there inRest) =
