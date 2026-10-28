@@ -2440,3 +2440,39 @@ finiteParetoFrontierIsNonempty costs axes complete head rest =
 -- Registry-issued tax evidence, real-world feasible scenario enumeration,
 -- source authority and any economic policy effect remain X01-X10 obligations.
 
+------------------------------------------------------------------------
+-- I07 executable-type source witness for the ORIGINAL two-axis policy
+-- fixture. This shows that the finite-axis completeness premise is
+-- inhabited for the exact source-defined policy cost hyperfabric.
+-- Two undominated outcomes do NOT imply a unique optimal tax policy.
+------------------------------------------------------------------------
+
+policyTradeoffAxisCoverage :
+  (axis : PolicyTradeoffAxis) →
+  RankedMember axis (administrationAxis ∷ careShortfallAxis ∷ [])
+policyTradeoffAxisCoverage administrationAxis = ranked-here
+policyTradeoffAxisCoverage careShortfallAxis = ranked-there ranked-here
+
+admittedCheapAdministration :
+  Pareto.AdmissibleStratumPoint policyOutcomeProblem
+admittedCheapAdministration =
+  Pareto.admissibleStratumPoint lowAdministrativeCost tt tt
+
+admittedCareCapacity :
+  Pareto.AdmissibleStratumPoint policyOutcomeProblem
+admittedCareCapacity =
+  Pareto.admissibleStratumPoint increasedCareCapacity tt tt
+
+twoAxisPolicyFrontierIsNonempty :
+  NonemptyRankedParetoFront policyTradeoffCosts
+    (λ candidate →
+      finiteAxisCostSum policyTradeoffCosts
+        (administrationAxis ∷ careShortfallAxis ∷ [])
+        (Pareto.model candidate))
+    admittedCheapAdministration (admittedCareCapacity ∷ [])
+twoAxisPolicyFrontierIsNonempty =
+  finiteParetoFrontierIsNonempty policyTradeoffCosts
+    (administrationAxis ∷ careShortfallAxis ∷ [])
+    policyTradeoffAxisCoverage
+    admittedCheapAdministration (admittedCareCapacity ∷ [])
+
