@@ -145,9 +145,9 @@ fourGridFlagIfAndOnlyIfActuallySelfNegativeForward :
   fourGridAntipode g ≡ g → fourFixedCube g ≡ true
 fourGridFlagIfAndOnlyIfActuallySelfNegativeForward
   (Four.fourCube a b c) proof
-  rewrite fourAxisFixedIffFlagForward a (cong Four.x proof)
-        | fourAxisFixedIffFlagForward b (cong Four.y proof)
-        | fourAxisFixedIffFlagForward c (cong Four.z proof) = refl
+  rewrite fourAxisFixedIffFlagForward a (cong Four.FourGridCube64.x proof)
+        | fourAxisFixedIffFlagForward b (cong Four.FourGridCube64.y proof)
+        | fourAxisFixedIffFlagForward c (cong Four.FourGridCube64.z proof) = refl
 
 fourGridFlagIfAndOnlyIfActuallySelfNegativeBackward :
   (g : Four.FourGridCube64) →
@@ -277,9 +277,9 @@ fiveGridFlagIfAndOnlyIfActuallySelfNegativeForward :
   fiveGridAntipode g ≡ g → fiveFixedCube g ≡ true
 fiveGridFlagIfAndOnlyIfActuallySelfNegativeForward
   (Full.gridCube a b c) proof
-  rewrite fiveAxisFixedIffFlagForward a (cong Full.x proof)
-        | fiveAxisFixedIffFlagForward b (cong Full.y proof)
-        | fiveAxisFixedIffFlagForward c (cong Full.z proof) = refl
+  rewrite fiveAxisFixedIffFlagForward a (cong Full.GridCube125.x proof)
+        | fiveAxisFixedIffFlagForward b (cong Full.GridCube125.y proof)
+        | fiveAxisFixedIffFlagForward c (cong Full.GridCube125.z proof) = refl
 
 fiveGridFlagIfAndOnlyIfActuallySelfNegativeBackward :
   (g : Full.GridCube125) →
