@@ -64,6 +64,19 @@ class IntakeTest(unittest.TestCase):
             gate.enforce_spatial_buffer(rows, assignments, 0.05)
         gate.enforce_spatial_buffer(rows, assignments, 0.005)
 
+    def test_source_identities_and_position_manifest_provenance(self):
+        # A valid archive manifest is not sufficient: a partial or
+        # duplicated position table is not a held-out benchmark.
+        from collections import Counter
+        expected = {"A1": 4096, "A2": 4096, "D1": 1089, "R2": 4096}
+        good = [(sc, str(i)) for sc, n in expected.items() for i in range(n)]
+        self.assertEqual(len(good), 13377)
+        self.assertEqual(dict(Counter(sc for sc, _ in good)), expected)
+        duplicated = good + [good[0]]
+        self.assertEqual(len(set(duplicated)), 13377)
+        self.assertNotEqual(len(duplicated), len(set(duplicated)))
+        self.assertNotEqual(len(set(good[:-1])), 13377)
+
     def test_paired_correlation_is_not_discarded(self):
         pairs = [(0.0, 0.0), (1.0, 1.0), (2.0, 2.0)]
         got = gate.correlated_error_budget(pairs, 3)
