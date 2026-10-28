@@ -198,6 +198,15 @@ exactQuadraticModeSum modePlus modeMinus = wideZero
 exactQuadraticModeSum modePlus modeZero = widePlusOne
 exactQuadraticModeSum modePlus modePlus = widePlusTwo
 
+-- Correct Galerkin projection is partial: outputs outside the
+-- retained integer mode window are discarded, NOT wrapped.
+exactRetainedModeProjection : FiveMode → Maybe ThreeMode
+exactRetainedModeProjection wideMinusTwo = nothing
+exactRetainedModeProjection wideMinusOne = just modeMinus
+exactRetainedModeProjection wideZero = just modeZero
+exactRetainedModeProjection widePlusOne = just modePlus
+exactRetainedModeProjection widePlusTwo = nothing
+
 -- The three-point DFT identifies residue classes modulo 3.
 -- This is an intentionally lossy projection of exact integer Fourier labels.
 periodicThreePointFold : FiveMode → ThreeMode
@@ -218,6 +227,20 @@ positivePositiveLeavesThreeModeWindow = refl
 positivePositiveAliasesToNegative :
   periodicQuadraticModeSum modePlus modePlus ≡ modeMinus
 positivePositiveAliasesToNegative = refl
+
+-- The selected positive-positive quadratic product leaves no retained
+-- coefficient at k=-1 when projected in the exact integer lattice.
+correctQuadraticProjectionRemovesPlusTwo :
+  exactRetainedModeProjection
+    (exactQuadraticModeSum modePlus modePlus) ≡ nothing
+correctQuadraticProjectionRemovesPlusTwo = refl
+
+-- Evaluating the same product pointwise on three samples instead
+-- spuriously creates a retained negative-frequency contribution.
+incorrectQuadraticFoldCreatesMinusOne :
+  just (periodicQuadraticModeSum modePlus modePlus) ≡ just modeMinus
+incorrectQuadraticFoldCreatesMinusOne = refl
+
 
 negativeNegativeLeavesThreeModeWindow :
   exactQuadraticModeSum modeMinus modeMinus ≡ wideMinusTwo
