@@ -24,6 +24,7 @@ module DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryFibreActionExact w
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Product using (_,_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
@@ -92,7 +93,7 @@ transitiveAction : ∀ {n} (f target : PhaseField n)
   (x : End.BalancedLevel n) →
   act (difference f target) f x ≡ target x
 transitiveAction f target x
-  rewrite sym (C3.associative (target x)
+  rewrite C3.associative (target x)
                           (C3.inverse (f x)) (f x))
         | C3.inverseLeft (f x)
         | C3.rightIdentity (target x) = refl
