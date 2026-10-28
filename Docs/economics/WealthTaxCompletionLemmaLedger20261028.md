@@ -210,3 +210,7 @@ Existing TOE consumer: DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda.
 - No new clearing adapter or live broker execution. The original dashiTRADE PR #3 Python shadow suite remains a separate executable implementation, not proof of this Agda type.
 
 **Current scoped ledger status: 47 D / 9 R / 21 N, out of 77.** No observed Agda compiler certificate, and no X01–X10 same-object empirical record suite.
+
+## 2026-10-28 D11 × D12 ordered identity/cash join
+
+The earlier separate finite fill uniqueness and cash conservation receipts did not establish that their *lists* were related. JoinedPriceIdentityBatch now carries one ordered list of (timestamped ID, priced fill) pairs. It requires exact equality between that full price/quantity projection and the settled cash batch's original list, unique local tokens, and common issuer/class labels. joinedIdentityAndCashReconcile composes the prior D11 cash equation with the D12 token property. A two-fill positive witness has gross cash 3. This does not verify real exchange identity, custody finality or tax payment. All construction is source-written; compiler certification remains unobserved. No status tally is changed: **47 D / 9 R / 21 N**.
