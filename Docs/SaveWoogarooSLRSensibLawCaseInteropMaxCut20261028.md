@@ -117,3 +117,14 @@ and SLR #75/#54 (protected candidates and real reopened cases) are
 unmerged independent work, not assumed imported or proved. All original
 legislative, QUT, QCC, SWFG, Stockland, court and prior Ibrahim/Monster
 3B ownership stays intact. No ESD code was touched.
+
+
+**Additional snowball implementation:** SLR #59 now reuses the previously
+owned `investigation_acquisition::potential_reopening_cone` for
+`packet -> closure obligation -> original seven-ground key -> candidate
+Matter review`. Exact G01-G28 binds to the existing SLR case. The output
+retains `creates_actual_reopening=false` and
+`creates_semantic_authority=false`; it neither pays evidence nor imports
+an unmerged sibling's persistence flow. Source-written Rust regression
+covers direct ID retention, the advice second-order cone and rejection
+of unknown packet IDs. Cargo execution remains unverified.
