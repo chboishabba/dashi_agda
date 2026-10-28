@@ -1533,3 +1533,72 @@ twoIdentifiedChronologicalFills =
 -- Even a structurally valid finite list is not an authenticated broker,
 -- exchange, nominee/custodian or ASX settlement allocation receipt.
 
+------------------------------------------------------------------------
+-- D11 × D12 SAME-SEQUENCE REFINEMENT.
+-- A separate list of unique tokens cannot certify the cash fills unless
+-- the *entire ordered price/quantity projection* is explicitly matched.
+-- This is local list equality, not broker/custody historical authentication.
+------------------------------------------------------------------------
+
+record JoinedPriceIdentityFill : Set where
+  constructor joined-price-identity-fill
+  field
+    timedPart : TimestampedFill
+    pricedPart : PriceQuantityFill
+open JoinedPriceIdentityFill public
+
+pricedProjection : List JoinedPriceIdentityFill → List PriceQuantityFill
+pricedProjection [] = []
+pricedProjection (fill ∷ rest) =
+  pricedPart fill ∷ pricedProjection rest
+
+timedProjection : List JoinedPriceIdentityFill → List TimestampedFill
+timedProjection [] = []
+timedProjection (fill ∷ rest) =
+  timedPart fill ∷ timedProjection rest
+
+record JoinedPriceIdentityBatch : Set where
+  constructor joined-price-identity-batch
+  field
+    settledCashBatch : CashReconciledFillBatch
+    joinedFills : List JoinedPriceIdentityFill
+    issuerOfJoinedBatch : String
+    classOfJoinedBatch : String
+    fullPriceSequenceMatched :
+      pricedProjection joinedFills ≡ settledFills settledCashBatch
+    distinctJoinedTokens : UniqueFillTokens (timedProjection joinedFills)
+    allJoinedLabelsMatched :
+      AllFillLabelsMatch issuerOfJoinedBatch classOfJoinedBatch
+        (timedProjection joinedFills)
+open JoinedPriceIdentityBatch public
+
+joinedIdentityAndCashReconcile :
+  (batch : JoinedPriceIdentityBatch) →
+  recordedGrossCash (settledCashBatch batch)
+    ≡ grossFromFiniteSettledFills (pricedProjection (joinedFills batch))
+  × UniqueFillTokens (timedProjection (joinedFills batch))
+joinedIdentityAndCashReconcile batch =
+  trans
+    (settledProceedsMatchRecordedCash (settledCashBatch batch))
+    (cong grossFromFiniteSettledFills
+      (sym (fullPriceSequenceMatched batch))) ,
+  distinctJoinedTokens batch
+
+syntheticPriceIdentityBatch : JoinedPriceIdentityBatch
+syntheticPriceIdentityBatch =
+  joined-price-identity-batch
+    twoFillGenericWitness
+    (joined-price-identity-fill syntheticFill7 (price-quantity-fill 1 1)
+      ∷ joined-price-identity-fill syntheticFill8 (price-quantity-fill 1 2)
+      ∷ [])
+    "fixture-issuer" "fixture-ordinary"
+    refl twoDistinctTokensAreUnique twoFillLabelsAgree
+
+syntheticJoinedTwoFillCash :
+  recordedGrossCash (settledCashBatch syntheticPriceIdentityBatch) ≡ 3
+syntheticJoinedTwoFillCash = refl
+
+-- Even this exact sequence reconciliation cannot prove that the original
+-- broker issued these IDs, the buyer received title, the seller funded a
+-- prior tax liability or any named investor owns a real voting share.
+
