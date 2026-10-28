@@ -59,3 +59,12 @@ P0: compile `ZipfFractionAddRationalBridgeExact.agda`, `ZipfFractionFoldConditio
 P1: replace the adapter's identifier-only `finiteZipfWeightIdentificationPaid=false` with a *typed verified evidence bridge* ONLY when the prior theorem has typechecked; preserve existing historical authors and evidence tiers.
 
 P2: formalize the existing constructive S24 pair-switch/HLP chain and H08 all-count sharp histories over the already-owned probability, finite-statistics and chronology carriers; use the 27 subject contracts to avoid falsely proving empirical power-laws.
+
+
+## Agda toolchain compatibility clarification
+
+The repository's existing `scripts/run_agda29_parallel_check.sh` targets Agda **2.9** and defaults `AGDA_STDLIB_REF=experimental` (the local standard-library source path may override it). The existing `dashi-agda.agda-lib` also depends on `standard-library`, `dchott-agda`, `bishop` and `cubical-0.9`.
+
+The public `agda-stdlib/master` pages document the **specific theorem names used by this proof**; however, public latest docs are **not** a verification that the repository's actual experimental pin elaborates those terms, nor that the full dchott/bishop/cubical import graph compiles. A legitimate final receipt must include the exact Agda binary version, stdlib commit, invocation and successful kernel result. Until then, the proof remains source-written.
+
+The appropriate existing local workflow is the repository's `scripts/run_agda29_parallel_check.sh` with a focused target `DASHI/Statistics/ZipfFractionAddRationalBridgeExact.agda`, followed by `ZipfFractionFoldConditionalExact.agda` and `ZipfFamilyEverything.agda`. Do not edit any protected ESD path, import master-only owner modules onto this diverged branch without verifying their actual availability, or use CI green as a substitute for interpreting concrete proof types.
