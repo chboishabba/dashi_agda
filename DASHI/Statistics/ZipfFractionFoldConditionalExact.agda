@@ -19,8 +19,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base as Nat using (NonZero; nonZero)
 import Data.Nat.Properties as NatP
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Data.Rational.Base as R using (ℚ; 0ℚ; _+_; normalize)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Statistics.ZipfFamilyFiniteExact as Finite
@@ -120,3 +120,75 @@ sourceHurwitzEqualsRationalFold I (suc n) shift exponent =
       (ℚP.+-comm
         (Normal.rawSum n shift exponent)
         (Normal.rawTerm n shift exponent)))
+
+
+------------------------------------------------------------------------
+-- F13b Pareto reduction: the *actual* quotient interpretation is fixed.
+-- No global division is attempted on raw denominator-zero fractions.
+-- The ZERO and TERM laws are concrete. Only cross-denominator addition
+-- compatibility remains as a separately typed mathematical obligation.
+------------------------------------------------------------------------
+
+concreteInterpret :
+  (a : Finite.Fraction) →
+  Nat.NonZero (Fraction.denominator a) → ℚ
+concreteInterpret a denominatorNonZero =
+  R.normalize (Fraction.numerator a) (Fraction.denominator a)
+    {{denominatorNonZero}}
+
+concreteZeroPreserved :
+  concreteInterpret Finite.zeroFraction Nat.nonZero ≡ 0ℚ
+concreteZeroPreserved = refl
+
+-- The source's unreduced per-rank numerator/denominator is exactly
+-- (1, mandelbrotDenominator r shift exponent).
+concreteRankTermPreserved : ∀ r shift exponent →
+  concreteInterpret
+    (Finite.finiteMandelbrotTerm r shift exponent)
+    (Finite.mandelbrotDenominatorNonZero r shift exponent)
+  ≡ Normal.rawTerm r shift exponent
+concreteRankTermPreserved r shift exponent =
+  sym (Normal.rawTermMatchesSource r shift exponent)
+
+-- This is the SINGLE unpaid F13b equation. It has a constrained domain.
+-- It is a type, not an axiom declaration, inhabitant, proof token or Bool.
+ConcreteAddLaw : Set
+ConcreteAddLaw =
+  (a b : Finite.Fraction) →
+  (a≢0 : Nat.NonZero (Fraction.denominator a)) →
+  (b≢0 : Nat.NonZero (Fraction.denominator b)) →
+  concreteInterpret (Finite.addFraction a b)
+    (NatP.m*n≢0
+      (Fraction.denominator a) (Fraction.denominator b)
+      {{a≢0}} {{b≢0}})
+  ≡ concreteInterpret a a≢0 + concreteInterpret b b≢0
+
+concreteFractionInterpretation :
+  ConcreteAddLaw → PositiveFractionInterpretation
+concreteFractionInterpretation addLaw = record
+  { interpret = concreteInterpret
+  ; zero-preserved = concreteZeroPreserved
+  ; addition-preserved = addLaw
+  }
+
+concreteZipfInterpretation :
+  ConcreteAddLaw → ZipfPositiveFractionInterpretation
+concreteZipfInterpretation addLaw = record
+  { positiveInterpretation = concreteFractionInterpretation addLaw
+  ; rank-term-preserved = concreteRankTermPreserved
+  }
+
+-- All earlier fold work can now be consumed by providing JUST the
+-- concrete cross-denominator addition theorem. This is deliberately
+-- conditional and never registered as an unconditional paid F13b.
+concreteSourceHurwitzEqualsRationalFold :
+  (addLaw : ConcreteAddLaw)
+  (count shift exponent : Nat) →
+  concreteInterpret
+    (Finite.finiteHurwitz count shift exponent)
+    (Finite.finiteHurwitzDenominatorNonZero count shift exponent)
+  ≡ Normal.rawSum count shift exponent
+concreteSourceHurwitzEqualsRationalFold addLaw count shift exponent =
+  sourceHurwitzEqualsRationalFold
+    (concreteZipfInterpretation addLaw)
+    count shift exponent
