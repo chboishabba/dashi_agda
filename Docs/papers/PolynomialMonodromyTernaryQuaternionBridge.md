@@ -335,3 +335,89 @@ The same degree-angle residue 81 does NOT imply the same radian sine sign. The t
 The committed scripts/check_polynomial_pickover_gamma_horned_maxcut.py now computes both factorial and subfactorial CRT targets, and audits the 44=24+20 split. An independent materially equivalent in-session Python replay passed; exact GitHub script-blob execution was not recorded.
 
 **Proof cut:** retain the standard two-step recurrence and derive the full inclusion-exclusion factorial/subfactorial formula in Agda; run exact-head typechecking of 120-constructor filtering; formalize genuine S5/A5 parity group laws without interpreting two equal counts as an isomorphism; require independent REAL certificates for each separately typed radians-phase target; preserve Ibrahim/Monster source ownership and wild-geometry non-promotion.
+
+
+## 2026-10-28 native ternary end-address and typed theta follow-up
+
+The user clarified that the desired balanced-ternary replacement of
+the Alexander horned-space notation is the **INFINITE END-ADDRESS
+SPACE ITSELF**, not a ternary-valued observer over its original
+binary stream:
+
+```text
+K2 = C3_sector × Bit^N
+K3 = C3_sector × Trit^N   (full -/0/+ in every chronological digit).
+```
+
+Parent horned PR #1244 now owns
+`AlexanderHornedNativeBalancedTernaryEndTowerExact.agda`
+using original `RecursiveFibreTower.FibreTower` and
+`InverseLimitPoint`, finite prefix projections,
+an actually coherent infinite-zero end family,
+external C3 and distinct internal balanced-trit
+C3, the sign-reflection S3 conjugation equation,
+and a tetration config-table receiver.
+No cross-branch import is attempted here.
+The external sector C3 and internal root/digit S3
+are mathematically different typed actions; #1414
+continues to own the ORIGINAL polynomial root
+label monodromy and quaternion 120°/720° lift.
+
+The complete prefix code `-→0,0→10,+→11`
+from stacked #1254 gives a homeomorphism of
+ABSTRACT Cantor end spaces K3 and K2, even
+C3-sector-equivariantly, but not a metric isometry,
+a fair Bernoulli measure equivalence, a
+2-adic=3-adic additive group identity,
+a same-depth binary-tree map, or a wild
+3D linked-handlebody embedding. The native
+ternary cylinders have `3·3^n` cells at
+depth n; at n=2 this is 27 sites, whose
+full trit-label configuration table has
+`3^27 = 3↑↑3` entries. The existing
+`DASHI.Cognition.RecursiveFibreTower` owns
+that TETRATION FUNCTION-SPACE recurrence.
+The native geometric 3-child wild-horn
+supplier remains separate from the original
+Hatcher binary source and the new abstract
+`[a,b][b,c]` ternary word tower.
+
+**Exact theta / prefix notation (not a quotation claim):**
+The attached user steelman specifies POSTFIX
+`9999!` and its actual real-angle phase
+`θ_F=99^(9999!)`, while #1414's
+`PolynomialSubfactorialDerangementS3S5Exact`
+already independently models PREFIX
+`!9999`, the derangement number, and the
+alternative angle `θ_D=99^(!9999)`.
+The new `ThetaIndex` and
+`thetaAngleRadians` in this PR's EXISTING
+Gamma/factorial owner are a local definition
+of these angle expressions, NOT a proof
+that standard mathematical theta denotes
+factorial. Standard Gamma satisfies
+`Γ(10000)=9999!`. No exact video transcript
+sentence specifying theta as a factorial
+function has been recovered; do not present
+it as a sourced assertion.
+
+The exact local CRT discriminator is
+`θ_F mod 9999=4950` and
+`θ_D mod 9999=3861`; both happen
+to be `81 mod 360`. The existing
+`check_polynomial_pickover_gamma_horned_maxcut.py`
+now defines and checks `sub_residues` BEFORE
+printing them (fixing a NameError). Both
+terminal radian sine signs remain unproved.
+The original #1260 Pickover objective is
+`θ_F`, not `θ_D`, pending source-level
+verification otherwise.
+
+These additions neither establish an
+analytic polynomial monodromy path, a
+new Galois quintic result, an actual
+horn exterior group homotopy, an
+Ibrahim Monster 3B same-object representation,
+nor a proof of RH. Original author attribution
+and distinct source/code/test/kernel status
+are unchanged.
