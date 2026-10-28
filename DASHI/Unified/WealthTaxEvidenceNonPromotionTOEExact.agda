@@ -577,6 +577,11 @@ open DashiTradeTax public using
   ; policySwapCannotBeAdmittedParetoSymmetry
   ; administrativeCostInjectiveOnTwoPolicyFixture
   ; everyQualifiedParetoSymmetryFixesBothPolicies
+  ; swapPolicyCostAxis
+  ; swapPolicyCostAxisTwice
+  ; reindexedPolicyTradeoffCosts
+  ; policyReindexedCostChartPreservesDominance
+  ; policyReindexedCostChartReflectsDominance
   ; equalCostTotalCannotReflectParetoOrder
   ; policyWeightedTwoAxisCost
   ; careHeavyWeightsPreferCareByScalar
