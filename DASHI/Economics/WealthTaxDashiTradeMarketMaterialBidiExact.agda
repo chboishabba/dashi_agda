@@ -19,6 +19,7 @@ open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong
 open import Data.Empty using (⊥)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
@@ -727,6 +728,85 @@ payingParticipantExample =
 
 -- Cash magnitudes and this directional cash balance do NOT certify the
 -- securities-leg net quantities, eligibility or the DvP settlement receipt.
+
+------------------------------------------------------------------------
+-- CONDITIONAL SINGLE-INSTRUMENT DELIVERY VERSUS PAYMENT (F04/F05).
+-- The independent settlement authority / source finality remains absent
+-- until supplied externally. No T+1/T+2 calendar or market clock inferred.
+------------------------------------------------------------------------
+
+data SecurityNetDirection : Set where
+  netSecuritiesDelivered : SecurityNetDirection
+  netSecuritiesReceived : SecurityNetDirection
+
+SecurityQuantityBalanced :
+  SecurityNetDirection → Nat → Nat → Nat → Set
+SecurityQuantityBalanced netSecuritiesDelivered grossDelivered grossReceived net =
+  grossDelivered ≡ grossReceived + net
+SecurityQuantityBalanced netSecuritiesReceived grossDelivered grossReceived net =
+  grossReceived ≡ grossDelivered + net
+
+data OppositeCashAndSecurityLeg :
+  ParticipantCashDirection → SecurityNetDirection → Set where
+  sellSettlementLegs :
+    OppositeCashAndSecurityLeg netCashReceivable netSecuritiesDelivered
+  purchaseSettlementLegs :
+    OppositeCashAndSecurityLeg netCashPayable netSecuritiesReceived
+
+record SingleInstrumentDvPBatch : Set where
+  constructor single-instrument-dvp-batch
+  field
+    linkedCashBatch : DirectionalClearingBatch
+    securityIdentifier : String
+    securityDirection : SecurityNetDirection
+    grossDeliveredUnits : Nat
+    grossReceivedUnits : Nat
+    netSecurityUnits : Nat
+    securityQuantityReconciled :
+      SecurityQuantityBalanced securityDirection
+        grossDeliveredUnits grossReceivedUnits netSecurityUnits
+    cashToSecurityDirectionMatched :
+      OppositeCashAndSecurityLeg
+        (cashDirection linkedCashBatch) securityDirection
+    cashFinalityEpoch : Nat
+    titleFinalityEpoch : Nat
+    simultaneousFinalityRecorded :
+      cashFinalityEpoch ≡ titleFinalityEpoch
+open SingleInstrumentDvPBatch public
+
+aggregateNetPositionsRespectGrossCashAndSecurityTotals :
+  (batch : SingleInstrumentDvPBatch) →
+  DirectionBalanced
+    (cashDirection (linkedCashBatch batch))
+    (grossSellSettlementCash (linkedCashBatch batch))
+    (grossBuySettlementCash (linkedCashBatch batch))
+    (netSettlementCashMagnitude (linkedCashBatch batch))
+  × SecurityQuantityBalanced
+      (securityDirection batch)
+      (grossDeliveredUnits batch)
+      (grossReceivedUnits batch)
+      (netSecurityUnits batch)
+aggregateNetPositionsRespectGrossCashAndSecurityTotals batch =
+  directionBalance (linkedCashBatch batch) ,
+  securityQuantityReconciled batch
+
+deliveryVersusPaymentCashAndTitleCoMove :
+  (batch : SingleInstrumentDvPBatch) →
+  cashFinalityEpoch batch ≡ titleFinalityEpoch batch
+deliveryVersusPaymentCashAndTitleCoMove =
+  simultaneousFinalityRecorded
+
+syntheticDeliveredDvP : SingleInstrumentDvPBatch
+syntheticDeliveredDvP =
+  single-instrument-dvp-batch
+    receivingParticipantExample
+    "fixture:eligible-security-ordinary"
+    netSecuritiesDelivered
+    5 2 3 refl sellSettlementLegs
+    4 4 refl
+
+-- F04/F05 close only the model's proof obligations WHEN a caller supplies
+-- a batch witness. Neither model field represents official ASX/CHESS data.
 
 -- Reconcile arbitrarily many investor allocations to a participant-level
 -- cash batch. The investors' identity, settlement authority and instrument
