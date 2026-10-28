@@ -44,3 +44,42 @@ Sampling **IID with replacement** from masses (1/2,1/4,1/4) is a *different* ran
 This is one finite mathematical bridge from a pre-existing sorting quotient to a language discovery statistic. The SSSP owners did **not** originate the general statistical principle that the entire Heaps curve cannot identify token labels. Conversely, this adapter does **not** prove that an algorithmic SSSP frontier is a natural language corpus, that a Heaps exponent identifies syntax, that the six labels form a cyclic group, or that Zipf rank spectra recover arbitrary pressure, phases, physical triads, Hilberg exponents or Monster 3B objects.
 
 The original 27-topic taxonomy remains unchanged and the protected ESD surfaces remain untouched. Follow-up P0 for rigorous formal certification is a compatible Agda kernel typecheck of the existing original import chain plus this adapter. Follow-up mathematical Pareto cut is to upgrade **H08** from this exact size-4 witness to all-count constructive extremal histories, and then bridge existing S23/S24 stochastic/path couplings without a duplicate probability carrier. Keep `ConcreteAddLaw` F13b unfinished until its actual nonzero-denominator rational addition proof is supplied.
+
+
+## Two-sampler first-discovery order: Plackett–Luce (Pareto snowball)
+
+This continuation separates a random *type-arrival permutation* from the random *times of those arrivals*.
+
+**Original roots, no rediscovery claim:** R. Duncan Luce, *Individual Choice Behavior: A Theoretical Analysis* (1959), and R. L. Plackett, "The Analysis of Permutations," *Journal of the Royal Statistical Society C* **24** (1975), 193–202, https://doi.org/10.2307/2346567. The original 1975 paper explicitly writes the sequential-weight permutation formula. The result below is a finite occupancy interpretation of that classical model, not a new law or a replicated empirical preference process.
+
+Let `f=(f_1,...,f_K)` be positive counts, `N=Σf_i`. For either **(i)** independent IID draws from `P(type i)=f_i/N` or **(ii)** a uniformly random ordering of a fixed multiset with exactly `f_i` tokens of type i, the order `σ` in which each type first appears has the same law:
+
+```
+P(σ=(i_1,...,i_K)) =
+  (f_(i_1)/N) * (f_(i_2)/(N-f_(i_1))) * ... *
+  (f_(i_K)/(N-Σ_(j<K)f_(i_j))).
+```
+
+**Proof for the distinct-type order, with explicit sampler conditions.**
+For IID, after some types have appeared, the draws of old types form a geometric waiting period. Condition on the next draw that names a *new* type; its relative probability is `f_j/(N-Σseen f)`. Repeat for each remaining type. For a random permutation of N physical tokens, conditional on the previously observed type set, the earliest token from any remaining type is uniformly chosen among tokens of remaining types; again its label probability is `f_j/(N-Σseen f)`. Iterating gives the same product. This is a **first-seen label order** theorem; the random waiting times and prefix-vocabulary processes remain DIFFERENT.
+
+The new `scripts/zipf_first_discovery_plackett_luce_exact.py` computes the classical law exactly with `Fraction`, computes the IID next-new-type transition separately via geometric waiting, and independently enumerates uniform distinguishable-token multiset permutations to cross-check it. The two-sampler `first_discovery_two_sampler_certificate` uses the already-owned finite `_validated_counts` and the ABC six-order carrier from this cut. The companion `tests/test_zipf_first_discovery_plackett_luce_exact.py` contains eight focused tests and is included in the local acceptance shell. No Agda-level general probabilistic theorem is claimed yet.
+
+For **AABC** counts `(2,1,1)`, the exact six first-seen type-order probabilities under BOTH samplers are:
+
+| ABC type discovery order | Probability |
+|---|---:|
+| ABC | 1/4 |
+| ACB | 1/4 |
+| BAC | 1/6 |
+| BCA | 1/12 |
+| CAB | 1/6 |
+| CBA | 1/12 |
+
+Yet at the second draw, `E_IID[V_2]=13/8` while `E_uniform-permutation[V_2]=11/6`. These were verified against an **independent local 12-word enumeration**, not taken from a fitted empirical Zipf model. The two samplers agree on which new type tends to appear next, but **not** on how many draws are needed before it appears.
+
+### Nonpromotion of source/PR ownership
+
+The mathematical *formula* belongs to Luce/Plackett and earlier probability theory; the six ABC carrier and exact ternary×binary codec remain the earlier 1 September 2026 SSSP Agda owner's work. The 28 October 2026 Johl Brown-directed ChatGPT-assisted Python adapter supplies bounded executable crosschecks and connects the two existing interfaces without transferring historical or PR ownership. Prior Ibrahim Monster 3B results remain independent. No theorem about same-object vortex dynamics, numerical corpus chronology, C6/HexTruth algebra or formal statistical power-law universality is claimed.
+
+**Remaining wall:** the Python modules are committed and locally independent 6- and 12-word enumerations were executed, but the exact committed GitHub Python modules, the full exact-head suite and any new Agda theorems have not been compiled or executed as a whole in this environment. The more general Plackett–Luce/Heaps two-sampler equality is mathematical source plus finite checks here, not a completed Agda probability-space proof.
