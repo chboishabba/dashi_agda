@@ -706,3 +706,78 @@ external C3. For genuine orbifold completion, retain
 the original split exact sequence plus geometric
 homotopy quotient instance as a separately audited
 target; the paper formula already exists.
+
+
+### K. Existing 2I target for ternary tower and physical Pareto discriminator
+
+The third branch is not merely a choice of a 3-adic/ultrametric
+observer: the new algebraic ternary commutator tower has a genuine
+compatible FINITE target, obtained by directly reusing the
+original source-owned 120-element `2I` construction in
+`scripts/alexander_horned_c3_finite_SU2_gauge_simulator.py`.
+New consumer:
+`scripts/alexander_horned_balanced_ternary_2i_target_comparison.py`.
+
+Let the original commutator section choose
+`(a_g,b_g)` with `[a_g,b_g]=g` in `2I`. For the
+three-child ternary bonding word
+`[a,b][b,c]`, choose `a=a_g,b=b_g,c=b_g`.
+Then
+```text
+[a,b][b,c] = [a_g,b_g][b_g,b_g] = g * 1 = g.
+```
+At the root choose the EXISTING source-owned generating pair
+`rootpair` with `[a,b]=q` and `<a,b>=2I`.
+The first two child values already generate all 120
+elements. Thus the 2I quotient survives the new
+abstract ternary substitution. However the third
+child is represented by exactly the SAME value as
+the middle child at each refinement; **the extra
+geometric branch is not independently detected**
+by this particular finite representation. This is
+a severe non-promotion and a positive finite
+representation at the same time.
+
+Independent local source-equivalent Python check:
+all 120 icosians, all 120 commutator-section
+witnesses and 121 ternary parent assignments
+at depth 0..4 PASS; `q³=-1,q⁶=1` and
+rootpair generates the whole group. Current
+source was committed by GitHub connector; no
+exact-blob checkout, kernel or hardware execution
+is represented by this local reproduction.
+
+For depth n, a fully expanded ternary meridian
+word has length `6^n`; its root-cube protocol
+requires `3*6^n` elementary word gates,
+against `3*4^n` for actual binary Hatcher
+refinement. Under ONLY the pre-existing
+independent isotropic Gaussian SU2 angle model
+with per-gate `σ=1.5°`, the model expectation
+is `-exp(-L*σ²/8)` with L the actual compiled
+word length. The compared values:
+
+| Depth | Binary gates | Ternary gates | E[W] binary | E[W] ternary |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 3 | 3 | -0.999743 | -0.999743 |
+| 1 | 12 | 18 | -0.998972 | -0.998459 |
+| 2 | 48 | 108 | -0.995896 | -0.990790 |
+| 3 | 192 | 648 | -0.983685 | -0.945996 |
+| 4 | 768 | 3888 | -0.936321 | -0.716699 |
+| 5 | 3072 | 23328 | -0.768596 | -0.135526 |
+
+The stage-five word-count factor is EXACTLY
+`6^5/4^5=243/32`, a legitimate typed appearance
+of `3^5=243`; this says nothing about
+the DISTINCT `5^3=125` carrier from PR #1414.
+It is a noise/cost tradeoff, not a numerical
+identification with Riemann, Monster, 13/27
+or measured gauge phenomena.
+
+**Decision:** retain binary Hatcher geometry and
+its conditional three-sector orbifold as the
+primary SAME-OBJECT programme; use balanced
+ternary as a full observer, an optional distinct
+three-child abstract group, and a falsifiable
+finite-target/cost comparator. The P0 source
+wild-satellite collar has not been bypassed.
