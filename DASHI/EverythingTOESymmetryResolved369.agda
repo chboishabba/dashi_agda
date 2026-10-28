@@ -1,6 +1,18 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinPrimeSixWheel
 import DASHI.Arithmetic.TwinPrimeFRACDASHReuseExact as TwinPrimeFRACDASH
+import DASHI.Arithmetic.CertifiedPrimePairModulusExact as ArbitraryPrimeCRT
+open ArbitraryPrimeCRT public using
+  ( certifyCandidate
+  ; localPairSurvives?
+  ; allPairSurvive?
+  ; localPairPeriodic
+  ; localPairPeriodicBack
+  ; extendedSieveRetainsEarlier
+  ; residueProductEncodeDecode
+  ; sspAddressSymmetryPreservesPrime
+  ; sixWheelNecessaryForOtherPrimes
+  )
 open TwinPrimeFRACDASH public using
   ( bridgeChoosesFirstApplicable
   ; bridgeActivationForcesResidueFive
