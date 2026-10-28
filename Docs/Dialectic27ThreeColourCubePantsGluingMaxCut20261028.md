@@ -214,7 +214,7 @@ voxel↔depth-three pants path bijection, constructs both concrete
 uniform RED painted join faces fail proper adjacent-vertex colouring
 even when their boundary paint agrees.
 
-The separate reproducible finite checker
+The same Agda consumer also source-writes an explicit modulo-three `properThreeColouringOfVoxelGrid` with a 12-case step-preservation proof and a composed `properThreeColouringOfNativePantsGrid`. Unlike identical seam paint, this is genuinely proper on the specified adjacent-vertex grid. No kernel execution is claimed.\n\nThe separate reproducible finite checker
 `scripts/check_dialectic27_native_pants_adjacency.py`
 covers **729 ordered voxel/path vertex pairs**, 108 directed
 and 54 undirected strict ternary grid edges, and exhibits a
