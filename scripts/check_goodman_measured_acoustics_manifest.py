@@ -79,41 +79,50 @@ def split_blocks(rows, seed):
 
 
 def enforce_spatial_buffer(rows, assigned, minimum_separation_m):
-    """Fail if distinct partitions are closer than the declared distance.
+    """Check metric source separation with a deterministic 3-D spatial hash.
 
-    Do not compare R2 against other scenarios: its physical geometry/medium
-    differs. All source coordinates must be finite metric coordinates.
+    Within each acquisition scenario, any pair assigned to distinct
+    partitions at Euclidean distance below the threshold causes rejection.
+    Bins have edge length equal to threshold. Any offending pair lies
+    in the same or one of the 26 adjacent bins. Checks scale with local
+    occupancy, not the square of the full 13,377-position corpus.
+    R2 is intentionally isolated as the external environment test.
     """
     if not math.isfinite(minimum_separation_m) or minimum_separation_m <= 0:
         raise ValueError("positive physical separation threshold required")
     by_group = {(x["scenario"], x["spatial_block"]): x["partition"] for x in assigned}
     positions = {}
     for row in rows:
+        sc = row.get("scenario")
+        pos = str(row.get("position_id", ""))
+        block = str(row.get("spatial_block", ""))
         coords = row.get("xyz_m")
         if not isinstance(coords, list) or len(coords) != 3:
             raise ValueError("physical xyz_m source coordinates required")
-        if not all(isinstance(v, (float, int)) and math.isfinite(v) for v in coords):
+        if not all(type(v) in (float, int) and math.isfinite(v) for v in coords):
             raise ValueError("invalid metric coordinates")
-        key = (row["scenario"], str(row["position_id"]))
-        if key in positions and positions[key] != tuple(coords):
-            raise ValueError("inconsistent coordinates for source position")
-        positions[key] = tuple(coords)
-    unique = list(positions.items())
-    for i, ((sc, pos), xyz) in enumerate(unique):
-        first = next(row for row in rows if row["scenario"] == sc and str(row["position_id"]) == pos)
-        first_partition = by_group[(sc, str(first["spatial_block"]))]
-        if first_partition == "external_environment":
-            continue
-        for (sc2, pos2), xyz2 in unique[i+1:]:
-            if sc2 != sc:
-                continue
-            second = next(row for row in rows if row["scenario"] == sc2 and str(row["position_id"]) == pos2)
-            second_partition = by_group[(sc2, str(second["spatial_block"]))]
-            if first_partition == second_partition:
-                continue
-            if math.dist(xyz, xyz2) < minimum_separation_m:
-                raise ValueError("cross-partition spatial buffer violated")
+        key = (sc, pos)
+        partition = by_group.get((sc, block))
+        if partition is None:
+            raise ValueError("source block absent from partition map")
+        datum = (tuple(coords), partition)
+        if key in positions and positions[key] != datum:
+            raise ValueError("inconsistent position coordinates or partition")
+        positions[key] = datum
 
+    buckets = {}
+    for (sc, _), (xyz, partition) in sorted(positions.items()):
+        if partition == "external_environment":
+            continue
+        cell = tuple(math.floor(v / minimum_separation_m) for v in xyz)
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                for dz in (-1, 0, 1):
+                    neighbor = (sc, cell[0]+dx, cell[1]+dy, cell[2]+dz)
+                    for other_xyz, other_partition in buckets.get(neighbor, ()):
+                        if partition != other_partition and math.dist(xyz, other_xyz) < minimum_separation_m:
+                            raise ValueError("cross-partition spatial buffer violated")
+        buckets.setdefault((sc, *cell), []).append((xyz, partition))
 
 def correlated_error_budget(pairs, inverse_gain):
     """Sample covariance from independently acquired paired replicate errors.
