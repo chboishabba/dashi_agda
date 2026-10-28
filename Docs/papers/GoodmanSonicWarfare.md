@@ -334,3 +334,29 @@ None of these statements establishes that the third observation is obtainable fr
 - **Consumer scope**: image/audio resemblance, copied recordings, shared propagation curves, matched sample fingerprints or a Monster-style numerical character pattern do not prove shared source identity, causation, a verified representation or a physical anomaly. The original Ibrahim Monster 3B attribution remains untouched.
 - **Evidence promotion**: physical forward model, inverse source identification, sensor calibration, context-dependent human response, and socio-political causal claims are separate obligations. T4 demonstrates **why an ideal third observer helps a particular finite reconstruction**, not why a specific real instrument is available.
 - **Practical stop**: no more semantic wrappers solely to produce a larger theorem count. The next formal gate is a pinned Agda typecheck of the exact head; empirical studies and archival case verification are independent further lanes. Do not count CI status, synthetic fixtures or DOI lookup as a kernel theorem or physical measurement.
+
+## T5 Pareto-minimal observation — correcting overcollection
+
+The earlier T4 proof showed that receiver + source monitor + independent medium observation separates the four toy worlds. However, T4 was **not Pareto-minimal**.
+
+Enumerating candidate observational fibres reveals:
+
+| Observer subset | Distinct observed values on four toy worlds | Identifies whole toy world? |
+|---|---:|---|
+| Downstream receiver only | 2 | No |
+| Source-side monitor only | 2 | No |
+| Medium label only | 2 | No |
+| Receiver + source monitor | 3 | No |
+| Receiver + medium label | 3 | No |
+| **Source monitor + medium label** | **4** | **Yes** |
+| All three | 4 | Yes, but receiver is redundant |
+
+The two-coordinate observer `sourceAndMedium` is the **unique minimal two-coordinate identifying set among these three named observations**. `sourceAndMediumSeparatesAllFourWorlds` closes all 16 ordered pairs (4 reflexive, 12 constructor-distinct). The original `Observer.Separating` remains the proof owner. `sourceMonitorNotWorldSeparating`, `mediumMonitorNotWorldSeparating`, and `receiverAndMediumNotWorldSeparating` are explicit obstructions to smaller or alternative instrument combinations.
+
+More importantly, the **redundancy is constructive**, not a mere cardinality comparison. The four-case `recoverFullFromPareto` derives the omitted receiver reading from the source-monitor/medium pair. `fullObservationFactorsThroughParetoPair` proves reconstruction of the full observation for each toy world, while `paretoPairFactorsThroughFullObservation` proves the reverse projection by forgetting the receiver. Hence the pair and triple have the **same information about these four worlds**. There is no new generic information-ordering theorem.
+
+**Physical boundary.** The candidate medium coordinate remains an idealised, independently supplied label; it is not inferred from receiver silence. No assertion is made about engineering price, optimal microphone layout, frequency coverage, curved/spiral reflectors, measured attenuation or clinical response. Minimality is **relative to the selected finite candidate observation family**; it is not a universal minimal-instrument theorem.
+
+**Regression:** a further five exhaustive cases now check source-only, medium-only and receiver+medium insufficiency; source+medium sufficiency; and the receiver being determined by the pair. Additional complete-state assertions check both reconstruction directions for four worlds. The script contains 27 listed toy factorisation cases; **27 is only the test count, not a ternary/369 or Monster same-object fingerprint**.
+
+**Pareto next gate:** this is now a genuine stopping cut for the synthetic inverse example. Verify Agda at the exact head and pursue calibrated independent medium/source measurements before any experimental promotion. Reuse all existing theorem owners. The ISO 12913 and 16755 references and Guo/Zhang reviews remain independently attributed study/standard inputs, not proof certificates.
