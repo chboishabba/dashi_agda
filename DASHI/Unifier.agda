@@ -3,6 +3,27 @@ import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinPrimeSixWheel
 import DASHI.Arithmetic.TwinPrimeFRACDASHReuseExact as TwinPrimeFRACDASH
 import DASHI.Arithmetic.CertifiedPrimePairModulusExact as ArbitraryPrimeCRT
 import DASHI.Arithmetic.CertifiedPrimePairPeriodExact as PairCRTPeriod
+import DASHI.Arithmetic.SignedSSPPrimeOffsetMacroExact as SignedOffsetMacro
+open SignedOffsetMacro public using
+  ( plusTwoFractionMacro
+  ; minusTwoFractionMacro
+  ; plusOutputHasOffsetExponent
+  ; minusOutputHasOffsetExponent
+  ; signedPlusIsForward
+  ; signedMinusIsInverse
+  ; minusIsNegationOfPlus
+  )
+
+import DASHI.Arithmetic.SignedSSPPrimeOutputBoundaryExact as SignedPrimeReadout
+open SignedPrimeReadout public using
+  ( everyCertifiedPrimeHasAnEncoding
+  ; certifiedPrimeIsReachableWhenEmitterProved
+  ; twinPrimeInvariantUnderEqualReadout
+  ; twinPrimeInvariantUnderEqualReadoutBack
+  ; pairSieveInvariantUnderEqualReadout
+  ; pairSieveInvariantUnderEqualReadoutBack
+  ; certifiedNeighboursAreTwinPrimes
+  )
 open PairCRTPeriod public using
   ( localKPeriod
   ; localKOffsetPeriod
