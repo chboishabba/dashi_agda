@@ -8,6 +8,7 @@ import DASHI.Core.CoarseFineFabricCalculusExact as Coarse
 import DASHI.Cognition.PNF.WikidataRepairProposal as Repair
 import DASHI.Cognition.PNF.WikidataTypePressureMiniWorldExact as MiniWorld
 import DASHI.Interop.SensibLawResidualLattice as Residual
+import DASHI.Pressure as Pressure
 import Ontology.Hecke.PNFResidualBridge as Hecke
 
 ------------------------------------------------------------------------
@@ -183,7 +184,7 @@ illegalDefectPressureIsCritical :
   Residual.residualToPressure
     (Hecke.defectResidual Hecke.illegalDefect)
   ≡
-  Hecke.critical
+  Pressure.critical
 illegalDefectPressureIsCritical =
   Hecke.illegalDefect-critical
 
