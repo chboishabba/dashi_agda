@@ -24,7 +24,7 @@ module DASHI.Foundations.PolynomialC3S3TwentySevenOrbitRefinementExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_,_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Cognition.RecursiveFibreTower as Tower
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
@@ -46,16 +46,16 @@ cycleCodeThreeTimes : (x : Code27) →
 cycleCodeThreeTimes x =
   trans
     (cong (cycleCode)
-      (Act.conjugateComposition Perm.permRotate Perm.permRotate x))
+      (sym (Act.conjugateComposition Perm.permRotate Perm.permRotate x)))
     (trans
-      (Act.conjugateComposition Perm.permRotate Perm.permRotate2 x)
+      (sym (Act.conjugateComposition Perm.permRotate Perm.permRotate2 x))
       (Act.conjugateIdentity x))
 
 reflectionCodeTwice : (x : Code27) →
   reflectionCode (reflectionCode x) ≡ x
 reflectionCodeTwice x =
   trans
-    (Act.conjugateComposition Perm.permSwapLowHigh Perm.permSwapLowHigh x)
+    (sym (Act.conjugateComposition Perm.permSwapLowHigh Perm.permSwapLowHigh x))
     (Act.conjugateIdentity x)
 
 -- Dihedral relation s r s = r^-1 on the ACTUAL 27 table code
@@ -65,12 +65,12 @@ reflectionInvertsCycle : (x : Code27) →
     ≡ Perm.conjugateCode Perm.permRotate2 x
 reflectionInvertsCycle x =
   trans
-    (Act.conjugateComposition Perm.permSwapLowHigh Perm.permRotate
-      (reflectionCode x))
+    (sym (Act.conjugateComposition Perm.permSwapLowHigh Perm.permRotate
+      (reflectionCode x)))
     (trans
-      (Act.conjugateComposition
+      (sym (Act.conjugateComposition
         (S3._∙_ Perm.permSwapLowHigh Perm.permRotate)
-        Perm.permSwapLowHigh x)
+        Perm.permSwapLowHigh x))
       refl)
 
 -- Three *distinct* C3-fixed endomorphisms: the commuting
