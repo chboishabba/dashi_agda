@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MODULE = ROOT / "DASHI/Culture/GoodmanSonicWarfareExact.agda"
 RHYTHM = ROOT / "DASHI/Culture/GoodmanSonicWarfareRhythmInterventionExact.agda"
 TRANSPORT = ROOT / "DASHI/Culture/GoodmanSonicWarfareTransportExact.agda"
+STABILITY = ROOT / "scripts/check_goodman_inverse_stability_finite.py"
 DOC = ROOT / "Docs/papers/GoodmanSonicWarfare.md"
 ROOTS = [
     ROOT / "DASHI/EverythingTOESymmetryResolved369.agda",
@@ -31,6 +32,7 @@ def check() -> None:
     doc = DOC.read_text(encoding="utf-8")
     rhythm = RHYTHM.read_text(encoding="utf-8")
     transport = TRANSPORT.read_text(encoding="utf-8")
+    stability = STABILITY.read_text(encoding="utf-8")
     for owner in [
         "DASHI.Core.AttributedSourceCore",
         "DASHI.Core.SnowballAttributionProvenanceInvariantExact",
@@ -145,6 +147,8 @@ def check() -> None:
         "DASHI.Physics.ObserverConditionedTransportBridge",
         "DASHI.Core.QueryIndexedProjectionAdequacyExact",
         "DASHI.Core.ObserverRefinementLatticeExact",
+        "DASHI.Core.RobustExperimentInferenceFrontierExact",
+        "DASHI.Core.FrozenHeldOutRepairRefinementExact",
     ):
         require(f"import {owner}" in transport,
                 f"transport must import inherited theorem owner {owner}")
@@ -166,6 +170,10 @@ def check() -> None:
         "jointReceiverAndSourceMonitor",
         "sourceMonitorAdequateForEmitterQuestion",
         "sourceMonitorStrictlyRefinesSelectedReceiver",
+        "sonicFitDoesNotEstablishAdequacy",
+        "sonicTrainingFitDoesNotPayHeldOutValidation",
+        "Robust.sameFitDifferentAdequacy",
+        "FrozenHeldOut.trainingFitDoesNotCreateHeldOutValidity",
         "jointObserverDoesNotIdentifyWholeWorld",
         "fullObserverStrictlyRefinesJointObserver",
         "fullObserverSeparatesToyWorlds",
@@ -223,6 +231,25 @@ def check() -> None:
         r"(?m)^recoverFullFromPareto \((\w+) , (\w+)\) =", transport)
     require(len(reconstructions) == 4 and len(set(reconstructions)) == 4,
             "full observer reconstruction must have four pair cases")
+    # T6: Exact-rational inverse diagnostics remain a synthetic finite
+    # regression, and cannot claim any measured acoustics or kernel proof.
+    for text in (
+        "from fractions import Fraction as F",
+        "determinant = F(1, n)",
+        "assert hidden_error / measurement_error == n",
+        "assert condition == 2*(n+1)",
+        '"not_verified": [',
+        '"Agda kernel"',
+        '"calibrated sound"',
+    ):
+        require(text in stability, f"missing exact-rational inverse check: {text}")
+    for cited in (
+        "T6 stability and genuinely measured evidence frontier",
+        "RobustExperimentInferenceFrontierExact",
+        "FrozenHeldOutRepairRefinementExact",
+        "10.1038/s42949-026-00482-2",
+    ):
+        require(cited in doc, f"missing robustness provenance/documentation: {cited}")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
