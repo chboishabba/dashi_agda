@@ -1,3 +1,64 @@
+## 2026-10-28 independent FIRST-forward finite-thickness intersection max-cut
+
+**Executed local comparison on actual HTML first collision receipts**:
+construct 25,000 sampled angular intervals of each *offset-wall*
+family (Archimedean, logarithmic, smooth segmented) using exact
+analytical centreline derivative normals; join sampled offset
+vertices into line segments and include endpoint caps; perform
+independent ray-versus-segment determinant intersection, selecting
+the least positive distance. This does NOT use HTML's SDF or
+closest-curve Gauss–Newton procedure.
+
+For 44 first collisions per family, under the matched 5.289 m
+outer envelope, all 132 had a finite independent first hit.
+**Every independent intersection occurs after the SDF's recorded
+hit**, by more than the advertised 0.7 mm SDF threshold:
+- Archimedean: median +1.414 mm, range +1.333 to +1.499 mm.
+- Logarithmic: median +1.729 mm, range +1.311 to +1.832 mm.
+- Segmented surrogate: median +1.349 mm, range +1.272 to +1.431 mm.
+Repeat log with 70,000 angular intervals: median +1.729 mm,
+max +1.832 mm, suggesting this discrepancy is not a gross
+polygon sampling artefact. The local executed JSON and
+standalone script are in the session artefacts.
+
+**Interpretation:** the SDF reported hit positions are materially
+EARLY compared with a separately sampled physical offset-wall
+boundary. The previous near-wall audit checked only proximity,
+not earliest forward hit. This newly detected mismatch means that
+even a perfectly closing optical angular momentum ledger cannot
+certify the previous -195.58 microN*m as accurate. In particular
+this discrepancy exceeds the nominal contact tolerance, but
+the HTML's derivative-based closest-wall distance/normal
+approximation and the independent offset-wall construction may
+differ for finite curvature: verify that these represent identical
+intended material surfaces before assigning the full difference
+to the integrator.
+
+**Committed new source**:
+`scripts/kozyrev_first_forward_intersection_referee.py`
+and source-written tests. It uses NumPy for vectorised geometry
+but does not claim exact real-arithmetic root isolation;
+the tests have not yet been executed from GitHub's committed blob.
+The independent first-hit screen does not yet certify SECOND
+and subsequent collisions. No CI or Agda kernel claims.
+
+**Concrete blocking path:** define exactly one physical wall
+semantics (normal-offset strip versus a distance-to-centreline
+stroke), use it in both renderer and ray engine, then bracket
+each positive ray–boundary root and refine to a declared
+tolerance. Use a per-surface previous-hit exclusion or
+validated error-bound spawn ray rather than a hard-coded
+post-reflection nudge; repeat all 44-ray candidate trajectories
+and conservation/scale parity controls. Reject any old
+Pareto winner that changes outside robustness tolerance.
+
+**Attribution and restraint:** this is standard geometrical
+optics and numerical ray-surface intersection, not original
+physical theory. Prior DASHI torque #1164, S3/C3 #1414,
+optical/TOE #1407 and Ibrahim Monster 3B proof owners
+remain separate; protected ESD untouched. No fabricated
+optimum, new torsion field, or clinical evidence.
+
 ## 2026-10-28 independent continuous-surface collision audit
 
 **Executed:** independently evaluate 176 sampled contact points from each of
