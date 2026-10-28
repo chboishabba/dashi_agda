@@ -140,7 +140,24 @@ def run():
         joint_receivers, emitter, True))
     assert monitor['trans-off'] != monitor['absorb-on']
 
-    assert len(out) == 19
+    # T4: A source monitor identifies the emitter but not the environment.
+    # An additional idealised medium observation is independent evidence,
+    # not reconstruction from a silent microphone.
+    medium = {state: ('transmitting' if state.startswith('trans-') else 'absorbing')
+              for state in transport_states}
+    full_observer = {state: (joint_receivers[state], medium[state])
+                     for state in transport_states}
+    out.append(test_case('joint receiver and source monitor cannot determine medium',
+        transport_states, joint_receivers, medium, False))
+    out.append(test_case('full observer recovers declared medium',
+        transport_states, full_observer, medium, True))
+    out.append(test_case('full three-observer fixture identifies each toy world',
+        transport_states, full_observer,
+        {state: state for state in transport_states}, True))
+    assert len(set(full_observer.values())) == 4
+    assert joint_receivers['trans-off'] == joint_receivers['absorb-off']
+
+    assert len(out) == 22
     print(dumps({"mode": "finite-exhaustive-synthetic-only",
                  "all_passed": True, "tests": out,
                  "non_promotion": ["not-Agda-kernel", "not-measured-acoustics",
