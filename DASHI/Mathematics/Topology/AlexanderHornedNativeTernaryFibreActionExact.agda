@@ -94,7 +94,7 @@ transitiveAction : ∀ {n} (f target : PhaseField n)
   act (difference f target) f x ≡ target x
 transitiveAction f target x
   rewrite C3.associative (target x)
-                          (C3.inverse (f x)) (f x))
+                          (C3.inverse (f x)) (f x)
         | C3.inverseLeft (f x)
         | C3.rightIdentity (target x) = refl
 
