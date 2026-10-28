@@ -131,6 +131,8 @@ def main() -> None:
         "toeBalancedTaxPaymentDoesNotProveLiquidity",
         "toeClearingNetDoesNotAuthenticateTaxpayer",
         "toeTwoOptionParetoWitnessHasDistinctMinimalChoices",
+        "toeDistinctLocalFillTokensAndClassLabels",
+        "toeDuplicateLocalFillTokenIsRejected",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
     # These are direct aliases of EXISTING source and evidence owners.
@@ -218,6 +220,10 @@ def main() -> None:
         "participantNetStatementDoesNotIdentifyIndividualTaxpayer",
         "FixedInputConstructionFeasibility",
         "finiteParetoTradeoffHasTwoDistinctMinimalOptions",
+        "ChronologicalIdentifiedFillBatch", "TimestampedFill",
+        "TokenAbsent", "UniqueFillTokens", "AllFillLabelsMatch",
+        "uniqueFillIdentityAndMonotoneEventTime",
+        "duplicateSevenTokenRejected",
     ):
         assert theorem in dashi_tax_bridge, "missing tax-market gate: " + theorem
     assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", dashi_tax_bridge), (
