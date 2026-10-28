@@ -62,7 +62,7 @@ transport3CommutesWithRotate3 state (tripleWave a b c) = refl
 -- This statement holds for arbitrary operators; no acoustic assumptions.
 ------------------------------------------------------------------------
 
-record TripleOperator : Set₁ where
+record TripleOperator : Set where
   constructor tripleOperator
   field
     firstOperator secondOperator thirdOperator :
