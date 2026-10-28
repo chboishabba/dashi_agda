@@ -14,7 +14,8 @@ open RootDiscriminant public using
   ( vandermondeTransformsByParity ; discriminantInvariant
   ; discriminantDependsOnlyOnVietaCoefficients
   ; firstSecondCollisionGivesZero
-  ; firstThirdCollisionGivesZero ; secondThirdCollisionGivesZero )
+  ; firstThirdCollisionGivesZero ; secondThirdCollisionGivesZero
+  ; splitVandermondeZero ; zeroDiscriminantImpliesCollision )
 
 -- Artin B3 full twist: trivial root S3 endpoint but C7 signed
 -- crossing exponent six, preserving both braid and cancellation relations.
