@@ -47,6 +47,7 @@ jobs:
       - name: Agda type-check new finite R2P2 proof owners
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2MountainOpticalClockComparisonExact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2369WaveOpticalCombInformationCutExact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2ClockBiasIdentifiabilityMaxCutExact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2ThreeClockLoopClosure369Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda
