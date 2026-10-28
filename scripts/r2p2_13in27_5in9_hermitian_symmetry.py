@@ -87,6 +87,15 @@ def convolution(left, right):
     return dict(output)
 
 
+def plane_convolution(left, right):
+    """Exact 81 ordered pairs of two-dimensional signed input frequencies."""
+    output = defaultdict(lambda: (Fraction(0), Fraction(0)))
+    for p, q in product(PLANE9, repeat=2):
+        k = tuple(a + b for a, b in zip(p, q))
+        output[k] = add(output[k], multiply(left[p], right[q]))
+    return dict(output)
+
+
 def audit():
     cube_reps = set(map(representative, CUBE27))
     plane_reps = set(map(representative, PLANE9))
@@ -109,6 +118,15 @@ def audit():
 
     nine = sample_hermitian(PLANE9)
     assert unpack_hermitian(pack_hermitian(nine, PLANE9), PLANE9) == nine
+    nine_right = sample_hermitian(PLANE9, variant=2)
+    assert nine_right != nine
+    nine_output = plane_convolution(nine, nine_right)
+    assert len(nine_output) == 25
+    assert all(nine_output[neg(k)] == conjugate(v) for k,v in nine_output.items())
+    assert nine_output == plane_convolution(
+        unpack_hermitian(pack_hermitian(nine,PLANE9),PLANE9),
+        unpack_hermitian(pack_hermitian(nine_right,PLANE9),PLANE9))
+
 
     compressed_left = pack_hermitian(left, CUBE27)
     compressed_right = pack_hermitian(right, CUBE27)
@@ -145,6 +163,7 @@ def audit():
             "plane_roundtrip": True,
             "conjugate_closed_125_output": True,
             "packed_13_pairs_preserve_all_729_product_terms": True,
+            "plane_81_input_pairs_25_output_convolution_preserved": True,
             "arbitrary_complex_27_is_losslessly_compressed": False,
         },
         "operator_cut": {
