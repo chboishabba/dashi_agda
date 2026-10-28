@@ -138,6 +138,21 @@ def main() -> None:
         "toeDerivedSummaryDoesNotBecomeOriginalEvidence",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
+    source_root = (ROOT / OWNERS[0]).read_text(encoding="utf-8")
+    for receipt in (
+        "ringEntrepreneurialNorway2026",
+        "ringFirmResponseIsNotFagerengPortfolioResponse",
+        "ringFirmResponseIsNotJakobsenAggregateResponse",
+    ):
+        assert receipt in source_root, f"missing original-study/estimand boundary: {receipt}"
+    assert "test_constructive_finite_axis_pareto" in script, (
+        "missing finite-axis exhaustive and missing-axis falsification path"
+    )
+    for toe_bound in (
+        "toeRingFirmStudyIsNotFagerengPortfolioEstimand",
+        "toeRingFirmStudyIsNotJakobsenMigrationAggregateEstimand",
+    ):
+        assert toe_bound in bridge, f"missing TOE estimand boundary: {toe_bound}"
     # These are direct aliases of EXISTING source and evidence owners.
     # A missing owner defeats provenance reachability even when the alias
     # name remains present in the TOE consumer.
@@ -256,6 +271,9 @@ def main() -> None:
         "noUniqueOptimalTaxRateFromParetoOrderAlone",
         "finiteNonemptyRankMinimum",
         "finiteParetoFrontierNonemptyGivenStrictRank",
+        "finiteParetoFrontierIsNonempty",
+        "finiteAxisSumStrict",
+        "finiteAxesReverseOrStrict",
     ):
         assert symbol in dashi_tax_bridge, f"missing source-owned economy gate: {symbol}"
     for symbol in (
@@ -266,7 +284,8 @@ def main() -> None:
         "toeEvenTwoPolicyOptionsMayHaveDifferentParetoMinimalRates",
     ):
         assert symbol in bridge, f"missing TOE evidence firewall: {symbol}"
-    for symbol in ("finiteNonemptyRankMinimum", "finiteParetoFrontierNonemptyGivenStrictRank"):
+    for symbol in ("finiteNonemptyRankMinimum", "finiteParetoFrontierNonemptyGivenStrictRank",
+                   "finiteParetoFrontierIsNonempty"):
         assert symbol in bridge, f"missing finite Pareto owner reexport: {symbol}"
     assert "open DashiTradeTax public using" in bridge, (
         "follow-on sources not reachable from original TOE consumer"
