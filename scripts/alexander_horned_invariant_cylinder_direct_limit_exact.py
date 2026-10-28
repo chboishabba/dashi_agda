@@ -85,7 +85,7 @@ def check():
     counts={}
     for n in range(7):
         assert len(orbits(n))==(3**n+1)//2
-        assert 3*len(orbits(n))==len(words(n))+len(orbits(n))*3-(3**n+1)//2*3  # explicit integer scope
+        assert len(orbits(n))*2==len(words(n))+1  # Burnside: one sign-fixed zero word
         assert len({zero_child(o) for o in orbits(n)})==len(orbits(n))
         counts[n]=dict(cells=3*3**n,orbits=len(orbits(n)),
                        invariant_fields=3**len(orbits(n)))
