@@ -3,6 +3,8 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Maybe using (just)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeNSCut
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Convolution729
+import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as Bilinear729
+import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourGridPareto729
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fourier729Core
 import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as PeriodicFourier729
 import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as Fourier729Owner
@@ -1708,3 +1710,32 @@ toeCyclic27CannotRecoverTrueWideFourierMode :
     → ⊥
 toeCyclic27CannotRecoverTrueWideFourierMode =
   Convolution729.noDecoderOfActualWideModeFromCyclic27
+
+------------------------------------------------------------------------
+-- 4³ = 64 retained-output Pareto vs 5³ = 125 full-output labels.
+-- Source-inherited Q(omega) arithmetic, arbitrary distinct inputs.
+-- No 4-grid sampled-physical-space DFT/NS/clock/Monster identity.
+------------------------------------------------------------------------
+
+toeFourGridBilinearRetained :
+  (f g : Fourier729.ModeCube27 → Fourier729Owner.Cyclotomic3)
+  (target : Fourier729.ModeCube27) →
+  Bilinear729.fourGridBilinearRetainedAt Bilinear729.cyclotomicOps f g target
+    ≡ Bilinear729.trueBilinearConvolutionAt Bilinear729.cyclotomicOps
+        f g (Convolution729.retainedToWide target)
+toeFourGridBilinearRetained =
+  Bilinear729.cyclotomicFourGridRetainedBilinearExact
+
+toeFiveGridBilinearFull :
+  (f g : Fourier729.ModeCube27 → Fourier729Owner.Cyclotomic3)
+  (target : Convolution729.WideCube125) →
+  Bilinear729.fiveGridBilinearFullAt Bilinear729.cyclotomicOps f g target
+    ≡ Bilinear729.trueBilinearConvolutionAt Bilinear729.cyclotomicOps f g target
+toeFiveGridBilinearFull =
+  Bilinear729.cyclotomicFiveGridFullBilinearExact
+
+toeFourGridDoesNotIdentifyOuterTwoFrequencies :
+  FourGridPareto729.foldFour ModeNSCut.wideMinusTwo
+    ≡ FourGridPareto729.foldFour ModeNSCut.widePlusTwo
+toeFourGridDoesNotIdentifyOuterTwoFrequencies =
+  FourGridPareto729.outerFrequencyCollisionAtFour
