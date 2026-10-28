@@ -214,3 +214,89 @@ toySourceOnProducesSignalInTransmittingCase :
     (applySource sourceOn transmittingOff)
   ≡ receiverSignal
 toySourceOnProducesSignalInTransmittingCase = refl
+
+
+------------------------------------------------------------------------
+-- T4: THE INVERSE PROBLEM IS ONLY PARTLY REPAIRED BY A SOURCE MONITOR.
+--
+-- The previous theorem established adequacy for source activity.
+-- It did NOT show that the source+receiver jointly determines the medium.
+-- Below, transmittingOff and absorbingOff still coincide in BOTH readings.
+-- A third, independently justified environment observer separates those
+-- worlds. This is an observer hierarchy, not a free physical sensor.
+--
+-- The finiteness and the four labels are DASHI application constructions;
+-- the generic strict-refinement/separation owners remain in
+-- DASHI.Core.ObserverRefinementLatticeExact.
+------------------------------------------------------------------------
+
+data ToyMedium : Set where
+  toyTransmitting : ToyMedium
+  toyAbsorbing : ToyMedium
+
+toyMedium : ToySoundField → ToyMedium
+toyMedium transmittingOff = toyTransmitting
+toyMedium transmittingOn = toyTransmitting
+toyMedium absorbingOff = toyAbsorbing
+toyMedium absorbingOn = toyAbsorbing
+
+-- Both original sensors report silence with the source off, even though
+-- one toy environment transmits and the other absorbs.
+sameReceiverAndSourceReadingForDifferentMedia :
+  jointReceiverAndSourceMonitor transmittingOff
+    ≡ jointReceiverAndSourceMonitor absorbingOff
+sameReceiverAndSourceReadingForDifferentMedia = refl
+
+differentMediaInSilentWorlds :
+  toyMedium transmittingOff ≡ toyMedium absorbingOff → ⊥
+differentMediaInSilentWorlds ()
+
+jointObserverDoesNotIdentifyWholeWorld :
+  Observer.Separating jointReceiverAndSourceMonitor → ⊥
+jointObserverDoesNotIdentifyWholeWorld separating
+  with separating transmittingOff absorbingOff
+    sameReceiverAndSourceReadingForDifferentMedia
+... | ()
+
+-- This additional observer is intentionally an idealised *medium* label:
+-- no sound-only algorithm or physical calibration creates it automatically.
+fullToyObservation : ToySoundField →
+  (ToyReceived × ToyReceived) × ToyMedium
+fullToyObservation =
+  Observer.pairObserver jointReceiverAndSourceMonitor toyMedium
+
+fullObserverStrictlyRefinesJointObserver :
+  Observer.StrictRefinement
+    jointReceiverAndSourceMonitor fullToyObservation
+fullObserverStrictlyRefinesJointObserver =
+  Observer.strictPairRefinement
+    jointReceiverAndSourceMonitor
+    toyMedium
+    transmittingOff absorbingOff
+    sameReceiverAndSourceReadingForDifferentMedia
+    differentMediaInSilentWorlds
+
+-- All sixteen cases are closed; the diagonal case is reflexive and the
+-- other twelve have constructor-distinct full observations.
+fullObserverSeparatesToyWorlds :
+  Observer.Separating fullToyObservation
+fullObserverSeparatesToyWorlds transmittingOff transmittingOff _ = refl
+fullObserverSeparatesToyWorlds transmittingOff transmittingOn ()
+fullObserverSeparatesToyWorlds transmittingOff absorbingOff ()
+fullObserverSeparatesToyWorlds transmittingOff absorbingOn ()
+fullObserverSeparatesToyWorlds transmittingOn transmittingOff ()
+fullObserverSeparatesToyWorlds transmittingOn transmittingOn _ = refl
+fullObserverSeparatesToyWorlds transmittingOn absorbingOff ()
+fullObserverSeparatesToyWorlds transmittingOn absorbingOn ()
+fullObserverSeparatesToyWorlds absorbingOff transmittingOff ()
+fullObserverSeparatesToyWorlds absorbingOff transmittingOn ()
+fullObserverSeparatesToyWorlds absorbingOff absorbingOff _ = refl
+fullObserverSeparatesToyWorlds absorbingOff absorbingOn ()
+fullObserverSeparatesToyWorlds absorbingOn transmittingOff ()
+fullObserverSeparatesToyWorlds absorbingOn transmittingOn ()
+fullObserverSeparatesToyWorlds absorbingOn absorbingOff ()
+fullObserverSeparatesToyWorlds absorbingOn absorbingOn _ = refl
+
+-- Boundary: this conditional finite observer includes the idealised medium
+-- coordinate. It does not solve generic acoustic phase retrieval, assign an
+-- emitter from arbitrary real recordings, or measure a physical material.
