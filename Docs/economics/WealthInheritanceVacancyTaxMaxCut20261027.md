@@ -540,3 +540,21 @@ Michael T. M. Emmerich and André H. Deutz (31 May 2018), *A tutorial on multiob
 
 Original mathematicians retain the historical theorem; Emmerich and Deutz retain ownership of their tutorial's exposition; previous DASHI Pareto owners retain their code and theorem ownership; ChatGPT-assisted new source terms are not kernel-certified until Agda is actually run. All first-link and Monster 3B Ibrahim source claims remain independent. No ESD surfaces or live trader authority are modified.
 
+## 2026-10-28 369/trialectic evidence-axis synthesis
+
+This extension answers the existing dialectic-27-cube interpretation without replacing the economic models with numbers.
+
+A single dialectical position lives on each of three axes. The first axis labels the hypothesis, the second labels source review, and their interaction has its own third effect-claim coordinate. Every position is one of the pre-existing signed trits: negative (counter-position), zero (unresolved), or positive (position). Thus the *annotation carrier* has 3^3 = 27 positions. It is a **coordinate language**, not a validated assessment or causal model.
+
+**Exact missing-information theorem:** For every fixed x/y, the z fibre still has all three possibilities. The new `sourceReviewDoesNotDetermineCausalPolarity` counterexample invokes the inherited `IntersectionalNonFactorability` owner; `rechartingXYCannotManufactureCausalPolarity` excludes even lossless-looking re-labels of that impoverished projection. A positive tax-hypothesis or review marker cannot produce a verified effect.
+
+At the next recursive level, x, y and z each carry an *entire existing 27-cell*. The inherited trialectic source owner proves the structural three-cell/T^9 representation, 27^3 = 19,683. The third cube carries separately supplied interaction information. It is not a function of the first two cubes by default. This follows the user's x-axis/y-axis/interaction-on-z construction without conflating a physical 3-cell with a topological ball or a causally estimated third variable.
+
+The six coordinate orientations obey the finite S3 permutation and braid laws. The C3 rotation returns after three applications, but rotating the *labels* of hypothesis/evidence/effect does not give valid meaning-preserving transformations of the original roles. The reused Q8 quotient remembers a central +/- distinction that the quotient forgets, just as a cash net or policy summary may forget data. This is an **information-loss analogy only**, not same-object quantum, market, causal, or Monster ontology. PR #1414 separately owns its quaternion/C3 finite witness and primary mathematical attributions.
+
+The five unresolved source requirements have **3^5 = 243 possible unverified review annotations**, while a three-position choice from the existing complement-five-mode carrier has **5^3 = 125 possibilities**. Their arithmetic cardinalities are provably unequal. Neither counts real candidate taxpayers, firms, confirmed receipts or tax outcomes. The original `Base369NumberTheoryNumerologyWrongTypeSnowballExact` owner prevents a numerological interpretation of shared digits from acquiring proof authority.
+
+The October 2026 source-atlas additions also keep distinct (a) Ring's Norwegian combined wealth/dividend/exit-tax reform outcome study, (b) Jaros–Rauh's one-time California tax revenue **forecast**, and (c) Bacher–Fagereng–Ring–Wold's startup **minimum equity requirement** study. Each has different authorship, intervention, target and inference validity. One may inspire a competing policy case but cannot pay another case's empirical obligations. See `Docs/economics/WealthTaxCompletionLemmaLedger20261028.md` for exact proof-owner/export and test mappings.
+
+**Status:** 61 D / 11 R / 5 N in the 77-row scoped ledger. All 42 original conversation topics remain in scope. The added mathematical cross-pollination does not close any of A05, C09, E07, F07 or H08. No Agda kernel pass or authenticated tax/CHESS/custody/causal record is claimed.
+
