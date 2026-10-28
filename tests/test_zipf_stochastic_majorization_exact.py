@@ -93,7 +93,6 @@ def test_fail_closed_wrong_horizon_sampler_counts_and_relation():
     with pytest.raises(ValueError):upper_tails((F(1,2), F(1,3)))
 
 
-
 def test_pair_cdf_exact_against_independent_two_type_enumeration():
     from zipf_stochastic_majorization_exact import pair_second_type_cdf
     for a,b in ((1,1),(2,1),(3,2),(4,3)):
