@@ -25,7 +25,7 @@ module DASHI.Statistics.ZipfTernary27ActionHeapsExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Product using (_,_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
