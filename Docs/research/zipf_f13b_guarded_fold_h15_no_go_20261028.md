@@ -1,4 +1,6 @@
 # F13b guarded positive-denominator fold and H15 complete-Heaps-curve no-go
+
+> **Status update, 28 October 2026 (later cut):** The earlier F13b `ConcreteAddLaw` source-construction gap is now addressed by `DASHI/Statistics/ZipfFractionAddRationalBridgeExact.agda` using standard-library unnormalised-to-reduced rational isomorphism, and consumed by `concreteHurwitzSourceWritten` in `ZipfFractionFoldConditionalExact.agda`. **No Agda kernel typecheck has been executed**, so all earlier statements about missing *kernel-certified* F13b proofs remain true. The authoritative newer proof-status ledger is `Docs/research/zipf_f13b_unreduced_rational_isomorphism_20261028.md`. Keep `finiteZipfWeightIdentificationPaid=false`.
 Date: 28 October 2026. Repository PR: https://github.com/chboishabba/dashi_agda/pull/1275.
 
 ## O — Objective
