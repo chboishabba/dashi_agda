@@ -23,6 +23,21 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.TwinPrimeTernary270AffineCRTCodecExact as Ternary270CRT
+open Ternary270CRT public using
+  ( cubeToWheel270
+  ; wheel270ToCube
+  ; wheel270DecodeEncode
+  ; cube270GlobalAntipode
+  ; wheel270AffinePairReversal
+  ; wheel270ModTwo
+  ; wheel270ModThree
+  ; wheel270LocalPrimeTwo
+  ; wheel270LocalPrimeThree
+  ; wheel270LocalPrimeFive
+  ; wheel270PassesCertifiedTwoThreeFive
+  )
+
 import DASHI.Arithmetic.TwinPrimeThreeAxisLocalThreeOrbitExact as TernaryLocalPrimeThree
 open TernaryLocalPrimeThree public using
   ( centeredPrimeThreeResidue
