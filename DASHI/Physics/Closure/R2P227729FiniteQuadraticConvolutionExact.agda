@@ -72,7 +72,6 @@ wideFiveRoundTrip (wideCube a b c)
 
 fiveWideRoundTrip :
   (g : GridCube125) → wideToFiveGrid (fiveGridToWide g) ≡ g
-fiveWideRoundTrip (gridCube I.gridMinusTwo I.gridMinusTwo I.gridMinusTwo) = refl
 fiveWideRoundTrip (gridCube a b c) =
   gridAll a b c
   where
