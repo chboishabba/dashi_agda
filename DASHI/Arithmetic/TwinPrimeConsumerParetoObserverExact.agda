@@ -54,6 +54,7 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Core
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Antipodal
 import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as Wave
 import DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact as Twin
 import DASHI.Arithmetic.CertifiedPrimePairModulusExact as Pair
@@ -105,6 +106,20 @@ threeAxisCapacityIsTwentySeven :
   Geometry.hypervoxelStateCount ≡ 27
 threeAxisCapacityIsTwentySeven =
   Geometry.hypervoxelStateCountIs27
+
+-- The *same* underlying 3x3x3 geometry has a strict C2 antipode.
+-- Under that action, the unique all-zero centre is fixed and 26 other
+-- points form 13 sign-opposite pairs. Reuse the existing source owner;
+-- a class count is NOT a primality predicate or a lossless code.
+threeAxisCapacityIsCentrePlusThirteenAntipodalPairs :
+  Geometry.hypervoxelStateCount ≡ 1 + 13 * 2
+threeAxisCapacityIsCentrePlusThirteenAntipodalPairs =
+  Antipodal.ternaryCubeCountDecomposesAsCentrePlusThirteenPairs
+
+threeAxisAntipodalOrbitCountIsFourteen :
+  Antipodal.antipodalClass27Count ≡ 14
+threeAxisAntipodalOrbitCountIsFourteen =
+  Antipodal.antipodalClass27CountIsFourteen
 
 OrderedThreeCubePair : Set
 OrderedThreeCubePair = ThreeByThreeByThree × ThreeByThreeByThree
