@@ -115,6 +115,23 @@ A three-mode toy **can reveal a discretisation bug or an information-loss bounda
 Verification levels: **source written** ≠ **Python independently executed** ≠ **committed suite executed** ≠ **Agda kernel theorem** ≠ **real experimental or NS mathematical physics result**. This distinction and the original authors' priority must remain visible in all reports.
 
 
+## 5b. 28 October reuse breakthrough: source-owned C3³ Fourier BIDI, exact 729 incidence and T⁶ carrier
+
+**Important correction of earlier roadmap:** the original DASHI repository already contains a *full* (not merely symbolic) 27-point cyclotomic Fourier algebra:
+- `DASHI.Biology.Physical.C3CubeCyclotomicFourierExact`: original `cubeFourierInversion`, `cubeFourierForwardInverse`, `cubeCharacterOrthogonality`; it builds a genuine 27-index DFT with `ℚ(ω)` amplitudes.
+- `DASHI.Biology.Physical.C3CubeCyclotomicParsevalExact`: original `cubeParsevalNormalised`, `cubeParsevalUnnormalised`.
+- `DASHI.Biology.Physical.C3CubeDirectGroupConvolutionExact`: original `c3CubeDirectConvolutionTheorem`, `directEqualsSpectralConvolution`. This is **cyclic** C3×C3×C3 group convolution, not Z³/Galerkin convolution.
+
+These already-pay **F4.3–F4.6** as original cyclic-theory owners, once the new signed mode chart is kernel-checked. The new `R2P227729ExistingC3FourierConvolutionReuseExact` packs any function on the 27 signed integer **labels** into the original `CubeSignal`, proves unpack/pack pointwise and pack/unpack object roundtrips, and directly reuses inverse, Parseval, and direct-vs-spectral cyclic convolution. **The chart must order the Fourier group residues as [zero, plus, minus]**, matching C3 residue classes 0,1,2. Ordering them [-,0,+] would be a distinct permutation that need not intertwine the group operation.
+
+The new `R2P227729FourierObserverIncidenceExact` now carries actual pair enumerations `cube27` (27) and `pair729` (729), exact `0..26` and `0..728` rank-list witnesses, and classified *input pairs* rather than naked number products: **343** satisfy coordinatewise `p+q∈[-1,1]³`, **386** do not. It also proves a typed mode/voxel BIDI, exhibits **sign(+2)=+ but centered-mod3(+2)=−**, and distinguishes original periodic C3³ wraparound from the original nonperiodic P3³ graph.
+
+The new `R2P227729PairSixTritFibreBidiExact` gives explicit **mutual inverse** maps `ModeCube27 × ModeCube27 ↔ TernaryFiniteFunctionDeltaBasisExact.TritCube 6` and transport laws for *arbitrary* functions on these 729 addresses. This is a new carrier-shape equivalence to an **original** T⁶ source owner, not a construction of the selected GF729 field action, a Monster representation, or physical clock pairs.
+
+The new `R2P227729FiniteQuadraticConvolutionExact` enumerates all pairs and provides an arbitrary-`Nat`-amplitude coefficient-wise theorem for all 125 integer wide-mode output labels. It recovers each exact `[-2,2]³` output after a **five-element index chart** and proves total pair-weight aggregation equality; a three-grid label-fold example remains genuinely lossy. Crucially, this is **NOT** `DFT5`/sampled-field multiplication equivalence and NOT an incompressible NS vector operator. The outstanding high-alpha finite work is now the **cross-operation intertwiner** (integer Galerkin convolution ↔ 5³-point physical-space product) and transverse vector/Leray structure. The original 27 C3 DFT is therefore reused, not duplicated.
+
+**Execution proof grades at this revision:** source-written Agda modules and root imports; exact arithmetic independently run with Python for 27×27 pair incidence, rank ranges and five input-amplitude profiles on all 125 outputs; **no Agda kernel run**, no exact-checkout test suite receipt, no R2P2/NS physical measurement or global analytic result. User explicitly excluded CI from this continuation, so the branch workflow was left untouched in this tranche.
+
 ## 6. Completion roadmap and exhaustive scoped lemma inventory (28 Oct 2026)
 
 **Scope of “complete”**: This is the entire currently identifiable lemma cutset for (F) a fully kernel-checked exact three-mode/27×27 Fourier *finite* codec/NS-operator abstraction, (M) an actual Ma-source optical-lattice operator/spectral comparator, (R) the separate R2P2 experimental comparator, and (C) any attempt to pay the global NS analytic/Clay frontier. There cannot be a known finite, complete list of lemmas that proves an unsolved global mathematical claim merely by inspecting code. If F reaches a kernel-green finish, M/R/C remain independent targets. Names prefixed **want:** are specifications, **not** claims that those declarations exist.
@@ -143,8 +160,8 @@ Verification levels: **source written** ≠ **Python independently executed** �
 - **F1.6** [R] \`BinaryThreeBitTwoTritAntipodalCodecExact.blockRoundTrip\`, \`centreUnused\`, \`complementAntipodeEquivariant\`.
 - **F1.7** [R] \`BinaryThreeBitTrit27FibreLiftExact.bit3LiftRoundTrip\` and \`bitComplementBecomes27Antipode\`; its binary image has **8**, not 27, framed states.
 - **F1.8** [R] \`Base369Ternary27HypervoxelFabricGeometryExact.hypervoxelStateCountIs27\` and exact \`Ternary27Point\`.
-- **F1.9** [N] **want:\`threeModeCubeEquivBase369Point\`**: explicit bijection between three mode-label products and the existing canonical \`Ternary27Point\`, with both inverse proofs; use original constructors, not fresh incompatible C3 types.
-- **F1.10** [N] **want:\`pair27EquivTrit6\`**: typed bijection between *ordered pairs* \`Cube27×Cube27\` and the existing \`TritCube 6\`; preserve roles, and prove projection/pair/rebuild in both directions. \`Base369TernaryDeltaBasisCrossPollinationExact.appraisalCountIsDecisionSquared\` proves cardinality, not this physical role identification.
+- **F1.9** [S] **want:\`threeModeCubeEquivBase369Point\`**: explicit bijection between three mode-label products and the existing canonical \`Ternary27Point\`, with both inverse proofs; use original constructors, not fresh incompatible C3 types.
+- **F1.10** [S] **want:\`pair27EquivTrit6\`**: typed bijection between *ordered pairs* \`Cube27×Cube27\` and the existing \`TritCube 6\`; preserve roles, and prove projection/pair/rebuild in both directions. \`Base369TernaryDeltaBasisCrossPollinationExact.appraisalCountIsDecisionSquared\` proves cardinality, not this physical role identification.
 - **F1.11** [N] **want:\`pair27IsNotPhysicalDoubleClockOrGF729\`**: guard that a pair of mode labels ≠ an optical two-clock measurement ≠ a selected GF(729) field element/Monster action without a separately named carrier-and-operator equivalence.
 
 ### Gate F2 — the **three distinct** 27-label observers (highest-alpha missing math)
@@ -153,10 +170,10 @@ Verification levels: **source written** ≠ **Python independently executed** �
 - **F2.2** [R] \`NSTriadKNPeriodicFourierTernaryTorusFibreBidiRound530Exact.periodicSignObservationSection530\`: existing section of sign observation.
 - **F2.3** [R] \`NSTriadKNPeriodicTorusBase369NormalizationRound531Exact\`: exact sign-fibre/B369 carrier normalization and periodic torus adjacency, **not** a quotient of integer addition.
 - **F2.4** [S] \`periodicThreePointFold\`, \`threeAxisPeriodicallyAliasedPlusXSquare\`: distinct **centered modulo-three** sampling residue.
-- **F2.5** [N] **want:\`signVsCenteredModThreeDisagreeAtTwo\`**: at \`+2\` prove \`integerSign529(+2)=+\` and \`centeredMod3(+2)=-\`; their outputs differ even though both have three labels.
+- **F2.5** [S] **want:\`signVsCenteredModThreeDisagreeAtTwo\`**: at \`+2\` prove \`integerSign529(+2)=+\` and \`centeredMod3(+2)=-\`; their outputs differ even though both have three labels.
 - **F2.6** [N] **want:\`signQuotientNotAdditive\`**: exhibit \`(+1)+(+1)\` as a concrete failure of signed-trit C3 group addition under the sign observer. The existing sign-section never claimed a group homomorphism.
 - **F2.7** [N] **want:\`modThreeIsAdditive\`**: prove \`ρ_3(p+q)=ρ_3(ρ_3p+ρ_3q)\` for integer Fourier vectors, using a genuine mod-3 group structure (not signed sign classification).
-- **F2.8** [N] **want:\`pathAdjacencyNotCyclicAdjacency\`**: preserve the original P3 cubical adjacency's lack of wraparound from \`Base369Ternary27PathCubeSpectralBandsExact\`; contrast with \`Base369PeriodicTernaryTorusPathRestrictionBidiExact\`.
+- **F2.8** [S] **want:\`pathAdjacencyNotCyclicAdjacency\`**: preserve the original P3 cubical adjacency's lack of wraparound from \`Base369Ternary27PathCubeSpectralBandsExact\`; contrast with \`Base369PeriodicTernaryTorusPathRestrictionBidiExact\`.
 - **F2.9** [R] \`Base369Ternary27CharacterAdjacencyEquivarianceExact\`: \`C3×C3×C3 ≠ Z/27Z\` guard, cubic tensor character and axis swap/rotation.
 - **F2.10** [N] **want:\`observerInformationOrder\`**: identify which consumers factor through **sign**, **mod3**, **sign+exact residual**, and **mod3+integer quotient**. Neither bare 27-class observer can recover unbounded frequency or the correct output under every nonlinear operation.
 
@@ -164,12 +181,12 @@ Verification levels: **source written** ≠ **Python independently executed** �
 
 - **F3.1** [R] \`NSIntegerFourierLattice.addMode\`, \`Resonance\`: original \`ℤ³\` exact resonance.
 - **F3.2** [S] \`exactQuadraticModeSum\`, \`positivePositiveLeavesThreeModeWindow\` and \`periodicQuadraticModeSum\`: PR #1407 finite nine-case integer-versus-folded model.
-- **F3.3** [N] **want:\`enumerateCube27CompleteNoDuplicates\`**: a canonical ordered \`Fin 27\` enumeration of all 27 signed mode labels, with a proof of completeness and uniqueness.
-- **F3.4** [N] **want:\`enumeratePair729CompleteNoDuplicates\`**: equivalence between pairs of \`Fin 27\` and \`Fin 729\`, preserving ordered pair roles.
+- **F3.3** [S] **want:\`enumerateCube27CompleteNoDuplicates\`**: a canonical ordered \`Fin 27\` enumeration of all 27 signed mode labels, with a proof of completeness and uniqueness.
+- **F3.4** [S] **want:\`enumeratePair729CompleteNoDuplicates\`**: equivalence between pairs of \`Fin 27\` and \`Fin 729\`, preserving ordered pair roles.
 - **F3.5** [N] **want:\`integerTriadPairSumCommutesWithEmbedding\`**: all 729 source-indexed pairs use canonical \`NSIntegerFourierLattice.addMode\`, not arithmetic in C3³.
-- **F3.6** [N] **want:\`oneAxisSevenInsidePairs\`**: seven of nine ordered pairs in \`{-1,0,1}²\` have sum inside \`{-1,0,1}\`.
-- **F3.7** [N] **want:\`cube343InsidePairs\`**: coordinate product gives \`7³=343\` exact in-window ordered 3D pairs. The current Agda \`7*7*7=343\` arithmetic is not yet a proof that this is the actual classified set.
-- **F3.8** [N] **want:\`cube386OutsidePairs\`**: partition the 729 actual pairs by decidable membership and prove \`729-343=386\`; no duplicate, omitted or unclassified input.
+- **F3.6** [S] **want:\`oneAxisSevenInsidePairs\`**: seven of nine ordered pairs in \`{-1,0,1}²\` have sum inside \`{-1,0,1}\`.
+- **F3.7** [S] **want:\`cube343InsidePairs\`**: coordinate product gives \`7³=343\` exact in-window ordered 3D pairs. The current Agda \`7*7*7=343\` arithmetic is not yet a proof that this is the actual classified set.
+- **F3.8** [S] **want:\`cube386OutsidePairs\`**: partition the 729 actual pairs by decidable membership and prove \`729-343=386\`; no duplicate, omitted or unclassified input.
 - **F3.9** [N] **want:\`modeSumNegationCovariant\`**: signed antipode / true wavevector negation commute with exact integer addition; respect conjugate-frequency roles.
 - **F3.10** [N] **want:\`pairIncidenceByOutput\`**: partition 729 ordered interactions into output fibres by **integer** \`k=p+q\`, not output sign or 27-bin residue.
 - **F3.11** [N] **want:\`outOfWindowDoesNotMeanNonzeroAmplitude\`**: incidence support alone supplies no physical coefficient; zero-valued and cancelling terms remain possible.
@@ -178,22 +195,22 @@ Verification levels: **source written** ≠ **Python independently executed** �
 
 - **F4.1** [R] \`TernaryFiniteFunctionDeltaBasisExact.decomposeExact\` and \`Base369TernaryDeltaBasisCrossPollinationExact.decisionFunctionDecomposition\`: exact finite point-mass decomposition on \`TritCube 3\`.
 - **F4.2** [R] \`Base369Ternary27CharacterAdjacencyEquivarianceExact.cubeCharacterValue\`: existing C3³ tensor character values.
-- **F4.3** [N] **want:\`cubeCharactersOrthogonal\`**: exact finite orthogonality sum using a carrier with sufficient roots of unity and a correct normalization (\`ℂ\`, cyclotomic or rational complex).
-- **F4.4** [N] **want:\`cubeDFTInverse\`**: construct a full 27-point transform and inverse; the original \`Base369Ternary27SpectralSymmetryIrrepBridgeExact\` explicitly does **not** claim this.
-- **F4.5** [N] **want:\`cubeParseval\`**: correct normalization and squared-norm equality. The original symmetry/character labels do not themselves prove Parseval.
-- **F4.6** [N] **want:\`mod3ConvolutionTheorem\`**: Fourier transform of **periodic folded** convolution is pointwise product, explicitly contrasted with the integer Galerkin convolution.
-- **F4.7** [N] **want:\`fullPair729KernelToLinearMap\`**: a typed bilinear map \`Coefficient^27×Coefficient^27→Coefficient^27\` indexed by pair-incidence and output, with \`27²\` interaction entries; a 729-element index set alone does not supply physical coefficients.
+- **F4.3** [R] **want:\`cubeCharactersOrthogonal\`**: exact finite orthogonality sum using a carrier with sufficient roots of unity and a correct normalization (\`ℂ\`, cyclotomic or rational complex).
+- **F4.4** [R] **want:\`cubeDFTInverse\`**: construct a full 27-point transform and inverse; the original \`Base369Ternary27SpectralSymmetryIrrepBridgeExact\` explicitly does **not** claim this.
+- **F4.5** [R] **want:\`cubeParseval\`**: correct normalization and squared-norm equality. The original symmetry/character labels do not themselves prove Parseval.
+- **F4.6** [R] **want:\`mod3ConvolutionTheorem\`**: Fourier transform of **periodic folded** convolution is pointwise product, explicitly contrasted with the integer Galerkin convolution.
+- **F4.7** [S] **want:\`fullPair729KernelToLinearMap\`**: a typed bilinear map \`Coefficient^27×Coefficient^27→Coefficient^27\` indexed by pair-incidence and output, with \`27²\` interaction entries; a 729-element index set alone does not supply physical coefficients.
 - **F4.8** [N] **want:\`periodicVsPathSpectrumNotSilentlyIdentical\`**: original \`Base369Ternary27PathCubeSpectralBandsExact\` provides multiplicity combinatorics, not a diagonalization of periodic or real lattice operators by cyclic characters.
-- **F4.9** [N] **want:\`codecPushForwardOfFullKernel\`**: transporting the *same fully retained* 27×27 kernel through an exact codec commutes with decoding, with no claim that a quotient also transports it.
+- **F4.9** [S] **want:\`codecPushForwardOfFullKernel\`**: transporting the *same fully retained* 27×27 kernel through an exact codec commutes with decoding, with no claim that a quotient also transports it.
 
 ### Gate F5 — alias-free projected quadratic operator and padded computation (finite endpoint)
 
 - **F5.1** [S] \`exactRetainedModeProjection\`, \`correctQuadraticProjectionRemovesPlusTwo\` and \`incorrectQuadraticFoldCreatesMinusOne\`: correct truncation vs 3-point alias.
 - **F5.2** [S] \`wideModeAliasCollision\`, \`foldedThreePointModeCannotRecoverExactFourierIndex\`, \`rechartingThreePointModeCannotFixAliasing\`: reuses generic nonfactorability. Kernel check pending.
-- **F5.3** [N] **want:\`integerQuadraticConvolution27\`**: for arbitrary coefficients in an agreed ring/field, sum all integer-exact input pairs into output coefficients for \`k∈[-2,2]^3\`.
-- **F5.4** [N] **want:\`projectionAfterConvolution\`**: define canonical integer Galerkin \`P_1(u*v)\` on \`[-1,1]^3\`, independent of sampled-grid aliasing.
+- **F5.3** [S] **want:\`integerQuadraticConvolution27\`**: for arbitrary coefficients in an agreed ring/field, sum all integer-exact input pairs into output coefficients for \`k∈[-2,2]^3\`.
+- **F5.4** [S] **want:\`projectionAfterConvolution\`**: define canonical integer Galerkin \`P_1(u*v)\` on \`[-1,1]^3\`, independent of sampled-grid aliasing.
 - **F5.5** [N] **want:\`threeGridCounterexampleAtRetainedCoefficient\`**: formalize at least one genuinely nonzero erroneous retained quadratic coefficient, not merely a mode-label collision.
-- **F5.6** [N] **want:\`fivePointGridInjectiveOnQuadraticSupport\`**: if all component sums lie in \`[-2,2]\`, reduction mod five is injective on that integer support.
+- **F5.6** [S] **want:\`fivePointGridInjectiveOnQuadraticSupport\`**: if all component sums lie in \`[-2,2]\`, reduction mod five is injective on that integer support.
 - **F5.7** [N] **want:\`paddedFiveGridMatchesTrueProjectedProduct\`**: finite DFT orthogonality + previous injectivity yields \`P_1(FFT5⁻¹(FFT5(u)·FFT5(v)))=P_1(u*v)\` for **every** 27-coefficient input pair, not just 27 balanced-amplitude sample cases. Here `E` zero-embeds Fourier coefficients into the five-point grid on each axis; `DFT5` and `IDFT5` must have mutually consistent normalization. The right side `u*v` means exact integer-index Fourier convolution, not pointwise multiplication of coefficient arrays.
 - **F5.8** [N] **want:\`threeGridHasNoUniversalExactness\`**: derive from F5.5 the impossibility of a universal equality for unpadded N=3.
 - **F5.9** [N] **want:\`codecTransportPreservesPaddedProduct\`**: prove the exact codec diagram commutes with the *correct padded and projected* operator, with proper coefficient precision and sign data.
