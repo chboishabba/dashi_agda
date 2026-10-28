@@ -783,3 +783,19 @@ remain OPEN MATHEMATICS about gap-two simultaneous primality.
 This #1408 addition owns only consumer non-factorability; Ibrahim
 Monster 3B, original sector topology, statistical Zipf/Heaps and
 2026 polynomial PR owners remain separately credited.
+
+### Q25–Q26: full-cube period-information wall
+
+| ID | Required exact lemma or proof obligation | Status and current owner |
+|---|---|---|
+| Q25 | `fullCubePeriodNoGo`: full 27-state wheel code at 59 and 329 collides while true twin starts differ | S: new #1408 `wholeCubeResidueLosesTwinConsumer`, `noUniversalTwinClassifierFromFiniteWholeCube`; 329=7×47, 59/61 prime |
+| Q26 | `NatWheelResiduePeriodBidi`: preserve the unrestricted quotient k along with r=n mod270, prove n=270*k+r and roundtrip, and show genuine twin observer acts on the **reconstructed Nat**, not residue alone | N/O: reuse original Nat division theorem, no new prime oracle |
+
+**Important information hierarchy:** `S3 equality pattern` /
+`C2 sign orbit` (14 classes) is coarser than the full
+`Ternary27Point` (27 states). The full cube is a typed
+and invertible description of an **admissible residue modulo 270**
+but is still a quotient of unbounded integers. Neither 14 nor 27
+states suffices to determine genuine `TwinPrimeAt n` for all n.
+Even `Nat ≅ (residue, unbounded period index)` is a *lossless input
+representation*, not a proof of joint prime correlation.
