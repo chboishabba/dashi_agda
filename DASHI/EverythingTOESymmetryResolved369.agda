@@ -1,5 +1,14 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- Classical cubic discriminant: Vandermonde alternates under S3,
+-- its square depends only on Vieta coefficients and vanishes at collisions.
+import DASHI.Foundations.PolynomialVandermondeDiscriminantExact as RootDiscriminant
+open RootDiscriminant public using
+  ( vandermondeTransformsByParity ; discriminantInvariant
+  ; discriminantDependsOnlyOnVietaCoefficients
+  ; firstSecondCollisionGivesZero
+  ; firstThirdCollisionGivesZero ; secondThirdCollisionGivesZero )
+
 -- Artin B3 full twist: trivial root S3 endpoint but C7 signed
 -- crossing exponent six, preserving both braid and cancellation relations.
 import DASHI.Foundations.PolynomialBraidFullTwistSevenWitnessExact as BraidTwist
