@@ -418,3 +418,32 @@ OEIS A267572: https://oeis.org/A267572.
 No protected ESD surfaces changed. PR #1414 monodromy
 objects are branch-only and independent; no same-object
 Monster 3B or quintic prime-distribution claim is made.
+
+## 28 October 2026 — genuine S3/C3/Stirling orbit correspondence and arithmetic no-go
+
+Current #1244 source `AlexanderHornedS3WordSignOrbitTransportExact`
+already constructs arbitrary-length word normalization
+`(w0,...,wn) -> (w1-w0,...,wn-w0)`, proves C3
+translation cancellation and C2 sign-equivariance, and
+supplies a zero-anchor section and retranslation witness.
+The quotient-level identity
+`T^(n+1)/S3 ≅ T^n/C2` uses the usual affine
+`S3=AGL(1,F3)=C3⋊C2`. The classical RGS/Stirling
+interpretation is independently owned by #1275. It yields
+`(3^n+1)/2 = Σ_{k=1}^3 S(n+1,k)` (n≥0).
+This correspondence is between **orbit sets with specified
+actions**; it is not equality of the raw carrier actions,
+statistical distributions or a Monster-group representation.
+
+#1408 only contributes a new consumer boundary:
+`TwinPrimeTernary270IbrahimSurvivorCollisionExact` now reuses
+the ORIGINAL `BalancedTernaryAntipodalOrbitExact` to show
+the mod-270 points 59/209 share a global 14-class sign orbit,
+despite different true twin-primality results. Consequently,
+the four-position S3 equality-pattern class (under the
+specific normalized quotient map) cannot serve as a twin-prime
+oracle. The original 3×3×3 geometry and its dependent
+orientation residual are required for lossless arithmetic input.
+No branch-only #1244/#1275 module is imported into #1408.
+See 24 named Q-series obligations in the existing 75-lemma matrix.
+All new Agda source remains kernel-pending. No CI or ESD edits.
