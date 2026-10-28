@@ -196,3 +196,50 @@ For contextual predictions, test preregistered `M0 = P(Y | acoustic_measurement)
 M1 is a productive mathematical cut because it adds a **positive joint sufficiency witness** to the prior negative acoustic-only obstruction. Further Agda abstractions should be delayed until: (a) the pinned Track A kernel and four TOE aggregates pass, (b) both exact scripts execute in CI at the exact commit, and (c) GitHub merges the minimal source/ownership changes. The separate calibrated-acoustics and soundscape experiments remain optional research lanes, not requirements for a correctly delimited formalisation release.
 
 `DASHI.Wikimedia.IbrahimSnowballSkepticismExpertiseTrustPropagandaBidiExact` remains the source of the reused persuasion/truth and deceptive-intent lemmas. This application does not transfer Ibrahim Monster 3B representation identity, reinterpret numerical coincidences as proof, or claim a sociological/medical cause. Prior source and repository proof authors are preserved.
+
+## R1 / I1 / S1 continuation — rhythm, causal identifiability and provenance (28 October 2026)
+
+**New canonical application file:** `DASHI/Culture/GoodmanSonicWarfareRhythmInterventionExact.agda` is imported into the existing `GoodmanSonicWarfareExact` owner. The TOE roots consume it transitively. No extra generic calculus was introduced.
+
+### R1 — count is not onset phase
+
+This finite example has two pulse traces, each containing **exactly one** event. One event occurs in the first slot; the other occurs in the second slot. The coarse pulse-count projection collapses them. The onset-phase query distinguishes them. `countCannotRecoverPhase` reuses `DASHI.Core.QueryIndexedProjectionAdequacyExact` to rule out every phase-answer factorisation through count alone; `countIsAdequateForCount` proves count is sufficient for its own query; and `phaseIsAdequateForPhase` gives the positive phase witness.
+
+A two-slot **event count is not tempo or auditory entrainment**. This is a minimal structural example of why a rhythm researcher must retain timed onset/phase, clocks and episode alignment instead of just a global count or nominal frequency. Earlier rhythm analyses by **Lucio Alberto Pinheiro dos Santos** (as conveyed by Bachelard/Goodman, not independently recovered here), **Gaston Bachelard**, and **Henri Lefebvre** retain original priority. Goodman's relevant source chapters are **16 (1931: Rhythmanalysis)** and **20 (Rhythm out of Noise)**. The exact finite source-written proof belongs to the DASHI application.
+
+### I1 — passive association does not identify sound causation
+
+The new example uses two **synthetic structural causal models**:
+
+| Model | Passive equations | Controlled source, background held fixed |
+|---|---|---|
+| Direct response | `X := U, Y := X` | `do(X=1), U=0` gives `(X,Y)=(1,1)` |
+| Shared-driver association | `X := U, Y := U` | `do(X=1), U=0` gives `(X,Y)=(1,0)` |
+
+Under passive conditions `U=0` and `U=1`, **both** models show exactly `(0,0)` and `(1,1)`. Passive-only datasets cannot distinguish the mechanisms in this model. The logical controlled intervention separates their predictions.
+
+The previously existing generic theorem owner, **`DASHI.Core.IdentifiabilityActiveInformationExact`**, is reused through `Ident.EquivalentOn`, `Ident.DistinguishingExperiment` and `Ident.splitterRefutesAnyFamilyContainingIt`. That owner credits **Keith J. Beven** (2006, DOI [10.1016/j.jhydrol.2005.07.007](https://doi.org/10.1016/j.jhydrol.2005.07.007)) and **Byron K. Williams, Mitchell J. Eaton and David R. Breininger** (2011, DOI [10.1016/j.ecolmodel.2011.07.003](https://doi.org/10.1016/j.ecolmodel.2011.07.003)); their work is the cited methodological antecedent, not authorship of this finite sonic fixture.
+
+For general causal methodology, **Miguel A. Hernán and James M. Robins**, [*Causal Inference: What If*](https://miguelhernan.org/whatifbook), first online-cited 2020 with later publisher versions, is an independent source. The book explains why an explicitly defined intervention, exchangeability, consistency, positivity and study design matter. **None of those empirical identification assumptions is proven by the two finite examples.** This is an observational-equivalence countermodel and a possible discriminating measurement *in the model*, not a performed causal study.
+
+- `passiveObservationsDoNotIdentifyCausalModel`: exact finite equivalence on two passive designs.
+- `logicalInterventionDistinguishesMechanisms`: diagnostic experiment separates the two synthetic mechanisms.
+- `addingControlledInterventionBreaksEquivalence`: existing generic splitter theorem rules out equivalence when the discriminating experiment is included.
+
+A real acoustic trial must state its exposure, comparators, recruitment, microphone calibration, context measurement, noncompliance/contamination, outcome metric, uncertainty and ethical/safety permissions. **No intervention against a person is inferred or authorised.** The query-specific difference between observational prediction and causal identification is the high-value formal takeaway.
+
+### S1 — sonic circulation cannot create proof or source ownership
+
+The existing `DASHI.Core.SnowballAttributionProvenanceInvariantExact` now has a **concrete instantiation for `goodmanSource`** in the main application. `goodmanSnowballRole` and the source-kind/proof-nonimport/authority-noncreation equalities are direct use of the existing owner.
+
+The rhythm/intervention application also reuses the existing citation/proof, citation/authority, source-kind retention and formalisation-relationship firewalls. Goodman's use of *audio virology*, dubbing, remix, earworms and network circulation is **not** literal viral replication, proof that a listener experienced fear, or permission to attribute a dub technique to a distributor rather than its creator.
+
+For the **politics of frequency**, distinguish (1) a speaker/emitter with evidence of physical output, (2) an institutional sponsor/editor with its own records, (3) a platform/distribution event, (4) a receiver's actual exposure, (5) a measured effect, and (6) a supported counterfactual effect. These are separate ownership and causal coordinates; the source's historical examples remain independently verifiable historical hypotheses.
+
+### Test/roadmap consequences
+
+The finite regression now includes **15** bounded factorisation checks: 6 original mirror/propaganda/acoustics, 3 four-world context, 3 rhythmic count/phase, 3 passive/controlled causal model comparisons. This is exhaustive only for the listed fixtures. The accompanying static checker requires the inherited theorem owners and all six readout cases; neither script certifies Agda.
+
+**Pareto next cut:** Stop adding semantic wrappers. Compile the two owner modules and the canonical TOE roots in the pinned Agda environment, repair any actual type errors and preserve their original proof ownership. External calibrated acoustics/soundscape research can proceed independently and must not be smuggled in as a completed theorem. CI scheduling is not part of this continuation.
+
+**Physical meaning:** These examples prove no anomalous acoustic force and no universal sound-to-fear law. They justify a disciplined experimental model that keeps onset phase, exposure, recipient context and causal intervention assumptions distinct, and uses independent measured observations to decide which coordinates actually improve out-of-sample inference.
