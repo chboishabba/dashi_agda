@@ -1195,3 +1195,237 @@ paretoOrderDoesNotTotallyRankTheseOptions (inj₁ leftDominates) =
   cheapAdministrationDoesNotDominateCareOption leftDominates
 paretoOrderDoesNotTotallyRankTheseOptions (inj₂ rightDominates) =
   careOptionDoesNotDominateCheapAdministration rightDominates
+
+------------------------------------------------------------------------
+-- 2026-10-28 FOLLOW-ON: BUDGET, ATTRIBUTION AND FINITE PARETO BOUNDARIES.
+-- Model-conditional source terms, not externally observed transactions.
+-- Original ASX/CHESS and empirical author ownership is unchanged.
+------------------------------------------------------------------------
+
+-- B06. A no-penalty/no-refund/no-interest collection is no greater than
+-- the *named* assessed liability when the two exactly reconcile. The
+-- assessment amount must be supplied by the caller; this does not
+-- authenticate an assessment or exclude real statutory adjustments.
+record NoAdjustmentCollection : Set where
+  constructor no-adjustment-collection
+  field
+    assessedLiabilityUnits : Nat
+    remittedPrincipalUnits : Nat
+    stillUnpaidPrincipalUnits : Nat
+    principalConservation :
+      remittedPrincipalUnits + stillUnpaidPrincipalUnits
+        ≡ assessedLiabilityUnits
+open NoAdjustmentCollection public
+
+remittanceBoundedByAssessedLiabilityUnderNoPenalties :
+  (collection : NoAdjustmentCollection) →
+  remittedPrincipalUnits collection ≤ assessedLiabilityUnits collection
+remittanceBoundedByAssessedLiabilityUnderNoPenalties collection =
+  subst
+    (λ total → remittedPrincipalUnits collection ≤ total)
+    (principalConservation collection)
+    (m≤m+n (remittedPrincipalUnits collection)
+      (stillUnpaidPrincipalUnits collection))
+
+noAdjustmentCollectionExample : NoAdjustmentCollection
+noAdjustmentCollectionExample =
+  no-adjustment-collection 5 3 2 refl
+
+-- B07. Avoid silently treating appropriation as actual expenditure.
+-- The single budget identity includes distinct opening/other receipts,
+-- administration, fiscal transfers, care appropriation and closing cash.
+record ReconciledPublicCashBudget : Set where
+  constructor reconciled-public-cash-budget
+  field
+    availablePublicCash : Nat
+    administrativeCashOutflow : Nat
+    transferCashOutflow : Nat
+    careAppropriationCashOutflow : Nat
+    retainedPublicCash : Nat
+    publicCashBalance :
+      availablePublicCash
+        ≡ (administrativeCashOutflow + transferCashOutflow
+            + careAppropriationCashOutflow) + retainedPublicCash
+open ReconciledPublicCashBudget public
+
+budgetOutflow : ReconciledPublicCashBudget → Nat
+budgetOutflow budget =
+  administrativeCashOutflow budget
+    + transferCashOutflow budget + careAppropriationCashOutflow budget
+
+cashBudgetConservationWithCostsAndTransfers :
+  (budget : ReconciledPublicCashBudget) →
+  budgetOutflow budget ≤ availablePublicCash budget
+cashBudgetConservationWithCostsAndTransfers budget =
+  subst
+    (λ total → budgetOutflow budget ≤ total)
+    (sym (publicCashBalance budget))
+    (m≤m+n (budgetOutflow budget) (retainedPublicCash budget))
+
+syntheticBalancedPublicBudget : ReconciledPublicCashBudget
+syntheticBalancedPublicBudget =
+  reconciled-public-cash-budget 9 1 2 3 3 refl
+
+-- B08. Appropriating the same currency amount does not identify
+-- delivered hours. The example is about missing information, not a
+-- prediction that any named care institution delivers zero hours.
+record CareDeliveryCounterworld : Set where
+  constructor care-delivery-counterworld
+  field
+    careAppropriationAmount : Nat
+    deliveredCareServiceHours : Nat
+open CareDeliveryCounterworld public
+
+fundedUnstaffedCare : CareDeliveryCounterworld
+fundedUnstaffedCare = care-delivery-counterworld 2 0
+
+fundedStaffedCare : CareDeliveryCounterworld
+fundedStaffedCare = care-delivery-counterworld 2 1
+
+differentCareHoursAtSameAppropriation :
+  deliveredCareServiceHours fundedUnstaffedCare
+    ≡ deliveredCareServiceHours fundedStaffedCare → ⊥
+differentCareHoursAtSameAppropriation ()
+
+careAppropriatedDoesNotDetermineCareDelivered :
+  INF.FactorsThrough careAppropriationAmount deliveredCareServiceHours → ⊥
+careAppropriatedDoesNotDetermineCareDelivered =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      fundedUnstaffedCare fundedStaffedCare refl
+      differentCareHoursAtSameAppropriation)
+
+-- C09 partial: an arithmetically balanced source route is not a proof
+-- that financing or settlement was accessible at remittance time.
+-- A real feasibility determination needs external liquidity, collateral
+-- and time evidence. Bool here is an *assumption*, not a broker receipt.
+record RouteAccessCounterworld : Set where
+  constructor route-access-counterworld
+  field
+    attemptedRoute : FundingRoute
+    externalFundsAccessible : Bool
+open RouteAccessCounterworld public
+
+accessibleSyntheticRoute : RouteAccessCounterworld
+accessibleSyntheticRoute =
+  route-access-counterworld assetSaleFunded true
+
+inaccessibleSyntheticRoute : RouteAccessCounterworld
+inaccessibleSyntheticRoute =
+  route-access-counterworld assetSaleFunded false
+
+identicalRouteCashReceipt : RouteAccessCounterworld → Nat
+identicalRouteCashReceipt world =
+  taxPaymentForRoute (attemptedRoute world)
+
+routeBalanceDoesNotEstablishLiquidityOrTiming :
+  INF.FactorsThrough identicalRouteCashReceipt externalFundsAccessible → ⊥
+routeBalanceDoesNotEstablishLiquidityOrTiming =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      accessibleSyntheticRoute inaccessibleSyntheticRoute refl
+      (λ ()))
+
+-- F06. A participant's cash batch is not an authenticated beneficial
+-- owner. Synthetic identifier numbers are *distinguishable fixture keys*,
+-- not legal, brokerage, HIN, or custody-verified identities.
+record ParticipantIdentityCounterworld : Set where
+  constructor participant-identity-counterworld
+  field
+    participantClearing : ParticipantClearingBatch
+    unverifiedInvestorKey : Nat
+open ParticipantIdentityCounterworld public
+
+participantNetCashProjection : ParticipantIdentityCounterworld → Nat
+participantNetCashProjection world =
+  netReceivedCash (participantClearing world)
+
+firstAttributionCandidate : ParticipantIdentityCounterworld
+firstAttributionCandidate =
+  participant-identity-counterworld offsettingClearedTransactions 1
+
+secondAttributionCandidate : ParticipantIdentityCounterworld
+secondAttributionCandidate =
+  participant-identity-counterworld offsettingClearedTransactions 2
+
+differentInvestorKeysDespiteMatchingNet :
+  unverifiedInvestorKey firstAttributionCandidate
+    ≡ unverifiedInvestorKey secondAttributionCandidate → ⊥
+differentInvestorKeysDespiteMatchingNet ()
+
+participantNetStatementDoesNotIdentifyIndividualTaxpayer :
+  INF.FactorsThrough participantNetCashProjection unverifiedInvestorKey → ⊥
+participantNetStatementDoesNotIdentifyIndividualTaxpayer =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      firstAttributionCandidate secondAttributionCandidate refl
+      differentInvestorKeysDespiteMatchingNet)
+
+-- G06 partial: conditional resource constraints, never a conversion
+-- from money, votes or traded shares to material productive output.
+record FixedInputConstructionFeasibility : Set where
+  constructor fixed-input-construction-feasibility
+  field
+    commissionedPlantUnits : Nat
+    energyPerPlantUnit : Nat
+    materialPerPlantUnit : Nat
+    physicallyAvailableEnergy : Nat
+    physicallyAvailableMaterials : Nat
+    energySufficesForConstruction :
+      commissionedPlantUnits * energyPerPlantUnit ≤ physicallyAvailableEnergy
+    materialsSufficeForConstruction :
+      commissionedPlantUnits * materialPerPlantUnit
+        ≤ physicallyAvailableMaterials
+open FixedInputConstructionFeasibility public
+
+energyMaterialsAndConstructionRequireSeparateInputs :
+  (period : FixedInputConstructionFeasibility) →
+  (commissionedPlantUnits period * energyPerPlantUnit period
+    ≤ physicallyAvailableEnergy period)
+  × (commissionedPlantUnits period * materialPerPlantUnit period
+    ≤ physicallyAvailableMaterials period)
+energyMaterialsAndConstructionRequireSeparateInputs period =
+  energySufficesForConstruction period ,
+  materialsSufficeForConstruction period
+
+-- I08 finite countermodel. A *pair* of incomparable alternatives can
+-- both be Pareto-minimal. This does NOT construct a full finite-frontier
+-- algorithm (I07), set a tax rate or select a welfare function.
+TwoOptionUndominated : HypotheticalPolicyOutcome → Set
+TwoOptionUndominated candidate =
+  (challenger : HypotheticalPolicyOutcome) →
+    Pareto.WeaklyDominates policyTradeoffCosts challenger candidate →
+    Pareto.WeaklyDominates policyTradeoffCosts candidate challenger
+
+cheapAdministrationIsUndominated : TwoOptionUndominated lowAdministrativeCost
+cheapAdministrationIsUndominated lowAdministrativeCost _ =
+  paretoDominanceReflexive policyTradeoffCosts lowAdministrativeCost
+cheapAdministrationIsUndominated increasedCareCapacity challengerDominates
+  with careOptionDoesNotDominateCheapAdministration challengerDominates
+... | ()
+
+careCapacityIsUndominated : TwoOptionUndominated increasedCareCapacity
+careCapacityIsUndominated lowAdministrativeCost challengerDominates
+  with cheapAdministrationDoesNotDominateCareOption challengerDominates
+... | ()
+careCapacityIsUndominated increasedCareCapacity _ =
+  paretoDominanceReflexive policyTradeoffCosts increasedCareCapacity
+
+careAndAdministrationAreDistinct :
+  increasedCareCapacity ≡ lowAdministrativeCost → ⊥
+careAndAdministrationAreDistinct ()
+
+finiteParetoTradeoffHasTwoDistinctMinimalOptions :
+  TwoOptionUndominated lowAdministrativeCost
+  × TwoOptionUndominated increasedCareCapacity
+finiteParetoTradeoffHasTwoDistinctMinimalOptions =
+  cheapAdministrationIsUndominated , careCapacityIsUndominated
+
+paretoMinimalityCannotUniquelySelectCheapAdministration :
+  ((candidate : HypotheticalPolicyOutcome) →
+    TwoOptionUndominated candidate →
+    candidate ≡ lowAdministrativeCost) → ⊥
+paretoMinimalityCannotUniquelySelectCheapAdministration unique =
+  careAndAdministrationAreDistinct
+    (unique increasedCareCapacity careCapacityIsUndominated)
+
