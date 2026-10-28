@@ -242,3 +242,45 @@ def multiset_heaps_area_gap(counts: Sequence[int]) -> int:
     gap = lower_birthsum - len(c) * (len(c) - 1) // 2
     assert gap >= 0
     return gap
+
+
+def multiset_count_majorizes(a: Sequence[int], b: Sequence[int]) -> bool:
+    """Hardy-Littlewood-Polya majorization on same-N, same-K positive counts.
+
+    A majorizes B iff each decreasing top-k partial sum A is >= that of B,
+    with identical totals. This is a type-frequency order, not a history.
+    """
+    a_sorted = sorted(_validated_counts(a), reverse=True)
+    b_sorted = sorted(_validated_counts(b), reverse=True)
+    if len(a_sorted) != len(b_sorted) or sum(a_sorted) != sum(b_sorted):
+        raise ValueError('majorization requires the same type and token totals')
+    left = right = 0
+    for x, y in zip(a_sorted, b_sorted):
+        left += x
+        right += y
+        if left < right:
+            return False
+    return True
+
+
+def majorization_heaps_temporal_gap_certificate(
+    concentrated: Sequence[int], dispersed: Sequence[int]
+) -> tuple[int, int]:
+    """Majorization sharpens Heaps' MIN and increases its integral ambiguity.
+
+    If f majorizes g, both have the same N and K, then lower_f(t)<=lower_g(t)
+    for every t, upper_f(t)=upper_g(t), and gap_f>=gap_g. This follows from
+    the top-k cumulative budget and the exact finite gap formula.
+    No independence or stochastic model is required. Citation: classical
+    Hardy-Littlewood-Polya majorization; empirical connections are unproved.
+    """
+    if not multiset_count_majorizes(concentrated, dispersed):
+        raise ValueError('declared concentration comparison does not majorize')
+    f_lower, f_upper = multiset_heaps_extremal_profiles(concentrated)
+    g_lower, g_upper = multiset_heaps_extremal_profiles(dispersed)
+    assert f_upper == g_upper
+    assert all(f <= g for f, g in zip(f_lower, g_lower))
+    f_gap = multiset_heaps_area_gap(concentrated)
+    g_gap = multiset_heaps_area_gap(dispersed)
+    assert f_gap >= g_gap
+    return f_gap, g_gap
