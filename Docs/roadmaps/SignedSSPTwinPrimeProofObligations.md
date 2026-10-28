@@ -211,3 +211,33 @@ Reviewed latest DASHI PRs #1409–#1413, PR #1407's 27×729 Fourier/codec treatm
 Rechecked mathematical source: DHJ Polymath, *Variants of the Selberg sieve, and bounded intervals containing many primes*, **Research in the Mathematical Sciences** 1, article 12 (17 October 2014), DOI https://doi.org/10.1186/s40687-014-0012-7. The unconditional bound is `H₁≤246`; `H₁≤6` is conditional on generalized Elliott–Halberstam. Its sieve parity analysis does **not** rule out all signed computational approaches, but it does mean exact modular screening alone does not prove `H₁≤2`.
 
 **Next verified blocker:** instantiate actual signed SSP source/target action systems, action-preserving compiler and readout on the entire PRIMEGAME execution, and obtain full kernel checking of the source-written new Agda modules. Separately, general arithmetic CRT reconstruction/inverse and the analytic twin-pair correlation criterion remain open. A finite machine model cannot directly settle the infinite arithmetic conjecture.
+
+
+## 2026-10-28 eighth max-cut: PR #1407 consumer-specific Pareto transfer
+
+**Cross-PR source, inspected at exact head** `323f15b8de4e1daf4b09531a5b175328c28d5631`, [PR #1407](https://github.com/chboishabba/dashi_agda/pull/1407). Its scientific task is R2P2/finite Fourier and NOT twin primes. The reusable mathematics is an *information-preservation criterion*:
+
+- `R2P227729FourierObserverIncidenceExact` indexes 27 three-coordinate balanced integer modes and 729 ordered input pairs. Exactly 343 ordered sums stay in the retained `[-1,1]^3` output cube; 386 lie outside.
+- `R2P227729FourGridRetainedQuadraticParetoExact` establishes that 3-point periodic folding aliases some retained quadratic outputs, whereas a 4-point-per-axis residue grid distinguishes every retained output (even though it identifies outer `+2` and `−2`); 5 points per axis retain the full `[-2,2]^3` output. This is **finite incidence**, not an implemented FFT or measured NS/clock physics.
+- `R2P227729BilinearCyclotomicPadCutExact` extends the retained/full statement to independent `f,g` and an abstract coefficient API, subsequently instantiated using the pre-existing exact cyclotomic owner. Coefficient/source ownership remains with #1407.
+- `R2P2369WaveOpticalCombInformationCutExact` uses the **existing on-master** `Core.IndexedRelationalHyperfabricSpineExact.ConsumerCollision/ConsumerSufficient`, `Core.IntersectionalNonFactorability` and `Base369WaveContinuousSymbolicCodingExact`: once a coarse projection collides two states that require different answers, postprocessing alone cannot restore the missing information. An exact residual does preserve it.
+
+**What is safely imported into the arithmetic lane:** the generic **on-master** consumer and residual owners above, not PR #1407's branch-only physics modules. New `DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact` proves at source level:
+
+1. `fiveAndThirtyFiveSameSixWheel`: `5%6=35%6=5`.
+2. `twinAtThirtyFiveIsFalse`: the actual proof-bearing prime-pair decision rejects `35` (composite) while `TwinPrimeAt 5` succeeds.
+3. `wheelTwinCollision`, `wheelCannotDecideActualTwins`: use the **existing** generic non-factorability owner; modulo-six residue cannot classify true twin-prime starts universally.
+4. `postprocessedWheelStillCannotDecideTwins`: any `Nat→Chart` transformation of a mod-six result remains insufficient to decide true twin starts.
+5. `primeSieveSymbolicCoding`, `exactTwinQueryCodeRoundTrip`, `exactTwinQueryCodeIsConsumerSufficient`: instantiate the existing symbolic trit-with-exact-residual codec; its full integer payload suffices for the actual twin-prime Boolean query. This is a correctness result, **not** compression or a proof of new prime regularity.
+6. `finiteSieveBit` and `sieveBitIsSufficientForFiniteSieveQuery`: the Boolean result of the existing certified all-prime-moduli finite sieve is sufficient **for that exact query**.
+7. `finiteSieveBitPeriodic`: the finite Boolean result is periodic by the product of its certified moduli. The proof eliminates impossible yes/no branches using the source-owned two-way `CertifiedPrimePairPeriodExact` transport.
+
+**Why it matters:** an observer can be optimal for one consumer while inadequate for another. The six-wheel is valid as a necessary local filter, not a true prime oracle. By retaining the exact p residual on its actual arithmetic carrier, signed SSP can preserve the genuine question without claiming that coarse modulo classes generate primality.
+
+**Independent local Python replay** `scripts/check_twin_prime_1407_consumer_pareto.py` passed (2026-10-28): 27 modes/729 ordered inputs, 343 retained and 386 outside, 386 retained-output mismatches at 3-grid, zero at 4-grid, zero full-output mismatches at 5-grid; mod-six collision for 5/35; prime-2 raw exponent guard; and five-modulus sieve `(2,3,5,7,11)` periodic with product 2310. `221=13*17` survives that five-modulus screen but is composite. These checks agree with finite incidence arithmetic but are **not** tests of #1407's Agda kernel or an end-to-end signed SSP runtime.
+
+**Updated Pareto / Ibrahim classification:** this transfer pays a clear proof debt on observation sufficiency, rather than importing 27/729/4³/5³ as magical arithmetic constants. Source-written new Agda code is linked to the three TOE roots. No protected ESD or original #1407 owner surface was edited. Ibrahim Monster 3B and other earlier authors retain their original theorem ownership. **Remaining research gates:** actual signed prime-emitter compiler, certified general CRT inverse, quantified joint prime-pair correlation, unconditional twin-prime infinitude. Source-written Agda still awaits a kernel receipt; no CI action was run on request.
+
+### Historical source boundaries
+
+Original Fourier dealiasing priority remains with Patterson/Orszag and subsequent computational Fourier researchers; the #1407 arithmetic index adapter belongs to its PR owners. For the separate number-theoretic frontier, DHJ Polymath (2014), *Variants of the Selberg sieve, and bounded intervals containing many primes*, DOI [10.1186/s40687-014-0012-7](https://doi.org/10.1186/s40687-014-0012-7), proves `H₁≤246` unconditionally and `H₁≤6` conditionally on generalized Elliott–Halberstam. Its sieve parity theorem is a boundary on **purely sieve-theoretic** routes, not an impossibility proof for every signed computational model.
