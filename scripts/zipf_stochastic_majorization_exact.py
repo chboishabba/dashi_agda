@@ -159,3 +159,19 @@ def pair_pathwise_quantile_certificate(
         assert all(int(tc<=m)<=int(td<=m) for m in range(horizon+1))
         witnesses.append((u,tc,td))
     return tuple(witnesses)
+
+
+def novelty_flags_from_complete_heaps_curve(curve: Sequence[int]) -> tuple[bool, ...]:
+    """Invert a FULL exact prefix-diversity curve to its novelty-event flags.
+
+    This is not possible from a histogram, exponent, or fitted Heaps curve.
+    The valid first nonempty prefix must introduce its first type.
+    It does not reconstruct the identity of repeated token types.
+    """
+    v = tuple(curve)
+    if not v or any(type(x) is not int or x < 0 for x in v) or v[0] != 0:
+        raise ValueError('full finite Heaps curve starts at zero')
+    gains = tuple(y-x for x,y in zip(v,v[1:]))
+    if any(delta not in (0,1) for delta in gains) or (gains and gains[0] != 1):
+        raise ValueError('valid first-seen type gain must be exactly 0 or 1')
+    return tuple(delta == 1 for delta in gains)
