@@ -1,5 +1,10 @@
 module DASHI.Unified.Everything where
 import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinPrimeSixWheel
+import DASHI.Arithmetic.TwinPrimeFRACDASHReuseExact as TwinPrimeFRACDASH
+open TwinPrimeFRACDASH public using
+  ( bridgeChoosesFirstApplicable
+  ; bridgeActivationForcesResidueFive
+  )
 open TwinPrimeSixWheel public using
   ( shiftTwoThreeTimes
   ; r5PairSurvives
