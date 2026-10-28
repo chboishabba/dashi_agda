@@ -273,6 +273,19 @@ def main() -> None:
         "finiteNonemptyRankMinimum",
         "finiteParetoFrontierNonemptyGivenStrictRank",
         "finiteParetoFrontierIsNonempty",
+        "FundingTokenAbsent",
+        "UniqueFundingTokens",
+        "finiteFundingPartitionConservesUnits",
+        "CanonicalFundingEntry",
+        "CanonicalFundingBatch",
+        "canonicalClaimCannotBeReusedInLaterPosition",
+        "canonicalFundingTotalsReconcile",
+        "duplicateFixtureFundingTokenIsRejected",
+        "AustralianEquityHoldingMode",
+        "OfficialHolderRegistration",
+        "holderModeCannotBecomeLegalTitleByNameMatch",
+        "executionRecordIsNotOfficialFinality",
+        "officialSettlementIsNotBeneficiaryAllocation",
         "policyTradeoffAxisCoverage",
         "twoAxisPolicyFrontierIsNonempty",
         "finiteAxisCostSum",
@@ -293,6 +306,17 @@ def main() -> None:
     for symbol in ("finiteNonemptyRankMinimum", "finiteParetoFrontierNonemptyGivenStrictRank",
                    "finiteParetoFrontierIsNonempty"):
         assert symbol in bridge, f"missing finite Pareto owner reexport: {symbol}"
+    for symbol in (
+        "FundingTokenAbsent",
+        "UniqueFundingTokens",
+        "canonicalClaimCannotBeReusedInLaterPosition",
+        "AustralianEquityHoldingMode",
+        "holderModeCannotBecomeLegalTitleByNameMatch",
+        "toeCanonicalFundingClaimIsNotReusedWithinFiniteBatch",
+        "toeBatchSourcePartitionAccountsForEachTaggedClaimOnce",
+        "toeOfficialSettlementAndCustodyAllocationRemainDistinct",
+    ):
+        assert symbol in bridge, f"missing funding/ASX TOE boundary: {symbol}"
     assert "open DashiTradeTax public using" in bridge, (
         "follow-on sources not reachable from original TOE consumer"
     )
@@ -327,6 +351,7 @@ def main() -> None:
         assert symbol in tax_source, f"pasted 1/2/5 proposal lost: {symbol}"
     for symbol in ("bellHooks2000", "baudrillard1981", "kropotkin1892"):
         assert symbol in social_source, f"original philosophical author omitted: {symbol}"
+    assert "test_canonical_funding_batch_no_double_count" in script, ("source canonicalization adversarial oracle missing")
     assert "test_ai_proposed_idle_equity_schedule_is_not_victoria_vrlt" in script, (
         "proposal versus actual-law negative-control regression absent"
     )
