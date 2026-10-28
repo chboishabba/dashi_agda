@@ -33,6 +33,8 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
 import DASHI.Reasoning.DialecticXYInteractionZTransportExact as XY
 import DASHI.Reasoning.RelationalBranchCobordismGeometry as Pants
 import DASHI.Reasoning.TypedHyperfabricPantsGluingBridgeExact as TypedPants
+import DASHI.Reasoning.TrialecticGrothendieckTransitionCocycleExact as ExistingCocycle
+import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact as ExistingTwoCell
 
 -- Presentation palette is TAGGED; a colour is not automatically a
 -- dialectical position, logical polarity, graph proper-colouring or proof.
@@ -213,6 +215,89 @@ paletteAgreementAfterDeclaredTransport =
     (λ u v → refl)
     refl
     Pants.outerInnerMatch
+
+------------------------------------------------------------------------
+-- A THIRD joining constraint: pairwise matching observed face colours
+-- does NOT automatically enforce coherence of a CYCLIC triple of
+-- palette charts. The existing Grothendieck cocycle and attached face
+-- are the actual formal owners for that higher-order obligation.
+------------------------------------------------------------------------
+
+swapGreenBlue : Paint3 → Paint3
+swapGreenBlue red = red
+swapGreenBlue green = blue
+swapGreenBlue blue = green
+
+swapGreenBlueInverse : (c : Paint3) →
+  swapGreenBlue (swapGreenBlue c) ≡ c
+swapGreenBlueInverse red = refl
+swapGreenBlueInverse green = refl
+swapGreenBlueInverse blue = refl
+
+record ThreeFaceColourCycle : Set where
+  constructor three-face-colour-cycle
+  field
+    patchAB patchBC patchCA : FaceColours
+    chartAB chartBC chartCA : Paint3 → Paint3
+    colourTransportAB : (u v : Trit.SSPTrit) →
+      chartAB (patchAB (u , v)) ≡ patchBC (u , v)
+    colourTransportBC : (u v : Trit.SSPTrit) →
+      chartBC (patchBC (u , v)) ≡ patchCA (u , v)
+    colourTransportCA : (u v : Trit.SSPTrit) →
+      chartCA (patchCA (u , v)) ≡ patchAB (u , v)
+open ThreeFaceColourCycle public
+
+record PaletteCocycle (cycle : ThreeFaceColourCycle) : Set where
+  constructor palette-cocycle
+  field
+    returnsEveryColour : (c : Paint3) →
+      chartCA cycle (chartBC cycle (chartAB cycle c)) ≡ c
+open PaletteCocycle public
+
+-- All observed squares are RED. The AB chart swaps the UNUSED green
+-- and blue sectors, keeping observed red fixed. Thus all three
+-- pairwise patches match, but the global chart action is non-identity.
+observedRedCycle : ThreeFaceColourCycle
+observedRedCycle =
+  three-face-colour-cycle
+    (solid red) (solid red) (solid red)
+    swapGreenBlue
+    (λ c → c)
+    (λ c → c)
+    (λ u v → refl)
+    (λ u v → refl)
+    (λ u v → refl)
+
+greenNotBlue : blue ≡ green → ⊥
+greenNotBlue ()
+
+pairwiseColourMatchesButChartCocycleFails :
+  PaletteCocycle observedRedCycle → ⊥
+pairwiseColourMatchesButChartCocycleFails cert =
+  greenNotBlue (returnsEveryColour cert green)
+
+-- All-red is STILL a fixed point: this counterexample rejects global
+-- chart *equivariance on all colours*, NOT the existence of a particular
+-- red-valued global section. The distinction is necessary.
+redIsFixedEvenInBadCycle :
+  chartCA observedRedCycle
+    (chartBC observedRedCycle (chartAB observedRedCycle red))
+  ≡ red
+redIsFixedEvenInBadCycle = refl
+
+-- The previously established C3 three-patch transport closure is
+-- proof-relevant for its ORIGINAL CellDialectic chart action.
+-- We do not substitute the above paint-cycle test for that theorem.
+canonicalTrialecticCocycleOwner :
+  ExistingCocycle.cycleAB2Cell
+    ExistingCocycle.Cell.canonicalCellAB
+  ≡ ExistingCocycle.canonicalABCycleCloses
+canonicalTrialecticCocycleOwner = refl
+
+existingAttachedFaceOwner :
+  ExistingTwoCell.TrialecticGrothendieckAttachedTwoCellBoundary
+existingAttachedFaceOwner =
+  ExistingTwoCell.canonicalTrialecticGrothendieckAttachedTwoCellBoundary
 
 -- Ordinary paint agreement is just one of several orthogonal gates.
 -- A successful seam certificate is NOT itself a new global section.
