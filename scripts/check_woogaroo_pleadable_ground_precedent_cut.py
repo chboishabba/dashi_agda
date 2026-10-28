@@ -26,7 +26,7 @@ def main() -> None:
     assert owner.count("Source.publicAttribution") == 8
     assert owner.count("= case-hypothesis") == 7
     assert owner.count("false refl") == 7
-    assert owner.count("→ ⊥") == 9
+    assert owner.count("→ ⊥") == 10
     assert canon.count("import DASHI.Law.SensibLawWoogarooEPBC8575PleadableGroundsPrecedentCut20261028Exact") == 1
 
     for p in (
@@ -41,7 +41,9 @@ def main() -> None:
         "canonicalCondition6aSubmission = Condition.condition6aLiteralSubmission",
         "canonicalCondition6aAcceptance = Condition.condition6aCouncilAcceptance",
         "canonicalStandingUnpaid = Counsel.organisationStanding",
-        "canonicalSecretaryReportUnpaid = File.section95CRecommendation"
+        "canonicalSecretaryReportUnpaid = File.section95CRecommendation",
+        "import DASHI.Law.SensibLawWoogarooPostApprovalPoliticalGasBenefit20261027Exact as Post",
+        "canonicalStocklandFirstPartyDefence = Post.stocklandSpringview"
     ):
         assert p in owner, "missing reused proof/evidence owner: " + p
 
@@ -64,7 +66,7 @@ def main() -> None:
                   "practitionerSummaryNotCourtJudgment", "recoveryAimNotAbsoluteProhibition",
                   "adviceURLNotConsideration", "notPublicNotNecessarilyAbsent",
                   "guidanceNotCommencementMatrix", "differentWindFarmDoesNotDecideWoogaroo",
-                  "sourceHypothesesNotFiled"):
+                  "sourceHypothesesNotFiled", "developerClaimNotRegulatorFinding"):
         assert guard in owner, guard
 
     assert "Merits.s139" in owner and "s139 : OperativeRule" in merits
@@ -82,11 +84,14 @@ def main() -> None:
         assert claim in memo, claim
     assert "28 October precedent steelman and rebuttal" in counsel
     assert "28 October P0 case-ground steelman" in legal
+    assert "Stockland Springview primary project FAQ" in memo
+    assert "three times the Ipswich minimum width" in memo
+    assert "DeveloperFAQEqualsCommonwealthScientificFinding" in owner
     assert "zero of seven grounds" in memo
     assert "NOT counsel's signed opinion" in memo
     assert "not a 2019/8575 ruling" in owner
     assert "failClosed : establishedSpecificBreach ≡ false" in owner
-    print("PASS: 8 original source roots, 7 fail-closed candidate grounds, 9 non-promotion guards, 5 canonical owner imports and case-source coverage")
+    print("PASS: 8 original source roots, 7 fail-closed candidate grounds, 10 non-promotion guards, 6 canonical owner imports and case-source coverage")
 
 
 if __name__ == "__main__":
