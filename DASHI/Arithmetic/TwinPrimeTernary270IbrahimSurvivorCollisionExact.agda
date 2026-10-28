@@ -28,6 +28,8 @@ module DASHI.Arithmetic.TwinPrimeTernary270IbrahimSurvivorCollisionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Maybe using (Maybe)
+open import Data.Nat.DivMod using (_%_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -43,6 +45,8 @@ import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionE
 import DASHI.Arithmetic.TwinPrimeTernary270AffineCRTCodecExact as Codec
 import DASHI.Arithmetic.TwinPrimeTernary270SurvivorCoverageExact as Wheel
 import DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact as Certified
+import DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact as Factor
+import Data.Nat.Primality as NatPrime
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Core
 import DASHI.Core.IntersectionalNonFactorability as NF
 
@@ -167,3 +171,57 @@ noTwinClassifierFromBareGlobalFourteenOrbit :
 noTwinClassifierFromBareGlobalFourteenOrbit =
   Core.collisionRefutesSufficiency
     globalFourteenOrbitLosesTwinConsumer
+
+------------------------------------------------------------------------
+-- STRONGEST FINITE CODE NO-GO: even the FULL 27-cell wheel point is
+-- not the whole integer. It remembers n mod 270, not the quotient.
+--
+-- 59 and 329 are the SAME residue/cube point:
+-- 329 = 59 + 270 = 7 * 47, yet 59 and 61 are both prime.
+-- No classifier on the 27 cube states can decide all Nat twin starts.
+-- This is an arithmetic consumer collision, not a distribution claim.
+------------------------------------------------------------------------
+
+wholeNatToWheelCube : Nat → Maybe Geometry.Ternary27Point
+wholeNatToWheelCube n = Codec.wheel270ToCube (n % 270)
+
+fiftyNineAndThreeTwentyNineSameFullCube :
+  wholeNatToWheelCube 59 ≡ wholeNatToWheelCube 329
+fiftyNineAndThreeTwentyNineSameFullCube = refl
+
+threeTwentyNineIsComposite : NatPrime.Composite 329
+threeTwentyNineIsComposite =
+  Factor.twoNontrivialFactorsAreComposite 329
+    (Factor.twoNontrivialFactors 5 45 refl)
+
+trueTwin59 : Certified.twinStartBool 59 ≡ true
+trueTwin59 = refl
+
+notTwin329 : Certified.twinStartBool 329 ≡ false
+notTwin329 = refl
+
+natTwinConsumerDistinguishes59And329 :
+  Certified.twinStartBool 59 ≡ Certified.twinStartBool 329 → ⊥
+natTwinConsumerDistinguishes59And329 same =
+  trueCannotEqualFalse
+    (trans (sym trueTwin59) (trans same notTwin329))
+
+wholeCubeResidueLosesTwinConsumer :
+  Core.ConsumerCollision wholeNatToWheelCube Certified.twinStartBool
+wholeCubeResidueLosesTwinConsumer =
+  NF.nonFactorabilityWitness
+    59 329
+    fiftyNineAndThreeTwentyNineSameFullCube
+    natTwinConsumerDistinguishes59And329
+
+noUniversalTwinClassifierFromFiniteWholeCube :
+  Core.ConsumerSufficient wholeNatToWheelCube
+    Certified.twinStartBool → ⊥
+noUniversalTwinClassifierFromFiniteWholeCube =
+  Core.collisionRefutesSufficiency
+    wholeCubeResidueLosesTwinConsumer
+
+-- The correction is a quotient/residual code retaining the unbounded
+-- period index, not an arithmetic-primality claim from orbit counts.
+-- Any true Nat->(residue,period) lift must prove an exact arithmetic
+-- round trip and retain enough information for the prime decider.
