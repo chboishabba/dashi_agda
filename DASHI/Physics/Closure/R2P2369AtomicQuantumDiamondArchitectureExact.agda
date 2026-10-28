@@ -648,3 +648,17 @@ fullArchitectureDoesNotIdentifyMaStrontiumWithR2P2Ytterbium :
   Lattice.maBichromaticSr87 ≡ Lattice.trianaMountainYb → EmptyR2P2.⊥
 fullArchitectureDoesNotIdentifyMaStrontiumWithR2P2Ytterbium =
   Lattice.maIsNotTheR2P2Clock
+
+-- The original Ma 18:11 supercell number and DASHI C18 phase count
+-- happen to match as Nat; no carrier/observable map is provided.
+fullArchitectureSupercell18NominalCrossProduct :
+  Lattice.maFirst813Periods * Lattice.nominal813Nm + 3
+  ≡ Lattice.maFirst497Periods * Lattice.nominal497Nm
+fullArchitectureSupercell18NominalCrossProduct =
+  Lattice.maFirstNominalSupercellOffset
+
+fullArchitectureSupercell18IsNotIdentifiedC18 :
+  Lattice.paperSupercell18EqualsPhysicalC18Realization
+    (lattice canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureSupercell18IsNotIdentifiedC18 =
+  Lattice.maSupercell18IsNotAnIdentifiedC18PhysicsRealization
