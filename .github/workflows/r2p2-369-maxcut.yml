@@ -37,6 +37,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_r2p2_*.py' -v
           python scripts/r2p2_clock_comparison_diagnostic.py
           python scripts/r2p2_optical_lattice_3site_diagnostic.py
+          python scripts/r2p2_optical_lattice_3site_diagnostic.py --nominal-supercell-pareto
 
   focused-agda:
     runs-on: ubuntu-24.04
