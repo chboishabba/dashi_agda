@@ -3,6 +3,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Maybe using (just)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeNSCut
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Convolution729
+import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fourier729Core
 import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as PeriodicFourier729
 import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as Fourier729Owner
 import DASHI.Physics.Closure.R2P227729PairSixTritFibreBidiExact as Pair729
@@ -646,3 +647,12 @@ unifiedExistingC3CyclicConvolution :
     ≡ PeriodicFourier729.spectralC3ConvolutionOfModeCoefficients f g m
 unifiedExistingC3CyclicConvolution =
   PeriodicFourier729.periodic27DirectEqualsSpectralAtEveryMode
+
+-- Original C3^3 DFT is exact ON THE CYCLIC QUOTIENT. Integer outputs
+-- (2,0,0) and (-1,0,0) collide on that quotient.
+unifiedCyclic27CannotRecoverTrueWideFourierMode :
+  Fourier729Core.ConsumerSufficient
+    Convolution729.wideIntegerOutputToThreeResidues (λ w → w)
+    → ⊥
+unifiedCyclic27CannotRecoverTrueWideFourierMode =
+  Convolution729.noDecoderOfActualWideModeFromCyclic27
