@@ -172,8 +172,54 @@ twin-prime proof. The 75-ID architecture tally is unchanged.
 | E11 | Duplicate prime filter idempotence | S: same owner |
 | E12 | Fresh filters only remove candidates | P: monotonicity theorem / explicit refinement import |
 | E13 | Genuine twin p,p+2 passes each proper finite small-modulus filter | N: handle modulus equal to endpoint and range assumptions correctly |
-| E14 | Arbitrarily large double-composite survivors of each fixed finite sieve | P: independently executed CRT construction, Agda CRT proof outstanding |
+| E14 | Construct strictly composite pairs surviving any finite sieve; establish a universal baseline and unboundedness | S/P: factorable lift and nontrivial factor witnesses for every given r≥2 survivor, without CRT inverse; universal baseline, unboundedness and kernel check still open |
 | E15 | FRACTRAN decoded-exponent / CRT commuting square | S: signed ±2 both sides; raw (2^p) parity no-go; full VM interface outstanding |
+
+## E14 max-cut: factorable double-composite family, no CRT inverse
+
+For any finite certified axis list, let `P=modulusProduct axes`.
+For any given surviving `r≥2` and `t≥1`, set
+
+```
+L = r * (1 + P*(r+2)*t)
+U = (r+2) * (1 + P*r*t)
+k = r * (r+2) * t
+```
+
+**Exact identities:** `L+2=U`, `L=r+kP`. Therefore
+`AllPairSurvive axes r ⇔ AllPairSurvive axes L` by the already
+source-owned `allPairProductPeriodicMultiple` and its inverse.
+The four multiplicative factors are all strictly greater than 1.
+
+New `DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact` contains
+source-written semiring equalities, both sieve transports, strict
+`TwoNontrivialFactors` witnesses for L and U, the `suc`-indexed
+proof that every product of certified moduli is positive, and
+`factorableSurvivorWithBothStrictFactors` for any given surviving
+`r=suc(suc a)`. Distinctness and coprimality are **not needed**.
+
+The simple universal baseline is `r=2P−1` when `P≥2` (both
+residues are ±1 at every sieving modulus); for the empty axis list
+use `r=2`. This was checked **numerically**, but the baseline
+witness and an explicit unbounded/injective `t↦L` theorem still
+need Agda proofs. E14 is thus **stronger, not yet fully closed**.
+
+An independently executed Python equivalent of
+`scripts/check_finite_twin_sieve_factorable_lift.py` passed
+**504 cases across nine finite prime lists**, including prime 2,
+repeated axes and the empty list; 3,375 small-variable factor
+coefficient identities also passed. These are not Agda kernel checks.
+
+DHJ Polymath/ Selberg sieve parity historical authority remains
+source-owned. The construction shows why no *fixed* finite local
+test is a proof of genuine twin-primality once a survivor exists;
+it is not itself the full analytic parity theorem. Do not use
+3×3×3 Fourier/Monster labels or Ibrahim 3B analogy as a proxy
+for any arithmetic prime-pair correlation.
+
+**Next max-cut:** unconditional baseline and monotonicity lemmas,
+then source-to-target FRACTRAN compiler reachability and a genuine
+analytic correlation result.
 
 ## F. Arithmetic-analytic leap (9 obligations)
 
