@@ -4,9 +4,11 @@ Reuse the canonical Heaps count validator and majorization relation. The
 IID collector can continue past N draws; a fixed-multiset permutation cannot.
 Exact inclusion-exclusion is exponential in the number of types. Formulae
 are classical coupon-collector occupancy identities (not a new discovery).
-Historical root: de Moivre; modern majorization framework HLP (1934),
-Marshall/Olkin/Arnold (2011). Repository adapter: Johl Brown with OpenAI
-ChatGPT assistance (2026-10-28). No Agda-kernel or empirical claim.
+Original roots: von Schelling (1954), unequal coupon collection; Nakata
+(2019), IID majorization/Schur-concave completion CDF; HLP (1934),
+classical majorization; Marshall/Olkin/Arnold (2011), synthesis.
+Repository adapter: Johl Brown with OpenAI ChatGPT assistance
+(2026-10-28). No Agda-kernel or empirical claim.
 """
 from __future__ import annotations
 
