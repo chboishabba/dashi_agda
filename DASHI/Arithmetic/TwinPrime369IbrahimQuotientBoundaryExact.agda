@@ -28,6 +28,8 @@ module DASHI.Arithmetic.TwinPrime369IbrahimQuotientBoundaryExact where
 
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Relation.Binary.PropositionalEquality using (sym)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Data.Product using (_×_; _,_)
@@ -40,6 +42,8 @@ import DASHI.Foundations.BalancedTernaryAntipodalResidualCodecExact as Codec
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Ibrahim
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSP
 import DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact as Guy
+import DASHI.Arithmetic.TwinPrimeThreeAxisLocalThreeOrbitExact as LocalThree
+import DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact as Twin
 
 import DASHI.Foundations.Base369NDimParetoChartExact as NineAxes
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Core
@@ -194,3 +198,77 @@ threeToFifthDoesNotEqualFiveCubed ()
 
 -- No same-object Monster character identity, D4 module equivalence,
 -- all-prime emitter, or prime correlation follows from these counts.
+
+------------------------------------------------------------------------
+-- STRONG ARITHMETIC COUNTEREXAMPLE TO THE 3x5=15 QUOTIENT.
+--
+-- In the actual prime-3 slice (outer trit x=-1), the inner pair
+-- (-1,+1) encodes 5, and its antipode (+1,-1) encodes 20.
+-- The quotient identifies them, but twin-primality is different:
+-- Prime(5) × Prime(7) is inhabited; Prime(20) is not.
+------------------------------------------------------------------------
+
+twinFivePoint : Geometry.Ternary27Point
+twinFivePoint =
+  Geometry.ternary27Point
+    Trit.sspNegOne Trit.sspNegOne Trit.sspPosOne
+
+nonTwinTwentyPoint : Geometry.Ternary27Point
+nonTwinTwentyPoint =
+  Geometry.ternary27Point
+    Trit.sspNegOne Trit.sspPosOne Trit.sspNegOne
+
+twinFivePointRepresentsFive :
+  LocalThree.centeredPrimeThreeResidue
+    (Geometry.y twinFivePoint) (Geometry.z twinFivePoint) ≡ 5
+twinFivePointRepresentsFive = refl
+
+nonTwinTwentyPointRepresentsTwenty :
+  LocalThree.centeredPrimeThreeResidue
+    (Geometry.y nonTwinTwentyPoint) (Geometry.z nonTwinTwentyPoint)
+    ≡ 20
+nonTwinTwentyPointRepresentsTwenty = refl
+
+samePhaseOrbitForFiveAndTwenty :
+  Ibrahim.reduce27ToPhaseOrbit15 twinFivePoint
+    ≡ Ibrahim.reduce27ToPhaseOrbit15 nonTwinTwentyPoint
+samePhaseOrbitForFiveAndTwenty = refl
+
+-- The total observer below extends the true arithmetic query from
+-- the x=-1 slice. The collision uses two actual x=-1 members.
+sliceTwinPredicate : Geometry.Ternary27Point → Bool
+sliceTwinPredicate p =
+  Twin.twinStartBool
+    (LocalThree.centeredPrimeThreeResidue
+      (Geometry.y p) (Geometry.z p))
+
+twinFiveSliceIsTrue : sliceTwinPredicate twinFivePoint ≡ true
+twinFiveSliceIsTrue = Twin.twinAtFiveIsTrue
+
+nonTwinTwentySliceIsFalse :
+  sliceTwinPredicate nonTwinTwentyPoint ≡ false
+nonTwinTwentySliceIsFalse = refl
+
+distinctTrueTwinAnswers :
+  sliceTwinPredicate twinFivePoint
+    ≡ sliceTwinPredicate nonTwinTwentyPoint → ⊥
+distinctTrueTwinAnswers same =
+  Twin.trueNotFalse
+    (trans
+      (sym twinFiveSliceIsTrue)
+      (trans same nonTwinTwentySliceIsFalse))
+
+ibrahimPhaseOrbitLosesTwinPrimeAnswer :
+  Core.ConsumerCollision
+    Ibrahim.reduce27ToPhaseOrbit15 sliceTwinPredicate
+ibrahimPhaseOrbitLosesTwinPrimeAnswer =
+  NF.nonFactorabilityWitness
+    twinFivePoint nonTwinTwentyPoint
+    samePhaseOrbitForFiveAndTwenty distinctTrueTwinAnswers
+
+cannotDecideTwinFromThreeTimesFivePhaseAlone :
+  Core.ConsumerSufficient
+    Ibrahim.reduce27ToPhaseOrbit15 sliceTwinPredicate → ⊥
+cannotDecideTwinFromThreeTimesFivePhaseAlone =
+  Core.collisionRefutesSufficiency
+    ibrahimPhaseOrbitLosesTwinPrimeAnswer
