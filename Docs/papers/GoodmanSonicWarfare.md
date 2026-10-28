@@ -160,3 +160,39 @@ Track B is draft feedback. For final promotion, use the repo's authoritative pin
 **Source correction:** The physical echo/delay/reverberation interpretation is in Goodman's **chapter 29, printed p. 159**. His argument invokes virtualised acoustic spaces, not proof of a Kozyrev physical phenomenon. Earworms, sonic contagion, military deployments, political economy and psychoacoustic exposure remain distinct claim families. The 2009 MIT Press DOI edition records eISBN 9780262258838; the later MIT Press bookstore's 2012 eBook edition records another eISBN (9780262266338). These are distinct publisher manifestations, not a contradiction to resolve by overwriting the original DOI edition.
 
 **Verification obligation:** Typecheck all imported owners at the exact head. Execute the independent small-world regression separately from source-level lexical validation and Agda kernel verification. Do not use a passing fixture to promote empirical exposure or biomedical predictions.
+
+## M1 exact context-refinement cut — source-written, kernel pending
+
+An explicitly synthetic **four-world interaction fixture** now lives in the original Goodman application owner. Worlds are the Cartesian combinations of *quiet/loud signal* and *protected/exposed context*. The target `contextualResponse` is baseline for three combinations and elevated for **loud + exposed**. These words are toy labels, **not measured physiological thresholds or measured subjects**.
+
+For the response query:
+- Signal-only projection has a concrete collision at loud/protected vs loud/exposed with different answers; inherited `Query.queryAdequacyDefectBlocksFactorisation` rules out every signal-only factorisation.
+- Context-only projection has a concrete collision at quiet/exposed vs loud/exposed with different answers; the same owner rules out every context-only factorisation.
+- The joint signal/context observation has four explicit cases and a proof that response factors through it. This is `jointSignalContextDeterminesSyntheticResponse` in `DASHI.Culture.GoodmanSonicWarfareExact`.
+
+The exact mathematical statement is **conditional on these finite definitions**:
+```text
+NOT Adequate(signalOnly, responseQuery)
+AND NOT Adequate(contextOnly, responseQuery)
+AND Adequate(jointSignalContext, responseQuery).
+```
+The proof does **not** establish that signal and context are adequate in nature. In particular, a measured context variable must be obtained independently of the response to avoid label leakage. The toy rule is not evidence of any special frequency, neurochemical force, entrainment, fear induction or public-space intervention effect.
+
+**Executed computational regression:** `scripts/check_goodman_sonic_warfare_finite.py` enumerates possible functions on observation fibres. It includes the original six mirror/acoustic/propaganda cases and now three additional interaction cases. Nine of nine finite tests passed locally at committed 4259-byte script with source checksum `0xa64e0c5c` (FNV-1a over character codes, not a cryptographic integrity hash). This is not Agda kernel execution and is not empirical validation. The CI source checker additionally tests totality of all five four-state mappings; do not claim its GitHub Actions execution without a run.
+
+### Independent soundscape practice and physically meaningful discriminators
+
+- **ISO 12913-1:2014**, *Acoustics — Soundscape — Part 1: Definition and conceptual framework* ([ISO official](https://www.iso.org/standard/52161.html)), provides conceptual separation between an acoustic environment and a soundscape experienced in context. Confirmed by ISO in 2025. It is a **measurement/planning standard**, not an attributed Goodman or DASHI mathematical theorem.
+- **ISO/TS 12913-2:2018**, *Data collection and reporting requirements* ([ISO official](https://www.iso.org/standard/75267.html)), describes data capture for people, acoustic environment and context. Follow appropriate licence and edition; no copyrighted standard text is copied into this repository.
+- **Soundscape and its context: A framework based on a systematic review**, *JASA* 157 (2025), DOI [10.1121/10.0036882](https://doi.org/10.1121/10.0036882), is a later independently authored framework involving 14 theoretical and 52 empirical studies. Credit those authors separately; it does not supply our four-state proof, Goodman's original claims, or a universal effect size.
+- **WHO** (2018), *Environmental noise guidelines for the European Region*, ISBN 978-92-8-905356-3 ([WHO](https://www.who.int/publications/i/item/9789289053563)), is a separate health risk source. Do not use a philosophical frequency schematic as an exposure guideline.
+
+A physical validation lane needs a separate source/geometry/receiver **ordinary acoustic transfer** benchmark before human participants are relevant. Candidate nondestructive tests: use innocuous background-level signals; measure calibrated microphone impulse responses, room temperature/position/geometry, level uncertainty and frequency-dependent response; preregister held-out positions and hardware. Require predictions on new recordings better than matched null baselines. Comparing candidate geometric reflectors is engineering **characterisation**, not support for nonstandard Kozyrev mechanisms.
+
+For contextual predictions, test preregistered `M0 = P(Y | acoustic_measurement)` versus `M1 = P(Y | acoustic_measurement, independently_measured_context)`; use held-out subjects/sites/days and calibration/error bars, not in-sample improvement. Context must not encode the outcome or leak the participant's response label. An out-of-sample null result rejects the claimed improvement for the tested scope. This is an empirical hypothesis and **not** a theorem consequence of the four-world fixture.
+
+### Pareto stop condition and residual gates
+
+M1 is a productive mathematical cut because it adds a **positive joint sufficiency witness** to the prior negative acoustic-only obstruction. Further Agda abstractions should be delayed until: (a) the pinned Track A kernel and four TOE aggregates pass, (b) both exact scripts execute in CI at the exact commit, and (c) GitHub merges the minimal source/ownership changes. The separate calibrated-acoustics and soundscape experiments remain optional research lanes, not requirements for a correctly delimited formalisation release.
+
+`DASHI.Wikimedia.IbrahimSnowballSkepticismExpertiseTrustPropagandaBidiExact` remains the source of the reused persuasion/truth and deceptive-intent lemmas. This application does not transfer Ibrahim Monster 3B representation identity, reinterpret numerical coincidences as proof, or claim a sociological/medical cause. Prior source and repository proof authors are preserved.
