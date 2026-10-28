@@ -1134,3 +1134,21 @@ The derived subgroup H_n' consists of those field translations whose three secto
 5. Most important original topological proof cut unchanged: an actual supported wild-satellite relative cap/collar, meridian-map naturality, central pi1 and exact kernel verification for the SAME ambient wild exterior. No finite end-actor calculation pays that geometric gate.
 
 Original geometric attribution: Alexander (1924), Hatcher AT 2B.2. The permutation-semidir​ect and finite vector-space calculations are ordinary classical mathematics, with new DASHI implementation ownership attached only to the new source. Existing #1244 and independent #1414/#1260/#1254 and Ibrahim/Monster owners remain unchanged.
+
+
+### 2026-10-28 completed finite chart cut: 27 end cells, C3^27 group and local S3 reflections
+
+**New theorem owner** DASHI/Mathematics/Topology/AlexanderHornedNativeTernaryTrialectic27ChartExact.agda constructs the CHOSEN bijection
+
+  C3_sector × Trit × Trit  <->  TriTruth × TriTruth × TriTruth
+                              = SynthesisChoice27.
+
+It proves both inverse compositions, checks external sector rotation moves ONLY the first trialectic coordinate, and checks the internal trit cycle rotates the final TWO coordinates. These are commuting C3 actions, but not the same source operation. It also transports every 27-address C3-valued local phase function to the original trialectic 27-cell carrier and proves two pointwise inverse round trips and exact preservation of pointwise C3 multiplication. This is a genuine finite SET/GROUP-LAW chart, not a philosophical or geometric identification of the cells.
+
+**New S3 extension** DASHI/Mathematics/Topology/AlexanderHornedNativeTernaryS3LocalValuesExact.agda reuses the old TernaryPermutationS3LawsExact, TernaryPermutationCyclicSubgroupsExact and the native end owner. It defines local S3^X value permutations, proves pointwise group-action composition/identity, distinguishes a global reflection from an independently chosen reflection at one address, and proves the chosen horn-C3 value subgroup law transports into the exact cyclic C3<S3 embedding. Its depth-two field-transformation count is 6^27, different from the original translation group 3^27. It remains SOLVABLE (direct product of solvable S3 groups, and a possible further extension by external C3 remains solvable), hence does not inherit the perfect A5/2I/Hatcher source-group properties. A braid PERMUTATION image at one fibre is not an actual analytic polynomial-monodromy loop.
+
+The earlier semidirect adapter was extended to prove all pointwise inverse and identity laws, as well as sector and gauge product associativity, action composition, and refinement naturality. No global function-extensionality assumption or postulate was inserted. A truly first-class group-object instance can still package these extensional pointwise equalities via canonical finite table encoding. The derived augmentation subgroup size formula retains the separate computational / paper proof tier until an Agda normal-subgroup and quotient constructor is implemented.
+
+**Independent exact local finite replay:** sector/field pullback and action compatibility checked at depths 0–3; all 81 semidirect elements and their nine commutator subgroup values checked at depth zero; local/global S3 reflection distinction and actual S3>C3 embedding checked independently. The source includes the new Python regression script, but the exact remote blob was not run locally because this environment cannot download private/remote source from the connector into its execution runtime. These checks do not replace exact-head Agda certification.
+
+**Pareto stopping point:** the entire FINITE-LEVEL input required by the attached proposal is now represented as source-written Agda, including the nested 27 chart, local fibre group, twisted semidirect action, explicit local S3 extension, and refinement. The next genuine theorem is the compact-clopen factorization C_loc(K3,C3) and first-class colimit quotient; do not build a parallel incompatible end tower. The classical actual supported wild-satellite collar and relative exterior homotopy map remain the principal GEOMETRIC gate, unchanged by end-fibre algebra. Historical, prior repo, source-written, locally computed and kernel-verified statuses remain distinct.
