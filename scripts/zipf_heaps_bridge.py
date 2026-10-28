@@ -184,3 +184,61 @@ def equal_flag_runs(flags:Sequence[bool])->tuple[tuple[bool,int],...]:
         else:
             result.append((b,1))
     return tuple(result)
+
+
+def extremal_multiset_token_orders(counts: Sequence[int]) -> tuple[tuple[int, ...], tuple[int, ...]]:
+    """Two constructive chronological orders realizing the WHOLE tight envelope.
+
+    The first fills types by descending declared count and minimizes observed
+    prefix diversity at every prefix length simultaneously. The second visits
+    each type once before any repeated token, maximizing it at every prefix.
+    A fixed type index resolves tied counts; no empirical chronology is inferred.
+    Original extremal discovery-process context: Zimmerlin et al., PRE 2026.
+    """
+    c = _validated_counts(counts)
+    ranked = sorted(enumerate(c), key=lambda pair: (-pair[1], pair[0]))
+    lower_order = tuple(i for i, n in ranked for _ in range(n))
+    upper_order = tuple(i for i, _ in ranked) + tuple(
+        i for i, n in ranked for _ in range(n - 1)
+    )
+    return lower_order, upper_order
+
+
+def observed_prefix_diversity(tokens: Sequence[int]) -> tuple[int, ...]:
+    """Prefix type count, INCLUDING the empty prefix at t=0."""
+    seen = set()
+    curve = [0]
+    for token in tokens:
+        seen.add(token)
+        curve.append(len(seen))
+    return tuple(curve)
+
+
+def multiset_heaps_extremal_profiles(counts: Sequence[int]) -> tuple[tuple[int, ...], tuple[int, ...]]:
+    """Sharp bounds for every t=0..N with exact attainable witness orders."""
+    c = _validated_counts(counts)
+    low, high = extremal_multiset_token_orders(c)
+    lower = observed_prefix_diversity(low)
+    upper = observed_prefix_diversity(high)
+    # Independent per-t prefix-budget certificate already in this module.
+    assert all((lower[t], upper[t]) == distinct_envelope(c, t)
+               for t in range(sum(c) + 1))
+    return lower, upper
+
+
+def multiset_heaps_area_gap(counts: Sequence[int]) -> int:
+    """Exact MAX-minus-MIN area under the all-prefix diversity curve.
+
+    If sorted counts f_1>=...>=f_K>0 and S_j=sum_(i<=j) f_i,
+    gap=sum_(j=0)^(K-1) S_j - K(K-1)/2, independent of word labels.
+    This measures information about temporal order NOT retained by ranks.
+    """
+    c = sorted(_validated_counts(counts), reverse=True)
+    prefix = 0
+    lower_birthsum = 0
+    for count in c:
+        lower_birthsum += prefix
+        prefix += count
+    gap = lower_birthsum - len(c) * (len(c) - 1) // 2
+    assert gap >= 0
+    return gap
