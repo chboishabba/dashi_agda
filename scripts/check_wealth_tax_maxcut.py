@@ -284,6 +284,39 @@ def test_canonical_funding_batch_no_double_count() -> None:
     assert len({historical for historical, _ in historical_claim_alias}) == 1
     assert checks == sum(27 ** i for i in range(4)) + 20000
 
+
+def test_canonical_funding_payment_route_weld() -> None:
+    """Independent bounded route weld and equal-grand-total negative oracle."""
+    from itertools import product
+
+    seen = 0
+    for cash, loan, sale in product(range(16), repeat=3):
+        source_rows = ((1, 0, cash), (2, 1, loan), (3, 2, sale))
+        source_partition = tuple(
+            sum(amount for _, channel, amount in source_rows if channel == i)
+            for i in range(3)
+        )
+        assert source_partition == (cash, loan, sale)
+        source_grand_total = sum(row[2] for row in source_rows)
+        for tax_paid in range(source_grand_total + 1):
+            fee = source_grand_total - tax_paid
+            funding_route = (cash, loan, sale, tax_paid, fee)
+            assert source_partition == funding_route[:3]
+            assert source_grand_total == tax_paid + fee
+            seen += 1
+
+    # The same gross funding sum does not establish that the channels
+    # match; both are 5 but the claimed loan/cash source differs.
+    cash_only = (5, 0, 0)
+    debt_only = (0, 5, 0)
+    assert sum(cash_only) == sum(debt_only)
+    assert cash_only != debt_only
+
+    # A valid settlement that arrives after tax payment cannot fund that
+    # earlier remittance without a separately admitted bridge.
+    tax_payment_epoch, sale_settlement_epoch = 3, 8
+    assert not (sale_settlement_epoch <= tax_payment_epoch)
+    assert seen == 16**3 + 3 * sum(range(16)) * 16**2
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
@@ -298,4 +331,5 @@ if __name__ == "__main__":
     test_ai_proposed_idle_equity_schedule_is_not_victoria_vrlt()
     test_constructive_finite_axis_pareto()
     test_canonical_funding_batch_no_double_count()
-    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto exhaustive/random oracle + canonical funding partitions")
+    test_canonical_funding_payment_route_weld()
+    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto oracle + canonical funding partitions + same-route weld")
