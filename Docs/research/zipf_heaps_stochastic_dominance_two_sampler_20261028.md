@@ -68,6 +68,29 @@ Conditioning on the common outside schedule gives stochastic dominance
 for each transfer, and the classical integer majorization transfer
 decomposition gives the full finite statement.
 
+## Stronger joint all-prefix coupling (same finite hypotheses)
+
+A concentrating pair transfer also admits a coupling of **the entire
+prefix-discovery trajectory**. Given m draws from the merged pair, let
+T be the first group-draw index at which both subtypes have appeared.
+For each m, its CDF is exactly the pair-both formula above, so the
+more concentrated pair's CDF is no larger at **every** m. A single common
+uniform random quantile therefore couples the two thresholds with
+T_concentrated >= T_dispersed almost surely. Reuse an identical random
+schedule of merged-pair positions and other-type draws. The number
+of discovered types in the concentrated population is then no greater
+at **all prefix lengths simultaneously**. Composition of finite
+majorization transfers yields a coupling of the path distributions.
+This is a distributional coupling result, not an assertion that
+observed chronological sequences obey the uniform-shuffle model.
+
+`pair_second_type_cdf` and `pair_pathwise_quantile_certificate`
+compute exact rational CDFs and check the common-quantile order over
+every finite CDF interval for each single transfer. The
+`horizon+1` sentinel means the pair's second type remains unseen.
+These are computational witnesses for the pair-transfer proof, not
+kernel-verified existence proofs over all random processes.
+
 ## Executable exact coefficient evaluator
 
 `scripts/zipf_stochastic_majorization_exact.py` imports canonical
@@ -82,11 +105,12 @@ It checks normalization and equality with the existing mean owner.
 
 ## Executed and unpaid gates
 
-Six tests in `tests/test_zipf_stochastic_majorization_exact.py` passed
+Eight tests in `tests/test_zipf_stochastic_majorization_exact.py` passed
 locally. These independently enumerate IID words and without-replacement
 subsets of individually labeled multiset tokens, and exhaust **1,007**
 comparable count pairs (K=2..4, counts 1..3), all prefix times and
-thresholds for both samplers. New module/test GitHub blobs match the
+thresholds for both samplers, and independently verify pair CDFs and the
+same-quantile all-prefix coupling. New module/test GitHub blobs match the
 locally executed source.
 
 The focused tests ran against a locally extracted set of dependency
