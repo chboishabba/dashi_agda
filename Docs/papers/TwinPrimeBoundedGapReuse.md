@@ -314,8 +314,7 @@ New source-written, kernel-pending Agda owners:
    typed SSP15 factorisation and #636 FRACDASH numeric interpreter
    priority theorem. It also reflects no-applicable halting.
    The mathematical applicability guard carries exact integer
-   evidence `next*d=n*a`, while the concrete evaluator and
-   signed state/action compiler remain uninstantiated obligations.
+   evidence `next*d=n*a`, while the numeric evaluator is now constructed from the stdlib quotient theorem; the **signed state/action compiler** remains uninstantiated.
 2. `TwinPrimeTernary270IbrahimSurvivorCollisionExact` proves a
    same-quotient/different-primality consumer collision within the
    full mod-270 local-survivor image. The original x/y/z points
@@ -340,8 +339,32 @@ sieve-parity theorem. The analytic gap-two conjecture remains open.
 See https://oeis.org/A267572 and
 https://doi.org/10.1186/s40687-014-0012-7.
 
-**Outstanding max-cut:** concrete Nat fraction successor evaluator;
+**Outstanding max-cut:** kernel-check the now source-written Nat quotient evaluator;
 signed SSP/FRACDASH action-state bisimulation; historical
 prime-output reachability; arbitrary CRT inverse; and genuine
 joint prime distribution. No ESD edit and no same-object
 numerology promotion.
+
+### 2026-10-28 numeric evaluator is now *source-instantiated*
+
+`PrimegameTypedNumericFirstApplicableBidiExact` now defines
+`exactNumericNext`, `exactNumericNextIsCorrect`, and an inhabited
+`concreteExactFractionEvaluator` record. The zero denominator is
+rejected by `ExactFractionApplies`; for positive denominators,
+Agda's stdlib quotient/remainder equations derive exact output
+`next*d=n*a` from the arithmetic integrality witness. This is
+not an uninterpreted evaluator axiom. The three canonical TOE roots
+export `guyConcreteExactPriorityForward` and
+`guyConcreteExactPriorityBackward`.
+
+**Scope/evidence:** source-written Agda with explicit stdlib names,
+not typechecked in this runtime. Local exact Python tested the
+14 original Guy fractions and 20,000 integer steps; it is not the
+Agda kernel. The missing A07/A08/B03/C08 frontier is now the
+actual signed SSP/FRACDASH action-state simulation plus readout,
+not a missing integer-division specification. No branch-only
+#1414 polynomial/quintic/monodromy module was imported: #1414
+correctly distinguishes its own 27-label endomorphism/S3 meanings
+from cube-coordinate semantics, and no mathematical map into the
+actual twin-prime correlation was established. Preserve its own
+PR ownership and Ibrahim 3B boundary.
