@@ -333,9 +333,132 @@ focus evidence reviewed with classifySupport evidence | reviewed
 ... | negativeOnly | true = Synthesis.respondentHypothesisForCounterDefeaterSearch
 ... | negativeOnly | false = Synthesis.seekOriginals
 
+-- MULTIPLE nested predicates must jointly satisfy the case-level
+-- candidate antecedent. This is not a legal materiality theorem: all
+-- inputs remain explicitly stipulated, same-ground and same-scope.
+orB : Bool → Bool → Bool
+orB true _ = true
+orB false x = x
+
+andB : Bool → Bool → Bool
+andB true x = x
+andB false _ = false
+
+positiveOnlyEvidence : SignedClaimEvidence → Bool
+positiveOnlyEvidence evidence with classifySupport evidence
+... | positiveOnly = true
+... | _ = false
+
+negativeOnlyEvidence : SignedClaimEvidence → Bool
+negativeOnlyEvidence evidence with classifySupport evidence
+... | negativeOnly = true
+... | _ = false
+
+notPositiveOnlyEvidence : SignedClaimEvidence → Bool
+notPositiveOnlyEvidence evidence with classifySupport evidence
+... | positiveOnly = false
+... | _ = true
+
+bothEvidence : SignedClaimEvidence → Bool
+bothEvidence evidence with classifySupport evidence
+... | bothReported = true
+... | _ = false
+
+allPredicateSlots : List PredicateSlot
+allPredicateSlots =
+  applicableLaw ∷ allegedDefect ∷ legalMateriality ∷
+  claimedCompliance ∷ habitatConcern ∷ causalConnection ∷
+  reviewedOriginal ∷ sameProjectStage ∷ independentMediation ∷ []
+
+hasAnyConflict : ∀ {g} → SignedCaseFibre g → Bool
+hasAnyConflict f = go allPredicateSlots
+  where
+    go : List PredicateSlot → Bool
+    go [] = false
+    go (slot ∷ more) = orB (bothEvidence (at f slot)) (go more)
+
+sharedSourceGates : ∀ {g} → SignedCaseFibre g → Bool
+sharedSourceGates f =
+  andB (positiveOnlyEvidence (at f applicableLaw))
+    (andB (positiveOnlyEvidence (at f reviewedOriginal))
+      (positiveOnlyEvidence (at f sameProjectStage)))
+
+applicantPredicateConjunction : ∀ {g} → SignedCaseFibre g → Bool
+applicantPredicateConjunction f =
+  andB (positiveOnlyEvidence (at f allegedDefect))
+    (andB (positiveOnlyEvidence (at f legalMateriality))
+      (notPositiveOnlyEvidence (at f claimedCompliance)))
+
+respondentPredicateConjunction : ∀ {g} → SignedCaseFibre g → Bool
+respondentPredicateConjunction f =
+  andB (negativeOnlyEvidence (at f allegedDefect))
+    (positiveOnlyEvidence (at f claimedCompliance))
+
 signedFibreFocus : ∀ {g} → SignedCaseFibre g →
   Bool → Synthesis.WoogarooSynthesisKind
-signedFibreFocus f reviewed = focus (at f allegedDefect) reviewed
+signedFibreFocus f reviewed with
+  hasAnyConflict f | reviewed | sharedSourceGates f |
+  applicantPredicateConjunction f | respondentPredicateConjunction f
+... | true  | _     | _     | _     | _     =
+  Synthesis.reconcileOpposingSourceAssertions
+... | false | false | _     | _     | _     =
+  Synthesis.seekOriginals
+... | false | true  | false | _     | _     =
+  Synthesis.seekOriginals
+... | false | true  | true  | true  | _     =
+  Synthesis.applicantHypothesisForDefeaterSearch
+... | false | true  | true  | false | true  =
+  Synthesis.respondentHypothesisForCounterDefeaterSearch
+... | false | true  | true  | false | false =
+  Synthesis.seekOriginals
+
+-- A one-atom sign does NOT force any candidate branch if other
+-- antecedents remain unknown. This differs from the local/leaf focus.
+singleNegativeDoesNotForceCaseSynthesis :
+  signedFibreFocus (signed-case-fibre
+    (λ slot → negativeEvidence) "hypothetical" []) false
+  ≡ Synthesis.seekOriginals
+singleNegativeDoesNotForceCaseSynthesis = refl
+
+-- A full consistent conditional case can route one branch; even that
+-- does not create a source receipt or determine the trialectic face.
+respondentExample : PredicateSlot → SignedClaimEvidence
+respondentExample applicableLaw = positiveEvidence
+respondentExample allegedDefect = negativeEvidence
+respondentExample claimedCompliance = positiveEvidence
+respondentExample reviewedOriginal = positiveEvidence
+respondentExample sameProjectStage = positiveEvidence
+respondentExample _ = unknownEvidence
+
+respondentExampleFibre : SignedCaseFibre Ground.approvedAdviceOmitted
+respondentExampleFibre = signed-case-fibre respondentExample "hypothetical" []
+
+multiPredicateRespondentBranch :
+  signedFibreFocus respondentExampleFibre true
+  ≡ Synthesis.respondentHypothesisForCounterDefeaterSearch
+multiPredicateRespondentBranch = refl
+
+applicantExample : PredicateSlot → SignedClaimEvidence
+applicantExample applicableLaw = positiveEvidence
+applicantExample allegedDefect = positiveEvidence
+applicantExample legalMateriality = positiveEvidence
+applicantExample claimedCompliance = negativeEvidence
+applicantExample reviewedOriginal = positiveEvidence
+applicantExample sameProjectStage = positiveEvidence
+applicantExample _ = unknownEvidence
+
+applicantExampleFibre : SignedCaseFibre Ground.approvedAdviceOmitted
+applicantExampleFibre = signed-case-fibre applicantExample "hypothetical" []
+
+multiPredicateApplicantBranch :
+  signedFibreFocus applicantExampleFibre true
+  ≡ Synthesis.applicantHypothesisForDefeaterSearch
+multiPredicateApplicantBranch = refl
+
+unpaidFibreNeverCompletesLegalBridge :
+  (g : Ground.Ground) →
+  signedFibreFocus (unpaidFibre g) true ≡ Synthesis.seekOriginals
+unpaidFibreNeverCompletesLegalBridge g = refl
 
 negativeCandidateRoutesToCountercase :
   focus negativeEvidence true
