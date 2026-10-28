@@ -456,6 +456,18 @@ euCommissionWealthTax2026 = tax-source-receipt
 -- the different May coauthored portfolio study or October AER panel.
 ------------------------------------------------------------------------
 
+-- Independent municipal contrast. The same country is not the same
+-- tax intervention, mobility corridor, data design or outcome metric.
+-- Original author-owned research, peer-reviewed Fiscal Studies 47(3).
+iaconoSmedsvikBoMunicipal2026 : TaxSourceReceipt
+iaconoSmedsvikBoMunicipal2026 = tax-source-receipt
+  "Roberto Iacono and Bård Smedsvik"
+  "Behavioural responses to wealth taxation: evidence from a Norwegian reform; Fiscal Studies 47(3):255-280; published 8 September 2026; DOI 10.1111/1475-5890.70024"
+  "https://onlinelibrary.wiley.com/doi/full/10.1111/1475-5890.70024"
+  scholarlyEmpiricalEstimate conditionalResearchEstimate
+  "Local Bø municipal wealth-tax rate fell from 0.85 to 0.35 percent from 2021. Authors estimate a 45 percent higher local average taxable wealth per 1 percentage point tax-rate decrease and a 4.8 percent rise in weighted local taxpayer mass; the main mechanism is within-Norway migration."
+  "Locally treated jurisdiction and within-country relocation; not a measured national outflow, not a firm-level post-2021 investment effect, not tax-cap implementation, and not interchangeably pooled with Ring 2026 or Jakobsen et al. 2026."
+
 ringEntrepreneurialNorway2026 : TaxSourceReceipt
 ringEntrepreneurialNorway2026 = tax-source-receipt
   "Marius A. K. Ring (sole original author)"
