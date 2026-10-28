@@ -19,7 +19,7 @@ p_n : X_(n+1) → X_n              -- original drop-last map
 G_n = X_n → C3_phase             -- actual local phase field functions
 ```
 
-The new `AlexanderHornedNativeTernaryLocalPhaseActionExact.agda` **explicitly** defines trit↔C3 value charts, two inverse round-trip proofs, and the original (pointwise) group operations on `G_n`. Its `translate g f` is `x↦g(x)+f(x) mod3`. All action/group laws are supplied as **pointwise propositional equalities**; this avoids inventing global function extensionality or a postulate.
+The original #1244 module `AlexanderHornedNativeTernaryFibreActionExact.agda` **already owns** `FibreAction = Map(X_n,C3)`, pointwise `combine`, `act`, `inverseAction`, `pullback`, `pullbackInjective`, `transitiveAction`, and the inverse-limit `LocalFibreAction/evalLocal`. The new module **imports and reuses those exact definitions**, adding only an explicit trit↔C3 chart, a true semidirect product, cylinder setoid laws and an invariant-observation no-go. This avoids a duplicate local-gauge group or inverse-limit carrier.
 
 There are `|X_n|=3^(n+1)` finite clopen cylinders. Classical finite function counting gives `|G_n|=3^(3^(n+1))`. At depth 2, `|X_2|=27`, `|G_2|=3^27=7,625,597,484,987`. The exact source already owns `Native.ternaryConfigurationTetration` and proves the numerical identification `3^27=3↑↑3`. **The 27 address cells are not 27 time samples, 27 Fourier modes, 27 physical horns or 27 Monster dimensions.** Any such identification needs a typed map and its desired invariance property.
 
@@ -31,16 +31,16 @@ Original `balancedProjection` sends a prefix (sector, trit-vector including one 
 p_n^*(f)(x) = f(p_n(x)).
 ```
 
-The module source-writes `refineHomomorphismAt`, `refineInverseAt`, and `refineTranslationAt` directly on original carriers.
+The original owner already source-writes `pullbackMultiplication` and `pullbackInverse`; the extension imports those without copying them, and adds `refineRotationSquare` and twisted-product equivariance.
 
-More strongly, the original `Native.snoc` and `dropLastSnoc` construct an **actual section** `child_n(x)=(sector, prefix++[-1])`. Its proof `childSection` satisfies `p_n(child_n(x))=x`. Consequently
+More strongly, the original `End.snoc` and `dropLastSnoc` already construct a section `section_n(x)=(sector, prefix++[0])` with `p_n(section_n(x))=x`; the ORIGINAL owner proves it in `sectionProjection`. Consequently
 
 ```
 (∀y ∈ X_(n+1), p_n^* f(y) = p_n^* g(y))
     ⇒ (∀x ∈ X_n, f(x)=g(x)).
 ```
 
-This is exactly the source-written `refineReflectsEquality`. It does not require function extensionality, an infinite compactness principle, or a count coincidence. Injectivity here is in the **pointwise function-setoid**.
+This is exactly the EXISTING source-written `Fibre.pullbackInjective`. The new extension reuses that theorem; it does not claim its original proof ownership. It does not require function extensionality, an infinite compactness principle, or a count coincidence. Injectivity here is in the **pointwise function-setoid**.
 
 ## External sector rotation and real finite semidirect action
 
@@ -66,7 +66,7 @@ This gives a correct **finite semidirect group law** `G_n⋊C3` at source-term l
 
 ## Inverse-limit cylinder field — actual positive lemma and remaining topology wall
 
-The same module provides `CylinderPhase`: an actual finite resolution n paired with a phase function `f:X_n→C3`. It evaluates a field on an ORIGINAL `Native.BalancedEndPoint` via `f(Tower.stateAt(point,n))`. The typed proof `refinementPreservesEndValue` follows from the existing `InverseLimitPoint.coherent` equation. The `shiftEnd` construction produces an actual coherent rotated infinite end. The theorem `endRotationValueSquare` identifies evaluating an externally rotated field with evaluating the original field at the inverse-rotated end.
+The ORIGINAL #1244 owner provides `LocalFibreAction`, `evalLocal`, and `refinementEvaluation` on the existing inverse-limit endpoints. The new extension uses those exact carriers, adds `shiftEnd` (a coherent inverse sector-shift of an end) and `evalRotationSquare` (cylinder-value equivariance), without making a second `CylinderPhase` or equality-on-function assumption.
 
 More, `SameOnEnds` is the **pointwise equivalence relation** on cylinder representatives induced by all coherent infinite ends. Its reflexive/symmetric/transitive lemmas, one-step refinement invariance and sector-rotation congruence are source-written. This supplies the quotient's **setoid equality interface**; it does *not* pretend to have constructed a higher-inductive quotient type or a full topological compactness theorem.
 
@@ -80,7 +80,7 @@ still requires **(a)** quotienting representatives by an appropriate eventual-eq
 
 ## Strong actual information-loss/no-weld consequence
 
-For any two local fields `f,h:X_n→C3`, the difference field `g(x)=h(x)−f(x)` satisfies `translate g f(x)=h(x)` **at every address**. The module source-writes `gaugeFromTo` and `gaugeTranslationTransitiveAt`, using the ORIGINAL C3 inverse and associativity. Therefore **any pointwise-extensional observable invariant under the FULL local `G_n` action is constant**. The source-written `gaugeInvariantObservableConstant` makes the extensionality hypothesis explicit rather than smuggling in function equality.
+For any two local fields `f,h:X_n→C3`, the **ORIGINAL** `Fibre.difference` and `Fibre.transitiveAction` prove `Fibre.act (Fibre.difference f h) f(x)=h(x)` at every address. The extension then proves **any pointwise-extensional observable invariant under the FULL local `G_n` action is constant** in `gaugeInvariantObservableConstant`. Its observation-extensionality hypothesis is explicit; the original transitivity proof retains ownership.
 
 This is the precise cross-pollination with #1275's five-equality-pattern and four-Heaps observations: they are invariant under a *global diagonal* relabeling `S3` (and hence C3), but **not** under an arbitrary local translation. For three root-sector positions, `f=(0,0,0)` has Heaps prefix counts `(0,1,1,1)`. A local phase change `g=(0,1,0)` gives `(0,1,2,2)`; global addition of a single constant preserves the first curve. Thus local gauge observables cannot be confused with the previously proved original symmetry quotient. The choice to interpret three sector values as chronological observations is an explicit **statistical chart**, not intrinsic geometry.
 
@@ -100,3 +100,8 @@ P3. If and only if a source-selected wild ternary embedded handlebody tower exis
 P4. If connecting to #1414 root monodromy, #1407 Fourier phase or original Ibrahim Monster 3B, require actual same-object transport morphisms with group-action compatibility; do not reuse numeric `3^27` or `S3` labels as a proof.
 
 This file is deliberately a **finite group/action completion and infinite/topology gap ledger**, not a physical claim or a claimed Agda-verified release.
+
+
+## De-duplication audit (final 2026-10-28)
+
+The repository already had `AlexanderHornedNativeTernaryFibreActionExact.agda`, committed on the canonical #1244 branch. A static review found that repeating its `Map(X_n,C3)` carrier would violate reuse-first and risk a duplicate ontology. The extension `AlexanderHornedNativeTernaryLocalPhaseActionExact.agda` was therefore rewritten to **import** the original `FibreAction`, `combine`, `inverseAction`, `act`, `pullback`, `pullbackInjective`, `difference`, `transitiveAction`, `LocalFibreAction`, and `evalLocal`. It now contains only nonduplicate typed additions: signed-trit ↔ C3 chart, inverse-sector pullback action, twisted group multiplication/inverse, equivariant refinement, SameOnEnds equivalence and its rotation congruence, and full-local-gauge invariant-observation no-go. The original owner remains the canonical group/fibre tower and the extension stays a smaller additive module.
