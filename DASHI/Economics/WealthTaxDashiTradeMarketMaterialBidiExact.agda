@@ -680,6 +680,54 @@ netReceiptCannotRecoverGrossTurnover =
       noClearedTransactions offsettingClearedTransactions
       sameNetReceipt differentGrossSellsDespiteSameNet)
 
+-- Signed cash obligation direction is a tagged variant, not negative Nat.
+-- This extends the receiver-only finite ParticipantClearingBatch owner without
+-- conflating a paying participant with a receiving participant.
+
+data ParticipantCashDirection : Set where
+  netCashReceivable : ParticipantCashDirection
+  netCashPayable : ParticipantCashDirection
+
+DirectionBalanced :
+  ParticipantCashDirection → Nat → Nat → Nat → Set
+DirectionBalanced netCashReceivable grossSell grossBuy net =
+  grossSell ≡ grossBuy + net
+DirectionBalanced netCashPayable grossSell grossBuy net =
+  grossBuy ≡ grossSell + net
+
+record DirectionalClearingBatch : Set where
+  constructor directional-clearing-batch
+  field
+    cashDirection : ParticipantCashDirection
+    grossSellSettlementCash : Nat
+    grossBuySettlementCash : Nat
+    netSettlementCashMagnitude : Nat
+    directionBalance :
+      DirectionBalanced cashDirection
+        grossSellSettlementCash grossBuySettlementCash
+        netSettlementCashMagnitude
+open DirectionalClearingBatch public
+
+aggregateNetPositionsRespectGrossCashAndSecurityTotals :
+  (batch : DirectionalClearingBatch) →
+  DirectionBalanced (cashDirection batch)
+    (grossSellSettlementCash batch)
+    (grossBuySettlementCash batch)
+    (netSettlementCashMagnitude batch)
+aggregateNetPositionsRespectGrossCashAndSecurityTotals =
+  directionBalance
+
+receivingParticipantExample : DirectionalClearingBatch
+receivingParticipantExample =
+  directional-clearing-batch netCashReceivable 5 2 3 refl
+
+payingParticipantExample : DirectionalClearingBatch
+payingParticipantExample =
+  directional-clearing-batch netCashPayable 2 5 3 refl
+
+-- Cash magnitudes and this directional cash balance do NOT certify the
+-- securities-leg net quantities, eligibility or the DvP settlement receipt.
+
 -- Reconcile arbitrarily many investor allocations to a participant-level
 -- cash batch. The investors' identity, settlement authority and instrument
 -- eligibility remain additional external inputs, not inferred from amounts.
