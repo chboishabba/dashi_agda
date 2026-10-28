@@ -25,3 +25,9 @@ import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryTrialectic27ChartE
 
 import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryS3LocalValuesExact
 import DASHI.Mathematics.Topology.AlexanderHornedDepthTwoFiveOrbitFibreExact
+
+-- Root-monodromy video / native end: actual finite source-level theorem
+-- instances and non-promotion cut. Existing chart/fibre owners stay canonical.
+import DASHI.Mathematics.Topology.AlexanderHornedS3DerivedMonodromyNoGoExact
+import DASHI.Mathematics.Topology.AlexanderHornedTernaryTwentySevenInvolutionNoGoExact
+import DASHI.Mathematics.Topology.AlexanderHornedSectorDihedralS3EndExact
