@@ -100,6 +100,10 @@ def main() -> None:
         "toeSharesSoldCannotDetermineInstalledCapacity",
         "toeShareSaleCountDoesNotFixWeightedVoting",
         "toeNoCashNoCreditNeedsSaleProceeds",
+        "toeSubmittedOrderDoesNotIdentifySettlement",
+        "toeExecutedVolumeDoesNotIdentifySettlement",
+        "toeTwoFillCashIdentity",
+        "toeEarlierTaxReceiptCannotUseLaterSaleWithoutBridge",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
     # These are direct aliases of EXISTING source and evidence owners.
@@ -144,6 +148,12 @@ def main() -> None:
         "FundingVoteReconciliation", "ordinarySaleLink", "superVotingSaleLink",
         "quantityCannotFixVotingControl",
         "noOtherFundingImpliesSaleProceeds",
+        "TwoFillSettlementLink", "submittedWithoutFill",
+        "executedUnsettled", "twoPricesThreeProceeds",
+        "submittedOrderDoesNotDetermineSettlement",
+        "executionDoesNotDetermineSettlement", "twoFillCashConservation",
+        "MatchedSettlementTaxChronology",
+        "priorCashReceiptHasNoForwardSettlementLink",
     ):
         assert theorem in dashi_tax_bridge, "missing tax-market gate: " + theorem
     assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", dashi_tax_bridge), (
