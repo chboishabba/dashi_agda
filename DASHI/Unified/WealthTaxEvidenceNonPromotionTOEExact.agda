@@ -9,6 +9,7 @@ module DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact where
 -- Ibrahim 2017 FLN navigation is not a wealth-tax proof or Monster action.
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (zero; _+_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attributed
@@ -188,6 +189,18 @@ toeShareSaleCountDoesNotFixWeightedVoting :
     DashiTradeTax.routedUnitsSold DashiTradeTax.weightedOwnerVotesAfter → ⊥
 toeShareSaleCountDoesNotFixWeightedVoting =
   DashiTradeTax.quantityCannotFixVotingControl
+
+-- Conditional positive accounting identity under explicit no-liquidity,
+-- no-credit assumptions. Does not assert that any real taxpayer must sell.
+toeNoCashNoCreditNeedsSaleProceeds :
+  (route : DashiTradeTax.FundingRoute) →
+  DashiTradeTax.unrestrictedCash route ≡ zero →
+  DashiTradeTax.newLoanCash route ≡ zero →
+  DashiTradeTax.grossSaleCash route ≡
+    DashiTradeTax.taxPaymentForRoute route
+    + DashiTradeTax.executionCashCost route
+toeNoCashNoCreditNeedsSaleProceeds =
+  DashiTradeTax.noOtherFundingImpliesSaleProceeds
 
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
