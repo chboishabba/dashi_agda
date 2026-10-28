@@ -20,6 +20,7 @@ OWNERS = [
     ROOT / "DASHI/Physics/Closure/R2P227729FourierObserverIncidenceExact.agda",
     ROOT / "DASHI/Physics/Closure/R2P227729PairSixTritFibreBidiExact.agda",
     ROOT / "DASHI/Physics/Closure/R2P227729FiniteQuadraticConvolutionExact.agda",
+    ROOT / "DASHI/Physics/Closure/R2P227729ExistingC3FourierConvolutionReuseExact.agda",
 ]
 
 
@@ -81,6 +82,10 @@ class Finite729Tests(unittest.TestCase):
         self.assertIn("exact343InWindowPairs", source[0])
         self.assertIn("exact386OutOfWindowPairs", source[0])
         self.assertIn("modeVoxelRoundTrip", source[0])
+        self.assertIn("cube27RanksAreExactlyZeroThrough26", source[0])
+        self.assertIn("orderedPairRanksAreExactlyZeroThrough728", source[0])
+        self.assertIn("pathXAxisWraparoundIsImpossible", source[0])
+        self.assertIn("periodicXAxisWraparoundExists", source[0])
         self.assertIn("voxelModeRoundTrip", source[0])
         self.assertIn("sixTritsAfterOrderedPairRoundTrip", source[1])
         self.assertIn("orderedPairAfterSixTritRoundTrip", source[1])
@@ -88,6 +93,14 @@ class Finite729Tests(unittest.TestCase):
         self.assertIn("sixTritAmplitudeAfterTransport", source[1])
         self.assertIn("all729PairsFiveIndexRecoveryIsExact", source[2])
         self.assertIn("retainedFiveIndexConvolutionExact", source[2])
+        for key in ("C3CubeCyclotomicFourierExact", "C3CubeCyclotomicParsevalExact",
+                    "C3CubeDirectGroupConvolutionExact",
+                    "signedModeToCyclicResidueConvention",
+                    "packAfterUnpack", "unpackAfterPack",
+                    "existingPeriodic27FourierRoundTrip",
+                    "periodic27DirectEqualsSpectralAtEveryMode",
+                    "existingCyclic27Parseval"):
+            self.assertIn(key, source[3])
         for path, text in zip(OWNERS, source):
             with self.subTest(path=str(path)):
                 for escape in ("postulate\n", "{!!}", "{-# TERMINATING #-}",
