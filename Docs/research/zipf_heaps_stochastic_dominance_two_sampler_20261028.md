@@ -19,6 +19,10 @@ It is not a 28th statistical law or a Balaban/Monster/NS/RH result.
 - Zimmerlin, Louail, Moussallam and Barthelemy, *Physical Review E* 113,
   054304 (11 May 2026), https://doi.org/10.1103/543d-frbq: independent
   temporal-dependence and extremal Heaps/Zipf analysis.
+- Santoro, Petri and Tria, *Physical Review Research* 8, 043083
+  (22 October 2026), https://doi.org/10.1103/shhp-4dht: independently
+  analyze novelty/non-novelty avalanches and urn-model dynamics.
+  Their empirical avalanche results are **not** replicated here.
 - Clauset, Shalizi and Newman, *SIAM Review* 51 (2009), 661–703,
   https://doi.org/10.1137/070710111: independent falsifiable empirical
   power-law model methodology.
@@ -103,14 +107,36 @@ It uses rational generating-function coefficients for the full PMF:
 No new probability carrier or synthetic proof authority is added.
 It checks normalization and equality with the existing mean owner.
 
+## Finite chronology information hierarchy
+
+The complete type-count prefix curve `V(0),...,V(N)` uniquely determines
+the novelty-event flags by `new(t)=V(t)-V(t-1)`, with values 0 or 1.
+Conversely, the novelty flags cumulatively determine the complete curve.
+Thus avalanche runs of binary novelty/non-novelty flags are a deterministic
+summary of the **full observed Heaps curve**; they are not new independent
+information once that *entire* curve is known. Santoro/Petri/Tria's
+2026 avalanche analysis can nevertheless distinguish systems which have
+similar **fitted Heaps laws or aggregate exponents**, not necessarily
+identical full event sequences.
+
+The full curve still cannot identify which old type recurred.
+The exact witness `(0,1,0,2,1)` versus `(0,1,1,2,0)` has the
+same terminal histogram `(2,2,1)`, the same entire curve
+`(0,1,2,2,3,3)`, the same novelty flags `(1,1,0,1,0)`
+and novelty-run lengths, but different repeated-token identities.
+The code reuses canonical `observed_prefix_diversity`,
+`novelty_flags` and `equal_flag_runs` to check this hierarchy.
+
 ## Executed and unpaid gates
 
-Eight tests in `tests/test_zipf_stochastic_majorization_exact.py` passed
+Ten tests in `tests/test_zipf_stochastic_majorization_exact.py` passed
 locally. These independently enumerate IID words and without-replacement
 subsets of individually labeled multiset tokens, and exhaust **1,007**
 comparable count pairs (K=2..4, counts 1..3), all prefix times and
 thresholds for both samplers, and independently verify pair CDFs and the
-same-quantile all-prefix coupling. New module/test GitHub blobs match the
+same-quantile all-prefix coupling, and enumerate the finite full-curve/novelty
+bijection with an explicit repeat-identity counterexample. New module/test
+GitHub blobs match the
 locally executed source.
 
 The focused tests ran against a locally extracted set of dependency
