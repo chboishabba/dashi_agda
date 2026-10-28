@@ -92,6 +92,22 @@ sectorActionDistributes n C3.c0 g h x = refl
 sectorActionDistributes n C3.c1 g h x = refl
 sectorActionDistributes n C3.c2 g h x = refl
 
+sectorActionPreservesZero :
+  ∀ n (r : C3.C3) (x : End.BalancedLevel n) →
+  sectorAction n r (zeroGauge n) x ≡ C3.c0
+sectorActionPreservesZero n C3.c0 x = refl
+sectorActionPreservesZero n C3.c1 x = refl
+sectorActionPreservesZero n C3.c2 x = refl
+
+sectorActionPreservesInverse :
+  ∀ n (r : C3.C3) (g : Gauge n)
+  (x : End.BalancedLevel n) →
+  sectorAction n r (Native.inverseAction g) x
+    ≡ C3.inverse (sectorAction n r g x)
+sectorActionPreservesInverse n C3.c0 g x = refl
+sectorActionPreservesInverse n C3.c1 g x = refl
+sectorActionPreservesInverse n C3.c2 g x = refl
+
 sectorActionPullbackSquare :
   ∀ n (r : C3.C3) (g : Gauge n)
   (x : End.BalancedLevel (suc n)) →
@@ -144,9 +160,13 @@ semidirectActionComposition {n}
     (cong
       (λ t → C3._∙_ (C3._∙_ (g x) (sectorAction n r h x)) t)
       (sectorActionComposition n r s f x))
-    (C3.associative
-      (g x) (sectorAction n r h x)
-      (sectorAction n r (sectorAction n s f) x))
+    (trans
+      (C3.associative
+        (g x) (sectorAction n r h x)
+        (sectorAction n r (sectorAction n s f) x))
+      (cong (λ t → C3._∙_ (g x) t)
+        (sym (sectorActionDistributes n r h
+          (sectorAction n s f) x))))
 
 sectorProjectionPreservesProduct :
   ∀ {n} (a b : FieldSymmetry n) →
@@ -167,9 +187,13 @@ semidirectGaugeAssociativity {n}
   trans
     (C3.associative (g x) (sectorAction n r h x)
       (sectorAction n (C3._∙_ r s) k x))
-    (cong
-      (λ z → C3._∙_ (g x) (C3._∙_ (sectorAction n r h x) z))
-      (sectorActionComposition n r s k x))
+    (trans
+      (cong
+        (λ z → C3._∙_ (g x) (C3._∙_ (sectorAction n r h x) z))
+        (sectorActionComposition n r s k x))
+      (cong (λ t → C3._∙_ (g x) t)
+        (sym (sectorActionDistributes n r h
+          (sectorAction n s k) x))))
 
 semidirectSectorAssociativity :
   ∀ {n} (a b c : FieldSymmetry n) →
@@ -263,9 +287,13 @@ semidirectRightInverseGauge :
   localRotation (combineSymmetry a (inverseSymmetry a)) x ≡ C3.c0
 semidirectRightInverseGauge {n} (fieldSymmetry g r) x =
   trans
-    (cong (λ value → C3._∙_ (g x) (C3.inverse value))
-      (sectorActionCancelsItsInverse n r g x))
-    (C3.inverseRight (g x))
+    (cong (λ t → C3._∙_ (g x) t)
+      (sectorActionPreservesInverse n r
+        (sectorAction n (C3.inverse r) g) x))
+    (trans
+      (cong (λ value → C3._∙_ (g x) (C3.inverse value))
+        (sectorActionCancelsItsInverse n r g x))
+      (C3.inverseRight (g x)))
 
 semidirectRightInverseSector :
   ∀ {n} (a : FieldSymmetry n) →
@@ -295,8 +323,11 @@ semidirectRightIdentityGauge :
   ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
   localRotation (combineSymmetry a (identitySymmetry n)) x
     ≡ localRotation a x
-semidirectRightIdentityGauge a x =
-  C3.rightIdentity (localRotation a x)
+semidirectRightIdentityGauge {n} a x =
+  trans
+    (cong (λ t → C3._∙_ (localRotation a x) t)
+      (sectorActionPreservesZero n (sectorRotation a) x))
+    (C3.rightIdentity (localRotation a x))
 
 -- These named operations are on finite-depth C3 fields; their direct
 -- limit equals the locally constant continuous group only after an
