@@ -234,3 +234,27 @@ Each displayed `N` and `N+2` is composite by the construction's explicit fresh p
 The new Agda owner also adds `allPairProductPeriodicMultiple` and its reverse, as well as exact filter-swap and duplicate-elimination theorems, establishing the periodic/symmetry half of the mechanism in source. A general Agda CRT inverse and an Agda double-composite producer are still needed for a kernel-checked version of this obstruction.
 
 **Updated verification split:** six independent local Python regression scripts passed; GitHub files and CI source written and read back; Agda kernel status pending; external Lean analytic assumptions unchanged. Do not claim an unconditional 186 theorem or twin-prime infinitude from finite modular symmetry.
+
+## 2026-10-28 signed SSP prime-output max-cut
+
+Dedicated 67-obligation audit and attribution: [SignedSSPTwinPrimeProofObligations](../roadmaps/SignedSSPTwinPrimeProofObligations.md).
+
+### Concrete signed offset arithmetic
+
+`DASHI.Arithmetic.SignedSSPPrimeOffsetMacroExact` gives an explicit formula- and divisibility-certified pair of two-step FRACTRAN macros for a decoded exponent `p`:
+- Source `9·2^p`, fraction `2/3` applied twice, output `4·2^p = 2^(p+2)` for all natural `p`.
+- For `p=2+k`, source `36·2^k=9·2^p`, fraction `1/6` applied twice, output `2^k = 2^(p−2)`.
+- Both transitions carry proofs of `denominator ∣ source` and `source·numerator = target·denominator`, not just a diagram.
+- The macro's signed `+2` and `−2` direction reuses `SignedSSPFRACTRANWeaveExact.positiveMultiplicity/negativeMultiplicity`, `orientationOfMultiplicity` and `negateMultiplicity`.
+
+This operation is numerical FRACTRAN integer semantics, not multiplication of the *decoded prime* `p` by the fraction. The prime appears as an **exponent** in the machine's coding `2^p`. The input `3²` supplies the finite two-step counter. The plus/minus macros are run as separate singleton programs; composing them into the running ordered PRIMEGAME requires an explicit dispatcher or compiler proof. The arithmetic macro alone does not implement complete signed-register prime enumeration.
+
+`DASHI.Arithmetic.SignedSSPPrimeOutputBoundaryExact` proves readout-invariance of actual arithmetic twin-primality and arbitrary-prime sieve predicates under decoding-preserving representations. It makes prime reachability an uninstantiated `ArithmeticPrimeEmitter` interface rather than pretending a representation theorem implies every prime is reached by the signed machine. It preserves separate certificates for `Prime p` and `Prime (p+2)`.
+
+The new `scripts/check_signed_ssp_prime_offset_macro.py` checks the Conway/Guy 15-fraction PRIMEGAME through nine prime exponent emissions, 254 plus and 254 minus numeric macros, underflow guard at `p<2`, and distinct FRACDASH R3 sign-register transport `23→17→19`. A materially equivalent local Python execution passed. The new Agda proofs are **source-written, kernel-pending**.
+
+### Mathematical authority
+
+John H. Conway, *FRACTRAN: A Simple Universal Programming Language for Arithmetic* (1987), in *Open Problems in Communication and Computation*, pp. 4–26, Springer DOI 10.1007/978-1-4612-4808-8. Richard K. Guy, *Conway's Prime Producing Machine* (1983), Mathematics Magazine 56(1), 26–33, DOI 10.2307/2690263, for the 15-fraction list variant. FRACDASH's signed compiler and paired-prime state-tag bridge remain owned by its repository. Neither one is attributed to Conway or promoted into new mathematical prime-distribution results.
+
+The updated pinned-Agda job includes both new modules and a runnable local regression. No successful exact-head kernel receipt has been observed. The external Polymath8b parity analysis and 2026 `PrimeGaps186` conditional analytic assumptions remain unchanged.
