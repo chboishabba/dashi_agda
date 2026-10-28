@@ -323,3 +323,46 @@ PR [#1406](https://github.com/chboishabba/dashi_agda/pull/1406) reuses existing 
 
 **Stop conditions:** GitHub Actions must actually run the relevant Python script, semantic preflight and Agda; the proof-source path must typecheck against the exact PR head. Current branch still does not modify the newer specialised TOE roots because their current master versions contain extensive independent work absent from the older branch snapshot. Attribution, empirical test data and kernel certification remain separate obligations.
 
+## 13. Tax × dashiTRADE market / material max-cut (2026-10-28)
+
+The direct user-requested cross-repo check inspected both the Agda trading proof owners and the independent [standalone private dashiTRADE](https://github.com/chboishabba/dashiTRADE). Both are part of the continuation scope.
+
+### Reuse rather than re-prove
+
+Existing Agda original repository owners are:
+- DASHI.Finance.DashiTradeFibreBridgeExact: factor/residual proposal is not execution permission.
+- DASHI.Trading.DashiTradeDreamOptionConeExact: equal direction can have different BUY availability; HOLD remains first class; trajectory cost is not endpoint value.
+- DASHI.Economics.DashiTradeAIInfrastructureMarketCrossPollinationExact: identical demand signals do not identify refinancing viability.
+- DASHI.Trading.TradingDeclaredRealizedViabilityBridgeExact: planned viability is not realised outcome.
+- DASHI.Core.IntersectionalNonFactorability: generic formal non-factorisation belongs to this existing mathematical module; original Crenshaw 1991 owns conceptual priority, not Agda code or theorem verification.
+
+This branch now has the distinct application DASHI.Economics.WealthTaxDashiTradeMarketMaterialBidiExact. It combines EXISTING inherited fiscal/market/finance fibres in three synthetic cases to demonstrate:
+1. Identical assessed hypothetical wealth-tax liability **does not determine** BUY permission.
+2. Identical infrastructure-demand signal **does not determine** refinancing availability.
+3. Identical market-direction proposal **does not determine** public tax cash collection.
+4. HOLD remains available in the inherited finite trading example.
+
+These source-written Agda proof terms are not certified until an observed exact-head Agda run succeeds. Nothing grants trading authorisation or predicts measured financial/physical outcomes.
+
+The new adapter is registered in Economics/Everything and re-exported through Unified/WealthTaxEvidenceNonPromotionTOEExact. The general canonical Everything import still reaches it; the three divergent specialist TOE roots remain untouched to protect more recent master branches and Ibrahim/Balaban/Fleet ownership. CI and the 42-topic topic-presence guard now require this Agda application and its inherited owners.
+
+### Standalone Python lane, no runtime changes
+
+A new [dashiTRADE PR #3](https://github.com/chboishabba/dashiTRADE/pull/3) carries:
+- policy/wealth_tax_shadow.py: immutable, source/time-indexed, exact decimal fiscal shadow receipt; assessed tax liability, actual cash collected, collection costs, care appropriation, delivered care hours and share-class voting rights stay separate.
+- tests/test_wealth_tax_shadow.py: eight synthetic negative controls, including pairing with the existing ShadowPolicyStep logging output without changing the live Intent.
+- docs/wealth_tax_shadow_material_maxcut.md and a path-scoped GitHub Actions Python unittest gate.
+
+Production run_trader, Nashi, broker, futures controller, intent.py and bar_exec.py are not modified. The independent [dashiTRADE PR #1](https://github.com/chboishabba/dashiTRADE/pull/1) (source-bounded AI capital financing) and [PR #2](https://github.com/chboishabba/dashiTRADE/pull/2) (TimesFM shadow) are unmerged; neither is imported or assumed installed.
+
+### Attribution and physical implications
+
+A wealth valuation is a market/legal claim, not a machine, power station or care hour. Even an enforceable cash tax liability must pass through collection, liquidity, possible portfolio transactions, company votes, financing/refinancing, public budgets and labour/capital capacity before changing real outcomes. Each transfer requires its own same-actor time-series and counterfactual evidence. The hypothetical 100% assessment-day threshold is **not** an enacted tax nor a market prediction.
+
+Original independent roots: OECD *Financing of Social Protection* (9 Sep 2026, DOI 10.1787/b384fd31-en), Fagereng/Guiso/Ring NBER WP 35262 (May 2026, DOI 10.3386/w35262), and Jakobsen et al. AER 2026 immigration evidence. These sources concern distinct populations and outcomes and are not replications of a 100% stock wealth ceiling. Earlier philosophers, social scientists and official datasets retain their original source ownership; the resulting new product-world proof structure is DASHI repository work, not theirs.
+
+### Remaining gates
+
+P0: 42/42 requested source topics classified. P1: new Agda cross-domain source and shadow-only Python suite written, but exact-head Agda and GitHub CI run must be observed. P2: obtain same-object ownership, legal assessment, tax receipts, actual trades/refinancing, physical construction/worker-hour data; still open. P3: competing-policy causal/negative-control tests; still open. P4: selectively integrate into current-master specialist TOE roots and preserve Ibrahim first-link history and Monster 3B proof ownership; still open.
+
+**No policy authorisation, live trading, measured capacity, scientific discovery or economic causal validation is inferred from the synthetic examples.**
