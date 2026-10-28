@@ -35,6 +35,7 @@ data ToySoundField : Set where
 
 data ToyMicrophone : Set where
   selectedMicrophone : ToyMicrophone
+  sourceMonitor : ToyMicrophone
 
 data ToyReceived : Set where
   receiverSilent : ToyReceived
@@ -57,6 +58,10 @@ toyMicrophoneReadout selectedMicrophone transmittingOff = receiverSilent
 toyMicrophoneReadout selectedMicrophone transmittingOn = receiverSignal
 toyMicrophoneReadout selectedMicrophone absorbingOff = receiverSilent
 toyMicrophoneReadout selectedMicrophone absorbingOn = receiverSilent
+toyMicrophoneReadout sourceMonitor transmittingOff = receiverSilent
+toyMicrophoneReadout sourceMonitor transmittingOn = receiverSignal
+toyMicrophoneReadout sourceMonitor absorbingOff = receiverSilent
+toyMicrophoneReadout sourceMonitor absorbingOn = receiverSignal
 
 toyTransportSystem : Transport.TransportSystem
 toyTransportSystem = record
@@ -71,6 +76,18 @@ toyTransportSystem = record
 selectedMicrophoneProjection : ToySoundField → ToyReceived
 selectedMicrophoneProjection =
   toyMicrophoneReadout selectedMicrophone
+
+-- The idealised source-side monitor reads source activity before the toy
+-- environment hides it. It is an extra instrument assumption, not a free
+-- consequence of the first microphone's silent reading.
+sourceMonitorProjection : ToySoundField → ToyReceived
+sourceMonitorProjection =
+  toyMicrophoneReadout sourceMonitor
+
+jointReceiverAndSourceMonitor :
+  ToySoundField → ToyReceived × ToyReceived
+jointReceiverAndSourceMonitor state =
+  selectedMicrophoneProjection state , sourceMonitorProjection state
 
 data SourceActivity : Set where
   sourceInactive : SourceActivity
@@ -135,6 +152,31 @@ sameReceiverReadoutCannotRecoverEmitterActivity :
     selectedMicrophoneProjection toyQuerySemantics emitterQuestion → ⊥
 sameReceiverReadoutCannotRecoverEmitterActivity =
   Query.queryAdequacyDefectBlocksFactorisation sourceActivityCollision
+
+------------------------------------------------------------------------
+-- A genuinely additional observer can resolve this toy inverse ambiguity.
+-- This conditional result does not establish field or material identity.
+------------------------------------------------------------------------
+
+sourceMonitorAdequateForEmitterQuestion :
+  Query.AdequateFor
+    sourceMonitorProjection toyQuerySemantics emitterQuestion
+sourceMonitorAdequateForEmitterQuestion =
+  Query.factorsForQuery
+    {project = sourceMonitorProjection}
+    {semantics = toyQuerySemantics}
+    {query = emitterQuestion}
+    (λ { receiverSilent → emitterInactiveAnswer
+       ; receiverSignal → emitterActiveAnswer })
+    (λ { transmittingOff → refl
+       ; transmittingOn → refl
+       ; absorbingOff → refl
+       ; absorbingOn → refl })
+
+sourceMonitorSeparatesSilentSourceCollision :
+  sourceMonitorProjection transmittingOff
+    ≡ sourceMonitorProjection absorbingOn → ⊥
+sourceMonitorSeparatesSilentSourceCollision ()
 
 -- This is the existing owner-specific observer equivalence, not equality
 -- of fields, sources, or biological effects.
