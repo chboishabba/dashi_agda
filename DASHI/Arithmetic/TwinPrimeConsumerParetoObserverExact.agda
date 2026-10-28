@@ -3,6 +3,14 @@ module DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact where
 ------------------------------------------------------------------------
 -- PR #1407 CROSS-POLLINATION; NO BRANCH-ONLY IMPORT.
 --
+-- IMPORTANT: PR #1407's 27-mode carrier is NOT 27 unstructured labels:
+--    (x,y,z) in {-1,0,+1} x {-1,0,+1} x {-1,0,+1},
+--    exactly THREE independent ternary coordinates, 3 x 3 x 3 = 27.
+--    Two ordered input cubes form SIX coordinates, 3^6 = 729.
+-- The existing Base369Ternary27HypervoxelFabricGeometryExact owner
+-- already proves the three-axis structure. Reuse, never flatten.
+-- This geometry is a representation/observer, NOT prime divisibility.
+--
 -- Source-written donor in chboishabba/dashi_agda PR #1407:
 --   R2P227729FourGridRetainedQuadraticParetoExact
 --     shows a coarse N=4 observation adequate for *retained* output
@@ -32,7 +40,7 @@ module DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact where
 -- Source-written Agda; do not claim kernel-verified typechecking.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat using (_%_)
@@ -45,10 +53,69 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Core
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Foundations.SSPTritCarrier as SSP
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as Wave
 import DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact as Twin
 import DASHI.Arithmetic.CertifiedPrimePairModulusExact as Pair
 import DASHI.Arithmetic.CertifiedPrimePairPeriodExact as Period
+
+------------------------------------------------------------------------
+-- THREE AXES, NOT TWENTY-SEVEN UNRELATED LABELS.
+-- Reuse the original x/y/z ternary-point carrier and its count theorem.
+-- The ordered pair is two *typed* 3x3x3 cubes (six trit coordinates).
+--
+-- Do not identify this with an arithmetic prime modulus, CRT triple,
+-- a Monster class, or the physical Fourier operator of PR #1407.
+------------------------------------------------------------------------
+
+ThreeByThreeByThree : Set
+ThreeByThreeByThree = Geometry.Ternary27Point
+
+toThreeCoordinates :
+  ThreeByThreeByThree →
+  SSP.SSPTrit × (SSP.SSPTrit × SSP.SSPTrit)
+toThreeCoordinates point =
+  Geometry.x point , (Geometry.y point , Geometry.z point)
+
+fromThreeCoordinates :
+  SSP.SSPTrit × (SSP.SSPTrit × SSP.SSPTrit) →
+  ThreeByThreeByThree
+fromThreeCoordinates (x , (y , z)) =
+  Geometry.ternary27Point x y z
+
+threeCoordinateDecodeEncode :
+  (point : ThreeByThreeByThree) →
+  fromThreeCoordinates (toThreeCoordinates point) ≡ point
+threeCoordinateDecodeEncode (Geometry.ternary27Point x y z) = refl
+
+threeCoordinateEncodeDecode :
+  (coords : SSP.SSPTrit × (SSP.SSPTrit × SSP.SSPTrit)) →
+  toThreeCoordinates (fromThreeCoordinates coords) ≡ coords
+threeCoordinateEncodeDecode (x , (y , z)) = refl
+
+threeAxisCountIsThree :
+  Geometry.axisCount ≡ 3
+threeAxisCountIsThree = refl
+
+threeAxisCapacityIsThreeTimesThreeTimesThree :
+  Geometry.hypervoxelStateCount ≡ 3 * 3 * 3
+threeAxisCapacityIsThreeTimesThreeTimesThree = refl
+
+threeAxisCapacityIsTwentySeven :
+  Geometry.hypervoxelStateCount ≡ 27
+threeAxisCapacityIsTwentySeven =
+  Geometry.hypervoxelStateCountIs27
+
+OrderedThreeCubePair : Set
+OrderedThreeCubePair = ThreeByThreeByThree × ThreeByThreeByThree
+
+orderedPairAxisCountIsSix :
+  Geometry.axisCount + Geometry.axisCount ≡ 6
+orderedPairAxisCountIsSix = refl
+
+orderedPairCapacityIsSevenHundredTwentyNine :
+  Geometry.hypervoxelStateCount * Geometry.hypervoxelStateCount ≡ 729
+orderedPairCapacityIsSevenHundredTwentyNine = refl
 
 sixWheelObservation : Nat → Nat
 sixWheelObservation n = n % 6
