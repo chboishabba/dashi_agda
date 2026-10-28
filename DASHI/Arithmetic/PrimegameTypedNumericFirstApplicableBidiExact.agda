@@ -31,7 +31,8 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Product using (_×_; _,_; Σ; proj₁; proj₂)
 open import Relation.Nullary using (¬_; Dec; yes; no)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
-open import Data.Nat.Properties using (_≟_)
+open import Data.Nat.Properties using (_≟_; *-identityʳ)
+open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (_≢_; cong; trans; subst; sym)
 open import Data.Empty using (⊥-elim)
 import Data.Nat.DivMod as DivMod
@@ -390,3 +391,34 @@ guyTypedExecutableHalt n witness =
 -- Executable policy has its own test fixture. Its source-level proof
 -- does not assert a compiled signed SSP/FRACDASH executor or a global
 -- theorem about all prime readouts.
+
+------------------------------------------------------------------------
+-- HISTORICAL READOUT ≠ HALTING.
+-- Guy's final fraction is 55/1. Every Nat state has an applicable
+-- rule. The source computation may emit prime markers along an
+-- ongoing trace, never by ordinary terminal program halting.
+------------------------------------------------------------------------
+
+guyLastRuleAlwaysApplies : (n : Nat) →
+  ExactFractionApplies n (55 , 1)
+guyLastRuleAlwaysApplies n =
+  (λ ()) , ((n * 55) , *-identityʳ (n * 55))
+
+guyBlockedPrefixCannotIncludeLast :
+  (n : Nat) →
+  NoApplicable ExactFractionApplies n Guy.guyFourteenNumeric →
+  (ExactFractionApplies n (55 , 1) → ⊥)
+guyBlockedPrefixCannotIncludeLast n blocked =
+  proj₁ (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (blocked))))))))))))))
+
+guyNumericScannerNeverHalts :
+  (n : Nat) →
+  firstApplicableNumeric Guy.guyFourteenNumeric n ≡ nothing → ⊥
+guyNumericScannerNeverHalts n apparentHalt =
+  guyBlockedPrefixCannotIncludeLast n
+    (guyNumericExecutableHalt n apparentHalt)
+    (guyLastRuleAlwaysApplies n)
+
+-- This theorem blocks the false claim that a prime marker is an
+-- ordinary terminal output. No universal prime-emission theorem
+-- follows from the existence of this always-applicable last rule.
