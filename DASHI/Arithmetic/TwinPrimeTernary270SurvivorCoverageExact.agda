@@ -28,7 +28,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Nat.DivMod using (_%_)
 open import Data.Product using (_×_; _,_; Σ; proj₁; proj₂)
-open import Data.Empty using (⊥-elim)
+open import Data.Empty using (⊥; ⊥-elim)
 import Data.Fin.Base as Fin
 open import Data.Fin.Base using (Fin)
 open import Relation.Binary.PropositionalEquality using
@@ -38,6 +38,9 @@ import DASHI.Foundations.SSPTritCarrier as T
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Arithmetic.TwinPrimeTernary270AffineCRTCodecExact as Codec
 import DASHI.Arithmetic.CertifiedPrimePairModulusExact as Pair
+import DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact as Composite
+import DASHI.Arithmetic.TwinPrimeSixWheelExact as Twin
+import Data.Nat.Primality as NatPrime
 
 -- The exact same guards used by the certified 2/3/5 sieve.
 Wheel270Survives : Nat → Set
@@ -1324,3 +1327,47 @@ survivorFibreFactorisation = refl
 -- Together with wheel270CompleteCertified this is the finite
 -- typed-cube / prime-2,3,5 wheel-survivor equivalence.
 -- No extension from local survival to actual twin primality.
+
+------------------------------------------------------------------------
+-- A concrete DOUBLE-COMPOSITE residue inside the FULL 27-point cube.
+-- r = 119 survives p=2,3,5, but 119=7*17 and 121=11*11.
+-- Reuse the original genuine Composite witness constructor owner.
+------------------------------------------------------------------------
+
+wheel270CubePoint119 :
+  Codec.cubeToWheel270
+    (Geometry.ternary27Point
+      T.sspZero T.sspPosOne T.sspPosOne) ≡ 119
+wheel270CubePoint119 = refl
+
+wheel270119Survives : Wheel270Survives 119
+wheel270119Survives =
+  ((λ ()) , (λ ())) ,
+  (((λ ()) , (λ ())) ,
+    (((λ ()) , (λ ())) , tt))
+
+wheel270119IsComposite : NatPrime.Composite 119
+wheel270119IsComposite =
+  Composite.twoNontrivialFactorsAreComposite 119
+    (Composite.twoNontrivialFactors 5 15 refl)
+
+wheel270121IsComposite : NatPrime.Composite 121
+wheel270121IsComposite =
+  Composite.twoNontrivialFactorsAreComposite 121
+    (Composite.twoNontrivialFactors 9 9 refl)
+
+wheel270119SurvivalCannotProveTwin :
+  Twin.TwinPrimeAt 119 → ⊥
+wheel270119SurvivalCannotProveTwin genuine =
+  NatPrime.composite⇒¬prime wheel270119IsComposite
+    (proj₁ genuine)
+
+wheel270121NotPrime : NatPrime.Prime 121 → ⊥
+wheel270121NotPrime =
+  NatPrime.composite⇒¬prime wheel270121IsComposite
+
+-- All three are exact separate mathematical facts:
+-- wheel270CubePoint119, wheel270119Survives,
+-- wheel270119IsComposite and wheel270121IsComposite.
+-- A type-preserving bijection between finite sieve survivors and
+-- cube points cannot manufacture the missing prime certificates.
