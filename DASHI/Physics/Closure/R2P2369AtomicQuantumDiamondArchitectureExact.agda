@@ -16,6 +16,8 @@ import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as Loop
 import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as Lattice
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeCut
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as FiniteConv
+import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as C3Fourier
+import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as FourierOwner
 import DASHI.Physics.Closure.R2P227729PairSixTritFibreBidiExact as SixTritPairs
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as ModePairs
 import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact as BlockBitsR2P2
@@ -765,3 +767,24 @@ fullArchitectureFiniteConvolutionDoesNotEstablishNSRegularity :
     ModeCut.canonicalThreeModeCodecNSAuthority ≡ false
 fullArchitectureFiniteConvolutionDoesNotEstablishNSRegularity =
   ModeCut.threeModeCodecIsNotAnNSProof
+
+------------------------------------------------------------------------
+-- ORIGINAL exact full C3^3 Fourier/inverse/Parseval/convolution owners.
+-- C3 cyclic convolution does NOT establish Z3 integer Galerkin identity.
+------------------------------------------------------------------------
+
+fullArchitectureReusesExactC3FourierInversion :
+  (f : C3Fourier.ModeCoefficient27) (mode : ModePairs.ModeCube27) →
+  C3Fourier.unpackModeSignal
+    (FourierOwner.inverseFourier27
+      (FourierOwner.fourier27 (C3Fourier.packModeSignal f))) mode
+    ≡ f mode
+fullArchitectureReusesExactC3FourierInversion =
+  C3Fourier.existingPeriodic27FourierRoundTrip
+
+fullArchitectureReusesExactC3PeriodicConvolution :
+  (f g : C3Fourier.ModeCoefficient27) (mode : ModePairs.ModeCube27) →
+  C3Fourier.periodicC3ConvolutionOfModeCoefficients f g mode
+    ≡ C3Fourier.spectralC3ConvolutionOfModeCoefficients f g mode
+fullArchitectureReusesExactC3PeriodicConvolution =
+  C3Fourier.periodic27DirectEqualsSpectralAtEveryMode
