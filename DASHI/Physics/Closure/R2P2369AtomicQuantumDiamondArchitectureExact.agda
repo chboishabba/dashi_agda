@@ -7,6 +7,10 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
+import DASHI.Physics.Closure.R2P2369WaveOpticalCombInformationCutExact as WaveCut
+import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as SymbolicR2P2
+import DASHI.Core.IndexedRelationalHyperfabricSpineExact as CoreR2P2
+import Data.Empty as EmptyR2P2
 import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as Bias
 import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as Loop
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
@@ -465,6 +469,9 @@ record R2P2369FullLogicalArchitecture : Set where
     causalCanonical : causal ≡ canonicalR2P2FiniteCausalModel
     phase : R2P2PhaseIndex
     phaseCanonical : phase ≡ canonicalR2P2PhaseIndex
+    signedBeatWaveCut : WaveCut.WaveCombAuthorityBoundary
+    signedBeatWaveCutCanonical :
+      signedBeatWaveCut ≡ WaveCut.canonicalWaveCombAuthorityBoundary
     quantumProperTimeComparator : QuantumProperTimeComparatorBoundary
     comparatorCanonical :
       quantumProperTimeComparator ≡ canonicalQuantumProperTimeComparatorBoundary
@@ -512,6 +519,8 @@ canonicalR2P2369FullLogicalArchitecture = record
   ; causalCanonical = refl
   ; phase = canonicalR2P2PhaseIndex
   ; phaseCanonical = refl
+  ; signedBeatWaveCut = WaveCut.canonicalWaveCombAuthorityBoundary
+  ; signedBeatWaveCutCanonical = refl
   ; quantumProperTimeComparator = canonicalQuantumProperTimeComparatorBoundary
   ; comparatorCanonical = refl
   ; optical = canonicalR2P2OpticalPhysicsBoundary
@@ -582,3 +591,27 @@ fullArchitectureNoCurvatureFromLoopNull :
     (loopAudit canonicalR2P2369FullLogicalArchitecture) ≡ false
 fullArchitectureNoCurvatureFromLoopNull =
   Loop.threeClockLoopCannotClaimCurvature
+
+------------------------------------------------------------------------
+-- Existing 369/wave exact-state witness retained at the TOE root.
+-- No 3/6/9 trit rechart can recreate erased signed comb frequency.
+------------------------------------------------------------------------
+
+fullArchitectureRetainsSignedBeatInFibre :
+  (branch : WaveCut.BeatBranch) →
+  SymbolicR2P2.decode
+    (SymbolicR2P2.encode WaveCut.signedBeatWaveCoding branch) ≡ branch
+fullArchitectureRetainsSignedBeatInFibre =
+  WaveCut.signedBeatEncodeDecode
+
+fullArchitectureWaveTruncationCannotDetermineOpticalHz :
+  CoreR2P2.ConsumerSufficient
+    WaveCut.absoluteBeatOrientation WaveCut.branchOpticalHz → EmptyR2P2.⊥
+fullArchitectureWaveTruncationCannotDetermineOpticalHz =
+  WaveCut.absoluteBeatTritCannotRecoverOpticalHz
+
+fullArchitectureWaveCutIsNotPhaseCalibration :
+  WaveCut.c3ProvesOpticalCarrierPhaseCalibration
+    (signedBeatWaveCut canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureWaveCutIsNotPhaseCalibration =
+  WaveCut.waveBridgeDoesNotCalibratePhysicalPhase
