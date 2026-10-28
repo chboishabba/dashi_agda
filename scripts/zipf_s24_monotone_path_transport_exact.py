@@ -20,6 +20,7 @@ from __future__ import annotations
 from collections import defaultdict, deque
 from dataclasses import dataclass
 from fractions import Fraction
+from math import comb
 from typing import Sequence, Literal
 
 from zipf_heaps_bridge import _validated_counts, multiset_count_majorizes
@@ -217,3 +218,54 @@ def finite_hall_cut_obstruction(
             best_deficit = deficit
             best = selected, upward, deficit
     return best
+
+
+def pair_one_type_survival_probability(
+    a: int, b: int, pair_draws: int, sampler: Sampler
+) -> Fraction:
+    """Exact probability pair has <=1 distinct observed type after m draws.
+
+    At m=0 this event has probability 1 and count=0; the two-term
+    formulas are valid only for m>=1. This is the time-to-first-switch
+    survival distribution of the *pair stream*, conditional on drawing
+    within that pair. This is NOT a full K-type Heaps path law.
+    """
+    if (type(a) is not int or type(b) is not int or min(a,b)<1
+            or type(pair_draws) is not int or pair_draws < 0
+            or sampler not in ("iid","permutation")
+            or (sampler=="permutation" and pair_draws>a+b)):
+        raise ValueError("positive pair counts, valid sampler and horizon")
+    if pair_draws==0:
+        return Fraction(1)
+    total=a+b
+    if sampler=="iid":
+        result=Fraction(a,total)**pair_draws + Fraction(b,total)**pair_draws
+    else:
+        result=Fraction(comb(a,pair_draws)+comb(b,pair_draws),
+                        comb(total,pair_draws))
+    assert 0<=result<=1
+    return result
+
+
+def concentrating_pair_transfer_certificate(
+    a: int, b: int, pair_draws: int,
+) -> dict[Sampler, tuple[Fraction, Fraction]]:
+    """Exact convexity cut for integer (a,b)->(a+1,b-1), a>=b>=2.
+
+    Returns original and concentrated one-type-survival probabilities.
+    Both are ordered concentrated>=original for the pair first-switch
+    process. All-prefix coupling still needs a common outer schedule
+    and conditional pair-stream disintegration (not paid by this helper).
+    """
+    if (type(a) is not int or type(b) is not int or a<b or b<2
+            or type(pair_draws) is not int
+            or not 0<=pair_draws<=a+b):
+        raise ValueError("valid concentrating transfer a>=b>=2 and 0<=m<=a+b")
+    out={}
+    for sampler in ("iid","permutation"):
+        original=pair_one_type_survival_probability(a,b,pair_draws,sampler)
+        concentrated=pair_one_type_survival_probability(
+            a+1,b-1,pair_draws,sampler)
+        assert original<=concentrated
+        out[sampler]=(original,concentrated)
+    return out
