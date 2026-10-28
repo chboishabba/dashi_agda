@@ -51,6 +51,7 @@ jobs:
             tests/test_zipf_family_formal.py \
             tests/test_zipf_family_crosslaw.py \
             tests/test_zipf_heaps_bridge_exact.py \
+            tests/test_zipf_heaps_extremal_profiles.py \
             tests/test_zipf_occupancy_collisions_exact.py \
             tests/test_pareto_benford_lorenz_bridge.py \
             tests/test_zipf_family_coverage_gates.py \
