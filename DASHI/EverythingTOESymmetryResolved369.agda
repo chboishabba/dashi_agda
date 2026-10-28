@@ -110,6 +110,10 @@ open NatWheelPeriod public using
   ; encodeNatPeriod270
   ; decodeNatPeriod270
   ; decodeEncodeNatPeriod270
+  ; encodeDecodeNatPeriod270
+  ; periodDivCorrect
+  ; periodRemCorrect
+  ; finiteResidueAfterDecode
   ; certifiedResidueHasCube
   ; NatCubePeriod270
   ; decodeCubePeriod270
