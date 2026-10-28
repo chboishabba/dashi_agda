@@ -11,7 +11,9 @@ on:
   push:
     paths:
       - "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda"
+      - "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda"
       - "scripts/check_twin_prime_six_wheel_finite.py"
+      - "scripts/check_twin_prime_ssp15_crt_finite.py"
       - ".github/workflows/twin-prime-finite-wheel.yml"
 
 jobs:
