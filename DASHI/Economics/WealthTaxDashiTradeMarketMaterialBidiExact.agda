@@ -14,8 +14,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (_≤_; _∸_)
-open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; +-assoc; +-comm; m+n∸n≡m)
-open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
+open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; +-assoc; +-comm; m+n∸n≡m; [m+n]∸[m+o]≡n∸o)
+open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong; cong₂)
 open import Data.Empty using (⊥)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
@@ -859,6 +859,51 @@ syntheticOffsettingInvestorAllocations =
 
 
 ------------------------------------------------------------------------
+------------------------------------------------------------------------
+-- BORROWING INCREASES DEBT ALONG WITH CASH (C07).
+-- Net position here is cash minus liabilities truncated at zero. This is
+-- an explicitly local financial stock model: no interest, collateral,
+-- lender risk, fees, taxes, valuation change or repayment is inferred.
+------------------------------------------------------------------------
+
+record MatchedBorrowingBalance : Set where
+  constructor matched-borrowing-balance
+  field
+    cashBeforeBorrowing : Nat
+    debtBeforeBorrowing : Nat
+    cashBorrowed : Nat
+    cashAfterBorrowing : Nat
+    debtAfterBorrowing : Nat
+    cashIncreaseMatched :
+      cashAfterBorrowing ≡ cashBorrowed + cashBeforeBorrowing
+    debtIncreaseMatched :
+      debtAfterBorrowing ≡ cashBorrowed + debtBeforeBorrowing
+open MatchedBorrowingBalance public
+
+loanProceedsIncreaseLiabilities :
+  (loan : MatchedBorrowingBalance) →
+  debtAfterBorrowing loan ≡
+    cashBorrowed loan + debtBeforeBorrowing loan
+loanProceedsIncreaseLiabilities = debtIncreaseMatched
+
+borrowedCashDoesNotByItselfRaiseNetCashMinusDebt :
+  (loan : MatchedBorrowingBalance) →
+  cashAfterBorrowing loan ∸ debtAfterBorrowing loan ≡
+    cashBeforeBorrowing loan ∸ debtBeforeBorrowing loan
+borrowedCashDoesNotByItselfRaiseNetCashMinusDebt loan =
+  trans
+    (cong₂ _∸_ (cashIncreaseMatched loan) (debtIncreaseMatched loan))
+    ([m+n]∸[m+o]≡n∸o (cashBorrowed loan)
+      (cashBeforeBorrowing loan) (debtBeforeBorrowing loan))
+
+syntheticBorrowedFunding : MatchedBorrowingBalance
+syntheticBorrowedFunding =
+  matched-borrowing-balance 2 1 3 5 4 refl refl
+
+-- Cash, debt and true wealth are not the same thing. The positive
+-- conservation statement depends on both ledger identities, not on merely
+-- observing that a bank account balance increased.
+
 -- GENERIC FINITE ORDER/EXECUTION/SETTLEMENT CONTRACTS (D09--D11).
 -- No two-fill bound is silently assumed to cover an arbitrary collection.
 -- A valid reconciled receipt carries accounting evidence. Mere proposal,
