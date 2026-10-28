@@ -575,6 +575,11 @@ open DashiTradeTax public using
   ; rotatePolicyXYZThreeTimes
   ; swapPolicyXYTwice
   ; existingS3InverseLaw
+  ; swapPolicyYZTwice
+  ; policyCubeAdjacentSwapBraid
+  ; policyCubeLabelSwapNotAnEconomicIntervention
+  ; existingQ8CentralSignIsProjectedAway
+  ; existingQ8MinusSignHasOrderTwo
   ; PolicyEvidenceInteractionThreeCell
   ; policyInteractionToCellDialectic
   ; policyThreeCellToExistingHyperform
