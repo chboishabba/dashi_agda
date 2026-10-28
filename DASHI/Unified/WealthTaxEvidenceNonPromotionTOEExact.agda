@@ -9,7 +9,7 @@ module DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact where
 -- Ibrahim 2017 FLN navigation is not a wealth-tax proof or Monster action.
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (zero; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attributed
@@ -226,6 +226,14 @@ toeTwoFillCashIdentity :
       * DashiTradeTax.secondUnitPrice DashiTradeTax.twoPricesThreeProceeds
 toeTwoFillCashIdentity =
   DashiTradeTax.twoFillCashConservation
+
+-- Settlement cash is an optional, separately timed source of payment.
+-- The finite conditional chronology has no permission to infer bridge loans,
+-- exchange settlement, or observed taxpayer payments from a quotation.
+toeEarlierTaxReceiptCannotUseLaterSaleWithoutBridge :
+  (lag : Nat) → 1 ≡ 3 + lag → ⊥
+toeEarlierTaxReceiptCannotUseLaterSaleWithoutBridge =
+  DashiTradeTax.priorCashReceiptHasNoForwardSettlementLink
 
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
