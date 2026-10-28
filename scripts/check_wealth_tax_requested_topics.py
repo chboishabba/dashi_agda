@@ -360,6 +360,11 @@ def main() -> None:
         "numerologicalPatternDoesNotPayEconomicProof",
         "matchingDigitsDoNotProveTaxEffects",
         "quaternionLiftDoesNotAuthenticateSettlement",
+        "swapPolicyYZTwice",
+        "policyCubeAdjacentSwapBraid",
+        "policyCubeLabelSwapNotAnEconomicIntervention",
+        "existingQ8CentralSignIsProjectedAway",
+        "existingQ8MinusSignHasOrderTwo",
     ):
         assert symbol in bridge, f"missing funding/ASX TOE boundary: {symbol}"
     for symbol in (
@@ -382,6 +387,14 @@ def main() -> None:
             "numerology cross-pollination must import existing owner: "
             + original_owner
         )
+    assert "import DASHI.Algebra.FiniteQuaternionDoubleCover as Q8" in dashi_tax_bridge, (
+        "Q8 central-sign loss must reuse actual finite quotient owner"
+    )
+    for term in ("jarosRauhCaliforniaProjection2026",
+                 "bacherFagerengRingWoldEntry2026",
+                 "jointNorwegianReformsNotCaliforniaProjection",
+                 "norwegianStartupCapitalThresholdNotWealthTax"):
+        assert term in tax_source, f"missing distinct source/estimand: {term}"
     assert "test_369_trialectic_numeric_role_maxcut" in script, (
         "27-cube/3^5/5^3 model oracle missing"
     )
