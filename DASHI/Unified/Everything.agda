@@ -2,6 +2,14 @@ module DASHI.Unified.Everything where
 import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinPrimeSixWheel
 import DASHI.Arithmetic.TwinPrimeFRACDASHReuseExact as TwinPrimeFRACDASH
 import DASHI.Arithmetic.CertifiedPrimePairModulusExact as ArbitraryPrimeCRT
+import DASHI.Arithmetic.CertifiedPrimePairPeriodExact as PairCRTPeriod
+open PairCRTPeriod public using
+  ( localKPeriod
+  ; localKOffsetPeriod
+  ; productIsCommonPeriod
+  ; allPairProductPeriodic
+  ; allPairProductPeriodicBack
+  )
 import DASHI.Arithmetic.TwinPrimeOggControlReuseExact as PrimeControlReuse
 open PrimeControlReuse public using
   ( knownNonOggControlCount
