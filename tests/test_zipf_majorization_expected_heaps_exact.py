@@ -84,3 +84,29 @@ def test_zero_uncertainty_and_noncomparable_arguments_fail_closed():
     with pytest.raises(ValueError):M.zipf_shape_majorization_certificate(5,2,1)
     with pytest.raises(ValueError):M.zipf_exponent_iid_heaps_certificate(5,1,2,0,-1)
     with pytest.raises(ValueError):M.local_one_step_presence_gain(5,5,1)
+
+
+def test_majorization_mean_order_does_not_imply_variance_order():
+    """Same concentrated/dispersed pair, opposite variance order by sampler/time."""
+    from zipf_occupancy_collisions_exact import (
+        iid_vocabulary_variance, permutation_vocabulary_variance,
+    )
+    concentrated = (1, 3)
+    dispersed = (2, 2)
+    assert multiset_count_majorizes(concentrated, dispersed)
+    a = tuple(F(x, 4) for x in concentrated)
+    b = tuple(F(x, 4) for x in dispersed)
+    # IID variance at t=2: concentrated LESS variable.
+    assert iid_vocabulary_variance(a, 2) == F(15, 64)
+    assert iid_vocabulary_variance(b, 2) == F(1, 4)
+    # IID variance at t=3: concentrated MORE variable.
+    assert iid_vocabulary_variance(a, 3) == F(63, 256)
+    assert iid_vocabulary_variance(b, 3) == F(3, 16)
+    # Without replacement at t=2: concentrated MORE variable.
+    assert permutation_vocabulary_variance(concentrated, 2) == F(1, 4)
+    assert permutation_vocabulary_variance(dispersed, 2) == F(2, 9)
+    # Expected number of types still respects majorization in both samplers.
+    for t in (2, 3):
+        (ia, ib), (pa, pb) = M.majorization_expected_vocabulary_certificate(
+            concentrated, dispersed, t)
+        assert ia <= ib and pa <= pb
