@@ -332,6 +332,9 @@ def check() -> None:
         "DASHI.Algebra.BalancedTernary",
         "DASHI.Core.ResidualBitLowerBoundThreeExact",
         "DASHI.Reasoning.DialecticInvariantGeometry",
+        "DASHI.Reasoning.TernaryComparisonSynthesisExact",
+        "DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact",
+        "DASHI.Topology.TetrationalGateField",
     ):
         require(f"import {owner}" in sonic_cube, f"missing numerology prior proof owner {owner}")
     for symbol in (
@@ -342,6 +345,10 @@ def check() -> None:
         "dialecticMirrorTwice",
         "twoFortyThreeIsThreeToFive",
         "oneTwentyFiveIsFiveCubed",
+        "toExistingSynthesisCarrier",
+        "observationRetainsCanonicalXY",
+        "existingTrialecticBasisHas27",
+        "existingTetrationHeightTwoIs27",
     ):
         require(symbol + " :" in sonic_cube, f"missing finite T11 theorem {symbol}")
     require("GoodmanSonicNumerologyObservationCubeExact" in transport,
