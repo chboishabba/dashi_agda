@@ -1,5 +1,40 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- Full video concept/lemma atlas. Only source-written finite examples are
+-- opened. The separate uninhabited analytic/Galois/Spin contracts stay scoped.
+import DASHI.Foundations.PolynomialVideo45ConceptContractsExact as Video45
+import DASHI.Foundations.PolynomialVietaRootSymmetryExact as VietaRoot
+import DASHI.Foundations.PolynomialBraidPermutationImageExact as BraidRoot
+import DASHI.Foundations.QuinticOverlappingThreeCyclesExact as QuinticCycle
+import DASHI.Foundations.Polynomial369TrialecticTransportExact as Root369
+import DASHI.Foundations.PolynomialTwoSheetMonodromyExact as SheetRoot
+import DASHI.Foundations.PolynomialGlobalRadicalTopologyContractsExact as RootGlobal
+
+open Video45 public using
+  ( VideoConcept ; Scope ; conceptScope
+  ; kernelVerifiedInThisPR ; kernelVerificationNotAssertedHere )
+open VietaRoot public using
+  ( cubicVietaIdentity ; coefficientInvariantUnderRootPermutation
+  ; imaginaryUnitSolvesX2PlusOne ; negativeImaginarySolvesX2PlusOne )
+open BraidRoot public using
+  ( pureBraidPermutationImageIsIdentity
+  ; braidRelationRespectedByS3Image ; commutatorIsEven
+  ; commutatorOfTwoC3RotationsIsIdentity
+  ; positiveHistoryNotLiterallyEmpty )
+open QuinticCycle public using
+  ( doubleCommutatorRecoversA ; doubleCommutatorRecoversB
+  ; noQuinticTheoremFromTwoCycleWitnessAlone )
+open Root369 public using
+  ( sameCarrierCountDifferentSemantics
+  ; endoSynthesisEndo ; synthesisEndoSynthesis
+  ; conjugateSynthesisChartComposition
+  ; synthesisCellForgetsNothing ; quaternionC3AxisTransport
+  ; hypervoxelReorientation ; braidCoarseReturn )
+open SheetRoot public using
+  ( deckSwapInvolution ; sameCoefficientAfterDeckLoop
+  ; noMonodromyInvariantSelection ; loopActionComposition )
+open RootGlobal public using ( conditionalGeneralQuinticImpossibility )
+
 -- Sourced finite polynomial-root monodromy / 243-vs-125 / quaternion C3 lift.
 -- The same owner carries explicit non-promotion flags for quintic and topology.
 import DASHI.Foundations.PolynomialMonodromyTernaryQuaternionBridgeExact as PolynomialMonodromy
