@@ -19,6 +19,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AttributedSourceCore as Attributed
 import DASHI.Core.EvidenceHyperfabricExact as Evidence
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as ExternalIdentity
 import DASHI.Economics.SourceAttributionPromotionBoundaryExact as Sources
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
@@ -681,4 +682,28 @@ toeOfficialSettlementAndCustodyAllocationRemainDistinct :
     ≡ DashiTradeTax.validatedBeneficialCustodyAllocation → ⊥
 toeOfficialSettlementAndCustodyAllocationRemainDistinct =
   DashiTradeTax.officialSettlementIsNotBeneficiaryAllocation
+
+-- Reuse existing Wikimedia/Snowball external-identity proof owners.
+-- This is an authority-boundary import, not the transplantation of an
+-- Ibrahim first-link theorem, a 3B/Monster representation, or a market
+-- evidence producer. A citation/QID/reference is NOT a custody receipt.
+toeCandidateReferenceDoesNotVerifyCanonicalSource :
+  ExternalIdentity.P854CandidateEqualsVerifiedCanonicalSource → ⊥
+toeCandidateReferenceDoesNotVerifyCanonicalSource =
+  ExternalIdentity.p854CandidateStillNeedsInspection
+
+toeQidDoesNotValidateTaxOrSettlementClaim :
+  ExternalIdentity.QidPaysSourceTruth → ⊥
+toeQidDoesNotValidateTaxOrSettlementClaim =
+  ExternalIdentity.qidDoesNotPaySourceTruth
+
+toeUnresolvedIdentityIsNotProvedAbsent :
+  ExternalIdentity.UnresolvedQidMeansEntityAbsent → ⊥
+toeUnresolvedIdentityIsNotProvedAbsent =
+  ExternalIdentity.unresolvedQidIsNotEntityAbsence
+
+toeRelevantVerifiedIdentityMustRemainInSourceLens :
+  ExternalIdentity.VerifiedRelevantIdentityMayBeSilentlyDropped → ⊥
+toeRelevantVerifiedIdentityMustRemainInSourceLens =
+  ExternalIdentity.verifiedRelevantIdentityMustSnowball
 
