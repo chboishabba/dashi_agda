@@ -92,3 +92,30 @@ Finally, the source-owned **seven** endomorphism-shape orbits are not equivalent
 - Next Pareto targets: (i) typecheck new 27 bridge and F13b on the repository's pinned Agda 2.9/std-stdlib toolchain, (ii) reuse prior shape/orbit typed receivers for explicit evidence provenance rather than composing unrelated group orders, (iii) complete S24's existing source mathematical coupling as an Agda theorem, (iv) extend H08 all-count sharpness where the source family permits it. CI is not the proof boundary. Respect original dated primary authors and earlier repository/PR proof ownership.
 
 Source bibliography: Cauchy–Frobenius lemma and Pólya theorem (1937) in *Encyclopedia of Mathematics*, https://encyclopediaofmath.org/wiki/P%C3%B3lya_theorem ; Dixon & Mortimer (1996) *Permutation Groups* DOI 10.1007/978-1-4612-0731-3; Zimmerlin, Louail, Moussallam & Barthelemy (2025 preprint) *The dynamics of discovery and the Heaps-Zipf relationship*, https://arxiv.org/abs/2510.21481. Modern Heaps chronology is attributed to those original authors, not this numeric demonstration.
+
+
+## Additional Pareto cut: general alphabet-by-length fibres
+
+The action-sensitive cube result extends constructively to arbitrary finite **word length n and alphabet size q**, using the already-owned IID full-Heaps path law as the probability receiver.
+
+A complete Heaps curve corresponds to a binary novelty event at each position: the first position is always novel, and the subsequent n−1 positions contain at most q−1 further novel events. Every such event pattern can be realized on a q-label alphabet. Therefore the **number of distinct full Heaps curves** is
+
+```
+H(q,n) = Σ_{j=0}^{min(q−1,n−1)} C(n−1,j).
+```
+
+The **number of named words that realize a particular curve** is an exact product: at a new-type event with s distinct types already seen, choose one of q−s unused labels; at a repeat event, choose one of s old labels. The product over all positions gives the fibre cardinality, and the fibres sum to q^n.
+
+The new function `scripts/zipf_ternary27_action_heaps_exact.uniform_heaps_curve_multiplicities(q,n)` implements this *integer fibre-count* computation and compares its normalization against the pre-existing `zipf_full_heaps_path_distribution_exact.full_heaps_curve_law((1,)*q,n,"iid")`. Thus it **reuses** the canonical probability distribution, rather than introducing another IID statistical model. Executable resource bounds (q≤7,n≤10,q^n≤30000) are not claimed as a limitation on the combinatorial formula itself.
+
+Distinct typed cases:
+
+| Source interpretation | Total named words | Complete Heaps curves | Example fibre counts |
+|---|---:|---:|---|
+| 3 labels × 3 positions (3³) | 27 | 4 | 3,6,12,6 |
+| 3 labels × 5 positions (3⁵) | 243 | 11 | 3,6,12,6,24,12,18,48,24,36,54 |
+| 5 labels × 3 positions (5³) | 125 | 4 | 5,20,40,60 |
+
+The 11 Heaps curves on 3⁵ words happen to match the **11 C3-coordinate orbits on 3³ words**. This equality is explicitly recorded as a **numerical coincidence between two different quotient sets**, not an observation-preserving bijection. The carrier cardinalities 243 versus 27, the positions and group actions differ. No 720° quaternion, Monster 3B representation or quintic polynomial result follows.
+
+The expanded regression independently exhausts all q≤5 and n≤6 with q^n≤30000 and checks these named-word fibre counts against `itertools.product`. The exact integer count/multiplicity formula is classical occupancy combinatorics. It is not a new Zipf scaling law, an empirical proof of Heaps universality or an Agda kernel certificate. Historical origins remain with Cauchy/Frobenius/Burnside, Pólya, original Heaps/Zipf researchers and the separately credited repo source owners.
