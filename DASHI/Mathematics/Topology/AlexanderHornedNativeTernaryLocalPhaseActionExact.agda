@@ -308,3 +308,82 @@ depthTwoCells = Native.threeSectorDepthTwoPrefixes
 depthTwoLocalPhaseCount :
   Tower.pow 3 (3 * Tower.pow 3 2) ≡ Tower.tetration 3 3
 depthTwoLocalPhaseCount = Native.ternaryConfigurationTetration
+
+
+------------------------------------------------------------------------
+-- Strong no-weld: full local phase translations are TRANSITIVE on fields.
+-- It follows that a pointwise-extensional observable invariant under
+-- every local gauge must be constant. Global diagonal relabeling is
+-- a smaller group and can have nonconstant Heaps/equality invariants.
+------------------------------------------------------------------------
+
+gaugeFromTo : ∀ {n} → LocalPhase n → LocalPhase n → LocalPhase n
+gaugeFromTo f h x = C3._∙_ (h x) (C3.inverse (f x))
+
+gaugeTranslationTransitiveAt : ∀ {n} (f h : LocalPhase n)
+  (x : Address n) →
+  translate (gaugeFromTo f h) f x ≡ h x
+gaugeTranslationTransitiveAt f h x =
+  trans
+    (C3.associative (h x) (C3.inverse (f x)) (f x))
+    (trans
+      (cong (C3._∙_ (h x)) (C3.inverseLeft (f x)))
+      (C3.rightIdentity (h x)))
+
+gaugeInvariantObservableConstant : ∀ {n} {A : Set}
+  (observable : LocalPhase n → A) →
+  ((f h : LocalPhase n) →
+    ((x : Address n) → f x ≡ h x) →
+    observable f ≡ observable h) →
+  ((g f : LocalPhase n) →
+    observable (translate g f) ≡ observable f) →
+  (f h : LocalPhase n) → observable f ≡ observable h
+gaugeInvariantObservableConstant observable pointwiseRespects invariant f h =
+  trans
+    (sym (invariant (gaugeFromTo f h) f))
+    (pointwiseRespects (translate (gaugeFromTo f h) f) h
+      (gaugeTranslationTransitiveAt f h))
+
+------------------------------------------------------------------------
+-- A SETOID of cylinder representatives on the ACTUAL inverse limit.
+-- Equality-on-ends is an equivalence relation; one-step refinement
+-- and sector-shift preserve it. This is not a quotient type or a
+-- topological theorem that ALL continuous maps factor through a depth.
+------------------------------------------------------------------------
+
+SameOnEnds : CylinderPhase → CylinderPhase → Set
+SameOnEnds a b = (point : Native.BalancedEndPoint) →
+  valueAtEnd a point ≡ valueAtEnd b point
+
+sameOnEndsReflexive : (a : CylinderPhase) → SameOnEnds a a
+sameOnEndsReflexive a point = refl
+
+sameOnEndsSymmetric : (a b : CylinderPhase) →
+  SameOnEnds a b → SameOnEnds b a
+sameOnEndsSymmetric a b equal point = sym (equal point)
+
+sameOnEndsTransitive : (a b c : CylinderPhase) →
+  SameOnEnds a b → SameOnEnds b c → SameOnEnds a c
+sameOnEndsTransitive a b c ab bc point =
+  trans (ab point) (bc point)
+
+sameOnEndsOneRefinement : ∀ n (f : LocalPhase n) →
+  SameOnEnds (cylinderPhase (suc n) (refine n f))
+             (cylinderPhase n f)
+sameOnEndsOneRefinement n f point =
+  refinementPreservesEndValue n f point
+
+rotateCylinder : C3.C3 → CylinderPhase → CylinderPhase
+rotateCylinder shift (cylinderPhase n f) =
+  cylinderPhase n (shiftField shift f)
+
+sameOnEndsRotationCongruence : (shift : C3.C3)
+  (a b : CylinderPhase) → SameOnEnds a b →
+  SameOnEnds (rotateCylinder shift a) (rotateCylinder shift b)
+sameOnEndsRotationCongruence shift
+  (cylinderPhase n f) (cylinderPhase m g) equal point =
+  trans
+    (endRotationValueSquare n shift f point)
+    (trans
+      (equal (shiftEnd shift point))
+      (sym (endRotationValueSquare m shift g point)))
