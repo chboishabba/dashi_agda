@@ -9,6 +9,7 @@ CC BY-NC-SA 4.0. No observed acoustic accuracy is inferred by this tool.
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 from statistics import mean
 
@@ -30,7 +31,7 @@ def validate_manifest(manifest, root):
     if manifest.get("license") != "CC BY-NC-SA 4.0":
         raise ValueError("dataset licence must remain attached")
     scenarios = manifest.get("scenarios")
-    if not isinstance(scenarios, list) or {r.get("id") for r in scenarios} != SCENARIOS:
+    if not isinstance(scenarios, list) or len(scenarios) != 4 or {r.get("id") for r in scenarios} != SCENARIOS:
         raise ValueError("required four unique scenario entries")
     for rec in scenarios:
         ident = rec["id"]
@@ -77,6 +78,43 @@ def split_blocks(rows, seed):
             for (sc, block), label in sorted(assigned.items())]
 
 
+def enforce_spatial_buffer(rows, assigned, minimum_separation_m):
+    """Fail if distinct partitions are closer than the declared distance.
+
+    Do not compare R2 against other scenarios: its physical geometry/medium
+    differs. All source coordinates must be finite metric coordinates.
+    """
+    if not math.isfinite(minimum_separation_m) or minimum_separation_m <= 0:
+        raise ValueError("positive physical separation threshold required")
+    by_group = {(x["scenario"], x["spatial_block"]): x["partition"] for x in assigned}
+    positions = {}
+    for row in rows:
+        coords = row.get("xyz_m")
+        if not isinstance(coords, list) or len(coords) != 3:
+            raise ValueError("physical xyz_m source coordinates required")
+        if not all(isinstance(v, (float, int)) and math.isfinite(v) for v in coords):
+            raise ValueError("invalid metric coordinates")
+        key = (row["scenario"], str(row["position_id"]))
+        if key in positions and positions[key] != tuple(coords):
+            raise ValueError("inconsistent coordinates for source position")
+        positions[key] = tuple(coords)
+    unique = list(positions.items())
+    for i, ((sc, pos), xyz) in enumerate(unique):
+        first = next(row for row in rows if row["scenario"] == sc and str(row["position_id"]) == pos)
+        first_partition = by_group[(sc, str(first["spatial_block"]))]
+        if first_partition == "external_environment":
+            continue
+        for (sc2, pos2), xyz2 in unique[i+1:]:
+            if sc2 != sc:
+                continue
+            second = next(row for row in rows if row["scenario"] == sc2 and str(row["position_id"]) == pos2)
+            second_partition = by_group[(sc2, str(second["spatial_block"]))]
+            if first_partition == second_partition:
+                continue
+            if math.dist(xyz, xyz2) < minimum_separation_m:
+                raise ValueError("cross-partition spatial buffer violated")
+
+
 def correlated_error_budget(pairs, inverse_gain):
     """Sample covariance from independently acquired paired replicate errors.
 
@@ -115,6 +153,7 @@ def main():
     p.add_argument("--positions", required=True)
     p.add_argument("--seed", default="sonic-heldout-v1")
     p.add_argument("--output", required=True)
+    p.add_argument("--min-separation-m", type=float, required=True)
     args = p.parse_args()
     manifest = json.loads(Path(args.manifest).read_text())
     validate_manifest(manifest, Path(args.archive_root))
@@ -122,6 +161,7 @@ def main():
     if not isinstance(positions, list) or not positions:
         raise ValueError("source-position metadata required")
     groups = split_blocks(positions, args.seed)
+    enforce_spatial_buffer(positions, groups, args.min_separation_m)
     result = {"dataset_doi": LATEST_DOI, "sha256_verified": True,
               "partitions": groups, "measurement_results": None,
               "warning": "No calibration/covariance/accuracy measured by manifest and split alone"}
