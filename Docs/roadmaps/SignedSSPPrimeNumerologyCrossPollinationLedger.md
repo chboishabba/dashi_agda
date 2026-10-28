@@ -68,4 +68,32 @@ The local Python probes `scripts/check_twin_prime_369_ibrahim_local_orbits.py` a
 - **P3 next proof:** general arithmetic coprime CRT inverse; local p−2 counts and exact survivor cardinality under arbitrary distinct prime moduli.
 - **P4 research wall:** quantified correlation or other genuine information proving simultaneous arithmetic primality at distance two. DHJ Polymath8b (2014) established H₁≤246 unconditionally and H₁≤6 under generalized Elliott–Halberstam, with a parity obstruction for *purely sieve-theoretic* routes. That does not imply the twin-prime conjecture or refute all possible signed computation.
 
-**Claim status:** these three new Agda sources are **source-written, kernel-pending**. All distinct original-source contributors retain attribution: Conway/Guy for FRACTRAN, Serre and earlier group representation mathematics, Ibrahim and the original Monster 3B/phase owner, PR #1407's finite Fourier owners, DHJ Polymath8b for analytic sieve limitations, and #1408 for the newly source-written arithmetic bridges. No protected ESD edits, no new axiom, no CI run. 
+**Claim status:** these three new Agda sources are **source-written, kernel-pending**. All distinct original-source contributors retain attribution: Conway/Guy for FRACTRAN, Serre and earlier group representation mathematics, Ibrahim and the original Monster 3B/phase owner, PR #1407's finite Fourier owners, DHJ Polymath8b for analytic sieve limitations, and #1408 for the newly source-written arithmetic bridges. No protected ESD edits, no new axiom, no CI run.
+
+## E. 270-wheel reverse coverage and coordinate decomposition
+
+The new source-written `TwinPrimeTernary270SurvivorCoverageExact`
+uses 270 bounded computational proof cases, not a bijection inferred
+merely from matching cardinalities. It gives both a typed inverse
+witness for each actual mod-270 sieve survivor and a successful
+decoder proof. Every other residue fails one of the 2/3/5
+divisibility guards by explicit contradiction.
+
+```text
+mod 2:  E(x,y,z) = 1
+mod 27: E(x,y,z) = 14 + 3*d(y) + 9*d(z)    (9 choices)
+mod 5:  E(x,y,z) = 1 + 3*d(x)              (3 choices)
+total:  1 * 9 * 3 = 27 admissible classes in mod 270
+```
+
+This is the real separation of the three independent *geometry*
+coordinates into arithmetic consumers: the outer x coordinate
+specifies the mod-5 local choice; the inner y/z plane encodes a
+9-element prime-power-3 local fibre. It is NOT three CRT axes with
+distinct prime moduli. The earlier Ibrahim 3×5=15 phase quotient
+loses information, whereas the full 3×3×3 map is injective.
+
+A finite-completeness source theorem is different from a tested
+Agda theorem. No Agda compiler/kernel receipt is available;
+the 270-case Python independent check did pass. No evidence of
+infinite genuine twin pairs is inferred.
