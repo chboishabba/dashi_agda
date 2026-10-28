@@ -234,6 +234,70 @@ refineSymmetryFaithful n a b pointwiseEqual sectorEqual =
   Native.pullbackInjective n (localRotation a) (localRotation b)
     pointwiseEqual
 
+
+------------------------------------------------------------------------
+-- CLOSE THE FINITE SEMIDIRECT GROUP LAWS POINTWISE.
+-- Source owner supplies the C3 inverse on gauge values. The external
+-- C3 inverse additionally moves the ADDRESS before sign inversion.
+------------------------------------------------------------------------
+
+inverseSymmetry :
+  ∀ {n} → FieldSymmetry n → FieldSymmetry n
+inverseSymmetry {n} (fieldSymmetry g r) =
+  fieldSymmetry
+    (Native.inverseAction (sectorAction n (C3.inverse r) g))
+    (C3.inverse r)
+
+sectorActionCancelsItsInverse :
+  ∀ n (r : C3.C3) (g : Gauge n)
+  (x : End.BalancedLevel n) →
+  sectorAction n r (sectorAction n (C3.inverse r) g) x ≡ g x
+sectorActionCancelsItsInverse n C3.c0 g x = refl
+sectorActionCancelsItsInverse n C3.c1 g x =
+  Native.rotateFieldCubed n g x
+sectorActionCancelsItsInverse n C3.c2 g x =
+  Native.rotateFieldCubed n g x
+
+semidirectRightInverseGauge :
+  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
+  localRotation (combineSymmetry a (inverseSymmetry a)) x ≡ C3.c0
+semidirectRightInverseGauge {n} (fieldSymmetry g r) x =
+  trans
+    (cong (λ value → C3._∙_ (g x) (C3.inverse value))
+      (sectorActionCancelsItsInverse n r g x))
+    (C3.inverseRight (g x))
+
+semidirectRightInverseSector :
+  ∀ {n} (a : FieldSymmetry n) →
+  sectorRotation (combineSymmetry a (inverseSymmetry a)) ≡ C3.c0
+semidirectRightInverseSector (fieldSymmetry g r) =
+  C3.inverseRight r
+
+semidirectLeftInverseGauge :
+  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
+  localRotation (combineSymmetry (inverseSymmetry a) a) x ≡ C3.c0
+semidirectLeftInverseGauge {n} (fieldSymmetry g r) x =
+  C3.inverseLeft (sectorAction n (C3.inverse r) g x)
+
+semidirectLeftInverseSector :
+  ∀ {n} (a : FieldSymmetry n) →
+  sectorRotation (combineSymmetry (inverseSymmetry a) a) ≡ C3.c0
+semidirectLeftInverseSector (fieldSymmetry g r) =
+  C3.inverseLeft r
+
+semidirectLeftIdentityGauge :
+  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
+  localRotation (combineSymmetry (identitySymmetry n) a) x
+    ≡ localRotation a x
+semidirectLeftIdentityGauge a x = refl
+
+semidirectRightIdentityGauge :
+  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
+  localRotation (combineSymmetry a (identitySymmetry n)) x
+    ≡ localRotation a x
+semidirectRightIdentityGauge a x =
+  C3.rightIdentity (localRotation a x)
+
 -- These named operations are on finite-depth C3 fields; their direct
 -- limit equals the locally constant continuous group only after an
 -- independent compact-clopen factorization/colimit proof.
