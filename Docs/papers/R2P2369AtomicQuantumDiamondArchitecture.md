@@ -71,6 +71,10 @@ Gravity clock comparison: `y_GR ≈ ΔU/c²` for stationary observers in the wea
 
 Estimate and uncertainty: `r = y_measured - y_GR`, `σ_r² = σ_clock² + σ_link² + σ_geopotential² + 2Σcov_ij` only where each covariance term's sign and units follow an explicit measurement model; absent that, do not add independent uncertainties or assume them zero. No measured residual, statistical significance or alternative-gravity interpretation was produced here.
 
+## New primary-source cross-pollination as of 2026-10-28
+
+**Qin, C.-G.; Liu, T.; Li, Q.; et al.**, "Relativistic formulation for dual one-way Doppler cancellation scheme observables for gravitational redshift tests," *European Physical Journal C* **86**, 1230, published **2026-10-26**, DOI **10.1140/epjc/s10052-026-16367-8**, https://doi.org/10.1140/epjc/s10052-026-16367-8 . This independently derived space-based uplink/downlink observable treats relativistic terms through order c^-3 and examines Doppler, atmosphere, Shapiro delay, tides and synchronisation. **This is NOT an R2P2 measurement, and not identical to our terrestrial 69 km/81 km network.** It is a source-owned comparator for what kinds of physical correction terms a future measured model may need. The repository-wide search found no named `DopplerCancellationScheme` or `dualOneWay` owner on current master; `GRWeakFieldPredictionReceipt` separately contains a solar Shapiro-delay baseline. Do not copy Qin's final expressions or promote them without a faithful geometry and clock-convention mapping.
+
 ## Scope, limits, verification (S/L/P/G/F)
 
 **Built**: complete type-level *logical* path; reused 369 atomic/field index; both diamonds; finite C3/Weyl certificates; SI second owner; two-way transfer obligations; external redshift bridge; source and evidence guards; tests and TOE root imports.
