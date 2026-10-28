@@ -279,14 +279,17 @@ def check() -> None:
         "twoChannelRingPerturbation",
         "calibratedTwoChannelPerturbation",
         "commonModeSecondCoordinateRecovers",
+        "noisyTriangularPair",
+        "calibratedFullPairPerturbation",
+        "commonModePairRetainsFirstError",
         "ridgeSecond",
         "ridgeTwoChannelDecomposition",
         "ridgeBiasBalance",
         "ridgeNormalEquation",
     ):
         require(theorem in rational, f"missing T7 rational theorem {theorem}")
-    require(rational.count("r * q ≡ 1ℚ") == 4,
-            "all four inverse and noise theorems must retain calibration premise")
+    require(rational.count("r * q ≡ 1ℚ") == 6,
+            "all six calibrated inverse and full-pair theorems must retain calibration premise")
     require(not re.search(
         r"(?m)^\s*(?:postulate|{-#\s*(?:TERMINATING|NO_POSITIVITY_CHECK)\s*#-})",
         rational),
