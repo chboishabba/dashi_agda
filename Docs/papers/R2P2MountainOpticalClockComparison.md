@@ -1,5 +1,9 @@
 # R2P2 mountain optical-clock comparison: source, reused proofs, and empirical boundary
 
+**Exact user-supplied secondary source:** Veritasium, **"No device could prove Einstein wrong... until now,"** published **2026-10-23**, https://www.youtube.com/watch?v=eyZEqSPeMwg . Its transcript is the explanatory account supplied for this formalisation. Keep APS's June 2026 abstract as the original R2P2 apparatus/measurement authority. The title is a statement of the *capability to test* general relativity, not evidence that Einstein has already been disproved.
+
+**Full reuse-first 369/atomic/quantum/diamond composition:** [R2P2369AtomicQuantumDiamondArchitecture.md](R2P2369AtomicQuantumDiamondArchitecture.md). This adds typed field/phase/causal/refinement interfaces and no physical promotion.
+
 ## O — Objective
 
 Formalise the supplied Veritasium transcript as a source-typed R2P2 optical-clock observation request. Do not infer quantum gravity from conventional gravitational redshift, or infer a finished clock comparison from a working optical link.
