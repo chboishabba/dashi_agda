@@ -191,3 +191,20 @@ q^n = Σ_{k=1}^{min(q,n)} S(n,k) (q)_k.
 This is a **true typed factorization** through set-partition patterns and Heaps novelty curves. It supplies **no** isomorphism between the 11 Heaps curves on 3⁵ words and the unrelated 11 coordinate-C3 orbits on the 27-state cube. Neither source group action nor the probability measure is transported by a coincident orbit count.
 
 A separate local Python `Counter`/independent named-word enumeration checked **all 30 q,n configurations** for 1≤q≤5, 1≤n≤6 against canonical restricted-growth class cardinalities, covering **26,214 named words**, including 3³, 3⁵ and 5³. The newly committed focused regression includes the same checks; **the full exact-head checkout/runner was not executed**, and the source-written Agda factor was not Agda-kernel checked. Classical set partitions and Stirling numbers are inherited mathematics; new code/observation map under Johl Brown with OpenAI ChatGPT assistance is repository integration only.
+
+
+## Exact five-pattern probability factor under nonuniform IID
+
+The same genuine 27-code observation factor persists as a *probabilistic pushforward* under arbitrary nonuniform IID label probabilities, not as a measure-invariant action. The newly committed function `iid_three_draw_equality_pattern_law` computes the **fine five-equality-pattern distribution** using the existing (S_2,S_3) owners:
+
+| Fine equality pattern | Probability |
+|---|---|
+| AAA | S₃ |
+| AAB | S₂ − S₃ |
+| ABA | S₂ − S₃ |
+| ABB | S₂ − S₃ |
+| ABC | 1 − 3S₂ + 2S₃ |
+
+The already formalized observation map merges the **ABA** and **ABB** rows. Therefore its coarse full-Heaps law is `S₃, S₂−S₃, 2(S₂−S₃), 1−3S₂+2S₃`. The code checks this exact pushforward against the *pre-existing* canonical full-path law; its regression independently enumerates all named three-letter words for the 117 positive-weight cases. Distinct named words (e.g., AAA and CCC) generally have unequal probability; it is the **marginalized equality-pattern class**, not the raw word, that has the stated symmetric probability.
+
+This factor is a genuine observation-space map with type-preserving probability aggregation. The 720° spin lift in PR #1414, Fourier fibres in #1407, seven source-owned endomorphism shapes, and Ibrahim Monster 3B remain separate and cannot be inferred from this arithmetic. The mathematical formulas are classical IID occupancy/symmetric-polynomial identities. New repository code is source-written and independently enumerated; its full exact-HEAD pytest/Agda kernel status remains unverified.
