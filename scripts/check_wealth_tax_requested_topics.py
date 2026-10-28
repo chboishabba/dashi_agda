@@ -315,8 +315,13 @@ def main() -> None:
         "toeCanonicalFundingClaimIsNotReusedWithinFiniteBatch",
         "toeBatchSourcePartitionAccountsForEachTaggedClaimOnce",
         "toeOfficialSettlementAndCustodyAllocationRemainDistinct",
+        "toeCandidateReferenceDoesNotVerifyCanonicalSource",
+        "toeQidDoesNotValidateTaxOrSettlementClaim",
+        "toeUnresolvedIdentityIsNotProvedAbsent",
+        "toeRelevantVerifiedIdentityMustRemainInSourceLens",
     ):
         assert symbol in bridge, f"missing funding/ASX TOE boundary: {symbol}"
+    assert "import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as ExternalIdentity" in bridge, "original Snowball identity owner must remain imported"
     assert "open DashiTradeTax public using" in bridge, (
         "follow-on sources not reachable from original TOE consumer"
     )
