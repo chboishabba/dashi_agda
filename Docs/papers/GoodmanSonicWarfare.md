@@ -472,3 +472,19 @@ These new independent sources are stored under `acousticInverseSourceAtlas` in t
 **Physical translation and falsifiable decision:** collecting two microphone time series does not by itself guarantee independence of their errors. An empirical programme must report measured noise and cross-channel covariance, the acoustic forward/operator model, source-medium geometry and frequency band, a validation set unavailable during regulariser selection, confidence intervals and a negative/null comparator. A chosen regulariser trades bias against sensitivity. Neither T9 nor a low in-sample residual proves human affect, a specific sound weapon, or acoustic/Kozyrev abnormal mechanics.
 
 **No theorem promotion:** the T9 Agda source still awaits an Agda kernel check at the exact branch head. The 72 computed regression cases do not cover arbitrary parameter values, calibrate real instruments, or prove a minimisation theorem. PR #1407's open Fourier/aliasing construction is only independent methodological inspiration. Preserve original Ibrahim truth/deception ownership and never promote a shared frequency-count or character-pattern signature into physical or Monster same-object identity.
+
+## T10 full-pair noise propagation (Pareto correction)
+
+The T8 common-mode result was **component-specific**. It showed cancellation for the reconstructed second coordinate, not recovery of both source-state coordinates. A new two-coordinate Agda consumer makes that distinction theorem-facing:
+
+```text
+with calibration r*q = 1:
+recover_r(noisy_forward_q(x,y,alpha,beta))
+  = (x + alpha, y + r*(beta - alpha))
+when alpha = beta:
+  = (x + alpha, y)
+```
+
+`noisyTriangularPair` explicitly retains both errors. `calibratedFullPairPerturbation` reuses `calibratedTwoChannelPerturbation` by pair congruence. `commonModePairRetainsFirstError` reuses the original common-mode lemma. Neither adds an independent theorem owner or a new postulate. It prevents an erroneous consumer from promoting second-coordinate cancellation to complete-state immunity.
+
+This is conditional exact rational algebra. The calibration equality remains an assumption; no model of stochastic covariance, real sound-pressure propagation, instrument noise or causal human response is supplied. The source-written Agda lemmas require actual kernel verification. Their inherited rational solver and Goodman/Ibrahim attribution boundaries remain unchanged.
