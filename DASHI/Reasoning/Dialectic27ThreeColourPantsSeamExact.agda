@@ -298,6 +298,85 @@ existingAttachedFaceOwner :
 existingAttachedFaceOwner =
   ExistingTwoCell.canonicalTrialecticGrothendieckAttachedTwoCellBoundary
 
+------------------------------------------------------------------------
+-- Stage extension: a local dialectic-interaction cube is ONE of the
+-- THREE 27-voxels in the ALREADY-OWNED hyperfabric T^9. Appraisal
+-- voxels are independent typed inputs; they are NOT an arbitrary
+-- duplication of the 27 stage roles or a proof of a common verdict.
+------------------------------------------------------------------------
+
+record EncounterHyperformalLift : Set where
+  constructor encounter-hyperformal-lift
+  field
+    encounter : XY.DialecticEncounter27
+    firstParticipantAppraisal : Cube.Ternary27Point
+    secondParticipantAppraisal : Cube.Ternary27Point
+    fabric : Cube.TernaryHyperformalPoint
+    fabricIsCanonical :
+      fabric ≡ Cube.ternaryHyperformalPoint
+        (XY.toCanonicalCube encounter)
+        firstParticipantAppraisal
+        secondParticipantAppraisal
+open EncounterHyperformalLift public
+
+liftEncounter :
+  XY.DialecticEncounter27 →
+  Cube.Ternary27Point →
+  Cube.Ternary27Point →
+  EncounterHyperformalLift
+liftEncounter xyz appA appB =
+  encounter-hyperformal-lift xyz appA appB
+    (Cube.ternaryHyperformalPoint
+      (XY.toCanonicalCube xyz) appA appB) refl
+
+liftRetainsXYInteraction :
+  (xyz : XY.DialecticEncounter27) →
+  (appA appB : Cube.Ternary27Point) →
+  Cube.interactionVoxel (fabric (liftEncounter xyz appA appB))
+  ≡ XY.toCanonicalCube xyz
+liftRetainsXYInteraction xyz appA appB = refl
+
+liftRetainsFirstAppraisal :
+  (xyz : XY.DialecticEncounter27) →
+  (appA appB : Cube.Ternary27Point) →
+  Cube.appraisalAVoxel (fabric (liftEncounter xyz appA appB)) ≡ appA
+liftRetainsFirstAppraisal xyz appA appB = refl
+
+liftRetainsSecondAppraisal :
+  (xyz : XY.DialecticEncounter27) →
+  (appA appB : Cube.Ternary27Point) →
+  Cube.appraisalBVoxel (fabric (liftEncounter xyz appA appB)) ≡ appB
+liftRetainsSecondAppraisal xyz appA appB = refl
+
+hyperfabricCountIs19683 :
+  Cube.hyperfabricStateCount ≡ 19683
+hyperfabricCountIs19683 = Cube.hyperfabricStateCountIs19683
+
+record ColouredSeamLift
+    (left right : FacePatch) : Set where
+  constructor coloured-seam-lift
+  field
+    colourAndPants : FaceSeam left right
+    leftHyperformal rightHyperformal : EncounterHyperformalLift
+    seamIsNotAnEvidenceOrFaceReceipt : Bool
+    noAutomaticFaceReceipt :
+      seamIsNotAnEvidenceOrFaceReceipt ≡ false
+open ColouredSeamLift public
+
+-- Construct a pair of locally charted hyperforms. The exact pants
+-- seam is positive, yet its result is ONLY a certificate. There is
+-- no invented glue/reorganization of two global hyperfabrics.
+exampleTypedHyperformalSeam : ColouredSeamLift validLeft validRight
+exampleTypedHyperformalSeam = coloured-seam-lift
+  validColourAndPantsSeam
+  (liftEncounter
+    (XY.dialectic-encounter XY.thesis XY.antithesis XY.thesis)
+    Cube.origin Cube.origin)
+  (liftEncounter
+    (XY.dialectic-encounter XY.thesis XY.antithesis XY.synthesis)
+    Cube.origin Cube.origin)
+  false refl
+
 -- Ordinary paint agreement is just one of several orthogonal gates.
 -- A successful seam certificate is NOT itself a new global section.
 noNewFabricFromSeam :
