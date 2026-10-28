@@ -661,3 +661,125 @@ OEIS A267572: https://oeis.org/A267572.
 No protected ESD surfaces changed. PR #1414 monodromy
 objects are branch-only and independent; no same-object
 Monster 3B or quintic prime-distribution claim is made.
+
+## 2026-10-28 source-owned S3/C3/Stirling/sign-orbit connection — Q cut
+
+The mathematical identity and its exact **source ownership** are now explicit.
+
+Let T=Z/3Z. Every value permutation in S3 is one of the
+six affine maps t -> a*t+b with a=±1 and b∈T; C3 is the
+translation subgroup. For an anchored word
+w=(w0,w1,...,wn), define
+
+`normalise(w)=(w1-w0,...,wn-w0)`.
+
+Then:
+* `normalise(w+b)=normalise(w)`;
+* `normalise(-w+b)=-normalise(w)`;
+* the section `d↦(0,d1,...,dn)` reconstructs every difference
+  vector exactly;
+* every anchored word translates to its normalised section.
+
+Therefore there is a canonical (once the first position is chosen)
+orbit-set correspondence
+`T^(n+1)/S3 ≅ T^n/C2`, with the RHS under simultaneous sign
+inversion. This is NOT an equivariant identification of the raw
+actions nor a claim that label permutations equal position swaps.
+
+**Original repository owner found:** PR #1244,
+`DASHI.Mathematics.Topology.AlexanderHornedS3WordSignOrbitTransportExact`
+already source-writes `relativeTranslate`,
+`normaliseTranslate`, `relativeReflection`,
+`normaliseReflection`, `signedRelativeSection`, and
+`normaliseViaTranslation` for **arbitrary n**. The #1244 code says
+the quotient equivalence follows from its interface; no explicit
+univalent/set quotient implementation, all-n Burnside/Stirling
+cardinality theorem, or successful Agda kernel receipt was observed.
+Do NOT duplicate this owner or import its unmerged branch as if
+it were part of the current master/#1408 import closure.
+
+**Original statistical owner found:** PR #1275,
+`ZipfThreeDrawEqualityPatternFactorExact` owns five genuine
+three-letter value-S3 equality patterns; its companion
+`ZipfTernary27ActionHeapsExact` separates value relabeling,
+position permutations, and endomorphism conjugacy. These are
+different quotients. The RGS/Stirling interpretation at arbitrary
+n is mathematics of set partitions with at most three blocks, not
+a Zipf law or a particular corpus law.
+
+**Original invariant field owner found:** PR #1244's
+`AlexanderHornedDepthTwoFiveOrbitFibreExact` proves source-written
+pointwise inflate/deflate for depth-two native H-invariant fields.
+The native end-field rank r_n is described as (3^n+1)/2 in
+`Docs/topology/AlexanderHornedInvariantCylinderDirectLimitMaxCut20261028.md`;
+that roadmap explicitly says the all-depth count has no kernel
+receipt. Count the *orbits* first; the corresponding C3-valued
+invariant field cardinality is `3^(r_n)`, not r_n.
+
+For n≥0:
+`r_n=(3^n+1)/2=sum_{k=1}^3 S(n+1,k)`.
+The single all-zero sign word is fixed, and the other
+`3^n-1` sign words form disjoint pairs. Independently,
+global S3 value relabelings classify words by equality partitions
+of n+1 positions into at most three blocks. Finite exact integer
+checks exhaustively confirmed the orbit bijection for n=0,...,6.
+
+| n | length n+1 | Stirling terms S(n+1,1/2/3) | orbit rank r_n |
+|---:|---:|---|---:|
+| 0 | 1 | 1,0,0 | 1 |
+| 1 | 2 | 1,1,0 | 2 |
+| 2 | 3 | 1,3,1 | 5 |
+| 3 | 4 | 1,7,6 | 14 |
+| 4 | 5 | 1,15,25 | 41 |
+| 5 | 6 | 1,31,90 | 122 |
+| 6 | 7 | 1,63,301 | 365 |
+
+### New Q-series — every remaining orbit/consumer lemma
+
+Statuses: O=pre-existing owner, S=source-written kernel-pending,
+P=partially realised, N=not yet source-written, C=requires a
+concrete cross-domain same-object/intertwining witness.
+
+| ID | Required exact lemma or proof obligation | Status and current owner |
+|---|---|---|
+| Q01 | `threeLabelsAsC3`: identify the existing finite ternary label carrier with C3 | O/P: #1244 phase/trit bridge |
+| Q02 | `allS3Affine`: all six global value-label permutations are exactly t↦±t+b | P: #1244 translates/reflects; formal S3 action equivalence requires its laws |
+| Q03 | `normaliseTranslate`: first-label differences ignore C3 shift | S: #1244 existing source |
+| Q04 | `normaliseReflection`: global reflection becomes coordinatewise negation | S: #1244 existing source |
+| Q05 | `signedRelativeTranslationInvariant`: signs preserve translation cancellation | S: #1244 existing source |
+| Q06 | `signedRelativeReflection`: signed normalization is C2 equivariant | S: #1244 existing source |
+| Q07 | `signedRelativeSection`: exact inverse on zero-anchored difference vectors | S: #1244 existing source |
+| Q08 | `normaliseViaTranslation`: each anchored word is a translated normal form | S: #1244 existing source |
+| Q09 | `orbitMapWellDefined`: normalization descends from full value-S3 to sign-C2 quotients | P: maps/actions exist; explicit quotient construction missing |
+| Q10 | `orbitMapSurjective`: section hits every sign orbit | P: source section exists, induced quotient theorem missing |
+| Q11 | `orbitMapInjective`: same signed orbit implies an original global S3 permutation | P: translation + reflection witnesses exist, quotient theorem missing |
+| Q12 | `anchoredOrbitBijection`: assemble the exact set quotient equivalence | N/P: general mathematical proof given, no certified quotient type |
+| Q13 | `S3WordOrbitsAreEqualityPatterns`: same orbit iff same labelled-position equality partition | P: #1275 three-letter instance, all-length theorem missing |
+| Q14 | `restrictedGrowthCanonical`: bijection to RGS using ≤3 blocks | P/N: #1275 finite case, arbitrary-length canonicalisation missing |
+| Q15 | `restrictedStirlingCount`: #RGS(n+1,≤3)=sum S(n+1,k) | N: classical Stirling theorem; no all-n Agda proof observed |
+| Q16 | `uniqueFixedSignWord`: only all-zero vector fixed under simultaneous sign flip | P: exact finite n=2,3 owners; general Vec proof missing |
+| Q17 | `pairPartition`: all non-fixed sign words have 2-element C2 orbits | P: exact finite owners; all-n orbit theorem missing |
+| Q18 | `signOrbitCount`: #T^n/C2=(3^n+1)/2 for all n | P: checked finite n≤6; no all-n kernel proof observed |
+| Q19 | `stirlingSignCount`: identity both by orbit bijection and by counting | N/P: mathematically established, formal composition missing |
+| Q20 | `phaseFieldInflateDeflate`: invariant fields correspond pointwise to functions on sign orbits | S: #1244 n=2 owner; all-n construction still a separate obligation |
+| Q21 | `global14WheelNoGo`: two surviving cube points have equal global sign class but different genuine TwinPrimeAt | S: **new #1408** `globalFourteenOrbitLosesTwinConsumer` at 59/209 |
+| Q22 | `endpointFlipCommutes`: 270 affine endpoint reversal agrees with strict global C2 | S: #1408 affine codec; full cube correspondence source-written |
+| Q23 | `nativeSectorVsValueWordBridge`: intertwine native H-sector action and S3 value-word action on a specified SAME object | C: raw native actions remain different; no imported same-object theorem |
+| Q24 | `consumerFactorCriterion`: only C2-invariant observables factor through the 14 orbit classes; twin primality fails | O/S: source-owned ConsumerCollision plus new #1408 global no-go |
+
+The original 75 items T01–G08 remain unchanged in scope; Q01–Q24
+are **additional cross-domain proof obligations**, not a hidden
+replacement or a proof of joint prime correlations. Arithmetic
+applications must keep the extra orientation/residual for
+lossless reconstruction and cannot make any true twin-prime
+predicate periodic modulo a fixed finite wheel.
+
+**Highest Pareto cut:** Q09–Q12 and Q15–Q19 close the remaining
+general quotient/counting *formalisation* using #1244 and #1275
+source owners without importing unmerged branches. In parallel,
+A07/A08/B03/C08 require a real signed-state compiler, and
+E03–E08 require genuine all-prime coprime CRT. F02/F04/F06/F07
+remain OPEN MATHEMATICS about gap-two simultaneous primality.
+This #1408 addition owns only consumer non-factorability; Ibrahim
+Monster 3B, original sector topology, statistical Zipf/Heaps and
+2026 polynomial PR owners remain separately credited.
