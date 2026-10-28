@@ -324,3 +324,9 @@ The former C06 finite source partition and C01 funding-route cash identity were 
 
 **Execution status:** 40,440 bounded Python model-oracle cases passed for canonical source partition and token aliases. An Agda compiler/typecheck was not available in the current environment. The test exercises arithmetic semantics only. The fiscal model remains hypothetical; no live trade, primary taxpayer record, physical capital observation or measured causal effect follows.
 
+### Same-route weld bounded arithmetic regression
+
+The existing script scripts/check_wealth_tax_maxcut.py now includes test_canonical_funding_payment_route_weld. An independently executed Python model oracle passed **96,256 source-to-payment modeled joins** over every triple of cash/debt/sale amounts from 0 through 15, with each arithmetically compatible split into remitted tax cash and execution fees. The adversarial controls reject equal grand totals with different channels and reject an unbridged sale settlement at epoch 8 as funding a tax payment at epoch 3.
+
+This is independent finite arithmetic testing, not proof that the Agda compiler accepts the new owner or that any economic event occurred. Source identity, HIN/SRN title and original claim-to-canonical-token authority remain separate evidence requirements. Formal status stays 61 D / 11 R / 5 N. The executable shadow dashiTRADE PR is unchanged.
+
