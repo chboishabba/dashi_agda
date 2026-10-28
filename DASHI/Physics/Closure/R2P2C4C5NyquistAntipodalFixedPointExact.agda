@@ -211,10 +211,6 @@ originalC3CubeThirteenPairs :
 originalC3CubeThirteenPairs =
   Source.ternaryCubeCountDecomposesAsCentrePlusThirteenPairs
 
-c3C4C5OrbitClassCounts :
-  14 + 36 + 63 ≡ 113
-c3C4C5OrbitClassCounts = refl
-
 -- CRITICAL physics gate: self-antipodal Fourier classes require real
 -- coefficients for a real sampled field. This module proves only
 -- the index-side fixed-point structure, not field reality/FFT.
