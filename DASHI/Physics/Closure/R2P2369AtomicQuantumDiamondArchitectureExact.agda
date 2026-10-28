@@ -15,6 +15,8 @@ import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as Bias
 import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as Loop
 import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as Lattice
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeCut
+import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact as BlockBitsR2P2
+import DASHI.ComputerScience.BinaryThreeBitTrit27FibreLiftExact as Codec27R2P2
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
 import DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge as SI
 import DASHI.Physics.Closure.QuantumClockSuperpositionReceipt as Superposition
@@ -707,3 +709,20 @@ fullArchitectureDoesNotPromoteThreeModeToNSClay :
     (modeAliasingCut canonicalR2P2369FullLogicalArchitecture) ≡ false
 fullArchitectureDoesNotPromoteThreeModeToNSClay =
   ModeCut.threeModeCodecIsNotAnNSProof
+
+-- Three signed Fourier labels per axis give a 27-site C3^3 INDEX cube.
+-- The original NS Fourier carrier is Z^3, and k=(2,0,0) does not vanish
+-- merely because its sampled 27-grid residue is (-1,0,0).
+fullArchitectureC3CubedAliasingIsNotNSZCubed :
+  ModeCut.threeAxisPeriodicallyAliasedPlusXSquare
+    ≡ ModeCut.threeAxisBalancedModeCube
+         ModeCut.modeMinus ModeCut.modeZero ModeCut.modeZero
+fullArchitectureC3CubedAliasingIsNotNSZCubed =
+  ModeCut.periodicThreeAxisPositiveXSquareWrapsToNegativeX
+
+fullArchitectureReusesThreeBitFramed27Payload :
+  (bits : BlockBitsR2P2.Bit3) →
+  Codec27R2P2.decodeBit3From27Payload
+    (Codec27R2P2.encodeBit3To27 bits) ≡ bits
+fullArchitectureReusesThreeBitFramed27Payload =
+  ModeCut.inheritedThreeBitToFramed27RoundTrip
