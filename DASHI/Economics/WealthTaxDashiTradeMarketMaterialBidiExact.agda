@@ -708,13 +708,13 @@ record DirectionalClearingBatch : Set where
         netSettlementCashMagnitude
 open DirectionalClearingBatch public
 
-aggregateNetPositionsRespectGrossCashAndSecurityTotals :
+directionalParticipantCashBalance :
   (batch : DirectionalClearingBatch) →
   DirectionBalanced (cashDirection batch)
     (grossSellSettlementCash batch)
     (grossBuySettlementCash batch)
     (netSettlementCashMagnitude batch)
-aggregateNetPositionsRespectGrossCashAndSecurityTotals =
+directionalParticipantCashBalance =
   directionBalance
 
 receivingParticipantExample : DirectionalClearingBatch
