@@ -51,7 +51,10 @@ def test_reuses_existing_owner_in_actual_agda_transport():
     for term in ("as Phase","tritPhaseRoundTrip","normaliseTranslate",
                  "normaliseReflection","signedRelativeTranslationInvariant",
                  "signedRelativeReflection","signedRelativeSection",
-                 "normaliseViaTranslation"):
+                 "normaliseViaTranslation",
+                 "normaliseSameImpliesTranslate",
+                 "signedOrbitToGlobalS3","globalS3ToSignedOrbit",
+                 "signedOrbitIffGlobalAffineS3"):
         assert term in agda
     assert "import DASHI.Mathematics.Topology.AlexanderHornedS3WordSignOrbitTransportExact" in root
     for escape in ("postulate\n","{!!}","allow-unsolved-metas",
