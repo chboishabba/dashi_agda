@@ -13,6 +13,7 @@ from r2p2_13in27_5in9_hermitian_symmetry import (  # noqa: E402
 
 SOURCE=ROOT/"DASHI/Physics/Closure/R2P227729AntipodalThirteenFiveOrbitFourierCutExact.agda"
 CODEC=ROOT/"DASHI/Physics/Closure/R2P227729HermitianThirteenPairFourierCodecExact.agda"
+TRANSPORT=ROOT/"DASHI/Physics/Closure/R2P227729HermitianConvolutionTransportExact.agda"
 ROOTS=[
  ROOT/"DASHI/EverythingTOESymmetryResolved369.agda",
  ROOT/"DASHI/Unifier.agda",
@@ -42,6 +43,11 @@ class AntipodalFourierTests(unittest.TestCase):
         result=convolution(left,right)
         self.assertEqual(len(result),125)
         self.assertTrue(all(result[neg(k)]==conjugate(v) for k,v in result.items()))
+        self.assertEqual(
+            result,
+            convolution(
+                unpack_hermitian(pack_hermitian(left,CUBE27),CUBE27),
+                unpack_hermitian(pack_hermitian(right,CUBE27),CUBE27)))
 
     def test_orbit_labels_drop_pair_sum_orientation(self):
         plus=(1,0,0); minus=(-1,0,0)
@@ -75,7 +81,13 @@ class AntipodalFourierTests(unittest.TestCase):
             "planeRealScalarDegreesOfFreedom",
             "C3CubeCyclotomicFourierExact",
         ): self.assertIn(token,codec)
-        for src in (code,codec):
+        transport=TRANSPORT.read_text(encoding="utf-8")
+        for token in ("compact13PairTransportPreservesAll125IntegerOutputs",
+                      "compact13PairsPreserveFourGridRetainedQuadratic",
+                      "compact13PairsPreserveFiveGridFullQuadratic",
+                      "sumUsingCong"):
+            self.assertIn(token,transport)
+        for src in (code,codec,transport):
             for escape in ("{!!}","postulate\n","{-# TERMINATING #-}",
                            "{-# NO_POSITIVITY_CHECK #-}","allow-unsolved-metas"):
                 self.assertNotIn(escape,src)
@@ -86,6 +98,7 @@ class AntipodalFourierTests(unittest.TestCase):
                 content=root.read_text(encoding="utf-8")
                 self.assertIn("R2P227729AntipodalThirteenFiveOrbitFourierCutExact",content)
                 self.assertIn("R2P227729HermitianThirteenPairFourierCodecExact",content)
+                self.assertIn("R2P227729HermitianConvolutionTransportExact",content)
                 self.assertIn("Hermitian",content)
                 self.assertIn("Antipodal",content)
 
