@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as R2P2Loop
 import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as R2P2Bias
 import DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact as R2P2369
 import DASHI.Foundations.Base369BinaryTernaryRefinement as RefineR2P2
@@ -1763,3 +1764,18 @@ unifierR2P2BiasNoQuantumGravity :
     R2P2Bias.canonicalR2P2BiasIdentifiabilityMaxCut ≡ false
 unifierR2P2BiasNoQuantumGravity =
   R2P2Bias.thisExampleDoesNotProveQuantumGravity
+
+------------------------------------------------------------------------
+-- Three-clock ratio-loop integrity: conditional 369 finite witness only.
+------------------------------------------------------------------------
+
+unifierR2P2LoopSyntheticClosure :
+  R2P2Loop.loopNumerator ≡ R2P2Loop.loopDenominator
+unifierR2P2LoopSyntheticClosure =
+  R2P2Loop.syntheticCycleCloses
+
+unifierR2P2LoopNullCannotProveCurvature :
+  R2P2Loop.threeClockLoopNullImpliesCurvature
+    R2P2Loop.canonicalThreeClockLoopSourceBoundary ≡ false
+unifierR2P2LoopNullCannotProveCurvature =
+  R2P2Loop.threeClockLoopCannotClaimCurvature
