@@ -1,5 +1,7 @@
 # Zipf F13: constructive rational normalization into canonical PNF (2026-10-28)
 
+> **Status update, 28 October 2026 (later cut):** The earlier F13b `ConcreteAddLaw` source-construction gap is now addressed by `DASHI/Statistics/ZipfFractionAddRationalBridgeExact.agda` using standard-library unnormalised-to-reduced rational isomorphism, and consumed by `concreteHurwitzSourceWritten` in `ZipfFractionFoldConditionalExact.agda`. **No Agda kernel typecheck has been executed**, so all earlier statements about missing *kernel-certified* F13b proofs remain true. The authoritative newer proof-status ledger is `Docs/research/zipf_f13b_unreduced_rational_isomorphism_20261028.md`. Keep `finiteZipfWeightIdentificationPaid=false`.
+
 ## Exact scope, authority and attribution
 
 This is the original **27-topic** Zipf-family PR #1275, not an additional law. Original finite rank/power-law work belongs to Estoup, Zipf, Mandelbrot and Hurwitz. Standard rational normalization, finite additive induction, positivity and reciprocal identities belong to classical algebra and the Agda standard-library contributors. Prior repository proof owners of `DASHI.Core.FiniteUniformProbabilityNormalizationExact`, `DASHI.Cognition.PNF.GenericExpectedFibreRateExact`, and the previously authored Zipf-family adapter retain independent source ownership. This scoped source-written adaptation is Johl Brown-directed with OpenAI ChatGPT assistance on 28 October 2026. Earlier Ibrahim Monster 3B results are not identified with the statistical carrier and keep separate ownership.
