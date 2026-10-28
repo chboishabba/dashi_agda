@@ -223,15 +223,14 @@ zCannotBeDerivedFromXYAlone :
   (choose : DialecticPosition × DialecticPosition → DialecticPosition) →
   ((cell : DialecticEncounter27) →
     choose (xyEncounter cell) ≡ zInteractionPosition cell) → ⊥
+thesis≠antithesis : thesis ≡ antithesis → ⊥
+thesis≠antithesis ()
+
 zCannotBeDerivedFromXYAlone choose all =
-  impossible
-    (sym (all (dialectic-encounter thesis antithesis thesis)))
-    (all (dialectic-encounter thesis antithesis antithesis)))
-  where
-    impossible : (choose (thesis , antithesis) ≡ thesis) →
-      (choose (thesis , antithesis) ≡ antithesis) → ⊥
-    impossible one two with trans (sym one) two
-    ... | ()
+  thesis≠antithesis
+    (trans
+      (sym (all (dialectic-encounter thesis antithesis thesis)))
+      (all (dialectic-encounter thesis antithesis antithesis)))
 
 -- A total declared transport SELECTS Z and is exactly a rule, not a
 -- topology-implied value or an actual empirical/logical authority.
