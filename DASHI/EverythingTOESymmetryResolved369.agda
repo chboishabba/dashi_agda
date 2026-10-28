@@ -14,6 +14,23 @@ open SignedOffsetMacro public using
   ; minusIsNegationOfPlus
   )
 
+import DASHI.Arithmetic.TwinPrimeCertifiedEnumeratorExact as ExactTwinCounter
+open ExactTwinCounter public using
+  ( twinPrimeAt?
+  ; twinStartsUpTo
+  ; twinPairCountLE
+  ; twinStartListCountExact
+  ; certifiedTwinFromSeparatePrimeProofs
+  )
+
+import DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact as SignedTwinNoGo
+open SignedTwinNoGo public using
+  ( orientationFiveAndSevenEqual
+  ; twinAtFiveIsTrue
+  ; twinAtSevenIsFalse
+  ; orientationAloneCannotDecideTwinPrimality
+  )
+
 import DASHI.Arithmetic.SignedSSPPrimeOutputBoundaryExact as SignedPrimeReadout
 open SignedPrimeReadout public using
   ( everyCertifiedPrimeHasAnEncoding
