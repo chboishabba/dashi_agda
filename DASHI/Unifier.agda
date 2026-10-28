@@ -2,6 +2,12 @@ module DASHI.Unifier where
 import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinPrimeSixWheel
 import DASHI.Arithmetic.TwinPrimeFRACDASHReuseExact as TwinPrimeFRACDASH
 import DASHI.Arithmetic.CertifiedPrimePairModulusExact as ArbitraryPrimeCRT
+import DASHI.Arithmetic.TwinPrimeOggControlReuseExact as PrimeControlReuse
+open PrimeControlReuse public using
+  ( knownNonOggControlCount
+  ; knownAllPrimeControlCount
+  ; controlAndCertifiedPrimeAgree
+  )
 open ArbitraryPrimeCRT public using
   ( certifyCandidate
   ; localPairSurvives?
