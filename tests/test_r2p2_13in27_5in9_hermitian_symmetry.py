@@ -37,7 +37,8 @@ class AntipodalFourierTests(unittest.TestCase):
 
     def test_quadratic_convolution_conjugation_closure(self):
         left=sample_hermitian(CUBE27)
-        right=sample_hermitian(tuple(reversed(CUBE27)))
+        right=sample_hermitian(CUBE27,variant=1)
+        self.assertNotEqual(left,right)
         result=convolution(left,right)
         self.assertEqual(len(result),125)
         self.assertTrue(all(result[neg(k)]==conjugate(v) for k,v in result.items()))
