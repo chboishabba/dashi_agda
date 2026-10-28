@@ -4,7 +4,7 @@ Status: **specified from primary dataset documentation; NOT data-downloaded, fit
 
 ## Primary data and owner attribution
 
-1. Adam Kujawski, Art J. R. Pelling, Ennes Sarradj, *MIRACLE—a microphone array impulse response dataset for acoustic learning*, EURASIP Journal on Audio, Speech, and Music Processing (2024), DOI [10.1186/s13636-024-00352-8](https://doi.org/10.1186/s13636-024-00352-8). Published data [10.14279/depositonce-20106](https://doi.org/10.14279/depositonce-20106), CC BY-NC-SA 4.0. **Original authors** own measurements, source positions, calibration analysis, deconvolution method, original results. 856,128 measured single-channel room impulse responses (RIRs), 64-channel array, four source/medium scenarios; three anechoic and one specular reflective. Acquisition sampling 51.2 kHz; RIR post-processing uses resampling to 32 kHz; source location uncertainty assessed statistically with scenario-dependent millimetre-scale intervals. Authors acquired two background and two excitation measurements per source location using a loopback. Published final RIR files are not necessarily full raw replicate recordings; check actual files and metadata before claiming sample-level noise covariance.
+1. Adam Kujawski, Art J. R. Pelling, Ennes Sarradj, *MIRACLE—a microphone array impulse response dataset for acoustic learning*, EURASIP Journal on Audio, Speech, and Music Processing (2024), DOI [10.1186/s13636-024-00352-8](https://doi.org/10.1186/s13636-024-00352-8). Current version 4 published data [10.14279/depositonce-20837](https://doi.org/10.14279/depositonce-20837), CC BY-NC-SA 4.0. The previously cited [10.14279/depositonce-20106](https://doi.org/10.14279/depositonce-20106) is a superseded version (3); never mix archive hashes or scenario files across these two versions. **Original authors** own measurements, source positions, calibration analysis, deconvolution method, original results. 856,128 measured single-channel room impulse responses (RIRs), 64-channel array, four source/medium scenarios; three anechoic and one specular reflective. Acquisition sampling 51.2 kHz; RIR post-processing uses resampling to 32 kHz; source location uncertainty assessed statistically with scenario-dependent millimetre-scale intervals. Authors acquired two background and two excitation measurements per source location using a loopback. Published final RIR files are not necessarily full raw replicate recordings; check actual files and metadata before claiming sample-level noise covariance.
 2. Hendrik W. Löllmann, Christine Evers, et al., *LOCATA Challenge Data Corpus*, IEEE SAM (2018); Christine Evers et al., *The LOCATA Challenge: Acoustic Source Localization and Tracking*, IEEE/ACM TASLP 28 (2020), DOI [10.1109/TASLP.2020.2990485](https://doi.org/10.1109/TASLP.2020.2990485). [Official dataset and evaluator](https://www.locata.lms.tf.fau.de/datasets/). Multiple recorded arrays with independent OptiTrack source/sensor coordinates and source voice activity; appropriate for direction-of-arrival / tracking external validity; **not proof of absolute pressure calibration**. Follow the supplied Open Data Commons licence notice and source-paper attribution.
 3. James Eaton, Nikolay D. Gaubitch, Alastair H. Moore, Patrick A. Naylor, *Estimation of Room Acoustic Parameters: The ACE Challenge*, IEEE/ACM TASLP 24 (2016), 1681–1693. [Official dataset](https://www.imperial.ac.uk/speech-audio-processing/projects/ace-challenge/). Measured RIRs and ambient/fan/babble recordings in seven rooms; measured T60 and DRR targets. Registration required; CC BY-ND 4.0 restrictions; do not redistribute modified corpus data.
 4. Jacques Hadamard (well-posedness), A. N. Tikhonov (regularisation) and primary source authors retain mathematical/empirical priority. Steve Goodman (2009, DOI 10.7551/mitpress/7999.001.0001) remains the cultural source, not author of an acoustics instrument or dataset. Existing DASHI inverse/rational/provenance owners own their original proofs; this protocol is not a kernel theorem. Preserve Ibrahim Monster 3B ownership and proof non-promotion.
@@ -52,3 +52,28 @@ With nonzero error mean, add rho*q*(mu_beta-mu_alpha) to bias. These are algebra
 ## Explicit work status / next executable gate
 
 Literature and official dataset pages located and read. **No dataset files have been downloaded, no MIRACLE/LOCATA/ACE sample has been evaluated, no measured Sigma or calibration curve estimated, and no held-out performance score exists in this PR.** The exact formulae above follow conditionally from the already source-written T8/T9 model and can be checked symbolically. The next empirical action is acquire the **versioned MIRACLE dataset** and its real metadata; do not invent numeric uncertainty values. A true measured benchmark requires bytes in the runtime and a validated parser.
+
+## Executable fail-closed intake
+
+`scripts/check_goodman_measured_acoustics_manifest.py` is the newly committed evidence acquisition gate. It checks a **version-4** manifest against DOI `10.14279/depositonce-20837`, CC BY-NC-SA 4.0, archive SHA-256 values and all four original scenario filenames (`A1.h5`, `A2.h5`, `D1.h5`, `R2.h5`). It rejects missing or mismatched files before producing a split receipt.
+
+It accepts *separately supplied and validated source-position metadata* with `scenario`, `position_id`, and `spatial_block`. It groups all microphone channels from the same position, then allocates entire hashed blocks into train/validation/test; scenario R2 is reserved for external-environment evaluation. The algorithm itself does not derive physical block adjacency or enforce a geometric buffer. **It must not be treated as spatial leak-free until source coordinates and block adjacency have been separately validated.** Its nominal 60/20/20 split is hash probability, not guaranteed exact sample counts; inspect the resulting partition sizes and distances.
+
+The `correlated_error_budget` function computes a sample covariance from at least three *independent paired error measurements* and the conditional Jacobian transformation. It does **not** find such measurements inside the MIRACLE HDF5 files. The manifest/split command intentionally emits `measurement_results: null` until a real model and an actual sealed test have run.
+
+Example manifest (replace hashes only after checking actual downloaded files):
+
+```json
+{
+  "dataset_doi": "10.14279/depositonce-20837",
+  "license": "CC BY-NC-SA 4.0",
+  "scenarios": [
+    {"id": "A1", "sha256": "INSERT_ACTUAL_SHA256"},
+    {"id": "A2", "sha256": "INSERT_ACTUAL_SHA256"},
+    {"id": "D1", "sha256": "INSERT_ACTUAL_SHA256"},
+    {"id": "R2", "sha256": "INSERT_ACTUAL_SHA256"}
+  ]
+}
+```
+
+No dataset archive was obtained or hashed in this execution environment. The command makes that absence a hard failure instead of a fabricated measured validation receipt. The original authors' data copyright/CC obligations, field calibration uncertainty, sample covariance requirements and Agda kernel-verification requirements remain unchanged.
