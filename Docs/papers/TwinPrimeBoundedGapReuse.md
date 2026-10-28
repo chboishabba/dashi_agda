@@ -285,3 +285,10 @@ CRT, historical FRACTRAN semantics, primality correlation or
 the twin-prime conjecture. Original Conway/Guy, Hardy–Littlewood,
 Brun, Polymath8, Ibrahim/Monster, original geometry and #1407
 proof ownership remain separate. ESD surfaces were not modified.
+
+**Concrete wheel-obstruction:** the signed ternary
+point `(0,+1,+1)` maps to 119, passes all local 2/3/5
+pair-sieve tests, yet 119=7×17 and 121=11×11. The source-written
+`wheel270119SurvivalCannotProveTwin` uses the existing
+stdlib Composite proof owner, not a synthetic prime predicate.
+The finite Python script now mirrors these checks.
