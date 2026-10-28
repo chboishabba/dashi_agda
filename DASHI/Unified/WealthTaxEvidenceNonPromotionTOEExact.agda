@@ -363,6 +363,20 @@ toeSyntheticPolicyCostsAreIncomparable :
 toeSyntheticPolicyCostsAreIncomparable =
   DashiTradeTax.paretoOrderDoesNotTotallyRankTheseOptions
 
+-- A participant's gross/net cash requires explicit investor allocations.
+-- Amount conservation is conditional on reconciled allocation evidence;
+-- no account identity or actual CHESS batch is fabricated.
+toeInvestorAllocationsMustReconcileToParticipant :
+  (allocation : DashiTradeTax.ParticipantInvestorAllocation) →
+  DashiTradeTax.sumInvestorCashUnits
+    (DashiTradeTax.investorGrossSales allocation)
+    ≡ DashiTradeTax.sumInvestorCashUnits
+        (DashiTradeTax.investorGrossPurchases allocation)
+      + DashiTradeTax.netReceivedCash
+          (DashiTradeTax.netBatch allocation)
+toeInvestorAllocationsMustReconcileToParticipant =
+  DashiTradeTax.investorAllocationsSumToParticipantObligation
+
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
 -- observed, exact-head compiler run. No ESD imports are changed.
