@@ -68,3 +68,10 @@ The repository's existing `scripts/run_agda29_parallel_check.sh` targets Agda **
 The public `agda-stdlib/master` pages document the **specific theorem names used by this proof**; however, public latest docs are **not** a verification that the repository's actual experimental pin elaborates those terms, nor that the full dchott/bishop/cubical import graph compiles. A legitimate final receipt must include the exact Agda binary version, stdlib commit, invocation and successful kernel result. Until then, the proof remains source-written.
 
 The appropriate existing local workflow is the repository's `scripts/run_agda29_parallel_check.sh` with a focused target `DASHI/Statistics/ZipfFractionAddRationalBridgeExact.agda`, followed by `ZipfFractionFoldConditionalExact.agda` and `ZipfFamilyEverything.agda`. Do not edit any protected ESD path, import master-only owner modules onto this diverged branch without verifying their actual availability, or use CI green as a substitute for interpreting concrete proof types.
+
+
+## Subsequent proof elaboration hardening
+
+A static review caught that the initial `rawFractionAddPreserved` branch used `refl` for the raw source-to-`ℚᵘ` addition equality. Although correct arithmetically, relying on definitional equality of the natural-to-integer embedding is needlessly fragile (and can fail with the standard library's sign/magnitude representation).
+
+The proof term has now been strengthened to use **the already-owned integer embedding homomorphism lemmas** `Data.Integer.Properties.pos-+` and `pos-*` explicitly, combined with `cong₂`. This relates `+(n*e+m*d)` to `(+n)*(+e) + (+m)*(+d)` without asking the kernel to infer the arithmetic conversion by normalization alone. The positive denominator product is unchanged. The two impossible zero-denominator cases still use absurd patterns. The proof remains kernel-pending; this is compiler-risk reduction, not a compiler receipt.
