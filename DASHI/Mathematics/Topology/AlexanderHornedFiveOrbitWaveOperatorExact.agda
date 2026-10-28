@@ -44,13 +44,13 @@ WaveField = Address → Wave.DiscreteWave
 WaveOperator : Set
 WaveOperator = Wave.DiscreteWave → Wave.DiscreteWave
 
-OperatorField : Set₁
+OperatorField : Set
 OperatorField = Address → WaveOperator
 
 FiveWaveField : Set
 FiveWaveField = Five.FiveOrbit → Wave.DiscreteWave
 
-FiveOperatorField : Set₁
+FiveOperatorField : Set
 FiveOperatorField = Five.FiveOrbit → WaveOperator
 
 orbitOfAddress : Address → Five.FiveOrbit
