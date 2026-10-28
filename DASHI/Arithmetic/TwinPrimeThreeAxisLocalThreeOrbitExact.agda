@@ -28,7 +28,7 @@ module DASHI.Arithmetic.TwinPrimeThreeAxisLocalThreeOrbitExact where
 -- Finite source-written Agda; kernel acceptance NOT observed.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.DivMod using (_%_)
 
