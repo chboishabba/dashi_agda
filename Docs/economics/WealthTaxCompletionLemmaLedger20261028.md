@@ -1,6 +1,6 @@
 # Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
 
-Created 2026-10-28. **77 named formal obligations** across nine groups: 46 source-written (D), 9 owned by existing reusable sources (R), 22 remaining proof/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+Created 2026-10-28. **77 named formal obligations** across nine groups: 47 source-written (D), 9 owned by existing reusable sources (R), 21 remaining proof/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
 
 Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
 
@@ -53,7 +53,7 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **D09 [D]** `genericExecutedCountBoundedBySubmitted` — Finite list of fills cannot exceed authorized order under contract.
 - **D10 [D]** `genericSettledCountBoundedByExecuted` — All partial fills and unsettled remainders balance.
 - **D11 [D]** `genericSettledProceedsIsExactPriceQuantitySum` — Arbitrary number of exact fills, no ambient decimal rounding.
-- **D12 [N]** `uniqueFillIdentityAndMonotoneEventTime` — Unique IDs, instrument and 4-stage timestamp agreement.
+- **D12 [D]** `uniqueFillIdentityAndMonotoneEventTime` — Unique IDs, instrument and 4-stage timestamp agreement.
 
 ### E. Share class and control identity (9)
 
@@ -202,3 +202,11 @@ Existing TOE consumer: DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda.
 
 **Actual walls remain:** D12 generic fill IDs/chronology; A05 asset/debt/beneficial-owner valuation; E07–E09 authenticated owner/rights/transaction identity; F07 custody finality; H06–H08 evidence authority; I01–I07/I09 causal multi-policy framework; full compiler pass, mainline integration, X01–X10 external evidence and cross-runtime conformance.
 
+## 2026-10-28 finite fill chronology continuation (D12)
+
+- **D12 N → D:** TimestampedFill includes issuer/class labels and an explicit four-stage per-fill chronology: submission ≤ execution ≤ clearing ≤ settlement. TokenAbsent and UniqueFillTokens define a recursive duplicate-token exclusion for arbitrary finite lists, with AllFillLabelsMatch requiring issuer/class agreement throughout a batch.
+- ChronologicalIdentifiedFillBatch exposes the proofs and uniqueFillIdentityAndMonotoneEventTime projects them. TwoIdentifiedChronologicalFills supplies a positive finite witness; duplicateSevenTokenRejected supplies the same-token negative witness.
+- The theorem is **source-written, not kernel-certified**. A token is unique only within the supplied list; a repeated token in another batch, a forged label, an exchange clock offset, a settlement rejection, and a real custody identity still require separate authority. D12 contains no cross-fill sorting requirement and must not be represented as one.
+- No new clearing adapter or live broker execution. The original dashiTRADE PR #3 Python shadow suite remains a separate executable implementation, not proof of this Agda type.
+
+**Current scoped ledger status: 47 D / 9 R / 21 N, out of 77.** No observed Agda compiler certificate, and no X01–X10 same-object empirical record suite.
