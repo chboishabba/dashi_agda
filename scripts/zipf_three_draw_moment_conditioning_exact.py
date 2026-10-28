@@ -122,3 +122,31 @@ def nonuniform_zipf_three_rank_receipt() -> dict:
     assert aaa!=ccc
     return {"moments":moments,"distinct_conditioning":result,
             "same_heaps_curve_word_probabilities":(aaa,ccc)}
+
+
+def iid_three_draw_equality_pattern_law(weights: Sequence[int]) -> dict:
+    """Exact fine equality-pattern pushforward for three IID draws.
+
+    AAB, ABA, ABB each have mass S2-S3 even for unequal named weights.
+    The original named word law need NOT be invariant under relabelling.
+    """
+    counts=_validated_counts(weights)
+    coarse=iid_three_draw_moment_law(counts)
+    s2,s3=coarse["S2"],coarse["S3"]
+    fine={
+        "AAA":s3,
+        "AAB":s2-s3,
+        "ABA":s2-s3,
+        "ABB":s2-s3,
+        "ABC":1-3*s2+2*s3,
+    }
+    fine={name:mass for name,mass in fine.items() if mass>0}
+    push={
+        (0,1,1,1):fine.get("AAA",Fraction()),
+        (0,1,1,2):fine.get("AAB",Fraction()),
+        (0,1,2,2):fine.get("ABA",Fraction())+fine.get("ABB",Fraction()),
+        (0,1,2,3):fine.get("ABC",Fraction()),
+    }
+    assert {curve:mass for curve,mass in push.items() if mass>0}==coarse["law"]
+    assert sum(fine.values(),Fraction())==1
+    return {"pattern_law":fine,"heaps_pushforward":coarse["law"]}
