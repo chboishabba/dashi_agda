@@ -14,11 +14,13 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (_≤_; _∸_; z≤n; s≤s)
-open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; ≤-total; +-assoc; +-comm; +-identityʳ; m+n∸n≡m; [m+n]∸[m+o]≡n∸o)
+open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; ≤-total; +-mono-≤; +-mono-<-≤; +-mono-≤-<; +-assoc; +-comm; +-identityʳ; m+n∸n≡m; [m+n]∸[m+o]≡n∸o)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong; cong₂)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Nat.Properties using (_≤?_)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Relation.Nullary using (yes; no)
 open import Data.Product using (_×_; _,_)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -2240,4 +2242,201 @@ finiteParetoFrontierNonemptyGivenStrictRank costs rank head rest decreases =
            (minimumBound chosen challenger membership)
            (decreases challenger (minimumCandidate chosen)
              strictImprovement))
+
+------------------------------------------------------------------------
+-- I07: COMPLETE FINITE-AXIS PARETO EXISTENCE WITH NO EXTRA RANK AXIOM.
+--
+-- Original mathematical root: every finite nonempty partially ordered set
+-- has a minimal element (classical finite Pareto result).
+-- Repository proof: derive a Nat rank by summing a COMPLETE FINITE LIST
+-- of objective axes, then reuse the preceding rank-minimum proof owner.
+-- The finite axis closure is explicit; infinite/unlisted objectives are
+-- NOT silently ignored. This does not prescribe welfare weights, a real
+-- tax-rate optimum, legal eligibility, or an observed policy result.
+------------------------------------------------------------------------
+
+-- A lower (better) cost at one coordinate, plus weakly lower costs
+-- elsewhere, makes the SUM of finite costs strictly lower.
+finiteAxisCostSum :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  List (Pareto.Axis costs) → Pareto.Model problem → Nat
+finiteAxisCostSum costs [] model = zero
+finiteAxisCostSum costs (axis ∷ rest) model =
+  Pareto.cost costs axis model + finiteAxisCostSum costs rest model
+
+finiteAxisCostSumMonotone :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (axes : List (Pareto.Axis costs)) →
+  (better worse : Pareto.Model problem) →
+  Pareto.WeaklyDominates costs better worse →
+  finiteAxisCostSum costs axes better ≤
+    finiteAxisCostSum costs axes worse
+finiteAxisCostSumMonotone costs [] better worse dominance = ≤-refl
+finiteAxisCostSumMonotone costs (axis ∷ rest) better worse dominance =
+  +-mono-≤ (dominance axis)
+    (finiteAxisCostSumMonotone costs rest better worse dominance)
+
+finiteNatStrictFromNoReverse :
+  {m n : Nat} →
+  m ≤ n → (n ≤ m → ⊥) → suc m ≤ n
+finiteNatStrictFromNoReverse {zero} {zero} _ notReverse =
+  ⊥-elim (notReverse z≤n)
+finiteNatStrictFromNoReverse {zero} {suc n} _ notReverse =
+  s≤s z≤n
+finiteNatStrictFromNoReverse {suc m} {zero} () _
+finiteNatStrictFromNoReverse {suc m} {suc n}
+  (s≤s smaller≤larger) notReverse =
+  s≤s (finiteNatStrictFromNoReverse smaller≤larger
+    (λ reverse → notReverse (s≤s reverse)))
+
+record FiniteAxisStrictWitness
+    {problem : Pareto.ConsumerMDLProblem}
+    (costs : Pareto.CostHyperfabric problem)
+    (axes : List (Pareto.Axis costs))
+    (better worse : Pareto.Model problem) : Set where
+  constructor finite-axis-strict-witness
+  field
+    improvedAxis : Pareto.Axis costs
+    improvedAxisListed : RankedMember improvedAxis axes
+    improvedAxisStrict :
+      suc (Pareto.cost costs improvedAxis better)
+        ≤ Pareto.cost costs improvedAxis worse
+open FiniteAxisStrictWitness public
+
+finiteAxisSumStrict :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (axes : List (Pareto.Axis costs)) →
+  (better worse : Pareto.Model problem) →
+  Pareto.WeaklyDominates costs better worse →
+  FiniteAxisStrictWitness costs axes better worse →
+  suc (finiteAxisCostSum costs axes better)
+    ≤ finiteAxisCostSum costs axes worse
+finiteAxisSumStrict costs [] better worse dominates
+  (finite-axis-strict-witness axis () strict)
+finiteAxisSumStrict costs (axis ∷ rest) better worse dominates
+  (finite-axis-strict-witness .axis ranked-here strict) =
+  +-mono-<-≤ strict
+    (finiteAxisCostSumMonotone costs rest better worse dominates)
+finiteAxisSumStrict costs (axis ∷ rest) better worse dominates
+  (finite-axis-strict-witness other (ranked-there listed) strict) =
+  +-mono-≤-< (dominates axis)
+    (finiteAxisSumStrict costs rest better worse dominates
+      (finite-axis-strict-witness other listed strict))
+
+ReverseOnListedAxes :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  List (Pareto.Axis costs) →
+  (better worse : Pareto.Model problem) → Set
+ReverseOnListedAxes costs [] better worse = ⊤
+ReverseOnListedAxes costs (axis ∷ rest) better worse =
+  (Pareto.cost costs axis worse ≤ Pareto.cost costs axis better)
+    × ReverseOnListedAxes costs rest better worse
+
+listedReverseAt :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (axes : List (Pareto.Axis costs)) →
+  (better worse : Pareto.Model problem) →
+  (axis : Pareto.Axis costs) →
+  RankedMember axis axes →
+  ReverseOnListedAxes costs axes better worse →
+  Pareto.cost costs axis worse ≤ Pareto.cost costs axis better
+listedReverseAt costs [] better worse axis () reverse
+listedReverseAt costs (axis ∷ rest) better worse .axis
+  ranked-here (headReverse , tailReverse) = headReverse
+listedReverseAt costs (head ∷ rest) better worse axis
+  (ranked-there listed) (headReverse , tailReverse) =
+  listedReverseAt costs rest better worse axis listed tailReverse
+
+-- An exhaustive finite axis list means that a reverse inequality on
+-- every listed coordinate IS a reverse inequality on any declared axis.
+allListedReverseImpliesWeakReverse :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (axes : List (Pareto.Axis costs)) →
+  ((axis : Pareto.Axis costs) → RankedMember axis axes) →
+  (better worse : Pareto.Model problem) →
+  ReverseOnListedAxes costs axes better worse →
+  Pareto.WeaklyDominates costs worse better
+allListedReverseImpliesWeakReverse costs axes complete better worse reverses axis =
+  listedReverseAt costs axes better worse axis (complete axis) reverses
+
+-- The decision procedure either collects reverse inequalities on the
+-- entire finite axis enumeration or constructs one strictly improved axis.
+finiteAxesReverseOrStrict :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (axes : List (Pareto.Axis costs)) →
+  (better worse : Pareto.Model problem) →
+  Pareto.WeaklyDominates costs better worse →
+  ReverseOnListedAxes costs axes better worse
+    ⊎ FiniteAxisStrictWitness costs axes better worse
+finiteAxesReverseOrStrict costs [] better worse dominates = inj₁ tt
+finiteAxesReverseOrStrict costs (axis ∷ rest) better worse dominates
+  with Pareto.cost costs axis worse ≤? Pareto.cost costs axis better
+... | no notReverse =
+  inj₂ (finite-axis-strict-witness axis ranked-here
+    (finiteNatStrictFromNoReverse (dominates axis) notReverse))
+... | yes reverseHead
+  with finiteAxesReverseOrStrict costs rest better worse dominates
+... | inj₁ reverseTail = inj₁ (reverseHead , reverseTail)
+... | inj₂ witnessTail =
+  inj₂ (finite-axis-strict-witness (improvedAxis witnessTail)
+    (ranked-there (improvedAxisListed witnessTail))
+    (improvedAxisStrict witnessTail))
+
+-- With complete finite axis coverage, non-reversibility is constructive
+-- evidence that SOME cost axis strictly improves. No classical excluded
+-- middle, postulate, or synthetic proof receipt is introduced.
+strictImprovedAxisFromFiniteCoverage :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (axes : List (Pareto.Axis costs)) →
+  ((axis : Pareto.Axis costs) → RankedMember axis axes) →
+  (better worse : Pareto.AdmissibleStratumPoint problem) →
+  StrictlyDominatesAdmissible costs better worse →
+  FiniteAxisStrictWitness costs axes
+    (Pareto.model better) (Pareto.model worse)
+strictImprovedAxisFromFiniteCoverage costs axes complete better worse strict
+  with finiteAxesReverseOrStrict costs axes
+    (Pareto.model better) (Pareto.model worse) (proj₁ strict)
+... | inj₁ reverseAll =
+  ⊥-elim (proj₂ strict
+    (allListedReverseImpliesWeakReverse costs axes complete
+      (Pareto.model better) (Pareto.model worse) reverseAll))
+... | inj₂ witness = witness
+
+-- General for ANY nonempty finite list of already-eligible models and
+-- any complete finite objective-axis enumeration. No extra rank-decrease
+-- premise is supplied by the caller: this proof derives it from componentwise
+-- Nat Pareto dominance and finite-axis arithmetic.
+finiteParetoFrontierIsNonempty :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (axes : List (Pareto.Axis costs)) →
+  ((axis : Pareto.Axis costs) → RankedMember axis axes) →
+  (head : Pareto.AdmissibleStratumPoint problem) →
+  (rest : List (Pareto.AdmissibleStratumPoint problem)) →
+  NonemptyRankedParetoFront costs
+    (λ candidate →
+      finiteAxisCostSum costs axes (Pareto.model candidate)) head rest
+finiteParetoFrontierIsNonempty costs axes complete head rest =
+  finiteParetoFrontierNonemptyGivenStrictRank costs
+    (λ candidate → finiteAxisCostSum costs axes (Pareto.model candidate))
+    head rest
+    (λ better worse strict →
+      finiteAxisSumStrict costs axes
+        (Pareto.model better) (Pareto.model worse)
+        (proj₁ strict)
+        (strictImprovedAxisFromFiniteCoverage costs axes complete
+          better worse strict))
+
+-- I07 proof burden ends here only within the complete finite-axis scope.
+-- The existing Pareto owner determines eligible models and costs.
+-- Registry-issued tax evidence, real-world feasible scenario enumeration,
+-- source authority and any economic policy effect remain X01-X10 obligations.
 
