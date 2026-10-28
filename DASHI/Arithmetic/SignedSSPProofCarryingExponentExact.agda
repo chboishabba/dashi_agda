@@ -24,7 +24,7 @@ module DASHI.Arithmetic.SignedSSPProofCarryingExponentExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Arithmetic.SignedSSPPrimeOffsetMacroExact as Offset
 
@@ -141,3 +141,44 @@ minusTwoCodeRawIsActualMacroOutput :
   rawIntegerCode (minusTwoCodeAt k)
     ≡ Offset.minusOutput k
 minusTwoCodeRawIsActualMacroOutput k = refl
+
+-- The exponent is recoverable, not a many-to-one sign-only label.
+encodeExponentInjective :
+  (p q : Nat) →
+  encodeExponent p ≡ encodeExponent q →
+  p ≡ q
+encodeExponentInjective p q equalCodes =
+  trans
+    (sym (decodeEncodeExponent p))
+    (trans
+      (cong decodeExponent equalCodes)
+      (decodeEncodeExponent q))
+
+-- A real certified input code for p=2+k yields the guarded minus macro.
+-- The source-comparison lemma explicitly uses the payload equality,
+-- preventing raw-code/modulus confusion.
+minusMacroSourceMatchesCertifiedCode :
+  (code : CertifiedExponentCode) →
+  (k : Nat) →
+  decodeExponent code ≡ suc (suc k) →
+  9 * rawIntegerCode code ≡ Offset.minusSource k
+minusMacroSourceMatchesCertifiedCode code k originalExponent =
+  trans
+    (plusMacroSourceMatchesCertifiedCode code)
+    (trans
+      (cong Offset.plusSource originalExponent)
+      (sym (Offset.minusStartIsPrimeEncoded k)))
+
+minusTwoCode :
+  (code : CertifiedExponentCode) →
+  (k : Nat) →
+  decodeExponent code ≡ suc (suc k) →
+  CertifiedExponentCode
+minusTwoCode code k originalExponent = minusTwoCodeAt k
+
+minusTwoCodeDecodesCorrectly :
+  (code : CertifiedExponentCode) →
+  (k : Nat) →
+  (originalExponent : decodeExponent code ≡ suc (suc k)) →
+  decodeExponent (minusTwoCode code k originalExponent) ≡ k
+minusTwoCodeDecodesCorrectly code k originalExponent = refl
