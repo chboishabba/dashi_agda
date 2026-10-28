@@ -317,3 +317,62 @@ sameOnEndsImpliesEventual
 -- concrete setoid. A quotient *type* and the compactness argument that
 -- ALL continuous K3->C3 maps factor through some finite stage remain
 -- independent, not smuggled in as a source-written proof.
+
+
+------------------------------------------------------------------------
+-- Stronger constructive split: restricting to ZERO-CHILD is a RETRACTION
+-- of source-owned pullback, AND preserves sector/sign invariance.
+-- This exhibits actual split injections at every finite level.
+------------------------------------------------------------------------
+
+restrictToZeroChild : ∀ n →
+  Fibre.FibreAction (suc n) → Fibre.FibreAction n
+restrictToZeroChild n f x = f (Fibre.section n x)
+
+zeroChildSectorSquare : ∀ n (x : End.BalancedLevel n) →
+  Fibre.section n (End.rotateBalancedLevel n x) ≡
+    End.rotateBalancedLevel (suc n) (Fibre.section n x)
+zeroChildSectorSquare n (sector , word) = refl
+
+mapSnoc : ∀ {A B : Set} {n}
+  (h : A → B) (xs : Vec A n) (v : A) →
+  End.mapVec h (End.snoc xs v) ≡
+    End.snoc (End.mapVec h xs) (h v)
+mapSnoc h [] v = refl
+mapSnoc h (x ∷ xs) v =
+  cong (h x ∷_) (mapSnoc h xs v)
+
+zeroChildSignSquare : ∀ n (x : End.BalancedLevel n) →
+  Fibre.section n (End.reflectBalancedLevel n x) ≡
+    End.reflectBalancedLevel (suc n) (Fibre.section n x)
+zeroChildSignSquare n (sector , word) =
+  cong (λ xs → (sector , xs))
+    (sym (mapSnoc Trit.negate word Trit.zero))
+
+restrictInvariantToZeroChild : ∀ n
+  (f : Fibre.FibreAction (suc n)) →
+  Fibre.SectorSignInvariant f →
+  Fibre.SectorSignInvariant (restrictToZeroChild n f)
+restrictInvariantToZeroChild n f inv = record
+  { sector = λ x →
+      trans (cong f (zeroChildSectorSquare n x))
+        (Fibre.SectorSignInvariant.sector inv (Fibre.section n x))
+  ; sign = λ x →
+      trans (cong f (zeroChildSignSquare n x))
+        (Fibre.SectorSignInvariant.sign inv (Fibre.section n x))
+  }
+
+restrictPullbackIsIdentityAt : ∀ n
+  (f : Fibre.FibreAction n) (x : End.BalancedLevel n) →
+  restrictToZeroChild n (Fibre.pullback n f) x ≡ f x
+restrictPullbackIsIdentityAt n f x =
+  cong f (Fibre.sectionProjection n x)
+
+-- The split is a genuine instance of the original source's injection,
+-- not a second independently declared group structure on field codes.
+restrictPreservesCombine : ∀ n
+  (f g : Fibre.FibreAction (suc n)) (x : End.BalancedLevel n) →
+  restrictToZeroChild n (Fibre.combine f g) x ≡
+    Fibre.combine (restrictToZeroChild n f)
+                  (restrictToZeroChild n g) x
+restrictPreservesCombine n f g x = refl
