@@ -162,3 +162,19 @@ The new `plusMacroSourceMatchesCertifiedCode` and `minusMacroSourceMatchesCertif
 This is a **concrete** lossless code and a partial answer to roadmap B02/B03/D04–D05. It is not an `SSP15ResidualCodec` instance on `FractranCOL.EV5`, which remains a separate bridge. In particular, the code stores `p` as a residual, so no computational compression ratio or extra prime-distribution information follows by itself.
 
 Independent regression `scripts/check_signed_ssp_twin_information_loss.py` ran locally and found exactly 1,224 twin-prime starting integers with lower endpoint ≤100,000, confirming the stronger collision (5,7), and the correct prime-2 odd/modulus distinction. The source-written Agda has not been kernel-checked.
+
+## 2026-10-28 sixth max-cut: exact signed-code / CRT square, both directions
+
+`DASHI.Arithmetic.SignedSSPCertifiedCRTReadoutSquareExact` closes a **concrete proof-carrying arithmetic commuting square** for arbitrary certified prime moduli:
+- the existing two-step `2/3` FRACTRAN macro computes the raw code `2^(p+2)`;
+- the `CertifiedExponentCode` retains the original p and its power-of-two equality;
+- the plus-code decoder computes exactly `p+2`;
+- `plusTwoCRTReadoutCommutes` proves modulo any `CertifiedPrimeAxis` gives the same residue as arithmetic `(p+2) mod axis.modulus`;
+- `pairSieveTransportThroughPlusCode` and its reverse transport the existing true `AllPairSurvive` predicate across the decoded equality for any list of certified prime axes;
+- `twinPrimeToCertifiedCodePair` and `certifiedCodePairToTwinPrime` move two independent actual arithmetic prime certificates between the decoded `p,p+2` pair and the two proof-carrying code endpoints.
+
+This is a source-written finite arithmetic BIDI bridge across all certified moduli, and it directly consumes earlier theorem owners rather than inventing new primality, sign, FRACTRAN or CRT primitives. It is **not** a concrete instance of the FRACDASH VM's `SourceMachine/FractranRepresentation`, not a universal arithmetic `CRTStep` inverse, and not a statement about the original prime program reaching every enriched state. Those remain the first true executable/formalisation frontier. No Agda kernel acceptance has been observed.
+
+**Why this max-cut matters:** raw FRACTRAN code parity and decoded exponent parity disagree already at p=3. The corrected commuting square cannot accidentally delete prime 2. The old SSP and Monster `4B` address/frame information can be included as extra metadata only if it preserves the arithmetic exponent residual; it does not provide missing prime-correlation estimates.
+
+**Attribution scope:** Conway/Guy prime-game semantics; FRACDASH signed paired-register compiler; DASHI prior codec and arithmetic counting owners; Brun/Hardy–Littlewood classic prime-pair mathematics; Ibrahim's separate 3B representation ownership untouched. No external authorship is transferred to the new bridge proof.
