@@ -183,3 +183,137 @@ storedIndependentComplexPairs = refl
 
 realScalarDegreesOfFreedom : 1 + 13 * 2 ≡ 27
 realScalarDegreesOfFreedom = refl
+
+------------------------------------------------------------------------
+-- SOURCE FIVE-IN-NINE: one real centre and four complex conjugate pairs.
+-- Uses original *global C2 antipode* quotient, not the D4 3-orbit
+-- cell quotient, nor the five D4 irreducible representation species.
+------------------------------------------------------------------------
+
+plane9Zero : Ant.Plane9
+plane9Zero = M.modeZero , M.modeZero
+
+plane9Representative : Orbit.AntipodalClass9 → Ant.Plane9
+plane9Representative Orbit.centre9 = plane9Zero
+plane9Representative Orbit.firstAxis9 = M.modePlus , M.modeZero
+plane9Representative Orbit.secondAxis9 = M.modeZero , M.modePlus
+plane9Representative Orbit.sameSignDiagonal9 = M.modePlus , M.modePlus
+plane9Representative Orbit.oppositeSignDiagonal9 = M.modePlus , M.modeMinus
+
+planeRepresentativeHasCorrectClass :
+  (orbit : Orbit.AntipodalClass9) →
+  Ant.antipodalClass9 (plane9Representative orbit) ≡ orbit
+planeRepresentativeHasCorrectClass Orbit.centre9 = refl
+planeRepresentativeHasCorrectClass Orbit.firstAxis9 = refl
+planeRepresentativeHasCorrectClass Orbit.secondAxis9 = refl
+planeRepresentativeHasCorrectClass Orbit.sameSignDiagonal9 = refl
+planeRepresentativeHasCorrectClass Orbit.oppositeSignDiagonal9 = refl
+
+planePositiveSide : Ant.Plane9 → Bool
+planePositiveSide (M.modePlus , b) = true
+planePositiveSide (M.modeMinus , b) = false
+planePositiveSide (M.modeZero , M.modePlus) = true
+planePositiveSide (M.modeZero , M.modeMinus) = false
+planePositiveSide (M.modeZero , M.modeZero) = true
+
+choosePlane9 : Bool → Ant.Plane9 → Ant.Plane9 → Ant.Plane9
+choosePlane9 true a b = a
+choosePlane9 false a b = b
+
+planeRepresentativeMatchesSelectedOrientation :
+  (plane : Ant.Plane9) →
+  plane9Representative (Ant.antipodalClass9 plane)
+    ≡ choosePlane9 (planePositiveSide plane)
+         plane (Ant.negatePlane9 plane)
+planeRepresentativeMatchesSelectedOrientation (M.modeMinus , M.modeMinus) = refl
+planeRepresentativeMatchesSelectedOrientation (M.modeMinus , M.modeZero) = refl
+planeRepresentativeMatchesSelectedOrientation (M.modeMinus , M.modePlus) = refl
+planeRepresentativeMatchesSelectedOrientation (M.modeZero , M.modeMinus) = refl
+planeRepresentativeMatchesSelectedOrientation (M.modeZero , M.modeZero) = refl
+planeRepresentativeMatchesSelectedOrientation (M.modeZero , M.modePlus) = refl
+planeRepresentativeMatchesSelectedOrientation (M.modePlus , M.modeMinus) = refl
+planeRepresentativeMatchesSelectedOrientation (M.modePlus , M.modeZero) = refl
+planeRepresentativeMatchesSelectedOrientation (M.modePlus , M.modePlus) = refl
+
+record PackedHermitian9 : Set where
+  field
+    planeCentreReal : ℚ
+    firstAxisCoefficient : C3.Cyclotomic3
+    secondAxisCoefficient : C3.Cyclotomic3
+    sameDiagonalCoefficient : C3.Cyclotomic3
+    oppositeDiagonalCoefficient : C3.Cyclotomic3
+open PackedHermitian9 public
+
+packedNineAtOrbit : PackedHermitian9 → Orbit.AntipodalClass9 → C3.Cyclotomic3
+packedNineAtOrbit packed Orbit.centre9 =
+  C3.cyc (planeCentreReal packed) 0ℚ
+packedNineAtOrbit packed Orbit.firstAxis9 = firstAxisCoefficient packed
+packedNineAtOrbit packed Orbit.secondAxis9 = secondAxisCoefficient packed
+packedNineAtOrbit packed Orbit.sameSignDiagonal9 = sameDiagonalCoefficient packed
+packedNineAtOrbit packed Orbit.oppositeSignDiagonal9 =
+  oppositeDiagonalCoefficient packed
+
+packedPlane9 : PackedHermitian9 → Ant.Plane9 → C3.Cyclotomic3
+packedPlane9 packed plane with planePositiveSide plane
+... | true = packedNineAtOrbit packed (Ant.antipodalClass9 plane)
+... | false = C3.conjC (packedNineAtOrbit packed (Ant.antipodalClass9 plane))
+
+record Hermitian9 : Set where
+  field
+    coefficient9 : Ant.Plane9 → C3.Cyclotomic3
+    conjugateAtNegative9 :
+      (plane : Ant.Plane9) →
+      coefficient9 (Ant.negatePlane9 plane)
+        ≡ C3.conjC (coefficient9 plane)
+    zero9Real : ℚ
+    zero9RealCorrect :
+      coefficient9 plane9Zero ≡ C3.cyc zero9Real 0ℚ
+open Hermitian9 public
+
+packHermitian9 : Hermitian9 → PackedHermitian9
+packHermitian9 source = record
+  { planeCentreReal = zero9Real source
+  ; firstAxisCoefficient = coefficient9 source
+      (plane9Representative Orbit.firstAxis9)
+  ; secondAxisCoefficient = coefficient9 source
+      (plane9Representative Orbit.secondAxis9)
+  ; sameDiagonalCoefficient = coefficient9 source
+      (plane9Representative Orbit.sameSignDiagonal9)
+  ; oppositeDiagonalCoefficient = coefficient9 source
+      (plane9Representative Orbit.oppositeSignDiagonal9)
+  }
+
+packedNineAtOrbitAfterPacking :
+  (source : Hermitian9) (orbit : Orbit.AntipodalClass9) →
+  packedNineAtOrbit (packHermitian9 source) orbit
+    ≡ coefficient9 source (plane9Representative orbit)
+packedNineAtOrbitAfterPacking source Orbit.centre9 =
+  sym (zero9RealCorrect source)
+packedNineAtOrbitAfterPacking source Orbit.firstAxis9 = refl
+packedNineAtOrbitAfterPacking source Orbit.secondAxis9 = refl
+packedNineAtOrbitAfterPacking source Orbit.sameSignDiagonal9 = refl
+packedNineAtOrbitAfterPacking source Orbit.oppositeSignDiagonal9 = refl
+
+decodeAfterEncodeHermitian9 :
+  (source : Hermitian9) (plane : Ant.Plane9) →
+  packedPlane9 (packHermitian9 source) plane ≡ coefficient9 source plane
+decodeAfterEncodeHermitian9 source plane with planePositiveSide plane
+... | true
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 plane)
+        | planeRepresentativeMatchesSelectedOrientation plane = refl
+... | false
+  rewrite packedNineAtOrbitAfterPacking source (Ant.antipodalClass9 plane)
+        | planeRepresentativeMatchesSelectedOrientation plane =
+  trans
+    (cong C3.conjC (conjugateAtNegative9 source plane))
+    (C3.conjugationInvolutive (coefficient9 source plane))
+
+storedIndependentComplexPlanePairs : 4 ≡ 4
+storedIndependentComplexPlanePairs = refl
+
+planeRealScalarDegreesOfFreedom : 1 + 4 * 2 ≡ 9
+planeRealScalarDegreesOfFreedom = refl
+
+-- Five vs fourteen are source orbit counts; the codecs are not D4 group
+-- irreducible decomposition, and the Fourier operator is not compressed
+-- by simply deleting signed/complex residuals.
