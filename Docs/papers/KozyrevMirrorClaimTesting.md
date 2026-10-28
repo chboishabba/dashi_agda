@@ -1,3 +1,88 @@
+## 2026-10-28 momentum-first max-cut continuation: conservation referee
+
+**Ownership:** original classical photon-momentum law is standard optics;
+in-repo oriented torque/Hodge mathematics remains owned by merged PR
+[#1164](https://github.com/chboishabba/dashi_agda/pull/1164).
+The new independent Python event-ledger/referee source belongs only to
+[#1404](https://github.com/chboishabba/dashi_agda/pull/1404).
+Related new optical/TOE work in #1407 is a separate PR owner. No
+Ibrahim/Monster 3B owner or protected ESD surface was changed.
+
+Source-facing physical reference: Cambridge University Press,
+*Ray Optics*, section 2.2 (optical forces),
+https://www.cambridge.org/core/services/aop-cambridge-core/content/view/93A3A5617D2687BF78E2B49F8C387DB9/9781107279711c2_p19-41_CBO.pdf/ray-optics.pdf
+and the standard stress-tensor/angular-momentum flux framework in
+*Radiation forces and torques in optics and acoustics*,
+*Reviews of Modern Physics* **98**, 025002 (2026),
+https://nori-physics.org/wp-content/uploads/RevModPhys_98_025002_30_Apr_2026.pdf.
+Do not elevate geometric ray results to field-theory equivalence.
+
+**Actual cut implemented:** `scripts/kozyrev_optical_event_ledger.py`
+and `scripts/tests/test_kozyrev_optical_event_ledger.py`.
+These are source-written in the Kozyrev PR, but their full GitHub
+test and Agda kernel verification remains **OPEN**.
+
+The independent event-ledger referee takes a source power and unit
+direction, then a sequence of explicitly located wall impact
+positions and outgoing unit directions. It computes:
+
+```text
+p_in  = (P_in / c) * incoming_direction
+p_out = (P_in * rho / c) * outgoing_direction
+F_wall_event = p_in - p_out
+tau_wall_event = cross(position - axis, F_wall_event).z
+P_absorbed_wall = (1 - rho) * P_in
+```
+
+A wall event must occur **forward on the current ray**. The referee
+rejects off-path or backward collisions. A terminal point must also
+lie along the final outgoing ray. This checks *path continuity*, not
+that the location is on a real spiral wall; the independent SDF
+surface-intersection problem remains a separate acceptance gate.
+
+At termination (only `escape`, `target`, or `unresolved`):
+```text
+P_source = P_wall_absorbed + P_terminal
+p_source = F_wall + p_target + p_escape + p_unresolved
+L_source = tau_wall + L_target + L_escape + L_unresolved
+```
+
+These are full-flux conservation checks. In an implementation with
+multiple optical sources, add their momentum and angular momentum
+source-wise before comparing the ledger. The tensor/stress and
+material/heat channels are *not* inferred from this ray closure.
+
+**Interior-entry logic remains independent of the ledger.**
+Classify an exterior-only strike as an inadmissible *interior-optimal*
+experiment. Once a ray passes the designated opening, keep
+physically valid later reflections; never delete a legitimate
+wall event merely because its surface normal points outward.
+
+**Necessary semantic limitation:** the ledger validates the algebra
+of an already classified event history. It does not establish
+whether the SDF found the nearest correct surface, prove a smooth
+normal's direction, certify patent dimensions, or establish net
+source-plus-collector propulsion. The objective is `WallTorqueZ`
+about the declared centre; source/collector reaction remains a
+separate *whole device* physical boundary.
+
+**Synthetic tests source-written:** 100% reflection/reversal,
+partial wall absorption, signed torque plus absorbing target,
+fail-closed unresolved output, dimensional scaling of torque,
+invalid normal rejection. These are **not** empirical or
+kernel-verified theorem receipts.
+
+**Next independent referee gate:** use actual event logs exported
+by the HTML and reconstruct every ray with
+`RayLedger.emit -> .hit -> .close`. Compare source-normalised
+wall/target/escape and angular sums ray by ray. Exclude
+`OUTSIDE_FIRST_HIT` from interior-mode ranking, while still
+including its power in the complete source-energy denominator.
+Reject any candidate where an event fails continuity or conservation.
+Then repeat coordinate/Pareto optimisation over the valid set and
+check shape/scale robustness. No additional foundational spiral,
+wreath or new torsion field module is necessary.
+
 # Kozyrev mirror: source cut, formal claim registry and test-readiness
 
 **Status, 27 October 2026:** source registration and analysis tooling only.
