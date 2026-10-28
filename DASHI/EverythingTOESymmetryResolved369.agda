@@ -20,6 +20,7 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Nat using (_+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
@@ -1570,7 +1571,7 @@ toeR2P2FiniteLatticeNoncommuting :
     (R2P2Lattice.siteDependentPotential R2P2Lattice.leftBasisState)
   ≡ R2P2Lattice.siteDependentPotential
     (R2P2Lattice.nearestNeighbourAdjacency R2P2Lattice.leftBasisState)
-  → R2P2Lattice.⊥
+  → ⊥
 toeR2P2FiniteLatticeNoncommuting =
   R2P2Lattice.finiteLatticeOperatorsFailToCommute
 
