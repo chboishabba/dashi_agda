@@ -133,3 +133,16 @@ The repository's Monster `4B` content is a conjugacy-class / moonshine datum, no
 5. If claiming a new twin-prime result, prove a quantitative prime-pair correlation estimate that survives decoded arithmetic and is not reducible to parity-limited sieve data. No such result was discovered in #1409–#1413 or current 4B material.
 
 Owner status update: A03,A08,A10 (runtime compiler) remain open; B02/B03 readout now have conditional codec transport but no concrete full-machine instance; C04–C08 remain to be kernel-linked/instantiated; E02–E04 verified by finite Python but not Agda general proof; D06 and exact finite twin enumeration have source-level owners; F05 has a rigorous **orientation-only negative** special case, richer signed invariants remain research. The G01 twin infinitude target is unchanged.
+
+## 2026-10-28 fourth max-cut: prime 2 forces exponent decoding
+
+`DASHI.Arithmetic.SignedSSPRawCodeParityNoGoExact` establishes an exact *counterexample* to treating the integer encoding as its decoded exponent: at arithmetic prime `p=3`, Conway/Guy-style raw output is `2^3=8`, hence raw code `8 mod 2 = 0`, while decoded prime `3 mod 2 = 1`. Consequently **there cannot be a universal equality** `(2^p mod 2) = (p mod 2)`. An actual modular sieve must retain p=2 but apply it to the **decoded exponent**, not the raw FRACTRAN code. This is a critical BIDI source/target representation cut, independent of CI or optimization.
+
+`SignedSSPOrientationTwinClassifierNoGoExact` now also contains `collidingCodeCannotDecideAllTwins`: for **any** carrier and encoding that identifies 5 and 7, no deterministic classifier of that code alone can agree with true arithmetic `TwinPrimeAt` for all naturals. The previous orientation-only theorem is a genuine specialization of this general quotient no-go. This is why the prior SSP15 compression theorem demands a residual channel.
+
+The two no-go theorems and `SignedSSPTwinObservableTransportExact` are jointly exposed from the three canonical TOE roots:
+- a lossy quotient can destroy the ability to answer the twin-prime question;
+- a genuinely lossless label+residual codec preserves twin-primality and the finite count indicator;
+- a raw power-of-two code is **not** the arithmetic exponent, so even a lossless codec requires the actual exponent/readout theorem before applying mod p.
+
+These exact source-written results change roadmap B02/B03/E15 from a vague request into a concrete proof condition. The missing code is an actual `readExponent` with a correct `readExponent(2^p)=p` law on accepted emitted states (or a dependent residual carrying `p` and a proof `code=2^p`). Until that is instantiated, CRT constraints over the raw FRACTRAN integer are invalid. No Agda kernel check has been claimed.
