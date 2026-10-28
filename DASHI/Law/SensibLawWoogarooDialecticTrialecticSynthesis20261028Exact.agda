@@ -29,6 +29,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Face
 import DASHI.Reasoning.TrialecticAttachedTwoCellExact as Attached
 import DASHI.Reasoning.TrialecticEdgeSynthesisCompatibilityExact as Edges
@@ -101,7 +102,7 @@ faceStillUnresolved kind = refl
 
 -- Existing theorem: no extraction of the 2-cell from the 1-skeleton.
 threeEdgesDoNotDetermineIndependentFace :
-  DASHI.Core.ConsumerDescentMinimalObserverExact.FactorsThrough
+  Descent.FactorsThrough
     Attached.attachedBoundaryObserver Attached.attachedFaceConsumer → ⊥
 threeEdgesDoNotDetermineIndependentFace =
   Attached.attachedFaceDoesNotFactorThroughBoundary
