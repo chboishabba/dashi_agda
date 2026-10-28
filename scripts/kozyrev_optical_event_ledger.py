@@ -35,17 +35,18 @@ class RayLedger:
     source_position: tuple
     source_direction: tuple
     source_power_w: float
+    axis_origin: tuple=(0.,0.)
     wall_force: tuple=(0., 0.)
     wall_torque: float=0.
     wall_absorption_w: float=0.
     event_count: int=0
 
     @classmethod
-    def emit(cls, position, direction, power_w):
+    def emit(cls, position, direction, power_w, axis_origin=(0.,0.)):
         if not unit(direction) or not 0 <= power_w < float('inf'):
             raise ValueError('source must have unit direction and finite nonnegative power')
         return cls(tuple(position), tuple(direction), power_w,
-                   tuple(position), tuple(direction), power_w)
+                   tuple(position), tuple(direction), power_w, tuple(axis_origin))
 
     def hit(self, point, outgoing_direction, reflectivity, *, path_tolerance=1e-7):
         """Conventional reflection plus local absorption at each wall event."""
@@ -61,14 +62,14 @@ class RayLedger:
         pout=scale(self.power_w*reflectivity/C,outgoing_direction)
         impulse=sub(pin,pout)
         self.wall_force=add(self.wall_force,impulse)
-        self.wall_torque+=cross(point,impulse)
+        self.wall_torque+=cross(sub(point,self.axis_origin),impulse)
         self.wall_absorption_w+=self.power_w*(1-reflectivity)
         self.power_w*=reflectivity
         self.position=tuple(point)
         self.direction=tuple(outgoing_direction)
         self.event_count+=1
 
-    def close(self, kind, terminal_point, origin=(0.,0.), *, path_tolerance=1e-7):
+    def close(self, kind, terminal_point, *, path_tolerance=1e-7):
         """Terminal event escaped/target/unresolved (never call unresolved 'escape')."""
         if kind not in ('escape','target','unresolved'):
             raise ValueError('invalid terminal state')
@@ -87,8 +88,8 @@ class RayLedger:
         delta=sub(pin,add(self.wall_force,add(target,add(unresolved,escape))))
         # Source position and termination position account for angular momentum.
         # The wall events' moment must be taken about the exact same origin.
-        input_L=cross(sub(self.source_position,origin),pin)
-        output_L=cross(sub(terminal_point,origin),pout)
+        input_L=cross(sub(self.source_position,self.axis_origin),pin)
+        output_L=cross(sub(terminal_point,self.axis_origin),pout)
         target_L=output_L if kind=='target' else 0.
         escape_L=output_L if kind=='escape' else 0.
         unresolved_L=output_L if kind=='unresolved' else 0.
