@@ -75,6 +75,28 @@ Estimate and uncertainty: `r = y_measured - y_GR`, `σ_r² = σ_clock² + σ_lin
 
 **Qin, C.-G.; Liu, T.; Li, Q.; et al.**, "Relativistic formulation for dual one-way Doppler cancellation scheme observables for gravitational redshift tests," *European Physical Journal C* **86**, 1230, published **2026-10-26**, DOI **10.1140/epjc/s10052-026-16367-8**, https://doi.org/10.1140/epjc/s10052-026-16367-8 . This independently derived space-based uplink/downlink observable treats relativistic terms through order c^-3 and examines Doppler, atmosphere, Shapiro delay, tides and synchronisation. **This is NOT an R2P2 measurement, and not identical to our terrestrial 69 km/81 km network.** It is a source-owned comparator for what kinds of physical correction terms a future measured model may need. The repository-wide search found no named `DopplerCancellationScheme` or `dualOneWay` owner on current master; `GRWeakFieldPredictionReceipt` separately contains a solar Shapiro-delay baseline. Do not copy Qin's final expressions or promote them without a faithful geometry and clock-convention mapping.
 
+## Max-cut / Pareto identifiability result (2026-10-28)
+
+The independent finite Agda owner `DASHI/Physics/Closure/R2P2ClockBiasIdentifiabilityMaxCutExact.agda` uses **existing** R2P2, weak-field redshift and `Base369BinaryTernaryRefinement` owners. The key issue is not a missing number-theoretic or quantum object. It is whether the clock observation actually identifies a gravitational slope independently of nuisance offsets.
+
+Define the **synthetic** affine toy observable `y(h)=b+s h`. The first candidate is `(b,s)=(6,1)`; the second is `(3,2)`. Both give `y(3)=9`. This equality is an exact finite proof named `oneHeightCannotDiscriminate`. At the second toy height `h=9`, the same candidates give `y(9)=15` and `y(9)=21`. A second Agda function discharges the impossible equality between those two natural numbers by the empty pattern, named `secondHeightDiscriminatesTheseCandidates`. This is an **exact finite separation for two chosen candidate models only**, not universal identifiability for arbitrary slopes or actual data. Neither `3,6,9` nor `18` is a special gravitational constant. The inherited refinement square does not automatically reduce clock bias or identify a physical optical field.
+
+A new `R2P2BiasIdentifiabilityMaxCut` record explicitly keeps `universalBiasIdentifiabilityClaimed`, `stableBiasAcrossRealApparatusEstablished`, `realMultiHeightR2P2DataIngested` and `physicalQuantumGravityIdentified` all false. The actual two-clock mountain/Boulder experiment consists of two **clocks at two elevations**, ordinarily making **one distinct elevation/potential difference**. It is not automatically a multi-baseline test because there happen to be two clocks. A second independent potential lever arm, a physically demonstrated bias stability model, or another independent constraint is needed before the toy two-height example could apply.
+
+The intended inference ladder is:
+1. **P0 source**: video/media provenance distinct from APS original and published experimental data.
+2. **P1 mathematical**: inherited redshift and 369/diamond witnesses; finite clock-bias ambiguity and separation.
+3. **P2 metrology**: exact comb offset/sign/phase-index data, SI reference, laser/lattice systematics and link reciprocity.
+4. **P3 geodesy**: instrument-geoid/potential model, heights/datums/tides and relevant covariance.
+5. **P4 comparison**: reduced clock ratio `y`, transfer correction, independently predicted `y_GR`, full uncertainty, source-hash and independent replay.
+6. **P5 physics**: a prespecified LPI/GR-deviation alternative with a real discriminator. **Quantum gravity requires further distinct physics evidence.**
+
+Pareto priority is **P2–P4**. Searching for a new 369 carrier or importing unrelated Monster, qutrit or finite causal results is lower-value than establishing calibrations and data. This is an explicitly source-aligned Ibrahim ownership/max-cut discipline, not a scientific or Monster representation discovery.
+
+Published primary-source benchmarks: Grotti et al., *Physical Review Applied* **21** L061001 (2024), DOI https://doi.org/10.1103/PhysRevApplied.21.L061001 (457-km Sr clock ratio + independently measured geopotential); Qin et al., *EPJ C* **86** 1230 (2026), DOI https://doi.org/10.1140/epjc/s10052-026-16367-8 (space-based dual one-way optical Doppler model); Dai et al., *Physical Review D* **114** 064073 (2026), DOI https://doi.org/10.1103/qk9j-42hx (simulated CSS phase measurements, source-specific uncertainty model). None is R2P2 raw data, and none grants exact physical verification to this finite example.
+
+Regression: `tests/test_r2p2_clock_bias_identifiability.py`. Kernel type checking remains a distinct CI task, now declared in `.github/workflows/r2p2-369-maxcut.yml`. Do not describe workflow creation as a successful test execution.
+
 ## Scope, limits, verification (S/L/P/G/F)
 
 **Built**: complete type-level *logical* path; reused 369 atomic/field index; both diamonds; finite C3/Weyl certificates; SI second owner; two-way transfer obligations; external redshift bridge; source and evidence guards; tests and TOE root imports.
@@ -100,7 +122,9 @@ Estimate and uncertainty: `r = y_measured - y_GR`, `σ_r² = σ_clock² + σ_lin
 python3 tests/test_r2p2_mountain_optical_clock.py
 python3 tests/test_r2p2_369_atomic_quantum_diamond.py
 python3 tests/test_r2p2_clock_comparison_diagnostic.py
+python3 tests/test_r2p2_clock_bias_identifiability.py
 python3 scripts/r2p2_clock_comparison_diagnostic.py
+agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2ClockBiasIdentifiabilityMaxCutExact.agda
 agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda
 ```
 
