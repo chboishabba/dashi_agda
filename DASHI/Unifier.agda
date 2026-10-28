@@ -36,6 +36,10 @@ open FactorableSieveLift public using
   ; factorableRightHasTwoNontrivialFactors
   ; certifiedModulusProductPositive
   ; factorableSurvivorWithBothStrictFactors
+  ; twoNontrivialFactorsAreComposite
+  ; twoNontrivialFactorsRefutePrime
+  ; factorableSurvivorWithBothCompositeCertificates
+  ; factorableSurvivorCannotBeGenuineTwin
   )
 
 import DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact as TwinConsumerPareto
