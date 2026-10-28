@@ -124,3 +124,42 @@ def test_same_heaps_curve_different_original_conjugacy_shape():
     assert "Perm.rank2OneFixedShape" in src
     assert "Perm.rank2TwoFixedShape" in src
     assert "noFunctionalGraphShapeRecoveryFromHeaps" in src
+
+
+def test_three_to_five_versus_five_to_three_coding():
+    from zipf_ternary27_action_heaps_exact import compare_three_to_five_coding_axes
+    receipt=compare_three_to_five_coding_axes()
+    assert receipt=={
+        "five_trit_words":243,"their_heaps_curves":11,
+        "three_five_mode_words":125,"their_heaps_curves":4,
+        "independent_cyclic_cube_orbits":11}
+    # Equality of these last two 11 counts is NOT an equivariant map.
+
+
+def test_all_small_uniform_novelty_fibres_against_independent_word_enumeration():
+    from collections import Counter
+    from math import comb
+    from zipf_ternary27_action_heaps_exact import uniform_heaps_curve_multiplicities
+    for alphabet in range(1,6):
+        for length in range(1,7):
+            if alphabet**length>30000:continue
+            exact=uniform_heaps_curve_multiplicities(alphabet,length)
+            independent=Counter()
+            for word in product(range(alphabet),repeat=length):
+                seen=set()
+                curve=[0]
+                for v in word:
+                    seen.add(v)
+                    curve.append(len(seen))
+                independent[tuple(curve)]+=1
+            assert exact==dict(independent)
+            assert len(exact)==sum(comb(length-1,j)
+                for j in range(min(alphabet-1,length-1)+1))
+            assert sum(exact.values())==alphabet**length
+
+
+def test_uniform_fibre_formula_strict_domain_gates():
+    from zipf_ternary27_action_heaps_exact import uniform_heaps_curve_multiplicities
+    for alphabet,length in ((0,3),(8,3),(3,0),(3,11),(7,7),(True,3),(3,True)):
+        with pytest.raises(ValueError):
+            uniform_heaps_curve_multiplicities(alphabet,length)
