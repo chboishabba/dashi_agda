@@ -340,59 +340,33 @@ def main() -> None:
         "toeBackedOutTransactionIsNotSettled",
         "toeJointReformOutcomeDoesNotIdentifySingleTaxEffect",
         "toeAssetValueDoesNotIdentifyBeneficialShare",
-        "PolicyEvidenceXY",
-        "policyEvidenceXY",
-        "policyEffectZ",
-        "sameXYStillAllowsOppositeZ",
-        "sourceReviewDoesNotDetermineCausalPolarity",
-        "rechartingXYCannotManufactureCausalPolarity",
-        "rotatePolicyXYZThreeTimes",
-        "swapPolicyXYTwice",
-        "existingS3InverseLaw",
-        "PolicyEvidenceInteractionThreeCell",
-        "policyThreeCellFabricRoundTrip",
-        "policyThreeCubeInheritedCarrierCount",
+        "policyRawTwoAxisCost",
+        "policyEqualWeightCost",
+        "equalWeightCostCollapsesIncomparablePolicies",
+        "equalCostTotalDoesNotRecoverAdministrativeCost",
+        "rechartingTotalCostCannotRecoverAdministrativeAxis",
+        "equalCostTotalCannotReflectParetoOrder",
+        "policyWeightedTwoAxisCost",
+        "careHeavyWeightsPreferCareByScalar",
+        "administrationHeavyWeightsPreferCheapAdministrationByScalar",
+        "toeEqualScalarCannotRecoverPolicyAdminAxis",
+        "toeScalarTotalCannotReflectActualParetoDominance",
+        "toeRechartOfScalarCannotRecoverAdminAxis",
+    ):
+        assert symbol in bridge, f"missing Pareto-semantic information-loss proof: {symbol}"
+    # Decorative 3/6/9, 27, Q8, 243/125 evidence-gate adapters were
+    # deliberately removed. They have no cost covariance, empirical
+    # identity or actual tax effect. The mathematical owners remain intact.
+    for forced in (
         "FiveEvidenceGateAnnotations",
         "ThreeFiveModeAnnotations",
-        "fiveGateAnnotationsHave243Combinations",
-        "threeFiveModesHave125Combinations",
-        "differentFiveGateAndThreeModeCounts",
-        "numerologicalPatternDoesNotPayEconomicProof",
-        "matchingDigitsDoNotProveTaxEffects",
-        "quaternionLiftDoesNotAuthenticateSettlement",
-        "swapPolicyYZTwice",
-        "policyCubeAdjacentSwapBraid",
-        "policyCubeLabelSwapNotAnEconomicIntervention",
         "existingQ8CentralSignIsProjectedAway",
-        "existingQ8MinusSignHasOrderTwo",
-    ):
-        assert symbol in bridge, f"missing funding/ASX TOE boundary: {symbol}"
-    for symbol in (
-        "toePolicyXYDoesNotDetermineCausalZ",
-        "toeFinanceXYRechartCannotProduceZ",
-        "toeFiveEvidenceGatesHave243AnnotationCombinations",
-        "toeThreeFiveModesHave125AnnotationCombinations",
-        "toeNumericPatternIsNotEconomicAuthority",
+        "policyCubeAdjacentSwapBraid",
         "toeQuaternionSpinIsNotSettlementEvidence",
     ):
-        assert symbol in bridge, f"missing numerology/trialectic TOE proof: {symbol}"
-    for original_owner in (
-        "DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact",
-        "DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact",
-        "DASHI.Foundations.TernaryPermutationS3LawsExact",
-        "DASHI.Biology.NonaryCompletionPhaseQuotientExact",
-        "DASHI.Wikimedia.Base369NumberTheoryNumerologyWrongTypeSnowballExact",
-    ):
-        assert original_owner in dashi_tax_bridge, (
-            "numerology cross-pollination must import existing owner: "
-            + original_owner
+        assert forced not in dashi_tax_bridge, (
+            "unqualified numerology/symmetry weld reinstated: " + forced
         )
-    assert "import DASHI.Algebra.FiniteQuaternionDoubleCover as Q8" in dashi_tax_bridge, (
-        "Q8 central-sign loss must reuse actual finite quotient owner"
-    )
-    assert "test_369_trialectic_numeric_role_maxcut" in script, (
-        "27-cube/3^5/5^3 model oracle missing"
-    )
     assert "import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as ExternalIdentity" in bridge, "original Snowball identity owner must remain imported"
     assert "open DashiTradeTax public using" in bridge, (
         "follow-on sources not reachable from original TOE consumer"
