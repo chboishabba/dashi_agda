@@ -35,6 +35,10 @@ import DASHI.Codec.VerifiedFiniteTritCoder as TwoBits
 import DASHI.Codec.BalancedTritBitFibre as SignFibre
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact as BinaryInTernary
 import DASHI.ComputerScience.BalancedTernaryQutritBasisBridgeExact as QutritBasis
+import DASHI.ComputerScience.BinaryThreeBitTrit27FibreLiftExact as Codec27
+import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact as BlockBits
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit27
+import DASHI.Foundations.Base369AddressSymmetryAndBranchGeometryExact as Branch27
 import DASHI.Algebra.Quantum.FiniteQutrit as Qutrit
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Core
 import DASHI.Core.IntersectionalNonFactorability as NF
@@ -308,6 +312,52 @@ nsGramIsNotPromotedByThreeModeAliasing =
 nsLESProxyDoesNotSolveNS :
   LESOp.DASHILESClaimBoundary.navierStokesSolved LES.canonicalDASHILESClaimBoundary ≡ false
 nsLESProxyDoesNotSolveNS = refl
+
+------------------------------------------------------------------------
+-- EXACT 3D MODE CUBE C3^3 (27 labels) versus physical NS Z^3.
+-- Reuse the actual three-bit -> two-trit -> framed 27-cell codec.
+-- A binary payload has 8 states, with a fixed zero framing trit; the full
+-- 27-state signed Fourier cube includes many labels outside that image.
+-- None of this constructs Fourier coefficients or a physical Z^3 lattice.
+------------------------------------------------------------------------
+
+threeAxisBalancedModeCube :
+  ThreeMode → ThreeMode → ThreeMode → Orbit27.TritTriple
+threeAxisBalancedModeCube x y z =
+  Branch27.triple
+    (modeToBalancedSSP x)
+    (modeToBalancedSSP y)
+    (modeToBalancedSSP z)
+
+threeAxisPlusX : Orbit27.TritTriple
+threeAxisPlusX =
+  threeAxisBalancedModeCube modePlus modeZero modeZero
+
+threeAxisPeriodicallyAliasedPlusXSquare : Orbit27.TritTriple
+threeAxisPeriodicallyAliasedPlusXSquare =
+  threeAxisBalancedModeCube
+    (periodicQuadraticModeSum modePlus modePlus)
+    modeZero modeZero
+
+periodicThreeAxisPositiveXSquareWrapsToNegativeX :
+  threeAxisPeriodicallyAliasedPlusXSquare
+    ≡ threeAxisBalancedModeCube modeMinus modeZero modeZero
+periodicThreeAxisPositiveXSquareWrapsToNegativeX = refl
+
+inheritedThreeBitToFramed27RoundTrip :
+  (bits : BlockBits.Bit3) →
+  Codec27.decodeBit3From27Payload (Codec27.encodeBit3To27 bits)
+    ≡ bits
+inheritedThreeBitToFramed27RoundTrip =
+  Codec27.bit3LiftRoundTrip
+
+inheritedThreeBitComplementMatches27Antipode :
+  (bits : BlockBits.Bit3) →
+  Codec27.encodeBit3To27 (BlockBits.complementBit3 bits)
+  ≡
+  Codec27.antipodeTriple (Codec27.encodeBit3To27 bits)
+inheritedThreeBitComplementMatches27Antipode =
+  Codec27.bitComplementBecomes27Antipode
 
 -- In the Ma 2026 optical lattice Fourier supercell, ±11 and ±18 are
 -- absent from a three-mode {-1,0,+1} window. This is a DIFFERENT cause
