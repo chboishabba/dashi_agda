@@ -38,6 +38,7 @@ import DASHI.Physics.Closure.WolfPrize2026UltracoldControlBridge as Wolf
 import DASHI.Physics.Closure.BothwellYe2022MillimetreRedshiftReceipt as Ye
 import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
 import DASHI.Physics.Closure.R2P2369WaveOpticalCombInformationCutExact as WaveCut
+import DASHI.Foundations.Base369BinaryTernaryRefinement as Phase369
 
 -- Three sites constitute a tiny finite test graph, NOT a physical 3/6/9 law.
 data ThreeSiteVector : Set where
@@ -90,6 +91,58 @@ finiteLatticeOperatorsFailToCommute :
   ≡ siteDependentPotential (nearestNeighbourAdjacency leftBasisState)
   → ⊥
 finiteLatticeOperatorsFailToCommute ()
+
+------------------------------------------------------------------------
+-- Original Ma et al. (2026) supplement S4: approximate rational supercells.
+-- Ratios are N_497:N_813 = 18:11, 85:52, 139:85, 175:107, 265:162.
+-- These period numbers come from Ma et al., NOT from DASHI C18.
+-- 497/813 are only nominal wavelength labels in nanometres.
+-- The following exact cross products do NOT calibrate measured wavelengths.
+------------------------------------------------------------------------
+
+nominal497Nm : Nat
+nominal497Nm = 497
+
+nominal813Nm : Nat
+nominal813Nm = 813
+
+maFirst497Periods : Nat
+maFirst497Periods = 18
+
+maFirst813Periods : Nat
+maFirst813Periods = 11
+
+maFirstNominalSupercellOffset :
+  maFirst813Periods * nominal813Nm + 3
+  ≡ maFirst497Periods * nominal497Nm
+maFirstNominalSupercellOffset = refl
+
+maSecondNominalSupercellOffset :
+  85 * nominal497Nm + 31 ≡ 52 * nominal813Nm
+maSecondNominalSupercellOffset = refl
+
+maThirdNominalSupercellOffset :
+  139 * nominal497Nm + 22 ≡ 85 * nominal813Nm
+maThirdNominalSupercellOffset = refl
+
+maFourthNominalSupercellOffset :
+  175 * nominal497Nm + 16 ≡ 107 * nominal813Nm
+maFourthNominalSupercellOffset = refl
+
+maFifthNominalSupercellOffset :
+  265 * nominal497Nm + 1 ≡ 162 * nominal813Nm
+maFifthNominalSupercellOffset = refl
+
+-- C18 is an inherited mathematical 2*3^2 phase-resolution count.
+-- The physical supercell uses eighteen 497-nm wavelength periods.
+-- Equal counts are not a physical clock-lattice/phase representation.
+base369C18HasEighteenSectors :
+  Phase369.sectorCount Phase369.phase18Resolution ≡ 18
+base369C18HasEighteenSectors = Phase369.phase18-sector-count
+
+maPhysicalEighteenAndC18EqualAsNumbersOnly :
+  maFirst497Periods ≡ Phase369.sectorCount Phase369.phase18Resolution
+maPhysicalEighteenAndC18EqualAsNumbersOnly = refl
 
 -- The 87Sr atomic identity is taken from the EXISTING periodic-table owner.
 -- Proton number 38 and mass number 87 imply neutron number 49.
@@ -146,6 +199,9 @@ record OpticalLattice369PhysicalAuthority : Set where
     maMagicLatticeTransferToR2P2Verified : Bool
     maMagicLatticeTransferToR2P2VerifiedIsFalse :
       maMagicLatticeTransferToR2P2Verified ≡ false
+    paperSupercell18EqualsPhysicalC18Realization : Bool
+    paperSupercell18EqualsPhysicalC18RealizationIsFalse :
+      paperSupercell18EqualsPhysicalC18Realization ≡ false
     finiteP3ProvesInfiniteAAThreshold : Bool
     finiteP3ProvesInfiniteAAThresholdIsFalse :
       finiteP3ProvesInfiniteAAThreshold ≡ false
@@ -184,6 +240,8 @@ canonicalOpticalLattice369PhysicalAuthority = record
       finiteLatticeOperatorsFailToCommute
   ; maMagicLatticeTransferToR2P2Verified = false
   ; maMagicLatticeTransferToR2P2VerifiedIsFalse = refl
+  ; paperSupercell18EqualsPhysicalC18Realization = false
+  ; paperSupercell18EqualsPhysicalC18RealizationIsFalse = refl
   ; finiteP3ProvesInfiniteAAThreshold = false
   ; finiteP3ProvesInfiniteAAThresholdIsFalse = refl
   ; opticalLatticeControlsMetricRedshift = false
@@ -223,4 +281,11 @@ latticeDoesNotObserveQuantumGravity :
     canonicalOpticalLattice369PhysicalAuthority ≡ false
 latticeDoesNotObserveQuantumGravity =
   measuredQuantumGravityObservedIsFalse
+    canonicalOpticalLattice369PhysicalAuthority
+
+maSupercell18IsNotAnIdentifiedC18PhysicsRealization :
+  paperSupercell18EqualsPhysicalC18Realization
+    canonicalOpticalLattice369PhysicalAuthority ≡ false
+maSupercell18IsNotAnIdentifiedC18PhysicsRealization =
+  paperSupercell18EqualsPhysicalC18RealizationIsFalse
     canonicalOpticalLattice369PhysicalAuthority
