@@ -1,3 +1,63 @@
+## 2026-10-28 original-purpose cut: spatial optical occupancy and control obligation
+
+**Reconnection to RU2122446C1:** the actual hypothesis is not "maximise
+solar power at a tiny central target". We must compare spatial residence
+and exposure in the occupied working region against a circle, curved
+sector, screen, and nonreflective enclosure, with source/material/volume
+conditions matched. All claims remain conditional numerical proxies
+until physical measurements.
+
+**Executed on original HTML collision histories** (44 rays, 9000 W,
+rho=0.95): use a fixed grid, step each path segment at <= one-third
+cell, add `power_W * segment_length_m / c` to visited cells within
+a disk whose radius equals 1.02 of the outer spiral radius. A path's
+power drops after each hit. Only `INTERIOR_ENTRY` trajectories
+contribute to this particular spatial receiver; rejected input
+remains in the source denominator. This is **not** human irradiance,
+3-D energy density, coherent resonance, or evidence of clinical effect.
+
+- Current torque winner, absorber OFF, 44/44 entered: total equivalent
+  in-disk ray energy **0.001528195870275 J**, input-normalised
+  residence **169.800 ns**, 80x80 grid max **5.549 microjoules/cell**.
+- Best focus scene, absorber ON, 44/44 entered: equivalent energy
+  **0.000743298572005 J**, residence **82.589 ns**, grid maximum
+  **7.581 microjoules/cell**.
+- Grid-size sensitivity of integrated residence (40,80,160 cells per
+  axis): torque **169.7957,169.7995,169.7965 ns**, focus
+  **82.5887,82.5887,82.5887 ns**.
+- These DIFFERENT absorber conditions cannot prove a causal spiral
+  advantage; next comparisons must pair absorber ON/OFF with the
+  same source and geometry. A high single-cell peak could be a
+  thin-beam sampling artefact.
+
+**GitHub source-written** `scripts/kozyrev_spatial_occupancy.py`,
+`scripts/tests/test_kozyrev_spatial_occupancy.py`. Separate
+more detailed local plotting code and actual computed 80x80 PNGs
+were executed; the exact committed GitHub regression tests have
+NOT been run independently. No CI or Agda-kernel success claimed.
+
+**Next max-cut gates:**
+(1) matched source+aperture geometry circle and sector controls,
+(2) absorber ON/OFF and occupant-shaped absorbing/scattering region,
+(3) controlled source spectrum, polarization and material
+reflectivity, (4) 2-D to 3-D physical irradiance conversion,
+(5) logged equivalent optical energy, wall force/torque and target
+absorption in each HTML Pareto scene, (6) independent ray/curve
+intersection and size/tolerance convergence, (7) conventional thermal,
+acoustic and rotation/sham channels for human claims. No WGM claims
+without a wave solver and resonant linewidth evidence.
+
+**Primary-source ownership:** historic Kozyrev patent claims belong
+to Kaznacheev/Trofimov; spiral-microcavity directional emission results
+belong to Hentschel/Kwon (Optics Letters 34, 163-165, 2009,
+doi:10.1364/OL.34.000163), Kim/Park/Yi/Kim (Optics Letters 36,
+4503-4505, 2011, doi:10.1364/OL.36.004503), and Ryu/Hentschel
+(Optics Letters 36,1116-1118, 2011, doi:10.1364/OL.36.001116).
+Those microcavity results do not establish field modes in our
+macroscopic SDF model. DASHI torque owners remain merged #1164;
+new ray occupancy code belongs #1404. #1407 optical/TOE and Ibrahim
+Monster 3B priority remain distinct. No ESD changes.
+
 ## 2026-10-28 optical confinement and energy-residence max-cut
 
 **Question:** Does the mirror function more like a multi-pass passive optical
