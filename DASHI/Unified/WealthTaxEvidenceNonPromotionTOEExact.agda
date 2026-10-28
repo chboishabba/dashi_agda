@@ -721,8 +721,7 @@ toeCanonicalSourcesFundExactlyOneJoinedRoute :
     (DashiTradeTax.fundingEntryTags
       (DashiTradeTax.fundingClaims
         (DashiTradeTax.canonicalSourceBatch weld)))
-  ≡ DashiTradeTax.Tax.taxPaidCash
-      (DashiTradeTax.taxExecution (DashiTradeTax.samePaymentRoute weld))
+  ≡ DashiTradeTax.taxPaymentForRoute (DashiTradeTax.samePaymentRoute weld)
       + DashiTradeTax.executionCashCost (DashiTradeTax.samePaymentRoute weld)
 toeCanonicalSourcesFundExactlyOneJoinedRoute =
   DashiTradeTax.canonicalFundingBatchExactlyFundsTaxPaymentAndFees
