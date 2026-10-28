@@ -289,10 +289,9 @@ redIsFixedEvenInBadCycle = refl
 -- proof-relevant for its ORIGINAL CellDialectic chart action.
 -- We do not substitute the above paint-cycle test for that theorem.
 canonicalTrialecticCocycleOwner :
-  ExistingCocycle.cycleAB2Cell
-    ExistingCocycle.Cell.canonicalCellAB
-  ≡ ExistingCocycle.canonicalABCycleCloses
-canonicalTrialecticCocycleOwner = refl
+  ExistingCocycle.TrialecticGrothendieckTransitionCocycleBoundary
+canonicalTrialecticCocycleOwner =
+  ExistingCocycle.canonicalTrialecticGrothendieckTransitionCocycleBoundary
 
 existingAttachedFaceOwner :
   ExistingTwoCell.TrialecticGrothendieckAttachedTwoCellBoundary
