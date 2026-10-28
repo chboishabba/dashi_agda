@@ -330,3 +330,47 @@ The existing script scripts/check_wealth_tax_maxcut.py now includes test_canonic
 
 This is independent finite arithmetic testing, not proof that the Agda compiler accepts the new owner or that any economic event occurred. Source identity, HIN/SRN title and original claim-to-canonical-token authority remain separate evidence requirements. Formal status stays 61 D / 11 R / 5 N. The executable shadow dashiTRADE PR is unchanged.
 
+## 2026-10-28 RBA back-out and joint-reform max-cut continuation
+
+The scoped ledger remains **61 D / 11 R / 5 N = 77**. The five N are A05, C09, E07, F07 and H08. New results below strengthen *conditional proof obligations* and their negative controls. None is promoted to authenticated history or an Agda kernel-certified theorem.
+
+### C09 + F07: settlement status, independent official finality and same-route payment
+
+- DvPBatchDisposition is a three-constructor distinction among dueForSettlement, backedOutAndRescheduled and completedIrrevocableDvP. dueDoesNotProveActualDvP and backedOutDoesNotProveActualDvP rule out the invalid status coercions.
+- SourceLinkedFinalSettlement combines the *existing* OfficialSettlementAdmission owner with an independent validation predicate, an explicit completed status, same-taxpayer holder and issuer/class keys, verified cash amount and settlement epoch. These predicates must come from an external authoritative producer. They are not satisfied by a local fill token or a manually assigned ASX label.
+- ExternallyAdmittedSaleTaxRoute combines the *existing* FinancedRouteAdmission owner with the original settlement admission, matching sale proceeds to the *same* funded route, and proving settlement time is no later than that route's tax-payment time.
+- validatedSaleProceedsCannotSkipSettlementAndTaxChronology merely projects those required premises. It does not construct a real CHESS confirmation, RITS banking statement, registry-holder allocation or tax payment.
+
+**Original institutional authority:** ASX, 'Settlement services and pricing', https://www.asx.com.au/about/regulation/clearing-and-settlement-of-cash-equities-in-australia/settlement/settlement-services-and-pricing, describing irrevocable DvP Model 3 net settlement, distinct from merely due obligations. Reserve Bank of Australia, *Assessment of ASX Clearing and Settlement Facilities 2017-18*, Securities Settlement Facility Standard 7, https://www.rba.gov.au/payments-and-infrastructure/financial-market-infrastructure/clearing-and-settlement-facilities/assessments/2017-2018/asx-securities-settlement-facilities/standard-07.html, describing back-out and rescheduling on securities shortfall. General operator documentation does NOT authenticate a particular brokerage event.
+
+### H08: mixed tax reform does not pay isolated treatment inference
+
+- CombinedReformIdentificationWorld supplies an illustrative joint-reform outcome and an independently varying wealth-tax-only potential outcome. Two counterworlds share the joint outcome but differ in the tax-only counterfactual.
+- jointReformReceiptCannotIdentifyIsolatedWealthTaxEffect reuses the *existing* DASHI.Core.IntersectionalNonFactorability theorem owner. It rules out recovering the tax-only outcome from the joint outcome alone.
+- The original published root is Marius A. K. Ring, *Taxing Entrepreneurial Wealth: Evidence from Norway, 2021–2025*, NBER Working Paper 35854 (October 2026), https://www.nber.org/papers/w35854. His empirical study explicitly covers joint changes to business-wealth, dividend and migration-related gains rules. The source does not claim that identifying one outcome alone identifies a separate wealth-tax-only potential outcome. The counterworlds are original finite examples, **not Ring's observations**.
+- The separate Jakobsen, Kleven, Kolsrud, Landais and Munoz, *American Economic Review* 116(10), October 2026, DOI 10.1257/aer.20241596 remains a different Scandinavian migration/aggregate estimand, not a result rebranded as Ring's.
+
+### A05: beneficial attribution is not gross valuation
+
+AssessedOwnerAllocationWorld and assetValueDoesNotIdentifyTaxpayerBeneficialShare construct equal-gross-asset, different-taxpayer-allocated-asset counterworlds. The original generic nonfactorability owner supplies the mathematical theorem. No beneficial ownership register, tax-year value or accepted debt deduction is inferred.
+
+### TOE and direct independent checks
+
+The original DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda consumer re-exports the source-owned status/receipt/counterworld terms and boundary lemmas. Its existing Snowball/Ibrahim attribution owners remain imported; no new FLN, Monster 3B or same-object action has been claimed.
+
+The scripts/check_wealth_tax_maxcut.py new bounded DvP oracle covers **18,816 combinations**, with **112** satisfying all modeled conditions. The independent local Python oracle executed all 18,816 cases successfully and checked the beneficial-attribution and joint-reform negative controls. The repository topic guard now checks the new terms. This is executed model checking, **not an Agda compiler or ASX settlement receipt**.
+
+### Residual evidence cut and no-free-promotion rule
+
+| Open ID | Unpaid external producer | What no existing theorem can manufacture |
+|---|---|---|
+| A05 | taxpayer-linked valuation, ownership, currency, exclusions and debt as of one legally relevant valuation date | lawful net-wealth assessment |
+| C09 | credible liquid cash/loan and repayment/fee conditions, final sale proceeds and pre-remittance timing | an actually executable funding path |
+| E07 | legal and beneficial registers, issuer/class and same-account holder identity | a genuinely verified issuer-holder-title chain |
+| F07 | primary CHESS/RITS/participant/custodian settlement and allocation evidence | final settlement of the precise trade |
+| H08 | linked panel, measured material/care outcomes, exposure decomposition and credible causal design | identified tax-policy effects |
+
+**Pareto / max-cut disposition:** the mathematical finite-frontier theorem is already source-written under I07. The remaining cut is evidence-bearing. Repeated source-written projections of unchecked predicates cannot reduce these external requirements. Treat any source revision, P854 candidate, QID or content hash as an identity *candidate* until its relevant producer is validated. Preserve upstream institutional and empirical author credits and distinct original repository proof ownership.
+
+**Verification ceiling:** no observed Agda typecheck, no independent primary-record producer for the five open lanes, no protected ESD edits and no change to live dashiTRADE. The exact-head structural audit and original 42-topic inventory must still be inspected after the final commit.
+
