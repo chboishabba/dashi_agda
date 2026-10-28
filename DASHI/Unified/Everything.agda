@@ -37,6 +37,7 @@ open SignedTwinNoGo public using
   ( orientationFiveAndSevenEqual
   ; twinAtFiveIsTrue
   ; twinAtSevenIsFalse
+  ; collidingCodeCannotDecideAllTwins
   ; orientationAloneCannotDecideTwinPrimality
   )
 
