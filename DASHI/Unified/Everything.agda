@@ -13,6 +13,7 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Nat using (_+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Nat.Base using (ℕ)
@@ -518,7 +519,7 @@ unifiedR2P2FiniteLatticeNoncommuting :
     (R2P2Lattice.siteDependentPotential R2P2Lattice.leftBasisState)
   ≡ R2P2Lattice.siteDependentPotential
     (R2P2Lattice.nearestNeighbourAdjacency R2P2Lattice.leftBasisState)
-  → R2P2Lattice.⊥
+  → ⊥
 unifiedR2P2FiniteLatticeNoncommuting =
   R2P2Lattice.finiteLatticeOperatorsFailToCommute
 
