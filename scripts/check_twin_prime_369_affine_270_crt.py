@@ -20,16 +20,29 @@ def main():
     assert len(cube)==3*3*3==len(encoding)==len(decoding)==27
     arithmetic_survivors={n for n in range(270) if survives(n)}
     assert set(decoding)==arithmetic_survivors
+    # All 270 coverage cases match exactly: 27 accepted, 243 rejected.
+    rejected={n for n in range(270) if not survives(n)}
+    assert len(rejected)==243
+    assert all(any((n+offset)%q==0 for q in (2,3,5) for offset in (0,2)) for n in rejected)
     for cube_point,value in encoding.items():
         assert decoding[value]==cube_point and survives(value)
         assert value%2==1 and value%3==2 and value%5 in (1,2,4)
+        x,y,z=(digit(t) for t in cube_point)
+        assert value%27==(14+3*y+9*z)%27
+        assert value%5==(1+3*x)%5
         assert encoding[antipode(cube_point)]==(-value-2)%270
+    # A FULL typed-cube survivor with both endpoints actually composite.
+    assert encoding[(0,1,1)]==119
+    assert 119==7*17 and 121==11*11
+    assert survives(119)
     assert encoding[(0,0,0)]==269
     assert len({min(p,antipode(p)) for p in cube})==14
     assert len({(p[0],min(p[1:],antipode(p)[1:])) for p in cube})==15
     assert 27==1+13*2 and 9==1+4*2
     assert 3**5==243 and 5**3==125 and 3**9==19683
-    print('PASS: 27 exact survivors modulo 270 (p=2,3,5)')
+    print('PASS: 270 exhaustive proof-table cases, 27 survivors, 243 rejected')
+    print('PASS: exact 1 x 9 x 3 residue projections: mod 2, mod 27, mod 5')
+    print('PASS: code 119 => 119 = 7*17 and 121 = 11*11 (both composite)')
     print('PASS: explicit affine cube↔finite survivor lookup and 27 C2 swaps')
     print('PASS: one fixed 269 + 13 antipodal pairs; separate 3x5=15 quotient')
     print('Theorem level: finite Python only; Agda code is kernel pending')
