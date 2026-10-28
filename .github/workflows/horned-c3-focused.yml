@@ -1,0 +1,79 @@
+name: Horned C3 focused proofs
+on:
+  push:
+    branches:
+      - alexander-horned-c3-equivariant-20261024
+  pull_request:
+    paths:
+      - "DASHI/Mathematics/Topology/AlexanderHorned*.agda"
+      - "proofs/horned_c3_lean/**"
+      - "scripts/alexander_horned_c3_*.py"
+      - "scripts/check_alexander_horned_c3_exact_head.sh"
+      - ".github/workflows/horned-c3-focused.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact finite Python audits
+        run: |
+          python3 scripts/alexander_horned_c3_a5_probe.py
+          python3 scripts/alexander_horned_torsion_steelman_probe.py
+          python3 scripts/alexander_horned_padic_hypercomplex_audit.py
+          python3 scripts/alexander_horned_spin_icosahedral_bridge.py
+          python3 scripts/alexander_horned_spin_360_720_audit.py
+          python3 scripts/alexander_horned_c3_spin_split_cocycle_probe.py
+          python3 scripts/alexander_horned_c3_spin_dirac_probe.py
+          python3 scripts/alexander_horned_c3_spin_fixed_axis_padic_probe.py
+          python3 scripts/alexander_horned_c3_maschke_field_comparison.py
+          python3 scripts/alexander_horned_c3_full_actor_maschke_f7.py
+          python3 scripts/alexander_horned_c3_maschke_prime_comparison.py
+          python3 scripts/alexander_horned_c3_spin_cyclotomic_intertwiner_audit.py
+          python3 scripts/alexander_horned_c3_f7_full_actor_reynolds.py
+          python3 scripts/alexander_horned_c3_spin_voa_module_probe.py
+          python3 scripts/alexander_horned_mixedprime_congruence_audit.py
+          python3 scripts/alexander_horned_ore_residual_alternating_probe.py
+          python3 scripts/alexander_horned_a5_c3_restriction_weld.py
+          python3 scripts/alexander_horned_c3_voa_a5_action_probe.py
+          python3 scripts/alexander_horned_c3_free_factor_probe.py
+          python3 scripts/alexander_horned_c3_collars_audit.py
+          python3 scripts/check_alexander_horned_abelian_bidi.py
+          python3 scripts/alexander_horned_c3_pickover_scalar_phase_boundary.py
+          python3 scripts/alexander_horned_c3_radius_overlap_witness.py
+          python3 scripts/alexander_horned_c3_open_exhaustion_severe_controls.py
+          python3 scripts/alexander_horned_c3_relative_exterior_absorption.py
+
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda with standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: "2.7.0.1"
+          agda-stdlib-version: "recommended"
+      - name: Report exact commit and focused kernel diagnostics
+        run: bash scripts/check_alexander_horned_c3_exact_head.sh
+
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Build pinned Hatcher/Mathlib kernel bridge
+        working-directory: proofs/horned_c3_lean
+        run: |
+          lake update
+          lake exe cache get
+          lake build
