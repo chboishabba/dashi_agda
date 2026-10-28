@@ -37,6 +37,7 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Core
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as Indexed
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Physics.ShiftWaveRefinementSeam as Seam
+import DASHI.Physics.Base369PhaseBridge as Phase369
 import DASHI.Physics.WaveAlgorithmLift as Algorithm
 import DASHI.Physics.Closure.Base369PolyphaseKernelBoundary as Phase
 import DASHI.Foundations.Base369PolyphaseCharacters as Characters
@@ -170,6 +171,33 @@ finiteWaveAlgorithmTritInvolution :
   Algorithm.tritInvolution (Algorithm.tritInvolution trit) ≡ trit
 finiteWaveAlgorithmTritInvolution =
   Algorithm.tritInvolution²
+
+-- Reuse the actual Base369 physics phase bridge rather than asserting
+-- that all 3/6/9 coarse projections are interchangeable. q6 and q9
+-- respect their declared one-step rotations. Nonary block projection
+-- has a *source-owned obstruction* at non-0. Hence choosing the wrong
+-- 369 phase quotient can break an expected covariance law even before
+-- applying real optical calibration.
+sixPhaseCoarseRotationLaw :
+  (h : Base369.HexTruth) →
+  Phase369.q6 (Base369.rotateHex h)
+    ≡ Base369.rotateTri (Phase369.q6 h)
+sixPhaseCoarseRotationLaw = Phase369.q6-rotate
+
+ninePhaseCoarseRotationLaw :
+  (n : Base369.NonaryTruth) →
+  Phase369.q9 (Base369.rotateNonary n)
+    ≡ Base369.rotateTri (Phase369.q9 n)
+ninePhaseCoarseRotationLaw = Phase369.q9-rotate
+
+nonaryBlockCoarsePhaseRotationObstruction :
+  Phase369.coarseNonaryBlock (Base369.rotateNonary Base369.non-0)
+    ≡
+  Base369.rotateTri (Phase369.coarseNonaryBlock Base369.non-0)
+    →
+  ⊥
+nonaryBlockCoarsePhaseRotationObstruction =
+  Phase369.coarseNonaryBlock-rotate-obstruction
 
 -- Wave algorithm's generic Hilbert/unitarity obligations were not solved
 -- by finite synthetic beat witnesses.
