@@ -145,7 +145,7 @@ def check() -> None:
             "new finite transport owner must not add postulates")
     for name, expected in (
         ("applySource", 8),
-        ("toyMicrophoneReadout", 4),
+        ("toyMicrophoneReadout", 8),
         ("sourceActivity", 4),
         ("readAnswer", 8),
     ):
@@ -154,6 +154,10 @@ def check() -> None:
                 f"transport {name} must enumerate {expected} unique cases")
     for theorem in (
         "toyTransportSystem",
+        "sourceMonitorProjection",
+        "jointReceiverAndSourceMonitor",
+        "sourceMonitorAdequateForEmitterQuestion",
+        "sourceMonitorSeparatesSilentSourceCollision",
         "receiverProjectionAdequateForReceiverQuestion",
         "sourceActivityCollision",
         "sameReceiverReadoutCannotRecoverEmitterActivity",
