@@ -41,6 +41,7 @@ import DASHI.Cognition.PNF.ContinuousOscillatorSyntheticReceipt as Osc
 import DASHI.Culture.CohnTechnostrategicDiscourseExact as Cohn
 import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact as Philosophy
 import DASHI.Culture.GoodmanSonicWarfareRhythmInterventionExact as RhythmCausality
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Wikimedia.IbrahimSnowballSkepticismExpertiseTrustPropagandaBidiExact as IbrahimTrust
 
@@ -69,6 +70,27 @@ sourceCitationDoesNotPromote :
     (Attr.attributedSourceAtlasReceipt goodmanSources validation) ≡ false
 sourceCitationDoesNotPromote validation =
   Attr.attributedSourceAtlasReceiptNonPromoting goodmanSources validation
+
+------------------------------------------------------------------------
+-- PARETO / SNOWBALL SOURCE ROLE: THIS GOODMAN INSTANCE IS REUSED, NOT
+-- REDEFINED. The source kind and its proof-nonimport flag survive
+-- provenance traversal. A citation does not turn an example into evidence.
+------------------------------------------------------------------------
+
+goodmanSnowballRole : Snowball.SourceRoleSnowballReceipt goodmanSource
+goodmanSnowballRole = Snowball.canonicalSourceRoleSnowballReceipt goodmanSource
+
+goodmanSourceKindRetained :
+  Snowball.sourceKindRetained goodmanSnowballRole ≡ true
+goodmanSourceKindRetained = refl
+
+goodmanCitationDoesNotImportProof :
+  Snowball.proofNonImportRetained goodmanSnowballRole ≡ true
+goodmanCitationDoesNotImportProof = refl
+
+goodmanCitationDoesNotCreateAuthority :
+  Snowball.authorityNonCreationRetained goodmanSnowballRole ≡ true
+goodmanCitationDoesNotCreateAuthority = refl
 
 ------------------------------------------------------------------------
 -- Claim families and provenance; labels are NOT observations or causes.
