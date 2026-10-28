@@ -6,6 +6,7 @@ on:
       - "DASHI/Philosophy/**"
       - "DASHI/Economics/Wealth*20261027Exact.agda"
       - "DASHI/Economics/Everything.agda"
+      - "DASHI/Economics/WealthTaxDashiTradeMarketMaterialBidiExact.agda"
       - "DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda"
       - "DASHI/Everything.agda"
       - "Docs/economics/WealthInheritanceVacancyTaxMaxCut20261027.md"
@@ -47,12 +48,14 @@ jobs:
           dashi-agda-preflight --root . DASHI/Economics/WealthInheritanceVacancyTaxMaxCut20261027Exact.agda
           dashi-agda-preflight --root . DASHI/Economics/WealthTaxPowerCareSociologyBidi20261027Exact.agda
           dashi-agda-preflight --root . DASHI/Economics/WealthTaxFiscalTransmissionControlBidi20261027Exact.agda
+          dashi-agda-preflight --root . DASHI/Economics/WealthTaxDashiTradeMarketMaterialBidiExact.agda
           dashi-agda-preflight --root . DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda
       - name: Typecheck fiscal transmission tax max-cut
         run: |
           agda $AGDA_FLAGS DASHI/Economics/WealthInheritanceVacancyTaxMaxCut20261027Exact.agda
           agda $AGDA_FLAGS DASHI/Economics/WealthTaxPowerCareSociologyBidi20261027Exact.agda
           agda $AGDA_FLAGS DASHI/Economics/WealthTaxFiscalTransmissionControlBidi20261027Exact.agda
+          agda $AGDA_FLAGS DASHI/Economics/WealthTaxDashiTradeMarketMaterialBidiExact.agda
           agda $AGDA_FLAGS DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda
       - name: Typecheck original philosophy regression
         run: agda $AGDA_FLAGS DASHI/Philosophy/PhilosophyRegression.agda
