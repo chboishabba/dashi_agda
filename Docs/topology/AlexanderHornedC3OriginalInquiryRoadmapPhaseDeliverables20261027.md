@@ -1666,3 +1666,8 @@ pants seam work is a separate
 four-boundary interface, and
 Ibrahim Monster 3B retains its
 independent representation ownership.
+
+
+## 2026-10-28 actual five-orbit wave-operator named-word receiver
+
+With the source-backed global-S3 word orbit ↔ simultaneous-C2 sign orbit chart in `AlexanderHornedS3WordSignOrbitTransportExact`, the original #1244 `AlexanderHornedFiveOrbitWaveOperatorExact` five-slot heterogeneous operators can now be evaluated on ANY named three-label word without inventing an operator carrier. New `AlexanderHornedFiveOrbitNamedWordWaveTransportExact` proves the explicit five-class map AAA→origin, AAB→axisSecond, ABA→axisFirst, ABB→diagonal, ABC→antiDiagonal, and operator-evolution compatibility and invariance under all six global value S3 transformations. Independent local exact integer audit covered **243 five-field assignments × 27 named three-label words × 6 S3 actions = 39,366** valid heterogeneous operator evaluations. Source terms were committed and imported by canonical TOE receiver but not Agda-kernel typechecked; the exact committed GitHub checkout regression did not run. The original finite wave source `ShiftDiscreteWaveStep` and #1405 sound-wave transport authors retain ownership. This is a genuine orbit-INDEXING transport only; it does not claim Zipf measures, time-series Heaps behaviour, an ambient Alexander wild embedding, physical acoustics, #1407 complex Fourier convolution, #1414 spin or Ibrahim/Monster same-object identity.
