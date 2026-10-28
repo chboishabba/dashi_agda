@@ -373,3 +373,23 @@ pants seam, cocycle and independent triadic face are unchanged
 and still necessary. This narrows a genuine graph-colouring gap
 without claiming an arbitrary-colour hyperfabric global section.
 Agda/Cargo remain unrun here.
+
+## 28 October: #1414 finite S3 rechart versus real Woogaroo evidence
+
+The full update is
+[`Docs/Woogaroo1414S3ChartTransportAndOriginalSourceMaxCut20261028.md`](Woogaroo1414S3ChartTransportAndOriginalSourceMaxCut20261028.md).
+Unmerged #1414's finite S3/C3 label action is an *inspiration*, not
+an imported mathematical source or ministerial/legal inference.
+A recharted XYZ presentation retains the original seven-ground source
+state and all 80 still-unpaid SLR obligations. Every explicit
+`-1/0/+1` **role** label remains separate from signed
+`±P` legal evidence. Only identity and endpoint reflection
+preserve strict nearest-neighbour adjacency; the other four S3
+permutations cannot be used automatically to glue physical/logical
+grid neighbours. Original A/B/C chart owner and the
+`T^18` attached higher face remain independent.
+Current unsigned 15 October portal listing is NOT the complete
+binding decision notice. The operative prior s135A draft, EDO
+counsel intake and conditional National EPA EPO draft remain
+**unsent**; the new SLR JSON source-maxcut is an acquisition
+worklist, not a legal action. SensibLaw remains prototype.
