@@ -788,3 +788,194 @@ ternary as a full observer, an optional distinct
 three-child abstract group, and a falsifiable
 finite-target/cost comparator. The P0 source
 wild-satellite collar has not been bypassed.
+
+
+### L. CORRECTED PRIMARY USER INTENT — native ternary infinite ends and tetration
+
+**Correction to the previous balanced-ternary interpretation.**
+The user's intended change is NOT limited to adding a trit
+label to each original binary Hatcher node. It is to allow
+the **entire intrinsic infinite end address** to take
+three native values at every depth:
+
+```text
+K2 = C3_sector × {left,right}^N
+K3 = C3_sector × {-1,0,+1}^N .
+K2[n] = C3 × Bit^n,       |K2[n]| = 3·2^n
+K3[n] = C3 × Trit^n,      |K3[n]| = 3·3^n = 3^(n+1)
+p[n] : K3[n+1] → K3[n],  erase the last chronological trit.
+K3 = lim_{←n} (K3[n],p[n]).
+```
+
+This is a REAL full-ternary inverse-limit end-address space,
+not a lossy observer. The earlier module
+`AlexanderHornedBalancedTernaryRiemannSquareExact`
+still provides a valid but DIFFERENT observer/retraction
+and must no longer be described as exhausting the user's
+ternary proposal.
+
+NEW `AlexanderHornedNativeBalancedTernaryEndTowerExact.agda`
+reuses `DASHI.Cognition.RecursiveFibreTower.FibreTower`
+and `InverseLimitPoint`: chronologically ordered
+`Vec Trit n`, explicit drop-last projections, snoc
+section identity, coherent all-zero end in each sector,
+external sector C3 commutation with every projection
+and order-three rotation. It also explicitly constructs
+the **independent INTERNAL order-three trit cycle**
+`-→0→+→-` and trit sign involution
+`-↔+, 0 fixed`, with
+`reflection·internalC3·reflection = internalC3^{-1}`.
+The internal action is the FINITE S3/dihedral pattern
+studied by #1414, but is NOT the external geometric
+sector rotation or a proved polynomial braid action.
+The two C3 factors commute by acting on separate
+coordinates. All proof sources are source-written and
+unverified by Agda kernel this cut.
+
+**Actual abstract topology, with the strongest #1254 reuse:**
+the existing complete prefix-free variable-length code
+
+```text
+- → 0,   0 → 10,   + → 11
+```
+
+extends to a C3-sector-preserving homeomorphism
+`K3 ≅ K2` of COMPACT ZERO-DIMENSIONAL SPACES:
+every infinite binary sequence parses uniquely into
+infinitely many codewords because every codeword has
+length one or two, and decoding the first n trits
+requires at most 2n bits. Encoding n trits determines
+at least n binary bits. Both maps are continuous
+for prefix topologies. THIS DOES NOT preserve
+single-level prefix length, the natural ultrametric,
+uniform product measures, the binary-shift dynamics,
+the internal trit 3-cycle at fixed binary depths,
+the 2-adic vs 3-adic ADDITIVE GROUP LAW, or the
+wild embedding/complement fundamental group.
+The identity on intrinsic end spaces alone cannot
+replace Hatcher's two-child linked 3D stages by
+a three-child handlebody recursion.
+
+**Native ternary clopen balls:** each ternary word
+`w` selects an actual clopen cylinder `[c,w]`
+at depth n with natural uniform mass
+`1/(3·3^n)`. The native prefix-ultrametric
+scale is `3^(-n)`, against binary `2^(-n)`.
+Under fair binary input, the prefix code induces
+iid trit weights `(1/2,1/4,1/4)`;
+under uniform trits, its first binary bit has
+probability `P(0)=1/3`, NOT the fair-binary
+law. The symbolic observer-collapse from earlier
+work is a separate mapping with probabilities
+`(2/3,1/3)`. These two different maps cannot be
+mixed in a "measure-preserving" commuting square.
+
+**Spatial control, explicitly TAME**:
+`scripts/alexander_horned_native_ternary_end_tetration.py`
+constructs base-seven round nested Euclidean balls
+with three disjoint children and positive gaps,
+within the same small root chart around
+`(1/3,1/2,0)`; their limit points are
+three rotated/transplanted tame ternary Cantor
+sets. This is an actual mathematical embedding of
+K3, but NOT the sought wild point-set from a
+three-child linked-handlebody Alexander sphere.
+Independent local exact Fraction audit PASS:
+3280 prefixes through depth 7, 9840 sector-prefix
+balls, 8191 binary code-prefix tests; code
+parsing and genuine gap/nesting all pass.
+
+**Tetration receiver, using EXISTING source**:
+`DASHI.Cognition.RecursiveFibreTower`
+already proves the base-three function-space
+recurrence `h0=1, h(n+1)=3^h(n)`:
+`h1=3,h2=27,h3=3^27`.
+This is NOT the same as address refinement:
+the three-root depth-n NATIVE ternary prefix
+partition has `3^(n+1)` CELLS:
+`3,9,27,81,243,729,...`.
+At depth TWO there are exactly 27 cells,
+so the space of functions assigning ONE trit
+to EACH cell has `3^27=7,625,597,484,987`
+labelled configurations, matching `h3`.
+At depth THREE there are 81 cells, so ternary
+function-table configurations number `3^81`.
+One-sector depth-three gives 27 cells and
+the same `3^27` configuration count;
+these are DIFFERENT indexing bases.
+The exact count coincidence is typed as
+"27 sites × trit-valued functions", not as
+27 extra horn levels, a 27th-order physical
+rotation, a Monster representation, or RH.
+
+**Pareto P0**: If the intended geometric wild
+object must itself have three geometric
+children per horn, the alternative ternary
+commutator tower already source-written in this
+PR needs its OWN specific 3D linking/punctured
+surface/collar embedding and induced meridian map.
+The native trit end space plus its tame embedding
+cannot supply that same-object wild proof.
+The earlier binary Hatcher/3-sector orbifold
+`(G_A*G_A*G_A)⋊C3` is already established as
+the algebraic conditional target; it is NOT
+a newly discovered ternary orbifold.
+
+### M. PR #1414 theta, prefix !n and original Pickover target
+
+PR #1414's user-video/finite-monodromy owner explicitly
+distinguishes standard `n!` FACTORIAL,
+prefix `!n` SUBFACTORIAL (derangement count),
+and `θ` as an ANGLE in `exp(iθ)`.
+The video transcript available through its
+roadmap does not substantiate the exact quotation
+"theta is the factorial function". If a source
+defines a local map `θ(n)=n!`, that definition
+is valid *within that source* but does not
+replace standard Gamma notation
+`Γ(n+1)=n!` or general Jacobi theta functions
+(DLMF §§5.1–5.2, 20.2).
+
+A typed index `ThetaIndex` was added to
+`#1414 PolynomialPickoverFactorialGammaDegreeExact.agda`
+without copying that UNMERGED producer to this branch:
+```text
+thetaFactorial(n)   = 99^(n!)     radians
+thetaSubfactorial(n)= 99^(!n)    radians
+thetaFactorial(9999)=99^(9999!), original #1260 target
+```
+The two exact different exponents are both
+astronomical; they are not tetration or
+factorials of the number `99^9999`.
+The #1414 Python source was repaired where it
+printed an UNDEFINED `sub_residues` name.
+Independent exact arithmetic:
+```text
+bitlen(9999!) = 118445
+bitlen(!9999) = 118444
+99^(9999!) mod 9999 = 4950
+99^(!9999) mod 9999 = 3861
+both mod 360 = 81
+```
+Thus degree-angle coarse periodicity does not
+separate the expressions; radians require
+a certified `π` period/remainder enclosure
+or actual sine-sign computation. Neither the
+factorial, subfactorial, nor tetration recurrence
+decides `sign(sin(99^(9999!)))`.
+This remains independently owned by PR #1260
+and its original number-theory primary sources.
+
+**Original credit:** Alexander 1924; Hatcher
+AT Ex.2B.2 for BINARY horned geometry;
+Euler/Legendre for Gamma; traditional derangement
+subfactorial counting (Montmort/Whitworth history);
+classical complete prefix/Kraft coding and
+Cantor-space topology; prior DASHI
+RecursiveFibreTower, BalancedTernary,
+#1254 variable-length codec, #1414
+S3/C3/quaternion and subfactorial ownership,
+#1260 Pickover/Machin/CRT analytics.
+No Ibrahim Monster 3B or VOA same-object
+theorem is inferred from any shared C3, 27,
+theta, q-phase, or cubic-root notation.
