@@ -349,6 +349,11 @@ def check() -> None:
         "observationRetainsCanonicalXY",
         "existingTrialecticBasisHas27",
         "existingTetrationHeightTwoIs27",
+        "selectionRetainsXY",
+        "tritComparisonRoundTrip",
+        "comparisonTritRoundTrip",
+        "selectionMatchesCanonicalRule",
+        "noRuleRecoversEveryInteraction",
     ):
         require(symbol + " :" in sonic_cube, f"missing finite T11 theorem {symbol}")
     require("GoodmanSonicNumerologyObservationCubeExact" in transport,
