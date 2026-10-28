@@ -16,6 +16,8 @@ import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as Loop
 import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as Lattice
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeCut
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as FiniteConv
+import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as BilinearPareto
+import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourPareto
 import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as C3Fourier
 import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as FourierOwner
 import DASHI.Physics.Closure.R2P227729PairSixTritFibreBidiExact as SixTritPairs
@@ -798,3 +800,36 @@ fullArchitectureCyclic27DoesNotRecoverExactWideIntegerMode :
     → EmptyR2P2.⊥
 fullArchitectureCyclic27DoesNotRecoverExactWideIntegerMode =
   FiniteConv.noDecoderOfActualWideModeFromCyclic27
+
+------------------------------------------------------------------------
+-- Stronger operator-pair Pareto: arbitrary signed/cyclotomic amplitudes
+-- and two independent Fourier inputs, not only Nat self-convolutions.
+-- Four INDEX classes/axis recover retained, five recover full support.
+-- These are not actual sampled-field DFT4/DFT5/NS continuum theorems.
+------------------------------------------------------------------------
+
+fullArchitectureFourGridBilinearRetained :
+  (f g : ModePairs.ModeCube27 → FourierOwner.Cyclotomic3)
+  (target : ModePairs.ModeCube27) →
+  BilinearPareto.fourGridBilinearRetainedAt BilinearPareto.cyclotomicOps
+    f g target
+  ≡ BilinearPareto.trueBilinearConvolutionAt BilinearPareto.cyclotomicOps
+      f g (FiniteConv.retainedToWide target)
+fullArchitectureFourGridBilinearRetained =
+  BilinearPareto.cyclotomicFourGridRetainedBilinearExact
+
+fullArchitectureFiveGridBilinearFull :
+  (f g : ModePairs.ModeCube27 → FourierOwner.Cyclotomic3)
+  (target : FiniteConv.WideCube125) →
+  BilinearPareto.fiveGridBilinearFullAt BilinearPareto.cyclotomicOps
+    f g target
+  ≡ BilinearPareto.trueBilinearConvolutionAt BilinearPareto.cyclotomicOps
+      f g target
+fullArchitectureFiveGridBilinearFull =
+  BilinearPareto.cyclotomicFiveGridFullBilinearExact
+
+fullArchitectureFourOuterModeCollision :
+  FourPareto.foldFour ModeCut.wideMinusTwo
+    ≡ FourPareto.foldFour ModeCut.widePlusTwo
+fullArchitectureFourOuterModeCollision =
+  FourPareto.outerFrequencyCollisionAtFour
