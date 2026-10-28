@@ -35,6 +35,8 @@ open TwinConsumerPareto public using
   ; threeAxisCountIsThree
   ; threeAxisCapacityIsThreeTimesThreeTimesThree
   ; threeAxisCapacityIsTwentySeven
+  ; threeAxisCapacityIsCentrePlusThirteenAntipodalPairs
+  ; threeAxisAntipodalOrbitCountIsFourteen
   ; orderedPairAxisCountIsSix
   ; orderedPairCapacityIsSevenHundredTwentyNine
   ; fiveAndThirtyFiveSameSixWheel
