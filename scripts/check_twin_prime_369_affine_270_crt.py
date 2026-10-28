@@ -6,6 +6,13 @@ Reuse exact DASHI geometry and separately owned Ibrahim 3x5 quotient.
 Not Agda kernel, not Monster same-object, not twin-prime infinitude.
 """
 from itertools import product
+from math import isqrt
+
+def is_prime(n):
+    return n >= 2 and all(n % d for d in range(2, isqrt(n) + 1))
+
+def true_twin_start(n):
+    return is_prime(n) and is_prime(n + 2)
 
 TRITS=(-1,0,1)
 digit=lambda t:t+1
@@ -35,6 +42,14 @@ def main():
     assert encoding[(0,1,1)]==119
     assert 119==7*17 and 121==11*11
     assert survives(119)
+    # Genuine consumer collision INSIDE the sieve's full 27-state image.
+    first, second = encoding[(0,-1,1)], encoding[(0,1,-1)]
+    assert (first,second)==(59,209)
+    assert survives(first) and survives(second)
+    assert true_twin_start(first) and not true_twin_start(second)
+    assert second==11*19
+    # Original Ibrahim's 3x5 reduction retains x, identifies inner antipodes.
+    assert (0,1,-1)==(0,-(-1),-(1))
     assert encoding[(0,0,0)]==269
     assert len({min(p,antipode(p)) for p in cube})==14
     assert len({(p[0],min(p[1:],antipode(p)[1:])) for p in cube})==15
@@ -44,6 +59,7 @@ def main():
     print('PASS: exact 1 x 9 x 3 residue projections: mod 2, mod 27, mod 5')
     print('PASS: code 119 => 119 = 7*17 and 121 = 11*11 (both composite)')
     print('PASS: explicit affine cube↔finite survivor lookup and 27 C2 swaps')
+    print('PASS: 59/209 same inner-phase orbit within wheel; true twin vs composite')
     print('PASS: one fixed 269 + 13 antipodal pairs; separate 3x5=15 quotient')
     print('Theorem level: finite Python only; Agda code is kernel pending')
 
