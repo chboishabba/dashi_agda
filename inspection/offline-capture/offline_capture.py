@@ -119,8 +119,9 @@ def capture(source: Path, destination: Path, label: str) -> dict[str, object]:
     source_resolved = source.resolve(strict=True)
     destination_resolved = destination.resolve(strict=False)
 
-    source_container = source_resolved if source_resolved.is_dir() else source_resolved.parent
-    if _is_relative_to(destination_resolved, source_container):
+    if source_resolved.is_dir() and _is_relative_to(
+        destination_resolved, source_resolved
+    ):
         raise CaptureError("destination must be outside the captured source tree")
 
     if destination.exists():
