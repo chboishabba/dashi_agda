@@ -1236,6 +1236,8 @@ fixed-point/orbit-counting theory and needs its own
 Agda all-depth group-indexed quotient proof if a
 kernel-level infinite invariant colimit is desired.
 
+**All-depth invariance refinement now source-written:** `AlexanderHornedNativeTernaryFibreActionExact.agda` now additionally defines `SectorSignInvariant` at every n and proves that pullback preserves both sector-rotation and simultaneous balanced-sign invariance. The sign/refinement square is proved using the original native vector drop-last/map commuting lemma. This supplies the all-depth closure previously described as P1. Pointwise source proofs are NOT Agda-kernel-verified, and the eventual-equality colimit and compactness universal property remain open.
+
 **Important noncommutation:** taking invariants before
 pullback along native ternary projections preserves
 sector and sign invariance, provided the refinement
