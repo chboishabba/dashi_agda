@@ -158,3 +158,71 @@ existingTetrationHeightTwoIs27 =
 -- tetration, but the two CARRIERS retain different constructors.
 -- A cardinality equality is not a universal transport, dynamics,
 -- canonically shared object, or higher-order face gluing receipt.
+
+------------------------------------------------------------------------
+-- T13: EXACT CONDITIONAL SELECTION IS A SECTION, NOT AN INVERSE
+-- A declared rule can select one Z for each XY. This is a section of
+-- observationXY, but does not reconstruct arbitrary hidden Z values.
+-- Source owner: TernaryComparisonSynthesisExact.TotalSynthesisRule.
+-- PR #1415 world-eigen collision reuses a generic no-factor theorem;
+-- this is our existing concrete 3-state witness, not another owner.
+------------------------------------------------------------------------
+
+comparisonToTrit : Base.TriTruth → Trit
+comparisonToTrit Base.tri-low = BT.neg
+comparisonToTrit Base.tri-mid = BT.zero
+comparisonToTrit Base.tri-high = BT.pos
+
+selectInteraction :
+  Compare.TotalSynthesisRule → Trit → Trit → ObservationCube
+selectInteraction rule x y =
+  voxel x y
+    (comparisonToTrit
+      (Compare.synthesize rule
+        (tritAsComparisonPosition x)
+        (tritAsComparisonPosition y)))
+
+selectionRetainsXY :
+  (rule : Compare.TotalSynthesisRule) →
+  (x y : Trit) →
+  observationXY (selectInteraction rule x y) ≡ (x , y)
+selectionRetainsXY rule x y = refl
+
+-- The rule-induced choice agrees exactly with its original canonical
+-- comparison/synthesis owner, provided the trit mapping roundtrips.
+tritComparisonRoundTrip :
+  (t : Trit) → comparisonToTrit (tritAsComparisonPosition t) ≡ t
+tritComparisonRoundTrip BT.neg = refl
+tritComparisonRoundTrip BT.zero = refl
+tritComparisonRoundTrip BT.pos = refl
+
+comparisonTritRoundTrip :
+  (t : Base.TriTruth) → tritAsComparisonPosition (comparisonToTrit t) ≡ t
+comparisonTritRoundTrip Base.tri-low = refl
+comparisonTritRoundTrip Base.tri-mid = refl
+comparisonTritRoundTrip Base.tri-high = refl
+
+selectionMatchesCanonicalRule :
+  (rule : Compare.TotalSynthesisRule) →
+  (x y : Trit) →
+  toExistingSynthesisCarrier (selectInteraction rule x y)
+  ≡ Compare.applySynthesisRule rule
+       (tritAsComparisonPosition x , tritAsComparisonPosition y)
+selectionMatchesCanonicalRule rule x y
+  rewrite comparisonTritRoundTrip
+    (Compare.synthesize rule
+      (tritAsComparisonPosition x)
+      (tritAsComparisonPosition y)) = refl
+
+-- Stronger no-promotion: selecting one representative does not give
+-- an inverse on the whole 27-cell carrier.
+noRuleRecoversEveryInteraction :
+  (rule : Compare.TotalSynthesisRule) →
+  ((c : ObservationCube) →
+    selectInteraction rule
+      (fst (observationXY c))
+      (snd (observationXY c)) ≡ c) → ⊥
+noRuleRecoversEveryInteraction rule exact =
+  noTotalRecoveryFromXY
+    (λ xy → selectInteraction rule (fst xy) (snd xy))
+    exact
