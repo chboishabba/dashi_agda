@@ -133,7 +133,7 @@ The ORIGINAL AlexanderHornedDepthTwoFiveOrbitFibreExact.agda had already quotien
 
   Map(FiveOrbit,C3_phase) × Map(C3_sector,FiveOrbit) -> Map(C3_sector,C3_phase).
 
-The source now constructs a chosen 3-orbit selector and a section: EVERY three-sector phase table has an origin in a five-orbit phase field. It also proves NO universal recovery of an original five-orbit field from its selected three-sector code, using two different fields with identical output. Two independent orbit-phase coordinates are unseen (a classical 9-element C3² kernel for the selected map). FiveOrbit is a 5-element SET, not automatically C5; thus 243 and 125 are NOT isomorphic groups or interchangeable carriers.
+The source now constructs a chosen 3-orbit selector and a section: EVERY three-sector phase table has an origin in a five-orbit phase field. It also proves NO universal recovery of an original five-orbit field from its selected three-sector code, using two different fields with identical output. Two independent orbit-phase coordinates are unseen. The SAME original module now supplies a complete TWO-SIDED kernel normal form: every neutral-readout five-orbit field is uniquely determined pointwise by its (diagonal, antiDiagonal) pair in C3×C3. All 9 possibilities are independently enumerated by the finite Python oracle. This strengthens the earlier collision-only result; the finite source remains Agda kernel-pending. FiveOrbit is a 5-element SET, not automatically C5; thus 243 and 125 are NOT isomorphic groups or interchangeable carriers.
 
 ### 6. Actual diagonal/global S3 versus local S3 and Heaps
 
