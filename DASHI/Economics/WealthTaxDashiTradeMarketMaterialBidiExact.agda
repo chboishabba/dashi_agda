@@ -2648,3 +2648,86 @@ duplicateFixtureFundingTokenIsRejected ((notSame , _) , _) =
 -- canonical economic-claim identity function, it neither identifies nor
 -- proves unique use of one historical unit of money or market entitlement.
 
+------------------------------------------------------------------------
+-- E07/F07: ASX OPERATOR OWNERSHIP AND SETTLEMENT SOURCE FIREWALL.
+--
+-- Original primary-operator roots, read 2026-10-28:
+--   ASX, Settlement services and pricing:
+--   https://www.asx.com.au/about/regulation/clearing-and-settlement-of-cash-equities-in-australia/settlement/settlement-services-and-pricing
+--   ASX, Company Defaults FAQ, My share holdings and finances:
+--   https://www.asx.com.au/investors/investment-tools-and-resources/faqs-company-defaults
+--
+-- CHESS and issuer-sponsored registers describe forms of legal title.
+-- A custodial/omnibus holding can instead give the client beneficial
+-- interest while a separate custodian holds legal title.
+-- A local equality of shareholder names cannot collapse those cases.
+------------------------------------------------------------------------
+
+data AustralianEquityHoldingMode : Set where
+  chessRegisteredLegalTitle : AustralianEquityHoldingMode
+  issuerSponsoredLegalTitle : AustralianEquityHoldingMode
+  custodialBeneficialInterest : AustralianEquityHoldingMode
+
+chessTitleIsNotCustodialBeneficialInterest :
+  chessRegisteredLegalTitle ≡ custodialBeneficialInterest → ⊥
+chessTitleIsNotCustodialBeneficialInterest ()
+
+issuerSponsoredTitleIsNotCustodialBeneficialInterest :
+  issuerSponsoredLegalTitle ≡ custodialBeneficialInterest → ⊥
+issuerSponsoredTitleIsNotCustodialBeneficialInterest ()
+
+chessHINIsNotIssuerSponsoredSRN :
+  chessRegisteredLegalTitle ≡ issuerSponsoredLegalTitle → ⊥
+chessHINIsNotIssuerSponsoredSRN ()
+
+record OfficialHolderRegistration
+    (RegistrationDocument : Set)
+    (OfficialValidation : RegistrationDocument → Set) : Set where
+  constructor official-holder-registration
+  field
+    holdingMode : AustralianEquityHoldingMode
+    registryDocument : RegistrationDocument
+    independentlyValidated : OfficialValidation registryDocument
+    registerAccountReference : String
+    securitiesClassReference : String
+    recordedLegalHolderReference : String
+    recordedBeneficiaryReference : String
+open OfficialHolderRegistration public
+
+-- The mode is an interpreted tag; independently validated source records
+-- and explicit links between the holder, beneficiary and the security
+-- remain necessary to claim real beneficial/registered ownership.
+holderModeCannotBecomeLegalTitleByNameMatch :
+  {RegistrationDocument : Set}
+  {OfficialValidation : RegistrationDocument → Set} →
+  (registration : OfficialHolderRegistration
+    RegistrationDocument OfficialValidation) →
+  holdingMode registration ≡ custodialBeneficialInterest →
+  holdingMode registration ≡ chessRegisteredLegalTitle → ⊥
+holderModeCannotBecomeLegalTitleByNameMatch registration beneficial chess =
+  chessTitleIsNotCustodialBeneficialInterest
+    (trans (sym chess) beneficial)
+
+data MarketRecordKind : Set where
+  orderSubmissionRecord : MarketRecordKind
+  exchangeExecutionRecord : MarketRecordKind
+  participantClearingObligation : MarketRecordKind
+  officialDvPSettlementReceipt : MarketRecordKind
+  validatedBeneficialCustodyAllocation : MarketRecordKind
+
+executionRecordIsNotOfficialFinality :
+  exchangeExecutionRecord ≡ officialDvPSettlementReceipt → ⊥
+executionRecordIsNotOfficialFinality ()
+
+clearingNetIsNotOfficialFinality :
+  participantClearingObligation ≡ officialDvPSettlementReceipt → ⊥
+clearingNetIsNotOfficialFinality ()
+
+officialSettlementIsNotBeneficiaryAllocation :
+  officialDvPSettlementReceipt ≡ validatedBeneficialCustodyAllocation → ⊥
+officialSettlementIsNotBeneficiaryAllocation ()
+
+-- Source-specific roles follow the ASX operator description. The
+-- institution's statement about its system does not authenticate a
+-- particular simulated DvP batch, HIN, SRN, nominee, tax or taxpayer.
+
