@@ -23,6 +23,13 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.FiniteTwinSieveNoPromotionExact as FiniteSieveNoPromotion
+open FiniteSieveNoPromotion public using
+  ( arbitrarilyLargeFiniteSieveFalsePositives
+  ; noFiniteSieveCanCertifyEveryTwin
+  ; noFiniteSieveCanCertifyAllLargeTwins
+  )
+
 import DASHI.Arithmetic.FiniteTwinSieveUniversalCompositeBaselineExact as CompositeBaseline
 open CompositeBaseline public using
   ( baselineMinusOne
