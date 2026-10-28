@@ -12,6 +12,8 @@ on:
       - 'scripts/tests/test_kozyrev_mirror_classical_null.py'
       - 'scripts/kozyrev_geometry_optimizer.py'
       - 'scripts/tests/test_kozyrev_geometry_optimizer.py'
+      - 'scripts/kozyrev_solar_bisolver.py'
+      - 'scripts/tests/test_kozyrev_solar_bisolver.py'
       - '.github/workflows/kozyrev-mirror-claim-testing.yml'
   pull_request:
     paths:
@@ -42,6 +44,10 @@ jobs:
         run: |
           python -m unittest discover -s scripts/tests -p 'test_kozyrev_geometry_optimizer.py' -v
           python scripts/kozyrev_geometry_optimizer.py --samples 720 > /tmp/kozyrev-synthetic-optimum.json
+      - name: Solar 10m2 power and first-bounce momentum fixture (not propulsion)
+        run: |
+          python -m unittest discover -s scripts/tests -p 'test_kozyrev_solar_bisolver.py' -v
+          python scripts/kozyrev_solar_bisolver.py
       - name: Preflight (not an Agda kernel proof)
         run: |
           python -m pip install -e tools/agda_preflight
