@@ -300,3 +300,107 @@ fullObserverSeparatesToyWorlds absorbingOn absorbingOn _ = refl
 -- Boundary: this conditional finite observer includes the idealised medium
 -- coordinate. It does not solve generic acoustic phase retrieval, assign an
 -- emitter from arbitrary real recordings, or measure a physical material.
+
+
+------------------------------------------------------------------------
+-- T5 / PARETO: THREE OBSERVERS ARE NOT A MINIMAL SUFFICIENT CUT.
+--
+-- The idealised source monitor plus the separately supplied medium label
+-- already distinguishes all four finite source/environment states. The
+-- selected downstream receiver adds NO further information about which of
+-- these four worlds is present once the two coordinates are known.
+--
+-- This is relative to the fixed set of three named instruments, not a
+-- universal sensor optimum, engineering cost minimum or calibration.
+------------------------------------------------------------------------
+
+sourceAndMedium : ToySoundField → ToyReceived × ToyMedium
+sourceAndMedium =
+  Observer.pairObserver sourceMonitorProjection toyMedium
+
+-- A single source monitor cannot determine the medium.
+sourceMonitorNotWorldSeparating :
+  Observer.Separating sourceMonitorProjection → ⊥
+sourceMonitorNotWorldSeparating separating
+  with separating transmittingOff absorbingOff refl
+... | ()
+
+-- A single medium observer cannot determine whether its source is on.
+mediumMonitorNotWorldSeparating :
+  Observer.Separating toyMedium → ⊥
+mediumMonitorNotWorldSeparating separating
+  with separating transmittingOff transmittingOn refl
+... | ()
+
+receiverAndMedium : ToySoundField → ToyReceived × ToyMedium
+receiverAndMedium =
+  Observer.pairObserver selectedMicrophoneProjection toyMedium
+
+-- Even knowing the medium, a fully absorbing receiver cannot distinguish
+-- an active from an inactive source in this fixture.
+receiverAndMediumNotWorldSeparating :
+  Observer.Separating receiverAndMedium → ⊥
+receiverAndMediumNotWorldSeparating separating
+  with separating absorbingOff absorbingOn refl
+... | ()
+
+sourceAndMediumSeparatesAllFourWorlds :
+  Observer.Separating sourceAndMedium
+sourceAndMediumSeparatesAllFourWorlds transmittingOff transmittingOff _ = refl
+sourceAndMediumSeparatesAllFourWorlds transmittingOff transmittingOn ()
+sourceAndMediumSeparatesAllFourWorlds transmittingOff absorbingOff ()
+sourceAndMediumSeparatesAllFourWorlds transmittingOff absorbingOn ()
+sourceAndMediumSeparatesAllFourWorlds transmittingOn transmittingOff ()
+sourceAndMediumSeparatesAllFourWorlds transmittingOn transmittingOn _ = refl
+sourceAndMediumSeparatesAllFourWorlds transmittingOn absorbingOff ()
+sourceAndMediumSeparatesAllFourWorlds transmittingOn absorbingOn ()
+sourceAndMediumSeparatesAllFourWorlds absorbingOff transmittingOff ()
+sourceAndMediumSeparatesAllFourWorlds absorbingOff transmittingOn ()
+sourceAndMediumSeparatesAllFourWorlds absorbingOff absorbingOff _ = refl
+sourceAndMediumSeparatesAllFourWorlds absorbingOff absorbingOn ()
+sourceAndMediumSeparatesAllFourWorlds absorbingOn transmittingOff ()
+sourceAndMediumSeparatesAllFourWorlds absorbingOn transmittingOn ()
+sourceAndMediumSeparatesAllFourWorlds absorbingOn absorbingOff ()
+sourceAndMediumSeparatesAllFourWorlds absorbingOn absorbingOn _ = refl
+
+-- Recover the omitted downstream receiver reading by a finite truth
+-- table once the source monitor and medium are known. This is a *toy*
+-- predictive law, not a physical inverse or general attenuation equation.
+recoverFullFromPareto :
+  ToyReceived × ToyMedium →
+  (ToyReceived × ToyReceived) × ToyMedium
+recoverFullFromPareto (receiverSilent , toyTransmitting) =
+  (receiverSilent , receiverSilent) , toyTransmitting
+recoverFullFromPareto (receiverSignal , toyTransmitting) =
+  (receiverSignal , receiverSignal) , toyTransmitting
+recoverFullFromPareto (receiverSilent , toyAbsorbing) =
+  (receiverSilent , receiverSilent) , toyAbsorbing
+recoverFullFromPareto (receiverSignal , toyAbsorbing) =
+  (receiverSilent , receiverSignal) , toyAbsorbing
+
+fullObservationFactorsThroughParetoPair :
+  (state : ToySoundField) →
+  fullToyObservation state ≡ recoverFullFromPareto (sourceAndMedium state)
+fullObservationFactorsThroughParetoPair transmittingOff = refl
+fullObservationFactorsThroughParetoPair transmittingOn = refl
+fullObservationFactorsThroughParetoPair absorbingOff = refl
+fullObservationFactorsThroughParetoPair absorbingOn = refl
+
+-- The reverse projection simply forgets the downstream receiver:
+-- both observation packages have exactly the same four-world fibres.
+forgetReceiverFromFull :
+  (ToyReceived × ToyReceived) × ToyMedium →
+  ToyReceived × ToyMedium
+forgetReceiverFromFull ((receiver , source) , medium) = source , medium
+
+paretoPairFactorsThroughFullObservation :
+  (state : ToySoundField) →
+  sourceAndMedium state ≡ forgetReceiverFromFull (fullToyObservation state)
+paretoPairFactorsThroughFullObservation transmittingOff = refl
+paretoPairFactorsThroughFullObservation transmittingOn = refl
+paretoPairFactorsThroughFullObservation absorbingOff = refl
+paretoPairFactorsThroughFullObservation absorbingOn = refl
+
+-- Only *relative* minimality was shown. The medium coordinate was assumed
+-- independently observable. No measured sensor, instrumentation budget,
+-- physical constitutive law or new causal force is supplied.
