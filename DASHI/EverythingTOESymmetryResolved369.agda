@@ -1,5 +1,13 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- Artin B3 full twist: trivial root S3 endpoint but C7 signed
+-- crossing exponent six, preserving both braid and cancellation relations.
+import DASHI.Foundations.PolynomialBraidFullTwistSevenWitnessExact as BraidTwist
+open BraidTwist public using
+  ( fullTwistHasIdentityS3Endpoint
+  ; fullTwistHasNonzeroSevenWinding
+  ; nontrivialFullTwistInSignedExponentReadout )
+
 -- PREFIX !n=derangements; POSTFIX n!=factorial. In S3 the only
 -- derangements are the two C3 cycles; S5 has !5=44 = 24 even +20 odd.
 import DASHI.Foundations.PolynomialSubfactorialDerangementS3S5Exact as Subfactorial
