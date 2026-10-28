@@ -23,6 +23,20 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.SignedSSPProofCarryingExponentExact as CertifiedExponent
+open CertifiedExponent public using
+  ( encodeExponent
+  ; decodeExponent
+  ; decodeEncodeExponent
+  ; encodeExponentInjective
+  ; plusMacroSourceMatchesCertifiedCode
+  ; plusTwoCode
+  ; plusTwoCodeDecodesCorrectly
+  ; minusMacroSourceMatchesCertifiedCode
+  ; minusTwoCode
+  ; minusTwoCodeDecodesCorrectly
+  )
+
 import DASHI.Arithmetic.SignedSSPRawCodeParityNoGoExact as RawCodeParity
 open RawCodeParity public using
   ( powerTwoOfThreeIsEight
