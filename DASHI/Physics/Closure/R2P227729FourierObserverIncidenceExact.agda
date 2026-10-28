@@ -56,30 +56,7 @@ modeCubeToVoxel (modeCube x y z) =
     (M.modeToBalancedSSP y)
     (M.modeToBalancedSSP z)
 
-voxelToModeCube : G.Ternary27Point → ModeCube27
-voxelToModeCube (G.ternary27Point SSP.sspNegOne y z) =
-  modeCube M.modeMinus (fromTrit y) (fromTrit z)
-  where
-    fromTrit : SSP.SSPTrit → M.ThreeMode
-    fromTrit SSP.sspNegOne = M.modeMinus
-    fromTrit SSP.sspZero = M.modeZero
-    fromTrit SSP.sspPosOne = M.modePlus
-voxelToModeCube (G.ternary27Point SSP.sspZero y z) =
-  modeCube M.modeZero (fromTrit y) (fromTrit z)
-  where
-    fromTrit : SSP.SSPTrit → M.ThreeMode
-    fromTrit SSP.sspNegOne = M.modeMinus
-    fromTrit SSP.sspZero = M.modeZero
-    fromTrit SSP.sspPosOne = M.modePlus
-voxelToModeCube (G.ternary27Point SSP.sspPosOne y z) =
-  modeCube M.modePlus (fromTrit y) (fromTrit z)
-  where
-    fromTrit : SSP.SSPTrit → M.ThreeMode
-    fromTrit SSP.sspNegOne = M.modeMinus
-    fromTrit SSP.sspZero = M.modeZero
-    fromTrit SSP.sspPosOne = M.modePlus
-
--- A separate *transparent*, reusable inverse is easier to audit.
+-- Transparent canonical inverse: one owner, no repeated local charts.
 sspToMode : SSP.SSPTrit → M.ThreeMode
 sspToMode SSP.sspNegOne = M.modeMinus
 sspToMode SSP.sspZero = M.modeZero
