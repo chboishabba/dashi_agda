@@ -151,6 +151,7 @@ def main() -> None:
     for toe_bound in (
         "toeRingFirmStudyIsNotFagerengPortfolioEstimand",
         "toeRingFirmStudyIsNotJakobsenMigrationAggregateEstimand",
+        "toeSyntheticTwoAxisPolicyFrontierIsNonempty",
     ):
         assert toe_bound in bridge, f"missing TOE estimand boundary: {toe_bound}"
     # These are direct aliases of EXISTING source and evidence owners.
@@ -272,6 +273,8 @@ def main() -> None:
         "finiteNonemptyRankMinimum",
         "finiteParetoFrontierNonemptyGivenStrictRank",
         "finiteParetoFrontierIsNonempty",
+        "policyTradeoffAxisCoverage",
+        "twoAxisPolicyFrontierIsNonempty",
         "finiteAxisSumStrict",
         "finiteAxesReverseOrStrict",
     ):
