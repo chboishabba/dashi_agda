@@ -107,7 +107,6 @@ def discovery_stochastic_majorization_certificate(
     return out
 
 
-
 def pair_second_type_cdf(a: int, b: int, pair_draws: int, sampler: Sampler) -> Fraction:
     """P(first two-type completion time <= m), conditional on m pair draws.
 
