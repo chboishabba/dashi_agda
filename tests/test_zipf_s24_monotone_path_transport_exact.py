@@ -99,3 +99,27 @@ def test_source_provenance_and_no_new_probability_carrier():
     assert "from zipf_heaps_bridge import _validated_counts, multiset_count_majorizes" in src
     assert "Strassen" in src and "Hardy-Littlewood-Polya" in src
     assert "Agda kernel" in src and "not a general theorem" in src.lower()
+
+
+def test_equal_every_coordinate_marginal_does_not_supply_a_path_coupling():
+    # Four *valid* discovery curves with binary 0/1 increments and V0=0:
+    # X: half of lower/lower and upper/upper.
+    # Y: half of lower/upper and upper/lower.
+    # Each coordinate V_t has the SAME law under X and Y, yet the joint
+    # path laws differ and only half the mass admits monotone transport.
+    lo_lo=(0,1,1,2,2)
+    hi_hi=(0,1,2,2,3)
+    lo_hi=(0,1,1,2,3)
+    hi_lo=(0,1,2,2,2)
+    x={lo_lo:F(1,2),hi_hi:F(1,2)}
+    y={lo_hi:F(1,2),hi_lo:F(1,2)}
+    for t in range(5):
+        assert {v:sum((p for curve,p in x.items() if curve[t]==v),F())
+                for v in (0,1,2,3)} == {
+                    v:sum((p for curve,p in y.items() if curve[t]==v),F())
+                    for v in (0,1,2,3)}
+    for law in (x,y):
+        assert all(all(v-u in (0,1) for u,v in zip(curve,curve[1:]))
+                   for curve in law)
+    mass,flow=_transport_maxflow(x,y)
+    assert mass==F(1,2) and sum(flow.values(),F())==F(1,2)
