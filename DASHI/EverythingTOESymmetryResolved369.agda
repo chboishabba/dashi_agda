@@ -1,5 +1,16 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- PREFIX !n=derangements; POSTFIX n!=factorial. In S3 the only
+-- derangements are the two C3 cycles; S5 has !5=44 = 24 even +20 odd.
+import DASHI.Foundations.PolynomialSubfactorialDerangementS3S5Exact as Subfactorial
+open Subfactorial public using
+  ( subfactorialThree ; subfactorialFive
+  ; prefixAndPostfixFiveAreDifferent
+  ; noFixedPointRotate ; noFixedPointRotate2
+  ; exactly44FiveLabelDerangements
+  ; evenFiveLabelDerangementsCount24
+  ; oddFiveLabelDerangementsCount20 )
+
 -- 9999! Gamma/angle distinction, degree-vs-radian Pickover,
 -- Hatcher/A5/2I perfect-group observer bridge and Q8 sign non-descent.
 import DASHI.Foundations.PolynomialPickoverFactorialGammaDegreeExact as FactorialPhase
