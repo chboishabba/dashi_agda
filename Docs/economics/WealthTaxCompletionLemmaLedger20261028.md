@@ -1,6 +1,6 @@
 # Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
 
-Created 2026-10-28. **77 named formal obligations** across nine groups: 41 already source-written (D), 9 owned by existing reusable sources (R), 27 new required proofs/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+Created 2026-10-28. **77 named formal obligations** across nine groups: 42 already source-written (D), 9 owned by existing reusable sources (R), 26 new required proofs/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
 
 Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
 
@@ -36,7 +36,7 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **C04 [D]** `saleVolumeCannotDetermineExecutionCost` — Equal quantities, different costs.
 - **C05 [D]** `saleVolumeCannotDeterminePhysicalCapacity` — Share volume does not identify machines.
 - **C06 [N]** `cashSourceUseIsSingleCounted` — Avoid counting same currency claim as cash, debt and sale.
-- **C07 [N]** `loanProceedsIncreaseLiabilities` — Borrowed proceeds create offsetting debt.
+- **C07 [D]** `loanProceedsIncreaseLiabilities` — Borrowed proceeds create offsetting debt.
 - **C08 [N]** `disposalPreservesExternalAssetTransferAccounting` — Seller/right transfer to buyer and fees cannot erase plant.
 - **C09 [N]** `routeFundingFeasibleGivenLiquidityCollateralAndTiming` — Balanced ledger does not guarantee funding availability.
 
@@ -156,17 +156,24 @@ The existing DASHI.Core.AdmissibleConsumerMDLHyperfabricExact owns the multi-axi
 
 I06 and a finite incomparability witness relevant to I08 are source-written, but I08 stays OPEN; I08 must not be misconstrued as a proof of the real-world unique optimum of any enacted tax. I07 (existence of an undominated point in nonempty finite feasible set) remains open. No source, proof-author or Ibrahim 3B ownership was reassigned.
 
-**Ledger: 41 D, 9 R, 27 N.**
+**Ledger: 42 D, 9 R, 26 N.**
 
 
 ## Participant-to-investor reconciliation (F03), 2026-10-28
 
 F03 is now source-written: `ParticipantInvestorAllocation` stores arbitrary finite lists of investor sale/purchase cash amounts and proofs that the sums equal a participant-level gross sell/gross buy batch. `investorAllocationsSumToParticipantObligation` composes these source-supplied equations with the previous participant-net balance using transitivity and congruence. The TOE consumer imports the same proof. This is a **conditional arithmetic conservation theorem**; it does not recover a named investor, tax payer, security ID or real ASX/CHESS source event from the participant's net receipt. F06/F07 (specific investor identity and official settlement finality) remain OPEN. No duplicate new general clearing library was created.
 
-**Ledger tally: 41 D, 9 R, 27 N.**
+**Ledger tally: 42 D, 9 R, 26 N.**
 
 ## Directional clearing and conditional single-instrument DvP
 
 The earlier receiver-only net-cash batch is extended by a payable/receivable direction tag. The conditional SingleInstrumentDvPBatch records separate gross/net cash and security quantities, matched direction, and simultaneous finality at an externally supplied epoch. F04/F05 now have source-written dependent contracts but do not establish real CHESS finality or identify a real taxpayer. F07 remains OPEN. No live trading code changes.
 
-**Current ledger: 41 D, 9 R, 27 N.**
+**Current ledger: 42 D, 9 R, 26 N.**
+
+
+## Matched lending balance (C07), 2026-10-28
+
+A new conditional MatchedBorrowingBalance requires both cash and liability to increase by the *same* borrowed units. It reuses the Agda standard library natural-number subtraction cancellation law to prove that cash minus debt, truncated at zero, is unchanged by that perfectly matched borrowing event. This is a genuine conditional algebraic result about the selected two-line financial ledger, not proof of loan accessibility or valuation, interest, collateral, lender risk, later repayments or tax-law effects. Both the original application and TOE consumer retain the no-automatic-credit authority boundary.
+
+**Ledger: 42 D, 9 R, 26 N.**
