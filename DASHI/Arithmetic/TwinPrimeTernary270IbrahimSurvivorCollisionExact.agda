@@ -36,6 +36,8 @@ open import Agda.Builtin.Unit using (tt)
 open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 import DASHI.Foundations.SSPTritCarrier as T
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
+import DASHI.Arithmetic.TwinPrime369IbrahimQuotientBoundaryExact as OriginalCubeBridge
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Ibrahim
 import DASHI.Arithmetic.TwinPrimeTernary270AffineCRTCodecExact as Codec
@@ -124,3 +126,44 @@ noTwinClassifierFromBareIbrahimPhaseWithinWheel :
 noTwinClassifierFromBareIbrahimPhaseWithinWheel =
   Core.collisionRefutesSufficiency
     ibrahimFifteenFailsActualTwinConsumerWithinWheel
+
+------------------------------------------------------------------------
+-- STRONGER NO-GO: the GLOBAL 14-class C2 quotient also collides.
+--
+-- The input pair 59/209 belongs to the same *global* antipodal
+-- 3x3x3 orbit (x=0 is fixed; y,z flip). Original 27->14 owner
+-- remains untouched. PR #1244 owns the independent arbitrary-depth
+-- T^(n+1)/S3 vs T^n/C2 word-normalisation theorem; the general
+-- equivalence is not imported from an unmerged branch.
+------------------------------------------------------------------------
+
+globalAntipodeSends59To209 :
+  Codec.cube270GlobalAntipode realTwinCubePoint
+    ≡ compositeTwinCubePoint
+globalAntipodeSends59To209 = refl
+
+globalFourteenClass :
+  Geometry.Ternary27Point → Orbit.AntipodalClass27
+globalFourteenClass p =
+  Orbit.classifyAntipodal27
+    (OriginalCubeBridge.geometryAsTritTriple p)
+
+sameGlobalFourteenOrbitInsideWheel :
+  globalFourteenClass realTwinCubePoint
+    ≡ globalFourteenClass compositeTwinCubePoint
+sameGlobalFourteenOrbitInsideWheel = refl
+
+globalFourteenOrbitLosesTwinConsumer :
+  Core.ConsumerCollision globalFourteenClass realTwinStartOnCube
+globalFourteenOrbitLosesTwinConsumer =
+  NF.nonFactorabilityWitness
+    realTwinCubePoint compositeTwinCubePoint
+    sameGlobalFourteenOrbitInsideWheel
+    differentTwinAnswersInsideWheel
+
+noTwinClassifierFromBareGlobalFourteenOrbit :
+  Core.ConsumerSufficient globalFourteenClass
+    realTwinStartOnCube → ⊥
+noTwinClassifierFromBareGlobalFourteenOrbit =
+  Core.collisionRefutesSufficiency
+    globalFourteenOrbitLosesTwinConsumer
