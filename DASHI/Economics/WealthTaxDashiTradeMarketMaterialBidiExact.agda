@@ -3078,6 +3078,16 @@ rechartingTotalCostCannotRecoverAdministrativeAxis rechart =
       equalWeightCostCollapsesIncomparablePolicies
       administrativeAxisRemainsDistinctAtEqualTotal)
 
+-- Forward implication holds for the SAME existing cost axes.
+-- This is the useful one-way order homomorphism; the following result
+-- proves that its converse fails even in the two-option fixture.
+equalCostTotalIsParetoMonotone :
+  (left right : HypotheticalPolicyOutcome) →
+  Pareto.WeaklyDominates policyTradeoffCosts left right →
+  policyEqualWeightCost left ≤ policyEqualWeightCost right
+equalCostTotalIsParetoMonotone left right dominance =
+  +-mono-≤ (dominance administrationAxis) (dominance careShortfallAxis)
+
 -- Stronger: the scalar <= relation does not reflect Pareto dominance
 -- even for the TWO actual, already-defined synthetic options.
 equalCostTotalCannotReflectParetoOrder :
