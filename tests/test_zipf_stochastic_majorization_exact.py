@@ -91,3 +91,28 @@ def test_fail_closed_wrong_horizon_sampler_counts_and_relation():
     with pytest.raises(ValueError):discovery_stochastic_majorization_certificate((2,1),(2,2),2)
     with pytest.raises(ValueError):discovery_stochastic_majorization_certificate((2,1),(2,1),4)
     with pytest.raises(ValueError):upper_tails((F(1,2), F(1,3)))
+
+
+
+def test_pair_cdf_exact_against_independent_two_type_enumeration():
+    from zipf_stochastic_majorization_exact import pair_second_type_cdf
+    for a,b in ((1,1),(2,1),(3,2),(4,3)):
+        for t in range(a+b+1):
+            # Both distinct if exactly two type labels have appeared.
+            ii = _independent_iid_enumeration((a,b),t)[2]
+            pp = _independent_without_replacement_enumeration((a,b),t)[2]
+            assert pair_second_type_cdf(a,b,t,'iid') == ii
+            assert pair_second_type_cdf(a,b,t,'permutation') == pp
+
+
+def test_same_quantile_couples_all_prefixes_for_each_one_token_transfer():
+    from zipf_stochastic_majorization_exact import pair_pathwise_quantile_certificate
+    for a in range(2,7):
+        for b in range(2,a+1):
+            for sampler in ('iid','permutation'):
+                witnesses = pair_pathwise_quantile_certificate(a,b,a+b,sampler)
+                assert witnesses
+                assert all(tc>=td for _,tc,td in witnesses)
+                assert all(F(0)<u<F(1) for u,_,_ in witnesses)
+    with pytest.raises(ValueError):pair_pathwise_quantile_certificate(1,2,2,'iid')
+    with pytest.raises(ValueError):pair_pathwise_quantile_certificate(2,2,5,'permutation')
