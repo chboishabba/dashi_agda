@@ -69,6 +69,28 @@ The new `periodicThreeAxisPositiveXSquareWrapsToNegativeX` is a genuine finite 3
 
 The executable now exhaustively enumerates **all 27²=729 ordered mode pairs** in that 3D cube. There are exactly `7³=343` pairs whose integer sum stays inside `{-1,0,1}³`, and **386** with at least one out-of-window component. A five-point frequency grid on each axis represents the full `{-2,-1,0,1,2}³` pairwise-sum range in this *particular* tiny finite setting, with zero index folding errors. These counts were independently executed in Python using 729 integer comparisons (not floating FFT). This is **not** a 27-vector physical NS Galerkin simulation; vector-valued complex amplitudes, Leray incompressibility, helical signs, Navier–Stokes time evolution and cutoff-uniform estimates are absent.
 
+## 3c. Stronger NS steelman: nonzero Leray-projected interaction changes under C3 folding
+
+A single transverse Fourier mode self-interacts trivially in the incompressible quadratic nonlinearity. Therefore the earlier `(+1)+(+1)` mode-index counterexample **by itself does not demonstrate a nonzero incompressible NS aliasing error**. To pay that objection, the exact-rational executable includes a nonparallel **two-input-mode** witness:
+
+```text
+p=(1,0,0),       a(p)=(0,1,0),    p·a=0
+q=(1,1,0),       b(q)=(1,-1,0),   q·b=0
+true output k=p+q=(2,1,0)
+three-grid fold ρ3(k)=(-1,1,0)
+
+symmetric convective coefficient up to common i:
+S=(a·q)b+(b·p)a=(1,0,0)
+P_k = I - kkᵀ/|k|²
+
+P_(2,1,0) S    = (1/5,-2/5,0)
+P_(-1,1,0) S   = (1/2, 1/2,0)
+```
+
+**These two results are nonzero and different.** Both input amplitudes satisfy their respective transversality constraints. The source-fixed orthogonal Leray projection is performed using **exact rational** arithmetic; the common complex Fourier factor `i` has been suppressed, which does not affect the discrepancy. The witness was independently executed in local Python and produced the exact fractions shown. A regression in `tests/test_r2p2_three_mode_codec_ns_aliasing.py` now calls the committed exact-rational routine.
+
+This is closer to the real incompressible NS nonlinear Fourier normal form than a bare mode-number coincidence. But it remains **a selected pair at one instant**. It does not model the full field, symmetrised real-valued conjugate completion, pressure evolution, energy inequality, viscosity, finite-time solver, invariant blowup or global regularity. Neither `P_k` nor `P_ρ(k)` alone pays the actual R571/R736 high-high/low-mode uniform Gram/weighted convolution estimates. It is not an Agda-kernel theorem: the existing NS Galerkin/Leray theorem owner is cited, and this source-written adapter's finite layer still needs type checking.
+
 ## 4. Pareto / snowball / Ibrahim physical proof cutset
 
 | Priority | Producer that actually pays the cut | Available? |
