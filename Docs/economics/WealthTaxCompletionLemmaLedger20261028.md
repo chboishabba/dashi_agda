@@ -1,6 +1,6 @@
 # Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
 
-Created 2026-10-28. **77 named formal obligations** across nine groups: 47 source-written (D), 9 owned by existing reusable sources (R), 21 remaining proof/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+Created 2026-10-28. **77 named formal obligations** across nine groups: 47 source-written (D), 11 owned by existing reusable sources (R), 19 remaining proof/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
 
 Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
 
@@ -94,8 +94,8 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **H03 [R]** `EvidenceHyperfabricExact and SnowballAttributionProvenanceInvariantExact` — Preserve independent evidence fibres and genealogy.
 - **H04 [R]** `ContentAddressedTransitionIdentityExact.canonicalTransitionIdentityBoundary` — Digest is not event identity/collision-freedom.
 - **H05 [D]** `toePaperCannotSupplyKernelCertification` — Agda source and publication are not compiler receipts.
-- **H06 [N]** `authorAndProofOwnershipAreDisjointReceiptTypes` — Original study, repository theorem, code, executed tests, Agda kernel all typed differently.
-- **H07 [N]** `originalSourceProducerIsNotDerivedSummary` — Primary and derivative reports never become two independent observations.
+- **H06 [R]** `authorAndProofOwnershipAreDisjointReceiptTypes` — Original study, repository theorem, code, executed tests, Agda kernel all typed differently.
+- **H07 [R]** `originalSourceProducerIsNotDerivedSummary` — Primary and derivative reports never become two independent observations.
 - **H08 [N]** `measuredPolicyEffectRequiresSameObjectInputs` — Conditional matched person/security/tax/payment/time/outcome promotion.
 
 ### I. Pareto comparison and causal humility (9)
@@ -214,3 +214,8 @@ Existing TOE consumer: DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda.
 ## 2026-10-28 D11 × D12 ordered identity/cash join
 
 The earlier separate finite fill uniqueness and cash conservation receipts did not establish that their *lists* were related. JoinedPriceIdentityBatch now carries one ordered list of (timestamped ID, priced fill) pairs. It requires exact equality between that full price/quantity projection and the settled cash batch's original list, unique local tokens, and common issuer/class labels. joinedIdentityAndCashReconcile composes the prior D11 cash equation with the D12 token property. A two-fill positive witness has gross cash 3. This does not verify real exchange identity, custody finality or tax payment. All construction is source-written; compiler certification remains unobserved. No status tally is changed: **47 D / 9 R / 21 N**.
+## 2026-10-28 reused original-owner attribution boundaries (H06–H07)
+
+The existing DASHI.Economics.SourceAttributionPromotionBoundaryExact owner already distinguishes original source propositions, formal construction, theorems and promotion steps. It independently proves sourceArgumentDoesNotAutoPromoteToDASHIFormalisationOwnership and secondaryReportDoesNotAutoPromoteToPrimaryAuthority. The TOE consumer now re-exports these exact existing proofs. Thus H06 and H07 are **R (reused prior owners)**, NOT independently authored new proofs, and not kernel-certified at this branch head. This closes the duplicated-work gap without copying a proof or giving original authors new repo theorem ownership. Different receipt authority levels still require an actual source producer for a valid empirical promotion.
+
+**Current scoped ledger status: 47 D / 11 R / 19 N, out of 77.** The previous 47/9/21 tally remains an historical snapshot. No signature, matching digest, content replica, Wikipedia hyperlink, Ibrahim Monster 3B result or LLM summary identifies a real taxpayer or proves a policy outcome.
