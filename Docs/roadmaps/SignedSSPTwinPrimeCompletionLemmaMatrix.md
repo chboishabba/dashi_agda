@@ -68,7 +68,7 @@ would nevertheless be necessary before promoting a theorem as verified.
 | T03 | `threeCoordinateEncodeDecode`: project the reconstructed point back to x/y/z. | S: same |
 | T04 | `threeAxisCountIsThree`: exactly three coordinate axes. | S: same, reuses geometry |
 | T05 | `threeAxisCapacityIsThreeTimesThreeTimesThree`: retain the **factorisation** as 3×3×3. | S: same |
-| T06 | `threeAxisCapacityIsTwentySeven`: derive 27 from 3³, not vice versa. | O + S: owner + export |
+| T06 | Preserve `3³=27=1+13×2`, the GLOBAL 14-class antipode, and the distinct inner-phase `3×5=15` quotient | O/S: original geometry, antipodal and Ibrahim owners; explicit 5-vs-20 arithmetic collision in `TwinPrime369IbrahimQuotientBoundaryExact`, kernel pending |
 | T07 | `orderedPairAxisCountIsSix`: two ordered 3-coordinate points have six coordinates. | S; #1407 also has an exact `TritCube 6` BIDI owner, separate branch |
 | T08 | `orderedPairCapacityIsSevenHundredTwentyNine`: 27×27 = 729 is a cardinality of typed ordered pairs. | S; #1407's independent 343/386 incidence result stays source-owned |
 
@@ -163,8 +163,8 @@ twin-prime proof. The 75-ID architecture tally is unchanged.
 | E02 | Modulus 2 is retained and has exactly one pair-survivor residue | P: six-wheel owner and finite probe; general Nat theorem still required |
 | E03 | For odd prime p the two excluded classes differ | N: arithmetic proof p>2 |
 | E04 | Exactly p−2 locally surviving residues for each odd p | N: Fin/cardinality proof; cannot assume it from a Python count |
-| E05 | Reconstruct residues from pairwise coprime prime moduli (CRT) | N: genuine arithmetic CRT, not a mixed-radix codec |
-| E06 | Forward/reconstruction inverse laws | N: both directions with coprime witnesses |
+| E05 | Arithmetic CRT reconstruction from general pairwise-coprime certified prime moduli | P: explicit FINITE modulus-270 affine CRT injection and 27-case lookup in `TwinPrimeTernary270AffineCRTCodecExact`; general inverse and 270-survivor Agda coverage theorem still N |
+| E06 | Forward/reconstruction inverse laws for arbitrary coprime CRT | P: 27-element cube/270-wheel decode-after-encode proof is source-written; arbitrary-axis true CRT BIDI and exhaustive 270-coverage in Agda remain N |
 | E07 | General finite pairwise-coprime prime product CRT | N: inductive step with a coprime-product proof |
 | E08 | Exact total survivor count `∏(p−ν_p)` modulo product | N: leverage E02–E07 and `FinitePrimeProductSieveExact` |
 | E09 | Product of any finite prime moduli is a sieve period | S: `CertifiedPrimePairPeriodExact` (even with repeated axes) |
@@ -173,7 +173,7 @@ twin-prime proof. The 75-ID architecture tally is unchanged.
 | E12 | Fresh filters only remove candidates | P: monotonicity theorem / explicit refinement import |
 | E13 | Genuine twin p,p+2 passes each proper finite small-modulus filter | N: handle modulus equal to endpoint and range assumptions correctly |
 | E14 | ∀ finite certified-prime axis lists and N, construct n≥N with both endpoints Composite, and all local pair filters passed | S (kernel pending): `everyFinitePrimeSieveHasLargeDoubleCompositeSurvivor` covers empty and nonempty lists; no CRT inverse, coprimality or fixed SSP15 limit |
-| E15 | FRACTRAN decoded-exponent / CRT commuting square | S: signed ±2 both sides; raw (2^p) parity no-go; full VM interface outstanding |
+| E15 | FRACTRAN decoded-exponent / CRT commuting square | S/P: signed ±2 decoded square; additionally explicit cube/270 finite C2 affine endpoint-swap and certified p2/p3/p5 local sieve; full signed VM interface outstanding |
 
 ## E14 max-cut: factorable double-composite family, no CRT inverse
 
@@ -364,6 +364,58 @@ one-step equivalence, exact first-applicable signed-SSP compiler and
 reachable outputs, arithmetic CRT inverse, and a genuine joint
 prime-pair distribution estimate. Neither a 14-rule enumeration
 nor an SSP15 codec establishes infinitely many twin primes.
+
+## 2026-10-28 numerology max-cut: exact finite 3³, 9→5, 3×5=15, and CRT-270
+
+The complete source-owner / scope / verification ledger is
+[SignedSSPPrimeNumerologyCrossPollinationLedger.md](SignedSSPPrimeNumerologyCrossPollinationLedger.md).
+
+**New source-written owners:**
+- `TwinPrimeThreeAxisLocalThreeOrbitExact`: the x=−1 slice of
+  `Ternary27Point` has nine balanced y/z residues
+  `n=−1+3y+9z(mod27)`, all with `n≡2(mod3)` and
+  `n+2≡1(mod3)`. Affine prime-endpoint reversal
+  `n↦−n−2(mod27)` equals inner strict antipode. Therefore the
+  exact nine-coordinate *local* orbit quotient has one fixed centre
+  plus four pairs = five classes. The real
+  `LocalPairSurvives` predicate is transported conditional on an
+  actual certified prime-3 axis.
+- `TwinPrime369IbrahimQuotientBoundaryExact`: imports the
+  **existing source-owned** Ibrahim 27→3×5=15 phase reduction and
+  separate global 27→14 antipodal residual codec. It proves the
+  3×5 phase quotient COLLIDES actual centered residues 5 (genuine
+  5,7 twin pair) and 20 (not twin). It therefore cannot answer even
+  that restricted actual arithmetic query without its missing inner
+  orientation. A different inherited code preserving the dependent
+  residual reconstructs all three axes. The existing nine-axis
+  `3+3+3` Pareto chart gives `3⁹=19683`. The Agda guard
+  `3⁵=243 ≠ 5³=125` rejects numerical conflation with the
+  exceptional E6 source-owned PR #1389.
+- `TwinPrimeTernary270AffineCRTCodecExact`: explicitly maps the
+  typed ternary cube into 27 genuine 2/3/5 finite local sieve
+  survivors modulo `270=27×2×5`, using the affine expression
+  `(41+108d(x)+30d(y)+90d(z)) mod270`. The 27-case
+  partial inverse proves injectivity on cube points and the
+  `n↦−n−2` sign-involution equation. It source-writes all six
+  local remainder/nonzero checks and transports them to the
+  **actual certified** `AllPairSurvive` for supplied p=2,3,5
+  axes. Independent exhaustive Python additionally checks that
+  the image covers all 27 arithmetic survivors among 0..269,
+  but THIS COVERAGE IS **NOT** an Agda theorem yet.
+
+**Independent local Python:** nine prime-3 survivors, five
+inner C2 orbits, 14 global 3³ C2 orbits, 15 phase-preserved
+inner-orbit labels, 27 pair-sieve survivors modulo270, exact
+270-element exhaustiveness and 27 affine reversal identities
+all passed. Separate finite FRACTRAN and factorable-sieve checks
+were rerun. Original Ibrahim Monster, Conway/Guy, PR #1407
+and Polymath8b attribution is unchanged. No ESD or CI changes.
+
+**Next proof:** E05/E06 finite 270 *coverage* in Agda using
+the existing `Fin`/residue-owner operators; C02/A07/C08
+the concrete faithful all-step signed FRACTRAN compiler;
+F02/F04/F07 the genuinely open analytic joint-primality
+frontier. All new sources remain **Agda-kernel pending**.
 
 ## Critical dependency DAG
 
