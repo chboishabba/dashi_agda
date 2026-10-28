@@ -750,16 +750,16 @@ concrete cross-domain same-object/intertwining witness.
 | Q06 | `signedRelativeReflection`: signed normalization is C2 equivariant | S: #1244 existing source |
 | Q07 | `signedRelativeSection`: exact inverse on zero-anchored difference vectors | S: #1244 existing source |
 | Q08 | `normaliseViaTranslation`: each anchored word is a translated normal form | S: #1244 existing source |
-| Q09 | `orbitMapWellDefined`: normalization descends from full value-S3 to sign-C2 quotients | P: maps/actions exist; explicit quotient construction missing |
-| Q10 | `orbitMapSurjective`: section hits every sign orbit | P: source section exists, induced quotient theorem missing |
-| Q11 | `orbitMapInjective`: same signed orbit implies an original global S3 permutation | P: translation + reflection witnesses exist, quotient theorem missing |
-| Q12 | `anchoredOrbitBijection`: assemble the exact set quotient equivalence | N/P: general mathematical proof given, no certified quotient type |
+| Q09 | `orbitMapWellDefined`: normalization descends from full value-S3 to sign-C2 quotients | S: #1244 `s3ToC2`, `c2ToS3`, and `actualWordDifferenceOrbitBidi` now instantiate the arbitrary-depth setoid quotient relations; kernel pending |
+| Q10 | `orbitMapSurjective`: section hits every sign orbit | S: #1244 `normalisationSurjective`, `canonicalWordSection` and `wordForCanonicalClass`; kernel pending |
+| Q11 | `orbitMapInjective`: same signed orbit implies an original global S3 permutation | S: #1244 `canonicalEqualityGivesWordOrbit`, `canonicaliseComplete`; kernel pending |
+| Q12 | `anchoredOrbitBijection`: assemble the exact set quotient equivalence | S: #1244 `CanonicalRelative n`, `wordOrbitGivesCanonicalEquality` and converse provide a constructive full normal form of S3 word orbits; kernel pending |
 | Q13 | `S3WordOrbitsAreEqualityPatterns`: same orbit iff same labelled-position equality partition | P: #1275 three-letter instance, all-length theorem missing |
 | Q14 | `restrictedGrowthCanonical`: bijection to RGS using ≤3 blocks | P/N: #1275 finite case, arbitrary-length canonicalisation missing |
 | Q15 | `restrictedStirlingCount`: #RGS(n+1,≤3)=sum S(n+1,k) | N: classical Stirling theorem; no all-n Agda proof observed |
-| Q16 | `uniqueFixedSignWord`: only all-zero vector fixed under simultaneous sign flip | P: exact finite n=2,3 owners; general Vec proof missing |
-| Q17 | `pairPartition`: all non-fixed sign words have 2-element C2 orbits | P: exact finite owners; all-n orbit theorem missing |
-| Q18 | `signOrbitCount`: #T^n/C2=(3^n+1)/2 for all n | P: checked finite n≤6; no all-n kernel proof observed |
+| Q16 | `uniqueFixedSignWord`: only all-zero vector fixed under simultaneous sign flip | S: #1244 canonical first-nonzero-positive normal form isolates the all-zero class; kernel pending |
+| Q17 | `pairPartition`: all non-fixed sign words have 2-element C2 orbits | S: #1244 `canonicalCover` plus `canonicaliseNegationInvariant` and normal-form completeness; kernel pending |
+| Q18 | `signOrbitCount`: #T^n/C2=(3^n+1)/2 for all n | S: #1244 `canonicalStepToSum`, `sumCanonicalRoundTrip`, `doubleCanonicalRank` prove all-depth 2r_n=3^n+1; kernel pending |
 | Q19 | `stirlingSignCount`: identity both by orbit bijection and by counting | N/P: mathematically established, formal composition missing |
 | Q20 | `phaseFieldInflateDeflate`: invariant fields correspond pointwise to functions on sign orbits | S: #1244 n=2 owner; all-n construction still a separate obligation |
 | Q21 | `global14WheelNoGo`: two surviving cube points have equal global sign class but different genuine TwinPrimeAt | S: **new #1408** `globalFourteenOrbitLosesTwinConsumer` at 59/209 |
@@ -789,7 +789,7 @@ Monster 3B, original sector topology, statistical Zipf/Heaps and
 | ID | Required exact lemma or proof obligation | Status and current owner |
 |---|---|---|
 | Q25 | `fullCubePeriodNoGo`: full 27-state wheel code at 59 and 329 collides while true twin starts differ | S: new #1408 `wholeCubeResidueLosesTwinConsumer`, `noUniversalTwinClassifierFromFiniteWholeCube`; 329=7×47, 59/61 prime |
-| Q26 | `NatWheelResiduePeriodBidi`: preserve the unrestricted quotient k along with r=n mod270, prove n=270*k+r and roundtrip, and show genuine twin observer acts on the **reconstructed Nat**, not residue alone | N/O: reuse original Nat division theorem, no new prime oracle |
+| Q26 | `NatWheelResiduePeriodBidi`: preserve the unrestricted quotient k along with r=n mod270, prove n=270*k+r and roundtrip, and show genuine twin observer acts on the **reconstructed Nat**, not residue alone | S: new #1408 `NatPeriod270`, `decodeEncodeNatPeriod270`, `encodeDecodeNatPeriod270`, finite cube-period survivor lift; kernel pending |
 
 **Important information hierarchy:** `S3 equality pattern` /
 `C2 sign orbit` (14 classes) is coarser than the full
@@ -799,3 +799,60 @@ but is still a quotient of unbounded integers. Neither 14 nor 27
 states suffices to determine genuine `TwinPrimeAt n` for all n.
 Even `Nat ≅ (residue, unbounded period index)` is a *lossless input
 representation*, not a proof of joint prime correlation.
+
+## 29 October 2026 actual source completion: S3/C2 normal form and Nat period BIDI
+
+**Checked against CURRENT active PR heads before writing.** #1244 already
+had explicit forward and converse affine-S3/relative-sign relation
+witnesses; the new, original-owner module
+`AlexanderHornedS3SignQuotientSetoidBidiExact` adds an
+equivalence relation for C2 differences and for S3 words,
+a constructive `CanonicalRelative n` normal form, orbit-class
+soundness/completeness in both directions, a section to anchored
+words, and an exact `CanonicalRelative(suc n) ↔
+CanonicalRelative n ⊎ Vec C3 n` constructor BIDI.
+Its `doubleCanonicalRank` proves `2r_n=3^n+1` for ALL n,
+not just n≤7 numerical checks. This is a typed source
+setoid/canonical quotient, **not** the already different native
+wild-end/sector or Zipf probability object.
+
+**The arithmetic Q26 owner is newly source-written on this PR:**
+`TwinPrimeNat270PeriodResidualBidiExact`. Its full
+`NatPeriod270` representation stores `periodIndex : Nat`
+and `boundedResidue : Fin 270`. The source proves
+`decodeEncodeNatPeriod270` using existing standard-library
+Euclidean decomposition and `encodeDecodeNatPeriod270`
+using exact positive-modulus quotient/remainder and Fin
+injectivity, following the prior repository Gödel base-12
+codec's divisor-quotient proof method.
+`encodeCertifiedCubePeriod270` additionally reuses the
+original *27-state survivor coverage* and returns a
+`(period,cube)` with an **exact Nat reconstruction proof**.
+`cubePeriodResidueRoundTrip` and
+`cubePeriodDecodeToCube` give the reverse residue/cube
+direction. Non-admissible residues remain in the full
+Fin270 code, not falsely mapped into one of 27 states.
+All three canonical #1408 TOE roots import/export these owners.
+
+**Executed independent finite model:** enumerate every anchored
+word and all six affine label relabelings for n=0..6,
+matching full orbit classes, canonical normal form and
+1,2,5,14,41,122,365. Exercise all 270 residues across
+five period indices and arbitrary large Nat examples.
+Both numerical fixtures passed. Source Agda kernel
+typechecking has **not** run (no Agda binary available).
+
+**Still open:**
+Q15/Q19 explicitly identify the all-depth
+Stirling/RGS **counting** proof with the separately owned
+#1275 canonical datatype, rather than relying on numerical
+correspondence; Q20 extends the native invariant-field
+inflation beyond depth two; Q23 needs a same-object
+wild-sector/value-label intertwiner and must remain
+conditional. A07/A08/B03/C08 remain the actual signed
+machine compiler, and E03–E08 the general certified-prime
+CRT. F02/F04/F06/F07/G01 are unsolved analytic
+twin-prime mathematics, as confirmed in current primary
+bounded-gap and formalisation documentation.
+No ESD surfaces, prior Ibrahim Monster 3B owners, or
+independent Zipf/Heaps PR proof ownership were edited.
