@@ -317,6 +317,44 @@ def test_canonical_funding_payment_route_weld() -> None:
     tax_payment_epoch, sale_settlement_epoch = 3, 8
     assert not (sale_settlement_epoch <= tax_payment_epoch)
     assert seen == 16**3 + 3 * sum(range(16)) * 16**2
+
+def test_official_settlement_receipt_backout_and_coherent_route() -> None:
+    """Bounded counterworlds for source-dependent DvP-to-tax admission.
+
+    This is a hypothetical truth-table oracle only. It cannot assert that
+    official validation, client identities or custody receipts are real.
+    """
+    from itertools import product
+
+    dispositions = ("due", "backed_out", "completed")
+    checked = 0
+    for status, officially_valid, holder_same, class_same, sale_cash,             route_sale_cash, settlement_epoch, payment_epoch in product(
+                dispositions, (False, True), (False, True), (False, True),
+                range(4), range(4), range(7), range(7)):
+        is_final = status == "completed"
+        cash_matches = sale_cash == route_sale_cash
+        chronology = settlement_epoch <= payment_epoch
+        admissible = (is_final and officially_valid and holder_same
+                      and class_same and cash_matches and chronology)
+        if status != "completed":
+            assert not admissible
+        if settlement_epoch > payment_epoch or not officially_valid:
+            assert not admissible
+        if admissible:
+            assert cash_matches and chronology and class_same and holder_same
+        checked += 1
+
+    assert checked == 3 * 2 * 2 * 2 * 4 * 4 * 7 * 7
+
+    # Identical valuations and joint-reform outcomes do not determine
+    # taxpayer allocation or a wealth-tax-only potential outcome.
+    same_asset_valuation = ((12, 3), (12, 9))
+    same_joint_reform_outcome = ((5, 1), (5, 3))
+    assert same_asset_valuation[0][0] == same_asset_valuation[1][0]
+    assert same_asset_valuation[0][1] != same_asset_valuation[1][1]
+    assert same_joint_reform_outcome[0][0] == same_joint_reform_outcome[1][0]
+    assert same_joint_reform_outcome[0][1] != same_joint_reform_outcome[1][1]
+
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
@@ -332,4 +370,5 @@ if __name__ == "__main__":
     test_constructive_finite_axis_pareto()
     test_canonical_funding_batch_no_double_count()
     test_canonical_funding_payment_route_weld()
-    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto oracle + canonical funding partitions + same-route weld")
+    test_official_settlement_receipt_backout_and_coherent_route()
+    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto oracle + canonical funding partitions + same-route weld + operator finality gating")
