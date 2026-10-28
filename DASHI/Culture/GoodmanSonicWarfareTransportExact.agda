@@ -26,6 +26,7 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.RobustExperimentInferenceFrontierExact as Robust
 import DASHI.Core.FrozenHeldOutRepairRefinementExact as FrozenHeldOut
 import DASHI.Culture.GoodmanSonicWarfareRationalInverseExact as RationalInverse
+import DASHI.Culture.GoodmanSonicNumerologyObservationCubeExact as SonicCube
 
 data ToySoundSource : Set where
   sourceOff : ToySoundSource
