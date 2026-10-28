@@ -506,3 +506,16 @@ toeCashReconciledFillsMustShareIdentitySequence :
 toeCashReconciledFillsMustShareIdentitySequence =
   DashiTradeTax.joinedIdentityAndCashReconcile
 
+-- H06/H07 existing-owner reuse, not independent new theorems.
+-- An author's published argument does not confer DASHI proof authorship.
+toeOriginalAuthorDoesNotAutomaticallyOwnDashiProof :
+  Sources.SourceArgumentImpliesDASHIFormalisationOwnershipPermission → ⊥
+toeOriginalAuthorDoesNotAutomaticallyOwnDashiProof =
+  Sources.sourceArgumentDoesNotAutoPromoteToDASHIFormalisationOwnership
+
+-- Secondary narrative does not become an original source producer.
+toeDerivedSummaryDoesNotBecomeOriginalEvidence :
+  Sources.SecondaryReportImpliesPrimarySourceAuthorityPermission → ⊥
+toeDerivedSummaryDoesNotBecomeOriginalEvidence =
+  Sources.secondaryReportDoesNotAutoPromoteToPrimaryAuthority
+
