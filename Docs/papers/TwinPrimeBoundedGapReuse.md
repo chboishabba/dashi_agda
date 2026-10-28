@@ -303,3 +303,45 @@ genuine pair. The new source-written
 `wheel270RejectsExceptionalStartFive` assert the arithmetic
 filter exclusions explicitly, and are re-exported through all
 three TOE roots. Agda kernel pending.
+
+## 2026-10-28 Pareto continuation: source-owned rule priority and quotient loss
+
+New source-written, kernel-pending Agda owners:
+
+1. `PrimegameTypedNumericFirstApplicableBidiExact` proves forward
+   and backward preservation of the *ordered first-applicable*
+   selection for the Guy 14-rule programme, reusing the existing
+   typed SSP15 factorisation and #636 FRACDASH numeric interpreter
+   priority theorem. It also reflects no-applicable halting.
+   The mathematical applicability guard carries exact integer
+   evidence `next*d=n*a`, while the concrete evaluator and
+   signed state/action compiler remain uninstantiated obligations.
+2. `TwinPrimeTernary270IbrahimSurvivorCollisionExact` proves a
+   same-quotient/different-primality consumer collision within the
+   full mod-270 local-survivor image. The original x/y/z points
+   `(0,-1,+1)` and `(0,+1,-1)` code 59 and 209. Both pass all
+   finite 2/3/5 pair guards, but only 59 begins a true twin pair.
+   Ibrahim's 3×5=15 phase orbit identifies the two; the original
+   consumer nonfactorability theorem is reused without copying its
+   ownership or promoting to Monster 3B.
+
+Executed independent standard-library Python arithmetic: exact
+270-wheel cases, 59/209 collision and 20,000 original Guy
+first-applicable transitions with all 14 rules and their ten
+distinct factor values. The corresponding committed regression
+scripts are executable sources but this is not an Agda kernel
+receipt; CI was intentionally not run.
+
+Sources: Conway's 1987 FRACTRAN paper, Guy 1983, OEIS A267572
+for the historical 14-rule **15/14** variant (distinct from
+Conway's **1/7** version), original Agda theorem authors,
+Ibrahim's original 27→15 construction, and Polymath8b's
+sieve-parity theorem. The analytic gap-two conjecture remains open.
+See https://oeis.org/A267572 and
+https://doi.org/10.1186/s40687-014-0012-7.
+
+**Outstanding max-cut:** concrete Nat fraction successor evaluator;
+signed SSP/FRACDASH action-state bisimulation; historical
+prime-output reachability; arbitrary CRT inverse; and genuine
+joint prime distribution. No ESD edit and no same-object
+numerology promotion.
