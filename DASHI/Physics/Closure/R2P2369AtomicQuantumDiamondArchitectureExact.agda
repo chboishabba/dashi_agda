@@ -79,9 +79,11 @@ canonicalClockPipelinePath = record
   }
 
 ------------------------------------------------------------------------
--- Two identical *isotope identities*. Not identical physical clock units.
+-- Selected *isotope model* identities, not two verified instrument records.
+-- Video gives 171Yb for the atomic lattice-clock explanation, while the
+-- APS R2P2 abstract only states neutral ytterbium without isotope IDs.
 -- 171Yb: atomic Z=70, N=101. Cs133: Z=55, N=78.
--- These are isotope bookkeeping facts, not atomic transition derivations.
+-- Neither isotope selection nor neutrality derives an optical transition.
 ------------------------------------------------------------------------
 
 record AtomicClockIdentities : Set where
@@ -102,6 +104,10 @@ record AtomicClockIdentities : Set where
     cesiumSecondCanonical :
       cesiumSecond ≡ SI.canonicalCs133SISecondAnchor
 
+    bothR2P2IsotopesIndependentlyVerifiedFromAPS : Bool
+    bothIsotopesNotVerifiedByAPS :
+      bothR2P2IsotopesIndependentlyVerifiedFromAPS ≡ false
+
     isotopeIdentityDerivesOpticalTransition : Bool
     isotopeIdentityDoesNotDeriveOpticalTransition :
       isotopeIdentityDerivesOpticalTransition ≡ false
@@ -121,6 +127,8 @@ canonicalAtomicClockIdentities = record
   ; cesiumNeutral = Atomic.neutralAtIsNeutral 55 78
   ; cesiumSecond = SI.canonicalCs133SISecondAnchor
   ; cesiumSecondCanonical = refl
+  ; bothR2P2IsotopesIndependentlyVerifiedFromAPS = false
+  ; bothIsotopesNotVerifiedByAPS = refl
   ; isotopeIdentityDerivesOpticalTransition = false
   ; isotopeIdentityDoesNotDeriveOpticalTransition = refl
   }
@@ -326,30 +334,33 @@ record OpticalTransferLeg : Set where
 
 open OpticalTransferLeg public
 
-peakDownlink : OpticalTransferLeg
-peakDownlink = record
-  { medium = atmosphericFreeSpace
-  ; direction = peakToPlains
-  ; nominalLengthKm = 69
+uncalibratedTransferLeg :
+  TransferMedium → TransferDirection → Nat → OpticalTransferLeg
+uncalibratedTransferLeg path direction length = record
+  { medium = path
+  ; direction = direction
+  ; nominalLengthKm = length
   ; reciprocityCalibrated = false
   ; reciprocityCalibratedIsFalse = refl
   }
 
-groundFibre : OpticalTransferLeg
-groundFibre = record
-  { medium = opticalFibre
-  ; direction = plainsToPeak
-  ; nominalLengthKm = 81
-  ; reciprocityCalibrated = false
-  ; reciprocityCalibratedIsFalse = refl
-  }
-
--- NOTE: These two rows classify different link segments, not a proven
--- end-to-end direction map. Phase-transfer routing may be bidirectional
--- for both segments. No direction-dependent measurements were supplied.
+-- Four *required* directional contacts, not independently checked links.
+-- The APS abstract reports two physical media and full-network shakedown.
+-- The video describes optical transfer in both directions, without
+-- providing calibrations for each individual directional path.
+requiredDirectionalTransferLegs : List OpticalTransferLeg
+requiredDirectionalTransferLegs =
+  uncalibratedTransferLeg atmosphericFreeSpace peakToPlains 69
+  ∷ uncalibratedTransferLeg atmosphericFreeSpace plainsToPeak 69
+  ∷ uncalibratedTransferLeg opticalFibre peakToPlains 81
+  ∷ uncalibratedTransferLeg opticalFibre plainsToPeak 81
+  ∷ []
 
 record R2P2OpticalPhysicsBoundary : Set where
   field
+    requiredFourDirectionalLegs : List OpticalTransferLeg
+    requiredFourDirectionalLegsAreDeclared :
+      requiredFourDirectionalLegs ≡ requiredDirectionalTransferLegs
     vacuumLaw : Optics.KernelLawBridge
     vacuumLawCanonical : vacuumLaw ≡ Optics.maxwellPhaseTransport
     reportedNetwork : R2P2.R2P2PrimarySource
@@ -369,7 +380,9 @@ open R2P2OpticalPhysicsBoundary public
 
 canonicalR2P2OpticalPhysicsBoundary : R2P2OpticalPhysicsBoundary
 canonicalR2P2OpticalPhysicsBoundary = record
-  { vacuumLaw = Optics.maxwellPhaseTransport
+  { requiredFourDirectionalLegs = requiredDirectionalTransferLegs
+  ; requiredFourDirectionalLegsAreDeclared = refl
+  ; vacuumLaw = Optics.maxwellPhaseTransport
   ; vacuumLawCanonical = refl
   ; reportedNetwork = R2P2.canonicalR2P2PrimarySource
   ; reportedNetworkIsCanonical = refl
