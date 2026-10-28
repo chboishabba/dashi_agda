@@ -17,6 +17,9 @@ import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as Lattice
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeCut
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as FiniteConv
 import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as BilinearPareto
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit729Owner
+import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as Hermitian729
+import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as Antipodal729
 import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourPareto
 import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as C3Fourier
 import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as FourierOwner
@@ -833,3 +836,54 @@ fullArchitectureFourOuterModeCollision :
     ≡ FourPareto.foldFour ModeCut.widePlusTwo
 fullArchitectureFourOuterModeCollision =
   FourPareto.outerFrequencyCollisionAtFour
+
+
+------------------------------------------------------------------------
+-- Reuse source 13 nonzero antipodal pairs in 27 and 5 classes in 9.
+-- For REAL Fourier fields, one rational real centre + 13 Q(omega)
+-- conjugate pairs stores all 27 scalar real degrees of freedom.
+-- Raw orbit labels alone still cannot compute integer pair sums.
+------------------------------------------------------------------------
+
+fullArchitectureFiveNineAntipodalClasses :
+  Orbit729Owner.antipodalClass9Count ≡ 5
+fullArchitectureFiveNineAntipodalClasses =
+  Antipodal729.sourceFiveNineOrbitCount
+
+fullArchitectureThirteenPairsInTwentySeven :
+  27 ≡ 1 + 13 * 2
+fullArchitectureThirteenPairsInTwentySeven =
+  Antipodal729.sourceThirteenNonzeroPairs
+
+fullArchitectureNineClassToTwentySevenClass :
+  (plane : Antipodal729.Plane9) →
+  Antipodal729.antipodalClass27
+    (Antipodal729.plane9ToCube27 plane)
+    ≡ Antipodal729.planeOrbitClassToCubeOrbit
+        (Antipodal729.antipodalClass9 plane)
+fullArchitectureNineClassToTwentySevenClass =
+  Antipodal729.planeClassInclusionCommutes
+
+fullArchitectureHermitianThirteenPairRoundTrip :
+  (s : Hermitian729.Hermitian27)
+  (mode : ModePairs.ModeCube27) →
+  Hermitian729.packedMode (Hermitian729.packHermitian27 s) mode
+    ≡ Hermitian729.coefficient s mode
+fullArchitectureHermitianThirteenPairRoundTrip =
+  Hermitian729.decodeAfterEncodeHermitian27
+
+fullArchitectureHermitianFiveNineRoundTrip :
+  (s : Hermitian729.Hermitian9)
+  (plane : Antipodal729.Plane9) →
+  Hermitian729.packedPlane9 (Hermitian729.packHermitian9 s) plane
+    ≡ Hermitian729.coefficient9 s plane
+fullArchitectureHermitianFiveNineRoundTrip =
+  Hermitian729.decodeAfterEncodeHermitian9
+
+fullArchitectureTrueQuadraticPairNegation :
+  (p q : ModePairs.ModeCube27) →
+  FiniteConv.exactPairOutput
+    (Antipodal729.negateCube p) (Antipodal729.negateCube q)
+    ≡ Antipodal729.negateWideCube (FiniteConv.exactPairOutput p q)
+fullArchitectureTrueQuadraticPairNegation =
+  Antipodal729.trueIntegerQuadraticPairSumNegationEquivariance
