@@ -1,3 +1,69 @@
+## 2026-10-28 optical confinement and energy-residence max-cut
+
+**Question:** Does the mirror function more like a multi-pass passive optical
+cavity than a one-shot central target concentrator? Test this without
+misrepresenting rays as coherent electromagnetic whispering-gallery modes.
+
+**Source lineage:** classical optical power flux and geometric travel-time
+identity are inherited physical principles. The cavity lifetime/Q concept is
+standard optics. Primary research precedents include Myung-Woon Kim,
+Kyu-Won Park, Chang-Hwan Yi and Chil-Min Kim, *Analysis of broad emission
+direction in a spiral-shaped microcavity laser*, *Optics Letters* 36 (2011),
+4503-4505, DOI 10.1364/OL.36.004503. Do not call our incoherent SDF ray
+histories measured WGMs or diffractive solutions. Preexisting DASHI
+oriented torque and right-hand-rule owners remain PR #1164. Separate
+current optical and 369/TOE source owners remain PR #1407; prior Ibrahim
+Monster 3B priority unaffected. No ESD modifications.
+
+**Executed offline on actual saved HTML events, not on a newly invented ray
+solver:** eleven source/absorber pair receipts plus the most recent torque
+winner. File `kozyrev_confinement_audit.py` and the machine-readable
+`spiral_confinement_results.json` exist as session-local artefacts.
+For each segment from source to first collision, between wall collisions,
+and from final wall to receiver/exit, compute
+`length_inside = length(segment intersect disk(center=origin,
+radius=1.02 * (inner + growth*2*pi*turns + thickness/2)))`.
+Weight this clipped length by the ray's optical power immediately before
+the segment. Ignore artificial far-field escape tails outside the disk.
+Then `U_equivalent = sum(P_segment * length_inside) / c`;
+`tau_residence = U_equivalent / P_source`.
+This is a **ray-power residence proxy** in joules (or seconds),
+not an EM field-mode quality factor. A multi-segment clipping error,
+rather than a failed conservation law, remains a possible systematic
+source; replicate with an independent segment/disk method.
+
+**Observed results, all optical input 9000 W, 44 rays, rho=0.95:**
+
+| Seed | Absorber | wall torque (microN m) | residence (ns) | receiver (W) |
+|:---|:---:|---:|---:|---:|
+| 8d95d3af | off | -184.08 | 158.78 | 0 |
+| 8d95d3af | on | -139.44 | 106.29 | 5389 |
+| 9c07f3a8 | off | -156.00 | 167.88 | 0 |
+| 9c07f3a8 | on | -85.29 | 82.59 | 7331 |
+| b1d0d257 | off | -91.49 | 176.58 | 0 |
+| b1d0d257 | on | -76.12 | 125.37 | 4962 |
+| corrected new torque winner | off | -193.24 | 168.05 | 0 |
+
+**Conclusion at this cut:** central target capture, clockwise wall torque,
+and optical residence are genuinely different objectives on the recorded
+trajectories. A high target-capture scene can reduce optical residence
+because its rays terminate earlier. The longest tested residence
+(`b1d0d257` absorber off) is not the strongest torque.
+The peak tested torque (-193.24 microN*m) is not a universal optimum
+in any of these objectives.
+
+**Next receiver gates:** export power-weighted spatial occupancy by cell
+and winding-turn for every actual HTML path; add domain-clipped
+segment-level residence and source-normalised circulation to the live
+HTML Pareto model and JSON receipt; paired ON/OFF absorber-position scans;
+independent geometric ray/curve and step-size convergence; source-
+consistent 3D/wave optics if studying actual WGM resonances; multiple
+fresh initial geometries and dimensionless shape sweep. Never add
+indefinite residence as a finite value for unresolved rays.
+Do not take photon lifetime, ray count or a picturesque trajectory
+as evidence of magnetic trapping, anomalous torsion, clinical response,
+or source-free propulsion.
+
 ## 2026-10-28 actual HTML event export and angular-momentum failure/referee
 
 **New locally executed verification evidence** from the existing HTML state
