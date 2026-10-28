@@ -1,3 +1,83 @@
+## 2026-10-28 same-SDF cross-family and 27-state experiment
+
+**Executed in local browser**: modified existing user-facing HTML
+`spiral_raymarch_sweep_pareto.html` to use shared
+`spiralRadius(theta)` and `spiralSlope(theta)` receivers from which
+*the same* SDF closest-wall projection, wall tangent/normal,
+rendering, entrance aperture, and torque histogram obtain their
+coordinates. Families:
+`arch: r=a+g theta`;
+`log: r=a exp(b theta)` (the legacy growth UI parameter is b,
+dimensionless in this family);
+`segmented: r=a+g theta+c sin(theta/Nturns)` with exact derivative
+`g+(c/Nturns) cos(theta/Nturns)`.
+The third is a smooth segmented-profile *surrogate*, not physical panel
+join/notch diffraction. Existing default arch 44-ray scene reproduced
+the original wall torque -139.43707635326658 microN*m, 440 collisions,
+and 5388.632453145407 W receiver **exactly**. The new HTML,
+search receipts and browser screenshots are **session-local files**, not
+yet committed to GitHub. A GitHub-committed browser runner
+`scripts/kozyrev_html_family_ternary_runner.py` can rerun the experiment
+with that HTML supplied as `--html`.
+
+**162 actual same-HTML evaluations**: 3 families x 3 levels of
+shape/pitch x 3 turns (1.25,1.5,1.75) x 3 angles (-97,-90,-83)
+x absorber ON/OFF = 162; 40 satisfy all 16 interior entries and
+zero unresolved ray statuses. The C3/ternary design-of-experiments
+labels are combinatorial, not physical 369 effects.
+
+**44-ray replay, 9000 W, rho .95**: strongest *raw*
+clockwise-wall-torque scene found in this bounded search:
+true log `inner=1.5 m, b=.17, turns=1.5, thickness=.156 m,
+rotation=180 degrees, emitter=(4.65,2.72) m, emitter angle=-83 degrees,
+beam width=.02 m, focal length=10 m, target OFF`;
+wall torque **-250.73064158122473 microN*m**;
+611 wall collisions, 44/44 interior entries, zero unresolved,
+4415.3252594801925 W escaped and 4584.674740519808 W absorbed
+at walls. This has larger *outer radius* than the earlier arch scene,
+so raw torque alone is NOT a scale-normalised superiority claim.
+Independent Python event replay gives **PASS**,
+angular residual 1.49e-19 N*m, linear residual 1.70e-20 N,
+energy residual ~1.18e-11 W. No physical/Agda proof is implied.
+
+**Distinct focusing winner within the limited screen**: a log
+candidate with absorber ON delivered ~7330.56 W to the
+receiver at 44 rays; it did not improve upon the earlier
+user-provided 9c07f3a8 capture percentage. Pareto objective
+requires receiver power, signed torque normalised by outer
+radius, in-domain optical residence and directed escape
+(momentum), NOT a single raw-torque ranking.
+
+**Numerical blocker discovered by offset sensitivity**:
+On the log torque winner, advancing `0.0025, 0.00125, 0.000625 m`
+along the reflected ray gave ~-250.7306, -250.7302,
+-250.7279 microN*m and exactly 611 collisions each.
+Reducing to `0.00025 m` gave approximately
+-148.507 microN*m and **10516 collisions**, an obvious
+self-recollision catastrophe because the SDF hit threshold is
+0.0007 m. Do not use sub-threshold offsets for convergence
+or claim a global optimum; derive/scale epsilon and verify
+independent exact intersections. The nominal 3-small-offset
+stability is a provisional *implementation regime*, not a
+proof of geometry accuracy.
+
+**Transplant and proof constraints**: reuse original source
+mathematics and torque owner merged #1164; newer
+#1414 finite S3/C3/balanced ternary/quaternion, #1407
+optical/TOE are separate proof owners. A handedness reflection
+`(x,y)->(x,-y)` has real signed torque parity.
+`3^3=27` is an experiment index, not measured resonance.
+`3^5=243`, `5^3=125`, and 720-degree quaternion lifts
+cannot be assigned unexplained physical multipliers.
+Ibrahim Monster 3B ownership preserved. ESD untouched.
+
+**Remaining high-priority**: exact SDF/curve collision validation,
+matched aperture and outer-radius controls, same-scene
+target ON/OFF, occupant-shaped spatial occupancy and
+nonreflective sector controls, actual local-HTML source
+commit, spatial/Pareto integration, and wave solver before
+coherent WGM or diffraction claims.
+
 ## 2026-10-28 cross-pollination cut: real geometric invariants versus numerology labels
 
 **Latest checked lineage:** #1414 root monodromy S3/C3, 3^5 vs 5^3,
