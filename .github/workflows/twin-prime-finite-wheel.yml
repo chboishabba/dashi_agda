@@ -4,7 +4,9 @@ on:
   pull_request:
     paths:
       - "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda"
+      - "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda"
       - "scripts/check_twin_prime_six_wheel_finite.py"
+      - "scripts/check_twin_prime_ssp15_crt_finite.py"
       - ".github/workflows/twin-prime-finite-wheel.yml"
   push:
     paths:
@@ -21,15 +23,24 @@ jobs:
         with:
           python-version: "3.12"
       - name: Check finite arithmetic, not unbounded theorem
-        run: python3 -B scripts/check_twin_prime_six_wheel_finite.py
+        run: |
+          python3 -B scripts/check_twin_prime_six_wheel_finite.py
+          python3 -B scripts/check_twin_prime_ssp15_crt_finite.py
       - name: Check theorem owner contains no new axioms or holes
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          text = Path("DASHI/Arithmetic/TwinPrimeSixWheelExact.agda").read_text()
-          for forbidden in ("postulate", "TERMINATING", "{!!", "?" + "?"):
-              assert forbidden not in text, forbidden
+          paths = (
+              "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda",
+              "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda",
+          )
+          texts = [Path(path).read_text() for path in paths]
+          for source in texts:
+              for forbidden in ("postulate ", "TERMINATING", "{!!", "?" + "?"):
+                  assert forbidden not in source, forbidden
           for required in ("pairSurvivorMustBeR5", "twinInfinitudeImpliesBoundedPairsTwo"):
-              assert required in text, required
+              assert required in texts[0], required
+          for required in ("bridgeChoosesFirstApplicable", "bridgeActivationForcesResidueFive"):
+              assert required in texts[1], required
           print("static source check passed; NOT an Agda kernel receipt")
           PY
