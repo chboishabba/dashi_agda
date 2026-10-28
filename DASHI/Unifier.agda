@@ -23,6 +23,15 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.SignedSSPTwinObservableTransportExact as ExactSSPReadout
+open ExactSSPReadout public using
+  ( losslessSSPReadoutRoundTrip
+  ; losslessSSPPreservesActualTwinPredicate
+  ; losslessSSPPreservesExactTwinIndicator
+  ; terminalSameOutcomeTwinIndicator
+  ; terminalSameOutcomeTwinPrimeProof
+  )
+
 import DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact as SignedTwinNoGo
 open SignedTwinNoGo public using
   ( orientationFiveAndSevenEqual
