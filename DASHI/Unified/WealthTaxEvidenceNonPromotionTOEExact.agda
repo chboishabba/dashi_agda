@@ -566,35 +566,15 @@ open DashiTradeTax public using
   ; finiteAxisSumStrict
   ; strictImprovedAxisFromFiniteCoverage
   ; finiteParetoFrontierIsNonempty
-  ; PolicyEvidenceXY
-  ; policyEvidenceXY
-  ; policyEffectZ
-  ; sameXYStillAllowsOppositeZ
-  ; sourceReviewDoesNotDetermineCausalPolarity
-  ; rechartingXYCannotManufactureCausalPolarity
-  ; rotatePolicyXYZThreeTimes
-  ; swapPolicyXYTwice
-  ; existingS3InverseLaw
-  ; swapPolicyYZTwice
-  ; policyCubeAdjacentSwapBraid
-  ; policyCubeLabelSwapNotAnEconomicIntervention
-  ; existingQ8CentralSignIsProjectedAway
-  ; existingQ8MinusSignHasOrderTwo
-  ; PolicyEvidenceInteractionThreeCell
-  ; policyInteractionToCellDialectic
-  ; policyThreeCellToExistingHyperform
-  ; policyThreeCellFabricRoundTrip
-  ; policyThreeCubeInheritedCarrierCount
-  ; policyOneCubeInheritedCarrierCount
-  ; FiveEvidenceGateAnnotations
-  ; ThreeFiveModeAnnotations
-  ; fiveGateAnnotationsHave243Combinations
-  ; threeFiveModesHave125Combinations
-  ; differentFiveGateAndThreeModeCounts
-  ; numerologicalPatternDoesNotPayEconomicProof
-  ; matchingDigitsDoNotProveTaxEffects
-  ; quaternionLiftDoesNotAuthenticateSettlement
-  ; incompatibleCardinalSignaturesAreNotSameCarrier
+  ; policyRawTwoAxisCost
+  ; policyEqualWeightCost
+  ; equalWeightCostCollapsesIncomparablePolicies
+  ; equalCostTotalDoesNotRecoverAdministrativeCost
+  ; rechartingTotalCostCannotRecoverAdministrativeAxis
+  ; equalCostTotalCannotReflectParetoOrder
+  ; policyWeightedTwoAxisCost
+  ; careHeavyWeightsPreferCareByScalar
+  ; administrationHeavyWeightsPreferCheapAdministrationByScalar
   ; DvPBatchDisposition
   ; SourceLinkedFinalSettlement
   ; ExternallyAdmittedSaleTaxRoute
@@ -798,41 +778,35 @@ toeAssetValueDoesNotIdentifyBeneficialShare :
 toeAssetValueDoesNotIdentifyBeneficialShare =
   DashiTradeTax.assetValueDoesNotIdentifyTaxpayerBeneficialShare
 
--- Cross-domain use of established 27-state carrier. The x/y projection
--- identifies the same evidence-review label at opposed z hypotheses.
--- Existing non-factorability owner provides the full no-go proof.
-toePolicyXYDoesNotDetermineCausalZ :
+-- Exact cost-axis loss: both synthetic policies have an equal summed
+-- scalar, but one has lower administration cost and the other lower
+-- care shortfall. A numerological rechart adds no missing information.
+toeEqualScalarCannotRecoverPolicyAdminAxis :
   INF.FactorsThrough
-    DashiTradeTax.policyEvidenceXY DashiTradeTax.policyEffectZ → ⊥
-toePolicyXYDoesNotDetermineCausalZ =
-  DashiTradeTax.sourceReviewDoesNotDetermineCausalPolarity
+    DashiTradeTax.policyEqualWeightCost
+    (DashiTradeTax.policyAxisCost DashiTradeTax.administrationAxis) → ⊥
+toeEqualScalarCannotRecoverPolicyAdminAxis =
+  DashiTradeTax.equalCostTotalDoesNotRecoverAdministrativeCost
 
-toeFinanceXYRechartCannotProduceZ :
-  {Recharted : Set} →
-  (rechart : DashiTradeTax.PolicyEvidenceXY → Recharted) →
+toeScalarTotalCannotReflectActualParetoDominance :
+  ((left right : DashiTradeTax.HypotheticalPolicyOutcome) →
+    DashiTradeTax.policyEqualWeightCost left
+      ≤ DashiTradeTax.policyEqualWeightCost right →
+    Pareto.WeaklyDominates DashiTradeTax.policyTradeoffCosts
+      left right) → ⊥
+toeScalarTotalCannotReflectActualParetoDominance =
+  DashiTradeTax.equalCostTotalCannotReflectParetoOrder
+
+toeRechartOfScalarCannotRecoverAdminAxis :
+  {Chart : Set} →
+  (rechart : Nat → Chart) →
   INF.FactorsThrough
-    (λ state → rechart (DashiTradeTax.policyEvidenceXY state))
-    DashiTradeTax.policyEffectZ → ⊥
-toeFinanceXYRechartCannotProduceZ =
-  DashiTradeTax.rechartingXYCannotManufactureCausalPolarity
+    (λ candidate → rechart (DashiTradeTax.policyEqualWeightCost candidate))
+    (DashiTradeTax.policyAxisCost DashiTradeTax.administrationAxis) → ⊥
+toeRechartOfScalarCannotRecoverAdminAxis =
+  DashiTradeTax.rechartingTotalCostCannotRecoverAdministrativeAxis
 
-toeFiveEvidenceGatesHave243AnnotationCombinations :
-  DashiTradeTax.fiveGateTernaryArithmeticCount ≡ 243
-toeFiveEvidenceGatesHave243AnnotationCombinations =
-  DashiTradeTax.fiveGateAnnotationsHave243Combinations
-
-toeThreeFiveModesHave125AnnotationCombinations :
-  DashiTradeTax.threeFiveModeArithmeticCount ≡ 125
-toeThreeFiveModesHave125AnnotationCombinations =
-  DashiTradeTax.threeFiveModesHave125Combinations
-
-toeNumericPatternIsNotEconomicAuthority :
-  DashiTradeTax.NumericSignatureCertifiesTaxEffect → ⊥
-toeNumericPatternIsNotEconomicAuthority =
-  DashiTradeTax.matchingDigitsDoNotProveTaxEffects
-
-toeQuaternionSpinIsNotSettlementEvidence :
-  DashiTradeTax.QuaternionSpinCycleCertifiesSettlement → ⊥
-toeQuaternionSpinIsNotSettlementEvidence =
-  DashiTradeTax.quaternionLiftDoesNotAuthenticateSettlement
+-- No cost-covariance or eligibility proof has been constructed for
+-- relabeling real tax, administrative, care or title axes as S3 charts.
+-- The original mathematical carrier owners remain unchanged.
 
