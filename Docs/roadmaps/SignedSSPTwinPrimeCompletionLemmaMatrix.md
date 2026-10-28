@@ -163,8 +163,8 @@ twin-prime proof. The 75-ID architecture tally is unchanged.
 | E02 | Modulus 2 is retained and has exactly one pair-survivor residue | P: six-wheel owner and finite probe; general Nat theorem still required |
 | E03 | For odd prime p the two excluded classes differ | N: arithmetic proof p>2 |
 | E04 | Exactly p−2 locally surviving residues for each odd p | N: Fin/cardinality proof; cannot assume it from a Python count |
-| E05 | Arithmetic CRT reconstruction from general pairwise-coprime certified prime moduli | P: explicit FINITE modulus-270 affine CRT injection and 27-case lookup in `TwinPrimeTernary270AffineCRTCodecExact`; general inverse and 270-survivor Agda coverage theorem still N |
-| E06 | Forward/reconstruction inverse laws for arbitrary coprime CRT | P: 27-element cube/270-wheel decode-after-encode proof is source-written; arbitrary-axis true CRT BIDI and exhaustive 270-coverage in Agda remain N |
+| E05 | Arithmetic CRT reconstruction from general pairwise-coprime certified prime moduli | P: explicit FINITE modulus-270 affine CRT injection and 27-case lookup in `TwinPrimeTernary270AffineCRTCodecExact`; general inverse remains N; finite 270-survivor coverage source-written in TwinPrimeTernary270SurvivorCoverageExact (kernel pending) |
+| E06 | Forward/reconstruction inverse laws for arbitrary coprime CRT | P: 27-element cube/270-wheel decode-after-encode proof is source-written; arbitrary-axis true CRT BIDI remains N; finite 270-coverage source-written, kernel pending |
 | E07 | General finite pairwise-coprime prime product CRT | N: inductive step with a coprime-product proof |
 | E08 | Exact total survivor count `∏(p−ν_p)` modulo product | N: leverage E02–E07 and `FinitePrimeProductSieveExact` |
 | E09 | Product of any finite prime moduli is a sieve period | S: `CertifiedPrimePairPeriodExact` (even with repeated axes) |
@@ -461,3 +461,36 @@ written, not kernel verified until an exact-head type-check exists.
 The actual all-prime reachability theorem is not supplied by a finite
 SSP15 label set, numerical tests or by the presence of a field in
 an uninstantiated record.
+
+## 2026-10-28 extension: actual finite CRT-wheel reverse coverage (new owner)
+
+The source-written `TwinPrimeTernary270SurvivorCoverageExact` now adds the
+missing reverse direction **at the finite 270-element residue level**.
+It reuses the already typed `Ternary27Point(x,y,z)`, the source-owned
+injective affine encoder, and the certified prime-axis predicates.
+
+- `wheel270CompleteFin`: every one of the 270 representatives
+  passing the actual 2/3/5 pair guards admits a typed cube preimage.
+- `certifiedWheel270ToGuards` and `wheel270CompleteCertified`:
+  transport from real `CertifiedPrimeAxis` evidence, not a new oracle.
+- `wheel270SurvivorDecodes`: a local sieve survivor has a successful
+  `wheel270ToCube` readout (no unexplained `nothing`).
+- `wheel270ProjectionMod27`, `wheel270ProjectionMod5` and
+  `wheel270ProjectionMod2`: the precise arithmetic decomposition
+  `1 × 9 × 3 = 27`. The x trit selects an allowed mod-5 class,
+  y/z encode the 9 allowed mod-27 classes, and parity is fixed.
+
+The proof table has **270 computed cases: 27 inverse witnesses and 243
+rejections** by an explicit modulus/equality contradiction.
+Independent exact Python arithmetic checked all 270 instances. The
+Agda compiler is unavailable here. These declarations are **source
+written, KERNEL PENDING**, not G06-discharge.
+
+Status refinement: E05/E06 advance for this special 2/3/5 wheel
+only. E05–E08 for general pairwise-coprime moduli remain open, as do
+A07/A08/B03/C08 for the full signed PRIMEGAME execution compiler,
+F02/F04/F06/F07 and G01 for gap-two analytic infinitude.
+The codec is a bijection of finite *candidate residues*, not of
+actual twin primes. Finite surving composites remain source-owned
+counterexamples. Original Ibrahim Monster 3B ownership and other
+mathematical roots are unaffected; no protected ESD files changed.
