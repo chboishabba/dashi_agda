@@ -513,3 +513,14 @@ The committed existing finite regression
 243 rejects, three projections and 119/121 factorizations.
 Its equivalent exact-integer tests were run locally; CI and Agda
 kernel were not run.
+
+**Exceptional small-prime boundary:** the local mod-2/3/5 wheel
+excludes n=3 and n=5 because an endpoint equals a sieving prime.
+These are genuine familiar twin-prime starts (3,5) and (5,7),
+so the mod-270 theorem must be described as *exactly covering the
+wheel's local surviving residues*, never as classifying every
+genuine pair. The new source-written
+`wheel270RejectsExceptionalStartThree` and
+`wheel270RejectsExceptionalStartFive` assert the arithmetic
+filter exclusions explicitly, and are re-exported through all
+three TOE roots. Agda kernel pending.
