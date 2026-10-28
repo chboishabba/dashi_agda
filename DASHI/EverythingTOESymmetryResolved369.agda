@@ -1585,3 +1585,20 @@ toeR2P2OpticalLatticeNotQuantumGravity :
     R2P2Lattice.canonicalOpticalLattice369PhysicalAuthority ≡ false
 toeR2P2OpticalLatticeNotQuantumGravity =
   R2P2Lattice.latticeDoesNotObserveQuantumGravity
+
+------------------------------------------------------------------------
+-- Ma 2026 S4 supercell N497=18, N813=11, nominal cross-product.
+-- Equal number 18 does not identify a physical R2P2/369 wave carrier.
+------------------------------------------------------------------------
+
+toeMaSupercellNominal18to11 :
+  R2P2Lattice.maFirst813Periods * R2P2Lattice.nominal813Nm + 3
+  ≡ R2P2Lattice.maFirst497Periods * R2P2Lattice.nominal497Nm
+toeMaSupercellNominal18to11 =
+  R2P2Lattice.maFirstNominalSupercellOffset
+
+toeMaSupercell18NotPhysicalC18 :
+  R2P2Lattice.paperSupercell18EqualsPhysicalC18Realization
+    R2P2Lattice.canonicalOpticalLattice369PhysicalAuthority ≡ false
+toeMaSupercell18NotPhysicalC18 =
+  R2P2Lattice.maSupercell18IsNotAnIdentifiedC18PhysicsRealization
