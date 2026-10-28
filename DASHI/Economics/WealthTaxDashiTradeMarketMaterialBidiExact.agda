@@ -486,3 +486,38 @@ twoFillCashConservation :
       * secondUnitPrice twoPricesThreeProceeds
 twoFillCashConservation =
   settledProceedsReconciled twoPricesThreeProceeds
+
+
+------------------------------------------------------------------------
+-- CONDITIONAL CASH CHRONOLOGY
+-- An order/execution event is not exchange settlement. For a sale-funded
+-- TAX PAYMENT to use settled proceeds, source times must be matched.
+-- A bridge loan (if one exists) is a separate FundingRoute.newLoanCash axis;
+-- do not invent it merely because settlement is later than tax payment.
+------------------------------------------------------------------------
+
+record MatchedSettlementTaxChronology : Set where
+  constructor matched-settlement-tax-chronology
+  field
+    settledTransaction : TwoFillSettlementLink
+    finalSettlementEpoch : Nat
+    taxCashReceiptEpoch : Nat
+    forwardSettlementToCollectionLag : Nat
+    taxCashNotEarlierThanSettlement :
+      taxCashReceiptEpoch ≡
+        finalSettlementEpoch + forwardSettlementToCollectionLag
+open MatchedSettlementTaxChronology public
+
+-- Chronological integer epochs are synthetic ordered markers, not dated
+-- market observations and not automatically exchange-business-day offsets.
+sameRouteChronologicalPayment : MatchedSettlementTaxChronology
+sameRouteChronologicalPayment =
+  matched-settlement-tax-chronology
+    twoPricesThreeProceeds 3 4 1 refl
+
+-- A hypothetical settled sale at epoch 3 cannot directly fund a tax cash
+-- receipt at epoch 1 under this specific nonnegative forward-lag contract.
+priorCashReceiptHasNoForwardSettlementLink :
+  (lag : Nat) → 1 ≡ 3 + lag → ⊥
+priorCashReceiptHasNoForwardSettlementLink zero ()
+priorCashReceiptHasNoForwardSettlementLink (suc lag) ()
