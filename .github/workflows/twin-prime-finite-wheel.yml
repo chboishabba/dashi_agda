@@ -59,3 +59,29 @@ jobs:
               assert required in texts[3], required
           print("static source check passed; NOT an Agda kernel receipt")
           PY
+
+  pinned-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+      AGDA_JOBS: '2'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check new theorem sources with pinned Agda (kernel receipt if passed)
+        env:
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29
+        run: |
+          set -euo pipefail
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Arithmetic/TwinPrimeSixWheelExact.agda \
+            DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda \
+            DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda \
+            DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda
