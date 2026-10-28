@@ -1371,3 +1371,120 @@ New `AlexanderHornedInvariantCylinderDirectLimitExact.agda` adds the missing sou
 - The original Alexander/Hatcher wild 3D embedding, same-object meridian/relative collar and perfect-group representation into a nonabelian target remain independent and kernel-pending; finite local phase groups do not solve them. PR #1414 polynomial monodromy and quaternion, #1407 27/729 Fourier, #1275 Zipf/Heaps and original Ibrahim Monster 3B retain distinct authorship. No ESD changes or speculative welds.
 
 Canonical detailed ledger: `Docs/topology/AlexanderHornedInvariantCylinderDirectLimitMaxCut20261028.md`.
+
+
+### Q. Three-legged pants as actual three-child source: boundary-word obstruction and genus-two repair
+
+User specifically identified the existing **three-legged pants gluing** as
+the candidate geometric supplier for the F06 `ternaryThreeChildHandlebody`
+obligation. Reuse-first audit found that stacked #1254
+`DASHI/Topology/TernaryCylinderPantsGeometryExact.agda` already
+constructs exact ternary child slots, the 1→3 *combinatorial*
+pants channels and matching prefix refinements. Its ORIGINAL
+`TernaryPantsGeometryBoundary` explicitly says
+`smoothEmbeddedPantsThickeningConstructed=false`.
+Original `RelationalBranchCobordismGeometry` owns its
+phase/capacity/wave/interface gluing. These are real existing
+results, **not** actual surface/3D-handlebody embeddings.
+
+**Essential geometric distinction:** the orientable genus-zero
+four-holed sphere `Σ_(0,4)` (one input, three outputs)
+has peripheral boundary relation `d·a·b·c=1`
+(up to orientation, conjugation and basepoint paths).
+Thus the input peripheral loop reads `(abc)^(-1)`,
+or `abc` with reversed chosen input orientation.
+By contrast the proposed ternary Alexander/Hatcher
+meridian bonding map is
+```text
+x_w -> [a,b][b,c] = a b a^-1 c b^-1 c^-1 .
+```
+The abelianisation of the first is nonzero for
+independent child meridians, while that of the
+second is identically zero. Their equality
+is therefore **impossible** under a free-group
+identification sending the three output
+peripherals to (a,b,c). In particular no
+direct promotion of the combinatorial 1→3
+pants relation into the horn meridian is
+mathematically valid. Classical source:
+four-holed sphere presentation
+`π₁ Σ_(0,4)=<a,b,c,d|abcd=1>`;
+Calegari's surface-boundary commutator
+presentation also supplies the repair.
+
+**Constructive repair on a different surface type:**
+a genus TWO, one-boundary surface `Σ_(2,1)`
+has source boundary word
+`[A,B][C,D]`. A homomorphism of its rank-four
+free group sending
+`(A,B,C,D)→(a,b,b,c)`
+maps that exact boundary word to
+`[a,b][b,c]`, with the proper order.
+This is an ACTUAL continuous surface map
+at the homotopy-class/surface-group level
+since the source surface retracts to a
+four-petal graph. It does **not** assert
+the map is an embedding or π₁-injective:
+indeed B and C share an image, creating
+a kernel already on the source free group.
+The natural next geometry is a genuinely
+embedded genus-two surface with one specified
+boundary curve in a 3D handlebody exterior,
+or another source-faithful 3D linking
+construction inducing the same word.
+One must explicitly prove its gluing to
+the existing **three** child solid pieces,
+the complement inclusion and the induced
+meridian naturality.
+
+**New source owner**:
+`AlexanderHornedTernaryPantsMeridianBoundaryExact.agda`
+reuses original #1244 three-child `TernaryWord`
+and original `Pants.composedOneToThree`.
+It constructs a C3-valued character that sends
+first child to 1 and other children to 0,
+proves peripheral pants boundary has nonzero
+character and ternary commutator word has zero,
+and gives a contradiction to their identification.
+It also defines the genus-two boundary word
+and proves its specific image under shared
+middle-handle assignment is exactly the
+selected ternary refinement word.
+This is source-written, Agda kernel pending.
+
+**Updated exact remaining lemma chain** (F06-F09):
+1. `ternaryPantsOutputSlots` [prior #1254]
+2. `fourHoledSpherePeripheralPresentation` [classical]
+3. `pantsBoundaryNotHornBonding` [new source]
+4. `genusTwoBoundaryWord` [classical]
+5. `ternaryBoundaryFactorsThroughGenusTwo` [new source]
+6. `genusTwoEmbeddedSurfaceRealisation` [OPEN]
+7. `embeddedSurfaceBoundaryMeridian` [OPEN]
+8. `threeChild3DHandlebodyCarrier` [OPEN]
+9. `threeChildLinkedSatelliteStage` [OPEN]
+10. `threeChildStageInclusionInjective` [OPEN]
+11. `threeChildComplementMeridianNaturality` [OPEN]
+12. `ternaryInfiniteCompactExhaustion` [OPEN]
+13. `ternaryWildLimitAndRelativeCollars` [OPEN]
+14. `ternaryExteriorPi1DirectLimit` [OPEN]
+15. `ternaryExternalC3EquivariantAmbientAction` [OPEN]
+
+There is no legitimate route from the existing
+combinatorial 1→3 seam receipt ALONE to (6)-(15).
+All three sectors and native balanced end
+addresses remain available as *separate*
+data. The existing binary Hatcher wild
+group remains its own source, with its
+own supported stationary-cap geometric wall.
+
+**Attribution**: classical oriented surface
+group and cobordism presentations, original
+Alexander 1924/Hatcher AT 2B.2 binary
+geometry; original DASHI `Pants` and
+`TernaryCylinderPantsGeometryExact` owners,
+original distinct #1244 ternary commutator
+tower authoring. No ownership of #1254,
+Ibrahim Monster 3B, zeta/RH, 2I, or acoustic
+lab data is reassigned. This source proof
+is NOT an Agda kernel, smooth embedding
+or physical verification receipt.
