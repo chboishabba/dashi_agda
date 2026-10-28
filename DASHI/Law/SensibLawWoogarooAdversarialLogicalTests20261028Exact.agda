@@ -64,10 +64,10 @@ transitionalSection139 = SavedLaw.newPart9Sections138139
 -- Formula labels are FORMAL atoms. They are not independently reviewed
 -- PNF interpretations or empirical facts. Reuse the native PNF calculus.
 premise : Case.Ground → PNF.Formula
-premise g = PNF.atom (groundKey g) []
+premise g = PNF.atom "candidate-ground-premise" (PNF.literalTerm (groundKey g) ∷ [])
 
 conditionalResult : Case.Ground → PNF.Formula
-conditionalResult g = PNF.atom "hypothetical-legal-consequence" []
+conditionalResult g = PNF.atom "hypothetical-legal-consequence" (PNF.literalTerm (groundKey g) ∷ [])
 
 -- An applicant can derive a consequence only when the bridge/rule and
 -- premise have BOTH been supplied. This proves a sequent, not either input.
@@ -84,10 +84,10 @@ conditionalApplicantDerivation g =
 -- The same logical rule is neutral to party identity. A genuine government
 -- rebuttal likewise needs its own evidence + conditional statutory bridge.
 defencePremise : Case.Ground → PNF.Formula
-defencePremise g = PNF.atom "government-reviewed-compliance" []
+defencePremise g = PNF.atom "government-reviewed-compliance" (PNF.literalTerm (groundKey g) ∷ [])
 
 defenceConsequence : Case.Ground → PNF.Formula
-defenceConsequence g = PNF.atom "hypothetical-defence-result" []
+defenceConsequence g = PNF.atom "hypothetical-defence-result" (PNF.literalTerm (groundKey g) ∷ [])
 
 conditionalRespondentDerivation : (g : Case.Ground) →
   Logic._⊢_
