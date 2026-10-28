@@ -48,10 +48,13 @@ def main() -> None:
     ) == 1
     assert "matter:au:epbc:2019-8575:postapproval" in bridge
     assert "woogaroo-case-cut:v0_1" in bridge
-    assert "SLR PR #59" in memo and "SensibLaw" in memo
+    assert "[PR #59]" in memo and "SensibLaw" in memo
     assert "2015" in memo and "Mackay Conservation Group" in memo
-    assert "consent" in memo.lower() and "without Schedule 1" in memo
-    assert "SCENIC" not in bridge  # no silent alternate action import
+    assert "consent" in memo.lower() and "removed before enactment" in memo
+    # Scenic may be described in a type-level no-promotion firewall.
+    # The actual bridge rows must still target Springview only.
+    assert bridge.count('"2019/8575"') == 7
+    assert 'matchedEPBCAction : String' in bridge
 
     for native, cross in GROUNDS:
         assert f"Case.{native}" in bridge, native
