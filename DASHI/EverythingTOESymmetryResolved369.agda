@@ -70,6 +70,11 @@ open GuyPriorityBidi public using
   ; guyTypedExecutableStepSound
   ; guyNumericExecutableHalt
   ; guyTypedExecutableHalt
+  ; guyLastRuleAlwaysApplies
+  ; guyBlockedPrefixCannotIncludeLast
+  ; guyNumericScannerNeverHalts
+  ; guyNumericAlwaysSteps
+  ; guyTypedAlwaysSteps
   )
 
 import DASHI.Arithmetic.TwinPrimeTernary270IbrahimSurvivorCollisionExact as WheelIbrahimCollision
