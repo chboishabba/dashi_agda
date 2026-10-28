@@ -680,6 +680,51 @@ netReceiptCannotRecoverGrossTurnover =
       noClearedTransactions offsettingClearedTransactions
       sameNetReceipt differentGrossSellsDespiteSameNet)
 
+-- Reconcile arbitrarily many investor allocations to a participant-level
+-- cash batch. The investors' identity, settlement authority and instrument
+-- eligibility remain additional external inputs, not inferred from amounts.
+
+sumInvestorCashUnits : List Nat → Nat
+sumInvestorCashUnits [] = zero
+sumInvestorCashUnits (units ∷ rest) =
+  units + sumInvestorCashUnits rest
+
+record ParticipantInvestorAllocation : Set where
+  constructor participant-investor-allocation
+  field
+    netBatch : ParticipantClearingBatch
+    investorGrossSales : List Nat
+    investorGrossPurchases : List Nat
+    sellerAllocationsReconciled :
+      sumInvestorCashUnits investorGrossSales ≡ grossSellCash netBatch
+    buyerAllocationsReconciled :
+      sumInvestorCashUnits investorGrossPurchases ≡ grossBuyCash netBatch
+open ParticipantInvestorAllocation public
+
+investorAllocationsSumToParticipantObligation :
+  (allocation : ParticipantInvestorAllocation) →
+  sumInvestorCashUnits (investorGrossSales allocation) ≡
+    sumInvestorCashUnits (investorGrossPurchases allocation)
+      + netReceivedCash (netBatch allocation)
+investorAllocationsSumToParticipantObligation allocation =
+  trans
+    (sellerAllocationsReconciled allocation)
+    (trans
+      (netAccounting (netBatch allocation))
+      (cong (λ cash → cash + netReceivedCash (netBatch allocation))
+        (sym (buyerAllocationsReconciled allocation))))
+
+syntheticOffsettingInvestorAllocations : ParticipantInvestorAllocation
+syntheticOffsettingInvestorAllocations =
+  participant-investor-allocation
+    offsettingClearedTransactions
+    (1 ∷ 2 ∷ [])
+    (3 ∷ [])
+    refl refl
+
+-- Allocation evidence is required, not recovered automatically from
+-- participant cash, identical digest strings or an issuer reference alone.
+
 -- The net batch is a participant-level financial observation. The
 -- original two-fill sale is an investor-level synthetic fixture. No implicit
 -- identification of the two records is supplied by this code.
