@@ -20,3 +20,5 @@ import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryLocalPhaseActionEx
 -- NativeTernaryFibreAction owner retained; no duplicate field group.
 import DASHI.Mathematics.Topology.AlexanderHornedNativeTernarySemidirectActionExact
 import DASHI.Mathematics.Topology.AlexanderHornedTernaryFibreDerivedCutExact
+
+import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryTrialectic27ChartExact
