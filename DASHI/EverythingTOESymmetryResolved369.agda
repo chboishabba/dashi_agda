@@ -13,3 +13,10 @@ import DASHI.Mathematics.Topology.AlexanderHornedBalancedTernaryCommutatorTowerE
 import DASHI.Mathematics.Topology.AlexanderHornedNativeBalancedTernaryEndTowerExact
 import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryFibreActionExact
 import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryLocalPhaseActionExact
+
+
+-- Exact native end C3 local-sector SEMIDIRECT group action and
+-- metabelian vs perfect Hatcher/A5/2I non-promotion. Existing
+-- NativeTernaryFibreAction owner retained; no duplicate field group.
+import DASHI.Mathematics.Topology.AlexanderHornedNativeTernarySemidirectActionExact
+import DASHI.Mathematics.Topology.AlexanderHornedTernaryFibreDerivedCutExact
