@@ -37,6 +37,12 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
 open import Data.Product using (Σ; _×_; _,_)
+open import Data.Nat.Base using (_<_; z≤n; s≤s)
+open import Data.Nat.Divisibility using (divides)
+import Data.Nat.Properties as NatP
+import Data.Nat.Primality as NatPrime
+open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (_≢_)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 
@@ -274,4 +280,85 @@ factorableSurvivorWithBothStrictFactors axes a t survivor
           (suc (suc a)) (suc b) (suc t)))
         (factorableRightHasTwoNontrivialFactors a b t)
     )
+  )
+
+------------------------------------------------------------------------
+-- UPGRADE: TRUE stdlib Composite/Prime, not only factor labels.
+--
+-- The original Data.Nat.Primality owner defines Composite using a
+-- nontrivial proper divisor, and proves Composite -> not Prime.
+-- We reuse that exact witness instead of defining another "Prime".
+------------------------------------------------------------------------
+
+twoNontrivialFactorsAreComposite :
+  (n : Nat) →
+  TwoNontrivialFactors n →
+  NatPrime.Composite n
+twoNontrivialFactorsAreComposite n
+    (twoNontrivialFactors a b productEq) =
+  subst NatPrime.Composite (sym productEq)
+    (NatPrime.composite-≢
+      (suc (suc a))
+      firstIsProper
+      (divides (suc (suc b))
+        (NatP.*-comm (suc (suc a)) (suc (suc b)))))
+  where
+    d : Nat
+    d = suc (suc a)
+
+    e : Nat
+    e = suc (suc b)
+
+    strictProduct : d < d * e
+    strictProduct =
+      NatP.m<m*n d e (s≤s (s≤s z≤n))
+
+    firstIsProper : d ≢ d * e
+    firstIsProper equality =
+      NatP.<-irrefl refl
+        (subst (d <_) (sym equality) strictProduct)
+
+twoNontrivialFactorsRefutePrime :
+  (n : Nat) →
+  TwoNontrivialFactors n →
+  NatPrime.Prime n →
+  ⊥
+twoNontrivialFactorsRefutePrime n factored =
+  NatPrime.composite⇒¬prime
+    (twoNontrivialFactorsAreComposite n factored)
+
+factorableSurvivorWithBothCompositeCertificates :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (a t : Nat) →
+  Pair.AllPairSurvive axes (suc (suc a)) →
+  Σ Nat (λ n →
+    Pair.AllPairSurvive axes n
+      × (NatPrime.Composite n × NatPrime.Composite (n + 2)))
+factorableSurvivorWithBothCompositeCertificates axes a t survivor
+  with factorableSurvivorWithBothStrictFactors axes a t survivor
+... | n , (survival , (leftWitness , rightWitness)) =
+  n ,
+  ( survival
+  , ( twoNontrivialFactorsAreComposite n leftWitness
+    , twoNontrivialFactorsAreComposite (n + 2) rightWitness
+    )
+  )
+
+-- The actual arithmetic TwinPrimeAt predicate (separate Prime proofs)
+-- is REFUTED for both-compound outputs. No synthetic prime tags.
+factorableSurvivorCannotBeGenuineTwin :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (a t : Nat) →
+  Pair.AllPairSurvive axes (suc (suc a)) →
+  Σ Nat (λ n →
+    Pair.AllPairSurvive axes n
+      × (NatPrime.Prime n → ⊥)
+      × (NatPrime.Prime (n + 2) → ⊥))
+factorableSurvivorCannotBeGenuineTwin axes a t survivor
+  with factorableSurvivorWithBothCompositeCertificates axes a t survivor
+... | n , (survival , (leftComposite , rightComposite)) =
+  n ,
+  ( survival
+  , NatPrime.composite⇒¬prime leftComposite
+  , NatPrime.composite⇒¬prime rightComposite
   )
