@@ -33,6 +33,7 @@ open import Relation.Nullary using (¬_)
 open import Relation.Binary.PropositionalEquality using (_≢_; cong; trans; subst; sym)
 open import Data.Empty using (⊥-elim)
 import Data.Nat.DivMod as DivMod
+open DivMod using (_/_; _%_)
 
 import DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact as Guy
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
@@ -230,7 +231,7 @@ historicalRuleCount = Guy.guyProgrammeRuleCountIsFourteen
 
 exactNumericNext : Nat → RuleNumbers → Nat
 exactNumericNext n (a , zero) = zero
-exactNumericNext n (a , suc d) = (n * a) DivMod./ suc d
+exactNumericNext n (a , suc d) = (n * a) / suc d
 
 -- For d>0 with m*d=n*a, division's remainder vanishes. Reuse
 -- the canonical division algorithm and multiple-modulo theorem.
@@ -247,9 +248,9 @@ exactNumericNextIsCorrect n (a , suc d)
       (DivMod.m≡m%n+[m/n]*n (n * a) (suc d))
       (trans
         (cong
-          (λ r → r + ((n * a) DivMod./ suc d) * suc d)
+          (λ r → r + ((n * a) / suc d) * suc d)
           (trans
-            (cong (λ v → v DivMod.% suc d) (sym productEq))
+            (cong (λ v → v % suc d) (sym productEq))
             (DivMod.m*n%n≡0 integralNext (suc d))))
         refl))
 
