@@ -13,7 +13,8 @@ module DASHI.Statistics.ZipfPNFConstructiveNormalizationExact where
 -- Counts are positive (suc n). No fabricated normalization premise is passed
 -- by callers. The source Fraction-to-ℚ accumulator equality is distinct.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
