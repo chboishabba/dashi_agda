@@ -77,3 +77,5 @@ Example manifest (replace hashes only after checking actual downloaded files):
 ```
 
 No dataset archive was obtained or hashed in this execution environment. The command makes that absence a hard failure instead of a fabricated measured validation receipt. The original authors' data copyright/CC obligations, field calibration uncertainty, sample covariance requirements and Agda kernel-verification requirements remain unchanged.
+
+**Updated spatial gate:** The intake command now requires `--min-separation-m` and an `xyz_m` three-coordinate metric list for each source position. It rejects inconsistent coordinates and cross-partition source pairs closer than the declared threshold. This is a conservative pairwise check within each acquisition scenario; it does not prove independence of acoustic responses at larger distances or guarantee exact split proportions. The nested-pair implementation is intended as a correctness-first check and may need spatial indexing for the full 13k-position dataset.
