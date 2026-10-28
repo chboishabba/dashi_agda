@@ -151,3 +151,9 @@ The inherited catalogue serves a different question: source-owned representation
 In summary, the user hypothesis splits into **a finite pre-existing 20-prime representation catalogue** and **a general prime candidate/certificate process**. The former is concrete prior art, the latter gives arbitrary-modulus sieve extension. The already-proved SSP369 automorphism preserves each input prime identity and therefore cannot independently generate new prime values. Explicit new moduli and genuine coprime evidence are still necessary for arithmetic CRT.
 
 This is also why `DASHI.Arithmetic.CoprimeLayer` and `DASHI.Arithmetic.TrackedCoprimeTable` are retained as prior coprimality owners: they prove distinct tracked prime powers coprime and a product-divisibility lemma. Our generic `ArithmeticPrimeCRTStep` requires the *same standard-library `Coprime M p` type* for arbitrary axes, instead of assuming it from distinct SSP labels. The general arithmetic inverse remains an open proof target.
+
+### Exact-head kernel CI requested, not yet observed
+
+The PR now has a separate `pinned-agda` GitHub Actions job, modelled on the existing Math2026 and J369 pin and using the repository's `scripts/run_agda29_parallel_check.sh`. It checks the four new Agda modules independently of the Python finite regression. This is a **scheduled CI instruction in committed source**, not a statement that the job ran or passed. Promotion to kernel-verified requires the exact PR head to produce a successful job receipt, followed by checks of the three canonical TOE aggregate imports.
+
+The local running container does not have `agda` installed. Both previous finite scripts and the newly added arbitrary-prime/CRT Python script were executed in this session and passed; their output must not be substituted for the Agda kernel.
