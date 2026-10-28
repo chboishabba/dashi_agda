@@ -9,7 +9,7 @@ module DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact where
 -- Ibrahim 2017 FLN navigation is not a wealth-tax proof or Monster action.
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (zero; _+_)
+open import Agda.Builtin.Nat using (zero; _+_; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attributed
@@ -201,6 +201,31 @@ toeNoCashNoCreditNeedsSaleProceeds :
     + DashiTradeTax.executionCashCost route
 toeNoCashNoCreditNeedsSaleProceeds =
   DashiTradeTax.noOtherFundingImpliesSaleProceeds
+
+-- New bounded settlement seam: the existence of an order or of an
+-- executed fill is insufficient to reconstruct cleared units.
+-- These are source-owned INF examples, not broker/custody confirmations.
+toeSubmittedOrderDoesNotIdentifySettlement :
+  INF.FactorsThrough
+    DashiTradeTax.submittedUnits DashiTradeTax.settledShareCount → ⊥
+toeSubmittedOrderDoesNotIdentifySettlement =
+  DashiTradeTax.submittedOrderDoesNotDetermineSettlement
+
+toeExecutedVolumeDoesNotIdentifySettlement :
+  INF.FactorsThrough
+    DashiTradeTax.executedShareCount DashiTradeTax.settledShareCount → ⊥
+toeExecutedVolumeDoesNotIdentifySettlement =
+  DashiTradeTax.executionDoesNotDetermineSettlement
+
+toeTwoFillCashIdentity :
+  DashiTradeTax.grossSaleCash
+    (DashiTradeTax.settledFundingRoute DashiTradeTax.twoPricesThreeProceeds)
+  ≡ DashiTradeTax.firstSettledUnits DashiTradeTax.twoPricesThreeProceeds
+      * DashiTradeTax.firstUnitPrice DashiTradeTax.twoPricesThreeProceeds
+    + DashiTradeTax.secondSettledUnits DashiTradeTax.twoPricesThreeProceeds
+      * DashiTradeTax.secondUnitPrice DashiTradeTax.twoPricesThreeProceeds
+toeTwoFillCashIdentity =
+  DashiTradeTax.twoFillCashConservation
 
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
