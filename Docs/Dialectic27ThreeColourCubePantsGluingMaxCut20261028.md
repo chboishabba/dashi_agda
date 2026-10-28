@@ -199,3 +199,32 @@ modules and script are committed and reread via the GitHub connector.
 No Agda compiler kernel run, Cargo test, empirical data ingestion,
 actual source payment, graph-colouring theorem, legal fact or
 automatically constructed 2-sheaf/hypersheaf is claimed.
+
+## 28 October continuation — native pants-path graph gap narrowed
+
+A new separate and canonical-synthesis-imported module
+`DASHI/Combinatorics/Dialectic27PantsNativeGridAdjacencyExact.agda`
+declares a native one-slot `PantsPath 3` adjacency using the inherited
+`slot3↔slot6↔slot9` steps, not a definition pulled back from the voxel.
+It proves (source-written, Agda kernel still unrun) all 12 directional
+adjacency cases **both ways** under the already-owned
+`JInvariantColourWheelNineSheetPantsGluingExact`
+voxel↔depth-three pants path bijection, constructs both concrete
+`GraphHom` maps, reuses exact inverse roundtrips, and proves why
+uniform RED painted join faces fail proper adjacent-vertex colouring
+even when their boundary paint agrees.
+
+The separate reproducible finite checker
+`scripts/check_dialectic27_native_pants_adjacency.py`
+covers **729 ordered voxel/path vertex pairs**, 108 directed
+and 54 undirected strict ternary grid edges, and exhibits a
+valid modulo-3 3-colour *vertex* assignment. An independent Python
+enumeration executed those checks successfully. The old
+`GraphColouring369PantsHomomorphismBoundaryExact` still describes
+the unrestricted/unspecified geometry bridge as unresolved: this is
+a **specified native one-slot finite graph only**; no smooth pants,
+general seam-flip proper colouring, full chart-gluing theorem or
+actual physical model is inferred.
+
+The complete **119-entry lemma/source/evidence ledger** is
+[`Dialectic27PantsHyperformalCompleteLemmaLedger20261028.md`](Dialectic27PantsHyperformalCompleteLemmaLedger20261028.md).
