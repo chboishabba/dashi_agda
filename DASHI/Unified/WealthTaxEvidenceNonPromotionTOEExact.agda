@@ -428,3 +428,50 @@ toeBorrowingDoesNotByItselfIncreaseCashLessDebt =
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
 -- observed, exact-head compiler run. No ESD imports are changed.
+
+-- Follow-on economic separation exports. These consume the existing model;
+-- TOE reachability does not certify theorem checking or real-world events.
+
+toePrincipalRemittanceIsBoundedByReconciledAssessment :
+  (collection : DashiTradeTax.NoAdjustmentCollection) →
+  DashiTradeTax.remittedPrincipalUnits collection ≤
+    DashiTradeTax.assessedLiabilityUnits collection
+toePrincipalRemittanceIsBoundedByReconciledAssessment =
+  DashiTradeTax.remittanceBoundedByAssessedLiabilityUnderNoPenalties
+
+toePublicBudgetRequiresReconciledSourcesAndOutflows :
+  (budget : DashiTradeTax.ReconciledPublicCashBudget) →
+  DashiTradeTax.budgetOutflow budget ≤
+    DashiTradeTax.availablePublicCash budget
+toePublicBudgetRequiresReconciledSourcesAndOutflows =
+  DashiTradeTax.cashBudgetConservationWithCostsAndTransfers
+
+toeCareAppropriationDoesNotProveDeliveredHours :
+  INF.FactorsThrough
+    DashiTradeTax.careAppropriationAmount
+    DashiTradeTax.deliveredCareServiceHours → ⊥
+toeCareAppropriationDoesNotProveDeliveredHours =
+  DashiTradeTax.careAppropriatedDoesNotDetermineCareDelivered
+
+toeBalancedTaxPaymentDoesNotProveLiquidity :
+  INF.FactorsThrough
+    DashiTradeTax.identicalRouteCashReceipt
+    DashiTradeTax.externalFundsAccessible → ⊥
+toeBalancedTaxPaymentDoesNotProveLiquidity =
+  DashiTradeTax.routeBalanceDoesNotEstablishLiquidityOrTiming
+
+toeClearingNetDoesNotAuthenticateTaxpayer :
+  INF.FactorsThrough
+    DashiTradeTax.participantNetCashProjection
+    DashiTradeTax.unverifiedInvestorKey → ⊥
+toeClearingNetDoesNotAuthenticateTaxpayer =
+  DashiTradeTax.participantNetStatementDoesNotIdentifyIndividualTaxpayer
+
+toeTwoOptionParetoWitnessHasDistinctMinimalChoices :
+  DashiTradeTax.TwoOptionUndominated
+    DashiTradeTax.lowAdministrativeCost
+  × DashiTradeTax.TwoOptionUndominated
+      DashiTradeTax.increasedCareCapacity
+toeTwoOptionParetoWitnessHasDistinctMinimalChoices =
+  DashiTradeTax.finiteParetoTradeoffHasTwoDistinctMinimalOptions
+
