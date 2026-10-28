@@ -244,3 +244,28 @@ duplicatePrimeFilterRoundTrip :
     ≡ witness
 duplicatePrimeFilterRoundTrip axis rest n
   (first , tail) = refl
+
+------------------------------------------------------------------------
+-- Repeated product period is a theorem for every natural multiplier.
+-- This is about the finite candidate sieve, not genuine prime pairs.
+------------------------------------------------------------------------
+
+allPairProductPeriodicMultiple :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (n k : Nat) →
+  Pair.AllPairSurvive axes n →
+  Pair.AllPairSurvive axes (n + k * modulusProduct axes)
+allPairProductPeriodicMultiple axes n k =
+  allPairCommonPeriodic axes (k * modulusProduct axes) n
+    (scaleCommonPeriod axes (modulusProduct axes) k
+      (productIsCommonPeriod axes))
+
+allPairProductPeriodicMultipleBack :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (n k : Nat) →
+  Pair.AllPairSurvive axes (n + k * modulusProduct axes) →
+  Pair.AllPairSurvive axes n
+allPairProductPeriodicMultipleBack axes n k =
+  allPairCommonPeriodicBack axes (k * modulusProduct axes) n
+    (scaleCommonPeriod axes (modulusProduct axes) k
+      (productIsCommonPeriod axes))
