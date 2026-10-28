@@ -20,7 +20,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base as Nat using (NonZero; nonZero)
 open import Data.Rational.Base as R
   using (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; normalize;
-         _+_; _*_; 1/_)
+         nonNegative; _+_; _*_; 1/_)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Statistics.ZipfFamilyFiniteExact as Zipf
@@ -125,10 +125,11 @@ atomsWithFactor zero shift exponent factor positiveFactor = []
 atomsWithFactor (suc n) shift exponent factor positiveFactor =
   Expected.probabilityAtom
     (rawTerm n shift exponent * factor)
-    (ℚP.positive⁻¹ (rawTerm n shift exponent * factor)
-      {{ℚP.pos*pos⇒pos
-          (rawTerm n shift exponent) factor
-          {{rawTermPositive n shift exponent}} {{positiveFactor}}}})
+    (ℚP.nonNegative⁻¹ (rawTerm n shift exponent * factor)
+      {{ℚP.pos⇒nonNeg (rawTerm n shift exponent * factor)
+        {{ℚP.pos*pos⇒pos
+            (rawTerm n shift exponent) factor
+            {{rawTermPositive n shift exponent}} {{positiveFactor}}}}}})
   ∷ atomsWithFactor n shift exponent factor positiveFactor
 
 atomsTotalEqualsScaledSum :
