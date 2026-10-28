@@ -115,3 +115,30 @@ def test_same_quantile_couples_all_prefixes_for_each_one_token_transfer():
                 assert all(F(0)<u<F(1) for u,_,_ in witnesses)
     with pytest.raises(ValueError):pair_pathwise_quantile_certificate(1,2,2,'iid')
     with pytest.raises(ValueError):pair_pathwise_quantile_certificate(2,2,5,'permutation')
+
+
+def test_full_heaps_curve_exactly_recovers_novelty_flags_not_repeated_identities():
+    from zipf_stochastic_majorization_exact import novelty_flags_from_complete_heaps_curve
+    from zipf_heaps_bridge import observed_prefix_diversity, novelty_flags, equal_flag_runs
+    # Same histogram AND same COMPLETE Heaps curve, but distinct repeat identities.
+    a = (0,1,0,2,1)
+    b = (0,1,1,2,0)
+    assert a != b
+    assert tuple(a.count(i) for i in range(3)) == tuple(b.count(i) for i in range(3)) == (2,2,1)
+    va = observed_prefix_diversity(a)
+    vb = observed_prefix_diversity(b)
+    assert va == vb == (0,1,2,2,3,3)
+    assert novelty_flags_from_complete_heaps_curve(va) == novelty_flags(a) == novelty_flags(b)
+    assert equal_flag_runs(novelty_flags(a)) == equal_flag_runs(novelty_flags(b))
+    assert a[2] != b[2] # The identity of the first repeated token is not identified.
+
+
+def test_novelty_reconstruction_exhaustive_and_invalid_curve_gates():
+    from zipf_stochastic_majorization_exact import novelty_flags_from_complete_heaps_curve
+    from zipf_heaps_bridge import observed_prefix_diversity, novelty_flags
+    for k in (1,2,3):
+        for t in range(6):
+            for word in product(range(k),repeat=t):
+                assert novelty_flags_from_complete_heaps_curve(observed_prefix_diversity(word)) == novelty_flags(word)
+    for invalid in ((), (1,), (0,0), (0,2), (0,1,3), (0,1,0), (0,True)):
+        with pytest.raises(ValueError):novelty_flags_from_complete_heaps_curve(invalid)
