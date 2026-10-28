@@ -619,3 +619,16 @@ toeRingFirmStudyIsNotJakobsenMigrationAggregateEstimand :
 toeRingFirmStudyIsNotJakobsenMigrationAggregateEstimand =
   Base.ringFirmResponseIsNotJakobsenAggregateResponse
 
+-- I07 non-vacuous witness: the original two synthetic cost axes are
+-- explicitly complete and both candidate models are admitted/adequate.
+toeSyntheticTwoAxisPolicyFrontierIsNonempty :
+  DashiTradeTax.NonemptyRankedParetoFront DashiTradeTax.policyTradeoffCosts
+    (λ candidate →
+      DashiTradeTax.finiteAxisCostSum DashiTradeTax.policyTradeoffCosts
+        (DashiTradeTax.administrationAxis ∷ DashiTradeTax.careShortfallAxis ∷ [])
+        (Pareto.model candidate))
+    DashiTradeTax.admittedCheapAdministration
+    (DashiTradeTax.admittedCareCapacity ∷ [])
+toeSyntheticTwoAxisPolicyFrontierIsNonempty =
+  DashiTradeTax.twoAxisPolicyFrontierIsNonempty
+
