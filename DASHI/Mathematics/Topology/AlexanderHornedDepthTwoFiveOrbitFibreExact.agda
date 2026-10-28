@@ -253,3 +253,70 @@ noUniversalFiveFieldRecoveryFromThreeSelectedOrbits recover exact =
 -- under this chosen three-sector selector. Their kernel is C3^2
 -- (nine fields). That count is an independent finite group calculation;
 -- the code above establishes a *stronger concrete non-descent witness*.
+
+
+------------------------------------------------------------------------
+-- COMPLETE KERNEL NORMAL FORM for the selected three-orbit evaluation.
+-- Kernel = exactly two independent C3 coordinates, i.e. C3 × C3.
+-- This goes beyond a collision fixture; it is a TWO-SIDED finite
+-- parametrisation of ALL five-orbit fields with neutral readout.
+------------------------------------------------------------------------
+
+FreeInvisiblePair : Set
+FreeInvisiblePair = C3.C3 × C3.C3
+
+freeInvisibleField : FreeInvisiblePair → FiveField
+freeInvisibleField (a , b) origin = C3.c0
+freeInvisibleField (a , b) axisFirst = C3.c0
+freeInvisibleField (a , b) axisSecond = C3.c0
+freeInvisibleField (a , b) diagonal = a
+freeInvisibleField (a , b) antiDiagonal = b
+
+invisibleCoordinates : FiveField → FreeInvisiblePair
+invisibleCoordinates f = f diagonal , f antiDiagonal
+
+freeInvisiblePairRoundTrip :
+  (pair : FreeInvisiblePair) →
+  invisibleCoordinates (freeInvisibleField pair) ≡ pair
+freeInvisiblePairRoundTrip (a , b) = refl
+
+record NeutralThreeReadout (f : FiveField) : Set where
+  field
+    originNeutral : f origin ≡ C3.c0
+    axisFirstNeutral : f axisFirst ≡ C3.c0
+    axisSecondNeutral : f axisSecond ≡ C3.c0
+
+open NeutralThreeReadout public
+
+freeFieldHasNeutralReadout :
+  (pair : FreeInvisiblePair) →
+  NeutralThreeReadout (freeInvisibleField pair)
+freeFieldHasNeutralReadout pair = record
+  { originNeutral = refl
+  ; axisFirstNeutral = refl
+  ; axisSecondNeutral = refl
+  }
+
+allNeutralReadoutFieldsFromTwoCoordinates :
+  (f : FiveField) →
+  (neutral : NeutralThreeReadout f) →
+  (o : FiveOrbit) →
+  freeInvisibleField (invisibleCoordinates f) o ≡ f o
+allNeutralReadoutFieldsFromTwoCoordinates f neutral origin =
+  sym (originNeutral neutral)
+allNeutralReadoutFieldsFromTwoCoordinates f neutral axisFirst =
+  sym (axisFirstNeutral neutral)
+allNeutralReadoutFieldsFromTwoCoordinates f neutral axisSecond =
+  sym (axisSecondNeutral neutral)
+allNeutralReadoutFieldsFromTwoCoordinates f neutral diagonal = refl
+allNeutralReadoutFieldsFromTwoCoordinates f neutral antiDiagonal = refl
+
+freeFieldReadoutNeutral :
+  (pair : FreeInvisiblePair) →
+  readoutCode (freeInvisibleField pair) selectionOfThreeOrbits
+  ≡ C3.c0 , (C3.c0 , C3.c0)
+freeFieldReadoutNeutral pair = refl
+
+-- Source theorem: kernel of the readout morphism is pointwise
+-- isomorphic to C3². The order 9 follows from known C3 cardinality.
+-- This kernel does not equal an SU2 central kernel or a Monster orbit.
