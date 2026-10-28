@@ -3168,9 +3168,11 @@ policyReindexedCostChartReflectsDominance :
   (left right : HypotheticalPolicyOutcome) →
   Pareto.WeaklyDominates reindexedPolicyTradeoffCosts left right →
   Pareto.WeaklyDominates policyTradeoffCosts left right
-policyReindexedCostChartReflectsDominance left right dominance axis
-  rewrite swapPolicyCostAxisTwice axis =
-  dominance (swapPolicyCostAxis axis)
+policyReindexedCostChartReflectsDominance left right dominance axis =
+  subst (λ namedAxis →
+    policyAxisCost namedAxis left ≤ policyAxisCost namedAxis right)
+    (swapPolicyCostAxisTwice axis)
+    (dominance (swapPolicyCostAxis axis))
 
 -- The general Pareto-symmetry owner requires exact preservation
 -- of eligibility and every named cost axis.
