@@ -178,3 +178,36 @@ This is a source-written finite arithmetic BIDI bridge across all certified modu
 **Why this max-cut matters:** raw FRACTRAN code parity and decoded exponent parity disagree already at p=3. The corrected commuting square cannot accidentally delete prime 2. The old SSP and Monster `4B` address/frame information can be included as extra metadata only if it preserves the arithmetic exponent residual; it does not provide missing prime-correlation estimates.
 
 **Attribution scope:** Conway/Guy prime-game semantics; FRACDASH signed paired-register compiler; DASHI prior codec and arithmetic counting owners; Brun/Hardy–Littlewood classic prime-pair mathematics; Ibrahim's separate 3B representation ownership untouched. No external authorship is transferred to the new bridge proof.
+
+
+## 2026-10-28 seventh max-cut — bidirectional neighbour and faithful reachability
+
+### Exact unsigned arithmetic, both signed directions
+
+`DASHI.Arithmetic.SignedSSPBidirectionalNeighbourExact.agda` completes the negative-offset side of the existing BIDI readout construction. Source-written theorems (Agda kernel pending):
+
+- `plusCodeIsMinusAdmissible`: any certified +2 code has an explicit p=2+k witness for the inverse FRACTRAN -2 macro.
+- `plusThenMinusDecodedIdentity` and `minusThenPlusDecodedIdentity`: +2 then -2, and -2 then +2, recover the same **decoded arithmetic exponent**. This is not equality of arbitrary signed machine states, which may retain different metadata and traces.
+- `minusTwoCRTReadoutCommutes`: after applying the guarded -2 macro, reduce the **decoded** exponent mod any certified prime axis (including 2), not the raw integer `2^p`. This is the previously missing negative counterpart of `plusTwoCRTReadoutCommutes`.
+- `minusTwoPairSieveTransport` and `minusTwoPairSieveTransportBack`: the arbitrary finite certified-prime sieve predicate is preserved in both directions by a proven readout identity.
+- `twinAtLowerToCertifiedUpperAndMinus` and `certifiedUpperAndMinusToTwinAtLower`: both genuine arithmetic prime certificates transfer between a lower-start `TwinPrimeAt k` and the signed machine's encoded upper endpoint `k+2` with its genuine -2 offset. This transports evidence; it does not manufacture primality.
+
+**Local computational check**, independently run: `scripts/check_signed_ssp_bidirectional_neighbor.py` tests input exponents `2..499` (498 inputs, 996 exact two-step integer FRACTRAN traces), both output exponent decoders, inverse offsets, real `Prime` checks and modulo tests at certified integer primes `2,3,5,7,11,13,17,19,23,29`. All passed in a local equivalent script. Prime 2 is retained; `2^3=8 mod 2` is not substituted for decoded `3 mod 2`. No infinite or Agda-kernel conclusion follows.
+
+### Exact finite-code enumeration for every actual twin pair
+
+`DASHI.Arithmetic.SignedSSPTwinFiniteCoverageExact.agda` reuses `PrimeCountingFunction.primesUpTo`, `TwinPrimeCertifiedEnumeratorExact.twinPrimeAt?`, and `SignedSSPPrimeOutputBoundaryExact`'s list membership and map transport. It adds `twinStartAppearsAtOwnCutoff`: any genuinely certified `TwinPrimeAt (2+k)` appears in the finite list at cutoff `2+k`. Mapping to `CertifiedExponentCode` preserves membership via `everyCertifiedTwinCodeAppearsAtOwnCutoff`; `encodedTwinListLengthExact` reuses the existing cardinality equality. `twinCountIncrementsAtCertifiedTwin` reuses the generic prime-count-at-certified-member theorem. This completes **arithmetical finite-list coverage**, not the claim the actual machine reaches that emitted code.
+
+### Real source→target reachability transport, conditional on actual alignment
+
+`DASHI.Arithmetic.SignedSSPPrimeEmitterTraceTransportExact.agda` reuses the pre-existing `Core.TypedDependencyCore.DependentActionSystem` and `Core.AdmissibleReachability.Reachable` (no duplicate reachability definition). It defines `ActionTraceCompiler`: every source admissible step has a target admissible step whose **entire next state equals the encoding** of the source's next state. Induction proves `traceSimulation` across arbitrarily long finite traces. Given source PRIMEGAME completeness for every arithmetic prime, the per-state readout agreement and this exact step alignment, `transportReferencePrimeEmitter` constructs the **existing** `ArithmeticPrimeEmitter` interface.
+
+**Important gap isolation:** the existing `Interop.VerifiedFractranCrankPipeline.CompilerSimulation` has forward simulation up to an observed/decode-matching target state; it does not automatically guarantee that the target next state *equals the encoding* needed to iterate that concrete trace proof. Neither generic compiler interface by itself supplies the required concrete signed SSP runtime instance. The trace transport theorem is conditional and does not promote the existence of such an instance or historical Conway/Guy unbounded prime emission into a DASHI kernel proof.
+
+### Adjacent sources and limits
+
+Reviewed latest DASHI PRs #1409–#1413, PR #1407's 27×729 Fourier/codec treatment, and prior owner PRs #1334, #1139, #636 and #128. #1334 explicitly owns contextual FRACTRAN/SSSP, ternary Pareto and Ibrahim snowball BIDI normalization. Those owners remain distinct; no Monster 3B/4B character or 369 analogy is identified with arithmetic prime-pair distribution.
+
+Rechecked mathematical source: DHJ Polymath, *Variants of the Selberg sieve, and bounded intervals containing many primes*, **Research in the Mathematical Sciences** 1, article 12 (17 October 2014), DOI https://doi.org/10.1186/s40687-014-0012-7. The unconditional bound is `H₁≤246`; `H₁≤6` is conditional on generalized Elliott–Halberstam. Its sieve parity analysis does **not** rule out all signed computational approaches, but it does mean exact modular screening alone does not prove `H₁≤2`.
+
+**Next verified blocker:** instantiate actual signed SSP source/target action systems, action-preserving compiler and readout on the entire PRIMEGAME execution, and obtain full kernel checking of the source-written new Agda modules. Separately, general arithmetic CRT reconstruction/inverse and the analytic twin-pair correlation criterion remain open. A finite machine model cannot directly settle the infinite arithmetic conjecture.
