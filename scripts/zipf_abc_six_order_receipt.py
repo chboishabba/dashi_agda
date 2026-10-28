@@ -120,3 +120,30 @@ def repeated_a_three_type_receipt() -> dict:
         assert from_curves==from_owner
     return {"curve_probabilities":dist, "total_distinct_orders":12,
             "lower":lows,"upper":highs,"heaps_area_gap":2}
+
+
+def two_singletons_prefix_two_gap(m: int) -> dict:
+    """Closed finite (m,1,1) two-sampler comparison, all integer m>=1.
+
+    Classical occupancy/collision identities, with no new probability owner:
+      E_perm[V2] = 2 - m(m-1)/((m+2)(m+1))
+      E_iid[V2]  = 2 - (m^2+2)/(m+2)^2
+      difference = 2(2m+1)/((m+1)(m+2)^2) > 0
+    Also the existing sharp Heaps all-prefix area gap = 2(m-1).
+    """
+    if type(m) is not int or m < 1:
+        raise ValueError("positive integer repeated-type multiplicity required")
+    from zipf_heaps_bridge import expected_iid_vocabulary
+    counts=(m,1,1)
+    n=m+2
+    iid=expected_iid_vocabulary(tuple(Fraction(c,n) for c in counts),2)
+    permutation=expected_permutation_vocabulary(counts,2)
+    iid_closed=2-Fraction(m*m+2,n*n)
+    perm_closed=2-Fraction(m*(m-1),n*(n-1))
+    gap=Fraction(2*(2*m+1),(m+1)*n*n)
+    area=multiset_heaps_area_gap(counts)
+    assert iid==iid_closed and permutation==perm_closed
+    assert permutation-iid==gap and gap>0
+    assert area==2*(m-1)
+    return {"iid_expected_v2":iid,"permutation_expected_v2":permutation,
+            "permutation_minus_iid_v2":gap,"extremal_heaps_area_gap":area}
