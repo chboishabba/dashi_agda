@@ -157,3 +157,50 @@ This is also why `DASHI.Arithmetic.CoprimeLayer` and `DASHI.Arithmetic.TrackedCo
 The PR now has a separate `pinned-agda` GitHub Actions job, modelled on the existing Math2026 and J369 pin and using the repository's `scripts/run_agda29_parallel_check.sh`. It checks the four new Agda modules independently of the Python finite regression. This is a **scheduled CI instruction in committed source**, not a statement that the job ran or passed. Promotion to kernel-verified requires the exact PR head to produce a successful job receipt, followed by checks of the three canonical TOE aggregate imports.
 
 The local running container does not have `agda` installed. Both previous finite scripts and the newly added arbitrary-prime/CRT Python script were executed in this session and passed; their output must not be substituted for the Agda kernel.
+
+## 2026-10-28 continuation: arbitrary-prime product period, symmetry, and exact 186-tuple prior art
+
+This tranche follows the existing proof graph, rather than strengthening the earlier PR's unverified CRT inverse claim.
+
+### New theorem owner and proof boundary
+
+`DASHI.Arithmetic.CertifiedPrimePairPeriodExact` reuses `CertifiedPrimePairModulusExact.LocalPairSurvives`, `AllPairSurvive`, and Agda stdlib `Data.Nat.DivMod.[m+kn]%n≡m%n`. The source defines:
+
+- `localKPeriod`, `localKOffsetPeriod`, `localKPeriodic` and `localKPeriodicBack`: the paired residue predicate is invariant in both directions under adding any natural multiple `k * p`, for each certified prime modulus `p`.
+- `CommonPeriod` (list-indexed, proof-carrying): for each axis, the candidate period `M` is witnessed as `k * p`. This is a *modular arithmetic* obligation, not a claim of CRT reconstruction or primality.
+- `scaleCommonPeriod` and `productIsCommonPeriod`: construct the period witness for the **product of any finite list** of certified prime moduli. No pairwise coprimality is needed for periodicity. Duplicates are allowed.
+- `allPairCommonPeriodic`/`Back` and `allPairProductPeriodic`/`Back`: transport the *entire finite pair sieve* in both directions by its product period, reusing the local predicates and explicit equality transport.
+- `swapFirstTwoPrimeFilters`, `swapFirstTwoFiltersInvolution`, `duplicatePrimeFilterErases`/`Inserts`, and `duplicatePrimeFilterRoundTrip`: exact commutative/idempotent filter symmetry. These are the sound meaning of "further mod()" operations that reorder or repeat constraints. **They cannot generate a new arithmetic prime value from the same SSP label**.
+
+This is logically independent of the outstanding `ArithmeticPrimeCRTStep`, which requires `Coprime M p` plus a genuine inverse of the canonical residue map. A product period is **not** a CRT isomorphism. Similarly, finite filter order/idempotence is **not** a Monster same-object action.
+
+**Agda status:** new source-written declarations, with no source-declared holes, postulates or unsafe flags in the new modules. The runnable pinned-Agda workflow was updated to target the new owner; **no successful kernel receipt has been observed**.
+
+### Independent executed finite regression
+
+`scripts/check_twin_prime_periodic_sieve.py` checks exact integer invariance across nine finite prime lists, including repeated 2 and 3 (deliberately **non-coprime** axes), several multiplier periods, and filter commutation. For pairwise distinct primes it compares full-period survivors with `prod(p - ν_p)`; for duplicate moduli it checks multiplicity scaling over the LCM rather than falsely multiplying local survivor counts. It also retains composite survivor 2279. **Locally executed and passed** on 2026-10-28.
+
+### 2026 short-gap literature: sourced tuple, not borrowed theorem ownership
+
+The public [OpenAI PrimeGaps186](https://github.com/openai/PrimeGaps186) source and [Challenge.lean](https://github.com/openai/PrimeGaps186/blob/main/Challenge.lean) give a particular set `H` of 40 distinct nonnegative shifts with endpoints 0 and 186. `scripts/check_prime_gap_186_tuple_admissibility.py` transcribes this finite data **with source attribution** and independently checks that all 12 primes `p ≤ 40` omit at least one residue class. For every prime `p > 40`, cardinality `|H| = 40 < p` gives an omitted class, independent of the bounded numerical sample. The script additionally samples primes through 256 as a regression, not as a substitute for the cardinality proof.
+
+Observed missing residue witnesses (one per prime): `2→1, 3→1, 5→4, 7→3, 11→7, 13→5, 17→11, 19→8, 23→16, 29→9, 31→4, 37→3`. The separate Python test passed. It establishes the **elementary admissibility of the supplied finite tuple** in ordinary mathematics, but is not a Lean/Agda kernel formalisation of that property. It does not verify `DHL[40,2]` or a gap bound.
+
+Axiom Math's [PrimeGapsLib](https://github.com/AxiomMath/PrimeGapsLib) explicitly separates `PrimeGapsTheory` from `PrimeGapsCert`. OpenAI's 186 formalisation separately declares three analytic/numerical input axioms: the rank-three Kloosterman estimate (classical Katz/Deligne source), the rank-two correlation estimate (Fouvry–Kowalski–Michel), and a numerical physical-integrals/caps package. The conditional Lean proof is **not** imported as an unconditional DASHI theorem. The tuple belongs to the OpenAI source and retains third-party acknowledgments including Axiom Math.
+
+### Cross-PR Pareto/Ibrahim source checks
+
+- [PR #1260](https://github.com/chboishabba/dashi_agda/pull/1260) contains factorial CRT examples and a p=101 control outside SSP15. Its finite certificates are not a general inverse for `Fin(M*p)`.
+- [PR #1139](https://github.com/chboishabba/dashi_agda/pull/1139) uses `RadixValuationStageBridge` and signed SSP/FRACTRAN climbing-gym semantics. Its p-adic addresses and wreath actions retain the chosen prime and do not construct a proof of infinitely many arithmetic twin-prime pairs.
+- [PR #1334](https://github.com/chboishabba/dashi_agda/pull/1334) explicitly forbids search priority, semantic similarity, external eigen patterns, and numeric matches from being promoted to proof or Monster same-object recognition. This PR reuses those governance principles, without copying their theorem owners.
+- Merged [PR #636](https://github.com/chboishabba/dashi_agda/pull/636) is the original source for the finite FRACDASH first-applicable machine interface; merged [PR #128](https://github.com/chboishabba/dashi_agda/pull/128) owns prime enumeration and counting.
+- Retain historical ownership of Brun, Hardy–Littlewood, GPY, Zhang, Maynard, Tao, Polymath8, Ogg/Duncan–Ono, Deligne/Katz, Fouvry–Kowalski–Michel, and original Agda/Lean contributors. The Ibrahim Monster 3B results stay in their prior distinct proof lane. No new Monster representation is claimed.
+
+### Next true cut
+
+1. **Kernel**: type-check this PR's five Agda theorem owners at the exact head and the three TOE roots. Fix actual elaboration failures rather than deriving status from source text or Python scripts.
+2. **Finite arithmetic CRT**: instantiate `ArithmeticPrimeCRTStep` from coprimality with a computed inverse and both round-trip laws; use existing `CoprimeLayer` where it applies and general Nat coprimality otherwise.
+3. **Local pair count**: prove `p - 2` for odd certified `p` and one residue at 2 in Agda. Lift that via a **true** CRT isomorphism to the exact pair-survivor product over distinct prime moduli; explicitly handle duplicate axes.
+4. **Analytic**: keep any `DHL[40,2]` or `H_1 ≤ 186` theorem conditional until every external analytic and finite-certificate assumption is discharged. The elementary finite sieve alone cannot provide twin-prime infinitude.
+
+**Status:** five local Python scripts passed; new Agda source checks are static only; no kernel or CI success asserted. Do not mark this PR merge-ready on source/static evidence alone.
