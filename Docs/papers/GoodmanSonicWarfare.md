@@ -279,3 +279,19 @@ The Goodman/ISO soundscape connection supports three clearly separate and ordere
 Only the third is about human outcomes. The first two do not require a subjective or unsafe exposure to be useful. These are distinct from the speculative Kozyrev apparatus in open PR #1404, and from externally owned Monster/Ibrahim representation results.
 
 **Pareto finish condition:** The source, typed claim, rhythm, finite causal, transport and snowball constructions are sufficient as a candidate *formal framework*. No further semantic satellites should be added unless a measured discriminator, a kernel error or a genuinely new theorem demands one. Agda kernel execution is still missing; source readback/finite evaluation does not discharge that debt. CI is intentionally not treated as the focus of this continuation.
+
+## T2 inverse repair — a second observer pays the missing information
+
+The T1 single-receiver example now has a **second, explicitly idealised microphone position**, `sourceMonitor`, which reads the source activity before the synthetic absorbing layer. The model includes **eight** microphone-by-field readout cases instead of four. The original selected receiver still cannot distinguish `transmittingOff` from `absorbingOn`: both have `receiverSilent`. The new monitor **does** distinguish them.
+
+New source-written finite results in `GoodmanSonicWarfareTransportExact`:
+
+- `sourceMonitorAdequateForEmitterQuestion`: the new observer sample factors the specified toy source-activity query.
+- `sourceMonitorSeparatesSilentSourceCollision`: the formerly colliding states have provably different outputs at the new observer.
+- `jointReceiverAndSourceMonitor`: retains both observations without asserting their empirical calibration.
+
+This illustrates the legitimate engineering route from an **inverse ambiguity** to an **extra measurement requirement**. It does not claim a source monitor can always be installed, that real attenuation is ideal, or that all source-identification inverse problems are solvable. A real instrument needs geometry, frequency response, access, uncertainty and independent validation. Its noise and masking can defeat exact identification.
+
+The independent fixture regression now covers **19** finite factorisation checks (17 prior + 2 monitor sufficiency checks). Source-level static assertions also require eight receiver readout cases, complete source update cases and the original owner theorem names.
+
+**Stop condition for this cut:** We have a full finite ladder: acoustic feature/context sufficiency, rhythm phase insufficiency, passive causal equivalence and discriminating experiment, source-to-receiver ambiguity and an explicitly measured-side repair, plus original source-role and Ibrahim attribution firewalls. Physical wave and human-effect assertions remain unverified. Do not extend this into an apparent general acoustic or cognitive law without independent evidence.
