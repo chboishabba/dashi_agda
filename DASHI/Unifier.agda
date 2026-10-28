@@ -1,4 +1,6 @@
 module DASHI.Unifier where
+import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as R2P2Symbolic
+import DASHI.Physics.Closure.R2P2369WaveOpticalCombInformationCutExact as R2P2Wave
 import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as R2P2Loop
 import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as R2P2Bias
 import DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact as R2P2369
@@ -1779,3 +1781,22 @@ unifierR2P2LoopNullCannotProveCurvature :
     R2P2Loop.canonicalThreeClockLoopSourceBoundary ≡ false
 unifierR2P2LoopNullCannotProveCurvature =
   R2P2Loop.threeClockLoopCannotClaimCurvature
+
+------------------------------------------------------------------------
+-- R2P2 / existing 369 wave constructor: exact fibre vs lossy trit.
+-- This is not a measured optical phase, unitarity or gravity theorem.
+------------------------------------------------------------------------
+
+unifierR2P2WaveSignedBeatRetained :
+  (branch : R2P2Wave.BeatBranch) →
+  R2P2Symbolic.decode
+    (R2P2Symbolic.encode R2P2Wave.signedBeatWaveCoding branch)
+    ≡ branch
+unifierR2P2WaveSignedBeatRetained =
+  R2P2Wave.signedBeatEncodeDecode
+
+unifierR2P2WaveNoPhysicalPhasePromotion :
+  R2P2Wave.c3ProvesOpticalCarrierPhaseCalibration
+    R2P2Wave.canonicalWaveCombAuthorityBoundary ≡ false
+unifierR2P2WaveNoPhysicalPhasePromotion =
+  R2P2Wave.waveBridgeDoesNotCalibratePhysicalPhase
