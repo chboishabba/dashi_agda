@@ -84,12 +84,62 @@ def analyze(hopping: Fraction = Fraction(1), gradient: Fraction = Fraction(2)):
     }
 
 
+
+# Original source: Ma et al. 2026-10-14, supplemental Fig. S4.
+# These are *source-selected* periodic supercell approximants, not
+# a derived list from the 369 phase grid or a verified R2P2 apparatus.
+MA_SUPERCELL_PERIODS = ((18, 11), (85, 52), (139, 85), (175, 107), (265, 162))
+
+
+def nominal_supercell_pareto():
+    """Arithmetic ONLY for nominal 497/813 nm labels, not calibrated magic wavelengths.
+
+    Pareto objective (a): 497-nm period count; (b): relative mismatch
+    |N497*497 - N813*813|/(N813*813). Neither objective is physical
+    fidelity/convergence without experimental wavelength and error data.
+    """
+    rows = []
+    for n497, n813 in MA_SUPERCELL_PERIODS:
+        length497 = n497 * 497
+        length813 = n813 * 813
+        err = abs(length497 - length813)
+        relative = Fraction(err, length813)
+        rows.append({
+            "periods_497": n497,
+            "periods_813": n813,
+            "nominal_length_497_nm": length497,
+            "nominal_length_813_nm": length813,
+            "nominal_mismatch_nm": err,
+            "relative_nominal_mismatch": str(relative),
+            "_relative_fraction": relative,
+        })
+    for row in rows:
+        row["dominated_in_declared_nominal_2d_cut"] = any(
+            other["periods_497"] <= row["periods_497"]
+            and other["_relative_fraction"] <= row["_relative_fraction"]
+            and (other["periods_497"] < row["periods_497"]
+                 or other["_relative_fraction"] < row["_relative_fraction"])
+            for other in rows
+            if other is not row
+        )
+        del row["_relative_fraction"]
+    return {
+        "source": "Ma et al. arXiv:2610.17499v2 supplement S4",
+        "objective": "nominal period count versus rational 497/813-nm length mismatch",
+        "nominal_wavelengths_not_actual_magic_calibrations": True,
+        "finite_rational_approximants_do_not_prove_irrational_AA_transition": True,
+        "rows": rows,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--hopping", default="1", help="exact rational toy J")
+    parser.add_argument("--nominal-supercell-pareto", action="store_true", help="analyze five source-listed rational supercells (nominal labels only)")
     parser.add_argument("--site-gradient", default="2", help="exact rational toy D")
     args = parser.parse_args()
-    result = analyze(Fraction(args.hopping), Fraction(args.site_gradient))
+    result = (nominal_supercell_pareto() if args.nominal_supercell_pareto
+              else analyze(Fraction(args.hopping), Fraction(args.site_gradient)))
     print(json.dumps(result, indent=2, sort_keys=True))
 
 
