@@ -77,6 +77,60 @@ worldTo369 w =
   Fabric.ternaryHyperformalPoint
     (applicantCube w) (respondentCube w) (reviewCube w)
 
+-- Decode only the declared {0, +1} embedding. A raw -1 ambient
+-- coordinate is NOT evidence of legal falsity; it is outside this
+-- six-Boolean input image, and is mapped conservatively to false.
+fromPositiveStatus : SSP.SSPTrit → Bool
+fromPositiveStatus SSP.sspNegOne = false
+fromPositiveStatus SSP.sspZero = false
+fromPositiveStatus SSP.sspPosOne = true
+
+positiveStatusLeftInverse : (v : Bool) →
+  fromPositiveStatus (toPositiveStatus v) ≡ v
+positiveStatusLeftInverse false = refl
+positiveStatusLeftInverse true = refl
+
+-- This decoder uses the six independent inputs only; the three derived
+-- coordinates are readbacks that must be recomputed, not source premises.
+worldFrom369 : ∀ {g} → Fabric.TernaryHyperformalPoint →
+  Logic.HypotheticalWorld g
+worldFrom369
+  (Fabric.ternaryHyperformalPoint
+    (Fabric.ternary27Point applicable defect material)
+    (Fabric.ternary27Point compliant harm conflict)
+    (Fabric.ternary27Point reviewed applicantResult respondentResult)) =
+  Logic.world
+    (fromPositiveStatus applicable)
+    (fromPositiveStatus defect)
+    (fromPositiveStatus material)
+    (fromPositiveStatus compliant)
+    (fromPositiveStatus reviewed)
+    (fromPositiveStatus harm)
+
+sixInputBitsRoundTrip : ∀ {g} (w : Logic.HypotheticalWorld g) →
+  worldFrom369 (worldTo369 w) ≡ w
+sixInputBitsRoundTrip
+  (Logic.world applicable defect material compliant reviewed harm)
+  rewrite positiveStatusLeftInverse applicable
+        | positiveStatusLeftInverse defect
+        | positiveStatusLeftInverse material
+        | positiveStatusLeftInverse compliant
+        | positiveStatusLeftInverse reviewed
+        | positiveStatusLeftInverse harm = refl
+
+-- The input embedding is injective: any two six-Boolean worlds that
+-- share this exact 369 chart are identical at the input level.
+-- This says nothing about legal truth, source validity, or Monster identity.
+worldTo369Injective :
+  ∀ {g} (left right : Logic.HypotheticalWorld g) →
+  worldTo369 left ≡ worldTo369 right → left ≡ right
+worldTo369Injective left right chartEqual =
+  trans
+    (sym (sixInputBitsRoundTrip left))
+    (trans
+      (cong worldFrom369 chartEqual)
+      (sixInputBitsRoundTrip right))
+
 worldToCellDialectic : ∀ {g} → Logic.HypotheticalWorld g →
   Cell.CellDialectic
 worldToCellDialectic w = Cell.hyperformToCellDialectic (worldTo369 w)
