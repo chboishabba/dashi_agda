@@ -130,3 +130,16 @@ def test_original_agda_owners_are_imported_not_redefined():
     for forbidden in ("{-# TERMINATING #-}", "postulate\n", "{!!}",
                       "NO_POSITIVITY_CHECK", "allow-unsolved-metas"):
         assert forbidden not in src
+
+
+def test_general_two_singletons_exact_two_sampler_gap_and_heaps_area():
+    from zipf_abc_six_order_receipt import two_singletons_prefix_two_gap
+    for m in range(1,51):
+        r=two_singletons_prefix_two_gap(m)
+        n=m+2
+        assert r["iid_expected_v2"]==2-F(m*m+2,n*n)
+        assert r["permutation_expected_v2"]==2-F(m*(m-1),n*(n-1))
+        assert r["permutation_minus_iid_v2"]==F(2*(2*m+1),(m+1)*n*n)>0
+        assert r["extremal_heaps_area_gap"]==2*(m-1)
+    for bad in (0,-1,True,1.1):
+        with pytest.raises(ValueError):two_singletons_prefix_two_gap(bad)
