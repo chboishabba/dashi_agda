@@ -128,9 +128,13 @@ class AntipodalFourierTests(unittest.TestCase):
         for token in ("fourCubeHasEightFixedAntipodes",
                       "fourCubeHas28NonfixedAntipodalPairs",
                       "fourCubeOrbitClasses36",
+                      "fourGridFlagIfAndOnlyIfActuallySelfNegativeForward",
+                      "fourGridFlagIfAndOnlyIfActuallySelfNegativeBackward",
                       "fiveCubeHasOneFixedAntipode",
                       "fiveCubeHas62AntipodalPairs",
-                      "fiveCubeOrbitClasses63"):
+                      "fiveCubeOrbitClasses63",
+                      "fiveGridFlagIfAndOnlyIfActuallySelfNegativeForward",
+                      "fiveGridFlagIfAndOnlyIfActuallySelfNegativeBackward"):
             self.assertIn(token,nyquist)
         for src in (code,codec,transport,plane_transport,nyquist):
             for escape in ("{!!}","postulate\n","{-# TERMINATING #-}",
