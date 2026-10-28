@@ -22,7 +22,7 @@ module DASHI.Arithmetic.FiniteTwinSieveNoPromotionExact where
 -- distribution theorem. Source written; Agda kernel pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.List using (List)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product using (Σ; _×_; _,_; proj₁)
