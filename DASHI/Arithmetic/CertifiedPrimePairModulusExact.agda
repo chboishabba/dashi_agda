@@ -40,6 +40,7 @@ open import Data.Nat.DivMod using (_%_; [m+n]%n≡m%n)
 open import Data.Nat.Primality as NatPrime using (Prime; prime?)
 
 import DASHI.Arithmetic.FinitePrimeProductSieveExact as Product
+import DASHI.Arithmetic.PrimeModSixSieveExact as PrimeSix
 import DASHI.Analysis.NatPrimeCountingInstance as NatCounter
 import DASHI.Geometry.SSP369TreeAutomorphism as Tree
 import DASHI.Foundations.SSPPrimeLane369Refinement as Ref
@@ -206,6 +207,39 @@ extendedSieveValidatesNewPrime :
   AllPairSurvive (axis ∷ rest) n →
   LocalPairSurvives axis n
 extendedSieveValidatesNewPrime axis rest n = proj₁
+
+-- Proof-bearing decision for an ARBITRARY finite sequence of
+-- individually certified prime moduli. This consumes the local decider.
+-- No fixed SSP15 lookup table is used.
+allPairSurvive? :
+  (axes : List CertifiedPrimeAxis) →
+  (n : Nat) →
+  Dec (AllPairSurvive axes n)
+allPairSurvive? [] n = yes tt
+allPairSurvive? (axis ∷ rest) n
+  with localPairSurvives? axis n | allPairSurvive? rest n
+... | yes localProof | yes remainingProof =
+  yes (localProof , remainingProof)
+... | no localFails | _ =
+  no (λ complete → localFails (proj₁ complete))
+... | yes localProof | no restFails =
+  no (λ complete → restFails (proj₂ complete))
+
+-- The new axis is a genuine prime because its witness is a
+-- Data.Nat.Primality.Prime proof, not an SSP / C3 / 369 label.
+axisReallyPrime :
+  (axis : CertifiedPrimeAxis) →
+  Prime (primeModulus axis)
+axisReallyPrime axis = primeWitness axis
+
+-- Reuse the canonical mod-six theorem: every prime >3 is in one of
+-- two residue classes. The converse is intentionally NOT asserted.
+sixWheelNecessaryForOtherPrimes :
+  (n : Nat) →
+  Prime (4 + n) →
+  DASHI.Arithmetic.PrimeModSixSieveExact.PrimeModSixClass (4 + n)
+sixWheelNecessaryForOtherPrimes =
+  DASHI.Arithmetic.PrimeModSixSieveExact.primeAboveThreeModSix
 
 -- The existing SSP symmetry acts on addresses and PRESERVES the
 -- prime identity. This explicit reuse blocks a false inference that
