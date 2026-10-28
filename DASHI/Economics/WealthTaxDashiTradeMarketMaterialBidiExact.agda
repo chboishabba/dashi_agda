@@ -14,7 +14,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (_≤_; _∸_)
-open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; +-assoc; +-comm; m+n∸n≡m; [m+n]∸[m+o]≡n∸o)
+open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; +-assoc; +-comm; +-identityʳ; m+n∸n≡m; [m+n]∸[m+o]≡n∸o)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong; cong₂)
 open import Data.Empty using (⊥)
 open import Agda.Builtin.Unit using (⊤; tt)
@@ -1965,9 +1965,9 @@ cashSourceUseIsSingleCounted :
   (cashContribution source + loanContribution source)
     + saleContribution source ≡ fundingSourceUnits source
 cashSourceUseIsSingleCounted (tagged-funding-receipt _ existingCashChannel n) =
-  refl
+  trans (+-identityʳ (n + zero)) (+-identityʳ n)
 cashSourceUseIsSingleCounted (tagged-funding-receipt _ freshLoanChannel n) =
-  refl
+  +-identityʳ n
 cashSourceUseIsSingleCounted (tagged-funding-receipt _ settledSaleChannel n) =
   refl
 
