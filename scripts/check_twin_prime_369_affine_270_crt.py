@@ -45,6 +45,7 @@ def main():
     # Genuine consumer collision INSIDE the sieve's full 27-state image.
     first, second = encoding[(0,-1,1)], encoding[(0,1,-1)]
     assert (first,second)==(59,209)
+    assert antipode((0,-1,1))==(0,1,-1)  # same GLOBAL 14-class orbit
     assert survives(first) and survives(second)
     assert true_twin_start(first) and not true_twin_start(second)
     assert second==11*19
@@ -59,7 +60,7 @@ def main():
     print('PASS: exact 1 x 9 x 3 residue projections: mod 2, mod 27, mod 5')
     print('PASS: code 119 => 119 = 7*17 and 121 = 11*11 (both composite)')
     print('PASS: explicit affine cube↔finite survivor lookup and 27 C2 swaps')
-    print('PASS: 59/209 same inner-phase orbit within wheel; true twin vs composite')
+    print('PASS: 59/209 same INNER 15 and GLOBAL 14 orbit; true twin vs composite')
     print('PASS: one fixed 269 + 13 antipodal pairs; separate 3x5=15 quotient')
     print('Theorem level: finite Python only; Agda code is kernel pending')
 
