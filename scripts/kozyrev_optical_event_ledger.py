@@ -47,10 +47,16 @@ class RayLedger:
         return cls(tuple(position), tuple(direction), power_w,
                    tuple(position), tuple(direction), power_w)
 
-    def hit(self, point, outgoing_direction, reflectivity):
+    def hit(self, point, outgoing_direction, reflectivity, *, path_tolerance=1e-7):
         """Conventional reflection plus local absorption at each wall event."""
         if not 0 <= reflectivity <= 1 or not unit(outgoing_direction):
             raise ValueError('invalid reflectivity or outgoing direction')
+        segment=sub(point,self.position)
+        distance=math.hypot(*segment)
+        if distance <= path_tolerance or abs(cross(segment,self.direction)) > path_tolerance*max(distance,1):
+            raise ValueError('wall event does not lie on the forward ray')
+        if segment[0]*self.direction[0]+segment[1]*self.direction[1] <= 0:
+            raise ValueError('wall collision lies behind ray')
         pin=scale(self.power_w/C,self.direction)
         pout=scale(self.power_w*reflectivity/C,outgoing_direction)
         impulse=sub(pin,pout)
@@ -62,10 +68,17 @@ class RayLedger:
         self.direction=tuple(outgoing_direction)
         self.event_count+=1
 
-    def close(self, kind, terminal_point, origin=(0.,0.)):
+    def close(self, kind, terminal_point, origin=(0.,0.), *, path_tolerance=1e-7):
         """Terminal event escaped/target/unresolved (never call unresolved 'escape')."""
         if kind not in ('escape','target','unresolved'):
             raise ValueError('invalid terminal state')
+        segment=sub(terminal_point,self.position)
+        distance=math.hypot(*segment)
+        if distance > path_tolerance:
+            if abs(cross(segment,self.direction)) > path_tolerance*max(distance,1):
+                raise ValueError('terminal event is off outgoing ray')
+            if segment[0]*self.direction[0]+segment[1]*self.direction[1] < 0:
+                raise ValueError('terminal lies behind ray')
         pin=scale(self.source_power_w/C,self.source_direction)
         pout=scale(self.power_w/C,self.direction)
         target= pout if kind=='target' else (0.,0.)
@@ -97,11 +110,11 @@ def specular(direction, normal):
 
 def same_scale_example(scale_length):
     r=RayLedger.emit((-2*scale_length,0),(1.,0.),9000.)
-    hit=(0.,scale_length)
+    hit=(0.,0.)
     r.hit(hit,(0.,1.),0.95)
     # This is a purely mathematical event-ledger fixture; physically a
     # free path from source to hit must separately be established.
-    return r.close('escape',(0.,4*scale_length))
+    return r.close('escape',(0.,3*scale_length))
 
 if __name__=='__main__':
     print(json.dumps({'example':same_scale_example(1.0)},indent=2))
