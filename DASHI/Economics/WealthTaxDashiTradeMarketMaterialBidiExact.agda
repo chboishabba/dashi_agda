@@ -3135,6 +3135,43 @@ administrationHeavyWeightsPreferCheapAdministrationByScalar :
 administrationHeavyWeightsPreferCheapAdministrationByScalar =
   m≤m+n 5 5
 
+-- Genuine chart transport, contrasted with an invalid policy swap.
+-- Relabel the two actual objective axes, their costs AND their names.
+-- Under this explicit simultaneous change, the Pareto order is exactly
+-- invariant in both directions. This does not map policies into one
+-- another and does not confer new preference, authority or data.
+swapPolicyCostAxis : PolicyTradeoffAxis → PolicyTradeoffAxis
+swapPolicyCostAxis administrationAxis = careShortfallAxis
+swapPolicyCostAxis careShortfallAxis = administrationAxis
+
+swapPolicyCostAxisTwice :
+  (axis : PolicyTradeoffAxis) →
+  swapPolicyCostAxis (swapPolicyCostAxis axis) ≡ axis
+swapPolicyCostAxisTwice administrationAxis = refl
+swapPolicyCostAxisTwice careShortfallAxis = refl
+
+reindexedPolicyTradeoffCosts : Pareto.CostHyperfabric policyOutcomeProblem
+reindexedPolicyTradeoffCosts =
+  Pareto.costHyperfabric
+    PolicyTradeoffAxis
+    (λ axis candidate → policyAxisCost (swapPolicyCostAxis axis) candidate)
+    (λ axis → policyAxisReference (swapPolicyCostAxis axis))
+
+policyReindexedCostChartPreservesDominance :
+  (left right : HypotheticalPolicyOutcome) →
+  Pareto.WeaklyDominates policyTradeoffCosts left right →
+  Pareto.WeaklyDominates reindexedPolicyTradeoffCosts left right
+policyReindexedCostChartPreservesDominance left right dominance axis =
+  dominance (swapPolicyCostAxis axis)
+
+policyReindexedCostChartReflectsDominance :
+  (left right : HypotheticalPolicyOutcome) →
+  Pareto.WeaklyDominates reindexedPolicyTradeoffCosts left right →
+  Pareto.WeaklyDominates policyTradeoffCosts left right
+policyReindexedCostChartReflectsDominance left right dominance axis
+  rewrite swapPolicyCostAxisTwice axis =
+  dominance (swapPolicyCostAxis axis)
+
 -- The general Pareto-symmetry owner requires exact preservation
 -- of eligibility and every named cost axis.
 -- For the existing concrete two-policy instance, identity is admitted,
