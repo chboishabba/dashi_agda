@@ -583,6 +583,10 @@ open DashiTradeTax public using
   ; executionRecordIsNotOfficialFinality
   ; clearingNetIsNotOfficialFinality
   ; officialSettlementIsNotBeneficiaryAllocation
+  ; CanonicalFundingRouteWeld
+  ; canonicalFundingBatchExactlyFundsTaxPaymentAndFees
+  ; fixtureSaleRouteWeld
+  ; fixtureSaleFundedTwoTaxAndOneFee
   )
 
 -- Explicit boundary aliases stay close to TOE use sites.
@@ -706,4 +710,20 @@ toeRelevantVerifiedIdentityMustRemainInSourceLens :
   ExternalIdentity.VerifiedRelevantIdentityMayBeSilentlyDropped → ⊥
 toeRelevantVerifiedIdentityMustRemainInSourceLens =
   ExternalIdentity.verifiedRelevantIdentityMustSnowball
+
+-- The same finite source-batch witness must finance the same modeled
+-- payment route. A checked equation on unrelated ledgers cannot be
+-- substituted merely because their scalar totals happen to match.
+toeCanonicalSourcesFundExactlyOneJoinedRoute :
+  {Claim : Set} {canonicalClaimToken : Claim → Nat} →
+  (weld : DashiTradeTax.CanonicalFundingRouteWeld Claim canonicalClaimToken) →
+  DashiTradeTax.fundingReceiptsTotal
+    (DashiTradeTax.fundingEntryTags
+      (DashiTradeTax.fundingClaims
+        (DashiTradeTax.canonicalSourceBatch weld)))
+  ≡ DashiTradeTax.Tax.taxPaidCash
+      (DashiTradeTax.taxExecution (DashiTradeTax.samePaymentRoute weld))
+      + DashiTradeTax.executionCashCost (DashiTradeTax.samePaymentRoute weld)
+toeCanonicalSourcesFundExactlyOneJoinedRoute =
+  DashiTradeTax.canonicalFundingBatchExactlyFundsTaxPaymentAndFees
 
