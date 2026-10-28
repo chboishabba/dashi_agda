@@ -9,6 +9,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
 import DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge as SI
+import DASHI.Physics.Closure.QuantumClockSuperpositionReceipt as Superposition
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as Atomic
 import DASHI.Core.SuperSSP369Field as Field369
 import DASHI.Foundations.Base369BinaryTernaryRefinement as Refine
@@ -312,6 +313,38 @@ canonicalR2P2PhaseIndex = record
   }
 
 ------------------------------------------------------------------------
+-- A separate finite quantum-proper-time *candidate* is inherited from an
+-- optical-ion-clock source lane. R2P2 neutral-Yb redshift comparison does NOT
+-- thereby implement proper-time superposition/interferometry. Physically
+-- testing quantumness of gravity needs distinct protocols and observables.
+------------------------------------------------------------------------
+
+record QuantumProperTimeComparatorBoundary : Set where
+  field
+    sourceQuantumModel : Superposition.QuantumClockSuperpositionReceipt
+    sourceQuantumModelIsCanonical :
+      sourceQuantumModel ≡ Superposition.canonicalQuantumClockSuperpositionReceipt
+    r2p2ImplementsQuantumProperTimeSuperposition : Bool
+    implementationNotEstablished :
+      r2p2ImplementsQuantumProperTimeSuperposition ≡ false
+    classicalRedshiftImpliesQuantumGravity : Bool
+    noQuantumGravityConsequence :
+      classicalRedshiftImpliesQuantumGravity ≡ false
+
+open QuantumProperTimeComparatorBoundary public
+
+canonicalQuantumProperTimeComparatorBoundary :
+  QuantumProperTimeComparatorBoundary
+canonicalQuantumProperTimeComparatorBoundary = record
+  { sourceQuantumModel = Superposition.canonicalQuantumClockSuperpositionReceipt
+  ; sourceQuantumModelIsCanonical = refl
+  ; r2p2ImplementsQuantumProperTimeSuperposition = false
+  ; implementationNotEstablished = refl
+  ; classicalRedshiftImpliesQuantumGravity = false
+  ; noQuantumGravityConsequence = refl
+  }
+
+------------------------------------------------------------------------
 -- Optical transfer is explicitly a two-medium, two-way requirement, not an
 -- assertion that the link has calibrated reciprocity or a full residual.
 ------------------------------------------------------------------------
@@ -425,6 +458,9 @@ record R2P2369FullLogicalArchitecture : Set where
     causalCanonical : causal ≡ canonicalR2P2FiniteCausalModel
     phase : R2P2PhaseIndex
     phaseCanonical : phase ≡ canonicalR2P2PhaseIndex
+    quantumProperTimeComparator : QuantumProperTimeComparatorBoundary
+    comparatorCanonical :
+      quantumProperTimeComparator ≡ canonicalQuantumProperTimeComparatorBoundary
     optical : R2P2OpticalPhysicsBoundary
     opticalCanonical : optical ≡ canonicalR2P2OpticalPhysicsBoundary
     properTime : Redshift.QuantumClockProperTimeRedshiftBridge
@@ -465,6 +501,8 @@ canonicalR2P2369FullLogicalArchitecture = record
   ; causalCanonical = refl
   ; phase = canonicalR2P2PhaseIndex
   ; phaseCanonical = refl
+  ; quantumProperTimeComparator = canonicalQuantumProperTimeComparatorBoundary
+  ; comparatorCanonical = refl
   ; optical = canonicalR2P2OpticalPhysicsBoundary
   ; opticalCanonical = refl
   ; properTime = Redshift.canonicalQuantumClockProperTimeRedshiftBridge
