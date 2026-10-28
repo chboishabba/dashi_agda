@@ -31,14 +31,23 @@ import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as F
 import DASHI.Biology.Physical.C3CubeCyclotomicParsevalExact as P
 import DASHI.Biology.Physical.C3CubeDirectGroupConvolutionExact as C
 
+-- Residue 0,1,2 are signed mode zero, plus, minus respectively.
+-- This is essential to intertwine the *cyclic group operation*, not
+-- merely give an arbitrary 27-element set bijection.
 tripleFromModes : ∀ {A : Set} → (M.ThreeMode → A) → F.Triple A
 tripleFromModes f =
-  F.triple (f M.modeMinus) (f M.modeZero) (f M.modePlus)
+  F.triple (f M.modeZero) (f M.modePlus) (f M.modeMinus)
 
 lookupTriple : ∀ {A : Set} → F.Triple A → M.ThreeMode → A
-lookupTriple (F.triple a b c) M.modeMinus = a
-lookupTriple (F.triple a b c) M.modeZero = b
-lookupTriple (F.triple a b c) M.modePlus = c
+lookupTriple (F.triple a b c) M.modeMinus = c
+lookupTriple (F.triple a b c) M.modeZero = a
+lookupTriple (F.triple a b c) M.modePlus = b
+
+signedModeToCyclicResidueConvention :
+  ∀ {A : Set} (f : M.ThreeMode → A) →
+  tripleFromModes f ≡
+    F.triple (f M.modeZero) (f M.modePlus) (f M.modeMinus)
+signedModeToCyclicResidueConvention f = refl
 
 lookupAfterTriple :
   ∀ {A : Set} (f : M.ThreeMode → A) (m : M.ThreeMode) →
