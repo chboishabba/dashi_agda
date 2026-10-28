@@ -346,6 +346,9 @@ def main() -> None:
         "equalCostTotalDoesNotRecoverAdministrativeCost",
         "rechartingTotalCostCannotRecoverAdministrativeAxis",
         "equalCostTotalIsParetoMonotone",
+        "policyIdentityIsAdmittedParetoSymmetry",
+        "policySwapCannotBeAdmittedParetoSymmetry",
+        "toeAdmittedParetoSymmetryCannotSwapPolicyRoles",
         "equalCostTotalCannotReflectParetoOrder",
         "policyWeightedTwoAxisCost",
         "careHeavyWeightsPreferCareByScalar",
@@ -369,6 +372,12 @@ def main() -> None:
         assert forced not in dashi_tax_bridge, (
             "unqualified numerology/symmetry weld reinstated: " + forced
         )
+    assert "import DASHI.Core.ParetoSymmetryQuotientAdmissionExact as ParetoSym" in dashi_tax_bridge, (
+        "economic policy role swap must use original semantic Pareto automorphism owner"
+    )
+    assert "import DASHI.Core.ParetoSymmetryQuotientAdmissionExact as ParetoSym" in bridge, (
+        "TOE symmetry type must come from original Pareto owner"
+    )
     assert "import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as ExternalIdentity" in bridge, "original Snowball identity owner must remain imported"
     assert "open DashiTradeTax public using" in bridge, (
         "follow-on sources not reachable from original TOE consumer"
@@ -384,7 +393,8 @@ def main() -> None:
     for owner in OWNERS:
         assert owner in workflow, f"no CI reference for Agda owner: {owner}"
     for label in ("oecdSocialProtection2026", "fagerengGuisoRing2026",
-                  "chatzouzIMF2026", "euCommissionWealthTax2026"):
+                  "chatzouzIMF2026", "euCommissionWealthTax2026",
+                  "iaconoSmedsvikBoMunicipal2026"):
         source = (ROOT / OWNERS[0]).read_text(encoding="utf-8")
         assert label in source, f"missing 2026 independent economic source: {label}"
     # Claim-specific original-root coverage, not evidence of empirical truth.
