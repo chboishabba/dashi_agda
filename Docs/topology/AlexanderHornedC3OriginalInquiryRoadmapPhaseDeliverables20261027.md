@@ -1345,3 +1345,12 @@ orbit analysis, #1244 five-orbit fibre source,
 and distinct experimental/gauge receipts
 are recorded separately. All new Agda
 source remains kernel-pending.
+
+
+## 2026-10-28 source-grounded video/monodromy/369 additional max-cut
+
+The corresponding detailed source and evidence ledger is [Native local fibre action cross-pollination](AlexanderHornedNativeTernaryLocalPhaseFibreMaxCut20261028.md). The **existing** native trialectic27 and five-orbit owners now also implement: a two-sided map from the actual 27-sector-depth-two phase functions to third-level ternary predicate tables; a REAL 3^5-vs-5^3 functional-domain swap with evaluation section and complete C3² nine-field kernel normal form; and a global-S3-versus-local-S3 Heaps/equality counterexample. They are SOURCE-WRITTEN, not kernel certified.
+
+Three NEW lemma owners supply: (i) the full existing S3→C3→1 derived series as a concrete instance of the previously proved Hatcher solvable-target non-observation theorem; (ii) a constructive no-equivariant-injection theorem separating 13-pair/1-fixed and 12-pair/3-fixed involutions on the SAME 27 elements; (iii) six intrinsic S3=dihedral sector-label actions commuting with every native finite-depth projection and a reflection conjugating the external C3 rotation to its inverse. Cross-PR [#1414](https://github.com/chboishabba/dashi_agda/pull/1414) separately owns a C7 winding observer distinguishing the B3 full twist from its trivial S3 root endpoint.
+
+**Preserved walls:** Actual Hatcher BINARY wild geometry (3×2^n) is not the native ternary end (3×3^n); end-space homeomorphisms are not ambient wild embeddings; finite wreath/local gauge fields cannot yield nontrivial Hatcher perfect-source representations through a solvable target; B3 infinite central twist is not SU2 ±1 spin kernel; numeric 243/125 or 27 matches do not identify source objects, RH zeros, physical Dirac/Wilson data or original Ibrahim Monster 3B representations. Independent exact integer/permutation Python checks passed; exact committed script was not executed from the GitHub blob; Agda/Lean kernel and actual geometric same-object proof are still open. CI was not run.
