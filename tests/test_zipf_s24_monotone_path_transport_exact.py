@@ -146,3 +146,36 @@ def test_dual_hall_cut_is_absent_for_true_majorization_couplings():
         assert finite_hall_cut_obstruction(cert.left_law,cert.right_law)==None
     with pytest.raises(ValueError):
         finite_hall_cut_obstruction({(0,):F(1)}, {(0,):F(1)},max_left_paths=True)
+
+
+def test_all_pair_transfer_first_switch_probabilities_exact():
+    from zipf_s24_monotone_path_transport_exact import (
+        pair_one_type_survival_probability, concentrating_pair_transfer_certificate)
+    from math import comb
+    checked=0
+    for b in range(2,8):
+        for a in range(b,9):
+            for m in range(a+b+1):
+                cert=concentrating_pair_transfer_certificate(a,b,m)
+                for sampler,(original,concentrated) in cert.items():
+                    assert original<=concentrated
+                    if m==0:
+                        assert original==concentrated==1
+                    elif sampler=="iid":
+                        assert original==F(a,a+b)**m+F(b,a+b)**m
+                    else:
+                        assert original==F(comb(a,m)+comb(b,m),comb(a+b,m))
+                    checked+=1
+    assert checked>500
+    for bad in ((0,2,0,"iid"),(3,0,0,"iid"),(2,1,1,"bad"),
+                (2,1,-1,"iid"),(2,1,4,"permutation")):
+        with pytest.raises(ValueError):
+            pair_one_type_survival_probability(*bad)
+
+
+def test_pair_transfer_premises_reject_non_concentrating_boundary():
+    from zipf_s24_monotone_path_transport_exact import concentrating_pair_transfer_certificate
+    for a,b,m in ((2,1,0),(1,2,1),(1,1,1),
+                  (3,2,-1),(3,2,6),(True,2,0)):
+        with pytest.raises(ValueError):
+            concentrating_pair_transfer_certificate(a,b,m)
