@@ -19,6 +19,7 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact as Base
 import DASHI.Economics.WealthTaxPowerCareSociologyBidi20261027Exact as Soc
 import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact as Fiscal
+import DASHI.Economics.WealthTaxDashiTradeMarketMaterialBidiExact as DashiTradeTax
 
 -- Flow/stock tax bases are separate even when numerical liabilities agree.
 toeWealthIsNotIncomeTax :
@@ -132,6 +133,31 @@ toePaperCannotSupplyKernelCertification :
   Sources.SourceReceiptImpliesPromotionStepPermission → ⊥
 toePaperCannotSupplyKernelCertification =
   Sources.sourceReceiptDoesNotAutoPromoteToPromotionStep
+
+-- Existing standalone dashiTRADE and Agda finance owners are independent
+-- of the tax policy: the same assessed liability does not select executable
+-- market actions; a price/demand headline does not grant refinance capacity.
+toeTaxDoesNotFixTradeBuy :
+  INF.FactorsThrough DashiTradeTax.taxAssessed DashiTradeTax.canBuy → ⊥
+toeTaxDoesNotFixTradeBuy =
+  DashiTradeTax.taxAmountCannotFixBuy
+
+toeDemandDoesNotFixRefinance :
+  INF.FactorsThrough
+    DashiTradeTax.capitalDemandSignal DashiTradeTax.refinanceViability → ⊥
+toeDemandDoesNotFixRefinance =
+  DashiTradeTax.headlineDemandCannotFixRefinance
+
+toeMarketDirectionDoesNotFixCollection :
+  INF.FactorsThrough
+    DashiTradeTax.candidateDirection DashiTradeTax.taxCollected → ⊥
+toeMarketDirectionDoesNotFixCollection =
+  DashiTradeTax.marketDirectionCannotFixCollection
+
+toeTaxLiabilityDoesNotCreateBrokerOrder :
+  DashiTradeTax.AssessedLiabilityCreatesMarketOrder → ⊥
+toeTaxLiabilityDoesNotCreateBrokerOrder =
+  DashiTradeTax.taxLiabilityIsNotTradingPermission
 
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
