@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
 import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as Bias
+import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as Loop
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
 import DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge as SI
 import DASHI.Physics.Closure.QuantumClockSuperpositionReceipt as Superposition
@@ -444,6 +445,8 @@ record R2P2369FullLogicalArchitecture : Set where
     biasIdentifiability : Bias.R2P2BiasIdentifiabilityMaxCut
     biasIdentifiabilityCanonical :
       biasIdentifiability ≡ Bias.canonicalR2P2BiasIdentifiabilityMaxCut
+    loopAudit : Loop.ThreeClockLoopSourceBoundary
+    loopAuditCanonical : loopAudit ≡ Loop.canonicalThreeClockLoopSourceBoundary
     workflow : ClockPipelinePath
     workflowCanonical : workflow ≡ canonicalClockPipelinePath
     atoms : AtomicClockIdentities
@@ -489,6 +492,8 @@ canonicalR2P2369FullLogicalArchitecture = record
   ; sourceBoundaryCanonical = refl
   ; biasIdentifiability = Bias.canonicalR2P2BiasIdentifiabilityMaxCut
   ; biasIdentifiabilityCanonical = refl
+  ; loopAudit = Loop.canonicalThreeClockLoopSourceBoundary
+  ; loopAuditCanonical = refl
   ; workflow = canonicalClockPipelinePath
   ; workflowCanonical = refl
   ; atoms = canonicalAtomicClockIdentities
@@ -564,3 +569,16 @@ fullArchitectureReusesSecondHeightDiscriminator :
   ≡ Bias.syntheticRate Bias.doubledSlopeWithSmallBias 9 → Bias.⊥
 fullArchitectureReusesSecondHeightDiscriminator =
   Bias.secondHeightDiscriminatesTheseCandidates
+
+-- A third real clock was not introduced by the finite 369 loop construction.
+fullArchitectureHasNoObservedTriangle :
+  Loop.r2p2ThirdRealClockProvided
+    (loopAudit canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureHasNoObservedTriangle =
+  Loop.twoClockR2P2DoesNotSupplyTriangle
+
+fullArchitectureNoCurvatureFromLoopNull :
+  Loop.threeClockLoopNullImpliesCurvature
+    (loopAudit canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureNoCurvatureFromLoopNull =
+  Loop.threeClockLoopCannotClaimCurvature
