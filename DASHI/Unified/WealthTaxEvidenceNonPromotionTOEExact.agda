@@ -559,6 +559,12 @@ open DashiTradeTax public using
   ; StrictlyDominatesAdmissible
   ; NonemptyRankedParetoFront
   ; finiteParetoFrontierNonemptyGivenStrictRank
+  ; FiniteAxisStrictWitness
+  ; finiteAxisCostSum
+  ; finiteAxisCostSumMonotone
+  ; finiteAxisSumStrict
+  ; strictImprovedAxisFromFiniteCoverage
+  ; finiteParetoFrontierIsNonempty
   )
 
 -- Explicit boundary aliases stay close to TOE use sites.
@@ -597,4 +603,19 @@ toeEvenTwoPolicyOptionsMayHaveDifferentParetoMinimalRates :
       ≡ DashiTradeTax.exampleZeroRate) → ⊥
 toeEvenTwoPolicyOptionsMayHaveDifferentParetoMinimalRates =
   DashiTradeTax.noUniqueOptimalTaxRateFromParetoOrderAlone
+
+-- Exact source ownership for the three distinct 2026 wealth-tax estimands.
+-- These disjoint source-target types are *not* independent causal studies by
+-- construction and do not combine estimates without a separate study model.
+toeRingFirmStudyIsNotFagerengPortfolioEstimand :
+  Base.norwegianJointReformFirmMigrationResponse
+    ≡ Base.norwegianPortfolioEquityPremiumAllocation → ⊥
+toeRingFirmStudyIsNotFagerengPortfolioEstimand =
+  Base.ringFirmResponseIsNotFagerengPortfolioResponse
+
+toeRingFirmStudyIsNotJakobsenMigrationAggregateEstimand :
+  Base.norwegianJointReformFirmMigrationResponse
+    ≡ Base.scandinavianRateMigrationAggregateResponse → ⊥
+toeRingFirmStudyIsNotJakobsenMigrationAggregateEstimand =
+  Base.ringFirmResponseIsNotJakobsenAggregateResponse
 
