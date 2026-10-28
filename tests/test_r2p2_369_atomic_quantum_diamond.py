@@ -91,7 +91,18 @@ class R2P2369ArchitectureTests(unittest.TestCase):
         self.assertEqual(sectors(1, 1), 6)
         self.assertEqual(sectors(0, 2), 9)
         self.assertEqual(sectors(1, 2), 18)
-        self.assertEqual((1, 2), (1, 2))
+        def binary_refine(address):
+            a, b = address
+            return a + 1, b
+
+        def ternary_refine(address):
+            a, b = address
+            return a, b + 1
+
+        self.assertEqual(
+            binary_refine(ternary_refine((0, 1))),
+            ternary_refine(binary_refine((0, 1))),
+        )
 
     def test_signed_comb_and_transcript_exact_arithmetic(self):
         tooth = 3 * 10 + 2
