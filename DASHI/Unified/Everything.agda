@@ -36,6 +36,7 @@ open CompositeBaseline public using
   ; baselineAtLeastThree
   ; everyNonemptyFinitePrimeSieveHasDoubleCompositeSurvivor
   ; everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor
+  ; everyFinitePrimeSieveHasLargeDoubleCompositeSurvivor
   )
 
 import DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact as FactorableSieveLift
