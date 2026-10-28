@@ -193,3 +193,47 @@ noTailRecoveryFromFullHeapsCurve recover correct =
 -- Boundary: source codec chart has 6 outcomes; minimum-only has
 -- 3 two-element fibres; full Heaps event curve has 1 six-element fibre.
 -- These are different observation maps, NOT isomorphic consumer theories.
+
+
+------------------------------------------------------------------------
+-- The smallest positive-count repeated-token cut (2,1,1).
+-- The first three symbols still use the already-owned A/B/C labels.
+-- This is a literal H08 *finite witness*, not a general all-count proof.
+------------------------------------------------------------------------
+
+aRepeatedEarly : List Hist.Letter
+aRepeatedEarly = Hist.A ∷ Hist.A ∷ Hist.B ∷ Hist.C ∷ []
+
+aRepeatedLate : List Hist.Letter
+aRepeatedLate = Hist.A ∷ Hist.B ∷ Hist.C ∷ Hist.A ∷ []
+
+repeatedHistogram : Hist.ThreeTypeHistogram
+repeatedHistogram =
+  Hist.frequencies (suc (suc zero)) (suc zero) (suc zero)
+
+earlySameHistogram :
+  Hist.observedHistogram aRepeatedEarly ≡ repeatedHistogram
+earlySameHistogram = refl
+
+lateSameHistogram :
+  Hist.observedHistogram aRepeatedLate ≡ repeatedHistogram
+lateSameHistogram = refl
+
+earlyMinimalProfile :
+  Hist.fullHeapsCurve aRepeatedEarly ≡
+    (zero ∷ suc zero ∷ suc zero ∷ suc (suc zero) ∷
+     suc (suc (suc zero)) ∷ [])
+earlyMinimalProfile = refl
+
+lateMaximalProfile :
+  Hist.fullHeapsCurve aRepeatedLate ≡
+    (zero ∷ suc zero ∷ suc (suc zero) ∷
+     suc (suc (suc zero)) ∷ suc (suc (suc zero)) ∷ [])
+lateMaximalProfile = refl
+
+-- The same histogram does NOT force identical full curves if there
+-- is a repeated type. This strengthens the six-order all-novelty case.
+earlyAndLateCurvesDistinct :
+  Hist.fullHeapsCurve aRepeatedEarly ≡
+  Hist.fullHeapsCurve aRepeatedLate → Hist.⊥
+earlyAndLateCurvesDistinct ()
