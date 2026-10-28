@@ -374,3 +374,45 @@ The scripts/check_wealth_tax_maxcut.py new bounded DvP oracle covers **18,816 co
 
 **Verification ceiling:** no observed Agda typecheck, no independent primary-record producer for the five open lanes, no protected ESD edits and no change to live dashiTRADE. The exact-head structural audit and original 42-topic inventory must still be inspected after the final commit.
 
+## 2026-10-28 maximum 369 / 27-cube / S3 / Q8 / numeric-role cross-pollination
+
+**Current scoped ledger remains 61 D / 11 R / 5 N = 77.** These are cross-domain reuses, stronger negative controls and a fresh source distinction. No item from the remaining five external-record obligations is declared complete.
+
+### Reused originals and new consumers
+
+| Receiver / purpose | Original owner reused | Exact structural result | Forbidden promotion |
+|---|---|---|---|
+| Economic x/y/z hypothesis cube | `DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact` | A source-owned 3×3×3 point with 27 raw states | Claim polarity is not a measured tax result |
+| X/y cannot determine z | `DASHI.Core.IntersectionalNonFactorability` | Two equal x/y states with opposed z outcomes refute **every** factorisation, including all postcomposed rechartings | Review labels, digit shuffles or S3 cannot manufacture causal evidence |
+| Trialectic x-cube / y-cube / z-interaction | `DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact` | Exact chart into T^9 = 19,683 source-owned three-cell fabric, with inverse on the structural projection | X/y cubes do not *force* the irreducible third cell |
+| Raw ABC permutations | `DASHI.Foundations.TernaryPermutationS3LawsExact`; `TernaryEndomorphismConjugacyExact` | Existing six-label S3 inverse; raw trialectic coordinate rotation order three, adjacent transpositions square to identity, braid relation | Permuting roles is not an authorized policy intervention |
+| Q8/720 quotient analogy | `DASHI.Algebra.FiniteQuaternionDoubleCover` | Existing Q8 central +/- sign has same V4 projection; minus sign squares to plus | This is not a custody double cover, a time loop, or an observed spin/market effect |
+| Five open evidence gates | `DASHI.Foundations.SSPTritCarrier` | Five *annotation positions* A05/C09/E07/F07/H08; 3^5 = 243 | A positive annotation is NOT an authenticated evidence record |
+| Distinct 3-of-5 modes | `DASHI.Biology.NonaryCompletionPhaseQuotientExact` | Five-mode carrier used in three independent chart slots; 5^3 = 125, unequal to 243 | No bijection, entropy equivalence or universal quintic inference |
+| Numerology culture lane | `DASHI.Wikimedia.Base369NumberTheoryNumerologyWrongTypeSnowballExact` | Existing `numerologyDoesNotPayProof` theorem | Popular 3/6/9/Tesla numerology is not number theory or tax-law authority |
+| Polynomial monodromy inspiration | [dashi_agda PR #1414](https://github.com/chboishabba/dashi_agda/pull/1414) | Separately owned S3/C3 root reordering, exact arithmetic counts, and finite rational quaternion sign witness | Other-branch theorem is NOT copied, imported as available, or attributed to this tax PR |
+
+**Numerology/physics attribution:** actual permutation theory has original mathematical roots (Galois, permutation-group literature; Dixon and Mortimer, 1996). Quaternion/spin constructions trace to Hamilton (1843) and established representation theory. The latest PR #1414 retains independent source and DASHI implementation ownership. This work only reuses in-repo carrier theorems and supplies source-written *domain-specific negative interfaces*. Ibrahim's 2017 FLN, later Snowball work and original Monster 3B claims retain their separate ownership. No common numerical fingerprint is promoted into a Monster representation.
+
+### 27-cube / actual causal-information distinction
+
+For `x = hypothesis polarity`, `y = review polarity` and `z = effect-claim polarity`, the original 27-state fibre contains **three distinct z possibilities per fixed x/y pair**. Therefore a readout of x/y alone loses z. The counterworld proof `sourceReviewDoesNotDetermineCausalPolarity` uses the original non-factorability theorem. The stronger `rechartingXYCannotManufactureCausalPolarity` shows no re-encoding of the x/y quotient can recover the missing independent z coordinate. This is a precise algebraic proof about annotation geometry, not a claim about policy causality.
+
+At the next scale, each x/y/z position may itself be one complete 27-cell. The existing trialectic owner supplies the T^9 rechart. This is **27^3 = 19,683** complete structural states. The x/y *pair* leaves an entire third 27-cell unconstrained. No fabricated synthesis cell is permitted.
+
+### Source snowball / conflicting interventions
+
+- **Benjamin Jaros and Joshua Rauh**, *The Net Present Value of the California Billionaire Tax Act*, NBER WP35899 (October 2026), DOI 10.3386/w35899. The authors' one-time 5% billionaire wealth-tax projection reports approximately USD 30 billion under its assumed migration/litigation responses. It is a **model-dependent forecast**, not authenticated collections or an annual full-excess cap estimate.
+- **Annika Bacher, Andreas Fagereng, Marius A. K. Ring and Ella Getz Wold**, *Regulating Entrepreneurship: The Case of Capital Requirements*, NBER WP35780 (September 2026), DOI 10.3386/w35780. The estimated entrepreneurship entry response follows a 70% decrease in startup capital requirements. That is not a wealth-tax treatment or a wealth-ceiling estimate.
+- **Marius A. K. Ring**, *Taxing Entrepreneurial Wealth: Evidence from Norway, 2021–2025*, NBER WP35854 (October 2026). Its bundled Norwegian tax and migration reforms remain a third, distinct estimand. The original authors keep all source and interpretation ownership. The source atlas now types these study targets separately.
+
+All three can motivate rival scenarios and Pareto axes, but none automatically estimates the other study's intervention. Sharing an author, a number, a source region, or a public database is insufficient to establish independent replication or same-object tax incidence.
+
+### Verification and residual cut
+
+The new `test_369_trialectic_numeric_role_maxcut` independently checks the full 27 raw states, all six coordinate bijections, C3 period three, adjacent swap involutions, 27^3=19,683, the 243 five-gate annotations, the 125 three-five-mode profiles, and x/y-to-z non-factorability fixtures. These are executed Python checks of the *numeric interpretation*, not Agda compiler certificates or original data.
+
+The existing owner/TOE regression now requires the exact new symbols and original imports. Protected ESD surfaces and the dashiTRADE runtime stay unchanged.
+
+**Unpaid walls:** A05 authenticated ownership/valuation; C09 real loan/cash funding; E07 legal/beneficial holder/issuer/class; F07 primary finality/custody; H08 same-object causal design/observed outcomes; Agda typecheck and master convergence. A new 3/6/9 coincidence cannot discharge any of them.
+
