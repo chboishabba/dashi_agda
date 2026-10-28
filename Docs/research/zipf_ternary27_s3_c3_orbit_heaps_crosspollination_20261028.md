@@ -62,7 +62,7 @@ Conditional mathematical interpretation: independently sample the three label po
 
 The **all-distinct** event has exactly six three-token outcomes (ABC/ACB/BAC/BCA/CAB/CBA), total mass `6/27=2/9`. Conditioned on this event, their probabilities are `1/6` each, and their full Heaps curve is **always** `(0,1,2,3)`. This is the precise interface to the earlier `ZipfABC6OrderHeapsQuotientExact` result.
 
-**CRITICAL:** The conditional six-order distribution is NOT the unconditional IID distribution. The fixed-multiset six-word uniform permutation sampler and the IID sampler agree on these **conditional** named orders but have different unconditioned complete-prefix path laws. No hidden generalization to nonuniform Zipf exponents follows. The 27-cell semantics remain a chart interpretation only.
+**CRITICAL:** The conditional six-order distribution is NOT the unconditional IID distribution. The fixed-multiset six-word uniform permutation sampler and the IID sampler agree on these **conditional** named orders but have different unconditioned complete-prefix path laws. A later exact conditioning theorem now **does** extend the uniform six-order conditional law to every strictly positive nonuniform IID distribution when the first three draws contain all three labels exactly once; see the additional subsection below. It does **not** extend the unconditional first-discovery Plackett–Luce law to a uniform distribution. The 27-cell semantics remain a chart interpretation only.
 
 ## Numerology / hyperfabric cross-pollination ledger (hard boundary)
 
@@ -119,3 +119,54 @@ Distinct typed cases:
 The 11 Heaps curves on 3⁵ words happen to match the **11 C3-coordinate orbits on 3³ words**. This equality is explicitly recorded as a **numerical coincidence between two different quotient sets**, not an observation-preserving bijection. The carrier cardinalities 243 versus 27, the positions and group actions differ. No 720° quaternion, Monster 3B representation or quintic polynomial result follows.
 
 The expanded regression independently exhausts all q≤5 and n≤6 with q^n≤30000 and checks these named-word fibre counts against `itertools.product`. The exact integer count/multiplicity formula is classical occupancy combinatorics. It is not a new Zipf scaling law, an empirical proof of Heaps universality or an Agda kernel certificate. Historical origins remain with Cauchy/Frobenius/Burnside, Pólya, original Heaps/Zipf researchers and the separately credited repo source owners.
+
+
+## Later exact Pareto cut: five equality patterns -> four Heaps histories
+
+**This is an actual observation-factor construction, not a 5=4 cardinality claim.** New source-written `DASHI/Statistics/ZipfThreeDrawEqualityPatternFactorExact.agda` consumes the original `RecursiveFibreTower.LevelTwoCode` and `ZipfTernary27ActionHeapsExact.codeHeaps`. It defines an explicit quotient map into five value-relabel (S_3) equality-pattern classes:
+
+```
+AAA    -- all same
+AAB    -- first two same
+ABA    -- first and third same
+ABB    -- last two same
+ABC    -- all distinct
+```
+
+The module supplies 27 explicit source constructor clauses for `equalityPattern`, five canonical representatives, 27 literal proof cases that **the actual source Heaps observable factors through that quotient**, and 162 source-written proof cases that the quotient is invariant under the already-owned six value-label permutations.
+
+The resulting 5-to-4 observation sends `AAA -> (0,1,1,1)`, `AAB -> (0,1,1,2)`, **both `ABA` and `ABB` -> (0,1,2,2)**, and `ABC -> (0,1,2,3)`. The explicit no-go `noUniversalEqualityPatternRecoveryFromHeaps` uses the two different ABA and ABB constructors with the same complete Heaps curve. This is a rigorous source-level non-invertibility witness, not a speculative weld. The existing seven endomorphism **conjugacy** classes remain a separate action, unchanged.
+
+Classical roots: finite set partitions, restricted growth encodings, Stirling/Bell partition counting, Cauchy–Frobenius/Burnside; original DASHI six-action, hypervoxel and Heaps owners preserve ownership. The adapter is a new Johl Brown-directed / OpenAI ChatGPT-assisted representation map dated 28 October 2026. It has **not** been Agda typechecked.
+
+## Later exact Pareto cut: nonuniform weights and collision-moment closure
+
+For any strictly positive finite IID distribution (p_1,ldots,p_q), define (S_2=Σ_i p_i²) and (S_3=Σ_i p_i³). The pushforward of the **complete three-draw IID word law** to the four Heaps curves is exactly
+
+```
+(0,1,1,1) : S3
+(0,1,1,2) : S2 - S3
+(0,1,2,2) : 2(S2 - S3)
+(0,1,2,3) : 1 - 3 S2 + 2 S3.
+```
+
+The formulas follow by decomposing the three draws into all identical, first-two identical, first-two different and last repeats vs all-distinct outcomes. They sum to one, and are nonnegative. This is classical occupancy/symmetric-power-sum mathematics, NOT a new empirical law or independent probabilistic carrier.
+
+The new `scripts/zipf_three_draw_moment_conditioning_exact.py` accepts the canonical source histogram weights, computes (S_2,S_3) using exact `Fraction`, and checks the resulting entire-prefix law against the PRE-EXISTING `zipf_full_heaps_path_distribution_exact.full_heaps_curve_law`. Its regression independently enumerates the weighted named words for **117** two-, three- and four-label configurations (5,985 exact three-token words in total); every equality passed in the separate local arithmetic check.
+
+**Crucial measure distinction:** The Heaps curve and equality pattern are invariant under value-S3 relabelling as **deterministic observations**. A nonuniform IID measure is NOT invariant under arbitrary relabelling of sample labels; for (p=(6/11,3/11,2/11)), `AAA` and `CCC` have the same Heaps curve, but masses `216/1331` and `8/1331`. Their statistical *observation pushforward* is symmetric in the weights; this does not imply equality of the original word masses.
+
+For the actual finite three-rank (s=1) Zipf masses `(1,1/2,1/3) / (11/6) = (6/11,3/11,2/11)`, the exact Heaps curve law is:
+
+| Complete Heaps curve | Rational probability |
+|---|---:|
+| (0,1,1,1) | 251/1331 |
+| (0,1,1,2) | 288/1331 |
+| (0,1,2,2) | 576/1331 |
+| (0,1,2,3) | 216/1331 |
+
+**New general conditioning theorem (elementary IID product proof):** For any `K>=1` and strictly positive p on **K named types**, condition the FIRST K IID draws on **all K types appearing exactly once**. Each of the (K!) named permutations has the same *unconditional* mass (prod_i p_i), hence the conditioning-event mass is (K!prod_i p_i), and each permutation's conditional probability is exactly (1/K!). This holds even when Zipf exponent s≠0. The executable enumerates K≤7, but the product identity is valid for any finite K.
+
+This conditional law is distinct from the **UNCONDITIONED eventual first-appearance order**, which has the original Plackett–Luce size-biased law. Under the `(6,3,2)` example, `P(ABC | first three all distinct)=1/6`, but `P_PL(ABC)=18/55`. Thus unconditional time/rank sampling cannot be replaced with the conditional order without explicit evidence.
+
+**Attribution and limits:** This is elementary IID occupancy, symmetric power-sum and conditioning mathematics, with original Heaps/Herdan/Zipf and Luce (1959)/Plackett (1975) credits. Existing source proof ownership is unchanged. The three-draw moment algebra was independently verified with exact arithmetic, and new source/tests have been committed; the whole branch's tests and Agda kernel have **not** been executed. Zero or negative weights are rejected rather than extrapolating an unsupported uniform conditional law. No quaternion/Monster/NS/RH or 11-orbit coincidence becomes a same-object theorem.
