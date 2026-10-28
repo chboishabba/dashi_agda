@@ -23,6 +23,15 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact as PrimegameCarrierSupport
+open PrimegameCarrierSupport public using
+  ( typedFractionsAreExactGuyFourteen
+  ; guyProgrammeRuleCountIsFourteen
+  ; primegameUsesTenTypedCarriers
+  ; originalSSPAtlasHasFifteenTypedCarriers
+  ; historicalProgrammeCountIsNotSSPCount
+  )
+
 import DASHI.Arithmetic.FiniteTwinSieveNoPromotionExact as FiniteSieveNoPromotion
 open FiniteSieveNoPromotion public using
   ( arbitrarilyLargeFiniteSieveFalsePositives
