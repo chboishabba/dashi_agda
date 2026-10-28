@@ -122,6 +122,9 @@ def nominal_supercell_pareto():
             for other in rows
             if other is not row
         )
+    # Do not delete comparison coordinates during the dominance pass:
+    # later rows still need earlier candidates' exact Fraction values.
+    for row in rows:
         del row["_relative_fraction"]
     return {
         "source": "Ma et al. arXiv:2610.17499v2 supplement S4",
