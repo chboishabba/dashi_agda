@@ -1,5 +1,23 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- 9999! Gamma/angle distinction, degree-vs-radian Pickover,
+-- Hatcher/A5/2I perfect-group observer bridge and Q8 sign non-descent.
+import DASHI.Foundations.PolynomialPickoverFactorialGammaDegreeExact as FactorialPhase
+import DASHI.Foundations.PolynomialHornedPerfectGroupObserverExact as HornedPerfect
+import DASHI.Foundations.PolynomialHornedSpinSignNonDescentExact as HornedSpin
+
+open FactorialPhase public using
+  ( factorialRecurrence ; gammaAt10000Is9999Factorial
+  ; canonicalPickoverExpression ; ninetyNineSquaredMod360
+  ; degreeResidueAtEvenPositivePower ; radianPickoverSignIsNotProved )
+open HornedPerfect public using
+  ( everyCommutatorGeneratedGroupAbelianObserverIsTrivial
+  ; foldCommutatorImageIsIdentity )
+open HornedSpin public using
+  ( sameProjectiveImageOfCentralSigns
+  ; noUniversalReconstructionFromV4
+  ; matchingTwoStateCarriersDoesNotIdentifySpinAndParity )
+
 -- C3 character/Fourier and trialectic 27-Cube chart, with two-sided inverses.
 import DASHI.Foundations.PolynomialC3FourierTrialecticChartExact as RootFourier
 open RootFourier public using
