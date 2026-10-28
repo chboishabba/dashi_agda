@@ -23,6 +23,20 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.FiniteTwinSieveUniversalCompositeBaselineExact as CompositeBaseline
+open CompositeBaseline public using
+  ( baselineMinusOne
+  ; baselinePlusOne
+  ; baselinePlusTwo
+  ; baselineLocalPairSurvives
+  ; baselineAllPairSurvivesAtCommonPeriod
+  ; anyFinitePrimeSieveHasBaseline
+  ; axisHasAtLeastTwo
+  ; nonemptyModulusProductHasAtLeastTwo
+  ; baselineAtLeastThree
+  ; everyNonemptyFinitePrimeSieveHasDoubleCompositeSurvivor
+  )
+
 import DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact as FactorableSieveLift
 open FactorableSieveLift public using
   ( leftFactorisationGivesRightPlusTwo
