@@ -1,6 +1,6 @@
 # Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
 
-Created 2026-10-28. **77 named formal obligations** across nine groups: 59 source-written (D), 11 owned by existing reusable sources (R), 7 remaining proof/evidence contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+Created 2026-10-28. **77 named formal obligations** across nine groups: 60 source-written (D), 11 owned by existing reusable sources (R), 6 remaining external identity/evidence contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
 
 Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
 
@@ -106,7 +106,7 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **I04 [D]** `behaviouralResponseParametersAreExplicitAssumptions` — Migration, credit and investor behaviour are not given theorems.
 - **I05 [D]** `sameInitialStateDifferentInterventionComparison` — Explicit baseline and treatment labels.
 - **I06 [D]** `paretoDominancePreorder` — Reflexive and transitive objective-vector comparison.
-- **I07 [N]** `finiteParetoFrontierIsNonempty` — Nonempty finite feasible choice set has non-dominated element.
+- **I07 [D]** `finiteParetoFrontierIsNonempty` — Nonempty finite feasible choice set has non-dominated element.
 - **I08 [D]** `noUniqueOptimalTaxRateFromParetoOrderAlone` — Partial ordering does not select welfare weights.
 - **I09 [D]** `syntheticModelCannotIdentifyObservedCausalEffect` — Separate case-study, controls and causal identification receipts.
 
@@ -266,4 +266,20 @@ The original multi-axis Pareto hyperfabric owner is unchanged. The existing econ
 - finiteParetoFrontierNonemptyGivenStrictRank: takes a supplied rank-decrease hypothesis for every strict Pareto improvement and constructs a listed admissible member that cannot be strictly dominated by another listed admissible member.
 
 **Proof scope:** This is an arbitrary-list constructive theorem with an EXTRA assumption: a Nat ranking strictly decreasing on strict Pareto improvements. It does **not** prove that such a rank exists for an arbitrary finite multi-axis cost fabric, that the list enumerates every feasible alternative, or that the rank faithfully reflects measured costs. I07 therefore **remains N** for the unrestricted nonempty finite feasible-frontier theorem. This partial source construction does not change 59 D / 11 R / 7 N. No Agda kernel typecheck was observed, and none of the model examples selects a real tax rate.
+
+## 2026-10-28 completed scoped finite-axis Pareto source term (I07)
+
+The previous rank-assumption-only construction is now complemented by a derived finite-axis theorem.
+
+- finiteAxisCostSum sums the original, named Pareto.CostHyperfabric axis costs over an explicitly enumerated finite list.
+- finiteAxesReverseOrStrict uses the standard-library decidable Nat order. For a weak-dominance pair, it produces either reverse inequalities on ALL listed axes or a witness of strict improvement at an exact axis.
+- strictImprovedAxisFromFiniteCoverage uses a supplied *complete finite-axis enumeration* to rule out the reverse case whenever strict dominance is given.
+- finiteAxisSumStrict proves strict summed-rank reduction from coordinatewise weak dominance and that strict-coordinate witness.
+- finiteParetoFrontierIsNonempty reuses the earlier constructive finiteNonemptyRankMinimum and finiteParetoFrontierNonemptyGivenStrictRank owners. Unlike the earlier version, the new public theorem DERIVES the rank-decrease proof from complete finite-axis cost data. It returns a member of any nonempty finite list of already-admissible, consumer-adequate candidates that no other listed candidate strictly Pareto-dominates.
+
+**I07 changes N → D within this release's declared scope:** the finite population is nonempty, every population member is admitted, and the axis language has a caller-supplied complete *finite* enumeration. This does not prove the same result with infinitely many unenumerated axes, does not verify that every economically feasible policy is enumerated and does not rank incomparable alternatives into a uniquely preferred policy. The source-written theorem is NOT an Agda compiler receipt. Its own full-axis and missing-axis bounded Python falsification check is executed separately.
+
+**Original mathematical roots:** the finite-order minimal-element result long predates this repository. Emmerich and Deutz (2018), "A tutorial on multiobjective optimization: fundamentals and evolutionary methods", Proposition 6, DOI 10.1007/s11047-018-9685-y, is an explicit published exposition, not claimed original invention of the theorem. The novel repository terms are ChatGPT-assisted source writing under Johl Brown's research direction; existing DASHI Pareto theorem owners remain the original code owner. Earlier Ibrahim first-link and Monster 3B claims are separate, and no new Monster correspondence is asserted.
+
+**Current ledger tally: 60 D / 11 R / 6 N = 77.** Residual A05/C06/C09/E07/F07/H08 still require authenticated source/financial/regulatory/causal same-object evidence rather than a new free-floating synthetic theorem. Kernel typecheck and current-master convergence are separate release gates.
 
