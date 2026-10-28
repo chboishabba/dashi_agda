@@ -1671,3 +1671,111 @@ independent representation ownership.
 ## 2026-10-28 actual five-orbit wave-operator named-word receiver
 
 With the source-backed global-S3 word orbit ↔ simultaneous-C2 sign orbit chart in `AlexanderHornedS3WordSignOrbitTransportExact`, the original #1244 `AlexanderHornedFiveOrbitWaveOperatorExact` five-slot heterogeneous operators can now be evaluated on ANY named three-label word without inventing an operator carrier. New `AlexanderHornedFiveOrbitNamedWordWaveTransportExact` proves the explicit five-class map AAA→origin, AAB→axisSecond, ABA→axisFirst, ABB→diagonal, ABC→antiDiagonal, and operator-evolution compatibility and invariance under all six global value S3 transformations. Independent local exact integer audit covered **243 five-field assignments × 27 named three-label words × 6 S3 actions = 39,366** valid heterogeneous operator evaluations. Source terms were committed and imported by canonical TOE receiver but not Agda-kernel typechecked; the exact committed GitHub checkout regression did not run. The original finite wave source `ShiftDiscreteWaveStep` and #1405 sound-wave transport authors retain ownership. This is a genuine orbit-INDEXING transport only; it does not claim Zipf measures, time-series Heaps behaviour, an ambient Alexander wild embedding, physical acoustics, #1407 complex Fourier convolution, #1414 spin or Ibrahim/Monster same-object identity.
+
+
+### T. Tetralemma relative handle-slide: cap fixation versus full-boundary obstruction
+
+**Tetralemma source owner audited:** `DASHI.Algebra.TetralemmaBridge`
+already implements `affirmation,negation,both,neither`, with a
+non-promotion firewall distinguishing this logic carrier from
+physical/semantic objects. `DisagreementFourViewBoundary`
+makes support for P and ¬P explicit. These FOUR positions
+are useful as proof-status/contradiction qualifications
+but are NOT a fourth geometric direction or a new
+3D gluing theorem. No false C3×Trit cubical witness
+is fabricated from this classification.
+
+**New mathematically decisive relative-wall correction:**
+a homeomorphism of an orientable genus-3 handlebody
+H3 which fixes its ENTIRE boundary pointwise
+induces the identity on π1(H3), since the boundary
+inclusion `π1(∂H3)→π1(H3)=F3` is onto and
+every boundary loop is fixed. Thus a nontrivial
+Nielsen automorphism `a↦c^-1a,b↦b^-1,c↦c`
+cannot be realised by a full-boundary-pointwise
+homeomorphism. The earlier short phrase
+"relative handle-slide" needs the precise
+weaker condition: a specifically SELECTED
+stationary disk/cap and its collar can be
+fixed while slides move the complementary
+handlebody boundary. Support away from that
+cap must be explicitly constructed. This
+full-boundary no-go is a direct fundamental
+group consequence, not a failed numerical test.
+
+Classical reference: Sebastian Hensel,
+*A Primer on Handlebody Groups*, §2–3,
+https://www.math.lmu.de/~hensel/papers/hno4.pdf,
+for cut systems, handlebody mapping class
+group and boundary-restriction facts.
+This source supports standard handlebody
+topology; it does not supply our specific
+Alexander wild-satellite cap-relative
+embedding automatically.
+
+**Current true theorem dependencies** after
+the already solved algebraic primitive basis
+`u=b^-1,v=c^-1a,z=c`:
+
+1. `selectedCapDisjointFromSlides` [P0, OPEN].
+   Choose actual embedded handle cores and
+   disjoint slide-support disks outside the
+   selected cap/collar.
+2. `relativeHandleSlideHomeomorphism` [P0, OPEN].
+   Construct an orientation-preserving
+   PL/smooth genus-3 handlebody homeomorphism
+   fixed on the selected cap neighbourhood
+   (NOT on all of ∂H3), with inverse and
+   exact induced Nielsen automorphism.
+3. `relativePeripheralBasepointPath` [OPEN].
+   Realise `p=a b a^-1 c` as an actual
+   complement path and verify the
+   conjugation equality on based loops.
+4. `thetaRibbonBoundaryEmbedded` [OPEN].
+   Embed a once-punctured-torus surface
+   whose based boundary represents
+   `[b^-1,c^-1a]` and is disjoint
+   from the stationary collar.
+5. `childMeridianFunctoriality` [OPEN].
+   Prove the identification of actual
+   chosen geometrical child meridians
+   with F(a,b,c) free basis under
+   these handle slides.
+6. `threeChildStageInclusion` [OPEN].
+   Compare true complement inclusions
+   with the abstract `[a,b][b,c]`
+   bonding map; prove injection.
+7. `nestedThreeChildWildLimit` [OPEN].
+   Bound nested stages, clearance, wildness,
+   preservation of cap and ambient C3.
+8. `ternaryExteriorSameObjectPi1` [OPEN].
+   Invoke the existing open-exhaustion /
+   van Kampen adapters on the SAME
+   actual three-dimensional exterior.
+
+**Proof-status qualification**:
+`AlexanderHornedTetralemmaRelativeHandleSlideGateExact.agda`
+imports the existing tetralemma and source
+meridian owners. It records affirmative
+algebraic evidence, negates the impossible
+full-boundary-pointwise claim, and leaves
+actual selected-cap preservation, geometric
+meridian naturality and wild-limit theorem
+as unproved source obligations.
+Its `RelativeHandleSlideSupplier` is only
+a weak abstract record of inverse maps
+and a cap predicate. IT IS NOT an inhabited
+concrete 3D topology model, and even an
+inhabitant would not prove a handlebody
+homeomorphism without additional
+topological structure. No kernel receipt
+or real geometric homeomorphism is claimed.
+
+This narrows and corrects the original
+F/G geometric cut while retaining original
+Alexander/Hatcher (1924 / AT 2B.2)
+source ownership, prior original
+Nielsen/pants owners, #1414 finite
+C3/S3/quaternion, sonic #1405,
+and original Ibrahim Monster 3B
+independence.
