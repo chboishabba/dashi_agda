@@ -14,6 +14,8 @@ module DASHI.Foundations.Polynomial369TrialecticTransportExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Product using (_,_)
+
 
 import Base369 as Base
 import DASHI.Cognition.RecursiveFibreTower as Tower
