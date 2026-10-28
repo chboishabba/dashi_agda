@@ -75,3 +75,30 @@ agda -i . -i <YOUR_PINNED_STANDARD_LIBRARY_PATH> DASHI/Arithmetic/TwinPrimeSixWh
 ```
 
 The second command is illustrative: use the repository's pinned preflight/CI setup for the actual Agda invocation. A syntax/preflight check or Python success does not replace the Agda kernel.
+
+## 2026-10-28 cross-repository reuse audit (Veritasium source clarified)
+
+The user identifies the video **Veritasium, “We're 99.9% sure this pattern is true, but no one can prove it”**, [YouTube 8HBDE-msUjw](https://www.youtube.com/watch?v=8HBDE-msUjw), published 14 June 2026, as the explanatory source. The transcript is the motivation. The historical mathematical papers above remain independent theorem owners.
+
+### BIDI search findings: do not overclaim absence
+
+- `dashi_agda/DASHI/Biology/SignedSSPFRACTRANWeaveExact.agda`: fifteen typed SSP prime lanes, balanced signed valuations, numerator/denominator instructions, and machine-oriented semantics. Those fifteen primes are exactly 2,3,5,7,11,13,17,19,23,29,31,41,47,59,71. This is a **fixed finite vocabulary**, not the set of all primes or the first fifteen primes.
+- `DASHI/Programmes/FRACDASHPairedPrimeActivityExact.agda`: paired-prime **tag/register** activation yields the existing first-applicable step theorem under explicit activity/applicability witnesses. Paired tags are NOT the mathematical statement that two Nat primes differ by 2. Its canonical boundary flags concrete Nat divisibility iff active-tag as **not closed**. Historical donor: merged [PR #636](https://github.com/chboishabba/dashi_agda/pull/636); source ownership remains with the existing FRACDASH macro and Agda compiler authors.
+- `DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda`: generic deterministic first-applicable rule, conditional on prefix-blocked and intended-applicable certificates.
+- `DASHI/Combinatorics/FractranCOL.agda`: five prime lanes [2,3,5,7,11], fuelled finite evaluation and **termination as a supplied axioms record**, not an unconditional prime theorem.
+- `DASHI/Combinatorics/SSP15FractranCompression.agda` / `FractranComputationEquivalence.agda`: explicit simulation, residual and compression contracts, not an automatic arithmetic same-object identity.
+- `DASHI/Analysis/RiemannSSP15ProducerMarkedSignedFRACTRANExact.agda`: explicit result that signed FRACTRAN execution **does not create an analytic identity**. Reuse this non-promotion precedent.
+- `DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda` / `PrimeGap2026SourceAcquisitionExact.agda`: source-bound an announcement concerning unusually **large** prime gaps (Lichtman/Alexeev), *not* the bounded **small** gap theorem in Zhang/Maynard/Polymath/OpenAI 186. Original source acquisition gate is not altered or promoted.
+- `dashifine/newtest/primes_krr.py`: empirical kernel-ridge-regression learning of divisibility / p-adic valuations. Predictions and finite MSE metrics are not prime predicates or proof objects. `dashifine/newtest/triality_stack.py` provides CRT-**like** composite phase experiments rather than a certified number-theoretic CRT.
+- `dashitest/docs/valuation_primes_plan.md`: a proposed full valuation vector, largest prime power and ultrametric distance benchmark; it is a *plan*, not a proved interpreter or complete sieve. `dashitest` has no GitHub code-search index in this audit; its directly fetched README and plan were inspected. Do not equate missing code-search hits with absence.
+- Original upstream CRT and prior arithmetic owners: merged [PR #128](https://github.com/chboishabba/dashi_agda/pull/128), `SixWheelCRTExact`, `FinitePrimeProductSieveExact`, and `PrimeModSixSieveExact`. Existing `FinitePrimeProductSieveExact` proves **single-number** ∏(p-1) survivors, not automatically twin-pair ∏(p-2) survivors. General arithmetic CRT still needs pairwise-coprime and congruence witnesses.
+
+### New explicit reuse on this PR
+
+`DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda` imports the existing wheel and FRACDASH theorem owners. `TwinWheelActivityBridge` requires evidence that the chosen machine's active tag actually represents the paired wheel-survival condition. **It does not construct a concrete machine bridge.** Given such a bridge, `bridgeChoosesFirstApplicable` reuses `activityReceiptYieldsFirstApplicableStep`, while `bridgeActivationForcesResidueFive` reuses `pairSurvivorMustBeR5`. This supplies the correctly typed same-object *obligation* rather than identifying unrelated uses of “paired primes”. It is exposed at all three TOE roots. No satellite, ESD or underlying proof owner is modified.
+
+`scripts/check_twin_prime_ssp15_crt_finite.py` independently checks local pair survival for every SSP15 prime (one excluded residue at 2, two at each odd prime), and the exact finite CRT count for prefixes up to 2·3·5·7·11·13=30030. The surviving count is **1485**, equal to ∏(p-ν_p) with ν_2=1, ν_p=2 otherwise. This is finite integer evidence; no arbitrary-list Agda CRT theorem is claimed. The test also proves by finite counterexample that SSP15 does not include 37,43,53,61,67. Both 2279=43·53 and 2281 avoid the entire SSP15 sieve, although 2279 is composite. Thus SSP15 screening alone is not even a complete primality decision procedure in this range, much less a twin-prime infinitude theorem.
+
+**Max-cut:** (1) Agda kernel-check these modules; (2) discharge concrete arithmetic-to-tag encoding and the missing-primes/general-prime CRT transport; (3) transfer weighted-sieve threshold and analytic distribution results from exact source statements. Reuse the 2026 external Lean work with its declared assumptions. No Monster character fingerprint, numerical correlation, or signed-machine execution may bypass the original Ibrahim attribution and same-object boundaries.
+
+**Executed local exact checks:** both finite Python scripts passed on 2026-10-28. No Agda kernel run, GitHub CI pass, or external Lean recheck is claimed.
