@@ -2822,3 +2822,102 @@ fixtureSaleFundedTwoTaxAndOneFee :
 fixtureSaleFundedTwoTaxAndOneFee =
   canonicalFundingBatchExactlyFundsTaxPaymentAndFees fixtureSaleRouteWeld
 
+------------------------------------------------------------------------
+-- RBA / ASX STATE-SPLIT: SCHEDULED, BACKED-OUT AND SETTLED.
+--
+-- Source roots:
+-- ASX Settlement Services and Pricing (Model 3 DvP; net batch);
+-- RBA 2017-18 ASX SSF Standard 7 (shortfall back-out and reschedule).
+-- https://www.asx.com.au/about/regulation/clearing-and-settlement-of-cash-equities-in-australia/settlement/settlement-services-and-pricing
+-- https://www.rba.gov.au/payments-and-infrastructure/financial-market-infrastructure/clearing-and-settlement-facilities/assessments/2017-2018/asx-securities-settlement-facilities/standard-07.html
+--
+-- A settlement due date and nominal T+2 rule never certify completion.
+-- An official batch-finality receipt still needs a genuine producer.
+------------------------------------------------------------------------
+
+data DvPBatchDisposition : Set where
+  dueForSettlement : DvPBatchDisposition
+  backedOutAndRescheduled : DvPBatchDisposition
+  completedIrrevocableDvP : DvPBatchDisposition
+
+dueDoesNotProveActualDvP :
+  dueForSettlement ≡ completedIrrevocableDvP → ⊥
+dueDoesNotProveActualDvP ()
+
+backedOutDoesNotProveActualDvP :
+  backedOutAndRescheduled ≡ completedIrrevocableDvP → ⊥
+backedOutDoesNotProveActualDvP ()
+
+record SourceLinkedFinalSettlement
+    (Receipt : Set)
+    (OfficiallyValidated : Receipt → Set) : Set where
+  constructor source-linked-final-settlement
+  field
+    originalSettlementAdmission :
+      OfficialSettlementAdmission Receipt OfficiallyValidated
+    observedBatchDisposition : DvPBatchDisposition
+    completionStageVerified :
+      observedBatchDisposition ≡ completedIrrevocableDvP
+    declaredTaxpayerKey : Nat
+    officialSellingHolderKey : Nat
+    sameHolderAsTaxpayer :
+      officialSellingHolderKey ≡ declaredTaxpayerKey
+    officialIssuerClassKey : Nat
+    intendedIssuerClassKey : Nat
+    sameIssuerClassAsTrade :
+      officialIssuerClassKey ≡ intendedIssuerClassKey
+    verifiedProceedsUnits : Nat
+    verifiedSettlementEpoch : Nat
+open SourceLinkedFinalSettlement public
+
+-- The receipt validator and identity-key assignments are independent
+-- obligations. Equality of local integer keys is not cryptographic
+-- validation, registry provenance or same legal/beneficial ownership.
+settlementProvenanceAndSecurityMatch :
+  {Receipt : Set} {OfficiallyValidated : Receipt → Set} →
+  (receipt : SourceLinkedFinalSettlement Receipt OfficiallyValidated) →
+  (OfficiallyValidated
+    (independentOfficialReceipt (originalSettlementAdmission receipt)))
+  × ((observedBatchDisposition receipt ≡ completedIrrevocableDvP)
+     × (officialIssuerClassKey receipt ≡ intendedIssuerClassKey receipt))
+settlementProvenanceAndSecurityMatch receipt =
+  independentAuthorityCheck (originalSettlementAdmission receipt) ,
+  (completionStageVerified receipt , sameIssuerClassAsTrade receipt)
+
+-- A same-payment-route requirement prevents proving the chronology
+-- of an unrelated transaction and calling it a tax-funding receipt.
+record ExternallyAdmittedSaleTaxRoute
+    (Receipt : Set)
+    (OfficiallyValidated : Receipt → Set) : Set where
+  constructor externally-admitted-sale-tax-route
+  field
+    admittedLiquidityAndCredit : FinancedRouteAdmission
+    recordedSale : SourceLinkedFinalSettlement Receipt OfficiallyValidated
+    salePartOfThisFundingRoute :
+      verifiedProceedsUnits recordedSale
+      ≡ grossSaleCash (admittedFundingRoute admittedLiquidityAndCredit)
+    paymentAfterThisSettlement :
+      verifiedSettlementEpoch recordedSale
+      ≤ taxPaymentEpoch admittedLiquidityAndCredit
+open ExternallyAdmittedSaleTaxRoute public
+
+validatedSaleProceedsCannotSkipSettlementAndTaxChronology :
+  {Receipt : Set} {OfficiallyValidated : Receipt → Set} →
+  (joined : ExternallyAdmittedSaleTaxRoute Receipt OfficiallyValidated) →
+  (OfficiallyValidated
+    (independentOfficialReceipt
+      (originalSettlementAdmission (recordedSale joined))))
+  × ((verifiedProceedsUnits (recordedSale joined)
+       ≡ grossSaleCash
+           (admittedFundingRoute (admittedLiquidityAndCredit joined)))
+    × (verifiedSettlementEpoch (recordedSale joined)
+         ≤ taxPaymentEpoch (admittedLiquidityAndCredit joined)))
+validatedSaleProceedsCannotSkipSettlementAndTaxChronology joined =
+  independentAuthorityCheck
+    (originalSettlementAdmission (recordedSale joined)) ,
+  (salePartOfThisFundingRoute joined , paymentAfterThisSettlement joined)
+
+-- The model deliberately does not provide an inhabitant of
+-- SourceLinkedFinalSettlement from a mere TimestampedFill or a predicted
+-- settlement date. An official provider must supply the validator proof.
+
