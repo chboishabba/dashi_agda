@@ -64,6 +64,33 @@ canonicalR2P2PrimarySource = record
   ; reportedLinkInstability = "few parts in 1e-17 at approximately 100 s; network shakedown only"
   }
 
+------------------------------------------------------------------------
+-- Exact user-supplied source identity. This is VIDEO authority only.
+-- Never use a secondary explanatory film as the original raw dataset.
+------------------------------------------------------------------------
+
+record Veritasium2026Source : Set where
+  field
+    videoTitle : String
+    videoUrl : String
+    publicationDate : String
+    creator : String
+    evidentialRole : String
+
+open Veritasium2026Source public
+
+canonicalVeritasium2026Source : Veritasium2026Source
+canonicalVeritasium2026Source = record
+  { videoTitle = "No device could prove Einstein wrong... until now"
+  ; videoUrl = "https://www.youtube.com/watch?v=eyZEqSPeMwg"
+  ; publicationDate = "2026-10-23"
+  ; creator = "Veritasium"
+  ; evidentialRole = "secondary explanatory video/transcript, not an R2P2 final raw-data article"
+  }
+
+veritasiumSourceIsNotAPSOriginal : Bool
+veritasiumSourceIsNotAPSOriginal = true
+
 r2p2FreeSpaceFromSource :
   freeSpaceLinkKm canonicalR2P2PrimarySource ≡ 69
 r2p2FreeSpaceFromSource = refl
@@ -152,6 +179,8 @@ record R2P2ClockComparisonBoundary : Set where
   field
     source : R2P2PrimarySource
     sourceIsCanonical : source ≡ canonicalR2P2PrimarySource
+    video : Veritasium2026Source
+    videoIsCanonical : video ≡ canonicalVeritasium2026Source
     properTimeBridge : Redshift.QuantumClockProperTimeRedshiftBridge
     properTimeBridgeIsCanonical :
       properTimeBridge ≡ Redshift.canonicalQuantumClockProperTimeRedshiftBridge
@@ -184,6 +213,8 @@ canonicalR2P2ClockComparisonBoundary : R2P2ClockComparisonBoundary
 canonicalR2P2ClockComparisonBoundary = record
   { source = canonicalR2P2PrimarySource
   ; sourceIsCanonical = refl
+  ; video = canonicalVeritasium2026Source
+  ; videoIsCanonical = refl
   ; properTimeBridge = Redshift.canonicalQuantumClockProperTimeRedshiftBridge
   ; properTimeBridgeIsCanonical = refl
   ; empiricalRequest = Request.opticalClockHeightComparisonRequested
