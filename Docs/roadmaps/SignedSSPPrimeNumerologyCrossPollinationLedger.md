@@ -134,3 +134,27 @@ first-applicable interpreter. The preservation includes ordered
 prefix failure and terminal no-applicable status, not only an
 unordered 14-element label set. It is source-written and does not
 provide signed runtime state/action alignment.
+
+### 2026-10-28 numeric evaluator is now *source-instantiated*
+
+`PrimegameTypedNumericFirstApplicableBidiExact` now defines
+`exactNumericNext`, `exactNumericNextIsCorrect`, and an inhabited
+`concreteExactFractionEvaluator` record. The zero denominator is
+rejected by `ExactFractionApplies`; for positive denominators,
+Agda's stdlib quotient/remainder equations derive exact output
+`next*d=n*a` from the arithmetic integrality witness. This is
+not an uninterpreted evaluator axiom. The three canonical TOE roots
+export `guyConcreteExactPriorityForward` and
+`guyConcreteExactPriorityBackward`.
+
+**Scope/evidence:** source-written Agda with explicit stdlib names,
+not typechecked in this runtime. Local exact Python tested the
+14 original Guy fractions and 20,000 integer steps; it is not the
+Agda kernel. The missing A07/A08/B03/C08 frontier is now the
+actual signed SSP/FRACDASH action-state simulation plus readout,
+not a missing integer-division specification. No branch-only
+#1414 polynomial/quintic/monodromy module was imported: #1414
+correctly distinguishes its own 27-label endomorphism/S3 meanings
+from cube-coordinate semantics, and no mathematical map into the
+actual twin-prime correlation was established. Preserve its own
+PR ownership and Ibrahim 3B boundary.
