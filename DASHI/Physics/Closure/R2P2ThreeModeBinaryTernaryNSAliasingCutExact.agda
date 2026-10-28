@@ -22,7 +22,7 @@ module DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; _∷_; [])
 open import Data.Empty using (⊥)
@@ -328,6 +328,21 @@ threeAxisBalancedModeCube x y z =
     (modeToBalancedSSP x)
     (modeToBalancedSSP y)
     (modeToBalancedSSP z)
+
+-- Exact size arithmetic is NOT a substitute for the independent
+-- enumeration of in/out-of-window pairs.  The count 386 is confirmed
+-- by the executable 729-pair reference, not proved just by this sum.
+threeAxisSignedModeCount : 3 * 3 * 3 ≡ 27
+threeAxisSignedModeCount = refl
+
+threeAxisOrderedPairCount : 27 * 27 ≡ 729
+threeAxisOrderedPairCount = refl
+
+threeAxisNoEscapePairsArithmetic : 7 * 7 * 7 ≡ 343
+threeAxisNoEscapePairsArithmetic = refl
+
+threeAxisPairPartitionArithmetic : 343 + 386 ≡ 729
+threeAxisPairPartitionArithmetic = refl
 
 threeAxisPlusX : Orbit27.TritTriple
 threeAxisPlusX =
