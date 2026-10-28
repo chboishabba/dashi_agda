@@ -196,3 +196,36 @@ ridgeNormalEquation q rho lambda a b paid =
 
 -- Source-written ring algebra, not a kernel-verified theorem yet.
 -- It cannot identify the correct lambda or justify a measured covariance.
+
+
+------------------------------------------------------------------------
+-- T10: PARETO REPAIR. A SECOND-COORDINATE STATEMENT IS NOT A PAIR RESULT.
+-- The first channel retains its error. This proof exposes BOTH coordinates
+-- in one equality and directly reuses the T8 conditional scalar result.
+------------------------------------------------------------------------
+
+noisyTriangularPair :
+  ℚ → (ℚ × ℚ) → ℚ → ℚ → (ℚ × ℚ)
+noisyTriangularPair q (x , y) firstError secondError =
+  (x + firstError) , ((x + q * y) + secondError)
+
+calibratedFullPairPerturbation :
+  ∀ (q r x y firstError secondError : ℚ) →
+  r * q ≡ 1ℚ →
+  recoverTriangular r
+    (noisyTriangularPair q (x , y) firstError secondError)
+  ≡ ((x + firstError) , (y + r * (secondError - firstError)))
+calibratedFullPairPerturbation q r x y firstError secondError paid =
+  cong (λ second → (x + firstError) , second)
+    (calibratedTwoChannelPerturbation
+      q r x y firstError secondError paid)
+
+commonModePairRetainsFirstError :
+  ∀ (q r x y sharedError : ℚ) →
+  r * q ≡ 1ℚ →
+  recoverTriangular r
+    (noisyTriangularPair q (x , y) sharedError sharedError)
+  ≡ ((x + sharedError) , y)
+commonModePairRetainsFirstError q r x y sharedError paid =
+  cong (λ second → (x + sharedError) , second)
+    (commonModeSecondCoordinateRecovers q r x y sharedError paid)
