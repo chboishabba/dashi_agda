@@ -12,6 +12,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Nat using (_≤_)
+open import Data.Nat.Properties using (m≤m+n)
+open import Relation.Binary.PropositionalEquality using (sym; subst)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -676,3 +680,102 @@ netReceiptCannotRecoverGrossTurnover =
 -- The net batch is a participant-level financial observation. The
 -- original two-fill sale is an investor-level synthetic fixture. No implicit
 -- identification of the two records is supplied by this code.
+
+
+------------------------------------------------------------------------
+-- GENERIC FINITE ORDER/EXECUTION/SETTLEMENT CONTRACTS (D09--D11).
+-- No two-fill bound is silently assumed to cover an arbitrary collection.
+-- A valid reconciled receipt carries accounting evidence. Mere proposal,
+-- request, fill ID, or market signal does NOT construct such a receipt.
+------------------------------------------------------------------------
+
+record CountReconciledOrder : Set where
+  constructor count-reconciled-order
+  field
+    submittedCount : Nat
+    executedCount : Nat
+    settledCount : Nat
+    unfilledCount : Nat
+    unsettledCount : Nat
+    submittedCountReconciled :
+      submittedCount ≡ executedCount + unfilledCount
+    executedCountReconciled :
+      executedCount ≡ settledCount + unsettledCount
+open CountReconciledOrder public
+
+genericExecutedCountBoundedBySubmitted :
+  (receipt : CountReconciledOrder) →
+  executedCount receipt ≤ submittedCount receipt
+genericExecutedCountBoundedBySubmitted receipt =
+  subst (λ n → executedCount receipt ≤ n)
+        (sym (submittedCountReconciled receipt))
+        (m≤m+n (executedCount receipt) (unfilledCount receipt))
+
+genericSettledCountBoundedByExecuted :
+  (receipt : CountReconciledOrder) →
+  settledCount receipt ≤ executedCount receipt
+genericSettledCountBoundedByExecuted receipt =
+  subst (λ n → settledCount receipt ≤ n)
+        (sym (executedCountReconciled receipt))
+        (m≤m+n (settledCount receipt) (unsettledCount receipt))
+
+record PriceQuantityFill : Set where
+  constructor price-quantity-fill
+  field
+    clearedUnits : Nat
+    quotedUnitPrice : Nat
+open PriceQuantityFill public
+
+grossFromFiniteSettledFills : List PriceQuantityFill → Nat
+grossFromFiniteSettledFills [] = zero
+grossFromFiniteSettledFills (fill ∷ rest) =
+  clearedUnits fill * quotedUnitPrice fill
+  + grossFromFiniteSettledFills rest
+
+unitsFromFiniteSettledFills : List PriceQuantityFill → Nat
+unitsFromFiniteSettledFills [] = zero
+unitsFromFiniteSettledFills (fill ∷ rest) =
+  clearedUnits fill + unitsFromFiniteSettledFills rest
+
+record CashReconciledFillBatch : Set where
+  constructor cash-reconciled-fill-batch
+  field
+    countReceipt : CountReconciledOrder
+    settledFills : List PriceQuantityFill
+    recordedGrossCash : Nat
+    fillCountMatchesReceipt :
+      unitsFromFiniteSettledFills settledFills ≡
+        settledCount countReceipt
+    settledProceedsMatchRecordedCash :
+      recordedGrossCash ≡ grossFromFiniteSettledFills settledFills
+open CashReconciledFillBatch public
+
+genericSettledProceedsIsExactPriceQuantitySum :
+  (batch : CashReconciledFillBatch) →
+  recordedGrossCash batch ≡ grossFromFiniteSettledFills (settledFills batch)
+genericSettledProceedsIsExactPriceQuantitySum =
+  settledProceedsMatchRecordedCash
+
+-- Arbitrarily many fills use the same generic conservation contract.
+-- All prices here are dimensionless natural-number fixture units, not
+-- market prices, fiat cents, broker fees or settlement confirmations.
+twoFillGenericWitness : CashReconciledFillBatch
+twoFillGenericWitness =
+  cash-reconciled-fill-batch
+    (count-reconciled-order 2 2 2 0 0 refl refl)
+    (price-quantity-fill 1 1 ∷ price-quantity-fill 1 2 ∷ [])
+    3 refl refl
+
+twoFillGenericBound :
+  settledCount (countReceipt twoFillGenericWitness)
+    ≤ submittedCount (countReceipt twoFillGenericWitness)
+twoFillGenericBound =
+  subst
+    (λ n → settledCount (countReceipt twoFillGenericWitness) ≤ n)
+    (sym (submittedCountReconciled (countReceipt twoFillGenericWitness)))
+    (genericSettledCountBoundedByExecuted
+      (countReceipt twoFillGenericWitness))
+
+twoFillGenericCash :
+  recordedGrossCash twoFillGenericWitness ≡ 3
+twoFillGenericCash = refl
