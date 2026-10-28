@@ -553,6 +553,12 @@ open DashiTradeTax public using
   ; MatchedPolicyEffectAdmission
   ; measuredPolicyEffectRequiresSameObjectInputs
   ; noUniqueOptimalTaxRateFromParetoOrderAlone
+  ; RankedMember
+  ; FiniteRankMinimum
+  ; finiteNonemptyRankMinimum
+  ; StrictlyDominatesAdmissible
+  ; NonemptyRankedParetoFront
+  ; finiteParetoFrontierNonemptyGivenStrictRank
   )
 
 -- Explicit boundary aliases stay close to TOE use sites.
