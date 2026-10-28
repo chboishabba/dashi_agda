@@ -139,6 +139,20 @@ record RationalDomainLawWitness : Set where
 
 open RationalDomainLawWitness public
 
+splitVandermondeZero :
+  (laws : RationalDomainLawWitness) →
+  (a b c : ℚ) →
+  vandermonde (Vieta.roots a b c) ≡ 0ℚ →
+  (a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c))
+splitVandermondeZero laws a b c vZero
+  with zeroProduct laws ((a - b) * (a - c)) (b - c) vZero
+... | inj₂ bcZero =
+  inj₂ (inj₂ (zeroDifference laws b c bcZero))
+... | inj₁ firstZero
+  with zeroProduct laws (a - b) (a - c) firstZero
+...   | inj₁ abZero = inj₁ (zeroDifference laws a b abZero)
+...   | inj₂ acZero = inj₂ (inj₁ (zeroDifference laws a c acZero))
+
 zeroDiscriminantImpliesCollision :
   (laws : RationalDomainLawWitness) →
   (a b c : ℚ) →
@@ -148,19 +162,8 @@ zeroDiscriminantImpliesCollision laws a b c discZero
   with zeroProduct laws
     (vandermonde (Vieta.roots a b c))
     (vandermonde (Vieta.roots a b c)) discZero
-... | inj₁ vZero = splitV vZero
-... | inj₂ vZero = splitV vZero
-  where
-    splitV :
-      vandermonde (Vieta.roots a b c) ≡ 0ℚ →
-      (a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c))
-    splitV vZero
-      with zeroProduct laws ((a - b) * (a - c)) (b - c) vZero
-    ... | inj₂ bcZero = inj₂ (inj₂ (zeroDifference laws b c bcZero))
-    ... | inj₁ firstZero
-      with zeroProduct laws (a - b) (a - c) firstZero
-    ...   | inj₁ abZero = inj₁ (zeroDifference laws a b abZero)
-    ...   | inj₂ acZero = inj₂ (inj₁ (zeroDifference laws a c acZero))
+... | inj₁ vZero = splitVandermondeZero laws a b c vZero
+... | inj₂ vZero = splitVandermondeZero laws a b c vZero
 
 -- The converse is now a short genuine constructive proof with two
 -- explicitly named missing field-property instances. It is not a
