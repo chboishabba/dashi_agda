@@ -1,5 +1,12 @@
 module DASHI.Unified.Everything where
 
+-- Source-generalized nested commutator recovery forces both witnesses
+-- trivial in every explicitly finite-derived solvable target.
+import DASHI.Foundations.PolynomialDoubleCommutatorSolvableNoGoExact as DoubleCommutatorObstruction
+open DoubleCommutatorObstruction public using
+  ( recoveringPairGainsTwoLevels ; atEveryDerivedLevel
+  ; everySolvableRecoveringPairIsTrivial )
+
 -- Classical cubic discriminant: Vandermonde alternates under S3,
 -- its square depends only on Vieta coefficients and vanishes at collisions.
 import DASHI.Foundations.PolynomialVandermondeDiscriminantExact as RootDiscriminant
