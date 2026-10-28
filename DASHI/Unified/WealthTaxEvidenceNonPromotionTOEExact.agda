@@ -243,6 +243,21 @@ toeSaleUnitsCannotIdentifySecurityClass :
 toeSaleUnitsCannotIdentifySecurityClass =
   DashiTradeTax.saleVolumeCannotIdentifyInstrumentClass
 
+-- Source-labelled synthetic settlement and share-class reconciliation:
+-- exact fixture equality does not authenticate any real tax/custody record.
+toeSyntheticSettlementOwnerClassWeld :
+  DashiTradeTax.SettlementOwnershipWeld
+toeSyntheticSettlementOwnerClassWeld =
+  DashiTradeTax.syntheticOrdinaryWeld
+
+-- Official ASX clearing netting is a distinct source/observer plane.
+-- Net received cash does not identify gross orders or investor proceeds.
+toeNetReceiptDoesNotDetermineGrossTrades :
+  INF.FactorsThrough DashiTradeTax.netReceivedCash
+    DashiTradeTax.grossSellCash → ⊥
+toeNetReceiptDoesNotDetermineGrossTrades =
+  DashiTradeTax.netReceiptCannotRecoverGrossTurnover
+
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
 -- observed, exact-head compiler run. No ESD imports are changed.
