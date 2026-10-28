@@ -13,6 +13,7 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as CoreR2P2
 import Data.Empty as EmptyR2P2
 import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as Bias
 import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as Loop
+import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as Lattice
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
 import DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge as SI
 import DASHI.Physics.Closure.QuantumClockSuperpositionReceipt as Superposition
@@ -455,6 +456,9 @@ record R2P2369FullLogicalArchitecture : Set where
     workflowCanonical : workflow ≡ canonicalClockPipelinePath
     atoms : AtomicClockIdentities
     atomsCanonical : atoms ≡ canonicalAtomicClockIdentities
+    lattice : Lattice.OpticalLattice369PhysicalAuthority
+    latticeCanonical :
+      lattice ≡ Lattice.canonicalOpticalLattice369PhysicalAuthority
     indexedAtomic : Indexed369Observation zero
     indexedAtomicCanonical : indexedAtomic ≡ rootAtomicIndex
     indexedOptical : Indexed369Observation (suc (suc (suc zero)))
@@ -505,6 +509,8 @@ canonicalR2P2369FullLogicalArchitecture = record
   ; workflowCanonical = refl
   ; atoms = canonicalAtomicClockIdentities
   ; atomsCanonical = refl
+  ; lattice = Lattice.canonicalOpticalLattice369PhysicalAuthority
+  ; latticeCanonical = refl
   ; indexedAtomic = rootAtomicIndex
   ; indexedAtomicCanonical = refl
   ; indexedOptical = fineOpticalIndex
@@ -534,7 +540,7 @@ canonicalR2P2369FullLogicalArchitecture = record
   ; fullQGClaimProved = false
   ; noQGProof = refl
   ; pendingPhysicalConstruction =
-      "171Yb transition/laser cooling, lattice trapping and interrogation Hamiltonian calibration"
+      "R2P2 neutral-Yb isotope/transition identity must be verified before specific cooling, lattice trapping and interrogation calibration"
       ∷ "two independent optical clocks: systematic shifts, line-shape fits and traceable SI ratios"
       ∷ "comb f_rep and f_CEO, tooth index, signed beat, cycle slips and phase detector"
       ∷ "bidirectional 69 km atmospheric and 81 km fibre link calibration and clocks"
@@ -615,3 +621,30 @@ fullArchitectureWaveCutIsNotPhaseCalibration :
     (signedBeatWaveCut canonicalR2P2369FullLogicalArchitecture) ≡ false
 fullArchitectureWaveCutIsNotPhaseCalibration =
   WaveCut.waveBridgeDoesNotCalibratePhysicalPhase
+
+------------------------------------------------------------------------
+-- Source-distinct 369 atomic optical-lattice control and wave/comb model.
+-- A three-site noncommutation witness is NOT the irrational AA transition.
+------------------------------------------------------------------------
+
+fullArchitectureFiniteLatticeHoppingDoesNotCommuteWithSitePotential :
+  Lattice.nearestNeighbourAdjacency
+    (Lattice.siteDependentPotential Lattice.leftBasisState)
+    ≡
+  Lattice.siteDependentPotential
+    (Lattice.nearestNeighbourAdjacency Lattice.leftBasisState)
+    →
+  EmptyR2P2.⊥
+fullArchitectureFiniteLatticeHoppingDoesNotCommuteWithSitePotential =
+  Lattice.finiteLatticeOperatorsFailToCommute
+
+fullArchitectureLatticeIsNotInfiniteAAProof :
+  Lattice.finiteP3ProvesInfiniteAAThreshold
+    (lattice canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureLatticeIsNotInfiniteAAProof =
+  Lattice.latticeCannotProveInfiniteAAThreshold
+
+fullArchitectureDoesNotIdentifyMaStrontiumWithR2P2Ytterbium :
+  Lattice.maBichromaticSr87 ≡ Lattice.trianaMountainYb → EmptyR2P2.⊥
+fullArchitectureDoesNotIdentifyMaStrontiumWithR2P2Ytterbium =
+  Lattice.maIsNotTheR2P2Clock
