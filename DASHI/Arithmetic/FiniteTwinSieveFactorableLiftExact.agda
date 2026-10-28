@@ -37,7 +37,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
 open import Data.Product using (Σ; _×_; _,_)
-open import Data.Nat.Base using (_<_; z≤n; s≤s)
+open import Data.Nat.Base using (_<_; _≤_; z≤n; s≤s)
 open import Data.Nat.Divisibility using (divides)
 import Data.Nat.Properties as NatP
 import Data.Nat.Primality as NatPrime
@@ -362,3 +362,42 @@ factorableSurvivorCannotBeGenuineTwin axes a t survivor
   , NatPrime.composite⇒¬prime leftComposite
   , NatPrime.composite⇒¬prime rightComposite
   )
+
+------------------------------------------------------------------------
+-- UNBOUNDEDNESS CUT: the explicit candidate dominates its parameter t.
+-- This reuses stdlib monotonicity, not an analytic prime-gap argument.
+------------------------------------------------------------------------
+
+factorableLeftLinearInParameter :
+  (r P t : Nat) →
+  factorableLeft r P t ≡
+    r + t * (r * (r + 2) * P)
+factorableLeftLinearInParameter =
+  solve 3
+    (λ r P t →
+      r :* (con 1 :+ ((P :* (r :+ con 2)) :* t))
+      :=
+      r :+ (t :* ((r :* (r :+ con 2)) :* P)))
+    refl
+
+-- With r>=2 and P>=1, the multiplier is positive, hence t<=L.
+-- In particular, choosing t=N gives a composite survivor >=N
+-- as soon as the universal baseline has been provided.
+factorableLeftDominatesParameter :
+  (a b t : Nat) →
+  t ≤ factorableLeft (suc (suc a)) (suc b) t
+factorableLeftDominatesParameter a b t =
+  subst
+    (t ≤_)
+    (sym (factorableLeftLinearInParameter
+      (suc (suc a)) (suc b) t))
+    (subst
+      (t ≤_)
+      (NatP.+-comm (t * coefficient) (suc (suc a)))
+      (NatP.≤-trans
+        (NatP.m≤m*n t coefficient)
+        (NatP.m≤m+n (t * coefficient) (suc (suc a)))))
+  where
+    coefficient : Nat
+    coefficient =
+      (suc (suc a)) * ((suc (suc a)) + 2) * (suc b)
