@@ -2921,3 +2921,89 @@ validatedSaleProceedsCannotSkipSettlementAndTaxChronology joined =
 -- SourceLinkedFinalSettlement from a mere TimestampedFill or a predicted
 -- settlement date. An official provider must supply the validator proof.
 
+------------------------------------------------------------------------
+-- H08: JOINT-REFORM OUTCOME DOES NOT IDENTIFY A SINGLE-TAX EFFECT.
+--
+-- Empirical source: Marius A. K. Ring, October 2026, NBER WP35854.
+-- The Norwegian 2021-2024 setting changes business-wealth, dividend,
+-- and migration-related capital-gains tax rules together.
+-- Author and estimand ownership remain in Wealth.ringEntrepreneurialNorway2026.
+-- Synthetic rival worlds BELOW are not Norwegian administrative records.
+------------------------------------------------------------------------
+
+record CombinedReformIdentificationWorld : Set where
+  constructor combined-reform-identification-world
+  field
+    postJointReformOutcome : Nat
+    wealthTaxOnlyCounterfactualOutcome : Nat
+    dividendTaxAlsoChanged : Bool
+    migrationGainsRuleAlsoChanged : Bool
+open CombinedReformIdentificationWorld public
+
+sameJointReformWorldA : CombinedReformIdentificationWorld
+sameJointReformWorldA =
+  combined-reform-identification-world 5 1 true true
+
+sameJointReformWorldB : CombinedReformIdentificationWorld
+sameJointReformWorldB =
+  combined-reform-identification-world 5 3 true true
+
+jointPolicyWorldsHaveSameObservedCoordinate :
+  postJointReformOutcome sameJointReformWorldA
+    ≡ postJointReformOutcome sameJointReformWorldB
+jointPolicyWorldsHaveSameObservedCoordinate = refl
+
+jointPolicyWorldsDisagreeOnSingleTaxCounterfactual :
+  wealthTaxOnlyCounterfactualOutcome sameJointReformWorldA
+    ≡ wealthTaxOnlyCounterfactualOutcome sameJointReformWorldB → ⊥
+jointPolicyWorldsDisagreeOnSingleTaxCounterfactual ()
+
+jointReformReceiptCannotIdentifyIsolatedWealthTaxEffect :
+  INF.FactorsThrough postJointReformOutcome
+    wealthTaxOnlyCounterfactualOutcome → ⊥
+jointReformReceiptCannotIdentifyIsolatedWealthTaxEffect =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      sameJointReformWorldA sameJointReformWorldB
+      jointPolicyWorldsHaveSameObservedCoordinate
+      jointPolicyWorldsDisagreeOnSingleTaxCounterfactual)
+
+-- Inference is about nonidentifiability from ONE projection only.
+-- Multi-policy administrative data plus a credible causal design may
+-- estimate relevant responses. This theorem cannot negate such a study.
+
+------------------------------------------------------------------------
+-- A05: VALUED ASSETS ARE NOT THE BENEFICIAL OWNERSHIP ALLOCATION.
+-- Reuse the established non-factorability theorem owner.
+------------------------------------------------------------------------
+
+record AssessedOwnerAllocationWorld : Set where
+  constructor assessed-owner-allocation-world
+  field
+    sameGrossAssetValuation : Nat
+    ownerAttributedAssets : Nat
+open AssessedOwnerAllocationWorld public
+
+ownerAllocationA : AssessedOwnerAllocationWorld
+ownerAllocationA = assessed-owner-allocation-world 12 3
+
+ownerAllocationB : AssessedOwnerAllocationWorld
+ownerAllocationB = assessed-owner-allocation-world 12 9
+
+ownerAllocationCanDifferAtIdenticalGrossValue :
+  ownerAttributedAssets ownerAllocationA
+    ≡ ownerAttributedAssets ownerAllocationB → ⊥
+ownerAllocationCanDifferAtIdenticalGrossValue ()
+
+assetValueDoesNotIdentifyTaxpayerBeneficialShare :
+  INF.FactorsThrough sameGrossAssetValuation ownerAttributedAssets → ⊥
+assetValueDoesNotIdentifyTaxpayerBeneficialShare =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      ownerAllocationA ownerAllocationB refl
+      ownerAllocationCanDifferAtIdenticalGrossValue)
+
+-- A real A05 snapshot requires independently validated legal/beneficial
+-- ownership, exclusions, debt, tax year, currency and valuation evidence.
+-- No source constructor here claims to possess those external records.
+
