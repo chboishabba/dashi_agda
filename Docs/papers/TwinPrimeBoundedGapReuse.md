@@ -141,3 +141,13 @@ for coprime `M,p`, with asserted reductions modulo each factor, bounds, absence 
 
 Primary external URLs: [OpenAI PrimeGaps186](https://github.com/openai/PrimeGaps186), [Axiom Math PrimeGapsLib](https://github.com/AxiomMath/PrimeGapsLib), and the source work credited above. `CRTPeriod.agda` and `DASHI.Biology.DecimalCRTResolutionExact` already provide periodicity and CRT proof-shape donors; the new source **reuses** standard modular lemmas and retains original authorship.
 
+
+### Further reuse found: the 20-prime Ogg/non-Ogg control universe
+
+The first search missed `DASHI.Moonshine.AllPrimeRepresentationFrickeClosureExact`, which **already** collects all twenty labelled primes below 72. Its theorem `allPrimeCandidateCountIsTwenty` pairs with `nonOggPrimeCandidateCountIsFive`. The five non-Ogg control numerals are precisely 37, 43, 53, 61, and 67; these were *already in the repository*, even though the fixed Ogg/SSP15 carrier omits them. This is a critical attribution and reuse correction: we do **not** claim to discover those prime controls independently.
+
+The inherited catalogue serves a different question: source-owned representation/Fricke/Ogg closure, with the fifteen special primes versus five non-Ogg controls. It does not prove that a chosen control automatically supplies a `Data.Nat.Primality.Prime` proof required by the arithmetic sieve. The new narrow `DASHI.Arithmetic.TwinPrimeOggControlReuseExact` directly imports the original owner and reuses its 20/5 exact finite count theorems. Its `ControlToCertifiedPrime` requires literal equality between an existing control's arithmetic numeral and a separately certified `CertifiedPrimeAxis`; no implicit representation-to-primality promotion.
+
+In summary, the user hypothesis splits into **a finite pre-existing 20-prime representation catalogue** and **a general prime candidate/certificate process**. The former is concrete prior art, the latter gives arbitrary-modulus sieve extension. The already-proved SSP369 automorphism preserves each input prime identity and therefore cannot independently generate new prime values. Explicit new moduli and genuine coprime evidence are still necessary for arithmetic CRT.
+
+This is also why `DASHI.Arithmetic.CoprimeLayer` and `DASHI.Arithmetic.TrackedCoprimeTable` are retained as prior coprimality owners: they prove distinct tracked prime powers coprime and a product-divisibility lemma. Our generic `ArithmeticPrimeCRTStep` requires the *same standard-library `Coprime M p` type* for arbitrary axes, instead of assuming it from distinct SSP labels. The general arithmetic inverse remains an open proof target.
