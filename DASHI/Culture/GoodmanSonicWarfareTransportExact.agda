@@ -22,6 +22,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Physics.ObserverConditionedTransportBridge as Transport
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
 data ToySoundSource : Set where
   sourceOff : ToySoundSource
@@ -86,8 +87,8 @@ sourceMonitorProjection =
 
 jointReceiverAndSourceMonitor :
   ToySoundField → ToyReceived × ToyReceived
-jointReceiverAndSourceMonitor state =
-  selectedMicrophoneProjection state , sourceMonitorProjection state
+jointReceiverAndSourceMonitor =
+  Observer.pairObserver selectedMicrophoneProjection sourceMonitorProjection
 
 data SourceActivity : Set where
   sourceInactive : SourceActivity
@@ -177,6 +178,20 @@ sourceMonitorSeparatesSilentSourceCollision :
   sourceMonitorProjection transmittingOff
     ≡ sourceMonitorProjection absorbingOn → ⊥
 sourceMonitorSeparatesSilentSourceCollision ()
+
+-- Direct reuse of the canonical strict observer-refinement theorem:
+-- the joint observer refines the original receiver, and one previously
+-- colliding source/environment pair separates in the added monitor.
+sourceMonitorStrictlyRefinesSelectedReceiver :
+  Observer.StrictRefinement
+    selectedMicrophoneProjection jointReceiverAndSourceMonitor
+sourceMonitorStrictlyRefinesSelectedReceiver =
+  Observer.strictPairRefinement
+    selectedMicrophoneProjection
+    sourceMonitorProjection
+    transmittingOff absorbingOn
+    refl
+    sourceMonitorSeparatesSilentSourceCollision
 
 -- This is the existing owner-specific observer equivalence, not equality
 -- of fields, sources, or biological effects.
