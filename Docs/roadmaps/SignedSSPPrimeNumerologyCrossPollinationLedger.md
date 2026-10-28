@@ -107,3 +107,30 @@ Agda example reuses `FiniteTwinSieveFactorableLiftExact`
 for genuine `Composite` witnesses and exports a refutation of
 `TwinPrimeAt 119`. Hence even the **unquotiented, lossless** 27
 states do not add arithmetic primality information.
+
+## F. New strongest quotient counterexample: both candidates survive the wheel
+
+The prior 5/20 example establishes a real collision but is outside
+the mod-270 2/3/5 survivor carrier. The new separately owned
+`TwinPrimeTernary270IbrahimSurvivorCollisionExact` establishes the
+stronger consumer collision **inside** that survivor carrier:
+`(0,-1,+1) -> 59` and `(0,+1,-1) -> 209` under the original
+3x3x3 affine map; 59 and 61 are prime but 209=11×19 is composite.
+Both representatives pass the local 2/3/5 guard.
+
+The source-owned Ibrahim phase quotient retains outer x but
+identifies the inner antipodal (y,z) pair, so it maps both to the
+same one of its original 15 classes. The source-written
+`Core.ConsumerCollision` with the existing certified Nat twin
+decider proves the quotient cannot supply the actual twin-start
+consumer even under finite sieve restriction. This is a
+specific useful **negative** cross-pollination, not matching
+numerals or a Monster 3B representation assertion.
+
+`PrimegameTypedNumericFirstApplicableBidiExact` is an independent,
+positive operational cross-pollination from the **10 original SSP
+prime factors used by the 14 original Guy rules** to the inherited
+first-applicable interpreter. The preservation includes ordered
+prefix failure and terminal no-applicable status, not only an
+unordered 14-element label set. It is source-written and does not
+provide signed runtime state/action alignment.
