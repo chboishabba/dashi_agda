@@ -14,8 +14,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (_≤_)
-open import Data.Nat.Properties using (m≤m+n; ≤-trans)
-open import Relation.Binary.PropositionalEquality using (sym; subst)
+open import Data.Nat.Properties using (m≤m+n; ≤-trans; +-assoc; +-comm)
+open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -783,3 +783,52 @@ twoFillGenericBound =
 twoFillGenericCash :
   recordedGrossCash twoFillGenericWitness ≡ 3
 twoFillGenericCash = refl
+
+
+------------------------------------------------------------------------
+-- EXACT SHARE TRANSFER CONSERVATION (E06).
+-- This is a transfer of already issued units between two accounts, not
+-- issuance/cancellation, derivatives, control rights or beneficial title.
+-- No settlement-finality or source-authentication proof is constructed.
+------------------------------------------------------------------------
+
+record PureIssuedClassTransfer : Set where
+  constructor pure-issued-class-transfer
+  field
+    sellerUnitsBefore : Nat
+    sellerUnitsAfter : Nat
+    buyerUnitsBefore : Nat
+    buyerUnitsAfter : Nat
+    transferredUnits : Nat
+    sellerReconciled :
+      sellerUnitsBefore ≡ sellerUnitsAfter + transferredUnits
+    buyerReconciled :
+      buyerUnitsAfter ≡ buyerUnitsBefore + transferredUnits
+open PureIssuedClassTransfer public
+
+shareClassTransferPreservesIssuedSupply :
+  (t : PureIssuedClassTransfer) →
+  sellerUnitsBefore t + buyerUnitsBefore t
+    ≡ sellerUnitsAfter t + buyerUnitsAfter t
+shareClassTransferPreservesIssuedSupply t =
+  trans
+    (cong (λ n → n + buyerUnitsBefore t) (sellerReconciled t))
+    (trans
+      (+-assoc (sellerUnitsAfter t) (transferredUnits t)
+         (buyerUnitsBefore t))
+      (trans
+        (cong (sellerUnitsAfter t +_)
+          (+-comm (transferredUnits t) (buyerUnitsBefore t)))
+        (sym (cong (sellerUnitsAfter t +_) (buyerReconciled t)))))
+
+twoOrdinarySharesTransferred : PureIssuedClassTransfer
+twoOrdinarySharesTransferred =
+  pure-issued-class-transfer 6 4 0 2 2 refl refl
+
+sellerBuyerTotalIsConserved :
+  sellerUnitsBefore twoOrdinarySharesTransferred
+    + buyerUnitsBefore twoOrdinarySharesTransferred
+  ≡ sellerUnitsAfter twoOrdinarySharesTransferred
+    + buyerUnitsAfter twoOrdinarySharesTransferred
+sellerBuyerTotalIsConserved =
+  shareClassTransferPreservesIssuedSupply twoOrdinarySharesTransferred
