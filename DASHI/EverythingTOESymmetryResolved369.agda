@@ -23,6 +23,15 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.SignedSSPCertifiedCRTReadoutSquareExact as SignedArithmeticCRT
+open SignedArithmeticCRT public using
+  ( plusTwoCRTReadoutCommutes
+  ; pairSieveTransportThroughPlusCode
+  ; pairSieveTransportThroughPlusCodeBack
+  ; twinPrimeToCertifiedCodePair
+  ; certifiedCodePairToTwinPrime
+  )
+
 import DASHI.Arithmetic.SignedSSPProofCarryingExponentExact as CertifiedExponent
 open CertifiedExponent public using
   ( encodeExponent
