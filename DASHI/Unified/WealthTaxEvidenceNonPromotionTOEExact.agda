@@ -571,6 +571,7 @@ open DashiTradeTax public using
   ; equalWeightCostCollapsesIncomparablePolicies
   ; equalCostTotalDoesNotRecoverAdministrativeCost
   ; rechartingTotalCostCannotRecoverAdministrativeAxis
+  ; equalCostTotalIsParetoMonotone
   ; equalCostTotalCannotReflectParetoOrder
   ; policyWeightedTwoAxisCost
   ; careHeavyWeightsPreferCareByScalar
@@ -809,4 +810,14 @@ toeRechartOfScalarCannotRecoverAdminAxis =
 -- No cost-covariance or eligibility proof has been constructed for
 -- relabeling real tax, administrative, care or title axes as S3 charts.
 -- The original mathematical carrier owners remain unchanged.
+
+-- Exact order cut: the scalar is monotone with respect to every
+-- declared cost axis, but does not reflect componentwise dominance.
+toeParetoDominanceImpliesNoHigherTotalCost :
+  (left right : DashiTradeTax.HypotheticalPolicyOutcome) →
+  Pareto.WeaklyDominates DashiTradeTax.policyTradeoffCosts left right →
+  DashiTradeTax.policyEqualWeightCost left
+    ≤ DashiTradeTax.policyEqualWeightCost right
+toeParetoDominanceImpliesNoHigherTotalCost =
+  DashiTradeTax.equalCostTotalIsParetoMonotone
 
