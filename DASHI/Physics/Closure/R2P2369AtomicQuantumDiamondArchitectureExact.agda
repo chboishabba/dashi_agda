@@ -788,3 +788,13 @@ fullArchitectureReusesExactC3PeriodicConvolution :
     ≡ C3Fourier.spectralC3ConvolutionOfModeCoefficients f g mode
 fullArchitectureReusesExactC3PeriodicConvolution =
   C3Fourier.periodic27DirectEqualsSpectralAtEveryMode
+
+-- Original generic non-factorability is instantiated to TWO real integer
+-- output labels sharing the same C3^3 residue. Exact periodic DFT inversion
+-- does not invent the lost Z3 high-frequency output.
+fullArchitectureCyclic27DoesNotRecoverExactWideIntegerMode :
+  CoreR2P2.ConsumerSufficient
+    FiniteConv.wideIntegerOutputToThreeResidues (λ w → w)
+    → EmptyR2P2.⊥
+fullArchitectureCyclic27DoesNotRecoverExactWideIntegerMode =
+  FiniteConv.noDecoderOfActualWideModeFromCyclic27
