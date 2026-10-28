@@ -417,6 +417,52 @@ def test_pareto_scalar_information_loss_and_weight_sensitivity() -> None:
 
     assert checked == 11**4 + 20_000
 
+
+def test_semantic_policy_symmetry_admission() -> None:
+    """Independent two-policy semantic automorphism census.
+
+    Only permutations preserving *each fixed named objective cost* and
+    eligibility qualify. An axis/chart permutation alone is insufficient.
+    """
+    from itertools import permutations
+
+    outcomes = ("low_administration_cost", "increased_care_capacity")
+    named_costs = {
+        outcomes[0]: {"administration": 0, "care_shortfall": 5},
+        outcomes[1]: {"administration": 5, "care_shortfall": 0},
+    }
+    eligible = {outcomes[0], outcomes[1]}
+    admissible = []
+    rejected = []
+    for image in permutations(outcomes):
+        transform = dict(zip(outcomes, image))
+        bijective = len(set(transform.values())) == len(outcomes)
+        preserves_eligibility = all((o in eligible) == (transform[o] in eligible)
+                                    for o in outcomes)
+        cost_preserving = all(
+            named_costs[o][axis] == named_costs[transform[o]][axis]
+            for o in outcomes for axis in ("administration", "care_shortfall")
+        )
+        if bijective and preserves_eligibility and cost_preserving:
+            admissible.append(transform)
+        else:
+            rejected.append(transform)
+
+    assert len(admissible) == 1
+    assert all(m[o] == o for o in outcomes for m in admissible)
+    assert len(rejected) == 1
+    assert rejected[0][outcomes[0]] == outcomes[1]
+
+    # Coordinate relabeling preserves comparisons only if both the axis
+    # names and corresponding cost entries are transported together.
+    x, y = (0, 5), (5, 0)
+    for p in permutations((0, 1)):
+        x_reindexed = tuple(x[i] for i in p)
+        y_reindexed = tuple(y[i] for i in p)
+        assert (all(a <= b for a, b in zip(x, y))
+                == all(a <= b for a, b in zip(x_reindexed, y_reindexed)))
+        assert sum(x_reindexed) == sum(y_reindexed) == 5
+
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
@@ -434,4 +480,5 @@ if __name__ == "__main__":
     test_canonical_funding_payment_route_weld()
     test_official_settlement_receipt_backout_and_coherent_route()
     test_pareto_scalar_information_loss_and_weight_sensitivity()
-    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto oracle + canonical funding partitions + same-route weld + operator finality gating + Pareto scalar-loss and axis-symmetry controls")
+    test_semantic_policy_symmetry_admission()
+    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto oracle + canonical funding partitions + same-route weld + operator finality gating + Pareto scalar-loss and source-owner-checked semantic symmetry controls")
