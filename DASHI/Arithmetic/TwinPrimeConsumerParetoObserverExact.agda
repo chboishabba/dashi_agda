@@ -32,11 +32,13 @@ module DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact where
 -- Source-written Agda; do not claim kernel-verified typechecking.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat using (_%_)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Agda.Builtin.List using (List)
+open import Relation.Nullary using (yes; no)
 open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -45,6 +47,8 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as Wave
 import DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact as Twin
+import DASHI.Arithmetic.CertifiedPrimePairModulusExact as Pair
+import DASHI.Arithmetic.CertifiedPrimePairPeriodExact as Period
 
 sixWheelObservation : Nat → Nat
 sixWheelObservation n = n % 6
@@ -120,3 +124,40 @@ exactTwinQueryCodeIsConsumerSufficient =
     (λ code → Twin.twinStartBool (Wave.decode code))
     (λ n →
       sym (cong Twin.twinStartBool (exactTwinQueryCodeRoundTrip n)))
+
+------------------------------------------------------------------------
+-- FINITE SIEVE QUERY: an explicit Boolean is a sufficient OBSERVATION
+-- for the Boolean finite-survival query (not for Prime(n)).
+-- Existing CertifiedPrimePairModulusExact supplies the proof-carrying
+-- decision, and CertifiedPrimePairPeriodExact proves periodicity.
+------------------------------------------------------------------------
+
+finiteSieveBit : List Pair.CertifiedPrimeAxis → Nat → Bool
+finiteSieveBit axes n with Pair.allPairSurvive? axes n
+... | yes _ = true
+... | no _ = false
+
+sieveBitIsSufficientForFiniteSieveQuery :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  Core.ConsumerSufficient (finiteSieveBit axes) (finiteSieveBit axes)
+sieveBitIsSufficientForFiniteSieveQuery axes =
+  NF.factorsThrough (λ result → result) (λ n → refl)
+
+-- In contrast to the full arithmetic twin predicate, this finite
+-- screening result is periodic in the product of its prime moduli.
+-- The two impossible cases are eliminated by the pre-existing
+-- TWO-WAY transport of genuine AllPairSurvive certificates.
+finiteSieveBitPeriodic :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (n : Nat) →
+  finiteSieveBit axes n
+    ≡ finiteSieveBit axes (n + Period.modulusProduct axes)
+finiteSieveBitPeriodic axes n
+  with Pair.allPairSurvive? axes n
+     | Pair.allPairSurvive? axes (n + Period.modulusProduct axes)
+... | yes valid | yes shifted = refl
+... | yes valid | no invalidShifted =
+  ⊥-elim (invalidShifted (Period.allPairProductPeriodic axes n valid))
+... | no invalid | yes validShifted =
+  ⊥-elim (invalid (Period.allPairProductPeriodicBack axes n validShifted))
+... | no invalid | no invalidShifted = refl
