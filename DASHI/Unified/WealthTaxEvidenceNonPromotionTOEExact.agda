@@ -159,6 +159,28 @@ toeTaxLiabilityDoesNotCreateBrokerOrder :
 toeTaxLiabilityDoesNotCreateBrokerOrder =
   DashiTradeTax.taxLiabilityIsNotTradingPermission
 
+-- Funding paths use the inherited market/finance fibres, not a fresh
+-- economic theorem. Collected cash cannot determine liquidation volume.
+toeTaxPaymentCannotDetermineSharesSold :
+  INF.FactorsThrough
+    DashiTradeTax.taxPaymentForRoute DashiTradeTax.shareUnitsSold → ⊥
+toeTaxPaymentCannotDetermineSharesSold =
+  DashiTradeTax.paidTaxCannotDetermineUnitsSold
+
+-- A volume count is not an executable price-impact or transaction-cost quote.
+toeShareVolumeCannotDetermineExecutionCost :
+  INF.FactorsThrough
+    DashiTradeTax.shareUnitsSold DashiTradeTax.executionCashCost → ⊥
+toeShareVolumeCannotDetermineExecutionCost =
+  DashiTradeTax.saleVolumeCannotDetermineExecutionCost
+
+-- Share settlement is not a measure of machines, workers or power capacity.
+toeSharesSoldCannotDetermineInstalledCapacity :
+  INF.FactorsThrough
+    DashiTradeTax.shareUnitsSold DashiTradeTax.installedMachineUnits → ⊥
+toeSharesSoldCannotDetermineInstalledCapacity =
+  DashiTradeTax.saleVolumeCannotDeterminePhysicalCapacity
+
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
 -- observed, exact-head compiler run. No ESD imports are changed.
