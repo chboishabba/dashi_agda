@@ -119,6 +119,12 @@ The original [EPBC Act C70 s487(3)](https://www.legislation.gov.au/C2004A00485/2
 
 **New complete bilateral case file**: [Pleadable Grounds and Adverse Authority Cut](SaveWoogarooForestPleadableGroundsAndAdversePrecedentCut20261028.md) gives 7 candidate grounds, exact legal duty, primary evidence, strongest defence and falsifier, with 2022 conservation advice and physical baseline graph. Its Agda bridge reuses existing **OperativeMeritsRules**, **CumulativeImpactSufficiency**, **Condition6aEvidenceState**, **StandingTimeInterimCounselTriage** and **EPBC95C135ADecisionFileMaxCut** owners; no independent copied legal ontology or claims of Agda proof verification.
 
+## 28 October case interoperability: no phantom evidence payment
+
+The [source-exact DASHI/SensibLaw/SLR case bridge](SaveWoogarooSLRSensibLawCaseInteropMaxCut20261028.md) aligns **seven legal research hypotheses** with [SensibLaw PR #500](https://github.com/chboishabba/SensibLaw/pull/500) source role/classification and [SLR PR #59](https://github.com/chboishabba/slr/pull/59) Matter controversy/reverse search. SLR currently instantiates **only 2** open residuals, not seven Court filings. The original legal elements, evidence, witness and normative order are still independently owned by the prior DASHI modules. Source-admission `compile` means legally authoritative *role*, not a paid literal span or reviewed case proposition. No SLR PostgreSQL Matter was persisted here and no lawyer appointed.
+
+A closer **favourable-but-qualified** comparison is [Parliament's 2015 Mackay Conservation Group court order summary](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/EPBC_Standing_Bill/Report/c01): Federal Court consent orders set aside an approval after parties agreed approved species conservation advice was not before the Minister. [Original parliamentary dissent](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/EPBC_Standing_Bill/Report/d01) expressly says **no judge issued a contested judgment or findings**, and the mine was re-approved. The 2013 Schedule 1 proposal to neutralise approval invalidity for this error was *not* enacted. For Woogaroo this pays only a legal comparison, not actual 2026 advice omission, validity or court outcome.
+
 ## Legal grounds — bounded screening, not pleaded allegations
 
 | Candidate legal issue | Current source-positive evidence | Missing proof / severe falsifier |
