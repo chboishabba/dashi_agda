@@ -97,3 +97,13 @@ A finite-completeness source theorem is different from a tested
 Agda theorem. No Agda compiler/kernel receipt is available;
 the 270-case Python independent check did pass. No evidence of
 infinite genuine twin pairs is inferred.
+
+### Same-cube no-promotion example
+
+The complete 3×3×3 code point (x,y,z)=(0,+1,+1)
+gives n=119. Both 119=7×17 and 121=11×11 are composite,
+though n passes every 2/3/5 local pair guard. This source-written
+Agda example reuses `FiniteTwinSieveFactorableLiftExact`
+for genuine `Composite` witnesses and exports a refutation of
+`TwinPrimeAt 119`. Hence even the **unquotiented, lossless** 27
+states do not add arithmetic primality information.
