@@ -162,8 +162,14 @@ def main():
         raise ValueError("source-position metadata required")
     groups = split_blocks(positions, args.seed)
     enforce_spatial_buffer(positions, groups, args.min_separation_m)
+    counts = {partition: sum(len(g["positions"]) for g in groups if g["partition"] == partition)
+              for partition in ("train", "validation", "test", "external_environment")}
+    if any(counts[name] == 0 for name in counts):
+        raise ValueError("incomplete held-out partition: all four partitions need independent groups")
     result = {"dataset_doi": LATEST_DOI, "sha256_verified": True,
-              "partitions": groups, "measurement_results": None,
+              "partitions": groups, "partition_position_counts": counts,
+              "min_separation_m": args.min_separation_m,
+              "measurement_results": None,
               "warning": "No calibration/covariance/accuracy measured by manifest and split alone"}
     Path(args.output).write_text(json.dumps(result, indent=2) + "\n")
 
