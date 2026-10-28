@@ -189,6 +189,111 @@ constantRedCannotBeProperGridColouring proper allRed =
       DifferentPaint a b → DifferentPaint Painted.red Painted.red
     transportEndpoints refl refl edge = edge
 
+-- An explicit PROPER three-colouring of every vertex, unlike the
+-- strictly EQUAL paint required on two face-to-face interfaces.
+-- It is the C3 sum of the three ternary position indices modulo 3.
+-- This is a colouring of our finite GRID graph only.
+rotateDifferent : (c : Painted.Paint3) →
+  DifferentPaint c (Painted.rotatePaint c)
+rotateDifferent Painted.red = redGreen
+rotateDifferent Painted.green = greenBlue
+rotateDifferent Painted.blue = blueRed
+
+reverseDifferent : ∀ {a b : Painted.Paint3} →
+  DifferentPaint a b → DifferentPaint b a
+reverseDifferent redGreen = greenRed
+reverseDifferent greenRed = redGreen
+reverseDifferent redBlue = blueRed
+reverseDifferent blueRed = redBlue
+reverseDifferent greenBlue = blueGreen
+reverseDifferent blueGreen = greenBlue
+
+rotatePreservesDifferent : ∀ {a b : Painted.Paint3} →
+  DifferentPaint a b →
+  DifferentPaint (Painted.rotatePaint a) (Painted.rotatePaint b)
+rotatePreservesDifferent redGreen = greenBlue
+rotatePreservesDifferent greenRed = blueGreen
+rotatePreservesDifferent redBlue = greenRed
+rotatePreservesDifferent blueRed = redGreen
+rotatePreservesDifferent greenBlue = blueRed
+rotatePreservesDifferent blueGreen = redBlue
+
+shiftColour : Trit.SSPTrit → Painted.Paint3 → Painted.Paint3
+shiftColour Trit.sspNegOne c = c
+shiftColour Trit.sspZero c = Painted.rotatePaint c
+shiftColour Trit.sspPosOne c =
+  Painted.rotatePaint (Painted.rotatePaint c)
+
+shiftPreservesDifferent : (t : Trit.SSPTrit) →
+  ∀ {a b : Painted.Paint3} →
+  DifferentPaint a b →
+  DifferentPaint (shiftColour t a) (shiftColour t b)
+shiftPreservesDifferent Trit.sspNegOne edge = edge
+shiftPreservesDifferent Trit.sspZero edge =
+  rotatePreservesDifferent edge
+shiftPreservesDifferent Trit.sspPosOne edge =
+  rotatePreservesDifferent (rotatePreservesDifferent edge)
+
+threeColourVoxel : Cube.Ternary27Point → Painted.Paint3
+threeColourVoxel (Cube.ternary27Point x y z) =
+  shiftColour x (shiftColour y (shiftColour z Painted.red))
+
+properThreeColouringPreservesAdjacency :
+  ∀ {a b : Cube.Ternary27Point} →
+  Cube.HypervoxelAdjacent a b →
+  DifferentPaint (threeColourVoxel a) (threeColourVoxel b)
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentX Cube.negToZero) =
+  rotateDifferent _
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentX Cube.zeroToNeg) =
+  reverseDifferent (rotateDifferent _)
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentX Cube.zeroToPos) =
+  rotateDifferent _
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentX Cube.posToZero) =
+  reverseDifferent (rotateDifferent _)
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentY {x0 = x} Cube.negToZero) =
+  shiftPreservesDifferent x (rotateDifferent _)
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentY {x0 = x} Cube.zeroToNeg) =
+  shiftPreservesDifferent x (reverseDifferent (rotateDifferent _))
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentY {x0 = x} Cube.zeroToPos) =
+  shiftPreservesDifferent x (rotateDifferent _)
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentY {x0 = x} Cube.posToZero) =
+  shiftPreservesDifferent x (reverseDifferent (rotateDifferent _))
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentZ {x0 = x} {y0 = y} Cube.negToZero) =
+  shiftPreservesDifferent x
+    (shiftPreservesDifferent y (rotateDifferent _))
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentZ {x0 = x} {y0 = y} Cube.zeroToNeg) =
+  shiftPreservesDifferent x
+    (shiftPreservesDifferent y
+      (reverseDifferent (rotateDifferent _)))
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentZ {x0 = x} {y0 = y} Cube.zeroToPos) =
+  shiftPreservesDifferent x
+    (shiftPreservesDifferent y (rotateDifferent _))
+properThreeColouringPreservesAdjacency
+  (Cube.adjacentZ {x0 = x} {y0 = y} Cube.posToZero) =
+  shiftPreservesDifferent x
+    (shiftPreservesDifferent y
+      (reverseDifferent (rotateDifferent _)))
+
+properThreeColouringOfVoxelGrid : Graph.GraphHom cubeGrid paintPalette
+properThreeColouringOfVoxelGrid =
+  Graph.graphHom threeColourVoxel properThreeColouringPreservesAdjacency
+
+properThreeColouringOfNativePantsGrid :
+  Graph.GraphHom pantsGrid paintPalette
+properThreeColouringOfNativePantsGrid =
+  Graph.composeHom pantsVoxelGridHom properThreeColouringOfVoxelGrid
+
 -- This exact graph equivalence is for the *declared* native
 -- one-slot pants path graph. It does NOT claim that an arbitrary
 -- pants-branch wave graph or smooth pair-of-pants graph has
