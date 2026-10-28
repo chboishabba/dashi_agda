@@ -97,3 +97,39 @@ ternaryHornAsGenusTwoSurfaceBoundary w = refl
 
 -- No 3D embedding, π1-injectivity or same-object 3D handlebody
 -- follows from this source-written surface-word coincidence.
+
+
+-- STRONGER MINIMAL-GENUS REPAIR: cyclic conjugate of ONE commutator.
+--
+-- With [x,y]=x y x^-1 y^-1, the selected word
+-- W = [a,b][b,c] = a b A c B C
+-- is cyclically rotated into
+--             B C a b A c = [B, C a].
+-- Hence W is CONJUGATE to a single commutator, not merely the
+-- boundary image of a genus-two surface. The representative source
+-- is a once-punctured torus (genus 1, one boundary).
+--
+-- The cyclic rotation corresponds to moving the based peripheral
+-- loop's basepoint along the boundary arc. No equality of based
+-- words is claimed without the specified conjugating path.
+
+singleCommutatorCyclicWord : Tower.TernaryAddress → Tower.TernaryWord
+singleCommutatorCyclicWord w =
+  Tower.commutator
+    (Tower.inverse (Tower.meridian (Tower.child Trit.zero w)))
+    (Tower.multiply
+      (Tower.inverse (Tower.meridian (Tower.child Trit.pos w)))
+      (Tower.meridian (Tower.child Trit.neg w)))
+
+-- The RHS has free-reduced letters B C a b A c, which is precisely
+-- the cyclic rotation by four letters of the original six-letter
+-- free reduction a b A c B C. That is a free-group equality AFTER
+-- cyclic conjugation, rather than syntax-level refl of TernaryWord.
+--
+-- A graph embedded as a theta ribbon spine has first Betti number
+-- E-V+1 = 3-2+1 = 2, so it can be thickened to a genus-one,
+-- one-boundary orientable ribbon surface with suitable cyclic edge
+-- order. This abstract ribbon surface is NOT automatically the
+-- original combinatorial 1->3 FOUR-boundary pants object.
+--
+-- No topological 3D embedding / meridian naturality is inferred.
