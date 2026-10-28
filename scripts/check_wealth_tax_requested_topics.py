@@ -123,6 +123,8 @@ def main() -> None:
         "toeSingleInstrumentDvPFixture",
         "toeDvPCashAndTitleRequireSameFinalEpoch",
         "toeParticipantDvPConservesBothLegs",
+        "toeBorrowingMustMatchNewDebt",
+        "toeBorrowingDoesNotByItselfIncreaseCashLessDebt",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
     # These are direct aliases of EXISTING source and evidence owners.
@@ -201,6 +203,8 @@ def main() -> None:
         "SingleInstrumentDvPBatch",
         "aggregateNetPositionsRespectGrossCashAndSecurityTotals",
         "deliveryVersusPaymentCashAndTitleCoMove",
+        "MatchedBorrowingBalance", "loanProceedsIncreaseLiabilities",
+        "borrowedCashDoesNotByItselfRaiseNetCashMinusDebt",
     ):
         assert theorem in dashi_tax_bridge, "missing tax-market gate: " + theorem
     assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", dashi_tax_bridge), (
