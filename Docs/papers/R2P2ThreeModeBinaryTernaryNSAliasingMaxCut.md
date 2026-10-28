@@ -113,3 +113,172 @@ A three-mode toy **can reveal a discretisation bug or an information-loss bounda
 - CI: `.github/workflows/r2p2-369-maxcut.yml` includes the new Python and focused Agda inputs.
 
 Verification levels: **source written** ≠ **Python independently executed** ≠ **committed suite executed** ≠ **Agda kernel theorem** ≠ **real experimental or NS mathematical physics result**. This distinction and the original authors' priority must remain visible in all reports.
+
+
+## 6. Completion roadmap and exhaustive scoped lemma inventory (28 Oct 2026)
+
+**Scope of “complete”**: This is the entire currently identifiable lemma cutset for (F) a fully kernel-checked exact three-mode/27×27 Fourier *finite* codec/NS-operator abstraction, (M) an actual Ma-source optical-lattice operator/spectral comparator, (R) the separate R2P2 experimental comparator, and (C) any attempt to pay the global NS analytic/Clay frontier. There cannot be a known finite, complete list of lemmas that proves an unsolved global mathematical claim merely by inspecting code. If F reaches a kernel-green finish, M/R/C remain independent targets. Names prefixed **want:** are specifications, **not** claims that those declarations exist.
+
+**Tags:** [R] exact theorem already exists in inspected original default-master source; [S] source-written on PR #1407 but **not Agda kernel-checked**; [B] proof appears only in another **open branch**, so must be imported by a legal merge/rebase and rechecked; [N] new finite obligation; [A] genuinely open mathematical/analytic or empirical source-backed obligation. An independently executed Python integer check is not a kernel theorem. All original owners retain theorem attribution.
+
+### Gate G0 — trustworthy lineage / Agda / execution (mandatory before claiming F complete)
+
+- **G0.1** [N] \`noTrustEscapes\`: focused changed Agda files and transitive imports have no new postulates, holes, \`allow-unsolved-metas\`, \`TERMINATING\`, \`NO_POSITIVITY_CHECK\` or equivalent unexplained proof escape.
+- **G0.2** [N] \`allSourceImportsResolve\`: each exact import, alias, data constructor and qualified constant resolves against the exact HEAD's pinned Agda 2.9 and stdlib versions.
+- **G0.3** [N] \`focusedAgdaKernelGreen\`: type-check each new module in a dependency order (original source, wave, optical-lattice, binary/ternary Fourier, architecture), not only a string-search unittest.
+- **G0.4** [N] \`allThreeTOERootsKernelGreen\`: independently check \`EverythingTOESymmetryResolved369\`, \`Unifier\` and \`Unified/Everything\`, avoiding aggregate import cycles and unmerged-only names.
+- **G0.5** [N] \`pythonExactCheckoutGreen\`: run \`unittest discover -s tests -p 'test_r2p2_*.py'\` and both Python CLIs **from the same checked-out commit**, with stdout/exit codes, not from a retyped reference.
+- **G0.6** [N] \`pythonVsKernelCaseCorrespondence\`: match every finite Python case's input/output types and constants with the Agda theorem statement; ensure tests do not only assert source strings.
+- **G0.7** [N] \`primarySourceAndAttributionLedger\`: keep Ma v2, Triano APS 2026, Bothwell/Ye 2022, Orszag/Patterson, Lambert/Reneuve/Augier 2026, and original DASHI/PR contributors as separate owners.
+- **G0.8** [N] \`noESDOrMonsterPromotion\`: assert changed-file ESD protection and that numerology, shared finite cardinality or sample data never becomes same-object Monster 3B or physical NS/GR evidence.
+- **G0.9** [N] \`externalProofStatusGated\`: source-written ≠ executed Python ≠ kernel proof ≠ laboratory source-data validation, enforced in documentation and release status.
+
+### Gate F1 — exact carriers and existing codecs (mostly reuse)
+
+- **F1.1** [R] \`tritAfterThreeModeRoundTrip\` and \`threeModeAfterTritRoundTrip\` on PR #1407 [S]; original \`Trit\`/SSP carriers are on default master [R]. Verify both roundtrips in kernel.
+- **F1.2** [R] \`VerifiedFiniteTritCoder.decode-encode\` and \`reserved-word-rejected\`: original \`neg=00, zer=01, pos=10, 11=invalid\`.
+- **F1.3** [R] \`BalancedTritBitFibre.decode-encode\`, \`encode-decode\`, support/sign split and involution.
+- **F1.4** [R] \`BinaryBalancedTernarySubcarrierExact.binaryTernaryRoundTrip\`, \`centreIsUnusedByBinaryEmbedding\`; binary uses only the two nonzero trits.
+- **F1.5** [R] \`QutritBasisClassicalCodecFibreExact.qutritTwoBitRoundTrip\` and \`BalancedTernaryQutritBasisBridgeExact.qutritAfterTritRoundTrip\`; **basis labels only**.
+- **F1.6** [R] \`BinaryThreeBitTwoTritAntipodalCodecExact.blockRoundTrip\`, \`centreUnused\`, \`complementAntipodeEquivariant\`.
+- **F1.7** [R] \`BinaryThreeBitTrit27FibreLiftExact.bit3LiftRoundTrip\` and \`bitComplementBecomes27Antipode\`; its binary image has **8**, not 27, framed states.
+- **F1.8** [R] \`Base369Ternary27HypervoxelFabricGeometryExact.hypervoxelStateCountIs27\` and exact \`Ternary27Point\`.
+- **F1.9** [N] **want:\`threeModeCubeEquivBase369Point\`**: explicit bijection between three mode-label products and the existing canonical \`Ternary27Point\`, with both inverse proofs; use original constructors, not fresh incompatible C3 types.
+- **F1.10** [N] **want:\`pair27EquivTrit6\`**: typed bijection between *ordered pairs* \`Cube27×Cube27\` and the existing \`TritCube 6\`; preserve roles, and prove projection/pair/rebuild in both directions. \`Base369TernaryDeltaBasisCrossPollinationExact.appraisalCountIsDecisionSquared\` proves cardinality, not this physical role identification.
+- **F1.11** [N] **want:\`pair27IsNotPhysicalDoubleClockOrGF729\`**: guard that a pair of mode labels ≠ an optical two-clock measurement ≠ a selected GF(729) field element/Monster action without a separately named carrier-and-operator equivalence.
+
+### Gate F2 — the **three distinct** 27-label observers (highest-alpha missing math)
+
+- **F2.1** [R] \`NSTriadKNPeriodicIntegerTernary27SignChartRound529Exact.integerSign529\` and \`observePeriodicMode529\`: actual integer **sign** quotient, respecting reflection.
+- **F2.2** [R] \`NSTriadKNPeriodicFourierTernaryTorusFibreBidiRound530Exact.periodicSignObservationSection530\`: existing section of sign observation.
+- **F2.3** [R] \`NSTriadKNPeriodicTorusBase369NormalizationRound531Exact\`: exact sign-fibre/B369 carrier normalization and periodic torus adjacency, **not** a quotient of integer addition.
+- **F2.4** [S] \`periodicThreePointFold\`, \`threeAxisPeriodicallyAliasedPlusXSquare\`: distinct **centered modulo-three** sampling residue.
+- **F2.5** [N] **want:\`signVsCenteredModThreeDisagreeAtTwo\`**: at \`+2\` prove \`integerSign529(+2)=+\` and \`centeredMod3(+2)=-\`; their outputs differ even though both have three labels.
+- **F2.6** [N] **want:\`signQuotientNotAdditive\`**: exhibit \`(+1)+(+1)\` as a concrete failure of signed-trit C3 group addition under the sign observer. The existing sign-section never claimed a group homomorphism.
+- **F2.7** [N] **want:\`modThreeIsAdditive\`**: prove \`ρ_3(p+q)=ρ_3(ρ_3p+ρ_3q)\` for integer Fourier vectors, using a genuine mod-3 group structure (not signed sign classification).
+- **F2.8** [N] **want:\`pathAdjacencyNotCyclicAdjacency\`**: preserve the original P3 cubical adjacency's lack of wraparound from \`Base369Ternary27PathCubeSpectralBandsExact\`; contrast with \`Base369PeriodicTernaryTorusPathRestrictionBidiExact\`.
+- **F2.9** [R] \`Base369Ternary27CharacterAdjacencyEquivarianceExact\`: \`C3×C3×C3 ≠ Z/27Z\` guard, cubic tensor character and axis swap/rotation.
+- **F2.10** [N] **want:\`observerInformationOrder\`**: identify which consumers factor through **sign**, **mod3**, **sign+exact residual**, and **mod3+integer quotient**. Neither bare 27-class observer can recover unbounded frequency or the correct output under every nonlinear operation.
+
+### Gate F3 — pair incidence and correct integer Fourier convolution
+
+- **F3.1** [R] \`NSIntegerFourierLattice.addMode\`, \`Resonance\`: original \`ℤ³\` exact resonance.
+- **F3.2** [S] \`exactQuadraticModeSum\`, \`positivePositiveLeavesThreeModeWindow\` and \`periodicQuadraticModeSum\`: PR #1407 finite nine-case integer-versus-folded model.
+- **F3.3** [N] **want:\`enumerateCube27CompleteNoDuplicates\`**: a canonical ordered \`Fin 27\` enumeration of all 27 signed mode labels, with a proof of completeness and uniqueness.
+- **F3.4** [N] **want:\`enumeratePair729CompleteNoDuplicates\`**: equivalence between pairs of \`Fin 27\` and \`Fin 729\`, preserving ordered pair roles.
+- **F3.5** [N] **want:\`integerTriadPairSumCommutesWithEmbedding\`**: all 729 source-indexed pairs use canonical \`NSIntegerFourierLattice.addMode\`, not arithmetic in C3³.
+- **F3.6** [N] **want:\`oneAxisSevenInsidePairs\`**: seven of nine ordered pairs in \`{-1,0,1}²\` have sum inside \`{-1,0,1}\`.
+- **F3.7** [N] **want:\`cube343InsidePairs\`**: coordinate product gives \`7³=343\` exact in-window ordered 3D pairs. The current Agda \`7*7*7=343\` arithmetic is not yet a proof that this is the actual classified set.
+- **F3.8** [N] **want:\`cube386OutsidePairs\`**: partition the 729 actual pairs by decidable membership and prove \`729-343=386\`; no duplicate, omitted or unclassified input.
+- **F3.9** [N] **want:\`modeSumNegationCovariant\`**: signed antipode / true wavevector negation commute with exact integer addition; respect conjugate-frequency roles.
+- **F3.10** [N] **want:\`pairIncidenceByOutput\`**: partition 729 ordered interactions into output fibres by **integer** \`k=p+q\`, not output sign or 27-bin residue.
+- **F3.11** [N] **want:\`outOfWindowDoesNotMeanNonzeroAmplitude\`**: incidence support alone supplies no physical coefficient; zero-valued and cancelling terms remain possible.
+
+### Gate F4 — full finite function algebra, 27² matrix and true FFT/DFT
+
+- **F4.1** [R] \`TernaryFiniteFunctionDeltaBasisExact.decomposeExact\` and \`Base369TernaryDeltaBasisCrossPollinationExact.decisionFunctionDecomposition\`: exact finite point-mass decomposition on \`TritCube 3\`.
+- **F4.2** [R] \`Base369Ternary27CharacterAdjacencyEquivarianceExact.cubeCharacterValue\`: existing C3³ tensor character values.
+- **F4.3** [N] **want:\`cubeCharactersOrthogonal\`**: exact finite orthogonality sum using a carrier with sufficient roots of unity and a correct normalization (\`ℂ\`, cyclotomic or rational complex).
+- **F4.4** [N] **want:\`cubeDFTInverse\`**: construct a full 27-point transform and inverse; the original \`Base369Ternary27SpectralSymmetryIrrepBridgeExact\` explicitly does **not** claim this.
+- **F4.5** [N] **want:\`cubeParseval\`**: correct normalization and squared-norm equality. The original symmetry/character labels do not themselves prove Parseval.
+- **F4.6** [N] **want:\`mod3ConvolutionTheorem\`**: Fourier transform of **periodic folded** convolution is pointwise product, explicitly contrasted with the integer Galerkin convolution.
+- **F4.7** [N] **want:\`fullPair729KernelToLinearMap\`**: a typed bilinear map \`Coefficient^27×Coefficient^27→Coefficient^27\` indexed by pair-incidence and output, with \`27²\` interaction entries; a 729-element index set alone does not supply physical coefficients.
+- **F4.8** [N] **want:\`periodicVsPathSpectrumNotSilentlyIdentical\`**: original \`Base369Ternary27PathCubeSpectralBandsExact\` provides multiplicity combinatorics, not a diagonalization of periodic or real lattice operators by cyclic characters.
+- **F4.9** [N] **want:\`codecPushForwardOfFullKernel\`**: transporting the *same fully retained* 27×27 kernel through an exact codec commutes with decoding, with no claim that a quotient also transports it.
+
+### Gate F5 — alias-free projected quadratic operator and padded computation (finite endpoint)
+
+- **F5.1** [S] \`exactRetainedModeProjection\`, \`correctQuadraticProjectionRemovesPlusTwo\` and \`incorrectQuadraticFoldCreatesMinusOne\`: correct truncation vs 3-point alias.
+- **F5.2** [S] \`wideModeAliasCollision\`, \`foldedThreePointModeCannotRecoverExactFourierIndex\`, \`rechartingThreePointModeCannotFixAliasing\`: reuses generic nonfactorability. Kernel check pending.
+- **F5.3** [N] **want:\`integerQuadraticConvolution27\`**: for arbitrary coefficients in an agreed ring/field, sum all integer-exact input pairs into output coefficients for \`k∈[-2,2]^3\`.
+- **F5.4** [N] **want:\`projectionAfterConvolution\`**: define canonical integer Galerkin \`P_1(u*v)\` on \`[-1,1]^3\`, independent of sampled-grid aliasing.
+- **F5.5** [N] **want:\`threeGridCounterexampleAtRetainedCoefficient\`**: formalize at least one genuinely nonzero erroneous retained quadratic coefficient, not merely a mode-label collision.
+- **F5.6** [N] **want:\`fivePointGridInjectiveOnQuadraticSupport\`**: if all component sums lie in \`[-2,2]\`, reduction mod five is injective on that integer support.
+- **F5.7** [N] **want:\`paddedFiveGridMatchesTrueProjectedProduct\`**: finite DFT orthogonality + previous injectivity yields \`P_1(FFT5⁻¹(FFT5(u)·FFT5(v)))=P_1(u*v)\` for **every** 27-coefficient input pair, not just 27 balanced-amplitude sample cases.
+- **F5.8** [N] **want:\`threeGridHasNoUniversalExactness\`**: derive from F5.5 the impossibility of a universal equality for unpadded N=3.
+- **F5.9** [N] **want:\`codecTransportPreservesPaddedProduct\`**: prove the exact codec diagram commutes with the *correct padded and projected* operator, with proper coefficient precision and sign data.
+- **F5.10** [N] **want:\`finiteOperatorStatementDoesNotRequireLargeNSProof\`**: release an exact finite theorem without importing the open NS Clay/continuum assumptions.
+
+### Gate F6 — divergence-free physical NS **finite** operator (stronger than a scalar alias witness)
+
+- **F6.1** [R] original \`NSTriadKNComplex3ExactCarrier\`, \`NSCross369OrientationBridgeExact\`, and \`NSIntegerFourierLattice\`; do not identify a complex **3-vector** with cyclic group \`C3\`.
+- **F6.2** [N] **want:\`transverseCoefficientBundle\`**: type \`û(k)∈ℂ³\` with \`k·û(k)=0\` for each integer \`k≠0\`, including a policy for zero frequency.
+- **F6.3** [N] **want:\`conjugateRealityCondition\`**: if aiming at a real velocity field, pair \`û(-k)=conj(û(k))\`; the two-mode rational demo is not yet a complete real-valued NS field.
+- **F6.4** [N] **want:\`lerayIdempotentAndTransverse\`**: for each nonzero integer k, prove \`P_k²=P_k\` and \`k·P_k v=0\` using the original scalar-field law package.
+- **F6.5** [N] **want:\`nsQuadraticPairKernel\`**: exact Leray-projected vector convective term \`-i P_k Σ_{p+q=k}(û(p)·q)û(q)\` on the chosen finite Fourier support, with sign and factor conventions pinned.
+- **F6.6** [N] **want:\`nsIntegerKernelRespectsTrueTriads\`**: proof that every kernel term uses *integer* \`p+q=k\`, not modulo-3 alias pairs.
+- **F6.7** [N] **want:\`noncollinearTransverseAliasWitness\`**: translate executed rational example \`p=(1,0,0),q=(1,1,0)\`; \`a=(0,1,0), b=(1,-1,0)\`; show \`P_(2,1,0)(1,0,0)=(1/5,-2/5,0)\` but \`P_(-1,1,0)(1,0,0)=(1/2,1/2,0)\`. This is **not** presently an Agda kernel result.
+- **F6.8** [N] **want:\`actualRealFieldAliasWitness\`**: optionally add conjugate modes and recompute the full vector nonlinearity so the witness is an admissible *real* divergence-free finite field rather than only a pair algebra receipt.
+- **F6.9** [N] **want:\`NSProjectedPaddedGridBidi\`**: prove the exact finite incompressible NS Galerkin nonlinear operator is reproduced by an alias-free padded sampled-grid implementation, including the Leray projector at the **true** output k.
+- **F6.10** [N] **want:\`finiteGalerkinEnergyCancellation\`**: derive the exact skew-symmetry/energy cancellation for the finite NS quadratic operator under the pinned periodic volume/inner-product normalization.
+- **F6.11** [N] **want:\`finiteGalerkinLocalODE\`**: tie finite-dimensional Galerkin coefficients to a local ODE with standard regularity assumptions (polynomial RHS). This is routine mathematics but not paid by the current trit codec.
+- **F6.12** [N] **want:\`finiteGalerkinUniformEnergyEstimate\`**: finite-cutoff energy identity/inequality with the correct viscosity/forcing assumptions; do not call this global cutoff-independent regularity.
+- **F6.13** [N] **want:\`finiteDSpaceDoesNotProveContinuumClay\`**: no promotion from F6.9–F6.12 to any global NS regularity theorem.
+
+### Gate M — real optical-lattice **different operator**, separate outcome
+
+- **M1** [R] use Ma et al., arXiv:2610.17499v2, \`H=p²/(2m)-U497 sin²(k497 z+φ)-U813 sin²(k813 z)\` as source-owner, not P3 site adjacency.
+- **M2** [S] Ma source-selected supercells \`18:11,85:52,139:85,175:107,265:162\`, exact **nominal-label** integer products, not measured-wavelength error.
+- **M3** [S] S6 Fourier supercell offsets \`±11,±18\` absent in \`-1,0,+1\` truncated plane-wave basis; keep separate from NS quadratic aliasing.
+- **M4** [A] **want:\`continuumHamiltonianFiniteCutoffSelfAdjoint\`** at supplied potential, boundary convention and actual calibrated wavelengths; cite Ma's original construction.
+- **M5** [A] **want:\`sourceSupercellFourierMatrixCorrect\`**: derive full S6 basis matrix, kinetic normalization and sideband entries; a three-mode stencil cannot substitute for S6.
+- **M6** [A] **want:\`supercellConvergenceErrorBound\`**: compare all 5 rational approximants and basis cutoffs in a source-appropriate norm, spectral/line-pulling observable and temperature. Nominal 497/813 integer mismatches are not the physical convergence error.
+- **M7** [A] **want:\`WannierAAProjectionWithError\`**: justify the tight-binding reduction from the continuum Hamiltonian, with calibrated \`J,Δ,β,φ\`, tunnelling and finite-size errors.
+- **M8** [A] **want:\`localizationSpectroscopyCorrespondence\`**: physical linewidth/Ramsey/line-pulling and systematics tied to Ma's actual source data and uncertainties. Do not infer R2P2 Yb trap parameters.
+
+### Gate R — real R2P2 comparator (independent physical outcome)
+
+- **R1** [A] **want:\`r2p2IsotopeAndTransitionSource\`**: source-verify actual neutral-Yb isotope and interrogation transition for **both** R2P2 clocks; 171Yb remains a model example until sourced.
+- **R2** [R/S] existing \`R2P2MountainOpticalClockComparisonExact\` synthetic comb/primary abstract; \`R2P2369WaveOpticalCombInformationCutExact\` signed beat collision; kernel status unconfirmed.
+- **R3** [A] **want:\`r2p2SignedCombObservableProducer\`**: mode number, \`f_rep\`, \`f_CEO\`, signed beat branch, trace timestamps, cycle slips, link/clock distinction.
+- **R4** [A] **want:\`r2p2TwoWayTransferNonreciprocityBound\`**: 69 km atmospheric and 81 km fibre phase/time transfer, physically calibrated asymmetric path noise and uncertainty.
+- **R5** [A] **want:\`r2p2CalibratedClockRatioAndCovariance\`**: same-epoch source-produced ratio with common-mode and differential systematics.
+- **R6** [A] **want:\`r2p2GeopotentialAndRedshiftUncertainty\`**: independent surveyed geopotential and weak-field GR expectation with correlated uncertainties.
+- **R7** [S/A] \`R2P2ClockBiasIdentifiabilityMaxCutExact\` synthetic two-lever-arm example shows ambiguous single lever arm; actual independent baselines required to identify bias and slope.
+- **R8** [S/A] \`R2P2ThreeClockLoopClosure369Exact\` finite synthetic ratio product; real third clock/network has **not** been supplied by two-clock R2P2.
+- **R9** [A] **want:\`r2p2PrespecifiedAlternativeModelDiscrimination\`**: full likelihood/covariance and apparatus bias controls before claims about departures from GR; no quantum gravity inference from a finite ternary grid.
+
+### Gate C — global NS analytic/Clay frontier (NOT implied by finishing F)
+
+The *existing* \`NSABCDConcentratedCompletionCutExact\` on master and distinct open PRs #1384 (cross-gradient), #1391 (instantaneous snapshot), #1279 (369 orientation/Gram) are the owners. These are **genuinely separate** mathematicians' research-level obligations; the list states their *interfaces*, not an assertion that they suffice to solve the unproved Clay problem:
+
+- **C1** [A] **want:\`cutoffUniformConvolutionMajorant\`**: real whole-space low/high integrability with correct low-frequency compensation and high-frequency resolvent decay, as required by the canonical A lane.
+- **C2** [A] **want:\`signedLebesgueAggregationSameObject\`**: actual R³ signed field, compensated integral and Fourier-domain identification; no discrete-sum ↔ continuum-integral promotion.
+- **C3** [A] **want:\`crossGradientQuantitativePayment\`**: live periodic-B \`p·q\`/cross-gradient bound on correct physical slots and weights, not just mode-counting.
+- **C4** [A] **want:\`highHighGramRayleighUniformBound\`**: quantitative \`λ_min(K_N(A))≥c/N\` (or chosen actually necessary replacement), uniform in the physical cutoff; generic 369 geometry/729 incidence does not pay it.
+- **C5** [A] **want:\`BonyThreeClassUniformMajorants\`**: signed far-low/high-high/comparable estimates on original live class carrier, correctly separating homochiral/heterochiral channels.
+- **C6** [A] **want:\`cutoffStableCompactnessAndLimit\`**: subsequence and weak/strong convergence strong enough to pass nonlinearities and claimed regularity, tied to actual norms.
+- **C7** [A] **want:\`existingCDReleasedAuditSufficiency\`**: independent native Option C/D proof obligations under original Fefferman/Clay target hypotheses; no release proof imported by an optimistic flag.
+- **C8** [A] **want:\`globalRegularityOrQualifyingCounterexample\`**: the actual Clay target, not a finite Galerkin theorem, a negative instantaneous rate, a simulated receipt or an analogy.
+- **C9** [A] **want:\`sameObjectContinuumNSFinalCertificate\`**: after genuine mathematical achievement, pinned original theorem, exact assumptions and kernel-level or independently peer-reviewed evidence. None claimed at present.
+
+### Gate I — Pareto/snowball/Ibrahim and 27/729 source identity firewalls
+
+- **I1** [R] \`Base369TernaryDeltaBasisCrossPollinationExact\`: \`TritCube 6\` has 729 labels and exact finite point-mass decomposition. **Do not identify** 729 Fourier ordered pairs with its appraisal semantics automatically.
+- **I2** [R] \`Base369Ternary27SpectralGeometryValidation\`: 27 voxel, 729 appraisal fibre, 19683 three-voxel fabric; periodic C3³ ≠ nonperiodic P3³, character labels ≠ proven physical eigenvectors.
+- **I3** [B] #1105 selected \`GF(3^6)\` field action and #1250 pointed 720+9/3B source cuts: equal 729 **cardinality** does not transport multiplicative field, representation, projector or physical Fourier operators.
+- **I4** [B] #1249 punctured-27/13 antipodal-pair geometry and #1386/#1390 Fin27 ABI: only rebase/import after explicit branch ownership, type agreement, head-check, and distinct same-object map. Original 3B/Albert/Ibrahim attribution survives.
+- **I5** [R/N] \`BalabanIbrahimParetoSnowballTOEExact\` and original Ibrahim snowball/frontier sources: cross-source searches rank unresolved *evidence producers*, never replace theorem proofs or physical measurements.
+- **I6** [N] **want:\`noEvidentialPromotionFromIncidenceCounts\`**: hard gate between 27²=729 combinatorics, 729 field points, Heisenberg 729, 720+9, C3³ voxel, code indices, and real Fourier/clock observations.
+- **I7** [N] **want:\`claimSpecificTerminalGate\`**: independently judge F, M, R and C, never one global \`TOE complete\` Boolean.
+
+### Minimal dependency graph / release gates
+
+\`\`\`text
+G0 kernel + executed tests + attribution  [MUST RUN FIRST]
+  ├── F1 exact codecs/bijective modes
+  │    ├── F2 sign != modulo != path adjacency
+  │    ├── F3 typed 27x27 = 729 actual pair incidence
+  │    └── F4 full 27 DFT/point-mass/function algebra
+  │          └── F5 true convolution/projection vs alias, exact N=5 remedy
+  │                └── F6 physical finite complex3/Leray/Galerkin operator
+  │                      ├── FINITE release F (kernel+tests+clear semantics)
+  │                      └── C1..C9 independent NS analytic/Clay frontier
+  ├── M1..M8 Ma 87Sr supercell and calibrated spectroscopy (independent)
+  ├── R1..R9 Triano R2P2 Yb transfer/redshift data (independent)
+  └── I1..I7 same-object/attribution guards across every path
+\`\`\`
+
+**Pareto sequencing:** P0 **kernel/check-run and sign-vs-modulo distinction**; P1 typed 27↔Fin27 and 729 ordered-pair equivalence; P2 true 3D quadratic convolution + 3-grid alias + 5-grid exactness **for arbitrary coefficients**; P3 nonzero real-valued, transverse Leray/Galerkin witness and energy identity; P4 only then optional phase-shifting/2/3 dealiasing optimizations. M/R require original experimental producers and C requires genuine analytic theorems. Do not spend first on another 729 carrier name, synthetic receipt, Monster fingerprint or tertiary code wrapper.
+
+**Exit F:** exact-head reproducible Agda kernel-green, complete 729-pair incidence proof, arbitrary-coefficient operator equality for N=5 and correct projection, explicit sign/modulo/path separation, original codec roundtrips, sufficiently typed NS finite algebra and no scientific overpromotion. **Exit M/R/C:** each has its own external physical/mathematical criteria; F success does not imply any of them.
