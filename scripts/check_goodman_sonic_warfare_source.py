@@ -14,6 +14,7 @@ RHYTHM = ROOT / "DASHI/Culture/GoodmanSonicWarfareRhythmInterventionExact.agda"
 TRANSPORT = ROOT / "DASHI/Culture/GoodmanSonicWarfareTransportExact.agda"
 RATIONAL = ROOT / "DASHI/Culture/GoodmanSonicWarfareRationalInverseExact.agda"
 STABILITY = ROOT / "scripts/check_goodman_inverse_stability_finite.py"
+RIDGE = ROOT / "scripts/check_goodman_ridge_regularisation_finite.py"
 DOC = ROOT / "Docs/papers/GoodmanSonicWarfare.md"
 ROOTS = [
     ROOT / "DASHI/EverythingTOESymmetryResolved369.agda",
@@ -35,6 +36,7 @@ def check() -> None:
     transport = TRANSPORT.read_text(encoding="utf-8")
     rational = RATIONAL.read_text(encoding="utf-8")
     stability = STABILITY.read_text(encoding="utf-8")
+    ridge = RIDGE.read_text(encoding="utf-8")
     for owner in [
         "DASHI.Core.AttributedSourceCore",
         "DASHI.Core.SnowballAttributionProvenanceInvariantExact",
@@ -54,6 +56,10 @@ def check() -> None:
         "10.7551/mitpress/7999.001.0001",
         "goodmanSources",
         "soundscapeComparatorSources",
+        "acousticInverseSourceAtlas",
+        "colettiDavisSchultz2025",
+        "delaunayImperialeMoireau2026",
+        "acousticInverseSourcesDoNotPromote",
         "zhangContextReview2025",
         "guoUrbanSoundscape2026",
         "isoNonAcousticContext2025",
@@ -273,6 +279,10 @@ def check() -> None:
         "twoChannelRingPerturbation",
         "calibratedTwoChannelPerturbation",
         "commonModeSecondCoordinateRecovers",
+        "ridgeSecond",
+        "ridgeTwoChannelDecomposition",
+        "ridgeBiasBalance",
+        "ridgeNormalEquation",
     ):
         require(theorem in rational, f"missing T7 rational theorem {theorem}")
     require(rational.count("r * q ≡ 1ℚ") == 4,
@@ -290,6 +300,28 @@ def check() -> None:
         "Jacques Hadamard",
     ):
         require(assertion in doc, f"missing T7 proof/attribution memo {assertion}")
+    # T9 ridge, inherited rational solver and independent source authors.
+    for token in (
+        "Coletti", "Davis", "Schultz", "10.1016/j.apacoust.2025.110756",
+        "Delaunay", "Imperiale", "Moireau", "10.3934/ipi.2025043",
+    ):
+        require(token in module, f"missing independent inverse source attribution {token}")
+    for token in (
+        "from fractions import Fraction as Q",
+        "assert checks == 72",
+        "assert len(rows) == 18",
+        "assert recovered - y == bias + gain*(second-first)",
+        "assert (q*q + lam)*recovered == q*(b-a)",
+    ):
+        require(token in ridge, f"missing T9 finite diagnostic {token}")
+    for token in (
+        "T9 regularised inversion",
+        "ridgeBiasBalance",
+        "ridgeNormalEquation",
+        "10.1016/j.apacoust.2025.110756",
+        "10.3934/ipi.2025043",
+    ):
+        require(token in doc, f"missing T9 original attribution or scope {token}")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
