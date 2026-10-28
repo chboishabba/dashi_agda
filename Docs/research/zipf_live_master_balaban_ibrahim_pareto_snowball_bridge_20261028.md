@@ -1,3 +1,5 @@
+> **Scope correction (28 October 2026): Balaban is NOT a Zipf-family dependency.** This historical note records discovery of a pre-existing combined TOE facade, not a mathematical bridge between Balaban renormalization and Zipf scaling. The core 27-topic integration uses only statistics, corpus provenance and (if relevant) Ibrahim-specific proof-status boundaries. Balaban RG/Yang-Mills is a separate research track. Do not import the combined facade merely to reach a Pareto/snowball routing convention. The new constructive finite Heaps/majorization owner is `scripts/zipf_heaps_bridge.py`, with proof-status ledger `Docs/research/zipf_heaps_majorization_extremal_maxcut_20261028.md`.
+
 # 28 October 2026 — Zipf 27 → existing Balaban/Ibrahim/Pareto/Snowball owner
 
 **Lane:** existing statistics PR #1275 only. This is a bounded integration contract and attribution cut, not a new Monster theorem, a spectral identification, or a second Pareto coordinator.
