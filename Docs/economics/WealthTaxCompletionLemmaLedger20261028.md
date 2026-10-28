@@ -416,3 +416,40 @@ The existing owner/TOE regression now requires the exact new symbols and origina
 
 **Unpaid walls:** A05 authenticated ownership/valuation; C09 real loan/cash funding; E07 legal/beneficial holder/issuer/class; F07 primary finality/custody; H08 same-object causal design/observed outcomes; Agda typecheck and master convergence. A new 3/6/9 coincidence cannot discharge any of them.
 
+## 2026-10-28 semantics-first audit: remove decorative 369 welds
+
+This section supersedes the earlier 27-cube, S3, Q8 and 3^5/5^3 economic-*adapter* claims recorded above. The independent mathematics survives in its ORIGINAL theorem owners. The economics PR no longer imports those owners or re-exports their arithmetic merely to advertise a cross-domain weld. No external theorem or prior author has been deleted or reassigned.
+
+**What was rejected, and why:**
+
+- The earlier five evidence-status positions corresponded to the current five open ledger IDs, so 3^5 = 243 was just a contingent annotation count. A change in backlog size would change this alleged invariant. It is not a derived financial mechanism.
+- The three 27-cells and six S3 label permutations were mathematically valid carriers, but no proved mapping transported a real taxable base, beneficial owner, policy intervention, cost covariance, or issuer/custody record through those symmetries. Even a correct group law cannot make an economic model automorphism without preserving eligibility and all cost axes.
+- The inherited Q8 central-sign quotient and PR #1414's rational quaternion 720-degree lift were unrelated to tax settlement: no operator/consumer, source evidence, or physical Spin action was exhibited. Treat their inclusion in the original economics module as an abandoned analogy, not established cross-domain knowledge.
+- The prior x/y versus z fixture was a valid generic **product-projection** counterexample, but it did not bind x/y to actual sourced policy observations. It therefore added no application-specific causal information beyond the original INF theorem.
+
+**What replaced these welds: genuine Pareto information loss on existing, fixed cost coordinates.**
+
+The original economic theorem owner already defines two synthetic, eligible policy outcomes and the cost hyperfabric:
+
+| Synthetic policy | Administration cost | Care shortfall | Unweighted sum |
+|---|---:|---:|---:|
+| lowAdministrativeCost | 0 | 5 | 5 |
+| increasedCareCapacity | 5 | 0 | 5 |
+
+The source-written replacement proves:
+
+- `equalWeightCostCollapsesIncomparablePolicies`: both exact two-axis costs map to the same unweighted scalar 5.
+- `equalCostTotalDoesNotRecoverAdministrativeCost`: the scalar projection cannot recover the axis that distinguishes the two candidate policies, reusing the original `IntersectionalNonFactorability` theorem.
+- `rechartingTotalCostCannotRecoverAdministrativeAxis`: composing the scalar with any subsequent chart map cannot restore erased cost information.
+- `equalCostTotalCannotReflectParetoOrder`: there is no *universal* implication from a lower/equal summed cost to actual componentwise `WeaklyDominates`. The particular two options are incomparable under the originally declared axes.
+- `policyWeightedTwoAxisCost`: weights (administration, care shortfall) = (1,2) yield scalar costs (10,5), while weights (2,1) yield (5,10). Each strict positive weighting therefore selects a different *scalar* winner without changing the Pareto order. The weights are hypothetical sensitivity parameters, not a hidden welfare calibration.
+- `careHeavyWeightsPreferCareByScalar` and `administrationHeavyWeightsPreferCheapAdministrationByScalar` are concrete Nat-order witnesses; they do not assert policy outcomes.
+
+This directly consumes the existing `DASHI.Core.AdmissibleConsumerMDLHyperfabricExact` partial-order owner and respects `DASHI.Core.ParetoSymmetryQuotientAdmissionExact`: legitimate Pareto symmetries must preserve eligibility and each declared cost, not just cardinalities or orbit labels. This is a *material* Pareto/max-cut consequence with false-positive controls.
+
+**Executed independent local numeric oracle:** checked 11^4 = 14,641 ordered two-vector pairs on values 0..10, five nonnegative positive weighting examples, an exact axis-reordering dominance invariant, and 20,000 seeded randomly permuted multi-axis pairs. **34,641 exhaustive/random cases passed** in Python, plus the concrete weight-reversal counterexample. These checks do not typecheck Agda and do not establish real-world calibrated weights.
+
+**Attribution:** the Pareto mathematical order, finite-frontier result and information-loss antecedents remain inherited. The new repository-owned *economic synthetic counterexample* is source-written under Johl Brown's research direction with ChatGPT implementation assistance. PR #1414's monodromy/quaternion work, the original S3 authors, historical Hamilton, the Ibrahim first-link programme and original Monster 3B owner remain distinct. A matching numeral, shared cohort or parallel formal carrier never proves the same historical/mathematical object.
+
+**Unchanged status:** 61 D / 11 R / 5 N over the 77 scoped obligations. No observation, legal instrument, taxpayer, market settlement, spin rotation, or Monster representation is certified. A05/C09/E07/F07/H08 remain genuinely open, along with Agda kernel-check and current-master convergence.
+
