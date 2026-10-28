@@ -1,3 +1,49 @@
+## 2026-10-28 independent continuous-surface collision audit
+
+**Executed:** independently evaluate 176 sampled contact points from each of
+the three 44-ray matched-envelope finalists (528 total), using SciPy
+bounded scalar minimisation on independent finite angular intervals.
+The source belongs to the local Kozyrev #1404 experiment, and the
+independent bounded-distance algorithm is *not* the HTML SDF's
+three-step multi-start Gauss-Newton nearest-curve method.
+
+| Family | Samples | Median | Max | Above contact tolerance |
+|:--|--:|--:|--:|--:|
+| Archimedean | 176 | 0.58683 mm | 0.68794 mm | 0 |
+| True logarithmic | 176 | 0.55050 mm | 0.69989 mm | 0 |
+| Smooth segmented-profile surrogate | 176 | 0.57705 mm | 0.69994 mm | 0 |
+
+Contact tolerance is **0.7 mm** in the existing HTML SDF fixture.
+These findings confirm numerical contact proximity **within the
+existing loose threshold**; they do **not** establish exact contact,
+first-positive intersection along every ray, sign of the actual
+stroked boundary normal, absence of missed adjacent surfaces, or
+convergence as tolerance shrinks. The old log torque advantage of
+~6.2% is still conditional on those remaining checks.
+
+**New source-written receiver:**
+`scripts/kozyrev_independent_surface_audit.py`;
+the local prototype `/mnt/data/kozyrev_independent_surface_audit.py`
+and the three result JSON files were actually executed in the session.
+The committed script is not independently run from its GitHub blob
+and no CI or Agda proof is claimed. In production this audit must be
+followed by an independent *ray–offset-curve first-intersection*
+method, preferably with reliable error intervals and no destructive
+normal offset. Numerical-ray self-hit handling should follow
+rigorous error-bound techniques rather than hand-tuned
+fixed-length nudges (see PBRT 4ed, Managing Rounding Error, and
+van Antwerpen 2023, Solving Self-Intersection Artifacts in
+DirectX Raytracing). The earlier 0.25 mm spawn offset caused
+~10,516 false hits, establishing the high priority of this gate.
+
+**Attribution:** optical impulse physics and geometrical reflection
+are inherited prior art; DASHI torque kernels remain owned by
+merged PR #1164, #1414 ternary/S3/quaternion and #1407 Fourier
+proofs by their authors, and the local independent experiment by
+#1404. No new Monster 3B object identification, anomalous torsion
+mechanism, coherent WGM or clinical validation is asserted.
+Protected ESD surfaces remain unchanged.
+
 ## 2026-10-28 matched-envelope three-family SDF screen
 
 **Hypothesis:** prior high raw torque of -250.73 microN*m for log b=.17
