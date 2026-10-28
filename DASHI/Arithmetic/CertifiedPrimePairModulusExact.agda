@@ -240,9 +240,9 @@ axisReallyPrime axis = primeWitness axis
 sixWheelNecessaryForOtherPrimes :
   (n : Nat) →
   Prime (4 + n) →
-  DASHI.Arithmetic.PrimeModSixSieveExact.PrimeModSixClass (4 + n)
+  PrimeSix.PrimeModSixClass (4 + n)
 sixWheelNecessaryForOtherPrimes =
-  DASHI.Arithmetic.PrimeModSixSieveExact.primeAboveThreeModSix
+  PrimeSix.primeAboveThreeModSix
 
 ------------------------------------------------------------------------
 -- Generic arithmetic CRT forward map and explicit inverse obligation.
