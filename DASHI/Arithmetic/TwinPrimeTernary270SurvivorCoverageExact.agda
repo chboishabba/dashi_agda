@@ -1203,8 +1203,18 @@ certifiedWheel270ToGuards :
   (n : Nat) →
   Pair.AllPairSurvive (a2 ∷ a3 ∷ a5 ∷ []) n →
   Wheel270Survives n
-certifiedWheel270ToGuards a2 a3 a5 eq2 eq3 eq5 n h
-  rewrite eq2 | eq3 | eq5 = h
+certifiedWheel270ToGuards a2 a3 a5 eq2 eq3 eq5 n
+  (h2 , (h3 , (h5 , tt))) =
+  ( subst
+      (λ p → ((n % p ≢ 0) × ((n + 2) % p ≢ 0)))
+      eq2 h2
+  , ( subst
+        (λ p → ((n % p ≢ 0) × ((n + 2) % p ≢ 0)))
+        eq3 h3
+    , ( subst
+          (λ p → ((n % p ≢ 0) × ((n + 2) % p ≢ 0)))
+          eq5 h5
+      , tt )))
 
 wheel270CompleteCertified :
   (a2 a3 a5 : Pair.CertifiedPrimeAxis) →
