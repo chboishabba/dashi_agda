@@ -5,8 +5,15 @@ must not be used as a numerical model of AA localization or R2P2 Yb data.
 """
 from pathlib import Path
 import unittest
+from fractions import Fraction
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'scripts'))
+from r2p2_optical_lattice_3site_diagnostic import (  # noqa: E402
+    analyze, make_matrix, characteristic_coefficients, expected_coefficients,
+    polynomial_eval,
+)
 MODULE = ROOT / "DASHI/Physics/Closure/R2P2OpticalLattice369HamiltonianCutExact.agda"
 ARCH = ROOT / "DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda"
 ROOTS = [
@@ -34,6 +41,24 @@ class OpticalLattice369Tests(unittest.TestCase):
         self.assertEqual(hop(potential(left)), (0, 0, 0))
         self.assertEqual(potential(hop(left)), (0, 1, 0))
         self.assertNotEqual(hop(potential(left)), potential(hop(left)))
+
+    def test_signed_hamiltonian_characteristic_polynomial_exact(self):
+        for hopping, gradient in ((1, 2), (1, 0), (0, 2), (3, 6), (2, 9), (-2, -3)):
+            with self.subTest(hopping=hopping, gradient=gradient):
+                J, D = Fraction(hopping), Fraction(gradient)
+                matrix = make_matrix(J, D)
+                coefficients = characteristic_coefficients(matrix)
+                self.assertEqual(coefficients, expected_coefficients(J, D))
+                self.assertEqual(polynomial_eval(coefficients, D), 0)
+                result = analyze(J, D)
+                self.assertFalse(result["experimental_aubry_andre_transition_proven"])
+                self.assertFalse(result["quasiperiodicity_constructed"])
+                self.assertFalse(result["r2p2_yb_clock_observed"])
+
+    def test_exact_cubic_example_at_j1_d2(self):
+        self.assertEqual(characteristic_coefficients(make_matrix(Fraction(1), Fraction(2))),
+                         (Fraction(1), Fraction(-6), Fraction(6), Fraction(4)))
+        self.assertEqual(polynomial_eval((Fraction(1), Fraction(-6), Fraction(6), Fraction(4)), 2), 0)
 
     def test_three_site_operator_is_not_a_fitted_aa_hamiltonian(self):
         content = MODULE.read_text(encoding="utf-8")
