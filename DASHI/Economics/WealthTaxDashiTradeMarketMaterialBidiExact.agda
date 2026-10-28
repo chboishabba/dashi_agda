@@ -13,8 +13,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Nat using (_≤_; _∸_)
-open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; +-assoc; +-comm; +-identityʳ; m+n∸n≡m; [m+n]∸[m+o]≡n∸o)
+open import Data.Nat using (_≤_; _∸_; z≤n; s≤s)
+open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; ≤-total; +-assoc; +-comm; +-identityʳ; m+n∸n≡m; [m+n]∸[m+o]≡n∸o)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong; cong₂)
 open import Data.Empty using (⊥)
 open import Agda.Builtin.Unit using (⊤; tt)
@@ -2105,4 +2105,139 @@ noUniqueOptimalTaxRateFromParetoOrderAlone :
 noUniqueOptimalTaxRateFromParetoOrderAlone claimedUnique =
   syntheticTaxRateLabelsAreDifferent
     (claimedUnique increasedCareCapacity careCapacityIsUndominated)
+
+------------------------------------------------------------------------
+-- I07 PARTIAL: FINITE NONEMPTY ELIGIBLE PARETO FRONT WITH STRICT RANK.
+-- A nonempty list of admissible and adequate candidates admits a minimal
+-- point if an explicit Nat rank strictly decreases along every strict
+-- Pareto improvement. Existence of such a rank for arbitrary finite
+-- multi-axis orders is a separate generality obligation.
+-- This reuses the original Pareto.AdmissibleStratumPoint owner.
+------------------------------------------------------------------------
+
+data RankedMember {A : Set} (value : A) : List A → Set where
+  ranked-here : {rest : List A} → RankedMember value (value ∷ rest)
+  ranked-there : {other : A} {rest : List A} →
+    RankedMember value rest → RankedMember value (other ∷ rest)
+
+record FiniteRankMinimum
+    {A : Set} (rank : A → Nat) (population : List A) : Set where
+  constructor finite-rank-minimum
+  field
+    minimumCandidate : A
+    minimumIsMember : RankedMember minimumCandidate population
+    minimumBound :
+      (candidate : A) → RankedMember candidate population →
+      rank minimumCandidate ≤ rank candidate
+open FiniteRankMinimum public
+
+singletonRankBound :
+  {A : Set} (rank : A → Nat) (head : A) →
+  (candidate : A) → RankedMember candidate (head ∷ []) →
+  rank head ≤ rank candidate
+singletonRankBound rank head candidate ranked-here = ≤-refl
+singletonRankBound rank head candidate (ranked-there ())
+
+headRankBound :
+  {A : Set} {tailHead : A} {tailRest : List A} →
+  (rank : A → Nat) (head : A) →
+  (tailMinimum : FiniteRankMinimum rank (tailHead ∷ tailRest)) →
+  rank head ≤ rank (minimumCandidate tailMinimum) →
+  (candidate : A) →
+  RankedMember candidate (head ∷ tailHead ∷ tailRest) →
+  rank head ≤ rank candidate
+headRankBound rank head tailMinimum head≤tail candidate ranked-here = ≤-refl
+headRankBound rank head tailMinimum head≤tail candidate (ranked-there p) =
+  ≤-trans head≤tail (minimumBound tailMinimum candidate p)
+
+tailRankBound :
+  {A : Set} {tailHead : A} {tailRest : List A} →
+  (rank : A → Nat) (head : A) →
+  (tailMinimum : FiniteRankMinimum rank (tailHead ∷ tailRest)) →
+  rank (minimumCandidate tailMinimum) ≤ rank head →
+  (candidate : A) →
+  RankedMember candidate (head ∷ tailHead ∷ tailRest) →
+  rank (minimumCandidate tailMinimum) ≤ rank candidate
+tailRankBound rank head tailMinimum tail≤head candidate ranked-here = tail≤head
+tailRankBound rank head tailMinimum tail≤head candidate (ranked-there p) =
+  minimumBound tailMinimum candidate p
+
+chooseMinAgainstHead :
+  {A : Set} {tailHead : A} {tailRest : List A} →
+  (rank : A → Nat) (head : A) →
+  (tailMinimum : FiniteRankMinimum rank (tailHead ∷ tailRest)) →
+  (rank head ≤ rank (minimumCandidate tailMinimum))
+    ⊎ (rank (minimumCandidate tailMinimum) ≤ rank head) →
+  FiniteRankMinimum rank (head ∷ tailHead ∷ tailRest)
+chooseMinAgainstHead rank head tailMinimum (inj₁ head≤tail) =
+  finite-rank-minimum head ranked-here
+    (headRankBound rank head tailMinimum head≤tail)
+chooseMinAgainstHead rank head tailMinimum (inj₂ tail≤head) =
+  finite-rank-minimum (minimumCandidate tailMinimum)
+    (ranked-there (minimumIsMember tailMinimum))
+    (tailRankBound rank head tailMinimum tail≤head)
+
+finiteNonemptyRankMinimum :
+  {A : Set} (rank : A → Nat) (head : A) (rest : List A) →
+  FiniteRankMinimum rank (head ∷ rest)
+finiteNonemptyRankMinimum rank head [] =
+  finite-rank-minimum head ranked-here (singletonRankBound rank head)
+finiteNonemptyRankMinimum rank head (tailHead ∷ tailRest) =
+  let tailMinimum = finiteNonemptyRankMinimum rank tailHead tailRest
+  in chooseMinAgainstHead rank head tailMinimum
+       (≤-total (rank head) (rank (minimumCandidate tailMinimum)))
+
+rankOrderCannotCycle :
+  {smaller larger : Nat} →
+  smaller ≤ larger →
+  suc larger ≤ smaller → ⊥
+rankOrderCannotCycle z≤n ()
+rankOrderCannotCycle (s≤s smaller≤larger) (s≤s reverseStrict) =
+  rankOrderCannotCycle smaller≤larger reverseStrict
+
+StrictlyDominatesAdmissible :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  Pareto.AdmissibleStratumPoint problem →
+  Pareto.AdmissibleStratumPoint problem → Set
+StrictlyDominatesAdmissible costs better worse =
+  Pareto.WeaklyDominates costs (Pareto.model better) (Pareto.model worse)
+  × (Pareto.WeaklyDominates costs (Pareto.model worse)
+        (Pareto.model better) → ⊥)
+
+record NonemptyRankedParetoFront
+    {problem : Pareto.ConsumerMDLProblem}
+    (costs : Pareto.CostHyperfabric problem)
+    (rank : Pareto.AdmissibleStratumPoint problem → Nat)
+    (head : Pareto.AdmissibleStratumPoint problem)
+    (rest : List (Pareto.AdmissibleStratumPoint problem)) : Set where
+  constructor nonempty-ranked-pareto-front
+  field
+    selectedFiniteRankMinimum :
+      FiniteRankMinimum rank (head ∷ rest)
+    noStrictlyDominatingListedCandidate :
+      (challenger : Pareto.AdmissibleStratumPoint problem) →
+      RankedMember challenger (head ∷ rest) →
+      StrictlyDominatesAdmissible costs challenger
+        (minimumCandidate selectedFiniteRankMinimum) → ⊥
+open NonemptyRankedParetoFront public
+
+finiteParetoFrontierNonemptyGivenStrictRank :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (rank : Pareto.AdmissibleStratumPoint problem → Nat) →
+  (head : Pareto.AdmissibleStratumPoint problem) →
+  (rest : List (Pareto.AdmissibleStratumPoint problem)) →
+  ((better worse : Pareto.AdmissibleStratumPoint problem) →
+    StrictlyDominatesAdmissible costs better worse →
+    suc (rank better) ≤ rank worse) →
+  NonemptyRankedParetoFront costs rank head rest
+finiteParetoFrontierNonemptyGivenStrictRank costs rank head rest decreases =
+  let chosen = finiteNonemptyRankMinimum rank head rest
+  in nonempty-ranked-pareto-front chosen
+       (λ challenger membership strictImprovement →
+         rankOrderCannotCycle
+           (minimumBound chosen challenger membership)
+           (decreases challenger (minimumCandidate chosen)
+             strictImprovement))
 
