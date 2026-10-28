@@ -104,6 +104,10 @@ The new Agda source defines a finite **three-plane-wave-mode** window with indic
 
 This is a second exact finite wrong-type cut: *same number of modes or matching 18/369 labels cannot substitute for the correct physical operator*. The witness is attached at `fullArchitectureMaS6ThreeModeHasNoSideband` in the canonical R2P2 architecture, with a Python finite enumeration regression. Its result is source-written, not Agda-kernel checked.
 
+## 3e. Three-mode binary/ternary codec × NS aliasing cross-cut
+
+The dedicated [three-mode codec / balanced NS aliasing audit](R2P2ThreeModeBinaryTernaryNSAliasingMaxCut.md) is source-written in `DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact`. It reuses original `VerifiedFiniteTritCoder`, `BalancedTritBitFibre`, `BinaryBalancedTernarySubcarrierExact`, `NSIntegerFourierLattice`, `NSCross369OrientationBridgeExact`, `NSTriadKN369HighHighGramBridgeReceipt`, and generic nonfactorability. The three input Fourier *mode indices* `{-1,0,+1}` have nine exact quadratic sums in `{-2,-1,0,1,2}`. A 3-point periodic grid aliases `+2` to `-1`, and the imported generic collision theorem shows no trit recoding can reconstruct the original wide mode. Five-point padding resolves all products in this finite example. Locally executed exact integer 27-profile enumeration: **24/27** 3-grid profiles alias, **0/27** 5-grid profiles alias. This does **not** identify the 2026 Ma S6 linear Fourier-sideband operator with a quadratic NS convolution, discharge the NS analytic Gram or Bony estimates, or report real optical-clock physics.
+
 ## 4. Pareto / snowball / Ibrahim plan — real cutset
 
 **P0: Experiment identity** — separate the 2022 Sr vertical redshift, 2026 Ma Sr87 horizontal AA localization, and 2026 R2P2 neutral-Yb mountain redshift. This is a primary-source provenance/authority gate.
