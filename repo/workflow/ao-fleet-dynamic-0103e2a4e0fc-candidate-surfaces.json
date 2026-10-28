@@ -1,0 +1,137 @@
+{
+  "schema": "dashi.repo.workflow.candidate-surfaces.v1",
+  "lane": "ao.fleet.dynamic.0103e2a4e0fc",
+  "orchestrator": "ao-fleet-conductor-leaf-0103e2a4e0fc",
+  "scope": "repository/workflow surface collection only; no theorem or workflow edits",
+  "generated_at": "2026-10-28",
+  "preconditions": {
+    "collection_source": "GitHub connected repository searches and file reads",
+    "branch_base": "master",
+    "noTypedMeet": true,
+    "protected_esd_edit": false
+  },
+  "zkp": {
+    "O": "Collect candidate existing source and workflow surfaces for DASHI TOE convergence.",
+    "R": "Read-only discovery plus one dedicated-branch inventory write.",
+    "C": "No overlap with theorem/ESD/proof implementation lanes.",
+    "S": "Only repository/workflow inventory path.",
+    "L": "One owned manifest file; source files are references only.",
+    "P": "Existing paths and repository discovery are evidence, not proof receipts.",
+    "G": "No postulates, pragmas or stub theorem bodies added.",
+    "F": "A deterministic, parseable candidate manifest with explicit verification limits."
+  },
+  "toe_targets": [
+    "DASHI/EverythingTOESymmetryResolved369.agda",
+    "DASHI/Unifier.agda",
+    "DASHI/Unified/"
+  ],
+  "candidate_sources": [
+    {
+      "path": "DASHI/Physics/Closure/DialecticalTetrationScaleReceipt.agda",
+      "role": "nine-tetrated-nine scale-marker source; bookkeeping receipt, not an analytic bound"
+    },
+    {
+      "path": "DASHI/Moonshine/Base369Pointed729CornerTritSquareBidiExact.agda",
+      "role": "pointed 729 corner/TritSquare exact BIDI rechart"
+    },
+    {
+      "path": "DASHI/Foundations/Base369TriadicPhaseTower.agda",
+      "role": "C3/C9/C27 cyclic phase refinement"
+    },
+    {
+      "path": "DASHI/Foundations/Base369NonaryTritSquareExact.agda",
+      "role": "literal 3-by-3 trit-square chart"
+    },
+    {
+      "path": "DASHI/Foundations/PhaseQuotientNonaryGroupSeparationExact.agda",
+      "role": "non-promotion of noncyclic Q9 to cyclic C9"
+    },
+    {
+      "path": "DASHI/Foundations/TernaryPermutationS3LawsExact.agda",
+      "role": "six ternary permutations and S3 group laws"
+    },
+    {
+      "path": "DASHI/Foundations/TernaryHypervoxelPermutationTransportExact.agda",
+      "role": "permutation transport across ternary address depths"
+    },
+    {
+      "path": "DASHI/Physics/Foundations/TorqueTrialectic369Exact.agda",
+      "role": "3x3 operator sheet and 3x3x3 bracket cube; signed orientation"
+    },
+    {
+      "path": "DASHI/Foundations/SignedZeroTernaryOrientationExact.agda",
+      "role": "oriented-neutral finite refinement"
+    },
+    {
+      "path": "DASHI/Reasoning/TrialecticGrothendieckTransitionCocycleExact.agda",
+      "role": "three-edge-chart transition cocycle"
+    },
+    {
+      "path": "DASHI/Moonshine/Base369Ternary27SpectralSymmetryIrrepBridgeExact.agda",
+      "role": "27-cube finite Fourier and stabiliser distinctions"
+    },
+    {
+      "path": "DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchRound12Exact.agda",
+      "role": "Monster 3B finite-representation search; no same-object promotion assumed"
+    },
+    {
+      "path": "DASHI/Analysis/PickoverSignedZeroTorque369GridExact.agda",
+      "role": "PR1260 candidate adapter, branch-local only",
+      "ref": "chatgpt/eisenstein9-crt-pickover-rh-maxcut-20261025"
+    }
+  ],
+  "workflow_surfaces": [
+    {
+      "path": ".github/workflows/toe-symmetry-resolved-369.yml",
+      "role": "existing TOE aggregate and Unified validation owner"
+    },
+    {
+      "path": ".github/workflows/pickover-eisenstein9-crt-finite.yml",
+      "role": "PR1260 finite phase regression owner",
+      "ref": "chatgpt/eisenstein9-crt-pickover-rh-maxcut-20261025"
+    }
+  ],
+  "cross_repo_candidates": [
+    {
+      "repository": "chboishabba/zkSEC",
+      "discovery": "connector repository lookup returned matching repository",
+      "ownership": "external donor; attribution retained"
+    },
+    {
+      "repository": "chboishabba/zkperf",
+      "discovery": "connector repository lookup returned matching repository",
+      "ownership": "meta-introspector donor; attribution retained"
+    },
+    {
+      "repository": "chboishabba/zos-server",
+      "discovery": "connector repository lookup returned matching repository",
+      "ownership": "meta-introspector donor; attribution retained"
+    },
+    {
+      "repository": "chboishabba/aristotle-cli-rs",
+      "discovery": "connector repository lookup returned matching repository",
+      "ownership": "meta-introspector donor; attribution retained"
+    },
+    {
+      "repository": "casey-git-clone",
+      "discovery": "no installed repository match in scoped lookup; unresolved"
+    },
+    {
+      "repository": "erdfa-py",
+      "discovery": "no installed repository match in scoped lookup; unresolved"
+    }
+  ],
+  "verification": {
+    "source": "GitHub file reads/search results in current turn; manifest retrieval after commit",
+    "local_referee": "not invoked; no run receipt",
+    "kernel": "not invoked; no claims of kernel verification",
+    "workflow": "not triggered",
+    "postconditions": [
+      "single manifest file only",
+      "no ESD edits",
+      "no modifications to TOE import graph by this collection-only lane",
+      "unverified candidate claims remain candidates"
+    ]
+  },
+  "next_owner": "TOE integration worker owns import changes and preflight; this collector owns only the inventory"
+}
