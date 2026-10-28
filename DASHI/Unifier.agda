@@ -23,6 +23,7 @@ import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Nat using (_+_)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -1812,7 +1813,7 @@ unifierR2P2FiniteLatticeNoncommuting :
     (R2P2Lattice.siteDependentPotential R2P2Lattice.leftBasisState)
   ≡ R2P2Lattice.siteDependentPotential
     (R2P2Lattice.nearestNeighbourAdjacency R2P2Lattice.leftBasisState)
-  → R2P2Lattice.⊥
+  → ⊥
 unifierR2P2FiniteLatticeNoncommuting =
   R2P2Lattice.finiteLatticeOperatorsFailToCommute
 
