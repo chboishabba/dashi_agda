@@ -3152,11 +3152,6 @@ policyIdentityIsAdmittedParetoSymmetry =
     (λ _ eligible → eligible)
     "identity-map-preserves-the-two-declared-economic-cost-axes"
 
-policyDistinctAdministrativeCostsCannotBeIdentified :
-  policyAxisCost administrationAxis lowAdministrativeCost
-    ≡ policyAxisCost administrationAxis increasedCareCapacity → ⊥
-policyDistinctAdministrativeCostsCannotBeIdentified ()
-
 -- The rejection is not a claim that S3 is false. It means the specific
 -- candidate exchange fails the existing semantic *cost-preservation*
 -- admission condition while the objective names remain unchanged.
@@ -3165,7 +3160,7 @@ policySwapCannotBeAdmittedParetoSymmetry :
   ParetoSym.mapModel symmetry lowAdministrativeCost
     ≡ increasedCareCapacity → ⊥
 policySwapCannotBeAdmittedParetoSymmetry symmetry swapping =
-  policyDistinctAdministrativeCostsCannotBeIdentified
+  administrativeAxisRemainsDistinctAtEqualTotal
     (trans
       (sym (ParetoSym.preservesAxisCost symmetry
         administrationAxis lowAdministrativeCost))
