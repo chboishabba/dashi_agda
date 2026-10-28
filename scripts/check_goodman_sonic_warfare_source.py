@@ -169,6 +169,14 @@ def check() -> None:
         "jointObserverDoesNotIdentifyWholeWorld",
         "fullObserverStrictlyRefinesJointObserver",
         "fullObserverSeparatesToyWorlds",
+        "sourceMonitorNotWorldSeparating",
+        "mediumMonitorNotWorldSeparating",
+        "receiverAndMediumNotWorldSeparating",
+        "sourceAndMediumSeparatesAllFourWorlds",
+        "fullObservationFactorsThroughParetoPair",
+        "paretoPairFactorsThroughFullObservation",
+        "recoverFullFromPareto",
+        "forgetReceiverFromFull",
         "sameReceiverAndSourceReadingForDifferentMedia",
         "differentMediaInSilentWorlds",
         "Observer.strictPairRefinement",
@@ -199,6 +207,22 @@ def check() -> None:
                 f"independent soundscape source not tracked in atlas and documentation: {marker}")
     require("Attr.attributedSourceAtlasReceiptNonPromoting" in module,
             "comparator sources cannot claim proof or empirical authority")
+    # T5 Pareto: the separating two-observer pair closes all 4x4 cases.
+    pairs = re.findall(
+        r"(?m)^sourceAndMediumSeparatesAllFourWorlds (\w+) (\w+) ", transport)
+    require(len(pairs) == 16 and len(set(pairs)) == 16,
+            "Pareto source+medium separation must cover all sixteen world pairs")
+    for theorem in (
+        "fullObservationFactorsThroughParetoPair",
+        "paretoPairFactorsThroughFullObservation",
+    ):
+        cases = re.findall(rf"(?m)^{theorem} (\w+) =", transport)
+        require(len(cases) == 4 and len(set(cases)) == 4,
+                f"{theorem} must cover four worlds")
+    reconstructions = re.findall(
+        r"(?m)^recoverFullFromPareto \((\w+) , (\w+)\) =", transport)
+    require(len(reconstructions) == 4 and len(set(reconstructions)) == 4,
+            "full observer reconstruction must have four pair cases")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
