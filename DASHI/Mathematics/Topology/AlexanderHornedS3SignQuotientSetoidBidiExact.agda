@@ -395,7 +395,7 @@ canonicalRankRecurrence n = refl
 doubleAddShuffle : ∀ a b →
   (a + b) + (a + b) ≡ (a + a) + (b + b)
 doubleAddShuffle a b =
-  trans (NP.+-assoc (a + b) a b)
+  trans (sym (NP.+-assoc (a + b) a b))
     (trans
       (cong (λ v → v + b)
         (trans (NP.+-assoc a b a)
