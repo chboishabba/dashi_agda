@@ -32,6 +32,7 @@ open import Data.Integer.Base using (+_)
 import DASHI.Algebra.Trit as Trit
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Codec.VerifiedFiniteTritCoder as TwoBits
+import DASHI.Codec.BalancedTritBitFibre as SignFibre
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact as BinaryInTernary
 import DASHI.ComputerScience.BalancedTernaryQutritBasisBridgeExact as QutritBasis
 import DASHI.Algebra.Quantum.FiniteQutrit as Qutrit
@@ -128,6 +129,48 @@ zeroModeIsNotAnEmbeddedBit false =
   BinaryInTernary.centreIsUnusedByBinaryEmbedding false
 zeroModeIsNotAnEmbeddedBit true =
   BinaryInTernary.centreIsUnusedByBinaryEmbedding true
+
+-- The original balanced support/sign codec retains the orientation bit
+-- only when the mode is nonzero. A support bit ALONE merges +/- modes.
+threeModeSupport : ThreeMode → Bool
+threeModeSupport mode =
+  SignFibre.supportBit (SignFibre.encodeFibre (threeModeToTrit mode))
+
+oppositeModesHaveSameBinarySupport :
+  threeModeSupport modeMinus ≡ threeModeSupport modePlus
+oppositeModesHaveSameBinarySupport = refl
+
+minusIsNotPlus : modeMinus ≡ modePlus → ⊥
+minusIsNotPlus ()
+
+supportForgetsSignedFourierOrientation :
+  Core.ConsumerCollision threeModeSupport (λ m → m)
+supportForgetsSignedFourierOrientation =
+  NF.nonFactorabilityWitness modeMinus modePlus
+    oppositeModesHaveSameBinarySupport minusIsNotPlus
+
+supportBitCannotDecodeSignedFourierMode :
+  Core.ConsumerSufficient threeModeSupport (λ m → m) → ⊥
+supportBitCannotDecodeSignedFourierMode =
+  Core.collisionRefutesSufficiency supportForgetsSignedFourierOrientation
+
+fullSupportPlusOptionalSignRecoversThreeMode :
+  (mode : ThreeMode) →
+  tritToThreeMode
+    (SignFibre.decodeFibre
+      (SignFibre.encodeFibre (threeModeToTrit mode)))
+    ≡ mode
+fullSupportPlusOptionalSignRecoversThreeMode modeMinus = refl
+fullSupportPlusOptionalSignRecoversThreeMode modeZero = refl
+fullSupportPlusOptionalSignRecoversThreeMode modePlus = refl
+
+sourceSignedModeCostIsTwo :
+  SignFibre.tritBitCost (threeModeToTrit modePlus) ≡ 2
+sourceSignedModeCostIsTwo = refl
+
+sourceZeroModeCostIsOne :
+  SignFibre.tritBitCost (threeModeToTrit modeZero) ≡ 1
+sourceZeroModeCostIsOne = refl
 
 -- Qutrit *basis label* reuse. Not a quantum state-space equivalence.
 threeModeToQutritBasis :
