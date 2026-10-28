@@ -74,7 +74,37 @@ def run():
     out.append(test_case('joint signal and context determine toy response', scenes,
         joint, response, True))
 
-    assert len(out) == 9
+    # R1: Count/tempo metadata hides the onset phase in a two-slot trace.
+    traces = ('slot-zero', 'slot-one')
+    count = dict.fromkeys(traces, 'one-event')
+    phase = dict(zip(traces, ('phase-zero', 'phase-one')))
+    out.append(test_case('pulse count adequately answers count', traces,
+        count, dict.fromkeys(traces, 'one-count-answer'), True))
+    out.append(test_case('pulse count cannot determine phase', traces,
+        count, phase, False))
+    out.append(test_case('phase observation determines toy phase', traces,
+        phase, phase, True))
+
+    # I1: Under passive observation X=U in both structurally different
+    # mechanisms. Model A has Y=X; model B has Y=U.
+    # A controlled do(X=1), holding U=0, separates the two models.
+    models = ('direct-sound-effect', 'common-driver-only')
+    passive_quiet = dict.fromkeys(models, 'quiet-signal-quiet-response')
+    passive_loud = dict.fromkeys(models, 'loud-signal-loud-response')
+    passive = {model: (passive_quiet[model], passive_loud[model])
+               for model in models}
+    active = {
+        'direct-sound-effect': 'loud-signal-loud-response',
+        'common-driver-only': 'loud-signal-quiet-response',
+    }
+    out.append(test_case('passive profiles are equivalent', models,
+        passive, passive, True))
+    out.append(test_case('passive observations cannot select causal model', models,
+        passive, active, False))
+    out.append(test_case('controlled intervention distinguishes toy mechanisms', models,
+        active, active, True))
+
+    assert len(out) == 15
     print(dumps({"mode": "finite-exhaustive-synthetic-only",
                  "all_passed": True, "tests": out,
                  "non_promotion": ["not-Agda-kernel", "not-measured-acoustics",
