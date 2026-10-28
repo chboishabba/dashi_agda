@@ -283,3 +283,45 @@ twin-prime infinitude, or any signed-SSP analytic advantage. Prior
 DASHI/Brun/Selberg/Polymath, Ibrahim and Monster ownership remains
 unchanged. The original 75-lemma completion matrix updates E14 while
 F02/F04/F07 remain research obligations.
+
+
+## 2026-10-28 tenth max-cut: local Python optimal, corrected Conway/Guy rule count
+
+Corrected the historical fixture against Conway's original FRACTRAN
+paper and OEIS A202138/A007546: the tested Guy PRIMEGAME list has
+**14 ordered fractions** (including 15/14 then 15/2), not 15. The
+alternative Conway list also has **14**, using 15/2 followed by 1/7.
+SSP15 describes the *distinct typed prime-carrier atlas* and does
+not determine the ordered programme length.
+
+New `DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact`
+source-writes all 14 historic fractions as exact numerator/denominator
+products of **ten reused typed SSPPrime constructors**, with a
+definitional equality to the historical numbers. The source-owned
+SSP15 atlas remains intact. No new carriers or ESD surfaces are edited.
+
+Local Python integer/valuation equivalence replay for **20,000 steps**
+passed, including all first-applicable guards, 20,001 reconstructed
+states, all 14 rules exercised and the nine published power-of-two
+prime markers through step 19201. The committed
+`scripts/check_primegame_ssp15_valuation_bisimulation_local.py`
+reuses the corrected existing programme fixture. This is empirical
+finite evidence, not a general Agda simulation theorem.
+
+The `DASHI.Arithmetic.FiniteTwinSieveNoPromotionExact` owner also
+directly proves (source written, kernel pending) that arbitrarily far
+out, every finite certified sieve admits accepted candidates with
+**both arithmetic endpoints nonprime**. This consumes the universal
+double-`Composite` constructor and the genuine `TwinPrimeAt`
+predicate, not a standalone Boolean surrogate.
+
+Local Python/SymPy independently checked the symbolic polynomial
+identities and **2,703** finite factorable cases across **159**
+modulus lists; the original 3×3×3 and 14 antipodal class check also
+passed. No CI or Agda kernel was run.
+
+The complete updated per-ID dependency matrix remains
+[SignedSSPTwinPrimeCompletionLemmaMatrix.md](SignedSSPTwinPrimeCompletionLemmaMatrix.md).
+The final frontier is concrete all-step Agda integer↔valuation
+equivalence and signed VM compilation, then number-theoretic pair
+correlation; no twin-prime theorem is claimed.
