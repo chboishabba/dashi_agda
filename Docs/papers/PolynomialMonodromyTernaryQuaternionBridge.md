@@ -493,3 +493,23 @@ This is strictly stronger than showing a braid word is syntactically nonempty. I
 **Refinement distinctions:** real Hatcher wild geometry 3*2^n binary meridians; native ternary end-space 3*3^n address cells; depthwise local field count 3^(3^(n+1)); recursive predicate iteration at next tower level 3^(3^27). These have explicit typed bridges or stated independent roles. Full twist group B3, SU2 lift sign and source outer C3 are not one common action merely because their projections return.
 
 **Verification:** independently executed finite Python PASS for 6->3->1, 14-vs-15 involution orbit split, Heaps witness, nonempty full-twist endpoint identity with exponent mod7=6, 3^27 and binary-vs-ternary counts. The added Agda source remains source-written / KERNEL-PENDING. No exact-head Agda, CI or geometric wild-exterior proof. No source-owner copy of draft-branch code into this PR and no ESD edits. The new accepted positive work is on the correctly owned #1244 branch; the full-twist receiver is on #1414.
+
+
+## 2026-10-28 focus correction: actual polynomial discriminant, not another wave/fibre owner
+
+Current donor inspection: #1244 already owns 27-cell/five-orbit local field group, 243-versus-125 evaluation and the C3² invisible kernel; #1405 already owns T15/T16 homogeneous/heterogeneous wave equivariance, and the #1244 five-orbit wave consumer; #1407 already owns the 13/27, 5/9 and Fourier orbit lanes. Their implementations are **not duplicated** on polynomial PR #1414.
+
+**New polynomial owner:** `DASHI.Foundations.PolynomialVandermondeDiscriminantExact.agda`, directly reusing `PolynomialVietaRootSymmetryExact.ThreeRoots`, the existing six `TriPermutation` constructors and the rational ring tactic. Source-written exact lemmas:
+- `vandermondeTransformsByParity`: the alternating product `V=(a-b)(a-c)(b-c)` is preserved by the THREE even/C3 permutations and negated by the THREE odd transpositions; six explicit source cases.
+- `discriminantInvariant`: `V²` is invariant under all six root-label permutations; six explicit source cases.
+- `discriminantDependsOnlyOnVietaCoefficients`: with `s1=a+b+c`, `s2=ab+bc+ac`, `s3=abc`, prove `V²=s1²s2²-4s2³-4s1³s3-27s3²+18s1s2s3`. This is the actual ALGEBRAIC bridge from ordered-root labels to an invariant in coefficient space.
+- Three collision implications: a=b, a=c, b=c imply `V²=0`.
+- All new names are attached to the three canonical TOE root aggregates; no protected ESD edits.
+
+This is the real missing polynomial-source link behind the video's branch-point/discriminant discussion. It is **not yet** the complex discriminant-complement covering, converse nonzero/disjoint-root proof, analytic path-lift, monodromy or global radical criterion.
+
+**Independent exact verification actually executed:** integer/Fraction polynomial calculations on all 343 triples `(a,b,c) in [-3,3]^3` passed the coefficient-discriminant identity; 2058 six-permutation checks passed `V²` invariance. This tests the source mathematics, but **is NOT execution of the committed code or Agda kernel type-check**.
+
+**Attribution:** classical Vieta (1591), Vandermonde/Lagrange (18th-century alternating polynomial), discriminant theory and Galois/Abel; repository ownership stays with the earlier S3 and cubic Vieta modules, while this PR owns only the new specific compositional proof source. No original Ibrahim Monster 3B or other PR proof ownership is transferred. The explicit sign-character link is structural, unlike equal numerology counts.
+
+**Next maximal dependency:** establish a genuine algebraic `Δ=0 ⇔ roots collide` over a field with no zero divisors, then construct a specific complex coefficient discriminant complement and ordered-root cover with loop transport. Existing #1244/#1405 end-fibre/wave and #1407 Fourier owners are separate and should be consumed only if a typed actual operator or monodromy intertwiner exists. CI is not required; source remains Agda-kernel pending.
