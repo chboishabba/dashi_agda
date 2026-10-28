@@ -9,6 +9,12 @@ open import Agda.Builtin.String using (String)
 -- Separates impressive science from the practical cost of restoring an
 -- application capability after retirement, departure, death, reorganisation,
 -- access change, or loss of a particular holder.
+--
+-- WARNING / ASSUMPTION:
+-- Reconstruction costing in this module is indicative and non-authoritative.
+-- Cost classes are qualitative planning assumptions only. They are not quotes,
+-- audited financial estimates, procurement authority, or evidence of actual
+-- expenditure without an application-specific source receipt.
 ------------------------------------------------------------------------
 
 data ReconstructionCoordinate : Set where
