@@ -68,13 +68,13 @@ def unpack_hermitian(packed, modes):
     }
 
 
-def sample_hermitian(modes):
+def sample_hermitian(modes, variant=0):
     representatives = tuple(sorted(set(map(representative, modes))))
     centre = (0,)*len(modes[0])
     stored = {}
     for i, k in enumerate(representatives):
-        stored[k] = (Fraction(7), Fraction(0)) if k == centre else (
-            Fraction(i - 9, 5), Fraction((3 * i % 7) - 3, 11)
+        stored[k] = (Fraction(7 + variant), Fraction(0)) if k == centre else (
+            Fraction(i + 2 * variant - 9, 5), Fraction(((3 * i + variant) % 7) - 3, 11)
         )
     return unpack_hermitian(stored, modes)
 
@@ -101,7 +101,8 @@ def audit():
     right = {k: multiply((Fraction(3),Fraction(1)),v) for k,v in left.items()}
     # Complex multiplication by a nonreal scalar destroys Hermitian symmetry.
     assert any(right[neg(k)] != conjugate(right[k]) for k in CUBE27)
-    right = sample_hermitian(tuple(reversed(CUBE27)))
+    right = sample_hermitian(CUBE27, variant=1)
+    assert right != left
     assert pack_hermitian(left, CUBE27)
     assert unpack_hermitian(pack_hermitian(left, CUBE27), CUBE27) == left
     assert unpack_hermitian(pack_hermitian(right, CUBE27), CUBE27) == right
