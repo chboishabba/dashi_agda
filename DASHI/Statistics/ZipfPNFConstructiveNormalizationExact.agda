@@ -188,3 +188,66 @@ zipfPNFConstantExpectation n shift exponent rate =
   Expected.normalizedConstantRateIsRate
     rate (zipfPNFAtoms n shift exponent)
     (zipfPNFAtomsNormalize n shift exponent)
+
+
+------------------------------------------------------------------------
+-- F13 snowball: specialize the constructed PNF law to the ALREADY-OWNED
+-- two-rank IID collision theorem. No alternative collision framework.
+-- For support 2: rank index 1 precedes index 0 in the fold.
+------------------------------------------------------------------------
+
+twoRankP : Nat → Nat → ℚ
+twoRankP shift exponent =
+  rawTerm (suc zero) shift exponent *
+  inverseNormalizer (suc zero) shift exponent
+
+twoRankQ : Nat → Nat → ℚ
+twoRankQ shift exponent =
+  rawTerm zero shift exponent *
+  inverseNormalizer (suc zero) shift exponent
+
+twoRankPPositive : ∀ shift exponent → R.Positive (twoRankP shift exponent)
+twoRankPPositive shift exponent =
+  ℚP.pos*pos⇒pos
+    (rawTerm (suc zero) shift exponent)
+    (inverseNormalizer (suc zero) shift exponent)
+    {{rawTermPositive (suc zero) shift exponent}}
+    {{inverseNormalizerPositive (suc zero) shift exponent}}
+
+twoRankQPositive : ∀ shift exponent → R.Positive (twoRankQ shift exponent)
+twoRankQPositive shift exponent =
+  ℚP.pos*pos⇒pos
+    (rawTerm zero shift exponent)
+    (inverseNormalizer (suc zero) shift exponent)
+    {{rawTermPositive zero shift exponent}}
+    {{inverseNormalizerPositive (suc zero) shift exponent}}
+
+twoRankPNormalized : ∀ shift exponent →
+  twoRankP shift exponent + twoRankQ shift exponent ≡ 1ℚ
+twoRankPNormalized shift exponent =
+  trans
+    (cong (twoRankP shift exponent +_)
+      (sym (ℚP.+-identityʳ (twoRankQ shift exponent))))
+    (zipfPNFAtomsNormalize (suc zero) shift exponent)
+
+twoRankZipfIIDLaw : Nat → Nat → Adapter.TwoRankIIDLaw
+twoRankZipfIIDLaw shift exponent =
+  Adapter.two-rank-iid-law
+    (twoRankP shift exponent)
+    (twoRankQ shift exponent)
+    (ℚP.nonNegative⁻¹ (twoRankP shift exponent)
+      {{ℚP.pos⇒nonNeg (twoRankP shift exponent)
+        {{twoRankPPositive shift exponent}}}})
+    (ℚP.nonNegative⁻¹ (twoRankQ shift exponent)
+      {{ℚP.pos⇒nonNeg (twoRankQ shift exponent)
+        {{twoRankQPositive shift exponent}}}})
+    (twoRankPNormalized shift exponent)
+    "IID with replacement on constructed finite 2-rank Zipf"
+
+twoRankZipfCollisionIdentity : ∀ shift exponent →
+  Adapter.iidTwoDrawMeanDistinct (twoRankZipfIIDLaw shift exponent)
+  + Adapter.iidTwoDrawCollision (twoRankZipfIIDLaw shift exponent)
+  ≡ Adapter.twoℚ
+twoRankZipfCollisionIdentity shift exponent =
+  Adapter.iidTwoDrawMeanPlusCollisionIsTwo
+    (twoRankZipfIIDLaw shift exponent)
