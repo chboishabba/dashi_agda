@@ -110,3 +110,24 @@ def test_majorization_mean_order_does_not_imply_variance_order():
         (ia, ib), (pa, pb) = M.majorization_expected_vocabulary_certificate(
             concentrated, dispersed, t)
         assert ia <= ib and pa <= pb
+
+
+def test_majorization_ordered_cumulative_means_do_not_order_novelty_rates():
+    from zipf_heaps_bridge import expected_iid_new_type, expected_permutation_vocabulary
+    # Uniform two-rank Zipf (s=0) against more concentrated Zipf s=1.
+    low, high = M.zipf_shape_majorization_certificate(2, 0, 1)
+    assert low == (F(1, 2), F(1, 2))
+    assert high == (F(2, 3), F(1, 3))
+    # At t=1, concentrated distribution has *lower* next-draw novelty.
+    assert expected_iid_new_type(high, 1) == F(4, 9) < F(1, 2)
+    # At t=4, rare type persistence reverses the marginal ordering.
+    assert expected_iid_new_type(high, 4) == F(2, 27) > F(1, 16)
+    for n in range(10):
+        hi, lo = M.zipf_exponent_iid_heaps_certificate(2, 0, 1, 0, n)
+        assert hi <= lo
+    # Without replacement, last-step discovery can also reverse.
+    f, g = (1, 3), (2, 2)
+    assert multiset_count_majorizes(f, g)
+    last_f = expected_permutation_vocabulary(f, 4) - expected_permutation_vocabulary(f, 3)
+    last_g = expected_permutation_vocabulary(g, 4) - expected_permutation_vocabulary(g, 3)
+    assert last_f == F(1, 4) > last_g == F(0)
