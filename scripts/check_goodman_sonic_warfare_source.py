@@ -275,8 +275,8 @@ def check() -> None:
         "commonModeSecondCoordinateRecovers",
     ):
         require(theorem in rational, f"missing T7 rational theorem {theorem}")
-    require(rational.count("r * q ≡ 1ℚ") == 2,
-            "both inverse and noise theorems must retain calibration premise")
+    require(rational.count("r * q ≡ 1ℚ") == 3,
+            "all three inverse and noise theorems must retain calibration premise")
     require(not re.search(
         r"(?m)^\s*(?:postulate|{-#\s*(?:TERMINATING|NO_POSITIVITY_CHECK)\s*#-})",
         rational),
