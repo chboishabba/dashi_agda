@@ -283,3 +283,7 @@ The previous rank-assumption-only construction is now complemented by a derived 
 
 **Current ledger tally: 60 D / 11 R / 6 N = 77.** Residual A05/C06/C09/E07/F07/H08 still require authenticated source/financial/regulatory/causal same-object evidence rather than a new free-floating synthetic theorem. Kernel typecheck and current-master convergence are separate release gates.
 
+### I07 explicit policy fixture consumption
+
+The original `policyTradeoffCosts` hyperfabric has exactly two axes, `administrationAxis` and `careShortfallAxis`. `policyTradeoffAxisCoverage` provides a complete inhabitants-by-constructor list for this axis type. `admittedCheapAdministration` and `admittedCareCapacity` provide the two already admissible/adequate source examples. `twoAxisPolicyFrontierIsNonempty` instantiates the general constructive finite-frontier theorem, exported as `toeSyntheticTwoAxisPolicyFrontierIsNonempty`. This source term shows the theorem is non-vacuous for a concrete, source-owned finite policy hyperfabric. It does NOT turn either option into an enacted policy or prove which option improves real welfare. Source-written, not Agda kernel-verified.
+
