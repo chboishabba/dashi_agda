@@ -2378,13 +2378,13 @@ finiteAxesReverseOrStrict :
 finiteAxesReverseOrStrict costs [] better worse dominates = inj₁ tt
 finiteAxesReverseOrStrict costs (axis ∷ rest) better worse dominates
   with Pareto.cost costs axis worse ≤? Pareto.cost costs axis better
-... | no notReverse =
+     | finiteAxesReverseOrStrict costs rest better worse dominates
+... | no notReverse | _ =
   inj₂ (finite-axis-strict-witness axis ranked-here
     (finiteNatStrictFromNoReverse (dominates axis) notReverse))
-... | yes reverseHead
-  with finiteAxesReverseOrStrict costs rest better worse dominates
-... | inj₁ reverseTail = inj₁ (reverseHead , reverseTail)
-... | inj₂ witnessTail =
+... | yes reverseHead | inj₁ reverseTail =
+  inj₁ (reverseHead , reverseTail)
+... | yes reverseHead | inj₂ witnessTail =
   inj₂ (finite-axis-strict-witness (improvedAxis witnessTail)
     (ranked-there (improvedAxisListed witnessTail))
     (improvedAxisStrict witnessTail))
