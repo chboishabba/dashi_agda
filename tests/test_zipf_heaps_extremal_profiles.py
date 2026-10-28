@@ -61,3 +61,28 @@ def test_input_domain_rejects_missing_and_zero_types():
     for c in ((), (2, 0), (True, 1), (1, -1), (1, 1.0)):
         with pytest.raises(ValueError): H.extremal_multiset_token_orders(c)
         with pytest.raises(ValueError): H.multiset_heaps_area_gap(c)
+
+
+def test_majorization_strengthens_temporal_gap_on_exhaustive_count_pairs():
+    for k in (2, 3, 4):
+        all_counts = list(product((1, 2, 3, 4), repeat=k))
+        for a in all_counts:
+            for b in all_counts:
+                if sum(a) != sum(b) or not H.multiset_count_majorizes(a, b):
+                    continue
+                a_gap, b_gap = H.majorization_heaps_temporal_gap_certificate(a, b)
+                assert a_gap >= b_gap
+                # Independently computed weighted-surplus identity.
+                aa = sorted(a, reverse=True)
+                assert a_gap == sum((k-i-1)*(aa[i]-1) for i in range(k))
+
+
+def test_majorization_is_partial_not_universal_or_numerology():
+    # Sorted (5,2,2) and (4,4,1) are incomparable: top1 higher on left,
+    # top2 higher on right.
+    assert not H.multiset_count_majorizes((5,2,2), (4,4,1))
+    assert not H.multiset_count_majorizes((4,4,1), (5,2,2))
+    assert H.majorization_heaps_temporal_gap_certificate((6,2,1), (3,3,3))[0] > 0
+    with pytest.raises(ValueError):
+        H.majorization_heaps_temporal_gap_certificate((5,2,2), (4,4,1))
+    with pytest.raises(ValueError): H.multiset_count_majorizes((3,2), (3,2,1))
