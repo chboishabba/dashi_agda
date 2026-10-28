@@ -362,6 +362,7 @@ def main() -> None:
     for symbol in ("bellHooks2000", "baudrillard1981", "kropotkin1892"):
         assert symbol in social_source, f"original philosophical author omitted: {symbol}"
     assert "test_canonical_funding_batch_no_double_count" in script, ("source canonicalization adversarial oracle missing")
+    assert "test_canonical_funding_payment_route_weld" in script, ("same-route funded payment weld oracle missing")
     assert "test_ai_proposed_idle_equity_schedule_is_not_victoria_vrlt" in script, (
         "proposal versus actual-law negative-control regression absent"
     )
