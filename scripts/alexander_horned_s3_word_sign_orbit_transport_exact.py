@@ -55,6 +55,7 @@ def check():
     for n in range(8):
         by_partition={}
         by_sign={}
+        representative_by_sign={}
         for tail in trits(n+1):
             total+=1
             partition=rgs(tail)
@@ -63,6 +64,13 @@ def check():
             assert old==signed
             other=by_sign.setdefault(signed,partition)
             assert other==partition
+            representative=representative_by_sign.setdefault(signed,tail)
+            target_d=relative(representative)
+            my_d=relative(tail)
+            chosen_sign=1 if my_d==target_d else -1
+            assert tuple((chosen_sign*v)%3 for v in my_d)==target_d
+            chosen_shift=(representative[0]-chosen_sign*tail[0])%3
+            assert transform(tail,chosen_shift,chosen_sign)==representative
             for shift,sgn in product(range(3),(-1,1)):
                 moved=transform(tail,shift,sgn)
                 assert sign_orbit(relative(moved))==signed
