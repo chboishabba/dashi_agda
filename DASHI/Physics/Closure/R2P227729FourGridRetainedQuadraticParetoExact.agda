@@ -93,6 +93,66 @@ eqFourCube (fourCube a b c) (fourCube x y z) =
     (Conv._&&B_ (eqFour a x) (eqFour b y))
     (eqFour c z)
 
+------------------------------------------------------------------------
+-- This IS the group addition table for Z/4, not merely a custom
+-- comparison of residues after already knowing the integer result.
+-- Encoding each input first and adding in this group gives the same
+-- four-residue label as taking the true integer Fourier sum and folding.
+------------------------------------------------------------------------
+
+fourGroupAdd : FourGridMode → FourGridMode → FourGridMode
+fourGroupAdd fourZero x = x
+fourGroupAdd fourMinusOne fourZero = fourMinusOne
+fourGroupAdd fourMinusOne fourMinusOne = fourOuterTwo
+fourGroupAdd fourMinusOne fourPlusOne = fourZero
+fourGroupAdd fourMinusOne fourOuterTwo = fourPlusOne
+fourGroupAdd fourPlusOne fourZero = fourPlusOne
+fourGroupAdd fourPlusOne fourMinusOne = fourZero
+fourGroupAdd fourPlusOne fourPlusOne = fourOuterTwo
+fourGroupAdd fourPlusOne fourOuterTwo = fourMinusOne
+fourGroupAdd fourOuterTwo fourZero = fourOuterTwo
+fourGroupAdd fourOuterTwo fourMinusOne = fourPlusOne
+fourGroupAdd fourOuterTwo fourPlusOne = fourMinusOne
+fourGroupAdd fourOuterTwo fourOuterTwo = fourZero
+
+fourGroupMatchesTrueSignedPairSum :
+  (a b : M.ThreeMode) →
+  fourGroupAdd
+    (foldFour (retainedAsWideMode a))
+    (foldFour (retainedAsWideMode b))
+    ≡ foldFour (M.exactQuadraticModeSum a b)
+fourGroupMatchesTrueSignedPairSum M.modeMinus M.modeMinus = refl
+fourGroupMatchesTrueSignedPairSum M.modeMinus M.modeZero = refl
+fourGroupMatchesTrueSignedPairSum M.modeMinus M.modePlus = refl
+fourGroupMatchesTrueSignedPairSum M.modeZero M.modeMinus = refl
+fourGroupMatchesTrueSignedPairSum M.modeZero M.modeZero = refl
+fourGroupMatchesTrueSignedPairSum M.modeZero M.modePlus = refl
+fourGroupMatchesTrueSignedPairSum M.modePlus M.modeMinus = refl
+fourGroupMatchesTrueSignedPairSum M.modePlus M.modeZero = refl
+fourGroupMatchesTrueSignedPairSum M.modePlus M.modePlus = refl
+
+inputToFourGrid : I.ModeCube27 → FourGridCube64
+inputToFourGrid (I.modeCube a b c) =
+  fourCube
+    (foldFour (retainedAsWideMode a))
+    (foldFour (retainedAsWideMode b))
+    (foldFour (retainedAsWideMode c))
+
+fourGridGroupSum :
+  FourGridCube64 → FourGridCube64 → FourGridCube64
+fourGridGroupSum (fourCube a b c) (fourCube d e f) =
+  fourCube (fourGroupAdd a d) (fourGroupAdd b e) (fourGroupAdd c f)
+
+fourGridGroupSumMatchesIntegerPair :
+  (p q : I.ModeCube27) →
+  fourGridGroupSum (inputToFourGrid p) (inputToFourGrid q)
+    ≡ wideToFourGrid (Conv.exactPairOutput p q)
+fourGridGroupSumMatchesIntegerPair
+  (I.modeCube a b c) (I.modeCube d e f)
+  rewrite fourGroupMatchesTrueSignedPairSum a d
+        | fourGroupMatchesTrueSignedPairSum b e
+        | fourGroupMatchesTrueSignedPairSum c f = refl
+
 fourGridRetainedCubeMembership :
   (wide : Conv.WideCube125) (retained : I.ModeCube27) →
   eqFourCube (wideToFourGrid wide)
@@ -111,7 +171,7 @@ fourGridPairContribution :
 fourGridPairContribution target amplitude (p , q) =
   Conv.weightIf
     (eqFourCube
-      (wideToFourGrid (Conv.exactPairOutput p q))
+      (fourGridGroupSum (inputToFourGrid p) (inputToFourGrid q))
       (wideToFourGrid (Conv.retainedToWide target)))
     (amplitude p * amplitude q)
 
@@ -122,8 +182,9 @@ fourGridPairCorrect :
   fourGridPairContribution target amplitude pair
     ≡ Conv.exactPairContribution (Conv.retainedToWide target) amplitude pair
 fourGridPairCorrect target amplitude (p , q)
-  rewrite fourGridRetainedCubeMembership
-    (Conv.exactPairOutput p q) target = refl
+  rewrite fourGridGroupSumMatchesIntegerPair p q
+        | fourGridRetainedCubeMembership
+            (Conv.exactPairOutput p q) target = refl
 
 fourGridRetainedConvolutionAt :
   (amplitude : I.ModeCube27 → Nat) →
