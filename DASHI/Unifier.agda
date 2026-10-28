@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as R2P2Lattice
 import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as R2P2Symbolic
 import DASHI.Physics.Closure.R2P2369WaveOpticalCombInformationCutExact as R2P2Wave
 import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as R2P2Loop
@@ -1800,3 +1801,29 @@ unifierR2P2WaveNoPhysicalPhasePromotion :
     R2P2Wave.canonicalWaveCombAuthorityBoundary ≡ false
 unifierR2P2WaveNoPhysicalPhasePromotion =
   R2P2Wave.waveBridgeDoesNotCalibratePhysicalPhase
+
+------------------------------------------------------------------------
+-- Same-clock optical-lattice control boundary: imported finite witness.
+-- Ma 87Sr AA, Bothwell/Ye Sr and R2P2 Yb remain distinct instruments.
+------------------------------------------------------------------------
+
+unifierR2P2FiniteLatticeNoncommuting :
+  R2P2Lattice.nearestNeighbourAdjacency
+    (R2P2Lattice.siteDependentPotential R2P2Lattice.leftBasisState)
+  ≡ R2P2Lattice.siteDependentPotential
+    (R2P2Lattice.nearestNeighbourAdjacency R2P2Lattice.leftBasisState)
+  → R2P2Lattice.⊥
+unifierR2P2FiniteLatticeNoncommuting =
+  R2P2Lattice.finiteLatticeOperatorsFailToCommute
+
+unifierR2P2NoInfiniteAAFromFinite3 :
+  R2P2Lattice.finiteP3ProvesInfiniteAAThreshold
+    R2P2Lattice.canonicalOpticalLattice369PhysicalAuthority ≡ false
+unifierR2P2NoInfiniteAAFromFinite3 =
+  R2P2Lattice.latticeCannotProveInfiniteAAThreshold
+
+unifierR2P2OpticalLatticeNotQuantumGravity :
+  R2P2Lattice.measuredQuantumGravityObserved
+    R2P2Lattice.canonicalOpticalLattice369PhysicalAuthority ≡ false
+unifierR2P2OpticalLatticeNotQuantumGravity =
+  R2P2Lattice.latticeDoesNotObserveQuantumGravity
