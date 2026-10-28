@@ -389,3 +389,29 @@ The script uses only Python `fractions.Fraction` and the standard library. At ea
 **Research exit requirements.** For a future *physical* claim, obtain (1) dated source and receiver data with units and calibration chain, (2) independent medium/geometry instrumentation, (3) declared noise/discrepancy budget and conditioning at the operating point, (4) a frozen matched baseline and held-out data partition, and (5) independent repetition. For *human* responses, add appropriate consent/ethics, outcome definitions, safe exposure and causal identification design. Do not substitute DOI links, synthetic checks, ordinary transfer models, or GitHub source files for these receipts. No harmful acoustic optimisation is part of this work.
 
 **Pareto stop**: T5 and T6 identify two different obstructions (missing observables and sensitivity to error). No further source abstraction should be promoted as a physical result without a real measured discriminator. Exact-head Agda compiler verification of all new source-written theorems remains open.
+
+## T7 rational inverse algebra — source-written conditional proof, not an inferred field equation
+
+The T6 Python regression already showed six exact-rational instances of loss of **uniform** inverse stability. The mathematical next cut is to express the **conditional algebraic recovery step** in Agda, not to inflate the test count.
+
+**New owner:** `DASHI/Culture/GoodmanSonicWarfareRationalInverseExact.agda`, imported from the existing Goodman transport module. It directly reuses the canonical `Data.Rational.Base`, `Data.Rational.Properties`, and `Data.Rational.Tactic.RingSolver` from agda-stdlib; no new arithmetic axiom or generic ring proof owner is claimed. Jacques Hadamard's prior inverse-problem theory and the original standard-library mathematics retain their ownership.
+
+For **arbitrary rational** `q, r, x, y, δ`, define the synthetic observation and reconstruction:
+
+```text
+forwardTriangular q (x,y) = (x, x + q*y)
+recoverTriangular r (a,b) = (a, r*(b-a))
+```
+
+- `ringCancellation`: `r*((x+q*y)-x) = (r*q)*y`, via inherited rational `solve`.
+- `calibratedInverseRoundtrip`: **if a separate certificate supplies `r*q=1`**, then reconstruction after forward observation returns exactly `(x,y)`.
+- `ringPerturbation`: `r*((x+q*y+δ)-x) = (r*q)*y + r*δ`, via inherited rational `solve`.
+- `calibratedPerturbation`: with the same **explicit** `r*q=1` certificate, the recovered hidden second coordinate under added observation error `δ` is `y + r*δ`.
+
+This separates the mathematical *dependency on a calibrated inverse coefficient* from the independent physical evidence required to obtain that coefficient and to bound its magnitude. It generalizes the algebraic structure of T6, but **does not prove** that an acoustic field really has this 2×2 triangular transfer map. It also does not yet prove the `∀n` condition-number formula in Agda. The latter remains an exact-rational external computation plus straightforward algebraic mathematics, not a promoted kernel theorem.
+
+A missing or erroneous value of `r` is an unfulfilled inverse-calibration obligation; a missing physical observation or held-out test is an unfulfilled measurement obligation. The formal source itself must pass an exact-head Agda kernel check before the source-written rational identities may be described as kernel verified. No kernel run was available in this environment.
+
+**Latest PR comparison:** [#1407](https://github.com/chboishabba/dashi_agda/pull/1407) now includes binary/ternary three-mode Fourier aliasing and a finite Navier–Stokes Leray-projection example. Its original source owner and synthetic-test limitations remain **separate**. It is a useful reminder that sampled signals can lose mode identity, but the unmerged branch is not imported as an acoustics theorem. [#1411](https://github.com/chboishabba/dashi_agda/pull/1411) keeps evidence-generation licences distinct from semantic authority; [#1412](https://github.com/chboishabba/dashi_agda/pull/1412) introduces explicit reprojection-quality failures. This T7 adapter likewise demands an independent calibration premise, rather than silently treating a numerical or source label as adequate measurement.
+
+**Pareto conclusion:** We now have a hierarchy of claims: (1) finite observer identifiability; (2) a finite Pareto-minimal observation pair; (3) conditional rational inversion and exact error propagation; (4) independent numerical evidence of deteriorating condition numbers across a family; and (5) a not-yet-paid calibrated physical-data and empirical-causality frontier. All original Goodman, soundscape, Hadamard, Agda-library, Ibrahim/snowball and Monster 3B source/proof ownership stays separate. New proof wrappers do not discharge (5).
