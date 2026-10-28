@@ -1,0 +1,56 @@
+name: R2P2 369 optical-clock max-cut
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/R2P2*.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'scripts/r2p2_clock_comparison_diagnostic.py'
+      - 'tests/test_r2p2_*.py'
+      - 'Docs/papers/R2P2*.md'
+      - '.github/workflows/r2p2-369-maxcut.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2p2-369-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  finite-and-provenance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run all R2P2 exact arithmetic, readback and provenance tests
+        run: |
+          python -m unittest discover -s tests -p 'test_r2p2_*.py' -v
+          python scripts/r2p2_clock_comparison_diagnostic.py
+
+  focused-agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: DeterminateSystems/nix-installer-action@v3
+      - name: Agda type-check new finite R2P2 proof owners
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2MountainOpticalClockComparisonExact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2ClockBiasIdentifiabilityMaxCutExact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda
+      - name: Agda type-check canonical TOE roots
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/EverythingTOESymmetryResolved369.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Unifier.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Unified/Everything.agda
