@@ -449,6 +449,46 @@ euCommissionWealthTax2026 = tax-source-receipt
   "2026 comparative wealth-related-tax designs and jurisdictional examples; existence of review does not establish effects for each instrument"
   "individual authors and European Commission sponsor retain original work; the report does not prove that a synthetic hard cap works"
 
+
+------------------------------------------------------------------------
+-- 2026-10-28 PRIMARY-SOURCE SNOWBALL, ORIGINAL ESTIMAND BOUNDARIES.
+-- A sole-author contemporary Norwegian study must not be collapsed into
+-- the different May coauthored portfolio study or October AER panel.
+------------------------------------------------------------------------
+
+ringEntrepreneurialNorway2026 : TaxSourceReceipt
+ringEntrepreneurialNorway2026 = tax-source-receipt
+  "Marius A. K. Ring (sole original author)"
+  "Taxing Entrepreneurial Wealth: Evidence from Norway, 2021-2025; NBER Working Paper 35854; October 2026; DOI 10.3386/w35854"
+  "https://www.nber.org/papers/w35854"
+  scholarlyEmpiricalEstimate conditionalResearchEstimate
+  "Norwegian 2021-2024 reforms combining business-wealth, dividends and migration-related capital-gains rules; estimated reform-related migration reduced modeled 2021-2024 wealth-tax revenue increase from 75 percent without migration to 71.5 percent; study reports no evidence of post-reform lower firm investment, higher dividends or more bankruptcies in analyzed samples"
+  "Working-paper estimated short-run nulls and reforms jointly varying policy instruments; not proof of universal zero effect, no migration, a single wealth-tax isolated coefficient, or a hypothetical 100 percent hard cap"
+
+data WealthTaxStudyEstimand : Set where
+  norwegianPortfolioEquityPremiumAllocation : WealthTaxStudyEstimand
+  norwegianJointReformFirmMigrationResponse : WealthTaxStudyEstimand
+  scandinavianRateMigrationAggregateResponse : WealthTaxStudyEstimand
+
+ringFirmResponseIsNotFagerengPortfolioResponse :
+  norwegianJointReformFirmMigrationResponse
+    ≡ norwegianPortfolioEquityPremiumAllocation → ⊥
+ringFirmResponseIsNotFagerengPortfolioResponse ()
+
+ringFirmResponseIsNotJakobsenAggregateResponse :
+  norwegianJointReformFirmMigrationResponse
+    ≡ scandinavianRateMigrationAggregateResponse → ⊥
+ringFirmResponseIsNotJakobsenAggregateResponse ()
+
+fagerengPortfolioIsNotJakobsenMigrationEstimate :
+  norwegianPortfolioEquityPremiumAllocation
+    ≡ scandinavianRateMigrationAggregateResponse → ⊥
+fagerengPortfolioIsNotJakobsenMigrationEstimate ()
+
+-- Sharing one coauthor or Norwegian data does not make independent
+-- estimands identical. Equally, disjoint estimands alone do not establish
+-- independent sampling, independent verification or causal truth.
+
 ------------------------------------------------------------------------
 -- NO SOURCE OR SCENARIO CAN AUTOMATICALLY CERTIFY A CAUSAL POLICY EFFECT.
 ------------------------------------------------------------------------
