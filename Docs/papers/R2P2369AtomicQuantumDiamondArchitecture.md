@@ -114,6 +114,20 @@ Further evidence snowball, without importing these unrelated object identities:
 - **Ma et al. (2026-10-14 arXiv v2)**, *An Aubry–André localized optical lattice clock*, https://arxiv.org/abs/2610.17499 . A physically separate localisation and space-clock preparation result, not demonstrated by the 369 refinement index.
 - **Ganapathy, Singh, Singamsetty, Kolkowitz (2026-10-16 accepted)**, *Gravitational-wave astronomy with a space-based optical clock network*, DOI https://doi.org/10.1103/xr78-l2zs . A separate instrument concept; gravitational-wave capability and quantum gravity should not be conflated.
 
+## Native 369 wave/phase bridge added on 28 October 2026
+
+**Exact formal source/attribution note:** [R2P2369WaveOpticalCombInformationCut.md](R2P2369WaveOpticalCombInformationCut.md), and `DASHI/Physics/Closure/R2P2369WaveOpticalCombInformationCutExact.agda`.
+
+This answers the additional 369 wave request **by importing, not rewriting**, the original `Base369WaveContinuousSymbolicCodingExact`, `Base369SymmetryWaveRound9Validation`, `IndexedRelationalPadicWaveContinuousAdaptersExact`, `IntersectionalNonFactorability`, `ShiftWaveRefinementSeam`, `WaveAlgorithmLift`, `Base369PhaseBridge`, `Base369PolyphaseKernelBoundary`, and `QuantumClockDimensionlessObservableLaw`. The `WaveAlgorithmLift`'s conditional norm/unitarity/continuum obligations remain unchanged.
+
+**New concrete max-cut**: the existing source-written comb examples `ν_n=3×10+2=32 Hz`, `ν_+=36 Hz`, `ν_-=28 Hz` have a common unsigned beat magnitude `|f_beat|=4 Hz`. The chosen coarse trit observer merges them. The original nonfactorability theorem then proves *no reconstruction from this trit alone exists*, and the generic recharting theorem proves *no subsequent renaming or chart of the trit restores the sign*. Conversely the source-owned 369 wave `encode` keeps the full branch in its exact carrier fibre, so `decodeAfterEncode` and its experimental-projection consumer agree definitionally. This provides a **real application of the existing 369 wave construction to an optical metrology information-loss boundary**. It does not make 369 a physical optical frequency or gravity law.
+
+The original Base369 physics-phase bridge gives a second important guard: `q6` and `q9` are each equivariant for their declared rotations, but `coarseNonaryBlock` is **not** equivariant under the same one-step projection. The new adapter imports the existing obstruction, rather than claiming every 3/6/9 quotient respects every phase operation.
+
+**Relevant primary research**: Caldwell–Triano–Sinclair 2025 https://doi.org/10.1364/AOP.545290 ; NIST OTWTFT https://www.nist.gov/programs-projects/optical-two-way-time-frequency-transfer ; Sinclair et al. 2023 https://www.nist.gov/publications/impact-strong-atmospheric-turbulence-two-way-optical-time-transfer ; and Krelina et al., quantum synchronization review (2026-10-26), https://link.springer.com/article/10.1140/epjqt/s40507-026-00576-x . None identifies a 369 trit with real optical carrier phase or makes the observed R2P2 classical redshift a quantum-gravity measurement.
+
+**Integration:** new wave adapter imported in the experiment architecture and three TOE roots. Test: `tests/test_r2p2_369_wave_optical_comb_cut.py`; focused Nix/Agda check added to `.github/workflows/r2p2-369-maxcut.yml`. No Agda kernel or Python checkout execution is implied by file creation.
+
 ## Scope, limits, verification (S/L/P/G/F)
 
 **Built**: complete type-level *logical* path; reused 369 atomic/field index; both diamonds; finite C3/Weyl certificates; SI second owner; two-way transfer obligations; external redshift bridge; source and evidence guards; tests and TOE root imports.
@@ -140,12 +154,14 @@ Further evidence snowball, without importing these unrelated object identities:
 ```sh
 python3 tests/test_r2p2_mountain_optical_clock.py
 python3 tests/test_r2p2_369_atomic_quantum_diamond.py
+python3 tests/test_r2p2_369_wave_optical_comb_cut.py
 python3 tests/test_r2p2_clock_comparison_diagnostic.py
 python3 tests/test_r2p2_clock_bias_identifiability.py
 python3 tests/test_r2p2_three_clock_loop_closure.py
 python3 scripts/r2p2_clock_comparison_diagnostic.py
 agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2ClockBiasIdentifiabilityMaxCutExact.agda
 agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2ThreeClockLoopClosure369Exact.agda
+agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2369WaveOpticalCombInformationCutExact.agda
 agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda
 ```
 
