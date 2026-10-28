@@ -133,23 +133,20 @@ regimeObservation r = PDA.observe (lens r)
 totalMDL : ∀ {O} → RegimePDA O → RegimeState → CodeLength
 totalMDL r s = PDA.costPDA (lens r) + regimeMDL (policy r) (weights r) s
 
+headAssignment : List Assignment → Assignment
+headAssignment [] = assignment zero alongWarp
+headAssignment (a ∷ as) = a
+
 switchPreservesGrainAtHead :
   (newFabric oldFabric : Nat) (g : Grain) (rest : List Assignment) →
-  grain (AssignmentHead (switchAt zero newFabric (assignment oldFabric g ∷ rest)))
-  ≡ g
-  where
-    AssignmentHead : List Assignment → Assignment
-    AssignmentHead [] = assignment zero alongWarp
-    AssignmentHead (x ∷ xs) = x
+  grain (headAssignment (switchAt zero newFabric
+    (assignment oldFabric g ∷ rest))) ≡ g
 switchPreservesGrainAtHead newFabric oldFabric g rest = refl
 
 rotatePreservesFabricAtHead :
   (f : Nat) (g : Grain) (rest : List Assignment) →
-  fabricCode (headAssignment (rotateAt zero (assignment f g ∷ rest))) ≡ f
-  where
-    headAssignment : List Assignment → Assignment
-    headAssignment [] = assignment zero alongWarp
-    headAssignment (a ∷ as) = a
+  fabricCode (headAssignment (rotateAt zero
+    (assignment f g ∷ rest))) ≡ f
 rotatePreservesFabricAtHead f g rest = refl
 
 -- Regression fixtures. These check the exact state transitions.
