@@ -183,3 +183,64 @@ allPairProductPeriodicBack :
 allPairProductPeriodicBack axes n =
   allPairCommonPeriodicBack axes (modulusProduct axes) n
     (productIsCommonPeriod axes)
+
+------------------------------------------------------------------------
+-- Finite filter symmetry, with no duplicate-prime promotion.
+--
+-- Reordering constraints has no effect on the truth of a conjunction.
+-- Repeating a prime modulus adds no new arithmetic information.
+-- These are the exact safe symmetries that coexist with the SSP
+-- prime-identity-preserving address action.
+------------------------------------------------------------------------
+
+swapFirstTwoPrimeFilters :
+  (first second : Pair.CertifiedPrimeAxis) →
+  (rest : List Pair.CertifiedPrimeAxis) →
+  (n : Nat) →
+  Pair.AllPairSurvive (first ∷ second ∷ rest) n →
+  Pair.AllPairSurvive (second ∷ first ∷ rest) n
+swapFirstTwoPrimeFilters first second rest n
+  (firstProof , (secondProof , tail)) =
+  secondProof , (firstProof , tail)
+
+swapFirstTwoFiltersInvolution :
+  (first second : Pair.CertifiedPrimeAxis) →
+  (rest : List Pair.CertifiedPrimeAxis) →
+  (n : Nat) →
+  (witness : Pair.AllPairSurvive (first ∷ second ∷ rest) n) →
+  swapFirstTwoPrimeFilters second first rest n
+    (swapFirstTwoPrimeFilters first second rest n witness)
+    ≡ witness
+swapFirstTwoFiltersInvolution first second rest n
+  (firstProof , (secondProof , tail)) = refl
+
+duplicatePrimeFilterErases :
+  (axis : Pair.CertifiedPrimeAxis) →
+  (rest : List Pair.CertifiedPrimeAxis) →
+  (n : Nat) →
+  Pair.AllPairSurvive (axis ∷ axis ∷ rest) n →
+  Pair.AllPairSurvive (axis ∷ rest) n
+duplicatePrimeFilterErases axis rest n
+  (first , (second , tail)) =
+  first , tail
+
+duplicatePrimeFilterInserts :
+  (axis : Pair.CertifiedPrimeAxis) →
+  (rest : List Pair.CertifiedPrimeAxis) →
+  (n : Nat) →
+  Pair.AllPairSurvive (axis ∷ rest) n →
+  Pair.AllPairSurvive (axis ∷ axis ∷ rest) n
+duplicatePrimeFilterInserts axis rest n
+  (first , tail) =
+  first , (first , tail)
+
+duplicatePrimeFilterRoundTrip :
+  (axis : Pair.CertifiedPrimeAxis) →
+  (rest : List Pair.CertifiedPrimeAxis) →
+  (n : Nat) →
+  (witness : Pair.AllPairSurvive (axis ∷ rest) n) →
+  duplicatePrimeFilterErases axis rest n
+    (duplicatePrimeFilterInserts axis rest n witness)
+    ≡ witness
+duplicatePrimeFilterRoundTrip axis rest n
+  (first , tail) = refl
