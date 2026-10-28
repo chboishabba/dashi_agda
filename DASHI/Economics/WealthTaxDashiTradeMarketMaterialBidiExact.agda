@@ -2731,3 +2731,94 @@ officialSettlementIsNotBeneficiaryAllocation ()
 -- institution's statement about its system does not authenticate a
 -- particular simulated DvP batch, HIN, SRN, nominee, tax or taxpayer.
 
+------------------------------------------------------------------------
+-- C06 x C01: EXACT CANONICAL FUNDING BATCH TO TAX-PAYMENT WELD.
+--
+-- This composes existing source proof owners.  The join includes an
+-- explicit equation from the *same finite batch* to the selected route.
+-- No cross-record join can be inferred from an equal total alone.
+------------------------------------------------------------------------
+
+fundingCashSubtotal : List TaggedFundingReceipt → Nat
+fundingCashSubtotal [] = zero
+fundingCashSubtotal (entry ∷ rest) =
+  cashContribution entry + fundingCashSubtotal rest
+
+fundingLoanSubtotal : List TaggedFundingReceipt → Nat
+fundingLoanSubtotal [] = zero
+fundingLoanSubtotal (entry ∷ rest) =
+  loanContribution entry + fundingLoanSubtotal rest
+
+fundingSaleSubtotal : List TaggedFundingReceipt → Nat
+fundingSaleSubtotal [] = zero
+fundingSaleSubtotal (entry ∷ rest) =
+  saleContribution entry + fundingSaleSubtotal rest
+
+record CanonicalFundingRouteWeld
+    (Claim : Set) (canonicalClaimToken : Claim → Nat) : Set where
+  constructor canonical-funding-route-weld
+  field
+    canonicalSourceBatch : CanonicalFundingBatch Claim canonicalClaimToken
+    samePaymentRoute : FundingRoute
+
+    cashChannelMatchesRoute :
+      fundingCashSubtotal
+        (fundingEntryTags (fundingClaims canonicalSourceBatch))
+      ≡ unrestrictedCash samePaymentRoute
+    loanChannelMatchesRoute :
+      fundingLoanSubtotal
+        (fundingEntryTags (fundingClaims canonicalSourceBatch))
+      ≡ newLoanCash samePaymentRoute
+    saleChannelMatchesRoute :
+      fundingSaleSubtotal
+        (fundingEntryTags (fundingClaims canonicalSourceBatch))
+      ≡ grossSaleCash samePaymentRoute
+
+    -- This is a *required* same-batch accounting receipt, not inferred
+    -- from the independent per-channel equalities. It prevents an
+    -- unchecked shuffle across the three payment sources.
+    completeBatchMatchesPaymentRoute :
+      fundingPartitionTotal
+        (fundingEntryTags (fundingClaims canonicalSourceBatch))
+      ≡ unrestrictedCash samePaymentRoute
+          + newLoanCash samePaymentRoute
+          + grossSaleCash samePaymentRoute
+open CanonicalFundingRouteWeld public
+
+canonicalFundingBatchExactlyFundsTaxPaymentAndFees :
+  {Claim : Set} {canonicalClaimToken : Claim → Nat} →
+  (weld : CanonicalFundingRouteWeld Claim canonicalClaimToken) →
+  fundingReceiptsTotal
+    (fundingEntryTags (fundingClaims (canonicalSourceBatch weld)))
+  ≡ Tax.taxPaidCash (taxExecution (samePaymentRoute weld))
+     + executionCashCost (samePaymentRoute weld)
+canonicalFundingBatchExactlyFundsTaxPaymentAndFees weld =
+  trans
+    (sym (canonicalFundingTotalsReconcile (canonicalSourceBatch weld)))
+    (trans (completeBatchMatchesPaymentRoute weld)
+      (fundingBalances (samePaymentRoute weld)))
+
+-- Positive fixture reuses the preexisting asset-sale payment route.
+-- Three units of local sale proceeds pay two local units of tax and
+-- one unit of execution cost; this is NOT a market trade.
+fixtureSaleClaim : CanonicalFundingEntry Nat (λ n → n)
+fixtureSaleClaim =
+  canonical-funding-entry 3
+    (tagged-funding-receipt 3 settledSaleChannel 3) refl
+
+fixtureSaleBatch : CanonicalFundingBatch Nat (λ n → n)
+fixtureSaleBatch =
+  canonical-funding-batch (fixtureSaleClaim ∷ []) (tt , tt)
+
+fixtureSaleRouteWeld : CanonicalFundingRouteWeld Nat (λ n → n)
+fixtureSaleRouteWeld =
+  canonical-funding-route-weld fixtureSaleBatch assetSaleFunded
+    refl refl refl refl
+
+fixtureSaleFundedTwoTaxAndOneFee :
+  fundingReceiptsTotal
+    (fundingEntryTags (fundingClaims (canonicalSourceBatch fixtureSaleRouteWeld)))
+  ≡ 3
+fixtureSaleFundedTwoTaxAndOneFee =
+  canonicalFundingBatchExactlyFundsTaxPaymentAndFees fixtureSaleRouteWeld
+
