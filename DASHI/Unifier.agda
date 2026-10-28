@@ -4,6 +4,9 @@ open import Data.Maybe using (just)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeNSCut
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Convolution729
 import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as Bilinear729
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as OriginalAntipodalSym729
+import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as HermitianSym729
+import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as AntipodalSym729
 import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourGridPareto729
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fourier729Core
 import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as PeriodicFourier729
@@ -1981,3 +1984,48 @@ unifierFourGridDoesNotIdentifyOuterTwoFrequencies :
     ≡ FourGridPareto729.foldFour ModeNSCut.widePlusTwo
 unifierFourGridDoesNotIdentifyOuterTwoFrequencies =
   FourGridPareto729.outerFrequencyCollisionAtFour
+
+------------------------------------------------------------------------
+-- Original strict global antipodes: 27=centre+13 pairs and
+-- 9=centre+4 pairs. Source Q(omega) Hermitian real-field packing
+-- is invertible, but bare orbit labels cannot encode convolution.
+-- This is NOT the D4 irreducible-character count or Monster3B action.
+------------------------------------------------------------------------
+
+unifierFiveOrbitNineSymmetry :
+  OriginalAntipodalSym729.antipodalClass9Count ≡ 5
+unifierFiveOrbitNineSymmetry =
+  AntipodalSym729.sourceFiveNineOrbitCount
+
+unifierThirteenPairsTwentySevenSymmetry :
+  27 ≡ 1 + 13 * 2
+unifierThirteenPairsTwentySevenSymmetry =
+  AntipodalSym729.sourceThirteenNonzeroPairs
+
+unifierHermitianThirteenPairRoundTrip :
+  (s : HermitianSym729.Hermitian27)
+  (mode : Fourier729.ModeCube27) →
+  HermitianSym729.packedMode
+    (HermitianSym729.packHermitian27 s) mode
+    ≡ HermitianSym729.coefficient s mode
+unifierHermitianThirteenPairRoundTrip =
+  HermitianSym729.decodeAfterEncodeHermitian27
+
+unifierHermitianFiveNineRoundTrip :
+  (s : HermitianSym729.Hermitian9)
+  (plane : AntipodalSym729.Plane9) →
+  HermitianSym729.packedPlane9
+    (HermitianSym729.packHermitian9 s) plane
+    ≡ HermitianSym729.coefficient9 s plane
+unifierHermitianFiveNineRoundTrip =
+  HermitianSym729.decodeAfterEncodeHermitian9
+
+unifierTrueIntegerPairNegationCovariance :
+  (p q : Fourier729.ModeCube27) →
+  Convolution729.exactPairOutput
+    (AntipodalSym729.negateCube p)
+    (AntipodalSym729.negateCube q)
+    ≡ AntipodalSym729.negateWideCube
+        (Convolution729.exactPairOutput p q)
+unifierTrueIntegerPairNegationCovariance =
+  AntipodalSym729.trueIntegerQuadraticPairSumNegationEquivariance
