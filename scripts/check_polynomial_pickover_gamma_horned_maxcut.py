@@ -20,6 +20,15 @@ def p_valuation_factorial(n, p):
         acc += n
     return acc
 
+def subfactorial(n):
+    """Number of derangements !n; prefix exclamation is NOT n!."""
+    if n == 0:
+        return 1
+    a, b = 1, 0
+    for k in range(2, n+1):
+        a, b = b, (k-1)*(a+b)
+    return b
+
 def perm_compose(p,q):
     return tuple(p[q[i]] for i in range(len(p)))
 
@@ -69,6 +78,8 @@ def main():
     # Radians: M mod 360 is NOT M mod (2*pi).
     # We DO NOT test or claim the sign of sin(99^(9999!)) in radians.
 
+    assert sum(all(p[i]!=i for i in range(5))
+               for p in permutations(range(5)))==44
     p5=tuple(permutations(range(5)))
     a5={p for p in p5 if parity(p)==0}
     assert len(p5)==120 and len(a5)==60
@@ -92,7 +103,7 @@ def main():
 
     print("PASS: exact factorial exponent, Gamma(10000) recurrence index,")
     print("      valuation(9999!) =",valuations)
-    print("      M mod 9,11,101,360,9999 =",residues)
+    print("      M mod 9,11,101,360,9999 =",residues)\n    print("      99^(!9999) residues (different target) =",sub_residues)
     print("      81 degrees => positive sine; radians => NOT DETERMINED")
     print("      S5=120; A5=60 perfect finite; triple×parity=60×2")
     print("      A,B overlapping 3-cycles recover commutator")
