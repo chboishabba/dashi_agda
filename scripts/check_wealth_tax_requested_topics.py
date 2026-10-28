@@ -28,6 +28,7 @@ OWNERS = (
     "DASHI/Economics/WealthInheritanceVacancyTaxMaxCut20261027Exact.agda",
     "DASHI/Economics/WealthTaxPowerCareSociologyBidi20261027Exact.agda",
     "DASHI/Economics/WealthTaxFiscalTransmissionControlBidi20261027Exact.agda",
+    "DASHI/Economics/WealthTaxDashiTradeMarketMaterialBidiExact.agda",
     "DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda",
 )
 PHILOSOPHY_OR_SOCIETY = (
@@ -90,6 +91,10 @@ def main() -> None:
         "toeSecondaryReportDoesNotBecomeIndependentStudy",
         "toeRepublishedOECDChapterIsNotNewIndependentProducer",
         "toePaperCannotSupplyKernelCertification",
+        "toeTaxDoesNotFixTradeBuy",
+        "toeDemandDoesNotFixRefinance",
+        "toeMarketDirectionDoesNotFixCollection",
+        "toeTaxLiabilityDoesNotCreateBrokerOrder",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
     # These are direct aliases of EXISTING source and evidence owners.
@@ -109,6 +114,28 @@ def main() -> None:
         assert owner_path.is_file(), f"source/evidence owner absent: {owner_path}"
     assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", bridge), (
         "thin TOE bridge must use source-owned theorem aliases, not axioms"
+    )
+    # The shadow bridge must use the pre-existing Agda trading, finance and
+    # generic non-factorability owners. No standalone runtime is imported.
+    dashi_tax_bridge = (ROOT / OWNERS[-2]).read_text(encoding="utf-8")
+    for original_owner in (
+        "DASHI.Core.IntersectionalNonFactorability",
+        "DASHI.Finance.DashiTradeFibreBridgeExact",
+        "DASHI.Trading.DashiTradeDreamOptionConeExact",
+        "DASHI.Economics.DashiTradeAIInfrastructureMarketCrossPollinationExact",
+        "DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact",
+    ):
+        assert "import " + original_owner in dashi_tax_bridge, (
+            "missing inherited dashiTRADE/finance/tax owner: " + original_owner
+        )
+    for theorem in (
+        "taxAmountCannotFixBuy", "headlineDemandCannotFixRefinance",
+        "marketDirectionCannotFixCollection",
+        "taxLiabilityIsNotTradingPermission", "holdStillAvailable",
+    ):
+        assert theorem in dashi_tax_bridge, "missing tax-market gate: " + theorem
+    assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", dashi_tax_bridge), (
+        "cross-domain application must not introduce axioms or termination bypass"
     )
     workflow = (ROOT / ".github/workflows/philosophy.yml").read_text(encoding="utf-8")
     assert "dashi-agda-preflight --root ." in workflow, "semantic preflight no longer scheduled"
@@ -140,7 +167,7 @@ def main() -> None:
     statuses = Counter(status for _, _, status, _, _ in rows)
     print(f"PASS: {len(rows)} distinct sourced/typed topic rows; "
           f"statuses {dict(sorted(statuses.items()))}; "
-          "three source Agda owners and one TOE bridge; semantic/compiler CI gates.")
+          "three fiscal Agda owners, one trade application and one TOE bridge; CI gates.")
     print("This is a coverage receipt, NOT a truth or Agda kernel receipt.")
 
 if __name__ == "__main__":
