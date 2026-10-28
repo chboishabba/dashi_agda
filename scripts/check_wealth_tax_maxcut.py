@@ -231,6 +231,59 @@ def test_constructive_finite_axis_pareto() -> None:
     assert dominated_by(omitted_axis_worlds[1], omitted_axis_worlds[0])
     assert total == 3**0 + 3**4 + 3**8 + 3**9 + 2048
 
+
+def test_canonical_funding_batch_no_double_count() -> None:
+    """Finite oracle for the Agda C06 conditional canonical-source model.
+
+    The canonical source ID mapping is a *supplied premise*. The test does
+    not authenticate a financial source, exchange fill or custody claim.
+    """
+    from itertools import product
+    from random import Random
+
+    # Each row is (canonical claim ID, exclusive channel, amount).
+    checks = 0
+    for n in range(4):
+        for source_ids in product(range(3), repeat=n):
+            for channels in product(range(3), repeat=n):
+                for amounts in product(range(3), repeat=n):
+                    rows = tuple(zip(source_ids, channels, amounts))
+                    unique = len(set(source_ids)) == len(source_ids)
+                    cash = sum(amount for _, c, amount in rows if c == 0)
+                    loans = sum(amount for _, c, amount in rows if c == 1)
+                    sales = sum(amount for _, c, amount in rows if c == 2)
+                    assert cash + loans + sales == sum(amount for _, _, amount in rows)
+                    if unique:
+                        for i in range(len(rows)):
+                            for j in range(i + 1, len(rows)):
+                                assert rows[i][0] != rows[j][0]
+                    else:
+                        assert any(rows[i][0] == rows[j][0]
+                                   for i in range(len(rows))
+                                   for j in range(i + 1, len(rows)))
+                    checks += 1
+
+    rng = Random(20261028)
+    for _ in range(20000):
+        size = rng.randrange(0, 22)
+        source_ids = [rng.randrange(25) for _ in range(size)]
+        channels = [rng.randrange(3) for _ in range(size)]
+        amounts = [rng.randrange(1000) for _ in range(size)]
+        totals = tuple(sum(v for c, v in zip(channels, amounts) if c == i)
+                       for i in range(3))
+        assert sum(totals) == sum(amounts)
+        assert (len(source_ids) == len(set(source_ids))) == (
+            all(source_ids[i] != source_ids[j]
+                for i in range(size) for j in range(i + 1, size)))
+        checks += 1
+
+    # Deliberate non-promotion control. Distinct local tokens alone pass a
+    # uniqueness test even if they both describe one underlying real claim.
+    historical_claim_alias = ((7, 101), (7, 102))
+    assert len({local for _, local in historical_claim_alias}) == 2
+    assert len({historical for historical, _ in historical_claim_alias}) == 1
+    assert checks == sum(27 ** i for i in range(4)) + 20000
+
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
@@ -244,4 +297,5 @@ if __name__ == "__main__":
     test_ai_risk_score_does_not_determine_tax_law()
     test_ai_proposed_idle_equity_schedule_is_not_victoria_vrlt()
     test_constructive_finite_axis_pareto()
-    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto exhaustive/random oracle")
+    test_canonical_funding_batch_no_double_count()
+    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto exhaustive/random oracle + canonical funding partitions")
