@@ -23,6 +23,27 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.SignedSSPBidirectionalNeighbourExact as SignedNeighbourBidi
+open SignedNeighbourBidi public using
+  ( plusCodeIsMinusAdmissible
+  ; plusThenMinusDecodedIdentity
+  ; minusThenPlusDecodedIdentity
+  ; minusTwoCRTReadoutCommutes
+  ; minusTwoPairSieveTransport
+  ; minusTwoPairSieveTransportBack
+  ; twinAtLowerToCertifiedUpperAndMinus
+  ; certifiedUpperAndMinusToTwinAtLower
+  )
+
+import DASHI.Arithmetic.SignedSSPTwinFiniteCoverageExact as SignedTwinCoverage
+open SignedTwinCoverage public using
+  ( twinStartAppearsAtOwnCutoff
+  ; encodedTwinStartsUpTo
+  ; everyCertifiedTwinCodeAppearsAtOwnCutoff
+  ; encodedTwinListLengthExact
+  ; twinCountIncrementsAtCertifiedTwin
+  )
+
 import DASHI.Arithmetic.SignedSSPCertifiedCRTReadoutSquareExact as SignedArithmeticCRT
 open SignedArithmeticCRT public using
   ( plusTwoCRTReadoutCommutes
