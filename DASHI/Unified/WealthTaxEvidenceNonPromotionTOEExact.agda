@@ -235,6 +235,14 @@ toeEarlierTaxReceiptCannotUseLaterSaleWithoutBridge :
 toeEarlierTaxReceiptCannotUseLaterSaleWithoutBridge =
   DashiTradeTax.priorCashReceiptHasNoForwardSettlementLink
 
+-- Same settled unit count does not identify which issuer/class rights
+-- moved. Explicit synthetic labels are not beneficial-ownership evidence.
+toeSaleUnitsCannotIdentifySecurityClass :
+  INF.FactorsThrough
+    DashiTradeTax.saleUnitsOfInstrument DashiTradeTax.instrumentClass → ⊥
+toeSaleUnitsCannotIdentifySecurityClass =
+  DashiTradeTax.saleVolumeCannotIdentifyInstrumentClass
+
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
 -- observed, exact-head compiler run. No ESD imports are changed.
