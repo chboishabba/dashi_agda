@@ -138,6 +138,10 @@ The original Base369 physics-phase bridge gives a second important guard: `q6` a
 
 Imported finite proof owner integrated into this experiment and all three TOE roots. New `tests/test_r2p2_optical_lattice_369.py` and a focused Agda CI target are committed, but kernel and exact-checkout test execution remain pending.
 
+## Native binary/ternary codec and balanced-369 NS Fourier cross-cut
+
+See [three-mode codec / balanced NS aliasing Max Cut](R2P2ThreeModeBinaryTernaryNSAliasingMaxCut.md). Existing lossless two-bit trit, binary-in-nonzero-ternary, support+optional sign, original `NSIntegerFourierLattice`, `NSCross369OrientationBridgeExact` and high-high Gram/LES boundaries are **reused**, not rewritten. A new finite C3 *quadratic convolution* counterexample shows `(+1)+(+1)=+2` in the exact integer spectrum but folds to `-1` on a 3-sample grid. A codec preserves the aliased symbol; it cannot reconstruct the erased integer Fourier index. Exact local 27-profile scan: 24 profiles alias at N=3; no profile aliases at N=5, within this **specific** finite quadratic model. This is not an optical lattice Hamiltonian simulation or NS Clay proof. Added source module, executable regression, all three root projections and CI target, pending kernel/exact-head CI.
+
 ## Scope, limits, verification (S/L/P/G/F)
 
 **Built**: complete type-level *logical* path; reused 369 atomic/field index; both diamonds; finite C3/Weyl certificates; SI second owner; two-way transfer obligations; external redshift bridge; source and evidence guards; tests and TOE root imports.
