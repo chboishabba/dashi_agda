@@ -59,6 +59,14 @@ class Finite729Tests(unittest.TestCase):
                 [recovered[k] for k in WIDE125],
             )
 
+    def test_wide_mode_collision_does_not_recover_integer_frequency(self):
+        high = (2, 0, 0)
+        low = (-1, 0, 0)
+        self.assertNotEqual(high, low)
+        folded = lambda k: tuple((v + 1) % 3 - 1 for v in k)
+        self.assertEqual(folded(high), folded(low))
+        self.assertEqual(folded(high), (-1, 0, 0))
+
     def test_three_grid_folds_false_retained_frequency(self):
         single = {k: int(k == (1, 0, 0)) for k in CUBE27}
         exact, folded = exact_convolution(single), aliased_three_convolution(single)
@@ -93,6 +101,9 @@ class Finite729Tests(unittest.TestCase):
         self.assertIn("sixTritAmplitudeAfterTransport", source[1])
         self.assertIn("all729PairsFiveIndexRecoveryIsExact", source[2])
         self.assertIn("retainedFiveIndexConvolutionExact", source[2])
+        self.assertIn("threeAxisCyclicIndexCollision", source[2])
+        self.assertIn("noDecoderOfActualWideModeFromCyclic27", source[2])
+        self.assertIn("cyclic27RechartCannotUndoWideFrequencyLoss", source[2])
         for key in ("C3CubeCyclotomicFourierExact", "C3CubeCyclotomicParsevalExact",
                     "C3CubeDirectGroupConvolutionExact",
                     "signedModeToCyclicResidueConvention",
