@@ -21,11 +21,10 @@ module DASHI.Foundations.PolynomialVandermondeDiscriminantExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
 
 import DASHI.Foundations.PolynomialVietaRootSymmetryExact as Vieta
-open import Data.Rational.Literals using (number)
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as S3
 
 vandermonde : Vieta.ThreeRoots → ℚ
@@ -94,13 +93,22 @@ secondThirdCollisionGivesZero a b = Ring.solve-∀ a b
 -- not simply a numerically equal root-oriented expression.
 ------------------------------------------------------------------------
 
+four : ℚ
+four = 1ℚ + 1ℚ + 1ℚ + 1ℚ
+
+eighteen : ℚ
+eighteen = (four * four) + 1ℚ + 1ℚ
+
+twentySeven : ℚ
+twentySeven = (four * four) + (four * four) - four - 1ℚ
+
 coefficientDiscriminant : ℚ → ℚ → ℚ → ℚ
 coefficientDiscriminant s₁ s₂ s₃ =
   s₁ * s₁ * (s₂ * s₂)
-  - ((s₂ * s₂ * s₂) * 4ℚ)
-  - ((s₁ * s₁ * s₁) * (s₃ * 4ℚ))
-  - ((s₃ * s₃) * 27ℚ)
-  + ((s₁ * s₂ * s₃) * 18ℚ)
+  - ((s₂ * s₂ * s₂) * four)
+  - ((s₁ * s₁ * s₁) * (s₃ * four))
+  - ((s₃ * s₃) * twentySeven)
+  + ((s₁ * s₂ * s₃) * eighteen)
 
 discriminantDependsOnlyOnVietaCoefficients :
   (r : Vieta.ThreeRoots) →
