@@ -1,0 +1,158 @@
+lane: ao.fleet.dynamic.083b19d25f58
+orchestrator_id: ao-fleet-conductor-leaf-083b19d25f58
+artifact: dependency-group/family-geometry
+status: complete
+
+objective:
+  Emit the dependency-group and family-geometry inventory for the hydrated macroscopic eigen-motif:
+  property:physics:NominalModifier · property:dashi:NominalModifier · content_clause:be:ClausalComplement
+
+preconditions:
+  - The repository parser carrier defines DependencyShape.nominalModifier.
+  - The repository parser carrier defines DependencyShape.clausalComplement.
+  - The SLR observation compiler maps nominalModifier to propertyFragment.
+  - The SLR observation compiler maps clausalComplement to contentClauseFragment.
+  - Candidate semantic fragments remain candidate-only.
+  - Pairwise typed support is independent unless an explicit typed meet witness exists.
+
+invariants:
+  - Keep property:physics and property:dashi as distinct hydrated coordinates.
+  - Do not merge nominalModifier and clausalComplement dependency groups.
+  - Do not infer semantic equivalence from shared dependency shape.
+  - Do not infer a typed meet between any two motif coordinates.
+  - Keep parser dependency shape separate from semantic fragment kind.
+  - Preserve unresolved attachment and discourse-role boundaries.
+
+motif:
+  macroscopic_eigen_motif:
+    - coordinate_id: property:physics:NominalModifier
+      namespace: property
+      lexical_key: physics
+      dependency_shape: nominalModifier
+      dependency_shape_tag: 5
+      compiler_fragment_family: propertyFragment
+      compiler_fragment_tag: 3
+      dependency_group: DG-NMOD
+      family_geometry: FG-PROPERTY-NMOD
+      candidate_only: true
+
+    - coordinate_id: property:dashi:NominalModifier
+      namespace: property
+      lexical_key: dashi
+      dependency_shape: nominalModifier
+      dependency_shape_tag: 5
+      compiler_fragment_family: propertyFragment
+      compiler_fragment_tag: 3
+      dependency_group: DG-NMOD
+      family_geometry: FG-PROPERTY-NMOD
+      candidate_only: true
+
+    - coordinate_id: content_clause:be:ClausalComplement
+      namespace: content_clause
+      lexical_key: be
+      dependency_shape: clausalComplement
+      dependency_shape_tag: 11
+      compiler_fragment_family: contentClauseFragment
+      compiler_fragment_tag: 10
+      dependency_group: DG-CCOMP
+      family_geometry: FG-CONTENT-CCOMP
+      candidate_only: true
+
+dependency_groups:
+  DG-NMOD:
+    dependency_shape: nominalModifier
+    member_count: 2
+    members:
+      - property:physics:NominalModifier
+      - property:dashi:NominalModifier
+    geometry:
+      multiplicity: 2
+      namespace_count: 1
+      lexical_key_count: 2
+      semantic_fragment_family: propertyFragment
+      shared_shape_does_not_imply_shared_meaning: true
+
+  DG-CCOMP:
+    dependency_shape: clausalComplement
+    member_count: 1
+    members:
+      - content_clause:be:ClausalComplement
+    geometry:
+      multiplicity: 1
+      namespace_count: 1
+      lexical_key_count: 1
+      semantic_fragment_family: contentClauseFragment
+      clausal_role_remains_unresolved: true
+
+family_geometry:
+  coordinate_count: 3
+  dependency_group_count: 2
+  semantic_fragment_family_count: 2
+  multiplicity_vector_by_dependency_group:
+    DG-NMOD: 2
+    DG-CCOMP: 1
+  multiplicity_vector_by_semantic_fragment_family:
+    propertyFragment: 2
+    contentClauseFragment: 1
+  shape_partition:
+    nominalModifier:
+      - property:physics:NominalModifier
+      - property:dashi:NominalModifier
+    clausalComplement:
+      - content_clause:be:ClausalComplement
+  semantic_partition:
+    propertyFragment:
+      - property:physics:NominalModifier
+      - property:dashi:NominalModifier
+    contentClauseFragment:
+      - content_clause:be:ClausalComplement
+
+pairwise_noTypedMeet:
+  - left: property:physics:NominalModifier
+    right: property:dashi:NominalModifier
+    typed_meet_witness_present: false
+    independence: strict
+  - left: property:physics:NominalModifier
+    right: content_clause:be:ClausalComplement
+    typed_meet_witness_present: false
+    independence: strict
+  - left: property:dashi:NominalModifier
+    right: content_clause:be:ClausalComplement
+    typed_meet_witness_present: false
+    independence: strict
+
+source_owners:
+  - path: DASHI/Reasoning/SpacyDependencyToCandidateLogicalPNFExact.agda
+    owns:
+      - DependencyShape.nominalModifier
+      - DependencyShape.clausalComplement
+      - SemanticFragmentKind.propertyFragment
+      - SemanticFragmentKind.contentClauseFragment
+      - candidate-only semantic boundary
+  - path: DASHI/Reasoning/SpacyExecutableSemanticRuleBankExact.agda
+    owns:
+      - admitted nominal-modifier relation rule
+      - admitted clausal-complement content rule
+      - clausal interpretation non-promotion boundary
+  - path: DASHI/Interop/SLRSpacyObservationWorldCompilerParityExact.agda
+    owns:
+      - nominalModifier dependency tag 5
+      - clausalComplement dependency tag 11
+      - nominalModifier to propertyFragment compiler mapping
+      - clausalComplement to contentClauseFragment compiler mapping
+      - propertyFragment tag 3
+      - contentClauseFragment tag 10
+  - path: Docs/PNFSpectralCovarianceGeometry.md
+    owns:
+      - anonymous eigenmode discipline
+      - structural motif participation view
+      - no semantic promotion from spectral coordinates
+
+postconditions:
+  - The hydrated motif is inventoried as three distinct coordinates.
+  - The motif has two dependency groups.
+  - The motif has two semantic fragment families.
+  - The nominal-modifier family has multiplicity two.
+  - The clausal-complement family has multiplicity one.
+  - Every pair remains noTypedMeet-independent.
+  - No truth, support, admissibility, or semantic-equivalence promotion is emitted.
