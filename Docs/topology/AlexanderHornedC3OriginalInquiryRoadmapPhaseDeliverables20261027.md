@@ -1779,3 +1779,61 @@ Nielsen/pants owners, #1414 finite
 C3/S3/quaternion, sonic #1405,
 and original Ibrahim Monster 3B
 independence.
+
+
+### U. G1–G6 six-obligation cap-relative 3D gate and exact elementary Nielsen audit
+
+The full detailed acceptance ledger now has its canonical source in
+`Docs/topology/AlexanderHornedRelativeThreeChildHandlebodyProofCut20261029.md`.
+No new parallel pants/handlebody geometry or group construction is
+invented. New exact executed producer
+`scripts/alexander_horned_relative_nielsen_stage_audit.py`
+reduces the selected basis map to THREE elementary moves:
+```text
+(a,b,c) → (a,b^-1,c)
+        → (c^-1 a,b^-1,c)
+        → (b^-1,c^-1 a,c) = (u,v,z).
+```
+Its inverse is `a=zv, b=u^-1, c=z`.
+The original meridian has explicitly based
+`p^-1[a,b][b,c]p=[u,v]` with `p=aba^-1c`.
+A locally run exact Python equivalent exhaustively
+checked all 9,331 signed words of lengths 0..5,
+both substitutions, the conjugation and the nonidentity
+of b reversal: PASS. The file was committed and
+readback still needed for exact-blob execution status.
+These checks do not prove an ambient homeomorphism.
+
+**G1** standard tame genus-three handlebody
+`D³∪3(D¹×D²)` and unused stationary cap are
+classically available abstractly, but the
+selected PL coordinates and verified disjoint
+feet/cores/collar are not yet committed.
+**G2** a cap-disjoint ambient Nielsen handle slide
+requires explicit cut disks/supports/isotopies
+and induced based pi1 action. A map fixed
+on the ENTIRE boundary is impossible.
+**G3** genus-one theta ribbon and peripheral
+word are solved abstractly, not embedded
+in the intended actual three-child complement
+with based p path.
+**G4** true inclusion/meridian naturality
+commuting square is open.
+**G5** nested wild satellite, injectivity,
+wildness, cap collars and ambient root C3
+are open.
+**G6** genuine exterior-group colimit/
+orbifold identification is open because
+G4/G5 are missing. This is the exact
+same-object wall, not another finite
+3/6/9 lemma.
+
+Independent #1414 polynomial
+double-commutator derived-series no-go
+is pertinent only as the separate
+perfect-to-solvable representation
+boundary, never as a source of the
+3D embedding. Keep mathematical
+prior source, source-written code,
+locally executed tests and kernel
+verification statuses distinct.
