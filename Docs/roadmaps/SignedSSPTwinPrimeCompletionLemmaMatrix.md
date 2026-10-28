@@ -611,3 +611,53 @@ correctly distinguishes its own 27-label endomorphism/S3 meanings
 from cube-coordinate semantics, and no mathematical map into the
 actual twin-prime correlation was established. Preserve its own
 PR ownership and Ibrahim 3B boundary.
+
+## 2026-10-28 executable Guy PRIMEGAME scanner and non-halting cut
+
+`PrimegameTypedNumericFirstApplicableBidiExact` now has a
+**source-written executable `firstApplicableNumeric`** and an
+`exactFractionApplies?` decision procedure. For positive
+denominator d it reuses standard-library quotient/modulus identities
+to show that the integrality guard admits exactly the returned Nat
+successor `(n*a)/d`; d=0 is explicitly rejected.
+`firstApplicableNumericSound` connects a `just after`
+computation to the *existing* FRACDASH
+`FirstApplicableStep` relation. `firstApplicableNumericHalt`
+connects `nothing` to the original conjunction of blocked rules.
+`guyTypedExecutableStepSound` and `guyTypedExecutableHalt`
+transport those receipts back to the original ten-factor SSP
+representation of all 14 Guy fractions.
+
+**Critical semantic correction:** Guy PRIMEGAME does not halt.
+Its last instruction is **55/1**, applicable for every Nat n.
+`guyLastRuleAlwaysApplies`,
+`guyNumericScannerNeverHalts`,
+`guyNumericAlwaysSteps`, and
+`guyTypedAlwaysSteps` source-write this fact and an actual
+selected transition for **every** natural-number state. The
+obligation A09 must therefore treat emitted powers-of-two as
+readout events on an ongoing trace, not termination output.
+
+Independent locally executed Python checks:
+- 270 arithmetic wheel representatives and the 59/209
+  inner-antipodal consumer collision.
+- 20,000 Guy states from initial 2 with all 14 instructions
+  exercised, matching typed/numeric priorities and arithmetic.
+- 21,000 individual numeric fraction guards, 3,048 admitted.
+- 20,000 separate Nat inputs with a defined first-applicable step.
+
+This improves A05, A06, C02's representation direction, and the
+numeric portion of A09. It **does not** prove A07/A08/B03/C08 for
+the signed FRACDASH machine, historical prime-enumeration
+completeness, an arithmetic CRT inverse, or gap-two infinitude.
+No kernel receipt, CI pass, or full signed executor proof is
+reported. All new Agda terms are source-written and need an
+actual pinned Agda typecheck before being promoted.
+
+Web historical corroboration: Richard K. Guy's 1983 14-rule
+version uses 15/14 plus 15/2 and 55/1. Conway's variant differs
+(1/7 replaces 15/14), and must stay separate.
+OEIS A267572: https://oeis.org/A267572.
+No protected ESD surfaces changed. PR #1414 monodromy
+objects are branch-only and independent; no same-object
+Monster 3B or quintic prime-distribution claim is made.
