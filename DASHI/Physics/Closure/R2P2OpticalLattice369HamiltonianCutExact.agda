@@ -144,6 +144,47 @@ maPhysicalEighteenAndC18EqualAsNumbersOnly :
   maFirst497Periods ≡ Phase369.sectorCount Phase369.phase18Resolution
 maPhysicalEighteenAndC18EqualAsNumbersOnly = refl
 
+------------------------------------------------------------------------
+-- Ma S6 uses ±11 and ±18 sidebands in a *plane-wave basis*.
+-- A three-mode Fourier truncation (indices -1, 0, +1) has pairwise index
+-- separation at most 2. No physical S6 offdiagonal term survives.
+-- This is a basis/truncation cut, not an argument that the real lattice
+-- lacks tunnelling or that three *site-basis* positions are impossible.
+------------------------------------------------------------------------
+
+data ThreePlaneWaveMode : Set where
+  negOnePlaneWave : ThreePlaneWaveMode
+  centralPlaneWave : ThreePlaneWaveMode
+  posOnePlaneWave : ThreePlaneWaveMode
+
+modeSeparation : ThreePlaneWaveMode → ThreePlaneWaveMode → Nat
+modeSeparation negOnePlaneWave negOnePlaneWave = 0
+modeSeparation negOnePlaneWave centralPlaneWave = 1
+modeSeparation negOnePlaneWave posOnePlaneWave = 2
+modeSeparation centralPlaneWave negOnePlaneWave = 1
+modeSeparation centralPlaneWave centralPlaneWave = 0
+modeSeparation centralPlaneWave posOnePlaneWave = 1
+modeSeparation posOnePlaneWave negOnePlaneWave = 2
+modeSeparation posOnePlaneWave centralPlaneWave = 1
+modeSeparation posOnePlaneWave posOnePlaneWave = 0
+
+data MaS6Sideband : Nat → Set where
+  source813Sideband : MaS6Sideband maFirst813Periods
+  source497Sideband : MaS6Sideband maFirst497Periods
+
+noMaS6SidebandInThreeModeFourierTruncation :
+  (a b : ThreePlaneWaveMode) →
+  MaS6Sideband (modeSeparation a b) → ⊥
+noMaS6SidebandInThreeModeFourierTruncation negOnePlaneWave negOnePlaneWave ()
+noMaS6SidebandInThreeModeFourierTruncation negOnePlaneWave centralPlaneWave ()
+noMaS6SidebandInThreeModeFourierTruncation negOnePlaneWave posOnePlaneWave ()
+noMaS6SidebandInThreeModeFourierTruncation centralPlaneWave negOnePlaneWave ()
+noMaS6SidebandInThreeModeFourierTruncation centralPlaneWave centralPlaneWave ()
+noMaS6SidebandInThreeModeFourierTruncation centralPlaneWave posOnePlaneWave ()
+noMaS6SidebandInThreeModeFourierTruncation posOnePlaneWave negOnePlaneWave ()
+noMaS6SidebandInThreeModeFourierTruncation posOnePlaneWave centralPlaneWave ()
+noMaS6SidebandInThreeModeFourierTruncation posOnePlaneWave posOnePlaneWave ()
+
 -- The 87Sr atomic identity is taken from the EXISTING periodic-table owner.
 -- Proton number 38 and mass number 87 imply neutron number 49.
 strontium87Index : Atom.AtomicIndex
