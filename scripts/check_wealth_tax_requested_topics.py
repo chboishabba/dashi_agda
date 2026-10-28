@@ -104,6 +104,7 @@ def main() -> None:
         "toeExecutedVolumeDoesNotIdentifySettlement",
         "toeTwoFillCashIdentity",
         "toeEarlierTaxReceiptCannotUseLaterSaleWithoutBridge",
+        "toeSaleUnitsCannotIdentifySecurityClass",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
     # These are direct aliases of EXISTING source and evidence owners.
@@ -154,6 +155,9 @@ def main() -> None:
         "executionDoesNotDetermineSettlement", "twoFillCashConservation",
         "MatchedSettlementTaxChronology",
         "priorCashReceiptHasNoForwardSettlementLink",
+        "IdentifiedClassSettlement", "ClassCompatibleWithTransfer",
+        "syntheticOrdinarySettlement", "syntheticSuperSettlement",
+        "saleVolumeCannotIdentifyInstrumentClass",
     ):
         assert theorem in dashi_tax_bridge, "missing tax-market gate: " + theorem
     assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", dashi_tax_bridge), (
