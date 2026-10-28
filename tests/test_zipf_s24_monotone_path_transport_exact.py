@@ -98,4 +98,4 @@ def test_source_provenance_and_no_new_probability_carrier():
     assert "from zipf_full_heaps_path_distribution_exact import full_heaps_curve_law" in src
     assert "from zipf_heaps_bridge import _validated_counts, multiset_count_majorizes" in src
     assert "Strassen" in src and "Hardy-Littlewood-Polya" in src
-    assert "Agda kernel" in src and "not a general theorem" in src
+    assert "Agda kernel" in src and "not a general theorem" in src.lower()
