@@ -110,7 +110,14 @@ def audit():
     nine = sample_hermitian(PLANE9)
     assert unpack_hermitian(pack_hermitian(nine, PLANE9), PLANE9) == nine
 
+    compressed_left = pack_hermitian(left, CUBE27)
+    compressed_right = pack_hermitian(right, CUBE27)
+    compact_output = convolution(
+        unpack_hermitian(compressed_left, CUBE27),
+        unpack_hermitian(compressed_right, CUBE27),
+    )
     output = convolution(left, right)
+    assert compact_output == output
     assert len(output) == 125
     assert all(output[neg(k)] == conjugate(z) for k,z in output.items())
     output_reps = {representative(k) for k in output}
@@ -137,6 +144,7 @@ def audit():
             "cube_roundtrip": True,
             "plane_roundtrip": True,
             "conjugate_closed_125_output": True,
+            "packed_13_pairs_preserve_all_729_product_terms": True,
             "arbitrary_complex_27_is_losslessly_compressed": False,
         },
         "operator_cut": {
