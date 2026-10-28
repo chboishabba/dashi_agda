@@ -89,7 +89,7 @@ jobs:
               assert required in texts[3], required
           for required in ("plusTwoFractionMacro", "minusTwoFractionMacro", "signedMinusIsInverse"):
               assert required in texts[4], required
-          for required in ("twinPrimeInvariantUnderEqualReadout", "certifiedPrimeIsReachableWhenEmitterProved"):
+          for required in ("twinPrimeInvariantUnderEqualReadout", "certifiedPrimeIsReachableWhenEmitterProved", "natPrimeAppearsAtOwnCutoff", "everyPrimeCodeAppearsAtOwnCutoff"):
               assert required in texts[5], required
           for required in ("knownAllPrimeControlCount", "ControlToCertifiedPrime"):
               assert required in texts[6], required
