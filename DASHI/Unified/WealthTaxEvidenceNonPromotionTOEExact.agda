@@ -566,6 +566,30 @@ open DashiTradeTax public using
   ; finiteAxisSumStrict
   ; strictImprovedAxisFromFiniteCoverage
   ; finiteParetoFrontierIsNonempty
+  ; PolicyEvidenceXY
+  ; policyEvidenceXY
+  ; policyEffectZ
+  ; sameXYStillAllowsOppositeZ
+  ; sourceReviewDoesNotDetermineCausalPolarity
+  ; rechartingXYCannotManufactureCausalPolarity
+  ; rotatePolicyXYZThreeTimes
+  ; swapPolicyXYTwice
+  ; existingS3InverseLaw
+  ; PolicyEvidenceInteractionThreeCell
+  ; policyInteractionToCellDialectic
+  ; policyThreeCellToExistingHyperform
+  ; policyThreeCellFabricRoundTrip
+  ; policyThreeCubeInheritedCarrierCount
+  ; policyOneCubeInheritedCarrierCount
+  ; FiveEvidenceGateAnnotations
+  ; ThreeFiveModeAnnotations
+  ; fiveGateAnnotationsHave243Combinations
+  ; threeFiveModesHave125Combinations
+  ; differentFiveGateAndThreeModeCounts
+  ; numerologicalPatternDoesNotPayEconomicProof
+  ; matchingDigitsDoNotProveTaxEffects
+  ; quaternionLiftDoesNotAuthenticateSettlement
+  ; incompatibleCardinalSignaturesAreNotSameCarrier
   ; DvPBatchDisposition
   ; SourceLinkedFinalSettlement
   ; ExternallyAdmittedSaleTaxRoute
@@ -768,4 +792,42 @@ toeAssetValueDoesNotIdentifyBeneficialShare :
     DashiTradeTax.ownerAttributedAssets → ⊥
 toeAssetValueDoesNotIdentifyBeneficialShare =
   DashiTradeTax.assetValueDoesNotIdentifyTaxpayerBeneficialShare
+
+-- Cross-domain use of established 27-state carrier. The x/y projection
+-- identifies the same evidence-review label at opposed z hypotheses.
+-- Existing non-factorability owner provides the full no-go proof.
+toePolicyXYDoesNotDetermineCausalZ :
+  INF.FactorsThrough
+    DashiTradeTax.policyEvidenceXY DashiTradeTax.policyEffectZ → ⊥
+toePolicyXYDoesNotDetermineCausalZ =
+  DashiTradeTax.sourceReviewDoesNotDetermineCausalPolarity
+
+toeFinanceXYRechartCannotProduceZ :
+  {Recharted : Set} →
+  (rechart : DashiTradeTax.PolicyEvidenceXY → Recharted) →
+  INF.FactorsThrough
+    (λ state → rechart (DashiTradeTax.policyEvidenceXY state))
+    DashiTradeTax.policyEffectZ → ⊥
+toeFinanceXYRechartCannotProduceZ =
+  DashiTradeTax.rechartingXYCannotManufactureCausalPolarity
+
+toeFiveEvidenceGatesHave243AnnotationCombinations :
+  DashiTradeTax.fiveGateTernaryArithmeticCount ≡ 243
+toeFiveEvidenceGatesHave243AnnotationCombinations =
+  DashiTradeTax.fiveGateAnnotationsHave243Combinations
+
+toeThreeFiveModesHave125AnnotationCombinations :
+  DashiTradeTax.threeFiveModeArithmeticCount ≡ 125
+toeThreeFiveModesHave125AnnotationCombinations =
+  DashiTradeTax.threeFiveModesHave125Combinations
+
+toeNumericPatternIsNotEconomicAuthority :
+  DashiTradeTax.NumericSignatureCertifiesTaxEffect → ⊥
+toeNumericPatternIsNotEconomicAuthority =
+  DashiTradeTax.matchingDigitsDoNotProveTaxEffects
+
+toeQuaternionSpinIsNotSettlementEvidence :
+  DashiTradeTax.QuaternionSpinCycleCertifiesSettlement → ⊥
+toeQuaternionSpinIsNotSettlementEvidence =
+  DashiTradeTax.quaternionLiftDoesNotAuthenticateSettlement
 
