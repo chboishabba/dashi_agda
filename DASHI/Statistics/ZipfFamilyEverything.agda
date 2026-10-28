@@ -16,6 +16,7 @@ import DASHI.Statistics.ZipfIIDTwoDrawAndPNFExact
 import DASHI.Statistics.ZipfPNFConstructiveNormalizationExact
 import DASHI.Statistics.ZipfFractionAddRationalBridgeExact
 import DASHI.Statistics.ZipfFractionFoldConditionalExact
+import DASHI.Statistics.ZipfF13bSourcePNFIntegrationExact
 import DASHI.Statistics.ZipfNoveltyCurveInjectiveExact
 import DASHI.Statistics.ZipfFullHeapsCurveIdentityNoGoExact
 import DASHI.Statistics.ZipfABC6OrderHeapsQuotientExact
