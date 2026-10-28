@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MODULE = ROOT / "DASHI/Culture/GoodmanSonicWarfareExact.agda"
 RHYTHM = ROOT / "DASHI/Culture/GoodmanSonicWarfareRhythmInterventionExact.agda"
 TRANSPORT = ROOT / "DASHI/Culture/GoodmanSonicWarfareTransportExact.agda"
+RATIONAL = ROOT / "DASHI/Culture/GoodmanSonicWarfareRationalInverseExact.agda"
 STABILITY = ROOT / "scripts/check_goodman_inverse_stability_finite.py"
 DOC = ROOT / "Docs/papers/GoodmanSonicWarfare.md"
 ROOTS = [
@@ -32,6 +33,7 @@ def check() -> None:
     doc = DOC.read_text(encoding="utf-8")
     rhythm = RHYTHM.read_text(encoding="utf-8")
     transport = TRANSPORT.read_text(encoding="utf-8")
+    rational = RATIONAL.read_text(encoding="utf-8")
     stability = STABILITY.read_text(encoding="utf-8")
     for owner in [
         "DASHI.Core.AttributedSourceCore",
@@ -149,6 +151,7 @@ def check() -> None:
         "DASHI.Core.ObserverRefinementLatticeExact",
         "DASHI.Core.RobustExperimentInferenceFrontierExact",
         "DASHI.Core.FrozenHeldOutRepairRefinementExact",
+        "DASHI.Culture.GoodmanSonicWarfareRationalInverseExact",
     ):
         require(f"import {owner}" in transport,
                 f"transport must import inherited theorem owner {owner}")
@@ -250,6 +253,37 @@ def check() -> None:
         "10.1038/s42949-026-00482-2",
     ):
         require(cited in doc, f"missing robustness provenance/documentation: {cited}")
+    # T7: Exact rational algebra uses original ring solver and a
+    # separately supplied nonzero inverse calibration certificate.
+    for owner in (
+        "Data.Rational.Tactic.RingSolver",
+        "Data.Rational.Properties",
+    ):
+        require(f"import {owner}" in rational,
+                f"rational adapter must reuse {owner}")
+    for theorem in (
+        "forwardTriangular",
+        "recoverTriangular",
+        "ringCancellation",
+        "calibratedInverseRoundtrip",
+        "ringPerturbation",
+        "calibratedPerturbation",
+    ):
+        require(theorem in rational, f"missing T7 rational theorem {theorem}")
+    require(rational.count("r * q ≡ 1ℚ") == 2,
+            "both inverse and noise theorems must retain calibration premise")
+    require(not re.search(
+        r"(?m)^\s*(?:postulate|{-#\s*(?:TERMINATING|NO_POSITIVITY_CHECK)\s*#-})",
+        rational),
+        "T7 has new postulate or trust escape")
+    require("GoodmanSonicWarfareRationalInverseExact" in transport,
+            "T7 rational proof must remain in the Goodman TOE import graph")
+    for assertion in (
+        "calibratedInverseRoundtrip",
+        "calibratedPerturbation",
+        "Jacques Hadamard",
+    ):
+        require(assertion in doc, f"missing T7 proof/attribution memo {assertion}")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
