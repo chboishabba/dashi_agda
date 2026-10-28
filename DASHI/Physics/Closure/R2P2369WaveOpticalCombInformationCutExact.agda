@@ -113,7 +113,7 @@ signedBeatEncodeDecode :
   (branch : BeatBranch) →
   Wave.decode (Wave.encode signedBeatWaveCoding branch) ≡ branch
 signedBeatEncodeDecode =
-  Wave.decodeAfterEncode signedBeatWaveCoding
+  Round9.symbolicCodingRetainsExactCarrier signedBeatWaveCoding
 
 fullBeatWaveFibreDeterminesOpticalHz :
   Core.ConsumerSufficient
@@ -162,6 +162,14 @@ finiteC3OneStepIsAdditive :
       DASHI.Foundations.Base369TriTruthField.triOne)
     (Characters.characterExponent3 mode phase)
 finiteC3OneStepIsAdditive = Phase.characterOneStepLaw
+
+-- Existing wave-algorithm carrier proves an involutive trit *encoding*.
+-- It does not imply reversal of an observed physical optical signal.
+finiteWaveAlgorithmTritInvolution :
+  (trit : Algorithm.Trit) →
+  Algorithm.tritInvolution (Algorithm.tritInvolution trit) ≡ trit
+finiteWaveAlgorithmTritInvolution =
+  Algorithm.tritInvolution²
 
 -- Wave algorithm's generic Hilbert/unitarity obligations were not solved
 -- by finite synthetic beat witnesses.
