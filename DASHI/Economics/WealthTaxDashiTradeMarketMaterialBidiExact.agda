@@ -28,6 +28,7 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
+import DASHI.Algebra.FiniteQuaternionDoubleCover as Q8
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as FiveMode
 import DASHI.Wikimedia.Base369NumberTheoryNumerologyWrongTypeSnowballExact as NumericRole
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
@@ -3228,4 +3229,51 @@ incompatibleCardinalSignaturesAreNotSameCarrier ()
 -- The 720-degree rational quaternion lift belongs to PR #1414's
 -- separate proof owner, not finance. It is a useful test of quotient
 -- information loss, not an economic observation, policy theorem or receipt.
+
+------------------------------------------------------------------------
+-- S3 COXETER AND Q8 SIGN QUOTIENT: ORIGINAL OWNER REUSE.
+-- The finite S3/C3 group and Q8 central quotient were proved elsewhere.
+-- We only transport their source-owned results as a chart/information-loss
+-- diagnostic. This cannot produce a market identity or physical Spin path.
+------------------------------------------------------------------------
+
+swapPolicyYZ : Fabric.Ternary27Point → Fabric.Ternary27Point
+swapPolicyYZ (Fabric.ternary27Point x y z) =
+  Fabric.ternary27Point x z y
+
+swapPolicyYZTwice :
+  (cube : Fabric.Ternary27Point) →
+  swapPolicyYZ (swapPolicyYZ cube) ≡ cube
+swapPolicyYZTwice (Fabric.ternary27Point x y z) = refl
+
+-- The two adjacent coordinate transpositions obey the S3 braid relation.
+-- This is transport on the EXISTING 27-point carrier, not a new S3 owner.
+policyCubeAdjacentSwapBraid :
+  (cube : Fabric.Ternary27Point) →
+  swapPolicyXY (swapPolicyYZ (swapPolicyXY cube))
+  ≡ swapPolicyYZ (swapPolicyXY (swapPolicyYZ cube))
+policyCubeAdjacentSwapBraid
+  (Fabric.ternary27Point x y z) = refl
+
+policyCubeLabelSwapNotAnEconomicIntervention :
+  Fabric.x
+    (swapPolicyXY
+      (Fabric.ternary27Point
+        SSP.sspNegOne SSP.sspPosOne SSP.sspZero))
+  ≡ SSP.sspNegOne → ⊥
+policyCubeLabelSwapNotAnEconomicIntervention ()
+
+-- Borrow the actual finite central-sign quotient from the original Q8
+-- module. Both signs have the same V4 image, but remain distinct Q8
+-- elements. This is a deliberately *lossy projection* analogy only.
+existingQ8CentralSignIsProjectedAway :
+  Q8.rho Q8.plusOne ≡ Q8.rho Q8.minusOne
+existingQ8CentralSignIsProjectedAway = refl
+
+existingQ8MinusSignHasOrderTwo :
+  Q8.q8Multiply Q8.minusOne Q8.minusOne ≡ Q8.plusOne
+existingQ8MinusSignHasOrderTwo = refl
+
+-- No same-object economic, historical, financial, tax-law or Monster
+-- claim follows from the sign kernel or 720-degree rotation analogy.
 
