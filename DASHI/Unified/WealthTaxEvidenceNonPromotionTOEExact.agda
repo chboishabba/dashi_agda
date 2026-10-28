@@ -494,3 +494,15 @@ toeDuplicateLocalFillTokenIsRejected :
 toeDuplicateLocalFillTokenIsRejected =
   DashiTradeTax.duplicateSevenTokenRejected
 
+-- Composed D11 × D12: exact cash/price sequence plus local token
+-- uniqueness. The joined local sequence is not a real broker event.
+toeCashReconciledFillsMustShareIdentitySequence :
+  (batch : DashiTradeTax.JoinedPriceIdentityBatch) →
+  (DashiTradeTax.recordedGrossCash (DashiTradeTax.settledCashBatch batch)
+    ≡ DashiTradeTax.grossFromFiniteSettledFills
+        (DashiTradeTax.pricedProjection (DashiTradeTax.joinedFills batch)))
+  × DashiTradeTax.UniqueFillTokens
+      (DashiTradeTax.timedProjection (DashiTradeTax.joinedFills batch))
+toeCashReconciledFillsMustShareIdentitySequence =
+  DashiTradeTax.joinedIdentityAndCashReconcile
+
