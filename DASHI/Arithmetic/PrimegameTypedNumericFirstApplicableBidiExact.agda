@@ -33,6 +33,7 @@ open import Relation.Nullary using (¬_)
 open import Relation.Binary.PropositionalEquality using (_≢_; subst; sym)
 
 import DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact as Guy
+import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact as First
 
 RuleNumbers : Set
@@ -216,5 +217,5 @@ guyExactGuardPriorityBackward :
 guyExactGuardPriorityBackward evaluator =
   guyNumericToTyped ExactFractionApplies (next evaluator)
 
-historicalRuleCount : Guy.Signed.listCount Guy.guyFourteenTyped ≡ 14
+historicalRuleCount : Signed.listCount Guy.guyFourteenTyped ≡ 14
 historicalRuleCount = Guy.guyProgrammeRuleCountIsFourteen
