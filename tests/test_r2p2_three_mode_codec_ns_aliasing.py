@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from r2p2_three_mode_codec_ns_aliasing_diagnostic import (  # noqa: E402
     MODES, CODEC, DECODE, BINARY_IN_TERNARY,
     centered_mod, exact_quadratic_product, sampled_quadratic_product,
-    kept_modes, audit,
+    kept_modes, audit, three_axis_27_mode_pair_audit,
 )
 
 AGDA = ROOT / "DASHI/Physics/Closure/R2P2ThreeModeBinaryTernaryNSAliasingCutExact.agda"
@@ -51,6 +51,17 @@ class ThreeModeNSCodecTests(unittest.TestCase):
         self.assertFalse(summary["ns_clay_or_qg_proved"])
         self.assertFalse(summary["r2p2_optical_clock_measured"])
 
+    def test_three_dimensional_c3_cubed_not_same_as_z_cubed(self):
+        r = three_axis_27_mode_pair_audit()
+        self.assertEqual(r["spatial_mode_labels"], 27)
+        self.assertEqual(r["ordered_quadratic_mode_pairs"], 729)
+        self.assertEqual(r["pairs_with_at_least_one_component_outside_retained_cube"], 386)
+        self.assertEqual(r["pairs_entirely_inside_retained_cube"], 343)
+        self.assertEqual(r["five_grid_each_axis_mode_wrap_errors"], 0)
+        self.assertEqual(r["example"]["integer_sum"], [2, 0, 0])
+        self.assertEqual(r["example"]["folded_C3_cubed"], [-1, 0, 0])
+        self.assertFalse(r["NS_time_evolution_or_Clay_claimed"])
+
     def test_codec_roundtrip_does_not_mean_alias_free(self):
         inputs = (-1, 0, 1)
         encoded = tuple(CODEC[m] for m in inputs)
@@ -62,6 +73,8 @@ class ThreeModeNSCodecTests(unittest.TestCase):
         content = AGDA.read_text(encoding="utf-8")
         for name in (
             "VerifiedFiniteTritCoder",
+            "BalancedTritBitFibre",
+            "BinaryThreeBitTrit27FibreLiftExact",
             "BinaryBalancedTernarySubcarrierExact",
             "BalancedTernaryQutritBasisBridgeExact",
             "NSIntegerFourierLattice",
@@ -75,6 +88,10 @@ class ThreeModeNSCodecTests(unittest.TestCase):
             "foldedThreePointModeCannotRecoverExactFourierIndex",
             "rechartingThreePointModeCannotFixAliasing",
             "nsExactPlusPlusIsPlusTwoX",
+            "periodicThreeAxisPositiveXSquareWrapsToNegativeX",
+            "inheritedThreeBitToFramed27RoundTrip",
+            "supportBitCannotDecodeSignedFourierMode",
+            "correctQuadraticProjectionRemovesPlusTwo",
             "maThreeModeSourceSidebandsAreOutOfWindow",
             "threeModeCodecIsNotAnNSProof",
         ):
