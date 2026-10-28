@@ -23,9 +23,20 @@ def mod_point(point, size):
 
 
 def main():
-    modes = list(product((-1,0,1), repeat=3))
-    pairs = list(product(modes,repeat=2))
-    assert len(modes) == 27 and len(pairs) == 729
+    # Genuine x/y/z THREE-AXIS TERNARY PRODUCT, not 27 unrelated tags:
+    # x ∈ {-1,0,+1}, y ∈ {-1,0,+1}, z ∈ {-1,0,+1}.
+    trit=(-1,0,1)
+    modes = [(x,y,z) for x in trit for y in trit for z in trit]
+    pairs = [((x0,y0,z0),(x1,y1,z1))
+             for x0,y0,z0 in modes for x1,y1,z1 in modes]
+    assert len(modes) == 3*3*3 == 27
+    assert len(pairs) == (3*3*3)*(3*3*3) == 3**6 == 729
+    assert {x for x,y,z in modes} == set(trit)
+    assert {y for x,y,z in modes} == set(trit)
+    assert {z for x,y,z in modes} == set(trit)
+    # Ordered pairs retain TWO SEPARATE x/y/z triples (six axes).
+    assert pairs[0] == ((-1,-1,-1),(-1,-1,-1))
+    assert pairs[-1] == ((1,1,1),(1,1,1))
     sum_point = lambda a,b: tuple(x+y for x,y in zip(a,b))
     retained = [sum_point(a,b) for a,b in pairs if all(-1 <= x+y <= 1 for x,y in zip(a,b))]
     assert len(retained)==343 and len(pairs)-len(retained)==386
@@ -54,7 +65,8 @@ def main():
             assert count == (1 if p==2 else p-2)
     # Survives all five prime-modulus tests, but not genuine primality.
     assert survivor(221) and not twins(221)  # 221 = 13*17
-    print('27 inputs, 729 ordered pairs; exact retained=343, outside=386: PASS')
+    print('x/y/z each ternary: 3x3x3=27; paired cubes: (3x3x3)^2=729: PASS')
+    print('729 ordered pairs; exact retained=343, outside=386: PASS')
     print(f'3-grid retained mismatches={wrong3}; 4-grid retained mismatches={wrong4}; 5-grid full mismatches={wrong5}')
     print('same mod6 at 5/35 yet distinct twin truth; decoded p=3 differs from 2^3 parity: PASS')
     print(f'finite product-period={period} and prime-2 exception: PASS')
