@@ -53,3 +53,66 @@ transport3CommutesWithRotate3 state (tripleWave a b c) = refl
 -- representation of the quaternion root monodromy on wave phases.
 -- A heterogeneous medium/source/gain demands separately justified
 -- action on those coefficients, and this theorem does not cover it.
+
+------------------------------------------------------------------------
+-- T16: HETEROGENEOUS OPERATORS MUST TRANSFORM WITH THE CHANNELS.
+-- A triple of independent wave operators is not invariant under a
+-- channel permutation. Equivariance instead has a naturality square:
+-- evolve(rotated operators, rotated field) = rotate(evolve(operators,field)).
+-- This statement holds for arbitrary operators; no acoustic assumptions.
+------------------------------------------------------------------------
+
+record TripleOperator : Set₁ where
+  constructor tripleOperator
+  field
+    firstOperator secondOperator thirdOperator :
+      Wave.DiscreteWave → Wave.DiscreteWave
+open TripleOperator public
+
+rotateOperators : TripleOperator → TripleOperator
+rotateOperators (tripleOperator a b c) = tripleOperator b c a
+
+evolveWith : TripleOperator → TripleWave → TripleWave
+evolveWith (tripleOperator f g h) (tripleWave a b c) =
+  tripleWave (f a) (g b) (h c)
+
+heterogeneousCovariance :
+  (operators : TripleOperator) →
+  (field : TripleWave) →
+  evolveWith (rotateOperators operators) (rotate3 field)
+    ≡ rotate3 (evolveWith operators field)
+heterogeneousCovariance (tripleOperator f g h) (tripleWave a b c) = refl
+
+rotateOperatorsThreeTimes :
+  (operators : TripleOperator) →
+  rotateOperators (rotateOperators (rotateOperators operators))
+    ≡ operators
+rotateOperatorsThreeTimes (tripleOperator f g h) = refl
+
+-- A fixed heterogeneous operator triple is generally NOT equivariant.
+-- Concrete noncommutation: first channel zeroes its input, while second
+-- and third leave it unchanged. This is an algebraic witness only.
+zeroOperator : Wave.DiscreteWave → Wave.DiscreteWave
+zeroOperator w = Wave.mkDiscreteWave (+ 0) (+ 0)
+
+identityOperator : Wave.DiscreteWave → Wave.DiscreteWave
+identityOperator w = w
+
+asymmetricOperators : TripleOperator
+asymmetricOperators =
+  tripleOperator zeroOperator identityOperator identityOperator
+
+unitWave : Wave.DiscreteWave
+unitWave = Wave.mkDiscreteWave (+ 1) (+ 0)
+
+asymmetricField : TripleWave
+asymmetricField = tripleWave unitWave unitWave unitWave
+
+fixedAsymmetricTransportDoesNotCommute :
+  evolveWith asymmetricOperators (rotate3 asymmetricField)
+  ≡ rotate3 (evolveWith asymmetricOperators asymmetricField) → ⊥
+fixedAsymmetricTransportDoesNotCommute ()
+
+-- To claim an actual physical channel symmetry requires observed or
+-- specified coefficients plus an action on the medium and sensor geometry.
+-- Neither this naturality square nor a 3/6/9 count supplies that receipt.
