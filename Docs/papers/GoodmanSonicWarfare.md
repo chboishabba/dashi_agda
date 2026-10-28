@@ -443,3 +443,32 @@ For every positive `n` in `1, 2, 10, 100, 1000, 10000`, four error pairs `(1/n,0
 **Latest PR methodological cross-check:** #1407's separate Fourier aliasing demonstrates why a discrete representation can lose physically relevant information, while #1411 and #1412 require explicit evidence and compatibility gates. These are cross-domain methodological analogies; no unmerged PR branch is imported here and no optical lattice, Navier–Stokes, Monster 3B, medical or acoustic same-object implication is claimed.
 
 **Real-world validation requirements**: measure individual instrument errors and correlated/common-mode errors before computing propagated uncertainty; verify source/reference-clock alignment and medium variation; preregister a held-out geometry/receiver prediction and compare against a calibrated baseline. Distinguish a successful inverse fit from a justified causal claim and from any ethical human-response trial. The exact rational model supplies a conditional algebraic check only. Original authors of soundscape studies, of Hadamard inverse-problem theory, of agda-stdlib lemmas, of Ibrahim media/Monster objects and of Goodman's cultural synthesis retain their separate ownership.
+
+## T9 regularised inversion, exact bias/noise trade-off, and independent 2025–2026 inverse-source research
+
+**Pareto step:** T5 is a finite identifiability result; T6 demonstrates a family of increasingly unstable exact inverses; T7–T8 formalise conditional reconstruction and paired-channel errors. The next distinct mathematical obligation is **regularisation**, which can reduce noise amplification but typically introduces bias. No extra cultural metaphor is needed.
+
+For a synthetic scalar residual `d = b-a = q*y + (beta-alpha)`, define the ridge candidate `z = rho*q*d`. The scalar quadratic objective `(q*z-d)^2 + lambda*z^2` has normal equation `(q*q+lambda)*z = q*d`. A *separately supplied* inverse coefficient `rho` must satisfy `(q*q+lambda)*rho = 1`. No source theorem here manufactures positivity of `lambda`, constructs `rho` for all settings, or proves a physical optimum.
+
+The **source-written Agda** application module `GoodmanSonicWarfareRationalInverseExact` now includes:
+
+- `ridgeSecond`: the declared regularised second-coordinate estimator;
+- `ridgeTwoChannelDecomposition`: the exact expression `z = (rho*q*q)*y + (rho*q)*(beta-alpha)`;
+- `ridgeBiasBalance`: conditional `(rho*q*q)*y + (rho*lambda)*y = y`;
+- `ridgeNormalEquation`: the normal-equation equality, conditional on the explicit inverse-coefficient certificate.
+
+This creates a **bias / error decomposition**, not a kernel-verified theorem yet. The proofs directly reuse the existing `Data.Rational.Tactic.RingSolver`. No new generic algebra, numerical PDE solver, or acoustic wave/absorber model was introduced.
+
+**Executed independent exact-rational regression:** `scripts/check_goodman_ridge_regularisation_finite.py` evaluates 6 positive scale values `n = 1,2,10,100,1000,10000`, 3 synthetic choices `lambda = 0, (1/n)^2, 1/n`, and 4 two-channel error pairs each. It checks **72/72 exact fractional cases**, normal equations, the bias/error decomposition and the common-mode equality. It outputs 18 parameter rows and explicitly makes *no* optimal-parameter claim. GitHub source byte count **2098**, character-FNV diagnostic `0x2180f876`, locally executed file SHA-256 `09560aff736268e35008deaba19bdb2d7a839493ddc6b674b20aa291e9a4ccb5`. Neither an exact fraction nor a good toy fit constitutes a calibrated acoustic experiment.
+
+**Independent source roots and attribution (not the owners of our finite proof):**
+
+- **A. N. Tikhonov** originated regularisation methods for ill-posed inverse problems; this application claims no priority for ridge/Tikhonov estimation. **Jacques Hadamard** retains the historical well-posedness criteria.
+- **Keaton Coletti, R. Benjamin Davis and Ryan Schultz** (5 September **2025**), [*Improved Bayesian regularization of inverse problems in vibrations and acoustics using noise-only measurements*](https://doi.org/10.1016/j.apacoust.2025.110756), *Applied Acoustics* **238**, 110756, Sandia SAND2025-05612J. Their independent research uses measured sensor noise in Tikhonov parameter selection and reports acoustic-source simulation and vibrational-load experiments. We have **not** reconstructed their method, executed their experiments, or established their quantitative performance claims.
+- **Tiphaine Delaunay, Sébastien Imperiale and Philippe Moireau** (online 10 September 2025; journal volume 2026), [*Mathematical analysis of an observer for solving inverse source wave problem*](https://doi.org/10.3934/ipi.2025043), *Inverse Problems and Imaging* **22**, 14–52. Their original wave-observability and inverse-source work provides separate identifiability/regularisation prior art. A finite toy observation pair is **not** their wave equation or its observability theorem.
+
+These new independent sources are stored under `acousticInverseSourceAtlas` in the original Goodman application, preserving author, publication, DOI, source kind and proof non-promotion. None is incorrectly attributed to Steve Goodman, to the T7/T9 author, or to an Ibrahim/Monster result. Likewise, original agda-stdlib theorem authors own the underlying ring-solver mechanics.
+
+**Physical translation and falsifiable decision:** collecting two microphone time series does not by itself guarantee independence of their errors. An empirical programme must report measured noise and cross-channel covariance, the acoustic forward/operator model, source-medium geometry and frequency band, a validation set unavailable during regulariser selection, confidence intervals and a negative/null comparator. A chosen regulariser trades bias against sensitivity. Neither T9 nor a low in-sample residual proves human affect, a specific sound weapon, or acoustic/Kozyrev abnormal mechanics.
+
+**No theorem promotion:** the T9 Agda source still awaits an Agda kernel check at the exact branch head. The 72 computed regression cases do not cover arbitrary parameter values, calibrate real instruments, or prove a minimisation theorem. PR #1407's open Fourier/aliasing construction is only independent methodological inspiration. Preserve original Ibrahim truth/deception ownership and never promote a shared frequency-count or character-pattern signature into physical or Monster same-object identity.
