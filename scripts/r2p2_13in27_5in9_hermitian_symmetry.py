@@ -96,6 +96,32 @@ def plane_convolution(left, right):
     return dict(output)
 
 
+def folded_hermitian_output(real_product, grid):
+    """Exact periodic output indices; N4 Nyquist self-negatives are real."""
+    if grid not in (4,5):
+        raise ValueError("only the relevant four/five grids")
+    def fold(k):
+        return tuple((x + grid // 2) % grid - grid // 2 for x in k)
+    output = defaultdict(lambda: (Fraction(0), Fraction(0)))
+    for k, value in real_product.items():
+        a,b = output[fold(k)]
+        output[fold(k)] = (a + value[0], b + value[1])
+    assert len(output) == grid**3
+    fixed = {k for k in output if fold(neg(k)) == k}
+    assert len(fixed) == (8 if grid == 4 else 1)
+    assert all(output[fold(neg(k))] == conjugate(v)
+               for k,v in output.items())
+    assert all(output[k][1] == 0 for k in fixed)
+    return {
+        "grid_points": grid**3,
+        "self_antipodal_frequency_classes": len(fixed),
+        "nonfixed_conjugate_pairs": (grid**3-len(fixed))//2,
+        "total_inversion_orbit_classes": (grid**3+len(fixed))//2,
+        "real_coefficients_at_all_self_antipodal_outputs": True,
+        "real_field_output_conjugate_symmetry": True,
+    }
+
+
 def audit():
     cube_reps = set(map(representative, CUBE27))
     plane_reps = set(map(representative, PLANE9))
@@ -138,6 +164,8 @@ def audit():
     assert compact_output == output
     assert len(output) == 125
     assert all(output[neg(k)] == conjugate(z) for k,z in output.items())
+    c4 = folded_hermitian_output(output,4)
+    c5 = folded_hermitian_output(output,5)
     output_reps = {representative(k) for k in output}
     assert len(output_reps) == 63
 
@@ -156,6 +184,7 @@ def audit():
             "pair_orbit_classes":365, "wide_product_modes":125,
             "wide_product_antipodal_classes":63
         },
+        "even_odd_padded_grid_inversion": {"four": c4, "five": c5},
         "real_coefficients": {
             "plane": "1 real zero + 4 complex = 9 real components",
             "cube": "1 real zero + 13 complex = 27 real components",
