@@ -21,10 +21,11 @@ module DASHI.Foundations.PolynomialVandermondeDiscriminantExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _-_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
 
 import DASHI.Foundations.PolynomialVietaRootSymmetryExact as Vieta
+open import Data.Rational.Literals using (number)
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as S3
 
 vandermonde : Vieta.ThreeRoots → ℚ
@@ -85,3 +86,27 @@ secondThirdCollisionGivesZero a b = Ring.solve-∀ a b
 -- converse (Δ=0 -> collision) and a nonzero complex coefficient
 -- covering/path-lift require field integral-domain and topology
 -- proofs, not finite root permutation tables alone.
+
+------------------------------------------------------------------------
+-- COEFFICIENT-ONLY CUBIC DISCRIMINANT.
+-- For monic x³ - s₁x² + s₂x - s₃, this is the classical formula.
+-- It makes explicit that Δ is a FUNCTION OF THE COEFFICIENTS,
+-- not simply a numerically equal root-oriented expression.
+------------------------------------------------------------------------
+
+coefficientDiscriminant : ℚ → ℚ → ℚ → ℚ
+coefficientDiscriminant s₁ s₂ s₃ =
+  s₁ * s₁ * (s₂ * s₂)
+  - ((s₂ * s₂ * s₂) * 4ℚ)
+  - ((s₁ * s₁ * s₁) * (s₃ * 4ℚ))
+  - ((s₃ * s₃) * 27ℚ)
+  + ((s₁ * s₂ * s₃) * 18ℚ)
+
+discriminantDependsOnlyOnVietaCoefficients :
+  (r : Vieta.ThreeRoots) →
+  discriminant r ≡
+  coefficientDiscriminant
+    (Vieta.rootSum r) (Vieta.rootPairSum r) (Vieta.rootProduct r)
+discriminantDependsOnlyOnVietaCoefficients
+  (Vieta.roots a b c) = Ring.solve-∀ a b c
+
