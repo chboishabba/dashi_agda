@@ -318,3 +318,38 @@ with stipulated synthetic review=true classifies 54 applicant,
 81 respondent, 19,548 missing-antecedent, and 242,461
 conflicted arrangements. These are hypothetical configurations,
 not a Woogaroo evidence or legal assessment.
+
+## Correction to the original 27-cube transport (28 October)
+
+The earlier mapping assigned applicant predicates to one
+T³ block, respondent predicates to another and review predicates
+to a third. That was NOT the user's actual dialectic 27-cube.
+The original construction is one T³ grid with X taking one
+dialectic's thesis/antithesis/synthesis role, Y a second
+dialectic's thesis/antithesis/synthesis role, and Z the
+*interaction's* own role. The XY plane has exactly nine
+ordered encounters and each has three possible Z positions.
+An XY encounter does not determine Z without a separately
+supplied synthesis/transport law.
+
+The new general reusable
+`DASHI/Reasoning/DialecticXYInteractionZTransportExact.agda`
+imports the earlier `TernaryComparisonSynthesisExact` canonical
+`Comparison9`/`SynthesisChoice27` and the literal
+`Base369Ternary27HypervoxelFabricGeometryExact`. It gives exact
+two-way coordinate rechart, a fixed-XY/different-Z obstruction
+to unauthorized descent, and an optional Z-stage transport.
+The new `DASHI/Law/SensibLawWoogarooXYInteraction27TransportExact.agda`
+attaches independent signed, contradictory and source-indexed
+legal evidence fibres to an interaction encounter without
+promoting them into its role coordinates. The general owner
+is imported in `TernarySynthesisOrbitWeldEverything` and the
+law adapter in both `Law.Everything` and the Woogaroo
+`PreservationEverything`. SLR #59 now exports an actual
+stage-free 27-cell carrier per ground and a corrected browser
+with three Z slices of the nine XY interactions. The
+earlier Boolean and signed T⁹ charts are retained ONLY as
+separate evidence/test lenses. Original Pareto/Ibrahim,
+law, DASHI comparison and Sophontic source authorship stays
+distinct; no real legal/physical Z mediation, Court outcome
+or evidence acquisition is inferred.
