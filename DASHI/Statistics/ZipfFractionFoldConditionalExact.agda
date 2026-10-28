@@ -1,102 +1,122 @@
 module DASHI.Statistics.ZipfFractionFoldConditionalExact where
 
--- 2026-10-28. F13b universal fold theorem.
--- Reuses ZipfFamilyFiniteExact and existing rational algebra.
--- NO postulates, unsafe flags, or fake Bool validation.
+-- F13b, 28 October 2026. A lawful positive-denominator fraction fold.
+-- The source FiniteFraction carrier does NOT forbid denominator zero.
+-- Do NOT state an addition-homomorphism over all raw FiniteFractions:
+-- that would wrongly require a division interpretation at denominator 0.
+-- Every interpretation below receives an explicit nonzero witness.
 --
--- This file proves: zero/add/term preservation IMPLIES whole-fold
--- preservation. It does NOT assert the concrete normalized rational
--- interpretation of the unreduced source FiniteFraction has already
--- discharged the addition preservation premise.
+-- Reuses ZipfFamilyFiniteExact.sumFirstDenominatorNonZero and
+-- Data.Nat.Properties.m*n≢0. The ONLY missing local algebraic payment is
+-- the concrete addFraction rational interpretation homomorphism.
 --
--- Classical finite-fold homomorphism mathematics: no originality claim.
--- Source formulation: Johl Brown-directed with ChatGPT assistance.
--- Existing original Zipf/Estoup/Mandelbrot/Hurwitz and PNF owners retain
--- priority; unrelated Ibrahim Monster 3B owner is not imported.
--- Source-written, Agda kernel typecheck NOT YET EXECUTED.
+-- Original finite-sum/rational algebra belongs to classical mathematics
+-- and the standard-library authors. Repository adapter: Johl Brown with
+-- OpenAI ChatGPT assistance. Existing prior Ibrahim 3B ownership retained.
+-- SOURCE-WRITTEN / Agda kernel NOT typechecked. No postulates/unsafe flags.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base as Nat using (NonZero; nonZero)
+import Data.Nat.Properties as NatP
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Statistics.ZipfFamilyFiniteExact as Finite
 import DASHI.Statistics.ZipfPNFConstructiveNormalizationExact as Normal
+import DASHI.Core.FiniteUniformProbabilityNormalizationExact as Fraction
 
--- The explicit assumptions are lawful morphism obligations, NOT proofs
--- of the actual `normalize numerator denominator` computation.
--- The instance is taken as an argument and cannot be synthesized from
--- the source-written repository code.
-
-record FractionInterpretation : Set₁ where
+-- Interpret ONLY fractions with proof of a nonzero denominator.
+-- The explicit witness makes the domain condition inescapable.
+record PositiveFractionInterpretation : Set₁ where
   field
-    interpret : Finite.Fraction → ℚ
-    zero-preserved : interpret Finite.zeroFraction ≡ 0ℚ
+    interpret :
+      (a : Finite.Fraction) →
+      Nat.NonZero (Fraction.denominator a) → ℚ
+    zero-preserved :
+      interpret Finite.zeroFraction Nat.nonZero ≡ 0ℚ
     addition-preserved :
       (a b : Finite.Fraction) →
-      interpret (Finite.addFraction a b) ≡ interpret a + interpret b
+      (a≢0 : Nat.NonZero (Fraction.denominator a)) →
+      (b≢0 : Nat.NonZero (Fraction.denominator b)) →
+      interpret (Finite.addFraction a b)
+        (NatP.m*n≢0
+          (Fraction.denominator a) (Fraction.denominator b)
+          {{a≢0}} {{b≢0}})
+      ≡ interpret a a≢0 + interpret b b≢0
 
-open FractionInterpretation public
+open PositiveFractionInterpretation public
 
--- Works for arbitrary finite fraction inputs. This is stronger than
--- the Zipf-only fold needed for source-normalizer parity.
-rationalFold : (I : FractionInterpretation) →
-  (Nat → Finite.Fraction) → Nat → ℚ
-rationalFold I f zero = 0ℚ
-rationalFold I f (suc n) =
-  interpret I (f n) + rationalFold I f n
+rationalFold :
+  (I : PositiveFractionInterpretation)
+  (f : Nat → Finite.Fraction) →
+  ((r : Nat) → Nat.NonZero (Fraction.denominator (f r))) →
+  Nat → ℚ
+rationalFold I f nz zero = 0ℚ
+rationalFold I f nz (suc n) =
+  interpret I (f n) (nz n) + rationalFold I f nz n
 
+-- The actual existing denominator-product proof, not a replacement.
+-- This is the generic induction step of the fraction normalization cut.
 finiteFractionFoldHomomorphism :
-  (I : FractionInterpretation)
+  (I : PositiveFractionInterpretation)
   (f : Nat → Finite.Fraction)
+  (nz : (r : Nat) → Nat.NonZero (Fraction.denominator (f r)))
   (n : Nat) →
-  interpret I (Finite.sumFirst f n) ≡ rationalFold I f n
-finiteFractionFoldHomomorphism I f zero = zero-preserved I
-finiteFractionFoldHomomorphism I f (suc n) =
+  interpret I (Finite.sumFirst f n)
+    (Finite.sumFirstDenominatorNonZero f n nz)
+  ≡ rationalFold I f nz n
+finiteFractionFoldHomomorphism I f nz zero =
+  zero-preserved I
+finiteFractionFoldHomomorphism I f nz (suc n) =
   trans
-    (addition-preserved I (Finite.sumFirst f n) (f n))
+    (addition-preserved I
+      (Finite.sumFirst f n) (f n)
+      (Finite.sumFirstDenominatorNonZero f n nz) (nz n))
     (trans
       (cong₂ _+_
-        (finiteFractionFoldHomomorphism I f n)
+        (finiteFractionFoldHomomorphism I f nz n)
         refl)
       (ℚP.+-comm
-        (rationalFold I f n)
-        (interpret I (f n))))
+        (rationalFold I f nz n)
+        (interpret I (f n) (nz n))))
 
--- A direct Zipf owner term-preservation hypothesis is separately typed.
--- It must be established on the actual positive-normalized interpretation,
--- not supplied as a synthetic receipt or source Boolean.
-
-record ZipfFractionInterpretation : Set₁ where
+-- One typed additional term-compatibility obligation. No instance of this
+-- record is fabricated; source-written normalize equality is still unpaid.
+record ZipfPositiveFractionInterpretation : Set₁ where
   field
-    fractionInterpretation : FractionInterpretation
-    term-preserved : ∀ r shift exponent →
-      interpret fractionInterpretation
+    positiveInterpretation : PositiveFractionInterpretation
+    rank-term-preserved : ∀ r shift exponent →
+      interpret positiveInterpretation
         (Finite.finiteMandelbrotTerm r shift exponent)
+        (Finite.mandelbrotDenominatorNonZero r shift exponent)
       ≡ Normal.rawTerm r shift exponent
 
-open ZipfFractionInterpretation public
+open ZipfPositiveFractionInterpretation public
 
--- The conclusion is exactly the unpaid bridge identified in F13b.
--- No claim is made that ZipfFractionInterpretation has an inhabitant.
-
+-- Full finite Hurwitz fold follows from the two concrete hypotheses.
+-- This is conditional on the *valid denominator* addition homomorphism.
 sourceHurwitzEqualsRationalFold :
-  (I : ZipfFractionInterpretation) (count shift exponent : Nat) →
-  interpret (fractionInterpretation I)
+  (I : ZipfPositiveFractionInterpretation)
+  (count shift exponent : Nat) →
+  interpret (positiveInterpretation I)
     (Finite.finiteHurwitz count shift exponent)
+    (Finite.finiteHurwitzDenominatorNonZero count shift exponent)
   ≡ Normal.rawSum count shift exponent
 sourceHurwitzEqualsRationalFold I zero shift exponent =
-  zero-preserved (fractionInterpretation I)
+  zero-preserved (positiveInterpretation I)
 sourceHurwitzEqualsRationalFold I (suc n) shift exponent =
   trans
-    (addition-preserved (fractionInterpretation I)
+    (addition-preserved (positiveInterpretation I)
       (Finite.finiteHurwitz n shift exponent)
-      (Finite.finiteMandelbrotTerm n shift exponent))
+      (Finite.finiteMandelbrotTerm n shift exponent)
+      (Finite.finiteHurwitzDenominatorNonZero n shift exponent)
+      (Finite.mandelbrotDenominatorNonZero n shift exponent))
     (trans
       (cong₂ _+_
         (sourceHurwitzEqualsRationalFold I n shift exponent)
-        (term-preserved I n shift exponent))
+        (rank-term-preserved I n shift exponent))
       (ℚP.+-comm
         (Normal.rawSum n shift exponent)
         (Normal.rawTerm n shift exponent)))
