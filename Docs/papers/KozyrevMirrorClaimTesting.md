@@ -1,3 +1,71 @@
+## 2026-10-28 cross-pollination cut: real geometric invariants versus numerology labels
+
+**Latest checked lineage:** #1414 root monodromy S3/C3, 3^5 vs 5^3,
+finite quaternion 720-degree lift; #1407 optical 3x3x3 / Fourier
+and #1408 signed SSP/CRT; existing Kozyrev #1404 and earlier
+#1164 torque owners. Reuse without rewriting source theorem owners.
+
+**Added source-written** `scripts/kozyrev_cross_family_screen.py`
+and tests. The code imports the existing
+`kozyrev_geometry_optimizer.vertices/first_hit` (existing #1404)
+rather than constructing duplicate polygon ray intersection code.
+It runs deterministic *internal-source* finite-panel Archimedean,
+endpoint-matched true logarithmic, and sinusoidally corrected
+segmented variation, with absorber ON/OFF, handedness and turns.
+Its multi-bounce paths compute P/c wall angular impulse and
+power-weighted travel residence.
+
+**Scientific gates:** This is a zero-thickness finite-panel
+**negative-control screen**. It is not the HTML finite-thickness
+SDF engine, does not test the aperture-inward first-hit predicate,
+and has no justified 3D, Maxwell, occupancy, laser diffraction,
+thermal or abnormal-torsion inference. The internal source used
+in the local 64-segment screen produced **zero central target
+capture** in the sampled cases: therefore no focusing Pareto
+winner can be claimed from that screen. Local 60-case auxiliary
+script found one segmented two-turn clockwise-torque scene at
+approximately -35.21 microN m under this DIFFERENT geometry,
+source, offset and sampling convention: NOT COMPARABLE to
+the earlier HTML ~-193 microN m figure.
+
+**Strict symmetry receivers**:
+- mirror transform (x,y)->(x,-y), direction likewise:
+  torque about z negates; total energy/path length unchanged
+  (provided target/source/boundaries are mirrored consistently).
+  This is a real 2D geometric-optical parity test.
+- A C3 cyclic relabelling of objective slots
+  (capture, clockwise wall torque, residence) and the full
+  six permutations S3 are **exact indexing symmetries** of
+  the analysis *labels*. They do NOT imply equal physical
+  scores or three-dimensional conservation.
+- A 3x3x3=27 factorial coding of low/central/high
+  settings is a compact **design of experiments** receiver.
+  3^5=243 versus 5^3=125 are different combinatorial
+  sets, not equal geometry populations, and not
+  performance predictions. The quaternion 720-degree
+  double-cover lift belongs to SO3/SU2 spin orientation,
+  not a predicted special 720-degree solar torque response.
+
+**Hard next blockers:** (1) wire log and segmented curves
+into *the same HTML collision state-machine* (finite
+thickness, continuous nearest hit, post-reflection forward
+offset, real entry aperture); (2) evaluate a matched-source,
+same-power 27-cell ternary experimental matrix with
+absorber paired ON/OFF and independent event referee;
+(3) sweep turns and pitch, then Pareto four genuinely
+different objectives: target capture, torque, in-domain
+power residence and directional outgoing impulse; (4) size
+and intersection tolerance convergence; (5) matched
+circle, curved sector and nonreflective controls.
+Until then, no cross-family globally optimal design exists.
+
+**Attribution:** original mathematical/numerology owners remain
+#1414/#1407/#1408; historical original geometry patents and
+microcavity claims attributed to their respective authors.
+The reusable cross-family fixture source belongs only to
+#1404. No new Agda theorem, no claim of Ibrahim/Monster 3B
+same-object representation, no edits to ESD surfaces.
+
 ## 2026-10-28 logarithmic / segmented spiral geometric cut
 
 **User's three regime hypotheses must be tested, not assumed.**
