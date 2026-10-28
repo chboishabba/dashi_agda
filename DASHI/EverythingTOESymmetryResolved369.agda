@@ -42,6 +42,38 @@ open Ternary270CRT public using
   ; wheel270PassesCertifiedTwoThreeFive
   )
 
+
+import DASHI.Arithmetic.PrimegameTypedNumericFirstApplicableBidiExact as GuyPriorityBidi
+open GuyPriorityBidi public using
+  ( ExactFractionApplies
+  ; ExactFractionEvaluator
+  ; typedStepToNumeric
+  ; numericStepToTyped
+  ; guyTypedToNumeric
+  ; guyNumericToTyped
+  ; typedHaltToNumeric
+  ; numericHaltToTyped
+  ; guyTypedHaltToNumeric
+  ; guyNumericHaltToTyped
+  ; guyExactGuardPriorityForward
+  ; guyExactGuardPriorityBackward
+  )
+
+import DASHI.Arithmetic.TwinPrimeTernary270IbrahimSurvivorCollisionExact as WheelIbrahimCollision
+open WheelIbrahimCollision public using
+  ( realTwinCubePoint
+  ; compositeTwinCubePoint
+  ; realTwinCubeCodes59
+  ; compositeTwinCubeCodes209
+  ; realTwinCubePassesWheel
+  ; compositeTwinCubePassesWheel
+  ; sameIbrahimOrbitInsideWheel
+  ; realTwin59IsTrue
+  ; composite209IsNotTwin
+  ; ibrahimFifteenFailsActualTwinConsumerWithinWheel
+  ; noTwinClassifierFromBareIbrahimPhaseWithinWheel
+  )
+
 import DASHI.Arithmetic.TwinPrimeTernary270SurvivorCoverageExact as Ternary270Coverage
 open Ternary270Coverage public using
   ( Wheel270Survives
