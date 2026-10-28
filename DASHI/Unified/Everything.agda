@@ -1,6 +1,10 @@
 module DASHI.Unified.Everything where
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Maybe using (just)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeNSCut
+import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Convolution729
+import DASHI.Physics.Closure.R2P227729PairSixTritFibreBidiExact as Pair729
+import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as Fourier729
 import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as R2P2Lattice
 import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as R2P2Symbolic
 import DASHI.Physics.Closure.R2P2369WaveOpticalCombInformationCutExact as R2P2Wave
@@ -587,3 +591,33 @@ unifiedNS27ModeCubeQuadraticAlias :
         ModeNSCut.modeMinus ModeNSCut.modeZero ModeNSCut.modeZero
 unifiedNS27ModeCubeQuadraticAlias =
   ModeNSCut.periodicThreeAxisPositiveXSquareWrapsToNegativeX
+
+------------------------------------------------------------------------
+-- 27x27 original ternary pair reused as source T^6, not GF(729).
+-- Numeric pair incidence, exact integer-frequency output and five-point
+-- index recovery are separate from original NS analytic and optical claims.
+------------------------------------------------------------------------
+
+unified729ActualInsidePairs :
+  Fourier729.countWhereL Fourier729.insidePair27 Fourier729.pair729 ≡ 343
+unified729ActualInsidePairs = Fourier729.exact343InWindowPairs
+
+unified729ActualOutsidePairs :
+  Fourier729.countWhereL
+    (λ pair → Fourier729.notB (Fourier729.insidePair27 pair))
+    Fourier729.pair729 ≡ 386
+unified729ActualOutsidePairs = Fourier729.exact386OutOfWindowPairs
+
+unified729SixTritPairBidi :
+  (pair : Pair729.OrderedPair729) →
+  Pair729.sixTritsToOrderedPair (Pair729.orderedPairToSixTrits pair) ≡ pair
+unified729SixTritPairBidi =
+  Pair729.sixTritsAfterOrderedPairRoundTrip
+
+unified729PairExactConvolution :
+  (amplitude : Fourier729.ModeCube27 → Nat)
+  (target : Convolution729.WideCube125) →
+  Convolution729.fiveIndexRecoveredConvolutionAt amplitude target
+    ≡ Convolution729.exactConvolutionAt amplitude target
+unified729PairExactConvolution =
+  Convolution729.all729PairsFiveIndexRecoveryIsExact
