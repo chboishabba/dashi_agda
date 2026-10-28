@@ -105,6 +105,15 @@ def main():
     assert all(parity(perm_compose(p,q))==(parity(p)+parity(q))%2
                for p in p5 for q in p5)
 
+    # Prefix !9999 is the derangement number, not postfix 9999!.
+    # Reuse the existing local subfactorial function and assert its
+    # genuinely distinct CRT projection before printing the result.
+    sub_exponent=subfactorial(9999)
+    assert sub_exponent.bit_length()==118444
+    sub_residues={d:pow(99,sub_exponent,d) for d in (9,11,101,360,9999)}
+    assert sub_residues=={9:0,11:0,101:23,360:81,9999:3861}
+    assert sub_residues!=residues
+
     print("PASS: exact factorial exponent, Gamma(10000) recurrence index,")
     print("      valuation(9999!) =",valuations)
     print("      M mod 9,11,101,360,9999 =",residues)
