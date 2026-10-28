@@ -66,13 +66,13 @@ traceSimulation :
   Reach.Reachable source before after →
   Reach.Reachable target (encode compiler before) (encode compiler after)
 traceSimulation compiler Reach.reachableRefl = Reach.reachableRefl
-traceSimulation compiler
+traceSimulation {target = target} compiler {after = after}
   (Reach.reachableStep action admissible rest)
   with stepAlignment compiler action admissible
 ... | targetStep , targetAfterAligned =
   Reach.reachableStep action targetStep
     (subst
-      (λ state → Reach.Reachable _ state _)
+      (λ state → Reach.Reachable target state (encode compiler after))
       (sym targetAfterAligned)
       (traceSimulation compiler rest))
 
