@@ -401,3 +401,39 @@ factorableLeftDominatesParameter a b t =
     coefficient : Nat
     coefficient =
       (suc (suc a)) * ((suc (suc a)) + 2) * (suc b)
+
+------------------------------------------------------------------------
+-- SAME CONCLUSION AT A SPECIFIED (not existential) exact output.
+-- This is the bridge needed by a threshold N: retain the actual
+-- arithmetic candidate in the result to apply the lower-bound proof.
+------------------------------------------------------------------------
+
+factorableSurvivorExactOutputIsComposite :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (a b t : Nat) →
+  (positive : Period.modulusProduct axes ≡ suc b) →
+  Pair.AllPairSurvive axes (suc (suc a)) →
+  Pair.AllPairSurvive axes
+    (factorableLeft (suc (suc a))
+      (Period.modulusProduct axes) (suc t))
+  × ( NatPrime.Composite
+        (factorableLeft (suc (suc a))
+          (Period.modulusProduct axes) (suc t))
+    × NatPrime.Composite
+        (factorableLeft (suc (suc a))
+          (Period.modulusProduct axes) (suc t) + 2))
+factorableSurvivorExactOutputIsComposite axes a b t positive survivor
+  rewrite positive =
+  factorablePairPreservesFiniteSieve axes
+    (suc (suc a)) (suc t) survivor
+  ,
+  ( twoNontrivialFactorsAreComposite
+      (factorableLeft (suc (suc a)) (suc b) (suc t))
+      (factorableLeftHasTwoNontrivialFactors a b t)
+  , subst NatPrime.Composite
+      (sym (leftFactorisationGivesRightPlusTwo
+        (suc (suc a)) (suc b) (suc t)))
+      (twoNontrivialFactorsAreComposite
+        (factorableRight (suc (suc a)) (suc b) (suc t))
+        (factorableRightHasTwoNontrivialFactors a b t))
+  )
