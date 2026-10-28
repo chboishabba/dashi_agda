@@ -5,6 +5,8 @@ on:
   pull_request:
     paths:
       - "DASHI/Culture/GoodmanSonicWarfareExact.agda"
+      - "DASHI/Culture/GoodmanSonicWarfareRhythmInterventionExact.agda"
+      - "DASHI/Culture/GoodmanSonicWarfareTransportExact.agda"
       - "DASHI/EverythingTOESymmetryResolved369.agda"
       - "DASHI/Unifier.agda"
       - "DASHI/Unified/Everything.agda"
@@ -19,6 +21,8 @@ on:
       - "feat/goodman-sonic-warfare-reuse-maxcut"
     paths:
       - "DASHI/Culture/GoodmanSonicWarfareExact.agda"
+      - "DASHI/Culture/GoodmanSonicWarfareRhythmInterventionExact.agda"
+      - "DASHI/Culture/GoodmanSonicWarfareTransportExact.agda"
       - "Docs/papers/GoodmanSonicWarfare.md"
       - "scripts/check_goodman_sonic_warfare_source.py"
       - "scripts/check_goodman_sonic_warfare_finite.py"
