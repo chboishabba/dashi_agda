@@ -83,8 +83,9 @@ finiteFractionFoldHomomorphism I f nz (suc n) =
         (rationalFold I f nz n)
         (interpret I (f n) (nz n))))
 
--- One typed additional term-compatibility obligation. No instance of this
--- record is fabricated; source-written normalize equality is still unpaid.
+-- One typed additional term-compatibility obligation. The concrete
+-- instance is now supplied below via the existing raw rational bridge,
+-- but the complete Agda import graph has not been kernel-checked.
 record ZipfPositiveFractionInterpretation : Set₁ where
   field
     positiveInterpretation : PositiveFractionInterpretation
@@ -126,8 +127,9 @@ sourceHurwitzEqualsRationalFold I (suc n) shift exponent =
 ------------------------------------------------------------------------
 -- F13b Pareto reduction: the *actual* quotient interpretation is fixed.
 -- No global division is attempted on raw denominator-zero fractions.
--- The ZERO and TERM laws are concrete. Only cross-denominator addition
--- compatibility remains as a separately typed mathematical obligation.
+-- The ZERO and TERM laws are concrete; cross-denominator addition is now
+-- constructed below using the pre-existing stdlib raw-rational isomorphism.
+-- Kernel verification is a separate remaining obligation.
 ------------------------------------------------------------------------
 
 concreteInterpret :
@@ -151,8 +153,9 @@ concreteRankTermPreserved : ∀ r shift exponent →
 concreteRankTermPreserved r shift exponent =
   sym (Normal.rawTermMatchesSource r shift exponent)
 
--- This is the SINGLE unpaid F13b equation. It has a constrained domain.
--- It is a type, not an axiom declaration, inhabitant, proof token or Bool.
+-- F13b's single algebraic equation has a constrained domain.
+-- A source-written inhabitant is now supplied below; the Agda kernel check
+-- is unpaid. This type is not an axiom declaration or receipt Boolean.
 ConcreteAddLaw : Set
 ConcreteAddLaw =
   (a b : Finite.Fraction) →
@@ -179,9 +182,9 @@ concreteZipfInterpretation addLaw = record
   ; rank-term-preserved = concreteRankTermPreserved
   }
 
--- All earlier fold work can now be consumed by providing JUST the
--- concrete cross-denominator addition theorem. This is deliberately
--- conditional and never registered as an unconditional paid F13b.
+-- All earlier fold work is consumed below by the source-written concrete
+-- cross-denominator addition theorem. Do not register it as kernel-paid
+-- F13b until the compatible Agda checker verifies this import closure.
 concreteSourceHurwitzEqualsRationalFold :
   (addLaw : ConcreteAddLaw)
   (count shift exponent : Nat) →
