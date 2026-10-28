@@ -246,3 +246,12 @@ max-cut and canonical potential-only snowball ownership are retained.
 No original evidence, real Sophontic model inference, legal determination,
 filed action, kernel proof execution or Monster same-object identity
 has been created. ESD surfaces remain untouched.
+
+**New exact geometric proof obligation closed at source level:**
+`sixInputBitsRoundTrip` decodes the six independent Bool fields after
+the canonical three-cube encoding; `worldTo369Injective` proves the
+embedding is one-to-one. It explicitly leaves raw negative-trit states
+outside the source-encoded image and never identifies the 19,683
+ambient positions with 19,683 admissible legal worlds. It is
+source-written until Agda kernel checking. The Sophontic paired
+semantic evaluator remains distinct from a trained model benchmark.
