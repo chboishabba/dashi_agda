@@ -541,10 +541,7 @@ failed higher-priority guard. `guyTypedToNumeric`,
 `guyNumericToTyped`, `guyTypedHaltToNumeric`, and
 `guyNumericHaltToTyped` specialise to the **actual 14-rule Guy
 programme**. `ExactFractionApplies` uses an integer successor
-witness `m*d=n*a` with nonzero denominator. The distinct
-`ExactFractionEvaluator` demands proof that a selected evaluator
-returns that successor; **no concrete signed FRACDASH evaluator
-instance is currently supplied**.
+witness `m*d=n*a` with nonzero denominator. The new `concreteExactFractionEvaluator` now supplies an actual **Nat quotient** evaluator for this arithmetic guard. It uses `Data.Nat.DivMod.m≡m%n+[m/n]*n` and `m*n%n≡0` to prove `next*d=n*a`. A concrete **signed FRACDASH state/action compiler** is still absent.
 
 This advances A05/A06 and the typed-factor part of C02/C03 from a
 bare 14-rule list to **first-applicable BIDI source terms**. A07/A08,
@@ -590,3 +587,27 @@ Independent subsequent cut: E03–E08 general coprime prime-product
 CRT, p-2 local counts and analytic gates F02/F04/F06/F07 and G01.
 Existing finite encodings and Monster fingerprints cannot
 discharge these analytic estimates.
+
+### 2026-10-28 numeric evaluator is now *source-instantiated*
+
+`PrimegameTypedNumericFirstApplicableBidiExact` now defines
+`exactNumericNext`, `exactNumericNextIsCorrect`, and an inhabited
+`concreteExactFractionEvaluator` record. The zero denominator is
+rejected by `ExactFractionApplies`; for positive denominators,
+Agda's stdlib quotient/remainder equations derive exact output
+`next*d=n*a` from the arithmetic integrality witness. This is
+not an uninterpreted evaluator axiom. The three canonical TOE roots
+export `guyConcreteExactPriorityForward` and
+`guyConcreteExactPriorityBackward`.
+
+**Scope/evidence:** source-written Agda with explicit stdlib names,
+not typechecked in this runtime. Local exact Python tested the
+14 original Guy fractions and 20,000 integer steps; it is not the
+Agda kernel. The missing A07/A08/B03/C08 frontier is now the
+actual signed SSP/FRACDASH action-state simulation plus readout,
+not a missing integer-division specification. No branch-only
+#1414 polynomial/quintic/monodromy module was imported: #1414
+correctly distinguishes its own 27-label endomorphism/S3 meanings
+from cube-coordinate semantics, and no mathematical map into the
+actual twin-prime correlation was established. Preserve its own
+PR ownership and Ibrahim 3B boundary.
