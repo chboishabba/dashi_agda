@@ -363,6 +363,10 @@ def check() -> None:
         require(c3_symbol + " :" in c3_source, f"missing C3 wave equivariance {c3_symbol}")
     require("GoodmanSonicWaveC3EquivarianceExact" in transport,
             "C3 wave bridge missing from TOE graph")
+    for s16 in ("heterogeneousCovariance", "rotateOperatorsThreeTimes",
+                "fixedAsymmetricTransportDoesNotCommute"):
+        require(s16 + " :" in c3_source, f"T16 operator-symmetry boundary missing {s16}")
+    require("T16 heterogeneous C3" in doc, "missing heterogeneous symmetry provenance")
     require("T15 homogeneous C3" in doc, "missing conditional C3 wave provenance")
     require("T11 numerological cross-pollination" in doc and "PR #1414" in doc,
             "missing T11 numerology provenance memo")
