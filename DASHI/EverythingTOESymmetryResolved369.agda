@@ -35,6 +35,7 @@ open CompositeBaseline public using
   ; nonemptyModulusProductHasAtLeastTwo
   ; baselineAtLeastThree
   ; everyNonemptyFinitePrimeSieveHasDoubleCompositeSurvivor
+  ; everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor
   )
 
 import DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact as FactorableSieveLift
@@ -50,6 +51,9 @@ open FactorableSieveLift public using
   ; factorableRightHasTwoNontrivialFactors
   ; certifiedModulusProductPositive
   ; factorableSurvivorWithBothStrictFactors
+  ; factorableLeftLinearInParameter
+  ; factorableLeftDominatesParameter
+  ; factorableSurvivorExactOutputIsComposite
   ; twoNontrivialFactorsAreComposite
   ; twoNontrivialFactorsRefutePrime
   ; factorableSurvivorWithBothCompositeCertificates
