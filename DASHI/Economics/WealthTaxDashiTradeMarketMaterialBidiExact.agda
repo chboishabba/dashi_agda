@@ -10,7 +10,7 @@ module DASHI.Economics.WealthTaxDashiTradeMarketMaterialBidiExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -367,3 +367,122 @@ quantityCannotFixVotingControl =
 -- 34/50 and 16/50 are fixture voting weights. This is not a legal
 -- board-control determination, a registered ownership record, nor a model
 -- of beneficial owner chains, voting pacts or fiduciary agreements.
+
+
+------------------------------------------------------------------------
+-- SETTLED TRANSACTION SUBCUT: ORDER != EXECUTION != CASH SETTLEMENT.
+-- A settlement cash entry is not present merely because a trade was proposed
+-- or executed. We impose same-route quantity and cash equalities explicitly.
+-- This remains a synthetic finite proof, NOT a custodian or broker receipt.
+-- Prior original proof: DASHI.Core.IntersectionalNonFactorability.
+------------------------------------------------------------------------
+
+record TwoFillSettlementLink : Set where
+  constructor two-fill-settlement-link
+  field
+    settledFundingRoute : FundingRoute
+    submittedUnits : Nat
+    firstExecutedUnits : Nat
+    secondExecutedUnits : Nat
+    firstSettledUnits : Nat
+    secondSettledUnits : Nat
+    firstUnitPrice : Nat
+    secondUnitPrice : Nat
+    unfilledUnits : Nat
+    firstUnsettledUnits : Nat
+    secondUnsettledUnits : Nat
+    proposedUnitsReconciled :
+      submittedUnits ≡
+        firstExecutedUnits + secondExecutedUnits + unfilledUnits
+    firstFillReconciled :
+      firstExecutedUnits ≡ firstSettledUnits + firstUnsettledUnits
+    secondFillReconciled :
+      secondExecutedUnits ≡ secondSettledUnits + secondUnsettledUnits
+    settledVolumeReconciled :
+      shareUnitsSold settledFundingRoute ≡
+        firstSettledUnits + secondSettledUnits
+    settledProceedsReconciled :
+      grossSaleCash settledFundingRoute ≡
+        firstSettledUnits * firstUnitPrice
+        + secondSettledUnits * secondUnitPrice
+open TwoFillSettlementLink public
+
+-- Same two-unit order submitted but not filled: paid from opening cash.
+submittedWithoutFill : TwoFillSettlementLink
+submittedWithoutFill =
+  two-fill-settlement-link
+    cashFunded
+    2 0 0 0 0 0 0 2 0 0
+    refl refl refl refl refl
+
+-- Two separate unit fills at distinct gross prices 1 and 2 produce 3.
+-- Exactly 2 settled units, 3 proceeds, 1 paid execution cash cost and
+-- 2 tax cash collected under the earlier assetSaleFunded balance.
+twoPricesThreeProceeds : TwoFillSettlementLink
+twoPricesThreeProceeds =
+  two-fill-settlement-link
+    assetSaleFunded
+    2 1 1 1 1 1 2 0 0 0
+    refl refl refl refl refl
+
+-- The full order executed, but no unit has actually settled.
+executedUnsettled : TwoFillSettlementLink
+executedUnsettled =
+  two-fill-settlement-link
+    cashFunded
+    2 2 0 0 0 3 0 0 2 0
+    refl refl refl refl refl
+
+settledShareCount : TwoFillSettlementLink → Nat
+settledShareCount link =
+  firstSettledUnits link + secondSettledUnits link
+
+executedShareCount : TwoFillSettlementLink → Nat
+executedShareCount link =
+  firstExecutedUnits link + secondExecutedUnits link
+
+sameSubmittedUnits :
+  submittedUnits submittedWithoutFill ≡ submittedUnits twoPricesThreeProceeds
+sameSubmittedUnits = refl
+
+differentSettlementAtSameSubmittedUnits :
+  settledShareCount submittedWithoutFill ≡
+  settledShareCount twoPricesThreeProceeds → ⊥
+differentSettlementAtSameSubmittedUnits ()
+
+submittedOrderDoesNotDetermineSettlement :
+  INF.FactorsThrough submittedUnits settledShareCount → ⊥
+submittedOrderDoesNotDetermineSettlement =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      submittedWithoutFill twoPricesThreeProceeds
+      sameSubmittedUnits differentSettlementAtSameSubmittedUnits)
+
+sameExecutedUnits :
+  executedShareCount executedUnsettled ≡
+  executedShareCount twoPricesThreeProceeds
+sameExecutedUnits = refl
+
+differentSettlementAtSameExecutedUnits :
+  settledShareCount executedUnsettled ≡
+  settledShareCount twoPricesThreeProceeds → ⊥
+differentSettlementAtSameExecutedUnits ()
+
+executionDoesNotDetermineSettlement :
+  INF.FactorsThrough executedShareCount settledShareCount → ⊥
+executionDoesNotDetermineSettlement =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      executedUnsettled twoPricesThreeProceeds
+      sameExecutedUnits differentSettlementAtSameExecutedUnits)
+
+-- A matching synthetic receipt states only the stipulated equality.
+-- It is not an actual cleared exchange or custodian bank statement.
+twoFillCashConservation :
+  grossSaleCash (settledFundingRoute twoPricesThreeProceeds) ≡
+    firstSettledUnits twoPricesThreeProceeds
+      * firstUnitPrice twoPricesThreeProceeds
+    + secondSettledUnits twoPricesThreeProceeds
+      * secondUnitPrice twoPricesThreeProceeds
+twoFillCashConservation =
+  settledProceedsReconciled twoPricesThreeProceeds
