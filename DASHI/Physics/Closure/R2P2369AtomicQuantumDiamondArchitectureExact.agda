@@ -662,3 +662,13 @@ fullArchitectureSupercell18IsNotIdentifiedC18 :
     (lattice canonicalR2P2369FullLogicalArchitecture) ≡ false
 fullArchitectureSupercell18IsNotIdentifiedC18 =
   Lattice.maSupercell18IsNotAnIdentifiedC18PhysicsRealization
+
+-- At Fourier indices -1,0,+1, Ma S6 offsets ±11, ±18 cannot couple
+-- distinct modes. The P3 site-graph toy is therefore not the S6 Fourier
+-- operator under a naive identity-of-three-modes identification.
+fullArchitectureMaS6ThreeModeHasNoSideband :
+  (a b : Lattice.ThreePlaneWaveMode) →
+  Lattice.MaS6Sideband (Lattice.modeSeparation a b) →
+  EmptyR2P2.⊥
+fullArchitectureMaS6ThreeModeHasNoSideband =
+  Lattice.noMaS6SidebandInThreeModeFourierTruncation
