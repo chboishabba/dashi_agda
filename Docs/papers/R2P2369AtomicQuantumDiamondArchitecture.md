@@ -97,6 +97,23 @@ Published primary-source benchmarks: Grotti et al., *Physical Review Applied* **
 
 Regression: `tests/test_r2p2_clock_bias_identifiability.py`. Kernel type checking remains a distinct CI task, now declared in `.github/workflows/r2p2-369-maxcut.yml`. Do not describe workflow creation as a successful test execution.
 
+## 369 three-clock ratio-loop integrity (latest Pareto/snowball follow-up)
+
+The January **2026 Optica review** by **Fortier, Luiten and Margolis**, DOI https://doi.org/10.1364/OPTICA.575770, describes optical-clock frequency-ratio loop closures and consistency analysis. This inherits earlier loop-closure work and experimental clock-network authorship, including Beloy et al. 2021. It is a distinct source-root to the R2P2 mountain link. Original authors retain the identity/proof of their scientific work.
+
+New **source-written** finite Agda adapter: `DASHI/Physics/Closure/R2P2ThreeClockLoopClosure369Exact.agda`. For the tiny synthetic clock frequencies `fA=3`, `fB=6`, `fC=9`, the three directed ratios `fA/fB`, `fB/fC`, `fC/fA` have product **exactly 1**. The rational identity is represented as an equality of integer numerator and denominator products, `3×6×9=6×9×3=162`. An intentionally corrupted edge `fC'/fA=10/3` instead yields **10/9** rather than one; the incompatible integer products are `180` and `162`. The constructor checks are **finite mathematical examples**, not experimental clock ratios.
+
+A real triangle needs **three independent clock references and three observed frequency ratio edges** with common epoch/clock correction and covariance treatment. R2P2 as published has **two clocks / one comparison**, hence no three-clock observed triangle. A loop misclosure indicates inconsistent edge data and/or model; a zero loop cannot prove spacetime curvature, the equivalence principle, or quantised gravity. 369 provides a *three-node index analogy* in our software; it does **not** assign special physical significance to 3, 6 or 9.
+
+This loop adapter is imported by the canonical architecture and all three TOE aggregates, with direct proof terms for the exact finite closure and the no-curvature promotion boundary. Test file: `tests/test_r2p2_three_clock_loop_closure.py`.
+
+Further evidence snowball, without importing these unrelated object identities:
+- **Caldwell, Triano, Sinclair (2025)**, *High-precision optical time and frequency transfer*, DOI https://doi.org/10.1364/AOP.545290. Same R2P2-linked authors; review of coherent optical transfer rather than proof of this experiment's final calibrated residual.
+- **Bergeron, Sinclair, Swann et al. (2019)**, *Femtosecond Time Synchronization of Optical Clocks Off a Flying Quadcopter*, NIST https://www.nist.gov/publications/femtosecond-time-synchronization-optical-clocks-flying-quadcopter . Prior-art for moving-platform reciprocity and its breakdown; not the video's helicopter apparatus or a published R2P2 flight result.
+- **Aeppli et al. (2026)**, *Optical clock frequency ratios with uncertainty ≤3.2×10^-18*, NIST https://www.nist.gov/publications/optical-clock-frequency-ratios-uncertainty-32-10-18 . Independent multi-clock ratio benchmarking; NOT the R2P2 pair-specific covariance.
+- **Ma et al. (2026-10-14 arXiv v2)**, *An Aubry–André localized optical lattice clock*, https://arxiv.org/abs/2610.17499 . A physically separate localisation and space-clock preparation result, not demonstrated by the 369 refinement index.
+- **Ganapathy, Singh, Singamsetty, Kolkowitz (2026-10-16 accepted)**, *Gravitational-wave astronomy with a space-based optical clock network*, DOI https://doi.org/10.1103/xr78-l2zs . A separate instrument concept; gravitational-wave capability and quantum gravity should not be conflated.
+
 ## Scope, limits, verification (S/L/P/G/F)
 
 **Built**: complete type-level *logical* path; reused 369 atomic/field index; both diamonds; finite C3/Weyl certificates; SI second owner; two-way transfer obligations; external redshift bridge; source and evidence guards; tests and TOE root imports.
@@ -125,8 +142,10 @@ python3 tests/test_r2p2_mountain_optical_clock.py
 python3 tests/test_r2p2_369_atomic_quantum_diamond.py
 python3 tests/test_r2p2_clock_comparison_diagnostic.py
 python3 tests/test_r2p2_clock_bias_identifiability.py
+python3 tests/test_r2p2_three_clock_loop_closure.py
 python3 scripts/r2p2_clock_comparison_diagnostic.py
 agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2ClockBiasIdentifiabilityMaxCutExact.agda
+agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2ThreeClockLoopClosure369Exact.agda
 agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda
 ```
 
