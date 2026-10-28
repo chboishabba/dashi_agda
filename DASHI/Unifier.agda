@@ -42,6 +42,19 @@ open Ternary270CRT public using
   ; wheel270PassesCertifiedTwoThreeFive
   )
 
+import DASHI.Arithmetic.TwinPrimeTernary270SurvivorCoverageExact as Ternary270Coverage
+open Ternary270Coverage public using
+  ( Wheel270Survives
+  ; wheel270CompleteFin
+  ; certifiedWheel270ToGuards
+  ; wheel270CompleteCertified
+  ; wheel270SurvivorDecodes
+  ; wheel270ProjectionMod27
+  ; wheel270ProjectionMod5
+  ; wheel270ProjectionMod2
+  ; survivorFibreFactorisation
+  )
+
 import DASHI.Arithmetic.TwinPrimeThreeAxisLocalThreeOrbitExact as TernaryLocalPrimeThree
 open TernaryLocalPrimeThree public using
   ( centeredPrimeThreeResidue
