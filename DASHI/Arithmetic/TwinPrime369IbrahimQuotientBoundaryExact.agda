@@ -38,10 +38,10 @@ import DASHI.Foundations.Base369AddressSymmetryAndBranchGeometryExact as Branch
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
 import DASHI.Foundations.BalancedTernaryAntipodalResidualCodecExact as Codec
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Ibrahim
-import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierExact as M42
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSP
 import DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact as Guy
 
+import DASHI.Foundations.Base369NDimParetoChartExact as NineAxes
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Core
 import DASHI.Core.IntersectionalNonFactorability as NF
 
@@ -168,3 +168,29 @@ countComparisonIsNotATypedEquivalence :
 countComparisonIsNotATypedEquivalence =
   phasePreservingFifteen ,
   (strictGlobalAntipodalFourteen , historicalGuyFourteenRules)
+
+------------------------------------------------------------------------
+-- NUMERICAL CROSS-POLLINATION MUST RETAIN ITS OPERATION.
+-- Three Cartesian triples produce NINE ternary axes: 3^(3+3+3),
+-- not a proof that 3^5 and 5^3 are the same object.
+------------------------------------------------------------------------
+
+nineAxisGroupingIsThreeCartesianCubes :
+  NineAxes.ternaryNineAxisProfileCount
+    ≡ (3 * 3 * 3) * (3 * 3 * 3) * (3 * 3 * 3)
+nineAxisGroupingIsThreeCartesianCubes = refl
+
+threeToFifthIs243 :
+  3 * 3 * 3 * 3 * 3 ≡ 243
+threeToFifthIs243 = refl
+
+fiveCubedIs125 :
+  5 * 5 * 5 ≡ 125
+fiveCubedIs125 = refl
+
+threeToFifthDoesNotEqualFiveCubed :
+  (3 * 3 * 3 * 3 * 3 ≡ 5 * 5 * 5) → ⊥
+threeToFifthDoesNotEqualFiveCubed ()
+
+-- No same-object Monster character identity, D4 module equivalence,
+-- all-prime emitter, or prime correlation follows from these counts.
