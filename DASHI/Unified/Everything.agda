@@ -53,6 +53,12 @@ open Ternary270Coverage public using
   ; wheel270ProjectionMod5
   ; wheel270ProjectionMod2
   ; survivorFibreFactorisation
+  ; wheel270CubePoint119
+  ; wheel270119Survives
+  ; wheel270119IsComposite
+  ; wheel270121IsComposite
+  ; wheel270119SurvivalCannotProveTwin
+  ; wheel270121NotPrime
   )
 
 import DASHI.Arithmetic.TwinPrimeThreeAxisLocalThreeOrbitExact as TernaryLocalPrimeThree
