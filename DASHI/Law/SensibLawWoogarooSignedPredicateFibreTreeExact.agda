@@ -112,6 +112,46 @@ mergeSamePredicate left right with
   claim-evidence pos neg
     (originalReferences left ++ originalReferences right)
 
+-- The low-level merge is NOT a legal source/authority join. This
+-- dependent wrapper ensures both fine values refer to the SAME exact
+-- ground, signed proposition and scope before a merger is constructible.
+record ScopedSignedEvidence
+    (g : Ground.Ground) (slot : PredicateSlot) (scope : String) : Set where
+  constructor scoped-signed-evidence
+  field
+    fineEvidence : SignedClaimEvidence
+open ScopedSignedEvidence public
+
+mergeScopedSameProposition :
+  ∀ {g slot scope} →
+  ScopedSignedEvidence g slot scope →
+  ScopedSignedEvidence g slot scope →
+  ScopedSignedEvidence g slot scope
+mergeScopedSameProposition
+  (scoped-signed-evidence left)
+  (scoped-signed-evidence right) =
+  scoped-signed-evidence (mergeSamePredicate left right)
+
+-- The same named predicate on a DIFFERENT ground/scope cannot be given
+-- to mergeScopedSameProposition without a separate equality transport
+-- witness. A string label or common 369 position does not supply one.
+sameScopePositive : ScopedSignedEvidence
+  Ground.approvedAdviceOmitted allegedDefect "epbc:2019/8575"
+sameScopePositive = scoped-signed-evidence
+  (claim-evidence true false [])
+
+sameScopeNegative : ScopedSignedEvidence
+  Ground.approvedAdviceOmitted allegedDefect "epbc:2019/8575"
+sameScopeNegative = scoped-signed-evidence
+  (claim-evidence false true [])
+
+scopedOppositionRetainsBoth :
+  classifySupport
+    (fineEvidence
+      (mergeScopedSameProposition sameScopePositive sameScopeNegative))
+  ≡ bothReported
+scopedOppositionRetainsBoth = refl
+
 unknownEvidence : SignedClaimEvidence
 unknownEvidence = claim-evidence false false []
 
