@@ -104,3 +104,40 @@ finite counterexample and test are source-written in this PR.
 passes. Local mixed-snapshot suite **130/130 passed**; same exact-head and
 Agda kernel limitations apply. Source/test Git blob SHA for the 7-test
 file: `0cdf6c598508ad90eface59ae6166679819de5e8`.
+
+
+## Further sharp no-go — ordered discovery means DO NOT order novelty rates
+
+The finite cumulative expectation inequality `E_f[V_t]≤E_g[V_t]`
+for every t **does not imply the corresponding inequality of first
+differences** `E_f[V_(t+1)]-E_f[V_t]` and `E_g[V_(t+1)]-E_g[V_t]`.
+This matters whenever a proposed physical or empirical argument replaces
+a bounded cumulative statistic with a pointwise rate.
+
+**Exact IID Zipf counterexample:** K=2, shift q=0, exponent 0 gives
+`g=(1/2,1/2)`; exponent 1 gives `f=(2/3,1/3)`. The exponent-1
+law majorizes exponent 0 and has no more expected distinct types for
+any t. But the probability of **one new type on draw t+1** is
+
+`P_new(t)=Σ_i p_i(1-p_i)^t`.
+
+At t=1, `P_new(1;f)=4/9 < 1/2=P_new(1;g)`.
+At t=4, `P_new(4;f)=2/27 > 1/16=P_new(4;g)`.
+Rare-type persistence reverses the instantaneous ordering.
+
+**Exact uniform fixed-multiset counterexample:** concentrated count
+`f=(1,3)` majorizes `g=(2,2)` with N=4 and K=2. For the final
+fourth draw, the expected new-type increments are respectively
+`1/4 > 0`, despite the cumulative mean dominance theorem.
+
+This new regression, `test_majorization_ordered_cumulative_means_do_not_order_novelty_rates`,
+reuses the previously owned IID novelty derivative and fixed-multiset
+vocabulary expectation functions. It proves only a bounded finite
+no-go / mathematical model discriminator. It does **not** establish
+empirical novelty avalanches, Navier–Stokes signed derivative control
+or a time-evolution theorem.
+
+**Updated local execution:** **131/131 tests passed**, latest added
+test Git blob `15944f6bfddb9de7bbf7f240931c489c59771f03`
+byte-matches the locally executed version. The exact GitHub HEAD
+suite and Agda kernel remain unverified.
