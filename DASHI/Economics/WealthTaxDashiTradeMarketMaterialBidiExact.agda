@@ -1923,3 +1923,186 @@ syntheticModelCannotIdentifyObservedCausalEffect =
       syntheticVersusExternalA syntheticVersusExternalB refl
       externalOutcomeDiffersAtSamePrediction)
 
+------------------------------------------------------------------------
+-- 2026-10-28 THIRD FOLLOW-ON: EXCLUSIVE SOURCE TAGS AND MATCHED ADMISSION.
+-- Inputs bearing the word "authenticated" require an external checker;
+-- no local label, hash or record constructor supplies that checker.
+------------------------------------------------------------------------
+
+-- C06. An individual funding source contributes to exactly one channel.
+-- Repetition of a historical source with a forged new local token is NOT
+-- prevented by the type; genuine source identity is an external obligation.
+data ExclusiveFundingChannel : Set where
+  existingCashChannel : ExclusiveFundingChannel
+  freshLoanChannel : ExclusiveFundingChannel
+  settledSaleChannel : ExclusiveFundingChannel
+
+record TaggedFundingReceipt : Set where
+  constructor tagged-funding-receipt
+  field
+    fundingSourceToken : Nat
+    fundingSourceChannel : ExclusiveFundingChannel
+    fundingSourceUnits : Nat
+open TaggedFundingReceipt public
+
+cashContribution : TaggedFundingReceipt → Nat
+cashContribution (tagged-funding-receipt _ existingCashChannel n) = n
+cashContribution (tagged-funding-receipt _ freshLoanChannel n) = zero
+cashContribution (tagged-funding-receipt _ settledSaleChannel n) = zero
+
+loanContribution : TaggedFundingReceipt → Nat
+loanContribution (tagged-funding-receipt _ existingCashChannel n) = zero
+loanContribution (tagged-funding-receipt _ freshLoanChannel n) = n
+loanContribution (tagged-funding-receipt _ settledSaleChannel n) = zero
+
+saleContribution : TaggedFundingReceipt → Nat
+saleContribution (tagged-funding-receipt _ existingCashChannel n) = zero
+saleContribution (tagged-funding-receipt _ freshLoanChannel n) = zero
+saleContribution (tagged-funding-receipt _ settledSaleChannel n) = n
+
+cashSourceUseIsSingleCounted :
+  (source : TaggedFundingReceipt) →
+  (cashContribution source + loanContribution source)
+    + saleContribution source ≡ fundingSourceUnits source
+cashSourceUseIsSingleCounted (tagged-funding-receipt _ existingCashChannel n) =
+  refl
+cashSourceUseIsSingleCounted (tagged-funding-receipt _ freshLoanChannel n) =
+  refl
+cashSourceUseIsSingleCounted (tagged-funding-receipt _ settledSaleChannel n) =
+  refl
+
+-- C09 conditional route admission. The positive conclusion requires
+-- credit, liquidity and chronology proofs, supplied independently.
+record FinancedRouteAdmission : Set where
+  constructor financed-route-admission
+  field
+    admittedFundingRoute : FundingRoute
+    availableLiquidCash : Nat
+    unrestrictedCashWithinLiquidity :
+      unrestrictedCash admittedFundingRoute ≤ availableLiquidCash
+    supportedCreditLimit : Nat
+    lendingWithinCollateralLimit :
+      newLoanCash admittedFundingRoute ≤ supportedCreditLimit
+    lastSettlementEpoch : Nat
+    taxPaymentEpoch : Nat
+    fundedBeforeRemittance :
+      lastSettlementEpoch ≤ taxPaymentEpoch
+open FinancedRouteAdmission public
+
+routeFundingFeasibleGivenLiquidityCollateralAndTiming :
+  (receipt : FinancedRouteAdmission) →
+  (unrestrictedCash (admittedFundingRoute receipt)
+    ≤ availableLiquidCash receipt)
+  × ((newLoanCash (admittedFundingRoute receipt)
+    ≤ supportedCreditLimit receipt)
+     × (lastSettlementEpoch receipt ≤ taxPaymentEpoch receipt))
+routeFundingFeasibleGivenLiquidityCollateralAndTiming receipt =
+  unrestrictedCashWithinLiquidity receipt ,
+  (lendingWithinCollateralLimit receipt , fundedBeforeRemittance receipt)
+
+-- E07. Source-checked holder and issuer/class matching must come from
+-- an independently validated registry receipt. String field agreement
+-- does not verify legal title, beneficial ownership or real signatures.
+record OwnerIssuerSecurityAdmission
+    (OfficialRegistryReceipt : Set)
+    (RegistryValid : OfficialRegistryReceipt → Set) : Set where
+  constructor owner-issuer-security-admission
+  field
+    ownershipRegisterReceipt : OfficialRegistryReceipt
+    independentRegistryValidation :
+      RegistryValid ownershipRegisterReceipt
+    namedInvestorAtFill : String
+    namedInvestorOnRegister : String
+    namedIssuerAtFill : String
+    namedIssuerOnRegister : String
+    namedShareClassAtFill : String
+    namedShareClassOnRegister : String
+    sameNamedInvestor :
+      namedInvestorAtFill ≡ namedInvestorOnRegister
+    sameNamedIssuer :
+      namedIssuerAtFill ≡ namedIssuerOnRegister
+    sameNamedShareClass :
+      namedShareClassAtFill ≡ namedShareClassOnRegister
+open OwnerIssuerSecurityAdmission public
+
+authenticatedOwnerIssuerInstrumentClassKey :
+  {OfficialRegistryReceipt : Set} →
+  {RegistryValid : OfficialRegistryReceipt → Set} →
+  (admission : OwnerIssuerSecurityAdmission
+    OfficialRegistryReceipt RegistryValid) →
+  RegistryValid (ownershipRegisterReceipt admission)
+  × ((namedInvestorAtFill admission ≡ namedInvestorOnRegister admission)
+      × ((namedIssuerAtFill admission ≡ namedIssuerOnRegister admission)
+          × (namedShareClassAtFill admission ≡ namedShareClassOnRegister admission)))
+authenticatedOwnerIssuerInstrumentClassKey admission =
+  independentRegistryValidation admission ,
+  (sameNamedInvestor admission ,
+    (sameNamedIssuer admission , sameNamedShareClass admission))
+
+-- H08. Independent authority, same-object custody/assessment keys,
+-- and a causal identification predicate are separate inputs.
+-- No inhabited external authoritative evidence is fabricated here.
+record MatchedPolicyEffectAdmission
+    (AssessmentRecord CustodyRecord OutcomeRecord DesignRecord : Set)
+    (AssessmentVerified : AssessmentRecord → Set)
+    (CustodyVerified : CustodyRecord → Set)
+    (OutcomeVerified : OutcomeRecord → Set)
+    (DesignVerified : DesignRecord → Set) : Set where
+  constructor matched-policy-effect-admission
+  field
+    primaryTaxAssessment : AssessmentRecord
+    taxAssessmentChecked : AssessmentVerified primaryTaxAssessment
+    primaryCustodyMovement : CustodyRecord
+    custodyMovementChecked : CustodyVerified primaryCustodyMovement
+    primaryPhysicalOutcome : OutcomeRecord
+    outcomeChecked : OutcomeVerified primaryPhysicalOutcome
+    independentCausalDesign : DesignRecord
+    causalDesignChecked : DesignVerified independentCausalDesign
+    taxSourceTaxpayerKey : Nat
+    custodyTaxpayerKey : Nat
+    assessmentAndCustodySamePerson :
+      taxSourceTaxpayerKey ≡ custodyTaxpayerKey
+    custodySecurityKey : Nat
+    outcomeSecurityKey : Nat
+    custodyAndOutcomeSameSecurity :
+      custodySecurityKey ≡ outcomeSecurityKey
+open MatchedPolicyEffectAdmission public
+
+measuredPolicyEffectRequiresSameObjectInputs :
+  {AssessmentRecord CustodyRecord OutcomeRecord DesignRecord : Set} →
+  {AssessmentVerified : AssessmentRecord → Set} →
+  {CustodyVerified : CustodyRecord → Set} →
+  {OutcomeVerified : OutcomeRecord → Set} →
+  {DesignVerified : DesignRecord → Set} →
+  (joined : MatchedPolicyEffectAdmission
+    AssessmentRecord CustodyRecord OutcomeRecord DesignRecord
+    AssessmentVerified CustodyVerified OutcomeVerified DesignVerified) →
+  (taxSourceTaxpayerKey joined ≡ custodyTaxpayerKey joined)
+    × (custodySecurityKey joined ≡ outcomeSecurityKey joined)
+measuredPolicyEffectRequiresSameObjectInputs joined =
+  assessmentAndCustodySamePerson joined ,
+  custodyAndOutcomeSameSecurity joined
+
+-- I08. Two explicit, hypothetical tax-rate labels can each sit behind
+-- a non-dominated outcome. Pareto alone cannot uniquely SELECT the rate.
+-- These labels are illustrative, not enacted rates or rate advice.
+data SyntheticRateLabel : Set where
+  exampleZeroRate : SyntheticRateLabel
+  exampleFullExcessRate : SyntheticRateLabel
+
+rateTagForOutcome : HypotheticalPolicyOutcome → SyntheticRateLabel
+rateTagForOutcome lowAdministrativeCost = exampleZeroRate
+rateTagForOutcome increasedCareCapacity = exampleFullExcessRate
+
+syntheticTaxRateLabelsAreDifferent :
+  exampleFullExcessRate ≡ exampleZeroRate → ⊥
+syntheticTaxRateLabelsAreDifferent ()
+
+noUniqueOptimalTaxRateFromParetoOrderAlone :
+  ((candidate : HypotheticalPolicyOutcome) →
+    TwoOptionUndominated candidate →
+    rateTagForOutcome candidate ≡ exampleZeroRate) → ⊥
+noUniqueOptimalTaxRateFromParetoOrderAlone claimedUnique =
+  syntheticTaxRateLabelsAreDifferent
+    (claimedUnique increasedCareCapacity careCapacityIsUndominated)
+
