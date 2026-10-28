@@ -53,6 +53,29 @@ The module also imports the existing 87Sr atomic identity `neutralAt 38 49` and 
 
 A canonical `OpticalLattice369PhysicalAuthority` record composes the earlier source owners. Fields for `finiteP3ProvesInfiniteAAThreshold`, `maMagicLatticeTransferToR2P2Verified`, `actualR2P2TrapDepthMeasuredHere`, `maPublishedCoherenceDataIngested`, `opticalLatticeControlsMetricRedshift` and `measuredQuantumGravityObserved` are **all false**. These are explicit scope declarations, not negative results about nature.
 
+## 3b. Signed three-site spectral calculation (independently executed)
+
+Added `scripts/r2p2_optical_lattice_3site_diagnostic.py` as a **pure Python/Fraction**, finite three-site spectral calculation. The executable uses
+
+```text
+H(J,D) =
+[  0  -J   0 ]
+[ -J   D  -J ]
+[  0  -J  2D ]
+```
+
+with real signed off-diagonal hopping. Here `D` is *only a synthetic linear on-site gradient*, **not** the calibrated `Δ cos(2π β i+φ)` of the Ma experiment and not a gravitational energy shift. Exact determinant and trace arithmetic yield:
+
+```text
+det(λ I - H)
+  = λ³ - 3D λ² + (2D² - 2J²)λ + 2D J²
+  = (λ-D)((λ-D)² - D² - 2J²)
+```
+
+Thus `λ=D` is an exact finite eigenvalue for every rational `J,D`; the other roots are `D±√(D²+2J²)`. For the synthetic choice `J=1,D=2`, the cubic is `λ³-6λ²+6λ+4`. This is a **genuine finite spectral calculation**, not an AA transition or an optical-clock measured spectrum. Its independent arithmetic oracle was **actually run** locally for `(J,D)=(1,2),(1,0),(0,2),(3,6),(2,9),(-2,-3)`, 6/6 exact rational characteristic/cofactor/central-eigenvalue tests passed. The committed diagnostic file and full GitHub checkout suite were **not** run locally; equivalence of source and independently exercised arithmetic was checked by authored formula, not an exact-head execution receipt.
+
+The executable is called by the PR-local CI workflow, and `tests/test_r2p2_optical_lattice_369.py` now exercises all six parameter pairs. This remains below Agda kernel certification and below a fit to Ma et al.'s published Rabi/Ramsey spectra.
+
 ## 4. Pareto / snowball / Ibrahim plan — real cutset
 
 **P0: Experiment identity** — separate the 2022 Sr vertical redshift, 2026 Ma Sr87 horizontal AA localization, and 2026 R2P2 neutral-Yb mountain redshift. This is a primary-source provenance/authority gate.
@@ -72,7 +95,7 @@ Attribution: Aubry & André retain original ideal localization-theory priority; 
 ## 5. Verification status
 
 - Source-written Agda finite three-site witness. Imported by `DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda` and **all three TOE roots**.
-- Added `tests/test_r2p2_optical_lattice_369.py`, exact noncommuting map and source/authority static contract.
+- Added `tests/test_r2p2_optical_lattice_369.py`, exact noncommuting map and source/authority static contract, plus six signed spectral cubic test cases.
 - Target `R2P2OpticalLattice369HamiltonianCutExact.agda` added to the existing PR-local focused pinned Agda workflow.
 - Python arithmetic can be checked independently in a local runtime. It is **not** an Agda kernel receipt and not a source-specific measurement.
 - Agda binary was absent on the available host. The current PR has no reported exact-head GitHub workflow run. Do not claim test suite or kernel success unless actually executed.
