@@ -1,3 +1,74 @@
+## 2026-10-28 logarithmic / segmented spiral geometric cut
+
+**User's three regime hypotheses must be tested, not assumed.**
+True logarithmic polar curve `r = a exp(b theta)`, pitch
+`tan(alpha) = b`, fractional radius growth per turn
+`exp(2 pi b)-1`. The proposed 5-10% / turn maps to
+`b = 0.007765... to 0.015169...`, NOT `b = 0.1-0.2`.
+The `b -> 0` limit is a circle but does not universally imply
+maximum central target capture or zero wall force for arbitrary
+illumination. `b -> infinity` does not establish monotone or
+maximum directional thrust and may make an interior aperture/ray
+experiment inadmissible. `1.5 turns` is a testable geometric
+candidate, not a proven universal focusing/no-escape theorem.
+
+**Executed exact geometric screen (source, no ray solver):**
+12 log pitches times 5 winding counts (1, 1.25, 1.5, 2, 3)
+at inner radius 1.5 m and geometric thickness 0.156 m: 60
+candidates; 43 pass the *necessary radial entrance clearance*
+`outer_radius - same_angle_previous_turn_radius > thickness`.
+This gate is not sufficient for source entrance, non-self-
+intersection, full-containment or physical ray dynamics.
+For comparison, the known 1.5-turn Archimedean fixture at
+`inner = 1.5 m; growth = 0.402 m/rad` has outer radius
+5.288760740229291 m. An endpoint-matched logarithmic family
+requires `b = 0.1337027621187584` (pitch 7.61544 degrees)
+and 131.655% growth/revolution. Endpoint matching does not mean
+wall curvature, notch, thickness or angle distributions match.
+
+**Added** `scripts/kozyrev_logarithmic_geometry_audit.py`
+and dedicated synthetic unit tests; independently executed a
+local equivalent geometry script and produced 60-row JSON. Newly
+committed source/test files are not claimed as freshly executed.
+This is an exact feasibility **prior** to expensive SDF ray
+optimisation, not an optical Pareto frontier.
+
+**Source boundaries / 2026 web verification:**
+Trowbridge, Wright & Dholakia, *The Radiation Pressure of Light:
+historical perspectives and the role of structured light*,
+arXiv:2504.18789 (2025) supports optical momentum background,
+not a three-state logarithmic spiral optimum;
+Liew, Redding, Ge, Solomon & Cao, *Active control of emission
+directionality of semiconductor microdisk lasers*, arXiv:1404.6709
+(2014), establishes selective optical pumping in deformed microdisks,
+not `b=0.1` universal;
+Kwon et al., *Lasing modes in a spiral-shaped dielectric
+microcavity*, Opt. Lett. 31, 1250-1252 (2006),
+doi:10.1364/OL.31.001250, distinguishes high-Q WGM-like and
+quasi-scarred directional modes;
+Courvoisier et al., *Deciphering output coupling mechanisms in
+spiral microcavities with femtosecond light bullets*,
+Opt. Lett. 30, 738-740 (2005), doi:10.1364/OL.30.000738,
+documents notch/evanescent coupling in actual wave microcavities.
+
+**Next blocking receiver:** reuse the *same* HTML state machine or
+a collision-by-collision cross-validated independent curve
+intersector for the logarithmic and segmented families. Only then
+run paired absorber ON/OFF, same-source entry-gated sweeps of
+pitch x turns x notch/position/thickness, with 2D P/c
+linear/angular conservation, receiver power, directional escape
+coefficient, power-weighted residence and source-normalised Pareto
+frontier. A matched circle/sector/nonreflective enclosure must use
+identical input power and aperture conventions. Re-evaluate by
+ray-resolution and offset convergence. Hand-wave WGM, thermal,
+biological and anomalous physics remain explicit non-promotions.
+
+**Attribution:** standard logarithmic spiral and radiation-pressure
+physics belongs to antecedent mathematics/physics; historic patent
+root Kaznacheev/Trofimov; prior DASHI torque proof owners #1164;
+logarithmic candidate source and audit only #1404; optical/TOE
+#1407, Ibrahim/Monster 3B, and ESD boundaries unchanged.
+
 ## 2026-10-28 original-purpose cut: spatial optical occupancy and control obligation
 
 **Reconnection to RU2122446C1:** the actual hypothesis is not "maximise
