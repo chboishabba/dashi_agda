@@ -14,11 +14,12 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (_≤_; _∸_)
-open import Data.Nat.Properties using (m≤m+n; ≤-trans; +-assoc; +-comm; m+n∸n≡m)
+open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; +-assoc; +-comm; m+n∸n≡m)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact as Tax
 import DASHI.Finance.DashiTradeFibreBridgeExact as Trade
 import DASHI.Trading.DashiTradeDreamOptionConeExact as Dream
@@ -881,3 +882,31 @@ deliveredCareHoursBoundedByEquipment :
   (service : DeliveredCareCapacity) →
   actuallyDeliveredHours service ≤ equipmentServiceHourCapacity service
 deliveredCareHoursBoundedByEquipment service = equipmentBound service
+
+
+------------------------------------------------------------------------
+-- PARETO ORDER LAWS (I06): REUSE ORIGINAL MULTI-AXIS COST HYPERFABRIC.
+-- We prove preorder laws over the existing weak-dominance definition;
+-- admissibility, policy feasibility, and objective-axis choices remain
+-- independently supplied by a real comparison consumer.
+------------------------------------------------------------------------
+
+paretoDominanceReflexive :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (candidate : Pareto.Model problem) →
+  Pareto.WeaklyDominates costs candidate candidate
+paretoDominanceReflexive costs candidate axis = ≤-refl
+
+paretoDominanceTransitive :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  {first second third : Pareto.Model problem} →
+  Pareto.WeaklyDominates costs first second →
+  Pareto.WeaklyDominates costs second third →
+  Pareto.WeaklyDominates costs first third
+paretoDominanceTransitive costs first≤second second≤third axis =
+  ≤-trans (first≤second axis) (second≤third axis)
+
+-- The order admits incomparable alternatives. It neither maximises a
+-- scalar welfare score nor authorises a particular wealth-tax percentage.
