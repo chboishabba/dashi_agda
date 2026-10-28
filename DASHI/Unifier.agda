@@ -23,6 +23,35 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.TwinPrimeThreeAxisLocalThreeOrbitExact as TernaryLocalPrimeThree
+open TernaryLocalPrimeThree public using
+  ( centeredPrimeThreeResidue
+  ; centeredPrimeThreePoint
+  ; everyCenteredResidueIsTwoModuloThree
+  ; everyCenteredPlusTwoIsOneModuloThree
+  ; localPrimePairSwapIsInnerAntipode
+  ; primeThreeOrbitRespectsInnerInversion
+  ; centeredSlicePassesCertifiedPrimeThree
+  ; nineLocalThreeSurvivors
+  ; fiveInnerSwapOrbitClasses
+  ; nineDecomposesAsOneCentreFourSwapPairs
+  )
+
+import DASHI.Arithmetic.TwinPrime369IbrahimQuotientBoundaryExact as NumerologyBoundary
+open NumerologyBoundary public using
+  ( typedCubeCapacity
+  ; phasePreservingThreeTimesFiveIsFifteen
+  ; phasePreservingFifteen
+  ; strictGlobalAntipodalFourteen
+  ; historicalGuyFourteenRules
+  ; originalOggFifteenPrimes
+  ; primegameUsesTenPrimes
+  ; phaseOrbitCannotRecoverSignedY
+  ; fullSignedCubeRoundTrip
+  ; nineAxisGroupingIsThreeCartesianCubes
+  ; threeToFifthDoesNotEqualFiveCubed
+  )
+
 import DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact as PrimegameCarrierSupport
 open PrimegameCarrierSupport public using
   ( typedFractionsAreExactGuyFourteen
