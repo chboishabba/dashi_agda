@@ -135,6 +135,26 @@ existingCyclic27Parseval :
     ≡ P.energy3 signal
 existingCyclic27Parseval = P.cubeParsevalNormalised
 
+-- This is a genuinely operator-level statement over ANY cyclotomic
+-- amplitude on the 27 group labels. The direct owner remains C3CubeDirect...
+periodicC3ConvolutionOfModeCoefficients :
+  ModeCoefficient27 → ModeCoefficient27 → ModeCoefficient27
+periodicC3ConvolutionOfModeCoefficients f g =
+  unpackModeSignal (C.convolution3 (packModeSignal f) (packModeSignal g))
+
+spectralC3ConvolutionOfModeCoefficients :
+  ModeCoefficient27 → ModeCoefficient27 → ModeCoefficient27
+spectralC3ConvolutionOfModeCoefficients f g =
+  unpackModeSignal (F.spectralConvolution (packModeSignal f) (packModeSignal g))
+
+periodic27DirectEqualsSpectralAtEveryMode :
+  (f g : ModeCoefficient27) (m : I.ModeCube27) →
+  periodicC3ConvolutionOfModeCoefficients f g m
+    ≡ spectralC3ConvolutionOfModeCoefficients f g m
+periodic27DirectEqualsSpectralAtEveryMode f g m
+  rewrite C.directEqualsSpectralConvolution (packModeSignal f)
+           (packModeSignal g) = refl
+
 -- EXISTING DFT applies to the quotient, not to the true high-frequency
 -- integer output. This is the concrete alias witness to transport around.
 cyclicC3ConvolutionCanAliasIntegerPlusTwo :
