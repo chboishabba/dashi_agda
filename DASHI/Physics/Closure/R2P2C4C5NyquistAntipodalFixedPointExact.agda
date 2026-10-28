@@ -29,6 +29,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
@@ -110,6 +111,68 @@ allFourGridCubes =
 fourCubeHas64Elements : I.lengthL allFourGridCubes ≡ 64
 fourCubeHas64Elements = refl
 
+------------------------------------------------------------------------
+-- Boolean count is proved to recognize ACTUAL fixed points of negation.
+-- This avoids identifying an arbitrary support label with a C2 orbit.
+------------------------------------------------------------------------
+
+andTrueLeft : (a b : Bool) → Full._&&B_ a b ≡ true → a ≡ true
+andTrueLeft true b proof = refl
+andTrueLeft false b ()
+
+andTrueRight : (a b : Bool) → Full._&&B_ a b ≡ true → b ≡ true
+andTrueRight true b proof = proof
+andTrueRight false b ()
+
+fourAxisFixedIffFlagForward :
+  (a : Four.FourGridMode) →
+  fourGroupAntipode a ≡ a → fourFixedAxis a ≡ true
+fourAxisFixedIffFlagForward Four.fourMinusOne ()
+fourAxisFixedIffFlagForward Four.fourZero proof = refl
+fourAxisFixedIffFlagForward Four.fourPlusOne ()
+fourAxisFixedIffFlagForward Four.fourOuterTwo proof = refl
+
+fourAxisFixedIffFlagBackward :
+  (a : Four.FourGridMode) →
+  fourFixedAxis a ≡ true → fourGroupAntipode a ≡ a
+fourAxisFixedIffFlagBackward Four.fourMinusOne ()
+fourAxisFixedIffFlagBackward Four.fourZero proof = refl
+fourAxisFixedIffFlagBackward Four.fourPlusOne ()
+fourAxisFixedIffFlagBackward Four.fourOuterTwo proof = refl
+
+fourGridFlagIfAndOnlyIfActuallySelfNegativeForward :
+  (g : Four.FourGridCube64) →
+  fourGridAntipode g ≡ g → fourFixedCube g ≡ true
+fourGridFlagIfAndOnlyIfActuallySelfNegativeForward
+  (Four.fourCube a b c) proof
+  rewrite fourAxisFixedIffFlagForward a (cong Four.x proof)
+        | fourAxisFixedIffFlagForward b (cong Four.y proof)
+        | fourAxisFixedIffFlagForward c (cong Four.z proof) = refl
+
+fourGridFlagIfAndOnlyIfActuallySelfNegativeBackward :
+  (g : Four.FourGridCube64) →
+  fourFixedCube g ≡ true → fourGridAntipode g ≡ g
+fourGridFlagIfAndOnlyIfActuallySelfNegativeBackward
+  (Four.fourCube a b c) proof =
+  let ab = Full._&&B_ (fourFixedAxis a) (fourFixedAxis b)
+      fa = andTrueLeft (fourFixedAxis a) (fourFixedAxis b)
+             (andTrueLeft ab (fourFixedAxis c) proof)
+      fb = andTrueRight (fourFixedAxis a) (fourFixedAxis b)
+             (andTrueLeft ab (fourFixedAxis c) proof)
+      fc = andTrueRight ab (fourFixedAxis c) proof
+  in
+  witness fa fb fc
+  where
+    witness :
+      fourFixedAxis a ≡ true →
+      fourFixedAxis b ≡ true →
+      fourFixedAxis c ≡ true →
+      fourGridAntipode (Four.fourCube a b c) ≡ Four.fourCube a b c
+    witness fa fb fc
+      rewrite fourAxisFixedIffFlagBackward a fa
+            | fourAxisFixedIffFlagBackward b fb
+            | fourAxisFixedIffFlagBackward c fc = refl
+
 fourCubeHasEightFixedAntipodes :
   I.countWhereL fourFixedCube allFourGridCubes ≡ 8
 fourCubeHasEightFixedAntipodes = refl
@@ -190,6 +253,57 @@ allFiveGridCubes =
 
 fiveCubeHas125Elements : I.lengthL allFiveGridCubes ≡ 125
 fiveCubeHas125Elements = refl
+
+fiveAxisFixedIffFlagForward :
+  (a : I.FiveGridMode) →
+  fiveGroupAntipode a ≡ a → fiveFixedAxis a ≡ true
+fiveAxisFixedIffFlagForward I.gridMinusTwo ()
+fiveAxisFixedIffFlagForward I.gridMinusOne ()
+fiveAxisFixedIffFlagForward I.gridZero proof = refl
+fiveAxisFixedIffFlagForward I.gridPlusOne ()
+fiveAxisFixedIffFlagForward I.gridPlusTwo ()
+
+fiveAxisFixedIffFlagBackward :
+  (a : I.FiveGridMode) →
+  fiveFixedAxis a ≡ true → fiveGroupAntipode a ≡ a
+fiveAxisFixedIffFlagBackward I.gridMinusTwo ()
+fiveAxisFixedIffFlagBackward I.gridMinusOne ()
+fiveAxisFixedIffFlagBackward I.gridZero proof = refl
+fiveAxisFixedIffFlagBackward I.gridPlusOne ()
+fiveAxisFixedIffFlagBackward I.gridPlusTwo ()
+
+fiveGridFlagIfAndOnlyIfActuallySelfNegativeForward :
+  (g : Full.GridCube125) →
+  fiveGridAntipode g ≡ g → fiveFixedCube g ≡ true
+fiveGridFlagIfAndOnlyIfActuallySelfNegativeForward
+  (Full.gridCube a b c) proof
+  rewrite fiveAxisFixedIffFlagForward a (cong Full.x proof)
+        | fiveAxisFixedIffFlagForward b (cong Full.y proof)
+        | fiveAxisFixedIffFlagForward c (cong Full.z proof) = refl
+
+fiveGridFlagIfAndOnlyIfActuallySelfNegativeBackward :
+  (g : Full.GridCube125) →
+  fiveFixedCube g ≡ true → fiveGridAntipode g ≡ g
+fiveGridFlagIfAndOnlyIfActuallySelfNegativeBackward
+  (Full.gridCube a b c) proof =
+  let ab = Full._&&B_ (fiveFixedAxis a) (fiveFixedAxis b)
+      fa = andTrueLeft (fiveFixedAxis a) (fiveFixedAxis b)
+             (andTrueLeft ab (fiveFixedAxis c) proof)
+      fb = andTrueRight (fiveFixedAxis a) (fiveFixedAxis b)
+             (andTrueLeft ab (fiveFixedAxis c) proof)
+      fc = andTrueRight ab (fiveFixedAxis c) proof
+  in
+  witness fa fb fc
+  where
+    witness :
+      fiveFixedAxis a ≡ true →
+      fiveFixedAxis b ≡ true →
+      fiveFixedAxis c ≡ true →
+      fiveGridAntipode (Full.gridCube a b c) ≡ Full.gridCube a b c
+    witness fa fb fc
+      rewrite fiveAxisFixedIffFlagBackward a fa
+            | fiveAxisFixedIffFlagBackward b fb
+            | fiveAxisFixedIffFlagBackward c fc = refl
 
 fiveCubeHasOneFixedAntipode :
   I.countWhereL fiveFixedCube allFiveGridCubes ≡ 1
