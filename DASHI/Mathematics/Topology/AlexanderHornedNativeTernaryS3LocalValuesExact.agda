@@ -20,6 +20,7 @@ module DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryS3LocalValuesExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Data.Product using (_,_)
 open import Data.Vec.Base using ([])
@@ -144,3 +145,108 @@ localC3SubgroupHomomorphism g h x =
 -- Full local S3 is a real enlargement of C3 but is still solvable;
 -- there is no algebraic route from merely selecting S3-valued
 -- functions to the nontrivial perfect Hatcher source or its 2I target.
+ 
+
+------------------------------------------------------------------------
+-- Source-specific Heaps / equality-pattern receiver from draft #1275:
+-- independent local S3 actions do NOT preserve the equality partition
+-- of labels at different addresses; global diagonal S3 does.
+--
+-- Equality is preserved by any global bijective coordinate relabeling,
+-- proved on ALL 6×3×3 source-labelled cases, rather than assuming it.
+-- The three-sector prefix (low,low,low) has Heaps counts (1,1,1);
+-- local reflection of the first sector changes it to (1,2,2).
+-- Draft #1275 retains original Heaps/Zipf statistical proof ownership.
+------------------------------------------------------------------------
+
+equalTruth : Base.TriTruth → Base.TriTruth → Bool
+equalTruth Base.tri-low Base.tri-low = true
+equalTruth Base.tri-mid Base.tri-mid = true
+equalTruth Base.tri-high Base.tri-high = true
+equalTruth _ _ = false
+
+diagonalS3PreservesEquality :
+  (p : Perm.TriPermutation) (a b : Base.TriTruth) →
+  equalTruth (Perm.applyPermutation p a) (Perm.applyPermutation p b)
+  ≡ equalTruth a b
+diagonalS3PreservesEquality Perm.permIdentity Base.tri-low Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permIdentity Base.tri-low Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permIdentity Base.tri-low Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permIdentity Base.tri-mid Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permIdentity Base.tri-mid Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permIdentity Base.tri-mid Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permIdentity Base.tri-high Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permIdentity Base.tri-high Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permIdentity Base.tri-high Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permRotate Base.tri-low Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permRotate Base.tri-low Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permRotate Base.tri-low Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permRotate Base.tri-mid Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permRotate Base.tri-mid Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permRotate Base.tri-mid Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permRotate Base.tri-high Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permRotate Base.tri-high Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permRotate Base.tri-high Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permRotate2 Base.tri-low Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permRotate2 Base.tri-low Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permRotate2 Base.tri-low Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permRotate2 Base.tri-mid Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permRotate2 Base.tri-mid Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permRotate2 Base.tri-mid Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permRotate2 Base.tri-high Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permRotate2 Base.tri-high Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permRotate2 Base.tri-high Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permSwapLowMid Base.tri-low Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permSwapLowMid Base.tri-low Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permSwapLowMid Base.tri-low Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permSwapLowMid Base.tri-mid Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permSwapLowMid Base.tri-mid Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permSwapLowMid Base.tri-mid Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permSwapLowMid Base.tri-high Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permSwapLowMid Base.tri-high Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permSwapLowMid Base.tri-high Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permSwapLowHigh Base.tri-low Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permSwapLowHigh Base.tri-low Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permSwapLowHigh Base.tri-low Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permSwapLowHigh Base.tri-mid Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permSwapLowHigh Base.tri-mid Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permSwapLowHigh Base.tri-mid Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permSwapLowHigh Base.tri-high Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permSwapLowHigh Base.tri-high Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permSwapLowHigh Base.tri-high Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permSwapMidHigh Base.tri-low Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permSwapMidHigh Base.tri-low Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permSwapMidHigh Base.tri-low Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permSwapMidHigh Base.tri-mid Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permSwapMidHigh Base.tri-mid Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permSwapMidHigh Base.tri-mid Base.tri-high = refl
+diagonalS3PreservesEquality Perm.permSwapMidHigh Base.tri-high Base.tri-low = refl
+diagonalS3PreservesEquality Perm.permSwapMidHigh Base.tri-high Base.tri-mid = refl
+diagonalS3PreservesEquality Perm.permSwapMidHigh Base.tri-high Base.tri-high = refl
+
+prefixTwoDiversity : ValueField 0 → Nat
+prefixTwoDiversity f with
+  equalTruth (f (C3.c0 , [])) (f (C3.c1 , []))
+... | true = 1
+... | false = 2
+
+originalTwoSectorDiversity :
+  prefixTwoDiversity allLow ≡ 1
+originalTwoSectorDiversity = refl
+
+localS3ChangesTwoSectorDiversity :
+  prefixTwoDiversity
+    (actGauge localReflectionOnlyFirstSector allLow) ≡ 2
+localS3ChangesTwoSectorDiversity = refl
+
+diagonalS3PreservesTwoSectorDiversity :
+  (p : Perm.TriPermutation) (f : ValueField 0) →
+  prefixTwoDiversity (actGauge (constantS3 p) f)
+  ≡ prefixTwoDiversity f
+diagonalS3PreservesTwoSectorDiversity p f
+  rewrite diagonalS3PreservesEquality p
+    (f (C3.c0 , [])) (f (C3.c1 , [])) = refl
+
+-- The local gauge torsor changes equality pattern. Thus Heaps and
+-- partition observables can be invariant for *diagonal* S3 without
+-- being invariant for the full independent local S3^X action.
