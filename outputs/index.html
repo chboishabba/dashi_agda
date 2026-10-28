@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DASHI outputs catalog</title>
+  <meta name="generator" content="ao-fleet-conductor">
+  <meta name="generated-at" content="2026-10-28T11:11:00+10:00">
+  <meta name="run-type" content="strategy-2-bundle">
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { max-width: 72rem; margin: 0 auto; padding: 2rem 1rem 4rem; line-height: 1.5; }
+    h1, h2 { line-height: 1.2; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
+    th, td { border: 1px solid currentColor; padding: .55rem; text-align: left; vertical-align: top; }
+    code { overflow-wrap: anywhere; }
+    .meta { display: grid; grid-template-columns: max-content 1fr; gap: .3rem 1rem; }
+    .status { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DASHI outputs catalog</h1>
+    <p>
+      Unified catalog for generated run pages across the repository output roots.
+      Entries carry an explicit timestamp and run-type label.
+    </p>
+    <dl class="meta">
+      <dt>Generated</dt>
+      <dd><time datetime="2026-10-28T11:11:00+10:00">2026-10-28 11:11 +10:00</time></dd>
+      <dt>Catalog schema</dt>
+      <dd><code>ao.outputs.catalog.v1</code></dd>
+    </dl>
+  </header>
+
+  <main>
+    <section aria-labelledby="roots">
+      <h2 id="roots">Output roots</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Root</th>
+            <th scope="col">Role</th>
+            <th scope="col">Per-root catalog</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-root="outputs">
+            <td><code>outputs/</code></td>
+            <td>Primary generated artifacts.</td>
+            <td><a href="./">Current root</a></td>
+          </tr>
+          <tr data-root="scripts-data-outputs">
+            <td><code>scripts/data/outputs/</code></td>
+            <td>Script-owned deterministic output artifacts.</td>
+            <td><a href="../scripts/data/outputs/">Secondary root</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="runs">
+      <h2 id="runs">Run catalog</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Timestamp</th>
+            <th scope="col">Run type</th>
+            <th scope="col">Lane</th>
+            <th scope="col">Orchestrator</th>
+            <th scope="col">Run page</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            id="run-ao-fleet-conductor-leaf-10e52afab8c1"
+            data-run-id="ao-fleet-conductor-leaf-10e52afab8c1"
+            data-run-type="strategy-2-bundle"
+            data-generated-at="2026-10-28T11:11:00+10:00">
+            <td><time datetime="2026-10-28T11:11:00+10:00">2026-10-28 11:11 +10:00</time></td>
+            <td><span class="status">Strategy 2 bundle</span></td>
+            <td><code>ao.fleet.dynamic.10e52afab8c1</code></td>
+            <td><code>ao-fleet-conductor-leaf-10e52afab8c1</code></td>
+            <td><a href="#run-page-ao-fleet-conductor-leaf-10e52afab8c1">Embedded run page</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <article
+      id="run-page-ao-fleet-conductor-leaf-10e52afab8c1"
+      data-schema="ao.strategy2.run-page.v1"
+      data-run-id="ao-fleet-conductor-leaf-10e52afab8c1">
+      <h2>Strategy 2 run page</h2>
+      <dl class="meta">
+        <dt>Lane</dt>
+        <dd><code>ao.fleet.dynamic.10e52afab8c1</code></dd>
+        <dt>Orchestrator ID</dt>
+        <dd><code>ao-fleet-conductor-leaf-10e52afab8c1</code></dd>
+        <dt>Run type</dt>
+        <dd>Strategy 2 bundle</dd>
+        <dt>Timestamp</dt>
+        <dd><time datetime="2026-10-28T11:11:00+10:00">2026-10-28 11:11 +10:00</time></dd>
+        <dt>Macroscopic eigen-motif</dt>
+        <dd>
+          <code>property:chboishabba:NominalModifier · property:repos:NominalModifier · property:dashi_agda:NominalModifier</code>
+        </dd>
+        <dt>Typed support</dt>
+        <dd><code>outputs/index.html</code></dd>
+      </dl>
+      <p>
+        This page is the unified catalog entry and run-page receipt for this lane.
+        It records the two repository output roots, the run timestamp, and the
+        Strategy 2 run-type label without modifying any output artifact outside
+        the declared typed support.
+      </p>
+    </article>
+  </main>
+</body>
+</html>
