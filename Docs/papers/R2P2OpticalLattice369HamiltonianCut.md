@@ -76,6 +76,26 @@ Thus `λ=D` is an exact finite eigenvalue for every rational `J,D`; the other ro
 
 The executable is called by the PR-local CI workflow, and `tests/test_r2p2_optical_lattice_369.py` now exercises all six parameter pairs. This remains below Agda kernel certification and below a fit to Ma et al.'s published Rabi/Ramsey spectra.
 
+## 3c. Ma supplementary S4: five rational supercells and C18 non-identity
+
+The original **Ma et al. 2026-10-14 arXiv:2610.17499v2 Supplement S4** uses rational supercells `N497:N813 = 18:11, 85:52, 139:85, 175:107, 265:162` for the continuum plane-wave representation, with coupling offsets `±N497` and `±N813` in momentum-index space (S6). These belong to the *plane-wave* representation, **not** the nearest-neighbour site-basis adjacency in our P3 toy. Using one basis as the other without an explicitly unitary/bounded change of basis would be a wrong-type identification.
+
+The finite Agda source now proves, by exact natural-number arithmetic, all five **nominal-only** wavelength cross-product offsets using the labels `497` and `813` nanometres:
+
+| Periods 497:813 | N497×497 (nm) | N813×813 (nm) | Nominal length mismatch |
+|---|---:|---:|---:|
+| 18:11 | 8946 | 8943 | 3 nm |
+| 85:52 | 42245 | 42276 | 31 nm |
+| 139:85 | 69083 | 69105 | 22 nm |
+| 175:107 | 86975 | 86991 | 16 nm |
+| 265:162 | 131705 | 131706 | 1 nm |
+
+These are *mathematical exercises on rounded wavelength labels*. The operational magic wavelengths are distinct calibrated quantities; no physical mismatch or apparatus configuration is reconstructed from this table. In particular this finite data does **not** prove Ma's spectral convergence, experimental threshold, magic-wavelength systematic shifts, or R2P2 Yb calibration.
+
+`DASHI.Foundations.Base369BinaryTernaryRefinement.phase18-sector-count` independently proves the inherited C18 index carrier has **18 sectors**. New `maPhysicalEighteenAndC18EqualAsNumbersOnly` records the arithmetic coincidence; `maSupercell18IsNotAnIdentifiedC18PhysicsRealization` keeps the physical identification **false** absent a source-produced map. The distinction is attached to `R2P2369AtomicQuantumDiamondArchitectureExact` and all three TOE roots. These flags are epistemic guardrails; not theorems that a future apparatus *could never* relate the carriers.
+
+`scripts/r2p2_optical_lattice_3site_diagnostic.py --nominal-supercell-pareto` computes the exact rational relative nominal mismatch `abs(N497*497 - N813*813)/(N813*813)`. Its two objectives are *smaller N497* and *smaller nominal relative mismatch*. At these objectives, **85:52 is Pareto dominated by 18:11**; 18:11, 139:85, 175:107, 265:162 are nondominated. This analysis was independently executed using Python `Fraction` against the five source-provided integer pairs (cross-products, exact mismatches and dominated flags). The committed exact-branch script/test suite has not executed locally; no actual physical spectral optimality follows. The original authors keep priority for the approximants and simulations. The Pareto ranking is source-written DASHI analysis with its own explicitly limited objectives.
+
 ## 4. Pareto / snowball / Ibrahim plan — real cutset
 
 **P0: Experiment identity** — separate the 2022 Sr vertical redshift, 2026 Ma Sr87 horizontal AA localization, and 2026 R2P2 neutral-Yb mountain redshift. This is a primary-source provenance/authority gate.
