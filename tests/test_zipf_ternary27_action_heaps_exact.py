@@ -163,3 +163,52 @@ def test_uniform_fibre_formula_strict_domain_gates():
     for alphabet,length in ((0,3),(8,3),(3,0),(3,11),(7,7),(True,3),(3,True)):
         with pytest.raises(ValueError):
             uniform_heaps_curve_multiplicities(alphabet,length)
+
+
+def test_stirling_pattern_factor_three_five_vs_five_three():
+    from zipf_ternary27_action_heaps_exact import exact_three_five_pattern_boundary
+    out=exact_three_five_pattern_boundary()
+    x=out['three_raised_five']
+    y=out['five_raised_three']
+    assert (x['pattern_count'],x['heaps_curve_count'])==(41,11)
+    assert x['stirling_counts']=={1:1,2:15,3:25}
+    assert sum(x['pattern_orbit_cardinalities'].values())==243
+    assert (y['pattern_count'],y['heaps_curve_count'])==(5,4)
+    assert y['stirling_counts']=={1:1,2:3,3:1}
+    assert sum(y['pattern_orbit_cardinalities'].values())==125
+
+
+def test_stirling_pattern_orbits_exactly_match_named_word_equivalence():
+    from zipf_ternary27_action_heaps_exact import equality_pattern_heaps_fibres
+    from collections import Counter
+    for q in range(1,6):
+        for n in range(1,7):
+            if q**n>30000:continue
+            receipt=equality_pattern_heaps_fibres(q,n)
+            direct=Counter()
+            direct_curve=Counter()
+            for named in product(range(q),repeat=n):
+                norm={}
+                rgs=[]
+                for symbol in named:
+                    if symbol not in norm:
+                        norm[symbol]=len(norm)
+                    rgs.append(norm[symbol])
+                direct[tuple(rgs)]+=1
+                seen=set()
+                curve=[0]
+                for symbol in named:
+                    seen.add(symbol)
+                    curve.append(len(seen))
+                direct_curve[tuple(curve)]+=1
+            assert direct==receipt['pattern_orbit_cardinalities']
+            assert direct_curve==receipt['heaps_curve_fibres']
+            assert sum(receipt['stirling_counts'].values())==receipt['pattern_count']
+            assert receipt['pattern_count']>=receipt['heaps_curve_count']
+
+
+def test_strict_domains_for_equality_pattern_observation():
+    from zipf_ternary27_action_heaps_exact import equality_pattern_heaps_fibres
+    for q,n in ((0,3),(3,0),(True,3),(3,False),(8,2),(7,10)):
+        with pytest.raises(ValueError):
+            equality_pattern_heaps_fibres(q,n)
