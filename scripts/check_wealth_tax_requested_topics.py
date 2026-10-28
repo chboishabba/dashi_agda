@@ -254,6 +254,8 @@ def main() -> None:
         "authenticatedOwnerIssuerInstrumentClassKey",
         "measuredPolicyEffectRequiresSameObjectInputs",
         "noUniqueOptimalTaxRateFromParetoOrderAlone",
+        "finiteNonemptyRankMinimum",
+        "finiteParetoFrontierNonemptyGivenStrictRank",
     ):
         assert symbol in dashi_tax_bridge, f"missing source-owned economy gate: {symbol}"
     for symbol in (
@@ -264,6 +266,8 @@ def main() -> None:
         "toeEvenTwoPolicyOptionsMayHaveDifferentParetoMinimalRates",
     ):
         assert symbol in bridge, f"missing TOE evidence firewall: {symbol}"
+    for symbol in ("finiteNonemptyRankMinimum", "finiteParetoFrontierNonemptyGivenStrictRank"):
+        assert symbol in bridge, f"missing finite Pareto owner reexport: {symbol}"
     assert "open DashiTradeTax public using" in bridge, (
         "follow-on sources not reachable from original TOE consumer"
     )
