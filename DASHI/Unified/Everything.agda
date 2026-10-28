@@ -8,6 +8,7 @@ import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as OriginalAntipodal
 import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as HermitianSym729
 import DASHI.Physics.Closure.R2P227729HermitianConvolutionTransportExact as HermitianConv729
 import DASHI.Physics.Closure.R2P281PlaneHermitianFiveOrbitConvolutionExact as HermitianPlane81
+import DASHI.Physics.Closure.R2P2C4C5NyquistAntipodalFixedPointExact as NyquistSym729
 import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as AntipodalSym729
 import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourGridPareto729
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fourier729Core
@@ -792,3 +793,31 @@ unifiedFiveInNineHermitian81PairConvolution :
         (HermitianSym729.coefficient9 b) target
 unifiedFiveInNineHermitian81PairConvolution =
   HermitianPlane81.fiveOrbitPlaneCodecPreservesAll25QuadraticOutputs
+
+------------------------------------------------------------------------
+-- Four-grid cyclic Fourier has eight self-antipodal frequency corners
+-- (0 or Nyquist 2 in each axis). Odd C3/5 grids have only one centre.
+-- Actual 4th/5th root FFT field transport remains a separate producer.
+------------------------------------------------------------------------
+
+unifiedFourGridEightFixedNyquist :
+  Fourier729.countWhereL NyquistSym729.fourFixedCube
+    NyquistSym729.allFourGridCubes ≡ 8
+unifiedFourGridEightFixedNyquist =
+  NyquistSym729.fourCubeHasEightFixedAntipodes
+
+unifiedFiveGridOneFixedCentre :
+  Fourier729.countWhereL NyquistSym729.fiveFixedCube
+    NyquistSym729.allFiveGridCubes ≡ 1
+unifiedFiveGridOneFixedCentre =
+  NyquistSym729.fiveCubeHasOneFixedAntipode
+
+unifiedFourGrid36OrbitClasses :
+  8 + 28 ≡ 36
+unifiedFourGrid36OrbitClasses =
+  NyquistSym729.fourCubeOrbitClasses36
+
+unifiedFiveGrid63OrbitClasses :
+  1 + 62 ≡ 63
+unifiedFiveGrid63OrbitClasses =
+  NyquistSym729.fiveCubeOrbitClasses63
