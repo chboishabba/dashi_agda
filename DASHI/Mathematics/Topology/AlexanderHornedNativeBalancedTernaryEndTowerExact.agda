@@ -17,7 +17,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Product using (_×_; _,_)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym)
 
 import DASHI.Algebra.BalancedTernary as Trit
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
@@ -177,14 +177,13 @@ rotateDigitsCubed [] = refl
 rotateDigitsCubed (t ∷ ts) =
   cong₂ _∷_ (rotateDigitCubed t) (rotateDigitsCubed ts)
 
-import Relation.Binary.PropositionalEquality as Eq using (cong₂)
 
 reflectConjugatesDigitCycle : ∀ {n} (xs : Vec Trit.Trit n) →
   reflectDigits (rotateDigits (reflectDigits xs)) ≡
     rotateDigits (rotateDigits xs)
 reflectConjugatesDigitCycle [] = refl
 reflectConjugatesDigitCycle (t ∷ ts) =
-  Eq.cong₂ _∷_ (digitReflectionConjugatesRotation t)
+  cong₂ _∷_ (digitReflectionConjugatesRotation t)
     (reflectConjugatesDigitCycle ts)
 
 rotateInternalLevel : ∀ n → BalancedLevel n → BalancedLevel n
@@ -205,7 +204,7 @@ internalRotationCubed : ∀ n (x : BalancedLevel n) →
   rotateInternalLevel n
     (rotateInternalLevel n (rotateInternalLevel n x)) ≡ x
 internalRotationCubed n (c , xs) =
-  Eq.cong₂ _,_ refl (rotateDigitsCubed xs)
+  cong (λ ys → (c , ys)) (rotateDigitsCubed xs)
 
 -- These independent actions are the direct-product source of an
 -- *abstract* C3_sector × S3_digit on this finite address carrier.
