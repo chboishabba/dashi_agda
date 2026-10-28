@@ -90,6 +90,11 @@ open WheelIbrahimCollision public using
   ; composite209IsNotTwin
   ; ibrahimFifteenFailsActualTwinConsumerWithinWheel
   ; noTwinClassifierFromBareIbrahimPhaseWithinWheel
+  ; globalAntipodeSends59To209
+  ; globalFourteenClass
+  ; sameGlobalFourteenOrbitInsideWheel
+  ; globalFourteenOrbitLosesTwinConsumer
+  ; noTwinClassifierFromBareGlobalFourteenOrbit
   )
 
 import DASHI.Arithmetic.TwinPrimeTernary270SurvivorCoverageExact as Ternary270Coverage
