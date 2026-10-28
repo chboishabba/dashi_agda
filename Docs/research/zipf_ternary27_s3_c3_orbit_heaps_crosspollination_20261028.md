@@ -170,3 +170,24 @@ For the actual finite three-rank (s=1) Zipf masses `(1,1/2,1/3) / (11/6) = (6/11
 This conditional law is distinct from the **UNCONDITIONED eventual first-appearance order**, which has the original Plackett–Luce size-biased law. Under the `(6,3,2)` example, `P(ABC | first three all distinct)=1/6`, but `P_PL(ABC)=18/55`. Thus unconditional time/rank sampling cannot be replaced with the conditional order without explicit evidence.
 
 **Attribution and limits:** This is elementary IID occupancy, symmetric power-sum and conditioning mathematics, with original Heaps/Herdan/Zipf and Luce (1959)/Plackett (1975) credits. Existing source proof ownership is unchanged. The three-draw moment algebra was independently verified with exact arithmetic, and new source/tests have been committed; the whole branch's tests and Agda kernel have **not** been executed. Zero or negative weights are rejected rather than extrapolating an unsupported uniform conditional law. No quaternion/Monster/NS/RH or 11-orbit coincidence becomes a same-object theorem.
+
+
+## Restricted-growth refinement: Stirling orbit cardinalities, not numerology
+
+The new `equality_pattern_heaps_fibres(q,n)` in the EXISTING `scripts/zipf_ternary27_action_heaps_exact.py` enumerates canonical **restricted-growth strings**. Each is a representative of a **value-label permutation orbit** on q-letter n-position words. It calculates that orbit's exact cardinality as the falling factorial `(q)_k=q(q−1)...(q−k+1)`, where the representative uses k distinct values. It pushes each orbit's count forward to the actual complete Heaps discovery curve and confirms **exact agreement with the existing** `uniform_heaps_curve_multiplicities`, which in turn checks the canonical `full_heaps_curve_law` owner.
+
+For n=3 and q=3, the equality-pattern orbits are `AAA,AAB,ABA,ABB,ABC` (five), of respective cardinalities `3,6,6,6,6`. The full Heaps observation merges `ABA` and `ABB`, leaving FOUR curves. This is now an explicit source-written Agda 27-state factor map, not an assertion inferred from counts.
+
+For q=3,n=5: the exact numbers of value-renaming orbits by used label count k are the classical Stirling values `S(5,1)=1`, `S(5,2)=15`, `S(5,3)=25`. There are **41** fine equality-pattern classes, which map to **11** complete Heaps curves. Weighting the orbits by the source label choices gives `1*3 + 15*6 + 25*6 = 243 = 3^5`.
+
+For q=5,n=3: the corresponding `S(3,k)` values are `1,3,1`. There are **5** fine equality-pattern classes mapping to **4** complete Heaps curves. The orbit-weight sum is `1*5 + 3*20 + 1*60 = 125 = 5^3`.
+
+The general original combinatorial identity is
+
+```
+q^n = Σ_{k=1}^{min(q,n)} S(n,k) (q)_k.
+```
+
+This is a **true typed factorization** through set-partition patterns and Heaps novelty curves. It supplies **no** isomorphism between the 11 Heaps curves on 3⁵ words and the unrelated 11 coordinate-C3 orbits on the 27-state cube. Neither source group action nor the probability measure is transported by a coincident orbit count.
+
+A separate local Python `Counter`/independent named-word enumeration checked **all 30 q,n configurations** for 1≤q≤5, 1≤n≤6 against canonical restricted-growth class cardinalities, covering **26,214 named words**, including 3³, 3⁵ and 5³. The newly committed focused regression includes the same checks; **the full exact-head checkout/runner was not executed**, and the source-written Agda factor was not Agda-kernel checked. Classical set partitions and Stirling numbers are inherited mathematics; new code/observation map under Johl Brown with OpenAI ChatGPT assistance is repository integration only.
