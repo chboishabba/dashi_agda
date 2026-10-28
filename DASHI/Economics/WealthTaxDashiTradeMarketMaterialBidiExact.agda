@@ -17,6 +17,8 @@ open import Data.Nat using (_≤_; _∸_)
 open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; +-assoc; +-comm; m+n∸n≡m)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
 open import Data.Empty using (⊥)
+open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
@@ -910,3 +912,68 @@ paretoDominanceTransitive costs first≤second second≤third axis =
 
 -- The order admits incomparable alternatives. It neither maximises a
 -- scalar welfare score nor authorises a particular wealth-tax percentage.
+
+
+------------------------------------------------------------------------
+-- INCOMPARABLE FINITE POLICY OPTIONS: PARETO IS NOT A TOTAL RANKING.
+-- The two outcomes are chosen synthetic *cost vectors*. They do not
+-- represent enacted rates, measured welfare, or an empirical trade-off.
+------------------------------------------------------------------------
+
+data HypotheticalPolicyOutcome : Set where
+  lowAdministrativeCost : HypotheticalPolicyOutcome
+  increasedCareCapacity : HypotheticalPolicyOutcome
+
+policyOutcomeProblem : Pareto.ConsumerMDLProblem
+policyOutcomeProblem =
+  Pareto.consumerMDLProblem
+    HypotheticalPolicyOutcome
+    (λ _ → ⊤)
+    (λ _ → ⊤)
+    (λ _ → 0)
+    _≡_
+    (λ _ → "synthetic-policy-outcome")
+    "no code length used to rank outcomes"
+    "hypothetical policy comparison only"
+
+data PolicyTradeoffAxis : Set where
+  administrationAxis : PolicyTradeoffAxis
+  careShortfallAxis : PolicyTradeoffAxis
+
+policyAxisCost : PolicyTradeoffAxis → HypotheticalPolicyOutcome → Nat
+policyAxisCost administrationAxis lowAdministrativeCost = 0
+policyAxisCost administrationAxis increasedCareCapacity = 5
+policyAxisCost careShortfallAxis lowAdministrativeCost = 5
+policyAxisCost careShortfallAxis increasedCareCapacity = 0
+
+policyAxisReference : PolicyTradeoffAxis → String
+policyAxisReference administrationAxis = "administrative-cost-units"
+policyAxisReference careShortfallAxis = "missing-care-capacity-units"
+
+policyTradeoffCosts : Pareto.CostHyperfabric policyOutcomeProblem
+policyTradeoffCosts =
+  Pareto.costHyperfabric PolicyTradeoffAxis policyAxisCost policyAxisReference
+
+careOptionDoesNotDominateCheapAdministration :
+  Pareto.WeaklyDominates policyTradeoffCosts
+    increasedCareCapacity lowAdministrativeCost → ⊥
+careOptionDoesNotDominateCheapAdministration dominance
+  with dominance administrationAxis
+... | ()
+
+cheapAdministrationDoesNotDominateCareOption :
+  Pareto.WeaklyDominates policyTradeoffCosts
+    lowAdministrativeCost increasedCareCapacity → ⊥
+cheapAdministrationDoesNotDominateCareOption dominance
+  with dominance careShortfallAxis
+... | ()
+
+paretoOrderDoesNotTotallyRankTheseOptions :
+  (Pareto.WeaklyDominates policyTradeoffCosts
+     lowAdministrativeCost increasedCareCapacity
+   ⊎ Pareto.WeaklyDominates policyTradeoffCosts
+     increasedCareCapacity lowAdministrativeCost) → ⊥
+paretoOrderDoesNotTotallyRankTheseOptions (inj₁ leftDominates) =
+  cheapAdministrationDoesNotDominateCareOption leftDominates
+paretoOrderDoesNotTotallyRankTheseOptions (inj₂ rightDominates) =
+  careOptionDoesNotDominateCheapAdministration rightDominates
