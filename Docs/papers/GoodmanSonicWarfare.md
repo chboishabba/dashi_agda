@@ -295,3 +295,14 @@ This illustrates the legitimate engineering route from an **inverse ambiguity** 
 The independent fixture regression now covers **19** finite factorisation checks (17 prior + 2 monitor sufficiency checks). Source-level static assertions also require eight receiver readout cases, complete source update cases and the original owner theorem names.
 
 **Stop condition for this cut:** We have a full finite ladder: acoustic feature/context sufficiency, rhythm phase insufficiency, passive causal equivalence and discriminating experiment, source-to-receiver ambiguity and an explicitly measured-side repair, plus original source-role and Ibrahim attribution firewalls. Physical wave and human-effect assertions remain unverified. Do not extend this into an apparent general acoustic or cognitive law without independent evidence.
+
+### T3 — strict information refinement, not just observer sufficiency
+
+The positive T2 result now reuses `DASHI.Core.ObserverRefinementLatticeExact.strictPairRefinement` directly. The joint observation is defined by `Observer.pairObserver` of the receiver and source monitor. `sourceMonitorStrictlyRefinesSelectedReceiver` supplies:
+
+1. A refinement law: equality of joint observations implies equality of the original receiver observation.
+2. A concrete **strictness witness**: the original receiver gives identical silent reports for `transmittingOff` and `absorbingOn`; the source-side monitor distinguishes them.
+
+Thus the added observer **strictly reduces the equivalence class** of the original source/medium fixture. This is a genuine instantiated order-theoretic result, not simply two unrelated positive/negative labels. The strict-refinement theorem is the **original DASHI observer-lattice owner's proof**; the named Sonic Warfare application only supplies the finite states, observables and separating witness.
+
+Again, an ideal monitor is a modelling assumption, not a claim of universal identifiability or physical access. Real inverse acoustic calibration, attenuation, instrument error and safety remain empirical obligations. Existing finite tests and source checker are sufficient at the source-only stage; no additional CI construction is needed.
