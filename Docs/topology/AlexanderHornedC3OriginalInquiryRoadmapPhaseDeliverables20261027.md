@@ -1589,3 +1589,80 @@ Classical polygon/surface presentations and
 Hatcher/Alexander original ownership retained.
 The 27/5 orbit fibre and existing three-legged
 pants work remain distinct typed consumers.
+
+
+### S. Explicit rank-three Nielsen basis: ternary word as Hatcher-style commutator
+
+The genus-one identification has a further very strong reuse:
+inside the rank-3 child free group `F(a,b,c)` define
+```text
+u = b^-1,  v = c^-1 a,  z = c.
+inverse substitution:
+  a = z v, b = u^-1, c = z.
+```
+These mutually inverse free-group substitutions are
+an explicit **Nielsen free basis**. It is not merely
+that the word happens to look like a commutator:
+`[a,b][b,c]` is freely conjugate to
+`[u,v]`, where u and v are part of a
+primitive basis and z is a spare free generator.
+The exact relation with `p=a b a^-1 c` is
+```text
+p^-1 [a,b][b,c] p = [b^-1,c^-1 a].
+```
+Thus the **classical Hatcher punctured-torus
+commutator source** can be reused at the
+algebraic stage after a specifically described
+rank-three basis change and basepoint-path
+conjugation. No genus-two replacement is
+necessary. This represents a constructive
+Pareto simplification of the previous
+ternary handlebody geometry frontier.
+
+An ambient handlebody homeomorphism induces
+Nielsen automorphisms of its free
+fundamental group, but this abstract
+basis change does not by itself prove the
+specific THREE-child, relative-boundary,
+wild-satellite/linked complement
+homeomorphism or preserved stationary collar.
+Those are the remaining same-object gates:
+(1) embed/label the 3-child target handlebody
+so its 3 independent meridians are a,b,c;
+(2) construct relative handle-slide
+homeomorphisms that send those labels
+to the chosen primitive u,v,z basis;
+(3) place the classical source
+once-punctured-torus commutator loop and
+conjugating basepoint path in the actual
+complement; (4) prove the image is the
+parent meridian; (5) exhibit the nested
+3-child satellite with distance, wild-limit
+and equivariant collar control; (6) prove
+the true inclusion maps on π1.
+
+NEW exact executable
+`scripts/alexander_horned_ternary_nielsen_handle_slide_audit.py`
+tests the free-basis map and inverse
+on all generator words of length at most
+5 and verifies the actual conjugator,
+with no floating point. Its mathematical
+assertions follow directly from the
+displayed inverse substitution.
+The script is committed but not presented
+as a runtime execution receipt of its exact
+GitHub blob. No Agda kernel or actual
+ambient isotopy/homotopy certificate
+is asserted.
+
+Source credit: Nielsen free-group
+transformations and classical regular
+neighbourhood/handle-slide theory;
+Hatcher AT Example 2B.2 owns the
+original binary geometric commutator,
+the existing DASHI #1244 three-child
+word remains its own owner, #1254
+pants seam work is a separate
+four-boundary interface, and
+Ibrahim Monster 3B retains its
+independent representation ownership.
