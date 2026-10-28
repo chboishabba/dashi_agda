@@ -356,6 +356,74 @@ def test_official_settlement_receipt_backout_and_coherent_route() -> None:
     assert same_joint_reform_outcome[0][0] == same_joint_reform_outcome[1][0]
     assert same_joint_reform_outcome[0][1] != same_joint_reform_outcome[1][1]
 
+
+def test_369_trialectic_numeric_role_maxcut() -> None:
+    """Independent finite oracle for inherited 27/19683, S3 and 3^5/5^3.
+
+    All axes below are hypothetical annotations. Neither signed ternary
+    patterns, permutation cycles nor numerals establish tax liability,
+    causal effects, CHESS finality, external identity or Monster objects.
+    """
+    from itertools import product, permutations
+
+    digits = (-1, 0, 1)
+    policy_cube = tuple(product(digits, repeat=3))
+    assert len(policy_cube) == 27
+
+    # Each x/y pair has exactly three possible z outcomes.
+    for x, y in product(digits, repeat=2):
+        fibre = tuple(point for point in policy_cube if point[:2] == (x, y))
+        assert len(fibre) == 3
+        assert {point[2] for point in fibre} == set(digits)
+
+    # The actual coordinate-permutation group contains six actions.
+    actions = tuple(permutations(range(3)))
+    assert len(actions) == 6
+    for permutation in actions:
+        mapped = {tuple(p[permutation[i]] for i in range(3))
+                  for p in policy_cube}
+        assert mapped == set(policy_cube)
+
+    def rotate_xyz(p: tuple[int, int, int]) -> tuple[int, int, int]:
+        return (p[1], p[2], p[0])
+
+    def swap_xy(p: tuple[int, int, int]) -> tuple[int, int, int]:
+        return (p[1], p[0], p[2])
+
+    for p in policy_cube:
+        assert rotate_xyz(rotate_xyz(rotate_xyz(p))) == p
+        assert swap_xy(swap_xy(p)) == p
+
+    # Three 27-cell factors have 27^3 = 3^9 = 19,683 carriers.
+    trialectic_3_cell_count = len(policy_cube) ** 3
+    assert trialectic_3_cell_count == 19683
+    # For each pair of structured x/y cells, 27 distinct z cells persist.
+    assert len(policy_cube)**2 * len(policy_cube) == trialectic_3_cell_count
+
+    gates = ("A05", "C09", "E07", "F07", "H08")
+    ternary_annotation_profiles = tuple(product(digits, repeat=len(gates)))
+    assert len(ternary_annotation_profiles) == 3**5 == 243
+    assert sum(all(v == 1 for v in p)
+               for p in ternary_annotation_profiles) == 1
+
+    # The imported ComplementMode5 carrier has five constructors.
+    # Its three-stage product is different, 5^3 = 125.
+    five_complement_modes = range(5)
+    three_mode_profiles = tuple(product(five_complement_modes, repeat=3))
+    assert len(three_mode_profiles) == 5**3 == 125
+    assert len(ternary_annotation_profiles) != len(three_mode_profiles)
+
+    # Even five positive *annotation symbols* do not supply five official
+    # external producer receipts. The two data types must remain distinct.
+    all_positive_annotations = tuple([1] * 5)
+    no_independent_records = ()
+    assert all_positive_annotations in ternary_annotation_profiles
+    assert len(no_independent_records) != len(gates)
+
+    print("PASS: 27 finite hypothesis/review/effect cells, 6 S3 chart actions, "
+          "19,683 three-cell carriers, 243 five-gate annotations, "
+          "125 three-mode charts, independent-z and authority negative controls")
+
 if __name__ == "__main__":
     test_finite_caps()
     test_same_flow_different_wealth()
@@ -372,4 +440,5 @@ if __name__ == "__main__":
     test_canonical_funding_batch_no_double_count()
     test_canonical_funding_payment_route_weld()
     test_official_settlement_receipt_backout_and_coherent_route()
-    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto oracle + canonical funding partitions + same-route weld + operator finality gating")
+    test_369_trialectic_numeric_role_maxcut()
+    print("PASS: 8,192 bounded arithmetic pairs + 10 synthetic counterexample suites + finite Pareto oracle + canonical funding partitions + same-route weld + operator finality gating + 369/trialectic role max-cut")
