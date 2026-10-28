@@ -128,6 +128,32 @@ def run():
     assert all(group_comm(a,b,coords)==identity
                for a in comm_values for b in comm_values)
 
+    # Local S3 VALUE actions: the same S3 original owner as the polynomial
+    # project, but with independent reflection gauges on each end-address.
+    # This is NOT the group of geometric horn meridian loops.
+    S3=tuple(__import__("itertools").permutations(range(3)))
+    def compose_s3(a,b):
+        return tuple(a[b[i]] for i in range(3))
+    r=(1,2,0)
+    c3_embed=((0,1,2),r,compose_s3(r,r))
+    for a,b in product(range(3),repeat=2):
+        assert compose_s3(c3_embed[a],c3_embed[b])==c3_embed[(a+b)%3]
+    identity3=(0,1,2)
+    flip=(2,1,0)
+    local=(flip,identity3,identity3)
+    global_flip=(flip,flip,flip)
+    constant_low=(0,0,0)
+    def act(gauge,values):
+        return tuple(gauge[i][values[i]] for i in range(3))
+    assert act(local,constant_low)==(2,0,0)
+    assert act(global_flip,constant_low)==(2,2,2)
+    assert all(act(tuple(compose_s3(g,h) for g,h in zip(A,local)),constant_low)
+               ==act(A,act(local,constant_low))
+               for A in product(S3,repeat=3))
+    # The local S3^27 count is 6^27, not 3^27; its source derived
+    # structure is solvable, so it still cannot detect a perfect group.
+    assert len(S3)==6 and 6**27>3**27
+
     print("PASS native_ternary_fibre_action")
     print("  K3_n cells n=0,1,2,3:",[3**(n+1) for n in range(4)])
     print("  |G_2|=3^27 =",3**27,"|H_2|=3^28 =",3**28)
