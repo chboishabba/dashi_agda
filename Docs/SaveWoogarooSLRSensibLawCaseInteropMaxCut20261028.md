@@ -255,3 +255,52 @@ outside the source-encoded image and never identifies the 19,683
 ambient positions with 19,683 admissible legal worlds. It is
 source-written until Agda kernel checking. The Sophontic paired
 semantic evaluator remains distinct from a trained model benchmark.
+
+## 28 October — signed −P/0/+P, nested trees, typed hyperfabric, 3-adic receivers
+
+The prior Boolean gate projection remains an auxiliary synthetic
+test, **not the complete dialectic sign semantics**. New canonical
+law import `DASHI/Law/SensibLawWoogarooSignedPredicateFibreTreeExact.agda`
+reuses `ClaimIndexedEvidencePolarityExact` / Dunn–Belnap,
+`BalancedTernaryOppositionEvidenceBridgeExact`,
+`SpacyDependencyToCandidateLogicalPNFExact` `notF`,
+`Base369Ternary27HypervoxelFabricGeometryExact`,
+`TypedHyperfabricCore`, `RecursiveFibreTower`,
+`HypercomplexRequestedFractranComponentExact`,
+`RequestedFibreInvolutionFoldExact`,
+`TriadicPAdicCylinderExact` and
+`TrialecticThreeCellCarryDepthExact`.
+Every ground-scoped proposition P has an explicit negative `notF P`
+(`−1`), positive (`+1`), and unresolved (`0`) observation.
+`both` and `neither` retain separate finer evidence states
+despite their shared coarse zero. The Agda source includes a concrete
+non-invertibility witness for any coarse-only four-way decoder.
+An arbitrary ground-indexed predicate decision tree nests without
+automatic flattening; only a CHOSEN finite signed branch maps into
+a triadic 3-adic cylinder. The original prefix compatibility theorem
+is reused, not a new p-adic law. Fine hypercomplex and actual
+face-mediated next-depth cell require separate supplied structures;
+no legal/Monster source receipt is inferred.
+
+The nine independent signed positions occupy `(T³)³=T⁹`.
+A reproducible reference enumerator
+`scripts/check_woogaroo_signed_predicate_fibre.py`
+was source-written. An independent Python reference enumeration
+ran all `4^9=262,144` fine assignments, found `3^9=19,683`
+distinct coarse codes and 512 distinct fine preimages of the
+all-zero code. The fine fibre, not the coarse sign, must drive
+contradiction-sensitive synthesis.
+
+SLR #59 now provides case-specific
+`woogaroo_synthesise_signed_fibre` with +P/−P/both/neither
+branch routing, scoped evidence alignment and 3-adic finite
+prefix. The canonical `woogaroo_unpaid_converged_synthesis`
+joins seven existing dialectical packets to seven signed fibres
+ONLY when ground/packet/four Gxx obligations align. It exposes
+a source-written JSON output and a first-class signed section
+in the offline 27-cube viewer. SLR has 26 source-written tests.
+No cargo, Agda kernel, original evidence payment or Court merits
+execution has been performed in this turn. No ESD surfaces edited,
+no cross-object Monster identification, and full original
+Dunn–Belnap, original DASHI, SensibLaw and Ibrahim proof credits
+preserved.
