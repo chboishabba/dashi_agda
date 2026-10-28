@@ -1,5 +1,13 @@
 module DASHI.Unifier where
 
+-- Artin B3 full twist: trivial root S3 endpoint but C7 signed
+-- crossing exponent six, preserving both braid and cancellation relations.
+import DASHI.Foundations.PolynomialBraidFullTwistSevenWitnessExact as BraidTwist
+open BraidTwist public using
+  ( fullTwistHasIdentityS3Endpoint
+  ; fullTwistHasNonzeroSevenWinding
+  ; nontrivialFullTwistInSignedExponentReadout )
+
 -- Exact ordinary factorial vs subfactorial, 3-cycle derangements and
 -- 44-of-120 quintic derangements; maintain radian phase non-promotion.
 import DASHI.Foundations.PolynomialSubfactorialDerangementS3S5Exact as Subfactorial
