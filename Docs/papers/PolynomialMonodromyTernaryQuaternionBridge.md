@@ -295,3 +295,43 @@ The committed script \`scripts/check_polynomial_pickover_gamma_horned_maxcut.py\
 7. **P6** Preserve numerology boundary across \(3\cdot2^n\), \(3^3\), \(3^4\cdot3^5=3^9\), \(3^5\), \(5^3\), \(5P3\), \(|S_5|\), \(|2I|\) and the \(C_3^3\) Fourier cube.
 
 **Scope:** attachment is supporting context; no device, synthetic-gauge experiment, Riemann surface, wild embedded complement identification, Monster same-object proof, or terminal Pickover radian sign was established by this continuation.
+
+
+### Important PREFIX !9999 versus source POSTFIX 9999! (derangement max-cut)
+
+**Distinct operation:** prefix !n denotes the subfactorial/derangement count D_n, whereas the user's attached steelman writes 99^(9999!) with a POSTFIX factorial. The user's new message writes !9999 with prefix notation; both must be retained as distinct exact targets until the source is clarified, and neither radian sine sign may be guessed. Derangements originate in de Montmort and Euler; Whitworth proposed the name subfactorial. Historical references: https://mathworld.wolfram.com/Subfactorial.html ; https://mathworld.wolfram.com/Derangement.html ; https://doi.org/10.1080/0020739X.2026.2701739. Gamma factorial (Euler/Legendre) and theta angle are separate again.
+
+Mathematical definitions:
+  n! = Gamma(n+1) = product(k=1,...,n) k;
+  !n = D_n = n! * sum(k=0,...,n) ((-1)^k/k!);
+  D_0=1, D_1=0, D_n=(n-1)(D_(n-1)+D_(n-2)).
+
+The asymptotic !n~n!/e is NOT a real-phase approximation after exponentiating 99 to these two different huge exponents.
+
+| Distinct object | Exact count | Typed interpretation |
+|---|---:|---|
+| 3! | 6 | All six S3/ABC permutations |
+| !3 | 2 | Exactly the two nonidentity C3 rotations; all swaps fix one label |
+| 5! | 120 | Full S5 root-label permutations |
+| !5 | 44 | Fixed-point-free 5-root permutations |
+| !5 in A5 | 24 | Even derangements |
+| !5 outside A5 | 20 | Odd derangements |
+| A5 | 60 | All even permutations; not just derangements |
+| 5P3 | 60 | Ordered injective triples / exact A5 finite-set chart |
+| 5^3 | 125 | Triples with repeated choices permitted |
+| Gamma(10000) | 9999! | Ordinary factorial, not !9999 |
+
+**Exact independent local Python replay** (not a radian-phase certificate):
+
+| Exponent E in 99^E | Bit length E | E mod 100 | 99^E mod 101 | 99^E mod 9999 | 99^E mod 360 |
+|---|---:|---:|---:|---:|---:|
+| 9999! | 118445 | 0 | 1 | 4950 | 81 |
+| !9999 | 118444 | 86 | 23 | 3861 | 81 |
+
+The same degree-angle residue 81 does NOT imply the same radian sine sign. The two terminal radian-phase signs remain unresolved. The original Pickover study in draft PR #1260 is the **postfix factorial** target.
+
+**New source-written Agda module:** DASHI.Foundations.PolynomialSubfactorialDerangementS3S5Exact. It defines subfactorial by its classical recurrence; constructs D3=2 and D5=44; proves C3's two nontrivial S3 rotations fix no point; exhibits fixed points for identity/transpositions; evaluates a 120-case quintic atlas filter into 44 derangements with exact 24+20 even/odd counts. All three canonical TOE import roots now link the exact named bridge. This source remains **Agda-kernel pending**.
+
+The committed scripts/check_polynomial_pickover_gamma_horned_maxcut.py now computes both factorial and subfactorial CRT targets, and audits the 44=24+20 split. An independent materially equivalent in-session Python replay passed; exact GitHub script-blob execution was not recorded.
+
+**Proof cut:** retain the standard two-step recurrence and derive the full inclusion-exclusion factorial/subfactorial formula in Agda; run exact-head typechecking of 120-constructor filtering; formalize genuine S5/A5 parity group laws without interpreting two equal counts as an isomorphism; require independent REAL certificates for each separately typed radians-phase target; preserve Ibrahim/Monster source ownership and wild-geometry non-promotion.
