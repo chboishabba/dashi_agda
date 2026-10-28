@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Cognition.PNF.EventAlgebra where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -276,6 +275,28 @@ left ⊗ right = composeByResidual left right "contextual fibre-product composit
 
 _∘p_ : EventPNF → EventPNF → TypedComposition
 later ∘p earlier = composeByResidual earlier later "temporal/causal PNF composition"
+
+contextualNoTypedMeetEmitsNamedIncompatibility :
+  ∀ left right →
+  Residual.computeResidual (algebraicAtom left) (algebraicAtom right)
+    ≡ Residual.noTypedMeet →
+  result (left ⊗ right)
+    ≡ operationIncompatibility
+        (namedNoTypedMeet left right "contextual fibre-product composition")
+contextualNoTypedMeetEmitsNamedIncompatibility left right residualIsNoTypedMeet =
+  noTypedMeetCompositionEmitsStructuredNamedIncompatibility
+    left right "contextual fibre-product composition" residualIsNoTypedMeet
+
+temporalNoTypedMeetEmitsNamedIncompatibility :
+  ∀ later earlier →
+  Residual.computeResidual (algebraicAtom earlier) (algebraicAtom later)
+    ≡ Residual.noTypedMeet →
+  result (later ∘p earlier)
+    ≡ operationIncompatibility
+        (namedNoTypedMeet earlier later "temporal/causal PNF composition")
+temporalNoTypedMeetEmitsNamedIncompatibility later earlier residualIsNoTypedMeet =
+  noTypedMeetCompositionEmitsStructuredNamedIncompatibility
+    earlier later "temporal/causal PNF composition" residualIsNoTypedMeet
 
 negateScoped : EventPNF → String → ScopedNegationReceipt
 negateScoped source scope =
