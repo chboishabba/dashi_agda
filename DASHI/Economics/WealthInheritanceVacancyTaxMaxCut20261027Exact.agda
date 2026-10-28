@@ -11,7 +11,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Data.Nat using (_∸_)
+open import Data.Nat using (_∸_; _⊓_; _≤_; z≤n; s≤s)
+open import Data.Nat.Properties as NatFacts using (≤-total; m≤n⇒m∸n≡0; m∸[m∸n]≡n; m≤n⇒m⊓n≡m; m≥n⇒m⊓n≡n; m∸n≤m)
+open import Data.Sum using (inj₁; inj₂)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
@@ -146,6 +148,52 @@ hundredPercentWealthExcess threshold w = wealthUnits w ∸ threshold
 netWealthAfterExcessTax : Nat → OwnedNetWealth → Nat
 netWealthAfterExcessTax threshold w =
   wealthUnits w ∸ hundredPercentWealthExcess threshold w
+
+------------------------------------------------------------------------
+-- GENERAL 100%-ABOVE-THRESHOLD STOCK LAW (A05--A08).
+-- These are conditional accounting theorems for the explicitly hypothetical
+-- policy at one assessment instant, not enacted law or effective collection.
+-- Reuse the Agda standard-library natural-number order/truncation lemmas.
+------------------------------------------------------------------------
+
+hundredPercentLiabilityZeroBelowThreshold :
+  (threshold wealth : Nat) →
+  wealth ≤ threshold →
+  hundredPercentWealthExcess threshold (owned-net-wealth wealth) ≡ zero
+hundredPercentLiabilityZeroBelowThreshold threshold wealth wealth≤threshold =
+  m≤n⇒m∸n≡0 wealth≤threshold
+
+netWealthAfterFullyPaidExcessEqualsMin :
+  (threshold wealth : Nat) →
+  netWealthAfterExcessTax threshold (owned-net-wealth wealth)
+    ≡ wealth ⊓ threshold
+netWealthAfterFullyPaidExcessEqualsMin threshold wealth
+  with ≤-total wealth threshold
+... | inj₁ wealth≤threshold
+  rewrite m≤n⇒m∸n≡0 wealth≤threshold
+        | m≤n⇒m⊓n≡m wealth≤threshold = refl
+... | inj₂ threshold≤wealth
+  rewrite m∸[m∸n]≡n threshold≤wealth
+        | m≥n⇒m⊓n≡n threshold≤wealth = refl
+
+wealthLiabilityNeverExceedsAssessedWealth :
+  (threshold wealth : Nat) →
+  hundredPercentWealthExcess threshold (owned-net-wealth wealth) ≤ wealth
+wealthLiabilityNeverExceedsAssessedWealth threshold wealth =
+  m∸n≤m wealth threshold
+
+wealthLiabilityMonotoneAtFixedThreshold :
+  (threshold : Nat) {smaller larger : Nat} →
+  smaller ≤ larger →
+  hundredPercentWealthExcess threshold (owned-net-wealth smaller)
+    ≤ hundredPercentWealthExcess threshold (owned-net-wealth larger)
+wealthLiabilityMonotoneAtFixedThreshold zero smaller≤larger =
+  smaller≤larger
+wealthLiabilityMonotoneAtFixedThreshold (suc threshold) {zero} {larger} _ =
+  z≤n
+wealthLiabilityMonotoneAtFixedThreshold (suc threshold) {suc smaller} {suc larger}
+  (s≤s smaller≤larger) =
+  wealthLiabilityMonotoneAtFixedThreshold threshold smaller≤larger
 
 incomeExample : hundredPercentIncomeExcess 3 (personal-income 5) ≡ 2
 incomeExample = refl
