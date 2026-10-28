@@ -75,6 +75,13 @@ class IntakeTest(unittest.TestCase):
             gate.validate_position_completeness(records[:-1] + [records[0]])
         with self.assertRaises(ValueError):
             gate.validate_position_completeness(records + [records[0]])
+        substituted = [dict(row) for row in records]
+        substituted[0]["position_id"] = "substitute-nonnumeric-label"
+        with self.assertRaises(ValueError):
+            gate.validate_position_completeness(substituted)
+        substituted[0]["position_id"] = "4096"
+        with self.assertRaises(ValueError):
+            gate.validate_position_completeness(substituted)
         corrupt = [dict(row) for row in records]
         corrupt[0]["scenario"] = "R2"
         with self.assertRaises(ValueError):
