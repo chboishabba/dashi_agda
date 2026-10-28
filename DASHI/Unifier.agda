@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Foundations.PolynomialC3FourierTrialecticChartExact as RootFourier
 
 -- Separate 120↔60×2 quintic parity atlas, exact arithmetic/369 identities,
 -- and attribution-preserving Ibrahim Pareto/snowball non-promotion gate.
