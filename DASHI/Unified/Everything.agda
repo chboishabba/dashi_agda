@@ -1,5 +1,13 @@
 module DASHI.Unified.Everything where
 
+-- Artin B3 full twist: trivial root S3 endpoint but C7 signed
+-- crossing exponent six, preserving both braid and cancellation relations.
+import DASHI.Foundations.PolynomialBraidFullTwistSevenWitnessExact as BraidTwist
+open BraidTwist public using
+  ( fullTwistHasIdentityS3Endpoint
+  ; fullTwistHasNonzeroSevenWinding
+  ; nontrivialFullTwistInSignedExponentReadout )
+
 -- Prefix !n derangements versus postfix n! factorial, with exact
 -- S3/C3 and S5/A5 parity partitions of fixed-point-free permutations.
 import DASHI.Foundations.PolynomialSubfactorialDerangementS3S5Exact as Subfactorial
