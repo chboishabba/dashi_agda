@@ -180,3 +180,40 @@ applicant-specific standing/clock, stage works and corridor ecology.
 No ESD surface touched. No generic calculus or source/payment store
 duplicated. Original law authors, scientists, courts, historical
 SensibLaw and Ibrahim source/PR proof ownership retained.
+
+
+## 28 October — original dialectic/trialectic synthetic outputs
+
+New root-imported `DASHI/Law/SensibLawWoogarooDialecticTrialecticSynthesis20261028Exact.agda`
+uses the **original** DASHI legal dialectical support/defeater/
+discriminator owner, adversarial rerun state transitions, context-scoped
+non-explosion, attached independent trialectic 2-cell, edge synthesis
+compatibility and local same-object/scope/provenance rules. Its third
+locus is independent legal/evidence/ecological review (NOT an invented
+third party). It keeps the triadic face `underdeterminedFace` even
+when the three paired search edges have been recorded. No new
+general dialectic calculus or legal source-payment mechanism.
+
+For each existing seven-ground case hypothesis it synthesises
+`WoogarooSynthesisOutput` with: original applicant hook; strongest
+stated hypothetical respondent countercase; original discriminator;
+source falsifier; current next dialectic adversarial search role;
+three-edge trialectic with independent face; explicit false
+Court-finding/source-payment fields. The current actual-source-unpaid
+world produces **seven seek-originals packets**. Contradictory
+defect/compliance assertions route to explicit reconciliation, not
+explosion or government favour.
+
+The corresponding SLR PR #59 native producer serialises its seven
+candidate packets with
+`cargo run -p sensiblaw-pg-source-store --example woogaroo_trialectic_synthesis`.
+See `slr/docs/WOOGAROO_2019_8575_TRIALECTIC_SYNTHESIS_OUTPUTS.md`
+for each proposed original acquisition and source/countercase. The
+independently executed finite reference enumeration of **448 hypothetical
+worlds** yields 294 seek-originals, 14 applicant-conditional, 28
+respondent-conditional, and 112 contradictory-assertion reconciliation
+states. These counts are not actual source payments or Court probability.
+The new Rust tests and Agda import are source-written; Cargo and
+Agda kernel verification have not been executed. Original statutory,
+judicial, ecological, dialectic, SensibLaw and Ibrahim/3B proof
+ownership remains separate. No protected ESD file changed.
