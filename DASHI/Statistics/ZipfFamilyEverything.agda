@@ -20,3 +20,4 @@ import DASHI.Statistics.ZipfNoveltyCurveInjectiveExact
 import DASHI.Statistics.ZipfFullHeapsCurveIdentityNoGoExact
 import DASHI.Statistics.ZipfABC6OrderHeapsQuotientExact
 import DASHI.Statistics.ZipfTernary27ActionHeapsExact
+import DASHI.Statistics.ZipfThreeDrawEqualityPatternFactorExact
