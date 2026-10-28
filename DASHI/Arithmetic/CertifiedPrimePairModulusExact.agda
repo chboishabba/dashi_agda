@@ -24,18 +24,20 @@ module DASHI.Arithmetic.CertifiedPrimePairModulusExact where
 -- infinitude, a Hardy--Littlewood estimate, or a general CRT isomorphism.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
+import Data.Fin.Base as Fin
 open import Data.Fin.Base using (Fin)
 open import Relation.Nullary using (Dec; yes; no)
 open import Relation.Binary.PropositionalEquality using
   (_≢_; cong; trans; sym)
-open import Data.Nat.Properties using (_≟_; +-assoc; +-comm)
+import Data.Nat.Properties as NatP
+open import Data.Nat.Properties using (_≟_; +-assoc; +-comm )
 open import Data.Nat.DivMod using (_%_; [m+n]%n≡m%n)
 open import Data.Nat.Primality as NatPrime using (Prime; prime?)
 
@@ -241,6 +243,55 @@ sixWheelNecessaryForOtherPrimes :
 sixWheelNecessaryForOtherPrimes =
   DASHI.Arithmetic.PrimeModSixSieveExact.primeAboveThreeModSix
 
+------------------------------------------------------------------------
+-- Generic arithmetic CRT forward map and explicit inverse obligation.
+--
+-- This reuses the distinction in DecimalCRTResolutionExact between a
+-- mixed-radix cardinal codec and the canonical residue projections.
+-- Fin.remainder actually reduces modulo its parameter.  For a product
+-- M*p the modulo-M projection must swap the factors first.
+-- An inverse is not silently synthesized without coprime evidence.
+------------------------------------------------------------------------
+
+canonicalPrimeCoordinate :
+  (M : Nat) (axis : CertifiedPrimeAxis) →
+  Fin (M * primeModulus axis) →
+  Fin (primeModulus axis)
+canonicalPrimeCoordinate M axis x =
+  Fin.remainder (primeModulus axis) x
+
+canonicalBaseCoordinate :
+  (M : Nat) (axis : CertifiedPrimeAxis) →
+  Fin (M * primeModulus axis) →
+  Fin M
+canonicalBaseCoordinate M axis x =
+  Fin.remainder M
+    (Fin.cast (NatP.*-comm M (primeModulus axis)) x)
+
+canonicalPrimeCRTForward :
+  (M : Nat) (axis : CertifiedPrimeAxis) →
+  Fin (M * primeModulus axis) →
+  Fin M × Fin (primeModulus axis)
+canonicalPrimeCRTForward M axis x =
+  canonicalBaseCoordinate M axis x ,
+  canonicalPrimeCoordinate M axis x
+
+record ArithmeticPrimeCRTStep (M : Nat) (axis : CertifiedPrimeAxis) : Set where
+  field
+    coprimeEvidence : Set
+    coprimeWitness : coprimeEvidence
+    reconstruct :
+      Fin M × Fin (primeModulus axis) →
+      Fin (M * primeModulus axis)
+    decodeEncode :
+      (x : Fin (M * primeModulus axis)) →
+      reconstruct (canonicalPrimeCRTForward M axis x) ≡ x
+    encodeDecode :
+      (pair : Fin M × Fin (primeModulus axis)) →
+      canonicalPrimeCRTForward M axis (reconstruct pair) ≡ pair
+
+-- No canonical ArithmeticPrimeCRTStep is provided without the actual
+-- arithmetic reconstruction and round-trip proofs.
 -- The existing SSP symmetry acts on addresses and PRESERVES the
 -- prime identity. This explicit reuse blocks a false inference that
 -- rotating a fixed 15-prime address generates a new arithmetic prime.
