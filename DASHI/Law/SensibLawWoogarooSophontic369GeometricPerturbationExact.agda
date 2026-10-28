@@ -141,6 +141,48 @@ nuisanceChanges369Carrier :
   worldTo369 beforeHarmOnly ≡ worldTo369 afterHarmOnly → ⊥
 nuisanceChanges369Carrier ()
 
+------------------------------------------------------------------------
+-- A genuinely geometric discriminator, using the already-owned T^3 grid.
+--
+-- The single input flip "reviewed: 0 -> 1" moves the independent cube
+-- TWO adjacent steps: (0,0,0) -> (1,0,0) -> (1,1,0).
+-- The first step records new review-gate status; the second records the
+-- *derived* applicant shortlist. Neither step creates evidence payment.
+-- The harm-only perturbation moves ONE Y step in the respondent cube,
+-- although the legal outcome remains unchanged.
+------------------------------------------------------------------------
+
+reviewMiddle : Fabric.Ternary27Point
+reviewMiddle =
+  Fabric.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero
+
+reviewGateStep :
+  Fabric.HypervoxelAdjacent (reviewCube beforeReview) reviewMiddle
+reviewGateStep = Fabric.adjacentX Fabric.zeroToPos
+
+derivedApplicantResponseStep :
+  Fabric.HypervoxelAdjacent reviewMiddle (reviewCube afterReview)
+derivedApplicantResponseStep = Fabric.adjacentY Fabric.zeroToPos
+
+nuisanceHarmSingleGridStep :
+  Fabric.HypervoxelAdjacent
+    (respondentCube beforeHarmOnly) (respondentCube afterHarmOnly)
+nuisanceHarmSingleGridStep = Fabric.adjacentY Fabric.zeroToPos
+
+-- Existing structured A/B/C dialectics glue three 27-cells per edge;
+-- three cyclically compatible edge dialectics have SIX independent cubes
+-- (A,B,C,S_AB,S_BC,S_CA) = 3^18 possible boundary states, plus the
+-- separate irreducible face. This count is NOT the 3^9 case chart.
+structuredTrialecticHas18TritCoordinates :
+  Cell.structuredBoundaryTernaryCoordinateCount ≡ 18
+structuredTrialecticHas18TritCoordinates =
+  Cell.structuredBoundaryTernaryCoordinateCountIsEighteen
+
+structuredTrialecticBoundaryHas387420489States :
+  Cell.structuredBoundaryStateCount ≡ 387420489
+structuredTrialecticBoundaryHas387420489States =
+  Cell.structuredBoundaryStateCountIs387420489
+
 -- Boolean contradiction is preserved, not "exploded" into either
 -- finding. Independent review flag alone cannot mediate the face.
 contradictoryCaseHasReconciliation :
