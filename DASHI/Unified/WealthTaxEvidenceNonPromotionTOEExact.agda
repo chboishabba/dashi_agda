@@ -565,6 +565,23 @@ open DashiTradeTax public using
   ; finiteAxisSumStrict
   ; strictImprovedAxisFromFiniteCoverage
   ; finiteParetoFrontierIsNonempty
+  ; FundingTokenAbsent
+  ; UniqueFundingTokens
+  ; finiteFundingPartitionConservesUnits
+  ; CanonicalFundingEntry
+  ; CanonicalFundingBatch
+  ; canonicalClaimCannotBeReusedInLaterPosition
+  ; canonicalFundingTotalsReconcile
+  ; distinctFixtureFundingBatch
+  ; fixtureFundingBatchConservesSeven
+  ; duplicateFixtureFundingTokenIsRejected
+  ; AustralianEquityHoldingMode
+  ; OfficialHolderRegistration
+  ; holderModeCannotBecomeLegalTitleByNameMatch
+  ; MarketRecordKind
+  ; executionRecordIsNotOfficialFinality
+  ; clearingNetIsNotOfficialFinality
+  ; officialSettlementIsNotBeneficiaryAllocation
   )
 
 -- Explicit boundary aliases stay close to TOE use sites.
@@ -631,4 +648,37 @@ toeSyntheticTwoAxisPolicyFrontierIsNonempty :
     (DashiTradeTax.admittedCareCapacity ∷ [])
 toeSyntheticTwoAxisPolicyFrontierIsNonempty =
   DashiTradeTax.twoAxisPolicyFrontierIsNonempty
+
+-- C06 typed finite-batch proof surface. A unique *local* source key is
+-- not an independently verified historical economic claim identifier.
+toeCanonicalFundingClaimIsNotReusedWithinFiniteBatch :
+  {Claim : Set} {canonicalClaimToken : Claim → Nat} →
+  (batch : DashiTradeTax.CanonicalFundingBatch Claim canonicalClaimToken) →
+  (first : DashiTradeTax.CanonicalFundingEntry Claim canonicalClaimToken) →
+  (rest : List (DashiTradeTax.CanonicalFundingEntry Claim canonicalClaimToken)) →
+  DashiTradeTax.fundingClaims batch ≡ first ∷ rest →
+  (later : DashiTradeTax.CanonicalFundingEntry Claim canonicalClaimToken) →
+  DashiTradeTax.RankedMember later rest →
+  DashiTradeTax.economicClaim first
+    ≡ DashiTradeTax.economicClaim later → ⊥
+toeCanonicalFundingClaimIsNotReusedWithinFiniteBatch =
+  DashiTradeTax.canonicalClaimCannotBeReusedInLaterPosition
+
+toeBatchSourcePartitionAccountsForEachTaggedClaimOnce :
+  {Claim : Set} {canonicalClaimToken : Claim → Nat} →
+  (batch : DashiTradeTax.CanonicalFundingBatch Claim canonicalClaimToken) →
+  DashiTradeTax.fundingPartitionTotal
+    (DashiTradeTax.fundingEntryTags (DashiTradeTax.fundingClaims batch))
+    ≡ DashiTradeTax.fundingReceiptsTotal
+        (DashiTradeTax.fundingEntryTags (DashiTradeTax.fundingClaims batch))
+toeBatchSourcePartitionAccountsForEachTaggedClaimOnce =
+  DashiTradeTax.canonicalFundingTotalsReconcile
+
+-- Market authority boundary: even a completed CHESS settlement is not
+-- automatically an authenticated downstream beneficial custody allocation.
+toeOfficialSettlementAndCustodyAllocationRemainDistinct :
+  DashiTradeTax.officialDvPSettlementReceipt
+    ≡ DashiTradeTax.validatedBeneficialCustodyAllocation → ⊥
+toeOfficialSettlementAndCustodyAllocationRemainDistinct =
+  DashiTradeTax.officialSettlementIsNotBeneficiaryAllocation
 
