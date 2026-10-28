@@ -1172,3 +1172,85 @@ Therefore the new AlexanderHornedNativeTernarySemidirectActionExact was **refact
 **Stronger no-go:** since the local C3 translation group acts freely and transitively on the space of phase assignments, every observer invariant under ALL independent local translations and respecting the existing pointwise equality must be constant. Thus a local phase value alone cannot produce a nontrivial gauge-invariant observable. Nontrivial Wilson holonomy requires edge/connection/transport data, not only C3-valued functions at addresses. This is a mathematical theorem about the phase-field torsor, distinct from the other no-go (a nontrivial perfect source has no nontrivial homomorphism into the metabelian field actor). Neither result disproves the independent perfect-to-2I representation programme.
 
 **Receipt:** source-written Agda, GitHub file readback and local independent finite action checks; exact-head Agda kernel still not run. No new unsafe escape, protected ESD change, synthetic Monster representation or actual wild-exterior group identification.
+
+
+### O. Exact 27 -> 9 -> 5 invariant fibre quotient and independent 729
+
+At depth two the NATIVE end-address partition is
+`X2=C3_sector × Trit²`, with 27 points.
+The external 3-cycle and simultaneous balanced sign reversal
+generate the commuting group `H=C3_sector × C2_sign`.
+Successive address quotients give
+```text
+  |X2|=27 -> |X2/C3|=9 -> |X2/H|=5
+```
+where the five sign classes of `Trit²` are
+`(0,0)`, `{(-,0),(+,0)}`,
+`{(0,-),(0,+)}`, `{(-,-),(+,+)}`
+and `{(-,+),(+,-)}`.
+Their full 27-point orbit sizes are `(3,6,6,6,6)`.
+
+**Formal group-level content.** Existing phase-field owner
+`A2=Map(X2,C3_phase)` is of cardinality `3^27`.
+The H-invariant subgroup has canonical pointwise encoding
+`A2^H ≅ Map(X2/H,C3) ≅ C3^5`,
+so its cardinality is **3^5=243**, not 729.
+New source `AlexanderHornedDepthTwoFiveOrbitFibreExact.agda`
+defines the five representative shapes and total classifier,
+proves the sign-orbit and inflation invariance,
+both pointwise round trips for invariant fields, and
+pointwise preservation of C3 multiplication.
+It does not introduce unneeded quotient-set axioms:
+the explicit five constructors provide the finite quotient.
+
+**729 belongs to an additional independent coordinate.**
+`SixPhaseState = FiveField × C3` has
+`3^5 × 3 = 3^6 = 729` elements.
+The sixth phase is EXTRA DATA. It cannot be double-counted
+if it was already encoded in one of the five invariant fields.
+After sector reduction the sector C3 acts trivially on the
+invariant fields, so reintroducing one C3 factor is a direct
+product until a nontrivial action is specified. This is not
+the original wild orbifold group, a 729-dimensional SU2
+module, or a Monster 3B receipt.
+
+**Executed finite severe controls:** the new
+`scripts/alexander_horned_depth_two_five_orbit_fibre_audit.py`
+enumerates all 243 five-trit fields; verifies field inflation
+to the 27-site carrier, invariance under both generators,
+extraction of the five values, and all 3 choices of the
+optional independent sixth phase. Local exact integer control
+PASS. No Agda/Lean kernel receipt is claimed.
+
+**Generalization across depths:** on `X_n=C3×Trit^n`,
+simultaneous balanced sign has exactly one fixed trit-word
+(the all-zero word). The quotient after external C3 has
+`(3^n+1)/2` orbits and its invariant field group has
+`3^((3^n+1)/2)` elements. In particular n=2 gives
+5 and 243, n=3 gives 14 and 3^14.
+This count is not the original independent 13/27
+antipodal PAIRS (13 pairs + one fixed = 14 orbits),
+nor the 3-sector fibrewise 15 sign-only orbits.
+The general count belongs to classical Burnside
+fixed-point/orbit-counting theory and needs its own
+Agda all-depth group-indexed quotient proof if a
+kernel-level infinite invariant colimit is desired.
+
+**Important noncommutation:** taking invariants before
+pullback along native ternary projections preserves
+sector and sign invariance, provided the refinement
+map commutes with both actions. This is the next honest
+P1 square to prove for all n, alongside the explicit
+finite-depth eventual-equality direct limit
+`colim A_n ≅ C_loc(K3,C3)`.
+Only AFTER these group-theoretic constructions should
+we seek an action on a particular embedded wild exterior
+or transport into nonabelian SU2: perfect source groups
+have no nontrivial characters into these abelian
+ternary fibre groups.
+
+Source credit stays with classical orbit counting,
+original DASHI #1407 5/9 and 13/27 symmetry,
+#1414 S3/C3 and 3^5 versus 5^3 discrimination,
+#1244 native address/fibre projective tower, and
+Alexander/Hatcher for the DISTINCT horned geometry.
