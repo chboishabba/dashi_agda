@@ -589,3 +589,90 @@ saleVolumeCannotIdentifyInstrumentClass =
 
 -- The strings are source labels only: matching them without transfer and
 -- legal registers proves neither shared economic ownership nor legal power.
+
+
+------------------------------------------------------------------------
+-- SAME-OBJECT CASH/RIGHTS WELD AND CLEARING-NET OBSERVER
+-- Direct reuse of source-owned INF nonfactorability and earlier fixture types.
+-- The witness requires exact agreement on finance route, units, issuer and
+-- instrument labels, but NO label proves a real custodial/issuer register.
+-- The external legal, broker and tax source inputs are NOT fabricated here.
+------------------------------------------------------------------------
+
+record SettlementOwnershipWeld : Set where
+  constructor settlement-ownership-weld
+  field
+    settledTrade : TwoFillSettlementLink
+    identifiedOwnerTransfer : IdentifiedClassSettlement
+    settledIssuerLabel : String
+    settledInstrumentLabel : String
+    routeMatches :
+      settledFundingRoute settledTrade ≡
+        routedPayment (matchedClassTransfer identifiedOwnerTransfer)
+    settledUnitsMatch :
+      settledShareCount settledTrade ≡
+        saleUnitsOfInstrument identifiedOwnerTransfer
+    issuerLabelMatches :
+      settledIssuerLabel ≡ issuerReference identifiedOwnerTransfer
+    instrumentLabelMatches :
+      settledInstrumentLabel ≡ instrumentReference identifiedOwnerTransfer
+open SettlementOwnershipWeld public
+
+syntheticOrdinaryWeld : SettlementOwnershipWeld
+syntheticOrdinaryWeld =
+  settlement-ownership-weld
+    twoPricesThreeProceeds syntheticOrdinarySettlement
+    "fixture-issuer" "fixture-ordinary"
+    refl refl refl refl
+
+syntheticSuperVotingWeld : SettlementOwnershipWeld
+syntheticSuperVotingWeld =
+  settlement-ownership-weld
+    twoPricesThreeProceeds syntheticSuperSettlement
+    "fixture-issuer" "fixture-super"
+    refl refl refl refl
+
+-- ASX/CHESS source root: participant-level netting takes place before
+-- DvP settlement. In particular, net cash receipt does not reconstruct
+-- a participant's GROSS buy/sell orders or any person's tax-sale proceeds.
+-- Source: ASX "Settlement services and pricing", 2026-accessed official page.
+-- This finite non-negative NET-RECEIPT fixture omits participants who pay net.
+record ParticipantClearingBatch : Set where
+  constructor participant-clearing-batch
+  field
+    grossSellCash : Nat
+    grossBuyCash : Nat
+    netReceivedCash : Nat
+    netAccounting :
+      grossSellCash ≡ grossBuyCash + netReceivedCash
+open ParticipantClearingBatch public
+
+noClearedTransactions : ParticipantClearingBatch
+noClearedTransactions =
+  participant-clearing-batch 0 0 0 refl
+
+offsettingClearedTransactions : ParticipantClearingBatch
+offsettingClearedTransactions =
+  participant-clearing-batch 3 3 0 refl
+
+sameNetReceipt :
+  netReceivedCash noClearedTransactions ≡
+  netReceivedCash offsettingClearedTransactions
+sameNetReceipt = refl
+
+differentGrossSellsDespiteSameNet :
+  grossSellCash noClearedTransactions ≡
+  grossSellCash offsettingClearedTransactions → ⊥
+differentGrossSellsDespiteSameNet ()
+
+netReceiptCannotRecoverGrossTurnover :
+  INF.FactorsThrough netReceivedCash grossSellCash → ⊥
+netReceiptCannotRecoverGrossTurnover =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      noClearedTransactions offsettingClearedTransactions
+      sameNetReceipt differentGrossSellsDespiteSameNet)
+
+-- The net batch is a participant-level financial observation. The
+-- original two-fill sale is an investor-level synthetic fixture. No implicit
+-- identification of the two records is supplied by this code.
