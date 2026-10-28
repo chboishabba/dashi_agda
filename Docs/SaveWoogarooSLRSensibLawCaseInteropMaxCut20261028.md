@@ -56,3 +56,64 @@ Primary government source status ≠ delivered approval conditions; legal-source
 **Done** means exact sources actually materialised and reviewed in SensibLaw/SLR; typed Matter only persisted after normative/evidence references are real; code tested when runtime is available; authorised counsel resolves filing/urgent protection; ecological outcome monitored against original enforceable conditions. Repository integration alone cannot halt clearing.
 
 **Attribution**: statutes/approved advice — Parliament/DCCEEW/TSSC; Court and parliamentary records retain their legal author or party source categories; QUT/QCC/SWFG/Stockland retain individual author roles; SLR/SL/Agda existing and prior PR authors retain ownership; prior Ibrahim Monster 3B remains distinct. OpenAI ChatGPT assisted new case-specific adapter and tests under user-directed analysis. No false same-object Monster representation, lawyer filing, agency complaint, executed check, actual property payment or physical habitat impact is being asserted.
+
+
+## 28 October 2026 — SLR production 80-obligation closure extension
+
+**Production change (SLR [PR #59](https://github.com/chboishabba/slr/pull/59),
+same original Matter owner):** `woogaroo_legal_closure.rs` is now exported by
+`workbench_projection.rs`. It has an exact 80-target unpaid closure manifest:
+I01-I08 identity, E01-E08 source provenance, P01-P08 applicant/procedure,
+D01-D08 federal decision file, G01-G28 seven candidate grounds x four
+discriminators, F01-F08 ecological effects, V01-V07 verification and O01-O05
+real-world outcomes. Every G01-G28 row cites the corresponding existing
+`WOOGAROO_GROUNDS` key. No law owner, generic evidence gate, database
+payment, or source-review API was cloned. The existing five proposition/two
+residual/two obligation candidate Matter is unchanged.
+
+Twelve ordered acquisition packets expose the *next original or action* and
+the exact set of unpaid IDs it can help resolve. They do not assign merit
+probabilities. The first five are applicant/counsel clock, signed conditions,
+Secretary s95C/delegate brief, actual s95B comments, and stage-matched works;
+recovery plan and real ecology follow. Decision-specific conflicts stay last.
+All rows have `discharged=false`. Contract tests reject duplicate targets,
+invented discharge, unknown ground, wrong source packet and rank mutation.
+They are source-written, **not executed Cargo tests or reviewed evidence**.
+
+**Operative 2026 law correction and firewall.** The official EPBC Act
+Compilation No. 70, 24 August 2026, continues to publish the *old*
+section 139(1) recovery-plan consistency and section 139(2) approved
+conservation-advice obligations:
+https://www.legislation.gov.au/C2004A00485/2026-08-24/2026-08-24/text/original/epub/OEBPS/document_1/document_1.html .
+The 2025 Environment Protection Reform Act Schedule 1 item 239 proposes
+a substituted section 139 with a protection-statement distinction:
+https://www.legislation.gov.au/C2025A00068/asmade/2025-12-01/text/original/epub/OEBPS/document_1/document_1.html .
+The August transitional rules commenced 24 August but do NOT, merely by
+existing, establish that *all* future-law section 139 changes applied to
+this 2019 referral on 15 October:
+https://www.legislation.gov.au/F2026L01106/asmade/2026-08-21/text/original/epub/OEBPS/document_1/document_1.html .
+Original commencement instruments, savings and the actual approval must
+be checked as a **specific law application**, not simplified into "old law"
+or "new standards" as an assumed case outcome. Nothing here alleges the
+Minister failed either version.
+
+**Exact source-original wall:** the official 2019/8575 project page
+https://epbcpublicportal.environment.gov.au/all-notices/project-decision/?id=b0e6d9ac-0ebb-f111-aaad-7c1e522b52b7
+currently reports a published approval decision, but its document pane
+does not expose a signed final notice or decision-file contents to this
+read. A portal retrieval error is not proof the signed instrument does
+not exist. The Federal Court's current ADJR procedure page
+https://www.fedcourt.gov.au/law-and-practice/national-practice-areas/aclhr/more
+ties the ordinary filing period to notification or reasons (whichever is
+later), so **12 November 2026 must NOT be represented as a verified
+deadline** for an unspecified applicant.
+
+**Architecture and attribution:** SensibLaw original Python prototype
+retains historical credit, PR #500 remains closed unmerged, SLR is the
+only production runtime target. DASHI retains the seven-ground formal
+law roots and cross-repo ownership. Sibling method PRs DASHI #1411
+(lazy original-revision span licence), #1413 (atomic gap persistence),
+and SLR #75/#54 (protected candidates and real reopened cases) are
+unmerged independent work, not assumed imported or proved. All original
+legislative, QUT, QCC, SWFG, Stockland, court and prior Ibrahim/Monster
+3B ownership stays intact. No ESD code was touched.
