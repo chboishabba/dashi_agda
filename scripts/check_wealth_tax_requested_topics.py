@@ -107,6 +107,15 @@ def main() -> None:
         "toeSaleUnitsCannotIdentifySecurityClass",
         "toeSyntheticSettlementOwnerClassWeld",
         "toeNetReceiptDoesNotDetermineGrossTrades",
+        "toeAssessmentDayFullPaymentLeavesMinimum",
+        "toeExcessLiabilityZeroBelowThreshold",
+        "toeTaxLiabilityMonotoneAtFixedThreshold",
+        "toeGenericExecutedQuantityBound",
+        "toeGenericSettledQuantityBound",
+        "toeArbitraryFillCashRequiresReconciliation",
+        "toePureSellerBuyerShareCountConserved",
+        "toeCapitalStockRequiresPhysicalReconciliation",
+        "toeDeliveredCareCannotExceedStaffHours",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
     # These are direct aliases of EXISTING source and evidence owners.
@@ -164,6 +173,18 @@ def main() -> None:
         "syntheticSuperVotingWeld", "ParticipantClearingBatch",
         "noClearedTransactions", "offsettingClearedTransactions",
         "netReceiptCannotRecoverGrossTurnover",
+        "CountReconciledOrder",
+        "genericExecutedCountBoundedBySubmitted",
+        "genericSettledCountBoundedByExecuted",
+        "genericSettledCountBoundedBySubmitted",
+        "CashReconciledFillBatch",
+        "genericSettledProceedsIsExactPriceQuantitySum",
+        "PureIssuedClassTransfer",
+        "shareClassTransferPreservesIssuedSupply",
+        "PhysicalCapacityPeriod",
+        "physicalCapitalStockFlowConservation",
+        "DeliveredCareCapacity",
+        "deliveredCareHoursBoundedByStaffAndEquipment",
     ):
         assert theorem in dashi_tax_bridge, "missing tax-market gate: " + theorem
     assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", dashi_tax_bridge), (
@@ -183,6 +204,14 @@ def main() -> None:
     # Claim-specific original-root coverage, not evidence of empirical truth.
     tax_source = (ROOT / OWNERS[0]).read_text(encoding="utf-8")
     social_source = (ROOT / OWNERS[1]).read_text(encoding="utf-8")
+    base = (ROOT / OWNERS[0]).read_text(encoding="utf-8")
+    for theorem in (
+        "hundredPercentLiabilityZeroBelowThreshold",
+        "netWealthAfterFullyPaidExcessEqualsMin",
+        "wealthLiabilityNeverExceedsAssessedWealth",
+        "wealthLiabilityMonotoneAtFixedThreshold",
+    ):
+        assert theorem in base, f"missing general tax/threshold theorem: {theorem}"
     for symbol in ("proposedDurationEscalatingIdleEquityLevy",
                    "proposalIdleEquityRateBasisPoints",
                    "sourceAIProposedRatesAreNotVictoriaLaw"):
