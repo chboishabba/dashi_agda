@@ -204,3 +204,33 @@ Axiom Math's [PrimeGapsLib](https://github.com/AxiomMath/PrimeGapsLib) explicitl
 4. **Analytic**: keep any `DHL[40,2]` or `H_1 ≤ 186` theorem conditional until every external analytic and finite-certificate assumption is discharged. The elementary finite sieve alone cannot provide twin-prime infinitude.
 
 **Status:** five local Python scripts passed; new Agda source checks are static only; no kernel or CI success asserted. Do not mark this PR merge-ready on source/static evidence alone.
+
+### The decisive finite-sieve obstruction: BOTH endpoints can be composite
+
+This is stronger than the previous SSP15 example `2279=43·53` (where only the first endpoint was proved composite). Given a finite list of prime moduli `S`, let `M=∏_{p∈S}p`. Pick a paired survivor residue `r` modulo `M`. Every local factor has a surviving class (one for 2, `p-2` for odd `p`), so ordinary CRT supplies such `r` for distinct finite primes. Choose two **fresh** distinct primes `q₁,q₂` that do not divide `M`. Ordinary CRT has a residue `b` modulo `Mq₁q₂` satisfying:
+
+```
+b ≡ r   (mod M)
+b ≡ 0   (mod q₁)
+b ≡ -2  (mod q₂)
+```
+
+Set `N = b + kMq₁q₂` for any sufficiently large positive `k`. Then `N` and `N+2` pass EVERY sieve constraint in `S`, while `q₁ | N`, `q₂ | N+2`, and both endpoints are larger than their corresponding factors, hence BOTH are composite. This construction can be continued for arbitrarily large `k`.
+
+This is an elementary ordinary mathematical proof that **no fixed finite prime-modulus screen can certify all its survivors as twin primes**, even if one uses arbitrary-prime extension and exact modular symmetry. It does not disprove twin-prime infinitude. It is *not* a formalised Agda proof, because general CRT reconstruction remains an open Agda cut. It is also not, by itself, the full analytic parity-barrier theorem behind sieve theory.
+
+`scripts/check_finite_twin_sieve_composite_completion.py` implements this construction with exact integer CRT via modular inverses and checks all congruences, both composite factors, and five arbitrarily chosen positive period multipliers for five different finite prime bases, including all SSP15 moduli and two extended controls 37 and 43. Local Python run **passed**:
+
+```
+S={2,3}:                              N=215
+S={2,3,5,7}:                          N=30041
+S={2,3,5,7,11,13}:                   N=9699707
+S=SSP15:                              N=14313269477552399344091
+S={2,3,5,7,11,13,37,43}:             N=129668759237
+```
+
+Each displayed `N` and `N+2` is composite by the construction's explicit fresh prime divisors, even though both survive the corresponding prior finite sieve. This executed counterexample is not a proof that a particular finite sieve *never* contains twin primes, only that it cannot identify **every** survivor as one.
+
+The new Agda owner also adds `allPairProductPeriodicMultiple` and its reverse, as well as exact filter-swap and duplicate-elimination theorems, establishing the periodic/symmetry half of the mechanism in source. A general Agda CRT inverse and an Agda double-composite producer are still needed for a kernel-checked version of this obstruction.
+
+**Updated verification split:** six independent local Python regression scripts passed; GitHub files and CI source written and read back; Agda kernel status pending; external Lean analytic assumptions unchanged. Do not claim an unconditional 186 theorem or twin-prime infinitude from finite modular symmetry.
