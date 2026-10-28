@@ -179,3 +179,23 @@ def test_pair_transfer_premises_reject_non_concentrating_boundary():
                   (3,2,-1),(3,2,6),(True,2,0)):
         with pytest.raises(ValueError):
             concentrating_pair_transfer_certificate(a,b,m)
+
+
+def test_permutation_pair_pascal_difference_exhaustive_grid():
+    from zipf_s24_monotone_path_transport_exact import exact_permutation_pair_transfer_difference
+    from math import comb
+    checks=0
+    for b in range(2,8):
+        for a in range(b,9):
+            for m in range(a+b+1):
+                difference=exact_permutation_pair_transfer_difference(a,b,m)
+                if m==0:
+                    assert difference==0
+                else:
+                    assert difference==F(comb(a,m-1)-comb(b-1,m-1),comb(a+b,m))
+                    assert difference>=0
+                checks+=1
+    assert checks==291
+    for bad in ((1,2,0),(3,1,1),(3,2,-1),(3,2,6)):
+        with pytest.raises(ValueError):
+            exact_permutation_pair_transfer_difference(*bad)
