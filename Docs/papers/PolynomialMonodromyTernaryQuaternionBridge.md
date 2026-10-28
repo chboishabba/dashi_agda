@@ -50,3 +50,110 @@ User-supplied **2swap polynomial-roots / Abel--Ruffini video transcript**, espec
 ## Evidence restrictions
 
 This new Agda source is **written but not Agda-kernel-verified**. Do not call it a completed proof until the pinned Agda check succeeds. Do not claim a continuous Spin cover, general Galois theorem, polynomial path-lifting theorem, arbitrary-radical impossibility theorem, or Monster object identification. No new postulates, allow-unsolved-metas, TERMINATING or NO_POSITIVITY_CHECK; no ESD modifications. Independent exact-Fraction checks, when executed, are computational evidence only; they are not Agda kernel receipts.
+
+
+## Transcript-complete obligation ledger — 45 enumerated subjects (28 October 2026)
+
+The identifiers V01–V45 track the full video; their order follows the 45-concept extraction in the prior discussion. The time ranges are approximate because several subjects overlap in the narration. **Status P means finite-source constructed or existing-owner reuse, NOT Agda kernel verification.** The underlying transcript does not mention our quaternion, 3^5 / 5^3, Monster, or 27-cube extensions.
+
+| ID | Approximate timestamp | Video concept | Formal receiver / deliverable | Status |
+|---|---|---|---|---|
+| V01 | 00:00–01:18 | Polynomial coefficients and zeros | finite exact polynomial evaluation + root predicates | P |
+| V02 | 01:18–02:11 | Complex-plane domain colouring | observation map, argument/modulus need analytic charts | I |
+| V03 | 02:11–04:25 | N→Z→Q→R→C extensions | source-typed field-extension hierarchy | I |
+| V04 | 03:57–04:25 | i and -i solve x²+1=0 | rational-complex exact conjugate witnesses | P |
+| V05 | 04:25–04:57 | Algebraic closure of C | FTA receipt / no self-contained proof yet | O |
+| V06 | 04:57–05:17 | Degree n yields n roots counted with multiplicity | root-multiset theorem interface | O |
+| V07 | 05:17–05:57 | Double roots and local order | multiplicity and winding interface | O |
+| V08 | 05:57–06:15 | n+1 coefficients for degree ≤n | finite coefficient-vector representation | P |
+| V09 | 06:15–07:12 | ±1 coefficient configurations | finite alphabet cardinality; exact examples | P |
+| V10 | 07:12–08:51 | Point-cloud complexity and dragon-curve resemblance | non-promotion of fractal identity | B |
+| V11 | 08:51–09:39 | Linear equation solution | field inverse requires a≠0 | I |
+| V12 | 09:39–10:26 | Ordered coefficients vs unordered roots | Vieta symmetric invariance finite exact | P |
+| V13 | 10:26–11:10 | No global continuous distinguished-root selection | continuous-section obstruction interface | O |
+| V14 | 11:10–12:19 | Discontinuous branch choice | two-sheet finite branch model | P |
+| V15 | 12:19–13:11 | Real coefficient conjugate root pairing | complex conjugation exact polynomial examples | P |
+| V16 | 13:11–13:41 | Movable branch cuts | branch cut bookkeeping interface | I |
+| V17 | 13:41–14:32 | Riemann surface two-sheet gluing | covering / ramification interface | O |
+| V18 | 14:32–15:02 | Continuous multi-root relation | unordered multiset transport | I |
+| V19 | 15:02–15:54 | Square-root loop swaps two roots | finite C2 root-label monodromy image | P |
+| V20 | 15:54–16:18 | Cubic needs more than only square roots | S3 derived obstruction conditional criterion | I |
+| V21 | 16:18–16:50 | Cube-root three sheets and C3 cycle | C3 embedding reused | P |
+| V22 | 16:50–17:08 | C3 cannot make a transposition | S3/C3 proper subgroup proof reused | P |
+| V23 | 17:08–17:51 | Two adjacent root swaps | S3 generators and braid-image words | P |
+| V24 | 17:51–18:49 | Commute / undo loops; nontrivial commutator | S3 commutator exact | P |
+| V25 | 18:49–19:24 | One radical has abelian monodromy | cyclic monodromy and derived-triviality | P |
+| V26 | 19:24–20:22 | Nested skewed radicals / shifted branch points | algebraic tower interface; analytic branch geometry open | O |
+| V27 | 20:22–20:28 | Cardano cubic radical construction | specific radical formula + field hypotheses | O |
+| V28 | 20:28–20:59 | Nested commutators for quartics | S4/A4/V4 derived chain interface | I |
+| V29 | 20:59–21:28 | Older radical machine loses deeper action | finite tower derived-length bound interface | I |
+| V30 | 21:28–21:55 | Further nested radicals can extend finite solvable depth | tower recursion interface | I |
+| V31 | 21:55–22:17 | Single transposition S2 trivial commutator | S2 table and derived identity | P |
+| V32 | 22:17–22:33 | Three-root derived series terminates | S3→C3→1 finite exact | P |
+| V33 | 22:33–22:57 | Four-root derived series terminates | S4→A4→V4→1 finite check/interface | I |
+| V34 | 22:57–23:17 | Five-root two overlapping 3-cycles | literal S5 permutation witnesses A,B | P |
+| V35 | 23:17–23:59 | Double commutator recovers generators | A,B finite exact witness | P |
+| V36 | 23:59–24:19 | Arbitrarily nested nontrivial commutators | recurrence on A/B commutator identity | I |
+| V37 | 24:19–24:55 | Radical towers have finite solvable derived length | conditional derived-length theorem | I |
+| V38 | 24:55–25:23 | A5 perfect, S5 non-solvable | finite group proof obligation, not inferred only from two cycles | O |
+| V39 | 25:23–25:30 | General quintic no radical formula | Galois criterion with char0 and generic S5 hypotheses | O |
+| V40 | 25:30–25:32 | Higher generic degrees similarly obstructed | Sn n≥5 subgroup/inheritance obligation | O |
+| V41 | 25:32–25:52 | Zeros of ±1 polynomial families | finite root atlas numeric exact/symbolic checks | I |
+| V42 | 25:52–26:17 | Interactive coefficient/root dragging | parameterised coefficient family and tracked labels | I |
+| V43 | 26:17–26:30 | Three legal coefficient symbols instead of two | base-3 length-(n+1) count | P |
+| V44 | 26:30–26:57 | Demo app / sponsor claims | no mathematical theorem; recorded source provenance | B |
+| V45 | cross-cut | Balanced-ternary 3^5 versus five-valued 5^3 | different carriers 243 versus 125; no canonical bijection | P |
+
+**Status key:** **P** new/existing finite source theorem or executable exact witness (Agda kernel still pending); **I** formal interface, finite model, or conditional mathematics; full theorem not discharged; **O** analytic / algebraic global theorem genuinely open in this PR; **B** boundary: descriptive claim, not promoted to a theorem.
+
+### Separate mathematical prerequisites and falsification gates
+
+| ID | Required lemma or construction | Mathematical completion criterion |
+|---|---|---|
+| A01 | Symmetric polynomial / Vieta | Product coefficients invariant under S_n action on roots, not under arbitrary coefficient permutation |
+| A02 | Discriminant complement | Distinct-root coefficient space, discriminant nonzero condition |
+| A03 | Ordered/unordered configurations | Quotient by S_n with genuine covering and lift |
+| A04 | Fundamental groups and braid groups | B_n as π1 of unordered configuration, P_n kernel of permutation map |
+| A05 | Monodromy action | Characterise π1 induced root permutation, with concrete coefficient loops |
+| A06 | Branched coverings | Separate singular discriminant fibres and ordinary unbranched parameter space |
+| A07 | Derived series of S2/S3/S4 | Exact subgroup and commutator equalities, including solvable termination |
+| A08 | Alternating A5 perfection | Prove normal closure of 3-cycles yields A5, or complete finite group enumeration |
+| A09 | Galois radical criterion | Characteristic-zero Galois extension, roots of unity, splitting field, both directions |
+| A10 | General degree-5 Galois group | Generic independent coefficient indeterminates over appropriate base field have S5 |
+| A11 | Continuous Spin3 topology | SU2/SO3 covering, path homotopy, 360-degree nonreturn and 720-degree return |
+| A12 | Punctured-loop winding | Winding number relates branch sheets; no claim from colour plot alone |
+| A13 | Source/scope provenance | Never promote toy finite action, coefficient-count identity, or Monster fingerprint into a global theorem |
+| A14 | Cross-repo ownership | Keep primary mathematicians, existing Agda owner, new bridge source code, executed regression, kernel receipt separate |
+
+### Numerology / cross-pollination — maps with controlled receivers
+
+| Candidate link | Exact transport / finite fact | Promotion gate |
+|---|---|---|
+| 3^3 = 27 | All ternary self-maps on a 3-point set are 3^3; S3 consists of exactly six reversible ones | The 27 synthesis cells (x,y,z) are a *different* 27-state carrier; use a typed chart, not identity |
+| 3^5 = 243 | Five independently chosen signed-trit coefficients of a monic quintic | Not five arbitrary complex roots; coefficient vectors and root multisets have different objects |
+| 5^3 = 125 | Three independently chosen values from existing five-mode carrier | This is with replacement; ordered triples of distinct roots would be 5·4·3 = 60 |
+| S3=6=C3⋊C2 | Cycle generator r, reflection s with srs=r^-1; use preexisting dihedral bridge | S3 is not the cyclic group C6 or Base369's hexXor |
+| 27 orbits | S3 acts by simultaneous relabelling on the 27 unary ternary maps; existing source classifies into seven conjugacy shapes | Cannot identify seven shapes with seven irreducible representations |
+| 3 steps / 6 steps | q=(1+i+j+k)/2: q³=-1, q⁶=1 and conjugation cycles i,j,k | Three 120° spatial steps vs six lifted steps; not six root permutations = 720° |
+| Q8 -> V4, 2T -> A4 | Existing kernel ±1 and signed lift fibres | Q8 has no 3-cycle q; 2T is a separate proved/typed source, not same-object Monster 3B |
+| braid word vs permutation | σ_i and σ_i^-1 both map to same transposition; σ_i² has trivial permutation image but nonzero exponent | Braid history is not reconstructed from S3 endpoint |
+| 3-adic / p-adic addresses | Reuse signed ternary codecs and hypervoxel transport to represent finite ordered root labels | Does not imply complex analytic continuation or number-theoretic prime theorems |
+| Fourier C3 / 369 | Reuse existing character and convolution owners on finite C3/27 carriers | Do not equate complex root winding to finite Fourier phase by numerical coincidence |
+| Pareto / snowball / Ibrahim | Max-cut by independent lemmas and provenance-preserving reindexing | Link only witnessed exact maps; preserve Ibrahim historical/Monster 3B owners |
+
+### Recent PR audit and source roots
+
+- [#1414](https://github.com/chboishabba/dashi_agda/pull/1414): the canonical current **draft** for this topic, extended here.
+- [#1407](https://github.com/chboishabba/dashi_agda/pull/1407): C3 / 27 / 729 / Hermitian Fourier submodels; only source-linked reuse, no branch-only import silently absorbed.
+- [#1408](https://github.com/chboishabba/dashi_agda/pull/1408): finite sieve and signed SSP, with explicit candidate-vs-global no-go.
+- [#1406](https://github.com/chboishabba/dashi_agda/pull/1406): non-Archimedean spectral finite models; no complex-monodromy theorem implied.
+- [#1396](https://github.com/chboishabba/dashi_agda/pull/1396): evidence non-promotion aggregation; reuse same guard style.
+- Ramond (2022), *The Abel–Ruffini Theorem: Complex but Not Complicated*, DOI 10.1080/00029890.2022.2010494.
+- D. Kohli (2023), *An Introduction to Galois Theory and the Abel–Ruffini Theorem*: https://math.uchicago.edu/~may/REU2023/REUPapers/Kohli.pdf.
+- Source discussion of braid monodromy: https://edocs.tib.eu/files/e01dh06/52066552X.pdf.
+- Binary tetrahedral quaternion chart, David Stone, Stony Brook: https://www.math.stonybrook.edu/~tony/bintet/quat-rep.html.
+- Lean AI formalization leaderboard states an Abel–Ruffini benchmark target, not a verified imported DASHI theorem: https://lean-lang.org/eval/problems/abel_ruffini/.
+
+### Max-cut execution order / stop rule
+
+P0: existing owner search, provenance and negative gates; P1: finite S2/S3/C3 algebra + quintic overlapping 3-cycles; P2: finite Vieta and branch covering models; P3: braid-word crossings and pure-braid exponent separator; P4: typed 3^5/5^3/27/S3 and quaternion transport; P5: genuine S4/S5 finite group proof by full enumerations; P6: complex discriminant complement and covering path lifting; P7: field-theoretic solvability by radicals and generic S5; P8: Spin3 homotopy and fibre topology; P9: TOE regression, source receipts, kernel validation. Stop at the first *unpaid external theorem dependency* and record its exact input/output type; do not create an alleged proof using a synthetic certificate or analogy.
