@@ -22,7 +22,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Nat.Base using (_!; _^_; _%_)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 -- Actual factorial, not a new duplicate factorial implementation.
 factorialBaseCase : zero ! ≡ 1
@@ -118,14 +118,24 @@ degreePowerResidue (suc n) =
 
 -- The *seed* zero here represents power 99^1, not 99^0.
 -- Even positive exponents therefore correspond to step counts odd.
-degreePowerResidueEvenIndex :
+twoMoreKeepsDegreeResidue :
   (n : Nat) →
-  degreePowerResidue (suc (n + n)) ≡ evenPower81
-degreePowerResidueEvenIndex zero = refl
-degreePowerResidueEvenIndex (suc n)
-  rewrite nextDegreePowerResidueInvolutive
-    (degreePowerResidue (suc (n + n))) =
-  degreePowerResidueEvenIndex n
+  degreePowerResidue (suc (suc n)) ≡ degreePowerResidue n
+twoMoreKeepsDegreeResidue n =
+  nextDegreePowerResidueInvolutive (degreePowerResidue n)
+
+doubleIndex : Nat → Nat
+doubleIndex zero = zero
+doubleIndex (suc n) = suc (suc (doubleIndex n))
+
+degreeResidueAtEvenPositivePower :
+  (n : Nat) →
+  degreePowerResidue (suc (doubleIndex n)) ≡ evenPower81
+degreeResidueAtEvenPositivePower zero = refl
+degreeResidueAtEvenPositivePower (suc n) =
+  trans
+    (twoMoreKeepsDegreeResidue (suc (doubleIndex n)))
+    (degreeResidueAtEvenPositivePower n)
 
 data AngleUnit : Set where
   radians degrees : AngleUnit
