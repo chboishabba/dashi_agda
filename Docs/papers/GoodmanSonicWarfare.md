@@ -488,3 +488,8 @@ when alpha = beta:
 `noisyTriangularPair` explicitly retains both errors. `calibratedFullPairPerturbation` reuses `calibratedTwoChannelPerturbation` by pair congruence. `commonModePairRetainsFirstError` reuses the original common-mode lemma. Neither adds an independent theorem owner or a new postulate. It prevents an erroneous consumer from promoting second-coordinate cancellation to complete-state immunity.
 
 This is conditional exact rational algebra. The calibration equality remains an assumption; no model of stochastic covariance, real sound-pressure propagation, instrument noise or causal human response is supplied. The source-written Agda lemmas require actual kernel verification. Their inherited rational solver and Goodman/Ibrahim attribution boundaries remain unchanged.
+
+
+## Measured acoustic evidence acquisition lane
+
+See [GoodmanMeasuredAcousticValidationProtocol.md](GoodmanMeasuredAcousticValidationProtocol.md) for the cited MIRACLE/LOCATA/ACE measured-RIR source records, full correlated two-channel covariance, conditional ridge bias/variance/MSE derivation, and leakage-safe spatially blocked held-out test plan. The protocol is **not** a claim of downloaded raw audio, measured covariance, fitted models, or completed held-out validation. In particular, position ground truth and calibration are not identical to traceable absolute sound-pressure calibration.
