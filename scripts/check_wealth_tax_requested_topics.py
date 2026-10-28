@@ -326,6 +326,8 @@ def main() -> None:
         "CanonicalFundingRouteWeld",
         "toeCanonicalSourcesFundExactlyOneJoinedRoute",
         "DvPBatchDisposition",
+        "dueDoesNotProveActualDvP",
+        "backedOutDoesNotProveActualDvP",
         "SourceLinkedFinalSettlement",
         "ExternallyAdmittedSaleTaxRoute",
         "settlementProvenanceAndSecurityMatch",
