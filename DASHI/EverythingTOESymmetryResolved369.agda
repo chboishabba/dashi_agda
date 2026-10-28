@@ -23,6 +23,14 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.SignedSSPRawCodeParityNoGoExact as RawCodeParity
+open RawCodeParity public using
+  ( powerTwoOfThreeIsEight
+  ; rawCodeThreeModuloTwoIsZero
+  ; decodedPrimeThreeModuloTwoIsOne
+  ; rawCodeModuloTwoCannotReplaceDecodedParity
+  )
+
 import DASHI.Arithmetic.SignedSSPTwinObservableTransportExact as ExactSSPReadout
 open ExactSSPReadout public using
   ( losslessSSPReadoutRoundTrip
