@@ -54,6 +54,11 @@ class FourGridParetoTests(unittest.TestCase):
         bilinear = AGDA[1].read_text(encoding="utf-8")
         for token in (
             "fourGridRetainedMembership",
+            "fourGroupAdd",
+            "fourGroupMatchesTrueSignedPairSum",
+            "fourGridGroupSumMatchesIntegerPair",
+            "fourGridCannotRecoverFullIntegerSpectrum",
+            "fourGridPostprocessingCannotRestoreFullSpectrum",
             "fourGridRetainedCubeMembership",
             "fourGridMatchesExactRetainedForAllCoefficients",
             "outerFrequencyCollisionAtFour",
@@ -64,6 +69,8 @@ class FourGridParetoTests(unittest.TestCase):
             self.assertIn(token, four)
         for token in (
             "sumUsingCong",
+            "fourGridGroupSum",
+            "fiveGridGroupSum",
             "fourGridBilinearRecoversAllRetainedCoefficients",
             "fiveGridBilinearRecoversAllFullCoefficients",
             "cyclotomicFourGridRetainedBilinearExact",
@@ -71,7 +78,11 @@ class FourGridParetoTests(unittest.TestCase):
             "C3CubeCyclotomicFourierExact",
         ):
             self.assertIn(token, bilinear)
-        for source in (four, bilinear):
+        full = (ROOT / "DASHI/Physics/Closure/R2P227729FiniteQuadraticConvolutionExact.agda").read_text(encoding="utf-8")
+        self.assertIn("fiveGroupMatchesTrueSignedPairSum", full)
+        self.assertIn("fiveGridGroupSumMatchesIntegerPair", full)
+        self.assertIn("fiveGroupAdd", full)
+        for source in (four, bilinear, full):
             self.assertNotIn("{!!}", source)
             self.assertNotIn("postulate\n", source)
             self.assertNotIn("{-# TERMINATING #-}", source)
