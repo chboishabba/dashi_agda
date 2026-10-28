@@ -120,3 +120,41 @@ The Agda module source-writes all five `refl` slot witnesses, a translated-word 
 Its independent local integer-mod-three Python check processed ALL 243 five-orbit field assignments, 27 three-token named words and six affine global S3 transformations, namely **39,366** exact operator/equality cases, using *five deliberately heterogeneous* affine orbit-dependent operators. The committed `scripts/alexander_horned_five_orbit_named_wave_transport_exact.py` and focused test are replayable. **This is source-written and finite computational evidence, not Agda-verified nor experimental acoustics.**
 
 This is a legitimate consumer of the 27→5 invariant address orbit geometry and #1275 equality-pattern *observation* map. The operator's input remains a finite five-orbit wave-value field. Statistical word probabilities, time-ordered Heaps novelty, original Alexander–Hatcher wild π₁, #1414 polynomial root monodromy/quaternion spin, #1407 signed Fourier convolution, #1405 measured sound propagation and original Ibrahim Monster 3B all require distinct typed transports. No same-object proof follows from the orbit-domain correspondence alone.
+
+## 29 October 2026: all-depth canonical quotient source closure
+
+**New source owner on original PR #1244:**
+`DASHI/Mathematics/Topology/AlexanderHornedS3SignQuotientSetoidBidiExact.agda`.
+This consumes the *original* `AlexanderHornedS3WordSignOrbitTransportExact`
+rather than duplicating the affine-S3 translation/reflection witnesses.
+It formalises:
+
+- `SameC2Orbit` as equality or simultaneous inversion of n C3 digits, with actual reflexive, symmetric and transitive proofs;
+- `s3ToC2` and `c2ToS3` as **both** directions of the actual global affine-S3 word orbit relation;
+- `normalisationSurjective`, `normalisationSectionUpToS3`, and `WordDifferenceOrbitBidi`, giving explicit quotient-relation preservation/reflection and a surjective section;
+- `CanonicalRelative n`: zero-prefixed canonical words, or a first positive (c1) digit with entirely unconstrained later digits; the c2-first case is transformed by simultaneous inversion;
+- `canonicaliseNegationInvariant`, `canonicalSection`, `canonicalCover`, `canonicaliseRespectsSign`, `canonicaliseComplete`, and `canonicalWordSection`: sound, complete all-depth canonical normal forms and reverse word representatives. The result is actual representative classification **iff** global S3 word-orbit equivalence;
+- `canonicalStepToSum` and `sumToCanonicalStep` (both constructorwise inverse), exhibiting
+  `CanonicalRelative(suc n) ≃ CanonicalRelative n ⊎ Vec C3 n`;
+- `canonicalOrbitRank`, `powThree`, and `doubleCanonicalRank`, the all-Nat arithmetic identity **2 r_n = 3^n + 1**, with exact ranks 1,2,5,14,41,122,365 through n=6.
+
+The canonical normal-form datatype makes the orbit classification
+constructive. The disjoint-sum equivalence proves the combinatorial
+recurrence; `Vec C3 n` contributes `3^n` free words. The
+**explicit all-n Stirling recurrence/bijection to classical restricted-growth
+set partitions** remains the separately owned #1275 bridge, not a
+new theorem asserted by coincident cardinality.
+
+Independent local exhaustive Python compared the entire affine S3
+orbit of *every* word of lengths 1..7 (n=0..6) to its canonical
+difference-sign class: PASS. This is an executed finite independent
+model, **not a kernel check**. No Agda binary was available locally.
+The new module is imported by #1244's focused
+`EverythingTOESymmetryResolved369` root; no ESD changes.
+
+**Important non-promotion:** this is an equivalence of setoid
+quotients of **labelled words under global value relabeling**,
+not equivalence of coordinate-position permutations,
+endomorphism-conjugacy, native wild-embedding topology, or
+actual Monster group representations. The original #1275
+Zipf/Heaps and Ibrahim 3B proof owners remain separate.
