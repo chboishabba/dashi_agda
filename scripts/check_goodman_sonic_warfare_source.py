@@ -13,6 +13,7 @@ MODULE = ROOT / "DASHI/Culture/GoodmanSonicWarfareExact.agda"
 RHYTHM = ROOT / "DASHI/Culture/GoodmanSonicWarfareRhythmInterventionExact.agda"
 TRANSPORT = ROOT / "DASHI/Culture/GoodmanSonicWarfareTransportExact.agda"
 RATIONAL = ROOT / "DASHI/Culture/GoodmanSonicWarfareRationalInverseExact.agda"
+SONIC_CUBE = ROOT / "DASHI/Culture/GoodmanSonicNumerologyObservationCubeExact.agda"
 STABILITY = ROOT / "scripts/check_goodman_inverse_stability_finite.py"
 RIDGE = ROOT / "scripts/check_goodman_ridge_regularisation_finite.py"
 DOC = ROOT / "Docs/papers/GoodmanSonicWarfare.md"
@@ -35,6 +36,7 @@ def check() -> None:
     rhythm = RHYTHM.read_text(encoding="utf-8")
     transport = TRANSPORT.read_text(encoding="utf-8")
     rational = RATIONAL.read_text(encoding="utf-8")
+    sonic_cube = SONIC_CUBE.read_text(encoding="utf-8")
     stability = STABILITY.read_text(encoding="utf-8")
     ridge = RIDGE.read_text(encoding="utf-8")
     for owner in [
@@ -325,6 +327,27 @@ def check() -> None:
         "10.3934/ipi.2025043",
     ):
         require(token in doc, f"missing T9 original attribution or scope {token}")
+    # T11 inherits exact existing typed-trit, residual and dialectic owners.
+    for owner in (
+        "DASHI.Algebra.BalancedTernary",
+        "DASHI.Core.ResidualBitLowerBoundThreeExact",
+        "DASHI.Reasoning.DialecticInvariantGeometry",
+    ):
+        require(f"import {owner}" in sonic_cube, f"missing numerology prior proof owner {owner}")
+    for symbol in (
+        "threeInteractionOutcomesSameObservation",
+        "noTotalRecoveryFromXY",
+        "oneBitCannotRecoverThreeInteractionOutcomes",
+        "recoverCubeAfterCompleteObservation",
+        "dialecticMirrorTwice",
+        "twoFortyThreeIsThreeToFive",
+        "oneTwentyFiveIsFiveCubed",
+    ):
+        require(symbol + " :" in sonic_cube, f"missing finite T11 theorem {symbol}")
+    require("GoodmanSonicNumerologyObservationCubeExact" in transport,
+            "T11 theorem must remain reachable from TOE")
+    require("T11 numerological cross-pollination" in doc and "PR #1414" in doc,
+            "missing T11 numerology provenance memo")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
