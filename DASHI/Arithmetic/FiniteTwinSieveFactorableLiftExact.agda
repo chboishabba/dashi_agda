@@ -33,9 +33,10 @@ module DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
+open import Data.Product using (Σ; _×_; _,_)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 
@@ -225,3 +226,52 @@ factorableRightHasTwoNontrivialFactors a b c =
 -- Note: the output TWO certificates do NOT depend on a prime-pair
 -- hypothesis. The finite sieve predicate can survive for both
 -- nontrivially factorable endpoints.
+
+------------------------------------------------------------------------
+-- THE MODULUS PRODUCT IS ALWAYS POSITIVE, even for repeated axes.
+-- It is a product of suc(c) factors; there is no distinctness or
+-- coprimality assumption hiding inside the sieve-preservation lemma.
+------------------------------------------------------------------------
+
+certifiedModulusProductPositive :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  Σ Nat (λ b → Period.modulusProduct axes ≡ suc b)
+certifiedModulusProductPositive [] = 0 , refl
+certifiedModulusProductPositive (axis ∷ rest)
+  with certifiedModulusProductPositive rest
+... | b , positive =
+  (b + Pair.nonzeroResidues axis * suc b)
+  ,
+  trans
+    (cong (λ q → Pair.primeModulus axis * q) positive)
+    refl
+
+-- COMPLETE DOUBLE NONTRIVIAL FACTORISATION, for any supplied survivor
+-- r>=2. A certificate here is a genuine product of two Nat numbers
+-- each represented as suc(suc residual), hence each >=2.
+--
+-- The baseline exists for all finite prime sieves (e.g. residue -1
+-- at their product), but proving that universal BASELINE theorem is
+-- intentionally a different lemma; it is not smuggled in here.
+factorableSurvivorWithBothStrictFactors :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (a t : Nat) →
+  Pair.AllPairSurvive axes (suc (suc a)) →
+  Σ Nat (λ n →
+    Pair.AllPairSurvive axes n
+    × (TwoNontrivialFactors n × TwoNontrivialFactors (n + 2)))
+factorableSurvivorWithBothStrictFactors axes a t survivor
+  with certifiedModulusProductPositive axes
+... | b , positive rewrite positive =
+  factorableLeft (suc (suc a)) (suc b) (suc t)
+  ,
+  ( factorablePairPreservesFiniteSieve axes (suc (suc a))
+      (suc t) survivor
+  , ( factorableLeftHasTwoNontrivialFactors a b t
+    , subst
+        TwoNontrivialFactors
+        (sym (leftFactorisationGivesRightPlusTwo
+          (suc (suc a)) (suc b) (suc t)))
+        (factorableRightHasTwoNontrivialFactors a b t)
+    )
+  )
