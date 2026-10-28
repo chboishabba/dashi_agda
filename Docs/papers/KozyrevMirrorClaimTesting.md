@@ -75,6 +75,76 @@ repository's **syntactic fail-closed non-promotion** receipt. It does
 not prove a physical conservation law, absence of a phenomenon, an
 experimental result, or clinical ineffectiveness.
 
+## 2026-10-28 solar 10 m2 dual-objective source-to-wall momentum screen
+
+**Source**: solar irradiance reference ASTM G-173 from National
+Renewable Energy Laboratory (NREL/NLR); NASA Langley 2026 teaching
+derivation of photon momentum flux as optical power divided by c.
+These support classical physics, not any anomalous Kozyrev effect.
+Source references:
+https://www.nlr.gov/grid/solar-resource/spectra-am1.5
+https://ntrs.nasa.gov/api/citations/20260000767/downloads/012026UIUC%20presentation%20sm.pdf
+
+**New canonical first-bounce producer**:
+`scripts/kozyrev_solar_bisolver.py`, using the **existing** shared
+`kozyrev_geometry_optimizer.py` collision method and target scorer.
+Tests `scripts/tests/test_kozyrev_solar_bisolver.py` and CI step
+have been source-written. It is a first-bounce **two-score** model,
+not an escaped-ray ledger or an optical wave solver.
+
+At 10 m² projected collector area, a stipulated 1000 W/m² plane
+irradiance supplies 10000 W. For 90% optical delivery, 9000 W arrives
+at the receiver/spiral input (before local material losses). The
+incoming photon momentum-rate scale is
+`10000 / 299792458 = 33.3564 microN`, or
+`9000 / 299792458 = 30.0208 microN` after the lens.
+The 100%-reflective total reversal ceiling for that 10 kW external
+beam is `2*10000/c = 66.7128 microN` for the full illuminated
+device, *given one directed incident beam and outgoing direction
+directly opposite*. Do not add this ceiling once per bounce.
+
+At 5% *local* absorption after 90% collector efficiency, 450 W is
+deposited locally. The 10 kW external collector is a high-power solar
+concentrator and must never be illuminated while an occupant is in
+or near the focal region. Serious eye, skin, ignition and thermal
+hazards exist. A 0.5 m lever gives a **single-surface illustrative**
+maximum torque scale `2*9000/c*0.5 = 30.0208 microN*m`; this is
+**not** a proven bound for internal forces on individual surfaces,
+whose local torque contributions may exceed the net system value
+and cancel each other. Actual torque depends on an external
+axis and entire angular momentum flux.
+
+**Scoring distinction**:
+- Focusing proxy: share of external first-bounce rays whose
+  reflected direction intersects a selected central target.
+- Wall momentum/torque proxy: signed change in incident ray
+  linear and angular momentum at that bounce.
+- Global device net force: incident minus escaped photon
+  momentum plus any momentum crossing thermal/mechanical
+  boundaries. This is **not** the same as local wall force and
+  the producer does not claim this global result.
+- Thermal source model for a human needs a real radiation
+  spectrum and angular intensity plus temperature/exchange.
+  "Biological energy" is not a separate demonstrated force.
+
+**Critical negative result**: A short external-beam first-bounce
+screen can show a nonzero wall momentum change while having
+zero target capture. Focusing and wall impulse are not guaranteed
+to increase together, and a high ray-count/impact-count is not a
+gain mechanism. A multi-bounce score is accepted only if all rays
+terminate or an explicit residual momentum/energy bound is paid.
+
+**Next highest-alpha cut**: integrate curved plate profiles from
+the 9-panel construction drawing, select directional external
+input versus internal thermal human emission as separate
+source coordinates, trace one ray until escape/absorption and
+account for all boundaries, then compute two objective values
+from the same completed path. Run a robust Pareto search over
+source angle and source position, including lens efficiency,
+alignment, material loss and the complete source/collector
+recoil. No Agda kernel, physical experiment, anomalous torsion
+or human benefit claimed by the newly written Python.
+
 ## 2026-10-28: Published geometry vs golden-ratio optimisation
 
 ### What primary and secondary evidence actually specifies
