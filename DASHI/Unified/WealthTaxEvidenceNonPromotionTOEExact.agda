@@ -11,6 +11,7 @@ module DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
 open import Data.Nat using (_≤_; _⊓_; _∸_)
+open import Data.Sum using (_⊎_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attributed
@@ -18,6 +19,7 @@ import DASHI.Core.EvidenceHyperfabricExact as Evidence
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Economics.SourceAttributionPromotionBoundaryExact as Sources
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact as Base
 import DASHI.Economics.WealthTaxPowerCareSociologyBidi20261027Exact as Soc
 import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact as Fiscal
@@ -331,6 +333,35 @@ toeDeliveredCareCannotExceedStaffHours :
     DashiTradeTax.actualStaffHours service
 toeDeliveredCareCannotExceedStaffHours =
   DashiTradeTax.deliveredCareHoursBoundedByStaffAndEquipment
+
+-- The canonical multi-axis Pareto relation is an existing theorem owner.
+-- These source-written application proofs do not invent welfare weights.
+toeParetoDominanceReflexive :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  (candidate : Pareto.Model problem) →
+  Pareto.WeaklyDominates costs candidate candidate
+toeParetoDominanceReflexive =
+  DashiTradeTax.paretoDominanceReflexive
+
+toeParetoDominanceTransitive :
+  {problem : Pareto.ConsumerMDLProblem} →
+  (costs : Pareto.CostHyperfabric problem) →
+  {first second third : Pareto.Model problem} →
+  Pareto.WeaklyDominates costs first second →
+  Pareto.WeaklyDominates costs second third →
+  Pareto.WeaklyDominates costs first third
+toeParetoDominanceTransitive =
+  DashiTradeTax.paretoDominanceTransitive
+
+toeSyntheticPolicyCostsAreIncomparable :
+  (Pareto.WeaklyDominates DashiTradeTax.policyTradeoffCosts
+    DashiTradeTax.lowAdministrativeCost DashiTradeTax.increasedCareCapacity
+   ⊎ Pareto.WeaklyDominates DashiTradeTax.policyTradeoffCosts
+    DashiTradeTax.increasedCareCapacity DashiTradeTax.lowAdministrativeCost)
+    → ⊥
+toeSyntheticPolicyCostsAreIncomparable =
+  DashiTradeTax.paretoOrderDoesNotTotallyRankTheseOptions
 
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
