@@ -20,7 +20,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; subst)
 open import Data.Nat.Properties using (+-assoc; +-comm; *-assoc; *-comm)
 open import Data.Nat.DivMod using (_%_; [m+kn]%n≡m%n)
 
@@ -140,9 +140,11 @@ allPairCommonPeriodic :
 allPairCommonPeriodic [] M n emptyPeriod witness = witness
 allPairCommonPeriodic (axis ∷ rest) M n
     (appendPeriod k divisible restPeriod)
-    (headWitness , restWitness)
-    rewrite divisible =
-  localKPeriodic axis n k headWitness
+    (headWitness , restWitness) =
+  subst
+    (Pair.LocalPairSurvives axis)
+    (cong (n +_) (sym divisible))
+    (localKPeriodic axis n k headWitness)
   ,
   allPairCommonPeriodic rest M n restPeriod restWitness
 
@@ -155,9 +157,12 @@ allPairCommonPeriodicBack :
 allPairCommonPeriodicBack [] M n emptyPeriod witness = witness
 allPairCommonPeriodicBack (axis ∷ rest) M n
     (appendPeriod k divisible restPeriod)
-    (headWitness , restWitness)
-    rewrite divisible =
-  localKPeriodicBack axis n k headWitness
+    (headWitness , restWitness) =
+  localKPeriodicBack axis n k
+    (subst
+      (Pair.LocalPairSurvives axis)
+      (cong (n +_) divisible)
+      headWitness)
   ,
   allPairCommonPeriodicBack rest M n restPeriod restWitness
 
