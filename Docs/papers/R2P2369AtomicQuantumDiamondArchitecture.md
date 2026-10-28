@@ -79,6 +79,8 @@ Estimate and uncertainty: `r = y_measured - y_GR`, `σ_r² = σ_clock² + σ_lin
 
 **Existing open empirical boundary**: PR #1117's optical-geodesy evidence work is unmerged; the actual raw R2P2 clock-ratio, transfer systematics, instrument covariance, geopotential and independent analysis are external. The Sorci et al. ion-clock theory does not close this gap for R2P2.
 
+**Finite executable comparator:** `scripts/r2p2_clock_comparison_diagnostic.py` accepts an already-reduced dimensionless frequency ratio, transfer correction, weak-field prediction and a full **3×3 symmetric positive-semidefinite covariance matrix**. It calculates `residual = measured - link - GR` and the variance `(1,-1,-1)^T C (1,-1,-1)` with exact rational arithmetic. The code refuses invalid covariance matrices and **always** reports measurement authority, GR deviation and quantum-gravity claims as `false`. The bundled fixture is explicitly synthetic. The script does not unpack raw optical phase, calibrate any physical device, or prove an experimental model. Tests are in `tests/test_r2p2_clock_comparison_diagnostic.py`.
+
 **Validation levels**: written Agda `refl` and imported proof terms are **source written** only pending an Agda kernel run at this commit. Python/test source static consistency, exact rational arithmetic, and binary/ternary counts are separate from kernel certification and empirical validation. Tests must run on the exact branch and report their own outcomes.
 
 **Pareto/snowball/Ibrahim**: highest-value completed bridge is new source-typed wiring across existing owners. Snowball toward measured claims requires a hash-pinned experiment archive and protocol rather than additional synthetic theory. Preserve the Ibrahim/Monster ownership and prohibit any quantum/Monster/369 identity claim based on character coincidences.
@@ -93,6 +95,8 @@ Estimate and uncertainty: `r = y_measured - y_GR`, `σ_r² = σ_clock² + σ_lin
 ```sh
 python3 tests/test_r2p2_mountain_optical_clock.py
 python3 tests/test_r2p2_369_atomic_quantum_diamond.py
+python3 tests/test_r2p2_clock_comparison_diagnostic.py
+python3 scripts/r2p2_clock_comparison_diagnostic.py
 agda -i . -i <repo-pinned-stdlib-path> DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda
 ```
 
