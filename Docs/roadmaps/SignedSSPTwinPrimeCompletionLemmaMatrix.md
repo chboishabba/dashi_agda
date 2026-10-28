@@ -72,6 +72,34 @@ would nevertheless be necessary before promoting a theorem as verified.
 | T07 | `orderedPairAxisCountIsSix`: two ordered 3-coordinate points have six coordinates. | S; #1407 also has an exact `TritCube 6` BIDI owner, separate branch |
 | T08 | `orderedPairCapacityIsSevenHundredTwentyNine`: 27×27 = 729 is a cardinality of typed ordered pairs. | S; #1407's independent 343/386 incidence result stays source-owned |
 
+### Existing signed geometry refinement: 1 + 13×2 = 27
+
+The **already-on-master** `DASHI.Foundations.BalancedTernaryAntipodalOrbitExact`
+owns `ternaryCubeCountDecomposesAsCentrePlusThirteenPairs` and
+`antipodalClass27CountIsFourteen`: the genuine three-axis cube
+`{-1,0,+1}³` has a unique all-zero fixed centre, thirteen nonzero
+strict-sign antipodal pairs, and fourteen C₂ orbit classes. The
+`TwinPrimeConsumerParetoObserverExact` module now **reuses** both
+owner theorems with its existing x/y/z cardinality declaration.
+Its arithmetic theorem is merely that this structured observer is
+a quotient and must retain additional data for twin-primality queries.
+
+PR #1407 has since added the separately owned
+`R2P227729AntipodalThirteenFiveOrbitFourierCutExact`,
+`R2P227729HermitianThirteenPairFourierCodecExact` and
+`R2P227729HermitianConvolutionTransportExact` source-written modules.
+For Hermitian `f(-k)=conj(f(k))`, the centre-plus-13-pair data can
+retain a restricted Fourier field, and a decoded convolution can retain
+the required finite outputs. This relies on the **Hermitian constraint**.
+There is no reason to impose that constraint on an arbitrary Nat prime
+emitter or identify Fourier Hermitian symmetry with prime correlations.
+No direct branch-only import was made and attribution remains with
+the established antipodal owner and the #1407 proof author.
+
+These two reused named results refine T06's geometry evidence rather
+than introducing new uncounted dependencies on the arithmetic
+twin-prime proof. The 75-ID architecture tally is unchanged.
+
 ## A. Signed SSP / FRACTRAN source machine (10 obligations)
 
 | ID | Lemma | Status / exact outstanding cut |
