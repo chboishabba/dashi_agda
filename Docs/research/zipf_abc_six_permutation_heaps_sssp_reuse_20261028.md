@@ -118,11 +118,16 @@ The observational hierarchy is now:
 
 ```
 full ordered token word
-  -> first-appearance order of NAMED types
-  -> terminal rank histogram?   [independent quotient, not a nested arrow]
-  -> full novelty flags / full exact Heaps curve
-  -> single-time V_t marginals (probabilistic operation)
-  -> fitted Heaps/Zipf exponent
+  |-> named first-appearance order
+  |-> terminal type histogram
+  |-> exact novelty flags <-> complete exact Heaps curve
+                           |-> selected prefix V_t
+                           |-> fitted Heaps description (with a fitting rule)
+
+probability law on full words
+  |-> law on full Heaps curves
+         |-> fixed-time V_t marginal
+  |-> law on named first-appearance orders
 ```
 
 The histogram and named first-discovery order are distinct projections of a word; they are **not** generally nested or equivalent. The corresponding conditional probability spaces and carrier maps must stay explicitly typed.
