@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from r2p2_optical_lattice_3site_diagnostic import (  # noqa: E402
     analyze, make_matrix, characteristic_coefficients, expected_coefficients,
-    polynomial_eval,
+    polynomial_eval, nominal_supercell_pareto,
 )
 MODULE = ROOT / "DASHI/Physics/Closure/R2P2OpticalLattice369HamiltonianCutExact.agda"
 ARCH = ROOT / "DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda"
@@ -60,6 +60,25 @@ class OpticalLattice369Tests(unittest.TestCase):
                          (Fraction(1), Fraction(-6), Fraction(6), Fraction(4)))
         self.assertEqual(polynomial_eval((Fraction(1), Fraction(-6), Fraction(6), Fraction(4)), 2), 0)
 
+    def test_ma_source_supercell_five_rational_approximants(self):
+        rows = nominal_supercell_pareto()["rows"]
+        self.assertEqual([(x["periods_497"], x["periods_813"]) for x in rows],
+                         [(18, 11), (85, 52), (139, 85), (175, 107), (265, 162)])
+        self.assertEqual([x["nominal_mismatch_nm"] for x in rows],
+                         [3, 31, 22, 16, 1])
+        self.assertEqual(rows[0]["relative_nominal_mismatch"], str(Fraction(1, 2981)))
+        self.assertEqual(rows[4]["relative_nominal_mismatch"], str(Fraction(1, 131706)))
+
+    def test_nominal_497_813_pareto_does_not_claim_physical_optimality(self):
+        result = nominal_supercell_pareto()
+        self.assertTrue(result["nominal_wavelengths_not_actual_magic_calibrations"])
+        self.assertTrue(result["finite_rational_approximants_do_not_prove_irrational_AA_transition"])
+        rows = result["rows"]
+        self.assertEqual(
+            [r["dominated_in_declared_nominal_2d_cut"] for r in rows],
+            [False, True, False, False, False],
+        )
+
     def test_three_site_operator_is_not_a_fitted_aa_hamiltonian(self):
         content = MODULE.read_text(encoding="utf-8")
         for owner in (
@@ -77,6 +96,9 @@ class OpticalLattice369Tests(unittest.TestCase):
             "maIsNotTheR2P2Clock",
             "yeIsNotTheMaClock",
             "latticeCannotProveInfiniteAAThreshold",
+            "maFirstNominalSupercellOffset",
+            "maFifthNominalSupercellOffset",
+            "maSupercell18IsNotAnIdentifiedC18PhysicsRealization",
             "latticeDoesNotConflateClockExperiments",
             "latticeDoesNotObserveQuantumGravity",
             "finiteP3ProvesInfiniteAAThresholdIsFalse",
@@ -98,6 +120,7 @@ class OpticalLattice369Tests(unittest.TestCase):
                 self.assertIn(module_path + "R2P2Lattice", content)
                 self.assertIn("R2P2FiniteLatticeNoncommuting", content)
                 self.assertIn("R2P2NoInfiniteAAFromFinite3", content)
+                self.assertIn("MaSupercell18NotPhysicalC18", content)
 
 
 if __name__ == "__main__":
