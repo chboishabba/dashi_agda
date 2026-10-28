@@ -1,6 +1,6 @@
 # Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
 
-Created 2026-10-28. **77 named formal obligations** across nine groups: 42 already source-written (D), 9 owned by existing reusable sources (R), 26 new required proofs/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+Created 2026-10-28. **77 named formal obligations** across nine groups: 46 source-written (D), 9 owned by existing reusable sources (R), 22 remaining proof/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
 
 Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
 
@@ -24,9 +24,9 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **B03 [D]** `cashReceiptsDoNotDetermineCareAppropriation` — Collected receipts do not choose spending.
 - **B04 [D]** `taxDueNotAdequateToInferActualCollection` — Query adequacy defect and negative witness.
 - **B05 [D]** `riskSignalAloneIsNotTaxAuthority` — AI risk feature does not define an effective statutory base.
-- **B06 [N]** `remittanceBoundedByAssessedLiabilityUnderNoPenalties` — State conditions excluding penalties, refunds and interest.
-- **B07 [N]** `cashBudgetConservationWithCostsAndTransfers` — Cash receipts, carry, debt and actual spending form balanced budget.
-- **B08 [N]** `careAppropriatedDoesNotDetermineCareDelivered` — Appropriation cannot create service hours without resources.
+- **B06 [D]** `remittanceBoundedByAssessedLiabilityUnderNoPenalties` — State conditions excluding penalties, refunds and interest.
+- **B07 [D]** `cashBudgetConservationWithCostsAndTransfers` — Cash receipts, carry, debt and actual spending form balanced budget.
+- **B08 [D]** `careAppropriatedDoesNotDetermineCareDelivered` — Appropriation cannot create service hours without resources.
 
 ### C. Payment funding and market sale paths (9)
 
@@ -74,7 +74,7 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **F03 [D]** `investorAllocationsSumToParticipantObligation` — Broker/custodian allocations aggregate to participant totals.
 - **F04 [D]** `deliveryVersusPaymentCashAndTitleCoMove` — Conditional securities/cash finality with correct settlement authority.
 - **F05 [D]** `aggregateNetPositionsRespectGrossCashAndSecurityTotals` — Signed buy/sell/receive/pay variants with no silent cancellation.
-- **F06 [N]** `participantNetStatementDoesNotIdentifyIndividualTaxpayer` — A net participant receipt is not an individual's payment trace.
+- **F06 [D]** `participantNetStatementDoesNotIdentifyIndividualTaxpayer` — A net participant receipt is not an individual's payment trace.
 - **F07 [N]** `actualSettlementFinalityRequiresOfficialReceipt` — Simulated close event cannot create authentic custody receipt.
 
 ### G. Physical capacity and care (7)
@@ -177,3 +177,28 @@ The earlier receiver-only net-cash batch is extended by a payable/receivable dir
 A new conditional MatchedBorrowingBalance requires both cash and liability to increase by the *same* borrowed units. It reuses the Agda standard library natural-number subtraction cancellation law to prove that cash minus debt, truncated at zero, is unchanged by that perfectly matched borrowing event. This is a genuine conditional algebraic result about the selected two-line financial ledger, not proof of loan accessibility or valuation, interest, collateral, lender risk, later repayments or tax-law effects. Both the original application and TOE consumer retain the no-automatic-credit authority boundary.
 
 **Ledger: 42 D, 9 R, 26 N.**
+
+## 2026-10-28 continuation: four substantive interfaces advanced
+
+Existing application owner: DASHI/Economics/WealthTaxDashiTradeMarketMaterialBidiExact.agda.
+Existing TOE consumer: DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda.
+
+**Four N → D source-written obligations (46 D / 9 R / 22 N):**
+
+- **B06:** NoAdjustmentCollection reconciles principal remitted, outstanding principal and the assessed liability. remittanceBoundedByAssessedLiabilityUnderNoPenalties derives the remittance bound from that identity. No penalty, refund, interest, tax statute or genuine assessment is inferred.
+- **B07:** ReconciledPublicCashBudget separates administrative outflow, transfer outflow, care appropriation and cash retained. cashBudgetConservationWithCostsAndTransfers proves modeled outflow is no greater than available cash, conditional on an exact balanced receipt.
+- **B08:** careAppropriatedDoesNotDetermineCareDelivered supplies two same-appropriation/different-delivered-hours counterworlds. It reuses the original IntersectionalNonFactorability theorem owner. This does not measure a clinical service.
+- **F06:** participantNetStatementDoesNotIdentifyIndividualTaxpayer supplies two distinct synthetic investor keys sharing the same participant clearing batch. It proves net statement alone cannot determine investor identity. Keys are illustrative, NOT authenticated taxpayer/holder identities.
+
+**Partial advances which remain N:**
+
+- **C09:** routeBalanceDoesNotEstablishLiquidityOrTiming prevents upgrading balanced payment totals into accessible financing. Real credit/collateral/liquidity and settlement timing still require evidence.
+- **G06:** FixedInputConstructionFeasibility adds conditional per-unit energy and material budget constraints. It does not calibrate inputs, commission actual plant or certify resource availability.
+- **I08:** finiteParetoTradeoffHasTwoDistinctMinimalOptions and paretoMinimalityCannotUniquelySelectCheapAdministration identify two undominated, distinct outcomes in the existing two-option illustrative cost hyperfabric. This is a finite countermodel, not general finite frontier enumeration (I07) or an optimal tax-rate result.
+
+**Independent roots:** ASX official CHESS Model 3/DvP and netting description; Fagereng–Guiso–Ring 2026 NBER WP35262. They bound institutional/empirical interpretation; they do not own the synthetic finite proof. The existing DASHI proof owners retain theorem ownership. Existing Ibrahim original FLN producer and earlier Monster 3B lineages are unrelated. Content identity, proof-source ownership, executed checks and authenticated transactions remain distinct.
+
+**Verification ceiling:** new Agda terms have been committed and structurally read back; NO observed Agda kernel typecheck or exact-head GitHub Actions receipt. The existing dashiTRADE shadow adapter is unchanged. No protected ESD surfaces or specialist TOE roots are edited. All 42 original topic inventory rows remain in scope; coverage is not a causal or formal certificate.
+
+**Actual walls remain:** D12 generic fill IDs/chronology; A05 asset/debt/beneficial-owner valuation; E07–E09 authenticated owner/rights/transaction identity; F07 custody finality; H06–H08 evidence authority; I01–I07/I09 causal multi-policy framework; full compiler pass, mainline integration, X01–X10 external evidence and cross-runtime conformance.
+
