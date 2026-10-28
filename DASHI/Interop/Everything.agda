@@ -12,6 +12,7 @@ import DASHI.Interop.ITIRRecordingManifestSensibLawAdapterExact
 import DASHI.Interop.ITIRTemporalHealthSensibLawAdapterExact
 import DASHI.Interop.ArtHiddenTopologyStack
 import DASHI.Interop.PNFSpectralFieldArchitectureReceipt
+import DASHI.Interop.WorldEigenResidualStratification
 import DASHI.Interop.SeaMeInItROMKernelFormalism
 import DASHI.Interop.PhysicsChemistryBiologyDNAUnificationDischarge
 import DASHI.Interop.GravitationalObservationProofSearchBridgeExact
