@@ -148,10 +148,17 @@ contradictoryCaseHasReconciliation :
     ≡ Trialectic.reconcileOpposingSourceAssertions
 contradictoryCaseHasReconciliation = refl
 
-sameFaceUnpaidUnderLoadBearingFlip :
-  Trialectic.faceStillUnresolved (Trialectic.classify beforeReview)
-  ≡ refl
-sameFaceUnpaidUnderLoadBearingFlip = refl
+unpaidFaceBeforeReview :
+  Trialectic.trialectic
+    (Trialectic.synthesise Ground.approvedAdviceOmitted beforeReview)
+  ≡ Trialectic.unpaidTrialectic (Trialectic.classify beforeReview)
+unpaidFaceBeforeReview = refl
+
+unpaidFaceUnderContradiction :
+  Trialectic.trialectic
+    (Trialectic.synthesise Ground.approvedAdviceOmitted Logic.contradictoryWorld)
+  ≡ Trialectic.unpaidTrialectic (Trialectic.classify Logic.contradictoryWorld)
+unpaidFaceUnderContradiction = refl
 
 -- NOTE: the actual attached TWO-CELL face cannot be inferred by exact
 -- rechart or a paired synthetic flip. Use the existing nonfactor theorem.
