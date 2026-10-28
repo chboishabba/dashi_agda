@@ -357,3 +357,42 @@ existingConjugacySizesSum27 = Perm.shapeOrbitSizesSumToTwentySeven
 
 existingCubeHas27Points : Fabric.hypervoxelStateCount ≡ 27
 existingCubeHas27Points = Fabric.hypervoxelStateCountIs27
+
+
+------------------------------------------------------------------------
+-- A second, stronger nonfactorization:
+-- Full Heaps curve cannot recover the ORIGINAL seven conjugacy shapes.
+-- The two code tables are distinct as endomorphisms, not merely
+-- permutations of token order.
+------------------------------------------------------------------------
+
+aac : Tower.LevelTwoCode
+aac = Base.tri-low , (Base.tri-low , Base.tri-high)
+
+sameHeapsDifferentConjugacyClasses :
+  codeHeaps aab ≡ codeHeaps aac
+sameHeapsDifferentConjugacyClasses = refl
+
+aabSourceShape :
+  Perm.shapeClass aab ≡ Perm.rank2OneFixedShape
+aabSourceShape = refl
+
+aacSourceShape :
+  Perm.shapeClass aac ≡ Perm.rank2TwoFixedShape
+aacSourceShape = refl
+
+oneFixedNotTwoFixed :
+  Perm.rank2OneFixedShape ≡ Perm.rank2TwoFixedShape → Hist.⊥
+oneFixedNotTwoFixed ()
+
+noFunctionalGraphShapeRecoveryFromHeaps :
+  (recover : List Nat → Perm.ShapeOrbit7) →
+  ((code : Tower.LevelTwoCode) →
+    recover (codeHeaps code) ≡ Perm.shapeClass code) →
+  Hist.⊥
+noFunctionalGraphShapeRecoveryFromHeaps recover correct =
+  oneFixedNotTwoFixed
+    (trans (sym (correct aab))
+      (trans
+        (cong recover sameHeapsDifferentConjugacyClasses)
+        (correct aac)))
