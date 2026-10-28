@@ -23,14 +23,6 @@ open import Relation.Nullary using (yes; no)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
-import DASHI.Foundations.SSPTritCarrier as SSP
-import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
-import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
-import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
-import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
-import DASHI.Algebra.FiniteQuaternionDoubleCover as Q8
-import DASHI.Biology.NonaryCompletionPhaseQuotientExact as FiveMode
-import DASHI.Wikimedia.Base369NumberTheoryNumerologyWrongTypeSnowballExact as NumericRole
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact as Wealth
 import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact as Tax
@@ -3016,264 +3008,123 @@ assetValueDoesNotIdentifyTaxpayerBeneficialShare =
 -- No source constructor here claims to possess those external records.
 
 ------------------------------------------------------------------------
--- ECONOMICS X BASE369 TRIALECTIC X NUMEROLOGY ROLE MAX-CUT.
+-- PARETO SCALAR-LOSS AUDIT: OBSERVABLE COSTS, NOT NUMBER PATTERNS.
 --
--- Reuse (not copy):
---   Base369Ternary27HypervoxelFabricGeometryExact owns the T^3 cube,
---     27 states, and the T^9 / 19683 three-cell fabric.
---   TrialecticThreeCellHyperformSynthesisExact owns CellDialectic.
---   TernaryPermutationS3LawsExact owns the ACTUAL label-action S3.
---   NonaryCompletionPhaseQuotientExact owns the five-mode carrier.
---   Base369NumberTheoryNumerologyWrongTypeSnowballExact owns the
---     proof-versus-numerological-motif separation.
---   IntersectionalNonFactorability owns all recharting/no-go proofs.
+-- Original existing theorem owners:
+--  DASHI.Core.AdmissibleConsumerMDLHyperfabricExact: declared cost axes
+--    and componentwise Pareto weak dominance.
+--  DASHI.Core.IntersectionalNonFactorability: exact information loss.
+--  DASHI.Core.ParetoSymmetryQuotientAdmissionExact: semantic qualification
+--    before quotienting a Pareto space.
 --
--- Cross-PR inspiration, NOT imported as an unavailable dependency:
---   dashi_agda PR #1414, 2026-10-28 (root-monodromy, 3^5 vs 5^3,
---   permutation versus spin lifting), original mathematical roots
---   Abel / Galois / Riemann / Hamilton / Dixon-Mortimer.
---
--- Economic coordinates:
---   x = hypothesis polarity (not tax amount);
---   y = evidence-review polarity (not independent provenance);
---   z = effect-claim polarity (not measured causal truth).
--- A point in T^3 is an annotation, not an authenticated observation.
+-- The fixture policies already exist above. Their costs are (0,5) and
+-- (5,0), so they are incomparable even though both cost totals are 5.
+-- Any scalar rechart from the total retains the collision. Weight choices
+-- can rank either candidate, but cannot establish welfare superiority.
+-- Numerals here are ordinary cost units; 3/6/9, S3, 27 and spin are not
+-- admissible evidence or price/cost calibration.
 ------------------------------------------------------------------------
 
-record PolicyEvidenceXY : Set where
-  constructor policy-evidence-xy
-  field
-    xHypothesisPolarity : SSP.SSPTrit
-    yReviewPolarity : SSP.SSPTrit
-open PolicyEvidenceXY public
+policyRawTwoAxisCost : HypotheticalPolicyOutcome → Nat × Nat
+policyRawTwoAxisCost candidate =
+  policyAxisCost administrationAxis candidate ,
+  policyAxisCost careShortfallAxis candidate
 
-policyEvidenceXY : Fabric.Ternary27Point → PolicyEvidenceXY
-policyEvidenceXY cube =
-  policy-evidence-xy (Fabric.x cube) (Fabric.y cube)
+policyRawCostForCheapAdministration :
+  policyRawTwoAxisCost lowAdministrativeCost ≡ (0 , 5)
+policyRawCostForCheapAdministration = refl
 
-policyEffectZ : Fabric.Ternary27Point → SSP.SSPTrit
-policyEffectZ = Fabric.z
+policyRawCostForIncreasedCare :
+  policyRawTwoAxisCost increasedCareCapacity ≡ (5 , 0)
+policyRawCostForIncreasedCare = refl
 
--- x and y alone cannot force z. The z coordinate is an independent
--- hypothesis slot; this is NOT evidence that any particular effect exists.
-sameXYNegativeZ : Fabric.Ternary27Point
-sameXYNegativeZ =
-  Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne
+policyEqualWeightCost : HypotheticalPolicyOutcome → Nat
+policyEqualWeightCost candidate =
+  policyAxisCost administrationAxis candidate
+    + policyAxisCost careShortfallAxis candidate
 
-sameXYPositiveZ : Fabric.Ternary27Point
-sameXYPositiveZ =
-  Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne
+equalWeightCostCollapsesIncomparablePolicies :
+  policyEqualWeightCost lowAdministrativeCost
+    ≡ policyEqualWeightCost increasedCareCapacity
+equalWeightCostCollapsesIncomparablePolicies = refl
 
-sameXYStillAllowsOppositeZ :
-  policyEvidenceXY sameXYNegativeZ ≡ policyEvidenceXY sameXYPositiveZ
-sameXYStillAllowsOppositeZ = refl
+administrativeAxisRemainsDistinctAtEqualTotal :
+  policyAxisCost administrationAxis lowAdministrativeCost
+    ≡ policyAxisCost administrationAxis increasedCareCapacity → ⊥
+administrativeAxisRemainsDistinctAtEqualTotal ()
 
-differentZDespiteSameXY :
-  policyEffectZ sameXYNegativeZ ≡ policyEffectZ sameXYPositiveZ → ⊥
-differentZDespiteSameXY ()
-
-sourceReviewDoesNotDetermineCausalPolarity :
-  INF.FactorsThrough policyEvidenceXY policyEffectZ → ⊥
-sourceReviewDoesNotDetermineCausalPolarity =
+equalCostTotalDoesNotRecoverAdministrativeCost :
+  INF.FactorsThrough policyEqualWeightCost
+    (policyAxisCost administrationAxis) → ⊥
+equalCostTotalDoesNotRecoverAdministrativeCost =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness
-      sameXYNegativeZ sameXYPositiveZ
-      sameXYStillAllowsOppositeZ differentZDespiteSameXY)
+      lowAdministrativeCost increasedCareCapacity
+      equalWeightCostCollapsesIncomparablePolicies
+      administrativeAxisRemainsDistinctAtEqualTotal)
 
--- Even a reversible relabeling or S3-labelled recharting of x/y cannot
--- repair the missing z dimension. This uses the original no-go owner.
-rechartingXYCannotManufactureCausalPolarity :
-  {Recharted : Set} →
-  (rechart : PolicyEvidenceXY → Recharted) →
-  INF.FactorsThrough (λ state → rechart (policyEvidenceXY state))
-    policyEffectZ → ⊥
-rechartingXYCannotManufactureCausalPolarity rechart =
+-- An arbitrary reweighting/relabeling of the already-collapsed sum
+-- can never reconstruct the omitted axis. This is source-owned
+-- IntersectionalNonFactorability, not a new algebraic identity.
+rechartingTotalCostCannotRecoverAdministrativeAxis :
+  {Chart : Set} →
+  (rechart : Nat → Chart) →
+  INF.FactorsThrough (λ candidate → rechart (policyEqualWeightCost candidate))
+    (policyAxisCost administrationAxis) → ⊥
+rechartingTotalCostCannotRecoverAdministrativeAxis rechart =
   INF.rechartingCannotRecoverErasedPhenomenon rechart
     (INF.nonFactorabilityWitness
-      sameXYNegativeZ sameXYPositiveZ
-      sameXYStillAllowsOppositeZ differentZDespiteSameXY)
+      lowAdministrativeCost increasedCareCapacity
+      equalWeightCostCollapsesIncomparablePolicies
+      administrativeAxisRemainsDistinctAtEqualTotal)
 
--- Raw coordinate permutations are valid charts, not semantic equivalences
--- between hypothesis, reviewed source, and causal-effect roles.
-rotatePolicyXYZ : Fabric.Ternary27Point → Fabric.Ternary27Point
-rotatePolicyXYZ (Fabric.ternary27Point x y z) =
-  Fabric.ternary27Point y z x
+-- Stronger: the scalar <= relation does not reflect Pareto dominance
+-- even for the TWO actual, already-defined synthetic options.
+equalCostTotalCannotReflectParetoOrder :
+  ((left right : HypotheticalPolicyOutcome) →
+    policyEqualWeightCost left ≤ policyEqualWeightCost right →
+    Pareto.WeaklyDominates policyTradeoffCosts left right) → ⊥
+equalCostTotalCannotReflectParetoOrder reflection =
+  cheapAdministrationDoesNotDominateCareOption
+    (reflection lowAdministrativeCost increasedCareCapacity ≤-refl)
 
-rotatePolicyXYZThreeTimes :
-  (cube : Fabric.Ternary27Point) →
-  rotatePolicyXYZ (rotatePolicyXYZ (rotatePolicyXYZ cube)) ≡ cube
-rotatePolicyXYZThreeTimes (Fabric.ternary27Point x y z) = refl
+-- Strictly positive relative weights can reverse scalar preferences.
+-- These weights are deliberate hypothetical sensitivity parameters.
+-- Neither preference resolves the earlier Pareto incomparability.
+policyWeightedTwoAxisCost :
+  Nat → Nat → HypotheticalPolicyOutcome → Nat
+policyWeightedTwoAxisCost adminWeight careWeight candidate =
+  adminWeight * policyAxisCost administrationAxis candidate
+    + careWeight * policyAxisCost careShortfallAxis candidate
 
-swapPolicyXY : Fabric.Ternary27Point → Fabric.Ternary27Point
-swapPolicyXY (Fabric.ternary27Point x y z) =
-  Fabric.ternary27Point y x z
+careHeavyWeightCheapAdministrationCost :
+  policyWeightedTwoAxisCost 1 2 lowAdministrativeCost ≡ 10
+careHeavyWeightCheapAdministrationCost = refl
 
-swapPolicyXYTwice :
-  (cube : Fabric.Ternary27Point) →
-  swapPolicyXY (swapPolicyXY cube) ≡ cube
-swapPolicyXYTwice (Fabric.ternary27Point x y z) = refl
+careHeavyWeightCareOptionCost :
+  policyWeightedTwoAxisCost 1 2 increasedCareCapacity ≡ 5
+careHeavyWeightCareOptionCost = refl
 
--- S3 has six exact label permutations. Reuse its source-owned group
--- inverse rather than claiming raw chart rotation is a market rotation.
-existingS3InverseLaw :
-  (action : Perm.TriPermutation) →
-  S3._∙_ (Perm.inversePermutation action) action
-    ≡ Perm.permIdentity
-existingS3InverseLaw = S3.compositionInverseLeft
+administrationHeavyWeightCheapAdministrationCost :
+  policyWeightedTwoAxisCost 2 1 lowAdministrativeCost ≡ 5
+administrationHeavyWeightCheapAdministrationCost = refl
 
--- Three 27-cells are one existing T^9 trialectic. The third cell is
--- a structured effect/interaction fibre, NOT forced by the first two.
-record PolicyEvidenceInteractionThreeCell : Set where
-  constructor policy-evidence-interaction-three-cell
-  field
-    xPolicyCube : Fabric.Ternary27Point
-    yProvenanceCube : Fabric.Ternary27Point
-    zEffectInteractionCube : Fabric.Ternary27Point
-open PolicyEvidenceInteractionThreeCell public
+administrationHeavyWeightCareOptionCost :
+  policyWeightedTwoAxisCost 2 1 increasedCareCapacity ≡ 10
+administrationHeavyWeightCareOptionCost = refl
 
-policyInteractionToCellDialectic :
-  PolicyEvidenceInteractionThreeCell → Cell.CellDialectic
-policyInteractionToCellDialectic state =
-  Cell.cell-dialectic
-    (xPolicyCube state) (yProvenanceCube state)
-    (zEffectInteractionCube state)
+careHeavyWeightsPreferCareByScalar :
+  policyWeightedTwoAxisCost 1 2 increasedCareCapacity
+    ≤ policyWeightedTwoAxisCost 1 2 lowAdministrativeCost
+careHeavyWeightsPreferCareByScalar = m≤m+n 5 5
 
-policyThreeCellToExistingHyperform :
-  PolicyEvidenceInteractionThreeCell → Fabric.TernaryHyperformalPoint
-policyThreeCellToExistingHyperform state =
-  Cell.cellDialecticToHyperform (policyInteractionToCellDialectic state)
+administrationHeavyWeightsPreferCheapAdministrationByScalar :
+  policyWeightedTwoAxisCost 2 1 lowAdministrativeCost
+    ≤ policyWeightedTwoAxisCost 2 1 increasedCareCapacity
+administrationHeavyWeightsPreferCheapAdministrationByScalar =
+  m≤m+n 5 5
 
-policyThreeCubeInheritedCarrierCount :
-  Cell.cellDialecticStateCount ≡ 19683
-policyThreeCubeInheritedCarrierCount =
-  Cell.cellDialecticHasNineteenThousandSixHundredEightyThreeStates
-
-policyOneCubeInheritedCarrierCount :
-  Fabric.hypervoxelStateCount ≡ 27
-policyOneCubeInheritedCarrierCount = Fabric.hypervoxelStateCountIs27
-
--- Reconstruct all three cells using the source-owned inverse. This
--- exact rechart is purely structural, not a policy-effect inference.
-policyThreeCellFabricRoundTrip :
-  (state : PolicyEvidenceInteractionThreeCell) →
-  Cell.hyperformToCellDialectic (policyThreeCellToExistingHyperform state)
-    ≡ policyInteractionToCellDialectic state
-policyThreeCellFabricRoundTrip state =
-  Cell.cellDialecticHyperformRoundTrip
-    (policyInteractionToCellDialectic state)
-
--- The five already OPEN evidence lanes A05, C09, E07, F07 and H08
--- each admit three annotation states: contradicted / unresolved /
--- provisionally supported. This gives 3^5 = 243 possible annotations.
--- It emphatically DOES NOT create five validated evidence producers.
-record FiveEvidenceGateAnnotations : Set where
-  constructor five-evidence-gate-annotations
-  field
-    a05ValuationAnnotation : SSP.SSPTrit
-    c09FundingAnnotation : SSP.SSPTrit
-    e07HolderAnnotation : SSP.SSPTrit
-    f07SettlementAnnotation : SSP.SSPTrit
-    h08CausalAnnotation : SSP.SSPTrit
-open FiveEvidenceGateAnnotations public
-
-record ThreeFiveModeAnnotations : Set where
-  constructor three-five-mode-annotations
-  field
-    modePolicy : FiveMode.ComplementMode5
-    modeEvidence : FiveMode.ComplementMode5
-    modeEffect : FiveMode.ComplementMode5
-open ThreeFiveModeAnnotations public
-
-fiveGateTernaryArithmeticCount : Nat
-fiveGateTernaryArithmeticCount = 3 * (3 * (3 * (3 * 3)))
-
-threeFiveModeArithmeticCount : Nat
-threeFiveModeArithmeticCount = 5 * (5 * 5)
-
-fiveGateAnnotationsHave243Combinations :
-  fiveGateTernaryArithmeticCount ≡ 243
-fiveGateAnnotationsHave243Combinations = refl
-
-threeFiveModesHave125Combinations :
-  threeFiveModeArithmeticCount ≡ 125
-threeFiveModesHave125Combinations = refl
-
-differentFiveGateAndThreeModeCounts :
-  fiveGateTernaryArithmeticCount
-    ≡ threeFiveModeArithmeticCount → ⊥
-differentFiveGateAndThreeModeCounts ()
-
--- Source-authority wrong-type gate. A cultural/numerological reading of
--- 3,6,9,27,243 or 125 cannot certify mathematical or economic results.
-numerologicalPatternDoesNotPayEconomicProof :
-  NumericRole.NumerologyPaysNumberTheoryProof → ⊥
-numerologicalPatternDoesNotPayEconomicProof =
-  NumericRole.numerologyDoesNotPayProof
-
-data NumericSignatureCertifiesTaxEffect : Set where
-data QuaternionSpinCycleCertifiesSettlement : Set where
-data Matching243And125ClaimsSameCarrier : Set where
-
-matchingDigitsDoNotProveTaxEffects :
-  NumericSignatureCertifiesTaxEffect → ⊥
-matchingDigitsDoNotProveTaxEffects ()
-
-quaternionLiftDoesNotAuthenticateSettlement :
-  QuaternionSpinCycleCertifiesSettlement → ⊥
-quaternionLiftDoesNotAuthenticateSettlement ()
-
-incompatibleCardinalSignaturesAreNotSameCarrier :
-  Matching243And125ClaimsSameCarrier → ⊥
-incompatibleCardinalSignaturesAreNotSameCarrier ()
-
--- The 720-degree rational quaternion lift belongs to PR #1414's
--- separate proof owner, not finance. It is a useful test of quotient
--- information loss, not an economic observation, policy theorem or receipt.
-
-------------------------------------------------------------------------
--- S3 COXETER AND Q8 SIGN QUOTIENT: ORIGINAL OWNER REUSE.
--- The finite S3/C3 group and Q8 central quotient were proved elsewhere.
--- We only transport their source-owned results as a chart/information-loss
--- diagnostic. This cannot produce a market identity or physical Spin path.
-------------------------------------------------------------------------
-
-swapPolicyYZ : Fabric.Ternary27Point → Fabric.Ternary27Point
-swapPolicyYZ (Fabric.ternary27Point x y z) =
-  Fabric.ternary27Point x z y
-
-swapPolicyYZTwice :
-  (cube : Fabric.Ternary27Point) →
-  swapPolicyYZ (swapPolicyYZ cube) ≡ cube
-swapPolicyYZTwice (Fabric.ternary27Point x y z) = refl
-
--- The two adjacent coordinate transpositions obey the S3 braid relation.
--- This is transport on the EXISTING 27-point carrier, not a new S3 owner.
-policyCubeAdjacentSwapBraid :
-  (cube : Fabric.Ternary27Point) →
-  swapPolicyXY (swapPolicyYZ (swapPolicyXY cube))
-  ≡ swapPolicyYZ (swapPolicyXY (swapPolicyYZ cube))
-policyCubeAdjacentSwapBraid
-  (Fabric.ternary27Point x y z) = refl
-
-policyCubeLabelSwapNotAnEconomicIntervention :
-  Fabric.x
-    (swapPolicyXY
-      (Fabric.ternary27Point
-        SSP.sspNegOne SSP.sspPosOne SSP.sspZero))
-  ≡ SSP.sspNegOne → ⊥
-policyCubeLabelSwapNotAnEconomicIntervention ()
-
--- Borrow the actual finite central-sign quotient from the original Q8
--- module. Both signs have the same V4 image, but remain distinct Q8
--- elements. This is a deliberately *lossy projection* analogy only.
-existingQ8CentralSignIsProjectedAway :
-  Q8.rho Q8.plusOne ≡ Q8.rho Q8.minusOne
-existingQ8CentralSignIsProjectedAway = refl
-
-existingQ8MinusSignHasOrderTwo :
-  Q8.q8Multiply Q8.minusOne Q8.minusOne ≡ Q8.plusOne
-existingQ8MinusSignHasOrderTwo = refl
-
--- No same-object economic, historical, financial, tax-law or Monster
--- claim follows from the sign kernel or 720-degree rotation analogy.
+-- A valid Pareto symmetry needs independent semantic cost covariance
+-- and eligibility-preservation witnesses. No such witness is claimed
+-- for swapping administrative cost with care shortfall.
 
