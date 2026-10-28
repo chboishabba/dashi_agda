@@ -22,3 +22,5 @@ import DASHI.Mathematics.Topology.AlexanderHornedNativeTernarySemidirectActionEx
 import DASHI.Mathematics.Topology.AlexanderHornedTernaryFibreDerivedCutExact
 
 import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryTrialectic27ChartExact
+
+import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryS3LocalValuesExact
