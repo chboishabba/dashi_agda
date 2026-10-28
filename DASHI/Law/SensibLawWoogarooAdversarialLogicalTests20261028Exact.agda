@@ -189,8 +189,8 @@ applicantConditional w =
 
 respondentConditional : ∀ {g} → HypotheticalWorld g → Bool
 respondentConditional w =
-  Truth.andBool (Truth.notBool (defectEstablished w))
-    (Truth.andBool (governmentComplianceEstablished w)
+  Truth.andBool (governmentComplianceEstablished w)
+    (Truth.andBool (Truth.notBool (defectEstablished w))
       (Truth.andBool (actualEvidenceReviewed w)
         (legallyApplicable w)))
 
