@@ -157,7 +157,43 @@ def run():
     assert len(set(full_observer.values())) == 4
     assert joint_receivers['trans-off'] == joint_receivers['absorb-off']
 
-    assert len(out) == 22
+    # T5 Pareto cut: source-monitor + independently known medium already
+    # identifies all four worlds. The original receiver is informationally
+    # redundant *relative to this finite set of candidate coordinates*.
+    source_and_medium = {state: (monitor[state], medium[state])
+                         for state in transport_states}
+    receiver_and_medium = {state: (receiver[state], medium[state])
+                           for state in transport_states}
+    world_identity = {state: state for state in transport_states}
+    out.append(test_case('source monitor alone does not identify whole world',
+        transport_states, monitor, world_identity, False))
+    out.append(test_case('medium alone does not identify whole world',
+        transport_states, medium, world_identity, False))
+    out.append(test_case('receiver and medium do not identify whole world',
+        transport_states, receiver_and_medium, world_identity, False))
+    out.append(test_case('source monitor plus medium identifies whole world',
+        transport_states, source_and_medium, world_identity, True))
+    out.append(test_case('Pareto pair determines omitted downstream receiver',
+        transport_states, source_and_medium, receiver, True))
+
+    # Finite two-way reconstruction demonstrates redundancy, not just
+    # injectivity. Does not assume a real, independently calibrated sensor.
+    def recover_full(pair):
+        src, med = pair
+        recv = src if med == 'transmitting' else 'silent'
+        return ((recv, src), med)
+    def forget_receiver(full):
+        (recv, src), med = full
+        return (src, med)
+    assert all(
+        full_observer[state] == recover_full(source_and_medium[state])
+        and source_and_medium[state] == forget_receiver(full_observer[state])
+        for state in transport_states
+    )
+    assert len(set(source_and_medium.values())) == 4
+    assert len(set(receiver_and_medium.values())) == 3
+
+    assert len(out) == 27
     print(dumps({"mode": "finite-exhaustive-synthetic-only",
                  "all_passed": True, "tests": out,
                  "non_promotion": ["not-Agda-kernel", "not-measured-acoustics",
