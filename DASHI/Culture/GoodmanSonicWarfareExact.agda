@@ -40,6 +40,7 @@ import DASHI.Biology.AnimalCommunicationPassiveAcousticLocalizationExact as Loca
 import DASHI.Cognition.PNF.ContinuousOscillatorSyntheticReceipt as Osc
 import DASHI.Culture.CohnTechnostrategicDiscourseExact as Cohn
 import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact as Philosophy
+import DASHI.Culture.GoodmanSonicWarfareRhythmInterventionExact as RhythmCausality
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Wikimedia.IbrahimSnowballSkepticismExpertiseTrustPropagandaBidiExact as IbrahimTrust
 
