@@ -105,3 +105,46 @@ This file is deliberately a **finite group/action completion and infinite/topolo
 ## De-duplication audit (final 2026-10-28)
 
 The repository already had `AlexanderHornedNativeTernaryFibreActionExact.agda`, committed on the canonical #1244 branch. A static review found that repeating its `Map(X_n,C3)` carrier would violate reuse-first and risk a duplicate ontology. The extension `AlexanderHornedNativeTernaryLocalPhaseActionExact.agda` was therefore rewritten to **import** the original `FibreAction`, `combine`, `inverseAction`, `act`, `pullback`, `pullbackInjective`, `difference`, `transitiveAction`, `LocalFibreAction`, and `evalLocal`. It now contains only nonduplicate typed additions: signed-trit ↔ C3 chart, inverse-sector pullback action, twisted group multiplication/inverse, equivariant refinement, SameOnEnds equivalence and its rotation congruence, and full-local-gauge invariant-observation no-go. The original owner remains the canonical group/fibre tower and the extension stays a smaller additive module.
+
+
+## 28 October: additional video/PR max-cut, beyond the local C3 action
+
+The canonical native 27/trialectic chart and five-orbit phase module were ALREADY OWNED in #1244. An initial duplicate chart was removed, and only its new third-predicate transport was added to the original owner. The following new proof terms are source-written and Agda kernel-PENDING.
+
+### 1. Recursively compatible Hatcher meridians cannot have nontrivial S3 image
+
+AlexanderHornedS3DerivedMonodromyNoGoExact.agda imports the original six-element S3 multiplication and the ORIGINAL generic HornedProPSolvableBlindExact.SolvableCommutatorTarget theorem. It supplies concrete derived levels S3 -> C3 -> 1 (36 finite S3 commutator cases, then 9 C3 cases). Consequently every S3-valued meridian assignment respecting Hatcher's full recursive COMMUTATOR relations is the identity. This is **not** a statement about arbitrary cubic-polynomial monodromy, which acts on a different source group. A5 and binary-icosahedral 2I remain different PERFECT target groups not excluded by solvability.
+
+### 2. Two 27-state reflection actions admit no equivariant injection
+
+AlexanderHornedTernaryTwentySevenInvolutionNoGoExact.agda uses one common depth-two carrier, C3_sector × Trit². Reflecting ALL three signed coordinates fixes one central address (13 pairs + 1 fixed = 14 orbits); reflecting only the two INTERNAL trits fixes one address per sector (12 pairs + 3 fixed = 15 orbits). There is a constructive proof that NO injection intertwines the second action with the first. Any such injection would send two distinct fixed inputs to the uniquely fixed output. Thus 13/27, 5/9 and a common cardinality 27 cannot force an equivariant object identity.
+
+### 3. Full S3 sector-label symmetry with a geometric boundary
+
+AlexanderHornedSectorDihedralS3EndExact.agda imports exact prior S3 and original native end tower. All six ABC permutations act on the external sector coordinate; group action law and inverse are established from existing S3; every projection square commutes. The even 3-cycle is the original horn sector rotation, and the chosen reflection s satisfies s*r*s=r^-1. This gives genuine intrinsic S3=D3 label symmetry, NOT an ambient reflection of an actual wild ball and NOT analytic root monodromy.
+
+### 4. Tetration by actual function-space isomorphism, not an arithmetic analogy
+
+The ORIGINAL AlexanderHornedNativeTernaryTrialectic27ChartExact.agda already supplies the 27-address ↔ 27-trialectic-code bijection and its local phase-field group chart. This continuation adds a genuine two-sided pointwise equivalence between Map(C3×Trit²,C3) and Map(SynthesisChoice27,TriTruth). It identifies the finite third-level predicate-table *carrier* underpinning the count 3^27=3↑↑3. A fourth **function-space** application gives 3^(3^27), whereas the next **spatial prefix** step has only 81 addresses and 3^81 local phase fields. Both axes remain distinct.
+
+### 5. The 3^5 versus 5^3 duality is now an evaluation/non-descent theorem
+
+The ORIGINAL AlexanderHornedDepthTwoFiveOrbitFibreExact.agda had already quotiented the nine two-trit choices by simultaneous sign reversal into FIVE deterministic orbit types. It also source-wrote a group of 3^5=243 phase fields invariant under that sign action AND the external sector rotation. We extended the SAME module with the different 5^3=125 set of three-sector ORBIT LABEL choices. The actual relationship is composition:
+
+  Map(FiveOrbit,C3_phase) × Map(C3_sector,FiveOrbit) -> Map(C3_sector,C3_phase).
+
+The source now constructs a chosen 3-orbit selector and a section: EVERY three-sector phase table has an origin in a five-orbit phase field. It also proves NO universal recovery of an original five-orbit field from its selected three-sector code, using two different fields with identical output. Two independent orbit-phase coordinates are unseen (a classical 9-element C3² kernel for the selected map). FiveOrbit is a 5-element SET, not automatically C5; thus 243 and 125 are NOT isomorphic groups or interchangeable carriers.
+
+### 6. Actual diagonal/global S3 versus local S3 and Heaps
+
+The original AlexanderHornedNativeTernaryS3LocalValuesExact.agda was extended with 54 constructor cases showing any diagonal/global S3 relabelling preserves pairwise equality of three-valued labels. A chosen local reflection changes the first-two-sector distinct-label count from 1 to 2. Hence the #1275 Heaps/equality-pattern observables are invariant under global S3, NOT under arbitrary local S3 gauge. The original #1275 statistical owner's proof and attribution remain unchanged.
+
+### 7. B3 full twist versus S3 endpoint and spin lifts
+
+In independently-owned PR #1414, PolynomialBraidFullTwistSevenWitnessExact.agda now builds a C7 signed-crossing observer on the actual four Artin generators (two crossings, two inverses), verifies the braid relation and both cancellation directions, and proves (sigma1*sigma2)^3 has identity S3 image but C7 residue 6. This is a genuine presentation-compatible obstruction to reconstructing full braid history from endpoint permutation. Original Artin (1925), Birman (1974), Kassel--Turaev and Jenny Wilson's braid lecture notes retain priority: https://dept.math.lsa.umich.edu/~jchw/RTG-Braids.pdf. B3 central infinite twist, q^3=-1 SU2 sign, and external horn sector C3 are three DIFFERENT group phenomena.
+
+### Executed checks and outstanding max-cut
+
+Independent exact Python PASS: S3 derived 6->3->1; sector D3 reflection; 27-state involution counts and 14-versus-15 orbit partitions; local/global Heaps witness; 3^27 and native chart; original binary 3*2^n versus native ternary 3*3^n; positive full twist S3 identity versus exponent 6 modulo7. New source script: scripts/alexander_horned_polynomial_video_crosspollination_exact.py (committed but NOT executed from the exact pushed blob).
+
+Agda is unavailable here; no successful exact-head Agda kernel receipt, CI check, analytic polynomial-monodromy covering, actual supported wild-embedding same-object group identification, 2I/Monster 3B representation identification, RH theorem or Pickover radian sine sign is claimed. The remaining real cut is Hatcher's selected relative-collar/van Kampen geometry, formal compact-clopen locally constant end-limit theorem, and exact-head kernel checks. Original Ibrahim Monster 3B ownership and prior theorems are retained; no protected ESD edits.
