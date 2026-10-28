@@ -56,3 +56,12 @@ Explicit source-written proof terms:
 2. Prove `interpret (Zipf.addFraction a b) = interpret a + interpret b` given both denominators nonzero; derive `interpret (Zipf.finiteHurwitz K q s) = rawSum K q s` by induction and turn the identification Bool to true only once the theorem is kernel-checked.
 3. Expand the same proved finite normalization into the old rank CDF/quantile and expected-vocabulary interfaces only if the carrier map preserves assumptions.
 4. Keep Release B's source-identified corpus, full rare tail, heldout model comparison and dependence assumptions separate. A good finite Zipf model fit or the scalar reciprocal proof does not identify a natural-language history, pressure, Fourier phase, zeta zeros or a Monster representation.
+
+
+## Direct two-rank source-owner reuse (follow-through)
+
+`twoRankP` and `twoRankQ` specialize the constructed support-two mass list. The fold's reverse rank order is explicit. `twoRankPNormalized` derives `p+q≡1ℚ` by rewriting the canonical PNF mass total rather than introducing a second normalizer. `twoRankZipfIIDLaw` instantiates the prior `Adapter.TwoRankIIDLaw` using real nonnegativity proofs; `twoRankZipfCollisionIdentity` applies the **existing** `Adapter.iidTwoDrawMeanPlusCollisionIsTwo` theorem, not an independent recreated result. These terms remain source-written/kernel-pending.
+
+A combined local run of the previous 26 stochastic/completion/stability tests and the 9 F13 arithmetic tests returned **35 passed**. It uses the earlier manually extracted dependency subset and a materially equivalent F13 stand-alone reproduction. Neither full GitHub-head parity nor an Agda compiler result is implied.
+
+A static source review corrected a mistaken initial `cong/sym/trans` import: they now come from `Relation.Binary.PropositionalEquality`, consistent with the repository's existing Agda code.
