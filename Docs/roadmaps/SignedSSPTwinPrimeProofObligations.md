@@ -76,3 +76,12 @@ Statuses: `OWNER` = relevant preexisting theorem owner, not necessarily fully in
 On 2026-10-28, recent repo PRs #1409–#1413 concern AO/PNF/evidence and reprojection rather than a prime-pair proof. PR #1407 contains optical-lattice/369 material; no prime-distribution theorem is imported from an analogy with a three-mode lattice. PR #1334 owns the contextual FRACTRAN/SSSP/Ibrahim Pareto normalization and explicitly forbids numeric coincidences or search priority from becoming proofs. PR #1139 owns signed SSP p-radix addressing; PR #636 merged the FRACDASH programme adapter; PR #128 merged the Nat counting/primality layer. This branch reuses the owners without duplicating their proofs.
 
 Independent mathematical significance still depends on a sourced, quantified arithmetic statement that survives decoding of signed machine states. Label orientation, Monster residues or a 369 frequency fingerprint alone are insufficient, and Ibrahim's prior Monster 3B ownership remains intact.
+
+## 2026-10-28 second reuse cut: exact finite-code coverage
+
+The existing `DASHI.Analysis.NatPrimeCountingInstance.natPrimesUpTo` and `DASHI.Analysis.PrimeCountingFunction.primesUpTo` already provide proof-bearing finite prime enumeration, so do not write another primality engine. The new `SignedSSPPrimeOutputBoundaryExact` extends this through:
+- `natPrimeAppearsAtOwnCutoff`: for every `Prime (2+n)`, that prime is a member of the existing finite list bounded by itself, proved by case-splitting `Data.Nat.Primality.prime?` and eliminating its `no` case with the supplied prime certificate;
+- `encodedPrimesUpTo`: map the existing prime-list owner into `2^p` codes, without altering its prime test;
+- `everyPrimeCodeAppearsAtOwnCutoff`: preserves membership through the map, for every certified prime `2+n`.
+
+This **source-written genuine universal finite-code coverage lemma** is not the signed machine's **reachability** or **termination/prime-emission** theorem. The difference is the uninstantiated `ArithmeticPrimeEmitter.coversEveryPrime` field. Consequently update Phase C: finite arithmetic prime-code list completeness is SOURCE; actual signed-SSP FRACTRAN reachability/computational equivalence remains OPEN. The theorem targets were added to both the canonical TOE roots and the pinned source scan, but no Agda kernel success has been observed.
