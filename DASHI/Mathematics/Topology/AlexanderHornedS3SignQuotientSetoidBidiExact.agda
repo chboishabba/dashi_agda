@@ -27,7 +27,7 @@ module DASHI.Mathematics.Topology.AlexanderHornedS3SignQuotientSetoidBidiExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product using (Σ; _,_)
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
@@ -205,3 +205,139 @@ actualWordDifferenceOrbitBidi n = record
   ; preserveOrbit = s3ToC2
   ; reflectOrbit = c2ToS3
   }
+
+------------------------------------------------------------------------
+-- CONCRETE ALL-DEPTH QUOTIENT NORMAL FORM.
+--
+-- Class representative: the zero vector, or a vector whose FIRST
+-- nonzero trit is c1. A c2 first nonzero trit is reflected to c1;
+-- all later coordinates are then simultaneously negated.
+-- This is a canonical finite DATA type, not a postulated quotient.
+------------------------------------------------------------------------
+
+data CanonicalRelative : Nat → Set where
+  empty : CanonicalRelative 0
+  zeroPrefix : ∀ {n} →
+    CanonicalRelative n → CanonicalRelative (suc n)
+  firstPositive : ∀ {n} →
+    Vec C3.C3 n → CanonicalRelative (suc n)
+
+canonicalRepresentative : ∀ {n} →
+  CanonicalRelative n → Vec C3.C3 n
+canonicalRepresentative empty = []
+canonicalRepresentative (zeroPrefix cs) =
+  C3.c0 ∷ canonicalRepresentative cs
+canonicalRepresentative (firstPositive xs) = C3.c1 ∷ xs
+
+canonicaliseRelative : ∀ {n} →
+  Vec C3.C3 n → CanonicalRelative n
+canonicaliseRelative [] = empty
+canonicaliseRelative (C3.c0 ∷ xs) =
+  zeroPrefix (canonicaliseRelative xs)
+canonicaliseRelative (C3.c1 ∷ xs) = firstPositive xs
+canonicaliseRelative (C3.c2 ∷ xs) =
+  firstPositive (negateDifferences xs)
+
+canonicalSection : ∀ {n} (c : CanonicalRelative n) →
+  canonicaliseRelative (canonicalRepresentative c) ≡ c
+canonicalSection empty = refl
+canonicalSection (zeroPrefix c) = cong zeroPrefix (canonicalSection c)
+canonicalSection (firstPositive xs) = refl
+
+canonicaliseNegationInvariant :
+  ∀ {n} (xs : Vec C3.C3 n) →
+  canonicaliseRelative (negateDifferences xs)
+    ≡ canonicaliseRelative xs
+canonicaliseNegationInvariant [] = refl
+canonicaliseNegationInvariant (C3.c0 ∷ xs) =
+  cong zeroPrefix (canonicaliseNegationInvariant xs)
+canonicaliseNegationInvariant (C3.c1 ∷ xs) =
+  cong firstPositive (negationInvolutive xs)
+canonicaliseNegationInvariant (C3.c2 ∷ xs) = refl
+
+canonicaliseRespectsSign : ∀ {n} (xs ys : Vec C3.C3 n) →
+  SameC2Orbit xs ys →
+  canonicaliseRelative xs ≡ canonicaliseRelative ys
+canonicaliseRespectsSign xs ys (same eq) =
+  cong canonicaliseRelative eq
+canonicaliseRespectsSign xs ys (flipped eq) =
+  trans (sym (canonicaliseNegationInvariant xs))
+        (cong canonicaliseRelative eq)
+
+canonicalCover : ∀ {n} (xs : Vec C3.C3 n) →
+  SameC2Orbit xs (canonicalRepresentative (canonicaliseRelative xs))
+canonicalCover [] = same refl
+canonicalCover (C3.c0 ∷ xs) with canonicalCover xs
+... | same eq = same (cong (C3.c0 ∷_) eq)
+... | flipped eq = flipped (cong (C3.c0 ∷_) eq)
+canonicalCover (C3.c1 ∷ xs) = same refl
+canonicalCover (C3.c2 ∷ xs) = flipped refl
+
+canonicaliseComplete : ∀ {n} (xs ys : Vec C3.C3 n) →
+  canonicaliseRelative xs ≡ canonicaliseRelative ys →
+  SameC2Orbit xs ys
+canonicaliseComplete xs ys equal =
+  c2Transitive xs
+    (canonicalRepresentative (canonicaliseRelative xs)) ys
+    (canonicalCover xs)
+    (c2Transitive
+      (canonicalRepresentative (canonicaliseRelative xs))
+      (canonicalRepresentative (canonicaliseRelative ys)) ys
+      (same (cong canonicalRepresentative equal))
+      (c2Symmetric ys
+        (canonicalRepresentative (canonicaliseRelative ys))
+        (canonicalCover ys)))
+
+-- Constructive *untruncated* classification:
+-- original S3-orbit relation iff equality of canonical relative codes.
+canonicalWordClass : ∀ {n} →
+  Original.AnchoredWord n → CanonicalRelative n
+canonicalWordClass w =
+  canonicaliseRelative (Original.normalise w)
+
+wordOrbitGivesCanonicalEquality : ∀ {n}
+  (w z : Original.AnchoredWord n) →
+  Original.GlobalS3Related w z →
+  canonicalWordClass w ≡ canonicalWordClass z
+wordOrbitGivesCanonicalEquality w z related =
+  canonicaliseRespectsSign (Original.normalise w)
+    (Original.normalise z) (s3ToC2 w z related)
+
+canonicalEqualityGivesWordOrbit : ∀ {n}
+  (w z : Original.AnchoredWord n) →
+  canonicalWordClass w ≡ canonicalWordClass z →
+  Original.GlobalS3Related w z
+canonicalEqualityGivesWordOrbit w z equal =
+  c2ToS3 w z
+    (canonicaliseComplete
+      (Original.normalise w)
+      (Original.normalise z) equal)
+
+wordForCanonicalClass : ∀ {n} →
+  CanonicalRelative n → Original.AnchoredWord n
+wordForCanonicalClass c =
+  Original.normalisedWord (canonicalRepresentative c)
+
+canonicalWordSection : ∀ {n} (c : CanonicalRelative n) →
+  canonicalWordClass (wordForCanonicalClass c) ≡ c
+canonicalWordSection c =
+  trans
+    (cong canonicaliseRelative
+      (relativeZeroAnchor (canonicalRepresentative c)))
+    (canonicalSection c)
+
+canonicalWordRepresentative : ∀ {n}
+  (w : Original.AnchoredWord n) →
+  Original.GlobalS3Related w
+    (wordForCanonicalClass (canonicalWordClass w))
+canonicalWordRepresentative w =
+  canonicalEqualityGivesWordOrbit w
+    (wordForCanonicalClass (canonicalWordClass w))
+    (sym (canonicalWordSection (canonicalWordClass w)))
+
+-- The canonical type has ONE empty code at level zero. Each added
+-- position permits either a leading zero followed by an older code,
+-- or a leading positive digit followed by n free trits.
+-- This *structural* normal form is the source of the orbit ranks
+-- 1,2,5,14,41,122,365. A general cardinality proof still needs a
+-- list/vector enumeration and is not pretended here.
