@@ -22,7 +22,7 @@ def s3_objective_permutations():
     """Six orderings of the objectives; do not confuse priorities with forces."""
     return list(itertools.permutations(AXES))
 
-def geometry_family(name, turns, inner, outer, *, correction=0., panels=400):
+def geometry_family(name, turns, inner, outer, *, correction=0., panels=64):
     """Reuse the pre-existing parametrised geometry and intersection."""
     if name == "arch":
         k = 0.
