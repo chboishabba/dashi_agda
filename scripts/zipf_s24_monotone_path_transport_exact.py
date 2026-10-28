@@ -269,3 +269,28 @@ def concentrating_pair_transfer_certificate(
         assert original<=concentrated
         out[sampler]=(original,concentrated)
     return out
+
+
+def exact_permutation_pair_transfer_difference(
+    a: int, b: int, pair_draws: int
+) -> Fraction:
+    """Exact Pascal identity for a concentrating transfer's switch tail.
+
+    For a>=b>=2 and 1<=m<=a+b,
+      S(a+1,b-1;m)-S(a,b;m)
+       = [C(a,m-1)-C(b-1,m-1)] / C(a+b,m) >= 0.
+    The m=0 difference is zero by the event's true boundary value 1.
+    This is a classical binomial identity, not original mathematics.
+    """
+    if (type(a) is not int or type(b) is not int or b<2 or a<b
+            or type(pair_draws) is not int
+            or not 0<=pair_draws<=a+b):
+        raise ValueError("positive transfer and valid pair draw horizon required")
+    if pair_draws == 0:
+        return Fraction()
+    m = pair_draws
+    direct = Fraction(comb(a,m-1)-comb(b-1,m-1),comb(a+b,m))
+    original = pair_one_type_survival_probability(a,b,m,"permutation")
+    concentrated = pair_one_type_survival_probability(a+1,b-1,m,"permutation")
+    assert direct >= 0 and direct == concentrated-original
+    return direct
