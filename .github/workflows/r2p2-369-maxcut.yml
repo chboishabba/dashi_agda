@@ -48,6 +48,7 @@ jobs:
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2MountainOpticalClockComparisonExact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2ClockBiasIdentifiabilityMaxCutExact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2ThreeClockLoopClosure369Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/R2P2369AtomicQuantumDiamondArchitectureExact.agda
       - name: Agda type-check canonical TOE roots
         run: |
