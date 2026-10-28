@@ -118,3 +118,50 @@ discriminantDependsOnlyOnVietaCoefficients :
 discriminantDependsOnlyOnVietaCoefficients
   (Vieta.roots a b c) = Ring.solve-∀ a b c
 
+
+------------------------------------------------------------------------
+-- CONVERSE: ZERO CUBIC DISCRIMINANT IMPLIES A ROOT COLLISION.
+-- Supply the two exact rational field properties. The underlying
+-- algebra is classical and already belongs to rational stdlib:
+--    xy=0 -> x=0 or y=0, and a-b=0 -> a=b.
+-- We do not misreport this as an unconditional proof until the two
+-- rational laws are instantiated with the installed stdlib version.
+------------------------------------------------------------------------
+
+open import Data.Sum using (_⊎_; inj₁; inj₂)
+
+record RationalDomainLawWitness : Set where
+  field
+    zeroProduct :
+      (x y : ℚ) → x * y ≡ 0ℚ → (x ≡ 0ℚ) ⊎ (y ≡ 0ℚ)
+    zeroDifference :
+      (x y : ℚ) → x - y ≡ 0ℚ → x ≡ y
+
+open RationalDomainLawWitness public
+
+zeroDiscriminantImpliesCollision :
+  (laws : RationalDomainLawWitness) →
+  (a b c : ℚ) →
+  discriminant (Vieta.roots a b c) ≡ 0ℚ →
+  (a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c))
+zeroDiscriminantImpliesCollision laws a b c discZero
+  with zeroProduct laws
+    (vandermonde (Vieta.roots a b c))
+    (vandermonde (Vieta.roots a b c)) discZero
+... | inj₁ vZero = splitV vZero
+... | inj₂ vZero = splitV vZero
+  where
+    splitV :
+      vandermonde (Vieta.roots a b c) ≡ 0ℚ →
+      (a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c))
+    splitV vZero
+      with zeroProduct laws ((a - b) * (a - c)) (b - c) vZero
+    ... | inj₂ bcZero = inj₂ (inj₂ (zeroDifference laws b c bcZero))
+    ... | inj₁ firstZero
+      with zeroProduct laws (a - b) (a - c) firstZero
+    ...   | inj₁ abZero = inj₁ (zeroDifference laws a b abZero)
+    ...   | inj₂ acZero = inj₂ (inj₁ (zeroDifference laws a c acZero))
+
+-- The converse is now a short genuine constructive proof with two
+-- explicitly named missing field-property instances. It is not a
+-- claimed topological discriminant-complement construction.
