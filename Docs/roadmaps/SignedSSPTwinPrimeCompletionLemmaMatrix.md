@@ -494,3 +494,22 @@ The codec is a bijection of finite *candidate residues*, not of
 actual twin primes. Finite surving composites remain source-owned
 counterexamples. Original Ibrahim Monster 3B ownership and other
 mathematical roots are unaffected; no protected ESD files changed.
+
+### Exact typed-cube composite counterexample
+
+Inside this very 27-state image, the point
+`ternary27Point sspZero sspPosOne sspPosOne` encodes residue
+`119`. The actual finite filters pass, yet
+`119 = 7·17` and `121 = 11·11`.
+`wheel270119IsComposite` and `wheel270121IsComposite` consume
+the earlier `FiniteTwinSieveFactorableLiftExact` constructor for
+real stdlib `Composite` evidence; `wheel270119SurvivalCannotProveTwin`
+rejects a genuine `TwinPrimeAt 119` proof. This is a concrete
+no-promotion example **within the same inverse-coded cube**, not
+merely a composite outside its chosen representation.
+
+The committed existing finite regression
+`scripts/check_twin_prime_369_affine_270_crt.py` now checks the
+243 rejects, three projections and 119/121 factorizations.
+Its equivalent exact-integer tests were run locally; CI and Agda
+kernel were not run.
