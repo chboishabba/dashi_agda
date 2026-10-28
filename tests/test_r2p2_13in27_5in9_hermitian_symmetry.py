@@ -8,13 +8,15 @@ sys.path.insert(0,str(ROOT/"scripts"))
 from r2p2_13in27_5in9_hermitian_symmetry import (  # noqa: E402
     CUBE27, PLANE9, PAIRS729,
     neg, representative, conjugate, sample_hermitian,
-    pack_hermitian, unpack_hermitian, convolution, plane_convolution, audit,
+    pack_hermitian, unpack_hermitian, convolution, plane_convolution,
+    folded_hermitian_output, audit,
 )
 
 SOURCE=ROOT/"DASHI/Physics/Closure/R2P227729AntipodalThirteenFiveOrbitFourierCutExact.agda"
 CODEC=ROOT/"DASHI/Physics/Closure/R2P227729HermitianThirteenPairFourierCodecExact.agda"
 TRANSPORT=ROOT/"DASHI/Physics/Closure/R2P227729HermitianConvolutionTransportExact.agda"
 PLANE_TRANSPORT=ROOT/"DASHI/Physics/Closure/R2P281PlaneHermitianFiveOrbitConvolutionExact.agda"
+NYQUIST=ROOT/"DASHI/Physics/Closure/R2P2C4C5NyquistAntipodalFixedPointExact.agda"
 ROOTS=[
  ROOT/"DASHI/EverythingTOESymmetryResolved369.agda",
  ROOT/"DASHI/Unifier.agda",
@@ -62,6 +64,23 @@ class AntipodalFourierTests(unittest.TestCase):
                 unpack_hermitian(pack_hermitian(left,PLANE9),PLANE9),
                 unpack_hermitian(pack_hermitian(right,PLANE9),PLANE9)))
 
+    def test_even_grid_eight_real_nyquist_corners(self):
+        a=sample_hermitian(CUBE27)
+        b=sample_hermitian(CUBE27,variant=1)
+        output=convolution(a,b)
+        four=folded_hermitian_output(output,4)
+        five=folded_hermitian_output(output,5)
+        self.assertEqual(
+            (four["self_antipodal_frequency_classes"],
+             four["nonfixed_conjugate_pairs"],
+             four["total_inversion_orbit_classes"]), (8,28,36))
+        self.assertEqual(
+            (five["self_antipodal_frequency_classes"],
+             five["nonfixed_conjugate_pairs"],
+             five["total_inversion_orbit_classes"]), (1,62,63))
+        self.assertTrue(four["real_coefficients_at_all_self_antipodal_outputs"])
+        self.assertTrue(five["real_field_output_conjugate_symmetry"])
+
     def test_orbit_labels_drop_pair_sum_orientation(self):
         plus=(1,0,0); minus=(-1,0,0)
         self.assertEqual(representative(plus),representative(minus))
@@ -105,7 +124,15 @@ class AntipodalFourierTests(unittest.TestCase):
                       "fiveOrbitPlaneCodecPreservesAll25QuadraticOutputs",
                       "packedPlanePairTermMatchesSource"):
             self.assertIn(token,plane_transport)
-        for src in (code,codec,transport,plane_transport):
+        nyquist=NYQUIST.read_text(encoding="utf-8")
+        for token in ("fourCubeHasEightFixedAntipodes",
+                      "fourCubeHas28NonfixedAntipodalPairs",
+                      "fourCubeOrbitClasses36",
+                      "fiveCubeHasOneFixedAntipode",
+                      "fiveCubeHas62AntipodalPairs",
+                      "fiveCubeOrbitClasses63"):
+            self.assertIn(token,nyquist)
+        for src in (code,codec,transport,plane_transport,nyquist):
             for escape in ("{!!}","postulate\n","{-# TERMINATING #-}",
                            "{-# NO_POSITIVITY_CHECK #-}","allow-unsolved-metas"):
                 self.assertNotIn(escape,src)
@@ -118,6 +145,7 @@ class AntipodalFourierTests(unittest.TestCase):
                 self.assertIn("R2P227729HermitianThirteenPairFourierCodecExact",content)
                 self.assertIn("R2P227729HermitianConvolutionTransportExact",content)
                 self.assertIn("R2P281PlaneHermitianFiveOrbitConvolutionExact",content)
+                self.assertIn("R2P2C4C5NyquistAntipodalFixedPointExact",content)
                 self.assertIn("Hermitian",content)
                 self.assertIn("Antipodal",content)
 
