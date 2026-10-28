@@ -49,7 +49,7 @@ The unique fixed trit word is the all-zero prefix. The other `3^n−1` words spl
 | 5 | 729 | 122 | 3^122 |
 | 6 | 2187 | 365 | 3^365 |
 
-**Genuine numerology/representation boundary:** The 41 H-orbits at n=4 are **not** the same thing as the unrelated 41 set-partition/RGS equality-pattern classes of length five with three labels in #1275. Both 41 results are real, but neither supplies a canonical action-compatible bijection, an empirical Zipf law, or an operator equality. By contrast, the 27→9→5 quotient followed by **Map(five orbit classes, C3)** is an actual, source-typed connection that yields 243. The 729 result requires the specified independent extra C3 mode.
+**Genuine cross-PR refinement:** A later explicit anchored-normalization transport (see the next section) proves that the **orbit sets** T^(n+1)/global-value-S3 and T^n/simultaneous-sign-C2 are equivalent. Thus the equal counts 5,14,41,122,365 have a canonical explanation after choosing the first token as anchor. This does **not** equate the raw sequence and address carriers, their measures, the wild-exterior fundamental group, or the local gauge and full S3 group actions. The independent sixth C3 phase needed for 729 is unchanged.
 
 ### Reproducible exact finite evidence
 
@@ -69,3 +69,33 @@ Standard source: *Stacks Project* §5.22 [Tag 08ZW, Profinite spaces](https://st
 Last, the original Alexander (1924) wild sphere and Hatcher's **binary** horned group are not proved to be the user's newly chosen balanced-ternary embedded wild handlebody. The original perfect horned group cannot be given a nontrivial homomorphism into an abelian phase quotient; it must not be silently represented by `A_n^H`. PR #1414 polynomial S3/spin quaternion and original Ibrahim Monster 3B retain separate object identity and author attribution. No ESD changes, no fabricated same-object RH/NS/Spin/Monster proof.
 
 Historical attribution: Alexander (1924); Hatcher's Algebraic Topology; Cauchy/Frobenius/Burnside orbit counting; classical directed colimits, profinite compactness, permutation-group actions. Earlier repository/source owners #1244's original `FibreAction`, `SectorSignInvariant` and `DepthTwoFiveOrbitFibreExact`; independent #1407 13/27/5/9 Fourier orbit results, #1414 polynomial/quaternion construction, #1275 Zipf-Heaps owner, original Ibrahim Monster 3B owner. The newly composed typed direct-limit algebra/ledger is Johl Brown-directed with OpenAI ChatGPT assistance, 28 Oct 2026.
+
+
+## Subsequent alpha cut: the `41=41` match DOES have an action-level transport
+
+Previous documentation described the equality of the two 41-count sequences as a bare coincidence. This was too weak. A **specific orbit-set isomorphism** is now constructed by the new source-written `AlexanderHornedS3WordSignOrbitTransportExact.agda` and its exhaustive independent Python oracle:
+
+```
+global value-S3 orbits on words of n+1 trit symbols
+    -> fix first symbol as anchor by a global C3 translation
+relative n trits (second-first, third-first, ...)
+    -> quotient by the residual reflection C2
+simultaneous sign orbits on n trit coordinates
+```
+
+Concretely, for `w=(a0,a1,...,an)`, normalize to differences `δ_i=a_i−a0 mod3`. Every global translation `a_i↦a_i+t` leaves all `δ_i` unchanged. Reflection `a_i↦−a_i` sends all `δ_i↦−δ_i`. Conversely, if the relative coordinates of two named words agree up to a common sign `s=±1`, choose `t=b0−s*a0`; the affine permutation `a_i↦s*a_i+t` sends the entire first word to the second. For three labels, **these six affine transformations are precisely the original S3 value permutations**. This is an honest two-way orbit transport, not a same-count identity.
+
+The new Agda source explicitly imports the prior #1244 signed-trit↔C3 phase chart. It provides `normalise`, `normaliseTranslate`, `normaliseReflection`, `signedRelativeTranslationInvariant`, `signedRelativeReflection`, a canonical anchored `wordFromDifferences`, `signedRelativeSection`, and `normaliseViaTranslation`. The Python check exhaustively compared restricted-growth equality-pattern representatives and actual sign-orbit representatives for **9,840** named words through length eight, and verified all **59,040** S3 actions, with no mismatches. This is source-written/independent finite evidence, **not Agda kernel verification**.
+
+Therefore the classical identity is structural:
+
+```
+r_n = # (T^n / C2_sign)
+    = # (T^(n+1) / S3_value)
+    = Σ_(k=1..min(3,n+1)) S(n+1,k)
+    = (3^n+1)/2.
+```
+
+This genuinely cross-pollinates #1244's invariant phase-field ORBIT DOMAIN with #1275's equality-pattern ORBIT DOMAIN. It does **not** identify the corresponding probability laws: uniform named words induce nonuniform orbit masses (different orbit sizes), and an IID nonuniform Zipf measure is not invariant under arbitrary value-S3 relabeling. It also does not equate `C3^5` local invariant fields with the five-pattern set itself, or the #1414 `5^3` modes.
+
+Earlier original SSSP permutations/ZIPF-Heaps, Hatcher/Alexander, #1407 Fourier and #1414 monodromy/quaternion ownership retain distinct proof provenance; any future operator transport must declare the relevant functor and source action.
