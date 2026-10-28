@@ -185,3 +185,40 @@ refinementEvaluation n f end
 -- constant function group modulo eventual pullback equality.
 -- The quotient / continuous-function universal property is a
 -- SEPARATE topological implementation obligation, not assumed here.
+
+
+-- ALL-DEPTH invariants under sector rotation and balanced sign.
+-- Invariance is kept pointwise to avoid new functional extensionality
+-- postulates. Balanced reflection is a DIFFERENT involution from
+-- the external sector C3 rotation.
+
+record SectorSignInvariant {n : Nat} (f : FibreAction n) : Set where
+  field
+    sector : ∀ x →
+      f (End.rotateBalancedLevel n x) ≡ f x
+    sign : ∀ x →
+      f (End.reflectBalancedLevel n x) ≡ f x
+
+reflectProjectionSquare : ∀ n (x : End.BalancedLevel (suc n)) →
+  End.balancedProjection n (End.reflectBalancedLevel (suc n) x)
+    ≡ End.reflectBalancedLevel n (End.balancedProjection n x)
+reflectProjectionSquare n (c , xs) =
+  cong (λ ys → (c , ys)) (End.mapDropLast Trit.negate xs)
+
+invariantsPullback : ∀ n (f : FibreAction n) →
+  SectorSignInvariant f →
+  SectorSignInvariant (pullback n f)
+invariantsPullback n f invariant = record
+  { sector = λ x →
+      trans (cong f (End.rotateBalancedProjectionSquare n x))
+            (SectorSignInvariant.sector invariant
+              (End.balancedProjection n x))
+  ; sign = λ x →
+      trans (cong f (reflectProjectionSquare n x))
+            (SectorSignInvariant.sign invariant
+              (End.balancedProjection n x))
+  }
+
+-- The invariant-field direct system is thus closed under refinement.
+-- The explicit quotient by eventual finite-depth equality and the
+-- topological compactness universal property remain separate owners.
