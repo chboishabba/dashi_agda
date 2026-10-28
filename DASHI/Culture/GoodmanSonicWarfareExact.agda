@@ -522,6 +522,130 @@ acousticFeaturesDoNotDetermineEveryResponse :
 acousticFeaturesDoNotDetermineEveryResponse =
   Query.queryAdequacyDefectBlocksFactorisation responseProjectionDefect
 
+
+------------------------------------------------------------------------
+-- FINITE CONTEXT REFINEMENT / M1
+--
+-- New DASHI finite witness.  A two-coordinate observation can be adequate
+-- for a response query even when neither coordinate alone is adequate.
+-- The four world states and their answers are synthetic and deliberately
+-- model a Boolean interaction.  A receiver/context label here is not a
+-- measured psychological variable or a result about physical humans.
+--
+-- Reuses the original query-indexed Blackwell-inspired / non-factorability
+-- calculus.  It does not redefine information ordering or causality.
+------------------------------------------------------------------------
+
+data SignalContextWorld : Set where
+  quietProtected : SignalContextWorld
+  quietExposed : SignalContextWorld
+  loudProtected : SignalContextWorld
+  loudExposed : SignalContextWorld
+
+data SignalObservation : Set where
+  quietSignal : SignalObservation
+  loudSignal : SignalObservation
+
+data ContextObservation : Set where
+  protectedContext : ContextObservation
+  exposedContext : ContextObservation
+
+data JointObservation : Set where
+  quietProtectedObservation : JointObservation
+  quietExposedObservation : JointObservation
+  loudProtectedObservation : JointObservation
+  loudExposedObservation : JointObservation
+
+data ContextualQuery : Set where
+  responseFromWorldQuery : ContextualQuery
+
+data ContextualAnswer : Set where
+  baselineResponse : ContextualAnswer
+  elevatedResponse : ContextualAnswer
+
+signalOnly : SignalContextWorld → SignalObservation
+signalOnly quietProtected = quietSignal
+signalOnly quietExposed = quietSignal
+signalOnly loudProtected = loudSignal
+signalOnly loudExposed = loudSignal
+
+contextOnly : SignalContextWorld → ContextObservation
+contextOnly quietProtected = protectedContext
+contextOnly quietExposed = exposedContext
+contextOnly loudProtected = protectedContext
+contextOnly loudExposed = exposedContext
+
+jointSignalContext : SignalContextWorld → JointObservation
+jointSignalContext quietProtected = quietProtectedObservation
+jointSignalContext quietExposed = quietExposedObservation
+jointSignalContext loudProtected = loudProtectedObservation
+jointSignalContext loudExposed = loudExposedObservation
+
+contextualResponse : SignalContextWorld → ContextualAnswer
+contextualResponse quietProtected = baselineResponse
+contextualResponse quietExposed = baselineResponse
+contextualResponse loudProtected = baselineResponse
+contextualResponse loudExposed = elevatedResponse
+
+jointResponse : JointObservation → ContextualAnswer
+jointResponse quietProtectedObservation = baselineResponse
+jointResponse quietExposedObservation = baselineResponse
+jointResponse loudProtectedObservation = baselineResponse
+jointResponse loudExposedObservation = elevatedResponse
+
+contextualAnswer : ContextualQuery → SignalContextWorld → ContextualAnswer
+contextualAnswer responseFromWorldQuery world = contextualResponse world
+
+contextualSemantics :
+  Query.QuerySemantics SignalContextWorld ContextualQuery ContextualAnswer
+contextualSemantics = Query.querySemantics contextualAnswer
+
+signalResponseDefect :
+  Query.QueryAdequacyDefect
+    signalOnly contextualSemantics responseFromWorldQuery
+signalResponseDefect =
+  Query.queryAdequacyDefect
+    loudProtected loudExposed refl (λ ())
+
+contextResponseDefect :
+  Query.QueryAdequacyDefect
+    contextOnly contextualSemantics responseFromWorldQuery
+contextResponseDefect =
+  Query.queryAdequacyDefect
+    quietExposed loudExposed refl (λ ())
+
+signalAloneCannotDetermineContextualResponse :
+  Query.AdequateFor
+    signalOnly contextualSemantics responseFromWorldQuery → ⊥
+signalAloneCannotDetermineContextualResponse =
+  Query.queryAdequacyDefectBlocksFactorisation signalResponseDefect
+
+contextAloneCannotDetermineContextualResponse :
+  Query.AdequateFor
+    contextOnly contextualSemantics responseFromWorldQuery → ⊥
+contextAloneCannotDetermineContextualResponse =
+  Query.queryAdequacyDefectBlocksFactorisation contextResponseDefect
+
+jointSignalContextDeterminesSyntheticResponse :
+  Query.AdequateFor
+    jointSignalContext contextualSemantics responseFromWorldQuery
+jointSignalContextDeterminesSyntheticResponse =
+  Query.factorsForQuery
+    {project = jointSignalContext}
+    {semantics = contextualSemantics}
+    {query = responseFromWorldQuery}
+    jointResponse
+    (λ { quietProtected → refl
+       ; quietExposed → refl
+       ; loudProtected → refl
+       ; loudExposed → refl })
+
+------------------------------------------------------------------------
+-- Physical and causal promotion remains outside this finite construction:
+-- there is no calibrated observation, independent conditional estimate,
+-- intervention, or general biological response model in this file.
+------------------------------------------------------------------------
+
 ------------------------------------------------------------------------
 -- IBRAHIM / SNOWBALL / MEDIA PROVENANCE: EXACT OWNER RE-EXPORT
 --
