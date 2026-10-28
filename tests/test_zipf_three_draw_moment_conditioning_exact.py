@@ -111,3 +111,24 @@ def test_no_duplicate_probability_ontology_and_explicit_original_owners():
     for forbidden in ("postulate\n","{!!}","allow-unsolved-metas",
                       "NO_POSITIVITY_CHECK","{-# TERMINATING #-}"):
         assert forbidden not in factor
+
+
+def test_fine_equality_pattern_pushforward_all_small_weights():
+    from zipf_three_draw_moment_conditioning_exact import iid_three_draw_equality_pattern_law
+    from collections import defaultdict
+    for k in (2,3,4):
+        for weights in product((1,2,3),repeat=k):
+            receipt=iid_three_draw_equality_pattern_law(weights)
+            direct=defaultdict(F)
+            p=tuple(F(w,sum(weights)) for w in weights)
+            for a,b,c in product(range(k),repeat=3):
+                shape=("AAA" if a==b==c else
+                       "AAB" if a==b else "ABA" if a==c else
+                       "ABB" if b==c else "ABC")
+                direct[shape]+=p[a]*p[b]*p[c]
+            assert receipt["pattern_law"]=={
+                shape:prob for shape,prob in direct.items() if prob>0}
+            assert receipt["heaps_pushforward"]==iid_three_draw_moment_law(weights)["law"]
+            assert (receipt["pattern_law"].get("AAB",F())
+                    ==receipt["pattern_law"].get("ABA",F())
+                    ==receipt["pattern_law"].get("ABB",F()))
