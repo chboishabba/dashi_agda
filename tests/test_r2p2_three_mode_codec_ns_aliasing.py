@@ -4,6 +4,7 @@ This is finite-mode arithmetic. It does not type-check Agda or establish
 physical Ma-lattice, R2P2, nonlinear Navier–Stokes or Clay statements.
 """
 import json
+from fractions import Fraction
 from pathlib import Path
 import sys
 import unittest
@@ -15,6 +16,7 @@ from r2p2_three_mode_codec_ns_aliasing_diagnostic import (  # noqa: E402
     MODES, CODEC, DECODE, BINARY_IN_TERNARY,
     centered_mod, exact_quadratic_product, sampled_quadratic_product,
     kept_modes, audit, three_axis_27_mode_pair_audit,
+    exact_two_mode_leray_aliasing_audit,
 )
 
 AGDA = ROOT / "DASHI/Physics/Closure/R2P2ThreeModeBinaryTernaryNSAliasingCutExact.agda"
@@ -61,6 +63,17 @@ class ThreeModeNSCodecTests(unittest.TestCase):
         self.assertEqual(r["example"]["integer_sum"], [2, 0, 0])
         self.assertEqual(r["example"]["folded_C3_cubed"], [-1, 0, 0])
         self.assertFalse(r["NS_time_evolution_or_Clay_claimed"])
+
+    def test_nonzero_transverse_ns_leray_projection_distinguishes_folding(self):
+        witness = exact_two_mode_leray_aliasing_audit()
+        self.assertEqual(witness["true_integer_output_k"], [2, 1, 0])
+        self.assertEqual(witness["folded_three_grid_output_k"], [-1, 1, 0])
+        self.assertEqual(witness["symmetrized_input_nonlinearity_up_to_i"], [1, 0, 0])
+        self.assertEqual(witness["leray_at_true_k"], ["1/5", "-2/5", "0"])
+        self.assertEqual(witness["leray_at_folded_k"], ["1/2", "1/2", "0"])
+        self.assertTrue(witness["different"])
+        self.assertFalse(witness["full_NS_equations_or_time_evolution_solved"])
+        self.assertFalse(witness["uniform_cutoff_estimate_established"])
 
     def test_codec_roundtrip_does_not_mean_alias_free(self):
         inputs = (-1, 0, 1)
