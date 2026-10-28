@@ -12,6 +12,7 @@ else
 fi
 python3 -m pytest -q \
   tests/test_zipf_family_formal.py \
+  tests/test_zipf_f13_pnf_parity_exact.py \
   tests/test_zipf_family_crosslaw.py \
   tests/test_zipf_heaps_bridge_exact.py \
   tests/test_zipf_heaps_extremal_profiles.py \
