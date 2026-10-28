@@ -25,7 +25,19 @@ open ExactTwinCounter public using
 
 import DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact as TwinConsumerPareto
 open TwinConsumerPareto public using
-  ( fiveAndThirtyFiveSameSixWheel
+  (
+    ThreeByThreeByThree
+  ; OrderedThreeCubePair
+  ; toThreeCoordinates
+  ; fromThreeCoordinates
+  ; threeCoordinateDecodeEncode
+  ; threeCoordinateEncodeDecode
+  ; threeAxisCountIsThree
+  ; threeAxisCapacityIsThreeTimesThreeTimesThree
+  ; threeAxisCapacityIsTwentySeven
+  ; orderedPairAxisCountIsSix
+  ; orderedPairCapacityIsSevenHundredTwentyNine
+  ; fiveAndThirtyFiveSameSixWheel
   ; twinAtThirtyFiveIsFalse
   ; wheelCannotDecideActualTwins
   ; postprocessedWheelStillCannotDecideTwins
