@@ -23,6 +23,21 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact as FactorableSieveLift
+open FactorableSieveLift public using
+  ( leftFactorisationGivesRightPlusTwo
+  ; factorableLeftIsProductPeriodShift
+  ; factorablePairPreservesFiniteSieve
+  ; factorablePairReflectsFiniteSieve
+  ; canonicalFactorableNeighbourPair
+  ; leftSecondFactorIsNontrivial
+  ; rightSecondFactorIsNontrivial
+  ; factorableLeftHasTwoNontrivialFactors
+  ; factorableRightHasTwoNontrivialFactors
+  ; certifiedModulusProductPositive
+  ; factorableSurvivorWithBothStrictFactors
+  )
+
 import DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact as TwinConsumerPareto
 open TwinConsumerPareto public using
   (
