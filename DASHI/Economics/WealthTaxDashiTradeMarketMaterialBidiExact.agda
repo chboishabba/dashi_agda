@@ -1602,3 +1602,324 @@ syntheticJoinedTwoFillCash = refl
 -- broker issued these IDs, the buyer received title, the seller funded a
 -- prior tax liability or any named investor owns a real voting share.
 
+------------------------------------------------------------------------
+-- 2026-10-28 SECOND FOLLOW-ON: STOCK, EVIDENCE AND RIVAL POLICIES.
+-- These are hypothetical, conditional Agda source constructions.
+-- They do not mint original tax assessments, brokerage credentials,
+-- issuer registers, economic observations or official settlement receipts.
+------------------------------------------------------------------------
+
+-- A05. Consistent accounting unit and instant are coordinates of a
+-- supplied snapshot; ownership and valuation must be verified elsewhere.
+record ScopedNetWealthSnapshot : Set where
+  constructor scoped-net-wealth-snapshot
+  field
+    assessmentEpoch : Nat
+    monetaryUnitLabel : String
+    declaredGrossUnits : Nat
+    excludedAssetsUnits : Nat
+    includedAssetsUnits : Nat
+    liabilityUnits : Nat
+    calculatedNetWealthUnits : Nat
+    exclusionsReconciled :
+      includedAssetsUnits + excludedAssetsUnits ≡ declaredGrossUnits
+    netAssetDebtReconciled :
+      calculatedNetWealthUnits + liabilityUnits ≡ includedAssetsUnits
+open ScopedNetWealthSnapshot public
+
+netWealthBalanceIsWellTyped :
+  (snapshot : ScopedNetWealthSnapshot) →
+  (includedAssetsUnits snapshot + excludedAssetsUnits snapshot
+    ≡ declaredGrossUnits snapshot)
+  × (calculatedNetWealthUnits snapshot + liabilityUnits snapshot
+    ≡ includedAssetsUnits snapshot)
+netWealthBalanceIsWellTyped snapshot =
+  exclusionsReconciled snapshot , netAssetDebtReconciled snapshot
+
+illustrativeNetWealthSnapshot : ScopedNetWealthSnapshot
+illustrativeNetWealthSnapshot =
+  scoped-net-wealth-snapshot 1 "hypothetical-currency-unit" 12 2 10 3 7 refl refl
+
+-- C08. Reuse the existing E06 owner. A transfer of already-issued
+-- ownership claims does not, by its arithmetic alone, retire machines.
+-- The plant identity must be supplied independently.
+record TransferWithUnalteredPlant : Set where
+  constructor transfer-with-unaltered-plant
+  field
+    shareHandoff : PureIssuedClassTransfer
+    plantBeforeHandoff : Nat
+    plantAfterHandoff : Nat
+    plantUnalteredByHandoff :
+      plantAfterHandoff ≡ plantBeforeHandoff
+open TransferWithUnalteredPlant public
+
+disposalPreservesExternalAssetTransferAccounting :
+  (handoff : TransferWithUnalteredPlant) →
+  (sellerUnitsBefore (shareHandoff handoff)
+     + buyerUnitsBefore (shareHandoff handoff)
+     ≡ sellerUnitsAfter (shareHandoff handoff)
+       + buyerUnitsAfter (shareHandoff handoff))
+  × (plantAfterHandoff handoff ≡ plantBeforeHandoff handoff)
+disposalPreservesExternalAssetTransferAccounting handoff =
+  shareClassTransferPreservesIssuedSupply (shareHandoff handoff) ,
+  plantUnalteredByHandoff handoff
+
+-- E08. Majority arithmetic cannot determine contractual control.
+-- The second axis is an EXTERNAL ASSUMPTION, not an actual AASB 10 verdict.
+record ControlEvidenceWorld : Set where
+  constructor control-evidence-world
+  field
+    arithmeticVotes : Nat
+    externallyAssumedEffectiveControl : Bool
+open ControlEvidenceWorld public
+
+sameVotesControlA : ControlEvidenceWorld
+sameVotesControlA = control-evidence-world 34 true
+
+sameVotesControlB : ControlEvidenceWorld
+sameVotesControlB = control-evidence-world 34 false
+
+effectiveControlDiffersWithIdenticalVotes :
+  externallyAssumedEffectiveControl sameVotesControlA
+    ≡ externallyAssumedEffectiveControl sameVotesControlB → ⊥
+effectiveControlDiffersWithIdenticalVotes ()
+
+controllingVotesRequireVerifiedRightsAndAgreements :
+  INF.FactorsThrough arithmeticVotes externallyAssumedEffectiveControl → ⊥
+controllingVotesRequireVerifiedRightsAndAgreements =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      sameVotesControlA sameVotesControlB refl
+      effectiveControlDiffersWithIdenticalVotes)
+
+-- E09. Equal local digest values do not establish historical event identity.
+-- These are synthetic NUMERIC LABELS. This is NOT a cryptographic
+-- SHA-256 collision claim, and no actual registry identity is created.
+record DigestEventCounterworld : Set where
+  constructor digest-event-counterworld
+  field
+    arbitraryDigestLabel : Nat
+    distinctHistoricalEventLabel : Nat
+open DigestEventCounterworld public
+
+digestWorldA : DigestEventCounterworld
+digestWorldA = digest-event-counterworld 7 11
+
+digestWorldB : DigestEventCounterworld
+digestWorldB = digest-event-counterworld 7 12
+
+differentEventsWithEqualDigestLabel :
+  distinctHistoricalEventLabel digestWorldA
+    ≡ distinctHistoricalEventLabel digestWorldB → ⊥
+differentEventsWithEqualDigestLabel ()
+
+persistentTransactionIdentityCannotFollowFromValueOrDigest :
+  INF.FactorsThrough arbitraryDigestLabel distinctHistoricalEventLabel → ⊥
+persistentTransactionIdentityCannotFollowFromValueOrDigest =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      digestWorldA digestWorldB refl differentEventsWithEqualDigestLabel)
+
+-- F07. A separate externally checked authority witness must accompany
+-- source-certified settlement. A synthetic SingleInstrumentDvPBatch
+-- alone does not generate a term of OfficialReceiptValid.
+record OfficialSettlementAdmission
+    (OfficialReceipt : Set)
+    (OfficialReceiptValid : OfficialReceipt → Set) : Set where
+  constructor official-settlement-admission
+  field
+    settlementSimulation : SingleInstrumentDvPBatch
+    independentOfficialReceipt : OfficialReceipt
+    independentAuthorityCheck :
+      OfficialReceiptValid independentOfficialReceipt
+open OfficialSettlementAdmission public
+
+actualSettlementFinalityRequiresOfficialReceipt :
+  {OfficialReceipt : Set} →
+  {OfficialReceiptValid : OfficialReceipt → Set} →
+  (admission : OfficialSettlementAdmission OfficialReceipt OfficialReceiptValid) →
+  OfficialReceiptValid (independentOfficialReceipt admission)
+actualSettlementFinalityRequiresOfficialReceipt = independentAuthorityCheck
+
+-- G07. Model a financial claim position and a distinct productive output.
+-- Sharing one balance cannot recover the physical measurement.
+record FinancePhysicalObservation : Set where
+  constructor finance-physical-observation
+  field
+    investorFinancialClaimUnits : Nat
+    physicalOutputUnits : Nat
+open FinancePhysicalObservation public
+
+financePhysicalA : FinancePhysicalObservation
+financePhysicalA = finance-physical-observation 5 0
+
+financePhysicalB : FinancePhysicalObservation
+financePhysicalB = finance-physical-observation 5 2
+
+physicalOutputDiffersAtSameClaim :
+  physicalOutputUnits financePhysicalA
+    ≡ physicalOutputUnits financePhysicalB → ⊥
+physicalOutputDiffersAtSameClaim ()
+
+financialClaimChangeDoesNotIdentifyPhysicalOutput :
+  INF.FactorsThrough investorFinancialClaimUnits physicalOutputUnits → ⊥
+financialClaimChangeDoesNotIdentifyPhysicalOutput =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      financePhysicalA financePhysicalB refl
+      physicalOutputDiffersAtSameClaim)
+
+-- I01. Reuse the original Base.TaxBase and its taxBase interpretation.
+-- A common numeric measurement unit makes two policies comparable on a
+-- chosen axis but does not erase the different taxable legal object.
+record RivalTaxBaseComparison : Set where
+  constructor rival-tax-base-comparison
+  field
+    firstPolicy : Tax.Policy
+    secondPolicy : Tax.Policy
+    firstTaxBase : Tax.TaxBase
+    secondTaxBase : Tax.TaxBase
+    firstBaseReconciles : firstTaxBase ≡ Tax.taxBase firstPolicy
+    secondBaseReconciles : secondTaxBase ≡ Tax.taxBase secondPolicy
+    firstPolicyCost : Nat
+    secondPolicyCost : Nat
+    comparativeCostUnit : String
+open RivalTaxBaseComparison public
+
+rivalPolicyTaxBasesRemainComparableButDistinct :
+  (pair : RivalTaxBaseComparison) →
+  (firstTaxBase pair ≡ Tax.taxBase (firstPolicy pair))
+  × (secondTaxBase pair ≡ Tax.taxBase (secondPolicy pair))
+rivalPolicyTaxBasesRemainComparableButDistinct pair =
+  firstBaseReconciles pair , secondBaseReconciles pair
+
+illustrativeIncomeWealthComparison : RivalTaxBaseComparison
+illustrativeIncomeWealthComparison =
+  rival-tax-base-comparison
+    Tax.incomeHundredAboveThreshold
+    Tax.wealthHundredAboveThreshold
+    Tax.annualPersonalIncome
+    Tax.currentNetWealth
+    refl refl 2 2 "illustrative-cost-units"
+
+-- I02. A proposal has no statutory standing just because it has an
+-- illustrative cost. An enacted tag needs an independently checked
+-- enactment record. This interface cannot manufacture that record.
+data PolicyAuthorityMode : Set where
+  hypotheticalOnly : PolicyAuthorityMode
+  statutoryEvidenceRequired : PolicyAuthorityMode
+
+record TaggedPolicyScenario : Set where
+  constructor tagged-policy-scenario
+  field
+    representedPolicy : Tax.Policy
+    authorityMode : PolicyAuthorityMode
+    policyReference : String
+open TaggedPolicyScenario public
+
+record StatutoryPolicyAdmission
+    (LegalRecord : Set)
+    (ValidApplicableStatute : LegalRecord → Set) : Set where
+  constructor statutory-policy-admission
+  field
+    claimedEnactedScenario : TaggedPolicyScenario
+    enactedTagRequired :
+      authorityMode claimedEnactedScenario ≡ statutoryEvidenceRequired
+    independentLegalRecord : LegalRecord
+    originalStatuteChecked :
+      ValidApplicableStatute independentLegalRecord
+open StatutoryPolicyAdmission public
+
+policyScenarioRequiresStatuteOrHypotheticalTag :
+  (scenario : TaggedPolicyScenario) →
+  PolicyAuthorityMode
+policyScenarioRequiresStatuteOrHypotheticalTag = authorityMode
+
+-- I03. A period transition carries exact modeled stock conservation
+-- independently of any policy prediction or real-world valuation.
+record FinitePolicyAccountingPeriod : Set where
+  constructor finite-policy-accounting-period
+  field
+    assetStockBefore : Nat
+    receivedRealResources : Nat
+    transferredAwayResources : Nat
+    assetStockAfter : Nat
+    finiteStockFlowReconciled :
+      assetStockAfter + transferredAwayResources
+        ≡ assetStockBefore + receivedRealResources
+open FinitePolicyAccountingPeriod public
+
+finitePolicyStateTransitionPreservesAccounting :
+  (period : FinitePolicyAccountingPeriod) →
+  assetStockAfter period + transferredAwayResources period
+    ≡ assetStockBefore period + receivedRealResources period
+finitePolicyStateTransitionPreservesAccounting = finiteStockFlowReconciled
+
+-- I04. Migration / credit / trading response coefficients are assumed
+-- parameters, not universally identified from the tax base.
+record ExplicitBehaviourAssumptions : Set where
+  constructor explicit-behaviour-assumptions
+  field
+    migrationResponseNumerator : Nat
+    migrationResponseDenominator : Nat
+    creditAccessResponseNumerator : Nat
+    creditAccessResponseDenominator : Nat
+    slowPortfolioAdjustmentPeriods : Nat
+    sourceAssumptionReference : String
+open ExplicitBehaviourAssumptions public
+
+behaviouralResponseParametersAreExplicitAssumptions :
+  (assumptions : ExplicitBehaviourAssumptions) →
+  Nat
+behaviouralResponseParametersAreExplicitAssumptions =
+  slowPortfolioAdjustmentPeriods
+
+-- I05. Holding initial state equal is a separate reconciled premise.
+-- A paired scenario is NOT an observed counterfactual study.
+record SharedInitialPolicyComparison : Set where
+  constructor shared-initial-policy-comparison
+  field
+    baselineScenario : TaggedPolicyScenario
+    interventionScenario : TaggedPolicyScenario
+    baselineOpeningWealth : Nat
+    interventionOpeningWealth : Nat
+    initialStatesMatched :
+      baselineOpeningWealth ≡ interventionOpeningWealth
+open SharedInitialPolicyComparison public
+
+sameInitialStateDifferentInterventionComparison :
+  (comparison : SharedInitialPolicyComparison) →
+  baselineOpeningWealth comparison ≡ interventionOpeningWealth comparison
+sameInitialStateDifferentInterventionComparison =
+  initialStatesMatched
+
+-- I09. Two worlds have the same synthetic forecast but distinct observed
+-- coordinates. Synthetic predictions do not identify actual outcomes.
+-- The observed coordinate here is an illustrative counterworld value,
+-- NOT collected or observed tax data.
+record SimulatedVsExternalOutcomeWorld : Set where
+  constructor simulated-vs-external-outcome-world
+  field
+    modelPredictionUnits : Nat
+    independentlySuppliedOutcomeUnits : Nat
+open SimulatedVsExternalOutcomeWorld public
+
+syntheticVersusExternalA : SimulatedVsExternalOutcomeWorld
+syntheticVersusExternalA = simulated-vs-external-outcome-world 4 0
+
+syntheticVersusExternalB : SimulatedVsExternalOutcomeWorld
+syntheticVersusExternalB = simulated-vs-external-outcome-world 4 1
+
+externalOutcomeDiffersAtSamePrediction :
+  independentlySuppliedOutcomeUnits syntheticVersusExternalA
+    ≡ independentlySuppliedOutcomeUnits syntheticVersusExternalB → ⊥
+externalOutcomeDiffersAtSamePrediction ()
+
+syntheticModelCannotIdentifyObservedCausalEffect :
+  INF.FactorsThrough modelPredictionUnits independentlySuppliedOutcomeUnits → ⊥
+syntheticModelCannotIdentifyObservedCausalEffect =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      syntheticVersusExternalA syntheticVersusExternalB refl
+      externalOutcomeDiffersAtSamePrediction)
+
