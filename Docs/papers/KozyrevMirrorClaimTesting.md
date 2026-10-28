@@ -1,3 +1,64 @@
+## 2026-10-28 actual HTML event export and angular-momentum failure/referee
+
+**New locally executed verification evidence** from the existing HTML state
+machine (not a separate geometry solver):
+
+- Original selected winning scene JSON from prior interior-gated coordinate
+  descent (44 rays, `rho=1`, 9000 W).
+- An updated local HTML runner exports source position/direction/power,
+  ordered wall collision positions/normals/in/out unit directions,
+  before/after optical power, force vector, signed torque, and terminal
+  kind/point/direction/power as JSON (`kozyrev-optical-events/1`).
+- Chromium execution through Playwright's `page.set_content` succeeded
+  without JavaScript errors. The legacy HTML originally yielded **957
+  collisions**, 23 target rays, 21 escaped, reported wall torque
+  **-68.20176864560934 microN*m**.
+- Independent Python replay exactly reproduced the *per-collision*
+  momentum impulse and signed wall torque, and a nearly zero linear
+  momentum residual, but discovered **angular momentum residual
+  -4.709663543144067e-7 N*m**, so the old reported number is **not
+  physically accepted**. This check did not previously exist in HTML.
+- Root-cause analysis: after reflection, the SDF sphere marcher shifted
+  the ray position along the surface normal:
+  `px=hx+orient*nx*0.0025; py=hy+orient*ny*0.0025`.
+  This is a transverse displacement with respect to the reflected ray,
+  and thus changes the apparent photon angular momentum without an
+  associated wall or source impulse.
+- Tested corrective handoff: shift forward *along the outgoing ray*:
+  `px=hx+ox*0.0025; py=hy+oy*0.0025`. The same source/geometry scene
+  then yielded **927 collisions**, **27 target** and **17 escaped**
+  rays, wall torque **-65.18319074987895 microN*m**,
+  angular-momentum residual **+8.470329472543003e-20 N*m**,
+  linear residual **5.082903495303877e-20 N**,
+  per-event impulse consistency within **3e-22 N**, and zero
+  disconnected-path flags at the initial audit threshold.
+- **Therefore retire the earlier -68.20 microN*m "winner" status.**
+  The adjusted -65.18 microN*m is a *replay of the old parameter scene
+  under a corrected integration convention*, not a newly optimised
+  Pareto maximum. Its central receiver captures 27/44 of the 9 kW
+  equal-power rays, approximately 5522.73 W.
+
+The HTML, original/fixed collision streams, screenshots and executable
+Python independent referee are attached as session-local artefacts,
+not yet committed as GitHub repository files. The existing branch
+event-referee Python source remains source-written and must be wired
+to this event schema. The branch's HTML, physical geometry validation,
+fully rerun coordinate search, kernel and CI are **OPEN**.
+
+**Critical numerical caveat:** exact angular-ledger closure after the
+forward offset does not prove correct SDF collision positions/normals,
+or convergence under offset refinement. Independently halve the step,
+SDF tolerance and geometry sampling before promoting an optimiser
+result. The SDF's `MAX_T=26` and finite computation budget also need
+explicit sufficient-escape certification.
+
+**Attribution:** original physical optical laws to standard mechanics;
+merged DASHI torque/right-hand-rule theorem owners in #1164 remain
+original owners; the new exact event-export/referee/offset diagnosis
+belongs to this Kozyrev test lane. Later Ibrahim/Monster 3B and
+protected ESD surfaces stay untouched. No nonstandard "torsion field"
+or device efficacy is inferred.
+
 ## 2026-10-28 momentum-first max-cut continuation: conservation referee
 
 **Ownership:** original classical photon-momentum law is standard optics;
