@@ -79,6 +79,12 @@ class OpticalLattice369Tests(unittest.TestCase):
             [False, True, False, False, False],
         )
 
+    def test_ma_s6_three_fourier_modes_do_not_have_11_or_18_sidebands(self):
+        modes = (-1, 0, 1)
+        self.assertTrue(all(abs(a - b) < 11 for a in modes for b in modes))
+        self.assertTrue(all(abs(a - b) not in (11, 18) for a in modes for b in modes))
+        self.assertNotEqual(hop((1, 0, 0)), (0, 0, 0))
+
     def test_three_site_operator_is_not_a_fitted_aa_hamiltonian(self):
         content = MODULE.read_text(encoding="utf-8")
         for owner in (
@@ -98,6 +104,7 @@ class OpticalLattice369Tests(unittest.TestCase):
             "latticeCannotProveInfiniteAAThreshold",
             "maFirstNominalSupercellOffset",
             "maFifthNominalSupercellOffset",
+            "noMaS6SidebandInThreeModeFourierTruncation",
             "maSupercell18IsNotAnIdentifiedC18PhysicsRealization",
             "latticeDoesNotConflateClockExperiments",
             "latticeDoesNotObserveQuantumGravity",
@@ -114,6 +121,7 @@ class OpticalLattice369Tests(unittest.TestCase):
         module_path = "import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as "
         self.assertIn(module_path + "Lattice", ARCH.read_text(encoding="utf-8"))
         self.assertIn("fullArchitectureLatticeIsNotInfiniteAAProof", ARCH.read_text(encoding="utf-8"))
+        self.assertIn("fullArchitectureMaS6ThreeModeHasNoSideband", ARCH.read_text(encoding="utf-8"))
         for path in ROOTS:
             content = path.read_text(encoding="utf-8")
             with self.subTest(root=str(path)):
