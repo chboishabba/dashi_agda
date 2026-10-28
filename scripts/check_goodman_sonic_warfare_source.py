@@ -49,6 +49,12 @@ def check() -> None:
     for marker in [
         "10.7551/mitpress/7999.001.0001",
         "goodmanSources",
+        "soundscapeComparatorSources",
+        "zhangContextReview2025",
+        "guoUrbanSoundscape2026",
+        "isoNonAcousticContext2025",
+        "isoSoundscapeAnalysis2025",
+        "soundscapeComparatorsCannotPromote",
         "goodmanSnowballRole",
         "goodmanCitationDoesNotImportProof",
         "sourceCitationDoesNotPromote",
@@ -182,6 +188,17 @@ def check() -> None:
             "full observer must cover each of the sixteen ordered world pairs")
     require("Observer.strictPairRefinement" in transport,
             "T4 strict refinement must delegate to its original owner")
+    # Comparator source identities and research/standard roles are explicit.
+    for marker in (
+        "10.1121/10.0036882",
+        "10.1038/s42949-026-00482-2",
+        "ISO/TS 16755-1:2025",
+        "ISO/TS 12913-3:2025",
+    ):
+        require(marker in module and marker in doc,
+                f"independent soundscape source not tracked in atlas and documentation: {marker}")
+    require("Attr.attributedSourceAtlasReceiptNonPromoting" in module,
+            "comparator sources cannot claim proof or empirical authority")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
