@@ -1488,3 +1488,12 @@ Ibrahim Monster 3B, zeta/RH, 2I, or acoustic
 lab data is reassigned. This source proof
 is NOT an Agda kernel, smooth embedding
 or physical verification receipt.
+
+
+## 2026-10-28 new exact source transport: ALL n-sign-orbits = (n+1)-word S3 equality classes
+
+A genuinely productive reuse across #1244 and #1275 removes the earlier numerical-coincidence interpretation of ranks `1,2,5,14,41,122,365,...`. The new #1244 `AlexanderHornedS3WordSignOrbitTransportExact.agda` fixes the FIRST label of a named `n+1`-letter word as an anchor and maps its remaining n labels to differences modulo 3. A simultaneous global **C3** relabel of all named values is annihilated by this relative-coordinate map, while global value reflection induces the simultaneous **C2 sign** inversion of those relative coordinates. Conversely, agreement of two normalized words up to C2 sign yields an explicit global affine-S3 transformation (translation or translated reflection) carrying one word to the other. Source terms `signedOrbitToGlobalS3` and `globalS3ToSignedOrbit` establish both relations. This gives the ACTUAL orbit-set equivalence `T^(n+1)/S3_value ≅ T^n/C2_sign`, not a same-cardinality weld.
+
+The standard combinatorial result is therefore `r_n = Σ_{k=1}^{min(3,n+1)} S(n+1,k) = (3^n+1)/2`. The #1275 original restricted-growth string/equality-pattern orbit owner is the receiver; the #1244 `H=C3_sector×C2_sign` reduced address orbit is the source of the signed n-trit carrier. The normalization requires a CHOSEN first-token anchor, and it transports **orbit sets**, not the full raw S3 action onto the existing raw address sector/sign action, uniform measures, IID nonuniform Zipf probabilities, topology, or spin. The extra sixth C3 field still must be independent for 729.
+
+Independent local exhaustive Python replay covered all 9,840 words through n=7 and all 59,040 affine S3 moves, plus one explicit inverse affine witness from each named word to its chosen sign-orbit representative. Formal Agda source/TOE root/tests were committed on #1244; **Agda kernel and checked-out exact GitHub suite remain pending**. Original #1275, #1407, #1414, SSSP and Ibrahim/Monster 3B proof owners retain credit. Source explanation: `Docs/topology/AlexanderHornedInvariantCylinderDirectLimitMaxCut20261028.md`.
