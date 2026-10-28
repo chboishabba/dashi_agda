@@ -89,6 +89,72 @@ fiveWideRoundTrip (gridCube a b c) =
         ≡ gridCube a b c
     gridAll a b c rewrite gridOne a | gridOne b | gridOne c = refl
 
+------------------------------------------------------------------------
+-- Explicit cyclic Z/5 addition, so the padded index consumer computes
+-- the same residues directly from input labels, WITHOUT first observing
+-- their full Z^3 sum. This is finite GROUP CONVOLUTION incidence.
+------------------------------------------------------------------------
+
+fiveGroupAdd : I.FiveGridMode → I.FiveGridMode → I.FiveGridMode
+fiveGroupAdd I.gridZero x = x
+fiveGroupAdd I.gridMinusTwo I.gridMinusTwo = I.gridPlusOne
+fiveGroupAdd I.gridMinusTwo I.gridMinusOne = I.gridPlusTwo
+fiveGroupAdd I.gridMinusTwo I.gridZero = I.gridMinusTwo
+fiveGroupAdd I.gridMinusTwo I.gridPlusOne = I.gridMinusOne
+fiveGroupAdd I.gridMinusTwo I.gridPlusTwo = I.gridZero
+fiveGroupAdd I.gridMinusOne I.gridMinusTwo = I.gridPlusTwo
+fiveGroupAdd I.gridMinusOne I.gridMinusOne = I.gridMinusTwo
+fiveGroupAdd I.gridMinusOne I.gridZero = I.gridMinusOne
+fiveGroupAdd I.gridMinusOne I.gridPlusOne = I.gridZero
+fiveGroupAdd I.gridMinusOne I.gridPlusTwo = I.gridPlusOne
+fiveGroupAdd I.gridPlusOne I.gridMinusTwo = I.gridMinusOne
+fiveGroupAdd I.gridPlusOne I.gridMinusOne = I.gridZero
+fiveGroupAdd I.gridPlusOne I.gridZero = I.gridPlusOne
+fiveGroupAdd I.gridPlusOne I.gridPlusOne = I.gridPlusTwo
+fiveGroupAdd I.gridPlusOne I.gridPlusTwo = I.gridMinusTwo
+fiveGroupAdd I.gridPlusTwo I.gridMinusTwo = I.gridZero
+fiveGroupAdd I.gridPlusTwo I.gridMinusOne = I.gridPlusOne
+fiveGroupAdd I.gridPlusTwo I.gridZero = I.gridPlusTwo
+fiveGroupAdd I.gridPlusTwo I.gridPlusOne = I.gridMinusTwo
+fiveGroupAdd I.gridPlusTwo I.gridPlusTwo = I.gridMinusOne
+
+inputToFiveAxis : M.ThreeMode → I.FiveGridMode
+inputToFiveAxis M.modeMinus = I.gridMinusOne
+inputToFiveAxis M.modeZero = I.gridZero
+inputToFiveAxis M.modePlus = I.gridPlusOne
+
+fiveGroupMatchesTrueSignedPairSum :
+  (a b : M.ThreeMode) →
+  fiveGroupAdd (inputToFiveAxis a) (inputToFiveAxis b)
+    ≡ I.toGridFive (M.exactQuadraticModeSum a b)
+fiveGroupMatchesTrueSignedPairSum M.modeMinus M.modeMinus = refl
+fiveGroupMatchesTrueSignedPairSum M.modeMinus M.modeZero = refl
+fiveGroupMatchesTrueSignedPairSum M.modeMinus M.modePlus = refl
+fiveGroupMatchesTrueSignedPairSum M.modeZero M.modeMinus = refl
+fiveGroupMatchesTrueSignedPairSum M.modeZero M.modeZero = refl
+fiveGroupMatchesTrueSignedPairSum M.modeZero M.modePlus = refl
+fiveGroupMatchesTrueSignedPairSum M.modePlus M.modeMinus = refl
+fiveGroupMatchesTrueSignedPairSum M.modePlus M.modeZero = refl
+fiveGroupMatchesTrueSignedPairSum M.modePlus M.modePlus = refl
+
+inputToFiveGrid : I.ModeCube27 → GridCube125
+inputToFiveGrid (I.modeCube a b c) =
+  gridCube (inputToFiveAxis a) (inputToFiveAxis b) (inputToFiveAxis c)
+
+fiveGridGroupSum : GridCube125 → GridCube125 → GridCube125
+fiveGridGroupSum (gridCube a b c) (gridCube d e f) =
+  gridCube (fiveGroupAdd a d) (fiveGroupAdd b e) (fiveGroupAdd c f)
+
+fiveGridGroupSumMatchesIntegerPair :
+  (p q : I.ModeCube27) →
+  fiveGridGroupSum (inputToFiveGrid p) (inputToFiveGrid q)
+    ≡ wideToFiveGrid (exactPairOutput p q)
+fiveGridGroupSumMatchesIntegerPair
+  (I.modeCube a b c) (I.modeCube d e f)
+  rewrite fiveGroupMatchesTrueSignedPairSum a d
+        | fiveGroupMatchesTrueSignedPairSum b e
+        | fiveGroupMatchesTrueSignedPairSum c f = refl
+
 pairOutputFivePointRecovered :
   (p q : I.ModeCube27) →
   fiveGridToWide (wideToFiveGrid (exactPairOutput p q))
@@ -197,7 +263,8 @@ fiveGridPairContribution :
 fiveGridPairContribution target amplitude (p , q) =
   weightIf
     (eqWideCube
-      (fiveGridToWide (wideToFiveGrid (exactPairOutput p q)))
+      (fiveGridToWide
+        (fiveGridGroupSum (inputToFiveGrid p) (inputToFiveGrid q)))
       target)
     (amplitude p * amplitude q)
 
@@ -208,7 +275,8 @@ fiveGridPairContributionEqualsExact :
   fiveGridPairContribution target amplitude pair
     ≡ exactPairContribution target amplitude pair
 fiveGridPairContributionEqualsExact target amplitude (p , q)
-  rewrite pairOutputFivePointRecovered p q = refl
+  rewrite fiveGridGroupSumMatchesIntegerPair p q
+        | pairOutputFivePointRecovered p q = refl
 
 sumPairWeights :
   (pairs : List Pair729) → (weight : Pair729 → Nat) → Nat
