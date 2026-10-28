@@ -308,6 +308,63 @@ proving the universal Agda statement.
 | G07 | Independent review of analytic proof, if any, and its input hypotheses | N/R: no analytic proof exists to review yet |
 | G08 | All original authors / dated primary sources / PR proof ownership preserved | P: source genealogy and ownership documented; keep review active |
 
+## 2026-10-28 local Python max-cut: 14 rules / 10 factors / 15 SSP carriers
+
+This continuation corrected an earlier **factual attribution/count error**.
+The 15/14,15/2 variant recorded by Richard K. Guy (1983) contains
+**14 ordered fractions**. The alternate 15/2,1/7 Conway (1987)
+presentation ALSO contains **14 ordered fractions**. See original
+Conway FRACTRAN paper and OEIS A202138, A007546 and A203907.
+The typed `SignedSSPFRACTRANWeaveExact` atlas independently contains
+**15 carrier primes**, not 14 rules. Of those 15 prime constructors,
+the Guy programme requires **exactly ten distinct factors**:
+2,3,5,7,11,13,17,19,23,29.
+
+`DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact` source-writes
+each Guy fraction as a product of actual existing SSPPrime constructors
+for numerator and denominator. The theorem
+`typedFractionsAreExactGuyFourteen` asks Agda to prove the resulting
+ordered list definitionally equals all 14 historical numeric fractions.
+`guyProgrammeRuleCountIsFourteen`,
+`primegameUsesTenTypedCarriers` and
+`originalSSPAtlasHasFifteenTypedCarriers` keep all three counts
+explicit without creating new register primes or new "proven" output
+prime theorems. The module is wired into all three TOE facades and
+is **Agda source-written, kernel pending**.
+
+`scripts/check_primegame_ssp15_valuation_bisimulation_local.py`
+reuses the existing 14-rule Python fixture and compares integer
+FRACTRAN to a ten-prime valuation vector. The independently executed
+local Python equivalent (20,000 steps; all 14 rules observed) verified
+priority guard equivalence, exact successor exponent updates, 20,001
+integer reconstructions, and nine prime-exponent marker events at
+published steps 19,69,280,707,2363,3876,8068,11319,19201.
+This is finite evidence only, **not** C02's universal Agda lemma,
+and not C04/C05 machine-completeness or the actual signed runtime.
+
+`DASHI.Arithmetic.FiniteTwinSieveNoPromotionExact` additionally
+derives, for every finite certified prime-axis list and every lower
+bound N, an actual `n≥N` surviving all pair filters with separate
+`¬Prime(n)` and `¬Prime(n+2)` certificates. This refutes a claimed
+general implication `AllPairSurvive → TwinPrimeAt` even eventually.
+The proof reuses the already-written universal double-Composite
+constructor rather than restating primality or making a new sieve.
+Exact-head Agda typechecking remains unperformed.
+
+Local symbolic Python/SymPy expansion proved the factor identities,
+and seeded integer testing verified **2,703 cases across 159 finite
+prime-modulus lists**, including repeated moduli, p=2 and empty lists.
+All local checks are independent computational evidence, not kernel
+receipts or arithmetic distribution theorems. The x/y/z geometry
+remains `3×3×3=27`; 13 antipodal pairs + centre retain prior owners;
+Monster 3B/4B and Ibrahim prior attribution remain unchanged.
+
+**Remaining frontier:** fully general source-Agda integer↔valuation
+one-step equivalence, exact first-applicable signed-SSP compiler and
+reachable outputs, arithmetic CRT inverse, and a genuine joint
+prime-pair distribution estimate. Neither a 14-rule enumeration
+nor an SSP15 codec establishes infinitely many twin primes.
+
 ## Critical dependency DAG
 
 ```text
