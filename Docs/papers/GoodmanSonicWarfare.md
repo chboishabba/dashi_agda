@@ -243,3 +243,39 @@ The finite regression now includes **15** bounded factorisation checks: 6 origin
 **Pareto next cut:** Stop adding semantic wrappers. Compile the two owner modules and the canonical TOE roots in the pinned Agda environment, repair any actual type errors and preserve their original proof ownership. External calibrated acoustics/soundscape research can proceed independently and must not be smuggled in as a completed theorem. CI scheduling is not part of this continuation.
 
 **Physical meaning:** These examples prove no anomalous acoustic force and no universal sound-to-fear law. They justify a disciplined experimental model that keeps onset phase, exposure, recipient context and causal intervention assumptions distinct, and uses independent measured observations to decide which coordinates actually improve out-of-sample inference.
+
+## T1 / P1 continuation — a concrete finite source-transport-observer instance
+
+**New application owner:** `DASHI.Culture.GoodmanSonicWarfareTransportExact`.
+
+The module now actually instantiates `DASHI.Physics.ObserverConditionedTransportBridge.TransportSystem` with:
+
+- `ToySoundSource`: off / on.
+- `ToySoundField`: transmitting or absorbing, each with source off or on.
+- `ToyMicrophone`: one selected receiver.
+- `ToyReceived`: silent / signal.
+
+The source-update map has all eight cases. The observer readout has all four field cases. An active source behind an idealised absorbing path and an inactive source behind a transmitting path both give a **silent** receiver readout in this finite fixture. Their source-activity states differ.
+
+**Exact source-written consequences using the inherited owners:**
+
+1. `receiverProjectionAdequateForReceiverQuestion`: this microphone sample adequately answers its **own** sample query.
+2. `sameReceiverReadoutCannotRecoverEmitterActivity`: its one-bit reading is insufficient to determine **every** source-activity query across the model states. This uses the existing query adequacy/non-factorability theorem, not an invented general theorem.
+3. `sameSampleAtSelectedObserver`: reuse `Transport._≈[_]_` to witness observer equivalence without physical/source identity.
+4. `toySourceOnVsOffObservable` and `toySourceOnProducesSignalInTransmittingCase`: exact constructor reductions of the toy source update, **not** an attenuation estimate or wave-equation solution.
+
+This is not a theorem that real rooms behave as a perfect absorber or that a particular frequency is undetectable. Real acoustic propagation requires calibrated waveform, frequency, geometry, attenuation, scattering, microphone response, background and uncertainty. A receiver's silence alone cannot license a claim about the absence of a physically active source without such a validated forward model.
+
+The independent finite regression now covers **17** factorisation checks, including two observer/source transfer cases. Eight transition-table checks and the transmittance/absorption contrasts are additional executable assertions, not independent Agda theorems. Static checks require all finite cases and the inherited transport owner.
+
+### Physical frontier and final attribution cut
+
+The Goodman/ISO soundscape connection supports three clearly separate and ordered scientific questions:
+
+- **Physics forward problem:** given an acoustic source, geometry, medium and instrument, can a calibrated forward operator predict a held-out microphone trace?
+- **Physics inverse problem:** for given observations, which source and medium hypotheses remain indistinguishable, and which additional sensor/position/source calibration would split them?
+- **Perception/causal problem:** for given received sound and measured context, can a tested predictor generalise to new people/settings, and which causal assumptions or feasible, safe interventions justify stronger effects?
+
+Only the third is about human outcomes. The first two do not require a subjective or unsafe exposure to be useful. These are distinct from the speculative Kozyrev apparatus in open PR #1404, and from externally owned Monster/Ibrahim representation results.
+
+**Pareto finish condition:** The source, typed claim, rhythm, finite causal, transport and snowball constructions are sufficient as a candidate *formal framework*. No further semantic satellites should be added unless a measured discriminator, a kernel error or a genuinely new theorem demands one. Agda kernel execution is still missing; source readback/finite evaluation does not discharge that debt. CI is intentionally not treated as the focus of this continuation.
