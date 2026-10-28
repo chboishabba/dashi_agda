@@ -23,6 +23,12 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.SignedSSPPrimeEmitterTraceTransportExact as PrimeTraceBridge
+open PrimeTraceBridge public using
+  ( traceSimulation
+  ; transportReferencePrimeEmitter
+  )
+
 import DASHI.Arithmetic.SignedSSPBidirectionalNeighbourExact as SignedNeighbourBidi
 open SignedNeighbourBidi public using
   ( plusCodeIsMinusAdmissible
