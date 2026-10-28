@@ -407,6 +407,24 @@ toeParticipantDvPConservesBothLegs :
 toeParticipantDvPConservesBothLegs =
   DashiTradeTax.aggregateNetPositionsRespectGrossCashAndSecurityTotals
 
+-- Conditional no-phantom-financial-wealth result for a matched
+-- cash/debt borrowing receipt. No lending feasibility or market observation.
+toeBorrowingMustMatchNewDebt :
+  (loan : DashiTradeTax.MatchedBorrowingBalance) →
+  DashiTradeTax.debtAfterBorrowing loan ≡
+    DashiTradeTax.cashBorrowed loan + DashiTradeTax.debtBeforeBorrowing loan
+toeBorrowingMustMatchNewDebt =
+  DashiTradeTax.loanProceedsIncreaseLiabilities
+
+toeBorrowingDoesNotByItselfIncreaseCashLessDebt :
+  (loan : DashiTradeTax.MatchedBorrowingBalance) →
+  DashiTradeTax.cashAfterBorrowing loan ∸
+    DashiTradeTax.debtAfterBorrowing loan
+    ≡ DashiTradeTax.cashBeforeBorrowing loan ∸
+        DashiTradeTax.debtBeforeBorrowing loan
+toeBorrowingDoesNotByItselfIncreaseCashLessDebt =
+  DashiTradeTax.borrowedCashDoesNotByItselfRaiseNetCashMinusDebt
+
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
 -- observed, exact-head compiler run. No ESD imports are changed.
