@@ -93,7 +93,8 @@ fiveGridContribution ops f g target (p , q) =
   choose (CoefficientOps.zero ops)
     (Full.eqWideCube
       (Full.fiveGridToWide
-        (Full.wideToFiveGrid (Full.exactPairOutput p q)))
+        (Full.fiveGridGroupSum (Full.inputToFiveGrid p)
+          (Full.inputToFiveGrid q)))
       target)
     (CoefficientOps.multiply ops (f p) (g q))
 
@@ -115,7 +116,8 @@ fiveGridTermIsTrueFullTerm :
   fiveGridContribution ops f g target pair
     ≡ exactContribution ops f g target pair
 fiveGridTermIsTrueFullTerm ops f g target (p , q)
-  rewrite Full.pairOutputFivePointRecovered p q = refl
+  rewrite Full.fiveGridGroupSumMatchesIntegerPair p q
+        | Full.pairOutputFivePointRecovered p q = refl
 
 trueBilinearConvolutionAt :
   ∀ {A : Set} → (ops : CoefficientOps A) →
