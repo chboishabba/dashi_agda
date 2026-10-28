@@ -397,8 +397,16 @@ def test_369_trialectic_numeric_role_maxcut() -> None:
     # Three 27-cell factors have 27^3 = 3^9 = 19,683 carriers.
     trialectic_3_cell_count = len(policy_cube) ** 3
     assert trialectic_3_cell_count == 19683
-    # For each pair of structured x/y cells, 27 distinct z cells persist.
-    assert len(policy_cube)**2 * len(policy_cube) == trialectic_3_cell_count
+    # Enumerate the complete 19,683-state fabric, not only its cardinality.
+    full_fabric = tuple(product(policy_cube, repeat=3))
+    assert len(full_fabric) == trialectic_3_cell_count
+    # For each one of 729 (x-cell,y-cell) pairs, all 27 z cells remain.
+    xy_to_z = {}
+    for x_cell, y_cell, z_cell in full_fabric:
+        xy_to_z.setdefault((x_cell, y_cell), set()).add(z_cell)
+    assert len(xy_to_z) == 729
+    assert all(available_z == set(policy_cube)
+               for available_z in xy_to_z.values())
 
     gates = ("A05", "C09", "E07", "F07", "H08")
     ternary_annotation_profiles = tuple(product(digits, repeat=len(gates)))
