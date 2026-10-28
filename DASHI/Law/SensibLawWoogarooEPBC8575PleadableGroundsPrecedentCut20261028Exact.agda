@@ -13,6 +13,7 @@ import DASHI.Law.SensibLawWoogarooEPBC8575CumulativeImpactSufficiencyExact as Cu
 import DASHI.Law.SensibLawWoogaroo9281Condition6aEvidenceStateExact as Condition
 import DASHI.Law.SensibLawWoogarooStandingTimeInterimCounselTriage20261027Exact as Counsel
 import DASHI.Law.SensibLawWoogarooEPBC95C135ADecisionFileMaxCut20261027Exact as File
+import DASHI.Law.SensibLawWoogarooPostApprovalPoliticalGasBenefit20261027Exact as Post
 
 ------------------------------------------------------------------------
 -- EPBC 2019/8575 LITIGATION GROUND / COUNTERGROUND CUT.
@@ -164,7 +165,7 @@ actionImpactGround : CaseHypothesis
 actionImpactGround = case-hypothesis actionBaselineError eccq2024FullCourtPrimary documentedPrimaryIssueOnly
   "Assess THIS Springview clearing's marginal impact on locally diminished koala habitat, not union of all surrounding developments as consequences under s136(2)(e)."
   "Final PD Item 4.6(c) analysis, 2022 approved advice, expert before/after habitat function, s95C/reasons and direct/indirect causation, plus materially missed statutory item."
-  "Tarkine 2015 and ECCC 2024 limit free-standing regional cumulative duty; mapping/baseline may be sufficient if decision genuinely addressed the action's relevant effects."
+  "Tarkine 2015 and ECCC 2024 limit free-standing regional cumulative duty. Stockland publicly says retained corridors are three times the local planning minimum, staged fauna management applies, and scat/surveys do not show a large resident colony. These are publisher claims to test against the actual government decision and ecological originals."
   "Signed file gives action-specific ecological baseline, local connectivity analysis, reasoned findings and lawful offset/mitigation treatment."
   false refl
 
@@ -225,6 +226,11 @@ canonicalCondition6aAcceptance = Condition.condition6aCouncilAcceptance
 canonicalStandingUnpaid : Counsel.LitigationGate
 canonicalStandingUnpaid = Counsel.organisationStanding
 
+-- Developer's own countercase is retained as original publisher claim,
+-- not as verified regulator ecological conclusion or registered land title.
+canonicalStocklandFirstPartyDefence : Source.AttributedSource
+canonicalStocklandFirstPartyDefence = Post.stocklandSpringview
+
 canonicalSecretaryReportUnpaid : File.DecisionFileReceipt
 canonicalSecretaryReportUnpaid = File.section95CRecommendation
 
@@ -238,6 +244,7 @@ data AbsenceFromPublicPortalProvesSecretaryOmittedDocument : Set where
 data GovernmentTransitionWebpageAloneProvesEveryOldMeritsProvision : Set where
 data 2025DismissedWindFarmCaseProvesSpringviewApprovalValid : Set where
 data SevenSourceWrittenGroundsAreFiledCourtPleadings : Set where
+data DeveloperFAQEqualsCommonwealthScientificFinding : Set where
 
 regionalHarmNotOwnProjectImpact :
   RegionalHarmSumEqualsLegallyRequiredProjectImpact → ⊥
@@ -274,3 +281,7 @@ differentWindFarmDoesNotDecideWoogaroo ()
 sourceHypothesesNotFiled :
   SevenSourceWrittenGroundsAreFiledCourtPleadings → ⊥
 sourceHypothesesNotFiled ()
+
+developerClaimNotRegulatorFinding :
+  DeveloperFAQEqualsCommonwealthScientificFinding → ⊥
+developerClaimNotRegulatorFinding ()
