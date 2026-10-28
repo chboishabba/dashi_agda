@@ -566,6 +566,15 @@ open DashiTradeTax public using
   ; finiteAxisSumStrict
   ; strictImprovedAxisFromFiniteCoverage
   ; finiteParetoFrontierIsNonempty
+  ; DvPBatchDisposition
+  ; SourceLinkedFinalSettlement
+  ; ExternallyAdmittedSaleTaxRoute
+  ; settlementProvenanceAndSecurityMatch
+  ; validatedSaleProceedsCannotSkipSettlementAndTaxChronology
+  ; CombinedReformIdentificationWorld
+  ; jointReformReceiptCannotIdentifyIsolatedWealthTaxEffect
+  ; AssessedOwnerAllocationWorld
+  ; assetValueDoesNotIdentifyTaxpayerBeneficialShare
   ; FundingTokenAbsent
   ; UniqueFundingTokens
   ; finiteFundingPartitionConservesUnits
@@ -725,4 +734,38 @@ toeCanonicalSourcesFundExactlyOneJoinedRoute :
       + DashiTradeTax.executionCashCost (DashiTradeTax.samePaymentRoute weld)
 toeCanonicalSourcesFundExactlyOneJoinedRoute =
   DashiTradeTax.canonicalFundingBatchExactlyFundsTaxPaymentAndFees
+
+-- Operator-source distinction: a CHESS transaction can be due, backed
+-- out or completed. The institution's documented mechanics do not
+-- certify the final state of a particular transaction.
+toeDueTradeIsNotSettled :
+  DashiTradeTax.dueForSettlement
+    ≡ DashiTradeTax.completedIrrevocableDvP → ⊥
+toeDueTradeIsNotSettled = DashiTradeTax.dueDoesNotProveActualDvP
+
+toeBackedOutTransactionIsNotSettled :
+  DashiTradeTax.backedOutAndRescheduled
+    ≡ DashiTradeTax.completedIrrevocableDvP → ⊥
+toeBackedOutTransactionIsNotSettled =
+  DashiTradeTax.backedOutDoesNotProveActualDvP
+
+-- ASX / RBA source-role ownership is independent from a particular
+-- broker's, issuer's, RITS provider's or custodian's actual receipt.
+
+-- Ring 2026 studies joint reforms; the joint outcome projection cannot
+-- by itself recover a wealth-tax-only counterfactual.
+toeJointReformOutcomeDoesNotIdentifySingleTaxEffect :
+  INF.FactorsThrough
+    DashiTradeTax.postJointReformOutcome
+    DashiTradeTax.wealthTaxOnlyCounterfactualOutcome → ⊥
+toeJointReformOutcomeDoesNotIdentifySingleTaxEffect =
+  DashiTradeTax.jointReformReceiptCannotIdentifyIsolatedWealthTaxEffect
+
+-- Asset value alone has no taxpayer-level beneficial-ownership field.
+toeAssetValueDoesNotIdentifyBeneficialShare :
+  INF.FactorsThrough
+    DashiTradeTax.sameGrossAssetValuation
+    DashiTradeTax.ownerAttributedAssets → ⊥
+toeAssetValueDoesNotIdentifyBeneficialShare =
+  DashiTradeTax.assetValueDoesNotIdentifyTaxpayerBeneficialShare
 
