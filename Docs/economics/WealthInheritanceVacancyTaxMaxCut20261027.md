@@ -417,3 +417,28 @@ The standalone [dashiTRADE PR #3](https://github.com/chboishabba/dashiTRADE/pull
 The strongest physical implication remains conditional: ownership, legal voting control, debt funding, execution costs and productive plant stock are distinct. Financial tax payment and legal share settlement can occur without any construction or destruction of machines, while control may change depending on the precise transferred rights. Without external same-actor/time matched data, no estimate of actual output, employment, energy, caregiving or price change is licensed.
 
 Original sources: ASIC shareholder-rights rules, AASB 10 accounting control rules, and SGX dual-class listing rules retain their own jurisdiction-specific authority and dates, cited separately above. New financial study mechanisms (Fagereng/Guiso/Ring 2026, Kim 2026, Bianchi et al. 2026) retain their original authors and independent populations. No numeric coincidence, Ibrahim knowledge-graph link or Monster 3B analogy manufactures company-control proof.
+
+## 16. Cash settlement and temporal provenance (28 October 2026)
+
+After the earlier paid-tax-versus-sale-volume and share-class max-cuts, an exact same-object weakness remained: a gross asset-sale amount and two share units were present without a witnessed breakdown of orders, individual fills, unit prices and **cash settlement**. The original fixture sold two units for gross proceeds three. Its construction did not imply a single uniform whole-number price.
+
+The **existing** WealthTaxDashiTradeMarketMaterialBidiExact Agda owner now adds an optional TwoFillSettlementLink. It requires:
+- intended order volume = two executed fill volumes + unfilled remainder;
+- each executed fill = settled quantity + unsettled remainder;
+- settled share quantity = the already-balanced funding route's sold unit count;
+- gross settled proceeds = sum of the two settled-unit counts times their independently stated unit prices.
+
+Two bounded worlds have *identical two-unit submitted orders*: submittedWithoutFill settles zero shares and uses available cash, whereas twoPricesThreeProceeds settles two distinct one-unit fills at prices 1 and 2, producing gross proceeds 3. An executedUnsettled world has two executed but **zero settled** units. These are two reused INF nonfactorability cases: submittedOrderDoesNotDetermineSettlement and executionDoesNotDetermineSettlement. They do not create broker authority or general price impact.
+
+A separate MatchedSettlementTaxChronology structure requires an explicit nonnegative forward lag between the separately observed final sale-settlement epoch and tax cash-collection epoch. The source-written finite contradiction priorCashReceiptHasNoForwardSettlementLink rejects modelling a tax payment at epoch 1 as funded directly by settled cash arriving at epoch 3, **unless an independently sourced alternative funding route is specified**. The epochs are model counters, not automatically venue business days or historical transaction data. The positive accounting statement twoFillCashConservation remains conditional on the stated finite fill receipts.
+
+The existing TOE consumer now re-exports these source-owned examples; the 42-topic guard requires the named owner symbols. The new Agda text has **not been typechecked with an Agda kernel** in this environment. The latest exact GitHub trade adapter and tests have been reproduced locally with **26/26 passing isolated Python tests**, not a live order or a tax authority record.
+
+Original independently dated institutional authorities distinguish the jurisdictions:
+
+- [ASX Clearing and Settlement / CHESS](https://www.asx.com.au/markets/clearing-and-settlement-services/asx-settlement): Australian cash-equity T+2 settlement and delivery versus payment. Registered title and cash move together when CHESS settles; this does not set an observed rate for a specific share.
+- [SEC T+1 final rule (15 February 2023)](https://www.sec.gov/rules-regulations/2023/02/34-96930) and [May 2024 implementation](https://www.sec.gov/newsroom/press-releases/2024-62): US standard shorter-cycle settlement since 28 May 2024, not the same Australian settlement service.
+- [ASIC, Shareholder rights and responsibilities](https://www.asic.gov.au/for-business-and-companies/companies/company-share-and-shareholder-rules-and-changes/shareholder-rights-and-responsibilities): share classes, constitutions and meeting-vote rules remain separate from price or count alone.
+- [Fagereng/Guiso/Ring (May 2026)](https://www.nber.org/papers/w35262): slow Norwegian investor portfolio adjustments after a tax-induced equity premium shock, not a timed forced-sale tax settlement or a 100% cap experiment.
+
+**Physical implication and current wall:** The hard step is not a further theorem about order IDs. It is obtaining *same-actor, same-instrument, same-jurisdiction, event-time-matched* taxation and custody documents that connect valuation, assessment, cleared funding, ownership-right transfer and downstream physical service or capital production. Source-written finite receipts are a method for checking such a join, not substitutes for its source data. Historical intellectual original authors, independent DASHI proof authors, standalone dashiTRADE runtime authors, and previously owned Ibrahim Monster 3B results remain separate attribution classes. No ESD module or specialist TOE root is modified.
