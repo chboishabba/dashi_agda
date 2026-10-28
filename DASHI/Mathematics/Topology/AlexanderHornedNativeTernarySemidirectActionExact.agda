@@ -178,6 +178,62 @@ semidirectSectorAssociativity :
 semidirectSectorAssociativity a b c =
   C3.associative (sectorRotation a) (sectorRotation b) (sectorRotation c)
 
+
+------------------------------------------------------------------------
+-- Refine the WHOLE semidirect actor along the established injective
+-- fibre-group pullback while keeping the external sector unchanged.
+------------------------------------------------------------------------
+
+refineSymmetry :
+  ∀ n → FieldSymmetry n → FieldSymmetry (suc n)
+refineSymmetry n (fieldSymmetry g r) =
+  fieldSymmetry (Native.pullback n g) r
+
+refineSymmetrySectorUnchanged :
+  ∀ n (a : FieldSymmetry n) →
+  sectorRotation (refineSymmetry n a) ≡ sectorRotation a
+refineSymmetrySectorUnchanged n a = refl
+
+refineSymmetryPreservesMultiplication :
+  ∀ n (a b : FieldSymmetry n)
+  (x : End.BalancedLevel (suc n)) →
+  localRotation (refineSymmetry n (combineSymmetry a b)) x
+  ≡ localRotation
+       (combineSymmetry (refineSymmetry n a)
+                        (refineSymmetry n b)) x
+refineSymmetryPreservesMultiplication n
+  (fieldSymmetry g r) (fieldSymmetry h s) x =
+  trans
+    (Native.pullbackMultiplication n g (sectorAction n r h) x)
+    (cong
+      (λ t → C3._∙_ (Native.pullback n g x) t)
+      (sectorActionPullbackSquare n r h x))
+
+refineSymmetryPreservesAction :
+  ∀ n (a : FieldSymmetry n) (f : Field n)
+  (x : End.BalancedLevel (suc n)) →
+  Native.pullback n (actOnField a f) x
+  ≡ actOnField (refineSymmetry n a) (Native.pullback n f) x
+refineSymmetryPreservesAction n (fieldSymmetry g r) f x =
+  trans
+    (Native.pullbackMultiplication n g (sectorAction n r f) x)
+    (cong
+      (λ t → C3._∙_ (Native.pullback n g x) t)
+      (sectorActionPullbackSquare n r f x))
+
+refineSymmetryFaithful :
+  ∀ n (a b : FieldSymmetry n) →
+  ((x : End.BalancedLevel (suc n)) →
+    localRotation (refineSymmetry n a) x
+    ≡ localRotation (refineSymmetry n b) x) →
+  sectorRotation (refineSymmetry n a)
+    ≡ sectorRotation (refineSymmetry n b) →
+  ((x : End.BalancedLevel n) →
+    localRotation a x ≡ localRotation b x)
+refineSymmetryFaithful n a b pointwiseEqual sectorEqual =
+  Native.pullbackInjective n (localRotation a) (localRotation b)
+    pointwiseEqual
+
 -- These named operations are on finite-depth C3 fields; their direct
 -- limit equals the locally constant continuous group only after an
 -- independent compact-clopen factorization/colimit proof.
