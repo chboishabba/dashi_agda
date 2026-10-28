@@ -23,6 +23,7 @@ import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as ExternalIden
 import DASHI.Economics.SourceAttributionPromotionBoundaryExact as Sources
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
+import DASHI.Core.ParetoSymmetryQuotientAdmissionExact as ParetoSym
 import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact as Base
 import DASHI.Economics.WealthTaxPowerCareSociologyBidi20261027Exact as Soc
 import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact as Fiscal
@@ -827,9 +828,9 @@ toeParetoDominanceImpliesNoHigherTotalCost =
 -- prohibit a label swap between the two original incomparable options.
 -- This is stronger than the mere collision of their unweighted totals.
 toeAdmittedParetoSymmetryCannotSwapPolicyRoles :
-  (symmetry : DashiTradeTax.ParetoSym.ParetoOrderAutomorphism
+  (symmetry : ParetoSym.ParetoOrderAutomorphism
     DashiTradeTax.policyTradeoffCosts) →
-  DashiTradeTax.ParetoSym.mapModel symmetry
+  ParetoSym.mapModel symmetry
     DashiTradeTax.lowAdministrativeCost
     ≡ DashiTradeTax.increasedCareCapacity → ⊥
 toeAdmittedParetoSymmetryCannotSwapPolicyRoles =
