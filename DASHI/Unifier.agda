@@ -50,6 +50,11 @@ open NumerologyBoundary public using
   ; fullSignedCubeRoundTrip
   ; nineAxisGroupingIsThreeCartesianCubes
   ; threeToFifthDoesNotEqualFiveCubed
+  ; twinFivePointRepresentsFive
+  ; nonTwinTwentyPointRepresentsTwenty
+  ; samePhaseOrbitForFiveAndTwenty
+  ; ibrahimPhaseOrbitLosesTwinPrimeAnswer
+  ; cannotDecideTwinFromThreeTimesFivePhaseAlone
   )
 
 import DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact as PrimegameCarrierSupport
