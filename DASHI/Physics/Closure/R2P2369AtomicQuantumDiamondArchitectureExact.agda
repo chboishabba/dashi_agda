@@ -7,6 +7,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
+import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as Bias
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
 import DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge as SI
 import DASHI.Physics.Closure.QuantumClockSuperpositionReceipt as Superposition
@@ -440,6 +441,9 @@ record R2P2369FullLogicalArchitecture : Set where
     sourceBoundary : R2P2.R2P2ClockComparisonBoundary
     sourceBoundaryCanonical :
       sourceBoundary ≡ R2P2.canonicalR2P2ClockComparisonBoundary
+    biasIdentifiability : Bias.R2P2BiasIdentifiabilityMaxCut
+    biasIdentifiabilityCanonical :
+      biasIdentifiability ≡ Bias.canonicalR2P2BiasIdentifiabilityMaxCut
     workflow : ClockPipelinePath
     workflowCanonical : workflow ≡ canonicalClockPipelinePath
     atoms : AtomicClockIdentities
@@ -483,6 +487,8 @@ canonicalR2P2369FullLogicalArchitecture = record
   ; videoCanonical = refl
   ; sourceBoundary = R2P2.canonicalR2P2ClockComparisonBoundary
   ; sourceBoundaryCanonical = refl
+  ; biasIdentifiability = Bias.canonicalR2P2BiasIdentifiabilityMaxCut
+  ; biasIdentifiabilityCanonical = refl
   ; workflow = canonicalClockPipelinePath
   ; workflowCanonical = refl
   ; atoms = canonicalAtomicClockIdentities
@@ -544,3 +550,17 @@ fullArchitectureDoesNotIngestMeasurements :
   externalMeasurementsIngested canonicalR2P2369FullLogicalArchitecture ≡ false
 fullArchitectureDoesNotIngestMeasurements =
   measurementsNotIngested canonicalR2P2369FullLogicalArchitecture
+
+-- A single synthetic height does not identify a slope independently of a
+-- nuisance bias. Two selected finite heights separate this candidate pair.
+fullArchitectureReusesBiasAmbiguity :
+  Bias.syntheticRate Bias.baselineWithLargeBias 3
+  ≡ Bias.syntheticRate Bias.doubledSlopeWithSmallBias 3
+fullArchitectureReusesBiasAmbiguity =
+  Bias.oneHeightCannotDiscriminate
+
+fullArchitectureReusesSecondHeightDiscriminator :
+  Bias.syntheticRate Bias.baselineWithLargeBias 9
+  ≡ Bias.syntheticRate Bias.doubledSlopeWithSmallBias 9 → Bias.⊥
+fullArchitectureReusesSecondHeightDiscriminator =
+  Bias.secondHeightDiscriminatesTheseCandidates
