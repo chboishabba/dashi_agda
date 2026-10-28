@@ -139,6 +139,13 @@ def validate_position_completeness(positions):
     counts = {sc: sum(sc0 == sc for sc0, _ in observed) for sc in expected_counts}
     if counts != expected_counts:
         raise ValueError("source-position counts differ from MIRACLE version 4")
+    # The HDF5 inspector assigns source IDs from positional array indices.
+    # A substitute arbitrary label must not satisfy mere cardinality.
+    for sc, count in expected_counts.items():
+        actual_ids = {position_id for scenario, position_id in observed if scenario == sc}
+        expected_ids = {str(index) for index in range(count)}
+        if actual_ids != expected_ids:
+            raise ValueError(f"{sc} has missing or substituted source indices")
     return counts
 
 
