@@ -1,4 +1,6 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+import DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact as R2P2369
+import DASHI.Foundations.Base369BinaryTernaryRefinement as RefineR2P2
 import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
@@ -1471,3 +1473,33 @@ toeR2P2NoAcceptedClockRatio :
   R2P2.fullClockComparisonUncertaintyAcceptedHere R2P2.canonicalR2P2ClockComparisonBoundary ≡ false
 toeR2P2NoAcceptedClockRatio =
   R2P2.r2p2HasNoAcceptedClockRatio
+
+------------------------------------------------------------------------
+-- R2P2 369/atomic/quantum/diamond source-typed composition.
+-- Exact finite index and graph assertions; no promoted GR/QG measurement.
+------------------------------------------------------------------------
+
+toeR2P2369Architecture :
+  R2P2369.R2P2369FullLogicalArchitecture
+toeR2P2369Architecture =
+  R2P2369.canonicalR2P2369FullLogicalArchitecture
+
+toeR2P2369RefinementDiamond :
+  RefineR2P2.binaryRefine
+    (RefineR2P2.ternaryRefine
+      RefineR2P2.phase3Resolution)
+  ≡ RefineR2P2.ternaryRefine
+      (RefineR2P2.binaryRefine
+        RefineR2P2.phase3Resolution)
+toeR2P2369RefinementDiamond =
+  R2P2369.resolutionDiamondAgrees
+
+toeR2P2369NoQGPromotion :
+  R2P2369.fullQGClaimProved toeR2P2369Architecture ≡ false
+toeR2P2369NoQGPromotion =
+  R2P2369.fullArchitectureDoesNotConstructQuantumGravity
+
+toeR2P2369NoMeasurements :
+  R2P2369.externalMeasurementsIngested toeR2P2369Architecture ≡ false
+toeR2P2369NoMeasurements =
+  R2P2369.fullArchitectureDoesNotIngestMeasurements
