@@ -10,6 +10,7 @@ module DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
+open import Data.Nat using (_≤_; _⊓_; _∸_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attributed
@@ -257,6 +258,79 @@ toeNetReceiptDoesNotDetermineGrossTrades :
     DashiTradeTax.grossSellCash → ⊥
 toeNetReceiptDoesNotDetermineGrossTrades =
   DashiTradeTax.netReceiptCannotRecoverGrossTurnover
+
+------------------------------------------------------------------------
+-- CONDITIONAL SOURCE-OWNED GENERIC MATHEMATICS (2026-10-28).
+-- An imported theorem is not an executed compiler or empirical receipt.
+------------------------------------------------------------------------
+
+toeAssessmentDayFullPaymentLeavesMinimum :
+  (threshold wealth : Nat) →
+  Base.netWealthAfterExcessTax threshold (Base.owned-net-wealth wealth)
+    ≡ wealth ⊓ threshold
+toeAssessmentDayFullPaymentLeavesMinimum =
+  Base.netWealthAfterFullyPaidExcessEqualsMin
+
+toeExcessLiabilityZeroBelowThreshold :
+  (threshold wealth : Nat) →
+  wealth ≤ threshold →
+  Base.hundredPercentWealthExcess threshold
+    (Base.owned-net-wealth wealth) ≡ zero
+toeExcessLiabilityZeroBelowThreshold =
+  Base.hundredPercentLiabilityZeroBelowThreshold
+
+toeTaxLiabilityMonotoneAtFixedThreshold :
+  (threshold : Nat) {smaller larger : Nat} →
+  smaller ≤ larger →
+  Base.hundredPercentWealthExcess threshold
+    (Base.owned-net-wealth smaller)
+    ≤ Base.hundredPercentWealthExcess threshold
+        (Base.owned-net-wealth larger)
+toeTaxLiabilityMonotoneAtFixedThreshold =
+  Base.wealthLiabilityMonotoneAtFixedThreshold
+
+toeGenericExecutedQuantityBound :
+  (receipt : DashiTradeTax.CountReconciledOrder) →
+  DashiTradeTax.executedCount receipt ≤ DashiTradeTax.submittedCount receipt
+toeGenericExecutedQuantityBound =
+  DashiTradeTax.genericExecutedCountBoundedBySubmitted
+
+toeGenericSettledQuantityBound :
+  (receipt : DashiTradeTax.CountReconciledOrder) →
+  DashiTradeTax.settledCount receipt ≤ DashiTradeTax.executedCount receipt
+toeGenericSettledQuantityBound =
+  DashiTradeTax.genericSettledCountBoundedByExecuted
+
+toeArbitraryFillCashRequiresReconciliation :
+  (batch : DashiTradeTax.CashReconciledFillBatch) →
+  DashiTradeTax.recordedGrossCash batch ≡
+    DashiTradeTax.grossFromFiniteSettledFills
+      (DashiTradeTax.settledFills batch)
+toeArbitraryFillCashRequiresReconciliation =
+  DashiTradeTax.genericSettledProceedsIsExactPriceQuantitySum
+
+toePureSellerBuyerShareCountConserved :
+  (t : DashiTradeTax.PureIssuedClassTransfer) →
+  DashiTradeTax.sellerUnitsBefore t + DashiTradeTax.buyerUnitsBefore t
+    ≡ DashiTradeTax.sellerUnitsAfter t + DashiTradeTax.buyerUnitsAfter t
+toePureSellerBuyerShareCountConserved =
+  DashiTradeTax.shareClassTransferPreservesIssuedSupply
+
+toeCapitalStockRequiresPhysicalReconciliation :
+  (period : DashiTradeTax.PhysicalCapacityPeriod) →
+  DashiTradeTax.installedAfter period ≡
+    (DashiTradeTax.installedBefore period
+      + DashiTradeTax.commissionedUnits period)
+      ∸ DashiTradeTax.retiredUnits period
+toeCapitalStockRequiresPhysicalReconciliation =
+  DashiTradeTax.physicalCapitalStockFlowConservation
+
+toeDeliveredCareCannotExceedStaffHours :
+  (service : DashiTradeTax.DeliveredCareCapacity) →
+  DashiTradeTax.actuallyDeliveredHours service ≤
+    DashiTradeTax.actualStaffHours service
+toeDeliveredCareCannotExceedStaffHours =
+  DashiTradeTax.deliveredCareHoursBoundedByStaffAndEquipment
 
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
