@@ -61,6 +61,15 @@ historicalForAgainst = Historical.epbc8575Hole
 transitionalSection139 : SavedLaw.ApplicableRule
 transitionalSection139 = SavedLaw.newPart9Sections138139
 
+-- Exact prior owners. Do not clone their Pareto, identifier, legal-atom,
+-- DOI/QID genealogy, or previously attributed scientific edges.
+canonicalParetoRoute : Pareto.CurrentParetoRoute
+canonicalParetoRoute = Pareto.currentParetoRoute
+
+canonicalIbrahimSourceCoverage : Ibrahim.WoogarooIbrahimCoverage
+canonicalIbrahimSourceCoverage = Pareto.ibrahimCoverage
+
+
 -- Formula labels are FORMAL atoms. They are not independently reviewed
 -- PNF interpretations or empirical facts. Reuse the native PNF calculus.
 premise : Case.Ground → PNF.Formula
