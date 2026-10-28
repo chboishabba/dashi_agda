@@ -64,15 +64,6 @@ representative axisSecond = T.zero , T.neg
 representative diagonal = T.neg , T.neg
 representative antiDiagonal = T.neg , T.pos
 
-orbitRepresentative : ∀ o →
-  orbit (Data.Product.proj₁ (representative o))
-        (Data.Product.proj₂ (representative o)) ≡ o
-orbitRepresentative origin = refl
-orbitRepresentative axisFirst = refl
-orbitRepresentative axisSecond = refl
-orbitRepresentative diagonal = refl
-orbitRepresentative antiDiagonal = refl
-
 -- The FULL 27-site local phase field already has a group structure.
 DepthTwoField : Set
 DepthTwoField = Fibre.PhaseField 2
