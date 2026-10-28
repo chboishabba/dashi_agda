@@ -35,7 +35,8 @@ open import Data.Empty using (⊥)
 open import Data.Product using (_,_)
 open import Data.Vec.Base using ([])
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
-import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryLocalFibreActionExact as F
+import DASHI.Mathematics.Topology.AlexanderHornedNativeTernarySemidirectActionExact as F
+import DASHI.Mathematics.Topology.AlexanderHornedNativeBalancedTernaryEndTowerExact as End
 
 -- Depth zero has exactly three sector addresses and 3^3 local gauges.
 deltaAtFirstSector : F.Gauge 0
@@ -52,31 +53,32 @@ deltaVanishesAtSecondSector :
 deltaVanishesAtSecondSector = refl
 
 rotateMovesDeltaToSecondSector :
-  F.rotateField 0 C3.c1 deltaAtFirstSector (C3.c1 , [])
+  F.sectorAction 0 C3.c1 deltaAtFirstSector (C3.c1 , [])
     ≡ C3.c1
 rotateMovesDeltaToSecondSector = refl
 
 sectorRotationIsNotTrivialOnGauges :
-  F.rotateField 0 C3.c1 deltaAtFirstSector (C3.c1 , [])
+  F.sectorAction 0 C3.c1 deltaAtFirstSector (C3.c1 , [])
     ≡ deltaAtFirstSector (C3.c1 , []) → ⊥
 sectorRotationIsNotTrivialOnGauges ()
 
 -- The local gauge subgroup is abelian (already proved pointwise).
 localGaugeSubgroupIsAbelian :
-  ∀ {n} (g h : F.Gauge n) (x : F.Level n) →
+  ∀ {n} (g h : F.Gauge n) (x : End.BalancedLevel n) →
   F.addGauge g h x ≡ F.addGauge h g x
-localGaugeSubgroupIsAbelian = F.pointwiseAddCommutative
+localGaugeSubgroupIsAbelian g h x =
+  F.commutativeC3 (g x) (h x)
 
 -- The quotient by this normal gauge subgroup is the sector C3,
 -- so its elements commute; the projection is a homomorphism.
 sectorProjectionPreservesProduct :
-  ∀ {n} (a b : F.FiniteFieldSymmetry n) →
+  ∀ {n} (a b : F.FieldSymmetry n) →
   F.sectorRotation (F.combineSymmetry a b)
   ≡ C3._∙_ (F.sectorRotation a) (F.sectorRotation b)
 sectorProjectionPreservesProduct a b = refl
 
 sectorProjectionIsAbelian :
-  ∀ {n} (a b : F.FiniteFieldSymmetry n) →
+  ∀ {n} (a b : F.FieldSymmetry n) →
   C3._∙_ (F.sectorRotation a) (F.sectorRotation b)
   ≡ C3._∙_ (F.sectorRotation b) (F.sectorRotation a)
 sectorProjectionIsAbelian a b =
@@ -84,10 +86,10 @@ sectorProjectionIsAbelian a b =
 
 -- Concrete proof of NONcommutativity at stage zero:
 -- local delta followed by sector rotation differs from the reverse.
-localFirst : F.FiniteFieldSymmetry 0
+localFirst : F.FieldSymmetry 0
 localFirst = F.fieldSymmetry deltaAtFirstSector C3.c0
 
-externalSecond : F.FiniteFieldSymmetry 0
+externalSecond : F.FieldSymmetry 0
 externalSecond = F.fieldSymmetry (F.zeroGauge 0) C3.c1
 
 firstThenSecond :
