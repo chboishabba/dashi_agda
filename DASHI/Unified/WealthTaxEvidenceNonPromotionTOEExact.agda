@@ -181,6 +181,14 @@ toeSharesSoldCannotDetermineInstalledCapacity :
 toeSharesSoldCannotDetermineInstalledCapacity =
   DashiTradeTax.saleVolumeCannotDeterminePhysicalCapacity
 
+-- Owner-registered transfer classes, not aggregate transaction count, pay
+-- the same-object voting-control inference. The finite link is synthetic.
+toeShareSaleCountDoesNotFixWeightedVoting :
+  INF.FactorsThrough
+    DashiTradeTax.routedUnitsSold DashiTradeTax.weightedOwnerVotesAfter → ⊥
+toeShareSaleCountDoesNotFixWeightedVoting =
+  DashiTradeTax.quantityCannotFixVotingControl
+
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
 -- observed, exact-head compiler run. No ESD imports are changed.
