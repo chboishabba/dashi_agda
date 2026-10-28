@@ -174,3 +174,46 @@ def majorization_heaps_path_transport_certificate(
         a, b, sampler, horizon, left, right, coupling, mass)
     certificate.validate()
     return certificate
+
+
+def finite_hall_cut_obstruction(
+    left_law: dict[Path, Fraction],
+    right_law: dict[Path, Fraction],
+    max_left_paths: int = 14,
+) -> tuple[tuple[Path, ...], tuple[Path, ...], Fraction] | None:
+    """Find a dual Hall/Strassen CUT obstructing monotone transport.
+
+    For a set A of left histories, let up(A) be the set of right histories
+    y for which some x in A satisfies x<=y at every prefix.
+    If P_left(A)>P_right(up(A)), no monotone coupling can exist.
+    The output (A, up(A), exact_positive_deficit) is independently
+    checkable; None means no violating subset was found after a FULL
+    enumeration of the capped finite support. This is the max-flow
+    min-cut dual, NOT a conjectured property of Zipf histograms.
+    """
+    if (not left_law or not right_law
+            or sum(left_law.values(), Fraction()) != 1
+            or sum(right_law.values(), Fraction()) != 1
+            or any(type(v) is not Fraction or v <= 0
+                   for law in (left_law, right_law) for v in law.values())):
+        raise ValueError("normalized, positive exact PMFs required")
+    if (type(max_left_paths) is not int or max_left_paths < 1
+            or len(left_law) > max_left_paths):
+        raise ValueError("finite dual cut exhaustive support limit exceeded")
+    left = tuple(left_law)
+    right = tuple(right_law)
+    best_deficit = Fraction()
+    best = None
+    for mask in range(1, 1 << len(left)):
+        selected = tuple(x for i, x in enumerate(left) if mask & (1 << i))
+        upward = tuple(y for y in right
+                       if any(len(x) == len(y) and
+                              all(a <= b for a, b in zip(x, y))
+                              for x in selected))
+        deficit = (
+            sum((left_law[x] for x in selected), Fraction())
+            - sum((right_law[y] for y in upward), Fraction()))
+        if deficit > best_deficit:
+            best_deficit = deficit
+            best = selected, upward, deficit
+    return best
