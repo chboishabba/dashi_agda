@@ -57,6 +57,44 @@ def kept_modes(amplitudes: tuple[int, int, int], grid: int):
     )
 
 
+
+def three_axis_27_mode_pair_audit() -> dict:
+    """Exact C3^3-vs-Z^3 incidence cut: 27² pairs in a {-1,0,1}^3 cube."""
+    cube = tuple(product(MODES, repeat=3))
+    pairs = 0
+    out_of_cube = 0
+    padded_axis_folding_errors = 0
+    exemplar = {}
+    for p, q in product(cube, repeat=2):
+        pairs += 1
+        k = tuple(a + b for a, b in zip(p, q))
+        wrap3 = tuple(centered_mod(v, 3) for v in k)
+        wrap5 = tuple(centered_mod(v, 5) for v in k)
+        if any(abs(v) > 1 for v in k):
+            out_of_cube += 1
+        if wrap5 != k:
+            padded_axis_folding_errors += 1
+        if p == (1, 0, 0) and q == (1, 0, 0):
+            exemplar = {"p": list(p), "q": list(q),
+                        "integer_sum": list(k), "folded_C3_cubed": list(wrap3)}
+    assert len(cube) == 27
+    assert pairs == 729
+    assert out_of_cube == 386
+    assert padded_axis_folding_errors == 0
+    assert exemplar["integer_sum"] == [2, 0, 0]
+    assert exemplar["folded_C3_cubed"] == [-1, 0, 0]
+    return {
+        "spatial_mode_labels": len(cube),
+        "ordered_quadratic_mode_pairs": pairs,
+        "pairs_with_at_least_one_component_outside_retained_cube": out_of_cube,
+        "pairs_entirely_inside_retained_cube": pairs - out_of_cube,
+        "five_grid_each_axis_mode_wrap_errors": padded_axis_folding_errors,
+        "example": exemplar,
+        "physical_NS_vector_projection_claimed": False,
+        "NS_time_evolution_or_Clay_claimed": False,
+    }
+
+
 def audit() -> dict:
     assert all(DECODE[CODEC[m]] == m for m in MODES)
     assert DECODE[(1, 1)] is None
@@ -105,6 +143,7 @@ def audit() -> dict:
         "reserved_binary_codeword_rejected": True,
         "binary_subcarrier_uses_only_nonzero_modes": True,
         "example": representative,
+        "three_axis_mode_pair_audit": three_axis_27_mode_pair_audit(),
         "ns_physical_model_realised": False,
         "ns_clay_or_qg_proved": False,
         "r2p2_optical_clock_measured": False,
