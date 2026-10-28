@@ -99,3 +99,24 @@ r_n = # (T^n / C2_sign)
 This genuinely cross-pollinates #1244's invariant phase-field ORBIT DOMAIN with #1275's equality-pattern ORBIT DOMAIN. It does **not** identify the corresponding probability laws: uniform named words induce nonuniform orbit masses (different orbit sizes), and an IID nonuniform Zipf measure is not invariant under arbitrary value-S3 relabeling. It also does not equate `C3^5` local invariant fields with the five-pattern set itself, or the #1414 `5^3` modes.
 
 Earlier original SSSP permutations/ZIPF-Heaps, Hatcher/Alexander, #1407 Fourier and #1414 monodromy/quaternion ownership retain distinct proof provenance; any future operator transport must declare the relevant functor and source action.
+
+
+## Further Pareto consumer: source-owned five-orbit wave operators on named words
+
+The native original `AlexanderHornedFiveOrbitWaveOperatorExact.agda` already owns **five genuinely different wave operators** indexed by the actual #1244 H-orbit carrier `Five.FiveOrbit`; its `inflateEvolutionSquare` proves operator/field evolution on 27 addresses reduces pointwise to the five orbit entries. The independent physical `ShiftDiscreteWaveStep` and the original #1405 Sonic Warfare wave-transport work retain distinct mathematical ownership.
+
+New `AlexanderHornedFiveOrbitNamedWordWaveTransportExact.agda` reuses that five-orbit operator type, **and** the actual newly proved anchored S3/C2 word normalizer. It derives an actual named-word-to-five-orbit chart, with the five explicit source-readable constructors:
+
+| Global S3 named equality pattern | Normalized signed n=2 relative coordinates | Canonical original FiveOrbit |
+|---|---|---|
+| AAA | (0,0) | origin |
+| AAB | (0,+) | axisSecond |
+| ABA | (+,0) | axisFirst |
+| ABB | (+,+) | diagonal |
+| ABC | (+,−) | antiDiagonal |
+
+The Agda module source-writes all five `refl` slot witnesses, a translated-word `wordOrbitTranslationInvariant`, a reflected-word `wordOrbitReflectionInvariant`, and two actual operator/field evolution invariance lemmas under global value-S3. Its `namedEvolutionFactor` is a commuting equation between **the ORIGINAL five-orbit operator** and named-word evaluation through the **actual quotient map**. No new wave ontology or source operator type is constructed.
+
+Its independent local integer-mod-three Python check processed ALL 243 five-orbit field assignments, 27 three-token named words and six affine global S3 transformations, namely **39,366** exact operator/equality cases, using *five deliberately heterogeneous* affine orbit-dependent operators. The committed `scripts/alexander_horned_five_orbit_named_wave_transport_exact.py` and focused test are replayable. **This is source-written and finite computational evidence, not Agda-verified nor experimental acoustics.**
+
+This is a legitimate consumer of the 27→5 invariant address orbit geometry and #1275 equality-pattern *observation* map. The operator's input remains a finite five-orbit wave-value field. Statistical word probabilities, time-ordered Heaps novelty, original Alexander–Hatcher wild π₁, #1414 polynomial root monodromy/quaternion spin, #1407 signed Fourier convolution, #1405 measured sound propagation and original Ibrahim Monster 3B all require distinct typed transports. No same-object proof follows from the orbit-domain correspondence alone.
