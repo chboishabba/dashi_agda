@@ -1497,3 +1497,95 @@ A genuinely productive reuse across #1244 and #1275 removes the earlier numerica
 The standard combinatorial result is therefore `r_n = Σ_{k=1}^{min(3,n+1)} S(n+1,k) = (3^n+1)/2`. The #1275 original restricted-growth string/equality-pattern orbit owner is the receiver; the #1244 `H=C3_sector×C2_sign` reduced address orbit is the source of the signed n-trit carrier. The normalization requires a CHOSEN first-token anchor, and it transports **orbit sets**, not the full raw S3 action onto the existing raw address sector/sign action, uniform measures, IID nonuniform Zipf probabilities, topology, or spin. The extra sixth C3 field still must be independent for 729.
 
 Independent local exhaustive Python replay covered all 9,840 words through n=7 and all 59,040 affine S3 moves, plus one explicit inverse affine witness from each named word to its chosen sign-orbit representative. Formal Agda source/TOE root/tests were committed on #1244; **Agda kernel and checked-out exact GitHub suite remain pending**. Original #1275, #1407, #1414, SSSP and Ibrahim/Monster 3B proof owners retain credit. Source explanation: `Docs/topology/AlexanderHornedInvariantCylinderDirectLimitMaxCut20261028.md`.
+
+
+### R. Stronger minimal-source theorem: theta ribbon genus one, not genus two
+
+**Correction and strictly stronger mathematical result.** The
+genus-two boundary-word map from earlier section Q is a valid
+(noninjective) source but is NOT MINIMAL. The selected three-child
+commutator product is actually conjugate to ONE commutator
+in the free group F(a,b,c), with a six-letter exact reduction:
+
+```text
+w  = [a,b][b,c] = a b A c B C
+q  = [B,Ca]    = B C a b A c
+p  = a b A c
+p^-1 w p = q             (free reduction)
+```
+
+Here capitals denote inverses. This is a precise based
+conjugacy, so the source loop is equivalent to the boundary
+of a GENUS-ONE once-punctured torus up to a specified
+change of peripheral basepoint. This genus is minimal:
+the word is nontrivial and has trivial abelianisation,
+so a genus-zero ONE-boundary disk cannot supply it
+and a genus-one surface does.
+
+The six sides of the cyclic word `a b A c B C`
+pair to give **two vertices, three edges and one
+face**. The resulting closed ribbon polygon has
+Euler characteristic `2-3+1=0`, hence genus one.
+Removing the face gives an orientable one-boundary
+surface of genus one. Its embedded ribbon graph
+spine is a THETA graph (three edges connecting
+two vertices), with free fundamental rank
+`E-V+1=2`. This is a legitimate abstract
+surface/thickening candidate at the SURFACE level.
+An unknotted theta graph CAN be smoothly embedded
+in R³ and have a regular ribbon neighbourhood.
+But proving that its peripheral boundary in the
+actual **THREE CHILD HORN COMPLEMENT** represents
+the separately labelled source word `[a,b][b,c]`,
+with all satellite clearance/linking/collar data,
+is an additional geometric theorem, not paid by
+abstract surface polygon gluing or a simple
+unknotted theta graph.
+
+The previous genus-two map with B and C identified
+is strictly less economical and is retained as a
+SECONDARY nonminimal source, not erased. The
+COMBINATORIAL #1254 1→3 pants carrier
+remains a different FOUR-boundary genus-zero
+topology: its peripheral word abelianises to
+a+b+c and cannot equal the new horn meridian
+under the natural independent-meridian identification.
+
+**Exact severe check:**
+`scripts/alexander_horned_ternary_theta_ribbon_boundary_audit.py`
+tests literal free reduction, the conjugator,
+abelianisation obstruction, ribbon polygon
+vertex/edge/face/gluing identifications,
+Euler characteristic and genus. Independently
+reproduced with local integer tuples: PASS.
+The source-written Agda module
+`AlexanderHornedTernaryPantsMeridianBoundaryExact`
+now also contains `singleCommutatorCyclicWord`
+with the correct literal expression; the
+normal-form/conjugacy equality has not been
+claimed as Agda kernel proof.
+
+**Adjusted Pareto geometric chain (replacing the
+earlier preferred genus-two *geometry*, not
+removing its correct algebraic map):**
+1. `ternaryWordSixLetterReduction` [finite proof]
+2. `ternaryWordSingleCommutatorConjugacy` [exact word calculation; Agda kernel pending]
+3. `thetaRibbonTwoVerticesThreeEdges` [classical polygon + exact check]
+4. `thetaRibbonGenusOneOneBoundary` [classical polygon + exact check]
+5. `thetaRibbonSmoothAmbientEmbedding` [classical unknotted model; specific parametrisation OPEN]
+6. `thetaRibbonPeripheralMeridianRealisation` [OPEN: actual 3D exterior child meridian map]
+7. `threeChildLinkedHandlebodyStage` [OPEN]
+8. `ternaryMeridianStageInjectivity` [abstract normal-form argument, geometric π1 instance OPEN]
+9. `nestedThreeChildWildSatellite` [OPEN]
+10. `ternaryStationaryCapAndAmbientC3` [OPEN]
+11. `ternaryExteriorPi1DirectLimit` [OPEN]
+
+**Nonpromotion:** A genus-one ribbon thickening
+does NOT imply an Alexander horned three-ball,
+and the source-word commutator length is not a
+proof of physical sound propagation, zeta zeros,
+Monster 3B identity or nonabelian SU2 coupling.
+Classical polygon/surface presentations and
+Hatcher/Alexander original ownership retained.
+The 27/5 orbit fibre and existing three-legged
+pants work remain distinct typed consumers.
