@@ -286,6 +286,9 @@ def main() -> None:
         "holderModeCannotBecomeLegalTitleByNameMatch",
         "executionRecordIsNotOfficialFinality",
         "officialSettlementIsNotBeneficiaryAllocation",
+        "CanonicalFundingRouteWeld",
+        "canonicalFundingBatchExactlyFundsTaxPaymentAndFees",
+        "fixtureSaleFundedTwoTaxAndOneFee",
         "policyTradeoffAxisCoverage",
         "twoAxisPolicyFrontierIsNonempty",
         "finiteAxisCostSum",
@@ -319,6 +322,8 @@ def main() -> None:
         "toeQidDoesNotValidateTaxOrSettlementClaim",
         "toeUnresolvedIdentityIsNotProvedAbsent",
         "toeRelevantVerifiedIdentityMustRemainInSourceLens",
+        "CanonicalFundingRouteWeld",
+        "toeCanonicalSourcesFundExactlyOneJoinedRoute",
     ):
         assert symbol in bridge, f"missing funding/ASX TOE boundary: {symbol}"
     assert "import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as ExternalIdentity" in bridge, "original Snowball identity owner must remain imported"
