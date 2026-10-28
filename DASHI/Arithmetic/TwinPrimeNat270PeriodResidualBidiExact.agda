@@ -21,10 +21,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (just)
 open import Data.Nat using (_/_; _%_; _<_)
 open import Data.Nat.DivMod using
-  (m%n<n; m≡m%n+[m/n]*n; [m+kn]%n≡m%n; m<n⇒m%n≡m)
+  (m%n<n; m≡m%n+[m/n]*n; [m+kn]%n≡m%n; m<n⇒m%n≡m;
+   m<n⇒m/n≡0; m*n/n≡m; +-distrib-/-∣ʳ)
 open import Data.Fin.Base using (Fin; fromℕ<; toℕ)
+import Data.Fin.Properties as FinP
+open import Data.Nat.Divisibility using (_∣_; divides)
 open import Data.Product using (Σ; _×_; _,_)
-open import Relation.Binary.PropositionalEquality using (trans; sym; cong)
+open import Relation.Binary.PropositionalEquality using (trans; sym; cong; cong₂)
 
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.SSPTritCarrier as T
@@ -127,3 +130,45 @@ cubePeriodDecodeToCube period cube =
 -- Semantic cut: to decide genuine TwinPrimeAt one must apply
 -- the existing Nat prime decider to decodeCubePeriod270.
 -- The quotient-only rule cannot determine it, as Q25 witnesses.
+
+------------------------------------------------------------------------
+-- THE OTHER HALF: EVERY CANONICAL FIN-RESIDUE / PERIOD CODE
+-- ROUND-TRIPS. This is a true ALL-NAT arithmetic BIDI, not just
+-- a left inverse. Reuses the previous Godel base-12 style stdlib
+-- quotient proof, rather than postulating uniqueness.
+------------------------------------------------------------------------
+
+periodDivCorrect : (period : Nat) (r : Fin 270) →
+  (toℕ r + period * 270) / 270 ≡ period
+periodDivCorrect period r
+  rewrite +-distrib-/-∣ʳ (toℕ r) (divides period refl)
+        | m<n⇒m/n≡0 (FinP.toℕ<n r)
+        | m*n/n≡m period 270
+  = refl
+
+periodRemCorrect : (period : Nat) (r : Fin 270) →
+  (toℕ r + period * 270) % 270 ≡ toℕ r
+periodRemCorrect period r =
+  trans
+    ([m+kn]%n≡m%n (toℕ r) period 270)
+    (m<n⇒m%n≡m (FinP.toℕ<n r))
+
+finiteResidueAfterDecode :
+  (period : Nat) (r : Fin 270) →
+  finiteResidue270 (toℕ r + period * 270) ≡ r
+finiteResidueAfterDecode period r =
+  FinP.toℕ-injective
+    (trans (finiteResidue270Value (toℕ r + period * 270))
+           (periodRemCorrect period r))
+
+encodeDecodeNatPeriod270 : (code : NatPeriod270) →
+  encodeNatPeriod270 (decodeNatPeriod270 code) ≡ code
+encodeDecodeNatPeriod270 (natPeriod270 period residue) =
+  cong₂ natPeriod270
+    (periodDivCorrect period residue)
+    (finiteResidueAfterDecode period residue)
+
+-- Together with decodeEncodeNatPeriod270, this is an actual
+-- arithmetic isomorphism Nat <-> Nat x Fin270, with no infinity
+-- compressed away. The 27 admissible cube states are a strictly
+-- smaller local residual subtype, not a different Nat cardinality.
