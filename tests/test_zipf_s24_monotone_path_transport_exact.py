@@ -123,3 +123,26 @@ def test_equal_every_coordinate_marginal_does_not_supply_a_path_coupling():
                    for curve in law)
     mass,flow=_transport_maxflow(x,y)
     assert mass==F(1,2) and sum(flow.values(),F())==F(1,2)
+
+
+def test_dual_hall_cut_exactly_explains_marginal_equality_no_go():
+    from zipf_s24_monotone_path_transport_exact import finite_hall_cut_obstruction
+    x={(0,1,1,2,2):F(1,2),(0,1,2,2,3):F(1,2)}
+    y={(0,1,1,2,3):F(1,2),(0,1,2,2,2):F(1,2)}
+    cut=finite_hall_cut_obstruction(x,y)
+    assert cut is not None
+    a,up,delta=cut
+    assert delta==F(1,2)
+    assert sum((x[z] for z in a),F())-sum((y[z] for z in up),F())==delta
+    assert all(not(any(v<=w for v,w in zip(z,right))
+                       and len(z)==len(right))
+                   for z in a if z==(0,1,2,2,3) for right in y)
+
+
+def test_dual_hall_cut_is_absent_for_true_majorization_couplings():
+    from zipf_s24_monotone_path_transport_exact import finite_hall_cut_obstruction
+    for sampler in ("iid","permutation"):
+        cert=majorization_heaps_path_transport_certificate((3,1,1),(2,2,1),5,sampler)
+        assert finite_hall_cut_obstruction(cert.left_law,cert.right_law)==None
+    with pytest.raises(ValueError):
+        finite_hall_cut_obstruction({(0,):F(1)}, {(0,):F(1)},max_left_paths=True)
