@@ -208,3 +208,42 @@ OEIS A267572: https://oeis.org/A267572.
 No protected ESD surfaces changed. PR #1414 monodromy
 objects are branch-only and independent; no same-object
 Monster 3B or quintic prime-distribution claim is made.
+
+## G. The precise (3^n+1)/2 = Stirling≤3 bridge (source-owned)
+
+A check of the actual latest #1244 and #1275 branches found the
+general normalization already SOURCE-WRITTEN in
+`AlexanderHornedS3WordSignOrbitTransportExact` (#1244).
+Given an (n+1)-word over the original three labels, subtract the
+first letter modulo 3. Global C3 translation disappears and every
+S3 reflection becomes simultaneous negation of the remaining n
+coordinates. Its explicit signed section and translation proof give
+the mathematical orbit-set bijection
+`T^(n+1)/S3 ≅ T^n/C2` for all n≥0, once a first position is chosen.
+The left quotient is set partitions of n+1 positions into ≤3
+blocks: restricted-growth patterns from the independent #1275
+Zipf/Heaps owner. The right count is
+`r_n = 1+(3^n-1)/2 = Σ_{k=1}^3 S(n+1,k)`.
+Exact local enumeration confirmed n=0..6: 1,2,5,14,41,122,365.
+The #1244 signed normalization has no independently observed Agda
+kernel receipt and does not yet implement a formal arbitrary-n
+quotient equivalence type; see Q01–Q24 in the completion matrix.
+
+**Strongest sound arithmetic transport / no-go:** #1408's
+`TwinPrimeTernary270IbrahimSurvivorCollisionExact` now proves
+`globalAntipodeSends59To209` and a real
+`globalFourteenOrbitLosesTwinConsumer`. Both 59 and 209 survive the
+2/3/5 local wheel, and occupy the same global sign class; 59,61
+are prime while 209=11*19. Thus the 14 equality-pattern/sign
+classes do NOT determine true twin-primality after the 270-wheel
+bijection. The dependent orientation residual is indispensable for
+that consumer. This is the required negative, non-fabricated
+Pareto/Ibrahim cross-pollination; original Monster 3B proof
+ownership is untouched.
+
+The #1244 native invariant fields remain a DIFFERENT carrier.
+Their rank r_n counts sign orbits, whereas C3-valued field
+configurations have cardinality `3^(r_n)`. Conjugacy S3 on
+endomorphism tables, S3 permuting word positions, S3 globally
+relabeling values, and S3 acting on original horn sectors are
+NOT interchangeable. No general CRT/prime correlation follows.
