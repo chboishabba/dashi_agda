@@ -177,7 +177,7 @@ All 45 video subjects have exact names in \`DASHI.Foundations.PolynomialVideo45C
 - \`PolynomialIbrahimParetoSnowballMaxCutExact.agda\`: formal proof-level firewall with direct retained original Ibrahim recognition boundary and exact negative-promotion adapters. Neither this new proof nor its source rights belong to the original Ibrahim Monster 3B claims.
 - \`PolynomialMonodromyTernaryQuaternionBridgeExact.agda\`: pre-existing PR #1414 finite S3/C3 and rational quaternion generator.
 
-The ten new owners plus the original finite bridge are attached through \`EverythingTOESymmetryResolved369\`, \`Unifier\`, and \`Unified/Everything\`. No protected ESD file was edited.
+The eleven new owners plus the original finite bridge are attached through \`EverythingTOESymmetryResolved369\`, \`Unifier\`, and \`Unified/Everything\`. No protected ESD file was edited.
 
 ### Independent exact Python audit (EXECUTED, not Agda)
 
