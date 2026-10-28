@@ -396,3 +396,24 @@ The standalone [dashiTRADE PR #3](https://github.com/chboishabba/dashiTRADE/pull
 There is no source-independent observed estimate here of a hypothetical 100% annual billionaire ceiling. Repeated original-paper abstracts, provider page mirrors and code comments remain the same source lineage. Existing Ibrahim first-link navigation, Pareto/Zipf prior theorem owners and Monster 3B same-object constraints are not converted to finance experiments. Previous Crenshaw, Fraser, Marx, Georgist and feminist original authorship is preserved.
 
 The exact source-written implementation and independently specified negative controls are a **finite algebraic model**, not a physically measured system. The next frontier is an executed same-actor, same-date cash/borrowing/security-sale trace, institutional control documentation, and separate installation/workforce service-outcome measurements.
+
+## 15. Exact same-object share-class reconciliation, not merely sale volume
+
+A newly discovered gap after the funding-route max-cut was **unit identity**: a seller may sell two ordinary shares or two super-voting shares. Equal asset-sale volumes are not equal legal/control changes. Also the earlier synthetic 6-ordinary-share transfer cannot automatically be welded to a separate two-unit sale receipt. Treating the two as one observation without reconciliation would violate the user attribution and same-object rules.
+
+The existing Agda tax–market owner now adds an optional FundingVoteReconciliation. A proof-bearing link contains the funding route, before/after voting ledgers, separately counted ordinary/super-voting transfers, a transfer-unit count equal to the route's sale count, exact owner holdings reconciliation for both classes, and unchanged total issued shares and class voting conditions in this finite example.
+
+Two explicit same-count examples (not observations of a company):
+- Starting owner: 6 ordinary + 3 super-voting shares, ten votes per super, with 20 ordinary and 3 super shares outstanding (owner votes 36 of 50).
+- Ordinary-class two-unit transfer: owner retains 4 ordinary + 3 super, hence **34/50** owner votes.
+- Super-voting two-unit transfer: owner retains 6 ordinary + 1 super, hence **16/50** owner votes.
+
+Both use the same paid hypothetical tax, same gross fixture sale cash, same share count sold and same execution-cost fixture. The inherited IntersectionalNonFactorability core therefore rejects a universal reconstruction of the owner's weighted voting rights from an aggregate sale-count projection. The theorem is a DASHI synthetic finite model, not a result attributed to tax scholars or proof of legal control in any listed company. Voting agreements, reserved matters, directors' duties, shareholder classes and effective beneficial ownership still require company-specific actual primary documents.
+
+The thin TOE consumer now exports toeShareSaleCountDoesNotFixWeightedVoting and the topic guard checks the original owner and constructor. No new general factorisation library, ESD edit or specialist TOE-root overwrite was added.
+
+The standalone [dashiTRADE PR #3](https://github.com/chboishabba/dashiTRADE/pull/3) now adds ShareClassSaleLink. This checks an existing shadow FundingRoute against explicit owner before/after ordinary and super-voting units. An old fixture in which **six** ordinary units transferred cannot be silently joined to a route selling **two** shares. That invalid join is rejected. Exact-blob reconstructed Python tests (the new shadow and tests, plus the unchanged original shadow runner) now pass **16/16** isolated cases, including negative matching tests. This is an executed Python receipt only; it is not an Agda kernel pass, a real audit of an issuer register or a tax-policy empirical result.
+
+The strongest physical implication remains conditional: ownership, legal voting control, debt funding, execution costs and productive plant stock are distinct. Financial tax payment and legal share settlement can occur without any construction or destruction of machines, while control may change depending on the precise transferred rights. Without external same-actor/time matched data, no estimate of actual output, employment, energy, caregiving or price change is licensed.
+
+Original sources: ASIC shareholder-rights rules, AASB 10 accounting control rules, and SGX dual-class listing rules retain their own jurisdiction-specific authority and dates, cited separately above. New financial study mechanisms (Fagereng/Guiso/Ring 2026, Kim 2026, Bianchi et al. 2026) retain their original authors and independent populations. No numeric coincidence, Ibrahim knowledge-graph link or Monster 3B analogy manufactures company-control proof.
