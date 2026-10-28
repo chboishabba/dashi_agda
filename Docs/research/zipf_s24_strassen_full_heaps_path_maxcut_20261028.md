@@ -81,3 +81,12 @@ A plausible complete proof follows the *actual two-sampler finite model*, not sy
 ## Pareto next
 
 The small finite search is no longer the interesting wall. The important next cut is **constructive switch-time coupling plus Robin Hood transfer composition at the Agda level**, while separately completing F13b positive-denominator rational addition and preserving source-owner attribution. CI status is not required as a substitute for mathematics.
+
+
+## Pair-transfer numerical certificate (S24.3–S24.4)
+
+The same source module now exports `pair_one_type_survival_probability(a,b,m,sampler)` and `concentrating_pair_transfer_certificate(a,b,m)`. These reuse classical IID power and exact hypergeometric binomial formulas. The API treats `m=0` as survival probability 1 **explicitly**. It refuses `b=1` as the source of a concentrating transfer, because transferring its only token would destroy the required positive K-type support.
+
+For all integer `2 ≤ b ≤ a ≤ 8` and `0 ≤ m ≤ a+b`, both samplers' original and concentrated first-switch survival probabilities were compared by an independent local `Fraction`/binomial calculation: **582 exact comparisons, zero failures**. These are concrete checks on the elementary convexity step. They are not a proof of the integer-binomial convexity lemma for arbitrary counts, and do not by themselves establish the common outer schedule or lift through general Robin Hood transfer chains.
+
+The committed companion regression includes the same check grid, strict domain rejection and the m=0 edge. Its actual committed GitHub bytes have been verified by connector readback, but were not executed as a full checkout in this session. Distinguish exact formula checking, bounded max-flow receipt, source-written Agda, and kernel certification.
