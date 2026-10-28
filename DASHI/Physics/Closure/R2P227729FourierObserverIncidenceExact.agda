@@ -39,6 +39,8 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as G
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicIntegerTernary27SignChartRound529Exact as Sign
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierTernaryTorusFibreBidiRound530Exact as SignSection
+import DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531Exact as Torus
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 ------------------------------------------------------------------------
 -- A genuine mode-label bijection onto the EXISTING 27-cube carrier.
@@ -135,6 +137,34 @@ canonicalSignSection :
 canonicalSignSection = SignSection.periodicSignObservationSection530
 
 ------------------------------------------------------------------------
+-- Existing periodic wraparound is NOT adjacency of the P3^3 path cube.
+-- The published source of either adjacency is reused unmodified.
+------------------------------------------------------------------------
+
+periodicXAxisWraparoundExists :
+  Torus.Base369PeriodicTorusAdjacent531
+    (G.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero)
+    (G.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero)
+periodicXAxisWraparoundExists =
+  Torus.periodicWraparoundLivesOnNormalizedCarrier531
+
+pathXAxisWraparoundIsImpossible :
+  G.HypervoxelAdjacent
+    (G.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero)
+    (G.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero)
+  → ⊥
+pathXAxisWraparoundIsImpossible ()
+
+-- The explicit two-sided mode/voxel inverse also proves injectivity.
+modeCubeToVoxelInjective :
+  ∀ {a b : ModeCube27} →
+  modeCubeToVoxel a ≡ modeCubeToVoxel b → a ≡ b
+modeCubeToVoxelInjective {a} {b} eq =
+  trans (sym (modeVoxelRoundTrip a))
+    (trans (cong voxelToModeCubeCanonical eq)
+           (modeVoxelRoundTrip b))
+
+------------------------------------------------------------------------
 -- REAL 27×27 PAIR ENUMERATION (not only 27*27 and 343+386 arithmetic).
 ------------------------------------------------------------------------
 
@@ -167,11 +197,41 @@ cube27 =
 cube27HasExactly27Entries : lengthL cube27 ≡ 27
 cube27HasExactly27Entries = refl
 
+------------------------------------------------------------------------
+-- Ordered dense indices: a full 27-rank list, not just cardinality.
+-- rank is a list-position identifier, NOT a finite-field element.
+------------------------------------------------------------------------
+
+modeRank : M.ThreeMode → Nat
+modeRank M.modeMinus = 0
+modeRank M.modeZero = 1
+modeRank M.modePlus = 2
+
+cubeRank : ModeCube27 → Nat
+cubeRank (modeCube a b c) =
+  9 * modeRank a + 3 * modeRank b + modeRank c
+
+rangeFrom : Nat → Nat → List Nat
+rangeFrom start zero = []
+rangeFrom start (suc remaining) =
+  start ∷ rangeFrom (suc start) remaining
+
+cube27RanksAreExactlyZeroThrough26 :
+  mapL cubeRank cube27 ≡ rangeFrom 0 27
+cube27RanksAreExactlyZeroThrough26 = refl
+
 ModePair729 : Set
 ModePair729 = ModeCube27 × ModeCube27
 
 pair729 : List ModePair729
 pair729 = concatMapL (λ a → mapL (λ b → a , b) cube27) cube27
+
+orderedPairRank : ModePair729 → Nat
+orderedPairRank (a , b) = 27 * cubeRank a + cubeRank b
+
+orderedPairRanksAreExactlyZeroThrough728 :
+  mapL orderedPairRank pair729 ≡ rangeFrom 0 729
+orderedPairRanksAreExactlyZeroThrough728 = refl
 
 pair729HasExactly729Entries : lengthL pair729 ≡ 729
 pair729HasExactly729Entries = refl
