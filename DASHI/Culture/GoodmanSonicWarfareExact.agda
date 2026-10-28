@@ -149,6 +149,52 @@ isoSoundscapeAnalysis2025 = Attr.mkNoDOISource
   "Standards provenance for in-situ soundscape analysis; successor to 2019 edition, not clinical or causal proof"
   Attr.publicAttribution
 
+
+------------------------------------------------------------------------
+-- NOISE-INFORMED ACOUSTIC INVERSE SOURCE PRIOR ART (INDEPENDENT)
+-- Original authors retain their entire proof, method and data ownership.
+------------------------------------------------------------------------
+
+colettiDavisSchultz2025 : Attr.AttributedSource
+colettiDavisSchultz2025 = Attr.mkDOISource
+  "Keaton Coletti; R. Benjamin Davis; Ryan Schultz"
+  "Improved Bayesian regularization of inverse problems in vibrations and acoustics using noise-only measurements"
+  "Applied Acoustics 238, 110756; Sandia SAND2025-05612J; 5 September 2025"
+  "2025"
+  "10.1016/j.apacoust.2025.110756"
+  "https://doi.org/10.1016/j.apacoust.2025.110756"
+  Attr.academicArticleSource
+  "Independent noise-informed Bayesian Tikhonov acoustic inverse study; does not establish the DASHI toy matrix, theorem or acoustic calibration"
+  Attr.publicAttribution
+
+delaunayImperialeMoireau2026 : Attr.AttributedSource
+delaunayImperialeMoireau2026 = Attr.mkDOISource
+  "Tiphaine Delaunay; Sebastien Imperiale; Philippe Moireau"
+  "Mathematical analysis of an observer for solving inverse source wave problem"
+  "Inverse Problems and Imaging 22 (2026), 14-52; published online 10 September 2025"
+  "2026"
+  "10.3934/ipi.2025043"
+  "https://doi.org/10.3934/ipi.2025043"
+  Attr.academicArticleSource
+  "Independent wave observability and sequential regularised reconstruction; no theorem copied or identified with the finite Sonic Warfare observer"
+  Attr.publicAttribution
+
+acousticInverseSourceAtlas : Attr.AttributedSourceAtlas
+acousticInverseSourceAtlas = Attr.mkSourceAtlas
+  "independent acoustic inverse problem roots"
+  "Coletti-Davis-Schultz; Delaunay-Imperiale-Moireau, not Goodman or DASHI"
+  (colettiDavisSchultz2025 ∷ delaunayImperialeMoireau2026 ∷ [])
+  "Primary dated research motivates validation and noise/regularisation gates; records no imported proof"
+
+acousticInverseSourcesDoNotPromote :
+  (validation : String) →
+  Receipt.promotesClaim
+    (Attr.attributedSourceAtlasReceipt acousticInverseSourceAtlas validation)
+    ≡ false
+acousticInverseSourcesDoNotPromote validation =
+  Attr.attributedSourceAtlasReceiptNonPromoting
+    acousticInverseSourceAtlas validation
+
 soundscapeComparatorSources : Attr.AttributedSourceAtlas
 soundscapeComparatorSources = Attr.mkSourceAtlas
   "2025-2026 independent soundscape comparison sources"
