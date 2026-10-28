@@ -160,9 +160,12 @@ pullbackFaithful :
   ∀ n (g h : Gauge n) →
   pointwise (pullback n g) (pullback n h) →
   pointwise g h
-pullbackFaithful n g h same x
-  rewrite projectZeroSection n x =
-  same (zeroSection n x)
+pullbackFaithful n g h same x =
+  trans
+    (sym (cong g (projectZeroSection n x)))
+    (trans
+      (same (zeroSection n x))
+      (cong h (projectZeroSection n x)))
 
 pullbackPreservesTranslation :
   ∀ n (g : Gauge n) (f : Field n) (x : Level (suc n)) →
