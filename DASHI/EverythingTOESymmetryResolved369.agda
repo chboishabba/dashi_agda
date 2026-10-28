@@ -95,6 +95,12 @@ open WheelIbrahimCollision public using
   ; sameGlobalFourteenOrbitInsideWheel
   ; globalFourteenOrbitLosesTwinConsumer
   ; noTwinClassifierFromBareGlobalFourteenOrbit
+  ; wholeNatToWheelCube
+  ; fiftyNineAndThreeTwentyNineSameFullCube
+  ; threeTwentyNineIsComposite
+  ; natTwinConsumerDistinguishes59And329
+  ; wholeCubeResidueLosesTwinConsumer
+  ; noUniversalTwinClassifierFromFiniteWholeCube
   )
 
 import DASHI.Arithmetic.TwinPrimeTernary270SurvivorCoverageExact as Ternary270Coverage
