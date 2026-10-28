@@ -422,3 +422,31 @@ guyNumericScannerNeverHalts n apparentHalt =
 -- This theorem blocks the false claim that a prime marker is an
 -- ordinary terminal output. No universal prime-emission theorem
 -- follows from the existence of this always-applicable last rule.
+
+-- Construct an actual legal selected transition for every Nat input.
+-- This is numeric PRIMEGAME totality, not signed-runtime reachability.
+guyNumericAlwaysSteps :
+  (n : Nat) →
+  Σ Nat (λ after →
+    First.FirstApplicableStep
+      ExactFractionApplies exactNumericNext
+      Guy.guyFourteenNumeric n after)
+guyNumericAlwaysSteps n
+  with firstApplicableNumeric Guy.guyFourteenNumeric n
+... | nothing =
+  ⊥-elim (guyNumericScannerNeverHalts n refl)
+... | just after =
+  after , guyNumericExecutableStepSound n refl
+
+guyTypedAlwaysSteps :
+  (n : Nat) →
+  Σ Nat (λ after →
+    First.FirstApplicableStep
+      TypedExactFractionApplies (TypedApply exactNumericNext)
+      Guy.guyFourteenTyped n after)
+guyTypedAlwaysSteps n
+  with firstApplicableNumeric Guy.guyFourteenNumeric n
+... | nothing =
+  ⊥-elim (guyNumericScannerNeverHalts n refl)
+... | just after =
+  after , guyTypedExecutableStepSound n refl
