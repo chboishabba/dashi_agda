@@ -1,4 +1,5 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as R2P2Loop
 import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as R2P2Bias
 import DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact as R2P2369
 import DASHI.Foundations.Base369BinaryTernaryRefinement as RefineR2P2
@@ -1521,3 +1522,18 @@ toeR2P2BiasNoQuantumGravity :
     R2P2Bias.canonicalR2P2BiasIdentifiabilityMaxCut ≡ false
 toeR2P2BiasNoQuantumGravity =
   R2P2Bias.thisExampleDoesNotProveQuantumGravity
+
+------------------------------------------------------------------------
+-- Three-clock ratio-loop integrity: conditional 369 finite witness only.
+------------------------------------------------------------------------
+
+toeR2P2LoopSyntheticClosure :
+  R2P2Loop.loopNumerator ≡ R2P2Loop.loopDenominator
+toeR2P2LoopSyntheticClosure =
+  R2P2Loop.syntheticCycleCloses
+
+toeR2P2LoopNullCannotProveCurvature :
+  R2P2Loop.threeClockLoopNullImpliesCurvature
+    R2P2Loop.canonicalThreeClockLoopSourceBoundary ≡ false
+toeR2P2LoopNullCannotProveCurvature =
+  R2P2Loop.threeClockLoopCannotClaimCurvature
