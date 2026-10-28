@@ -572,6 +572,8 @@ open DashiTradeTax public using
   ; equalCostTotalDoesNotRecoverAdministrativeCost
   ; rechartingTotalCostCannotRecoverAdministrativeAxis
   ; equalCostTotalIsParetoMonotone
+  ; policyIdentityIsAdmittedParetoSymmetry
+  ; policySwapCannotBeAdmittedParetoSymmetry
   ; equalCostTotalCannotReflectParetoOrder
   ; policyWeightedTwoAxisCost
   ; careHeavyWeightsPreferCareByScalar
@@ -820,4 +822,16 @@ toeParetoDominanceImpliesNoHigherTotalCost :
     ≤ DashiTradeTax.policyEqualWeightCost right
 toeParetoDominanceImpliesNoHigherTotalCost =
   DashiTradeTax.equalCostTotalIsParetoMonotone
+
+-- Existing semantic Pareto-symmetry owner: fixed named objective costs
+-- prohibit a label swap between the two original incomparable options.
+-- This is stronger than the mere collision of their unweighted totals.
+toeAdmittedParetoSymmetryCannotSwapPolicyRoles :
+  (symmetry : DashiTradeTax.ParetoSym.ParetoOrderAutomorphism
+    DashiTradeTax.policyTradeoffCosts) →
+  DashiTradeTax.ParetoSym.mapModel symmetry
+    DashiTradeTax.lowAdministrativeCost
+    ≡ DashiTradeTax.increasedCareCapacity → ⊥
+toeAdmittedParetoSymmetryCannotSwapPolicyRoles =
+  DashiTradeTax.policySwapCannotBeAdmittedParetoSymmetry
 
