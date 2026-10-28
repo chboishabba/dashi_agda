@@ -171,6 +171,19 @@ record FundingRoute : Set where
       ≡ Tax.taxPaidCash taxExecution + executionCashCost
 open FundingRoute public
 
+-- Conditional POSITIVE result: only within this exactly balanced fixture.
+-- If both opening unrestricted cash and new loan proceeds are unavailable,
+-- gross sale receipts must cover the realised tax payment plus execution
+-- cash costs. No statement about real-world forced sales is inferred.
+noOtherFundingImpliesSaleProceeds :
+  (route : FundingRoute) →
+  unrestrictedCash route ≡ 0 →
+  newLoanCash route ≡ 0 →
+  grossSaleCash route ≡
+    Tax.taxPaidCash (taxExecution route) + executionCashCost route
+noOtherFundingImpliesSaleProceeds route noCash noLoan
+  rewrite noCash | noLoan = fundingBalances route
+
 taxPaymentForRoute : FundingRoute → Nat
 taxPaymentForRoute route = Tax.taxPaidCash (taxExecution route)
 
