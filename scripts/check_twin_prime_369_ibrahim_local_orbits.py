@@ -9,6 +9,7 @@ Reuse and distinguish existing theorem owners:
 This script is finite regression; no Agda kernel or Monster same-object.
 """
 from itertools import product
+from math import isqrt
 T = (-1, 0, 1)
 pts = list(product(T, repeat=3))
 neg = lambda p: tuple(-x for x in p)
@@ -34,6 +35,11 @@ def main():
         assert n % 3 == 2 and (n+2)%3 == 1
         assert phase_class((0,y,z))==phase_class((0,-y,-z))
     assert len({phase_class((0,y,z)) for y,z in plane}) == 5
+    # A direct REAL primality-consumer collision at identical phase orbit:
+    assert centered(-1,1) == 5 and centered(1,-1) == 20
+    assert phase_class((-1,-1,1)) == phase_class((-1,1,-1))
+    prime=lambda n: n>=2 and all(n%d for d in range(2,isqrt(n)+1))
+    assert prime(5) and prime(7) and not prime(20)
     # 27 survivors mod 270 is a residue COUNT, not a canonical
     # isomorphism to the 27 trit cube.
     assert len([n for n in range(270) if sieve(n,(2,3,5))]) == 27
@@ -41,6 +47,7 @@ def main():
     assert 3**9 == 27**3 == 19683
     print('PASS: typed 3x3x3 cube -> 14 global classes and 3x5=15 inner-phase classes')
     print('PASS: prime-3 slice has 9 residues, affine swap -> 5 inner antipodal orbits')
+    print('PASS: phase orbit identifies 5 (twin start) with 20 (not twin)')
     print('PASS: 27 finite CRT local survivors modulo 270; no same-object promotion')
     print('PASS: 3^5=243 != 5^3=125 and 3^9=19683')
 
