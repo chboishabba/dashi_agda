@@ -22,7 +22,8 @@ module DASHI.Arithmetic.FiniteTwinSieveUniversalCompositeBaselineExact where
 -- and DOES NOT require the general CRT inverse, analytic prime
 -- distribution, or a FRACTRAN universal simulation.
 --
--- Unboundedness/injectivity in t is a distinct future formal lemma.
+-- A source-written arbitrary-threshold result is supplied below.
+-- Injectivity in t is not needed for that construction.
 -- New Agda code remains kernel-pending. No postulates or escape flags.
 -- Original Ibrahim Monster 3B / 4B, SSP and FRACDASH owners retained.
 ------------------------------------------------------------------------
@@ -279,3 +280,43 @@ everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor
       axes (suc (2 * a)) (suc a) N
       periodAtLeastTwo baseSurvives
   )
+
+------------------------------------------------------------------------
+-- FINAL FINITE-SIEVE UNIVERSALITY: INCLUDING THE EMPTY AXIS LIST.
+--
+-- The case [] needs no prime modulus and no special CRT argument.
+-- Choose r=2, P=1, t=N+1. The existing factorable lift yields
+-- both genuinely composite endpoints, above the arbitrary bound N.
+--
+-- For the nonempty case reuse the proof above without duplication.
+-- This closes E14's *specified source-level theorem* for ALL finite
+-- certified prime sieve lists, including repeated moduli and prime 2.
+------------------------------------------------------------------------
+
+everyFinitePrimeSieveHasLargeDoubleCompositeSurvivor :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (N : Nat) →
+  Σ Nat (λ n →
+    N ≤ n
+    × (Pair.AllPairSurvive axes n
+      × (Prime.Composite n × Prime.Composite (n + 2))))
+everyFinitePrimeSieveHasLargeDoubleCompositeSurvivor [] N =
+  let
+    n : Nat
+    n = Lift.factorableLeft 2 1 (suc N)
+
+    lowerBound : N ≤ n
+    lowerBound =
+      NatP.≤-trans
+        (NatP.n≤1+n N)
+        (Lift.factorableLeftDominatesParameter 0 0 (suc N))
+  in
+  n ,
+  ( lowerBound
+  , Lift.factorableSurvivorExactOutputIsComposite
+      [] 0 0 N refl tt
+  )
+everyFinitePrimeSieveHasLargeDoubleCompositeSurvivor
+    (axis ∷ rest) N =
+  everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor
+    axis rest N
