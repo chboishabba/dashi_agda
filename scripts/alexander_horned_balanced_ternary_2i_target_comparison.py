@@ -63,6 +63,7 @@ def run():
               'binary_expected',round(w_binary,6),
               'ternary_expected',round(w_ternary,6))
     print('BOUNDARY third child target value duplicates middle child')
+    print('BOUNDARY 3*6^n is UNOPTIMIZED symbolic word cost; a representation-aware compiler may cancel [b,b]=I')
     print('BOUNDARY this is no geometric 3-child Hatcher replacement')
     print('BOUNDARY noise envelopes are ideal independent-Gaussian models, not data')
 
