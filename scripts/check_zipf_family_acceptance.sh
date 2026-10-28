@@ -18,6 +18,7 @@ python3 -m pytest -q \
   tests/test_zipf_majorization_expected_heaps_exact.py \
   tests/test_zipf_stochastic_majorization_exact.py \
   tests/test_zipf_completion_time_exact.py \
+  tests/test_zipf_discovery_fit_stability_exact.py \
   tests/test_zipf_occupancy_collisions_exact.py \
   tests/test_pareto_benford_lorenz_bridge.py \
   tests/test_zipf_family_coverage_gates.py \
