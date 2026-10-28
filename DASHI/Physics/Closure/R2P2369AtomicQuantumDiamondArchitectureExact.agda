@@ -19,6 +19,7 @@ import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as FiniteC
 import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as BilinearPareto
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit729Owner
 import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as Hermitian729
+import DASHI.Physics.Closure.R2P227729HermitianConvolutionTransportExact as HermitianConv729
 import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as Antipodal729
 import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourPareto
 import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as C3Fourier
@@ -887,3 +888,39 @@ fullArchitectureTrueQuadraticPairNegation :
     ≡ Antipodal729.negateWideCube (FiniteConv.exactPairOutput p q)
 fullArchitectureTrueQuadraticPairNegation =
   Antipodal729.trueIntegerQuadraticPairSumNegationEquivariance
+
+
+------------------------------------------------------------------------
+-- Lossless compact real-Fourier 13-pair storage transported through the
+-- actual full integer 729 bilinear convolution. We STILL decode for
+-- arithmetic: no 13-only fast algorithm, NS PDE/Clay, or Yb clock claim.
+------------------------------------------------------------------------
+
+fullArchitectureCompact13PairsPreserveExact125Convolution :
+  (a b : Hermitian729.Hermitian27)
+  (target : FiniteConv.WideCube125) →
+  HermitianConv729.compactFullBilinearAt
+    (Hermitian729.packHermitian27 a)
+    (Hermitian729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b target
+fullArchitectureCompact13PairsPreserveExact125Convolution =
+  HermitianConv729.compact13PairTransportPreservesAll125IntegerOutputs
+
+fullArchitectureCompact13PairsPreserveFourGridRetained :
+  (a b : Hermitian729.Hermitian27) (target : ModePairs.ModeCube27) →
+  HermitianConv729.compactFourGridRetainedAt
+    (Hermitian729.packHermitian27 a)
+    (Hermitian729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b
+        (FiniteConv.retainedToWide target)
+fullArchitectureCompact13PairsPreserveFourGridRetained =
+  HermitianConv729.compact13PairsPreserveFourGridRetainedQuadratic
+
+fullArchitectureCompact13PairsPreserveFiveGridFull :
+  (a b : Hermitian729.Hermitian27) (target : FiniteConv.WideCube125) →
+  HermitianConv729.compactFiveGridFullAt
+    (Hermitian729.packHermitian27 a)
+    (Hermitian729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b target
+fullArchitectureCompact13PairsPreserveFiveGridFull =
+  HermitianConv729.compact13PairsPreserveFiveGridFullQuadratic
