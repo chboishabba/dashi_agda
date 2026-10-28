@@ -283,6 +283,7 @@ def main() -> None:
         "duplicateFixtureFundingTokenIsRejected",
         "AustralianEquityHoldingMode",
         "OfficialHolderRegistration",
+        "MarketRecordKind",
         "holderModeCannotBecomeLegalTitleByNameMatch",
         "executionRecordIsNotOfficialFinality",
         "officialSettlementIsNotBeneficiaryAllocation",
