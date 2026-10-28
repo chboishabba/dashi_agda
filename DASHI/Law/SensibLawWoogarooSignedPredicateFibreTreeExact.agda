@@ -325,15 +325,13 @@ conditionalCarryOwner = Carry.canonicalTrialecticThreeCellCarryDepthBoundary
 ------------------------------------------------------------------------
 
 focus : SignedClaimEvidence → Bool → Synthesis.WoogarooSynthesisKind
-focus evidence reviewed with classifySupport evidence
-... | bothReported = Synthesis.reconcileOpposingSourceAssertions
-... | neitherReported = Synthesis.seekOriginals
-... | positiveOnly with reviewed
-...   | true = Synthesis.applicantHypothesisForDefeaterSearch
-...   | false = Synthesis.seekOriginals
-... | negativeOnly with reviewed
-...   | true = Synthesis.respondentHypothesisForCounterDefeaterSearch
-...   | false = Synthesis.seekOriginals
+focus evidence reviewed with classifySupport evidence | reviewed
+... | bothReported | _ = Synthesis.reconcileOpposingSourceAssertions
+... | neitherReported | _ = Synthesis.seekOriginals
+... | positiveOnly | true = Synthesis.applicantHypothesisForDefeaterSearch
+... | positiveOnly | false = Synthesis.seekOriginals
+... | negativeOnly | true = Synthesis.respondentHypothesisForCounterDefeaterSearch
+... | negativeOnly | false = Synthesis.seekOriginals
 
 signedFibreFocus : ∀ {g} → SignedCaseFibre g →
   Bool → Synthesis.WoogarooSynthesisKind
