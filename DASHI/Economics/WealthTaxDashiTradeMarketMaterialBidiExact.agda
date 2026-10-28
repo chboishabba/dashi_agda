@@ -10,7 +10,7 @@ module DASHI.Economics.WealthTaxDashiTradeMarketMaterialBidiExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)\nopen import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -521,3 +521,70 @@ priorCashReceiptHasNoForwardSettlementLink :
   (lag : Nat) → 1 ≡ 3 + lag → ⊥
 priorCashReceiptHasNoForwardSettlementLink zero ()
 priorCashReceiptHasNoForwardSettlementLink (suc lag) ()
+
+
+------------------------------------------------------------------------
+-- INSTRUMENT-CLASS SAME-OBJECT SUBCUT
+-- Aggregate sale units are not an issuer/instrument/class identification.
+-- The source-key labels below are synthetic fields, not custody records.
+-- Ownership and intellectual priority for the generic result remain in INF.
+------------------------------------------------------------------------
+
+data SettlementInstrumentClass : Set where
+  ordinarySecurity : SettlementInstrumentClass
+  superVotingSecurity : SettlementInstrumentClass
+
+ClassCompatibleWithTransfer :
+  SettlementInstrumentClass → FundingVoteReconciliation → Set
+ClassCompatibleWithTransfer ordinarySecurity link =
+  superVotingUnitsTransferred link ≡ 0
+ClassCompatibleWithTransfer superVotingSecurity link =
+  ordinaryUnitsTransferred link ≡ 0
+
+record IdentifiedClassSettlement : Set where
+  constructor identified-class-settlement
+  field
+    matchedClassTransfer : FundingVoteReconciliation
+    issuerReference : String
+    instrumentReference : String
+    instrumentClass : SettlementInstrumentClass
+    transferMatchesNamedClass :
+      ClassCompatibleWithTransfer instrumentClass matchedClassTransfer
+open IdentifiedClassSettlement public
+
+syntheticOrdinarySettlement : IdentifiedClassSettlement
+syntheticOrdinarySettlement =
+  identified-class-settlement
+    ordinarySaleLink "fixture-issuer" "fixture-ordinary"
+    ordinarySecurity refl
+
+syntheticSuperSettlement : IdentifiedClassSettlement
+syntheticSuperSettlement =
+  identified-class-settlement
+    superVotingSaleLink "fixture-issuer" "fixture-super"
+    superVotingSecurity refl
+
+saleUnitsOfInstrument : IdentifiedClassSettlement → Nat
+saleUnitsOfInstrument state =
+  routedUnitsSold (matchedClassTransfer state)
+
+sameTwoUnitsDifferentClasses :
+  saleUnitsOfInstrument syntheticOrdinarySettlement ≡
+  saleUnitsOfInstrument syntheticSuperSettlement
+sameTwoUnitsDifferentClasses = refl
+
+distinctClassesDespiteSameVolume :
+  instrumentClass syntheticOrdinarySettlement ≡
+  instrumentClass syntheticSuperSettlement → ⊥
+distinctClassesDespiteSameVolume ()
+
+saleVolumeCannotIdentifyInstrumentClass :
+  INF.FactorsThrough saleUnitsOfInstrument instrumentClass → ⊥
+saleVolumeCannotIdentifyInstrumentClass =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      syntheticOrdinarySettlement syntheticSuperSettlement
+      sameTwoUnitsDifferentClasses distinctClassesDespiteSameVolume)
+
+-- The strings are source labels only: matching them without transfer and
+-- legal registers proves neither shared economic ownership nor legal power.
