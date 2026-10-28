@@ -60,6 +60,33 @@ paintRoundTrip blue = refl
 FaceSite9 : Set
 FaceSite9 = Trit.SSPTrit × Trit.SSPTrit
 
+-- Every coloured site denotes a *real boundary point* of the
+-- inherited T³ cube. The two trits are the free coordinates; the
+-- fixed coordinate is exactly the selected +/-1 outer face.
+facePoint : Cube.Face6 → FaceSite9 → Cube.Ternary27Point
+facePoint Cube.xNegativeFace (u , v) =
+  Cube.ternary27Point Trit.sspNegOne u v
+facePoint Cube.xPositiveFace (u , v) =
+  Cube.ternary27Point Trit.sspPosOne u v
+facePoint Cube.yNegativeFace (u , v) =
+  Cube.ternary27Point u Trit.sspNegOne v
+facePoint Cube.yPositiveFace (u , v) =
+  Cube.ternary27Point u Trit.sspPosOne v
+facePoint Cube.zNegativeFace (u , v) =
+  Cube.ternary27Point u v Trit.sspNegOne
+facePoint Cube.zPositiveFace (u , v) =
+  Cube.ternary27Point u v Trit.sspPosOne
+
+faceSiteReallyOnDeclaredFace :
+  (f : Cube.Face6) (u v : Trit.SSPTrit) →
+  Cube.OnFace f (facePoint f (u , v))
+faceSiteReallyOnDeclaredFace Cube.xNegativeFace u v = Cube.onFace refl
+faceSiteReallyOnDeclaredFace Cube.xPositiveFace u v = Cube.onFace refl
+faceSiteReallyOnDeclaredFace Cube.yNegativeFace u v = Cube.onFace refl
+faceSiteReallyOnDeclaredFace Cube.yPositiveFace u v = Cube.onFace refl
+faceSiteReallyOnDeclaredFace Cube.zNegativeFace u v = Cube.onFace refl
+faceSiteReallyOnDeclaredFace Cube.zPositiveFace u v = Cube.onFace refl
+
 FaceColours : Set
 FaceColours = FaceSite9 → Paint3
 
