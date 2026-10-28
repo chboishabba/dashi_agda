@@ -1,7 +1,7 @@
 module DASHI.Interop.TiRCorderCaptureIntakeTranscriptionAdaptersValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([])
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (zero)
 
 import DASHI.Interop.TiRCorderCaptureIntakeTranscriptionAdaptersExact as Adapter
