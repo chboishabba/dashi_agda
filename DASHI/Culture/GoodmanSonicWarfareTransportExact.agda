@@ -28,6 +28,7 @@ import DASHI.Core.FrozenHeldOutRepairRefinementExact as FrozenHeldOut
 import DASHI.Culture.GoodmanSonicWarfareRationalInverseExact as RationalInverse
 import DASHI.Culture.GoodmanSonicNumerologyObservationCubeExact as SonicCube
 import DASHI.Culture.GoodmanSonicWaveEngineTransportBridgeExact as SonicWaveEngine
+import DASHI.Culture.GoodmanSonicWaveC3EquivarianceExact as SonicWaveC3
 
 data ToySoundSource : Set where
   sourceOff : ToySoundSource
