@@ -24,6 +24,7 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
+import DASHI.Core.ParetoSymmetryQuotientAdmissionExact as ParetoSym
 import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact as Wealth
 import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact as Tax
 import DASHI.Finance.DashiTradeFibreBridgeExact as Trade
@@ -3134,7 +3135,43 @@ administrationHeavyWeightsPreferCheapAdministrationByScalar :
 administrationHeavyWeightsPreferCheapAdministrationByScalar =
   m≤m+n 5 5
 
--- A valid Pareto symmetry needs independent semantic cost covariance
--- and eligibility-preservation witnesses. No such witness is claimed
--- for swapping administrative cost with care shortfall.
+-- The general Pareto-symmetry owner requires exact preservation
+-- of eligibility and every named cost axis.
+-- For the existing concrete two-policy instance, identity is admitted,
+-- but swapping the two policy outcomes cannot preserve admin cost.
+policyIdentityIsAdmittedParetoSymmetry :
+  ParetoSym.ParetoOrderAutomorphism policyTradeoffCosts
+policyIdentityIsAdmittedParetoSymmetry =
+  ParetoSym.paretoOrderAutomorphism
+    (λ candidate → candidate)
+    (λ candidate → candidate)
+    (λ _ → refl)
+    (λ _ → refl)
+    (λ _ eligible → eligible)
+    (λ _ eligible → eligible)
+    (λ _ eligible → eligible)
+    "identity-map-preserves-the-two-declared-economic-cost-axes"
+
+policyDistinctAdministrativeCostsCannotBeIdentified :
+  policyAxisCost administrationAxis lowAdministrativeCost
+    ≡ policyAxisCost administrationAxis increasedCareCapacity → ⊥
+policyDistinctAdministrativeCostsCannotBeIdentified ()
+
+-- The rejection is not a claim that S3 is false. It means the specific
+-- candidate exchange fails the existing semantic *cost-preservation*
+-- admission condition while the objective names remain unchanged.
+policySwapCannotBeAdmittedParetoSymmetry :
+  (symmetry : ParetoSym.ParetoOrderAutomorphism policyTradeoffCosts) →
+  ParetoSym.mapModel symmetry lowAdministrativeCost
+    ≡ increasedCareCapacity → ⊥
+policySwapCannotBeAdmittedParetoSymmetry symmetry swapping =
+  policyDistinctAdministrativeCostsCannotBeIdentified
+    (trans
+      (sym (ParetoSym.preservesAxisCost symmetry
+        administrationAxis lowAdministrativeCost))
+      (cong (policyAxisCost administrationAxis) swapping))
+
+-- A valid cost-preserving quotient cannot merge these two policies,
+-- even though their unweighted totals agree. We prove the actual
+-- contract violation rather than inferring it from a matching numeral.
 
