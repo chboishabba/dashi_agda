@@ -258,3 +258,30 @@ The new `scripts/check_signed_ssp_prime_offset_macro.py` checks the Conway/Guy 1
 John H. Conway, *FRACTRAN: A Simple Universal Programming Language for Arithmetic* (1987), in *Open Problems in Communication and Computation*, pp. 4–26, Springer DOI 10.1007/978-1-4612-4808-8. Richard K. Guy, *Conway's Prime Producing Machine* (1983), Mathematics Magazine 56(1), 26–33, DOI 10.2307/2690263, for the 14-fraction Guy list variant. FRACDASH's signed compiler and paired-prime state-tag bridge remain owned by its repository. Neither one is attributed to Conway or promoted into new mathematical prime-distribution results.
 
 The updated pinned-Agda job includes both new modules and a runnable local regression. No successful exact-head kernel receipt has been observed. The external Polymath8b parity analysis and 2026 `PrimeGaps186` conditional analytic assumptions remain unchanged.
+
+## 2026-10-28: three-axis affine 270-wheel completion max-cut
+
+Reuse precedes construction: `Base369Ternary27HypervoxelFabricGeometryExact`
+owns the three independent balanced-ternary x/y/z coordinates;
+`TwinPrimeTernary270AffineCRTCodecExact` owns the affine encoding
+and inverse on 27 constructed points; `CertifiedPrimePairModulusExact`
+owns the *actual* two-endpoint arithmetic sieve.
+
+New `TwinPrimeTernary270SurvivorCoverageExact` expresses the missing
+reverse coverage as a bounded `Fin 270` theorem and carries
+270 constructive case proofs, including all 27 preimages and
+243 explicit failed local prime-modulus guards. `wheel270CompleteCertified`
+uses real independently proved certified prime 2, 3 and 5 axes.
+The exact projections give modulo 2 (one fixed parity), modulo
+27 (nine y/z states) and modulo 5 (three x states); 1×9×3=27.
+These are typed geometry coordinates with nonidentical arithmetic
+meanings, not 27 anonymous identifiers.
+
+The independent local exact-Python check exhaustively matched the
+27 image residues to all 27 2/3/5 survivors among 270 residues and
+tested the projections. Agda-kernel acceptance was NOT tested,
+and CI is deliberately not run. This does not solve general
+CRT, historical FRACTRAN semantics, primality correlation or
+the twin-prime conjecture. Original Conway/Guy, Hardy–Littlewood,
+Brun, Polymath8, Ibrahim/Monster, original geometry and #1407
+proof ownership remain separate. ESD surfaces were not modified.
