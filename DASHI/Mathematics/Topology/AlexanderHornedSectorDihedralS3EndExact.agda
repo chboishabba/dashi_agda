@@ -32,12 +32,12 @@ import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Mathematics.Topology.AlexanderHornedNativeBalancedTernaryEndTowerExact as End
-import DASHI.Mathematics.Topology.AlexanderHornedLocalFibreTetrationTransportExact as Chart
+import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryTrialectic27ChartExact as Chart
 
 permuteSector : Perm.TriPermutation → C3.C3 → C3.C3
 permuteSector p c =
-  Chart.truthAsSector
-    (Perm.applyPermutation p (Chart.sectorAsTruth c))
+  Chart.truthToSector
+    (Perm.applyPermutation p (Chart.sectorToTruth c))
 
 permuteAddress :
   (n : Nat) → Perm.TriPermutation →
@@ -47,7 +47,7 @@ permuteAddress n p (c , xs) = permuteSector p c , xs
 permuteSectorIdentity :
   (c : C3.C3) →
   permuteSector Perm.permIdentity c ≡ c
-permuteSectorIdentity c = Chart.sectorTruthRoundTrip c
+permuteSectorIdentity c = Chart.sectorRoundTrip c
 
 permuteSectorComposition :
   (p q : Perm.TriPermutation) (c : C3.C3) →
@@ -55,9 +55,9 @@ permuteSectorComposition :
     ≡ permuteSector p (permuteSector q c)
 permuteSectorComposition p q c
   rewrite Chart.truthSectorRoundTrip
-    (Perm.applyPermutation q (Chart.sectorAsTruth c)) =
-  cong Chart.truthAsSector
-    (S3.applyComposition p q (Chart.sectorAsTruth c))
+    (Perm.applyPermutation q (Chart.sectorToTruth c)) =
+  cong Chart.truthToSector
+    (S3.applyComposition p q (Chart.sectorToTruth c))
 
 permuteAddressComposition :
   (n : Nat) (p q : Perm.TriPermutation)
