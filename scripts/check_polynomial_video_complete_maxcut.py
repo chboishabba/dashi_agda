@@ -96,7 +96,7 @@ def main():
     while remaining:
         f = next(iter(remaining))
         orbit = {conjugate_endomorphism(p, f) for p in s3}
-        assert orbit <= remaining or (orbit & remaining)
+        assert orbit <= remaining, "orbit partition overlap"
         remaining -= orbit
         orbit_sizes.append(len(orbit))
     assert sorted(orbit_sizes) == [1, 2, 3, 3, 6, 6, 6]
@@ -133,6 +133,22 @@ def main():
         vieta_checks += 1
     assert vieta_checks == 625
 
+
+    # 120 actual five-permutations = 60 ordered distinct triples × two
+    # completions. Exactly one of each completion pair is even.
+    all5 = tuple(permutations(range(5)))
+    def inversion_parity(p):
+        return sum(p[i] > p[j] for i in range(5)
+                   for j in range(i + 1, 5)) % 2
+    triple_orientation = {
+        (p[:3], inversion_parity(p)): p for p in all5
+    }
+    assert len(triple_orientation) == 120
+    assert len({p[:3] for p in all5}) == 60
+    assert sum(inversion_parity(p) == 0 for p in all5) == 60
+    assert all(triple_orientation[(p[:3], inversion_parity(p))] == p
+               for p in all5)
+
     # The 120-degree quaternion lifts i->j->k, q^3=-1 and q^6=+1.
     q = (F(1, 2),) * 4
     one = (F(1), F(0), F(0), F(0))
@@ -159,7 +175,7 @@ def main():
           "s4=24,12,4,1 s5=120,60,60 "
           "two_cycles_generate=60 a5_generated_perfect=true "
           "ternary_endomorphism_orbits=1,2,3,3,6,6,6 "
-          "trit5=243 mode5triples=125 distinct_triples=60 "
+          "trit5=243 mode5triples=125 distinct_triples=60 atlas=120x60x2 "
           "vieta=625 q3=-1 q6=+1")
 if __name__ == "__main__":
     main()
