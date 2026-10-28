@@ -90,3 +90,42 @@ The same source module now exports `pair_one_type_survival_probability(a,b,m,sam
 For all integer `2 ≤ b ≤ a ≤ 8` and `0 ≤ m ≤ a+b`, both samplers' original and concentrated first-switch survival probabilities were compared by an independent local `Fraction`/binomial calculation: **582 exact comparisons, zero failures**. These are concrete checks on the elementary convexity step. They are not a proof of the integer-binomial convexity lemma for arbitrary counts, and do not by themselves establish the common outer schedule or lift through general Robin Hood transfer chains.
 
 The committed companion regression includes the same check grid, strict domain rejection and the m=0 edge. Its actual committed GitHub bytes have been verified by connector readback, but were not executed as a full checkout in this session. Distinguish exact formula checking, bounded max-flow receipt, source-written Agda, and kernel certification.
+
+
+## General S24 mathematical coupling argument (paper proof, NOT Agda kernel certificate)
+
+The earlier S24.1–S24.7 outline can be tightened into the following **mathematical argument** for strictly positive finite integer count vectors f and g, of the same labeled support size K and total N, with f majorizing g (after relabeling). The argument uses standard HLP majorization and elementary probability couplings. It is mathematically stronger than the finite executable test grid, but its Agda formalization, exact source import proof and compiler receipt are still UNPAID.
+
+**Theorem (full Heaps path order for each fixed horizon).** For either IID sampling with replacement from f/N or a uniform without-replacement permutation of the original multiset with counts f, and any finite admissible horizon t, there exists a coupling of the two *entire prefix-count vectors* `(V_0,...,V_t)` such that `V^f_j ≤ V^g_j` for every `0≤j≤t`. Under IID, t may exceed N; under permutation, `t≤N`. Equality of the two histograms permits the diagonal coupling. This is a model theorem, not an empirical claim about a named corpus.
+
+**Proof.** (1) Reduce to an integer elementary concentrating transfer `(a,b)→(a+1,b-1)` with a≥b≥2; the other K−2 type counts stay fixed. HLP majorization for positive integer partitions gives a finite chain of these transfers, up to relabeling. Each step preserves N, K, the sum S=a+b of the altered pair and strict positivity.
+
+(2) Decompose each random draw into `pair-group` versus `other groups`. For IID, both models select pair-group with probability S/N; use the same sequence of group-choice Bernoulli variables. Conditional on the group choices, use one identical IID sequence on the unchanged other labels with their conditional probabilities. Independently generate each model's pair-label subsequence with its own conditional probabilities `a/S,b/S` or `(a+1)/S,(b-1)/S`. For the fixed permutation model, use the same uniform subset of S pair-group positions in the N-token horizon; independently use the same uniform permutation of the unchanged other token multiset. The pair substreams are uniform random permutations of their respective S tokens. In either model, the outer schedule and all unaffected-type discoveries are **identically distributed and coupled to be identical**.
+
+(3) For the pair substream, let T be the index of the first pair draw at which both member types have been observed. For m=0, `Pr(T>0)=1`. For m≥1, the survival functions of T are:
+
+```
+IID: P(T>m) = (a/S)^m + (b/S)^m
+permutation: P(T>m) = [C(a,m)+C(b,m)]/C(S,m), 1<=m<=S.
+```
+
+(4) The concentrating transfer does not decrease either survival function. For IID, `x^m+(1-x)^m` is nondecreasing in `x≥1/2` (trivial for m=1; for m≥2, derivative `m[x^(m−1)−(1−x)^(m−1)]≥0`). The transfer increases x from a/S to (a+1)/S. For uniform permutation, Pascal's identity gives the exact nonnegative difference
+
+```
+P_(a+1,b-1)(T>m)-P_(a,b)(T>m)
+ = [C(a,m−1)−C(b−1,m−1)]/C(S,m) ≥ 0,
+```
+
+for 1≤m≤S, because a≥b−1. For m=0 it is zero by definition. This identity has been implemented and independently checked on the 291-case finite grid, but the algebraic proof itself is the elementary Pascal rule. It does not depend on a corpus fit.
+
+(5) Therefore `T_concentrated` is stochastically larger than `T_dispersed`. Couple their values with the *same uniform variable* using their inverse CDFs so that `T_concentrated≥T_dispersed` almost surely. For the finite permutation substream this is an ordinary finite distribution, while for the IID positive-probability pair the switch time is finite almost surely. Given these coupled switch times, sample a complete pair-label substream from each model's **own conditional law** given T (regular conditional probabilities exist on these discrete sample spaces). This disintegration restores the correct original marginal laws without disturbing the switch-time order.
+
+(6) After m pair-group positions, the pair has contributed exactly zero discovered types if m=0, one if `1≤m<T`, and two if `m≥T`. Consequently the concentrated pair never contributes more discovered types than the dispersed pair at any common pair position count m. The common outer schedule yields identical numbers of pair positions by every global time j, and the unchanged types contribute the same discovery count. Thus one *joint* pair-transfer coupling satisfies `V_concentrated(j)≤V_dispersed(j)` **simultaneously for all j≤t**.
+
+(7) Compose these ordered couplings through the finite HLP transfer sequence. Existence of conditional Markov kernels/disintegrations on finite discrete histories (or countable IID histories) supplies the standard coupling gluing step. Coordinatewise ≤ is transitive. Finally relabel types as needed; the Heaps curve is invariant under a bijection of type labels. This completes the **mathematical fixed-horizon coupling argument** for either specified sampler. It does not create an empirical, general-purpose claim about non-exchangeable text chronologies.
+
+**Formalization debts:** Prove HLP transfer reachability with positivity-preserving counts, construct the pair-vs-other schedule for each sampler, prove the switch-time stochastic ordering and quantile coupling constructively, show the conditional label-stream kernels reproduce the original distributions, and compose the finite sequence in Agda. No existing source-written Python function is an Agda proof, and no theorem is marked kernel-verified. For IID, a single *infinite* coupling consistent across every finite t is a stronger separate construction; the theorem above only asserts existence for each specified finite t. The previous 268 transport solutions are bounded independent computational confirmations and small-case witnesses, not prerequisites for the paper argument.
+
+**Dual guard:** The valid-curve counterexample with identical individual V_t marginals but Hall deficit 1/2 remains essential. It shows that proving S23 at each t *without* the common pair schedule/switch coupling would not justify S24. The general path-order argument depends on the actual sampling construction, not merely on marginal inequalities.
+
+**Next maximal formal cut:** Source-written Agda needs actual typed finite probability kernels and Strassen transport witnesses, or a simpler explicit pair-stream coupling that avoids a generic max-flow theory. Reuse existing PNF, finite multiset and SSSP order carriers, then certify the transfer lemma before advertising a universal DASHI theorem. The unrelated F13b positive-denominator add-fraction homomorphism remains an independent Agda blocker; do not attach its Bool proof flag to this paper derivation.
