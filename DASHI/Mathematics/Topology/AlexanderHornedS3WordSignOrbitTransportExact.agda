@@ -21,7 +21,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_×_; _,_)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
 import DASHI.Algebra.BalancedTernary as Trit
@@ -220,3 +220,106 @@ normaliseViaTranslation (a , xs) =
 -- Equivalence of quotient SETS follows from these maps and witnesses.
 -- We do NOT identify the original value-S3 action with the distinct
 -- sector-shift/sign action on raw native end addresses.
+
+
+------------------------------------------------------------------------
+-- PAY THE CONVERSE: a real affine-S3 witness exists exactly when the
+-- anchored normal forms agree up to sign. No orbit-cardinality axiom.
+------------------------------------------------------------------------
+
+translateVecUnit : ∀ {n} (xs : Vec C3.C3 n) →
+  End.mapVec (C3._∙_ C3.c0) xs ≡ xs
+translateVecUnit [] = refl
+translateVecUnit (x ∷ xs) =
+  cong₂ _∷_ (C3.leftIdentity x) (translateVecUnit xs)
+
+translateVecCompose : ∀ {n} a b (xs : Vec C3.C3 n) →
+  End.mapVec (C3._∙_ a) (End.mapVec (C3._∙_ b) xs) ≡
+  End.mapVec (C3._∙_ (C3._∙_ a b)) xs
+translateVecCompose a b [] = refl
+translateVecCompose a b (x ∷ xs) =
+  cong₂ _∷_ (sym (C3.associative a b x))
+    (translateVecCompose a b xs)
+
+translateWordUnit : ∀ {n} (w : AnchoredWord n) →
+  translateWord C3.c0 w ≡ w
+translateWordUnit (a , xs) =
+  cong₂ _,_ (C3.leftIdentity a) (translateVecUnit xs)
+
+translateWordCompose : ∀ {n} a b (w : AnchoredWord n) →
+  translateWord a (translateWord b w) ≡
+  translateWord (C3._∙_ a b) w
+translateWordCompose a b (anchor , xs) =
+  cong₂ _,_ (sym (C3.associative a b anchor))
+    (translateVecCompose a b xs)
+
+translateWordCancel : ∀ {n} a (w : AnchoredWord n) →
+  translateWord a (translateWord (C3.inverse a) w) ≡ w
+translateWordCancel a w =
+  trans (translateWordCompose a (C3.inverse a) w)
+    (trans
+      (cong (λ shift → translateWord shift w) (C3.inverseRight a))
+      (translateWordUnit w))
+
+normaliseSameImpliesTranslate : ∀ {n}
+  (w z : AnchoredWord n) →
+  normalise w ≡ normalise z →
+  translateWord (C3._∙_ (anchor z) (C3.inverse (anchor w))) w ≡ z
+normaliseSameImpliesTranslate w z equal =
+  trans
+    (sym (translateWordCompose (anchor z) (C3.inverse (anchor w)) w))
+    (trans
+      (cong (translateWord (anchor z))
+        (trans (normaliseViaTranslation w)
+          (trans (cong normalisedWord equal)
+            (sym (normaliseViaTranslation z)))))
+      (translateWordCancel (anchor z) z))
+
+data SignedOrbitRelated {n} (w z : AnchoredWord n) : Set where
+  sameRelative :
+    normalise w ≡ normalise z → SignedOrbitRelated w z
+  reflectedRelative :
+    End.mapVec C3.inverse (normalise w) ≡ normalise z →
+      SignedOrbitRelated w z
+
+data GlobalS3Related {n} (w z : AnchoredWord n) : Set where
+  translationWitness :
+    (shift : C3.C3) →
+    translateWord shift w ≡ z →
+    GlobalS3Related w z
+  reflectionWitness :
+    (shift : C3.C3) →
+    translateWord shift (reflectWord w) ≡ z →
+    GlobalS3Related w z
+
+signedOrbitToGlobalS3 : ∀ {n} (w z : AnchoredWord n) →
+  SignedOrbitRelated w z → GlobalS3Related w z
+signedOrbitToGlobalS3 w z (sameRelative equal) =
+  translationWitness (C3._∙_ (anchor z) (C3.inverse (anchor w)))
+    (normaliseSameImpliesTranslate w z equal)
+signedOrbitToGlobalS3 w z (reflectedRelative equal) =
+  reflectionWitness
+    (C3._∙_ (anchor z) (C3.inverse (anchor (reflectWord w))))
+    (normaliseSameImpliesTranslate (reflectWord w) z
+      (trans (normaliseReflection w) equal))
+
+globalS3ToSignedOrbit : ∀ {n} (w z : AnchoredWord n) →
+  GlobalS3Related w z → SignedOrbitRelated w z
+globalS3ToSignedOrbit w z (translationWitness shift equal) =
+  sameRelative
+    (trans (sym (normaliseTranslate shift w))
+      (cong normalise equal))
+globalS3ToSignedOrbit w z (reflectionWitness shift equal) =
+  reflectedRelative
+    (trans (sym (normaliseReflection w))
+      (trans (sym (normaliseTranslate shift (reflectWord w)))
+        (cong normalise equal)))
+
+signedOrbitIffGlobalAffineS3 : ∀ {n} (w z : AnchoredWord n) →
+  SignedOrbitRelated w z → GlobalS3Related w z
+signedOrbitIffGlobalAffineS3 = signedOrbitToGlobalS3
+
+-- The converse is a separate theorem with an explicit witness.
+-- This proves the EQUIVALENCE of the TWO ACTUAL orbit relations.
+-- The full quotient-type isomorphism may be packaged in the setoid
+-- category without asserting homogeneous raw carrier equality.
