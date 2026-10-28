@@ -217,3 +217,32 @@ The new Rust tests and Agda import are source-written; Cargo and
 Agda kernel verification have not been executed. Original statutory,
 judicial, ecological, dialectic, SensibLaw and Ibrahim/3B proof
 ownership remains separate. No protected ESD file changed.
+
+## 28 October — geometric 369/27-cube × Sophontic paired case adaptation
+The new Agda module `DASHI/Law/SensibLawWoogarooSophontic369GeometricPerturbationExact.agda`
+is imported via both Woogaroo PreservationEverything and Law.Everything.
+It reuses the pre-existing 27-state T^3 geometry, exact T^9 (19,683
+states) three-row chart, observer roundtrip, hypervoxel adjacency,
+three-cell dialectical synthesis, and separate irreducible face.
+Six independent synthetic Boolean legal attributes embed into three
+ternary 27-cubes (only 64 of 19,683 ambient points). One review-gate
+change propagates two literal 27-grid steps when a derived applicant
+classification changes; one harm-only change makes one step without
+changing the narrow statute review classifier. Both are source-written
+finite models, not facts about the real legal or ecological case.
+The separate compatible three-dialectics boundary has six 27-cells,
+18 ternary coordinates, 387,420,489 configurations, *plus* the
+irreducible face: it is not identified with T^9 or Monster 3B.
+
+Original Sophontic Inc. public 2026 paired-perturbation method is
+credited. Its earlier DASHI semantic-action geometric owners live on
+unmerged #1094/#1095, with Dust/Sophontic #1265 likewise unmerged;
+no absent branch modules were imported or rewritten. SLR #59 emits
+the chart in its source-unpaid JSON packets, offers a new paired
+reference assay and 448 source-written single-axis pair regressions,
+and includes a standalone interactive offline HTML cube viewer at
+`docs/woogaroo-369-geometric-lab.html`. Original G01–G28, 80-target
+max-cut and canonical potential-only snowball ownership are retained.
+No original evidence, real Sophontic model inference, legal determination,
+filed action, kernel proof execution or Monster same-object identity
+has been created. ESD surfaces remain untouched.
