@@ -257,3 +257,89 @@ noRechartOfOnlyOrbitLabelsRecoversIntegerPairOutput :
 noRechartOfOnlyOrbitLabelsRecoversIntegerPairOutput chart =
   Core.collisionSurvivesRechart chart
     orbitQuotientCannotDetermineIntegerPairOutput
+
+
+------------------------------------------------------------------------
+-- Exact negation covariance of the TRUE integer quadratic Fourier sum.
+-- This is the operator-level input for real-field Hermitian coefficients;
+-- it does not prove the amplitude-level conjugation sum on its own.
+------------------------------------------------------------------------
+
+negateWideAxis : M.FiveMode → M.FiveMode
+negateWideAxis M.wideMinusTwo = M.widePlusTwo
+negateWideAxis M.wideMinusOne = M.widePlusOne
+negateWideAxis M.wideZero = M.wideZero
+negateWideAxis M.widePlusOne = M.wideMinusOne
+negateWideAxis M.widePlusTwo = M.wideMinusTwo
+
+negateWideInvolution :
+  (k : M.FiveMode) → negateWideAxis (negateWideAxis k) ≡ k
+negateWideInvolution M.wideMinusTwo = refl
+negateWideInvolution M.wideMinusOne = refl
+negateWideInvolution M.wideZero = refl
+negateWideInvolution M.widePlusOne = refl
+negateWideInvolution M.widePlusTwo = refl
+
+trueSignedAxisSumNegatesCovariantly :
+  (a b : M.ThreeMode) →
+  M.exactQuadraticModeSum (negateMode a) (negateMode b)
+    ≡ negateWideAxis (M.exactQuadraticModeSum a b)
+trueSignedAxisSumNegatesCovariantly M.modeMinus M.modeMinus = refl
+trueSignedAxisSumNegatesCovariantly M.modeMinus M.modeZero = refl
+trueSignedAxisSumNegatesCovariantly M.modeMinus M.modePlus = refl
+trueSignedAxisSumNegatesCovariantly M.modeZero M.modeMinus = refl
+trueSignedAxisSumNegatesCovariantly M.modeZero M.modeZero = refl
+trueSignedAxisSumNegatesCovariantly M.modeZero M.modePlus = refl
+trueSignedAxisSumNegatesCovariantly M.modePlus M.modeMinus = refl
+trueSignedAxisSumNegatesCovariantly M.modePlus M.modeZero = refl
+trueSignedAxisSumNegatesCovariantly M.modePlus M.modePlus = refl
+
+negateWideCube : Conv.WideCube125 → Conv.WideCube125
+negateWideCube (Conv.wideCube a b c) =
+  Conv.wideCube (negateWideAxis a) (negateWideAxis b) (negateWideAxis c)
+
+negateWideCubeInvolution :
+  (k : Conv.WideCube125) →
+  negateWideCube (negateWideCube k) ≡ k
+negateWideCubeInvolution (Conv.wideCube a b c)
+  rewrite negateWideInvolution a
+        | negateWideInvolution b
+        | negateWideInvolution c = refl
+
+trueIntegerQuadraticPairSumNegationEquivariance :
+  (p q : I.ModeCube27) →
+  Conv.exactPairOutput (negateCube p) (negateCube q)
+    ≡ negateWideCube (Conv.exactPairOutput p q)
+trueIntegerQuadraticPairSumNegationEquivariance
+  (I.modeCube a b c) (I.modeCube d e f)
+  rewrite trueSignedAxisSumNegatesCovariantly a d
+        | trueSignedAxisSumNegatesCovariantly b e
+        | trueSignedAxisSumNegatesCovariantly c f = refl
+
+-- Nonzero wide frequency pairs are 62, with one centre:
+-- 125 = 1 + 62×2, corresponding to 63 antipodal output classes.
+wideQuadraticOrbitCount : 125 ≡ 1 + 62 * 2
+wideQuadraticOrbitCount = refl
+
+-- The simultaneous-input negation action on the 729 pair addresses
+-- has one fixed zero/zero pair. This is not pair-swap symmetrisation.
+simultaneouslyNegateOrderedPair : I.ModePair729 → I.ModePair729
+simultaneouslyNegateOrderedPair (p , q) = negateCube p , negateCube q
+
+simultaneousPairNegationInvolution :
+  (pair : I.ModePair729) →
+  simultaneouslyNegateOrderedPair (simultaneouslyNegateOrderedPair pair)
+    ≡ pair
+simultaneousPairNegationInvolution (p , q)
+  rewrite negateCubeInvolution p
+        | negateCubeInvolution q = refl
+
+orderedPairOutputCovariantUnderSimultaneousNegation :
+  (pair : I.ModePair729) →
+  let output : I.ModePair729 → Conv.WideCube125
+      output (p , q) = Conv.exactPairOutput p q
+  in
+  output (simultaneouslyNegateOrderedPair pair)
+    ≡ negateWideCube (output pair)
+orderedPairOutputCovariantUnderSimultaneousNegation (p , q) =
+  trueIntegerQuadraticPairSumNegationEquivariance p q
