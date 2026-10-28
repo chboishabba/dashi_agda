@@ -353,3 +353,23 @@ separate evidence/test lenses. Original Pareto/Ibrahim,
 law, DASHI comparison and Sophontic source authorship stays
 distinct; no real legal/physical Z mediation, Court outcome
 or evidence acquisition is inferred.
+
+## 28 October complete-lemma ledger and native finite graph cut
+
+The complete scoped **119-row** mathematical/case obligation ledger:
+[`Docs/Dialectic27PantsHyperformalCompleteLemmaLedger20261028.md`](Dialectic27PantsHyperformalCompleteLemmaLedger20261028.md).
+Its actual original Woogaroo legal P0 cut remains: retained counsel
+standing, applicant-specific filing clock, authenticated signed
+15 October 2026 instrument/conditions, s95B/s95C decision file,
+same-project Condition 6(a)/works records, expert habitat functional
+impact, and legally appropriate interim/conservation action.
+An original-source obligation is NOT a theorem supplied by a coloured cube.
+
+The newly authored native `PantsPath 3` one-step adjacency
+proof terms and bidirectional `GraphHom` transport are attached
+to the canonical synthesis import aggregate; independent Python
+checked 729 vertex pairs / 108 directed edges. Existing typed
+pants seam, cocycle and independent triadic face are unchanged
+and still necessary. This narrows a genuine graph-colouring gap
+without claiming an arbitrary-colour hyperfabric global section.
+Agda/Cargo remain unrun here.
