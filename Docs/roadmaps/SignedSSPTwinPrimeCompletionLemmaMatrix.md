@@ -524,3 +524,69 @@ genuine pair. The new source-written
 `wheel270RejectsExceptionalStartFive` assert the arithmetic
 filter exclusions explicitly, and are re-exported through all
 three TOE roots. Agda kernel pending.
+
+## 2026-10-28 continuation: Guy priority BIDI plus in-wheel Ibrahim counterexample
+
+### Concrete new proof owners (kernel pending)
+
+`PrimegameTypedNumericFirstApplicableBidiExact.agda` reuses
+`PrimegameSSP15CarrierFactorisationExact`'s exact ordered equality of
+the 14 typed Guy fractions and the historical 14 numeric fractions,
+and `FRACDASHNumericInterpreterTargetExact.FirstApplicableStep`'s
+original inductive first-applicable policy.
+
+The source-written lemmas `typedStepToNumeric` and
+`numericStepToTyped` preserve and reflect the chosen rule AND every
+failed higher-priority guard. `guyTypedToNumeric`,
+`guyNumericToTyped`, `guyTypedHaltToNumeric`, and
+`guyNumericHaltToTyped` specialise to the **actual 14-rule Guy
+programme**. `ExactFractionApplies` uses an integer successor
+witness `m*d=n*a` with nonzero denominator. The distinct
+`ExactFractionEvaluator` demands proof that a selected evaluator
+returns that successor; **no concrete signed FRACDASH evaluator
+instance is currently supplied**.
+
+This advances A05/A06 and the typed-factor part of C02/C03 from a
+bare 14-rule list to **first-applicable BIDI source terms**. A07/A08,
+B03 and C08 still need an actual signed state/action compiler and
+readout commuting proof. No purported historical PRIMEGAME
+completeness proof was conjured.
+
+`TwinPrimeTernary270IbrahimSurvivorCollisionExact.agda` strengthens
+the earlier arithmetic 5-versus-20 proof by using an **in-sieve**
+pair of 3x3x3 states, both passing the finite 2/3/5 filters:
+
+- `(x,y,z)=(0,-1,+1)` encodes 59, a genuine twin start (59,61).
+- `(0,+1,-1)` encodes 209=11×19, not a twin start.
+
+The *original Ibrahim* quotient `27→3×5=15` identifies both states
+because the x coordinate agrees and y/z are simultaneous antipodes.
+`ibrahimFifteenFailsActualTwinConsumerWithinWheel` reuses the
+existing `ConsumerCollision`/`nonFactorabilityWitness` theorem
+owners and `SignedSSPOrientationTwinClassifierNoGoExact.twinStartBool`
+(actual Nat proof-bearing primality decider). Thus this exact
+quotient is not even sufficient **after local 2/3/5 sieving**.
+The full 3x3x3 state plus an adequate residual remains necessary
+for lossless prime-start observation. This does not establish any
+Monster 3B same-object equivalence or an analytic prime result.
+
+### Executed finite evidence and next max-cut
+
+Local exact Python executed the 270 residue cases, actual 59/209
+in-sieve collision, all 14 Guy factorisations and 20,000 selected
+first-applicable integer steps. The new committed regression script
+`scripts/check_primegame_typed_numeric_priority_bidi.py` makes the
+latter repeatable in-repo; `check_twin_prime_369_affine_270_crt.py`
+now includes the 59/209 collision. **No Agda kernel or CI run**.
+
+Remaining direct implementation cut: provide a *concrete*
+`ExactFractionEvaluator` for Nat arithmetic, prove its chosen
+successor matches the original FRACDASH runtime, preserve 14-rule
+priority under signed compilation, and instantiate existing
+`ReferenceToSignedPrimeEmitter` only if its independent source
+reachability/completeness premises can actually be proved.
+
+Independent subsequent cut: E03–E08 general coprime prime-product
+CRT, p-2 local counts and analytic gates F02/F04/F06/F07 and G01.
+Existing finite encodings and Monster fingerprints cannot
+discharge these analytic estimates.
