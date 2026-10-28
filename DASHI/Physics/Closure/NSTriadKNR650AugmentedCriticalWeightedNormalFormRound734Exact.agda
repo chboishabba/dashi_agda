@@ -27,13 +27,117 @@ module DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRou
 -- scalar W with viscosity times one input-Laplacian coherent work, so theorem
 -- search may stay on that signed quartic carrier.
 --
+-- 2026-10-27 SOURCE-SPECIFIC PHYSICAL NEGATIVE CONTROL (NO CLAY CLAIM):
+-- On a real smooth six-mode, pure-positive-helicity velocity (all H- modes
+-- zero initially), M(0)=0 and integrated weighted W'(0)=0, yet the
+-- same literal dyadic critical production is
+-- Pcrit=(5+sqrt(5)-sqrt(30))/10>0; Xcrit=8, Dcrit=36.
+-- Scaling the *actual* physical Fourier velocity by 512 with nu=1 gives
+-- Xcrit'(0)=512^2(512 Pcrit -72)>0. Consequently the sought R734
+-- inequality with ANY retained margin delta>0 is false on a sufficiently
+-- short initial interval of the actual projected finite Galerkin ODE.
+-- The record below is a CONDITIONAL compiler, not an unproved universal
+-- theorem awaiting only routine constants. Preserve original conditional
+-- algebra and the historical positive-proof status flags as false.
+-- Exact symbolic/real-helical acceptance: tests/test_ns_r734_pure_plus_physical_w2_no_go.py
+-- Details/credit: Docs/research/ns_r734_pure_plus_physical_w2_no_go_20261027.md
+-- Crucial PRIOR-ART REUSE: Waleffe's true signed-helicity invariant
+-- (R92/R102) uses the exact curl eigenvalue +/-|k|, NOT R734's
+-- rounded-up dyadic weight 2^ceil(log2 ||k||infty). On the SAME
+-- pure-plus counterexample, exact-helicity nonlinear production is
+-- zero, while dyadic-weighted production is >0: the difference
+-- is the exact signed weight-defect sum
+--    2 Re Σ_k [dyadicWeight(k)-|k|] <u_k, PNSnonlin(u)_k>.
+-- Norm equivalence does not imply derivative/sign equivalence.
+-- A viable replacement analytical target must control this defect
+-- together with physical same-helicity and mixed-helicity channels.
+-- The full real-analytic Galerkin witness is NOT kernel formalised here.
+--
+-- 2026-10-27 PHYSICAL CRITICAL SMALL-DATA COMPANION (NOT THE W2 LEAF):
+-- For the SAME sharp cube weight w(k)=2^ceil(log2 ||k||infty), the full
+-- unforced mean-zero Fourier Galerkin trajectory satisfies
+--   X'_N + 2 nu D_N = P_N,
+--   |P_N| <= Ccrit sqrt(X_N) D_N,
+--   Ccrit=4*3^(3/4)*C6*C3.
+-- Here C6,C3 are the FIXED periodic H1->L6 and H3/2->W1,3
+-- Sobolev constants; r/sqrt(3)<=w(k)<2r for r=|k|2.
+-- This classical Fujita--Kato critical-small-data consequence yields
+--   X_N(T) + (2nu-Ccrit sqrt(X_N(0))) int_0^T D_N <= X_N(0)
+-- ONLY WHEN  Ccrit sqrt(X_N(0))<2nu.
+-- Furthermore arbitrary E0>0 eventually enters X<=nu²/Ccrit²
+-- at common t_enter=1/nu+max(0,log(sqrt(2)*Ccrit²*E0/nu²)/(2nu)).
+-- Then X_N(T)+nu int_t_enter^T D_N <= nu²/Ccrit².
+-- An optimised single-window recovery certificate uses
+--   A=sqrt(2)*Ccrit²*E0/nu², z*=min(A²,1/4),
+--   T*= A²/nu                       if 0<A<=1/2,
+--   T*=(1/4+log(2A)/2)/nu           if A>=1/2.
+-- The original t_enter formula above remains a VALID but nonoptimal
+-- instance. The new T* is a reduced upper bound on late entry, not
+-- an estimate on the missing pre-entry large-data critical interval.
+-- 2026-10-27 STRONGER ALL-DATA CRITICAL RESIDENCE MAX-CUT:
+-- For the SAME real unforced mean-zero full finite Galerkin trajectory,
+-- E_N=sum |u_k|² and H_N=sum |k|² |u_k|² obey E_N'=-2nu H_N.
+-- Since this source dyadic w(k)<2|k|, exact Fourier Cauchy implies
+--    X_N² <= 4 E_N H_N = -(2/nu) E_N E_N'.
+-- Therefore (with NO small-critical initial-data assumption)
+--    int_t0^T X_N(t)² dt <= (E_N(t0)²-E_N(T)²)/nu
+--    int_0^infinity X_N(t)² dt <= E0²/nu, uniformly in N.
+-- The dimensionless coefficient 1 is SHARP for this dyadic source:
+-- actual real unforced heat shears +/-n, n=2^(j-1)+1 have
+-- int X² / (E0²/nu)=(2^(j-1)/(2^(j-1)+1))² ->1.
+-- From the same bound: meas{t>=t0 : X_N(t)>B} <= E_N(t0)²/(nu B²).
+-- This bounds only TOTAL CRITICAL RESIDENCE, never sup X or signed W2.
+--
+-- Improved correlated L²-time averaging: let Anew=Ccrit² E0/nu².
+-- At the common all-cutoff late-entry time
+--    Tres=Anew²/nu                    if 0<Anew<=1/2,
+--    Tres=(1/4+log(2 Anew)/2)/nu     if Anew>=1/2,
+-- one has X_N(Tres)<=nu²/Ccrit² and the source's proven
+-- restricted critical absorption applies from Tres onward.
+-- For tau>=0, Poincare D_N>=X_N and Riccati comparison further give
+--    X_N(Tres+tau)<=4 nu²/(Ccrit² (1+exp(nu tau))²).
+-- This improves the older constant Aold=sqrt(2)*Anew and the
+-- eventual decay rate, but DOES NOT pay arbitrary-large-data
+-- early/middle critical production or the FALSE original W2 leaf.
+-- Mathematical roots: Leray kinetic-energy identity, Fourier Cauchy,
+-- Fujita--Kato small-critical comparison; exact dyadic heat-shear
+-- sharpness is this source-specific calculation, NOT a Clay proof.
+-- See Docs/research/ns_r734_critical_residence_pareto_20261027.md
+-- and tests/test_ns_r734_critical_residence.py (13 local checks).
+-- 2026-10-27 EXACT SAME-EQUATION NONPROMOTION:
+-- At fixed kinetic E0, an unforced real Fourier heat shear +/-n has
+-- X_n(t)=w(n) E0 exp(-2 nu n²t) and
+-- D_n(t)=w(n) n² E0 exp(-2 nu n²t), but P_n(t)=0 identically.
+-- Nevertheless int_0^infinity sqrt(X_n) D_n dt
+--   =w(n)^(3/2) E0^(3/2)/(3 nu) -> infinity as n -> infinity.
+-- Thus the valid cutoff-uniform int X_N² bound can NEVER pay this
+-- cutoff-uniform ABSOLUTE nonlinear upper majorant from E0 alone.
+-- Cancellation must be proved on the ACTUAL signed mode transfer.
+-- The derived L4_t H^(1/2)_x -> L4_t L3_x Serrin sum is 3/2>1,
+-- so it is not a continuation criterion. This refutes only the
+-- attempted deduction, not the validity of the classical energy
+-- identity, same-operator helicity accounting, or global regularity.
+--
+-- These are documented ANALYTIC derivations, not Agda formalised
+-- PDE results or an independent kernel-checked theorem receipt.
+--
+-- These are analytical physical-source derivations recorded at:
+--   Docs/research/ns_r734_critical_small_data_dyadic_20261027.md
+-- with seven local arithmetic tests in test_ns_r734_critical_small_data.py.
+-- They do NOT establish the ORIGINAL signed W2 bound involving 12 C_N,
+-- do NOT pay the arbitrary-large-data [0,t_enter] middle interval,
+-- and are NOT Agda kernel-proved by this rational polynomial module.
+-- Original Fujita--Kato ownership, classical embeddings and exact
+-- original source-vs-code distinctions must be preserved.
+--
 -- No estimate is introduced here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -61,6 +165,75 @@ import DASHI.Physics.Closure.NSTriadKNR650RateKernelInputLaplacianCollapseRound6
 
 F : C3.RealField _
 F = Rational.rationalRealField
+
+------------------------------------------------------------------------
+-- SOURCE-WRITTEN R734 POLARIZATION / WEIGHT-DEFECT IDENTITY
+--
+-- Original roots: Waleffe helical signed conservation, already compiled
+-- by DASHI R92/R102. The original R734 weight is DYADIC, not |k|.
+-- For ANY real weight w, exact curl radius r, plus energy ep and
+-- minus energy em:
+--   w(ep+em) = r(ep-em) + 2*r*em + (w-r)(ep+em).
+-- As a polynomial identity this is generic ℚ ring algebra.
+-- Applied physically it says dyadic critical energy = exact signed
+-- helicity + twice the negative-helicity mass + weight defect.
+-- The physical square root, helical projectors, PDE derivative and
+-- nonlinear bound are NOT supplied by this rational polynomial lemma.
+------------------------------------------------------------------------
+
+dyadicCriticalEnergyAsSignedHelicityPlusNegativeAndDefect :
+  (w radius plusMass minusMass : ℚ) →
+  w * (plusMass + minusMass)
+  ≡ radius * (plusMass - minusMass)
+    + ((1ℚ + 1ℚ) * radius) * minusMass
+    + (w - radius) * (plusMass + minusMass)
+dyadicCriticalEnergyAsSignedHelicityPlusNegativeAndDefect
+    w radius plusMass minusMass =
+  solve (w ∷ radius ∷ plusMass ∷ minusMass ∷ [])
+
+------------------------------------------------------------------------
+-- R734 / R92 EXACT WALEFFE-TRIAD WEIGHT CURVATURE (2026-10-27)
+--
+-- Original triad conservation roots: Waleffe (1992); inherited R92/R102.
+-- Source-specific witness: tests/test_ns_r734_phase_curvature.py.
+-- For an ordered positive-helicity triad with radial frequencies a<b<c,
+-- modal paired transfers are A*(b-c,c-a,a-b). The following RATIONAL
+-- polynomial identities do not claim that the original physical |k|
+-- square roots, Galerkin nonlinear force, or A are inhabited by this
+-- rational carrier. They DO preserve exact algebra and avoid importing
+-- false universal R734 W2 positivity.
+--
+-- Weighted production is A times a spectral secant-slope difference:
+-- ((b-c)wp+(c-a)wq+(a-b)wk)
+--    = (c-b)(wq-wp) - (b-a)(wk-wq).
+-- There is no division by an unproved spectral gap in this certificate.
+------------------------------------------------------------------------
+
+waleffeTriadEnergyTransferCyclicZero :
+  (small middle large : ℚ) →
+  ((middle - large) + (large - small)) + (small - middle) ≡ 0ℚ
+waleffeTriadEnergyTransferCyclicZero small middle large =
+  solve (small ∷ middle ∷ large ∷ [])
+
+waleffeTriadExactRadiusTransferCyclicZero :
+  (small middle large : ℚ) →
+  ((small * (middle - large)) + (middle * (large - small)))
+     + (large * (small - middle)) ≡ 0ℚ
+waleffeTriadExactRadiusTransferCyclicZero small middle large =
+  solve (small ∷ middle ∷ large ∷ [])
+
+weightedTriadProductionAsSecantNumerator :
+  (amplitude small middle large lowWeight middleWeight highWeight : ℚ) →
+  amplitude *
+    (((middle - large) * lowWeight +
+       (large - small) * middleWeight) +
+       (small - middle) * highWeight)
+  ≡ amplitude *
+    ((large - middle) * (middleWeight - lowWeight) -
+     (middle - small) * (highWeight - middleWeight))
+weightedTriadProductionAsSecantNumerator
+    amplitude small middle large lowWeight middleWeight highWeight =
+  solve (amplitude ∷ small ∷ middle ∷ large ∷ lowWeight ∷ middleWeight ∷ highWeight ∷ [])
 
 module AugmentedWeighted
     (Time : Set)
