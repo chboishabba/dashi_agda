@@ -22,11 +22,11 @@ def main() -> None:
     owner, canon, memo, counsel, legal, merits, cumulative, prestart, prior_counsel, prior_documents = (
         p.read_text(encoding="utf-8") for p in ORIGINALS
     )
-    assert owner.count("Source.mkNoDOISource") == 8
-    assert owner.count("Source.publicAttribution") == 8
+    assert owner.count("Source.mkNoDOISource") == 10
+    assert owner.count("Source.publicAttribution") == 10
     assert owner.count("= case-hypothesis") == 7
     assert owner.count("false refl") == 7
-    assert owner.count("→ ⊥") == 10
+    assert owner.count("→ ⊥") == 13
     assert canon.count("import DASHI.Law.SensibLawWoogarooEPBC8575PleadableGroundsPrecedentCut20261028Exact") == 1
 
     for p in (
@@ -54,7 +54,9 @@ def main() -> None:
         "tarkine2015FullCourtAdverse",
         "eccq2024FullCourtPrimary",
         "rainforest2025Dismissal",
-        "epbcTransitionDepartmentOriginal"
+        "epbcTransitionDepartmentOriginal",
+        "mackay2015ConsentOrdersParliamentRecord",
+        "mackay2015NoJudicialFindingParliamentRecord"
     ):
         assert source in owner, source
 
@@ -66,7 +68,9 @@ def main() -> None:
                   "practitionerSummaryNotCourtJudgment", "recoveryAimNotAbsoluteProhibition",
                   "adviceURLNotConsideration", "notPublicNotNecessarilyAbsent",
                   "guidanceNotCommencementMatrix", "differentWindFarmDoesNotDecideWoogaroo",
-                  "sourceHypothesesNotFiled", "developerClaimNotRegulatorFinding"):
+                  "sourceHypothesesNotFiled", "developerClaimNotRegulatorFinding",
+                  "proposed2013AmnestyNotEnacted", "mackayConsentNotRatio",
+                  "differentAdviceNotThisDelegateError"):
         assert guard in owner, guard
 
     assert "Merits.s139" in owner and "s139 : OperativeRule" in merits
@@ -85,13 +89,16 @@ def main() -> None:
     assert "28 October precedent steelman and rebuttal" in counsel
     assert "28 October P0 case-ground steelman" in legal
     assert "Stockland Springview primary project FAQ" in memo
+    assert "Mackay Conservation Group 2015 consent" in memo
+    assert "NSD33/2015" in memo and "no judgment or findings" in memo.lower()
+    assert "2013 amnesty" in memo and "without Schedule 1" in memo
     assert "three times the Ipswich minimum width" in memo
     assert "DeveloperFAQEqualsCommonwealthScientificFinding" in owner
     assert "zero of seven grounds" in memo
     assert "NOT counsel's signed opinion" in memo
     assert "not a 2019/8575 ruling" in owner
     assert "failClosed : establishedSpecificBreach ≡ false" in owner
-    print("PASS: 8 original source roots, 7 fail-closed candidate grounds, 10 non-promotion guards, 6 canonical owner imports and case-source coverage")
+    print("PASS: 10 original source roots, 7 fail-closed candidate grounds, 13 non-promotion guards, 6 canonical owner imports and case-source coverage")
 
 
 if __name__ == "__main__":
