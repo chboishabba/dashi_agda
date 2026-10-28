@@ -87,7 +87,9 @@ wideToFourGrid (Conv.wideCube a b c) =
 
 eqFourCube : FourGridCube64 → FourGridCube64 → Bool
 eqFourCube (fourCube a b c) (fourCube x y z) =
-  (eqFour a x Conv.&&B eqFour b y) Conv.&&B eqFour c z
+  Conv._&&B_
+    (Conv._&&B_ (eqFour a x) (eqFour b y))
+    (eqFour c z)
 
 fourGridRetainedCubeMembership :
   (wide : Conv.WideCube125) (retained : I.ModeCube27) →
