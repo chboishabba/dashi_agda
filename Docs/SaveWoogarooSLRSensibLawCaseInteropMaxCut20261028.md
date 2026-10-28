@@ -304,3 +304,17 @@ execution has been performed in this turn. No ESD surfaces edited,
 no cross-object Monster identification, and full original
 Dunn–Belnap, original DASHI, SensibLaw and Ibrahim proof credits
 preserved.
+
+**Final nested synthesis gate refinement:** the signed branch
+cannot determine a legal candidate from the polarity of one alleged
+defect. The source-written `signedFibreFocus` now checks the
+conjunction of signed applicability, reviewed original,
+same-project stage and applicant materiality or respondent
+compliance, after preserving any both-supported contradiction
+on all nine claim slots. Its SLR counterpart is
+`woogaroo_signed_nested_focus`; the browser viewer matches.
+The independently enumerated exhaustive 4^9 finite model
+with stipulated synthetic review=true classifies 54 applicant,
+81 respondent, 19,548 missing-antecedent, and 242,461
+conflicted arrangements. These are hypothetical configurations,
+not a Woogaroo evidence or legal assessment.
