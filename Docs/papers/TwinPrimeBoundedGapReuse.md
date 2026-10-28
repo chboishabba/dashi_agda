@@ -102,3 +102,42 @@ The user identifies the video **Veritasium, “We're 99.9% sure this pattern is 
 **Max-cut:** (1) Agda kernel-check these modules; (2) discharge concrete arithmetic-to-tag encoding and the missing-primes/general-prime CRT transport; (3) transfer weighted-sieve threshold and analytic distribution results from exact source statements. Reuse the 2026 external Lean work with its declared assumptions. No Monster character fingerprint, numerical correlation, or signed-machine execution may bypass the original Ibrahim attribution and same-object boundaries.
 
 **Executed local exact checks:** both finite Python scripts passed on 2026-10-28. No Agda kernel run, GitHub CI pass, or external Lean recheck is claimed.
+
+## 2026-10-28 P7: SSP-prime generation / arbitrary-modulus symmetry max-cut
+
+**User hypothesis, precisely scoped:** we might generate prime axes from the SSP construction and then use symmetry to calculate new moduli. Existing formalism verifies a related but stricter two-stage route:
+
+1. `DASHI.Geometry.SSP369TreeAutomorphism.actionPreservesPrimeLane` is an exact proof that an SSP unit/refinement action preserves its original *prime label*. Thus an SSP/C3/369 symmetry orbit on a **fixed** lane does **not** generate a new arithmetic prime. Nor do the Stage12 "prime successor" candidate labels automatically carry `Data.Nat.Primality.Prime`.
+2. `DASHI.Interop.PrimeSuccessorWitness` contains `candidateOnly=true` with universal-prime promotion blocked. `DASHI.Foundations.MixedPrimeResolution` already provides a third factor axis `2^a 3^b q^c` but explicitly requires `q` primality and pairwise coprime witnesses for CRT. These are the strongest correct existing prime-extension donors, not missing architecture.
+3. `DASHI.Analysis.NatPrimeCountingInstance` supplies the existing proof-bearing `Data.Nat.Primality.prime?` and exact prime count. `DASHI.Arithmetic.PrimeModSixSieveExact` already proves that every prime >3 belongs to residues 1 or 5 modulo six. That theorem gives a complete **candidate family**, not a primality certificate for every candidate.
+4. `DASHI.Arithmetic.CertifiedPrimePairModulusExact` (new) represents each additional prime as `CertifiedPrimeAxis` carrying `Prime (suc c)`; `certifyCandidate` uses the same proof-bearing Nat decider. `LocalPairSurvives` tests actual `n % p != 0` **and** `(n+2) % p != 0`. The decider `localPairSurvives?` is exact for every certified modulus, not fixed to SSP15. `AllPairSurvive` and `allPairSurvive?` combine arbitrary finite lists; `extendedSieveRetainsEarlier` proves adding a prime does not lose previous restrictions.
+5. The exact Agda source lemmas `localModPeriod`, `localOffsetPeriod`, `localPairPeriodic`, and `localPairPeriodicBack` formalise *residue symmetry* under `n -> n+p` for any certified prime `p`. They use the stdlib `[m+n]%n≡m%n` theorem, not an SSP-label substitution. `sspAddressSymmetryPreservesPrime` directly reuses the existing SSP theorem and blocks mixing those two actions.
+6. `Product.ResidueCoordinates` / `residueProductEncodeDecode` reuse the existing arbitrary-list mixed-radix codec. The **arithmetic** CRT forward map `canonicalPrimeCRTForward` projects actual `Fin (M*p)` residues to `Fin M × Fin p`. The new `ArithmeticPrimeCRTStep` requires `Coprime M p`, a reconstructed inverse, and both inverse laws. No such general Agda CRT inverse was silently provided or mislabeled complete. This matches existing `DASHI.Biology.DecimalCRTResolutionExact` precedent, which separates a cardinality codec from a coherent CRT inverse.
+
+### Executed numerical cross-check
+
+`scripts/check_twin_prime_arbitrary_crt_symmetry.py` uses the mod-6 candidate generator, exact integer trial-divisor primality certification, and the constructive arithmetic CRT extension
+
+`x = r + M * (((t-r) * M^{-1}) mod p)`
+
+for coprime `M,p`, with asserted reductions modulo each factor, bounds, absence of duplicate residues, and equality with direct exhaustive sieving. It checks:
+
+- Every generated prime through 251 agrees with an independent full candidate scan. Composite numbers 6k±1 are rejected.
+- Twelve certified prime axes through 103 absent from SSP15: 37,43,53,61,67,73,79,83,89,97,101,103.
+- Modulus-period symmetry for all primes through 103.
+- CRT repeated extension through modulus 30030 has 1485 pair survivors; direct enumeration agrees.
+- Extension from six-wheel by primes 37 and 43 yields modulus `6*37*43=9546`, with exactly `(37-2)*(43-2)=1435` pair survivors; direct enumeration agrees.
+
+**Exact finite runtime checks executed 2026-10-28.** A Python primality test and an arithmetic CRT regression are source-written executable checks, *not* Agda proof certificates, a general analytic prime asymptotic, or evidence of twin-prime infinitude. The new Agda declarations have not been kernel type-checked in the current environment.
+
+### Updated Pareto/Ibrahim proof frontier
+
+- **P0 finite mod + candidate**: new certified arbitrary prime-axis type, executable local pair decider, and one-axis period/symmetry proofs are source-written and wired into the TOE graph. Agda kernel run remains required.
+- **P1 global CRT**: the missing exact Agda proof is a reconstructed inverse satisfying `ArithmeticPrimeCRTStep` for coprime `M,p`. In the canonical source it is a *typed uninhabited obligation*, not the already-owned mixed-radix codec.
+- **P2 CRT pair count**: general local count `p-2` for `p>2`, with special `p=2` factor 1; derive finite-product counts on the arithmetic CRT representation, not by relabeling one-number `p-1` counts.
+- **P3 prime completeness**: check the source decision procedure against all divisors through `sqrt(n+2)` and the existing complete Nat prime enumeration; a finite mod wheel alone does not prove either endpoint prime.
+- **P4 analytic parity barrier**: sieving local congruence classes alone cannot establish infinitely many twin primes. Maynard/Polymath finite-gap methods require global distribution inputs; the bounded-gap best-known source proposal `PrimeGaps186` has three explicit Lean axioms. Preserve source authorship, conditionality and independent numeric receipts. Consult Axiom Math `PrimeGapsLib` for Lean method structure rather than claiming new proof ownership.
+- **P5 governance**: no modification to the unrelated large-gap Lichtman/Alexeev intake, to the existing Ibrahim Monster 3B proof ownership, or to ESD modules. No observed residue fingerprint, signed SSP valuation, or machine trace equals a Monster representation or a proof of the twin-prime conjecture.
+
+Primary external URLs: [OpenAI PrimeGaps186](https://github.com/openai/PrimeGaps186), [Axiom Math PrimeGapsLib](https://github.com/AxiomMath/PrimeGapsLib), and the source work credited above. `CRTPeriod.agda` and `DASHI.Biology.DecimalCRTResolutionExact` already provide periodicity and CRT proof-shape donors; the new source **reuses** standard modular lemmas and retains original authorship.
+
