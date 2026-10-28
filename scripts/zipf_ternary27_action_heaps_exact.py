@@ -246,3 +246,86 @@ def compare_three_to_five_coding_axes():
     return {"five_trit_words":243,"their_heaps_curves":11,
             "three_five_mode_words":125,"their_heaps_curves":4,
             "independent_cyclic_cube_orbits":11}
+
+
+def equality_pattern_heaps_fibres(alphabet: int, length: int):
+    """Actual S_q value-relabel quotient and its Heaps observation pushforward.
+
+    Restricted growth patterns canonically encode set partitions (classic
+    Stirling/Bell combinatorics), not a new ternary-group carrier.
+    For a pattern with k used labels, its orbit of named words has exactly
+    (q)_k = q*(q-1)*...*(q-k+1) elements. The original Zipf Heaps fibre
+    count is recovered by summing orbit cardinalities over matching curves.
+    """
+    if (type(alphabet) is not int or type(length) is not int
+            or not 1<=alphabet<=7 or not 1<=length<=10
+            or alphabet**length>30000):
+        raise ValueError('bounded positive alphabet and history length required')
+
+    # Generate restricted-growth strings directly, NOT every named word.
+    patterns={(0,)}
+    for _ in range(1,length):
+        following=set()
+        for pattern in patterns:
+            top=max(pattern)
+            for next_label in range(min(top+1,alphabet-1)+1):
+                following.add(pattern+(next_label,))
+        patterns=following
+
+    def falling(q,k):
+        result=1
+        for i in range(k):
+            result*=q-i
+        return result
+
+    def curve(word):
+        known=set();result=[0]
+        for label in word:
+            known.add(label)
+            result.append(len(known))
+        return tuple(result)
+
+    by_k=Counter()
+    by_curve=Counter()
+    pattern_sizes={}
+    for pattern in sorted(patterns):
+        k=max(pattern)+1
+        mass=falling(alphabet,k)
+        pattern_sizes[pattern]=mass
+        by_k[k]+=1
+        by_curve[curve(pattern)]+=mass
+
+    assert sum(pattern_sizes.values())==alphabet**length
+    # Existing canonical uniform Heaps fibres and conditional IID path
+    # interpretation are independently checked by its original owner.
+    expected=uniform_heaps_curve_multiplicities(alphabet,length)
+    assert dict(by_curve)==expected
+
+    return {
+        'pattern_count':len(patterns),
+        'stirling_counts':dict(sorted(by_k.items())),
+        'pattern_orbit_cardinalities':pattern_sizes,
+        'heaps_curve_count':len(by_curve),
+        'heaps_curve_fibres':dict(sorted(by_curve.items())),
+    }
+
+
+def exact_three_five_pattern_boundary():
+    """Structural calculation behind 3^5 versus 5^3, not an object weld."""
+    triad_depth5=equality_pattern_heaps_fibres(3,5)
+    five_mode_depth3=equality_pattern_heaps_fibres(5,3)
+    triad_depth3=equality_pattern_heaps_fibres(3,3)
+    assert triad_depth5['stirling_counts']=={1:1,2:15,3:25}
+    assert triad_depth5['pattern_count']==41
+    assert triad_depth5['heaps_curve_count']==11
+    assert five_mode_depth3['stirling_counts']=={1:1,2:3,3:1}
+    assert five_mode_depth3['pattern_count']==5
+    assert five_mode_depth3['heaps_curve_count']==4
+    assert triad_depth3['pattern_count']==5
+    assert triad_depth3['heaps_curve_count']==4
+    assert len(orbit_partition(C3,axis_permute))==11
+    # Equal number of 3^5 Heaps curves and 3^3 C3 coordinate orbits
+    # is NOT equality of set partitions, orbit actions or their measures.
+    return {'three_raised_five':triad_depth5,
+            'five_raised_three':five_mode_depth3,
+            'three_cubed':triad_depth3}
