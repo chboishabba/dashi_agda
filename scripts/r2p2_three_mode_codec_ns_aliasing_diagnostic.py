@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 from itertools import product
 from collections import defaultdict
+from fractions import Fraction
 import json
 
 MODES = (-1, 0, 1)
@@ -95,6 +96,60 @@ def three_axis_27_mode_pair_audit() -> dict:
     }
 
 
+
+def exact_two_mode_leray_aliasing_audit() -> dict:
+    """A nonzero, divergence-free, quadratic NS Fourier-mode test.
+
+    Only the symmetric convective Fourier coefficient and algebraic
+    Leray projector P_k=I-kk^T/|k|² are modelled. The common complex
+    Fourier factor i is omitted. No NS velocity solution is constructed.
+    """
+    p, q = (1, 0, 0), (1, 1, 0)
+    a, b = (0, 1, 0), (1, -1, 0)
+
+    def dot(v, w):
+        return sum(x*y for x, y in zip(v, w))
+
+    def add(v, w):
+        return tuple(x+y for x, y in zip(v, w))
+
+    def leray(k, v):
+        k2 = dot(k, k)
+        if k2 == 0:
+            raise ValueError("Leray projector at zero wavevector is not selected")
+        contraction = Fraction(dot(k, v), k2)
+        return tuple(Fraction(x) - contraction*y for x, y in zip(v, k))
+
+    assert dot(p, a) == 0
+    assert dot(q, b) == 0
+    k = add(p, q)
+    aliased = tuple(centered_mod(x, 3) for x in k)
+    # Ordered p,q and q,p contributions to (u·∇)u, up to common i.
+    convective = tuple(dot(a, q)*b_i + dot(b, p)*a_i
+                       for a_i, b_i in zip(a, b))
+    true_projected = leray(k, convective)
+    aliased_projected = leray(aliased, convective)
+    assert k == (2, 1, 0)
+    assert aliased == (-1, 1, 0)
+    assert convective == (1, 0, 0)
+    assert true_projected == (Fraction(1, 5), Fraction(-2, 5), Fraction(0))
+    assert aliased_projected == (Fraction(1, 2), Fraction(1, 2), Fraction(0))
+    assert true_projected != aliased_projected
+    return {
+        "p": list(p), "q": list(q),
+        "transverse_p_amplitude": list(a),
+        "transverse_q_amplitude": list(b),
+        "true_integer_output_k": list(k),
+        "folded_three_grid_output_k": list(aliased),
+        "symmetrized_input_nonlinearity_up_to_i": list(convective),
+        "leray_at_true_k": list(map(str, true_projected)),
+        "leray_at_folded_k": list(map(str, aliased_projected)),
+        "different": True,
+        "full_NS_equations_or_time_evolution_solved": False,
+        "uniform_cutoff_estimate_established": False,
+    }
+
+
 def audit() -> dict:
     assert all(DECODE[CODEC[m]] == m for m in MODES)
     assert DECODE[(1, 1)] is None
@@ -144,6 +199,7 @@ def audit() -> dict:
         "binary_subcarrier_uses_only_nonzero_modes": True,
         "example": representative,
         "three_axis_mode_pair_audit": three_axis_27_mode_pair_audit(),
+        "two_mode_divergence_free_leray_audit": exact_two_mode_leray_aliasing_audit(),
         "ns_physical_model_realised": False,
         "ns_clay_or_qg_proved": False,
         "r2p2_optical_clock_measured": False,
