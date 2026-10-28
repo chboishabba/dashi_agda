@@ -292,3 +292,14 @@ pair-sieve tests, yet 119=7×17 and 121=11×11. The source-written
 `wheel270119SurvivalCannotProveTwin` uses the existing
 stdlib Composite proof owner, not a synthetic prime predicate.
 The finite Python script now mirrors these checks.
+
+**Exceptional small-prime boundary:** the local mod-2/3/5 wheel
+excludes n=3 and n=5 because an endpoint equals a sieving prime.
+These are genuine familiar twin-prime starts (3,5) and (5,7),
+so the mod-270 theorem must be described as *exactly covering the
+wheel's local surviving residues*, never as classifying every
+genuine pair. The new source-written
+`wheel270RejectsExceptionalStartThree` and
+`wheel270RejectsExceptionalStartFive` assert the arithmetic
+filter exclusions explicitly, and are re-exported through all
+three TOE roots. Agda kernel pending.
