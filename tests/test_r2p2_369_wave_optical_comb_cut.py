@@ -46,6 +46,7 @@ class R2P2369WaveCutTests(unittest.TestCase):
             "ShiftWaveRefinementSeam",
             "WaveAlgorithmLift",
             "Base369PolyphaseKernelBoundary",
+            "Base369PhaseBridge",
             "QuantumClockDimensionlessObservableLaw",
             "R2P2MountainOpticalClockComparisonExact",
         ):
@@ -63,6 +64,9 @@ class R2P2369WaveCutTests(unittest.TestCase):
             "waveEncodedStateIsSufficient",
             "shiftFiniteWaveFineProjectsToCoarse",
             "finiteC3OneStepIsAdditive",
+            "sixPhaseCoarseRotationLaw",
+            "ninePhaseCoarseRotationLaw",
+            "nonaryBlockCoarsePhaseRotationObstruction",
             "clockPhaseIsDimensionless",
             "redshiftIsDimensionless",
             "finiteWaveAlgorithmTritInvolution",
