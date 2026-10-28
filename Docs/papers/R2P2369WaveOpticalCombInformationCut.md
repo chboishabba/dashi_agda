@@ -17,11 +17,12 @@
 2. `DASHI.Foundations.Base369SymmetryWaveRound9Validation` — previously verified source-written `symbolicCodingRetainsExactCarrier`.
 3. `DASHI.Core.IndexedRelationalHyperfabricSpineExact` and `DASHI.Core.IntersectionalNonFactorability` — original generic collision/nonfactorability and recharting impossibility. Ownership is retained, including this module's separate original attribution to Kimberlé Crenshaw as a *conceptual* root, not the author of the DASHI theorem.
 4. `DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact` — pre-existing wave fully-encoded sufficiency and finite `ShiftWaveRefinementSeam` projection theorem.
-5. `DASHI.Physics.WaveAlgorithmLift` — original finite sign/phase involution; the generic reversible, norm-preserving and interference obligations remain separately stated, not discharged by this adapter.
-6. `DASHI.Physics.Closure.Base369PolyphaseKernelBoundary` and `DASHI.Foundations.Base369PolyphaseCharacters` — source-written finite C3 exponent/additivity, no complex optical phase calibration.
-7. `DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw` — source-written dimensionless phase and redshift observable surfaces, no numeric acquisition.
-8. `DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact` — previously constructed synthetic comb teeth with `f_CEO` and a signed beat, primary/secondary source distinction.
-9. `DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact` — experiment-level composition. This work does not edit ESD surfaces or import unmerged PR #1117/#1292.
+5. `DASHI.Physics.Base369PhaseBridge` and `DASHI.Foundations.Base369AddressSymmetryAndBranchGeometryExact` — original 3/6/9 phase quotient rotation laws, a documented obstructed nonary block projection, and separation of local operator symmetry from propagated/role-dependent symmetry.
+6. `DASHI.Physics.WaveAlgorithmLift` — original finite sign/phase involution; the generic reversible, norm-preserving and interference obligations remain separately stated, not discharged by this adapter.
+7. `DASHI.Physics.Closure.Base369PolyphaseKernelBoundary` and `DASHI.Foundations.Base369PolyphaseCharacters` — source-written finite C3 exponent/additivity, no complex optical phase calibration.
+8. `DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw` — source-written dimensionless phase and redshift observable surfaces, no numeric acquisition.
+9. `DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact` — previously constructed synthetic comb teeth with `f_CEO` and a signed beat, primary/secondary source distinction.
+10. `DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact` — experiment-level composition. This work does not edit ESD surfaces or import unmerged PR #1117/#1292.
 
 Prior Ibrahim Monster 3B ownership remains separate. No character coincidence, matching 369 label, synthetic wave receipt, or refinement diamond is a proof of shared Monster, Hilbert-space, electromagnetic, atomic or spacetime representation.
 
@@ -49,6 +50,8 @@ The new Agda module `DASHI/Physics/Closure/R2P2369WaveOpticalCombInformationCutE
 - `waveEncodedStateIsSufficient` and `shiftFiniteWaveFineProjectsToCoarse` — existing generic adequacy and wave refinement seam explicitly connected.
 - `finiteWaveAlgorithmTritInvolution` and `finiteC3OneStepIsAdditive` — the older wave algorithm and C3 character proofs are imported, not duplicated.
 - `clockPhaseIsDimensionless` and `redshiftIsDimensionless` — inherited SI dimension semantics.
+- `sixPhaseCoarseRotationLaw`, `ninePhaseCoarseRotationLaw` and `nonaryBlockCoarsePhaseRotationObstruction` — direct reuse of the earlier 369 physical phase bridge. Not every coarse nonary quotient respects the selected cyclic phase rotation.
+- `sourceLocalSwapIsEquivariant` and `sourcePropagatedSwapCanFail` — direct reuse of original 369 branch-geometry witnesses. A locally symmetric swap does not imply context-dependent propagation symmetry; this supplies a formal caution for proposed two-way optical link cancellation, **not** real link data.
 
 This is a **source-written exact finite information-loss cut**. The use of 3/6/9 is a convenient mathematical example only. It does not generate a physical clock frequency, a preferred optical resonance, or a physical discretisation of wave phase.
 
