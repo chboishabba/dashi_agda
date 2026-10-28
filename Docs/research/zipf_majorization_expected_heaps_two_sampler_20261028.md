@@ -76,3 +76,31 @@ The source reuses:
 A real Fourier spectrum requires its wavevector ↔ rank map, phase, polarization and signed nonlinear transfer before carrying these inequalities into Navier–Stokes. An IID diversity expectation is neither an enstrophy estimate nor an RH zero theorem. Original Ibrahim Monster 3B authorship, source first links and historical priority remain explicitly retained.
 
 **True remaining wall:** exact GitHub-head Python CI, actual compatible Agda compiler proof, full source-identified and chronologically valid empirical datasets, and eventual same-carrier typechecked downstream connections. No test or citation silently pays those gates.
+
+
+## Sharp no-go — Schur-concave means do NOT imply monotone variances
+
+A tempting false promotion is that concentrating count mass also orders
+uncertainty in type discovery. It does **not**. The same two histograms
+`f=(1,3)` (majorizing) and `g=(2,2)` give these exact variances:
+
+| Draws | IID var under f | IID var under g | Fixed-permutation var under f | Fixed-permutation var under g |
+|---:|---:|---:|---:|---:|
+| 2 | 15/64 | 1/4 | 1/4 | 2/9 |
+| 3 | 63/256 | 3/16 | 3/16 | 0 |
+
+At t=2 **IID f has lower variance than g**, while fixed-permutation f
+has **higher variance**. Between t=2 and t=3, the **IID sign reverses**.
+The mean inequalities of theorem A still hold for both t and samplers.
+Thus no universally monotone variance, concentration, confidence interval
+or risk certificate may be inferred solely from the majorization
+ordering of the expectations. These exact values reuse the existing
+`zipf_occupancy_collisions_exact.py` covariance owners and are
+independently checked in `test_majorization_mean_order_does_not_imply_variance_order`.
+The original calculation is classical finite probability; the new
+finite counterexample and test are source-written in this PR.
+
+**Updated execution receipt:** the newly added variance negative control
+passes. Local mixed-snapshot suite **130/130 passed**; same exact-head and
+Agda kernel limitations apply. Source/test Git blob SHA for the 7-test
+file: `0cdf6c598508ad90eface59ae6166679819de5e8`.
