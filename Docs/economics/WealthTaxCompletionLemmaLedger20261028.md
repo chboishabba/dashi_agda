@@ -1,6 +1,6 @@
 # Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
 
-Created 2026-10-28. **77 named formal obligations** across nine groups: 28 already source-written (D), 9 owned by existing reusable sources (R), 40 new required proofs/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+Created 2026-10-28. **77 named formal obligations** across nine groups: 37 already source-written (D), 9 owned by existing reusable sources (R), 31 new required proofs/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
 
 Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
 
@@ -13,9 +13,9 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **A03 [D]** `sourceAIProposedRatesAreNotVictoriaLaw` — AI-suggested 1/2/5% idle equity is not the enacted Victoria VRLT schedule.
 - **A04 [D]** `annualSnapshotIsNotContinuousBound` — Assessment-time cap does not bound all between-assessment states.
 - **A05 [N]** `netWealthBalanceIsWellTyped` — One timestamp and unit, with debt and beneficial-ownership exclusions.
-- **A06 [N]** `netWealthAfterFullyPaidExcessEqualsMin` — Given full collection, after-payment wealth equals min(W,K).
-- **A07 [N]** `hundredPercentLiabilityZeroBelowThreshold` — Generic threshold/truncated subtraction cases.
-- **A08 [N]** `wealthLiabilityMonotoneAndThresholdBounded` — General fixed-threshold monotonicity and upper bound.
+- **A06 [D]** `netWealthAfterFullyPaidExcessEqualsMin` — Given full collection, after-payment wealth equals min(W,K).
+- **A07 [D]** `hundredPercentLiabilityZeroBelowThreshold` — Generic threshold/truncated subtraction cases.
+- **A08 [D]** `wealthLiabilityMonotoneAtFixedThreshold` and `wealthLiabilityNeverExceedsAssessedWealth` — General fixed-threshold monotonicity and upper bound.
 
 ### B. Fiscal collection, budget and care (8)
 
@@ -50,9 +50,9 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **D06 [D]** `executionDoesNotDetermineSettlement` — Executed amount does not specify settled shares.
 - **D07 [D]** `twoFillCashConservation` — Two filled unit prices 1 and 2 produce gross settled cash 3.
 - **D08 [D]** `priorCashReceiptHasNoForwardSettlementLink` — Future settlement does not directly finance earlier remittance.
-- **D09 [N]** `genericExecutedCountBoundedBySubmitted` — Finite list of fills cannot exceed authorized order under contract.
-- **D10 [N]** `genericSettledCountBoundedByExecuted` — All partial fills and unsettled remainders balance.
-- **D11 [N]** `genericSettledProceedsIsExactPriceQuantitySum` — Arbitrary number of exact fills, no ambient decimal rounding.
+- **D09 [D]** `genericExecutedCountBoundedBySubmitted` — Finite list of fills cannot exceed authorized order under contract.
+- **D10 [D]** `genericSettledCountBoundedByExecuted` — All partial fills and unsettled remainders balance.
+- **D11 [D]** `genericSettledProceedsIsExactPriceQuantitySum` — Arbitrary number of exact fills, no ambient decimal rounding.
 - **D12 [N]** `uniqueFillIdentityAndMonotoneEventTime` — Unique IDs, instrument and 4-stage timestamp agreement.
 
 ### E. Share class and control identity (9)
@@ -62,7 +62,7 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **E03 [D]** `FundingVoteReconciliation` — Per-class sold units and before/after owned units balance.
 - **E04 [D]** `saleVolumeCannotIdentifyInstrumentClass` — Quantity does not determine ordinary versus super-voting security.
 - **E05 [D]** `SettlementOwnershipWeld` — Exact synthetic funding/quantity/issuer/instrument label agreement.
-- **E06 [N]** `shareClassTransferPreservesIssuedSupply` — Seller/buyer/treasury/issuance/cancellation legal share changes.
+- **E06 [D]** `shareClassTransferPreservesIssuedSupply` — Seller/buyer/treasury/issuance/cancellation legal share changes.
 - **E07 [N]** `authenticatedOwnerIssuerInstrumentClassKey` — Evidence-checked beneficial owner, issuer, security and class.
 - **E08 [N]** `controllingVotesRequireVerifiedRightsAndAgreements` — Majority arithmetic does not determine effective legal control.
 - **E09 [N]** `persistentTransactionIdentityCannotFollowFromValueOrDigest` — Local object identity, value equality, content hash and registry identity differ.
@@ -82,8 +82,8 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **G01 [D]** `saleVolumeCannotDeterminePhysicalCapacity` — Existing finite distinct installed-machine example.
 - **G02 [D]** `careCannotFactorThroughTaxReceipt` — Same tax cash does not fix care outcome.
 - **G03 [R]** `AIEconomicUsefulWorkTimeSeriesExact and UnitEconomicsMarginExact` — Useful work and positive return do not follow from volume.
-- **G04 [N]** `physicalCapitalStockFlowConservation` — Existing stock + commissioned - retired = next stock with time.
-- **G05 [N]** `deliveredCareHoursBoundedByStaffAndEquipment` — Staff time, buildings and equipment constrain care capacity.
+- **G04 [D]** `physicalCapitalStockFlowConservation` — Existing stock + commissioned - retired = next stock with time.
+- **G05 [D]** `deliveredCareHoursBoundedByStaffAndEquipment` — Staff time, buildings and equipment constrain care capacity.
 - **G06 [N]** `energyMaterialsAndConstructionFeasibility` — Installed productive output consumes time and physical inputs.
 - **G07 [N]** `financialClaimChangeDoesNotIdentifyPhysicalOutput` — Generic conditional non-factorability rather than physical law.
 
@@ -137,3 +137,14 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 F0 = capture source owner, master comparison and exact heads. F1 = kernel typecheck plus syntax fix. F2 = generic accounting, settlement and identity completion (A–F). F3 = source-owned material constraints (G) and attribution firewalls (H). F4 = conditional rival policy Pareto frontier (I) with no measured-effect assertion. F5 = cross-repo shadow conformance and master TOE merge. F6 = real-world X01–X10 study, or publish them as OPEN if inaccessible. Formal release may finish at F5; an empirical finding cannot.
 
 **Attribution:** All dated mathematical, political and economic original authors keep original ownership; reuse DASHI theorem owners as owners, not copied proofs. The independent Ibrahim 2017 Wikipedia FLN and existing Ibrahim Monster 3B work remain separate. No numerical/character/IPFS coincidence creates same-object identity or a causal claim. Synthetic filled receipts are not exchange records, shareholder registers, legal assessments, market execution, care hours or laws of physics.
+
+## 2026-10-28 proof expansion: nine obligations now source-written
+
+The next pass constructs nine conditional general results by reusing the Agda standard library and existing DASHI theorem owners. Ledger now has 37 D, 9 R, 31 N. Source writing is NOT an observed Agda kernel check.
+
+- A06-A08: for all natural-number thresholds, under full assessment-day collection the modeled remaining stock equals the minimum of stock and threshold. Truncated liability vanishes below the threshold, is monotone at fixed threshold, and never exceeds assessed wealth.
+- D09-D11: generic balanced order records yield executed <= submitted, settled <= executed, and settled <= submitted. An arbitrary finite price/quantity list has an exact fold for gross proceeds; declared cash must carry a separate explicit equality proof. This does not assert any real exchange fill.
+- E06: an already-issued share-class transfer conserves seller/buyer combined unit count, given exact before/after seller and buyer reconciliations.
+- G04-G05: physical plant has its own before, commissioning, retirement and after-stock accounting. Actual care service hours are separately bounded by supplied staff and equipment capacities.
+
+All these records are model-conditional. No actual tax, legal control, worker, energy or machine state is inferred. No new unsafe Agda options or protected ESD edits. The standalone shadow Python suite was independently re-executed with 36 passing tests and remains unchanged.
