@@ -235,6 +235,9 @@ def main() -> None:
     # owner, with no synthetic receipt upgraded to verified market evidence.
     for symbol in (
         "ScopedNetWealthSnapshot",
+        "netWealthBalanceIsWellTyped",
+        "policyScenarioRequiresStatuteOrHypotheticalTag",
+        "behaviouralResponseParametersAreExplicitAssumptions",
         "cashSourceUseIsSingleCounted",
         "disposalPreservesExternalAssetTransferAccounting",
         "routeFundingFeasibleGivenLiquidityCollateralAndTiming",
