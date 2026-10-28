@@ -2476,3 +2476,175 @@ twoAxisPolicyFrontierIsNonempty =
     policyTradeoffAxisCoverage
     admittedCheapAdministration (admittedCareCapacity ∷ [])
 
+------------------------------------------------------------------------
+-- C06: CANONICAL FUNDING SOURCE PARTITION AND NO REPEATED CLAIM.
+--
+-- We reuse TaggedFundingReceipt and RankedMember instead of defining
+-- another parallel funding ledger or finite-list membership relation.
+-- The single-claim map is supplied by an external identity producer.
+-- Distinct local Nat tokens are not independently verified bank claims.
+------------------------------------------------------------------------
+
+FundingTokenAbsent : Nat → List TaggedFundingReceipt → Set
+FundingTokenAbsent token [] = ⊤
+FundingTokenAbsent token (entry ∷ rest) =
+  (token ≡ fundingSourceToken entry → ⊥) × FundingTokenAbsent token rest
+
+UniqueFundingTokens : List TaggedFundingReceipt → Set
+UniqueFundingTokens [] = ⊤
+UniqueFundingTokens (entry ∷ rest) =
+  FundingTokenAbsent (fundingSourceToken entry) rest
+  × UniqueFundingTokens rest
+
+fundingTokenAbsentRulesOutMember :
+  (token : Nat) (entries : List TaggedFundingReceipt)
+  (candidate : TaggedFundingReceipt) →
+  FundingTokenAbsent token entries →
+  RankedMember candidate entries →
+  token ≡ fundingSourceToken candidate → ⊥
+fundingTokenAbsentRulesOutMember token [] candidate absence ()
+fundingTokenAbsentRulesOutMember token (candidate ∷ rest)
+  .candidate (notSame , _) ranked-here same = notSame same
+fundingTokenAbsentRulesOutMember token (head ∷ rest)
+  candidate (_ , absentTail) (ranked-there inTail) same =
+  fundingTokenAbsentRulesOutMember token rest candidate
+    absentTail inTail same
+
+fundingReceiptsTotal : List TaggedFundingReceipt → Nat
+fundingReceiptsTotal [] = zero
+fundingReceiptsTotal (entry ∷ rest) =
+  fundingSourceUnits entry + fundingReceiptsTotal rest
+
+fundingPartitionTotal : List TaggedFundingReceipt → Nat
+fundingPartitionTotal [] = zero
+fundingPartitionTotal (entry ∷ rest) =
+  ((cashContribution entry + loanContribution entry)
+    + saleContribution entry) + fundingPartitionTotal rest
+
+finiteFundingPartitionConservesUnits :
+  (entries : List TaggedFundingReceipt) →
+  fundingPartitionTotal entries ≡ fundingReceiptsTotal entries
+finiteFundingPartitionConservesUnits [] = refl
+finiteFundingPartitionConservesUnits (entry ∷ rest) =
+  trans
+    (cong (λ n → n + fundingPartitionTotal rest)
+      (cashSourceUseIsSingleCounted entry))
+    (cong (fundingSourceUnits entry +_)
+      (finiteFundingPartitionConservesUnits rest))
+
+record CanonicalFundingEntry
+    (Claim : Set) (canonicalClaimToken : Claim → Nat) : Set where
+  constructor canonical-funding-entry
+  field
+    economicClaim : Claim
+    taggedFunding : TaggedFundingReceipt
+    tagAgreesWithCanonicalClaim :
+      fundingSourceToken taggedFunding ≡ canonicalClaimToken economicClaim
+open CanonicalFundingEntry public
+
+fundingEntryTags :
+  {Claim : Set} {canonicalClaimToken : Claim → Nat} →
+  List (CanonicalFundingEntry Claim canonicalClaimToken) →
+  List TaggedFundingReceipt
+fundingEntryTags [] = []
+fundingEntryTags (entry ∷ rest) =
+  taggedFunding entry ∷ fundingEntryTags rest
+
+fundingEntryMemberProjects :
+  {Claim : Set} {canonicalClaimToken : Claim → Nat} →
+  (candidate : CanonicalFundingEntry Claim canonicalClaimToken) →
+  (entries : List (CanonicalFundingEntry Claim canonicalClaimToken)) →
+  RankedMember candidate entries →
+  RankedMember (taggedFunding candidate) (fundingEntryTags entries)
+fundingEntryMemberProjects candidate [] ()
+fundingEntryMemberProjects candidate (candidate ∷ rest) ranked-here =
+  ranked-here
+fundingEntryMemberProjects candidate (first ∷ rest)
+  (ranked-there inRest) =
+  ranked-there (fundingEntryMemberProjects candidate rest inRest)
+
+record CanonicalFundingBatch
+    (Claim : Set) (canonicalClaimToken : Claim → Nat) : Set where
+  constructor canonical-funding-batch
+  field
+    fundingClaims : List (CanonicalFundingEntry Claim canonicalClaimToken)
+    uniqueCanonicalFundingTokens :
+      UniqueFundingTokens (fundingEntryTags fundingClaims)
+open CanonicalFundingBatch public
+
+canonicalClaimCannotBeReusedInLaterPosition :
+  {Claim : Set} {canonicalClaimToken : Claim → Nat} →
+  (batch : CanonicalFundingBatch Claim canonicalClaimToken) →
+  (first : CanonicalFundingEntry Claim canonicalClaimToken) →
+  (rest : List (CanonicalFundingEntry Claim canonicalClaimToken)) →
+  fundingClaims batch ≡ first ∷ rest →
+  (later : CanonicalFundingEntry Claim canonicalClaimToken) →
+  RankedMember later rest →
+  economicClaim first ≡ economicClaim later → ⊥
+canonicalClaimCannotBeReusedInLaterPosition
+  {canonicalClaimToken = canonicalClaimToken}
+  batch first rest exactList later listed sameClaim =
+  let unique =
+        subst (λ entries → UniqueFundingTokens (fundingEntryTags entries))
+          exactList (uniqueCanonicalFundingTokens batch)
+      absentFirstToken = proj₁ unique
+      projectedMembership = fundingEntryMemberProjects later rest listed
+      sameToken =
+        trans
+          (trans (tagAgreesWithCanonicalClaim first)
+            (cong canonicalClaimToken sameClaim))
+          (sym (tagAgreesWithCanonicalClaim later))
+  in fundingTokenAbsentRulesOutMember
+       (fundingSourceToken (taggedFunding first))
+       (fundingEntryTags rest) (taggedFunding later)
+       absentFirstToken projectedMembership sameToken
+
+canonicalFundingTotalsReconcile :
+  {Claim : Set} {canonicalClaimToken : Claim → Nat} →
+  (batch : CanonicalFundingBatch Claim canonicalClaimToken) →
+  fundingPartitionTotal (fundingEntryTags (fundingClaims batch))
+    ≡ fundingReceiptsTotal (fundingEntryTags (fundingClaims batch))
+canonicalFundingTotalsReconcile batch =
+  finiteFundingPartitionConservesUnits
+    (fundingEntryTags (fundingClaims batch))
+
+-- Source-written positive and duplicate-token rejection fixtures.
+-- Here "economic claims" are arbitrary Nat fixture keys, not historical
+-- bank transactions. The canonical-token assumption cannot be inferred
+-- from a database ID, textual description or matching content digest.
+fixtureFundingSourceOne : CanonicalFundingEntry Nat (λ n → n)
+fixtureFundingSourceOne =
+  canonical-funding-entry 1
+    (tagged-funding-receipt 1 existingCashChannel 3) refl
+
+fixtureFundingSourceTwo : CanonicalFundingEntry Nat (λ n → n)
+fixtureFundingSourceTwo =
+  canonical-funding-entry 2
+    (tagged-funding-receipt 2 freshLoanChannel 4) refl
+
+fundingTokensOneTwoDiffer : 1 ≡ 2 → ⊥
+fundingTokensOneTwoDiffer ()
+
+distinctFixtureFundingBatch : CanonicalFundingBatch Nat (λ n → n)
+distinctFixtureFundingBatch =
+  canonical-funding-batch
+    (fixtureFundingSourceOne ∷ fixtureFundingSourceTwo ∷ [])
+    ((fundingTokensOneTwoDiffer , tt) , (tt , tt))
+
+fixtureFundingBatchConservesSeven :
+  fundingPartitionTotal
+    (fundingEntryTags (fundingClaims distinctFixtureFundingBatch))
+    ≡ 7
+fixtureFundingBatchConservesSeven = refl
+
+duplicateFixtureFundingTokenIsRejected :
+  UniqueFundingTokens
+    (taggedFunding fixtureFundingSourceOne
+      ∷ taggedFunding fixtureFundingSourceOne ∷ []) → ⊥
+duplicateFixtureFundingTokenIsRejected ((notSame , _) , _) =
+  notSame refl
+
+-- The theorem is source-conditional. Without a genuine producer of the
+-- canonical economic-claim identity function, it neither identifies nor
+-- proves unique use of one historical unit of money or market entitlement.
+
