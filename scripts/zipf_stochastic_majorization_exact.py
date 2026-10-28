@@ -105,3 +105,58 @@ def discovery_stochastic_majorization_certificate(
         assert all(a <= b for a, b in zip(high, low))
         out[sampler] = (high, low)
     return out
+
+
+
+def pair_second_type_cdf(a: int, b: int, pair_draws: int, sampler: Sampler) -> Fraction:
+    """P(first two-type completion time <= m), conditional on m pair draws.
+
+    At m=0 or 1 it is zero. Under a permutation the pair contains exactly
+    a+b tokens; the convention C(x,m)=0 for x<m is explicit.
+    """
+    if (type(a) is not int or type(b) is not int or a < 1 or b < 1
+            or type(pair_draws) is not int or pair_draws < 0
+            or sampler not in ('iid', 'permutation')
+            or (sampler == 'permutation' and pair_draws > a+b)):
+        raise ValueError('positive pair, valid sampler and pair-draw horizon')
+    if pair_draws < 2:
+        return Fraction()
+    total = a+b
+    if sampler == 'iid':
+        return 1 - Fraction(a,total)**pair_draws - Fraction(b,total)**pair_draws
+    return 1 - Fraction(comb(a,pair_draws)+comb(b,pair_draws),comb(total,pair_draws))
+
+
+def pair_pathwise_quantile_certificate(
+    a: int, b: int, horizon: int, sampler: Sampler
+) -> tuple[tuple[Fraction,int,int], ...]:
+    """Finite exact coupling witness: concentrating a pair delays discovery.
+
+    For a>=b>=2, use one common uniform quantile U for the first group draw
+    on which BOTH subtypes have appeared, before and after a->a+1,b->b-1.
+    For every rational interval between CDF breakpoints, return the common
+    U midpoint and the two coupled completion times; horizon+1 means unseen.
+    Each witness orders all m<=horizon SIMULTANEOUSLY, not just a marginal.
+    With the same merged-pair and outside-type schedule this proves an
+    all-prefix coupling for the one-transfer Heaps diversity trajectory.
+    """
+    if (type(a) is not int or type(b) is not int or a < b or b < 2
+            or type(horizon) is not int or horizon < 0
+            or sampler not in ('iid','permutation')
+            or (sampler == 'permutation' and horizon > a+b)):
+        raise ValueError('a>=b>=2, valid sampler and horizon')
+    concentrated = tuple(pair_second_type_cdf(a+1,b-1,m,sampler)
+                         for m in range(horizon+1))
+    dispersed = tuple(pair_second_type_cdf(a,b,m,sampler)
+                      for m in range(horizon+1))
+    assert all(x<=y for x,y in zip(concentrated,dispersed))
+    cuts = sorted(set((Fraction(), Fraction(1), *concentrated, *dispersed)))
+    witnesses = []
+    for lo,hi in zip(cuts,cuts[1:]):
+        u = (lo+hi)/2
+        tc = next((m for m,c in enumerate(concentrated) if c>=u), horizon+1)
+        td = next((m for m,c in enumerate(dispersed) if c>=u), horizon+1)
+        assert tc>=td
+        assert all(int(tc<=m)<=int(td<=m) for m in range(horizon+1))
+        witnesses.append((u,tc,td))
+    return tuple(witnesses)
