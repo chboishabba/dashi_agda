@@ -41,18 +41,17 @@ open FractionInterpretation public
 
 -- Works for arbitrary finite fraction inputs. This is stronger than
 -- the Zipf-only fold needed for source-normalizer parity.
+rationalFold : (I : FractionInterpretation) →
+  (Nat → Finite.Fraction) → Nat → ℚ
+rationalFold I f zero = 0ℚ
+rationalFold I f (suc n) =
+  interpret I (f n) + rationalFold I f n
+
 finiteFractionFoldHomomorphism :
   (I : FractionInterpretation)
   (f : Nat → Finite.Fraction)
   (n : Nat) →
-  interpret I (Finite.sumFirst f n) ≡
-    rationalFold I f n
-  where
-    rationalFold : (I : FractionInterpretation)
-      (f : Nat → Finite.Fraction) (n : Nat) → ℚ
-    rationalFold I f zero = 0ℚ
-    rationalFold I f (suc n) =
-      interpret I (f n) + rationalFold I f n
+  interpret I (Finite.sumFirst f n) ≡ rationalFold I f n
 finiteFractionFoldHomomorphism I f zero = zero-preserved I
 finiteFractionFoldHomomorphism I f (suc n) =
   trans
@@ -64,12 +63,6 @@ finiteFractionFoldHomomorphism I f (suc n) =
       (ℚP.+-comm
         (rationalFold I f n)
         (interpret I (f n))))
-  where
-    rationalFold : (I : FractionInterpretation)
-      (f : Nat → Finite.Fraction) (n : Nat) → ℚ
-    rationalFold I f zero = 0ℚ
-    rationalFold I f (suc n) =
-      interpret I (f n) + rationalFold I f n
 
 -- A direct Zipf owner term-preservation hypothesis is separately typed.
 -- It must be established on the actual positive-normalized interpretation,
