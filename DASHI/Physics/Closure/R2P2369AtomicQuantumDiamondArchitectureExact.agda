@@ -15,6 +15,9 @@ import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as Bias
 import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as Loop
 import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as Lattice
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeCut
+import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as FiniteConv
+import DASHI.Physics.Closure.R2P227729PairSixTritFibreBidiExact as SixTritPairs
+import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as ModePairs
 import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact as BlockBitsR2P2
 import DASHI.ComputerScience.BinaryThreeBitTrit27FibreLiftExact as Codec27R2P2
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
@@ -726,3 +729,39 @@ fullArchitectureReusesThreeBitFramed27Payload :
     (Codec27R2P2.encodeBit3To27 bits) ≡ bits
 fullArchitectureReusesThreeBitFramed27Payload =
   ModeCut.inheritedThreeBitToFramed27RoundTrip
+
+------------------------------------------------------------------------
+-- Strong finite 27×27 owner: mathematical Fourier mode-pair incidence.
+-- No new Monster/Heisenberg/GF729 action or physical NS solution.
+------------------------------------------------------------------------
+
+fullArchitecture343PairClassification :
+  ModePairs.countWhereL ModePairs.insidePair27 ModePairs.pair729 ≡ 343
+fullArchitecture343PairClassification =
+  ModePairs.exact343InWindowPairs
+
+fullArchitecture386PairClassification :
+  ModePairs.countWhereL (λ pair → ModePairs.notB (ModePairs.insidePair27 pair))
+    ModePairs.pair729 ≡ 386
+fullArchitecture386PairClassification =
+  ModePairs.exact386OutOfWindowPairs
+
+fullArchitecture27PairsSixTritRoundTrip :
+  (p : SixTritPairs.OrderedPair729) →
+  SixTritPairs.sixTritsToOrderedPair (SixTritPairs.orderedPairToSixTrits p)
+    ≡ p
+fullArchitecture27PairsSixTritRoundTrip =
+  SixTritPairs.sixTritsAfterOrderedPairRoundTrip
+
+fullArchitectureFinite27x27Convolution :
+  (amplitude : ModePairs.ModeCube27 → Nat) (target : FiniteConv.WideCube125) →
+  FiniteConv.fiveIndexRecoveredConvolutionAt amplitude target
+    ≡ FiniteConv.exactConvolutionAt amplitude target
+fullArchitectureFinite27x27Convolution =
+  FiniteConv.all729PairsFiveIndexRecoveryIsExact
+
+fullArchitectureFiniteConvolutionDoesNotEstablishNSRegularity :
+  ModeCut.nsClayRegularityProved
+    ModeCut.canonicalThreeModeCodecNSAuthority ≡ false
+fullArchitectureFiniteConvolutionDoesNotEstablishNSRegularity =
+  ModeCut.threeModeCodecIsNotAnNSProof
