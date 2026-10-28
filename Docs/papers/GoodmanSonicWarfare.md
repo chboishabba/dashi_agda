@@ -415,3 +415,31 @@ A missing or erroneous value of `r` is an unfulfilled inverse-calibration obliga
 **Latest PR comparison:** [#1407](https://github.com/chboishabba/dashi_agda/pull/1407) now includes binary/ternary three-mode Fourier aliasing and a finite Navier–Stokes Leray-projection example. Its original source owner and synthetic-test limitations remain **separate**. It is a useful reminder that sampled signals can lose mode identity, but the unmerged branch is not imported as an acoustics theorem. [#1411](https://github.com/chboishabba/dashi_agda/pull/1411) keeps evidence-generation licences distinct from semantic authority; [#1412](https://github.com/chboishabba/dashi_agda/pull/1412) introduces explicit reprojection-quality failures. This T7 adapter likewise demands an independent calibration premise, rather than silently treating a numerical or source label as adequate measurement.
 
 **Pareto conclusion:** We now have a hierarchy of claims: (1) finite observer identifiability; (2) a finite Pareto-minimal observation pair; (3) conditional rational inversion and exact error propagation; (4) independent numerical evidence of deteriorating condition numbers across a family; and (5) a not-yet-paid calibrated physical-data and empirical-causality frontier. All original Goodman, soundscape, Hadamard, Agda-library, Ibrahim/snowball and Monster 3B source/proof ownership stays separate. New proof wrappers do not discharge (5).
+
+## T8 paired-channel error and common-mode cancellation
+
+The T7 rational inverse model is now extended to **two independently named observation errors**. This is the next precise Pareto cut because measured transfer problems rarely have only one error channel. The new algebra does **not** assume a probability distribution or covariance; it only names the errors separately.
+
+```text
+A_q (x,y) = (x, x + q*y)
+noisy observation = (x + alpha, x + q*y + beta)
+reconstruct_r (a,b) = (a, r*(b-a))
+with independently supplied calibration r*q=1:
+  reconstructed first = x + alpha
+  reconstructed second = y + r*(beta - alpha)
+```
+
+New source-written Agda terms in `GoodmanSonicWarfareRationalInverseExact`:
+- `twoChannelRingPerturbation`: polynomial identity without calibration;
+- `calibratedTwoChannelPerturbation`: conditional error difference `r*(beta-alpha)`;
+- `commonModeSecondCoordinateRecovers`: if `alpha=beta`, the *second* coordinate reconstructs exactly even though the *first* coordinate remains shifted.
+
+This source-level statement distinguishes **common-mode rejection on one component** from immunity of the **entire** inverse solution. It is not an assertion that two real microphones have equal errors, that real measurement noise is perfectly correlated, or that an inverse system is uniformly stable. `r*q=1` is still an unfulfilled physical calibration obligation, and these Agda terms still require a real kernel typecheck.
+
+**Exact execution receipt**: the updated 4442-character `scripts/check_goodman_inverse_stability_finite.py` was fetched from GitHub and reproduced locally, with matching FNV-1a character checksum `0x7287c809` and locally computed SHA-256 `03fd9e7702983bab1fa5acb0ed73c25a26f9c582d64c28a1c2dc7c03105a88b7`. It executed successfully: **six** exact-rational triangular inverse-family cases and **24 additional** rational two-channel cases passed. The older 3566-character/6-case receipt in T6 refers to the *prior* committed revision and must **not** be reported as the current script's fingerprint.
+
+For every positive `n` in `1, 2, 10, 100, 1000, 10000`, four error pairs `(1/n,0)`, `(0,1/n)`, `(1/n,1/n)`, and `(1/n,-1/n)` are tested. For each, exact rational arithmetic verifies the pair reconstruction. The all-common-mode pairs recover the second hidden coordinate; no simulated distribution or empirical variance is inferred. These fixtures do not prove a real-world covariance model. They also do not prove the generic `∀n` condition-number theorem in the Agda kernel.
+
+**Latest PR methodological cross-check:** #1407's separate Fourier aliasing demonstrates why a discrete representation can lose physically relevant information, while #1411 and #1412 require explicit evidence and compatibility gates. These are cross-domain methodological analogies; no unmerged PR branch is imported here and no optical lattice, Navier–Stokes, Monster 3B, medical or acoustic same-object implication is claimed.
+
+**Real-world validation requirements**: measure individual instrument errors and correlated/common-mode errors before computing propagated uncertainty; verify source/reference-clock alignment and medium variation; preregister a held-out geometry/receiver prediction and compare against a calibrated baseline. Distinguish a successful inverse fit from a justified causal claim and from any ethical human-response trial. The exact rational model supplies a conditional algebraic check only. Original authors of soundscape studies, of Hadamard inverse-problem theory, of agda-stdlib lemmas, of Ibrahim media/Monster objects and of Goodman's cultural synthesis retain their separate ownership.
