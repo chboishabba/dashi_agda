@@ -199,6 +199,22 @@ The new `R2P281PlaneHermitianFiveOrbitConvolutionExact` builds an independent li
 
 The separately executed local exact-fraction audit now checks **two actually distinct** Hermitian input arrays, their fully signed 729-pair product and the conjugate-reality property at all 125 outputs, plus two distinct nine-plane arrays and 81-pair products at all 25 outputs. In both dimensions, actual convolution outputs computed from the compact packed representation match the original full signed coefficient arrays. This is a computational result, *not* a committed-checkout test receipt and *not* an Agda kernel certificate.
 
+### Even-grid Nyquist exception: the original 13/27 code does not blindly become a 64-grid code
+
+A further reuse-first finite index module, `R2P2C4C5NyquistAntipodalFixedPointExact`, applies the same global-negation question to the **actual cyclic Z/4 and Z/5 output indices** used by the Fourier Pareto result. The original C3 count/hierarchy is *odd-grid* and has a unique fixed zero frequency. At even grid size N=4, **Nyquist 2 ≡ −2 (mod 4)** is also fixed under negation on every axis, so every frequency whose three coordinates are each zero or Nyquist is self-negative.
+
+| Grid | Frequency bins | Self-negative indices | Nonfixed inversion pairs | Total C2 orbits |
+| --- | ---: | ---: | ---: | ---: |
+| Original C3³, signed 27 cube | 27 | **1** | 13 | 14 |
+| Pareto C4³, retained-output grid | 64 | **8** | 28 | **36** |
+| Full C5³ output grid | 125 | **1** | 62 | **63** |
+
+The new Agda module includes the explicit cyclic negation tables, involution, signed-frequency compatibility, all 64/125 grid enumeration, eight/one fixed-point counts, and `64=8+28·2` and `125=1+62·2` equalities. It leaves original C3/27 antipodal and D4/Monster authorship unchanged.
+
+The updated pure-Python exact Q(ω) diagnostic takes **two distinct conjugate-symmetric source fields**, computes all 729 integer-frequency products, and folds their resulting 125 coefficients onto both cyclic grids. The resulting 64 coefficients obey the cyclic Hermitian involution; the **eight Nyquist-corner coefficients are real**. All 125 output coefficients likewise obey Hermitian symmetry on the five-grid, whose only fixed centre is real. These are independently executed exact-fraction checks, **not Agda kernel theorems or a physical-space C4/C5 DFT implementation**.
+
+**New high-alpha FFT proof obligation:** any actual real-signal C4³ packed sampled-frequency carrier must store **eight independent real fixed-corner values and 28 conjugate pairs**, not one real centre plus 13 pairs. Actual C5³ packed output uses **one real centre and 62 conjugate pairs**. Neither packing is an inherited literal 13/27 codec. Further requirements are C4/C5-specific transform roots, inversion/Parseval/convolution theorems, and a typed link from the real packed FFT to the original Q(ω) integer coefficient consumer.
+
 ### Pareto effect and actual next interfaces
 
 The strongest immediate application is **Hermitian half-spectrum storage** for a real scalar finite Fourier field. This can reduce complex storage and duplicated conjugate computations, but **not** the number of physical real degrees of freedom, the actual integer convolution support, or automatically the number of complex-vector NS operations.
