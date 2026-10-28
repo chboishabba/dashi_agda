@@ -172,7 +172,7 @@ twin-prime proof. The 75-ID architecture tally is unchanged.
 | E11 | Duplicate prime filter idempotence | S: same owner |
 | E12 | Fresh filters only remove candidates | P: monotonicity theorem / explicit refinement import |
 | E13 | Genuine twin p,p+2 passes each proper finite small-modulus filter | N: handle modulus equal to endpoint and range assumptions correctly |
-| E14 | Construct double-composite pairs surviving every given finite sieve; prove baseline and unboundedness | S/P: true `Data.Nat.Primality.Composite` and `¬Prime` certificates on both endpoints for ANY provided survivor r≥2, using product period only. Uniform baseline/unboundedness and kernel check remain open |
+| E14 | For every finite certified prime sieve and every bound N, exhibit n≥N with both n and n+2 genuinely composite and all finite filters passed | S: for each nonempty list, `everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor`; uses exact `2P−1` baseline, true stdlib `Composite`, parameter bound. Empty list handled trivially; exact-head Agda kernel receipt pending |
 | E15 | FRACTRAN decoded-exponent / CRT commuting square | S: signed ±2 both sides; raw (2^p) parity no-go; full VM interface outstanding |
 
 ## E14 max-cut: factorable double-composite family, no CRT inverse
@@ -198,17 +198,42 @@ proof that every product of certified moduli is positive, and
 `factorableSurvivorWithBothStrictFactors` for any given surviving
 `r=suc(suc a)`. Distinctness and coprimality are **not needed**.
 
-The simple universal baseline is `r=2P−1` when `P≥2` (both
-residues are ±1 at every sieving modulus); for the empty axis list
-use `r=2`. This was checked **numerically**, but the baseline
-witness and an explicit unbounded/injective `t↦L` theorem still
-need Agda proofs. E14 is thus **stronger, not yet fully closed**.
+The universal baseline **has now been written as Agda source**, not
+merely numerical intuition. In
+`FiniteTwinSieveUniversalCompositeBaselineExact`:
 
-An independently executed Python equivalent of
-`scripts/check_finite_twin_sieve_factorable_lift.py` passed
-**504 cases across nine finite prime lists**, including prime 2,
-repeated axes and the empty list; 3,375 small-variable factor
-coefficient identities also passed. These are not Agda kernel checks.
+- `baselineMinusOne b = 2(suc b)−1` uses natural arithmetic without
+  truncated subtraction;
+- `baselineLocalPairSurvives` proves that for any certified axis p|P,
+  both `2P−1` and `2P+1` have nonzero residue modulo p. It reuses
+  `m%n≡0⇒n∣m`, `∣m+n∣m⇒∣n` and the actual `Prime p` witness.
+  An assumed zero remainder would force p|1, contradicting p≥2;
+- `baselineAllPairSurvivesAtCommonPeriod` structurally reuses the
+  original `CommonPeriod` certificate for each axis;
+- `anyFinitePrimeSieveHasBaseline` applies the product-period owner;
+- `axisHasAtLeastTwo` and
+  `nonemptyModulusProductHasAtLeastTwo` show every nonempty
+  certified prime-axis product is ≥2;
+- `everyNonemptyFinitePrimeSieveHasDoubleCompositeSurvivor`
+  applies the factored lift to that baseline;
+- `factorableLeftLinearInParameter`,
+  `factorableLeftDominatesParameter`, and
+  `factorableSurvivorExactOutputIsComposite` keep the exact
+  growing output and show it exceeds an arbitrary threshold;
+- `everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor`
+  packages **∀N, ∃n≥N** satisfying all finite sieve predicates
+  while carrying `Composite n × Composite(n+2)`.
+
+These are constructive finite-sieve obstruction theorems at the
+**source-written** level. They do not require a CRT inverse and do
+not prove the broader Selberg parity theorem or anything about
+infinitely many *prime* pairs. Since Agda has not been typechecked,
+the final universal theorem remains **kernel pending**.
+
+The independent Python witness checks exercised the previous 504
+factorable survivors plus **54 extra unbounded-threshold cases**
+across six finite prime lists (including duplicates and modulus 2).
+All integer identities, thresholds and strict factors passed.
 
 DHJ Polymath/ Selberg sieve parity historical authority remains
 source-owned. The construction shows why no *fixed* finite local
