@@ -770,9 +770,16 @@ The stage-five word-count factor is EXACTLY
 `6^5/4^5=243/32`, a legitimate typed appearance
 of `3^5=243`; this says nothing about
 the DISTINCT `5^3=125` carrier from PR #1414.
-It is a noise/cost tradeoff, not a numerical
+It is a modelled RAW-WORD noise/cost tradeoff, not a numerical
 identification with Riemann, Monster, 13/27
-or measured gauge phenomena.
+or measured gauge phenomena. Because this particular finite
+2I representation sets c=b, a representation-aware compiler
+may delete the ideal [b,b]=1 branch and recover a binary-like
+shorter circuit. Therefore 3*6^n is the UNOPTIMISED
+SYMBOLIC-EXPANSION count, not an intrinsic hardware lower bound
+or proof that ternary encodings are less robust under optimal
+compilation. A fair device comparison must specify both
+source-word compilation and whether redundant gates are removed.
 
 **Decision:** retain binary Hatcher geometry and
 its conditional three-sector orbifold as the
