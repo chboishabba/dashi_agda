@@ -101,7 +101,13 @@ record AlphaOrder : Set₁ where
   constructor alpha-order
   field
     Alpha : Set
+    Weight : Set
     _≤α_ : Alpha → Alpha → Set
+    weightedSum3 :
+      Weight → Alpha →
+      Weight → Alpha →
+      Weight → Alpha →
+      Alpha
 
 open AlphaOrder public
 
@@ -110,10 +116,21 @@ record TopicParetoCoordinates
     (Topic : Set) : Set₁ where
   constructor topic-pareto-coordinates
   field
+    spectralWeight : Weight alphaOrder
+    theoremWeight : Weight alphaOrder
+    formalGapWeight : Weight alphaOrder
     spectralEnergy : Topic → Alpha alphaOrder
     theoremDensity : Topic → Alpha alphaOrder
     formalGapReduction : Topic → Alpha alphaOrder
     alphaPriority : Topic → Alpha alphaOrder
+    alphaIsWeightedCombination :
+      ∀ topic →
+      alphaPriority topic
+      ≡
+      weightedSum3 alphaOrder
+        spectralWeight (spectralEnergy topic)
+        theoremWeight (theoremDensity topic)
+        formalGapWeight (formalGapReduction topic)
     paretoEligible : Topic → Set
 
 open TopicParetoCoordinates public
