@@ -14,3 +14,5 @@ import DASHI.Statistics.ZipfFamilyFiniteExact
 import DASHI.Statistics.ZipfHeapsOrderNoGoExact
 import DASHI.Statistics.ZipfIIDTwoDrawAndPNFExact
 import DASHI.Statistics.ZipfPNFConstructiveNormalizationExact
+import DASHI.Statistics.ZipfFractionFoldConditionalExact
+import DASHI.Statistics.ZipfFullHeapsCurveIdentityNoGoExact
