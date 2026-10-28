@@ -16,10 +16,10 @@ module DASHI.Arithmetic.TwinPrimeNat270PeriodResidualBidiExact where
 -- No postulates; no unproved primality claim; kernel pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _<_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (just)
-open import Data.Nat using (_/_; _%_)
+open import Data.Nat using (_/_; _%_; _<_)
 open import Data.Nat.DivMod using
   (m%n<n; m≡m%n+[m/n]*n; [m+kn]%n≡m%n; m<n⇒m%n≡m)
 open import Data.Fin.Base using (Fin; fromℕ<; toℕ)
