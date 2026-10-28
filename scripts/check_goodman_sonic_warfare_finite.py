@@ -128,7 +128,19 @@ def run():
     assert receiver['trans-off'] != receiver['trans-on']
     assert receiver['absorb-off'] == receiver['absorb-on']
 
-    assert len(out) == 17
+    # T2: An *additional* idealised source-side monitor recovers the toy
+    # source-activity label even when the selected receiver is silent.
+    monitor = {state: ('signal' if emitter[state] == 'on' else 'silent')
+               for state in transport_states}
+    joint_receivers = {state: (receiver[state], monitor[state])
+                       for state in transport_states}
+    out.append(test_case('source monitor recovers source-activity query', transport_states,
+        monitor, emitter, True))
+    out.append(test_case('joint receiver and monitor recover source activity', transport_states,
+        joint_receivers, emitter, True))
+    assert monitor['trans-off'] != monitor['absorb-on']
+
+    assert len(out) == 19
     print(dumps({"mode": "finite-exhaustive-synthetic-only",
                  "all_passed": True, "tests": out,
                  "non_promotion": ["not-Agda-kernel", "not-measured-acoustics",
