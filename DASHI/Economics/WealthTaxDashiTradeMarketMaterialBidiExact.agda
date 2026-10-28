@@ -1429,3 +1429,107 @@ paretoMinimalityCannotUniquelySelectCheapAdministration unique =
   careAndAdministrationAreDistinct
     (unique increasedCareCapacity careCapacityIsUndominated)
 
+------------------------------------------------------------------------
+-- D12 FINITE FILL TOKEN UNIQUENESS + PER-FILL CHRONOLOGY.
+-- All timestamps are caller-supplied ordered integers; no timezone,
+-- exchange calendar, signed execution report or custody identity follows.
+-- Security-class labels are explicit but unauthenticated local strings.
+------------------------------------------------------------------------
+
+record TimestampedFill : Set where
+  constructor timestamped-fill
+  field
+    localFillToken : Nat
+    fillIssuerLabel : String
+    fillClassLabel : String
+    submissionEpoch : Nat
+    executionEpoch : Nat
+    clearingEpoch : Nat
+    settlementEpoch : Nat
+    submittedBeforeExecuted : submissionEpoch ≤ executionEpoch
+    executedBeforeCleared : executionEpoch ≤ clearingEpoch
+    clearedBeforeSettled : clearingEpoch ≤ settlementEpoch
+open TimestampedFill public
+
+-- No duplicate *local token* is permitted anywhere in an arbitrary finite
+-- batch. The record enforces individual event chronology. It does not
+-- assert consecutive fills arrived in timestamp-sorted list order.
+TokenAbsent : Nat → List TimestampedFill → Set
+TokenAbsent token [] = ⊤
+TokenAbsent token (fill ∷ rest) =
+  (token ≡ localFillToken fill → ⊥) × TokenAbsent token rest
+
+UniqueFillTokens : List TimestampedFill → Set
+UniqueFillTokens [] = ⊤
+UniqueFillTokens (fill ∷ rest) =
+  TokenAbsent (localFillToken fill) rest × UniqueFillTokens rest
+
+AllFillLabelsMatch : String → String → List TimestampedFill → Set
+AllFillLabelsMatch issuer security [] = ⊤
+AllFillLabelsMatch issuer security (fill ∷ rest) =
+  (issuer ≡ fillIssuerLabel fill)
+    × ((security ≡ fillClassLabel fill)
+       × AllFillLabelsMatch issuer security rest)
+
+record ChronologicalIdentifiedFillBatch : Set where
+  constructor chronological-identified-fill-batch
+  field
+    requestedIssuerLabel : String
+    requestedSecurityClassLabel : String
+    timestampedFills : List TimestampedFill
+    uniqueLocalTokens : UniqueFillTokens timestampedFills
+    reconciledIssuerClassLabels :
+      AllFillLabelsMatch requestedIssuerLabel
+        requestedSecurityClassLabel timestampedFills
+open ChronologicalIdentifiedFillBatch public
+
+uniqueFillIdentityAndMonotoneEventTime :
+  (batch : ChronologicalIdentifiedFillBatch) →
+  UniqueFillTokens (timestampedFills batch)
+  × AllFillLabelsMatch
+      (requestedIssuerLabel batch) (requestedSecurityClassLabel batch)
+      (timestampedFills batch)
+uniqueFillIdentityAndMonotoneEventTime batch =
+  uniqueLocalTokens batch , reconciledIssuerClassLabels batch
+
+-- Two equal-valued fills with the *same* local ID cannot satisfy the
+-- finite-list uniqueness contract. This is a negative fixture only.
+syntheticFill7 : TimestampedFill
+syntheticFill7 =
+  timestamped-fill 7 "fixture-issuer" "fixture-ordinary"
+    1 1 1 1 ≤-refl ≤-refl ≤-refl
+
+syntheticFill8 : TimestampedFill
+syntheticFill8 =
+  timestamped-fill 8 "fixture-issuer" "fixture-ordinary"
+    1 1 1 1 ≤-refl ≤-refl ≤-refl
+
+duplicateSevenTokenRejected :
+  UniqueFillTokens (syntheticFill7 ∷ syntheticFill7 ∷ []) → ⊥
+duplicateSevenTokenRejected ((notSameToken , _) , _) =
+  notSameToken refl
+
+sevenAndEightTokensAreDistinct : 7 ≡ 8 → ⊥
+sevenAndEightTokensAreDistinct ()
+
+twoDistinctTokensAreUnique :
+  UniqueFillTokens (syntheticFill7 ∷ syntheticFill8 ∷ [])
+twoDistinctTokensAreUnique =
+  (sevenAndEightTokensAreDistinct , tt) , (tt , tt)
+
+twoFillLabelsAgree :
+  AllFillLabelsMatch "fixture-issuer" "fixture-ordinary"
+    (syntheticFill7 ∷ syntheticFill8 ∷ [])
+twoFillLabelsAgree =
+  refl , (refl , (refl , (refl , tt)))
+
+twoIdentifiedChronologicalFills : ChronologicalIdentifiedFillBatch
+twoIdentifiedChronologicalFills =
+  chronological-identified-fill-batch
+    "fixture-issuer" "fixture-ordinary"
+    (syntheticFill7 ∷ syntheticFill8 ∷ [])
+    twoDistinctTokensAreUnique twoFillLabelsAgree
+
+-- Even a structurally valid finite list is not an authenticated broker,
+-- exchange, nominee/custodian or ASX settlement allocation receipt.
+
