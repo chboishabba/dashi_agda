@@ -13,6 +13,7 @@ fi
 python3 -m pytest -q \
   tests/test_zipf_family_formal.py \
   tests/test_zipf_f13_pnf_parity_exact.py \
+  tests/test_zipf_f13b_raw_rational_proof_exact.py \
   tests/test_zipf_f13b_h15_boundary_exact.py \
   tests/test_zipf_h14_novelty_curve_exact.py \
   tests/test_zipf_first_discovery_plackett_luce_exact.py \
