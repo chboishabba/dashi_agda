@@ -116,6 +116,9 @@ def main() -> None:
         "toePureSellerBuyerShareCountConserved",
         "toeCapitalStockRequiresPhysicalReconciliation",
         "toeDeliveredCareCannotExceedStaffHours",
+        "toeParetoDominanceReflexive",
+        "toeParetoDominanceTransitive",
+        "toeSyntheticPolicyCostsAreIncomparable",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
     # These are direct aliases of EXISTING source and evidence owners.
@@ -145,6 +148,7 @@ def main() -> None:
         "DASHI.Trading.DashiTradeDreamOptionConeExact",
         "DASHI.Economics.DashiTradeAIInfrastructureMarketCrossPollinationExact",
         "DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact",
+        "DASHI.Core.AdmissibleConsumerMDLHyperfabricExact",
     ):
         assert "import " + original_owner in dashi_tax_bridge, (
             "missing inherited dashiTRADE/finance/tax owner: " + original_owner
@@ -185,6 +189,8 @@ def main() -> None:
         "physicalCapitalStockFlowConservation",
         "DeliveredCareCapacity",
         "deliveredCareHoursBoundedByStaffAndEquipment",
+        "paretoDominanceReflexive", "paretoDominanceTransitive",
+        "policyTradeoffCosts", "paretoOrderDoesNotTotallyRankTheseOptions",
     ):
         assert theorem in dashi_tax_bridge, "missing tax-market gate: " + theorem
     assert not re.search(r"(?m)^\s*(postulate|{-#\s*TERMINATING)", dashi_tax_bridge), (
