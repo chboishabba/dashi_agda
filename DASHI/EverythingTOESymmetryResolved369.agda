@@ -103,6 +103,22 @@ open WheelIbrahimCollision public using
   ; noUniversalTwinClassifierFromFiniteWholeCube
   )
 
+
+import DASHI.Arithmetic.TwinPrimeNat270PeriodResidualBidiExact as NatWheelPeriod
+open NatWheelPeriod public using
+  ( NatPeriod270
+  ; encodeNatPeriod270
+  ; decodeNatPeriod270
+  ; decodeEncodeNatPeriod270
+  ; certifiedResidueHasCube
+  ; NatCubePeriod270
+  ; decodeCubePeriod270
+  ; encodeCertifiedCubePeriod270
+  ; cubeResidueBound
+  ; cubePeriodResidueRoundTrip
+  ; cubePeriodDecodeToCube
+  )
+
 import DASHI.Arithmetic.TwinPrimeTernary270SurvivorCoverageExact as Ternary270Coverage
 open Ternary270Coverage public using
   ( Wheel270Survives
