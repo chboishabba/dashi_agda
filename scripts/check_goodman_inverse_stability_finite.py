@@ -30,6 +30,7 @@ def norm_inf(v: tuple[F, F]) -> F:
 
 def run() -> list[dict]:
     results = []
+    two_channel_checks = 0
     for n in (1, 2, 10, 100, 1000, 10000):
         # det(A_n) = 1/n, nonzero; exact inverse recovers any rational x.
         determinant = F(1, n)
@@ -57,6 +58,23 @@ def run() -> list[dict]:
         condition = forward_norm * inverse_norm
         assert condition == 2*(n+1)
 
+        # Two-channel errors distinguish source uncertainty from
+        # correlated/common-mode cancellation. This is exact algebra,
+        # NOT a probabilistic covariance calibration.
+        for first_error, second_error in (
+            (F(1, n), F(0)),
+            (F(0), F(1, n)),
+            (F(1, n), F(1, n)),
+            (F(1, n), -F(1, n)),
+        ):
+            noisy_pair = (y[0] + first_error, y[1] + second_error)
+            result = inverse(n, noisy_pair)
+            expected_hidden_second = hidden[1] + n*(second_error - first_error)
+            assert result == (hidden[0] + first_error, expected_hidden_second)
+            if first_error == second_error:
+                assert result[1] == hidden[1]
+            two_channel_checks += 1
+
         results.append({
             "n": n,
             "determinant": str(determinant),
@@ -70,11 +88,13 @@ def run() -> list[dict]:
     # For every finite candidate uniform Lipschitz constant K, choosing
     # n > K makes the constructed inverse error ratio n > K.
     # These test values illustrate the symbolic identity, not exhaust N.
+    assert two_channel_checks == 24
     assert all(row["full_rank"] for row in results)
     assert results[-1]["condition_inf"] == "20002"
     print(dumps({
         "model": "synthetic-rational-two-by-two-inverse",
         "checked": len(results),
+        "two_channel_checks": two_channel_checks,
         "all_passed": True,
         "family_symbolic": "det(A_n)=1/n; ||A_n^-1||_inf=2n; cond_inf(A_n)=2(n+1)",
         "boundary": "per-n invertible is not uniformly stable as n grows",
