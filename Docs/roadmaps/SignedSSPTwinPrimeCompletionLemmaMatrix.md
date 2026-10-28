@@ -172,7 +172,7 @@ twin-prime proof. The 75-ID architecture tally is unchanged.
 | E11 | Duplicate prime filter idempotence | S: same owner |
 | E12 | Fresh filters only remove candidates | P: monotonicity theorem / explicit refinement import |
 | E13 | Genuine twin p,p+2 passes each proper finite small-modulus filter | N: handle modulus equal to endpoint and range assumptions correctly |
-| E14 | Construct strictly composite pairs surviving any finite sieve; establish a universal baseline and unboundedness | S/P: factorable lift and nontrivial factor witnesses for every given r≥2 survivor, without CRT inverse; universal baseline, unboundedness and kernel check still open |
+| E14 | Construct double-composite pairs surviving every given finite sieve; prove baseline and unboundedness | S/P: true `Data.Nat.Primality.Composite` and `¬Prime` certificates on both endpoints for ANY provided survivor r≥2, using product period only. Uniform baseline/unboundedness and kernel check remain open |
 | E15 | FRACTRAN decoded-exponent / CRT commuting square | S: signed ±2 both sides; raw (2^p) parity no-go; full VM interface outstanding |
 
 ## E14 max-cut: factorable double-composite family, no CRT inverse
@@ -220,6 +220,33 @@ for any arithmetic prime-pair correlation.
 **Next max-cut:** unconditional baseline and monotonicity lemmas,
 then source-to-target FRACTRAN compiler reachability and a genuine
 analytic correlation result.
+
+### E14 promotion to genuine arithmetic non-primality
+
+Further cross-check of the pinned Agda standard library found the
+**existing true predicate** `Data.Nat.Primality.Composite`, smart
+constructor `composite-≢`, and `composite⇒¬prime`.
+`FiniteTwinSieveFactorableLiftExact` now upgrades its explicit
+`suc(suc a) * suc(suc b)` factor certificates via
+`twoNontrivialFactorsAreComposite` and
+`twoNontrivialFactorsRefutePrime`; it exposes
+`factorableSurvivorWithBothCompositeCertificates` and
+`factorableSurvivorCannotBeGenuineTwin`.
+
+These results no longer merely describe **integer factors**: the
+source-written types demand actual stdlib `Composite n`,
+`Composite(n+2)`, `¬Prime n` and `¬Prime(n+2)` proofs. The original
+Nat primality kernel owner is reused; no alternative primality or
+analytical oracle is introduced. Exact-head Agda typechecking remains
+pending, so source-written proof terms must NOT be called
+kernel-verified.
+
+**Not yet discharged:** for any given arbitrary certified axis list,
+the `r=suc(suc a)` sieve survivor is an input premise. Proving its
+universal construction from `2P−1` with base `P=∏p` and deriving a
+formal unbounded/injective family remains the E14 kernel-level gap.
+The independent finite Python tests exercised those baselines without
+proving the universal Agda statement.
 
 ## F. Arithmetic-analytic leap (9 obligations)
 
