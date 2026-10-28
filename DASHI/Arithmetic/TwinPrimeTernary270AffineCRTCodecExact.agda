@@ -33,7 +33,7 @@ open import Agda.Builtin.Unit using (tt)
 open import Data.Nat.DivMod using (_%_)
 open import Data.Product using (_×_; _,_)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (_≢_; trans; sym)
+open import Relation.Binary.PropositionalEquality using (_≢_; trans; sym; cong)
 
 import DASHI.Foundations.SSPTritCarrier as T
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
@@ -114,12 +114,53 @@ wheel270DecodeEncode (Geometry.ternary27Point T.sspPosOne T.sspPosOne T.sspNegOn
 wheel270DecodeEncode (Geometry.ternary27Point T.sspPosOne T.sspPosOne T.sspZero) = refl
 wheel270DecodeEncode (Geometry.ternary27Point T.sspPosOne T.sspPosOne T.sspPosOne) = refl
 
+-- The explicit Nat lookup is a LEFT inverse, so the actual CRT
+-- wheel encoding is injective on the FULL typed 3-axis cube.
+justInjective :
+  ∀ {A : Set} {x y : A} →
+  just x ≡ just y → x ≡ y
+justInjective refl = refl
+
+cubeToWheel270Injective :
+  (p q : Geometry.Ternary27Point) →
+  cubeToWheel270 p ≡ cubeToWheel270 q →
+  p ≡ q
+cubeToWheel270Injective p q equalCodes =
+  justInjective
+    (trans
+      (sym (wheel270DecodeEncode p))
+      (trans
+        (cong wheel270ToCube equalCodes)
+        (wheel270DecodeEncode q)))
+
 cube270GlobalAntipode : Geometry.Ternary27Point → Geometry.Ternary27Point
 cube270GlobalAntipode (Geometry.ternary27Point x y z) =
   Geometry.ternary27Point
     (Orbit.strictAntipode x)
     (Orbit.strictAntipode y)
     (Orbit.strictAntipode z)
+
+cube270GlobalAntipodeInvolutive :
+  (p : Geometry.Ternary27Point) →
+  cube270GlobalAntipode (cube270GlobalAntipode p) ≡ p
+cube270GlobalAntipodeInvolutive
+    (Geometry.ternary27Point x y z)
+  rewrite Orbit.strictAntipodeInvolutive x
+        | Orbit.strictAntipodeInvolutive y
+        | Orbit.strictAntipodeInvolutive z = refl
+
+wheel270CentreCodeIs269 :
+  cubeToWheel270
+    (Geometry.ternary27Point
+      T.sspZero T.sspZero T.sspZero)
+  ≡ 269
+wheel270CentreCodeIs269 = refl
+
+wheel270CentreFixedByAntipode :
+  cube270GlobalAntipode
+    (Geometry.ternary27Point T.sspZero T.sspZero T.sspZero)
+  ≡ Geometry.ternary27Point T.sspZero T.sspZero T.sspZero
+wheel270CentreFixedByAntipode = refl
 
 -- This is the exact affine *unordered pair* swap, not ordinary
 -- additive inverse n -> -n (it is centred at n=-1).
