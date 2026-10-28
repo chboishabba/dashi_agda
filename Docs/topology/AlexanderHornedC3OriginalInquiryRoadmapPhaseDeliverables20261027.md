@@ -979,3 +979,124 @@ S3/C3/quaternion and subfactorial ownership,
 No Ibrahim Monster 3B or VOA same-object
 theorem is inferred from any shared C3, 27,
 theta, q-phase, or cubic-root notation.
+
+
+### N. Native ternary local fibre-action group and refinement system
+
+**User-selected interpretation:** the 27 native depth-two cells
+are not merely passive function input sites: each carries a
+local 3-state phase action. With the existing
+`K3[n]=C3_sector×Trit^n`, define
+
+```text
+A_n = Map(K3[n], C3_phase),  |A_n| = 3^(3*3^n).
+(g * f)(x) = g(x)+f(x) (mod 3).
+p[n] : K3[n+1] -> K3[n]
+p[n]^* g = g ∘ p[n] : A_n -> A_(n+1).
+```
+
+At n=2 there are 27 address cells and
+`|A_2|=3^27=3↑↑3=7,625,597,484,987`.
+Pointwise (C_3) addition makes (A_n) an
+ABELIAN group acting FREELY and TRANSITIVELY
+on all phase configurations over those cells.
+This is the accurate extra structure behind
+the earlier tetration *count*. The count is
+`3^27` at n=2, whereas the native address
+space still has only 27 cells.
+
+**New Agda reuse-first implementation:**
+`AlexanderHornedNativeTernaryFibreActionExact.agda`
+imports existing `NativeBalancedTernaryEndTowerExact`
+and `FiniteC3OrbitStabilizerExact` group law.
+It gives pointwise group law/action equations,
+a constructive difference sending one phase
+configuration to another, free action, pullback,
+multiplication/inverse preservation, injectivity
+of every pullback via the canonical snoc-zero
+section, C3 sector rotation/refinement
+commuting square, and coherent evaluation of
+finite-depth phase actions on genuine
+`InverseLimitPoint balancedEndTower` ends.
+This module is imported by the existing TOE
+symmetry receiver; no duplicate C3 group
+or generic inverse-limit object is created.
+
+**Local exact audit** in
+`scripts/alexander_horned_native_ternary_fibre_action_audit.py`
+covers depths 0..6, including 2187 coarse and
+6561 refined cells at depth six. It tests
+the pointwise group law, free/transitive
+difference, every projection section,
+pointwise injective pullback logic,
+rotation/pullback commutation, and order
+three sector rotation. Local Python passed.
+It does not enumerate all 3^27 phase fields,
+which is unnecessary to check these exact
+finite-algebraic laws.
+
+**Correct infinite-level group target:**
+the pullback diagram yields a directed
+system of groups `A_0 -> A_1 -> ...`.
+Its direct limit should be identified with
+`C_loc(K3,C3)`, the C3-valued CONTINUOUS
+(or equivalently locally constant, since
+target is finite discrete) functions on the
+native ternary compact Cantor end space.
+The Agda source implements the finite-depth
+representatives and their compatible
+evaluation on infinite ends, but does NOT
+yet implement an explicit quotient
+identifying different representatives at
+a common later depth nor a topological
+compactness/factorization certificate.
+Those are a precisely bounded P1 kernel
+obligation, rather than hidden assumptions.
+
+**External sector C3** acts on A_n by
+pullback of the address permutation.
+The resulting finite abstract group
+`A_n ⋊ C3_sector` is a permutational
+semidirect product, distinct from the
+previous ORIGINAL geometric orbifold
+`(G_A*G_A*G_A) ⋊ C3_sector`.
+These are not interchangeable:
+one is a group of locally varying
+C3 phases over end addresses; the other
+records the fundamental group of the
+conditional wild exterior orbifold.
+Relating them requires an explicit
+same-object action/representation,
+not a coincident C3 factor.
+
+**Tetration update:** (3^{27}) is
+precisely the size of the finite depth-two
+phase group. The unbounded iteration
+`F_(k+1)=Map(F_k,C3)` is a DIFFERENT
+recursive fibre hierarchy whose cardinalities
+obey `h_(k+1)=3^{h_k}`; this recurrence
+is already owned by `RecursiveFibreTower`.
+The depthwise local group sizes instead
+are `3^{3^{n+1}}`, and only match
+selected tetration values at special n.
+Do not silently identify both towers.
+
+**Pareto cutset:** finish a quotient by
+eventual equality in A_n with exact
+well-defined group law and C3 action.
+Then give a compactness proof that every
+continuous `K3->C3` field factors
+through a finite prefix. Only then seek
+a fibre-action interaction with the
+Hatcher wild exterior or its auxiliary
+(SU2) representation, retaining source
+and spin/gauge distinctions.
+
+Attribution: Cantor-space compactness
+and local constancy are classical, the
+generic `FibreTower` and C3 group
+are earlier DASHI owners, and #1244
+owns this source-specific fibre-action
+composition. No Agda typecheck or
+physical measurement is claimed in
+this update.
