@@ -83,3 +83,50 @@ Yet at the second draw, `E_IID[V_2]=13/8` while `E_uniform-permutation[V_2]=11/6
 The mathematical *formula* belongs to Luce/Plackett and earlier probability theory; the six ABC carrier and exact ternary×binary codec remain the earlier 1 September 2026 SSSP Agda owner's work. The 28 October 2026 Johl Brown-directed ChatGPT-assisted Python adapter supplies bounded executable crosschecks and connects the two existing interfaces without transferring historical or PR ownership. Prior Ibrahim Monster 3B results remain independent. No theorem about same-object vortex dynamics, numerical corpus chronology, C6/HexTruth algebra or formal statistical power-law universality is claimed.
 
 **Remaining wall:** the Python modules are committed and locally independent 6- and 12-word enumerations were executed, but the exact committed GitHub Python modules, the full exact-head suite and any new Agda theorems have not been compiled or executed as a whole in this environment. The more general Plackett–Luce/Heaps two-sampler equality is mathematical source plus finite checks here, not a completed Agda probability-space proof.
+
+
+## Joint full-Heaps-prefix distribution (neither marginal-only nor mere arrival order)
+
+The previous project-owned `scripts/zipf_stochastic_majorization_exact.distinct_count_pmf` computes `Pr(V_t=j)` for a **single** prefix t. It does not determine the probability law over the entire vector `(V_0,V_1,...,V_t)`; different transition histories can share a terminal marginal. This is the exact missing observable exposed by the six ABC orders.
+
+New `scripts/zipf_full_heaps_path_distribution_exact.py` computes a **joint** law by exact rational DP. Its state is `(remaining multiset counts, already-seen mask, complete prefix curve)`. For IID, the type i transition probability remains `f_i/N` at every draw; for uniform permutation, it is `remaining_i/(N-step)`. The dynamic program aggregates identically valued states with exact `Fraction` arithmetic and refuses horizons greater than 14 or too many states rather than claiming an unbounded executable implementation. The *mathematical* finite law is not limited to this resource cap.
+
+At **every** prefix of the jointly computed curve, the implementation independently checks its induced marginal against the existing canonical `distinct_count_pmf` owner and its expectation against the existing canonical `expected_iid_vocabulary` or `expected_permutation_vocabulary` owner. This maintains *reuse* rather than a duplicate occupancy distribution.
+
+For `ABC` with one of each named type:
+
+```
+Uniform permutation V_0..V_3 distribution:
+  (0,1,2,3): 1
+
+IID with p=(1/3,1/3,1/3), three draws:
+  (0,1,1,1): 1/9
+  (0,1,1,2): 2/9
+  (0,1,2,2): 4/9
+  (0,1,2,3): 2/9
+```
+
+Thus all SIX uniform permutation histories have the same deterministic Heaps curve, but the IID process allows repeated types within three draws. Both models still induce the *same* classical Plackett–Luce **first-appearance order** law on the full infinite-IID and complete-permutation sample paths, because those order probabilities integrate over the random waiting times.
+
+For `AABC`, the previously calculated exact fixed-multiset three-curve distribution `1/6,1/3,1/2` is recovered. The IID four-draw joint law differs.
+
+`tests/test_zipf_full_heaps_path_distribution_exact.py` adds eight test functions: independent IID word enumeration, independently enumerated labeled physical multiset permutations, path-vs-marginal consistency, literal six- and twelve-order cases, novelty-increment gates, and invalid-input exhaustion. An independent materially equivalent finite DP replay was executed locally against enumeration for **four count vectors and all small tested horizons** under both samplers; every exact probability comparison passed. The committed module and test file have **not** been executed from an exact GitHub checkout in this session. Do not represent a local reproduction as CI, Agda kernel certification or real-corpus observation.
+
+### New mathematical dependency and what remains
+
+The observational hierarchy is now:
+
+```
+full ordered token word
+  -> first-appearance order of NAMED types
+  -> terminal rank histogram?   [independent quotient, not a nested arrow]
+  -> full novelty flags / full exact Heaps curve
+  -> single-time V_t marginals (probabilistic operation)
+  -> fitted Heaps/Zipf exponent
+```
+
+The histogram and named first-discovery order are distinct projections of a word; they are **not** generally nested or equivalent. The corresponding conditional probability spaces and carrier maps must stay explicitly typed.
+
+The finite exact joint path distribution is an executable probability computation. A **general Agda kernel proof** of the two-sampler first-seen-order Plackett–Luce equality, the joint path construction's normalization, and S24's stochastic monotone coupling remains outstanding. These obligations cannot be inferred from shared examples, equal six-element cardinality, or the prior SSSP codec.
+
+No ESD, protected digital-ESD, current-master Balaban/YM, zeta/RH, NS or Ibrahim Monster 3B surfaces are modified. Historical math, previous source-owner code, new computations, executed checks and kernel proofs remain distinct.
