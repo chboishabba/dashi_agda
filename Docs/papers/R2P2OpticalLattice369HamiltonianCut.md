@@ -96,6 +96,14 @@ These are *mathematical exercises on rounded wavelength labels*. The operational
 
 `scripts/r2p2_optical_lattice_3site_diagnostic.py --nominal-supercell-pareto` computes the exact rational relative nominal mismatch `abs(N497*497 - N813*813)/(N813*813)`. Its two objectives are *smaller N497* and *smaller nominal relative mismatch*. At these objectives, **85:52 is Pareto dominated by 18:11**; 18:11, 139:85, 175:107, 265:162 are nondominated. This analysis was independently executed using Python `Fraction` against the five source-provided integer pairs (cross-products, exact mismatches and dominated flags). The committed exact-branch script/test suite has not executed locally; no actual physical spectral optimality follows. The original authors keep priority for the approximants and simulations. The Pareto ranking is source-written DASHI analysis with its own explicitly limited objectives.
 
+## 3d. Stronger wrong-basis obstruction: the Ma S6 Fourier offsets
+
+**Source primary equation S6** contains off-diagonal Fourier matrix elements at `j'-j = ±N497=±18` and `j'-j=±N813=±11` (with separately calibrated coupling strengths and diagonal kinetic energy). This is a **plane-wave** basis, not the real-space Wannier site nearest-neighbour basis of S1.
+
+The new Agda source defines a finite **three-plane-wave-mode** window with indices `-1,0,+1` and exact separations `0,1,2`. The indexed constructors `MaS6Sideband 11` and `MaS6Sideband 18` have no inhabitant at any of those nine pairs; all nine cases are discharged by empty patterns in `noMaS6SidebandInThreeModeFourierTruncation`. In contrast, the **site-basis** P3 graph has a nearest-neighbour edge. This proves that a naive *identity map* between these distinct tiny representations does not preserve the actual S6 off-diagonal coupling. It does not rule out a physically justified change of basis on a *sufficiently large* Hilbert space, nor assert anything about the experimentally measured linewidth or localization.
+
+This is a second exact finite wrong-type cut: *same number of modes or matching 18/369 labels cannot substitute for the correct physical operator*. The witness is attached at `fullArchitectureMaS6ThreeModeHasNoSideband` in the canonical R2P2 architecture, with a Python finite enumeration regression. Its result is source-written, not Agda-kernel checked.
+
 ## 4. Pareto / snowball / Ibrahim plan — real cutset
 
 **P0: Experiment identity** — separate the 2022 Sr vertical redshift, 2026 Ma Sr87 horizontal AA localization, and 2026 R2P2 neutral-Yb mountain redshift. This is a primary-source provenance/authority gate.
