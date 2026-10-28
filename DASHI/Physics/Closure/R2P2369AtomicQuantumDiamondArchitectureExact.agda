@@ -21,6 +21,7 @@ import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit729Owner
 import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as Hermitian729
 import DASHI.Physics.Closure.R2P227729HermitianConvolutionTransportExact as HermitianConv729
 import DASHI.Physics.Closure.R2P281PlaneHermitianFiveOrbitConvolutionExact as HermitianPlane81
+import DASHI.Physics.Closure.R2P2C4C5NyquistAntipodalFixedPointExact as Nyquist729
 import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as Antipodal729
 import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourPareto
 import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as C3Fourier
@@ -944,3 +945,29 @@ fullArchitectureFiveInNineHermitian81PairConvolution :
         (Hermitian729.coefficient9 b) target
 fullArchitectureFiveInNineHermitian81PairConvolution =
   HermitianPlane81.fiveOrbitPlaneCodecPreservesAll25QuadraticOutputs
+
+
+------------------------------------------------------------------------
+-- Even-vs-odd padded Fourier-grid antipode boundary. The 4³
+-- retained-output grid has EIGHT self-negative Nyquist corners,
+-- unlike the unique-centre C3³ 13-pair and C5³ 62-pair quotients.
+-- This is exact cyclic INDEX symmetry, not a new C4 sampled DFT.
+------------------------------------------------------------------------
+
+fullArchitectureFourGridNyquistEightFixed :
+  ModePairs.countWhereL Nyquist729.fourFixedCube
+    Nyquist729.allFourGridCubes ≡ 8
+fullArchitectureFourGridNyquistEightFixed =
+  Nyquist729.fourCubeHasEightFixedAntipodes
+
+fullArchitectureFiveGridOnlyCentreFixed :
+  ModePairs.countWhereL Nyquist729.fiveFixedCube
+    Nyquist729.allFiveGridCubes ≡ 1
+fullArchitectureFiveGridOnlyCentreFixed =
+  Nyquist729.fiveCubeHasOneFixedAntipode
+
+fullArchitectureFourGridNyquistIsSelfNegative :
+  Nyquist729.fourGroupAntipode FourPareto.fourOuterTwo
+    ≡ FourPareto.fourOuterTwo
+fullArchitectureFourGridNyquistIsSelfNegative =
+  Nyquist729.fourNyquistResidueIsSelfAntipodal
