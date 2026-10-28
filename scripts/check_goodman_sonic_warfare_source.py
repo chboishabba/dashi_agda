@@ -10,6 +10,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULE = ROOT / "DASHI/Culture/GoodmanSonicWarfareExact.agda"
+RHYTHM = ROOT / "DASHI/Culture/GoodmanSonicWarfareRhythmInterventionExact.agda"
 DOC = ROOT / "Docs/papers/GoodmanSonicWarfare.md"
 ROOTS = [
     ROOT / "DASHI/EverythingTOESymmetryResolved369.agda",
@@ -27,8 +28,11 @@ def require(condition: bool, message: str) -> None:
 def check() -> None:
     module = MODULE.read_text(encoding="utf-8")
     doc = DOC.read_text(encoding="utf-8")
+    rhythm = RHYTHM.read_text(encoding="utf-8")
     for owner in [
         "DASHI.Core.AttributedSourceCore",
+        "DASHI.Core.SnowballAttributionProvenanceInvariantExact",
+        "DASHI.Culture.GoodmanSonicWarfareRhythmInterventionExact",
         "DASHI.Core.QueryIndexedProjectionAdequacyExact",
         "DASHI.Physics.ObserverConditionedTransportBridge",
         "DASHI.Biology.BioacousticMultimodalLagFactorisationExact",
@@ -42,6 +46,8 @@ def check() -> None:
     for marker in [
         "10.7551/mitpress/7999.001.0001",
         "goodmanSources",
+        "goodmanSnowballRole",
+        "goodmanCitationDoesNotImportProof",
         "sourceCitationDoesNotPromote",
         "mirrorNameDoesNotDetermineMechanism",
         "acousticMirrorIsNotKozyrevReferent",
@@ -101,6 +107,31 @@ def check() -> None:
     require("IbrahimTrust.propagandaIntentCannotFactorTruthStatus" in module
             and "IbrahimTrust.falseContentCannotFactorDeceptiveIntent" in module,
             "M1/Ibrahim cross-pollination must remain owner-owned")
+    for owner in (
+        "DASHI.Core.QueryIndexedProjectionAdequacyExact",
+        "DASHI.Core.IdentifiabilityActiveInformationExact",
+        "DASHI.Core.SnowballAttributionProvenanceInvariantExact",
+    ):
+        require(f"import {owner}" in rhythm,
+                f"R1/I1 must import existing owner {owner}")
+    for marker in (
+        "countCannotRecoverPhase",
+        "phaseIsAdequateForPhase",
+        "passiveObservationsDoNotIdentifyCausalModel",
+        "logicalInterventionDistinguishesMechanisms",
+        "addingControlledInterventionBreaksEquivalence",
+        "sonicCitationCannotSupplyProof",
+        "sonicCitationMustRetainSourceKind",
+    ):
+        require(marker in rhythm, f"missing rhythm/causal formalism {marker}")
+    require(not re.search(r"(?m)^\s*postulate\b", rhythm),
+            "new sonic rhythm/causal owner must not introduce postulates")
+    sound_cases = re.findall(
+        r"(?m)^soundReadout (\w+) (\w+) =", rhythm)
+    require(len(sound_cases) == 6 and len(set(sound_cases)) == 6,
+            "causal readout must cover six distinct design-by-model cases")
+    require("Hernan" in doc or "Hernán" in doc,
+            "source report should attribute causal inference authors")
     require("Kozyrev" in doc and "Ibrahim" in doc and "Pinheiro dos Santos" in doc,
             "missing cross-domain/source priority cautions")
     for file in ROOTS:
