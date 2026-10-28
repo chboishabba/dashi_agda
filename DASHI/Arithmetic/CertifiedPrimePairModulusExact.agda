@@ -40,6 +40,7 @@ import Data.Nat.Properties as NatP
 open import Data.Nat.Properties using (_≟_; +-assoc; +-comm )
 open import Data.Nat.DivMod using (_%_; [m+n]%n≡m%n)
 open import Data.Nat.Primality as NatPrime using (Prime; prime?)
+open import Data.Nat.Coprimality using (Coprime)
 
 import DASHI.Arithmetic.FinitePrimeProductSieveExact as Product
 import DASHI.Arithmetic.PrimeModSixSieveExact as PrimeSix
@@ -278,8 +279,7 @@ canonicalPrimeCRTForward M axis x =
 
 record ArithmeticPrimeCRTStep (M : Nat) (axis : CertifiedPrimeAxis) : Set where
   field
-    coprimeEvidence : Set
-    coprimeWitness : coprimeEvidence
+    coprimeWitness : Coprime M (primeModulus axis)
     reconstruct :
       Fin M × Fin (primeModulus axis) →
       Fin (M * primeModulus axis)
