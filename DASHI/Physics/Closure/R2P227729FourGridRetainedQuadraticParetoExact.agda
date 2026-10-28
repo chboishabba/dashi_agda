@@ -30,6 +30,8 @@ open import Data.Empty using (⊥)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Conv
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Core
 
 -- The fourth residue class represents both +/-2 (modulo 4).
 data FourGridMode : Set where
@@ -169,6 +171,45 @@ outerFrequenciesReallyDiffer :
   M.wideMinusTwo ≡ M.widePlusTwo →
   ⊥
 outerFrequenciesReallyDiffer ()
+
+------------------------------------------------------------------------
+-- Source generic consumer nonfactorability, instantiated to the N=4
+-- full-wide-output collision. N=4 IS precise enough for retained K=1,
+-- but CANNOT recover the original signed +/-2 spectral coefficients.
+------------------------------------------------------------------------
+
+outerMinusTwoX : Conv.WideCube125
+outerMinusTwoX = Conv.wideCube M.wideMinusTwo M.wideZero M.wideZero
+
+outerPlusTwoX : Conv.WideCube125
+outerPlusTwoX = Conv.wideCube M.widePlusTwo M.wideZero M.wideZero
+
+fourGridOuterOutputsCollide :
+  wideToFourGrid outerMinusTwoX ≡ wideToFourGrid outerPlusTwoX
+fourGridOuterOutputsCollide = refl
+
+distinctWideOuterOutputs : outerMinusTwoX ≡ outerPlusTwoX → ⊥
+distinctWideOuterOutputs ()
+
+fourGridFullOutputCollision :
+  Core.ConsumerCollision wideToFourGrid (λ w → w)
+fourGridFullOutputCollision =
+  NF.nonFactorabilityWitness
+    outerMinusTwoX outerPlusTwoX
+    fourGridOuterOutputsCollide
+    distinctWideOuterOutputs
+
+fourGridCannotRecoverFullIntegerSpectrum :
+  Core.ConsumerSufficient wideToFourGrid (λ w → w) → ⊥
+fourGridCannotRecoverFullIntegerSpectrum =
+  Core.collisionRefutesSufficiency fourGridFullOutputCollision
+
+fourGridPostprocessingCannotRestoreFullSpectrum :
+  ∀ {Chart : Set} (chart : FourGridCube64 → Chart) →
+  Core.ConsumerSufficient (λ w → chart (wideToFourGrid w)) (λ w → w)
+    → ⊥
+fourGridPostprocessingCannotRestoreFullSpectrum chart =
+  Core.collisionSurvivesRechart chart fourGridFullOutputCollision
 
 -- N=3 is insufficient even at a RETAINED index.
 threeGridFalseRetainedNegativeFrequency :
