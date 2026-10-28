@@ -1256,3 +1256,92 @@ original DASHI #1407 5/9 and 13/27 symmetry,
 #1414 S3/C3 and 3^5 versus 5^3 discrimination,
 #1244 native address/fibre projective tower, and
 Alexander/Hatcher for the DISTINCT horned geometry.
+
+
+### P. Sonic Warfare T15/T16 five-orbit heterogeneous wave bridge
+
+Cross-PR donor audit: sonic #1405 already contains the
+**homogeneous** three-channel T15 equivariance theorem AND the
+stronger T16 **heterogeneous** operator/field naturality
+square, plus explicit fixed-heterogeneous counterexample.
+Those theorems belong to the earlier Goodman/finite wave
+authors and PR #1405. They are NOT rewritten as novel horned
+wave results. T16 operator triple's universe annotation was
+corrected in its OWN #1405 branch: a record of
+`DiscreteWave -> DiscreteWave` functions belongs to
+`Set`, not `Set₁`. It remains source-written until
+an exact Agda typechecking receipt.
+
+The independently valuable #1244 bridge is
+`AlexanderHornedFiveOrbitWaveOperatorExact.agda`,
+which uses existing #1244 `FiveOrbit`, classifier
+`C3×Trit² -> FiveOrbit` and
+`DASHI.Physics.ShiftDiscreteWaveStep.DiscreteWave`.
+For ANY five possibly distinct endomorphisms
+`O:FiveOrbit -> (DiscreteWave -> DiscreteWave)`,
+the 27-cell inflated operator/field is
+`O(orbit(x))`, `f(orbit(x))`, yielding
+
+```text
+evolve(inflateOp(O), inflateWave(f))
+    =pointwise= inflateWave(evolveFive(O,f))
+```
+
+Because the five-orbit classifier is invariant
+under both EXTERNAL sector C3 and simultaneous
+balanced sign, this five-*heterogeneous*-operator
+step commutes with BOTH symmetries. No requirement
+that all five orbit operators equal the same
+wave operator. A truly arbitrary 27-site operator
+triple instead requires the T16-style simultaneous
+operator-and-field relabelling:
+`evolve(r*O,r*f) = r*(evolve(O,f))`.
+With operators held fixed, heterogeneous
+equivariance generally FAILS, demonstrated by
+an explicit finite counterexample.
+
+The new exact integer wave-proxy regression
+`scripts/alexander_horned_five_orbit_wave_operator_audit.py`
+has local source-equivalent PASS on the 27 sites,
+five differing operators, external rotation,
+balanced sign and fixed-operator failure.
+The new Agda source imports the canonical
+TOE symmetry root. It does NOT import the
+UNMERGED #1405 module, nor claim the mathematical
+proof is an observation of physical acoustics.
+
+**Important information no-go:** at 27 sites
+this bridge depends on five orbit classes, not
+five wave eigenmodes or the physical five-word
+harmonic spectrum. The 243 five-class C3 phase
+fields and 729 with a sixth independent phase
+are FINITE FIBRE ACTIONS; the wave state here is
+a distinct `DiscreteWave` type. To claim an
+intertwiner `C3_phase -> DiscreteWave` with
+physical meaning requires explicit map,
+coefficient action, energy/flux invariant,
+calibration and medium geometry. Neither
+Riemann Xi reflection, Dirac holonomy, Monster
+3B nor Sonic Warfare literary interpretation
+supplies this map by shared C3 cardinalities.
+
+**Next geometric cut:** specify actual wave
+operator coefficients as functions of
+the native clopen end addresses and show
+they descend to the FIVE orbit quotient,
+or supply controlled covariance when they
+do not. A true acoustic device then requires
+a source-produced medium, measurable field
+and validated numerical discretization.
+The stationary wild satellite collar remains
+an independent and higher-priority P0
+topological same-object gap.
+
+Attribution: original Goodman source and
+historical wave operator theory, original
+DASHI/Physics wave-step owners, #1405
+T15/T16 proof authorship, #1407 five/nine
+orbit analysis, #1244 five-orbit fibre source,
+and distinct experimental/gauge receipts
+are recorded separately. All new Agda
+source remains kernel-pending.
