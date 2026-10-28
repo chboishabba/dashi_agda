@@ -18,9 +18,12 @@ module DASHI.Arithmetic.SignedSSPPrimeOutputBoundaryExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product using (Σ; _×_; _,_)
-open import Data.Nat.Primality using (Prime)
+open import Data.Nat.Primality as NatPrimality using (Prime; prime?)
+open import Data.Empty using (⊥-elim)
+open import Relation.Nullary using (yes; no)
+import DASHI.Analysis.NatPrimeCountingInstance as NatCount
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Arithmetic.SignedSSPPrimeOffsetMacroExact as Offset
@@ -126,3 +129,52 @@ certifiedNeighboursAreTwinPrimes :
   Prime (p + Offset.two) →
   Twin.TwinPrimeAt p
 certifiedNeighboursAreTwinPrimes p left right = left , right
+
+------------------------------------------------------------------------
+-- Reuse exact finite prime enumeration, not an invented machine run.
+--
+-- For each certified prime p>=2, the inherited NatPrimeCountingInstance
+-- returns p in the finite list through cutoff p. Mapping the list to
+-- power-of-two codes produces a genuine complete-at-each-cutoff
+-- REPRESENTATION family. Nothing here proves reachability by a signed
+-- SSP machine from its designated initial state.
+------------------------------------------------------------------------
+
+data _∈_ {A : Set} (x : A) : List A → Set where
+  here : ∀ {xs} → x ∈ (x ∷ xs)
+  there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
+
+mapList : ∀ {A B : Set} → (A → B) → List A → List B
+mapList f [] = []
+mapList f (x ∷ xs) = f x ∷ mapList f xs
+
+memberMap :
+  ∀ {A B : Set} →
+  (f : A → B) →
+  {x : A} {xs : List A} →
+  x ∈ xs →
+  f x ∈ mapList f xs
+memberMap f here = here
+memberMap f (there member) = there (memberMap f member)
+
+natPrimeAppearsAtOwnCutoff :
+  (n : Nat) →
+  Prime (suc (suc n)) →
+  (suc (suc n)) ∈ NatCount.natPrimesUpTo (suc (suc n))
+natPrimeAppearsAtOwnCutoff n witness
+  with NatPrimality.prime? (suc (suc n))
+... | yes _ = here
+... | no notPrime = ⊥-elim (notPrime witness)
+
+encodedPrimesUpTo : Nat → List Nat
+encodedPrimesUpTo n =
+  mapList Offset.powerTwo (NatCount.natPrimesUpTo n)
+
+everyPrimeCodeAppearsAtOwnCutoff :
+  (n : Nat) →
+  Prime (suc (suc n)) →
+  Offset.powerTwo (suc (suc n))
+    ∈ encodedPrimesUpTo (suc (suc n))
+everyPrimeCodeAppearsAtOwnCutoff n witness =
+  memberMap Offset.powerTwo
+    (natPrimeAppearsAtOwnCutoff n witness)
