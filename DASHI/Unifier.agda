@@ -1,5 +1,13 @@
 module DASHI.Unifier where
 
+-- Native 27 unary ternary maps: even C3 gives 11 conjugation orbits;
+-- full S3 gives 7. Same abstract source group as root discriminant
+-- parity; distinct action/carrier and no Galois/Monster promotion.
+import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitRefinementExact as RootParity27
+open RootParity27 public using
+  (cycleCodeThreeTimes ; reflectionCodeTwice ; reflectionInvertsCycle
+  ; fixedIdentity ; fixedRotate ; fixedRotateSquared)
+
 -- Source-generalized nested commutator recovery forces both witnesses
 -- trivial in every explicitly finite-derived solvable target.
 import DASHI.Foundations.PolynomialDoubleCommutatorSolvableNoGoExact as DoubleCommutatorObstruction
