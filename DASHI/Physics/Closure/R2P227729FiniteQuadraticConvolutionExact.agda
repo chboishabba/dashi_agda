@@ -32,6 +32,7 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Core
+import DASHI.Core.IntersectionalNonFactorability as NF
 open import Data.Empty using (⊥)
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
 
@@ -102,6 +103,54 @@ threePointFoldingCannotRecoverEveryTrueIndex :
     → ⊥
 threePointFoldingCannotRecoverEveryTrueIndex =
   M.foldedThreePointModeCannotRecoverExactFourierIndex
+
+------------------------------------------------------------------------
+-- The FULL 27-C3 DFT does not restore integer indices discarded
+-- BEFORE it receives the cyclic Fourier coefficient array.
+------------------------------------------------------------------------
+
+wideIntegerOutputToThreeResidues : WideCube125 → I.ModeCube27
+wideIntegerOutputToThreeResidues (wideCube a b c) =
+  I.modeCube
+    (M.periodicThreePointFold a)
+    (M.periodicThreePointFold b)
+    (M.periodicThreePointFold c)
+
+realWidePlusTwoX : WideCube125
+realWidePlusTwoX = wideCube M.widePlusTwo M.wideZero M.wideZero
+
+realWideMinusOneX : WideCube125
+realWideMinusOneX = wideCube M.wideMinusOne M.wideZero M.wideZero
+
+wideOutputsCollideOnCyclic27Residue :
+  wideIntegerOutputToThreeResidues realWidePlusTwoX
+    ≡ wideIntegerOutputToThreeResidues realWideMinusOneX
+wideOutputsCollideOnCyclic27Residue = refl
+
+differentActualIntegerWideOutputs :
+  realWidePlusTwoX ≡ realWideMinusOneX → ⊥
+differentActualIntegerWideOutputs ()
+
+threeAxisCyclicIndexCollision :
+  Core.ConsumerCollision wideIntegerOutputToThreeResidues (λ w → w)
+threeAxisCyclicIndexCollision =
+  NF.nonFactorabilityWitness
+    realWidePlusTwoX realWideMinusOneX
+    wideOutputsCollideOnCyclic27Residue
+    differentActualIntegerWideOutputs
+
+noDecoderOfActualWideModeFromCyclic27 :
+  Core.ConsumerSufficient wideIntegerOutputToThreeResidues (λ w → w) → ⊥
+noDecoderOfActualWideModeFromCyclic27 =
+  Core.collisionRefutesSufficiency threeAxisCyclicIndexCollision
+
+cyclic27RechartCannotUndoWideFrequencyLoss :
+  ∀ {Chart : Set} (chart : I.ModeCube27 → Chart) →
+  Core.ConsumerSufficient
+    (λ w → chart (wideIntegerOutputToThreeResidues w))
+    (λ w → w) → ⊥
+cyclic27RechartCannotUndoWideFrequencyLoss chart =
+  Core.collisionSurvivesRechart chart threeAxisCyclicIndexCollision
 
 ------------------------------------------------------------------------
 -- Explicit five-label equality. It is equality of mathematical indices,
