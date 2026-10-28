@@ -128,6 +128,16 @@ The original Base369 physics-phase bridge gives a second important guard: `q6` a
 
 **Integration:** new wave adapter imported in the experiment architecture and three TOE roots. Test: `tests/test_r2p2_369_wave_optical_comb_cut.py`; focused Nix/Agda check added to `.github/workflows/r2p2-369-maxcut.yml`. No Agda kernel or Python checkout execution is implied by file creation.
 
+## October 27 optical lattice and October 28 Aubry-André max-cut
+
+**Important distinct prior experiments**: merged [PR #1085](https://github.com/chboishabba/dashi_agda/pull/1085) owns the Bothwell/Ye 2022 ultracold Sr vertical optical-lattice redshift and Wolf ultracold-control source bridge. [PR #1292](https://github.com/chboishabba/dashi_agda/pull/1292) is a separate unmerged October 27 quantum-metrology TOE branch; [PR #1117](https://github.com/chboishabba/dashi_agda/pull/1117) remains an unmerged empirical-ingestion/geodesy redshift lane. They retain their owners.
+
+[**Detailed optical-lattice source/finite-Hamiltonian memo**](R2P2OpticalLattice369HamiltonianCut.md) and `DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact` now import the **merged existing** 2022 Ye/Wolf atomic/lattice owners and existing `AtomicPeriodicTable369GenerativeExact` and 369 wave/comb fibre. This adapter uses an *explicit P3 three-site* nearest-neighbour adjacency and site-dependent potential. A definitional counterexample proves the two mathematical operators do not commute on a chosen basis state. This is strictly below the actual AA incommensurate operator and the reported threshold `Δ/J=2`.
+
+**Primary-source separation:** Ma et al., arXiv:2610.17499v2 (14 Oct 2026), experimentally localized **87Sr** atoms in two horizontal **813/497 nm** magic-wavelength lattices, improving Ramsey coherence and narrowing Rabi spectra. Triano et al. R2P2 APS source instead names **neutral Yb**, not a demonstrated Ma/Sr AA clock. The 2022 Bothwell/Ye strontium vertical redshift is also separate. The current R2P2 model's example `171Yb` isotope is not source-verified for each mountain clock. Physical apparatus and isotope are independent evidence requirements.
+
+Imported finite proof owner integrated into this experiment and all three TOE roots. New `tests/test_r2p2_optical_lattice_369.py` and a focused Agda CI target are committed, but kernel and exact-checkout test execution remain pending.
+
 ## Scope, limits, verification (S/L/P/G/F)
 
 **Built**: complete type-level *logical* path; reused 369 atomic/field index; both diamonds; finite C3/Weyl certificates; SI second owner; two-way transfer obligations; external redshift bridge; source and evidence guards; tests and TOE root imports.
