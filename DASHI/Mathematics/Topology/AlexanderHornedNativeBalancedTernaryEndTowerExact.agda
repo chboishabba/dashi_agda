@@ -135,3 +135,79 @@ ternaryConfigurationTetration :
 ternaryConfigurationTetration
   rewrite threeSectorDepthTwoPrefixes =
   sym Tower.triadicTetrationThree
+
+
+------------------------------------------------------------------------
+-- PR #1414 ROOT-MONODROMY S3/C3 CONNECTION, TYPED AT TERNARY ENDS.
+-- The internal three-symbol cycle and external three-SECTOR rotation
+-- are two INDEPENDENT commuting C3 actions. Reflection on trits
+-- conjugates the internal cycle to its INVERSE, as in S3, but it does
+-- NOT invert the external sector rotation.
+-- This DOES NOT identify a polynomial's analytic root monodromy with
+-- the chosen Alexander exterior's geometric rotation.
+------------------------------------------------------------------------
+
+rotateDigit : Trit.Trit → Trit.Trit
+rotateDigit Trit.neg = Trit.zero
+rotateDigit Trit.zero = Trit.pos
+rotateDigit Trit.pos = Trit.neg
+
+rotateDigitCubed : ∀ t →
+  rotateDigit (rotateDigit (rotateDigit t)) ≡ t
+rotateDigitCubed Trit.neg = refl
+rotateDigitCubed Trit.zero = refl
+rotateDigitCubed Trit.pos = refl
+
+digitReflectionConjugatesRotation : ∀ t →
+  Trit.negate (rotateDigit (Trit.negate t)) ≡
+    rotateDigit (rotateDigit t)
+digitReflectionConjugatesRotation Trit.neg = refl
+digitReflectionConjugatesRotation Trit.zero = refl
+digitReflectionConjugatesRotation Trit.pos = refl
+
+rotateDigits : ∀ {n} → Vec Trit.Trit n → Vec Trit.Trit n
+rotateDigits = mapVec rotateDigit
+
+reflectDigits : ∀ {n} → Vec Trit.Trit n → Vec Trit.Trit n
+reflectDigits = mapVec Trit.negate
+
+rotateDigitsCubed : ∀ {n} (xs : Vec Trit.Trit n) →
+  rotateDigits (rotateDigits (rotateDigits xs)) ≡ xs
+rotateDigitsCubed [] = refl
+rotateDigitsCubed (t ∷ ts) =
+  cong₂ _∷_ (rotateDigitCubed t) (rotateDigitsCubed ts)
+
+import Relation.Binary.PropositionalEquality as Eq using (cong₂)
+
+reflectConjugatesDigitCycle : ∀ {n} (xs : Vec Trit.Trit n) →
+  reflectDigits (rotateDigits (reflectDigits xs)) ≡
+    rotateDigits (rotateDigits xs)
+reflectConjugatesDigitCycle [] = refl
+reflectConjugatesDigitCycle (t ∷ ts) =
+  Eq.cong₂ _∷_ (digitReflectionConjugatesRotation t)
+    (reflectConjugatesDigitCycle ts)
+
+rotateInternalLevel : ∀ n → BalancedLevel n → BalancedLevel n
+rotateInternalLevel n (c , xs) = c , rotateDigits xs
+
+rotateInternalProjectionSquare : ∀ n (x : BalancedLevel (suc n)) →
+  balancedProjection n (rotateInternalLevel (suc n) x) ≡
+    rotateInternalLevel n (balancedProjection n x)
+rotateInternalProjectionSquare n (c , xs) =
+  cong (λ ys → (c , ys)) (mapDropLast rotateDigit xs)
+
+externalInternalC3Commute : ∀ n (x : BalancedLevel n) →
+  rotateBalancedLevel n (rotateInternalLevel n x) ≡
+    rotateInternalLevel n (rotateBalancedLevel n x)
+externalInternalC3Commute n (c , xs) = refl
+
+internalRotationCubed : ∀ n (x : BalancedLevel n) →
+  rotateInternalLevel n
+    (rotateInternalLevel n (rotateInternalLevel n x)) ≡ x
+internalRotationCubed n (c , xs) =
+  Eq.cong₂ _,_ refl (rotateDigitsCubed xs)
+
+-- These independent actions are the direct-product source of an
+-- *abstract* C3_sector × S3_digit on this finite address carrier.
+-- They do not license a same-object polynomial braid or wild
+-- pi1 representation, despite identical 3-cycle fingerprints.
