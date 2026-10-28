@@ -243,47 +243,53 @@ properThreeColouringPreservesAdjacency :
   Cube.HypervoxelAdjacent a b →
   DifferentPaint (threeColourVoxel a) (threeColourVoxel b)
 properThreeColouringPreservesAdjacency
-  (Cube.adjacentX Cube.negToZero) =
-  rotateDifferent _
+  (Cube.adjacentX {y0 = y} {z0 = z} Cube.negToZero) =
+  rotateDifferent (shiftColour y (shiftColour z Painted.red))
 properThreeColouringPreservesAdjacency
-  (Cube.adjacentX Cube.zeroToNeg) =
-  reverseDifferent (rotateDifferent _)
+  (Cube.adjacentX {y0 = y} {z0 = z} Cube.zeroToNeg) =
+  reverseDifferent (rotateDifferent (shiftColour y (shiftColour z Painted.red)))
 properThreeColouringPreservesAdjacency
-  (Cube.adjacentX Cube.zeroToPos) =
-  rotateDifferent _
+  (Cube.adjacentX {y0 = y} {z0 = z} Cube.zeroToPos) =
+  rotateDifferent (Painted.rotatePaint (shiftColour y (shiftColour z Painted.red)))
 properThreeColouringPreservesAdjacency
-  (Cube.adjacentX Cube.posToZero) =
-  reverseDifferent (rotateDifferent _)
+  (Cube.adjacentX {y0 = y} {z0 = z} Cube.posToZero) =
+  reverseDifferent
+    (rotateDifferent (Painted.rotatePaint (shiftColour y (shiftColour z Painted.red))))
 properThreeColouringPreservesAdjacency
-  (Cube.adjacentY {x0 = x} Cube.negToZero) =
-  shiftPreservesDifferent x (rotateDifferent _)
+  (Cube.adjacentY {x0 = x} {z0 = z} Cube.negToZero) =
+  shiftPreservesDifferent x (rotateDifferent (shiftColour z Painted.red))
 properThreeColouringPreservesAdjacency
-  (Cube.adjacentY {x0 = x} Cube.zeroToNeg) =
-  shiftPreservesDifferent x (reverseDifferent (rotateDifferent _))
+  (Cube.adjacentY {x0 = x} {z0 = z} Cube.zeroToNeg) =
+  shiftPreservesDifferent x
+    (reverseDifferent (rotateDifferent (shiftColour z Painted.red)))
 properThreeColouringPreservesAdjacency
-  (Cube.adjacentY {x0 = x} Cube.zeroToPos) =
-  shiftPreservesDifferent x (rotateDifferent _)
+  (Cube.adjacentY {x0 = x} {z0 = z} Cube.zeroToPos) =
+  shiftPreservesDifferent x
+    (rotateDifferent (Painted.rotatePaint (shiftColour z Painted.red)))
 properThreeColouringPreservesAdjacency
-  (Cube.adjacentY {x0 = x} Cube.posToZero) =
-  shiftPreservesDifferent x (reverseDifferent (rotateDifferent _))
+  (Cube.adjacentY {x0 = x} {z0 = z} Cube.posToZero) =
+  shiftPreservesDifferent x
+    (reverseDifferent
+      (rotateDifferent (Painted.rotatePaint (shiftColour z Painted.red))))
 properThreeColouringPreservesAdjacency
   (Cube.adjacentZ {x0 = x} {y0 = y} Cube.negToZero) =
   shiftPreservesDifferent x
-    (shiftPreservesDifferent y (rotateDifferent _))
+    (shiftPreservesDifferent y (rotateDifferent Painted.red))
 properThreeColouringPreservesAdjacency
   (Cube.adjacentZ {x0 = x} {y0 = y} Cube.zeroToNeg) =
   shiftPreservesDifferent x
     (shiftPreservesDifferent y
-      (reverseDifferent (rotateDifferent _)))
+      (reverseDifferent (rotateDifferent Painted.red)))
 properThreeColouringPreservesAdjacency
   (Cube.adjacentZ {x0 = x} {y0 = y} Cube.zeroToPos) =
   shiftPreservesDifferent x
-    (shiftPreservesDifferent y (rotateDifferent _))
+    (shiftPreservesDifferent y
+      (rotateDifferent (Painted.rotatePaint Painted.red)))
 properThreeColouringPreservesAdjacency
   (Cube.adjacentZ {x0 = x} {y0 = y} Cube.posToZero) =
   shiftPreservesDifferent x
     (shiftPreservesDifferent y
-      (reverseDifferent (rotateDifferent _)))
+      (reverseDifferent (rotateDifferent (Painted.rotatePaint Painted.red))))
 
 properThreeColouringOfVoxelGrid : Graph.GraphHom cubeGrid paintPalette
 properThreeColouringOfVoxelGrid =
