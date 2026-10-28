@@ -189,9 +189,10 @@ applicantConditional w =
 
 respondentConditional : ∀ {g} → HypotheticalWorld g → Bool
 respondentConditional w =
-  Truth.andBool (governmentComplianceEstablished w)
-    (Truth.andBool (actualEvidenceReviewed w)
-      (legallyApplicable w))
+  Truth.andBool (Truth.notBool (defectEstablished w))
+    (Truth.andBool (governmentComplianceEstablished w)
+      (Truth.andBool (actualEvidenceReviewed w)
+        (legallyApplicable w)))
 
 -- Hypotheticals ONLY, with explicitly stipulated reviewed-evidence flags.
 -- There are NO such paid witnesses in the present SLR case model.
@@ -228,6 +229,28 @@ cannotPromoteOppositeBranches :
   respondentConditional w ≡ true → ⊥
 cannotPromoteOppositeBranches (world a b c false e f) _ ()
 cannotPromoteOppositeBranches (world a b c true e f) () _
+
+-- Independently asserted defect and compliance are CONTRADICTORY claims.
+-- Retain them without explosive promotion to either legal branch.
+contradictionPresent : ∀ {g} → HypotheticalWorld g → Bool
+contradictionPresent w =
+  Truth.andBool (defectEstablished w)
+    (governmentComplianceEstablished w)
+
+contradictoryWorld : HypotheticalWorld Case.approvedAdviceOmitted
+contradictoryWorld = world true true true true true true
+
+bothOpposedClaimsPresent :
+  contradictionPresent contradictoryWorld ≡ true
+bothOpposedClaimsPresent = refl
+
+contradictionNotApplicantFinding :
+  applicantConditional contradictoryWorld ≡ false
+contradictionNotApplicantFinding = refl
+
+contradictionNotGovernmentFinding :
+  respondentConditional contradictoryWorld ≡ false
+contradictionNotGovernmentFinding = refl
 
 -- Habitat damage is not by itself the statutory omission. Conversely,
 -- even a modelled government-compliance defence can coexist with damage.
