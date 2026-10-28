@@ -14,7 +14,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (_≤_)
-open import Data.Nat.Properties using (m≤m+n)
+open import Data.Nat.Properties using (m≤m+n; ≤-trans)
 open import Relation.Binary.PropositionalEquality using (sym; subst)
 open import Data.Empty using (⊥)
 
@@ -766,15 +766,19 @@ twoFillGenericWitness =
     (price-quantity-fill 1 1 ∷ price-quantity-fill 1 2 ∷ [])
     3 refl refl
 
+genericSettledCountBoundedBySubmitted :
+  (receipt : CountReconciledOrder) →
+  settledCount receipt ≤ submittedCount receipt
+genericSettledCountBoundedBySubmitted receipt =
+  ≤-trans
+    (genericSettledCountBoundedByExecuted receipt)
+    (genericExecutedCountBoundedBySubmitted receipt)
+
 twoFillGenericBound :
   settledCount (countReceipt twoFillGenericWitness)
     ≤ submittedCount (countReceipt twoFillGenericWitness)
 twoFillGenericBound =
-  subst
-    (λ n → settledCount (countReceipt twoFillGenericWitness) ≤ n)
-    (sym (submittedCountReconciled (countReceipt twoFillGenericWitness)))
-    (genericSettledCountBoundedByExecuted
-      (countReceipt twoFillGenericWitness))
+  genericSettledCountBoundedBySubmitted (countReceipt twoFillGenericWitness)
 
 twoFillGenericCash :
   recordedGrossCash twoFillGenericWitness ≡ 3
