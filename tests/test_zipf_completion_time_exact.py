@@ -148,3 +148,12 @@ def test_permutation_expected_time_matches_exhaustive_label_orders():
                     times.append(t)
                     break
         assert completion_mean(c,'permutation') == F(sum(times),len(times))
+
+
+def test_same_head_mass_and_type_count_different_rare_tail_completion():
+    """A top-2 rank fit cannot determine coverage of the remaining tail."""
+    a,b=(9,7,3,1),(9,7,2,2)
+    assert len(a)==len(b) and sum(a)==sum(b) and a[:2]==b[:2]
+    for sampler in ('iid','permutation'):
+        assert completion_mean(a,sampler) > completion_mean(b,sampler)
+        assert completion_cdf(a,10,sampler) < completion_cdf(b,10,sampler)
