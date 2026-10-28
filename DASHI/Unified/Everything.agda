@@ -6,6 +6,7 @@ import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Convolu
 import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as Bilinear729
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as OriginalAntipodalSym729
 import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as HermitianSym729
+import DASHI.Physics.Closure.R2P227729HermitianConvolutionTransportExact as HermitianConv729
 import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as AntipodalSym729
 import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourGridPareto729
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fourier729Core
@@ -735,3 +736,40 @@ unifiedTrueIntegerPairNegationCovariance :
         (Convolution729.exactPairOutput p q)
 unifiedTrueIntegerPairNegationCovariance =
   AntipodalSym729.trueIntegerQuadraticPairSumNegationEquivariance
+
+------------------------------------------------------------------------
+-- True Hermitian compact Fourier carrier BIDI through the original
+-- 729 ordered integer Z3 coefficient interaction consumer. This does
+-- not assert a faster 13-only algorithm or global NS/Monster physics.
+------------------------------------------------------------------------
+
+unifiedCompact13PairsExactIntegerConvolution :
+  (a b : HermitianSym729.Hermitian27)
+  (target : Convolution729.WideCube125) →
+  HermitianConv729.compactFullBilinearAt
+    (HermitianSym729.packHermitian27 a)
+    (HermitianSym729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b target
+unifiedCompact13PairsExactIntegerConvolution =
+  HermitianConv729.compact13PairTransportPreservesAll125IntegerOutputs
+
+unifiedCompact13PairsFourGridRetained :
+  (a b : HermitianSym729.Hermitian27)
+  (target : Fourier729.ModeCube27) →
+  HermitianConv729.compactFourGridRetainedAt
+    (HermitianSym729.packHermitian27 a)
+    (HermitianSym729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b
+      (Convolution729.retainedToWide target)
+unifiedCompact13PairsFourGridRetained =
+  HermitianConv729.compact13PairsPreserveFourGridRetainedQuadratic
+
+unifiedCompact13PairsFiveGridFull :
+  (a b : HermitianSym729.Hermitian27)
+  (target : Convolution729.WideCube125) →
+  HermitianConv729.compactFiveGridFullAt
+    (HermitianSym729.packHermitian27 a)
+    (HermitianSym729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b target
+unifiedCompact13PairsFiveGridFull =
+  HermitianConv729.compact13PairsPreserveFiveGridFullQuadratic
