@@ -1262,6 +1262,56 @@ toeNavierStokesTerminalPromotionImpossible =
 
 
 ------------------------------------------------------------------------
+-- R829-vector instantaneous snapshot and exact non-promotion boundary.
+------------------------------------------------------------------------
+
+toeNavierStokesInstantaneousVectorSnapshotClosed : Bool
+toeNavierStokesInstantaneousVectorSnapshotClosed =
+  NSClayTOE.instantaneousVectorSnapshotClosed
+
+toeNavierStokesInstantaneousVectorSnapshotClosedIsTrue :
+  toeNavierStokesInstantaneousVectorSnapshotClosed ≡ true
+toeNavierStokesInstantaneousVectorSnapshotClosedIsTrue =
+  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
+
+toeNavierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
+toeNavierStokesInstantaneousRepositoryRateStrictlyNegative =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
+
+toeNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
+  toeNavierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
+toeNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+toeNavierStokesRealFiniteODETransportClosed : Bool
+toeNavierStokesRealFiniteODETransportClosed =
+  NSClayTOE.realFiniteODETransportClosed
+
+toeNavierStokesRealFiniteODETransportStillOpen :
+  toeNavierStokesRealFiniteODETransportClosed ≡ false
+toeNavierStokesRealFiniteODETransportStillOpen =
+  NSClayTOE.realFiniteODETransportStillOpen
+
+toeNavierStokesUniversalR823IntegratedReserveRefuted : Bool
+toeNavierStokesUniversalR823IntegratedReserveRefuted =
+  NSClayTOE.universalR823IntegratedReserveRefuted
+
+toeNavierStokesUniversalR823IntegratedReserveStillUnrefuted :
+  toeNavierStokesUniversalR823IntegratedReserveRefuted ≡ false
+toeNavierStokesUniversalR823IntegratedReserveStillUnrefuted =
+  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
+
+toeNavierStokesInstantaneousSnapshotClayPromotion : Bool
+toeNavierStokesInstantaneousSnapshotClayPromotion =
+  NSClayTOE.instantaneousSnapshotClayPromotion
+
+toeNavierStokesInstantaneousSnapshotClayPromotionStillFalse :
+  toeNavierStokesInstantaneousSnapshotClayPromotion ≡ false
+toeNavierStokesInstantaneousSnapshotClayPromotionStillFalse =
+  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
+
+
+------------------------------------------------------------------------
 -- Current periodic-B shared weighted wall from R736.
 -- Proof ownership remains in R736 through the canonical NS Clay facade.
 ------------------------------------------------------------------------
