@@ -59,6 +59,8 @@ open Ternary270Coverage public using
   ; wheel270121IsComposite
   ; wheel270119SurvivalCannotProveTwin
   ; wheel270121NotPrime
+  ; wheel270RejectsExceptionalStartThree
+  ; wheel270RejectsExceptionalStartFive
   )
 
 import DASHI.Arithmetic.TwinPrimeThreeAxisLocalThreeOrbitExact as TernaryLocalPrimeThree
