@@ -31,6 +31,11 @@ module DASHI.Arithmetic.TwinPrimeThreeAxisLocalThreeOrbitExact where
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.DivMod using (_%_)
+open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (_≢_; trans; sym)
+open import Data.Product using (_×_; _,_)
+
+import DASHI.Arithmetic.CertifiedPrimePairModulusExact as Pair
 
 import DASHI.Foundations.SSPTritCarrier as T
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
@@ -122,3 +127,43 @@ fullCubeHasTwentySevenPositions :
   Geometry.hypervoxelStateCount ≡ 27
 fullCubeHasTwentySevenPositions =
   Geometry.hypervoxelStateCountIs27
+
+-- The +2 endpoint of every slice member has residue ONE at p=3.
+everyCenteredPlusTwoIsOneModuloThree :
+  (y z : T.SSPTrit) →
+  (centeredPrimeThreeResidue y z + 2) % 3 ≡ 1
+everyCenteredPlusTwoIsOneModuloThree T.sspNegOne T.sspNegOne = refl
+everyCenteredPlusTwoIsOneModuloThree T.sspZero   T.sspNegOne = refl
+everyCenteredPlusTwoIsOneModuloThree T.sspPosOne T.sspNegOne = refl
+everyCenteredPlusTwoIsOneModuloThree T.sspNegOne T.sspZero = refl
+everyCenteredPlusTwoIsOneModuloThree T.sspZero   T.sspZero = refl
+everyCenteredPlusTwoIsOneModuloThree T.sspPosOne T.sspZero = refl
+everyCenteredPlusTwoIsOneModuloThree T.sspNegOne T.sspPosOne = refl
+everyCenteredPlusTwoIsOneModuloThree T.sspZero   T.sspPosOne = refl
+everyCenteredPlusTwoIsOneModuloThree T.sspPosOne T.sspPosOne = refl
+
+twoIsNotZero : 2 ≡ 0 → ⊥
+twoIsNotZero ()
+
+oneIsNotZero : 1 ≡ 0 → ⊥
+oneIsNotZero ()
+
+-- Consumes the REAL certified local-sieve predicate. No assumption
+-- about the numbered 3-axis *geometry* supplying a Prime(3) proof.
+-- The input axis must already carry its usual Prime modulus proof.
+centeredSlicePassesCertifiedPrimeThree :
+  (axis : Pair.CertifiedPrimeAxis) →
+  Pair.primeModulus axis ≡ 3 →
+  (y z : T.SSPTrit) →
+  Pair.LocalPairSurvives axis (centeredPrimeThreeResidue y z)
+centeredSlicePassesCertifiedPrimeThree axis equalModulus y z
+  rewrite equalModulus =
+  (λ leftZero →
+     twoIsNotZero
+       (trans (sym (everyCenteredResidueIsTwoModuloThree y z))
+         leftZero))
+  ,
+  (λ rightZero →
+     oneIsNotZero
+       (trans (sym (everyCenteredPlusTwoIsOneModuloThree y z))
+         rightZero))
