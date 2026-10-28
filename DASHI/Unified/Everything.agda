@@ -1,5 +1,30 @@
 module DASHI.Unified.Everything where
 
+-- Separate 120↔60×2 quintic parity atlas, exact arithmetic/369 identities,
+-- and attribution-preserving Ibrahim Pareto/snowball non-promotion gate.
+import DASHI.Foundations.QuinticPermutationTripleOrientationAtlasExact as QuinticAtlas
+import DASHI.Foundations.PolynomialNumerologyArithmeticAtlasExact as NumericAtlas
+import DASHI.Foundations.PolynomialIbrahimParetoSnowballMaxCutExact as PolynomialIbrahim
+
+open QuinticAtlas public using
+  ( permCountIs120 ; tripleCountIs60 ; evenPermutationCountIs60
+  ; permutationAtlasRoundTrip ; tripleOrientationAtlasRoundTrip
+  ; firstThreePositionsAgreeWithChart )
+open NumericAtlas public using
+  ( threePowerFiveIsNineTimesTwentySeven
+  ; threePowerSixIsThreeTimes243
+  ; fivePowerThreeIsFiveTimesTwentyFive
+  ; difference243And125Is118
+  ; fivePermutationAtlasFibreCount
+  ; evenPermutationsMatchInjectiveTriples
+  ; paritySignRoundTrip ; signParityRoundTrip
+  ; countingDoesNotPromoteMonsterObject )
+open PolynomialIbrahim public using
+  ( canonicalPolynomialEvidenceMaxCut
+  ; reusedIbrahimRecognitionBoundary
+  ; searchPriorityAloneNeverProvesMonsterRecognition
+  ; noVideoConceptPretendsKernelReceipt )
+
 -- Full video concept/lemma atlas. Only source-written finite examples are
 -- opened. The separate uninhabited analytic/Galois/Spin contracts stay scoped.
 import DASHI.Foundations.PolynomialVideo45ConceptContractsExact as Video45
