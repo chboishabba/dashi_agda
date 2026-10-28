@@ -57,6 +57,11 @@ open GuyPriorityBidi public using
   ; guyNumericHaltToTyped
   ; guyExactGuardPriorityForward
   ; guyExactGuardPriorityBackward
+  ; exactNumericNext
+  ; exactNumericNextIsCorrect
+  ; concreteExactFractionEvaluator
+  ; guyConcreteExactPriorityForward
+  ; guyConcreteExactPriorityBackward
   )
 
 import DASHI.Arithmetic.TwinPrimeTernary270IbrahimSurvivorCollisionExact as WheelIbrahimCollision
