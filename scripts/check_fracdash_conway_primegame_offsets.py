@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Conway's PRIMEGAME, Richard K. Guy's ordered 15-fraction variant.
+"""Conway's PRIMEGAME, 14-fraction Richard K. Guy ordered variant.
 
 Source: John H. Conway, FRACTRAN (1987), and Richard K. Guy (1983),
 Conway's Prime Producing Machine (Math. Magazine 56(1), 26-33).
-This is the 15/14,15/2 Guy variant, not Conway's distinct 1/7
+This is the 14-fraction 15/14,15/2 Guy variant, not Conway's 1/7
 14-fraction presentation; compare OEIS A007546 and A267572. The FRACDASH R3 signed-register macro comes from
 chboishabba/FRACDASH BRIDGE_CORRECTNESS.md, physics1 gold slice.
 
@@ -13,7 +13,7 @@ Do not equate register-tag primes with generated arithmetic primes;
 """
 from math import isqrt
 
-CONWAY_GUY_FIFTEEN = ((17,91),(78,85),(19,51),(23,38),(29,33),
+CONWAY_GUY_FOURTEEN = ((17,91),(78,85),(19,51),(23,38),(29,33),
                   (77,29),(95,23),(77,19),(1,17),(11,13),
                   (13,11),(15,14),(15,2),(55,1))
 
@@ -32,7 +32,7 @@ def output_exponents(steps=20000):
         if state > 2 and state & (state-1) == 0:
             exponent = state.bit_length()-1
             yield tick, exponent
-        move = first_step(state, CONWAY_GUY_FIFTEEN)
+        move = first_step(state, CONWAY_GUY_FOURTEEN)
         if move is None:
             return
         state, index = move
