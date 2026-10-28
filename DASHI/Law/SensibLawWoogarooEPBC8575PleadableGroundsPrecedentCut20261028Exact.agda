@@ -118,6 +118,28 @@ epbcTransitionDepartmentOriginal = Source.mkNoDOISource
   "Government says previously referred projects are assessed under old law while new project standards commence later. This administrative guidance does NOT itself pay paragraph-by-paragraph commencement and savings for 2019/8575. Inspect original Reform Act 2025 Part 3 Schedule 1 and August transitional rules F2026L01106."
   Source.publicAttribution
 
+mackay2015ConsentOrdersParliamentRecord : Source.AttributedSource
+mackay2015ConsentOrdersParliamentRecord = Source.mkNoDOISource
+  "Parliament of Australia — Senate Environment and Communications Legislation Committee"
+  "EPBC Amendment (Standing) Bill 2015 report, chapter 1, paras 1.21-1.25"
+  "Original Senate primary report of Federal Court NSD33/2015 agreed orders"
+  "2015"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/EPBC_Standing_Bill/Report/c01"
+  Source.governmentSource
+  "Official parliamentary record states 2013 proposed post-Tarkine Schedule1 invalidity amnesty was OMITTED by Senate and enacted bill lacked Schedule1. In 2015 Mackay Conservation Group NSD33/2015, Minister had not been given approved Yakka Skink and Ornamental Snake conservation advice despite significant-impact findings; Justice Katzmann set aside approval by CONSENT 4 August 2015. Re-approved 14 October 2015. The orders are genuine but NO contested merits judgment or finding and NOT same 2026 action."
+  Source.publicAttribution
+
+mackay2015NoJudicialFindingParliamentRecord : Source.AttributedSource
+mackay2015NoJudicialFindingParliamentRecord = Source.mkNoDOISource
+  "Parliament of Australia — Senators' Dissenting Report"
+  "EPBC Amendment (Standing) Bill 2015, dissent paragraphs 1.4-1.5"
+  "Original dissent separately clarifies consent orders rather than reasoned judicial findings"
+  "2015"
+  "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/EPBC_Standing_Bill/Report/d01"
+  Source.governmentSource
+  "Original Parliament states NSD33/2015 orders made without hearing; no judgment or findings issued. AGS letter informed Court that parties agreed a legal error in required advice review and consent set-aside. Distinguish accepted party concessions and court orders from a binding ratio and from post-2013 statutory amendment that was NOT enacted."
+  Source.publicAttribution
+
 data Ground : Set where
   approvedAdviceOmitted : Ground
   recoveryPlanConflict : Ground
@@ -245,6 +267,9 @@ data GovernmentTransitionWebpageAloneProvesEveryOldMeritsProvision : Set where
 data 2025DismissedWindFarmCaseProvesSpringviewApprovalValid : Set where
 data SevenSourceWrittenGroundsAreFiledCourtPleadings : Set where
 data DeveloperFAQEqualsCommonwealthScientificFinding : Set where
+data 2013ProposedConservationAdviceAmnestyBecameEnactedLaw : Set where
+data 2015MackayConsentOrderEqualsContestedJudgment : Set where
+data OtherSpeciesAdmissionProvesWoogarooAdviceOmission : Set where
 
 regionalHarmNotOwnProjectImpact :
   RegionalHarmSumEqualsLegallyRequiredProjectImpact → ⊥
@@ -285,3 +310,15 @@ sourceHypothesesNotFiled ()
 developerClaimNotRegulatorFinding :
   DeveloperFAQEqualsCommonwealthScientificFinding → ⊥
 developerClaimNotRegulatorFinding ()
+
+proposed2013AmnestyNotEnacted :
+  2013ProposedConservationAdviceAmnestyBecameEnactedLaw → ⊥
+proposed2013AmnestyNotEnacted ()
+
+mackayConsentNotRatio :
+  2015MackayConsentOrderEqualsContestedJudgment → ⊥
+mackayConsentNotRatio ()
+
+differentAdviceNotThisDelegateError :
+  OtherSpeciesAdmissionProvesWoogarooAdviceOmission → ⊥
+differentAdviceNotThisDelegateError ()
