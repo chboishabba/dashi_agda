@@ -13,6 +13,7 @@ on:
       - "scripts/check_twin_prime_arbitrary_crt_symmetry.py"
       - "scripts/check_twin_prime_periodic_sieve.py"
       - "scripts/check_prime_gap_186_tuple_admissibility.py"
+      - "scripts/check_finite_twin_sieve_composite_completion.py"
       - ".github/workflows/twin-prime-finite-wheel.yml"
       - "DASHI/EverythingTOESymmetryResolved369.agda"
       - "DASHI/Unifier.agda"
@@ -29,6 +30,7 @@ on:
       - "scripts/check_twin_prime_arbitrary_crt_symmetry.py"
       - "scripts/check_twin_prime_periodic_sieve.py"
       - "scripts/check_prime_gap_186_tuple_admissibility.py"
+      - "scripts/check_finite_twin_sieve_composite_completion.py"
       - ".github/workflows/twin-prime-finite-wheel.yml"
       - "DASHI/EverythingTOESymmetryResolved369.agda"
       - "DASHI/Unifier.agda"
@@ -49,6 +51,7 @@ jobs:
           python3 -B scripts/check_twin_prime_arbitrary_crt_symmetry.py
           python3 -B scripts/check_twin_prime_periodic_sieve.py
           python3 -B scripts/check_prime_gap_186_tuple_admissibility.py
+          python3 -B scripts/check_finite_twin_sieve_composite_completion.py
       - name: Check theorem owner contains no new axioms or holes
         run: |
           python3 - <<'PY'
@@ -70,7 +73,7 @@ jobs:
               assert required in texts[1], required
           for required in ("localPairPeriodic", "certifyCandidate", "allPairSurvive?", "sspAddressSymmetryPreservesPrime"):
               assert required in texts[2], required
-          for required in ("productIsCommonPeriod", "allPairProductPeriodic", "allPairProductPeriodicBack"):
+          for required in ("productIsCommonPeriod", "allPairProductPeriodic", "allPairProductPeriodicBack", "allPairProductPeriodicMultiple", "swapFirstTwoFiltersInvolution", "duplicatePrimeFilterRoundTrip"):
               assert required in texts[3], required
           for required in ("knownAllPrimeControlCount", "ControlToCertifiedPrime"):
               assert required in texts[4], required
