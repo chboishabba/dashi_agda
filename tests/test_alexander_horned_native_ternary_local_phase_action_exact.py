@@ -16,6 +16,7 @@ def test_exhaustive_eighty_one_cubed_semidirect_laws():
     assert result["status"]=="PASS"
     assert result["all_81_cubed_associativity_cases"]==531441
     assert result["higher_depth_group_checks"]==1200
+    assert result["gauge_transitive_root_field_pairs"]==729
     assert result["address_shift_checks"]==1080
     assert result["depth_two_cells"]==27
     assert result["depth_two_local_group_size"]==7625597484987
@@ -54,15 +55,24 @@ def test_canonical_owner_and_no_unsafe_proof_promotion():
         "AlexanderHornedNativeBalancedTernaryEndTowerExact",
         "FiniteC3OrbitStabilizerExact",
         "RecursiveFibreTower",
-        "refineReflectsEquality",
+        "AlexanderHornedNativeTernaryFibreActionExact",
         "refineRotationSquare",
         "twistedAssociativeGaugeAt",
         "twistedInverseRightGaugeAt",
-        "refinementPreservesEndValue",
-        "endRotationValueSquare",
+        "sameOnEndsRefinement",
+        "sameOnEndsRotationCongruence",
+        "gaugeInvariantObservableConstant",
+        "tritPhaseRoundTrip",
     ):
         assert needed in src
     assert "import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryLocalPhaseActionExact" in root
+    prior=(ROOT/"DASHI/Mathematics/Topology/"
+           "AlexanderHornedNativeTernaryFibreActionExact.agda").read_text()
+    for original in ("FibreAction","pullbackInjective","transitiveAction",
+                     "refinementEvaluation"):
+        assert original in prior
+    assert "Fibre.FibreAction" in src and "Fibre.pullback" in src
+    assert "Fibre.transitiveAction" in src
     for forbidden in ("postulate\n","{!!}", "allow-unsolved-metas",
                       "NO_POSITIVITY_CHECK","{-# TERMINATING #-}"):
         assert forbidden not in src
