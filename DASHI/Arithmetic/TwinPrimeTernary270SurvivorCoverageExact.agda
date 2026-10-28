@@ -1371,3 +1371,19 @@ wheel270121NotPrime =
 -- wheel270119IsComposite and wheel270121IsComposite.
 -- A type-preserving bijection between finite sieve survivors and
 -- cube points cannot manufacture the missing prime certificates.
+
+------------------------------------------------------------------------
+-- Small-prime exceptions: a fixed prime-pair sieve may reject a
+-- genuine pair when one endpoint EQUALS the sieving prime.
+-- The familiar (3,5) and (5,7) starts are outside this wheel.
+-- The witness rejection is an exact arithmetic local statement;
+-- no new global prime theorem is inferred here.
+------------------------------------------------------------------------
+
+wheel270RejectsExceptionalStartThree : Wheel270Survives 3 → ⊥
+wheel270RejectsExceptionalStartThree
+  (_ , ((left3 , _) , _)) = left3 refl
+
+wheel270RejectsExceptionalStartFive : Wheel270Survives 5 → ⊥
+wheel270RejectsExceptionalStartFive
+  (_ , (_ , ((left5 , _) , _))) = left5 refl
