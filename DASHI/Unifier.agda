@@ -9,6 +9,8 @@ open PairCRTPeriod public using
   ; productIsCommonPeriod
   ; allPairProductPeriodic
   ; allPairProductPeriodicBack
+  ; swapFirstTwoFiltersInvolution
+  ; duplicatePrimeFilterRoundTrip
   )
 import DASHI.Arithmetic.TwinPrimeOggControlReuseExact as PrimeControlReuse
 open PrimeControlReuse public using
