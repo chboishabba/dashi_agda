@@ -421,3 +421,34 @@ Ibrahim Monster 3B same-object representation,
 nor a proof of RH. Original author attribution
 and distinct source/code/test/kernel status
 are unchanged.
+
+
+## 2026-10-28 attached native end-fibre local action max-cut — linked to original #1244 owner
+
+Two new user-supplied research notes clarified the native end space K3=C3×{-1,0,+1}^N, the different original binary Hatcher address space K2=C3×{0,1}^N, and the interpretation of the 3^27 function space as the **actual group of independent local phase rotations** on 27 cells. This is not merely a count and does not make Hatcher's meridians ternary. The existing #1244 source NativeTernaryFibreActionExact had already proved pullback injectivity and evaluation; the new source is committed to THAT owner branch, without cloning the group into this independently based PR.
+
+New #1244 theorem modules, source-written on alexander-horned-c3-equivariant-20261024:
+
+1. DASHI/Mathematics/Topology/AlexanderHornedNativeTernarySemidirectActionExact.agda: inverse-pullback external sector C3 action on Map(K3_n,C3), composition, pointwise semidirect group laws including inverse and identities, faithful pullback, semidirect refinement multiplication/field action naturality.
+2. DASHI/Mathematics/Topology/AlexanderHornedTernaryFibreDerivedCutExact.agda: explicit depth-zero noncommuting local-gauge/sector pair, abelian local gauge kernel and abelian sector quotient, documented metabelian derived boundary.
+3. DASHI/Mathematics/Topology/AlexanderHornedNativeTernaryTrialectic27ChartExact.agda: literal two-sided **bijection** of native 27 address cells and the prior trialectic SynthesisChoice27; different external-sector and internal-digit C3 actions; exact pointwise field-group-law transport on the 27 chart.
+4. DASHI/Mathematics/Topology/AlexanderHornedNativeTernaryS3LocalValuesExact.agda: local S3^X value permutations using the existing S3 source owner, local-vs-global reflection negative control, and true C3→S3 cyclic subgroup homomorphism on local fibre values. S3^X is solvable and not an A5, 2I or generic-quintic Galois source.
+
+New exact regression owner #1244: scripts/alexander_horned_native_ternary_local_fibre_actor.py. Its private-branch source was committed and inspected, but the exact blob was not executed from GitHub in this environment. INDEPENDENT local Python checked depth 0–3 action/refinement squares and enumerated all 81 semidirect elements at depth zero, finding nine commutator translations, second derived trivial, and genuine noncommutation.
+
+Key mathematics: put k=3^n. Then
+
+  |K3_n|=3k; A_n=Map(K3_n,C3)≅C3^(3k);
+  H_n=A_n ⋊ C3 has order 3^(3k+1);
+  H_n'≅C3^(2k), H_n''=1;
+  H_n^ab≅C3^(k+1).
+
+At depth two, |A_2|=3^27=7,625,597,484,987; |H_2|=3^28=22,876,792,454,961; |H_2'|=3^18=387,420,489; |H_2^ab|=3^10=59,049. The derived subgroup is the sum-zero augmentation kernel on EACH three-sector orbit. The pointwise group-law adapter is source-written, and the full derived/cokernel Agda group-object theorem remains outstanding; the equation is mathematically standard and computationally checked at depth zero.
+
+**Strong non-promotion:** nontrivial perfect G_A, perfect A5, and perfect 2I admit only TRIVIAL homomorphisms into solvable H_n, and likewise into any local-S3-valued field group extended by the external finite C3. Therefore these finite phase-fibre actors are NOT a replacement for the perfectly nonabelian Hatcher source or its 2I holonomy. The actual orbifold group (G_A*G_A*G_A) ⋊ C3 is a separate construction with a non-solvable/perfect source normal subgroup, not isomorphic to H_n. An actual source-group action on a richer non-solvable fibre is an additional independent representation theorem.
+
+**Polynomials and numerology:** C3 sector rotations and C3 local-value translations are different commuting/semidirect roles. The six ABC label permutations S3 and the full local independent S3^27 extensions have independent group meanings; no analytic braid loop follows. The 27 native sector/digit addresses have a chosen invertible chart to the triple trialectic carrier, but this is not an identity of an actual polynomial coefficient fibre or wild-space embedding. The equality 3^27=tetration(3,3) is for the local FUNCTION SPACE on 27 cells, whereas 3·3^n counts addresses; the original Hatcher binary tower has 3·2^n geometric meridians. The attached 13/27 and 5/9 antipodal fixed-orbit counts are for specific involutions with non-intertwining orbit structures, not proofs of same-object group actions.
+
+**Prior sources:** Alexander (1924), Hatcher AT 2B.2, classical finite wreath/semidirect products, C3/S3 groups and prior DASHI original authors; independent #1244, #1254, #1407, #1414, #1260 and Ibrahim/Monster 3B retain their separate ownership and exact-head proof tiers. External mathematical reference for the permutational wreath product H^S ⋊ G: https://agda-algebras.universalalgebra.org/Classical/Structures/Group/Wreath/ . All operations here are SOURCE-WRITTEN, Agda kernel NOT run; no newly claimed wild geometry, quintic Abel–Ruffini, RH, physical experiment or original Pickover sin sign.
+
+**Next irreducible cut:** the quotient/direct-limit group A_loc and compact-clopen proof C_loc(K3,C3), the full Agda augmentation-derived subgroup theorem, and source-to-geometric same-object relative-collar identification in #1244. Do not write a second competing 27/end-space kernel or import unmerged #1244 modules into #1414.
