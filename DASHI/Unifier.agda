@@ -23,6 +23,18 @@ open ExactTwinCounter public using
   ; certifiedTwinFromSeparatePrimeProofs
   )
 
+import DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact as TwinConsumerPareto
+open TwinConsumerPareto public using
+  ( fiveAndThirtyFiveSameSixWheel
+  ; twinAtThirtyFiveIsFalse
+  ; wheelCannotDecideActualTwins
+  ; postprocessedWheelStillCannotDecideTwins
+  ; exactTwinQueryCodeRoundTrip
+  ; exactTwinQueryCodeIsConsumerSufficient
+  ; sieveBitIsSufficientForFiniteSieveQuery
+  ; finiteSieveBitPeriodic
+  )
+
 import DASHI.Arithmetic.SignedSSPPrimeEmitterTraceTransportExact as PrimeTraceBridge
 open PrimeTraceBridge public using
   ( traceSimulation
