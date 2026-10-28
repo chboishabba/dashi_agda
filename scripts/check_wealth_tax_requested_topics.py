@@ -325,6 +325,19 @@ def main() -> None:
         "toeRelevantVerifiedIdentityMustRemainInSourceLens",
         "CanonicalFundingRouteWeld",
         "toeCanonicalSourcesFundExactlyOneJoinedRoute",
+        "DvPBatchDisposition",
+        "SourceLinkedFinalSettlement",
+        "ExternallyAdmittedSaleTaxRoute",
+        "settlementProvenanceAndSecurityMatch",
+        "validatedSaleProceedsCannotSkipSettlementAndTaxChronology",
+        "CombinedReformIdentificationWorld",
+        "jointReformReceiptCannotIdentifyIsolatedWealthTaxEffect",
+        "AssessedOwnerAllocationWorld",
+        "assetValueDoesNotIdentifyTaxpayerBeneficialShare",
+        "toeDueTradeIsNotSettled",
+        "toeBackedOutTransactionIsNotSettled",
+        "toeJointReformOutcomeDoesNotIdentifySingleTaxEffect",
+        "toeAssetValueDoesNotIdentifyBeneficialShare",
     ):
         assert symbol in bridge, f"missing funding/ASX TOE boundary: {symbol}"
     assert "import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as ExternalIdentity" in bridge, "original Snowball identity owner must remain imported"
