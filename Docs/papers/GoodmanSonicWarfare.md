@@ -559,3 +559,15 @@ This is a genuine finite example of equivariance in the standard sense `T(g·ψ)
 **Strict bound**: permutation of *three identically evolved wave channels* is not cyclic rotation of a physical 3D acoustic wave, not quaternion conjugation of spatial axes, not a proven intertwiner of #1414's root-label action, not an S3/Monster 3B representation and not acoustic propagation with non-identical media, gains or channel update operators. In heterogeneous media the relevant operator must transform covariantly with the channel permutation; no such law is declared or proved here. The separate XY–Z dialectical Z selector remains evidence-gated, and additive wave synthesis is not assumed equal to dialectical synthesis.
 
 **Execution**: source written, import graph attached and readback/source audit extended. Agda kernel and CI not run.
+
+## T16 heterogeneous C3: covariant operators versus false fixed symmetry
+
+The T15 homogeneous wave equivariance does not survive arbitrary unequal operators **held fixed**. Rather than invent a physical law, T16 extends the same finite owner with `TripleOperator`, `rotateOperators` and `evolveWith`. It establishes the strictly typed *joint-action naturality* identity
+
+`evolveWith(rotateOperators F, rotate3 ψ) = rotate3(evolveWith F, ψ)`
+
+for **any** three componentwise functions. This is definitional equational transport. It proves that relabelling the channel operators **together** with their input waves is coherent; it is not invariance under an unchanged anisotropic medium.
+
+A concrete counterexample uses `asymmetricOperators=(zero,id,id)` and three nonzero unit waves. Evolving with the **same unrotated** operator triple before versus after channel rotation yields different result triples. `fixedAsymmetricTransportDoesNotCommute` constructs the corresponding impossible equality by constructor disjointness. The distinction is stronger than counting a C3 orbit: a channel rotation alone is not a symmetry unless the physical coefficients are invariant or are themselves correctly transported.
+
+This closes the T15 next mathematical obstruction at the finite carrier level. It does **not** claim a measured heterogeneous acoustic transfer operator, an actual material medium, shared quaternion action from [PR #1414](https://github.com/chboishabba/dashi_agda/pull/1414), or Monster 3B sameness. Source-written terms remain Agda-kernel-unchecked, while inherited wave and symmetric-group sources retain independent ownership. CI and acquisition out of scope.
