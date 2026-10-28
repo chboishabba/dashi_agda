@@ -76,7 +76,8 @@ def main():
     seed=(0,0,0)
     local=(2,0,0)
     assert seed[:2]==(0,0) and local[:2]!=(0,0)
-    assert all((p[0]==p[0]) for p in s3)
+    assert all((perm[a]==perm[b]) == (a==b)
+               for perm in s3 for a,b in product(range(3),repeat=2))
     assert all((p[seed[0]]==p[seed[1]]) ==
                (seed[0]==seed[1]) for p in s3)
     assert len({seed[0],seed[1]})==1
@@ -88,6 +89,21 @@ def main():
     assert 3**27 == 7625597484987
     assert 3**(3**3) == 3**27
     assert 3*(3**27) == 22876792454961
+
+    # Genuine 243-versus-125 map reversal and complete kernel.
+    fields5=list(product(range(3),repeat=5))
+    selectors=list(product(range(5),repeat=3))
+    assert len(fields5)==243 and len(selectors)==125
+    selector=(0,1,2)
+    readout_fibres={}
+    for f in fields5:
+        snapshot=tuple(f[i] for i in selector)
+        readout_fibres[snapshot]=readout_fibres.get(snapshot,0)+1
+    assert len(readout_fibres)==27
+    assert set(readout_fibres.values())=={9}
+    neutral_kernel={f for f in fields5 if f[:3]==(0,0,0)}
+    assert neutral_kernel == {(0,0,0,a,b)
+                              for a,b in product(range(3),repeat=2)}
 
     # The three-strand full twist has trivial S3 endpoint, yet
     # exponent sum 6 and hence nonzero modulo 7.
@@ -103,6 +119,7 @@ def main():
     print("PASS: S3->C3->1, sector D3, 27 chart, 13/27 vs 15-orbit no-go,")
     print("      local-vs-global Heaps, 3^27, binary/ternary separation,")
     print("      B3 full twist exponent mod7=6 with S3 identity endpoint")
+    print("      3^5=243 vs 5^3=125, 27 readouts each with exact 9-field kernel")
     print("NO PROMOTION: no actual wild geometry, Pickover radian sign, RH,")
     print("              Monster 3B equivalence or Agda kernel proof")
 
