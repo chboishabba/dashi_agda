@@ -29,7 +29,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Product using (_×_; _,_; Σ; proj₁; proj₂)
-open import Relation.Nullary using (¬_)
+open import Relation.Nullary using (¬_; Dec; yes; no)
+open import Agda.Builtin.Maybe using (Maybe; just; nothing)
+open import Data.Nat.Properties using (_≟_)
 open import Relation.Binary.PropositionalEquality using (_≢_; cong; trans; subst; sym)
 open import Data.Empty using (⊥-elim)
 import Data.Nat.DivMod as DivMod
@@ -281,3 +283,110 @@ guyConcreteExactPriorityBackward :
     Guy.guyFourteenTyped before after
 guyConcreteExactPriorityBackward =
   guyExactGuardPriorityBackward concreteExactFractionEvaluator
+
+------------------------------------------------------------------------
+-- DECIDABLE ACTUAL FIRST-APPLICABLE NUMERIC INTERPRETER.
+-- This closes the remaining *numerical* scanner cut. Its relation
+-- proof reuses FirstApplicableStep and NoApplicable above.
+------------------------------------------------------------------------
+
+exactFractionApplies? :
+  (n : Nat) (rule : RuleNumbers) →
+  Dec (ExactFractionApplies n rule)
+exactFractionApplies? n (a , zero) =
+  no (λ (nonzero , _) → nonzero refl)
+exactFractionApplies? n (a , suc d)
+  with ((n * a) % suc d) ≟ zero
+... | yes remainderZero =
+  yes
+    ( (λ ())
+    , ( (n * a) / suc d
+      , sym
+          (trans
+            (DivMod.m≡m%n+[m/n]*n (n * a) (suc d))
+            (trans
+              (cong
+                (λ r → r + ((n * a) / suc d) * suc d)
+                remainderZero)
+              refl))
+      ))
+... | no remainderNonzero =
+  no (λ (_ , (candidate , productEq)) →
+    remainderNonzero
+      (trans
+        (cong (λ v → v % suc d) (sym productEq))
+        (DivMod.m*n%n≡0 candidate (suc d))))
+
+firstApplicableNumeric : List RuleNumbers → Nat → Maybe Nat
+firstApplicableNumeric [] n = nothing
+firstApplicableNumeric (rule ∷ rest) n
+  with exactFractionApplies? n rule
+... | yes _ = just (exactNumericNext n rule)
+... | no _ = firstApplicableNumeric rest n
+
+firstApplicableNumericSound :
+  (rules : List RuleNumbers) (n : Nat) {after : Nat} →
+  firstApplicableNumeric rules n ≡ just after →
+  First.FirstApplicableStep
+    ExactFractionApplies exactNumericNext
+    rules n after
+firstApplicableNumericSound [] n ()
+firstApplicableNumericSound (rule ∷ rest) n {after} equality
+  with exactFractionApplies? n rule
+... | yes applicable with equality
+...   | refl = First.choose-head applicable
+... | no blocked =
+  First.skip-head blocked
+    (firstApplicableNumericSound rest n equality)
+
+firstApplicableNumericHalt :
+  (rules : List RuleNumbers) (n : Nat) →
+  firstApplicableNumeric rules n ≡ nothing →
+  NoApplicable ExactFractionApplies n rules
+firstApplicableNumericHalt [] n equal = tt
+firstApplicableNumericHalt (rule ∷ rest) n equal
+  with exactFractionApplies? n rule
+... | yes applicable with equal
+...   | ()
+... | no blocked =
+  blocked , firstApplicableNumericHalt rest n equal
+
+-- Specialise back to the actual historical Guy list, not an
+-- arbitrary 14-element bag.
+guyNumericExecutableStepSound :
+  (n : Nat) {after : Nat} →
+  firstApplicableNumeric Guy.guyFourteenNumeric n ≡ just after →
+  First.FirstApplicableStep
+    ExactFractionApplies exactNumericNext
+    Guy.guyFourteenNumeric n after
+guyNumericExecutableStepSound =
+  firstApplicableNumericSound Guy.guyFourteenNumeric
+
+guyTypedExecutableStepSound :
+  (n : Nat) {after : Nat} →
+  firstApplicableNumeric Guy.guyFourteenNumeric n ≡ just after →
+  First.FirstApplicableStep
+    TypedExactFractionApplies (TypedApply exactNumericNext)
+    Guy.guyFourteenTyped n after
+guyTypedExecutableStepSound n witness =
+  guyConcreteExactPriorityBackward
+    (guyNumericExecutableStepSound n witness)
+
+guyNumericExecutableHalt :
+  (n : Nat) →
+  firstApplicableNumeric Guy.guyFourteenNumeric n ≡ nothing →
+  NoApplicable ExactFractionApplies n Guy.guyFourteenNumeric
+guyNumericExecutableHalt =
+  firstApplicableNumericHalt Guy.guyFourteenNumeric
+
+guyTypedExecutableHalt :
+  (n : Nat) →
+  firstApplicableNumeric Guy.guyFourteenNumeric n ≡ nothing →
+  NoApplicable TypedExactFractionApplies n Guy.guyFourteenTyped
+guyTypedExecutableHalt n witness =
+  guyNumericHaltToTyped ExactFractionApplies
+    (guyNumericExecutableHalt n witness)
+
+-- Executable policy has its own test fixture. Its source-level proof
+-- does not assert a compiled signed SSP/FRACDASH executor or a global
+-- theorem about all prime readouts.
