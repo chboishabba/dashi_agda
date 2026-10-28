@@ -7,6 +7,7 @@ import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as Bilinear7
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as OriginalAntipodalSym729
 import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as HermitianSym729
 import DASHI.Physics.Closure.R2P227729HermitianConvolutionTransportExact as HermitianConv729
+import DASHI.Physics.Closure.R2P281PlaneHermitianFiveOrbitConvolutionExact as HermitianPlane81
 import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as AntipodalSym729
 import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourGridPareto729
 import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fourier729Core
@@ -2067,3 +2068,21 @@ unifierCompact13PairsFiveGridFull :
     ≡ HermitianConv729.originalFullBilinearAt a b target
 unifierCompact13PairsFiveGridFull =
   HermitianConv729.compact13PairsPreserveFiveGridFullQuadratic
+
+------------------------------------------------------------------------
+-- Source-owned five antipodal classes in 9 are a REAL Fourier plane
+-- codec with 1 real centre + 4 complex conjugate pairs. All 81
+-- ordered quadratic pair coefficients and 25 wide outputs preserved.
+------------------------------------------------------------------------
+
+unifierFiveInNineHermitian81PairConvolution :
+  (a b : HermitianSym729.Hermitian9)
+  (target : HermitianPlane81.WidePlane25) →
+  HermitianPlane81.packedFivePlaneBilinearAt
+    (HermitianSym729.packHermitian9 a)
+    (HermitianSym729.packHermitian9 b) target
+    ≡ HermitianPlane81.truePlaneBilinearAt
+        (HermitianSym729.coefficient9 a)
+        (HermitianSym729.coefficient9 b) target
+unifierFiveInNineHermitian81PairConvolution =
+  HermitianPlane81.fiveOrbitPlaneCodecPreservesAll25QuadraticOutputs
