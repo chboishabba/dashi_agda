@@ -65,17 +65,20 @@ class IntakeTest(unittest.TestCase):
         gate.enforce_spatial_buffer(rows, assignments, 0.005)
 
     def test_source_identities_and_position_manifest_provenance(self):
-        # A valid archive manifest is not sufficient: a partial or
-        # duplicated position table is not a held-out benchmark.
-        from collections import Counter
         expected = {"A1": 4096, "A2": 4096, "D1": 1089, "R2": 4096}
-        good = [(sc, str(i)) for sc, n in expected.items() for i in range(n)]
-        self.assertEqual(len(good), 13377)
-        self.assertEqual(dict(Counter(sc for sc, _ in good)), expected)
-        duplicated = good + [good[0]]
-        self.assertEqual(len(set(duplicated)), 13377)
-        self.assertNotEqual(len(duplicated), len(set(duplicated)))
-        self.assertNotEqual(len(set(good[:-1])), 13377)
+        records = [{"scenario": sc, "position_id": str(i)}
+                   for sc, n in expected.items() for i in range(n)]
+        self.assertEqual(gate.validate_position_completeness(records), expected)
+        with self.assertRaises(ValueError):
+            gate.validate_position_completeness(records[:-1])
+        with self.assertRaises(ValueError):
+            gate.validate_position_completeness(records[:-1] + [records[0]])
+        with self.assertRaises(ValueError):
+            gate.validate_position_completeness(records + [records[0]])
+        corrupt = [dict(row) for row in records]
+        corrupt[0]["scenario"] = "R2"
+        with self.assertRaises(ValueError):
+            gate.validate_position_completeness(corrupt)
 
     def test_paired_correlation_is_not_discarded(self):
         pairs = [(0.0, 0.0), (1.0, 1.0), (2.0, 2.0)]
