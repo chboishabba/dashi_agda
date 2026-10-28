@@ -1,0 +1,35 @@
+name: Twin-prime finite wheel regression
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda"
+      - "scripts/check_twin_prime_six_wheel_finite.py"
+      - ".github/workflows/twin-prime-finite-wheel.yml"
+  push:
+    paths:
+      - "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda"
+      - "scripts/check_twin_prime_six_wheel_finite.py"
+      - ".github/workflows/twin-prime-finite-wheel.yml"
+
+jobs:
+  exact-finite-wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check finite arithmetic, not unbounded theorem
+        run: python3 -B scripts/check_twin_prime_six_wheel_finite.py
+      - name: Check theorem owner contains no new axioms or holes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          text = Path("DASHI/Arithmetic/TwinPrimeSixWheelExact.agda").read_text()
+          for forbidden in ("postulate", "TERMINATING", "{!!", "?" + "?"):
+              assert forbidden not in text, forbidden
+          for required in ("pairSurvivorMustBeR5", "twinInfinitudeImpliesBoundedPairsTwo"):
+              assert required in text, required
+          print("static source check passed; NOT an Agda kernel receipt")
+          PY
