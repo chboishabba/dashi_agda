@@ -1,5 +1,11 @@
 # Woogaroo 2019/8575 — DASHI / SensibLaw / SLR case-payment max-cut
 
+## Production ownership correction — 28 October 2026
+
+**SensibLaw is the original prototype. SLR is production.** [SensibLaw PR #500](https://github.com/chboishabba/SensibLaw/pull/500) is now **closed without merge**. Its experiment with source-locator identities, seven unresolved case grounds and no-promotion boundaries was moved to [native SLR PR #59](https://github.com/chboishabba/slr/pull/59) in `crates/sl-pg-source-store/src/woogaroo_case.rs`, exported through the existing SLR Matter workbench. The native Rust version is the only target for new case runtime implementation. It has **nine original-source locators, seven unresolved grounds, four unpaid legal/works prerequisites, a deterministic unscored priority frontier and a source-scoped five-proposition/two-residual Matter builder**. It does not run the Python prototype, copy an external production registry or generate a synthetic evidence payment. Its source-written Rust tests reject fabricated retained revisions, reviewed evidence and court filings.
+
+The previous `SensibLaw PR #500` references below are historical design/provenance records, not an active implementation dependency. The DASHI Agda bridge remains a source-written formal cross-reference, not a foreign runtime import. New runtime code is in SLR only. Prior mathematical, SLR Matter, prototype and Ibrahim source/PR ownership remain intact.
+
 **28 October 2026, source-written and unfiled.** This is an interoperability contract grounded in existing repository APIs, not a court filing, persisted PostgreSQL Matter, authorised source review, scientific field measurement, admission by a respondent or Agda kernel proof.
 
 ## Verified repository ownership
