@@ -14,10 +14,9 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (_≤_; _∸_; z≤n; s≤s)
-open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; ≤-total; +-mono-≤; +-mono-<-≤; +-mono-≤-<; +-assoc; +-comm; +-identityʳ; m+n∸n≡m; [m+n]∸[m+o]≡n∸o)
+open import Data.Nat.Properties using (m≤m+n; ≤-refl; ≤-trans; ≤-total; _≤?_; +-mono-≤; +-mono-<-≤; +-mono-≤-<; +-assoc; +-comm; +-identityʳ; m+n∸n≡m; [m+n]∸[m+o]≡n∸o)
 open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong; cong₂)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Nat.Properties using (_≤?_)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Relation.Nullary using (yes; no)
@@ -25,6 +24,7 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
+import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact as Wealth
 import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact as Tax
 import DASHI.Finance.DashiTradeFibreBridgeExact as Trade
 import DASHI.Trading.DashiTradeDreamOptionConeExact as Dream
@@ -1777,12 +1777,12 @@ financialClaimChangeDoesNotIdentifyPhysicalOutput =
 record RivalTaxBaseComparison : Set where
   constructor rival-tax-base-comparison
   field
-    firstPolicy : Tax.Policy
-    secondPolicy : Tax.Policy
-    firstTaxBase : Tax.TaxBase
-    secondTaxBase : Tax.TaxBase
-    firstBaseReconciles : firstTaxBase ≡ Tax.taxBase firstPolicy
-    secondBaseReconciles : secondTaxBase ≡ Tax.taxBase secondPolicy
+    firstPolicy : Wealth.Policy
+    secondPolicy : Wealth.Policy
+    firstTaxBase : Wealth.TaxBase
+    secondTaxBase : Wealth.TaxBase
+    firstBaseReconciles : firstTaxBase ≡ Wealth.taxBase firstPolicy
+    secondBaseReconciles : secondTaxBase ≡ Wealth.taxBase secondPolicy
     firstPolicyCost : Nat
     secondPolicyCost : Nat
     comparativeCostUnit : String
@@ -1790,18 +1790,18 @@ open RivalTaxBaseComparison public
 
 rivalPolicyTaxBasesRemainComparableButDistinct :
   (pair : RivalTaxBaseComparison) →
-  (firstTaxBase pair ≡ Tax.taxBase (firstPolicy pair))
-  × (secondTaxBase pair ≡ Tax.taxBase (secondPolicy pair))
+  (firstTaxBase pair ≡ Wealth.taxBase (firstPolicy pair))
+  × (secondTaxBase pair ≡ Wealth.taxBase (secondPolicy pair))
 rivalPolicyTaxBasesRemainComparableButDistinct pair =
   firstBaseReconciles pair , secondBaseReconciles pair
 
 illustrativeIncomeWealthComparison : RivalTaxBaseComparison
 illustrativeIncomeWealthComparison =
   rival-tax-base-comparison
-    Tax.incomeHundredAboveThreshold
-    Tax.wealthHundredAboveThreshold
-    Tax.annualPersonalIncome
-    Tax.currentNetWealth
+    Wealth.incomeHundredAboveThreshold
+    Wealth.wealthHundredAboveThreshold
+    Wealth.annualPersonalIncome
+    Wealth.currentNetWealth
     refl refl 2 2 "illustrative-cost-units"
 
 -- I02. A proposal has no statutory standing just because it has an
@@ -1814,7 +1814,7 @@ data PolicyAuthorityMode : Set where
 record TaggedPolicyScenario : Set where
   constructor tagged-policy-scenario
   field
-    representedPolicy : Tax.Policy
+    representedPolicy : Wealth.Policy
     authorityMode : PolicyAuthorityMode
     policyReference : String
 open TaggedPolicyScenario public
