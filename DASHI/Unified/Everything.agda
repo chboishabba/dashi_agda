@@ -1,5 +1,14 @@
 module DASHI.Unified.Everything where
 
+-- Prefix !n derangements versus postfix n! factorial, with exact
+-- S3/C3 and S5/A5 parity partitions of fixed-point-free permutations.
+import DASHI.Foundations.PolynomialSubfactorialDerangementS3S5Exact as Subfactorial
+open Subfactorial public using
+  ( subfactorialThree ; subfactorialFive
+  ; exactly44FiveLabelDerangements
+  ; evenFiveLabelDerangementsCount24
+  ; oddFiveLabelDerangementsCount20 )
+
 -- Exact gamma integer-index contract, Pickover finite/radian separation,
 -- perfect commutator-group observer and Q8 projective sign obstruction.
 import DASHI.Foundations.PolynomialPickoverFactorialGammaDegreeExact as FactorialPhase
