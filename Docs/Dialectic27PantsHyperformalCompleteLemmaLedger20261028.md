@@ -187,3 +187,28 @@ The ordering below is the Pareto/max-cut dependency order: reuse exact local own
 Existing code owners are the authoritative source of their own named results: `DASHI.Reasoning.TernaryComparisonSynthesisExact`; `DialecticXYInteractionZTransportExact`; `Base369Ternary27HypervoxelFabricGeometryExact`; `RelationalBranchCobordismGeometry`; `TypedHyperfabricPantsGluingBridgeExact`; `TrialecticGrothendieckThreeCellDescentExact`; `TrialecticGrothendieckTransitionCocycleExact`; `TrialecticGrothendieckAttachedTwoCellDescentExact`; `TernaryPantsSynthesisS3BridgeExact`; `JInvariantColourWheelNineSheetPantsGluingExact`; `GraphColouringHomomorphismCoreExact`; and now the separately authored finite graph adapter. Original Duta–Cassarà–Silvestri–Liò (2023) sheaf-hypergraph work is *structural motivation*, not learned model performance reproduced here. Atiyah (1988) supplies pants/TQFT vocabulary, not smooth pants constructed here. Belnap/Dunn original many-valued sources stay separate from the written Agda consumers. Australian statute/judgments, QUT/QCC/SWFG and Stockland first-party case source statements retain author labels. Previous Ibrahim Monster 3B work is **not** transferred to this mathematical carrier.
 
 **Repository:** [DASHI PR #1276](https://github.com/chboishabba/dashi_agda/pull/1276) for Agda and Python; [SLR PR #59](https://github.com/chboishabba/slr/pull/59) for production case output. SensibLaw remains prototype and was not newly modified. Protected ESD surfaces were not edited.
+
+## #1414 cross-pollination continuation (28 October — no increase to the original 119 core rows)
+
+The previously defined 119 obligations remain the original scoped contract.
+This continuation pays a **new separate discrimination subcut** rather than
+renumbering old conclusions: `SensibLawWoogarooS3ChartEvidenceInvariance20261028Exact`
+owns finite source-invariant S3 *presentation* of X/Y/Z, while
+`Dialectic27S3PresentationVsGridAutomorphismExact` constructs the
+independent actual-grid C2 reflection and exhibits counterexamples to C3
+or adjacent transpositions pretending to preserve strict 3-stage geometry.
+The independent executed Python enumeration checked **7 × 27 × 6 =
+1,134** case-cell-chart triple recovery cases; a second independent
+4,374-pair check confirms only identity and endpoint reflection
+preserve 27-grid adjacency. The other 4 permutations each have
+**108 ordered-pair disagreements**. This discharges the method question
+without asserting 27 legal findings or S3 as a legal transition.
+
+The new SLR worklist `woogaroo_original_source_maxcut` prioritizes
+the existing twelve original-document packets and all **80 still-unpaid**
+closure obligations. The JSON fixture now puts that original worklist
+before any speculative cube. Source-written test functions are still
+NOT Cargo-executed. [Full decision-first and donor-ownership
+audit](Woogaroo1414S3ChartTransportAndOriginalSourceMaxCut20261028.md).
+The actual P0 is still original approval/95B/95C/2022 koala advice,
+applicant-specific counsel standing/clock and same-stage works.
