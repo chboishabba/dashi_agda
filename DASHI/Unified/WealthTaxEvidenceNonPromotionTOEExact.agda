@@ -12,6 +12,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
 open import Data.Nat using (_≤_; _⊓_; _∸_)
 open import Data.Sum using (_⊎_)
+open import Data.Product using (_×_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attributed
@@ -376,6 +377,35 @@ toeInvestorAllocationsMustReconcileToParticipant :
           (DashiTradeTax.netBatch allocation)
 toeInvestorAllocationsMustReconcileToParticipant =
   DashiTradeTax.investorAllocationsSumToParticipantObligation
+
+-- Single-instrument DvP is a conditional dual-leg receipt, not proof of
+-- actual ASX/CHESS settlement, legal finality or taxpayer source identity.
+toeSingleInstrumentDvPFixture :
+  DashiTradeTax.SingleInstrumentDvPBatch
+toeSingleInstrumentDvPFixture =
+  DashiTradeTax.syntheticDeliveredDvP
+
+toeDvPCashAndTitleRequireSameFinalEpoch :
+  (batch : DashiTradeTax.SingleInstrumentDvPBatch) →
+  DashiTradeTax.cashFinalityEpoch batch ≡
+    DashiTradeTax.titleFinalityEpoch batch
+toeDvPCashAndTitleRequireSameFinalEpoch =
+  DashiTradeTax.deliveryVersusPaymentCashAndTitleCoMove
+
+toeParticipantDvPConservesBothLegs :
+  (batch : DashiTradeTax.SingleInstrumentDvPBatch) →
+  DashiTradeTax.DirectionBalanced
+    (DashiTradeTax.cashDirection (DashiTradeTax.linkedCashBatch batch))
+    (DashiTradeTax.grossSellSettlementCash (DashiTradeTax.linkedCashBatch batch))
+    (DashiTradeTax.grossBuySettlementCash (DashiTradeTax.linkedCashBatch batch))
+    (DashiTradeTax.netSettlementCashMagnitude (DashiTradeTax.linkedCashBatch batch))
+  × DashiTradeTax.SecurityQuantityBalanced
+      (DashiTradeTax.securityDirection batch)
+      (DashiTradeTax.grossDeliveredUnits batch)
+      (DashiTradeTax.grossReceivedUnits batch)
+      (DashiTradeTax.netSecurityUnits batch)
+toeParticipantDvPConservesBothLegs =
+  DashiTradeTax.aggregateNetPositionsRespectGrossCashAndSecurityTotals
 
 -- Repository import alone is a source-reachability relationship.
 -- It is NOT an Agda kernel certification receipt or a substitute for an
