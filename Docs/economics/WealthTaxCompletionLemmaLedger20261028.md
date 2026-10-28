@@ -1,6 +1,6 @@
 # Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
 
-Created 2026-10-28. **77 named formal obligations** across nine groups: 60 source-written (D), 11 owned by existing reusable sources (R), 6 remaining external identity/evidence contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+Created 2026-10-28. **77 named formal obligations** across nine groups: 61 source-written (D), 11 owned by existing reusable sources (R), 5 remaining external identity/evidence contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
 
 Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
 
@@ -35,7 +35,7 @@ Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/12
 - **C03 [D]** `paidTaxCannotDetermineUnitsSold` — Equal tax paid, different sale quantities.
 - **C04 [D]** `saleVolumeCannotDetermineExecutionCost` — Equal quantities, different costs.
 - **C05 [D]** `saleVolumeCannotDeterminePhysicalCapacity` — Share volume does not identify machines.
-- **C06 [N]** `cashSourceUseIsSingleCounted` — Avoid counting same currency claim as cash, debt and sale.
+- **C06 [D]** `cashSourceUseIsSingleCounted` — Avoid counting same currency claim as cash, debt and sale.
 - **C07 [D]** `loanProceedsIncreaseLiabilities` — Borrowed proceeds create offsetting debt.
 - **C08 [D]** `disposalPreservesExternalAssetTransferAccounting` — Seller/right transfer to buyer and fees cannot erase plant.
 - **C09 [N]** `routeFundingFeasibleGivenLiquidityCollateralAndTiming` — Balanced ledger does not guarantee funding availability.
@@ -286,4 +286,25 @@ The previous rank-assumption-only construction is now complemented by a derived 
 ### I07 explicit policy fixture consumption
 
 The original `policyTradeoffCosts` hyperfabric has exactly two axes, `administrationAxis` and `careShortfallAxis`. `policyTradeoffAxisCoverage` provides a complete inhabitants-by-constructor list for this axis type. `admittedCheapAdministration` and `admittedCareCapacity` provide the two already admissible/adequate source examples. `twoAxisPolicyFrontierIsNonempty` instantiates the general constructive finite-frontier theorem, exported as `toeSyntheticTwoAxisPolicyFrontierIsNonempty`. This source term shows the theorem is non-vacuous for a concrete, source-owned finite policy hyperfabric. It does NOT turn either option into an enacted policy or prove which option improves real welfare. Source-written, not Agda kernel-verified.
+
+## 2026-10-28 C06 finite canonical funding-split continuation
+
+**Current scoped tally: 61 D / 11 R / 5 N = 77.** C06 moves N to D **at the source-written proof level only**. A historical financial-source authenticator is not constructed. Previous counts above are historical snapshots.
+
+- Reused owners: TaggedFundingReceipt, cashSourceUseIsSingleCounted and RankedMember in the existing WealthTaxDashiTradeMarketMaterialBidiExact economics module. No competing proof tree.
+- FundingTokenAbsent and UniqueFundingTokens impose exact no-repeat *local token* constraints on arbitrary finite lists.
+- finiteFundingPartitionConservesUnits recursively proves that exclusive cash/loan/settled-sale contributions add to the sum of source amounts. It uses the earlier single-source identity in its induction step.
+- CanonicalFundingEntry ties a tagged token to a supplied function from economic claims to source tokens. CanonicalFundingBatch imposes uniqueness across that common mapping.
+- canonicalClaimCannotBeReusedInLaterPosition proves that a first entry cannot represent the same declared economic claim as any later list member, provided each entry obeys the **same externally supplied canonical mapping**. Local token uniqueness alone could not establish this.
+- canonicalFundingTotalsReconcile composes batch uniqueness with the finite accounting identity.
+- A synthetic positive fixture has three existing-cash units and four debt units; a negative fixture rejects duplicate tokens.
+- An independent bounded Python arithmetic oracle executed 40,440 exclusive-source cases plus an alias negative control. These checks are NOT Agda kernel verification.
+
+**Authority ceiling:** The canonical economic-claim map must be authentic for the real institution and event. Arbitrary numbers, content hashes, parser records and transaction labels do not supply that authority. The proof covers the supplied, correctly keyed finite batch. Actual bank claims, cross-batch identity, real loan availability, genuine clearing and settlement, and downstream beneficiary identity remain external evidence obligations.
+
+**E07/F07 cross-pollination:** ASX's primary operator pages distinguish CHESS legal title (HIN), issuer-sponsored legal title (SRN), and custodial/omnibus beneficial interest whose legal holder may be a custodian. AustralianEquityHoldingMode, OfficialHolderRegistration and holderModeCannotBecomeLegalTitleByNameMatch preserve those type differences. MarketRecordKind also separates execution, participant clearing, official DvP settlement and beneficiary allocation. Those are source-written negative boundaries, not official transaction receipts, and do **not** close E07/F07.
+
+**Primary operator roots:** ASX, "Settlement services and pricing", https://www.asx.com.au/about/regulation/clearing-and-settlement-of-cash-equities-in-australia/settlement/settlement-services-and-pricing ; ASX, "Company Defaults FAQ: My share holdings and finances", https://www.asx.com.au/investors/investment-tools-and-resources/faqs-company-defaults (accessed 28 October 2026). ASX owns the operational propositions. The user directs the research and ChatGPT-assisted code is new repository source-writing, not an ASX certificate. Prior Ibrahim first-link, Snowball and Monster 3B ownership remains unaffected.
+
+**Still N:** A05, C09, E07, F07, H08. A same-taxpayer, same-tax-event, same-settled-sale and same-physical-outcome claim needs independent source authority. No ESD surface or live dashiTRADE executor was edited. No observed Agda compiler pass. All 42 original inventory rows remain.
 
