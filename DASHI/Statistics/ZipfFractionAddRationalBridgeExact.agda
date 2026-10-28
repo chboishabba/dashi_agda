@@ -22,8 +22,9 @@ module DASHI.Statistics.ZipfFractionAddRationalBridgeExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Integer.Base as ℤ using (+_)
-open import Data.Nat.Base as Nat using (NonZero; nonZero)
+open import Data.Integer.Base as ℤ using (+_; _+_)
+import Data.Integer.Properties as ℤP
+open import Data.Nat.Base as Nat using (NonZero; nonZero; pred; _*_)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
@@ -78,7 +79,18 @@ rawFractionAddPreserved (Fraction.finiteFraction n zero) b () hb
 rawFractionAddPreserved (Fraction.finiteFraction n (suc d))
                         (Fraction.finiteFraction m zero) ha ()
 rawFractionAddPreserved (Fraction.finiteFraction n (suc d))
-                        (Fraction.finiteFraction m (suc e)) ha hb = refl
+                        (Fraction.finiteFraction m (suc e)) ha hb =
+  cong
+    (λ integerNumerator →
+      ℚᵘ.mkℚᵘ integerNumerator
+        (Nat.pred (suc d Nat.* suc e)))
+    (trans
+      (ℤP.pos-+
+        (n Nat.* suc e)
+        (m Nat.* suc d))
+      (cong₂ ℤ._+_
+        (ℤP.pos-* n (suc e))
+        (ℤP.pos-* m (suc d))))
 
 -- Lift the standard library's unnormalised equality to reduced
 -- rational equality; DO NOT re-prove the original rational group laws.
