@@ -23,6 +23,13 @@ open import Relation.Nullary using (yes; no)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Foundations.SSPTritCarrier as SSP
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
+import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
+import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
+import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
+import DASHI.Biology.NonaryCompletionPhaseQuotientExact as FiveMode
+import DASHI.Wikimedia.Base369NumberTheoryNumerologyWrongTypeSnowballExact as NumericRole
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Economics.WealthInheritanceVacancyTaxMaxCut20261027Exact as Wealth
 import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact as Tax
@@ -3006,4 +3013,219 @@ assetValueDoesNotIdentifyTaxpayerBeneficialShare =
 -- A real A05 snapshot requires independently validated legal/beneficial
 -- ownership, exclusions, debt, tax year, currency and valuation evidence.
 -- No source constructor here claims to possess those external records.
+
+------------------------------------------------------------------------
+-- ECONOMICS X BASE369 TRIALECTIC X NUMEROLOGY ROLE MAX-CUT.
+--
+-- Reuse (not copy):
+--   Base369Ternary27HypervoxelFabricGeometryExact owns the T^3 cube,
+--     27 states, and the T^9 / 19683 three-cell fabric.
+--   TrialecticThreeCellHyperformSynthesisExact owns CellDialectic.
+--   TernaryPermutationS3LawsExact owns the ACTUAL label-action S3.
+--   NonaryCompletionPhaseQuotientExact owns the five-mode carrier.
+--   Base369NumberTheoryNumerologyWrongTypeSnowballExact owns the
+--     proof-versus-numerological-motif separation.
+--   IntersectionalNonFactorability owns all recharting/no-go proofs.
+--
+-- Cross-PR inspiration, NOT imported as an unavailable dependency:
+--   dashi_agda PR #1414, 2026-10-28 (root-monodromy, 3^5 vs 5^3,
+--   permutation versus spin lifting), original mathematical roots
+--   Abel / Galois / Riemann / Hamilton / Dixon-Mortimer.
+--
+-- Economic coordinates:
+--   x = hypothesis polarity (not tax amount);
+--   y = evidence-review polarity (not independent provenance);
+--   z = effect-claim polarity (not measured causal truth).
+-- A point in T^3 is an annotation, not an authenticated observation.
+------------------------------------------------------------------------
+
+record PolicyEvidenceXY : Set where
+  constructor policy-evidence-xy
+  field
+    xHypothesisPolarity : SSP.SSPTrit
+    yReviewPolarity : SSP.SSPTrit
+open PolicyEvidenceXY public
+
+policyEvidenceXY : Fabric.Ternary27Point → PolicyEvidenceXY
+policyEvidenceXY cube =
+  policy-evidence-xy (Fabric.x cube) (Fabric.y cube)
+
+policyEffectZ : Fabric.Ternary27Point → SSP.SSPTrit
+policyEffectZ = Fabric.z
+
+-- x and y alone cannot force z. The z coordinate is an independent
+-- hypothesis slot; this is NOT evidence that any particular effect exists.
+sameXYNegativeZ : Fabric.Ternary27Point
+sameXYNegativeZ =
+  Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne
+
+sameXYPositiveZ : Fabric.Ternary27Point
+sameXYPositiveZ =
+  Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne
+
+sameXYStillAllowsOppositeZ :
+  policyEvidenceXY sameXYNegativeZ ≡ policyEvidenceXY sameXYPositiveZ
+sameXYStillAllowsOppositeZ = refl
+
+differentZDespiteSameXY :
+  policyEffectZ sameXYNegativeZ ≡ policyEffectZ sameXYPositiveZ → ⊥
+differentZDespiteSameXY ()
+
+sourceReviewDoesNotDetermineCausalPolarity :
+  INF.FactorsThrough policyEvidenceXY policyEffectZ → ⊥
+sourceReviewDoesNotDetermineCausalPolarity =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      sameXYNegativeZ sameXYPositiveZ
+      sameXYStillAllowsOppositeZ differentZDespiteSameXY)
+
+-- Even a reversible relabeling or S3-labelled recharting of x/y cannot
+-- repair the missing z dimension. This uses the original no-go owner.
+rechartingXYCannotManufactureCausalPolarity :
+  {Recharted : Set} →
+  (rechart : PolicyEvidenceXY → Recharted) →
+  INF.FactorsThrough (λ state → rechart (policyEvidenceXY state))
+    policyEffectZ → ⊥
+rechartingXYCannotManufactureCausalPolarity rechart =
+  INF.rechartingCannotRecoverErasedPhenomenon rechart
+    (INF.nonFactorabilityWitness
+      sameXYNegativeZ sameXYPositiveZ
+      sameXYStillAllowsOppositeZ differentZDespiteSameXY)
+
+-- Raw coordinate permutations are valid charts, not semantic equivalences
+-- between hypothesis, reviewed source, and causal-effect roles.
+rotatePolicyXYZ : Fabric.Ternary27Point → Fabric.Ternary27Point
+rotatePolicyXYZ (Fabric.ternary27Point x y z) =
+  Fabric.ternary27Point y z x
+
+rotatePolicyXYZThreeTimes :
+  (cube : Fabric.Ternary27Point) →
+  rotatePolicyXYZ (rotatePolicyXYZ (rotatePolicyXYZ cube)) ≡ cube
+rotatePolicyXYZThreeTimes (Fabric.ternary27Point x y z) = refl
+
+swapPolicyXY : Fabric.Ternary27Point → Fabric.Ternary27Point
+swapPolicyXY (Fabric.ternary27Point x y z) =
+  Fabric.ternary27Point y x z
+
+swapPolicyXYTwice :
+  (cube : Fabric.Ternary27Point) →
+  swapPolicyXY (swapPolicyXY cube) ≡ cube
+swapPolicyXYTwice (Fabric.ternary27Point x y z) = refl
+
+-- S3 has six exact label permutations. Reuse its source-owned group
+-- inverse rather than claiming raw chart rotation is a market rotation.
+existingS3InverseLaw :
+  (action : Perm.TriPermutation) →
+  S3._∙_ (Perm.inversePermutation action) action
+    ≡ Perm.permIdentity
+existingS3InverseLaw = S3.compositionInverseLeft
+
+-- Three 27-cells are one existing T^9 trialectic. The third cell is
+-- a structured effect/interaction fibre, NOT forced by the first two.
+record PolicyEvidenceInteractionThreeCell : Set where
+  constructor policy-evidence-interaction-three-cell
+  field
+    xPolicyCube : Fabric.Ternary27Point
+    yProvenanceCube : Fabric.Ternary27Point
+    zEffectInteractionCube : Fabric.Ternary27Point
+open PolicyEvidenceInteractionThreeCell public
+
+policyInteractionToCellDialectic :
+  PolicyEvidenceInteractionThreeCell → Cell.CellDialectic
+policyInteractionToCellDialectic state =
+  Cell.cell-dialectic
+    (xPolicyCube state) (yProvenanceCube state)
+    (zEffectInteractionCube state)
+
+policyThreeCellToExistingHyperform :
+  PolicyEvidenceInteractionThreeCell → Fabric.TernaryHyperformalPoint
+policyThreeCellToExistingHyperform state =
+  Cell.cellDialecticToHyperform (policyInteractionToCellDialectic state)
+
+policyThreeCubeInheritedCarrierCount :
+  Cell.cellDialecticStateCount ≡ 19683
+policyThreeCubeInheritedCarrierCount =
+  Cell.cellDialecticHasNineteenThousandSixHundredEightyThreeStates
+
+policyOneCubeInheritedCarrierCount :
+  Fabric.hypervoxelStateCount ≡ 27
+policyOneCubeInheritedCarrierCount = Fabric.hypervoxelStateCountIs27
+
+-- Reconstruct all three cells using the source-owned inverse. This
+-- exact rechart is purely structural, not a policy-effect inference.
+policyThreeCellFabricRoundTrip :
+  (state : PolicyEvidenceInteractionThreeCell) →
+  Cell.hyperformToCellDialectic (policyThreeCellToExistingHyperform state)
+    ≡ policyInteractionToCellDialectic state
+policyThreeCellFabricRoundTrip state =
+  Cell.cellDialecticHyperformRoundTrip
+    (policyInteractionToCellDialectic state)
+
+-- The five already OPEN evidence lanes A05, C09, E07, F07 and H08
+-- each admit three annotation states: contradicted / unresolved /
+-- provisionally supported. This gives 3^5 = 243 possible annotations.
+-- It emphatically DOES NOT create five validated evidence producers.
+record FiveEvidenceGateAnnotations : Set where
+  constructor five-evidence-gate-annotations
+  field
+    a05ValuationAnnotation : SSP.SSPTrit
+    c09FundingAnnotation : SSP.SSPTrit
+    e07HolderAnnotation : SSP.SSPTrit
+    f07SettlementAnnotation : SSP.SSPTrit
+    h08CausalAnnotation : SSP.SSPTrit
+open FiveEvidenceGateAnnotations public
+
+record ThreeFiveModeAnnotations : Set where
+  constructor three-five-mode-annotations
+  field
+    modePolicy : FiveMode.ComplementMode5
+    modeEvidence : FiveMode.ComplementMode5
+    modeEffect : FiveMode.ComplementMode5
+open ThreeFiveModeAnnotations public
+
+fiveGateTernaryArithmeticCount : Nat
+fiveGateTernaryArithmeticCount = 3 * (3 * (3 * (3 * 3)))
+
+threeFiveModeArithmeticCount : Nat
+threeFiveModeArithmeticCount = 5 * (5 * 5)
+
+fiveGateAnnotationsHave243Combinations :
+  fiveGateTernaryArithmeticCount ≡ 243
+fiveGateAnnotationsHave243Combinations = refl
+
+threeFiveModesHave125Combinations :
+  threeFiveModeArithmeticCount ≡ 125
+threeFiveModesHave125Combinations = refl
+
+differentFiveGateAndThreeModeCounts :
+  fiveGateTernaryArithmeticCount
+    ≡ threeFiveModeArithmeticCount → ⊥
+differentFiveGateAndThreeModeCounts ()
+
+-- Source-authority wrong-type gate. A cultural/numerological reading of
+-- 3,6,9,27,243 or 125 cannot certify mathematical or economic results.
+numerologicalPatternDoesNotPayEconomicProof :
+  NumericRole.NumerologyPaysNumberTheoryProof → ⊥
+numerologicalPatternDoesNotPayEconomicProof =
+  NumericRole.numerologyDoesNotPayProof
+
+data NumericSignatureCertifiesTaxEffect : Set where
+data QuaternionSpinCycleCertifiesSettlement : Set where
+data Matching243And125ClaimsSameCarrier : Set where
+
+matchingDigitsDoNotProveTaxEffects :
+  NumericSignatureCertifiesTaxEffect → ⊥
+matchingDigitsDoNotProveTaxEffects ()
+
+quaternionLiftDoesNotAuthenticateSettlement :
+  QuaternionSpinCycleCertifiesSettlement → ⊥
+quaternionLiftDoesNotAuthenticateSettlement ()
+
+incompatibleCardinalSignaturesAreNotSameCarrier :
+  Matching243And125ClaimsSameCarrier → ⊥
+incompatibleCardinalSignaturesAreNotSameCarrier ()
+
+-- The 720-degree rational quaternion lift belongs to PR #1414's
+-- separate proof owner, not finance. It is a useful test of quotient
+-- information loss, not an economic observation, policy theorem or receipt.
 
