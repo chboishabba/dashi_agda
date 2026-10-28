@@ -146,3 +146,19 @@ The two no-go theorems and `SignedSSPTwinObservableTransportExact` are jointly e
 - a raw power-of-two code is **not** the arithmetic exponent, so even a lossless codec requires the actual exponent/readout theorem before applying mod p.
 
 These exact source-written results change roadmap B02/B03/E15 from a vague request into a concrete proof condition. The missing code is an actual `readExponent` with a correct `readExponent(2^p)=p` law on accepted emitted states (or a dependent residual carrying `p` and a proof `code=2^p`). Until that is instantiated, CRT constraints over the raw FRACTRAN integer are invalid. No Agda kernel check has been claimed.
+
+## 2026-10-28 fifth max-cut: concrete certified exponent residual
+
+`DASHI.Arithmetic.SignedSSPProofCarryingExponentExact` constructs a concrete dependent `CertifiedExponentCode` with:
+- a signed SSP lane and signed magnitude metadata;
+- an explicit Nat arithmetic exponent residual `p`;
+- a raw Nat payload `c`;
+- proofs that the lane is base-2 SSP and `c = 2^p`.
+
+The canonical encoder uses `Signed.ssp2`, the source-owned `positiveMultiplicity` and the actual `Offset.powerTwo` encoder. Its `decodeExponent` reads `p` from the retained residual, and the source-written `decodeEncodeExponent` and `encodeExponentInjective` provide an exact Nat round trip and lossless injectivity. This directly discharges the *specified-code* arithmetic readout problem; it does **not** establish a decoder for arbitrary unlabeled raw FRACTRAN integers or prime-emission reachability from the actual runtime.
+
+The new `plusMacroSourceMatchesCertifiedCode` and `minusMacroSourceMatchesCertifiedCode` substitute `c=2^p` into the exact fraction-program source with equality witnesses. `plusTwoCode` and `minusTwoCode` then give proof-carrying, correctly decoded output codes. The minus case requires an input proof `p=2+k`; it does not silently underflow. Each numeric two-step fraction execution and signed direction remains owned by `SignedSSPPrimeOffsetMacroExact`. A full concrete FRACDASH machine simulation of the enriched record is still open.
+
+This is a **concrete** lossless code and a partial answer to roadmap B02/B03/D04–D05. It is not an `SSP15ResidualCodec` instance on `FractranCOL.EV5`, which remains a separate bridge. In particular, the code stores `p` as a residual, so no computational compression ratio or extra prime-distribution information follows by itself.
+
+Independent regression `scripts/check_signed_ssp_twin_information_loss.py` ran locally and found exactly 1,224 twin-prime starting integers with lower endpoint ≤100,000, confirming the stronger collision (5,7), and the correct prime-2 odd/modulus distinction. The source-written Agda has not been kernel-checked.
