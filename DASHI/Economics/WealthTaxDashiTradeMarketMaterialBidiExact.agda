@@ -268,3 +268,89 @@ equalVolumeDoesNotProveEqualMarketImpact ()
 -- Bianchi/Ceneri/Melosi/Villa, NBER 35715, September 2026:
 --   heterogeneous-agents funded/unfunded transfer model, NOT proof of a
 --   realised tax-cap market-price, physical-resource or refinancing effect.
+
+
+------------------------------------------------------------------------
+-- SAME-OBJECT OWNERSHIP HANDOFF: A SALE VOLUME DOES NOT IDENTIFY ITS CLASS.
+-- Actual independent company registers, transfer contracts and vote classes
+-- are required before invoking this *optional* reconciliation interface.
+-- The financing-route count alone has NO company-control authority.
+------------------------------------------------------------------------
+
+record FundingVoteReconciliation : Set where
+  constructor funding-vote-reconciliation
+  field
+    routedPayment : FundingRoute
+    shareStateBefore : Tax.ShareVoteState
+    shareStateAfter : Tax.ShareVoteState
+    ordinaryUnitsTransferred : Nat
+    superVotingUnitsTransferred : Nat
+    matchedSaleCount :
+      ordinaryUnitsTransferred + superVotingUnitsTransferred
+      ≡ shareUnitsSold routedPayment
+    ownerOrdinaryReconciled :
+      Tax.ownerOrdinaryShares shareStateBefore
+      ≡ Tax.ownerOrdinaryShares shareStateAfter + ordinaryUnitsTransferred
+    ownerSuperReconciled :
+      Tax.ownerSuperVotingShares shareStateBefore
+      ≡ Tax.ownerSuperVotingShares shareStateAfter
+        + superVotingUnitsTransferred
+    ordinaryTotalUnchanged :
+      Tax.allOrdinaryShares shareStateBefore
+      ≡ Tax.allOrdinaryShares shareStateAfter
+    superTotalUnchanged :
+      Tax.allSuperVotingShares shareStateBefore
+      ≡ Tax.allSuperVotingShares shareStateAfter
+open FundingVoteReconciliation public
+
+ordinarySaleLink : FundingVoteReconciliation
+ordinarySaleLink =
+  funding-vote-reconciliation
+    assetSaleFunded
+    (Tax.share-vote-state 6 3 20 3)
+    (Tax.share-vote-state 4 3 20 3)
+    2 0 refl refl refl refl refl
+
+superVotingSaleLink : FundingVoteReconciliation
+superVotingSaleLink =
+  funding-vote-reconciliation
+    assetSaleFunded
+    (Tax.share-vote-state 6 3 20 3)
+    (Tax.share-vote-state 6 1 20 3)
+    0 2 refl refl refl refl refl
+
+routedUnitsSold : FundingVoteReconciliation → Nat
+routedUnitsSold link = shareUnitsSold (routedPayment link)
+
+weightedOwnerVotesAfter : FundingVoteReconciliation → Nat
+weightedOwnerVotesAfter link =
+  Tax.ownerWeightedVotes (shareStateAfter link)
+
+equalSaleCountAcrossClasses :
+  routedUnitsSold ordinarySaleLink ≡ routedUnitsSold superVotingSaleLink
+equalSaleCountAcrossClasses = refl
+
+ordinaryRouteLeaves34Votes :
+  weightedOwnerVotesAfter ordinarySaleLink ≡ 34
+ordinaryRouteLeaves34Votes = refl
+
+superRouteLeaves16Votes :
+  weightedOwnerVotesAfter superVotingSaleLink ≡ 16
+superRouteLeaves16Votes = refl
+
+differentVotesAfterSameCount :
+  weightedOwnerVotesAfter ordinarySaleLink
+  ≡ weightedOwnerVotesAfter superVotingSaleLink → ⊥
+differentVotesAfterSameCount ()
+
+quantityCannotFixVotingControl :
+  INF.FactorsThrough routedUnitsSold weightedOwnerVotesAfter → ⊥
+quantityCannotFixVotingControl =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      ordinarySaleLink superVotingSaleLink
+      equalSaleCountAcrossClasses differentVotesAfterSameCount)
+
+-- 34/50 and 16/50 are fixture voting weights. This is not a legal
+-- board-control determination, a registered ownership record, nor a model
+-- of beneficial owner chains, voting pacts or fiduciary agreements.
