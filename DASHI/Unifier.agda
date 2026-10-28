@@ -1,5 +1,14 @@
 module DASHI.Unifier where
 
+-- Exact ordinary factorial vs subfactorial, 3-cycle derangements and
+-- 44-of-120 quintic derangements; maintain radian phase non-promotion.
+import DASHI.Foundations.PolynomialSubfactorialDerangementS3S5Exact as Subfactorial
+open Subfactorial public using
+  ( subfactorialThree ; subfactorialFive
+  ; exactly44FiveLabelDerangements
+  ; evenFiveLabelDerangementsCount24
+  ; oddFiveLabelDerangementsCount20 )
+
 -- Source-typed Gamma-factorial, Pickover phase, Hatcher perfect-group
 -- observer and signed-quaternion quotient bridges.
 import DASHI.Foundations.PolynomialPickoverFactorialGammaDegreeExact as FactorialPhase
