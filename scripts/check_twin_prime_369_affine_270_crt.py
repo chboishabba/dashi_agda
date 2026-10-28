@@ -49,6 +49,9 @@ def main():
     assert survives(first) and survives(second)
     assert true_twin_start(first) and not true_twin_start(second)
     assert second==11*19
+    assert 329 % 270 == first and 329 == 7*47
+    assert true_twin_start(59) and not true_twin_start(329)
+    assert decoding[329 % 270] == (0,-1,1)
     # Original Ibrahim's 3x5 reduction retains x, identifies inner antipodes.
     assert (0,1,-1)==(0,-(-1),-(1))
     assert encoding[(0,0,0)]==269
@@ -61,6 +64,7 @@ def main():
     print('PASS: code 119 => 119 = 7*17 and 121 = 11*11 (both composite)')
     print('PASS: explicit affine cube↔finite survivor lookup and 27 C2 swaps')
     print('PASS: 59/209 same INNER 15 and GLOBAL 14 orbit; true twin vs composite')
+    print('PASS: 59/329 same FULL 27 wheel point but different twin primality')
     print('PASS: one fixed 269 + 13 antipodal pairs; separate 3x5=15 quotient')
     print('Theorem level: finite Python only; Agda code is kernel pending')
 
