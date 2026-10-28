@@ -16,6 +16,7 @@ python3 -m pytest -q \
   tests/test_zipf_heaps_bridge_exact.py \
   tests/test_zipf_heaps_extremal_profiles.py \
   tests/test_zipf_majorization_expected_heaps_exact.py \
+  tests/test_zipf_stochastic_majorization_exact.py \
   tests/test_zipf_occupancy_collisions_exact.py \
   tests/test_pareto_benford_lorenz_bridge.py \
   tests/test_zipf_family_coverage_gates.py \
