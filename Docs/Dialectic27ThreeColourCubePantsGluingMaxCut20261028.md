@@ -57,6 +57,11 @@ is not dismissed; its precise scope is now proved by counterexample.
 ## Exact witnesses and counterexamples
 
 New `DASHI/Reasoning/Dialectic27ThreeColourPantsSeamExact.agda`:
+- `facePoint` concretely maps **all six** +/- outer faces and
+  each two-free-trit 3×3 site into the existing X/Y/Z 27 cube,
+  while `faceSiteReallyOnDeclaredFace` proves that every site
+  lies on its declared `Base369Ternary27HypervoxelFabricGeometryExact.OnFace`.
+  The surface is not just an unrelated nine-colour array.
 - `FaceSite9`, `FaceColours`, `Opposed` and `FaceSeam` encode
   actual typed 3×3 faces, opposite cube sides, all-site paint equality,
   scope equality and the existing five-coordinate `InterfaceMatch`;
