@@ -134,6 +134,8 @@ def main() -> None:
         "toeDistinctLocalFillTokensAndClassLabels",
         "toeDuplicateLocalFillTokenIsRejected",
         "toeCashReconciledFillsMustShareIdentitySequence",
+        "toeOriginalAuthorDoesNotAutomaticallyOwnDashiProof",
+        "toeDerivedSummaryDoesNotBecomeOriginalEvidence",
     ):
         assert symbol in bridge, f"missing source-owned TOE boundary: {symbol}"
     # These are direct aliases of EXISTING source and evidence owners.
