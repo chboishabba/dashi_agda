@@ -68,3 +68,6 @@ import DASHI.Economics.WealthTaxPowerCareSociologyBidi20261027Exact
 
 -- Distinguish assessed, collected, appropriated tax and time-indexed control.
 import DASHI.Economics.WealthTaxFiscalTransmissionControlBidi20261027Exact
+
+-- Tax/market buy/financing BIDI without trading permission.
+import DASHI.Economics.WealthTaxDashiTradeMarketMaterialBidiExact
