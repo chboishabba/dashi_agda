@@ -23,6 +23,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_!)
+open import Data.Product using (proj₂)
 
 import Base369 as Base
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as S3
@@ -143,6 +144,44 @@ countDerangements5 (p ∷ ps) with isDerangement5 p
 exactly44FiveLabelDerangements :
   countDerangements5 Five.allFivePermutations ≡ 44
 exactly44FiveLabelDerangements = refl
+
+
+-- A further nontrivial split inside the 44 derangements:
+-- 24 are even (in A5); 20 are odd (the other coset).
+-- The exact parity is the previously source-written 120-to-60x2 chart.
+isEvenPermutation5 : Five.Permutation5 → Bool
+isEvenPermutation5 p with proj₂ (Five.toTripleOrientation p)
+... | Five.evenChoice = true
+... | Five.oddChoice = false
+
+isOddPermutation5 : Five.Permutation5 → Bool
+isOddPermutation5 p =
+  notBool (isEvenPermutation5 p)
+
+countEvenDerangements5 : List Five.Permutation5 → Nat
+countEvenDerangements5 [] = zero
+countEvenDerangements5 (p ∷ ps)
+  with andBool (isDerangement5 p) (isEvenPermutation5 p)
+... | true = suc (countEvenDerangements5 ps)
+... | false = countEvenDerangements5 ps
+
+countOddDerangements5 : List Five.Permutation5 → Nat
+countOddDerangements5 [] = zero
+countOddDerangements5 (p ∷ ps)
+  with andBool (isDerangement5 p) (isOddPermutation5 p)
+... | true = suc (countOddDerangements5 ps)
+... | false = countOddDerangements5 ps
+
+evenFiveLabelDerangementsCount24 :
+  countEvenDerangements5 Five.allFivePermutations ≡ 24
+evenFiveLabelDerangementsCount24 = refl
+
+oddFiveLabelDerangementsCount20 :
+  countOddDerangements5 Five.allFivePermutations ≡ 20
+oddFiveLabelDerangementsCount20 = refl
+
+twentyFourPlusTwentyIsFortyFour : 24 + 20 ≡ 44
+twentyFourPlusTwentyIsFortyFour = refl
 
 -- Numerology guard: !3 counts two C3 generators, not all six of S3.
 data AllSixS3PermutationsAreDerangements : Set where
