@@ -213,3 +213,12 @@ Compare to our other two-state refinements: quaternion central \`±1\`, binary c
 - **Field theory:** splitting fields, Galois groups, radical-tower criteria in both directions, generic S5 group, special solvable quintic exceptions.
 - **Spin:** continuous SU2→SO3 covering and path homotopy; exact rational q remains a discrete 720-degree witness.
 - **Historical / provenance:** never reassign Abel/Galois/Riemann/Hamilton, original Ibrahim, earlier DASHI source proof owners, source-authored PR code, executed Python checks or Agda kernel status; never infer same-object Monster 3B from counts, symmetric character fingerprints or synthetic receipts.
+
+
+### C3/Fourier/trialectic receiver (additional exact owner)
+
+\`DASHI.Foundations.PolynomialC3FourierTrialecticChartExact\` consumes \`TriadicDepthOneCharacters\`, \`C3FourierConjugationExact\`, \`C3CubeFourier27Exact\`, and the existing three-coordinate \`SynthesisChoice27\`. It provides a genuine C3 phase-group isomorphism (all nine multiplication cases), reuses the symbolic Fourier conjugate-row proof \`chi1 ↔ chi2\`, constructs a lossless two-sided \`SynthesisChoice27 ↔ Cube3\` chart, and retains the original cube-character homomorphism. This is a finite C3/C3³ character transport only; it is **not** analytic continuation of polynomial roots, an actual complex Riemann-surface Fourier transformation, or an independently established Monster 3B representation. The module is imported into all three canonical TOE roots; its newly authored source remains kernel-pending.
+
+A further external prior-art confirmation is the American Mathematical Society account of the Artin braid-group exact sequence \`1 → P_n → B_n → S_n → 1\`, https://doi.org/10.1090/noti2452, and the source about exponent-sum \`B_n → ℤ\` (which distinguishes σ₀² from the identity), https://stoimenov.net/stoimeno/homepage/papers/burex2.pdf. Those are mathematical source authorities, not proof terms automatically imported into Agda.
+
+**Execution update:** The independent exact replay also checked \`Permutation5 ↔ DistinctTriple5 × Orientation2\` as a bijection over all 120 permutations, verified 60 even permutations and 60 distinct triples, and found exactly one even completion per triple. The committed script includes this 120-case replay, but an execution from that exact GitHub blob is not recorded.
