@@ -167,3 +167,33 @@ record AnalyticPhaseAuthority : Set₁ where
     degreeAngle : Nat → Real
     degreeAngleSignProof : Set
     radianSineSignCertificate : Set
+
+
+-- 2026-10-28 user-specified theta ANGLE with two different !-indices.
+-- Theta is an ANGLE-VALUED VARIABLE whose source expression may
+-- CONTAIN factorial or subfactorial. It is not Gamma or Jacobi theta.
+-- The original challenge uses factorial 9999!; prefix !9999 is the
+-- distinct derangement-counting function from the user's S3 video.
+-- Existing source: PolynomialSubfactorialDerangementS3S5Exact.
+import DASHI.Foundations.PolynomialSubfactorialDerangementS3S5Exact as Sub
+
+data ThetaIndex : Set where
+  postfixFactorial prefixSubfactorial : ThetaIndex
+
+thetaExponent : ThetaIndex → Nat
+thetaExponent postfixFactorial = factorialIndex9999
+thetaExponent prefixSubfactorial = Sub.subfactorial9999
+
+thetaAngleRadians : ThetaIndex → Nat
+thetaAngleRadians t = 99 ^ thetaExponent t
+
+thetaFactorialIsOriginalTarget :
+  thetaAngleRadians postfixFactorial ≡ pickoverInteger
+thetaFactorialIsOriginalTarget = refl
+
+-- DO NOT normalize the huge exponent to prove residue or sine signs.
+-- Distinct exact 9999! versus !9999 CRT residues are supplied by
+-- scripts/check_polynomial_pickover_gamma_horned_maxcut.py.
+-- An angle's SOURCE computation and its analytic mod-2pi phase are
+-- different objects; degree mod-360 belongs to neither real-radian
+-- sine-sign certificate.
