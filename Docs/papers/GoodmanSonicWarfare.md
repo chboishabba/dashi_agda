@@ -360,3 +360,32 @@ More importantly, the **redundancy is constructive**, not a mere cardinality com
 **Regression:** a further five exhaustive cases now check source-only, medium-only and receiver+medium insufficiency; source+medium sufficiency; and the receiver being determined by the pair. Additional complete-state assertions check both reconstruction directions for four worlds. The script contains 27 listed toy factorisation cases; **27 is only the test count, not a ternary/369 or Monster same-object fingerprint**.
 
 **Pareto next gate:** this is now a genuine stopping cut for the synthetic inverse example. Verify Agda at the exact head and pursue calibrated independent medium/source measurements before any experimental promotion. Reuse all existing theorem owners. The ISO 12913 and 16755 references and Guo/Zhang reviews remain independently attributed study/standard inputs, not proof certificates.
+
+## T6 stability and genuinely measured evidence frontier (2026-10-28)
+
+**New exact-rational computational regression**: `scripts/check_goodman_inverse_stability_finite.py` investigates a parametric family of *synthetic* 2×2 inverse problems. These matrices are **not acoustic transfer matrices** and do not model an actual microphone, real medium, absorber, wave, intensity, sound pressure or human response.
+
+```text
+A_n = [[1, 0], [1, 1/n]],    n = positive integer
+det(A_n) = 1/n > 0
+A_n^-1 = [[1, 0], [-n, n]]
+||A_n||_infinity = 1 + 1/n
+||A_n^-1||_infinity = 2n
+condition_infinity(A_n) = 2(n+1)
+```
+
+The script uses only Python `fractions.Fraction` and the standard library. At each `n ∈ {1, 2, 10, 100, 1000, 10000}`, the inverse exactly reconstructs a rational hidden vector. An observation perturbation `(0,1/n)` changes its reconstructed second hidden coordinate by **exactly one**, so its error-amplification ratio equals `n`. For any proposed finite **uniform** inverse-error Lipschitz bound `K`, `n>K` defeats it. Each **fixed** `A_n` remains continuously invertible; the point is loss of *uniform stability across the family*, not that a single nonsingular finite matrix is ill-posed.
+
+**Executed and checked against GitHub content.** The exact 3566-character GitHub script was reproduced locally and executed: six of six exact-rational cases passed; the source byte length and FNV-1a character checksum matched the fetched GitHub file (3566 characters; `0x2b84575d`). The local SHA-256 is `09cb00296ecc79084487a0ef1bab89476fe3eccd012de67f88f0208753e5c9ae`. This is a computational regression on the declared rational fixture, **not an Agda kernel result**. The algebraic identities are available for direct verification from the formulae but are not yet formalised as a general Agda `∀n` theorem.
+
+**Prior mathematics and repository proof owners.** Jacques Hadamard's well-posedness criteria require existence, uniqueness and stable data dependence; ill-conditioning is standard inverse-problem mathematics, **not a Goodman or DASHI discovery**. The repo already owns the exact boundaries `DASHI.Core.RobustExperimentInferenceFrontierExact.sameFitDifferentAdequacy` and `DASHI.Core.FrozenHeldOutRepairRefinementExact.trainingFitDoesNotCreateHeldOutValidity`. The Goodman transport application now **directly re-exports** them as `sonicFitDoesNotEstablishAdequacy` and `sonicTrainingFitDoesNotPayHeldOutValidation`. Original mathematical/theorem ownership is unchanged.
+
+**Why this matters physically**: T5 showed that an *ideal* pair of independent observations separates four discrete worlds. T6 shows why an actual continuously varying inverse problem also requires a calibrated **noise floor, error model, model discrepancy, and stability or conditioning test**. The mere fact that a noiseless inverse is unique does not demonstrate that a real instrument can resolve the source or medium at the desired precision. An independently measured medium coordinate is still necessary for the T5 claim; an acoustic-only source identification theorem has not been proved.
+
+**Literature-informed max-cut.** Xuan Guo *et al.* (2026) report 194 review studies and 66 meta-analysis studies; 70 of the 194 (36.08%) did **not** examine any testable contextual factor and only 14 (7.21%) assessed temporal contextual factors. The paper's effect estimates depend on outcome and controls; observational aggregation does not establish universal individual causal responses. Ruining Zhang *et al.* (2025) supply a separate taxonomy of non-acoustic context. The highest-value empirical question is therefore whether **independently measured, preregistered temporal/context variables** improve held-out prediction, not whether a pre-selected 4-state toy response can be fitted.
+
+**Latest PR comparison**: #1412 introduces fail-loud geometric reprojection quality gates; it is **branch-only** and not imported into Goodman or treated as acoustic calibration. #1411 separates generation/licensing of evidence spans from semantic proof authority. #1410 distinguishes participant and context parser roles, not human physiology. All three favour typed non-promotion and validation at the actual data seam rather than claiming that a newly typed input is a verified causal fact.
+
+**Research exit requirements.** For a future *physical* claim, obtain (1) dated source and receiver data with units and calibration chain, (2) independent medium/geometry instrumentation, (3) declared noise/discrepancy budget and conditioning at the operating point, (4) a frozen matched baseline and held-out data partition, and (5) independent repetition. For *human* responses, add appropriate consent/ethics, outcome definitions, safe exposure and causal identification design. Do not substitute DOI links, synthetic checks, ordinary transfer models, or GitHub source files for these receipts. No harmful acoustic optimisation is part of this work.
+
+**Pareto stop**: T5 and T6 identify two different obstructions (missing observables and sensitivity to error). No further source abstraction should be promoted as a physical result without a real measured discriminator. Exact-head Agda compiler verification of all new source-written theorems remains open.
