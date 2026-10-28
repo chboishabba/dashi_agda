@@ -80,7 +80,7 @@ fourGridContribution :
 fourGridContribution ops f g target (p , q) =
   choose (CoefficientOps.zero ops)
     (Four.eqFourCube
-      (Four.wideToFourGrid (Full.exactPairOutput p q))
+      (Four.fourGridGroupSum (Four.inputToFourGrid p) (Four.inputToFourGrid q))
       (Four.wideToFourGrid (Full.retainedToWide target)))
     (CoefficientOps.multiply ops (f p) (g q))
 
@@ -104,8 +104,9 @@ fourGridTermIsTrueRetainedTerm :
   fourGridContribution ops f g target pair
     ≡ exactContribution ops f g (Full.retainedToWide target) pair
 fourGridTermIsTrueRetainedTerm ops f g target (p , q)
-  rewrite Four.fourGridRetainedCubeMembership
-    (Full.exactPairOutput p q) target = refl
+  rewrite Four.fourGridGroupSumMatchesIntegerPair p q
+        | Four.fourGridRetainedCubeMembership
+            (Full.exactPairOutput p q) target = refl
 
 fiveGridTermIsTrueFullTerm :
   ∀ {A : Set} →
