@@ -135,3 +135,24 @@ The histogram and named first-discovery order are distinct projections of a word
 The finite exact joint path distribution is an executable probability computation. A **general Agda kernel proof** of the two-sampler first-seen-order Plackett–Luce equality, the joint path construction's normalization, and S24's stochastic monotone coupling remains outstanding. These obligations cannot be inferred from shared examples, equal six-element cardinality, or the prior SSSP codec.
 
 No ESD, protected digital-ESD, current-master Balaban/YM, zeta/RH, NS or Ibrahim Monster 3B surfaces are modified. Historical math, previous source-owner code, new computations, executed checks and kernel proofs remain distinct.
+
+
+## The entire (m,1,1) family: a closed strict two-sampler gap
+
+The smallest AABC case extends directly to **every positive integer m**, for token counts `(m,1,1)`. Set `N=m+2`. At t=2, the only way to see a single type is to draw two A labels. Under the two sampler hypotheses, the collision probabilities differ:
+
+```
+P_perm(V2=1) = m(m-1)/(N(N-1))
+P_IID(V2=1)  = (m^2+2)/N^2
+```
+
+Therefore
+
+```
+E_perm[V2] - E_IID[V2]
+  = 2(2m+1) / ((m+1)(m+2)^2) > 0,   m>=1.
+```
+
+This gives an exact all-m **strict separation** of chronological discovery expectations while the two samplers have the same conditional first-discovery **label order** law for every fixed counts vector. The preexisting Heaps all-prefix sharp envelope owner also yields the exact integrated gap `2(m-1)` for the same family. The formulas are classical finite occupancy consequences; this repository's new work is only their source-reused integration and regression, not mathematical priority over earlier research.
+
+The existing `scripts/zipf_abc_six_order_receipt.py` was extended with `two_singletons_prefix_two_gap(m)` to compare both closed forms to the already-owned `expected_iid_vocabulary`, `expected_permutation_vocabulary` and `multiset_heaps_area_gap` functions. The focused Python test now checks m=1..50 and strict positivity, with failure on invalid multiplicities. A separate **independent** exact rational local calculation checked m=1..100, all passed; it is not an exact-checkout execution of the committed module. Do not claim a uniform constant lower bound: the difference tends to zero as m grows.
