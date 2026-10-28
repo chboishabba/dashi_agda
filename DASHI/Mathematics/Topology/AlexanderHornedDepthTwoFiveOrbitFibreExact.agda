@@ -1,0 +1,153 @@
+module DASHI.Mathematics.Topology.AlexanderHornedDepthTwoFiveOrbitFibreExact where
+
+------------------------------------------------------------------------
+-- EXACT 27 -> 9 -> 5 -> 3^5 symmetry-reduced native fibre action.
+--
+-- Existing owners: native C3 x Trit^N end tower, finite C3 group,
+-- native ternary fibre action, 13/27 and 5/9 source PR #1407,
+-- independent 3^5 vs 5^3 source PR #1414.
+--
+-- The H=C3_sector x C2_sign-invariant phase fields on the depth-two
+-- 27 addresses are in pointwise bijection with the fields on FIVE
+-- explicit orbit representatives of simultaneous sign reversal.
+-- This is a genuine orbit-invariant field correspondence, NOT a
+-- direct identification of the 27 addresses with a 5-element set.
+-- Its optional sixth trit is an INDEPENDENT field coordinate.
+--
+-- Alexander/Hatcher's original wild source is NOT proved here.
+-- Riemann/RH, Pickover real-angle phase and Ibrahim Monster 3B
+-- retain independent owners. Source-written Agda, kernel pending.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Product using (_×_; _,_)
+open import Data.Vec.Base using (_∷_; [])
+
+import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
+import DASHI.Algebra.BalancedTernary as T
+import DASHI.Mathematics.Topology.AlexanderHornedNativeBalancedTernaryEndTowerExact as End
+import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryFibreActionExact as Fibre
+
+data FiveOrbit : Set where
+  origin axisFirst axisSecond diagonal antiDiagonal : FiveOrbit
+
+-- Classification is deterministic without quotient axioms or
+-- propositional function-extensionality.
+orbit : T.Trit → T.Trit → FiveOrbit
+orbit T.zero T.zero = origin
+orbit T.neg  T.zero = axisFirst
+orbit T.pos  T.zero = axisFirst
+orbit T.zero T.neg  = axisSecond
+orbit T.zero T.pos  = axisSecond
+orbit T.neg  T.neg  = diagonal
+orbit T.pos  T.pos  = diagonal
+orbit T.neg  T.pos  = antiDiagonal
+orbit T.pos  T.neg  = antiDiagonal
+
+orbitReflect : ∀ a b →
+  orbit (T.negate a) (T.negate b) ≡ orbit a b
+orbitReflect T.neg T.neg = refl
+orbitReflect T.neg T.zero = refl
+orbitReflect T.neg T.pos = refl
+orbitReflect T.zero T.neg = refl
+orbitReflect T.zero T.zero = refl
+orbitReflect T.zero T.pos = refl
+orbitReflect T.pos T.neg = refl
+orbitReflect T.pos T.zero = refl
+orbitReflect T.pos T.pos = refl
+
+representative : FiveOrbit → T.Trit × T.Trit
+representative origin = T.zero , T.zero
+representative axisFirst = T.neg , T.zero
+representative axisSecond = T.zero , T.neg
+representative diagonal = T.neg , T.neg
+representative antiDiagonal = T.neg , T.pos
+
+orbitRepresentative : ∀ o →
+  orbit (Data.Product.proj₁ (representative o))
+        (Data.Product.proj₂ (representative o)) ≡ o
+orbitRepresentative origin = refl
+orbitRepresentative axisFirst = refl
+orbitRepresentative axisSecond = refl
+orbitRepresentative diagonal = refl
+orbitRepresentative antiDiagonal = refl
+
+-- The FULL 27-site local phase field already has a group structure.
+DepthTwoField : Set
+DepthTwoField = Fibre.PhaseField 2
+
+-- Fixed under external sector C3 and simultaneous sign reversal.
+record Invariant27 (f : DepthTwoField) : Set where
+  field
+    sectorFixed : ∀ c a b →
+      f (c , (a ∷ b ∷ [])) ≡
+      f (C3.c0 , (a ∷ b ∷ []))
+    signFixed : ∀ a b →
+      f (C3.c0 , (T.negate a ∷ T.negate b ∷ [])) ≡
+      f (C3.c0 , (a ∷ b ∷ []))
+
+FiveField : Set
+FiveField = FiveOrbit → C3.C3
+
+-- Every five-field supplies a field invariant under BOTH symmetries.
+inflate : FiveField → DepthTwoField
+inflate k (c , (a ∷ b ∷ [])) = k (orbit a b)
+
+inflateInvariant : ∀ k → Invariant27 (inflate k)
+inflateInvariant k = record
+  { sectorFixed = λ c a b → refl
+  ; signFixed = λ a b → cong k (orbitReflect a b)
+  }
+
+deflate : DepthTwoField → FiveField
+deflate f o with representative o
+... | (a , b) = f (C3.c0 , (a ∷ b ∷ []))
+
+deflateInflate : ∀ k o → deflate (inflate k) o ≡ k o
+deflateInflate k origin = refl
+deflateInflate k axisFirst = refl
+deflateInflate k axisSecond = refl
+deflateInflate k diagonal = refl
+deflateInflate k antiDiagonal = refl
+
+-- For a GENERAL sector/sign invariant field, these are the 9
+-- pointwise orbit normal forms. Each proof is a single application
+-- of the invariant condition or definitionally identical.
+fieldOrbitNormalForm : ∀ f →
+  Invariant27 f → ∀ a b →
+  f (C3.c0 , (a ∷ b ∷ [])) ≡ deflate f (orbit a b)
+fieldOrbitNormalForm f invariant T.neg T.neg = refl
+fieldOrbitNormalForm f invariant T.neg T.zero = refl
+fieldOrbitNormalForm f invariant T.neg T.pos = refl
+fieldOrbitNormalForm f invariant T.zero T.neg = refl
+fieldOrbitNormalForm f invariant T.zero T.zero = refl
+fieldOrbitNormalForm f invariant T.zero T.pos =
+  sym (Invariant27.signFixed invariant T.zero T.pos)
+fieldOrbitNormalForm f invariant T.pos T.neg =
+  sym (Invariant27.signFixed invariant T.pos T.neg)
+fieldOrbitNormalForm f invariant T.pos T.zero =
+  sym (Invariant27.signFixed invariant T.pos T.zero)
+fieldOrbitNormalForm f invariant T.pos T.pos =
+  sym (Invariant27.signFixed invariant T.pos T.pos)
+
+inflateDeflateInvariant : ∀ f →
+  (inv : Invariant27 f) → ∀ c a b →
+  inflate (deflate f) (c , (a ∷ b ∷ [])) ≡
+    f (c , (a ∷ b ∷ []))
+inflateDeflateInvariant f inv c a b =
+  trans (sym (fieldOrbitNormalForm f inv a b))
+        (sym (Invariant27.sectorFixed inv c a b))
+
+-- Componentwise C3 addition commutes with the reduction.
+inflateCombines : ∀ k l c a b →
+  inflate (λ o → C3._∙_ (k o) (l o)) (c , (a ∷ b ∷ []))
+  ≡ C3._∙_ (inflate k (c , (a ∷ b ∷ [])))
+             (inflate l (c , (a ∷ b ∷ [])))
+inflateCombines k l c a b = refl
+
+-- A SEPARATE external phase coordinate yields 3^6=729 states.
+-- If it duplicates one of the existing five orbit values, it is not
+-- independent and its cardinality cannot be multiplied by three.
+SixPhaseState : Set
+SixPhaseState = FiveField × C3.C3
