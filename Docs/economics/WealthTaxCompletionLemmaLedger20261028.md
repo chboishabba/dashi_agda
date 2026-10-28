@@ -1,6 +1,6 @@
 # Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
 
-Created 2026-10-28. **77 named formal obligations** across nine groups: 47 source-written (D), 11 owned by existing reusable sources (R), 19 remaining proof/contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+Created 2026-10-28. **77 named formal obligations** across nine groups: 59 source-written (D), 11 owned by existing reusable sources (R), 7 remaining proof/evidence contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
 
 Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
 
