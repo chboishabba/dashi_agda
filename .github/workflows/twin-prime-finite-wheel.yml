@@ -6,6 +6,7 @@ on:
       - "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda"
       - "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda"
       - "DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda"
+      - "DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda"
       - "scripts/check_twin_prime_six_wheel_finite.py"
       - "scripts/check_twin_prime_ssp15_crt_finite.py"
       - "scripts/check_twin_prime_arbitrary_crt_symmetry.py"
@@ -15,6 +16,7 @@ on:
       - "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda"
       - "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda"
       - "DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda"
+      - "DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda"
       - "scripts/check_twin_prime_six_wheel_finite.py"
       - "scripts/check_twin_prime_ssp15_crt_finite.py"
       - "scripts/check_twin_prime_arbitrary_crt_symmetry.py"
@@ -41,6 +43,7 @@ jobs:
               "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda",
               "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda",
               "DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda",
+              "DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda",
           )
           texts = [Path(path).read_text() for path in paths]
           for source in texts:
@@ -52,5 +55,7 @@ jobs:
               assert required in texts[1], required
           for required in ("localPairPeriodic", "certifyCandidate", "allPairSurvive?", "sspAddressSymmetryPreservesPrime"):
               assert required in texts[2], required
+          for required in ("knownAllPrimeControlCount", "ControlToCertifiedPrime"):
+              assert required in texts[3], required
           print("static source check passed; NOT an Agda kernel receipt")
           PY
