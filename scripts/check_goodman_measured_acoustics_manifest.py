@@ -54,6 +54,8 @@ def split_blocks(rows, seed):
     blocks = {}
     seen_position_block = {}
     for row in rows:
+        if not isinstance(row, dict):
+            raise ValueError("position records must be objects")
         sc = row.get("scenario")
         pos = str(row.get("position_id", ""))
         block = str(row.get("spatial_block", ""))
@@ -169,6 +171,12 @@ def main():
     positions = json.loads(Path(args.positions).read_text())
     if not isinstance(positions, list) or not positions:
         raise ValueError("source-position metadata required")
+    expected_counts = {"A1": 4096, "A2": 4096, "D1": 1089, "R2": 4096}
+    observed = {(row["scenario"], str(row["position_id"])) for row in positions}
+    if len(observed) != 13377:
+        raise ValueError("expected 13,377 distinct source-position identities")
+    if {sc: sum(sc0 == sc for sc0, _ in observed) for sc in expected_counts} != expected_counts:
+        raise ValueError("source-position counts differ from MIRACLE version 4")
     groups = split_blocks(positions, args.seed)
     enforce_spatial_buffer(positions, groups, args.min_separation_m)
     counts = {partition: sum(len(g["positions"]) for g in groups if g["partition"] == partition)
@@ -176,6 +184,7 @@ def main():
     if any(counts[name] == 0 for name in counts):
         raise ValueError("incomplete held-out partition: all four partitions need independent groups")
     result = {"dataset_doi": LATEST_DOI, "sha256_verified": True,
+              "position_metadata_sha256": digest(Path(args.positions)),
               "partitions": groups, "partition_position_counts": counts,
               "min_separation_m": args.min_separation_m,
               "measurement_results": None,
