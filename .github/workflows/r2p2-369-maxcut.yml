@@ -8,6 +8,7 @@ on:
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'scripts/r2p2_clock_comparison_diagnostic.py'
+      - 'scripts/r2p2_optical_lattice_3site_diagnostic.py'
       - 'tests/test_r2p2_*.py'
       - 'Docs/papers/R2P2*.md'
       - '.github/workflows/r2p2-369-maxcut.yml'
@@ -35,6 +36,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_r2p2_*.py' -v
           python scripts/r2p2_clock_comparison_diagnostic.py
+          python scripts/r2p2_optical_lattice_3site_diagnostic.py
 
   focused-agda:
     runs-on: ubuntu-24.04
