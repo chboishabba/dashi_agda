@@ -1,26 +1,23 @@
 module DASHI.Mathematics.Topology.AlexanderHornedNativeTernarySemidirectActionExact where
 
 ------------------------------------------------------------------------
--- NEW OWNER EXTENSION: NATIVE TERNARY FIBRE SEMIDIRECT ACTION.
+-- REUSE-FIRST SEMIDIRECT FIELD-ACTION / REFINEMENT ADAPTER.
 --
--- REUSE, DO NOT DUPLICATE:
--- AlexanderHornedNativeTernaryFibreActionExact already constructs the
--- C3^X local group, its free/transitive field action, injective
--- refinement pullbacks and coherent infinite-end evaluation.
+-- ORIGINAL OWNERS (both already on PR #1244):
+-- * NativeTernaryFibreActionExact: Map(K_n,C3) group, local torsor,
+--   injective pullback and coherent end evaluation.
+-- * NativeTernaryLocalPhaseActionExact: correct inverse-sector twist,
+--   semidirect multiplication, both inverses, associativity,
+--   end-cylinder relation and rotation-preserving refinement.
 --
--- This extension adds the INVERSE-PULLBACK sector action of C3,
--- the finite semidirect product, multiplication/action composition,
--- and compatibility with the already owned injective pullbacks.
+-- THIS source adds only the action of that already-defined group
+-- on phase fields, a proof that multiplication agrees with sequential
+-- action, and faithful equivariant refinement of that action. No new
+-- competing group laws, no function extensionality or postulates.
 --
--- |X_n|=3^(n+1), |Map(X_n,C3)|=3^(3^(n+1)),
--- |Map(X_n,C3) ⋊ C3|=3^(3^(n+1)+1).
--- At n=2 the local subgroup has 3^27 elements. This is a
--- group of END-FIBRE transformations, NOT the horned-exterior
--- orbifold fundamental group or a physical gauge holonomy.
---
--- Attribution: classical permutational wreath products; Hatcher's
--- binary geometry owned by #1244; actual original group and field
--- source proofs reused, not reassigned. Agda kernel check pending.
+-- The original horned exterior π1, Monster 3B and SU2 holonomy
+-- remain separate. Historical group-theory and source author credits
+-- belong to original math and earlier named DASHI owners.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -29,19 +26,46 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
 import DASHI.Mathematics.Topology.AlexanderHornedNativeBalancedTernaryEndTowerExact as End
-import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryFibreActionExact as Native
+import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryFibreActionExact as Fibre
+import DASHI.Mathematics.Topology.AlexanderHornedNativeTernaryLocalPhaseActionExact as Owner
 
 Gauge : Nat → Set
-Gauge = Native.FibreAction
+Gauge = Fibre.FibreAction
 
 Field : Nat → Set
-Field = Native.PhaseField
+Field = Fibre.PhaseField
 
-addGauge : ∀ {n} → Gauge n → Gauge n → Gauge n
-addGauge = Native.combine
+FieldSymmetry : Nat → Set
+FieldSymmetry = Owner.TwistedPhase
+
+fieldSymmetry : ∀ {n} → Gauge n → C3.C3 → FieldSymmetry n
+fieldSymmetry = Owner.twistedPhase
+
+localRotation : ∀ {n} → FieldSymmetry n → Gauge n
+localRotation = Owner.gauge
+
+sectorRotation : ∀ {n} → FieldSymmetry n → C3.C3
+sectorRotation = Owner.sector
 
 zeroGauge : ∀ n → Gauge n
-zeroGauge n = Native.identityAction
+zeroGauge n = Fibre.identityAction
+
+addGauge : ∀ {n} → Gauge n → Gauge n → Gauge n
+addGauge = Fibre.combine
+
+sectorAction : ∀ n → C3.C3 → Gauge n → Gauge n
+sectorAction n r f = Owner.shiftField r f
+
+combineSymmetry :
+  ∀ {n} → FieldSymmetry n → FieldSymmetry n →
+  FieldSymmetry n
+combineSymmetry {n} = Owner.twistedMultiply n
+
+identitySymmetry : ∀ n → FieldSymmetry n
+identitySymmetry = Owner.twistedUnit
+
+inverseSymmetry : ∀ {n} → FieldSymmetry n → FieldSymmetry n
+inverseSymmetry {n} = Owner.twistedInverse n
 
 commutativeC3 : ∀ a b → C3._∙_ a b ≡ C3._∙_ b a
 commutativeC3 C3.c0 C3.c0 = refl
@@ -54,95 +78,25 @@ commutativeC3 C3.c2 C3.c0 = refl
 commutativeC3 C3.c2 C3.c1 = refl
 commutativeC3 C3.c2 C3.c2 = refl
 
--- Earlier owner chooses FORWARD pullback rotation (precomposition).
--- Left group action on fields MUST use inverse pullback. Thus sector
--- c1 acts by the square of the existing forward rotation.
-sectorAction : ∀ n → C3.C3 → Gauge n → Gauge n
-sectorAction n C3.c0 f = f
-sectorAction n C3.c1 f =
-  Native.rotateField n (Native.rotateField n f)
-sectorAction n C3.c2 f = Native.rotateField n f
-
-sectorActionIdentity :
-  ∀ n (f : Gauge n) (x : End.BalancedLevel n) →
-  sectorAction n C3.c0 f x ≡ f x
-sectorActionIdentity n f x = refl
-
 sectorActionComposition :
-  ∀ n (r s : C3.C3) (f : Gauge n) (x : End.BalancedLevel n) →
-  sectorAction n (C3._∙_ r s) f x
-    ≡ sectorAction n r (sectorAction n s f) x
-sectorActionComposition n C3.c0 s f x = refl
-sectorActionComposition n C3.c1 C3.c0 f x = refl
-sectorActionComposition n C3.c1 C3.c1 f x =
-  sym (Native.rotateFieldCubed n (Native.rotateField n f) x)
-sectorActionComposition n C3.c1 C3.c2 f x =
-  sym (Native.rotateFieldCubed n f x)
-sectorActionComposition n C3.c2 C3.c0 f x = refl
-sectorActionComposition n C3.c2 C3.c1 f x =
-  sym (Native.rotateFieldCubed n f x)
-sectorActionComposition n C3.c2 C3.c2 f x = refl
-
-sectorActionDistributes :
-  ∀ n (r : C3.C3) (g h : Gauge n)
+  ∀ n (r s : C3.C3) (g : Gauge n)
   (x : End.BalancedLevel n) →
-  sectorAction n r (addGauge g h) x
-    ≡ addGauge (sectorAction n r g) (sectorAction n r h) x
-sectorActionDistributes n C3.c0 g h x = refl
-sectorActionDistributes n C3.c1 g h x = refl
-sectorActionDistributes n C3.c2 g h x = refl
-
-sectorActionPreservesZero :
-  ∀ n (r : C3.C3) (x : End.BalancedLevel n) →
-  sectorAction n r (zeroGauge n) x ≡ C3.c0
-sectorActionPreservesZero n C3.c0 x = refl
-sectorActionPreservesZero n C3.c1 x = refl
-sectorActionPreservesZero n C3.c2 x = refl
-
-sectorActionPreservesInverse :
-  ∀ n (r : C3.C3) (g : Gauge n)
-  (x : End.BalancedLevel n) →
-  sectorAction n r (Native.inverseAction g) x
-    ≡ C3.inverse (sectorAction n r g x)
-sectorActionPreservesInverse n C3.c0 g x = refl
-sectorActionPreservesInverse n C3.c1 g x = refl
-sectorActionPreservesInverse n C3.c2 g x = refl
+  sectorAction n (C3._∙_ r s) g x
+    ≡ sectorAction n r (sectorAction n s g) x
+sectorActionComposition n r s g x =
+  Owner.shiftFieldComposeAt r s g x
 
 sectorActionPullbackSquare :
   ∀ n (r : C3.C3) (g : Gauge n)
   (x : End.BalancedLevel (suc n)) →
-  Native.pullback n (sectorAction n r g) x
-    ≡ sectorAction (suc n) r (Native.pullback n g) x
-sectorActionPullbackSquare n C3.c0 g x = refl
-sectorActionPullbackSquare n C3.c1 g x =
-  trans
-    (sym (Native.rotatePullbackSquare n (Native.rotateField n g) x))
-    (sym (Native.rotatePullbackSquare n g
-      (End.rotateBalancedLevel (suc n) x)))
-sectorActionPullbackSquare n C3.c2 g x =
-  sym (Native.rotatePullbackSquare n g x)
-
-record FieldSymmetry (n : Nat) : Set where
-  constructor fieldSymmetry
-  field
-    localRotation : Gauge n
-    sectorRotation : C3.C3
-open FieldSymmetry public
-
-identitySymmetry : ∀ n → FieldSymmetry n
-identitySymmetry n = fieldSymmetry (zeroGauge n) C3.c0
-
-combineSymmetry :
-  ∀ {n} → FieldSymmetry n → FieldSymmetry n →
-  FieldSymmetry n
-combineSymmetry {n} (fieldSymmetry g r) (fieldSymmetry h s) =
-  fieldSymmetry
-    (addGauge g (sectorAction n r h))
-    (C3._∙_ r s)
+  Fibre.pullback n (sectorAction n r g) x
+    ≡ sectorAction (suc n) r (Fibre.pullback n g) x
+sectorActionPullbackSquare n r g x =
+  Owner.refineRotationSquare n r g x
 
 actOnField : ∀ {n} → FieldSymmetry n → Field n → Field n
-actOnField {n} (fieldSymmetry g r) f =
-  Native.act g (sectorAction n r f)
+actOnField a f =
+  Fibre.act (localRotation a) (Owner.shiftField (sectorRotation a) f)
 
 identityActs :
   ∀ n (f : Field n) (x : End.BalancedLevel n) →
@@ -154,64 +108,58 @@ semidirectActionComposition :
   (f : Field n) (x : End.BalancedLevel n) →
   actOnField (combineSymmetry a b) f x
     ≡ actOnField a (actOnField b f) x
-semidirectActionComposition {n}
-  (fieldSymmetry g r) (fieldSymmetry h s) f x =
+semidirectActionComposition {n} a b f x =
   trans
     (cong
-      (λ t → C3._∙_ (C3._∙_ (g x) (sectorAction n r h x)) t)
-      (sectorActionComposition n r s f x))
+      (λ z → C3._∙_
+        (C3._∙_ (localRotation a x)
+          (Owner.shiftField (sectorRotation a) (localRotation b) x))
+        z)
+      (Owner.shiftFieldComposeAt
+        (sectorRotation a) (sectorRotation b) f x))
     (trans
       (C3.associative
-        (g x) (sectorAction n r h x)
-        (sectorAction n r (sectorAction n s f) x))
-      (cong (λ t → C3._∙_ (g x) t)
-        (sym (sectorActionDistributes n r h
-          (sectorAction n s f) x))))
+        (localRotation a x)
+        (Owner.shiftField (sectorRotation a) (localRotation b) x)
+        (Owner.shiftField (sectorRotation a)
+          (Owner.shiftField (sectorRotation b) f) x))
+      (cong
+        (λ z → C3._∙_ (localRotation a x) z)
+        (sym (Owner.shiftFieldAddAt
+          (sectorRotation a)
+          (localRotation b)
+          (Owner.shiftField (sectorRotation b) f) x))))
 
-sectorProjectionPreservesProduct :
-  ∀ {n} (a b : FieldSymmetry n) →
-  sectorRotation (combineSymmetry a b)
-    ≡ C3._∙_ (sectorRotation a) (sectorRotation b)
-sectorProjectionPreservesProduct a b = refl
-
--- The twisted group operation is associative pointwise on its function
--- component; no function extensionality axiom is needed.
 semidirectGaugeAssociativity :
   ∀ {n} (a b c : FieldSymmetry n)
   (x : End.BalancedLevel n) →
   localRotation (combineSymmetry (combineSymmetry a b) c) x
     ≡ localRotation (combineSymmetry a (combineSymmetry b c)) x
-semidirectGaugeAssociativity {n}
-  (fieldSymmetry g r) (fieldSymmetry h s)
-  (fieldSymmetry k t) x =
-  trans
-    (C3.associative (g x) (sectorAction n r h x)
-      (sectorAction n (C3._∙_ r s) k x))
-    (trans
-      (cong
-        (λ z → C3._∙_ (g x) (C3._∙_ (sectorAction n r h x) z))
-        (sectorActionComposition n r s k x))
-      (cong (λ t → C3._∙_ (g x) t)
-        (sym (sectorActionDistributes n r h
-          (sectorAction n s k) x))))
+semidirectGaugeAssociativity {n} a b c x =
+  Owner.twistedAssociativeGaugeAt n a b c x
 
 semidirectSectorAssociativity :
   ∀ {n} (a b c : FieldSymmetry n) →
   sectorRotation (combineSymmetry (combineSymmetry a b) c)
     ≡ sectorRotation (combineSymmetry a (combineSymmetry b c))
-semidirectSectorAssociativity a b c =
-  C3.associative (sectorRotation a) (sectorRotation b) (sectorRotation c)
+semidirectSectorAssociativity {n} a b c =
+  Owner.twistedAssociativeSector n a b c
 
+semidirectLeftInverseGauge :
+  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
+  localRotation (combineSymmetry (inverseSymmetry a) a) x ≡ C3.c0
+semidirectLeftInverseGauge {n} a x =
+  Owner.twistedInverseLeftGaugeAt n a x
 
-------------------------------------------------------------------------
--- Refine the WHOLE semidirect actor along the established injective
--- fibre-group pullback while keeping the external sector unchanged.
-------------------------------------------------------------------------
+semidirectRightInverseGauge :
+  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
+  localRotation (combineSymmetry a (inverseSymmetry a)) x ≡ C3.c0
+semidirectRightInverseGauge {n} a x =
+  Owner.twistedInverseRightGaugeAt n a x
 
 refineSymmetry :
   ∀ n → FieldSymmetry n → FieldSymmetry (suc n)
-refineSymmetry n (fieldSymmetry g r) =
-  fieldSymmetry (Native.pullback n g) r
+refineSymmetry = Owner.refineTwisted
 
 refineSymmetrySectorUnchanged :
   ∀ n (a : FieldSymmetry n) →
@@ -225,25 +173,21 @@ refineSymmetryPreservesMultiplication :
   ≡ localRotation
        (combineSymmetry (refineSymmetry n a)
                         (refineSymmetry n b)) x
-refineSymmetryPreservesMultiplication n
-  (fieldSymmetry g r) (fieldSymmetry h s) x =
-  trans
-    (Native.pullbackMultiplication n g (sectorAction n r h) x)
-    (cong
-      (λ t → C3._∙_ (Native.pullback n g x) t)
-      (sectorActionPullbackSquare n r h x))
+refineSymmetryPreservesMultiplication n a b x =
+  Owner.refineTwistedGaugeHomomorphismAt n a b x
 
 refineSymmetryPreservesAction :
   ∀ n (a : FieldSymmetry n) (f : Field n)
   (x : End.BalancedLevel (suc n)) →
-  Native.pullback n (actOnField a f) x
-  ≡ actOnField (refineSymmetry n a) (Native.pullback n f) x
-refineSymmetryPreservesAction n (fieldSymmetry g r) f x =
+  Fibre.pullback n (actOnField a f) x
+    ≡ actOnField (refineSymmetry n a) (Fibre.pullback n f) x
+refineSymmetryPreservesAction n a f x =
   trans
-    (Native.pullbackMultiplication n g (sectorAction n r f) x)
+    (Fibre.pullbackMultiplication n (localRotation a)
+      (Owner.shiftField (sectorRotation a) f) x)
     (cong
-      (λ t → C3._∙_ (Native.pullback n g x) t)
-      (sectorActionPullbackSquare n r f x))
+      (λ v → C3._∙_ (Fibre.pullback n (localRotation a) x) v)
+      (Owner.refineRotationSquare n (sectorRotation a) f x))
 
 refineSymmetryFaithful :
   ∀ n (a b : FieldSymmetry n) →
@@ -254,81 +198,10 @@ refineSymmetryFaithful :
     ≡ sectorRotation (refineSymmetry n b) →
   ((x : End.BalancedLevel n) →
     localRotation a x ≡ localRotation b x)
-refineSymmetryFaithful n a b pointwiseEqual sectorEqual =
-  Native.pullbackInjective n (localRotation a) (localRotation b)
-    pointwiseEqual
+refineSymmetryFaithful n a b sameGauges sameSectors =
+  Fibre.pullbackInjective n (localRotation a) (localRotation b)
+    sameGauges
 
-
-------------------------------------------------------------------------
--- CLOSE THE FINITE SEMIDIRECT GROUP LAWS POINTWISE.
--- Source owner supplies the C3 inverse on gauge values. The external
--- C3 inverse additionally moves the ADDRESS before sign inversion.
-------------------------------------------------------------------------
-
-inverseSymmetry :
-  ∀ {n} → FieldSymmetry n → FieldSymmetry n
-inverseSymmetry {n} (fieldSymmetry g r) =
-  fieldSymmetry
-    (Native.inverseAction (sectorAction n (C3.inverse r) g))
-    (C3.inverse r)
-
-sectorActionCancelsItsInverse :
-  ∀ n (r : C3.C3) (g : Gauge n)
-  (x : End.BalancedLevel n) →
-  sectorAction n r (sectorAction n (C3.inverse r) g) x ≡ g x
-sectorActionCancelsItsInverse n C3.c0 g x = refl
-sectorActionCancelsItsInverse n C3.c1 g x =
-  Native.rotateFieldCubed n g x
-sectorActionCancelsItsInverse n C3.c2 g x =
-  Native.rotateFieldCubed n g x
-
-semidirectRightInverseGauge :
-  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
-  localRotation (combineSymmetry a (inverseSymmetry a)) x ≡ C3.c0
-semidirectRightInverseGauge {n} (fieldSymmetry g r) x =
-  trans
-    (cong (λ t → C3._∙_ (g x) t)
-      (sectorActionPreservesInverse n r
-        (sectorAction n (C3.inverse r) g) x))
-    (trans
-      (cong (λ value → C3._∙_ (g x) (C3.inverse value))
-        (sectorActionCancelsItsInverse n r g x))
-      (C3.inverseRight (g x)))
-
-semidirectRightInverseSector :
-  ∀ {n} (a : FieldSymmetry n) →
-  sectorRotation (combineSymmetry a (inverseSymmetry a)) ≡ C3.c0
-semidirectRightInverseSector (fieldSymmetry g r) =
-  C3.inverseRight r
-
-semidirectLeftInverseGauge :
-  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
-  localRotation (combineSymmetry (inverseSymmetry a) a) x ≡ C3.c0
-semidirectLeftInverseGauge {n} (fieldSymmetry g r) x =
-  C3.inverseLeft (sectorAction n (C3.inverse r) g x)
-
-semidirectLeftInverseSector :
-  ∀ {n} (a : FieldSymmetry n) →
-  sectorRotation (combineSymmetry (inverseSymmetry a) a) ≡ C3.c0
-semidirectLeftInverseSector (fieldSymmetry g r) =
-  C3.inverseLeft r
-
-semidirectLeftIdentityGauge :
-  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
-  localRotation (combineSymmetry (identitySymmetry n) a) x
-    ≡ localRotation a x
-semidirectLeftIdentityGauge a x = refl
-
-semidirectRightIdentityGauge :
-  ∀ {n} (a : FieldSymmetry n) (x : End.BalancedLevel n) →
-  localRotation (combineSymmetry a (identitySymmetry n)) x
-    ≡ localRotation a x
-semidirectRightIdentityGauge {n} a x =
-  trans
-    (cong (λ t → C3._∙_ (localRotation a x) t)
-      (sectorActionPreservesZero n (sectorRotation a) x))
-    (C3.rightIdentity (localRotation a x))
-
--- These named operations are on finite-depth C3 fields; their direct
--- limit equals the locally constant continuous group only after an
--- independent compact-clopen factorization/colimit proof.
+-- The original owner also proves a strong cylinder-setoid congruence
+-- under sector rotation and gauge-invariant observer triviality.
+-- No second such record/type is created here.
