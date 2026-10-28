@@ -60,7 +60,21 @@ def run():
     out.append(test_case('same content does not determine deception', shared_content,
         same_content, dict(zip(shared_content, ('intent-unpaid', 'intent-paid'))), False))
 
-    assert len(out) == 6
+    # M1 four-world interaction: neither signal nor context alone suffices,
+    # but their joint observation recovers the synthetic response exactly.
+    scenes = ('quiet-protected', 'quiet-exposed', 'loud-protected', 'loud-exposed')
+    signal = dict(zip(scenes, ('quiet', 'quiet', 'loud', 'loud')))
+    context = dict(zip(scenes, ('protected', 'exposed', 'protected', 'exposed')))
+    response = dict(zip(scenes, ('baseline', 'baseline', 'baseline', 'elevated')))
+    joint = {state: (signal[state], context[state]) for state in scenes}
+    out.append(test_case('signal alone fails contextual response', scenes,
+        signal, response, False))
+    out.append(test_case('context alone fails contextual response', scenes,
+        context, response, False))
+    out.append(test_case('joint signal and context determine toy response', scenes,
+        joint, response, True))
+
+    assert len(out) == 9
     print(dumps({"mode": "finite-exhaustive-synthetic-only",
                  "all_passed": True, "tests": out,
                  "non_promotion": ["not-Agda-kernel", "not-measured-acoustics",
