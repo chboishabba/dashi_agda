@@ -37,9 +37,13 @@ def fold_cube(mode, grid):
 def convolution_pair_bilinear(left, right, grid=None):
     coefficients = defaultdict(int)
     for p, q in PAIRS729:
-        k = integer_sum(p, q)
         if grid:
-            k = fold_cube(k, grid)
+            # Genuine cyclic group operation on the encoded inputs,
+            # rather than calculating the Z³ sum and relabelling it.
+            k = tuple(fold(fold(a, grid) + fold(b, grid), grid)
+                      for a, b in zip(p, q))
+        else:
+            k = integer_sum(p, q)
         coefficients[k] += left[p] * right[q]
     return coefficients
 
@@ -107,9 +111,11 @@ def cyclotomic_bilinear_audit():
     def conv(grid=None):
         output = defaultdict(lambda: (Fraction(0), Fraction(0)))
         for p, q in PAIRS729:
-            k = integer_sum(p, q)
             if grid:
-                k = fold_cube(k, grid)
+                k = tuple(fold(fold(x, grid) + fold(y, grid), grid)
+                          for x, y in zip(p, q))
+            else:
+                k = integer_sum(p, q)
             a,b = output[k]
             c,d = c3_multiply(left[p], right[q])
             output[k] = (a+c,b+d)
@@ -136,6 +142,7 @@ def audit():
         "retained_mode_labels": 27,
         "all_quadratic_output_labels": 125,
         "ordered_pair_interactions": 729,
+        "modular_sum_is_computed_from_encoded_inputs": True,
         "three_grid_capacity": 27,
         "four_grid_capacity": 64,
         "five_grid_capacity": 125,
