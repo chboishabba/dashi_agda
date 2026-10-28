@@ -3166,6 +3166,32 @@ policySwapCannotBeAdmittedParetoSymmetry symmetry swapping =
         administrationAxis lowAdministrativeCost))
       (cong (policyAxisCost administrationAxis) swapping))
 
+-- Non-vacuous strengthening: in THIS TWO-OPTION FIXTURE the declared
+-- administration-cost coordinate is injective. Hence *every* qualified
+-- Pareto automorphism fixes *every* policy candidate.
+-- This is not a general claim about arbitrary finance or care models.
+administrativeCostInjectiveOnTwoPolicyFixture :
+  {left right : HypotheticalPolicyOutcome} →
+  policyAxisCost administrationAxis left
+    ≡ policyAxisCost administrationAxis right →
+  left ≡ right
+administrativeCostInjectiveOnTwoPolicyFixture
+  {lowAdministrativeCost} {lowAdministrativeCost} refl = refl
+administrativeCostInjectiveOnTwoPolicyFixture
+  {lowAdministrativeCost} {increasedCareCapacity} ()
+administrativeCostInjectiveOnTwoPolicyFixture
+  {increasedCareCapacity} {lowAdministrativeCost} ()
+administrativeCostInjectiveOnTwoPolicyFixture
+  {increasedCareCapacity} {increasedCareCapacity} refl = refl
+
+everyQualifiedParetoSymmetryFixesBothPolicies :
+  (symmetry : ParetoSym.ParetoOrderAutomorphism policyTradeoffCosts) →
+  (candidate : HypotheticalPolicyOutcome) →
+  ParetoSym.mapModel symmetry candidate ≡ candidate
+everyQualifiedParetoSymmetryFixesBothPolicies symmetry candidate =
+  administrativeCostInjectiveOnTwoPolicyFixture
+    (ParetoSym.preservesAxisCost symmetry administrationAxis candidate)
+
 -- A valid cost-preserving quotient cannot merge these two policies,
 -- even though their unweighted totals agree. We prove the actual
 -- contract violation rather than inferring it from a matching numeral.
