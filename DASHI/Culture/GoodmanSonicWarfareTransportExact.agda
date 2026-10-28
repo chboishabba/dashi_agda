@@ -23,6 +23,8 @@ open import Data.Empty using (⊥)
 import DASHI.Physics.ObserverConditionedTransportBridge as Transport
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
+import DASHI.Core.RobustExperimentInferenceFrontierExact as Robust
+import DASHI.Core.FrozenHeldOutRepairRefinementExact as FrozenHeldOut
 
 data ToySoundSource : Set where
   sourceOff : ToySoundSource
@@ -404,3 +406,26 @@ paretoPairFactorsThroughFullObservation absorbingOn = refl
 -- Only *relative* minimality was shown. The medium coordinate was assumed
 -- independently observable. No measured sensor, instrumentation budget,
 -- physical constitutive law or new causal force is supplied.
+
+------------------------------------------------------------------------
+-- T6: ROBUST INVERSION / OUT-OF-SAMPLE AUTHORITY DOES NOT FOLLOW.
+--
+-- The 2x2 rational example in scripts/check_goodman_inverse_stability_finite.py
+-- distinguishes invertibility from a uniform noise-amplification bound.
+-- It is an executed finite regression, not an Agda proof of a general
+-- real-matrix theorem. The following direct re-exports are inherited,
+-- separately authored anti-promotion results, not new DASHI theorems.
+------------------------------------------------------------------------
+
+sonicFitDoesNotEstablishAdequacy :
+  (Robust.fit Robust.adequateModel
+    ≡ Robust.fit Robust.inadequateModel) ×
+  (Robust.adequate Robust.adequateModel
+    ≡ Robust.adequate Robust.inadequateModel → ⊥)
+sonicFitDoesNotEstablishAdequacy = Robust.sameFitDifferentAdequacy
+
+sonicTrainingFitDoesNotPayHeldOutValidation :
+  FrozenHeldOut.TrainingFitCreatesHeldOutValidity → ⊥
+sonicTrainingFitDoesNotPayHeldOutValidation =
+  FrozenHeldOut.trainingFitDoesNotCreateHeldOutValidity
+
