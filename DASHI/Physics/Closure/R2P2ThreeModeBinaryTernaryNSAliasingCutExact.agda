@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as NSFourier
 import DASHI.Physics.Closure.NSCross369OrientationBridgeExact as NS369
 import DASHI.Physics.Closure.NSTriadKN369HighHighGramBridgeReceipt as Gram
 import DASHI.Physics.CFD.SparseTwistLESBridge as LES
+import DASHI.Physics.CFD.SparseTwistLESOperator as LESOp
 import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as Optical
 
 data ThreeMode : Set where
@@ -123,8 +124,10 @@ binarySubcarrierRoundTrip true = refl
 zeroModeIsNotAnEmbeddedBit :
   (bit : Bool) →
   modeToBalancedSSP (bitToNonzeroMode bit) ≡ SSP.sspZero → ⊥
-zeroModeIsNotAnEmbeddedBit bit =
-  BinaryInTernary.centreIsUnusedByBinaryEmbedding bit
+zeroModeIsNotAnEmbeddedBit false =
+  BinaryInTernary.centreIsUnusedByBinaryEmbedding false
+zeroModeIsNotAnEmbeddedBit true =
+  BinaryInTernary.centreIsUnusedByBinaryEmbedding true
 
 -- Qutrit *basis label* reuse. Not a quantum state-space equivalence.
 threeModeToQutritBasis :
@@ -237,7 +240,7 @@ nsGramIsNotPromotedByThreeModeAliasing =
     Gram.canonicalNSTriadKN369HighHighGramBridgeReceipt
 
 nsLESProxyDoesNotSolveNS :
-  LES.navierStokesSolved LES.canonicalDASHILESClaimBoundary ≡ false
+  LESOp.DASHILESClaimBoundary.navierStokesSolved LES.canonicalDASHILESClaimBoundary ≡ false
 nsLESProxyDoesNotSolveNS = refl
 
 -- In the Ma 2026 optical lattice Fourier supercell, ±11 and ±18 are
