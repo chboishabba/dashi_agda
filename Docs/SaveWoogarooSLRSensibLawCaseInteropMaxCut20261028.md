@@ -128,3 +128,55 @@ retains `creates_actual_reopening=false` and
 an unmerged sibling's persistence flow. Source-written Rust regression
 covers direct ID retention, the advice second-order cone and rejection
 of unknown packet IDs. Cargo execution remains unverified.
+
+
+## 28 October — explicit seven-ground FOR/AGAINST logical testing
+
+New canonically imported Agda consumer:
+`DASHI/Law/SensibLawWoogarooAdversarialLogicalTests20261028Exact.agda`.
+This REUSES existing owners: `PredicateNormalFormLogicalCalculusExact`
+(sequent and implication introduction/elimination),
+`SpacyDependencyToCandidateLogicalPNFExact` (ground-indexed formulae),
+`FixedWidthTruthTableCNFExact` (Boolean interpretation),
+`CounterexampleGuidedConsumerRefinementExact`, the
+`ContradictionPreservingReasoningPipelineExact`, historical
+`SensibLawWoogarooForAgainstLegalHoleMatrixExact`, current
+`SensibLawWoogarooEPBC8575PleadableGroundsPrecedentCut20261028Exact`,
+`SensibLawWoogarooEPBC20198575ApplicableLawMatrixExact`,
+and the existing `ParetoSnowballAcquisitionExact` and Ibrahim DOI/QID/
+Dewey source-genealogy owners. The earlier pre-approval for/against
+hole row remains a historical state; the new test is post-approval.
+
+Results are **conditional formal constructs only**: each of the seven
+ground keys has a native PNF `rule + premise |- consequence` applicant
+and respondent derivation. No original rule or premise is paid here.
+All seven have a finite Boolean countermodel `Lead=true,
+required legal bridge=false`, refuting ONLY the unconstrained
+shortcut `Lead => Bridge` in the stipulated independent valuation;
+this is not evidence that the bridge is false in the real world.
+A six-axis `HypotheticalWorld` retains applicability, alleged error,
+materiality, asserted compliance, reviewed evidence and ecological
+harm separately. Its mutually exclusive applicant/defence profiles
+do not imply a Court outcome. If defect and compliance are both
+asserted, the tension is retained and **neither** branch is promoted.
+Ecological harm may coexist with a modelled complying decision;
+lack of actual reviewed evidence produces neither branch.
+
+`scripts/check_woogaroo_adversarial_finite_worlds.py` independently
+enumerates the seven-ground / 64-world finite schema and checks
+contradiction retention, no simultaneous branch promotion, review
+gating, and harm != automatic legal invalidity. The **finite reference
+model is not a statutory sufficiency test**. SLR PR #59 mirrors the
+schema in its source-written Rust `WoogarooHypotheticalWorld` consumer,
+with 448 proposed exhaustive test cases and a special contradictory
+case per ground. These source-written fixtures do **not** count as
+source review, Agda kernel checking, Cargo execution, or a real SLR
+dispute settlement. All seven ground evidentiary gates remain 0.
+
+Conclusive next tasks cannot be replaced by theorem syntax:
+signed decision, operative conditions, original section 95B sent
+comments, 95C and actual advice consideration, saved-law original,
+applicant-specific standing/clock, stage works and corridor ecology.
+No ESD surface touched. No generic calculus or source/payment store
+duplicated. Original law authors, scientists, courts, historical
+SensibLaw and Ibrahim source/PR proof ownership retained.
