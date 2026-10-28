@@ -35,6 +35,7 @@ import DASHI.Reasoning.RelationalTernaryPhaseGeometry
 import DASHI.Reasoning.TernaryComparisonSynthesisExact
 import DASHI.Reasoning.DialecticXYInteractionZTransportExact
 import DASHI.Reasoning.Dialectic27ThreeColourPantsSeamExact
+import DASHI.Combinatorics.Dialectic27PantsNativeGridAdjacencyExact
 import DASHI.Reasoning.TernarySynthesisCellComplexExact
 import DASHI.Reasoning.TernarySynthesisLogicQualificationExact
 import DASHI.Reasoning.TernarySynthesisTransportWeldExact
