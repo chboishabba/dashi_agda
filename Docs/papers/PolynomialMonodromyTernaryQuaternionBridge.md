@@ -222,3 +222,76 @@ Compare to our other two-state refinements: quaternion central \`±1\`, binary c
 A further external prior-art confirmation is the American Mathematical Society account of the Artin braid-group exact sequence \`1 → P_n → B_n → S_n → 1\`, https://doi.org/10.1090/noti2452, and the source about exponent-sum \`B_n → ℤ\` (which distinguishes σ₀² from the identity), https://stoimenov.net/stoimeno/homepage/papers/burex2.pdf. Those are mathematical source authorities, not proof terms automatically imported into Agda.
 
 **Execution update:** The independent exact replay also checked \`Permutation5 ↔ DistinctTriple5 × Orientation2\` as a bijection over all 120 permutations, verified 60 even permutations and 60 distinct triples, and found exactly one even completion per triple. The committed script includes this 120-case replay, but an execution from that exact GitHub blob is not recorded.
+
+
+## 2026-10-28 attached Alexander–Hatcher steelman + Gamma/9999! + Pickover/Spin cut
+
+**Attachment provenance:** the newly supplied 613-line file *The full formalism of our current steelman* is a user's research synthesis, NOT an Agda source, independent kernel receipt or proof of the geometric wild embedding. It discusses Alexander's classical wild ball, Hatcher's Example 2B.2, the three-factor limit group, perfectness, \(C_3\) outer automorphisms, binary icosahedral \(2I\) gauge holonomy, and a Pickover phase. The attachment does **not** contain verbatim evidence of the separate video's phrase “theta is the factorial function”; treat that as an interpretation to resolve using notation evidence, not a transcript-verified historical quote.
+
+### Critical notation and original-phase target
+
+- The standard analytic extension of factorial is **Euler's \(\Gamma\)**, with capital Gamma notation attributed to Legendre: \(\Gamma(n+1)=n!\). In particular \(\Gamma(10000)=9999!\), not \(\Gamma(9999)=9999!\).
+- The symbol **\(\theta\)** ordinarily denotes an **angle** in \(z=e^{i\theta}\), or, in a different context, a Jacobi theta function. Neither is *definitionally* the factorial function. A source may make a private substitution \(\theta:=n!\) or \(\theta:=99^{n!}\), but that is an expression assigned to an angle, not an identity between \(\theta\) and \(\Gamma\).
+- NIST primary reference on notation: https://dlmf.nist.gov/5.1, Gamma integral and residues: https://dlmf.nist.gov/5.2, Jacobi theta functions: https://dlmf.nist.gov/20.2.
+- **Exact intended object:** \(E=9999!=\Gamma(10000)\), \(M=99^E\). This is not \((99^{9999})!\), \(99^{\Gamma(9999)}\), superfactorial or a power tower.
+- **Actual hard real analytic target:** \(\operatorname{sgn}(\sin M)=\operatorname{sgn}(\Im e^{iM})\), in **radians**. Equivalently \( (-1)^{\lfloor M/\pi\rfloor}\) for this nonzero integer \(M\) (not an integer multiple of \(\pi\)). No exact terminal real interval or parity certificate has been constructed.
+- **Different solved degree-angle target:** \(\operatorname{sgn}(\sin(M\pi/180))=+\), since \(M\bmod 360=81\) and \(81^\circ\in(0^\circ,180^\circ)\). Degree reduction is NOT reduction modulo the real period \(2\pi\) for radian \(M\).
+
+### Concrete exact independent Python replay
+
+With Python's exact integer factorial and modular exponentiation, the locally executed independent replay found:
+
+| Exact item | Result |
+|---|---|
+| \(\mathrm{bit\_length}(9999!)\) | 118445 |
+| \(v_2(9999!)\) | 9991 |
+| \(v_3(9999!)\) | 4996 |
+| \(v_5(9999!)\) | 2495 |
+| \(v_{11}(9999!)\) | 998 |
+| \(v_{101}(9999!)\) | 99 |
+| \(99^{9999!}\bmod 9\) | 0 |
+| \(99^{9999!}\bmod 11\) | 0 |
+| \(99^{9999!}\bmod 101\) | 1 |
+| \(99^{9999!}\bmod 360\) | 81 |
+| \(99^{9999!}\bmod 9999\) | 4950 |
+| CRT idempotent | \(4950^2\equiv4950\pmod{9999}\) |
+| \(S_5\), \(A_5\), ordered injective triples × parity | \(120\), \(60\), \(60\times2\) |
+| Two overlapping 3-cycles | generate all 60 of \(A_5\); 60-element commutator subgroup |
+
+The committed script \`scripts/check_polynomial_pickover_gamma_horned_maxcut.py\` contains the corresponding finite replay but was not executed from its exact GitHub blob. The independent in-session replay **passed**. The analytic \(\operatorname{sgn}\sin(99^{9999!})\) is NOT among its outputs.
+
+### Explicit reusable mathematical proof terms
+
+- \`PolynomialPickoverFactorialGammaDegreeExact.agda\`: reuses the standard-library factorial \`Data.Nat.Base._!\`, proves the successor recurrence and the **conditional** Gamma-at-successor contract for \(\Gamma(10000)\); proves the exact \(99^2\bmod360=81\) and residue-toggle statements; gives an inductive TWO-STATE positive-even-degree exponent automaton. This does not by itself prove the full \(\mathbb Z/360\mathbb Z\) modular exponent congruence for every \(n\), which is separately replayed in Python for the target integer. The radian sign is explicitly unproved.
+- \`PolynomialHornedPerfectGroupObserverExact.agda\`: proves an exact universal **commutator-factorisation ⇒ commutator-killing observer is trivial** theorem. The source gives a finite list of pairs for *each* group element, and the target observer preserves products. This is the reusable algebraic fact connecting perfect \(A_5\), the perfect binary icosahedral \(2I\), and the abstract three-factor horned-source limit. Their actual groups and origin proofs remain distinct. Every group element need only be a PRODUCT of commutators; do not assert commutator width one for the horned limit group without its own witness.
+- \`PolynomialHornedSpinSignNonDescentExact.agda\`: reuses existing exact \(Q_8\to V_4\) quotient, proves that \(+1\) and \(-1\) have the same projective image but are distinct, and proves **NO universal signed-quaternion reconstruction** from the sign-forgetting projection. Do not identify this \(Q_8\) witness with \(2I\to A_5\); the latter is a separate stronger donor in PR #1244.
+- All three owners are imported and named exported through the three canonical TOE root aggregates. This is source-written, **Agda kernel pending**.
+
+### Dated donor / prior-art ownership: source-first reuse, not branch-copy
+
+| Independent source owner | Established material | This PR's valid receiver | Non-promotion |
+|---|---|---|---|
+| [#1244 Alexander horned C3](https://github.com/chboishabba/dashi_agda/pull/1244), draft | Three-sector binary-horn tree, commuting \(C_3\) refinement, conditional perfect group and outer action, finite \(2I\) quotient and central-sign non-descent | Universal commutator-observer proof + shared \(C_3\) and rational quaternion labels | No source-group = actual geometric exterior identification until H1–H5 and compact-exhaustion geometry are paid |
+| [#1260 Eisenstein/Pickover](https://github.com/chboishabba/dashi_agda/pull/1260), draft | Exact factorial CRT, \(3^4\times3^5\) Eisenstein quotient, \(4950\) idempotent, Machin small-phase signs, catastrophic interval-width cost | Gamma index contract and comparison of **degree** vs **radian** phase | Finite CRT quotient and ultrametric observer do not furnish the terminal \(\operatorname{sgn}\sin M\) |
+| [#1407 369/27 Fourier](https://github.com/chboishabba/dashi_agda/pull/1407), draft | C3/Fourier finite 27×729 and 13/27,5/9 structure | Existing \(C_3^3\) Fourier/trialectic chart | Not a polynomial path-lift theorem or a Monster same-object identity |
+| Existing \`FiniteQuaternionDoubleCover\` on master | Actual \(Q_8\to V_4\) double-cover | Exact universal no-reconstruction proof | No \(2I\) quotient identified with this group |
+| Existing \`TernaryEndomorphismConjugacyExact\` | 27 endomorphisms, S3 orbits | 27↔27 trialectic carrier identity and seven orbit sizes | A 27-cell synthesis is not an Alexander horn binary branch or a new Galois quintic |
+| Existing \`IbrahimMonster3BRecognitionRouteParetoExact\` | Ibrahim independent Monster 3B/source-control and Pareto gates | Retained existing-owner receipt and no-promotion theorem | No matching order, trace or phase authorises object equality |
+
+**Critical 120-vs-120 check:** \(S_5\) and \(2I=SL_2(\mathbb F_5)\) both have **120 elements**, but they are **not isomorphic as groups**. \(S_5\) has a nontrivial sign homomorphism \(S_5\to C_2\), whereas \(2I\) is perfect. Also \(Z(S_5)=1\) whereas \(Z(2I)=\{\pm1\}\). The projective quotient \(2I/\{\pm1\}\cong A_5\) has **60**, matching the ordered-injective triple count with an ACTUAL finite chart on the \(A_5\)-label carrier, not proof that a source quintic polynomial, horn exterior, or Monster module realises that quotient. The exact group-level donor lives in PR #1244.
+
+**Critical end-space count:** the actual horn sector address set at finite depth \(n\) has \(3\cdot2^n\) sectors/branches; it is NOT \(3^n\), \(3^5\) or \(5^3\). The 3-sector root labels can be charted to \(C_3\), but the internal Cantor/horn refinement is binary. The clopen ultrametric end topology is intrinsic, and does not prove the ambient Alexander wild embedding.
+
+**Critical holonomy readout:** chosen two-dimensional spin-channel halftrace is \(-1\), while the normalised trace of \(\operatorname{diag}(-I_2,I_2,I_2)\) in the full six-dimensional three-channel actor is \(1/3\). Neither equals the unknown \(\sin M\) or determines its sign.
+
+### Remaining cut, in Pareto priority
+
+1. **P0** Real analytic terminal signed phase of \(e^{i99^{9999!}}\), with independently verified rational \(\pi\)-phase interval and end-to-end certificate cost. PR #1260 is original producer; this PR does not duplicate it.
+2. **P1** Exact-head Agda type check of all new files and three TOE roots. No new postulates, no unsafe options; the source is not a kernel receipt.
+3. **P2** Braid/group formalisation: complete \(A_5\) perfection and \(S_5\) derived series in first-class Agda; do not promote group-order matching alone.
+4. **P3** In PR #1244, pay real relative-collar geometry, selected actual wild satellites, van Kampen basing paths and same-object \(\pi_1(E)\) identification. The abstract perfect direct-limit presentation is not the same theorem.
+5. **P4** Projective \(2I\to A_5\) quotient source homomorphism/representation and binary-horn generator compatibility; retain exact first-channel vs six-channel normalisation.
+6. **P5** Exact \(\theta\) angle-unit separation, \(\Gamma\) analytic recurrence, Bishop analytic continuation and Lie/spin global topology; do not call a conditional Gamma record the classical proof.
+7. **P6** Preserve numerology boundary across \(3\cdot2^n\), \(3^3\), \(3^4\cdot3^5=3^9\), \(3^5\), \(5^3\), \(5P3\), \(|S_5|\), \(|2I|\) and the \(C_3^3\) Fourier cube.
+
+**Scope:** attachment is supporting context; no device, synthetic-gauge experiment, Riemann surface, wild embedded complement identification, Monster same-object proof, or terminal Pickover radian sign was established by this continuation.
