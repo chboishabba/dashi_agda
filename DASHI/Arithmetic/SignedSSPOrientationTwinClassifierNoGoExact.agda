@@ -56,6 +56,25 @@ twinAtSevenIsFalse = refl
 trueNotFalse : true ≡ false → ⊥
 trueNotFalse ()
 
+-- Any quotient that identifies 5 and 7 loses exactly the distinction
+-- a true twin-start decision requires. The argument is independent of
+-- the number of labels or the representation's actual implementation.
+-- A full lossless SSP label + residual can avoid this obstruction.
+collidingCodeCannotDecideAllTwins :
+  ∀ {Carrier : Set} →
+  (encode : Nat → Carrier) →
+  encode 5 ≡ encode 7 →
+  (classifier : Carrier → Bool) →
+  ((n : Nat) → classifier (encode n) ≡ twinStartBool n) →
+  ⊥
+collidingCodeCannotDecideAllTwins encode same classifier correct =
+  trueNotFalse
+    (trans
+      (sym (trans (correct 5) twinAtFiveIsTrue))
+      (trans
+        (cong classifier same)
+        (trans (correct 7) twinAtSevenIsFalse)))
+
 -- No total orientation-only predicate has the same classification on
 -- every Nat. The contradiction is explicitly witnessed at 5 and 7.
 orientationAloneCannotDecideTwinPrimality :
@@ -65,12 +84,10 @@ orientationAloneCannotDecideTwinPrimality :
       ≡ twinStartBool n) →
   ⊥
 orientationAloneCannotDecideTwinPrimality classifier correct =
-  trueNotFalse
-    (trans
-      (sym (trans (correct 5) twinAtFiveIsTrue))
-      (trans
-        (cong classifier orientationFiveAndSevenEqual)
-        (trans (correct 7) twinAtSevenIsFalse)))
+  collidingCodeCannotDecideAllTwins
+    orientationOfPositiveMagnitude
+    orientationFiveAndSevenEqual
+    classifier correct
 
 -- A lawful richer encoder must retain the integer readout, and a
 -- preserved readout leaves TwinPrimeAt invariant. No lost primality
