@@ -56,6 +56,19 @@ This comparison is exact integer arithmetic without floating FFT or numerical ro
 
 **Execution attribution:** the finite 27-case enumeration and N=3/N=5 comparison were independently executed in local Python and returned `24/27, 0/27`. The **committed** diagnostic and full GitHub checkout unittest suite remain unexecuted on their exact PR head. The new Agda source has not been kernel-checked.
 
+## 3b. Direct three-dimensional NS and 27-state codec comparison
+
+The 1-D three-mode window extends **coordinatewise** to the concrete `3×3×3 = 27` index cube `C={-1,0,+1}^3`. This is the same finite index count as the repository's canonical triple balanced trit, but **not** the unbounded integer NS carrier `Z^3`. The new module directly imports `BinaryThreeBitTwoTritAntipodalCodecExact`, `BinaryThreeBitTrit27FibreLiftExact`, `BalancedTernaryAntipodalOrbitExact` and `Base369AddressSymmetryAndBranchGeometryExact` to reuse:
+
+- The original **three binary bits → two balanced trits** injective payload codec. It uses 8 of 9 pair values, with centre (0,0) reserved.
+- The **27-trit-triple framed lift**: two payload trits plus a zero framing trit. Its encoded three-bit image is **8 of the 27** possible trit triples. It is not a bijection from 8 states to 27 states.
+- The original roundtrip `bit3LiftRoundTrip` and complement ↔ strict antipode equivalence; these are inherited, not newly proved here.
+- The **full** three-axis signed mode label cube using the actual `Branch.triple` carrier, which includes all 27 labels (not just the binary payload image).
+
+The new `periodicThreeAxisPositiveXSquareWrapsToNegativeX` is a genuine finite 3D example: two `(1,0,0)` Fourier modes have true sum `(2,0,0)` in the original NS integer lattice; modulo-three per-axis folding maps that to `(-1,0,0)`. A lossless three-bit/two-trit/framed-27 codec encodes whichever **post-fold** label it receives, but does not preserve the pre-fold integer vector unless the missing information is retained separately.
+
+The executable now exhaustively enumerates **all 27²=729 ordered mode pairs** in that 3D cube. There are exactly `7³=343` pairs whose integer sum stays inside `{-1,0,1}³`, and **386** with at least one out-of-window component. A five-point frequency grid on each axis represents the full `{-2,-1,0,1,2}³` pairwise-sum range in this *particular* tiny finite setting, with zero index folding errors. These counts were independently executed in Python using 729 integer comparisons (not floating FFT). This is **not** a 27-vector physical NS Galerkin simulation; vector-valued complex amplitudes, Leray incompressibility, helical signs, Navier–Stokes time evolution and cutoff-uniform estimates are absent.
+
 ## 4. Pareto / snowball / Ibrahim physical proof cutset
 
 | Priority | Producer that actually pays the cut | Available? |
@@ -71,7 +84,7 @@ A three-mode toy **can reveal a discretisation bug or an information-loss bounda
 
 ## 5. Deliverables and verification contract
 
-- New Agda owner: `DASHI/Physics/Closure/R2P2ThreeModeBinaryTernaryNSAliasingCutExact.agda`. Reuse-first imports and exact finite no-go.
+- Exhaustive three-dimensional 27²=729 mode-pair enumeration and original eight-bit-payload-to-27-image distinction added to the same source.\n- New Agda owner: `DASHI/Physics/Closure/R2P2ThreeModeBinaryTernaryNSAliasingCutExact.agda`. Reuse-first imports and exact finite no-go.
 - New executable: `scripts/r2p2_three_mode_codec_ns_aliasing_diagnostic.py`.
 - Tests: `tests/test_r2p2_three_mode_codec_ns_aliasing.py`.
 - Aggregate: `R2P2369AtomicQuantumDiamondArchitectureExact.agda` and all three TOE roots directly expose codec roundtrip, alias collision and no-NS-promotion.
