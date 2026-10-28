@@ -10,7 +10,7 @@ module DASHI.Economics.WealthTaxDashiTradeMarketMaterialBidiExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -144,3 +144,127 @@ profitIsNotTaxPolicyCausation ()
 priceDoesNotBuildPhysicalCapacity :
   MarketPriceCreatesPhysicalInfrastructure → ⊥
 priceDoesNotBuildPhysicalCapacity ()
+
+
+------------------------------------------------------------------------
+-- FINANCING TRANSMISSION MAX-CUT: PAYING A TAX IS NOT SELLING STOCK.
+--
+-- The owner and date belong to this DASHI application only. This exact
+-- source-written fixture is not a tax-statute statement or a trade receipt.
+-- Borrowing, cash payment and asset-sale proceeds are separate financing
+-- channels. Identical received revenue may have distinct route/cost effects.
+------------------------------------------------------------------------
+
+record FundingRoute : Set where
+  constructor funding-route
+  field
+    taxExecution : Tax.FiscalExecution
+    unrestrictedCash : Nat
+    newLoanCash : Nat
+    grossSaleCash : Nat
+    shareUnitsSold : Nat
+    executionCashCost : Nat
+    installedMachineUnits : Nat
+    -- A *model fixture accounting identity*, not an observed economy law.
+    fundingBalances :
+      unrestrictedCash + newLoanCash + grossSaleCash
+      ≡ Tax.taxPaidCash taxExecution + executionCashCost
+open FundingRoute public
+
+taxPaymentForRoute : FundingRoute → Nat
+taxPaymentForRoute route = Tax.taxPaidCash (taxExecution route)
+
+cashFunded : FundingRoute
+cashFunded =
+  funding-route Tax.worldDuePaid 2 0 0 0 0 9 refl
+
+assetSaleFunded : FundingRoute
+assetSaleFunded =
+  funding-route Tax.worldDuePaid 0 0 3 2 1 9 refl
+
+debtFunded : FundingRoute
+debtFunded =
+  funding-route Tax.worldDuePaid 0 2 0 0 0 9 refl
+
+higherCostSameSaleUnits : FundingRoute
+higherCostSameSaleUnits =
+  funding-route Tax.worldDuePaid 0 0 4 2 2 9 refl
+
+sameSaleButLessInstalledCapacity : FundingRoute
+sameSaleButLessInstalledCapacity =
+  funding-route Tax.worldDuePaid 0 0 3 2 1 0 refl
+
+equalTaxPaymentDifferentSaleVolume :
+  taxPaymentForRoute cashFunded ≡
+  taxPaymentForRoute assetSaleFunded
+equalTaxPaymentDifferentSaleVolume = refl
+
+saleVolumeDiffersAtEqualPayment :
+  shareUnitsSold cashFunded ≡ shareUnitsSold assetSaleFunded → ⊥
+saleVolumeDiffersAtEqualPayment ()
+
+paidTaxCannotDetermineUnitsSold :
+  INF.FactorsThrough taxPaymentForRoute shareUnitsSold → ⊥
+paidTaxCannotDetermineUnitsSold =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      cashFunded assetSaleFunded
+      equalTaxPaymentDifferentSaleVolume
+      saleVolumeDiffersAtEqualPayment)
+
+sameSoldSharesDifferentExecutionCost :
+  shareUnitsSold assetSaleFunded ≡
+  shareUnitsSold higherCostSameSaleUnits
+sameSoldSharesDifferentExecutionCost = refl
+
+executionCostDiffers :
+  executionCashCost assetSaleFunded ≡
+  executionCashCost higherCostSameSaleUnits → ⊥
+executionCostDiffers ()
+
+saleVolumeCannotDetermineExecutionCost :
+  INF.FactorsThrough shareUnitsSold executionCashCost → ⊥
+saleVolumeCannotDetermineExecutionCost =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      assetSaleFunded higherCostSameSaleUnits
+      sameSoldSharesDifferentExecutionCost executionCostDiffers)
+
+sameSaleVolumeWithDifferentInstalledMachines :
+  shareUnitsSold assetSaleFunded ≡
+  shareUnitsSold sameSaleButLessInstalledCapacity
+sameSaleVolumeWithDifferentInstalledMachines = refl
+
+installedMachineCountDiffers :
+  installedMachineUnits assetSaleFunded ≡
+  installedMachineUnits sameSaleButLessInstalledCapacity → ⊥
+installedMachineCountDiffers ()
+
+saleVolumeCannotDeterminePhysicalCapacity :
+  INF.FactorsThrough shareUnitsSold installedMachineUnits → ⊥
+saleVolumeCannotDeterminePhysicalCapacity =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      assetSaleFunded sameSaleButLessInstalledCapacity
+      sameSaleVolumeWithDifferentInstalledMachines
+      installedMachineCountDiffers)
+
+data TaxPaymentRequiresForcedLiquidation : Set where
+data EqualSharesSoldMeanEqualMarketImpact : Set where
+
+taxPaymentDoesNotForceLiquidation :
+  TaxPaymentRequiresForcedLiquidation → ⊥
+taxPaymentDoesNotForceLiquidation ()
+
+equalVolumeDoesNotProveEqualMarketImpact :
+  EqualSharesSoldMeanEqualMarketImpact → ⊥
+equalVolumeDoesNotProveEqualMarketImpact ()
+
+-- Distinct scoped upstream original empirical roots:
+-- Fagereng/Guiso/Ring 2026 NBER 35262: investor response in Norway.
+-- Minsoo Kim, Management Science, 2026, DOI 10.1287/mnsc.2025.01690:
+--   forced bond-fund redemptions x market liquidity in corporate bonds,
+--   NOT wealth-tax sales.
+-- Bianchi/Ceneri/Melosi/Villa, NBER 35715, September 2026:
+--   heterogeneous-agents funded/unfunded transfer model, NOT proof of a
+--   realised tax-cap market-price, physical-resource or refinancing effect.
