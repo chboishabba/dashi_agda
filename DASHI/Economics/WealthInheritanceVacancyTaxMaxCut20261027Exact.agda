@@ -489,6 +489,52 @@ fagerengPortfolioIsNotJakobsenMigrationEstimate ()
 -- estimands identical. Equally, disjoint estimands alone do not establish
 -- independent sampling, independent verification or causal truth.
 
+
+------------------------------------------------------------------------
+-- OCTOBER 2026 SNOWBALL: ONE-TIME WEALTH TAX FORECAST VERSUS CAPITAL ENTRY.
+-- Keep separate source owners, interventions, identification strategies
+-- and forecast/realized-outcome statuses. Do not identify two studies
+-- because they share Norway, a year, a wealth threshold, or an author.
+------------------------------------------------------------------------
+
+jarosRauhCaliforniaProjection2026 : TaxSourceReceipt
+jarosRauhCaliforniaProjection2026 = tax-source-receipt
+  "Benjamin Jaros; Joshua Rauh"
+  "The Net Present Value of the California Billionaire Tax Act, NBER Working Paper 35899 (October 2026), DOI 10.3386/w35899"
+  "https://www.nber.org/papers/w35899"
+  scholarlyEmpiricalEstimate conditionalResearchEstimate
+  "Authors forecast around USD 30 billion, range 28 to 36 billion, under modeled migration and legal assumptions for a proposed one-time 5 percent worldwide-net-worth tax above USD 1 billion"
+  "Model-based forecast and author-specific assumptions, not an independently observed tax receipt, enacted legal finding, annual 100 percent wealth cap, or causal effect estimate"
+
+bacherFagerengRingWoldEntry2026 : TaxSourceReceipt
+bacherFagerengRingWoldEntry2026 = tax-source-receipt
+  "Annika Bacher; Andreas Fagereng; Marius A. K. Ring; Ella Getz Wold"
+  "Regulating Entrepreneurship: The Case of Capital Requirements, NBER Working Paper 35780 (September 2026), DOI 10.3386/w35780"
+  "https://www.nber.org/papers/w35780"
+  scholarlyEmpiricalEstimate conditionalResearchEstimate
+  "Norwegian capital requirement reform reduced startup corporation minimum equity by 70 percent; entry nearly doubled in studied data without observed deterioration in selected firm quality measures"
+  "Regulatory startup-capital threshold is not annual personal wealth taxation, no isolated 100 percent cap effect, and the published study retains original author ownership"
+
+data TaxPolicyStudyTarget : Set where
+  norwegianJointWealthDividendMigrationReform : TaxPolicyStudyTarget
+  californiaOneTimeBillionaireTaxForecast : TaxPolicyStudyTarget
+  norwegianStartupMinimumCapitalRequirement : TaxPolicyStudyTarget
+
+jointNorwegianReformsNotCaliforniaProjection :
+  norwegianJointWealthDividendMigrationReform
+    ≡ californiaOneTimeBillionaireTaxForecast → ⊥
+jointNorwegianReformsNotCaliforniaProjection ()
+
+norwegianStartupCapitalThresholdNotWealthTax :
+  norwegianStartupMinimumCapitalRequirement
+    ≡ norwegianJointWealthDividendMigrationReform → ⊥
+norwegianStartupCapitalThresholdNotWealthTax ()
+
+californiaForecastNotNorwegianStartupEvidence :
+  californiaOneTimeBillionaireTaxForecast
+    ≡ norwegianStartupMinimumCapitalRequirement → ⊥
+californiaForecastNotNorwegianStartupEvidence ()
+
 ------------------------------------------------------------------------
 -- NO SOURCE OR SCENARIO CAN AUTOMATICALLY CERTIFY A CAUSAL POLICY EFFECT.
 ------------------------------------------------------------------------
