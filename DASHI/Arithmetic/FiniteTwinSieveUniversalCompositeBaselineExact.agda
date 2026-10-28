@@ -32,6 +32,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (Σ; _×_; _,_)
 open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as NatP
 open import Agda.Builtin.Unit using (tt)
 open import Relation.Binary.PropositionalEquality using
   (_≢_; sym; trans; subst; cong; cong₂)
@@ -215,3 +217,65 @@ everyNonemptyFinitePrimeSieveHasDoubleCompositeSurvivor axis rest t
           (Period.CommonPeriod (axis ∷ rest))
           periodAtLeastTwo
           (Period.productIsCommonPeriod (axis ∷ rest)))))
+
+------------------------------------------------------------------------
+-- FULL UNBOUNDED FINITE-SIEVE NO-GO:
+--
+-- For EVERY finite, NONEMPTY certified prime-axis list, and for
+-- EVERY lower bound N, an actual n>=N survives every local test,
+-- while BOTH n and n+2 carry Data.Nat.Primality.Composite receipts.
+--
+-- The result is elementary; no CRT inverse, distribution axiom,
+-- signed encoding conjecture, or unbounded search postulate.
+-- This is NOT the twin-prime conjecture: these are composite pairs.
+------------------------------------------------------------------------
+
+everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor :
+  (axis : Pair.CertifiedPrimeAxis) →
+  (rest : List Pair.CertifiedPrimeAxis) →
+  (N : Nat) →
+  Σ Nat (λ n →
+    N ≤ n
+    × (Pair.AllPairSurvive (axis ∷ rest) n
+      × (Prime.Composite n × Prime.Composite (n + 2))))
+everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor
+    axis rest N
+  with nonemptyModulusProductHasAtLeastTwo axis rest
+... | a , periodAtLeastTwo =
+  let
+    axes : List Pair.CertifiedPrimeAxis
+    axes = axis ∷ rest
+
+    original : Nat
+    original = suc (suc (suc (2 * a)))
+
+    lower : Nat
+    lower = Lift.factorableLeft
+      original (Period.modulusProduct axes) (suc N)
+
+    baseSurvives : Pair.AllPairSurvive axes original
+    baseSurvives =
+      subst (Pair.AllPairSurvive axes) (baselineAtLeastThree a)
+        (baselineAllPairSurvivesAtCommonPeriod axes (suc a)
+          (subst (Period.CommonPeriod axes)
+            periodAtLeastTwo
+            (Period.productIsCommonPeriod axes)))
+
+    lowerAtLeastNext : suc N ≤ lower
+    lowerAtLeastNext =
+      subst
+        (λ p → suc N ≤ Lift.factorableLeft original p (suc N))
+        (sym periodAtLeastTwo)
+        (Lift.factorableLeftDominatesParameter
+          (suc (2 * a)) (suc a) (suc N))
+
+    lowerAtLeastN : N ≤ lower
+    lowerAtLeastN =
+      NatP.≤-trans (NatP.n≤1+n N) lowerAtLeastNext
+  in
+  lower ,
+  ( lowerAtLeastN
+  , Lift.factorableSurvivorExactOutputIsComposite
+      axes (suc (2 * a)) (suc a) N
+      periodAtLeastTwo baseSurvives
+  )
