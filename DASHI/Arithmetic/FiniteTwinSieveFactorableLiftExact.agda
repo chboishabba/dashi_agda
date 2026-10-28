@@ -32,10 +32,10 @@ module DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact where
 -- or prime-distribution promotion.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; subst; trans)
+open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 
@@ -140,3 +140,88 @@ canonicalFactorableNeighbourPair r P t =
     refl
     refl
     (leftFactorisationGivesRightPlusTwo r P t)
+
+------------------------------------------------------------------------
+-- EXPLICIT NONTRIVIAL FACTORS, ALL r>=2, P>=1, t>=1.
+--
+-- A factor of the form suc(suc k) is >1 by CONSTRUCTION. These
+-- certificates are stronger than merely exhibiting n=a*b with a=1.
+-- No primality decider, finite bound, or external analytic assumption.
+------------------------------------------------------------------------
+
+record TwoNontrivialFactors (n : Nat) : Set where
+  constructor twoNontrivialFactors
+  field
+    firstResidual secondResidual : Nat
+    productIsInput :
+      n ≡ suc (suc firstResidual) * suc (suc secondResidual)
+
+open TwoNontrivialFactors public
+
+leftSecondResidual : Nat → Nat → Nat → Nat
+leftSecondResidual a b c =
+  b * (a + 4) * (suc c) + (a + 3) * (suc c) + c
+
+rightSecondResidual : Nat → Nat → Nat → Nat
+rightSecondResidual a b c =
+  b * (a + 2) * (suc c) + (a + 1) * (suc c) + c
+
+-- These are uniform explicit decompositions; the small-prime case
+-- r=2 is covered rather than lost to an implicit positive-factor gate.
+leftSecondFactorIsNontrivial :
+  (a b c : Nat) →
+  leftFactor (suc (suc a)) (suc b) (suc c)
+    ≡ suc (suc (leftSecondResidual a b c))
+leftSecondFactorIsNontrivial =
+  solve 3
+    (λ a b c →
+      con 1 :+
+        (((con 1 :+ b) :* (a :+ con 4)) :* (con 1 :+ c))
+      :=
+      con 2 :+
+        (((b :* (a :+ con 4)) :* (con 1 :+ c))
+          :+ (((a :+ con 3) :* (con 1 :+ c)) :+ c)))
+    refl
+
+rightSecondFactorIsNontrivial :
+  (a b c : Nat) →
+  rightFactor (suc (suc a)) (suc b) (suc c)
+    ≡ suc (suc (rightSecondResidual a b c))
+rightSecondFactorIsNontrivial =
+  solve 3
+    (λ a b c →
+      con 1 :+
+        (((con 1 :+ b) :* (a :+ con 2)) :* (con 1 :+ c))
+      :=
+      con 2 :+
+        (((b :* (a :+ con 2)) :* (con 1 :+ c))
+          :+ (((a :+ con 1) :* (con 1 :+ c)) :+ c)))
+    refl
+
+factorableLeftHasTwoNontrivialFactors :
+  (a b c : Nat) →
+  TwoNontrivialFactors
+    (factorableLeft (suc (suc a)) (suc b) (suc c))
+factorableLeftHasTwoNontrivialFactors a b c =
+  twoNontrivialFactors
+    a
+    (leftSecondResidual a b c)
+    (cong
+      (λ z → suc (suc a) * z)
+      (leftSecondFactorIsNontrivial a b c))
+
+factorableRightHasTwoNontrivialFactors :
+  (a b c : Nat) →
+  TwoNontrivialFactors
+    (factorableRight (suc (suc a)) (suc b) (suc c))
+factorableRightHasTwoNontrivialFactors a b c =
+  twoNontrivialFactors
+    (a + 2)
+    (rightSecondResidual a b c)
+    (cong
+      (λ z → (suc (suc a) + 2) * z)
+      (rightSecondFactorIsNontrivial a b c))
+
+-- Note: the output TWO certificates do NOT depend on a prime-pair
+-- hypothesis. The finite sieve predicate can survive for both
+-- nontrivially factorable endpoints.
