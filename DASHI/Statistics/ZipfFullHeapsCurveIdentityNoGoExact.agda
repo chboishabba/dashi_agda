@@ -18,6 +18,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Statistics.ZipfFamilyFiniteExact as Zipf
+import DASHI.Statistics.ZipfNoveltyCurveInjectiveExact as Novelty
 
 data Letter : Set where
   A B C : Letter
@@ -98,6 +99,19 @@ sameConcreteCurve :
   (zero ∷ suc zero ∷ suc (suc zero) ∷ suc (suc zero) ∷
    suc (suc (suc zero)) ∷ suc (suc (suc zero)) ∷ [])
 sameConcreteCurve = refl
+
+-- Exact H14/H15 compatibility: the complete Heaps curve identifies the
+-- binary novelty flags but not the repeated-token identity.
+witnessFlags : List Bool
+witnessFlags = true ∷ true ∷ false ∷ true ∷ false ∷ []
+
+leftCurveIsFlagCurve :
+  fullHeapsCurve leftWord ≡ Novelty.curveFromZero witnessFlags
+leftCurveIsFlagCurve = refl
+
+rightCurveIsFlagCurve :
+  fullHeapsCurve rightWord ≡ Novelty.curveFromZero witnessFlags
+rightCurveIsFlagCurve = refl
 
 thirdToken : List Letter → Letter
 thirdToken (_ ∷ _ ∷ x ∷ xs) = x
