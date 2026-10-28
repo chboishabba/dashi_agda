@@ -53,6 +53,14 @@ def main():
     assert typed_numeric == NUMERIC
     assert len(NUMERIC) == 14
     assert set(p for pair in FACTORS for side in pair for p in side) == set(PRIMES)
+    # For every natural-number state, the final 55/1 always applies.
+    # Emission of powers of two is an event, NOT terminal halting.
+    assert NUMERIC[-1] == (55, 1)
+    for n_probe in range(20_000):
+        enabled = enabled_indices(n_probe, NUMERIC)
+        assert enabled and enabled[-1] == 13
+        a, d = NUMERIC[enabled[0]]
+        assert (n_probe * a // d) * d == n_probe * a
     n = 2
     seen = set()
     checked = 0
@@ -75,6 +83,7 @@ def main():
     assert seen == set(range(14))
     print(f"PASS: {len(NUMERIC)} original Guy rules, {len(PRIMES)} factors, "
           f"{checked} selected exact steps; all rule-prefix guards agree")
+    print("PASS: 20,000 standalone Nat inputs are never halted (final 55/1)")
     print("Theorem level: executed finite Python only; Agda kernel pending")
 
 
