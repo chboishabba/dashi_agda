@@ -7,6 +7,8 @@ on:
       - "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda"
       - "DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda"
       - "DASHI/Arithmetic/CertifiedPrimePairPeriodExact.agda"
+      - "DASHI/Arithmetic/SignedSSPPrimeOffsetMacroExact.agda"
+      - "DASHI/Arithmetic/SignedSSPPrimeOutputBoundaryExact.agda"
       - "DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda"
       - "scripts/check_twin_prime_six_wheel_finite.py"
       - "scripts/check_twin_prime_ssp15_crt_finite.py"
@@ -14,6 +16,8 @@ on:
       - "scripts/check_twin_prime_periodic_sieve.py"
       - "scripts/check_prime_gap_186_tuple_admissibility.py"
       - "scripts/check_finite_twin_sieve_composite_completion.py"
+      - "scripts/check_signed_ssp_prime_offset_macro.py"
+      - "scripts/check_fracdash_conway_primegame_offsets.py"
       - ".github/workflows/twin-prime-finite-wheel.yml"
       - "DASHI/EverythingTOESymmetryResolved369.agda"
       - "DASHI/Unifier.agda"
@@ -24,6 +28,8 @@ on:
       - "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda"
       - "DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda"
       - "DASHI/Arithmetic/CertifiedPrimePairPeriodExact.agda"
+      - "DASHI/Arithmetic/SignedSSPPrimeOffsetMacroExact.agda"
+      - "DASHI/Arithmetic/SignedSSPPrimeOutputBoundaryExact.agda"
       - "DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda"
       - "scripts/check_twin_prime_six_wheel_finite.py"
       - "scripts/check_twin_prime_ssp15_crt_finite.py"
@@ -31,6 +37,8 @@ on:
       - "scripts/check_twin_prime_periodic_sieve.py"
       - "scripts/check_prime_gap_186_tuple_admissibility.py"
       - "scripts/check_finite_twin_sieve_composite_completion.py"
+      - "scripts/check_signed_ssp_prime_offset_macro.py"
+      - "scripts/check_fracdash_conway_primegame_offsets.py"
       - ".github/workflows/twin-prime-finite-wheel.yml"
       - "DASHI/EverythingTOESymmetryResolved369.agda"
       - "DASHI/Unifier.agda"
@@ -52,6 +60,8 @@ jobs:
           python3 -B scripts/check_twin_prime_periodic_sieve.py
           python3 -B scripts/check_prime_gap_186_tuple_admissibility.py
           python3 -B scripts/check_finite_twin_sieve_composite_completion.py
+          python3 -B scripts/check_signed_ssp_prime_offset_macro.py
+          python3 -B scripts/check_fracdash_conway_primegame_offsets.py
       - name: Check theorem owner contains no new axioms or holes
         run: |
           python3 - <<'PY'
@@ -61,6 +71,8 @@ jobs:
               "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda",
               "DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda",
               "DASHI/Arithmetic/CertifiedPrimePairPeriodExact.agda",
+              "DASHI/Arithmetic/SignedSSPPrimeOffsetMacroExact.agda",
+              "DASHI/Arithmetic/SignedSSPPrimeOutputBoundaryExact.agda",
               "DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda",
           )
           texts = [Path(path).read_text() for path in paths]
@@ -75,8 +87,12 @@ jobs:
               assert required in texts[2], required
           for required in ("productIsCommonPeriod", "allPairProductPeriodic", "allPairProductPeriodicBack", "allPairProductPeriodicMultiple", "swapFirstTwoFiltersInvolution", "duplicatePrimeFilterRoundTrip"):
               assert required in texts[3], required
-          for required in ("knownAllPrimeControlCount", "ControlToCertifiedPrime"):
+          for required in ("plusTwoFractionMacro", "minusTwoFractionMacro", "signedMinusIsInverse"):
               assert required in texts[4], required
+          for required in ("twinPrimeInvariantUnderEqualReadout", "certifiedPrimeIsReachableWhenEmitterProved"):
+              assert required in texts[5], required
+          for required in ("knownAllPrimeControlCount", "ControlToCertifiedPrime"):
+              assert required in texts[6], required
           print("static source check passed; NOT an Agda kernel receipt")
           PY
 
@@ -104,5 +120,7 @@ jobs:
             DASHI/Arithmetic/TwinPrimeSixWheelExact.agda \
             DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda \
             DASHI/Arithmetic/CertifiedPrimePairPeriodExact.agda \
+            DASHI/Arithmetic/SignedSSPPrimeOffsetMacroExact.agda \
+            DASHI/Arithmetic/SignedSSPPrimeOutputBoundaryExact.agda \
             DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda \
             DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda
