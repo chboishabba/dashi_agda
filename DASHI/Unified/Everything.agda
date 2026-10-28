@@ -3,6 +3,8 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Maybe using (just)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeNSCut
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Convolution729
+import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as PeriodicFourier729
+import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as Fourier729Owner
 import DASHI.Physics.Closure.R2P227729PairSixTritFibreBidiExact as Pair729
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as Fourier729
 import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as R2P2Lattice
@@ -621,3 +623,26 @@ unified729PairExactConvolution :
     ≡ Convolution729.exactConvolutionAt amplitude target
 unified729PairExactConvolution =
   Convolution729.all729PairsFiveIndexRecoveryIsExact
+
+------------------------------------------------------------------------
+-- Original exact C3^3 cyclotomic DFT and Parseval are source-owned.
+-- This carrier is cyclic; integer NS/Galerkin sums remain separate.
+------------------------------------------------------------------------
+
+unifiedExistingC3FourierInverse :
+  (f : PeriodicFourier729.ModeCoefficient27)
+  (m : Fourier729.ModeCube27) →
+  PeriodicFourier729.unpackModeSignal
+    (Fourier729Owner.inverseFourier27
+      (Fourier729Owner.fourier27 (PeriodicFourier729.packModeSignal f))) m
+    ≡ f m
+unifiedExistingC3FourierInverse =
+  PeriodicFourier729.existingPeriodic27FourierRoundTrip
+
+unifiedExistingC3CyclicConvolution :
+  (f g : PeriodicFourier729.ModeCoefficient27)
+  (m : Fourier729.ModeCube27) →
+  PeriodicFourier729.periodicC3ConvolutionOfModeCoefficients f g m
+    ≡ PeriodicFourier729.spectralC3ConvolutionOfModeCoefficients f g m
+unifiedExistingC3CyclicConvolution =
+  PeriodicFourier729.periodic27DirectEqualsSpectralAtEveryMode
