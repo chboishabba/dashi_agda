@@ -79,6 +79,55 @@ calibratedPerturbation q r x y delta paid =
         (λ value → value + r * delta)
         (QProperties.*-identityˡ y)))
 
+
+------------------------------------------------------------------------
+-- T8: TWO-CHANNEL / COMMON-MODE ERROR STRUCTURE
+--
+-- The two observation errors must be kept separately. Their *difference*
+-- enters recovery of the hidden second coordinate. This exact polynomial
+-- identity needs no independence, stochastic distribution or covariance
+-- assumption; a real uncertainty budget would need those separately.
+------------------------------------------------------------------------
+
+twoChannelRingPerturbation :
+  ∀ (q r x y firstError secondError : ℚ) →
+  r * (((x + q * y) + secondError) - (x + firstError))
+    ≡ ((r * q) * y) + r * (secondError - firstError)
+twoChannelRingPerturbation q r x y firstError secondError =
+  solve (q ∷ r ∷ x ∷ y ∷ firstError ∷ secondError ∷ [])
+
+calibratedTwoChannelPerturbation :
+  ∀ (q r x y firstError secondError : ℚ) →
+  r * q ≡ 1ℚ →
+  r * (((x + q * y) + secondError) - (x + firstError))
+    ≡ y + r * (secondError - firstError)
+calibratedTwoChannelPerturbation
+  q r x y firstError secondError paid =
+  trans
+    (twoChannelRingPerturbation q r x y firstError secondError)
+    (trans
+      (cong
+        (λ factor → factor * y + r * (secondError - firstError))
+        paid)
+      (cong
+        (λ value → value + r * (secondError - firstError))
+        (QProperties.*-identityˡ y)))
+
+-- If both recorded channels share the same additive error, their
+-- difference still recovers the *second* hidden coordinate exactly.
+-- The FIRST hidden coordinate is affected; this is not recovery of the
+-- entire state or a stochastic claim about actual sensor errors.
+commonModeSecondCoordinateRecovers :
+  ∀ (q r x y sharedError : ℚ) →
+  r * q ≡ 1ℚ →
+  r * (((x + q * y) + sharedError) - (x + sharedError))
+    ≡ y
+commonModeSecondCoordinateRecovers q r x y sharedError paid =
+  trans
+    (calibratedTwoChannelPerturbation
+      q r x y sharedError sharedError paid)
+    (solve (y ∷ r ∷ sharedError ∷ []))
+
 ------------------------------------------------------------------------
 -- Stop: the quantitative family A_n = [[1,0],[1,1/n]], and
 -- condition_infinity(A_n)=2(n+1), are verified by a separate exact-
