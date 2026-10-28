@@ -10,6 +10,7 @@ module DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (_≤_; _⊓_; _∸_)
 open import Data.Sum using (_⊎_)
 open import Data.Product using (_×_)
@@ -474,4 +475,22 @@ toeTwoOptionParetoWitnessHasDistinctMinimalChoices :
       DashiTradeTax.increasedCareCapacity
 toeTwoOptionParetoWitnessHasDistinctMinimalChoices =
   DashiTradeTax.finiteParetoTradeoffHasTwoDistinctMinimalOptions
+
+-- Unique IDs and per-fill chronology remain conditional local contracts.
+-- Neither labels nor exact token uniqueness authenticate a real fill.
+toeDistinctLocalFillTokensAndClassLabels :
+  (batch : DashiTradeTax.ChronologicalIdentifiedFillBatch) →
+  DashiTradeTax.UniqueFillTokens (DashiTradeTax.timestampedFills batch)
+  × DashiTradeTax.AllFillLabelsMatch
+      (DashiTradeTax.requestedIssuerLabel batch)
+      (DashiTradeTax.requestedSecurityClassLabel batch)
+      (DashiTradeTax.timestampedFills batch)
+toeDistinctLocalFillTokensAndClassLabels =
+  DashiTradeTax.uniqueFillIdentityAndMonotoneEventTime
+
+toeDuplicateLocalFillTokenIsRejected :
+  DashiTradeTax.UniqueFillTokens
+    (DashiTradeTax.syntheticFill7 ∷ DashiTradeTax.syntheticFill7 ∷ []) → ⊥
+toeDuplicateLocalFillTokenIsRejected =
+  DashiTradeTax.duplicateSevenTokenRejected
 
