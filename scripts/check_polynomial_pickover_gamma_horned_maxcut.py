@@ -103,7 +103,8 @@ def main():
 
     print("PASS: exact factorial exponent, Gamma(10000) recurrence index,")
     print("      valuation(9999!) =",valuations)
-    print("      M mod 9,11,101,360,9999 =",residues)\n    print("      99^(!9999) residues (different target) =",sub_residues)
+    print("      M mod 9,11,101,360,9999 =",residues)
+    print("      99^(!9999) residues (different target) =",sub_residues)
     print("      81 degrees => positive sine; radians => NOT DETERMINED")
     print("      S5=120; A5=60 perfect finite; triple×parity=60×2")
     print("      A,B overlapping 3-cycles recover commutator")
