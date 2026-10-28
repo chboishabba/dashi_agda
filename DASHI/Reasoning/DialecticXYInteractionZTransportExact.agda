@@ -259,6 +259,33 @@ transportRespectsZRule : (rule : DialecticInteractionRule)
   zInteractionPosition (transportXY rule x y) ≡ chosenZ rule x y
 transportRespectsZRule rule x y = refl
 
+-- The declared stage transport is exactly the already-owned
+-- TotalSynthesisRule, not an independently invented ternary operator.
+asCanonicalSynthesisRule :
+  DialecticInteractionRule → Comparison.TotalSynthesisRule
+asCanonicalSynthesisRule rule =
+  Comparison.totalSynthesisRule
+    (λ x y → positionToTri
+      (chosenZ rule (triToPosition x) (triToPosition y)))
+
+transportMatchesCanonicalRule :
+  (rule : DialecticInteractionRule) →
+  (x y : DialecticPosition) →
+  toCanonicalComparison27 (transportXY rule x y)
+  ≡
+  Comparison.applySynthesisRule (asCanonicalSynthesisRule rule)
+    (positionToTri x , positionToTri y)
+transportMatchesCanonicalRule rule x y
+  rewrite positionTriRoundTrip x | positionTriRoundTrip y = refl
+
+canonicalTransportRetainsBothDialectics :
+  (rule : DialecticInteractionRule) →
+  (x y : DialecticPosition) →
+  Comparison.comparisonOfSynthesis
+    (toCanonicalComparison27 (transportXY rule x y))
+  ≡ (positionToTri x , positionToTri y)
+canonicalTransportRetainsBothDialectics rule x y = refl
+
 -- A within-column evolution preserves the two input dialectic
 -- positions while allowing the interaction to move along Z.
 data InteractionZStep : DialecticEncounter27 → DialecticEncounter27 → Set where
@@ -281,6 +308,21 @@ illustrativeTwoStep :
     (dialectic-encounter thesis antithesis synthesis)
 illustrativeTwoStep =
   thesisToAntithesis , antithesisToSynthesis
+
+-- Exactly the existing 27-cube grid's Z-edge, with X and Y fixed.
+firstInteractionZGridStep :
+  (x y : DialecticPosition) →
+  Cube.HypervoxelAdjacent
+    (toCanonicalCube (dialectic-encounter x y thesis))
+    (toCanonicalCube (dialectic-encounter x y antithesis))
+firstInteractionZGridStep x y = Cube.adjacentZ Cube.negToZero
+
+secondInteractionZGridStep :
+  (x y : DialecticPosition) →
+  Cube.HypervoxelAdjacent
+    (toCanonicalCube (dialectic-encounter x y antithesis))
+    (toCanonicalCube (dialectic-encounter x y synthesis))
+secondInteractionZGridStep x y = Cube.adjacentZ Cube.zeroToPos
 
 -- These are permitted phase moves, not an empirical claim that all
 -- dialectics evolve monotonically or that synthesis is unavoidable.
