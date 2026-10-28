@@ -8,6 +8,15 @@ It is not a 28th statistical law or a Balaban/Monster/NS/RH result.
 
 - Issai Schur (1923) and Hardy, Littlewood and Pólya, *Inequalities* (1934):
   classical majorization and transfer methods.
+- **Priority correction, independently checked against the 2019 original:**
+  Toshio Nakata, "Coupon Collector's Problem with Unlike Probabilities",
+  *Journal of Classical Analysis* **14** (2019), 177–180,
+  https://doi.org/10.7153/jca-2019-14-13, Theorem 1 and Corollaries 1–2
+  explicitly prove Schur-concave IID full-collection CDF, stochastic
+  completion-time ordering, and Schur-convex expected completion time.
+  Nakata cites Hermann von Schelling's original 1954 unequal-probability
+  coupon-collection treatment and Flajolet/Gardy/Thimonier (1992).
+  **DASHI does not own the original IID stochastic completion theorem.**
 - Albert W. Marshall and Ingram Olkin, *Schur-Convex Functions*, Stanford
   technical report OLK NSF 74 (May 1973),
   https://statistics.stanford.edu/technical-reports/schur-convex-functions
