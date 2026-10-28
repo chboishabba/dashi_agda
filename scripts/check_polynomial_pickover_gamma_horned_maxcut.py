@@ -80,6 +80,10 @@ def main():
 
     assert sum(all(p[i]!=i for i in range(5))
                for p in permutations(range(5)))==44
+    deranged5=[p for p in permutations(range(5))
+               if all(p[i]!=i for i in range(5))]
+    assert sum(parity(p)==0 for p in deranged5)==24
+    assert sum(parity(p)==1 for p in deranged5)==20
     p5=tuple(permutations(range(5)))
     a5={p for p in p5 if parity(p)==0}
     assert len(p5)==120 and len(a5)==60
