@@ -23,7 +23,7 @@ module DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as Q using (ℚ)
+import Data.Rational.Base as Q
 
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
