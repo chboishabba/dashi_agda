@@ -27,8 +27,10 @@ module DASHI.Mathematics.Topology.AlexanderHornedS3SignQuotientSetoidBidiExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Product using (Σ; _,_)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
+import Data.Nat.Properties as NP
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
@@ -341,3 +343,101 @@ canonicalWordRepresentative w =
 -- This *structural* normal form is the source of the orbit ranks
 -- 1,2,5,14,41,122,365. A general cardinality proof still needs a
 -- list/vector enumeration and is not pretended here.
+
+------------------------------------------------------------------------
+-- ACTUAL STRUCTURAL COUNT: CanonicalRelative(suc n)
+--                      ~= CanonicalRelative n + Vec C3 n.
+-- The latter has 3^n distinct words. Thus orbit rank obeys
+-- r(0)=1; r(suc n)=r(n)+3^n.
+------------------------------------------------------------------------
+
+canonicalStepToSum : ∀ {n} →
+  CanonicalRelative (suc n) →
+  CanonicalRelative n ⊎ Vec C3.C3 n
+canonicalStepToSum (zeroPrefix c) = inj₁ c
+canonicalStepToSum (firstPositive xs) = inj₂ xs
+
+sumToCanonicalStep : ∀ {n} →
+  CanonicalRelative n ⊎ Vec C3.C3 n →
+  CanonicalRelative (suc n)
+sumToCanonicalStep (inj₁ c) = zeroPrefix c
+sumToCanonicalStep (inj₂ xs) = firstPositive xs
+
+sumCanonicalRoundTrip : ∀ {n}
+  (s : CanonicalRelative n ⊎ Vec C3.C3 n) →
+  canonicalStepToSum (sumToCanonicalStep s) ≡ s
+sumCanonicalRoundTrip (inj₁ c) = refl
+sumCanonicalRoundTrip (inj₂ xs) = refl
+
+canonicalSumRoundTrip : ∀ {n}
+  (c : CanonicalRelative (suc n)) →
+  sumToCanonicalStep (canonicalStepToSum c) ≡ c
+canonicalSumRoundTrip (zeroPrefix c) = refl
+canonicalSumRoundTrip (firstPositive xs) = refl
+
+-- Non-decimal recursive exponent / orbit-rank definitions avoid
+-- trusting a Python sequence as the general theorem.
+powThree : Nat → Nat
+powThree zero = 1
+powThree (suc n) =
+  (powThree n + powThree n) + powThree n
+
+canonicalOrbitRank : Nat → Nat
+canonicalOrbitRank zero = 1
+canonicalOrbitRank (suc n) =
+  canonicalOrbitRank n + powThree n
+
+canonicalRankRecurrence : ∀ n →
+  canonicalOrbitRank (suc n) ≡
+    canonicalOrbitRank n + powThree n
+canonicalRankRecurrence n = refl
+
+doubleAddShuffle : ∀ a b →
+  (a + b) + (a + b) ≡ (a + a) + (b + b)
+doubleAddShuffle a b =
+  trans (NP.+-assoc (a + b) a b)
+    (trans
+      (cong (λ v → v + b)
+        (trans (NP.+-assoc a b a)
+          (trans (cong (λ v → a + v) (NP.+-comm b a))
+            (sym (NP.+-assoc a a b)))))
+      (NP.+-assoc (a + a) b b))
+
+-- 2*r_n = 3^n+1, *for all n*, not only for five observed values.
+-- The 3^n on the RHS is the actual cardinality of the free
+-- n-position C3 word fibre in canonicalStepToSum.
+doubleCanonicalRank : ∀ n →
+  canonicalOrbitRank n + canonicalOrbitRank n
+    ≡ powThree n + 1
+doubleCanonicalRank zero = refl
+doubleCanonicalRank (suc n) =
+  trans
+    (doubleAddShuffle (canonicalOrbitRank n) (powThree n))
+    (trans
+      (cong
+        (λ v → v + (powThree n + powThree n))
+        (doubleCanonicalRank n))
+      (trans
+        (NP.+-comm (powThree n + 1) (powThree n + powThree n))
+        (sym (NP.+-assoc
+          (powThree n + powThree n) (powThree n) 1))))
+
+canonicalRankOne : canonicalOrbitRank 0 ≡ 1
+canonicalRankOne = refl
+canonicalRankTwo : canonicalOrbitRank 1 ≡ 2
+canonicalRankTwo = refl
+canonicalRankFive : canonicalOrbitRank 2 ≡ 5
+canonicalRankFive = refl
+canonicalRankFourteen : canonicalOrbitRank 3 ≡ 14
+canonicalRankFourteen = refl
+canonicalRankFortyOne : canonicalOrbitRank 4 ≡ 41
+canonicalRankFortyOne = refl
+canonicalRankOneHundredTwentyTwo : canonicalOrbitRank 5 ≡ 122
+canonicalRankOneHundredTwentyTwo = refl
+canonicalRankThreeHundredSixtyFive : canonicalOrbitRank 6 ≡ 365
+canonicalRankThreeHundredSixtyFive = refl
+
+-- Historical Stirling recurrence S(n+1,k)=k*S(n,k)+S(n,k-1)
+-- is an independent classical combinatorial definition. The
+-- RGS identification is owned by #1275, rather than silently
+-- importing that parallel branch or assuming identity of physics.
