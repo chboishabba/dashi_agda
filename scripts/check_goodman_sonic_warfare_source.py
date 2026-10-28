@@ -138,6 +138,7 @@ def check() -> None:
     for owner in (
         "DASHI.Physics.ObserverConditionedTransportBridge",
         "DASHI.Core.QueryIndexedProjectionAdequacyExact",
+        "DASHI.Core.ObserverRefinementLatticeExact",
     ):
         require(f"import {owner}" in transport,
                 f"transport must import inherited theorem owner {owner}")
@@ -157,6 +158,8 @@ def check() -> None:
         "sourceMonitorProjection",
         "jointReceiverAndSourceMonitor",
         "sourceMonitorAdequateForEmitterQuestion",
+        "sourceMonitorStrictlyRefinesSelectedReceiver",
+        "Observer.strictPairRefinement",
         "sourceMonitorSeparatesSilentSourceCollision",
         "receiverProjectionAdequateForReceiverQuestion",
         "sourceActivityCollision",
