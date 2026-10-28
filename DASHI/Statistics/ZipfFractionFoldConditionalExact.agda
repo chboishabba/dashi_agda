@@ -25,6 +25,7 @@ import Data.Rational.Properties as ℚP
 
 import DASHI.Statistics.ZipfFamilyFiniteExact as Finite
 import DASHI.Statistics.ZipfPNFConstructiveNormalizationExact as Normal
+import DASHI.Statistics.ZipfFractionAddRationalBridgeExact as AddBridge
 import DASHI.Core.FiniteUniformProbabilityNormalizationExact as Fraction
 
 -- Interpret ONLY fractions with proof of a nonzero denominator.
@@ -192,3 +193,27 @@ concreteSourceHurwitzEqualsRationalFold addLaw count shift exponent =
   sourceHurwitzEqualsRationalFold
     (concreteZipfInterpretation addLaw)
     count shift exponent
+
+------------------------------------------------------------------------
+-- New concrete F13b proof-term candidate, reusing standard-library
+-- rational/unreduced-rational isomorphism in AddBridge.
+--
+-- Unlike the preceding conditional statement, this term supplies
+-- the actual ConcreteAddLaw *construction*. It is SOURCE-WRITTEN and
+-- NOT Agda-kernel-verified. Keep downstream identification Bool false
+-- until a compatible Agda checker confirms the entire import closure.
+------------------------------------------------------------------------
+
+concreteAddLawSourceWritten : ConcreteAddLaw
+concreteAddLawSourceWritten =
+  AddBridge.positiveDenominatorAddHomomorphism
+
+concreteHurwitzSourceWritten :
+  (count shift exponent : Nat) →
+  concreteInterpret
+    (Finite.finiteHurwitz count shift exponent)
+    (Finite.finiteHurwitzDenominatorNonZero count shift exponent)
+  ≡ Normal.rawSum count shift exponent
+concreteHurwitzSourceWritten count shift exponent =
+  concreteSourceHurwitzEqualsRationalFold
+    concreteAddLawSourceWritten count shift exponent
