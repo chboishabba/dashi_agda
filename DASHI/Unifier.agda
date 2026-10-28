@@ -1,4 +1,6 @@
 module DASHI.Unifier where
+open import Data.Maybe using (just)
+import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeNSCut
 import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as R2P2Lattice
 import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as R2P2Symbolic
 import DASHI.Physics.Closure.R2P2369WaveOpticalCombInformationCutExact as R2P2Wave
@@ -1845,3 +1847,28 @@ unifierMaSupercell18NotPhysicalC18 :
     R2P2Lattice.canonicalOpticalLattice369PhysicalAuthority ≡ false
 unifierMaSupercell18NotPhysicalC18 =
   R2P2Lattice.maSupercell18IsNotAnIdentifiedC18PhysicsRealization
+
+------------------------------------------------------------------------
+-- Reused exact balanced trit/binary codec and C3 aliasing NS cut.
+-- Mathematical modes are labels. Codec inversion is not quadratic
+-- Fourier fidelity, a Yb clock measurement, or a Clay NS theorem.
+------------------------------------------------------------------------
+
+unifierThreeModeBinaryTernaryCodecRoundTrip :
+  (m : ModeNSCut.ThreeMode) →
+  ModeNSCut.twoBitsToThreeMode (ModeNSCut.threeModeToTwoBits m)
+    ≡ just m
+unifierThreeModeBinaryTernaryCodecRoundTrip =
+  ModeNSCut.threeModeTwoBitRoundTrip
+
+unifierThreeModeFourierQuadraticAlias :
+  ModeNSCut.periodicQuadraticModeSum ModeNSCut.modePlus ModeNSCut.modePlus
+    ≡ ModeNSCut.modeMinus
+unifierThreeModeFourierQuadraticAlias =
+  ModeNSCut.positivePositiveAliasesToNegative
+
+unifierThreeModeBinaryTernaryDoesNotProveNS :
+  ModeNSCut.nsClayRegularityProved
+    ModeNSCut.canonicalThreeModeCodecNSAuthority ≡ false
+unifierThreeModeBinaryTernaryDoesNotProveNS =
+  ModeNSCut.threeModeCodecIsNotAnNSProof
