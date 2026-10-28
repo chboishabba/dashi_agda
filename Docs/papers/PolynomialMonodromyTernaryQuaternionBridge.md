@@ -173,11 +173,11 @@ All 45 video subjects have exact names in \`DASHI.Foundations.PolynomialVideo45C
 - \`Polynomial369TrialecticTransportExact.agda\`: \`LevelTwoCode\` and \`SynthesisChoice27\` are a literal pair-carrier identity, with two-sided chart, S3 conjugation action laws, retained triangular synthesis cell, distinct first-two-slot action and existing quaternion C3/hypervoxel axis action.
 - \`QuinticPermutationTripleOrientationAtlasExact.agda\`: explicit **120-case** bijection \`Permutation5 ≃ DistinctTriple5 × Orientation2\`; 60 unique ordered distinct triples; 60 even-parity permutation codes; action of every permutation on the five labels; inverse and first-three-coordinate correctness proofs by constructor reduction. This is much stronger than a same-number coincidence. It does not yet formalise all S5/A5 group-operation laws.
 - \`PolynomialNumerologyArithmeticAtlasExact.agda\`: 3^3=27, 3^5=243=9×27, 3^6=729=3×243, 5^3=125=5×25, difference 118, 5P3=60, 5!=120=60×2, even-permutation count 60, parity vs Q8 sign two-sided *carrier* chart with explicit semantic separation.
-- \`PolynomialGlobalRadicalTopologyContractsExact.agda\`: explicit **uninhabited** field, discriminant-cover, analytic-monodromy, radical-solvability, generic-S5 quintic and continuous-Spin theorem contracts. A conditional general-quintic contradiction is proved given all actual inputs.
+- \`PolynomialGlobalRadicalTopologyContractsExact.agda\`: explicit **uninstantiated** field, discriminant-cover, analytic-monodromy, radical-solvability, generic-S5 quintic and continuous-Spin theorem contracts. A conditional general-quintic contradiction is proved given all actual inputs.
 - \`PolynomialIbrahimParetoSnowballMaxCutExact.agda\`: formal proof-level firewall with direct retained original Ibrahim recognition boundary and exact negative-promotion adapters. Neither this new proof nor its source rights belong to the original Ibrahim Monster 3B claims.
 - \`PolynomialMonodromyTernaryQuaternionBridgeExact.agda\`: pre-existing PR #1414 finite S3/C3 and rational quaternion generator.
 
-All ten new/existing owner modules are attached through \`EverythingTOESymmetryResolved369\`, \`Unifier\`, and \`Unified/Everything\`. No protected ESD file was edited.
+The ten new owners plus the original finite bridge are attached through \`EverythingTOESymmetryResolved369\`, \`Unifier\`, and \`Unified/Everything\`. No protected ESD file was edited.
 
 ### Independent exact Python audit (EXECUTED, not Agda)
 
