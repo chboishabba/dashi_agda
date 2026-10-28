@@ -75,3 +75,25 @@ The appropriate existing local workflow is the repository's `scripts/run_agda29_
 A static review caught that the initial `rawFractionAddPreserved` branch used `refl` for the raw source-to-`ℚᵘ` addition equality. Although correct arithmetically, relying on definitional equality of the natural-to-integer embedding is needlessly fragile (and can fail with the standard library's sign/magnitude representation).
 
 The proof term has now been strengthened to use **the already-owned integer embedding homomorphism lemmas** `Data.Integer.Properties.pos-+` and `pos-*` explicitly, combined with `cong₂`. This relates `+(n*e+m*d)` to `(+n)*(+e) + (+m)*(+d)` without asking the kernel to infer the arithmetic conversion by normalization alone. The positive denominator product is unchanged. The two impossible zero-denominator cases still use absurd patterns. The proof remains kernel-pending; this is compiler-risk reduction, not a compiler receipt.
+
+
+## Own-obligation continuation: source finite Hurwitz scaled into existing PNF total
+
+This is the ORIGINAL Zipf/ABC **F13b/PNF critical path** on #1275. The adjacent #1244, #1414 and #1407 constructions are machinery to reference if an actual typed receiver needs them; they are not completion targets or reasons to add unrelated numeric orbit bridges to this branch.
+
+The new `DASHI/Statistics/ZipfF13bSourcePNFIntegrationExact.agda` imports the ORIGINAL `Finite.finiteHurwitz`, the already-source-written `Fold.concreteHurwitzSourceWritten`, the ORIGINAL `PNF.inverseNormalizer/atomsTotalEqualsScaledSum/scaledSumFactors/zipfPNFAtomsNormalize`, and the canonical `Expected.probabilityTotal` atom total. It defines these *specific consumer proofs*:
+
+1. `sourceFiniteHurwitz n q s` = interpreted original raw fraction on **positive rank support** `suc n`.
+2. `sourceFiniteHurwitzEqualsRawSum`: exact F13b bridge into the ORIGINAL rational sum.
+3. `sourceScaledTotalEqualsPNFTotal`: source fraction × existing inverse normalizer = existing PNF atom total, via original `scaledSumFactors` and `atomsTotalEqualsScaledSum` proofs.
+4. `sourceFiniteHurwitzScaledToOne`: the same source fraction scaled by the existing positive normalizer equals `1ℚ` using ORIGINAL `zipfPNFAtomsNormalize`.
+
+This is a **consumer theorem** of the existing F13b and PNF proof owners, not a second rational field or a synthetic normalized-probability carrier. The finite family also supports count zero, but reciprocal normalization at count zero is **not** legal; therefore this consumer explicitly requires positive count by `suc n`. All prior original rational/Estoup/Zipf/Mandelbrot/Hurwitz authors and historical repository proof owners retain ownership.
+
+An independent Python `fractions.Fraction` arithmetic oracle **executed** 686 positive-support combinations (counts 1..14, shifts 0..6 and integer exponents 0..6), with exactly matching raw source cross-product fraction, rank sum, positive normalizer, canonical atom total and final 1. The committed `tests/test_zipf_f13b_source_pnf_consumer_exact.py` also checks 1,296 positive-denominator raw addition cases, the empty-count rejection boundary, original proof-identifier reuse and that the canonical PNF adapter still marks the original finite source identity **false**. It is registered in `scripts/check_zipf_family_acceptance.sh`.
+
+**Public experimental stdlib API recheck:** `Data.Rational.Base.normalize : (m n : ℕ) → {{NonZero n}} → ℚ` and `fromℚᵘ` are present; `Data.Rational.Properties.fromℚᵘ-cong`, `toℚᵘ-fromℚᵘ`, `toℚᵘ-homo-+`, and integer `pos-+`/`pos-*` exist. This checks names/types in the publicly published experimental standard library, **not** the precise repository-pinned experimental commit or a successful Agda elaboration.
+
+**Actual boundary unchanged:** Both new and preceding F13b Agda files are **source-written, not Agda-kernel-verified**. The adapter's `false` source-identity paid flag must stay false until an exact-head Agda 2.9 and compatible stdlib/dchott/bishop/cubical verification receipt exists. Do not call the 686 independently run mathematical cases “Agda tests”. No CI, ESD changes, Monster/Spin/RH/NS claims, or other-thread scope expansions were used.
+
+**Next immediate own-obligation sequence:** exact F13b/PNF Agda typecheck and repairs → all-prefix H08/H10/H12 mathematical proof sources → S24 universal path coupling/positive transfer-gluing → completion C identities and bounded/empirical T01–T27 acceptance. Leave other PR subjects alone unless a direct reuse removes an actual one of these obligations.
