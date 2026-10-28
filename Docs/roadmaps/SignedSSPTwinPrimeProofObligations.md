@@ -252,3 +252,34 @@ Corrected `DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact` on PR #1408 no
 **Complete proposed lemma matrix** (the 67 inherited A–G plus 8 newly explicit coordinate obligations, total **75**) is maintained at [SignedSSPTwinPrimeCompletionLemmaMatrix.md](SignedSSPTwinPrimeCompletionLemmaMatrix.md). It provides each ID, acceptance statement, existing owner or status, complete dependency DAG, attribution and kernel-verification boundary. The 75 are comprehensive for the present *specified architecture*, not a pretense that the remaining unknown mathematical breakthrough has an enumerable finite set of auxiliary lemmas.
 
 Priority after this correction: concrete signed machine/FRACDASH faithful compiler and decoder (A05/A07/A08/B03/C02/C08), arithmetic coprime CRT inverse and local p−2 counts (E02–E08), then a genuinely new pair-prime distribution theorem (F02/F04/F07). Inherited 4B/3B, Ibrahim/Pareto/snowball and Fourier representations remain distinct; neither 3³ nor 729 implies a prime-pair correlation. No CI run or protected ESD changes; written Agda still not kernel-verified.
+
+## E14 source-written completion: every finite sieve has unbounded composite pairs
+
+The new `DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact` and
+`DASHI.Arithmetic.FiniteTwinSieveUniversalCompositeBaselineExact`
+give a constructive elementary *finite-sieve obstruction* with no
+general CRT inverse. For the certified axes product P and nonempty
+list, r=2P−1 has residues −1 and +1 at all sieving primes. For any
+integer t≥1, the explicit pair
+
+```
+n   = r * (1 + P*(r+2)*t)
+n+2 = (r+2) * (1 + P*r*t)
+```
+
+has both endpoints divisible by factors >1, and n is congruent to
+r modulo P. Thus the finite certified sieve accepts both composites.
+The theorem `everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor`
+has an arbitrary target bound N and source-written proof terms
+requiring `N ≤ n × AllPairSurvive axes n ×
+(Composite n × Composite(n+2))` (parenthesized as nested products
+in Agda). The empty list has no divisibility constraints and can
+be handled with the same factorable lift from r=2.
+
+These are **source-written only** and no exact-head Agda kernel proof
+has been observed. This confirms the mathematical finite-sieve
+limitation but **does not** assert a general Selberg parity result,
+twin-prime infinitude, or any signed-SSP analytic advantage. Prior
+DASHI/Brun/Selberg/Polymath, Ibrahim and Monster ownership remains
+unchanged. The original 75-lemma completion matrix updates E14 while
+F02/F04/F07 remain research obligations.
