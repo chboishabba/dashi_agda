@@ -1,3 +1,60 @@
+## 2026-10-28 matched-envelope three-family SDF screen
+
+**Hypothesis:** prior high raw torque of -250.73 microN*m for log b=.17
+is confounded by its larger outside radius. The correct initial
+comparison keeps inner=1.5 m, outer=5.288760740229291 m, the same source
+seed `spiral-scene-8d95d3af`, 9 kW, rho=.95, thickness=.156 m,
+and source angle sweep [-97,-90,-83] degrees. For each of 1.25,
+1.5,1.75 turns, solve exact endpoint-matched Archimedean growth
+`g=(R-a)/(2pi N)` or logarithmic pitch
+`b=log(R/a)/(2pi N)`. The segmented candidate adds
+`0.05 sin(theta/N)`, so endpoints remain exactly equal.
+Thus the segment profile is smooth, NOT a manufactured notch.
+
+**Actually executed in original local HTML SDF state machine:**
+54 screen evaluations = 3 families x 3 turns x 3 angles x
+target ON/OFF; 18 admitted all 8 sampled rays and had no unresolved
+terminations. Only 1.5-turn scenes passed in this particular seed
+and gate. Six family/on-off finalists were independently replayed
+at 44 rays using the same HTML ray engine, and the independent
+Python optical-event referee reported PASS (energy, reflected
+direction, linear/angular momentum, and path continuity) for all six.
+Top absorber OFF family results at identical envelope:
+- Archimedean: wall torque **-184.0764 microN*m**, zero target power.
+- Segmented profile surrogate: **-183.3271 microN*m**, zero target power.
+- Logarithmic: **-195.5752 microN*m**, zero target power.
+The limited grid gives **6.25%** clockwise torque improvement for
+logarithmic compared to Archimedean at identical outer radius;
+it does **not** establish a global, physically manufactured,
+wave-optical or even fully converged numerical optimum.
+The paired absorber ON finalists also had zero target capture
+because the tested trajectories never intersect the receiver.
+Do not interpret this screen as testing focusing, confinement,
+source-free propulsion, or historical efficacy.
+
+**Committed executable search source**:
+`scripts/kozyrev_matched_envelope_html.py`
+and source-written endpoint equality test
+`scripts/tests/test_kozyrev_matched_envelope_html.py`.
+The browser runner consumes the *local* same-SDF extended HTML;
+that HTML is not yet committed to GitHub. The exact committed
+source test has not been freshly executed; the locally executed
+matched-envelope driver and all six browser replays are attached
+to the current session's computed receipts. Avoid claiming
+repository CI or Agda-kernel success.
+
+**Next max-cut**: independently solve nearest ray/capsule
+intersection and bound SDF error, preserve full input/source
+angular-momentum bookkeeping and registered entrance gate;
+evaluate tuned emitter/absorber conditions where the receiver
+intercepts actual rays; include clipped spatial-energy residence
+and directional escape as genuinely independent Pareto axes;
+compare matched circular/curved-sector/nonreflective controls;
+verify thickness/offset/resolution/size laws. Treat C2
+handedness parity as physical and 3^3/S3 labels solely as an
+experimental combinatorial receiver. Prior mathematical
+and Ibrahim/Monster owners and protected ESD remain unchanged.
+
 ## 2026-10-28 same-SDF cross-family and 27-state experiment
 
 **Executed in local browser**: modified existing user-facing HTML
