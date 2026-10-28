@@ -135,3 +135,64 @@ commonModeSecondCoordinateRecovers q r x y sharedError paid =
 -- implied by the ring identities alone and have NOT been kernel-checked
 -- for all positive n.
 ------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+-- T9: CONDITIONAL RIDGE / TIKHONOV REGULARISATION
+--
+-- Prior mathematics: A. N. Tikhonov's regularization; the inverse-
+-- problem literature predates this application. Noise-informed acoustic
+-- parameter selection is independently studied by Keaton Coletti,
+-- R. Benjamin Davis and Ryan Schultz (Applied Acoustics 238, 2025,
+-- DOI 10.1016/j.apacoust.2025.110756). No proof/code is copied from it.
+--
+-- For the triangular scalar residual d = b-a = q*y + error, the
+-- quadratic objective (q*z-d)^2 + lambda*z^2 has the normal equation
+-- (q*q+lambda)*z=q*d. We represent its candidate z by an externally
+-- supplied inverse coefficient rho. We do NOT construct rho, prove
+-- positivity, choose lambda, or claim optimality of the objective.
+--
+-- This is the exact algebraic BIAS/ERROR decomposition. No bound follows
+-- without additional calibration, noise, and parameter-selection data.
+------------------------------------------------------------------------
+
+ridgeSecond : ℚ → ℚ → ℚ → ℚ → ℚ
+ridgeSecond q rho a b = (rho * q) * (b - a)
+
+ridgeTwoChannelDecomposition :
+  ∀ (q rho x y firstError secondError : ℚ) →
+  ridgeSecond q rho
+    (x + firstError)
+    ((x + q * y) + secondError)
+  ≡ ((rho * (q * q)) * y)
+      + ((rho * q) * (secondError - firstError))
+ridgeTwoChannelDecomposition q rho x y firstError secondError =
+  solve (q ∷ rho ∷ x ∷ y ∷ firstError ∷ secondError ∷ [])
+
+ridgeBiasBalance :
+  ∀ (q rho lambda y : ℚ) →
+  rho * (q * q + lambda) ≡ 1ℚ →
+  ((rho * (q * q)) * y) + ((rho * lambda) * y) ≡ y
+ridgeBiasBalance q rho lambda y paid =
+  trans
+    (solve (q ∷ rho ∷ lambda ∷ y ∷ []))
+    (trans
+      (cong (λ factor → factor * y) paid)
+      (QProperties.*-identityˡ y))
+
+-- Algebraic normal equation for the candidate: no claim of unique
+-- minimisation is made because lambda and the inverse are not built.
+ridgeNormalEquation :
+  ∀ (q rho lambda a b : ℚ) →
+  (q * q + lambda) * rho ≡ 1ℚ →
+  (q * q + lambda) * ridgeSecond q rho a b
+    ≡ q * (b - a)
+ridgeNormalEquation q rho lambda a b paid =
+  trans
+    (solve (q ∷ rho ∷ lambda ∷ a ∷ b ∷ []))
+    (trans
+      (cong (λ factor → factor * (q * (b - a))) paid)
+      (QProperties.*-identityˡ (q * (b - a))))
+
+-- Source-written ring algebra, not a kernel-verified theorem yet.
+-- It cannot identify the correct lambda or justify a measured covariance.
