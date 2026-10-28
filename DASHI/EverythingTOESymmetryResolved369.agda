@@ -62,6 +62,14 @@ open GuyPriorityBidi public using
   ; concreteExactFractionEvaluator
   ; guyConcreteExactPriorityForward
   ; guyConcreteExactPriorityBackward
+  ; exactFractionApplies?
+  ; firstApplicableNumeric
+  ; firstApplicableNumericSound
+  ; firstApplicableNumericHalt
+  ; guyNumericExecutableStepSound
+  ; guyTypedExecutableStepSound
+  ; guyNumericExecutableHalt
+  ; guyTypedExecutableHalt
   )
 
 import DASHI.Arithmetic.TwinPrimeTernary270IbrahimSurvivorCollisionExact as WheelIbrahimCollision
