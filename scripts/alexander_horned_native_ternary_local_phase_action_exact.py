@@ -132,6 +132,16 @@ def check():
                     (pullback(f,n),a[1]),(pullback(g,n),b[1]))
             sampled+=1
 
+    # Full local gauge translations form a torsor on field configurations.
+    # For any f and h choose addresswise gauge=(h-f) mod3.
+    transitive_pairs=0
+    for f in fields:
+        for h in fields:
+            g={x:(h[x]-f[x])%3 for x in axes}
+            assert field_add(g,f)==h
+            transitive_pairs+=1
+    assert transitive_pairs==27**2
+
     # This witness separates ORIGINAL #1275 diagonal value-S3 observation
     # from local address-dependent translations. No duplicate Heaps carrier.
     x,y,z=addresses(0)
@@ -145,6 +155,7 @@ def check():
     return {"status":"PASS","address_shift_checks":address_cases,
             "all_81_cubed_associativity_cases":all_associative,
             "higher_depth_group_checks":sampled,
+            "gauge_transitive_root_field_pairs":transitive_pairs,
             "depth_two_cells":27,"depth_two_local_group_size":3**27,
             "depth_two_semidirect_size":3**28,
             "no_go":"local gauge can change Heaps while global relabel cannot"}
