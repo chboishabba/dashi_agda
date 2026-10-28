@@ -54,7 +54,7 @@ The new `TwinPrimeTernary270AffineCRTCodecExact` enumerates the **27 inverse loo
 (encode(x,y,z) + encode(−x,−y,−z) + 2) mod 270 = 0.
 ```
 
-This is an explicit C₂-equivariant **finite injection and candidate-sieve-preserving code**. The independent exhaustive Python check additionally verifies its image equals all 27 arithmetic survivors `n∈[0,269]`; the **Agda file does not yet claim this all-residues coverage theorem**. It does not construct the general coprime CRT inverse E05–E08 or an analytic twin-prime correlation.
+This is an explicit C₂-equivariant **finite injection and candidate-sieve-preserving code**. The new `cubeToWheel270Injective` theorem derives injectivity from the 27-case left inverse, `cube270GlobalAntipodeInvolutive` proves the true order-two action, and `wheel270CentreCodeIs269` with `wheel270CentreFixedByAntipode` identifies the arithmetic and geometric fixed centre. The independent exhaustive Python check additionally verifies its image equals all 27 arithmetic survivors `n∈[0,269]`; the **Agda file does not yet claim this all-residues coverage theorem**. It does not construct the general coprime CRT inverse E05–E08 or an analytic twin-prime correlation.
 
 The local Python probes `scripts/check_twin_prime_369_ibrahim_local_orbits.py` and `scripts/check_twin_prime_369_affine_270_crt.py` ran independently (the latter from a materially equivalent local copy) and passed all enumerated residue, inversion and 3×3×3 geometry checks. The independent uploaded prior audits `audit_fracprime_local.py` and `audit_sieve_local.py` also reran successfully: 20,000 numeric/valuation steps and 2,703 finite arithmetic witnesses. **None is a successful Agda kernel check.**
 
