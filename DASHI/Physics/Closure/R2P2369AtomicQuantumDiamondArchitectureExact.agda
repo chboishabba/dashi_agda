@@ -14,6 +14,7 @@ import Data.Empty as EmptyR2P2
 import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as Bias
 import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as Loop
 import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as Lattice
+import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeCut
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
 import DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge as SI
 import DASHI.Physics.Closure.QuantumClockSuperpositionReceipt as Superposition
@@ -459,6 +460,9 @@ record R2P2369FullLogicalArchitecture : Set where
     lattice : Lattice.OpticalLattice369PhysicalAuthority
     latticeCanonical :
       lattice ≡ Lattice.canonicalOpticalLattice369PhysicalAuthority
+    modeAliasingCut : ModeCut.ThreeModeCodecNSAuthority
+    modeAliasingCutCanonical :
+      modeAliasingCut ≡ ModeCut.canonicalThreeModeCodecNSAuthority
     indexedAtomic : Indexed369Observation zero
     indexedAtomicCanonical : indexedAtomic ≡ rootAtomicIndex
     indexedOptical : Indexed369Observation (suc (suc (suc zero)))
@@ -511,6 +515,8 @@ canonicalR2P2369FullLogicalArchitecture = record
   ; atomsCanonical = refl
   ; lattice = Lattice.canonicalOpticalLattice369PhysicalAuthority
   ; latticeCanonical = refl
+  ; modeAliasingCut = ModeCut.canonicalThreeModeCodecNSAuthority
+  ; modeAliasingCutCanonical = refl
   ; indexedAtomic = rootAtomicIndex
   ; indexedAtomicCanonical = refl
   ; indexedOptical = fineOpticalIndex
@@ -672,3 +678,32 @@ fullArchitectureMaS6ThreeModeHasNoSideband :
   EmptyR2P2.⊥
 fullArchitectureMaS6ThreeModeHasNoSideband =
   Lattice.noMaS6SidebandInThreeModeFourierTruncation
+
+------------------------------------------------------------------------
+-- Reused binary-in-ternary mode codec and NS exact Z^3 source owner.
+-- Lossless two-bit mode encoding is not lossless quadratic convolution.
+------------------------------------------------------------------------
+
+fullArchitectureExactPlusPlusVersusC3AliasedMinus :
+  ModeCut.exactQuadraticModeSum ModeCut.modePlus ModeCut.modePlus
+    ≡ ModeCut.widePlusTwo
+fullArchitectureExactPlusPlusVersusC3AliasedMinus =
+  ModeCut.positivePositiveLeavesThreeModeWindow
+
+fullArchitectureThreePointConvolutionAliasesOutput :
+  ModeCut.periodicQuadraticModeSum ModeCut.modePlus ModeCut.modePlus
+    ≡ ModeCut.modeMinus
+fullArchitectureThreePointConvolutionAliasesOutput =
+  ModeCut.positivePositiveAliasesToNegative
+
+fullArchitectureThreePointModeDoesNotRecoverIntegerLabel :
+  CoreR2P2.ConsumerSufficient ModeCut.periodicThreePointFold
+    (λ w → w) → EmptyR2P2.⊥
+fullArchitectureThreePointModeDoesNotRecoverIntegerLabel =
+  ModeCut.foldedThreePointModeCannotRecoverExactFourierIndex
+
+fullArchitectureDoesNotPromoteThreeModeToNSClay :
+  ModeCut.nsClayRegularityProved
+    (modeAliasingCut canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureDoesNotPromoteThreeModeToNSClay =
+  ModeCut.threeModeCodecIsNotAnNSProof
