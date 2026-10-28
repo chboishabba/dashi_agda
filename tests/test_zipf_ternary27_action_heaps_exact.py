@@ -112,3 +112,15 @@ def test_agda_owner_reuse_explicit_and_no_quaternion_same_object():
     for flag in ("postulate\n","{!!}","NO_POSITIVITY_CHECK",
                  "allow-unsolved-metas","{-# TERMINATING #-}"):
         assert flag not in src
+
+
+def test_same_heaps_curve_different_original_conjugacy_shape():
+    aab=(-1,-1,0)
+    aac=(-1,-1,1)
+    assert heaps_curve(aab)==heaps_curve(aac)==(0,1,1,2)
+    assert aac not in {
+        conjugate_endomorphism(aab,p) for p in S3}
+    src=(ROOT/"DASHI/Statistics/ZipfTernary27ActionHeapsExact.agda").read_text()
+    assert "Perm.rank2OneFixedShape" in src
+    assert "Perm.rank2TwoFixedShape" in src
+    assert "noFunctionalGraphShapeRecoveryFromHeaps" in src
