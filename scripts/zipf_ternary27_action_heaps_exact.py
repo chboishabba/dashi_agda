@@ -183,3 +183,66 @@ def information_loss_and_nonpromotion():
     return {"distinct_ternary_depth5":243,"distinct_five_mode_depth3":125,
             "ternary_cube":27,"double_cube":729,
             "distinct_heaps_curves":len(set(map(heaps_curve,CUBE)))}
+
+
+def uniform_heaps_curve_multiplicities(alphabet: int, length: int):
+    """Count complete novelty curves of length n over a q-symbol alphabet.
+
+    Integer-only pushforward of the EXISTING IID word space; the induced
+    probability law is compared against the canonical full_heaps_curve_law
+    owner when within its bounded computational budget. No new probability
+    carrier or exponent fitting is introduced.
+
+    If s types have appeared, a repeated token has s possible labels;
+    a novel type has q-s possible labels. This makes an exact DP over
+    the full novelty history, with no need to enumerate q^n whole words.
+    """
+    from math import comb
+    if (type(alphabet) is not int or type(length) is not int
+            or not 1<=alphabet<=7 or not 1<=length<=10
+            or alphabet**length>30000):
+        raise ValueError('bounded positive integer alphabet/length required')
+    states={(0,):1}
+    for _ in range(length):
+        following=Counter()
+        for curve,mass in states.items():
+            seen=curve[-1]
+            if seen:
+                following[curve+(seen,)]+=mass*seen
+            if seen<alphabet:
+                following[curve+(seen+1,)]+=mass*(alphabet-seen)
+        states=dict(following)
+    assert sum(states.values())==alphabet**length
+    expected_profile_count=sum(comb(length-1,j)
+        for j in range(min(alphabet-1,length-1)+1))
+    assert len(states)==expected_profile_count
+
+    # Reuse the prior full-path PMF owner; do not maintain another
+    # IID occupancy model. This bridge only computes integer fibre sizes.
+    from zipf_full_heaps_path_distribution_exact import full_heaps_curve_law
+    canonical=full_heaps_curve_law((1,)*alphabet,length,'iid')
+    expected={curve:Fraction(mass,alphabet**length)
+              for curve,mass in states.items()}
+    assert expected==canonical
+    return dict(sorted(states.items()))
+
+
+def compare_three_to_five_coding_axes():
+    """3^5 vs 5^3: typed orientation changes Heaps complexity.
+
+    11 full-Heaps curves on (3 labels,5 positions) is numerically equal
+    to 11 C3-position orbits on (3 labels,3 positions), but NO canonical
+    isomorphism or observation-intertwining map is supplied.
+    """
+    m3n5=uniform_heaps_curve_multiplicities(3,5)
+    m5n3=uniform_heaps_curve_multiplicities(5,3)
+    assert len(m3n5)==11 and len(m5n3)==4
+    assert sum(m3n5.values())==243
+    assert sum(m5n3.values())==125
+    assert m5n3=={
+       (0,1,1,1):5,(0,1,1,2):20,
+       (0,1,2,2):40,(0,1,2,3):60}
+    assert len(orbit_partition(C3,axis_permute))==len(m3n5)==11
+    return {"five_trit_words":243,"their_heaps_curves":11,
+            "three_five_mode_words":125,"their_heaps_curves":4,
+            "independent_cyclic_cube_orbits":11}
