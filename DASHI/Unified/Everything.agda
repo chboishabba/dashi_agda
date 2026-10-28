@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as R2P2Bias
 import DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact as R2P2369
 import DASHI.Foundations.Base369BinaryTernaryRefinement as RefineR2P2
 import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
@@ -451,3 +452,20 @@ unifiedR2P2369NoMeasurements :
   R2P2369.externalMeasurementsIngested unifiedR2P2369Architecture ≡ false
 unifiedR2P2369NoMeasurements =
   R2P2369.fullArchitectureDoesNotIngestMeasurements
+
+------------------------------------------------------------------------
+-- Independent R2P2 max-cut: one-height clock-bias confounding is exact.
+-- The second finite height separates only this selected candidate pair.
+------------------------------------------------------------------------
+
+unifiedR2P2BiasFiniteAmbiguity :
+  R2P2Bias.syntheticRate R2P2Bias.baselineWithLargeBias 3
+  ≡ R2P2Bias.syntheticRate R2P2Bias.doubledSlopeWithSmallBias 3
+unifiedR2P2BiasFiniteAmbiguity =
+  R2P2Bias.oneHeightCannotDiscriminate
+
+unifiedR2P2BiasNoQuantumGravity :
+  R2P2Bias.physicalQuantumGravityIdentified
+    R2P2Bias.canonicalR2P2BiasIdentifiabilityMaxCut ≡ false
+unifiedR2P2BiasNoQuantumGravity =
+  R2P2Bias.thisExampleDoesNotProveQuantumGravity
