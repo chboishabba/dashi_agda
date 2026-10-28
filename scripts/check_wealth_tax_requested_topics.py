@@ -390,11 +390,6 @@ def main() -> None:
     assert "import DASHI.Algebra.FiniteQuaternionDoubleCover as Q8" in dashi_tax_bridge, (
         "Q8 central-sign loss must reuse actual finite quotient owner"
     )
-    for term in ("jarosRauhCaliforniaProjection2026",
-                 "bacherFagerengRingWoldEntry2026",
-                 "jointNorwegianReformsNotCaliforniaProjection",
-                 "norwegianStartupCapitalThresholdNotWealthTax"):
-        assert term in tax_source, f"missing distinct source/estimand: {term}"
     assert "test_369_trialectic_numeric_role_maxcut" in script, (
         "27-cube/3^5/5^3 model oracle missing"
     )
@@ -418,6 +413,11 @@ def main() -> None:
         assert label in source, f"missing 2026 independent economic source: {label}"
     # Claim-specific original-root coverage, not evidence of empirical truth.
     tax_source = (ROOT / OWNERS[0]).read_text(encoding="utf-8")
+    for term in ("jarosRauhCaliforniaProjection2026",
+                 "bacherFagerengRingWoldEntry2026",
+                 "jointNorwegianReformsNotCaliforniaProjection",
+                 "norwegianStartupCapitalThresholdNotWealthTax"):
+        assert term in tax_source, f"missing distinct source/estimand: {term}"
     social_source = (ROOT / OWNERS[1]).read_text(encoding="utf-8")
     base = (ROOT / OWNERS[0]).read_text(encoding="utf-8")
     for theorem in (
