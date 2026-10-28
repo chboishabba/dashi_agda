@@ -22,6 +22,7 @@ module DASHI.Mathematics.Topology.AlexanderHornedDepthTwoFiveOrbitFibreExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Data.Product using (_×_; _,_)
+open import Data.Empty using (⊥)
 open import Data.Vec.Base using (_∷_; [])
 
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
@@ -142,3 +143,113 @@ inflateCombines k l c a b = refl
 -- independent and its cardinality cannot be multiplied by three.
 SixPhaseState : Set
 SixPhaseState = FiveField × C3.C3
+
+
+------------------------------------------------------------------------
+-- NEW NATURAL 3^5 vs 5^3 TRANSPORT: REVERSE DOMAIN AND CODOMAIN.
+--
+--   FiveField = (FiveOrbit -> C3)        -- 3^5 = 243, group
+--   ThreeOrbitSelection = (C3 -> FiveOrbit)  -- 5^3 = 125, set
+--
+-- Neither requires an invented C5 GROUP operation on FiveOrbit.
+-- Their canonical relation is composition/evaluation, not a bijection:
+-- field . selection : C3 -> C3.
+-- Choose three distinct orbits and every three-phase readout lifts
+-- to a FiveField; the other TWO orbit values remain unobservable.
+--
+-- This is an exact SOURCE-SPECIFIC BIDI / fibre information-loss result,
+-- not a numerical 243↔125 coincidence, and it preserves the original
+-- invariant27 / 13-in-27 / 5-in-9 owners above.
+------------------------------------------------------------------------
+
+ThreeOrbitSelection : Set
+ThreeOrbitSelection = C3.C3 → FiveOrbit
+
+ThreeSectorPhaseReadout : Set
+ThreeSectorPhaseReadout = C3.C3 → C3.C3
+
+evaluateAlongSelection :
+  FiveField → ThreeOrbitSelection → ThreeSectorPhaseReadout
+evaluateAlongSelection phase selector sector =
+  phase (selector sector)
+
+-- The recipient is a first-class, complete three-sector finite
+-- observation table; this avoids assuming function extensionality.
+ThreePhaseCode : Set
+ThreePhaseCode = C3.C3 × (C3.C3 × C3.C3)
+
+readoutCode :
+  FiveField → ThreeOrbitSelection → ThreePhaseCode
+readoutCode phase selector =
+  phase (selector C3.c0) ,
+    (phase (selector C3.c1) , phase (selector C3.c2))
+
+selectionOfThreeOrbits : ThreeOrbitSelection
+selectionOfThreeOrbits C3.c0 = origin
+selectionOfThreeOrbits C3.c1 = axisFirst
+selectionOfThreeOrbits C3.c2 = axisSecond
+
+liftThreePhaseCode : ThreePhaseCode → FiveField
+liftThreePhaseCode (a , (b , c)) origin = a
+liftThreePhaseCode (a , (b , c)) axisFirst = b
+liftThreePhaseCode (a , (b , c)) axisSecond = c
+liftThreePhaseCode (a , (b , c)) diagonal = C3.c0
+liftThreePhaseCode (a , (b , c)) antiDiagonal = C3.c0
+
+readoutCodeHasSection :
+  (code : ThreePhaseCode) →
+  readoutCode (liftThreePhaseCode code) selectionOfThreeOrbits ≡ code
+readoutCodeHasSection (a , (b , c)) = refl
+
+-- Pointwise group structure on the five orbit-phase fields and
+-- its compatibility with evaluation; the 5-orbit selection is
+-- deliberately only a SET without artificial 5-element group law.
+fiveFieldAdd : FiveField → FiveField → FiveField
+fiveFieldAdd f g o = C3._∙_ (f o) (g o)
+
+readoutPreservesGroupOperation :
+  (f g : FiveField) (selector : ThreeOrbitSelection)
+  (sector : C3.C3) →
+  evaluateAlongSelection (fiveFieldAdd f g) selector sector
+  ≡ C3._∙_ (evaluateAlongSelection f selector sector)
+            (evaluateAlongSelection g selector sector)
+readoutPreservesGroupOperation f g selector sector = refl
+
+-- Two distinct fields with IDENTICAL three-sector readouts.
+allNeutralFiveField : FiveField
+allNeutralFiveField _ = C3.c0
+
+diagonalOnlyCharge : FiveField
+diagonalOnlyCharge origin = C3.c0
+diagonalOnlyCharge axisFirst = C3.c0
+diagonalOnlyCharge axisSecond = C3.c0
+diagonalOnlyCharge diagonal = C3.c1
+diagonalOnlyCharge antiDiagonal = C3.c0
+
+sameThreeSectorReadout :
+  readoutCode allNeutralFiveField selectionOfThreeOrbits
+  ≡ readoutCode diagonalOnlyCharge selectionOfThreeOrbits
+sameThreeSectorReadout = refl
+
+invisibleDiagonalDiffers :
+  allNeutralFiveField diagonal ≡ diagonalOnlyCharge diagonal → ⊥
+invisibleDiagonalDiffers ()
+
+noUniversalFiveFieldRecoveryFromThreeSelectedOrbits :
+  (recover : ThreePhaseCode → FiveField) →
+  ((f : FiveField) (o : FiveOrbit) →
+     recover (readoutCode f selectionOfThreeOrbits) o ≡ f o)
+  → ⊥
+noUniversalFiveFieldRecoveryFromThreeSelectedOrbits recover exact =
+  invisibleDiagonalDiffers
+    (trans
+      (sym (exact allNeutralFiveField diagonal))
+      (trans
+        (cong (λ code → recover code diagonal)
+          sameThreeSectorReadout)
+        (exact diagonalOnlyCharge diagonal)))
+
+-- The five phase slots contain two unobserved independent components
+-- under this chosen three-sector selector. Their kernel is C3^2
+-- (nine fields). That count is an independent finite group calculation;
+-- the code above establishes a *stronger concrete non-descent witness*.
