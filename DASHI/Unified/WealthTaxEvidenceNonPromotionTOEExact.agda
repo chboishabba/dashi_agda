@@ -575,6 +575,8 @@ open DashiTradeTax public using
   ; equalCostTotalIsParetoMonotone
   ; policyIdentityIsAdmittedParetoSymmetry
   ; policySwapCannotBeAdmittedParetoSymmetry
+  ; administrativeCostInjectiveOnTwoPolicyFixture
+  ; everyQualifiedParetoSymmetryFixesBothPolicies
   ; equalCostTotalCannotReflectParetoOrder
   ; policyWeightedTwoAxisCost
   ; careHeavyWeightsPreferCareByScalar
@@ -835,4 +837,15 @@ toeAdmittedParetoSymmetryCannotSwapPolicyRoles :
     ≡ DashiTradeTax.increasedCareCapacity → ⊥
 toeAdmittedParetoSymmetryCannotSwapPolicyRoles =
   DashiTradeTax.policySwapCannotBeAdmittedParetoSymmetry
+
+-- The stronger complete census is a theorem, not just an enumerated
+-- Python fixture: the actual one-axis cost map is injective on the two
+-- allowed models, so no nontrivial qualified model permutation exists.
+toeEveryQualifiedSymmetryFixesEachSyntheticPolicy :
+  (symmetry : ParetoSym.ParetoOrderAutomorphism
+    DashiTradeTax.policyTradeoffCosts) →
+  (candidate : DashiTradeTax.HypotheticalPolicyOutcome) →
+  ParetoSym.mapModel symmetry candidate ≡ candidate
+toeEveryQualifiedSymmetryFixesEachSyntheticPolicy =
+  DashiTradeTax.everyQualifiedParetoSymmetryFixesBothPolicies
 
