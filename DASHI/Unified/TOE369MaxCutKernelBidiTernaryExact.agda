@@ -1,5 +1,7 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
 import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
+import DASHI.Reasoning.TrialecticObserverMatrix369Exact as DirectedObserver
+import DASHI.Core.ConsumerDescentMinimalObserverExact as DirectedDescent
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -231,7 +233,7 @@ toeWeightedGraphHasSixArrows :
 toeWeightedGraphHasSixArrows = WeightedGraph369.sixArrowsIncludingOneLoop
 
 toeWeightRotationNotAutomaticallyC3 :
-  ((source target : WeightedGraph369.Observer.Participant3) ->
+  ((source target : DirectedObserver.Participant3) ->
     WeightedGraph369.dankaWeight
       (WeightedGraph369.rotateVertex source)
       (WeightedGraph369.rotateVertex target)
@@ -240,7 +242,7 @@ toeWeightRotationNotAutomaticallyC3 =
   WeightedGraph369.weightedDankaGraphNotC3Invariant
 
 toeWeightedGraphDoesNotDetermineAttachedFace :
-  WeightedGraph369.Descent.FactorsThrough
+  DirectedDescent.FactorsThrough
     WeightedGraph369.graphObserver
     WeightedGraph369.triadicConsumer -> ⊥
 toeWeightedGraphDoesNotDetermineAttachedFace =
