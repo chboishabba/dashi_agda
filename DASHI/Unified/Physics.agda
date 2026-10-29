@@ -733,3 +733,33 @@ yangMillsYMA1CompletionDoesNotSelfPromote :
   ≡ false
 yangMillsYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+------------------------------------------------------------------------
+-- Canonical current Navier-Stokes four-lane problem receipt.
+------------------------------------------------------------------------
+
+navierStokesCurrentProblemReceipt :
+  NSClayTOE.NavierStokesCurrentProblemReceipt
+navierStokesCurrentProblemReceipt =
+  NSClayTOE.canonicalNavierStokesCurrentProblemReceipt
+
+navierStokesCurrentProblemBM2FiniteFoldClosed :
+  NSClayTOE.laneBM2FiniteFoldClosed navierStokesCurrentProblemReceipt ≡ true
+navierStokesCurrentProblemBM2FiniteFoldClosed =
+  NSClayTOE.currentProblemBM2FiniteFoldClosed
+
+navierStokesCurrentProblemBWeightedPlusStillOpen :
+  NSClayTOE.laneBWeightedPlusEndpointClosed navierStokesCurrentProblemReceipt ≡ false
+navierStokesCurrentProblemBWeightedPlusStillOpen =
+  NSClayTOE.currentProblemBWeightedPlusEndpointStillOpen
+
+
+navierStokesCurrentProblemBR829VectorClosed :
+  NSClayTOE.laneBR829VectorClosed navierStokesCurrentProblemReceipt ≡ true
+navierStokesCurrentProblemBR829VectorClosed =
+  NSClayTOE.currentProblemBR829VectorClosed
+
+navierStokesCurrentProblemBR829RealODEStillOpen :
+  NSClayTOE.laneBR829RealFiniteODETransportClosed navierStokesCurrentProblemReceipt ≡ false
+navierStokesCurrentProblemBR829RealODEStillOpen =
+  NSClayTOE.currentProblemBR829RealFiniteODETransportStillOpen

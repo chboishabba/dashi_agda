@@ -306,3 +306,130 @@ physicsRoadmapSubmissionMatchesAdapter :
   Physics.navierStokesSubmissionPacketReady
   ≡ NSClay.submissionPacketReady
 physicsRoadmapSubmissionMatchesAdapter = refl
+
+
+------------------------------------------------------------------------
+-- Canonical current four-lane problem receipt validation.
+------------------------------------------------------------------------
+
+adapterCurrentProblemBM2FiniteFoldClosed :
+  NSClay.laneBM2FiniteFoldClosed
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ true
+adapterCurrentProblemBM2FiniteFoldClosed =
+  NSClay.currentProblemBM2FiniteFoldClosed
+
+adapterCurrentProblemBM2SamplewisePaymentStillAnalytic :
+  NSClay.laneBM2SamplewisePhysicalPaymentStillAnalytic
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ true
+adapterCurrentProblemBM2SamplewisePaymentStillAnalytic =
+  NSClay.currentProblemBM2SamplewisePaymentRemainsAnalytic
+
+adapterCurrentProblemBM2GalerkinFoldStillAnalytic :
+  NSClay.laneBM2LiteralDissipationFoldStillAnalytic
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ true
+adapterCurrentProblemBM2GalerkinFoldStillAnalytic =
+  NSClay.currentProblemBM2GalerkinFoldRemainsAnalytic
+
+adapterCurrentProblemBWeightedPlusStillOpen :
+  NSClay.laneBWeightedPlusEndpointClosed
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ false
+adapterCurrentProblemBWeightedPlusStillOpen =
+  NSClay.currentProblemBWeightedPlusEndpointStillOpen
+
+adapterCurrentProblemBAugmentedStillOpen :
+  NSClay.laneBAugmentedCriticalWeightedClosed
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ false
+adapterCurrentProblemBAugmentedStillOpen =
+  NSClay.currentProblemBAugmentedCriticalWeightedStillOpen
+
+adapterCurrentProblemCDKernelBuildStillExternal :
+  NSClay.laneCDIndependentKernelBuildWitnessedHere
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ false
+adapterCurrentProblemCDKernelBuildStillExternal =
+  NSClay.currentProblemCDKernelBuildStillExternal
+
+adapterCurrentProblemCDReconstructionDoesNotGateAudit :
+  NSClay.laneCDIndependentReconstructionGatesAudit
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ false
+adapterCurrentProblemCDReconstructionDoesNotGateAudit =
+  NSClay.currentProblemCDReconstructionDoesNotGateAudit
+
+toeCurrentProblemBM2FiniteFoldMatchesAdapter :
+  TOE.toeNavierStokesCurrentProblemBM2FiniteFoldClosed
+  ≡ NSClay.currentProblemBM2FiniteFoldClosed
+toeCurrentProblemBM2FiniteFoldMatchesAdapter = refl
+
+toeCurrentProblemWeightedPlusMatchesAdapter :
+  TOE.toeNavierStokesCurrentProblemBWeightedPlusStillOpen
+  ≡ NSClay.currentProblemBWeightedPlusEndpointStillOpen
+toeCurrentProblemWeightedPlusMatchesAdapter = refl
+
+toeCurrentProblemAugmentedMatchesAdapter :
+  TOE.toeNavierStokesCurrentProblemBAugmentedStillOpen
+  ≡ NSClay.currentProblemBAugmentedCriticalWeightedStillOpen
+toeCurrentProblemAugmentedMatchesAdapter = refl
+
+unifierCurrentProblemBM2FiniteFoldMatchesAdapter :
+  U.unifierNavierStokesCurrentProblemBM2FiniteFoldClosed
+  ≡ NSClay.currentProblemBM2FiniteFoldClosed
+unifierCurrentProblemBM2FiniteFoldMatchesAdapter = refl
+
+unifierCurrentProblemWeightedPlusMatchesAdapter :
+  U.unifierNavierStokesCurrentProblemBWeightedPlusStillOpen
+  ≡ NSClay.currentProblemBWeightedPlusEndpointStillOpen
+unifierCurrentProblemWeightedPlusMatchesAdapter = refl
+
+physicsCurrentProblemBM2FiniteFoldMatchesAdapter :
+  Physics.navierStokesCurrentProblemBM2FiniteFoldClosed
+  ≡ NSClay.currentProblemBM2FiniteFoldClosed
+physicsCurrentProblemBM2FiniteFoldMatchesAdapter = refl
+
+physicsCurrentProblemWeightedPlusMatchesAdapter :
+  Physics.navierStokesCurrentProblemBWeightedPlusStillOpen
+  ≡ NSClay.currentProblemBWeightedPlusEndpointStillOpen
+physicsCurrentProblemWeightedPlusMatchesAdapter = refl
+
+
+adapterCurrentProblemBR829VectorClosed :
+  NSClay.laneBR829VectorClosed
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ true
+adapterCurrentProblemBR829VectorClosed =
+  NSClay.currentProblemBR829VectorClosed
+
+adapterCurrentProblemBR829InstantaneousRateStrictlyNegative :
+  NSClay.laneBR829InstantaneousRateStrictlyNegative
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ true
+adapterCurrentProblemBR829InstantaneousRateStrictlyNegative =
+  NSClay.currentProblemBR829InstantaneousRateStrictlyNegative
+
+adapterCurrentProblemBR829RealODEStillOpen :
+  NSClay.laneBR829RealFiniteODETransportClosed
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ false
+adapterCurrentProblemBR829RealODEStillOpen =
+  NSClay.currentProblemBR829RealFiniteODETransportStillOpen
+
+adapterCurrentProblemBR823IntegratedReserveStillNotRefuted :
+  NSClay.laneBR823IntegratedReserveRefuted
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ false
+adapterCurrentProblemBR823IntegratedReserveStillNotRefuted =
+  NSClay.currentProblemBR823IntegratedReserveStillNotRefuted
+
+toeCurrentProblemBR829VectorMatchesAdapter :
+  TOE.toeNavierStokesCurrentProblemBR829VectorClosed
+  ≡ NSClay.currentProblemBR829VectorClosed
+toeCurrentProblemBR829VectorMatchesAdapter = refl
+
+toeCurrentProblemBR829RealODEMatchesAdapter :
+  TOE.toeNavierStokesCurrentProblemBR829RealODEStillOpen
+  ≡ NSClay.currentProblemBR829RealFiniteODETransportStillOpen
+toeCurrentProblemBR829RealODEMatchesAdapter = refl
+
+unifierCurrentProblemBR829VectorMatchesAdapter :
+  U.unifierNavierStokesCurrentProblemBR829VectorClosed
+  ≡ NSClay.currentProblemBR829VectorClosed
+unifierCurrentProblemBR829VectorMatchesAdapter = refl
+
+physicsCurrentProblemBR829VectorMatchesAdapter :
+  Physics.navierStokesCurrentProblemBR829VectorClosed
+  ≡ NSClay.currentProblemBR829VectorClosed
+physicsCurrentProblemBR829VectorMatchesAdapter = refl

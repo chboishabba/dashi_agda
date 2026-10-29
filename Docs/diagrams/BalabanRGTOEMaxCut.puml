@@ -25,6 +25,8 @@ package "TOE consumers" {
 }
 
 component "BalabanRGTOE\nMaxCutValidation" as Validation
+component "Yang-Mills Gate-4 cutset\n58 conditional fields" as Gate4
+component "Fleet formal-gap target\n58 unformalised slots" as Fleet58
 
 Density --> Normalized : reuse
 RegularE --> Normalized : reuse
@@ -42,6 +44,8 @@ TOE --> Validation : agreement
 Unifier --> Validation : agreement
 Physics --> Validation : agreement
 Normalized --> Validation : receipt fields
+Gate4 --> Normalized : exact count + conditional boundary
+Fleet58 ..> Gate4 : equal count only\nno same-object identity
 
 note bottom of Frontier
 Preconditions:
@@ -51,6 +55,9 @@ Preconditions:
 
 Invariants:
 - one canonical theorem owner
+- 584 discharged fleet fibres stay discharged
+- only 58 fleet formal-gap slots stay targeted
+- fleet 58 != Yang-Mills Gate-4 58 by count alone
 - finite != continuum
 - conditional != machineChecked
 - no ESD mutation

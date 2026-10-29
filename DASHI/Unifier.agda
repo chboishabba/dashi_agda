@@ -1742,3 +1742,33 @@ unifierYMA1CompletionDoesNotSelfPromote :
   ≡ false
 unifierYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+------------------------------------------------------------------------
+-- Canonical current Navier-Stokes four-lane problem receipt.
+------------------------------------------------------------------------
+
+unifierNavierStokesCurrentProblemReceipt :
+  NSClayTOE.NavierStokesCurrentProblemReceipt
+unifierNavierStokesCurrentProblemReceipt =
+  NSClayTOE.canonicalNavierStokesCurrentProblemReceipt
+
+unifierNavierStokesCurrentProblemBM2FiniteFoldClosed :
+  NSClayTOE.laneBM2FiniteFoldClosed unifierNavierStokesCurrentProblemReceipt ≡ true
+unifierNavierStokesCurrentProblemBM2FiniteFoldClosed =
+  NSClayTOE.currentProblemBM2FiniteFoldClosed
+
+unifierNavierStokesCurrentProblemBWeightedPlusStillOpen :
+  NSClayTOE.laneBWeightedPlusEndpointClosed unifierNavierStokesCurrentProblemReceipt ≡ false
+unifierNavierStokesCurrentProblemBWeightedPlusStillOpen =
+  NSClayTOE.currentProblemBWeightedPlusEndpointStillOpen
+
+
+unifierNavierStokesCurrentProblemBR829VectorClosed :
+  NSClayTOE.laneBR829VectorClosed unifierNavierStokesCurrentProblemReceipt ≡ true
+unifierNavierStokesCurrentProblemBR829VectorClosed =
+  NSClayTOE.currentProblemBR829VectorClosed
+
+unifierNavierStokesCurrentProblemBR829RealODEStillOpen :
+  NSClayTOE.laneBR829RealFiniteODETransportClosed unifierNavierStokesCurrentProblemReceipt ≡ false
+unifierNavierStokesCurrentProblemBR829RealODEStillOpen =
+  NSClayTOE.currentProblemBR829RealFiniteODETransportStillOpen

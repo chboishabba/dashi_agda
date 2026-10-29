@@ -1500,3 +1500,38 @@ toeYMA1CompletionDoesNotSelfPromote :
   ≡ false
 toeYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+------------------------------------------------------------------------
+-- Canonical current Navier-Stokes four-lane problem receipt.
+------------------------------------------------------------------------
+
+toeNavierStokesCurrentProblemReceipt :
+  NSClayTOE.NavierStokesCurrentProblemReceipt
+toeNavierStokesCurrentProblemReceipt =
+  NSClayTOE.canonicalNavierStokesCurrentProblemReceipt
+
+toeNavierStokesCurrentProblemBM2FiniteFoldClosed :
+  NSClayTOE.laneBM2FiniteFoldClosed toeNavierStokesCurrentProblemReceipt ≡ true
+toeNavierStokesCurrentProblemBM2FiniteFoldClosed =
+  NSClayTOE.currentProblemBM2FiniteFoldClosed
+
+toeNavierStokesCurrentProblemBWeightedPlusStillOpen :
+  NSClayTOE.laneBWeightedPlusEndpointClosed toeNavierStokesCurrentProblemReceipt ≡ false
+toeNavierStokesCurrentProblemBWeightedPlusStillOpen =
+  NSClayTOE.currentProblemBWeightedPlusEndpointStillOpen
+
+toeNavierStokesCurrentProblemBAugmentedStillOpen :
+  NSClayTOE.laneBAugmentedCriticalWeightedClosed toeNavierStokesCurrentProblemReceipt ≡ false
+toeNavierStokesCurrentProblemBAugmentedStillOpen =
+  NSClayTOE.currentProblemBAugmentedCriticalWeightedStillOpen
+
+
+toeNavierStokesCurrentProblemBR829VectorClosed :
+  NSClayTOE.laneBR829VectorClosed toeNavierStokesCurrentProblemReceipt ≡ true
+toeNavierStokesCurrentProblemBR829VectorClosed =
+  NSClayTOE.currentProblemBR829VectorClosed
+
+toeNavierStokesCurrentProblemBR829RealODEStillOpen :
+  NSClayTOE.laneBR829RealFiniteODETransportClosed toeNavierStokesCurrentProblemReceipt ≡ false
+toeNavierStokesCurrentProblemBR829RealODEStillOpen =
+  NSClayTOE.currentProblemBR829RealFiniteODETransportStillOpen
