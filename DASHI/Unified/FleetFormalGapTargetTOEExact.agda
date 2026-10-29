@@ -10,6 +10,7 @@ open import Data.Empty using (⊥)
 import DASHI.Interop.PNFSpectralCoordinateRebuildability as Rebuild
 import DASHI.Interop.PNFSpectralNumericABICore as Numeric
 import DASHI.Interop.PNFResidualFieldInvariants as Residual
+import DASHI.Interop.SublinearTopicConductorCostExact as Conductor
 import DASHI.Planning.PlanningPNFClaimBoundaryExact as Planning
 import DASHI.Promotion.ObligationIndex as Obligation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
@@ -190,6 +191,17 @@ fleetResidualInvariantReceipt :
   Residual.PNFResidualFieldInvariantReceipt
 fleetResidualInvariantReceipt =
   Residual.canonicalPNFResidualFieldInvariantReceipt
+
+fleetSublinearConductorBoundary :
+  Conductor.DynamicConductorBoundary
+fleetSublinearConductorBoundary =
+  Conductor.canonicalDynamicConductorBoundary
+
+fleetSublinearCapacityIsBudget :
+  Conductor.workerCapacityIsBudgetNotModeSelector fleetSublinearConductorBoundary
+  ≡ true
+fleetSublinearCapacityIsBudget =
+  Conductor.capacityDoesNotSelectMode
 
 fleetPlanningBoundary :
   Planning.PNFPlanningAdapterBoundary
