@@ -856,3 +856,26 @@ unifiedOrbit365ReflectedEventExact :
   ≡ OrbitWeighted365.invertedEvent (OrbitWeighted365.sourceEvent a b pair)
 unifiedOrbit365ReflectedEventExact =
   OrbitWeighted365.reflectedEventIsConjugate
+
+
+-- Five-in-nine plane -> 41 actual ordered pair orbits -> 81 events.
+unifiedPlane41CanonicalCount :
+  Pairs365Owner.lengthL OrbitWeighted365.canonicalPlaneOrderedPairs ≡ 41
+unifiedPlane41CanonicalCount =
+  OrbitWeighted365.actual41PlanePairOrbits
+
+unifiedPlane41Emits81Events :
+  (a b : HermitianSym729.Hermitian9) →
+  Pairs365Owner.lengthL (OrbitWeighted365.orbitWeightedPlaneEvents a b) ≡ 81
+unifiedPlane41Emits81Events =
+  OrbitWeighted365.actual81WeightedPlaneEvents
+
+unifiedPlane41ConjugateEvent :
+  (a b : HermitianSym729.Hermitian9)
+  (pair : HermitianPlane81.PlanePair81) →
+  OrbitWeighted365.planeSourceEvent a b
+    (OrbitWeighted365.negatePlaneOrderedPair pair)
+  ≡ OrbitWeighted365.invertedPlaneEvent
+      (OrbitWeighted365.planeSourceEvent a b pair)
+unifiedPlane41ConjugateEvent =
+  OrbitWeighted365.reflectedPlaneEventIsConjugate
