@@ -51,6 +51,8 @@ grep -q 'generatedScaffoldDoesNotCreatePremise27' DASHI/Foundations/Wette1969Rul
 grep -q 'documentationDoesNotCreateMajorDerivation' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'verificationStatusDoesNotCreateMajorDerivation' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'canonicalRule915MajorZKPFrame' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'typedPreconditionsInvariantAndPostconditionAreConnectedIsTrue' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'buildCanonicalRule915ResidualContract' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'toeWetteGeneratedScaffoldDoesNotCreatePremise18' DASHI/EverythingTOESymmetryResolved369.agda
 grep -q 'toeFleetPriorityStillDoesNotCreateWetteProofAuthority' DASHI/EverythingTOESymmetryResolved369.agda
 grep -q 'unifiedWetteRule915CurrentProblemBoundary' DASHI/Unifier.agda
