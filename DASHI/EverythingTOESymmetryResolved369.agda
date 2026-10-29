@@ -1931,3 +1931,23 @@ toePlane41ConjugateEvent :
       (OrbitWeighted365.planeSourceEvent a b pair)
 toePlane41ConjugateEvent =
   OrbitWeighted365.reflectedPlaneEventIsConjugate
+
+
+------------------------------------------------------------------------
+-- New independent Gaussian Q(i) C4³ Fourier character orthogonality.
+-- Do not substitute the source-owned Q(omega) C3³ FFT for fourth roots.
+-- A fully normalized sampled-product Agda theorem still remains open.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C4GaussianFourierCharacterExact as C4Gaussian
+
+toeC4GaussianOneDimOrthogonality :
+  (k l : FourGridPareto729.FourGridMode) →
+  C4Gaussian.inner4 k l ≡ C4Gaussian.delta4 k l
+toeC4GaussianOneDimOrthogonality =
+  C4Gaussian.oneDimensionalCharacterOrthogonality
+
+toeC4GaussianCubeOrthogonality :
+  (k l : C4Gaussian.Cube4) →
+  C4Gaussian.cubeInner4 k l ≡ C4Gaussian.cubeDelta4 k l
+toeC4GaussianCubeOrthogonality =
+  C4Gaussian.cubeCharacterOrthogonality
