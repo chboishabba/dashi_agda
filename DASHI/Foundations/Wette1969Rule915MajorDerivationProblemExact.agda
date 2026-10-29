@@ -20,6 +20,7 @@ import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 import DASHI.Foundations.Wette1969Rule915PredicateProducerExact as Rule915
 import DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact as Later
 import DASHI.Foundations.Wette1969Rule915SourceExactScaffoldCutsetExact as Source
+import DASHI.Foundations.Wette1969Rule915TwoProofCutsetExact as Cutset
 import DASHI.Foundations.Wette1969Rule915IndependentMajorTraceJoinExact as Join
 import DASHI.Foundations.Wette1969Rule915MajorPureWordRecoveryFrontierExact as Recovery
 import DASHI.Foundations.Wette1969FiniteDerivationContextExact as Finite
@@ -207,6 +208,52 @@ selectCanonicalRule915FromCurrentResidual
     (canonicalMajorTraceInputs residual)
 
 ------------------------------------------------------------------------
+-- Typed precondition / invariant / postcondition contract.
+------------------------------------------------------------------------
+
+record CanonicalRule915ResidualContract
+    {initial : Context}
+    (recursivePredicate : WordTerm)
+    (scaffold :
+      Source.SourceExactScaffoldInputs
+        initial Weld.canonicalFirstSeven Weld.canonicalLater) : Set₁ where
+  constructor canonicalRule915ResidualContract
+  field
+    preconditions :
+      CanonicalRule915MajorResidual scaffold
+
+    scaffoldInvariant :
+      Cutset.Rule915SyntacticScaffoldEvidence
+        (Join.joinedMajorTarget (canonicalMajorTraceInputs preconditions))
+        Weld.canonicalFirstSeven
+        Weld.canonicalLater
+
+    postcondition :
+      PCRA.SelectedRuleApplication historicalSystem
+        (Join.joinedMajorTarget (canonicalMajorTraceInputs preconditions))
+
+open CanonicalRule915ResidualContract public
+
+buildCanonicalRule915ResidualContract :
+  {initial : Context} →
+  (recursivePredicate : WordTerm) →
+  (scaffold :
+    Source.SourceExactScaffoldInputs
+      initial Weld.canonicalFirstSeven Weld.canonicalLater) →
+  (residual : CanonicalRule915MajorResidual scaffold) →
+  CanonicalRule915ResidualContract recursivePredicate scaffold
+buildCanonicalRule915ResidualContract recursivePredicate scaffold residual =
+  canonicalRule915ResidualContract
+    residual
+    (Join.joinedScaffoldEvidence
+      Weld.canonicalFirstSeven
+      Weld.canonicalLater
+      scaffold
+      (canonicalMajorTraceInputs residual))
+    (selectCanonicalRule915FromCurrentResidual
+      recursivePredicate scaffold residual)
+
+------------------------------------------------------------------------
 -- Exact non-promotion gates.
 ------------------------------------------------------------------------
 
@@ -262,6 +309,10 @@ canonicalRule915MajorZKPFrame =
 record CanonicalRule915CurrentProblemBoundary : Set where
   constructor canonicalRule915CurrentProblemBoundary
   field
+    typedPreconditionsInvariantAndPostconditionAreConnected : Bool
+    typedPreconditionsInvariantAndPostconditionAreConnectedIsTrue :
+      typedPreconditionsInvariantAndPostconditionAreConnected ≡ true
+
     canonicalP145HasTwentySevenFixedPremiseWords : Bool
     canonicalP145HasTwentySevenFixedPremiseWordsIsTrue :
       canonicalP145HasTwentySevenFixedPremiseWords ≡ true
@@ -290,6 +341,7 @@ canonicalRule915CurrentProblemBoundary :
   CanonicalRule915CurrentProblemBoundary
 canonicalRule915CurrentProblemBoundary =
   canonicalRule915CurrentProblemBoundary
+    true refl
     true refl
     true refl
     true refl
