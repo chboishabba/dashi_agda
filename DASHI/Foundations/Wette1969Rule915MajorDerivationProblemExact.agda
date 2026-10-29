@@ -27,6 +27,7 @@ import DASHI.Foundations.Wette1969FiniteDerivationContextExact as Finite
 import DASHI.Foundations.Wette1969DerivationClosureExact as Closure
 import DASHI.Foundations.Wette1969Rule915CanonicalP145TypedWeldExact as Weld
 import DASHI.Foundations.Wette1969Rule915Premise18Rule9323ResolutionExact as Resolve18
+import DASHI.Foundations.Wette1969Rule915Premise18ImplicationSpineExact as Spine
 import DASHI.Foundations.Wette1969Rule915Premise27DirectionalClosureExact as Resolve27
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
 import Data.Empty using (⊥)
@@ -154,6 +155,11 @@ canonicalWette1969Rule915MajorDerivationProblemBoundary =
 --
 -- D27 has a selected sufficient route through its two directional leaves.
 ------------------------------------------------------------------------
+
+canonicalPremise18P145SpineRecovery :
+  Spine.Premise18P145SpineRecovery Weld.canonicalLater
+canonicalPremise18P145SpineRecovery =
+  Spine.premise18P145SpineRecovery refl
 
 CanonicalRule915CurrentProblem :
   {initial : Context} →
@@ -341,6 +347,10 @@ canonicalRule915MajorZKPFrame =
 record CanonicalRule915CurrentProblemBoundary : Set where
   constructor canonicalRule915CurrentProblemBoundary
   field
+    canonicalPremise18SpineRecoveryIsDefinitionallyDischarged : Bool
+    canonicalPremise18SpineRecoveryIsDefinitionallyDischargedIsTrue :
+      canonicalPremise18SpineRecoveryIsDefinitionallyDischarged ≡ true
+
     typedPreconditionsInvariantAndPostconditionAreConnected : Bool
     typedPreconditionsInvariantAndPostconditionAreConnectedIsTrue :
       typedPreconditionsInvariantAndPostconditionAreConnected ≡ true
