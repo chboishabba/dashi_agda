@@ -1620,3 +1620,30 @@ toeGDP15000DoesNotOpenCausalConsumer :
   FleetGapTOE.GDP15000CausalConsumerPromotion → ⊥
 toeGDP15000DoesNotOpenCausalConsumer =
   FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
+
+
+toeMeta2026SettlementNormCalibration :
+  FleetGapTOE.Meta2026SettlementNormCalibration
+toeMeta2026SettlementNormCalibration =
+  FleetGapTOE.fleetMeta2026SettlementNormCalibration
+
+toeMetaSettlementDoesNotBindCompetitors :
+  FleetGapTOE.LegalNorm.settlementAloneLegallyBindsTikTokOrYouTube
+    FleetGapTOE.LegalNorm.canonicalMeta2026SettlementNormCalibration
+  ≡ false
+toeMetaSettlementDoesNotBindCompetitors =
+  FleetGapTOE.fleetMetaSettlementDoesNotBindCompetitors
+
+toeMetaSettlementDoesNotCreateFederalStatute :
+  FleetGapTOE.LegalNorm.settlementCreatesFederalStatute
+    FleetGapTOE.LegalNorm.canonicalMeta2026SettlementNormCalibration
+  ≡ false
+toeMetaSettlementDoesNotCreateFederalStatute =
+  FleetGapTOE.fleetMetaSettlementDoesNotCreateFederalStatute
+
+toeJMDPosterDoesNotCreateLegalAuthority :
+  FleetGapTOE.LegalNorm.jmdPosterCreatesLegalAuthority
+    FleetGapTOE.LegalNorm.canonicalMeta2026SettlementNormCalibration
+  ≡ false
+toeJMDPosterDoesNotCreateLegalAuthority =
+  FleetGapTOE.fleetJMDPosterDoesNotCreateLegalAuthority
