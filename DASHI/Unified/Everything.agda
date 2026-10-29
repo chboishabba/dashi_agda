@@ -404,3 +404,20 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Canonical current Navier-Stokes four-lane problem receipt.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayCurrent
+
+unifiedNavierStokesCurrentProblemReceipt :
+  NSClayCurrent.NavierStokesCurrentProblemReceipt
+unifiedNavierStokesCurrentProblemReceipt =
+  NSClayCurrent.canonicalNavierStokesCurrentProblemReceipt
+
+unifiedNavierStokesCurrentProblemClayStillFalse :
+  NSClayCurrent.terminalClayPromotion unifiedNavierStokesCurrentProblemReceipt ≡ false
+unifiedNavierStokesCurrentProblemClayStillFalse =
+  NSClayCurrent.terminalClayPromotionIsFalse unifiedNavierStokesCurrentProblemReceipt
