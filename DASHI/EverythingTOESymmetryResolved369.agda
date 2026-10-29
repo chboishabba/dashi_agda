@@ -1,5 +1,28 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- O45: rational 2/3/6 block-field inverse and S3-intertwiner,
+-- assembled into source-written Q^27 ≃ 7triv ⊕ 4sign ⊕ 8std₂.
+-- Agda kernel verification PENDING; char3 modular no-go preserved.
+import DASHI.Foundations.PolynomialS3RationalBlockFieldIsomorphismExact as RationalFieldBlocks
+open RationalFieldBlocks public using
+  ( toCoordinates2 ; fromCoordinates2
+  ; toCoordinates3 ; fromCoordinates3
+  ; toCoordinates6 ; fromCoordinates6
+  ; fromToCoordinates2 ; toFromCoordinates2
+  ; fromToCoordinates3 ; toFromCoordinates3
+  ; fromToCoordinates6 ; toFromCoordinates6
+  ; toCoordinates2Intertwines ; toCoordinates3Intertwines
+  ; toCoordinates6Intertwines
+  ; toCoordinates2Additive ; toCoordinates3Additive
+  ; toCoordinates6Additive )
+import DASHI.Foundations.PolynomialS3RationalTwentySevenFieldIsomorphismExact as RationalNative27
+open RationalNative27 public using
+  ( RationalCoordinates27 ; encodeNative27 ; decodeNative27
+  ; decodeEncodeNativeAt ; encodeDecodeNativeCoordinateAt
+  ; encodeBlocksAdditiveAt ; decodeBlocksAdditiveAt
+  ; encodeBlocksIntertwinesAt ; decodeBlocksIntertwinesAt
+  ; sourceBlockActionAgreesWithNative )
+
 -- Separate F3 no-go: nonsemisimple three-point C3 permutation module
 -- has no C3-equivariant linear retraction onto its constant line.
 import DASHI.Foundations.PolynomialC3CharacteristicThreeRetractionNoGoExact as C3ModularNoGo
