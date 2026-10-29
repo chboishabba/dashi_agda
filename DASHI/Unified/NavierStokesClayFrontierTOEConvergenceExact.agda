@@ -56,6 +56,7 @@ import DASHI.Physics.Closure.NSAuthorityConsistencyGuard as Guard
 import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as Roadmap
 import DASHI.Physics.Closure.NSClaySubmissionEligibilityRoadmapReceipt as Eligibility
 import DASHI.Physics.Closure.NSTriadKNR650CurrentSharedWeightedWallRound736Exact as R736
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as BM2
 
 open Distance public using (NSClayDistanceFinalPromotion)
 
@@ -295,6 +296,113 @@ currentSharedWeightedClayPromotionStillFalse =
   R736.round736ClayPromotionIsFalse
 
 ------------------------------------------------------------------------
+-- Current four-lane problem, normalized onto existing theorem owners.
+--
+-- This is a status theorem surface.
+-- It does not add a PDE estimate.
+-- Agda is the authority.
+-- Lean and external repositories are donor or audit sources only.
+------------------------------------------------------------------------
+
+record NavierStokesCurrentProblemReceipt : Set where
+  field
+    laneACompilerStackClosed : Bool
+    laneAInternalFrontierClosed : Bool
+
+    laneBM2FiniteFoldClosed : Bool
+    laneBM2SamplewisePhysicalPaymentStillAnalytic : Bool
+    laneBM2LiteralDissipationFoldStillAnalytic : Bool
+    laneBSharedWeightedExactlyTwoLeaves : Bool
+    laneBWeightedPlusEndpointClosed : Bool
+    laneBAugmentedCriticalWeightedClosed : Bool
+
+    laneCReleasedSourceAuditClosed : Bool
+    laneDReleasedSourceAuditClosed : Bool
+    laneCDIndependentKernelBuildWitnessedHere : Bool
+    laneCDIndependentReconstructionGatesAudit : Bool
+
+    terminalClayPromotion : Bool
+    terminalClayPromotionIsFalse :
+      terminalClayPromotion ≡ false
+
+open NavierStokesCurrentProblemReceipt public
+
+canonicalNavierStokesCurrentProblemReceipt :
+  NavierStokesCurrentProblemReceipt
+canonicalNavierStokesCurrentProblemReceipt =
+  record
+    { laneACompilerStackClosed =
+        ABCD.aCompilerStackClosed
+    ; laneAInternalFrontierClosed =
+        ABCD.aInternalFrontierClosed
+    ; laneBM2FiniteFoldClosed =
+        BM2.cardinalityFreeFiniteFoldClosed
+    ; laneBM2SamplewisePhysicalPaymentStillAnalytic =
+        BM2.samplewisePhysicalPaymentStillAnalytic
+    ; laneBM2LiteralDissipationFoldStillAnalytic =
+        BM2.literalFoldIntoGalerkinDissipationStillAnalytic
+    ; laneBSharedWeightedExactlyTwoLeaves =
+        currentSharedWeightedExactlyTwoLeaves
+    ; laneBWeightedPlusEndpointClosed =
+        currentWeightedPlusEndpointClosed
+    ; laneBAugmentedCriticalWeightedClosed =
+        currentAugmentedCriticalWeightedClosed
+    ; laneCReleasedSourceAuditClosed =
+        releasedCSourceAuditClosed
+    ; laneDReleasedSourceAuditClosed =
+        releasedDSourceAuditClosed
+    ; laneCDIndependentKernelBuildWitnessedHere =
+        ABCD.cdIndependentKernelBuildWitnessedHere
+    ; laneCDIndependentReconstructionGatesAudit =
+        ABCD.cdIndependentReconstructionGatesAudit
+    ; terminalClayPromotion =
+        navierStokesABCDClayPromotion
+    ; terminalClayPromotionIsFalse =
+        navierStokesABCDClayPromotionStillFalse
+    }
+
+currentProblemBM2FiniteFoldClosed :
+  laneBM2FiniteFoldClosed canonicalNavierStokesCurrentProblemReceipt ≡ true
+currentProblemBM2FiniteFoldClosed =
+  BM2.cardinalityFreeFiniteFoldClosedIsTrue
+
+currentProblemBM2SamplewisePaymentRemainsAnalytic :
+  laneBM2SamplewisePhysicalPaymentStillAnalytic
+    canonicalNavierStokesCurrentProblemReceipt ≡ true
+currentProblemBM2SamplewisePaymentRemainsAnalytic =
+  BM2.samplewisePhysicalPaymentStillAnalyticIsTrue
+
+currentProblemBM2GalerkinFoldRemainsAnalytic :
+  laneBM2LiteralDissipationFoldStillAnalytic
+    canonicalNavierStokesCurrentProblemReceipt ≡ true
+currentProblemBM2GalerkinFoldRemainsAnalytic =
+  BM2.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+currentProblemBWeightedPlusEndpointStillOpen :
+  laneBWeightedPlusEndpointClosed
+    canonicalNavierStokesCurrentProblemReceipt ≡ false
+currentProblemBWeightedPlusEndpointStillOpen =
+  currentWeightedPlusEndpointStillOpen
+
+currentProblemBAugmentedCriticalWeightedStillOpen :
+  laneBAugmentedCriticalWeightedClosed
+    canonicalNavierStokesCurrentProblemReceipt ≡ false
+currentProblemBAugmentedCriticalWeightedStillOpen =
+  currentAugmentedCriticalWeightedStillOpen
+
+currentProblemCDKernelBuildStillExternal :
+  laneCDIndependentKernelBuildWitnessedHere
+    canonicalNavierStokesCurrentProblemReceipt ≡ false
+currentProblemCDKernelBuildStillExternal =
+  ABCD.cdIndependentKernelBuildWitnessedHereIsFalse
+
+currentProblemCDReconstructionDoesNotGateAudit :
+  laneCDIndependentReconstructionGatesAudit
+    canonicalNavierStokesCurrentProblemReceipt ≡ false
+currentProblemCDReconstructionDoesNotGateAudit =
+  ABCD.cdIndependentReconstructionGatesAuditIsFalse
+
+------------------------------------------------------------------------
 -- Canonical roadmap and submission-eligibility reconciliation.
 ------------------------------------------------------------------------
 
@@ -404,13 +512,13 @@ canonicalNavierStokesClayFrontierTOEZKPFrame =
     ; constructionRule =
         "Expose exact owner aliases and theorem-level non-promotion only."
     ; scopeRule =
-        "Treat R736 as the preferred periodic-B analytic max-cut. Keep its two weighted leaves open. Keep A/B internal theorem development separate from released C/D audit and from carrier-structured completion."
+        "Treat the canonical current-problem receipt as the four-lane status surface. Treat R736 as the preferred periodic-B analytic max-cut. Reuse the R571 M2 finite fold as a producer strategy below R736. Keep A/B internal theorem development separate from released C/D audit and from carrier-structured completion."
     ; laneRule =
         "Use one Navier-Stokes normalization lane and keep ESD surfaces unchanged."
     ; preconditionRule =
         "Require the canonical R736 owner, A/B/C/D max-cut, residual scheduler, Clay-distance receipt, authority guard, roadmap, and submission-eligibility owners to exist before normalization."
     ; invariantRule =
-        "Preserve theorem ownership. Preserve exactly two preferred R736 analytic leaves. Preserve the shared weighted/input-Laplacian carrier. Do not promote producer strategies, circular Q-plus-minus shortcuts, finite carriers, or released C/D audit facts into a Clay proof."
+        "Preserve theorem ownership. Preserve the A/B/C/D lane split. Preserve exactly two preferred R736 analytic leaves. Preserve the shared weighted/input-Laplacian carrier. Preserve the BM2 finite fold as closed while its samplewise and Galerkin-fold payments remain analytic. Do not promote producer strategies, circular Q-plus-minus shortcuts, finite carriers, or released C/D audit facts into a Clay proof."
     ; postconditionRule =
         "Expose the R736 shared wall, both open leaves, barrier compiler, structural gap, and exact false promotion gates through TOE, Unifier, and Unified.Physics."
     ; governanceRule =
