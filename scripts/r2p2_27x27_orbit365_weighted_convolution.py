@@ -4,6 +4,7 @@ Scientific and repository provenance: Serre orbit counting; Orszag/Patterson
 pseudo-spectral convolution; DASHI original 27/729, 13/27 and Q(omega) owners.
 This is an arithmetic check, NOT an Agda kernel receipt or NS theorem.
 """
+from collections import Counter
 from fractions import Fraction
 from itertools import product
 from random import Random
@@ -86,6 +87,27 @@ def reduced(f, g):
 
 
 def check():
+    # Exhaustive address permutation, independent of coefficient profiles.
+    reps = [pair for pair in PAIRS if pair_canonical(pair)]
+    expanded = []
+    for p, q in reps:
+        expanded.append((p, q))
+        if (p, q) != (ZERO, ZERO):
+            expanded.append((neg(p), neg(q)))
+    assert len(reps) == 365 and len(expanded) == 729
+    assert Counter(expanded) == Counter(PAIRS)
+
+    # Existing five-in-nine symmetry: 81 ordered pairs form 41 orbits.
+    plane = tuple(product((-1, 0, 1), repeat=2))
+    plane_pairs = tuple(product(plane, repeat=2))
+    plane_zero = (0, 0)
+    plane_reps = [(p, q) for p, q in plane_pairs
+                  if (canonical(p) if p != plane_zero else canonical(q))]
+    plane_expanded = [(p, q) for p, q in plane_reps]
+    plane_expanded += [(neg(p), neg(q)) for p, q in plane_reps
+                       if (p, q) != (plane_zero, plane_zero)]
+    assert len(plane_reps) == 41 and len(plane_expanded) == 81
+    assert Counter(plane_expanded) == Counter(plane_pairs)
     for p, q in PAIRS:
         assert pair_canonical((p, q)) != pair_canonical((neg(p), neg(q))) or (p, q) == (ZERO, ZERO)
         assert add_modes(neg(p), neg(q)) == neg(add_modes(p, q))
@@ -102,6 +124,7 @@ def check():
         assert len([k for k in WIDE if all(abs(x) <= 1 for x in k)]) == 27
     print('PASS: 12 distinct exact Q(omega) Hermitian two-field profiles, all 125 coefficients')
     print('PASS: 729 original vs 365 products (+364 conjugations), 365 orbits, 729 emitted events')
+    print('PASS: exhaustive address permutation in 3D (365) and 2D (41)')
     print('PASS: global negation, integer-sum covariance, real zero-frequency output')
 
 
