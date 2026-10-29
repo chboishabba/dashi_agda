@@ -75,3 +75,45 @@ physicalWritesAreNotSemanticAuthority ()
 
 desiredMustCompareCurrent : DesiredRelationMaySkipCurrentComparison → ⊥
 desiredMustCompareCurrent ()
+
+------------------------------------------------------------------------
+-- Single-owner authority routing.
+--
+-- A desired/current reconciler is not active merely because it exists.
+-- The hot path must route candidate membership mutation through exactly one
+-- owner.  Private delete/reinsert paths are forbidden.
+------------------------------------------------------------------------
+
+record RelationDeltaOwnerRouting : Set where
+  constructor relationDeltaOwnerRouting
+  field
+    candidateMutationOwnerCount : Nat
+    privateCandidateMutationBypassCount : Nat
+    hotPathReconcilerOwnerCount : Nat
+    reconciliationReceiptOwnerCount : Nat
+
+    candidateMutationOwnerUnique :
+      candidateMutationOwnerCount ≡ 1
+
+    privateCandidateMutationBypassZero :
+      privateCandidateMutationBypassCount ≡ 0
+
+    hotPathReconcilerOwnerUnique :
+      hotPathReconcilerOwnerCount ≡ 1
+
+    reconciliationReceiptOwnerMatchesHotPath :
+      reconciliationReceiptOwnerCount ≡ hotPathReconcilerOwnerCount
+
+open RelationDeltaOwnerRouting public
+
+data DuplicateCandidateMutationAuthority : Set where
+
+data HotPathMayBypassRelationDeltaOwner : Set where
+
+duplicateCandidateMutationAuthorityImpossible :
+  DuplicateCandidateMutationAuthority → ⊥
+duplicateCandidateMutationAuthorityImpossible ()
+
+hotPathBypassImpossible :
+  HotPathMayBypassRelationDeltaOwner → ⊥
+hotPathBypassImpossible ()
