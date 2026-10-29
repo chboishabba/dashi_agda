@@ -404,3 +404,45 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- SensibLaw reviewed legal-follow unified facade.
+------------------------------------------------------------------------
+
+import DASHI.Law.AustralianContractsReviewedHopCompilerExact as ContractsHop
+
+unifiedReviewedContractsMaxCut :
+  ContractsHop.ReviewedContractsMaxCutBoundary
+unifiedReviewedContractsMaxCut =
+  ContractsHop.canonicalReviewedContractsMaxCutBoundary
+
+unifiedReviewedContractsResidualsPreserved :
+  ContractsHop.ReviewedContractsMaxCutBoundary.reviewedResidualsSurviveTrajectory
+    ContractsHop.canonicalReviewedContractsMaxCutBoundary
+  ≡ true
+unifiedReviewedContractsResidualsPreserved =
+  ContractsHop.ReviewedContractsMaxCutBoundary.reviewedResidualsSurviveTrajectoryIsTrue
+    ContractsHop.canonicalReviewedContractsMaxCutBoundary
+
+unifiedReviewedContractsNoLegalAuthority :
+  ContractsHop.ReviewedContractsMaxCutBoundary.createsLegalAuthority
+    ContractsHop.canonicalReviewedContractsMaxCutBoundary
+  ≡ false
+unifiedReviewedContractsNoLegalAuthority =
+  ContractsHop.ReviewedContractsMaxCutBoundary.createsLegalAuthorityIsFalse
+    ContractsHop.canonicalReviewedContractsMaxCutBoundary
+
+
+unifiedReviewedContractsRuntimeParity :
+  ContractsHop.ReviewedContractsRuntimeParityBoundary
+unifiedReviewedContractsRuntimeParity =
+  ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+
+unifiedReviewedContractsKernelAcceptsReviewedDeltaOnly :
+  ContractsHop.ReviewedContractsRuntimeParityBoundary.genericKernelAcceptsOnlyReviewedDelta
+    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ true
+unifiedReviewedContractsKernelAcceptsReviewedDeltaOnly =
+  ContractsHop.ReviewedContractsRuntimeParityBoundary.genericKernelAcceptsOnlyReviewedDeltaIsTrue
+    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
