@@ -176,7 +176,7 @@ def test():
     assert abs(det_product)==2834352
     assert len(re.findall(r"^regularBlockIntertwines Perm\.perm\w+ slot\d slot\d = refl$",reg,re.M))==216
     assert len(re.findall(r"^nativeBlockActionByShape Shape\.perm\w+",assembly,re.M))==162
-    assert len(re.findall(r"^regularCodeFree ",native,re.M))==108
+    assert len(re.findall(r"^regularCodeFree (?:rank2OneFixed|rank2TwoFixed|rank2TwoCycle) Block\\.slot",native,re.M))==108
     print("PASS exact 2x2/3x3/6x6 scaled integer inverses")
     print("PASS rational determinants: 1, -2, 3, 3, ±54, ±54, ±54")
     print("PASS 216 regular and 24+54 small-block intertwining cases")
