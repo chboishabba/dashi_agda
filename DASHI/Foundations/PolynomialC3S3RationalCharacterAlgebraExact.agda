@@ -1,22 +1,16 @@
 module DASHI.Foundations.PolynomialC3S3RationalCharacterAlgebraExact where
 
--- Classical Reynolds/character decomposition, made explicit on the already
--- owned 11 C3 conjugation classes and seven S3 classes.
--- Historical authority: Burnside, Reynolds, Maschke/finite representation
--- theory. DASHI owns only this finite typed construction.
--- Uses rational coefficients; NOT F3, trit-valued averaging, an orthogonal
--- Hilbert projection, Monster 3B, or the free output-phase action.
--- No postulates; exact-head Agda kernel verification remains pending.
+-- Thin SAME-CARRIER adapter. Existing rational C2 projector mathematics belongs
+-- to DASHI.Biology.MoonshineOrbifoldSectorProjectorExact (and historical
+-- finite-group representation theory). This file owns only the eleven-orbit
+-- reflection instantiation. No reassignment of prior DASHI/Ibrahim ownership.
+-- Source-written; Agda kernel verification pending; not yet a TOE import.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; 0ℚ)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
-
+open import Data.Rational.Base using (ℚ)
+open import Relation.Binary.PropositionalEquality using (cong)
 import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitQuotientExact as Q
-
--- C2 on the 11 C3 orbit classes comes from the original S3 reflection.
--- Two rational-valued coordinates per swapped pair admit a canonical
--- symmetric / antisymmetric separation without a second quotient ontology.
+import DASHI.Biology.MoonshineOrbifoldSectorProjectorExact as Existing
 
 Field11ℚ : Set
 Field11ℚ = Q.Orbit11 → ℚ
@@ -28,17 +22,34 @@ reflectInvolutive : (f : Field11ℚ) (o : Q.Orbit11) →
   reflect (reflect f) o ≡ f o
 reflectInvolutive f o = cong f (Q.reflection11Involutive o)
 
--- The unnormalised character operators are definable even without division:
--- E(f)=f+s.f and O(f)=f-s.f. Actual normalized Reynolds projectors are
--- obtained by dividing by 2 in characteristic zero, a separate analytic
--- implementation obligation.
+-- Construct the actual pair that the established rational C2 projector
+-- already operates upon. No duplicate addition/subtraction/ring proof.
+reflectionPair : Field11ℚ → Q.Orbit11 → Existing.RationalPair
+reflectionPair f o =
+  Existing.pair (f o) (f (Q.reflectionOn11 o))
 
-evenNumerator : Field11ℚ → Field11ℚ
-evenNumerator f o = f o + reflect f o
+positiveProjectionAt : Field11ℚ → Q.Orbit11 → ℚ
+positiveProjectionAt f o =
+  Existing.first (Existing.positiveProjection (reflectionPair f o))
 
-oddNumerator : Field11ℚ → Field11ℚ
-oddNumerator f o = f o - reflect f o
+negativeProjectionAt : Field11ℚ → Q.Orbit11 → ℚ
+negativeProjectionAt f o =
+  Existing.first (Existing.negativeProjection (reflectionPair f o))
 
--- Non-promotion: these constructors alone do not assert orthogonality
--- or numerical efficiency. Group-action and rational-addition proof laws
--- are left to the existing canonical rational algebra owner.
+-- Reuses the ACTUAL prior rational-solver theorem, not an equivalent
+-- source-written arithmetic reimplementation.
+reflectionPositiveNegativeReconstruct :
+  (f : Field11ℚ) (o : Q.Orbit11) →
+  Data.Rational.Base._+_
+    (positiveProjectionAt f o) (negativeProjectionAt f o)
+  ≡ f o
+reflectionPositiveNegativeReconstruct f o =
+  Existing.positivePlusNegativeFirst (reflectionPair f o)
+
+-- Reflection exchanges the two coordinates of this prior-owned pair.
+reflectionPairSwap :
+  (f : Field11ℚ) (o : Q.Orbit11) →
+  reflectionPair f (Q.reflectionOn11 o)
+    ≡ Existing.swap (reflectionPair f o)
+reflectionPairSwap f o
+  rewrite Q.reflection11Involutive o = Agda.Builtin.Equality.refl
