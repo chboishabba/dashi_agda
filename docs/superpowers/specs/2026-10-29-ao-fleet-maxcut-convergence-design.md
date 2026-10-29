@@ -73,6 +73,7 @@ Add one safe twenty-worker schedule owner.
 
 A full schedule is a total function from Fin 20 to typed goals.
 Every scheduled goal must be unblocked and Pareto eligible.
+Distinct worker slots must carry distinct goals.
 Every distinct worker pair must carry noTypedMeet evidence.
 The total Fin 20 domain proves all twenty slots are occupied.
 This is stronger than the existing per-topic worker-width bound.
