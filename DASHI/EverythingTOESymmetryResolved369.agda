@@ -4,6 +4,8 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Unified.RiemannRHMaxCutTOEExact as RiemannRHTOE
+import DASHI.Unified.Physics as UnifiedPhysics
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
@@ -1524,3 +1526,74 @@ toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+------------------------------------------------------------------------
+-- Riemann / RH max-cut TOE convergence.
+------------------------------------------------------------------------
+
+toeRiemannRHCurrentFrontier :
+  RiemannRHTOE.CurrentThreeTapFrontier
+toeRiemannRHCurrentFrontier =
+  RiemannRHTOE.currentThreeTapFrontier
+
+toeRiemannRHZKPFrame :
+  RiemannRHTOE.RiemannRHTOEZKPFrame
+toeRiemannRHZKPFrame =
+  RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
+
+toeRiemannRHA1CarrierStillOpen :
+  RiemannRHTOE.currentA1CarrierSummationPaid ≡ false
+toeRiemannRHA1CarrierStillOpen =
+  RiemannRHTOE.a1CarrierSummationStillOpen
+
+toeRiemannRHA2ScalarStillOpen :
+  RiemannRHTOE.currentA2StrictScalarPaid ≡ false
+toeRiemannRHA2ScalarStillOpen =
+  RiemannRHTOE.a2StrictScalarStillOpen
+
+toeRiemannRHRouteBStillOpen :
+  RiemannRHTOE.currentRouteBEventualGapPaid ≡ false
+toeRiemannRHRouteBStillOpen =
+  RiemannRHTOE.routeBEventualGapStillOpen
+
+toeRiemannRHStillOpen :
+  RiemannRHTOE.currentRHDerived ≡ false
+toeRiemannRHStillOpen =
+  RiemannRHTOE.riemannHypothesisStillOpen
+
+toeRiemannTerminalOffPaymentType : Set₁
+toeRiemannTerminalOffPaymentType =
+  RiemannRHTOE.terminalOffPaymentType
+
+toeRiemannTerminalGammaPaymentType : Set₁
+toeRiemannTerminalGammaPaymentType =
+  RiemannRHTOE.terminalGammaPaymentType
+
+------------------------------------------------------------------------
+-- Feynman experiment exact non-promotion convergence.
+------------------------------------------------------------------------
+
+toeFeynmanDerivationBoundary :
+  UnifiedPhysics.FeynmanDerivationBoundaryType
+toeFeynmanDerivationBoundary =
+  UnifiedPhysics.feynmanDerivationBoundary
+
+toeFeynmanArchitectureCompatible :
+  UnifiedPhysics.feynmanArchitectureCompatibleFlag ≡ true
+toeFeynmanArchitectureCompatible =
+  UnifiedPhysics.feynmanArchitectureCompatible
+
+toeFeynmanHistoryRealisationStillOpen :
+  UnifiedPhysics.feynmanHistoryRealisationSuppliedFlag ≡ false
+toeFeynmanHistoryRealisationStillOpen =
+  UnifiedPhysics.feynmanHistoryRealisationStillOpen
+
+toeTSFVDoesNotDeriveFeynmanPropagator :
+  UnifiedPhysics.feynmanPropagatorDerivedFlag ≡ false
+toeTSFVDoesNotDeriveFeynmanPropagator =
+  UnifiedPhysics.tsfvDoesNotCurrentlyDeriveFeynmanPropagator
+
+toeFeynmanExperimentDoesNotValidateTSFV :
+  UnifiedPhysics.feynmanExperimentValidatesTSFVFlag ≡ false
+toeFeynmanExperimentDoesNotValidateTSFV =
+  UnifiedPhysics.feynmanExperimentDoesNotValidateTSFV
