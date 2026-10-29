@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-10-29 — AO fleet spectral, W20, and combinatorial Max Cut convergence
+
+- Normalized the existing world/macro/sub-eigen/fibre, hierarchical Pareto, and topic-conductor donors onto current master.
+- Added the authoritative five-level AO distinction: MP eigenspace, primary topic, subtopic, complete-link fibre, and typed unblocked goal.
+- Added explicit K=50 and K=100 spectral truncation choices and an abstract MP spectral-basis receipt with above-bulk-edge and orthonormality obligations.
+- Added typed rejection boundaries for hexadecimal literals, memory-address noise, raw UI tokens, and raw DOM tokens.
+- Added a total `Fin 20` conductor schedule. Every slot requires an unblocked, Pareto-eligible, top-ranked goal. Every distinct worker pair requires `noTypedMeet` evidence.
+- Recorded that a serial modulo-eight loop is not full W=20 concurrency.
+- Added a literal combinatorial Max Cut surface with two-side partitions, crossing edges, boundary vertices, a discrete-Laplacian cut witness, and a Goemans-Williamson SDP receipt boundary.
+- Reused existing Yang-Mills gauge/coarse residual and Navier-Stokes exact commutator owners through explicit same-object/non-promotion gates.
+- Wired the new surfaces through `DASHI.Interop.Everything`, `FleetFormalGapTargetTOEExact`, `EverythingTOESymmetryResolved369`, and `DASHI.Unified.Everything`.
+- Added a focused exact-head Agda workflow. Local Agda is unavailable in this runtime, so kernel status remains pending until that workflow reports.
+- No ESD or digital_esd surface is edited.
+
+
 This changelog is append-only. Older mentions of `false` are historical wave
 records unless the entry explicitly states it is describing the current live
 monitor surface.
