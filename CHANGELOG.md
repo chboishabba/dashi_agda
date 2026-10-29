@@ -60,3 +60,5 @@ monitor surface.
 - Reused the canonical trialectic attached-face non-descent constructor to prove that identical complete weighted graph projections can carry distinct irreducible triadic faces.
 - Bridged existing opposition, McCall category strategies, SSP hypervoxel address, typed hyperfabric compatibility and 27-pants adjacency *without* promoting analogies into proof authority; connected both TOE roots, the relational rollup, Unified.Everything and 369 max-cut.
 - Source prompt: Tivadar Danka's 26 October 2026 educational illustration; mathematical matrix/graph correspondence remains standard prior art. Kernel verification and downstream situated gluing remain open; ESD surfaces untouched.
+
+- Follow-on: exhibited a real source-directed `TypedHyperfabric` with compatible outgoing-row section; independently proved the missing direct A→C arrow has nonzero length-two weight 2.2 through B. Seam remains conditional on a branch-channel interpretation and `InterfaceMatch`.
