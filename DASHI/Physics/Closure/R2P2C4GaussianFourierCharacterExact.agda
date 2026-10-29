@@ -14,6 +14,7 @@ module DASHI.Physics.Closure.R2P2C4GaussianFourierCharacterExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (true; false)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as Four
