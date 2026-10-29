@@ -9,6 +9,8 @@ package "Original theorem owners" {
   [NSClayDistanceFinalReceipt] as Distance
   [NSAuthorityConsistencyGuard] as Guard
   [NSTriadKNR650CurrentSharedWeightedWallRound736Exact] as R736
+  [NSTriadKNR571PhysicalM2DissipationFoldExact] as BM2Fold
+  [NavierStokesBM2TOEConvergenceExact] as BM2
   [ClayNSProofRoadmapReceipt] as Roadmap
   [NSClaySubmissionEligibilityRoadmapReceipt] as Eligibility
 }
@@ -30,6 +32,8 @@ Residual --> Facade : canonical residual gates
 Distance --> Facade : carrier-to-general gap\nterminal promotion -> bottom
 Guard --> Facade : mixed-scope promotion guard
 R736 --> Facade : current periodic-B max-cut\n2 shared weighted leaves\nClay promotion = false
+BM2Fold --> BM2 : finite cardinality-free fold
+BM2 --> Facade : B producer strategy\nphysical payments remain analytic
 Roadmap --> Facade : weak/BKM branch + false promotion
 Eligibility --> Facade : BKM/all-data/submission/eligibility gates
 
@@ -49,8 +53,12 @@ Preconditions:
 - ESD surfaces are read-only
 
 Invariants:
+- one receipt states the current A/B/C/D problem
 - A/B stay internal theorem-development lanes
 - C/D stay released-proof audit lanes
+- BM2 finite aggregation is closed
+- BM2 samplewise physical payment is analytic
+- BM2 literal Galerkin fold is analytic
 - R736 has exactly two preferred analytic leaves
 - both R736 leaves use one weighted/input-Laplacian carrier
 - both R736 leaves remain open
@@ -60,6 +68,9 @@ Invariants:
 - no finite/modeled result promotes Clay
 
 Postconditions:
+- current four-lane receipt is TOE-reachable
+- BM2 finite fold is TOE-reachable
+- BM2 analytic payment boundaries are explicit
 - R736 shared wall is TOE-reachable
 - both open R736 leaves are TOE-reachable
 - the exact R736 non-promotion theorem is TOE-reachable
