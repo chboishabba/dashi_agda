@@ -1,5 +1,32 @@
 module DASHI.Unifier where
 
+-- NEW O40 rational S3 block certificates on the ACTUAL native 27 G-set:
+-- integer-scaled Q inverse matrices (sizes 2,3,6), 216 regular Fourier
+-- intertwiners, and 1+2+3+3+6+6+6 code/block action atlas.
+-- Distinct from characteristic-3 full S3 semisimplicity.
+import DASHI.Foundations.PolynomialS3RegularRationalBlockCertificateExact as RationalRegularS3
+open RationalRegularS3 public using
+  (basis6 ; scaledInverse6 ; basisScaledInverse ; inverseScaledBasis
+  ; regularBlockIntertwines)
+import DASHI.Foundations.PolynomialS3SmallRationalBlockCertificateExact as RationalSmallS3
+open RationalSmallS3 public using
+  (basis2 ; basis3 ; scaledInverse2 ; scaledInverse3
+  ; basis2ScaledInverse2 ; inverse2ScaledBasis2
+  ; basis3ScaledInverse3 ; inverse3ScaledBasis3
+  ; twoBlockIntertwines ; threeBlockIntertwines
+  ; nativeTwoAction ; nativeThreeAction ; nativeOneFixed)
+import DASHI.Foundations.PolynomialS3RegularOrbitToNativeCodeExact as RationalNativeRegular
+open RationalNativeRegular public using
+  (regularCode ; regularCodeFree ; nativeRegularActionIntertwines
+  ; regularCodeShape)
+import DASHI.Foundations.PolynomialS3TwentySevenOrbitBlockAssemblyExact as RationalOrbit27
+open RationalOrbit27 public using
+  (OrbitBlock27 ; blockToCode ; codeToBlock
+  ; codeBlockRoundTrip ; blockCodeRoundTrip
+  ; blockAction ; blockActionIdentity ; blockActionComposition
+  ; blockActionPreservesNative ; nativeBlockActionByShape
+  ; toBlockField ; fromBlockField ; fromToBlockField ; toFromBlockField)
+
 -- Exact six S3 permutation-character fixed-point counts 27,3,3,3,3,3.
 -- Rational-character arithmetic reconciles 7 triv + 4 sign + 8 std;
 -- no modular-F3 Maschke decomposition or same-object Monster claim.
