@@ -17,6 +17,7 @@ module DASHI.Physics.Closure.R2P2C4RetainedSampledOperatorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Rational.Base using (ℚ; _*_; normalize)
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
@@ -94,10 +95,26 @@ cubeAtPad :
   (a b c : Four.FourGridMode) →
   cubeAt (pad27To64 f) (Four.fourCube a b c)
   ≡ zeroPaddedAt f (Four.fourCube a b c)
-cubeAtPad f a b c
-  rewrite quadFunctionSection
-    (λ x → zeroPaddedAt f (Four.fourCube a b x)) c
-  = refl
+cubeAtPad f a b c =
+  trans
+    (cong (λ rows → quadAt (quadAt rows b) c)
+      (quadFunctionSection outerF a))
+    (trans
+      (cong (λ row → quadAt row c)
+        (quadFunctionSection (middleF a) b))
+      (quadFunctionSection (innerF a b) c))
+  where
+    innerF : (x y : Four.FourGridMode) →
+      Four.FourGridMode → G.Gaussian4
+    innerF x y z = zeroPaddedAt f (Four.fourCube x y z)
+
+    middleF : Four.FourGridMode →
+      Four.FourGridMode → FFT.Quad G.Gaussian4
+    middleF x y = quadFromFunction (innerF x y)
+
+    outerF : Four.FourGridMode →
+      FFT.Quad (FFT.Quad G.Gaussian4)
+    outerF x = quadFromFunction (middleF x)
 
 -- Select retained INTEGER wavevectors only, without folding Nyquist.
 readRetained :
