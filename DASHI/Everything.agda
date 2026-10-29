@@ -259,3 +259,7 @@ import DASHI.Visual.ColourPerceptionDASHI
 import DASHI.Visual.RepositoryEvolutionEverything
 import DASHI.Physics.Closure.BothwellYe2022MillimetreRedshiftReceipt
 import DASHI.Physics.Closure.WolfPrize2026UltracoldControlBridge
+
+-- Zipf / Hurwitz / rank-family exact finite methods and empirical authority gates.
+-- Import graph ownership only; no analytic RH, NS, fractal or empirical promotion.
+import DASHI.Statistics.ZipfFamilyEverything

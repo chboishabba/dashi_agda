@@ -1,0 +1,42 @@
+# Closing the original 27-topic request: executable coverage and typed cross-domain bridges
+
+**Date:** 27 October 2026 (Australia/Brisbane). **Owner:** PR #1275, `chatgpt/zipf-family-27-law-maxcut-20261027`.
+**Attribution:** the mathematical identities, historical source discoveries and 2026 original research remain their original authors' work. The bounded repository code, negative controls and integration authored in this PR: Johl Brown with OpenAI ChatGPT assistance. In particular, retain Ibrahim's earlier Monster 3B proof ownership; **none** of the rank-law or zeta observations are evidence of same-object Monster representations.
+
+## Acceptance: original scope, not a name-only inventory
+
+Exactly 27 requested items = 24 Zipf Wikipedia “See also” topics, Zipf itself, Zipf–Mandelbrot, Hurwitz zeta. Their exact 27 keys are in `DASHI/Statistics/ZipfFamilyFiniteExact.agda` and `scripts/zipf_family_formal.py`; `scripts/zipf_family_severe_coverage.py:COVERAGE` now maps **each** to one explicitly scoped, dynamically resolvable, callable implementation. `audit_coverage_contract()` fails if any key disappears, duplicates, or no longer resolves to a function. This verifies actual code entrypoints; it **does not** certify results about empirical populations, analyticity, or Agda kernel proofs. For the original 27-row subject matrix and distinct outstanding science: `Docs/research/zipf_family_27_topic_coverage_audit_20261027.md`.
+
+| Group | Requested subjects, all directly covered |
+|---|---|
+| Language, corpus, rank and entropy (10) | Zipf's law; brevity law; word list; hapax legomenon; Heaps' law; Hilberg's hypothesis; Menzerath's law; letter frequency; most common English words; Zipf–Mandelbrot law |
+| Distributions and statistics (9) | Benford's law; Gibrat's law; King effect; long tail; Lorenz curve; Pareto distribution; Pareto principle; rank–size distribution; Hurwitz zeta |
+| Community, information science and provenance (8) | 1% rule; Bradford's law; demographic gravitation; historical recurrence; Lotka's law; Price's law; principle of least effort; Stigler's law of eponymy |
+
+**Local acceptance as of this file:** the six preceding Python test files plus `tests/test_zipf_family_severe_coverage.py` returned **103 passed**. The newly added severe-coverage code/test Git blob SHAs were checked against exact local bytes. Most previous tests ran from local snapshots whose hashes differ from GitHub; **not a verified exact-head all-file receipt**. The three source-written Agda companions and umbrella remain **kernel-pending** because Agda is unavailable.
+
+## Newly paid severe gates for participation and Bradford
+
+**90–9–1 original-root:** Jakob Nielsen, *Participation Inequality: The 90-9-1 Rule for Social Features* (8 October 2006), credits predecessor Will Hill (early 1990s): https://www.nngroup.com/articles/participation-inequality/ . Nielsen's “lurkers” are observed readers/observers who do not contribute, **not** all zero-contribution registered accounts. `measured_participation_four_tiers` now separates creator, commenter, recorded lurker and unobserved/inactive denominator. Exact tests demonstrate both a hypothetical 90/9/1 population and populations where it fails. This fixes the prior coarser `participation_roles`'s interpretation without asserting real-user activity.
+
+**Bradford primary-root:** Samuel C. Bradford, “Sources of Information on Specific Subjects,” *Engineering* **137**, 85–86 (1934) (original; *Documentation* 1946 and later reprints are not independent original roots). Bibliometrix reference https://search.r-project.org/CRAN/refmans/bibliometrix/html/bradford.html . Applications sometimes preserve all same-productivity journals in one zone, causing unequal article totals; see original independent critical methodology in https://pmc.ncbi.nlm.nih.gov/articles/PMC3319917/ and DOI 10.3163/1536-5050.100.2.013. The existing `bradford_optimal_equal_zones` explicitly allows tie splitting; new `bradford_tie_preserving_zones` restricts dynamic-programming boundaries to *between unequal ranks*. It fails closed if fewer tie blocks than requested zones. Independent exhaustive enumeration verifies the optimum under its declared objective; it is a descriptive zonal optimiser, **not** evidence that the 1:n:n² hypothesis holds.
+
+## Remaining cross-domain clauses in original user message
+
+The original user also specified “existing fractal/symmetry”, “zeta/Eisenstein/RH” and an image resembling Navier–Stokes vortices/pressure. Those are **application/analogy targets**, not extra names to silently fold into the 27-law inventory; retain their own source and proof obligations.
+
+1. **Zipf–Mandelbrot to Hurwitz zeta:** for `Re(s)>1`, integer `N>=1`, real shift `q>=0`,
+   `H_N(s,q) = Σ_(r=1)^N (r+q)^(-s) = ζ(s,q+1)−ζ(s,q+N+1)`.
+   This follows from the Hurwitz recurrence in **NIST DLMF §25.11**, https://dlmf.nist.gov/25.11 , which notes Hurwitz introduced the series in 1882. The equality must **not** be justified by subtracting two divergent series when `s=1`. The finite rational summation/moment code in this PR covers bounded integer shifts/exponents only. Meromorphic continuation, completed zeta/RH, Eisenstein and actual theta/modular identifications belong to existing `DASHI.Analysis.ZetaTheoremSurface` and PR #1260; no same-object identification or new RH proof is claimed.
+
+2. **Zipf/fractal/symmetry:** a power-law rank distribution is not a spatial or geometric fractal dimension, nor an established symmetry action. To construct a genuinely typed map, specify the geometric carrier, refinement/scales, metric, measure, pushforward and a proof that scaling law/quotient preserves the consumer semantics. Reuse `DASHI.Core.ParetoSymmetryQuotientAdmissionExact`'s preserved-cost and preserved-eligibility gates. Statistical rank permutation invariance alone is too weak. Context in A&A 2021 https://doi.org/10.1051/0004-6361/202141081 discusses Zipf structure complexity as scaling analogy, not a universal proof.
+
+3. **Zipf / 3D Fourier shells:** PR #1271 already constructs the exact periodic integer-frequency cubic shell cardinality `(2R+1)^3−(2R−1)^3=24R²+2` and the associated conditional zeta/Sobolev moment thresholds: https://github.com/chboishabba/dashi_agda/blob/chatgpt/ns-r735-local-w1-h1-maxcut-20261026/Docs/research/ns_zipf_3d_shell_zeta_sobolev_20261027.md . This bridge assumes specified *radial per-mode spectra* and cannot silently transport arbitrary empirically sorted Zipf energy ranks to an isotropic spectral law.
+
+4. **NS vorticity/pressure and spectral phase:** PR #1271's already attributed 3D incompressible real six-mode R734 witness directly computes `B_k=Σ_(p+q=k)(q·û(p))û(q)` and `p̂(k)=−k·B_k/|k|²` (for `k≠0` with its specific Fourier conventions) on the **same physical Galerkin carrier**, not an arbitrary scalar synthetic spectrum: https://github.com/chboishabba/dashi_agda/blob/chatgpt/ns-r735-local-w1-h1-maxcut-20261026/Docs/research/ns_r734_pressure_poisson_zipf_phase_20261027.md . A rank or power-only ledger loses wavevector directions, complex phases and polarizations that the quadratic convolution needs. The two sign/phase countermodels already source-written and tested in PR #1271 establish a **finite information-loss** obstruction; neither vortex imagery nor Zipf fits prove pressure recovery, regularity, or NSE singularity. Classic triad/helicity and Leray calculations retain their mathematicians' original ownership. Do not substitute an uninspected “attached image” for a verified Fourier field.
+
+## Finite provenance and claim-status ladder
+
+For **every** topic distinguish (A) original dated source or accountable experiment, (B) derived mathematics, (C) user/repository-authored formal interface, (D) executable synthetic regression, (E) Agda/Lean kernel proof on exact checked head, (F) independently reproduced empirical observation, and (G) established same-object transport across domains. This PR currently pays **(C) for 27/27** and bounded parts of (B)/(D). It does **not** pay (E)/(F)/(G) globally. Documentation links do not serve as a substitute for original-source page-level audit.
+
+Stop at the true remaining wall: verify exact-head full pytest; install compatible Agda and correct actual type-check errors; pay finite positive `H_N` normalization into canonical PNF atoms; validate empirical samples and held-out alternatives; and only then cross validated analytic/fractal/NS typed bridges. Do not label a future task as completed.

@@ -1,0 +1,133 @@
+"""Independent exact tests of Schur-concave vocabulary expectation."""
+from fractions import Fraction as F
+from itertools import product
+from pathlib import Path
+import sys
+import pytest
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+import zipf_majorization_expected_heaps_exact as M
+from zipf_heaps_bridge import (
+    expected_iid_vocabulary, expected_permutation_vocabulary,
+    multiset_count_majorizes,
+)
+
+
+def test_every_majorized_count_pair_has_two_sampler_monotonicity():
+    for k in (2, 3, 4):
+        histograms = list(product((1, 2, 3), repeat=k))
+        for a in histograms:
+            for b in histograms:
+                if sum(a) != sum(b) or not multiset_count_majorizes(a, b):
+                    continue
+                for t in range(sum(a)+1):
+                    (ia, ib), (pa, pb) = M.majorization_expected_vocabulary_certificate(a, b, t)
+                    assert ia <= ib and pa <= pb
+                    assert ia == expected_iid_vocabulary(tuple(F(x,sum(a)) for x in a),t)
+                    assert pa == expected_permutation_vocabulary(a,t)
+
+
+def test_one_token_transfer_nonnegative_loss_all_prefixes():
+    for c in ((4, 2, 1), (5, 3, 2), (3, 3, 2, 1), (7, 4)):
+        for i,a in enumerate(c):
+            for j,b in enumerate(c):
+                if i == j or a < b or b < 2: continue
+                d = M.transfer_one_token_to_larger_type(c,i,j)
+                assert sum(d) == sum(c)
+                for t in range(sum(c)+1):
+                    iid, perm = M.one_transfer_expected_loss(c,i,j,t)
+                    assert iid >= 0 and perm >= 0
+                    # Adjacent one-token loss equals marginal difference.
+                    ai, ap = M.local_one_step_presence_gain(sum(c), a, t)
+                    bi, bp = M.local_one_step_presence_gain(sum(c), b-1, t)
+                    assert iid == bi-ai
+                    assert perm == bp-ap
+
+
+def test_discrete_presence_gain_is_nonincreasing():
+    for N in range(1, 13):
+        for n in range(N+1):
+            gains=[M.local_one_step_presence_gain(N,k,n) for k in range(N)]
+            assert all(x[0]>=y[0] and x[1]>=y[1] for x,y in zip(gains,gains[1:]))
+
+
+def test_inequality_can_be_strict_but_has_mean_equalities_at_endpoints():
+    more=(6,2,1); less=(3,3,3)
+    for t in range(10):
+        (a,b),(c,d)=M.majorization_expected_vocabulary_certificate(more,less,t)
+        if t==0:
+            assert a==b==c==d==0
+        if t==1:
+            assert a==b==c==d==1
+        if t==9:
+            assert c==d==3  # Without replacement, all types seen.
+        if t in (2,3):
+            assert a<b and c<d
+
+
+def test_zipf_exponent_majorizes_for_all_small_integer_shapes():
+    for k in range(1, 8):
+        for q in range(4):
+            for low in range(5):
+                for high in range(low, 6):
+                    p0,p1=M.zipf_shape_majorization_certificate(k,low,high,q)
+                    assert len(p0)==len(p1)==k
+                    for draws in (0,1,2,3,8):
+                        x,y=M.zipf_exponent_iid_heaps_certificate(k,low,high,q,draws)
+                        assert x<=y
+
+
+def test_zero_uncertainty_and_noncomparable_arguments_fail_closed():
+    for c,r,p in (((1,1),0,1),((1,4),0,1),((3,1),0,1),((3,2),1,1)):
+        with pytest.raises(ValueError):M.transfer_one_token_to_larger_type(c,r,p)
+    with pytest.raises(ValueError):M.majorization_expected_vocabulary_certificate((5,2,2),(4,4,1),2)
+    with pytest.raises(ValueError):M.majorization_expected_vocabulary_certificate((3,2),(3,1),2)
+    with pytest.raises(ValueError):M.zipf_shape_majorization_certificate(5,2,1)
+    with pytest.raises(ValueError):M.zipf_exponent_iid_heaps_certificate(5,1,2,0,-1)
+    with pytest.raises(ValueError):M.local_one_step_presence_gain(5,5,1)
+
+
+def test_majorization_mean_order_does_not_imply_variance_order():
+    """Same concentrated/dispersed pair, opposite variance order by sampler/time."""
+    from zipf_occupancy_collisions_exact import (
+        iid_vocabulary_variance, permutation_vocabulary_variance,
+    )
+    concentrated = (1, 3)
+    dispersed = (2, 2)
+    assert multiset_count_majorizes(concentrated, dispersed)
+    a = tuple(F(x, 4) for x in concentrated)
+    b = tuple(F(x, 4) for x in dispersed)
+    # IID variance at t=2: concentrated LESS variable.
+    assert iid_vocabulary_variance(a, 2) == F(15, 64)
+    assert iid_vocabulary_variance(b, 2) == F(1, 4)
+    # IID variance at t=3: concentrated MORE variable.
+    assert iid_vocabulary_variance(a, 3) == F(63, 256)
+    assert iid_vocabulary_variance(b, 3) == F(3, 16)
+    # Without replacement at t=2: concentrated MORE variable.
+    assert permutation_vocabulary_variance(concentrated, 2) == F(1, 4)
+    assert permutation_vocabulary_variance(dispersed, 2) == F(2, 9)
+    # Expected number of types still respects majorization in both samplers.
+    for t in (2, 3):
+        (ia, ib), (pa, pb) = M.majorization_expected_vocabulary_certificate(
+            concentrated, dispersed, t)
+        assert ia <= ib and pa <= pb
+
+
+def test_majorization_ordered_cumulative_means_do_not_order_novelty_rates():
+    from zipf_heaps_bridge import expected_iid_new_type, expected_permutation_vocabulary
+    # Uniform two-rank Zipf (s=0) against more concentrated Zipf s=1.
+    low, high = M.zipf_shape_majorization_certificate(2, 0, 1)
+    assert low == (F(1, 2), F(1, 2))
+    assert high == (F(2, 3), F(1, 3))
+    # At t=1, concentrated distribution has *lower* next-draw novelty.
+    assert expected_iid_new_type(high, 1) == F(4, 9) < F(1, 2)
+    # At t=4, rare type persistence reverses the marginal ordering.
+    assert expected_iid_new_type(high, 4) == F(2, 27) > F(1, 16)
+    for n in range(10):
+        hi, lo = M.zipf_exponent_iid_heaps_certificate(2, 0, 1, 0, n)
+        assert hi <= lo
+    # Without replacement, last-step discovery can also reverse.
+    f, g = (1, 3), (2, 2)
+    assert multiset_count_majorizes(f, g)
+    last_f = expected_permutation_vocabulary(f, 4) - expected_permutation_vocabulary(f, 3)
+    last_g = expected_permutation_vocabulary(g, 4) - expected_permutation_vocabulary(g, 3)
+    assert last_f == F(1, 4) > last_g == F(0)
