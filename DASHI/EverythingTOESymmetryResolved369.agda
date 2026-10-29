@@ -4,6 +4,7 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Unified.RiemannRHMaxCutTOEExact as RiemannRHTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
@@ -1456,3 +1457,47 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Riemann / RH max-cut TOE convergence.
+------------------------------------------------------------------------
+
+toeRiemannRHCurrentFrontier :
+  RiemannRHTOE.CurrentThreeTapFrontier
+toeRiemannRHCurrentFrontier =
+  RiemannRHTOE.currentThreeTapFrontier
+
+toeRiemannRHZKPFrame :
+  RiemannRHTOE.RiemannRHTOEZKPFrame
+toeRiemannRHZKPFrame =
+  RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
+
+toeRiemannRHA1CarrierStillOpen :
+  RiemannRHTOE.currentA1CarrierSummationPaid ≡ false
+toeRiemannRHA1CarrierStillOpen =
+  RiemannRHTOE.a1CarrierSummationStillOpen
+
+toeRiemannRHA2ScalarStillOpen :
+  RiemannRHTOE.currentA2StrictScalarPaid ≡ false
+toeRiemannRHA2ScalarStillOpen =
+  RiemannRHTOE.a2StrictScalarStillOpen
+
+toeRiemannRHRouteBStillOpen :
+  RiemannRHTOE.currentRouteBEventualGapPaid ≡ false
+toeRiemannRHRouteBStillOpen =
+  RiemannRHTOE.routeBEventualGapStillOpen
+
+toeRiemannRHStillOpen :
+  RiemannRHTOE.currentRHDerived ≡ false
+toeRiemannRHStillOpen =
+  RiemannRHTOE.riemannHypothesisStillOpen
+
+toeRiemannTerminalOffPaymentType : Set₁
+toeRiemannTerminalOffPaymentType =
+  RiemannRHTOE.terminalOffPaymentType
+
+toeRiemannTerminalGammaPaymentType : Set₁
+toeRiemannTerminalGammaPaymentType =
+  RiemannRHTOE.terminalGammaPaymentType
+
+
