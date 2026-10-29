@@ -6,6 +6,9 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSHistoricalSignedExternalCommutatorSnowballLineageExact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
@@ -31,6 +34,9 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSHistoricalSignedExternalCommutatorSnowballLineageExact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
@@ -81,6 +87,14 @@ jobs:
           dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityExact.agda --root .
           dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/Physics.agda --root .
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda --root .
+          dashi-repo diagnose DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda --root .
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda --root .
+          dashi-repo related b4ResearchLeafNowOnlyPhysicalR440Payment --root . --limit 20
+          dashi-repo related historicalNestedInnerPureCommutatorExposed --root . --limit 20
+          dashi-repo discover 'Navier Stokes current physical R440 noncore core payment historical signed external commutator non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKNR650 --root .
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKNExternal --root .
           dashi-repo related literalRound440VariableDomainCMP116SourceLevel --root . --limit 20
           dashi-repo related literalRound443FiniteWilsonActionInvarianceLevel --root . --limit 20
           dashi-repo related literalRound444PeterWeylWilsonIdentificationLevel --root . --limit 20
@@ -143,6 +157,11 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
+            DASHI/Physics/Closure/NSHistoricalSignedExternalCommutatorSnowballLineageExact.agda
+            DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda
+            DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda
             DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
@@ -164,6 +183,8 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
             DASHI/Unified/Everything.agda
