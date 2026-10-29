@@ -495,3 +495,51 @@ All Agda sources remain kernel pending; neither CI nor
 Agda compiler was run. No ESD edits; original Ibrahim Monster
 3B, Guy/Conway, Pólya/Burnside, Zipf/Heaps source authorship
 and prior PR ownership remain untouched.
+
+## 29 October 2026: first actual Mangoldt / residual BIDI consumer bridge
+
+User-identified pre-existing source owners were inspected directly:
+`DASHI/Core/ResidualNaturality.agda` (functorial naturality interface),
+`DASHI/Cognition/ResidualPhaseGeometry.agda` (the ORIGINAL
+`Projection`/`Fibre`/`Residual` Sigma carrier),
+`DASHI/Core/NonginOnePointOneArmyRefinementExact.agda`
+(strict refinement and frame-sensitive consumer),
+`DASHI/Core/ConsumerGuidedReopenableRefinementExact.agda`
+(constructive consumer collision and refinement),
+and `DASHI/Base369ExceptionalResidualCrossPollinationValidation.agda`
+(precisely rejects dimension-only and same-action promotion).
+
+The previously existing **actual von Mangoldt** specification is
+`DASHI/Analysis/RiemannVonMangoldtSpecification.agda`;
+`VonMangoldtAt` is a relational prime-power specification and
+`VonMangoldtFunction` includes a single-valued `lambdaSpecified`
+witness, rather than an automatically available analytic estimate.
+
+New typed import-bearing consumer interface:
+`DASHI/Arithmetic/TwinPrimeResidualMangoldtBidiExact.agda`.
+It reuses `Phase.Residual periodProjection`, proves singleton
+Nat reconstruction via `periodResidualUniqueness`,
+and uses the existing period/Fin270 full BIDI to transport
+any `Nat → Output` without loss. It specializes to
+`mangoldtPeriodForward`/`mangoldtPeriodBackward` for the
+ACTUAL Weil scalar and a generic `ArithmeticPairCorrelation`
+with exact forward/backward paired-`lambda` transport.
+The original `Refine` generic consumer separation standard
+remains the owner; this file does **not** grant a coarse quotient
+consumer sufficiency from finite orbit equality alone.
+
+An executable Python oracle was committed as
+`scripts/check_twin_prime_mangoldt_residual_bidi.py`.
+Local Python **executed** the same independent finite tests:
+20,000 Nat round-trips; 21,600 (period, Fin270) round-trips;
+5,000 individual von-Mangoldt term equality checks;
+5,000 pair correlation equality checks; 27 admissible wheel
+residues; and strict 59/209 + 59/329 counterexamples: PASS.
+
+**Unpaid analytic wall:** a uniform positive lower bound
+on `sum Lambda(n) Lambda(n+2)` would be a substantial new
+number-theoretic theorem, not a consequence of a bidirectional
+representation. No implementation here asserts such positivity,
+nontrivial cancellation, parity-barrier bypass or the twin-prime
+conjecture. No Agda typecheck/CI was run; all Agda statements
+remain source-written and kernel-pending.
