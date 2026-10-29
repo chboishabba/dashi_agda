@@ -76,10 +76,10 @@ zetaSquaredLaw : zeta5 *5 zeta5 ≡ zetaSquared
 zetaSquaredLaw = refl
 
 zetaFourthLaw : zetaSquared *5 zetaSquared ≡ zetaFourth
-zetaFourthLaw = refl
+zetaFourthLaw = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
 
 zetaFifthLaw : zetaFourth *5 zeta5 ≡ one5
-zetaFifthLaw = refl
+zetaFifthLaw = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
 
 conjugationInvolutive :
   (x : Cyclotomic5) → conj5 (conj5 x) ≡ x
@@ -131,31 +131,31 @@ scalarProduct5 I.gridMinusOne I.gridMinusOne = I.gridPlusOne
 rootGroupLaw :
   (a b : I.FiveGridMode) →
   root5 (Full.fiveGroupAdd a b) ≡ root5 a *5 root5 b
-rootGroupLaw I.gridZero I.gridZero = refl
-rootGroupLaw I.gridZero I.gridPlusOne = refl
-rootGroupLaw I.gridZero I.gridPlusTwo = refl
-rootGroupLaw I.gridZero I.gridMinusTwo = refl
-rootGroupLaw I.gridZero I.gridMinusOne = refl
-rootGroupLaw I.gridPlusOne I.gridZero = refl
-rootGroupLaw I.gridPlusOne I.gridPlusOne = refl
-rootGroupLaw I.gridPlusOne I.gridPlusTwo = refl
-rootGroupLaw I.gridPlusOne I.gridMinusTwo = refl
-rootGroupLaw I.gridPlusOne I.gridMinusOne = refl
-rootGroupLaw I.gridPlusTwo I.gridZero = refl
-rootGroupLaw I.gridPlusTwo I.gridPlusOne = refl
-rootGroupLaw I.gridPlusTwo I.gridPlusTwo = refl
-rootGroupLaw I.gridPlusTwo I.gridMinusTwo = refl
-rootGroupLaw I.gridPlusTwo I.gridMinusOne = refl
-rootGroupLaw I.gridMinusTwo I.gridZero = refl
-rootGroupLaw I.gridMinusTwo I.gridPlusOne = refl
-rootGroupLaw I.gridMinusTwo I.gridPlusTwo = refl
-rootGroupLaw I.gridMinusTwo I.gridMinusTwo = refl
-rootGroupLaw I.gridMinusTwo I.gridMinusOne = refl
-rootGroupLaw I.gridMinusOne I.gridZero = refl
-rootGroupLaw I.gridMinusOne I.gridPlusOne = refl
-rootGroupLaw I.gridMinusOne I.gridPlusTwo = refl
-rootGroupLaw I.gridMinusOne I.gridMinusTwo = refl
-rootGroupLaw I.gridMinusOne I.gridMinusOne = refl
+rootGroupLaw I.gridZero I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridZero I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridZero I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridZero I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridZero I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusOne I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusOne I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusOne I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusOne I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusOne I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusTwo I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusTwo I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusTwo I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusTwo I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridPlusTwo I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusTwo I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusTwo I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusTwo I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusTwo I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusTwo I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusOne I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusOne I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusOne I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusOne I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+rootGroupLaw I.gridMinusOne I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
 
 character5 : I.FiveGridMode → I.FiveGridMode → Cyclotomic5
 character5 k x = root5 (scalarProduct5 k x)
@@ -186,31 +186,31 @@ delta5 k l with eq5 k l
 
 oneDimensionalCharacterOrthogonality :
   (k l : I.FiveGridMode) → inner5 k l ≡ delta5 k l
-oneDimensionalCharacterOrthogonality I.gridZero I.gridZero = refl
-oneDimensionalCharacterOrthogonality I.gridZero I.gridPlusOne = refl
-oneDimensionalCharacterOrthogonality I.gridZero I.gridPlusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridZero I.gridMinusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridZero I.gridMinusOne = refl
-oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridZero = refl
-oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridPlusOne = refl
-oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridPlusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridMinusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridMinusOne = refl
-oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridZero = refl
-oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridPlusOne = refl
-oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridPlusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridMinusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridMinusOne = refl
-oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridZero = refl
-oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridPlusOne = refl
-oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridPlusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridMinusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridMinusOne = refl
-oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridZero = refl
-oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridPlusOne = refl
-oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridPlusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridMinusTwo = refl
-oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridMinusOne = refl
+oneDimensionalCharacterOrthogonality I.gridZero I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridZero I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridZero I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridZero I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridZero I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusOne I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridPlusTwo I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusTwo I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridZero = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridPlusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridPlusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridMinusTwo = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+oneDimensionalCharacterOrthogonality I.gridMinusOne I.gridMinusOne = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
 
 -- Three axes give exactly 125 independent samples; the only
 -- self-negative full C5^3 frequency is the zero mode.
