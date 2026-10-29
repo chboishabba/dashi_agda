@@ -18,6 +18,7 @@ import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
 import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
 import DASHI.Core.CompositionalComplianceExact as Compliance
+import DASHI.Core.InstitutionalNormProductionExact as InstitutionalNorm
 import DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact as FanningLiteral
 
 ------------------------------------------------------------------------
@@ -448,4 +449,54 @@ canonicalSafeJustLegalGovernanceZKPFrame =
     "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only; meta-introspector attribution remains separate"
     "F: TOE root and Unifier expose the same literal-data, compliance, and operational-record non-promotion receipts"
     "verification: related_symbols/discover/round_lineage locally; trust-escape scan; ESD diff scan; exact-head Agda kernel check"
+    false false false false
+
+
+------------------------------------------------------------------------
+-- INSTITUTIONAL NORM TRANSMISSION TOE HANDOFF
+------------------------------------------------------------------------
+
+SettlementTransmissionBoundary : Set
+SettlementTransmissionBoundary = InstitutionalNorm.SettlementTransmissionBoundary
+
+fleetSettlementTransmissionBoundary : SettlementTransmissionBoundary
+fleetSettlementTransmissionBoundary =
+  InstitutionalNorm.canonicalSettlementTransmissionBoundary
+
+fleetIndustryConventionDoesNotCreateFederalLaw :
+  InstitutionalNorm.IndustryConventionCreatesFederalLaw → ⊥
+fleetIndustryConventionDoesNotCreateFederalLaw =
+  InstitutionalNorm.industryConventionDoesNotCreateFederalLaw
+
+fleetSettlementDoesNotCreateSupremeCourtHolding :
+  InstitutionalNorm.SettlementCreatesSupremeCourtHolding → ⊥
+fleetSettlementDoesNotCreateSupremeCourtHolding =
+  InstitutionalNorm.settlementDoesNotCreateSupremeCourtHolding
+
+fleetSettlementDoesNotCreateConstitutionalPrecedent :
+  InstitutionalNorm.SettlementCreatesConstitutionalPrecedent → ⊥
+fleetSettlementDoesNotCreateConstitutionalPrecedent =
+  InstitutionalNorm.settlementDoesNotCreateConstitutionalPrecedent
+
+fleetSameVisiblePolicyDoesNotImplySameAuthoritySource :
+  InstitutionalNorm.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
+fleetSameVisiblePolicyDoesNotImplySameAuthoritySource =
+  InstitutionalNorm.sameVisiblePolicyDoesNotImplySameAuthoritySource
+
+SettlementNormTransmissionZKPFrame : Set
+SettlementNormTransmissionZKPFrame = ParetoSnowball.TOEZKPFrame
+
+canonicalSettlementNormTransmissionZKPFrame :
+  SettlementNormTransmissionZKPFrame
+canonicalSettlementNormTransmissionZKPFrame =
+  ParetoSnowball.toe-zkp-frame
+    "O: formalize settlement-mediated norm transmission without promoting convergence into generally binding law"
+    "R: reuse InstitutionalNormProductionExact, query-indexed adequacy, authority routing, and the existing TOE handoff"
+    "C: extend the canonical institutional-norm owner and expose aliases only; do not create a parallel settlement calculus"
+    "S: party obligation, platform policy, competitor adoption, industry convention, and generally binding law remain distinct"
+    "L: one disjoint governance lane; the 584 discharged fibres remain outside the 58-gap target"
+    "P: a settlement source, party scope, policy surface, and authority source must be typed before downstream claims"
+    "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only"
+    "F: TOE and Unifier export non-promotion receipts; same visible policy does not imply the same authority source"
+    "verification: reuse-first code search; trust-escape scan; ESD diff scan; exact-head Agda kernel check"
     false false false false
