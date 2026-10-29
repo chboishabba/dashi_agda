@@ -23,3 +23,19 @@ transitionBoundary =
     oneAddOneRemoveOneReplaceOneSkip
     4
     refl
+
+------------------------------------------------------------------------
+-- SensibLaw C3d routing witness.
+------------------------------------------------------------------------
+
+singleCandidateRelationOwner : RelationDeltaOwnerRouting
+singleCandidateRelationOwner =
+  relationDeltaOwnerRouting
+    1
+    0
+    1
+    1
+    refl
+    refl
+    refl
+    refl
