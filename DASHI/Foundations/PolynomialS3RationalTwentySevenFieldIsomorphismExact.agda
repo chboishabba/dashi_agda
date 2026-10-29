@@ -130,3 +130,28 @@ decodeEncodeNativeAt f x =
 -- encodeDecodeCoordinatesAt witnesses the coordinate side as
 -- a separate pointwise certificate, with no function-extensionality
 -- postulate. A full composite coordinate side proof is O45b.
+
+-- Source-native coordinate round trip: all seven orbit blocks are
+-- evaluated through their literal chosen code chart. The finite
+-- source table blockCodeRoundTrip reduces on each of the six
+-- static coordinate sites in the matrix contractions.
+encodeDecodeNativeCoordinateAt :
+  (c : RationalCoordinates27) (b : Atlas.OrbitBlock27) →
+  coordinateAt (encodeNative27 (decodeNative27 c)) b ≡
+  coordinateAt c b
+encodeDecodeNativeCoordinateAt c Atlas.identityBlock = refl
+encodeDecodeNativeCoordinateAt c (Atlas.cycleBlock i) =
+  Iso.toFromCoordinates2 (cycleCoordinates c) i
+encodeDecodeNativeCoordinateAt c (Atlas.transpositionBlock i) =
+  Iso.toFromCoordinates3 (transpositionCoordinates c) i
+encodeDecodeNativeCoordinateAt c (Atlas.constantBlock i) =
+  Iso.toFromCoordinates3 (constantCoordinates c) i
+encodeDecodeNativeCoordinateAt c (Atlas.oneFixedBlock i) =
+  Iso.toFromCoordinates6 (oneFixedCoordinates c) i
+encodeDecodeNativeCoordinateAt c (Atlas.twoFixedBlock i) =
+  Iso.toFromCoordinates6 (twoFixedCoordinates c) i
+encodeDecodeNativeCoordinateAt c (Atlas.twoCycleBlock i) =
+  Iso.toFromCoordinates6 (twoCycleCoordinates c) i
+
+-- Source-written Q^27 pointwise two-sided code and coordinate
+-- atlas, still pending compiler/kernel proof acceptance.
