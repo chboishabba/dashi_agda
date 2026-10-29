@@ -1,4 +1,8 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+import DASHI.Trading.DashiTradeDreamOptionConeExact as DashiTradeDream
+import DASHI.Finance.DashiTradeFibreBridgeExact as DashiTradeFibre
+import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as DashiTradeLaw
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as AgdaFirstLegalRuntime
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1500,3 +1504,54 @@ toeYMA1CompletionDoesNotSelfPromote :
   ≡ false
 toeYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- dashiTRADE and Agda-first legal governance convergence.
+------------------------------------------------------------------------
+
+toeDashiTradeZKPFrame : DashiTradeDream.DashiTradeZKPFrame
+toeDashiTradeZKPFrame = DashiTradeDream.canonicalDashiTradeZKPFrame
+
+toeDashiTradeDecisionInvariants : DashiTradeDream.DashiTradeDecisionInvariants
+toeDashiTradeDecisionInvariants =
+  DashiTradeDream.canonicalDashiTradeDecisionInvariants
+
+toeDashiTradeDecisionPostconditions : DashiTradeDream.DashiTradeDecisionPostconditions
+toeDashiTradeDecisionPostconditions =
+  DashiTradeDream.canonicalDashiTradeDecisionPostconditions
+
+toeDashiTradeFinanceAuthorityBoundary :
+  DashiTradeFibre.ResidualToTradeAuthorityBoundary
+toeDashiTradeFinanceAuthorityBoundary =
+  DashiTradeFibre.canonicalResidualToTradeAuthorityBoundary
+
+toeDashiTradeComparativeBoundary :
+  DashiTradeLaw.DashiTradeComparativeBoundary
+toeDashiTradeComparativeBoundary =
+  DashiTradeLaw.canonicalDashiTradeComparativeBoundary
+
+toeAgdaFirstLegalRuntimeContract :
+  AgdaFirstLegalRuntime.AgdaFirstLegalRuntimeContract
+toeAgdaFirstLegalRuntimeContract =
+  AgdaFirstLegalRuntime.canonicalAgdaFirstLegalRuntimeContract
+
+toeDashiTradeRuntimeConformanceCannotAutoPromote :
+  DashiTradeDream.RuntimeConformancePromotion → ⊥
+toeDashiTradeRuntimeConformanceCannotAutoPromote =
+  DashiTradeDream.runtimeConformanceCannotBePromotedWithoutReceipt
+
+toeDashiTradeJustificationDoesNotProveMarketCausation :
+  DashiTradeLaw.JustificationChainProvesMarketCausation → ⊥
+toeDashiTradeJustificationDoesNotProveMarketCausation =
+  DashiTradeLaw.justificationChainDoesNotProveMarketCausation
+
+toeDashiTradeProfitDoesNotProveGlobalTheory :
+  DashiTradeLaw.ProfitableTrajectoryProvesGlobalTheory → ⊥
+toeDashiTradeProfitDoesNotProveGlobalTheory =
+  DashiTradeLaw.profitableTrajectoryDoesNotProveGlobalTheory
+
+toeReferenceLegalRuntimeCannotOverrideAgda :
+  AgdaFirstLegalRuntime.ReferenceImplementationMayOverrideAgdaContract → ⊥
+toeReferenceLegalRuntimeCannotOverrideAgda =
+  AgdaFirstLegalRuntime.referenceImplementationDoesNotOverrideFormalContract
