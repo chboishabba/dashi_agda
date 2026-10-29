@@ -1,5 +1,15 @@
 module DASHI.Unified.Everything where
 
+-- Explicit finite vector charts and pointwise inverses establish a
+-- chosen ordering for 3^7, 3^11, and 3^27 ternary field carriers.
+import DASHI.Foundations.PolynomialC3S3OrbitFieldVectorAtlasExact as RootOrbitFields
+open RootOrbitFields public using
+  ( encode7 ; decode7 ; decodeEncode7Pointwise ; encodeDecode7
+  ; encode11 ; decode11 ; decodeEncode11Pointwise ; encodeDecode11
+  ; encode27 ; decode27 ; decodeEncode27Pointwise ; encodeDecode27
+  ; sevenFieldsAre2187 ; elevenFieldsAre177147
+  ; twentySevenFieldsAre7625597484987 )
+
 -- True 27->11->7 S3/C3 conjugacy quotient and invariant ternary fields.
 -- Includes explicit fixed-point no-go versus free output-phase 27->9.
 import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitQuotientExact as RootOrbitQuotient
