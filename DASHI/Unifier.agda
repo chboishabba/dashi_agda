@@ -10,6 +10,7 @@ import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidir
 import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact as PlantNutrientTransport
+import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as PlantHydraulicCarbon
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1805,3 +1806,16 @@ unifierPlantNutrientTransportZKPFrame =
     "the Unifier reaches the same exact moisture boundary and non-promotion theorem as the TOE root"
     "GitHub reuse search, exact-owner read-back, trust-escape scan, ESD mutation scan and Agda kernel check"
     false false false false
+
+
+unifierLeafAreaNutrientCouplingBoundary :
+  PlantHydraulicCarbon.LeafAreaNutrientCouplingBoundary
+unifierLeafAreaNutrientCouplingBoundary =
+  PlantHydraulicCarbon.canonicalLeafAreaNutrientCouplingBoundary
+
+unifierLeafAreaDoesNotDetermineNutrientUptakeAlone :
+  PlantHydraulicCarbon.leafAreaAloneDeterminesNutrientUptake
+    PlantHydraulicCarbon.canonicalLeafAreaNutrientCouplingBoundary
+  ≡ false
+unifierLeafAreaDoesNotDetermineNutrientUptakeAlone =
+  PlantHydraulicCarbon.leafAreaDoesNotDetermineNutrientUptakeAlone
