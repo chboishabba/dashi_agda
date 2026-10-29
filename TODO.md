@@ -17304,3 +17304,6 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+- [ ] Require the MP covariance witness to identify Sigma with the empirical (1/M) A A^T producer.
+- [ ] Require distinct worker slots to carry distinct goals.
