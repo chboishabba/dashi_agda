@@ -11,6 +11,7 @@ import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Cognition.PNF.RelationDeltaReconciliationExact as RelationDeltaExact
 import DASHI.Cognition.PNF.RelationDeltaReconciliationRegression as RelationDelta
+import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 
 pnfHyperfabricSurface : Hyperfabric.PNFHyperfabric369Surface
 pnfHyperfabricSurface =
@@ -58,3 +59,8 @@ unifiedCandidateRelationExecutionBoundary :
   RelationDeltaExact.RelationDeltaAuthorityBoundary
 unifiedCandidateRelationExecutionBoundary =
   RelationDelta.candidateRelationExecutionBoundary
+
+
+unifiedCandidateRelationZKPFrame : Introspective.ZKPFrame
+unifiedCandidateRelationZKPFrame =
+  RelationDelta.candidateRelationZKPFrame
