@@ -44,8 +44,8 @@ grep -q 'genericScaffoldAutomaticallySuppliesFive9323PremisesIsFalse' DASHI/Foun
 grep -q 'exactP145Premise27ReducedToTwoDirectionalLeavesIsTrue' DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
 grep -q 'closureUsesOneRule935AndTwoRule939StepsIsTrue' DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
 grep -q 'closureManufacturesEitherDirectionalLeafIsFalse' DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
-grep -q 'record CanonicalRule915MajorResidual' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
-grep -q 'canonicalMajorTraceInputs' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'CanonicalRule915CurrentProblem' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'selectedRouteToCurrentProblem' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'generatedScaffoldDoesNotCreatePremise18' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'generatedScaffoldDoesNotCreatePremise27' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'documentationDoesNotCreateMajorDerivation' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
@@ -53,6 +53,7 @@ grep -q 'verificationStatusDoesNotCreateMajorDerivation' DASHI/Foundations/Wette
 grep -q 'canonicalRule915MajorZKPFrame' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'typedPreconditionsInvariantAndPostconditionAreConnectedIsTrue' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'buildCanonicalRule915ResidualContract' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'selected9323RouteIsKnownCompleteForPremise18IsFalse' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'toeWetteGeneratedScaffoldDoesNotCreatePremise18' DASHI/EverythingTOESymmetryResolved369.agda
 grep -q 'toeFleetPriorityStillDoesNotCreateWetteProofAuthority' DASHI/EverythingTOESymmetryResolved369.agda
 grep -q 'unifiedWetteRule915CurrentProblemBoundary' DASHI/Unifier.agda
