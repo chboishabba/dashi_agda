@@ -299,3 +299,100 @@ module LocalNielsenReducedCertificate where
 -- An unrestricted arbitrary-word Agda theorem (and exact-head Agda
 -- kernel receipt) is not claimed here.  No local finite-order 3D
 -- homeomorphism or G2–G6 geometry is constructed by these computations.
+
+
+------------------------------------------------------------------------
+-- MOD-THREE MODULE OBSTRUCTION, NOT MERELY A SIGNED-LABEL NO-GO.
+--
+-- On abelianization, the local peripheral-preserving Nielsen map has
+-- matrix columns (-1,1,2), (-1,0,1), (0,0,1) over Z; a literal
+-- cyclic permutation has columns (0,1,0),(0,0,1),(1,0,0).
+-- In F3^3 the Nielsen map has NINE fixed points, whereas cyclic
+-- permutation has THREE.  A conjugating GL3(Z) matrix would induce
+-- a bijection modulo three preserving fixed-point cardinality;
+-- hence no such basis conjugacy exists.  This is independent of
+-- their matching characteristic polynomial (t-1)(t²+t+1).
+--
+-- Exact 27-case Agda calculations below REUSE the existing C3
+-- groupElements and group law.  The final GL3/F3 conjugacy argument
+-- is mathematical reasoning outside this finite computational scope.
+-- No 3D periodic homeomorphism or physical 27-cell identification.
+------------------------------------------------------------------------
+
+module NielsenMod3PermutationBarrier where
+  open import Agda.Builtin.Bool using (Bool; true; false)
+
+  data Vec3 : Set where
+    triple : C3.C3 → C3.C3 → C3.C3 → Vec3
+
+  infixr 5 _++list_
+  _++list_ : ∀ {A : Set} → List A → List A → List A
+  [] ++list ys = ys
+  (x ∷ xs) ++list ys = x ∷ (xs ++list ys)
+
+  mapList : ∀ {A B : Set} → (A → B) → List A → List B
+  mapList f [] = []
+  mapList f (x ∷ xs) = f x ∷ mapList f xs
+
+  bindList : ∀ {A B : Set} → (A → List B) → List A → List B
+  bindList f [] = []
+  bindList f (x ∷ xs) = f x ++list bindList f xs
+
+  allAbelianTriples : List Vec3
+  allAbelianTriples =
+    bindList (λ x →
+      bindList (λ y →
+        mapList (λ z → triple x y z) C3.groupElements)
+      C3.groupElements)
+    C3.groupElements
+
+  eqC3 : C3.C3 → C3.C3 → Bool
+  eqC3 C3.c0 C3.c0 = true
+  eqC3 C3.c1 C3.c1 = true
+  eqC3 C3.c2 C3.c2 = true
+  eqC3 _ _ = false
+
+  eqVec : Vec3 → Vec3 → Bool
+  eqVec (triple a b c) (triple x y z)
+    with eqC3 a x | eqC3 b y | eqC3 c z
+  ... | true | true | true = true
+  ... | _ | _ | _ = false
+
+  permutation3 : Vec3 → Vec3
+  permutation3 (triple a b c) = triple c a b
+
+  -- Matrix of the actual source-owned phi on abelianized (a,b,c):
+  --  a -> c A c b, b -> A c, c -> c.
+  nielsen3 : Vec3 → Vec3
+  nielsen3 (triple a b c) =
+    triple
+      (C3._∙_ (C3.inverse a) (C3.inverse b))
+      a
+      (C3._∙_ (C3._∙_ (C3._∙_ a a) b) c)
+
+  fixed : (Vec3 → Vec3) → List Vec3 → List Vec3
+  fixed f [] = []
+  fixed f (v ∷ vs) with eqVec (f v) v
+  ... | true = v ∷ fixed f vs
+  ... | false = fixed f vs
+
+  allAbelianTriplesCount : C3.length allAbelianTriples ≡ 27
+  allAbelianTriplesCount = refl
+
+  literalCycleFixedCount :
+    C3.length (fixed permutation3 allAbelianTriples) ≡ 3
+  literalCycleFixedCount = refl
+
+  localNielsenFixedCount :
+    C3.length (fixed nielsen3 allAbelianTriples) ≡ 9
+  localNielsenFixedCount = refl
+
+  unequalMod3FixedCounts :
+    C3.length (fixed permutation3 allAbelianTriples)
+      ≡ C3.length (fixed nielsen3 allAbelianTriples) → ⊥
+  unequalMod3FixedCounts ()
+
+-- This supplies a concrete obstruction to changing a literal child
+-- three-cycle INTO the nonlinear Nielsen peripheral stabilizer by
+-- conjugation in Aut(F3) (even after allowing GL3(Z) on H1).
+-- It does not forbid other geometric realizations of either action.
