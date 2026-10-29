@@ -135,3 +135,112 @@ unreducedConvolutionAt :
   (a b : Herm.Hermitian27) → Conv.WideCube125 → C3.Cyclotomic3
 unreducedConvolutionAt a b target =
   sumEventsAt target (unreducedEvents a b)
+
+
+------------------------------------------------------------------------
+-- TWO-DIMENSIONAL SOURCE FIVE-IN-NINE EXTENSION: 81 -> 41 -> 81
+-- Reuses the ORIGINAL plane Hermitian codec and its integer pair output.
+-- No D4 irreducible-representation or Monster inference is permitted.
+------------------------------------------------------------------------
+
+import DASHI.Physics.Closure.R2P281PlaneHermitianFiveOrbitConvolutionExact as Plane
+import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
+
+isZeroPlane : Ant.Plane9 → Bool
+isZeroPlane (M.modeZero , M.modeZero) = true
+isZeroPlane _ = false
+
+positivePlaneOrderedPair : Plane.PlanePair81 → Bool
+positivePlaneOrderedPair (p , q) with isZeroPlane p
+... | true = Herm.planePositiveSide q
+... | false = Herm.planePositiveSide p
+
+canonicalPlaneOrderedPairs : List Plane.PlanePair81
+canonicalPlaneOrderedPairs =
+  filterL positivePlaneOrderedPair Plane.planePairs81
+
+actual41PlanePairOrbits :
+  I.lengthL canonicalPlaneOrderedPairs ≡ 41
+actual41PlanePairOrbits = refl
+
+negatePlaneOrderedPair : Plane.PlanePair81 → Plane.PlanePair81
+negatePlaneOrderedPair (p , q) =
+  Ant.negatePlane9 p , Ant.negatePlane9 q
+
+negateWidePlane : Plane.WidePlane25 → Plane.WidePlane25
+negateWidePlane (x , y) =
+  Ant.negateWideAxis x , Ant.negateWideAxis y
+
+planePairOutputCovariant :
+  (pair : Plane.PlanePair81) →
+  Plane.planeTruePairSum (negatePlaneOrderedPair pair)
+    ≡ negateWidePlane (Plane.planeTruePairSum pair)
+planePairOutputCovariant ((a , b) , (c , d))
+  rewrite Ant.trueSignedAxisSumNegatesCovariantly a c
+        | Ant.trueSignedAxisSumNegatesCovariantly b d = refl
+
+record WeightedPlaneEvent : Set where
+  constructor weightedPlaneEvent
+  field
+    planeOutput : Plane.WidePlane25
+    planeWeight : C3.Cyclotomic3
+open WeightedPlaneEvent public
+
+planeSourceEvent :
+  (a b : Herm.Hermitian9) →
+  Plane.PlanePair81 → WeightedPlaneEvent
+planeSourceEvent a b (p , q) =
+  weightedPlaneEvent (Plane.planeTruePairSum (p , q))
+    (C3._*C_ (Herm.coefficient9 a p) (Herm.coefficient9 b q))
+
+invertedPlaneEvent : WeightedPlaneEvent → WeightedPlaneEvent
+invertedPlaneEvent (weightedPlaneEvent k z) =
+  weightedPlaneEvent (negateWidePlane k) (C3.conjC z)
+
+reflectedPlaneEventIsConjugate :
+  (a b : Herm.Hermitian9) (pair : Plane.PlanePair81) →
+  planeSourceEvent a b (negatePlaneOrderedPair pair)
+    ≡ invertedPlaneEvent (planeSourceEvent a b pair)
+reflectedPlaneEventIsConjugate a b (p , q)
+  rewrite planePairOutputCovariant (p , q)
+        | Herm.conjugateAtNegative9 a p
+        | Herm.conjugateAtNegative9 b q
+        | C3.conjugationMultiplicative
+            (Herm.coefficient9 a p) (Herm.coefficient9 b q) = refl
+
+isCentralPlanePair : Plane.PlanePair81 → Bool
+isCentralPlanePair (p , q) with isZeroPlane p
+... | true = isZeroPlane q
+... | false = false
+
+emitCanonicalPlanePair :
+  (a b : Herm.Hermitian9) →
+  Plane.PlanePair81 → List WeightedPlaneEvent
+emitCanonicalPlanePair a b pair with isCentralPlanePair pair
+... | true = planeSourceEvent a b pair ∷ []
+... | false =
+  let e = planeSourceEvent a b pair in
+  e ∷ invertedPlaneEvent e ∷ []
+
+orbitWeightedPlaneEvents :
+  (a b : Herm.Hermitian9) → List WeightedPlaneEvent
+orbitWeightedPlaneEvents a b =
+  I.concatMapL (emitCanonicalPlanePair a b) canonicalPlaneOrderedPairs
+
+actual81WeightedPlaneEvents :
+  (a b : Herm.Hermitian9) →
+  I.lengthL (orbitWeightedPlaneEvents a b) ≡ 81
+actual81WeightedPlaneEvents a b = refl
+
+sumPlaneEventsAt :
+  Plane.WidePlane25 → List WeightedPlaneEvent → C3.Cyclotomic3
+sumPlaneEventsAt target [] = C3.zeroC
+sumPlaneEventsAt target (e ∷ es)
+  with Plane.planeOutputEqual (planeOutput e) target
+... | true = C3._+C_ (planeWeight e) (sumPlaneEventsAt target es)
+... | false = sumPlaneEventsAt target es
+
+orbitWeightedPlaneConvolutionAt :
+  (a b : Herm.Hermitian9) → Plane.WidePlane25 → C3.Cyclotomic3
+orbitWeightedPlaneConvolutionAt a b target =
+  sumPlaneEventsAt target (orbitWeightedPlaneEvents a b)
