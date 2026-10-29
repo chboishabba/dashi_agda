@@ -384,3 +384,60 @@ handlebody theory retain original mathematical priority; current
 DASHI owners retain source/proof ownership. The polynomial #1414,
 sonic #1405, and prior Ibrahim Monster 3B work remain distinct.
 No ESD, empirics, physical gauge, or same-object Monster promotion.
+
+
+## 2026-10-29 second Pareto cut: modular conjugacy obstruction (27 vectors)
+
+The canonical boundary owner now contains
+\`NielsenMod3PermutationBarrier\`. It reuses
+\`DASHI.Core.FiniteC3OrbitStabilizerExact.C3\`, \`groupElements\`,
+addition and inverses to enumerate all \(3^3=27\) exponent vectors
+over \(\mathbb F_3\). The local peripheral-stabilizing nonlinear
+Nielsen map induces on the abelianization of \(F(a,b,c)\) the matrix
+
+\[
+N=\begin{pmatrix}-1&-1&0\\1&0&0\\2&1&1\end{pmatrix},
+\qquad
+P=\begin{pmatrix}0&0&1\\1&0&0\\0&1&0\end{pmatrix}
+\]
+
+for the naive literal child-label three-cycle \(P\). Both satisfy
+\(N^3=P^3=I\), \(\det N=\det P=1\) and have
+\(\chi(t)=t^3-1=(t-1)(t^2+t+1)\) over characteristic zero.
+**That matching characteristic polynomial does NOT identify their
+integral or mod-3 representations.** Direct finite calculation gives
+
+\[
+|\mathrm{Fix}_{\mathbb F_3^3}(N)|=9,\qquad
+|\mathrm{Fix}_{\mathbb F_3^3}(P)|=3.
+\]
+
+Since a matrix in \(GL_3(\mathbb Z)\) reduces to an invertible matrix
+modulo three, and conjugacy preserves the fixed-point-set cardinality,
+\(N\) and \(P\) are not conjugate in \(GL_3(\mathbb Z)\). Therefore
+their original \(F_3\)-automorphisms are **not conjugate in
+\(\mathrm{Aut}(F_3)\)** either. This eliminates any attempted
+free-basis change equating a literal generator three-cycle to the
+specific nonlinear Nielsen peripheral stabilizer. It is strictly
+stronger than the earlier 48-case signed permutation audit and
+compatible with the existence of both distinct order-three actions.
+
+The Agda finite certificates are \`allAbelianTriplesCount\`,
+\`literalCycleFixedCount\`, \`localNielsenFixedCount\` and
+\`unequalMod3FixedCounts\`. They prove concrete cardinality computations
+IF the exact-head Agda kernel checks; the general conjugacy-invariant
+argument is documented mathematically, not packaged as a quantified
+Agda theorem. The committed Python regression enumerated all 27
+vectors, passed, and also independently exercised the order-three
+action. Local execution was byte-compared with GitHub source using
+FNV-1a/length; no Agda kernel or CI.
+
+This explains why sharing the rational C3 spectrum, a ternary cell
+count or a polynomial S3/Monster fingerprint does not license a
+same-object identification. External-sector rotation already has
+its independent all-depth tower theorem. G2–G6 still require actual
+relative 3D topology, with G4's separate conjugating path \(q\).
+Underlying facts: classical integral representation theory and
+abelianization of free groups, not a new claim of original
+group-theoretic prior art. DASHI contribution is the precise
+source-specific modular discriminator and finite regression.
