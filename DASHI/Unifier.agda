@@ -2335,3 +2335,48 @@ unifierC5Full125CharacterOrthogonality :
   C5Character125.cubeInner5 k l ≡ C5Character125.cubeDelta5 k l
 unifierC5Full125CharacterOrthogonality =
   C5Character125.cubeCharacterOrthogonality
+
+
+------------------------------------------------------------------------
+-- Full 125-sample Q(zeta5) actual finite FFT, input 27-to-125 padding,
+-- pointwise spectral multiplication and original coefficient-polymorphic
+-- 729 pair / 125 exact integer outputs. SAME scalar carrier only.
+-- The sample-to-index equation is still a separate analytic-algebraic
+-- finite kernel obligation; never replace it by a synthetic receipt.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C5FullSampledFourierBidiExact as C5Sampled125
+import DASHI.Physics.Closure.R2P2C5FullSampledIntegerOperatorExact as C5FullOperator
+
+unifierC5Actual125SampledForwardInverse :
+  (s : C5Sampled125.CubeSignal125) →
+  C5Sampled125.fourier125 (C5Sampled125.inverseFourier125 s) ≡ s
+unifierC5Actual125SampledForwardInverse =
+  C5Sampled125.cubeFourierForwardInverse
+
+unifierC5Actual125SampledInverseForward :
+  (s : C5Sampled125.CubeSignal125) →
+  C5Sampled125.inverseFourier125 (C5Sampled125.fourier125 s) ≡ s
+unifierC5Actual125SampledInverseForward =
+  C5Sampled125.cubeFourierInversion
+
+unifierC5Pad27RetainsCoefficients :
+  (f : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Fourier729.ModeCube27) →
+  C5FullOperator.readRetained (C5FullOperator.pad27To125 f) k ≡ f k
+unifierC5Pad27RetainsCoefficients =
+  C5FullOperator.paddingRetainsAll27
+
+unifierC5FullIndexedEqualsOriginalInteger :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Convolution729.WideCube125) →
+  C5FullOperator.indexedFiveGridBilinearAt f g k
+    ≡ C5FullOperator.originalTrue125BilinearAt f g k
+unifierC5FullIndexedEqualsOriginalInteger =
+  C5FullOperator.indexedFiveGridEqualsTrueFullInteger
+
+unifierC5ActualFull125SampledOperator :
+  (Fourier729.ModeCube27 → C5Character125.Cyclotomic5) →
+  (Fourier729.ModeCube27 → C5Character125.Cyclotomic5) →
+  Convolution729.WideCube125 → C5Character125.Cyclotomic5
+unifierC5ActualFull125SampledOperator =
+  C5FullOperator.fullSampledBilinear125
