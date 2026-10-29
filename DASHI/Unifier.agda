@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Biology.EmbodiedSocialEcologyRelationalHistoryObligationExact as SituatedReachabilityTOE
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1742,3 +1743,21 @@ unifierYMA1CompletionDoesNotSelfPromote :
   ≡ false
 unifierYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- Neurodivergent situated reachability TOE receipt.
+--
+-- This is a domain receipt.  It does not alter the Fleet/Yang-Mills 58-gap
+-- cardinality or promote a universal autism mechanism.
+------------------------------------------------------------------------
+
+unifierSituatedReachabilityReceipt :
+  SituatedReachabilityTOE.SituatedReachabilityTOEReceipt
+unifierSituatedReachabilityReceipt =
+  SituatedReachabilityTOE.canonicalSituatedReachabilityTOEReceipt
+
+unifierSituatedReachabilityZKPFrame :
+  SituatedReachabilityTOE.SituatedReachabilityZKPFrame
+unifierSituatedReachabilityZKPFrame =
+  SituatedReachabilityTOE.canonicalSituatedReachabilityZKPFrame
