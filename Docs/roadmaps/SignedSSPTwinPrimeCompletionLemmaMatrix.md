@@ -902,3 +902,38 @@ NEW `DASHI/Arithmetic/TwinPrimeNat270ConsumerGuidedStrictRefinementExact.agda` d
 This is **source-written only, kernel check pending**. It closes a concrete instance of the strict consumer-guided refinement boundary, not arbitrary all-nat CEGAR completeness. Imported through the three original TOE roots; no ESD modifications.
 
 **Pareto/max-cut:** the immediate finite obligations are kernel validation and M13 full 270-way reindexing; the analytic bottleneck is still F02/F04/F06. Snowball results are only propagated when the typed consumer actually factors through the claimed projection; the original Ibrahim 3B group-action ownership remains separate and unmodified.
+
+## 29 October 2026 — M13 row-wise exact finite partition, further max-cut
+
+**Source-written owner:** `DASHI/Arithmetic/TwinPrimeResidualMangoldtPeriodRowsExact.agda`
+on #1408, imported by all three TOE roots. It reuses the existing
+`NatPeriod270` true arithmetic BIDI, `TwinPrimeResidualMangoldtBidiExact`
+and `TwinPrimeResidualMangoldtFiniteSumBidiExact.AdditiveScalar`.
+It neither redefines the Riemann/Mangoldt specification nor imports
+unmerged #1244, #1275, or Ibrahim Monster group actions as though
+they were the same object.
+
+- `rowNat`, `rowEncodeDecode`: 270k+r with actual `Fin 270` coordinate and exact codec reconstruction.
+- `rowConsumerForward`, `rowConsumerBackward`: original Nat consumer = lossless period-coded consumer, both directions.
+- `sumFinFrom`, `sumFinCongruence`: finite bounded fold respecting pointwise equalities; **no unproved additive associativity** or permutation invariance.
+- `periodRowSum`, `periodRowCodeSum`, `periodRowBidiForward`, `periodRowBidiBackward`: all 270 residues within one period.
+- `periodPairCorrelationBidi`: pair Mangoldt-style weighted correlation sum carried exactly through the original Nat codec.
+
+**Actual local Python executed:** 80 complete 270-residue rows,
+84 arbitrary partial/period-crossing intervals, 21,600 Nat/period
+inverse checks, and finite von-Mangoldt pair correlation equality:
+PASS. This is an independent arithmetic model, not an Agda kernel receipt.
+
+**Remain OPEN:** the general arbitrary-interval `M13-interval`
+partition theorem that reorders a contiguous finite sum into
+potentially partial period rows, with an explicit additive
+associativity/commutativity or order-preserving interval reindexing
+justification. The 27-survivor extraction requires handling
+small-prime exceptional cases, not equating all 270 rows with the
+27 admissible points. M14/M15 require actual proper prime-power
+classification and a certified asymptotic upper bound. M16/F02/F04/F06
+remain the nontrivial positivity/parity-barrier mathematics.
+Kernel verification for ALL newly written Agda sources remains open.
+The 2026 unrefereed H1<=186 bounded-gap result does not imply gap 2.
+No ESD changes; original Conway/Guy, Brun/Selberg/Polymath,
+#1244 native C3, #1275 RGS and Ibrahim Monster 3B ownership retained.
