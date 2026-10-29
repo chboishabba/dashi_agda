@@ -226,4 +226,5 @@ Postconditions permit refinement to close an omission and forbid universal recov
 
 The same owner is now imported by `DASHI/EverythingTOESymmetryResolved369.agda`, `DASHI/Unifier.agda`, and `DASHI/Unified/Everything.agda`.
 The Lean parity surface is `Integration/ResidualTaxonomy.lean`.
+The C4-style import map is `Docs/architecture/BraidedTransferTOE.puml`.
 Agda remains the golden authority.
