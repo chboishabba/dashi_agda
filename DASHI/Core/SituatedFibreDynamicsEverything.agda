@@ -40,6 +40,7 @@ import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.MultiaxialIncidenceFibreExact
 import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact
 import DASHI.Core.ConsumerFibreRefinementSchedulerExact
+import DASHI.Cognition.PNF.RationalMarkovLumpingFutureExact as MarkovLumping
 
 ------------------------------------------------------------------------
 -- TOE ZKP frame for the current problem.
@@ -52,6 +53,12 @@ import DASHI.Core.ConsumerFibreRefinementSchedulerExact
 -- P preconditions: finite refinement stays on the declared coarse stage.
 -- G invariants: endpoint projection does not recover erased path data.
 -- F postconditions: the canonical trap remains a proof-bearing barrier.
+--
+-- Stochastic analogue:
+-- RationalMarkovLumpingFutureExact owns the positive condition under which a
+-- coarse stochastic quotient preserves all finite-horizon factored observables.
+-- The deterministic trap/escape witness here must not be promoted to a Markov
+-- non-lumpability theorem without a concrete stochastic kernel.
 ------------------------------------------------------------------------
 
 record SituatedFibreTOEZKPFrame : Set₁ where
