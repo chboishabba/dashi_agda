@@ -167,3 +167,25 @@ small gate; they are not replaced by it.
 - `neither` is not falsity; it is the fail-closed absence of promotable structural
   evidence.
 - This module does not certify spaCy accuracy or a particular parser profile.
+
+
+## TOE handoff
+
+The semantic-promotion owner is imported directly by the three canonical TOE roots:
+
+- `DASHI.EverythingTOESymmetryResolved369`;
+- `DASHI.Unifier`;
+- `DASHI.Unified.Everything`.
+
+The same roots import `DASHI.Core.GovernanceTrajectoryRealisationExact` and `DASHI.Finance.DashiTradeFibreBridgeExact`.
+
+This creates one invariant handoff across legal and trading domains:
+
+- observation is evidence;
+- classification is evidence;
+- heuristic support is evidence;
+- none of these creates execution, legal, or semantic authority;
+- authority remains owned by the domain-specific gate.
+
+No literal Actionstep-specific formal owner exists on the current default branch. This policy therefore does not invent one. A future Actionstep adapter must consume this gate and preserve the same non-promotion invariant.
+
