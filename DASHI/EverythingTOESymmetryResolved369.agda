@@ -10,6 +10,7 @@ import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidir
 import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Unified.PNFHyperfabric as UnifiedPNF
 import DASHI.Cognition.PNF.RelationDeltaReconciliationExact as RelationDeltaExact
+import DASHI.Core.AuthorityNonPromotionCore as Authority
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -1471,3 +1472,19 @@ toeCandidateRelationOwnerRouting :
   RelationDeltaExact.RelationDeltaOwnerRouting
 toeCandidateRelationOwnerRouting =
   UnifiedPNF.unifiedCandidateRelationOwnerRouting
+
+
+toeCandidateRelationExecutionBoundary :
+  RelationDeltaExact.RelationDeltaAuthorityBoundary
+toeCandidateRelationExecutionBoundary =
+  UnifiedPNF.unifiedCandidateRelationExecutionBoundary
+
+toeCandidateRelationRuntimeAuthorityStillFalse :
+  Authority.runtimeAuthorityFlag
+    (RelationDeltaExact.executionNonPromotion
+      toeCandidateRelationExecutionBoundary)
+  ≡ false
+toeCandidateRelationRuntimeAuthorityStillFalse =
+  Authority.bundleRuntimeAuthorityIsFalse
+    (RelationDeltaExact.executionNonPromotion
+      toeCandidateRelationExecutionBoundary)
