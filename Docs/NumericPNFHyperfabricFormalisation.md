@@ -246,9 +246,15 @@ The projection contract requires:
 - zero required procedural statement per source row.
 
 `AffectedBoundaryLocalReductionExact.agda` now exposes the generic
-`AffectedLocalReducer`. The existing parent-frontier reducer is an instance of
+`AffectedLocalReducer` and `SoundAffectedKeySelection`. The existing parent-frontier reducer is an instance of
 that owner. A consumer with zero affected keys must retain its state exactly. A
 consumer that produces no semantic state change must emit no hierarchy delta.
+
+`SoundAffectedKeySelection` coalesces the useful no-missing-wakeup rule from the
+historical `itir-edit-transport-leaf-locality-v2` lineage. Conservative extra
+wakeups are permitted. Missing a required affected key is not permitted. The
+historical `DependencyIndexedOwnerWakeupExact` file is not revived as a second
+live theorem owner.
 
 `SentenceAnaphorSetwiseProjectionExact.agda` is the E0d specialization. Its
 semantic boundary is:
