@@ -4,6 +4,8 @@ module DASHI.Reasoning.Everything where
 
 import DASHI.Reasoning.RelationalEverything
 import DASHI.Reasoning.TrialecticEdgeSynthesisCompatibilityExact
+import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact
+import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact
 import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact
 import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact
