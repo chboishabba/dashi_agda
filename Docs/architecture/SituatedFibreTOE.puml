@@ -1,0 +1,78 @@
+@startuml
+title DASHI situated fibre TOE convergence
+
+skinparam componentStyle rectangle
+
+package "Golden Agda theorem owners" {
+  [DecimalStageResidualBarrierExact] as Decimal
+  [FiniteTypedBranchingReachabilityBridgeExact] as Branch
+  [TrajectoryEndpointNonfactorabilityExact] as Trajectory
+  [HistoryConditionedChoiceExact] as History
+  [TypedBranchingOptionConeBridgeExact] as Cone
+  [StageTransitionBarrierExact] as Barrier
+}
+
+package "Canonical rollup" {
+  [SituatedFibreDynamicsEverything] as Rollup
+}
+
+package "TOE consumers" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as Unifier
+  [Unified.Everything] as Unified
+}
+
+Decimal --> Rollup : coarse stage != finite depth
+Branch --> Rollup : row mass != reachability
+Trajectory --> Rollup : endpoint != path
+History --> Rollup : present != history/future
+Barrier --> Rollup : blocked path is typed
+Cone --> Rollup : reachability -> option cone
+
+Rollup --> TOE
+Rollup --> Unifier
+Rollup --> Unified
+
+note right of Rollup
+O: preserve coarse/fine separation
+R: reuse canonical theorem owners
+C: compose typed branch and path witnesses
+S: block semantic promotion
+L: one nonblocking convergence lane
+P: finite refinement preserves coarse stage
+G: erased path data does not descend
+F: trap barrier and option-cone split remain explicit
+end note
+
+note bottom
+Preconditions:
+* Agda owners are theorem authority.
+* Lean mirrors are correspondence evidence only.
+* Fleet 584 discharged fibres stay discharged.
+* Fleet 44 contradiction gaps stay separate.
+* Fleet 58 unformalised gaps are unchanged by this integration.
+
+Invariants:
+* fine depth != coarse stage transition
+* local branch mass != reachable future
+* endpoint equality != trajectory equality
+* present observation != history-conditioned future cone
+* option-cone comparison != coercion
+
+Postconditions:
+* all three TOE roots reach the same canonical rollup
+* no ESD surface is edited
+* no standards framework creates theorem authority
+end note
+
+legend left
+Process lenses only:
+ITIL
+ISO 9000
+ISO/IEC 42001, 27001, 27701, 23894, 9241
+NIST AI RMF
+Six Sigma
+C4 / PlantUML
+No certification claim.
+endlegend
+@enduml
