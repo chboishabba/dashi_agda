@@ -29,9 +29,10 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectR44020261007
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length)
-open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -50,6 +51,56 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianR440WeldExact as 
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact as NoncoreCore
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveExact as LiveOwner
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBonyLiveExact as RateLive
+
+------------------------------------------------------------------------
+-- Cross-prover R440 padding audit.
+--
+-- The Lean donor NSUnforcedAnalyticCuts proves the same scalar identity.
+-- This Agda theorem is the golden proof owner for the rational four-moment
+-- normal form used below.
+--
+-- A zero-amplitude noncore padding batch changes only the noncore count and
+-- noncore input-rate sum.  The signed defect increment is exactly
+--
+--   dr * vC - dn * wC.
+--
+-- This is a diagnostic.  It is not a physical padding theorem and it does not
+-- pay B4.  It rules out treating cutoff padding as automatically invisible.
+------------------------------------------------------------------------
+
+r440FourMomentSignedDefect :
+  ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
+r440FourMomentSignedDefect nN nC rN rC vN vC wN wC =
+  0ℚ - (nC * wN + nN * wC - rN * vC - rC * vN)
+
+r440ZeroAmplitudeNoncorePaddingIncrement :
+  (nN nC rN rC vN vC wN wC dn dr : ℚ) →
+  r440FourMomentSignedDefect
+    (nN + dn) nC (rN + dr) rC vN vC wN wC
+  - r440FourMomentSignedDefect
+      nN nC rN rC vN vC wN wC
+  ≡ dr * vC - dn * wC
+r440ZeroAmplitudeNoncorePaddingIncrement
+    nN nC rN rC vN vC wN wC dn dr =
+  solve
+    ( nN ∷ nC ∷ rN ∷ rC ∷ vN ∷ vC ∷ wN ∷ wC ∷ dn ∷ dr ∷ [])
+
+twoℚ : ℚ
+twoℚ = 1ℚ + 1ℚ
+
+threeℚ : ℚ
+threeℚ = twoℚ + 1ℚ
+
+r440PaddingScalarWitnessIncrementOne :
+  (nN nC rN rC vN wN : ℚ) →
+  r440FourMomentSignedDefect
+    (nN + 1ℚ) nC (rN + threeℚ) rC vN 1ℚ wN twoℚ
+  - r440FourMomentSignedDefect
+      nN nC rN rC vN 1ℚ wN twoℚ
+  ≡ 1ℚ
+r440PaddingScalarWitnessIncrementOne nN nC rN rC vN wN =
+  solve (nN ∷ nC ∷ rN ∷ rC ∷ vN ∷ wN ∷ [])
+
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -121,6 +172,26 @@ module LiveDefectR440
           0ℚ - Work.coherentWork (Live.mixed output) residual)
         residualIsPhysicalR440NormalForm)
 
+
+  physicalFourMomentScalarDefect : ℚ
+  physicalFourMomentScalarDefect =
+    r440FourMomentSignedDefect
+      (Pair.natAsRational (length N.noncore))
+      (Pair.natAsRational (length N.core))
+      (Pair.rateSum Rate.inputMass N.noncore)
+      (Pair.rateSum Rate.inputMass N.core)
+      (Pair.workSum (Live.work output) N.noncore)
+      (Pair.workSum (Live.work output) N.core)
+      (Pair.weightedWorkSum
+        Rate.inputMass (Live.work output) N.noncore)
+      (Pair.weightedWorkSum
+        Rate.inputMass (Live.work output) N.core)
+
+  defectIsFourMomentScalarDefect :
+    N.R.defect ≡ physicalFourMomentScalarDefect
+  defectIsFourMomentScalarDefect =
+    N.defectIsNegativeFourAggregate
+
 ------------------------------------------------------------------------
 -- Status: all representation content is gone from the B4 defect leaf.
 ------------------------------------------------------------------------
@@ -133,6 +204,12 @@ b4DefectPhysicalResidualNormalFormClosed = true
 
 b4DefectSignedPhysicalWorkClosed : Bool
 b4DefectSignedPhysicalWorkClosed = true
+
+b4DefectR440FourMomentScalarClosed : Bool
+b4DefectR440FourMomentScalarClosed = true
+
+b4DefectR440ZeroPaddingAuditClosed : Bool
+b4DefectR440ZeroPaddingAuditClosed = true
 
 b4DefectR440PhysicalPaymentClosed : Bool
 b4DefectR440PhysicalPaymentClosed = false
@@ -154,6 +231,14 @@ b4DefectPhysicalResidualNormalFormClosedIsTrue = refl
 b4DefectSignedPhysicalWorkClosedIsTrue :
   b4DefectSignedPhysicalWorkClosed ≡ true
 b4DefectSignedPhysicalWorkClosedIsTrue = refl
+
+b4DefectR440FourMomentScalarClosedIsTrue :
+  b4DefectR440FourMomentScalarClosed ≡ true
+b4DefectR440FourMomentScalarClosedIsTrue = refl
+
+b4DefectR440ZeroPaddingAuditClosedIsTrue :
+  b4DefectR440ZeroPaddingAuditClosed ≡ true
+b4DefectR440ZeroPaddingAuditClosedIsTrue = refl
 
 b4DefectR440PhysicalPaymentClosedIsFalse :
   b4DefectR440PhysicalPaymentClosed ≡ false
