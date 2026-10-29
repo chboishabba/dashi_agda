@@ -1,5 +1,16 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- REUSE: original MoonshineOrbifoldSectorProjectorExact rational C2
+-- even/odd operators instantiated on the 11 genuine C3 orbits.
+-- The video's Vandermonde and orbit observables share ONLY sign C2.
+import DASHI.Foundations.PolynomialC3S3RationalCharacterAlgebraExact as RationalC2Adapter
+open RationalC2Adapter public using
+  ( Field11ℚ ; positiveProjectionAt ; negativeProjectionAt
+  ; reflectionPositiveNegativeReconstruct ; positiveReflectionInvariant
+  ; negativeReflectionOdd ; positiveProjectionAtIdempotent
+  ; s3OnRationalField ; positiveIntertwinesS3Parity
+  ; negativeIntertwinesS3Parity ; s3OnRationalFieldFactorsThroughParity )
+
 -- O45: rational 2/3/6 block-field inverse and S3-intertwiner,
 -- assembled into source-written Q^27 ≃ 7triv ⊕ 4sign ⊕ 8std₂.
 -- Agda kernel verification PENDING; char3 modular no-go preserved.
