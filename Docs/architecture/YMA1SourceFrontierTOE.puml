@@ -1,0 +1,85 @@
+@startuml
+title DASHI Yang-Mills Row A1 source frontier -> TOE
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+
+package "Primary sources" {
+  component "Bałaban CMP98
+Averaging
+DOI 10.1007/BF01211042" as CMP98
+  component "Bałaban CMP99
+Background propagators
+DOI 10.1007/BF01240355" as CMP99
+  component "Bałaban CMP109
+Effective actions / beta
+DOI 10.1007/BF01215223" as CMP109
+}
+
+package "Golden Agda owners" {
+  component "BalabanCMP109DirectBetaSourceRegression" as Direct
+  component "BalabanRowARecentLeanCrossProverProgressExact" as Cross
+  component "BalabanYM4RowALiteralProducerAdapterExact" as Producer
+  component "YMA1SourceFrontierExact" as A1
+  component "YMImplementAToDTOEMaxCutExact
+58 Gate-4 formal gaps" as Gate4
+}
+
+package "TOE facades" {
+  component "EverythingTOESymmetryResolved369" as TOE
+  component "Unifier" as Unifier
+  component "Unified.Physics" as Physics
+}
+
+package "Lean mirror" {
+  component "AgdaMirror.Physics.YangMills.A1SourceFrontier" as LeanMirror
+}
+
+package "Meta-introspector donors
+separate attribution / no theorem authority" {
+  component "zkperf" as zkperf
+  component "zos-server" as zos
+  component "erdfa-py" as erdfa
+  component "aristotle-cli-rs" as aristotle
+}
+
+CMP98 --> Direct : literal Q' / averaging
+CMP99 --> Direct : C(U), A(U), constrained Gaussian
+CMP109 --> Direct : beta projection / current remainder
+
+Direct --> A1 : source frontier levels
+Cross --> A1 : cross-prover evidence only
+Producer --> A1 : finite literal producer shape
+Gate4 --> A1 : count = 58
+
+A1 --> TOE
+A1 --> Unifier
+A1 --> Physics
+
+A1 ..> LeanMirror : golden authority -> mirror
+LeanMirror --> A1 : no promotion
+
+zkperf ..> A1 : attributed donor only
+zos ..> A1 : attributed donor only
+erdfa ..> A1 : attributed donor only
+aristotle ..> A1 : attributed donor only
+
+note right of A1
+Preconditions:
+- same branch / same source carrier
+- fixed-coordinate C* A C Gaussian
+- Lean is evidence only
+
+Invariants:
+- conditional does not self-promote
+- finite does not imply continuum
+- 58 formal gaps != 4 research rows
+- no ESD authority
+
+Postconditions:
+- current A1 compilers are TOE-reachable
+- literal source blockers stay explicit
+- Row A promotion remains false
+end note
+
+@enduml
