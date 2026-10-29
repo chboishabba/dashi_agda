@@ -1,0 +1,474 @@
+# Wealth-tax × dashiTRADE: exact completion roadmap and scoped lemma ledger
+
+Created 2026-10-28. **77 named formal obligations** across nine groups: 61 source-written (D), 11 owned by existing reusable sources (R), 5 remaining external identity/evidence contracts (N). D and R are NOT equivalent to an observed Agda kernel pass. N are *proposed names*, not already implemented.
+
+Source PRs: [dashi_agda #1277](https://github.com/chboishabba/dashi_agda/pull/1277); [dashiTRADE #3](https://github.com/chboishabba/dashiTRADE/pull/3). This ledger defines the complete finite scope **for this economics/trade research release**; it is not a finite list of all possible theorems in macroeconomics or physics. Reuse first; do not edit ESD or overwrite diverged TOE root files.
+
+## Formal lemma and record obligations
+
+### A. Tax base and assessment-day ceiling (8)
+
+- **A01 [D]** `incomeTaxIsNotStockCap` — Stock and annual income taxes are distinct constructors.
+- **A02 [D]** `vacancyTaxIsNotWealthCap and inheritanceTaxIsNotAnnualWealthLevy` — Different legal tax bases remain typed.
+- **A03 [D]** `sourceAIProposedRatesAreNotVictoriaLaw` — AI-suggested 1/2/5% idle equity is not the enacted Victoria VRLT schedule.
+- **A04 [D]** `annualSnapshotIsNotContinuousBound` — Assessment-time cap does not bound all between-assessment states.
+- **A05 [N]** `netWealthBalanceIsWellTyped` — One timestamp and unit, with debt and beneficial-ownership exclusions.
+- **A06 [D]** `netWealthAfterFullyPaidExcessEqualsMin` — Given full collection, after-payment wealth equals min(W,K).
+- **A07 [D]** `hundredPercentLiabilityZeroBelowThreshold` — Generic threshold/truncated subtraction cases.
+- **A08 [D]** `wealthLiabilityMonotoneAtFixedThreshold` and `wealthLiabilityNeverExceedsAssessedWealth` — General fixed-threshold monotonicity and upper bound.
+
+### B. Fiscal collection, budget and care (8)
+
+- **B01 [D]** `liabilityAloneDoesNotDetermineCollection` — Same assessed liability permits differing collected cash.
+- **B02 [D]** `collectionCostsNotDeterminedByCash` — Collected cash does not determine administration cost.
+- **B03 [D]** `cashReceiptsDoNotDetermineCareAppropriation` — Collected receipts do not choose spending.
+- **B04 [D]** `taxDueNotAdequateToInferActualCollection` — Query adequacy defect and negative witness.
+- **B05 [D]** `riskSignalAloneIsNotTaxAuthority` — AI risk feature does not define an effective statutory base.
+- **B06 [D]** `remittanceBoundedByAssessedLiabilityUnderNoPenalties` — State conditions excluding penalties, refunds and interest.
+- **B07 [D]** `cashBudgetConservationWithCostsAndTransfers` — Cash receipts, carry, debt and actual spending form balanced budget.
+- **B08 [D]** `careAppropriatedDoesNotDetermineCareDelivered` — Appropriation cannot create service hours without resources.
+
+### C. Payment funding and market sale paths (9)
+
+- **C01 [D]** `FundingRoute.fundingBalances` — Cash + new debt + gross sales equals tax cash + execution costs.
+- **C02 [D]** `noOtherFundingImpliesSaleProceeds` — With zero cash/debt, sale cash equals tax plus execution costs.
+- **C03 [D]** `paidTaxCannotDetermineUnitsSold` — Equal tax paid, different sale quantities.
+- **C04 [D]** `saleVolumeCannotDetermineExecutionCost` — Equal quantities, different costs.
+- **C05 [D]** `saleVolumeCannotDeterminePhysicalCapacity` — Share volume does not identify machines.
+- **C06 [D]** `cashSourceUseIsSingleCounted` — Avoid counting same currency claim as cash, debt and sale.
+- **C07 [D]** `loanProceedsIncreaseLiabilities` — Borrowed proceeds create offsetting debt.
+- **C08 [D]** `disposalPreservesExternalAssetTransferAccounting` — Seller/right transfer to buyer and fees cannot erase plant.
+- **C09 [N]** `routeFundingFeasibleGivenLiquidityCollateralAndTiming` — Balanced ledger does not guarantee funding availability.
+
+### D. Trade, fills and settlement (12)
+
+- **D01 [R]** `Dream.buyViabilityDoesNotFactorThroughDirection` — Trade signal does not supply BUY permission.
+- **D02 [R]** `Dream.holdAlwaysAvailable` — HOLD is admissible in inherited finite model.
+- **D03 [R]** `TradingJointPreconditionFabricExact.expansiveNotJointlyAdmissible` — Marginal permission does not imply joint permission.
+- **D04 [R]** `ContentAddressedTransitionIdentityExact.SameTransitionSpine` — Exact transition identity across stages is more than a hash.
+- **D05 [D]** `submittedOrderDoesNotDetermineSettlement` — Submitted order does not specify settled shares.
+- **D06 [D]** `executionDoesNotDetermineSettlement` — Executed amount does not specify settled shares.
+- **D07 [D]** `twoFillCashConservation` — Two filled unit prices 1 and 2 produce gross settled cash 3.
+- **D08 [D]** `priorCashReceiptHasNoForwardSettlementLink` — Future settlement does not directly finance earlier remittance.
+- **D09 [D]** `genericExecutedCountBoundedBySubmitted` — Finite list of fills cannot exceed authorized order under contract.
+- **D10 [D]** `genericSettledCountBoundedByExecuted` — All partial fills and unsettled remainders balance.
+- **D11 [D]** `genericSettledProceedsIsExactPriceQuantitySum` — Arbitrary number of exact fills, no ambient decimal rounding.
+- **D12 [D]** `uniqueFillIdentityAndMonotoneEventTime` — Unique IDs, instrument and 4-stage timestamp agreement.
+
+### E. Share class and control identity (9)
+
+- **E01 [D]** `ownerWeightedVotes and afterTransferVotesRemainAboveHalf` — Finite super-vote example.
+- **E02 [D]** `quantityCannotFixVotingControl` — Same sale count can leave 34/50 versus 16/50 voting power.
+- **E03 [D]** `FundingVoteReconciliation` — Per-class sold units and before/after owned units balance.
+- **E04 [D]** `saleVolumeCannotIdentifyInstrumentClass` — Quantity does not determine ordinary versus super-voting security.
+- **E05 [D]** `SettlementOwnershipWeld` — Exact synthetic funding/quantity/issuer/instrument label agreement.
+- **E06 [D]** `shareClassTransferPreservesIssuedSupply` — Seller/buyer/treasury/issuance/cancellation legal share changes.
+- **E07 [N]** `authenticatedOwnerIssuerInstrumentClassKey` — Evidence-checked beneficial owner, issuer, security and class.
+- **E08 [D]** `controllingVotesRequireVerifiedRightsAndAgreements` — Majority arithmetic does not determine effective legal control.
+- **E09 [D]** `persistentTransactionIdentityCannotFollowFromValueOrDigest` — Local object identity, value equality, content hash and registry identity differ.
+
+### F. Clearing and investor attribution (7)
+
+- **F01 [D]** `ParticipantClearingBatch.netAccounting` — Finite gross sell/buy to net-receipt accounting.
+- **F02 [D]** `netReceiptCannotRecoverGrossTurnover` — Net zero can hide offsetting gross activity.
+- **F03 [D]** `investorAllocationsSumToParticipantObligation` — Broker/custodian allocations aggregate to participant totals.
+- **F04 [D]** `deliveryVersusPaymentCashAndTitleCoMove` — Conditional securities/cash finality with correct settlement authority.
+- **F05 [D]** `aggregateNetPositionsRespectGrossCashAndSecurityTotals` — Signed buy/sell/receive/pay variants with no silent cancellation.
+- **F06 [D]** `participantNetStatementDoesNotIdentifyIndividualTaxpayer` — A net participant receipt is not an individual's payment trace.
+- **F07 [N]** `actualSettlementFinalityRequiresOfficialReceipt` — Simulated close event cannot create authentic custody receipt.
+
+### G. Physical capacity and care (7)
+
+- **G01 [D]** `saleVolumeCannotDeterminePhysicalCapacity` — Existing finite distinct installed-machine example.
+- **G02 [D]** `careCannotFactorThroughTaxReceipt` — Same tax cash does not fix care outcome.
+- **G03 [R]** `AIEconomicUsefulWorkTimeSeriesExact and UnitEconomicsMarginExact` — Useful work and positive return do not follow from volume.
+- **G04 [D]** `physicalCapitalStockFlowConservation` — Existing stock + commissioned - retired = next stock with time.
+- **G05 [D]** `deliveredCareHoursBoundedByStaffAndEquipment` — Staff time, buildings and equipment constrain care capacity.
+- **G06 [D]** `energyMaterialsAndConstructionFeasibility` — Installed productive output consumes time and physical inputs.
+- **G07 [D]** `financialClaimChangeDoesNotIdentifyPhysicalOutput` — Generic conditional non-factorability rather than physical law.
+
+### H. Attribution, evidence and theorem authority (8)
+
+- **H01 [R]** `AttributedSourceCore.citationImportsProofIsFalse` — External citation does not discharge kernel theorem.
+- **H02 [R]** `SourceAttributionPromotionBoundaryExact.sameContentDoesNotAutoPromoteToIndependentProducer` — Reprints and summaries do not create independent sources.
+- **H03 [R]** `EvidenceHyperfabricExact and SnowballAttributionProvenanceInvariantExact` — Preserve independent evidence fibres and genealogy.
+- **H04 [R]** `ContentAddressedTransitionIdentityExact.canonicalTransitionIdentityBoundary` — Digest is not event identity/collision-freedom.
+- **H05 [D]** `toePaperCannotSupplyKernelCertification` — Agda source and publication are not compiler receipts.
+- **H06 [R]** `authorAndProofOwnershipAreDisjointReceiptTypes` — Original study, repository theorem, code, executed tests, Agda kernel all typed differently.
+- **H07 [R]** `originalSourceProducerIsNotDerivedSummary` — Primary and derivative reports never become two independent observations.
+- **H08 [N]** `measuredPolicyEffectRequiresSameObjectInputs` — Conditional matched person/security/tax/payment/time/outcome promotion.
+
+### I. Pareto comparison and causal humility (9)
+
+- **I01 [D]** `rivalPolicyTaxBasesRemainComparableButDistinct` — Compare wealth/income/inheritance/gains/land/vacancy on typed metrics.
+- **I02 [D]** `policyScenarioRequiresStatuteOrHypotheticalTag` — Hypothetical hard cap not mislabeled enacted.
+- **I03 [D]** `finitePolicyStateTransitionPreservesAccounting` — Across-period wealth/debt/security/care stocks balance.
+- **I04 [D]** `behaviouralResponseParametersAreExplicitAssumptions` — Migration, credit and investor behaviour are not given theorems.
+- **I05 [D]** `sameInitialStateDifferentInterventionComparison` — Explicit baseline and treatment labels.
+- **I06 [D]** `paretoDominancePreorder` — Reflexive and transitive objective-vector comparison.
+- **I07 [D]** `finiteParetoFrontierIsNonempty` — Nonempty finite feasible choice set has non-dominated element.
+- **I08 [D]** `noUniqueOptimalTaxRateFromParetoOrderAlone` — Partial ordering does not select welfare weights.
+- **I09 [D]** `syntheticModelCannotIdentifyObservedCausalEffect` — Separate case-study, controls and causal identification receipts.
+
+## External independent evidence obligations (not Agda lemmas)
+
+- **X01** Primary enacted tax statute, jurisdiction, base and assessment period.
+- **X02** Assessed wealth, debt, exclusions and ownership with original timestamp.
+- **X03** Legally issued liability, collection, adjustments, refunds and costs.
+- **X04** Payment-source cash, loan, collateral, sales or separate bridge finance.
+- **X05** Real order/fill IDs, price, fee and seller holdings.
+- **X06** CHESS/broker/issuer custody settlement and participant-to-investor allocation.
+- **X07** Authentic company share-class voting rights and effective control agreements.
+- **X08** Measured capital spending, assets commissioned, energy, staffing and delivered care.
+- **X09** Matched controls, pretrends, migration and confounder sensitivity.
+- **X10** Independent/out-of-sample replication, uncertainty and null-result disclosure.
+
+## Release gates (engineering, not theorems)
+
+- **K01** Lock original owner and exact SHA/Agda/stdlib/Python dependency receipt.
+- **K02** Discharge N terms or label residuals OPEN; no fake complete status.
+- **K03** Observed Agda kernel pass of 4 economics owners and TOE consumer, zero unsafe proof escapes.
+- **K04** Exact Python/Agda fixture equivalence, adversarial test and no live order execution.
+- **K05** Rebase/merge 152 newer master-only commits without resetting three evolving TOE root files; register Economics/TOE imports; fix master economics escaped newline.
+- **K06** Review and merge both PRs and publish source-written/tested/kernel/empirical tiers separately.
+
+## Minimal sequencing / completion decision
+
+F0 = capture source owner, master comparison and exact heads. F1 = kernel typecheck plus syntax fix. F2 = generic accounting, settlement and identity completion (A–F). F3 = source-owned material constraints (G) and attribution firewalls (H). F4 = conditional rival policy Pareto frontier (I) with no measured-effect assertion. F5 = cross-repo shadow conformance and master TOE merge. F6 = real-world X01–X10 study, or publish them as OPEN if inaccessible. Formal release may finish at F5; an empirical finding cannot.
+
+**Attribution:** All dated mathematical, political and economic original authors keep original ownership; reuse DASHI theorem owners as owners, not copied proofs. The independent Ibrahim 2017 Wikipedia FLN and existing Ibrahim Monster 3B work remain separate. No numerical/character/IPFS coincidence creates same-object identity or a causal claim. Synthetic filled receipts are not exchange records, shareholder registers, legal assessments, market execution, care hours or laws of physics.
+
+## 2026-10-28 proof expansion: nine obligations now source-written
+
+The next pass constructs nine conditional general results by reusing the Agda standard library and existing DASHI theorem owners. Ledger now has 37 D, 9 R, 31 N. Source writing is NOT an observed Agda kernel check.
+
+- A06-A08: for all natural-number thresholds, under full assessment-day collection the modeled remaining stock equals the minimum of stock and threshold. Truncated liability vanishes below the threshold, is monotone at fixed threshold, and never exceeds assessed wealth.
+- D09-D11: generic balanced order records yield executed <= submitted, settled <= executed, and settled <= submitted. An arbitrary finite price/quantity list has an exact fold for gross proceeds; declared cash must carry a separate explicit equality proof. This does not assert any real exchange fill.
+- E06: an already-issued share-class transfer conserves seller/buyer combined unit count, given exact before/after seller and buyer reconciliations.
+- G04-G05: physical plant has its own before, commissioning, retirement and after-stock accounting. Actual care service hours are separately bounded by supplied staff and equipment capacities.
+
+All these records are model-conditional. No actual tax, legal control, worker, energy or machine state is inferred. No new unsafe Agda options or protected ESD edits. The standalone shadow Python suite was independently re-executed with 36 passing tests and remains unchanged.
+
+
+## Pareto source-owner continuation, 2026-10-28
+
+The existing DASHI.Core.AdmissibleConsumerMDLHyperfabricExact owns the multi-axis WeaklyDominates definition. The economics adapter now imports it and supplies paretoDominanceReflexive and paretoDominanceTransitive. A two-option synthetic cost-vector example proves that two distinct feasible-looking options can be incomparable when lower administration costs compete against increased care capacity. This is source-written, not an observed Agda kernel result.
+
+I06 and a finite incomparability witness relevant to I08 are source-written, but I08 stays OPEN; I08 must not be misconstrued as a proof of the real-world unique optimum of any enacted tax. I07 (existence of an undominated point in nonempty finite feasible set) remains open. No source, proof-author or Ibrahim 3B ownership was reassigned.
+
+**Ledger: 42 D, 9 R, 26 N.**
+
+
+## Participant-to-investor reconciliation (F03), 2026-10-28
+
+F03 is now source-written: `ParticipantInvestorAllocation` stores arbitrary finite lists of investor sale/purchase cash amounts and proofs that the sums equal a participant-level gross sell/gross buy batch. `investorAllocationsSumToParticipantObligation` composes these source-supplied equations with the previous participant-net balance using transitivity and congruence. The TOE consumer imports the same proof. This is a **conditional arithmetic conservation theorem**; it does not recover a named investor, tax payer, security ID or real ASX/CHESS source event from the participant's net receipt. F06/F07 (specific investor identity and official settlement finality) remain OPEN. No duplicate new general clearing library was created.
+
+**Ledger tally: 42 D, 9 R, 26 N.**
+
+## Directional clearing and conditional single-instrument DvP
+
+The earlier receiver-only net-cash batch is extended by a payable/receivable direction tag. The conditional SingleInstrumentDvPBatch records separate gross/net cash and security quantities, matched direction, and simultaneous finality at an externally supplied epoch. F04/F05 now have source-written dependent contracts but do not establish real CHESS finality or identify a real taxpayer. F07 remains OPEN. No live trading code changes.
+
+**Current ledger: 42 D, 9 R, 26 N.**
+
+
+## Matched lending balance (C07), 2026-10-28
+
+A new conditional MatchedBorrowingBalance requires both cash and liability to increase by the *same* borrowed units. It reuses the Agda standard library natural-number subtraction cancellation law to prove that cash minus debt, truncated at zero, is unchanged by that perfectly matched borrowing event. This is a genuine conditional algebraic result about the selected two-line financial ledger, not proof of loan accessibility or valuation, interest, collateral, lender risk, later repayments or tax-law effects. Both the original application and TOE consumer retain the no-automatic-credit authority boundary.
+
+**Ledger: 42 D, 9 R, 26 N.**
+
+## 2026-10-28 continuation: four substantive interfaces advanced
+
+Existing application owner: DASHI/Economics/WealthTaxDashiTradeMarketMaterialBidiExact.agda.
+Existing TOE consumer: DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda.
+
+**Four N → D source-written obligations (46 D / 9 R / 22 N):**
+
+- **B06:** NoAdjustmentCollection reconciles principal remitted, outstanding principal and the assessed liability. remittanceBoundedByAssessedLiabilityUnderNoPenalties derives the remittance bound from that identity. No penalty, refund, interest, tax statute or genuine assessment is inferred.
+- **B07:** ReconciledPublicCashBudget separates administrative outflow, transfer outflow, care appropriation and cash retained. cashBudgetConservationWithCostsAndTransfers proves modeled outflow is no greater than available cash, conditional on an exact balanced receipt.
+- **B08:** careAppropriatedDoesNotDetermineCareDelivered supplies two same-appropriation/different-delivered-hours counterworlds. It reuses the original IntersectionalNonFactorability theorem owner. This does not measure a clinical service.
+- **F06:** participantNetStatementDoesNotIdentifyIndividualTaxpayer supplies two distinct synthetic investor keys sharing the same participant clearing batch. It proves net statement alone cannot determine investor identity. Keys are illustrative, NOT authenticated taxpayer/holder identities.
+
+**Partial advances which remain N:**
+
+- **C09:** routeBalanceDoesNotEstablishLiquidityOrTiming prevents upgrading balanced payment totals into accessible financing. Real credit/collateral/liquidity and settlement timing still require evidence.
+- **G06:** FixedInputConstructionFeasibility adds conditional per-unit energy and material budget constraints. It does not calibrate inputs, commission actual plant or certify resource availability.
+- **I08:** finiteParetoTradeoffHasTwoDistinctMinimalOptions and paretoMinimalityCannotUniquelySelectCheapAdministration identify two undominated, distinct outcomes in the existing two-option illustrative cost hyperfabric. This is a finite countermodel, not general finite frontier enumeration (I07) or an optimal tax-rate result.
+
+**Independent roots:** ASX official CHESS Model 3/DvP and netting description; Fagereng–Guiso–Ring 2026 NBER WP35262. They bound institutional/empirical interpretation; they do not own the synthetic finite proof. The existing DASHI proof owners retain theorem ownership. Existing Ibrahim original FLN producer and earlier Monster 3B lineages are unrelated. Content identity, proof-source ownership, executed checks and authenticated transactions remain distinct.
+
+**Verification ceiling:** new Agda terms have been committed and structurally read back; NO observed Agda kernel typecheck or exact-head GitHub Actions receipt. The existing dashiTRADE shadow adapter is unchanged. No protected ESD surfaces or specialist TOE roots are edited. All 42 original topic inventory rows remain in scope; coverage is not a causal or formal certificate.
+
+**Actual walls remain:** D12 generic fill IDs/chronology; A05 asset/debt/beneficial-owner valuation; E07–E09 authenticated owner/rights/transaction identity; F07 custody finality; H06–H08 evidence authority; I01–I07/I09 causal multi-policy framework; full compiler pass, mainline integration, X01–X10 external evidence and cross-runtime conformance.
+
+## 2026-10-28 finite fill chronology continuation (D12)
+
+- **D12 N → D:** TimestampedFill includes issuer/class labels and an explicit four-stage per-fill chronology: submission ≤ execution ≤ clearing ≤ settlement. TokenAbsent and UniqueFillTokens define a recursive duplicate-token exclusion for arbitrary finite lists, with AllFillLabelsMatch requiring issuer/class agreement throughout a batch.
+- ChronologicalIdentifiedFillBatch exposes the proofs and uniqueFillIdentityAndMonotoneEventTime projects them. TwoIdentifiedChronologicalFills supplies a positive finite witness; duplicateSevenTokenRejected supplies the same-token negative witness.
+- The theorem is **source-written, not kernel-certified**. A token is unique only within the supplied list; a repeated token in another batch, a forged label, an exchange clock offset, a settlement rejection, and a real custody identity still require separate authority. D12 contains no cross-fill sorting requirement and must not be represented as one.
+- No new clearing adapter or live broker execution. The original dashiTRADE PR #3 Python shadow suite remains a separate executable implementation, not proof of this Agda type.
+
+**Current scoped ledger status: 47 D / 9 R / 21 N, out of 77.** No observed Agda compiler certificate, and no X01–X10 same-object empirical record suite.
+
+## 2026-10-28 D11 × D12 ordered identity/cash join
+
+The earlier separate finite fill uniqueness and cash conservation receipts did not establish that their *lists* were related. JoinedPriceIdentityBatch now carries one ordered list of (timestamped ID, priced fill) pairs. It requires exact equality between that full price/quantity projection and the settled cash batch's original list, unique local tokens, and common issuer/class labels. joinedIdentityAndCashReconcile composes the prior D11 cash equation with the D12 token property. A two-fill positive witness has gross cash 3. This does not verify real exchange identity, custody finality or tax payment. All construction is source-written; compiler certification remains unobserved. No status tally is changed: **47 D / 9 R / 21 N**.
+## 2026-10-28 reused original-owner attribution boundaries (H06–H07)
+
+The existing DASHI.Economics.SourceAttributionPromotionBoundaryExact owner already distinguishes original source propositions, formal construction, theorems and promotion steps. It independently proves sourceArgumentDoesNotAutoPromoteToDASHIFormalisationOwnership and secondaryReportDoesNotAutoPromoteToPrimaryAuthority. The TOE consumer now re-exports these exact existing proofs. Thus H06 and H07 are **R (reused prior owners)**, NOT independently authored new proofs, and not kernel-certified at this branch head. This closes the duplicated-work gap without copying a proof or giving original authors new repo theorem ownership. Different receipt authority levels still require an actual source producer for a valid empirical promotion.
+
+**Current scoped ledger status: 47 D / 11 R / 19 N, out of 77.** The previous 47/9/21 tally remains an historical snapshot. No signature, matching digest, content replica, Wikipedia hyperlink, Ibrahim Monster 3B result or LLM summary identifies a real taxpayer or proves a policy outcome.
+
+## 2026-10-28 source-owned stock, identity and rival-policy continuation
+
+**Current exact ledger: 59 D / 11 R / 7 N = 77.** Twelve obligations moved from N to D as model-conditional Agda source constructions, NOT observed Agda kernel results or empirical accomplishments. The historical previous tallies remain in earlier sections as versioned snapshots.
+
+**D source-written (theoretical scoped completion; actual-world validation remains X01–X10):**
+
+- C08: disposalPreservesExternalAssetTransferAccounting reuses the existing E06 share seller/buyer conservation and requires separately witnessed plant invariance.
+- E08: controllingVotesRequireVerifiedRightsAndAgreements gives two equal-vote/different-assumed-control counterworlds, blocking vote-count-only claims of effective legal control.
+- E09: persistentTransactionIdentityCannotFollowFromValueOrDigest blocks factorisation from an equal synthetic digest label into different synthetic event labels. No cryptographic collision is asserted.
+- G06: FixedInputConstructionFeasibility carries independently specified energy and material requirements. energyMaterialsAndConstructionRequireSeparateInputs projects the two necessary input constraints.
+- G07: financialClaimChangeDoesNotIdentifyPhysicalOutput uses the established nonfactorability owner for same-claim/different-output worlds.
+- I01: RivalTaxBaseComparison reuses original Tax.Policy, Tax.TaxBase and taxBase, preserving separate legal objects while allowing declared common cost units.
+- I02: TaggedPolicyScenario and StatutoryPolicyAdmission keep hypotheses separate from externally validated enactment evidence; no such legal evidence is synthesized.
+- I03: FinitePolicyAccountingPeriod requires before/after stock and flow reconciliation.
+- I04: ExplicitBehaviourAssumptions keeps migration, credit and slow portfolio-adjustment assumptions in separate named coordinates; it is not an estimated response.
+- I05: SharedInitialPolicyComparison requires equality of baseline/intervention opening stock; this is not sufficient for causal identification.
+- I08: noUniqueOptimalTaxRateFromParetoOrderAlone exhibits two distinct illustrative rate tags behind already-demonstrated incomparable Pareto-minimal outcomes. It refutes universal unique-choice inference, not a specific enacted tax rate.
+- I09: syntheticModelCannotIdentifyObservedCausalEffect supplies same-forecast/different-external-coordinate worlds; the external coordinate is **synthetic fixture input**, not real observations.
+
+**Partial source-written work, intentionally retained N because the stronger evidence/identity target is unpaid:**
+
+- A05: ScopedNetWealthSnapshot reconciles gross/included/excluded assets and debt, but same-object valuation, beneficial-owner exclusion, currency validity and time authority remain unverified.
+- C06: TaggedFundingReceipt proves each tag contributes to exactly one channel. This does not prevent two forged tokens referring to one real cash source across receipts.
+- C09: FinancedRouteAdmission requires liquidity limit, collateral/credit limit and settlement-before-tax evidence. Constructing these *assumed* proofs does not demonstrate actual financing access.
+- E07: OwnerIssuerSecurityAdmission requires independent registry validity and owner/issuer/class name matches. It does not verify cryptographic signatures or true beneficial ownership.
+- F07: OfficialSettlementAdmission requires an independent official receipt validation predicate. There is no actual ASX/CHESS/custodian receipt or checker invocation.
+- H08: MatchedPolicyEffectAdmission requires independent tax/custody/outcome/causal-design checks plus same-person and same-security key equalities. No real matched panel or identified causal effect is presented.
+- I07: a two-option finite Pareto witness is available; general nonempty finite feasible-frontier existence using the original canonical multi-axis order remains open.
+
+**Additional complete source-level guards:** the original TOE consumer re-exports the new application results. The source/topic checker now requires the corresponding symbols, 42 topic rows and canonical imports. Existing economics and provenance theorem owners are not copied. No modified protected ESD surface, no specialist TOE facade overwrite, no live dashiTRADE executor change.
+
+**Original source ownership and interpretation boundaries:** ASX owns CHESS Model 3 DvP / participant netting descriptions; Andreas Fagereng, Luigi Guiso and Marius A. K. Ring own NBER 35262 (May 2026) Norwegian portfolio evidence. Neither validates the hypothetical 100%-above-threshold annual cap. The original 2017 Ibrahim Wikipedia first-link lineage and independently owned Ibrahim Monster 3B results are not tax-system proof producers. A later reprint, code hash or matching character fingerprint does not establish independence or same-object identity.
+
+**Verification ceiling:** commits establish repository source writing only. No Agda compiler is installed in this execution environment; exact-head Agda kernel checking is NOT observed. Static guards and bounded Python arithmetic checks are not interchangeable with typechecking. No production or real-world observations follow.
+
+## 2026-10-28 I07 constructive ranked finite-frontier partial proof
+
+The original multi-axis Pareto hyperfabric owner is unchanged. The existing economics application now includes a generic structurally recursive finite arg-minimum construction:
+
+- RankedMember: source-local proof of membership in a finite list.
+- FiniteRankMinimum and finiteNonemptyRankMinimum: for any Nat ranking of any nonempty finite population, return a member with no larger rank than any other listed member, using standard-library ≤-total, ≤-trans, ≤-refl.
+- rankOrderCannotCycle: rejects a ≤ cycle with one strict successor step.
+- StrictlyDominatesAdmissible: interprets strict improvement using the original Pareto.WeaklyDominates on Pareto.AdmissibleStratumPoint, which already carries feasibility and consumer adequacy.
+- finiteParetoFrontierNonemptyGivenStrictRank: takes a supplied rank-decrease hypothesis for every strict Pareto improvement and constructs a listed admissible member that cannot be strictly dominated by another listed admissible member.
+
+**Proof scope:** This is an arbitrary-list constructive theorem with an EXTRA assumption: a Nat ranking strictly decreasing on strict Pareto improvements. It does **not** prove that such a rank exists for an arbitrary finite multi-axis cost fabric, that the list enumerates every feasible alternative, or that the rank faithfully reflects measured costs. I07 therefore **remains N** for the unrestricted nonempty finite feasible-frontier theorem. This partial source construction does not change 59 D / 11 R / 7 N. No Agda kernel typecheck was observed, and none of the model examples selects a real tax rate.
+
+## 2026-10-28 completed scoped finite-axis Pareto source term (I07)
+
+The previous rank-assumption-only construction is now complemented by a derived finite-axis theorem.
+
+- finiteAxisCostSum sums the original, named Pareto.CostHyperfabric axis costs over an explicitly enumerated finite list.
+- finiteAxesReverseOrStrict uses the standard-library decidable Nat order. For a weak-dominance pair, it produces either reverse inequalities on ALL listed axes or a witness of strict improvement at an exact axis.
+- strictImprovedAxisFromFiniteCoverage uses a supplied *complete finite-axis enumeration* to rule out the reverse case whenever strict dominance is given.
+- finiteAxisSumStrict proves strict summed-rank reduction from coordinatewise weak dominance and that strict-coordinate witness.
+- finiteParetoFrontierIsNonempty reuses the earlier constructive finiteNonemptyRankMinimum and finiteParetoFrontierNonemptyGivenStrictRank owners. Unlike the earlier version, the new public theorem DERIVES the rank-decrease proof from complete finite-axis cost data. It returns a member of any nonempty finite list of already-admissible, consumer-adequate candidates that no other listed candidate strictly Pareto-dominates.
+
+**I07 changes N → D within this release's declared scope:** the finite population is nonempty, every population member is admitted, and the axis language has a caller-supplied complete *finite* enumeration. This does not prove the same result with infinitely many unenumerated axes, does not verify that every economically feasible policy is enumerated and does not rank incomparable alternatives into a uniquely preferred policy. The source-written theorem is NOT an Agda compiler receipt. Its own full-axis and missing-axis bounded Python falsification check is executed separately.
+
+**Original mathematical roots:** the finite-order minimal-element result long predates this repository. Emmerich and Deutz (2018), "A tutorial on multiobjective optimization: fundamentals and evolutionary methods", Proposition 6, DOI 10.1007/s11047-018-9685-y, is an explicit published exposition, not claimed original invention of the theorem. The novel repository terms are ChatGPT-assisted source writing under Johl Brown's research direction; existing DASHI Pareto theorem owners remain the original code owner. Earlier Ibrahim first-link and Monster 3B claims are separate, and no new Monster correspondence is asserted.
+
+**Current ledger tally: 60 D / 11 R / 6 N = 77.** Residual A05/C06/C09/E07/F07/H08 still require authenticated source/financial/regulatory/causal same-object evidence rather than a new free-floating synthetic theorem. Kernel typecheck and current-master convergence are separate release gates.
+
+### I07 explicit policy fixture consumption
+
+The original `policyTradeoffCosts` hyperfabric has exactly two axes, `administrationAxis` and `careShortfallAxis`. `policyTradeoffAxisCoverage` provides a complete inhabitants-by-constructor list for this axis type. `admittedCheapAdministration` and `admittedCareCapacity` provide the two already admissible/adequate source examples. `twoAxisPolicyFrontierIsNonempty` instantiates the general constructive finite-frontier theorem, exported as `toeSyntheticTwoAxisPolicyFrontierIsNonempty`. This source term shows the theorem is non-vacuous for a concrete, source-owned finite policy hyperfabric. It does NOT turn either option into an enacted policy or prove which option improves real welfare. Source-written, not Agda kernel-verified.
+
+## 2026-10-28 C06 finite canonical funding-split continuation
+
+**Current scoped tally: 61 D / 11 R / 5 N = 77.** C06 moves N to D **at the source-written proof level only**. A historical financial-source authenticator is not constructed. Previous counts above are historical snapshots.
+
+- Reused owners: TaggedFundingReceipt, cashSourceUseIsSingleCounted and RankedMember in the existing WealthTaxDashiTradeMarketMaterialBidiExact economics module. No competing proof tree.
+- FundingTokenAbsent and UniqueFundingTokens impose exact no-repeat *local token* constraints on arbitrary finite lists.
+- finiteFundingPartitionConservesUnits recursively proves that exclusive cash/loan/settled-sale contributions add to the sum of source amounts. It uses the earlier single-source identity in its induction step.
+- CanonicalFundingEntry ties a tagged token to a supplied function from economic claims to source tokens. CanonicalFundingBatch imposes uniqueness across that common mapping.
+- canonicalClaimCannotBeReusedInLaterPosition proves that a first entry cannot represent the same declared economic claim as any later list member, provided each entry obeys the **same externally supplied canonical mapping**. Local token uniqueness alone could not establish this.
+- canonicalFundingTotalsReconcile composes batch uniqueness with the finite accounting identity.
+- A synthetic positive fixture has three existing-cash units and four debt units; a negative fixture rejects duplicate tokens.
+- An independent bounded Python arithmetic oracle executed 40,440 exclusive-source cases plus an alias negative control. These checks are NOT Agda kernel verification.
+
+**Authority ceiling:** The canonical economic-claim map must be authentic for the real institution and event. Arbitrary numbers, content hashes, parser records and transaction labels do not supply that authority. The proof covers the supplied, correctly keyed finite batch. Actual bank claims, cross-batch identity, real loan availability, genuine clearing and settlement, and downstream beneficiary identity remain external evidence obligations.
+
+**E07/F07 cross-pollination:** ASX's primary operator pages distinguish CHESS legal title (HIN), issuer-sponsored legal title (SRN), and custodial/omnibus beneficial interest whose legal holder may be a custodian. AustralianEquityHoldingMode, OfficialHolderRegistration and holderModeCannotBecomeLegalTitleByNameMatch preserve those type differences. MarketRecordKind also separates execution, participant clearing, official DvP settlement and beneficiary allocation. Those are source-written negative boundaries, not official transaction receipts, and do **not** close E07/F07.
+
+**Primary operator roots:** ASX, "Settlement services and pricing", https://www.asx.com.au/about/regulation/clearing-and-settlement-of-cash-equities-in-australia/settlement/settlement-services-and-pricing ; ASX, "Company Defaults FAQ: My share holdings and finances", https://www.asx.com.au/investors/investment-tools-and-resources/faqs-company-defaults (accessed 28 October 2026). ASX owns the operational propositions. The user directs the research and ChatGPT-assisted code is new repository source-writing, not an ASX certificate. Prior Ibrahim first-link, Snowball and Monster 3B ownership remains unaffected.
+
+**Still N:** A05, C09, E07, F07, H08. A same-taxpayer, same-tax-event, same-settled-sale and same-physical-outcome claim needs independent source authority. No ESD surface or live dashiTRADE executor was edited. No observed Agda compiler pass. All 42 original inventory rows remain.
+
+## 2026-10-28 canonical funding route exact same-batch weld
+
+The former C06 finite source partition and C01 funding-route cash identity were separately valid conditional contracts. This pass connects them through a single batch-specific instance.
+
+- fundingCashSubtotal, fundingLoanSubtotal and fundingSaleSubtotal fold the previously typed exclusive channel selector over a finite list.
+- CanonicalFundingRouteWeld contains an original CanonicalFundingBatch and an original FundingRoute, with four explicit equations: each of the three channel totals must match the corresponding route field, and the *same full partition* must match the route's combined funding total. No totals-only name matching or concatenation is silently accepted.
+- canonicalFundingBatchExactlyFundsTaxPaymentAndFees composes the original canonicalFundingTotalsReconcile and original FundingRoute.fundingBalances. Thus the sum of each declared canonical source exactly equals the *same joined route's* tax cash plus execution fee, conditional on the weld.
+- fixtureSaleRouteWeld reuses the pre-existing assetSaleFunded route. The sample sale-source receipt is three units, modeled tax cash two, modeled fee one. It does not assert that any securities have been sold in reality.
+- toeCanonicalSourcesFundExactlyOneJoinedRoute re-exports the same theorem from its economics owner, rather than duplicating an arithmetic derivation.
+
+**Same-object and proof-level ceiling:** this joins mathematical values, not a verified source revision, bank account, held security, broker order or actual CHESS settlement. Reusing a scalar 3 is not independent evidence. External X02-X06 remain unpaid, as do A05/C09/E07/F07/H08. No status change from 61 D / 11 R / 5 N.
+
+**Snowball/Ibrahim reuse:** The TOE consumer now imports the *existing* SnowballExternalIdentityAvailabilityExact owner and re-exports p854CandidateStillNeedsInspection, qidDoesNotPaySourceTruth, unresolvedQidIsNotEntityAbsence, and verifiedRelevantIdentityMustSnowball as four non-promotion boundaries. Candidate external identifiers, QIDs or a hash do not pay real-transaction or source-truth authority. These are exact inherited source-owner proofs, NOT four new wealth-tax lemma obligations or new ownership of Ibrahim's 2017 FLN and Monster 3B results. The distinction follows the shared reviewed-evidence reducer pattern in dashi_agda PR #1411, without editing the reducer or claiming its runtime is present in this branch.
+
+**Execution status:** 40,440 bounded Python model-oracle cases passed for canonical source partition and token aliases. An Agda compiler/typecheck was not available in the current environment. The test exercises arithmetic semantics only. The fiscal model remains hypothetical; no live trade, primary taxpayer record, physical capital observation or measured causal effect follows.
+
+### Same-route weld bounded arithmetic regression
+
+The existing script scripts/check_wealth_tax_maxcut.py now includes test_canonical_funding_payment_route_weld. An independently executed Python model oracle passed **96,256 source-to-payment modeled joins** over every triple of cash/debt/sale amounts from 0 through 15, with each arithmetically compatible split into remitted tax cash and execution fees. The adversarial controls reject equal grand totals with different channels and reject an unbridged sale settlement at epoch 8 as funding a tax payment at epoch 3.
+
+This is independent finite arithmetic testing, not proof that the Agda compiler accepts the new owner or that any economic event occurred. Source identity, HIN/SRN title and original claim-to-canonical-token authority remain separate evidence requirements. Formal status stays 61 D / 11 R / 5 N. The executable shadow dashiTRADE PR is unchanged.
+
+## 2026-10-28 RBA back-out and joint-reform max-cut continuation
+
+The scoped ledger remains **61 D / 11 R / 5 N = 77**. The five N are A05, C09, E07, F07 and H08. New results below strengthen *conditional proof obligations* and their negative controls. None is promoted to authenticated history or an Agda kernel-certified theorem.
+
+### C09 + F07: settlement status, independent official finality and same-route payment
+
+- DvPBatchDisposition is a three-constructor distinction among dueForSettlement, backedOutAndRescheduled and completedIrrevocableDvP. dueDoesNotProveActualDvP and backedOutDoesNotProveActualDvP rule out the invalid status coercions.
+- SourceLinkedFinalSettlement combines the *existing* OfficialSettlementAdmission owner with an independent validation predicate, an explicit completed status, same-taxpayer holder and issuer/class keys, verified cash amount and settlement epoch. These predicates must come from an external authoritative producer. They are not satisfied by a local fill token or a manually assigned ASX label.
+- ExternallyAdmittedSaleTaxRoute combines the *existing* FinancedRouteAdmission owner with the original settlement admission, matching sale proceeds to the *same* funded route, and proving settlement time is no later than that route's tax-payment time.
+- validatedSaleProceedsCannotSkipSettlementAndTaxChronology merely projects those required premises. It does not construct a real CHESS confirmation, RITS banking statement, registry-holder allocation or tax payment.
+
+**Original institutional authority:** ASX, 'Settlement services and pricing', https://www.asx.com.au/about/regulation/clearing-and-settlement-of-cash-equities-in-australia/settlement/settlement-services-and-pricing, describing irrevocable DvP Model 3 net settlement, distinct from merely due obligations. Reserve Bank of Australia, *Assessment of ASX Clearing and Settlement Facilities 2017-18*, Securities Settlement Facility Standard 7, https://www.rba.gov.au/payments-and-infrastructure/financial-market-infrastructure/clearing-and-settlement-facilities/assessments/2017-2018/asx-securities-settlement-facilities/standard-07.html, describing back-out and rescheduling on securities shortfall. General operator documentation does NOT authenticate a particular brokerage event.
+
+### H08: mixed tax reform does not pay isolated treatment inference
+
+- CombinedReformIdentificationWorld supplies an illustrative joint-reform outcome and an independently varying wealth-tax-only potential outcome. Two counterworlds share the joint outcome but differ in the tax-only counterfactual.
+- jointReformReceiptCannotIdentifyIsolatedWealthTaxEffect reuses the *existing* DASHI.Core.IntersectionalNonFactorability theorem owner. It rules out recovering the tax-only outcome from the joint outcome alone.
+- The original published root is Marius A. K. Ring, *Taxing Entrepreneurial Wealth: Evidence from Norway, 2021–2025*, NBER Working Paper 35854 (October 2026), https://www.nber.org/papers/w35854. His empirical study explicitly covers joint changes to business-wealth, dividend and migration-related gains rules. The source does not claim that identifying one outcome alone identifies a separate wealth-tax-only potential outcome. The counterworlds are original finite examples, **not Ring's observations**.
+- The separate Jakobsen, Kleven, Kolsrud, Landais and Munoz, *American Economic Review* 116(10), October 2026, DOI 10.1257/aer.20241596 remains a different Scandinavian migration/aggregate estimand, not a result rebranded as Ring's.
+
+### A05: beneficial attribution is not gross valuation
+
+AssessedOwnerAllocationWorld and assetValueDoesNotIdentifyTaxpayerBeneficialShare construct equal-gross-asset, different-taxpayer-allocated-asset counterworlds. The original generic nonfactorability owner supplies the mathematical theorem. No beneficial ownership register, tax-year value or accepted debt deduction is inferred.
+
+### TOE and direct independent checks
+
+The original DASHI/Unified/WealthTaxEvidenceNonPromotionTOEExact.agda consumer re-exports the source-owned status/receipt/counterworld terms and boundary lemmas. Its existing Snowball/Ibrahim attribution owners remain imported; no new FLN, Monster 3B or same-object action has been claimed.
+
+The scripts/check_wealth_tax_maxcut.py new bounded DvP oracle covers **18,816 combinations**, with **112** satisfying all modeled conditions. The independent local Python oracle executed all 18,816 cases successfully and checked the beneficial-attribution and joint-reform negative controls. The repository topic guard now checks the new terms. This is executed model checking, **not an Agda compiler or ASX settlement receipt**.
+
+### Residual evidence cut and no-free-promotion rule
+
+| Open ID | Unpaid external producer | What no existing theorem can manufacture |
+|---|---|---|
+| A05 | taxpayer-linked valuation, ownership, currency, exclusions and debt as of one legally relevant valuation date | lawful net-wealth assessment |
+| C09 | credible liquid cash/loan and repayment/fee conditions, final sale proceeds and pre-remittance timing | an actually executable funding path |
+| E07 | legal and beneficial registers, issuer/class and same-account holder identity | a genuinely verified issuer-holder-title chain |
+| F07 | primary CHESS/RITS/participant/custodian settlement and allocation evidence | final settlement of the precise trade |
+| H08 | linked panel, measured material/care outcomes, exposure decomposition and credible causal design | identified tax-policy effects |
+
+**Pareto / max-cut disposition:** the mathematical finite-frontier theorem is already source-written under I07. The remaining cut is evidence-bearing. Repeated source-written projections of unchecked predicates cannot reduce these external requirements. Treat any source revision, P854 candidate, QID or content hash as an identity *candidate* until its relevant producer is validated. Preserve upstream institutional and empirical author credits and distinct original repository proof ownership.
+
+**Verification ceiling:** no observed Agda typecheck, no independent primary-record producer for the five open lanes, no protected ESD edits and no change to live dashiTRADE. The exact-head structural audit and original 42-topic inventory must still be inspected after the final commit.
+
+## 2026-10-28 maximum 369 / 27-cube / S3 / Q8 / numeric-role cross-pollination
+
+**Current scoped ledger remains 61 D / 11 R / 5 N = 77.** These are cross-domain reuses, stronger negative controls and a fresh source distinction. No item from the remaining five external-record obligations is declared complete.
+
+### Reused originals and new consumers
+
+| Receiver / purpose | Original owner reused | Exact structural result | Forbidden promotion |
+|---|---|---|---|
+| Economic x/y/z hypothesis cube | `DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact` | A source-owned 3×3×3 point with 27 raw states | Claim polarity is not a measured tax result |
+| X/y cannot determine z | `DASHI.Core.IntersectionalNonFactorability` | Two equal x/y states with opposed z outcomes refute **every** factorisation, including all postcomposed rechartings | Review labels, digit shuffles or S3 cannot manufacture causal evidence |
+| Trialectic x-cube / y-cube / z-interaction | `DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact` | Exact chart into T^9 = 19,683 source-owned three-cell fabric, with inverse on the structural projection | X/y cubes do not *force* the irreducible third cell |
+| Raw ABC permutations | `DASHI.Foundations.TernaryPermutationS3LawsExact`; `TernaryEndomorphismConjugacyExact` | Existing six-label S3 inverse; raw trialectic coordinate rotation order three, adjacent transpositions square to identity, braid relation | Permuting roles is not an authorized policy intervention |
+| Q8/720 quotient analogy | `DASHI.Algebra.FiniteQuaternionDoubleCover` | Existing Q8 central +/- sign has same V4 projection; minus sign squares to plus | This is not a custody double cover, a time loop, or an observed spin/market effect |
+| Five open evidence gates | `DASHI.Foundations.SSPTritCarrier` | Five *annotation positions* A05/C09/E07/F07/H08; 3^5 = 243 | A positive annotation is NOT an authenticated evidence record |
+| Distinct 3-of-5 modes | `DASHI.Biology.NonaryCompletionPhaseQuotientExact` | Five-mode carrier used in three independent chart slots; 5^3 = 125, unequal to 243 | No bijection, entropy equivalence or universal quintic inference |
+| Numerology culture lane | `DASHI.Wikimedia.Base369NumberTheoryNumerologyWrongTypeSnowballExact` | Existing `numerologyDoesNotPayProof` theorem | Popular 3/6/9/Tesla numerology is not number theory or tax-law authority |
+| Polynomial monodromy inspiration | [dashi_agda PR #1414](https://github.com/chboishabba/dashi_agda/pull/1414) | Separately owned S3/C3 root reordering, exact arithmetic counts, and finite rational quaternion sign witness | Other-branch theorem is NOT copied, imported as available, or attributed to this tax PR |
+
+**Numerology/physics attribution:** actual permutation theory has original mathematical roots (Galois, permutation-group literature; Dixon and Mortimer, 1996). Quaternion/spin constructions trace to Hamilton (1843) and established representation theory. The latest PR #1414 retains independent source and DASHI implementation ownership. This work only reuses in-repo carrier theorems and supplies source-written *domain-specific negative interfaces*. Ibrahim's 2017 FLN, later Snowball work and original Monster 3B claims retain their separate ownership. No common numerical fingerprint is promoted into a Monster representation.
+
+### 27-cube / actual causal-information distinction
+
+For `x = hypothesis polarity`, `y = review polarity` and `z = effect-claim polarity`, the original 27-state fibre contains **three distinct z possibilities per fixed x/y pair**. Therefore a readout of x/y alone loses z. The counterworld proof `sourceReviewDoesNotDetermineCausalPolarity` uses the original non-factorability theorem. The stronger `rechartingXYCannotManufactureCausalPolarity` shows no re-encoding of the x/y quotient can recover the missing independent z coordinate. This is a precise algebraic proof about annotation geometry, not a claim about policy causality.
+
+At the next scale, each x/y/z position may itself be one complete 27-cell. The existing trialectic owner supplies the T^9 rechart. This is **27^3 = 19,683** complete structural states. The x/y *pair* leaves an entire third 27-cell unconstrained. No fabricated synthesis cell is permitted.
+
+### Source snowball / conflicting interventions
+
+- **Benjamin Jaros and Joshua Rauh**, *The Net Present Value of the California Billionaire Tax Act*, NBER WP35899 (October 2026), DOI 10.3386/w35899. The authors' one-time 5% billionaire wealth-tax projection reports approximately USD 30 billion under its assumed migration/litigation responses. It is a **model-dependent forecast**, not authenticated collections or an annual full-excess cap estimate.
+- **Annika Bacher, Andreas Fagereng, Marius A. K. Ring and Ella Getz Wold**, *Regulating Entrepreneurship: The Case of Capital Requirements*, NBER WP35780 (September 2026), DOI 10.3386/w35780. The estimated entrepreneurship entry response follows a 70% decrease in startup capital requirements. That is not a wealth-tax treatment or a wealth-ceiling estimate.
+- **Marius A. K. Ring**, *Taxing Entrepreneurial Wealth: Evidence from Norway, 2021–2025*, NBER WP35854 (October 2026). Its bundled Norwegian tax and migration reforms remain a third, distinct estimand. The original authors keep all source and interpretation ownership. The source atlas now types these study targets separately.
+
+All three can motivate rival scenarios and Pareto axes, but none automatically estimates the other study's intervention. Sharing an author, a number, a source region, or a public database is insufficient to establish independent replication or same-object tax incidence.
+
+### Verification and residual cut
+
+The new `test_369_trialectic_numeric_role_maxcut` independently checks the full 27 raw states, all six coordinate bijections, C3 period three, adjacent swap involutions, 27^3=19,683, the 243 five-gate annotations, the 125 three-five-mode profiles, and x/y-to-z non-factorability fixtures. These are executed Python checks of the *numeric interpretation*, not Agda compiler certificates or original data.
+
+The existing owner/TOE regression now requires the exact new symbols and original imports. Protected ESD surfaces and the dashiTRADE runtime stay unchanged.
+
+**Unpaid walls:** A05 authenticated ownership/valuation; C09 real loan/cash funding; E07 legal/beneficial holder/issuer/class; F07 primary finality/custody; H08 same-object causal design/observed outcomes; Agda typecheck and master convergence. A new 3/6/9 coincidence cannot discharge any of them.
+
+## 2026-10-28 semantics-first audit: remove decorative 369 welds
+
+This section supersedes the earlier 27-cube, S3, Q8 and 3^5/5^3 economic-*adapter* claims recorded above. The independent mathematics survives in its ORIGINAL theorem owners. The economics PR no longer imports those owners or re-exports their arithmetic merely to advertise a cross-domain weld. No external theorem or prior author has been deleted or reassigned.
+
+**What was rejected, and why:**
+
+- The earlier five evidence-status positions corresponded to the current five open ledger IDs, so 3^5 = 243 was just a contingent annotation count. A change in backlog size would change this alleged invariant. It is not a derived financial mechanism.
+- The three 27-cells and six S3 label permutations were mathematically valid carriers, but no proved mapping transported a real taxable base, beneficial owner, policy intervention, cost covariance, or issuer/custody record through those symmetries. Even a correct group law cannot make an economic model automorphism without preserving eligibility and all cost axes.
+- The inherited Q8 central-sign quotient and PR #1414's rational quaternion 720-degree lift were unrelated to tax settlement: no operator/consumer, source evidence, or physical Spin action was exhibited. Treat their inclusion in the original economics module as an abandoned analogy, not established cross-domain knowledge.
+- The prior x/y versus z fixture was a valid generic **product-projection** counterexample, but it did not bind x/y to actual sourced policy observations. It therefore added no application-specific causal information beyond the original INF theorem.
+
+**What replaced these welds: genuine Pareto information loss on existing, fixed cost coordinates.**
+
+The original economic theorem owner already defines two synthetic, eligible policy outcomes and the cost hyperfabric:
+
+| Synthetic policy | Administration cost | Care shortfall | Unweighted sum |
+|---|---:|---:|---:|
+| lowAdministrativeCost | 0 | 5 | 5 |
+| increasedCareCapacity | 5 | 0 | 5 |
+
+The source-written replacement proves:
+
+- `equalWeightCostCollapsesIncomparablePolicies`: both exact two-axis costs map to the same unweighted scalar 5.
+- `equalCostTotalDoesNotRecoverAdministrativeCost`: the scalar projection cannot recover the axis that distinguishes the two candidate policies, reusing the original `IntersectionalNonFactorability` theorem.
+- `rechartingTotalCostCannotRecoverAdministrativeAxis`: composing the scalar with any subsequent chart map cannot restore erased cost information.
+- `equalCostTotalIsParetoMonotone`: unlike the false converse, genuine componentwise Pareto weak dominance **does** imply no higher unweighted scalar total, using the existing standard-library sum monotonicity. Together the forward theorem and reverse counterexample prove the scalar map is order-preserving but not order-reflecting. The TOE aliases keep both directions explicit.
+- `equalCostTotalCannotReflectParetoOrder`: there is no *universal* implication from a lower/equal summed cost to actual componentwise `WeaklyDominates`. The particular two options are incomparable under the originally declared axes.
+- `policyWeightedTwoAxisCost`: weights (administration, care shortfall) = (1,2) yield scalar costs (10,5), while weights (2,1) yield (5,10). Each strict positive weighting therefore selects a different *scalar* winner without changing the Pareto order. The weights are hypothetical sensitivity parameters, not a hidden welfare calibration.
+- `careHeavyWeightsPreferCareByScalar` and `administrationHeavyWeightsPreferCheapAdministrationByScalar` are concrete Nat-order witnesses; they do not assert policy outcomes.
+
+This directly consumes the existing `DASHI.Core.AdmissibleConsumerMDLHyperfabricExact` partial-order owner and respects `DASHI.Core.ParetoSymmetryQuotientAdmissionExact`: legitimate Pareto symmetries must preserve eligibility and each declared cost, not just cardinalities or orbit labels. This is a *material* Pareto/max-cut consequence with false-positive controls.
+
+**Executed independent local numeric oracle:** checked 11^4 = 14,641 ordered two-vector pairs on values 0..10, five nonnegative positive weighting examples, an exact axis-reordering dominance invariant, and 20,000 seeded randomly permuted multi-axis pairs. **34,641 exhaustive/random cases passed** in Python, plus the concrete weight-reversal counterexample. These checks do not typecheck Agda and do not establish real-world calibrated weights.
+
+**Attribution:** the Pareto mathematical order, finite-frontier result and information-loss antecedents remain inherited. The new repository-owned *economic synthetic counterexample* is source-written under Johl Brown's research direction with ChatGPT implementation assistance. PR #1414's monodromy/quaternion work, the original S3 authors, historical Hamilton, the Ibrahim first-link programme and original Monster 3B owner remain distinct. A matching numeral, shared cohort or parallel formal carrier never proves the same historical/mathematical object.
+
+**Unchanged status:** 61 D / 11 R / 5 N over the 77 scoped obligations. No observation, legal instrument, taxpayer, market settlement, spin rotation, or Monster representation is certified. A05/C09/E07/F07/H08 remain genuinely open, along with Agda kernel-check and current-master convergence.
+
+### 2026-10-28 semantic Pareto automorphism and municipal-mobility snowball
+
+**Pareto/symmetry max-cut: real declared objectives versus unqualified label permutations.** The economics owner now directly imports `DASHI.Core.ParetoSymmetryQuotientAdmissionExact`, which requires a candidate automorphism to preserve eligibility and every *named* cost coordinate. The original synthetic policy costs are (administration, care shortfall) = (0,5) for `lowAdministrativeCost` and (5,0) for `increasedCareCapacity`. Their sum ties, but their named costs differ.
+
+- `policyIdentityIsAdmittedParetoSymmetry`: construct a genuine contract witness for the identity policy map, proving the admission condition is inhabited and not just a vacuous rejection.
+- `administrativeCostInjectiveOnTwoPolicyFixture`: exhaustive two-constructor proof that the original administration-cost coordinate differentiates the two synthetic policy candidates. This property is fixture-specific, not a claim of injectivity in all policy models.
+- `swapPolicyCostAxisTwice`, `policyReindexedCostChartPreservesDominance` and `policyReindexedCostChartReflectsDominance`: the one valid symmetry of *coordinate presentation* simultaneously permutes the two existing objective axes, their cost functions and their source/reference names. The resulting new `CostHyperfabric` has exactly the same Pareto weak-dominance relation in both directions. This is a genuine reversible chart equivalence, **not** a policy-space automorphism that exchanges welfare, taxation or care meaning. It uses the existing Pareto cost-hyperfabric owner. The TOE consumer re-exports the new proofs without owning a second copy.
+- `everyQualifiedParetoSymmetryFixesBothPolicies`: combine that injectivity with the inherited `preservesAxisCost` field to prove pointwise identity for **every** admitted Pareto automorphism of this fixture. The TOE consumer exports the same result; this is more informative than asserting the two actions are merely different labels.
+- `policySwapCannotBeAdmittedParetoSymmetry`: for any such qualified automorphism, the assertion that it sends the cheap-administration policy to the care-capacity policy contradicts preservation of the administration cost. This is a proper semantic use of the existing Pareto quotient owner, not an S3, C3, quaternion, 27-cube or numerology analogy.
+- `toeAdmittedParetoSymmetryCannotSwapPolicyRoles`: import the original Pareto-symmetry owner *directly* in the TOE consumer and re-export the exact existing economic counterexample.
+- `test_semantic_policy_symmetry_admission`: independently enumerate both permutations of the actual two-option policy carrier. Identity preserves eligibility and both fixed named costs; swapping the candidates fails the cost-preservation obligation. Coordinate reindexing of both vectors is separately a valid chart operation, but it is **not** a justified swap of policy meaning.
+
+**Primary-source snowball with intervention separation.** Roberto Iacono and Bård Smedsvik, *Behavioural responses to wealth taxation: evidence from a Norwegian reform*, *Fiscal Studies* 47(3), 255–280, first published **8 September 2026**, DOI [10.1111/1475-5890.70024](https://doi.org/10.1111/1475-5890.70024), is now represented by the independent `iaconoSmedsvikBoMunicipal2026` source receipt. It exploits the Bø municipality's 2021 marginal wealth-tax rate cut **0.85% to 0.35%** and estimates a **45%** local average taxable-wealth response per one-percentage-point tax reduction and **4.8%** higher treated-municipality weighted wealth-taxpayer mass. The original authors report that internal migration dominates; neither this municipal response nor a concentration of wealthy people in one municipality demonstrates that Norway lost the corresponding population nationally. Their underlying population/tax data are proprietary Statistics Norway data; the authors provide replication code conditional on microdata.no access. The journal's original study owns all these findings and interpretation.
+
+This municipal mobility and local tax-base estimand is not interchangeable with Ring's October 2026 national joint-reform owner/firm-investment study, the Jakobsen–Kleven–Kolsrud–Landais–Munoz AER Scandinavian cross-border/aggregate estimands, the 2026 portfolio allocation study, the hypothetical 100% excess wealth tax, or any software-generated tax receipt. No pooled numerical migration elasticity is justified by shared country or year. These cross-study differences are the genuine snowball output, not a claimed shared theorem or same-object representation.
+
+**Current status:** 61 source-written / 11 inherited owners / 5 unpaid external evidence requirements, over 77 scoped obligations. The new semantic automorphism proof and one external source receipt are cross-cutting improvements, not additional counted obligations. Attribution remains original-author dated source, original Agda theorem owner, new source-written adapter, executed Python oracle, and *unobserved* Agda kernel verification. No ESD module or dashiTRADE execution surface is edited. Ibrahim's established first-link and Monster 3B ownership are independent.
+
