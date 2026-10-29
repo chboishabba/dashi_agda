@@ -25,6 +25,7 @@ on:
       - 'DASHI/Unified/Everything.agda'
       - 'Docs/support/reference/NeurodivergentSituatedReachabilityTOE.md'
       - 'Docs/diagrams/neurodivergent-situated-reachability-toe.puml'
+      - 'scripts/check_neurodivergent_situated_reachability_toe.py'
       - '.github/workflows/neurodivergent-social-ecology.yml'
   workflow_dispatch:
 
@@ -50,6 +51,8 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: neurodivergent-social-ecology-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Deterministic situated reachability source audit
+        run: python3 scripts/check_neurodivergent_situated_reachability_toe.py
       - name: Trust scan neurodivergent social-ecology tranche
         shell: bash
         run: |
