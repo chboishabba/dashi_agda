@@ -53,3 +53,10 @@ monitor surface.
   landed through `walkObjectsSucMemberByVertices` and
   `walkObjectExtendMemberByVertices` in
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+
+## 2026-10-29 — Weighted directed 3×3 graph inside 369/trialectics
+
+- Added `TrialecticWeightedDirectedGraph369Exact`: exact integer-tenths graph/matrix equivalence, six nonzero directed arcs, asymmetric reversal, a genuine order-three vertex permutation and a counterexample to weighted C3 invariance.
+- Reused the canonical trialectic attached-face non-descent constructor to prove that identical complete weighted graph projections can carry distinct irreducible triadic faces.
+- Bridged existing opposition, McCall category strategies, SSP hypervoxel address, typed hyperfabric compatibility and 27-pants adjacency *without* promoting analogies into proof authority; connected both TOE roots, the relational rollup, Unified.Everything and 369 max-cut.
+- Source prompt: Tivadar Danka's 26 October 2026 educational illustration; mathematical matrix/graph correspondence remains standard prior art. Kernel verification and downstream situated gluing remain open; ESD surfaces untouched.
