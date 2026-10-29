@@ -8,6 +8,7 @@ package "External Fleet R4/R5 context" {
 
 package "Existing DASHI owners" {
   component "CompositionalComplianceExact" as Compliance
+  component "InstitutionalNormProductionExact" as NormProduction
   component "Fanning2022LiteralSituatedQualifiedUseBridgeExact" as FanningLiteral
   component "FleetFormalGapTargetTOEExact" as Fleet
   component "BoundAcquisitionDemandExact" as Bound
@@ -35,6 +36,7 @@ Fleet --> Manifest : canonical 584 / 44 / 58 partition
 Bound --> Manifest : exact acquisition alignment
 Pareto --> Manifest : search priority does not create proof
 Compliance --> SafeJustLegal : typed intermediate witness
+NormProduction --> SafeJustLegal : settlement -> policy -> convention\nwithout authority promotion
 FanningLiteral --> SafeJustLegal : source receipt and authority gates
 Fleet --> SafeJustLegal : 584/44/58 invariant
 SafeJustLegal --> TOE : exact non-promotion exports
@@ -64,6 +66,8 @@ Invariants:
 - operational records do not create legal authority
 - literal data does not create causal or decision authority
 - compliance composition retains the typed intermediate witness
+- settlement binding, competitor adoption, industry convention, and federal law stay distinct
+- same visible policy does not imply the same authority source
 
 Postcondition:
 - per-gap dispatch stays false until the named manifest is acquired
