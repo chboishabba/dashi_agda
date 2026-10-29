@@ -87,7 +87,34 @@ def rho(p):
         cols.append(y[:2])
     return [[cols[j][i] for j in (0,1)] for i in (0,1)]
 
+
+def verify_rational_solver_source_integrity():
+    """Source/owner integrity, not a substitute for Agda elaboration."""
+    rational=owner("PolynomialS3RationalBlockFieldIsomorphismExact")
+    adapter=owner("PolynomialC3S3RationalCharacterAlgebraExact")
+    assert "Data.Rational.Tactic.RingSolver" in rational
+    solver_lines=re.findall(r"Ring[.]solve-∀[^\\n]*",rational)
+    assert len(solver_lines)>=176, len(solver_lines)
+    for line in solver_lines:
+        assert not re.search(r"\\b[fg] (?:Small|Big)[.]",line),line
+        assert "(f " in line, line
+    assert "MoonshineOrbifoldSectorProjectorExact" in adapter
+    for name in ("positiveIntertwinesS3Parity",
+                 "negativeIntertwinesS3Parity",
+                 "s3OnRationalFieldFactorsThroughParity"):
+        assert len(re.findall(r"^"+name+r" Perm[.]perm",adapter,re.M))==6,name
+    for root in (
+        "DASHI/EverythingTOESymmetryResolved369.agda",
+        "DASHI/Unifier.agda","DASHI/Unified/Everything.agda"
+    ):
+        t=(ROOT/root).read_text(encoding="utf-8")
+        assert "PolynomialC3S3RationalCharacterAlgebraExact" in t,root
+        assert "PolynomialS3RationalBlockFieldIsomorphismExact" in t,root
+    print("PASS rational ring-solver explicit argument lint; "
+          "reuse of original rational C2 donor; 3 TOE root imports")
+
 def test():
+    verify_rational_solver_source_integrity()
     reg,small,native,assembly=map(owner,NAMES)
     B6=integer_matrices(reg,"basis6",6,"slot")
     C6=integer_matrices(reg,"scaledInverse6",6,"slot")
