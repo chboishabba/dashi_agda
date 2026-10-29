@@ -3,6 +3,12 @@ name: Fanning literal-data contract Agda check
 on:
   pull_request:
     paths:
+      - 'DASHI/Governance/SafeJustIndicatorSystemExact.agda'
+      - 'DASHI/Governance/ProvisioningGeometryExact.agda'
+      - 'DASHI/Governance/ONeill2018MethodsBoundaryExact.agda'
+      - 'DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda'
+      - 'DASHI/Governance/Kallis2025ClaimByClaimEvidenceRealizationExact.agda'
+      - 'DASHI/Governance/Kallis2025GDP15000UpstreamStudyBridgeExact.agda'
       - 'DASHI/Governance/Fanning2022SupplementaryDataAuthorityExact.agda'
       - 'DASHI/Governance/Fanning2022LiteralDataToFigureCommutationExact.agda'
       - 'DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseBridgeExact.agda'
@@ -14,6 +20,7 @@ on:
       - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Governance/Everything.agda'
       - '.github/workflows/fanning-literal-data-contract.yml'
   workflow_dispatch:
@@ -40,6 +47,12 @@ jobs:
         run: |
           set -euo pipefail
           files=(
+            DASHI/Governance/SafeJustIndicatorSystemExact.agda
+            DASHI/Governance/ProvisioningGeometryExact.agda
+            DASHI/Governance/ONeill2018MethodsBoundaryExact.agda
+            DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda
+            DASHI/Governance/Kallis2025ClaimByClaimEvidenceRealizationExact.agda
+            DASHI/Governance/Kallis2025GDP15000UpstreamStudyBridgeExact.agda
             DASHI/Governance/Fanning2022SupplementaryDataAuthorityExact.agda
             DASHI/Governance/Fanning2022LiteralDataToFigureCommutationExact.agda
             DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseBridgeExact.agda
@@ -65,10 +78,17 @@ jobs:
           export DASHI_NO_TMUX=1
           export AGDA_JOBS=2
           scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/SafeJustIndicatorSystemExact.agda \
+            DASHI/Governance/ProvisioningGeometryExact.agda \
+            DASHI/Governance/ONeill2018MethodsBoundaryExact.agda \
+            DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda \
+            DASHI/Governance/Kallis2025ClaimByClaimEvidenceRealizationExact.agda \
+            DASHI/Governance/Kallis2025GDP15000UpstreamStudyBridgeExact.agda \
             DASHI/Governance/Fanning2022SupplementaryDataAuthorityExact.agda \
             DASHI/Governance/Fanning2022LiteralDataToFigureCommutationExact.agda \
             DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseRegression.agda \
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda \
             DASHI/EverythingTOESymmetryResolved369.agda \
             DASHI/Unifier.agda \
+            DASHI/Unified/Everything.agda \
             DASHI/Governance/Everything.agda
