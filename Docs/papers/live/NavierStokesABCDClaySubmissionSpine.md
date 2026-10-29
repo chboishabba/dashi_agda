@@ -492,3 +492,70 @@ The post-reserve B continuation cut is also non-circular: the standard
 localized Luo continuation compiler is already constructed, while the
 cutoff-uniform/continuum inputs needed to turn the eventual B1--B7 estimate into
 the all-data global theorem remain the explicit B-continuation leaf.
+
+
+## 11. 2026-10-29 canonical TOE reconciliation
+
+The Agda tree is the formal authority.
+
+The current normalized status is in
+`DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda`.
+It exposes one `NavierStokesCurrentProblemReceipt`.
+
+The receipt reuses the existing A/B/C/D owners.
+It does not create a new PDE theorem.
+
+### A
+
+A stays an internal theorem-production lane.
+
+The canonical A compiler stack is reused.
+The A internal frontier keeps its owner status.
+No B result promotes A.
+
+### B
+
+R736 stays the preferred periodic analytic max-cut.
+
+R736 has exactly two preferred weighted leaves.
+Both leaves use the same weighted input-Laplacian carrier.
+Both leaves remain open.
+
+The R571 BM2 path is a producer strategy below this wall.
+Its cardinality-free finite fold is closed.
+Its samplewise physical payment remains analytic.
+Its literal fold into Galerkin dissipation remains analytic.
+
+The R829 repository vector snapshot is closed.
+The selected instantaneous repository rate is strictly negative.
+This is an instantaneous finite result only.
+The real finite-Galerkin ODE transport remains open.
+The integrated universal R823 reserve refutation remains open.
+No instantaneous result promotes a trajectory theorem or Clay completion.
+
+### C and D
+
+C and D stay released-proof audit lanes.
+
+The source-coordinate audits remain separate from native reconstruction.
+An independent DASHI kernel build is not witnessed by the current receipt.
+Independent reconstruction does not gate the source audit.
+
+The Lean `ExternalClayNS` project is a donor and semantic audit.
+It is not Agda proof authority.
+Its `AgdaContract.lean` file confirms the intended A/B/C/D semantic shape.
+The Agda theorem owners remain authoritative for DASHI status.
+
+### TOE reachability
+
+The current problem receipt is directly reachable from:
+
+- `DASHI/EverythingTOESymmetryResolved369.agda`;
+- `DASHI/Unifier.agda`;
+- `DASHI/Unified/Physics.agda`;
+- `DASHI/Unified/Everything.agda`.
+
+The validation module checks exact facade agreement.
+
+No ESD surface is part of this reconciliation.
+No new numbered or round-suffixed owner was introduced.
