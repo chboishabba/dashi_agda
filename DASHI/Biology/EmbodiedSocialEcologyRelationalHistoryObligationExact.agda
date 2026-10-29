@@ -13,6 +13,8 @@ import DASHI.Biology.NeurotypeProcessingGeometryExact as Processing
 import DASHI.Biology.ProcessingGeometryActionGateExact as ProcessingGate
 import DASHI.Biology.SocialEcologicalAffordanceConeExact as Ecology
 import DASHI.Biology.TrustedFriendEcologyInteractionExact as FriendInteraction
+import DASHI.Governance.OptionConeCoercionExact as Cone
+import DASHI.Governance.HistoryConditionedSocialEcologyOptionConeExact as HistoryCone
 
 ------------------------------------------------------------------------
 -- EMBODIED SOCIAL-ECOLOGY RELATIONAL-HISTORY ADAPTER
@@ -283,6 +285,39 @@ friendEcologyInteractionIsNonadditive :
 friendEcologyInteractionIsNonadditive =
   FriendInteraction.friendEcologyNotEndpointAdditive
 
+
+------------------------------------------------------------------------
+-- Reuse the existing proof-bearing social-ecology option-cone owner.
+--
+-- These generic contractions are not identified with the domain-specific
+-- Boolean witness above.  They provide the canonical proof-bearing option-cone
+-- interface for the same history/ecology theorem shape.
+------------------------------------------------------------------------
+
+genericHistoryOptionConeContraction :
+  Cone.StrictSafeReachabilityContraction
+    HistoryCone.socialReachability
+    HistoryCone.regulatedSupportive
+    HistoryCone.mobilisedSupportive
+genericHistoryOptionConeContraction =
+  HistoryCone.historyConditionedContraction
+
+genericEcologyOptionConeContraction :
+  Cone.StrictSafeReachabilityContraction
+    HistoryCone.socialReachability
+    HistoryCone.regulatedSupportive
+    HistoryCone.regulatedHostile
+genericEcologyOptionConeContraction =
+  HistoryCone.ecologyConditionedContraction
+
+genericJointOptionConeContraction :
+  Cone.StrictSafeReachabilityContraction
+    HistoryCone.socialReachability
+    HistoryCone.regulatedSupportive
+    HistoryCone.mobilisedHostile
+genericJointOptionConeContraction =
+  HistoryCone.jointHistoryEcologyContraction
+
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F audit frame.
 --
@@ -342,6 +377,9 @@ record SituatedReachabilityTOEReceipt : Set where
     trustedFriendEcologyInteractionReused : Bool
     trustedFriendEcologyInteractionReusedIsTrue :
       trustedFriendEcologyInteractionReused ≡ true
+    proofBearingHistoryEcologyOptionConeReused : Bool
+    proofBearingHistoryEcologyOptionConeReusedIsTrue :
+      proofBearingHistoryEcologyOptionConeReused ≡ true
     historyPropagationWitnessInstalled : Bool
     historyPropagationWitnessInstalledIsTrue :
       historyPropagationWitnessInstalled ≡ true
@@ -361,6 +399,7 @@ record SituatedReachabilityTOEReceipt : Set where
 canonicalSituatedReachabilityTOEReceipt : SituatedReachabilityTOEReceipt
 canonicalSituatedReachabilityTOEReceipt =
   situated-reachability-toe-receipt
+    true refl
     true refl
     true refl
     true refl
