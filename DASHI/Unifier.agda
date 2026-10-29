@@ -1834,12 +1834,12 @@ unifierONeillCountProjectionBoundary =
   FleetGapTOE.fleetONeillCountProjectionBoundary
 
 unifierONeillObservedResultDoesNotCreateUniversalImpossibility :
-  FleetGapTOE.ONeillMethods.UniversalImpossibilityCertificate → ⊥
+  FleetGapTOE.ONeillUniversalImpossibilityPromotion → ⊥
 unifierONeillObservedResultDoesNotCreateUniversalImpossibility =
   FleetGapTOE.fleetONeillObservedResultDoesNotCreateUniversalImpossibility
 
 unifierObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
-  FleetGapTOE.Provisioning.IdentifiedProvisioningTreatmentEffect → ⊥
+  FleetGapTOE.ProvisioningTreatmentEffectPromotion → ⊥
 unifierObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
   FleetGapTOE.fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect
 
@@ -1849,8 +1849,7 @@ unifierFanningProjectionBoundary =
   FleetGapTOE.fleetFanningProjectionBoundary
 
 unifierFanningBAUProjectionIsNotObserved2050Outcome :
-  FleetGapTOE.FanningProjection.FanningProjectionBoundary.BAUProjectionIsObserved2050Outcome
-    FleetGapTOE.FanningProjection.canonicalFanningProjectionBoundary ≡ false
+  FleetGapTOE.FanningBAUNotObservationReceipt
 unifierFanningBAUProjectionIsNotObserved2050Outcome =
   FleetGapTOE.fleetFanningBAUProjectionIsNotObserved2050Outcome
 
@@ -1860,8 +1859,6 @@ unifierGDP15000UpstreamBoundary =
   FleetGapTOE.fleetGDP15000UpstreamBoundary
 
 unifierGDP15000DoesNotOpenCausalConsumer :
-  FleetGapTOE.KallisClaims.AdequateFor
-    FleetGapTOE.KallisClaims.gdp15000Realization
-    FleetGapTOE.KallisClaims.causalMechanismConsumer → ⊥
+  FleetGapTOE.GDP15000CausalConsumerPromotion → ⊥
 unifierGDP15000DoesNotOpenCausalConsumer =
   FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
