@@ -937,3 +937,37 @@ Kernel verification for ALL newly written Agda sources remains open.
 The 2026 unrefereed H1<=186 bounded-gap result does not imply gap 2.
 No ESD changes; original Conway/Guy, Brun/Selberg/Polymath,
 #1244 native C3, #1275 RGS and Ibrahim Monster 3B ownership retained.
+
+## 29 October 2026 — M13 complete-period contiguous BIDI
+
+**New source:** `DASHI/Arithmetic/TwinPrimeMangoldtFinIntervalReindexExact.agda`.
+Owner: #1408. It imports the ORIGINAL finite-sum, exact Nat
+period BIDI, and `Fin270` row owners, without recreating
+their carriers. The source supplies:
+`intervalFinSum`, `intervalFinSumExact`
+(any start/count and any additive scalar, using indexwise
+congruence, **no scalar commutativity axiom**),
+`periodRowIsContiguousInterval`, and
+`periodCorrelationToContiguous` /
+`contiguousToPeriodCorrelation` for every period.
+Therefore the ordered sum over 270 finite residual codes is
+the identical ordered arithmetic correlation sum over
+[270k,270k+270), not a numeric-rank analogy.
+
+**Actually executed local Python:** 55 complete period rows,
+80 arbitrary boundary-spanning interval partitions, 14,850
+pairwise Nat <-> period/residue witness pairs: PASS.
+These tests do not certify Agda typing or an analytic lower bound.
+
+**Next concrete M13 cuts:** prove a general prefix/suffix partial
+period row is an ordered interval with exact bounds, then
+prove concatenation of rows via explicit additive associativity
+(or construct a common index fold with matching evaluation order)
+and arbitrary interval partition across period boundaries.
+Once M13 is fully complete, M14 proper-prime-power accounting,
+M15 finite upper bound and M16 conditional positive-correlation
+implication remain. F02/F04/F06 still need genuinely new
+unconditional number theory; neither finite CRT nor S3/C2
+orbit equivalence supplies it. Avoid Monster same-object
+promotion and keep prior Ibrahim 3B ownership.
+**Source-written, kernel pending. No CI or ESD edits.**
