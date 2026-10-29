@@ -80,3 +80,24 @@ They nonetheless share characteristic polynomial \(t^3-1\).
 This is a precise non-promotion boundary, not a cross-domain 3/9/27
 identification. No geometric G2–G6 certificate, Agda kernel or Lean
 kernel success follows.
+
+
+### Correction after direct separate dashi_lean4 checkout-path inspection
+
+A new 2026-10-29 read of the ACTUAL \`chboishabba/dashi_lean4\`
+\`main\` tree found that \`RequestProject\` currently contains
+\`NavierStokes/\` and NOT the two previously inferred
+\`RequestProject/OntologyTopology.lean\` or
+\`RequestProject/RetractTopology.lean\` paths: both exact
+\`fetch_file\` calls returned 404. Thus the earlier truncated-tree
+mention of those names must **not** be presented as a verified,
+current default-branch Lean source. We successfully opened
+\`AgdaMirror/AuthorityBoundary.lean\` on \`main\`: it is a
+source/authority boundary mirror and supplies no related
+cap-relative three-child homeomorphism. Default-branch code
+searches for \`FundamentalGroup\`, \`IsPathConnected\`,
+\`handlebody\`, \`Homeomorph\`, and \`FreeGroup\` returned no
+results; absent index hits are not proof of absence. The actual
+relevant Lean van Kampen consumers we read are under
+\`dashi_agda/proofs/horned_c3_lean/HornedC3/\`, not a verified
+same-object theorem from \`dashi_lean4\`.
