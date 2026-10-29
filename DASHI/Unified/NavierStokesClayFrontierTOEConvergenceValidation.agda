@@ -127,7 +127,112 @@ releasedHeadCoordinateAuditNeedNotReopen =
 
 
 ------------------------------------------------------------------------
--- R736 current periodic-B shared weighted wall.
+-- Current periodic-B authoritative R440 wall.
+------------------------------------------------------------------------
+
+adapterCurrentBHighestInformationIsPhysicalR440 :
+  NSClay.currentPeriodicBHighestInformationIsPhysicalR440 ≡ true
+adapterCurrentBHighestInformationIsPhysicalR440 =
+  NSClay.currentPeriodicBHighestInformationIsPhysicalR440IsTrue
+
+adapterCurrentB4PhysicalPaymentStillOpen :
+  NSClay.currentPeriodicB4PhysicalPaymentClosed ≡ false
+adapterCurrentB4PhysicalPaymentStillOpen =
+  NSClay.currentPeriodicB4PhysicalPaymentStillOpen
+
+adapterCurrentB4FourMomentScalarClosed :
+  NSClay.currentPeriodicB4FourMomentScalarClosed ≡ true
+adapterCurrentB4FourMomentScalarClosed =
+  NSClay.currentPeriodicB4FourMomentScalarClosedIsTrue
+
+adapterCurrentB4ZeroPaddingAuditClosed :
+  NSClay.currentPeriodicB4ZeroPaddingAuditClosed ≡ true
+adapterCurrentB4ZeroPaddingAuditClosed =
+  NSClay.currentPeriodicB4ZeroPaddingAuditClosedIsTrue
+
+adapterCurrentB1PhysicalProducerStillOpen :
+  NSClay.currentPeriodicB1PhysicalProducerClosed ≡ false
+adapterCurrentB1PhysicalProducerStillOpen =
+  NSClay.currentPeriodicB1PhysicalProducerStillOpen
+
+adapterCurrentB2PhysicalProducerStillOpen :
+  NSClay.currentPeriodicB2PhysicalProducerClosed ≡ false
+adapterCurrentB2PhysicalProducerStillOpen =
+  NSClay.currentPeriodicB2PhysicalProducerStillOpen
+
+adapterCurrentB3PhysicalProducerStillOpen :
+  NSClay.currentPeriodicB3PhysicalProducerClosed ≡ false
+adapterCurrentB3PhysicalProducerStillOpen =
+  NSClay.currentPeriodicB3PhysicalProducerStillOpen
+
+adapterCurrentBContinuationStillOpen :
+  NSClay.currentPeriodicBContinuationInputsClosed ≡ false
+adapterCurrentBContinuationStillOpen =
+  NSClay.currentPeriodicBContinuationInputsStillOpen
+
+adapterCurrentBR823ShouldNotReopen :
+  NSClay.currentPeriodicBR823ShouldReopen ≡ false
+adapterCurrentBR823ShouldNotReopen =
+  NSClay.currentPeriodicBR823ShouldNotReopen
+
+adapterHistoricalExternalRouteReachedPureCommutator :
+  NSClay.historicalExternalSignedCommutatorRouteReachedPureCommutator ≡ true
+adapterHistoricalExternalRouteReachedPureCommutator =
+  NSClay.historicalExternalSignedCommutatorRouteReachedPureCommutatorIsTrue
+
+adapterHistoricalExternalRouteDoesNotPromoteClay :
+  NSClay.historicalExternalSignedCommutatorRoutePromotesClay ≡ false
+adapterHistoricalExternalRouteDoesNotPromoteClay =
+  NSClay.historicalExternalSignedCommutatorRouteDoesNotPromoteClay
+
+toeCurrentB4MatchesAdapter :
+  TOE.toeNavierStokesCurrentB4PhysicalPaymentClosed
+  ≡ NSClay.currentPeriodicB4PhysicalPaymentClosed
+toeCurrentB4MatchesAdapter = refl
+
+unifierCurrentB4MatchesAdapter :
+  U.unifierNavierStokesCurrentB4PhysicalPaymentClosed
+  ≡ NSClay.currentPeriodicB4PhysicalPaymentClosed
+unifierCurrentB4MatchesAdapter = refl
+
+physicsCurrentB4MatchesAdapter :
+  Physics.navierStokesCurrentB4PhysicalPaymentClosed
+  ≡ NSClay.currentPeriodicB4PhysicalPaymentClosed
+physicsCurrentB4MatchesAdapter = refl
+
+toeCurrentBR823MatchesAdapter :
+  TOE.toeNavierStokesCurrentBR823ShouldReopen
+  ≡ NSClay.currentPeriodicBR823ShouldReopen
+toeCurrentBR823MatchesAdapter = refl
+
+unifierCurrentBR823MatchesAdapter :
+  U.unifierNavierStokesCurrentBR823ShouldReopen
+  ≡ NSClay.currentPeriodicBR823ShouldReopen
+unifierCurrentBR823MatchesAdapter = refl
+
+physicsCurrentBR823MatchesAdapter :
+  Physics.navierStokesCurrentBR823ShouldReopen
+  ≡ NSClay.currentPeriodicBR823ShouldReopen
+physicsCurrentBR823MatchesAdapter = refl
+
+toeHistoricalExternalNonPromotionMatchesAdapter :
+  TOE.toeNavierStokesHistoricalExternalCommutatorRoutePromotesClay
+  ≡ NSClay.historicalExternalSignedCommutatorRoutePromotesClay
+toeHistoricalExternalNonPromotionMatchesAdapter = refl
+
+unifierHistoricalExternalNonPromotionMatchesAdapter :
+  U.unifierNavierStokesHistoricalExternalCommutatorRoutePromotesClay
+  ≡ NSClay.historicalExternalSignedCommutatorRoutePromotesClay
+unifierHistoricalExternalNonPromotionMatchesAdapter = refl
+
+physicsHistoricalExternalNonPromotionMatchesAdapter :
+  Physics.navierStokesHistoricalExternalCommutatorRoutePromotesClay
+  ≡ NSClay.historicalExternalSignedCommutatorRoutePromotesClay
+physicsHistoricalExternalNonPromotionMatchesAdapter = refl
+
+
+------------------------------------------------------------------------
+-- Legacy R736 compatibility surface.
 ------------------------------------------------------------------------
 
 adapterSharedWeightedExactlyTwoLeaves :
@@ -182,7 +287,7 @@ adapterSharedWeightedClayStillFalse =
 
 
 ------------------------------------------------------------------------
--- Consumer agreement for the current R736 wall.
+-- Consumer agreement for the legacy R736 compatibility surface.
 ------------------------------------------------------------------------
 
 toeSharedWeightedLeafCountMatchesAdapter :
