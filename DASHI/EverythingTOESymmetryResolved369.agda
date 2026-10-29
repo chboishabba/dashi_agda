@@ -1,4 +1,10 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+import DASHI.Core.SituatedFibreDynamicsEverything as SituatedFibreTOE
+import DASHI.Core.DecimalStageResidualBarrierExact as DecimalStageTOE
+import DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact as BranchReachTOE
+import DASHI.Core.HistoryConditionedChoiceExact as HistoryTOE
+import DASHI.Core.TrajectoryEndpointNonfactorabilityExact as TrajectoryTOE
+import DASHI.Governance.TypedBranchingOptionConeBridgeExact as OptionConeTOE
 import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHFrontier
 import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExact as MillenniumResidual
 import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumLean
@@ -1841,3 +1847,57 @@ toeNavierStokesInstantaneousSnapshotClayPromotionStillFalse :
   toeNavierStokesInstantaneousSnapshotClayPromotion ≡ false
 toeNavierStokesInstantaneousSnapshotClayPromotionStillFalse =
   NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
+
+
+------------------------------------------------------------------------
+-- Current coarse/fine, branch, history, and option-cone TOE convergence.
+--
+-- Golden source: Agda owners imported above.
+-- Lean mirrors and external receipts are correspondence evidence only.
+-- No ESD surface participates in this theorem path.
+------------------------------------------------------------------------
+
+toeSituatedFibreZKPFrame =
+  SituatedFibreTOE.canonicalSituatedFibreTOEZKPFrame
+
+toeDecimalRefinementPreservesCoarseStage =
+  DecimalStageTOE.refinementDepthPreservesCoarseStage
+
+toeNonNineFiniteRefinementRetainsResidual =
+  DecimalStageTOE.nonNineRefinementRetainsResidualAtEveryFiniteDepth
+
+toeStage9SelfLoop =
+  DecimalStageTOE.stage9HasCanonicalSelfLoop
+
+toeStage9ExternalCoordinateEdge =
+  DecimalStageTOE.stage9To10RequiresCanonicalExternalCoordinateEdge
+
+toeEqualLocalBranchMass =
+  BranchReachTOE.sameStartRowMass
+
+toeEqualLocalBranchRegime =
+  BranchReachTOE.sameStartRowRegime
+
+toeEscapeStartReachesGoal =
+  BranchReachTOE.escapeStartReachesGoal
+
+toeTrapStartCannotReachGoal =
+  BranchReachTOE.trapStartCannotReachGoal
+
+toeTypedBranchTrapBarrier =
+  BranchReachTOE.canonicalTypedBranchTrapBarrier
+
+toeTrajectoryEndpointNonfactorability =
+  TrajectoryTOE.demoTrajectoryDoesNotFactorThroughEndpoints
+
+toeHistoryConditionedChoiceBoundary =
+  HistoryTOE.canonicalHistoryConditionedChoiceBoundary
+
+toeHistoryFutureConeWitness =
+  HistoryTOE.canonicalToyFutureConeWitness
+
+toeEqualLocalMassDifferentOptionCone =
+  OptionConeTOE.canonicalEqualLocalMassDifferentOptionCone
+
+toeTypedBranchingOptionConeBoundary =
+  OptionConeTOE.canonicalTypedBranchingOptionConeBoundary
