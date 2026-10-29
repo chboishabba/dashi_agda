@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Fin.Base using (Fin)
 
 import DASHI.Core.CoarseFineFabricCalculusExact as Coarse
 import DASHI.Cognition.PNF.WikidataRepairProposal as Repair
@@ -95,7 +96,15 @@ record MPSpectralBasisWitness (Scalar Vector : Set) : Set₁ where
   constructor mp-spectral-basis-witness
   field
     truncation : SpectralTruncationK
+    sampleCount : Nat
+    activation : Fin sampleCount → Vector
     covarianceAction : Vector → Vector
+    EmpiricalCovarianceAATOverM :
+      (Fin sampleCount → Vector) →
+      (Vector → Vector) →
+      Set
+    covarianceIsEmpiricalAATOverM :
+      EmpiricalCovarianceAATOverM activation covarianceAction
     eigenvalue : Vector → Scalar
     lambdaPlus : Scalar
     AboveBulkEdge : Scalar → Scalar → Set
