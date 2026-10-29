@@ -65,8 +65,9 @@ jobs:
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
           )
-          if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
+          if grep -nE 'postulate|allow-unsolved-metas|TERMINATING|NON_TERMINATING|NO_POSITIVITY_CHECK|\{!!\}|\bsorry\b|\badmit\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in Fanning literal-data contract.' >&2
             exit 1
           fi
