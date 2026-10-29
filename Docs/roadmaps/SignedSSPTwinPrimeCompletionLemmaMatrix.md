@@ -856,3 +856,34 @@ twin-prime mathematics, as confirmed in current primary
 bounded-gap and formalisation documentation.
 No ESD surfaces, prior Ibrahim Monster 3B owners, or
 independent Zipf/Heaps PR proof ownership were edited.
+
+## 29 October 2026: live M-series residual/Mangoldt proof ledger
+
+**Source owners imported, never duplicated:** `DASHI.Analysis.RiemannVonMangoldtSpecification` (original `VonMangoldtAt`/`VonMangoldtFunction`), `DASHI.Cognition.ResidualPhaseGeometry` (`Projection`/`Residual`), `DASHI.Core.ConsumerGuidedReopenableRefinementExact` (consumer-guided strict refinement), `DASHI.Core.NonginOnePointOneArmyRefinementExact` (frame-sensitive consumer), `DASHI.Core.ResidualNaturality` (category-level interface), `DASHI.Arithmetic.TwinPrimeNat270PeriodResidualBidiExact` (lossless full-Nat code). All these owners retain original attribution; Ibrahim Monster 3B and PR #1244/#1275 symmetry/counting proofs are independent.
+
+| ID | Exact obligation | Status and source |
+|---|---|---|
+| M01 | Reuse native `Phase.Projection` | S: `TwinPrimeResidualMangoldtBidiExact.periodProjection` |
+| M02 | Native residual fibre for period code | S: `exactPeriodResidual` |
+| M03 | Nat gives a fibre witness | S: `natGivesPeriodResidual` |
+| M04 | Any fibre witness uniquely determines original Nat | S: `periodResidualUniqueness` |
+| M05 | Any Nat consumer lifts to full period code | S: `liftNatConsumer`/`liftConsumerSound` |
+| M06 | Consumer transport preserves both directions | S: `liftConsumerComplete`/`periodConsumerBidi` |
+| M07 | Actual von Mangoldt scalar forward | S: `mangoldtPeriodForward` |
+| M08 | Actual von Mangoldt scalar backward | S: `mangoldtPeriodBackward` |
+| M09 | Pair-weighted correlation forward | S: `pairCorrelationForward` |
+| M10 | Pair-weighted correlation backward | S: `pairCorrelationBackward` |
+| M11 | Construct and verify an actual `AllPrimeArithmetic` instance, prove its scalar laws | P/N: existing Riemann owner; no fresh analytic instance assumed |
+| M12 | Finite intervals: Nat sum ↔ period-coded sum, for arbitrary additive carrier and paired Mangoldt | **NEW S**: `TwinPrimeResidualMangoldtFiniteSumBidiExact.finiteSumBidiForward`, `finiteSumBidiBackward`, `pairFiniteSumBidiForward`, `pairFiniteSumBidiBackward`, `mangoldtFiniteSumForward` |
+| M13 | Decompose entire finite interval exactly by 270 residue classes and variable period bounds | N: M12 does not yet prove the nested 270 Fubini/reindex theorem |
+| M14 | Separate genuine prime pairs from contributions with at least one proper prime power | N/R: requires a sound prime-power decomposition |
+| M15 | Uniform explicit upper bound on prime-power-only correction | N/R: prove, do not infer from tests |
+| M16 | Analytic positive-correlation estimate + M14/M15 ⇒ arbitrarily large certified twin primes | N/R: conditional implication missing; premise is **open mathematical conjecture-scale** |
+
+**New source:** `DASHI/Arithmetic/TwinPrimeResidualMangoldtFiniteSumBidiExact.agda`, 29 October 2026, imports the original correlated Mangoldt consumer and existing period-residual BIDI. The theorem is induction on finite interval length, using `cong₂` for additive sum transport; it does not import an assumed analytic estimate. The generic additive carrier requires no unproved positivity/commutativity for this pointwise transport.
+
+**Executed local Python:** 396 exact finite-sum equalities over 33 start indices and six interval lengths, on the actual mathematical von Mangoldt values and paired `Lambda(n)Lambda(n+2)`; 20,000 Nat and 21,600 period-code bidirectional round trips, PASS. These executed checks validate the finite arithmetic model, **not Agda kernel acceptance** or a large-X positive lower bound.
+
+**Critical max-cut:** M13 exact residue partition; M14/M15 proper-power removal; M16 conditional conversion; F02/F04/F06 original analytic positivity/parity barrier; G06 kernel verification. No claim twin-prime infinitude solved. Recent conditional bounded-gap work and Fernando Portela's June 2026 Krafft/Turán preprint are comparative research context, not proof imports. The latter reduces its result to a finite-dimensional optimisation inequality and itself states that inequality is a prerequisite. Preserve original authors and dated roots.
+
+**Integration:** All three TOE roots now import and selectively export the new M12 bridge. All status S markers mean source-written only and are NOT kernel verification receipts. Do not modify ESD surfaces.
