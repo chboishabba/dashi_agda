@@ -840,6 +840,8 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeProgramCookLevinSame
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as PNPCanonical
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as PNPSelector
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as PNPInput
+import DASHI.Mathematics.Arithmetic.EllipticCurveFiniteTwoDescentSeedExact as BSDFiniteKummer
+import DASHI.Mathematics.Arithmetic.EllipticCurveTwoTorsionAndBadPrimeExact as BSDTwoTorsion
 
 millenniumThreeLaneZKPFrame : Introspection.ZKPFrame
 millenniumThreeLaneZKPFrame =
@@ -998,3 +1000,21 @@ pnpConcreteCookLevinSameObjectPaid :
     machine stateCoverage symbolCoverage nonempty input steps
 pnpConcreteCookLevinSameObjectPaid =
   PNPSame.sameMachineProgramCookLevinCertificate
+
+
+bsdFiniteTorsionKummerHomomorphismIsGolden :
+  ∀ left right →
+  BSDFiniteKummer.finiteKummerMap
+    (BSDTwoTorsion.addTorsion left right)
+  ≡
+  BSDFiniteKummer.addSquareClass
+    (BSDFiniteKummer.finiteKummerMap left)
+    (BSDFiniteKummer.finiteKummerMap right)
+bsdFiniteTorsionKummerHomomorphismIsGolden =
+  BSDFiniteKummer.finiteKummerHomomorphism
+
+leanBSDExceptionalTorsionTranslationSourcePresent :
+  LeanAssist.bsdLocalKummerTorsionTranslationSourcePresent
+    LeanAssist.currentMillenniumLeanAssistReceipt
+  ≡ true
+leanBSDExceptionalTorsionTranslationSourcePresent = refl
