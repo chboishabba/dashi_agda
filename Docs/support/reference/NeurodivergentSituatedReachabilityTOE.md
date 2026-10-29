@@ -4,13 +4,9 @@
 
 This note records the golden Agda composition for the current neurodivergent social-ecology problem.
 
-The target is:
+The target is the composed map:
 
-[
-	ext{history} 	imes 	ext{processing} 	imes 	ext{relation} 	imes 	ext{ecology}
-ightarrow
-	ext{guarded reachable option cone}.
-]
+History × processing × relation × ecology → guarded reachable option cone.
 
 The formal owner is
 `DASHI/Biology/EmbodiedSocialEcologyRelationalHistoryObligationExact.agda`.
@@ -80,17 +76,7 @@ The social affordance tested here is the ability to remain.
 
 The finite future code is:
 
-[
-	ext{future}
-=
-	ext{history gate}
-land
-	ext{processing gate}
-land
-	ext{reachable planning}
-land
-	ext{social remain}.
-]
+Future = history gate AND processing gate AND reachable planning AND social remain.
 
 This Boolean equation is a theorem specimen.
 It is not a calibrated clinical score.
