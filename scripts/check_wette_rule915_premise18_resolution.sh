@@ -54,6 +54,8 @@ grep -q 'canonicalRule915MajorZKPFrame' DASHI/Foundations/Wette1969Rule915MajorD
 grep -q 'typedPreconditionsInvariantAndPostconditionAreConnectedIsTrue' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'buildCanonicalRule915ResidualContract' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'selected9323RouteIsKnownCompleteForPremise18IsFalse' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'canonicalPremise18SpineRecoveryIsDefinitionallyDischargedIsTrue' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'canonicalPremise18P145SpineRecovery' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
 grep -q 'toeWetteGeneratedScaffoldDoesNotCreatePremise18' DASHI/EverythingTOESymmetryResolved369.agda
 grep -q 'toeFleetPriorityStillDoesNotCreateWetteProofAuthority' DASHI/EverythingTOESymmetryResolved369.agda
 grep -q 'unifiedWetteRule915CurrentProblemBoundary' DASHI/Unifier.agda
