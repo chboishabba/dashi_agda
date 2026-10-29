@@ -404,3 +404,56 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Safe/just paper-chain normalization through Unified.Everything.
+------------------------------------------------------------------------
+
+unifiedSafeJustPaperChainBoundary :
+  FleetGapTOE.SafeJustPaperChainBoundary
+unifiedSafeJustPaperChainBoundary =
+  FleetGapTOE.canonicalSafeJustPaperChainBoundary
+
+unifiedSafeJustPaperChainZKPFrame :
+  FleetGapTOE.SafeJustPaperChainZKPFrame
+unifiedSafeJustPaperChainZKPFrame =
+  FleetGapTOE.canonicalSafeJustPaperChainZKPFrame
+
+unifiedONeillCountProjectionBoundary :
+  FleetGapTOE.ONeillCountProjectionBoundary
+unifiedONeillCountProjectionBoundary =
+  FleetGapTOE.fleetONeillCountProjectionBoundary
+
+unifiedONeillObservedResultDoesNotCreateUniversalImpossibility :
+  FleetGapTOE.ONeillMethods.UniversalImpossibilityCertificate → ⊥
+unifiedONeillObservedResultDoesNotCreateUniversalImpossibility =
+  FleetGapTOE.fleetONeillObservedResultDoesNotCreateUniversalImpossibility
+
+unifiedObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
+  FleetGapTOE.Provisioning.IdentifiedProvisioningTreatmentEffect → ⊥
+unifiedObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
+  FleetGapTOE.fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect
+
+unifiedFanningProjectionBoundary :
+  FleetGapTOE.FanningProjectionBoundary
+unifiedFanningProjectionBoundary =
+  FleetGapTOE.fleetFanningProjectionBoundary
+
+unifiedFanningBAUProjectionIsNotObserved2050Outcome :
+  FleetGapTOE.FanningProjection.FanningProjectionBoundary.BAUProjectionIsObserved2050Outcome
+    FleetGapTOE.FanningProjection.canonicalFanningProjectionBoundary ≡ false
+unifiedFanningBAUProjectionIsNotObserved2050Outcome =
+  FleetGapTOE.fleetFanningBAUProjectionIsNotObserved2050Outcome
+
+unifiedGDP15000UpstreamBoundary :
+  FleetGapTOE.GDP15000UpstreamBoundary
+unifiedGDP15000UpstreamBoundary =
+  FleetGapTOE.fleetGDP15000UpstreamBoundary
+
+unifiedGDP15000DoesNotOpenCausalConsumer :
+  FleetGapTOE.KallisClaims.AdequateFor
+    FleetGapTOE.KallisClaims.gdp15000Realization
+    FleetGapTOE.KallisClaims.causalMechanismConsumer → ⊥
+unifiedGDP15000DoesNotOpenCausalConsumer =
+  FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
