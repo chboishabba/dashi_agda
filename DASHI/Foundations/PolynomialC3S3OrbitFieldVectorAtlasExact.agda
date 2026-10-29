@@ -8,6 +8,7 @@ module DASHI.Foundations.PolynomialC3S3OrbitFieldVectorAtlasExact where
 -- New pointwise inverse proofs are source-written; kernel pending.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (_+_)
 open import Data.Vec.Base using (Vec; []; _∷_)
 import Data.Vec.Base as Vec
 import Data.Fin.Base as Fin
@@ -194,3 +195,16 @@ twentySevenFieldsAre7625597484987 = refl
 
 -- All three are bijections up to pointwise equality (no funext axiom).
 -- The enumerated orbit order is an explicit CHOICE of a basis.
+
+-- The four extra coordinates are the second member of each
+-- of the four reflection-swapped C3 orbit pairs. This is a
+-- coordinate count, NOT an unproved Fourier eigenspace theorem.
+elevenSlotsSplitSevenAndFour : 7 + 4 ≡ 11
+elevenSlotsSplitSevenAndFour = refl
+
+elevenFieldCountFactorsIntoSevenAndFour :
+  Tower.pow 3 11 ≡ Tower.pow 3 7 * Tower.pow 3 4
+elevenFieldCountFactorsIntoSevenAndFour = refl
+
+fourSwappedPairResidualFields : Tower.pow 3 4 ≡ 81
+fourSwappedPairResidualFields = refl
