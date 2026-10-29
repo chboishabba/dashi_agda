@@ -1469,7 +1469,7 @@ toeWetteRule915CurrentProblemBoundary :
 toeWetteRule915CurrentProblemBoundary =
   Wette915.canonicalRule915CurrentProblemBoundary
 
-toeWetteRule915ZKPFrame : Wette915.Introspection.ZKPFrame
+toeWetteRule915ZKPFrame : Wette915.Rule915MajorZKPFrame
 toeWetteRule915ZKPFrame =
   Wette915.canonicalRule915MajorZKPFrame
 
