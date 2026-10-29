@@ -5,6 +5,8 @@ on:
   pull_request:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
+      - 'DASHI/Core/SituatedFibreDynamicsEverything.agda'
+      - 'DASHI/Core/SituatedFibreDynamicsEverything.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
@@ -93,6 +95,13 @@ jobs:
           dashi-repo discover 'Yang Mills Goal1 TOE variable domain Peter Weyl compactness stress non-promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
+          dashi-repo diagnose DASHI/Core/SituatedFibreDynamicsEverything.agda --root .
+          dashi-repo related canonicalSituatedFibreTOEZKPFrame --root . --limit 30
+          dashi-repo related refinementDepthPreservesCoarseStage --root . --limit 30
+          dashi-repo related canonicalTypedBranchTrapBarrier --root . --limit 30
+          dashi-repo related canonicalEqualLocalMassDifferentOptionCone --root . --limit 30
+          dashi-repo discover 'coarse fine finite refinement typed branching reachability trajectory residue history future option cone stage barrier' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Core.SituatedFibre --root .
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
           dashi-repo diagnose DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda --root .
@@ -172,6 +181,7 @@ jobs:
         run: |
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
+            DASHI/Core/SituatedFibreDynamicsEverything.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda
@@ -202,6 +212,7 @@ jobs:
         run: |
           agda --version
           modules=(
+            DASHI/Core/SituatedFibreDynamicsEverything.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
