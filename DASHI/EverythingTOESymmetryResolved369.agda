@@ -1,5 +1,12 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 
+-- Separate F3 no-go: nonsemisimple three-point C3 permutation module
+-- has no C3-equivariant linear retraction onto its constant line.
+import DASHI.Foundations.PolynomialC3CharacteristicThreeRetractionNoGoExact as C3ModularNoGo
+open C3ModularNoGo public using
+  ( tripleSumZero ; tripleSumCannotBeOne
+  ; noC3InvariantLinearFunctionalRetraction )
+
 -- NEW O40 rational S3 block certificates on the ACTUAL native 27 G-set:
 -- integer-scaled Q inverse matrices (sizes 2,3,6), 216 regular Fourier
 -- intertwiners, and 1+2+3+3+6+6+6 code/block action atlas.
