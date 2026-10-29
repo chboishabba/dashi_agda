@@ -89,7 +89,60 @@ def sampled_full_bilinear(left, right):
     }
 
 
+
+
+def one_axis_transform(coefs, inverse=False):
+    """Same sign and normalization as Q(zeta5) Agda forward1/inverse1."""
+    output = []
+    for k in range(5):
+        acc = ZERO
+        for j in range(5):
+            phase = ROOTS[((1 if inverse else -1) * j * k) % 5]
+            acc = add(acc, mul(coefs[j], phase))
+        output.append(tuple(v / 5 for v in acc) if inverse else acc)
+    return output
+
+
+def one_axis_sampled_convolution(left, right):
+    left_samples = one_axis_transform(left, inverse=True)
+    right_samples = one_axis_transform(right, inverse=True)
+    spectral = one_axis_transform(
+        [mul(x, y) for x, y in zip(left_samples, right_samples)])
+    return [tuple(5 * v for v in z) for z in spectral]
+
+
+def one_axis_indexed_convolution(left, right):
+    result = []
+    for k in range(5):
+        value = ZERO
+        for p in range(5):
+            value = add(value, mul(left[p], right[(k - p) % 5]))
+        result.append(value)
+    return result
+
+
+def check_one_axis_sampled_convolution():
+    # Exhaust all 25 monomial coefficient pairs; by exact bilinearity
+    # this constitutes a Q(zeta5)-module basis certificate.
+    for p in range(5):
+        for q in range(5):
+            left = [ONE if j == p else ZERO for j in range(5)]
+            right = [ONE if j == q else ZERO for j in range(5)]
+            assert one_axis_sampled_convolution(left, right) == (
+                one_axis_indexed_convolution(left, right))
+    # Nontrivial arbitrary field-level check for scalar implementation.
+    for seed in range(12):
+        rng = Random(5100 + seed)
+        left = [tuple(F(rng.randrange(-8, 9), 7) for _ in range(4))
+                for _ in range(5)]
+        right = [tuple(F(rng.randrange(-8, 9), 11) for _ in range(4))
+                 for _ in range(5)]
+        assert one_axis_sampled_convolution(left, right) == (
+            one_axis_indexed_convolution(left, right))
+    print("PASS: C5 all 25 monomial basis pairs and 12 independent dense Q(zeta5) one-axis pairs")
+
 def check():
+    check_one_axis_sampled_convolution()
     for i in range(3):
         left, right = random_field(5100 + i), random_field(5200 + i)
         assert sampled_full_bilinear(left, right) == direct_integer_bilinear(left, right)
