@@ -11,6 +11,7 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Unified.PNFHyperfabric as UnifiedPNF
 import DASHI.Cognition.PNF.RelationDeltaReconciliationExact as RelationDeltaExact
 import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1730,3 +1731,8 @@ unifierCandidateRelationRuntimeAuthorityStillFalse =
   Authority.bundleRuntimeAuthorityIsFalse
     (RelationDeltaExact.executionNonPromotion
       unifierCandidateRelationExecutionBoundary)
+
+
+unifierCandidateRelationZKPFrame : Introspective.ZKPFrame
+unifierCandidateRelationZKPFrame =
+  UnifiedPNF.unifiedCandidateRelationZKPFrame
