@@ -87,7 +87,6 @@ canonicalAdaptiveCutoffCrossingBoundary =
     false
     false
     false
-    false
     true
     false
     true
