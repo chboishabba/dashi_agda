@@ -8,6 +8,8 @@ import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
+import DASHI.Unified.PNFHyperfabric as UnifiedPNF
+import DASHI.Cognition.PNF.RelationDeltaReconciliationExact as RelationDeltaExact
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -1456,3 +1458,16 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- SensibLaw direct-delta reconciliation boundary.
+--
+-- The TOE aggregate consumes one golden candidate mutation owner. It does not
+-- promote runtime execution evidence into semantic or theorem authority.
+------------------------------------------------------------------------
+
+toeCandidateRelationOwnerRouting :
+  RelationDeltaExact.RelationDeltaOwnerRouting
+toeCandidateRelationOwnerRouting =
+  UnifiedPNF.unifiedCandidateRelationOwnerRouting
