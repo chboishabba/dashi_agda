@@ -78,3 +78,14 @@ Plans:
 | 3. MDL Integration | 1/2 | In progress | - |
 | 4. Signature Elimination | 2/2 | Complete | 2026-03-01 |
 | 5. Closure Harness | 0/2 | Not started | - |
+
+## 2026-10-29 — Weighted directed graph / trialectics 369 seam
+
+- [x] Reuse three-position observer matrix, attached two-cell, non-geometric argument opposition, ternary hypervoxel and typed pants owners.
+- [x] Source-write exact rational-in-tenths 3x3 ↔ directed weighted graph round trips, 6-arc specimen, C3-weight obstruction and full-matrix attached-face non-descent.
+- [x] Wire relational rollup, TOE roots, Unified aggregate and 369 Max Cut facade.
+- [ ] Golden Agda exact-head kernel check, --safe/no-postulates/no-metas/no-termination-escape scan; no certification until run.
+- [ ] Check Lean mirror against golden proof statements under pinned toolchain.
+- [ ] Supply separately sourced hyperfabric stalk/incidence/section compatibility and 27-pants adjacency if advancing beyond the finite graph boundary.
+
+See `Docs/TrialecticWeightedDirectedGraph369.md` for attribution, the weight convention, proofs and non-promotion obligations.
