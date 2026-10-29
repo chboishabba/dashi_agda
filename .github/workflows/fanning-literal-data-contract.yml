@@ -18,6 +18,10 @@ on:
       - '.github/workflows/fanning-literal-data-contract.yml'
   workflow_dispatch:
 
+concurrency:
+  group: fanning-literal-data-contract-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
