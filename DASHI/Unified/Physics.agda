@@ -13,6 +13,9 @@ import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Physics.Foundations.TSFVFeynmanDerivationObligationsExact as Feynman
+import DASHI.Physics.Closure.FeynmanKelvinTrajectoryCrossPollinationExact as FeynmanExperiment
+import DASHI.Physics.Closure.QuantumPathFibreObservationQuotient as QuantumPath
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.YMA1SourceFrontierExact as YMA1Frontier
@@ -733,3 +736,83 @@ yangMillsYMA1CompletionDoesNotSelfPromote :
   ≡ false
 yangMillsYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+------------------------------------------------------------------------
+-- Feynman experiment / path-integral non-promotion facade.
+--
+-- Proof ownership remains in the existing Foundations and Closure owners.
+-- The experiment supports the finite path-amplitude/action-phase layer.
+-- It does not validate TSFV or derive the Feynman propagator from TSFV.
+------------------------------------------------------------------------
+
+FeynmanDerivationBoundaryType : Set
+FeynmanDerivationBoundaryType =
+  Feynman.TSFVFeynmanDerivationBoundary
+
+feynmanArchitectureCompatibleFlag : Bool
+feynmanArchitectureCompatibleFlag =
+  Feynman.architectureCompatibleWithFeynman
+    Feynman.canonicalTSFVFeynmanDerivationBoundary
+
+feynmanHistoryRealisationSuppliedFlag : Bool
+feynmanHistoryRealisationSuppliedFlag =
+  Feynman.justifiedHistoryTransitionRealizationSupplied
+    Feynman.canonicalTSFVFeynmanDerivationBoundary
+
+feynmanPropagatorDerivedFlag : Bool
+feynmanPropagatorDerivedFlag =
+  Feynman.tsfvCurrentlyDerivesFeynmanPropagator
+    Feynman.canonicalTSFVFeynmanDerivationBoundary
+
+feynmanExperimentValidatesTSFVFlag : Bool
+feynmanExperimentValidatesTSFVFlag =
+  FeynmanExperiment.experimentValidatesTSFV
+    FeynmanExperiment.canonicalFeynmanKelvinTrajectoryBridge
+
+feynmanDerivationBoundary :
+  Feynman.TSFVFeynmanDerivationBoundary
+feynmanDerivationBoundary =
+  Feynman.canonicalTSFVFeynmanDerivationBoundary
+
+feynmanExperimentBridge :
+  FeynmanExperiment.FeynmanKelvinTrajectoryBridge
+feynmanExperimentBridge =
+  FeynmanExperiment.canonicalFeynmanKelvinTrajectoryBridge
+
+feynmanQuantumPathSurface :
+  QuantumPath.QuantumPathFibreObservationQuotient
+feynmanQuantumPathSurface =
+  QuantumPath.canonicalQuantumPathFibreObservationQuotient
+
+feynmanArchitectureCompatible :
+  Feynman.architectureCompatibleWithFeynman feynmanDerivationBoundary ≡ true
+feynmanArchitectureCompatible = refl
+
+feynmanStructuralNonseparableActionDerived :
+  Feynman.nonseparableTransitionActionDerived feynmanDerivationBoundary ≡ true
+feynmanStructuralNonseparableActionDerived = refl
+
+feynmanHistoryRealisationStillOpen :
+  Feynman.justifiedHistoryTransitionRealizationSupplied feynmanDerivationBoundary ≡ false
+feynmanHistoryRealisationStillOpen = refl
+
+feynmanActionPhaseCalibrationStillOpen :
+  Feynman.actionToPhaseCalibrationSupplied feynmanDerivationBoundary ≡ false
+feynmanActionPhaseCalibrationStillOpen = refl
+
+tsfvDoesNotCurrentlyDeriveFeynmanPropagator :
+  Feynman.tsfvCurrentlyDerivesFeynmanPropagator feynmanDerivationBoundary ≡ false
+tsfvDoesNotCurrentlyDeriveFeynmanPropagator = refl
+
+feynmanExperimentDoesNotValidateTSFV :
+  FeynmanExperiment.experimentValidatesTSFV feynmanExperimentBridge ≡ false
+feynmanExperimentDoesNotValidateTSFV = refl
+
+feynmanStationaryDoesNotImplyMinimum :
+  FeynmanExperiment.stationaryImpliesMinimum feynmanExperimentBridge ≡ false
+feynmanStationaryDoesNotImplyMinimum = refl
+
+feynmanStationaryDoesNotImplyMetricShortest :
+  FeynmanExperiment.stationaryImpliesMetricShortest feynmanExperimentBridge ≡ false
+feynmanStationaryDoesNotImplyMetricShortest = refl
+

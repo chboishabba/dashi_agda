@@ -2,6 +2,7 @@ module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
+import DASHI.Unified.RiemannRHMaxCutTOEExact as RiemannRHTOE
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
 
 open import Agda.Primitive using (Setω)
@@ -428,3 +429,37 @@ unifiedSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 unifiedSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+------------------------------------------------------------------------
+-- Riemann / RH current max-cut TOE surface.
+------------------------------------------------------------------------
+
+unifiedRiemannRHCurrentFrontier :
+  RiemannRHTOE.CurrentThreeTapFrontier
+unifiedRiemannRHCurrentFrontier =
+  RiemannRHTOE.currentThreeTapFrontier
+
+unifiedRiemannRHZKPFrame :
+  RiemannRHTOE.RiemannRHTOEZKPFrame
+unifiedRiemannRHZKPFrame =
+  RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
+
+unifiedRiemannRHA1CarrierStillOpen :
+  RiemannRHTOE.currentA1CarrierSummationPaid ≡ false
+unifiedRiemannRHA1CarrierStillOpen =
+  RiemannRHTOE.a1CarrierSummationStillOpen
+
+unifiedRiemannRHA2ScalarStillOpen :
+  RiemannRHTOE.currentA2StrictScalarPaid ≡ false
+unifiedRiemannRHA2ScalarStillOpen =
+  RiemannRHTOE.a2StrictScalarStillOpen
+
+unifiedRiemannRHRouteBStillOpen :
+  RiemannRHTOE.currentRouteBEventualGapPaid ≡ false
+unifiedRiemannRHRouteBStillOpen =
+  RiemannRHTOE.routeBEventualGapStillOpen
+
+unifiedRiemannRHStillOpen :
+  RiemannRHTOE.currentRHDerived ≡ false
+unifiedRiemannRHStillOpen =
+  RiemannRHTOE.riemannHypothesisStillOpen
