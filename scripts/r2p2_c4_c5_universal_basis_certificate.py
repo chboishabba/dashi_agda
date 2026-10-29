@@ -6,6 +6,8 @@ The C4 character is in Q(i); the C5 character is in Q(zeta_5).
 Orszag/Patterson own the classical pseudo-spectral/dealiasing mathematics.
 """
 from itertools import product
+from fractions import Fraction
+from random import Random
 
 K = tuple(product((-1, 0, 1), repeat=3))
 W = tuple(product((-2, -1, 0, 1, 2), repeat=3))
@@ -42,7 +44,54 @@ def c5_kernel(diff):
     return int(all(a == (5, 0, 0, 0) for a in parts))
 
 
+def gaussian_mul(a, b):
+    return (a[0]*b[0]-a[1]*b[1], a[0]*b[1]+a[1]*b[0])
+
+
+def gaussian_add(a, b):
+    return a[0]+b[0], a[1]+b[1]
+
+
+def fourth_root_power(n):
+    return ((1, 0), (0, 1), (-1, 0), (0, -1))[n % 4]
+
+
+def transform_q4_axis(data, axis, inverse=False):
+    new = {}
+    for k in GRID4:
+        result = (Fraction(0), Fraction(0))
+        for j in range(4):
+            input_k = tuple(j if n == axis else x for n,x in enumerate(k))
+            phase = fourth_root_power((1 if inverse else -1)*j*k[axis])
+            result = gaussian_add(result, gaussian_mul(data[input_k],phase))
+        if inverse:
+            result = (result[0]/4,result[1]/4)
+        new[k] = result
+    return new
+
+
+def check_actual_q4_tensor():
+    for seed in range(3):
+        rng = Random(27004+seed)
+        source = {k:(Fraction(rng.randrange(-7,8),7),
+                     Fraction(rng.randrange(-7,8),11)) for k in GRID4}
+        forward = source
+        for axis in (0,1,2):
+            forward = transform_q4_axis(forward,axis)
+        back = forward
+        for axis in (2,1,0):
+            back = transform_q4_axis(back,axis,True)
+        assert back == source
+        for k in GRID4:
+            val = (Fraction(0),Fraction(0))
+            for x in GRID4:
+                val = gaussian_add(val,gaussian_mul(source[x],
+                    fourth_root_power(-sum(a*b for a,b in zip(k,x)))))
+            assert forward[k] == val
+
+
 def certificate():
+    check_actual_q4_tensor()
     # All one-dimensional C4 and C5 root sums, not sampled profiles.
     assert [sum4(d) for d in range(4)] == [(4, 0), (0, 0), (0, 0), (0, 0)]
     assert [sum5(d) for d in range(5)] == [(5, 0, 0, 0)] + [(0, 0, 0, 0)] * 4
@@ -79,6 +128,7 @@ def certificate():
     fixed4 = [k for k in GRID4 if all((-x) % 4 == x for x in k)]
     assert len(fixed4) == 8
 
+    print('PASS: 3 arbitrary Q(i) 64-sample DFTs, forward matrix and inverse tensor exactly')
     print('PASS: C4 4096 inverse/forward delta entries, 19683 universal bilinear basis coefficients')
     print('PASS: C5 91125 universal bilinear basis coefficients at all 125 full outputs')
     print('PASS: 8 C4 Nyquist fixed corners; C4 cannot recover full +-2 output')
