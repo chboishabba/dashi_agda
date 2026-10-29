@@ -142,3 +142,101 @@ canonicalInstitutionalNormProductionBoundary =
     false
     true
     true
+
+
+------------------------------------------------------------------------
+-- SETTLEMENT-MEDIATED NORM TRANSMISSION
+--
+-- This is a generic institutional transmission instance.
+-- It does not claim that any named settlement created federal law.
+-- It separates party binding force, platform policy, competitor adoption,
+-- industry convention, and generally binding law.
+------------------------------------------------------------------------
+
+data NormativeReach : Set where
+  partyBound : NormativeReach
+  platformPolicy : NormativeReach
+  competitorAdoption : NormativeReach
+  industryConvention : NormativeReach
+  generallyBindingLaw : NormativeReach
+
+data AuthoritySource : Set where
+  settlementAuthority : AuthoritySource
+  voluntaryPolicyAuthority : AuthoritySource
+  competitorPressureAuthority : AuthoritySource
+  legislativeAuthority : AuthoritySource
+  judicialHoldingAuthority : AuthoritySource
+
+record SettlementTransmission : Set where
+  constructor settlement-transmission
+  field
+    origin : NormativeReach
+    platformSurface : NormativeReach
+    competitorSurface : NormativeReach
+    industrySurface : NormativeReach
+
+open SettlementTransmission public
+
+canonicalSettlementTransmission : SettlementTransmission
+canonicalSettlementTransmission =
+  settlement-transmission
+    partyBound
+    platformPolicy
+    competitorAdoption
+    industryConvention
+
+data IndustryConventionCreatesFederalLaw : Set where
+data SettlementCreatesSupremeCourtHolding : Set where
+data SettlementCreatesConstitutionalPrecedent : Set where
+data SameVisiblePolicyImpliesSameAuthoritySource : Set where
+
+industryConventionDoesNotCreateFederalLaw :
+  IndustryConventionCreatesFederalLaw → ⊥
+industryConventionDoesNotCreateFederalLaw ()
+
+settlementDoesNotCreateSupremeCourtHolding :
+  SettlementCreatesSupremeCourtHolding → ⊥
+settlementDoesNotCreateSupremeCourtHolding ()
+
+settlementDoesNotCreateConstitutionalPrecedent :
+  SettlementCreatesConstitutionalPrecedent → ⊥
+settlementDoesNotCreateConstitutionalPrecedent ()
+
+sameVisiblePolicyDoesNotImplySameAuthoritySource :
+  SameVisiblePolicyImpliesSameAuthoritySource → ⊥
+sameVisiblePolicyDoesNotImplySameAuthoritySource ()
+
+record SettlementTransmissionBoundary : Set where
+  constructor settlement-transmission-boundary
+  field
+    settlementCanBindParties : Bool
+    settlementCanBindPartiesIsTrue : settlementCanBindParties ≡ true
+    settlementAloneBindsCompetitors : Bool
+    settlementAloneBindsCompetitorsIsFalse : settlementAloneBindsCompetitors ≡ false
+    competitorAdoptionCanConvergePolicy : Bool
+    competitorAdoptionCanConvergePolicyIsTrue : competitorAdoptionCanConvergePolicy ≡ true
+    industryConventionIsFederalLaw : Bool
+    industryConventionIsFederalLawIsFalse : industryConventionIsFederalLaw ≡ false
+    settlementIsSupremeCourtHolding : Bool
+    settlementIsSupremeCourtHoldingIsFalse : settlementIsSupremeCourtHolding ≡ false
+    settlementIsConstitutionalPrecedent : Bool
+    settlementIsConstitutionalPrecedentIsFalse : settlementIsConstitutionalPrecedent ≡ false
+    sameVisiblePolicyImpliesSameAuthority : Bool
+    sameVisiblePolicyImpliesSameAuthorityIsFalse :
+      sameVisiblePolicyImpliesSameAuthority ≡ false
+    productionHistoryRemainsRelevant : Bool
+    productionHistoryRemainsRelevantIsTrue : productionHistoryRemainsRelevant ≡ true
+
+open SettlementTransmissionBoundary public
+
+canonicalSettlementTransmissionBoundary : SettlementTransmissionBoundary
+canonicalSettlementTransmissionBoundary =
+  settlement-transmission-boundary
+    true refl
+    false refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
