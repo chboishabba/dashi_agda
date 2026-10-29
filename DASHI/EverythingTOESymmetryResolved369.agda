@@ -1570,3 +1570,56 @@ toeSameVisiblePolicyDoesNotImplySameAuthoritySource :
   FleetGapTOE.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
 toeSameVisiblePolicyDoesNotImplySameAuthoritySource =
   FleetGapTOE.fleetSameVisiblePolicyDoesNotImplySameAuthoritySource
+
+
+------------------------------------------------------------------------
+-- Safe/just paper-chain normalization.
+------------------------------------------------------------------------
+
+toeSafeJustPaperChainBoundary :
+  FleetGapTOE.SafeJustPaperChainBoundary
+toeSafeJustPaperChainBoundary =
+  FleetGapTOE.canonicalSafeJustPaperChainBoundary
+
+toeSafeJustPaperChainZKPFrame :
+  FleetGapTOE.SafeJustPaperChainZKPFrame
+toeSafeJustPaperChainZKPFrame =
+  FleetGapTOE.canonicalSafeJustPaperChainZKPFrame
+
+toeONeillCountProjectionBoundary :
+  FleetGapTOE.ONeillCountProjectionBoundary
+toeONeillCountProjectionBoundary =
+  FleetGapTOE.fleetONeillCountProjectionBoundary
+
+toeONeillObservedResultDoesNotCreateUniversalImpossibility :
+  FleetGapTOE.ONeillMethods.UniversalImpossibilityCertificate → ⊥
+toeONeillObservedResultDoesNotCreateUniversalImpossibility =
+  FleetGapTOE.fleetONeillObservedResultDoesNotCreateUniversalImpossibility
+
+toeObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
+  FleetGapTOE.Provisioning.IdentifiedProvisioningTreatmentEffect → ⊥
+toeObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
+  FleetGapTOE.fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect
+
+toeFanningProjectionBoundary :
+  FleetGapTOE.FanningProjectionBoundary
+toeFanningProjectionBoundary =
+  FleetGapTOE.fleetFanningProjectionBoundary
+
+toeFanningBAUProjectionIsNotObserved2050Outcome :
+  FleetGapTOE.FanningProjection.FanningProjectionBoundary.BAUProjectionIsObserved2050Outcome
+    FleetGapTOE.FanningProjection.canonicalFanningProjectionBoundary ≡ false
+toeFanningBAUProjectionIsNotObserved2050Outcome =
+  FleetGapTOE.fleetFanningBAUProjectionIsNotObserved2050Outcome
+
+toeGDP15000UpstreamBoundary :
+  FleetGapTOE.GDP15000UpstreamBoundary
+toeGDP15000UpstreamBoundary =
+  FleetGapTOE.fleetGDP15000UpstreamBoundary
+
+toeGDP15000DoesNotOpenCausalConsumer :
+  FleetGapTOE.KallisClaims.AdequateFor
+    FleetGapTOE.KallisClaims.gdp15000Realization
+    FleetGapTOE.KallisClaims.causalMechanismConsumer → ⊥
+toeGDP15000DoesNotOpenCausalConsumer =
+  FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
