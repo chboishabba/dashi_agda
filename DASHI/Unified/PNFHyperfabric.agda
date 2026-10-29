@@ -50,16 +50,6 @@ pnfHyperfabricJPromotionBlocked =
 -- DASHI.Cognition.PNF.
 ------------------------------------------------------------------------
 
-pnfDeltaFedProjectionOwner :
-  Set₁
-pnfDeltaFedProjectionOwner =
-  DeltaProjection.DeltaFedProjection Set Set Set Set
-
-pnfAffectedLocalReducerOwner :
-  Set₁
-pnfAffectedLocalReducerOwner =
-  LocalReduction.AffectedLocalReducer Set Set Set
-
 pnfAnaphorSurfaceIdentityPromotionImpossible :
   Anaphor.SurfaceSpellingIsWitnessIdentity → ⊥
 pnfAnaphorSurfaceIdentityPromotionImpossible =
