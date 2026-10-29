@@ -10,6 +10,7 @@ package "Original theorem owners" {
   [NSAuthorityConsistencyGuard] as Guard
   [NSTriadKNR650CurrentSharedWeightedWallRound736Exact] as R736
   [NSTriadKNR571PhysicalM2DissipationFoldExact] as BM2Fold
+  [NSTriadKNR650Rational345SnapshotIdentificationRound850Exact] as R850
   [NavierStokesBM2TOEConvergenceExact] as BM2
   [ClayNSProofRoadmapReceipt] as Roadmap
   [NSClaySubmissionEligibilityRoadmapReceipt] as Eligibility
@@ -34,6 +35,7 @@ Guard --> Facade : mixed-scope promotion guard
 R736 --> Facade : current periodic-B max-cut\n2 shared weighted leaves\nClay promotion = false
 BM2Fold --> BM2 : finite cardinality-free fold
 BM2 --> Facade : B producer strategy\nphysical payments remain analytic
+R850 --> Facade : R829 vector closed\nreal ODE transport open
 Roadmap --> Facade : weak/BKM branch + false promotion
 Eligibility --> Facade : BKM/all-data/submission/eligibility gates
 
@@ -59,6 +61,10 @@ Invariants:
 - BM2 finite aggregation is closed
 - BM2 samplewise physical payment is analytic
 - BM2 literal Galerkin fold is analytic
+- R829 repository vector is closed
+- R829 instantaneous signed rate is negative
+- real finite-ODE transport is open
+- integrated R823 reserve refutation is open
 - R736 has exactly two preferred analytic leaves
 - both R736 leaves use one weighted/input-Laplacian carrier
 - both R736 leaves remain open
@@ -71,6 +77,8 @@ Postconditions:
 - current four-lane receipt is TOE-reachable
 - BM2 finite fold is TOE-reachable
 - BM2 analytic payment boundaries are explicit
+- R829 instantaneous boundary is explicit
+- real-ODE and integrated-reserve boundaries are explicit
 - R736 shared wall is TOE-reachable
 - both open R736 leaves are TOE-reachable
 - the exact R736 non-promotion theorem is TOE-reachable
