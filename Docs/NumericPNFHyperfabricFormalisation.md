@@ -222,3 +222,73 @@ Conformance requires all of the following:
 The formalisation proves the algorithmic and authority contract. It does not
 substitute for migration tests, database execution plans, parser-quality
 assessment, or measured scaling evidence.
+
+## Parent exact-work admission and migration 209 certification
+
+The active SensibLaw parent reducer now calls the relation-delta reconciler from
+migration 209. The formal owner remains
+`DASHI.Cognition.PNF.DeltaNativeParentRuntimeBridgeExact`.
+
+The current large-parent replay reached one parent with 8,206 object keys while
+the configured exact key budget was 8,192. The runtime failed closed before the
+transaction could commit. The rollback also removed the reconciliation receipts.
+This is a resource-admission failure. It is not a semantic failure and it is not
+a relation-reconciliation failure.
+
+The golden Agda surface now records the exact regression as:
+
+```text
+parent key demand       = 8206
+configured exact budget = 8192
+positive excess         = 14
+disposition             = rejected
+```
+
+The proof uses the existing exact-sketch capacity owner. It does not turn 8,192
+into a semantic constant. It also does not authorize key truncation.
+
+`RelationDeltaReconciliationExact` now separates a transaction-local
+reconciliation from a persisted reconciliation receipt. A rolled-back
+reconciliation cannot certify the runtime path. A persisted no-op replay has
+logical rows but zero physical mutations. This is the fixed-point receipt needed
+for the second replay after migration 209.
+
+Runtime certification therefore requires both conditions:
+
+1. the exact parent-key execution is admitted under the declared execution
+   budget; and
+2. the relation-delta receipt survives commit.
+
+The current 8,206/8,192 replay fails the first condition. The previous rolled-back
+run also fails the second condition. The correct status is therefore:
+**migration 209 structurally live; runtime certification still pending**.
+
+### ZKP O/R/C/S/L/P/G/F
+
+- **O — objective:** certify the active parent reducer only after exact
+  resource admission and durable relation-delta evidence.
+- **R — reuse:** reuse `BoundedInterfaceSketch`,
+  `DeltaNativeParentRuntimeBridgeExact`, `RelationDeltaReconciliationExact`,
+  and `AuthorityNonPromotionCore`.
+- **C — construction:** bind observed parent key demand to configured capacity.
+  Reject 8,206 under 8,192. Require a persisted reconciliation receipt.
+- **S — safety:** fail closed. Do not truncate semantic keys. Do not treat a
+  larger execution budget as semantic authority. Do not treat rollback as
+  certification.
+- **L — lane:** keep exact-work admission separate from relation mutation
+  ownership. Migration 209 remains the single candidate-mutation authority.
+- **P — preconditions:** migration 209 is structurally active; key demand and
+  configured capacity are explicit; the database transaction boundary is
+  observable.
+- **G — governance and invariants:** semantic cardinality, execution policy,
+  runtime evidence, empirical evidence, theorem authority, and legal authority
+  remain distinct. ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF,
+  Six Sigma, and C4/PlantUML are process lenses only.
+- **F — postconditions and verification:** an admitted run with a persisted
+  conservation receipt may certify the runtime path. A rejected or rolled-back
+  run cannot. The controlled second replay should preserve logical inspection
+  while physical mutations fall to zero when state is unchanged.
+
+No new C4 or PlantUML topology is required for this formalisation. The runtime
+topology did not change. Only the admission and certification contract became
+explicit.
