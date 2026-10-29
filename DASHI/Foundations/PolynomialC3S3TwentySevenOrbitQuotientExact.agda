@@ -17,6 +17,8 @@ import DASHI.Foundations.TernaryEndomorphismS3ActionLawsExact as ActionLaws
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitRefinementExact as Act
+import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact as FreePhase
+open import Data.Empty using (⊥)
 
 Code27 : Set
 Code27 = Tower.LevelTwoCode
@@ -558,3 +560,18 @@ everyReflectionInvariantFieldDescends f invariant o
 -- End-to-end field descent is now the composition of these two
 -- constructive quotient universal properties. No numeric bijection,
 -- arbitrary-field averaging, or function extensionality postulate.
+
+-- NO-GO: same 27 points do not make their C3 actions equivariantly
+-- interchangeable. Conjugation fixes the identity endomorphism,
+-- while existing free output-phase rotation has NO fixed code.
+noEquivariantMapFromConjugationToFreeOutputPhase :
+  (f : Code27 → Code27) →
+  ((x : Code27) →
+    f (Act.cycleCode x) ≡ FreePhase.rotateOutputCode (f x)) →
+  ⊥
+noEquivariantMapFromConjugationToFreeOutputPhase f equivariance =
+  FreePhase.rotateOutputCodeHasNoFixedPoint
+    (f (Shape.permutationCode Shape.permIdentity))
+    (trans
+      (sym (equivariance (Shape.permutationCode Shape.permIdentity)))
+      (cong f Act.fixedIdentity))
