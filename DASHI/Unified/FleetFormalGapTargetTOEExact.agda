@@ -10,6 +10,10 @@ open import Data.Empty using (⊥)
 import DASHI.Interop.PNFSpectralCoordinateRebuildability as Rebuild
 import DASHI.Interop.PNFSpectralNumericABICore as Numeric
 import DASHI.Interop.PNFResidualFieldInvariants as Residual
+import DASHI.Interop.WorldEigenResidualStratification as Stratification
+import DASHI.Interop.HierarchicalSpectralParetoExact as Hierarchical
+import DASHI.Interop.SublinearTopicConductorCostExact as Conductor
+import DASHI.Interop.CombinatorialMaxCutPhysicsAlignmentExact as MaxCut
 import DASHI.Planning.PlanningPNFClaimBoundaryExact as Planning
 import DASHI.Promotion.ObligationIndex as Obligation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
@@ -190,6 +194,85 @@ fleetResidualInvariantReceipt :
   Residual.PNFResidualFieldInvariantReceipt
 fleetResidualInvariantReceipt =
   Residual.canonicalPNFResidualFieldInvariantReceipt
+
+
+------------------------------------------------------------------------
+-- AO fleet discriminator / full-concurrency / combinatorial Max Cut surface.
+------------------------------------------------------------------------
+
+fleetAOSpectralStratificationBoundary :
+  Stratification.AOSpectralStratificationBoundary
+fleetAOSpectralStratificationBoundary =
+  Stratification.canonicalAOSpectralStratificationBoundary
+
+fleetTokenNoiseDoesNotCreateTopic :
+  Stratification.tokenNoiseCanCreateTopic
+    fleetAOSpectralStratificationBoundary
+  ≡ false
+fleetTokenNoiseDoesNotCreateTopic =
+  Stratification.tokenNoiseDoesNotCreateTopic
+
+fleetHierarchicalSpectralParetoBoundary :
+  Hierarchical.HierarchicalSpectralParetoBoundary
+fleetHierarchicalSpectralParetoBoundary =
+  Hierarchical.canonicalHierarchicalSpectralParetoBoundary
+
+fleetParallelDispatchRequiresNoTypedMeet :
+  Hierarchical.parallelDispatchRequiresNoTypedMeet
+    fleetHierarchicalSpectralParetoBoundary
+  ≡ true
+fleetParallelDispatchRequiresNoTypedMeet =
+  Hierarchical.parallelDispatchRequiresNoTypedMeetIsTrue
+    fleetHierarchicalSpectralParetoBoundary
+
+fleetSublinearConductorBoundary :
+  Conductor.DynamicConductorBoundary
+fleetSublinearConductorBoundary =
+  Conductor.canonicalDynamicConductorBoundary
+
+fleetTwentyWorkerConcurrencyBoundary :
+  Conductor.TwentyWorkerConcurrencyBoundary
+fleetTwentyWorkerConcurrencyBoundary =
+  Conductor.canonicalTwentyWorkerConcurrencyBoundary
+
+fleetWorkerCapacityIsTwenty :
+  Conductor.capacity fleetTwentyWorkerConcurrencyBoundary ≡ 20
+fleetWorkerCapacityIsTwenty =
+  Conductor.capacityIsTwenty fleetTwentyWorkerConcurrencyBoundary
+
+fleetSerialModuloEightIsNotFullConcurrency :
+  Conductor.serialModuloEightIsAcceptedAsTwentyWorkerSchedule
+    fleetTwentyWorkerConcurrencyBoundary
+  ≡ false
+fleetSerialModuloEightIsNotFullConcurrency =
+  Conductor.serialModuloEightIsAcceptedAsTwentyWorkerScheduleIsFalse
+    fleetTwentyWorkerConcurrencyBoundary
+
+fleetCombinatorialMaxCutPhysicsBoundary :
+  MaxCut.CombinatorialMaxCutPhysicsBoundary
+fleetCombinatorialMaxCutPhysicsBoundary =
+  MaxCut.canonicalCombinatorialMaxCutPhysicsBoundary
+
+fleetMaxCutDoesNotPromoteYangMills :
+  MaxCut.graphCutCreatesYangMillsEquation
+    fleetCombinatorialMaxCutPhysicsBoundary
+  ≡ false
+fleetMaxCutDoesNotPromoteYangMills =
+  MaxCut.maxCutDoesNotPromoteYangMills
+
+fleetMaxCutDoesNotPromoteNavierStokes :
+  MaxCut.graphCutCreatesNavierStokesEstimate
+    fleetCombinatorialMaxCutPhysicsBoundary
+  ≡ false
+fleetMaxCutDoesNotPromoteNavierStokes =
+  MaxCut.maxCutDoesNotPromoteNavierStokes
+
+fleetSDPReceiptDoesNotCreatePhysicsTheorem :
+  MaxCut.sdpReceiptCreatesPhysicsTheorem
+    fleetCombinatorialMaxCutPhysicsBoundary
+  ≡ false
+fleetSDPReceiptDoesNotCreatePhysicsTheorem =
+  MaxCut.sdpReceiptDoesNotCreatePhysicsTheorem
 
 fleetPlanningBoundary :
   Planning.PNFPlanningAdapterBoundary

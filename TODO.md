@@ -1,3 +1,26 @@
+
+
+## AO Fleet max-cut convergence — 2026-10-29
+
+Golden Agda is authoritative.
+
+- [x] Normalize donor PR #1415 world/macro/sub-eigen/fibre types onto current master.
+- [x] Extend the hierarchy to exact eigenspace / primary topic / subtopic / fibre / goal levels.
+- [x] Represent only K = 50 or K = 100 as supported spectral truncation choices.
+- [x] Require an MP basis witness to carry covariance/eigenvalue/bulk-edge/orthonormality evidence without hidden floating-point assumptions.
+- [x] Reject hex literals, pointer-like memory addresses, raw UI tokens, and raw DOM tokens before topic admission.
+- [x] Normalize donor PR #1416 threshold/Pareto/noTypedMeet machinery onto current master.
+- [x] Normalize donor PR #1417 conductor width machinery onto current master.
+- [x] Add a total Fin 20 schedule with all slots occupied.
+- [x] Require every scheduled goal to be unblocked and Pareto eligible.
+- [x] Require pairwise noTypedMeet evidence for every two distinct worker slots.
+- [x] Add a finite combinatorial Max Cut owner with vertex partition, crossing-edge, discrete Laplacian, and GW/SDP receipt surfaces.
+- [x] Reuse existing YM gauge/Hodge commutator and NS exact commutator owners through explicit non-promoting adapters.
+- [x] Wire new owners through Interop and Fleet TOE aggregates.
+- [x] Mirror the golden public contract in dashi_lean4.
+- [x] Implement executable discriminator tests in dashiBRAIN.
+- [ ] Verify zero postulates, zero holes, zero TERMINATING/NON_TERMINATING, zero NO_POSITIVITY_CHECK, and zero ESD edits.
+- [ ] Append changelogs only after code and tests are in place.
 # FOR TODO GO TO '# TODO'
 
 Current NS Gate 1 / Gate 2 roadmap note for `2026-07-02`:
@@ -17281,3 +17304,6 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+- [x] Require the MP covariance witness to identify Sigma with the empirical (1/M) A A^T producer.
+- [x] Require distinct worker slots to carry distinct goals.
