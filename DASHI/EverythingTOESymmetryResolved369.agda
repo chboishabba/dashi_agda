@@ -9,6 +9,7 @@ import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObse
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
+import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact as PlantNutrientTransport
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -1524,3 +1525,44 @@ toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+
+------------------------------------------------------------------------
+-- Plant nutrient transport and spatial sentinel bioassay.
+--
+-- The Environment owner remains theorem authority. The TOE only exposes its
+-- exact boundary and non-promotion proof.
+------------------------------------------------------------------------
+
+toePlantNutrientTransportBoundary :
+  PlantNutrientTransport.SoilMoistureNutrientTransportBoundary
+toePlantNutrientTransportBoundary =
+  PlantNutrientTransport.canonicalSoilMoistureNutrientTransportBoundary
+
+toePlantPhenotypeDoesNotIdentifyUniqueChemicalCause :
+  PlantNutrientTransport.phenotypeAloneIdentifiesUniqueChemicalCause
+    PlantNutrientTransport.canonicalSoilMoistureNutrientTransportBoundary
+  ≡ false
+toePlantPhenotypeDoesNotIdentifyUniqueChemicalCause =
+  PlantNutrientTransport.plantPhenotypeDoesNotIdentifyUniqueChemicalCause
+
+toeInterveinalChlorosisUniqueCausePromotionImpossible :
+  PlantNutrientTransport.UniqueCausePromotion
+    PlantNutrientTransport.interveinalChlorosis
+  → ⊥
+toeInterveinalChlorosisUniqueCausePromotionImpossible =
+  PlantNutrientTransport.interveinalChlorosisUniqueCausePromotionImpossible
+
+toePlantNutrientTransportZKPFrame : ParetoSnowballTOE.TOEZKPFrame
+toePlantNutrientTransportZKPFrame =
+  ParetoSnowballTOE.toe-zkp-frame
+    "formalize soil-moisture nutrient transport and spatial sentinel bioassay without promoting symptoms to a unique cause"
+    "reuse root-soil ion-water, whole-plant hydraulic-carbon, LES, PNP, chemistry, conservation and existing TOE non-promotion owners"
+    "extend the canonical root-soil physiology owner and expose exact aliases through the TOE"
+    "moisture changes transport and availability; one phenotype can remain compatible with distinct causes"
+    "one disjoint plant nutrient transport normalization lane"
+    "same-species spatial observations need recorded controls, moisture, geometry and source history before causal promotion"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma and C4/PlantUML remain process lenses only"
+    "the TOE exposes the moisture boundary and blocks unique-cause promotion from interveinal chlorosis alone"
+    "GitHub reuse search, exact-owner read-back, trust-escape scan, ESD mutation scan and Agda kernel check"
+    false false false false
