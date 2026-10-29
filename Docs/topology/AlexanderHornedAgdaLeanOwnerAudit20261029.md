@@ -61,3 +61,22 @@ executed in a byte-matched local file, and passed. New Agda declarations
 are source-written; **no Agda compiler/kernel receipt** and no CI.
 Existing signed-permutation obstruction, external-sector C3 action,
 and exact three-armed group conditional theorem remain separately owned.
+
+
+### Modular fixed-space discriminator, same Agda owner
+
+On further inspection the existing core
+\`DASHI.Core.FiniteC3OrbitStabilizerExact.agda\` supplies the literal
+three-element group \`C3\` and \`groupElements\`; the native
+\`AlexanderHornedNativeTernaryTrialectic27ChartExact.agda\` supplies
+a different, already owned 27-cell **chart**, not the exponent-vector
+representation of \(H_1(F_3;\mathbb F_3)\). The new
+\`NielsenMod3PermutationBarrier\` within the **existing** boundary
+module uses the former group carrier and keeps the chart's semantics
+independent. The literal three-cycle and nonlinear peripheral Nielsen
+action have respective mod-three fixed-space counts **3 and 9**,
+so they cannot be conjugate by any \(GL_3(\mathbb Z)\) basis change.
+They nonetheless share characteristic polynomial \(t^3-1\).
+This is a precise non-promotion boundary, not a cross-domain 3/9/27
+identification. No geometric G2–G6 certificate, Agda kernel or Lean
+kernel success follows.
