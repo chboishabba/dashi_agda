@@ -338,7 +338,7 @@ adaptive real schedule J_real=(t/alpha)^4:
   -- source-written for 0<alpha<=1
 ```
 
-Taking `alpha=|a|` matches the horizontal-square scale.  A second domain-neutral Lean theorem now proves that quarter-period crossing and arbitrarily sharp far accuracy are asymptotically compatible: if `Lambda>0`, `epsilon>0`, and `far(J)->0`, then some natural `J>=1` simultaneously has `pi/2 < J*Lambda` and `far(J)<epsilon`.  Literal far-shell instantiation and exact final-carrier cutoff transport remain open.
+Taking `alpha=|a|` matches the horizontal-square scale. A second domain-neutral Lean theorem proves that quarter-period crossing and arbitrarily sharp far accuracy are asymptotically compatible. This does **not** imply compatibility with the centered near-sign theorem. The centered near-sign theorem needs `J*Lambda <= pi/2`, while the crossing selector gives `pi/2 < J*Lambda`. The new Lean no-go formalizes that incompatibility. On the fixed canonical support `Lambda_t = 9*pi/(4*t)`, the near-sign premise forces `J <= 2*t/9`. Therefore the direct weld `adaptive large cutoff -> centered finite-near sign` is pruned. Literal far-shell instantiation and exact final-carrier cutoff transport remain open.
 
 Gamma status is also sharper.  The exact vendored
 
@@ -807,3 +807,120 @@ global centered complement sign        OPEN
 Gamma centered sign / cancellation     OPEN
 own-a^2 correction alternative         OPEN
 ```
+
+
+## RH adaptive-cutoff / near-sign recut — 2026-10-29
+
+This recut synchronizes the Lean implementation with the Agda golden frontier.
+
+The Lean branch owns three separate facts.
+
+- The displacement-adaptive far atom can retain the horizontal-square scale.
+- A natural cutoff can cross the quarter-period threshold while making a generic far function small.
+- That crossing cutoff cannot satisfy the centered near-sign premise on the same fixed support.
+
+The third fact prevents an invalid composition of the first two facts with the centered finite-near sign theorem.
+
+### Preconditions
+
+- The final RH carrier remains the literal universal even-cone / pole-quotient carrier.
+- The fixed canonical support is the same support used by the centered near-sign theorem.
+- The centered near-sign theorem keeps the premise `J*Lambda <= pi/2`.
+- The generic crossing selector keeps the conclusion `pi/2 < J*Lambda`.
+- Lean proof terms remain Lean proof terms until a separate Agda proof or checked transport exists.
+
+### Invariants
+
+- Search priority does not create proof authority.
+- Pareto priority does not create theorem truth.
+- Snowball traversal does not create same-object identity.
+- Ibrahim provenance does not create a run receipt.
+- A source-written Lean theorem does not become an Agda kernel theorem by import metadata.
+- The reflection-pair target signal and the final signed complement stay on their literal carriers.
+- ESD surfaces remain import-only.
+
+### Postcondition
+
+The fixed-support direct weld is pruned.
+
+The live high analytic leaf must do one of three things.
+
+1. Preserve an explicit horizontal-square factor in the literal residual while remaining inside the cosine-sign window.
+2. Make the support depend on horizontal displacement strongly enough that the selected large cutoff still stays inside the cosine-sign window.
+3. Prove additional signed cancellation after the first cosine sign change.
+
+The first and third options remain preferred because they preserve the existing final carrier.
+
+### O / R / C / S / L / P / G / F
+
+| Field | Normalized value |
+|---|---|
+| O | Isolate the smallest unpaid high RH analytic cut on the literal final carrier. |
+| R | Reuse the adaptive far donor, centered near-sign donor, reflection-pair signal, and current R2 frontier. |
+| C | One fixed-support cutoff cannot satisfy both crossing and near-sign premises. |
+| S | Keep taper, Off, Gamma, pole, cluster, and proof-authority semantics separate. |
+| L | Prefer signed whole-response or horizontal-square-preserving estimates over absolute far magnitude. |
+| P | Require explicit support, cutoff, same-carrier, sign, and proof-authority preconditions. |
+| G | Preserve max-cut, Pareto, snowball, Ibrahim, attribution, and non-promotion controls. |
+| F | Close only with a literal residual theorem, a justified support rescaling, or a signed post-quarter-period cancellation theorem. |
+
+### C4 / PlantUML view
+
+```plantuml
+@startuml
+title RH adaptive cutoff / centered near-sign max-cut
+component "Lean adaptive far atom" as Far
+component "Lean crossing selector" as Crossing
+component "Lean centered near-sign theorem" as NearSign
+component "Agda RH donor boundary" as AgdaBoundary
+component "Riemann G2 current frontier" as Frontier
+component "EverythingTOESymmetryResolved369" as TOE
+component "Unifier" as Unifier
+component "Unified.Everything" as Unified
+
+Far --> AgdaBoundary : source receipt
+Crossing --> AgdaBoundary : source receipt
+NearSign --> AgdaBoundary : incompatible fixed-support premise
+AgdaBoundary --> Frontier : normalized max-cut
+Frontier --> TOE
+AgdaBoundary --> Unifier
+AgdaBoundary --> Unified
+@enduml
+```
+
+### Control normalization
+
+The implementation uses one canonical theorem owner for each claim. This matches the repository's ISO 9000-style single-owner quality rule.
+
+The ZKP frame records objective, requirement, constraint, state, logic, preconditions, governance, and finish condition. This supports the repository's ISO 42001 and NIST AI RMF evidence boundary.
+
+The proof-authority firewall preserves ISO 27001 and ISO 27701 separation between source metadata and trusted proof state.
+
+The fail-closed no-promotion rules preserve the repository's ISO 23894 risk treatment.
+
+The direct, one-thought-per-line status surface preserves the repository's ISO 9241 usability rule.
+
+The Pareto recut uses a Six Sigma defect view: the invalid composition is the defect, the fixed-support premise pair is the cause, and the three live repair classes are the controlled alternatives.
+
+### Disjoint nonblocking lanes
+
+- Lane A owns Lean-to-Agda source receipt synchronization.
+- Lane B owns the literal signed whole-complement or horizontal-square residual theorem.
+- Lane C owns any displacement-dependent support construction.
+- Lane D owns deterministic trust scans and exact-head kernel receipts.
+
+No lane may promote another lane's source status into theorem authority.
+
+### Attribution and evidence class
+
+The mathematical Riemann explicit-formula and zero-symmetry sources retain their historical attribution.
+
+The current Lean source is repository-authored implementation evidence.
+
+The Agda files are the golden status and proof-boundary owners.
+
+Meta-introspector repositories remain provenance and tooling sources only.
+
+The current tranche is source-written and repository-wired.
+
+No fresh Agda kernel receipt is claimed by this document.
