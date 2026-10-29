@@ -91,6 +91,36 @@ record MillenniumLeanAssistReceipt : Set where
     hodgeCP1CellularH2Source :
       String
 
+    hodgeCP1SingularTransportSource :
+      String
+
+    bsdLocalPolynomialSameObjectSource :
+      String
+
+    bsdLocalEulerFactorSameObjectSource :
+      String
+
+    bsdActualLocalPointGroupSource :
+      String
+
+    bsdLocalKummerBoundaryCasesSource :
+      String
+
+    bsdLocalKummerSecantSource :
+      String
+
+    bsdLocalKummerTangentSource :
+      String
+
+    bsdLocalKummerSecantDispatchSource :
+      String
+
+    bsdLocalKummerTangentDispatchSource :
+      String
+
+    bsdGlobalPrimePlaceWeldSource :
+      String
+
     hodgeCP1QuotientSourcePresent :
       Bool
 
@@ -157,6 +187,36 @@ record MillenniumLeanAssistReceipt : Set where
     hodgePointCellularGeneratorSourcePresent :
       Bool
 
+    hodgeCP1SingularTransportSourcePresent :
+      Bool
+
+    bsdLocalPolynomialSameObjectSourcePresent :
+      Bool
+
+    bsdLocalEulerFactorSameObjectSourcePresent :
+      Bool
+
+    bsdActualLocalPointGroupSourcePresent :
+      Bool
+
+    bsdLocalKummerBoundaryCasesSourcePresent :
+      Bool
+
+    bsdLocalKummerSecantSourcePresent :
+      Bool
+
+    bsdLocalKummerTangentSourcePresent :
+      Bool
+
+    bsdLocalKummerSecantDispatchSourcePresent :
+      Bool
+
+    bsdLocalKummerTangentDispatchSourcePresent :
+      Bool
+
+    bsdGlobalPrimePlaceWeldSourcePresent :
+      Bool
+
     sourcesRootedInSynthesis :
       Bool
 
@@ -178,7 +238,7 @@ currentMillenniumLeanAssistReceipt =
     "chboishabba/dashi_lean4"
     "agent/millennium-three-lane-lean-assist"
     "#10"
-    "196c1041eea4f5a62c4d99d8f6d0fd149a6c86b5"
+    "3dcebd8d7cac1211a49d17c376b4c1b3b15fea2f"
     "leanprover/lean4:v4.28.0"
     "mathlib v4.28.0"
     "Synthesis/MillenniumHodgeCP1Quotient.lean"
@@ -195,6 +255,26 @@ currentMillenniumLeanAssistReceipt =
     "Synthesis/MillenniumBSDTotalLocalKummer.lean"
     "Synthesis/MillenniumBSDMathlibLFunctionWeld.lean"
     "Synthesis/MillenniumHodgeCP1CellularH2.lean"
+    "Synthesis/MillenniumHodgeCP1SingularTransport.lean"
+    "Synthesis/MillenniumBSDLocalPolynomialSameObject.lean"
+    "Synthesis/MillenniumBSDLocalEulerFactorSameObject.lean"
+    "Synthesis/MillenniumBSDActualLocalPointGroup.lean"
+    "Synthesis/MillenniumBSDLocalKummerBoundaryCases.lean"
+    "Synthesis/MillenniumBSDLocalKummerSecant.lean"
+    "Synthesis/MillenniumBSDLocalKummerTangent.lean"
+    "Synthesis/MillenniumBSDLocalKummerSecantDispatch.lean"
+    "Synthesis/MillenniumBSDLocalKummerTangentDispatch.lean"
+    "Synthesis/MillenniumBSDGlobalPrimePlaceWeld.lean"
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
     true
     true
     true
