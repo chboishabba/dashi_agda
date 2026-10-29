@@ -110,17 +110,17 @@ Reuse existing finite Laplacian, Yang–Mills commutator, and Navier–Stokes co
 
 ### New acceptance gates
 
-- [ ] Golden Agda defines all five scale levels.
-- [ ] Golden Agda records K = 50 and K = 100 explicitly.
-- [ ] Golden Agda defines a typed token-admission firewall.
-- [ ] A full schedule is total over twenty worker slots.
-- [ ] Every scheduled goal is unblocked.
-- [ ] Every scheduled goal is Pareto eligible.
-- [ ] Every distinct scheduled pair has noTypedMeet evidence.
-- [ ] Finite Max Cut has explicit partition, crossing-edge, Laplacian, and SDP-receipt interfaces.
-- [ ] Max Cut operator reuse does not promote a Yang–Mills or Navier–Stokes same-object theorem.
-- [ ] Lean mirrors the golden public contract.
-- [ ] dashiBRAIN tests the concrete token filter, stratifier, full-width scheduler, and finite cut diagnostics.
+- [x] Golden Agda defines all five scale levels.
+- [x] Golden Agda records K = 50 and K = 100 explicitly.
+- [x] Golden Agda defines a typed token-admission firewall.
+- [x] A full schedule is total over twenty worker slots.
+- [x] Every scheduled goal is unblocked.
+- [x] Every scheduled goal is Pareto eligible.
+- [x] Every distinct scheduled pair has noTypedMeet evidence.
+- [x] Finite Max Cut has explicit partition, crossing-edge, Laplacian, and SDP-receipt interfaces.
+- [x] Max Cut operator reuse does not promote a Yang–Mills or Navier–Stokes same-object theorem.
+- [x] Lean mirrors the golden public contract.
+- [x] dashiBRAIN tests the concrete token filter, stratifier, full-width scheduler, and finite cut diagnostics.
 
 ### Live non-promotion boundary
 
