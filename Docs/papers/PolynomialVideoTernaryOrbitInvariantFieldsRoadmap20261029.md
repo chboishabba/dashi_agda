@@ -345,3 +345,41 @@ The source module contains no `postulate`, `sorry`, or `{!!}` intentionally; ver
 | O52 | Typecheck three TOE import roots, reconcile any actual proof failures, and record first verified universal Q27 module statement without promoting other Galois/wild/Monster objects | OPEN |
 
 **Stop rule:** Do not declare the general video's analytic root-monodromy, quintic Galois/radicals, Spin topology or #1244 genus-one wild geometry discharged by this finite Q27 theorem. Preserve original mathematical authors, original repository owners, source code contributions, exact independent computation, and missing kernel receipt as separate statuses. No protected ESD surfaces were edited; original Ibrahim Monster 3B attribution remains untouched.
+
+## 29 October 2026 further reuse-first source audit: real Agda + Lean + translator owners
+
+This continuation deliberately inspected **source trees**, not only GitHub PR metadata:
+- Exact current PR #1414 head and latest #1244/#1407/new adjacent PRs; source listings from `chboishabba/dashi_agda` (including `DASHI/Foundations` and `tools/agda_preflight/agda_preflight`).
+- `chboishabba/dashi_lean4`: actual `AgdaMirror/QuotientSetoidSurface.lean`, `AgdaMirror/FibreAveraging.lean`, `AgdaMirror/ProjectionVsInvertible.lean`, `AgdaMirror/Base369.lean`. They own native Lean quotient/pullback, rational finite-fibre averaging, and idempotent/invertible distinctions. These are useful **proximal prior formal results**, not yet a compiler-verified Lean theorem specifically identifying this #1414 27-dimensional S3 representation.
+- `chboishabba/agda2lean` real `ROADMAP.md`: typed IR, independent kernel proof checking, exact-dependency provenance, and a fail-closed mapping registry. This is a translator/proof boundary, NOT a permit to promote Agda source-written text to kernel-checked Lean evidence.
+- EXISTING Agda rational C2 owner `DASHI.Biology.MoonshineOrbifoldSectorProjectorExact`: rational pair, positive and negative sector projectors, reconstruction, parity and positive/negative idempotence. Its original FLM / Dong-Li-Mason / Lepowsky-Li attribution belongs there. The already-created #1414 adapter `PolynomialC3S3RationalCharacterAlgebraExact` was discovered by inspecting actual repository filenames, NOT by reasoning solely from #1414 PR summaries. We EXTENDED this existing adapter instead of duplicating its field/ring lemmas.
+
+### New owner-preserving integration
+
+`PolynomialC3S3RationalCharacterAlgebraExact` now imports the actual six-element polynomial parity action `PolynomialVandermondeOrbitParityIntertwinerExact` and source-writes:
+- `s3OnRationalField`: the **existing** S3→C2 action on genuine eleven C3 conjugacy orbits, now pulled back on rational-valued eleven-orbit fields.
+- `positiveIntertwinesS3Parity`: all six S3 permutations fix the original borrowed rational positive projection (3 even + 3 reflection cases).
+- `negativeIntertwinesS3Parity`: the corresponding negative projector transforms through the exact **same rational sign character** used by the video cubic Vandermonde.
+- `s3OnRationalFieldFactorsThroughParity`: direct six-case factorization through original `S3/C3≅C2`, with no identification between the rational polynomial root space and the eleven function-table quotient.
+- All three TOE roots now import the **thin existing rational projector adapter**, without moving or rewriting the original Moonshine-owner mathematics. Original Ibrahim Monster 3B remains separate.
+
+### Actual defect repaired in original O49 rational matrix owner
+
+A source inspection of `PolynomialS3RationalBlockFieldIsomorphismExact.agda` found 176 theorem-call sites with unparenthesized `Ring.solve-∀ f Small.pair0 ...`-style arguments. This is an **Agda application parsing/elaboration risk**: a selector expression must be a single argument, e.g. `Ring.solve-∀ (f Small.pair0) (f Small.pair1)`. All single-field and two-field arguments in the ORIGINAL owner were repaired in-place; not a second generated module. The source contains 176 actual `Ring.solve-∀` proof call lines plus one textual comment (177 matches), and source readback now finds **zero** unparenthesized calls in the known pattern. Agda kernel compilation is STILL NOT RUN, so no stronger claim is made.
+
+The existing `scripts/check_polynomial_s3_rational_orbit_blocks_20261029.py` was also EXTENDED in-place to reject malformed rational-solver calls, ensure the original rational projector donor is actually imported by the adapter, count all 18 parity clauses, and assert all three TOE root imports. The Python audit was source-read back and its regex corrected; the **checked-out script has not been executed** (no GitHub clone access in the container).
+
+**Independently executed exact finite evidence:** 25 deterministic rational-field sample assignments on eleven orbit slots, times 11 slots times six permutations, gave 1650 integer-scaled positive/negative reconstruction and S3-sign equations PASS. This is actual finite computation, not an Agda proof receipt or same-object Monster equivalence.
+
+| ID | Source-led obligation | Status |
+|---|---|---|
+| O53 | Recover and reuse actual in-repo Moonshine rational C2 projector theorem owner; connect to 11 orbit field's S3 parity, including the original Vandermonde sign | SOURCE-WRITTEN IN EXISTING ADAPTER, 18 cases source-readback, 1650 sample equations PASS; kernel pending |
+| O54 | Repair malformed `Ring.solve-∀` application syntax in actual O49 rational 2/3/6 matrix field proof without duplicating owner | FIX COMMITTED IN PLACE; 176 call lines corrected; Agda elaboration still pending |
+| O55 | Extend exact source-verifier to check rational solver syntax, donor reuse and three TOE roots | SOURCE WRITTEN; local GitHub readback PASS; checked-out Python script NOT RUN |
+| O56 | Compare genuine `dashi_lean4` mirror/proximal statements and `agda2lean` IR promises against Agda proof ownership; require independent kernels before cross-language theorem promotion | SOURCE INSPECTION DONE; Lean/Agda combined checked theorem NOT CLAIMED |
+
+### Remaining first hard wall
+
+An Agda/stdlib installation and an actual checkout at the current PR #1414 SHA are unavailable in this container, so `agda`, `dashi-agda-preflight related_symbols/discover/round_lineage`, and the committed scripts cannot be truthfully reported as executed here. The developer-facing next step is **Agda kernel/checker acceptance of actual exact-head imported sources**, followed by native Lean reconstruction only where the current proof translates faithfully. No CI wiring is required; the independent owner boundaries remain unchanged.
+
+Higher-level open mathematics: actual complex coefficient root-lifting and braid fundamental groups; generic quintic `S5` Galois identification / radical solvability theorem; continuous Spin cover; the independent Hatcher exterior meridian theorem. These cannot be obtained from the finite 27-coordinate rational representation by numerical analogy or matching group character values.
