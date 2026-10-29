@@ -23,13 +23,14 @@ open import Data.Product using (_,_)
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
 import DASHI.Physics.Closure.R2P281PlaneHermitianFiveOrbitConvolutionExact as Plane
+import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as Ant
 import DASHI.Physics.Closure.R2P227729OrbitWeighted365ConvolutionExact as Orbit
 import DASHI.Physics.Closure.R2P227729Orbit365PermutationReductionExact as Generic
 import DASHI.Physics.Closure.R2P227729Orbit365RankSortPermutationExact as Sort
 import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as Herm
 import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as C3
 
-planeRank : Herm.Ant.Plane9 → Nat
+planeRank : Ant.Plane9 → Nat
 planeRank (a , b) = 3 * I.modeRank a + I.modeRank b
 
 planeOrderedPairRank : Plane.PlanePair81 → Nat
