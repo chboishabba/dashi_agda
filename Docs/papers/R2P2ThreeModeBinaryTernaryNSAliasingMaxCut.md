@@ -538,3 +538,29 @@ Adjacent PR #1414 covers independent polynomial monodromy/S3-C3, and #1416/#1417
 **Only source-written:** new Agda C4 `Quad`, `CubeSignal64` inversion, 27->64 padding/roundtrip, sampled operator, inherited 729-pair Gaussian instantiation, and their projections in the three TOE roots. No checkout-pinned pytest execution, Agda type-check, or CI receipt was obtained. No changed ESD file, no new postulate, no allow-unsolved-metas, no termination/positivity bypass.
 
 **Remaining wall:** kernel certify the current new modules, then prove the one real sampled-versus-index Q(i) equality and canonical-pair permutation/sum law. Finite mathematical correctness, source-written terms, executed Python checks, certified Agda theorems, scientific source provenance, and calibrated physical observations remain separate verification grades.
+
+
+## 5g. 29 October 2026 — source-owned generic permutation closes all but the concrete 365 address lemma
+
+New reuse discovery: `DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact` already owns `uniqueMembershipEquivalenceToPermutation` for arbitrary finite lists. Its own lineage credits the original physical NS list-permutation closure, including `NSTriadKNPhysicalOutputFiberPermutationRound35Exact`. Reusing that owner, rather than duplicating permutation theory, is the Pareto/max-cut route.
+
+New source-written adapter `R2P227729Orbit365PermutationReductionExact.agda` defines `expandedCanonicalPairs` by expanding each of the 365 canonical ordered pairs into itself and its simultaneous-negative mate, except the unique fixed zero/zero pair. It contains:
+- The 729-entry length computation and generic list-map/concat fusion.
+- Pointwise `emitPairEqualsMapExpanded` from the **already inherited** reflected-event conjugation theorem; therefore the actual 365-product event stream equals the source-event mapping of the expanded 729 addresses.
+- Exact Q(omega) additive commutativity, associativity and zero identity, plus proof-relevant fold invariance under the original standard list-permutation relation.
+- The fully quantified **conditional** theorem `fullPairSumEqualsOrbitSumGivenPermutation`: if `pair729 ↭ expandedCanonicalPairs`, the original 729-product Hermitian output equals the 365-product/reused-conjugates output at **every** integer-frequency target for **every** pair of admissible Hermitian coefficient fields.
+- `specific365PermutationFromUniqueMembership`, which delegates the permutation to the source-owned generic theorem and makes its four premises explicit (original uniqueness, expanded uniqueness, both membership directions). These premises have **not** been promoted to unconditional Agda theorems.
+
+This splits the remaining finite work into narrow concrete proof obligations:
+```text
+(1) Unique.Unique pair729
+(2) Unique.Unique expandedCanonicalPairs
+(3) ∀ p, p ∈ pair729 → p ∈ expandedCanonicalPairs
+(4) ∀ p, p ∈ expandedCanonicalPairs → p ∈ pair729
+----------------------------------------------------------------------
+     pair729 ↭ expandedCanonicalPairs       [SOURCE GENERIC REUSE]
+     original Hermitian 729-fold ≡ orbit-365-fold  [NEW CONDITIONAL]
+```
+The independent exact Python enumeration confirms (1)–(4) as finite computational facts and shows the actual 729-address multisets agree; that is **not** an Agda kernel proof of those four propositions. Type-check the new module before treating its source-written conditional proofs as established. All three TOE roots now project its explicit conditional theorem, without falsely recording the missing input permutation as discharged.
+
+**The strongest next max-cut**, after kernel readback, is to use the already available dense 0..728 pair rank and generic finite list unique/membership lemmas to prove (1)–(4), then close the conditional proposition without introducing any postulate, meta escape or alternate 729 ontology. Independently, close `retainedSampledBilinear = fourGridGaussianIndexConvolutionAt` by distributivity and C4 tensor character orthogonality. Neither conclusion implies the original continuum NS analytic theorem, R2P2 calibration or any Monster/Ibrahim same-object representation.
