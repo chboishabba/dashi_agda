@@ -11,9 +11,14 @@ module DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact where
 --
 -- R. Reuse.
 -- NSABCDMaxCut20261007Exact owns the irreducible A/B/C/D programme split.
+-- NSClayFacingBPureAnalysisFrontier20261005Exact owns the current periodic-B
+-- physical R440 wall and keeps R823 frozen.
+-- NSHistoricalSignedExternalCommutatorSnowballLineageExact owns the historical
+-- signed Waleffe-to-commutator donor lineage and its non-promotion receipts.
 -- NSCanonicalClayResidualExact owns the canonical typed residual scheduler.
 -- NSClayDistanceFinalReceipt owns the later carrier-to-general structural gap.
 -- NSAuthorityConsistencyGuard owns the mixed-scope promotion guard.
+-- R736 remains imported for legacy compatibility only.
 --
 -- C. Construction.
 -- This module exports exact aliases and non-promotion theorems only.
@@ -21,6 +26,8 @@ module DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact where
 --
 -- S. Scope.
 -- A/B remain internal theorem-development lanes.
+-- The current B highest-information leaf is the literal physical R440 payment.
+-- The historical external-commutator chain and R736 are donor surfaces.
 -- C/D remain released-proof audit lanes.
 -- Carrier-structured completion does not imply general NS completion.
 -- No closed finite or modeled result promotes the Clay target.
@@ -55,6 +62,8 @@ import DASHI.Physics.Closure.NSClayDistanceFinalReceipt as Distance
 import DASHI.Physics.Closure.NSAuthorityConsistencyGuard as Guard
 import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as Roadmap
 import DASHI.Physics.Closure.NSClaySubmissionEligibilityRoadmapReceipt as Eligibility
+import DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact as BCurrent
+import DASHI.Physics.Closure.NSHistoricalSignedExternalCommutatorSnowballLineageExact as History
 import DASHI.Physics.Closure.NSTriadKNR650CurrentSharedWeightedWallRound736Exact as R736
 
 open Distance public using (NSClayDistanceFinalPromotion)
@@ -194,9 +203,139 @@ releasedHeadDoesNotRequireReopeningCoordinateAudit =
 
 
 ------------------------------------------------------------------------
--- Current periodic-B shared weighted wall.
+-- Current periodic-B authoritative wall.
 --
--- R736 is the preferred current periodic analytic max-cut.
+-- NSABCDMaxCut20261007Exact routes B to the pure-analysis frontier.
+-- That frontier names the literal physical R440 noncore/core payment as the
+-- highest-information B leaf.  Representation work is frozen.
+--
+-- The historical signed external-Waleffe/commutator chain remains a useful
+-- donor.  It is not the current preferred B leaf and does not promote Clay.
+------------------------------------------------------------------------
+
+currentPeriodicBHighestInformationIsPhysicalR440 : Bool
+currentPeriodicBHighestInformationIsPhysicalR440 =
+  BCurrent.b4ResearchLeafNowOnlyPhysicalR440Payment
+
+currentPeriodicB4PhysicalPaymentClosed : Bool
+currentPeriodicB4PhysicalPaymentClosed =
+  BCurrent.b4DefectRemainderClosed
+
+currentPeriodicB4FourMomentScalarClosed : Bool
+currentPeriodicB4FourMomentScalarClosed =
+  BCurrent.b4DefectR440FourMomentScalarClosed
+
+currentPeriodicB4ZeroPaddingAuditClosed : Bool
+currentPeriodicB4ZeroPaddingAuditClosed =
+  BCurrent.b4DefectR440ZeroPaddingAuditClosed
+
+currentPeriodicB1PhysicalProducerClosed : Bool
+currentPeriodicB1PhysicalProducerClosed =
+  BCurrent.b1PhysicalProducerClosed
+
+currentPeriodicB2PhysicalProducerClosed : Bool
+currentPeriodicB2PhysicalProducerClosed =
+  BCurrent.b2PhysicalProducerClosed
+
+currentPeriodicB3PhysicalProducerClosed : Bool
+currentPeriodicB3PhysicalProducerClosed =
+  BCurrent.b3PhysicalProducerClosed
+
+currentPeriodicBContinuationInputsClosed : Bool
+currentPeriodicBContinuationInputsClosed =
+  BCurrent.bContinuationPhysicalInputsClosed
+
+currentPeriodicBRepresentationProgrammeFrozen : Bool
+currentPeriodicBRepresentationProgrammeFrozen =
+  ABCD.bRepresentationProgrammeFrozen
+
+currentPeriodicBR823ShouldReopen : Bool
+currentPeriodicBR823ShouldReopen =
+  BCurrent.r823ShouldReopen
+
+historicalExternalSignedCommutatorRouteReachedPureCommutator : Bool
+historicalExternalSignedCommutatorRouteReachedPureCommutator =
+  History.historicalNestedInnerPureCommutatorExposed
+
+historicalExternalSignedCommutatorModernWeldAddsEstimate : Bool
+historicalExternalSignedCommutatorModernWeldAddsEstimate =
+  History.modernWeightedNestedWeldIntroducesNewEstimate
+
+historicalExternalSignedCommutatorRoutePromotesClay : Bool
+historicalExternalSignedCommutatorRoutePromotesClay =
+  History.historicalStructuralLineageAlonePromotesClay
+
+currentPeriodicBHighestInformationIsPhysicalR440IsTrue :
+  currentPeriodicBHighestInformationIsPhysicalR440 ≡ true
+currentPeriodicBHighestInformationIsPhysicalR440IsTrue =
+  BCurrent.b4ResearchLeafNowOnlyPhysicalR440PaymentIsTrue
+
+currentPeriodicB4PhysicalPaymentStillOpen :
+  currentPeriodicB4PhysicalPaymentClosed ≡ false
+currentPeriodicB4PhysicalPaymentStillOpen =
+  BCurrent.b4DefectRemainderClosedIsFalse
+
+currentPeriodicB4FourMomentScalarClosedIsTrue :
+  currentPeriodicB4FourMomentScalarClosed ≡ true
+currentPeriodicB4FourMomentScalarClosedIsTrue =
+  BCurrent.b4DefectR440FourMomentScalarClosedIsTrue
+
+currentPeriodicB4ZeroPaddingAuditClosedIsTrue :
+  currentPeriodicB4ZeroPaddingAuditClosed ≡ true
+currentPeriodicB4ZeroPaddingAuditClosedIsTrue =
+  BCurrent.b4DefectR440ZeroPaddingAuditClosedIsTrue
+
+currentPeriodicB1PhysicalProducerStillOpen :
+  currentPeriodicB1PhysicalProducerClosed ≡ false
+currentPeriodicB1PhysicalProducerStillOpen =
+  BCurrent.b1PhysicalProducerClosedIsFalse
+
+currentPeriodicB2PhysicalProducerStillOpen :
+  currentPeriodicB2PhysicalProducerClosed ≡ false
+currentPeriodicB2PhysicalProducerStillOpen =
+  BCurrent.b2PhysicalProducerClosedIsFalse
+
+currentPeriodicB3PhysicalProducerStillOpen :
+  currentPeriodicB3PhysicalProducerClosed ≡ false
+currentPeriodicB3PhysicalProducerStillOpen =
+  BCurrent.b3PhysicalProducerClosedIsFalse
+
+currentPeriodicBContinuationInputsStillOpen :
+  currentPeriodicBContinuationInputsClosed ≡ false
+currentPeriodicBContinuationInputsStillOpen =
+  BCurrent.bContinuationPhysicalInputsClosedIsFalse
+
+currentPeriodicBRepresentationProgrammeFrozenIsTrue :
+  currentPeriodicBRepresentationProgrammeFrozen ≡ true
+currentPeriodicBRepresentationProgrammeFrozenIsTrue =
+  ABCD.bRepresentationProgrammeFrozenIsTrue
+
+currentPeriodicBR823ShouldNotReopen :
+  currentPeriodicBR823ShouldReopen ≡ false
+currentPeriodicBR823ShouldNotReopen =
+  BCurrent.r823ShouldReopenIsFalse
+
+historicalExternalSignedCommutatorRouteReachedPureCommutatorIsTrue :
+  historicalExternalSignedCommutatorRouteReachedPureCommutator ≡ true
+historicalExternalSignedCommutatorRouteReachedPureCommutatorIsTrue =
+  History.historicalNestedInnerPureCommutatorExposedIsTrue
+
+historicalExternalSignedCommutatorModernWeldAddsNoEstimate :
+  historicalExternalSignedCommutatorModernWeldAddsEstimate ≡ false
+historicalExternalSignedCommutatorModernWeldAddsNoEstimate =
+  History.modernWeightedNestedWeldIntroducesNewEstimateIsFalse
+
+historicalExternalSignedCommutatorRouteDoesNotPromoteClay :
+  historicalExternalSignedCommutatorRoutePromotesClay ≡ false
+historicalExternalSignedCommutatorRouteDoesNotPromoteClay =
+  History.historicalStructuralLineageAlonePromotesClayIsFalse
+
+
+------------------------------------------------------------------------
+-- Legacy R736 compatibility surface.
+--
+-- R736 remains theorem-bearing historical provenance.  It is not the current
+-- authoritative B max-cut after NSABCDMaxCut20261007Exact.
 -- It supersedes older producer-coordinate cuts without changing theorem
 -- ownership or promotion status.
 ------------------------------------------------------------------------
@@ -400,19 +539,19 @@ canonicalNavierStokesClayFrontierTOEZKPFrame =
     { objective =
         "Normalize the canonical Navier-Stokes Clay frontier and exact non-promotion theorems into the DASHI TOE graph."
     ; reuseRule =
-        "Reuse the A/B/C/D max-cut, R736 shared weighted wall, canonical residual scheduler, final Clay-distance receipt, and authority guard before adding any adapter."
+        "Reuse the A/B/C/D max-cut and current B pure-analysis owner first. Retain R736 and the signed external-commutator chain as historical donors only. Reuse the canonical residual scheduler, final Clay-distance receipt, and authority guard before adding any adapter."
     ; constructionRule =
         "Expose exact owner aliases and theorem-level non-promotion only."
     ; scopeRule =
-        "Treat R736 as the preferred periodic-B analytic max-cut. Keep its two weighted leaves open. Keep A/B internal theorem development separate from released C/D audit and from carrier-structured completion."
+        "Treat the literal physical R440 noncore/core payment as the current highest-information periodic-B leaf. Keep B1/B2/B3 physical producers and continuation inputs explicit. Keep R736 and the signed external-commutator route historical. Keep A/B internal theorem development separate from released C/D audit and from carrier-structured completion."
     ; laneRule =
         "Use one Navier-Stokes normalization lane and keep ESD surfaces unchanged."
     ; preconditionRule =
-        "Require the canonical R736 owner, A/B/C/D max-cut, residual scheduler, Clay-distance receipt, authority guard, roadmap, and submission-eligibility owners to exist before normalization."
+        "Require the authoritative A/B/C/D max-cut, current B pure-analysis owner, historical signed external-commutator lineage, residual scheduler, Clay-distance receipt, authority guard, roadmap, and submission-eligibility owners to exist before normalization."
     ; invariantRule =
-        "Preserve theorem ownership. Preserve exactly two preferred R736 analytic leaves. Preserve the shared weighted/input-Laplacian carrier. Do not promote producer strategies, circular Q-plus-minus shortcuts, finite carriers, or released C/D audit facts into a Clay proof."
+        "Preserve theorem ownership. Preserve the literal physical R440 payment as the current highest-information B leaf. Preserve the open B1/B2/B3 producer and continuation leaves. Do not reopen R823. Do not promote the historical Waleffe/commutator chain, R736, producer strategies, finite carriers, or released C/D audit facts into a Clay proof."
     ; postconditionRule =
-        "Expose the R736 shared wall, both open leaves, barrier compiler, structural gap, and exact false promotion gates through TOE, Unifier, and Unified.Physics."
+        "Expose the current literal R440 B wall, open physical B producer leaves, historical donor/non-promotion receipts, structural gap, and exact false promotion gates through TOE, Unifier, and Unified.Physics. Retain the R736 aliases for compatibility only."
     ; governanceRule =
         "Preserve theorem ownership, source attribution, A/B/C/D lane separation, and failure-closed promotion."
     ; verificationRule =
