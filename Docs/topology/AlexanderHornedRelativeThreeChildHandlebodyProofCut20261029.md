@@ -292,3 +292,30 @@ is identified.
 Exact rational local audit PASSED for the linking
 matrix. This is NOT the Agda kernel, a certified
 3D PL triangulation or a physical acoustic experiment.
+
+## 2026-10-29 local-C3 symmetry: obstruction and constructive algebraic repair
+
+See [signed stabilizer](AlexanderHornedSignedMeridianStabilizer20261029.md)
+and [order-three Nielsen stabilizer](AlexanderHornedOrderThreePeripheralNielsen20261029.md).
+
+- Signed child-meridian permutations: exactly 4 / 48 preserve the unoriented
+  class of w=[a,b][b,c]. No signed three-cycle does so.
+- IMPORTANT QUALIFICATION: a **different**, non-signed-permutation automorphism
+  of order THREE exists. In Nielsen coordinates u=b^-1, v=c^-1 a, z=c:
+  phi(u)=v, phi(v)=v^-1u^-1, phi(z)=z. In original coordinates:
+  a->c a^-1 c b, b->a^-1 c, c->c.
+- Exact free-word audit establishes phi^3=id and phi(w) conjugate to w.
+  Thus the earlier signed-permutation no-go cannot be promoted to a
+  blanket local-C3 no-go in Aut(F3).
+- Geometric G2–G6 are STILL OPEN. Specific topological existence would
+  require a cap-relative supported map of the chosen actual complement,
+  embedded based peripheral surface, equivariant bonding inclusion,
+  compatible infinite wild stages and an exterior-group proof.
+- Neither algebraic order-three nor the general mapping-class surjection
+  implies an order-three cap-fixed geometric representative for this
+  specific 3D wild construction. External C3 root-sector permutation is
+  independently available and must remain distinct.
+
+Attribution remains Alexander/Hatcher, Nielsen and Hensel, original
+DASHI module owners and separate Ibrahim Monster 3B proof ownership.
+No ESD edits, kernel checks, CI or physical/Monster same-object promotion.
