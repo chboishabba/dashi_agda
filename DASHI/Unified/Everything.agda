@@ -1,4 +1,8 @@
 module DASHI.Unified.Everything where
+import DASHI.Trading.DashiTradeDreamOptionConeExact as DashiTradeDream
+import DASHI.Finance.DashiTradeFibreBridgeExact as DashiTradeFibre
+import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as DashiTradeLaw
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as AgdaFirstLegalRuntime
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -404,3 +408,30 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Golden dashiTRADE/legal convergence.
+------------------------------------------------------------------------
+
+unifiedDashiTradeZKPFrame : DashiTradeDream.DashiTradeZKPFrame
+unifiedDashiTradeZKPFrame = DashiTradeDream.canonicalDashiTradeZKPFrame
+
+unifiedDashiTradeDecisionInvariants : DashiTradeDream.DashiTradeDecisionInvariants
+unifiedDashiTradeDecisionInvariants =
+  DashiTradeDream.canonicalDashiTradeDecisionInvariants
+
+unifiedDashiTradeFinanceAuthorityBoundary :
+  DashiTradeFibre.ResidualToTradeAuthorityBoundary
+unifiedDashiTradeFinanceAuthorityBoundary =
+  DashiTradeFibre.canonicalResidualToTradeAuthorityBoundary
+
+unifiedDashiTradeComparativeBoundary :
+  DashiTradeLaw.DashiTradeComparativeBoundary
+unifiedDashiTradeComparativeBoundary =
+  DashiTradeLaw.canonicalDashiTradeComparativeBoundary
+
+unifiedAgdaFirstLegalRuntimeContract :
+  AgdaFirstLegalRuntime.AgdaFirstLegalRuntimeContract
+unifiedAgdaFirstLegalRuntimeContract =
+  AgdaFirstLegalRuntime.canonicalAgdaFirstLegalRuntimeContract
