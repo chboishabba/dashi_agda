@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Mathematics.CrossPollination.MillenniumThreeLaneContinuationValidation as MillenniumThreeLane
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -313,3 +314,14 @@ record DASHIUnificationAxiom : Set₁ where
 
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
+
+
+------------------------------------------------------------------------
+-- Golden Millennium three-lane consumer.
+-- Unifier consumes the contract. It does not become proof authority.
+------------------------------------------------------------------------
+
+millenniumThreeLaneContract :
+  MillenniumThreeLane.MillenniumThreeLaneTOEContract
+millenniumThreeLaneContract =
+  MillenniumThreeLane.canonicalMillenniumThreeLaneTOEContract
