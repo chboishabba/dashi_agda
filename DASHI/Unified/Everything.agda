@@ -404,3 +404,18 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Numeric PNF delta-fed projection aliases.
+------------------------------------------------------------------------
+
+unifiedPNFAnaphorSurfaceIdentityPromotionImpossible :
+  PNFHyperfabric.Anaphor.SurfaceSpellingIsWitnessIdentity → ⊥
+unifiedPNFAnaphorSurfaceIdentityPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorSurfaceIdentityPromotionImpossible
+
+unifiedPNFAnaphorCandidateResolutionPromotionImpossible :
+  PNFHyperfabric.Anaphor.CandidateEvidenceResolvesProjectedAnaphor → ⊥
+unifiedPNFAnaphorCandidateResolutionPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorCandidateResolutionPromotionImpossible
