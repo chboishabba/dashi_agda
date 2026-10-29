@@ -157,3 +157,27 @@ canonicalTextTest text = textTestResult (textTestCase text text) text refl
 canonicalTextTestMatches : (text : String) →
   TextTestResult.observedText (canonicalTextTest text) ≡ text
 canonicalTextTestMatches text = refl
+
+-- Worker 09: packaging an already witnessed test preserves its witness.
+-- It does not establish that a real test runner executed the test.
+record AssessedPackage : Set where
+  constructor assessedPackage
+  field
+    packageLabel : String
+    packagedResult : TextTestResult
+
+packageSatisfied : String → TextTestResult → AssessedPackage
+packageSatisfied label result = assessedPackage label result
+
+packagePreservesObserved : (label : String) (result : TextTestResult) →
+  TextTestResult.observedText
+    (AssessedPackage.packagedResult (packageSatisfied label result)) ≡
+  TextTestResult.observedText result
+packagePreservesObserved label result = refl
+
+packagePreservesExpected : (label : String) (result : TextTestResult) →
+  TextTestCase.expectedText
+    (TextTestResult.testCase
+      (AssessedPackage.packagedResult (packageSatisfied label result))) ≡
+  TextTestCase.expectedText (TextTestResult.testCase result)
+packagePreservesExpected label result = refl
