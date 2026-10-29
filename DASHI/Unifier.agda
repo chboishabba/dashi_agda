@@ -2123,3 +2123,30 @@ unifierFiveGrid63OrbitClasses =
 unifierActual729PositivePairOrbitCount :
   Pairs365Owner.countWhereL Pair365.positivePair Pairs365Owner.pair729 ≡ 365
 unifierActual729PositivePairOrbitCount = Pair365.actualPositivePairRepresentatives
+
+
+------------------------------------------------------------------------
+-- 365 canonical pair events: exact reflected contribution and counts.
+-- Global permutation/sum equivalence to all 729 ordered terms is open.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P227729OrbitWeighted365ConvolutionExact as OrbitWeighted365
+
+unifierOrbit365CanonicalPairCount :
+  Pairs365Owner.lengthL OrbitWeighted365.canonicalOrderedPairs ≡ 365
+unifierOrbit365CanonicalPairCount =
+  OrbitWeighted365.actual365CanonicalPairEntries
+
+unifierOrbit365EventCount :
+  (a b : HermitianSym729.Hermitian27) →
+  Pairs365Owner.lengthL (OrbitWeighted365.orbitWeightedEvents a b) ≡ 729
+unifierOrbit365EventCount =
+  OrbitWeighted365.actual729WeightedEvents
+
+unifierOrbit365ReflectedEventExact :
+  (a b : HermitianSym729.Hermitian27)
+  (pair : Pairs365Owner.ModePair729) →
+  OrbitWeighted365.sourceEvent a b
+    (AntipodalSym729.simultaneouslyNegateOrderedPair pair)
+  ≡ OrbitWeighted365.invertedEvent (OrbitWeighted365.sourceEvent a b pair)
+unifierOrbit365ReflectedEventExact =
+  OrbitWeighted365.reflectedEventIsConjugate
