@@ -2234,3 +2234,15 @@ unifierC4RetainedSampledBilinear :
   Fourier729.ModeCube27 → C4Gaussian.Gaussian4
 unifierC4RetainedSampledBilinear =
   C4Retained.retainedSampledBilinear
+
+
+-- Original polymorphic true integer 729-pair theorem, now at exactly
+-- the same Q(i) scalar carrier as the new C4 64-sample FFT.
+unifierC4GaussianIndexPreservesTrueIntegerConvolution :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (target : Fourier729.ModeCube27) →
+  C4Retained.fourGridGaussianIndexConvolutionAt f g target
+  ≡ C4Retained.trueGaussianIntegerConvolutionAt f g
+      (Convolution729.retainedToWide target)
+unifierC4GaussianIndexPreservesTrueIntegerConvolution =
+  C4Retained.fourGridGaussianIndexIsTrueIntegerConvolution
