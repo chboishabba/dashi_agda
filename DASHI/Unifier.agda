@@ -1794,21 +1794,21 @@ unifierSettlementNormTransmissionZKPFrame =
   FleetGapTOE.canonicalSettlementNormTransmissionZKPFrame
 
 unifierIndustryConventionDoesNotCreateFederalLaw :
-  FleetGapTOE.InstitutionalNorm.IndustryConventionCreatesFederalLaw → ⊥
+  FleetGapTOE.IndustryConventionCreatesFederalLaw → ⊥
 unifierIndustryConventionDoesNotCreateFederalLaw =
   FleetGapTOE.fleetIndustryConventionDoesNotCreateFederalLaw
 
 unifierSettlementDoesNotCreateSupremeCourtHolding :
-  FleetGapTOE.InstitutionalNorm.SettlementCreatesSupremeCourtHolding → ⊥
+  FleetGapTOE.SettlementCreatesSupremeCourtHolding → ⊥
 unifierSettlementDoesNotCreateSupremeCourtHolding =
   FleetGapTOE.fleetSettlementDoesNotCreateSupremeCourtHolding
 
 unifierSettlementDoesNotCreateConstitutionalPrecedent :
-  FleetGapTOE.InstitutionalNorm.SettlementCreatesConstitutionalPrecedent → ⊥
+  FleetGapTOE.SettlementCreatesConstitutionalPrecedent → ⊥
 unifierSettlementDoesNotCreateConstitutionalPrecedent =
   FleetGapTOE.fleetSettlementDoesNotCreateConstitutionalPrecedent
 
 unifierSameVisiblePolicyDoesNotImplySameAuthoritySource :
-  FleetGapTOE.InstitutionalNorm.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
+  FleetGapTOE.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
 unifierSameVisiblePolicyDoesNotImplySameAuthoritySource =
   FleetGapTOE.fleetSameVisiblePolicyDoesNotImplySameAuthoritySource
