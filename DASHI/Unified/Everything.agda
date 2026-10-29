@@ -1022,3 +1022,22 @@ unifiedOriginalFiveInNineConvolutionMatches41 :
   ≡ OrbitWeighted365.orbitWeightedPlaneConvolutionAt a b target
 unifiedOriginalFiveInNineConvolutionMatches41 =
   Plane41Rank.sourceFiveInNineTrueConvolutionEqualsOrbit41
+
+
+------------------------------------------------------------------------
+-- Original C5 group indexed at real five-point residues, with NEW
+-- exact Q(zeta_5) character algebra and 125-point tensor orthogonality.
+-- No imported C3/4 character or Monster same-object shortcut.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C5CyclotomicFullFourierCharacterExact as C5Character125
+
+unifiedC5FifthRootExact :
+  C5Character125._*5_ C5Character125.zetaFourth C5Character125.zeta5
+  ≡ C5Character125.one5
+unifiedC5FifthRootExact = C5Character125.zetaFifthLaw
+
+unifiedC5Full125CharacterOrthogonality :
+  (k l : Convolution729.GridCube125) →
+  C5Character125.cubeInner5 k l ≡ C5Character125.cubeDelta5 k l
+unifiedC5Full125CharacterOrthogonality =
+  C5Character125.cubeCharacterOrthogonality
