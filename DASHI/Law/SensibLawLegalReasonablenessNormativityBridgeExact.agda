@@ -2,6 +2,7 @@ module DASHI.Law.SensibLawLegalReasonablenessNormativityBridgeExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.InstitutionalNormSituatedReasonablenessBridgeExact as NormBridge
