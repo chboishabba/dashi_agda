@@ -2380,3 +2380,16 @@ unifierC5ActualFull125SampledOperator :
   Convolution729.WideCube125 → C5Character125.Cyclotomic5
 unifierC5ActualFull125SampledOperator =
   C5FullOperator.fullSampledBilinear125
+
+
+------------------------------------------------------------------------
+-- Source-written C5 Q(zeta5) one-axis ACTUAL sampled multiplication
+-- equals original five-group cyclic convolution, arbitrary inputs.
+-- Preserves the three-axis sampled/index and NS analytic gates.
+------------------------------------------------------------------------
+unifierC5OneAxisSampledConvolutionEqualsIndexed :
+  (a b : C5Sampled125.Quint C5Character125.Cyclotomic5) →
+  C5Sampled125.sampledConvolution5 a b
+    ≡ C5Sampled125.cyclicConvolution5 a b
+unifierC5OneAxisSampledConvolutionEqualsIndexed =
+  C5Sampled125.oneAxisSampledConvolutionIsCyclic
