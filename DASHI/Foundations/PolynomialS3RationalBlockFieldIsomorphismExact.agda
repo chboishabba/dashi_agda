@@ -241,3 +241,239 @@ toCoordinates6Intertwines Perm.permSwapMidHigh f Big.slot5 = Ring.solve-∀ f Bi
 -- This source isolates coefficients and block operations so the
 -- global 27-dimensional rational field isomorphism can import them
 -- WITHOUT creating a parallel owner or re-proving finite S3 tables.
+
+------------------------------------------------------------------------
+-- Rational linearity and inverse-direction S3 equivariance.
+-- Reuse the same Ring.solve-∀ machinery already owning polynomial
+-- Vieta invariants; this is no new algebraic axiom.
+------------------------------------------------------------------------
+
+plusField2 : Field2 → Field2 → Field2
+plusField2 f g i = f i + g i
+
+toCoordinates2Additive :
+  (f g : Field2) (i : Small.Pair) →
+  toCoordinates2 (plusField2 f g) i ≡
+  plusField2 (toCoordinates2 f) (toCoordinates2 g) i
+toCoordinates2Additive f g Small.pair0 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1 g Small.pair0 g Small.pair1
+toCoordinates2Additive f g Small.pair1 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1 g Small.pair0 g Small.pair1
+
+fromCoordinates2Additive :
+  (f g : Field2) (i : Small.Pair) →
+  fromCoordinates2 (plusField2 f g) i ≡
+  plusField2 (fromCoordinates2 f) (fromCoordinates2 g) i
+fromCoordinates2Additive f g Small.pair0 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1 g Small.pair0 g Small.pair1
+fromCoordinates2Additive f g Small.pair1 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1 g Small.pair0 g Small.pair1
+
+fromCoordinates2Intertwines :
+  (p : Perm.TriPermutation) (f : Field2) (i : Small.Pair) →
+  fromCoordinates2 (coordinateAction2 p f) i ≡
+  sourceAction2 p (fromCoordinates2 f) i
+fromCoordinates2Intertwines Perm.permIdentity f Small.pair0 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permIdentity f Small.pair1 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permRotate f Small.pair0 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permRotate f Small.pair1 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permRotate2 f Small.pair0 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permRotate2 f Small.pair1 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permSwapLowMid f Small.pair0 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permSwapLowMid f Small.pair1 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permSwapLowHigh f Small.pair0 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permSwapLowHigh f Small.pair1 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permSwapMidHigh f Small.pair0 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+fromCoordinates2Intertwines Perm.permSwapMidHigh f Small.pair1 =
+  Ring.solve-∀ f Small.pair0 f Small.pair1
+
+plusField3 : Field3 → Field3 → Field3
+plusField3 f g i = f i + g i
+
+toCoordinates3Additive :
+  (f g : Field3) (i : Small.Three) →
+  toCoordinates3 (plusField3 f g) i ≡
+  plusField3 (toCoordinates3 f) (toCoordinates3 g) i
+toCoordinates3Additive f g Small.axis0 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2 g Small.axis0 g Small.axis1 g Small.axis2
+toCoordinates3Additive f g Small.axis1 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2 g Small.axis0 g Small.axis1 g Small.axis2
+toCoordinates3Additive f g Small.axis2 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2 g Small.axis0 g Small.axis1 g Small.axis2
+
+fromCoordinates3Additive :
+  (f g : Field3) (i : Small.Three) →
+  fromCoordinates3 (plusField3 f g) i ≡
+  plusField3 (fromCoordinates3 f) (fromCoordinates3 g) i
+fromCoordinates3Additive f g Small.axis0 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2 g Small.axis0 g Small.axis1 g Small.axis2
+fromCoordinates3Additive f g Small.axis1 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2 g Small.axis0 g Small.axis1 g Small.axis2
+fromCoordinates3Additive f g Small.axis2 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2 g Small.axis0 g Small.axis1 g Small.axis2
+
+fromCoordinates3Intertwines :
+  (p : Perm.TriPermutation) (f : Field3) (i : Small.Three) →
+  fromCoordinates3 (coordinateAction3 p f) i ≡
+  sourceAction3 p (fromCoordinates3 f) i
+fromCoordinates3Intertwines Perm.permIdentity f Small.axis0 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permIdentity f Small.axis1 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permIdentity f Small.axis2 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permRotate f Small.axis0 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permRotate f Small.axis1 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permRotate f Small.axis2 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permRotate2 f Small.axis0 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permRotate2 f Small.axis1 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permRotate2 f Small.axis2 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permSwapLowMid f Small.axis0 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permSwapLowMid f Small.axis1 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permSwapLowMid f Small.axis2 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permSwapLowHigh f Small.axis0 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permSwapLowHigh f Small.axis1 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permSwapLowHigh f Small.axis2 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permSwapMidHigh f Small.axis0 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permSwapMidHigh f Small.axis1 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+fromCoordinates3Intertwines Perm.permSwapMidHigh f Small.axis2 =
+  Ring.solve-∀ f Small.axis0 f Small.axis1 f Small.axis2
+
+plusField6 : Field6 → Field6 → Field6
+plusField6 f g i = f i + g i
+
+toCoordinates6Additive :
+  (f g : Field6) (i : Big.Six) →
+  toCoordinates6 (plusField6 f g) i ≡
+  plusField6 (toCoordinates6 f) (toCoordinates6 g) i
+toCoordinates6Additive f g Big.slot0 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+toCoordinates6Additive f g Big.slot1 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+toCoordinates6Additive f g Big.slot2 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+toCoordinates6Additive f g Big.slot3 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+toCoordinates6Additive f g Big.slot4 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+toCoordinates6Additive f g Big.slot5 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+
+fromCoordinates6Additive :
+  (f g : Field6) (i : Big.Six) →
+  fromCoordinates6 (plusField6 f g) i ≡
+  plusField6 (fromCoordinates6 f) (fromCoordinates6 g) i
+fromCoordinates6Additive f g Big.slot0 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+fromCoordinates6Additive f g Big.slot1 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+fromCoordinates6Additive f g Big.slot2 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+fromCoordinates6Additive f g Big.slot3 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+fromCoordinates6Additive f g Big.slot4 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+fromCoordinates6Additive f g Big.slot5 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5 g Big.slot0 g Big.slot1 g Big.slot2 g Big.slot3 g Big.slot4 g Big.slot5
+
+fromCoordinates6Intertwines :
+  (p : Perm.TriPermutation) (f : Field6) (i : Big.Six) →
+  fromCoordinates6 (coordinateAction6 p f) i ≡
+  sourceAction6 p (fromCoordinates6 f) i
+fromCoordinates6Intertwines Perm.permIdentity f Big.slot0 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permIdentity f Big.slot1 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permIdentity f Big.slot2 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permIdentity f Big.slot3 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permIdentity f Big.slot4 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permIdentity f Big.slot5 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate f Big.slot0 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate f Big.slot1 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate f Big.slot2 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate f Big.slot3 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate f Big.slot4 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate f Big.slot5 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate2 f Big.slot0 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate2 f Big.slot1 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate2 f Big.slot2 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate2 f Big.slot3 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate2 f Big.slot4 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permRotate2 f Big.slot5 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowMid f Big.slot0 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowMid f Big.slot1 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowMid f Big.slot2 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowMid f Big.slot3 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowMid f Big.slot4 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowMid f Big.slot5 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowHigh f Big.slot0 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowHigh f Big.slot1 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowHigh f Big.slot2 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowHigh f Big.slot3 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowHigh f Big.slot4 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapLowHigh f Big.slot5 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapMidHigh f Big.slot0 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapMidHigh f Big.slot1 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapMidHigh f Big.slot2 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapMidHigh f Big.slot3 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapMidHigh f Big.slot4 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
+fromCoordinates6Intertwines Perm.permSwapMidHigh f Big.slot5 =
+  Ring.solve-∀ f Big.slot0 f Big.slot1 f Big.slot2 f Big.slot3 f Big.slot4 f Big.slot5
