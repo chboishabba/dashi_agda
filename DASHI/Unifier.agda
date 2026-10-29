@@ -1,5 +1,29 @@
 module DASHI.Unifier where
 
+-- Exact S3->C2 sign representation ties cubic Vandermonde alternating
+-- action to 7-even+4-odd F3 orbit-field action, without object identity.
+import DASHI.Foundations.PolynomialC3S3ReflectionParityFourierExact as RootParityFourier
+open RootParityFourier public using
+  ( evenAverage ; oddHalfDifference
+  ; encodeEvenOdd ; decodeEvenOdd ; decodeAfterEncodeAt
+  ; encodeAfterDecodeEvenAt ; reflectEvenIsFixed
+  ; reflectOddCycleIsNegative ; reflectOddOneFixedIsNegative
+  ; reflectOddTwoFixedIsNegative ; reflectOddTwoCycleIsNegative )
+import DASHI.Foundations.PolynomialC3S3ReflectionParityLinearExact as RootParityLinear
+open RootParityLinear public using
+  (plusTruth ; plus11 ; plus7 ; plusOdd4 ; plusCoordinates
+  ; encodeEvenAdditiveAt ; encodeOddAdditiveCycle
+  ; encodeOddAdditiveOneFixed ; encodeOddAdditiveTwoFixed
+  ; encodeOddAdditiveTwoCycle ; decodeAdditiveAt)
+import DASHI.Foundations.PolynomialVandermondeOrbitParityIntertwinerExact as RootS3Parity
+open RootS3Parity public using
+  (permutationParity ; parityHomomorphism
+  ; fullS3ActionOnEleven ; fullS3ActionOnElevenComposition
+  ; classifyConjugationByParity ; vandermondeIntertwinesSign)
+import DASHI.Foundations.PolynomialVandermondeOrbitSignCharacterExact as RootSignIntertwiner
+open RootSignIntertwiner public using
+  (pullbackSignField ; evenSevenIntertwines ; oddSignIntertwines)
+
 -- Nested characteristic-free C3/S3 representative-sampling projections:
 -- idempotence, exact invariant ranges, two-sided absorption.
 import DASHI.Foundations.PolynomialC3S3OrbitSamplingProjectionExact as RootOrbitProjectors
