@@ -1501,3 +1501,26 @@ toeYMA1CompletionDoesNotSelfPromote :
   ≡ false
 toeYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- SensibLaw G1-G4 direct runtime boundary.
+------------------------------------------------------------------------
+
+toeSensibLawDirectCutoverReceipt :
+  SensibLawDirect.ProductionCutoverReceipt
+toeSensibLawDirectCutoverReceipt =
+  SensibLawDirect.sensibLawGWBv01ProductionCutover
+
+toeSensibLawDirectParserTokenWritesAreZero :
+  SensibLawDirect.productionParserTokenWrites
+    SensibLawDirect.sensibLawGWBv01ProductionCutover
+  ≡ 0
+toeSensibLawDirectParserTokenWritesAreZero =
+  SensibLawDirect.productionParserTokenWritesZero
+    SensibLawDirect.sensibLawGWBv01ProductionCutover
+
+toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
+  SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
+toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
+  SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
