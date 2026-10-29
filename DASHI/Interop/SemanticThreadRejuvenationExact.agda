@@ -111,3 +111,27 @@ worker01ComparisonPreserved = refl
 worker01ChangePreserved :
   Worker01Motif.mutation canonicalWorker01 ≡ change "change"
 worker01ChangePreserved = refl
+
+-- Worker 06: parsed text is an explicit input, not a parsing correctness claim.
+-- Collapsing an auto node changes only the visibility bit; its text is retained.
+record ParsedAutoNode : Set where
+  constructor parsedAutoNode
+  field
+    parsedText : String
+    expanded : Bool
+
+collapseAuto : ParsedAutoNode → ParsedAutoNode
+collapseAuto node = parsedAutoNode (ParsedAutoNode.parsedText node) false
+
+collapseAutoPreservesText : (node : ParsedAutoNode) →
+  ParsedAutoNode.parsedText (collapseAuto node) ≡ ParsedAutoNode.parsedText node
+collapseAutoPreservesText node = refl
+
+collapseAutoHides : (node : ParsedAutoNode) →
+  ParsedAutoNode.expanded (collapseAuto node) ≡ false
+collapseAutoHides node = refl
+
+collapseAutoIdempotent : (node : ParsedAutoNode) →
+  collapseAuto (collapseAuto node) ≡ collapseAuto node
+collapseAutoIdempotent (parsedAutoNode text true) = refl
+collapseAutoIdempotent (parsedAutoNode text false) = refl
