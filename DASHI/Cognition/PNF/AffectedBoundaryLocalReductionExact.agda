@@ -79,6 +79,52 @@ record ParentLocalReducer
 open ParentLocalReducer public
 
 ------------------------------------------------------------------------
+-- Generic affected-key local reducer.
+--
+-- ParentLocalReducer is the parent-frontier instance.  This generic owner is
+-- the reusable shape for any delta-fed consumer.  A source projection computes
+-- an affected-key carrier.  The reducer may reconsider only that carrier.
+------------------------------------------------------------------------
+
+record AffectedLocalReducer
+    (State Delta AffectedKeys : Set) : Set₁ where
+  field
+    affected : Delta → AffectedKeys
+    affectedKeyCount : AffectedKeys → Nat
+    reduceAffected : State → Delta → State
+    emittedDeltaCount : State → Delta → Nat
+
+    noAffectedKeysPreserveState :
+      (state : State) →
+      (delta : Delta) →
+      affectedKeyCount (affected delta) ≡ 0 →
+      reduceAffected state delta ≡ state
+
+    noStateChangeEmitsNoDelta :
+      (state : State) →
+      (delta : Delta) →
+      reduceAffected state delta ≡ state →
+      emittedDeltaCount state delta ≡ 0
+
+open AffectedLocalReducer public
+
+parentLocalReducerAsAffectedLocalReducer :
+  ∀ {ParentState ChildDelta : Set} →
+  ParentLocalReducer ParentState ChildDelta →
+  AffectedLocalReducer ParentState ChildDelta AffectedBoundaryKeys
+parentLocalReducerAsAffectedLocalReducer reducer =
+  record
+    { affected = ParentLocalReducer.affected reducer
+    ; affectedKeyCount = touchedKeyCount
+    ; reduceAffected = ParentLocalReducer.reduceAffected reducer
+    ; emittedDeltaCount = ParentLocalReducer.emittedDeltaCount reducer
+    ; noAffectedKeysPreserveState =
+        ParentLocalReducer.noAffectedKeysPreserveState reducer
+    ; noStateChangeEmitsNoDelta =
+        ParentLocalReducer.noParentChangeEmitsNoDelta reducer
+    }
+
+------------------------------------------------------------------------
 -- Change-sensitive propagation.
 --
 -- The runtime is allowed to transport a parent delta only when local reduction
