@@ -9,6 +9,8 @@ import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObse
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
+import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact as PlantNutrientTransport
+import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as PlantHydraulicCarbon
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1766,3 +1768,54 @@ unifierSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 unifierSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+
+------------------------------------------------------------------------
+-- Plant nutrient transport exact owner.
+------------------------------------------------------------------------
+
+unifierPlantNutrientTransportBoundary :
+  PlantNutrientTransport.SoilMoistureNutrientTransportBoundary
+unifierPlantNutrientTransportBoundary =
+  PlantNutrientTransport.canonicalSoilMoistureNutrientTransportBoundary
+
+unifierPlantPhenotypeDoesNotIdentifyUniqueChemicalCause :
+  PlantNutrientTransport.phenotypeAloneIdentifiesUniqueChemicalCause
+    PlantNutrientTransport.canonicalSoilMoistureNutrientTransportBoundary
+  ≡ false
+unifierPlantPhenotypeDoesNotIdentifyUniqueChemicalCause =
+  PlantNutrientTransport.plantPhenotypeDoesNotIdentifyUniqueChemicalCause
+
+unifierInterveinalChlorosisUniqueCausePromotionImpossible :
+  PlantNutrientTransport.UniqueCausePromotion
+    PlantNutrientTransport.interveinalChlorosis
+  → ⊥
+unifierInterveinalChlorosisUniqueCausePromotionImpossible =
+  PlantNutrientTransport.interveinalChlorosisUniqueCausePromotionImpossible
+
+unifierPlantNutrientTransportZKPFrame : ParetoSnowballTOE.TOEZKPFrame
+unifierPlantNutrientTransportZKPFrame =
+  ParetoSnowballTOE.toe-zkp-frame
+    "formalize soil-moisture nutrient transport and spatial sentinel bioassay without promoting symptoms to a unique cause"
+    "reuse root-soil ion-water, whole-plant hydraulic-carbon, LES, PNP, chemistry, conservation and existing TOE non-promotion owners"
+    "extend the canonical root-soil physiology owner and expose exact aliases through the Unifier"
+    "moisture changes transport and availability; one phenotype can remain compatible with distinct causes"
+    "one disjoint plant nutrient transport normalization lane"
+    "same-species spatial observations need recorded controls, moisture, geometry and source history before causal promotion"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma and C4/PlantUML remain process lenses only"
+    "the Unifier reaches the same exact moisture boundary and non-promotion theorem as the TOE root"
+    "GitHub reuse search, exact-owner read-back, trust-escape scan, ESD mutation scan and Agda kernel check"
+    false false false false
+
+
+unifierLeafAreaNutrientCouplingBoundary :
+  PlantHydraulicCarbon.LeafAreaNutrientCouplingBoundary
+unifierLeafAreaNutrientCouplingBoundary =
+  PlantHydraulicCarbon.canonicalLeafAreaNutrientCouplingBoundary
+
+unifierLeafAreaDoesNotDetermineNutrientUptakeAlone :
+  PlantHydraulicCarbon.leafAreaAloneDeterminesNutrientUptake
+    PlantHydraulicCarbon.canonicalLeafAreaNutrientCouplingBoundary
+  ≡ false
+unifierLeafAreaDoesNotDetermineNutrientUptakeAlone =
+  PlantHydraulicCarbon.leafAreaDoesNotDetermineNutrientUptakeAlone
