@@ -167,3 +167,22 @@ small gate; they are not replaced by it.
 - `neither` is not falsity; it is the fail-closed absence of promotable structural
   evidence.
 - This module does not certify spaCy accuracy or a particular parser profile.
+
+## Resource-admission non-promotion
+
+Exact-work admission is separate from semantic promotion.
+
+The current parent-frontier regression observes 8,206 object keys against an
+8,192 exact-work budget. The golden Agda owner records that execution as
+rejected. The rejection does not delete, truncate, weaken, or relabel the
+semantic key set. Increasing a runtime budget also does not create truth,
+admissibility, empirical, theorem, runtime, or legal authority.
+
+A migration-209 runtime claim requires a reconciliation receipt that survives
+the database transaction. A receipt observed only inside a transaction that
+later rolls back is not a durable certification receipt.
+
+This extends the existing promotion policy without changing the tetralemma
+semantic carrier. Resource admission controls whether an exact execution may
+run. The semantic promotion gate controls what evidence may become a promoted
+semantic position. Neither gate can impersonate the other.
