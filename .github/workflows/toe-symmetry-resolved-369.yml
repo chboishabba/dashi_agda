@@ -6,6 +6,7 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Core/SituatedFibreDynamicsEverything.agda'
+      - 'DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
@@ -35,6 +36,7 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Core/SituatedFibreDynamicsEverything.agda'
+      - 'DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
@@ -96,6 +98,9 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
           dashi-repo diagnose DASHI/Core/SituatedFibreDynamicsEverything.agda --root .
+          dashi-repo diagnose DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda --root .
+          dashi-repo related oneStepMarkovLumping --root . --limit 30
+          dashi-repo related allFiniteHorizonsRemainCoarseFactored --root . --limit 30
           dashi-repo related canonicalSituatedFibreTOEZKPFrame --root . --limit 30
           dashi-repo related refinementDepthPreservesCoarseStage --root . --limit 30
           dashi-repo related canonicalTypedBranchTrapBarrier --root . --limit 30
@@ -182,6 +187,7 @@ jobs:
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Core/SituatedFibreDynamicsEverything.agda
+            DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda
@@ -213,6 +219,7 @@ jobs:
           agda --version
           modules=(
             DASHI/Core/SituatedFibreDynamicsEverything.agda
+            DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
