@@ -564,3 +564,68 @@ This splits the remaining finite work into narrow concrete proof obligations:
 The independent exact Python enumeration confirms (1)–(4) as finite computational facts and shows the actual 729-address multisets agree; that is **not** an Agda kernel proof of those four propositions. Type-check the new module before treating its source-written conditional proofs as established. All three TOE roots now project its explicit conditional theorem, without falsely recording the missing input permutation as discharged.
 
 **The strongest next max-cut**, after kernel readback, is to use the already available dense 0..728 pair rank and generic finite list unique/membership lemmas to prove (1)–(4), then close the conditional proposition without introducing any postulate, meta escape or alternate 729 ontology. Independently, close `retainedSampledBilinear = fourGridGaussianIndexConvolutionAt` by distributivity and C4 tensor character orthogonality. Neither conclusion implies the original continuum NS analytic theorem, R2P2 calibration or any Monster/Ibrahim same-object representation.
+
+
+## 5h. 29 October 2026 — unconditional source-written orbit proofs, Q(zeta5) full 125-sample implementation
+
+**Current live PR inspiration:** #1433 normalizes the actual Agda NS A/B/C/D and BM2/R829 frontiers without claiming any new PDE result; #1428 records R440 noncore/core diagnostics and explicitly leaves B4, B1–B3 and periodic physical continuation open. These PRs are distinct donor/authority lanes. The Fourier branch does **not** silently import their unmerged changes, claim to pay R440/R736, or promote a finite Galerkin identity to a Clay conclusion. Retain all original NS proof owners, external collaborators and Ibrahim Monster 3B author attribution.
+
+### 5h.1 Three-dimensional 365/729 orbit permutation at the original dense ranks
+
+The original `R2P227729FourierObserverIncidenceExact` already has an ordered 27-mode enumeration and the exact dense address rank `orderedPairRank : ModePair729 -> Nat`. The original `NSTriadKNLiteralCriticalProductionRadialOrderExact` uses a source-written **constructive insertion sort plus proof-relevant permutation**. New `R2P227729Orbit365RankSortPermutationExact.agda` reuses that strategy, generalized to an arbitrary carrier and rank function.
+
+- `sortByRankPermutation` proves, constructively and without uniqueness assumptions, that sorting is a permutation of the original list.
+- `rankSorted365ExpandedIsOriginal729 = refl` is an intentional **closed 729-element normalization certificate** comparing the actual expanded 365 canonical pairs against original `pair729` in rank order. It is not merely a cardinality comparison.
+- `actualOriginal729PermutesToExpanded365` composes the two permutation facts, supplying the formerly missing hypothesis to the preexisting `fullPairSumEqualsOrbitSumGivenPermutation`.
+- `orbit365FullHermitianConvolutionEquals729` now has no address-permutation hypothesis in its *source-written type*. It identifies the original and orbit-weighted 125-output finite Q(omega) Hermitian convolution for any two admissible input fields.
+- **Critical status**: this is newly authored Agda source, *not yet kernel-checked*. If rank-sort normalization proves too expensive in the pinned Agda kernel, replace the direct `refl` computation with rank-index uniqueness/membership proofs while keeping the inherited permutation and fold identities. Do not call source text a verified theorem.
+
+The independent exact Python comparison confirmed the sorted 729 addresses exactly match original pair order; this only independently validates the finite combinatorics.
+
+### 5h.2 Reusing the generic sorter for the five-in-nine plane (41/81)
+
+New `R2P281PlaneOrbit41RankSortConvolutionExact.agda` reuses the *same generic* `sortByRank`/permutation proof, not a copied two-dimensional sorting system. `planeOrderedPairRank` is the original 9x9 dense lexicographic pair rank; its expanded 41-orbit list sorts back to the original 81 addresses, by a source-written closed `refl` normal form.
+
+It then builds the source-weighted plane events, reuses the generic Q(omega) permutation-invariant fold from `R2P227729Orbit365PermutationReductionExact`, and matches the **original** `R2P281PlaneHermitianFiveOrbitConvolutionExact.truePlaneBilinearAt` (including the zero-contribution branches). The new `sourceFiveInNineTrueConvolutionEqualsOrbit41` is an unconditional source-written proof type for arbitrary two Hermitian plane fields and all 25 actual integer output frequencies. Agda kernel validation remains pending. No 5-class D4 irrep, Monster group action or physical 2D NS claim.
+
+### 5h.3 Source-written C4 one-axis sampled multiplication
+
+New `R2P2C4GaussianSampledFourierBidiExact.oneAxisSampledConvolutionIsCyclic` states that four times the unnormalized forward DFT of the pointwise product of two individually normalized inverse DFTs equals the correct four-residue cyclic convolution of arbitrary Gaussian-rational coefficient fields. It is written using the original Q(i) operations and the ring solver, not a postulate. Independent exact-rational Python checks passed 64 separately populated coefficient-field pairs, all four output frequencies. Agda typechecking of the ring-solver proof is pending.
+
+### 5h.4 Q(zeta_5) is the correct FULL five-grid scalar; C5 sampled construction added
+
+The existing `R2P227729FiniteQuadraticConvolutionExact` owns the actual C5 group operation and the 125 integer-frequency output labels. Search of existing repository default-branch code found no suitable already-owned `Q(zeta5)` full sampled Fourier scalar/DFT; unrelated zeta/Monster names are NOT substitutes.
+
+New `R2P2C5CyclotomicFullFourierCharacterExact.agda` constructs exact four-coordinate rational cyclotomic scalars modulo `Phi_5=1+z+z²+z³+z⁴`, with 16 exact convolution products combined into coefficients, conjugation, root of order five, 25 source-written C5 character orthogonality cases, and a C5³ tensor product character law over the original `GridCube125`.
+
+New `R2P2C5FullSampledFourierBidiExact.agda` adds five-point forward/inverse transforms on `Quint Cyclotomic5`, source-written arbitrary-coefficient inversion terms, and their full three-dimensional 125-sample tensorized forward/inverse pair plus actual pointwise sampled multiplication. This is a separate coefficient field from the prior C4/Q(i) and C3/Q(omega) Fourier owners.
+
+New `R2P2C5FullSampledIntegerOperatorExact.agda` adds:
+- exactly zero-padded 27 input Fourier coefficients in a 125-entry C5³ array;
+- signed input-mode roundtrips;
+- the physically conventional unscaled synthesis `125 * inverseFourier125`;
+- normalized Fourier analysis `(1/125) * fourier125`;
+- the actual *full-output* 125-sample pointwise-product operator `fullSampledBilinear125`;
+- an instantiation of the original coefficient-polymorphic 729-pair indexed convolution on the **same** Q(zeta5) carrier, with the original `fiveGridBilinearRecoversAllFullCoefficients` theorem.
+
+The **only missing Agda sampled-to-index finite equation** at this level is:
+```text
+∀ f g : ModeCube27 -> Cyclotomic5, k : WideCube125:
+  fullSampledBilinear125 f g k
+    ≡ indexedFiveGridBilinearAt f g k
+```
+This equation is **not asserted** in Agda until proved. For C4, the analogous sampled-to-index equality is also still missing, despite the completed 1D source statement and exact sampled code.
+
+**Independent exact Python checks actually executed in this session:** Q(zeta5) root powers `zeta^5=1`; all 25 scalar character inner products; 8 arbitrary 5-mode transform/inverse pairs; full 125-sample Q(zeta5) inverse and forward tensor roundtrip; two independent densely populated 27-coefficient Q(zeta5) field pairs passed exact sampled-vs-integer convolution at **all 125 full outputs**. The first three profiles are encoded in `scripts/r2p2_c5_exact_sampled_125_full_bilinear.py` and its pytest wrapper, which were committed but not executed on an exact GitHub checkout. The earlier 91,125 **universal fifth-root bilinear coefficient** checks remain an independent mathematical basis audit.
+
+### 5h.5 Updated proof status, max-cut and attribution gate
+
+| Producer / obligation | Current evidence | Remains open |
+| --- | --- | --- |
+| 365/729 and 41/81 address + Hermitian convolution | Source-written unconditional Agda proof types, actual ranked sorts; independent exact arithmetic | Agda kernel exact-head typecheck / potentially optimize normalization |
+| C4/Q(i) actual sampled 64-grid | Source-written 1D product theorem, 3D FFT forward/inverse, 27-padding, indexed Gaussian exact integer theorem; independent all-basis arithmetic | 3D sampled-to-index kernel equality |
+| C5/Q(zeta5) actual full sampled 125-grid | Source-written fifth-root/DFT/pad/pointwise/indexed theorem; independent full sampled 125-output checks + 91,125 basis coefficients | 3D sampled-to-index kernel equality |
+| Physical NS finite Galerkin | Original Complex3/Leray/triad authority remains golden | Same-object vector-Leray projection, physical energy, original R440/R736 and real-ODE analytic leaves |
+| Continuum NS, optical clocks, Ibrahim/Monster 3B | Original separate research owners | Analytic/empirical/same-object evidence not supplied here |
+
+All new owners are imported with explicit theorem projections by `EverythingTOESymmetryResolved369`, `Unifier` and `Unified/Everything`. No modifications to digital ESD or CI, no `postulate`, no unsolved-meta or termination/positivity escape, and no claim of kernel verification. Continue highest-alpha on the two *sampled-to-index* tensor distribution proofs; avoid numerology-only welds and keep source-produced, independently computed, kernel-checked, and physically calibrated evidence grades separate.
