@@ -23,6 +23,8 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
 import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
 import DASHI.Unified.BrainFMRI as BrainFMRI
+import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact as BraidedTransferTOE
+import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryTOE
 import DASHI.Unified.CarrierGrammar as CarrierGrammar
 import DASHI.Unified.ChemistrySupervoxel as ChemistrySupervoxel
 import DASHI.Unified.CrossScaleMatterPhysics as CrossScaleMatterPhysics
@@ -404,3 +406,63 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Braided transfer / narrative calibration TOE normalization.
+--
+-- Reuse the canonical reasoning owners.
+-- This aggregate adds no new Kimmerer, Two-Eyed Seeing, or topology claim.
+------------------------------------------------------------------------
+
+toeBraidedTransferZKPFrame :
+  BraidedTransferTOE.BraidTransferZKPFrame
+toeBraidedTransferZKPFrame =
+  BraidedTransferTOE.conversationBraidZKP
+
+toeBraidedTransferContract :
+  BraidedTransferTOE.BraidTransferContract
+toeBraidedTransferContract =
+  BraidedTransferTOE.canonicalBraidTransferContract
+
+toeBraidedCoarseReadingHasMissingRelationGap :
+  BraidedTransferTOE.braidTransferGap
+    BraidedTransferTOE.braidCalibrationProgramme
+    BraidedTransferTOE.boundedRelationalTransfer
+    BraidedTransferTOE.canonicalBraidingOwners
+    BraidedTransferTOE.coarseMultiplicityState
+    BraidedTransferTOE.underFitLattice
+  ≡ BraidedTransferTOE.missingRelationGap
+toeBraidedCoarseReadingHasMissingRelationGap =
+  BraidedTransferTOE.coarseReadingHasMissingRelationGap
+
+toeBraidedCalibratedReadingClosesGap :
+  BraidedTransferTOE.braidTransferGap
+    BraidedTransferTOE.braidCalibrationProgramme
+    BraidedTransferTOE.boundedRelationalTransfer
+    BraidedTransferTOE.canonicalBraidingOwners
+    BraidedTransferTOE.calibratedRelationalState
+    BraidedTransferTOE.fittedLattice
+  ≡ BraidedTransferTOE.noTransferGap
+toeBraidedCalibratedReadingClosesGap =
+  BraidedTransferTOE.calibratedReadingClosesTransferGap
+
+toeBraidedRuptureHasSpuriousRecoverabilityGap :
+  BraidedTransferTOE.braidTransferGap
+    BraidedTransferTOE.braidCalibrationProgramme
+    BraidedTransferTOE.boundedRelationalTransfer
+    BraidedTransferTOE.canonicalBraidingOwners
+    BraidedTransferTOE.rupturedRelationState
+    BraidedTransferTOE.overFitLattice
+  ≡ BraidedTransferTOE.spuriousRecoverabilityGap
+toeBraidedRuptureHasSpuriousRecoverabilityGap =
+  BraidedTransferTOE.ruptureHasSpuriousRecoverabilityGap
+
+toeBraidDoesNotGuaranteeRecoverabilityAfterRupture :
+  BraidedTransferTOE.BraidGuaranteesRecoverabilityAfterRupture -> ⊥
+toeBraidDoesNotGuaranteeRecoverabilityAfterRupture =
+  BraidedTransferTOE.braidDoesNotGuaranteeRecoverabilityAfterRupture
+
+toeAttachedFaceDoesNotRecoverBraidHistory :
+  BraidedHistoryTOE.SameAttachedFaceMeansSameProcessRoute -> ⊥
+toeAttachedFaceDoesNotRecoverBraidHistory =
+  BraidedHistoryTOE.sameAttachedFaceDoesNotMeanSameProcessRoute
