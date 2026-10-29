@@ -411,11 +411,11 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 ------------------------------------------------------------------------
 
 unifiedPNFAnaphorSurfaceIdentityPromotionImpossible :
-  PNFHyperfabric.Anaphor.SurfaceSpellingIsWitnessIdentity → ⊥
+  PNFHyperfabric.PNFAnaphorSurfaceIdentityPromotion → ⊥
 unifiedPNFAnaphorSurfaceIdentityPromotionImpossible =
   PNFHyperfabric.pnfAnaphorSurfaceIdentityPromotionImpossible
 
 unifiedPNFAnaphorCandidateResolutionPromotionImpossible :
-  PNFHyperfabric.Anaphor.CandidateEvidenceResolvesProjectedAnaphor → ⊥
+  PNFHyperfabric.PNFAnaphorCandidateResolutionPromotion → ⊥
 unifiedPNFAnaphorCandidateResolutionPromotionImpossible =
   PNFHyperfabric.pnfAnaphorCandidateResolutionPromotionImpossible
