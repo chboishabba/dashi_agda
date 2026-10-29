@@ -16,6 +16,7 @@ import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.YMA1SourceFrontierExact as YMA1Frontier
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
@@ -708,7 +709,7 @@ yangMillsYMA1ZKPFrame =
   YMA1Frontier.canonicalYMA1ZKPFrame
 
 yangMillsYMA1FrozenResearchCount :
-  Agda.Builtin.Nat.Nat
+  ℕ
 yangMillsYMA1FrozenResearchCount =
   YMA1Frontier.frozenResearchCount
     YMA1Frontier.canonicalYMA1SourceFrontierReceipt
@@ -726,7 +727,7 @@ yangMillsYMA1RowAStillNotPromoted =
   YMA1Frontier.rowAStillNotPromoted
 
 yangMillsYMA1CompletionDoesNotSelfPromote :
-  DASHI.Physics.YangMills.CompactLieProofLevel.promotable
+  Proof.promotable
     (YMA1Frontier.rowACompletion
       YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
   ≡ false
