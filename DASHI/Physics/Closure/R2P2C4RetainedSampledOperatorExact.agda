@@ -164,7 +164,7 @@ norm64 : ℚ
 norm64 = normalize 1 64
 
 unnorm64 : ℚ
-unnorm64 = 64
+unnorm64 = normalize 64 1
 
 synthesiseUnscaled :
   FFT.CubeSignal64 → FFT.CubeSignal64
