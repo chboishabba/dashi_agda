@@ -998,3 +998,27 @@ unifiedOrbit365FullHermitianConvolutionMatches729 :
     ≡ OrbitWeighted365.orbitWeightedConvolutionAt a b k
 unifiedOrbit365FullHermitianConvolutionMatches729 =
   Orbit365Rank.orbit365FullHermitianConvolutionEquals729
+
+
+------------------------------------------------------------------------
+-- Independently source-written complete five-in-nine / 41-in-81 plane
+-- Hermitian Q(omega) operator identity for the original 25 integer
+-- outputs. Uses the SAME generic rank-sort permutation proof as 3D.
+-- Kernel execution pending. Does not imply D4 or physical NS.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P281PlaneOrbit41RankSortConvolutionExact as Plane41Rank
+
+unifiedOriginal81PlanePermutesFrom41 :
+  HermitianPlane81.planePairs81 PairPerm365.↭ Plane41Rank.expanded41PlanePairs
+unifiedOriginal81PlanePermutesFrom41 =
+  Plane41Rank.originalPlanePairsPermuteToExpanded41
+
+unifiedOriginalFiveInNineConvolutionMatches41 :
+  (a b : HermitianSym729.Hermitian9)
+  (target : HermitianPlane81.WidePlane25) →
+  HermitianPlane81.truePlaneBilinearAt
+    (HermitianSym729.coefficient9 a)
+    (HermitianSym729.coefficient9 b) target
+  ≡ OrbitWeighted365.orbitWeightedPlaneConvolutionAt a b target
+unifiedOriginalFiveInNineConvolutionMatches41 =
+  Plane41Rank.sourceFiveInNineTrueConvolutionEqualsOrbit41
