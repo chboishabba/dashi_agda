@@ -8,6 +8,7 @@ import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
+import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -1456,3 +1457,23 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Numeric PNF delta-fed projection non-promotion.
+------------------------------------------------------------------------
+
+toePNFAnaphorSurfaceIdentityPromotionImpossible :
+  PNFHyperfabric.Anaphor.SurfaceSpellingIsWitnessIdentity → ⊥
+toePNFAnaphorSurfaceIdentityPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorSurfaceIdentityPromotionImpossible
+
+toePNFAnaphorCandidateResolutionPromotionImpossible :
+  PNFHyperfabric.Anaphor.CandidateEvidenceResolvesProjectedAnaphor → ⊥
+toePNFAnaphorCandidateResolutionPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorCandidateResolutionPromotionImpossible
+
+toePNFAnaphorRecursiveSelfUpdateImpossible :
+  PNFHyperfabric.Anaphor.SetwiseProjectionRequiresRecursiveDemandUpdate → ⊥
+toePNFAnaphorRecursiveSelfUpdateImpossible =
+  PNFHyperfabric.pnfAnaphorRecursiveSelfUpdateImpossible
