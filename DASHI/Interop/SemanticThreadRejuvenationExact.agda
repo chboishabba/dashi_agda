@@ -202,3 +202,36 @@ chooseRatherPreservesPhrase preferred alternative = refl
 chooseRatherSelectsPreferred : (preferred alternative : String) →
   ComparativeState.selected (chooseRather preferred alternative) ≡ preferred
 chooseRatherSelectsPreferred preferred alternative = refl
+
+-- Worker 12: buffering an already witnessed text result is a protocol
+-- state, not a claim about proof-kernel execution or GPU memory buffers.
+record BufferedTestResult : Set where
+  constructor bufferedTestResult
+  field
+    bufferedResult : TextTestResult
+    pending : Bool
+
+bufferResult : TextTestResult → BufferedTestResult
+bufferResult result = bufferedTestResult result true
+
+releaseBuffered : BufferedTestResult → BufferedTestResult
+releaseBuffered entry = bufferedTestResult (BufferedTestResult.bufferedResult entry) false
+
+bufferPreservesObserved : (result : TextTestResult) →
+  TextTestResult.observedText (BufferedTestResult.bufferedResult (bufferResult result)) ≡
+  TextTestResult.observedText result
+bufferPreservesObserved result = refl
+
+releasePreservesResult : (entry : BufferedTestResult) →
+  BufferedTestResult.bufferedResult (releaseBuffered entry) ≡
+  BufferedTestResult.bufferedResult entry
+releasePreservesResult entry = refl
+
+releaseClearsPending : (entry : BufferedTestResult) →
+  BufferedTestResult.pending (releaseBuffered entry) ≡ false
+releaseClearsPending entry = refl
+
+releaseIdempotent : (entry : BufferedTestResult) →
+  releaseBuffered (releaseBuffered entry) ≡ releaseBuffered entry
+releaseIdempotent (bufferedTestResult result true) = refl
+releaseIdempotent (bufferedTestResult result false) = refl
