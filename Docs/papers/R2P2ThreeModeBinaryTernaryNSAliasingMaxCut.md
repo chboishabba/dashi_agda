@@ -466,3 +466,75 @@ The four-grid module retains the explicit eight Nyquist self-inverse frequency c
 **Next kernel obligations in exact dependency order:** (1) type-check the new event owner and three root projections; (2) prove `canonicalOrderedPairs` plus their simultaneous negatives are a *no-duplicate, exhaustive permutation* of the real `pair729` list, then commute finite Q(omega) addition over that permutation to establish 365-event/729-pair equality for arbitrary Hermitian inputs, and independently establish the analogous 41-event/81-pair plane identity; (3) kernel-check the newly source-written Q(i) C4 group-root, 1D and C4³ orthogonality source terms and implement the missing normalized inverse/forward Fourier transforms, then prove the sample-pointwise identity in Agda; (4) attach the theorem to the original Complex3/Leray finite NS object and prove reality and energy cancellation; (5) treat cutoff-uniform continuum estimates, five-point full spectrum and calibrated experimental data as independent exits. Do not use sibling PR monodromy #1414, Pareto scheduler #1416/#1417, or their numerology as replacement evidence.
 
 **Attribution:** original historic finite Fourier group theory, Orszag/Patterson numerical dealiasing, Lambert–Reneuve–Augier (2026, [arXiv:2603.08892](https://arxiv.org/abs/2603.08892)) are background scientific authors; repository source proofs and their actual PR authorship remain distinct. Exact standalone computation does not become kernel type checking. The previous Ibrahim Monster 3B and other source-owner statements remain unchanged. No ESD edits and no physical or same-object Monster claim.
+
+
+## 5f. 29 October 2026 — real 64-point C4 transform, operator adapter and universal C4/C5 basis certificate
+
+**Provenance:** This extension continues the source-owned section 5e, with original mathematics by Fourier/finite-character authors and pseudo-spectral dealiasing by Patterson/Orszag. Lambert–Reneuve–Augier (2026, [arXiv:2603.08892](https://arxiv.org/abs/2603.08892)) is a contemporary comparison, not the original theorem or a source of NS regularity. Original in-repository `C3CubeCyclotomicFourierExact`, `R2P227729FourGridRetainedQuadraticParetoExact`, `R2P227729BilinearCyclotomicPadCutExact` and `NSTriadKNFiniteConvolutionReconstruction` retain their proof authorship. No ESD or Ibrahim Monster 3B owner was modified.
+
+### Source-written 64-point Fourier forward/inverse (new)
+
+`DASHI/Physics/Closure/R2P2C4GaussianSampledFourierBidiExact.agda` implements the actual fourth-root Fourier matrix on a `Quad` of Gaussian rationals, both normalized inverse and unnormalized forward, then transports the method of the original three-axis `C3CubeCyclotomicFourierExact` through `Quad (Quad (Quad Gaussian4))`. It includes explicit four-by-four transpose, axis roundtrips, both 64-sample inversion directions, and an actual pointwise sampled product. Agda source-written only; no kernel execution.
+
+The matrix convention is
+```text
+F4  : a[x] -> sum_(x=0..3) a[x] i^(-k x)                [unnormalized]
+I4  : a[k] -> 1/4 sum_(k=0..3) a[k] i^(+k x)           [normalized]
+F64 = F4 tensor F4 tensor F4
+I64 = I4 tensor I4 tensor I4 = 1/64 sum_k ...
+```
+There is no implicit substitution of the source cubic cyclotomic field Q(omega) for the fourth-root field Q(i). The original C3 DFT remains separately owned and valid for its carrier.
+
+### Actual 27->64 sampled-field bilinear operator
+
+`DASHI/Physics/Closure/R2P2C4RetainedSampledOperatorExact.agda` now defines:
+
+1. `axisFromFour` and `axisToFour`, excluding the Nyquist residue 2 from the **input** signed frequencies, with an exact section.
+2. `quadFromFunction` in the cyclic order 0,+1,2,-1 (not the display order -1,0,+1,2).
+3. `pad27To64` as a genuine 64-cell zero-padding map, with `paddingRetainsAll27` for every signed integer input.
+4. `synthesiseUnscaled = 64 * inverseFourier64` and `analyseNormalized = (1/64) * fourier64`, removing the hidden scaling ambiguity.
+5. `retainedSampledBilinear`: pad f,g; synthesize both at 64 physical grid points; multiply the 64 samples; apply normalized Fourier analysis; read the 27 signed retained outputs.
+6. `gaussianCoefficientOps`: instantiates the original **coefficient-polymorphic** true 729-pair convolution and four-grid index theorem at the **same** Q(i) scalar carrier. The imported original theorem yields `fourGridGaussianIndexIsTrueIntegerConvolution` for two entirely arbitrary Q(i) 27-mode input fields, with no conversion between incompatible scalars.
+
+The remaining exact kernel equation is now between two explicitly defined functions on the **same type**:
+```text
+∀ f g : ModeCube27 -> Gaussian4, k : ModeCube27:
+    retainedSampledBilinear f g k
+      ≡ fourGridGaussianIndexConvolutionAt f g k.
+```
+This is not proved in Agda yet; do **not** add it as a postulate. A proof must distribute the actual 64 sampled product over two 27-term Fourier syntheses, apply C4³ character orthogonality and normalization, and reindex the finite sum via the existing 729 ordered-pair collector. Once it exists, composing with the inherited indexed theorem will establish the exact finite sampled-to-integer operator bridge.
+
+### Universal finite basis checks — stronger than random coefficient fixtures
+
+New committed `scripts/r2p2_c4_c5_universal_basis_certificate.py` and pytest wrapper check:
+
+| Basis identity | Exact cases tested | Interpretation |
+|---|---:|---|
+| C4³ 64x64 Fourier/inverse matrix | 4,096 | All matrix elements of the character-orthogonality identity |
+| C4³ 27x27 input pairs, 27 retained outputs | 19,683 | Every symbolic coefficient of `u[p]v[q]` agrees with the true integer-frequency retained convolution |
+| C5³ 27x27 input pairs, 125 full outputs | 91,125 | Every symbolic coefficient agrees with the full integer-frequency convolution using the exact formal fifth-root relation `1+ζ+ζ²+ζ³+ζ⁴=0` |
+| C4 full-field tensor sample identity | Three separately populated 64-sample arrays | Exact Q(i) forward/inverse equality and direct-character evaluation |
+| Nyquist condition | Eight | Exactly eight C4³ inversion-fixed grid frequencies |
+
+These **are universal coefficient/basis checks**, not merely eight or twelve random profiles: bilinearity then implies the corresponding mathematical finite identity for arbitrary coefficient fields over the relevant cyclotomic coefficient rings. The C5 audit uses four-coordinate exact representation of cyclotomic fifth roots in its character sums; it is not a completed Agda `Q(ζ5)` sampled-transform implementation. This is independent executed Python in the local runtime; **not an exact-repository-checkout test receipt**, and not Agda kernel certification.
+
+The C4 case is exact for retained outputs only. Full outputs +2 and -2 collide modulo four. The C5 case is exact for all 125 outputs. C4 has eight self-antipodal Nyquist frequencies; any real-field inverse transform must treat their Fourier coefficients as self-conjugate (real).
+
+### Prior art, highest-alpha and Pareto ownership decision
+
+1. **Reuse first:** the original `NSTriadKNFiniteConvolutionReconstruction` has a proof of bag equality, list permutation, and preservation of finite ordered convolution sums under a canonical input-swap orbit reindexing. Its *method* is the right donor for the 365 simultaneous-negation orbit case. Its specific input-swap theorem must **not** be applied directly to a different action.
+2. **Complete the one critical missing finite equality:** show `retainedSampledBilinear = fourGridGaussianIndexConvolutionAt` by an actual C4³ character proof over the 27/729 input/output supports.
+3. **Then the orbit wall:** reuse the source proof strategy for a typed no-duplicate/exhaustive permutation from 365 canonical input pairs plus reflected mates to 729 ordered input pairs. Transport Q(omega) finite sums under that permutation. The executable address certificate is not a substitute for the kernel permutation proof.
+4. **Then NS:** attach the already-proved finite operator to the **original** Complex3/Leray/triad carriers, with Hermitian conjugation, real divergence-free fields, energy cancellation and actual finite Galerkin theorem. Do not build an incompatible duplicate NS object.
+5. **Separately:** cutoff-uniform high-high Gram estimates and Clay regularity are original analytic research obligations; physical Ma 87Sr and R2P2 neutral Yb calibration need real source data, covariance and systematics; C5 sampled DFT/ζ5 Agda source is not yet constructed.
+6. **Ibrahim firewall:** cite original Ibrahim snowball/Pareto and Monster 3B ownership. No mere match of 27, 729, 365, 19683 or C5 character indices is a group representation, same-object Monster weld, metrological proof or independent physical observation.
+
+Adjacent PR #1414 covers independent polynomial monodromy/S3-C3, and #1416/#1417 cover abstract Pareto worker scheduling. They were inspected for reuse priorities, not merged, copied or turned into physics authority.
+
+### Execution and trust boundary
+
+**Actually executed locally:** standalone exact Python 365/729 Hermitian and 41/81 plane comparisons, 4-grid sampled-product profiles, complete C4/C5 universal coefficient certificate, and the exact forward/inverse Q(i) 64-cell checks.
+
+**Only source-written:** new Agda C4 `Quad`, `CubeSignal64` inversion, 27->64 padding/roundtrip, sampled operator, inherited 729-pair Gaussian instantiation, and their projections in the three TOE roots. No checkout-pinned pytest execution, Agda type-check, or CI receipt was obtained. No changed ESD file, no new postulate, no allow-unsolved-metas, no termination/positivity bypass.
+
+**Remaining wall:** kernel certify the current new modules, then prove the one real sampled-versus-index Q(i) equality and canonical-pair permutation/sum law. Finite mathematical correctness, source-written terms, executed Python checks, certified Agda theorems, scientific source provenance, and calibrated physical observations remain separate verification grades.
