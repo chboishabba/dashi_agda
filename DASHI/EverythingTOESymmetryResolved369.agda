@@ -10,6 +10,7 @@ import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidir
 import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact as PlantNutrientTransport
+import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as PlantHydraulicCarbon
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -1566,3 +1567,16 @@ toePlantNutrientTransportZKPFrame =
     "the TOE exposes the moisture boundary and blocks unique-cause promotion from interveinal chlorosis alone"
     "GitHub reuse search, exact-owner read-back, trust-escape scan, ESD mutation scan and Agda kernel check"
     false false false false
+
+
+toeLeafAreaNutrientCouplingBoundary :
+  PlantHydraulicCarbon.LeafAreaNutrientCouplingBoundary
+toeLeafAreaNutrientCouplingBoundary =
+  PlantHydraulicCarbon.canonicalLeafAreaNutrientCouplingBoundary
+
+toeLeafAreaDoesNotDetermineNutrientUptakeAlone :
+  PlantHydraulicCarbon.leafAreaAloneDeterminesNutrientUptake
+    PlantHydraulicCarbon.canonicalLeafAreaNutrientCouplingBoundary
+  ≡ false
+toeLeafAreaDoesNotDetermineNutrientUptakeAlone =
+  PlantHydraulicCarbon.leafAreaDoesNotDetermineNutrientUptakeAlone
