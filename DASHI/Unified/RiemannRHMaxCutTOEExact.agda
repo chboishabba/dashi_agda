@@ -51,6 +51,29 @@ import DASHI.Analysis.ResidualBudgetMarginCompilerExact as Budget
 -- Canonical owners.
 ------------------------------------------------------------------------
 
+CurrentThreeTapFrontier : Set
+CurrentThreeTapFrontier = ThreeTap.ThreeTapCurrentLeanFrontier
+
+currentA1CarrierSummationPaid : Bool
+currentA1CarrierSummationPaid =
+  ThreeTap.ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
+    ThreeTap.currentThreeTapCurrentLeanFrontier
+
+currentA2StrictScalarPaid : Bool
+currentA2StrictScalarPaid =
+  ThreeTap.ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
+    ThreeTap.currentThreeTapCurrentLeanFrontier
+
+currentRouteBEventualGapPaid : Bool
+currentRouteBEventualGapPaid =
+  ThreeTap.ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
+    ThreeTap.currentThreeTapCurrentLeanFrontier
+
+currentRHDerived : Bool
+currentRHDerived =
+  ThreeTap.ThreeTapCurrentLeanFrontier.rhDerivedHere
+    ThreeTap.currentThreeTapCurrentLeanFrontier
+
 currentThreeTapFrontier : ThreeTap.ThreeTapCurrentLeanFrontier
 currentThreeTapFrontier = ThreeTap.currentThreeTapCurrentLeanFrontier
 
