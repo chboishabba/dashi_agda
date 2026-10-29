@@ -181,3 +181,24 @@ packagePreservesExpected : (label : String) (result : TextTestResult) →
       (AssessedPackage.packagedResult (packageSatisfied label result))) ≡
   TextTestCase.expectedText (TextTestResult.testCase result)
 packagePreservesExpected label result = refl
+
+-- Worker 11: the comparative phrase and the selected state remain distinct.
+-- This does not assert that the phrase was parsed or interpreted correctly.
+record ComparativeState : Set where
+  constructor comparativeState
+  field
+    phrase : ComparativeChangeMotif
+    selected : String
+
+chooseRather : String → String → ComparativeState
+chooseRather preferred alternative =
+  comparativeState (ratherThan preferred alternative) preferred
+
+chooseRatherPreservesPhrase : (preferred alternative : String) →
+  ComparativeState.phrase (chooseRather preferred alternative) ≡
+  ratherThan preferred alternative
+chooseRatherPreservesPhrase preferred alternative = refl
+
+chooseRatherSelectsPreferred : (preferred alternative : String) →
+  ComparativeState.selected (chooseRather preferred alternative) ≡ preferred
+chooseRatherSelectsPreferred preferred alternative = refl
