@@ -74,7 +74,7 @@ jobs:
             DASHI/Biology/NeurodivergentSocialEcologyCrossPollinationExact.agda
             DASHI/Core/ContrastiveInterventionResponseExact.agda
           )
-          if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
+          if grep -nE '\\b(postulate|TERMINATING|NO_POSITIVITY_CHECK|sorry|admit)\\b|allow-unsolved-metas' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in neurodivergent social-ecology tranche.' >&2
             exit 1
           fi
