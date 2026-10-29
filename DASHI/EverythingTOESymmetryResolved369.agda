@@ -37,6 +37,8 @@ import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Unified.YMA1SourceFrontierExact as YMA1Frontier
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
 
 -- Current-master R485/R546/R558 Goal-1/Pareto normalization.
@@ -1459,6 +1461,70 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
+
+------------------------------------------------------------------------
+-- Canonical Row-A1 source frontier.
+-- Agda remains theorem authority. Lean cross-prover progress does not promote.
+------------------------------------------------------------------------
+
+toeYMA1SourceFrontierReceipt :
+  YMA1Frontier.YMA1SourceFrontierReceipt
+toeYMA1SourceFrontierReceipt =
+  YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+toeYMA1ZKPFrame :
+  YMA1Frontier.YMA1ZKPFrame
+toeYMA1ZKPFrame =
+  YMA1Frontier.canonicalYMA1ZKPFrame
+
+toeYMA1FrozenResearchCount :
+  ℕ
+toeYMA1FrozenResearchCount =
+  YMA1Frontier.frozenResearchCount
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+toeYMA1FrozenResearchCountIsFour :
+  toeYMA1FrozenResearchCount ≡ 4
+toeYMA1FrozenResearchCountIsFour =
+  YMA1Frontier.frozenResearchCountStillFour
+
+toeYMA1RowAStillNotPromoted :
+  YMA1Frontier.rowAPromoted
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+  ≡ false
+toeYMA1RowAStillNotPromoted =
+  YMA1Frontier.rowAStillNotPromoted
+
+toeYMA1CompletionDoesNotSelfPromote :
+  Proof.promotable
+    (YMA1Frontier.rowACompletion
+      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
+  ≡ false
+toeYMA1CompletionDoesNotSelfPromote =
+  YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- SensibLaw G1-G4 direct runtime boundary.
+------------------------------------------------------------------------
+
+toeSensibLawDirectCutoverReceipt :
+  SensibLawDirect.ProductionCutoverReceipt
+toeSensibLawDirectCutoverReceipt =
+  SensibLawDirect.sensibLawGWBv01ProductionCutover
+
+toeSensibLawDirectParserTokenWritesAreZero :
+  SensibLawDirect.productionParserTokenWrites
+    SensibLawDirect.sensibLawGWBv01ProductionCutover
+  ≡ 0
+toeSensibLawDirectParserTokenWritesAreZero =
+  SensibLawDirect.productionParserTokenWritesZero
+    SensibLawDirect.sensibLawGWBv01ProductionCutover
+
+toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
+  SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
+toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
+  SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
 
 ------------------------------------------------------------------------
 -- Wette constructive-foundations max-cut.
