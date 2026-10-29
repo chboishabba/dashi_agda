@@ -15,6 +15,7 @@ import DASHI.Biology.SocialEcologicalAffordanceConeExact as Ecology
 import DASHI.Biology.TrustedFriendEcologyInteractionExact as FriendInteraction
 import DASHI.Governance.OptionConeCoercionExact as Cone
 import DASHI.Governance.HistoryConditionedSocialEcologyOptionConeExact as HistoryCone
+import DASHI.Governance.HistoryObserverAuthorityOptionConeCapstoneExact as GovernanceCapstone
 
 ------------------------------------------------------------------------
 -- EMBODIED SOCIAL-ECOLOGY RELATIONAL-HISTORY ADAPTER
@@ -318,6 +319,12 @@ genericJointOptionConeContraction :
 genericJointOptionConeContraction =
   HistoryCone.jointHistoryEcologyContraction
 
+
+genericObserverAffordanceAuthorityBoundary :
+  GovernanceCapstone.HistoryObserverAuthorityCapstoneBoundary
+genericObserverAffordanceAuthorityBoundary =
+  GovernanceCapstone.canonicalHistoryObserverAuthorityCapstoneBoundary
+
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F audit frame.
 --
@@ -380,6 +387,9 @@ record SituatedReachabilityTOEReceipt : Set where
     proofBearingHistoryEcologyOptionConeReused : Bool
     proofBearingHistoryEcologyOptionConeReusedIsTrue :
       proofBearingHistoryEcologyOptionConeReused ≡ true
+    observerAffordanceAuthorityCapstoneReused : Bool
+    observerAffordanceAuthorityCapstoneReusedIsTrue :
+      observerAffordanceAuthorityCapstoneReused ≡ true
     historyPropagationWitnessInstalled : Bool
     historyPropagationWitnessInstalledIsTrue :
       historyPropagationWitnessInstalled ≡ true
@@ -399,6 +409,7 @@ record SituatedReachabilityTOEReceipt : Set where
 canonicalSituatedReachabilityTOEReceipt : SituatedReachabilityTOEReceipt
 canonicalSituatedReachabilityTOEReceipt =
   situated-reachability-toe-receipt
+    true refl
     true refl
     true refl
     true refl
