@@ -74,6 +74,24 @@ recover additional triadic meaning without an independently supplied
 face-mediation witness. It does not assert a specific empirical
 three-person relationship.
 
+## Matrix powers, typed outgoing-row hyperfabric and binary-in-ternary codec
+
+The direct A→C entry is zero, but the path A→B→C has scaled weight
+`10×22 = 220` in hundredths: `(A²)[A,C] = 220/100 = 2.2`.
+This is an exact finite two-step-walk calculation (consistent with the
+existing `BalabanFiniteSpeedLocalInfluencePathExact` path-support owner),
+not a new locality or continuum-semigroup result.
+
+The new owner also instantiates `TypedHyperfabricCore` rather than merely
+citing it. Each vertex stalk is its complete outgoing weight row; an
+`OrderedEdge(source,target)` has the weight as its edge stalk, with an
+`OutgoingIncidence` witness only at the source. The restriction evaluates
+the row at the edge target, and `outgoingWeightSection` has an explicit
+`compatible` proof. The exact edge-illustration provenance is retained.
+The canonical `HyperfabricPantsGluing` is still only an *obligation*:
+a domain-specific map from weights to branch channels and a real
+`InterfaceMatch` must be supplied before claiming any seam.
+
 ## Ternary codec, hypervoxel and pants
 
 The observer's *positions* are an existing nine-slot chart and an
@@ -107,10 +125,11 @@ boundaries rather than promoting shape analogies to theorem authority.
   `--safe`, postulates, unsolved metas, termination escape hatches.
 - [ ] **Independent Lean mirror:** ensure mirror statements are
   no stronger than golden Agda and compile under the pinned Lean toolchain.
-- [ ] **Conditional next leaf:** instantiate an actual
-  provenance-bearing `TypedHyperfabric` over this graph only after
-  choosing relevant fibres, incidence/restrictions and compatible
-  global sections. For a 27-voxel pants graph homomorphism, first
-  supply *that carrier's* adjacency, not this 3-vertex example.
+- [x] Construct a finite outgoing-row `TypedHyperfabric`, explicit
+  source-directed incidence, restrictions and a compatible global section.
+- [x] Prove the mediated two-step A→B→C contribution despite no direct A→C arc.
+- [ ] **Conditional next leaf:** justify a situated weight→pants branch-channel
+  interpretation and matching interface if desired. For a 27-voxel pants graph
+  homomorphism, first supply *that carrier's* adjacency, not this 3-vertex example.
 - [ ] **No silent semantics:** find situated sources for any
   intersectional, psychological, legal, or physical interpretation.
