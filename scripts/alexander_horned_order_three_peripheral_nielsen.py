@@ -33,6 +33,29 @@ for g in (1,2,3):
 assert phi[1]!=(1,)
 assert conjugate(subst(w,phi),w)
 assert not conjugate(subst(w,phi),inv(w))
+# Stronger exact based-path requirement for the selected ternary bonding word.
+# phi(w) is conjugate by this PARTICULAR q, but not equal as a based word.
+q=(3,-1,3,-1)  # c a^-1 c a^-1
+assert subst(w,phi)==red(q+w+inv(q))
+assert subst(w,phi)!=w
+
+# Every FREELY REDUCED word of length <= 5: 1+6+30+150+750+3750=4687.
+# This is a computational regression, not a quantified Agda kernel theorem.
+from itertools import product
+checks=0
+alphabet=(-3,-2,-1,1,2,3)
+for n in range(6):
+    for letters in product(alphabet,repeat=n):
+        if red(letters)!=letters:
+            continue
+        t=letters
+        for _ in range(3):
+            t=subst(t,phi)
+        assert t==letters,(letters,t)
+        checks+=1
+assert checks==4687
+print("PASS:",checks,"reduced free words length <=5 have phi^3=id")
+print("PASS: exact based conjugator q=c A c A; strict based phi(w)=w FAILS")
 print("PASS: nontrivial order-three Nielsen automorphism preserving [w] in F3")
 print("Images: a -> c a^-1 c b; b -> a^-1 c; c -> c")
 print("Geometric cap-relative realisation and Agda kernel are NOT established.")
