@@ -1,0 +1,93 @@
+@startuml
+title SensibLaw reviewed LegalFollow max-cut
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+
+package "Primary-law acquisition" {
+  [LegalFollow residual] as residual
+  [Typed source demand] as demand
+  [Governed OALC] as oalc
+  [Pinned source receipt] as source
+}
+
+package "Reviewed admission" {
+  [Authority identity review] as identity
+  [Proposition review and payment] as proposition
+  [Citation-use treatment review] as treatment
+}
+
+package "Canonical legal world" {
+  [Reviewed candidate delta] as delta
+  [Typed trace and provenance] as trace
+  [Residual recomputation] as recompute
+  [Consumer adequacy check] as adequacy
+}
+
+package "Read-only consumers" {
+  [MatterRuntime] as runtime
+  [Projection / VisualisationIR] as projection
+}
+
+residual --> demand
+demand --> oalc
+oalc --> source
+source --> identity : review gate
+identity --> proposition : exact identity retained
+identity --> treatment : exact identity retained
+proposition --> delta : reviewed support only
+treatment --> delta : reviewed citation use only
+delta --> trace : append provenance
+trace --> recompute
+recompute --> residual : fresh selectable work
+trace --> adequacy
+trace --> runtime
+runtime --> projection
+
+note right of oalc
+Acquisition substrate only.
+Zero result is not negative legal evidence.
+end note
+
+note right of identity
+Raw OALC identity cannot create
+a canonical legal authority alias.
+QID is supplemental scheduling metadata.
+end note
+
+note right of delta
+Candidate only.
+No legal authority.
+No current-law conclusion.
+Corroborating review units may
+deduplicate to one semantic hop.
+All review provenance remains.
+end note
+
+note right of recompute
+Paid work cannot resurrect itself.
+No selectable residual means only
+that the current frontier is closed.
+end note
+
+note right of adequacy
+Runtime coverage is not FactorsThrough.
+Formal adequacy needs an actual
+query-indexed proof witness.
+end note
+
+note bottom
+ZKP frame
+O: close source-to-reviewed-hop-to-frontier handoff.
+R: reuse existing OALC, review, residual, Pareto, snowball and adequacy owners.
+C: enforce explicit identity, proposition and treatment gates.
+S: fail closed on unresolved, contested, context-only and unsupported inputs.
+L: one disjoint legal reviewed-hop lane.
+P: exact source revision, reviewer evidence and declared consumer coordinates.
+G: preserve source, DASHI, Ibrahim and meta-introspector attribution. ESD is read-only.
+F: emit candidate deltas and residuals only.
+
+Process lenses: ITIL; ISO 9000; ISO/IEC 42001, 27001, 27701, 23894, 9241;
+NIST AI RMF; Six Sigma; C4. These govern process and traceability only.
+end note
+@enduml
