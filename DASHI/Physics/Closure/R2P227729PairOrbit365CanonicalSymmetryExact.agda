@@ -72,15 +72,13 @@ noncentralPairsSplitAs364SignedPairs = refl
 -- have the proven nonfactorability counterexample in the source owner.
 negatingBothInputModesNegatesTheirIntegerOutput :
   (pair : I.ModePair729) →
-  Ant.negateWideCube
-    (Conv.exactPairOutput
-      (proj₁ pair) (proj₂ pair))
-    ≡
   Conv.exactPairOutput
     (proj₁ (Ant.simultaneouslyNegateOrderedPair pair))
     (proj₂ (Ant.simultaneouslyNegateOrderedPair pair))
-negatingBothInputModesNegatesTheirIntegerOutput pair =
-  Ant.trueIntegerQuadraticPairSumNegationEquivariance pair
+    ≡ Ant.negateWideCube
+        (Conv.exactPairOutput (proj₁ pair) (proj₂ pair))
+negatingBothInputModesNegatesTheirIntegerOutput =
+  Ant.orderedPairOutputCovariantUnderSimultaneousNegation
 
 -- Explicit fail-closed statement: labels in the 365 classes do not
 -- by themselves encode signed complex amplitudes or an NS interaction.
