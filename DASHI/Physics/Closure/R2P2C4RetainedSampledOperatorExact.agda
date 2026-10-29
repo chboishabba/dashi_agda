@@ -199,3 +199,49 @@ retainedSampledBilinear f g target =
 -- coefficients were independently exhaustively checked in the associated
 -- Python certificate. A standalone kernel proof of equality with the
 -- original 729-pair true-integer convolution remains open.
+
+
+------------------------------------------------------------------------
+-- EXACT SAME Q(i) SCALAR CARRIER AT THE INDEX-OPERATOR BOUNDARY.
+-- The inherited bilinear theorem is coefficient-polymorphic and
+-- supplies the correct integer/4-grid correspondence WITHOUT recasting
+-- the original C3/Q(omega) amplitudes as a different scalar field.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as Bilinear
+import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Full
+
+gaussianCoefficientOps : Bilinear.CoefficientOps G.Gaussian4
+gaussianCoefficientOps = record
+  { zero = G.zeroG
+  ; add = G._+G_
+  ; multiply = G._*G_
+  }
+
+trueGaussianIntegerConvolutionAt :
+  (I.ModeCube27 → G.Gaussian4) →
+  (I.ModeCube27 → G.Gaussian4) →
+  Full.WideCube125 → G.Gaussian4
+trueGaussianIntegerConvolutionAt =
+  Bilinear.trueBilinearConvolutionAt gaussianCoefficientOps
+
+fourGridGaussianIndexConvolutionAt :
+  (I.ModeCube27 → G.Gaussian4) →
+  (I.ModeCube27 → G.Gaussian4) →
+  I.ModeCube27 → G.Gaussian4
+fourGridGaussianIndexConvolutionAt =
+  Bilinear.fourGridBilinearRetainedAt gaussianCoefficientOps
+
+-- Fully quantified for TWO INDEPENDENT Q(i) coefficient fields,
+-- not just one tested numerical profile or a formal cardinality.
+fourGridGaussianIndexIsTrueIntegerConvolution :
+  (f g : I.ModeCube27 → G.Gaussian4) (target : I.ModeCube27) →
+  fourGridGaussianIndexConvolutionAt f g target
+    ≡ trueGaussianIntegerConvolutionAt f g (Full.retainedToWide target)
+fourGridGaussianIndexIsTrueIntegerConvolution =
+  Bilinear.fourGridBilinearRecoversAllRetainedCoefficients gaussianCoefficientOps
+
+-- THE remaining same-carrier sampled operator proof must relate:
+--   retainedSampledBilinear f g target
+--   fourGridGaussianIndexConvolutionAt f g target
+-- via the exact C4^3 root character, distributivity and 1/64 scaling.
+-- Do not introduce a postulate or assert an equality until proved.
