@@ -2,6 +2,7 @@ module DASHI.Cognition.PNF.RelationDeltaReconciliationRegression where
 
 open import Agda.Builtin.Equality using (refl)
 open import DASHI.Cognition.PNF.RelationDeltaReconciliationExact
+import DASHI.Core.AuthorityNonPromotionCore as Authority
 
 oneAddOneRemoveOneReplaceOneSkip : RelationDeltaReceipt
 oneAddOneRemoveOneReplaceOneSkip =
@@ -39,3 +40,11 @@ singleCandidateRelationOwner =
     refl
     refl
     refl
+
+
+candidateRelationExecutionBoundary : RelationDeltaAuthorityBoundary
+candidateRelationExecutionBoundary =
+  relationDeltaAuthorityBoundary
+    singleCandidateRelationOwner
+    (Authority.mkClosedAuthorityNonPromotionBundle
+      "sensiblaw-relation-delta-execution-owner")
