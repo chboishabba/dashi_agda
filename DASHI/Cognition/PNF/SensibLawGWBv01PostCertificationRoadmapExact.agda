@@ -2,8 +2,10 @@ module DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero)
 open import Data.Empty using (⊥)
 
+import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureExact as Direct
 import DASHI.Cognition.PNF.DirectStreamingRoadmapSynthesisExact as OldRoadmap
 import DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationExact as GWB
 
@@ -15,6 +17,47 @@ import DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationExact as GWB
 -- receipt licenses: bounded parity is closed on GWB v0.1; production cutover is
 -- now the next decision gate, not an already-earned global authority.
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- Declared production cutover.
+--
+-- This receipt is a governed physical-policy choice. It uses the bounded GWB
+-- parity receipt as evidence. It does not claim parity for every future corpus.
+------------------------------------------------------------------------
+
+record ProductionCutoverReceipt : Set where
+  constructor productionCutoverReceipt
+  field
+    certifiedRun : GWB.GWBv01RuntimeCertificationReceipt
+    projectionMode : Direct.ParserProjectionMode
+    productionMode : projectionMode ≡ Direct.productionDirect
+    sentenceLocalDatabaseCrossings : Nat
+    sentenceLocalDatabaseCrossingsZero :
+      sentenceLocalDatabaseCrossings ≡ zero
+    productionParserTokenWrites : Nat
+    productionParserTokenWritesZero :
+      productionParserTokenWrites ≡ zero
+    referencePathRetained : Bool
+    referencePathRetainedTrue : referencePathRetained ≡ true
+    universalParityClaimed : Bool
+    universalParityClaimedFalse : universalParityClaimed ≡ false
+
+open ProductionCutoverReceipt public
+
+sensibLawGWBv01ProductionCutover : ProductionCutoverReceipt
+sensibLawGWBv01ProductionCutover =
+  productionCutoverReceipt
+    GWB.gwbV01CertifiedRun
+    Direct.productionDirect
+    refl
+    zero
+    refl
+    zero
+    refl
+    true
+    refl
+    false
+    refl
 
 data PostGWBStage : Set where
   boundedParityClosed : PostGWBStage
@@ -110,11 +153,17 @@ canonicalSemanticExpansionBoundary =
 
 data GWBReceiptMakesAllFutureCorporaParityCertified : Set where
 
+data DeclaredCutoverMakesParityUniversal : Set where
+
 data GWBReceiptMakesAllFutureSemanticExpansionsPerformanceCertified : Set where
 
 boundedReceiptCannotCertifyAllFutureCorpora :
   GWBReceiptMakesAllFutureCorporaParityCertified → ⊥
 boundedReceiptCannotCertifyAllFutureCorpora ()
+
+declaredCutoverDoesNotMakeParityUniversal :
+  DeclaredCutoverMakesParityUniversal → ⊥
+declaredCutoverDoesNotMakeParityUniversal ()
 
 boundedReceiptCannotCertifyFutureExpandedSemantics :
   GWBReceiptMakesAllFutureSemanticExpansionsPerformanceCertified → ⊥
