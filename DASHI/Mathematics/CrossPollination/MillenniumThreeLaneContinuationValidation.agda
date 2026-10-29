@@ -834,6 +834,7 @@ hodgeCellularPointGeneratorWeldPaid =
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact as Gate
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceLinearCycleClassExact as HodgeLinear
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHodgeBasisExact as HodgeBasis
 
 millenniumThreeLaneZKPFrame : Introspection.ZKPFrame
 millenniumThreeLaneZKPFrame =
@@ -864,7 +865,7 @@ record MillenniumThreeLaneTOEContract : Set where
       ≡ true
 
     hodgeFiniteLinearCyclePrecondition :
-      ∀ {n} (power : HodgeLinear.Basis.ProjectiveSpaceHodgeBasis n)
+      ∀ {n} (power : HodgeBasis.ProjectiveSpaceHodgeBasis n)
         (h : HodgeLinear.CPnRationalHodgeClass n power) →
       HodgeLinear.AlgebraicRepresentative power h
 
