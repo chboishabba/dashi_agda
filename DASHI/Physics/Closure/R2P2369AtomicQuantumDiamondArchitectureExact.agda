@@ -1,4 +1,6 @@
 module DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact where
+import DASHI.Physics.Closure.R2P227729PairOrbit365CanonicalSymmetryExact as Pair365
+import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as Pairs365Owner
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -971,3 +973,9 @@ fullArchitectureFourGridNyquistIsSelfNegative :
     ≡ FourPareto.fourOuterTwo
 fullArchitectureFourGridNyquistIsSelfNegative =
   Nyquist729.fourNyquistResidueIsSelfAntipodal
+
+-- Simultaneous inversion of ordered pair labels: 729 -> 365 classes.
+-- This is NOT independent antipodal quotienting of either input mode.
+architectureActual729PositivePairOrbitCount :
+  Pairs365Owner.countWhereL Pair365.positivePair Pairs365Owner.pair729 ≡ 365
+architectureActual729PositivePairOrbitCount = Pair365.actualPositivePairRepresentatives
