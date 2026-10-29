@@ -594,7 +594,7 @@ cultivationMetabolomics2026 : CultivationCompositionSourceReceipt
 cultivationMetabolomics2026 =
   cultivation-composition-source-receipt
     2026
-    "Integrated LC x LC-ASCA workflow for cultivar- and cultivation-dependent Cannabis sativa metabolic variability; PubMed PMID 42570619"
+    "Caruso, Acquaviva, Lemus Muller, Pellegrino, Castells; Journal of Chromatography A 1785:467331; DOI 10.1016/j.chroma.2026.467331; PMID 42570619"
     "Cultivar explained most measured chemical variability; cultivation method also explained a smaller significant component; outdoor and greenhouse samples differed from indoor samples in metabolomic composition."
     "Cultivation-dependent chemistry does not establish that outdoor growth caused the reported Royale preference."
 
