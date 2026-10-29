@@ -103,3 +103,8 @@ import DASHI.Interop.Round11MachinLeanBindingManifestExact
 import DASHI.Interop.LeanBishopCompletionCanonicalRouteReceiptExact
 import DASHI.Interop.LeanRound11MachinCanonicalRouteBParityExact
 import DASHI.Interop.LeanRound11MachinReplayEvidenceExact
+
+import DASHI.Interop.WorldEigenResidualStratification
+import DASHI.Interop.HierarchicalSpectralParetoExact
+import DASHI.Interop.SublinearTopicConductorCostExact
+import DASHI.Interop.CombinatorialMaxCutPhysicsAlignmentExact
