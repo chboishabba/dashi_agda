@@ -89,3 +89,25 @@ topicOneLastPreserved = refl
 
 topicOneNowPreserved : TopicOnePlan.nowExpansion canonicalTopicOne ≡ expandTemporal "now"
 topicOneNowPreserved = refl
+
+-- Worker 01: the lexical sub-motif is retained without assuming that
+-- comparative 'rather/than' and a 'change' event are equivalent.
+data ComparativeChangeMotif : Set where
+  ratherThan : String → String → ComparativeChangeMotif
+  change : String → ComparativeChangeMotif
+
+record Worker01Motif : Set where
+  constructor worker01Motif
+  field comparison : ComparativeChangeMotif
+        mutation : ComparativeChangeMotif
+
+canonicalWorker01 : Worker01Motif
+canonicalWorker01 = worker01Motif (ratherThan "rather" "than") (change "change")
+
+worker01ComparisonPreserved :
+  Worker01Motif.comparison canonicalWorker01 ≡ ratherThan "rather" "than"
+worker01ComparisonPreserved = refl
+
+worker01ChangePreserved :
+  Worker01Motif.mutation canonicalWorker01 ≡ change "change"
+worker01ChangePreserved = refl
