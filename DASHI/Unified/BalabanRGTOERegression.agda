@@ -58,6 +58,9 @@ import DASHI.Physics.YangMills.BalabanRGLane as LegacyRGLane
 import DASHI.Physics.YangMills.YangMillsHighestAlphaGateDependencyExact as Gate
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
 import DASHI.Physics.YangMills.YangMillsConstructivePathPrePostInvariantExact as Path
+import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as RGReopen
+import DASHI.Physics.YangMills.BalabanFiniteRGTotalCovarianceExact as RGCovariance
+import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact as Residual369
 
 ------------------------------------------------------------------------
 -- Exact theorem-owner re-exports.
@@ -681,3 +684,133 @@ toeContinuumPromotionRemainsFalseIsFalse = refl
 toeClayPromotionRemainsFalseIsFalse :
   toeClayPromotionRemainsFalse ≡ false
 toeClayPromotionRemainsFalseIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- CATEGORICAL FIBRE / OBSERVER NORMALIZATION
+--
+-- Reuse the existing Balaban coarse/fine reopening and 369 residual owners.
+-- Do not create a parallel Pi/Phi/Psi ontology.
+-- Pi, Phi, and Psi remain structural roles over existing carriers.
+-- Tau and zeta remain domain-specific coordinates unless a typed crosswalk exists.
+--
+-- The finite reopening theorem is the categorical analogue used here:
+-- coarse projection keeps an explicit fibre kernel, and observables transport
+-- through that kernel. The total-covariance theorem keeps the residual
+-- conditional covariance instead of erasing it.
+------------------------------------------------------------------------
+
+open RGReopen public using
+  ( FiniteRGReopeningStep
+  ; Observable
+  ; transportObservable
+  ; finiteRGObservableExpectationPreserved
+  ; finiteRGCompositeExpectationPreserved
+  ; finiteRGObservableReopeningLevel
+  ; finiteRGCompositeObservableTransportLevel
+  ; scaleUniformRGAnalyticProducerStillRequiredLevel
+  )
+
+open RGCovariance public using
+  ( conditionalCovariance
+  ; finiteRGTotalCovariance
+  ; finiteRGTotalVariance
+  ; finiteRGConnectedObservableReopening
+  ; finiteRGTotalCovarianceLevel
+  ; finiteRGTotalVarianceLevel
+  ; finiteRGConnectedObservableReopeningLevel
+  )
+
+open Residual369 public using
+  ( sourceRecoveryNonDescentWitness
+  ; coarseBalabanClaimNotSufficientForRecoveryDecision
+  ; coarseBalabanClaimCannotFactorRecoveryDecision
+  ; ym369ResidualNoDirectTheoremTransfer
+  )
+
+record BalabanCategoricalFibreTOEReceipt : Set where
+  field
+    finiteObservableReopening : ProofLevel
+    finiteCompositeObservableTransport : ProofLevel
+    finiteTotalCovariance : ProofLevel
+    finiteTotalVariance : ProofLevel
+    finiteConnectedObservableReopening : ProofLevel
+    scaleUniformAnalyticProducer : ProofLevel
+
+    sourceResidualNonDescentReused : Bool
+    sourceResidualNonDescentReusedIsTrue :
+      sourceResidualNonDescentReused ≡ true
+
+    piPhiPsiCreateParallelOntology : Bool
+    piPhiPsiCreateParallelOntologyIsFalse :
+      piPhiPsiCreateParallelOntology ≡ false
+
+    tauZetaPromotedAsGenericPipelineStages : Bool
+    tauZetaPromotedAsGenericPipelineStagesIsFalse :
+      tauZetaPromotedAsGenericPipelineStages ≡ false
+
+    finiteFibreResultPromotesContinuumRG : Bool
+    finiteFibreResultPromotesContinuumRGIsFalse :
+      finiteFibreResultPromotesContinuumRG ≡ false
+
+    fibrePreconditions : List Path.PathClause
+    fibrePostconditions : List Path.PathClause
+    fibreInvariants : List Clay.ClayInvariant
+
+open BalabanCategoricalFibreTOEReceipt public
+
+canonicalBalabanCategoricalFibreTOEReceipt :
+  BalabanCategoricalFibreTOEReceipt
+canonicalBalabanCategoricalFibreTOEReceipt =
+  record
+    { finiteObservableReopening =
+        RGReopen.finiteRGObservableReopeningLevel
+    ; finiteCompositeObservableTransport =
+        RGReopen.finiteRGCompositeObservableTransportLevel
+    ; finiteTotalCovariance =
+        RGCovariance.finiteRGTotalCovarianceLevel
+    ; finiteTotalVariance =
+        RGCovariance.finiteRGTotalVarianceLevel
+    ; finiteConnectedObservableReopening =
+        RGCovariance.finiteRGConnectedObservableReopeningLevel
+    ; scaleUniformAnalyticProducer =
+        RGReopen.scaleUniformRGAnalyticProducerStillRequiredLevel
+    ; sourceResidualNonDescentReused = true
+    ; sourceResidualNonDescentReusedIsTrue = refl
+    ; piPhiPsiCreateParallelOntology = false
+    ; piPhiPsiCreateParallelOntologyIsFalse = refl
+    ; tauZetaPromotedAsGenericPipelineStages = false
+    ; tauZetaPromotedAsGenericPipelineStagesIsFalse = refl
+    ; finiteFibreResultPromotesContinuumRG = false
+    ; finiteFibreResultPromotesContinuumRGIsFalse = refl
+    ; fibrePreconditions =
+        preconditions canonicalBalabanTOEZKPFrame
+    ; fibrePostconditions =
+        postconditions canonicalBalabanTOEZKPFrame
+    ; fibreInvariants =
+        invariants canonicalBalabanTOEZKPFrame
+    }
+
+balabanCategoricalFibreKeepsContinuumPromotionClosed :
+  finiteFibreResultPromotesContinuumRG
+    canonicalBalabanCategoricalFibreTOEReceipt
+  ≡ false
+balabanCategoricalFibreKeepsContinuumPromotionClosed =
+  finiteFibreResultPromotesContinuumRGIsFalse
+    canonicalBalabanCategoricalFibreTOEReceipt
+
+balabanPiPhiPsiRemainRolesNotOntology :
+  piPhiPsiCreateParallelOntology
+    canonicalBalabanCategoricalFibreTOEReceipt
+  ≡ false
+balabanPiPhiPsiRemainRolesNotOntology =
+  piPhiPsiCreateParallelOntologyIsFalse
+    canonicalBalabanCategoricalFibreTOEReceipt
+
+balabanTauZetaRemainDomainSpecific :
+  tauZetaPromotedAsGenericPipelineStages
+    canonicalBalabanCategoricalFibreTOEReceipt
+  ≡ false
+balabanTauZetaRemainDomainSpecific =
+  tauZetaPromotedAsGenericPipelineStagesIsFalse
+    canonicalBalabanCategoricalFibreTOEReceipt
