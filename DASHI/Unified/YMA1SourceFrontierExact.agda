@@ -53,6 +53,7 @@ import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression as Direct
 import DASHI.Physics.YangMills.BalabanRowARecentLeanCrossProverProgressExact as Cross
 import DASHI.Physics.YangMills.BalabanYM4RowALiteralProducerAdapterExact as Producer
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as Gate4
 
 ------------------------------------------------------------------------
 -- ZKP governance frame.
@@ -94,7 +95,7 @@ canonicalYMA1ZKPFrame = record
   ; P-proposal =
       "Close the literal source identifications. Do not add a second A1 ontology."
   ; G-governance =
-      "Fail closed. Preserve attribution. Do not edit ESD surfaces. Preserve meta-introspector attribution. Use deterministic verification and exact non-promotion."
+      "Fail closed. Preserve attribution. Do not edit ESD surfaces. Keep zkperf, zos-server, erdfa-py, and aristotle-cli-rs as separately attributed meta-introspector donors, not theorem authority. Use deterministic verification and exact non-promotion."
   ; F-gap =
       "Open source producers are literal Q prime and pivot data, the same-object C*AC weld and positive patch, history-uniform five-channel source control, and the cumulative beta sensitivity q<1 reported by the Lean lane."
   ; preconditions =
@@ -139,6 +140,9 @@ record YMA1SourceFrontierReceipt : Set where
 
     rowACompletion : Proof.ProofLevel
 
+    gate4FormalGapCount : Nat
+    gate4FormalGapCountIs58 : gate4FormalGapCount ≡ 58
+
     frozenResearchCount : Nat
     frozenResearchCountIsFour : frozenResearchCount ≡ 4
 
@@ -180,6 +184,11 @@ canonicalYMA1SourceFrontierReceipt = record
   ; rowACompletion =
       Cross.rowACompletionAfterRecentCrossProverProgressLevel
 
+  ; gate4FormalGapCount =
+      Gate4.gate4UnresolvedCount Gate4.canonicalYMImplementAToDTOEMaxCutReceipt
+  ; gate4FormalGapCountIs58 =
+      Gate4.gate4UnresolvedCountIs58 Gate4.canonicalYMImplementAToDTOEMaxCutReceipt
+
   ; frozenResearchCount =
       Direct.currentFrozenResearchCountRegression
   ; frozenResearchCountIsFour =
@@ -209,6 +218,11 @@ literalCumulativeSensitivityDoesNotSelfPromote :
   ≡ false
 literalCumulativeSensitivityDoesNotSelfPromote =
   Proof.conditionalDoesNotSelfPromote
+
+gate4FormalGapCountStill58 :
+  gate4FormalGapCount canonicalYMA1SourceFrontierReceipt ≡ 58
+gate4FormalGapCountStill58 =
+  gate4FormalGapCountIs58 canonicalYMA1SourceFrontierReceipt
 
 frozenResearchCountStillFour :
   frozenResearchCount canonicalYMA1SourceFrontierReceipt ≡ 4
