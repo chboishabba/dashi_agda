@@ -25,7 +25,7 @@ module DASHI.Mathematics.Topology.AlexanderHornedTernaryPantsMeridianBoundaryExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (_∷_; [])
+open import Agda.Builtin.List using (List; _∷_; [])
 open import Data.Empty using (⊥)
 
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
@@ -133,3 +133,163 @@ singleCommutatorCyclicWord w =
 -- original combinatorial 1->3 FOUR-boundary pants object.
 --
 -- No topological 3D embedding / meridian naturality is inferred.
+
+
+------------------------------------------------------------------------
+-- Exact LOCAL F3 free-reduction certificates.  This extends the
+-- canonical pants/meridian owner instead of creating a duplicate owner.
+--
+-- Source: classic free-group/Nielsen operations; independent 2026-10-29
+-- DASHI certificate for the already source-owned [a,b][b,c] word.
+-- The root-sector C3 tower is NOT this local Nielsen C3.
+--
+-- These refl checks are concrete computations on freely reduced lists,
+-- not a proof of correctness of the reducer for every word, nor
+-- a geometric or kernel-verified cap-relative homeomorphism.
+------------------------------------------------------------------------
+
+module LocalNielsenReducedCertificate where
+  open import Agda.Builtin.Bool using (Bool; true; false)
+
+  data Letter : Set where
+    posA negA posB negB posC negC : Letter
+
+  Word : Set
+  Word = List Letter
+
+  infixr 5 _++w_
+  _++w_ : Word → Word → Word
+  [] ++w ys = ys
+  (x ∷ xs) ++w ys = x ∷ (xs ++w ys)
+
+  opposite : Letter → Letter
+  opposite posA = negA
+  opposite negA = posA
+  opposite posB = negB
+  opposite negB = posB
+  opposite posC = negC
+  opposite negC = posC
+
+  cancel : Letter → Letter → Bool
+  cancel posA negA = true
+  cancel negA posA = true
+  cancel posB negB = true
+  cancel negB posB = true
+  cancel posC negC = true
+  cancel negC posC = true
+  cancel _ _ = false
+
+  push : Letter → Word → Word
+  push x [] = x ∷ []
+  push x (y ∷ ys) with cancel x y
+  ... | true = ys
+  ... | false = x ∷ y ∷ ys
+
+  reduce : Word → Word
+  reduce [] = []
+  reduce (x ∷ xs) = push x (reduce xs)
+
+  invert : Word → Word
+  invert [] = []
+  invert (x ∷ xs) = invert xs ++w (opposite x ∷ [])
+
+  comm : Word → Word → Word
+  comm x y = x ++w y ++w invert x ++w invert y
+
+  a b c : Word
+  a = posA ∷ []
+  b = posB ∷ []
+  c = posC ∷ []
+
+  -- Evaluate the ORIGINAL canonical three-child syntax at one
+  -- selected ternary root.  Only the newest child trit is read.
+  -- This is not a faithful evaluation of arbitrary tower addresses.
+  childLetter : Tower.TernaryAddress → Word
+  childLetter (Tower.ternary-address _ (Trit.neg ∷ _)) = a
+  childLetter (Tower.ternary-address _ (Trit.zero ∷ _)) = b
+  childLetter (Tower.ternary-address _ (Trit.pos ∷ _)) = c
+  childLetter _ = []
+
+  evalTower : Tower.TernaryWord → Word
+  evalTower Tower.identityWord = []
+  evalTower (Tower.meridian x) = childLetter x
+  evalTower (Tower.inverse x) = invert (evalTower x)
+  evalTower (Tower.multiply x y) = evalTower x ++w evalTower y
+
+  canonicalRoot : Tower.TernaryAddress
+  canonicalRoot = Tower.ternary-address C3.c0 []
+
+  w : Word
+  w = evalTower (hornBoundaryWord canonicalRoot)
+
+  canonicalWordReduction :
+    reduce w ≡
+      (posA ∷ posB ∷ negA ∷ posC ∷ negB ∷ negC ∷ [])
+  canonicalWordReduction = refl
+
+  -- u=B, v=C a, z=c is the source-owned Nielsen basis.
+  u v z p : Word
+  u = invert b
+  v = invert c ++w a
+  z = c
+  p = a ++w b ++w invert a ++w c
+
+  puncturedTorusBoundary :
+    reduce (invert p ++w w ++w p) ≡ reduce (comm u v)
+  puncturedTorusBoundary = refl
+
+  -- The nonlinear 3-cycle in the original (a,b,c) coordinates.
+  -- a -> c A c b, b -> A c, c -> c.
+  image : Letter → Word
+  image posA = posC ∷ negA ∷ posC ∷ posB ∷ []
+  image posB = negA ∷ posC ∷ []
+  image posC = c
+  image negA = invert (image posA)
+  image negB = invert (image posB)
+  image negC = invert (image posC)
+
+  substitute : Word → Word
+  substitute [] = []
+  substitute (x ∷ xs) = image x ++w substitute xs
+
+  phi : Word → Word
+  phi xs = reduce (substitute xs)
+
+  phiOnU : phi u ≡ reduce v
+  phiOnU = refl
+
+  phiOnV : phi v ≡ reduce (invert v ++w invert u)
+  phiOnV = refl
+
+  phiOnZ : phi z ≡ z
+  phiOnZ = refl
+
+  phiCubedOnA : phi (phi (phi a)) ≡ a
+  phiCubedOnA = refl
+
+  phiCubedOnB : phi (phi (phi b)) ≡ b
+  phiCubedOnB = refl
+
+  phiCubedOnC : phi (phi (phi c)) ≡ c
+  phiCubedOnC = refl
+
+  phiNonidentityOnA : phi a ≡ a → ⊥
+  phiNonidentityOnA ()
+
+  -- Explicit based conjugator q=c A c A: not just a cyclic
+  -- word-equality oracle or an unrelated S3 fingerprint.
+  q : Word
+  q = c ++w invert a ++w c ++w invert a
+
+  phiPreservesPeripheralConjugacy :
+    phi w ≡ reduce (q ++w w ++w invert q)
+  phiPreservesPeripheralConjugacy = refl
+
+  nontrivialParentMeridian : reduce w ≡ [] → ⊥
+  nontrivialParentMeridian ()
+
+-- The three-generator check, together with the free-group universal
+-- property, identifies the mathematical order-three automorphism.
+-- An unrestricted arbitrary-word Agda theorem (and exact-head Agda
+-- kernel receipt) is not claimed here.  No local finite-order 3D
+-- homeomorphism or G2–G6 geometry is constructed by these computations.
