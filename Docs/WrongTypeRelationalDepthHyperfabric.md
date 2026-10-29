@@ -199,3 +199,31 @@ observers, symbolic wave-quantisation collisions **on a specified
 finite sample**, and failure of an inadequate observer family.
 Source-written scripts are not run receipts.
 
+
+
+## Braided transfer calibration
+
+The golden Agda owner is `DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact`.
+It reuses the existing Kimmerer calibration, transfer residual, structural transfer, role grammar, and governance owners.
+The conversation example is modeled as consumer-relative transfer.
+A coarse reading can omit required relation data.
+An over-broad reading can import a target relation that is not supported.
+
+The ZKP coordinates are:
+
+- O: braid calibration objective.
+- R: bounded relational-transfer requirement.
+- C: canonical DASHI owner set.
+- S: coarse, calibrated, or non-recoverable target state.
+- L: under-fit, fitted, or over-fit lattice state.
+- P: refine the reading or stop applying the frame.
+- G: declared success condition.
+- F: missing-relation, closed, or spurious-transfer gap.
+
+Preconditions require a declared source boundary and consumer.
+Invariants preserve strand difference, provenance, and authority boundaries.
+Postconditions permit refinement to close an omission and forbid universal recoverability.
+
+The same owner is now imported by `DASHI/EverythingTOESymmetryResolved369.agda`, `DASHI/Unifier.agda`, and `DASHI/Unified/Everything.agda`.
+The Lean parity surface is `Integration/ResidualTaxonomy.lean`.
+Agda remains the golden authority.
