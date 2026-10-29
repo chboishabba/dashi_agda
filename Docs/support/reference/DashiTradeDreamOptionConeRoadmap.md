@@ -498,3 +498,231 @@ Runtime receipt                     dashiTRADE implementation conformance
 ```
 
 The trading domain should become mostly an instantiation of generic DASHI owners, not a second private theory of observers, hyperfabrics, reachability or interaction.
+
+
+---
+
+## 11. Golden ZKP and TOE convergence
+
+Date: 2026-10-29.
+
+Agda is the golden semantic owner.
+
+Lean and runtime code are consumers.
+
+They may mirror or implement the Agda contract.
+
+They may not create missing semantics.
+
+### O — Objective
+
+Select only an action that is available in the situated trading fabric.
+
+Require a robust-dominance receipt before a risk-increasing action may outrank HOLD.
+
+Keep realized outcome separate from proposal and authorization.
+
+### R — Reuse
+
+Reuse these existing owners.
+
+- `DASHI.Trading.PermissionKernel` owns the historical ACT/HOLD/BAN predecessor.
+- `DASHI.Core.IntersectionalNonFactorability` owns observer collision and no-rechart recovery.
+- `DASHI.Trading.DashiTradeDreamOptionConeExact` owns the trading target contract.
+- `DASHI.Finance.DashiTradeFibreBridgeExact` owns the finance-to-trading fibre handoff.
+- `DASHI.Law.SensibLawDashiTradeComparativeAdapterExact` owns legal comparative change-layer separation for dashiTRADE.
+- `DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything` owns the Agda-first legal runtime authority boundary.
+
+No separate Actionstep theorem owner exists on current master.
+
+Do not invent one.
+
+Treat Actionstep integration as a runtime or evidence consumer until a typed owner exists.
+
+### C — Construction
+
+The golden trading file now carries three explicit contract surfaces.
+
+The precondition surface requires normalized units, a runtime parity receipt, a selected situated state, a selected action, and an availability proof.
+
+The invariant surface keeps proposal, predicted weight, accessibility, actionability, HOLD, joint viability, and Agda authority separate.
+
+The postcondition surface requires action availability, robust dominance for risk increase, realized-outcome separation, and an implementation conformance receipt.
+
+The file also carries one O/R/C/S/L/P/G/F ZKP receipt.
+
+### S — Safety
+
+Do not promote a proposal into authorization.
+
+Do not promote one confidence scalar into size and urgency authority.
+
+Do not promote marginal gate success into joint viability.
+
+Do not promote passed runtime gates into robust economic dominance.
+
+Do not promote realized profit into global theory truth.
+
+Do not let a reference legal runtime override the Agda contract.
+
+### L — Lane
+
+Use one trading normalization lane.
+
+Keep the lane disjoint from ESD surfaces.
+
+Do not edit `dashi_digital_esd`, `*digital_esd*`, or `*ESD*`.
+
+No new round, version, or numbered trading file is needed.
+
+### P — Preconditions
+
+The decision consumer needs one unit convention.
+
+The decision consumer needs a runtime-to-Agda parity receipt.
+
+The selected action needs an availability receipt.
+
+A risk-increasing action needs a robust-dominance receipt over HOLD.
+
+The joint market, inventory, liquidity, uncertainty, history, risk, and execution context must remain available to the admission consumer.
+
+### P — Invariants
+
+HOLD remains first class.
+
+Direction remains a proposal.
+
+Prediction remains distinct from accessibility.
+
+Accessibility remains distinct from actionability.
+
+A coarse observer collision remains a proof obligation.
+
+Post-processing does not repair an erased consumer distinction.
+
+Legal source transport does not create legal authority.
+
+Runtime transport does not override Agda.
+
+### P — Postconditions
+
+The chosen action has an availability receipt.
+
+A risk increase has a robust-dominance receipt.
+
+The realized accounting outcome remains a later observation.
+
+Runtime conformance remains false until the implementation receipt exists.
+
+### G — Governance
+
+Use ITIL, ISO 9000, ISO/IEC 42001, ISO/IEC 27001, ISO/IEC 27701, ISO/IEC 23894, ISO 9241, NIST AI RMF, Six Sigma, and C4 as process and presentation lenses.
+
+Do not claim certification from these references.
+
+Use the following C4 roles.
+
+- System: dashiTRADE decision system.
+- Container: Agda golden contract.
+- Container: Python runtime decision engine.
+- Container: Lean parity mirror.
+- Component: proposal observer.
+- Component: action-indexed admission consumer.
+- Component: cost and unit owner.
+- Component: robust-dominance checker.
+- Component: execution and realized accounting receipt.
+
+### F — Verification
+
+The Agda source must contain no postulate.
+
+The Agda source must contain no unsolved-meta escape.
+
+The Agda source must contain no termination or positivity escape.
+
+The Lean mirror must state that Agda is golden.
+
+The Lean mirror must not claim theorem identity across provers.
+
+The runtime must not claim conformance without a parity receipt.
+
+Current formal status is fail-closed.
+
+`currentRuntimeUnitNormalizationComplete` is false.
+
+`currentRuntimeParityReceiptSupplied` is false.
+
+`currentRuntimeRobustDominanceReceiptSupplied` is false.
+
+The Agda theorem surface therefore blocks runtime-conformance promotion.
+
+## 12. TOE import graph
+
+The current convergence lane attaches the same owners to all three canonical aggregate surfaces.
+
+- `DASHI.EverythingTOESymmetryResolved369`.
+- `DASHI.Unifier`.
+- `DASHI.Unified.Everything`.
+
+The TOE root directly exposes the trading ZKP frame.
+
+The TOE root directly exposes the trading invariants and postconditions.
+
+The TOE root directly exposes the finance authority boundary.
+
+The TOE root directly exposes the SensibLaw comparative boundary.
+
+The TOE root directly exposes the Agda-first legal runtime contract.
+
+The TOE root also exposes explicit non-promotion eliminators for runtime conformance, market-causation promotion, global-theory promotion, and legal-runtime override.
+
+This makes trading and legal governance reachable from the canonical TOE without a parallel facade.
+
+## 13. Cross-prover and latest-PR discipline
+
+Agda PR #1417 uses the same golden-owner rule for a runtime control law.
+
+Lean PR #90 mirrors that Agda owner and states that Lean adds no independent scheduler semantics.
+
+That pattern is the correct cross-prover model for dashiTRADE.
+
+Lean PR #71 and PR #75 also reinforce consumer-relative sufficiency and claim-relative verification.
+
+They motivate parity and held-out consumer checks.
+
+They do not replace the Agda trading owner.
+
+Current Lean main already contains the generic `AgdaMirror.IntersectionalNonFactorability` theorem.
+
+The dashiTRADE Lean update should therefore instantiate that existing theorem.
+
+It should not define a second factorization kernel.
+
+## 14. Fleet and gap boundary
+
+The Fleet archive reports 584 discharged fibres, 44 contradiction gaps, and 58 unformalised formal gaps.
+
+Those counts do not identify a specific trading gap.
+
+This convergence does not claim that dashiTRADE discharges one of the 58 named gaps.
+
+A named manifest row is required before any such claim is valid.
+
+The three macroscopic eigen-motif labels remain planning metadata.
+
+They do not create theorem identity.
+
+## 15. Runtime cross-check
+
+Current dashiTRADE PR #2 is shadow-only.
+
+It does not change the live strategy or executor.
+
+Current dashiTRADE PR #3 is also shadow-only.
+
+It explicitly leaves live Nashi, order, controller, Intent, and execution paths unchanged.
+
+These PRs support the current fail-closed runtime status.
+
+They do not supply the missing golden runtime parity or robust-dominance receipt.
