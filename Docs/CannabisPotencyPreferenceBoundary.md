@@ -215,6 +215,14 @@ DOI: 10.1016/j.ypmed.2026.108663.
 
 The bounded reading used here is that product potency and THC dose are distinct objects.
 
+Lorenzetti et al. retain source ownership for *Cannabis in the wild: Analysis of street cannabis and cannabinoid composition in Australia*.
+
+DOI: 10.1016/j.drugpo.2025.104974.
+
+The bounded reading used here is that subjective strength ratings were not correlated with measured THC or total THC in the same donated products.
+
+Perceived strength is not the same endpoint as preference, therapeutic benefit, or causal mechanism.
+
 Caruso, Acquaviva, Lemus Müller, Pellegrino, and Castells retain source ownership for the 2026 cultivation metabolomics study.
 
 DOI: 10.1016/j.chroma.2026.467331.
