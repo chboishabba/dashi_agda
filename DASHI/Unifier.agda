@@ -1698,3 +1698,23 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Canonical current Navier-Stokes four-lane problem receipt.
+------------------------------------------------------------------------
+
+unifierNavierStokesCurrentProblemReceipt :
+  NSClayTOE.NavierStokesCurrentProblemReceipt
+unifierNavierStokesCurrentProblemReceipt =
+  NSClayTOE.canonicalNavierStokesCurrentProblemReceipt
+
+unifierNavierStokesCurrentProblemBM2FiniteFoldClosed :
+  NSClayTOE.laneBM2FiniteFoldClosed unifierNavierStokesCurrentProblemReceipt ≡ true
+unifierNavierStokesCurrentProblemBM2FiniteFoldClosed =
+  NSClayTOE.currentProblemBM2FiniteFoldClosed
+
+unifierNavierStokesCurrentProblemBWeightedPlusStillOpen :
+  NSClayTOE.laneBWeightedPlusEndpointClosed unifierNavierStokesCurrentProblemReceipt ≡ false
+unifierNavierStokesCurrentProblemBWeightedPlusStillOpen =
+  NSClayTOE.currentProblemBWeightedPlusEndpointStillOpen
