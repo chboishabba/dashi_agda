@@ -246,6 +246,25 @@ The Agda owner exports a typed O/R/C/S/L/P/G/F frame.
 - The receipt is imported by all three canonical TOE roots.
 - No universal autism mechanism is promoted.
 
+
+## Existing Balaban and Fleet TOE state
+
+The requested Balaban reconciliation was already present on the current canonical roots before this change.
+
+The TOE root already exposes the Balaban scale-density flow level.
+It already exposes the concrete regular-E localization witness level.
+It already exposes the Casimir lower-bound transport level.
+It already exposes the stress-pairing physical weld level.
+It already exposes the continuum-limit non-promotion theorem.
+
+`DASHI/Unifier.agda` consumes the same Balaban regression owner and keeps the continuum-limit promotion impossible.
+
+This PR does not duplicate those proofs.
+It preserves the current root content while adding the situated-reachability receipt.
+
+The Fleet 584 / 44 / 58 ledger remains unchanged.
+This social-ecology result is not reclassified as a Balaban or Yang-Mills gap.
+
 ## TOE convergence
 
 The receipt is imported directly by:
