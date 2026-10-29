@@ -1,0 +1,77 @@
+@startuml
+title DASHI braided transfer calibration -> TOE
+
+skinparam componentStyle rectangle
+left to right direction
+
+package "Source-bounded interpretation" {
+  component "Kimmerer narrative calibration" as K
+  component "Two-Eyed coordination" as T
+}
+
+package "Canonical reasoning owners" {
+  component "TrialecticBraidedTwoEyedCoordinationExact" as B
+  component "TrialecticThreeStrandBraidHistoryExact" as H
+  component "MetaphorTransferResidualExact" as R
+  component "StructuralTransferBreakdownExact" as S
+  component "ConsumerDescentMinimalObserverExact" as D
+  component "RelationalRoleGrammarExact" as G
+  component "GovernanceTrajectoryRealisationExact\nO/R/C/S/L/P/G/F" as Z
+}
+
+package "TOE consumers" {
+  component "EverythingTOESymmetryResolved369" as E
+  component "Unifier" as U
+  component "Unified.Everything" as UE
+}
+
+K --> B : bounded calibration
+T --> B : anti-fusion coordination
+R --> B : missing vs spurious residual
+S --> B : fit vs rupture
+G --> B : role/observer boundary
+Z --> B : ZKP frame
+D --> H : non-descent
+B --> H : strand identities
+B --> E
+H --> E
+B --> U
+H --> U
+B --> UE
+H --> UE
+
+note bottom of B
+Preconditions:
+source boundary declared
+consumer declared
+
+Invariants:
+strand difference retained
+provenance retained
+authority not transferred
+
+Postconditions:
+calibration may close omission
+rupture may require withdrawal
+universal recoverability = false
+end note
+
+note bottom of H
+Same attached face
+does not recover
+one unique process history.
+end note
+
+note bottom of E
+Agda is golden.
+TOE roots consume proof owners.
+They do not create source authority.
+end note
+
+note bottom
+Process lenses only:
+ITIL; ISO 9000/42001/27001/27701/23894/9241;
+NIST AI RMF; Six Sigma; C4/PlantUML.
+No certification claim.
+end note
+@enduml
