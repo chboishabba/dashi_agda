@@ -1500,3 +1500,38 @@ toeYMA1CompletionDoesNotSelfPromote :
   ≡ false
 toeYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- Safe/just and legal-compliance governance handoff.
+------------------------------------------------------------------------
+
+toeFanningLiteralSituatedAuthorityBoundary :
+  FleetGapTOE.FanningLiteralSituatedAuthorityBoundary
+toeFanningLiteralSituatedAuthorityBoundary =
+  FleetGapTOE.fleetFanningLiteralSituatedAuthorityBoundary
+
+toeCompositionalComplianceBoundary :
+  FleetGapTOE.CompositionalComplianceBoundary
+toeCompositionalComplianceBoundary =
+  FleetGapTOE.fleetCompositionalComplianceBoundary
+
+toeSafeJustLegalGovernanceBoundary :
+  FleetGapTOE.SafeJustLegalGovernanceBoundary
+toeSafeJustLegalGovernanceBoundary =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceBoundary
+
+toeSafeJustLegalGovernanceZKPFrame :
+  FleetGapTOE.SafeJustLegalGovernanceZKPFrame
+toeSafeJustLegalGovernanceZKPFrame =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceZKPFrame
+
+toeSensibLawRecordDoesNotCreateLegalAuthority :
+  FleetGapTOE.SensibLawRecordCreatesLegalAuthority → ⊥
+toeSensibLawRecordDoesNotCreateLegalAuthority =
+  FleetGapTOE.sensibLawRecordDoesNotCreateLegalAuthority
+
+toeActionstepRecordDoesNotCreateLegalAuthority :
+  FleetGapTOE.ActionstepRecordCreatesLegalAuthority → ⊥
+toeActionstepRecordDoesNotCreateLegalAuthority =
+  FleetGapTOE.actionstepRecordDoesNotCreateLegalAuthority
