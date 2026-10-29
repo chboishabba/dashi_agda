@@ -465,6 +465,22 @@ canonicalSafeJustLegalGovernanceZKPFrame =
 SettlementTransmissionBoundary : Set
 SettlementTransmissionBoundary = InstitutionalNorm.SettlementTransmissionBoundary
 
+IndustryConventionCreatesFederalLaw : Set
+IndustryConventionCreatesFederalLaw =
+  InstitutionalNorm.IndustryConventionCreatesFederalLaw
+
+SettlementCreatesSupremeCourtHolding : Set
+SettlementCreatesSupremeCourtHolding =
+  InstitutionalNorm.SettlementCreatesSupremeCourtHolding
+
+SettlementCreatesConstitutionalPrecedent : Set
+SettlementCreatesConstitutionalPrecedent =
+  InstitutionalNorm.SettlementCreatesConstitutionalPrecedent
+
+SameVisiblePolicyImpliesSameAuthoritySource : Set
+SameVisiblePolicyImpliesSameAuthoritySource =
+  InstitutionalNorm.SameVisiblePolicyImpliesSameAuthoritySource
+
 fleetSettlementTransmissionBoundary : SettlementTransmissionBoundary
 fleetSettlementTransmissionBoundary =
   InstitutionalNorm.canonicalSettlementTransmissionBoundary
