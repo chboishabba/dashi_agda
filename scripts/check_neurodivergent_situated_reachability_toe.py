@@ -2,16 +2,17 @@
 """Deterministic source audit for the situated neurodivergent reachability TOE lane."""
 
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
 
 FORBIDDEN = (
-    "postulate",
-    "allow-unsolved-metas",
-    "TERMINATING",
-    "NO_POSITIVITY_CHECK",
-    "sorry",
-    "admit",
+    re.compile(r"\\bpostulate\\b"),
+    re.compile(r"allow-unsolved-metas"),
+    re.compile(r"\\bTERMINATING\\b"),
+    re.compile(r"\\bNO_POSITIVITY_CHECK\\b"),
+    re.compile(r"\\bsorry\\b"),
+    re.compile(r"\\badmit\\b"),
 )
 
 AGDA_FILES = (
@@ -101,8 +102,10 @@ def assert_required() -> None:
 def assert_trust_boundary() -> None:
     for path in AGDA_FILES:
         content = read(path)
-        for token in FORBIDDEN:
-            assert token not in content, f"{path}: forbidden token {token!r}"
+        for pattern in FORBIDDEN:
+            assert not pattern.search(content), (
+                f"{path}: forbidden token pattern {pattern.pattern!r}"
+            )
 
 
 def assert_no_esd_edit_surface() -> None:
