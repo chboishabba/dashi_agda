@@ -1,0 +1,45 @@
+name: AO fleet max-cut convergence
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Interop/WorldEigenResidualStratification.agda'
+      - 'DASHI/Interop/HierarchicalSpectralParetoExact.agda'
+      - 'DASHI/Interop/SublinearTopicConductorCostExact.agda'
+      - 'DASHI/Interop/CombinatorialMaxCutPhysicsAlignmentExact.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Interop/Everything.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - '.github/workflows/ao-fleet-maxcut-convergence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Trust escape scan
+        run: |
+          set -euo pipefail
+          ! grep -R -n -E 'postulate|\{!!\}|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_TERMINATION_CHECK|NO_POSITIVITY_CHECK|primTrustMe|trustMe'             DASHI/Interop/WorldEigenResidualStratification.agda             DASHI/Interop/HierarchicalSpectralParetoExact.agda             DASHI/Interop/SublinearTopicConductorCostExact.agda             DASHI/Interop/CombinatorialMaxCutPhysicsAlignmentExact.agda             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+      - name: Typecheck golden owners
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for source in               DASHI/Interop/WorldEigenResidualStratification.agda               DASHI/Interop/HierarchicalSpectralParetoExact.agda               DASHI/Interop/SublinearTopicConductorCostExact.agda               DASHI/Interop/CombinatorialMaxCutPhysicsAlignmentExact.agda               DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
+            done
+          '
