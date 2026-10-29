@@ -416,7 +416,7 @@ wetteRule915CurrentProblemBoundary :
 wetteRule915CurrentProblemBoundary =
   Wette915.canonicalRule915CurrentProblemBoundary
 
-wetteRule915ZKPFrame : Wette915.Introspection.ZKPFrame
+wetteRule915ZKPFrame : Wette915.Rule915MajorZKPFrame
 wetteRule915ZKPFrame =
   Wette915.canonicalRule915MajorZKPFrame
 
