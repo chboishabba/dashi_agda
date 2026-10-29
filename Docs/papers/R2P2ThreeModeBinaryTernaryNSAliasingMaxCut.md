@@ -400,3 +400,63 @@ G0 kernel + executed tests + attribution  [MUST RUN FIRST]
 ### 5e. Pair-orbit 365 canonicalization (29 October 2026)
 
 The existing source-owned 13-in-27/five-in-nine Antipodal/Hermitian PR lane already contains the necessary sign, conjugation, Nyquist and 729 pair inversion laws. Rather than duplicate those, `R2P227729PairOrbit365CanonicalSymmetryExact.agda` now reuses their actual `simultaneouslyNegateOrderedPair` involution and existing full `pair729` enumeration. It defines a lexicographic `positivePair` decision by the first nonzero coordinate of the first input, then of the second input if the first is zero; `canonicalPair` chooses the pair or its simultaneous antipode. The source-written reductions `oneActualCentralPair` and `actualPositivePairRepresentatives` target exact counts **1** and **365**, respectively; the already-owned output covariance is imported by its exact theorem name. Independent local Python enumeration on all 729 distinct pair inputs returned **365** canonical distinct class representatives, **365** positive-side pairs and **one** inversion-fixed centre. There is still no Agda kernel receipt, no orbit-weighted 365-term accelerated bilinear NS convolution theorem and no demonstration that separately quotienting each input preserves the output (it does not). Original mathematical and repository owners retain attribution, and no Monster/Heisenberg/clock same-object recognition is inferred. Existing protected ESD files and CI were not edited.
+
+
+## 5e. 29 October 2026: 365-orbit Q(omega) event compiler and Q(i) C4 sampled product
+
+**Head continuation:** source-authored in PR #1407; no Agda kernel run or exact-branch regression execution. The local standalone Python arithmetic was executed, but is not a pinned checkout execution receipt.
+
+### Highest-alpha A: 365 actual multiplication events, not merely 365 labels
+
+Original authority is unchanged: `BalancedTernaryAntipodalOrbitExact` owns 13-in-27/5-in-9 C2 classifications; `R2P227729PairOrbit365CanonicalSymmetryExact` owns the actual positive-side classification and count of 365 representatives; `C3CubeCyclotomicFourierExact` owns Q(omega) and multiplicative conjugation; `R2P227729BilinearCyclotomicPadCutExact` owns the ordered 729-pair convolution.
+
+New module `R2P227729OrbitWeighted365ConvolutionExact.agda` constructs the actual filtered 365-element list and computes **one Q(omega) multiplication per canonical pair**. For a representative (p,q), it emits (p+q,f(p)g(q)); if (p,q) is not the unique (0,0) fixed point it also emits (-p-q,conj(f(p)g(q))) *without a second multiplication*. Its `reflectedEventIsConjugate` statement uses the inherited Hermitian input constraints, integer-sum negation law and exact multiplicativity of conjugation, for two distinct input coefficient fields. The 365 representatives emit 729 weighted events.
+
+This differs from mere 13-pair packed-input storage: it avoids 364 of the 729 coefficient multiplications of a naïve pair loop. It does not claim the overall runtime is 2x faster. There are still 729 event updates, conjugations, aggregation and indexing costs.
+
+**Proof status:** the per-pair reflected identity and count are source-written Agda; full-list permutation / sum equality of the 729 emitted events with the original lexicographic 729 ordered events remains an *explicit kernel obligation*. No such theorem is silently assumed. Standalone local Python `r2p2_orbit365_check.py` independently ran 12 different exact Q(omega) Hermitian pairs of fields and matched all 125 output coefficients. The corresponding committed reproducible script is `scripts/r2p2_27x27_orbit365_weighted_convolution.py` with test `tests/test_r2p2_27x27_orbit365_weighted_convolution.py`. Its presence is not a claim that the committed exact-head test itself ran.
+
+The exact 2D nine-mode analog is 81 = 1 + 40×2 ordered input pairs, hence a potential **41-multiplication** canonical-pair compiler. That is a consequence of the same C2 orbit count, not a committed Agda two-dimensional accelerated operator. Do not infer this from a five-class D4 irrep interpretation.
+
+### Highest-alpha B: a genuine sampled-field C4³ finite theorem, at paper level
+
+Let K={-1,0,1}³. Let `Q(i)` be the Gaussian rational field, and let `chi_k(x) = i^(k·x)` for x∈(Z/4Z)³. Use the **unscaled** inverse synthesis `U(x)=sum_{p∈K}u_p chi_p(x)` and the **1/64-normalized** forward Fourier coefficient `F4(h)(k)=(1/64) sum_x h(x) chi_{-k}(x)`.
+
+For arbitrary u,v : K→Q(i), direct finite distribution gives
+
+```text
+F4(U·V)(k)
+  = sum_{p,q in K} u[p]v[q] (1/64) sum_{x in C4³} i^((p+q-k)·x)
+  = sum_{p,q in K; p+q ≡ k (mod 4)} u[p]v[q].
+```
+
+The second equality is finite character orthogonality. Each coordinate of p+q is in [-2,2], whereas the retained k coordinate is in [-1,1]. Thus p+q-k lies in [-3,3]; its only multiple of 4 is zero. Therefore for **every retained k**, `p+q ≡ k (mod 4)` iff `p+q = k` as *integer* vectors. This establishes at the mathematical (non-kernel) level:
+
+```text
+for all u,v : K -> Q(i), and k in K,
+  F4[ (F4^-1 E u) pointwise (F4^-1 E v) ](k)
+    = sum_{p+q=k, p,q in K} u[p]v[q].
+```
+
+This 4³-grid theorem is **only projected-output equality**: modulo four merges +2 and -2 (Nyquist) at the unretained full-product indices. Five samples per axis are needed to preserve all 125 signed output frequencies without collision. An arbitrary Q(omega) C3 carrier cannot supply an honest fourth root of unity; Q(i) is used here and the existing C3 transform is not mislabelled C4.
+
+**Reproducibility:** standalone local exact rational Python executed 64 finite C4³ orthogonality checks and eight independently populated, distinct complex two-field coefficient profiles. All 27 projected outputs matched exact integer convolution. Committed `scripts/r2p2_c4_3d_exact_sampled_quadratic_dft.py` and `tests/test_r2p2_c4_3d_exact_sampled_quadratic_dft.py` hold the implementation and check. Their exact-branch checkout execution is still pending. No Agda kernel formalisation of the Q(i) three-dimensional DFT, inverse, orthogonality, and projected multiplication has been completed.
+
+### Pareto/max-cut and snowball ledger after this tranche
+
+| Obligation | Evidence grade | Status |
+| --- | --- | --- |
+| 27 input labels, 729 signed pairs, 365 simultaneous antipodal orbits | Existing owner + source-written Agda + independent counts | Established finite computational evidence; kernel pending |
+| 365 representative single-product event compiler and per-event conjugation | New source-written Agda, local exact Q(omega) tests | Implemented; global reindex/permutation proof open |
+| 4³ sampled multiplication equals all retained true integer convolution coefficients | Algebraic character proof in this document + local Q(i) exact checks | Mathematical proof supplied; Agda formalisation open |
+| Full 5³ sampled product and all 125 frequency coefficients | Source-written index theorem, not sampled ζ5 Fourier | Open |
+| Complex3 transverse vectors, Leray, Hermitian reality, finite Galerkin energy | Reuse original `NSTriadKNFiniteConvolutionReconstruction` and NS physical sources | Open same-object integration |
+| Cutoff-uniform NS high-high bounds and continuum Clay conclusion | Original analytic NS owners | Open; nothing here proves them |
+| Ma Sr optical lattice and R2P2 Yb clock/calibrated residual | External original scientific measurement owners | Open and empirical |
+| Ibrahim / Monster 3B; GF(729), 720+9 | Distinct original repository proof ownership | No new same-object evidence, no promotion |
+| All three TOE roots | Direct imports and projection theorems | Source-written, kernel pending |
+| CI and ESD | Left untouched | User scope respected |
+
+**Next kernel obligations in exact dependency order:** (1) type-check the new event owner and three root projections; (2) prove `canonicalOrderedPairs` plus their simultaneous negatives are a *no-duplicate, exhaustive permutation* of the real `pair729` list, then commute finite Q(omega) addition over that permutation to establish 365-event/729-pair equality for arbitrary Hermitian inputs; (3) transport C4 1D Q(i) orthogonality and the normalized inverse and forward transform through a C4³ tensor carrier, then prove the sample-pointwise identity in Agda; (4) attach the theorem to the original Complex3/Leray finite NS object and prove reality and energy cancellation; (5) treat cutoff-uniform continuum estimates, five-point full spectrum and calibrated experimental data as independent exits. Do not use sibling PR monodromy #1414, Pareto scheduler #1416/#1417, or their numerology as replacement evidence.
+
+**Attribution:** original historic finite Fourier group theory, Orszag/Patterson numerical dealiasing, Lambert–Reneuve–Augier (2026, [arXiv:2603.08892](https://arxiv.org/abs/2603.08892)) are background scientific authors; repository source proofs and their actual PR authorship remain distinct. Exact standalone computation does not become kernel type checking. The previous Ibrahim Monster 3B and other source-owner statements remain unchanged. No ESD edits and no physical or same-object Monster claim.
