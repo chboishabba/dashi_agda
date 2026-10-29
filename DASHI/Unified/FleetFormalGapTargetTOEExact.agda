@@ -19,6 +19,7 @@ import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
 import DASHI.Core.CompositionalComplianceExact as Compliance
 import DASHI.Core.InstitutionalNormProductionExact as InstitutionalNorm
+import DASHI.Law.SensibLawLegalReasonablenessNormativityBridgeExact as LegalNorm
 import DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact as FanningLiteral
 import DASHI.Governance.SafeJustIndicatorSystemExact as ONeillIndicators
 import DASHI.Governance.ProvisioningGeometryExact as Provisioning
@@ -679,3 +680,31 @@ canonicalSafeJustPaperChainZKPFrame =
     "F: TOE, Unifier, and Unified.Everything expose the same paper-chain and legal-governance boundaries"
     "verification: search/reuse first; local related/discover/lineage when available; trust-escape scan; ESD diff scan; exact-head Agda kernel receipt"
     false false false false
+
+
+Meta2026SettlementNormCalibration : Set
+Meta2026SettlementNormCalibration =
+  LegalNorm.Meta2026SettlementNormCalibration
+
+fleetMeta2026SettlementNormCalibration :
+  Meta2026SettlementNormCalibration
+fleetMeta2026SettlementNormCalibration =
+  LegalNorm.canonicalMeta2026SettlementNormCalibration
+
+fleetMetaSettlementDoesNotBindCompetitors :
+  LegalNorm.settlementAloneLegallyBindsTikTokOrYouTube
+    LegalNorm.canonicalMeta2026SettlementNormCalibration
+  ≡ false
+fleetMetaSettlementDoesNotBindCompetitors = refl
+
+fleetMetaSettlementDoesNotCreateFederalStatute :
+  LegalNorm.settlementCreatesFederalStatute
+    LegalNorm.canonicalMeta2026SettlementNormCalibration
+  ≡ false
+fleetMetaSettlementDoesNotCreateFederalStatute = refl
+
+fleetJMDPosterDoesNotCreateLegalAuthority :
+  LegalNorm.jmdPosterCreatesLegalAuthority
+    LegalNorm.canonicalMeta2026SettlementNormCalibration
+  ≡ false
+fleetJMDPosterDoesNotCreateLegalAuthority = refl
