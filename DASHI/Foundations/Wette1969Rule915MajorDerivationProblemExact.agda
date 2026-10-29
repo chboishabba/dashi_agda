@@ -194,9 +194,9 @@ selectCanonicalRule915FromCurrentResidual :
   (scaffold :
     Source.SourceExactScaffoldInputs
       initial Weld.canonicalFirstSeven Weld.canonicalLater) →
-  CanonicalRule915MajorResidual scaffold →
+  (residual : CanonicalRule915MajorResidual scaffold) →
   PCRA.SelectedRuleApplication historicalSystem
-    (Join.joinedMajorTarget (canonicalMajorTraceInputs _))
+    (Join.joinedMajorTarget (canonicalMajorTraceInputs residual))
 selectCanonicalRule915FromCurrentResidual
   recursivePredicate scaffold residual =
   Join.selectRule915FromIndependentMajorTraces
