@@ -887,3 +887,18 @@ independent Zipf/Heaps PR proof ownership were edited.
 **Critical max-cut:** M13 exact residue partition; M14/M15 proper-power removal; M16 conditional conversion; F02/F04/F06 original analytic positivity/parity barrier; G06 kernel verification. No claim twin-prime infinitude solved. Recent conditional bounded-gap work and Fernando Portela's June 2026 Krafft/Turán preprint are comparative research context, not proof imports. The latter reduces its result to a finite-dimensional optimisation inequality and itself states that inequality is a prerequisite. Preserve original authors and dated roots.
 
 **Integration:** All three TOE roots now import and selectively export the new M12 bridge. All status S markers mean source-written only and are NOT kernel verification receipts. Do not modify ESD surfaces.
+
+### 29 October 2026 continuation: Q25/Q26 actually invoke original CEGAR refinement
+
+NEW `DASHI/Arithmetic/TwinPrimeNat270ConsumerGuidedStrictRefinementExact.agda` does not redefine the original `StrictProjectionRefinement` or `ConsumerGuidedRefinement`. It instantiates those exact source-owned records at the consumer `SignedSSPOrientationTwinClassifierNoGoExact.twinStartBool`:
+
+- `coarseResidue : Nat → Fin 270` versus `finePeriod : Nat → NatPeriod270`.
+- `coarseFactorsThroughFine` explicitly forgets the period.
+- `fiftyNineAnd329SameResidue` proves the old fibre equality by computation.
+- `fiftyNineAnd329DifferentPeriod` proves the fine codes distinct.
+- `twinConsumerSeparates` proves consumer outputs different (59/61 true twin; 329 composite).
+- `strictConsumerGuidedPeriodRefinement` uses the original CEGAR refinement constructor; `noActualTwinConsumerFromBareFin270` invokes the original no-descent theorem.
+
+This is **source-written only, kernel check pending**. It closes a concrete instance of the strict consumer-guided refinement boundary, not arbitrary all-nat CEGAR completeness. Imported through the three original TOE roots; no ESD modifications.
+
+**Pareto/max-cut:** the immediate finite obligations are kernel validation and M13 full 270-way reindexing; the analytic bottleneck is still F02/F04/F06. Snowball results are only propagated when the typed consumer actually factors through the claimed projection; the original Ibrahim 3B group-action ownership remains separate and unmodified.
