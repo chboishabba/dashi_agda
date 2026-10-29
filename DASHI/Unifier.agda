@@ -1,5 +1,15 @@
 module DASHI.Unifier where
 
+-- Exact six S3 permutation-character fixed-point counts 27,3,3,3,3,3.
+-- Rational-character arithmetic reconciles 7 triv + 4 sign + 8 std;
+-- no modular-F3 Maschke decomposition or same-object Monster claim.
+import DASHI.Foundations.PolynomialS3TwentySevenPermutationCharacterExact as RootS3Character
+open RootS3Character public using
+  ( fullEnumerationHasTwentySeven ; fixed0 ; fixed1 ; fixed2
+  ; fixed3 ; fixed4 ; fixed5 ; c3BurnsideNumerator ; s3BurnsideNumerator
+  ; dimensionReconstructed ; threeCycleCharacterReconstructed
+  ; transpositionCharacterReconstructed ; elevenDimensionReconstructed )
+
 -- Exact S3->C2 sign representation ties cubic Vandermonde alternating
 -- action to 7-even+4-odd F3 orbit-field action, without object identity.
 import DASHI.Foundations.PolynomialC3S3ReflectionParityFourierExact as RootParityFourier
