@@ -104,6 +104,25 @@ open WheelIbrahimCollision public using
   )
 
 
+import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as MangoldtResidual
+open MangoldtResidual public using
+  ( periodProjection
+  ; exactPeriodResidual
+  ; natGivesPeriodResidual
+  ; periodResidualUniqueness
+  ; liftNatConsumer
+  ; liftConsumerSound
+  ; liftConsumerComplete
+  ; mangoldtAtPeriod
+  ; mangoldtPeriodForward
+  ; mangoldtPeriodBackward
+  ; ArithmeticPairCorrelation
+  ; pairCorrelationAtNat
+  ; pairCorrelationAtPeriod
+  ; pairCorrelationForward
+  ; pairCorrelationBackward
+  )
+
 import DASHI.Arithmetic.TwinPrimeNat270PeriodResidualBidiExact as NatWheelPeriod
 open NatWheelPeriod public using
   ( NatPeriod270
