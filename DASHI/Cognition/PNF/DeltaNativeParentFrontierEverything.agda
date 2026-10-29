@@ -5,4 +5,5 @@ module DASHI.Cognition.PNF.DeltaNativeParentFrontierEverything where
 -- surface.
 import DASHI.Cognition.PNF.AffectedBoundaryLocalReductionExact
 import DASHI.Cognition.PNF.DeltaNativeParentRuntimeBridgeExact
+import DASHI.Cognition.PNF.RelationDeltaReconciliationExact
 import DASHI.Cognition.PNF.AffectedBoundaryLocalReductionRegression
