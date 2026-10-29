@@ -1951,3 +1951,23 @@ toeC4GaussianCubeOrthogonality :
   C4Gaussian.cubeInner4 k l ≡ C4Gaussian.cubeDelta4 k l
 toeC4GaussianCubeOrthogonality =
   C4Gaussian.cubeCharacterOrthogonality
+
+
+------------------------------------------------------------------------
+-- C4 Gaussian exact 64-sample tensor DFT: both inverse directions.
+-- Reuses the C4 Q(i) character owner and the C3 tensor-proof method.
+-- No projected quadratic product claim is promoted here.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C4GaussianSampledFourierBidiExact as C4Sampled64
+
+toeC4SampledForwardInverse :
+  (s : C4Sampled64.CubeSignal64) →
+  C4Sampled64.fourier64 (C4Sampled64.inverseFourier64 s) ≡ s
+toeC4SampledForwardInverse =
+  C4Sampled64.cubeFourierForwardInverse
+
+toeC4SampledInverseForward :
+  (s : C4Sampled64.CubeSignal64) →
+  C4Sampled64.inverseFourier64 (C4Sampled64.fourier64 s) ≡ s
+toeC4SampledInverseForward =
+  C4Sampled64.cubeFourierInversion
