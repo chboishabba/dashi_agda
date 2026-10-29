@@ -98,7 +98,7 @@ Mathematical receiver: idempotent invariant-field normalization. This is **not**
 
 Independent executed Python check: 100 finite random 27-fields verified both idempotences and two-sided absorption using consistent nested orbit representatives. Agda original-source heads were read back, but Agda kernel, exact full-checkout Python runner and CI remain unrun. No ESD edit, no external owner or Ibrahim Monster 3B status change.
 
-**New prioritized obligation O25**: pin Agda/stdlib and type-check this actual sampling projector and 7/11/27 vector atlas; repair any elaboration failure.
+**Prioritized obligation O25**: pin Agda/stdlib and type-check this actual sampling projector and 7/11/27 vector atlas; repair any elaboration failure.
 **O26**: if useful for the video's phase/Fourier representation, instantiate a true scalar `C3`-character transform on `Field11` with explicit source/target ring, compare `P_C3,P_S3` to the corresponding averaging projectors ONLY after confirming the correct coefficient extension/characteristic and action intertwiner.
 
 
@@ -126,3 +126,34 @@ The test confirms `R3²=R3`, `R6²=R6`, `R3 R6=R6 R3=R6`, `R3=Pplus+Pminus` poin
 - [ ] O32 original-prior-art ledger and repository proof ownership: label Burnside/Reynolds as inherited mathematics, #1414 as code owner, #1260 as prior Pickover arithmetic source, exact executed arithmetic check, kernel-pending status, unchanged Ibrahim Monster 3B ownership.
 
 **Negative control corrected during experiment:** transposition has **3 fixed codes**, not 7; seven is the number of `S3` orbits. Conflating these counts breaks Burnside. Script enforces all three conjugacy-class fixed counts.
+
+## Highest-alpha follow-up, 29 October: actual S3 parity character and F3 reflection Fourier
+
+**Why this is a genuine connection:** the *same* sign quotient `S3 -> S3/C3 ≅ C2` operates on (i) the video's alternating Vandermonde on ordered rational cubic roots and (ii) the involution of the **11 genuine conjugacy classes** of the 27 native trit endomorphisms. These are different S3 representations. Their shared source is the sign character, not a bijection of their carriers, Monster identity, physical gauge equivalence or an Hatcher wild-space identification.
+
+**New proof owners, added to all three TOE root imports:**
+- `PolynomialC3S3ReflectionParityFourierExact.agda`: scalar chart `TriTruth≃Phase3≃F3`; on each of four reflection-swapped pairs `e=(a+b)/2`, `o=(a-b)/2` where `1/2=2=-1` in F3. Proves all six nine-case scalar identities, defines `Field11 ↔ (Field7 × Odd4)`, source-writes all 11 field decode-after-encode cases, 7 even and 4 odd encode-after-decode cases, and that reflection fixes even coordinates while negating all four odd coordinates. This is **C2** Fourier in characteristic three; C3 averaging by 1/3 would be invalid. The choice of four ordered pairs is explicit.
+- `PolynomialC3S3ReflectionParityLinearExact.agda`: reuses the original `Phase3` addition. Four independent 81-clause scalar proofs show even averaging, odd half-difference and both reconstructions preserve addition; lifts them to seven even slots, four odd slots, and decoding of all eleven slots. Thus the two-sided chart respects addition; it is more than a numeric equality `3^11=3^7·3^4`.
+- `PolynomialVandermondeOrbitParityIntertwinerExact.agda`: `S3 -> Stage.C2` parity homomorphism in 36 explicit source cases, action of C2 on `Orbit11`, six-element S3 action and 162 total source cases that original `conjugateCode` classification intertwines it; reuses the original cubic Vandermonde `sign` proof to factor both representations through the same parity. No map from rational root triples to 11 tables is claimed.
+- `PolynomialVandermondeOrbitSignCharacterExact.agda`: full S3 pullback of eleven-class fields; even seven coordinates fixed and the four odd coordinates carry the sign character under all six permutations, 24 explicit odd-coordinate proof cases.
+- `PolynomialS3TwentySevenPermutationCharacterExact.agda`: enumerates exactly 27 endomorphism codes and counts six original conjugation-map fixed sets: `[27,3,3,3,3,3]`. Burnside arithmetic reproduces S3 seven orbits and C3 eleven orbits. The **characteristic-zero S3 character table** numerically reconstructs `7 trivial ⊕ 4 sign ⊕ 8 standard(2D)`: dimension 27, 3-cycle trace 3, reflection trace 3. This is a character-level calculation and requires a separate Maschke/representation reconstruction receipt before an actual direct-sum module isomorphism is called kernel-proved. Over **F3**, S3 has order 6 divisible by 3 and full semisimplicity does NOT follow; the only F3 splitting proved here is the C2 action on the eleven C3-invariant coordinates.
+- New reproducible checkout checker: `scripts/check_polynomial_s3_c2_reflection_fourier_20261029.py`. It parses current Agda source tables and checks all 729 C3-orbit pairs, 162 S3 sign actions, six fixed-count values, six nine-case scalar sets, 324 scalar additivity cases, 24 odd sign proof clauses, and all 177147 function tables for the 11-dimensional split.
+
+**Evidence actually executed this turn:** independent Python exact arithmetic exhaustively tested all `3^11=177147` eleven-value fields for two-sided coordinate reconstruction and reflection parity (PASS); verified `[27,3,3,3,3,3]` fixed-point counts and seven/eleven orbit partitions (PASS). Separately, connector JS read the exact committed Agda sources and checked all 162 parity/classifier cases, all 36 parity-group cases, and 324 source-written arithmetic lemma case lines against the independent F3 formulas (PASS). These are computational checks, NOT AGDA KERNEL PROOFS. The **committed checkout checker script** itself was not executed against a cloned GitHub branch in this session; the container cannot fetch the repo and no Agda compiler is installed.
+
+### Expanded follow-up obligations O27–O36
+
+| ID | Dependency / acceptance test | Status |
+|---|---|---|
+| O27 | Construct explicit F3-valued four-pair C2 even/odd Fourier chart `Field11 ↔ Field7 × Odd4` | SOURCE-WRITTEN; kernel pending |
+| O28 | Prove pointwise forward/backward inverses and reflection action (+1 on 7, -1 on 4) | SOURCE-WRITTEN; kernel pending; 177147 independent checks PASS |
+| O29 | Prove encoding/decoding preserve actual F3 addition, not only cardinality | SOURCE-WRITTEN; kernel pending; 324 scalar cases PASS |
+| O30 | Instantiate actual `S3->C2` parity and 162-classifier action, reusing original S3 carrier | SOURCE-WRITTEN; kernel pending; 162 source cases independently checked |
+| O31 | Connect polynomial Vandermonde sign and four odd orbit coefficients by sharing the same parity character, not carrier identity | SOURCE-WRITTEN; kernel pending |
+| O32 | Compute actual six-permutation fixed-point trace `[27,3,3,3,3,3]`, Burnside orbit counts 11/7 | SOURCE-WRITTEN; kernel pending; independent exact count PASS |
+| O33 | Import/build characteristic-zero irreducible S3 character table, semisimplicity, uniqueness, and obtain an *actual* rational module equivalence `Q^27 ≃ 7·triv⊕4·sign⊕8·std` | OPEN; numerical character consistency alone is insufficient |
+| O34 | Preserve modular distinction: char(F3)=3 divides |S3|=6; **do not** infer full F3 S3 semisimplicity from O27–O32 | NEGATIVE GATE, ACTIVE |
+| O35 | Execute exact committed checkout checker and pin Agda/stdlib/TOE kernel receipts; repair any real errors, do not worry about CI | OPEN |
+| O36 | Continue the separately tracked actual analytic polynomial root monodromy, generic quintic Galois/radicals, continuous spin, wild Hatcher and Ibrahim/Monster attribution gates | INDEPENDENT, OPEN |
+
+**Highest-alpha next cut:** kernel acceptance of actual owners; then O33 for a genuinely proved characteristic-zero representation decomposition; or a lawful field-valued Fourier diagonalization of the full S3 action after establishing its actual coefficient representation. No new 3/6/9 numeric coincidence is needed. Original historical mathematical authors, repo owners, source-written, executed computational evidence and kernel receipts remain separately attributed.
