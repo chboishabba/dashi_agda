@@ -17,6 +17,8 @@ import DASHI.Unified.BalabanRGTOERegression as BalabanRG
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
 import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
+import DASHI.Core.CompositionalComplianceExact as Compliance
+import DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact as FanningLiteral
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -335,3 +337,115 @@ fleetTextFallbackAuthorityStillFalse :
   Rebuild.textFallbackIsCoordinateAuthority ≡ false
 fleetTextFallbackAuthorityStillFalse =
   Rebuild.textFallbackCoordinateAuthorityFalse
+
+
+------------------------------------------------------------------------
+-- SAFE/JUST + LEGAL COMPLIANCE TOE HANDOFF
+------------------------------------------------------------------------
+
+FanningLiteralSituatedAuthorityBoundary : Set
+FanningLiteralSituatedAuthorityBoundary = FanningLiteral.LiteralSituatedAuthorityBoundary
+
+fleetFanningLiteralSituatedAuthorityBoundary : FanningLiteralSituatedAuthorityBoundary
+fleetFanningLiteralSituatedAuthorityBoundary =
+  FanningLiteral.canonicalLiteralSituatedAuthorityBoundary
+
+fleetLiteralSourceSurvivesSituatedQualification :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.literalSourceReceiptSurvivesSituatedQualification
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ true
+fleetLiteralSourceSurvivesSituatedQualification = refl
+
+fleetHistoricalObservationCannotSilentlyBecomeBAUForecastEvidence :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.historicalObservationCanSilentlyBecomeBAUForecastEvidence
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ false
+fleetHistoricalObservationCannotSilentlyBecomeBAUForecastEvidence = refl
+
+fleetQualifiedLiteralResearchUseDoesNotCreateCausalAuthority :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.qualifiedLiteralResearchUseCreatesCausalAuthority
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ false
+fleetQualifiedLiteralResearchUseDoesNotCreateCausalAuthority = refl
+
+fleetQualifiedLiteralResearchUseDoesNotCreateDecisionAuthority :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.qualifiedLiteralResearchUseCreatesDecisionAuthority
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ false
+fleetQualifiedLiteralResearchUseDoesNotCreateDecisionAuthority = refl
+
+fleetDoesNotClaimFanningWorkbookAlreadyIngested :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.thisModuleClaimsWorkbookAlreadyIngested
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ false
+fleetDoesNotClaimFanningWorkbookAlreadyIngested = refl
+
+CompositionalComplianceBoundary : Set
+CompositionalComplianceBoundary = Compliance.CompositionalComplianceBoundary
+
+fleetCompositionalComplianceBoundary : CompositionalComplianceBoundary
+fleetCompositionalComplianceBoundary = Compliance.canonicalCompositionalComplianceBoundary
+
+fleetComplianceRetainsIntermediateWitness :
+  Compliance.CompositionalComplianceBoundary.downstreamReceiptRetainsIntermediateWitness
+    Compliance.canonicalCompositionalComplianceBoundary ≡ true
+fleetComplianceRetainsIntermediateWitness = refl
+
+fleetEndpointEqualityDoesNotCreateCompliance :
+  Compliance.CompositionalComplianceBoundary.endpointEqualityAloneCreatesCompliance
+    Compliance.canonicalCompositionalComplianceBoundary ≡ false
+fleetEndpointEqualityDoesNotCreateCompliance = refl
+
+data SensibLawRecordCreatesLegalAuthority : Set where
+
+sensibLawRecordDoesNotCreateLegalAuthority :
+  SensibLawRecordCreatesLegalAuthority → ⊥
+sensibLawRecordDoesNotCreateLegalAuthority ()
+
+data ActionstepRecordCreatesLegalAuthority : Set where
+
+actionstepRecordDoesNotCreateLegalAuthority :
+  ActionstepRecordCreatesLegalAuthority → ⊥
+actionstepRecordDoesNotCreateLegalAuthority ()
+
+record SafeJustLegalGovernanceBoundary : Set where
+  constructor safe-just-legal-governance-boundary
+  field
+    goldenAgdaOwnsFormalSemantics : Bool
+    goldenAgdaOwnsFormalSemanticsIsTrue : goldenAgdaOwnsFormalSemantics ≡ true
+    sensibLawOperationalRecordCreatesLegalAuthority : Bool
+    sensibLawOperationalRecordCreatesLegalAuthorityIsFalse :
+      sensibLawOperationalRecordCreatesLegalAuthority ≡ false
+    actionstepOperationalRecordCreatesLegalAuthority : Bool
+    actionstepOperationalRecordCreatesLegalAuthorityIsFalse :
+      actionstepOperationalRecordCreatesLegalAuthority ≡ false
+    legalComplianceHandoffRequiresTypedIntermediateWitness : Bool
+    legalComplianceHandoffRequiresTypedIntermediateWitnessIsTrue :
+      legalComplianceHandoffRequiresTypedIntermediateWitness ≡ true
+    literalDataReceiptCreatesPolicyMandate : Bool
+    literalDataReceiptCreatesPolicyMandateIsFalse :
+      literalDataReceiptCreatesPolicyMandate ≡ false
+    discharged584FibresRetargeted : Bool
+    discharged584FibresRetargetedIsFalse : discharged584FibresRetargeted ≡ false
+    only58UnformalisedFormalGapsRemainTargeted : Bool
+    only58UnformalisedFormalGapsRemainTargetedIsTrue :
+      only58UnformalisedFormalGapsRemainTargeted ≡ true
+    esdSurfaceEditedByThisLane : Bool
+    esdSurfaceEditedByThisLaneIsFalse : esdSurfaceEditedByThisLane ≡ false
+
+canonicalSafeJustLegalGovernanceBoundary : SafeJustLegalGovernanceBoundary
+canonicalSafeJustLegalGovernanceBoundary =
+  safe-just-legal-governance-boundary
+    true refl false refl false refl true refl false refl false refl true refl false refl
+
+SafeJustLegalGovernanceZKPFrame : Set
+SafeJustLegalGovernanceZKPFrame = ParetoSnowball.TOEZKPFrame
+
+canonicalSafeJustLegalGovernanceZKPFrame : SafeJustLegalGovernanceZKPFrame
+canonicalSafeJustLegalGovernanceZKPFrame =
+  ParetoSnowball.toe-zkp-frame
+    "O: converge literal safe-and-just evidence, legal compliance handoffs, and semantic non-promotion into the existing DASHI TOE"
+    "R: reuse Fanning2022LiteralSituatedQualifiedUseBridgeExact, CompositionalComplianceExact, FleetFormalGapTargetTOEExact, and the existing TOE roots"
+    "C: attach aliases and exact boundary receipts only; do not add a second authority or compliance calculus"
+    "S: literal data does not create causal or decision authority; operational case records do not create legal authority; endpoint equality does not replace a typed intermediate witness"
+    "L: one disjoint nonblocking governance-convergence lane; the 584 discharged fibres remain outside the 58-gap target"
+    "P: canonical golden Agda owners exist; source attribution remains intact; ESD surfaces are read-only"
+    "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only; meta-introspector attribution remains separate"
+    "F: TOE root and Unifier expose the same literal-data, compliance, and operational-record non-promotion receipts"
+    "verification: related_symbols/discover/round_lineage locally; trust-escape scan; ESD diff scan; exact-head Agda kernel check"
+    false false false false
