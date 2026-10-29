@@ -1481,3 +1481,14 @@ toeNavierStokesCurrentProblemBAugmentedStillOpen :
   NSClayTOE.laneBAugmentedCriticalWeightedClosed toeNavierStokesCurrentProblemReceipt ≡ false
 toeNavierStokesCurrentProblemBAugmentedStillOpen =
   NSClayTOE.currentProblemBAugmentedCriticalWeightedStillOpen
+
+
+toeNavierStokesCurrentProblemBR829VectorClosed :
+  NSClayTOE.laneBR829VectorClosed toeNavierStokesCurrentProblemReceipt ≡ true
+toeNavierStokesCurrentProblemBR829VectorClosed =
+  NSClayTOE.currentProblemBR829VectorClosed
+
+toeNavierStokesCurrentProblemBR829RealODEStillOpen :
+  NSClayTOE.laneBR829RealFiniteODETransportClosed toeNavierStokesCurrentProblemReceipt ≡ false
+toeNavierStokesCurrentProblemBR829RealODEStillOpen =
+  NSClayTOE.currentProblemBR829RealFiniteODETransportStillOpen
