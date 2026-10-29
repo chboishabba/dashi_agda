@@ -18,54 +18,54 @@ import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitQuotientExact as Q
 
 index7 : Shape.ShapeOrbit7 → Fin.Fin 7
 index7 Shape.identityShape =  Fin.zero
-index7 Shape.threeCycleShape = Fin.suc Fin.zero
-index7 Shape.transpositionShape = Fin.suc Fin.suc Fin.zero
-index7 Shape.constantShape = Fin.suc Fin.suc Fin.suc Fin.zero
-index7 Shape.rank2OneFixedShape = Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index7 Shape.rank2TwoFixedShape = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index7 Shape.rank2TwoCycleShape = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
+index7 Shape.threeCycleShape = Fin.suc (Fin.zero)
+index7 Shape.transpositionShape = Fin.suc (Fin.suc (Fin.zero))
+index7 Shape.constantShape = Fin.suc (Fin.suc (Fin.suc (Fin.zero)))
+index7 Shape.rank2OneFixedShape = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))
+index7 Shape.rank2TwoFixedShape = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))
+index7 Shape.rank2TwoCycleShape = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))
 
 index11 : Q.Orbit11 → Fin.Fin 11
 index11 Q.identityOrbit =  Fin.zero
-index11 Q.cycleForwardOrbit = Fin.suc Fin.zero
-index11 Q.cycleBackwardOrbit = Fin.suc Fin.suc Fin.zero
-index11 Q.transpositionOrbit = Fin.suc Fin.suc Fin.suc Fin.zero
-index11 Q.constantOrbit = Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index11 Q.rank2OneFixedA = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index11 Q.rank2OneFixedB = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index11 Q.rank2TwoFixedA = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index11 Q.rank2TwoFixedB = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index11 Q.rank2TwoCycleA = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index11 Q.rank2TwoCycleB = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
+index11 Q.cycleForwardOrbit = Fin.suc (Fin.zero)
+index11 Q.cycleBackwardOrbit = Fin.suc (Fin.suc (Fin.zero))
+index11 Q.transpositionOrbit = Fin.suc (Fin.suc (Fin.suc (Fin.zero)))
+index11 Q.constantOrbit = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))
+index11 Q.rank2OneFixedA = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))
+index11 Q.rank2OneFixedB = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))
+index11 Q.rank2TwoFixedA = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))
+index11 Q.rank2TwoFixedB = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))
+index11 Q.rank2TwoCycleA = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))
+index11 Q.rank2TwoCycleB = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))
 
 index27 : Q.Code27 → Fin.Fin 27
 index27 (Base.tri-low , (Base.tri-low , Base.tri-low)) =  Fin.zero
-index27 (Base.tri-low , (Base.tri-low , Base.tri-mid)) = Fin.suc Fin.zero
-index27 (Base.tri-low , (Base.tri-low , Base.tri-high)) = Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-low , (Base.tri-mid , Base.tri-low)) = Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-low , (Base.tri-mid , Base.tri-mid)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-low , (Base.tri-mid , Base.tri-high)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-low , (Base.tri-high , Base.tri-low)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-low , (Base.tri-high , Base.tri-mid)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-low , (Base.tri-high , Base.tri-high)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-mid , (Base.tri-low , Base.tri-low)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-mid , (Base.tri-low , Base.tri-mid)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-mid , (Base.tri-low , Base.tri-high)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-mid , (Base.tri-mid , Base.tri-low)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-mid , (Base.tri-mid , Base.tri-mid)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-mid , (Base.tri-mid , Base.tri-high)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-mid , (Base.tri-high , Base.tri-low)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-mid , (Base.tri-high , Base.tri-mid)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-mid , (Base.tri-high , Base.tri-high)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-high , (Base.tri-low , Base.tri-low)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-high , (Base.tri-low , Base.tri-mid)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-high , (Base.tri-low , Base.tri-high)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-high , (Base.tri-mid , Base.tri-low)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-high , (Base.tri-mid , Base.tri-mid)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-high , (Base.tri-mid , Base.tri-high)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-high , (Base.tri-high , Base.tri-low)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-high , (Base.tri-high , Base.tri-mid)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
-index27 (Base.tri-high , (Base.tri-high , Base.tri-high)) = Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.suc Fin.zero
+index27 (Base.tri-low , (Base.tri-low , Base.tri-mid)) = Fin.suc (Fin.zero)
+index27 (Base.tri-low , (Base.tri-low , Base.tri-high)) = Fin.suc (Fin.suc (Fin.zero))
+index27 (Base.tri-low , (Base.tri-mid , Base.tri-low)) = Fin.suc (Fin.suc (Fin.suc (Fin.zero)))
+index27 (Base.tri-low , (Base.tri-mid , Base.tri-mid)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))
+index27 (Base.tri-low , (Base.tri-mid , Base.tri-high)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))
+index27 (Base.tri-low , (Base.tri-high , Base.tri-low)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))
+index27 (Base.tri-low , (Base.tri-high , Base.tri-mid)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))
+index27 (Base.tri-low , (Base.tri-high , Base.tri-high)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))
+index27 (Base.tri-mid , (Base.tri-low , Base.tri-low)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))
+index27 (Base.tri-mid , (Base.tri-low , Base.tri-mid)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))
+index27 (Base.tri-mid , (Base.tri-low , Base.tri-high)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))
+index27 (Base.tri-mid , (Base.tri-mid , Base.tri-low)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))
+index27 (Base.tri-mid , (Base.tri-mid , Base.tri-mid)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))
+index27 (Base.tri-mid , (Base.tri-mid , Base.tri-high)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))
+index27 (Base.tri-mid , (Base.tri-high , Base.tri-low)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))
+index27 (Base.tri-mid , (Base.tri-high , Base.tri-mid)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))
+index27 (Base.tri-mid , (Base.tri-high , Base.tri-high)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))
+index27 (Base.tri-high , (Base.tri-low , Base.tri-low)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))
+index27 (Base.tri-high , (Base.tri-low , Base.tri-mid)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))
+index27 (Base.tri-high , (Base.tri-low , Base.tri-high)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))
+index27 (Base.tri-high , (Base.tri-mid , Base.tri-low)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))))
+index27 (Base.tri-high , (Base.tri-mid , Base.tri-mid)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))))
+index27 (Base.tri-high , (Base.tri-mid , Base.tri-high)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))))))
+index27 (Base.tri-high , (Base.tri-high , Base.tri-low)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))))))
+index27 (Base.tri-high , (Base.tri-high , Base.tri-mid)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))))))))
+index27 (Base.tri-high , (Base.tri-high , Base.tri-high)) = Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))))))))
 
 encode7 : Q.Field7 → Vec Base.TriTruth 7
 encode7 f = f Shape.identityShape ∷ f Shape.threeCycleShape ∷ f Shape.transpositionShape ∷ f Shape.constantShape ∷ f Shape.rank2OneFixedShape ∷ f Shape.rank2TwoFixedShape ∷ f Shape.rank2TwoCycleShape ∷ []
