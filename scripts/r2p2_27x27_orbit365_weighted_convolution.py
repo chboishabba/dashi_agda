@@ -109,6 +109,24 @@ def check():
     assert len(plane_reps) == 41 and len(plane_expanded) == 81
     assert Counter(plane_expanded) == Counter(plane_pairs)
 
+    # EXACT owners checked on this branch:
+    # I.modeRank: -1->0, 0->1, +1->2; I.cubeRank base 3;
+    # I.orderedPairRank: 27*cubeRank(left) + cubeRank(right).
+    # These are address-level checks of the *same* rank sorter used by
+    # R2P227729Orbit365RankSortPermutationExact, not just Counter equality.
+    def signed_rank(k):
+        return sum((v + 1) * (3 ** (len(k) - pos - 1))
+                   for pos, v in enumerate(k))
+
+    def pair_rank(pair):
+        left, right = pair
+        return (3 ** len(left)) * signed_rank(left) + signed_rank(right)
+
+    assert sorted(expanded, key=pair_rank) == list(PAIRS)
+    assert sorted(plane_expanded, key=pair_rank) == list(plane_pairs)
+    assert [pair_rank(pair) for pair in PAIRS] == list(range(729))
+    assert [pair_rank(pair) for pair in plane_pairs] == list(range(81))
+
     # Exact Q(omega) weighted-output check for the source 5-in-9 plane.
     def plane_field(seed):
         rng = Random(seed)
@@ -156,7 +174,7 @@ def check():
     print('PASS: 12 distinct exact Q(omega) Hermitian two-field profiles, all 125 coefficients')
     print('PASS: 729 original vs 365 products (+364 conjugations), 365 orbits, 729 emitted events')
     print('PASS: 12 exact Q(omega) 41-vs-81 plane products at all 25 outputs')
-    print('PASS: exhaustive address permutation in 3D (365) and 2D (41)')
+    print('PASS: exhaustive address permutation and SAME original dense rank order in 3D/2D')
     print('PASS: global negation, integer-sum covariance, real zero-frequency output')
 
 
