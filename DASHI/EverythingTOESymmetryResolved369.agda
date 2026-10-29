@@ -1,5 +1,6 @@
 module DASHI.EverythingTOESymmetryResolved369 where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Analysis.RiemannG2AdaptiveCutoffCrossingCompatibilityLeanDonorExact as RHAdaptiveCutoff
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -1456,3 +1457,38 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- RH adaptive-cutoff / centered-near-sign max-cut.
+-- Agda records the companion Lean proof boundary without promoting Lean proof
+-- terms to Agda kernel proofs.
+------------------------------------------------------------------------
+
+toeRHAdaptiveCutoffNearSignBoundary :
+  RHAdaptiveCutoff.AdaptiveCutoffCrossingBoundary
+toeRHAdaptiveCutoffNearSignBoundary =
+  RHAdaptiveCutoff.canonicalAdaptiveCutoffCrossingBoundary
+
+toeRHAdaptiveCutoffNearSignZKPFrame :
+  RHAdaptiveCutoff.AdaptiveCutoffNearSignZKPFrame
+toeRHAdaptiveCutoffNearSignZKPFrame =
+  RHAdaptiveCutoff.canonicalAdaptiveCutoffNearSignZKPFrame
+
+toeRHAdaptiveCrossingLeavesCenteredNearSignWindow :
+  RHAdaptiveCutoff.AdaptiveCutoffCrossingBoundary.crossingSelectorInsideCenteredNearSignWindow
+    RHAdaptiveCutoff.canonicalAdaptiveCutoffCrossingBoundary ≡ false
+toeRHAdaptiveCrossingLeavesCenteredNearSignWindow =
+  RHAdaptiveCutoff.adaptiveCrossingSelectorLeavesNearSignWindow
+
+toeRHAdaptiveDirectNearSignWeldStillOpen :
+  RHAdaptiveCutoff.AdaptiveCutoffCrossingBoundary.directAdaptiveCutoffNearSignWeldPaid
+    RHAdaptiveCutoff.canonicalAdaptiveCutoffCrossingBoundary ≡ false
+toeRHAdaptiveDirectNearSignWeldStillOpen =
+  RHAdaptiveCutoff.directAdaptiveCutoffNearSignWeldStillOpen
+
+toeRHCanonicalNearSignForcesLinearCutoff :
+  RHAdaptiveCutoff.AdaptiveCutoffCrossingBoundary.canonicalFixedSupportSignWindowForcesLinearCutoff
+    RHAdaptiveCutoff.canonicalAdaptiveCutoffCrossingBoundary ≡ true
+toeRHCanonicalNearSignForcesLinearCutoff =
+  RHAdaptiveCutoff.canonicalNearSignWindowForcesLinearCutoff

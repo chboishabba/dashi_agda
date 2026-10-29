@@ -487,6 +487,36 @@ adaptiveExactFinalCarrierCutoffTransportStillOpen :
     R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ false
 adaptiveExactFinalCarrierCutoffTransportStillOpen = refl
 
+adaptiveCrossingSelectorLeavesCenteredNearSignWindow :
+  R2CutoffCompat.AdaptiveCutoffCrossingBoundary.crossingSelectorInsideCenteredNearSignWindow
+    R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ false
+adaptiveCrossingSelectorLeavesCenteredNearSignWindow = refl
+
+adaptiveCutoffDirectNearSignWeldPruned :
+  R2CutoffCompat.AdaptiveCutoffCrossingBoundary.directAdaptiveCutoffNearSignWeldPaid
+    R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ false
+adaptiveCutoffDirectNearSignWeldPruned = refl
+
+canonicalFixedSupportNearSignForcesLinearCutoff :
+  R2CutoffCompat.AdaptiveCutoffCrossingBoundary.canonicalFixedSupportSignWindowForcesLinearCutoff
+    R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ true
+canonicalFixedSupportNearSignForcesLinearCutoff = refl
+
+adaptiveHorizontalSquareFarRateDoesNotCloseR2Alone :
+  R2CutoffCompat.AdaptiveCutoffCrossingBoundary.horizontalSquareFarRateAloneClosesR2
+    R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ false
+adaptiveHorizontalSquareFarRateDoesNotCloseR2Alone = refl
+
+adaptiveRepairMustChangeScaleOrSignArgument :
+  R2CutoffCompat.AdaptiveCutoffCrossingBoundary.repairMustPreserveHorizontalSquareInsideSignWindowOrChangeSignArgument
+    R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ true
+adaptiveRepairMustChangeScaleOrSignArgument = refl
+
+currentAdaptiveCutoffNearSignZKPFrame :
+  R2CutoffCompat.AdaptiveCutoffNearSignZKPFrame
+currentAdaptiveCutoffNearSignZKPFrame =
+  R2CutoffCompat.canonicalAdaptiveCutoffNearSignZKPFrame
+
 adaptiveCutoffMayEnlargeFiniteNearCarrier :
   R2Adaptive.AdaptiveBaselineExcessBoundary.adaptiveCutoffMayEnlargeFiniteNearCarrier
     R2Adaptive.canonicalAdaptiveBaselineExcessBoundary ≡ true
