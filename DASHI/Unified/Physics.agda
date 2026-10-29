@@ -709,3 +709,14 @@ navierStokesCurrentProblemBWeightedPlusStillOpen :
   NSClayTOE.laneBWeightedPlusEndpointClosed navierStokesCurrentProblemReceipt ≡ false
 navierStokesCurrentProblemBWeightedPlusStillOpen =
   NSClayTOE.currentProblemBWeightedPlusEndpointStillOpen
+
+
+navierStokesCurrentProblemBR829VectorClosed :
+  NSClayTOE.laneBR829VectorClosed navierStokesCurrentProblemReceipt ≡ true
+navierStokesCurrentProblemBR829VectorClosed =
+  NSClayTOE.currentProblemBR829VectorClosed
+
+navierStokesCurrentProblemBR829RealODEStillOpen :
+  NSClayTOE.laneBR829RealFiniteODETransportClosed navierStokesCurrentProblemReceipt ≡ false
+navierStokesCurrentProblemBR829RealODEStillOpen =
+  NSClayTOE.currentProblemBR829RealFiniteODETransportStillOpen
