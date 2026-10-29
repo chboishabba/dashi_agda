@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Foundations.Wette1969Rule915MajorDerivationProblemExact as Wette915
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1698,3 +1699,27 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Wette constructive-foundations canonical residual and non-promotion surface.
+------------------------------------------------------------------------
+
+unifiedWetteRule915CurrentProblemBoundary :
+  Wette915.CanonicalRule915CurrentProblemBoundary
+unifiedWetteRule915CurrentProblemBoundary =
+  Wette915.canonicalRule915CurrentProblemBoundary
+
+unifiedWetteRule915ZKPFrame : Wette915.Introspection.ZKPFrame
+unifiedWetteRule915ZKPFrame =
+  Wette915.canonicalRule915MajorZKPFrame
+
+unifiedWetteScaffoldDoesNotCreatePremise18 :
+  Wette915.GeneratedScaffoldCreatesPremise18 → ⊥
+unifiedWetteScaffoldDoesNotCreatePremise18 =
+  Wette915.generatedScaffoldDoesNotCreatePremise18
+
+unifiedWetteScaffoldDoesNotCreatePremise27 :
+  Wette915.GeneratedScaffoldCreatesPremise27 → ⊥
+unifiedWetteScaffoldDoesNotCreatePremise27 =
+  Wette915.generatedScaffoldDoesNotCreatePremise27
