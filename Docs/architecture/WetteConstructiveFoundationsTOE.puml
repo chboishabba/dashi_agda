@@ -1,0 +1,71 @@
+@startuml
+title Wette constructive foundations to DASHI TOE
+
+skinparam componentStyle rectangle
+
+package "Primary source" {
+  [Wette 1969 p.145 / §1.632] as Source
+}
+
+package "Golden Agda owners" {
+  [Canonical p.145 27-premise weld] as P145
+  [Generated scaffold
+1-17, 19-26] as Scaffold
+  [D18 residual
+matched 9.3.23 leaves] as D18
+  [D27 residual
+two directional leaves] as D27
+  [Independent major trace join] as Join
+  [Rule 9.1.5 certified application] as Rule915
+}
+
+package "DASHI TOE" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as Unifier
+  [Unified/Everything] as Unified
+  [Fleet formal-gap target] as Fleet
+}
+
+package "Lean mirror" {
+  [AgdaMirror.WetteConstructiveFoundations] as Lean
+}
+
+Source --> P145 : transcription authority
+P145 --> Scaffold : same typed slots
+Scaffold --> D18 : shared 10-15 retained
+Scaffold --> D27 : shared 10-15 retained
+D18 --> Join : certified major trace
+D27 --> Join : certified major trace
+Join --> Rule915 : proof-carrying cutset
+Rule915 --> TOE : canonical owner alias
+Rule915 --> Unifier : canonical owner alias
+Rule915 --> Unified : canonical owner alias
+Fleet ..> TOE : prioritization only
+Fleet ..> Rule915 : no proof promotion
+P145 ..> Lean : golden mirror boundary
+Rule915 ..> Lean : golden mirror boundary
+
+note right of D18
+Precondition:
+five historical 9.3.23 premises
+plus exact core-leaf match.
+Postcondition:
+D18 closes through two 9.3.9 steps.
+end note
+
+note right of D27
+Precondition:
+left and right directional leaves.
+Postcondition:
+D27 closes through 9.3.5
+and two 9.3.9 steps.
+end note
+
+note bottom of Fleet
+584 discharged fibres remain discharged.
+44 contradiction gaps remain separate.
+58 unformalised formal gaps are the planning target.
+No named-manifest theorem identifies Wette as one of the 58.
+end note
+
+@enduml
