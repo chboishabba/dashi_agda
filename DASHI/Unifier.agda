@@ -1743,3 +1743,26 @@ unifierYMA1CompletionDoesNotSelfPromote :
   ≡ false
 unifierYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- SensibLaw G1-G4 direct runtime boundary.
+------------------------------------------------------------------------
+
+unifierSensibLawDirectCutoverReceipt :
+  SensibLawDirect.ProductionCutoverReceipt
+unifierSensibLawDirectCutoverReceipt =
+  SensibLawDirect.sensibLawGWBv01ProductionCutover
+
+unifierSensibLawDirectParserTokenWritesAreZero :
+  SensibLawDirect.productionParserTokenWrites
+    SensibLawDirect.sensibLawGWBv01ProductionCutover
+  ≡ 0
+unifierSensibLawDirectParserTokenWritesAreZero =
+  SensibLawDirect.productionParserTokenWritesZero
+    SensibLawDirect.sensibLawGWBv01ProductionCutover
+
+unifierSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
+  SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
+unifierSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
+  SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
