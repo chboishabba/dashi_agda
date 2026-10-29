@@ -1500,3 +1500,53 @@ toeYMA1CompletionDoesNotSelfPromote :
   ≡ false
 toeYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+------------------------------------------------------------------------
+-- SensibLaw Australian-contracts reviewed-hop TOE convergence.
+-- Proof ownership remains in the Law module.
+------------------------------------------------------------------------
+
+import DASHI.Law.AustralianContractsReviewedHopCompilerExact as ContractsHop
+
+toeReviewedContractsMaxCut :
+  ContractsHop.ReviewedContractsMaxCutBoundary
+toeReviewedContractsMaxCut =
+  ContractsHop.canonicalReviewedContractsMaxCutBoundary
+
+toeReviewedContractsZKPFrame :
+  ContractsHop.ReviewedContractsTOEZKPFrame
+toeReviewedContractsZKPFrame =
+  ContractsHop.reviewedContractsZKPFrame
+
+toeReviewedContractsAuthorityStillClosed :
+  ContractsHop.reviewedContractsPromotesAnyAuthority
+  ≡ false
+toeReviewedContractsAuthorityStillClosed =
+  ContractsHop.reviewedContractsAuthorityStillClosed
+
+toeReviewedContractsFleetFormalGapBudget :
+  ContractsHop.reviewedContractsFormalGapCount
+  ≡ 58
+toeReviewedContractsFleetFormalGapBudget =
+  ContractsHop.reviewedContractsFormalGapBudgetIs58
+
+
+toeReviewedContractsRuntimeParity :
+  ContractsHop.ReviewedContractsRuntimeParityBoundary
+toeReviewedContractsRuntimeParity =
+  ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+
+toeReviewedContractsPaidTreatmentDoesNotResurrect :
+  ContractsHop.ReviewedContractsRuntimeParityBoundary.paidTreatmentWorkMayResurrectAsFreshTreatmentWork
+    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ false
+toeReviewedContractsPaidTreatmentDoesNotResurrect =
+  ContractsHop.ReviewedContractsRuntimeParityBoundary.paidTreatmentWorkMayResurrectAsFreshTreatmentWorkIsFalse
+    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+
+toeReviewedContractsClosedDoesNotMeanAdequate :
+  ContractsHop.ReviewedContractsRuntimeParityBoundary.frontierClosureMeansFormalConsumerAdequacy
+    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ false
+toeReviewedContractsClosedDoesNotMeanAdequate =
+  ContractsHop.ReviewedContractsRuntimeParityBoundary.frontierClosureMeansFormalConsumerAdequacyIsFalse
+    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
