@@ -8,6 +8,8 @@ polynomial roots, an actual wild exterior, or any Monster object.
 """
 from itertools import permutations, product
 from collections import Counter
+from pathlib import Path
+import re
 
 points=list(range(3))
 S3=list(permutations(points))
@@ -34,7 +36,49 @@ def partition(group):
         unseen-=orbit
     return blocks
 
+
+def verify_checked_out_agda_classifiers():
+    """Read the exact source tables, not only a reconstructed Python quotient."""
+    src=Path(__file__).resolve().parents[1] / (
+        "DASHI/Foundations/PolynomialC3S3TwentySevenOrbitQuotientExact.agda"
+    )
+    assert src.is_file(), "Run this test from a checkout containing the Agda module"
+    text=src.read_text(encoding="utf-8")
+    tri={"low":0,"mid":1,"high":2}
+    pattern=r"Base\\.tri-(low|mid|high)"
+    cl=re.compile(r"^classify11 \\("+pattern+r" , \\("+pattern+r" , "+pattern+
+                  r"\\)\\) = (\\w+)$",re.M)
+    table={}
+    for a,b,c,name in cl.findall(text):
+        key=(tri[a],tri[b],tri[c])
+        assert key not in table
+        table[key]=name
+    assert len(table)==27
+    reppat=re.compile(r"^representative11 (\\w+) = "+pattern+r" , \\("+pattern+
+                      r" , "+pattern+r"\\)$",re.M)
+    representatives={name:(tri[a],tri[b],tri[c]) for name,a,b,c in reppat.findall(text)}
+    assert len(representatives)==11
+    reflpat=re.compile(r"^reflectionOn11 (\\w+) = (\\w+)$",re.M)
+    reflected=dict(reflpat.findall(text))
+    assert len(reflected)==11
+    mergepat=re.compile(r"^mergeToSeven (\\w+) = Shape\\.(\\w+)$",re.M)
+    merge=dict(mergepat.findall(text))
+    assert len(merge)==11 and len(set(merge.values()))==7
+    for x in codes:
+        name=table[x]
+        assert table[conjugate(r,x)]==name
+        assert reflected[name]==table[conjugate(s,x)]
+        assert table[representatives[name]]==name
+        for y in codes:
+            assert (table[x]==table[y]) == any(
+                x==conjugate(p,y) for p in C3)
+    assert Counter(table.values()) == Counter({name:len(
+        [x for x in codes if table[x]==name]) for name in representatives})
+    print("PASS exact Agda classifier table: 27 states × 27 pair tests")
+    print("PASS 11 representatives, 11 involution labels and 7 merged shapes")
+
 def main():
+    verify_checked_out_agda_classifiers()
     assert len(codes)==27 and len(S3)==6
     assert mul(mul(s,r),s)==r2
     for f in codes:
