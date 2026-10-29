@@ -52,7 +52,8 @@ jobs:
         run: |
           dashi-repo index --root .
           dashi-repo diagnose DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda --root .
-          dashi-repo related CanonicalRule915MajorResidual --root . --limit 20
+          dashi-repo related CanonicalRule915CurrentProblem --root . --limit 20
+          dashi-repo related CanonicalRule915SelectedRouteResidual --root . --limit 20
           dashi-repo related matchedRule9323ClosesPremise18 --root . --limit 20
           dashi-repo related closeCanonicalPremise27 --root . --limit 20
           dashi-repo discover 'Wette 1969 rule 9.1.5 premise 18 premise 27 proof carrying cutset' --root . --limit 50
