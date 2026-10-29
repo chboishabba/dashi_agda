@@ -1971,3 +1971,24 @@ toeC4SampledInverseForward :
   C4Sampled64.inverseFourier64 (C4Sampled64.fourier64 s) ≡ s
 toeC4SampledInverseForward =
   C4Sampled64.cubeFourierInversion
+
+
+------------------------------------------------------------------------
+-- Explicit 27 signed integer Fourier modes -> zero-pad 64 -> C4^3
+-- unscaled synthesis -> pointwise sampled product -> normalized forward
+-- -> 27 retained outputs. No silent same-object NS promotion.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C4RetainedSampledOperatorExact as C4Retained
+
+toeC4Pad27RoundTrip :
+  (f : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (mode : Fourier729.ModeCube27) →
+  C4Retained.readRetained (C4Retained.pad27To64 f) mode ≡ f mode
+toeC4Pad27RoundTrip = C4Retained.paddingRetainsAll27
+
+toeC4RetainedSampledBilinear :
+  (Fourier729.ModeCube27 → C4Gaussian.Gaussian4) →
+  (Fourier729.ModeCube27 → C4Gaussian.Gaussian4) →
+  Fourier729.ModeCube27 → C4Gaussian.Gaussian4
+toeC4RetainedSampledBilinear =
+  C4Retained.retainedSampledBilinear
