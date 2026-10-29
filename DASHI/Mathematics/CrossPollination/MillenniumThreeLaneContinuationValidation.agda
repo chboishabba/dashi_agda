@@ -847,7 +847,7 @@ millenniumThreeLaneZKPFrame =
     "O: chboishabba/dashi_agda is the golden proof owner; chboishabba/dashi_lean4 is a sibling producer only"
     "R: close standard formalisation debt for P versus NP, Hodge, and BSD without promoting any Clay conjecture"
     "C: reuse canonical Cook-Levin, projective-cycle, Selmer/Sha, and sibling-Lean custody owners before extending"
-    "S: P waits on the canonical flat Cell/Bits specialization; Hodge waits on literal singular/de Rham same-object geometry; BSD waits on Kummer/global-completion same-object theorems"
+    "S: P has same-machine exact-budget Cook-Levin closure and waits on standard-machine simulation or a universal complexity obstruction; Hodge waits on literal singular/de Rham same-object geometry; BSD waits on Kummer and global-completion same-object theorems"
     "L: observe only theorem-backed branch state, exact source custody, and fail-closed open-problem boundaries"
     "P: extend existing canonical owners; attach results to TOE aggregates; keep docs and verification receipts synchronized"
     "G: eliminate remaining known-math seams while preserving exact non-promotion of P=NP, general Hodge, and BSD"
