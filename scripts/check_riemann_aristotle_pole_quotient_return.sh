@@ -29,6 +29,11 @@ FILES=(
   DASHI/Analysis/RiemannAristotleRHFinalAllowanceLeafSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
+  DASHI/Unified/RiemannRHMaxCutTOEExact.agda
+  DASHI/Unified/Physics.agda
+  DASHI/Unified/Everything.agda
+  DASHI/Unifier.agda
+  DASHI/EverythingTOESymmetryResolved369.agda
 )
 
 for f in "${FILES[@]}"; do
@@ -61,6 +66,11 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleRHFinalAllowanceLeafSchedulerExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
+  agda DASHI/Unified/RiemannRHMaxCutTOEExact.agda
+  agda DASHI/Unified/Physics.agda
+  agda DASHI/Unified/Everything.agda
+  agda DASHI/Unifier.agda
+  agda DASHI/EverythingTOESymmetryResolved369.agda
 else
   echo "agda executable not present; trust scan only" >&2
 fi
