@@ -1,5 +1,22 @@
 module DASHI.Unified.Everything where
 
+-- True 27->11->7 S3/C3 conjugacy quotient and invariant ternary fields.
+-- Includes explicit fixed-point no-go versus free output-phase 27->9.
+import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitQuotientExact as RootOrbitQuotient
+open RootOrbitQuotient public using
+  ( Code27 ; Orbit11 ; classify11 ; representative11
+  ; classifyRepresentative11 ; codeFromClassRepresentative
+  ; C3Related ; relatedHasSameClass ; sameClassHasRotation
+  ; reflectionOn11 ; reflection11Involutive
+  ; reflectionFixedClassIsOneOfThree ; mergeToSeven
+  ; classificationFactors ; countEleven
+  ; inflate11 ; inflate7 ; inflate7To27
+  ; pullbackComposes ; inflate11InjectiveAt ; inflate7InjectiveAt
+  ; inflate11C3Invariant ; everyC3InvariantFieldDescends
+  ; inflate7To27S3Invariant ; everyS3InvariantFieldDescends
+  ; inflate7ReflectionInvariant ; everyReflectionInvariantFieldDescends
+  ; noEquivariantMapFromConjugationToFreeOutputPhase )
+
 -- Native 27 unary ternary maps: even C3 gives 11 conjugation orbits;
 -- full S3 gives 7. Same abstract source group as root discriminant
 -- parity; distinct action/carrier and no Galois/Monster promotion.
