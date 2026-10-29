@@ -2004,3 +2004,27 @@ toeC4GaussianIndexPreservesTrueIntegerConvolution :
       (Convolution729.retainedToWide target)
 toeC4GaussianIndexPreservesTrueIntegerConvolution =
   C4Retained.fourGridGaussianIndexIsTrueIntegerConvolution
+
+
+------------------------------------------------------------------------
+-- Reuse original finite weighted reindexing and physical NS permutation
+-- METHOD for the distinct 365/729 simultaneous-inversion action.
+-- This is explicitly CONDITIONAL on the actual ordered address
+-- permutation; its concrete unique/membership proof remains open.
+------------------------------------------------------------------------
+import Data.List.Relation.Binary.Permutation.Propositional as PairPerm365
+import DASHI.Physics.Closure.R2P227729Orbit365PermutationReductionExact as Orbit365Perm
+
+toeExpanded365Has729OrderedAddresses :
+  Pairs365Owner.lengthL Orbit365Perm.expandedCanonicalPairs ≡ 729
+toeExpanded365Has729OrderedAddresses =
+  Orbit365Perm.expandedCanonicalPairCount
+
+toeFull365HermitianSumGivenAddressPermutation :
+  (a b : HermitianSym729.Hermitian27)
+  (target : Convolution729.WideCube125) →
+  Pairs365Owner.pair729 PairPerm365.↭ Orbit365Perm.expandedCanonicalPairs →
+  OrbitWeighted365.unreducedConvolutionAt a b target
+    ≡ OrbitWeighted365.orbitWeightedConvolutionAt a b target
+toeFull365HermitianSumGivenAddressPermutation =
+  Orbit365Perm.fullPairSumEqualsOrbitSumGivenPermutation
