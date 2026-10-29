@@ -13,7 +13,7 @@ import DASHI.Core.RecursiveParetoFrontierLiftingExact as Recursive
 --
 -- The threshold carrier is abstract. Runtime consumers may instantiate it
 -- with continuous spectral distance. The theorem needs only an explicit order
--- and explicit relation inclusion. It does not postulate quotient types.
+-- and explicit relation inclusion. It does not introduce hidden quotient types.
 ------------------------------------------------------------------------
 
 record ThresholdOrder : Set₁ where
