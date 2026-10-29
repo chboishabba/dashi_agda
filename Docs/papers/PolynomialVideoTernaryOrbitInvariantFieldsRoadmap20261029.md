@@ -157,3 +157,17 @@ The test confirms `R3²=R3`, `R6²=R6`, `R3 R6=R6 R3=R6`, `R3=Pplus+Pminus` poin
 | O36 | Continue the separately tracked actual analytic polynomial root monodromy, generic quintic Galois/radicals, continuous spin, wild Hatcher and Ibrahim/Monster attribution gates | INDEPENDENT, OPEN |
 
 **Highest-alpha next cut:** kernel acceptance of actual owners; then O33 for a genuinely proved characteristic-zero representation decomposition; or a lawful field-valued Fourier diagonalization of the full S3 action after establishing its actual coefficient representation. No new 3/6/9 numeric coincidence is needed. Original historical mathematical authors, repo owners, source-written, executed computational evidence and kernel receipts remain separately attributed.
+
+### Original-source representation construction for O33 (donor search completed)
+
+A repository code search for exact S3 standard/permutation representation owners found no directly reusable matching S3 decomposition; existing `IbrahimMonster*PermutationCharacter*` and `IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact` are distinct owned Monster-character results, and their receipt/attribution discipline is reusable but not their mathematical object identity.
+
+The source-derived **constructive route** is shorter than a generic character-reconstruction postulate: the original seven S3 conjugacy orbits have actual sizes `1,2,3,3,6,6,6`. Over a characteristic-zero field, the permutation representation of a:
+- size-1 orbit gives `trivial`;
+- size-2 orbit gives `trivial ⊕ sign` (permutation of the two cosets of C3);
+- size-3 orbit gives `trivial ⊕ standard₂`, each of the two 3-orbits;
+- size-6 orbit gives the regular representation `trivial ⊕ sign ⊕ 2·standard₂`, each of the three regular orbits.
+
+Adding the actual orbit owners yields `7·trivial ⊕ 4·sign ⊕ 8·standard₂` at dimension 27, with exactly the six fixed-point trace values already source-computed. This is **mathematical consequence of classical characteristic-zero S3 representation theory**, not a newly kernel-verified code-level equivalence in #1414. Actual next formal obligation: construct (or import) S3-stable orbit vectors and explicit invertible block-intertwining matrices for the size-2,3,6 components; prove the original 27 table-code action is conjugate to their disjoint union, then glue the block maps.
+
+External sources/preserved attribution: Serre, *Linear Representations of Finite Groups* (1977); Pavel Etingof and colleagues, *Introduction to Representation Theory* (MIT notes, https://klein.mit.edu/~etingof/reprbook.pdf); Princeton lecture *Modular Representations of Symmetric Groups*, ordinary/Brauer character table of S3 (https://web.math.princeton.edu/~charchan/ModularRepresentationsSymmetricGroupSeminar); Maithani, 2025, Reynolds operator (DOI 10.1112/blms.70175); Mathlib4's original `Equiv.Perm.sign` group homomorphism (https://leanprover-community.github.io/mathlib4_docs/Mathlib/GroupTheory/Perm/Sign.html). Original repository character code and Ibrahim Monster 3B ownership remain independent.
