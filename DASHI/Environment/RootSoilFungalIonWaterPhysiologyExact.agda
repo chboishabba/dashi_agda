@@ -290,3 +290,148 @@ canonicalRootSoilFungalPhysiologyBoundary =
     false refl
     true refl
     true refl
+
+
+------------------------------------------------------------------------
+-- Spatial sentinel bioassay and soil-moisture nutrient-transport boundary.
+--
+-- PRIMARY SOURCES
+--
+-- Petra Marschner and Zed Rengel,
+-- "Nutrient availability in soils", in Marschner's Mineral Nutrition of
+-- Plants, 4th ed. (2023), pp. 499--522.
+-- DOI: 10.1016/B978-0-12-819773-8.00003-4.
+--
+-- Agriculture Victoria, "Avoiding crop damage from residual herbicides".
+-- NSW Government, "Herbicide residues".
+-- Department of Primary Industries and Regional Development (WA),
+-- "Residual herbicides - carryover and behaviour in dry conditions".
+--
+-- SOURCE BOUNDARY
+-- The sources support soil-water control of nutrient mobility and the use of
+-- controlled plant bioassays for residual-herbicide screening. The typed
+-- diagnostic carrier below is DASHI reconstruction. A visible plant phenotype
+-- remains an observation. It does not identify one chemical cause by itself.
+------------------------------------------------------------------------
+
+data IndicatorPhenotype : Set where
+  interveinalChlorosis : IndicatorPhenotype
+  paleOrLightVeins : IndicatorPhenotype
+  reducedVigour : IndicatorPhenotype
+  abnormalRootArchitecture : IndicatorPhenotype
+
+data SoilStressHypothesis : Set where
+  residualHerbicideCarryover : SoilStressHypothesis
+  heavyMetalOrPaintResidue : SoilStressHypothesis
+  pHAvailabilityShift : SoilStressHypothesis
+  moistureLimitedNutrientTransport : SoilStressHypothesis
+  waterloggingRootStress : SoilStressHypothesis
+  salinityOrIonImbalance : SoilStressHypothesis
+
+data PhenotypeCauseCompatibility : IndicatorPhenotype → SoilStressHypothesis → Set where
+  chlorosisResidualHerbicideCandidate :
+    PhenotypeCauseCompatibility interveinalChlorosis residualHerbicideCarryover
+  chlorosisPHCandidate :
+    PhenotypeCauseCompatibility interveinalChlorosis pHAvailabilityShift
+  chlorosisMetalCandidate :
+    PhenotypeCauseCompatibility interveinalChlorosis heavyMetalOrPaintResidue
+  vigourMoistureCandidate :
+    PhenotypeCauseCompatibility reducedVigour moistureLimitedNutrientTransport
+  vigourWaterloggingCandidate :
+    PhenotypeCauseCompatibility reducedVigour waterloggingRootStress
+
+record UniqueCausePromotion (phenotype : IndicatorPhenotype) : Set where
+  constructor uniqueCausePromotion
+  field
+    promotedCause : SoilStressHypothesis
+    allCompatibleSame :
+      ∀ {candidate} →
+      PhenotypeCauseCompatibility phenotype candidate →
+      candidate ≡ promotedCause
+
+open UniqueCausePromotion public
+
+interveinalChlorosisUniqueCausePromotionImpossible :
+  UniqueCausePromotion interveinalChlorosis → ⊥
+interveinalChlorosisUniqueCausePromotionImpossible promotion
+  with allCompatibleSame promotion chlorosisResidualHerbicideCandidate
+... | refl
+  with allCompatibleSame promotion chlorosisPHCandidate
+... | ()
+
+record SpatialSentinelBioassayReceipt : Set where
+  constructor spatialSentinelBioassayReceipt
+  field
+    sameIndicatorSpecies : Bool
+    controlledSeedOrPropagationReference : String
+    fixedOrRecordedSpacing : Bool
+    suspectBoundaryRecorded : Bool
+    comparisonAreaRecorded : Bool
+    wateringSourceRecorded : Bool
+    soilDepthRecorded : Bool
+    moistureConditionRecorded : Bool
+    phenotypeRecorded : Bool
+    rootPhenotypeRecorded : Bool
+    repeatedSpatialPatternRecorded : Bool
+    laboratoryOrLabelFollowupReference : String
+    controlSoilReference : String
+    observationGeometryReference : String
+
+open SpatialSentinelBioassayReceipt public
+
+record SoilMoistureNutrientTransportBoundary : Set where
+  constructor soilMoistureNutrientTransportBoundary
+  field
+    soilWaterParticipatesInDissolvedIonTransport : Bool
+    massFlowAndDiffusionRemainDistinctTransportRoutes : Bool
+    soilWaterContentCanChangeNutrientAvailability : Bool
+    soilMoistureCanChangeResidualHerbicideAvailabilityOrBreakdown : Bool
+    waterloggingCanConfoundPlantBioassay : Bool
+    moistureAloneDeterminesPlantNutrientStatus : Bool
+    phenotypeAloneIdentifiesUniqueChemicalCause : Bool
+    spatialReplicationRaisesDiagnosticValue : Bool
+    controlledComparisonIsRequiredForCausalPromotion : Bool
+
+open SoilMoistureNutrientTransportBoundary public
+
+canonicalSoilMoistureNutrientTransportBoundary :
+  SoilMoistureNutrientTransportBoundary
+canonicalSoilMoistureNutrientTransportBoundary =
+  soilMoistureNutrientTransportBoundary
+    true
+    true
+    true
+    true
+    true
+    false
+    false
+    true
+    true
+
+soilWaterParticipatesInNutrientTransport :
+  soilWaterParticipatesInDissolvedIonTransport
+    canonicalSoilMoistureNutrientTransportBoundary
+  ≡ true
+soilWaterParticipatesInNutrientTransport = refl
+
+soilMoistureDoesNotDetermineNutrientStatusAlone :
+  moistureAloneDeterminesPlantNutrientStatus
+    canonicalSoilMoistureNutrientTransportBoundary
+  ≡ false
+soilMoistureDoesNotDetermineNutrientStatusAlone = refl
+
+plantPhenotypeDoesNotIdentifyUniqueChemicalCause :
+  phenotypeAloneIdentifiesUniqueChemicalCause
+    canonicalSoilMoistureNutrientTransportBoundary
+  ≡ false
+plantPhenotypeDoesNotIdentifyUniqueChemicalCause = refl
+
+controlledComparisonRequiredBeforeCausalPromotion :
+  controlledComparisonIsRequiredForCausalPromotion
+    canonicalSoilMoistureNutrientTransportBoundary
+  ≡ true
+controlledComparisonRequiredBeforeCausalPromotion = refl
+
+marschnerRengelNutrientAvailabilityDOI : String
+marschnerRengelNutrientAvailabilityDOI =
+  "10.1016/B978-0-12-819773-8.00003-4"
