@@ -155,3 +155,82 @@ proof ownership stays with original individual PRs, including
 #1254 pants, #1405 sonic T15/T16, #1414 S5 polynomial monodromy,
 and earlier Ibrahim Monster 3B. No numerical or symbolic same-object
 promotion.
+
+
+## New G1 rational PL spine: finite geometric witness
+
+**Executable, source-specific progress on G1**:
+`scripts/alexander_horned_three_loop_pl_spine_g1.py` supplies an
+explicit exact rational EMBEDDED planar graph. Its seven vertices
+are central `O=(0,0)` and six selected feet
+```text
+  a: (8,1), (8,-1)
+  b: (-5,8), (-6,7)
+  c: (-5,-8), (-6,-7)
+```
+Each of the three triangles goes `O -> first foot -> second
+foot -> O`. All 9 edges are tested for pairwise intersections;
+different triangles meet only at `O`. The connected embedded
+graph has 7 vertices and 9 edges. Its fundamental group is
+free of rank `E-V+1=3`, canonically charted by the three
+labelled triangles `a,b,c`. The classical regular-neighborhood
+theorem makes a sufficiently thin embedded closed PL
+neighborhood a tame genus-three handlebody in R³, with
+a 0-handle near O and three 1-handles.
+This is a *specific finite* tame three-dimensional carrier,
+not merely a numerical count of three triangles.
+
+A stationary cap is reserved on the **lower hemisphere**
+of the central 0-handle, e.g. in the spherical patch with
+`z <= -3/4`. The noncentral graph is planar (`z=0`), so the
+cap has positive vertical separation from all graph parts
+outside the central 0-handle. The existence of a sufficiently
+small closed product-collar follows from this positive
+separation and the tame 0-handle chart. The script does
+NOT specify the complete non-overlapping 3D tubular
+radii of all 9 edges or certify an exact polyhedral
+boundary triangulation; that remains a stronger
+coordinate-level model, but the standard regular
+neighborhood theorem does establish an actual
+genus-three HANDLEBODY for this embedded graph.
+
+**Critical type check:** the loops `a,b,c`
+in this G1 handlebody are its own **core fundamental-group
+generators**. They are NOT automatically MERIDIANS OF
+THREE HORNS IN ITS COMPLEMENT. The later G3/G4
+must produce a chart from the actual complementary
+exterior and geometric child meridian loops
+to a free group with these names. Without it,
+even a cap-fixed Nielsen automorphism of the
+handlebody's OWN fundamental group does not pay
+the required horned-exterior meridian inclusion.
+This guards a possible internal/external
+dualisation mistake.
+
+**Updated accepted progress:**
+- G1 (abstract actual tame genus-three handlebody,
+  3 labelled core circles, disjoint reserved cap):
+  PL graph and regular-neighborhood mathematical
+  construction; exact rational noncrossing verified.
+- G2 (specific cap-fixed ambient homeomorphism
+  inducing chosen Nielsen map): STILL OPEN.
+- G3 (punctured torus embedded in ACTUAL
+  three-child EXTERIOR with based meridian chart):
+  STILL OPEN; exact abstract free-word boundary
+  and conjugator ALREADY owned.
+- G4 (true horn-complement stage inclusion):
+  STILL OPEN.
+- G5/G6 (nested linked wild limit, actual
+  C3-equivariant exterior group): STILL OPEN.
+- #1414 S5 derived-series/double commutator
+  remains separate; general perfect→solvable
+  no-go does not solve ambient geometry.
+
+Attribution: classical graph regular-neighborhood
+theory, genus = E-V+1, Alexander/Hatcher original
+wild geometry and prior source-owned Nielsen
+and pants constructions. The script is a new
+finite source-specific rational witness. No
+Agda kernel certification, precise PL
+handle-slide, ambient horned sphere or
+Monster 3B identity is claimed.
