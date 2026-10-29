@@ -1,5 +1,8 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+
+open import Agda.Builtin.Equality using (_≡_)
 import DASHI.Mathematics.CrossPollination.MillenniumThreeLaneContinuationValidation as MillenniumThreeLane
+import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact as MillenniumGate
 
 ------------------------------------------------------------------------
 -- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
@@ -21,22 +24,22 @@ toeMillenniumThreeLaneContract =
   MillenniumThreeLane.canonicalMillenniumThreeLaneTOEContract
 
 toePVersusNPRemainsNonPromoted :
-  MillenniumThreeLane.Gate.finalClosureStatus
-    MillenniumThreeLane.Gate.pVersusNPStatus
-  ≡ MillenniumThreeLane.Gate.analyticOrGeometricBoundary
+  MillenniumGate.finalClosureStatus
+    MillenniumGate.pVersusNPStatus
+  ≡ MillenniumGate.analyticOrGeometricBoundary
 toePVersusNPRemainsNonPromoted =
   MillenniumThreeLane.threeLanePNonPromotion
 
 toeHodgeRemainsNonPromoted :
-  MillenniumThreeLane.Gate.finalClosureStatus
-    MillenniumThreeLane.Gate.hodgeStatus
-  ≡ MillenniumThreeLane.Gate.analyticOrGeometricBoundary
+  MillenniumGate.finalClosureStatus
+    MillenniumGate.hodgeStatus
+  ≡ MillenniumGate.analyticOrGeometricBoundary
 toeHodgeRemainsNonPromoted =
   MillenniumThreeLane.threeLaneHodgeNonPromotion
 
 toeBSDRemainsNonPromoted :
-  MillenniumThreeLane.Gate.finalClosureStatus
-    MillenniumThreeLane.Gate.bsdStatus
-  ≡ MillenniumThreeLane.Gate.analyticOrGeometricBoundary
+  MillenniumGate.finalClosureStatus
+    MillenniumGate.bsdStatus
+  ≡ MillenniumGate.analyticOrGeometricBoundary
 toeBSDRemainsNonPromoted =
   MillenniumThreeLane.threeLaneBSDNonPromotion
