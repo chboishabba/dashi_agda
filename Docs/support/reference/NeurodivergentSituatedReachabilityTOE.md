@@ -248,6 +248,23 @@ The existing Fleet values remain:
 
 The social-ecology adapter is not silently counted as a Yang-Mills Gate-4 formal gap.
 
+
+## Latest PR pattern audit
+
+The implementation also checked the newest repository lanes.
+
+- PR #1414 uses the current convention of exposing one result through all three canonical TOE roots.
+- PR #1415 reuses coarse/fine non-factorability to block an invalid zoom-out when a quotient erases a required distinction.
+- PR #1416 keeps Pareto scheduling and threshold coarsening separate from proof authority.
+- PR #1417 keeps worker allocation separate from truth and semantic authority.
+
+This lane follows the same discipline.
+
+It treats latency as a coarse observer.
+It proves a collision against the future-cone consumer.
+It reuses the existing refined coordinates.
+It does not grant semantic authority from priority, scheduling, or a numerical score.
+
 ## Management-system normalization
 
 This section is a mapping only.
