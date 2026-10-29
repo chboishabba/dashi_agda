@@ -1718,3 +1718,14 @@ unifierNavierStokesCurrentProblemBWeightedPlusStillOpen :
   NSClayTOE.laneBWeightedPlusEndpointClosed unifierNavierStokesCurrentProblemReceipt ≡ false
 unifierNavierStokesCurrentProblemBWeightedPlusStillOpen =
   NSClayTOE.currentProblemBWeightedPlusEndpointStillOpen
+
+
+unifierNavierStokesCurrentProblemBR829VectorClosed :
+  NSClayTOE.laneBR829VectorClosed unifierNavierStokesCurrentProblemReceipt ≡ true
+unifierNavierStokesCurrentProblemBR829VectorClosed =
+  NSClayTOE.currentProblemBR829VectorClosed
+
+unifierNavierStokesCurrentProblemBR829RealODEStillOpen :
+  NSClayTOE.laneBR829RealFiniteODETransportClosed unifierNavierStokesCurrentProblemReceipt ≡ false
+unifierNavierStokesCurrentProblemBR829RealODEStillOpen =
+  NSClayTOE.currentProblemBR829RealFiniteODETransportStillOpen
