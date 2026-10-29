@@ -43,7 +43,7 @@ data UsedCircuitCoordinate (inputs gates : Nat) : Set where
 coordinateIndex :
   ∀ {inputs gates} → UsedCircuitCoordinate inputs gates → Nat
 coordinateIndex (inputCoordinate i) = Data.Fin.Base.toℕ i
-coordinateIndex (gateCoordinate {inputs = inputs} i) =
+coordinateIndex {inputs = inputs} (gateCoordinate i) =
   Compiler.gateVariableIndex inputs i
 
 -- Under shared constraints, the prior realization lemma forces each input
