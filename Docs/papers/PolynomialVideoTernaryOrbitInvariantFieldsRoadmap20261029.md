@@ -232,3 +232,67 @@ The existing 11-orbit C3 quotient and its *actual* induced reflection are reused
 - [ ] **O44** Audit all previously existing even/odd/parity/involution/prior math symbol candidates across branches before another new owner. Default-branch code search does **not** cover open sibling PR branches; inspect branch-specific changed file lists and fetch_file by ref.
 
 **Status gate:** source rewritten and roadmap committed; no CI required; no Agda compiler run and no upgraded OpenAI mathematical theorem established. No ESD edits.
+
+## O40 exact finite-matrix continuation (29 October 2026, latest PR heads audited)
+
+Latest PR audit on 2026-10-29: polynomial owner #1414 continues at its original draft branch; independent #1244 (Alexander genus-one/Hatcher), #1405 (sonic waves), #1407 (Fourier/NS), and recent #1428–#1436 subject lanes are separate. Do not import their private branch-only constructions or rewrite them. The group character problem remains OUR mathematical owner.
+
+The previous O40 was **only a character agreement**. The current PR advances it to an explicit **rational change-of-basis certificate** on every actual 27-code S3 orbit. Original source math: Maschke (1899), classical finite S3 representation theory and Serre (1977); original seven-shape and conjugacy owners in DASHI retain attribution. Independent numerical exact checks and uncompiled Agda source have distinct statuses.
+
+### Exact new mathematical data
+
+The ORIGINAL seven shape orbits, in the unchanged order, have sizes `1,2,3,3,6,6,6`. For a 2-orbit use
+`B₂=[[1,1],[1,-1]]`, `C₂=B₂`, and `B₂C₂=C₂B₂=2I₂`, determinant -2.
+
+For either 3-orbit use `B₃=[[1,1,0],[1,0,1],[1,-1,-1]]`, `C₃=[[1,1,1],[2,-1,-1],[-1,2,-1]]`, `B₃C₃=C₃B₃=3I₃`, determinant +3. The two residual coordinates are the standard 2-dimensional zero-sum representation in characteristic zero, not a characteristic-three direct sum.
+
+For each free 6-orbit, order the source group labels `[e,r,r²,s01,s02,s12]` and use the exact integer six-by-six Fourier matrix
+```
+B6 =
+[ 1  1  1  0  0  1 ]
+[ 1  1  0  1 -1 -1 ]
+[ 1  1 -1 -1  1  0 ]
+[ 1 -1  0  1  1  0 ]
+[ 1 -1 -1 -1  0  1 ]
+[ 1 -1  1  0 -1 -1 ]
+C6 = 54 * inverse(B6) =
+[  9   9   9   9   9   9 ]
+[  9   9   9  -9  -9  -9 ]
+[ 18 -18   0   0 -18  18 ]
+[  0  18 -18  18   0 -18 ]
+[  0 -18  18  18 -18   0 ]
+[ 18   0 -18   0  18 -18 ]
+```
+Both integer products equal `54 I6` and determinant `det B6=-54` in the group-row ordering. The basis columns are the original trivial character, sign character, and four matrix coefficients `ρ(g^-1)_{ij}` of the **actual** two-dimensional standard S3 representation `ρ`. For all six group elements, the conjugated block action is exactly `1 ⊕ sign ⊕ ρ ⊕ ρ`. There is no use of floating-point comparisons or irreducible character fingerprint promotion.
+
+Block determinants in sorted-native-code order are `1,-2,3,3,54,54,-54` and their product is `2,834,352 ≠ 0`. The absolute determinant is independent of the permutation of rows and identifies an invertible rational 27-dimensional basis. This is the ACTUAL constructive finite-matrix proof over Q at the algebra/computation level, not yet an Agda-kernel proof of the globally assembled rational module.
+
+### Source-written owners on #1414
+
+1. `PolynomialS3RegularRationalBlockCertificateExact.agda` — typed six group labels, source `S3` permutation chart, integer `B6` and `C6=54 B6⁻¹`, 72 two-sided 6×6 cell lemmas, standard matrix `ρ`, diagonal `1⊕sign⊕ρ⊕ρ` and 216 literal equivariance cell lemmas.
+2. `PolynomialS3SmallRationalBlockCertificateExact.agda` — 2×2 and 3×3 matrices and scaled two-sided inverses, 24+54 representation-intertwining cells, and source-shape-level identity, cycle, transposition and constant maps.
+3. `PolynomialS3RegularOrbitToNativeCodeExact.agda` — actual three source six-orbit representatives, typed action intertwining from original S3 group and 108 injectivity/no-collision constructor clauses.
+4. `PolynomialS3TwentySevenOrbitBlockAssemblyExact.agda` — bijection between native `Code27` and the literal disjoint `1+2+3+3+6+6+6` family, complete 27-case source classifier and 27×2 round-trips, native 162-case original S3 equivariance, group action identity/composition, and generic-field pointwise pullback inverses. No assertion that root triples equal endomorphism codes.
+5. `PolynomialC3CharacteristicThreeRetractionNoGoExact.agda` — original `Phase3` C3 law proves a C3-invariant F3-linear functional on three basis positions has coefficients `a=b=c` and evaluates the constant vector as `3a=0`. Therefore no equivariant linear RETRACTION to the constant line. This formalises why the rational 3-block basis with determinant 3 does not invert in characteristic three. The earlier **C2** 7-even+4-odd split over F3 is still valid.
+
+All five import into `EverythingTOESymmetryResolved369`, `Unifier`, and `Unified/Everything` without touching protected ESD surfaces.
+
+### Executed evidence and remaining wall
+
+- Independent **local exact SymPy** rational matrix audit on all seven orbit blocks PASSED: nonzero determinants, two-sided inverses, S3-equivariance on every basis column and every group element; source algebraic receiver checked the 27-code partition and all 162 native permutation actions. Exact source readback of Agda B₂,B₃,B₆ and scaled inverses checked 98 two-sided matrix products, 216 regular source proofs and all 27 native-code labels / 162 original actions (PASS). This is ACTUAL EXECUTED computational evidence and source-readback, **NOT Agda kernel compilation**.
+- Pure-stdlib checked-out regression `scripts/check_polynomial_s3_rational_orbit_blocks_20261029.py` committed. The script was not executed against the exact checked-out GitHub head here; local container cannot clone GitHub and has no Agda binary.
+- O40 is therefore **MATHEMATICAL MATRIX CONSTRUCTION COMPUTATION-COMPLETE / AGDA GLOBAL Q-MODULE TYPECHECK OPEN**. The remaining finite step is formally defining `ℚ` coefficient-valued fields on the new orbit-block sum, constructing rational forward/backward linear maps from the certified scaled integer B/C matrices (divide by 2,3,54), and kernel checking their two-sided inverses and actual S3-equivariance at the whole 27-dimensional field level.
+- Keep separate original O20/O36 continuum polynomial coefficient loops, generic quintic S5/Galois radical criterion, Spin SU2/SO3 topology and Hatcher three-dimensional wild exterior. The finite S3 module does not solve those automatically.
+
+| ID | Remaining item and mathematical acceptance gate | Status |
+|---|---|---|
+| O41 | Explicit original 6-group-label 6×6 Fourier basis, 54-scaled two-sided inverse, full six-element intertwiner | SOURCE-WRITTEN; independent exact PASS; kernel pending |
+| O42 | Explicit 2×2 and 3×3 parity/standard matrices and native small-orbit intertwiners | SOURCE-WRITTEN; independent exact PASS; kernel pending |
+| O43 | Three regular 6-orbit native-code maps with group action and each six-label injectivity | SOURCE-WRITTEN; independent exact PASS; kernel pending |
+| O44 | Full native 27↔1+2+3+3+6+6+6 orbit-block G-set equivalence, 162 S3 action cases and any-target field pullback | SOURCE-WRITTEN; independent exact source table PASS; kernel pending |
+| O45 | Define rational coefficient field, glue seven block B/C maps to an explicit 27×27 rational S3-module equivalence and prove global linearity + inverse | OPEN, exact numerical matrix construction already checked |
+| O46 | Characteristic-three C3-equivariant linear retraction no-go (no modular 3-point split), preserving valid separate C2 Fourier | SOURCE-WRITTEN; kernel pending |
+| O47 | Run exact committed script in an actual branch checkout; capture stdout, interpreter, commit SHA and results | OPEN; independent local analogous Python/SymPy checks PASS |
+| O48 | Pin Agda and stdlib; type-check new five sources, previous orbit/Fourier sources and three TOE import roots; repair proof errors. CI intentionally not required | OPEN; no kernel receipt |
+
+**STOP/PARETO:** O45 and O48 are the two unpaid proof-level gates. Further 27/369 numeric analogies add no value without a typed operator law. The unrelated Ibrahim Monster 3B representation is explicitly NOT the same 27-module; preserve all original authors' root theorems, original meta-introspector owner and source-code vs computation vs kernel receipts.
