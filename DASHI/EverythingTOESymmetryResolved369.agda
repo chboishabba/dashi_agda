@@ -1464,16 +1464,16 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 ------------------------------------------------------------------------
 
 toePNFAnaphorSurfaceIdentityPromotionImpossible :
-  PNFHyperfabric.Anaphor.SurfaceSpellingIsWitnessIdentity → ⊥
+  PNFHyperfabric.PNFAnaphorSurfaceIdentityPromotion → ⊥
 toePNFAnaphorSurfaceIdentityPromotionImpossible =
   PNFHyperfabric.pnfAnaphorSurfaceIdentityPromotionImpossible
 
 toePNFAnaphorCandidateResolutionPromotionImpossible :
-  PNFHyperfabric.Anaphor.CandidateEvidenceResolvesProjectedAnaphor → ⊥
+  PNFHyperfabric.PNFAnaphorCandidateResolutionPromotion → ⊥
 toePNFAnaphorCandidateResolutionPromotionImpossible =
   PNFHyperfabric.pnfAnaphorCandidateResolutionPromotionImpossible
 
 toePNFAnaphorRecursiveSelfUpdateImpossible :
-  PNFHyperfabric.Anaphor.SetwiseProjectionRequiresRecursiveDemandUpdate → ⊥
+  PNFHyperfabric.PNFAnaphorRecursiveSelfUpdate → ⊥
 toePNFAnaphorRecursiveSelfUpdateImpossible =
   PNFHyperfabric.pnfAnaphorRecursiveSelfUpdateImpossible
