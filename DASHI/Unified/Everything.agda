@@ -1,6 +1,10 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Interop.WorldEigenResidualStratification as AOStratification
+import DASHI.Interop.HierarchicalSpectralParetoExact as AOHierarchical
+import DASHI.Interop.SublinearTopicConductorCostExact as AOConductor
+import DASHI.Interop.CombinatorialMaxCutPhysicsAlignmentExact as AOCombinatorialMaxCut
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
 
