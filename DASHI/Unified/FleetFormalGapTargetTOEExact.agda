@@ -691,20 +691,29 @@ fleetMeta2026SettlementNormCalibration :
 fleetMeta2026SettlementNormCalibration =
   LegalNorm.canonicalMeta2026SettlementNormCalibration
 
-fleetMetaSettlementDoesNotBindCompetitors :
+fleetMetaSettlementAloneLegallyBindsCompetitors : Bool
+fleetMetaSettlementAloneLegallyBindsCompetitors =
   LegalNorm.settlementAloneLegallyBindsTikTokOrYouTube
     LegalNorm.canonicalMeta2026SettlementNormCalibration
-  ≡ false
+
+fleetMetaSettlementDoesNotBindCompetitors :
+  fleetMetaSettlementAloneLegallyBindsCompetitors ≡ false
 fleetMetaSettlementDoesNotBindCompetitors = refl
 
-fleetMetaSettlementDoesNotCreateFederalStatute :
+fleetMetaSettlementCreatesFederalStatute : Bool
+fleetMetaSettlementCreatesFederalStatute =
   LegalNorm.settlementCreatesFederalStatute
     LegalNorm.canonicalMeta2026SettlementNormCalibration
-  ≡ false
+
+fleetMetaSettlementDoesNotCreateFederalStatute :
+  fleetMetaSettlementCreatesFederalStatute ≡ false
 fleetMetaSettlementDoesNotCreateFederalStatute = refl
 
-fleetJMDPosterDoesNotCreateLegalAuthority :
+fleetJMDPosterCreatesLegalAuthority : Bool
+fleetJMDPosterCreatesLegalAuthority =
   LegalNorm.jmdPosterCreatesLegalAuthority
     LegalNorm.canonicalMeta2026SettlementNormCalibration
-  ≡ false
+
+fleetJMDPosterDoesNotCreateLegalAuthority :
+  fleetJMDPosterCreatesLegalAuthority ≡ false
 fleetJMDPosterDoesNotCreateLegalAuthority = refl
