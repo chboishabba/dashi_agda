@@ -323,3 +323,64 @@ No ESD edits, kernel checks, CI or physical/Monster same-object promotion.
 ## Source-first owner audit, 29 October 2026
 
 See [the exact Agda and Lean source audit](AlexanderHornedAgdaLeanOwnerAudit20261029.md). External-sector `rotationCommutesAllTernaryStages` is already in the canonical Agda tower. Do not duplicate it or conflate it with a local Nielsen C3. The complement-side PL/meridian certificates G2–G6 are still open. The Lean recursive repository search was truncated and does not establish exhaustive absence. Attribution and Ibrahim Monster 3B non-promotion unchanged.
+
+
+## 2026-10-29 exact local Nielsen based-naturality gate (new)
+
+Read the actual canonical Agda sources, not only PR descriptions:
+\`AlexanderHornedBalancedTernaryCommutatorTowerExact\`,
+\`AlexanderHornedTernaryPantsMeridianBoundaryExact\`,
+\`AlexanderHornedTetralemmaRelativeHandleSlideGateExact\`,
+and \`AlexanderHornedC3ExteriorBridge\`. The attached Lean
+\`ThreeArmCollarCoverAssembly\` and \`ThreeArmHatcherGroupTransport\`
+remain conditional consumers. \`EverythingTOESymmetryResolved369\` already
+imports the canonical boundary module, so the following results enter that
+TOE import graph without a duplicate owner.
+
+**Concrete strengthened G4 obstruction:** in \(F(a,b,c)\), with
+\(w=[a,b][b,c]=abAcBC\) and
+\(\phi(a)=ca^{-1}cb,\ \phi(b)=a^{-1}c,\ \phi(c)=c\), exact free reduction gives
+
+\[
+q=ca^{-1}ca^{-1},\qquad
+\phi(w)=q\,w\,q^{-1}\ne w.
+\]
+
+It is a genuine equality of reduced free-group words, not just an
+unexplained cyclic-equivalence boolean. The automorphism satisfies
+\(\phi^3=\mathrm{id}\) by checking three free generators and extending
+through the free-group universal property; this mathematical extension
+is NOT yet a quantified Agda proof. The reduced-word Agda terms live
+IN the original
+\`AlexanderHornedTernaryPantsMeridianBoundaryExact.agda\` under
+\`LocalNielsenReducedCertificate\`, including \`canonicalWordReduction\`,
+\`puncturedTorusBoundary\`, \`phiCubedOnA/B/C\`,
+\`phiPreservesPeripheralConjugacy\`, and
+\`phiNotStrictlyBasedPeripheral\`. No algebraic analogue is silently
+declared to be an ambient three-manifold action.
+
+**Consequent geometric gate:** a based naturality square in which the
+parent based meridian is fixed but the children transform by this
+specific local \(\phi\) **cannot commute strictly**. It could commute
+only after supplying compatible conjugating basepoint/path transport,
+with the algebraic target class \(q\). An *actual path in the selected
+complement*, its lift through cap-relative slides, and coherent
+stage-to-stage transport are still absent. Conjugacy-class equivariance
+is insufficient for the claimed *based* inclusion without those maps.
+This does not obstruct the already canonical external three-sector C3
+rotation, which permutes entire root sectors rather than children.
+
+Source regression \`scripts/alexander_horned_order_three_peripheral_nielsen.py\`
+now checks the exact \(q\), strict mismatch, and every 4,687 freely reduced
+word of length <=5 for \(\phi^3\). A byte-matched local script was executed
+successfully on 2026-10-29; GitHub readback and exact-head Agda typecheck
+are separate receipts. G2 cap-relative PL map, G3 actual embedded
+punctured torus, G4 geometric based square, G5 nested wild stages and
+G6 exterior fundamental-group identification REMAIN OPEN.
+
+Attribution: Alexander 1924 and Hatcher AT Example 2B.2 retain the
+binary wild-topology source; Nielsen/classical free-group algebra and
+handlebody theory retain original mathematical priority; current
+DASHI owners retain source/proof ownership. The polynomial #1414,
+sonic #1405, and prior Ibrahim Monster 3B work remain distinct.
+No ESD, empirics, physical gauge, or same-object Monster promotion.
