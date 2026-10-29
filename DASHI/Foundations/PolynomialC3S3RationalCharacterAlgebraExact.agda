@@ -4,12 +4,14 @@ module DASHI.Foundations.PolynomialC3S3RationalCharacterAlgebraExact where
 -- to DASHI.Biology.MoonshineOrbifoldSectorProjectorExact (and historical
 -- finite-group representation theory). This file owns only the eleven-orbit
 -- reflection instantiation. No reassignment of prior DASHI/Ibrahim ownership.
--- Source-written; Agda kernel verification pending; not yet a TOE import.
+-- Source-written; Agda kernel verification pending; TOE import owner retained.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _+_; -_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitQuotientExact as Q
+import DASHI.Foundations.PolynomialVandermondeOrbitParityIntertwinerExact as Parity
+import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
 import DASHI.Biology.MoonshineOrbifoldSectorProjectorExact as Existing
 
 Field11ℚ : Set
@@ -95,3 +97,67 @@ positiveProjectionAtIdempotent f o =
     (cong (λ pair → Existing.first (Existing.positiveProjection pair))
       (positiveReflectionPair f o))
     (Existing.positiveProjectionIdempotentFirst (reflectionPair f o))
+
+------------------------------------------------------------------------
+-- Video-to-repository exact SAME SIGN CHARACTER, SAME RATIONAL FIELD.
+-- Pull back the *original* S3 conjugacy action to the 11-orbit field
+-- and project it by the prior-owned rational C2 sector operators.
+-- Reuse original moonshine projector equations: do not copy ring
+-- algebra or promote an 11-orbit field to an actual Monster module.
+------------------------------------------------------------------------
+
+s3OnRationalField :
+  Perm.TriPermutation → Field11ℚ → Field11ℚ
+s3OnRationalField p f o =
+  f (Parity.fullS3ActionOnEleven p o)
+
+positiveField : Field11ℚ → Field11ℚ
+positiveField = positiveProjectionAt
+
+negativeField : Field11ℚ → Field11ℚ
+negativeField = negativeProjectionAt
+
+ifParity : Perm.TriPermutation → Field11ℚ → Q.Orbit11 → ℚ
+ifParity Perm.permIdentity f o = f o
+ifParity Perm.permRotate f o = f o
+ifParity Perm.permRotate2 f o = f o
+ifParity Perm.permSwapLowMid f o = reflect f o
+ifParity Perm.permSwapLowHigh f o = reflect f o
+ifParity Perm.permSwapMidHigh f o = reflect f o
+
+positiveIntertwinesS3Parity :
+  (p : Perm.TriPermutation) (f : Field11ℚ) (o : Q.Orbit11) →
+  positiveField (s3OnRationalField p f) o ≡ positiveField f o
+positiveIntertwinesS3Parity Perm.permIdentity f o = refl
+positiveIntertwinesS3Parity Perm.permRotate f o = refl
+positiveIntertwinesS3Parity Perm.permRotate2 f o = refl
+positiveIntertwinesS3Parity Perm.permSwapLowMid f o = positiveReflectionInvariant f o
+positiveIntertwinesS3Parity Perm.permSwapLowHigh f o = positiveReflectionInvariant f o
+positiveIntertwinesS3Parity Perm.permSwapMidHigh f o = positiveReflectionInvariant f o
+
+negativeIntertwinesS3Parity :
+  (p : Perm.TriPermutation) (f : Field11ℚ) (o : Q.Orbit11) →
+  negativeField (s3OnRationalField p f) o ≡
+  Parity.signedRational (Parity.permutationParity p) (negativeField f o)
+negativeIntertwinesS3Parity Perm.permIdentity f o = refl
+negativeIntertwinesS3Parity Perm.permRotate f o = refl
+negativeIntertwinesS3Parity Perm.permRotate2 f o = refl
+negativeIntertwinesS3Parity Perm.permSwapLowMid f o = negativeReflectionOdd f o
+negativeIntertwinesS3Parity Perm.permSwapLowHigh f o = negativeReflectionOdd f o
+negativeIntertwinesS3Parity Perm.permSwapMidHigh f o = negativeReflectionOdd f o
+
+-- Compare to Parity.vandermondeIntertwinesSign:
+-- both arrows use identical S3 -> C2 and its action by +/-1
+-- on ℚ; the underlying object carriers remain DIFFERENT.
+-- The adapter is an actual imported same-carrier morphism, not
+-- a new invented Moonshine/Vandermonde equality.
+
+s3OnRationalFieldFactorsThroughParity :
+  (p : Perm.TriPermutation) (f : Field11ℚ) (o : Q.Orbit11) →
+  s3OnRationalField p f o ≡ ifParity p f o
+s3OnRationalFieldFactorsThroughParity Perm.permIdentity f o = refl
+s3OnRationalFieldFactorsThroughParity Perm.permRotate f o = refl
+s3OnRationalFieldFactorsThroughParity Perm.permRotate2 f o = refl
+s3OnRationalFieldFactorsThroughParity Perm.permSwapLowMid f o = refl
+s3OnRationalFieldFactorsThroughParity Perm.permSwapLowHigh f o = refl
+s3OnRationalFieldFactorsThroughParity Perm.permSwapMidHigh f o = refl
