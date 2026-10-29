@@ -411,7 +411,7 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 ------------------------------------------------------------------------
 
 unifiedRiemannRHCurrentFrontier :
-  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier
+  RiemannRHTOE.CurrentThreeTapFrontier
 unifiedRiemannRHCurrentFrontier =
   RiemannRHTOE.currentThreeTapFrontier
 
@@ -421,25 +421,21 @@ unifiedRiemannRHZKPFrame =
   RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
 
 unifiedRiemannRHA1CarrierStillOpen :
-  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
-    unifiedRiemannRHCurrentFrontier ≡ false
+  RiemannRHTOE.currentA1CarrierSummationPaid ≡ false
 unifiedRiemannRHA1CarrierStillOpen =
   RiemannRHTOE.a1CarrierSummationStillOpen
 
 unifiedRiemannRHA2ScalarStillOpen :
-  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
-    unifiedRiemannRHCurrentFrontier ≡ false
+  RiemannRHTOE.currentA2StrictScalarPaid ≡ false
 unifiedRiemannRHA2ScalarStillOpen =
   RiemannRHTOE.a2StrictScalarStillOpen
 
 unifiedRiemannRHRouteBStillOpen :
-  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
-    unifiedRiemannRHCurrentFrontier ≡ false
+  RiemannRHTOE.currentRouteBEventualGapPaid ≡ false
 unifiedRiemannRHRouteBStillOpen =
   RiemannRHTOE.routeBEventualGapStillOpen
 
 unifiedRiemannRHStillOpen :
-  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier.rhDerivedHere
-    unifiedRiemannRHCurrentFrontier ≡ false
+  RiemannRHTOE.currentRHDerived ≡ false
 unifiedRiemannRHStillOpen =
   RiemannRHTOE.riemannHypothesisStillOpen
