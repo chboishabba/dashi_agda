@@ -9,6 +9,11 @@ package "External Fleet R4/R5 context" {
 package "Existing DASHI owners" {
   component "CompositionalComplianceExact" as Compliance
   component "InstitutionalNormProductionExact" as NormProduction
+  component "SafeJustIndicatorSystemExact" as Indicators
+  component "ProvisioningGeometryExact" as Provisioning
+  component "ONeill2018MethodsBoundaryExact" as ONeill
+  component "Fanning2022ProjectionBoundaryExact" as FanningProjection
+  component "Kallis2025GDP15000UpstreamStudyBridgeExact" as KallisGDP
   component "Fanning2022LiteralSituatedQualifiedUseBridgeExact" as FanningLiteral
   component "FleetFormalGapTargetTOEExact" as Fleet
   component "BoundAcquisitionDemandExact" as Bound
@@ -35,10 +40,19 @@ Graph --> Manifest : source graph identity only
 Fleet --> Manifest : canonical 584 / 44 / 58 partition
 Bound --> Manifest : exact acquisition alignment
 Pareto --> Manifest : search priority does not create proof
+Indicators --> SafeJustChain : lossy count projection
+Provisioning --> SafeJustChain : resource-only non-factorability
+ONeill --> SafeJustChain : observed != universal impossibility
+FanningProjection --> SafeJustChain : count/extent/trajectory separation
+KallisGDP --> SafeJustChain : descriptive GDP pattern != causal threshold
 Compliance --> SafeJustLegal : typed intermediate witness
 NormProduction --> SafeJustLegal : settlement -> policy -> convention\nwithout authority promotion
 FanningLiteral --> SafeJustLegal : source receipt and authority gates
+Fleet --> SafeJustChain : 584/44/58 invariant
 Fleet --> SafeJustLegal : 584/44/58 invariant
+SafeJustChain --> TOE : exact paper-chain exports
+SafeJustChain --> Unifier : exact paper-chain exports
+SafeJustChain --> Unified : exact paper-chain exports
 SafeJustLegal --> TOE : exact non-promotion exports
 SafeJustLegal --> Unifier : exact non-promotion exports
 
