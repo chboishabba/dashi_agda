@@ -244,7 +244,10 @@ verificationStatusDoesNotCreateMajorDerivation ()
 -- F = live residual function.
 ------------------------------------------------------------------------
 
-canonicalRule915MajorZKPFrame : Introspection.ZKPFrame
+Rule915MajorZKPFrame : Set
+Rule915MajorZKPFrame = Introspection.ZKPFrame
+
+canonicalRule915MajorZKPFrame : Rule915MajorZKPFrame
 canonicalRule915MajorZKPFrame =
   Introspection.zkp-frame
     "O: certify the canonical p.145 rule 9.1.5 only from proof-carrying historical derivations"
