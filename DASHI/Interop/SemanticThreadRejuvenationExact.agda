@@ -62,3 +62,30 @@ soleStore : {t : Thread} {p : PNF t} →
   (committedWorld : CommittedWorld t p) →
   CommittedWorld.store committedWorld ≡ postgresql
 soleStore _ = refl
+
+-- Topic-label operations are syntax, not an assertion of semantic equivalence.
+-- Preserve the distinction between a property collapse and temporal expansion.
+data TopicOperation : Set where
+  collapseProperty : String → TopicOperation
+  expandTemporal : String → TopicOperation
+
+record TopicOnePlan : Set where
+  constructor topicOnePlan
+  field autoCollapse : TopicOperation
+        lastCollapse : TopicOperation
+        nowExpansion : TopicOperation
+
+canonicalTopicOne : TopicOnePlan
+canonicalTopicOne = topicOnePlan
+  (collapseProperty "auto")
+  (collapseProperty "last")
+  (expandTemporal "now")
+
+topicOneAutoPreserved : TopicOnePlan.autoCollapse canonicalTopicOne ≡ collapseProperty "auto"
+topicOneAutoPreserved = refl
+
+topicOneLastPreserved : TopicOnePlan.lastCollapse canonicalTopicOne ≡ collapseProperty "last"
+topicOneLastPreserved = refl
+
+topicOneNowPreserved : TopicOnePlan.nowExpansion canonicalTopicOne ≡ expandTemporal "now"
+topicOneNowPreserved = refl
