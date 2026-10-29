@@ -7,6 +7,8 @@ package "External Fleet R4/R5 context" {
 }
 
 package "Existing DASHI owners" {
+  component "CompositionalComplianceExact" as Compliance
+  component "Fanning2022LiteralSituatedQualifiedUseBridgeExact" as FanningLiteral
   component "FleetFormalGapTargetTOEExact" as Fleet
   component "BoundAcquisitionDemandExact" as Bound
   component "BalabanIbrahimParetoSnowballTOEExact" as Pareto
@@ -15,6 +17,10 @@ package "Existing DASHI owners" {
 package "Normalized acquisition boundary" {
   component "Fleet58ManifestAcquisitionExact" as Manifest
   component "Fleet58ManifestAcquisitionRegression" as Regression
+}
+
+package "Safe/just legal governance handoff" {
+  component "SafeJustLegalGovernanceBoundary\nO/R/C/S/L/P/G/F receipt" as SafeJustLegal
 }
 
 package "DASHI TOE consumers" {
@@ -28,6 +34,11 @@ Graph --> Manifest : source graph identity only
 Fleet --> Manifest : canonical 584 / 44 / 58 partition
 Bound --> Manifest : exact acquisition alignment
 Pareto --> Manifest : search priority does not create proof
+Compliance --> SafeJustLegal : typed intermediate witness
+FanningLiteral --> SafeJustLegal : source receipt and authority gates
+Fleet --> SafeJustLegal : 584/44/58 invariant
+SafeJustLegal --> TOE : exact non-promotion exports
+SafeJustLegal --> Unifier : exact non-promotion exports
 
 Manifest --> TOE
 Manifest --> Unifier
@@ -49,6 +60,10 @@ Invariants:
 - search priority does not create proof
 - ESD surfaces remain read-only
 - meta-introspector repositories keep separate authority
+- SensibLaw and Actionstep records remain operational evidence
+- operational records do not create legal authority
+- literal data does not create causal or decision authority
+- compliance composition retains the typed intermediate witness
 
 Postcondition:
 - per-gap dispatch stays false until the named manifest is acquired
