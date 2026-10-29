@@ -171,3 +171,23 @@ The source-derived **constructive route** is shorter than a generic character-re
 Adding the actual orbit owners yields `7·trivial ⊕ 4·sign ⊕ 8·standard₂` at dimension 27, with exactly the six fixed-point trace values already source-computed. This is **mathematical consequence of classical characteristic-zero S3 representation theory**, not a newly kernel-verified code-level equivalence in #1414. Actual next formal obligation: construct (or import) S3-stable orbit vectors and explicit invertible block-intertwining matrices for the size-2,3,6 components; prove the original 27 table-code action is conjugate to their disjoint union, then glue the block maps.
 
 External sources/preserved attribution: Serre, *Linear Representations of Finite Groups* (1977); Pavel Etingof and colleagues, *Introduction to Representation Theory* (MIT notes, https://klein.mit.edu/~etingof/reprbook.pdf); Princeton lecture *Modular Representations of Symmetric Groups*, ordinary/Brauer character table of S3 (https://web.math.princeton.edu/~charchan/ModularRepresentationsSymmetricGroupSeminar); Maithani, 2025, Reynolds operator (DOI 10.1112/blms.70175); Mathlib4's original `Equiv.Perm.sign` group homomorphism (https://leanprover-community.github.io/mathlib4_docs/Mathlib/GroupTheory/Perm/Sign.html). Original repository character code and Ibrahim Monster 3B ownership remain independent.
+
+### Final source-level reuse cut before characteristic-zero representation wall: O37–O40
+
+Instead of creating a duplicate 27-state group owner, `PolynomialC3S3OrbitFieldVectorAtlasExact.agda` was EXTENDED in place:
+- `codeForIndex27 : Fin 27 -> Code27`, `indexCodeRoundTrip` and `codeIndexRoundTrip`: literal 27-index chart with 54 two-sided constructor equations. This is an actual carrier equivalence using the existing `index27`, not a 27=27 count.
+- `transportS3OnIndex27`, `transportIndexIdentity`, `transportIndexComposition`: transports the original S3 conjugacy action to the finite 27-index carrier, using the ORIGINAL `TernaryEndomorphismS3ActionLawsExact` group-action proofs.
+- `transportIndexPreservesShape`: all S3 index transports stay in the original seven-shape orbit block; proof reuses `shapeClassInvariant` and the lossless chart.
+- `transportIndexParity`: the square `Fin27 -> Code27 -> Orbit11` is equivariant for the exact parity action `S3 -> C2` constructed earlier. This is a compositional operation-preserving bridge, not an identification with polynomial root positions.
+- All three TOE roots export these names under the ORIGINAL vector-atlas import rather than creating a new duplicate module.
+
+Independent GitHub SOURCE readback checked 27 index cases in the lexicographic order of original ternary codes, and both sets of 27 inverse declarations (PASS). Original S3 composition source and earlier exact 162 code action checks support the finite mathematics. **No Agda kernel proof receipt.**
+
+| ID | Formal requirement | Status |
+|---|---|---|
+| O37 | Complete two-sided code/index chart `Code27 ≃ Fin27` | SOURCE-WRITTEN; exact source-table readback PASS; kernel pending |
+| O38 | Transport existing S3 action to `Fin27`; prove identity and composition | SOURCE-WRITTEN; kernel pending |
+| O39 | Prove seven-shape block preservation and parity-square commutativity after transport | SOURCE-WRITTEN; kernel pending |
+| O40 | Construct explicit characteristic-zero S3 intertwiners on the seven invariant orbit blocks of sizes 1,2,3,3,6,6,6 and assemble an actual `Q^27 ≃ 7 triv ⊕ 4 sign ⊕ 8 std₂` S3-module isomorphism | OPEN; representation matrices and exact-head kernel witness required |
+
+With O37–O39 the group-set/coarse-quotient side is source-complete at the existing finite carrier level. The next mathematical wall is **not** numeric: a characteristic-zero block-intertwiner theorem (O40) and compiler/kernel acceptance of the existing source; separately, actual continuous polynomial braid and Galois results remain open. No CI work is needed, but no CI absence can be confused with successful kernel checking.
