@@ -135,3 +135,25 @@ collapseAutoIdempotent : (node : ParsedAutoNode) →
   collapseAuto (collapseAuto node) ≡ collapseAuto node
 collapseAutoIdempotent (parsedAutoNode text true) = refl
 collapseAutoIdempotent (parsedAutoNode text false) = refl
+
+-- Worker 08: a text fixture is assessed by an explicit expected result.
+-- A self-declared test receipt is not evidence that a runtime test executed.
+record TextTestCase : Set where
+  constructor textTestCase
+  field
+    inputText : String
+    expectedText : String
+
+record TextTestResult : Set where
+  constructor textTestResult
+  field
+    testCase : TextTestCase
+    observedText : String
+    matchesExpected : observedText ≡ TextTestCase.expectedText testCase
+
+canonicalTextTest : (text : String) → TextTestResult
+canonicalTextTest text = textTestResult (textTestCase text text) text refl
+
+canonicalTextTestMatches : (text : String) →
+  TextTestResult.observedText (canonicalTextTest text) ≡ text
+canonicalTextTestMatches text = refl
