@@ -52,3 +52,9 @@ unifiedCandidateRelationOwnerRouting :
   RelationDeltaExact.RelationDeltaOwnerRouting
 unifiedCandidateRelationOwnerRouting =
   RelationDelta.singleCandidateRelationOwner
+
+
+unifiedCandidateRelationExecutionBoundary :
+  RelationDeltaExact.RelationDeltaAuthorityBoundary
+unifiedCandidateRelationExecutionBoundary =
+  RelationDelta.candidateRelationExecutionBoundary
