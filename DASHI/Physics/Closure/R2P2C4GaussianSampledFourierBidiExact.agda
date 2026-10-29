@@ -253,3 +253,56 @@ spectralSampledProduct64 f g =
 -- is F((F^-1 f)(F^-1 g)) = (1/64) cyclic convolution(f,g).
 -- The finite 27-mode zero-padding and physical Leray bridge remain
 -- independent proof obligations.
+
+
+------------------------------------------------------------------------
+-- HIGHEST-ALPHA EXACT C4 ONE-AXIS SAMPLED MULTIPLICATION / CONVOLUTION.
+-- This is the first distributive Fourier coefficient theorem, not only
+-- forward/inverse roundtrip. It uses the original Q(i) root algebra and
+-- the standard C4 group convolution, not an asserted FFT axiom.
+------------------------------------------------------------------------
+
+pointwiseProduct1 : Quad Gaussian4 → Quad Gaussian4 → Quad Gaussian4
+pointwiseProduct1 = zipQuad _*G_
+
+fourRational : ℚ
+fourRational = 4
+
+scaleQuad : ℚ → Quad Gaussian4 → Quad Gaussian4
+scaleQuad q = mapQuad (scaleG q)
+
+-- On arbitrary 4+4 coefficient entries the circular group convolution
+-- is the four signed-residue interactions p+q=k (mod 4).
+cyclicConvolution4 : Quad Gaussian4 → Quad Gaussian4 → Quad Gaussian4
+cyclicConvolution4
+  (quad a b c d) (quad e f g h) = quad
+  (a *G e +G b *G h +G c *G g +G d *G f)
+  (a *G f +G b *G e +G c *G h +G d *G g)
+  (a *G g +G b *G f +G c *G e +G d *G h)
+  (a *G h +G b *G g +G c *G f +G d *G e)
+
+-- Since inverse1 includes a 1/4 factor, the Fourier transform of
+-- products of inverse-synthesized samples is 1/4 of this convolution.
+-- Thus the fourRational factor below is REQUIRED, not ornamental.
+sampledConvolution4 :
+  Quad Gaussian4 → Quad Gaussian4 → Quad Gaussian4
+sampledConvolution4 a b =
+  scaleQuad fourRational
+    (forward1 (pointwiseProduct1 (inverse1 a) (inverse1 b)))
+
+oneAxisSampledConvolutionIsCyclic :
+  (a b : Quad Gaussian4) →
+  sampledConvolution4 a b ≡ cyclicConvolution4 a b
+oneAxisSampledConvolutionIsCyclic
+  (quad (gauss a0 a1) (gauss b0 b1)
+        (gauss c0 c1) (gauss d0 d1))
+  (quad (gauss e0 e1) (gauss f0 f1)
+        (gauss g0 g1) (gauss h0 h1)) =
+  quad-ext (gauss-ext solve-∀ solve-∀)
+           (gauss-ext solve-∀ solve-∀)
+           (gauss-ext solve-∀ solve-∀)
+           (gauss-ext solve-∀ solve-∀)
+
+-- No claim that this 1D law by itself proves the padded 3D truncated
+-- convolution. Tensor-distribution, support reindexing and the 27/729
+-- target link are independent, still-visible kernel obligations.
