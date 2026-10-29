@@ -1,5 +1,14 @@
 module DASHI.Unifier where
 
+-- Nested characteristic-free C3/S3 representative-sampling projections:
+-- idempotence, exact invariant ranges, two-sided absorption.
+import DASHI.Foundations.PolynomialC3S3OrbitSamplingProjectionExact as RootOrbitProjectors
+open RootOrbitProjectors public using
+  (projectC3 ; projectS3 ; projectC3Idempotent ; projectS3Idempotent
+  ; projectC3Invariant ; projectS3Invariant
+  ; projectC3FixesInvariant ; projectS3FixesInvariant
+  ; projectC3AfterS3IsS3 ; projectS3AfterC3IsS3)
+
 -- Explicit finite vector charts and pointwise inverses establish a
 -- chosen ordering for 3^7, 3^11, and 3^27 ternary field carriers.
 import DASHI.Foundations.PolynomialC3S3OrbitFieldVectorAtlasExact as RootOrbitFields
