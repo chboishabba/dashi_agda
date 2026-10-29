@@ -162,6 +162,10 @@ record FullTwentyWorkerSchedule
     scheduledGoalTopParetoRanked :
       (slot : Fin 20) →
       TopParetoRanked (assignment slot)
+    distinctSlotsHaveDistinctGoals :
+      (left right : Fin 20) →
+      left ≢ right →
+      assignment left ≢ assignment right
     pairwiseNoTypedMeet :
       (left right : Fin 20) →
       left ≢ right →
