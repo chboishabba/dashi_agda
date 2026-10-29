@@ -1837,3 +1837,38 @@ boundary, never as a source of the
 prior source, source-written code,
 locally executed tests and kernel
 verification statuses distinct.
+
+
+### V. Exact tame G1 handlebody and dual-meridian I3 linking chart
+
+The six-obligation current frontier is explicitly
+tracked in `Docs/topology/AlexanderHornedRelativeThreeChildHandlebodyProofCut20261029.md`.
+To avoid merely repeating classical existence, the new
+G1 rational witnesses `scripts/alexander_horned_three_loop_pl_spine_g1.py`
+and `scripts/alexander_horned_three_child_dual_meridian_g1.py`
+supply an actual 7-vertex, 9-edge embedded graph with THREE
+labelled planar loops, genus-three regular-neighborhood
+homeomorphism type, central unused south-pole stationary
+cap and exterior dual polygonal meridians.
+The meridian linking matrix against the three
+labelled spine cycles is EXACTLY I3 after choice
+of orientations (independently executed exact
+rational determinant regression). No arbitrary
+finite 3/6/9 orbit counting or invented
+three-dimensional cubical gluing is involved.
+
+**Important object check:** these are complementary
+meridian loops of the TAME chosen G1 carrier.
+The parent horned meridian map must still be
+verified from an actual three-child linked
+satellite under a cap-relative PL homeomorphism.
+An identity linking matrix does not by itself
+prove the nonabelian commutator word, nor any
+infinite wild limit. G2–G6 remain open as
+stated in the proof cut. Source/author status:
+Alexander/Hatcher and classical regular-neighborhood
+topology prior art; source-specific coordinate
+and exact arithmetic check here; no Agda kernel
+or physical provenance promotion. Polynomial
+#1414's S5 derived-series no-go is an
+independent proof lane, not a 3D embedding.
