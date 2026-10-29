@@ -69,7 +69,54 @@ def direct(f, g):
     }
 
 
+
+
+def one_axis_transform(coefs, inverse=False):
+    """Same Q(i) sign and 1/4 inverse normalization as Agda forward1/inverse1."""
+    out = []
+    for k in range(4):
+        coeff = sum_complex(
+            mul(coefs[j], phase((1 if inverse else -1) * j * k))
+            for j in range(4))
+        out.append(mul_frac(coeff, Fraction(1, 4)) if inverse else coeff)
+    return out
+
+
+def one_axis_cyclic_convolution(left, right):
+    return [
+        sum_complex(mul(left[j], right[(k - j) % 4]) for j in range(4))
+        for k in range(4)
+    ]
+
+
+def one_axis_sampled_convolution(left, right):
+    a = one_axis_transform(left, inverse=True)
+    b = one_axis_transform(right, inverse=True)
+    sampled = [mul(x, y) for x, y in zip(a, b)]
+    return [mul_frac(z, 4) for z in one_axis_transform(sampled)]
+
+
+def check_one_axis_sampled_convolution():
+    # All 16 monomial basis products, every output. This is a bilinear
+    # Q(i)-module basis audit, rather than only random-profile testing.
+    for p in range(4):
+        for q in range(4):
+            left = [ONE if j == p else ZERO for j in range(4)]
+            right = [ONE if j == q else ZERO for j in range(4)]
+            assert one_axis_sampled_convolution(left, right) == (
+                one_axis_cyclic_convolution(left, right))
+    for seed in range(12):
+        rng = Random(27004 + seed)
+        left = [(Fraction(rng.randrange(-8, 9), 7),
+                 Fraction(rng.randrange(-8, 9), 7)) for _ in range(4)]
+        right = [(Fraction(rng.randrange(-8, 9), 11),
+                  Fraction(rng.randrange(-8, 9), 11)) for _ in range(4)]
+        assert one_axis_sampled_convolution(left, right) == (
+            one_axis_cyclic_convolution(left, right))
+    print("PASS: C4 all 16 one-axis monomial pairs and 12 arbitrary dense Q(i) input pairs")
+
 def check():
+    check_one_axis_sampled_convolution()
     # Exact fourth-root orthogonality on all 64 group characters.
     residues = tuple(product(range(4), repeat=3))
     for delta in residues:
