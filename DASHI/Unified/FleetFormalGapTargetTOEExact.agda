@@ -547,8 +547,12 @@ fleetONeillSameBioCountDoesNotRecoverCO2 :
 fleetONeillSameBioCountDoesNotRecoverCO2 =
   ONeillIndicators.sameBioCountDoesNotRecoverCO2
 
+ONeillUniversalImpossibilityPromotion : Set
+ONeillUniversalImpossibilityPromotion =
+  ONeillMethods.UniversalImpossibilityCertificate
+
 fleetONeillObservedResultDoesNotCreateUniversalImpossibility :
-  ONeillMethods.UniversalImpossibilityCertificate → ⊥
+  ONeillUniversalImpossibilityPromotion → ⊥
 fleetONeillObservedResultDoesNotCreateUniversalImpossibility =
   ONeillMethods.paperDoesNotSupplyUniversalImpossibility
 
@@ -559,8 +563,12 @@ fleetProvisioningBoundary : ProvisioningBoundary
 fleetProvisioningBoundary =
   Provisioning.canonicalProvisioningBoundary
 
+ProvisioningTreatmentEffectPromotion : Set
+ProvisioningTreatmentEffectPromotion =
+  Provisioning.IdentifiedProvisioningTreatmentEffect
+
 fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
-  Provisioning.IdentifiedProvisioningTreatmentEffect → ⊥
+  ProvisioningTreatmentEffectPromotion → ⊥
 fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
   Provisioning.observedResidualDoesNotSupplyTreatmentIdentification
 
@@ -576,9 +584,13 @@ fleetFanningExtentDoesNotRecoverIndicatorVector :
     FanningProjection.canonicalFanningProjectionBoundary ≡ false
 fleetFanningExtentDoesNotRecoverIndicatorVector = refl
 
-fleetFanningBAUProjectionIsNotObserved2050Outcome :
+FanningBAUNotObservationReceipt : Set
+FanningBAUNotObservationReceipt =
   FanningProjection.FanningProjectionBoundary.BAUProjectionIsObserved2050Outcome
     FanningProjection.canonicalFanningProjectionBoundary ≡ false
+
+fleetFanningBAUProjectionIsNotObserved2050Outcome :
+  FanningBAUNotObservationReceipt
 fleetFanningBAUProjectionIsNotObserved2050Outcome = refl
 
 GDP15000UpstreamBoundary : Set
@@ -588,10 +600,14 @@ fleetGDP15000UpstreamBoundary : GDP15000UpstreamBoundary
 fleetGDP15000UpstreamBoundary =
   KallisGDP.canonicalGDP15000UpstreamBoundary
 
-fleetGDP15000DoesNotOpenCausalConsumer :
+GDP15000CausalConsumerPromotion : Set
+GDP15000CausalConsumerPromotion =
   KallisClaims.AdequateFor
     KallisClaims.gdp15000Realization
-    KallisClaims.causalMechanismConsumer → ⊥
+    KallisClaims.causalMechanismConsumer
+
+fleetGDP15000DoesNotOpenCausalConsumer :
+  GDP15000CausalConsumerPromotion → ⊥
 fleetGDP15000DoesNotOpenCausalConsumer =
   KallisGDP.upstreamStudyDoesNotOpenCausalConsumer
 
