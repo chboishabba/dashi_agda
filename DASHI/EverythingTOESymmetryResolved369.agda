@@ -54,7 +54,11 @@ open RootOrbitFields public using
   ; twentySevenFieldsAre7625597484987
   ; elevenSlotsSplitSevenAndFour
   ; elevenFieldCountFactorsIntoSevenAndFour
-  ; fourSwappedPairResidualFields )
+  ; fourSwappedPairResidualFields
+  ; codeForIndex27 ; indexCodeRoundTrip ; codeIndexRoundTrip
+  ; transportS3OnIndex27 ; transportIndexIdentity
+  ; transportIndexComposition ; transportIndexPreservesShape
+  ; transportIndexParity )
 
 -- True 27->11->7 S3/C3 conjugacy quotient and invariant ternary fields.
 -- Includes explicit fixed-point no-go versus free output-phase 27->9.
