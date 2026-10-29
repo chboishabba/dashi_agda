@@ -2,6 +2,7 @@ module DASHI.Wikimedia.IbrahimCannabisTerpeneCommercialSampleQuantitativeAssayEx
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -437,3 +438,322 @@ canonicalCommercialCannabisQuantitativeAssayBoundary : CommercialCannabisQuantit
 canonicalCommercialCannabisQuantitativeAssayBoundary =
   commercial-cannabis-quantitative-assay-boundary
     true true true true true true true false false false
+
+
+------------------------------------------------------------------------
+-- NOMINAL POTENCY / REPORTED PREFERENCE DISCRIMINATOR
+--
+-- Current problem:
+--   Jade is labelled near 25 percent THC.
+--   Royale is labelled near 27 percent THC.
+--   A comparison product is labelled near 30 percent THC.
+--   The reported preference orders Royale above Jade and above the 30 percent
+--   comparison product.
+--
+-- This is a bounded observation fixture.
+-- It does not identify an exact batch assay.
+-- It does not identify delivered THC dose.
+-- It does not identify exposure.
+-- It does not identify a terpene mechanism.
+-- It does not identify an outdoor-cultivation mechanism.
+-- It does not establish a clinical recommendation.
+------------------------------------------------------------------------
+
+data CurrentCannabisProduct : Set where
+  jade : CurrentCannabisProduct
+  royale : CurrentCannabisProduct
+  comparator30 : CurrentCannabisProduct
+
+currentProductLabel : CurrentCannabisProduct → String
+currentProductLabel jade = "Tasmanian Botanics Jade"
+currentProductLabel royale = "Tasmanian Botanics Sunflower Royale"
+currentProductLabel comparator30 =
+  "30 percent THC comparison product; exact product identity not promoted here"
+
+nominalTHCPercent : CurrentCannabisProduct → Nat
+nominalTHCPercent jade = 25
+nominalTHCPercent royale = 27
+nominalTHCPercent comparator30 = 30
+
+nominalPotencyReference : CurrentCannabisProduct → String
+nominalPotencyReference jade =
+  "Tasmanian Botanics Jade product/CMI headline potency; exact current batch assay still required"
+nominalPotencyReference royale =
+  "Tasmanian Botanics Sunflower Royale product/CMI headline potency; exact current batch assay still required"
+nominalPotencyReference comparator30 =
+  "reported 30 percent comparison product headline potency; exact product and batch assay remain unpromoted"
+
+data NominalPotencyOrder : CurrentCannabisProduct → CurrentCannabisProduct → Set where
+  jadeBelowRoyale :
+    NominalPotencyOrder jade royale
+  royaleBelowComparator30 :
+    NominalPotencyOrder royale comparator30
+
+data ReportedPreferenceOrder : CurrentCannabisProduct → CurrentCannabisProduct → Set where
+  royalePreferredToJade :
+    ReportedPreferenceOrder royale jade
+  royalePreferredToComparator30 :
+    ReportedPreferenceOrder royale comparator30
+
+-- A potency-only monotone account of the Royale/comparator pair would require
+-- the higher-labelled comparator to be preferred to Royale.
+-- No such reported-preference constructor exists in this bounded fixture.
+data PotencyOnlyMonotoneFitsCurrentFixture : Set where
+  potency-only-monotone :
+    ReportedPreferenceOrder comparator30 royale →
+    PotencyOnlyMonotoneFitsCurrentFixture
+
+potencyOnlyMonotoneDoesNotFitCurrentFixture :
+  PotencyOnlyMonotoneFitsCurrentFixture → ⊥
+potencyOnlyMonotoneDoesNotFitCurrentFixture
+  (potency-only-monotone ())
+
+record PotencyPreferenceObservation : Set where
+  constructor potency-preference-observation
+  field
+    lowerNominalProduct : CurrentCannabisProduct
+    higherNominalProduct : CurrentCannabisProduct
+    nominalOrder :
+      NominalPotencyOrder lowerNominalProduct higherNominalProduct
+    preferredProduct : CurrentCannabisProduct
+    lessPreferredProduct : CurrentCannabisProduct
+    reportedPreference :
+      ReportedPreferenceOrder preferredProduct lessPreferredProduct
+    reportReference : String
+    exactBatchAssayPaid : Bool
+    administeredDosePaid : Bool
+    exposurePaid : Bool
+    causalMechanismPaid : Bool
+open PotencyPreferenceObservation public
+
+royaleComparatorPreferenceObservation : PotencyPreferenceObservation
+royaleComparatorPreferenceObservation =
+  potency-preference-observation
+    royale
+    comparator30
+    royaleBelowComparator30
+    royale
+    comparator30
+    royalePreferredToComparator30
+    "current bounded report: Royale is preferred to a product labelled 30 percent THC"
+    false false false false
+
+jadeRoyalePreferenceObservation : PotencyPreferenceObservation
+jadeRoyalePreferenceObservation =
+  potency-preference-observation
+    jade
+    royale
+    jadeBelowRoyale
+    royale
+    jade
+    royalePreferredToJade
+    "current bounded report: Royale is preferred to Jade"
+    false false false false
+
+------------------------------------------------------------------------
+-- Source-bound dose and cultivation receipts.
+--
+-- Haney, Arout, and Bedillion 2026 retain source ownership.
+-- DOI: 10.1016/j.ypmed.2026.108663.
+-- Their review states that product potency is not the same object as THC dose.
+--
+-- The 2026 LC x LC-ASCA cultivation study remains an external empirical source.
+-- It supports cultivation-dependent chemical variability.
+-- It does not pay a Royale-specific causal effect.
+------------------------------------------------------------------------
+
+record PotencyDoseSourceReceipt : Set where
+  constructor potency-dose-source-receipt
+  field
+    authors : String
+    year : Nat
+    doi : String
+    boundedReading : String
+    excludedPromotion : String
+open PotencyDoseSourceReceipt public
+
+haneyAroutBedillion2026 : PotencyDoseSourceReceipt
+haneyAroutBedillion2026 =
+  potency-dose-source-receipt
+    "Margaret Haney; Caroline A. Arout; Margaret F. Bedillion"
+    2026
+    "10.1016/j.ypmed.2026.108663"
+    "Human behavioural pharmacology review: cannabis product potency is not delta-9-THC dose because inhalation behaviour changes with product strength."
+    "Review-level dose distinction does not identify the delivered dose, exposure, mechanism, or preferred product in the current fixture."
+
+record CultivationCompositionSourceReceipt : Set where
+  constructor cultivation-composition-source-receipt
+  field
+    year : Nat
+    sourceReference : String
+    boundedReading : String
+    excludedPromotion : String
+open CultivationCompositionSourceReceipt public
+
+cultivationMetabolomics2026 : CultivationCompositionSourceReceipt
+cultivationMetabolomics2026 =
+  cultivation-composition-source-receipt
+    2026
+    "Integrated LC x LC-ASCA workflow for cultivar- and cultivation-dependent Cannabis sativa metabolic variability; PubMed PMID 42570619"
+    "Cultivar explained most measured chemical variability; cultivation method also explained a smaller significant component; outdoor and greenhouse samples differed from indoor samples in metabolomic composition."
+    "Cultivation-dependent chemistry does not establish that outdoor growth caused the reported Royale preference."
+
+------------------------------------------------------------------------
+-- WrongType and non-promotion barriers.
+------------------------------------------------------------------------
+
+data NominalPotencyCreatesDeliveredDose : Set where
+data NominalPotencyCreatesExposure : Set where
+data ReportedPreferenceCreatesTerpeneCause : Set where
+data ReportedPreferenceCreatesOutdoorCause : Set where
+data ProductLabelCreatesExactBatchComposition : Set where
+
+nominalPotencyDoesNotCreateDeliveredDose :
+  NominalPotencyCreatesDeliveredDose → ⊥
+nominalPotencyDoesNotCreateDeliveredDose ()
+
+nominalPotencyDoesNotCreateExposure :
+  NominalPotencyCreatesExposure → ⊥
+nominalPotencyDoesNotCreateExposure ()
+
+reportedPreferenceDoesNotCreateTerpeneCause :
+  ReportedPreferenceCreatesTerpeneCause → ⊥
+reportedPreferenceDoesNotCreateTerpeneCause ()
+
+reportedPreferenceDoesNotCreateOutdoorCause :
+  ReportedPreferenceCreatesOutdoorCause → ⊥
+reportedPreferenceDoesNotCreateOutdoorCause ()
+
+productLabelDoesNotCreateExactBatchComposition :
+  ProductLabelCreatesExactBatchComposition → ⊥
+productLabelDoesNotCreateExactBatchComposition ()
+
+------------------------------------------------------------------------
+-- Pareto continuation for the current problem.
+------------------------------------------------------------------------
+
+data PotencyPreferenceParetoTarget : Set where
+  exactRoyaleBatchAssay
+  exactJadeBatchAssay
+  exactComparatorBatchAssay
+  administeredComposition
+  exposureTrajectory
+  controlledPreferenceDiscriminator
+  constituentMechanism
+  cultivationMechanism : PotencyPreferenceParetoTarget
+
+record PotencyPreferenceParetoStep : Set where
+  constructor potency-preference-pareto-step
+  field
+    priority : Nat
+    target : PotencyPreferenceParetoTarget
+    action : String
+    pays : String
+    dominatedUntil : String
+open PotencyPreferenceParetoStep public
+
+potencyPreferencePareto0 : PotencyPreferenceParetoStep
+potencyPreferencePareto0 =
+  potency-preference-pareto-step
+    0 exactRoyaleBatchAssay
+    "acquire the exact Royale batch cannabinoid and terpene assay with units, method, batch identity, and custody"
+    "same-object Royale composition"
+    "none"
+
+potencyPreferencePareto1 : PotencyPreferenceParetoStep
+potencyPreferencePareto1 =
+  potency-preference-pareto-step
+    1 exactJadeBatchAssay
+    "acquire the exact Jade batch cannabinoid and terpene assay with units, method, batch identity, and custody"
+    "same-object Jade composition"
+    "none after Royale if the current comparison remains active"
+
+potencyPreferencePareto2 : PotencyPreferenceParetoStep
+potencyPreferencePareto2 =
+  potency-preference-pareto-step
+    2 exactComparatorBatchAssay
+    "identify the 30 percent comparison product and acquire its exact batch assay"
+    "same-object comparator composition"
+    "exact product identity required"
+
+potencyPreferencePareto3 : PotencyPreferenceParetoStep
+potencyPreferencePareto3 =
+  potency-preference-pareto-step
+    3 administeredComposition
+    "record preparation, consumed mass, route, and composition transformation"
+    "product composition to administered composition"
+    "exact batch composition required"
+
+potencyPreferencePareto4 : PotencyPreferenceParetoStep
+potencyPreferencePareto4 =
+  potency-preference-pareto-step
+    4 exposureTrajectory
+    "record or estimate source-qualified exposure over time without substituting label potency for dose"
+    "administered composition to exposure"
+    "administered composition required"
+
+potencyPreferencePareto5 : PotencyPreferenceParetoStep
+potencyPreferencePareto5 =
+  potency-preference-pareto-step
+    5 controlledPreferenceDiscriminator
+    "repeat the comparison with product identity, dose, route, time, tolerance state, and outcome coordinates recorded"
+    "bounded within-person preference evidence"
+    "single uncontrolled report is insufficient"
+
+potencyPreferencePareto6 : PotencyPreferenceParetoStep
+potencyPreferencePareto6 =
+  potency-preference-pareto-step
+    6 constituentMechanism
+    "test a constituent-specific mechanism only after exact composition and exposure are paid"
+    "mechanism-specific explanation"
+    "preference plus co-occurrence is insufficient"
+
+potencyPreferencePareto7 : PotencyPreferenceParetoStep
+potencyPreferencePareto7 =
+  potency-preference-pareto-step
+    7 cultivationMechanism
+    "test outdoor-versus-indoor causation only with matched genotype, batch chemistry, preparation, exposure, and outcome controls"
+    "cultivation-specific causal discriminator"
+    "cultivation label plus preference is insufficient"
+
+record CannabisPotencyPreferenceBoundary : Set where
+  constructor cannabis-potency-preference-boundary
+  field
+    headlinePotencySeparatedFromExactBatchAssay : Bool
+    headlinePotencySeparatedFromExactBatchAssayIsTrue :
+      headlinePotencySeparatedFromExactBatchAssay ≡ true
+    productPotencySeparatedFromDeliveredDose : Bool
+    productPotencySeparatedFromDeliveredDoseIsTrue :
+      productPotencySeparatedFromDeliveredDose ≡ true
+    deliveredDoseSeparatedFromExposure : Bool
+    deliveredDoseSeparatedFromExposureIsTrue :
+      deliveredDoseSeparatedFromExposure ≡ true
+    nominalPotencyAloneFitsCurrentPreferenceOrdering : Bool
+    nominalPotencyAloneFitsCurrentPreferenceOrderingIsFalse :
+      nominalPotencyAloneFitsCurrentPreferenceOrdering ≡ false
+    reportedPreferenceCreatesTerpeneMechanism : Bool
+    reportedPreferenceCreatesTerpeneMechanismIsFalse :
+      reportedPreferenceCreatesTerpeneMechanism ≡ false
+    reportedPreferenceCreatesOutdoorMechanism : Bool
+    reportedPreferenceCreatesOutdoorMechanismIsFalse :
+      reportedPreferenceCreatesOutdoorMechanism ≡ false
+    exactBatchAssayIsNextParetoTarget : Bool
+    exactBatchAssayIsNextParetoTargetIsTrue :
+      exactBatchAssayIsNextParetoTarget ≡ true
+    clinicalRecommendationPaid : Bool
+    clinicalRecommendationPaidIsFalse :
+      clinicalRecommendationPaid ≡ false
+open CannabisPotencyPreferenceBoundary public
+
+canonicalCannabisPotencyPreferenceBoundary :
+  CannabisPotencyPreferenceBoundary
+canonicalCannabisPotencyPreferenceBoundary =
+  cannabis-potency-preference-boundary
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    true refl
+    false refl
