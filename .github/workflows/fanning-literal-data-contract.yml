@@ -17,6 +17,8 @@ on:
       - 'DASHI/Governance/Fanning2022NormalizationExact.agda'
       - 'DASHI/Governance/SafeJustSituatedClaimAuthorityBridgeExact.agda'
       - 'DASHI/Core/CompositionalComplianceExact.agda'
+      - 'DASHI/Core/InstitutionalNormProductionExact.agda'
+      - 'DASHI/Law/SensibLawLegalReasonablenessNormativityBridgeExact.agda'
       - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
@@ -58,6 +60,8 @@ jobs:
             DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseBridgeExact.agda
             DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseRegression.agda
             DASHI/Core/CompositionalComplianceExact.agda
+            DASHI/Core/InstitutionalNormProductionExact.agda
+            DASHI/Law/SensibLawLegalReasonablenessNormativityBridgeExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
@@ -87,6 +91,8 @@ jobs:
             DASHI/Governance/Fanning2022SupplementaryDataAuthorityExact.agda \
             DASHI/Governance/Fanning2022LiteralDataToFigureCommutationExact.agda \
             DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseRegression.agda \
+            DASHI/Core/InstitutionalNormProductionExact.agda \
+            DASHI/Law/SensibLawLegalReasonablenessNormativityBridgeExact.agda \
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda \
             DASHI/EverythingTOESymmetryResolved369.agda \
             DASHI/Unifier.agda \
