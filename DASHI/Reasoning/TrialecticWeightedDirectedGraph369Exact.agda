@@ -28,6 +28,8 @@ import DASHI.Core.McCallCategoryStrategyBoundaryExact as McCall
 import DASHI.Reasoning.Trialectic369RubikRefinementExact as Rubik
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
+import DASHI.Reasoning.TypedHyperfabricPantsGluingBridgeExact as PantsBridge
+open import Data.List using ([]; _∷_)
 import DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact as ColourPants
 
 WeightedMatrix3 : Set
@@ -256,3 +258,80 @@ canonicalWeightedGraphTrialectic369Boundary :
 canonicalWeightedGraphTrialectic369Boundary =
   weighted-graph-trialectic-369-boundary
     true true true false false false true false true
+
+------------------------------------------------------------------------
+-- Follow-on: matrix multiplication is the total weight of length-2 walks.
+-- The missing direct A -> C arc does not block a mediated A -> B -> C walk.
+-- This exact finite example is compatible with the existing Balaban finite
+-- local-walk machinery; it is NOT a new semigroup/locality theorem.
+------------------------------------------------------------------------
+
+twoStepWeightAtoC : Nat
+twoStepWeightAtoC =
+  dankaWeight Observer.participantA Observer.participantA
+  * dankaWeight Observer.participantA Observer.participantC
+  + dankaWeight Observer.participantA Observer.participantB
+  * dankaWeight Observer.participantB Observer.participantC
+  + dankaWeight Observer.participantA Observer.participantC
+  * dankaWeight Observer.participantC Observer.participantC
+
+twoStepAtoCEquals220Hundredths :
+  twoStepWeightAtoC ≡ 220
+twoStepAtoCEquals220Hundredths = refl
+
+twoStepAtoCNotZero : twoStepWeightAtoC ≡ 0 -> ⊥
+twoStepAtoCNotZero ()
+
+------------------------------------------------------------------------
+-- A nontrivial instantiated compatible hyperfabric section. Vertex stalks
+-- store complete outgoing weight rows; edge stalks store the selected weight.
+-- Incidence is source-directed only.  No source authority, psychology,
+-- universal directed sheaf, pants topology or smoothness is inferred.
+------------------------------------------------------------------------
+
+data OrderedEdge : Set where
+  orderedEdge : Observer.Participant3 -> Observer.Participant3 -> OrderedEdge
+
+data OutgoingIncidence : Observer.Participant3 -> OrderedEdge -> Set where
+  outgoingIncidence :
+    ∀ {source target} ->
+    OutgoingIncidence source (orderedEdge source target)
+
+restrictOutgoing :
+  ∀ {vertex edge} ->
+  OutgoingIncidence vertex edge ->
+  (Observer.Participant3 -> Nat) ->
+  Nat
+restrictOutgoing (outgoingIncidence {target = target}) row = row target
+
+outgoingWeightFabric :
+  Hyperfabric.TypedHyperfabric Observer.Participant3 OrderedEdge
+outgoingWeightFabric = record
+  { vertexStalk = λ _ -> Observer.Participant3 -> Nat
+  ; edgeStalk = λ _ -> Nat
+  ; incidence = OutgoingIncidence
+  ; restrict = restrictOutgoing
+  ; edgeProvenance =
+      λ _ -> "source: supplied 26 Oct 2026 matrix illustration" ∷ []
+  ; edgeSalience =
+      λ { (orderedEdge source target) -> dankaWeight source target }
+  ; fabricLabel = "three-node directed weighted graph; outgoing-row stalks"
+  }
+
+outgoingWeightSection :
+  Hyperfabric.GlobalSection outgoingWeightFabric
+outgoingWeightSection = record
+  { vertexValue = dankaWeight
+  ; edgeValue =
+      λ { (orderedEdge source target) -> dankaWeight source target }
+  ; compatible =
+      λ { (outgoingIncidence {source = source} {target = target}) -> refl }
+  ; sectionReceipt =
+      "outgoing edge restrictions recover exactly the source-row weights"
+  }
+
+-- A pants channel interpretation plus interface match must be supplied
+-- separately.  Naming the exact existing obligation does not inhabit it.
+DirectedGraphPantsGluingObligation : Set₁
+DirectedGraphPantsGluingObligation =
+  PantsBridge.HyperfabricPantsGluing outgoingWeightSection
