@@ -34,58 +34,58 @@
 
 ### Task 1: Documentation and TODO alignment
 
-- [ ] Update .planning/ROADMAP.md.
-- [ ] Update TODO.md with exact acceptance items.
-- [ ] Keep authority and non-promotion language explicit.
+- [x] Update .planning/ROADMAP.md.
+- [x] Update TODO.md with exact acceptance items.
+- [x] Keep authority and non-promotion language explicit.
 
 ### Task 2: Golden spectral stratification
 
-- [ ] Reuse the world/macro/sub-eigen/fibre donor.
-- [ ] Add eigenspace and goal levels.
-- [ ] Add K = 50 / K = 100 truncation type.
-- [ ] Add typed token-noise rejection.
+- [x] Reuse the world/macro/sub-eigen/fibre donor.
+- [x] Add eigenspace and goal levels.
+- [x] Add K = 50 / K = 100 truncation type.
+- [x] Add typed token-noise rejection.
 - [ ] Add MP spectral-basis witness with abstract scalar/order inputs.
 
 ### Task 3: Full twenty-worker schedule
 
-- [ ] Reuse hierarchical Pareto and conductor donors.
-- [ ] Define total Fin 20 worker assignment.
-- [ ] Require unblocked goals.
-- [ ] Require Pareto eligibility.
-- [ ] Require pairwise noTypedMeet for distinct slots.
-- [ ] Prove declared capacity is 20.
+- [x] Reuse hierarchical Pareto and conductor donors.
+- [x] Define total Fin 20 worker assignment.
+- [x] Require unblocked goals.
+- [x] Require Pareto eligibility.
+- [x] Require pairwise noTypedMeet for distinct slots.
+- [x] Prove declared capacity is 20.
 
 ### Task 4: Combinatorial Max Cut alignment
 
-- [ ] Define finite two-side partition and crossing-edge predicate.
-- [ ] Define discrete-Laplacian and SDP receipt interfaces.
-- [ ] Add explicit physics same-object gate.
-- [ ] Anchor existing YM commutator and NS exact commutator owners.
-- [ ] Prove operator-shape reuse does not create physical identity.
+- [x] Define finite two-side partition and crossing-edge predicate.
+- [x] Define discrete-Laplacian and SDP receipt interfaces.
+- [x] Add explicit physics same-object gate.
+- [x] Anchor existing YM commutator and NS exact commutator owners.
+- [x] Prove operator-shape reuse does not create physical identity.
 
 ### Task 5: TOE wiring
 
-- [ ] Import new owners from DASHI.Interop.Everything.
-- [ ] Expose the normalized AO boundary from FleetFormalGapTargetTOEExact.
-- [ ] Attach the convergence surface to DASHI.EverythingTOESymmetryResolved369 and DASHI.Unified.Everything where acyclic.
+- [x] Import new owners from DASHI.Interop.Everything.
+- [x] Expose the normalized AO boundary from FleetFormalGapTargetTOEExact.
+- [x] Attach the convergence surface to DASHI.EverythingTOESymmetryResolved369 and DASHI.Unified.Everything where acyclic.
 
 ### Task 6: Lean mirror
 
-- [ ] Mirror K choices, scale distinction, token classes, full twenty-worker schedule contract, and Max Cut non-promotion.
-- [ ] Mark Agda as golden in module documentation.
+- [x] Mirror K choices, scale distinction, token classes, full twenty-worker schedule contract, and Max Cut non-promotion.
+- [x] Mark Agda as golden in module documentation.
 
 ### Task 7: Python discriminator
 
-- [ ] Reject hex/address/UI/DOM noise.
-- [ ] Produce five-level finite stratification receipts.
-- [ ] Enforce full 20-slot scheduling.
-- [ ] Reject pairwise typed-overlap schedules.
-- [ ] Produce exact finite cut diagnostics and keep physics adapters non-promoting.
+- [x] Reject hex/address/UI/DOM noise.
+- [x] Produce five-level finite stratification receipts.
+- [x] Enforce full 20-slot scheduling.
+- [x] Reject pairwise typed-overlap schedules.
+- [x] Produce exact finite cut diagnostics and keep physics adapters non-promoting.
 
 ### Task 8: Verification and changelog
 
 - [ ] Run Python tests.
-- [ ] Run trust-escape and protected-path scans.
-- [ ] Read back exact branch symbols.
+- [x] Run trust-escape and protected-path scans.
+- [x] Read back exact branch symbols.
 - [ ] Check workflow/commit status.
 - [ ] Append changelogs after implementation.
