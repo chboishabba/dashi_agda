@@ -92,18 +92,16 @@ mangoldtFiniteSumForward :
   (arithmetic : VM.AllPrimeArithmetic space) →
   (mangoldt : VM.VonMangoldtFunction space arithmetic) →
   (S : AdditiveScalar) →
-  (scalarTransport : Scalar S → Weil.WeilTestSpace.Scalar space) →
-  (source : Weil.WeilTestSpace.Scalar space → Scalar S) →
-  (inverseAt : ∀ x → source (scalarTransport x) ≡ x) →
+  (toScalar : Weil.WeilTestSpace.Scalar space → Scalar S) →
   (start count : Nat) →
   sumDecodedInterval S
-    (λ code → source (Bidi.mangoldtAtPeriod space arithmetic mangoldt code))
+    (λ code → toScalar (Bidi.mangoldtAtPeriod space arithmetic mangoldt code))
     start count
   ≡ sumInterval S
-    (λ n → source (VM.VonMangoldtFunction.lambda mangoldt n))
+    (λ n → toScalar (VM.VonMangoldtFunction.lambda mangoldt n))
     start count
-mangoldtFiniteSumForward space arithmetic mangoldt S toWeil fromWeil inverseAt start zero = refl
-mangoldtFiniteSumForward space arithmetic mangoldt S toWeil fromWeil inverseAt start (suc count) =
+mangoldtFiniteSumForward space arithmetic mangoldt S toScalar start zero = refl
+mangoldtFiniteSumForward space arithmetic mangoldt S toScalar start (suc count) =
   cong₂ (add S)
-    (cong fromWeil (Bidi.mangoldtPeriodForward space arithmetic mangoldt start))
-    (mangoldtFiniteSumForward space arithmetic mangoldt S toWeil fromWeil inverseAt (suc start) count)
+    (cong toScalar (Bidi.mangoldtPeriodForward space arithmetic mangoldt start))
+    (mangoldtFiniteSumForward space arithmetic mangoldt S toScalar (suc start) count)
