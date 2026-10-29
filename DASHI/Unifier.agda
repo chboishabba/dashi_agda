@@ -8,6 +8,7 @@ import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
+import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1698,3 +1699,23 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Numeric PNF delta-fed projection consumer boundary.
+------------------------------------------------------------------------
+
+unifierPNFAnaphorSurfaceIdentityPromotionImpossible :
+  PNFHyperfabric.Anaphor.SurfaceSpellingIsWitnessIdentity → ⊥
+unifierPNFAnaphorSurfaceIdentityPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorSurfaceIdentityPromotionImpossible
+
+unifierPNFAnaphorCandidateResolutionPromotionImpossible :
+  PNFHyperfabric.Anaphor.CandidateEvidenceResolvesProjectedAnaphor → ⊥
+unifierPNFAnaphorCandidateResolutionPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorCandidateResolutionPromotionImpossible
+
+unifierPNFAnaphorProceduralProjectionCannotClaimSetBased :
+  PNFHyperfabric.Anaphor.ProceduralPerOccurrenceProjectionIsSetBased → ⊥
+unifierPNFAnaphorProceduralProjectionCannotClaimSetBased =
+  PNFHyperfabric.pnfAnaphorProceduralProjectionCannotClaimSetBased
