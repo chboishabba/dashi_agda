@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
