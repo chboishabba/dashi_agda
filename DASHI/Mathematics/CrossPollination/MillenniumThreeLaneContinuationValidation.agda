@@ -3,6 +3,7 @@ module DASHI.Mathematics.CrossPollination.MillenniumThreeLaneContinuationValidat
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as PNP
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHomogeneousCoordinatesExact as Hodge
@@ -835,6 +836,10 @@ import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact as Gate
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceLinearCycleClassExact as HodgeLinear
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHodgeBasisExact as HodgeBasis
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact as PNPSame
+import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as PNPCanonical
+import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as PNPSelector
+import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as PNPInput
 
 millenniumThreeLaneZKPFrame : Introspection.ZKPFrame
 millenniumThreeLaneZKPFrame =
@@ -890,12 +895,19 @@ record MillenniumThreeLaneTOEContract : Set where
         LeanAssist.currentMillenniumLeanAssistReceipt
       ≡ false
 
-    -- Postconditions / current min-cuts.
-    pCanonicalFlatAssignmentStillOpen :
-      PNPRunCNF.flatAssignmentPlacementPaid
-        PNPRunCNF.canonicalConcreteTapeRunCNFWeldBoundary
-      ≡ false
+    pConcreteCookLevinSameObjectPrecondition :
+      ∀ (machine : PNP.ConcreteTapeMachine)
+        (stateCoverage :
+          PNPCanonical.EnumerationCoverage (PNP.finiteState machine))
+        (symbolCoverage :
+          PNPCanonical.EnumerationCoverage (PNP.finiteSymbol machine))
+        (nonempty : PNPSelector.NonemptyRuleTable machine)
+        (input : PNPInput.InputWord machine)
+        (steps : Nat) →
+      PNPSame.SameMachineProgramCookLevinCertificate
+        machine stateCoverage symbolCoverage nonempty input steps
 
+    -- Postconditions / current min-cuts.
     hodgeLiteralComparisonStillOpen :
       Hodge.singularDeRhamComparisonPaid
         Hodge.canonicalProjectiveSpaceGeometryComparisonBoundary
@@ -939,8 +951,8 @@ canonicalMillenniumThreeLaneTOEContract = record
       leanKernelReceiptStillUnobserved
   ; agdaLeanSameObjectAuthorityRemainsExternal =
       agdaLeanSameObjectImportStillOpen
-  ; pCanonicalFlatAssignmentStillOpen =
-      pnpFlatAssignmentStillExternal
+  ; pConcreteCookLevinSameObjectPrecondition =
+      PNPSame.sameMachineProgramCookLevinCertificate
   ; hodgeLiteralComparisonStillOpen =
       hodgeComparisonStillOpen
   ; bsdGlobalExactSequenceStillOpen =
@@ -967,3 +979,22 @@ threeLaneBSDNonPromotion :
   Gate.finalClosureStatus Gate.bsdStatus
   ≡ Gate.analyticOrGeometricBoundary
 threeLaneBSDNonPromotion = refl
+
+
+------------------------------------------------------------------------
+-- CURRENT P MAX-CUT: canonical concrete Cook--Levin same-object closure.
+------------------------------------------------------------------------
+
+pnpConcreteCookLevinSameObjectPaid :
+  ∀ (machine : PNP.ConcreteTapeMachine)
+    (stateCoverage :
+      PNPCanonical.EnumerationCoverage (PNP.finiteState machine))
+    (symbolCoverage :
+      PNPCanonical.EnumerationCoverage (PNP.finiteSymbol machine))
+    (nonempty : PNPSelector.NonemptyRuleTable machine)
+    (input : PNPInput.InputWord machine)
+    (steps : Nat) →
+  PNPSame.SameMachineProgramCookLevinCertificate
+    machine stateCoverage symbolCoverage nonempty input steps
+pnpConcreteCookLevinSameObjectPaid =
+  PNPSame.sameMachineProgramCookLevinCertificate
