@@ -1552,21 +1552,21 @@ toeSettlementNormTransmissionZKPFrame =
   FleetGapTOE.canonicalSettlementNormTransmissionZKPFrame
 
 toeIndustryConventionDoesNotCreateFederalLaw :
-  FleetGapTOE.InstitutionalNorm.IndustryConventionCreatesFederalLaw → ⊥
+  FleetGapTOE.IndustryConventionCreatesFederalLaw → ⊥
 toeIndustryConventionDoesNotCreateFederalLaw =
   FleetGapTOE.fleetIndustryConventionDoesNotCreateFederalLaw
 
 toeSettlementDoesNotCreateSupremeCourtHolding :
-  FleetGapTOE.InstitutionalNorm.SettlementCreatesSupremeCourtHolding → ⊥
+  FleetGapTOE.SettlementCreatesSupremeCourtHolding → ⊥
 toeSettlementDoesNotCreateSupremeCourtHolding =
   FleetGapTOE.fleetSettlementDoesNotCreateSupremeCourtHolding
 
 toeSettlementDoesNotCreateConstitutionalPrecedent :
-  FleetGapTOE.InstitutionalNorm.SettlementCreatesConstitutionalPrecedent → ⊥
+  FleetGapTOE.SettlementCreatesConstitutionalPrecedent → ⊥
 toeSettlementDoesNotCreateConstitutionalPrecedent =
   FleetGapTOE.fleetSettlementDoesNotCreateConstitutionalPrecedent
 
 toeSameVisiblePolicyDoesNotImplySameAuthoritySource :
-  FleetGapTOE.InstitutionalNorm.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
+  FleetGapTOE.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
 toeSameVisiblePolicyDoesNotImplySameAuthoritySource =
   FleetGapTOE.fleetSameVisiblePolicyDoesNotImplySameAuthoritySource
