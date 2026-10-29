@@ -99,6 +99,31 @@ record SentenceAnaphorSetwiseReceipt : Set where
 open SentenceAnaphorSetwiseReceipt public
 
 ------------------------------------------------------------------------
+-- Negative boundaries.
+------------------------------------------------------------------------
+
+data SurfaceSpellingIsWitnessIdentity : Set where
+data CandidateEvidenceResolvesProjectedAnaphor : Set where
+data SetwiseProjectionRequiresRecursiveDemandUpdate : Set where
+
+data ProceduralPerOccurrenceProjectionIsSetBased : Set where
+
+surfaceSpellingIsNotWitnessIdentity : SurfaceSpellingIsWitnessIdentity → ⊥
+surfaceSpellingIsNotWitnessIdentity ()
+
+candidateEvidenceCannotResolveProjection :
+  CandidateEvidenceResolvesProjectedAnaphor → ⊥
+candidateEvidenceCannotResolveProjection ()
+
+setwiseProjectionNeedsNoRecursiveDemandRewrite :
+  SetwiseProjectionRequiresRecursiveDemandUpdate → ⊥
+setwiseProjectionNeedsNoRecursiveDemandRewrite ()
+
+perOccurrenceProceduralProjectionIsNotSetBased :
+  ProceduralPerOccurrenceProjectionIsSetBased → ⊥
+perOccurrenceProceduralProjectionIsNotSetBased ()
+
+------------------------------------------------------------------------
 -- Normalized delta-fed instance.
 --
 -- This record does not invent a second anaphor semantics.  It states that the
@@ -223,27 +248,3 @@ compileSentenceAnaphorProjectionZKPFrame instance =
         projectionLeavesDemandOpen
     }
 
-------------------------------------------------------------------------
--- Negative boundaries.
-------------------------------------------------------------------------
-
-data SurfaceSpellingIsWitnessIdentity : Set where
-data CandidateEvidenceResolvesProjectedAnaphor : Set where
-data SetwiseProjectionRequiresRecursiveDemandUpdate : Set where
-
-data ProceduralPerOccurrenceProjectionIsSetBased : Set where
-
-surfaceSpellingIsNotWitnessIdentity : SurfaceSpellingIsWitnessIdentity → ⊥
-surfaceSpellingIsNotWitnessIdentity ()
-
-candidateEvidenceCannotResolveProjection :
-  CandidateEvidenceResolvesProjectedAnaphor → ⊥
-candidateEvidenceCannotResolveProjection ()
-
-setwiseProjectionNeedsNoRecursiveDemandRewrite :
-  SetwiseProjectionRequiresRecursiveDemandUpdate → ⊥
-setwiseProjectionNeedsNoRecursiveDemandRewrite ()
-
-perOccurrenceProceduralProjectionIsNotSetBased :
-  ProceduralPerOccurrenceProjectionIsSetBased → ⊥
-perOccurrenceProceduralProjectionIsNotSetBased ()
