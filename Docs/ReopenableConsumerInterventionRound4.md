@@ -141,3 +141,130 @@ The module does not claim that angle defect alone determines a manufacturable pa
 Thus the cross-project relation is theorem-level rather than a similarity table.
 ## Claim boundary
 The common kernel proves structural facts about abstraction, finite future behaviour, fidelity escalation, evidence provenance, reopening and authority. It does not establish cloth constitutive laws, animal semantics, environmental calibration, stakeholder legitimacy, or continuous-state global search completeness. Those remain domain producers and can now be attached without reimplementing the shared theorem machinery.
+
+
+## TOE safe-and-just legal governance convergence
+
+The golden implementation reuses existing Agda owners.
+
+It reuses DASHI.Core.CompositionalComplianceExact.
+
+It reuses DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact.
+
+It reuses DASHI.Unified.FleetFormalGapTargetTOEExact.
+
+DASHI.EverythingTOESymmetryResolved369 and DASHI.Unifier export the same receipts.
+
+Fanning et al. retain source ownership for The social shortfall and ecological overshoot of nations.
+
+The DOI is 10.1038/s41893-021-00799-z.
+
+Necula retains source attribution for Compiling with Proofs.
+
+The source record is CMU-CS-98-154.
+
+This repository does not assert a DOI for that thesis.
+
+Bitansky, Canetti, Chiesa, and Tromer retain source attribution for recursive proof-carrying-data composition.
+
+The DOI is 10.1145/2488608.2488623.
+
+DASHI owns the exact Agda handoff records and non-promotion theorems.
+
+SensibLaw records are operational evidence inputs.
+
+SensibLaw records do not create legal authority by themselves.
+
+Actionstep records are operational case-management inputs.
+
+Actionstep records do not create legal authority by themselves.
+
+A literal Fanning source row does not create causal authority.
+
+A literal Fanning source row does not create policy decision authority.
+
+A downstream compliance proof retains the typed intermediate witness.
+
+Endpoint equality alone does not replace that witness.
+
+### ZKP frame
+
+O is the objective.
+
+The objective is TOE convergence for literal evidence and legal compliance handoffs.
+
+R is reuse.
+
+Reuse canonical Agda owners before extension.
+
+C is construction.
+
+Add aliases and exact boundary receipts only.
+
+S is the safety invariant.
+
+Evidence and operational records do not self-promote into legal, causal, or decision authority.
+
+L is the lane.
+
+Use one disjoint governance-convergence lane.
+
+The 584 discharged fibres stay discharged.
+
+Only the 58 unformalised formal gaps remain targeted.
+
+P is the precondition set.
+
+Golden Agda owners exist.
+
+Source identifiers remain stable.
+
+ESD surfaces remain read-only.
+
+G is governance.
+
+ITIL and Six Sigma are process lenses.
+
+ISO 9000 is a quality-management lens.
+
+ISO/IEC 42001:2023 is an AI management-system lens.
+
+ISO/IEC 27001:2022 is an information-security management lens.
+
+ISO/IEC 27701:2025 is a privacy-information management lens.
+
+ISO/IEC 23894:2023 is an AI risk-management lens.
+
+ISO 9241 standards are usability and human-centred-design lenses.
+
+NIST AI RMF is a risk-management lens.
+
+C4 and PlantUML are architecture documentation lenses.
+
+These statements do not claim certification.
+
+F is the postcondition set.
+
+The TOE root and Unifier expose the same governance receipts.
+
+The literal-data non-promotion proofs remain exact.
+
+The operational-record non-promotion proofs remain exact.
+
+The compositional-compliance invariant remains exact.
+
+### Verification
+
+Run related_symbols, discover, and round_lineage before new construction.
+
+Reject postulate.
+
+Reject allow-unsolved-metas.
+
+Reject TERMINATING.
+
+Reject NO_POSITIVITY_CHECK.
+
+Check that no ESD path changed.
+
+Run the exact-head Agda kernel check before claiming kernel success.
