@@ -567,8 +567,90 @@ navierStokesTerminalPromotionImpossible =
 
 
 ------------------------------------------------------------------------
--- Current periodic-B shared weighted wall from R736.
--- Proof ownership remains in R736 through the canonical NS Clay facade.
+-- Current periodic-B authoritative wall.
+-- The normalized facade follows NSABCDMaxCut20261007Exact and the current
+-- pure-analysis owner.  Historical R736 and external-commutator routes remain
+-- reachable below only as donor/provenance surfaces.
+------------------------------------------------------------------------
+
+navierStokesCurrentBHighestInformationIsPhysicalR440 : Bool
+navierStokesCurrentBHighestInformationIsPhysicalR440 =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440
+
+navierStokesCurrentBHighestInformationIsPhysicalR440IsTrue :
+  navierStokesCurrentBHighestInformationIsPhysicalR440 ≡ true
+navierStokesCurrentBHighestInformationIsPhysicalR440IsTrue =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440IsTrue
+
+navierStokesCurrentB4PhysicalPaymentClosed : Bool
+navierStokesCurrentB4PhysicalPaymentClosed =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentClosed
+
+navierStokesCurrentB4PhysicalPaymentStillOpen :
+  navierStokesCurrentB4PhysicalPaymentClosed ≡ false
+navierStokesCurrentB4PhysicalPaymentStillOpen =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentStillOpen
+
+navierStokesCurrentB4FourMomentScalarClosed : Bool
+navierStokesCurrentB4FourMomentScalarClosed =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosed
+
+navierStokesCurrentB4FourMomentScalarClosedIsTrue :
+  navierStokesCurrentB4FourMomentScalarClosed ≡ true
+navierStokesCurrentB4FourMomentScalarClosedIsTrue =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosedIsTrue
+
+navierStokesCurrentB4ZeroPaddingAuditClosed : Bool
+navierStokesCurrentB4ZeroPaddingAuditClosed =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosed
+
+navierStokesCurrentB4ZeroPaddingAuditClosedIsTrue :
+  navierStokesCurrentB4ZeroPaddingAuditClosed ≡ true
+navierStokesCurrentB4ZeroPaddingAuditClosedIsTrue =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosedIsTrue
+
+navierStokesCurrentB1PhysicalProducerClosed : Bool
+navierStokesCurrentB1PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB1PhysicalProducerClosed
+
+navierStokesCurrentB2PhysicalProducerClosed : Bool
+navierStokesCurrentB2PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB2PhysicalProducerClosed
+
+navierStokesCurrentB3PhysicalProducerClosed : Bool
+navierStokesCurrentB3PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB3PhysicalProducerClosed
+
+navierStokesCurrentBContinuationInputsClosed : Bool
+navierStokesCurrentBContinuationInputsClosed =
+  NSClayTOE.currentPeriodicBContinuationInputsClosed
+
+navierStokesCurrentBR823ShouldReopen : Bool
+navierStokesCurrentBR823ShouldReopen =
+  NSClayTOE.currentPeriodicBR823ShouldReopen
+
+navierStokesCurrentBR823ShouldNotReopen :
+  navierStokesCurrentBR823ShouldReopen ≡ false
+navierStokesCurrentBR823ShouldNotReopen =
+  NSClayTOE.currentPeriodicBR823ShouldNotReopen
+
+navierStokesHistoricalExternalCommutatorPureRouteClosed : Bool
+navierStokesHistoricalExternalCommutatorPureRouteClosed =
+  NSClayTOE.historicalExternalSignedCommutatorRouteReachedPureCommutator
+
+navierStokesHistoricalExternalCommutatorRoutePromotesClay : Bool
+navierStokesHistoricalExternalCommutatorRoutePromotesClay =
+  NSClayTOE.historicalExternalSignedCommutatorRoutePromotesClay
+
+navierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay :
+  navierStokesHistoricalExternalCommutatorRoutePromotesClay ≡ false
+navierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay =
+  NSClayTOE.historicalExternalSignedCommutatorRouteDoesNotPromoteClay
+
+
+------------------------------------------------------------------------
+-- Legacy R736 compatibility surface.
+-- R736 remains theorem-bearing provenance.  It is not the current B max-cut.
 ------------------------------------------------------------------------
 
 navierStokesSharedWeightedExactlyTwoLeaves : Bool
