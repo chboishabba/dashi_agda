@@ -103,7 +103,7 @@ oneOver125 : ℚ
 oneOver125 = normalize 1 125
 
 whole125 : ℚ
-whole125 = 125
+whole125 = normalize 125 1
 
 unscaledSynthesis125 :
   FFT.CubeSignal125 → FFT.CubeSignal125
