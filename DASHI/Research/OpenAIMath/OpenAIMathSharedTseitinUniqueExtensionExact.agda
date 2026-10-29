@@ -139,3 +139,55 @@ uniqueUsedCoordinates
     (gateCoordinate i) =
   uniqueAuxiliaryGateValues
     leftRealization rightRealization sameInputVector i
+
+------------------------------------------------------------------------
+-- Lift the finite uniqueness statement to the ACTUAL shared acceptance
+-- formula, reusing the existing Boolean conjunction proof. This is not a
+-- theorem for a second, invented "SAT oracle" or a duplicate compiler.
+------------------------------------------------------------------------
+
+acceptedFormulaRealization :
+  ∀ {inputs}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (assignment : Cook.Assignment)
+    (accepted :
+      Cook.evaluate (Existing.sharedAcceptanceFormula circuit) assignment
+        ≡ true) →
+  Existing.ProgramAssignmentRealizes
+    (Circuit.program circuit) assignment
+acceptedFormulaRealization circuit assignment accepted =
+  Existing.sharedConstraintsGiveRealization
+    (Circuit.program circuit)
+    assignment
+    (Existing.andTrueLeft accepted)
+
+uniqueAcceptedFormulaModelsOnUsedCoordinates :
+  ∀ {inputs}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (left right : Cook.Assignment)
+    (leftAccepted :
+      Cook.evaluate (Existing.sharedAcceptanceFormula circuit) left ≡ true)
+    (rightAccepted :
+      Cook.evaluate (Existing.sharedAcceptanceFormula circuit) right ≡ true)
+    (sameInputs :
+      Existing.inputValues
+        (acceptedFormulaRealization circuit left leftAccepted)
+        ≡
+      Existing.inputValues
+        (acceptedFormulaRealization circuit right rightAccepted))
+    (coordinate :
+      UsedCircuitCoordinate inputs (Circuit.gateCount circuit)) →
+  left (coordinateIndex coordinate)
+    ≡ right (coordinateIndex coordinate)
+uniqueAcceptedFormulaModelsOnUsedCoordinates
+    circuit left right leftAccepted rightAccepted sameInputs coordinate =
+  uniqueUsedCoordinates
+    (acceptedFormulaRealization circuit left leftAccepted)
+    (acceptedFormulaRealization circuit right rightAccepted)
+    sameInputs
+    coordinate
+
+-- Exact #SAT transfer remains strictly conditional on finite support,
+-- a unique-extension bijection, a bounded-width CNF conversion, and
+-- concrete encoded-bit/time/space accounting. This file pays the
+-- functional-determination component, not the OpenAI machine theorem.
