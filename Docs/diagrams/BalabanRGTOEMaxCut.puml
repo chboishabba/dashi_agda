@@ -13,6 +13,9 @@ package "Canonical theorem owners" {
   component "CMP116 stress\nCauchy / Hilbert bounds" as Stress
   component "Published finite nonlinear RG" as PublishedRG
   component "Scale-transfer frontier" as Frontier
+  component "Finite RG reopening\\nobservable transport" as Reopening
+  component "Total covariance\\nresidual fibre term" as Covariance
+  component "369 source residual\\nconsumer non-descent" as Residual
   component "Continuum route boundary" as Continuum
 }
 
@@ -32,6 +35,9 @@ Casimir --> Normalized : reuse
 Stress --> Normalized : reuse
 PublishedRG --> Normalized : reuse
 Frontier --> Normalized : strict authority
+Reopening --> Normalized : reuse
+Covariance --> Normalized : reuse
+Residual --> Normalized : reuse
 Continuum --> Normalized : non-promotion
 
 Normalized --> TOE : import / alias
@@ -55,6 +61,16 @@ Invariants:
 - conditional != machineChecked
 - no ESD mutation
 - attribution stays with source owners
+end note
+
+note bottom of Reopening
+Categorical fibre reading:
+- coarse projection is not terminal
+- reopening kernel retains fine-fibre information
+- observable expectation transports exactly
+- conditional covariance retains residual correlation
+- Pi/Phi/Psi are structural roles
+- tau/zeta are not generic pipeline stages here
 end note
 
 note bottom of Continuum

@@ -733,3 +733,24 @@ yangMillsYMA1CompletionDoesNotSelfPromote :
   ≡ false
 yangMillsYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- BALABAN CATEGORICAL FIBRE NORMALIZATION
+------------------------------------------------------------------------
+
+open BalabanRGTOE public using
+  ( BalabanCategoricalFibreTOEReceipt
+  ; canonicalBalabanCategoricalFibreTOEReceipt
+  ; finiteRGObservableExpectationPreserved
+  ; finiteRGCompositeExpectationPreserved
+  ; finiteRGTotalCovariance
+  ; finiteRGTotalVariance
+  ; finiteRGConnectedObservableReopening
+  ; sourceRecoveryNonDescentWitness
+  ; coarseBalabanClaimNotSufficientForRecoveryDecision
+  ; coarseBalabanClaimCannotFactorRecoveryDecision
+  ; balabanCategoricalFibreKeepsContinuumPromotionClosed
+  ; balabanPiPhiPsiRemainRolesNotOntology
+  ; balabanTauZetaRemainDomainSpecific
+  )
