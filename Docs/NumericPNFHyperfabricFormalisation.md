@@ -222,3 +222,78 @@ Conformance requires all of the following:
 The formalisation proves the algorithmic and authority contract. It does not
 substitute for migration tests, database execution plans, parser-quality
 assessment, or measured scaling evidence.
+
+## Delta-fed projection and affected-key reduction
+
+The current SensibLaw E0d optimization is normalized onto existing theorem
+owners. It does not introduce a second PNF semantic object.
+
+`SetwiseGroupedFibreProjectionExact.agda` now owns the generic delta-fed
+projection shape:
+
+```text
+source delta
+  -> projection relation
+  -> affected keys
+  -> exact final authority
+```
+
+The projection contract requires:
+
+- exact equality between the legacy and delta-fed final authority;
+- zero source-interior rescans;
+- zero recursive semantic self-updates; and
+- zero required procedural statement per source row.
+
+`AffectedBoundaryLocalReductionExact.agda` now exposes the generic
+`AffectedLocalReducer`. The existing parent-frontier reducer is an instance of
+that owner. A consumer with zero affected keys must retain its state exactly. A
+consumer that produces no semantic state change must emit no hierarchy delta.
+
+`SentenceAnaphorSetwiseProjectionExact.agda` is the E0d specialization. Its
+semantic boundary is:
+
+```text
+pronoun occurrence
+  -> surface / role / residual evidence
+  -> open demand
+  -> bounded candidate evidence
+```
+
+The projection does not infer referent identity from surface spelling. Candidate
+evidence does not resolve a demand. The implementation must not update the
+demand table recursively to trigger itself.
+
+The ZKP frame uses the repository convention:
+
+- **O**: legacy and delta-fed final authority are equal;
+- **R**: projection is set-based;
+- **C**: recursive semantic self-update count is zero;
+- **S**: only affected keys enter the local reducer;
+- **L**: surface spelling cannot promote to witness identity;
+- **P**: candidate evidence cannot promote to resolution;
+- **G**: source-interior rescan count is zero; and
+- **F**: each projected anaphor demand remains open until explicit resolution.
+
+The result is attached to the TOE graph through
+`DASHI.Unified.PNFHyperfabric`, `DASHI.EverythingTOESymmetryResolved369`,
+`DASHI.Unifier`, and `DASHI.Unified.Everything`.
+
+The Lean mirror in `dashi_lean4/Integration/DASHITOE/Core.lean` is a consumer
+contract only. Agda remains the golden theorem authority.
+
+### Runtime acceptance for E0d
+
+SensibLaw must certify the replacement against the pre-E0d authority on the same
+isolated corpus. The parity surface includes demand identity, source occurrence,
+surface evidence, role evidence, residual type, target constraints, candidate
+evidence, demand status, provenance, export consequences, and lookup
+consequences.
+
+Performance is a separate gate. The measured E0c baseline for
+`project_numeric_sentence_anaphors_setwise` was 296 calls, 1.486 seconds total,
+and 0.600 seconds exclusive on the 95-sentence fixture. E0d is admitted only if
+semantic parity remains exact and the physical invocation/statement count falls.
+
+No Agda kernel receipt is claimed for this edit in the current execution
+environment.
