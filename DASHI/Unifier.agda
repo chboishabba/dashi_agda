@@ -1777,3 +1777,38 @@ unifierActionstepRecordDoesNotCreateLegalAuthority :
   FleetGapTOE.ActionstepRecordCreatesLegalAuthority → ⊥
 unifierActionstepRecordDoesNotCreateLegalAuthority =
   FleetGapTOE.actionstepRecordDoesNotCreateLegalAuthority
+
+
+------------------------------------------------------------------------
+-- Institutional settlement / norm-transmission non-promotion.
+------------------------------------------------------------------------
+
+unifierSettlementTransmissionBoundary :
+  FleetGapTOE.SettlementTransmissionBoundary
+unifierSettlementTransmissionBoundary =
+  FleetGapTOE.fleetSettlementTransmissionBoundary
+
+unifierSettlementNormTransmissionZKPFrame :
+  FleetGapTOE.SettlementNormTransmissionZKPFrame
+unifierSettlementNormTransmissionZKPFrame =
+  FleetGapTOE.canonicalSettlementNormTransmissionZKPFrame
+
+unifierIndustryConventionDoesNotCreateFederalLaw :
+  FleetGapTOE.InstitutionalNorm.IndustryConventionCreatesFederalLaw → ⊥
+unifierIndustryConventionDoesNotCreateFederalLaw =
+  FleetGapTOE.fleetIndustryConventionDoesNotCreateFederalLaw
+
+unifierSettlementDoesNotCreateSupremeCourtHolding :
+  FleetGapTOE.InstitutionalNorm.SettlementCreatesSupremeCourtHolding → ⊥
+unifierSettlementDoesNotCreateSupremeCourtHolding =
+  FleetGapTOE.fleetSettlementDoesNotCreateSupremeCourtHolding
+
+unifierSettlementDoesNotCreateConstitutionalPrecedent :
+  FleetGapTOE.InstitutionalNorm.SettlementCreatesConstitutionalPrecedent → ⊥
+unifierSettlementDoesNotCreateConstitutionalPrecedent =
+  FleetGapTOE.fleetSettlementDoesNotCreateConstitutionalPrecedent
+
+unifierSameVisiblePolicyDoesNotImplySameAuthoritySource :
+  FleetGapTOE.InstitutionalNorm.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
+unifierSameVisiblePolicyDoesNotImplySameAuthoritySource =
+  FleetGapTOE.fleetSameVisiblePolicyDoesNotImplySameAuthoritySource
