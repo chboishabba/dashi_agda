@@ -1456,3 +1456,24 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- BALABAN CATEGORICAL FIBRE NORMALIZATION
+------------------------------------------------------------------------
+
+open BalabanRGTOE public using
+  ( BalabanCategoricalFibreTOEReceipt
+  ; canonicalBalabanCategoricalFibreTOEReceipt
+  ; finiteRGObservableExpectationPreserved
+  ; finiteRGCompositeExpectationPreserved
+  ; finiteRGTotalCovariance
+  ; finiteRGTotalVariance
+  ; finiteRGConnectedObservableReopening
+  ; sourceRecoveryNonDescentWitness
+  ; coarseBalabanClaimNotSufficientForRecoveryDecision
+  ; coarseBalabanClaimCannotFactorRecoveryDecision
+  ; balabanCategoricalFibreKeepsContinuumPromotionClosed
+  ; balabanPiPhiPsiRemainRolesNotOntology
+  ; balabanTauZetaRemainDomainSpecific
+  )
