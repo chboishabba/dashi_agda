@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 import DASHI.Biology.NeurodivergentSocialEcologySourceRegistryExact as Sources
 import DASHI.Biology.SocialEcologicalAffordanceConeExact as Ecology
 import DASHI.Biology.TrustedFriendRelationalGateExact as FriendGate
+import DASHI.Core.BinaryInteractionNonseparabilityExact as Binary
 
 ------------------------------------------------------------------------
 -- TRUSTED-FRIEND x ECOLOGY INTERACTION
@@ -22,9 +23,8 @@ import DASHI.Biology.TrustedFriendRelationalGateExact as FriendGate
 -- trusted friend does not add another unit of availability.
 --
 -- This is an interaction theorem, not an empirical effect-size model.  The
--- Nat codes below are finite structural codes only.  Once PR #620 ancestry is
--- available, this file should become a thin adapter to the generic binary
--- interaction/nonseparability owner there.
+-- Nat codes below are finite structural codes only.  The generic binary
+-- interaction/nonseparability owner is reused directly.
 ------------------------------------------------------------------------
 
 data EcologyCondition : Set where
@@ -124,6 +124,66 @@ repairedFriendLeavesRemainCodeUnchanged :
   remainCode repairedCondition trustedFriendCondition
   ≡ remainCode repairedCondition aloneCondition
 repairedFriendLeavesRemainCodeUnchanged = refl
+
+
+------------------------------------------------------------------------
+-- Reuse the generic binary interaction owner.
+--
+-- The exact remain surface is:
+--
+--     alone   friend
+-- high   0       1
+-- repair 1       1
+--
+-- This violates the additive rectangle identity.  It also violates the
+-- multiplicative rank-one minor identity.  Therefore a constant endpoint-only
+-- decomposition cannot reconstruct the joint ecology x relation surface.
+------------------------------------------------------------------------
+
+friendEcologySurface : Binary.BinaryNatSurface
+friendEcologySurface =
+  Binary.binary-nat-surface
+    EcologyCondition
+    RelationCondition
+    remainCode
+    "Trusted-friend x ecology remain availability. The finite code is structural only."
+
+friendEcologyRectangleObstruction :
+  Binary.RectangleObstruction friendEcologySurface
+friendEcologyRectangleObstruction =
+  Binary.rectangle-obstruction
+    highDemandCondition
+    repairedCondition
+    aloneCondition
+    trustedFriendCondition
+    (λ ())
+
+friendEcologyRankOneObstruction :
+  Binary.RankOneMinorObstruction friendEcologySurface
+friendEcologyRankOneObstruction =
+  Binary.rank-one-minor-obstruction
+    highDemandCondition
+    repairedCondition
+    aloneCondition
+    trustedFriendCondition
+    (λ ())
+
+friendEcologyStrongInteraction :
+  Binary.StrongBinaryInteractionAdmission friendEcologySurface
+friendEcologyStrongInteraction =
+  Binary.strong-binary-interaction-admission
+    friendEcologyRectangleObstruction
+    friendEcologyRankOneObstruction
+
+FriendEcologyEndpointAdditiveModel : Set₁
+FriendEcologyEndpointAdditiveModel =
+  Binary.EndpointAdditivelySeparable friendEcologySurface
+
+friendEcologyNotEndpointAdditive :
+  FriendEcologyEndpointAdditiveModel → ⊥
+friendEcologyNotEndpointAdditive =
+  Binary.strongAdmissionImpliesAdditiveNonseparability
+    friendEcologyStrongInteraction
 
 ------------------------------------------------------------------------
 -- No context-free additive "friend bonus" fits both environments.
