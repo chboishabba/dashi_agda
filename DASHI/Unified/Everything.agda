@@ -1,4 +1,6 @@
 module DASHI.Unified.Everything where
+import DASHI.Physics.Closure.R2P227729PairOrbit365CanonicalSymmetryExact as Pair365
+import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as Pairs365Owner
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Maybe using (just)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeNSCut
@@ -821,3 +823,9 @@ unifiedFiveGrid63OrbitClasses :
   1 + 62 ≡ 63
 unifiedFiveGrid63OrbitClasses =
   NyquistSym729.fiveCubeOrbitClasses63
+
+-- Simultaneous inversion of ordered pair labels: 729 -> 365 classes.
+-- This is NOT independent antipodal quotienting of either input mode.
+unifiedActual729PositivePairOrbitCount :
+  Pairs365Owner.countWhereL Pair365.positivePair Pairs365Owner.pair729 ≡ 365
+unifiedActual729PositivePairOrbitCount = Pair365.actualPositivePairRepresentatives
