@@ -31,6 +31,16 @@ files=(
   DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollinationGateExact.agda
   DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollinationValidation.agda
   DASHI/EverythingMillenniumSubstantiveCrossPollination.agda
+  DASHI/Mathematics/AlgebraicGeometry/ProjectiveSpaceLinearCycleClassExact.agda
+  DASHI/Mathematics/Complexity/FixedWidthCNFToCookFormulaExact.agda
+  DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeProgramCodeExact.agda
+  DASHI/Mathematics/Complexity/ConcreteTapeCookLevinCookFormulaExact.agda
+  DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact.agda
+  DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda
+  DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda
+  DASHI/EverythingTOESymmetryResolved369.agda
+  DASHI/Unifier.agda
+  DASHI/Unified/Everything.agda
 )
 
 for file in "${files[@]}"; do test -f "$file"; done
@@ -102,6 +112,22 @@ checks=(
   'DASHI/Mathematics/Topology/QuaternionS3PoincareCrossPollination.agda:poincareConclusionFromQuaternionBridge'
   'DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollinationGateExact.agda:allOpenLanesRemainUncompleted'
   'DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollinationGateExact.agda:gradedVOANowHasExactFiniteCore'
+  'DASHI/Mathematics/AlgebraicGeometry/ProjectiveSpaceLinearCycleClassExact.agda:everyFiniteCPnHodgeBasisClassIsAlgebraic'
+  'DASHI/Mathematics/Complexity/FixedWidthCNFToCookFormulaExact.agda:cnfCookSatisfiabilityExact'
+  'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeProgramCodeExact.agda:decodeEncodeStaticProgramView'
+  'DASHI/Mathematics/Complexity/ConcreteTapeCookLevinCookFormulaExact.agda:cookFormulaExactBudgetIff'
+  'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact.agda:sameMachineProgramCookLevinCertificate'
+  'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda:pnpConcreteCookLevinSameObjectPaid'
+  'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda:canonicalMillenniumThreeLaneTOEContract'
+  'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda:threeLanePNonPromotion'
+  'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda:threeLaneHodgeNonPromotion'
+  'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda:threeLaneBSDNonPromotion'
+  'DASHI/EverythingTOESymmetryResolved369.agda:toeMillenniumThreeLaneContract'
+  'DASHI/EverythingTOESymmetryResolved369.agda:toePVersusNPRemainsNonPromoted'
+  'DASHI/EverythingTOESymmetryResolved369.agda:toeHodgeRemainsNonPromoted'
+  'DASHI/EverythingTOESymmetryResolved369.agda:toeBSDRemainsNonPromoted'
+  'DASHI/Unifier.agda:millenniumThreeLaneContract'
+  'DASHI/Unified/Everything.agda:millenniumThreeLaneContract'
 )
 
 for check in "${checks[@]}"; do
@@ -146,4 +172,7 @@ grep -Fq 'import DASHI.EverythingHurwitzHopfNoetherCrossPollination' DASHI/Every
 grep -Fq 'MillenniumSubstantiveCrossPollinationValidation' DASHI/EverythingMillenniumSubstantiveCrossPollination.agda
 
 scripts/run_agda29_parallel_check.sh \
-  DASHI/EverythingMillenniumSubstantiveCrossPollination.agda
+  DASHI/EverythingMillenniumSubstantiveCrossPollination.agda \
+  DASHI/EverythingTOESymmetryResolved369.agda \
+  DASHI/Unifier.agda \
+  DASHI/Unified/Everything.agda
