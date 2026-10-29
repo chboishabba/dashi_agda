@@ -1742,3 +1742,42 @@ unifierYMA1CompletionDoesNotSelfPromote :
   ≡ false
 unifierYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+------------------------------------------------------------------------
+-- SensibLaw reviewed legal-follow convergence.
+-- This is an alias-only weld to the golden Law owner.
+------------------------------------------------------------------------
+
+import DASHI.Law.AustralianContractsReviewedHopCompilerExact as ContractsHop
+
+unifierReviewedContractsMaxCut :
+  ContractsHop.ReviewedContractsMaxCutBoundary
+unifierReviewedContractsMaxCut =
+  ContractsHop.canonicalReviewedContractsMaxCutBoundary
+
+unifierReviewedContractsAuthorityStillClosed :
+  ContractsHop.reviewedContractsPromotesAnyAuthority
+  ≡ false
+unifierReviewedContractsAuthorityStillClosed =
+  ContractsHop.reviewedContractsAuthorityStillClosed
+
+unifierReviewedContractsCreatesNoCurrentLaw :
+  ContractsHop.ReviewedContractsMaxCutBoundary.createsCurrentLawConclusion
+    ContractsHop.canonicalReviewedContractsMaxCutBoundary
+  ≡ false
+unifierReviewedContractsCreatesNoCurrentLaw =
+  ContractsHop.ReviewedContractsMaxCutBoundary.createsCurrentLawConclusionIsFalse
+    ContractsHop.canonicalReviewedContractsMaxCutBoundary
+
+
+unifierReviewedContractsRuntimeParity :
+  ContractsHop.ReviewedContractsRuntimeParityBoundary
+unifierReviewedContractsRuntimeParity =
+  ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+
+unifierReviewedContractsRuntimeCoverageNotFactorsThrough :
+  ContractsHop.ReviewedContractsRuntimeParityBoundary.runtimeCoverageIsFormalFactorsThroughProof
+    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ false
+unifierReviewedContractsRuntimeCoverageNotFactorsThrough =
+  ContractsHop.ReviewedContractsRuntimeParityBoundary.runtimeCoverageIsFormalFactorsThroughProofIsFalse
+    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
