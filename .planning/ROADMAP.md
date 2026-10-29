@@ -89,3 +89,5 @@ Plans:
 - [ ] Supply separately sourced hyperfabric stalk/incidence/section compatibility and 27-pants adjacency if advancing beyond the finite graph boundary.
 
 See `Docs/TrialecticWeightedDirectedGraph369.md` for attribution, the weight convention, proofs and non-promotion obligations.
+
+- [x] Follow-on: finite weight-graph outgoing-row hyperfabric section with incidence/restriction compatibility and mediated two-step path result (A²)[A,C]=2.2.
