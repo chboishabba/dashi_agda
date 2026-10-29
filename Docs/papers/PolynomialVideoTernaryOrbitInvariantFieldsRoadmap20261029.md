@@ -100,3 +100,29 @@ Independent executed Python check: 100 finite random 27-fields verified both ide
 
 **New prioritized obligation O25**: pin Agda/stdlib and type-check this actual sampling projector and 7/11/27 vector atlas; repair any elaboration failure.
 **O26**: if useful for the video's phase/Fourier representation, instantiate a true scalar `C3`-character transform on `Field11` with explicit source/target ring, compare `P_C3,P_S3` to the corresponding averaging projectors ONLY after confirming the correct coefficient extension/characteristic and action intertwiner.
+
+
+## 29 October continuation: executed rational Reynolds / C2-character max-cut
+
+Source-written independent script committed in PR #1414 at `scripts/check_polynomial_c3_s3_reynolds_character_exact.py`, commit `a402835d980bcebd42b553469eaa434faf416622`. A locally executed equivalent exact Fraction-based Python script PASSED 24 independent rational-valued 27-state field trials and full finite group orbit/character counts. **The committed script has not been re-executed from the remote checkout** and the Agda kernel has not been run.
+
+**Historical original mathematical authority:** finite-group character theory, Burnside's orbit lemma, Reynolds averaging and the C2 ±-character projectors (not new DASHI discoveries). General finite-field Reynolds averaging requires invertible group order; the current experiment uses **rationals**, not trits or characteristic 3. See MathWorld Reynolds Operator, https://mathworld.wolfram.com/ReynoldsOperator.html, and primary published invariant-theory expositions. Cite original historical authors when dating a priority claim; treat this numeric experiment as independent implementation only.
+
+**Exact action:** S3 conjugates all 27 functions from a 3-element set to itself. Character traces (fixed-code counts) are identity 27, nonidentity 3-cycles 3, and transpositions 3. Burnside gives C3 invariant dimension `(27+3+3)/3=11` and S3 invariant dimension `(27+2·3+3·3)/6=7`. On 11 C3 classes, reflection has exactly three fixed classes and four exchanged pairs. Hence the rational `C3`-invariant subspace decomposes as seven reflection-even and four reflection-odd coordinates, with genuine idempotent operators:
+`R3 f = (f + rotate f + rotate² f)/3`;
+`R6 f = (sum_{p in S3} p·f)/6`;
+`Pplus f = (R3 f + reflect(R3 f))/2 = R6 f`;
+`Pminus f = (R3 f - reflect(R3 f))/2`.
+The test confirms `R3²=R3`, `R6²=R6`, `R3 R6=R6 R3=R6`, `R3=Pplus+Pminus` pointwise, reflection sign on minus, and zero S3 average for minus. All of these are classical consequences of the group action, not kernel-verified Agda theorems in this commit.
+
+**Strict owner distinction:** existing `PolynomialC3S3OrbitSamplingProjectionExact.agda` defines CHOSEN-REPRESENTATIVE sampling, which is defined on trit-valued fields and is not linear Reynolds averaging. The new script evaluates the same literal 27-code conjugation action over rational function values; no identification of those two operators is claimed. Four antisymmetric coordinates are justified in this rational representation, strengthening the previous `11=7+4` bare coordinate count for a **new, typed coefficient domain**. This is not Fourier on `F3`, not a physical wave operator, not a Monster representation and not the free output-phase `27→9` quotient.
+
+**Worklist status update:** 
+- [x] O27 finite rational Reynolds and character trace receipt (exact local script execution, standalone GitHub script committed; exact checkout execution pending).
+- [x] O28 rational 7-even/4-odd representation decomposition finite regression.
+- [ ] O29 source-write an Agda theorem over explicit rational coefficient carrier and literal S3 action; reuse existing abstract finite-sum/group character theorem owners first; no trit-field division.
+- [ ] O30 check the exact committed script on branch head and run Agda kernel with pinned stdlib (CI unnecessary).
+- [ ] O31 investigate conditional objective/count-preservation connections to OpenAI ETH family counting or Max-Cut **only** after a concrete same-problem graph/CNF action and polynomial encoding bound. Maintain independent #1260 radian Pickover sign problem and original #1414 Galois/Spin/Hatcher obligations.
+- [ ] O32 original-prior-art ledger and repository proof ownership: label Burnside/Reynolds as inherited mathematics, #1414 as code owner, #1260 as prior Pickover arithmetic source, exact executed arithmetic check, kernel-pending status, unchanged Ibrahim Monster 3B ownership.
+
+**Negative control corrected during experiment:** transposition has **3 fixed codes**, not 7; seven is the number of `S3` orbits. Conflating these counts breaks Burnside. Script enforces all three conjugacy-class fixed counts.
