@@ -32,6 +32,7 @@ The adapter reuses these existing Agda owners.
 - `DASHI/Core/BinaryInteractionNonseparabilityExact.agda` owns the generic non-additive interaction test.
 - `DASHI/Governance/SituatedIntegrityOptionConeBridgeExact.agda` already connects declared/realised mismatch to a proof-bearing option-cone comparison.
 - `DASHI/Governance/HistoryConditionedSocialEcologyOptionConeExact.agda` already owns proof-bearing history-only, ecology-only, and joint option-cone contractions.
+- `DASHI/Governance/HistoryObserverAuthorityOptionConeCapstoneExact.agda` already separates observation, affordance, valuation, and modification authority.
 
 The implementation does not create a new history calculus.
 It does not create a new option-cone calculus.
@@ -105,7 +106,21 @@ Therefore the latency observer cannot determine the future option-cone code.
 
 Any post-processing of that already-collapsed latency observer also cannot recover the erased distinction.
 
+### Observer and authority reuse
+
+The adapter imports the existing governance capstone boundary.
+
+This preserves these distinctions:
+
+- observation is not realised affordance;
+- realised affordance is not valuation;
+- valuation is not modification authority;
+- authority does not guarantee repair.
+
+The trusted friend can refine context without acquiring modification authority.
+
 ### Relation essentiality
+
 
 Hold ordinary history fixed.
 Hold processing geometry fixed.
