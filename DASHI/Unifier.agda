@@ -11,6 +11,7 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.RiemannPoleQuotientTOEConvergenceExact as RiemannTOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -107,6 +108,35 @@ balabanRGTOEReceipt =
 balabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
 balabanRGZKPFrame =
   BalabanRGTOE.canonicalBalabanTOEZKPFrame
+
+------------------------------------------------------------------------
+-- Canonical Riemann pole-quotient frontier.
+------------------------------------------------------------------------
+
+unifierRiemannPoleQuotientZKPFrame :
+  RiemannTOE.RiemannPoleQuotientTOEZKPFrame
+unifierRiemannPoleQuotientZKPFrame =
+  RiemannTOE.canonicalRiemannPoleQuotientTOEZKPFrame
+
+unifierRiemannHighOrdinateCompletionTheorem :
+  RiemannTOE.HighOrdinateCompletionTheorem
+unifierRiemannHighOrdinateCompletionTheorem =
+  RiemannTOE.highOrdinateCompletionTheorem
+
+unifierRiemannDeterminantDiagnosticDoesNotPromote :
+  RiemannTOE.determinantMayReplaceFinalCarrier ≡ false
+unifierRiemannDeterminantDiagnosticDoesNotPromote =
+  RiemannTOE.determinantMayNotReplaceFinalCarrier
+
+unifierRiemannLowOrdinateAttachmentStillOpen :
+  RiemannTOE.plattTrudgianTheoremImportedIntoAgda ≡ false
+unifierRiemannLowOrdinateAttachmentStillOpen =
+  RiemannTOE.plattTrudgianTheoremStillNotImported
+
+unifierRiemannHypothesisStillOpen :
+  RiemannTOE.rhDerived ≡ false
+unifierRiemannHypothesisStillOpen =
+  RiemannTOE.rhStillOpen
 
 ------------------------------------------------------------------------
 -- Normalized Balaban density, regular-E, stress, and continuum surfaces.

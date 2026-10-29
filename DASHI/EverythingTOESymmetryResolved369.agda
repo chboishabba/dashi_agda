@@ -32,6 +32,41 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 import DASHI.Unified.GRQuantumProofTermRegression
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.RiemannPoleQuotientTOEConvergenceExact as RiemannTOE
+
+------------------------------------------------------------------------
+-- Canonical Riemann pole-quotient frontier.
+------------------------------------------------------------------------
+
+toeRiemannPoleQuotientZKPFrame :
+  RiemannTOE.RiemannPoleQuotientTOEZKPFrame
+toeRiemannPoleQuotientZKPFrame =
+  RiemannTOE.canonicalRiemannPoleQuotientTOEZKPFrame
+
+toeRiemannHighOrdinateCompletionTheorem :
+  RiemannTOE.HighOrdinateCompletionTheorem
+toeRiemannHighOrdinateCompletionTheorem =
+  RiemannTOE.highOrdinateCompletionTheorem
+
+toeRiemannExactlyTwoHighOrdinateAnalyticLeaves :
+  RiemannTOE.exactlyTwoTerminalAnalyticPayments ≡ true
+toeRiemannExactlyTwoHighOrdinateAnalyticLeaves =
+  RiemannTOE.exactlyTwoTerminalAnalyticPaymentsIsTrue
+
+toeRiemannDeterminantDiagnosticDoesNotPromote :
+  RiemannTOE.determinantMayReplaceFinalCarrier ≡ false
+toeRiemannDeterminantDiagnosticDoesNotPromote =
+  RiemannTOE.determinantMayNotReplaceFinalCarrier
+
+toeRiemannLowOrdinateAttachmentStillOpen :
+  RiemannTOE.plattTrudgianTheoremImportedIntoAgda ≡ false
+toeRiemannLowOrdinateAttachmentStillOpen =
+  RiemannTOE.plattTrudgianTheoremStillNotImported
+
+toeRiemannHypothesisStillOpen :
+  RiemannTOE.rhDerived ≡ false
+toeRiemannHypothesisStillOpen =
+  RiemannTOE.rhStillOpen
 
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
