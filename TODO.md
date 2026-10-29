@@ -1,3 +1,26 @@
+
+
+## AO Fleet max-cut convergence — 2026-10-29
+
+Golden Agda is authoritative.
+
+- [ ] Normalize donor PR #1415 world/macro/sub-eigen/fibre types onto current master.
+- [ ] Extend the hierarchy to exact eigenspace / primary topic / subtopic / fibre / goal levels.
+- [ ] Represent only K = 50 or K = 100 as supported spectral truncation choices.
+- [ ] Require an MP basis witness to carry covariance/eigenvalue/bulk-edge/orthonormality evidence without hidden floating-point assumptions.
+- [ ] Reject hex literals, pointer-like memory addresses, raw UI tokens, and raw DOM tokens before topic admission.
+- [ ] Normalize donor PR #1416 threshold/Pareto/noTypedMeet machinery onto current master.
+- [ ] Normalize donor PR #1417 conductor width machinery onto current master.
+- [ ] Add a total Fin 20 schedule with all slots occupied.
+- [ ] Require every scheduled goal to be unblocked and Pareto eligible.
+- [ ] Require pairwise noTypedMeet evidence for every two distinct worker slots.
+- [ ] Add a finite combinatorial Max Cut owner with vertex partition, crossing-edge, discrete Laplacian, and GW/SDP receipt surfaces.
+- [ ] Reuse existing YM gauge/Hodge commutator and NS exact commutator owners through explicit non-promoting adapters.
+- [ ] Wire new owners through Interop and Fleet TOE aggregates.
+- [ ] Mirror the golden public contract in dashi_lean4.
+- [ ] Implement executable discriminator tests in dashiBRAIN.
+- [ ] Verify zero postulates, zero holes, zero TERMINATING/NON_TERMINATING, zero NO_POSITIVITY_CHECK, and zero ESD edits.
+- [ ] Append changelogs only after code and tests are in place.
 # FOR TODO GO TO '# TODO'
 
 Current NS Gate 1 / Gate 2 roadmap note for `2026-07-02`:
