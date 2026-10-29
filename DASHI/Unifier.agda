@@ -1506,8 +1506,90 @@ unifierNavierStokesTerminalPromotionImpossible =
 
 
 ------------------------------------------------------------------------
--- Current periodic-B shared weighted wall from R736.
--- Proof ownership remains in R736 through the canonical NS Clay facade.
+-- Current periodic-B authoritative wall.
+-- The normalized facade follows NSABCDMaxCut20261007Exact and the current
+-- pure-analysis owner.  Historical R736 and external-commutator routes remain
+-- reachable below only as donor/provenance surfaces.
+------------------------------------------------------------------------
+
+unifierNavierStokesCurrentBHighestInformationIsPhysicalR440 : Bool
+unifierNavierStokesCurrentBHighestInformationIsPhysicalR440 =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440
+
+unifierNavierStokesCurrentBHighestInformationIsPhysicalR440IsTrue :
+  unifierNavierStokesCurrentBHighestInformationIsPhysicalR440 ≡ true
+unifierNavierStokesCurrentBHighestInformationIsPhysicalR440IsTrue =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440IsTrue
+
+unifierNavierStokesCurrentB4PhysicalPaymentClosed : Bool
+unifierNavierStokesCurrentB4PhysicalPaymentClosed =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentClosed
+
+unifierNavierStokesCurrentB4PhysicalPaymentStillOpen :
+  unifierNavierStokesCurrentB4PhysicalPaymentClosed ≡ false
+unifierNavierStokesCurrentB4PhysicalPaymentStillOpen =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentStillOpen
+
+unifierNavierStokesCurrentB4FourMomentScalarClosed : Bool
+unifierNavierStokesCurrentB4FourMomentScalarClosed =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosed
+
+unifierNavierStokesCurrentB4FourMomentScalarClosedIsTrue :
+  unifierNavierStokesCurrentB4FourMomentScalarClosed ≡ true
+unifierNavierStokesCurrentB4FourMomentScalarClosedIsTrue =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosedIsTrue
+
+unifierNavierStokesCurrentB4ZeroPaddingAuditClosed : Bool
+unifierNavierStokesCurrentB4ZeroPaddingAuditClosed =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosed
+
+unifierNavierStokesCurrentB4ZeroPaddingAuditClosedIsTrue :
+  unifierNavierStokesCurrentB4ZeroPaddingAuditClosed ≡ true
+unifierNavierStokesCurrentB4ZeroPaddingAuditClosedIsTrue =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosedIsTrue
+
+unifierNavierStokesCurrentB1PhysicalProducerClosed : Bool
+unifierNavierStokesCurrentB1PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB1PhysicalProducerClosed
+
+unifierNavierStokesCurrentB2PhysicalProducerClosed : Bool
+unifierNavierStokesCurrentB2PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB2PhysicalProducerClosed
+
+unifierNavierStokesCurrentB3PhysicalProducerClosed : Bool
+unifierNavierStokesCurrentB3PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB3PhysicalProducerClosed
+
+unifierNavierStokesCurrentBContinuationInputsClosed : Bool
+unifierNavierStokesCurrentBContinuationInputsClosed =
+  NSClayTOE.currentPeriodicBContinuationInputsClosed
+
+unifierNavierStokesCurrentBR823ShouldReopen : Bool
+unifierNavierStokesCurrentBR823ShouldReopen =
+  NSClayTOE.currentPeriodicBR823ShouldReopen
+
+unifierNavierStokesCurrentBR823ShouldNotReopen :
+  unifierNavierStokesCurrentBR823ShouldReopen ≡ false
+unifierNavierStokesCurrentBR823ShouldNotReopen =
+  NSClayTOE.currentPeriodicBR823ShouldNotReopen
+
+unifierNavierStokesHistoricalExternalCommutatorPureRouteClosed : Bool
+unifierNavierStokesHistoricalExternalCommutatorPureRouteClosed =
+  NSClayTOE.historicalExternalSignedCommutatorRouteReachedPureCommutator
+
+unifierNavierStokesHistoricalExternalCommutatorRoutePromotesClay : Bool
+unifierNavierStokesHistoricalExternalCommutatorRoutePromotesClay =
+  NSClayTOE.historicalExternalSignedCommutatorRoutePromotesClay
+
+unifierNavierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay :
+  unifierNavierStokesHistoricalExternalCommutatorRoutePromotesClay ≡ false
+unifierNavierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay =
+  NSClayTOE.historicalExternalSignedCommutatorRouteDoesNotPromoteClay
+
+
+------------------------------------------------------------------------
+-- Legacy R736 compatibility surface.
+-- R736 remains theorem-bearing provenance.  It is not the current B max-cut.
 ------------------------------------------------------------------------
 
 unifierNavierStokesSharedWeightedExactlyTwoLeaves : Bool
