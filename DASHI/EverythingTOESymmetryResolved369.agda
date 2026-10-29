@@ -1264,8 +1264,90 @@ toeNavierStokesTerminalPromotionImpossible =
 
 
 ------------------------------------------------------------------------
--- Current periodic-B shared weighted wall from R736.
--- Proof ownership remains in R736 through the canonical NS Clay facade.
+-- Current periodic-B authoritative wall.
+-- The normalized facade follows NSABCDMaxCut20261007Exact and the current
+-- pure-analysis owner.  Historical R736 and external-commutator routes remain
+-- reachable below only as donor/provenance surfaces.
+------------------------------------------------------------------------
+
+toeNavierStokesCurrentBHighestInformationIsPhysicalR440 : Bool
+toeNavierStokesCurrentBHighestInformationIsPhysicalR440 =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440
+
+toeNavierStokesCurrentBHighestInformationIsPhysicalR440IsTrue :
+  toeNavierStokesCurrentBHighestInformationIsPhysicalR440 ≡ true
+toeNavierStokesCurrentBHighestInformationIsPhysicalR440IsTrue =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440IsTrue
+
+toeNavierStokesCurrentB4PhysicalPaymentClosed : Bool
+toeNavierStokesCurrentB4PhysicalPaymentClosed =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentClosed
+
+toeNavierStokesCurrentB4PhysicalPaymentStillOpen :
+  toeNavierStokesCurrentB4PhysicalPaymentClosed ≡ false
+toeNavierStokesCurrentB4PhysicalPaymentStillOpen =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentStillOpen
+
+toeNavierStokesCurrentB4FourMomentScalarClosed : Bool
+toeNavierStokesCurrentB4FourMomentScalarClosed =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosed
+
+toeNavierStokesCurrentB4FourMomentScalarClosedIsTrue :
+  toeNavierStokesCurrentB4FourMomentScalarClosed ≡ true
+toeNavierStokesCurrentB4FourMomentScalarClosedIsTrue =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosedIsTrue
+
+toeNavierStokesCurrentB4ZeroPaddingAuditClosed : Bool
+toeNavierStokesCurrentB4ZeroPaddingAuditClosed =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosed
+
+toeNavierStokesCurrentB4ZeroPaddingAuditClosedIsTrue :
+  toeNavierStokesCurrentB4ZeroPaddingAuditClosed ≡ true
+toeNavierStokesCurrentB4ZeroPaddingAuditClosedIsTrue =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosedIsTrue
+
+toeNavierStokesCurrentB1PhysicalProducerClosed : Bool
+toeNavierStokesCurrentB1PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB1PhysicalProducerClosed
+
+toeNavierStokesCurrentB2PhysicalProducerClosed : Bool
+toeNavierStokesCurrentB2PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB2PhysicalProducerClosed
+
+toeNavierStokesCurrentB3PhysicalProducerClosed : Bool
+toeNavierStokesCurrentB3PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB3PhysicalProducerClosed
+
+toeNavierStokesCurrentBContinuationInputsClosed : Bool
+toeNavierStokesCurrentBContinuationInputsClosed =
+  NSClayTOE.currentPeriodicBContinuationInputsClosed
+
+toeNavierStokesCurrentBR823ShouldReopen : Bool
+toeNavierStokesCurrentBR823ShouldReopen =
+  NSClayTOE.currentPeriodicBR823ShouldReopen
+
+toeNavierStokesCurrentBR823ShouldNotReopen :
+  toeNavierStokesCurrentBR823ShouldReopen ≡ false
+toeNavierStokesCurrentBR823ShouldNotReopen =
+  NSClayTOE.currentPeriodicBR823ShouldNotReopen
+
+toeNavierStokesHistoricalExternalCommutatorPureRouteClosed : Bool
+toeNavierStokesHistoricalExternalCommutatorPureRouteClosed =
+  NSClayTOE.historicalExternalSignedCommutatorRouteReachedPureCommutator
+
+toeNavierStokesHistoricalExternalCommutatorRoutePromotesClay : Bool
+toeNavierStokesHistoricalExternalCommutatorRoutePromotesClay =
+  NSClayTOE.historicalExternalSignedCommutatorRoutePromotesClay
+
+toeNavierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay :
+  toeNavierStokesHistoricalExternalCommutatorRoutePromotesClay ≡ false
+toeNavierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay =
+  NSClayTOE.historicalExternalSignedCommutatorRouteDoesNotPromoteClay
+
+
+------------------------------------------------------------------------
+-- Legacy R736 compatibility surface.
+-- R736 remains theorem-bearing provenance.  It is not the current B max-cut.
 ------------------------------------------------------------------------
 
 toeNavierStokesSharedWeightedExactlyTwoLeaves : Bool
