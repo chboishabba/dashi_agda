@@ -57,6 +57,7 @@ import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as Roadmap
 import DASHI.Physics.Closure.NSClaySubmissionEligibilityRoadmapReceipt as Eligibility
 import DASHI.Physics.Closure.NSTriadKNR650CurrentSharedWeightedWallRound736Exact as R736
 import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as BM2
+import DASHI.Physics.Closure.NSTriadKNR650Rational345SnapshotIdentificationRound850Exact as R850
 
 open Distance public using (NSClayDistanceFinalPromotion)
 
@@ -312,6 +313,10 @@ record NavierStokesCurrentProblemReceipt : Set where
     laneBM2FiniteFoldClosed : Bool
     laneBM2SamplewisePhysicalPaymentStillAnalytic : Bool
     laneBM2LiteralDissipationFoldStillAnalytic : Bool
+    laneBR829VectorClosed : Bool
+    laneBR829InstantaneousRateStrictlyNegative : Bool
+    laneBR829RealFiniteODETransportClosed : Bool
+    laneBR823IntegratedReserveRefuted : Bool
     laneBSharedWeightedExactlyTwoLeaves : Bool
     laneBWeightedPlusEndpointClosed : Bool
     laneBAugmentedCriticalWeightedClosed : Bool
@@ -341,6 +346,14 @@ canonicalNavierStokesCurrentProblemReceipt =
         BM2.samplewisePhysicalPaymentStillAnalytic
     ; laneBM2LiteralDissipationFoldStillAnalytic =
         BM2.literalFoldIntoGalerkinDissipationStillAnalytic
+    ; laneBR829VectorClosed =
+        R850.round850R829VectorClosed
+    ; laneBR829InstantaneousRateStrictlyNegative =
+        R850.round850InstantaneousActualRepositoryRateStrictlyNegative
+    ; laneBR829RealFiniteODETransportClosed =
+        R850.round850RealFiniteODETransportClosed
+    ; laneBR823IntegratedReserveRefuted =
+        R850.round850UniversalR823IntegratedReserveRefuted
     ; laneBSharedWeightedExactlyTwoLeaves =
         currentSharedWeightedExactlyTwoLeaves
     ; laneBWeightedPlusEndpointClosed =
@@ -377,6 +390,27 @@ currentProblemBM2GalerkinFoldRemainsAnalytic :
     canonicalNavierStokesCurrentProblemReceipt ≡ true
 currentProblemBM2GalerkinFoldRemainsAnalytic =
   BM2.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+currentProblemBR829VectorClosed :
+  laneBR829VectorClosed canonicalNavierStokesCurrentProblemReceipt ≡ true
+currentProblemBR829VectorClosed =
+  R850.round850R829VectorClosedIsTrue
+
+currentProblemBR829InstantaneousRateStrictlyNegative :
+  laneBR829InstantaneousRateStrictlyNegative
+    canonicalNavierStokesCurrentProblemReceipt ≡ true
+currentProblemBR829InstantaneousRateStrictlyNegative =
+  R850.round850InstantaneousActualRepositoryRateStrictlyNegativeIsTrue
+
+currentProblemBR829RealFiniteODETransportStillOpen :
+  laneBR829RealFiniteODETransportClosed
+    canonicalNavierStokesCurrentProblemReceipt ≡ false
+currentProblemBR829RealFiniteODETransportStillOpen = refl
+
+currentProblemBR823IntegratedReserveStillNotRefuted :
+  laneBR823IntegratedReserveRefuted
+    canonicalNavierStokesCurrentProblemReceipt ≡ false
+currentProblemBR823IntegratedReserveStillNotRefuted = refl
 
 currentProblemBWeightedPlusEndpointStillOpen :
   laneBWeightedPlusEndpointClosed
@@ -518,7 +552,7 @@ canonicalNavierStokesClayFrontierTOEZKPFrame =
     ; preconditionRule =
         "Require the canonical R736 owner, A/B/C/D max-cut, residual scheduler, Clay-distance receipt, authority guard, roadmap, and submission-eligibility owners to exist before normalization."
     ; invariantRule =
-        "Preserve theorem ownership. Preserve the A/B/C/D lane split. Preserve exactly two preferred R736 analytic leaves. Preserve the shared weighted/input-Laplacian carrier. Preserve the BM2 finite fold as closed while its samplewise and Galerkin-fold payments remain analytic. Do not promote producer strategies, circular Q-plus-minus shortcuts, finite carriers, or released C/D audit facts into a Clay proof."
+        "Preserve theorem ownership. Preserve the A/B/C/D lane split. Preserve exactly two preferred R736 analytic leaves. Preserve the shared weighted/input-Laplacian carrier. Preserve the BM2 finite fold as closed while its samplewise and Galerkin-fold payments remain analytic. Preserve the R829 instantaneous vector closure while real finite-ODE transport and integrated R823 refutation remain open. Do not promote producer strategies, instantaneous finite rates, circular Q-plus-minus shortcuts, finite carriers, or released C/D audit facts into a Clay proof."
     ; postconditionRule =
         "Expose the R736 shared wall, both open leaves, barrier compiler, structural gap, and exact false promotion gates through TOE, Unifier, and Unified.Physics."
     ; governanceRule =
