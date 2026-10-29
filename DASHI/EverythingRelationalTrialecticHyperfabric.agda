@@ -1,4 +1,5 @@
 module DASHI.EverythingRelationalTrialecticHyperfabric where
+import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
 
 ------------------------------------------------------------------------
 -- RELATIONAL TRIALECTIC HYPERFABRIC ROLLUP
