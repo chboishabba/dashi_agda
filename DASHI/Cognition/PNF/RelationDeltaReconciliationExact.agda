@@ -4,6 +4,8 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+
 ------------------------------------------------------------------------
 -- Desired/current keyed relation reconciliation.
 --
@@ -117,3 +119,16 @@ duplicateCandidateMutationAuthorityImpossible ()
 hotPathBypassImpossible :
   HotPathMayBypassRelationDeltaOwner → ⊥
 hotPathBypassImpossible ()
+
+
+------------------------------------------------------------------------
+-- Execution ownership does not promote authority.
+------------------------------------------------------------------------
+
+record RelationDeltaAuthorityBoundary : Set where
+  constructor relationDeltaAuthorityBoundary
+  field
+    ownerRouting : RelationDeltaOwnerRouting
+    executionNonPromotion : Authority.AuthorityNonPromotionBundle
+
+open RelationDeltaAuthorityBoundary public
