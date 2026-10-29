@@ -244,9 +244,9 @@ module LocalNielsenReducedCertificate where
   image posA = posC ∷ negA ∷ posC ∷ posB ∷ []
   image posB = negA ∷ posC ∷ []
   image posC = c
-  image negA = invert (image posA)
-  image negB = invert (image posB)
-  image negC = invert (image posC)
+  image negA = negB ∷ negC ∷ posA ∷ negC ∷ []
+  image negB = negC ∷ posA ∷ []
+  image negC = negC ∷ []
 
   substitute : Word → Word
   substitute [] = []
