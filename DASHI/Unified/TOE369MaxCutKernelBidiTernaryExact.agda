@@ -1,4 +1,5 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
+import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -209,3 +210,38 @@ toePermutationNoGoDoesNotCreateLinearAction :
   Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
 toePermutationNoGoDoesNotCreateLinearAction =
   Ibrahim.noGoDoesNotCreateLinearAction
+
+------------------------------------------------------------------------
+-- Source-typed weighted directed-graph/trialectic regression.
+-- This is not a Monster action, a smooth pants gluing, or an actual
+-- C3-equivariant weighted representation.
+------------------------------------------------------------------------
+
+toeWeightedMatrixDigraphRoundTrip :
+  WeightedGraph369.digraphToMatrix
+    (WeightedGraph369.matrixToDigraph
+      WeightedGraph369.dankaWeightedMatrixTenths)
+  ≡ WeightedGraph369.dankaWeightedMatrixTenths
+toeWeightedMatrixDigraphRoundTrip =
+  WeightedGraph369.matrixDigraphRoundTrip
+    WeightedGraph369.dankaWeightedMatrixTenths
+
+toeWeightedGraphHasSixArrows :
+  WeightedGraph369.nonzeroEdgeCount ≡ 6
+toeWeightedGraphHasSixArrows = WeightedGraph369.sixArrowsIncludingOneLoop
+
+toeWeightRotationNotAutomaticallyC3 :
+  ((source target : WeightedGraph369.Observer.Participant3) ->
+    WeightedGraph369.dankaWeight
+      (WeightedGraph369.rotateVertex source)
+      (WeightedGraph369.rotateVertex target)
+    ≡ WeightedGraph369.dankaWeight source target) -> ⊥
+toeWeightRotationNotAutomaticallyC3 =
+  WeightedGraph369.weightedDankaGraphNotC3Invariant
+
+toeWeightedGraphDoesNotDetermineAttachedFace :
+  WeightedGraph369.Descent.FactorsThrough
+    WeightedGraph369.graphObserver
+    WeightedGraph369.triadicConsumer -> ⊥
+toeWeightedGraphDoesNotDetermineAttachedFace =
+  WeightedGraph369.matrixDoesNotDetermineTrialecticFace
