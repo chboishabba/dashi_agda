@@ -24,6 +24,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 -- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Unified.YMA1SourceFrontierExact as YMA1Frontier
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
 
 -- Current-master R485/R546/R558 Goal-1/Pareto normalization.
@@ -1699,6 +1701,47 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
+
+------------------------------------------------------------------------
+-- Canonical Row-A1 source frontier.
+-- Agda remains theorem authority. Lean cross-prover progress does not promote.
+------------------------------------------------------------------------
+
+unifierYMA1SourceFrontierReceipt :
+  YMA1Frontier.YMA1SourceFrontierReceipt
+unifierYMA1SourceFrontierReceipt =
+  YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+unifierYMA1ZKPFrame :
+  YMA1Frontier.YMA1ZKPFrame
+unifierYMA1ZKPFrame =
+  YMA1Frontier.canonicalYMA1ZKPFrame
+
+unifierYMA1FrozenResearchCount :
+  ℕ
+unifierYMA1FrozenResearchCount =
+  YMA1Frontier.frozenResearchCount
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+unifierYMA1FrozenResearchCountIsFour :
+  unifierYMA1FrozenResearchCount ≡ 4
+unifierYMA1FrozenResearchCountIsFour =
+  YMA1Frontier.frozenResearchCountStillFour
+
+unifierYMA1RowAStillNotPromoted :
+  YMA1Frontier.rowAPromoted
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+  ≡ false
+unifierYMA1RowAStillNotPromoted =
+  YMA1Frontier.rowAStillNotPromoted
+
+unifierYMA1CompletionDoesNotSelfPromote :
+  Proof.promotable
+    (YMA1Frontier.rowACompletion
+      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
+  ≡ false
+unifierYMA1CompletionDoesNotSelfPromote =
+  YMA1Frontier.rowACompletionDoesNotSelfPromote
 
 ------------------------------------------------------------------------
 -- Canonical current Navier-Stokes four-lane problem receipt.
