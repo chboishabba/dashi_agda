@@ -9,6 +9,8 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.UnifiedMathLanguageAssertedProofs as Asserted
 import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Cognition.PNF.RelationDeltaReconciliationExact as RelationDeltaExact
+import DASHI.Cognition.PNF.RelationDeltaReconciliationRegression as RelationDelta
 
 pnfHyperfabricSurface : Hyperfabric.PNFHyperfabric369Surface
 pnfHyperfabricSurface =
@@ -37,3 +39,16 @@ pnfHyperfabricJPromotionBlocked :
   Spine.objectExternalJPromotion pnfHyperfabricObject ≡ false
 pnfHyperfabricJPromotionBlocked =
   refl
+
+
+------------------------------------------------------------------------
+-- SensibLaw relation-delta authority routing.
+--
+-- The unified surface consumes the golden PNF reconciliation theorem. It does
+-- not become an independent candidate mutation authority.
+------------------------------------------------------------------------
+
+unifiedCandidateRelationOwnerRouting :
+  RelationDeltaExact.RelationDeltaOwnerRouting
+unifiedCandidateRelationOwnerRouting =
+  RelationDelta.singleCandidateRelationOwner
