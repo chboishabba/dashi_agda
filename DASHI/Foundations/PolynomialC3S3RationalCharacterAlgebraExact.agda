@@ -26,7 +26,7 @@ reflect f o = f (Q.reflectionOn11 o)
 
 reflectInvolutive : (f : Field11ℚ) (o : Q.Orbit11) →
   reflect (reflect f) o ≡ f o
-reflectInvolutive f o = cong f (Q.reflectionInvolutive o)
+reflectInvolutive f o = cong f (Q.reflection11Involutive o)
 
 -- The unnormalised character operators are definable even without division:
 -- E(f)=f+s.f and O(f)=f-s.f. Actual normalized Reynolds projectors are
