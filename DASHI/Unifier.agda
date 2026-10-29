@@ -2270,3 +2270,25 @@ unifierFull365HermitianSumGivenAddressPermutation :
     ≡ OrbitWeighted365.orbitWeightedConvolutionAt a b target
 unifierFull365HermitianSumGivenAddressPermutation =
   Orbit365Perm.fullPairSumEqualsOrbitSumGivenPermutation
+
+
+------------------------------------------------------------------------
+-- Source-written unconditional 365 / 729 finite convolution theorem:
+-- exact dense rank-sorted 729 address permutation; the prior
+-- hypothesis-bearing permutation boundary is now supplied in source.
+-- Exact-head Agda kernel validation remains necessary.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P227729Orbit365RankSortPermutationExact as Orbit365Rank
+
+unifierActual729AddressesPermuteFrom365 :
+  Pairs365Owner.pair729 PairPerm365.↭ Orbit365Perm.expandedCanonicalPairs
+unifierActual729AddressesPermuteFrom365 =
+  Orbit365Rank.actualOriginal729PermutesToExpanded365
+
+unifierOrbit365FullHermitianConvolutionMatches729 :
+  (a b : HermitianSym729.Hermitian27)
+  (k : Convolution729.WideCube125) →
+  OrbitWeighted365.unreducedConvolutionAt a b k
+    ≡ OrbitWeighted365.orbitWeightedConvolutionAt a b k
+unifierOrbit365FullHermitianConvolutionMatches729 =
+  Orbit365Rank.orbit365FullHermitianConvolutionEquals729
