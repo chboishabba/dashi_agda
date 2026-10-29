@@ -11,6 +11,7 @@ package "DASHI Biology domain" {
   component "ObserverRelativeReachableSubfabricExact" as Reach
   component "TrustedFriendEcologyInteractionExact" as Relation
   component "SocialEcologicalAffordanceConeExact" as Ecology
+  component "HistoryConditionedSocialEcologyOptionConeExact" as HistoryCone
   component "EmbodiedSocialEcologyRelationalHistoryObligationExact\n(golden adapter)" as Adapter
 }
 
@@ -40,6 +41,7 @@ Reach --> Adapter : accessible branch
 Relation --> Adapter : relation x ecology
 Ecology --> Adapter : realised affordance
 Fabric --> Adapter : generic history/relation fabric
+HistoryCone --> Adapter : proof-bearing option-cone contractions
 Interaction --> Relation : nonseparability test
 
 Adapter --> TOE : typed receipt + ZKP frame
