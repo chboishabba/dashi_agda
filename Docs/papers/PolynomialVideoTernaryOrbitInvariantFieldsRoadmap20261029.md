@@ -191,3 +191,19 @@ Independent GitHub SOURCE readback checked 27 index cases in the lexicographic o
 | O40 | Construct explicit characteristic-zero S3 intertwiners on the seven invariant orbit blocks of sizes 1,2,3,3,6,6,6 and assemble an actual `Q^27 ≃ 7 triv ⊕ 4 sign ⊕ 8 std₂` S3-module isomorphism | OPEN; representation matrices and exact-head kernel witness required |
 
 With O37–O39 the group-set/coarse-quotient side is source-complete at the existing finite carrier level. The next mathematical wall is **not** numeric: a characteristic-zero block-intertwiner theorem (O40) and compiler/kernel acceptance of the existing source; separately, actual continuous polynomial braid and Galois results remain open. No CI work is needed, but no CI absence can be confused with successful kernel checking.
+
+
+## 29 October continuation — exact C2 action carrier for rational characters (O33–O36)
+
+**Commits:** `f74f8d55` authored `DASHI/Foundations/PolynomialC3S3RationalCharacterAlgebraExact.agda`; `23cfcedc` corrected its reference to the *actual* inherited `Q.reflection11Involutive`. This is a small source-written lemma/definition surface; **NOT Agda kernel verified** and not wired to TOE roots until proof acceptance. No ESD changes.
+
+The existing 11-orbit C3 quotient and its *actual* induced reflection are reused, rather than re-deriving their orbit classifier. On rational-valued 11-orbit fields, `reflect f o=f(reflectionOn11 o)`, with pointwise involution proof via the inherited theorem. Define `evenNumerator f=f+reflect f` and `oddNumerator f=f-reflect f`. These are genuine literal rational-function operators. They do not yet prove idempotent normalized Reynolds projection, invariant fixed-space decomposition, or dimensional rank in Agda. Those remain targets despite the already executed exact rational Python regression.
+
+- [x] **O33** Build a source-written rational field action using existing C3→11 and reflection theorem; no second orbit ontology.
+- [x] **O34** Define unnormalised C2 character-numerator operators, separate from trit-valued representative sampling.
+- [ ] **O35** Reuse Agda `Data.Rational.Properties` to prove sign-equivariance, `even+odd=2f`, normalized `1/2` projections, orthogonality and 7+4 rank/bijection with original explicit 3 fixed and 4 swapped orbit pairs; exact Agda checker receipt required.
+- [ ] **O36** Compare the new rational reduction against OpenAI #SAT / Max-Cut only on concrete invariant constraint graph/objective and polynomial-size uniform input family. An isolated fixed 27-state representation has no asymptotic hardness claim.
+
+**Historical ownership:** classical Reynolds operator and Maschke averaging are prior mathematics, e.g. https://mathworld.wolfram.com/ReynoldsOperator.html and https://math.mit.edu/~etingof/representationtheorybook.pdf (Maschke). Earlier DASHI 11/7 classifier and trit projection owners retain construction credit; new branch-only Agda code authorship is separate; earlier Ibrahim Monster 3B action stays independent. Rational 1/2 and 1/3 division cannot be copied into characteristic-three field without additional structure.
+
+**Accuracy ceiling:** previous Python report is a local exact arithmetic regression; this new module has not been typechecked with Agda. It therefore pays O33/O34 at the *source-written* level only. Keep O35–O36 as unpaid, no CI claim needed.
