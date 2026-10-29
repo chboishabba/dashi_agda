@@ -81,3 +81,22 @@ Original math: Galois's S3 alternating subgroup, finite orbit theory, Vandermond
 - **P3:** Fourier on eleven/seven orbits; construct action/intertwining for a defined coefficient ring and a real operator. No averaging in characteristic three.
 - **P4:** independent polynomial radical/Galois, braid topology, continuous Spin, Hatcher wild-geometric obligations remain separately tracked in `PolynomialMonodromyTernaryQuaternionBridge.md`.
 - **PROVENANCE:** preserve current owner and original mathematics vs code/executed/kernel receipts, negative-promotion contracts, zero ESD surface changes.
+
+## Pareto snowball continuation: actual orbit-sampling operators, no characteristic-three division
+
+Source-written `DASHI/Foundations/PolynomialC3S3OrbitSamplingProjectionExact.agda` defines the natural chosen-representative sampling maps on `Field27`:
+`P_C3(f)(x) = f(representative11(classify11(x)))`, and
+`P_S3(f)(x) = f(Shape.shapeRepresentative(Shape.shapeClass(x)))`.
+It source-writes:
+- `projectC3Idempotent`, `projectS3Idempotent`: both retractions satisfy `P²=P` pointwise.
+- `projectC3Invariant`, `projectS3Invariant`: their ranges lie in the respective fixed-point/invariant-field spaces.
+- `projectC3FixesInvariant`, `projectS3FixesInvariant`: every field invariant under the relevant original permutation action is fixed by its projector, establishing exact range.
+- `chosenSevenRepresentativeIsElevenRepresentative`: the original seven-shape representatives coincide with the selected representatives of their eleven C3 classes. This is a REAL typed compatibility identity, checked by seven constructor cases, not a cardinality match.
+- `projectC3AfterS3IsS3`, `projectS3AfterC3IsS3`: the projections absorb in both orders, `P_C3 P_S3 = P_S3 P_C3 = P_S3`.
+
+Mathematical receiver: idempotent invariant-field normalization. This is **not** the character-theoretic Fourier-average `(1/|G|) Σ_g g·f`; it works on three-valued fields in characteristic three without a division operation, but it depends on chosen representative order. Do not call it a canonical orthogonal projection or physically calibrated wave operator.
+
+Independent executed Python check: 100 finite random 27-fields verified both idempotences and two-sided absorption using consistent nested orbit representatives. Agda original-source heads were read back, but Agda kernel, exact full-checkout Python runner and CI remain unrun. No ESD edit, no external owner or Ibrahim Monster 3B status change.
+
+**New prioritized obligation O25**: pin Agda/stdlib and type-check this actual sampling projector and 7/11/27 vector atlas; repair any elaboration failure.
+**O26**: if useful for the video's phase/Fourier representation, instantiate a true scalar `C3`-character transform on `Field11` with explicit source/target ring, compare `P_C3,P_S3` to the corresponding averaging projectors ONLY after confirming the correct coefficient extension/characteristic and action intertwiner.
