@@ -13,12 +13,18 @@ on:
       - 'DASHI/Biology/TrustedFriendRelationalScaffoldingExact.agda'
       - 'DASHI/Biology/TrustedFriendRelationalGateExact.agda'
       - 'DASHI/Biology/TrustedFriendEcologyInteractionExact.agda'
+      - 'DASHI/Biology/EmbodiedSocialEcologyRelationalHistoryObligationExact.agda'
       - 'DASHI/Biology/NeuroqueerRelationshipEcologyExact.agda'
       - 'DASHI/Biology/SolisProjectProvenanceExact.agda'
       - 'DASHI/Biology/SolisSystemSensitivityBoundaryExact.agda'
       - 'DASHI/Biology/NeurodivergentSocialEcologyCrossPollinationExact.agda'
       - 'DASHI/Core/ContrastiveInterventionResponseExact.agda'
       - 'DASHI/Biology/DomainEverything.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'Docs/support/reference/NeurodivergentSituatedReachabilityTOE.md'
+      - 'Docs/diagrams/neurodivergent-situated-reachability-toe.puml'
       - '.github/workflows/neurodivergent-social-ecology.yml'
   workflow_dispatch:
 
@@ -91,6 +97,9 @@ jobs:
               DASHI/Biology/TrustedFriendEcologyInteractionExact.agda
               DASHI/Biology/NeurodivergentSocialEcologyCrossPollinationExact.agda
               DASHI/Biology/DomainEverything.agda
+              DASHI/EverythingTOESymmetryResolved369.agda
+              DASHI/Unifier.agda
+              DASHI/Unified/Everything.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-neurodivergent-social-ecology-check.log 2>&1
