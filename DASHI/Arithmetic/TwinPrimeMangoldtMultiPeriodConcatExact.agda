@@ -13,6 +13,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
+import Data.Nat.Properties as NP
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as Sum
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as Bidi
 import DASHI.Arithmetic.TwinPrimeMangoldtFinIntervalReindexExact as Row
@@ -35,7 +36,8 @@ sumIntervalSplit :
   ≡ Sum.sumInterval S f start (countLeft + countRight)
 sumIntervalSplit S M f start zero countRight =
   leftIdentity M (Sum.sumInterval S f start countRight)
-sumIntervalSplit S M f start (suc countLeft) countRight =
+sumIntervalSplit S M f start (suc countLeft) countRight
+  rewrite NP.+-suc start countLeft =
   trans
     (associative M
       (f start)
