@@ -20,6 +20,12 @@ import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
 import DASHI.Core.CompositionalComplianceExact as Compliance
 import DASHI.Core.InstitutionalNormProductionExact as InstitutionalNorm
 import DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact as FanningLiteral
+import DASHI.Governance.SafeJustIndicatorSystemExact as ONeillIndicators
+import DASHI.Governance.ProvisioningGeometryExact as Provisioning
+import DASHI.Governance.ONeill2018MethodsBoundaryExact as ONeillMethods
+import DASHI.Governance.Fanning2022ProjectionBoundaryExact as FanningProjection
+import DASHI.Governance.Kallis2025ClaimByClaimEvidenceRealizationExact as KallisClaims
+import DASHI.Governance.Kallis2025GDP15000UpstreamStudyBridgeExact as KallisGDP
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -499,4 +505,145 @@ canonicalSettlementNormTransmissionZKPFrame =
     "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only"
     "F: TOE and Unifier export non-promotion receipts; same visible policy does not imply the same authority source"
     "verification: reuse-first code search; trust-escape scan; ESD diff scan; exact-head Agda kernel check"
+    false false false false
+
+
+------------------------------------------------------------------------
+-- SAFE/JUST PAPER-CHAIN TOE NORMALIZATION
+--
+-- Golden source chain:
+--   O'Neill et al. 2018 -> Fanning et al. 2022 -> Kallis et al. 2025.
+--
+-- This facade does not own the domain mathematics.  It only makes the
+-- canonical non-promotion boundaries reachable from the Fleet/TOE surface.
+------------------------------------------------------------------------
+
+ONeillCountProjectionBoundary : Set
+ONeillCountProjectionBoundary = ONeillIndicators.CountProjectionBoundary
+
+fleetONeillCountProjectionBoundary : ONeillCountProjectionBoundary
+fleetONeillCountProjectionBoundary =
+  ONeillIndicators.canonicalCountProjectionBoundary
+
+fleetONeillSameBioCountDoesNotRecoverCO2 :
+  ONeillIndicators.co2Over ONeillIndicators.bioA ≡
+  ONeillIndicators.co2Over ONeillIndicators.bioB → ⊥
+fleetONeillSameBioCountDoesNotRecoverCO2 =
+  ONeillIndicators.sameBioCountDoesNotRecoverCO2
+
+fleetONeillObservedResultDoesNotCreateUniversalImpossibility :
+  ONeillMethods.UniversalImpossibilityCertificate → ⊥
+fleetONeillObservedResultDoesNotCreateUniversalImpossibility =
+  ONeillMethods.paperDoesNotSupplyUniversalImpossibility
+
+ProvisioningBoundary : Set
+ProvisioningBoundary = Provisioning.ProvisioningBoundary
+
+fleetProvisioningBoundary : ProvisioningBoundary
+fleetProvisioningBoundary =
+  Provisioning.canonicalProvisioningBoundary
+
+fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
+  Provisioning.IdentifiedProvisioningTreatmentEffect → ⊥
+fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
+  Provisioning.observedResidualDoesNotSupplyTreatmentIdentification
+
+FanningProjectionBoundary : Set
+FanningProjectionBoundary = FanningProjection.FanningProjectionBoundary
+
+fleetFanningProjectionBoundary : FanningProjectionBoundary
+fleetFanningProjectionBoundary =
+  FanningProjection.canonicalFanningProjectionBoundary
+
+fleetFanningExtentDoesNotRecoverIndicatorVector :
+  FanningProjection.FanningProjectionBoundary.extentViewRecoversIndicatorVector
+    FanningProjection.canonicalFanningProjectionBoundary ≡ false
+fleetFanningExtentDoesNotRecoverIndicatorVector = refl
+
+fleetFanningBAUProjectionIsNotObserved2050Outcome :
+  FanningProjection.FanningProjectionBoundary.BAUProjectionIsObserved2050Outcome
+    FanningProjection.canonicalFanningProjectionBoundary ≡ false
+fleetFanningBAUProjectionIsNotObserved2050Outcome = refl
+
+GDP15000UpstreamBoundary : Set
+GDP15000UpstreamBoundary = KallisGDP.GDP15000UpstreamBoundary
+
+fleetGDP15000UpstreamBoundary : GDP15000UpstreamBoundary
+fleetGDP15000UpstreamBoundary =
+  KallisGDP.canonicalGDP15000UpstreamBoundary
+
+fleetGDP15000DoesNotOpenCausalConsumer :
+  KallisClaims.AdequateFor
+    KallisClaims.gdp15000Realization
+    KallisClaims.causalMechanismConsumer → ⊥
+fleetGDP15000DoesNotOpenCausalConsumer =
+  KallisGDP.upstreamStudyDoesNotOpenCausalConsumer
+
+record SafeJustPaperChainBoundary : Set where
+  constructor safe-just-paper-chain-boundary
+  field
+    agdaIsGoldenFormalAuthority : Bool
+    agdaIsGoldenFormalAuthorityIsTrue :
+      agdaIsGoldenFormalAuthority ≡ true
+    countProjectionRecoversIndicatorCoordinates : Bool
+    countProjectionRecoversIndicatorCoordinatesIsFalse :
+      countProjectionRecoversIndicatorCoordinates ≡ false
+    observedCountryResultCreatesUniversalImpossibility : Bool
+    observedCountryResultCreatesUniversalImpossibilityIsFalse :
+      observedCountryResultCreatesUniversalImpossibility ≡ false
+    resourceQuantityAloneDeterminesNeedOutcome : Bool
+    resourceQuantityAloneDeterminesNeedOutcomeIsFalse :
+      resourceQuantityAloneDeterminesNeedOutcome ≡ false
+    observedProvisioningGapIdentifiesCausalTreatmentEffect : Bool
+    observedProvisioningGapIdentifiesCausalTreatmentEffectIsFalse :
+      observedProvisioningGapIdentifiesCausalTreatmentEffect ≡ false
+    fanningAggregateExtentRecoversIndicatorVector : Bool
+    fanningAggregateExtentRecoversIndicatorVectorIsFalse :
+      fanningAggregateExtentRecoversIndicatorVector ≡ false
+    fanningBAUProjectionIsObservedFutureOutcome : Bool
+    fanningBAUProjectionIsObservedFutureOutcomeIsFalse :
+      fanningBAUProjectionIsObservedFutureOutcome ≡ false
+    gdp15000PatternIsUniversalCausalThreshold : Bool
+    gdp15000PatternIsUniversalCausalThresholdIsFalse :
+      gdp15000PatternIsUniversalCausalThreshold ≡ false
+    descriptiveEvidenceCreatesPolicyMandate : Bool
+    descriptiveEvidenceCreatesPolicyMandateIsFalse :
+      descriptiveEvidenceCreatesPolicyMandate ≡ false
+    leanMirrorCreatesAgdaAuthority : Bool
+    leanMirrorCreatesAgdaAuthorityIsFalse :
+      leanMirrorCreatesAgdaAuthority ≡ false
+    existingLiteralLegalGovernanceBoundaryPreserved : Bool
+    existingLiteralLegalGovernanceBoundaryPreservedIsTrue :
+      existingLiteralLegalGovernanceBoundaryPreserved ≡ true
+
+canonicalSafeJustPaperChainBoundary : SafeJustPaperChainBoundary
+canonicalSafeJustPaperChainBoundary =
+  safe-just-paper-chain-boundary
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
+
+SafeJustPaperChainZKPFrame : Set
+SafeJustPaperChainZKPFrame = ParetoSnowball.TOEZKPFrame
+
+canonicalSafeJustPaperChainZKPFrame : SafeJustPaperChainZKPFrame
+canonicalSafeJustPaperChainZKPFrame =
+  ParetoSnowball.toe-zkp-frame
+    "O: normalize the O'Neill 2018 -> Fanning 2022 -> Kallis 2025 safe-and-just evidence chain into the existing DASHI TOE"
+    "R: reuse canonical indicator, provisioning, methods, projection, claim-authority, literal-data, compliance, and Fleet owners"
+    "C: expose exact aliases and non-promotion receipts; do not create a second safe-and-just calculus"
+    "S: count summaries, aggregate extents, forecasts, descriptive GDP associations, operational records, and Lean mirrors do not self-promote"
+    "L: one governance normalization lane; the 584 discharged fibres remain discharged and the 44 contradiction gaps remain separate"
+    "P: the three source papers and canonical Agda owners exist; source attribution remains attached; ESD surfaces are read-only"
+    "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only"
+    "F: TOE, Unifier, and Unified.Everything expose the same paper-chain and legal-governance boundaries"
+    "verification: search/reuse first; local related/discover/lineage when available; trust-escape scan; ESD diff scan; exact-head Agda kernel receipt"
     false false false false
