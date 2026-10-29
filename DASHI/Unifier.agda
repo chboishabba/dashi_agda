@@ -1710,7 +1710,7 @@ unifiedWetteRule915CurrentProblemBoundary :
 unifiedWetteRule915CurrentProblemBoundary =
   Wette915.canonicalRule915CurrentProblemBoundary
 
-unifiedWetteRule915ZKPFrame : Wette915.Introspection.ZKPFrame
+unifiedWetteRule915ZKPFrame : Wette915.Rule915MajorZKPFrame
 unifiedWetteRule915ZKPFrame =
   Wette915.canonicalRule915MajorZKPFrame
 
