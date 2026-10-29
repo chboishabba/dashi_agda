@@ -1862,3 +1862,30 @@ unifierGDP15000DoesNotOpenCausalConsumer :
   FleetGapTOE.GDP15000CausalConsumerPromotion → ⊥
 unifierGDP15000DoesNotOpenCausalConsumer =
   FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
+
+
+unifierMeta2026SettlementNormCalibration :
+  FleetGapTOE.Meta2026SettlementNormCalibration
+unifierMeta2026SettlementNormCalibration =
+  FleetGapTOE.fleetMeta2026SettlementNormCalibration
+
+unifierMetaSettlementDoesNotBindCompetitors :
+  FleetGapTOE.LegalNorm.settlementAloneLegallyBindsTikTokOrYouTube
+    FleetGapTOE.LegalNorm.canonicalMeta2026SettlementNormCalibration
+  ≡ false
+unifierMetaSettlementDoesNotBindCompetitors =
+  FleetGapTOE.fleetMetaSettlementDoesNotBindCompetitors
+
+unifierMetaSettlementDoesNotCreateFederalStatute :
+  FleetGapTOE.LegalNorm.settlementCreatesFederalStatute
+    FleetGapTOE.LegalNorm.canonicalMeta2026SettlementNormCalibration
+  ≡ false
+unifierMetaSettlementDoesNotCreateFederalStatute =
+  FleetGapTOE.fleetMetaSettlementDoesNotCreateFederalStatute
+
+unifierJMDPosterDoesNotCreateLegalAuthority :
+  FleetGapTOE.LegalNorm.jmdPosterCreatesLegalAuthority
+    FleetGapTOE.LegalNorm.canonicalMeta2026SettlementNormCalibration
+  ≡ false
+unifierJMDPosterDoesNotCreateLegalAuthority =
+  FleetGapTOE.fleetJMDPosterDoesNotCreateLegalAuthority
