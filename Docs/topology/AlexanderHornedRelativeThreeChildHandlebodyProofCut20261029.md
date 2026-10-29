@@ -234,3 +234,61 @@ finite source-specific rational witness. No
 Agda kernel certification, precise PL
 handle-slide, ambient horned sphere or
 Monster 3B identity is claimed.
+
+
+## G1 strengthened: exact tame-complement meridian linking chart
+
+We now have more than the abstract genus-three regular neighbourhood.
+The new exact rational source
+`scripts/alexander_horned_three_child_dual_meridian_g1.py`
+uses the same three triangles, each with a simple planar spanning
+2-disk, and constructs three closed **polygonal rectangle loops**
+in R³ minus the graph. Each rectangle passes from z=-2 to z=+2 at
+one point strictly INSIDE precisely one triangle and returns through
+the plane at one point outside ALL three triangle disks:
+
+```text
+inside    outside   spanning disk
+( 6, 0)   ( 9, 0)      a
+(-4, 5)   (-8,10)      b
+(-4,-5)   (-8,-10)     c
+```
+
+The exact determinant/segment audit proves all six crossing
+projections avoid the nine embedded graph edges and that each
+rectangle has exactly ONE interior transverse intersection with
+its own spanning disk, zero with the other disks. Orientation of
+the loops gives the integral LINKING matrix
+
+```text
+         a  b  c
+  ma = [ 1, 0, 0 ]
+  mb = [ 0, 1, 0 ]
+  mc = [ 0, 0, 1 ]
+```
+
+As the graph is compact and the loops are disjoint from it,
+choose the regular-neighbourhood radius sufficiently small
+so they remain in its tame EXTERIOR. This certifies concrete
+dual linking loops in the complement of the THREE-LOOP
+TAME HANDLEBODY. In particular their homology classes pair
+with the three graph cycles as the identity. This is not
+a proof of the full free fundamental-group presentation
+on those loops (which uses standard unknotted planar
+handlebody complement theory), nor a proof that the
+three loops become the correct *wild child meridians*
+after the yet-to-be-designed ternary horn linking.
+
+**Geometric wall now sharper:**
+the three tame complementary meridian candidates are
+explicit. The missing map is the actual 3D *satellite
+stage* embedding, with a supported cap-fixed Nielsen
+move and a properly embedded theta ribbon whose
+boundary represents `[a,b][b,c]` in the SAME
+exterior. Without those, neither the parent stage
+inclusion nor the wild direct-limit exterior group
+is identified.
+
+Exact rational local audit PASSED for the linking
+matrix. This is NOT the Agda kernel, a certified
+3D PL triangulation or a physical acoustic experiment.
