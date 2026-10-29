@@ -4,9 +4,9 @@
 
 - Normalized the existing world/macro/sub-eigen/fibre, hierarchical Pareto, and topic-conductor donors onto current master.
 - Added the authoritative five-level AO distinction: MP eigenspace, primary topic, subtopic, complete-link fibre, and typed unblocked goal.
-- Added explicit K=50 and K=100 spectral truncation choices and an abstract MP spectral-basis receipt with above-bulk-edge and orthonormality obligations.
+- Added explicit K=50 and K=100 spectral truncation choices and an MP spectral-basis receipt with an explicit empirical `(1/M) A A^T` same-object obligation, above-bulk-edge evidence, and orthonormality obligations.
 - Added typed rejection boundaries for hexadecimal literals, memory-address noise, raw UI tokens, and raw DOM tokens.
-- Added a total `Fin 20` conductor schedule. Every slot requires an unblocked, Pareto-eligible, top-ranked goal. Every distinct worker pair requires `noTypedMeet` evidence.
+- Added a total `Fin 20` conductor schedule. Every slot requires an unblocked, Pareto-eligible, top-ranked goal. Distinct slots require distinct goals and `noTypedMeet` evidence.
 - Recorded that a serial modulo-eight loop is not full W=20 concurrency.
 - Added a literal combinatorial Max Cut surface with two-side partitions, crossing edges, boundary vertices, a discrete-Laplacian cut witness, and a Goemans-Williamson SDP receipt boundary.
 - Reused existing Yang-Mills gauge/coarse residual and Navier-Stokes exact commutator owners through explicit same-object/non-promotion gates.
