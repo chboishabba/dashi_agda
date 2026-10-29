@@ -24,6 +24,7 @@ import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.QueryIndexedProjectionAdequacyExact
 import DASHI.Core.CoarseFineDepthDecompositionExact
+import DASHI.Core.DecimalResidualRefinementExact as Decimal
 import DASHI.Core.DecimalStageResidualBarrierExact as DecimalStage
 import DASHI.Core.FiniteTypedBranchingKernelExact
 import DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact as Branch
@@ -63,9 +64,9 @@ record SituatedFibreTOEZKPFrame : Set₁ where
     lane : Barrier.StageTransitionBarrierBoundary
     precondition :
       DecimalStage.refinedStage
-        DASHI.Core.DecimalResidualRefinementExact.d9 2
+        Decimal.d9 2
       ≡ DecimalStage.digitStage
-          DASHI.Core.DecimalResidualRefinementExact.d9
+          Decimal.d9
     invariant :
       NF.NonFactorabilityWitness
         (Trajectory.endpointObserver Trajectory.demoSystem)
