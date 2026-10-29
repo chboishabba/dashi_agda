@@ -7,7 +7,7 @@ module DASHI.Foundations.PolynomialC3S3RationalCharacterAlgebraExact where
 -- Source-written; Agda kernel verification pending; not yet a TOE import.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _+_; -_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitQuotientExact as Q
 import DASHI.Biology.MoonshineOrbifoldSectorProjectorExact as Existing
@@ -40,8 +40,7 @@ negativeProjectionAt f o =
 -- source-written arithmetic reimplementation.
 reflectionPositiveNegativeReconstruct :
   (f : Field11ℚ) (o : Q.Orbit11) →
-  Data.Rational.Base._+_
-    (positiveProjectionAt f o) (negativeProjectionAt f o)
+  positiveProjectionAt f o + negativeProjectionAt f o
   ≡ f o
 reflectionPositiveNegativeReconstruct f o =
   Existing.positivePlusNegativeFirst (reflectionPair f o)
@@ -70,7 +69,7 @@ positiveReflectionInvariant f o =
 negativeReflectionOdd :
   (f : Field11ℚ) (o : Q.Orbit11) →
   negativeProjectionAt f (Q.reflectionOn11 o)
-    ≡ Data.Rational.Base.-_ (negativeProjectionAt f o)
+    ≡ - negativeProjectionAt f o
 negativeReflectionOdd f o =
   trans
     (cong (λ pair → Existing.first (Existing.negativeProjection pair))
