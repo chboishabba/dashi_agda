@@ -2,6 +2,7 @@ module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
+import DASHI.Unified.RiemannRHMaxCutTOEExact as RiemannRHTOE
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -404,3 +405,41 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Riemann / RH current max-cut TOE surface.
+------------------------------------------------------------------------
+
+unifiedRiemannRHCurrentFrontier :
+  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier
+unifiedRiemannRHCurrentFrontier =
+  RiemannRHTOE.currentThreeTapFrontier
+
+unifiedRiemannRHZKPFrame :
+  RiemannRHTOE.RiemannRHTOEZKPFrame
+unifiedRiemannRHZKPFrame =
+  RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
+
+unifiedRiemannRHA1CarrierStillOpen :
+  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
+    unifiedRiemannRHCurrentFrontier ≡ false
+unifiedRiemannRHA1CarrierStillOpen =
+  RiemannRHTOE.a1CarrierSummationStillOpen
+
+unifiedRiemannRHA2ScalarStillOpen :
+  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
+    unifiedRiemannRHCurrentFrontier ≡ false
+unifiedRiemannRHA2ScalarStillOpen =
+  RiemannRHTOE.a2StrictScalarStillOpen
+
+unifiedRiemannRHRouteBStillOpen :
+  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
+    unifiedRiemannRHCurrentFrontier ≡ false
+unifiedRiemannRHRouteBStillOpen =
+  RiemannRHTOE.routeBEventualGapStillOpen
+
+unifiedRiemannRHStillOpen :
+  RiemannRHTOE.ThreeTap.ThreeTapCurrentLeanFrontier.rhDerivedHere
+    unifiedRiemannRHCurrentFrontier ≡ false
+unifiedRiemannRHStillOpen =
+  RiemannRHTOE.riemannHypothesisStillOpen
