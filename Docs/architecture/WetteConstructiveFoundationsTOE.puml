@@ -33,8 +33,10 @@ package "Lean mirror" {
 Source --> P145 : transcription authority
 P145 --> Scaffold : same typed slots
 Scaffold --> D18 : shared 10-15 retained
+D18Route ..> D18 : sufficient route; not proved complete
 Scaffold --> D27 : shared 10-15 retained
 D18 --> Join : certified major trace
+Scaffold --> D18Route : selected search route
 D27 --> Join : certified major trace
 Join --> Rule915 : proof-carrying cutset
 Rule915 --> TOE : canonical owner alias
@@ -45,12 +47,15 @@ Fleet ..> Rule915 : no proof promotion
 P145 ..> Lean : golden mirror boundary
 Rule915 ..> Lean : golden mirror boundary
 
-note right of D18
+note right of D18Route
 Precondition:
 five historical 9.3.23 premises
 plus exact core-leaf match.
 Postcondition:
 D18 closes through two 9.3.9 steps.
+Invariant:
+this route is sufficient only.
+No completeness claim.
 end note
 
 note right of D27
