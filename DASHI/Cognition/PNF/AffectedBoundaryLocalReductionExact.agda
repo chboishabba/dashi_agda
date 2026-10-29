@@ -108,6 +108,39 @@ record AffectedLocalReducer
 
 open AffectedLocalReducer public
 
+------------------------------------------------------------------------
+-- Sound affected-key selection.
+--
+-- Lineage: this normalizes the useful no-missing-wakeup boundary from the
+-- historical itir-edit-transport-leaf-locality-v2
+-- DependencyIndexedOwnerWakeupExact owner. The historical file is not revived.
+--
+-- Extra affected keys may cause conservative work. Missing a required key may
+-- suppress semantic recomputation and is therefore forbidden.
+------------------------------------------------------------------------
+
+record SoundAffectedKeySelection
+    (Delta Key : Set) : Set₁ where
+  field
+    requiredAffected : Delta → Key → Set
+    selectedAffected : Delta → Key → Set
+    noMissingAffectedKey :
+      ∀ delta key →
+      requiredAffected delta key →
+      selectedAffected delta key
+
+open SoundAffectedKeySelection public
+
+requiredAffectedKeyCannotBeMissing :
+  ∀ {Delta Key : Set}
+    (selection : SoundAffectedKeySelection Delta Key)
+    (delta : Delta)
+    (key : Key) →
+  requiredAffected selection delta key →
+  selectedAffected selection delta key
+requiredAffectedKeyCannotBeMissing selection delta key =
+  noMissingAffectedKey selection delta key
+
 parentLocalReducerAsAffectedLocalReducer :
   ∀ {ParentState ChildDelta : Set} →
   ParentLocalReducer ParentState ChildDelta →
