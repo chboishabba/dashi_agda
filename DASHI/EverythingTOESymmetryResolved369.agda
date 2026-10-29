@@ -11,6 +11,7 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Unified.PNFHyperfabric as UnifiedPNF
 import DASHI.Cognition.PNF.RelationDeltaReconciliationExact as RelationDeltaExact
 import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -1488,3 +1489,8 @@ toeCandidateRelationRuntimeAuthorityStillFalse =
   Authority.bundleRuntimeAuthorityIsFalse
     (RelationDeltaExact.executionNonPromotion
       toeCandidateRelationExecutionBoundary)
+
+
+toeCandidateRelationZKPFrame : Introspective.ZKPFrame
+toeCandidateRelationZKPFrame =
+  UnifiedPNF.unifiedCandidateRelationZKPFrame
