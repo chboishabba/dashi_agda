@@ -104,6 +104,19 @@ open WheelIbrahimCollision public using
   )
 
 
+import DASHI.Arithmetic.TwinPrimeNat270ConsumerGuidedStrictRefinementExact as NatPeriodRefinement
+open NatPeriodRefinement public using
+  ( coarseResidue
+  ; finePeriod
+  ; coarseFactorsThroughFine
+  ; fiftyNineAnd329SameResidue
+  ; fiftyNineAnd329DifferentPeriod
+  ; strictPeriodRefinement
+  ; twinConsumerSeparates
+  ; strictConsumerGuidedPeriodRefinement
+  ; noActualTwinConsumerFromBareFin270
+  )
+
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as MangoldtFiniteSum
 open MangoldtFiniteSum public using
   ( AdditiveScalar
