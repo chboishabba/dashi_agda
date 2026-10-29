@@ -971,3 +971,33 @@ unconditional number theory; neither finite CRT nor S3/C2
 orbit equivalence supplies it. Avoid Monster same-object
 promotion and keep prior Ibrahim 3B ownership.
 **Source-written, kernel pending. No CI or ESD edits.**
+
+## 29 October 2026 — multi-period finite-sum max-cut (M13)
+
+**New source owner:** `DASHI/Arithmetic/TwinPrimeMangoldtMultiPeriodConcatExact.agda`.
+Reuses the pre-existing scalar fold, pointwise Mangoldt residual BIDI and
+Fin270 period-row owners. The explicitly supplied `MonoidSum` requires
+only left identity and associativity of addition; it assumes neither
+scalar commutativity nor analytic positivity. `sumIntervalSplit`
+proves concatenation of any two ordered finite intervals; 
+`blockRowsCorrect` inducts over any number of complete 270-element
+blocks, beginning at any Nat start index. `codeBlockRows` defines
+the coded multi-period correlation sum. Its BIDI correctness is
+**not yet proved**, nor is arbitrary partial-row partition.
+
+**Executed independent local Python:** 42 comparisons over 0..5 complete
+blocks and 7 starting offsets; all full ordered sequences matched.
+This is computational testing only; Agda kernel and CI not run.
+All 3 TOE roots import the module. No ESD files touched.
+
+**Next highest-value proof cuts:** establish `codeBlockRows` to
+`blockRows` via the true `periodIndex` step arithmetic;
+prove prefix/suffix partial-row assembly and arbitrary interval
+partition (M13); then prime-power exceptional terms and bounds
+(M14/M15), followed by conditional inference M16. Open research
+F02/F04/F06 remains **unconditional gap-two correlation**, which
+cannot be supplied by any quotient, finite-sieve count, or matching
+Ibrahim/Monster fingerprint. Attribution: original residual and
+Conway/Guy source owners retained; bounded-gap input credits
+Zhang/Maynard/Polymath, and any unrefereed 2026 bounds retain
+their conditional/unverified scope.
