@@ -121,6 +121,9 @@ record MillenniumLeanAssistReceipt : Set where
     bsdGlobalPrimePlaceWeldSource :
       String
 
+    bsdLocalKummerTorsionTranslationSource :
+      String
+
     hodgeCP1QuotientSourcePresent :
       Bool
 
@@ -217,6 +220,9 @@ record MillenniumLeanAssistReceipt : Set where
     bsdGlobalPrimePlaceWeldSourcePresent :
       Bool
 
+    bsdLocalKummerTorsionTranslationSourcePresent :
+      Bool
+
     sourcesRootedInSynthesis :
       Bool
 
@@ -238,7 +244,7 @@ currentMillenniumLeanAssistReceipt =
     "chboishabba/dashi_lean4"
     "agent/millennium-three-lane-lean-assist"
     "#10"
-    "3dcebd8d7cac1211a49d17c376b4c1b3b15fea2f"
+    "c0bec1fd85751a4db719afddc472e548896613c3"
     "leanprover/lean4:v4.28.0"
     "mathlib v4.28.0"
     "Synthesis/MillenniumHodgeCP1Quotient.lean"
@@ -265,6 +271,8 @@ currentMillenniumLeanAssistReceipt =
     "Synthesis/MillenniumBSDLocalKummerSecantDispatch.lean"
     "Synthesis/MillenniumBSDLocalKummerTangentDispatch.lean"
     "Synthesis/MillenniumBSDGlobalPrimePlaceWeld.lean"
+    "Synthesis/MillenniumBSDLocalKummerTorsionTranslation.lean"
+    true
     true
     true
     true
