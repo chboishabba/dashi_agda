@@ -1,3 +1,171 @@
+## 2026-10-29 golden three-lane TOE convergence
+
+This section is the current owner-facing state.
+
+Agda is the golden proof surface.
+
+Lean is a sibling producer.
+
+Lean source presence does not create Agda proof authority.
+
+The current ZKP frame reuses `DASHI.Interop.IntrospectiveProofLoopExact.ZKPFrame`.
+
+The eight coordinates are O/R/C/S/L/P/G/F.
+
+- O: `dashi_agda` owns the golden theorem graph.
+- R: close known formalisation debt without promoting a Clay conjecture.
+- C: reuse canonical Cook-Levin, projective-cycle, Selmer/Sha, and custody owners first.
+- S: P has same-machine exact-budget Cook-Levin closure. Hodge still needs literal singular/de Rham same-object geometry. BSD still needs Kummer and global-completion same-object theorems.
+- L: observe theorem-backed branch state only.
+- P: extend canonical owners and attach them to the TOE graph.
+- G: remove known-math seams while the final Clay gates remain false.
+- F: theorem-content gaps remain live. CI, source presence, visual similarity, and cross-prover source presence do not close a theorem gap.
+
+### P versus NP
+
+The old canonical Cell/Bits blocker is obsolete on this branch.
+
+The branch now reuses the landed canonical owners:
+
+- `ConcreteTapeCanonicalCellBitsExact`;
+- `FixedWidthCNFToCookFormulaExact`;
+- `PNotEqualsNPConcreteTapeProgramCodeExact`;
+- `ConcreteTapeCookLevinCookFormulaExact`;
+- `PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact`.
+
+The same literal machine now owns both its finite static program code and its exact-budget Cook-Levin certificate.
+
+The remaining standard boundary is no longer a tableau representation seam.
+
+It is the universal machine-model and complexity boundary:
+
+- standard deterministic machine to `ConcreteTapeMachine` polynomial simulation;
+- reverse polynomial simulation when needed;
+- universal lower-bound or deterministic-polynomial SAT result strong enough to settle P versus NP.
+
+No P versus NP solution is promoted.
+
+### Hodge
+
+The finite projective-space algebraic side now reuses `ProjectiveSpaceHodgeBasisExact` and `ProjectiveSpaceLinearCycleClassExact`.
+
+For every represented basis line, a rational multiple of the coordinate linear subspace maps to the corresponding rational multiple of the hyperplane power.
+
+This is a finite projective-space cycle-class surjectivity theorem.
+
+It is not the literal singular/de Rham comparison for geometric `CP^n`.
+
+The literal `CP^1` lane still has the same hard topological seam:
+
+`H_2^sing(S^2; Q) ~= Q`.
+
+No general Hodge theorem is promoted.
+
+### BSD arithmetic
+
+The Agda repository already owns Selmer and Sha boundary machinery.
+
+The Lean sibling now contains actual local elliptic group transport and explicit secant/tangent two-descent identities.
+
+The ordinary secant and ordinary doubling cases are dispatched through mathlib's actual elliptic group law.
+
+These Lean results remain sibling-source custody until an Agda same-object import is paid.
+
+The next local arithmetic cut is the exceptional two-torsion translation and complete Kummer homomorphism theorem.
+
+Then the existing Selmer/Sha owners can consume the local subgroup result.
+
+### BSD analytic
+
+The sibling Lean lane identifies the explicit point-count polynomial with mathlib's actual odd-prime local polynomial.
+
+It also identifies the explicit recurrence coefficients with the actual local Euler factor at prime powers.
+
+The global rational prime place and the canonical completion equivalences are already typed.
+
+The remaining same-object seam is invariance of the local polynomial, local power series, and local Euler factor across the paired completion and integer-ring equivalences.
+
+No analytic continuation, functional equation, analytic rank, or BSD theorem is promoted.
+
+### TOE import graph
+
+The golden three-lane contract is imported by:
+
+- `DASHI/EverythingTOESymmetryResolved369.agda`;
+- `DASHI/Unifier.agda`;
+- `DASHI/Unified/Everything.agda`.
+
+The focused TOE aggregate exports explicit non-promotion theorems for P versus NP, Hodge, and BSD.
+
+The cumulative Millennium validation remains the proof owner.
+
+The TOE aggregates are consumers.
+
+They do not become proof authorities.
+
+### Governance and verification
+
+The process follows reuse, deduplicate, extend, then construct.
+
+The branch does not edit ESD surfaces.
+
+The branch does not transfer theorem ownership from `zkperf`, `zos-server`, `erdfa-py`, `aristotle-cli-rs`, or other meta-introspector repositories.
+
+Those repositories retain independent attribution.
+
+The external fleet context reports 584 discharged fibres and 58 unformalised formal gaps.
+
+This tranche does not recompute those counts.
+
+It targets only the current theorem-content residuals described above.
+
+The control mapping is operational.
+
+It is not a claim of ISO, NIST, ITIL, Six Sigma, privacy, security, or quality certification.
+
+- ITIL: reuse the existing service owner before adding a new owner.
+- ISO 9000: keep source, theorem, validation, and documentation states consistent.
+- ISO/IEC 42001 and NIST AI RMF: preserve provenance, authority boundaries, and fail-closed promotion gates.
+- ISO/IEC 27001 and 27701: do not widen protected data or ESD surfaces.
+- ISO 23894: keep uncertainty and unresolved theorem debt explicit.
+- ISO 9241: keep status text short and unambiguous.
+- Six Sigma: treat duplicate owners and stale status text as defects.
+- C4: domain owners are components; validation is the container-level integration surface; TOE roots are consumers.
+
+PlantUML view:
+
+```plantuml
+@startuml
+component "P canonical Cook-Levin owners" as P
+component "Hodge CPn cycle owners" as H
+component "BSD Selmer / analytic owners" as B
+component "MillenniumThreeLaneContinuationValidation" as V
+component "MillenniumLeanAssistReceiptExact" as L
+component "EverythingTOESymmetryResolved369" as TOE
+component "Unifier" as U
+component "Unified.Everything" as E
+
+P --> V
+H --> V
+B --> V
+L --> V : source custody only
+V --> TOE
+V --> U
+V --> E
+@enduml
+```
+
+Verification remains deterministic and fail-closed.
+
+Run the existing checker.
+
+It rejects holes, postulates, unsafe termination or positivity escapes, and trust primitives.
+
+It also checks the TOE consumer roots.
+
+No kernel success is claimed without an observed Agda or Lean run.
+
+
 # Substantive Millennium and graded-VOA cross-pollination
 
 ## Scope
