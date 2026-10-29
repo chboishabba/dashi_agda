@@ -36,6 +36,7 @@ import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 -- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.YMA1SourceFrontierExact as YMA1Frontier
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
 
 -- Current-master R485/R546/R558 Goal-1/Pareto normalization.
@@ -1475,7 +1476,7 @@ toeYMA1ZKPFrame =
   YMA1Frontier.canonicalYMA1ZKPFrame
 
 toeYMA1FrozenResearchCount :
-  Agda.Builtin.Nat.Nat
+  ℕ
 toeYMA1FrozenResearchCount =
   YMA1Frontier.frozenResearchCount
     YMA1Frontier.canonicalYMA1SourceFrontierReceipt
@@ -1493,7 +1494,7 @@ toeYMA1RowAStillNotPromoted =
   YMA1Frontier.rowAStillNotPromoted
 
 toeYMA1CompletionDoesNotSelfPromote :
-  DASHI.Physics.YangMills.CompactLieProofLevel.promotable
+  Proof.promotable
     (YMA1Frontier.rowACompletion
       YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
   ≡ false
