@@ -2,6 +2,7 @@ module DASHI.Mathematics.CrossPollination.MillenniumThreeLaneContinuationValidat
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as PNP
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHomogeneousCoordinatesExact as Hodge
@@ -820,3 +821,148 @@ hodgeCellularPointGeneratorWeldPaid :
   ≡ HodgeCell.cellularPointGenerator
 hodgeCellularPointGeneratorWeldPaid =
   HodgeCell.pointCycleClassWeldsToCellularGenerator
+
+
+------------------------------------------------------------------------
+-- GOLDEN THREE-LANE TOE CONTRACT.
+--
+-- Reuse the canonical introspective O/R/C/S/L/P/G/F frame.
+-- The frame records execution context only. The theorem fields below carry
+-- the mathematical authority.
+------------------------------------------------------------------------
+
+import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
+import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact as Gate
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceLinearCycleClassExact as HodgeLinear
+
+millenniumThreeLaneZKPFrame : Introspection.ZKPFrame
+millenniumThreeLaneZKPFrame =
+  Introspection.zkp-frame
+    "O: chboishabba/dashi_agda is the golden proof owner; chboishabba/dashi_lean4 is a sibling producer only"
+    "R: close standard formalisation debt for P versus NP, Hodge, and BSD without promoting any Clay conjecture"
+    "C: reuse canonical Cook-Levin, projective-cycle, Selmer/Sha, and sibling-Lean custody owners before extending"
+    "S: P waits on the canonical flat Cell/Bits specialization; Hodge waits on literal singular/de Rham same-object geometry; BSD waits on Kummer/global-completion same-object theorems"
+    "L: observe only theorem-backed branch state, exact source custody, and fail-closed open-problem boundaries"
+    "P: extend existing canonical owners; attach results to TOE aggregates; keep docs and verification receipts synchronized"
+    "G: eliminate remaining known-math seams while preserving exact non-promotion of P=NP, general Hodge, and BSD"
+    "F: count only theorem content gaps; CI, source presence, visual similarity, and cross-prover source presence do not pay a theorem gap"
+
+record MillenniumThreeLaneTOEContract : Set where
+  field
+    frame :
+      Introspection.ZKPFrame
+
+    -- Preconditions.
+    pWholeRowLocalityPrecondition :
+      PNPIff.semanticWholeRowLocalityIffPaid
+        PNPIff.canonicalConcreteTapeLocalityCharacterizationBoundary
+      ≡ true
+
+    pBooleanReflectionPrecondition :
+      PNPReflect.fullLegalWindowBooleanIffPaid
+        PNPReflect.canonicalConcreteTapeLegalWindowReflectionBoundary
+      ≡ true
+
+    hodgeFiniteLinearCyclePrecondition :
+      ∀ {n} (power : HodgeLinear.Basis.ProjectiveSpaceHodgeBasis n)
+        (h : HodgeLinear.CPnRationalHodgeClass n power) →
+      HodgeLinear.AlgebraicRepresentative power h
+
+    bsdRationalPlacePrecondition :
+      BSDPlaces.rationalPlaceSplitPaid
+        BSDPlaces.canonicalEllipticRationalPlaceSelmerBoundary
+      ≡ true
+
+    bsdSelmerCompilerPrecondition :
+      BSDSeed.finiteSeedToSelmerCompilerPaid
+        BSDSeed.canonicalEllipticFiniteSeedToSelmerBoundary
+      ≡ true
+
+    -- Invariants.
+    leanKernelAuthorityRemainsExternal :
+      LeanAssist.leanKernelReceiptObserved
+        LeanAssist.currentMillenniumLeanAssistReceipt
+      ≡ false
+
+    agdaLeanSameObjectAuthorityRemainsExternal :
+      LeanAssist.agdaSameObjectImportPaid
+        LeanAssist.currentMillenniumLeanAssistReceipt
+      ≡ false
+
+    -- Postconditions / current min-cuts.
+    pCanonicalFlatAssignmentStillOpen :
+      PNPRunCNF.flatAssignmentPlacementPaid
+        PNPRunCNF.canonicalConcreteTapeRunCNFWeldBoundary
+      ≡ false
+
+    hodgeLiteralComparisonStillOpen :
+      Hodge.singularDeRhamComparisonPaid
+        Hodge.canonicalProjectiveSpaceGeometryComparisonBoundary
+      ≡ false
+
+    bsdGlobalExactSequenceStillOpen :
+      BSDArithmetic.globalExactSequencePaid
+        BSDArithmetic.canonicalEllipticTwoDescentRoadBoundary
+      ≡ false
+
+    pFinalClosureRemainsBoundary :
+      Gate.finalClosureStatus Gate.pVersusNPStatus
+      ≡ Gate.analyticOrGeometricBoundary
+
+    hodgeFinalClosureRemainsBoundary :
+      Gate.finalClosureStatus Gate.hodgeStatus
+      ≡ Gate.analyticOrGeometricBoundary
+
+    bsdFinalClosureRemainsBoundary :
+      Gate.finalClosureStatus Gate.bsdStatus
+      ≡ Gate.analyticOrGeometricBoundary
+
+open MillenniumThreeLaneTOEContract public
+
+canonicalMillenniumThreeLaneTOEContract :
+  MillenniumThreeLaneTOEContract
+canonicalMillenniumThreeLaneTOEContract = record
+  { frame =
+      millenniumThreeLaneZKPFrame
+  ; pWholeRowLocalityPrecondition =
+      pnpWholeRowLocalityIffPaid
+  ; pBooleanReflectionPrecondition =
+      pnpFullLegalWindowReflectionPaid
+  ; hodgeFiniteLinearCyclePrecondition =
+      HodgeLinear.everyFiniteCPnHodgeBasisClassIsAlgebraic
+  ; bsdRationalPlacePrecondition =
+      bsdRationalPlaceSplitPaid
+  ; bsdSelmerCompilerPrecondition =
+      bsdFiniteSeedSelmerCompilerPaid
+  ; leanKernelAuthorityRemainsExternal =
+      leanKernelReceiptStillUnobserved
+  ; agdaLeanSameObjectAuthorityRemainsExternal =
+      agdaLeanSameObjectImportStillOpen
+  ; pCanonicalFlatAssignmentStillOpen =
+      pnpFlatAssignmentStillExternal
+  ; hodgeLiteralComparisonStillOpen =
+      hodgeComparisonStillOpen
+  ; bsdGlobalExactSequenceStillOpen =
+      bsdGlobalDescentStillOpen
+  ; pFinalClosureRemainsBoundary =
+      refl
+  ; hodgeFinalClosureRemainsBoundary =
+      refl
+  ; bsdFinalClosureRemainsBoundary =
+      refl
+  }
+
+threeLanePNonPromotion :
+  Gate.finalClosureStatus Gate.pVersusNPStatus
+  ≡ Gate.analyticOrGeometricBoundary
+threeLanePNonPromotion = refl
+
+threeLaneHodgeNonPromotion :
+  Gate.finalClosureStatus Gate.hodgeStatus
+  ≡ Gate.analyticOrGeometricBoundary
+threeLaneHodgeNonPromotion = refl
+
+threeLaneBSDNonPromotion :
+  Gate.finalClosureStatus Gate.bsdStatus
+  ≡ Gate.analyticOrGeometricBoundary
+threeLaneBSDNonPromotion = refl
