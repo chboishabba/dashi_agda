@@ -9,6 +9,7 @@ import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObse
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
+import DASHI.Wikimedia.IbrahimCannabisTerpeneCommercialSampleQuantitativeAssayExact as CannabisAssay
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -1524,3 +1525,58 @@ toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+
+------------------------------------------------------------------------
+-- Cannabis nominal-potency / reported-preference TOE handoff.
+------------------------------------------------------------------------
+
+toeCannabisPotencyPreferenceBoundary :
+  CannabisAssay.CannabisPotencyPreferenceBoundary
+toeCannabisPotencyPreferenceBoundary =
+  CannabisAssay.canonicalCannabisPotencyPreferenceBoundary
+
+toeCannabisRoyaleComparatorPreferenceObservation :
+  CannabisAssay.PotencyPreferenceObservation
+toeCannabisRoyaleComparatorPreferenceObservation =
+  CannabisAssay.royaleComparatorPreferenceObservation
+
+toeCannabisJadeRoyalePreferenceObservation :
+  CannabisAssay.PotencyPreferenceObservation
+toeCannabisJadeRoyalePreferenceObservation =
+  CannabisAssay.jadeRoyalePreferenceObservation
+
+toeCannabisPotencyOnlyMonotoneDoesNotFitCurrentFixture :
+  CannabisAssay.PotencyOnlyMonotoneFitsCurrentFixture → ⊥
+toeCannabisPotencyOnlyMonotoneDoesNotFitCurrentFixture =
+  CannabisAssay.potencyOnlyMonotoneDoesNotFitCurrentFixture
+
+toeCannabisNominalPotencyDoesNotCreateDeliveredDose :
+  CannabisAssay.NominalPotencyCreatesDeliveredDose → ⊥
+toeCannabisNominalPotencyDoesNotCreateDeliveredDose =
+  CannabisAssay.nominalPotencyDoesNotCreateDeliveredDose
+
+toeCannabisReportedPreferenceDoesNotCreateTerpeneCause :
+  CannabisAssay.ReportedPreferenceCreatesTerpeneCause → ⊥
+toeCannabisReportedPreferenceDoesNotCreateTerpeneCause =
+  CannabisAssay.reportedPreferenceDoesNotCreateTerpeneCause
+
+toeCannabisReportedPreferenceDoesNotCreateOutdoorCause :
+  CannabisAssay.ReportedPreferenceCreatesOutdoorCause → ⊥
+toeCannabisReportedPreferenceDoesNotCreateOutdoorCause =
+  CannabisAssay.reportedPreferenceDoesNotCreateOutdoorCause
+
+toeCannabisPotencyPreferenceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeCannabisPotencyPreferenceZKPFrame =
+  ParetoSnowballTOE.toe-zkp-frame
+    "O: formalise the current Jade/Royale/high-potency comparison without promoting headline THC into dose, exposure, mechanism, or clinical effect"
+    "R: reuse the commercial same-sample assay, composition, interaction, temporal-evidence, and non-promotion owners before extension"
+    "C: extend the existing commercial-assay owner with one bounded potency/preference discriminator and expose exact aliases through TOE roots"
+    "S: product label potency is not exact batch composition; potency is not delivered dose; dose is not exposure; preference does not create terpene or outdoor causation"
+    "L: one disjoint cannabis evidence lane; no ESD mutation; no retargeting of the 584 discharged fibres"
+    "P: Agda remains golden; current preference evidence is source-bounded; exact batch assays remain unpaid; attribution stays with source authors"
+    "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only and do not create scientific authority"
+    "F: the current fixture refutes a monotone nominal-THC-only preference account while leaving exact composition, exposure, constituent mechanism, cultivation mechanism, and clinical translation open"
+    "verification: code-search deduplication; trust-escape scan; ESD diff scan; Agda kernel check when an Agda runtime is available"
+    false false false false
