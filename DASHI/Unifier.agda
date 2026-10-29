@@ -1706,16 +1706,16 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 ------------------------------------------------------------------------
 
 unifierPNFAnaphorSurfaceIdentityPromotionImpossible :
-  PNFHyperfabric.Anaphor.SurfaceSpellingIsWitnessIdentity → ⊥
+  PNFHyperfabric.PNFAnaphorSurfaceIdentityPromotion → ⊥
 unifierPNFAnaphorSurfaceIdentityPromotionImpossible =
   PNFHyperfabric.pnfAnaphorSurfaceIdentityPromotionImpossible
 
 unifierPNFAnaphorCandidateResolutionPromotionImpossible :
-  PNFHyperfabric.Anaphor.CandidateEvidenceResolvesProjectedAnaphor → ⊥
+  PNFHyperfabric.PNFAnaphorCandidateResolutionPromotion → ⊥
 unifierPNFAnaphorCandidateResolutionPromotionImpossible =
   PNFHyperfabric.pnfAnaphorCandidateResolutionPromotionImpossible
 
 unifierPNFAnaphorProceduralProjectionCannotClaimSetBased :
-  PNFHyperfabric.Anaphor.ProceduralPerOccurrenceProjectionIsSetBased → ⊥
+  PNFHyperfabric.PNFAnaphorProceduralProjectionClaim → ⊥
 unifierPNFAnaphorProceduralProjectionCannotClaimSetBased =
   PNFHyperfabric.pnfAnaphorProceduralProjectionCannotClaimSetBased
