@@ -1,3 +1,59 @@
+
+
+## Current normalized TOE authority — 2026-10-29
+
+Agda is the golden formal authority.
+
+The authoritative periodic-B max-cut is `NSClayFacingBPureAnalysisFrontier20261005Exact`.
+
+`NSABCDMaxCut20261007Exact` routes the current B lane to that owner.
+
+The current highest-information B leaf is the literal physical R440 noncore/core payment.
+
+The B4 payment remains open.
+
+The B1, B2, and B3 physical producer leaves remain open.
+
+The periodic continuation physical inputs remain open.
+
+R823 is frozen as a rejected route and must not reopen.
+
+The R106-to-R573 signed external-Waleffe/commutator lineage remains theorem-bearing historical structure.
+
+That lineage is a donor for cancellation and same-object rewrites.
+
+That lineage is not the current B max-cut.
+
+R736 remains a theorem-bearing legacy weighted presentation.
+
+R736 is not the current B max-cut.
+
+The Lean file `NSUnforcedAnalyticCuts.lean` supplies cross-prover negative controls.
+
+The zero-amplitude R440 padding identity is now also proved in the golden Agda R440 owner.
+
+On the four-moment scalar normal form, the increment is exactly `dr * V_Core - dn * W_Core`.
+
+Therefore cutoff padding is not automatically invisible.
+
+The theorem is a diagnostic and not a physical B4 payment.
+
+The Lean theorem supplied the cross-prover donor shape.
+
+Its quartic-versus-cubic homogeneity theorem rejects an uncompensated universal identification of mixed-helicity covariance with physical enstrophy production.
+
+These Lean results are donors and falsifiers.
+
+They do not replace Agda theorem ownership.
+
+The normalized TOE surface is `DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact`.
+
+`DASHI.EverythingTOESymmetryResolved369`, `DASHI.Unifier`, and `DASHI.Unified.Physics` consume that surface.
+
+No ESD surface is edited.
+
+No Clay promotion follows from these normalization changes.
+
 # Navier–Stokes Paper 1 Modern Proof-Spine Migration
 
 Date: 2026-09-14 (Australia/Brisbane)
