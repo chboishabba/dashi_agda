@@ -1908,3 +1908,26 @@ toeOrbit365ReflectedEventExact :
   ≡ OrbitWeighted365.invertedEvent (OrbitWeighted365.sourceEvent a b pair)
 toeOrbit365ReflectedEventExact =
   OrbitWeighted365.reflectedEventIsConjugate
+
+
+-- Five-in-nine plane -> 41 actual ordered pair orbits -> 81 events.
+toePlane41CanonicalCount :
+  Pairs365Owner.lengthL OrbitWeighted365.canonicalPlaneOrderedPairs ≡ 41
+toePlane41CanonicalCount =
+  OrbitWeighted365.actual41PlanePairOrbits
+
+toePlane41Emits81Events :
+  (a b : HermitianSym729.Hermitian9) →
+  Pairs365Owner.lengthL (OrbitWeighted365.orbitWeightedPlaneEvents a b) ≡ 81
+toePlane41Emits81Events =
+  OrbitWeighted365.actual81WeightedPlaneEvents
+
+toePlane41ConjugateEvent :
+  (a b : HermitianSym729.Hermitian9)
+  (pair : HermitianPlane81.PlanePair81) →
+  OrbitWeighted365.planeSourceEvent a b
+    (OrbitWeighted365.negatePlaneOrderedPair pair)
+  ≡ OrbitWeighted365.invertedPlaneEvent
+      (OrbitWeighted365.planeSourceEvent a b pair)
+toePlane41ConjugateEvent =
+  OrbitWeighted365.reflectedPlaneEventIsConjugate
