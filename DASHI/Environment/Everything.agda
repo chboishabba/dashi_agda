@@ -2,6 +2,8 @@ module DASHI.Environment.Everything where
 
 -- Existing soil/root salt and physiology BIDI lineage.
 import DASHI.Environment.RootSoilSaltLineageBidiExact
+import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
+import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact
 
 -- Living Environment System planning/calibration spine.
 import DASHI.Environment.LatentDepthFormalism
