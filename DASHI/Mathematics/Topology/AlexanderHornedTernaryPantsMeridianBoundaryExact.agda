@@ -285,6 +285,12 @@ module LocalNielsenReducedCertificate where
     phi w ≡ reduce (q ++w w ++w invert q)
   phiPreservesPeripheralConjugacy = refl
 
+  -- Without a based-path conjugacy correction, local Nielsen C3
+  -- fails STRICT meridian naturality: phi(w) is not literally w.
+  -- This is a genuine extra acceptance condition for G4.
+  phiNotStrictlyBasedPeripheral : phi w ≡ reduce w → ⊥
+  phiNotStrictlyBasedPeripheral ()
+
   nontrivialParentMeridian : reduce w ≡ [] → ⊥
   nontrivialParentMeridian ()
 
