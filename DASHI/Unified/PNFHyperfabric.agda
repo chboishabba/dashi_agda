@@ -50,22 +50,38 @@ pnfHyperfabricJPromotionBlocked =
 -- DASHI.Cognition.PNF.
 ------------------------------------------------------------------------
 
+PNFAnaphorSurfaceIdentityPromotion : Set
+PNFAnaphorSurfaceIdentityPromotion =
+  Anaphor.SurfaceSpellingIsWitnessIdentity
+
+PNFAnaphorCandidateResolutionPromotion : Set
+PNFAnaphorCandidateResolutionPromotion =
+  Anaphor.CandidateEvidenceResolvesProjectedAnaphor
+
+PNFAnaphorRecursiveSelfUpdate : Set
+PNFAnaphorRecursiveSelfUpdate =
+  Anaphor.SetwiseProjectionRequiresRecursiveDemandUpdate
+
+PNFAnaphorProceduralProjectionClaim : Set
+PNFAnaphorProceduralProjectionClaim =
+  Anaphor.ProceduralPerOccurrenceProjectionIsSetBased
+
 pnfAnaphorSurfaceIdentityPromotionImpossible :
-  Anaphor.SurfaceSpellingIsWitnessIdentity → ⊥
+  PNFAnaphorSurfaceIdentityPromotion → ⊥
 pnfAnaphorSurfaceIdentityPromotionImpossible =
   Anaphor.surfaceSpellingIsNotWitnessIdentity
 
 pnfAnaphorCandidateResolutionPromotionImpossible :
-  Anaphor.CandidateEvidenceResolvesProjectedAnaphor → ⊥
+  PNFAnaphorCandidateResolutionPromotion → ⊥
 pnfAnaphorCandidateResolutionPromotionImpossible =
   Anaphor.candidateEvidenceCannotResolveProjection
 
 pnfAnaphorRecursiveSelfUpdateImpossible :
-  Anaphor.SetwiseProjectionRequiresRecursiveDemandUpdate → ⊥
+  PNFAnaphorRecursiveSelfUpdate → ⊥
 pnfAnaphorRecursiveSelfUpdateImpossible =
   Anaphor.setwiseProjectionNeedsNoRecursiveDemandRewrite
 
 pnfAnaphorProceduralProjectionCannotClaimSetBased :
-  Anaphor.ProceduralPerOccurrenceProjectionIsSetBased → ⊥
+  PNFAnaphorProceduralProjectionClaim → ⊥
 pnfAnaphorProceduralProjectionCannotClaimSetBased =
   Anaphor.perOccurrenceProceduralProjectionIsNotSetBased
