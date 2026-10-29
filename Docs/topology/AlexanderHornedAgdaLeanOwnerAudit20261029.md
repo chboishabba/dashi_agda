@@ -29,3 +29,35 @@ No current source inspection discharged (1)-(5). `RelativeHandleSlideSupplier` i
 
 ## Verification and attribution
 This document is a checked source and literature audit, not kernel-checked mathematics. No CI or Agda compile was run. Preserve Alexander (1924), Hatcher *Algebraic Topology* Example 2B.2, classical Nielsen/free-group normal form and Hensel handlebody literature. Preserve existing original DASHI authors and #1414 polynomial, #1405 wave, #1254 pants and prior Ibrahim Monster 3B ownership; do not infer Monster representation or physical acoustics from the numerical chart. Protected ESD surfaces untouched.
+
+
+## 2026-10-29 direct source follow-up and added canonical certificate
+
+Further direct reads included PR #1244's current branch versions of
+\`scripts/alexander_horned_order_three_peripheral_nielsen.py\`,
+\`scripts/alexander_horned_ternary_nielsen_handle_slide_audit.py\`,
+\`scripts/alexander_horned_three_child_dual_meridian_g1.py\`,
+\`proofs/horned_c3_lean/HornedC3/ThreeArmCollarCoverAssembly.lean\`,
+and \`ThreeArmHatcherGroupTransport.lean\`, plus
+\`DASHI/Unifier.agda\` and \`DASHI/Unified/Everything.agda\`.
+Neither the general conditional Lean van Kampen transport nor the
+abstract G1 dual linking chart is a cap-fixed Nielsen realisation.
+
+The canonical \`AlexanderHornedTernaryPantsMeridianBoundaryExact.agda\`
+was *extended*, not cloned, with exact computed free-reduction witnesses
+for the order-three Nielsen map and a strict-based equivariance
+counterexample:
+\(\phi(w)=q w q^{-1}\ne w,\ q=ca^{-1}ca^{-1}\).
+The negative theorem is deliberately about based free words; the
+existence of an actual geometric conjugating path remains a distinct
+G3/G4 obligation. \`EverythingTOESymmetryResolved369\` already imports
+that owner; separate direct imports from \`Unifier\` or
+\`Unified/Everything\` were not observed, and no new dependency was
+invented in those broader aggregates. Do not claim all TOE roots
+kernel-check from the focused import graph.
+
+The linked regression was strengthened to 4,687 reduced words,
+executed in a byte-matched local file, and passed. New Agda declarations
+are source-written; **no Agda compiler/kernel receipt** and no CI.
+Existing signed-permutation obstruction, external-sector C3 action,
+and exact three-armed group conditional theorem remain separately owned.
