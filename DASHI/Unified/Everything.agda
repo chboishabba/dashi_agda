@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Foundations.Wette1969Rule915MajorDerivationProblemExact as Wette915
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -428,3 +429,26 @@ unifiedSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 unifiedSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+------------------------------------------------------------------------
+-- Wette constructive-foundations golden Agda surface.
+------------------------------------------------------------------------
+
+wetteRule915CurrentProblemBoundary :
+  Wette915.CanonicalRule915CurrentProblemBoundary
+wetteRule915CurrentProblemBoundary =
+  Wette915.canonicalRule915CurrentProblemBoundary
+
+wetteRule915ZKPFrame : Wette915.Rule915MajorZKPFrame
+wetteRule915ZKPFrame =
+  Wette915.canonicalRule915MajorZKPFrame
+
+wetteDocumentationDoesNotCreateMajorDerivation :
+  Wette915.DocumentationCreatesMajorDerivation → ⊥
+wetteDocumentationDoesNotCreateMajorDerivation =
+  Wette915.documentationDoesNotCreateMajorDerivation
+
+wetteVerificationStatusDoesNotCreateMajorDerivation :
+  Wette915.VerificationStatusCreatesMajorDerivation → ⊥
+wetteVerificationStatusDoesNotCreateMajorDerivation =
+  Wette915.verificationStatusDoesNotCreateMajorDerivation
