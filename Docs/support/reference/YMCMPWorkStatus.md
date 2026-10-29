@@ -59,6 +59,15 @@ The current parallel Lean results are evidence only. They do not change an Agda 
 
 The canonical ZKP governance frame uses O/R/C/S/L/P/G/F and records explicit preconditions, invariants, and postconditions. The governance labels are process controls. They are not claims of ISO, NIST, ITIL, or Six Sigma certification.
 
+The current import graph is documented in `Docs/architecture/YMA1SourceFrontierTOE.puml`.
+
+The two counters are intentionally distinct:
+
+- Gate-4 formal-gap scope: `58`.
+- Frozen macroscopic research rows A/B/C/D: `4`.
+
+Do not infer that one counter discharges the other.
+
 
 ## Executive rule
 
