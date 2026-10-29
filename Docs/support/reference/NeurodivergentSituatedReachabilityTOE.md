@@ -35,6 +35,7 @@ The adapter reuses these existing Agda owners.
 - `DASHI/Biology/TrustedFriendEcologyInteractionExact.agda` owns the trusted-friend by ecology interaction.
 - `DASHI/Core/BinaryInteractionNonseparabilityExact.agda` owns the generic non-additive interaction test.
 - `DASHI/Governance/SituatedIntegrityOptionConeBridgeExact.agda` already connects declared/realised mismatch to a proof-bearing option-cone comparison.
+- `DASHI/Governance/HistoryConditionedSocialEcologyOptionConeExact.agda` already owns proof-bearing history-only, ecology-only, and joint option-cone contractions.
 
 The implementation does not create a new history calculus.
 It does not create a new option-cone calculus.
@@ -133,6 +134,22 @@ This inhabits the existing `RelationEssentialForFuture` interface.
 
 The trusted friend remains a relation coordinate.
 The friend is not decision authority.
+
+
+### Proof-bearing option-cone reuse
+
+The adapter does not define a second option-cone carrier.
+
+It re-exports the existing proof-bearing contractions from `HistoryConditionedSocialEcologyOptionConeExact`.
+
+The existing owner proves:
+
+- history can contract the option cone while ecology is fixed;
+- ecology can contract the option cone while history is fixed;
+- the joint history and ecology condition can contract it further.
+
+These generic contractions are not identified with the domain-specific Boolean witness.
+They provide the canonical option-cone theorem shape.
 
 ### Friend by ecology interaction
 
