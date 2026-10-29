@@ -388,3 +388,48 @@ physicsCurrentProblemWeightedPlusMatchesAdapter :
   Physics.navierStokesCurrentProblemBWeightedPlusStillOpen
   ≡ NSClay.currentProblemBWeightedPlusEndpointStillOpen
 physicsCurrentProblemWeightedPlusMatchesAdapter = refl
+
+
+adapterCurrentProblemBR829VectorClosed :
+  NSClay.laneBR829VectorClosed
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ true
+adapterCurrentProblemBR829VectorClosed =
+  NSClay.currentProblemBR829VectorClosed
+
+adapterCurrentProblemBR829InstantaneousRateStrictlyNegative :
+  NSClay.laneBR829InstantaneousRateStrictlyNegative
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ true
+adapterCurrentProblemBR829InstantaneousRateStrictlyNegative =
+  NSClay.currentProblemBR829InstantaneousRateStrictlyNegative
+
+adapterCurrentProblemBR829RealODEStillOpen :
+  NSClay.laneBR829RealFiniteODETransportClosed
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ false
+adapterCurrentProblemBR829RealODEStillOpen =
+  NSClay.currentProblemBR829RealFiniteODETransportStillOpen
+
+adapterCurrentProblemBR823IntegratedReserveStillNotRefuted :
+  NSClay.laneBR823IntegratedReserveRefuted
+    NSClay.canonicalNavierStokesCurrentProblemReceipt ≡ false
+adapterCurrentProblemBR823IntegratedReserveStillNotRefuted =
+  NSClay.currentProblemBR823IntegratedReserveStillNotRefuted
+
+toeCurrentProblemBR829VectorMatchesAdapter :
+  TOE.toeNavierStokesCurrentProblemBR829VectorClosed
+  ≡ NSClay.currentProblemBR829VectorClosed
+toeCurrentProblemBR829VectorMatchesAdapter = refl
+
+toeCurrentProblemBR829RealODEMatchesAdapter :
+  TOE.toeNavierStokesCurrentProblemBR829RealODEStillOpen
+  ≡ NSClay.currentProblemBR829RealFiniteODETransportStillOpen
+toeCurrentProblemBR829RealODEMatchesAdapter = refl
+
+unifierCurrentProblemBR829VectorMatchesAdapter :
+  U.unifierNavierStokesCurrentProblemBR829VectorClosed
+  ≡ NSClay.currentProblemBR829VectorClosed
+unifierCurrentProblemBR829VectorMatchesAdapter = refl
+
+physicsCurrentProblemBR829VectorMatchesAdapter :
+  Physics.navierStokesCurrentProblemBR829VectorClosed
+  ≡ NSClay.currentProblemBR829VectorClosed
+physicsCurrentProblemBR829VectorMatchesAdapter = refl
