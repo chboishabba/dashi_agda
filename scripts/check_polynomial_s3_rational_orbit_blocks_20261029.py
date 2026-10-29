@@ -148,7 +148,7 @@ def test():
             canonical[c]=f"{title} Small.axis{i}"
     for title,rep in zip(SHAPES[4:],REPS[4:]):
         for i,p in enumerate(PERMS):
-            canonical[conjugate(p,rep)]=f"{title} Regular.Block.slot{i}"
+            canonical[conjugate(p,rep)]=f"{title} Block.slot{i}"
     assert labels==canonical
 
     for p in PERMS:
