@@ -15,6 +15,8 @@ import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Unified.YMA1SourceFrontierExact as YMA1Frontier
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
@@ -689,3 +691,45 @@ navierStokesClayEligibilityStillFalse :
   navierStokesClayEligible ≡ false
 navierStokesClayEligibilityStillFalse =
   NSClayTOE.clayEligibilityStillFalse
+
+
+------------------------------------------------------------------------
+-- Canonical Row-A1 source frontier.
+-- Agda remains theorem authority. Lean cross-prover progress does not promote.
+------------------------------------------------------------------------
+
+yangMillsYMA1SourceFrontierReceipt :
+  YMA1Frontier.YMA1SourceFrontierReceipt
+yangMillsYMA1SourceFrontierReceipt =
+  YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+yangMillsYMA1ZKPFrame :
+  YMA1Frontier.YMA1ZKPFrame
+yangMillsYMA1ZKPFrame =
+  YMA1Frontier.canonicalYMA1ZKPFrame
+
+yangMillsYMA1FrozenResearchCount :
+  ℕ
+yangMillsYMA1FrozenResearchCount =
+  YMA1Frontier.frozenResearchCount
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+yangMillsYMA1FrozenResearchCountIsFour :
+  yangMillsYMA1FrozenResearchCount ≡ 4
+yangMillsYMA1FrozenResearchCountIsFour =
+  YMA1Frontier.frozenResearchCountStillFour
+
+yangMillsYMA1RowAStillNotPromoted :
+  YMA1Frontier.rowAPromoted
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+  ≡ false
+yangMillsYMA1RowAStillNotPromoted =
+  YMA1Frontier.rowAStillNotPromoted
+
+yangMillsYMA1CompletionDoesNotSelfPromote :
+  Proof.promotable
+    (YMA1Frontier.rowACompletion
+      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
+  ≡ false
+yangMillsYMA1CompletionDoesNotSelfPromote =
+  YMA1Frontier.rowACompletionDoesNotSelfPromote
