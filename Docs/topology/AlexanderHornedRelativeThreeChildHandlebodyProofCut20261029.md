@@ -319,3 +319,7 @@ and [order-three Nielsen stabilizer](AlexanderHornedOrderThreePeripheralNielsen2
 Attribution remains Alexander/Hatcher, Nielsen and Hensel, original
 DASHI module owners and separate Ibrahim Monster 3B proof ownership.
 No ESD edits, kernel checks, CI or physical/Monster same-object promotion.
+
+## Source-first owner audit, 29 October 2026
+
+See [the exact Agda and Lean source audit](AlexanderHornedAgdaLeanOwnerAudit20261029.md). External-sector `rotationCommutesAllTernaryStages` is already in the canonical Agda tower. Do not duplicate it or conflate it with a local Nielsen C3. The complement-side PL/meridian certificates G2–G6 are still open. The Lean recursive repository search was truncated and does not establish exhaustive absence. Attribution and Ibrahim Monster 3B non-promotion unchanged.
