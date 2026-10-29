@@ -1869,23 +1869,29 @@ unifierMeta2026SettlementNormCalibration :
 unifierMeta2026SettlementNormCalibration =
   FleetGapTOE.fleetMeta2026SettlementNormCalibration
 
+unifierMetaSettlementAloneLegallyBindsCompetitors : Bool
+unifierMetaSettlementAloneLegallyBindsCompetitors =
+  FleetGapTOE.fleetMetaSettlementAloneLegallyBindsCompetitors
+
 unifierMetaSettlementDoesNotBindCompetitors :
-  FleetGapTOE.LegalNorm.settlementAloneLegallyBindsTikTokOrYouTube
-    FleetGapTOE.LegalNorm.canonicalMeta2026SettlementNormCalibration
-  ≡ false
+  unifierMetaSettlementAloneLegallyBindsCompetitors ≡ false
 unifierMetaSettlementDoesNotBindCompetitors =
   FleetGapTOE.fleetMetaSettlementDoesNotBindCompetitors
 
+unifierMetaSettlementCreatesFederalStatute : Bool
+unifierMetaSettlementCreatesFederalStatute =
+  FleetGapTOE.fleetMetaSettlementCreatesFederalStatute
+
 unifierMetaSettlementDoesNotCreateFederalStatute :
-  FleetGapTOE.LegalNorm.settlementCreatesFederalStatute
-    FleetGapTOE.LegalNorm.canonicalMeta2026SettlementNormCalibration
-  ≡ false
+  unifierMetaSettlementCreatesFederalStatute ≡ false
 unifierMetaSettlementDoesNotCreateFederalStatute =
   FleetGapTOE.fleetMetaSettlementDoesNotCreateFederalStatute
 
+unifierJMDPosterCreatesLegalAuthority : Bool
+unifierJMDPosterCreatesLegalAuthority =
+  FleetGapTOE.fleetJMDPosterCreatesLegalAuthority
+
 unifierJMDPosterDoesNotCreateLegalAuthority :
-  FleetGapTOE.LegalNorm.jmdPosterCreatesLegalAuthority
-    FleetGapTOE.LegalNorm.canonicalMeta2026SettlementNormCalibration
-  ≡ false
+  unifierJMDPosterCreatesLegalAuthority ≡ false
 unifierJMDPosterDoesNotCreateLegalAuthority =
   FleetGapTOE.fleetJMDPosterDoesNotCreateLegalAuthority
