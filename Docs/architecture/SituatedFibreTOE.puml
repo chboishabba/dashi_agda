@@ -10,6 +10,7 @@ package "Golden Agda theorem owners" {
   [HistoryConditionedChoiceExact] as History
   [TypedBranchingOptionConeBridgeExact] as Cone
   [StageTransitionBarrierExact] as Barrier
+  [RationalMarkovLumpingFutureExact] as Markov
 }
 
 package "Canonical rollup" {
@@ -28,6 +29,7 @@ Trajectory --> Rollup : endpoint != path
 History --> Rollup : present != history/future
 Barrier --> Rollup : blocked path is typed
 Cone --> Rollup : reachability -> option cone
+Markov --> Rollup : positive stochastic lumping analogue
 
 Rollup --> TOE
 Rollup --> Unifier
@@ -58,6 +60,7 @@ Invariants:
 * endpoint equality != trajectory equality
 * present observation != history-conditioned future cone
 * option-cone comparison != coercion
+* deterministic quotient failure != stochastic non-lumpability without a kernel
 
 Postconditions:
 * all three TOE roots reach the same canonical rollup
