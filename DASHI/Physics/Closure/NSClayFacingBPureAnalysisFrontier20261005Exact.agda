@@ -12,7 +12,10 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 --   * DFL and DHH fuse to ONE Bip(Noncore,Core), Noncore = DFL ++ DHH;
 --   * eight scalar moments collapse to the four moments of that partition;
 --   * its one residual vector is definitionally welded to canonical R440
---     input-Laplacian weighted-amplitude aggregates on the two literal subsets.
+--     input-Laplacian weighted-amplitude aggregates on the two literal subsets;
+--   * the four-moment signed scalar defect is exact;
+--   * zero-amplitude noncore padding changes that scalar defect by exactly
+--     dr * V_Core - dn * W_Core, so padding invariance is not automatic.
 --
 -- Thus the only remaining B4 theorem is the physical signed payment
 --
@@ -117,6 +120,14 @@ b4DefectPhysicalResidualNormalFormClosed = DefectR440.b4DefectPhysicalResidualNo
 
 b4DefectSignedPhysicalWorkClosed : Bool
 b4DefectSignedPhysicalWorkClosed = DefectR440.b4DefectSignedPhysicalWorkClosed
+
+b4DefectR440FourMomentScalarClosed : Bool
+b4DefectR440FourMomentScalarClosed =
+  DefectR440.b4DefectR440FourMomentScalarClosed
+
+b4DefectR440ZeroPaddingAuditClosed : Bool
+b4DefectR440ZeroPaddingAuditClosed =
+  DefectR440.b4DefectR440ZeroPaddingAuditClosed
 
 b4DefectResidualStillAbstractCarrier : Bool
 b4DefectResidualStillAbstractCarrier = DefectR440.b4DefectResidualStillAbstractCarrier
@@ -294,6 +305,16 @@ b4DefectPhysicalResidualNormalFormClosedIsTrue = refl
 
 b4DefectSignedPhysicalWorkClosedIsTrue : b4DefectSignedPhysicalWorkClosed ≡ true
 b4DefectSignedPhysicalWorkClosedIsTrue = refl
+
+b4DefectR440FourMomentScalarClosedIsTrue :
+  b4DefectR440FourMomentScalarClosed ≡ true
+b4DefectR440FourMomentScalarClosedIsTrue =
+  DefectR440.b4DefectR440FourMomentScalarClosedIsTrue
+
+b4DefectR440ZeroPaddingAuditClosedIsTrue :
+  b4DefectR440ZeroPaddingAuditClosed ≡ true
+b4DefectR440ZeroPaddingAuditClosedIsTrue =
+  DefectR440.b4DefectR440ZeroPaddingAuditClosedIsTrue
 
 b4DefectResidualStillAbstractCarrierIsFalse : b4DefectResidualStillAbstractCarrier ≡ false
 b4DefectResidualStillAbstractCarrierIsFalse = refl
