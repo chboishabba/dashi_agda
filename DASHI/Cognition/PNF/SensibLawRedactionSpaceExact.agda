@@ -40,3 +40,28 @@ placeWithSpace left right = spacedPublicOutput left " " right
 spaceSeparatorPreserved : (left right : PublicOutput) →
   SpacedPublicOutput.separator (placeWithSpace left right) ≡ " "
 spaceSeparatorPreserved left right = refl
+
+-- Reapplying redaction to an already public result is a no-op.
+-- This is a type-directed projection law, not a security certification.
+redactPublic : PublicOutput → PublicOutput
+redactPublic output = output
+
+redactPublicIdempotent : (output : PublicOutput) →
+  redactPublic (redactPublic output) ≡ redactPublic output
+redactPublicIdempotent output = refl
+
+redactAgainPreservesProjection : (draft : PrivateDraft) →
+  redactPublic (redactOutput draft) ≡ redactOutput draft
+redactAgainPreservesProjection draft = refl
+
+redactSpaced : SpacedPublicOutput → SpacedPublicOutput
+redactSpaced output =
+  spacedPublicOutput
+    (redactPublic (SpacedPublicOutput.first output))
+    (SpacedPublicOutput.separator output)
+    (redactPublic (SpacedPublicOutput.second output))
+
+redactSpacedPreservesSeparator : (output : SpacedPublicOutput) →
+  SpacedPublicOutput.separator (redactSpaced output) ≡
+  SpacedPublicOutput.separator output
+redactSpacedPreservesSeparator output = refl
