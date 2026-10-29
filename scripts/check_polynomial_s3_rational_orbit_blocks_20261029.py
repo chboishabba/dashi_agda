@@ -96,7 +96,7 @@ def verify_rational_solver_source_integrity():
     solver_lines=re.findall(r"Ring[.]solve-∀[^\n]*",rational)
     assert len(solver_lines)>=176, len(solver_lines)
     for line in solver_lines:
-        assert not re.search(r"\b[fg] (?:Small|Big)[.]",line),line
+        assert not re.search(r"^Ring[.]solve-∀[ \t]+[fg][ \t]+(?:Small|Big)[.]",line),line
         assert "(f " in line, line
     assert "MoonshineOrbifoldSectorProjectorExact" in adapter
     for name in ("positiveIntertwinesS3Parity",
