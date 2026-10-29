@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Biology.EmbodiedSocialEcologyRelationalHistoryObligationExact as SituatedReachabilityTOE
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -404,3 +405,21 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Neurodivergent situated reachability TOE receipt.
+--
+-- This is a domain receipt.  It does not alter the Fleet/Yang-Mills 58-gap
+-- cardinality or promote a universal autism mechanism.
+------------------------------------------------------------------------
+
+unifiedSituatedReachabilityReceipt :
+  SituatedReachabilityTOE.SituatedReachabilityTOEReceipt
+unifiedSituatedReachabilityReceipt =
+  SituatedReachabilityTOE.canonicalSituatedReachabilityTOEReceipt
+
+unifiedSituatedReachabilityZKPFrame :
+  SituatedReachabilityTOE.SituatedReachabilityZKPFrame
+unifiedSituatedReachabilityZKPFrame =
+  SituatedReachabilityTOE.canonicalSituatedReachabilityZKPFrame
