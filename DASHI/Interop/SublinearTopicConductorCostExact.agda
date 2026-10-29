@@ -8,7 +8,6 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.SLRWorldResearchIterationBudgetExact as Budget
-import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
 
 ------------------------------------------------------------------------
 -- SUBLINEAR TOPIC CONDUCTOR CONTROL LAW
@@ -130,6 +129,3 @@ parallelStillRequiresNoTypedMeet = refl
 
 budgetAnchor : Budget.WorldResearchIterationBudget
 budgetAnchor = Budget.canonicalWorldResearchIterationBudget
-
-fleetAnchor : Fleet.FleetFormalGapTargetReceipt
-fleetAnchor = Fleet.canonicalFleetFormalGapTargetReceipt
