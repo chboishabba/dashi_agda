@@ -22,6 +22,7 @@ module DASHI.Physics.Closure.R2P227729Orbit365RankSortPermutationExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Properties using (_≤?_)
 open import Relation.Nullary using (yes; no)
 import Data.List.Relation.Binary.Permutation.Propositional as Perm
@@ -34,38 +35,45 @@ import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Full
 import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as Herm
 import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as C3
 
-insertPairByRank :
-  I.ModePair729 → List I.ModePair729 → List I.ModePair729
-insertPairByRank pair [] = pair ∷ []
-insertPairByRank pair (head ∷ tail)
-  with I.orderedPairRank pair ≤? I.orderedPairRank head
-... | yes _ = pair ∷ head ∷ tail
-... | no _ = head ∷ insertPairByRank pair tail
+-- Generic carrier/rank sort: also serves the 41-in-81 plane, without
+-- duplicating the permutation induction or importing a physical NS sort.
+insertByRank :
+  ∀ {A : Set} → (A → Nat) → A → List A → List A
+insertByRank rank x [] = x ∷ []
+insertByRank rank x (y ∷ rest) with rank x ≤? rank y
+... | yes _ = x ∷ y ∷ rest
+... | no _ = y ∷ insertByRank rank x rest
 
-sortPairsByRank : List I.ModePair729 → List I.ModePair729
-sortPairsByRank [] = []
-sortPairsByRank (pair ∷ rest) =
-  insertPairByRank pair (sortPairsByRank rest)
+sortByRank : ∀ {A : Set} → (A → Nat) → List A → List A
+sortByRank rank [] = []
+sortByRank rank (x ∷ xs) = insertByRank rank x (sortByRank rank xs)
 
-insertPairByRankPermutation :
-  (pair : I.ModePair729) (xs : List I.ModePair729) →
-  insertPairByRank pair xs Perm.↭ (pair ∷ xs)
-insertPairByRankPermutation pair [] = Perm.refl
-insertPairByRankPermutation pair (head ∷ tail)
-  with I.orderedPairRank pair ≤? I.orderedPairRank head
+insertByRankPermutation :
+  ∀ {A : Set} (rank : A → Nat) (x : A) (xs : List A) →
+  insertByRank rank x xs Perm.↭ (x ∷ xs)
+insertByRankPermutation rank x [] = Perm.refl
+insertByRankPermutation rank x (y ∷ ys) with rank x ≤? rank y
 ... | yes _ = Perm.refl
 ... | no _ =
   Perm.trans
-    (Perm.prep head (insertPairByRankPermutation pair tail))
-    (Perm.swap head pair Perm.refl)
+    (Perm.prep y (insertByRankPermutation rank x ys))
+    (Perm.swap y x Perm.refl)
+
+sortByRankPermutation :
+  ∀ {A : Set} (rank : A → Nat) (xs : List A) →
+  sortByRank rank xs Perm.↭ xs
+sortByRankPermutation rank [] = Perm.refl
+sortByRankPermutation rank (x ∷ xs) =
+  Perm.trans
+    (insertByRankPermutation rank x (sortByRank rank xs))
+    (Perm.prep x (sortByRankPermutation rank xs))
+
+sortPairsByRank : List I.ModePair729 → List I.ModePair729
+sortPairsByRank = sortByRank I.orderedPairRank
 
 sortPairsByRankPermutation :
   (xs : List I.ModePair729) → sortPairsByRank xs Perm.↭ xs
-sortPairsByRankPermutation [] = Perm.refl
-sortPairsByRankPermutation (pair ∷ rest) =
-  Perm.trans
-    (insertPairByRankPermutation pair (sortPairsByRank rest))
-    (Perm.prep pair (sortPairsByRankPermutation rest))
+sortPairsByRankPermutation = sortByRankPermutation I.orderedPairRank
 
 -- The crucial closed kernel normal form: both sides contain the SAME
 -- actual 729 pair records, in identical rank order, not only 729 counts.
