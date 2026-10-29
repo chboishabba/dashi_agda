@@ -279,9 +279,11 @@ The canonical p.145 rule 9.1.5 transcription fixes all 27 premise words.
 The generated historical scaffold produces premises 1-17 and 19-26.
 Premises 10-15 are produced once and reused by both major branches.
 
-The live premise-18 residual is a matched historical 9.3.23 instance.
-It requires the five printed 9.3.23 premises and an exact core-leaf match.
+The live premise-18 problem remains a certified historical derivation of D18.
+A matched historical 9.3.23 instance is one selected sufficient route.
+That route requires the five printed 9.3.23 premises and an exact core-leaf match.
 Two existing 9.3.9 steps then close premise 18.
+The repository does not claim that the selected 9.3.23 route is complete for D18.
 
 The live premise-27 residual is two directional implication leaves.
 Existing rule 9.3.5 combines the leaves.
