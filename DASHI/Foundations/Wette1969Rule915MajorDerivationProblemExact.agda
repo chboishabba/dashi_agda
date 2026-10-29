@@ -24,6 +24,11 @@ import DASHI.Foundations.Wette1969Rule915IndependentMajorTraceJoinExact as Join
 import DASHI.Foundations.Wette1969Rule915MajorPureWordRecoveryFrontierExact as Recovery
 import DASHI.Foundations.Wette1969FiniteDerivationContextExact as Finite
 import DASHI.Foundations.Wette1969DerivationClosureExact as Closure
+import DASHI.Foundations.Wette1969Rule915CanonicalP145TypedWeldExact as Weld
+import DASHI.Foundations.Wette1969Rule915Premise18Rule9323ResolutionExact as Resolve18
+import DASHI.Foundations.Wette1969Rule915Premise27DirectionalClosureExact as Resolve27
+import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
+import Data.Empty using (⊥)
 
 WordTerm = Signature.WordTerm
 Context = Finite.DerivationContext
@@ -136,4 +141,155 @@ canonicalWette1969Rule915MajorDerivationProblemBoundary =
     true refl
     true refl
     true refl
+    false refl
+
+
+------------------------------------------------------------------------
+-- CANONICAL CURRENT RESIDUAL.
+--
+-- The p.145 transcription, generated scaffold, and structural closure suffixes
+-- are already recovered.  The current mathematical residual is therefore:
+--
+--   D18: one matched historical 9.3.23 core-leaf attempt;
+--   D27: two directional implication leaves.
+--
+-- The suffixes are not new proof obligations.  Existing historical rules close
+-- D18 and D27 once these residual witnesses are supplied.
+------------------------------------------------------------------------
+
+record CanonicalRule915MajorResidual
+    {initial : Context}
+    (scaffold :
+      Source.SourceExactScaffoldInputs
+        initial Weld.canonicalFirstSeven Weld.canonicalLater) : Set₁ where
+  constructor canonicalRule915MajorResidual
+  field
+    predecessorInductionResidual :
+      Resolve18.Rule9323MatchedCoreLeafAttempt
+        Weld.canonicalFirstSeven Weld.canonicalLater scaffold
+
+    definiensIndependenceResidual :
+      Resolve27.CanonicalPremise27DirectionalLeafAttempt scaffold
+
+open CanonicalRule915MajorResidual public
+
+canonicalMajorTraceInputs :
+  {initial : Context} →
+  {scaffold :
+    Source.SourceExactScaffoldInputs
+      initial Weld.canonicalFirstSeven Weld.canonicalLater} →
+  CanonicalRule915MajorResidual scaffold →
+  Join.IndependentMajorTraceInputs
+    Weld.canonicalFirstSeven Weld.canonicalLater scaffold
+canonicalMajorTraceInputs residual =
+  Join.independentMajorTraceInputs
+    (Resolve18.matchedRule9323ClosesPremise18
+      (predecessorInductionResidual residual))
+    (Resolve27.closeCanonicalPremise27
+      (definiensIndependenceResidual residual))
+
+selectCanonicalRule915FromCurrentResidual :
+  {initial : Context} →
+  (recursivePredicate : WordTerm) →
+  (scaffold :
+    Source.SourceExactScaffoldInputs
+      initial Weld.canonicalFirstSeven Weld.canonicalLater) →
+  CanonicalRule915MajorResidual scaffold →
+  PCRA.SelectedRuleApplication historicalSystem
+    (Join.joinedMajorTarget (canonicalMajorTraceInputs _))
+selectCanonicalRule915FromCurrentResidual
+  recursivePredicate scaffold residual =
+  Join.selectRule915FromIndependentMajorTraces
+    Weld.canonicalFirstSeven
+    Weld.canonicalLater
+    recursivePredicate
+    scaffold
+    (canonicalMajorTraceInputs residual)
+
+------------------------------------------------------------------------
+-- Exact non-promotion gates.
+------------------------------------------------------------------------
+
+data GeneratedScaffoldCreatesPremise18 : Set where
+data GeneratedScaffoldCreatesPremise27 : Set where
+data DocumentationCreatesMajorDerivation : Set where
+data VerificationStatusCreatesMajorDerivation : Set where
+
+generatedScaffoldDoesNotCreatePremise18 :
+  GeneratedScaffoldCreatesPremise18 → ⊥
+generatedScaffoldDoesNotCreatePremise18 ()
+
+generatedScaffoldDoesNotCreatePremise27 :
+  GeneratedScaffoldCreatesPremise27 → ⊥
+generatedScaffoldDoesNotCreatePremise27 ()
+
+documentationDoesNotCreateMajorDerivation :
+  DocumentationCreatesMajorDerivation → ⊥
+documentationDoesNotCreateMajorDerivation ()
+
+verificationStatusDoesNotCreateMajorDerivation :
+  VerificationStatusCreatesMajorDerivation → ⊥
+verificationStatusDoesNotCreateMajorDerivation ()
+
+------------------------------------------------------------------------
+-- ZKP O/R/C/S/L/P/G/F process frame.
+--
+-- O = objective.
+-- R = reused owners and requirements.
+-- C = canonical code owner.
+-- S = current formal state.
+-- L = proof lattice / derivation context.
+-- P = proposal for the next proof payment.
+-- G = goal.
+-- F = live residual function.
+------------------------------------------------------------------------
+
+canonicalRule915MajorZKPFrame : Introspection.ZKPFrame
+canonicalRule915MajorZKPFrame =
+  Introspection.zkp-frame
+    "O: certify the canonical p.145 rule 9.1.5 only from proof-carrying historical derivations"
+    "R: reuse the canonical p.145 weld, generated scaffold, 9.3.23 resolution, directional closure, and independent trace join"
+    "C: DASHI.Foundations.Wette1969Rule915MajorDerivationProblemExact"
+    "S: all 27 source slots are fixed; scaffold slots are generated; D18 and D27 are reduced but their leaf witnesses remain explicit"
+    "L: finite historical derivation contexts with monotone certified trace weakening and replay"
+    "P: discharge only the matched 9.3.23 leaf obligations for D18 and the two directional leaves for D27"
+    "G: select certified historical 9.1.5 at the joined target without semantic promotion"
+    "F: return the first missing D18 or D27 leaf receipt; status, documentation, fleet priority, and source labels do not create it"
+
+record CanonicalRule915CurrentProblemBoundary : Set where
+  constructor canonicalRule915CurrentProblemBoundary
+  field
+    canonicalP145HasTwentySevenFixedPremiseWords : Bool
+    canonicalP145HasTwentySevenFixedPremiseWordsIsTrue :
+      canonicalP145HasTwentySevenFixedPremiseWords ≡ true
+
+    generatedScaffoldLeavesExactlyTwoMajorBranches : Bool
+    generatedScaffoldLeavesExactlyTwoMajorBranchesIsTrue :
+      generatedScaffoldLeavesExactlyTwoMajorBranches ≡ true
+
+    premise18ClosesFromMatched9323ThenTwo939Steps : Bool
+    premise18ClosesFromMatched9323ThenTwo939StepsIsTrue :
+      premise18ClosesFromMatched9323ThenTwo939Steps ≡ true
+
+    premise27ClosesFromTwoDirectionalLeavesThen935AndTwo939Steps : Bool
+    premise27ClosesFromTwoDirectionalLeavesThen935AndTwo939StepsIsTrue :
+      premise27ClosesFromTwoDirectionalLeavesThen935AndTwo939Steps ≡ true
+
+    scaffoldAloneClosesEitherMajorBranch : Bool
+    scaffoldAloneClosesEitherMajorBranchIsFalse :
+      scaffoldAloneClosesEitherMajorBranch ≡ false
+
+    documentationOrVerificationStatusClosesMajorBranch : Bool
+    documentationOrVerificationStatusClosesMajorBranchIsFalse :
+      documentationOrVerificationStatusClosesMajorBranch ≡ false
+
+canonicalRule915CurrentProblemBoundary :
+  CanonicalRule915CurrentProblemBoundary
+canonicalRule915CurrentProblemBoundary =
+  canonicalRule915CurrentProblemBoundary
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
     false refl
