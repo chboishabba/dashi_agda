@@ -56,6 +56,23 @@ for n in range(6):
 assert checks==4687
 print("PASS:",checks,"reduced free words length <=5 have phi^3=id")
 print("PASS: exact based conjugator q=c A c A; strict based phi(w)=w FAILS")
+# INTEGRAL MODULE OBSTRUCTION: phi and literal 3-cycle have matching
+# characteristic polynomial t^3-1 but differ as Z[C3]-modules.
+# GL3(Z) conjugacy would induce mod-3 conjugacy and preserve fixed counts.
+N=((-1,-1,0),(1,0,0),(2,1,1))
+P=((0,0,1),(1,0,0),(0,1,0))
+def act(matrix,v):
+    return tuple(sum(row[i]*v[i] for i in range(3))%3 for row in matrix)
+V=list(product(range(3),repeat=3))
+assert len(V)==27
+n_fixed=[v for v in V if act(N,v)==v]
+p_fixed=[v for v in V if act(P,v)==v]
+assert len(n_fixed)==9,(len(n_fixed),n_fixed)
+assert len(p_fixed)==3,(len(p_fixed),p_fixed)
+assert all(act(N,act(N,act(N,v)))==v for v in V)
+assert all(act(P,act(P,act(P,v)))==v for v in V)
+print("PASS: 27/27 mod-3 vectors; Nielsen 9 fixed versus permutation 3 fixed")
+print("NO-GO: actions cannot be GL3(Z) conjugate despite the same t^3-1")
 print("PASS: nontrivial order-three Nielsen automorphism preserving [w] in F3")
 print("Images: a -> c a^-1 c b; b -> a^-1 c; c -> c")
 print("Geometric cap-relative realisation and Agda kernel are NOT established.")
