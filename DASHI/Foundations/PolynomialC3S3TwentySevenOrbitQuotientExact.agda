@@ -8,11 +8,14 @@ module DASHI.Foundations.PolynomialC3S3TwentySevenOrbitQuotientExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Product using (_×_; _,_; proj₁; proj₂; Σ; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂; Σ)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import Base369 as Base
 import DASHI.Cognition.RecursiveFibreTower as Tower
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Shape
+import DASHI.Foundations.TernaryEndomorphismS3ActionLawsExact as ActionLaws
+import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitRefinementExact as Act
 
 Code27 : Set
@@ -448,3 +451,110 @@ everyC3InvariantFieldDescends f inv x =
   trans (cong f (codeFromClassRepresentative x))
     (rotationPreservesInvariant f inv
       (rotationToRepresentative x) (representative11 (classify11 x)))
+
+-- The odd involution has three fixed classes (identity,
+-- transposition, constant) and four swapped PAIRS. This is an
+-- actual constructor-exhaustive uniqueness proof.
+reflectionFixedClassIsOneOfThree :
+  (o : Orbit11) →
+  reflectionOn11 o ≡ o →
+  (o ≡ identityOrbit) ⊎
+  ((o ≡ transpositionOrbit) ⊎ (o ≡ constantOrbit))
+reflectionFixedClassIsOneOfThree identityOrbit eq = inj₁ refl
+reflectionFixedClassIsOneOfThree cycleForwardOrbit ()
+reflectionFixedClassIsOneOfThree cycleBackwardOrbit ()
+reflectionFixedClassIsOneOfThree transpositionOrbit eq = inj₂ (inj₁ refl)
+reflectionFixedClassIsOneOfThree constantOrbit eq = inj₂ (inj₂ refl)
+reflectionFixedClassIsOneOfThree rank2OneFixedA ()
+reflectionFixedClassIsOneOfThree rank2OneFixedB ()
+reflectionFixedClassIsOneOfThree rank2TwoFixedA ()
+reflectionFixedClassIsOneOfThree rank2TwoFixedB ()
+reflectionFixedClassIsOneOfThree rank2TwoCycleA ()
+reflectionFixedClassIsOneOfThree rank2TwoCycleB ()
+
+-- S3-invariance of the EXISTING 7-shape classifier follows from its
+-- canonical orbit witnesses, rather than a duplicated 162-case table.
+shapeClassInvariant :
+  (p : Shape.TriPermutation) (x : Code27) →
+  Shape.shapeClass (Shape.conjugateCode p x) ≡ Shape.shapeClass x
+shapeClassInvariant p x with Shape.canonicalOrbitWitness x
+... | Shape.orbitWitness q eq =
+  trans (cong (λ z → Shape.shapeClass (Shape.conjugateCode p z)) eq)
+    (trans
+      (cong Shape.shapeClass
+        (sym (ActionLaws.conjugateComposition p q
+          (Shape.shapeRepresentative (Shape.shapeClass x)))))
+      (Shape.representativeOrbitStaysClass
+        (S3._∙_ p q) (Shape.shapeClass x)))
+
+inflate7To27S3Invariant :
+  (f : Field7) (p : Shape.TriPermutation) (x : Code27) →
+  inflate7To27 f (Shape.conjugateCode p x)
+    ≡ inflate7To27 f x
+inflate7To27S3Invariant f p x =
+  cong f (shapeClassInvariant p x)
+
+-- Every field constant under the full six-label action descends
+-- through the EXISTING seven-shape classifier; the canonical orbit
+-- witness supplies its original representative transformation.
+everyS3InvariantFieldDescends :
+  (f : Field27) →
+  ((p : Shape.TriPermutation) (x : Code27) →
+    f (Shape.conjugateCode p x) ≡ f x) →
+  (x : Code27) →
+  f x ≡ inflate7To27
+    (λ shape → f (Shape.shapeRepresentative shape)) x
+everyS3InvariantFieldDescends f inv x
+  with Shape.canonicalOrbitWitness x
+... | Shape.orbitWitness p eq =
+  trans (cong f eq)
+    (inv p (Shape.shapeRepresentative (Shape.shapeClass x)))
+
+-- Explicit section of 11 -> 7 via the earlier seven-shape owner.
+sevenSection : Shape.ShapeOrbit7 → Orbit11
+sevenSection shape =
+  classify11 (Shape.shapeRepresentative shape)
+
+sevenSectionRightInverse :
+  (shape : Shape.ShapeOrbit7) →
+  mergeToSeven (sevenSection shape) ≡ shape
+sevenSectionRightInverse = mergeRepresentative7
+
+-- Every eleven-class is either the chosen section of its seven-shape
+-- or the reflection of that section. This is the four-pairs
+-- refinement in a constructive form.
+elevenCoveredBySectionOrReflection :
+  (o : Orbit11) →
+  (o ≡ sevenSection (mergeToSeven o)) ⊎
+  (reflectionOn11 o ≡ sevenSection (mergeToSeven o))
+elevenCoveredBySectionOrReflection identityOrbit = inj₁ refl
+elevenCoveredBySectionOrReflection cycleForwardOrbit = inj₁ refl
+elevenCoveredBySectionOrReflection cycleBackwardOrbit = inj₂ refl
+elevenCoveredBySectionOrReflection transpositionOrbit = inj₁ refl
+elevenCoveredBySectionOrReflection constantOrbit = inj₁ refl
+elevenCoveredBySectionOrReflection rank2OneFixedA = inj₁ refl
+elevenCoveredBySectionOrReflection rank2OneFixedB = inj₂ refl
+elevenCoveredBySectionOrReflection rank2TwoFixedA = inj₁ refl
+elevenCoveredBySectionOrReflection rank2TwoFixedB = inj₂ refl
+elevenCoveredBySectionOrReflection rank2TwoCycleA = inj₁ refl
+elevenCoveredBySectionOrReflection rank2TwoCycleB = inj₂ refl
+
+inflate7ReflectionInvariant :
+  (f : Field7) (o : Orbit11) →
+  inflate7 f (reflectionOn11 o) ≡ inflate7 f o
+inflate7ReflectionInvariant f o =
+  cong f (mergeIgnoresReflection o)
+
+everyReflectionInvariantFieldDescends :
+  (f : Field11) →
+  ((o : Orbit11) → f (reflectionOn11 o) ≡ f o) →
+  (o : Orbit11) →
+  f o ≡ inflate7 (λ shape → f (sevenSection shape)) o
+everyReflectionInvariantFieldDescends f invariant o
+  with elevenCoveredBySectionOrReflection o
+... | inj₁ eq = cong f eq
+... | inj₂ eq = trans (sym (invariant o)) (cong f eq)
+
+-- End-to-end field descent is now the composition of these two
+-- constructive quotient universal properties. No numeric bijection,
+-- arbitrary-field averaging, or function extensionality postulate.
