@@ -270,3 +270,72 @@ pointwiseProduct125 = zipQuint (zipQuint (zipQuint C5._*5_))
 -- Source-written full 125-sample transform and pointwise product.
 -- Exact padded 27->125 physical integer-frequency bilinear equality
 -- remains a separate kernel obligation, not an axiom or claimed result.
+
+------------------------------------------------------------------------
+-- FULL C5 ONE-AXIS SAMPLED PRODUCT/CYCLIC CONVOLUTION LEMMA.
+--
+-- Reuses original fiveGroupAdd and source C5 inverse; this is NOT
+-- an extra five-group presentation. Same Q(zeta5) coefficient carrier.
+-- Normalised inverse1 means the forward transform of two synthesised
+-- signals is 1/5 times cyclic convolution, so multiply by FIVE.
+-- The three-axis 27/729 indexed map remains a separate proof boundary.
+------------------------------------------------------------------------
+
+import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Full
+import DASHI.Physics.Closure.R2P2C4C5NyquistAntipodalFixedPointExact as Nyquist
+
+pointwiseProduct1 : Quint C5.Cyclotomic5 → Quint C5.Cyclotomic5 →
+  Quint C5.Cyclotomic5
+pointwiseProduct1 = zipQuint C5._*5_
+
+wholeFive : ℚ
+wholeFive = normalize 5 1
+
+scaleQuint : ℚ → Quint C5.Cyclotomic5 → Quint C5.Cyclotomic5
+scaleQuint q = mapQuint (scale5 q)
+
+-- Reuse inherited ORIGINAL cyclic group addition and additive inverse.
+cyclicConvolutionAt :
+  I.FiveGridMode → Quint C5.Cyclotomic5 →
+  Quint C5.Cyclotomic5 → C5.Cyclotomic5
+cyclicConvolutionAt k a b =
+  C5.sum5 λ p →
+    C5._*5_ (quintAt a p)
+      (quintAt b
+        (Full.fiveGroupAdd k (Nyquist.fiveGroupAntipode p)))
+
+cyclicConvolution5 :
+  Quint C5.Cyclotomic5 → Quint C5.Cyclotomic5 →
+  Quint C5.Cyclotomic5
+cyclicConvolution5 a b =
+  quintFrom λ k → cyclicConvolutionAt k a b
+
+sampledConvolution5 :
+  Quint C5.Cyclotomic5 → Quint C5.Cyclotomic5 →
+  Quint C5.Cyclotomic5
+sampledConvolution5 a b =
+  scaleQuint wholeFive
+    (forward1 (pointwiseProduct1 (inverse1 a) (inverse1 b)))
+
+-- Two INDEPENDENT arbitrary cyclotomic five-point coefficient fields.
+-- Finite ring proof, not floating-point or an appeal to Fourier folklore.
+-- The ring solver normalises over 40 independent rational coordinates.
+oneAxisSampledConvolutionIsCyclic :
+  (a b : Quint C5.Cyclotomic5) →
+  sampledConvolution5 a b ≡ cyclicConvolution5 a b
+oneAxisSampledConvolutionIsCyclic
+  (quint (cyc5 a0 a1 a2 a3) (cyc5 b0 b1 b2 b3)
+         (cyc5 c0 c1 c2 c3) (cyc5 d0 d1 d2 d3)
+         (cyc5 e0 e1 e2 e3))
+  (quint (cyc5 f0 f1 f2 f3) (cyc5 g0 g1 g2 g3)
+         (cyc5 h0 h1 h2 h3) (cyc5 i0 i1 i2 i3)
+         (cyc5 j0 j1 j2 j3)) =
+  quint-ext
+    (cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀)
+    (cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀)
+    (cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀)
+    (cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀)
+    (cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀)
+
+-- IMPORTANT: source-written Agda proof candidate; no executed kernel
+-- check. The 125-sample three-axis sampled/index theorem is still open.
