@@ -117,6 +117,7 @@ open NatPeriodRefinement public using
   ; noActualTwinConsumerFromBareFin270
   )
 
+import DASHI.Arithmetic.TwinPrimeResidualMangoldtPeriodRowsExact
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as MangoldtFiniteSum
 open MangoldtFiniteSum public using
   ( AdditiveScalar
