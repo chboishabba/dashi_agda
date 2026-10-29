@@ -208,3 +208,160 @@ elevenFieldCountFactorsIntoSevenAndFour = refl
 
 fourSwappedPairResidualFields : Tower.pow 3 4 ≡ 81
 fourSwappedPairResidualFields = refl
+
+------------------------------------------------------------------------
+-- COMPLETE 27-CODE / FIN27 CHART AND TRANSPORT OF ORIGINAL S3 ACTION.
+-- A chosen enumeration is not itself a new S3 quotient. Reuse the
+-- original S3 conjugacy and action-law owners. This is the actual
+-- typed G-set coordinate bridge for future rational orbit modules.
+------------------------------------------------------------------------
+
+import DASHI.Foundations.TernaryEndomorphismS3ActionLawsExact as ActionLaws
+import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
+import DASHI.Foundations.PolynomialVandermondeOrbitParityIntertwinerExact as Parity
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+
+codeForIndex27 : Fin.Fin 27 → Q.Code27
+codeForIndex27 (Fin.zero) = (Base.tri-low , (Base.tri-low , Base.tri-low))
+codeForIndex27 (Fin.suc (Fin.zero)) = (Base.tri-low , (Base.tri-low , Base.tri-mid))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.zero))) = (Base.tri-low , (Base.tri-low , Base.tri-high))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))) = (Base.tri-low , (Base.tri-mid , Base.tri-low))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))) = (Base.tri-low , (Base.tri-mid , Base.tri-mid))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))) = (Base.tri-low , (Base.tri-mid , Base.tri-high))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))) = (Base.tri-low , (Base.tri-high , Base.tri-low))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))) = (Base.tri-low , (Base.tri-high , Base.tri-mid))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))) = (Base.tri-low , (Base.tri-high , Base.tri-high))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))) = (Base.tri-mid , (Base.tri-low , Base.tri-low))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))) = (Base.tri-mid , (Base.tri-low , Base.tri-mid))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))) = (Base.tri-mid , (Base.tri-low , Base.tri-high))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))) = (Base.tri-mid , (Base.tri-mid , Base.tri-low))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))) = (Base.tri-mid , (Base.tri-mid , Base.tri-mid))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))) = (Base.tri-mid , (Base.tri-mid , Base.tri-high))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))) = (Base.tri-mid , (Base.tri-high , Base.tri-low))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))) = (Base.tri-mid , (Base.tri-high , Base.tri-mid))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))) = (Base.tri-mid , (Base.tri-high , Base.tri-high))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))) = (Base.tri-high , (Base.tri-low , Base.tri-low))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))) = (Base.tri-high , (Base.tri-low , Base.tri-mid))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))) = (Base.tri-high , (Base.tri-low , Base.tri-high))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))))) = (Base.tri-high , (Base.tri-mid , Base.tri-low))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))))) = (Base.tri-high , (Base.tri-mid , Base.tri-mid))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))))))) = (Base.tri-high , (Base.tri-mid , Base.tri-high))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))))))) = (Base.tri-high , (Base.tri-high , Base.tri-low))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))))))))) = (Base.tri-high , (Base.tri-high , Base.tri-mid))
+codeForIndex27 (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))))))))) = (Base.tri-high , (Base.tri-high , Base.tri-high))
+
+indexCodeRoundTrip :
+  (x : Q.Code27) → codeForIndex27 (index27 x) ≡ x
+indexCodeRoundTrip (Base.tri-low , (Base.tri-low , Base.tri-low)) = refl
+indexCodeRoundTrip (Base.tri-low , (Base.tri-low , Base.tri-mid)) = refl
+indexCodeRoundTrip (Base.tri-low , (Base.tri-low , Base.tri-high)) = refl
+indexCodeRoundTrip (Base.tri-low , (Base.tri-mid , Base.tri-low)) = refl
+indexCodeRoundTrip (Base.tri-low , (Base.tri-mid , Base.tri-mid)) = refl
+indexCodeRoundTrip (Base.tri-low , (Base.tri-mid , Base.tri-high)) = refl
+indexCodeRoundTrip (Base.tri-low , (Base.tri-high , Base.tri-low)) = refl
+indexCodeRoundTrip (Base.tri-low , (Base.tri-high , Base.tri-mid)) = refl
+indexCodeRoundTrip (Base.tri-low , (Base.tri-high , Base.tri-high)) = refl
+indexCodeRoundTrip (Base.tri-mid , (Base.tri-low , Base.tri-low)) = refl
+indexCodeRoundTrip (Base.tri-mid , (Base.tri-low , Base.tri-mid)) = refl
+indexCodeRoundTrip (Base.tri-mid , (Base.tri-low , Base.tri-high)) = refl
+indexCodeRoundTrip (Base.tri-mid , (Base.tri-mid , Base.tri-low)) = refl
+indexCodeRoundTrip (Base.tri-mid , (Base.tri-mid , Base.tri-mid)) = refl
+indexCodeRoundTrip (Base.tri-mid , (Base.tri-mid , Base.tri-high)) = refl
+indexCodeRoundTrip (Base.tri-mid , (Base.tri-high , Base.tri-low)) = refl
+indexCodeRoundTrip (Base.tri-mid , (Base.tri-high , Base.tri-mid)) = refl
+indexCodeRoundTrip (Base.tri-mid , (Base.tri-high , Base.tri-high)) = refl
+indexCodeRoundTrip (Base.tri-high , (Base.tri-low , Base.tri-low)) = refl
+indexCodeRoundTrip (Base.tri-high , (Base.tri-low , Base.tri-mid)) = refl
+indexCodeRoundTrip (Base.tri-high , (Base.tri-low , Base.tri-high)) = refl
+indexCodeRoundTrip (Base.tri-high , (Base.tri-mid , Base.tri-low)) = refl
+indexCodeRoundTrip (Base.tri-high , (Base.tri-mid , Base.tri-mid)) = refl
+indexCodeRoundTrip (Base.tri-high , (Base.tri-mid , Base.tri-high)) = refl
+indexCodeRoundTrip (Base.tri-high , (Base.tri-high , Base.tri-low)) = refl
+indexCodeRoundTrip (Base.tri-high , (Base.tri-high , Base.tri-mid)) = refl
+indexCodeRoundTrip (Base.tri-high , (Base.tri-high , Base.tri-high)) = refl
+
+codeIndexRoundTrip :
+  (i : Fin.Fin 27) → index27 (codeForIndex27 i) ≡ i
+codeIndexRoundTrip (Fin.zero) = refl
+codeIndexRoundTrip (Fin.suc (Fin.zero)) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.zero))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero)))))))))))))))))))))))))) = refl
+codeIndexRoundTrip (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.zero))))))))))))))))))))))))))) = refl
+
+transportS3OnIndex27 :
+  Shape.TriPermutation → Fin.Fin 27 → Fin.Fin 27
+transportS3OnIndex27 p i =
+  index27 (Shape.conjugateCode p (codeForIndex27 i))
+
+transportIndexIdentity :
+  (i : Fin.Fin 27) →
+  transportS3OnIndex27 Shape.permIdentity i ≡ i
+transportIndexIdentity i =
+  trans (cong index27 (ActionLaws.conjugateIdentity (codeForIndex27 i)))
+    (codeIndexRoundTrip i)
+
+transportIndexComposition :
+  (p q : Shape.TriPermutation) (i : Fin.Fin 27) →
+  transportS3OnIndex27 (S3._∙_ p q) i ≡
+  transportS3OnIndex27 p (transportS3OnIndex27 q i)
+transportIndexComposition p q i =
+  trans
+    (cong index27
+      (ActionLaws.conjugateComposition p q (codeForIndex27 i)))
+    (cong (λ x → index27 (Shape.conjugateCode p x))
+      (sym (indexCodeRoundTrip
+        (Shape.conjugateCode q (codeForIndex27 i)))))
+
+shapeOfIndex27 : Fin.Fin 27 → Shape.ShapeOrbit7
+shapeOfIndex27 i = Shape.shapeClass (codeForIndex27 i)
+
+transportIndexPreservesShape :
+  (p : Shape.TriPermutation) (i : Fin.Fin 27) →
+  shapeOfIndex27 (transportS3OnIndex27 p i) ≡ shapeOfIndex27 i
+transportIndexPreservesShape p i =
+  trans
+    (cong Shape.shapeClass
+      (indexCodeRoundTrip
+        (Shape.conjugateCode p (codeForIndex27 i))))
+    (Q.shapeClassInvariant p (codeForIndex27 i))
+
+classifyElevenOfIndex27 : Fin.Fin 27 → Q.Orbit11
+classifyElevenOfIndex27 i = Q.classify11 (codeForIndex27 i)
+
+transportIndexParity :
+  (p : Shape.TriPermutation) (i : Fin.Fin 27) →
+  classifyElevenOfIndex27 (transportS3OnIndex27 p i) ≡
+  Parity.fullS3ActionOnEleven p (classifyElevenOfIndex27 i)
+transportIndexParity p i =
+  trans
+    (cong Q.classify11
+      (indexCodeRoundTrip
+        (Shape.conjugateCode p (codeForIndex27 i))))
+    (Parity.classifyConjugationByParity p (codeForIndex27 i))
+
+-- The actual action now has a lossless finite-coordinate representation
+-- over Fin 27. This is a necessary receiver for O33's rational
+-- 1+2+3+3+6+6+6 orbit block decomposition. That further
+-- characteristic-zero module isomorphism is still OPEN.
