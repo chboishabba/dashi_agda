@@ -1456,3 +1456,39 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- Safe/just and legal-compliance governance handoff.
+-- These aliases preserve the golden FleetFormalGapTargetTOEExact owner.
+------------------------------------------------------------------------
+
+toeFanningLiteralSituatedAuthorityBoundary :
+  FleetGapTOE.FanningLiteralSituatedAuthorityBoundary
+toeFanningLiteralSituatedAuthorityBoundary =
+  FleetGapTOE.fleetFanningLiteralSituatedAuthorityBoundary
+
+toeCompositionalComplianceBoundary :
+  FleetGapTOE.CompositionalComplianceBoundary
+toeCompositionalComplianceBoundary =
+  FleetGapTOE.fleetCompositionalComplianceBoundary
+
+toeSafeJustLegalGovernanceBoundary :
+  FleetGapTOE.SafeJustLegalGovernanceBoundary
+toeSafeJustLegalGovernanceBoundary =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceBoundary
+
+toeSafeJustLegalGovernanceZKPFrame :
+  FleetGapTOE.SafeJustLegalGovernanceZKPFrame
+toeSafeJustLegalGovernanceZKPFrame =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceZKPFrame
+
+toeSensibLawRecordDoesNotCreateLegalAuthority :
+  FleetGapTOE.SensibLawRecordCreatesLegalAuthority → ⊥
+toeSensibLawRecordDoesNotCreateLegalAuthority =
+  FleetGapTOE.sensibLawRecordDoesNotCreateLegalAuthority
+
+toeActionstepRecordDoesNotCreateLegalAuthority :
+  FleetGapTOE.ActionstepRecordCreatesLegalAuthority → ⊥
+toeActionstepRecordDoesNotCreateLegalAuthority =
+  FleetGapTOE.actionstepRecordDoesNotCreateLegalAuthority
