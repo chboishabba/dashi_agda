@@ -454,3 +454,70 @@ unifiedGDP15000DoesNotOpenCausalConsumer :
   FleetGapTOE.GDP15000CausalConsumerPromotion → ⊥
 unifiedGDP15000DoesNotOpenCausalConsumer =
   FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
+
+
+------------------------------------------------------------------------
+-- Institutional settlement / norm-transmission governance surface.
+------------------------------------------------------------------------
+
+unifiedSettlementTransmissionBoundary :
+  FleetGapTOE.SettlementTransmissionBoundary
+unifiedSettlementTransmissionBoundary =
+  FleetGapTOE.fleetSettlementTransmissionBoundary
+
+unifiedSettlementNormTransmissionZKPFrame :
+  FleetGapTOE.SettlementNormTransmissionZKPFrame
+unifiedSettlementNormTransmissionZKPFrame =
+  FleetGapTOE.canonicalSettlementNormTransmissionZKPFrame
+
+unifiedIndustryConventionDoesNotCreateFederalLaw :
+  FleetGapTOE.IndustryConventionCreatesFederalLaw → ⊥
+unifiedIndustryConventionDoesNotCreateFederalLaw =
+  FleetGapTOE.fleetIndustryConventionDoesNotCreateFederalLaw
+
+unifiedSettlementDoesNotCreateSupremeCourtHolding :
+  FleetGapTOE.SettlementCreatesSupremeCourtHolding → ⊥
+unifiedSettlementDoesNotCreateSupremeCourtHolding =
+  FleetGapTOE.fleetSettlementDoesNotCreateSupremeCourtHolding
+
+unifiedSettlementDoesNotCreateConstitutionalPrecedent :
+  FleetGapTOE.SettlementCreatesConstitutionalPrecedent → ⊥
+unifiedSettlementDoesNotCreateConstitutionalPrecedent =
+  FleetGapTOE.fleetSettlementDoesNotCreateConstitutionalPrecedent
+
+unifiedSameVisiblePolicyDoesNotImplySameAuthoritySource :
+  FleetGapTOE.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
+unifiedSameVisiblePolicyDoesNotImplySameAuthoritySource =
+  FleetGapTOE.fleetSameVisiblePolicyDoesNotImplySameAuthoritySource
+
+unifiedMeta2026SettlementNormCalibration :
+  FleetGapTOE.Meta2026SettlementNormCalibration
+unifiedMeta2026SettlementNormCalibration =
+  FleetGapTOE.fleetMeta2026SettlementNormCalibration
+
+unifiedMetaSettlementAloneLegallyBindsCompetitors : Bool
+unifiedMetaSettlementAloneLegallyBindsCompetitors =
+  FleetGapTOE.fleetMetaSettlementAloneLegallyBindsCompetitors
+
+unifiedMetaSettlementDoesNotBindCompetitors :
+  unifiedMetaSettlementAloneLegallyBindsCompetitors ≡ false
+unifiedMetaSettlementDoesNotBindCompetitors =
+  FleetGapTOE.fleetMetaSettlementDoesNotBindCompetitors
+
+unifiedMetaSettlementCreatesFederalStatute : Bool
+unifiedMetaSettlementCreatesFederalStatute =
+  FleetGapTOE.fleetMetaSettlementCreatesFederalStatute
+
+unifiedMetaSettlementDoesNotCreateFederalStatute :
+  unifiedMetaSettlementCreatesFederalStatute ≡ false
+unifiedMetaSettlementDoesNotCreateFederalStatute =
+  FleetGapTOE.fleetMetaSettlementDoesNotCreateFederalStatute
+
+unifiedJMDPosterCreatesLegalAuthority : Bool
+unifiedJMDPosterCreatesLegalAuthority =
+  FleetGapTOE.fleetJMDPosterCreatesLegalAuthority
+
+unifiedJMDPosterDoesNotCreateLegalAuthority :
+  unifiedJMDPosterCreatesLegalAuthority ≡ false
+unifiedJMDPosterDoesNotCreateLegalAuthority =
+  FleetGapTOE.fleetJMDPosterDoesNotCreateLegalAuthority
