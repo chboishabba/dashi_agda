@@ -31,6 +31,7 @@ import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Foundations.TernaryEndomorphismS3ActionLawsExact as Act
 import DASHI.Foundations.PolynomialVandermondeDiscriminantExact as Disc
+import DASHI.Foundations.PolynomialVietaRootSymmetryExact as Vieta
 
 Code27 : Set
 Code27 = Tower.LevelTwoCode
@@ -94,11 +95,17 @@ fixedRotateSquared = refl
 -- Cubic root discriminant transforms under the SAME abstract S3
 -- elements, but on a DIFFERENT carrier (ordered rational roots).
 -- We explicitly reuse rather than recreate the sign theorem.
-rootParityIsAlternating =
-  Disc.vandermondeTransformsByParity
+rootParityIsAlternating :
+  (p : Perm.TriPermutation) (roots : Vieta.ThreeRoots) →
+  Disc.vandermonde (Vieta.permuteRoots p roots) ≡
+    Disc.isOdd p (Disc.vandermonde roots)
+rootParityIsAlternating = Disc.vandermondeTransformsByParity
 
-rootDiscriminantIsS3Invariant =
-  Disc.discriminantInvariant
+rootDiscriminantIsS3Invariant :
+  (p : Perm.TriPermutation) (roots : Vieta.ThreeRoots) →
+  Disc.discriminant (Vieta.permuteRoots p roots) ≡
+    Disc.discriminant roots
+rootDiscriminantIsS3Invariant = Disc.discriminantInvariant
 
 -- S3-conjugation of a table and S3-reordering of roots are distinct
 -- representations. Their common source is S3, not an identification
