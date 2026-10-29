@@ -581,6 +581,16 @@ haneyAroutBedillion2026 =
     "Human behavioural pharmacology review: cannabis product potency is not delta-9-THC dose because inhalation behaviour changes with product strength."
     "Review-level dose distinction does not identify the delivered dose, exposure, mechanism, or preferred product in the current fixture."
 
+
+lorenzettiEtAl2025 : PotencyDoseSourceReceipt
+lorenzettiEtAl2025 =
+  potency-dose-source-receipt
+    "Valentina Lorenzetti; Isabella Goodwin; Erynn Christensen; Rebecca Kirkham; Yann Chye; Peter Galettis; Rebecca Gordon; Nadia Solowij; Murat Yucel"
+    2025
+    "10.1016/j.drugpo.2025.104974"
+    "Australian same-product HPLC study: subjective cannabis-strength ratings were not correlated with measured THC or total THC in the donated samples."
+    "Perceived strength is not the same endpoint as product preference, therapeutic benefit, or a causal constituent mechanism."
+
 record CultivationCompositionSourceReceipt : Set where
   constructor cultivation-composition-source-receipt
   field
