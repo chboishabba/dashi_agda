@@ -45,23 +45,23 @@ def verify_checked_out_agda_classifiers():
     assert src.is_file(), "Run this test from a checkout containing the Agda module"
     text=src.read_text(encoding="utf-8")
     tri={"low":0,"mid":1,"high":2}
-    pattern=r"Base\\.tri-(low|mid|high)"
-    cl=re.compile(r"^classify11 \\("+pattern+r" , \\("+pattern+r" , "+pattern+
-                  r"\\)\\) = (\\w+)$",re.M)
+    pattern=r"Base\.tri-(low|mid|high)"
+    cl=re.compile(r"^classify11 \("+pattern+r" , \("+pattern+r" , "+pattern+
+                  r"\)\) = (\w+)$",re.M)
     table={}
     for a,b,c,name in cl.findall(text):
         key=(tri[a],tri[b],tri[c])
         assert key not in table
         table[key]=name
     assert len(table)==27
-    reppat=re.compile(r"^representative11 (\\w+) = "+pattern+r" , \\("+pattern+
-                      r" , "+pattern+r"\\)$",re.M)
+    reppat=re.compile(r"^representative11 (\w+) = "+pattern+r" , \("+pattern+
+                      r" , "+pattern+r"\)$",re.M)
     representatives={name:(tri[a],tri[b],tri[c]) for name,a,b,c in reppat.findall(text)}
     assert len(representatives)==11
-    reflpat=re.compile(r"^reflectionOn11 (\\w+) = (\\w+)$",re.M)
+    reflpat=re.compile(r"^reflectionOn11 (\w+) = (\w+)$",re.M)
     reflected=dict(reflpat.findall(text))
     assert len(reflected)==11
-    mergepat=re.compile(r"^mergeToSeven (\\w+) = Shape\\.(\\w+)$",re.M)
+    mergepat=re.compile(r"^mergeToSeven (\w+) = Shape\.(\w+)$",re.M)
     merge=dict(mergepat.findall(text))
     assert len(merge)==11 and len(set(merge.values()))==7
     for x in codes:
