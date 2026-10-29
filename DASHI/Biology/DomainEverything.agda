@@ -53,8 +53,8 @@ import DASHI.Biology.Microbiology.Everything
 import DASHI.Biology.NeurodivergentHoldingTensionSourceBoundaryExact
 import DASHI.Biology.NeurodivergentHoldingTensionBridgeExact
 
--- Explicit seam for the eventual #606 embodied-gate -> #618 social-ecology
--- adapter once draft ancestry is reconciled.  No cross-draft owners are copied.
+-- The former #606 embodied-gate -> social-ecology seam is now discharged on
+-- shared ancestry.  This adapter reuses the merged owners and copies none.
 import DASHI.Biology.EmbodiedSocialEcologyRelationalHistoryObligationExact
 
 -- Same-trial multimodal diagnosis/debugging return, including append-only
