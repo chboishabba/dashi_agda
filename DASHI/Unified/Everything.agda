@@ -104,6 +104,18 @@ open WheelIbrahimCollision public using
   )
 
 
+import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as MangoldtFiniteSum
+open MangoldtFiniteSum public using
+  ( AdditiveScalar
+  ; sumInterval
+  ; sumDecodedInterval
+  ; finiteSumBidiForward
+  ; finiteSumBidiBackward
+  ; pairFiniteSumBidiForward
+  ; pairFiniteSumBidiBackward
+  ; mangoldtFiniteSumForward
+  )
+
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as MangoldtResidual
 open MangoldtResidual public using
   ( periodProjection
