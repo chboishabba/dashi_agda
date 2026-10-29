@@ -108,6 +108,37 @@ def check():
                        if (p, q) != (plane_zero, plane_zero)]
     assert len(plane_reps) == 41 and len(plane_expanded) == 81
     assert Counter(plane_expanded) == Counter(plane_pairs)
+
+    # Exact Q(omega) weighted-output check for the source 5-in-9 plane.
+    def plane_field(seed):
+        rng = Random(seed)
+        d = {}
+        for k in plane:
+            if canonical(k):
+                d[k] = (Fraction(rng.randrange(-8, 9), 7),
+                        Fraction(0 if k == plane_zero else rng.randrange(-8, 9), 11))
+        for k in plane:
+            if k not in d:
+                d[k] = conj(d[neg(k)])
+        return d
+
+    wide_plane = tuple(product(range(-2, 3), repeat=2))
+    for i in range(12):
+        left = plane_field(250000 + i)
+        right = plane_field(260000 + 5 * i)
+        original = {k: CZERO for k in wide_plane}
+        reduced_plane = {k: CZERO for k in wide_plane}
+        for p, q in plane_pairs:
+            k = add_modes(p, q)
+            original[k] = plus(original[k], mul(left[p], right[q]))
+        for p, q in plane_reps:
+            k = add_modes(p, q)
+            z = mul(left[p], right[q])
+            reduced_plane[k] = plus(reduced_plane[k], z)
+            if (p, q) != (plane_zero, plane_zero):
+                reduced_plane[neg(k)] = plus(reduced_plane[neg(k)], conj(z))
+        assert original == reduced_plane
+        assert original[plane_zero][1] == 0
     for p, q in PAIRS:
         assert pair_canonical((p, q)) != pair_canonical((neg(p), neg(q))) or (p, q) == (ZERO, ZERO)
         assert add_modes(neg(p), neg(q)) == neg(add_modes(p, q))
@@ -124,6 +155,7 @@ def check():
         assert len([k for k in WIDE if all(abs(x) <= 1 for x in k)]) == 27
     print('PASS: 12 distinct exact Q(omega) Hermitian two-field profiles, all 125 coefficients')
     print('PASS: 729 original vs 365 products (+364 conjugations), 365 orbits, 729 emitted events')
+    print('PASS: 12 exact Q(omega) 41-vs-81 plane products at all 25 outputs')
     print('PASS: exhaustive address permutation in 3D (365) and 2D (41)')
     print('PASS: global negation, integer-sum covariance, real zero-frequency output')
 
