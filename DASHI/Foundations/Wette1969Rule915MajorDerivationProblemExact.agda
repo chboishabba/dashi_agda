@@ -146,66 +146,85 @@ canonicalWette1969Rule915MajorDerivationProblemBoundary =
 
 
 ------------------------------------------------------------------------
--- CANONICAL CURRENT RESIDUAL.
+-- CANONICAL CURRENT PROBLEM AND SELECTED SUFFICIENT ROUTES.
 --
--- The p.145 transcription, generated scaffold, and structural closure suffixes
--- are already recovered.  The current mathematical residual is therefore:
+-- The canonical current problem is still the pair of certified D18/D27 traces
+-- from the generated p.145 scaffold.  The existing 9.3.23 construction is a
+-- selected sufficient route for D18.  It is not proved complete for D18.
 --
---   D18: one matched historical 9.3.23 core-leaf attempt;
---   D27: two directional implication leaves.
---
--- The suffixes are not new proof obligations.  Existing historical rules close
--- D18 and D27 once these residual witnesses are supplied.
+-- D27 has a selected sufficient route through its two directional leaves.
 ------------------------------------------------------------------------
 
-record CanonicalRule915MajorResidual
+CanonicalRule915CurrentProblem :
+  {initial : Context} →
+  Source.SourceExactScaffoldInputs
+    initial Weld.canonicalFirstSeven Weld.canonicalLater →
+  Set₁
+CanonicalRule915CurrentProblem scaffold =
+  Join.IndependentMajorTraceInputs
+    Weld.canonicalFirstSeven Weld.canonicalLater scaffold
+
+record CanonicalRule915SelectedRouteResidual
     {initial : Context}
     (scaffold :
       Source.SourceExactScaffoldInputs
         initial Weld.canonicalFirstSeven Weld.canonicalLater) : Set₁ where
-  constructor canonicalRule915MajorResidual
+  constructor canonicalRule915SelectedRouteResidual
   field
-    predecessorInductionResidual :
+    selectedPredecessorInductionRoute :
       Resolve18.Rule9323MatchedCoreLeafAttempt
         Weld.canonicalFirstSeven Weld.canonicalLater scaffold
 
-    definiensIndependenceResidual :
+    selectedDefiniensIndependenceRoute :
       Resolve27.CanonicalPremise27DirectionalLeafAttempt scaffold
 
-open CanonicalRule915MajorResidual public
+open CanonicalRule915SelectedRouteResidual public
 
-canonicalMajorTraceInputs :
+selectedRouteToCurrentProblem :
   {initial : Context} →
   {scaffold :
     Source.SourceExactScaffoldInputs
       initial Weld.canonicalFirstSeven Weld.canonicalLater} →
-  CanonicalRule915MajorResidual scaffold →
-  Join.IndependentMajorTraceInputs
-    Weld.canonicalFirstSeven Weld.canonicalLater scaffold
-canonicalMajorTraceInputs residual =
+  CanonicalRule915SelectedRouteResidual scaffold →
+  CanonicalRule915CurrentProblem scaffold
+selectedRouteToCurrentProblem residual =
   Join.independentMajorTraceInputs
     (Resolve18.matchedRule9323ClosesPremise18
-      (predecessorInductionResidual residual))
+      (selectedPredecessorInductionRoute residual))
     (Resolve27.closeCanonicalPremise27
-      (definiensIndependenceResidual residual))
+      (selectedDefiniensIndependenceRoute residual))
 
-selectCanonicalRule915FromCurrentResidual :
+selectCanonicalRule915FromCurrentProblem :
   {initial : Context} →
   (recursivePredicate : WordTerm) →
   (scaffold :
     Source.SourceExactScaffoldInputs
       initial Weld.canonicalFirstSeven Weld.canonicalLater) →
-  (residual : CanonicalRule915MajorResidual scaffold) →
+  (problem : CanonicalRule915CurrentProblem scaffold) →
   PCRA.SelectedRuleApplication historicalSystem
-    (Join.joinedMajorTarget (canonicalMajorTraceInputs residual))
-selectCanonicalRule915FromCurrentResidual
-  recursivePredicate scaffold residual =
+    (Join.joinedMajorTarget problem)
+selectCanonicalRule915FromCurrentProblem
+  recursivePredicate scaffold problem =
   Join.selectRule915FromIndependentMajorTraces
     Weld.canonicalFirstSeven
     Weld.canonicalLater
     recursivePredicate
     scaffold
-    (canonicalMajorTraceInputs residual)
+    problem
+
+selectCanonicalRule915FromSelectedRoute :
+  {initial : Context} →
+  (recursivePredicate : WordTerm) →
+  (scaffold :
+    Source.SourceExactScaffoldInputs
+      initial Weld.canonicalFirstSeven Weld.canonicalLater) →
+  (residual : CanonicalRule915SelectedRouteResidual scaffold) →
+  PCRA.SelectedRuleApplication historicalSystem
+    (Join.joinedMajorTarget (selectedRouteToCurrentProblem residual))
+selectCanonicalRule915FromSelectedRoute
+  recursivePredicate scaffold residual =
+  selectCanonicalRule915FromCurrentProblem
+    recursivePredicate scaffold (selectedRouteToCurrentProblem residual)
 
 ------------------------------------------------------------------------
 -- Typed precondition / invariant / postcondition contract.
@@ -220,17 +239,17 @@ record CanonicalRule915ResidualContract
   constructor canonicalRule915ResidualContract
   field
     preconditions :
-      CanonicalRule915MajorResidual scaffold
+      CanonicalRule915CurrentProblem scaffold
 
     scaffoldInvariant :
       Cutset.Rule915SyntacticScaffoldEvidence
-        (Join.joinedMajorTarget (canonicalMajorTraceInputs preconditions))
+        (Join.joinedMajorTarget preconditions)
         Weld.canonicalFirstSeven
         Weld.canonicalLater
 
     postcondition :
       PCRA.SelectedRuleApplication historicalSystem
-        (Join.joinedMajorTarget (canonicalMajorTraceInputs preconditions))
+        (Join.joinedMajorTarget preconditions)
 
 open CanonicalRule915ResidualContract public
 
@@ -240,18 +259,31 @@ buildCanonicalRule915ResidualContract :
   (scaffold :
     Source.SourceExactScaffoldInputs
       initial Weld.canonicalFirstSeven Weld.canonicalLater) →
-  (residual : CanonicalRule915MajorResidual scaffold) →
+  (problem : CanonicalRule915CurrentProblem scaffold) →
   CanonicalRule915ResidualContract recursivePredicate scaffold
-buildCanonicalRule915ResidualContract recursivePredicate scaffold residual =
+buildCanonicalRule915ResidualContract recursivePredicate scaffold problem =
   canonicalRule915ResidualContract
-    residual
+    problem
     (Join.joinedScaffoldEvidence
       Weld.canonicalFirstSeven
       Weld.canonicalLater
       scaffold
-      (canonicalMajorTraceInputs residual))
-    (selectCanonicalRule915FromCurrentResidual
-      recursivePredicate scaffold residual)
+      problem)
+    (selectCanonicalRule915FromCurrentProblem
+      recursivePredicate scaffold problem)
+
+buildCanonicalRule915SelectedRouteContract :
+  {initial : Context} →
+  (recursivePredicate : WordTerm) →
+  (scaffold :
+    Source.SourceExactScaffoldInputs
+      initial Weld.canonicalFirstSeven Weld.canonicalLater) →
+  (residual : CanonicalRule915SelectedRouteResidual scaffold) →
+  CanonicalRule915ResidualContract recursivePredicate scaffold
+buildCanonicalRule915SelectedRouteContract
+  recursivePredicate scaffold residual =
+  buildCanonicalRule915ResidualContract
+    recursivePredicate scaffold (selectedRouteToCurrentProblem residual)
 
 ------------------------------------------------------------------------
 -- Exact non-promotion gates.
@@ -302,9 +334,9 @@ canonicalRule915MajorZKPFrame =
     "C: DASHI.Foundations.Wette1969Rule915MajorDerivationProblemExact"
     "S: all 27 source slots are fixed; scaffold slots are generated; D18 and D27 are reduced but their leaf witnesses remain explicit"
     "L: finite historical derivation contexts with monotone certified trace weakening and replay"
-    "P: discharge only the matched 9.3.23 leaf obligations for D18 and the two directional leaves for D27"
+    "P: search the general D18 trace problem; use matched 9.3.23 only as a selected sufficient route; use the two directional leaves as the selected D27 route"
     "G: select certified historical 9.1.5 at the joined target without semantic promotion"
-    "F: return the first missing D18 or D27 leaf receipt; status, documentation, fleet priority, and source labels do not create it"
+    "F: return the first missing general D18/D27 trace receipt; selected route, status, documentation, fleet priority, and source labels do not create it"
 
 record CanonicalRule915CurrentProblemBoundary : Set where
   constructor canonicalRule915CurrentProblemBoundary
@@ -321,9 +353,13 @@ record CanonicalRule915CurrentProblemBoundary : Set where
     generatedScaffoldLeavesExactlyTwoMajorBranchesIsTrue :
       generatedScaffoldLeavesExactlyTwoMajorBranches ≡ true
 
-    premise18ClosesFromMatched9323ThenTwo939Steps : Bool
-    premise18ClosesFromMatched9323ThenTwo939StepsIsTrue :
-      premise18ClosesFromMatched9323ThenTwo939Steps ≡ true
+    premise18Selected9323RouteClosesThenTwo939Steps : Bool
+    premise18Selected9323RouteClosesThenTwo939StepsIsTrue :
+      premise18Selected9323RouteClosesThenTwo939Steps ≡ true
+
+    selected9323RouteIsKnownCompleteForPremise18 : Bool
+    selected9323RouteIsKnownCompleteForPremise18IsFalse :
+      selected9323RouteIsKnownCompleteForPremise18 ≡ false
 
     premise27ClosesFromTwoDirectionalLeavesThen935AndTwo939Steps : Bool
     premise27ClosesFromTwoDirectionalLeavesThen935AndTwo939StepsIsTrue :
@@ -345,6 +381,7 @@ canonicalRule915CurrentProblemBoundary =
     true refl
     true refl
     true refl
+    false refl
     true refl
     false refl
     false refl
