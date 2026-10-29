@@ -829,3 +829,30 @@ unifiedFiveGrid63OrbitClasses =
 unifiedActual729PositivePairOrbitCount :
   Pairs365Owner.countWhereL Pair365.positivePair Pairs365Owner.pair729 ≡ 365
 unifiedActual729PositivePairOrbitCount = Pair365.actualPositivePairRepresentatives
+
+
+------------------------------------------------------------------------
+-- 365 real-Hermitian ordered-pair orbits and conjugate event transport.
+-- The global 729-summand permutation proof remains a separate obligation.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P227729OrbitWeighted365ConvolutionExact as OrbitWeighted365
+
+unifiedOrbit365CanonicalPairCount :
+  Pairs365Owner.lengthL OrbitWeighted365.canonicalOrderedPairs ≡ 365
+unifiedOrbit365CanonicalPairCount =
+  OrbitWeighted365.actual365CanonicalPairEntries
+
+unifiedOrbit365EventCount :
+  (a b : HermitianSym729.Hermitian27) →
+  Pairs365Owner.lengthL (OrbitWeighted365.orbitWeightedEvents a b) ≡ 729
+unifiedOrbit365EventCount =
+  OrbitWeighted365.actual729WeightedEvents
+
+unifiedOrbit365ReflectedEventExact :
+  (a b : HermitianSym729.Hermitian27)
+  (pair : Pairs365Owner.ModePair729) →
+  OrbitWeighted365.sourceEvent a b
+    (AntipodalSym729.simultaneouslyNegateOrderedPair pair)
+  ≡ OrbitWeighted365.invertedEvent (OrbitWeighted365.sourceEvent a b pair)
+unifiedOrbit365ReflectedEventExact =
+  OrbitWeighted365.reflectedEventIsConjugate
