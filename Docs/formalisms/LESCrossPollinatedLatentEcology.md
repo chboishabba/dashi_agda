@@ -206,3 +206,6 @@ The ZKP frame uses these roles.
 Agda remains the golden formal authority. Lean may mirror this boundary. A Lean mirror must not strengthen it.
 
 Primary scientific attribution remains with Marschner and Rengel for nutrient availability and with the cited Australian agricultural agencies for residual-herbicide carryover and bioassay guidance. DASHI owns the typed reconstruction and non-promotion interface.
+
+
+Leaf area enters as a coupled driver, not as a nutrient-uptake oracle. The canonical whole-plant owner records that leaf area can change transpiring and photosynthetic surface, while root state, soil moisture, dissolved-ion availability, transporters, fungal pathways, atmosphere and demand remain explicit. The exact non-promotion theorem states that leaf area alone does not determine nutrient uptake.
