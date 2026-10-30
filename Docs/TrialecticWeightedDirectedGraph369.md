@@ -380,3 +380,61 @@ unavailable; the two-ended directed fabric is finite/synthetic and
 still lacks a source-justified target-domain gluing/face-mediation
 interface. Avoid any claim of full TOE, physical YM/Monster same-object,
 or human intersectionality evidence from these examples.
+
+## 2026-10-30 continuation — orientation normal form and the symmetry-fixed cut
+
+**New golden source-written owners:**
+
+- `GraphColouring369PantsEdgeCoverageExact` reuses
+  `Geometry.HypervoxelAdjacent` and the existing `Cut.unitNativeGridEdges`.
+  Each of the 12 constructor combinations (3 coordinate axes × 4
+  oriented nearest-neighbour ternary steps) receives a concrete
+  `OrientedSlotCertificate`. Its three axes × nine fixed-coordinate
+  assignments × two increasing steps construct **exactly 54 canonical
+  slots**. The module states both that the slot edges reproduce the
+  prior 54-unit-edge list and that slot codes form the closed 0..53
+  census. Formal `slotIndex` injectivity is *still separately open*
+  on the Agda side; do not infer the arbitrary-carrier injection from
+  the closed finite list equality alone.
+- `GraphColouring369PantsSymmetryCutInvariantExact` reuses the
+  existing six `S3CoordinatePermutation` actions and the existing
+  middle-coordinate seam flip. For this **selected** checkerboard,
+  coordinate permutations and sign inversion of coordinate two
+  preserve the actual Bool partition, not merely some proper
+  colouring. Source-written proofs transport this back through the
+  pre-existing voxel/pants round-trip. The underlying 3×3 asymmetric
+  weighted graph is NOT thereby S3-equivariant.
+
+**Downstream Lean** now includes independent
+`GraphColouring369PantsEdgeCoverage.lean` with a canonical 54-slot
+list, `Nodup` proof candidate, boolean algorithmic adjacency coverage
+and native edge soundness, plus
+`GraphColouring369PantsSymmetryCutInvariant.lean`, which enumerates
+all S3 and seam cases in the selected partition. Golden Agda remains
+authoritative and both kernels remain unchecked.
+
+**Independent locally executed finite Python audit:** confirms 54
+unique canonical edges spanning all 108 oriented native edges, all
+162 S3-vertex partition equalities, and all 27 seam-reflection
+partition equalities. The repository's deterministic companion script
+now reproduces these checks. They are computational findings, not an
+Agda/Lean kernel receipt.
+
+**Fresh primary-source comparisons:**
+- Ribeiro, Tenorio, Belieni, Souza & Mesquita, *Cooperative Sheaf
+  Neural Networks* (ICLR 2026), for independent incoming/outgoing
+  restrictions and selective receptivity. No theorem/benchmark copied.
+- Carballo Castro, Madeira, Qin, Thanou & Frossard, *Generating Directed
+  Graphs with Dual Attention and Asymmetric Encoding* (ICLR 2026),
+  for asymmetric pairwise graph model design. No trained weights or
+  graph-generator claim imported.
+- Fiorini et al., *Sheaves Reloaded: A Direction Awakening* and
+  Mule et al., *Directional Sheaf Hypergraph Networks*, ICLR 2026.
+  Attribution remains with respective authors; the DASHI finite
+  orientation/colour/face proofs are separately owned.
+
+**Remaining:** exact-head Agda safe-import and Lean kernel checks;
+generic Agda `slotIndex` injection (or an equivalent witnessed
+list-`Nodup` theorem); domain-sourced face/pants interface and any
+actual equivariant *weighted* action; Ibrahim Monster3B and YM
+same-object/physics work is not discharged.
