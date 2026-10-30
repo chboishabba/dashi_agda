@@ -1,6 +1,20 @@
 # Changelog
 
 
+## 2026-10-30 — ABC orbit follow-on: six genus-one algebraic charts
+
+- Added \`sixPuncturedTorusBoundary\` to the existing Agda ABC
+  orbit module, transporting the source-owned Nielsen
+  punctured-torus commutator coordinates across all six
+  existing S3 permutations.
+- Independently executed 6 genus-one, 6 inversion and 36
+  group-transport finite cases. GitHub source readback passed;
+  the committed Python regression itself, exact-head Agda/Lean
+  kernels and CI were not run. G3 embedded-surface geometry
+  remains open.
+
+
+
 ## 2026-10-30 — Alexander horned ABC six-permutation peripheral orbit (PR #1244)
 
 - Reused \`TernaryEndomorphismConjugacyExact\`,
