@@ -108,3 +108,10 @@ Owner: `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasingMaxCut.md`, section **5j
 - [ ] **P0** Prove actual `gaussianActualCharacterResolution` and `cyclotomicFiveActualCharacterResolution` using existing 1D/tensor orthogonality and original source sample order, then pinned Agda check.
 - [ ] **P0** Prove tensor FFT/padding synthesis/analysis = corresponding source character sums for arbitrary coefficient fields; compose with the now generic original 729 extraction to close both sampled/index equations.
 - [ ] **P1/P2** Preserve original physical Complex3/Leray/R440/R736/B4 and experimental clock roots; no same-object YM/NS or Ibrahim/Monster 3B promotion from combinatorial equivalences.
+
+
+### 2026-10-30 exact --safe closure gate (PR #1407)
+- [x] Check actual local branch owners plus `DASHI/Core/Prelude.agda` and original observer incidence for `{-# OPTIONS --safe #-}`: the file options are **absent** despite no obvious new trust escapes. Note: no escape scan certifies the Agda import closure.
+- [x] Verify original de-aliasing attribution: S. A. Orszag 1971 J. Atmos. Sci. DOI 10.1175/1520-0469(1971)028<1074:OTEOAI>2.0.CO;2; G. S. Patterson Jr./S. A. Orszag 1971 Phys. Fluids DOI 10.1063/1.1693365.
+- [x] Normalize C4 four-point scalar explicitly as `normalize 4 1`.
+- [ ] **P0:** pinned Agda `--safe` type-check with source dependency audit; do not claim certified golden just because no holes/postulates appear in static scans. Preserve original unmerged branches and ESD write protection.
