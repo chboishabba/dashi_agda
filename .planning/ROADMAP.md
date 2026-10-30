@@ -132,3 +132,18 @@ this 369 lane does not mark those completed.
   interfaces (separate from finite selected demonstration).
 - [ ] Exact-head `--safe` Agda and downstream pinned Lean verification
   for both the pants graph/colour and selected mediation owners.
+
+## 2026-10-30 P0/P1 native weighted max-cut and QID high-alpha cut
+
+Maximal edgewise two-way cut can be derived from existing proved-candidate
+checkerboard properness. This bridges the user's graph-as-matrix
+example and 27-grid without falsely identifying them. Reuse graph
+isomorphism and a transported palette witness. QIDs are concept-only
+coordinates and cannot provide source, semantics, physics, or authority.
+
+- [ ] Source-write edge-saturated maximum cut for any nonnegative native
+  graph edge weights; record unit-weight 54 edge finite audit separately.
+- [ ] Verify QIDs against live Wikidata labels and source-atlas ownership.
+- [ ] Integrate into Ibrahim/Pareto snowball and downstream Lean.
+- [ ] Kernel-check each construction on exact branch head; keep
+  source-written and kernel-paid status split until then.
