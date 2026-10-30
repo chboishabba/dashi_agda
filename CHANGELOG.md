@@ -1,6 +1,20 @@
 # Changelog
 
 
+## 2026-10-30 — S3-equivariant three-class middle-child index
+
+- Added 36-case \`middleChildClassCriterion\` to the existing canonical
+  ternary boundary Agda module: two ABC relabellings have the same
+  unoriented peripheral conjugacy class precisely when they have
+  the same middle-generator image \`p(b)\`.
+- Reused the pre-existing S3 composition theorem to prove
+  \`middleChildIndexEquivariant\` and six orientation-flip facts.
+- Independently checked 36 index/class comparisons and 36
+  transport cases. Exact-head Agda kernel/CI still unrun.
+  The three-class chart is algebraic, not the wild complement.
+
+
+
 ## 2026-10-30 — ABC orbit follow-on: six genus-one algebraic charts
 
 - Added \`sixPuncturedTorusBoundary\` to the existing Agda ABC
