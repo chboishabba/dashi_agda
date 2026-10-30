@@ -515,3 +515,221 @@ circuitPlacedCNFClosedClauseCount circuit =
     (cong
       (λ total → total + suc zero)
       (fourPerGateMultiply (Circuit.gateCount circuit)))
+
+
+------------------------------------------------------------------------
+-- ACTUAL GLOBAL CNF SOUNDNESS / COMPLETENESS FOR THE ORIGINAL DAG.
+--
+-- This is a structural same-object statement: every assigned gate output
+-- satisfies the original gate's local Boolean relation after pulling the
+-- actual global Fin assignment back along its original variable indices.
+-- Critically, this does not *yet* identify the finite assignment with
+-- evaluateProgram on the input vector: that requires a separate
+-- gate-evaluation/finite-bits bridge before transferring the numeric count.
+--
+-- Original proof owners reused:
+--   Placed.evaluateCNFAppend
+--   Rename.renamedCNFEvaluation
+--   Rename.placedTruthTableCNFSound/Complete
+--   CNF.andTrueGivesRight
+-- No new SAT datatype, CNF compiler, or axiom.
+------------------------------------------------------------------------
+
+-- Same Boolean conjunction inversion, specialized to the earlier CNF owner.
+-- The Cook-specific andTrueLeft lives in the prior SAT semantics owner; this
+-- variant avoids silently assuming Cook.andBool and CNF.andBool are identical.
+cnfAndTrueLeft :
+  ∀ {left right : Bool} →
+  CNF.andBool left right ≡ true → left ≡ true
+cnfAndTrueLeft {true} {true} accepted = refl
+cnfAndTrueLeft {true} {false} ()
+cnfAndTrueLeft {false} {true} ()
+cnfAndTrueLeft {false} {false} ()
+
+cnfAndBothTrue :
+  ∀ {left right : Bool} →
+  left ≡ true → right ≡ true →
+  CNF.andBool left right ≡ true
+cnfAndBothTrue refl refl = refl
+
+-- Proven structural witness for the ACTUAL original GateProgram, using
+-- the concrete original local gate relation (not a synthetic oracle).
+data ProgramPlacedGatesValid {inputs : Nat} :
+  ∀ {gates : Nat} →
+  (program : Circuit.GateProgram inputs gates) →
+  CNF.Bits (inputs + gates) → Set where
+
+  emptyProgramValid :
+    ∀ {bits : CNF.Bits (inputs + zero)} →
+    ProgramPlacedGatesValid Circuit.noGates bits
+
+  extendedProgramValid :
+    ∀ {gates : Nat}
+      {previous : Circuit.GateProgram inputs gates}
+      {gate : Circuit.Gate inputs gates}
+      {bits : CNF.Bits (inputs + suc gates)} →
+    ProgramPlacedGatesValid previous
+      (Rename.pullbackBits extendEarlierFin bits) →
+    localGateConsistent gate
+      (Rename.pullbackBits (gateWindowRename gate) bits) ≡ true →
+    ProgramPlacedGatesValid (Circuit.appendGate previous gate) bits
+
+programPlacedCNFSound :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (bits : CNF.Bits (inputs + gates)) →
+  CNF.evaluateCNF (programPlacedCNF program) bits ≡ true →
+  ProgramPlacedGatesValid program bits
+programPlacedCNFSound Circuit.noGates bits accepted =
+  emptyProgramValid
+programPlacedCNFSound
+    (Circuit.appendGate previous gate) bits accepted =
+  extendedProgramValid
+    (programPlacedCNFSound
+      previous
+      (Rename.pullbackBits extendEarlierFin bits)
+      (trans
+        (sym
+          (Rename.renamedCNFEvaluation
+            extendEarlierFin (programPlacedCNF previous) bits))
+        (cnfAndTrueLeft split)))
+    (placedGateSound gate bits
+      (CNF.andTrueGivesRight
+        (CNF.evaluateCNF
+          (Rename.renameCNF extendEarlierFin
+            (programPlacedCNF previous))
+          bits)
+        (CNF.evaluateCNF (placedGateCNF gate) bits)
+        split))
+  where
+    split :
+      CNF.andBool
+        (CNF.evaluateCNF
+          (Rename.renameCNF extendEarlierFin
+            (programPlacedCNF previous))
+          bits)
+        (CNF.evaluateCNF (placedGateCNF gate) bits)
+      ≡ true
+    split =
+      trans
+        (sym
+          (Placed.evaluateCNFAppend
+            (Rename.renameCNF extendEarlierFin
+              (programPlacedCNF previous))
+            (placedGateCNF gate)
+            bits))
+        accepted
+
+programPlacedCNFComplete :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (bits : CNF.Bits (inputs + gates)) →
+  ProgramPlacedGatesValid program bits →
+  CNF.evaluateCNF (programPlacedCNF program) bits ≡ true
+programPlacedCNFComplete Circuit.noGates bits emptyProgramValid = refl
+programPlacedCNFComplete
+    (Circuit.appendGate previous gate)
+    bits
+    (extendedProgramValid oldValid gateValid) =
+  trans
+    (Placed.evaluateCNFAppend
+      (Rename.renameCNF extendEarlierFin
+        (programPlacedCNF previous))
+      (placedGateCNF gate)
+      bits)
+    (cnfAndBothTrue
+      (trans
+        (Rename.renamedCNFEvaluation
+          extendEarlierFin
+          (programPlacedCNF previous)
+          bits)
+        (programPlacedCNFComplete
+          previous
+          (Rename.pullbackBits extendEarlierFin bits)
+          oldValid))
+      (placedGateComplete gate bits gateValid))
+
+-- The original output-wire unit clause has exactly the value of the
+-- original output variable. Evaluating the Boolean bit explicitly avoids
+-- an unproved rewrite between separately defined Boolean operations.
+outputUnitEvaluation :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (bits : CNF.Bits (inputs + Circuit.gateCount circuit)) →
+  CNF.evaluateCNF (outputUnitCNF circuit) bits ≡
+    CNF.lookupBit bits (outputWireFin (Circuit.outputWire circuit))
+outputUnitEvaluation circuit bits
+  with CNF.lookupBit bits (outputWireFin (Circuit.outputWire circuit))
+... | false = refl
+... | true = refl
+
+record WholeCircuitPlacedMeaning
+    {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (bits : CNF.Bits (inputs + Circuit.gateCount circuit)) : Set where
+  constructor whole-circuit-placed-meaning
+  field
+    gateRelations :
+      ProgramPlacedGatesValid (Circuit.program circuit) bits
+    outputAccepted :
+      CNF.lookupBit bits (outputWireFin (Circuit.outputWire circuit))
+        ≡ true
+
+wholeCircuitPlacedCNFSound :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (bits : CNF.Bits (inputs + Circuit.gateCount circuit)) →
+  CNF.evaluateCNF (circuitPlacedCNF circuit) bits ≡ true →
+  WholeCircuitPlacedMeaning circuit bits
+wholeCircuitPlacedCNFSound circuit bits accepted =
+  whole-circuit-placed-meaning
+    (programPlacedCNFSound
+      (Circuit.program circuit) bits
+      (cnfAndTrueLeft split))
+    (trans
+      (sym (outputUnitEvaluation circuit bits))
+      (CNF.andTrueGivesRight
+        (CNF.evaluateCNF
+          (programPlacedCNF (Circuit.program circuit)) bits)
+        (CNF.evaluateCNF (outputUnitCNF circuit) bits)
+        split))
+  where
+    split :
+      CNF.andBool
+        (CNF.evaluateCNF
+          (programPlacedCNF (Circuit.program circuit)) bits)
+        (CNF.evaluateCNF (outputUnitCNF circuit) bits)
+      ≡ true
+    split =
+      trans
+        (sym
+          (Placed.evaluateCNFAppend
+            (programPlacedCNF (Circuit.program circuit))
+            (outputUnitCNF circuit) bits))
+        accepted
+
+wholeCircuitPlacedCNFComplete :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (bits : CNF.Bits (inputs + Circuit.gateCount circuit)) →
+  WholeCircuitPlacedMeaning circuit bits →
+  CNF.evaluateCNF (circuitPlacedCNF circuit) bits ≡ true
+wholeCircuitPlacedCNFComplete circuit bits
+    (whole-circuit-placed-meaning relations accepted) =
+  trans
+    (Placed.evaluateCNFAppend
+      (programPlacedCNF (Circuit.program circuit))
+      (outputUnitCNF circuit)
+      bits)
+    (cnfAndBothTrue
+      (programPlacedCNFComplete
+        (Circuit.program circuit) bits relations)
+      (trans
+        (outputUnitEvaluation circuit bits)
+        accepted))
+
+-- This soundness/completeness is on the literal whole-circuit CNF and
+-- original per-gate relations. The missing stronger bridge remains the
+-- equivalence with evaluateProgram on the finite original input vector,
+-- which is needed to reuse finiteSupportedTseitinCountExact on THIS CNF.
+-- All declarations in this cut are source-written, Agda kernel pending.
