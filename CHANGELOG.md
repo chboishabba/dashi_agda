@@ -88,3 +88,9 @@ monitor surface.
 - Inhabited inherited exact `CoarseFineReopening Nat`, `ConsumerIndexedResidualRefinement.ResidualRepair`, Pickover sin-9999 `SignedPhaseFibre` for the *actual* twin consumer. Original 59/329 collision proves the residual must separate them. Reuses exact `NatPeriod270` inverse, not a duplicate quotient.
 - Proved in source exact actual Mangoldt pointwise consumer reopening and any finite-window pair-correlation BIDI through this fibre, followed by original prime-only / proper-power error sum split. Full FRACTRAN machine readout correctness and cofinal CT15 estimate remain explicit, uninhabited/missing premises.
 - Linked via all 3 canonical TOE roots, added finite exact Python diagnostic. No ESD edits, no CI, no kernel test; historical Conway/Brun/Hardy–Littlewood and original Ibrahim/Pareto/Snowball/QID ownership preserved.
+
+## 2026-10-30 — cofinal fixed-FRACTRAN-rack no-go from original factorable sieve owner
+
+- Source-wrote the exact certified-modulus survivor ↔ paired two-register FRACTRAN blocked-prefix equivalence using the original FRACDASH first-applicable contract and CertifiedPrimePairModulusExact.
+- Reused existing `FiniteTwinSieveFactorableLiftExact` unbounded double-composite construction to prove source-level `cofinallyBlockedCompositePrimePairs` for any finite rack with a surviving seed. It rules out global prime classification from any fixed finite divisor rack, not from a genuine unbounded FRACTRAN computation.
+- Source-wrote Pickover's original `signedFibreStrictlyRefinesSector` specialized to the twin-consumer period fibre. Exact finite tests passed locally; Agda/Lean kernel pending, no ESD changes or CI.
