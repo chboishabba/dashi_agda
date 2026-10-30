@@ -27,7 +27,7 @@ open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NP
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using
-  (cong₂; sym; trans; subst)
+  (cong; cong₂; sym; trans; subst)
 
 import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannVonMangoldtSpecification as VM
@@ -40,6 +40,8 @@ import DASHI.Arithmetic.TwinPrimeMangoldtPrimeOneCertifiedBidiExact as Certified
 import DASHI.Arithmetic.TwinPrimeMangoldtPrimeErrorFiniteSplitExact as Split
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as Sum
 import DASHI.Arithmetic.TwinPrimeWeilActualCorrelationPartitionExact as WeilBridge
+import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as Residual
+import DASHI.Arithmetic.TwinPrimeMangoldtActualPrimePowerResidualExact as Actual
 
 -- Constructive membership, with exact start and count.
 data TwinInInterval : Nat → Nat → Set where
@@ -249,3 +251,139 @@ nonzeroPrimeOnlySumGivesBoundedTwin
     (nonzeroPrimeOnlySumGivesTwin
       space arithmetic mangoldt theta ownership laws
       start count nonzero)
+
+------------------------------------------------------------------------
+-- CT15/CT16 NEW ALTERNATE MAX CUT: EXACT TOTAL != ERROR SEPARATOR.
+--
+-- Original finite identity owner: finiteMangoldtPrimeErrorSplit.
+-- Original finite witness owner: nonzeroPrimeOnlySumGivesBoundedTwin.
+-- Neither a positive lower bound nor a real log scalar is necessary
+-- for this LOGICAL implication. At arbitrarily large windows an
+-- actual separator remains a genuinely OPEN number-theory task.
+--
+-- Consumer-guided premise: an observation of the actual scalar sums
+-- differs. A noninjective observer is enough IF it distinguishes
+-- these two concrete inputs. Mere residue-class data for n, QIDs,
+-- character matches, and finite wheel survivors do not give it.
+-- Source-written / Agda safe-kernel verification pending.
+------------------------------------------------------------------------
+
+actualMangoldtTotalWindow :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic) →
+  (start count : Nat) →
+  Weil.WeilTestSpace.Scalar space
+actualMangoldtTotalWindow space arithmetic mangoldt start count =
+  Sum.sumInterval (WeilBridge.weilAdditive space)
+    (Residual.pairCorrelationAtNat
+      (Actual.actualMangoldtPair space arithmetic mangoldt))
+    start count
+
+actualMangoldtErrorWindow :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic) →
+  (start count : Nat) →
+  Weil.WeilTestSpace.Scalar space
+actualMangoldtErrorWindow space arithmetic mangoldt start count =
+  Sum.sumInterval (WeilBridge.weilAdditive space)
+    (Split.nonPrimeErrorAtNat space arithmetic mangoldt)
+    start count
+
+-- If prime-only sum were zero, exact split and additive left-zero
+-- force total=error, contradicting the supplied actual mismatch.
+totalErrorUnequalForcesPrimeOnlyNonzero :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (laws : Split.AdditiveInterchangeLaws space)
+  (start count : Nat) →
+  (actualMangoldtTotalWindow space arithmetic mangoldt start count
+    ≡ actualMangoldtErrorWindow space arithmetic mangoldt start count
+    → ⊥) →
+  (Sum.sumInterval (WeilBridge.weilAdditive space)
+    (Split.primeOnlyAtNat space arithmetic mangoldt)
+    start count
+    ≡ Weil.WeilTestSpace.zeroS space → ⊥)
+totalErrorUnequalForcesPrimeOnlyNonzero
+    space arithmetic mangoldt laws start count unequal primeZero =
+  unequal
+    (trans
+      (Split.finiteMangoldtPrimeErrorSplit
+        space arithmetic mangoldt laws start count)
+      (trans
+        (cong
+          (λ x → Weil.WeilTestSpace._+S_ space x
+            (actualMangoldtErrorWindow
+              space arithmetic mangoldt start count))
+          primeZero)
+        (Split.zeroLeft laws
+          (actualMangoldtErrorWindow
+            space arithmetic mangoldt start count))))
+
+-- A proof that the OBSERVED total differs from the OBSERVED error
+-- is enough: any equality of original scalars would transport under
+-- the observer via cong. This explicitly permits noninjective
+-- observers but requires a real distinguishability proof.
+observedTotalErrorSeparationGivesBoundedTwin :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (theta : Cheb.PrimeLogWeightKernel space PrimeNat.natPrimePredicate)
+  (ownership : Cheb.ChebyshevPrimeOwnership
+    space PrimeNat.natPrimePredicate theta arithmetic)
+  (laws : Split.AdditiveInterchangeLaws space)
+  {Observation : Set}
+  (observe : Weil.WeilTestSpace.Scalar space → Observation)
+  (start count : Nat) →
+  (observe (actualMangoldtTotalWindow
+    space arithmetic mangoldt start count)
+    ≡
+   observe (actualMangoldtErrorWindow
+    space arithmetic mangoldt start count)
+    → ⊥) →
+  Σ Nat (λ p →
+    (start ≤ p) × ((suc p ≤ start + count) × Twin.TwinPrimeAt p))
+observedTotalErrorSeparationGivesBoundedTwin
+    space arithmetic mangoldt theta ownership laws
+    observe start count distinct =
+  nonzeroPrimeOnlySumGivesBoundedTwin
+    space arithmetic mangoldt theta ownership laws
+    start count
+    (totalErrorUnequalForcesPrimeOnlyNonzero
+      space arithmetic mangoldt laws start count
+      (λ equal → distinct (cong observe equal)))
+
+-- CT18 CONDITIONAL COMPOSITION over arbitrarily late exact windows.
+-- The input below is NOT a theorem proved in this module; it is the
+-- precise new research obligation for parity/symmetry approaches.
+cofinalObservedSeparationImpliesTwinInfinitude :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (theta : Cheb.PrimeLogWeightKernel space PrimeNat.natPrimePredicate)
+  (ownership : Cheb.ChebyshevPrimeOwnership
+    space PrimeNat.natPrimePredicate theta arithmetic)
+  (laws : Split.AdditiveInterchangeLaws space)
+  {Observation : Set}
+  (observe : Weil.WeilTestSpace.Scalar space → Observation)
+  (windowLength : Nat → Nat) →
+  ((N : Nat) →
+    (observe (actualMangoldtTotalWindow space arithmetic mangoldt
+      N (windowLength N))
+      ≡
+     observe (actualMangoldtErrorWindow space arithmetic mangoldt
+      N (windowLength N))
+      → ⊥)) →
+  Twin.TwinPrimesInfinitelyOften
+cofinalObservedSeparationImpliesTwinInfinitude
+    space arithmetic mangoldt theta ownership laws
+    observe windowLength distinct =
+  twinUnboundedFromUnboundedNonzeroPrimeSums
+    space arithmetic mangoldt theta ownership laws
+    windowLength
+    (λ N →
+      totalErrorUnequalForcesPrimeOnlyNonzero
+        space arithmetic mangoldt laws N (windowLength N)
+        (λ equal → distinct N (cong observe equal)))
