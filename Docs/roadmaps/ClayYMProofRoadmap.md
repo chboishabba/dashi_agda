@@ -13,7 +13,9 @@ The canonical `BalabanSU2RationalWilsonTraceBoundExact` proves
 boundedness fields** are supplied by the existing trace theorem. The resulting
 canonical S2 inputs feed `YMClayLiteralWilsonP2ExpectationConvergenceExact`
 and the already-proved three selected expectation-limit compilers. This
-removes a family of duplicate P2 per-loop boundedness proofs. The exact
+removes a family of duplicate P2 per-loop boundedness proofs. The record now additionally requires `traceIsLiteralWilson`, an explicit equality on the SAME physical loop carrier. Boundedness is transported along that equality with `subst`; an arbitrary synthetic trace observable cannot be substituted into P2.
+
+The exact
 remaining P2 obligations are now the trace→Gram physical interpretation,
 bounded-product closure, identity boundedness, selected Euclidean
 translate/support-time identity, and actual measure convergence on the same
