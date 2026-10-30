@@ -163,7 +163,8 @@ routeSH1ReusesR313MagnitudeCompilerIsFalse =
   R313.r296AbsoluteLocalizationIndependentAfterR295MagnitudeBoundIsFalse
 
 routeSH1ToDirectOSCompilerLevel : ProofLevel
-routeSH1ToDirectOSCompilerLevel = machineChecked
+-- Source-written typed compiler; exact-head Agda kernel receipt not observed.
+routeSH1ToDirectOSCompilerLevel = conditional
 
 routeSH1SelectedPhysicalPaymentLevel : ProofLevel
 routeSH1SelectedPhysicalPaymentLevel = H1.routeSH1PhysicalLevel
