@@ -1,4 +1,6 @@
 module DASHI.Unified.Everything where
+import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
+import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
 import DASHI.Reasoning.TrialecticWeightedGraphFaceMediationSelectedExact as SelectedFace369
 import DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact as GridPants369
 import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
