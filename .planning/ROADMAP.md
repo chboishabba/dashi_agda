@@ -78,3 +78,17 @@ Plans:
 | 3. MDL Integration | 1/2 | In progress | - |
 | 4. Signature Elimination | 2/2 | Complete | 2026-03-01 |
 | 5. Closure Harness | 0/2 | Not started | - |
+
+
+## 2026-10-30 — PR #1407 finite cyclotomic sampled-to-index proof cut
+
+Owner: `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasingMaxCut.md`, section **5j**. This cross-project cut does **not** redefine the historical Feb–Mar geometry closure phases above. Golden: original Agda first, Lean semantic donor second.
+
+- [x] Read original 27/729 and 41/81 Agda index/orbit machinery, exact `BilinearCyclotomicPadCutExact`, C3 Fourier authority boundary, YM finite Fubini, NS finite permutation, newest #1437/#1438 Agda and current #1433 NS, plus actual dashi_lean4 NS files.
+- [x] Source-write Q(i) and Q(ζ5) addition/multiplication and distributive laws in the existing scalar owners; instantiate the same generic algebra.
+- [x] Source-write generic finite Fubini/add/swap/scale/append/map/concat-map, **original 27×27→729** distributive expansion, and original C4/C5 group-character addition; project into all three TOE roots.
+- [x] Independently execute exact arithmetic: 8/64 scalar ring basis triples, 5+5 arbitrary 729-product input pairs, 64/125 original table-derived character-index clauses. Regression scripts extended in place; committed-checkout tests not run.
+- [ ] **P0:** kernel type-check each new and previously source-written 365/41, C4/C5 finite owner on the pinned Agda head (no CI requested); repair concrete errors before any machine-checked claim.
+- [ ] **P0:** using the generic 729 product/Fubini/character layer, prove `retainedSampledBilinear = fourGridGaussianIndexConvolutionAt` and `fullSampledBilinear125 = indexedFiveGridBilinearAt` for arbitrary actual fields/targets.
+- [ ] **P1:** once source and kernel align, attach the same-object Complex3/Leray/Galerkin operator with physical divergence-free energy and signed coefficients; do not import unmerged unrelated lanes silently.
+- [ ] **P2:** preserve original R440/R736/B4 physical analytic and real-ODE walls, Ma 87Sr versus R2P2 neutral-Yb measurements, Ibrahim/Monster 3B provenance; no same-object promotion from indices.
