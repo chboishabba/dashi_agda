@@ -237,6 +237,8 @@ open PolynomialIbrahim public using
   ; reusedIbrahimRecognitionBoundary
   ; searchPriorityAloneNeverProvesMonsterRecognition
   ; noVideoConceptPretendsKernelReceipt
+  ; originalVideoM1CoefficientDiscriminantReceipt
+  ; originalVideoM10OrientationReceipt
   ; polynomialDiscriminantQid ; galoisTheoryQid
   ; specificPolynomialMonodromyQid ; qidCannotPayPolynomialProof )
 
