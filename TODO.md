@@ -13,6 +13,17 @@
 - [ ] Extend pointwise product closure across the *actual* selected Gram bounded-observable algebra, or narrow the target to the literal Wilson image in a proof-preserving way; do not assume generic closure from a rational-image-only bound.
 
 
+
+### 2026-10-30 continuation: canonical native-P2 and P3 source archaeology
+- [x] Search native source and compiler files beyond PR descriptions; identify preexisting `BalabanLiteralWilsonNativePhysicalMeasureExact` and `YMClayLiteralWilsonP2NativeMeasureExact` as stronger owners.
+- [x] Compile native bounded loop/unit/product fields into the historical S2 record from the *same* native physical measure; the generic trace-to-Gram adapter is not mandatory.
+- [x] Keep P2 finite expectation limits separate from support-distance: the native P2 proof is valid without the P1 spatial/time-distance witness.
+- [x] Correct the canonical normalized rational-SU(2) cylinder `groupRank` to 1 rather than misidentifying it with defining representation dimension 2.
+- [x] Search P3 existing reconstructed-spectrum owners before new constructions: `YangMillsDirectSourceOSReconstructedSpectrumH3Exact`, `YangMillsClayCMP119RealSameOSH3Exact`.
+- [ ] Physically construct `NativeWilsonPreferredPhysicalMeasureInputs` (actual normalization/limit/tail inputs); prove the selected family and current CMP119 physical Wilson carrier agree.
+- [ ] Physically instantiate P3's R281 spectrum as **the** actual H2 reconstructed Hamiltonian's spectrum; the current H3 records are exact typing and conditional construction compilers.
+
+
 ## 2026-10-30 YM direct-route R320/R313/R333 max-cut
 
 - [x] Search golden Agda and Lean owner files as well as live PRs before choosing route; prefer existing `YMClayRouteSH1DirectSelectedMarkedDecayExact`, R313 and R333.
