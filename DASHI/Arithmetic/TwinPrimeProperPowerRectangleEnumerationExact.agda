@@ -253,7 +253,7 @@ insertIfFreshLengthAtMost :
     ≤ suc (Reindex.listLength xs)
 insertIfFreshLengthAtMost x [] = s≤s z≤n
 insertIfFreshLengthAtMost x (y ∷ ys) with x NatP.≟ y
-... | yes equal = NatP.≤-refl
+... | yes equal = NatP.n≤1+n (suc (Reindex.listLength ys))
 ... | no different =
   s≤s (insertIfFreshLengthAtMost x ys)
 
