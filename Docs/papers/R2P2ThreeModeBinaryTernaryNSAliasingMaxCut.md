@@ -728,3 +728,33 @@ The product-distribution step to literal `pair729` is now sourced. The remaining
 Then a separately verified native `ExactNSFourierInteractionStructure` / Complex3 / Leray transport is required, keeping original R440/R736/B4 analytic cut and physical real ODE separate. **OpenAI NavierStokesAndEuler 2026** formally proves the *forced* C/D breakdown and unforced Euler blowup, not this branch's unforced periodic-B estimate; original authors and Lean source priority are preserved ([original released code](https://github.com/openai/NavierStokesAndEuler), [released formalization manifest](https://github.com/openai/NavierStokesAndEuler/blob/main/formalization.yaml)). Weinan Wang's 2026 Lean result on 2D Galerkin constructions ([arXiv:2609.33033](https://arxiv.org/abs/2609.33033)) is independent prior art, not this exact 3D C4/C5 scalar transport.
 
 **Ibrahim/source-custody rule:** `IbrahimSnowballParetoFrontierExact`, prior source-produced first-link provenance, original Monster 3B authors, other repository proofs and kernel-verified certificates retain separate ownership and authority. No 27/729 spectral coincidence, matched character table, synthetic clock receipt, or generalized Pareto/Max Cut lane promotes same-object Monster, calibrated R2P2, or unforced NS closure. ESD untouched, CI untouched.
+
+
+## 5k. 30 October 2026 — source-identical, phase-weighted 729-term sampled-product expansion
+
+This continues §5j, and reuses its **original** finite Fourier incidence, scalar law, Fubini and indexed convolution owners. Unlike the earlier pure product identity, this stage carries the **actual fourth/fifth-root Fourier character of the summed frequency** at each sample. It still does not assert unproved normalization or sampled-to-index equality.
+
+**New source-written Agda (kernel pending):**
+
+- Generic `productShuffle4` and `productShuffleSix` in existing `BilinearCyclotomicPadCutExact`. The same already instantiated `FiniteSumAlgebra` now explicitly includes scalar multiplication associativity and commutativity. The six-factor regrouping works for both Q(i) and Q(ζ5) without exponentially expanding arbitrary scalar polynomials. It is algebraic source reuse of the inherited finite Fubini method, not a new polynomial ontology.
+- In existing `R2P2C4RetainedSampledOperatorExact`: `gaussianCubeCharacter`, `gaussianCubeCharacterAddition`, `gaussianOriginal27UnscaledSynthesisAt`, `gaussianOriginal729PhaseContribution` and `gaussianSourceSampledProductExpands729`. The C4 cube frequency, character and group sum use original `Four.FourGridCube64` and `Four.fourGridGroupSum`.
+- In existing `R2P2C5FullSampledIntegerOperatorExact`: corresponding `cyclotomicFiveCubeCharacter`, `cyclotomicFiveCubeCharacterAddition`, `cyclotomicFiveOriginal27UnscaledSynthesisAt`, `cyclotomicFiveOriginal729PhaseContribution` and `cyclotomicFiveSourceSampledProductExpands729`. The C5 cube uses original `Full.GridCube125` and `Full.fiveGridGroupSum`. Both results are projected into all three TOE roots.
+
+For each **original** sample index (x), source code now states the same ring-polymorphic mathematical identity independently on Q(i) and Q(ζ5):
+
+[
+\left(\sum_{p\in K}f_p\chi(p,x)\right)
+\left(\sum_{q\in K}g_q\chi(q,x)\right)
+=
+\sum_{(p,q)\in\mathrm{pair729}}
+f_pg_q\chi(p+q,x),
+\quad K=\{-1,0,1\}^3.
+]
+
+No assumption that `C3CubeCyclotomicFourierExact.spectralConvolutionDiagonalises` already proves this formula: its own explicit false boundary remains in force. The proof architecture reuses `source729ProductExpansion`, the original C4/C5 index-group addition, finite character multiplicativity and multiplication regrouping.
+
+**Independently executed exact local arithmetic:** one independently chosen dense Q(i) two-field profile was checked against **all 64 source C4 sample points**, each with all 729 character-weighted ordered terms; one dense Q(ζ5) two-field profile was checked at **all 125 source C5 sample points**, likewise with all 729 terms. Both passed using Python `Fraction` and exact cyclotomic polynomial arithmetic. The existing `scripts/r2p2_c4_3d_exact_sampled_quadratic_dft.py` and `scripts/r2p2_c5_exact_sampled_125_full_bilinear.py` were extended with matching tests; those committed tests have **not** been executed from a pinned exact branch checkout. The earlier original-table checks of 64/125 scalar distribution cases and 729 product expansion remain separate independent evidence.
+
+**Narrower remaining theorem walls:** (i) establish inside the Agda kernel the equivalence of the actual `synthesiseUnscaled (pad27To64 f)` / `unscaledSynthesis125 (pad27To125 f)` **sample arrays** with `Original27UnscaledSynthesisAt f x`; (ii) identify the actual normalized forward transform at each retained/full output as the exact character-weighted finite sample sum; (iii) apply full C4³/C5³ character orthogonality and source index-membership laws to collapse the 729 terms; (iv) compile and kernel-check the source-written algebra/orbit/FFT owners before asserting machine-checked equality. The C4 retained 27-output and C5 full 125-output sampled-to-index lemmas are **not yet proved in Agda**.
+
+**No promotions:** R440/R736/B4, continuum Navier–Stokes real evolution, Ma 87Sr and R2P2 Yb optical-clock calibration, original Ibrahim snowball/Monster 3B and all source-authorship boundaries remain independent. Current branch edits touch no ESD or CI surfaces. 
