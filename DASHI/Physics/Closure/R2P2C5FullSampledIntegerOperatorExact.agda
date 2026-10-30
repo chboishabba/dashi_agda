@@ -11,7 +11,7 @@ module DASHI.Physics.Closure.R2P2C5FullSampledIntegerOperatorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import Agda.Builtin.List using (List)
 open import Data.Product using (_,_; proj₁; proj₂)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
@@ -533,3 +533,163 @@ cyclotomicFiveTripleNormalizedPhaseScale a b c d e f =
     (trans
       (cong (λ v → FFT.scale5 oneOver125 v) rearrange)
       factorScale)
+
+
+------------------------------------------------------------------------
+-- EXACT FIVE-POINT SOURCE GROUP/WIDE EQUALITY AND THREE-AXIS DELTA.
+-- The original five-grid labels are not silently substituted for the
+-- integer-output labels: all 25 axis equality transports are explicit.
+------------------------------------------------------------------------
+
+cyclotomicFiveOriginalAxisWideEquality :
+  (a b : I.FiveGridMode) →
+  C5.eq5 a b ≡ Full.eqWideMode (I.fromGridFive a) (I.fromGridFive b)
+cyclotomicFiveOriginalAxisWideEquality I.gridZero I.gridZero = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridZero I.gridPlusOne = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridZero I.gridPlusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridZero I.gridMinusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridZero I.gridMinusOne = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusOne I.gridZero = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusOne I.gridPlusOne = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusOne I.gridPlusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusOne I.gridMinusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusOne I.gridMinusOne = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusTwo I.gridZero = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusTwo I.gridPlusOne = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusTwo I.gridPlusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusTwo I.gridMinusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridPlusTwo I.gridMinusOne = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusTwo I.gridZero = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusTwo I.gridPlusOne = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusTwo I.gridPlusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusTwo I.gridMinusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusTwo I.gridMinusOne = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusOne I.gridZero = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusOne I.gridPlusOne = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusOne I.gridPlusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusOne I.gridMinusTwo = refl
+cyclotomicFiveOriginalAxisWideEquality I.gridMinusOne I.gridMinusOne = refl
+
+cyclotomicFiveGroupCubeEquals :
+  Full.GridCube125 → Full.GridCube125 → Bool
+cyclotomicFiveGroupCubeEquals
+  (Full.gridCube a b c) (Full.gridCube d e f) =
+  Full._&&B_
+    (Full._&&B_ (C5.eq5 a d) (C5.eq5 b e))
+    (C5.eq5 c f)
+
+cyclotomicFiveGroupEqualityMatchesOriginalWide :
+  (k l : Full.GridCube125) →
+  cyclotomicFiveGroupCubeEquals k l
+    ≡ Full.eqWideCube (Full.fiveGridToWide k) (Full.fiveGridToWide l)
+cyclotomicFiveGroupEqualityMatchesOriginalWide
+  (Full.gridCube a b c) (Full.gridCube d e f)
+  rewrite cyclotomicFiveOriginalAxisWideEquality a d
+        | cyclotomicFiveOriginalAxisWideEquality b e
+        | cyclotomicFiveOriginalAxisWideEquality c f = refl
+
+cyclotomicFiveAxisNormalizedPhase :
+  I.FiveGridMode → I.FiveGridMode →
+  I.FiveGridMode → C5.Cyclotomic5
+cyclotomicFiveAxisNormalizedPhase k l x =
+  FFT.scale5 FFT.oneFifth
+    (C5._*5_ (C5.character5 k x) (C5.conj5 (C5.character5 l x)))
+
+fiveAxisX : Full.GridCube125 → I.FiveGridMode
+fiveAxisX (Full.gridCube a b c) = a
+fiveAxisY : Full.GridCube125 → I.FiveGridMode
+fiveAxisY (Full.gridCube a b c) = b
+fiveAxisZ : Full.GridCube125 → I.FiveGridMode
+fiveAxisZ (Full.gridCube a b c) = c
+
+cyclotomicFiveCubeNormalizedPhaseSplit :
+  (k l x : Full.GridCube125) →
+  FFT.scale5 oneOver125
+    (C5._*5_ (cyclotomicFiveCubeCharacter k x)
+      (C5.conj5 (cyclotomicFiveCubeCharacter l x)))
+  ≡ C5._*5_
+      (C5._*5_
+        (cyclotomicFiveAxisNormalizedPhase
+          (fiveAxisX k) (fiveAxisX l) (fiveAxisX x))
+        (cyclotomicFiveAxisNormalizedPhase
+          (fiveAxisY k) (fiveAxisY l) (fiveAxisY x)))
+      (cyclotomicFiveAxisNormalizedPhase
+        (fiveAxisZ k) (fiveAxisZ l) (fiveAxisZ x))
+cyclotomicFiveCubeNormalizedPhaseSplit
+  (Full.gridCube a b c)
+  (Full.gridCube d e f)
+  (Full.gridCube x y z) =
+  cyclotomicFiveTripleNormalizedPhaseScale
+    (C5.character5 a x) (C5.character5 b y) (C5.character5 c z)
+    (C5.character5 d x) (C5.character5 e y) (C5.character5 f z)
+
+cyclotomicFiveActualCubeCharacterResolution :
+  (k l : Full.GridCube125) →
+  Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveGridCubes
+    (λ x → FFT.scale5 oneOver125
+      (C5._*5_ (cyclotomicFiveCubeCharacter k x)
+        (C5.conj5 (cyclotomicFiveCubeCharacter l x))))
+  ≡ Bilinear.choose C5.zero5 (cyclotomicFiveGroupCubeEquals k l) C5.one5
+cyclotomicFiveActualCubeCharacterResolution
+  (Full.gridCube a b c) (Full.gridCube d e f) =
+  trans
+    (cyclotomicFiveActualNyquistSeparableProduct
+      (cyclotomicFiveAxisNormalizedPhase a d)
+      (cyclotomicFiveAxisNormalizedPhase b e)
+      (cyclotomicFiveAxisNormalizedPhase c f)
+      (λ cube → FFT.scale5 oneOver125
+        (C5._*5_
+          (cyclotomicFiveCubeCharacter (Full.gridCube a b c) cube)
+          (C5.conj5
+            (cyclotomicFiveCubeCharacter (Full.gridCube d e f) cube))))
+      (λ x y z → cyclotomicFiveCubeNormalizedPhaseSplit
+        (Full.gridCube a b c) (Full.gridCube d e f)
+        (Full.gridCube x y z)))
+    (trans
+      (cong₂ C5._*5_
+        (cong₂ C5._*5_
+          (cyclotomicFiveOriginalAxisCharacterResolution a d)
+          (cyclotomicFiveOriginalAxisCharacterResolution b e))
+        (cyclotomicFiveOriginalAxisCharacterResolution c f))
+      (Bilinear.sourceChooseProductTriple
+        cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+        C5.one5 (C5.scalarMulOneRight C5.one5)
+        (C5.eq5 a d)
+        (C5.eq5 b e)
+        (C5.eq5 c f)))
+
+cyclotomicFiveActualCharacterResolutionPaid :
+  (target : Full.WideCube125) →
+  cyclotomicFiveActualCharacterResolution target
+cyclotomicFiveActualCharacterResolutionPaid target (p , q) =
+  let
+    group = Full.fiveGridGroupSum
+      (Full.inputToFiveGrid p) (Full.inputToFiveGrid q)
+    targetGroup = Full.wideToFiveGrid target
+    outputEquality :
+      cyclotomicFiveGroupCubeEquals group targetGroup
+      ≡ cyclotomicFiveSelectedOriginalPair target (p , q)
+    outputEquality =
+      trans
+        (cyclotomicFiveGroupEqualityMatchesOriginalWide
+          group targetGroup)
+        (cong (Full.eqWideCube (Full.fiveGridToWide group))
+          (Full.wideFiveRoundTrip target))
+  in
+  trans
+    (cyclotomicFiveActualCubeCharacterResolution group targetGroup)
+    (cong (λ flag → Bilinear.choose C5.zero5 flag C5.one5)
+      outputEquality)
+
+cyclotomicFiveSourceSampledEqualsIndexed :
+  (f g : I.ModeCube27 → C5.Cyclotomic5)
+  (target : Full.WideCube125) →
+  cyclotomicFiveSourceNormalizedSampledAt f g target
+    ≡ indexedFiveGridBilinearAt f g target
+cyclotomicFiveSourceSampledEqualsIndexed f g target =
+  cyclotomicFiveSourceSampledEqualsIndexedGivenResolution
+    f g target (cyclotomicFiveActualCharacterResolutionPaid target)
+
+-- The full ORIGINAL 125-output *character-sum operator* is now
+-- source-written unconditionally. Equality with the tensor FFT array
+-- evaluator is still a distinct unproved equation. Kernel pending.
