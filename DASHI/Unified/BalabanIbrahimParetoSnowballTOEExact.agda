@@ -11,6 +11,11 @@ import DASHI.Wikimedia.IbrahimMonster3BCharacterExecutionCutsetSnowballExact as 
 import DASHI.Wikimedia.IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact as Phase
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZeta
 import DASHI.Wikimedia.IbrahimFirstLinkHistoricalDiscriminatorParetoExact as Historical
+import DASHI.Combinatorics.GraphColouringHomomorphismCoreExact as Colour
+import DASHI.Combinatorics.GraphColouring369PantsGridAdjacencyExact as FinitePantsGrid
+import DASHI.Combinatorics.GraphColouringRecolourPantsSnowballExact as ColourSnowball
+import DASHI.Wikimedia.IbrahimSnowballDependencyNDimLocalGlobalProofSearchBidiExact as IbrahimDependency
+
 
 ------------------------------------------------------------------------
 -- Reuse-only TOE convergence.
@@ -208,3 +213,51 @@ FiniteIrreducibilityCreatesMonsterHZetaRecognition =
 CurrentQidIdentifiesHistoricalTitle : Set
 CurrentQidIdentifiesHistoricalTitle =
   Historical.CurrentQidIdentifiesHistoricalTitle
+
+------------------------------------------------------------------------
+-- FINITE 369 GRAPH/COLOUR SNOWBALL, 30 OCTOBER 2026.
+--
+-- The finite bipartite 27-grid and six S3 coordinate permutations are
+-- source-written in the canonical combinatorics module.  This facade
+-- consumes that owner and retains the Ibrahim dependency/local-global
+-- non-promotion gate.  This is not a Monster3B, Balaban/YM, Hedetniemi,
+-- four-colour or source-reproduction theorem.
+------------------------------------------------------------------------
+
+nativeTwentySevenGridTwoColouring :
+  Colour.Colouring
+    FinitePantsGrid.pantsGrid
+    FinitePantsGrid.twoColourPalette
+nativeTwentySevenGridTwoColouring = FinitePantsGrid.pantsTwoColouring
+
+nativePantsFlipRetainsProperness :
+  Colour.Colouring
+    FinitePantsGrid.pantsGrid
+    FinitePantsGrid.twoColourPalette
+nativePantsFlipRetainsProperness =
+  FinitePantsGrid.flipPreservesTwoColouring
+
+nativeS3SixPermutationsAreDistinct :
+  (left right : FinitePantsGrid.S3CoordinatePermutation) ->
+  FinitePantsGrid.actS3Pants
+    left FinitePantsGrid.s3DistinctAnchor
+  ≡ FinitePantsGrid.actS3Pants
+    right FinitePantsGrid.s3DistinctAnchor
+  -> left ≡ right
+nativeS3SixPermutationsAreDistinct =
+  FinitePantsGrid.s3AnchorImageInjective
+
+nativeColouringDoesNotPaySeamCompatibility :
+  ColourSnowball.GraphColouringPantsBoundary.localRecolourImpliesGlobalGluingCompatibility
+    ColourSnowball.canonicalGraphColouringPantsBoundary ≡ false
+nativeColouringDoesNotPaySeamCompatibility = refl
+
+ibrahimLocalValidityStillDoesNotImplyGlobalGluing :
+  IbrahimDependency.LocalValidityMeansGlobalAdmissibility -> ⊥
+ibrahimLocalValidityStillDoesNotImplyGlobalGluing =
+  IbrahimDependency.localValidityDoesNotMeanGlobalAdmissibility
+
+ibrahimMoreDimensionsStillDoNotGuaranteeMoreKnowledge :
+  IbrahimDependency.MoreDimensionsMeanMoreKnowledge -> ⊥
+ibrahimMoreDimensionsStillDoNotGuaranteeMoreKnowledge =
+  IbrahimDependency.moreDimensionsDoNotMeanMoreKnowledge
