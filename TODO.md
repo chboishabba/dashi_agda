@@ -17317,3 +17317,14 @@ See `.planning/ROADMAP.md` and `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasing
 - [x] Actual `Core.Prelude`, original 27/729 incidence and C4/C5/bilinear owners lack top-level `{-# OPTIONS --safe #-}`; trust-escape scan is necessary, not sufficient. Historical Orszag/Patterson 1971 journal source attributions now pinned in paper §5l.
 - [x] C4 one-axis forward product scale uses explicit `normalize 4 1`.
 - [ ] **P0:** establish transitive Agda `--safe` eligibility of the source proof graph, exact-head typecheck without postulates/metas/termination bypasses, then discharge C4/C5 actual finite character-resolution and tensor sample-array bridges. Do not make a fake kernel-green receipt.
+
+
+## 2026-10-30 5m source Nyquist cube and actual integer convolution (PR #1407)
+
+- [x] Re-read original source Agda/Lean and #1441/#1440/#1438/#1437 PR code; inherited `BalabanIbrahimParetoSnowballTOEExact.currentQidDoesNotIdentifyHistoricalTitle` already guards current QIDs, so do not duplicate or promote that carrier.
+- [x] 16 C4/25 C5 concrete original-order one-axis exact character equalities; generic original 3-axis list Fubini, scalar conjugation and (N^{-3}) factorization, and Boolean triple selector transport (source-written).
+- [x] `gaussianActualCharacterResolutionPaid`, `cyclotomicFiveActualCharacterResolutionPaid`, source sampled/indexed and true **integer 729-ordered-pair** convolution lemmas projected to three TOE roots (source-written, unverified kernel).
+- [x] Independent local exact checks: 16/25 source-order normalized axis deltas, 19,683/91,125 pair/target no-alias facts. These are NOT formal Agda kernel receipts.
+- [ ] **P0:** type-check all changed source and imports using actual Agda, repair errors, and establish `--safe` compatibility; do not mistake a static escape scan for compiler evidence.
+- [ ] **P0:** identify actual padded tensor 64/125-point FFT arrays with the source Fourier character sum, then compose to theorem for `retainedSampledBilinear` and `fullSampledBilinear125` (not yet source-written).
+- [ ] **P1/P2:** native physical NS estimates and real-time transport, clock empirical calibration, and original historical Ibrahim dump/parser/hash and Monster 3B representation remain separate.
