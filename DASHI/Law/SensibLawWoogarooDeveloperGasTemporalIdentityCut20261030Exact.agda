@@ -14,6 +14,8 @@ import DASHI.Law.SensibLawWoogarooIbrahimDeweyQidLegalAtomExact as Ibrahim
 import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact as Lobby
 import DASHI.Law.SensibLawAzureSpringfieldInducedGasDemandExact as Demand
 import DASHI.Law.SensibLawWoogarooGasSecondThirdOrderNonPromotion20261030Exact as Prior
+import DASHI.Law.SensibLawWoogaroo9281EPBCInstrumentDisambiguationExact as Instrument
+import DASHI.Law.SensibLawWoogarooEPBC8575CumulativeImpactSufficiencyExact as Cumulative
 
 ------------------------------------------------------------------------
 -- WOOGAROO / SPRINGFIELD - TIME AND PERSON/ASSET IDENTITY CUT
@@ -122,15 +124,18 @@ data LegalRole : Set where
   serviceConnectionHolder : LegalRole
   revenueRecipient : LegalRole
 
-data ProjectCoordinate : Set where
-  epbc20198575 : ProjectCoordinate
-  scenic20208651 : ProjectCoordinate
-  villageOne20147306 : ProjectCoordinate
+-- Reuse canonical EPBC identifier owners; do not create a competing case enum.
+villageOneInstrument : Instrument.FederalInstrumentCoordinate
+villageOneInstrument = Instrument.epbc2014_7306
 
-distinctEPBCProjects : epbc20198575 ≡ scenic20208651 → ⊥
-distinctEPBCProjects ()
+springviewCurrentInstrument : Instrument.FederalInstrumentCoordinate
+springviewCurrentInstrument = Instrument.epbc2019_8575
 
-villageOneIsNotCurrentAction : villageOne20147306 ≡ epbc20198575 → ⊥
+scenicSeparateProject : Cumulative.ProjectCoordinate
+scenicSeparateProject = Cumulative.scenic2020_8651
+
+villageOneIsNotCurrentAction :
+  villageOneInstrument ≡ springviewCurrentInstrument → ⊥
 villageOneIsNotCurrentAction ()
 
 record ScopedRole : Set where
@@ -258,7 +263,7 @@ federalApprovalCut = priority-cut epbcSignedApprovalConditionsAnd95B95C false fa
 record PriorApprovalTransfer : Set where
   constructor prior-approval-transfer
   field
-    project : ProjectCoordinate
+    project : Instrument.FederalInstrumentCoordinate
     transferorACN : String
     transfereeACN : String
     instrument : Source.AttributedSource
@@ -268,7 +273,7 @@ open PriorApprovalTransfer public
 
 historicalCherishStocklandTransfer : PriorApprovalTransfer
 historicalCherishStocklandTransfer = prior-approval-transfer
-  villageOne20147306
+  villageOneInstrument
   "052055811"
   "000664835"
   priorVillageOneTransfer2017
