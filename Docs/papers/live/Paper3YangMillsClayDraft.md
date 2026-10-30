@@ -40,6 +40,19 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 > does not identify rational SU(2) with the full continuum Wilson measure.
 
 
+
+> **P2 canonical owner correction.** The strongest in-repo donor is
+> `BalabanLiteralRationalSU2WilsonBoundedAlgebraExact`, which constructs the
+> literal configuration-dependent path-holonomy observable and proves its
+> pointwise unit bound (and identity/product pointwise closure). The P2
+> adapter now consumes that specific function—not a fixed quaternion for
+> each path—and transports boundedness to the physical Gram observable
+> along an explicit literal-Wilson identity. The unit observable's Gram
+> boundedness is likewise derived. The remaining physical inputs are the
+> actual pointwise→Gram interpretation, generic target-algebra product
+> closure, time/support identification and continuum measure convergence.
+
+
 ## Abstract
 
 This manuscript presents a reduction of the four-dimensional Yang–Mills mass-gap problem on a literal finite SU(2) Wilson–Gibbs family to three physical inputs, denoted `F1`, `F3`, and `F4`. The finite lattice theory, transfer-form algebra, varying-Hilbert-space transport, vacuum-sector spectral consequences, and final continuum gap compiler are treated as already-paid mathematical infrastructure where stated. The surviving physical obligations are:
