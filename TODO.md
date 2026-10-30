@@ -1,7 +1,7 @@
 # FOR TODO GO TO '# TODO'
 
 
-- [x] P2 Pareto: reuse existing rational SU(2) normalized trace upper/lower theorem to construct `RationalSU2TraceGramBoundSource`, eliminating separate loop-specific Gram-boundedness inputs after one explicit trace-to-Gram interpretation.
+- [x] P2 Pareto: reuse the existing rational SU(2) literal path-holonomy pointwise algebra owner to construct `RationalSU2TraceGramBoundSource`, eliminating separate loop-specific Gram-boundedness inputs after one explicit trace-to-Gram interpretation.
 - [x] Reuse same canonical S2 carrier via `rationalSU2TraceBuildsCanonicalS2` so existing P2 selected-expectation-limit compilers consume the rational-trace producer directly.
 - [ ] Supply the physical `traceIsLiteralWilson` exact same-object equality on the selected physical Wilson family; a rational group trace alone cannot stand in for a separately selected observable.
 - [ ] Supply the *physical* same-family trace→Gram boundedness interpretation for the actual Wilson/Haar carrier; prove bounded product and identity closure, selected time-distance, and actual continuum-measure convergence. Rational quaternion traces alone do not instantiate that theory.
