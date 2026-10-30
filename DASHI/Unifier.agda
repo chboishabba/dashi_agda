@@ -2456,3 +2456,29 @@ unifierC5Source729CharacterWeightedSample :
       (C5FullOperator.cyclotomicFiveOriginal729PhaseContribution f g x)
 unifierC5Source729CharacterWeightedSample =
   C5FullOperator.cyclotomicFiveSourceSampledProductExpands729
+
+
+------------------------------------------------------------------------
+-- CONDITIONAL extraction is deliberately typed with an unresolved
+-- C4/C5 finite character-resolution payment, not an inferred proof.
+-- This isolates the remaining source sample-sum/index step before the
+-- independently open actual FFT tensor-array identification.
+------------------------------------------------------------------------
+
+unifierC4CharacterResolutionExtractsSourceIndexed :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (k : Fourier729.ModeCube27) →
+  C4Retained.gaussianActualCharacterResolution k →
+  C4Retained.gaussianSourceNormalizedSampledAt f g k
+    ≡ C4Retained.fourGridGaussianIndexConvolutionAt f g k
+unifierC4CharacterResolutionExtractsSourceIndexed =
+  C4Retained.gaussianSourceSampledEqualsIndexedGivenResolution
+
+unifierC5CharacterResolutionExtractsSourceIndexed :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Convolution729.WideCube125) →
+  C5FullOperator.cyclotomicFiveActualCharacterResolution k →
+  C5FullOperator.cyclotomicFiveSourceNormalizedSampledAt f g k
+    ≡ C5FullOperator.indexedFiveGridBilinearAt f g k
+unifierC5CharacterResolutionExtractsSourceIndexed =
+  C5FullOperator.cyclotomicFiveSourceSampledEqualsIndexedGivenResolution
