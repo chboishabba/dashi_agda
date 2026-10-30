@@ -1,4 +1,5 @@
 module DASHI.Unifier where
+import DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact as GridPants369
 import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
