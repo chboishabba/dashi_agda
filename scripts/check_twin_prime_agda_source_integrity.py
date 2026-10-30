@@ -17,10 +17,10 @@ from pathlib import Path
 import re
 import sys
 
-IMPORT = re.compile(r"^\\s*(?:open\\s+)?import\\s+([^\\s]+)", re.M)
-BAD_POSTULATE = re.compile(r"^\\s*postulate\\b", re.M)
-HOLE = re.compile(r"(?<!\\S)\\?(?!\\S)|=\\s*\\{!|\\{!.*?!\\}", re.S)
-TERMINATION = re.compile(r"\\{\\-#\\s*(?:TERMINATING|NON_TERMINATING)\\s*#\\-\\}")
+IMPORT = re.compile(r"^\s*(?:open\s+)?import\s+([^\s]+)", re.M)
+BAD_POSTULATE = re.compile(r"^\s*postulate\b", re.M)
+HOLE = re.compile(r"(?<!\S)\?(?!\S)|=\s*\{!|\{!.*?!\}", re.S)
+TERMINATION = re.compile(r"\{\-#\s*(?:TERMINATING|NON_TERMINATING)\s*#\-\}")
 
 def check_source(path: Path, require_safe: bool = False) -> list[str]:
     raw = path.read_text(encoding="utf-8")
