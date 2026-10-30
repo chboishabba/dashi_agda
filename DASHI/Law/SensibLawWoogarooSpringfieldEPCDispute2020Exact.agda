@@ -446,3 +446,47 @@ quotedEngineerAdviceDoesNotProveCurrentCapacity =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness sameCherishClaimNoCertifiedCapacity
       sameCherishClaimWithSeparatelyCertifiedCapacity refl differentCapacityReceipt)
+
+
+------------------------------------------------------------------------
+-- EXACT FIRST/SECOND/THIRD ORDER WELD TO RECITED 1998 SIA CLAUSE 22
+-- No duplicate owner: consume original court-reported historical term
+-- from the Springfield statutory legal owner. The 2008 4000x2000 alleged
+-- water/sewer offer and clause22 contingent repayment are DIFFERENT legal
+-- mechanisms. Neither documents a 2026 Cherish/SCG cash transfer.
+------------------------------------------------------------------------
+
+historicEntitlementChangeClause : Law.CourtReportedClause
+historicEntitlementChangeClause = Law.sIAClause22Reported
+
+data CompensationClaimWorld : Set where
+  quotedCapacityWithoutEntitlementChange : CompensationClaimWorld
+  quotedCapacityWithSeparatelyProvedEntitlementChange : CompensationClaimWorld
+
+data SameCherishCapacityQuote : Set where
+  historicalSewerQuoteRecorded : SameCherishCapacityQuote
+
+data Clause22TriggerEvidence : Set where
+  noUnconsentedChangeProved : Clause22TriggerEvidence
+  unconsentedEntitlementChangeProved : Clause22TriggerEvidence
+
+quotedSewerOffer : CompensationClaimWorld → SameCherishCapacityQuote
+quotedSewerOffer quotedCapacityWithoutEntitlementChange = historicalSewerQuoteRecorded
+quotedSewerOffer quotedCapacityWithSeparatelyProvedEntitlementChange = historicalSewerQuoteRecorded
+
+clause22Trigger : CompensationClaimWorld → Clause22TriggerEvidence
+clause22Trigger quotedCapacityWithoutEntitlementChange = noUnconsentedChangeProved
+clause22Trigger quotedCapacityWithSeparatelyProvedEntitlementChange = unconsentedEntitlementChangeProved
+
+differentClause22Trigger :
+  clause22Trigger quotedCapacityWithoutEntitlementChange ≡
+  clause22Trigger quotedCapacityWithSeparatelyProvedEntitlementChange → ⊥
+differentClause22Trigger ()
+
+quotedEPCDoesNotProveClause22ChangeWithoutConsent :
+  INF.FactorsThrough quotedSewerOffer clause22Trigger → ⊥
+quotedEPCDoesNotProveClause22ChangeWithoutConsent =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness quotedCapacityWithoutEntitlementChange
+      quotedCapacityWithSeparatelyProvedEntitlementChange
+      refl differentClause22Trigger)
