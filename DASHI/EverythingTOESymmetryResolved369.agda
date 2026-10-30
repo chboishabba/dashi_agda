@@ -179,7 +179,8 @@ open RootDiscriminant public using
   ; discriminantDependsOnlyOnVietaCoefficients
   ; firstSecondCollisionGivesZero
   ; firstThirdCollisionGivesZero ; secondThirdCollisionGivesZero
-  ; splitVandermondeZero ; zeroDiscriminantImpliesCollision )
+  ; splitVandermondeZero ; zeroDiscriminantImpliesCollision
+  ; zeroDifferenceRational ; rationalDomainLawWitness ; zeroDiscriminantImpliesCollisionRational ; collisionImpliesZeroDiscriminantRational ; zeroDiscriminantIffRootCollisionRational )
 
 -- Artin B3 full twist: trivial root S3 endpoint but C7 signed
 -- crossing exponent six, preserving both braid and cancellation relations.
@@ -301,6 +302,9 @@ open PolynomialMonodromy public using
   ; differentArithmeticCounts
   ; spinThirdTurnHasUnitNorm
   ; spinConjugationIntertwinesABCThreeCycle
+  ; iTimesJIsK ; jTimesIIsNegativeK ; jTimesKIsI ; kTimesJIsNegativeI ; kTimesIIsJ ; iTimesKIsNegativeJ
+  ; positiveSwapOfQuaternionAxesImpossible ; positiveSwapIJImpossible ; positiveSwapJKImpossible ; positiveSwapIKImpossible ; spinSignedSwapIJRightInverse
+  ; spinSignedSwapIJLeftInverse ; signedSwapIJMapsIToJ ; signedSwapIJMapsJToI ; signedSwapIJMustNegateK ; noFullPositiveQuaternionS3Action
   ; spinThreeStepsCentralMinus
   ; spinSixStepsIdentity
   ; finiteQ8CentralSignIsInvisible
