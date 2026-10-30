@@ -389,3 +389,36 @@ signedSwapIJMapsJToI = refl
 signedSwapIJMustNegateK :
   rotateBySignedSwapIJ positiveK ≡ Q.negQ positiveK
 signedSwapIJMustNegateK = refl
+
+------------------------------------------------------------------------
+-- M10 consumer: an ENTIRE positive-axis S3 action cannot act by
+-- multiplication-preserving quaternion maps. It contains an odd swap.
+-- The C3 subaction survives and has the exact q^3 = -1 lift above.
+------------------------------------------------------------------------
+
+record FullPositiveQuaternionS3Action : Set₁ where
+  field
+    action : Perm.TriPermutation →
+      Q.RationalQuaternion → Q.RationalQuaternion
+    preservesQuaternionProduct :
+      (p : Perm.TriPermutation) (x y : Q.RationalQuaternion) →
+      action p (Q._*q_ x y) ≡
+      Q._*q_ (action p x) (action p y)
+    positiveBasisPermutation :
+      (p : Perm.TriPermutation) (a : Base.TriTruth) →
+      action p (imaginaryBasis a) ≡
+      imaginaryBasis (Perm.applyPermutation p a)
+
+noFullPositiveQuaternionS3Action :
+  FullPositiveQuaternionS3Action → ⊥
+noFullPositiveQuaternionS3Action full =
+  positiveSwapIJImpossible
+    (FullPositiveQuaternionS3Action.action full Perm.permSwapLowMid)
+    (FullPositiveQuaternionS3Action.preservesQuaternionProduct
+      full Perm.permSwapLowMid)
+    (FullPositiveQuaternionS3Action.positiveBasisPermutation
+      full Perm.permSwapLowMid Base.tri-low)
+    (FullPositiveQuaternionS3Action.positiveBasisPermutation
+      full Perm.permSwapLowMid Base.tri-mid)
+    (FullPositiveQuaternionS3Action.positiveBasisPermutation
+      full Perm.permSwapLowMid Base.tri-high)
