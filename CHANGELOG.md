@@ -113,3 +113,8 @@ monitor surface.
 ## 2026-10-31 — sharpen actual prime-power error bound, clarify record boundary
 
 - Replaced the unnecessary (\lfloor\log_2Y\rfloor\lfloor\sqrt Y\rfloor) count with (B(Y)=(\lfloor\sqrt Y\rfloor-1)+\max(\lfloor\log_2Y\rfloor-2,0)(\lfloor Y^{1/3}\rfloor-1)), establishing the classical standard-Mangoldt estimate (E(Y)\le2B(Y)(\log Y)^2=O(\sqrt Y\log^2 Y)). Updated original exact support regression to compute integer cube roots. This is a routine quantitative refinement, NOT a new twin-prime breakthrough or claimed world record; true (S(Y)\gg Y) remains open. Agda abstract scalar has no asserted real order/log bounds. 
+
+## 2026-10-31 — SOTA prime-gap semantic bidirectional bridge
+
+- Inspected actual `TwinPrimeSixWheelExact`, its exact `BoundedPrimePair` record and CT18 actual Mangoldt total/error separator. Added `TwinPrimeSOTABoundedGapBidiExact.agda`: two-way exact-gap-two proof transport and cofinal-family equivalence through a *retained shift equality* rather than treating a 186/246 bound as twin primes. Three TOE roots now import the bridge.
+- Grounded source ledger in GPY, Zhang, Maynard/Tao, Polymath8b (unconditional 246), Axiom Math Lean 246 blueprint, OpenAI PrimeGaps186 (three explicit conditional inputs) and Chen prime/almost-prime result, with original author/AI/repository attribution and no promotion of conditional, almost-prime or finite model claims to gap two. Kernel typecheck pending; no ESD edits or CI.
