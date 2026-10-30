@@ -293,7 +293,7 @@ open PolynomialMonodromy public using
   ; iTimesJIsK ; jTimesIIsNegativeK ; jTimesKIsI ; kTimesJIsNegativeI ; kTimesIIsJ ; iTimesKIsNegativeJ
   ; positiveINotNegative ; positiveJNotNegative ; positiveKNotNegative
   ; positiveSwapOfQuaternionAxesImpossible ; positiveSwapIJImpossible ; positiveSwapJKImpossible ; positiveSwapIKImpossible ; spinSignedSwapIJRightInverse
-  ; spinSignedSwapIJLeftInverse ; signedSwapIJMapsIToJ ; signedSwapIJMapsJToI ; signedSwapIJMustNegateK ; noFullPositiveQuaternionS3Action
+  ; spinSignedSwapIJLeftInverse ; signedSwapIJMapsIToJ ; signedSwapIJMapsJToI ; signedSwapIJMustNegateK ; noFullPositiveQuaternionS3Action ; noPositiveQuaternionBraidGeneratorLift
   ; spinThreeStepsCentralMinus
   ; spinSixStepsIdentity
   ; finiteQ8CentralSignIsInvisible
