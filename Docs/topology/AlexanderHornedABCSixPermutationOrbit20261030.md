@@ -228,3 +228,25 @@ representation. The new three-class quotient is only a
 source-owned **S3-set**, not a representation of a Monster
 3B normalizer, a faithful braid action, physical spin holonomy,
 or a same-object wild-exterior computation.
+
+
+## 8. Strict local periodic C3 cannot be rescued by basing (2026-10-30)
+
+The six-word S3 orbit remains a valid **algebraic family**, and
+the middle-child index remains S3-equivariant. However
+\`phi²(q)phi(q)q=w^-1\`, so the based-normalised local
+\`psi=Inn(q^-1)phi\` fixes \`w\` but
+\`psi³=Inn(w)≠id\`. The classical free-group centralizer
+theorem gives every alternative conjugator \`q w^k\`
+and twists \`w^(3k-1)\`, never 1. The **single selected
+based word** therefore cannot carry a strictly period-three
+lift of this particular phi, despite unbased phi^3=id.
+
+See [new periodic-cap/cocycle max-cut](AlexanderHornedPeriodicCapCocycleMaxCut20261030.md).
+Newman's 1931 periodic-homeomorphism theorem independently
+forbids any finite-order nontrivial Nielsen action fixing a
+relatively open boundary disk pointwise in a connected
+genus-three handlebody. Nonperiodic cap-supported handle slides
+and external-sector S3 remain distinct open/available lanes.
+Source-written exact Agda witnesses; paper classical theorems;
+Agda/Lean kernel and actual 3D source-specific geometry pending.
