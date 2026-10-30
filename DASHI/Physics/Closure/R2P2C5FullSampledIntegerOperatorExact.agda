@@ -12,6 +12,7 @@ module DASHI.Physics.Closure.R2P2C5FullSampledIntegerOperatorExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Data.Product using (proj₁; proj₂)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Rational.Base using (ℚ; normalize)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
@@ -207,3 +208,18 @@ cyclotomicFiveActualFiniteSumProductScale :
       (Bilinear.sumAll cyclotomicFiveOps xs f)
 cyclotomicFiveActualFiniteSumProductScale =
   Bilinear.sumAllScaleLeft cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+
+
+-- This is the genuine distributive Fourier-field product expansion,
+-- over the ORIGINAL source 729 ordered input pair addresses.
+cyclotomicFiveActual729InputProductExpansion :
+  (f g : I.ModeCube27 → C5.Cyclotomic5) →
+  C5._*5_
+    (Bilinear.sumAll cyclotomicFiveOps I.cube27 f)
+    (Bilinear.sumAll cyclotomicFiveOps I.cube27 g)
+  ≡ Bilinear.sumAll cyclotomicFiveOps I.pair729
+      (λ pair → C5._*5_
+        (f (proj₁ pair)) (g (proj₂ pair)))
+cyclotomicFiveActual729InputProductExpansion =
+  Bilinear.source729ProductExpansion
+    cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
