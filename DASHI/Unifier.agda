@@ -32,7 +32,10 @@ open RationalNative27 public using
   ; decodeEncodeNativeAt ; encodeDecodeNativeCoordinateAt
   ; encodeBlocksAdditiveAt ; decodeBlocksAdditiveAt
   ; encodeBlocksIntertwinesAt ; decodeBlocksIntertwinesAt
-  ; sourceBlockActionAgreesWithNative )
+  ; sourceBlockActionAgreesWithNative
+  ; plusNativeFields ; encodeNativeAdditiveAt ; decodeNativeAdditiveAt
+  ; nativeSourceAction27 ; nativeActionAgreesWithBlockAt
+  ; decodeNativeIntertwinesAt )
 
 -- Separate F3 no-go: nonsemisimple three-point C3 permutation module
 -- has no C3-equivariant linear retraction onto its constant line.
