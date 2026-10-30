@@ -224,3 +224,44 @@ properPowerCoveredByRootRectangle basePredecessor k upper cutoff
     (Bounds.properPowerBaseLeFloorRoot
       (suc basePredecessor) k upper powerBound)
     exponentBound
+
+------------------------------------------------------------------------
+-- CT11: executable duplicate-eliminating numeric image / length bound.
+--
+-- Selecting one representative of each repeated candidate value can
+-- only DECREASE the candidate count. We prove this exact inequality
+-- directly, not by importing an unverified analytic counting bound.
+------------------------------------------------------------------------
+
+notEqualNat : Nat → Nat → Bool
+notEqualNat x y with x NatP.≟ y
+... | yes same = false
+... | no different = true
+
+dedupPowerValues : List Nat → List Nat
+dedupPowerValues [] = []
+dedupPowerValues (x ∷ xs) =
+  x ∷ dedupPowerValues (filterCandidate (notEqualNat x) xs)
+
+dedupLengthAtMost :
+  (xs : List Nat) →
+  Reindex.listLength (dedupPowerValues xs)
+    ≤ Reindex.listLength xs
+dedupLengthAtMost [] = z≤n
+dedupLengthAtMost (x ∷ xs) =
+  s≤s (NatP.≤-trans
+    (dedupLengthAtMost (filterCandidate (notEqualNat x) xs))
+    (filteredLengthAtMost (notEqualNat x) xs))
+
+properPowerCandidateDistinctCount : Nat → Nat → Nat
+properPowerCandidateDistinctCount b e =
+  Reindex.listLength (dedupPowerValues (powerValueRectangle b e))
+
+properPowerCandidateDistinctCountBound :
+  (b e : Nat) →
+  properPowerCandidateDistinctCount b e ≤ b * e
+properPowerCandidateDistinctCountBound b e =
+  subst
+    (λ n → properPowerCandidateDistinctCount b e ≤ n)
+    (powerValueRectangleLength b e)
+    (dedupLengthAtMost (powerValueRectangle b e))
