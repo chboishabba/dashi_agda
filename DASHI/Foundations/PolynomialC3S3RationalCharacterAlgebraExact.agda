@@ -125,15 +125,34 @@ ifParity Perm.permSwapLowMid f o = reflect f o
 ifParity Perm.permSwapLowHigh f o = reflect f o
 ifParity Perm.permSwapMidHigh f o = reflect f o
 
+-- Definitional SAME-PAIR transport: applying reflection to the
+-- input field and then selecting the orbit is definitionally the
+-- original field at the reflected orbit. This is *not* the
+-- positiveReflectionInvariant theorem itself; the two need trans.
+positiveFieldReflectTransport :
+  (f : Field11ℚ) (o : Q.Orbit11) →
+  positiveField (reflect f) o ≡
+  positiveField f (Q.reflectionOn11 o)
+positiveFieldReflectTransport f o = refl
+
+negativeFieldReflectTransport :
+  (f : Field11ℚ) (o : Q.Orbit11) →
+  negativeField (reflect f) o ≡
+  negativeField f (Q.reflectionOn11 o)
+negativeFieldReflectTransport f o = refl
+
 positiveIntertwinesS3Parity :
   (p : Perm.TriPermutation) (f : Field11ℚ) (o : Q.Orbit11) →
   positiveField (s3OnRationalField p f) o ≡ positiveField f o
 positiveIntertwinesS3Parity Perm.permIdentity f o = refl
 positiveIntertwinesS3Parity Perm.permRotate f o = refl
 positiveIntertwinesS3Parity Perm.permRotate2 f o = refl
-positiveIntertwinesS3Parity Perm.permSwapLowMid f o = positiveReflectionInvariant f o
-positiveIntertwinesS3Parity Perm.permSwapLowHigh f o = positiveReflectionInvariant f o
-positiveIntertwinesS3Parity Perm.permSwapMidHigh f o = positiveReflectionInvariant f o
+positiveIntertwinesS3Parity Perm.permSwapLowMid f o =
+  trans (positiveFieldReflectTransport f o) (positiveReflectionInvariant f o)
+positiveIntertwinesS3Parity Perm.permSwapLowHigh f o =
+  trans (positiveFieldReflectTransport f o) (positiveReflectionInvariant f o)
+positiveIntertwinesS3Parity Perm.permSwapMidHigh f o =
+  trans (positiveFieldReflectTransport f o) (positiveReflectionInvariant f o)
 
 negativeIntertwinesS3Parity :
   (p : Perm.TriPermutation) (f : Field11ℚ) (o : Q.Orbit11) →
@@ -142,9 +161,12 @@ negativeIntertwinesS3Parity :
 negativeIntertwinesS3Parity Perm.permIdentity f o = refl
 negativeIntertwinesS3Parity Perm.permRotate f o = refl
 negativeIntertwinesS3Parity Perm.permRotate2 f o = refl
-negativeIntertwinesS3Parity Perm.permSwapLowMid f o = negativeReflectionOdd f o
-negativeIntertwinesS3Parity Perm.permSwapLowHigh f o = negativeReflectionOdd f o
-negativeIntertwinesS3Parity Perm.permSwapMidHigh f o = negativeReflectionOdd f o
+negativeIntertwinesS3Parity Perm.permSwapLowMid f o =
+  trans (negativeFieldReflectTransport f o) (negativeReflectionOdd f o)
+negativeIntertwinesS3Parity Perm.permSwapLowHigh f o =
+  trans (negativeFieldReflectTransport f o) (negativeReflectionOdd f o)
+negativeIntertwinesS3Parity Perm.permSwapMidHigh f o =
+  trans (negativeFieldReflectTransport f o) (negativeReflectionOdd f o)
 
 -- Compare to Parity.vandermondeIntertwinesSign:
 -- both arrows use identical S3 -> C2 and its action by +/-1
