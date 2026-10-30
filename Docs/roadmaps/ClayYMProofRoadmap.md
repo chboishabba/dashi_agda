@@ -8,12 +8,9 @@ The canonical `BalabanSU2RationalWilsonTraceBoundExact` proves
 `YMClayLiteralWilsonS2SameAlgebraBoundExact` now defines the proof-bearing
 `RationalSU2TraceGramBoundSource` and the explicit projections
 `rationalSU2TraceToSameAlgebraWilsonBounds` and
-`rationalSU2TraceBuildsCanonicalS2`. Once one same-carrier
-`traceIntervalIsGramBounded` interpretation is exhibited, **all loopwise
-boundedness fields** are supplied by the existing trace theorem. The resulting
+`rationalSU2TraceBuildsCanonicalS2`. Once one same-carrier `pointwiseUnitBoundGivesGramBounded` interpretation and `traceIsLiteralWilson` equality are exhibited, **all loopwise boundedness fields** follow from the existing literal configuration-dependent Wilson-path theorem. The resulting
 canonical S2 inputs feed `YMClayLiteralWilsonP2ExpectationConvergenceExact`
-and the already-proved three selected expectation-limit compilers. This
-removes a family of duplicate P2 per-loop boundedness proofs. The record now additionally requires `traceIsLiteralWilson`, an explicit equality on the SAME physical loop carrier. Boundedness is transported along that equality with `subst`; an arbitrary synthetic trace observable cannot be substituted into P2.
+and the already-proved three selected expectation-limit compilers. This removes a family of duplicate P2 per-loop boundedness proofs. The record now additionally requires `traceIsLiteralWilson`, an explicit equality on the SAME physical loop carrier. Boundedness is transported along that equality with `subst`; an arbitrary synthetic trace observable cannot be substituted into P2.
 
 The exact
 remaining P2 obligations are now the trace→Gram physical interpretation,
