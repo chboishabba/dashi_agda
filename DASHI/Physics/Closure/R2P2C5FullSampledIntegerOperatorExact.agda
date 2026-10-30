@@ -693,3 +693,20 @@ cyclotomicFiveSourceSampledEqualsIndexed f g target =
 -- The full ORIGINAL 125-output *character-sum operator* is now
 -- source-written unconditionally. Equality with the tensor FFT array
 -- evaluator is still a distinct unproved equation. Kernel pending.
+
+
+------------------------------------------------------------------------
+-- TRANSITIVE SOURCE-IDENTICAL ORIGINAL INTEGER FREQUENCY BRIDGE.
+-- Reuses the ORIGINAL 729-term exact indexed carrier, not a merely
+-- modulo-N cyclic output count, and does not claim the tensor FFT
+-- computer's array values agree with this source sum yet.
+------------------------------------------------------------------------
+
+cyclotomicFiveSourceCharacterSumRecoversTrueIntegerFull :
+  (f g : I.ModeCube27 → C5.Cyclotomic5)
+  (target : Full.WideCube125) →
+  cyclotomicFiveSourceNormalizedSampledAt f g target ≡ originalTrue125BilinearAt f g target
+cyclotomicFiveSourceCharacterSumRecoversTrueIntegerFull f g target =
+  trans
+    (cyclotomicFiveSourceSampledEqualsIndexed f g target)
+    (indexedFiveGridEqualsTrueFullInteger f g target)
