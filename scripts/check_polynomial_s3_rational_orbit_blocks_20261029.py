@@ -137,6 +137,12 @@ def verify_rational_solver_source_integrity():
         "nativeSourceAction27",
         "nativeActionAgreesWithBlockAt",
         "decodeNativeIntertwinesAt",
+        "nativeSourceActionIdentityAt",
+        "nativeSourceActionCompositionAt",
+        "nativeSourceActionAdditiveAt",
+        "encodeNativeRespectsPointwiseAt",
+        "decodedNativeEquivAt",
+        "encodeNativeIntertwinesAt",
     )
     for name in native_receipts:
         assert len(re.findall(r"^"+name+r" :",native_fields,re.M))==1,name
@@ -144,6 +150,25 @@ def verify_rational_solver_source_integrity():
     assert "Atlas.blockActionPreservesNative" in native_fields
     assert "Atlas.blockCodeRoundTrip" in native_fields
     assert "sourceBlockActionAgreesWithNative" in native_fields
+
+    # O73--O76: source-level audit of group-law owner reuse and finite
+    # pointwise encoder transport. Count the actual seven constructor
+    # cases (1+2+3+3+6+6+6=27 native coordinate observations).
+    assert "TernaryEndomorphismS3ActionLawsExact as ActionLaws" in native_fields
+    assert "TernaryPermutationS3LawsExact as S3" in native_fields
+    assert "ActionLaws.inverseProduct p q" in native_fields
+    assert "ActionLaws.conjugateComposition" in native_fields
+    assert len(re.findall(r"^encodeNativeRespectsPointwiseAt f g equal ",native_fields,re.M))==7
+    assert "encodeNativeRespectsPointwiseAt f g equal Atlas.identityBlock" in native_fields
+    assert native_fields.count("equal (Atlas.blockToCode (Atlas.")==26
+    for family,arity in (("cycleBlock",2),("transpositionBlock",3),
+                         ("constantBlock",3),("oneFixedBlock",6),
+                         ("twoFixedBlock",6),("twoCycleBlock",6)):
+        assert len(re.findall(r"equal [(]Atlas[.]blockToCode [(]Atlas[.]"+
+            family+r" (?:Small|Big)[.]\w+[)]",native_fields))==arity,family
+    assert "encodeDecodeNativeCoordinateAt" in native_fields
+    assert "decodedNativeEquivAt p f" in native_fields
+    assert "decodeNativeIntertwinesAt p (encodeNative27 f) x" in native_fields
     for root in (
         "DASHI/EverythingTOESymmetryResolved369.agda",
         "DASHI/Unifier.agda","DASHI/Unified/Everything.agda"
@@ -252,6 +277,20 @@ def test():
                 next_index=PERMS.index(multiply(p,PERMS[index]))
                 expected=part[:-1]+str(next_index)
             assert observed==expected,(p,c,observed,expected)
+
+    # The same original six S3 group elements act on ALL 27 native codes.
+    # This is a direct finite audit of the inverse-pullback group law that
+    # the source-written nativeSourceActionCompositionAt imports.
+    s3_native_cases=0
+    for p,q in product(PERMS,repeat=2):
+        assert inverse(multiply(p,q))==multiply(inverse(q),inverse(p))
+        for c in product(CODE,repeat=3):
+            assert conjugate(multiply(p,q),c)==conjugate(p,conjugate(q,c))
+            assert conjugate(inverse(multiply(p,q)),c)==(
+                conjugate(inverse(q),conjugate(inverse(p),c)))
+            s3_native_cases+=1
+    assert s3_native_cases==972
+    print("PASS 972 original-code S3 composition / inverse-pullback cases")
 
     det_product=determinant([[1]])
     for M in (B2,B3,B3,B6,B6,B6):
