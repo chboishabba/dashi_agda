@@ -46,6 +46,50 @@ is the real remaining P2 implementation wall, alongside the physical
 trace/Gram map and limit/time semantics.
 
 
+
+### 30 October, subsequent source-first native-P2 max-cut
+
+The stronger already-existing donor chain is now authoritative for **native**
+rational Wilson paths:
+
+```
+BalabanLiteralRationalSU2WilsonBoundedAlgebraExact
+  -> BalabanLiteralRationalSU2WilsonCylinderBoundDataExact
+  -> BalabanLiteralWilsonNativeThermodynamicProducerExact
+  -> BalabanLiteralWilsonNativePhysicalMeasureExact
+  -> YMClayLiteralWilsonP2NativeMeasureExact.nativeWilsonP2Limits
+```
+
+The native physical-measure owner explicitly sets
+`Gram.BoundedObservable = Σ majorant, QuantitativeBound` and
+`Gram.multiplyObservable =` pointwise Wilson multiplication. Thus the earlier
+generic `RationalSU2TraceGramBoundSource` with its separately provided
+trace-to-Gram and generic multiplication closure is a **compatibility** route,
+not a primitive P2 input in the native path.
+
+In `YMClayLiteralWilsonS2SameAlgebraBoundExact`,
+`nativeWilsonSameAlgebraBoundInputs` reuses the already-produced
+quantitative Wilson path bound, unit bound, bounded products and native
+physical-measure definitions. No new analytic closure is assumed in this
+specialization. Moreover `nativeWilsonP2Limits` already constructs all
+three actual convergence proofs **without** support-distance/time geometry;
+support-distance belongs to P1. Its thermodynamic/expectation input package
+still must be physically inhabited; the syntactic construction is not itself
+a new four-dimensional measure-existence theorem.
+
+**Normalization fix:** the canonical `literalRationalSU2WilsonCylinderBounds`
+uses `groupRank = 1ℚ` for normalized Wilson traces. The new S2 adapter now
+matches this exact source, rather than confusing normalized trace with the
+matrix representation dimension two. This is a same-object semantic correction.
+
+P3 donor search also found pre-existing
+`YangMillsDirectSourceOSReconstructedSpectrumH3Exact` and
+`YangMillsClayCMP119RealSameOSH3Exact`. Both retain the physical
+selected-spectrum / actual reconstructed `H_OS` identification as a
+proof-bearing input; no new synthetic H3 spectrum is introduced.
+
+
+
 ## 2026-10-30 — Route-S H1 direct-source Pareto weld
 
 The highest-value reuse cut is the **direct source/OS** mass-gap route, not a
