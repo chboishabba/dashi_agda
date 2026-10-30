@@ -1824,3 +1824,13 @@ unifierBalabanRouteSP2NativeNoDistancePayment =
 unifierBalabanRouteSP2NativeCompilerLevel : ProofLevel
 unifierBalabanRouteSP2NativeCompilerLevel =
   BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
+
+
+unifierBalabanRouteSP2R445NoSecondMoment :
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequired ≡ false
+unifierBalabanRouteSP2R445NoSecondMoment =
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+unifierBalabanRouteSP2R445CompilerLevel : ProofLevel
+unifierBalabanRouteSP2R445CompilerLevel =
+  BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
