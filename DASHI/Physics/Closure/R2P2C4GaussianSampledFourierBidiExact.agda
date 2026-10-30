@@ -266,7 +266,7 @@ pointwiseProduct1 : Quad Gaussian4 → Quad Gaussian4 → Quad Gaussian4
 pointwiseProduct1 = zipQuad _*G_
 
 fourRational : ℚ
-fourRational = 4
+fourRational = normalize 4 1
 
 scaleQuad : ℚ → Quad Gaussian4 → Quad Gaussian4
 scaleQuad q = mapQuad (scaleG q)
