@@ -1590,3 +1590,94 @@ then use this M16 theorem. The missing (3) is not supplied by
 currently known bounded-gap results, nor by any S3/C2/Ibrahim
 quotient equivalence. Check all Agda with the golden safe kernel
 before claiming a theorem. No ESD edits.
+
+## 30 October 2026 — exact FINAL critical-path obligations (research OWNED by DASHI)
+
+**Target:** the original `TwinPrimeSixWheelExact.TwinPrimesInfinitelyOften`,
+constructively `∀ N → Σ Nat (λ p → N ≤ p × TwinPrimeAt p)`.
+The status below is based on actually fetching the October 30 source
+of M13, M14, M16 and the original Riemann/prime-counting interfaces.
+Being source-written is **not** kernel verification. This document
+lists **our own proof obligations** and must not defer the mathematical
+discovery to unspecified third parties.
+
+### A. Materialization and consistency obligations (independent of novel analytic breakthrough)
+
+| ID | Exact lemma/result we must discharge | Existing donor / present state |
+| --- | --- | --- |
+| CT01 | `SafeAgdaClosure`: import-closed `{-# OPTIONS --safe #-}`, no postulates, holes or termination escapes; all newly added modules and TOE roots typecheck at pinned stdlib | Source-written, **not checked**; some new modules currently lack explicit `--safe` |
+| CT02 | `NatPrimeCarrierConcrete`: actual `AllPrimeArithmetic.Prime` with certified `NatPrime.Prime`, injective `toNat` and `ChebyshevPrimeOwnership` fully inhabited, no proof-object identity shortcut | `NatPrimeCountingInstance`, `ChebyshevPrimeCounting`; partial interfaces |
+| CT03 | `PrimePowerUniqueBase`: for primes p,q and positive i,j, `p^i=q^j ⇒ p=q`; including uniqueness of the Mangoldt scalar value | Original `RiemannPrimePowerCounting`; not yet actual unconditional proof |
+| CT04 | `PrimePowerDecidableTotal`: every Nat either witnesses a certified positive prime power or formally excludes all such powers; cannot assert `lambdaSpecified` without constructing it | `RiemannVonMangoldtSpecification.VonMangoldtAt` relational; construction open |
+| CT05 | `ConcreteVonMangoldtWeil`: `WeilTestSpace`, log-prime weights, genuine multiplication, ordered scalar/additive laws, zero-annihilation, `VonMangoldtFunction.lambdaSpecified` and `specificationSingleValued` inhabited without postulates | `RiemannTrackedToVonMangoldtBridge` tracks ONLY 15 primes; `RiemannPrimeExhaustion` is parametric; real-analysis donor `NSPeriodicCanonicalRealAuthorities` has **postulates**, therefore disallowed in Golden closure |
+| CT06 | `Finite270TotalBidiKernel`: full `start,count` Nat interval ↔ two-case period-plan and reverse with all code/interval identities kernel-checked | `TwinPrimeMangoldtTotalIntervalPlanExact`; source-written |
+| CT07 | `FinitePrimeErrorSplitKernel`: original `Λ(n)Λ(n+2)` finite sum = sum of exponent-one pairs + retained all-other support terms, with all 9 cases and correct algebra | `TwinPrimeMangoldtPrimeErrorFiniteSplitExact`; source-written |
+| CT08 | `PrimeOneActualNatPrimeBidiKernel`: two first-exponent carrier certificates ↔ two actual NatPrimality.Prime proofs at gap two | `TwinPrimeMangoldtPrimeOneCertifiedBidiExact`; source-written conditional on CT02 |
+| CT09 | `FiniteNonzeroExtractsTwinKernel`: nonzero *prime-only* finite sum → `Σ p, TwinPrimeAt p` in the source interval, no new axiom | `TwinPrimeMangoldtNonzeroPrimeSumWitnessExact`; source-written conditional on CT02/CT05 |
+
+### B. Classical elementary M15 lemmas WE CAN PROVE, not a research-paper dependency
+
+Let `U=2X+2` for integer `X≥2`, and let E(X) be the
+exact nonnegative weighted contribution of pairs with at least
+one **proper** prime power (exponent ≥2). All estimates here
+refer to a REAL, ORDERED, genuinely logarithmic scalar,
+not an arbitrary `WeilTestSpace.Scalar`.
+
+| ID | Exact theorem we must formalise | Mathematical proof idea |
+| --- | --- | --- |
+| CT10 | `PerfectPowerExponentBound`: if `p^k≤U` with `k≥2`, then `p≤⌊√U⌋` and `k≤⌊log₂ U⌋` | Integer monotonicity; all primes ≥2 |
+| CT11 | `PerfectPowerFiniteCount`: # distinct integers `n≤U` with `n=p^k, k≥2` is ≤ `⌊√U⌋⌊log₂ U⌋`; counting repeated representations gives an upper bound | Map each (p,k) to an integer; bounded union; don't require uniqueness |
+| CT12 | `LogWeightUpper`: `0≤Λ(n)≤log U` for `2≤n≤U`; hence `0≤Λ(n)Λ(n+2)≤(log U)^2` for arguments within U | Basic ordered-log laws and original prime-power definition |
+| CT13 | `ProperPowerPairErrorBound`: `0≤E(X)≤2⌊√U⌋⌊log₂ U⌋(log U)^2` over `X≤n<2X` | At most two shifted proper-power sets; CT11–CT12; exact support partition |
+| CT14 | `ProperPowerErrorSublinear`: for every `ε>0` eventually `E(X)≤ε X` | Explicit domination `√X log³ X = o(X)`, proved in the chosen ordered real model |
+
+The CT13 bound is deliberately conservative but is enough for
+infinitude. These are **proposed exact lemmas**, not currently
+kernel-verified or claimed established on #1408.
+
+### C. NEW theorem we ourselves must discover and PROVE (parity-sensitive gap-two)
+
+Define the original, fully instantiated von Mangoldt correlation
+`S(X)=Σ_{X≤n<2X} Λ(n) Λ(n+2)`.
+
+| ID | Exact target | Status |
+| --- | --- | --- |
+| CT15 | **`GapTwoMangoldtDyadicPositive`**: `∃ c>0, X₀, ∀ X≥X₀, S(X)≥cX` (stronger than necessary; alternatively `∀N∃X≥N, S(X)>E(X)` is a minimal sufficiency target) | **UNPROVED NEW MATHEMATICS**; original Hardy–Littlewood conjectural main term `2 C₂ X` is NOT a donor theorem |
+| CT15a (research decomposition) | Prove an exact parity-sensitive analytic expansion `S(X)=M(X)+R(X)`, with a **proved** `M(X)≥aX`, `a>0`, and a **proved** one-sided `R(X)>-aX/2` | Only a proposed attack, NOT an existing bound or imported theorem |
+| CT15b (key scientific wall) | Establish the shifted double-primality correlation/cancellation estimate required for the `R(X)` bound; existing BV/Maynard/bounded-gap results do NOT give it | **UNPROVED**; explicitly test putative refinements against the parity obstruction, including the double-composite survivor construction in `FiniteTwinSieveFactorableLiftExact` |
+| CT16 | `DyadicLowerBeatsProperPowerError`: CT14 + CT15 ⇒ `P(X)=S(X)-E(X)>0` for every sufficiently large dyadic window | Elementary ordered-real inequality; source open |
+| CT17 | `DyadicPrimePairReadout`: CT16 + CT09 ⇒ `Σp, X≤p<2X × TwinPrimeAt p`; choose sufficiently large X≥N for each N | Conditional composition, source open |
+| CT18 | `TwinPrimesInfinitelyOftenFinal`: export the UNCONDITIONAL, ZERO-POSTULATE theorem through the TOE roots, with all premises of CT15 *proved*, NOT record fields left uninhabited | Final goal, OPEN |
+
+Important: CT15a/b are NOT an assertion that a standard sieve
+already supplies the requisite estimate. They define an auditable
+research decomposition. The novel proof must explicitly defeat
+the residual parity-indistinguishability obstruction, not merely
+rename it as `CorrelationLaw`, `UnboundedNonzero`, `Positivity`,
+`Ibrahim`, `QID` or a supplier parameter.
+
+### D. Distinguish the two goals
+
+Proving the **number-theoretic** twin-prime theorem requires
+CT01–CT18 (excluding any unused optional stronger estimates).
+The more ambitious **signed SSP/FRACTRAN executable BIDI** additionally
+requires A03/A07/A08/A09, B02–B07, C02–C08, D03–D08 and E15
+from the original 101-lemma matrix: machine trace semantics,
+faithful readout, true reachability and certificate transport.
+Those DO NOT bypass CT15, and need not block working on CT15
+in parallel.
+
+**Proof order for highest-alpha work:** CT02/CT03/CT04/CT05
+(concrete original semantic model), CT06–CT09 (kernel and
+consumer proof), CT10–CT14 (elementary proper-power bound),
+CT15a/b (new mathematics and independent adversarial
+counterexample checks), CT16–CT18. No CI shortcut, no ESD edits;
+the Golden Agda --safe kernel, rather than Python,
+is final proof authority.
+
+Primary source: Tao, `A general parity problem obstruction`
+(2014); Hardy–Littlewood, `Partitio Numerorum III` (1923);
+Brun (1919), Zhang (2013/14), Maynard/Tao and
+Polymath8b (2013–2014). Original Riemann/Mangoldt,
+DASHI module authors, and preexisting
+Pareto/Snowball/Ibrahim/QID source ownership remain distinct.
