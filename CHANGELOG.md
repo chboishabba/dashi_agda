@@ -1,6 +1,50 @@
 # Changelog
 
 
+## 2026-10-30 — Alexander G2/G4: periodic open-cap and Nielsen 3-cocycle hard cut
+
+- Directly reinspected current canonical Agda boundary and handle-slide
+  owner modules, source Python, external S3 source and conditional HornedC3
+  Lean consumer. Also read the latest Agda PRs #1440/#1438 and Lean
+  #103, #1414's real B3 full-twist source, the existing S3
+  multiplication table, Ibrahim Monster 3B sources and the
+  canonical snowball attribution module.
+- Extended \`AlexanderHornedTernaryPantsMeridianBoundaryExact.agda\`
+  *in place*: exact \`threefoldBasingCocycleIsInverseParent\`
+  checks \`phi²(q)phi(q)q=w^-1\`; \`basedPhiFixesParent\`
+  and \`basedPhiCubeOnA/B/C\` compute the central \`Inn(w)\`
+  third iterate, with \`basedPhiCubeNotIdentityOnA\`.
+- Updated the existing \`AlexanderHornedTetralemmaRelativeHandleSlideGateExact.agda\`
+  status distinction and nonidentity consumer. No point-set
+  handlebody homeomorphism is fabricated.
+- Extended original
+  \`scripts/alexander_horned_order_three_peripheral_nielsen.py\`
+  with generator-wise and \`k=-7..7\` peripheral-conjugator
+  finite checks. An independent Python model was executed PASS;
+  the committed exact Python file was not executed locally.
+- Added \`Docs/topology/AlexanderHornedPeriodicCapCocycleMaxCut20261030.md\`
+  and updated the original G1–G6 proof cut, ABC orbit,
+  source audit, original inquiry roadmap and planning roadmap.
+  Classical free-group cyclic centralizers give the all-integer
+  residual \`w^(3k-1)\` no-go; Newman 1931 separately
+  forbids nontrivial periodic handlebody actions with a
+  relatively open boundary cap pointwise fixed.
+- G2 now explicitly requests supported **nonperiodic** relative
+  Nielsen slides. G3 actual embedded torus, G4 based
+  actual complement inclusion, G5 nested wild stage and
+  G6 same-object exterior \`pi1\` remain **open**.
+  The original external root-sector C3 action, ABC six-word
+  S3 family, polynomial B3 full twist and Monster 3B
+  representations are distinct mathematical objects.
+- Evidence boundaries: direct GitHub readback and independent
+  executed free-word algebra; no Agda or Lean kernel,
+  no in-repo preflight, no CI, no protected ESD edits.
+  Attribution to Alexander/Hatcher, Newman, Nielsen,
+  Artin/Birman, original Ibrahim/Monster3B and DASHI owners
+  is retained without proof-authority promotion.
+
+
+
 ## 2026-10-30 — S3-equivariant three-class middle-child index
 
 - Added 36-case \`middleChildClassCriterion\` to the existing canonical
