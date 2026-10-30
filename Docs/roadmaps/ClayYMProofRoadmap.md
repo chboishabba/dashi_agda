@@ -23,6 +23,30 @@ physical theory. The rational-quaternion argument alone is **not** a proof
 over full continuum Haar SU(2), nor an independent gauge-measure limit.
 
 
+
+### Canonical rational Wilson-function donor (30 October late reuse correction)
+
+Further source-tree archaeology found the existing
+`BalabanLiteralRationalSU2WilsonBoundedAlgebraExact.agda` owner. It already
+constructs **configuration-dependent** `RationalWilsonPath n` observables
+using periodic bond holonomies, proves the complete pointwise unit bound
+`literalWilsonPathPointwiseUnitBounded`, and proves one/multiplication
+pointwise closure. The new P2 bridge now consumes this owner *directly*:
+`physicalWilsonObservable : RationalWilsonObservable n → TestObservable`,
+`traceIsLiteralWilson` on the actual path observable, and
+`pointwiseUnitBoundGivesGramBounded` transport the existing theorem onto
+the same physical `Gram.BoundedObservable` carrier. The bounded identity
+follows from the existing literal unit observable and an exact same-object
+identity equality, rather than being independently assumed.
+
+This replaces the earlier fixed-quaternion-per-path approximation: path
+holonomy necessarily depends on the configuration. Generic
+`Gram.BoundedObservable` multiplication closure is still a separate
+stronger physical algebra input than rational-image pointwise closure. This
+is the real remaining P2 implementation wall, alongside the physical
+trace/Gram map and limit/time semantics.
+
+
 ## 2026-10-30 — Route-S H1 direct-source Pareto weld
 
 The highest-value reuse cut is the **direct source/OS** mass-gap route, not a
