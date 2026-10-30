@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as NativeP2
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 import DASHI.Physics.YangMills.YMClayAristotleRouteSLiteralWilsonDonorExact as RouteSLean
 import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact as RouteS3
@@ -984,3 +985,22 @@ routeSP2NativeNoDistanceRequirementIsFalse =
 
 routeSP2NativeSameAlgebraCompilerLevel : ProofLevel
 routeSP2NativeSameAlgebraCompilerLevel = S2.nativeWilsonS2CompilerLevel
+
+
+------------------------------------------------------------------------
+-- R445 SAME marked-source moment -> native preferred physical measure
+-- -> already-owned three P2 convergence limits (no second moment source).
+------------------------------------------------------------------------
+
+routeSP2R445IndependentMomentRequired : Bool
+routeSP2R445IndependentMomentRequired =
+  NativeP2.p2NativeIndependentMomentSelectionRequired
+
+routeSP2R445IndependentMomentRequiredIsFalse :
+  routeSP2R445IndependentMomentRequired ≡ false
+routeSP2R445IndependentMomentRequiredIsFalse =
+  NativeP2.p2NativeIndependentMomentSelectionRequiredIsFalse
+
+routeSP2R445NativeCompilerLevel : ProofLevel
+routeSP2R445NativeCompilerLevel =
+  NativeP2.p2CanonicalMarkedSourceCompilerLevel
