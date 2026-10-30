@@ -206,3 +206,11 @@ QIDs and 2026 directed-sheaf sources are attribution/comparison only.
 - [ ] **Genuine Agda uniqueness theorem** for strict positive weights and whole 54-edge grid needs a canonical connected path/certificate and extensional comparison of all optimal partitions to the two checkerboards; BFS Python is not a kernel theorem.
 - [ ] Source-checked same-object adapter to OpenAI family-102 **simple unweighted** `Graph.cutSize` with `u<v` orientation and canonical binary graph printer; distinguish the closed native bipartite class (trivial exact optimum) from unrestricted hardness. No unrestricted graph 102 theorem or SAT 378 speedup follows from this native fixture.
 - [ ] Exact-head Agda and Lean compiler receipts; no CI dependency and no ESD edit.
+
+- [x] Strengthened native canonical slots with an explicit
+  Agda `NoDuplicateSlots allNativeSlots` proof candidate;
+  close-list boolean evaluation has a source-written soundness
+  construction. No external checker receipt.
+- [ ] Check the new inductive distinctness and 54-slot code census
+  in Agda; separately prove generic slotId/endpoint injectivity
+  if required by a later consumer.
