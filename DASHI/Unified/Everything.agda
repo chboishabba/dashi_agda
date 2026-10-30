@@ -486,3 +486,13 @@ unifiedBalabanRouteSP2NativeNoDistancePayment =
 unifiedBalabanRouteSP2NativeCompilerLevel : ProofLevel
 unifiedBalabanRouteSP2NativeCompilerLevel =
   BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
+
+
+unifiedBalabanRouteSP2R445NoSecondMoment :
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequired ≡ false
+unifiedBalabanRouteSP2R445NoSecondMoment =
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+unifiedBalabanRouteSP2R445CompilerLevel : ProofLevel
+unifiedBalabanRouteSP2R445CompilerLevel =
+  BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
