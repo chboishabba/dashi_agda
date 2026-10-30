@@ -16,6 +16,7 @@ module DASHI.Foundations.PolynomialS3RationalBlockFieldIsomorphismExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Int using (Int; pos)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as Ring
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
