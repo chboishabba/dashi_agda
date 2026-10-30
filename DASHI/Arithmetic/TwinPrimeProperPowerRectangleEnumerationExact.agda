@@ -20,12 +20,14 @@ module DASHI.Arithmetic.TwinPrimeProperPowerRectangleEnumerationExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)\nopen import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Product using (_×_; _,_)\nopen import Data.Nat.Base using (_≤_; z≤n; s≤s)\nimport Data.Nat.Properties as NatP\nopen import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; subst)
+open import Data.Product using (_×_; _,_)\nopen import Data.Nat.Base using (_≤_; z≤n; s≤s)\nimport Data.Nat.Properties as NatP\nopen import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; subst; sym)
+open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Data.List.Base using (_++_; map)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 import DASHI.Analysis.RiemannPrimePowerArithmetic as Power
+import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact as Root
 
 -- All exponent indices 0..E-1 appear, in descending order.
 powerRow : Nat → Nat → List (Nat × Nat)
@@ -112,3 +114,87 @@ filteredRectangleAtMost b e predicate =
       (filterCandidate predicate (powerRectangle b e)) ≤ n)
     (powerRectangleLength b e)
     (filteredLengthAtMost predicate (powerRectangle b e))
+
+------------------------------------------------------------------------
+-- CT11 CONDITIONAL COMPLETE COORDINATE COVERAGE.
+--
+-- Each pair (base,k) in its exact rectangle is physically present
+-- in the enumerator. This is the missing finite membership half
+-- needed to move from a power bound to a cardinality inequality.
+------------------------------------------------------------------------
+
+data _member_ {A : Set} (x : A) : List A → Set where
+  memberHead : ∀ {xs} → x member (x ∷ xs)
+  memberTail : ∀ {y xs} → x member xs → x member (y ∷ xs)
+
+memberAppendLeft :
+  {A : Set} {x : A} (xs ys : List A) →
+  x member xs → x member (xs ++ ys)
+memberAppendLeft [] ys ()
+memberAppendLeft (x ∷ xs) ys memberHead = memberHead
+memberAppendLeft (y ∷ xs) ys (memberTail proof) =
+  memberTail (memberAppendLeft xs ys proof)
+
+memberAppendRight :
+  {A : Set} {x : A} (xs ys : List A) →
+  x member ys → x member (xs ++ ys)
+memberAppendRight [] ys proof = proof
+memberAppendRight (y ∷ xs) ys proof =
+  memberTail (memberAppendRight xs ys proof)
+
+rowContainsIndex :
+  (base e k : Nat) → suc k ≤ e →
+  (base , k) member powerRow base e
+rowContainsIndex base zero k ()
+rowContainsIndex base (suc e) k (s≤s k≤e)
+  with k NatP.≟ e
+... | yes equal =
+  subst
+    (λ i → (base , i) member powerRow base (suc e))
+    (sym equal)
+    memberHead
+... | no different =
+  memberTail
+    (rowContainsIndex base e k
+      (Root.strictFromLeDifferent k≤e different))
+
+rectangleContainsIndex :
+  (b e base k : Nat) →
+  suc zero ≤ base → base ≤ b → suc k ≤ e →
+  (base , k) member powerRectangle b e
+rectangleContainsIndex zero e zero k () baseBound exponentBound
+rectangleContainsIndex zero e (suc base) k positive () exponentBound
+rectangleContainsIndex (suc b) e base k positive baseBound exponentBound
+  with base NatP.≟ suc b
+... | yes equal =
+  subst
+    (λ i → (i , k) member powerRectangle (suc b) e)
+    (sym equal)
+    (memberAppendLeft
+      (powerRow (suc b) e) (powerRectangle b e)
+      (rowContainsIndex (suc b) e k exponentBound))
+... | no different =
+  memberAppendRight
+    (powerRow (suc b) e) (powerRectangle b e)
+    (rectangleContainsIndex b e base k positive
+      (Root.strictBelowSuccessorToLe
+        (Root.strictFromLeDifferent baseBound different))
+      exponentBound)
+
+mapPreservesMember :
+  {A B : Set} (f : A → B) {x : A} (xs : List A) →
+  x member xs → f x member map f xs
+mapPreservesMember f [] ()
+mapPreservesMember f (x ∷ xs) memberHead = memberHead
+mapPreservesMember f (y ∷ xs) (memberTail proof) =
+  memberTail (mapPreservesMember f xs proof)
+
+powerValueRectangleCovers :
+  (b e base k : Nat) →
+  suc zero ≤ base → base ≤ b → suc k ≤ e →
+  Power.natPow base (suc (suc k))
+    member powerValueRectangle b e
+powerValueRectangleCovers b e base k positive baseBound exponentBound =
+  mapPreservesMember powerValue (powerRectangle b e)
+    (rectangleContainsIndex b e base k
+      positive baseBound exponentBound)
