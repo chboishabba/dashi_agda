@@ -21,13 +21,20 @@ module DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinGateCNFExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Vec.Base using (Vec)
 import Data.Fin.Base as Fin
+import Data.Fin.Properties as FinP
+open import Data.Nat.Base using (_<_)
+import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
+import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
+import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedCompilerExact as Compiler
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact as Semantics
 
 three : Nat
 three = suc (suc (suc zero))
@@ -169,3 +176,134 @@ actualGateCNFAccepts gate values previous =
   localGateCNFComplete gate
     (actualGateWindow gate values previous)
     (actualGateConsistent gate values previous)
+
+
+------------------------------------------------------------------------
+-- CERTIFIED GLOBAL FIN-NAME PLACEMENT for ONE existing DAG gate.
+--
+-- Inputs use 0..inputs-1; earlier gates use exactly the original compiler's
+-- creation-time numbers; new output uses inputs+gates.
+-- CNFPlacedConstraintConjunctionExact and CNFVariableRenamingExact are
+-- original owners of the compilation/renaming semantics. Nothing here
+-- constructs an alternative CNF representation.
+------------------------------------------------------------------------
+
+newOutputBelow :
+  ∀ {inputs gates : Nat} →
+  inputs + gates < inputs + suc gates
+newOutputBelow {inputs} {gates} =
+  NatP.+-monoˡ-< inputs (NatP.n<1+n gates)
+
+newOutputFin :
+  ∀ {inputs gates : Nat} →
+  Fin.Fin (inputs + suc gates)
+newOutputFin {inputs} {gates} =
+  Fin.fromℕ< (newOutputBelow {inputs} {gates})
+
+-- Actual original compiler variable numbering, before injecting to Fin.
+wireNumber :
+  ∀ {inputs gates : Nat} →
+  Circuit.WireRef inputs gates → Nat
+wireNumber (Circuit.inputWire index) = Fin.toℕ index
+wireNumber {inputs} (Circuit.gateWire index) =
+  Compiler.gateVariableIndex inputs index
+
+wireNumberBelow :
+  ∀ {inputs gates : Nat}
+    (source : Circuit.WireRef inputs gates) →
+  wireNumber source < inputs + suc gates
+wireNumberBelow {inputs} {gates} (Circuit.inputWire index) =
+  NatP.<-≤-trans
+    (FinP.toℕ<n index)
+    (NatP.m≤m+n inputs (suc gates))
+wireNumberBelow {inputs} {gates} (Circuit.gateWire index) =
+  NatP.<-trans
+    (Semantics.gateVariableIndexBelowNext inputs index)
+    (newOutputBelow {inputs} {gates})
+
+wireFin :
+  ∀ {inputs gates : Nat} →
+  Circuit.WireRef inputs gates → Fin.Fin (inputs + suc gates)
+wireFin source = Fin.fromℕ< (wireNumberBelow source)
+
+-- Only three finite indices per gate. Unused inputs of a constant/NOT gate
+-- can harmlessly alias the output, because the local relation ignores them.
+gateWindowRename :
+  ∀ {inputs gates : Nat} →
+  (gate : Circuit.Gate inputs gates) →
+  Fin.Fin three → Fin.Fin (inputs + suc gates)
+gateWindowRename gate Fin.zero = newOutputFin
+gateWindowRename (Circuit.constantGate value) (Fin.suc Fin.zero) =
+  newOutputFin
+gateWindowRename (Circuit.constantGate value)
+    (Fin.suc (Fin.suc Fin.zero)) =
+  newOutputFin
+gateWindowRename (Circuit.notGate source) (Fin.suc Fin.zero) =
+  wireFin source
+gateWindowRename (Circuit.notGate source)
+    (Fin.suc (Fin.suc Fin.zero)) =
+  newOutputFin
+gateWindowRename (Circuit.andGate left right) (Fin.suc Fin.zero) =
+  wireFin left
+gateWindowRename (Circuit.andGate left right)
+    (Fin.suc (Fin.suc Fin.zero)) =
+  wireFin right
+gateWindowRename (Circuit.orGate left right) (Fin.suc Fin.zero) =
+  wireFin left
+gateWindowRename (Circuit.orGate left right)
+    (Fin.suc (Fin.suc Fin.zero)) =
+  wireFin right
+
+-- The output variable number agrees exactly with the ORIGINAL shared
+-- Tseitin compiler, rather than merely being alpha-equivalent.
+gateOutputIndexExact :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates) →
+  Fin.toℕ (gateWindowRename gate Fin.zero) ≡ inputs + gates
+gateOutputIndexExact {inputs} {gates} gate =
+  FinP.toℕ-fromℕ< (newOutputBelow {inputs} {gates})
+
+-- One original placed local constraint with the certified output/operand map.
+placedGate :
+  ∀ {inputs gates : Nat} →
+  Circuit.Gate inputs gates →
+  Placed.PlacedPredicate three (inputs + suc gates)
+placedGate gate =
+  Placed.placed-predicate
+    (gateWindowRename gate)
+    (localGateConsistent gate)
+
+placedGateCNF :
+  ∀ {inputs gates : Nat} →
+  Circuit.Gate inputs gates →
+  CNF.CNF (inputs + suc gates)
+placedGateCNF gate = Placed.compilePlaced (placedGate gate)
+
+-- All soundness/completeness is imported from the previously developed
+-- original CNF placement theorem, not rederived gate by gate.
+placedGateSound :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates)
+    (globalBits : CNF.Bits (inputs + suc gates)) →
+  CNF.evaluateCNF (placedGateCNF gate) globalBits ≡ true →
+  localGateConsistent gate
+    (Rename.pullbackBits (gateWindowRename gate) globalBits) ≡ true
+placedGateSound gate globalBits =
+  Rename.placedTruthTableCNFSound
+    (gateWindowRename gate) (localGateConsistent gate) globalBits
+
+placedGateComplete :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates)
+    (globalBits : CNF.Bits (inputs + suc gates)) →
+  localGateConsistent gate
+    (Rename.pullbackBits (gateWindowRename gate) globalBits) ≡ true →
+  CNF.evaluateCNF (placedGateCNF gate) globalBits ≡ true
+placedGateComplete gate globalBits =
+  Rename.placedTruthTableCNFComplete
+    (gateWindowRename gate) (localGateConsistent gate) globalBits
+
+-- Next: assemble GateProgram by renaming previous clauses into the new
+-- finite global width, conjoin one placed gate, add final output literal,
+-- prove uniqueness/parsimonious count using the established numeric result.
+-- No global #SAT or OpenAI bit length claim follows yet from one gate.
