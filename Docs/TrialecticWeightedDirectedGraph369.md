@@ -261,3 +261,27 @@ policy for human, physical, legal or governance meanings.
 source-written; independently grounded, equivariant, consumer-specific
 mediation and actual Grothendieck/global seam compatibility remain
 OPEN. Agda/Lean exact-head kernels were not run.
+
+## 2026-10-30 next max-cut: actual graph cut + verified QID crosswalk
+
+**Docs -> TODO -> Code -> Changelog.** Reuse `Geometry.HypervoxelAdjacent`, existing two-colour `voxelTwoColouring`, `GraphColouringRecolourPantsSnowballExact` known concept coordinates, `SnowballExternalIdentityAvailabilityExact`, `AttributedSourceCore`, and `BalabanIbrahimParetoSnowballTOEExact`.
+
+Target exact theorem: the native 27-grid admits a cut that crosses **every** native edge. Consequently it dominates every competing 2-way cut edgewise; it is an abstract maximum cut for any nonnegative edge-weight function (without assuming equal weights). The companion finite audit counts 54 undirected native unit-weight edges. Do **not** claim a fully kernel-proved 54-edge counting theorem before Agda certifies a complete edge enumeration.
+
+Verified Wikidata items (inspected English label 30 October 2026):
+- graph theory Q131476; directed graph Q1137726;
+- adjacency matrix Q727035; graph coloring Q504843;
+- bipartite graph Q174733; graph isomorphism Q303100;
+- graph homomorphism Q3385162; maximum cut Q942557;
+- hypergraph Q840247; four color theorem Q184410.
+
+These are **concept identities**, not identity or mathematical authority of
+the synthetic 27-voxel object, a smooth pants cobordism, a specific
+intersectional claim, or an Ibrahim Monster representation. The paper
+identity and publication date of 2026 4CT results must be kept separate
+from Q184410 (the general theorem) and its 2019 Shitov source. The
+arXiv:2603.24880 source is v3 as of 1 October 2026, correcting older
+source-atlas text which still says v2. No source proof is imported.
+Preserve QID unresolved state for precise missing entities (e.g. this
+particular selected-geometry fixture; a general higher-stack proof).
+QID IDs not verified must remain candidate/unresolved, never guessed.
