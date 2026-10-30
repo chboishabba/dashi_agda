@@ -294,6 +294,67 @@ module LocalNielsenReducedCertificate where
   phiNotStrictlyBasedPeripheral : phi w ≡ reduce w → ⊥
   phiNotStrictlyBasedPeripheral ()
 
+
+  -- New high-alpha G4 cyclic-basing obstruction.  The previously
+  -- computed q is the exact conjugator phi(w)=q w q^-1.
+  -- The 3-fold transfer around phi's orbit carries a NONZERO
+  -- peripheral twist, not a strictly coherent order-three lift:
+  --
+  --   phi²(q) phi(q) q = w^-1.
+  --
+  -- The proof is a literal free reduction in the ORIGINAL word
+  -- carrier. This finite algebra does NOT manufacture an actual
+  -- path, continuous or PL homeomorphism, or limit-space action.
+  phiQ phi2Q threefoldBasingCocycle : Word
+  phiQ = phi q
+  phi2Q = phi phiQ
+  threefoldBasingCocycle =
+    reduce (phi2Q ++w phiQ ++w q)
+
+  threefoldBasingCocycleIsInverseParent :
+    threefoldBasingCocycle ≡ reduce (invert w)
+  threefoldBasingCocycleIsInverseParent = refl
+
+  threefoldBasingCocycleNontrivial :
+    threefoldBasingCocycle ≡ [] → ⊥
+  threefoldBasingCocycleNontrivial ()
+
+  -- The one chosen based normalization psi = Inn(q^-1) ◦ phi
+  -- fixes the parent word, but psi³ = Inn(w), not identity.
+  -- Generator-wise checks are exact; unrestricted free-group
+  -- lift uses the classical universal property, not new axioms.
+  basedPhi : Word → Word
+  basedPhi xs = reduce (invert q ++w phi xs ++w q)
+
+  basedPhiFixesParent : basedPhi w ≡ reduce w
+  basedPhiFixesParent = refl
+
+  basedPhiCubeOnA :
+    basedPhi (basedPhi (basedPhi a))
+      ≡ reduce (w ++w a ++w invert w)
+  basedPhiCubeOnA = refl
+
+  basedPhiCubeOnB :
+    basedPhi (basedPhi (basedPhi b))
+      ≡ reduce (w ++w b ++w invert w)
+  basedPhiCubeOnB = refl
+
+  basedPhiCubeOnC :
+    basedPhi (basedPhi (basedPhi c))
+      ≡ reduce (w ++w c ++w invert w)
+  basedPhiCubeOnC = refl
+
+  basedPhiCubeNotIdentityOnA :
+    basedPhi (basedPhi (basedPhi a)) ≡ a → ⊥
+  basedPhiCubeNotIdentityOnA ()
+
+  -- Therefore THIS chosen basepoint correction CANNOT be both
+  -- strictly order 3 and exactly peripheral-pointwise preserving.
+  -- General impossibility over EVERY conjugator q w^k uses the
+  -- classical centralizer theorem for non-power words in F3,
+  -- and is stated in documentation, not asserted as an Agda
+  -- theorem without that normal-form proof.
+
   nontrivialParentMeridian : reduce w ≡ [] → ⊥
   nontrivialParentMeridian ()
 
