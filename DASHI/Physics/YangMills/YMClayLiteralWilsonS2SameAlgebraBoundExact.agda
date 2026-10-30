@@ -15,6 +15,7 @@ import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R2
 import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact as R304
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationExact as S2
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundExact as Trace
+import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as RationalSU2
 
 ------------------------------------------------------------------------
 -- ROUTE-S S2 / WILSON BOUNDS ON THE SAME T5 OBSERVABLE ALGEBRA
@@ -77,6 +78,85 @@ sameAlgebraWilsonCylinderBoundData {dataSet = dataSet} inputs = record
         boundedMultiplyClosed inputs left right leftBounded rightBounded
   ; Thermo.WilsonCylinderBoundData.identityBound = identityBounded inputs
   }
+
+
+------------------------------------------------------------------------
+-- Rational SU(2) loop trace -> SAME Gram.BoundedObservable bridge.
+--
+-- The existing rational-unit-quaternion owner proves both trace endpoints.
+-- Instead of paying BoundedObservable separately for every loop, one literal
+-- trace interpretation carries the quantitative interval into the SAME
+-- physical T5 observable algebra. This is a generic implication: the
+-- interpretation itself must be supplied for the intended cutoff family.
+--
+-- Provenance: the SU(2) bound is owned by
+-- BalabanSU2RationalWilsonTraceBoundExact; no claim about the full Haar
+-- continuum theory follows from its rational quaternion model.
+------------------------------------------------------------------------
+
+record RationalSU2TraceGramBoundSource
+    {Measure TestObservable Loop : Set}
+    (dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ)
+    : Set₁ where
+  field
+    loopHolonomy : Loop → RationalSU2.RationalUnitQuaternion
+    traceObservable : RationalSU2.RationalUnitQuaternion → TestObservable
+
+    one groupRank : ℚ
+    multiplyScalar : ℚ → ℚ → ℚ
+
+    -- A single interpretation theorem on the same physical measure:
+    -- normalized rational SU(2) trace in [-1,1] is Gram-bounded.
+    traceIntervalIsGramBounded :
+      ∀ q → Trace.RationalSU2NormalizedTraceBound q →
+        Gram.BoundedObservable dataSet (traceObservable q)
+
+    boundedMultiplyClosed : ∀ left right →
+      Gram.BoundedObservable dataSet left →
+      Gram.BoundedObservable dataSet right →
+      Gram.BoundedObservable dataSet
+        (Gram.multiplyObservable (Gram.operations dataSet) left right)
+
+    identityObservable : TestObservable
+    identityBounded :
+      Gram.BoundedObservable dataSet identityObservable
+
+open RationalSU2TraceGramBoundSource public
+
+rationalSU2TraceToSameAlgebraWilsonBounds :
+  ∀ {Measure TestObservable Loop}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ} →
+  RationalSU2TraceGramBoundSource {Loop = Loop} dataSet →
+  SameAlgebraWilsonBoundInputs {Loop = Loop} dataSet
+rationalSU2TraceToSameAlgebraWilsonBounds source = record
+  { SameAlgebraWilsonBoundInputs.loopObservable =
+      λ loop → traceObservable source (loopHolonomy source loop)
+  ; SameAlgebraWilsonBoundInputs.one = one source
+  ; SameAlgebraWilsonBoundInputs.groupRank = groupRank source
+  ; SameAlgebraWilsonBoundInputs.multiplyScalar = multiplyScalar source
+  ; SameAlgebraWilsonBoundInputs.literalLoopBounded =
+      λ loop → traceIntervalIsGramBounded source
+        (loopHolonomy source loop)
+        (Trace.normalizedTraceBound (loopHolonomy source loop))
+  ; SameAlgebraWilsonBoundInputs.boundedMultiplyClosed =
+      boundedMultiplyClosed source
+  ; SameAlgebraWilsonBoundInputs.identityObservable =
+      identityObservable source
+  ; SameAlgebraWilsonBoundInputs.identityBounded = identityBounded source
+  }
+
+rationalSU2TraceSourcePaysLiteralLoopBoundedness : Bool
+rationalSU2TraceSourcePaysLiteralLoopBoundedness = true
+
+rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue :
+  rationalSU2TraceSourcePaysLiteralLoopBoundedness ≡ true
+rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue = refl
+
+rationalSU2TraceToGramInterpretationLevel : ProofLevel
+rationalSU2TraceToGramInterpretationLevel = conditional
+
+rationalSU2TraceToSameAlgebraCompilerLevel : ProofLevel
+rationalSU2TraceToSameAlgebraCompilerLevel = conditional
 
 record SameAlgebraCanonicalS2Inputs
     {Measure TestObservable Loop : Set}
