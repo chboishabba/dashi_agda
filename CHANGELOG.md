@@ -81,3 +81,10 @@ monitor surface.
 - Added `TwinPrimeOddCompositeCubeRoughCutExact.agda`, safe-source universal three-factor threshold cube lower bound and contradiction to cube-roughness. Wired into original certified 103/105 odd-squarefree counterfeit and all three TOE roots.
 - Transported original computed binary cutoff and candidate/deduplicated power lists to equal standard-library `⌊log₂⌋` counterparts, yielding a source-written exact M15 position-cover envelope `2*floorSquareRoot(U)*⌊log₂U⌋`.
 - Real Möbius shifted-prime contamination asymptotics, strict ordinary-real Mangoldt scalar and cofinal correlation separation remain mathematical research obligations. No Agda/Lean compiler receipt, no CI, no ESD changes; independent historical owners/PR authorship and Ibrahim/Monster 3B/QID distinctions retained.
+
+## 2026-10-30 — FRACTRAN catches 59/329; source-level Pickover residual repair + actual Mangoldt window fibre
+
+- Added `DASHI/Arithmetic/TwinPrimeFractranResidualHyperfabricExact.agda`. Uses inherited SSP lane primes 7/47/59 with explicit 59 and 329 factor witnesses; adds literal first-applicable [1/7,1/47] operational step 329→47, with 59 locally stuck. Does not conflate Conway's prime-generating 14-fraction program with this mini-rack or the repo's five-lane FractranCOL.
+- Inhabited inherited exact `CoarseFineReopening Nat`, `ConsumerIndexedResidualRefinement.ResidualRepair`, Pickover sin-9999 `SignedPhaseFibre` for the *actual* twin consumer. Original 59/329 collision proves the residual must separate them. Reuses exact `NatPeriod270` inverse, not a duplicate quotient.
+- Proved in source exact actual Mangoldt pointwise consumer reopening and any finite-window pair-correlation BIDI through this fibre, followed by original prime-only / proper-power error sum split. Full FRACTRAN machine readout correctness and cofinal CT15 estimate remain explicit, uninhabited/missing premises.
+- Linked via all 3 canonical TOE roots, added finite exact Python diagnostic. No ESD edits, no CI, no kernel test; historical Conway/Brun/Hardy–Littlewood and original Ibrahim/Pareto/Snowball/QID ownership preserved.
