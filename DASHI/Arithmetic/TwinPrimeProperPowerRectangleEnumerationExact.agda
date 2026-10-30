@@ -28,6 +28,7 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 import DASHI.Analysis.RiemannPrimePowerArithmetic as Power
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact as Root
+import DASHI.Arithmetic.TwinPrimeProperPowerFloorRootBoundExact as Bounds
 
 -- All exponent indices 0..E-1 appear, in descending order.
 powerRow : Nat → Nat → List (Nat × Nat)
@@ -198,3 +199,28 @@ powerValueRectangleCovers b e base k positive baseBound exponentBound =
   mapPreservesMember powerValue (powerRectangle b e)
     (rectangleContainsIndex b e base k
       positive baseBound exponentBound)
+
+------------------------------------------------------------------------
+-- CT10 + CT11: every proper power with a supplied exponent cutoff
+-- occurs in the precise rectangle whose length is root * cutoff.
+-- The final *numerical* exponent cutoff (floor-log2) still needs
+-- a separate proof. No uniqueness/cardinality of distinct values
+-- is silently inferred from list membership alone.
+------------------------------------------------------------------------
+
+properPowerCoveredByRootRectangle :
+  (basePredecessor k upper exponentCutoff : Nat) →
+  Power.natPow (suc (suc basePredecessor)) (suc (suc k)) ≤ upper →
+  suc k ≤ exponentCutoff →
+  Power.natPow (suc (suc basePredecessor)) (suc (suc k))
+    member powerValueRectangle
+      (Root.floorSquareRoot upper) exponentCutoff
+properPowerCoveredByRootRectangle basePredecessor k upper cutoff
+    powerBound exponentBound =
+  powerValueRectangleCovers
+    (Root.floorSquareRoot upper) cutoff
+    (suc (suc basePredecessor)) k
+    (s≤s z≤n)
+    (Bounds.properPowerBaseLeFloorRoot
+      (suc basePredecessor) k upper powerBound)
+    exponentBound
