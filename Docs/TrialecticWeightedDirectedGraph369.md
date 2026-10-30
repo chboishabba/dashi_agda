@@ -230,3 +230,34 @@ are reassigned.
   four-colour work; original meta-introspector/Ibrahim and
   Monster3B sources retain the ownership already specified in the
   canonical source atlas. Their proofs are **not** claimed here.
+
+## 2026-10-30 follow-on: selected face mediation and a second non-descent cut
+
+Reused, without duplicating:
+`TrialecticGrothendieckThreeCellDescentExact.FaceMediationLaw`,
+`GrothendieckFaceMediatedSection`,
+`TrialecticThreeCellCarryDepthExact.promoteGrothendieckMediated`,
+the canonical compatible T18 boundary, and
+`ConsumerDescentMinimalObserverExact`.
+
+`TrialecticWeightedGraphFaceMediationSelectedExact.agda` now provides a
+**declared synthetic three-case fixture** (reciprocal → positive
+27-cell corner, coercive → negative corner, underdetermined → origin).
+The complete weighted graph is retained as part of the input but is
+**not** treated as supplying either the attached face or the T18
+Grothendieck boundary. Instead, the face is explicitly supplied, and
+the boundary comes from the existing chosen compatible local sections.
+The typed next-depth carry reuses `SecondOrderCellGluing`, with exact
+source-state retention and a selected-output equality.
+
+Two states with identical complete weighted matrices and different
+attached faces select different next-depth cells. The selected-output
+consumer therefore **does not factor through the graph observer**.
+This is a strengthened finite non-descent claim, not a general
+face-synthesis theorem or evidence that one should use this synthetic
+policy for human, physical, legal or governance meanings.
+
+**Revised P2:** a demonstrative *selected* law/carry is now
+source-written; independently grounded, equivariant, consumer-specific
+mediation and actual Grothendieck/global seam compatibility remain
+OPEN. Agda/Lean exact-head kernels were not run.
