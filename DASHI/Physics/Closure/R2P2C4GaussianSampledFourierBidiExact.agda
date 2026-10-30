@@ -306,3 +306,17 @@ oneAxisSampledConvolutionIsCyclic
 -- No claim that this 1D law by itself proves the padded 3D truncated
 -- convolution. Tensor-distribution, support reindexing and the 27/729
 -- target link are independent, still-visible kernel obligations.
+
+
+------------------------------------------------------------------------
+-- EXACT TWO-FACTOR RATIONAL SCALING / CYCLOTOMIC MULTIPLICATION.
+-- This prevents handwaving the 3-axis 1/N³ factor in a finite
+-- sampled-character identity.
+------------------------------------------------------------------------
+
+gaussianScaleOfProduct :
+  (q r : ℚ) (x y : Gaussian4) →
+  scaleG (q * r) (G._*G_ x y)
+  ≡ G._*G_ (scaleG q x) (scaleG r y)
+gaussianScaleOfProduct q r (G.gauss a b) (G.gauss e f) =
+  C4.gauss-ext solve-∀ solve-∀
