@@ -95,6 +95,17 @@ council2023DocumentIndex = Source.mkNoDOISource
   "Same planning application index separately lists Stockland Development Pty Limited submission consent and Cherish Enterprises Pty Ltd landowner-consent documents; file labels are not signatures, verified parcel title or corporate transaction terms."
   Source.publicAttribution
 
+springfieldCityGroupCouncilCommentIndex2024 : Source.AttributedSource
+springfieldCityGroupCouncilCommentIndex2024 = Source.mkNoDOISource
+  "Ipswich City Council"
+  "6243/2023/LAP, entry 6: 14 March 2024 s275Z Planning Act - SCG Comment"
+  "Official Council application document index; underlying comment face not retrieved"
+  "14 March 2024"
+  "https://edoc.ipswich.qld.gov.au/objective/?env=iccecm&id=1596235&plat=pwy"
+  Source.governmentSource
+  "Official index names a Springfield City Group comment under the same Council planning application that also lists Cherish and Stockland consents. Index only: neither comment content, stance, authority nor gas/EPBC linkage is established."
+  Source.publicAttribution
+
 networkLevelRegister : Source.AttributedSource
 networkLevelRegister = Demand.allgasCurrentOwnership
 
@@ -110,7 +121,8 @@ sourceAtlas = Source.mkSourceAtlas
   "DASHI.Law.SensibLawWoogarooDeveloperGasTemporalIdentityCut20261030Exact"
   (hansard2005 ∷ april2025Diary ∷ cherishPublicCommentNotice ∷
    stocklandSpringview ∷ priorVillageOneTransfer2017 ∷
-   council2023DocumentIndex ∷ networkLevelRegister ∷ [])
+   council2023DocumentIndex ∷ springfieldCityGroupCouncilCommentIndex2024 ∷
+   networkLevelRegister ∷ [])
   "Retains source author, time and claim scope; AEMC network ownership is reused from the existing Agda owner. A repeated report is not an independent evidence producer."
 
 data LegalRole : Set where
@@ -123,6 +135,7 @@ data LegalRole : Set where
   retailer : LegalRole
   serviceConnectionHolder : LegalRole
   revenueRecipient : LegalRole
+  indexedPlanningCommentator : LegalRole
 
 -- Reuse canonical EPBC identifier owners; do not create a competing case enum.
 villageOneInstrument : Instrument.FederalInstrumentCoordinate
@@ -162,6 +175,11 @@ landTitleStillOpen : ScopedRole
 landTitleStillOpen = scoped-role registeredLandowner
   "EPBC 2019/8575 — exact registered parcel title"
   stocklandSpringview false false
+
+springfieldCouncilIndexOnly : ScopedRole
+springfieldCouncilIndexOnly = scoped-role indexedPlanningCommentator
+  "Council 6243/2023/LAP — Springfield City Group comment (index only)"
+  springfieldCityGroupCouncilCommentIndex2024 true false
 
 -- A programme-level gas expansion statement and an aggregate network owner
 -- are compatible with different exact project-pipe identities. The fact that
@@ -312,3 +330,37 @@ pastApprovalTransferDoesNotProveCurrentProjectContract =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness priorTransferWithoutNewContract
       priorTransferWithSeparatelyFoundNewContract refl currentContractDiffers)
+
+
+-- A listed comment within the Council case adds a real project-process edge,
+-- but without its face it does not determine the speaker's substantive stance.
+data CommentWorld : Set where
+  scgCommentCritical : CommentWorld
+  scgCommentSupportive : CommentWorld
+
+data IndexedComment : Set where
+  scgCommentListed : IndexedComment
+
+data CommentDisposition : Set where
+  criticalComment : CommentDisposition
+  supportiveComment : CommentDisposition
+
+commentIndex : CommentWorld → IndexedComment
+commentIndex scgCommentCritical = scgCommentListed
+commentIndex scgCommentSupportive = scgCommentListed
+
+commentContent : CommentWorld → CommentDisposition
+commentContent scgCommentCritical = criticalComment
+commentContent scgCommentSupportive = supportiveComment
+
+commentContentDiffers :
+  commentContent scgCommentCritical ≡
+  commentContent scgCommentSupportive → ⊥
+commentContentDiffers ()
+
+scgIndexDoesNotEstablishPosition :
+  INF.FactorsThrough commentIndex commentContent → ⊥
+scgIndexDoesNotEstablishPosition =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness scgCommentCritical
+      scgCommentSupportive refl commentContentDiffers)
