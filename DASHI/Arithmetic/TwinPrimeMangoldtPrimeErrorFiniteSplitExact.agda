@@ -7,8 +7,12 @@ module DASHI.Arithmetic.TwinPrimeMangoldtPrimeErrorFiniteSplitExact where
 -- Imported proof owners: original RiemannVonMangoldtSpecification,
 -- original exhaustive endpoint cases, and M14 actual finite sum.
 --
--- A pointwise exhaustive case split separates the true (p,p+2)
+-- A pointwise exhaustive case split separates the p^1,p^1
 -- exponent-one branch from ALL remaining prime-power contributions.
+-- For this to be *genuine* Nat primality, an external-to-this-module
+-- ChebyshevPrimeOwnership must certify each AllPrimeArithmetic.Prime;
+-- see TwinPrimeMangoldtPrimeOneCertifiedBidiExact. Without that
+-- identity bridge the name "primeOnly" is purely a carrier label.
 -- Finite sum reordering requires EXPLICIT additive interchange.
 -- Neither WeilTestSpace nor an arbitrary AdditiveScalar promises it.
 -- No positivity estimate / logarithmic error estimate is claimed.
@@ -46,8 +50,10 @@ record AdditiveInterchangeLaws (space : Weil.WeilTestSpace) : Set where
           (Weil.WeilTestSpace._+S_ space b d)
 open AdditiveInterchangeLaws public
 
--- Only both exponent-one classifications are original prime/prime
--- weights. This is NOT the same predicate as "nonzero Lambda pair".
+-- Both exponent-one classifications are carrier-level prime/prime
+-- *candidates*, not genuine NatPrimality.Prime without the separately
+-- proved ChebyshevPrimeOwnership. Neither all-prime-carrier identity
+-- nor prime-pair density follows from nonzero lambda weights.
 primeOnlyWeight :
   (space : Weil.WeilTestSpace)
   (arithmetic : VM.AllPrimeArithmetic space) →
@@ -196,8 +202,9 @@ finiteSumPointwiseSplit space laws f g h pointwise start (suc count) =
         (suc start) count))
 
 -- The complete useful finite identity for M15:
--- original actual weighted Λ-pair sum = genuine exponent-one
--- prime-pair contribution + ALL other prime-power contribution.
+-- original actual weighted Λ-pair sum = exponent-one pair
+-- contribution + ALL other prime-power contribution.
+-- Promoting "exponent-one" to NatPrime requires the owner bridge.
 -- The error bound remains an independent ANALYTIC obligation.
 finiteMangoldtPrimeErrorSplit :
   (space : Weil.WeilTestSpace)
