@@ -84,3 +84,57 @@ computedCandidateImageNoDuplicates upper =
     (Rect.powerValueRectangle
       (Root.floorSquareRoot upper)
       (Cutoff.floorBinaryExponent upper))
+
+------------------------------------------------------------------------
+-- CT11 ALTERNATIVE CANONICAL RECTANGLE:
+-- original floor-square-root × standard-library floor-log₂,
+-- with the same precise prime-power membership guarantee.
+-- No independent logarithm implementation or real analytic scalar.
+------------------------------------------------------------------------
+
+properPowerInStdlibLogRectangle :
+  (basePredecessor k upper : Nat) →
+  Power.natPow (suc (suc basePredecessor)) (suc (suc k))
+    ≤ upper →
+  Rect._member_
+    (Power.natPow (suc (suc basePredecessor)) (suc (suc k)))
+    (Rect.powerValueRectangle
+      (Root.floorSquareRoot upper)
+      (Cutoff.canonicalStdlibFloorLog₂ upper))
+properPowerInStdlibLogRectangle basePredecessor k upper bound =
+  Rect.properPowerCoveredByRootRectangle
+    basePredecessor k upper
+    (Cutoff.canonicalStdlibFloorLog₂ upper)
+    bound
+    (Cutoff.properPowerExponentBelowStdlibLog
+      basePredecessor k upper bound)
+
+properPowerInStdlibLogDedupRectangle :
+  (basePredecessor k upper : Nat) →
+  Power.natPow (suc (suc basePredecessor)) (suc (suc k))
+    ≤ upper →
+  Rect._member_
+    (Power.natPow (suc (suc basePredecessor)) (suc (suc k)))
+    (Rect.dedupPowerValues
+      (Rect.powerValueRectangle
+        (Root.floorSquareRoot upper)
+        (Cutoff.canonicalStdlibFloorLog₂ upper)))
+properPowerInStdlibLogDedupRectangle basePredecessor k upper bound =
+  Rect.dedupPreservesMember
+    (Rect.powerValueRectangle
+      (Root.floorSquareRoot upper)
+      (Cutoff.canonicalStdlibFloorLog₂ upper))
+    (properPowerInStdlibLogRectangle
+      basePredecessor k upper bound)
+
+stdlibLogCandidateDistinctCountBound :
+  (upper : Nat) →
+  Rect.properPowerCandidateDistinctCount
+    (Root.floorSquareRoot upper)
+    (Cutoff.canonicalStdlibFloorLog₂ upper)
+  ≤
+  Root.floorSquareRoot upper * Cutoff.canonicalStdlibFloorLog₂ upper
+stdlibLogCandidateDistinctCountBound upper =
+  Rect.properPowerCandidateDistinctCountBound
+    (Root.floorSquareRoot upper)
+    (Cutoff.canonicalStdlibFloorLog₂ upper)
