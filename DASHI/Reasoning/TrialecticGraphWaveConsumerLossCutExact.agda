@@ -32,6 +32,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Product using (proj₂)
+import DASHI.Core.ObserverRefinementLatticeExact as ObserverRefinement
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Data.Integer using (ℤ; +_; -[1+_]) renaming (_+_ to _+ℤ_)
 import DASHI.Physics.ShiftDiscreteWaveStep as SDWS
@@ -288,3 +290,64 @@ lagTwoSignedSpectralNumeratorZero = refl
 -- not supply a positive off-diagonal (+2) arithmetic correlation.
 -- The example is deliberately synthetic, and therefore is only a
 -- fail-fast countermodel to an UNSUPPORTED generic inference.
+
+------------------------------------------------------------------------
+-- POSITIVE CLOSURE: UNAVERAGED DIRECTED GRAPH IS THE SUFFICIENT
+-- RESIDUAL FOR ITS SELECTED DIRECTED-EDGE CONSUMER.
+--
+-- This closes both halves of the real consumer-indexed refinement:
+-- the C3 orbit alone is INSUFFICIENT, but retaining the original 3x3
+-- matrix makes the paired observer sufficient. Moreover it is a
+-- STRICT refinement, witnessed by the original C3 collision.
+--
+-- This is more than exhibiting an arbitrary info-loss example:
+-- it constructs the actual repaired fibre via the existing core
+-- rather than merely recommending to keep extra information.
+------------------------------------------------------------------------
+
+fullDirectedMatrixResidualRepair :
+  Refine.ResidualRepair
+    orbitMatrix
+    Graph.digraphToMatrix
+    directedSelectedWeight
+fullDirectedMatrixResidualRepair = record
+  { jointSufficient = λ left right samePair ->
+      trans
+        (sym (unaveragedMatrixReadsSelected left))
+        (trans
+          (cong unaveragedMatrixConsumer (proj₂ samePair))
+          (unaveragedMatrixReadsSelected right))
+  }
+
+fullDirectedMatrixStrictlyRefinesC3Orbit :
+  ObserverRefinement.StrictRefinement
+    orbitMatrix
+    (ObserverRefinement.pairObserver orbitMatrix Graph.digraphToMatrix)
+fullDirectedMatrixStrictlyRefinesC3Orbit =
+  Refine.consumerRelevantResidualGivesStrictRefinement
+    graphOrbitConsumerCollision
+    fullDirectedMatrixResidualRepair
+
+-- The same retained full directed graph is sufficient for the WAVE
+-- trit consumer; it preserves the selected edge's magnitude as well
+-- as the positive/zero wave sign, unlike a bare C3 orbit average.
+fullDirectedMatrixWaveResidualRepair :
+  Refine.ResidualRepair
+    orbitMatrix
+    Graph.digraphToMatrix
+    selectedWaveTrit
+fullDirectedMatrixWaveResidualRepair = record
+  { jointSufficient = λ left right samePair ->
+      cong
+        (λ weight -> WaveState weight)
+        (trans
+          (sym (unaveragedMatrixReadsSelected left))
+          (trans
+            (cong unaveragedMatrixConsumer (proj₂ samePair))
+            (unaveragedMatrixReadsSelected right)))
+  }
+  where
+    WaveState : Nat -> Wave.Trit
+    WaveState n with Graph.presentWeight n
+    ... | true = Wave.pos
+    ... | false = Wave.zero
