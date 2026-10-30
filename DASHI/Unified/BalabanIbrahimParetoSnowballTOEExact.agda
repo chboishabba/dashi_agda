@@ -231,3 +231,22 @@ ibrahimParetoRouteSDoesNotReproveMagnitude :
 ibrahimParetoRouteSDoesNotReproveMagnitude =
   DirectYM.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
 
+
+------------------------------------------------------------------------
+-- P2 rational-trace Pareto snowball: one source theorem feeds the SAME
+-- Gram boundedness/expectation-limit route; no Monster transfer or external
+-- kernel claim is manufactured by search priority.
+------------------------------------------------------------------------
+
+ibrahimParetoRouteSP2TraceCompilerLevel : ProofLevel
+ibrahimParetoRouteSP2TraceCompilerLevel =
+  DirectYM.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+
+ibrahimParetoRouteSP2PhysicalInterpretationLevel : ProofLevel
+ibrahimParetoRouteSP2PhysicalInterpretationLevel =
+  DirectYM.balabanRouteSP2TracePhysicalInterpretationLevel
+
+ibrahimParetoRouteSP2TraceNoPerLoopReproof :
+  DirectYM.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+ibrahimParetoRouteSP2TraceNoPerLoopReproof =
+  DirectYM.balabanRouteSP2TracePaysPerLoopBounds
