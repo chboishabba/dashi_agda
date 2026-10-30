@@ -229,7 +229,9 @@ open PolynomialIbrahim public using
   ( canonicalPolynomialEvidenceMaxCut
   ; reusedIbrahimRecognitionBoundary
   ; searchPriorityAloneNeverProvesMonsterRecognition
-  ; noVideoConceptPretendsKernelReceipt )
+  ; noVideoConceptPretendsKernelReceipt
+  ; polynomialDiscriminantQid ; galoisTheoryQid
+  ; specificPolynomialMonodromyQid ; qidCannotPayPolynomialProof )
 
 -- Full video concept/lemma atlas. Only source-written finite examples are
 -- opened. The separate uninhabited analytic/Galois/Spin contracts stay scoped.
