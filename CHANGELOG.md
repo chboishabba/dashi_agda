@@ -150,3 +150,17 @@ monitor surface.
   than equating a raw Boolean field or numeric census with proof.
   Generic index/endpoint injectivity and kernel certification remain
   separate.
+
+## 2026-10-30 — Actual C3-invariant orbit sum of an asymmetric directed graph
+
+- Added `TrialecticC3WeightedOrbitSymmetrizationExact`, which
+  creates a NEW exact cyclically invariant Nat-weight function
+  from three rotations of the original 3×3 directed graph.
+- Recorded the new `[[5,50,22],[22,5,50],[50,22,5]]`
+  integer-tenths matrix and explicit non-identity witness against
+  the original; no new Monster representation claimed.
+- Reused existing two-ended directed hyperfabric roles and
+  restrictions to instantiate a compatible section with pointwise
+  C3 outgoing/incoming row transport.
+- Added and imported the downstream Lean mirror and wired the
+  golden TOE and Ibrahim/Pareto roots; kernel validation pending.
