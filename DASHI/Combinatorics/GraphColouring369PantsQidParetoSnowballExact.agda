@@ -205,4 +205,4 @@ record Graph369QidParetoBoundary : Set where
 canonicalGraph369QidParetoBoundary : Graph369QidParetoBoundary
 canonicalGraph369QidParetoBoundary =
   graph-369-qid-pareto-boundary
-    true true false true false false false false false
+    true true true true false false false false false
