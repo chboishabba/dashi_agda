@@ -364,3 +364,125 @@ s3AnchorImageInjective permutationACB permutationCAB ()
 s3AnchorImageInjective permutationACB permutationBAC ()
 s3AnchorImageInjective permutationACB permutationCBA ()
 s3AnchorImageInjective permutationACB permutationACB _ = refl
+
+------------------------------------------------------------------------
+-- 7. Nontrivial OPTIMAL two-colour palette for this exact 27-grid.
+--
+-- Nearest-neighbour ternary steps flip whether the chosen coordinate is
+-- the neutral (middle) trit.  The XOR of the three neutral indicators
+-- therefore gives a proper checkerboard two-colouring.
+-- The existing explicit origin/X neighbour rules out a one-colour
+-- palette.  This is a FINITE exact statement, not a general graph-
+-- colouring or four-colour theorem.
+------------------------------------------------------------------------
+
+flipBool : Bool -> Bool
+flipBool true = false
+flipBool false = true
+
+xorBool : Bool -> Bool -> Bool
+xorBool false b = b
+xorBool true b = flipBool b
+
+xorFlipLeft : (a b : Bool) ->
+  xorBool (flipBool a) b ≡ flipBool (xorBool a b)
+xorFlipLeft false false = refl
+xorFlipLeft false true = refl
+xorFlipLeft true false = refl
+xorFlipLeft true true = refl
+
+xorFlipRight : (a b : Bool) ->
+  xorBool a (flipBool b) ≡ flipBool (xorBool a b)
+xorFlipRight false false = refl
+xorFlipRight false true = refl
+xorFlipRight true false = refl
+xorFlipRight true true = refl
+
+middleTrit : SSP.SSPTrit -> Bool
+middleTrit SSP.sspNegOne = false
+middleTrit SSP.sspZero = true
+middleTrit SSP.sspPosOne = false
+
+middleFlipsOnStep : ∀ {a b} -> Geometry.TritGridStep a b ->
+  middleTrit a ≡ flipBool (middleTrit b)
+middleFlipsOnStep Geometry.negToZero = refl
+middleFlipsOnStep Geometry.zeroToNeg = refl
+middleFlipsOnStep Geometry.zeroToPos = refl
+middleFlipsOnStep Geometry.posToZero = refl
+
+voxelCheckerColour : Geometry.Ternary27Point -> Bool
+voxelCheckerColour (Geometry.ternary27Point x y z) =
+  xorBool (xorBool (middleTrit x) (middleTrit y)) (middleTrit z)
+
+checkerColourFlipsAcrossGrid :
+  ∀ {u v} -> Geometry.HypervoxelAdjacent u v ->
+  voxelCheckerColour u ≡ flipBool (voxelCheckerColour v)
+checkerColourFlipsAcrossGrid
+  (Geometry.adjacentX {x0} {x1} {y0} {z0} step)
+  rewrite middleFlipsOnStep step
+        | xorFlipLeft (middleTrit x1) (middleTrit y0)
+        | xorFlipLeft
+            (xorBool (middleTrit x1) (middleTrit y0))
+            (middleTrit z0) = refl
+checkerColourFlipsAcrossGrid
+  (Geometry.adjacentY {x0} {y0} {y1} {z0} step)
+  rewrite middleFlipsOnStep step
+        | xorFlipRight (middleTrit x0) (middleTrit y1)
+        | xorFlipLeft
+            (xorBool (middleTrit x0) (middleTrit y1))
+            (middleTrit z0) = refl
+checkerColourFlipsAcrossGrid
+  (Geometry.adjacentZ {x0} {y0} {z0} {z1} step)
+  rewrite middleFlipsOnStep step
+        | xorFlipRight
+            (xorBool (middleTrit x0) (middleTrit y0))
+            (middleTrit z1) = refl
+
+boolNotItsOwnFlip : (b : Bool) -> b ≡ flipBool b -> ⊥
+boolNotItsOwnFlip true ()
+boolNotItsOwnFlip false ()
+
+differentBool : Bool -> Bool -> Set
+differentBool a b = a ≡ b -> ⊥
+
+checkerboardProper :
+  ∀ {u v} -> Geometry.HypervoxelAdjacent u v ->
+  differentBool (voxelCheckerColour u) (voxelCheckerColour v)
+checkerboardProper {u} {v} edge same =
+  boolNotItsOwnFlip (voxelCheckerColour v)
+    (trans (sym same) (checkerColourFlipsAcrossGrid edge))
+
+twoColourPalette : Colour.RelGraph
+twoColourPalette = Colour.paletteGraph Bool differentBool
+
+voxelTwoColouring : Colour.Colouring voxelGrid twoColourPalette
+voxelTwoColouring = Colour.graphHom voxelCheckerColour checkerboardProper
+
+pantsTwoColouring : Colour.Colouring pantsGrid twoColourPalette
+pantsTwoColouring =
+  Colour.pullbackColouring pantsToVoxelGraphHom voxelTwoColouring
+
+flipPreservesTwoColouring : Colour.Colouring pantsGrid twoColourPalette
+flipPreservesTwoColouring =
+  pullbackProperColouringThroughFlip pantsTwoColouring
+
+rotationPreservesTwoColouring : Colour.Colouring pantsGrid twoColourPalette
+rotationPreservesTwoColouring =
+  pullbackProperColouringThroughRotation pantsTwoColouring
+
+noOneColouringOfVoxelGrid :
+  Colour.Colouring
+    voxelGrid
+    (Colour.paletteGraph ⊤ (λ _ _ -> ⊥))
+  -> ⊥
+noOneColouringOfVoxelGrid colouring =
+  Colour.preservesAdj colouring Geometry.originAdjacentPositiveX
+
+noOneColouringOfPantsGrid :
+  Colour.Colouring
+    pantsGrid
+    (Colour.paletteGraph ⊤ (λ _ _ -> ⊥))
+  -> ⊥
+noOneColouringOfPantsGrid colouring =
+  noOneColouringOfVoxelGrid
+    (Colour.pullbackColouring voxelToPantsGraphHom colouring)
