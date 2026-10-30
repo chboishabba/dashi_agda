@@ -144,3 +144,9 @@ monitor surface.
   atlas; no DOI/QID identity or inherited proof ownership invented.
 - Kernel/--safe certification, global seam semantics and general
   same-object/physical promotion remain explicitly open.
+
+- Extended canonical edge chart with a source-written propositional
+  `NoDuplicateSlots` proof for the exact 54-slot list, rather
+  than equating a raw Boolean field or numeric census with proof.
+  Generic index/endpoint injectivity and kernel certification remain
+  separate.
