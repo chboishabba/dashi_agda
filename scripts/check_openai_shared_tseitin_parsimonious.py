@@ -39,6 +39,11 @@ def count_both(n, gates, output):
 def main():
     tests = 0
     for n in (1, 2):
+        # Existing literal DAG owner permits zero gates and an input output.
+        # Exercise that boundary before extending to programs with gates.
+        for output in [("i", i) for i in range(n)]:
+            count_both(n, (), output)
+            tests += 1
         programs = [()]
         for depth in range(3):
             extended = []
@@ -54,6 +59,8 @@ def main():
                 for output in [("i", i) for i in range(n)] + [("g", i) for i in range(len(p))]:
                     count_both(n, p, output)
                     tests += 1
+
+    assert tests == 59293
 
     # A one-way auxiliary implication does not force a unique extension.
     input_bits = (False,)
