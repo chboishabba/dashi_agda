@@ -378,3 +378,35 @@ distinctErrorPositionEnvelopeLengthBound upper =
     (Rect.dedupLengthAtMost
       (candidatePositionEnvelope (computedProperPowerCandidates upper)))
     (computedPositionEnvelopeLengthBound upper)
+
+------------------------------------------------------------------------
+-- CT13 -> CT14 CANONICAL NUMERIC FORM:
+-- same genuine bounded error-position support, written directly with
+-- standard-library floor log₂ instead of the custom search cutoff.
+-- This is an EXACT equality-transport consequence of the original
+-- source owner; no analytic real-log upper bound is claimed here.
+------------------------------------------------------------------------
+
+computedCandidatesAgreeWithStdlibLog :
+  (upper : Nat) →
+  computedProperPowerCandidates upper ≡
+  Rect.dedupPowerValues
+    (Rect.powerValueRectangle
+      (Root.floorSquareRoot upper)
+      (Binary.canonicalStdlibFloorLog₂ upper))
+computedCandidatesAgreeWithStdlibLog =
+  Cover.computedAndStdlibDedupPowerImagesAgree
+
+distinctErrorPositionStdlibLogLengthBound :
+  (upper : Nat) →
+  Reindex.listLength (distinctErrorPositionEnvelope upper)
+  ≤
+  (Root.floorSquareRoot upper * Binary.canonicalStdlibFloorLog₂ upper)
+    * 2
+distinctErrorPositionStdlibLogLengthBound upper =
+  subst
+    (λ exponentCutoff →
+      Reindex.listLength (distinctErrorPositionEnvelope upper)
+        ≤ (Root.floorSquareRoot upper * exponentCutoff) * 2)
+    (Binary.customAndStdlibFloorLogAgree upper)
+    (distinctErrorPositionEnvelopeLengthBound upper)
