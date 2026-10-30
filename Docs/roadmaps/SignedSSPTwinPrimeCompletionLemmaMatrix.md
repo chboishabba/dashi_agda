@@ -1682,3 +1682,81 @@ Brun (1919), Zhang (2013/14), Maynard/Tao and
 Polymath8b (2013–2014). Original Riemann/Mangoldt,
 DASHI module authors, and preexisting
 Pareto/Snowball/Ibrahim/QID source ownership remain distinct.
+
+## 30 October 2026 — new max-cut: constructive CT09b + CT10 using existing in-repo integer square root
+
+**Source audit this turn (actual Agda, not just PR):**
+Read the #1408 `TwinPrimeMangoldtNonzeroPrimeSumWitnessExact.agda`,
+`TwinPrimeCertifiedEnumeratorExact.agda`,
+`TwinPrimeSixWheelExact.agda`, the real
+`RiemannPrimePowerCounting.agda` interfaces, and the original
+`RiemannPrimePowerArithmetic.natPow`.
+Located and READ `DASHI/Mathematics/NumberTheory/FiniteNatFloorSquareRootExact.agda`
+on `master`. Its `floorSquareRootUpToMaximal` is the
+exact existing donor for base-sqrt bounds; no extra sqrt algorithm
+is necessary. Also inspected `FinitePositiveFactorPairExact`,
+`BishopNatEmbeddingPowerValidation`, and
+`PrimeCountingTransforms`: Riemann/Möbius bridge *records*
+are not a concrete proof of the gap-two correlation.
+Lean and PR #1244/#1275/#1414 owners remain distinct and
+not automatically merged; their S3/RGS/Ibrahim/QID
+equivalence does not satisfy NatPrime.
+
+**Implemented source-written, Agda kernel PENDING:**
+
+- CT09b in `TwinPrimeMangoldtNonzeroPrimeSumWitnessExact`:
+  `twinInIntervalBoundedReadout` and
+  `nonzeroPrimeOnlySumGivesBoundedTwin`. The witness now
+  has BOTH `start ≤ p` and `suc p ≤ start+count`;
+  original `twinInIntervalReadout` remains for existing callers.
+- CT10a in `TwinPrimeProperPowerFloorRootBoundExact.agda`:
+  `powTwoEqualsSquare`,
+  `powNextAtLeastPrevious`,
+  `squareBelowEveryProperPower`,
+  `properPowerBaseLeFloorRoot`.
+  Reuse the ORIGINAL proved-in-source Nat floor square root.
+  For all **positive** bases b and exponents e≥2,
+  `b^e≤U ⇒ b≤floorSquareRoot U`.
+- CT10b in `TwinPrimeProperPowerBinaryExponentLowerExact.agda`:
+  `binaryPowerBelowPositiveBasePower`,
+  `properPowerBinaryCeiling`, using Nat multiplication
+  monotonicity. For every base b≥2,
+  `2^e≤b^e≤U` for exponent e≥2.
+- CT10 conjunction in `TwinPrimeProperPowerRectangleBoundExact.agda`:
+  `ProperPowerRectangle` and
+  `properPowerInRectangle`. A proper prime-power index
+  must lie in the actual finite coordinate rectangle
+  `b≤floor sqrt U` and `2^e≤U`.
+  This rectangle is NOT yet counted in Agda as a
+  cardinality ≤floor sqrt U ×floor log₂ U.
+
+**Actual local Python executed:** independently enumerated all
+prime powers up to U=80002, and checked the CT10 bounds,
+CT11 integer #proper ≤isqrt(U)×floorlog2(U),
+and the corresponding **numerical** weighted CT13 envelope
+over 247 dyadic windows (up to X=40000): PASS.
+The oracle encountered 1,427 actual non-prime-pair
+prime-power error terms and 56,996 total nonzero pair
+terms across these windows. The independent regression was
+committed as `scripts/check_twin_prime_m15_proper_power_envelope.py`.
+This is finite oracle evidence only, not Agda kernel receipt
+or a proof of the asymptotic weighted bound.
+
+**Still UNPAID:** CT01 full safe Agda compilation,
+CT11 genuine cardinality over a duplicate-safe
+power/base/exponent finite enumeration (the rectangular
+coordinates just proved), CT12 real log and product
+upper bound, CT13 finite error bound, CT14
+`o(X)` in certified ordered analysis, CT15 parity-sensitive
+gap-two positive correlation, CT16–CT18 unconditional final closure.
+Do NOT import `NSPeriodicCanonicalRealAuthorities`
+as golden `--safe`: the file explicitly carries
+postulates. No ESD edits, no CI, no spurious proven
+Monster/symmetry/QID representations.
+
+**Fresh primary research (Oct 2026):** Wang's version 0.8
+`Why expansion methods for Chowla do not reach twin primes`
+(Zenodo 23694711, 27 Oct 2026) proposes explicit
+dilation/entropy parity limitations. It does NOT
+rule out all future approaches, but is a worthwhile
+adversarial test for any CT15 remainder claim.
