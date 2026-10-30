@@ -175,3 +175,9 @@ monitor surface.
 - Added an exact finite four-phase wave parity counterfeit to graph-wave consumer-loss Agda source: nonnegative four-site f=(1,1,0,0), DFT modes (2,1−i,0,1+i), mode norms (4,2,0,2), but zero +2 correlation and zero signed spectral numerator. Reuses existing `ShiftDiscreteWaveStep` and `ShiftUnitaryLikeConstraint`; independent exact integer test PASS. This is an analytical *method-discriminator*, not prime distribution or terminal sine-sign proof. Attribution and authority boundaries unchanged.
 
 - Completed the **positive** graph-wave residual repair: original unaveraged matrix is an inhabited consumer-sufficient residual for selected directed-weight and signed finite-wave observers, and `fullDirectedMatrixStrictlyRefinesC3Orbit` proves original source-owned strict refinement. This is all-graph source-level proof, not just the fixture. Agda kernel pending.
+
+## 2026-10-30 — history-aware graph/wave recovery supersedes static-orbit no-go interpretation
+
+- Added `TrialecticGraphWaveHistoricalFibreRecoveryExact.agda`: exact 3-time retained fine source matrices alongside each C3 coarse orbit frame. Proved source-level consumer recovery at every retained time and under arbitrary deterministic common evolution; generic no-go now correctly requires collision of **entire retained history**, not current orbit-only coincidence.
+- Original 9-directed-cell/18-source-target-incidence roles and independent depth-three 27-choice ternary fibre are reused with exact source-level role and trit roundtrip proofs. Distinct 2×9 Fricke-stable ModeBlock18 is not conflated with edge role doubling; original Monster-3B ownership retained.
+- Corrected the scope of the previous graph-wave spectral no-go; static C3 average alone loses signed orientation, yet retained historical fibre preserves it. Four TOE/graph roots import new owner; no ESD edits, CI, or kernel-verification claim.
