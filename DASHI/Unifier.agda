@@ -239,6 +239,7 @@ open PolynomialIbrahim public using
   ; noVideoConceptPretendsKernelReceipt
   ; originalVideoM1CoefficientDiscriminantReceipt
   ; originalVideoM10OrientationReceipt
+  ; originalVideoM2M10BraidQuaternionNoGoReceipt
   ; polynomialDiscriminantQid ; galoisTheoryQid
   ; specificPolynomialMonodromyQid ; qidCannotPayPolynomialProof )
 
