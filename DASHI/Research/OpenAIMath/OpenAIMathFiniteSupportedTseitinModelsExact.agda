@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Research.OpenAIMath.OpenAIMathFiniteSupportedTseitinModelsExact where
 
 ------------------------------------------------------------------------
@@ -28,6 +27,7 @@ open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as VectorOwner
 
 -- A model has precisely n+g bits, not an unrestricted Nat -> Bool tail.
 -- Each auxiliary gate bit is REQUIRED to equal concrete DAG evaluation.
@@ -76,18 +76,9 @@ decodeEncodeAccepted :
   decodeSupported circuit (encodeAccepted circuit accepted) ≡ accepted
 decodeEncodeAccepted circuit (bits , accepted) = refl
 
--- Finite vectors are determined by every indexed coordinate; no function
--- extensionality postulate or global Nat -> Bool assignment equality.
-vecExt :
-  ∀ {n : Nat} {left right : Vec Bool n} →
-  ((i : Fin n) →
-    Circuit.lookupVec i left ≡ Circuit.lookupVec i right) →
-  left ≡ right
-vecExt {zero} {[]} {[]} equal = refl
-vecExt {suc n} {x ∷ xs} {y ∷ ys} equal
-  rewrite equal fzero
-        | vecExt {left = xs} {right = ys} (λ i → equal (fsuc i)) =
-  refl
+-- Reuse the existing P-vs-NP truth-table owner's pointwise finite-vector
+-- extensionality. It supplies structural induction without an extensionality
+-- postulate; no second Vec theorem is introduced here.
 
 -- Conversely, decode+re-encode recovers ALL FINITE assignment values,
 -- not merely existential satisfiability. Proof fields are not counted.
@@ -98,7 +89,10 @@ encodeDecodeAuxiliary :
   auxiliaryBits (encodeAccepted circuit (decodeSupported circuit model))
     ≡ auxiliaryBits model
 encodeDecodeAuxiliary circuit model =
-  vecExt (λ i → sym (auxiliaryCorrect model i))
+  VectorOwner.vecExtensionality
+    (Circuit.evaluateProgram (Circuit.program circuit) (inputBits model))
+    (auxiliaryBits model)
+    (λ i → sym (auxiliaryCorrect model i))
 
 encodeDecodeInput :
   ∀ {inputs : Nat}
