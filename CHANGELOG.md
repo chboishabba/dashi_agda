@@ -79,3 +79,14 @@ monitor surface.
 - Extended TOE/max-cut and Ibrahim/Pareto/snowball facades, preserving
   local-vs-global, source-vs-proof, graph-vs-hyperedge, 3B ownership,
   and discrete-vs-smooth non-promotion rules. All **kernel gates pending**.
+
+## 2026-10-30 — Selected graph/face-to-depth carry
+
+- Added `TrialecticWeightedGraphFaceMediationSelectedExact`, reusing
+  existing Grothendieck face mediation and next-depth carry interfaces.
+- Constructed one explicitly labelled synthetic three-case face policy
+  and a selected 27-cell output, proving source-written non-factorability
+  of that output through the original complete weighted graph.
+- Mirrored the exact finite non-descent surface in Lean. No general
+  social/physical mediation, higher stack, Monster3B, smooth pants,
+  external source authority or kernel verification promoted.
