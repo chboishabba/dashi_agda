@@ -129,3 +129,35 @@ ThreeArmHatcherGroupTransport.lean\` was read: actual cover piece
 group equivalences remain supplied hypotheses. No Lean copy of
 the new finite boundary family was fabricated before golden
 Agda kernel acceptance.
+
+
+### 2026-10-30 current G2/G4 Newman and cocycle source audit
+
+Read current PR #1244 branch original
+\`AlexanderHornedTernaryPantsMeridianBoundaryExact.agda\`,
+\`AlexanderHornedTetralemmaRelativeHandleSlideGateExact.agda\`,
+\`AlexanderHornedSectorDihedralS3EndExact.agda\`, original
+\`scripts/alexander_horned_order_three_peripheral_nielsen.py\`
+and \`proofs/horned_c3_lean/HornedC3/ThreeArmHatcherGroupTransport.lean\`.
+Also directly read default-branch \`TernaryPermutationS3LawsExact.agda\`,
+\`SnowballAttributionProvenanceInvariantExact.agda\`,
+Ibrahim's own Monster 3B multiplicity correction, the existing
+dashi_lean4 #103 AgdaMirror source, and latest #1414/#1438/#1440
+changed-file lists. No newer same-object cap-relative geometry
+owner was verified in these direct reads.
+
+Canonical original boundary owner now computes exact local
+\`phi²(q)phi(q)q=w^-1\`, and the original relative gate
+imports its actual \`basedPhiCubeNotIdentityOnA\`, rather than
+asserting geometry or a fresh group action. The GENERAL
+all-conjugator obstruction follows from the classical free-group
+centralizer theorem, not a claimed kernel-checked Agda theorem.
+The separate periodic open-fixed-cap no-go derives from
+Newman 1931 on the connected boundary and handlebody π1
+surjection; it is paper-level and *not* machine-constructed.
+
+Publication priority: Newman 1931, classical Nielsen/free-group
+centralizers, Alexander 1924, Hatcher, standard handlebody
+theory; separate ownership stays with Ibrahim Monster 3B,
+polynomial #1414, trialectic #1438 and YM #1440.
+No ESD source touched; no Agda/Lean compiler or CI run.
