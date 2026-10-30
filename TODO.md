@@ -17281,3 +17281,152 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+## 2026-10-30 — Trialectic 369 weighted digraph / native pants finite max-cut
+
+**Already source-written (not kernel-certified):** nine-position weighted
+directed matrix bridge; different attached faces on identical full graph;
+native 27-grid one-step adjacency; pants graph isomorphism candidate;
+27-cell 2-colour checkerboard and singleton exclusion; six S3 coordinate
+permutations; C3 and seam reflection graph homs; dedicated Lean mirror;
+finite semantics script; TOE and Ibrahim snowball imports.
+
+**P0** Run exact-head Agda `--safe` with no postulates, metas, termination
+escapes; inspect actual import chain, repair any errors, log exact command
+and result. Only then run pinned Lean/mirror. No CI required.
+
+**P1** Supply domain-specific weight→branch-channel interpretation and
+actual pants `InterfaceMatch`; keep `TypedHyperfabric` restrictions,
+source provenance, time, identity and authority constraints first class.
+
+**P2** Reuse and actually inhabit a `FaceMediationLaw` and
+`SecondOrderCellGluing` where source-paid, distinguishing the
+independent triadic face from edges, two-step walks and local colouring.
+
+**P3** Continue Pareto/snowball across this proven finite surface without
+promoting inherited paper claims, six permutations, Monster3B character
+fingerprints or a three-node asymmetric weight fixture to a physical,
+VOA or smooth-surface theorem.
+
+See `Docs/TrialecticWeightedDirectedGraph369.md`.
+
+## 2026-10-30 P2 update — selected mediation
+
+Source-written selected finite face→next-depth-cell mediator through
+canonical Grothendieck T18 descent, with non-descent of output from
+identical weighted matrices. This is ONLY a selected fixture.
+
+Pending: kernel verification; prove an *independently justified*
+domain-specific mediation law, its action equivariance and actual
+pants/sheaf matching before promoting any real-world synthesis.
+
+## Trialectic graph QID/Pareto max-cut: 2026-10-30 additional obligations
+
+- [ ] Reuse existing two-colouring: give edgewise all-cut saturation
+  certificate and universal optimality for nonnegative weighted native grid.
+- [ ] Reuse SnowballExternalIdentityAvailabilityExact for verified
+  Q131476, Q1137726, Q727035, Q504843, Q174733, Q303100,
+  Q3385162, Q942557, Q840247, Q184410 identities.
+- [ ] Exact model edge enumeration: 54 undirected, 108 oriented edges;
+  do not confuse exhaustive Python run with Agda kernel certificate.
+- [ ] Link these results via existing Pareto/Ibrahim TOE consumer, and
+  mirror core mathematical claims in Lean after golden Agda.
+- [ ] Keep QID/source attribution and proof/physical promotion independent.
+- [ ] Kernel/type check and fix dependent Agda/Lean code at exact head
+  when compilers are available. No CI required.
+
+## 2026-10-30 two-ended directed hyperfabric extension
+
+- [ ] Instantiate `TypedHyperfabricCore` with both directed source
+  and target incidence, outgoing/incoming rows and exact weights.
+- [ ] Construct a compatible two-ended global section without imposing
+  symmetry of a forward/backward pair; demonstrate a loop case.
+- [ ] Consume the new owner from focused TOE imports and downstream Lean.
+- [ ] Do not promote ICLR2026 DSNN/DSHN source to empirical performance,
+  spectral theorem, or invented sheaf-Laplacian implementation.
+
+## 2026-10-30 implementation status correction — max-cut/QID/directed hyperfabric
+
+- [x] Golden Agda source: edge-saturated native 27-grid weighted cut
+  optimal for any finite supported edge list with Nat weights.
+- [x] 54 constructed unit edges with source-level count/weight proof
+  candidates; external exhaustive audit 54 unique undirected edges,
+  108 orientations, 14/13 checkerboard split.
+- [x] Verified ten live QID concept labels; exact synthetic fixture QID
+  explicitly unresolved; source ownership non-promotion maintained.
+- [x] Two-ended directed source+target compatible hyperfabric, loop and
+  asymmetry witnesses, plus downstream Lean mirror.
+- [x] Imported new owners across TOE/Unifier/Unified/Ibrahim rollups,
+  refreshed 2026 four-colour article to arXiv v3.
+- [ ] **Kernel:** Agda exact-head check including safe import closure
+  and dependent pattern matching; Lean exact-head check on pinned
+  toolchain. No CI required.
+- [ ] Formal *coverage + uniqueness* theorem for 54 generated
+  undirected grid edges (Python exhaustiveness is not a formal receipt).
+- [ ] Consumer-specific genuine pants interface/gluing, provenance-
+  justified independent face law, and exact C3/S3 action transport for
+  particular consumer records. No automatic Monster/YM/physical claim.
+
+## QID role-type follow-on
+
+- [x] Reuse existing `KnowledgeCoordinate` for directed graph Dewey
+  511.54; avoid treating the wider 511.5 discipline as the same object.
+- [x] Distinct typed concept roles for graph homomorphism Q3385162,
+  graph isomorphism Q303100, max cut Q942557, and theorem Q184410.
+- [ ] Do not claim external QIDs certify kernel facts or identities
+  of particular DASHI synthetic graph, face, proof, or smooth surface.
+
+## 2026-10-30 edge coverage and max-cut symmetry follow-on
+
+- [x] Reuse native graph and 54-edge list; produce every native
+  adjacency's oriented canonical slot witness, including reversal.
+- [x] Exact slot count/0..53 source equality and Lean `Nodup`
+  source-written proof.
+- [x] S3 and seam preserve this *actual selected checkerboard*;
+  maintain asymmetric 3-node graph counterexample.
+- [x] Reproduce finite orientation/partition calculations in Python.
+- [ ] Kernel-check Agda and Lean (CI unnecessary); address any
+  exact-head errors, transitive --safe issues and source drift.
+- [ ] Discharge Agda generic slot-code injectivity/list uniqueness.
+- [ ] Source-authorised trialectic 2-cell, higher-order seam and
+  provenance/authority compatibility for particular consumers only.
+
+- [x] Added typed `NoDuplicateSlots allNativeSlots` with
+  negative-comparison soundness and constructive membership.
+- [ ] Verify this closed 54-slot no-duplicate proof and optional
+  stronger generic slot-index/endpoint injectivity in kernel.
+
+- [x] Explicit new C3 orbit-symmetrized weight and corresponding
+  two-ended compatible section, without falsely equating it to
+  the asymmetric original directed matrix.
+- [x] Formal source-written outgoing/incoming C3 weight transports.
+- [ ] Validate orbit-sum equations in Agda/Lean kernels; no CI needed.
+- [ ] Face mediation, provenance transport and actual Monster/physical
+  action must be separately sourced/proved for their own consumers.
+
+### 2026-10-30 matrix–graph–wave/prime/Pickover crosscut
+- [x] Actual source inspection of PR #1438 graph/matrix C3 symmetrisation, directed hyperfabric, finite wave and consumer-indexed residual machinery (not PR text alone).
+- [x] Construct explicit 3-vertex C3 orbit-sum equality with divergent original directed-edge consumer; reuse graph source BIDI and generic collision theory; no auto-generating missing analytic source.
+- [x] Show any deterministic wave/spectral computation fed *only* the symmetrised matrix cannot recover the erased selected weight; attached original wave trit differs pos/zero.
+- [x] Reuse original directed source/target global-section owners to establish both fine graphs have compatible typed hyperfabric sections; global gluing alone is not sufficient.
+- [x] Wire into the four graph/TOE import roots; commit independent exact matrix checker and documentation. No ESD edits.
+- [ ] Agda/Lean kernel check for new and original graph module once compatible toolchain available (no CI obligation).
+- [ ] Twin CT15: prove actual arithmetic prime-only/error separation on cofinal windows; forbid replacing true `Λ(n)Λ(n+2)` with synthetic graph edge weights or using mere S3/C3 equivariance as a positivity theorem.
+- [ ] Pickover: construct a certified terminal analytic `π`-phase interval/sign at `99^(9999!)` with effective cost, not a finite CRT/C3/λ^9 graph label. Retain original Machin, wave and source-owner receipts.
+
+- [x] Further exact C4 discrete-wave Fourier witness: positive spectral mode energies (4,2,0,2) but zero lag-two correlation for synthetic f=(1,1,0,0); reuse original Gaussian-integer `ShiftDiscreteWaveStep` and `ShiftUnitaryLikeConstraint` code, no new wave algebra.
+- [x] Independent integer-pair DFT replay and original graph C3 nine-entry matrix equality both PASS; checked-in Python test expanded; no analytic claim promoted.
+- [ ] Prove PRIME-SPECIFIC spectral correlation lower bound in an actual arithmetic producer, not from positive Hilbert/Fourier energy alone, and certify full interval Pickover phase separately.
+
+- [x] Inhabit actual matrix-vs-C3 `ResidualRepair` for every graph and original finite wave trit; prove explicit strict refinement from the existing source-owned consumer collision. No analytic cross-promotion.
+
+### 2026-10-30 retained-history correction and typed 9/18/27 integration
+
+- [x] Inspect actual HistoryTimeIndexedConsumerFibreExact, HistoryTimeReasoningFibreTransportPathExact, ConsumerIndexedUntanglingTowerExact, CoarseDynamicsTraceCongruenceExact, WaveAlgorithmLift, ShiftWaveRefinementHierarchy and original nine-trit/Rubik typed codec.
+- [x] Correct static C3 orbit-only no-go scope: historical consumer-sufficiency is tested on the *complete retained temporal fibre*, not the current averaged matrix alone.
+- [x] Add golden source `TrialecticGraphWaveHistoricalFibreRecoveryExact`: prior/live/future source matrices, separate C3 orbit frames, exact consumer recovery after retained history, deterministic evolution postprocessing, and generic full-history collision no-go.
+- [x] Reuse actual 9 ordered directed cells, both source/target incidence roles for every edge, typed 27-choices-per-stage depth-three trit-cube round trip, and independently typed 2×9 Fricke block; no semantic collapse by cardinality.
+- [x] Attach new source to four TOE graph imports; keep ESD untouched.
+- [ ] Instantiate the historically retained observation in an actually computed, nontrivial graph-wave update with source-proved `WaveRefinementTower` and retained fibre projection compatibility; general postprocessing of full history is only the first closure layer.
+- [ ] For actual twin-prime `Λ(n)Λ(n+2)` and Pickover real phase, construct physical/arithmetic producer and quantitative consumer-specific analytic bounds; neither follows from this finite type-level interface.
+- [ ] Kernel typecheck Agda transitive imports / Lean native counterparts; no CI necessary.

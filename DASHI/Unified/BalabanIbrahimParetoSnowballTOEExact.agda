@@ -1,4 +1,15 @@
 module DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact where
+import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as C3Graph369
+import DASHI.Reasoning.TrialecticObserverMatrix369Exact as C3Observer369
+import DASHI.Reasoning.TrialecticC3WeightedOrbitSymmetrizationExact as C3Weighted369
+import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as PantsBridgeSym
+import DASHI.Topology.TernaryPantsFrontierExact as PantsFrontierSym
+import DASHI.Combinatorics.GraphColouring369PantsGridAdjacencyExact as GridPantsSym
+import DASHI.Combinatorics.GraphColouring369PantsSymmetryCutInvariantExact as S3Cut369
+import DASHI.Combinatorics.GraphColouring369PantsEdgeCoverageExact as EdgeChart369
+import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
+open import Data.Nat using (_≤_)open import Data.List using (List)import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
+import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -11,6 +22,11 @@ import DASHI.Wikimedia.IbrahimMonster3BCharacterExecutionCutsetSnowballExact as 
 import DASHI.Wikimedia.IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact as Phase
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZeta
 import DASHI.Wikimedia.IbrahimFirstLinkHistoricalDiscriminatorParetoExact as Historical
+import DASHI.Combinatorics.GraphColouringHomomorphismCoreExact as Colour
+import DASHI.Combinatorics.GraphColouring369PantsGridAdjacencyExact as FinitePantsGrid
+import DASHI.Combinatorics.GraphColouringRecolourPantsSnowballExact as ColourSnowball
+import DASHI.Wikimedia.IbrahimSnowballDependencyNDimLocalGlobalProofSearchBidiExact as IbrahimDependency
+
 
 ------------------------------------------------------------------------
 -- Reuse-only TOE convergence.
@@ -208,3 +224,100 @@ FiniteIrreducibilityCreatesMonsterHZetaRecognition =
 CurrentQidIdentifiesHistoricalTitle : Set
 CurrentQidIdentifiesHistoricalTitle =
   Historical.CurrentQidIdentifiesHistoricalTitle
+
+------------------------------------------------------------------------
+-- FINITE 369 GRAPH/COLOUR SNOWBALL, 30 OCTOBER 2026.
+--
+-- The finite bipartite 27-grid and six S3 coordinate permutations are
+-- source-written in the canonical combinatorics module.  This facade
+-- consumes that owner and retains the Ibrahim dependency/local-global
+-- non-promotion gate.  This is not a Monster3B, Balaban/YM, Hedetniemi,
+-- four-colour or source-reproduction theorem.
+------------------------------------------------------------------------
+
+nativeTwentySevenGridTwoColouring :
+  Colour.Colouring
+    FinitePantsGrid.pantsGrid
+    FinitePantsGrid.twoColourPalette
+nativeTwentySevenGridTwoColouring = FinitePantsGrid.pantsTwoColouring
+
+nativePantsFlipRetainsProperness :
+  Colour.Colouring
+    FinitePantsGrid.pantsGrid
+    FinitePantsGrid.twoColourPalette
+nativePantsFlipRetainsProperness =
+  FinitePantsGrid.flipPreservesTwoColouring
+
+nativeS3SixPermutationsAreDistinct :
+  (left right : FinitePantsGrid.S3CoordinatePermutation) ->
+  FinitePantsGrid.actS3Pants
+    left FinitePantsGrid.s3DistinctAnchor
+  ≡ FinitePantsGrid.actS3Pants
+    right FinitePantsGrid.s3DistinctAnchor
+  -> left ≡ right
+nativeS3SixPermutationsAreDistinct =
+  FinitePantsGrid.s3AnchorImageInjective
+
+nativeColouringDoesNotPaySeamCompatibility :
+  ColourSnowball.GraphColouringPantsBoundary.localRecolourImpliesGlobalGluingCompatibility
+    ColourSnowball.canonicalGraphColouringPantsBoundary ≡ false
+nativeColouringDoesNotPaySeamCompatibility = refl
+
+ibrahimLocalValidityStillDoesNotImplyGlobalGluing :
+  IbrahimDependency.LocalValidityMeansGlobalAdmissibility -> ⊥
+ibrahimLocalValidityStillDoesNotImplyGlobalGluing =
+  IbrahimDependency.localValidityDoesNotMeanGlobalAdmissibility
+
+ibrahimMoreDimensionsStillDoNotGuaranteeMoreKnowledge :
+  IbrahimDependency.MoreDimensionsMeanMoreKnowledge -> ⊥
+ibrahimMoreDimensionsStillDoNotGuaranteeMoreKnowledge =
+  IbrahimDependency.moreDimensionsDoNotMeanMoreKnowledge
+
+------------------------------------------------------------------------
+-- Ibrahim/Pareto high-alpha graph 369: real edgewise maximality,
+-- independently verified concept QIDs, explicit provenance authority.
+------------------------------------------------------------------------
+
+ibrahimGraphNativeWeightedMaxCut :
+  (edges : List NativeMaxCut369.NativeWeightedEdge) ->
+  (candidate : NativeMaxCut369.Partition) ->
+  NativeMaxCut369.cutScore candidate edges
+    ≤ NativeMaxCut369.cutScore NativeMaxCut369.checkerCut edges
+ibrahimGraphNativeWeightedMaxCut =
+  NativeMaxCut369.checkerMaximumCut
+
+ibrahimQidProofAuthorityStillBlocked :
+  NativeQid369.QidIdentityAsKernelTheorem → ⊥
+ibrahimQidProofAuthorityStillBlocked = NativeQid369.qidIdentityNotATheorem
+
+ibrahimQidCannotPromoteSameMonsterRepresentation :
+  NativeQid369.SameConceptImpliesSameMonsterRepresentation → ⊥
+ibrahimQidCannotPromoteSameMonsterRepresentation =
+  NativeQid369.conceptSamenessNotMonsterSameObject
+
+------------------------------------------------------------------------
+-- Ibrahim/Pareto finite result with explicit action, not a claim of
+-- weighted/asymmetric or Monster3B full representation equivariance.
+------------------------------------------------------------------------
+
+ibrahimNativeS3KeepsSelectedCut :
+  (g : GridPantsSym.S3CoordinatePermutation) ->
+  (p : PantsFrontierSym.PantsPath 3) ->
+  NativeMaxCut369.checkerCut
+    (PantsBridgeSym.pants3ToVoxel27
+      (GridPantsSym.actS3Pants g p))
+  ≡ NativeMaxCut369.checkerCut
+    (PantsBridgeSym.pants3ToVoxel27 p)
+ibrahimNativeS3KeepsSelectedCut =
+  S3Cut369.s3PreservesNativeMaxCutPartition
+
+------------------------------------------------------------------------
+-- Pareto/Ibrahim same-object gate: the symmetrized graph is NEW.
+------------------------------------------------------------------------
+ibrahimC3OrbitSumIsNewGraph :
+  C3Weighted369.equivariantImageWeight
+    C3Observer369.participantA C3Observer369.participantB
+  ≡ C3Graph369.dankaWeight
+    C3Observer369.participantA C3Observer369.participantB -> ⊥
+ibrahimC3OrbitSumIsNewGraph =
+  C3Weighted369.orbitSumChangesTheGraph

@@ -1,8 +1,28 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
+import DASHI.Reasoning.TrialecticC3WeightedOrbitSymmetrizationExact as C3Weighted369
+import Data.List as NativeList
+import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as NativePants369
+import DASHI.Topology.TernaryPantsFrontierExact as NativeFrontier
+import DASHI.Combinatorics.GraphColouring369PantsSymmetryCutInvariantExact as S3Cut369
+import DASHI.Combinatorics.GraphColouring369PantsEdgeCoverageExact as EdgeChart369
+import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
+import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as NativeIdentity
+import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
+import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
+import DASHI.Reasoning.TrialecticWeightedGraphFaceMediationSelectedExact as SelectedFace369
+import DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact as GridPants369
+import DASHI.Combinatorics.GraphColouringHomomorphismCoreExact as GridColour
+import DASHI.Combinatorics.GraphColouring369PantsGridAdjacencyExact as NativeGridPants
+import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
+import DASHI.Reasoning.TrialecticObserverMatrix369Exact as DirectedObserver
+import DASHI.Core.ConsumerDescentMinimalObserverExact as DirectedDescent
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Nat using (_≤_)
+open import Data.List using (List)
+open import Data.Unit using (⊤)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
@@ -209,3 +229,189 @@ toePermutationNoGoDoesNotCreateLinearAction :
   Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
 toePermutationNoGoDoesNotCreateLinearAction =
   Ibrahim.noGoDoesNotCreateLinearAction
+
+------------------------------------------------------------------------
+-- Source-typed weighted directed-graph/trialectic regression.
+-- This is not a Monster action, a smooth pants gluing, or an actual
+-- C3-equivariant weighted representation.
+------------------------------------------------------------------------
+
+toeWeightedMatrixDigraphRoundTrip :
+  WeightedGraph369.digraphToMatrix
+    (WeightedGraph369.matrixToDigraph
+      WeightedGraph369.dankaWeightedMatrixTenths)
+  ≡ WeightedGraph369.dankaWeightedMatrixTenths
+toeWeightedMatrixDigraphRoundTrip =
+  WeightedGraph369.matrixDigraphRoundTrip
+    WeightedGraph369.dankaWeightedMatrixTenths
+
+toeWeightedGraphHasSixArrows :
+  WeightedGraph369.nonzeroEdgeCount ≡ 6
+toeWeightedGraphHasSixArrows = WeightedGraph369.sixArrowsIncludingOneLoop
+
+toeWeightRotationNotAutomaticallyC3 :
+  ((source target : DirectedObserver.Participant3) ->
+    WeightedGraph369.dankaWeight
+      (WeightedGraph369.rotateVertex source)
+      (WeightedGraph369.rotateVertex target)
+    ≡ WeightedGraph369.dankaWeight source target) -> ⊥
+toeWeightRotationNotAutomaticallyC3 =
+  WeightedGraph369.weightedDankaGraphNotC3Invariant
+
+toeWeightedGraphDoesNotDetermineAttachedFace :
+  DirectedDescent.FactorsThrough
+    WeightedGraph369.graphObserver
+    WeightedGraph369.triadicConsumer -> ⊥
+toeWeightedGraphDoesNotDetermineAttachedFace =
+  WeightedGraph369.matrixDoesNotDetermineTrialecticFace
+
+------------------------------------------------------------------------
+-- Native ternary-27 -> finite pants path graph max-cut.
+-- Do not identify the 3-vertex weighted fixture with this 27-grid, or
+-- a finite pants graph with a smooth TQFT.  These are constructed terms,
+-- with independent kernel verification still outstanding.
+------------------------------------------------------------------------
+
+toeNativeVoxelPantsGraphHom :
+  GridColour.GraphHom
+    GridPants369.nativeVoxelGrid GridPants369.nativePantsGrid
+toeNativeVoxelPantsGraphHom =
+  GridPants369.nativeVoxelToPantsGraphHom
+
+toeNativePantsGridHasTwoColouring :
+  GridColour.Colouring
+    GridPants369.nativePantsGrid
+    NativeGridPants.twoColourPalette
+toeNativePantsGridHasTwoColouring =
+  NativeGridPants.pantsTwoColouring
+
+toeNoSingletonColouringPants :
+  GridColour.Colouring
+    GridPants369.nativePantsGrid
+    (GridColour.paletteGraph ⊤ (λ _ _ -> ⊥))
+    -> ⊥
+toeNoSingletonColouringPants =
+  NativeGridPants.noOneColouringOfPantsGrid
+
+toeSixPermutationImagesDistinct :
+  (left right : NativeGridPants.S3CoordinatePermutation) ->
+  NativeGridPants.actS3Pants
+    left NativeGridPants.s3DistinctAnchor
+  ≡ NativeGridPants.actS3Pants
+    right NativeGridPants.s3DistinctAnchor
+  -> left ≡ right
+toeSixPermutationImagesDistinct =
+  NativeGridPants.s3AnchorImageInjective
+
+------------------------------------------------------------------------
+-- Selected finite attached-face mediation: a source-independent chart,
+-- NOT a universal inferred face law.  The output fails graph-only descent.
+------------------------------------------------------------------------
+
+toeSelectedOutputNoGraphOnlyDecoder :
+  DirectedDescent.FactorsThrough
+    WeightedGraph369.graphObserver
+    SelectedFace369.selectedOutputConsumer -> ⊥
+toeSelectedOutputNoGraphOnlyDecoder =
+  SelectedFace369.selectedNextDepthOutputCannotFactorThroughGraph
+
+------------------------------------------------------------------------
+-- Native 27-grid QID + genuine weighted maximum-cut Pareto max-cut.
+-- QID is concept identity only; no graph-object or Monster same-object claim.
+------------------------------------------------------------------------
+
+toeNativeEdgewiseWeightedMaximumCut :
+  (edges : List NativeMaxCut369.NativeWeightedEdge) ->
+  (candidate : NativeMaxCut369.Partition) ->
+  NativeMaxCut369.cutScore candidate edges
+  ≤ NativeMaxCut369.cutScore NativeMaxCut369.checkerCut edges
+toeNativeEdgewiseWeightedMaximumCut =
+  NativeMaxCut369.checkerMaximumCut
+
+toeNative54UnitCutWitness :
+  NativeMaxCut369.cutScore
+    NativeMaxCut369.checkerCut
+    NativeMaxCut369.unitNativeGridEdges ≡ 54
+toeNative54UnitCutWitness =
+  NativeMaxCut369.checkerWitnessScoreIs54
+
+toeVerifiedConceptQidsRetainNoAuthority :
+  NativeIdentity.SnowballExternalIdentityPolicy.externalIdentityCreatesSemanticAuthority
+    NativeIdentity.canonicalExternalIdentityPolicy ≡ false
+toeVerifiedConceptQidsRetainNoAuthority =
+  NativeQid369.verifiedConceptDoesNotCreateAuthority
+
+------------------------------------------------------------------------
+-- Both-ended source/target compatible directed hyperfabric:
+-- directionality retained, without erasing the independently given face.
+------------------------------------------------------------------------
+
+toeDirectedFabricForwardSourceTarget :
+  DirectedFabric369.restrictDirected
+    (DirectedFabric369.atSource
+      {source = DirectedObserver.participantA}
+      {target = DirectedObserver.participantB})
+    (DirectedFabric369.outgoingIncomingRow DirectedObserver.participantA)
+  ≡
+  DirectedFabric369.restrictDirected
+    (DirectedFabric369.atTarget
+      {source = DirectedObserver.participantA}
+      {target = DirectedObserver.participantB})
+    (DirectedFabric369.outgoingIncomingRow DirectedObserver.participantB)
+toeDirectedFabricForwardSourceTarget =
+  trans DirectedFabric369.sourceAtoBWeight
+        (sym DirectedFabric369.targetAtoBWeight)
+
+toeDirectedFabricForwardReverseRemainDistinct :
+  WeightedGraph369.dankaWeight DirectedObserver.participantA DirectedObserver.participantB
+  ≡ WeightedGraph369.dankaWeight DirectedObserver.participantB DirectedObserver.participantA
+  -> ⊥
+toeDirectedFabricForwardReverseRemainDistinct =
+  DirectedFabric369.forwardBackwardNotSymmetric
+
+------------------------------------------------------------------------
+-- Maximum-cut chart completion: any native oriented adjacency has a
+-- canonical 54-slot chart representative or its reversal; all six S3
+-- maps and the second seam flip fix the selected checkerboard partition.
+------------------------------------------------------------------------
+
+toeAnyNativeEdgeClassifiedIn54Slots :
+  ∀ {u v} -> Geometry.HypervoxelAdjacent u v ->
+  EdgeChart369.OrientedSlotCertificate u v
+toeAnyNativeEdgeClassifiedIn54Slots =
+  EdgeChart369.classifyNativeAdjacency
+
+toeFiftyFourSlotIdsExact :
+  NativeList.length EdgeChart369.allNativeSlots ≡ 54
+toeFiftyFourSlotIdsExact = EdgeChart369.allNativeSlotsCount54
+
+toeS3PreservesActualMaxCutPartition :
+  (g : NativeGridPants.S3CoordinatePermutation) ->
+  (p : NativeFrontier.PantsPath 3) ->
+  NativeMaxCut369.checkerCut
+    (NativePants369.pants3ToVoxel27
+      (NativeGridPants.actS3Pants g p))
+  ≡ NativeMaxCut369.checkerCut
+    (NativePants369.pants3ToVoxel27 p)
+toeS3PreservesActualMaxCutPartition =
+  S3Cut369.s3PreservesNativeMaxCutPartition
+
+------------------------------------------------------------------------
+-- A genuine C3 action exists on the NEW orbit-sum weighted graph,
+-- not on the original asymmetric graph.
+------------------------------------------------------------------------
+toeNewOrbitSumWeightHasActualC3Symmetry :
+  (source target : DirectedObserver.Participant3) ->
+  C3Weighted369.equivariantImageWeight
+    (C3Weighted369.rotate source) (C3Weighted369.rotate target)
+  ≡ C3Weighted369.equivariantImageWeight source target
+toeNewOrbitSumWeightHasActualC3Symmetry =
+  C3Weighted369.orbitSumC3Invariant WeightedGraph369.dankaWeight
+
+toeOriginalWeightedImageStillNotC3 :
+  ((source target : DirectedObserver.Participant3) ->
+    WeightedGraph369.dankaWeight
+      (C3Weighted369.rotate source) (C3Weighted369.rotate target)
+    ≡ WeightedGraph369.dankaWeight source target) -> ⊥
+toeOriginalWeightedImageStillNotC3 =
+  C3Weighted369.originalGraphC3StillFails
