@@ -303,3 +303,154 @@ scalarMulDistributesLeft (cyc5 a b c d) (cyc5 e f g h) (cyc5 i j k l) =
 -- The proof-critical part is distributivity, not the cyclic index
 -- counts. Finite sum-swap/scale can now reuse the original generic
 -- Grafakos and NS proof patterns at their actual cyclotomic types.
+
+
+------------------------------------------------------------------------
+-- MULTIPLICATIVE CHARACTER LAW ON THE ORIGINAL SOURCE GROUP.
+-- Distributes actual cyclic scalar multiplication over the ORIGINAL
+-- index group addition; no second Z/4 or Z/5 group is introduced.
+-- These finite 64/125 cases are the critical algebraic ingredient for
+-- reducing sampled products to the original 729 indexed convolution.
+------------------------------------------------------------------------
+
+scalarIndexDistributivity :
+  (a b x : I.FiveGridMode) →
+  scalarProduct5 (Full.fiveGroupAdd a b) x
+  ≡ Full.fiveGroupAdd
+      (scalarProduct5 a x) (scalarProduct5 b x)
+scalarIndexDistributivity I.gridZero I.gridZero I.gridZero = refl
+scalarIndexDistributivity I.gridZero I.gridZero I.gridPlusOne = refl
+scalarIndexDistributivity I.gridZero I.gridZero I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridZero I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridZero I.gridMinusOne = refl
+scalarIndexDistributivity I.gridZero I.gridPlusOne I.gridZero = refl
+scalarIndexDistributivity I.gridZero I.gridPlusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridZero I.gridPlusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridPlusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridPlusOne I.gridMinusOne = refl
+scalarIndexDistributivity I.gridZero I.gridPlusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridZero I.gridPlusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridZero I.gridPlusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridPlusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridPlusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridZero I.gridMinusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridZero I.gridMinusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridZero I.gridMinusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridMinusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridMinusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridZero I.gridMinusOne I.gridZero = refl
+scalarIndexDistributivity I.gridZero I.gridMinusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridZero I.gridMinusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridMinusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridZero I.gridMinusOne I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridZero I.gridZero = refl
+scalarIndexDistributivity I.gridPlusOne I.gridZero I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridZero I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridZero I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridZero I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusOne I.gridZero = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusOne I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridPlusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusOne I.gridZero = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusOne I.gridMinusOne I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridZero I.gridZero = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridZero I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridZero I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridZero I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridZero I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusOne I.gridZero = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusOne I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridPlusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusOne I.gridZero = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridPlusTwo I.gridMinusOne I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridZero I.gridZero = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridZero I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridZero I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridZero I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridZero I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusOne I.gridZero = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusOne I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridPlusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusOne I.gridZero = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusTwo I.gridMinusOne I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridZero I.gridZero = refl
+scalarIndexDistributivity I.gridMinusOne I.gridZero I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridZero I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridZero I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridZero I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusOne I.gridZero = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusOne I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridPlusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusTwo I.gridZero = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusTwo I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusTwo I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusTwo I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusTwo I.gridMinusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusOne I.gridZero = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusOne I.gridPlusOne = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusOne I.gridPlusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusOne I.gridMinusTwo = refl
+scalarIndexDistributivity I.gridMinusOne I.gridMinusOne I.gridMinusOne = refl
+
+characterAdditionLaw :
+  (a b x : I.FiveGridMode) →
+  character5 (Full.fiveGroupAdd a b) x
+  ≡ _*5_ (character5 a x) (character5 b x)
+characterAdditionLaw a b x
+  rewrite scalarIndexDistributivity a b x =
+  rootGroupLaw (scalarProduct5 a x) (scalarProduct5 b x)
+
+-- Source-written, kernel pending.  This asserts only finite character
+-- multiplicativity, not the 3D sampled-to-integer convolution theorem.
