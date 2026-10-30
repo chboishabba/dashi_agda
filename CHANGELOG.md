@@ -50,6 +50,24 @@ monitor surface.
   pointwise-to-Gram interpretation remain explicit inputs.
 
 
+
+- Continued the exact native-Wilson P2 search beyond the prior adapter:
+  `BalabanLiteralWilsonNativeThermodynamicProducerExact`,
+  `BalabanLiteralWilsonNativePhysicalMeasureExact`, and
+  `YMClayLiteralWilsonP2NativeMeasureExact` already construct the physical
+  bounded-observable algebra and all three P2 expectation-limit proofs
+  conditionally on the actual native measure producer. Added
+  `nativeWilsonSameAlgebraBoundInputs` reusing those **same** owners,
+  removing generic pointwise-to-Gram, independent product and identity
+  assumptions for the native route.
+- Matched normalized SU(2) Wilson-cylinder `groupRank = 1ℚ` from canonical
+  existing owner (not the defining matrix dimension). Kept external/generic
+  adapter as compatibility only.
+- P3 search found existing selected-H2 / real-CMP119 same-Hamiltonian
+  spectral owner modules. The physical H3 interpretation remains an input,
+  not a new spectral identification by receipt.
+
+
 ## 2026-07-19 — Wetsuit seam optimisation boundary
 
 - Added `DASHI.Geometry.WetsuitSeamOptimisationBoundary`, a fail-closed typed
