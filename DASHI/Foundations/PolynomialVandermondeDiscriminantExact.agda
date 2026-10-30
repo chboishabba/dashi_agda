@@ -129,8 +129,9 @@ discriminantDependsOnlyOnVietaCoefficients
 -- Supply the two exact rational field properties. The underlying
 -- algebra is classical and already belongs to rational stdlib:
 --    xy=0 -> x=0 or y=0, and a-b=0 -> a=b.
--- We do not misreport this as an unconditional proof until the two
--- rational laws are instantiated with the installed stdlib version.
+-- The two field-law inputs are defined by a reusable record; the
+-- concrete rational stdlib v2.4 instance follows below. Its claimed
+-- kernel acceptance remains pending in the current execution runtime.
 ------------------------------------------------------------------------
 
 record RationalDomainLawWitness : Set where
