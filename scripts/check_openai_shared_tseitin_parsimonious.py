@@ -21,6 +21,43 @@ def eval_circuit(inputs, gates, input_bits):
     return tuple(out)
 
 
+
+def count_whole_placed_cnf_models(n, gates, output):
+    """Full 4g+1-clause CNF of the source DAG; count every finite model.
+
+    The existing test's ('g',i) uses creation-order indexing; Agda's actual
+    GateProgram.GateWire uses newest-first. We explicitly convert between
+    these views before mapping into the original Tseitin numeric index.
+    """
+    clauses = []
+    for older, (op, args) in enumerate(gates):
+        new_output = n + older
+        def index(w):
+            if w[0] == "i":
+                return w[1]
+            newest_first = older - 1 - w[1]
+            assert 0 <= newest_first < older
+            return n + older - 1 - newest_first
+        left_idx = new_output if op == "const" else index(args[0])
+        right_idx = index(args[1]) if op in ("and", "or") else new_output
+        for row in product((False, True), repeat=3):
+            o, left, right = row
+            expected = {
+                "const": lambda: args[0],
+                "not": lambda: not left,
+                "and": lambda: left and right,
+                "or": lambda: left or right,
+            }[op]()
+            if o != expected:
+                clauses.append(((new_output, not o), (left_idx, not left),
+                                (right_idx, not right)))
+    final_index = output[1] if output[0] == "i" else n + output[1]
+    clauses.append(((final_index, True),))
+    assert len(clauses) == 4 * len(gates) + 1
+    return sum(all(any(bits[j] == sign for j, sign in clause)
+                   for clause in clauses)
+               for bits in product((False, True), repeat=n + len(gates)))
+
 def count_both(n, gates, output):
     n_input_accept = 0
     n_tseitin_models = 0
@@ -33,6 +70,7 @@ def count_both(n, gates, output):
             outval = (inp if output[0] == "i" else aux)[output[1]]
             if outval: n_tseitin_models += 1
     assert n_input_accept == n_tseitin_models
+    assert n_input_accept == count_whole_placed_cnf_models(n, gates, output)
     return n_input_accept
 
 
@@ -153,7 +191,7 @@ def main():
     assert 2 * count_both(1, gates, ("g", 0)) == 4
     check_local_three_bit_gate_cnf()
     check_placed_gate_index_semantics()
-    print(f"PASS: {tests} exhaustive small DAG/output cases with exact-count equality")
+    print(f"PASS: {tests} exhaustive DAG/output cases: input = canonical Tseitin = full 4g+1 CNF counts")
     print("PASS: one-way-gate and unconstrained-tail counterexamples")
 
 
