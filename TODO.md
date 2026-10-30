@@ -17334,3 +17334,13 @@ pants/sheaf matching before promoting any real-world synthesis.
 - [ ] Keep QID/source attribution and proof/physical promotion independent.
 - [ ] Kernel/type check and fix dependent Agda/Lean code at exact head
   when compilers are available. No CI required.
+
+## 2026-10-30 two-ended directed hyperfabric extension
+
+- [ ] Instantiate `TypedHyperfabricCore` with both directed source
+  and target incidence, outgoing/incoming rows and exact weights.
+- [ ] Construct a compatible two-ended global section without imposing
+  symmetry of a forward/backward pair; demonstrate a loop case.
+- [ ] Consume the new owner from focused TOE imports and downstream Lean.
+- [ ] Do not promote ICLR2026 DSNN/DSHN source to empirical performance,
+  spectral theorem, or invented sheaf-Laplacian implementation.
