@@ -93,11 +93,24 @@ def verify_rational_solver_source_integrity():
     rational=owner("PolynomialS3RationalBlockFieldIsomorphismExact")
     adapter=owner("PolynomialC3S3RationalCharacterAlgebraExact")
     assert "Data.Rational.Tactic.RingSolver" in rational
-    solver_lines=re.findall(r"Ring[.]solve-∀[^\n]*",rational)
-    assert len(solver_lines)>=176, len(solver_lines)
+    # Agda stdlib's solve-∀ is a nullary macro; use the in-repo
+    # Moonshine donor's explicit variable-list Ring.solve instead.
+    for owner_name in (
+        "PolynomialS3RationalBlockFieldIsomorphismExact",
+        "PolynomialVietaRootSymmetryExact",
+        "PolynomialVandermondeDiscriminantExact",
+    ):
+        owner_text=owner(owner_name)
+        assert "Ring.solve-∀" not in owner_text, owner_name
+        calls=re.findall(r"Ring[.]solve \\([^\\n]* \\u2237 \\[\\]\\)",owner_text)
+        minimum=176 if owner_name.endswith("BlockFieldIsomorphismExact") else 10
+        assert len(calls)>=minimum,(owner_name,len(calls))
+    solver_lines=re.findall(r"Ring[.]solve \\([^\\n]* \\u2237 \\[\\]\\)",rational)
+    assert len(solver_lines)==176,len(solver_lines)
     for line in solver_lines:
-        assert not re.search(r"^Ring[.]solve-∀[ \t]+[fg][ \t]+(?:Small|Big)[.]",line),line
-        assert "(f " in line, line
+        assert "(f " in line and "∷ []" in line,line
+    assert "positiveFieldReflectTransport" in adapter
+    assert "negativeFieldReflectTransport" in adapter
     assert "MoonshineOrbifoldSectorProjectorExact" in adapter
     for name in ("positiveIntertwinesS3Parity",
                  "negativeIntertwinesS3Parity",
