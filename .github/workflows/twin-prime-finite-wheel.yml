@@ -1,0 +1,126 @@
+name: Twin-prime finite wheel regression
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda"
+      - "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda"
+      - "DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda"
+      - "DASHI/Arithmetic/CertifiedPrimePairPeriodExact.agda"
+      - "DASHI/Arithmetic/SignedSSPPrimeOffsetMacroExact.agda"
+      - "DASHI/Arithmetic/SignedSSPPrimeOutputBoundaryExact.agda"
+      - "DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda"
+      - "scripts/check_twin_prime_six_wheel_finite.py"
+      - "scripts/check_twin_prime_ssp15_crt_finite.py"
+      - "scripts/check_twin_prime_arbitrary_crt_symmetry.py"
+      - "scripts/check_twin_prime_periodic_sieve.py"
+      - "scripts/check_prime_gap_186_tuple_admissibility.py"
+      - "scripts/check_finite_twin_sieve_composite_completion.py"
+      - "scripts/check_signed_ssp_prime_offset_macro.py"
+      - "scripts/check_fracdash_conway_primegame_offsets.py"
+      - ".github/workflows/twin-prime-finite-wheel.yml"
+      - "DASHI/EverythingTOESymmetryResolved369.agda"
+      - "DASHI/Unifier.agda"
+      - "DASHI/Unified/Everything.agda"
+  push:
+    paths:
+      - "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda"
+      - "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda"
+      - "DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda"
+      - "DASHI/Arithmetic/CertifiedPrimePairPeriodExact.agda"
+      - "DASHI/Arithmetic/SignedSSPPrimeOffsetMacroExact.agda"
+      - "DASHI/Arithmetic/SignedSSPPrimeOutputBoundaryExact.agda"
+      - "DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda"
+      - "scripts/check_twin_prime_six_wheel_finite.py"
+      - "scripts/check_twin_prime_ssp15_crt_finite.py"
+      - "scripts/check_twin_prime_arbitrary_crt_symmetry.py"
+      - "scripts/check_twin_prime_periodic_sieve.py"
+      - "scripts/check_prime_gap_186_tuple_admissibility.py"
+      - "scripts/check_finite_twin_sieve_composite_completion.py"
+      - "scripts/check_signed_ssp_prime_offset_macro.py"
+      - "scripts/check_fracdash_conway_primegame_offsets.py"
+      - ".github/workflows/twin-prime-finite-wheel.yml"
+      - "DASHI/EverythingTOESymmetryResolved369.agda"
+      - "DASHI/Unifier.agda"
+      - "DASHI/Unified/Everything.agda"
+
+jobs:
+  exact-finite-wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check finite arithmetic, not unbounded theorem
+        run: |
+          python3 -B scripts/check_twin_prime_six_wheel_finite.py
+          python3 -B scripts/check_twin_prime_ssp15_crt_finite.py
+          python3 -B scripts/check_twin_prime_arbitrary_crt_symmetry.py
+          python3 -B scripts/check_twin_prime_periodic_sieve.py
+          python3 -B scripts/check_prime_gap_186_tuple_admissibility.py
+          python3 -B scripts/check_finite_twin_sieve_composite_completion.py
+          python3 -B scripts/check_signed_ssp_prime_offset_macro.py
+          python3 -B scripts/check_fracdash_conway_primegame_offsets.py
+      - name: Check theorem owner contains no new axioms or holes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          paths = (
+              "DASHI/Arithmetic/TwinPrimeSixWheelExact.agda",
+              "DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda",
+              "DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda",
+              "DASHI/Arithmetic/CertifiedPrimePairPeriodExact.agda",
+              "DASHI/Arithmetic/SignedSSPPrimeOffsetMacroExact.agda",
+              "DASHI/Arithmetic/SignedSSPPrimeOutputBoundaryExact.agda",
+              "DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda",
+          )
+          texts = [Path(path).read_text() for path in paths]
+          for source in texts:
+              for forbidden in ("postulate ", "TERMINATING", "{!!", "?" + "?"):
+                  assert forbidden not in source, forbidden
+          for required in ("pairSurvivorMustBeR5", "twinInfinitudeImpliesBoundedPairsTwo"):
+              assert required in texts[0], required
+          for required in ("bridgeChoosesFirstApplicable", "bridgeActivationForcesResidueFive"):
+              assert required in texts[1], required
+          for required in ("localPairPeriodic", "certifyCandidate", "allPairSurvive?", "sspAddressSymmetryPreservesPrime"):
+              assert required in texts[2], required
+          for required in ("productIsCommonPeriod", "allPairProductPeriodic", "allPairProductPeriodicBack", "allPairProductPeriodicMultiple", "swapFirstTwoFiltersInvolution", "duplicatePrimeFilterRoundTrip"):
+              assert required in texts[3], required
+          for required in ("plusTwoFractionMacro", "minusTwoFractionMacro", "signedMinusIsInverse"):
+              assert required in texts[4], required
+          for required in ("twinPrimeInvariantUnderEqualReadout", "certifiedPrimeIsReachableWhenEmitterProved", "natPrimeAppearsAtOwnCutoff", "everyPrimeCodeAppearsAtOwnCutoff"):
+              assert required in texts[5], required
+          for required in ("knownAllPrimeControlCount", "ControlToCertifiedPrime"):
+              assert required in texts[6], required
+          print("static source check passed; NOT an Agda kernel receipt")
+          PY
+
+  pinned-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+      AGDA_JOBS: '2'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check new theorem sources with pinned Agda (kernel receipt if passed)
+        env:
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29
+        run: |
+          set -euo pipefail
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Arithmetic/TwinPrimeSixWheelExact.agda \
+            DASHI/Arithmetic/CertifiedPrimePairModulusExact.agda \
+            DASHI/Arithmetic/CertifiedPrimePairPeriodExact.agda \
+            DASHI/Arithmetic/SignedSSPPrimeOffsetMacroExact.agda \
+            DASHI/Arithmetic/SignedSSPPrimeOutputBoundaryExact.agda \
+            DASHI/Arithmetic/TwinPrimeFRACDASHReuseExact.agda \
+            DASHI/Arithmetic/TwinPrimeOggControlReuseExact.agda

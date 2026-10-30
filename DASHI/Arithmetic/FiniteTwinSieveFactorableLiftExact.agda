@@ -1,0 +1,439 @@
+module DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact where
+
+------------------------------------------------------------------------
+-- FINITE SIEVE PARITY / FACTORABLE-PAIR MAX-CUT
+--
+-- Classical sources: Eratosthenes, Brun, Selberg's parity obstruction,
+-- DHJ Polymath (2014), Variants of the Selberg sieve...
+-- Original DASHI owners:
+--   CertifiedPrimePairModulusExact (true arithmetic finite pair test)
+--   CertifiedPrimePairPeriodExact (allPairProductPeriodicMultiple)
+--   FinitePrimeProductSieveExact (mixed-radix carrier distinct from CRT)
+--
+-- New: a constructive algebraic transformation taking ANY given
+-- finite-sieve survivor r, product of sieving moduli P and t, to
+--
+--     L = r [1 + P(r+2)t]
+--     L+2 = (r+2) [1 + Prt].
+--
+-- This is a double factorisation while preserving ALL finite pair
+-- sieve filters by a previously PROVED product-period theorem.
+-- It needs neither an arithmetic CRT inverse nor any analytic theorem.
+--
+-- At r>=2, P>=1 and t>=1, each displayed factor is >1. The Agda
+-- source below proves the factorisations and survivor transport;
+-- a global NonPrime conclusion and an unconditional construction of
+-- a baseline r for every list are distinct remaining obligations.
+-- This does NOT prove infinitely many twin primes (indeed it produces
+-- composite candidates, once factor nontriviality is certified).
+--
+-- Signed SSP, Conway PRIMEGAME and Monster 3B/4B representation
+-- owners retain their own code and proof authority. No same-object
+-- or prime-distribution promotion.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
+open import Data.Product using (Σ; _×_; _,_)
+open import Data.Nat.Base using (_<_; _≤_; z≤n; s≤s)
+open import Data.Nat.Divisibility using (divides)
+import Data.Nat.Properties as NatP
+import Data.Nat.Primality as NatPrime
+open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (_≢_)
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
+
+import DASHI.Arithmetic.CertifiedPrimePairModulusExact as Pair
+import DASHI.Arithmetic.CertifiedPrimePairPeriodExact as Period
+
+-- The two multiplicative factors are explicit Nat expressions.
+-- We intentionally do not call a factorisation with factor=1
+-- a composite-number certificate.
+leftFactor : Nat → Nat → Nat → Nat
+leftFactor r P t = 1 + P * (r + 2) * t
+
+rightFactor : Nat → Nat → Nat → Nat
+rightFactor r P t = 1 + P * r * t
+
+factorableLeft : Nat → Nat → Nat → Nat
+factorableLeft r P t = r * leftFactor r P t
+
+factorableRight : Nat → Nat → Nat → Nat
+factorableRight r P t = (r + 2) * rightFactor r P t
+
+sieveMultiplier : Nat → Nat → Nat → Nat
+sieveMultiplier r P t = r * (r + 2) * t
+
+-- Unlike an ad hoc large finite regression, these are polynomial
+-- identities for ALL natural numbers r, P and t.
+leftFactorisationGivesRightPlusTwo :
+  (r P t : Nat) →
+  factorableLeft r P t + 2 ≡ factorableRight r P t
+leftFactorisationGivesRightPlusTwo =
+  solve 3
+    (λ r P t →
+      (r :* (con 1 :+ ((P :* (r :+ con 2)) :* t))) :+ con 2
+      :=
+      (r :+ con 2) :* (con 1 :+ ((P :* r) :* t)))
+    refl
+
+factorableLeftIsProductPeriodShift :
+  (r P t : Nat) →
+  factorableLeft r P t ≡ r + sieveMultiplier r P t * P
+factorableLeftIsProductPeriodShift =
+  solve 3
+    (λ r P t →
+      r :* (con 1 :+ ((P :* (r :+ con 2)) :* t))
+      :=
+      r :+ ((((r :* (r :+ con 2)) :* t) :* P)))
+    refl
+
+-- Reuse the source's *actual arithmetic* finite sieve, not a
+-- separate Boolean/SSP15-labelled surrogate.
+factorablePairPreservesFiniteSieve :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (r t : Nat) →
+  Pair.AllPairSurvive axes r →
+  Pair.AllPairSurvive axes
+    (factorableLeft r (Period.modulusProduct axes) t)
+factorablePairPreservesFiniteSieve axes r t survivor =
+  subst
+    (Pair.AllPairSurvive axes)
+    (sym (factorableLeftIsProductPeriodShift
+      r (Period.modulusProduct axes) t))
+    (Period.allPairProductPeriodicMultiple
+      axes r
+      (sieveMultiplier r (Period.modulusProduct axes) t)
+      survivor)
+
+-- The reverse follows from the existing BACKWARD period theorem:
+-- the transformation does not gain any local residue information.
+factorablePairReflectsFiniteSieve :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (r t : Nat) →
+  Pair.AllPairSurvive axes
+    (factorableLeft r (Period.modulusProduct axes) t) →
+  Pair.AllPairSurvive axes r
+factorablePairReflectsFiniteSieve axes r t survivor =
+  Period.allPairProductPeriodicMultipleBack
+    axes r (sieveMultiplier r (Period.modulusProduct axes) t)
+    (subst
+      (Pair.AllPairSurvive axes)
+      (factorableLeftIsProductPeriodShift
+        r (Period.modulusProduct axes) t)
+      survivor)
+
+-- A proof-carrying pair-of-products with no unspecified prime status.
+record FactorableNeighbourPair (r P t : Nat) : Set where
+  constructor factorableNeighbourPair
+  field
+    lower : Nat
+    upper : Nat
+    lowerProduct : lower ≡ r * leftFactor r P t
+    upperProduct : upper ≡ (r + 2) * rightFactor r P t
+    gapExactlyTwo : lower + 2 ≡ upper
+
+open FactorableNeighbourPair public
+
+canonicalFactorableNeighbourPair :
+  (r P t : Nat) → FactorableNeighbourPair r P t
+canonicalFactorableNeighbourPair r P t =
+  factorableNeighbourPair
+    (factorableLeft r P t)
+    (factorableRight r P t)
+    refl
+    refl
+    (leftFactorisationGivesRightPlusTwo r P t)
+
+------------------------------------------------------------------------
+-- EXPLICIT NONTRIVIAL FACTORS, ALL r>=2, P>=1, t>=1.
+--
+-- A factor of the form suc(suc k) is >1 by CONSTRUCTION. These
+-- certificates are stronger than merely exhibiting n=a*b with a=1.
+-- No primality decider, finite bound, or external analytic assumption.
+------------------------------------------------------------------------
+
+record TwoNontrivialFactors (n : Nat) : Set where
+  constructor twoNontrivialFactors
+  field
+    firstResidual secondResidual : Nat
+    productIsInput :
+      n ≡ suc (suc firstResidual) * suc (suc secondResidual)
+
+open TwoNontrivialFactors public
+
+leftSecondResidual : Nat → Nat → Nat → Nat
+leftSecondResidual a b c =
+  b * (a + 4) * (suc c) + (a + 3) * (suc c) + c
+
+rightSecondResidual : Nat → Nat → Nat → Nat
+rightSecondResidual a b c =
+  b * (a + 2) * (suc c) + (a + 1) * (suc c) + c
+
+-- These are uniform explicit decompositions; the small-prime case
+-- r=2 is covered rather than lost to an implicit positive-factor gate.
+leftSecondFactorIsNontrivial :
+  (a b c : Nat) →
+  leftFactor (suc (suc a)) (suc b) (suc c)
+    ≡ suc (suc (leftSecondResidual a b c))
+leftSecondFactorIsNontrivial =
+  solve 3
+    (λ a b c →
+      con 1 :+
+        (((con 1 :+ b) :* (a :+ con 4)) :* (con 1 :+ c))
+      :=
+      con 2 :+
+        (((b :* (a :+ con 4)) :* (con 1 :+ c))
+          :+ (((a :+ con 3) :* (con 1 :+ c)) :+ c)))
+    refl
+
+rightSecondFactorIsNontrivial :
+  (a b c : Nat) →
+  rightFactor (suc (suc a)) (suc b) (suc c)
+    ≡ suc (suc (rightSecondResidual a b c))
+rightSecondFactorIsNontrivial =
+  solve 3
+    (λ a b c →
+      con 1 :+
+        (((con 1 :+ b) :* (a :+ con 2)) :* (con 1 :+ c))
+      :=
+      con 2 :+
+        (((b :* (a :+ con 2)) :* (con 1 :+ c))
+          :+ (((a :+ con 1) :* (con 1 :+ c)) :+ c)))
+    refl
+
+factorableLeftHasTwoNontrivialFactors :
+  (a b c : Nat) →
+  TwoNontrivialFactors
+    (factorableLeft (suc (suc a)) (suc b) (suc c))
+factorableLeftHasTwoNontrivialFactors a b c =
+  twoNontrivialFactors
+    a
+    (leftSecondResidual a b c)
+    (cong
+      (λ z → suc (suc a) * z)
+      (leftSecondFactorIsNontrivial a b c))
+
+factorableRightHasTwoNontrivialFactors :
+  (a b c : Nat) →
+  TwoNontrivialFactors
+    (factorableRight (suc (suc a)) (suc b) (suc c))
+factorableRightHasTwoNontrivialFactors a b c =
+  twoNontrivialFactors
+    (a + 2)
+    (rightSecondResidual a b c)
+    (cong
+      (λ z → (suc (suc a) + 2) * z)
+      (rightSecondFactorIsNontrivial a b c))
+
+-- Note: the output TWO certificates do NOT depend on a prime-pair
+-- hypothesis. The finite sieve predicate can survive for both
+-- nontrivially factorable endpoints.
+
+------------------------------------------------------------------------
+-- THE MODULUS PRODUCT IS ALWAYS POSITIVE, even for repeated axes.
+-- It is a product of suc(c) factors; there is no distinctness or
+-- coprimality assumption hiding inside the sieve-preservation lemma.
+------------------------------------------------------------------------
+
+certifiedModulusProductPositive :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  Σ Nat (λ b → Period.modulusProduct axes ≡ suc b)
+certifiedModulusProductPositive [] = 0 , refl
+certifiedModulusProductPositive (axis ∷ rest)
+  with certifiedModulusProductPositive rest
+... | b , positive =
+  (b + Pair.nonzeroResidues axis * suc b)
+  ,
+  trans
+    (cong (λ q → Pair.primeModulus axis * q) positive)
+    refl
+
+-- COMPLETE DOUBLE NONTRIVIAL FACTORISATION, for any supplied survivor
+-- r>=2. A certificate here is a genuine product of two Nat numbers
+-- each represented as suc(suc residual), hence each >=2.
+--
+-- The baseline exists for all finite prime sieves (e.g. residue -1
+-- at their product), but proving that universal BASELINE theorem is
+-- intentionally a different lemma; it is not smuggled in here.
+factorableSurvivorWithBothStrictFactors :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (a t : Nat) →
+  Pair.AllPairSurvive axes (suc (suc a)) →
+  Σ Nat (λ n →
+    Pair.AllPairSurvive axes n
+    × (TwoNontrivialFactors n × TwoNontrivialFactors (n + 2)))
+factorableSurvivorWithBothStrictFactors axes a t survivor
+  with certifiedModulusProductPositive axes
+... | b , positive rewrite positive =
+  factorableLeft (suc (suc a)) (suc b) (suc t)
+  ,
+  ( factorablePairPreservesFiniteSieve axes (suc (suc a))
+      (suc t) survivor
+  , ( factorableLeftHasTwoNontrivialFactors a b t
+    , subst
+        TwoNontrivialFactors
+        (sym (leftFactorisationGivesRightPlusTwo
+          (suc (suc a)) (suc b) (suc t)))
+        (factorableRightHasTwoNontrivialFactors a b t)
+    )
+  )
+
+------------------------------------------------------------------------
+-- UPGRADE: TRUE stdlib Composite/Prime, not only factor labels.
+--
+-- The original Data.Nat.Primality owner defines Composite using a
+-- nontrivial proper divisor, and proves Composite -> not Prime.
+-- We reuse that exact witness instead of defining another "Prime".
+------------------------------------------------------------------------
+
+twoNontrivialFactorsAreComposite :
+  (n : Nat) →
+  TwoNontrivialFactors n →
+  NatPrime.Composite n
+twoNontrivialFactorsAreComposite n
+    (twoNontrivialFactors a b productEq) =
+  subst NatPrime.Composite (sym productEq)
+    (NatPrime.composite-≢
+      (suc (suc a))
+      firstIsProper
+      (divides (suc (suc b))
+        (NatP.*-comm (suc (suc a)) (suc (suc b)))))
+  where
+    d : Nat
+    d = suc (suc a)
+
+    e : Nat
+    e = suc (suc b)
+
+    strictProduct : d < d * e
+    strictProduct =
+      NatP.m<m*n d e (s≤s (s≤s z≤n))
+
+    firstIsProper : d ≢ d * e
+    firstIsProper equality =
+      NatP.<-irrefl refl
+        (subst (d <_) (sym equality) strictProduct)
+
+twoNontrivialFactorsRefutePrime :
+  (n : Nat) →
+  TwoNontrivialFactors n →
+  NatPrime.Prime n →
+  ⊥
+twoNontrivialFactorsRefutePrime n factored =
+  NatPrime.composite⇒¬prime
+    (twoNontrivialFactorsAreComposite n factored)
+
+factorableSurvivorWithBothCompositeCertificates :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (a t : Nat) →
+  Pair.AllPairSurvive axes (suc (suc a)) →
+  Σ Nat (λ n →
+    Pair.AllPairSurvive axes n
+      × (NatPrime.Composite n × NatPrime.Composite (n + 2)))
+factorableSurvivorWithBothCompositeCertificates axes a t survivor
+  with factorableSurvivorWithBothStrictFactors axes a t survivor
+... | n , (survival , (leftWitness , rightWitness)) =
+  n ,
+  ( survival
+  , ( twoNontrivialFactorsAreComposite n leftWitness
+    , twoNontrivialFactorsAreComposite (n + 2) rightWitness
+    )
+  )
+
+-- The actual arithmetic TwinPrimeAt predicate (separate Prime proofs)
+-- is REFUTED for both-compound outputs. No synthetic prime tags.
+factorableSurvivorCannotBeGenuineTwin :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (a t : Nat) →
+  Pair.AllPairSurvive axes (suc (suc a)) →
+  Σ Nat (λ n →
+    Pair.AllPairSurvive axes n
+      × (NatPrime.Prime n → ⊥)
+      × (NatPrime.Prime (n + 2) → ⊥))
+factorableSurvivorCannotBeGenuineTwin axes a t survivor
+  with factorableSurvivorWithBothCompositeCertificates axes a t survivor
+... | n , (survival , (leftComposite , rightComposite)) =
+  n ,
+  ( survival
+  , NatPrime.composite⇒¬prime leftComposite
+  , NatPrime.composite⇒¬prime rightComposite
+  )
+
+------------------------------------------------------------------------
+-- UNBOUNDEDNESS CUT: the explicit candidate dominates its parameter t.
+-- This reuses stdlib monotonicity, not an analytic prime-gap argument.
+------------------------------------------------------------------------
+
+factorableLeftLinearInParameter :
+  (r P t : Nat) →
+  factorableLeft r P t ≡
+    r + t * (r * (r + 2) * P)
+factorableLeftLinearInParameter =
+  solve 3
+    (λ r P t →
+      r :* (con 1 :+ ((P :* (r :+ con 2)) :* t))
+      :=
+      r :+ (t :* ((r :* (r :+ con 2)) :* P)))
+    refl
+
+-- With r>=2 and P>=1, the multiplier is positive, hence t<=L.
+-- In particular, choosing t=N gives a composite survivor >=N
+-- as soon as the universal baseline has been provided.
+factorableLeftDominatesParameter :
+  (a b t : Nat) →
+  t ≤ factorableLeft (suc (suc a)) (suc b) t
+factorableLeftDominatesParameter a b t =
+  subst
+    (t ≤_)
+    (sym (factorableLeftLinearInParameter
+      (suc (suc a)) (suc b) t))
+    (subst
+      (t ≤_)
+      (NatP.+-comm (t * coefficient) (suc (suc a)))
+      (NatP.≤-trans
+        (NatP.m≤m*n t coefficient)
+        (NatP.m≤m+n (t * coefficient) (suc (suc a)))))
+  where
+    coefficient : Nat
+    coefficient =
+      (suc (suc a)) * ((suc (suc a)) + 2) * (suc b)
+
+------------------------------------------------------------------------
+-- SAME CONCLUSION AT A SPECIFIED (not existential) exact output.
+-- This is the bridge needed by a threshold N: retain the actual
+-- arithmetic candidate in the result to apply the lower-bound proof.
+------------------------------------------------------------------------
+
+factorableSurvivorExactOutputIsComposite :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (a b t : Nat) →
+  (positive : Period.modulusProduct axes ≡ suc b) →
+  Pair.AllPairSurvive axes (suc (suc a)) →
+  Pair.AllPairSurvive axes
+    (factorableLeft (suc (suc a))
+      (Period.modulusProduct axes) (suc t))
+  × ( NatPrime.Composite
+        (factorableLeft (suc (suc a))
+          (Period.modulusProduct axes) (suc t))
+    × NatPrime.Composite
+        (factorableLeft (suc (suc a))
+          (Period.modulusProduct axes) (suc t) + 2))
+factorableSurvivorExactOutputIsComposite axes a b t positive survivor
+  rewrite positive =
+  factorablePairPreservesFiniteSieve axes
+    (suc (suc a)) (suc t) survivor
+  ,
+  ( twoNontrivialFactorsAreComposite
+      (factorableLeft (suc (suc a)) (suc b) (suc t))
+      (factorableLeftHasTwoNontrivialFactors a b t)
+  , subst NatPrime.Composite
+      (sym (leftFactorisationGivesRightPlusTwo
+        (suc (suc a)) (suc b) (suc t)))
+      (twoNontrivialFactorsAreComposite
+        (factorableRight (suc (suc a)) (suc b) (suc t))
+        (factorableRightHasTwoNontrivialFactors a b t))
+  )

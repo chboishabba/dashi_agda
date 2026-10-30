@@ -1,4 +1,463 @@
 module DASHI.Unifier where
+import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinPrimeSixWheel
+import DASHI.Arithmetic.TwinPrimeFRACDASHReuseExact as TwinPrimeFRACDASH
+import DASHI.Arithmetic.CertifiedPrimePairModulusExact as ArbitraryPrimeCRT
+import DASHI.Arithmetic.CertifiedPrimePairPeriodExact as PairCRTPeriod
+import DASHI.Arithmetic.SignedSSPPrimeOffsetMacroExact as SignedOffsetMacro
+open SignedOffsetMacro public using
+  ( plusTwoFractionMacro
+  ; minusTwoFractionMacro
+  ; plusOutputHasOffsetExponent
+  ; minusOutputHasOffsetExponent
+  ; signedPlusIsForward
+  ; signedMinusIsInverse
+  ; minusIsNegationOfPlus
+  )
+
+import DASHI.Arithmetic.TwinPrimeCertifiedEnumeratorExact as ExactTwinCounter
+open ExactTwinCounter public using
+  ( twinPrimeAt?
+  ; twinStartsUpTo
+  ; twinPairCountLE
+  ; twinStartListCountExact
+  ; certifiedTwinFromSeparatePrimeProofs
+  )
+
+import DASHI.Arithmetic.TwinPrimeTernary270AffineCRTCodecExact as Ternary270CRT
+open Ternary270CRT public using
+  ( cubeToWheel270
+  ; wheel270ToCube
+  ; wheel270DecodeEncode
+  ; cubeToWheel270Injective
+  ; cube270GlobalAntipodeInvolutive
+  ; wheel270CentreCodeIs269
+  ; wheel270CentreFixedByAntipode
+  ; cube270GlobalAntipode
+  ; wheel270AffinePairReversal
+  ; wheel270ModTwo
+  ; wheel270ModThree
+  ; wheel270LocalPrimeTwo
+  ; wheel270LocalPrimeThree
+  ; wheel270LocalPrimeFive
+  ; wheel270PassesCertifiedTwoThreeFive
+  )
+
+
+import DASHI.Arithmetic.PrimegameTypedNumericFirstApplicableBidiExact as GuyPriorityBidi
+open GuyPriorityBidi public using
+  ( ExactFractionApplies
+  ; ExactFractionEvaluator
+  ; typedStepToNumeric
+  ; numericStepToTyped
+  ; guyTypedToNumeric
+  ; guyNumericToTyped
+  ; typedHaltToNumeric
+  ; numericHaltToTyped
+  ; guyTypedHaltToNumeric
+  ; guyNumericHaltToTyped
+  ; guyExactGuardPriorityForward
+  ; guyExactGuardPriorityBackward
+  ; exactNumericNext
+  ; exactNumericNextIsCorrect
+  ; concreteExactFractionEvaluator
+  ; guyConcreteExactPriorityForward
+  ; guyConcreteExactPriorityBackward
+  ; exactFractionApplies?
+  ; firstApplicableNumeric
+  ; firstApplicableNumericSound
+  ; firstApplicableNumericHalt
+  ; guyNumericExecutableStepSound
+  ; guyTypedExecutableStepSound
+  ; guyNumericExecutableHalt
+  ; guyTypedExecutableHalt
+  ; guyLastRuleAlwaysApplies
+  ; guyBlockedPrefixCannotIncludeLast
+  ; guyNumericScannerNeverHalts
+  ; guyNumericAlwaysSteps
+  ; guyTypedAlwaysSteps
+  )
+
+import DASHI.Arithmetic.TwinPrimeTernary270IbrahimSurvivorCollisionExact as WheelIbrahimCollision
+open WheelIbrahimCollision public using
+  ( realTwinCubePoint
+  ; compositeTwinCubePoint
+  ; realTwinCubeCodes59
+  ; compositeTwinCubeCodes209
+  ; realTwinCubePassesWheel
+  ; compositeTwinCubePassesWheel
+  ; sameIbrahimOrbitInsideWheel
+  ; realTwin59IsTrue
+  ; composite209IsNotTwin
+  ; ibrahimFifteenFailsActualTwinConsumerWithinWheel
+  ; noTwinClassifierFromBareIbrahimPhaseWithinWheel
+  ; globalAntipodeSends59To209
+  ; globalFourteenClass
+  ; sameGlobalFourteenOrbitInsideWheel
+  ; globalFourteenOrbitLosesTwinConsumer
+  ; noTwinClassifierFromBareGlobalFourteenOrbit
+  ; wholeNatToWheelCube
+  ; fiftyNineAndThreeTwentyNineSameFullCube
+  ; threeTwentyNineIsComposite
+  ; natTwinConsumerDistinguishes59And329
+  ; wholeCubeResidueLosesTwinConsumer
+  ; noUniversalTwinClassifierFromFiniteWholeCube
+  )
+
+
+import DASHI.Arithmetic.TwinPrimeNat270ConsumerGuidedStrictRefinementExact as NatPeriodRefinement
+open NatPeriodRefinement public using
+  ( coarseResidue
+  ; finePeriod
+  ; coarseFactorsThroughFine
+  ; fiftyNineAnd329SameResidue
+  ; fiftyNineAnd329DifferentPeriod
+  ; strictPeriodRefinement
+  ; twinConsumerSeparates
+  ; strictConsumerGuidedPeriodRefinement
+  ; noActualTwinConsumerFromBareFin270
+  )
+
+import DASHI.Arithmetic.TwinPrimeResidualMangoldtPeriodRowsExact
+import DASHI.Arithmetic.TwinPrimeMangoldtFinIntervalReindexExact
+import DASHI.Arithmetic.TwinPrimeMangoldtMultiPeriodConcatExact
+import DASHI.Arithmetic.TwinPrimeMangoldtPartialPeriodPartitionExact
+import DASHI.Arithmetic.TwinPrimeMangoldtActualPrimePowerResidualExact
+import DASHI.Arithmetic.TwinPrimeWeilActualCorrelationPartitionExact
+import DASHI.Arithmetic.TwinPrimeMangoldtPrimePowerPairBothSidesExact
+import DASHI.Arithmetic.TwinPrimeMangoldtOutsidePrimePowersZeroExact
+import DASHI.Arithmetic.TwinPrimeMangoldtCertifiedIntervalScheduleExact
+import DASHI.Arithmetic.TwinPrimeCertifiedCountJumpBidiExact
+import DASHI.Arithmetic.TwinPrimeConditionalUnboundedFromCountJumpsExact
+import DASHI.Arithmetic.TwinPrimeCertifiedNatPeriodWitnessBidiExact
+import DASHI.Arithmetic.TwinPrimeMangoldtTwoCaseIntervalPlanExact
+import DASHI.Arithmetic.TwinPrimeMangoldtTotalIntervalPlanExact
+import DASHI.Arithmetic.TwinPrimeMangoldtExhaustiveSupportCaseExact
+import DASHI.Arithmetic.TwinPrimeMangoldtClassifiedFiniteSumExact
+import DASHI.Arithmetic.TwinPrimeMangoldtPrimeErrorFiniteSplitExact
+import DASHI.Arithmetic.TwinPrimeMangoldtFiniteErrorPeriodBidiExact
+import DASHI.Arithmetic.TwinPrimeMangoldtNonzeroPrimeSumWitnessExact
+import DASHI.Arithmetic.TwinPrimeProperPowerFloorRootBoundExact
+import DASHI.Arithmetic.TwinPrimeProperPowerBinaryExponentLowerExact
+import DASHI.Arithmetic.TwinPrimeProperPowerRectangleBoundExact
+import DASHI.Arithmetic.TwinPrimeProperPowerRectangleEnumerationExact
+import DASHI.Arithmetic.TwinPrimeProperPowerCoreBinaryCapacityReuseExact
+import DASHI.Arithmetic.TwinPrimeProperPowerBinaryCutoffNatExact
+import DASHI.Arithmetic.TwinPrimeProperPowerUniversalRectangleCoverageExact
+import DASHI.Arithmetic.TwinPrimeMangoldtProperPowerCandidateCoverageExact
+import DASHI.Arithmetic.TwinPrimeMangoldtErrorSupportProperExact
+import DASHI.Arithmetic.TwinPrimeMangoldtPrimeOneCertifiedBidiExact
+import DASHI.Arithmetic.TwinPrimeMangoldtProperPower25_27NoGoExact
+import DASHI.Arithmetic.TwinPrimeOddCompositeCubeRoughCutExact
+import DASHI.Arithmetic.TwinPrimeFractranResidualHyperfabricExact
+import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as MangoldtFiniteSum
+open MangoldtFiniteSum public using
+  ( AdditiveScalar
+  ; sumInterval
+  ; sumDecodedInterval
+  ; finiteSumBidiForward
+  ; finiteSumBidiBackward
+  ; pairFiniteSumBidiForward
+  ; pairFiniteSumBidiBackward
+  ; mangoldtFiniteSumForward
+  )
+
+import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as MangoldtResidual
+open MangoldtResidual public using
+  ( periodProjection
+  ; exactPeriodResidual
+  ; natGivesPeriodResidual
+  ; periodResidualUniqueness
+  ; liftNatConsumer
+  ; liftConsumerSound
+  ; liftConsumerComplete
+  ; mangoldtAtPeriod
+  ; mangoldtPeriodForward
+  ; mangoldtPeriodBackward
+  ; ArithmeticPairCorrelation
+  ; pairCorrelationAtNat
+  ; pairCorrelationAtPeriod
+  ; pairCorrelationForward
+  ; pairCorrelationBackward
+  )
+
+import DASHI.Arithmetic.TwinPrimeNat270PeriodResidualBidiExact as NatWheelPeriod
+open NatWheelPeriod public using
+  ( NatPeriod270
+  ; encodeNatPeriod270
+  ; decodeNatPeriod270
+  ; decodeEncodeNatPeriod270
+  ; encodeDecodeNatPeriod270
+  ; periodDivCorrect
+  ; periodRemCorrect
+  ; finiteResidueAfterDecode
+  ; certifiedResidueHasCube
+  ; NatCubePeriod270
+  ; decodeCubePeriod270
+  ; encodeCertifiedCubePeriod270
+  ; cubeResidueBound
+  ; cubePeriodResidueRoundTrip
+  ; cubePeriodDecodeToCube
+  )
+
+import DASHI.Arithmetic.TwinPrimeTernary270SurvivorCoverageExact as Ternary270Coverage
+open Ternary270Coverage public using
+  ( Wheel270Survives
+  ; wheel270CompleteFin
+  ; certifiedWheel270ToGuards
+  ; wheel270CompleteCertified
+  ; wheel270SurvivorDecodes
+  ; wheel270ProjectionMod27
+  ; wheel270ProjectionMod5
+  ; wheel270ProjectionMod2
+  ; survivorFibreFactorisation
+  ; wheel270CubePoint119
+  ; wheel270119Survives
+  ; wheel270119IsComposite
+  ; wheel270121IsComposite
+  ; wheel270119SurvivalCannotProveTwin
+  ; wheel270121NotPrime
+  ; wheel270RejectsExceptionalStartThree
+  ; wheel270RejectsExceptionalStartFive
+  )
+
+import DASHI.Arithmetic.TwinPrimeThreeAxisLocalThreeOrbitExact as TernaryLocalPrimeThree
+open TernaryLocalPrimeThree public using
+  ( centeredPrimeThreeResidue
+  ; centeredPrimeThreePoint
+  ; everyCenteredResidueIsTwoModuloThree
+  ; everyCenteredPlusTwoIsOneModuloThree
+  ; localPrimePairSwapIsInnerAntipode
+  ; primeThreeOrbitRespectsInnerInversion
+  ; centeredSlicePassesCertifiedPrimeThree
+  ; nineLocalThreeSurvivors
+  ; fiveInnerSwapOrbitClasses
+  ; nineDecomposesAsOneCentreFourSwapPairs
+  )
+
+import DASHI.Arithmetic.TwinPrime369IbrahimQuotientBoundaryExact as NumerologyBoundary
+open NumerologyBoundary public using
+  ( typedCubeCapacity
+  ; phasePreservingThreeTimesFiveIsFifteen
+  ; phasePreservingFifteen
+  ; strictGlobalAntipodalFourteen
+  ; historicalGuyFourteenRules
+  ; originalOggFifteenPrimes
+  ; primegameUsesTenPrimes
+  ; phaseOrbitCannotRecoverSignedY
+  ; fullSignedCubeRoundTrip
+  ; nineAxisGroupingIsThreeCartesianCubes
+  ; threeToFifthDoesNotEqualFiveCubed
+  ; twinFivePointRepresentsFive
+  ; nonTwinTwentyPointRepresentsTwenty
+  ; samePhaseOrbitForFiveAndTwenty
+  ; ibrahimPhaseOrbitLosesTwinPrimeAnswer
+  ; cannotDecideTwinFromThreeTimesFivePhaseAlone
+  )
+
+import DASHI.Arithmetic.PrimegameSSP15CarrierFactorisationExact as PrimegameCarrierSupport
+open PrimegameCarrierSupport public using
+  ( typedFractionsAreExactGuyFourteen
+  ; guyProgrammeRuleCountIsFourteen
+  ; primegameUsesTenTypedCarriers
+  ; originalSSPAtlasHasFifteenTypedCarriers
+  ; historicalProgrammeCountIsNotSSPCount
+  )
+
+import DASHI.Arithmetic.FiniteTwinSieveNoPromotionExact as FiniteSieveNoPromotion
+open FiniteSieveNoPromotion public using
+  ( arbitrarilyLargeFiniteSieveFalsePositives
+  ; noFiniteSieveCanCertifyEveryTwin
+  ; noFiniteSieveCanCertifyAllLargeTwins
+  )
+
+import DASHI.Arithmetic.FiniteTwinSieveUniversalCompositeBaselineExact as CompositeBaseline
+open CompositeBaseline public using
+  ( baselineMinusOne
+  ; baselinePlusOne
+  ; baselinePlusTwo
+  ; baselineLocalPairSurvives
+  ; baselineAllPairSurvivesAtCommonPeriod
+  ; anyFinitePrimeSieveHasBaseline
+  ; axisHasAtLeastTwo
+  ; nonemptyModulusProductHasAtLeastTwo
+  ; baselineAtLeastThree
+  ; everyNonemptyFinitePrimeSieveHasDoubleCompositeSurvivor
+  ; everyNonemptyFinitePrimeSieveHasLargeDoubleCompositeSurvivor
+  ; everyFinitePrimeSieveHasLargeDoubleCompositeSurvivor
+  )
+
+import DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact as FactorableSieveLift
+open FactorableSieveLift public using
+  ( leftFactorisationGivesRightPlusTwo
+  ; factorableLeftIsProductPeriodShift
+  ; factorablePairPreservesFiniteSieve
+  ; factorablePairReflectsFiniteSieve
+  ; canonicalFactorableNeighbourPair
+  ; leftSecondFactorIsNontrivial
+  ; rightSecondFactorIsNontrivial
+  ; factorableLeftHasTwoNontrivialFactors
+  ; factorableRightHasTwoNontrivialFactors
+  ; certifiedModulusProductPositive
+  ; factorableSurvivorWithBothStrictFactors
+  ; factorableLeftLinearInParameter
+  ; factorableLeftDominatesParameter
+  ; factorableSurvivorExactOutputIsComposite
+  ; twoNontrivialFactorsAreComposite
+  ; twoNontrivialFactorsRefutePrime
+  ; factorableSurvivorWithBothCompositeCertificates
+  ; factorableSurvivorCannotBeGenuineTwin
+  )
+
+import DASHI.Arithmetic.TwinPrimeConsumerParetoObserverExact as TwinConsumerPareto
+open TwinConsumerPareto public using
+  (
+    ThreeByThreeByThree
+  ; OrderedThreeCubePair
+  ; toThreeCoordinates
+  ; fromThreeCoordinates
+  ; threeCoordinateDecodeEncode
+  ; threeCoordinateEncodeDecode
+  ; threeAxisCountIsThree
+  ; threeAxisCapacityIsThreeTimesThreeTimesThree
+  ; threeAxisCapacityIsTwentySeven
+  ; threeAxisCapacityIsCentrePlusThirteenAntipodalPairs
+  ; threeAxisAntipodalOrbitCountIsFourteen
+  ; orderedPairAxisCountIsSix
+  ; orderedPairCapacityIsSevenHundredTwentyNine
+  ; fiveAndThirtyFiveSameSixWheel
+  ; twinAtThirtyFiveIsFalse
+  ; wheelCannotDecideActualTwins
+  ; postprocessedWheelStillCannotDecideTwins
+  ; exactTwinQueryCodeRoundTrip
+  ; exactTwinQueryCodeIsConsumerSufficient
+  ; sieveBitIsSufficientForFiniteSieveQuery
+  ; finiteSieveBitPeriodic
+  )
+
+import DASHI.Arithmetic.SignedSSPPrimeEmitterTraceTransportExact as PrimeTraceBridge
+open PrimeTraceBridge public using
+  ( traceSimulation
+  ; transportReferencePrimeEmitter
+  )
+
+import DASHI.Arithmetic.SignedSSPBidirectionalNeighbourExact as SignedNeighbourBidi
+open SignedNeighbourBidi public using
+  ( plusCodeIsMinusAdmissible
+  ; plusThenMinusDecodedIdentity
+  ; minusThenPlusDecodedIdentity
+  ; minusTwoCRTReadoutCommutes
+  ; minusTwoPairSieveTransport
+  ; minusTwoPairSieveTransportBack
+  ; twinAtLowerToCertifiedUpperAndMinus
+  ; certifiedUpperAndMinusToTwinAtLower
+  )
+
+import DASHI.Arithmetic.SignedSSPTwinFiniteCoverageExact as SignedTwinCoverage
+open SignedTwinCoverage public using
+  ( twinStartAppearsAtOwnCutoff
+  ; encodedTwinStartsUpTo
+  ; everyCertifiedTwinCodeAppearsAtOwnCutoff
+  ; encodedTwinListLengthExact
+  ; twinCountIncrementsAtCertifiedTwin
+  )
+
+import DASHI.Arithmetic.SignedSSPCertifiedCRTReadoutSquareExact as SignedArithmeticCRT
+open SignedArithmeticCRT public using
+  ( plusTwoCRTReadoutCommutes
+  ; pairSieveTransportThroughPlusCode
+  ; pairSieveTransportThroughPlusCodeBack
+  ; twinPrimeToCertifiedCodePair
+  ; certifiedCodePairToTwinPrime
+  )
+
+import DASHI.Arithmetic.SignedSSPProofCarryingExponentExact as CertifiedExponent
+open CertifiedExponent public using
+  ( encodeExponent
+  ; decodeExponent
+  ; decodeEncodeExponent
+  ; encodeExponentInjective
+  ; plusMacroSourceMatchesCertifiedCode
+  ; plusTwoCode
+  ; plusTwoCodeDecodesCorrectly
+  ; minusMacroSourceMatchesCertifiedCode
+  ; minusTwoCode
+  ; minusTwoCodeDecodesCorrectly
+  )
+
+import DASHI.Arithmetic.SignedSSPRawCodeParityNoGoExact as RawCodeParity
+open RawCodeParity public using
+  ( powerTwoOfThreeIsEight
+  ; rawCodeThreeModuloTwoIsZero
+  ; decodedPrimeThreeModuloTwoIsOne
+  ; rawCodeModuloTwoCannotReplaceDecodedParity
+  )
+
+import DASHI.Arithmetic.SignedSSPTwinObservableTransportExact as ExactSSPReadout
+open ExactSSPReadout public using
+  ( losslessSSPReadoutRoundTrip
+  ; losslessSSPPreservesActualTwinPredicate
+  ; losslessSSPPreservesExactTwinIndicator
+  ; terminalSameOutcomeTwinIndicator
+  ; terminalSameOutcomeTwinPrimeProof
+  )
+
+import DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact as SignedTwinNoGo
+open SignedTwinNoGo public using
+  ( orientationFiveAndSevenEqual
+  ; twinAtFiveIsTrue
+  ; twinAtSevenIsFalse
+  ; collidingCodeCannotDecideAllTwins
+  ; orientationAloneCannotDecideTwinPrimality
+  )
+
+import DASHI.Arithmetic.SignedSSPPrimeOutputBoundaryExact as SignedPrimeReadout
+open SignedPrimeReadout public using
+  ( everyCertifiedPrimeHasAnEncoding
+  ; certifiedPrimeIsReachableWhenEmitterProved
+  ; twinPrimeInvariantUnderEqualReadout
+  ; twinPrimeInvariantUnderEqualReadoutBack
+  ; pairSieveInvariantUnderEqualReadout
+  ; pairSieveInvariantUnderEqualReadoutBack
+  ; certifiedNeighboursAreTwinPrimes
+  ; natPrimeAppearsAtOwnCutoff
+  ; everyPrimeCodeAppearsAtOwnCutoff
+  )
+open PairCRTPeriod public using
+  ( localKPeriod
+  ; localKOffsetPeriod
+  ; productIsCommonPeriod
+  ; allPairProductPeriodic
+  ; allPairProductPeriodicBack
+  ; swapFirstTwoFiltersInvolution
+  ; duplicatePrimeFilterRoundTrip
+  )
+import DASHI.Arithmetic.TwinPrimeOggControlReuseExact as PrimeControlReuse
+open PrimeControlReuse public using
+  ( knownNonOggControlCount
+  ; knownAllPrimeControlCount
+  ; controlAndCertifiedPrimeAgree
+  )
+open ArbitraryPrimeCRT public using
+  ( certifyCandidate
+  ; localPairSurvives?
+  ; allPairSurvive?
+  ; localPairPeriodic
+  ; localPairPeriodicBack
+  ; extendedSieveRetainsEarlier
+  ; residueProductEncodeDecode
+  ; sspAddressSymmetryPreservesPrime
+  ; sixWheelNecessaryForOtherPrimes
+  )
+open TwinPrimeFRACDASH public using
+  ( bridgeChoosesFirstApplicable
+  ; bridgeActivationForcesResidueFive
+  )
+open TwinPrimeSixWheel public using
+  ( shiftTwoThreeTimes
+  ; r5PairSurvives
+  ; pairSurvivorMustBeR5
+  ; twinInfinitudeImpliesBoundedPairsTwo
+  )
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE

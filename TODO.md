@@ -17281,3 +17281,82 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+## 2026-10-30 — CT11/M15 twin-prime max-cut status (#1408)
+
+- [x] Source-write actual Mangoldt proper-power support -> CT11 computed deduplicated candidate image; support exclusion in the other direction (new `TwinPrimeMangoldtProperPowerCandidateCoverageExact`).
+- [x] Source-write positive Nat base readout from original Chebyshev certified prime ownership, using standard-library nonprimality at 0 and 1; no extra global axiom. Source **not kernel-verified**.
+- [x] Execute independent finite integer oracle: 1,997 upper bounds, 1,995,003 shifted pairs, no support misses. Commit corresponding (not separately run) regression script; include 36=6² overcount adversary.
+- [ ] CT01: Agda --safe compiler check and repair through three TOE roots, strict 0 postulates/holes/unsafe termination; Lean translation only after golden proof.
+- [ ] CT02: construct the real all-prime-carrier, not just conditional ownership.
+- [ ] CT11/13: finite interval-position support cardinality bound <=2*properPowerCandidateDistinctCount and certified error-sum domination.
+- [ ] CT12/14: concrete ordered real log weights, bound error O(sqrt U log³ U) and prove o(X).
+- [ ] CT15: prove, do not assume, the unconditional positive gap-two shifted Mangoldt correlation with signed residual control.
+- [ ] CT16–CT18: extract arbitrary certified twin pairs from positive prime-only sum; prove genuine infinitude without premises.
+- [ ] Preserve Ibrahim original Monster-3B, Pareto/Snowball, QID and meta-introspector provenance; no same-object promotion, no protected ESD edits.
+
+### 2026-10-30 CT13 follow-on after actual error-position envelope
+
+- [x] Source-write a list of the two possible error positions for every CT11 candidate value, with exact length 2*image length.
+- [x] Reuse the original deduplicator to prove `DistinctValues` and `nonzeroErrorPositionInDistinctEnvelope` for actual M15 error support (conditional on already-owned real Chebyshev prime identity).
+- [x] Source-write `distinctErrorPositionEnvelopeLengthBound` ≤ `2*floorSquareRoot(U)*floorBinaryExponent(U)`; independent integer oracle passed.
+- [ ] Kernel-check both the updated CT11/M15 module and the exact transitive import graph under --safe, no postulates/holes.
+- [ ] Connect genuine bounded-interval, indexed nonzero-error support count to the distinct covering image; instantiate real ordered logarithms, pointwise nonnegative residual weights, and the final O(sqrt(U) log³(U)) / o(X) estimate.
+- [ ] Prove CT15a/b/c unconditional positivity and signed correlation control; until then CT16-CT18 infinitude is unavailable.
+
+### 2026-10-30 CT15 frontier research continuation (#1408)
+
+- [x] Inspect actual Agda prime arithmetic, Mangoldt BIDI, signed Möbius finite probe, CT11 cutoff, real-log owners; actual Lean source, agda2lean; latest Riemann/3×3/YM/Ibrahim PR heads.
+- [x] Source-write 103→105=3×5×7 negative-Möbius parity false-positive in original no-go Agda owner; use certified NatPrime and genuine 105 factorisation.
+- [x] Independently run finite Möbius sign / odd-squarefree contamination / cube-roughness oracle on five dyadic windows; commit reproducible checker (not separately executed from checkout).
+- [x] In original M16 Agda owner, source-write scalar total-vs-error disequality and arbitrary-observer separation → bounded true twin, plus cofinal conditional twin infinitude; **separation premise remains missing**.
+- [x] Reuse original stdlib Log₂ and in-repo core pow2 to source-write canonical floor-log, rectangle and extensional equivalence with old cutoff; **compiler pending**.
+- [ ] CT01: run actual Agda --safe transitive compilation, fix elaboration issues; no postulates/holes/termination escapes.
+- [ ] CT12–CT14: instantiate nondegenerate ordered ordinary-real logarithm with real Mangoldt weights; prove actual weighted support sum domination and E(X)=o(X).
+- [ ] CT15: originate and prove a uniform or cofinal analytic/spectral/arithmetic separation of *actual* ΛΛ correlation from proper-power error; Möbius signed cancellation and finite geometry do not suffice.
+- [ ] CT16–CT18: discharge the real cofinal observer/positivity theorem *without assumption* and close TwinPrimesInfinitelyOften with kernel receipt.
+- [ ] Historical ownership unchanged: Brun, Hardy–Littlewood, Chebyshev/von Mangoldt/Möbius, Lü–Wang–Wu, independent repo/PR authors, Ibrahim Monster 3B, Pareto/Snowball, meta-introspector, QIDs navigation-only, no ESD edits.
+
+### 2026-10-30 CT15 additional number-theory arithmetic cut
+
+- [x] Reuse `Data.Nat.Properties.*-mono-≤` for arbitrary three-large-factor `B³` lower bound with no added postulates; add as `TwinPrimeOddCompositeCubeRoughCutExact.agda` (`--safe` declared).
+- [x] Import it into actual 103/105 odd squarefree counterfeit owner and prove its numerical cube bound; attach once to the three canonical TOE roots.
+- [x] State source equalities of computed/stdlib floor-log₂ power images and duplicate-free images; transport exact M15 position cover to `2*floorSquareRoot(U)*⌊log₂U⌋`.
+- [ ] Kernel-check new and existing sources with actual Agda and repair any parse/type/termination errors; no postulates or unsafe escapes.
+- [ ] Produce a complete proof-relevant Nat factor-list/Möbius parity classifier, including the three-factor/cube-root implication, using original stdlib factorisation, not an SSP15 finite class.
+- [ ] Prove genuine shifted-prime short-divisor/roughness cancellation or an unbounded cofinal actual Mangoldt separator; **this** is the front of the twin-prime conjecture and is NOT solved by this finite argument.
+- [ ] Prove `CT12–CT14` ordinary-real logarithmic weights and error sublinearity and unconditional `CT16–CT18` with Agda kernel acceptance. Keep original mathematical/Ibrahim/Pareto/Snowball/QID ownership and ESD isolation.
+
+### 2026-10-30 FRACTRAN / Pickover hyperfabric integration (#1408)
+
+- [x] Search actual fifteen-lane SSP signed valuation source: 7, 47, 59 ARE present. Verify the existing concrete FractranCOL interpreter is only five lanes; do not confuse symbolic SSP labels with arbitrary finite divisibility machines.
+- [x] Source-write explicit 59/329 genuine SSP valuation receipts and the factored 329=7×47 vs 59=59; use the previously certified twin outcomes, no invented factor proofs.
+- [x] Source-write actual ordered first-applicable FRACTRAN mini-rack [1/7,1/47]; 329→47, 59 no step, consuming FRACDASH numeric operational semantics.
+- [x] Instantiate exact CoarseFineReopening Nat using original 270-period BIDI; inhabit original Pickover SignedPhaseFibre and prove consumer-relevant residual necessity for 59/329 and generic exact-reopening twin sufficiency.
+- [x] Transport the actual Mangoldt pair correlation and its finite window S=P+E split through this SAME fibre using original sum BIDI; connect to all 3 TOE roots.
+- [x] Execute independent finite X=100,1000,10000 complete prime-denominator stage oracle (respectively 6,14,34 gates) and compare exact trial divisibility to actual twin decisions and lossy 270 wheel; commit reproducible checker (not executed from checkout).
+- [ ] Construct a **real** Nat→FRACTRAN machine compiler with verified first-applicable semantics, output readout and termination/step simulation, not just open SoundFractranTwinReadout record.
+- [ ] Build the growing prime-axis/scale-indexed arithmetic hyperfabric with genuinely scale-compatible analytic estimates, not just exact window gluing.
+- [ ] Prove CT15 cofinal actual Mangoldt total/error separation (or equivalent unbounded rough shifted-prime sector) and CT12–CT14 ordinary-real logarithms; twin-prime infinitude remains OPEN.
+- [ ] Run Agda transitive --safe kernel and Lean mirror checks once compiler available (not CI).
+
+### 2026-10-30 fixed FRACTRAN prefix parity/camouflage cut
+
+- [x] Prove source-level equivalence of certified finite pair-sieve survivor and paired FRACTRAN blocked-prefix semantics, explicitly distinguished from one actual rational fraction on a raw n.
+- [x] Reuse original finite double-factorisation owner to source-write cofinal fixed-rack false positives: any finite certified prime-test rack with a >=2 survivor has arbitrarily late composite pairs passing all its local checks.
+- [x] Directly instantiate Pickover strict-refinement theorem, not only its residual-separation necessity.
+- [x] Execute independent exact integer examples for finite racks [2,3,5], [2,3,5,7], [2,3,5,7,11] at t=1,10,100,100000.
+- [ ] Prove original finite sieve has a >=2 surviving seed for **all** certified finite axis lists (e.g. residue -1 modulo modulus product) rather than leaving seed explicit; do not duplicate underlying CRT/period machinery.
+- [ ] Prove a real first-applicable paired source-register FRACTRAN simulation and obtain certified outputs on all bounded input windows.
+- [ ] Prove genuine cofinal *prime* pair survivors, not cofinal *composite* camouflage; the latter is evidence of the hard obstruction.
+- [ ] Kernel-check these source-written Agdas and the full three-root import graph; no CI necessary.
+
+### 2026-10-30 continued FRACTRAN first-applicable no-go
+- [x] Source-write exact ordered local trace `329→47→1`, terminal 1, and 59-stuck witness using original FRACDASH interpreter semantics.
+- [x] Source-write `noFixedFractranPrefixCanCertifyEveryTwin` as a genuine logical refutation of blocked finite-denominator prefix→TwinPrimeAt, not just a numeric counterexample; original factorable-survivor theorem owner retained.
+- [ ] Check these actual source terms in safe Agda kernel (toolchain unavailable here); repair any elaboration errors, do not promote source-written to kernel-verified.
+- [ ] Construct verified growing/machine-level FRACTRAN paired-register compiler and genuine analytic cofinal prime-pair separation; no finite rack or QID numerology can discharge this theorem.
+
+### 2026-10-31 shifted-pair error scale
+- [x] Classical elementary bound in real standard Mangoldt model: proper-prime-power error support <=2 floor(sqrt Y) floor(log2 Y) and mass E(Y)<=that count*(ln Y)^2; independent exact support audit y=100..100000.
+- [ ] Produce unconditional positive main-term lower bound S(Y)≥cY for shifted actual Λ(n)Λ(n+2) on unbounded Y, or another true cofinal total-error separation; finite graphs/FRACTRAN/Mangoldt split alone insufficient. This is open number theory, not a theorem generated by an interface.
