@@ -451,3 +451,22 @@ An independent local Python audit (not a kernel checker) enumerated all 54 edges
 QID verification was reuse-only: existing `GraphColouring369PantsQidParetoSnowballExact` owns the typed concepts for [maximum cut Q942557](https://www.wikidata.org/wiki/Q942557) and [bipartite graph Q174733](https://www.wikidata.org/wiki/Q174733) and the exact unnamed synthetic 27-vertex fixture stays **unresolved**. Neither a shared label/QID nor an apparent 27/11/7 count identifies the native grid with the different 27 ternary endomorphism functions or Ibrahim's Monster3B action.
 
 **Receipt separation:** previously published bipartite graph mathematics / original DASHI Agda source owner / original script's new connectivity extension / independently executed local Python tests / future Agda and Lean kernel checks are distinct. No protected ESD/CI changes. Roadmap updated.
+
+## Final 54-slot uniqueness addition — 30 October 2026
+
+`GraphColouring369PantsEdgeCoverageExact.agda` now carries an
+explicit *propositional* `NoDuplicateSlots` proof candidate for
+`allNativeSlots`, not only a Boolean status. Its proof uses a
+three-role constructor-sensitive comparison, reflexivity of trit and
+step equality, a sound negative-match inference, an inductive list
+membership relation, and a closed evaluation of all 54 slots.
+The generic `slotIndex` injection or edge-endpoint-map injection
+is **not** silently inferred from list uniqueness. Neither the
+closed-list `refl` nor the source-written proof has received a
+kernel-check in this environment.
+
+The companion Python computation independently checked 54 distinct
+canonical endpoint pairs, exact coverage of all 108 directed
+native adjacencies, and all 162 S3 and 27 seam-reflection cases.
+Both Agda/Lean source owners are imported into the TOE,
+Unifier, Unified.Everything and Ibrahim/Pareto facades.
