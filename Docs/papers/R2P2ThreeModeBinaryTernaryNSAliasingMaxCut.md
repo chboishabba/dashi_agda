@@ -758,3 +758,47 @@ No assumption that `C3CubeCyclotomicFourierExact.spectralConvolutionDiagonalises
 **Narrower remaining theorem walls:** (i) establish inside the Agda kernel the equivalence of the actual `synthesiseUnscaled (pad27To64 f)` / `unscaledSynthesis125 (pad27To125 f)` **sample arrays** with `Original27UnscaledSynthesisAt f x`; (ii) identify the actual normalized forward transform at each retained/full output as the exact character-weighted finite sample sum; (iii) apply full C4³/C5³ character orthogonality and source index-membership laws to collapse the 729 terms; (iv) compile and kernel-check the source-written algebra/orbit/FFT owners before asserting machine-checked equality. The C4 retained 27-output and C5 full 125-output sampled-to-index lemmas are **not yet proved in Agda**.
 
 **No promotions:** R440/R736/B4, continuum Navier–Stokes real evolution, Ma 87Sr and R2P2 Yb optical-clock calibration, original Ibrahim snowball/Monster 3B and all source-authorship boundaries remain independent. Current branch edits touch no ESD or CI surfaces. 
+
+
+## 5l. 30 October 2026 — precise character-resolution payment and source-order universal certificate
+
+### Audit of the currently live repository — actual source, not merely PR bodies
+
+At this continuation the live draft was #1407 on head `ea5846b0`. Directly inspected branch source `R2P227729BilinearCyclotomicPadCutExact`, exact C4/C5 sampled-operator owners, `R2P2C4C5NyquistAntipodalFixedPointExact` (the **actual enumerated sample lists**), the original C4/C5 scalar-character owners, `C3CubeCyclotomicFourierExact` and the three TOE roots; directly fetched `dashi_lean4/main` `ExternalClayNS/AgdaContract.lean` and `NSUnforcedAnalyticCuts.lean` rather than inferring Lean capability from PR metadata. Also read concrete owner source on the **current** #1440 Yang–Mills H1→R313→R333 route, its `BalabanIbrahimParetoSnowballTOEExact` identity/nonpromotion surface, #1438 trialectic graph/face mediation, and #1437 finite combinatorial Max Cut. Those separate owners were not copied or treated as closing finite Fourier/physical NS.
+
+**Web donor/context:** mathlib's `Mathlib/Analysis/Fourier/FourierTransform.lean` presents continuous Fourier integral/Fubini, not our discrete Q(i)/Q(ζ5) 64/125 exact convolution certificate. Original repository finite Yang–Mills Fubini (Balaban), NS proof method, C3 DFT and earlier finite group character identities remain the actual source donors. Orszag/Patterson classical pseudo-spectral mathematics retains priority. Ibrahim's existing Monster-3B/First-Link source custody is unchanged.
+
+### One reusable exact extraction proof, with its only unresolved mathematical assumption **visible**
+
+Extended existing `R2P227729BilinearCyclotomicPadCutExact.agda` with `finiteFourierExtractionFromOriginal729GivenResolution`. For any scalar coefficients with previously source-written commutative finite-sum multiplication/distribution and any **actual sample list**, it proves:
+
+```text
+  (Σ_[sample] Σ_[pair ∈ ORIGINAL pair729] coeff(pair)*phase(pair,sample))
+    = Σ_[pair ∈ ORIGINAL pair729]
+        choose(zero, isSelected(pair), coeff(pair))
+```
+
+**Given:** for each original pair, `Σ_[sample] phase(pair,sample) =
+choose(zero,isSelected(pair),one)`, plus the scalar right-unit law. Its proof uses original `sumAllSwap`, `sumAllScaleLeft`, source `sumAllCong` and explicit true/false membership branches, NOT an unproved postulate or a second 729 input carrier. This is a valuable conditional *reduction*, **not** proof of the character-resolution premise.
+
+Existing C4 retained and C5 full-output owners now expose the **literal** `gaussianNormalizedCharacterPhase` and `cyclotomicFiveNormalizedCharacterPhase`, with factors (1/64) and (1/125), the exact original `Nyquist.allFourGridCubes` and `Nyquist.allFiveGridCubes` sample lists, the actual output membership predicates from original indexed convolution, `ActualCharacterResolution` types, `SourceNormalizedSampledAt`, and `SourceSampledEqualsIndexedGivenResolution`. All are wired to the existing three TOE roots with the resolution premise displayed. The separate true operator equality still requires actual array synthesis/analysis-to-source character identification.
+
+### Exhaustive independent root and index audit of this exact new premise
+
+A local standalone pure-Python exact rational/root calculation ran for **every full group character pair** and **every original signed 27×27 pair/target combination**. It uses the precise Agda sample-axis enumeration orders:
+
+- C4: `(fourMinusOne, fourZero, fourPlusOne, fourOuterTwo)`, residues `(3,0,1,2)`; 64 sample points, **4,096** ordered group-frequency character comparisons, and **19,683** actual 729-pair × retained 27-output comparisons.
+- C5: `(gridMinusTwo, gridMinusOne, gridZero, gridPlusOne, gridPlusTwo)`, residues `(3,4,0,1,2)`; 125 sample points, **15,625** group character comparisons, and **91,125** actual 729-pair × 125 full-output comparisons.
+
+The calculation forms **the full three-axis unnormalized sums** using actual sample orders, then requires (N^3) on equal group indices and zero otherwise, and divides by (N^3) for exact normalized selected-pair equality. A preliminary diagnostic erroneously checked against (N) rather than (N^3); this was corrected before the final complete run. Both complete checks then **passed**. This correction is documented to prevent silently mistaking 1D for 3D normalization. The existing `scripts/r2p2_c4_c5_universal_basis_certificate.py` was extended in-place with `check_original_sample_order_character_resolution` (rather than adding another test system) to retain these exact sample-order regressions. Its committed exact-head checkout was **not** separately executed.
+
+These 19,683/91,125 exact coefficient audits support an algebraically universal finite bilinear identity, because the expression is bilinear in the independent source coefficients. They are **independently executed finite arithmetic**, not pinned Agda kernel verification of the generated `ActualCharacterResolution` types. They do not certify optical-clock measurements or continuum NSE.
+
+### Remaining max-cut
+
+1. Source-write and kernel-check **C4/C5 exact character-resolution proofs** over the original sample lists. Existing C4/C5 1D `oneDimensionalCharacterOrthogonality` and 3D `cubeCharacterOrthogonality` are reusable, but the actual sample list ordering, normalized scaling and multiplication/conjugation factorization must be proved to match them.
+2. Source-write and kernel-check **actual padded array FFT synthesis/analysis ≡ source 27-mode character sum/sample extraction** for arbitrary exact coefficients, not merely finite numerical basis tests.
+3. Compose these with the new explicit conditional extraction and original `fourGridBilinearRecoversAllRetainedCoefficients` / `fiveGridBilinearRecoversAllFullCoefficients` to prove actual `retainedSampledBilinear` and `fullSampledBilinear125` equality to original indexed 729-source convolution.
+4. Distinct physical Complex3/Leray/energy/real-time ODE and R440/R736/B4 unforced analytic obligations, Ma 87Sr/R2P2 neutral Yb empirical calibration, and Ibrahim/Monster 3B same-object provenance remain **open** and must not be promoted from this finite result.
+
+**Trust:** Agda source-written, no postulates/holes intentionally added; local Agda and Lean binaries unavailable and NO kernel or CI run. No ESD edits. New code is source-owned by this branch, older mathematical results/source code remain attributed to their original authors and original Ibrahim Monster 3B owner. 
