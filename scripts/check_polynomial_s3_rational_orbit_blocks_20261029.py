@@ -140,7 +140,7 @@ def verify_rational_solver_source_integrity():
     )
     for name in native_receipts:
         assert len(re.findall(r"^"+name+r" :",native_fields,re.M))==1,name
-        assert len(re.findall(r"^"+name+r" [^\\n]* =",native_fields,re.M))==1,name
+        assert len(re.findall(r"^"+name+r" [^\n]* =",native_fields,re.M))==1,name
     assert "Atlas.blockActionPreservesNative" in native_fields
     assert "Atlas.blockCodeRoundTrip" in native_fields
     assert "sourceBlockActionAgreesWithNative" in native_fields
