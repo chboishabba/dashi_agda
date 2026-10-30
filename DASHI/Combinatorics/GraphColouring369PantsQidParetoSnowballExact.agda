@@ -222,6 +222,43 @@ graph369QidSourceAtlas =
       ∷ directionalSheaf2026 ∷ directedSheafHypergraph2026 ∷ [])
     "source/proof roles kept independent; inherited graph theorem and original Ibrahim/Monster authorship retained"
 
+
+-- Additional 2026 primary-source cross-pollination:
+-- selective incoming/outgoing directed restrictions vs a fixed local
+-- compatible section, and asymmetric directed graph generation.
+-- Neither source is imported as a physical or computational theorem.
+
+cooperativeSheaf2026 : Source.AttributedSource
+cooperativeSheaf2026 = Source.mkNoDOISource
+  "André Ribeiro; Ana Luiza Tenorio; Juan Belieni; Amauri Souza; Diego Mesquita"
+  "Cooperative Sheaf Neural Networks"
+  "ICLR 2026"
+  "2026"
+  "https://proceedings.iclr.cc/paper_files/paper/2026/hash/ea1a7f7bc0fc14142106a84c94c826d0-Abstract-Conference.html"
+  Source.academicArticleSource
+  "source comparison for directional source/target receptive field and selective in/out Laplacians; DASHI has not reproduced their operator or experiments"
+  Source.publicAttribution
+
+directedGraphGeneration2026 : Source.AttributedSource
+directedGraphGeneration2026 = Source.mkNoDOISource
+  "Alba Carballo Castro; Manuel Madeira; Yiming Qin; Dorina Thanou; Pascal Frossard"
+  "Generating Directed Graphs with Dual Attention and Asymmetric Encoding"
+  "ICLR 2026"
+  "2026"
+  "https://proceedings.iclr.cc/paper_files/paper/2026/hash/d99f9bd9c692e64c266acdc16b866e7f-Abstract-Conference.html"
+  Source.academicArticleSource
+  "source comparison for asymmetric source/target dependence; no graph-generation algorithm, performance receipt or learned weights imported into DASHI"
+  Source.publicAttribution
+
+directionalCrossPollinationAtlas : Source.AttributedSourceAtlas
+directionalCrossPollinationAtlas =
+  Source.mkSourceAtlas
+    "directed two-ended hyperfabric and higher-order source comparison"
+    "DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact"
+    (directionalSheaf2026 ∷ directedSheafHypergraph2026
+      ∷ cooperativeSheaf2026 ∷ directedGraphGeneration2026 ∷ [])
+    "four 2026 source roots retained, but no imported directed Laplacian/ML theorem or same-object graph identification"
+
 ------------------------------------------------------------------------
 -- Highest-alpha mathematical result consumes golden native cut:
 -- every true native grid edge crosses checkerboard, even when each edge
