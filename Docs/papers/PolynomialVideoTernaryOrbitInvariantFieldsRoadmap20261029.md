@@ -435,3 +435,16 @@ Higher-level open mathematics: actual complex coefficient root-lifting and braid
 | O66 | Run exact-head Agda/stdlib/typechecked TOE-root graph and repair any solver unfolding/normalization failures | OPEN; no Agda or checked-out repository available |
 
 **Completion boundary:** mathematical exact 2/3/6 matrices and Q27 character results are computationally checked; the 176 new **Agda proofs are source-written, not kernel accepted**. The macro can still expose normalization/elaboration issues under the pinned stdlib; do not call these theorems formally proved until `agda --safe` (where applicable) actually accepts them. This refinement avoids false Green outcomes, not another 369 coincidence. Original finite group theory, Maschke, rational projectors, existing Agda/Lean owners, Hatcher and Ibrahim Monster 3B attribution remain distinguished. Neither ESD surfaces nor CI were changed.
+
+### 30 October further literal Agda name/readback correction (O67–O68)
+
+The 176 generated scalar-helper declarations were renamed from `foo_scalar_base_pair0`-style names to **unambiguous camelCase**, e.g. `fromToCoordinates2ScalarBasePair0`, to avoid treating underscore separators as potential Agda mixfix placeholders. This is a source naming/parse-risk repair, not a mathematical theorem. Its caller sites were renamed in the SAME owner. The existing checked-out matrix/source audit was synchronized to the new theorem-name convention.
+
+Exact GitHub source readback performed AFTER these writes: 176 distinct `...Scalar...` helper definitions proved by nullary `Ring.solve-∀`, 176 field theorem calls referencing precisely those same names, eleven actual scalar-field constructor clauses (2+3+6), no old `_scalar_` names, zero malformed additive patterns, no postulates or unsolved metas detected in that edited source. All three imports remain under the original owner, not a duplicate.
+
+| ID | Implementation/verification gate | State |
+|---|---|---|
+| O67 | Avoid accidental generated Agda mixfix theorem identifiers; rename all scalar helpers/calls without changing dependencies | SOURCE-WRITTEN; 176-name source bijection readback PASS |
+| O68 | Execute exact checked-out Python source audit and actual pinned Agda kernel on Q27, Vieta, Vandermonde, C2 adapter, and three TOE roots; repair remaining elaboration errors | OPEN; this runtime has no Agda and cannot clone GitHub |
+
+This section is the **current state**; O57's interim applied-field-list fix has been superseded by O62–O68. No protected ESD edit, no CI work, and no unearned Lean/Agda kernel or Ibrahim/Monster 3B same-object claim.
