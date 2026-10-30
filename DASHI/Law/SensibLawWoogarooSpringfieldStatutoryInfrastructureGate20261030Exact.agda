@@ -634,8 +634,8 @@ springLake2024HighCourtState = historical-case-receipt
 data HistoricCourtRecordItem : Set where
   courtAppealBook1998SIA : HistoricCourtRecordItem
   courtAppealBook1998DeedAmendments : HistoricCourtRecordItem
-  2016ADPApplication : HistoricCourtRecordItem
-  2026SameLotTitleAndContract : HistoricCourtRecordItem
+  historic2016ADPApplication : HistoricCourtRecordItem
+  current2026SameLotTitleAndContract : HistoricCourtRecordItem
 
 record CourtExhibitLocator : Set where
   constructor court-exhibit-locator
