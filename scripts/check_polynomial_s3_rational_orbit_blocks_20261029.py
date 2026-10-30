@@ -272,7 +272,7 @@ def verify_original_polynomial_video_m1_m10():
         "coefficientDiscriminantZeroIffRootCollisionRational",
     ):
         assert len(re.findall(r"^"+name+r" :",disc,re.M))==1,name
-        assert re.search(r"^"+name+r" [^\n]* =",disc,re.M),name
+        assert re.search(r"^"+name+r"(?: [^\n]*)? =",disc,re.M),name
     for name in (
         "iTimesJIsK","jTimesIIsNegativeK",
         "jTimesKIsI","kTimesJIsNegativeI",
