@@ -25,7 +25,7 @@ module DASHI.Arithmetic.TwinPrimeFractranResidualHyperfabricExact where
 -- representation. Source-written; kernel check pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -35,9 +35,14 @@ import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannVonMangoldtSpecification as VM
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as Correlation
 import DASHI.Arithmetic.TwinPrimeMangoldtActualPrimePowerResidualExact as Mangoldt
-open import Data.Product using (_×_)
+open import Data.Product using (Σ; _×_; _,_; proj₁)
 open import Agda.Builtin.List using (List; _∷_; [])
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as NP
+import Data.Nat.Primality as NatPrime
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Arithmetic.TwinPrimeNat270PeriodResidualBidiExact as Period
@@ -52,6 +57,10 @@ import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as Sum
 import DASHI.Arithmetic.TwinPrimeWeilActualCorrelationPartitionExact as Fold
 import DASHI.Arithmetic.TwinPrimeMangoldtPrimeErrorFiniteSplitExact as Split
 import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact as Interpreter
+import DASHI.Arithmetic.CertifiedPrimePairModulusExact as Pair
+import DASHI.Arithmetic.CertifiedPrimePairPeriodExact as PairPeriod
+import DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact as Factorable
+import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinSpec
 
 ------------------------------------------------------------------------
 -- 59 = 59, versus 329 = 7 * 47: both SSP primes really exist in
@@ -468,3 +477,109 @@ fiftyNineHasNoLocalFractranStep
   fortySevenDenominatorCannotFireOn59 fortySevenEnabled
 fiftyNineHasNoLocalFractranStep
   (Interpreter.skip-head _ (Interpreter.skip-head _ ()))
+
+------------------------------------------------------------------------
+-- FINITE FRACTRAN PREFIX / LOCAL SIEVE EXACT CORRESPONDENCE.
+--
+-- A two-endpoint fraction-denominator guard is activated iff a
+-- certified prime modulus divides n OR n+2. This is a state-indexed
+-- "first applicable fraction" failure/blocked-prefix predicate.
+-- The source-owned CertifiedPrimePairModulusExact already has the
+-- exact complement: AllPairSurvive. Do NOT invent a second sieve.
+------------------------------------------------------------------------
+
+primePairDenominatorEnabled :
+  Nat → Pair.CertifiedPrimeAxis → Set
+primePairDenominatorEnabled n axis =
+  (n % Pair.primeModulus axis ≡ zero)
+  ⊎ ((n + 2) % Pair.primeModulus axis ≡ zero)
+
+finitePrimePairSieveBlocksFractranPrefix :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (n : Nat) →
+  Pair.AllPairSurvive axes n →
+  Interpreter.PrefixBlocked primePairDenominatorEnabled n axes
+finitePrimePairSieveBlocksFractranPrefix [] n tt = tt
+finitePrimePairSieveBlocksFractranPrefix
+    (axis ∷ axes) n ((leftNotDivides , rightNotDivides) , rest) =
+  (λ { (inj₁ dividesLeft) → leftNotDivides dividesLeft
+     ; (inj₂ dividesRight) → rightNotDivides dividesRight })
+  ,
+  finitePrimePairSieveBlocksFractranPrefix axes n rest
+
+blockedFractranPrefixIsFinitePrimePairSurvivor :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (n : Nat) →
+  Interpreter.PrefixBlocked primePairDenominatorEnabled n axes →
+  Pair.AllPairSurvive axes n
+blockedFractranPrefixIsFinitePrimePairSurvivor [] n tt = tt
+blockedFractranPrefixIsFinitePrimePairSurvivor
+    (axis ∷ axes) n (blocked , rest) =
+  ( (λ dividesLeft → blocked (inj₁ dividesLeft))
+  , (λ dividesRight → blocked (inj₂ dividesRight)) )
+  ,
+  blockedFractranPrefixIsFinitePrimePairSurvivor axes n rest
+
+-- A FIXED finite program's local prime denominators are subject
+-- to exactly the same parity/composite camouflage as the finite
+-- sieve. Reuse ORIGINAL exact factorable-survivor construction.
+--
+-- For ANY certified finite rack with a >=2 surviving seed and a
+-- certified positive product of moduli, for EVERY threshold N,
+-- construct a blocked state >=N where BOTH n and n+2 are actually
+-- Composite. This refutes "no enabled divisor -> twin" for every
+-- fixed rack, even after adding any finite number of prime axes.
+-- This is not a refutation of FRACTRAN computation/universality:
+-- a universal program may iterate through unbounded candidates.
+------------------------------------------------------------------------
+
+cofinallyBlockedCompositePrimePairs :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (seedOffset productPredecessor : Nat) →
+  (positiveProduct :
+    PairPeriod.modulusProduct axes ≡ suc productPredecessor) →
+  (seedSurvives :
+    Pair.AllPairSurvive axes (suc (suc seedOffset))) →
+  (N : Nat) →
+  Σ Nat (λ n →
+    (N ≤ n) ×
+    (Interpreter.PrefixBlocked primePairDenominatorEnabled n axes
+      × ((NatPrime.Prime n → ⊥)
+          × (NatPrime.Prime (n + 2) → ⊥))))
+cofinallyBlockedCompositePrimePairs
+    axes seedOffset productPredecessor positiveProduct seedSurvives N
+  with Factorable.factorableSurvivorExactOutputIsComposite
+    axes seedOffset productPredecessor N positiveProduct seedSurvives
+... | pairSurvives , (leftComposite , rightComposite) =
+  factorableOutput ,
+  ( lowerBound
+  , ( finitePrimePairSieveBlocksFractranPrefix axes
+        factorableOutput pairSurvives
+    , (NatPrime.composite⇒¬prime leftComposite
+      , NatPrime.composite⇒¬prime rightComposite)
+    )
+  )
+  where
+    factorableOutput : Nat
+    factorableOutput =
+      Factorable.factorableLeft
+        (suc (suc seedOffset))
+        (PairPeriod.modulusProduct axes) (suc N)
+
+    lowerBound : N ≤ factorableOutput
+    lowerBound =
+      NP.≤-trans
+        (NP.n≤1+n N)
+        (subst
+          (λ modulus →
+            suc N ≤ Factorable.factorableLeft
+              (suc (suc seedOffset)) modulus (suc N))
+          (sym positiveProduct)
+          (Factorable.factorableLeftDominatesParameter
+            seedOffset productPredecessor (suc N)))
+
+-- The mathematical obstruction to a fixed finite FRACTRAN prefix
+-- is a full-Nat arithmetic theorem, not an SSA/Monster label count.
+-- Conversely, stage-by-stage growth of the prime-denominator rack
+-- can decide EVERY finite bounded window but yields NO cofinal
+-- lower bound on genuine twin-pair counts without extra analysis.
