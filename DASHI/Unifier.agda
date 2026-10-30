@@ -1785,3 +1785,22 @@ unifierBalabanR320RouteSNoDuplicateMagnitude :
   BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
 unifierBalabanR320RouteSNoDuplicateMagnitude =
   BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+
+
+------------------------------------------------------------------------
+-- Pareto P2: existing rational SU2 trace bound -> same-physical Gram
+-- boundedness producer -> canonical Wilson S2 input.
+------------------------------------------------------------------------
+
+unifierBalabanRouteSP2TraceToS2Level : ProofLevel
+unifierBalabanRouteSP2TraceToS2Level =
+  BalabanRGTOE.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+
+unifierBalabanRouteSP2PhysicalInterpretationLevel : ProofLevel
+unifierBalabanRouteSP2PhysicalInterpretationLevel =
+  BalabanRGTOE.balabanRouteSP2TracePhysicalInterpretationLevel
+
+unifierBalabanRouteSP2PerLoopBoundAfterInterpretation :
+  BalabanRGTOE.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+unifierBalabanRouteSP2PerLoopBoundAfterInterpretation =
+  BalabanRGTOE.balabanRouteSP2TracePaysPerLoopBounds
