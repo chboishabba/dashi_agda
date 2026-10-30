@@ -17,6 +17,7 @@ import DASHI.Governance.LocalGlobalCouncilGluing
 import DASHI.Governance.RelationalMandateFibre
 import DASHI.Governance.SituatedConstituency
 import DASHI.Governance.TransitionResidual
+import DASHI.Governance.ParallelNeedsInstitutionalTransitionExact
 import DASHI.Governance.SituatedInverseJusticeFibreExact
 import DASHI.Governance.InverseJusticeThroughputExact
 import DASHI.Governance.NonCompensatoryJusticeOrderExact
