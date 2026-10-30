@@ -81,3 +81,11 @@ monitor surface.
 - Verified historical Orszag (1971 J. Atmos. Sci.), Patterson/Orszag (1971 Phys. Fluids) and Orszag (1971 Galerkin spectral) primary-source authorship; kept finite method inheritance, branch-owned Agda proof terms and executed exact checks separate.
 - Source-audited original `Core.Prelude`, observer incidence and new C4/C5/bilinear modules: `{-# OPTIONS --safe #-}` is not declared in these files. Static hole/postulate scans do not certify safe mode. Recorded transitive `--safe` import closure and exact-head Agda checking as mandatory before golden certification; no ESD change and no CI run.
 - Made C4 four-point source rational normalization explicit with `normalize 4 1`.
+
+
+## 2026-10-30 — original Nyquist 3D character to true 729 integer convolution (kernel pending)
+
+- Audited actual Agda source, the dashi_lean4 NS source, latest PR #1441 governance/#1440 YM/#1438 trialectics/#1437 max-cut; QID/Ibrahim same-object guards already in the existing Pareto snowball owner.
+- Reused existing C4/C5 cyclotomic scalars and original Nyquist axes. Source-wrote 16/25 exact normalized 1-axis character equality cases; generic triple Cartesian sum/Fubini and source Boolean multiplication; exact three-factor scale/conjugate normalizations; and three-axis C4/C5 delta on original 64/125 point lists. C5 source integer-label equivalence uses 25 explicit group/wide equality cases and the original `wideFiveRoundTrip` proof.
+- Replaced abstract character-resolution payment with source-written `gaussianActualCharacterResolutionPaid` and `cyclotomicFiveActualCharacterResolutionPaid`. Source-written unconditional `SourceSampledEqualsIndexed` theorems and original `trueInteger` 729-pair convolution transport are reachable from three TOE roots; the term `SourceSampled` denotes finite **character sums**, not the actual padded tensor FFT.
+- Independently executed exact tests: 16/25 one-axis roots and 19,683/91,125 original pair→target selector comparisons passed. Exact branch Agda/Lean kernel, `--safe` closure, CI and pinned checkout testing were not run. No protected ESD changes; original R440/R736/B4, real-time physical NS, clock measurements, Ibrahim historical dump and Monster same-object promotion remain open.
