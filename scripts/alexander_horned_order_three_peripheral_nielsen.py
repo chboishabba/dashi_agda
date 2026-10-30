@@ -76,3 +76,43 @@ print("NO-GO: actions cannot be GL3(Z) conjugate despite the same t^3-1")
 print("PASS: nontrivial order-three Nielsen automorphism preserving [w] in F3")
 print("Images: a -> c a^-1 c b; b -> a^-1 c; c -> c")
 print("Geometric cap-relative realisation and Agda kernel are NOT established.")
+
+
+# G4-COCYCLE-OBSTRUCTION: the chosen peripheral conjugator has a
+# nontrivial threefold path-transfer norm, independently of a 3D model.
+# Mathematical prior art: cyclic centralizers of non-power free-group
+# elements, and the classical boundary twist/extension principle.
+q=(3,-1,3,-1)
+phi_q=subst(q,phi)
+phi2_q=subst(phi_q,phi)
+norm=red(phi2_q+phi_q+q)
+assert norm==inv(w), (norm,inv(w))
+def power(w,k):
+    base=w if k>=0 else inv(w)
+    out=()
+    for _ in range(abs(k)):
+        out=red(out+base)
+    return out
+def based_phi(word,conjugator=q):
+    return red(inv(conjugator)+subst(word,phi)+conjugator)
+assert based_phi(w)==w
+for generator in (a,b,c):
+    x=generator
+    for _ in range(3):
+        x=based_phi(x)
+    assert x==red(w+generator+inv(w)), (generator,x)
+assert based_phi(based_phi(based_phi(a)))!=a
+# Any OTHER conjugator fixing the same cyclically reduced non-power
+# parent must differ from q by w^k; the theorem giving this is the
+# classical free-group centralizer result, not a finite search.
+for k in range(-7,8):
+    qk=red(q+power(w,k))
+    assert subst(w,phi)==red(qk+w+inv(qk))
+    norm_k=red(subst(subst(qk,phi),phi)+subst(qk,phi)+qk)
+    assert norm_k==power(w,3*k-1), (k,norm_k)
+    assert norm_k, k
+print("PASS G4-COCYCLE-OBSTRUCTION: phi^2(q) phi(q) q = w^-1")
+print("PASS G4-COCYCLE-OBSTRUCTION: based phi fixes w but cube = Inn(w) on 3 generators")
+print("PASS G4-COCYCLE-OBSTRUCTION: k=-7..7 norms w^(3k-1), none trivial")
+print("BOUNDARY: all-integer no-go uses classic centralizer/root theorem, not exhaustive k sampling")
+print("BOUNDARY: Newman 1931 is a separate periodic cap-pointwise 3D obstruction")
