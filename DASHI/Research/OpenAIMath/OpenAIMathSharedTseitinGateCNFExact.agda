@@ -33,6 +33,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact a
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
+import DASHI.Mathematics.Complexity.CookLevinGridReplicationExact as Grid
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedCompilerExact as Compiler
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact as Semantics
 
@@ -307,3 +308,35 @@ placedGateComplete gate globalBits =
 -- finite global width, conjoin one placed gate, add final output literal,
 -- prove uniqueness/parsimonious count using the established numeric result.
 -- No global #SAT or OpenAI bit length claim follows yet from one gate.
+
+
+------------------------------------------------------------------------
+-- A sharper resource fact than the generic 8-row upper bound:
+-- every one of these four concrete DAG gate forms rejects exactly four
+-- of the eight possible 3-bit windows. The original Grid owner supplies
+-- the clause-length measure; this is a fixed finite reduction by computation.
+------------------------------------------------------------------------
+
+four : Nat
+four = suc (suc (suc (suc zero)))
+
+localGateCNFClauseCountFour :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates) →
+  Grid.listLength (localGateCNF gate) ≡ four
+localGateCNFClauseCountFour (Circuit.constantGate false) = refl
+localGateCNFClauseCountFour (Circuit.constantGate true) = refl
+localGateCNFClauseCountFour (Circuit.notGate source) = refl
+localGateCNFClauseCountFour (Circuit.andGate left right) = refl
+localGateCNFClauseCountFour (Circuit.orGate left right) = refl
+
+placedGateCNFClauseCountFour :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates) →
+  Grid.listLength (placedGateCNF gate) ≡ four
+placedGateCNFClauseCountFour gate =
+  localGateCNFClauseCountFour gate
+
+-- The second equality holds because renaming maps each clause without
+-- deleting or duplicating it; it may be normalized by definitional
+-- reduction in the existing fixed-width CNF carrier. Kernel pending.
