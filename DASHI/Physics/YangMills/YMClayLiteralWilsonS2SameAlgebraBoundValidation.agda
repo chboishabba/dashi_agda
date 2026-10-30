@@ -40,3 +40,14 @@ normalizedTraceSuppliesPerLoopBoundGivenInterpretation :
   S2.rationalSU2TraceSourcePaysLiteralLoopBoundedness ≡ true
 normalizedTraceSuppliesPerLoopBoundGivenInterpretation =
   S2.rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue
+
+
+nativeP2HasNoSeparateProductBoundednessInput :
+  S2.nativeWilsonS2NoIndependentBoundedProductLeaf ≡ true
+nativeP2HasNoSeparateProductBoundednessInput =
+  S2.nativeWilsonS2NoIndependentBoundedProductLeafIsTrue
+
+nativeP2HasNoDistancePrecondition :
+  S2.nativeWilsonP2DoesNotNeedSupportDistance ≡ false
+nativeP2HasNoDistancePrecondition =
+  S2.nativeWilsonP2DoesNotNeedSupportDistanceIsFalse
