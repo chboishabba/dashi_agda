@@ -1001,3 +1001,39 @@ Ibrahim/Monster fingerprint. Attribution: original residual and
 Conway/Guy source owners retained; bounded-gap input credits
 Zhang/Maynard/Polymath, and any unrefereed 2026 bounds retain
 their conditional/unverified scope.
+
+## 30 October 2026 — highest-alpha max-cut: actual Mangoldt + entire coded block + partial interval BIDI
+
+**Repository-first audit performed (NOT only PR names):**
+
+- Agda on `master`: opened `DASHI/Analysis/WeilTestSpace.agda`, `RiemannVonMangoldtSpecification.agda`, `RiemannPrimePowerCounting.agda`, `RiemannPrimePowerMangoldtIdentity.agda`, `RiemannPrimeExhaustion.agda`, `WeightedValuationVonMangoldtBoundary.agda`, `DASHI/Core/ParetoSymmetryQuotientAdmissionExact.agda`, `DASHI/Core/SnowballAttributionProvenanceInvariantExact.agda`, `DASHI/Wikimedia/IbrahimSnowballParetoFrontierExact.agda` and `IbrahimEnglishHighFlowQidBindingsExact.agda`.
+- Agda on #1408: opened actual current `TwinPrimeNat270PeriodResidualBidiExact.agda`, `TwinPrimeResidualMangoldtFiniteSumBidiExact.agda`, and `TwinPrimeMangoldtMultiPeriodConcatExact.agda`. Checked #1244/#1275/#1414 recent heads for separate source ownership; did not pretend those other branches had been merged.
+- Lean on `chboishabba/dashi_lean4` `main`: opened `README.md`, `docs/DECLARATION_LANDSCAPE.md`, `Main.lean`, `DashiPerf.lean`. It records a narrow current checked-in Lean declaration map, and much larger candidate *bundles that have not been materialized*; there is no checked-in Lean proof of the required gap-two estimate in this inventory.
+- `chboishabba/agda2lean` `main`: opened `README.md` and `lean-toolchain` (Lean 4.28), verified that elaboration snapshot / strict IR / Lean reconstruction is a translation pipeline, **not** independent proof of an unresolved source claim.
+- Checked recent commit search in all three repositories. `QID` bindings are external identity metadata, **not** mathematical proof authority. Pareto geometric symmetry is *not* admitted without semantic consumer preservation; Snowball retention does *not* prove arithmetic positivity. Original Ibrahim 3B ownership remains separate.
+
+**This turn's actual new / extended source-written Agda:**
+
+1. `TwinPrimeMangoldtMultiPeriodConcatExact.agda` now additionally proves `codeBlockRowsCorrect`, `codeBlockRowsToInterval`, `intervalToCodeBlockRows`: ANY period index and ANY number of full 270-block rows; original finite-fold owner; additive associativity required only for contiguous regrouping; no scalar commutativity.
+2. `TwinPrimeMangoldtPartialPeriodPartitionExact.agda`: `partialPeriodPartition` and reverse `partialPeriodPartitionBidi`. For **any** start / prefix / period / number of full rows / suffix with witnessed `start + prefix = 270*period`, the exact contiguous correlation sum agrees with the prefix + coded full blocks + suffix; original ordering unchanged. No claim that witness is automatically constructed for every start yet.
+3. `TwinPrimeMangoldtActualPrimePowerResidualExact.agda`: `actualMangoldtPair` uses ORIGINAL `VonMangoldtFunction.lambda` and `AllPrimeArithmetic._*S_`, `actualPairPeriodBidi` and reverse; `mangoldtPrimePowerPeriod` uses ORIGINAL `lambdaAtPrimePower`; `occurrenceMangoldtPeriod` uses ORIGINAL `PrimePowerOccurrence`; `actualPairAtPrimePower` transports precisely `Lambda(p^(k+1))=log p`, NOT k*log p. This is the exact M14 prime-power **weight** prerequisite; not the proper-prime-power counting/bounding theorem.
+4. `TwinPrimeWeilActualCorrelationPartitionExact.agda`: reuses ORIGINAL `WeilTestSpace` scalar, constructs `weilAdditive`, requires `WeilAdditiveLaws` (`leftZero` and `addAssociative`) **because those laws are absent from the original WeilTestSpace record**, and assembles `realMangoldtPartialPeriodBidi`. The supplied analytic model and laws are still explicit parameters, not generated automatically by an alias.
+
+All four modules are imported in `EverythingTOESymmetryResolved369`, `Unifier`, `Unified/Everything`; no ESD changes.
+
+**Actually executed local Python, not Agda:** 1,280 aligned partial/full-period interval identities; 183 exact **symbolic** `log(p)log(q)` monomial-Counter correlation equalities; 20,250 `Nat ↔ (period,residue)` checks; 59/209 and 59/329 no-go; plus 66 `Lambda(p^k)=log p` prime-power instances. **PASS**. The committed regression harness is `scripts/check_twin_prime_mangoldt_partial_period_exact.py`. Local `agda`, `lean`, `lake` executables unavailable; NO kernel receipt and no CI claim.
+
+**Remaining truthful proof cut (do not mark solved):**
+
+- M13-all: construct the alignment witness algorithm for *every* `start, count`, prove the residual prefix/suffix bounds, and connect it with the source-written partial-period theorem. Source-written sum identities still require Agda kernel check.
+- M11: supply a genuinely instantiated `AllPrimeArithmetic`/`VonMangoldtFunction` from the existing proof-bearing Nat prime calculus and a concrete Weil scalar with proved `WeilAdditiveLaws`, rather than a hypothetical parameter.
+- M14/M15: actual classifier/count of **proper prime powers** (k>=2) and certified uniform upper bound on their total pair-correlation contribution; the existing Riemann counting/finite enumeration owner is prior art and source of types. Do not confuse the weighted-valuation energy `p*v_p(n)` with classical von Mangoldt.
+- M16: prove the *conditional* lemma turning an independent genuine `sum Lambda(n)Lambda(n+2) >= cX` estimate, after M14/M15 errors, into certified unbounded twin pairs.
+- F02/F04/F06/G01: the **unconditional** analytic positive gap-two correlation remains an unsolved mathematical problem. Neither finite CRT, 3^5 vs 5^3, orbit matching, Monster fingerprint, nor a proof-carrying encoder discharges it.
+
+**Relevant external prior-art verification, not a proof import:**
+Stadlmann, *Bounded gaps between primes*, arXiv:2608.31126 (2026);
+Song & Yue, *Bounded Gaps Between Primes: An Upper Bound of 236*, SSRN 7408198 (September 2026);
+Teorth bounded-prime-gap record https://teorth.github.io/optimizationproblems/constants/88a.html (reported H1<=186, distinct from established/peer-reviewed);
+Wang, *Why expansion methods for Chowla do not reach twin primes*, Zenodo 23694711, 27 Oct 2026 (method-limitation **report**, not a twin-prime result).
+Preserve original Conway/Guy, Zhang/Maynard/Polymath, original Agda/Lean and Ibrahim proof/source ownership. QID = source identity only. No claim of kernel certification, independent analytic verification or a solution to twin primes.
