@@ -962,3 +962,25 @@ routeSP2LoopBoundsFromTraceGivenInterpretationIsTrue :
 routeSP2LoopBoundsFromTraceGivenInterpretationIsTrue =
   S2.rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue
 
+
+
+routeSP2NativeNoSeparateBoundedProductLeaf : Bool
+routeSP2NativeNoSeparateBoundedProductLeaf =
+  S2.nativeWilsonS2NoIndependentBoundedProductLeaf
+
+routeSP2NativeNoSeparateBoundedProductLeafIsTrue :
+  routeSP2NativeNoSeparateBoundedProductLeaf ≡ true
+routeSP2NativeNoSeparateBoundedProductLeafIsTrue =
+  S2.nativeWilsonS2NoIndependentBoundedProductLeafIsTrue
+
+routeSP2NativeNoDistanceRequirement : Bool
+routeSP2NativeNoDistanceRequirement =
+  S2.nativeWilsonP2DoesNotNeedSupportDistance
+
+routeSP2NativeNoDistanceRequirementIsFalse :
+  routeSP2NativeNoDistanceRequirement ≡ false
+routeSP2NativeNoDistanceRequirementIsFalse =
+  S2.nativeWilsonP2DoesNotNeedSupportDistanceIsFalse
+
+routeSP2NativeSameAlgebraCompilerLevel : ProofLevel
+routeSP2NativeSameAlgebraCompilerLevel = S2.nativeWilsonS2CompilerLevel
