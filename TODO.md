@@ -17281,3 +17281,17 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+
+## 2026-10-30 — PR #1407 cyclotomic Fourier 27×729 Fubini / sample max-cut (Golden Agda)
+
+See `.planning/ROADMAP.md` and `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasingMaxCut.md` §5j for proof ownership and attribution.
+
+- [x] Reuse original Agda `cube27`/`pair729`, 365/41 orbit owners, source group addition, generic coefficient convolution, Yang–Mills/NS finite Fubini methods; inspect actual dashi_lean4 NS donor code and newest #1437/#1438.
+- [x] Source-write exact Q(i) and Q(ζ5) scalar ring laws in their owners and generic `FiniteSumAlgebra`, `sumAllSwap`, `sumAllScaleLeft/Right`, `sumAllDoubleProduct`, `sumAllPair729AsDouble`, and `source729ProductExpansion` in the original coefficient-polymorphic convolution owner.
+- [x] Source-write C4/C5 character-addition compatibility for the original cyclic index tables; project both 729-term expansions into the three TOE roots.
+- [x] Independently test 64 C4 / 125 C5 exact original group-index clauses and 8/64 scalar algebra basis triples plus 5 separate 729-pair dense profiles per carrier. Existing scripts have matching new regression checks; exact-branch Python suite not run.
+- [ ] **P0 Agda kernel:** typecheck the new scalar finite-sum and character-adapter owners, then current rank-sorted 365/729 and 41/81 source candidates; fix actual errors, using original proof owners first.
+- [ ] **P0 main theorem:** prove C4 64-point retained sampled/index and C5 125-point full sampled/index tensor equations by applying 729-term expansion plus exact finite character orthogonality and normalized inverse/forward.
+- [ ] **P1 finite physics:** obtain same-object Complex3/Leray projection of the finite convolution (including Hermitian and energy constraints) from original NS triads.
+- [ ] **P2 analysis/empiricism:** R440/R736/B4 cutoff-uniform estimates, real-time Galerkin transport and real R2P2 clock systematics remain distinct; preserve original Ibrahim snowball, Monster 3B and external NS/OpenAI attribution.
