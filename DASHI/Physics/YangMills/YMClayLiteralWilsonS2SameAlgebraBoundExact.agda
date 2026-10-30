@@ -130,19 +130,19 @@ rationalSU2TraceToSameAlgebraWilsonBounds :
   SameAlgebraWilsonBoundInputs {Loop = Loop} dataSet
 rationalSU2TraceToSameAlgebraWilsonBounds source = record
   { SameAlgebraWilsonBoundInputs.loopObservable =
-      λ loop → traceObservable source (loopHolonomy source loop)
-  ; SameAlgebraWilsonBoundInputs.one = one source
-  ; SameAlgebraWilsonBoundInputs.groupRank = groupRank source
-  ; SameAlgebraWilsonBoundInputs.multiplyScalar = multiplyScalar source
+      λ loop → RationalSU2TraceGramBoundSource.traceObservable source (RationalSU2TraceGramBoundSource.loopHolonomy source loop)
+  ; SameAlgebraWilsonBoundInputs.one = RationalSU2TraceGramBoundSource.one source
+  ; SameAlgebraWilsonBoundInputs.groupRank = RationalSU2TraceGramBoundSource.groupRank source
+  ; SameAlgebraWilsonBoundInputs.multiplyScalar = RationalSU2TraceGramBoundSource.multiplyScalar source
   ; SameAlgebraWilsonBoundInputs.literalLoopBounded =
-      λ loop → traceIntervalIsGramBounded source
-        (loopHolonomy source loop)
-        (Trace.normalizedTraceBound (loopHolonomy source loop))
+      λ loop → RationalSU2TraceGramBoundSource.traceIntervalIsGramBounded source
+        (RationalSU2TraceGramBoundSource.loopHolonomy source loop)
+        (Trace.normalizedTraceBound (RationalSU2TraceGramBoundSource.loopHolonomy source loop))
   ; SameAlgebraWilsonBoundInputs.boundedMultiplyClosed =
-      boundedMultiplyClosed source
+      RationalSU2TraceGramBoundSource.boundedMultiplyClosed source
   ; SameAlgebraWilsonBoundInputs.identityObservable =
-      identityObservable source
-  ; SameAlgebraWilsonBoundInputs.identityBounded = identityBounded source
+      RationalSU2TraceGramBoundSource.identityObservable source
+  ; SameAlgebraWilsonBoundInputs.identityBounded = RationalSU2TraceGramBoundSource.identityBounded source
   }
 
 rationalSU2TraceSourcePaysLiteralLoopBoundedness : Bool
