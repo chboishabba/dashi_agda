@@ -163,7 +163,33 @@ def check_cyclotomic_ring_and_original_729_product_expansion():
         assert mul(fsum, gsum) == ordered_pair_sum
     print("PASS: Q(zeta5) 64 ring basis triples and 3 full original 729-term expansions")
 
+
+def check_source_729_character_weighted_sample_product():
+    """Every 5^3 sample; integer frequencies and original pair order."""
+    rng = Random(205001)
+    left = {k: tuple(F(rng.randrange(-3, 4), 5 + j)
+                     for j in range(4)) for k in INPUT}
+    right = {k: tuple(F(rng.randrange(-3, 4), 9 + j)
+                      for j in range(4)) for k in INPUT}
+    for x in GRID:
+        ls, rs = ZERO, ZERO
+        for p in INPUT:
+            phase = ROOTS[sum(a * b for a, b in zip(p, x)) % 5]
+            ls = add(ls, mul(left[p], phase))
+        for q in INPUT:
+            phase = ROOTS[sum(a * b for a, b in zip(q, x)) % 5]
+            rs = add(rs, mul(right[q], phase))
+        original = ZERO
+        for p in INPUT:
+            for q in INPUT:
+                k = tuple(a + b for a, b in zip(p, q))
+                phase = ROOTS[sum(a * b for a, b in zip(k, x)) % 5]
+                original = add(original, mul(mul(left[p], right[q]), phase))
+        assert mul(ls, rs) == original
+    print("PASS: C5 125 actual sample points, 729 exact character-weighted original input pairs each")
+
 def check():
+    check_source_729_character_weighted_sample_product()
     check_cyclotomic_ring_and_original_729_product_expansion()
     check_one_axis_sampled_convolution()
     for i in range(3):
