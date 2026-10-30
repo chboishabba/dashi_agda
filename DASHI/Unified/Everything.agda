@@ -1,4 +1,6 @@
 module DASHI.Unified.Everything where
+import DASHI.Combinatorics.GraphColouring369PantsSymmetryCutInvariantExact as S3Cut369
+import DASHI.Combinatorics.GraphColouring369PantsEdgeCoverageExact as EdgeChart369
 import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
 import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
 import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
