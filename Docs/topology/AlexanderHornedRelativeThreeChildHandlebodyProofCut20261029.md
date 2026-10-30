@@ -511,3 +511,58 @@ complementary meridians, nor provide an ambient S3 action. For G4,
 the remaining high-alpha dependency is now an actual point-set
 map/collar/basing path realizing either the selected-stabilizer
 boundary or orbit-indexed multi-boundary family.
+
+
+## 2026-10-30 corrected high-alpha G2/G4 max-cut: cyclic peripheral twist and periodic cap no-go
+
+**New detailed proof ledger:** [periodic cap and Nielsen cocycle obstruction](AlexanderHornedPeriodicCapCocycleMaxCut20261030.md).
+
+Direct current-source reads of original meridian Agda, original relative
+handle-slide gate, original external-sector S3, conditional HornedC3
+Lean group transport, default-branch S3 and Ibrahim snowball owners
+were performed. Checked latest #1414 polynomial, #1438 trialectic,
+#1440 Yang–Mills and dashi_lean4 #103 boundaries independently.
+The appropriate result is NOT another 27/6-carrier analogue.
+
+Source-written Agda in the canonical original boundary owner:
+\`threefoldBasingCocycleIsInverseParent\` proves the selected
+threefold path-transfer product \`phi²(q) phi(q) q = w^-1\` by
+free reduction. \`basedPhiFixesParent\`, \`basedPhiCubeOnA/B/C\`,
+and \`basedPhiCubeNotIdentityOnA\` show that correcting
+\`phi\` by the explicit conjugating \`q\` fixes the selected
+based meridian but its third iterate is \`Inn(w)\`, not identity.
+
+**Stronger all-conjugator mathematical consequence:** the source
+word \`w=abAcBC\` is cyclically reduced with one positive \`a\`,
+hence not a proper power. The classical free-group centralizer
+theorem gives \`C_F(w)=<w>\`. Every conjugator for the same
+peripheral transport has form \`q w^k\`, and the 3-fold product
+equals \`w^(3k-1)\`. No integer k makes it identity; therefore
+this PARTICULAR local Nielsen automorphism has no strictly
+order-three inner re-basing that fixes the selected based word.
+The finite Python checks sampled k=-7..7; the general theorem
+depends on the classical centralizer argument, NOT those tests.
+This does NOT refute the original unbased \`phi³=id\` theorem
+or the six-word S3 orbit family.
+
+**Separate topological Newman (1931) no-go:** on a connected compact
+handlebody, a finite-order homeomorphism fixing a nonempty
+RELATIVELY OPEN boundary cap pointwise restricts to the identity
+on the connected boundary, by Newman's periodic transformation
+theorem. The boundary-to-handlebody pi1 surjection then forces
+trivial action on handlebody pi1. A nontrivial Nielsen map
+therefore cannot be at once finite-order and pointwise cap-fixed
+on the SAME connected handlebody. A cap kept setwise is NOT a cap
+fixed pointwise, and a nonperiodic supported Nielsen map remains
+a viable geometric design target. Neither source-written Agda
+nor this paper argument constructs the actual G2 homeomorphism.
+
+**Revised geometric Pareto:** G2 demand nonperiodic supported
+relative slides rather than finite-order pointwise-fixed
+periodic Nielsen representatives. G3 embed the torus, G4
+choose (single boundary + stabilizer), (six-word S3-covariant
+family) or (weak/groupoid based action with explicit central
+twist), G5 construct nested wild stage maps, G6 identify
+the actual exterior group. Do not claim that the three-sector
+binary wild construction proves ternary G2–G6. No kernel, CI,
+or Monster/physical same-object certificate has been generated.
