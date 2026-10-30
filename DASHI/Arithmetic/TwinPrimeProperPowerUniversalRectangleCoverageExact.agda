@@ -1,0 +1,55 @@
+module DASHI.Arithmetic.TwinPrimeProperPowerUniversalRectangleCoverageExact where
+
+------------------------------------------------------------------------
+-- CT10×CT11: FOR ALL NATS U, EVERY P^k, k>=2, p>=2,
+-- WITH VALUE <=U OCCURS IN THE ACTUAL DISTINCT-FINITE
+-- RECTANGLE CANDIDATE IMAGE.
+--
+-- The numeric 2^e / floorBinaryExponent owner is imported.
+-- The numeric floor-square-root / exact enumeration owners are
+-- imported. No second Nat exponentiation, no real logarithm,
+-- no ESD edits, no positive prime correlation assumption.
+--
+-- Source-written; kernel check pending. 2026-10-30.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Nat.Base using (_≤_)
+import DASHI.Analysis.RiemannPrimePowerArithmetic as Power
+import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact as Root
+import DASHI.Arithmetic.TwinPrimeProperPowerBinaryCutoffNatExact as Cutoff
+import DASHI.Arithmetic.TwinPrimeProperPowerRectangleEnumerationExact as Rect
+
+properPowerInComputedRectangle :
+  (basePredecessor k upper : Nat) →
+  Power.natPow (suc (suc basePredecessor)) (suc (suc k))
+    ≤ upper →
+  Rect._member_
+    (Power.natPow (suc (suc basePredecessor)) (suc (suc k)))
+    (Rect.powerValueRectangle
+      (Root.floorSquareRoot upper)
+      (Cutoff.floorBinaryExponent upper))
+properPowerInComputedRectangle basePredecessor k upper bound =
+  Rect.properPowerCoveredByRootRectangle
+    basePredecessor k upper
+    (Cutoff.floorBinaryExponent upper)
+    bound
+    (Cutoff.properPowerExponentBelowCutoff
+      basePredecessor k upper bound)
+
+properPowerInDedupComputedRectangle :
+  (basePredecessor k upper : Nat) →
+  Power.natPow (suc (suc basePredecessor)) (suc (suc k))
+    ≤ upper →
+  Rect._member_
+    (Power.natPow (suc (suc basePredecessor)) (suc (suc k)))
+    (Rect.dedupPowerValues
+      (Rect.powerValueRectangle
+        (Root.floorSquareRoot upper)
+        (Cutoff.floorBinaryExponent upper)))
+properPowerInDedupComputedRectangle basePredecessor k upper bound =
+  Rect.dedupPreservesMember
+    (Rect.powerValueRectangle
+      (Root.floorSquareRoot upper)
+      (Cutoff.floorBinaryExponent upper))
+    (properPowerInComputedRectangle basePredecessor k upper bound)
