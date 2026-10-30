@@ -53,3 +53,12 @@ monitor surface.
   landed through `walkObjectsSucMemberByVertices` and
   `walkObjectExtendMemberByVertices` in
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+
+
+## 2026-10-30 — PR #1407 source-identical finite Fourier 729-product Fubini (kernel pending)
+
+- Directly audited actual `dashi_agda` C3/C4/C5 Fourier, 27/729 pair/orbit, original coefficient-polymorphic convolution, Yang–Mills Fubini and NS rank/permutation code; directly read `dashi_lean4` NS semantic contract and zero-padding adversary. Checked new PR #1437/#1438 Agda owner files and #1433 NS boundary.
+- Added **source-written** C4/Q(i) and C5/Q(ζ5) ring algebra laws plus finite source-group character-addition lemmas; original C3 Fourier source correctly flags that diagonalization is **not** already the group-convolution theorem.
+- Added `FiniteSumAlgebra` and generic finite-sum add, scale, swap, append, map, concat-map and 27×27→729 pair-product expansion to **existing** `R2P227729BilinearCyclotomicPadCutExact.agda` instead of duplicating the original indexed operator. Instantiated over both scalar carriers and exposed named theorem candidates in all three TOE roots.
+- Independently checked the original Agda C4/C5 scalar-group tables (64 and 125 cases, zero mismatch); local exact `Fraction` verified 8 Gaussian and 64 fifth-cyclotomic ring basis triples and five distinct dense 729-pair inputs per carrier. Extended existing Python diagnostics in place, without claiming an exact-checkout run.
+- Updated `.planning/ROADMAP.md`, `TODO.md` and paper §5j. **Agda kernel was not run and CI was neither changed nor run**; source-written proofs are not certified. Remaining C4/C5 3D sampled↔indexed identities, NS physical R440/R736/B4, original external forced C/D attribution, R2P2 calibration and Ibrahim Monster 3B same-object evidence remain strictly separate.
