@@ -214,3 +214,16 @@ QIDs and 2026 directed-sheaf sources are attribution/comparison only.
 - [ ] Check the new inductive distinctness and 54-slot code census
   in Agda; separately prove generic slotId/endpoint injectivity
   if required by a later consumer.
+
+## C3 source/target orbit-sum closure (source-written)
+
+- [x] Construct C3-invariant Nat-weight orbit sum for any
+  existing three-vertex weighted directed graph.
+- [x] Compute explicit circulant 3×3 image and preserve
+  original asymmetric C3 obstruction and not-same-object witness.
+- [x] Reuse existing source+target directed stalk and restrictions
+  for a generic compatible section with pointwise C3 transports.
+- [x] Mirror exact finite theorem boundary downstream in Lean and
+  consume in the canonical TOE/Ibrahim import graph.
+- [ ] Golden Agda and Lean kernel checks, full import safety, and
+  independently justified equivariant triadic face/pants gluing.
