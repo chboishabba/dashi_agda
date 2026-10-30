@@ -24,6 +24,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as NativeP2
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as P2Trace
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 
@@ -753,3 +754,22 @@ balabanRouteSP2NativeNoDistanceIsFalse =
 
 balabanRouteSP2NativeCompilerLevel : ProofLevel
 balabanRouteSP2NativeCompilerLevel = P2Trace.nativeWilsonS2CompilerLevel
+
+
+------------------------------------------------------------------------
+-- R445 SAME marked-source moment -> native preferred physical measure
+-- -> already-owned three P2 convergence limits (no second moment source).
+------------------------------------------------------------------------
+
+balabanRouteSP2R445IndependentMomentRequired : Bool
+balabanRouteSP2R445IndependentMomentRequired =
+  NativeP2.p2NativeIndependentMomentSelectionRequired
+
+balabanRouteSP2R445IndependentMomentRequiredIsFalse :
+  balabanRouteSP2R445IndependentMomentRequired ≡ false
+balabanRouteSP2R445IndependentMomentRequiredIsFalse =
+  NativeP2.p2NativeIndependentMomentSelectionRequiredIsFalse
+
+balabanRouteSP2R445NativeCompilerLevel : ProofLevel
+balabanRouteSP2R445NativeCompilerLevel =
+  NativeP2.p2CanonicalMarkedSourceCompilerLevel
