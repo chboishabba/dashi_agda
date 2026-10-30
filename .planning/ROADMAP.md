@@ -99,6 +99,10 @@ and \`Docs/topology/AlexanderHornedABCSixPermutationOrbit20261030.md\`.
   **No kernel success is currently claimed; CI intentionally omitted.**
 - [ ] G2: cap-collar-disjoint actual PL homeomorphism and inverse.
 - [ ] G3: embedded once-punctured torus in actual child complement.
+- [x] Check the six source-owned genus-one commutator presentations,
+  all 36 algebraic S3 transport cases, and the 36-case equivalence
+  between middle-child label p(b) and unoriented parent class.
+  These are finite source-written Agda, not 3D G3/G4 completion.
 - [ ] G4: choose and prove either one fixed parent class with its
   stabilizer and actual conjugating paths, OR a geometrically
   implemented S3-indexed six-boundary family with based naturality.
