@@ -417,3 +417,10 @@ noUnconditionalClayPromotion :
   Full.unconditionalClayPromotion ≡ false
 noUnconditionalClayPromotion =
   Full.unconditionalClayPromotionIsFalse
+
+
+routeSH1NoDuplicateAbsoluteMagnitude :
+  Full.routeSH1AbsoluteMagnitudeIndependentPhysicalLeaf ≡ false
+routeSH1NoDuplicateAbsoluteMagnitude =
+  Full.routeSH1AbsoluteMagnitudeIndependentPhysicalLeafIsFalse
+
