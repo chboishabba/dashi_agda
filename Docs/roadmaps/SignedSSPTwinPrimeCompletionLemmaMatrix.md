@@ -1299,3 +1299,68 @@ M16 **correlation-to-real certified count jumps**,
 F02/F04/F06 unconditional analytic gap-two estimate,
 G06 full safe kernel proof. Do not mark twin infinitude
 unconditional from the conditional count-jump field.
+
+## 30 October 2026 — M14 exhaustive actual Mangoldt support + proper-power gap-two no-go
+
+**Source-written, kernel-pending:** 
+`DASHI/Arithmetic/TwinPrimeMangoldtExhaustiveSupportCaseExact.agda`.
+
+- Import and case-split `RiemannVonMangoldtSpecification.VonMangoldtAt`
+  through `VonMangoldtFunction.lambdaSpecified` directly.
+- `MangoldtSupportCase` has three **exhaustive** alternatives:
+  `exponentOne` with original n=p^1 witness,
+  `exponentAtLeastTwo` with original n=p^(k+2) witness,
+  `noPrimePower` with original excluded-all-prime-powers witness.
+- `mangoldtValueAtExponentOne`,
+  `mangoldtValueAtProperPower`,
+  `mangoldtValueOutside` reuse the ORIGINAL
+  `specificationSingleValued` and constructors to preserve
+  exact Weil scalar weights `log p, log p, 0`.
+- `BothEndpointsClassified` and `allPairSupportCases`
+  provide every logical 3×3 pair-support case for
+  (n,n+2). This is a classification of **support**,
+  not an identification with the 3×3×3 SSP geometry.
+
+**Explicit soundness counterexample:**
+`DASHI/Arithmetic/TwinPrimeMangoldtProperPower25_27NoGoExact.agda`
+reuses `RiemannPrimePowerArithmetic.natPow`,
+`FiniteTwinSieveFactorableLiftExact.TwoNontrivialFactors`,
+`Data.Nat.Primality.Composite` and the genuine
+`TwinPrimeSixWheelExact.TwinPrimeAt`.
+It records `25=5²`, `27=3³`,
+`25+2=27`, proves actual 25/27 composite
+certificates and refutes `TwinPrimeAt 25`.
+Hence even **both** endpoints being proper prime powers
+at gap two cannot establish genuine twin primality.
+A separate analytic scalar with positive log weights
+would be needed to formally state nonzero Mangoldt
+product; this module does not invent it.
+
+**Actually executed local Python:** 100,000 consecutive
+paired-support classifications, all 9 combinations
+observed including `(proper,proper)`, PASS.
+Committed `scripts/check_twin_prime_mangoldt_support_nine_cases.py`.
+Prior 3,010 total two-case M13 interval checks and
+70,001 true certified count-jump checks also PASS.
+All are finite model evidence, NOT Agda kernel receipts.
+
+**Status adjustment:** M14 exhaustive support classification and
+term-weight identities are now source-written. **OPEN**
+is finite-count multiplicity, extraction of only true prime/prime
+contributions, and the uniform proper-power weighted
+pair-error estimate M15. M16 remains conditional on a
+genuinely new positive correlation-to-count-jump theorem.
+F02/F04/F06/G01 remain mathematically OPEN;
+do NOT label this a proof of twin-prime infinitude.
+All new modules are imported into all three TOE roots.
+
+**Highest-alpha finite next cut:** kernel-check the complete
+M13 source chain, then prove the finite weighted pair
+decomposition by the 3×3 cases, with explicit zero-product
+and addition laws; prove elementary proper-power counting
+and logarithmic error bounds. **Research next cut:**
+an unconditional gap-two correlation estimate overcoming
+the sieve parity barrier. QIDs remain identification metadata,
+Ibrahim Monster 3B ownership unchanged, original Pareto
+semantic-admission and Snowball provenance controls preserved.
+No protected ESD edits and no CI claimed.
