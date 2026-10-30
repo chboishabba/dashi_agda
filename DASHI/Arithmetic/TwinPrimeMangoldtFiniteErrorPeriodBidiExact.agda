@@ -26,6 +26,9 @@ open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannVonMangoldtSpecification as VM
+import DASHI.Analysis.ChebyshevPrimeCounting as Cheb
+import DASHI.Analysis.NatPrimeCountingInstance as PrimeNat
+import DASHI.Arithmetic.TwinPrimeMangoldtPrimeOneCertifiedBidiExact as Certified
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as Sum
 import DASHI.Arithmetic.TwinPrimeMangoldtActualPrimePowerResidualExact as Actual
 import DASHI.Arithmetic.TwinPrimeWeilActualCorrelationPartitionExact as WeilBridge
@@ -78,3 +81,50 @@ finitePrimeErrorToCodedPeriod space arithmetic mangoldt monoid
     splitLaws start count =
   sym (finiteCodedPeriodToPrimeError
     space arithmetic mangoldt monoid splitLaws start count)
+
+------------------------------------------------------------------------
+-- M16 ADMISSION GATE: THE EXPONENT-ONE WEIGHTS ARE GENUINE
+-- NAT-PRIME WEIGHTS ONLY AFTER THE ORIGINAL CHEBYSHEV OWNERSHIP
+-- BRIDGE HAS BEEN SUPPLIED.
+--
+-- The underlying additive identity is unchanged. The additional
+-- parameter is the true all-prime-carrier -> NatPrime proof; it
+-- is NOT produced from a QID, a finite sieve survivor or an
+-- Ibrahim/Monster/word-orbit label.
+------------------------------------------------------------------------
+
+finiteCodedPeriodToCertifiedPrimeError :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (theta : Cheb.PrimeLogWeightKernel space PrimeNat.natPrimePredicate)
+  (ownership : Cheb.ChebyshevPrimeOwnership
+    space PrimeNat.natPrimePredicate theta arithmetic)
+  (monoid : WeilBridge.WeilAdditiveLaws space)
+  (splitLaws : Split.AdditiveInterchangeLaws space) →
+  (start count : Nat) →
+  Plan.planCorrelationSum (WeilBridge.weilAdditive space)
+    (Actual.actualMangoldtPair space arithmetic mangoldt)
+    start count (Total.completeIntervalPlan start count)
+  ≡ Weil.WeilTestSpace._+S_ space
+      (Sum.sumInterval (WeilBridge.weilAdditive space)
+        (Split.primeOnlyAtNat space arithmetic mangoldt) start count)
+      (Sum.sumInterval (WeilBridge.weilAdditive space)
+        (Split.nonPrimeErrorAtNat space arithmetic mangoldt) start count)
+finiteCodedPeriodToCertifiedPrimeError
+    space arithmetic mangoldt theta ownership monoid splitLaws
+    start count =
+  finiteCodedPeriodToPrimeError
+    space arithmetic mangoldt monoid splitLaws start count
+
+-- The owner provides an actual two-way typed proof. This witness is
+-- carried explicitly rather than inferred from numeric coincidence.
+primeOneOwnerBidi :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (theta : Cheb.PrimeLogWeightKernel space PrimeNat.natPrimePredicate)
+  (ownership : Cheb.ChebyshevPrimeOwnership
+    space PrimeNat.natPrimePredicate theta arithmetic)
+  (n : Nat) →
+  Certified.PrimeOneTwinBidi space arithmetic n
+primeOneOwnerBidi = Certified.primeOneTwinBidi
