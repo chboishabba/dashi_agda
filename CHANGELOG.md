@@ -53,3 +53,11 @@ monitor surface.
   landed through `walkObjectsSucMemberByVertices` and
   `walkObjectExtendMemberByVertices` in
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+
+## 2026-10-30 — twin-prime CT11-to-M15 exact support bridge (PR #1408)
+
+- Added `DASHI.Arithmetic.TwinPrimeMangoldtProperPowerCandidateCoverageExact`: real support -> computed duplicate-free power image, nonzero residual endpoint inclusion and exact zero-if-outside theorem, using prior owners.
+- Constructed the numeric base ≥2 bridge from the original certified Chebyshev Nat-prime carrier; rejected any assumption that abstract `toNat` alone implies primality.
+- Imported through `DASHI/EverythingTOESymmetryResolved369.agda`, `DASHI/Unifier.agda` and `DASHI/Unified/Everything.agda`; updated roadmap, paper and TODO; committed a finite overcount/support adversary regression.
+- Checked actual Agda/Lean and recent PR sources, not just PR descriptions; original authors and semantic admission gates retained, no ESD modifications.
+- **Evidence boundary:** source-written and independent numeric oracle only. Agda/Lean kernel closure, complete ordered scalar, CT13–CT14 error asymptotic and CT15 positivity remain unproved. CI not run.
