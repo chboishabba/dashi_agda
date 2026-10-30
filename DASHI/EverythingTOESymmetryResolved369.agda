@@ -1582,3 +1582,13 @@ toeBalabanRouteSP2NativeNoDistancePayment =
 toeBalabanRouteSP2NativeCompilerLevel : ProofLevel
 toeBalabanRouteSP2NativeCompilerLevel =
   BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
+
+
+toeBalabanRouteSP2R445NoSecondMoment :
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequired ≡ false
+toeBalabanRouteSP2R445NoSecondMoment =
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+toeBalabanRouteSP2R445CompilerLevel : ProofLevel
+toeBalabanRouteSP2R445CompilerLevel =
+  BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
