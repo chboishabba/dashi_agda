@@ -141,7 +141,30 @@ def check_one_axis_sampled_convolution():
             one_axis_indexed_convolution(left, right))
     print("PASS: C5 all 25 monomial basis pairs and 12 independent dense Q(zeta5) one-axis pairs")
 
+
+def check_cyclotomic_ring_and_original_729_product_expansion():
+    """All 64 basis triples plus three actual 27^2 pair enumerations."""
+    basis = [tuple(F(int(j == i)) for j in range(4)) for i in range(4)]
+    for a, b, c in product(basis, repeat=3):
+        assert mul(mul(a, b), c) == mul(a, mul(b, c))
+        assert mul(a, add(b, c)) == add(mul(a, b), mul(a, c))
+        assert mul(add(a, b), c) == add(mul(a, c), mul(b, c))
+    for seed in range(3):
+        f, g = random_field(7100 + seed), random_field(7200 + seed)
+        fsum = ZERO
+        gsum = ZERO
+        for k in INPUT:
+            fsum = add(fsum, f[k])
+            gsum = add(gsum, g[k])
+        ordered_pair_sum = ZERO
+        for p in INPUT:
+            for q in INPUT:
+                ordered_pair_sum = add(ordered_pair_sum, mul(f[p], g[q]))
+        assert mul(fsum, gsum) == ordered_pair_sum
+    print("PASS: Q(zeta5) 64 ring basis triples and 3 full original 729-term expansions")
+
 def check():
+    check_cyclotomic_ring_and_original_729_product_expansion()
     check_one_axis_sampled_convolution()
     for i in range(3):
         left, right = random_field(5100 + i), random_field(5200 + i)
