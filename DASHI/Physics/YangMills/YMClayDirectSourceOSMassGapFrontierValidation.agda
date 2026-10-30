@@ -33,3 +33,14 @@ osReconstructionStillRequired =
 noClayPromotion :
   Direct.clayPromotion ≡ false
 noClayPromotion = Direct.clayPromotionIsFalse
+
+
+------------------------------------------------------------------------
+-- The H1-to-R296 bridge reuses the canonical R313 theorem owner.
+------------------------------------------------------------------------
+
+h1MagnitudeIsNotASecondPhysicalLeaf :
+  Direct.routeSH1ReusesR313MagnitudeCompiler ≡ false
+h1MagnitudeIsNotASecondPhysicalLeaf =
+  Direct.routeSH1ReusesR313MagnitudeCompilerIsFalse
+
