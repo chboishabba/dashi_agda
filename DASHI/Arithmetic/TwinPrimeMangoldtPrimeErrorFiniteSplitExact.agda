@@ -19,7 +19,7 @@ module DASHI.Arithmetic.TwinPrimeMangoldtPrimeErrorFiniteSplitExact where
 -- All theorem terms source-written, Agda kernel pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_,_)
 open import Relation.Binary.PropositionalEquality using (cong₂; trans; sym)
