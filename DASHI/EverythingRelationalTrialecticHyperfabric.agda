@@ -1,4 +1,5 @@
 module DASHI.EverythingRelationalTrialecticHyperfabric where
+import DASHI.Reasoning.TrialecticC3WeightedOrbitSymmetrizationExact as C3Weighted369
 import DASHI.Combinatorics.GraphColouring369PantsSymmetryCutInvariantExact as S3Cut369
 import DASHI.Combinatorics.GraphColouring369PantsEdgeCoverageExact as EdgeChart369
 import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
