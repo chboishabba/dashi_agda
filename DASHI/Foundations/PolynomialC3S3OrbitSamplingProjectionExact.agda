@@ -204,3 +204,44 @@ projectS3AnyMatchesOriginal :
   (f : Q.Field27) (x : Q.Code27) →
   projectS3Any f x ≡ projectS3 f x
 projectS3AnyMatchesOriginal f x = refl
+
+------------------------------------------------------------------------
+-- O80: the complementary C3 descent/retraction converse.
+-- The generic rotation induction transports the ORIGINAL 27-code witness,
+-- so no second classifier, quotient or new rational arithmetic is needed.
+------------------------------------------------------------------------
+
+rotationPreservesAny :
+  ∀ {A : Set} (f : Q.Code27 → A) →
+  ((x : Q.Code27) →
+    f (Shape.conjugateCode Shape.permRotate x) ≡ f x) →
+  (r : Q.Rotation3) (x : Q.Code27) →
+  f (Q.actRotation3 r x) ≡ f x
+rotationPreservesAny f invariant Q.phaseZero x = refl
+rotationPreservesAny f invariant Q.phaseOne x = invariant x
+rotationPreservesAny f invariant Q.phaseTwo x =
+  trans (invariant (Shape.conjugateCode Shape.permRotate x))
+    (invariant x)
+
+projectC3AnyFixesInvariant :
+  ∀ {A : Set} (f : Q.Code27 → A) →
+  ((x : Q.Code27) →
+    f (Shape.conjugateCode Shape.permRotate x) ≡ f x) →
+  (x : Q.Code27) → projectC3Any f x ≡ f x
+projectC3AnyFixesInvariant f invariant x =
+  sym (trans
+    (cong f (Q.codeFromClassRepresentative x))
+    (rotationPreservesAny f invariant (Q.rotationToRepresentative x)
+      (Q.representative11 (Q.classify11 x))))
+
+-- Sampling commutes with EVERY codomain change of values, not just
+-- trit or rational arithmetic; this is the precise naturality law.
+projectC3AnyNaturality :
+  ∀ {A B : Set} (h : A → B) (f : Q.Code27 → A) (x : Q.Code27) →
+  projectC3Any (λ y → h (f y)) x ≡ h (projectC3Any f x)
+projectC3AnyNaturality h f x = refl
+
+projectS3AnyNaturality :
+  ∀ {A B : Set} (h : A → B) (f : Q.Code27 → A) (x : Q.Code27) →
+  projectS3Any (λ y → h (f y)) x ≡ h (projectS3Any f x)
+projectS3AnyNaturality h f x = refl
