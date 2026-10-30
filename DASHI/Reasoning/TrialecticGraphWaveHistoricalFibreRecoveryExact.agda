@@ -304,3 +304,46 @@ shiftRetainsFutureWaveConsumer nextFrame h = refl
 -- At the newer future time the actual nextFrame is needed. Neither
 -- the C3 orbit alone nor the cardinality of a 27-voxel chart
 -- determines that source update.
+
+------------------------------------------------------------------------
+-- INHABIT THE ORIGINAL HistoryTimeIndexedConsumerFibreExact surface.
+-- The admissible hidden states are those matching the full retained
+-- historical observation. This is explicitly CONSUMER-RELATIVE:
+-- the fibre identifies every selected directed weight at each time.
+-- Nothing assumes coarse orbit averages are separately sufficient.
+------------------------------------------------------------------------
+
+historicalLiveFibre :
+  RetainedGraphHistory -> HistoryTime ->
+  RetainedGraphHistory -> Set
+historicalLiveFibre reference t candidate =
+  retainedObserver candidate ≡ retainedObserver reference
+
+historyTimeConsumerSurface : History.HistoryTimeConsumerFibreSurface
+historyTimeConsumerSurface = record
+  { History = RetainedGraphHistory
+  ; Time = HistoryTime
+  ; Hidden = RetainedGraphHistory
+  ; Decision = Nat
+  ; ConsumerVersion = HistoryTime
+  ; liveFibreAt = historicalLiveFibre
+  ; consumerAt = λ history time hidden -> selectedConsumerAt time hidden
+  ; consumerVersionAt = λ history time -> time
+  ; fibreReading = "original C3 orbit plus exact complete three-frame history"
+  ; consumerReading = "actual selected directed-source weight at indexed time"
+  ; versionReading = "time-indexed declared consumer version"
+  }
+
+historyTimeConsumerClosedAt :
+  (reference : RetainedGraphHistory) (t : HistoryTime) ->
+  History.ConsumerClosedAt historyTimeConsumerSurface reference t
+historyTimeConsumerClosedAt reference t left right leftIn rightIn =
+  historicalConsumerRecovery t left right
+    (trans leftIn (sym rightIn))
+
+-- A real producer refinement of the full-history fibre can now use
+-- the original producerRefinementPreservesConsumerClosure theorem,
+-- provided its typed version/consumer compatibility evidence.
+-- No consumer revision authority or time evolution is silently
+-- fabricated; this instance freezes the selected consumer within
+-- each declared time coordinate.
