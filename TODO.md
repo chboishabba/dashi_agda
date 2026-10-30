@@ -17281,3 +17281,16 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+## 2026-10-30 — CT11/M15 twin-prime max-cut status (#1408)
+
+- [x] Source-write actual Mangoldt proper-power support -> CT11 computed deduplicated candidate image; support exclusion in the other direction (new `TwinPrimeMangoldtProperPowerCandidateCoverageExact`).
+- [x] Source-write positive Nat base readout from original Chebyshev certified prime ownership, using standard-library nonprimality at 0 and 1; no extra global axiom. Source **not kernel-verified**.
+- [x] Execute independent finite integer oracle: 1,997 upper bounds, 1,995,003 shifted pairs, no support misses. Commit corresponding (not separately run) regression script; include 36=6² overcount adversary.
+- [ ] CT01: Agda --safe compiler check and repair through three TOE roots, strict 0 postulates/holes/unsafe termination; Lean translation only after golden proof.
+- [ ] CT02: construct the real all-prime-carrier, not just conditional ownership.
+- [ ] CT11/13: finite interval-position support cardinality bound <=2*properPowerCandidateDistinctCount and certified error-sum domination.
+- [ ] CT12/14: concrete ordered real log weights, bound error O(sqrt U log³ U) and prove o(X).
+- [ ] CT15: prove, do not assume, the unconditional positive gap-two shifted Mangoldt correlation with signed residual control.
+- [ ] CT16–CT18: extract arbitrary certified twin pairs from positive prime-only sum; prove genuine infinitude without premises.
+- [ ] Preserve Ibrahim original Monster-3B, Pareto/Snowball, QID and meta-introspector provenance; no same-object promotion, no protected ESD edits.
