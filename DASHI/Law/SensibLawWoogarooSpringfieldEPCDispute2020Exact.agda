@@ -15,6 +15,7 @@ import DASHI.Law.SensibLawWoogarooSpringfieldStatutoryInfrastructureGate20261030
 import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact as Gas
 import DASHI.Law.SensibLawWoogarooIbrahimDeweyQidLegalAtomExact as Ibrahim
 import DASHI.Wikimedia.IdentifierExact as Identifier
+import DASHI.Law.SensibLawWoogaroo9281NegotiatedApprovedGeometryExact as CouncilGeometry
 
 ------------------------------------------------------------------------
 -- 2020 CHERISH / SPRINGFIELD CITY GROUP EPC CONTRACTUAL DISPUTE
@@ -259,3 +260,62 @@ orderedEvidenceCuts =
   actualTransferAndReceiptLedger ∷
   siteParcelAndCreekGeometry ∷
   current20198575GasServicingSchedule ∷ []
+
+------------------------------------------------------------------------
+-- 2020 Opossum Creek historic trunk sewer vs 2026 Council EXTERNAL SEWER
+-- Reuse the original stamped 9281 geometry carrier, not a copied plan index.
+------------------------------------------------------------------------
+
+approved2026CouncilExternalSewer : CouncilGeometry.ApprovedPlanCarrierReceipt
+approved2026CouncilExternalSewer = CouncilGeometry.negotiated9281ApprovedPlans
+
+historical2020HearingCarrier : Source.AttributedSource
+historical2020HearingCarrier = qld2020Hearing
+
+-- Both source objects mention the Opossum Creek / O'Dwyer corridor, but
+-- different dates and asset descriptions cannot pay exact pipeline identity.
+data SewerCorridorWorld : Set where
+  twoDistinctSewerAssetSegments : SewerCorridorWorld
+  samePipeEstablishedByMissingAsBuilt : SewerCorridorWorld
+
+data SharedCreekName : Set where
+  namedOpossumOdwyerArea : SharedCreekName
+
+data ActualSewerSegmentIdentity : Set where
+  pipelineIdentityStillOpen : ActualSewerSegmentIdentity
+  exactGeoreferencedPipeIdentityPaid : ActualSewerSegmentIdentity
+
+observedSharedCreek : SewerCorridorWorld → SharedCreekName
+observedSharedCreek twoDistinctSewerAssetSegments = namedOpossumOdwyerArea
+observedSharedCreek samePipeEstablishedByMissingAsBuilt = namedOpossumOdwyerArea
+
+pipelineIdentity : SewerCorridorWorld → ActualSewerSegmentIdentity
+pipelineIdentity twoDistinctSewerAssetSegments = pipelineIdentityStillOpen
+pipelineIdentity samePipeEstablishedByMissingAsBuilt = exactGeoreferencedPipeIdentityPaid
+
+distinctPipeIdentity :
+  pipelineIdentity twoDistinctSewerAssetSegments ≡
+  pipelineIdentity samePipeEstablishedByMissingAsBuilt → ⊥
+distinctPipeIdentity ()
+
+creekNameAndApprovedWorksDoNotIdentifyHistoricPipe :
+  INF.FactorsThrough observedSharedCreek pipelineIdentity → ⊥
+creekNameAndApprovedWorksDoNotIdentifyHistoricPipe =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness twoDistinctSewerAssetSegments
+      samePipeEstablishedByMissingAsBuilt refl distinctPipeIdentity)
+
+data PipeAcquisitionTarget : Set where
+  council9281ApprovedExternalSewerCAD : PipeAcquisitionTarget
+  quuAsBuilt2020ExistingTrunkSewer : PipeAcquisitionTarget
+  1998SIAAndCurrentSewerServicingAgreements : PipeAcquisitionTarget
+  2026ParcelAndStageGeometry : PipeAcquisitionTarget
+  sameActionAndPrestartEvidence : PipeAcquisitionTarget
+
+samePipePareto : List PipeAcquisitionTarget
+samePipePareto =
+  council9281ApprovedExternalSewerCAD ∷
+  quuAsBuilt2020ExistingTrunkSewer ∷
+  1998SIAAndCurrentSewerServicingAgreements ∷
+  2026ParcelAndStageGeometry ∷
+  sameActionAndPrestartEvidence ∷ []
