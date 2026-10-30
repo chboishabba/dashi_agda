@@ -17281,3 +17281,31 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+## 2026-10-30 — Trialectic 369 weighted digraph / native pants finite max-cut
+
+**Already source-written (not kernel-certified):** nine-position weighted
+directed matrix bridge; different attached faces on identical full graph;
+native 27-grid one-step adjacency; pants graph isomorphism candidate;
+27-cell 2-colour checkerboard and singleton exclusion; six S3 coordinate
+permutations; C3 and seam reflection graph homs; dedicated Lean mirror;
+finite semantics script; TOE and Ibrahim snowball imports.
+
+**P0** Run exact-head Agda `--safe` with no postulates, metas, termination
+escapes; inspect actual import chain, repair any errors, log exact command
+and result. Only then run pinned Lean/mirror. No CI required.
+
+**P1** Supply domain-specific weight→branch-channel interpretation and
+actual pants `InterfaceMatch`; keep `TypedHyperfabric` restrictions,
+source provenance, time, identity and authority constraints first class.
+
+**P2** Reuse and actually inhabit a `FaceMediationLaw` and
+`SecondOrderCellGluing` where source-paid, distinguishing the
+independent triadic face from edges, two-step walks and local colouring.
+
+**P3** Continue Pareto/snowball across this proven finite surface without
+promoting inherited paper claims, six permutations, Monster3B character
+fingerprints or a three-node asymmetric weight fixture to a physical,
+VOA or smooth-surface theorem.
+
+See `Docs/TrialecticWeightedDirectedGraph369.md`.
