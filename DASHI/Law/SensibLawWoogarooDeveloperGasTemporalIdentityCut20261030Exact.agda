@@ -70,6 +70,29 @@ stocklandSpringview = Source.mkNoDOISource
   "First-party page: Stockland describes itself as proposed developer, not registered site owner; says private third-party freehold and no confirmed construction start. Neither proves exact title holder, option terms or gas supply."
   Source.publicAttribution
 
+
+priorVillageOneTransfer2017 : Source.AttributedSource
+priorVillageOneTransfer2017 = Source.mkNoDOISource
+  "Commonwealth Department of the Environment and Energy / Rod Whyte"
+  "Signed EPBC 2014/7306 section 145B Notice of Transfer of Approval, 16 June 2017"
+  "Original instrument reproduced in Stockland-hosted 2019 Kalina compliance report, PDF page 38"
+  "16 June 2017"
+  "https://www.stockland.com.au/globalassets/residential/qld/kalina/news-and-events/annual-compliance-report-to-8-july-2019.pdf"
+  Source.governmentSource
+  "Original signed transfer face names Cherish Enterprises Pty Ltd ACN 052 055 811 as transferor and Stockland Development Pty Limited ACN 000 664 835 as transferee for VILLAGE ONE, EPBC 2014/7306, Lot 43 on SP2442290. This does not transfer EPBC 2019/8575."
+  Source.publicAttribution
+
+council2023DocumentIndex : Source.AttributedSource
+council2023DocumentIndex = Source.mkNoDOISource
+  "Ipswich City Council"
+  "6243/2023/LAP application document index, entries 316 and 318"
+  "Official council document index, original signed document faces not yet authenticated"
+  "29 June 2023"
+  "https://edoc.ipswich.qld.gov.au/objective/?env=iccecm&id=1596235&plat=pwy"
+  Source.governmentSource
+  "Same planning application index separately lists Stockland Development Pty Limited submission consent and Cherish Enterprises Pty Ltd landowner-consent documents; file labels are not signatures, verified parcel title or corporate transaction terms."
+  Source.publicAttribution
+
 networkLevelRegister : Source.AttributedSource
 networkLevelRegister = Demand.allgasCurrentOwnership
 
@@ -84,7 +107,8 @@ sourceAtlas = Source.mkSourceAtlas
   "Woogaroo 2019/8575 developer / 2005 gas / 2025 portfolio / 2026 asset temporal cut"
   "DASHI.Law.SensibLawWoogarooDeveloperGasTemporalIdentityCut20261030Exact"
   (hansard2005 ∷ april2025Diary ∷ cherishPublicCommentNotice ∷
-   stocklandSpringview ∷ networkLevelRegister ∷ [])
+   stocklandSpringview ∷ priorVillageOneTransfer2017 ∷
+   council2023DocumentIndex ∷ networkLevelRegister ∷ [])
   "Retains source author, time and claim scope; AEMC network ownership is reused from the existing Agda owner. A repeated report is not an independent evidence producer."
 
 data LegalRole : Set where
@@ -101,9 +125,13 @@ data LegalRole : Set where
 data ProjectCoordinate : Set where
   epbc20198575 : ProjectCoordinate
   scenic20208651 : ProjectCoordinate
+  villageOne20147306 : ProjectCoordinate
 
 distinctEPBCProjects : epbc20198575 ≡ scenic20208651 → ⊥
 distinctEPBCProjects ()
+
+villageOneIsNotCurrentAction : villageOne20147306 ≡ epbc20198575 → ⊥
+villageOneIsNotCurrentAction ()
 
 record ScopedRole : Set where
   constructor scoped-role
@@ -222,3 +250,60 @@ assetChainCut = priority-cut assetTransferSchedulesAndRevenueAllocation false fa
 
 federalApprovalCut : PriorityCut
 federalApprovalCut = priority-cut epbcSignedApprovalConditionsAnd95B95C false false
+
+
+-- A genuine 2017 Cherish -> Stockland Commonwealth approval transfer exists
+-- for a different action. It is stronger than proximity but not a current
+-- assignment of the 2019/8575 approval, contract or land title.
+record PriorApprovalTransfer : Set where
+  constructor prior-approval-transfer
+  field
+    project : ProjectCoordinate
+    transferorACN : String
+    transfereeACN : String
+    instrument : Source.AttributedSource
+    datedTransferFacePaid : Bool
+    current20198575TransferPaid : Bool
+open PriorApprovalTransfer public
+
+historicalCherishStocklandTransfer : PriorApprovalTransfer
+historicalCherishStocklandTransfer = prior-approval-transfer
+  villageOne20147306
+  "052055811"
+  "000664835"
+  priorVillageOneTransfer2017
+  true
+  false
+
+-- This proof is about the epistemic limit of transferring information
+-- between two distinct action identifiers, not about denying any later deal.
+data TransferWorld : Set where
+  priorTransferWithoutNewContract : TransferWorld
+  priorTransferWithSeparatelyFoundNewContract : TransferWorld
+
+data HistoricalTransferObserved : Set where
+  cherishtoStocklandVillageOne2017 : HistoricalTransferObserved
+
+data CurrentActionContract : Set where
+  currentContractUnacquired : CurrentActionContract
+  currentContractDocumented : CurrentActionContract
+
+historical : TransferWorld → HistoricalTransferObserved
+historical priorTransferWithoutNewContract = cherishtoStocklandVillageOne2017
+historical priorTransferWithSeparatelyFoundNewContract = cherishtoStocklandVillageOne2017
+
+current : TransferWorld → CurrentActionContract
+current priorTransferWithoutNewContract = currentContractUnacquired
+current priorTransferWithSeparatelyFoundNewContract = currentContractDocumented
+
+currentContractDiffers :
+  current priorTransferWithoutNewContract ≡
+  current priorTransferWithSeparatelyFoundNewContract → ⊥
+currentContractDiffers ()
+
+pastApprovalTransferDoesNotProveCurrentProjectContract :
+  INF.FactorsThrough historical current → ⊥
+pastApprovalTransferDoesNotProveCurrentProjectContract =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness priorTransferWithoutNewContract
+      priorTransferWithSeparatelyFoundNewContract refl currentContractDiffers)
