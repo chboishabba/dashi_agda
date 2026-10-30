@@ -1521,3 +1521,15 @@ Agda/Lean proof owners; independently owned Ibrahim
 finite classification identities are DASHI-specific
 new source-written adapters, not falsely attributed
 as the historical source authors' formalised proofs.
+
+### 30 October 2026 — primary-source correction of a misleading purported solution
+
+The preceding paragraph describing Laporta `arXiv:2006.04547`
+as an "unverified research claim" is strictly strengthened by
+the **current primary arXiv record**, checked on 30 October 2026:
+https://arxiv.org/abs/2006.04547 records **withdrawn**
+(last revised 27 October 2026), with the author's explicit
+comment **"Lemma 2 is false"**. This is NOT a candidate analytic
+ingredient, and neither the original title nor secondary arXiv
+mirrors may override its current withdrawn status. No
+F02/F04/F06/G01 promotion is justified.
