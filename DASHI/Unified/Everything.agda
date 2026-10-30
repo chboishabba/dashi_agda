@@ -1099,3 +1099,36 @@ unifiedC5OneAxisSampledConvolutionEqualsIndexed :
     ≡ C5Sampled125.cyclicConvolution5 a b
 unifiedC5OneAxisSampledConvolutionEqualsIndexed =
   C5Sampled125.oneAxisSampledConvolutionIsCyclic
+
+
+------------------------------------------------------------------------
+-- New actual 27-by-27 distributive expansion on 729 ORIGINAL ordered
+-- Fourier pairs, instantiated separately over the existing Q(i)
+-- and Q(zeta5) scalar owners. Proves a finite source-level step toward
+-- sampled/index equality; DOES NOT claim the missing character sum step.
+------------------------------------------------------------------------
+import Data.Product as FourierPairProjection
+
+unifiedC4Actual729ProductExpansion :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4) →
+  C4Gaussian._*G_
+    (Bilinear729.sumAll C4Retained.gaussianCoefficientOps Fourier729.cube27 f)
+    (Bilinear729.sumAll C4Retained.gaussianCoefficientOps Fourier729.cube27 g)
+  ≡ Bilinear729.sumAll C4Retained.gaussianCoefficientOps Fourier729.pair729
+    (λ pair → C4Gaussian._*G_
+      (f (FourierPairProjection.proj₁ pair))
+      (g (FourierPairProjection.proj₂ pair)))
+unifiedC4Actual729ProductExpansion =
+  C4Retained.gaussianActual729InputProductExpansion
+
+unifiedC5Actual729ProductExpansion :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5) →
+  C5Character125._*5_
+    (Bilinear729.sumAll C5FullOperator.cyclotomicFiveOps Fourier729.cube27 f)
+    (Bilinear729.sumAll C5FullOperator.cyclotomicFiveOps Fourier729.cube27 g)
+  ≡ Bilinear729.sumAll C5FullOperator.cyclotomicFiveOps Fourier729.pair729
+    (λ pair → C5Character125._*5_
+      (f (FourierPairProjection.proj₁ pair))
+      (g (FourierPairProjection.proj₂ pair)))
+unifiedC5Actual729ProductExpansion =
+  C5FullOperator.cyclotomicFiveActual729InputProductExpansion
