@@ -13,7 +13,7 @@ module DASHI.Arithmetic.TwinPrimeProperPowerUniversalRectangleCoverageExact wher
 -- Source-written; kernel check pending. 2026-10-30.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (_≤_)
 import DASHI.Analysis.RiemannPrimePowerArithmetic as Power
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact as Root
@@ -53,3 +53,34 @@ properPowerInDedupComputedRectangle basePredecessor k upper bound =
       (Root.floorSquareRoot upper)
       (Cutoff.floorBinaryExponent upper))
     (properPowerInComputedRectangle basePredecessor k upper bound)
+
+------------------------------------------------------------------------
+-- CT11 computed, duplicate-safe finite counting receipt.
+-- This bound is about the actual finite candidate image, including
+-- all genuine proper prime powers with value <=upper; composite-base
+-- candidates may overcount, never undercount.
+------------------------------------------------------------------------
+
+computedCandidateDistinctCountBound :
+  (upper : Nat) →
+  Rect.properPowerCandidateDistinctCount
+    (Root.floorSquareRoot upper)
+    (Cutoff.floorBinaryExponent upper)
+  ≤ Root.floorSquareRoot upper * Cutoff.floorBinaryExponent upper
+computedCandidateDistinctCountBound upper =
+  Rect.properPowerCandidateDistinctCountBound
+    (Root.floorSquareRoot upper)
+    (Cutoff.floorBinaryExponent upper)
+
+computedCandidateImageNoDuplicates :
+  (upper : Nat) →
+  Rect.DistinctValues
+    (Rect.dedupPowerValues
+      (Rect.powerValueRectangle
+        (Root.floorSquareRoot upper)
+        (Cutoff.floorBinaryExponent upper)))
+computedCandidateImageNoDuplicates upper =
+  Rect.dedupValuesDistinct
+    (Rect.powerValueRectangle
+      (Root.floorSquareRoot upper)
+      (Cutoff.floorBinaryExponent upper))
