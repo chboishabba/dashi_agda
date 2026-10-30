@@ -23,7 +23,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Vec.Base using (Vec)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 import Data.Fin.Base as Fin
 import Data.Fin.Properties as FinP
@@ -387,6 +387,17 @@ programPlacedCNF
     (Rename.renameCNF extendEarlierFin (programPlacedCNF previous))
     (placedGateCNF gate)
 
+-- Two older source owners define extensionally equal append functions,
+-- but unknown lists do not make their bodies definitionally identical.
+-- Prove the EXACT append used by the placed-constraint owner.
+placedAppendLength :
+  ∀ {A : Set} (left right : List A) →
+  Grid.listLength (Placed.append left right)
+    ≡ Grid.listLength left + Grid.listLength right
+placedAppendLength [] right = refl
+placedAppendLength (value ∷ left) right =
+  cong suc (placedAppendLength left right)
+
 -- Canonical additive 4-per-gate clause budget. This is an actual
 -- structural count, not a floating asymptotic assertion.
 fourPerGate : Nat → Nat
@@ -401,7 +412,7 @@ programPlacedCNFClauseCount Circuit.noGates = refl
 programPlacedCNFClauseCount
     (Circuit.appendGate previous gate) =
   trans
-    (Grid.lengthAppend
+    (placedAppendLength
       (Rename.renameCNF extendEarlierFin (programPlacedCNF previous))
       (placedGateCNF gate))
     (cong₂ _+_
@@ -465,7 +476,7 @@ circuitPlacedCNFClauseCount :
     ≡ fourPerGate (Circuit.gateCount circuit) + suc zero
 circuitPlacedCNFClauseCount circuit =
   trans
-    (Grid.lengthAppend
+    (placedAppendLength
       (programPlacedCNF (Circuit.program circuit))
       (outputUnitCNF circuit))
     (cong₂ _+_
