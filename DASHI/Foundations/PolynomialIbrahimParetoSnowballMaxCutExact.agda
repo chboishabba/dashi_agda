@@ -25,6 +25,7 @@ import DASHI.Foundations.PolynomialNumerologyArithmeticAtlasExact as Numerology
 import DASHI.Foundations.Polynomial369TrialecticTransportExact as Trialectic
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ExistingTOE
 import DASHI.Wikimedia.IbrahimMonster3BRecognitionRouteParetoExact as Ibrahim
+import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 
 record PolynomialEvidenceMaxCut : Set₁ where
   field
@@ -106,3 +107,40 @@ noVideoConceptPretendsKernelReceipt :
   Video.kernelVerifiedInThisPR concept ≡ false
 noVideoConceptPretendsKernelReceipt =
   Video.kernelVerificationNotAssertedHere
+
+------------------------------------------------------------------------
+-- O77: Wikidata QIDs as optional concept coordinates, not proof receipts.
+-- Source: Wikidata item labels and descriptions inspected 30 Oct 2026.
+-- Reuses existing SnowballExternalIdentityAvailabilityExact, no duplicate
+-- identity ontology. Neither QID creates an S3 same-object identification.
+------------------------------------------------------------------------
+
+polynomialDiscriminantQid : Identity.ExternalIdentityDemand
+polynomialDiscriminantQid =
+  Identity.mkOptionalIdentityDemand
+    "DASHI.Foundations.PolynomialIbrahimParetoSnowballMaxCutExact"
+    "Wikidata Q192487: discriminant, function of polynomial coefficients"
+    "discriminant" Identity.wikidataQid
+    (Identity.verified "Q192487"
+      "concept label/description inspected; not an Agda theorem receipt")
+
+galoisTheoryQid : Identity.ExternalIdentityDemand
+galoisTheoryQid =
+  Identity.mkOptionalIdentityDemand
+    "DASHI.Foundations.PolynomialIbrahimParetoSnowballMaxCutExact"
+    "Wikidata Q92552: Galois theory, field automorphism group study"
+    "Galois theory" Identity.wikidataQid
+    (Identity.verified "Q92552"
+      "concept label/description inspected; not proof of generic S5")
+
+specificPolynomialMonodromyQid : Identity.ExternalIdentityDemand
+specificPolynomialMonodromyQid =
+  Identity.mkOptionalIdentityDemand
+    "DASHI.Foundations.PolynomialIbrahimParetoSnowballMaxCutExact"
+    "No verified QID for this exact 27-code conjugation / root-path object"
+    "specific polynomial monodromy representation" Identity.wikidataQid
+    (Identity.unresolved
+      "Do not conflate with the separate monodromy theorem Q4455046")
+
+qidCannotPayPolynomialProof : Identity.QidPaysSourceTruth → ⊥
+qidCannotPayPolynomialProof = Identity.qidDoesNotPaySourceTruth
