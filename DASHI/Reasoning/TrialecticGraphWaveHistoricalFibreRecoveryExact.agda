@@ -251,3 +251,56 @@ historicalWaveConsumerRecovery :
   Consumer.ConsumerSufficient retainedObserver (signedWaveConsumerAt t)
 historicalWaveConsumerRecovery t left right same =
   cong (signedWaveConsumerAt t) (proj₂ same)
+
+------------------------------------------------------------------------
+-- NONTRIVIAL TEMPORAL SHIFT: append a new graph frame and preserve
+-- the two preceding frames rather than overwriting with a coarse
+-- orbit. The new update does not need to invent an analytic wave
+-- evolution: the chosen Next function must be supplied explicitly.
+------------------------------------------------------------------------
+
+shiftRetainedHistory :
+  (nextFrame : Graph.WeightedMatrix3 -> Graph.WeightedMatrix3) ->
+  RetainedGraphHistory -> RetainedGraphHistory
+shiftRetainedHistory nextFrame h =
+  retained-graph-history
+    (current h)
+    (after h)
+    (nextFrame (after h))
+
+shiftPriorIsPreviousCurrent :
+  (nextFrame : Graph.WeightedMatrix3 -> Graph.WeightedMatrix3) ->
+  (h : RetainedGraphHistory) ->
+  before (shiftRetainedHistory nextFrame h) ≡ current h
+shiftPriorIsPreviousCurrent nextFrame h = refl
+
+shiftCurrentIsPreviousFuture :
+  (nextFrame : Graph.WeightedMatrix3 -> Graph.WeightedMatrix3) ->
+  (h : RetainedGraphHistory) ->
+  current (shiftRetainedHistory nextFrame h) ≡ after h
+shiftCurrentIsPreviousFuture nextFrame h = refl
+
+shiftNextIsRealFineUpdate :
+  (nextFrame : Graph.WeightedMatrix3 -> Graph.WeightedMatrix3) ->
+  (h : RetainedGraphHistory) ->
+  after (shiftRetainedHistory nextFrame h)
+    ≡ nextFrame (after h)
+shiftNextIsRealFineUpdate nextFrame h = refl
+
+shiftRetainsWaveConsumer :
+  (nextFrame : Graph.WeightedMatrix3 -> Graph.WeightedMatrix3) ->
+  (h : RetainedGraphHistory) ->
+  signedWaveConsumerAt priorTime (shiftRetainedHistory nextFrame h)
+    ≡ signedWaveConsumerAt liveTime h
+shiftRetainsWaveConsumer nextFrame h = refl
+
+shiftRetainsFutureWaveConsumer :
+  (nextFrame : Graph.WeightedMatrix3 -> Graph.WeightedMatrix3) ->
+  (h : RetainedGraphHistory) ->
+  signedWaveConsumerAt liveTime (shiftRetainedHistory nextFrame h)
+    ≡ signedWaveConsumerAt futureTime h
+shiftRetainsFutureWaveConsumer nextFrame h = refl
+
+-- At the newer future time the actual nextFrame is needed. Neither
+-- the C3 orbit alone nor the cardinality of a 27-voxel chart
+-- determines that source update.
