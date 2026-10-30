@@ -17294,3 +17294,12 @@ Cleanup
 - [ ] CT15: prove, do not assume, the unconditional positive gap-two shifted Mangoldt correlation with signed residual control.
 - [ ] CT16–CT18: extract arbitrary certified twin pairs from positive prime-only sum; prove genuine infinitude without premises.
 - [ ] Preserve Ibrahim original Monster-3B, Pareto/Snowball, QID and meta-introspector provenance; no same-object promotion, no protected ESD edits.
+
+### 2026-10-30 CT13 follow-on after actual error-position envelope
+
+- [x] Source-write a list of the two possible error positions for every CT11 candidate value, with exact length 2*image length.
+- [x] Reuse the original deduplicator to prove `DistinctValues` and `nonzeroErrorPositionInDistinctEnvelope` for actual M15 error support (conditional on already-owned real Chebyshev prime identity).
+- [x] Source-write `distinctErrorPositionEnvelopeLengthBound` ≤ `2*floorSquareRoot(U)*floorBinaryExponent(U)`; independent integer oracle passed.
+- [ ] Kernel-check both the updated CT11/M15 module and the exact transitive import graph under --safe, no postulates/holes.
+- [ ] Connect genuine bounded-interval, indexed nonzero-error support count to the distinct covering image; instantiate real ordered logarithms, pointwise nonnegative residual weights, and the final O(sqrt(U) log³(U)) / o(X) estimate.
+- [ ] Prove CT15a/b/c unconditional positivity and signed correlation control; until then CT16-CT18 infinitude is unavailable.
