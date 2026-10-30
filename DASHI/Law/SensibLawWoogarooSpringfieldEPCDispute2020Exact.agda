@@ -175,15 +175,15 @@ data PaymentWorld : Set where
   priceQuotedWithDifferentPaymentReceipt : PaymentWorld
 
 data SameQuotedPrice : Set where
-  4000EPAt2000AUD : SameQuotedPrice
+  quoted4000EPAt2000AUD : SameQuotedPrice
 
 data TransferReceipt : Set where
   noActualTransferDocument : TransferReceipt
   originalBankOrReceiptPaid : TransferReceipt
 
 priceObservation : PaymentWorld → SameQuotedPrice
-priceObservation priceQuotedNoTransfer = 4000EPAt2000AUD
-priceObservation priceQuotedWithDifferentPaymentReceipt = 4000EPAt2000AUD
+priceObservation priceQuotedNoTransfer = quoted4000EPAt2000AUD
+priceObservation priceQuotedWithDifferentPaymentReceipt = quoted4000EPAt2000AUD
 
 paidTransfer : PaymentWorld → TransferReceipt
 paidTransfer priceQuotedNoTransfer = noActualTransferDocument
