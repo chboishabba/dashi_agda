@@ -96,3 +96,23 @@ development refusal
 ```
 
 Those coordinates remain separately source-paid through the existing custodianship / Mabo / Two-Eyed / intersectionality stack.
+
+
+## 30 October 2026 — post-approval priority correction (PR #1439)
+
+**EPBC 2019/8575 is an approved-decision investigation, not an open refusal-stage action.** The pre-decision option in the earlier list is historical. The active highest-alpha route now begins with original signed Part 9 approval and conditions, s 95B material and s 95C recommendation. Portal views currently conflict between `Published` and `Expired` while identifying the same approval-decision-made project: compare dated manifestations, not an inferred legal lapse. The signed conditions/authorized footprint and contemporaneous compliance evidence are independently unpaid.
+
+**Priority sequence / receipt cutset:**
+1. P0 original 15 October 2026 signed instrument + operative conditions + legal publication/revision history (2019/8575 only).
+2. P0 exact s 95B comment/transmission and s 95C recommendation; distinguish statutory requirements from actual project-specific ministerial receipt.
+3. P0 precise condition × parcel × date × conduct × authority response matrix for any s 474A / s 475 theory; no breach, court order, or filing promoted from suspicion.
+4. P0 standing and limitation clock: certified Queensland OFT association record and actual applicant/court proceeding identity before any EPBC s 487 or ADJR ss 11/15 conclusion.
+5. P1 government lobbying activity original and meeting brief, contemporaneous correspondence and decision join; Queensland diary confirms access, not gas tasking.
+6. P1 gas specification/MIRN/tariff and asset owner/operator/revenue contract before quantifying developer, network or lobbying benefits.
+7. P1 ecological spatial match and protective state avenues under NCA ss 13, 49, 102 / Part 7A remain independent of federal merits-review deadlines.
+
+**Separate project/context controls:** Scenic EPBC 2020/8651, Peninsula 2020/8629 and local 9281 conditions never substitute for the 2019/8575 signed instrument. A relationship between developer, gas retailer, network asset, lobbyist or donor does not establish a benefit transfer or federal decision causation.
+
+**Formal bridge:** `DASHI.Law.SensibLawWoogarooGasSecondThirdOrderNonPromotion20261030Exact` imports existing attribution and nonfactorability owners through the preservation rollup. Three source-written proof witnesses reject diary→gas agenda, endpoint→beneficiary, and approval-status→breach determinations. Kernel status remains **not tested**. No new legal filing or instrument receipt is claimed.
+
+**Attribution:** Retain original QUT/QCC and statutory/judicial/source authors, plus preexisting PR owners; second/third-order bridge described on unmerged PRs is not imported as though merged.
