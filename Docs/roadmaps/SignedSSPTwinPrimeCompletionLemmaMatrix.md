@@ -1164,3 +1164,73 @@ preserves source role; Ibrahim `IbrahimSnowballParetoFrontierExact`
 is a separate historically attributed dataset-genealogy programme;
 QIDs identify entities but do not confer kernel proof. No new
 Monster 3B same-object representation is asserted. No ESD edits.
+
+## 30 October 2026 — M13 semantic correction: short intervals versus boundary-crossing intervals
+
+A **mathematical flaw in the previous proposed cut** was identified:
+`CertifiedIntervalSchedule start count` requires
+`start + prefixLength = firstWholePeriod*270` together with
+`count = prefixLength + blocks*270 + suffixLength`.
+For a short non-boundary interval, e.g. `start=59, count=1`,
+this schedule cannot exist. No amount of Agda proof search could
+construct it for all `start,count`. The correct arbitrary interval
+split has **two constructors**:
+
+1. **within one 270-period**:
+   `start%270 + count ≤ 270`, use the already existing
+   `pairFiniteSumBidiBackward` for the exact lossless
+   Nat→period-code finite fold;
+2. **crosses a period boundary**: pass the already defined,
+   proof-bearing `CertifiedIntervalSchedule` to
+   `scheduleCorrelationForward`/`Backward` and retain the
+   exact prefix + whole 270-blocks + suffix semantics.
+
+**Implemented** the repaired typed interface, forward/backward
+transport as
+`DASHI/Arithmetic/TwinPrimeMangoldtTwoCaseIntervalPlanExact.agda`.
+Updated the original `TwinPrimeMangoldtCertifiedIntervalScheduleExact`
+header to reject the impossible universal aligned-only claim.
+This uses the original `NatPeriod270` code; 270 residue positions
+are **not** misidentified with the 27 sieve survivors or with
+Ibrahim 15/global antipodal 14 quotient classes.
+
+**Actually executed local Python**: 3,010 interval plans,
+335 within-period and 2,675 crossing-boundary; 274 exact
+symbolic `log(p)log(q)` correlation comparisons, all PASS.
+Explicit edge cases include [59,60), [269,270),
+[269,271), [270,270), [270,541), and [329,330).
+Checker committed at
+`scripts/check_twin_prime_m13_two_case_plan.py`.
+
+**NEXT M13 theorem:** constructive
+`completePlan : (start count : Nat) →
+ CompleteIntervalPlan start count` using division/remainder,
+a decidable within-period inequality, and in the crossing
+branch the correctly bounded prefix, period count and suffix
+with *both* equality witnesses. This is now a logically valid
+total-constructor target; still source-open, not kernel-checked.
+No unproved positivity imported.
+
+**Actual independent-PR source inspections, not just heads:**
+- #1244 `AlexanderHornedS3SignQuotientSetoidBidiExact.agda`
+  proves a distinct C3/S3 word-action setoid quotient. It cannot
+  replace the lossless Nat/Fin270 period residual required by
+  primality.
+- #1275 `ZipfThreeDrawEqualityPatternFactorExact.agda`
+  has a source-written 27-code → 5 equality-pattern map for
+  observation/Heaps histories, not a prime-pair classifier.
+- #1414 `PolynomialC3S3TwentySevenOrbitRefinementExact.agda`
+  states a 27-endomorphism conjugation (7 S3 orbits);
+  `PolynomialIbrahimParetoSnowballMaxCutExact.agda` explicitly
+  blocks numerical analogy from creating same-object/Monster
+  proof authority. This is valuable *admission logic*, not a
+  substitute for analytic gap-two correlation.
+- Prior source `DASHI/Core/ParetoSymmetryQuotientAdmissionExact`
+  requires declared semantic objective and eligibility
+  preservation before quotienting. Original Ibrahim QID bindings
+  retain entity identity only, not theorem or kernel authority.
+
+All M13 additions are imported through the three target TOE roots.
+No protected ESD files changed. No Agda kernel or CI receipt.
+External sources still distinguish Polymath/Maynard bounded
+gaps from the open H1=2 twin-prime conjecture.
