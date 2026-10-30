@@ -205,6 +205,8 @@ def verify_rational_solver_source_integrity():
         "projectS3AnyFixesInvariant",
         "projectC3AnyAfterS3Any", "projectS3AnyAfterC3Any",
         "projectC3AnyMatchesOriginal", "projectS3AnyMatchesOriginal",
+        "rotationPreservesAny", "projectC3AnyFixesInvariant",
+        "projectC3AnyNaturality", "projectS3AnyNaturality",
     )
     for name in sample_names:
         assert len(re.findall(r"^"+name+r" :",sampling,re.M))==1,name
@@ -220,6 +222,9 @@ def verify_rational_solver_source_integrity():
         "projectRationalS3AdditiveAt", "projectRationalC3AdditiveAt",
         "projectRationalC3AfterS3At", "projectRationalS3AfterC3At",
         "projectRationalS3NativeActionInvariantAt",
+        "projectRationalC3FixesInvariantAt",
+        "projectRationalC3NaturalityAt",
+        "projectRationalS3NaturalityAt",
     )
     assert "PolynomialC3S3OrbitSamplingProjectionExact as Sampling" in native_fields
     for name in rational_sample_names:
@@ -233,7 +238,7 @@ def verify_rational_solver_source_integrity():
         for name in rational_sample_names:
             assert name in root_text,(root,name)
     print("PASS generic original orbit retraction reused on rational Q27;"
-          " 11 generic and 12 native declarations; 3 TOE roots")
+          " 15 generic and 15 native declarations; 3 TOE roots")
 
     assert "MoonshineOrbifoldSectorProjectorExact" in adapter
     for name in ("positiveIntertwinesS3Parity",
