@@ -738,3 +738,32 @@ physicsR320NoSecondMagnitudeLeaf :
   ≡ Balaban.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
 physicsR320NoSecondMagnitudeLeaf = refl
 
+
+------------------------------------------------------------------------
+-- Rational SU2 P2 trace/S2 same-owner regression.
+------------------------------------------------------------------------
+
+toeP2TraceCompilerMatchesOwner :
+  TOE.toeBalabanRouteSP2TraceToS2Level
+  ≡ Balaban.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+toeP2TraceCompilerMatchesOwner = refl
+
+unifierP2TraceCompilerMatchesOwner :
+  Unifier.unifierBalabanRouteSP2TraceToS2Level
+  ≡ Balaban.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+unifierP2TraceCompilerMatchesOwner = refl
+
+physicsP2TraceCompilerMatchesOwner :
+  Physics.yangMillsBalabanRouteSP2TraceToS2Level
+  ≡ Balaban.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+physicsP2TraceCompilerMatchesOwner = refl
+
+toeP2PhysicalInterpretationMatchesOwner :
+  TOE.toeBalabanRouteSP2PhysicalInterpretationLevel
+  ≡ Balaban.balabanRouteSP2TracePhysicalInterpretationLevel
+toeP2PhysicalInterpretationMatchesOwner = refl
+
+toeP2TracePaysPerLoopBoundsGivenInterpretation :
+  TOE.toeBalabanRouteSP2PerLoopBoundAfterInterpretation
+    ≡ Balaban.balabanRouteSP2TracePaysPerLoopBounds
+toeP2TracePaysPerLoopBoundsGivenInterpretation = refl
