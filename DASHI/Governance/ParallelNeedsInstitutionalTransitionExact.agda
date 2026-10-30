@@ -74,6 +74,8 @@ record FederationReceipt : Set where
     localAutonomy : Bool
     compatibleCoordination : Bool
     meaningfulExit : Bool
+    localCouncilSections : Council.CouncilBasePoint → Council.LocalCouncilSection
+    localCouncilCompatibility : Council.CompatibleCouncilFamily localCouncilSections
     autonomyVerified : localAutonomy ≡ true
     coordinationVerified : compatibleCoordination ≡ true
     exitVerified : meaningfulExit ≡ true
