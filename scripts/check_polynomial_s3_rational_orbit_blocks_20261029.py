@@ -177,8 +177,22 @@ def verify_rational_solver_source_integrity():
         assert "PolynomialS3RationalTwentySevenFieldIsomorphismExact" in root_text
         for name in native_receipts:
             assert name in root_text,(root,name)
+        for name in ("polynomialDiscriminantQid", "galoisTheoryQid",
+                     "specificPolynomialMonodromyQid", "qidCannotPayPolynomialProof"):
+            assert name in root_text,(root,name)
     print("PASS repaired 27-code action type; native addition and S3 "
           "transport source coverage; three TOE exports (kernel pending)")
+
+
+    # O77: reuse the upstream optional-identity/QID mechanism. A verified
+    # label is a navigation coordinate, never a field-theory theorem.
+    qid_owner=owner("PolynomialIbrahimParetoSnowballMaxCutExact")
+    assert "SnowballExternalIdentityAvailabilityExact as Identity" in qid_owner
+    for qid in ('"Q192487"','"Q92552"'):
+        assert ("Identity.verified "+qid) in qid_owner,qid
+    assert "specificPolynomialMonodromyQid" in qid_owner
+    assert "Identity.unresolved" in qid_owner
+    assert "qidCannotPayPolynomialProof = Identity.qidDoesNotPaySourceTruth" in qid_owner
 
     assert "MoonshineOrbifoldSectorProjectorExact" in adapter
     for name in ("positiveIntertwinesS3Parity",
