@@ -13,7 +13,7 @@ module DASHI.Physics.Closure.R2P2C5FullSampledIntegerOperatorExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Agda.Builtin.List using (List)
-open import Data.Product using (proj₁; proj₂)
+open import Data.Product using (_,_; proj₁; proj₂)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Rational.Base using (ℚ; normalize)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
