@@ -30,3 +30,7 @@ source authority
 ```
 
 No earlier stage is silently promoted into a later one.
+
+## 30 October 2026 — gas lobbying / second-third-order protection
+
+The official 2019/8575 portal **approval-decision status** is not the signed Part 9 text or an adjudicated condition breach; the 2020/8651 Scenic project is separate. The Queensland ministerial or chief-of-staff diary entry proves a reported meeting, not gas-policy agenda, substantive tasking, a benefit transfer or federal approval causation. A gas connection can be observed without resolving the legal asset owner, operating rights, income streams or ultimate beneficiary. These distinctions are independently modelled by `SensibLawWoogarooGasSecondThirdOrderNonPromotion20261030Exact.agda`, imported into the case rollup; the proofs are source-written, not kernel certified. Keep QUT/QCC provenance and historical PR authorship separately assigned. See `WoogarooGasSecondThirdOrderMaxCut20261030.md` and `WoogarooPreservationLegalCutset.md` for the acquisition ordering and open work.
