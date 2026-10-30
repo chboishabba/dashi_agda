@@ -44,7 +44,7 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 > adapter now consumes that specific function—not a fixed quaternion for
 > each path—and transports boundedness to the physical Gram observable
 > along an explicit literal-Wilson identity. The unit observable's Gram
-> boundedness is likewise derived. The remaining physical inputs are the
+> boundedness is likewise derived, and S2 uses the canonical rational SU(2) one, defining-representation dimension two and multiplication. The remaining physical inputs are the
 > actual pointwise→Gram interpretation, generic target-algebra product
 > closure, time/support identification and continuum measure convergence.
 
