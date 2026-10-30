@@ -12,6 +12,7 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Law.SensibLawWoogarooDeveloperGasTemporalIdentityCut20261030Exact as Developer
 import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact as Lobby
 import DASHI.Law.SensibLawWoogarooIbrahimDeweyQidLegalAtomExact as Ibrahim
+import DASHI.Wikimedia.IdentifierExact as Identifier
 
 ------------------------------------------------------------------------
 -- SPRINGFIELD PLANNING ACT ss 275T-275ZA (2024)
@@ -392,8 +393,8 @@ publishedPlanServiceList =
 
 -- Reuse prior Ibrahim original named public-law QID as navigation ONLY,
 -- never mint one for the SCG legal person, Cherish or an unseen agreement.
-environmentalLawNavigationQid : String
-environmentalLawNavigationQid = "Q328798"
+environmentalLawNavigationQid : Identifier.ItemId
+environmentalLawNavigationQid = Ibrahim.environmentalLawQid
 
 -- The 2024 s275Z text and Council index can motivate an infrastructure
 -- contract search without upgrading to an executed gas service or payment.
