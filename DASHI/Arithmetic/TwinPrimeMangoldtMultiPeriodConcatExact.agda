@@ -34,7 +34,8 @@ sumIntervalSplit :
     (Sum.sumInterval S f start countLeft)
     (Sum.sumInterval S f (start + countLeft) countRight)
   ≡ Sum.sumInterval S f start (countLeft + countRight)
-sumIntervalSplit S M f start zero countRight =
+sumIntervalSplit S M f start zero countRight
+  rewrite NP.+-identityʳ start =
   leftIdentity M (Sum.sumInterval S f start countRight)
 sumIntervalSplit S M f start (suc countLeft) countRight
   rewrite NP.+-suc start countLeft =
