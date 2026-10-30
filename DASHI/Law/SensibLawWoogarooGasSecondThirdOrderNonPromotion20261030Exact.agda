@@ -111,3 +111,37 @@ approvalCannotDetermineBreach =
 -- observation, donation, party proximity or gas contact becomes causal proof.
 -- The same-object EPBC 2019/8575 approval instrument remains a separate
 -- documentary acquisition obligation; Scenic EPBC 2020/8651 is not imported.
+
+// A lobbyist's reported contact and the authority's retained contact record
+// are different documentary producers. Even agreement on attendance does not
+// determine the content of the request or its downstream disposition.
+data ContactWorld : Set where
+  matchingRecordsNoPolicyRequest : ContactWorld
+  matchingRecordsWithPolicyRequest : ContactWorld
+
+data CorroboratedContact : Set where
+  independentlyRecordedAttendance : CorroboratedContact
+
+data RequestContent : Set where
+  noGasRequestAuthenticated : RequestContent
+  gasRequestAuthenticated : RequestContent
+
+corroboration : ContactWorld → CorroboratedContact
+corroboration matchingRecordsNoPolicyRequest = independentlyRecordedAttendance
+corroboration matchingRecordsWithPolicyRequest = independentlyRecordedAttendance
+
+requestContent : ContactWorld → RequestContent
+requestContent matchingRecordsNoPolicyRequest = noGasRequestAuthenticated
+requestContent matchingRecordsWithPolicyRequest = gasRequestAuthenticated
+
+differentContent :
+  requestContent matchingRecordsNoPolicyRequest ≡
+  requestContent matchingRecordsWithPolicyRequest → ⊥
+differentContent ()
+
+corroboratedAttendanceDoesNotDetermineGasRequest :
+  INF.FactorsThrough corroboration requestContent → ⊥
+corroboratedAttendanceDoesNotDetermineGasRequest =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness matchingRecordsNoPolicyRequest
+      matchingRecordsWithPolicyRequest refl differentContent)
