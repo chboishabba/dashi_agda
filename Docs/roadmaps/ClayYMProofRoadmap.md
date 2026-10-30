@@ -1,5 +1,42 @@
 # Clay Yang-Mills Proof Roadmap
 
+## 2026-10-30 — Route-S H1 direct-source Pareto weld
+
+The highest-value reuse cut is the **direct source/OS** mass-gap route, not a
+repetition of the strong F1/F3/F4 Mosco path. The existing owners already
+provide the exact compiler spine:
+
+```text
+R320 DirectSelectedT5MarkedDecayPayment (literal selected two-J inequality)
+  -> YMClayRouteSH1DirectSelectedMarkedDecayExact.h1BuildsLocalizedR295
+  -> R313.exactT5JMagnitudeFromR295 (with rational |·| meaning)
+  -> R296.ExactT5JMagnitudePresentation
+  -> R333.CanonicalBOSIndexedApplication + Completion
+  -> OS.PhysicalMassGapCertificate on the SAME reconstructed H_OS
+```
+
+The new direct bridge in `YMClayDirectSourceOSMassGapFrontierExact` is an
+explicit Agda composition of **existing** owners, not a new selected-source
+inequality. It removes the apparent need to pay R295/R296 again after H1.
+Its remaining actual inputs are R320 physical source localization, rational
+absolute-magnitude interpretation, R333's physical Wilson/time, expectation
+limit and same-H_OS spectral witnesses. P1/P2/P3 in the September closed-world
+audit are the corresponding direct-route cut. The independent strong
+F1-C/F1-D/P_a/E_a/Mosco obligations are **not** terminal prerequisites of
+Route S, but remain available for the other Pareto lane.
+
+Source roots and authorship: Tadeusz Bałaban, CMP 116 (1988), DOI
+10.1007/BF01239022 (cluster expansions and differentiated localization);
+R295/R313/R320/R333 are independently authored DASHI theorem interfaces and
+compilers. A published paper, a typed import, a source-written proof and an
+exact-head kernel check are distinct evidence levels. No physical source
+witness is fabricated; no continuum or Clay promotion occurs from this weld.
+The direct consumer is now smaller and can be attacked at its actual literal
+Wilson P1/P2/P3 physical inputs; all-compact-simple-group and local-QFT
+extension remains a separate terminal scope. Reference comparison: OpenAI's
+26 October 2026 existence announcement is not an imported proof: its Yang–Mills
+Lean artifacts were not publicly released as of this review.
+
 Status: lemma roadmap; non-promoting.
 
 This document is a dependency graph for what a DASHI-based proof of the
