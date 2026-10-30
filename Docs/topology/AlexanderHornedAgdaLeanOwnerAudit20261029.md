@@ -101,3 +101,31 @@ results; absent index hits are not proof of absence. The actual
 relevant Lean van Kampen consumers we read are under
 \`dashi_agda/proofs/horned_c3_lean/HornedC3/\`, not a verified
 same-object theorem from \`dashi_lean4\`.
+
+
+### 2026-10-30 ABC six-permutation owner cross-check
+
+Directly read \`DASHI/Core/TernaryRoleCarrierExact.agda\`,
+\`DASHI/Foundations/TernaryEndomorphismConjugacyExact.agda\`,
+\`DASHI/Foundations/TernaryPermutationS3LawsExact.agda\`,
+\`DASHI/Computation/SSSPThreeFrontierLinearExtensionQuotientBidiExact.agda\`,
+and \`AlexanderHornedSectorDihedralS3EndExact.agda\`. The six ABC
+permutations, their S3 group law, the SSSP linear orders, and the
+external S3 sector action are separate existing owners. The
+\`ABCSixPermutationPeripheralOrbit\` extension is in the original
+\`AlexanderHornedTernaryPantsMeridianBoundaryExact.agda\`, with no
+copied/new S3 multiplication table. Source classification is
+six distinct oriented conjugacy classes and three distinct
+orientation-forgotten classes, plus exact finite 36-case S3
+equivariance of the **family** of boundary words.
+
+Also directly fetched current independent PR #1438's golden
+\`TrialecticWeightedDirectedGraph369Exact.agda\` and Lean PR #103's
+\`AgdaMirror/Reasoning/TrialecticWeightedDirectedGraph369.lean\`.
+Those establish a weighted 3x3 fixture that FAILS C3 invariance;
+neither owns a horn-meridian realization or repairs G2–G6.
+The existing \`dashi_agda/proofs/horned_c3_lean/HornedC3/
+ThreeArmHatcherGroupTransport.lean\` was read: actual cover piece
+group equivalences remain supplied hypotheses. No Lean copy of
+the new finite boundary family was fabricated before golden
+Agda kernel acceptance.
