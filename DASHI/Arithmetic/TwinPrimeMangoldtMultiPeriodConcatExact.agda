@@ -14,7 +14,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import Data.Nat.Properties as NP
-import Data.Nat.Properties as NP
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as Sum
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as Bidi
 import DASHI.Arithmetic.TwinPrimeMangoldtFinIntervalReindexExact as Row
