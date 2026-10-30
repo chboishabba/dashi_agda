@@ -697,7 +697,11 @@ balabanR320RouteSSelectedPhysicalSourceLevel : ProofLevel
 balabanR320RouteSSelectedPhysicalSourceLevel =
   RouteS.routeSH1SelectedPhysicalPaymentLevel
 
+balabanR320RouteSMagnitudeNotNewPhysical : Bool
+balabanR320RouteSMagnitudeNotNewPhysical =
+  RouteS.routeSH1ReusesR313MagnitudeCompiler
+
 balabanR320RouteSNoSecondAbsoluteMagnitudeInput :
-  RouteS.routeSH1ReusesR313MagnitudeCompiler ≡ false
+  balabanR320RouteSMagnitudeNotNewPhysical ≡ false
 balabanR320RouteSNoSecondAbsoluteMagnitudeInput =
   RouteS.routeSH1ReusesR313MagnitudeCompilerIsFalse
