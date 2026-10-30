@@ -62,3 +62,20 @@ monitor surface.
 - Source prompt: Tivadar Danka's 26 October 2026 educational illustration; mathematical matrix/graph correspondence remains standard prior art. Kernel verification and downstream situated gluing remain open; ESD surfaces untouched.
 
 - Follow-on: exhibited a real source-directed `TypedHyperfabric` with compatible outgoing-row section; independently proved the missing direct A→C arrow has nonzero length-two weight 2.2 through B. Seam remains conditional on a branch-channel interpretation and `InterfaceMatch`.
+
+## 2026-10-30 — Native 27-grid/pants graph isomorphism, checkerboard and six S3 permutations
+
+- Reused pre-existing one-ternary-step `HypervoxelAdjacent` and
+  voxel↔pants depth-three carrier round trips. Source-wrote exact
+  graph homomorphisms in both directions; did not invent arbitrary
+  adjacency, a new pants manifold or a new graph ontology.
+- Added C3 coordinate rotation, independent second-slot reflection,
+  all six distinct S3 labelled coordinate permutations and typed
+  adjacency-preserving actions.
+- Added checkerboard 2-colour properness, explicit one-colour
+  obstruction, and palette-colouring transport under finite actions.
+- Mirrored the finite graph results in the downstream Lean branch,
+  and added standalone exhaustive Python combinatorics checks.
+- Extended TOE/max-cut and Ibrahim/Pareto/snowball facades, preserving
+  local-vs-global, source-vs-proof, graph-vs-hyperedge, 3B ownership,
+  and discrete-vs-smooth non-promotion rules. All **kernel gates pending**.
