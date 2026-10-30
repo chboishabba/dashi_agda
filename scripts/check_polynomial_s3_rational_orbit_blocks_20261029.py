@@ -93,24 +93,33 @@ def verify_rational_solver_source_integrity():
     rational=owner("PolynomialS3RationalBlockFieldIsomorphismExact")
     adapter=owner("PolynomialC3S3RationalCharacterAlgebraExact")
     assert "Data.Rational.Tactic.RingSolver" in rational
-    # Agda stdlib's solve-∀ is a nullary macro; use the in-repo
-    # Moonshine donor's explicit variable-list Ring.solve instead.
-    for owner_name in (
-        "PolynomialS3RationalBlockFieldIsomorphismExact",
-        "PolynomialVietaRootSymmetryExact",
-        "PolynomialVandermondeDiscriminantExact",
+    # The reflected Ring.solve variable-list macro accepts ONLY bound
+    # variables (Agda v2.4 Tactic.RingSolver.getVariableIndices), not
+    # arbitrary applied terms such as (f Small.pair0).
+    # Therefore the rational block proof owner uses universally
+    # quantified scalar helper lemmas with the ZERO-argument solve-∀
+    # macro and then specializes them to the actual field values.
+    q27=owner("PolynomialS3RationalBlockFieldIsomorphismExact")
+    scalar=re.findall(r"^([A-Za-z0-9_]+_scalar_[A-Za-z0-9_]+) = Ring[.]solve-∀$",q27,re.M)
+    applied=re.findall(r"^([A-Za-z0-9]+) (?:Perm[.]\\w+ )?f(?: g)? (?:Small|Big)[.]\\w+ = ([A-Za-z0-9_]+_scalar_[A-Za-z0-9_]+) ",q27,re.M)
+    assert len(scalar)==176,len(scalar)
+    assert len(applied)==176,len(applied)
+    assert len(set(scalar))==176
+    assert set(scalar)==set(n for _,n in applied)
+    assert not re.search(r"Ring[.]solve \\(",q27)
+    assert not re.search(r"= Ring[.]solve-∀[ \\t]+",q27)
+    for owner_name,needed in (
+        ("PolynomialVietaRootSymmetryExact",19),
+        ("PolynomialVandermondeDiscriminantExact",14),
     ):
-        owner_text=owner(owner_name)
-        assert "Ring.solve-∀" not in owner_text, owner_name
-        calls=re.findall(r"Ring[.]solve \\([^\\n]* \\u2237 \\[\\]\\)",owner_text)
-        minimum=176 if owner_name.endswith("BlockFieldIsomorphismExact") else 10
-        assert len(calls)>=minimum,(owner_name,len(calls))
-    solver_lines=re.findall(r"Ring[.]solve \\([^\\n]* \\u2237 \\[\\]\\)",rational)
-    assert len(solver_lines)==176,len(solver_lines)
-    for line in solver_lines:
-        assert "(f " in line and "∷ []" in line,line
-    assert "positiveFieldReflectTransport" in adapter
-    assert "negativeFieldReflectTransport" in adapter
+        text=owner(owner_name)
+        assert "Ring.solve-∀" not in text
+        assert len(re.findall(r"Ring[.]solve \\([^\\n]* \\u2237 \\[\\]\\)",text))==needed
+    for dim,n in ((2,2),(3,3),(6,6)):
+        assert len(re.findall(r"^scalarField"+str(dim)+r" x[0-9]+",q27,re.M))==n
+    print("PASS 176 true scalar solve-∀ lemmas with field instantiations;"
+          "19 Vieta and 14 Vandermonde bound-variable solve macros")
+
     assert "MoonshineOrbifoldSectorProjectorExact" in adapter
     for name in ("positiveIntertwinesS3Parity",
                  "negativeIntertwinesS3Parity",
