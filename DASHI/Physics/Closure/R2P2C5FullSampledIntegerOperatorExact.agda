@@ -19,6 +19,7 @@ open import Data.Rational.Base using (ℚ; normalize)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Full
+import DASHI.Physics.Closure.R2P2C4C5NyquistAntipodalFixedPointExact as Nyquist
 import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as Bilinear
 import DASHI.Physics.Closure.R2P2C5CyclotomicFullFourierCharacterExact as C5
 import DASHI.Physics.Closure.R2P2C5FullSampledFourierBidiExact as FFT
@@ -300,3 +301,75 @@ cyclotomicFiveSourceSampledProductExpands729 f g x =
 
 -- The original carrier/table and ordered pair list occur literally.
 -- Source-written only until pinned Agda kernel checks the full module.
+
+------------------------------------------------------------------------
+-- FINITE SAMPLE EXTRACTION AT THE ORIGINAL C5 full 125 TARGETS.
+-- Explicit character resolution remains an INPUT, not an axiom or a
+-- synthetic receipt. Reuses the generic 729/finite-Fubini compiler
+-- instead of a second indexed convolution or a wrong scalar carrier.
+------------------------------------------------------------------------
+
+cyclotomicFiveSelectedOriginalPair :
+  Full.WideCube125 → I.ModePair729 → Bool
+cyclotomicFiveSelectedOriginalPair target (p , q) =
+  Full.eqWideCube
+    (Full.fiveGridToWide
+      (Full.fiveGridGroupSum (Full.inputToFiveGrid p) (Full.inputToFiveGrid q)))
+    target
+
+cyclotomicFiveNormalizedCharacterPhase :
+  Full.WideCube125 → I.ModePair729 → Full.GridCube125 → C5.Cyclotomic5
+cyclotomicFiveNormalizedCharacterPhase target (p , q) x =
+  FFT.scale5 oneOver125
+    (C5._*5_
+      (cyclotomicFiveCubeCharacter
+        (Full.fiveGridGroupSum (Full.inputToFiveGrid p) (Full.inputToFiveGrid q)) x)
+      (C5.conj5
+        (cyclotomicFiveCubeCharacter (Full.wideToFiveGrid target) x)))
+
+cyclotomicFiveOriginalPairCoefficient :
+  (I.ModeCube27 → C5.Cyclotomic5) →
+  (I.ModeCube27 → C5.Cyclotomic5) →
+  I.ModePair729 → C5.Cyclotomic5
+cyclotomicFiveOriginalPairCoefficient f g (p , q) =
+  C5._*5_ (f p) (g q)
+
+cyclotomicFiveSourceNormalizedSampledAt :
+  (I.ModeCube27 → C5.Cyclotomic5) →
+  (I.ModeCube27 → C5.Cyclotomic5) →
+  Full.WideCube125 → C5.Cyclotomic5
+cyclotomicFiveSourceNormalizedSampledAt f g target =
+  Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveGridCubes
+    (λ x → Bilinear.sumAll cyclotomicFiveOps I.pair729
+      (λ pair → C5._*5_
+        (cyclotomicFiveOriginalPairCoefficient f g pair)
+        (cyclotomicFiveNormalizedCharacterPhase target pair x)))
+
+cyclotomicFiveActualCharacterResolution :
+  Full.WideCube125 → Set
+cyclotomicFiveActualCharacterResolution target =
+  (pair : I.ModePair729) →
+  Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveGridCubes
+    (cyclotomicFiveNormalizedCharacterPhase target pair)
+  ≡ Bilinear.choose C5.zero5
+    (cyclotomicFiveSelectedOriginalPair target pair) C5.one5
+
+cyclotomicFiveSourceSampledEqualsIndexedGivenResolution :
+  (f g : I.ModeCube27 → C5.Cyclotomic5)
+  (target : Full.WideCube125) →
+  cyclotomicFiveActualCharacterResolution target →
+  cyclotomicFiveSourceNormalizedSampledAt f g target
+    ≡ indexedFiveGridBilinearAt f g target
+cyclotomicFiveSourceSampledEqualsIndexedGivenResolution f g target resolution =
+  Bilinear.finiteFourierExtractionFromOriginal729GivenResolution
+    cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+    Nyquist.allFiveGridCubes
+    C5.one5 C5.scalarMulOneRight
+    (cyclotomicFiveOriginalPairCoefficient f g)
+    (cyclotomicFiveNormalizedCharacterPhase target)
+    (cyclotomicFiveSelectedOriginalPair target)
+    resolution
+
+-- The condition above is the 64/125-character resolution,
+-- not the missing tensor-FFT synthesis/analysis same-object theorem.
+-- Neither is silently assumed from a numeric Python fixture.
