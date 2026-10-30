@@ -1816,3 +1816,70 @@ CT10a/b and their rectangular conjunction source-written.
 CT11–CT14 remain complete-proof obligations; their
 local Python checks are finite. No protected ESD edits,
 no CI. Agda kernel proof still pending.
+
+## 30 October 2026 — further CT13/M15 max-cut: nonzero retained error has proper-power witness
+
+**Actual source-written Agda:** 
+`DASHI/Arithmetic/TwinPrimeMangoldtErrorSupportProperExact.agda`,
+imported once through `EverythingTOESymmetryResolved369`,
+`Unifier` and `Unified/Everything`.
+
+Reuses the original `RiemannVonMangoldtSpecification`,
+the exhaustive `TwinPrimeMangoldtExhaustiveSupportCaseExact`
+three-way cases, the original finite prime/error split,
+and explicit `ProductZeroLaws` (NOT silently inferred).
+Defines `ProperPowerAt`, `ProperPowerAtEitherEndpoint`,
+and two nontrivial case theorems:
+
+- `errorZeroIfNoProper`: if no left/right proper prime-power
+  occurrence exists, the actual retained error scalar
+  is exactly zero. Handles all nine support combinations.
+  Outside-support contributions require the real zero
+  multiplication laws; exponent-one/exponent-one has
+  retained error zero by source definition.
+- `errorNonzeroHasProperPower`: for any Nat `n`,
+  a proof that the retained error weight is **not**
+  equal to zero yields a real, ORIGINAL
+  `AllPrimeArithmetic.Prime` and exponent ≥2
+  for `n` or `n+2`. This is a constructive
+  source-level inverse support witness, not a
+  finite-sieve class or prime-density assumption.
+
+**Actually executed local Python:** 150,000 candidates
+with independent prime-power trial-factor classifier:
+47 nonzero proper-power error pairs, 1,701 genuine
+prime/prime pairs, 148,252 outside-support pairs.
+For every 47 error pair, actual proper-power bases
+satisfy the integer `isqrt(n+2)` limit and
+`2^exponent≤n+2`. PASS. Committed runnable oracle
+`scripts/check_twin_prime_m15_error_support_proper.py`.
+Earlier executed 247-window numerical CT13 error tests
+and 8-window CT15 signed-Möbius parity audit remain
+recorded separately. No kernel receipt or analytic
+unboundedness claim.
+
+**Updated exact debt:**
+
+1. CT10a/CT10b: base and binary-exponent rectangular
+   envelopes SOURCE-WRITTEN, not kernel-checked.
+2. M15-support: only nonzero errors occur at proper
+   powers SOURCE-WRITTEN, not kernel-checked.
+3. CT11: PROVE rectangle index enumeration/cardinality
+   with duplicate-safe counting of prime-power
+   **values**; a pair's error support counts at most
+   twice the proper-value support, not arbitrary pairs.
+4. CT12: REAL ordered logarithm positivity/growth,
+   not a Nat-valued weight proxy.
+5. CT13–CT14: assemble the uniform actual weighted
+   residual bound and its sublinearity.
+6. CT15: **still genuinely missing** uniform negative
+   cancellation bound on the signed Möbius/divisor
+   shifted prime-pair correlation. The exact finite
+   parity probe detects enormous cancellation;
+   it does not assert a positive asymptotic.
+7. CT16–CT18: compose with genuine certified
+   nonzero-prime-only-sum-to-witness theorem, close
+   under Golden Agda --safe with no postulates.
+No ESD files, no CI; provenance retained for
+original mathematical authors, independent
+DASHI/Lean authors, Pareto/Snowball/Ibrahim/QID.
