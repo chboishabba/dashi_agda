@@ -1,4 +1,5 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
+import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as NativeIdentity
 import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
 import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
@@ -333,3 +334,31 @@ toeVerifiedConceptQidsRetainNoAuthority :
     NativeIdentity.canonicalExternalIdentityPolicy ≡ false
 toeVerifiedConceptQidsRetainNoAuthority =
   NativeQid369.verifiedConceptDoesNotCreateAuthority
+
+------------------------------------------------------------------------
+-- Both-ended source/target compatible directed hyperfabric:
+-- directionality retained, without erasing the independently given face.
+------------------------------------------------------------------------
+
+toeDirectedFabricForwardSourceTarget :
+  DirectedFabric369.restrictDirected
+    (DirectedFabric369.atSource
+      {source = DirectedObserver.participantA}
+      {target = DirectedObserver.participantB})
+    (DirectedFabric369.outgoingIncomingRow DirectedObserver.participantA)
+  ≡
+  DirectedFabric369.restrictDirected
+    (DirectedFabric369.atTarget
+      {source = DirectedObserver.participantA}
+      {target = DirectedObserver.participantB})
+    (DirectedFabric369.outgoingIncomingRow DirectedObserver.participantB)
+toeDirectedFabricForwardSourceTarget =
+  trans DirectedFabric369.sourceAtoBWeight
+        (sym DirectedFabric369.targetAtoBWeight)
+
+toeDirectedFabricForwardReverseRemainDistinct :
+  WeightedGraph369.dankaWeight DirectedObserver.participantA DirectedObserver.participantB
+  ≡ WeightedGraph369.dankaWeight DirectedObserver.participantB DirectedObserver.participantA
+  -> ⊥
+toeDirectedFabricForwardReverseRemainDistinct =
+  DirectedFabric369.forwardBackwardNotSymmetric
