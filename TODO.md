@@ -17419,3 +17419,14 @@ pants/sheaf matching before promoting any real-world synthesis.
 - [ ] Prove PRIME-SPECIFIC spectral correlation lower bound in an actual arithmetic producer, not from positive Hilbert/Fourier energy alone, and certify full interval Pickover phase separately.
 
 - [x] Inhabit actual matrix-vs-C3 `ResidualRepair` for every graph and original finite wave trit; prove explicit strict refinement from the existing source-owned consumer collision. No analytic cross-promotion.
+
+### 2026-10-30 retained-history correction and typed 9/18/27 integration
+
+- [x] Inspect actual HistoryTimeIndexedConsumerFibreExact, HistoryTimeReasoningFibreTransportPathExact, ConsumerIndexedUntanglingTowerExact, CoarseDynamicsTraceCongruenceExact, WaveAlgorithmLift, ShiftWaveRefinementHierarchy and original nine-trit/Rubik typed codec.
+- [x] Correct static C3 orbit-only no-go scope: historical consumer-sufficiency is tested on the *complete retained temporal fibre*, not the current averaged matrix alone.
+- [x] Add golden source `TrialecticGraphWaveHistoricalFibreRecoveryExact`: prior/live/future source matrices, separate C3 orbit frames, exact consumer recovery after retained history, deterministic evolution postprocessing, and generic full-history collision no-go.
+- [x] Reuse actual 9 ordered directed cells, both source/target incidence roles for every edge, typed 27-choices-per-stage depth-three trit-cube round trip, and independently typed 2×9 Fricke block; no semantic collapse by cardinality.
+- [x] Attach new source to four TOE graph imports; keep ESD untouched.
+- [ ] Instantiate the historically retained observation in an actually computed, nontrivial graph-wave update with source-proved `WaveRefinementTower` and retained fibre projection compatibility; general postprocessing of full history is only the first closure layer.
+- [ ] For actual twin-prime `Λ(n)Λ(n+2)` and Pickover real phase, construct physical/arithmetic producer and quantitative consumer-specific analytic bounds; neither follows from this finite type-level interface.
+- [ ] Kernel typecheck Agda transitive imports / Lean native counterparts; no CI necessary.
