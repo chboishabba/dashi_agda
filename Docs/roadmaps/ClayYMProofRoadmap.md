@@ -90,6 +90,34 @@ proof-bearing input; no new synthetic H3 spectrum is introduced.
 
 
 
+
+### R445 same-marked-moment source to native P2 (30 October continuation)
+
+Existing `BalabanClayT5MarkedMomentProducerRound444Exact` and
+`BalabanClayT5MarkedPreferredExpectationRound445Exact` already compile
+one marked-polymer moment closure into the exact preferred diagonal
+expectation producer on a selected thermodynamic family.
+`BalabanLiteralWilsonNativePhysicalMeasureExact.nativeWilsonPreferredFromMarked`
+now reuses that R445 input **on the same native Wilson thermodynamic
+carrier**, then
+`YMClayLiteralWilsonP2NativeMeasureExact.nativeWilsonP2FromMarkedSource`
+constructs the actual three P2 expectation limits using the existing
+`nativeWilsonP2Limits`. No second moment package, covariance shortcut,
+support-distance theorem or independent trace-to-Gram interpretation is
+introduced in the native route. Remaining inputs are the actual R445
+`boundedObservableTail`, continuum-tail witness, selected moment
+realization and physically identified native thermodynamic/measure family.
+The real CMP119 and rational P2 carriers are not asserted equal by analogy.
+
+The 2026 external literature scan included OpenAI's October 26 public
+scientific-collaboration announcement, Bałaban's original CMP116 record,
+and contemporary proof proposals; externally authored proof claims are
+inspiration/search inputs, not kernel proof terms or guaranteed physical
+witnesses. QIDs are discovery/provenance identifiers and do not substitute
+for mathematical same-object equalities; the existing Ibrahim/QID and
+Monster3B ownership fences remain unchanged.
+
+
 ## 2026-10-30 — Route-S H1 direct-source Pareto weld
 
 The highest-value reuse cut is the **direct source/OS** mass-gap route, not a
