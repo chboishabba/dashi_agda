@@ -36,6 +36,38 @@ def count_both(n, gates, output):
     return n_input_accept
 
 
+
+def check_local_three_bit_gate_cnf():
+    """Original fixed-width truth-table CNF, specialized to DAG gate predicates.
+
+    Explicitly different from expanding a whole n-bit circuit truth table.
+    """
+    kinds = ("const-false", "const-true", "not", "and", "or")
+    rows = tuple(product((False, True), repeat=3))
+    def predicate(kind, bits):
+        output, left, right = bits
+        expected = {
+            "const-false": False,
+            "const-true": True,
+            "not": not left,
+            "and": left and right,
+            "or": left or right,
+        }[kind]
+        return output == expected
+
+    for kind in kinds:
+        # Original CNF.truthTableCNF excludes each rejected local row.
+        clauses = [tuple((i, not bit) for i, bit in enumerate(row))
+                   for row in rows if not predicate(kind, row)]
+        assert len(clauses) <= 8
+        assert all(len(clause) == 3 for clause in clauses)
+        for candidate in rows:
+            compiled = all(any(candidate[index] == literal
+                               for index, literal in clause)
+                           for clause in clauses)
+            assert compiled == predicate(kind, candidate), (kind, candidate)
+    print("PASS: 40 local three-bit gate/CNF evaluations; <=8 width-3 clauses")
+
 def main():
     tests = 0
     for n in (1, 2):
@@ -73,6 +105,7 @@ def main():
 
     # The unused Nat->Bool tail is not determined by the circuit.
     assert 2 * count_both(1, gates, ("g", 0)) == 4
+    check_local_three_bit_gate_cnf()
     print(f"PASS: {tests} exhaustive small DAG/output cases with exact-count equality")
     print("PASS: one-way-gate and unconstrained-tail counterexamples")
 
