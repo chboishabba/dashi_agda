@@ -63,3 +63,7 @@ monitor surface.
 
 - Added `PickoverAnalyticJHistoricalPhaseConsumerExact.agda`, reusing original `JInvariantBishopTrigUnitPhaseExact`, `JInvariantBishopQFromUnitPhaseExact`, analytical j-fibre and non-descent owners rather than a new abstract phase ontology.
 - Source-written exact equality `Im(bishopTrigPhase dataSet theta)=bishopSin dataSet theta`, consumer recovery from a retained three-time analytic phase and a separately required true-angle terminal producer certificate. No false identification of modular q/j finite values or their phase with the actual terminal sine. All three golden TOE roots import new owner; kernel pending, no ESD edit or CI.
+
+## 2026-10-31 — rigorous large-precision Pickover sign controls
+
+- Added `scripts/check_pickover_large_exponent_complex_phase_certificate.py`, independent dynamically scaled fixed-point complex powering with rigorous seed/rounding/product-error bounds. Locally executed equivalent implementation: signs (-,-,+,+,-,+) for k=(1,2,6,24,120,720), 1465 decimal precision and 7088 multiplications for the largest control. The 9999! terminal phase remains open and requires a source-specific compressed certified real-phase witness, not only a finite cyclic orbit. Original Bishop/Machin/Pickover authorship and attribution preserved. No ESD edits or CI.
