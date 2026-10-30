@@ -319,3 +319,69 @@ samePipePareto =
   1998SIAAndCurrentSewerServicingAgreements ∷
   2026ParcelAndStageGeometry ∷
   sameActionAndPrestartEvidence ∷ []
+
+
+------------------------------------------------------------------------
+-- Exact 2023 Council index anchors, one carrier not independent receipts.
+-- 292 is the Applicant's 2023 Sewer and Water Masterplan attachment;
+-- 321 is a separately indexed Remittance Advice, NOT a payment receipt.
+------------------------------------------------------------------------
+
+record CouncilIndexedPotentialJoin : Set where
+  constructor council-indexed-potential-join
+  field
+    source : Source.AttributedSource
+    councilApplication : String
+    fileIndex : String
+    indexedFileLabel : String
+    underlyingFaceReceived : Bool
+    actualCashTransferProved : Bool
+
+springview2023SewerWaterMasterplanLocator : CouncilIndexedPotentialJoin
+springview2023SewerWaterMasterplanLocator = council-indexed-potential-join
+  Law.councilSpringviewIndex
+  "6243/2023/LAP"
+  "292 (3 Oct 2023)"
+  "Applicant response to information request - Appendix A - Sewer and Water Masterplan"
+  false false
+
+springview2023RemittanceAdviceLocator : CouncilIndexedPotentialJoin
+springview2023RemittanceAdviceLocator = council-indexed-potential-join
+  Law.councilSpringviewIndex
+  "6243/2023/LAP"
+  "321 (29 Jun 2023)"
+  "Application Supporting Information - Remittance Advice"
+  false false
+
+-- A council file index label alone cannot tell whether the remittance
+-- concerned an application fee, any third-party transaction, or neither.
+data IndexedAdviceWorld : Set where
+  adviceIndexedForApplicationAdmin : IndexedAdviceWorld
+  adviceIndexedWithIndependentlyVerifiedTransfer : IndexedAdviceWorld
+
+data AdviceLabel : Set where
+  remittanceAdviceOnlyIndexed : AdviceLabel
+
+data TransferDisposition : Set where
+  noUnderlyingPaymentAuthenticated : TransferDisposition
+  verifiedTransferAndBeneficiary : TransferDisposition
+
+adviceIndex : IndexedAdviceWorld → AdviceLabel
+adviceIndex adviceIndexedForApplicationAdmin = remittanceAdviceOnlyIndexed
+adviceIndex adviceIndexedWithIndependentlyVerifiedTransfer = remittanceAdviceOnlyIndexed
+
+adviceDisposition : IndexedAdviceWorld → TransferDisposition
+adviceDisposition adviceIndexedForApplicationAdmin = noUnderlyingPaymentAuthenticated
+adviceDisposition adviceIndexedWithIndependentlyVerifiedTransfer = verifiedTransferAndBeneficiary
+
+differentDisposition :
+  adviceDisposition adviceIndexedForApplicationAdmin ≡
+  adviceDisposition adviceIndexedWithIndependentlyVerifiedTransfer → ⊥
+differentDisposition ()
+
+remittanceAdviceIndexDoesNotEstablishBeneficiaryPayment :
+  INF.FactorsThrough adviceIndex adviceDisposition → ⊥
+remittanceAdviceIndexDoesNotEstablishBeneficiaryPayment =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness adviceIndexedForApplicationAdmin
+      adviceIndexedWithIndependentlyVerifiedTransfer refl differentDisposition)
