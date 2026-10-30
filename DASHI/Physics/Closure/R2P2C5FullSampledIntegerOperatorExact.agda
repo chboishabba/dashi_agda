@@ -15,6 +15,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Agda.Builtin.List using (List)
 open import Data.Product using (_,_; proj₁; proj₂)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
 open import Data.Rational.Base using (ℚ; normalize)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
@@ -373,3 +374,57 @@ cyclotomicFiveSourceSampledEqualsIndexedGivenResolution f g target resolution =
 -- The condition above is the 64/125-character resolution,
 -- not the missing tensor-FFT synthesis/analysis same-object theorem.
 -- Neither is silently assumed from a numeric Python fixture.
+
+
+------------------------------------------------------------------------
+-- FIRST ACTUALLY DISCHARGED SOURCE-ORDER CHARACTER-RESOLUTION LEAF.
+-- Uses exact ORIGINAL Nyquist axis enumeration (not the phase owner's
+-- alternative cyclic listing), original character/group equality,
+-- and the original Q(i)/Q(zeta5) coefficient operations.
+--
+-- Finite 4² / 5² patterns, no postulate and no list-equality oracle.
+-- This is ONE AXIS.  Three-axis Fubini and the tensor FFT identification
+-- are separate downstream kernel obligations.
+------------------------------------------------------------------------
+
+cyclotomicFiveSourceAxisCharacterKernel :
+  I.FiveGridMode → I.FiveGridMode → C5.Cyclotomic5
+cyclotomicFiveSourceAxisCharacterKernel k l =
+  Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveAxes
+    (λ x →
+      FFT.scale5 FFT.oneFifth
+        (C5._*5_ (C5.character5 k x)
+          (C5.conj5 (C5.character5 l x))))
+
+cyclotomicFiveOriginalAxisCharacterResolution :
+  (k l : I.FiveGridMode) →
+  cyclotomicFiveSourceAxisCharacterKernel k l
+  ≡ Bilinear.choose C5.zero5 (C5.eq5 k l) C5.one5
+cyclotomicFiveOriginalAxisCharacterResolution I.gridZero I.gridZero = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridZero I.gridPlusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridZero I.gridPlusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridZero I.gridMinusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridZero I.gridMinusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusOne I.gridZero = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusOne I.gridPlusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusOne I.gridPlusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusOne I.gridMinusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusOne I.gridMinusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusTwo I.gridZero = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusTwo I.gridPlusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusTwo I.gridPlusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusTwo I.gridMinusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridPlusTwo I.gridMinusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusTwo I.gridZero = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusTwo I.gridPlusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusTwo I.gridPlusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusTwo I.gridMinusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusTwo I.gridMinusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusOne I.gridZero = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusOne I.gridPlusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusOne I.gridPlusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusOne I.gridMinusTwo = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusOne I.gridMinusOne = C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+-- Actual enumerated axes are owned by R2P2C4C5NyquistAntipodalFixedPointExact.
+-- Source-written proof terms; an Agda kernel run is still required.
