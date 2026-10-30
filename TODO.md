@@ -17302,3 +17302,12 @@ See `.planning/ROADMAP.md` and `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasing
 - [x] Independent exact arithmetic passed all 64 C4 / 125 C5 samples at 729 ordered pair terms each; existing Python diagnostics extended in place.
 - [ ] **P0 next:** establish `synthesiseUnscaled∘pad27To64` and `unscaledSynthesis125∘pad27To125` equal source `Original27UnscaledSynthesisAt` on all actual sample cells; then normalized forward Fourier character extraction and exact tensor orthogonality give sampled→indexed coefficient equality.
 - [ ] Require pinned Agda type-check and original Complex3/Leray physical audit before any theorem-promotion; retain R440/B4 and all empirical/Monster nonpromotion gates.
+
+
+### 2026-10-30 5l exact normalized kernel and original 729 extraction (PR #1407)
+- [x] Original source finite Fubini source-generic extraction theorem requires explicit normalized character-resolution witness instead of assuming sample/index equality.
+- [x] C4 retained and C5 full-output actual normalized Fourier phase definitions, original sample lists, source selected-pair booleans and conditional extraction theorems are source-written/TOE-wired.
+- [x] Independent pure exact arithmetic checked 4096+15625 full-group ordered character comparisons and 19683+91125 original input-pair/output resolutions in correct source order; existing universal certificate updated in-place. No Agda typecheck or committed checkout tests.
+- [ ] **P0** Construct finite-list 3D character-resolution bridge from existing C4/C5 tensor orthogonality (including original enumeration and factor (N^{-3})).
+- [ ] **P0** Connect actual C4/C5 padded array tensor transforms with source literal sample sums; compose generic extraction with indexed 729 equality and kernel-check under the golden Agdas.
+- [ ] **P1** Reuse native NS Complex3/Leray and preserve R440/R736/B4 analytic/real-ODE root; keep original Ibrahim Monster 3B proof custody separate.
