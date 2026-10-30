@@ -48,6 +48,11 @@ import DASHI.Reasoning.HistoryTimeIndexedConsumerFibreExact as History
 import DASHI.Reasoning.HistoryTimeReasoningFibreTransportPathExact as Path
 import DASHI.Core.ConsumerIndexedUntanglingTowerExact as Tower
 import DASHI.Physics.WaveAlgorithmLift as Wave
+import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as Directed
+import DASHI.Reasoning.Trialectic369RubikRefinementExact as Cube
+import DASHI.Reasoning.Trialectic369OutgoingFrickeModeBlock18Exact as Mode18
+import DASHI.Foundations.SSPTritCarrier as SSP
+import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 
 -- A path point records its own original fine matrix; an orbit-sum is
 -- only a derived observation. This is ONE concrete source-history
@@ -171,3 +176,78 @@ allNinePositionsReopen = Graph.digraphMatrixRoundTrip
 -- refinements. Their actual consumer-preserving intertwiners,
 -- where appropriate, must be supplied for this Nat-weighted graph.
 -- Thus the recovery theorem neither truncates nor confuses them.
+
+------------------------------------------------------------------------
+-- 9 -> TWO-ENDED INCIDENCE (18 roles) -> 27-CHOICE REFINEMENT.
+--
+-- These are THREE DIFFERENT TYPE CLAIMS, preserved independently:
+--  * nine ordered source-target entries (3x3);
+--  * two incidence roles for EACH entry: atSource, atTarget (18);
+--  * each ternary ROW has 27 possible trit values, and the full
+--    3-row matrix is a depth-3 address with 27^3 possibilities.
+--
+-- The distinct Fricke ModeBlock18 = BinaryPhase x Codec.Sheet9
+-- is NOT falsely equated with the 18 directed incidence roles.
+------------------------------------------------------------------------
+
+sourceRoleReadsActualWeight :
+  (g : Graph.WeightedDigraph3)
+  (s t : Matrix.Participant3) ->
+  Directed.restrictDirected
+    (Directed.atSource {source = s} {target = t})
+    (Orbit.rowsFor g s)
+    ≡ g s t
+sourceRoleReadsActualWeight g s t = refl
+
+targetRoleReadsActualWeight :
+  (g : Graph.WeightedDigraph3)
+  (s t : Matrix.Participant3) ->
+  Directed.restrictDirected
+    (Directed.atTarget {source = s} {target = t})
+    (Orbit.rowsFor g t)
+    ≡ g s t
+targetRoleReadsActualWeight g s t = refl
+
+bothIncidenceRolesAgree :
+  (g : Graph.WeightedDigraph3)
+  (s t : Matrix.Participant3) ->
+  Directed.restrictDirected
+    (Directed.atSource {source = s} {target = t})
+    (Orbit.rowsFor g s)
+  ≡
+  Directed.restrictDirected
+    (Directed.atTarget {source = s} {target = t})
+    (Orbit.rowsFor g t)
+bothIncidenceRolesAgree g s t = refl
+
+ternaryNineToDepthThree :
+  Matrix.ObserverMatrix3 SSP.SSPTrit ->
+  Hyper.TernaryAddress 3 3
+ternaryNineToDepthThree = Cube.observerToDepth3Address
+
+ternaryDepthThreeReturnsNine :
+  (matrix : Matrix.ObserverMatrix3 SSP.SSPTrit) ->
+  Cube.depth3AddressToObserver (ternaryNineToDepthThree matrix)
+    ≡ matrix
+ternaryDepthThreeReturnsNine = Cube.observerAddressRoundTrip
+
+-- An exact finite 18-state chart EXISTS, but is not the same object
+-- as the 18 incidence roles unless an explicit morphism is proved.
+frickeEighteenIsExactlyEighteen :
+  Mode18.modeBlockStateCount ≡ 18
+frickeEighteenIsExactlyEighteen =
+  Mode18.modeBlockStateCountIsEighteen
+
+-- The wave's signed value is a consumer of the ORIGINAL directed
+-- selected edge. Retaining the entire history recovers it at each
+-- point, irrespective of the shape of the coarse C3 summary.
+signedWaveConsumerAt :
+  HistoryTime -> RetainedGraphHistory -> Wave.Trit
+signedWaveConsumerAt t h =
+  Static.selectedWaveTrit (fineGraphAt t h)
+
+historicalWaveConsumerRecovery :
+  (t : HistoryTime) ->
+  Consumer.ConsumerSufficient retainedObserver (signedWaveConsumerAt t)
+historicalWaveConsumerRecovery t left right same =
+  cong (signedWaveConsumerAt t) (proj₂ same)
