@@ -537,3 +537,68 @@ gaussianActualNyquistSeparableProduct fx fy fz cubeTerm agreement =
     gaussianCoefficientOps gaussianFiniteSumAlgebra
     Nyquist.allFourAxes Nyquist.allFourAxes Nyquist.allFourAxes
     Four.fourCube fx fy fz cubeTerm agreement
+
+
+------------------------------------------------------------------------
+-- EXACT THREE-AXIS CHARACTER NORMALIZATION AND CONJUGATE REGROUPING.
+-- Reuses the original cyclotomic conjugation and four-factor product
+-- permuter; two-factor scale-product proved in existing FFT owner.
+-- No 4^6 / 5^6 exhaustive constructor explosion or new scalar field.
+------------------------------------------------------------------------
+
+gaussianCubeScaleFactor :
+  norm64 ≡ (FFT.quarter * FFT.quarter) * FFT.quarter
+gaussianCubeScaleFactor = solve-∀
+
+gaussianTripleNormalizedPhaseScale :
+  (a b c d e f : G.Gaussian4) →
+  FFT.scaleG norm64 (G._*G_ (G._*G_ (G._*G_ (a) (b)) (c)) (G.conjG (G._*G_ (G._*G_ (d) (e)) (f))))
+  ≡ G._*G_ (G._*G_ (FFT.scaleG FFT.quarter (G._*G_ (a) (G.conjG d))) (FFT.scaleG FFT.quarter (G._*G_ (b) (G.conjG e)))) (FFT.scaleG FFT.quarter (G._*G_ (c) (G.conjG f)))
+gaussianTripleNormalizedPhaseScale a b c d e f =
+  let
+    conjugateDistribution :
+      G.conjG (G._*G_ (G._*G_ (d) (e)) (f))
+      ≡ G._*G_ (G._*G_ (G.conjG d) (G.conjG e)) (G.conjG f)
+    conjugateDistribution =
+      trans
+        (G.gaussianConjMul (G._*G_ (d) (e)) f)
+        (cong (λ v → G._*G_ (v) (G.conjG f))
+          (G.gaussianConjMul d e))
+
+    rearrange :
+      G._*G_ (G._*G_ (G._*G_ (a) (b)) (c)) (G._*G_ (G._*G_ (G.conjG d) (G.conjG e)) (G.conjG f))
+      ≡ G._*G_ (G._*G_ (G._*G_ (a) (G.conjG d)) (G._*G_ (b) (G.conjG e))) (G._*G_ (c) (G.conjG f))
+    rearrange =
+      trans
+        (Bilinear.productShuffle4 gaussianCoefficientOps gaussianFiniteSumAlgebra
+          (G._*G_ (a) (b)) c
+          (G._*G_ (G.conjG d) (G.conjG e)) (G.conjG f))
+        (cong
+          (λ v → G._*G_ (v) (G._*G_ (c) (G.conjG f)))
+          (Bilinear.productShuffle4 gaussianCoefficientOps gaussianFiniteSumAlgebra
+            a b (G.conjG d) (G.conjG e))))
+
+    factorScale :
+      FFT.scaleG norm64 (G._*G_ (G._*G_ (G._*G_ (a) (G.conjG d)) (G._*G_ (b) (G.conjG e))) (G._*G_ (c) (G.conjG f)))
+      ≡ G._*G_ (G._*G_ (FFT.scaleG FFT.quarter (G._*G_ (a) (G.conjG d))) (FFT.scaleG FFT.quarter (G._*G_ (b) (G.conjG e)))) (FFT.scaleG FFT.quarter (G._*G_ (c) (G.conjG f)))
+    factorScale =
+      trans
+        (cong
+          (λ q → FFT.scaleG q (G._*G_ (G._*G_ (G._*G_ (a) (G.conjG d)) (G._*G_ (b) (G.conjG e))) (G._*G_ (c) (G.conjG f))))
+          gaussianCubeScaleFactor)
+        (trans
+          (FFT.gaussianScaleOfProduct
+            (FFT.quarter * FFT.quarter) FFT.quarter
+            (G._*G_ (G._*G_ (a) (G.conjG d)) (G._*G_ (b) (G.conjG e))) (G._*G_ (c) (G.conjG f)))
+          (cong
+            (λ v → G._*G_ (v) (FFT.scaleG FFT.quarter (G._*G_ (c) (G.conjG f))))
+            (FFT.gaussianScaleOfProduct FFT.quarter FFT.quarter
+              (G._*G_ (a) (G.conjG d)) (G._*G_ (b) (G.conjG e)))))
+  in
+  trans
+    (cong
+      (λ v → FFT.scaleG norm64 (G._*G_ (G._*G_ (G._*G_ (a) (b)) (c)) (v)))
+      conjugateDistribution)
+    (trans
+      (cong (λ v → FFT.scaleG norm64 v) rearrange)
+      factorScale)
