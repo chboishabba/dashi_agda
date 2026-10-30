@@ -863,3 +863,6 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+-- Prime-gap SOTA: exact shift-two BIDI; larger published bounds remain distinct.
+import DASHI.Arithmetic.TwinPrimeSOTABoundedGapBidiExact as PrimeGapSOTABidi
