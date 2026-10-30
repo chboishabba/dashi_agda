@@ -27,6 +27,19 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 > independently authored formal interfaces and compositions.
 
 
+
+> **P2 boundedness supplement, 30 October.** The canonical rational-quaternion
+> SU(2) trace theorem now feeds the existing S2 Wilson algebra through a
+> typed `RationalSU2TraceGramBoundSource`, provided its normalized trace
+> interval is identified with the physical `Gram.BoundedObservable`
+> predicate. A single interpretation theorem replaces individual loopwise
+> boundedness assumptions. The canonical S2 projection then feeds the
+> existing P2 three-expectation-limit compiler. This is an exact
+> implication conditional on the physical source-to-measure interpretation,
+> bounded product/identity closure and selected time-distance geometry; it
+> does not identify rational SU(2) with the full continuum Wilson measure.
+
+
 ## Abstract
 
 This manuscript presents a reduction of the four-dimensional Yang–Mills mass-gap problem on a literal finite SU(2) Wilson–Gibbs family to three physical inputs, denoted `F1`, `F3`, and `F4`. The finite lattice theory, transfer-form algebra, varying-Hilbert-space transport, vacuum-sector spectral consequences, and final continuum gap compiler are treated as already-paid mathematical infrastructure where stated. The surviving physical obligations are:
