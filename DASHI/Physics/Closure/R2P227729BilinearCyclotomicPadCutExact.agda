@@ -539,3 +539,81 @@ productShuffleSix ops laws a b c d e f =
     (productShuffle4 ops laws
       (CoefficientOps.multiply ops a c)
       (CoefficientOps.multiply ops b d) e f)
+
+
+------------------------------------------------------------------------
+-- EXACT FINITE FOURIER COEFFICIENT-EXTRACTION REDUCTION.
+--
+-- Reuses, rather than re-proves, sumAllSwap and sumAllScaleLeft on the
+-- original 729 pair list. The ONLY premise not obtained from abstract
+-- semiring laws is the actual normalized character resolution.
+-- Do NOT interpret supplying this premise as discharging it.
+--
+-- Source genealogy: BalabanFiniteSumFubiniExact (YM) and
+-- NSTriadKNLuoFiniteFourierInversionFromResolutionExact (Grafakos).
+-- This version is coefficient-polymorphic, not a false rational-only
+-- coercion to Q(i) or Q(zeta5). Source-written; kernel pending.
+------------------------------------------------------------------------
+
+finiteFourierExtractionFromOriginal729GivenResolution :
+  ∀ {Sample A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (samples : List Sample)
+  (one : A)
+  (rightUnit :
+    (value : A) →
+    CoefficientOps.multiply ops value one ≡ value)
+  (coefficient : Pairs.ModePair729 → A)
+  (phase : Pairs.ModePair729 → Sample → A)
+  (selected : Pairs.ModePair729 → Bool)
+  (resolution :
+    (pair : Pairs.ModePair729) →
+    sumAll ops samples (phase pair)
+    ≡ choose (CoefficientOps.zero ops) (selected pair) one) →
+  sumAll ops samples
+    (λ sample →
+      sumAll ops Pairs.pair729
+        (λ pair →
+          CoefficientOps.multiply ops
+            (coefficient pair) (phase pair sample)))
+  ≡ sumAll ops Pairs.pair729
+      (λ pair →
+        choose (CoefficientOps.zero ops)
+          (selected pair) (coefficient pair))
+finiteFourierExtractionFromOriginal729GivenResolution
+  ops laws samples one rightUnit coefficient phase selected resolution =
+  trans
+    (sumAllSwap ops laws samples Pairs.pair729
+      (λ sample pair →
+        CoefficientOps.multiply ops
+          (coefficient pair) (phase pair sample)))
+    (sumAllCong ops Pairs.pair729
+      (λ pair →
+        sumAll ops samples
+          (λ sample →
+            CoefficientOps.multiply ops
+              (coefficient pair) (phase pair sample)))
+      (λ pair →
+        choose (CoefficientOps.zero ops)
+          (selected pair) (coefficient pair))
+      (λ pair →
+        trans
+          (sumAllScaleLeft ops laws
+            (coefficient pair) samples (phase pair))
+          (trans
+            (cong (CoefficientOps.multiply ops (coefficient pair))
+              (resolution pair))
+            (selectByResolution pair (selected pair)))))
+  where
+  selectByResolution :
+    (pair : Pairs.ModePair729) (flag : Bool) →
+    CoefficientOps.multiply ops (coefficient pair)
+      (choose (CoefficientOps.zero ops) flag one)
+    ≡ choose (CoefficientOps.zero ops) flag (coefficient pair)
+  selectByResolution pair true = rightUnit (coefficient pair)
+  selectByResolution pair false =
+    FiniteSumAlgebra.sumMulZeroRight laws (coefficient pair)
+
+-- The exact remaining C4/C5 'payment' is a proof of resolution
+-- for the ACTUAL sample list, normalized character kernel and
+-- retained/full output selection. No postulate or extracted oracle.
