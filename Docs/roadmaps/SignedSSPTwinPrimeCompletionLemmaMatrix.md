@@ -2151,3 +2151,57 @@ studies cancellation of `Λ(n)μ(n+2)` (one shifted Möbius factor);
 that is NOT equivalent to a lower bound for
 `Λ(n)Λ(n+2)`. Neither may be promoted to a twin-prime proof.
 No ESD edits and no CI executed.
+
+### 30 October 2026 — exact 43-file static audit and CT11 computed-count corollaries
+
+After the CT11 import-header repair, **all 43 changed
+Agda paths matching TwinPrime/Mangoldt/ProperPower** on
+PR #1408 were freshly fetched from the branch and
+examined in four batches. No remaining literal `\\n`
+import corruption, duplicated exact import declarations,
+postulate declarations or `TERMINATING`/`NON_TERMINATING`
+pragmas were detected in that 43-file subset.
+This is a STATIC text check; it does NOT find all
+Agda elaboration/type errors, verify imports' entire
+transitive closure, or produce a Golden kernel receipt.
+
+The actual newly added `TwinPrimeProperPowerBinaryCutoffNatExact`
+and `TwinPrimeProperPowerUniversalRectangleCoverageExact`
+lack `{-# OPTIONS --safe #-}`; fixing the complete safe
+dependency graph remains CT01. No local `agda`/`lean`
+binaries and no network fetch of the repo were available
+in the container; no CI was run.
+
+New CT11 formalisation derives, from the original
+`FiniteNatFloorSquareRootExact.floorSquareRoot`,
+`GeneralResidualFibreCardinalityExact.pow2`,
+`FiniteWeightedReindexExact.listLength`, and the
+original `natPow`, a fully computed candidate-image
+bound `length(dedup(image(rectangle(U))))
+≤ floorSquareRoot(U)*floorBinaryExponent(U)`, alongside
+membership and duplicate-free image witnesses for each
+positive-base proper-power value ≤U. These are source-written,
+NOT kernel-verified. They still need a final connection to
+an explicitly enumerated predicate of distinct certified
+prime powers in [0,U], including the original all-prime
+ownership bridge.
+
+The October 2026 primary literature check includes
+Liang Wang's version-0.8 *Chowla expansion limitation*
+(Zenodo 23694711, 27 Oct; explicitly AI-assisted
+and not independently specialist-reviewed), and
+Lü, Wang, Wu (arXiv:2610.20242) claiming shifted
+`Λ(n)μ(n+2)` cancellation. Neither provides an unconditional
+`Λ(n)Λ(n+2)` positive lower bound.
+No QID record, Pareto quotient, Snowball provenance,
+Ibrahim orbit, Monster 3B resemblance, or finite
+CRT/FRACTRAN receipt is promoted into CT15.
+
+**Next Pareto cut:** isolate a genuine ordered-log
+scalar instance and the CT12 pointwise weight upper
+bound; then prove CT13/CT14 from the now
+candidate-bounded distinct proper-power support.
+In parallel, attack CT15c's genuine shifted gap-two
+signed cancellation; reject any bound relying only
+on the finite wheel survivor count, which admits
+composite–composite counterfeit pairs.
