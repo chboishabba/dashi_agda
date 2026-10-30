@@ -13,7 +13,8 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Data.Vec using (Vec; []; _∷_)
 
-import DASHI.Combinatorics.TriadicVideoCodecObservationQuotient as Video
+-- Conceptual source owner: DASHI.Combinatorics.TriadicVideoCodecObservationQuotient
+-- Not imported: that owner's module is not marked --safe.
 
 xor : Bool → Bool → Bool
 xor false x = x
