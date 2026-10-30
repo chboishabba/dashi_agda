@@ -496,3 +496,18 @@ boundary charts but **does not pay G3**: none is an actual
 embedded surface in the selected three-child complement, and
 G4 based inclusion is still unverified. Independently reproduced
 six commutator, six reversal and 36 group-transport checks.
+
+
+### 2026-10-30 further six-to-three equivariant quotient discriminator
+
+The stronger source-owned \`middleChildClassCriterion\` identifies
+unoriented parent-meridian orbits exactly by the existing S3 action
+on the **image of the middle generator b**. The 3 pair-fibres are
+\`b: ABC/CBA\`, \`c: ACB/BCA\`, \`a: BAC/CAB\`. The existing S3
+composition theorem transports the three-class index equivariantly;
+this is better than an unstructured list of three representatives.
+It does not identify the quotient with a geometric triple of
+complementary meridians, nor provide an ambient S3 action. For G4,
+the remaining high-alpha dependency is now an actual point-set
+map/collar/basing path realizing either the selected-stabilizer
+boundary or orbit-indexed multi-boundary family.
