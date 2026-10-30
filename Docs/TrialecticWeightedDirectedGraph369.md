@@ -285,3 +285,20 @@ source-atlas text which still says v2. No source proof is imported.
 Preserve QID unresolved state for precise missing entities (e.g. this
 particular selected-geometry fixture; a general higher-stack proof).
 QID IDs not verified must remain candidate/unresolved, never guessed.
+
+## 2026-10-30 directed source/target two-ended fabric next leaf
+
+The already-committed `TrialecticWeightedDirectedGraph369Exact.outgoingWeightFabric`
+uses only source incidence. Its compatible section does not establish
+target-incidence transport. The next REUSE-first extension should use the
+same `TypedHyperfabricCore` with a vertex stalk holding **both outgoing
+and incoming** weight rows, a typed source/target incidence tag, and an
+edge stalk containing the selected directed weight. Restrict source
+stalk at target and target stalk at source: the two values coincide for
+the same *directed* arrow without forcing the reversed arrow equal.
+Self-loops should carry two valid incidence witnesses at one vertex.
+
+This is a finite sheaf-like compatibility proof, not a DSNN or Laplacian,
+not a genuine sheaf on a topological site, not pants surface gluing,
+and not an empirical graph-learning result. The 2026 DSNN and DSHN
+primary publications are **conceptual comparison roots only**.
