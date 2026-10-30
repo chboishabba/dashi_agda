@@ -181,3 +181,74 @@ readback are not kernel checks; exact finite regression is not
 a theorem about all integers or a topological construction;
 paper reasoning using Newman and classical centralizers is
 not the same as a formal 3D certificate. No CI, no ESD edits.
+
+
+## 6. Consequence: the normalized relative lift has infinite order
+
+The source-owner equality \`psi³=Inn(w)\` implies
+\`psi^(3n)=Inn(w^n)\` for every positive integer \`n\`.
+Since the free group is torsion-free and has trivial centre,
+\`Inn(w^n)≠id\`; therefore \`psi\` has **infinite order**.
+This is an exact mathematical consequence of the classic
+free-group facts, not an unsupported Agda quantification.
+The code's generator-wise cube checks are local finite
+witnesses; they are not a kernel proof of this universal
+group-theoretic inference.
+
+This infinite-order relative lift is compatible in **form**
+with the classical central/full-twist phenomena of braid and
+one-holed-torus mapping-class groups, but it is NOT a theorem
+identifying the source-owned local Nielsen map with a
+specific Dehn twist or 3-braid mapping class. A geometric
+identification remains the missing G2/G3 map.
+
+Directly inspected current independent #1414
+\`DASHI/Foundations/PolynomialBraidFullTwistSevenWitnessExact.agda\`:
+it proves a **different** six-crossing B3 full twist has
+identity S3 endpoint but nonzero exponent-sum modulo seven;
+it properly attributes Artin (1925), Birman (1974) and
+Kassel–Turaev (2008). This is useful as a typed
+"endpoint-permutation forgets central history" **comparison**,
+not as the geometric or group-theoretic source of
+\`psi³=Inn(w)\`. Its winding mod-seven is NOT the G4
+peripheral exponent \`3k-1\`, and no cross-repo module
+identity is asserted.
+
+For classical precedent the one-holed-torus mapping-class
+group has a B3 description and central boundary-twist
+extension; see standard mapping-class literature, for example
+Yair Minsky, *A Brief Introduction to Mapping Class Groups*,
+and Birman, *Braids, Links, and Mapping Class Groups* (1974).
+The actual selected three-child embedding must still supply
+the surface and based curves before any specific mapping-class
+identity can be claimed.
+
+## 7. Independent execution and provenance receipts
+
+Independent local Python free reduction on the current selected
+\`w,q,phi\` was EXECUTED and passed:
+- \`phi²(q)phi(q)q=w^-1\`;
+- all three generating letters of \`psi³\` equal their
+  respective conjugates by \`w\`;
+- \`q_k=q w^k\` for \`k=-7,...,7\` satisfies the parent
+  conjugacy equation and has exact threefold norm
+  \`w^(3k-1)≠1\`.
+
+This executed code was an **independently reproduced model**
+of the canonical source formulas. The committed GitHub
+Python script was separately *source-updated and read back*
+but was not downloaded or executed byte-for-byte in the
+model container. The Agda compiler, pinned stdlib, Lean
+kernel, full in-repo preflight and CI were not available
+or run. Hence all new formal declarations are
+**source-written / kernel pending**, and geometry G2–G6
+is not claimed proved.
+
+Attribution/provenance reuses the directly inspected
+\`DASHI.Core.SnowballAttributionProvenanceInvariantExact\`
+rule: preserve author/title/publication/DOI/source type/
+formalisation relationship/proof import/authority as
+separate axes. Original Hatcher/Alexander/Newman/Nielsen
+and Artin/Birman results retain priority. Ibrahim's original
+Monster 3B theorem owners, Balaban's own RG roots, and
+independent #1414, #1438, #1440 PR owners remain separate.
