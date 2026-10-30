@@ -164,7 +164,7 @@ blockActionComposition p q b =
 
 -- Explicit original group actions on each individual orbit block,
 -- not just a partition-count equality.
-caseBlockAction : Shape.TriPermutation → OrbitBlock27 → OrbitBlock27 Shape.TriPermutation → OrbitBlock27 → OrbitBlock27
+caseBlockAction : Shape.TriPermutation → OrbitBlock27 → OrbitBlock27
 caseBlockAction p identityBlock = identityBlock
 caseBlockAction p (cycleBlock i) = cycleBlock (Small.flipPair p i)
 caseBlockAction p (transpositionBlock i) =
