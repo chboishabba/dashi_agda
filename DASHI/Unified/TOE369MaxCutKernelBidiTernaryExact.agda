@@ -1,4 +1,7 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
+import DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact as GridPants369
+import DASHI.Combinatorics.GraphColouringHomomorphismCoreExact as GridColour
+import DASHI.Combinatorics.GraphColouring369PantsGridAdjacencyExact as NativeGridPants
 import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact as DirectedObserver
 import DASHI.Core.ConsumerDescentMinimalObserverExact as DirectedDescent
@@ -6,6 +9,7 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact as DirectedDescent
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Unit using (⊤)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
@@ -247,3 +251,41 @@ toeWeightedGraphDoesNotDetermineAttachedFace :
     WeightedGraph369.triadicConsumer -> ⊥
 toeWeightedGraphDoesNotDetermineAttachedFace =
   WeightedGraph369.matrixDoesNotDetermineTrialecticFace
+
+------------------------------------------------------------------------
+-- Native ternary-27 -> finite pants path graph max-cut.
+-- Do not identify the 3-vertex weighted fixture with this 27-grid, or
+-- a finite pants graph with a smooth TQFT.  These are constructed terms,
+-- with independent kernel verification still outstanding.
+------------------------------------------------------------------------
+
+toeNativeVoxelPantsGraphHom :
+  GridColour.GraphHom
+    GridPants369.nativeVoxelGrid GridPants369.nativePantsGrid
+toeNativeVoxelPantsGraphHom =
+  GridPants369.nativeVoxelToPantsGraphHom
+
+toeNativePantsGridHasTwoColouring :
+  GridColour.Colouring
+    GridPants369.nativePantsGrid
+    NativeGridPants.twoColourPalette
+toeNativePantsGridHasTwoColouring =
+  NativeGridPants.pantsTwoColouring
+
+toeNoSingletonColouringPants :
+  GridColour.Colouring
+    GridPants369.nativePantsGrid
+    (GridColour.paletteGraph ⊤ (λ _ _ -> ⊥))
+    -> ⊥
+toeNoSingletonColouringPants =
+  NativeGridPants.noOneColouringOfPantsGrid
+
+toeSixPermutationImagesDistinct :
+  (left right : NativeGridPants.S3CoordinatePermutation) ->
+  NativeGridPants.actS3Pants
+    left NativeGridPants.s3DistinctAnchor
+  ≡ NativeGridPants.actS3Pants
+    right NativeGridPants.s3DistinctAnchor
+  -> left ≡ right
+toeSixPermutationImagesDistinct =
+  NativeGridPants.s3AnchorImageInjective
