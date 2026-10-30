@@ -1364,3 +1364,160 @@ the sieve parity barrier. QIDs remain identification metadata,
 Ibrahim Monster 3B ownership unchanged, original Pareto
 semantic-admission and Snowball provenance controls preserved.
 No protected ESD edits and no CI claimed.
+
+## 30 October 2026 — source-audited M13 × M14 max-cut: exact classified finite sums, true prime-one BIDI, retained error
+
+### Repository and external state checked in THIS continuation
+
+Actual Agda source read on #1408 (not only PR titles):
+`TwinPrimeMangoldtMultiPeriodConcatExact.agda`,
+`TwinPrimeMangoldtCertifiedIntervalScheduleExact.agda`,
+`TwinPrimeMangoldtTotalIntervalPlanExact.agda`,
+`TwinPrimeMangoldtExhaustiveSupportCaseExact.agda`,
+`TwinPrimeMangoldtProperPower25_27NoGoExact.agda`,
+`FiniteTwinSieveFactorableLiftExact.agda`,
+`TwinPrimeCertifiedEnumeratorExact.agda`.
+Existing original owners on `master` read:
+`RiemannVonMangoldtSpecification.agda`,
+`ChebyshevPrimeCounting.agda`,
+`NatPrimeCountingInstance.agda`,
+`PrimeCountingFunction.agda`,
+`RiemannPrimePowerCounting.agda`,
+`ParetoSymmetryQuotientAdmissionExact.agda`,
+`SnowballAttributionProvenanceInvariantExact.agda`,
+`IbrahimEnglishHighFlowQidBindingsExact.agda`.
+Distinct PR-source material read:
+#1244 `AlexanderHornedS3SignQuotientSetoidBidiExact.agda`,
+#1275 `ZipfThreeDrawEqualityPatternFactorExact.agda`,
+#1414 `PolynomialIbrahimParetoSnowballMaxCutExact.agda`.
+Latest heads observed: #1408 `4b36f817...` at session start;
+#1244 `4b9ef09e...`, #1275 `bca5fb61...`,
+#1414 `51860893...`. These independent PRs were NOT merged.
+Lean actual source read:
+`dashi_lean4/MoonshineFractran.lean` (finite SSP state and arithmetic
+equalities), `dashi_lean4/docs/DECLARATION_LANDSCAPE.md` (actual
+checked-in declarations distinct from candidate bundles);
+`agda2lean/README.md` (typed Core IR/CBOR/Lean reconstruction).
+No Lean proof of unconditional gap-two correlation was found in
+these checked surfaces.
+
+Current external primary references:
+Julia Stadlmann (arXiv:2608.31126, 2026) H1<=240;
+Song & Yue (SSRN 7408198, 2026) claim H1<=236;
+OpenAI (2026) reports H1<=186 but its Lean receipt explicitly has
+unpaid analytic/numeric assumptions. They are *bounded gaps*, NOT gap 2.
+A 2026-10-27 Laporta upload titled a claim of the full conjecture
+(arXiv 2006.04547) is an **unverified research claim**, not usable
+as a proved lemma merely because an abstract says "true".
+No source claim is promoted to kernel authority or identified
+as a same-object Monster/Ibrahim theorem.
+
+### Concrete code and paydown (all SOURCE-WRITTEN / kernel PENDING)
+
+1. Repaired `TwinPrimeMangoldtMultiPeriodConcatExact.sumIntervalSplit`
+   zero-length base case with `Data.Nat.Properties.+-identityʳ`.
+   The previous base case failed to explicitly transport the
+   variable-index `start+0` to `start` under the finite fold.
+2. `TwinPrimeMangoldtClassifiedFiniteSumExact.agda`:
+   `supportWeight`, `supportWeightCorrect`,
+   `pairSupportWeight`, `classifiedPairWeightExact`,
+   `classifiedPairPeriodExact`,
+   `finiteCorrelationClassifiedExact`.
+   These reuse the ORIGINAL `VonMangoldtAt` cases and
+   exact `specificationSingleValued`; EVERY finite
+   actual lambda-pair sum is equal to its classified sum
+   with zero additive commutativity assumptions.
+3. `TwinPrimeMangoldtPrimeOneCertifiedBidiExact.agda`:
+   imports the ORIGINAL `ChebyshevPrimeOwnership`
+   and `NatPrimeCountingInstance.natPrimePredicate`.
+   `primeOnePairToTwin` and `twinToPrimeOnePair`
+   transport actual `NatPrimality.Prime n` certificates
+   both directions using `p^1=p` and the owned
+   `primeToCarrier` / `carrierIsPrime` maps.
+   `PrimeOneTwinBidi` is a logical BIDI, NOT
+   equality of dependent proof objects.
+4. `TwinPrimeMangoldtPrimeErrorFiniteSplitExact.agda`:
+   nine explicit case proofs `pairCaseSplit`;
+   `classifiedPointwiseSplit`; all-length ordered
+   `finiteSumPointwiseSplit`; `finiteMangoldtPrimeErrorSplit`.
+   Original lambda-pair sum is EXACTLY the sum over
+   exponent-one/exponent-one terms PLUS all remaining terms.
+   `AdditiveInterchangeLaws` supplies unit and
+   commutative regrouping as **EXPLICIT additional scalar
+   assumptions**. No fake monoid/Weil laws.
+   **Semantic correction:** `AllPrimeArithmetic.Prime`
+   is an arbitrary carrier unless the ORIGINAL
+   `ChebyshevPrimeOwnership` bridge is supplied.
+   The unguarded `primeOnlyAtNat` is therefore a
+   carrier-exponent-one *candidate* sum, not automatically
+   genuine `NatPrime` evidence.
+5. `TwinPrimeMangoldtFiniteErrorPeriodBidiExact.agda`
+   composes M13 total arbitrary interval code with M14
+   finite prime/error split in BOTH directions:
+   `finiteCodedPeriodToPrimeError`,
+   `finitePrimeErrorToCodedPeriod`.
+   The **admitted** `finiteCodedPeriodToCertifiedPrimeError`
+   explicitly also requires `ChebyshevPrimeOwnership`,
+   and `primeOneOwnerBidi` witnesses that owner.
+   This is an exact finite certificate-preserving interface,
+   NOT a twin-prime count growth theorem.
+6. Each of the three canonical TOE roots now imports the
+   four new modules once; pre-existing duplicated
+   `TwinPrimeMangoldtActualPrimePowerResidualExact` imports
+   were removed without editing ESD.
+7. Independent Python regression oracle committed:
+   `scripts/check_twin_prime_m14_prime_error_split.py`.
+   The Python interpreter was ACTUALLY RUN locally:
+   15,002 independent support classifications;
+   606 exact symbolic M14 finite intervals;
+   15,000 actual prime-one/twin case comparisons;
+   30,000 pair classifications;
+   706 exact symbolic whole=prime+error intervals;
+   all PASS, including (25,27) as prime-power ERROR,
+   (59,61) as a genuine twin pair, and all nine
+   support category pairings. Symbolic monomials
+   are formal `log(p)*log(q)` tokens and imply NO analytic estimates.
+   Existing local 3,010 M13 interval tests,
+   25,000 support tests, 70,001 count-jump checks,
+   and 30,000 Nat-period checks also ran PASS.
+8. Static checks / imports / absence of `postulate`
+   do NOT establish successful Agda kernel elaboration.
+   The local container has no executable `agda` or `lean`.
+   No CI was run by explicit user instruction.
+
+### Updated max-cut frontier (highest-alpha)
+
+- **M13:** exact all-Nat interval reindexing and count decomposition
+  source-written; actual Agda typecheck remains an unpaid gate.
+- **M14:** full original 3×3 source-support algebra, classified
+  finite correlation, exponent-one NatPrime certificate BIDI
+  *under genuine ownership*, and explicit retained proper-power
+  error source-written. Still need proof-bearing finite
+  multiplicity/no-duplicate classification and concrete total
+  instantiated `AllPrimeArithmetic`/Weil analytic scalar.
+- **M15:** a UNIFORM positive/ordered scalar bound for
+  `nonPrimeErrorAtNat` remains OPEN; an elementary bound
+  on the count of proper powers must be paired with
+  explicit growth bounds on logarithmic weights.
+- **M16:** formal conditional implication from
+  positive gap-two `sum Λ(n)Λ(n+2)` to genuine NatPrime
+  pair count growth remains OPEN. Existing
+  `UnboundedCertifiedCountJumps` is an ASSUMPTION,
+  not proof of its own existence.
+- **F02/F04/F06/G01:** unconditional positive prime-pair
+  correlation and the parity obstruction are mathematically
+  OPEN; QIDs, Pareto search rankings, C3/S3 matching
+  orbit sizes, or historical Ibrahim/Monster fingerprints
+  do NOT discharge them.
+- **G06:** exact-head Agda kernel verification, with
+  `--safe`, zero postulates/metas and no artificial
+  termination escapes, remains OPEN.
+
+Provenance: original von Mangoldt/Riemann, Brun (1919),
+Hardy–Littlewood (1923), Zhang (2013/14),
+Maynard/Tao/Polymath (2013–14); original DASHI
+Agda/Lean proof owners; independently owned Ibrahim
+3B and Snowball/QID references retained. The
+finite classification identities are DASHI-specific
+new source-written adapters, not falsely attributed
+as the historical source authors' formalised proofs.
