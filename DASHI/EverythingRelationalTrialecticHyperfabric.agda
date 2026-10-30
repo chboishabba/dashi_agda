@@ -1,4 +1,5 @@
 module DASHI.EverythingRelationalTrialecticHyperfabric where
+import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
 import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
 import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
 import DASHI.Reasoning.TrialecticWeightedGraphFaceMediationSelectedExact as SelectedFace369
