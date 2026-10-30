@@ -101,20 +101,20 @@ def verify_rational_solver_source_integrity():
     # macro and then specializes them to the actual field values.
     q27=owner("PolynomialS3RationalBlockFieldIsomorphismExact")
     scalar=re.findall(r"^([A-Za-z0-9_]+_scalar_[A-Za-z0-9_]+) = Ring[.]solve-∀$",q27,re.M)
-    applied=re.findall(r"^([A-Za-z0-9]+) (?:Perm[.]\\w+ )?f(?: g)? (?:Small|Big)[.]\\w+ = ([A-Za-z0-9_]+_scalar_[A-Za-z0-9_]+) ",q27,re.M)
+    applied=re.findall(r"^([A-Za-z0-9]+) (?:Perm[.]\w+ )?f(?: g)? (?:Small|Big)[.]\w+ = ([A-Za-z0-9_]+_scalar_[A-Za-z0-9_]+) ",q27,re.M)
     assert len(scalar)==176,len(scalar)
     assert len(applied)==176,len(applied)
     assert len(set(scalar))==176
     assert set(scalar)==set(n for _,n in applied)
-    assert not re.search(r"Ring[.]solve \\(",q27)
-    assert not re.search(r"= Ring[.]solve-∀[ \\t]+",q27)
+    assert not re.search(r"Ring[.]solve \(",q27)
+    assert not re.search(r"= Ring[.]solve-∀[ \t]+",q27)
     for owner_name,needed in (
         ("PolynomialVietaRootSymmetryExact",19),
         ("PolynomialVandermondeDiscriminantExact",14),
     ):
         text=owner(owner_name)
         assert "Ring.solve-∀" not in text
-        assert len(re.findall(r"Ring[.]solve \\([^\\n]* \\u2237 \\[\\]\\)",text))==needed
+        assert len(re.findall(r"Ring[.]solve \([^\n]* \u2237 \[\]\)",text))==needed
     for dim,n in ((2,2),(3,3),(6,6)):
         assert len(re.findall(r"^scalarField"+str(dim)+r" x[0-9]+",q27,re.M))==n
     print("PASS 176 true scalar solve-∀ lemmas with field instantiations;"
