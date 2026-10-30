@@ -5,3 +5,4 @@ open import DASHI.Research.OpenAIMath.OpenAIMathPriorityAtlasExact public
 open import DASHI.Research.OpenAIMath.OpenAIMathSourceAtlasExact public
 open import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinUniqueExtensionExact public
 open import DASHI.Research.OpenAIMath.OpenAIMathFiniteSupportedTseitinModelsExact public
+open import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinGateCNFExact public
