@@ -169,3 +169,12 @@ QIDs and 2026 directed-sheaf sources are attribution/comparison only.
   metas, termination, postulate scans. No CI dependency.
 - [ ] 54-edge formal completeness/uniqueness and genuine selected
   situated pants/gluing or face mediation interface.
+
+## 2026-10-30 QID role-typing refinement
+
+- [x] Type QID graph concept roles; distinguish discipline,
+  structure, representation, morphism, problem, theorem.
+- [x] Reuse existing Snowball Dewey/QID coordinate and inspected
+  511.54 directed graph vs 511.5 graph theory parent.
+- [x] Lean mirror role-indexed concept vocabulary.
+- [ ] Exact-head kernel checks and situated face/seam authority.
