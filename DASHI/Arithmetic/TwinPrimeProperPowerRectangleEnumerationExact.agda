@@ -19,8 +19,8 @@ module DASHI.Arithmetic.TwinPrimeProperPowerRectangleEnumerationExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)\nopen import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Product using (_×_; _,_)\nopen import Data.Nat.Base using (_≤_; z≤n; s≤s)\nimport Data.Nat.Properties as NatP\nopen import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; subst; sym)
+open import Agda.Builtin.List using (List; []; _∷_)\nopen import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)\nopen import Data.Nat.Base using (_≤_; z≤n; s≤s)\nopen import Data.Empty using (⊥)\nopen import Data.Sum using (_⊎_; inj₁; inj₂)\nimport Data.Nat.Properties as NatP\nopen import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; subst; sym)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Data.List.Base using (_++_; map)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
@@ -279,3 +279,107 @@ properPowerCandidateDistinctCountBound b e =
     (λ n → properPowerCandidateDistinctCount b e ≤ n)
     (powerValueRectangleLength b e)
     (dedupLengthAtMost (powerValueRectangle b e))
+
+------------------------------------------------------------------------
+-- CT11 DEDUP EQUIVALENCE: true membership equivalence, plus no repeats.
+-- Original list/number evidence is preserved; unlike a cardinality
+-- analogy, these are actual finite proof terms for our source program.
+------------------------------------------------------------------------
+
+insertContainsNew :
+  (x : Nat) (xs : List Nat) →
+  x member insertIfFresh x xs
+insertContainsNew x [] = memberHead
+insertContainsNew x (y ∷ ys) with x NatP.≟ y
+... | yes equal =
+  subst
+    (λ value → value member (y ∷ ys))
+    (sym equal)
+    memberHead
+... | no different =
+  memberTail (insertContainsNew x ys)
+
+insertPreservesOld :
+  (x : Nat) {value : Nat} (xs : List Nat) →
+  value member xs → value member insertIfFresh x xs
+insertPreservesOld x [] ()
+insertPreservesOld x (y ∷ ys) proof with x NatP.≟ y
+... | yes equal = proof
+... | no different with proof
+...   | memberHead = memberHead
+...   | memberTail tailMember =
+  memberTail (insertPreservesOld x ys tailMember)
+
+insertMembershipBack :
+  (x : Nat) {value : Nat} (xs : List Nat) →
+  value member insertIfFresh x xs →
+  (value ≡ x) ⊎ (value member xs)
+insertMembershipBack x [] memberHead = inj₁ refl
+insertMembershipBack x (y ∷ ys) proof with x NatP.≟ y
+... | yes equal = inj₂ proof
+... | no different with proof
+...   | memberHead = inj₂ memberHead
+...   | memberTail tailMember with
+    insertMembershipBack x ys tailMember
+...     | inj₁ sameNew = inj₁ sameNew
+...     | inj₂ oldMember = inj₂ (memberTail oldMember)
+
+dedupPreservesMember :
+  {value : Nat} (xs : List Nat) →
+  value member xs → value member dedupPowerValues xs
+dedupPreservesMember [] ()
+dedupPreservesMember (x ∷ xs) memberHead =
+  insertContainsNew x (dedupPowerValues xs)
+dedupPreservesMember (x ∷ xs) (memberTail original) =
+  insertPreservesOld x (dedupPowerValues xs)
+    (dedupPreservesMember xs original)
+
+dedupMemberComesFromOriginal :
+  {value : Nat} (xs : List Nat) →
+  value member dedupPowerValues xs → value member xs
+dedupMemberComesFromOriginal [] ()
+dedupMemberComesFromOriginal (x ∷ xs) inImage
+  with insertMembershipBack x (dedupPowerValues xs) inImage
+... | inj₁ sameNew =
+  subst
+    (λ v → v member (x ∷ xs))
+    (sym sameNew)
+    memberHead
+... | inj₂ oldImage =
+  memberTail (dedupMemberComesFromOriginal xs oldImage)
+
+data DistinctValues : List Nat → Set where
+  distinctEmpty : DistinctValues []
+  distinctCons :
+    ∀ {x xs} →
+    (x member xs → ⊥) →
+    DistinctValues xs →
+    DistinctValues (x ∷ xs)
+
+insertPreservesDistinct :
+  (x : Nat) (xs : List Nat) →
+  DistinctValues xs → DistinctValues (insertIfFresh x xs)
+insertPreservesDistinct x [] distinctEmpty =
+  distinctCons (λ ()) distinctEmpty
+insertPreservesDistinct x (y ∷ ys)
+    (distinctCons yFresh tailDistinct)
+  with x NatP.≟ y
+... | yes equal = distinctCons yFresh tailDistinct
+... | no different =
+  distinctCons
+    (λ inInserted →
+      caseInsert (insertMembershipBack x ys inInserted))
+    (insertPreservesDistinct x ys tailDistinct)
+  where
+    caseInsert :
+      (y ≡ x) ⊎ (y member ys) → ⊥
+    caseInsert (inj₁ yEqualsX) = different (sym yEqualsX)
+    caseInsert (inj₂ yOld) = yFresh yOld
+
+dedupValuesDistinct :
+  (xs : List Nat) →
+  DistinctValues (dedupPowerValues xs)
+dedupValuesDistinct [] = distinctEmpty
+dedupValuesDistinct (x ∷ xs) =
+  insertPreservesDistinct x (dedupPowerValues xs)
+    (dedupValuesDistinct xs)
