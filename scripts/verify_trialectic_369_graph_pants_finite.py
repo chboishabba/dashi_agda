@@ -96,6 +96,41 @@ def main() -> None:
                     if perturbed(x) != perturbed(y))
         assert score <= weighted_checker_score
 
+    # Pareto next cut: positivity + connectedness gives exactly two
+    # saturated optimal partitions (checkerboard and its complement).
+    # This is a classical connected-bipartite-graph deduction, NOT 2^27
+    # exhaustive search and not a new Agda kernel theorem.
+    neighbours = {vertex: set() for vertex in V}
+    for source, target in undirected_edges:
+        neighbours[source].add(target)
+        neighbours[target].add(source)
+    reachable = {V[0]}
+    frontier = [V[0]]
+    while frontier:
+        for other in neighbours[frontier.pop()]:
+            if other not in reachable:
+                reachable.add(other)
+                frontier.append(other)
+    assert len(reachable) == len(V)
+    # Given the root bit, every reached neighbor is forced to be its
+    # opposite for a saturated cut with strictly positive edge weights.
+    for root_bit in (0, 1):
+        forced = {V[0]: root_bit}
+        todo = [V[0]]
+        while todo:
+            here = todo.pop()
+            for other in neighbours[here]:
+                required = forced[here] ^ 1
+                if other in forced:
+                    assert forced[other] == required
+                else:
+                    forced[other] = required
+                    todo.append(other)
+        assert len(forced) == 27
+        assert all(forced[v] == (checker(v) ^ (root_bit ^ checker(V[0])))
+                   for v in V)
+        assert all(forced[u] != forced[v] for u, v in undirected_edges)
+
     # IDs inspected on actual Wikidata item pages; no QID created here.
     verified_concept_qids = {
         "graph_theory": "Q131476",
@@ -121,6 +156,9 @@ def main() -> None:
         "minimal_palette_size": 2,
         "checkerboard_colour_class_sizes": dict(sorted(Counter(checker(v) for v in V).items())),
         "max_cut_54_unit_edges": checker_unit_score,
+        "connected_native_grid_vertices": len(reachable),
+        "strict_positive_weight_optimum_unique_up_to_global_complement": True,
+        "uniqueness_basis": "connectedness and positive-edge cut saturation; not enumerated over all 2^27 partitions",
         "nonuniform_positive_weight_total_saturated": weighted_total,
         "verified_concept_qids_navigation_only": verified_concept_qids,
         "distinct_s3_permutations": len(six),
