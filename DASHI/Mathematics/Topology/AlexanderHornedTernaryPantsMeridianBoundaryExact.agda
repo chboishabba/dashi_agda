@@ -599,6 +599,24 @@ module ABCSixPermutationPeripheralOrbit where
   orbitFamilyEquivariant Perm.permSwapMidHigh Perm.permSwapLowHigh = refl
   orbitFamilyEquivariant Perm.permSwapMidHigh Perm.permSwapMidHigh = refl
 
+
+  -- Each relabelled word still has the original once-punctured
+  -- torus commutator presentation.  This gives six *mapped surface*
+  -- source charts, NOT six embedded theta ribbons in one wild stage.
+  sixPuncturedTorusBoundary :
+    (sigma : Perm.TriPermutation) →
+    reduce
+      (invert (renameWord sigma p) ++w
+       imageOfParent sigma ++w renameWord sigma p)
+      ≡ reduce
+        (comm (renameWord sigma u) (renameWord sigma v))
+  sixPuncturedTorusBoundary Perm.permIdentity = refl
+  sixPuncturedTorusBoundary Perm.permRotate = refl
+  sixPuncturedTorusBoundary Perm.permRotate2 = refl
+  sixPuncturedTorusBoundary Perm.permSwapLowMid = refl
+  sixPuncturedTorusBoundary Perm.permSwapLowHigh = refl
+  sixPuncturedTorusBoundary Perm.permSwapMidHigh = refl
+
   -- The parent word's orientation reversal is represented by
   -- right multiplication by the EXISTING S3 transposition (a c).
   -- Each case is an explicit finite free reduction, not a quotient
