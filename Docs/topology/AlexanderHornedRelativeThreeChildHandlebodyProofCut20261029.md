@@ -483,3 +483,16 @@ No action from the pending polynomial #1414 or trialectic #1438
 branches was imported as if it were a proven topology result.
 The prior Hatcher binary geometry is still binary.
 Source written, exact-head Agda and Lean kernel unexecuted; CI skipped.
+
+
+### 2026-10-30 follow-on: six mapped punctured-torus boundary charts
+
+The exact six-case \`ABCSixPermutationPeripheralOrbit.
+sixPuncturedTorusBoundary\` reuses the chosen \`u,v,p\`
+basis/conjugator and transports it through every existing S3
+element without inventing new surface-group generators. This
+pays the free-group equality for all six candidate genus-one
+boundary charts but **does not pay G3**: none is an actual
+embedded surface in the selected three-child complement, and
+G4 based inclusion is still unverified. Independently reproduced
+six commutator, six reversal and 36 group-transport checks.
