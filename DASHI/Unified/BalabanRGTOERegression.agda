@@ -731,3 +731,25 @@ balabanRouteSP2TracePaysPerLoopBounds :
 balabanRouteSP2TracePaysPerLoopBounds =
   P2Trace.rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue
 
+
+
+balabanRouteSP2NativeNoExtraProduct : Bool
+balabanRouteSP2NativeNoExtraProduct =
+  P2Trace.nativeWilsonS2NoIndependentBoundedProductLeaf
+
+balabanRouteSP2NativeNoExtraProductIsTrue :
+  balabanRouteSP2NativeNoExtraProduct ≡ true
+balabanRouteSP2NativeNoExtraProductIsTrue =
+  P2Trace.nativeWilsonS2NoIndependentBoundedProductLeafIsTrue
+
+balabanRouteSP2NativeNoDistance : Bool
+balabanRouteSP2NativeNoDistance =
+  P2Trace.nativeWilsonP2DoesNotNeedSupportDistance
+
+balabanRouteSP2NativeNoDistanceIsFalse :
+  balabanRouteSP2NativeNoDistance ≡ false
+balabanRouteSP2NativeNoDistanceIsFalse =
+  P2Trace.nativeWilsonP2DoesNotNeedSupportDistanceIsFalse
+
+balabanRouteSP2NativeCompilerLevel : ProofLevel
+balabanRouteSP2NativeCompilerLevel = P2Trace.nativeWilsonS2CompilerLevel
