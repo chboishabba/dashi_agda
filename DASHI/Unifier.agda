@@ -180,7 +180,8 @@ open RootDiscriminant public using
   ; firstSecondCollisionGivesZero
   ; firstThirdCollisionGivesZero ; secondThirdCollisionGivesZero
   ; splitVandermondeZero ; zeroDiscriminantImpliesCollision
-  ; zeroDifferenceRational ; rationalDomainLawWitness ; zeroDiscriminantImpliesCollisionRational ; collisionImpliesZeroDiscriminantRational ; zeroDiscriminantIffRootCollisionRational )
+  ; zeroDifferenceRational ; rationalDomainLawWitness ; zeroDiscriminantImpliesCollisionRational ; collisionImpliesZeroDiscriminantRational ; zeroDiscriminantIffRootCollisionRational
+  ; coefficientDiscriminantZeroIffRootCollisionRational )
 
 -- Artin B3 full twist: trivial root S3 endpoint but C7 signed
 -- crossing exponent six, preserving both braid and cancellation relations.
