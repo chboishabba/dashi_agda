@@ -1,4 +1,5 @@
 module DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact where
+import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
 open import Data.Nat using (_≤_)open import Data.List using (List)import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
 import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
 
