@@ -119,3 +119,16 @@ For the precise finite cut and citations, see
 `Docs/TrialecticWeightedDirectedGraph369.md`. Older MDL / signature
 closure obligations in the five-phase roadmap above are independent;
 this 369 lane does not mark those completed.
+
+## 2026-10-30 — P2 finite medial instance (not semantic closure)
+
+- [x] Reuse existing `FaceMediationLaw`,
+  `GrothendieckFaceMediatedSection`, `promoteGrothendieckMediated`
+  and non-descent witnesses.
+- [x] Source-write one explicitly selected synthetic policy, an
+  inhabited carry and a proof candidate that the selected output
+  fails to descend from the complete weighted graph.
+- [ ] A **situated, source-authorized** mediation law and admissible
+  interfaces (separate from finite selected demonstration).
+- [ ] Exact-head `--safe` Agda and downstream pinned Lean verification
+  for both the pants graph/colour and selected mediation owners.
