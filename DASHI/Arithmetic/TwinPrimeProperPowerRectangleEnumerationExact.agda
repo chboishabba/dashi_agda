@@ -356,6 +356,16 @@ data DistinctValues : List Nat → Set where
     DistinctValues xs →
     DistinctValues (x ∷ xs)
 
+insertedMemberContradiction :
+  (x y : Nat) {ys : List Nat} →
+  (x ≡ y → ⊥) →
+  (y member ys → ⊥) →
+  (y ≡ x) ⊎ (y member ys) → ⊥
+insertedMemberContradiction x y distinct yFresh (inj₁ same) =
+  distinct (sym same)
+insertedMemberContradiction x y distinct yFresh (inj₂ old) =
+  yFresh old
+
 insertPreservesDistinct :
   (x : Nat) (xs : List Nat) →
   DistinctValues xs → DistinctValues (insertIfFresh x xs)
@@ -368,13 +378,9 @@ insertPreservesDistinct x (y ∷ ys)
 ... | no different =
   distinctCons
     (λ inInserted →
-      caseInsert (insertMembershipBack x ys inInserted))
+      insertedMemberContradiction x y different yFresh
+        (insertMembershipBack x ys inInserted))
     (insertPreservesDistinct x ys tailDistinct)
-  where
-    caseInsert :
-      (y ≡ x) ⊎ (y member ys) → ⊥
-    caseInsert (inj₁ yEqualsX) = different (sym yEqualsX)
-    caseInsert (inj₂ yOld) = yFresh yOld
 
 dedupValuesDistinct :
   (xs : List Nat) →
