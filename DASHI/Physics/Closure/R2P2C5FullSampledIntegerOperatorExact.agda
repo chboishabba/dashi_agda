@@ -16,7 +16,7 @@ open import Agda.Builtin.List using (List)
 open import Data.Product using (_,_; proj₁; proj₂)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
-open import Data.Rational.Base using (ℚ; normalize)
+open import Data.Rational.Base using (ℚ; _*_; normalize)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Full
@@ -468,3 +468,68 @@ cyclotomicFiveActualNyquistSeparableProduct fx fy fz cubeTerm agreement =
     cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
     Nyquist.allFiveAxes Nyquist.allFiveAxes Nyquist.allFiveAxes
     Full.gridCube fx fy fz cubeTerm agreement
+
+
+------------------------------------------------------------------------
+-- EXACT THREE-AXIS CHARACTER NORMALIZATION AND CONJUGATE REGROUPING.
+-- Reuses the original cyclotomic conjugation and four-factor product
+-- permuter; two-factor scale-product proved in existing FFT owner.
+-- No 4^6 / 5^6 exhaustive constructor explosion or new scalar field.
+------------------------------------------------------------------------
+
+cyclotomicFiveCubeScaleFactor :
+  oneOver125 ≡ (FFT.oneFifth * FFT.oneFifth) * FFT.oneFifth
+cyclotomicFiveCubeScaleFactor = solve-∀
+
+cyclotomicFiveTripleNormalizedPhaseScale :
+  (a b c d e f : C5.Cyclotomic5) →
+  FFT.scale5 oneOver125 (C5._*5_ (C5._*5_ (C5._*5_ (a) (b)) (c)) (C5.conj5 (C5._*5_ (C5._*5_ (d) (e)) (f))))
+  ≡ C5._*5_ (C5._*5_ (FFT.scale5 FFT.oneFifth (C5._*5_ (a) (C5.conj5 d))) (FFT.scale5 FFT.oneFifth (C5._*5_ (b) (C5.conj5 e)))) (FFT.scale5 FFT.oneFifth (C5._*5_ (c) (C5.conj5 f)))
+cyclotomicFiveTripleNormalizedPhaseScale a b c d e f =
+  let
+    conjugateDistribution :
+      C5.conj5 (C5._*5_ (C5._*5_ (d) (e)) (f))
+      ≡ C5._*5_ (C5._*5_ (C5.conj5 d) (C5.conj5 e)) (C5.conj5 f)
+    conjugateDistribution =
+      trans
+        (C5.conjugationMultiplicative (C5._*5_ (d) (e)) f)
+        (cong (λ v → C5._*5_ (v) (C5.conj5 f))
+          (C5.conjugationMultiplicative d e))
+
+    rearrange :
+      C5._*5_ (C5._*5_ (C5._*5_ (a) (b)) (c)) (C5._*5_ (C5._*5_ (C5.conj5 d) (C5.conj5 e)) (C5.conj5 f))
+      ≡ C5._*5_ (C5._*5_ (C5._*5_ (a) (C5.conj5 d)) (C5._*5_ (b) (C5.conj5 e))) (C5._*5_ (c) (C5.conj5 f))
+    rearrange =
+      trans
+        (Bilinear.productShuffle4 cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+          (C5._*5_ (a) (b)) c
+          (C5._*5_ (C5.conj5 d) (C5.conj5 e)) (C5.conj5 f))
+        (cong
+          (λ v → C5._*5_ (v) (C5._*5_ (c) (C5.conj5 f)))
+          (Bilinear.productShuffle4 cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+            a b (C5.conj5 d) (C5.conj5 e))))
+
+    factorScale :
+      FFT.scale5 oneOver125 (C5._*5_ (C5._*5_ (C5._*5_ (a) (C5.conj5 d)) (C5._*5_ (b) (C5.conj5 e))) (C5._*5_ (c) (C5.conj5 f)))
+      ≡ C5._*5_ (C5._*5_ (FFT.scale5 FFT.oneFifth (C5._*5_ (a) (C5.conj5 d))) (FFT.scale5 FFT.oneFifth (C5._*5_ (b) (C5.conj5 e)))) (FFT.scale5 FFT.oneFifth (C5._*5_ (c) (C5.conj5 f)))
+    factorScale =
+      trans
+        (cong
+          (λ q → FFT.scale5 q (C5._*5_ (C5._*5_ (C5._*5_ (a) (C5.conj5 d)) (C5._*5_ (b) (C5.conj5 e))) (C5._*5_ (c) (C5.conj5 f))))
+          cyclotomicFiveCubeScaleFactor)
+        (trans
+          (FFT.cyclotomicFiveScaleOfProduct
+            (FFT.oneFifth * FFT.oneFifth) FFT.oneFifth
+            (C5._*5_ (C5._*5_ (a) (C5.conj5 d)) (C5._*5_ (b) (C5.conj5 e))) (C5._*5_ (c) (C5.conj5 f)))
+          (cong
+            (λ v → C5._*5_ (v) (FFT.scale5 FFT.oneFifth (C5._*5_ (c) (C5.conj5 f))))
+            (FFT.cyclotomicFiveScaleOfProduct FFT.oneFifth FFT.oneFifth
+              (C5._*5_ (a) (C5.conj5 d)) (C5._*5_ (b) (C5.conj5 e)))))
+  in
+  trans
+    (cong
+      (λ v → FFT.scale5 oneOver125 (C5._*5_ (C5._*5_ (C5._*5_ (a) (b)) (c)) (v)))
+      conjugateDistribution)
+    (trans
+      (cong (λ v → FFT.scale5 oneOver125 v) rearrange)
+      factorScale)
