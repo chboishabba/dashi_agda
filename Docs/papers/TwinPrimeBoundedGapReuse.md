@@ -543,3 +543,9 @@ representation. No implementation here asserts such positivity,
 nontrivial cancellation, parity-barrier bypass or the twin-prime
 conjecture. No Agda typecheck/CI was run; all Agda statements
 remain source-written and kernel-pending.
+
+## 2026-10-30 — actual Mangoldt residual into computed proper-power support
+
+Continued from CT11 cutoff and deduplicated-image construction on PR #1408. New Agda owner `TwinPrimeMangoldtProperPowerCandidateCoverageExact` imports, rather than replaces, the original von Mangoldt, Chebyshev ownership and NatPrime owners; it connects actual proper-power endpoint evidence to computed candidate membership and proves the reverse exclusion (no candidate endpoint => zero retained error). The abstract `AllPrimeArithmetic` alone does not prove `toNat p >= 2`; `primeBaseFromChebyshevOwnership` provides the proof from the existing certified owner using standard-library primality refutations at 0 and 1.
+
+This is a **source-written, kernel-pending** semantic bridge: it does not prove that every candidate is a prime power, cannot treat composite base 6 in 36=6² as prime, and cannot identify the wheel/Ibrahim quotient with actual gap-two distribution. The finite position injection/cardinality lemma and actual real ordered log weights are still required for CT13/CT14. Most critically CT15b/c have no unconditional positive shifted prime-correlation / signed-remainder proof. Original Hardy–Littlewood, Brun, von Mangoldt, Chebyshev, Lü–Wang–Wu and Liang Wang mathematical provenance remains separate from independently authored source terms; prior Ibrahim Monster 3B, Pareto/Snowball and QID ownership and non-promotion constraints are preserved. No ESD edits; no CI run.
