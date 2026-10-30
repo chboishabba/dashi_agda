@@ -349,10 +349,11 @@ record EdgeChartCoverageBoundary : Set where
     exact54CanonicalSlots : Bool
     exactExistingEdgeListRoundTrip : Bool
     exactZeroToFiftyThreeIdentifierCensus : Bool
+    typedClosedListNoDuplicatesWritten : Bool
     slotIdInjectivityEstablishedHere : Bool
     exactHeadAgdaKernelChecked : Bool
     smoothOrPhysicalPantsClaimed : Bool
 
 canonicalEdgeChartCoverageBoundary : EdgeChartCoverageBoundary
 canonicalEdgeChartCoverageBoundary =
-  edge-chart-coverage-boundary true true true true true false false false
+  edge-chart-coverage-boundary true true true true true true false false false
