@@ -411,3 +411,95 @@ priorityCommercialJoins =
   agreementIdentityAndParcel ∷ specificUtilityScope ∷
   contractingPartiesAndConsideration ∷ successorAndSubdivisionTerms ∷
   observedPhysicalAssetOrMeter ∷ actualIncomeAndBeneficiary ∷ []
+
+
+------------------------------------------------------------------------
+-- RELATION-TYPED HISTORY: CONTRACT, ADVERSARIAL CASE, STATUTORY REVIEW
+-- These are three different paths, not one friendly ownership edge.
+------------------------------------------------------------------------
+
+data RelationshipKind : Set where
+  contractualHistoricalInfrastructureParticipant : RelationshipKind
+  adversarialPlanningLitigation : RelationshipKind
+  statutoryNonApplicantReview : RelationshipKind
+  recordedLobbyingAccess : RelationshipKind
+
+record RelationshipReceipt : Set where
+  constructor relationship-receipt
+  field
+    kind : RelationshipKind
+    source : Source.AttributedSource
+    temporalKey : String
+    paidDocumentContent : Bool
+    provesFinancialTransfer : Bool
+    provesGasLobbying : Bool
+
+open RelationshipReceipt public
+
+councilCherish1998ContractContext : RelationshipReceipt
+councilCherish1998ContractContext = relationship-receipt
+  contractualHistoricalInfrastructureParticipant
+  springfieldStructurePlan2025
+  "Springfield Infrastructure Agreement 1998; original Council plan description"
+  true false false
+
+cherishSCGAdversarialAppeal2018 : RelationshipReceipt
+cherishSCGAdversarialAppeal2018 = relationship-receipt
+  adversarialPlanningLitigation
+  qca266OfficialCarrier
+  "[2018] QCA 266; Court of Appeal 8535/2017; 12 Oct 2018"
+  true false false
+
+scgCommentStatutoryRoute2024 : RelationshipReceipt
+scgCommentStatutoryRoute2024 = relationship-receipt
+  statutoryNonApplicantReview
+  councilSpringviewIndex
+  "6243/2023/LAP; s275Z entry 6; 14 Mar 2024"
+  false false false
+
+santoroAccessDistinctFromStatutoryRole : RelationshipReceipt
+santoroAccessDistinctFromStatutoryRole = relationship-receipt
+  recordedLobbyingAccess
+  Developer.april2025Diary
+  "9 Apr 2025 Treasurer/Energy portfolio office"
+  true false false
+
+relationshipHistory : List RelationshipReceipt
+relationshipHistory =
+  councilCherish1998ContractContext ∷
+  cherishSCGAdversarialAppeal2018 ∷
+  scgCommentStatutoryRoute2024 ∷
+  santoroAccessDistinctFromStatutoryRole ∷ []
+
+-- A recorded historical agreement does not turn earlier adversarial
+-- litigation into an agreed current revenue-sharing scheme.
+data RelationshipWorld : Set where
+  oldDealAndCourtNoCurrentCashflow : RelationshipWorld
+  oldDealAndCourtSeparatelyPaidCurrentCashflow : RelationshipWorld
+
+data ObservedHistory : Set where
+  agreementAndAppealExist : ObservedHistory
+
+data CurrentCommercialGain : Set where
+  currentGainNotDocumented : CurrentCommercialGain
+  currentGainDocumented : CurrentCommercialGain
+
+history : RelationshipWorld → ObservedHistory
+history oldDealAndCourtNoCurrentCashflow = agreementAndAppealExist
+history oldDealAndCourtSeparatelyPaidCurrentCashflow = agreementAndAppealExist
+
+gain : RelationshipWorld → CurrentCommercialGain
+gain oldDealAndCourtNoCurrentCashflow = currentGainNotDocumented
+gain oldDealAndCourtSeparatelyPaidCurrentCashflow = currentGainDocumented
+
+gainDifference :
+  gain oldDealAndCourtNoCurrentCashflow ≡
+  gain oldDealAndCourtSeparatelyPaidCurrentCashflow → ⊥
+gainDifference ()
+
+agreementAndAdversarialJudgmentDoNotDetermineCurrentBenefit :
+  INF.FactorsThrough history gain → ⊥
+agreementAndAdversarialJudgmentDoNotDetermineCurrentBenefit =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness oldDealAndCourtNoCurrentCashflow
+      oldDealAndCourtSeparatelyPaidCurrentCashflow refl gainDifference)
