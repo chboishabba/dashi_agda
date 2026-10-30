@@ -49,6 +49,22 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 > closure, time/support identification and continuum measure convergence.
 
 
+
+> **30 October further source-first correction (native P2).** The existing
+> `BalabanLiteralWilsonNativeThermodynamicProducerExact`,
+> `BalabanLiteralWilsonNativePhysicalMeasureExact`, and
+> `YMClayLiteralWilsonP2NativeMeasureExact` already construct the native
+> quantitative bounded-observable algebra and the complete three-expectation
+> P2 conclusion, conditional on actual physical measure/tail inputs. The new
+> `nativeWilsonSameAlgebraBoundInputs` compiles this directly into the old
+> S2 record. The earlier generic trace-to-Gram adapter is only for non-native
+> carriers; it is no longer a native proof obligation. P2 requires **no**
+> separate Euclidean support-distance input. The canonical normalized
+> Wilson-trace bound is rank `1ℚ`, not `2ℚ` (the latter is the defining
+> representation dimension). P3's native H2/H3 same-Hamiltonian spectral
+> identification remains physically proof-bearing.
+
+
 ## Abstract
 
 This manuscript presents a reduction of the four-dimensional Yang–Mills mass-gap problem on a literal finite SU(2) Wilson–Gibbs family to three physical inputs, denoted `F1`, `F3`, and `F4`. The finite lattice theory, transfer-form algebra, varying-Hilbert-space transport, vacuum-sector spectral consequences, and final continuum gap compiler are treated as already-paid mathematical infrastructure where stated. The surviving physical obligations are:
