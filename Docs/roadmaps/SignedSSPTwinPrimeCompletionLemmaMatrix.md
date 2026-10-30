@@ -1883,3 +1883,99 @@ unboundedness claim.
 No ESD files, no CI; provenance retained for
 original mathematical authors, independent
 DASHI/Lean authors, Pareto/Snowball/Ibrahim/QID.
+
+## 30 October 2026 — CT11 exact candidate image max-cut, actual Agda/Lean/PR audit
+
+**This turn's actual repository inspection:** #1408 current Agdas
+`RiemannPrimePowerArithmetic.natPow`,
+`TwinPrimeProperPowerFloorRootBoundExact`,
+`TwinPrimeProperPowerBinaryExponentLowerExact`,
+`TwinPrimeProperPowerRectangleBoundExact`,
+`TwinPrimeMangoldtErrorSupportProperExact`,
+`TwinPrimeMangoldtNonzeroPrimeSumWitnessExact`;
+master `FiniteNatFloorSquareRootExact`,
+`FiniteWeightedReindexExact.listLength`,
+`ChebyshevPrimeCounting` and
+`RiemannPrimePowerCounting`. Also fetched actual
+`dashi_lean4/MoonshineFractran.lean`,
+`docs/DECLARATION_LANDSCAPE.md`, `agda2lean/README.md`,
+#1244 Horned-S3 quotient, #1275 Zipf pattern, #1414
+Polynomial-Ibrahim/Pareto/Snowball, and the original Pareto
+semantic-admission/QID identity boundary files. Refreshed all
+four PR heads. Independent S3/RGS/Monster/orbit identities must
+not be promoted into a Nat-prime correlation theorem.
+
+**New source-written CT11 owner:**
+`DASHI/Arithmetic/TwinPrimeProperPowerRectangleEnumerationExact.agda`.
+Imports the EXISTING `FiniteWeightedReindexExact.listLength`,
+the ORIGINAL `RiemannPrimePowerArithmetic.natPow`,
+the ORIGINAL `FiniteNatFloorSquareRootExact`, and the
+CT10 square-root lemma; no redundant finite-power ontology.
+
+- `powerRow` / `powerRowLength`: exact E exponent-index
+  candidates with `k=0..E-1`, corresponding to exponent `k+2`.
+- `powerRectangle` / `powerRectangleLength`: all bases
+  `1..B` paired with all E indices, **exactly B*E entries**.
+- `powerValueRectangle` /
+  `powerValueRectangleLength`: map candidates through the
+  original `natPow`; candidate LIST size unchanged.
+- `filterCandidate` / `filteredLengthAtMost`: any
+  filtered candidate count ≤ initial list count.
+- Proof-relevant membership `_member_` and
+  `rowContainsIndex`, `rectangleContainsIndex`,
+  `powerValueRectangleCovers`: each positive-base
+  bounded exponent coordinate genuinely appears.
+- `properPowerCoveredByRootRectangle`: if a proper
+  positive-base power ≤U and its exponent offset k<E,
+  the numerical power occurs in the exact mapped
+  `floorSquareRoot(U)*E` rectangle. This is a FINITE
+  membership proof, not a density assumption.
+- `insertIfFresh`, `dedupPowerValues`,
+  `insertIfFreshLengthAtMost`,
+  `dedupLengthAtMost`,
+  `properPowerCandidateDistinctCountBound`:
+  a structurally-recursive duplicate-eliminating power
+  image with upper count ≤ B*E. **Source repair**:
+  the initial `dedupPowerValues` used recursion on an
+  arbitrary filtered list, which would not satisfy
+  structural Agda termination; replaced it with
+  `insertIfFresh` over the input list. No
+  TERMINATING pragma, axioms, or postulates.
+  One inserted-duplicate length branch was also fixed
+  to use `n≤1+n` rather than reflexivity.
+- All new CT11 source imports are present exactly once
+  in `EverythingTOESymmetryResolved369`,
+  `Unifier`, and `Unified/Everything`.
+  No protected ESD edits.
+
+**ACTUALLY executed local Python**: 714 distinct upper bounds
+`U=4,11,...,4995`, rectangle cardinality and deduplicated
+image checks; 22,645 proof-model coordinate/value
+membership checks of genuine proper prime powers;
+all PASS. Independently verified the exact script's
+logic in the container before committing the reproducible
+`scripts/check_twin_prime_ct11_rectangle_membership.py`.
+This is NOT Agda kernel typechecking or a universal
+analytic error estimate.
+
+**Precise remaining CT11 subcut**: prove
+`dedupPowerValues` is NoDuplicates and preserves
+every input value's list membership (the count
+inequality alone does NOT prove distinct cardinality);
+prove an explicit total `floorLog2Nat(U)` exponent
+cutoff such that `natPow 2 e≤U ⇒ e≤floorLog2Nat U`.
+Then connect to actual distinct proper-prime-power
+support and the exact M15 residue error.
+
+**CT12–CT14** remain: explicit ordered logarithmic weights,
+certified uniform weighted error `O(sqrt U log^3 U)`,
+sublinearity. **CT15** remains wholly unproved new
+parity-sensitive mathematics. Signed Möbius
+`CT15a` is exact FINITE computational
+identity only; neither positive main term nor
+uniform negative-remainder bound is certified.
+Prove rather than assume both.
+**CT01/G06** full `--safe` Agda kernel closure is unpaid;
+Agda/Lean binaries unavailable locally. No CI run.
+External sources (Song–Yue 2026, Wang 2026) provide
+claims/method diagnostics, not proof of gap 2.
