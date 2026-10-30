@@ -600,3 +600,58 @@ cofinallyBlockedCompositePrimePairs
 -- Conversely, stage-by-stage growth of the prime-denominator rack
 -- can decide EVERY finite bounded window but yields NO cofinal
 -- lower bound on genuine twin-pair counts without extra analysis.
+
+------------------------------------------------------------------------
+-- EXACT TWO-STEP TERMINAL TRACE, now actually using first-applicable
+-- FRACTRAN operational semantics at EACH stage.
+--
+-- 329 --(1/7)--> 47 --(1/47)--> 1.
+-- The second step requires the original first guard 7 to be blocked.
+-- This does NOT imply the global arithmetic primality of 47 from
+-- halting; it is an explicit finite trace of this local program.
+------------------------------------------------------------------------
+
+fortySevenSevenGuardBlocked : 47 % 7 ≡ 5
+fortySevenSevenGuardBlocked = refl
+
+fortySevenFortySevenGuardEnabled : 47 % 47 ≡ 0
+fortySevenFortySevenGuardEnabled = refl
+
+fortySevenFirstRuleBlocked : 47 % 7 ≡ 0 → ⊥
+fortySevenFirstRuleBlocked ()
+
+threeTwentyNineSecondFractranStep :
+  Interpreter.FirstApplicableStep
+    localFractionEnabled localFractionStep
+    localFractranProgram 47 1
+threeTwentyNineSecondFractranStep =
+  Interpreter.skip-head fortySevenFirstRuleBlocked
+    (Interpreter.choose-head fortySevenFortySevenGuardEnabled)
+
+oneSevenGuardBlocked : 1 % 7 ≡ 1
+oneSevenGuardBlocked = refl
+
+oneFortySevenGuardBlocked : 1 % 47 ≡ 1
+oneFortySevenGuardBlocked = refl
+
+oneSevenCannotFire : 1 % 7 ≡ 0 → ⊥
+oneSevenCannotFire ()
+
+oneFortySevenCannotFire : 1 % 47 ≡ 0 → ⊥
+oneFortySevenCannotFire ()
+
+oneHasNoLocalFractranStep :
+  {next : Nat} →
+  Interpreter.FirstApplicableStep
+    localFractionEnabled localFractionStep
+    localFractranProgram 1 next →
+  ⊥
+oneHasNoLocalFractranStep
+  (Interpreter.choose-head sevenEnabled) =
+  oneSevenCannotFire sevenEnabled
+oneHasNoLocalFractranStep
+  (Interpreter.skip-head _
+    (Interpreter.choose-head fortySevenEnabled)) =
+  oneFortySevenCannotFire fortySevenEnabled
+oneHasNoLocalFractranStep
+  (Interpreter.skip-head _ (Interpreter.skip-head _ ()))
