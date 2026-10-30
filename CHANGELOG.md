@@ -125,3 +125,22 @@ monitor surface.
   sampled nonuniform weights totalling 344 on all 54 native edges.
   No role coercion, source QID, or computed equality upgrades proof
   ownership, semantic face authority, physical theory or kernel state.
+
+## 2026-10-30 — Orientation normal form and S3-fixed optimal cut
+
+- Added `GraphColouring369PantsEdgeCoverageExact`: actual three-axis
+  one-step adjacency admits a 54-slot increasing-edge chart with
+  explicit reversal classification, an exact witness-list rechart and
+  a closed 0..53 slot census.
+- Added `GraphColouring369PantsSymmetryCutInvariantExact`: all six
+  S3 permutations and the second-coordinate sign reflection fix the
+  selected bipartite maximum-cut partition, not just proper-colouring
+  existence. No arbitrary directed-weight equivariance promoted.
+- Added Lean edge-coverage/Nodup and symmetry-fixed-cut downstream
+  mirrors. Extended native Python audit with 54 unique undirected
+  charts, all 108 oriented edges, 162 S3 and 27 reflection checks.
+- Updated ICLR 2026 directed-sheaf/hypergraph and asymmetric-generator
+  author-level primary-source comparisons via the canonical QID/source
+  atlas; no DOI/QID identity or inherited proof ownership invented.
+- Kernel/--safe certification, global seam semantics and general
+  same-object/physical promotion remain explicitly open.
