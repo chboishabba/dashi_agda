@@ -11,6 +11,7 @@ module DASHI.Physics.Closure.R2P2C5FullSampledIntegerOperatorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Rational.Base using (ℚ; normalize)
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
@@ -165,3 +166,44 @@ indexedFiveGridEqualsTrueFullInteger =
 --     ≡ indexedFiveGridBilinearAt f g target.
 -- The exhaustive independent Q(zeta5) character/basis test is evidence,
 -- not an Agda proof of the 125-grid sampled multiplication theorem.
+
+
+------------------------------------------------------------------------
+-- SAME-OBJECT CYCLOTOMIC FINITE FUBINI/SCALING INSTANTIATION.
+-- Reuses source Yang--Mills and NS finite sum proofs via the generic
+-- coefficient-polymorphic interface in BilinearCyclotomicPadCutExact.
+-- Needed for the actual 3D FFT sampled→index distribution proof;
+-- it is not yet that theorem.
+------------------------------------------------------------------------
+
+cyclotomicFiveFiniteSumAlgebra : Bilinear.FiniteSumAlgebra cyclotomicFiveOps
+cyclotomicFiveFiniteSumAlgebra = record
+  { sumAddAssoc = C5.scalarAddAssociative
+  ; sumAddComm = C5.scalarAddCommutative
+  ; sumAddZeroLeft = C5.scalarAddZeroLeft
+  ; sumMulDistributesLeft = C5.scalarMulDistributesLeft
+  ; sumMulDistributesRight = C5.scalarMulDistributesRight
+  ; sumMulZeroLeft = C5.scalarMulZeroLeft
+  ; sumMulZeroRight = C5.scalarMulZeroRight
+  }
+
+cyclotomicFiveActualFiniteSumSwap :
+  ∀ {X Y : Set} (xs : List X)
+  (ys : List Y)
+  (f : X → Y → C5.Cyclotomic5) →
+  Bilinear.sumAll cyclotomicFiveOps xs
+    (λ x → Bilinear.sumAll cyclotomicFiveOps ys (f x))
+  ≡ Bilinear.sumAll cyclotomicFiveOps ys
+    (λ y → Bilinear.sumAll cyclotomicFiveOps xs (λ x → f x y))
+cyclotomicFiveActualFiniteSumSwap =
+  Bilinear.sumAllSwap cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+
+cyclotomicFiveActualFiniteSumProductScale :
+  ∀ {X : Set} (z : C5.Cyclotomic5)
+  (xs : List X) (f : X → C5.Cyclotomic5) →
+  Bilinear.sumAll cyclotomicFiveOps xs
+    (λ x → C5._*5_ z (f x))
+  ≡ C5._*5_ z
+      (Bilinear.sumAll cyclotomicFiveOps xs f)
+cyclotomicFiveActualFiniteSumProductScale =
+  Bilinear.sumAllScaleLeft cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
