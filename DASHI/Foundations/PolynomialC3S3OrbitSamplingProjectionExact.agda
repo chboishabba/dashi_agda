@@ -113,3 +113,94 @@ projectS3AfterC3IsS3 f x =
 -- is a genuine retract of the eleven-field projection's range,
 -- with the ORIGINAL seven-shape classifier, not the unrelated
 -- output-phase normalized "seven nonunits".
+
+------------------------------------------------------------------------
+-- O78: POLYMORPHIC SAME-CARRIER ORBIT-SAMPLING RETRACTIONS.
+--
+-- Reuses the precise original 27-code S3/C3 quotient, chosen canonical
+-- representatives and the trit sampling owner above. The proof does not
+-- inspect the value carrier; hence it applies to rational fields too.
+-- This is NOT Reynolds averaging: sampling one chosen representative
+-- is generally neither canonical nor an invariant inner-product map.
+-- Classical finite group actions (Dixon--Mortimer); DASHI owns these
+-- concrete representative choices and the adapter, kernel pending.
+------------------------------------------------------------------------
+
+projectC3Any :
+  ∀ {A : Set} → (Q.Code27 → A) → Q.Code27 → A
+projectC3Any f x =
+  f (Q.representative11 (Q.classify11 x))
+
+projectS3Any :
+  ∀ {A : Set} → (Q.Code27 → A) → Q.Code27 → A
+projectS3Any f x =
+  f (Shape.shapeRepresentative (Shape.shapeClass x))
+
+projectC3AnyIdempotent :
+  ∀ {A : Set} (f : Q.Code27 → A) (x : Q.Code27) →
+  projectC3Any (projectC3Any f) x ≡ projectC3Any f x
+projectC3AnyIdempotent f x =
+  cong (λ o → f (Q.representative11 o))
+    (Q.classifyRepresentative11 (Q.classify11 x))
+
+projectS3AnyIdempotent :
+  ∀ {A : Set} (f : Q.Code27 → A) (x : Q.Code27) →
+  projectS3Any (projectS3Any f) x ≡ projectS3Any f x
+projectS3AnyIdempotent f x =
+  cong (λ shape → f (Shape.shapeRepresentative shape))
+    (Shape.representativeHasDeclaredShape (Shape.shapeClass x))
+
+projectC3AnyInvariant :
+  ∀ {A : Set} (f : Q.Code27 → A) (x : Q.Code27) →
+  projectC3Any f (Shape.conjugateCode Shape.permRotate x) ≡
+  projectC3Any f x
+projectC3AnyInvariant f x =
+  cong (λ o → f (Q.representative11 o))
+    (Q.classify11CycleInvariant x)
+
+projectS3AnyInvariant :
+  ∀ {A : Set} (f : Q.Code27 → A)
+  (p : Shape.TriPermutation) (x : Q.Code27) →
+  projectS3Any f (Shape.conjugateCode p x) ≡
+  projectS3Any f x
+projectS3AnyInvariant f p x =
+  cong (λ shape → f (Shape.shapeRepresentative shape))
+    (Q.shapeClassInvariant p x)
+
+projectS3AnyFixesInvariant :
+  ∀ {A : Set} (f : Q.Code27 → A) →
+  ((p : Shape.TriPermutation) (x : Q.Code27) →
+    f (Shape.conjugateCode p x) ≡ f x) →
+  (x : Q.Code27) → projectS3Any f x ≡ f x
+projectS3AnyFixesInvariant f invariant x
+  with Shape.canonicalOrbitWitness x
+... | Shape.orbitWitness p eq =
+  sym (trans (cong f eq)
+    (invariant p (Shape.shapeRepresentative (Shape.shapeClass x))))
+
+projectC3AnyAfterS3Any :
+  ∀ {A : Set} (f : Q.Code27 → A) (x : Q.Code27) →
+  projectC3Any (projectS3Any f) x ≡ projectS3Any f x
+projectC3AnyAfterS3Any f x =
+  cong (λ shape → f (Shape.shapeRepresentative shape))
+    (trans (shapeOfRepresentative11 (Q.classify11 x))
+      (sym (Q.classificationFactors x)))
+
+projectS3AnyAfterC3Any :
+  ∀ {A : Set} (f : Q.Code27 → A) (x : Q.Code27) →
+  projectS3Any (projectC3Any f) x ≡ projectS3Any f x
+projectS3AnyAfterC3Any f x =
+  cong f (chosenSevenRepresentativeIsElevenRepresentative
+    (Shape.shapeClass x))
+
+-- Original trit-specific definitions remain the canonical public owners;
+-- these equalities certify that the generic versions instantiate them.
+projectC3AnyMatchesOriginal :
+  (f : Q.Field27) (x : Q.Code27) →
+  projectC3Any f x ≡ projectC3 f x
+projectC3AnyMatchesOriginal f x = refl
+
+projectS3AnyMatchesOriginal :
+  (f : Q.Field27) (x : Q.Code27) →
+  projectS3Any f x ≡ projectS3 f x
+projectS3AnyMatchesOriginal f x = refl
