@@ -133,3 +133,100 @@ boundaries rather than promoting shape analogies to theorem authority.
   homomorphism, first supply *that carrier's* adjacency, not this 3-vertex example.
 - [ ] **No silent semantics:** find situated sources for any
   intersectional, psychological, legal, or physical interpretation.
+
+## 2026-10-30 — Native 27-grid/pants adjacency maximal finite cut
+
+**Source-written, not Agda/Lean kernel-verified.** Inspect the actual
+existing owner `Base369Ternary27HypervoxelFabricGeometryExact.agda`:
+it ALREADY defines `TritGridStep` with only -1↔0↔+1 and
+`HypervoxelAdjacent` changing exactly one axis. Do not accidentally
+substitute arbitrary unequal-coordinate adjacency (which would connect
+-1 directly to +1), or reuse the unrelated three-vertex weighted fixture.
+
+`GraphColouring369PantsGridAdjacencyExact.agda` constructs the new typed
+`SlotGridStep` using the existing slot↔SSP bridge, and an explicit
+three-path `Pants3Adjacent`. It then constructs:
+
+- actual `GraphHom` terms between the **native** 27-grid and the
+  **declared** depth-three pants path graph, both directions, with the
+  pre-existing inverse vertex round trips (graph isomorphism as two
+  graph-homomorphisms, not a smooth-space equivalence);
+- C₃ coordinate rotation commuting with the voxel→pants rechart,
+  involutive second-coordinate reflection preserving adjacency, plus
+  the **six distinct** coordinate permutations of S₃: ABC, BCA, CAB,
+  BAC, CBA, ACB. Their actions on the all-distinct labelled anchor are
+  pairwise distinct, and each transports declared adjacency;
+- a nontrivial **two-colour checkerboard** using XOR of the three
+  middle-trit indicators. Every one-step grid edge changes the parity.
+  A concrete origin→positive-X edge rules out a singleton proper
+  palette. Consequently this finite graph and its isomorphic pants
+  graph have exactly two colours as a minimal proper palette;
+- proper-colouring pullbacks along C₃ rotation and seam flip without
+  claiming a 4-colour theorem, Hedetniemi equality, topology, physical
+  coupling, or empirical social interactions.
+
+An independent exhaustive Python evaluation of the combinatorial
+semantics finds **27 vertices, 108 oriented nearest-neighbour arcs
+(54 undirected edges)**, degrees 3×8, 4×12, 5×6, 6×1; it checks the
+six permutations, reflection and two-colouring. The source for the
+reproducible audit is
+`scripts/verify_trialectic_369_graph_pants_finite.py`. These are
+finite computational receipts, not Agda/Lean kernel verification.
+
+**Conservative live status:** the existing
+`GraphColouring369PantsHomomorphismBoundaryExact` canonical flags
+stay false for kernel-certified closure. New source-written terms
+and an explicit candidate status have been exposed separately.
+Do not silently promote source-writing to typechecking.
+
+### Snowball and Pareto bridge
+
+`BalabanIbrahimParetoSnowballTOEExact` consumes the source-written
+finite colouring/rotation/flip and imports the already-authored
+`GraphColouringRecolourPantsSnowballExact` and
+`IbrahimSnowballDependencyNDimLocalGlobalProofSearchBidiExact`
+non-promotion gates. An admissible local proper colouring **does not**
+automatically pay a globally compatible pants seam or source authority.
+No inherited Ibrahim Monster3B results or original historical authorship
+are reassigned.
+
+**Next live max-cut (dependency order):**
+1. Golden Agda `--safe` exact-head check and trust-escape/termination scan;
+   fix each concrete compiler error; then pinned Lean mirror exact-head check.
+2. Prove branch-channel interpretation and real `InterfaceMatch` for a
+   *specified situated consumer* if one exists. Do not invent authority,
+   continuous pants or source-independent human categories.
+3. For higher-order trialectic emergence, provide an actual existing
+   `FaceMediationLaw` / `SecondOrderCellGluing` instance and transport
+   an independently sourced attached 2-cell; full weighted graph or
+   proper colouring alone cannot recover that face.
+4. Retain compatibility with actual six-permutation S₃, restricted C₃
+   and asymmetric weighted counterexamples. Never promote the 3-node
+   image to a C₃-invariant weighted graph.
+5. Only after source/semantic conditions are met, transport to
+   Ibrahim, Pareto, legal and physics consumers with separate
+   theorem/receipt authority.
+
+### Sources and attribution
+
+- Existing formal geometry, ternary path, 2026-10-26 Danka educational
+  matrix image, and exact finite Agda/Lean proofs are attributed
+  separately: the **matrix-as-digraph correspondence is standard prior
+  art** and the new graph-isomorphism/checkerboard adapter belongs to
+  the DASHI repository authors.
+- Michael F. Atiyah, *Topological quantum field theory* (1988),
+  DOI 10.1007/BF02698547: topology/gluing terminology, **not**
+  certification that a discrete pants path is a smooth cobordism.
+- Aida Abiad et al., *Hypergraphs and simplicial complexes in focus*
+  (2026), DOI 10.1088/2632-072X/ae3c4e: higher-order networks vs
+  pairwise interactions, **no theorem imported**.
+- Stefano Fiorini, Hakan Emre Aktas, Iulia Duta, Pietro Morerio,
+  Alessio Del Bue, Pietro Liò, Stefano Coniglio,
+  *Sheaves Reloaded: A Direction Awakening*, ICLR 2026
+  (https://proceedings.iclr.cc/paper_files/paper/2026/hash/0954a37c03775409e295fb4b99b664c7-Abstract-Conference.html):
+  direction-aware cellular sheaf comparison only; no DSNN experiments
+  or directed Laplacian results have been proved in DASHI by this work.
+- Shitov, 2019 Hedetniemi counterexample; Inoue et al., 2026
+  four-colour work; original meta-introspector/Ibrahim and
+  Monster3B sources retain the ownership already specified in the
+  canonical source atlas. Their proofs are **not** claimed here.
