@@ -29,6 +29,9 @@ open import Agda.Builtin.List using (List; _∷_; [])
 open import Data.Empty using (⊥)
 
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
+import Base369 as Base
+import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
+import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Algebra.BalancedTernary as Trit
 import DASHI.Reasoning.RelationalBranchCobordismGeometry as Pants
 import DASHI.Mathematics.Topology.AlexanderHornedBalancedTernaryCommutatorTowerExact as Tower
@@ -396,3 +399,225 @@ module NielsenMod3PermutationBarrier where
 -- three-cycle INTO the nonlinear Nielsen peripheral stabilizer by
 -- conjugation in Aut(F3) (even after allowing GL3(Z) on H1).
 -- It does not forbid other geometric realizations of either action.
+
+
+------------------------------------------------------------------------
+-- SIX ABC CHILD-PERMUTATION ORBIT OF THE ACTUAL TERNARY BONDING WORD.
+--
+-- Reuse existing TernaryEndomorphismConjugacyExact.TriPermutation and
+-- TernaryPermutationS3LawsExact (six elements, composition and action).
+-- DO NOT introduce a seventh permutation group or confuse the existing
+-- AlexanderHornedSectorDihedralS3EndExact OUTER-sector action with this
+-- INNER child-generator relabelling.
+--
+-- For w=[a,b][b,c], all six relabelled words are cyclically reduced
+-- length six, each containing one posA. Rotation to that unique
+-- letter gives six distinct conjugacy-class representatives.
+-- Allowing meridian orientation reversal pairs them into three.
+--
+-- Agda below proves explicit finite calculations with a source-owned
+-- free-word reducer, NOT the general free-group conjugacy criterion.
+-- The latter follows mathematically from classical cyclic normal form.
+-- Nothing embeds the surface in the chosen three-child complement.
+------------------------------------------------------------------------
+
+module ABCSixPermutationPeripheralOrbit where
+  open import Agda.Builtin.Bool using (Bool; true; false)
+  open import Agda.Builtin.Nat using (Nat; zero; suc)
+  open LocalNielsenReducedCertificate
+
+  positive : Base.TriTruth → Letter
+  positive Base.tri-low = posA
+  positive Base.tri-mid = posB
+  positive Base.tri-high = posC
+
+  renameLetter : Perm.TriPermutation → Letter → Letter
+  renameLetter p posA = positive (Perm.applyPermutation p Base.tri-low)
+  renameLetter p posB = positive (Perm.applyPermutation p Base.tri-mid)
+  renameLetter p posC = positive (Perm.applyPermutation p Base.tri-high)
+  renameLetter p negA = opposite (renameLetter p posA)
+  renameLetter p negB = opposite (renameLetter p posB)
+  renameLetter p negC = opposite (renameLetter p posC)
+
+  renameWord : Perm.TriPermutation → Word → Word
+  renameWord p [] = []
+  renameWord p (x ∷ xs) = renameLetter p x ∷ renameWord p xs
+
+  imageOfParent : Perm.TriPermutation → Word
+  imageOfParent p = reduce (renameWord p w)
+
+  firstA : Word → Bool
+  firstA (posA ∷ _) = true
+  firstA _ = false
+
+  rotateOnce : Word → Word
+  rotateOnce [] = []
+  rotateOnce (x ∷ xs) = xs ++w (x ∷ [])
+
+  -- On the SIX specific orbit words, posA occurs exactly once;
+  -- this bounded search selects the unique cyclic representative
+  -- starting with posA and does not assume decidable word conjugacy.
+  anchor : Nat → Word → Word
+  anchor zero xs = xs
+  anchor (suc n) xs with firstA xs
+  ... | true = xs
+  ... | false = anchor n (rotateOnce xs)
+
+  anchored : Perm.TriPermutation → Word
+  anchored p = anchor 6 (imageOfParent p)
+
+  allSix : List Perm.TriPermutation
+  allSix =
+    Perm.permIdentity ∷ Perm.permRotate ∷ Perm.permRotate2 ∷
+    Perm.permSwapLowMid ∷ Perm.permSwapLowHigh ∷
+    Perm.permSwapMidHigh ∷ []
+
+  mapList : ∀ {A B : Set} → (A → B) → List A → List B
+  mapList f [] = []
+  mapList f (x ∷ xs) = f x ∷ mapList f xs
+
+  sixAnchoredWords : List Word
+  sixAnchoredWords = mapList anchored allSix
+
+  -- ABC: a b A c B C
+  abcAnchored :
+    anchored Perm.permIdentity ≡
+      (posA ∷ posB ∷ negA ∷ posC ∷ negB ∷ negC ∷ [])
+  abcAnchored = refl
+
+  -- BCA: a C A b c B
+  bcaAnchored :
+    anchored Perm.permRotate ≡
+      (posA ∷ negC ∷ negA ∷ posB ∷ posC ∷ negB ∷ [])
+  bcaAnchored = refl
+
+  -- CAB: a C b A B c
+  cabAnchored :
+    anchored Perm.permRotate2 ≡
+      (posA ∷ negC ∷ posB ∷ negA ∷ negB ∷ posC ∷ [])
+  cabAnchored = refl
+
+  -- BAC: a B c A C b
+  bacAnchored :
+    anchored Perm.permSwapLowMid ≡
+      (posA ∷ negB ∷ posC ∷ negA ∷ negC ∷ posB ∷ [])
+  bacAnchored = refl
+
+  -- CBA: a B A c b C
+  cbaAnchored :
+    anchored Perm.permSwapLowHigh ≡
+      (posA ∷ negB ∷ negA ∷ posC ∷ posB ∷ negC ∷ [])
+  cbaAnchored = refl
+
+  -- ACB: a c A b C B
+  acbAnchored :
+    anchored Perm.permSwapMidHigh ≡
+      (posA ∷ posC ∷ negA ∷ posB ∷ negC ∷ negB ∷ [])
+  acbAnchored = refl
+
+  eqLetter : Letter → Letter → Bool
+  eqLetter posA posA = true
+  eqLetter negA negA = true
+  eqLetter posB posB = true
+  eqLetter negB negB = true
+  eqLetter posC posC = true
+  eqLetter negC negC = true
+  eqLetter _ _ = false
+
+  eqWord : Word → Word → Bool
+  eqWord [] [] = true
+  eqWord (x ∷ xs) (y ∷ ys) with eqLetter x y
+  ... | true = eqWord xs ys
+  ... | false = false
+  eqWord _ _ = false
+
+  occurs : Word → List Word → Bool
+  occurs x [] = false
+  occurs x (y ∷ ys) with eqWord x y
+  ... | true = true
+  ... | false = occurs x ys
+
+  noDuplicates : List Word → Bool
+  noDuplicates [] = true
+  noDuplicates (x ∷ xs) with occurs x xs
+  ... | true = false
+  ... | false = noDuplicates xs
+
+  allSixCount : C3.length allSix ≡ 6
+  allSixCount = refl
+
+  -- Since each cyclically reduced word has one positive a, the
+  -- six DIFFERENT anchored normal forms determine six DIFFERENT
+  -- oriented conjugacy classes of this selected source word.
+  sixOrientedNormalFormsDistinct :
+    noDuplicates sixAnchoredWords ≡ true
+  sixOrientedNormalFormsDistinct = refl
+
+  -- The parent word's orientation reversal is represented by
+  -- right multiplication by the EXISTING S3 transposition (a c).
+  -- Each case is an explicit finite free reduction, not a quotient
+  -- type or geometric source-generated boundary path.
+  orientationReversalPair :
+    (p : Perm.TriPermutation) →
+    anchored p ≡
+      anchor 6 (invert
+        (imageOfParent (S3._∙_ p Perm.permSwapLowHigh)))
+  orientationReversalPair Perm.permIdentity = refl
+  orientationReversalPair Perm.permRotate = refl
+  orientationReversalPair Perm.permRotate2 = refl
+  orientationReversalPair Perm.permSwapLowMid = refl
+  orientationReversalPair Perm.permSwapLowHigh = refl
+  orientationReversalPair Perm.permSwapMidHigh = refl
+
+  -- Three canonical unoriented representatives: ABC, BCA, CAB.
+  -- Their partner words are respectively CBA, ACB, BAC.
+  unorientedRepresentative : Perm.TriPermutation → Perm.TriPermutation
+  unorientedRepresentative Perm.permIdentity = Perm.permIdentity
+  unorientedRepresentative Perm.permRotate = Perm.permRotate
+  unorientedRepresentative Perm.permRotate2 = Perm.permRotate2
+  unorientedRepresentative Perm.permSwapLowMid = Perm.permRotate2
+  unorientedRepresentative Perm.permSwapLowHigh = Perm.permIdentity
+  unorientedRepresentative Perm.permSwapMidHigh = Perm.permRotate
+
+  _orBool_ : Bool → Bool → Bool
+  true orBool _ = true
+  false orBool x = x
+
+  matchesUnorientedRepresentative : Perm.TriPermutation → Bool
+  matchesUnorientedRepresentative p =
+    eqWord (anchored p) (anchored (unorientedRepresentative p))
+    orBool
+    eqWord (anchored p)
+      (anchor 6 (invert
+        (imageOfParent (unorientedRepresentative p))))
+
+  allSixMapToThreeUnorientedClasses :
+    (p : Perm.TriPermutation) →
+    matchesUnorientedRepresentative p ≡ true
+  allSixMapToThreeUnorientedClasses Perm.permIdentity = refl
+  allSixMapToThreeUnorientedClasses Perm.permRotate = refl
+  allSixMapToThreeUnorientedClasses Perm.permRotate2 = refl
+  allSixMapToThreeUnorientedClasses Perm.permSwapLowMid = refl
+  allSixMapToThreeUnorientedClasses Perm.permSwapLowHigh = refl
+  allSixMapToThreeUnorientedClasses Perm.permSwapMidHigh = refl
+
+  threeRepresentativeNormalFormsDistinct :
+    noDuplicates
+      (anchored Perm.permIdentity ∷
+       anchored Perm.permRotate ∷
+       anchored Perm.permRotate2 ∷ []) ≡ true
+  threeRepresentativeNormalFormsDistinct = refl
+
+  -- A literal child three-cycle changes even the unoriented parent
+  -- conjugacy class, whereas the external root-sector C3 is already
+  -- equivariant for the source-owned ternary refinement.
+  threeCycleDoesNotPreserveBasedParent :
+    anchored Perm.permRotate ≡ anchored Perm.permIdentity → ⊥
+  threeCycleDoesNotPreserveBasedParent ()
+
+-- Source-specific OUTCOME: six oriented and three unoriented boundary
+-- conjugacy classes, with the existing S3 action on a FAMILY of
+-- boundaries, not an invariant selected parent boundary. Formal
+-- packaging of quotient S3/C2 and group-level conjugacy criterion
+-- remains distinct from these finite normal-form certificates.
+-- No cap-supported PL map, embedded torus or wild exterior follows.
