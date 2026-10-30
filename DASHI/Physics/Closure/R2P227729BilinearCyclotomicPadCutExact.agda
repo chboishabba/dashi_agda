@@ -693,12 +693,6 @@ nestedTripleProductFactors ops laws xs ys zs fx fy fz =
     ysum = sumAll ops ys fy
     zsum = sumAll ops zs fz
 
-    inside :
-      (x : X) →
-      sumAll ops ys
-        (λ y → sumAll ops zs
-          (λ z → (fx x ⊗ fy y) ⊗ fz z))
-      ≡ (fx x ⊗ ysum) ⊗ zsum
     inside x =
       trans
         (sumAllCong ops ys
