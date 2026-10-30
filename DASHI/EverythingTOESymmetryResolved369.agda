@@ -122,6 +122,8 @@ import DASHI.Arithmetic.TwinPrimeMangoldtFinIntervalReindexExact
 import DASHI.Arithmetic.TwinPrimeMangoldtMultiPeriodConcatExact
 import DASHI.Arithmetic.TwinPrimeMangoldtPartialPeriodPartitionExact
 import DASHI.Arithmetic.TwinPrimeMangoldtActualPrimePowerResidualExact
+import DASHI.Arithmetic.TwinPrimeWeilActualCorrelationPartitionExact
+import DASHI.Arithmetic.TwinPrimeMangoldtActualPrimePowerResidualExact
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as MangoldtFiniteSum
 open MangoldtFiniteSum public using
   ( AdditiveScalar
