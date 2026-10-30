@@ -248,3 +248,93 @@ scalarMulDistributesLeft (gauss a b) (gauss c d) (gauss e f) =
 -- The proof-critical part is distributivity, not the cyclic index
 -- counts. Finite sum-swap/scale can now reuse the original generic
 -- Grafakos and NS proof patterns at their actual cyclotomic types.
+
+
+------------------------------------------------------------------------
+-- MULTIPLICATIVE CHARACTER LAW ON THE ORIGINAL SOURCE GROUP.
+-- Distributes actual cyclic scalar multiplication over the ORIGINAL
+-- index group addition; no second Z/4 or Z/5 group is introduced.
+-- These finite 64/125 cases are the critical algebraic ingredient for
+-- reducing sampled products to the original 729 indexed convolution.
+------------------------------------------------------------------------
+
+scalarIndexDistributivity :
+  (a b x : Four.FourGridMode) →
+  scalarProduct4 (Four.fourGroupAdd a b) x
+  ≡ Four.fourGroupAdd
+      (scalarProduct4 a x) (scalarProduct4 b x)
+scalarIndexDistributivity Four.fourZero Four.fourZero Four.fourZero = refl
+scalarIndexDistributivity Four.fourZero Four.fourZero Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourZero Four.fourZero Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourZero Four.fourZero Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourZero Four.fourPlusOne Four.fourZero = refl
+scalarIndexDistributivity Four.fourZero Four.fourPlusOne Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourZero Four.fourPlusOne Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourZero Four.fourPlusOne Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourZero Four.fourOuterTwo Four.fourZero = refl
+scalarIndexDistributivity Four.fourZero Four.fourOuterTwo Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourZero Four.fourOuterTwo Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourZero Four.fourOuterTwo Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourZero Four.fourMinusOne Four.fourZero = refl
+scalarIndexDistributivity Four.fourZero Four.fourMinusOne Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourZero Four.fourMinusOne Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourZero Four.fourMinusOne Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourZero Four.fourZero = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourZero Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourZero Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourZero Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourPlusOne Four.fourZero = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourPlusOne Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourPlusOne Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourPlusOne Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourOuterTwo Four.fourZero = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourOuterTwo Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourOuterTwo Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourOuterTwo Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourMinusOne Four.fourZero = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourMinusOne Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourMinusOne Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourPlusOne Four.fourMinusOne Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourZero Four.fourZero = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourZero Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourZero Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourZero Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourPlusOne Four.fourZero = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourPlusOne Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourPlusOne Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourPlusOne Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourOuterTwo Four.fourZero = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourOuterTwo Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourOuterTwo Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourOuterTwo Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourMinusOne Four.fourZero = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourMinusOne Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourMinusOne Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourOuterTwo Four.fourMinusOne Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourZero Four.fourZero = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourZero Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourZero Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourZero Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourPlusOne Four.fourZero = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourPlusOne Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourPlusOne Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourPlusOne Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourOuterTwo Four.fourZero = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourOuterTwo Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourOuterTwo Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourOuterTwo Four.fourMinusOne = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourMinusOne Four.fourZero = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourMinusOne Four.fourPlusOne = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourMinusOne Four.fourOuterTwo = refl
+scalarIndexDistributivity Four.fourMinusOne Four.fourMinusOne Four.fourMinusOne = refl
+
+characterAdditionLaw :
+  (a b x : Four.FourGridMode) →
+  character4 (Four.fourGroupAdd a b) x
+  ≡ _*G_ (character4 a x) (character4 b x)
+characterAdditionLaw a b x
+  rewrite scalarIndexDistributivity a b x =
+  rootGroupLaw (scalarProduct4 a x) (scalarProduct4 b x)
+
+-- Source-written, kernel pending.  This asserts only finite character
+-- multiplicativity, not the 3D sampled-to-integer convolution theorem.
