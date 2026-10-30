@@ -17,6 +17,7 @@ module DASHI.Foundations.PolynomialMonodromyTernaryQuaternionBridgeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Empty using (⊥)
@@ -254,3 +255,137 @@ actualComplexMonodromyNotConstructed = refl
 quinticUnsolvabilityNotConstructed :
   isEstablishedHere generalQuinticAbelRuffini ≡ false
 quinticUnsolvabilityNotConstructed = refl
+
+------------------------------------------------------------------------
+-- ORIGINAL VIDEO M10 / ORIENTATION MAX-CUT.
+--
+-- Permuting the positive quaternion axes i,j,k by an ODD S3 root-label
+-- permutation reverses the oriented product ij=k. Inner conjugation by
+-- a unit quaternion is multiplicative, so it cannot implement such an
+-- axis-only permutation. A corrected odd swap must negate one axis.
+--
+-- The actual 180-degree signed swap below is induced on i,j,k by a
+-- rational invertible quaternion i+j, with inverse -(i+j)/2. It is a
+-- finite exact algebraic witness, NOT an SO(3) path/Spin(3) cover.
+-- Classical Hamilton algebra, original Q multiplication owner.
+-- Source-written; exact-head Agda kernel acceptance pending.
+------------------------------------------------------------------------
+
+positiveI positiveJ positiveK : Q.RationalQuaternion
+positiveI = imaginaryBasis Base.tri-low
+positiveJ = imaginaryBasis Base.tri-mid
+positiveK = imaginaryBasis Base.tri-high
+
+iTimesJIsK : Q._*q_ positiveI positiveJ ≡ positiveK
+iTimesJIsK = refl
+
+jTimesIIsNegativeK : Q._*q_ positiveJ positiveI ≡ Q.negQ positiveK
+jTimesIIsNegativeK = refl
+
+jTimesKIsI : Q._*q_ positiveJ positiveK ≡ positiveI
+jTimesKIsI = refl
+
+kTimesJIsNegativeI : Q._*q_ positiveK positiveJ ≡ Q.negQ positiveI
+kTimesJIsNegativeI = refl
+
+kTimesIIsJ : Q._*q_ positiveK positiveI ≡ positiveJ
+kTimesIIsJ = refl
+
+iTimesKIsNegativeJ : Q._*q_ positiveI positiveK ≡ Q.negQ positiveJ
+iTimesKIsNegativeJ = refl
+
+positiveINotNegative : positiveI ≡ Q.negQ positiveI → ⊥
+positiveINotNegative eq with cong Q.q1 eq
+... | ()
+
+positiveJNotNegative : positiveJ ≡ Q.negQ positiveJ → ⊥
+positiveJNotNegative eq with cong Q.q2 eq
+... | ()
+
+positiveKNotNegative : positiveK ≡ Q.negQ positiveK → ⊥
+positiveKNotNegative eq with cong Q.q3 eq
+... | ()
+
+-- One reusable no-go closes ALL three odd positive-axis swaps.
+positiveSwapOfQuaternionAxesImpossible :
+  (u v w : Q.RationalQuaternion) →
+  Q._*q_ u v ≡ w →
+  Q._*q_ v u ≡ Q.negQ w →
+  (w ≡ Q.negQ w → ⊥) →
+  (F : Q.RationalQuaternion → Q.RationalQuaternion) →
+  ((x y : Q.RationalQuaternion) →
+    F (Q._*q_ x y) ≡ Q._*q_ (F x) (F y)) →
+  F u ≡ v → F v ≡ u → F w ≡ w → ⊥
+positiveSwapOfQuaternionAxesImpossible
+    u v w uvIsW vuIsNegW nonzero F productMap Fu Fv Fw =
+  nonzero
+    (trans (sym Fw)
+      (trans (cong F (sym uvIsW))
+        (trans (productMap u v)
+          (trans (cong₂ Q._*q_ Fu Fv) vuIsNegW))))
+
+positiveSwapIJImpossible :
+  (F : Q.RationalQuaternion → Q.RationalQuaternion) →
+  ((x y : Q.RationalQuaternion) →
+    F (Q._*q_ x y) ≡ Q._*q_ (F x) (F y)) →
+  F positiveI ≡ positiveJ →
+  F positiveJ ≡ positiveI →
+  F positiveK ≡ positiveK → ⊥
+positiveSwapIJImpossible =
+  positiveSwapOfQuaternionAxesImpossible positiveI positiveJ positiveK
+    iTimesJIsK jTimesIIsNegativeK positiveKNotNegative
+
+positiveSwapJKImpossible :
+  (F : Q.RationalQuaternion → Q.RationalQuaternion) →
+  ((x y : Q.RationalQuaternion) →
+    F (Q._*q_ x y) ≡ Q._*q_ (F x) (F y)) →
+  F positiveJ ≡ positiveK →
+  F positiveK ≡ positiveJ →
+  F positiveI ≡ positiveI → ⊥
+positiveSwapJKImpossible =
+  positiveSwapOfQuaternionAxesImpossible positiveJ positiveK positiveI
+    jTimesKIsI kTimesJIsNegativeI positiveINotNegative
+
+positiveSwapIKImpossible :
+  (F : Q.RationalQuaternion → Q.RationalQuaternion) →
+  ((x y : Q.RationalQuaternion) →
+    F (Q._*q_ x y) ≡ Q._*q_ (F x) (F y)) →
+  F positiveK ≡ positiveI →
+  F positiveI ≡ positiveK →
+  F positiveJ ≡ positiveJ → ⊥
+positiveSwapIKImpossible =
+  positiveSwapOfQuaternionAxesImpossible positiveK positiveI positiveJ
+    kTimesIIsJ iTimesKIsNegativeJ positiveJNotNegative
+
+-- The orientation correction is an EXACT witness on the original
+-- quaternion carrier, not an invented abstract signed-permutation table.
+spinSignedSwapIJ : Q.RationalQuaternion
+spinSignedSwapIJ = Q.quat 0ℚ 1ℚ 1ℚ 0ℚ
+
+spinSignedSwapIJInverse : Q.RationalQuaternion
+spinSignedSwapIJInverse =
+  Q.quat 0ℚ (- half) (- half) 0ℚ
+
+spinSignedSwapIJRightInverse :
+  Q._*q_ spinSignedSwapIJ spinSignedSwapIJInverse ≡ Q.oneQ
+spinSignedSwapIJRightInverse = refl
+
+spinSignedSwapIJLeftInverse :
+  Q._*q_ spinSignedSwapIJInverse spinSignedSwapIJ ≡ Q.oneQ
+spinSignedSwapIJLeftInverse = refl
+
+rotateBySignedSwapIJ : Q.RationalQuaternion → Q.RationalQuaternion
+rotateBySignedSwapIJ value =
+  Q._*q_ (Q._*q_ spinSignedSwapIJ value) spinSignedSwapIJInverse
+
+signedSwapIJMapsIToJ :
+  rotateBySignedSwapIJ positiveI ≡ positiveJ
+signedSwapIJMapsIToJ = refl
+
+signedSwapIJMapsJToI :
+  rotateBySignedSwapIJ positiveJ ≡ positiveI
+signedSwapIJMapsJToI = refl
+
+signedSwapIJMustNegateK :
+  rotateBySignedSwapIJ positiveK ≡ Q.negQ positiveK
+signedSwapIJMustNegateK = refl
