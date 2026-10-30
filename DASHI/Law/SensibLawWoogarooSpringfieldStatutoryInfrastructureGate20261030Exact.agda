@@ -13,6 +13,7 @@ import DASHI.Law.SensibLawWoogarooDeveloperGasTemporalIdentityCut20261030Exact a
 import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact as Lobby
 import DASHI.Law.SensibLawWoogarooIbrahimDeweyQidLegalAtomExact as Ibrahim
 import DASHI.Wikimedia.IdentifierExact as Identifier
+import DASHI.Law.SensibLawWoogaroo9281QueenslandCommencementEnforcementCutExact as LocalWorks
 
 ------------------------------------------------------------------------
 -- SPRINGFIELD PLANNING ACT ss 275T-275ZA (2024)
@@ -503,3 +504,47 @@ agreementAndAdversarialJudgmentDoNotDetermineCurrentBenefit =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness oldDealAndCourtNoCurrentCashflow
       oldDealAndCourtSeparatelyPaidCurrentCashflow refl gainDifference)
+
+------------------------------------------------------------------------
+-- STATE COMMENCEMENT WELD: reused 9281/2024/OW authority, no new scheme.
+------------------------------------------------------------------------
+
+-- Section 275ZB structures Springfield plan prerequisites and exceptions.
+-- The distinct 9281 local works owner already carries s72, s164, s180
+-- and literal condition 6(a).  These are two state legal consumers, not
+-- self-paying proofs of site-works commencement or an offence.
+existingLocalStatePreservationCut : LocalWorks.QueenslandPreservationCut
+existingLocalStatePreservationCut = LocalWorks.canonicalQueenslandPreservationCut
+
+existingLocalStatePrestartCut : LocalWorks.QueenslandCutPareto
+existingLocalStatePrestartCut = LocalWorks.canonicalQueenslandCutPareto
+
+data StartWorksCoordinate : Set where
+  springfieldPlanHierarchyS275ZB : StartWorksCoordinate
+  councilOperationalWorks9281Condition6a : StartWorksCoordinate
+  planningActS72Prestart : StartWorksCoordinate
+  planningActS164Offence : StartWorksCoordinate
+  planningActS180Enforcement : StartWorksCoordinate
+  federalEPBC20198575Instrument : StartWorksCoordinate
+
+localStartWorksAcquisitionOrder : List StartWorksCoordinate
+localStartWorksAcquisitionOrder =
+  springfieldPlanHierarchyS275ZB ∷
+  councilOperationalWorks9281Condition6a ∷
+  planningActS72Prestart ∷
+  planningActS164Offence ∷
+  planningActS180Enforcement ∷
+  federalEPBC20198575Instrument ∷ []
+
+record SamePhaseLocalPayment : Set where
+  constructor same-phase-local-payment
+  field
+    originalPlanHierarchyPaid : Bool
+    literal9281Condition6aSubmittedInstrumentPaid : Bool
+    sameParcelAndWorksPhasePaid : Bool
+    physicalClearingEvidencePaid : Bool
+    planningActOffenceEstablished : Bool
+
+samePhaseLocalResidual : SamePhaseLocalPayment
+samePhaseLocalResidual = same-phase-local-payment
+  false false false false false
