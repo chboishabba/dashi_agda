@@ -1872,3 +1872,24 @@ and exact arithmetic check here; no Agda kernel
 or physical provenance promotion. Polynomial
 #1414's S5 derived-series no-go is an
 independent proof lane, not a 3D embedding.
+
+
+## 2026-10-30 ABC/S3 six-permutation continuation and revised G4 gate
+
+Canonical source: [ABC six-permutation meridian orbit](AlexanderHornedABCSixPermutationOrbit20261030.md)
+and updated [G1–G6 relative proof cut](AlexanderHornedRelativeThreeChildHandlebodyProofCut20261029.md).
+Existing S3 owners were READ, not cloned. The original ternary
+parent word has six distinct oriented free-group conjugacy classes
+under ABC relabelling, only three classes after orientation reversal,
+and a 36-case source-written S3-covariant **family** of boundary
+words. This does not make a SINGLE selected parent peripheral
+class invariant under the full local child S3.
+
+The roadmap therefore retains a strict G4 alternative:
+\`singlePeripheral + stabilizer + basedPath\` OR
+\`orbitIndexedPeripheralFamily + geometricS3Map + basedPaths\`.
+Neither actual complement-side geometric supplier is constructed.
+G2–G3 and G5–G6 still open. External root-sector C3/S3 is a
+different action, and #1414 polynomial, #1438 trialectics and
+Ibrahim Monster 3B are not borrowed as embedded geometry.
+No Agda/Lean kernel, CI or physical same-object certification.
