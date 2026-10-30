@@ -41,6 +41,7 @@ monitor surface.
 
 
 
+- The canonical P2 witness also fixes SU(2) normalization scalars (one, dimension two, multiplication) directly instead of accepting arbitrary numeric fields.
 - Late P2 source-first correction: found and directly reused the pre-existing
   `BalabanLiteralRationalSU2WilsonBoundedAlgebraExact` configuration-dependent
   Wilson path bound, identity and product proofs. Replaced the narrower
