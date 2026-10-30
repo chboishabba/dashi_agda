@@ -553,6 +553,52 @@ module ABCSixPermutationPeripheralOrbit where
     noDuplicates sixAnchoredWords ≡ true
   sixOrientedNormalFormsDistinct = refl
 
+
+  -- Exact 6x6 S3-equivariance of the SIX-word boundary FAMILY.
+  -- This avoids the false claim that a single selected w is fixed
+  -- under every child permutation.  Both sides are source-owned
+  -- reduced words, not actual embedded boundary curves.
+  orbitFamilyEquivariant :
+    (p q : Perm.TriPermutation) →
+    imageOfParent (S3._∙_ p q)
+      ≡ reduce (renameWord p (imageOfParent q))
+  orbitFamilyEquivariant Perm.permIdentity Perm.permIdentity = refl
+  orbitFamilyEquivariant Perm.permIdentity Perm.permRotate = refl
+  orbitFamilyEquivariant Perm.permIdentity Perm.permRotate2 = refl
+  orbitFamilyEquivariant Perm.permIdentity Perm.permSwapLowMid = refl
+  orbitFamilyEquivariant Perm.permIdentity Perm.permSwapLowHigh = refl
+  orbitFamilyEquivariant Perm.permIdentity Perm.permSwapMidHigh = refl
+  orbitFamilyEquivariant Perm.permRotate Perm.permIdentity = refl
+  orbitFamilyEquivariant Perm.permRotate Perm.permRotate = refl
+  orbitFamilyEquivariant Perm.permRotate Perm.permRotate2 = refl
+  orbitFamilyEquivariant Perm.permRotate Perm.permSwapLowMid = refl
+  orbitFamilyEquivariant Perm.permRotate Perm.permSwapLowHigh = refl
+  orbitFamilyEquivariant Perm.permRotate Perm.permSwapMidHigh = refl
+  orbitFamilyEquivariant Perm.permRotate2 Perm.permIdentity = refl
+  orbitFamilyEquivariant Perm.permRotate2 Perm.permRotate = refl
+  orbitFamilyEquivariant Perm.permRotate2 Perm.permRotate2 = refl
+  orbitFamilyEquivariant Perm.permRotate2 Perm.permSwapLowMid = refl
+  orbitFamilyEquivariant Perm.permRotate2 Perm.permSwapLowHigh = refl
+  orbitFamilyEquivariant Perm.permRotate2 Perm.permSwapMidHigh = refl
+  orbitFamilyEquivariant Perm.permSwapLowMid Perm.permIdentity = refl
+  orbitFamilyEquivariant Perm.permSwapLowMid Perm.permRotate = refl
+  orbitFamilyEquivariant Perm.permSwapLowMid Perm.permRotate2 = refl
+  orbitFamilyEquivariant Perm.permSwapLowMid Perm.permSwapLowMid = refl
+  orbitFamilyEquivariant Perm.permSwapLowMid Perm.permSwapLowHigh = refl
+  orbitFamilyEquivariant Perm.permSwapLowMid Perm.permSwapMidHigh = refl
+  orbitFamilyEquivariant Perm.permSwapLowHigh Perm.permIdentity = refl
+  orbitFamilyEquivariant Perm.permSwapLowHigh Perm.permRotate = refl
+  orbitFamilyEquivariant Perm.permSwapLowHigh Perm.permRotate2 = refl
+  orbitFamilyEquivariant Perm.permSwapLowHigh Perm.permSwapLowMid = refl
+  orbitFamilyEquivariant Perm.permSwapLowHigh Perm.permSwapLowHigh = refl
+  orbitFamilyEquivariant Perm.permSwapLowHigh Perm.permSwapMidHigh = refl
+  orbitFamilyEquivariant Perm.permSwapMidHigh Perm.permIdentity = refl
+  orbitFamilyEquivariant Perm.permSwapMidHigh Perm.permRotate = refl
+  orbitFamilyEquivariant Perm.permSwapMidHigh Perm.permRotate2 = refl
+  orbitFamilyEquivariant Perm.permSwapMidHigh Perm.permSwapLowMid = refl
+  orbitFamilyEquivariant Perm.permSwapMidHigh Perm.permSwapLowHigh = refl
+  orbitFamilyEquivariant Perm.permSwapMidHigh Perm.permSwapMidHigh = refl
+
   -- The parent word's orientation reversal is represented by
   -- right multiplication by the EXISTING S3 transposition (a c).
   -- Each case is an explicit finite free reduction, not a quotient
