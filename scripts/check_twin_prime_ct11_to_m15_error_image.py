@@ -50,6 +50,14 @@ def main() -> None:
         values = candidate_image(upper)
         assert len(values) <= isqrt(upper) * (upper.bit_length() - 1)
         assert all(p in values for p in true_values if p <= upper)
+        position_envelope = [
+            pos
+            for value in values
+            for pos in (value, max(value - 2, 0))
+        ]
+        distinct_positions = set(position_envelope)
+        assert len(position_envelope) == 2 * len(values)
+        assert len(distinct_positions) <= len(position_envelope)
         support_in_window = 0
         for n in range(0, upper - 1):
             pair_checks += 1
@@ -58,6 +66,7 @@ def main() -> None:
                 support_in_window += 1
                 supported_pairs += 1
                 assert n in values or n + 2 in values
+                assert n in distinct_positions
         # Each proper-power VALUE can occur in at most two shifted
         # positions: as left or right endpoint. This is a numeric model
         # of the pending finite injection/cardinality proof.
