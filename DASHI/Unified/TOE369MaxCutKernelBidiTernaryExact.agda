@@ -1,4 +1,5 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
+import DASHI.Reasoning.TrialecticWeightedGraphFaceMediationSelectedExact as SelectedFace369
 import DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact as GridPants369
 import DASHI.Combinatorics.GraphColouringHomomorphismCoreExact as GridColour
 import DASHI.Combinatorics.GraphColouring369PantsGridAdjacencyExact as NativeGridPants
@@ -289,3 +290,15 @@ toeSixPermutationImagesDistinct :
   -> left ≡ right
 toeSixPermutationImagesDistinct =
   NativeGridPants.s3AnchorImageInjective
+
+------------------------------------------------------------------------
+-- Selected finite attached-face mediation: a source-independent chart,
+-- NOT a universal inferred face law.  The output fails graph-only descent.
+------------------------------------------------------------------------
+
+toeSelectedOutputNoGraphOnlyDecoder :
+  DirectedDescent.FactorsThrough
+    WeightedGraph369.graphObserver
+    SelectedFace369.selectedOutputConsumer -> ⊥
+toeSelectedOutputNoGraphOnlyDecoder =
+  SelectedFace369.selectedNextDepthOutputCannotFactorThroughGraph
