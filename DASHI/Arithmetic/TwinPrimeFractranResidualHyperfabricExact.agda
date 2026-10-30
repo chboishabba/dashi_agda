@@ -655,3 +655,32 @@ oneHasNoLocalFractranStep
   oneFortySevenCannotFire fortySevenEnabled
 oneHasNoLocalFractranStep
   (Interpreter.skip-head _ (Interpreter.skip-head _ ()))
+
+------------------------------------------------------------------------
+-- TERMINAL NO-GO FOR EVERY FIXED PRIME-DENOMINATOR PREFIX.
+-- Unlike a numerical example, this rules out a uniform promotion
+-- from finite-prefix non-activation to actual twin primality.
+-- Uses the original cofinal factorable-survivor theorem; the
+-- assumption is just the EXPLICIT surviving seed certificate.
+------------------------------------------------------------------------
+
+noFixedFractranPrefixCanCertifyEveryTwin :
+  (axes : List Pair.CertifiedPrimeAxis) →
+  (seedOffset productPredecessor : Nat) →
+  (positiveProduct :
+    PairPeriod.modulusProduct axes ≡ suc productPredecessor) →
+  (seedSurvives :
+    Pair.AllPairSurvive axes (suc (suc seedOffset))) →
+  ((n : Nat) →
+    Interpreter.PrefixBlocked primePairDenominatorEnabled n axes →
+    TwinSpec.TwinPrimeAt n) →
+  ⊥
+noFixedFractranPrefixCanCertifyEveryTwin
+    axes seedOffset productPredecessor positiveProduct seedSurvives
+    purportedClassifier
+  with cofinallyBlockedCompositePrimePairs
+    axes seedOffset productPredecessor
+    positiveProduct seedSurvives zero
+... | n , (_ , (blocked , (notPrimeLeft , notPrimeRight))) =
+  notPrimeLeft
+    (proj₁ (purportedClassifier n blocked))
