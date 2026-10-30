@@ -65,6 +65,19 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 > identification remains physically proof-bearing.
 
 
+
+> **R445 producer reduction (30 October continuation).** The new
+> `nativeWilsonPreferredFromMarked` and `nativeWilsonP2FromMarkedSource`
+> compositions send one existing R444/R445 selected marked-polymer moment
+> realization into the native rational-Wilson physical measure, then directly
+> into all three P2 expectation limits. No separate marked-moment source or
+> P2 support-distance theorem is required. Physical R445 tail/convergence
+> witnesses, four-dimensional CMP119 same-object interpretation and the
+> real H2/H3 spectral witness remain explicit. Bałaban and the original
+> marked-polymer authors retain mathematical attribution; these terms are
+> independently authored DASHI compositions, not new published source lemmas.
+
+
 ## Abstract
 
 This manuscript presents a reduction of the four-dimensional Yang–Mills mass-gap problem on a literal finite SU(2) Wilson–Gibbs family to three physical inputs, denoted `F1`, `F3`, and `F4`. The finite lattice theory, transfer-form algebra, varying-Hilbert-space transport, vacuum-sector spectral consequences, and final continuum gap compiler are treated as already-paid mathematical infrastructure where stated. The surviving physical obligations are:
