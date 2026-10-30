@@ -114,3 +114,14 @@ monitor surface.
 - No Agda/Lean kernel, transitive `--safe`, CI, DSNN performance,
   real-world semantics, physical field theory, Monster same-object,
   or smooth pants certification has been performed or claimed.
+
+## 2026-10-30 — QID role-typed Snowball refinement
+
+- Extended the verified QID atlas with typed knowledge roles and a
+  directly inspected directed-graph Dewey 511.54 coordinate, reusing
+  the existing Snowball KnowledgeCoordinate constructor; general
+  graph theory 511.5 remains a broader classification.
+- Mirrored these role types in Lean; independent Python finite audit
+  sampled nonuniform weights totalling 344 on all 54 native edges.
+  No role coercion, source QID, or computed equality upgrades proof
+  ownership, semantic face authority, physical theory or kernel state.
