@@ -23,6 +23,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Vec.Base using (Vec)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 import Data.Fin.Base as Fin
 import Data.Fin.Properties as FinP
 open import Data.Nat.Base using (_<_)
@@ -330,13 +332,27 @@ localGateCNFClauseCountFour (Circuit.notGate source) = refl
 localGateCNFClauseCountFour (Circuit.andGate left right) = refl
 localGateCNFClauseCountFour (Circuit.orGate left right) = refl
 
+-- Actual proof: original renameCNF maps clauses one-to-one, and the
+-- original Grid.listLength counts clauses independently of their literals.
+renameCNFClauseCountExact :
+  ∀ {local global : Nat}
+    (renaming : Fin.Fin local → Fin.Fin global)
+    (formula : CNF.CNF local) →
+  Grid.listLength (Rename.renameCNF renaming formula)
+    ≡ Grid.listLength formula
+renameCNFClauseCountExact renaming [] = refl
+renameCNFClauseCountExact renaming (clause ∷ clauses) =
+  cong suc (renameCNFClauseCountExact renaming clauses)
+
 placedGateCNFClauseCountFour :
   ∀ {inputs gates : Nat}
     (gate : Circuit.Gate inputs gates) →
   Grid.listLength (placedGateCNF gate) ≡ four
 placedGateCNFClauseCountFour gate =
-  localGateCNFClauseCountFour gate
+  trans
+    (renameCNFClauseCountExact
+      (gateWindowRename gate) (localGateCNF gate))
+    (localGateCNFClauseCountFour gate)
 
--- The second equality holds because renaming maps each clause without
--- deleting or duplicating it; it may be normalized by definitional
--- reduction in the existing fixed-width CNF carrier. Kernel pending.
+-- This is an actual same-object clause-count transport from the source
+-- gate to its ORIGINAL placed CNF. Agda kernel verification pending.
