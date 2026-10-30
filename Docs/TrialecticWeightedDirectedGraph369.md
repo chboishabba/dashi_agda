@@ -470,3 +470,40 @@ canonical endpoint pairs, exact coverage of all 108 directed
 native adjacencies, and all 162 S3 and 27 seam-reflection cases.
 Both Agda/Lean source owners are imported into the TOE,
 Unifier, Unified.Everything and Ibrahim/Pareto facades.
+
+## C3-weighted repair — orbit sum, not original-object equivariance
+
+New owner `TrialecticC3WeightedOrbitSymmetrizationExact`
+reuses the existing `Participant3`, `rotateVertexCubed`,
+`WeightedDigraph3`, and `TrialecticDirectedSourceTargetHyperfabricExact`
+incidence/stalk/restriction types. For an arbitrary directed Nat-weight
+matrix (w) on three vertices it defines
+`orbitSum(w)(s,t)=w(s,t)+w(r(s),r(t))+w(r²(s),r²(t))`.
+Using the rotation-cube identity and commutative associativity of Nat
+addition, it source-writes an invariant of the **new** weight
+function under (r). No averaging/division/negative weights or
+same-object claim is involved.
+
+For the original integer-tenths matrix,
+the new orbit sum is the circulant
+`[[5,50,22],[22,5,50],[50,22,5]]`.
+The input has `w(A,B)=10`, whereas the new object has
+`orbitSum(w)(A,B)=50`. A contradiction witness explicitly
+prevents identifying them. The original non-C3-invariant theorem
+is retained.
+
+The new `directedFabricFor(w)` and `compatibleSectionFor(w)`
+instantiate the **existing** two-ended incidence, local stalk and
+restriction operators for any selected Nat-weight function;
+`equivariantDirectedSection` is their orbit-sum instance.
+Two pointwise transport lemmas prove compatibility of the outgoing
+row at the rotated source and incoming row at the rotated target.
+This creates a finite equivariant directed-weight section but
+**does not** supply independent face transport, a physical gauge
+connection, a directed sheaf Laplacian, VOA or Monster3B action,
+or a smooth pants cobordism.
+
+Downstream `TrialecticC3WeightedOrbitSymmetrization.lean` mirrors
+the orbit sum and selected source/target transport. Canonical
+TOE, Unifier, Unified and Ibrahim/Pareto roots import the result.
+Kernel verification remains OPEN.
