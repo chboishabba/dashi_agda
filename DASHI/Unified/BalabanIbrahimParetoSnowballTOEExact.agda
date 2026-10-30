@@ -1,4 +1,7 @@
 module DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact where
+import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as C3Graph369
+import DASHI.Reasoning.TrialecticObserverMatrix369Exact as C3Observer369
+import DASHI.Reasoning.TrialecticC3WeightedOrbitSymmetrizationExact as C3Weighted369
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as PantsBridgeSym
 import DASHI.Topology.TernaryPantsFrontierExact as PantsFrontierSym
 import DASHI.Combinatorics.GraphColouring369PantsGridAdjacencyExact as GridPantsSym
@@ -307,3 +310,14 @@ ibrahimNativeS3KeepsSelectedCut :
     (PantsBridgeSym.pants3ToVoxel27 p)
 ibrahimNativeS3KeepsSelectedCut =
   S3Cut369.s3PreservesNativeMaxCutPartition
+
+------------------------------------------------------------------------
+-- Pareto/Ibrahim same-object gate: the symmetrized graph is NEW.
+------------------------------------------------------------------------
+ibrahimC3OrbitSumIsNewGraph :
+  C3Weighted369.equivariantImageWeight
+    C3Observer369.participantA C3Observer369.participantB
+  ≡ C3Graph369.dankaWeight
+    C3Observer369.participantA C3Observer369.participantB -> ⊥
+ibrahimC3OrbitSumIsNewGraph =
+  C3Weighted369.orbitSumChangesTheGraph
