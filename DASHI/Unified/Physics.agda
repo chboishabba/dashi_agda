@@ -752,3 +752,22 @@ yangMillsBalabanR320RouteSNoDuplicateMagnitude :
   BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
 yangMillsBalabanR320RouteSNoDuplicateMagnitude =
   BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+
+
+------------------------------------------------------------------------
+-- Pareto P2: existing rational SU2 trace bound -> same-physical Gram
+-- boundedness producer -> canonical Wilson S2 input.
+------------------------------------------------------------------------
+
+yangMillsBalabanRouteSP2TraceToS2Level : ProofLevel
+yangMillsBalabanRouteSP2TraceToS2Level =
+  BalabanRGTOE.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+
+yangMillsBalabanRouteSP2PhysicalInterpretationLevel : ProofLevel
+yangMillsBalabanRouteSP2PhysicalInterpretationLevel =
+  BalabanRGTOE.balabanRouteSP2TracePhysicalInterpretationLevel
+
+yangMillsBalabanRouteSP2PerLoopBoundAfterInterpretation :
+  BalabanRGTOE.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+yangMillsBalabanRouteSP2PerLoopBoundAfterInterpretation =
+  BalabanRGTOE.balabanRouteSP2TracePaysPerLoopBounds
