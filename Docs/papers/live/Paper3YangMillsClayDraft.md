@@ -32,7 +32,7 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 > boundedness assumptions. The canonical S2 projection then feeds the
 > existing P2 three-expectation-limit compiler. This is an exact
 > implication conditional on the physical source-to-measure interpretation,
-> bounded product/identity closure and selected time-distance geometry; it
+> bounded product closure, literal-identity same-object equality and selected time-distance geometry; it
 > does not identify rational SU(2) with the full continuum Wilson measure.
 
 
