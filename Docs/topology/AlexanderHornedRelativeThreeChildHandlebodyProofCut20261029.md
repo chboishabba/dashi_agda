@@ -441,3 +441,45 @@ Underlying facts: classical integral representation theory and
 abelianization of free groups, not a new claim of original
 group-theoretic prior art. DASHI contribution is the precise
 source-specific modular discriminator and finite regression.
+
+
+## 2026-10-30 six ABC permutation continuation — canonical S3 reused
+
+Read the actual \`TernaryRoleCarrierExact\`, \`TernaryEndomorphismConjugacyExact\`,
+\`TernaryPermutationS3LawsExact\`, the six SSSP linear extensions,
+\`AlexanderHornedSectorDihedralS3EndExact\`, the existing local
+meridian module, and conditional HornedC3 Lean group transport.
+The external-sector S3 is ALREADY OWNED; the new result is the
+source-specific child-label **boundary-word orbit**, not an additional S3.
+
+See [ABC six-permutation proof ledger](AlexanderHornedABCSixPermutationOrbit20261030.md).
+
+In the canonical meridian Agda owner, \`ABCSixPermutationPeripheralOrbit\`
+provides literal \`abc/acb/bac/bca/cab/cbaAnchored\` witnesses,
+\`sixOrientedNormalFormsDistinct\`, six reversal-pair witnesses,
+\`allSixMapToThreeUnorientedClasses\`, and
+\`orbitFamilyEquivariant\` for the full 6×6=S3 action table.
+All six oriented cyclic conjugacy representatives are distinct,
+but inversion pairs ABC/CBA, ACB/BCA, BAC/CAB. This produces
+**three** unoriented orbits. A selected single parent boundary class
+is therefore not invariant under the FULL local child S3, while
+its **six-word boundary family** is equivariant as an algebraic object.
+
+DO NOT silently replace the original stage map by the family:
+G4 now has two explicitly different design choices: (a) hold fixed
+one parent class, permit only its actual stabilizer and prove based
+path naturality, OR (b) construct a genuine three-dimensional
+orbit-indexed multi-peripheral stage with six oriented charts and
+prove it geometrically. Algebraic sixfold equivariance does not
+supply six embedded punctured tori or six realizable cap-relative
+slides. The previously shown GL3(Z) modular no-conjugacy obstruction
+between local Nielsen C3 and literal label C3 remains valid.
+
+**TODO/max-cut:** G2 actual supported PL moves; G3 actual embedded
+relative theta ribbon/torus; G4 actual based inclusion/path and
+explicit choice of single-boundary versus orbit-indexed geometry;
+G5 coherent nested wild stages; G6 same-object exterior group.
+No action from the pending polynomial #1414 or trialectic #1438
+branches was imported as if it were a proven topology result.
+The prior Hatcher binary geometry is still binary.
+Source written, exact-head Agda and Lean kernel unexecuted; CI skipped.
