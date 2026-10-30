@@ -174,12 +174,12 @@ nativeWilsonP2FromMarkedSource
     (NativeMeasure.nativeWilsonPreferredFromMarked thermodynamic preferred)
     translateLoop left right time
 
-p2NativeNoIndependentMomentSelection : Bool
-p2NativeNoIndependentMomentSelection = false
+p2NativeIndependentMomentSelectionRequired : Bool
+p2NativeIndependentMomentSelectionRequired = false
 
-p2NativeNoIndependentMomentSelectionIsFalse :
-  p2NativeNoIndependentMomentSelection ≡ false
-p2NativeNoIndependentMomentSelectionIsFalse = refl
+p2NativeIndependentMomentSelectionRequiredIsFalse :
+  p2NativeIndependentMomentSelectionRequired ≡ false
+p2NativeIndependentMomentSelectionRequiredIsFalse = refl
 
 p2CanonicalMarkedSourceCompilerLevel : ProofLevel
 p2CanonicalMarkedSourceCompilerLevel = conditional
