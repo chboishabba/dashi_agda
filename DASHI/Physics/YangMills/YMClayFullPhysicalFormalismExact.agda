@@ -916,3 +916,24 @@ unconditionalClayPromotion = false
 unconditionalClayPromotionIsFalse :
   unconditionalClayPromotion ≡ false
 unconditionalClayPromotionIsFalse = refl
+
+
+-- The direct-source compiler now consumes H1 directly via R295/R313/R296.
+-- This is the existing route's proof-level export, not a new physical input.
+routeSH1DirectOSCompilerLevel : ProofLevel
+routeSH1DirectOSCompilerLevel =
+  RouteS.routeSH1ToDirectOSCompilerLevel
+
+routeSH1SelectedPhysicalPaymentLevel : ProofLevel
+routeSH1SelectedPhysicalPaymentLevel =
+  RouteS.routeSH1SelectedPhysicalPaymentLevel
+
+routeSH1AbsoluteMagnitudeIndependentPhysicalLeaf : Bool
+routeSH1AbsoluteMagnitudeIndependentPhysicalLeaf =
+  RouteS.routeSH1ReusesR313MagnitudeCompiler
+
+routeSH1AbsoluteMagnitudeIndependentPhysicalLeafIsFalse :
+  routeSH1AbsoluteMagnitudeIndependentPhysicalLeaf ≡ false
+routeSH1AbsoluteMagnitudeIndependentPhysicalLeafIsFalse =
+  RouteS.routeSH1ReusesR313MagnitudeCompilerIsFalse
+
