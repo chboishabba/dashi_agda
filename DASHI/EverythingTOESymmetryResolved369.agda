@@ -11,3 +11,6 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
 -- Reuse exact 369/tetration/corner/S3 proofs and explicit non-promotion gates.
 import DASHI.Unified.TOE369TetratedCornerCocycleConvergenceExact
+
+-- Original Bishop analytical J phase imported as actual Pickover signed-history consumer.
+import DASHI.Analysis.PickoverAnalyticJHistoricalPhaseConsumerExact as PickoverAnalyticJHistory
