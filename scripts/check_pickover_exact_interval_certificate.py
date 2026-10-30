@@ -51,6 +51,14 @@ def main():
         if n==7: assert digit==51
         print(f'{n}! exponent={k} first_radix99_digit={digit} signed={sign}')
     assert pow(99,120,101)==pow(99,720,101)==95
+    # Stronger cross-PR graph/wave counterexample: one and the SAME
+    # complete mod-9999 phase chart, yet opposite ACTUAL sine signs.
+    # These are fully certified by the Machin rational floor routine
+    # above, not by a C3 wave label or a floating-point experiment.
+    pi_lo,pi_hi=machin_pi_bounds(720)
+    assert pow(99,120,9999)==pow(99,720,9999)==297
+    assert sign_certificate(120,pi_lo,pi_hi)==-1
+    assert sign_certificate(720,pi_lo,pi_hi)==1
     print('PASS: seven exact real-phase sign certificates')
     print('PASS: 101 torsion observer loses the real sign on factorial subsequence')
     print('OPEN: 9999! real-phase interval or an alternative sublinear certificate')
