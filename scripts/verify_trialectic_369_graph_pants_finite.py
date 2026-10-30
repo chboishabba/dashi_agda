@@ -131,6 +131,36 @@ def main() -> None:
                    for v in V)
         assert all(forced[u] != forced[v] for u, v in undirected_edges)
 
+    # Canonical orientation normal form: three axes, 9 fixed-coordinate
+    # pairs and 2 increasing steps = 54 unique undirected templates.
+    # Both directions of each native edge must occur exactly once.
+    canonical = []
+    for axis in range(3):
+        for fixed in product(TRITS, repeat=2):
+            for start, end in ((-1, 0), (0, 1)):
+                rest = iter(fixed)
+                src, dst = [], []
+                for k in range(3):
+                    if k == axis:
+                        src.append(start)
+                        dst.append(end)
+                    else:
+                        val = next(rest)
+                        src.append(val)
+                        dst.append(val)
+                canonical.append((tuple(src), tuple(dst)))
+    assert len(canonical) == 54 and len(set(canonical)) == 54
+    assert set(edges) == (
+        set(canonical) | {(v, u) for u, v in canonical}
+    )
+    assert all(parity == list(range(54))[parity] for parity in range(54))
+    s3_parity_checks = sum(
+        checker(tuple(v[i] for i in order)) == checker(v)
+        for v in V for order in six
+    )
+    assert s3_parity_checks == 162
+    assert all(checker(flip_second(v)) == checker(v) for v in V)
+
     # IDs inspected on actual Wikidata item pages; no QID created here.
     verified_concept_qids = {
         "graph_theory": "Q131476",
@@ -156,6 +186,9 @@ def main() -> None:
         "minimal_palette_size": 2,
         "checkerboard_colour_class_sizes": dict(sorted(Counter(checker(v) for v in V).items())),
         "max_cut_54_unit_edges": checker_unit_score,
+        "canonical_54_slots_unique_and_cover_both_orientations": True,
+        "native_s3_partition_fixed_checks": s3_parity_checks,
+        "native_seam_flip_partition_fixed_checks": 27,
         "connected_native_grid_vertices": len(reachable),
         "strict_positive_weight_optimum_unique_up_to_global_complement": True,
         "uniqueness_basis": "connectedness and positive-edge cut saturation; not enumerated over all 2^27 partitions",
