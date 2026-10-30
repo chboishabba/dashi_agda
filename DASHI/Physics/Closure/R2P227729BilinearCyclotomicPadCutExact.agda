@@ -841,3 +841,52 @@ sourceCartesianTripleProductFactorsWith
 -- A source cube is merely the constructor mk here. No claim that its
 -- actual Fourier character splits into 1D factors until an owner
 -- supplies the explicit pointwise agreement at this exact carrier.
+
+
+------------------------------------------------------------------------
+-- SOURCE Boolean Cartesian selector product.  This is exactly the
+-- equality predicate convention of the source C4/C5 cubes:
+--   (eqAxis0 &&B eqAxis1) &&B eqAxis2.
+-- Proof does not assume a data-induced ranking, synthetic QID, or
+-- excluded middle on arbitrary propositions: only concrete Bool.
+------------------------------------------------------------------------
+
+sourceChooseProduct :
+  ∀ {A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (one : A)
+  (unitOne : CoefficientOps.multiply ops one one ≡ one)
+  (a b : Bool) →
+  CoefficientOps.multiply ops
+    (choose (CoefficientOps.zero ops) a one)
+    (choose (CoefficientOps.zero ops) b one)
+  ≡ choose (CoefficientOps.zero ops) (Full._&&B_ a b) one
+sourceChooseProduct ops laws one unitOne true true = unitOne
+sourceChooseProduct ops laws one unitOne true false =
+  FiniteSumAlgebra.sumMulZeroRight laws one
+sourceChooseProduct ops laws one unitOne false true =
+  FiniteSumAlgebra.sumMulZeroLeft laws one
+sourceChooseProduct ops laws one unitOne false false =
+  FiniteSumAlgebra.sumMulZeroLeft laws (CoefficientOps.zero ops)
+
+sourceChooseProductTriple :
+  ∀ {A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (one : A)
+  (unitOne : CoefficientOps.multiply ops one one ≡ one)
+  (a b c : Bool) →
+  CoefficientOps.multiply ops
+    (CoefficientOps.multiply ops
+      (choose (CoefficientOps.zero ops) a one)
+      (choose (CoefficientOps.zero ops) b one))
+    (choose (CoefficientOps.zero ops) c one)
+  ≡ choose (CoefficientOps.zero ops)
+      (Full._&&B_ (Full._&&B_ a b) c) one
+sourceChooseProductTriple ops laws one unitOne a b c =
+  trans
+    (cong
+      (λ first → CoefficientOps.multiply ops first
+        (choose (CoefficientOps.zero ops) c one))
+      (sourceChooseProduct ops laws one unitOne a b))
+    (sourceChooseProduct ops laws one unitOne
+      (Full._&&B_ a b) c)
