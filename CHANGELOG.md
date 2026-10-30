@@ -105,3 +105,7 @@ monitor surface.
 
 - Crosswalked actual PR #1438 asymmetric weighted matrix and C3 hyperfabric with existing true Mangoldt finite prime/error split and the new FRACTRAN fixed-prefix counterexample. The graph owner now proves a consumer-specific C3 symmetrization information-loss theorem, preventing promotion from spectral graph symmetry to prime-only cofinal positivity without a signed residual and independent analytic estimate.
 - Checked contemporaneous Oct 2026 external research: recent AI-assisted dilation-spectral parity limitation preprint is a scoped method claim, not solved twins; arXiv:2006.04547 author withdrew claimed twin-prime proof ('Lemma 2 is false'). Preserved original mathematics and independent Ibrahim/Pareto/Snowball/QID attribution, without importing unmerged graph code or editing ESD. No CI; Agda kernel remains pending.
+
+## 2026-10-31 — actual Mangoldt proper-power error support estimate
+
+- Checked original `finiteMangoldtPrimeErrorSplit` against real-valued standard \(\Lambda\), deriving explicit elementary \(E(Y)\le2\lfloor\sqrt Y\rfloor\lfloor\log_2 Y\rfloor(\log Y)^2\). The generic abstract Weil scalar does **not** get this order structure for free. Added deterministic exact prime-power support checker and independently enumerated Y=100..100000. This leaves an honest, now sharply isolated missing positive shifted-correlation main-term estimate \(S(Y)\gg Y\); it is open, not proven from symmetry. No ESD modifications or CI.
