@@ -700,3 +700,114 @@ data DispositionKind : Set where
 dispositionsAreDifferent :
   appellateMeritsDetermination ≡ discretionarySpecialLeaveRefusal → ⊥
 dispositionsAreDifferent ()
+
+
+------------------------------------------------------------------------
+-- NEWLY INSPECTED OFFICIAL [2017] QPEC 38 ORIGINAL PDF PP 29-31
+-- Paragraph [73] RECITES specific 1998 Springfield Infrastructure Agreement
+-- provisions from an agreed court exhibit, NOT a complete executed deed.
+-- The trial judge's later DECLARATION was set aside by [2018] QCA 266.
+-- Contract clause recitals remain historical source-specific data only.
+------------------------------------------------------------------------
+
+cherish2017OriginalReasonsPDF : Source.AttributedSource
+cherish2017OriginalReasonsPDF = Source.mkNoDOISource
+  "Planning and Environment Court of Queensland, Kefford DCJ"
+  "Cherish Enterprises Pty Ltd v Ipswich City Council [2017] QPEC 38, reasons paragraph [73]"
+  "Official original judgment PDF, court-reported 1998 SIA terms, pages 29-31"
+  "14 July 2017"
+  "https://www.queenslandjudgments.com.au/caselaw/qpec/2017/38/pdf"
+  (Source.namedSourceKind "court judgment")
+  "Original judgment PDF p29-31 [73] summarises 1998 SIA clauses 14,19,22,132,134,190,192,215,274 from agreed exhibits. Underlying deed and amendments not received. The 2017 development-entitlement declaration was SET ASIDE by [2018] QCA 266; recital is not a new 2026 rights or actual-financial-transfer determination."
+  Source.publicAttribution
+
+data SIA1998ClauseMechanism : Set where
+  severanceAndSubstituteNegotiation : SIA1998ClauseMechanism
+  areaDevelopmentPlanAgreementPriority : SIA1998ClauseMechanism
+  conditionalEntitlementChangeReimbursement : SIA1998ClauseMechanism
+  openSpaceMasterPlanConsistency : SIA1998ClauseMechanism
+  drainageMasterPlanConsistency : SIA1998ClauseMechanism
+  councilMayConditionInfrastructurePerformance : SIA1998ClauseMechanism
+  subdivisionSurveySealingPrerequisites : SIA1998ClauseMechanism
+
+record CourtReportedClause : Set where
+  constructor court-reported-clause
+  field
+    originalCourtCarrier : Source.AttributedSource
+    clauseNumber : String
+    courtParagraph : String
+    legalMechanism : SIA1998ClauseMechanism
+    fullOriginalSignedDeedPaid : Bool
+    present2026SameLotApplicationProved : Bool
+    actualPaymentOrBreachEstablished : Bool
+
+sIAClause22Reported : CourtReportedClause
+sIAClause22Reported = court-reported-clause
+  cherish2017OriginalReasonsPDF "22" "[73](c), PDF p29"
+  conditionalEntitlementChangeReimbursement false false false
+
+sIAClause132and134Reported : CourtReportedClause
+sIAClause132and134Reported = court-reported-clause
+  cherish2017OriginalReasonsPDF "132 and 134" "[73](e)-(f), PDF p29"
+  openSpaceMasterPlanConsistency false false false
+
+sIAClause190and192Reported : CourtReportedClause
+sIAClause190and192Reported = court-reported-clause
+  cherish2017OriginalReasonsPDF "190 and 192" "[73](g)-(h), PDF pp29-30"
+  drainageMasterPlanConsistency false false false
+
+sIAClause215Reported : CourtReportedClause
+sIAClause215Reported = court-reported-clause
+  cherish2017OriginalReasonsPDF "215" "[73](i), PDF p30"
+  councilMayConditionInfrastructurePerformance false false false
+
+sIAClause274Reported : CourtReportedClause
+sIAClause274Reported = court-reported-clause
+  cherish2017OriginalReasonsPDF "274" "[73](j), PDF p30"
+  subdivisionSurveySealingPrerequisites false false false
+
+reportedPriorityClauses : List CourtReportedClause
+reportedPriorityClauses =
+  sIAClause22Reported ∷
+  sIAClause132and134Reported ∷
+  sIAClause190and192Reported ∷
+  sIAClause215Reported ∷
+  sIAClause274Reported ∷ []
+
+-- Even where the court reproduces clause 22's contingent reimbursement
+-- mechanism, neither altered entitlement nor actual expenditure/repayment
+-- is thereby paid for any 2019/8575 or 2026 parcel.
+data EntitlementWorld : Set where
+  historicalClauseWithoutCurrentRepayment : EntitlementWorld
+  historicalClauseWithNewIndependentRepayment : EntitlementWorld
+
+data ClauseExcerptObservation : Set where
+  courtRecordsClause22 : ClauseExcerptObservation
+
+data Actual2026RepaymentReceipt : Set where
+  noCurrentFinancialReceipt : Actual2026RepaymentReceipt
+  currentFinancialReceiptAuthenticated : Actual2026RepaymentReceipt
+
+clauseExcerpt : EntitlementWorld → ClauseExcerptObservation
+clauseExcerpt historicalClauseWithoutCurrentRepayment = courtRecordsClause22
+clauseExcerpt historicalClauseWithNewIndependentRepayment = courtRecordsClause22
+
+repaymentStatus : EntitlementWorld → Actual2026RepaymentReceipt
+repaymentStatus historicalClauseWithoutCurrentRepayment = noCurrentFinancialReceipt
+repaymentStatus historicalClauseWithNewIndependentRepayment = currentFinancialReceiptAuthenticated
+
+repaymentDiffers :
+  repaymentStatus historicalClauseWithoutCurrentRepayment ≡
+  repaymentStatus historicalClauseWithNewIndependentRepayment → ⊥
+repaymentDiffers ()
+
+reportedConditionalReimbursementDoesNotProveCashTransfer :
+  INF.FactorsThrough clauseExcerpt repaymentStatus → ⊥
+reportedConditionalReimbursementDoesNotProveCashTransfer =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness historicalClauseWithoutCurrentRepayment
+      historicalClauseWithNewIndependentRepayment refl repaymentDiffers)
+
+-- Open Space / Drainage masterplans are separately source-paid 1998
+-- historical legal planning constructs. They are not an EPBC 2019/8575
+-- koala-offset determination, environmental clearance or same-site works.
