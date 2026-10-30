@@ -232,3 +232,74 @@ cubeCharacterOrthogonality (Full.gridCube a b c) (Full.gridCube d e f)
 
 -- Unfinished separate owner: 5-point forward/inverse sampled transform
 -- and tensorized full 125-output multiplication theorem.
+
+
+------------------------------------------------------------------------
+-- EXACT SCALAR RING LAWS FOR THE REPOSITORY-OWNED FINITE DFT.
+-- Needed for distributing sampled pointwise products through nested
+-- C4/C5 axis sums; they MUST precede any tensor convolution claim.
+-- Proofs are in the ORIGINAL Q(i)/Q(zeta5) scalar carriers, not ℚ
+-- coerced via an unproved equivalence. Source-written, kernel pending.
+------------------------------------------------------------------------
+
+scalarAddAssociative :
+  (x y z : Cyclotomic5) →
+  _+5_ (_+5_ x y) z ≡ _+5_ x (_+5_ y z)
+scalarAddAssociative (cyc5 a b c d) (cyc5 e f g h) (cyc5 i j k l) =
+  cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarAddCommutative :
+  (x y : Cyclotomic5) → _+5_ x y ≡ _+5_ y x
+scalarAddCommutative (cyc5 a b c d) (cyc5 e f g h) =
+  cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarAddZeroLeft :
+  (x : Cyclotomic5) → _+5_ zero5 x ≡ x
+scalarAddZeroLeft (cyc5 a b c d) = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarAddZeroRight :
+  (x : Cyclotomic5) → _+5_ x zero5 ≡ x
+scalarAddZeroRight (cyc5 a b c d) = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarMulAssociative :
+  (x y z : Cyclotomic5) →
+  _*5_ (_*5_ x y) z ≡ _*5_ x (_*5_ y z)
+scalarMulAssociative (cyc5 a b c d) (cyc5 e f g h) (cyc5 i j k l) =
+  cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarMulCommutative :
+  (x y : Cyclotomic5) → _*5_ x y ≡ _*5_ y x
+scalarMulCommutative (cyc5 a b c d) (cyc5 e f g h) =
+  cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarMulOneLeft :
+  (x : Cyclotomic5) → _*5_ one5 x ≡ x
+scalarMulOneLeft (cyc5 a b c d) = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarMulOneRight :
+  (x : Cyclotomic5) → _*5_ x one5 ≡ x
+scalarMulOneRight (cyc5 a b c d) = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarMulZeroLeft :
+  (x : Cyclotomic5) → _*5_ zero5 x ≡ zero5
+scalarMulZeroLeft (cyc5 a b c d) = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarMulZeroRight :
+  (x : Cyclotomic5) → _*5_ x zero5 ≡ zero5
+scalarMulZeroRight (cyc5 a b c d) = cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarMulDistributesRight :
+  (x y z : Cyclotomic5) →
+  _*5_ (_+5_ x y) z ≡ _+5_ (_*5_ x z) (_*5_ y z)
+scalarMulDistributesRight (cyc5 a b c d) (cyc5 e f g h) (cyc5 i j k l) =
+  cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+scalarMulDistributesLeft :
+  (x y z : Cyclotomic5) →
+  _*5_ x (_+5_ y z) ≡ _+5_ (_*5_ x y) (_*5_ x z)
+scalarMulDistributesLeft (cyc5 a b c d) (cyc5 e f g h) (cyc5 i j k l) =
+  cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
+
+-- The proof-critical part is distributivity, not the cyclic index
+-- counts. Finite sum-swap/scale can now reuse the original generic
+-- Grafakos and NS proof patterns at their actual cyclotomic types.
