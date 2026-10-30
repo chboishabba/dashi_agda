@@ -90,3 +90,27 @@ monitor surface.
 - Mirrored the exact finite non-descent surface in Lean. No general
   social/physical mediation, higher stack, Monster3B, smooth pants,
   external source authority or kernel verification promoted.
+
+## 2026-10-30 — Weighted native graph max-cut, QID identity and both-ended directed fabric
+
+- Added golden `GraphColouring369PantsWeightedMaxCutExact`: checkerboard
+  edgewise saturation and universal maximum cut for finite supported
+  native 27-grid edges with arbitrary nonnegative Nat weights;
+  constructed 54 unit edge witnesses with source-level length/weight
+  candidates, separate from Python 54-edge exhaustive semantics audit.
+- Added `GraphColouring369PantsQidParetoSnowballExact`: verified
+  Q131476, Q1137726, Q727035, Q504843, Q174733, Q303100,
+  Q3385162, Q942557, Q840247 and Q184410; unresolved synthetic
+  fixture; QID, 2019 Shitov, 2026 Inoue et al., DSNN/DSHN original
+  authors and prior Ibrahim/Monster3B proof ownership remain distinct.
+- Reused `TypedHyperfabricCore` in
+  `TrialecticDirectedSourceTargetHyperfabricExact`: both-ended
+  source/target restriction maps, compatible oriented-edge global
+  section, explicit forward/reverse asymmetry and a self-loop.
+- Added downstream Lean mirrors, wired existing focused TOE roots,
+  corrected `GraphColouringRecolourPantsSnowballExact` citation from
+  2026 arXiv v2 to inspected v3 (revised 1 October 2026); updated
+  deterministic Python companion with heterogeneous weights and QIDs.
+- No Agda/Lean kernel, transitive `--safe`, CI, DSNN performance,
+  real-world semantics, physical field theory, Monster same-object,
+  or smooth pants certification has been performed or claimed.
