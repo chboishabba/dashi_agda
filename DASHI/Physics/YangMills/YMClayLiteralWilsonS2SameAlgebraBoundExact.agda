@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; map)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -101,6 +102,11 @@ record RationalSU2TraceGramBoundSource
   field
     loopHolonomy : Loop → RationalSU2.RationalUnitQuaternion
     traceObservable : RationalSU2.RationalUnitQuaternion → TestObservable
+    -- Physical same-object witness: never substitute a synthetic trace carrier
+    -- for the existing literal Wilson-loop observable.
+    literalWilsonLoopObservable : Loop → TestObservable
+    traceIsLiteralWilson : ∀ loop →
+      traceObservable (loopHolonomy loop) ≡ literalWilsonLoopObservable loop
 
     one groupRank : ℚ
     multiplyScalar : ℚ → ℚ → ℚ
@@ -126,16 +132,20 @@ rationalSU2TraceToSameAlgebraWilsonBounds :
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ} →
   RationalSU2TraceGramBoundSource {Loop = Loop} dataSet →
   SameAlgebraWilsonBoundInputs {Loop = Loop} dataSet
-rationalSU2TraceToSameAlgebraWilsonBounds source = record
+rationalSU2TraceToSameAlgebraWilsonBounds {dataSet = dataSet} source = record
   { SameAlgebraWilsonBoundInputs.loopObservable =
-      λ loop → RationalSU2TraceGramBoundSource.traceObservable source (RationalSU2TraceGramBoundSource.loopHolonomy source loop)
+      RationalSU2TraceGramBoundSource.literalWilsonLoopObservable source
   ; SameAlgebraWilsonBoundInputs.one = RationalSU2TraceGramBoundSource.one source
   ; SameAlgebraWilsonBoundInputs.groupRank = RationalSU2TraceGramBoundSource.groupRank source
   ; SameAlgebraWilsonBoundInputs.multiplyScalar = RationalSU2TraceGramBoundSource.multiplyScalar source
   ; SameAlgebraWilsonBoundInputs.literalLoopBounded =
-      λ loop → RationalSU2TraceGramBoundSource.traceIntervalIsGramBounded source
-        (RationalSU2TraceGramBoundSource.loopHolonomy source loop)
-        (Trace.normalizedTraceBound (RationalSU2TraceGramBoundSource.loopHolonomy source loop))
+      λ loop →
+        subst (Gram.BoundedObservable dataSet)
+          (RationalSU2TraceGramBoundSource.traceIsLiteralWilson source loop)
+          (RationalSU2TraceGramBoundSource.traceIntervalIsGramBounded source
+            (RationalSU2TraceGramBoundSource.loopHolonomy source loop)
+            (Trace.normalizedTraceBound
+              (RationalSU2TraceGramBoundSource.loopHolonomy source loop)))
   ; SameAlgebraWilsonBoundInputs.boundedMultiplyClosed =
       RationalSU2TraceGramBoundSource.boundedMultiplyClosed source
   ; SameAlgebraWilsonBoundInputs.identityObservable =
