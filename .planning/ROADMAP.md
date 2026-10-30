@@ -178,3 +178,20 @@ QIDs and 2026 directed-sheaf sources are attribution/comparison only.
   511.54 directed graph vs 511.5 graph theory parent.
 - [x] Lean mirror role-indexed concept vocabulary.
 - [ ] Exact-head kernel checks and situated face/seam authority.
+
+## 2026-10-30 — further high-alpha 369 edge-coverage / symmetry cut
+
+- [x] Source-write native adjacency orientation canonicalisation
+  covering each of the three axes and four directed step cases.
+- [x] Source-write 54-slot chart, explicit map into existing
+  54-unit-edge witnesses and exact closed 0–53 slot-index census.
+- [x] Source-write all six S3 actions and the seam reflection as
+  *fixing the actual selected cut*, not just proper-colouring existence.
+- [x] Mirror both finite surfaces downstream in Lean; extend local
+  Python test with 54-edge/108-orientation and 162+27 action checks.
+- [x] Attach 2026 CSNN/Directo author/source roots to existing
+  attributed-source atlas; do not import algorithms or benchmarks.
+- [ ] Golden exact-head kernel, Lean pinned kernel, and Agda
+  abstract slot-index injectivity/list Nodup certification.
+- [ ] Sourced, consumer-specific higher-order face/pants transport
+  and real direction-preserving weighted representation actions.
