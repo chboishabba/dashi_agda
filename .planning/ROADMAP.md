@@ -155,3 +155,17 @@ The higher-value next cut is a **both-endpoint compatible section**
 that preserves the orientation and witnesses asymmetry. Reuse the
 existing `TypedHyperfabricCore`, not a new sheaf/hypergraph ontology.
 QIDs and 2026 directed-sheaf sources are attribution/comparison only.
+
+## 2026-10-30 source-written closure ledger — weighted max-cut/QID
+
+- [x] Native edgewise cut saturation and generic Nat-weighted
+  finite-list optimality, plus exact source-level 54-edge unit witnesses.
+- [x] Actual QID identities for ten graph/colouring/max-cut concepts;
+  specific fixture identity remains unresolved.
+- [x] Two-ended directed hyperfabric compatible section with
+  independently oriented source/target restriction maps.
+- [x] Golden TOE/import and Lean downstream mirrors synchronised.
+- [ ] Agda/Lean kernel verified status; exact-head transcript and safe,
+  metas, termination, postulate scans. No CI dependency.
+- [ ] 54-edge formal completeness/uniqueness and genuine selected
+  situated pants/gluing or face mediation interface.
