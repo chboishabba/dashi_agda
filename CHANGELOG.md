@@ -100,3 +100,8 @@ monitor surface.
 - Extended the actual twin-prime FRACTRAN hyperfabric owner with ordered `329→47→1` trace and proof of 1 terminality; independent local Python check passed.
 - Proved in source `noFixedFractranPrefixCanCertifyEveryTwin` from the original cofinally blocked composite-pair construction; explicitly conditional on an inhabited surviving seed. Maintains distinction between fixed finite denominator prefix, general FRACTRAN machine and genuine unbounded prime-pair analytic theorem.
 - Golden source typecheck pending; no CI, no ESD edits, provenance unchanged.
+
+## 2026-10-30 — CT15 graph/wave hyperfabric discriminator from recent graph PR
+
+- Crosswalked actual PR #1438 asymmetric weighted matrix and C3 hyperfabric with existing true Mangoldt finite prime/error split and the new FRACTRAN fixed-prefix counterexample. The graph owner now proves a consumer-specific C3 symmetrization information-loss theorem, preventing promotion from spectral graph symmetry to prime-only cofinal positivity without a signed residual and independent analytic estimate.
+- Checked contemporaneous Oct 2026 external research: recent AI-assisted dilation-spectral parity limitation preprint is a scoped method claim, not solved twins; arXiv:2006.04547 author withdrew claimed twin-prime proof ('Lemma 2 is false'). Preserved original mathematics and independent Ibrahim/Pareto/Snowball/QID attribution, without importing unmerged graph code or editing ESD. No CI; Agda kernel remains pending.
