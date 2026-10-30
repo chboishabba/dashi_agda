@@ -92,3 +92,10 @@ Owner: `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasingMaxCut.md`, section **5j
 - [ ] **P0:** using the generic 729 product/Fubini/character layer, prove `retainedSampledBilinear = fourGridGaussianIndexConvolutionAt` and `fullSampledBilinear125 = indexedFiveGridBilinearAt` for arbitrary actual fields/targets.
 - [ ] **P1:** once source and kernel align, attach the same-object Complex3/Leray/Galerkin operator with physical divergence-free energy and signed coefficients; do not import unmerged unrelated lanes silently.
 - [ ] **P2:** preserve original R440/R736/B4 physical analytic and real-ODE walls, Ma 87Sr versus R2P2 neutral-Yb measurements, Ibrahim/Monster 3B provenance; no same-object promotion from indices.
+
+
+### 2026-10-30 5k source-character continuation (PR #1407)
+- [x] Reuse one scalar-polymorphic 729-pair Fubini proof for phase-weighted sampled products, multiply six C4/C5 cube-character factors using the existing scalar multiplication laws, and export both sample-local theorems from all TOE roots.
+- [x] Independently verify each exact weighted 729-pair product at all 64 C4 and all 125 C5 source sample addresses; extend in-place regressions. No pinned checkout run.
+- [ ] **P0:** prove actual FFT-padded synthesis equals source 27-mode character sum, normalized sample analysis equals character coefficient extraction, and C4³/C5³ orthogonality collapses to the original indexed 729-term operator. Kernel type-check all new source.
+- [ ] Preserve separate original NS R440/R736/B4 physical walls, clock calibration, Ibrahim/Monster and external historical proof ownership.
