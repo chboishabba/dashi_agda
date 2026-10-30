@@ -17413,3 +17413,7 @@ pants/sheaf matching before promoting any real-world synthesis.
 - [ ] Agda/Lean kernel check for new and original graph module once compatible toolchain available (no CI obligation).
 - [ ] Twin CT15: prove actual arithmetic prime-only/error separation on cofinal windows; forbid replacing true `Λ(n)Λ(n+2)` with synthetic graph edge weights or using mere S3/C3 equivariance as a positivity theorem.
 - [ ] Pickover: construct a certified terminal analytic `π`-phase interval/sign at `99^(9999!)` with effective cost, not a finite CRT/C3/λ^9 graph label. Retain original Machin, wave and source-owner receipts.
+
+- [x] Further exact C4 discrete-wave Fourier witness: positive spectral mode energies (4,2,0,2) but zero lag-two correlation for synthetic f=(1,1,0,0); reuse original Gaussian-integer `ShiftDiscreteWaveStep` and `ShiftUnitaryLikeConstraint` code, no new wave algebra.
+- [x] Independent integer-pair DFT replay and original graph C3 nine-entry matrix equality both PASS; checked-in Python test expanded; no analytic claim promoted.
+- [ ] Prove PRIME-SPECIFIC spectral correlation lower bound in an actual arithmetic producer, not from positive Hilbert/Fourier energy alone, and certify full interval Pickover phase separately.
