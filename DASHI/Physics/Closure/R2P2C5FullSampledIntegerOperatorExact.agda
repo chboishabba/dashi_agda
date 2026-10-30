@@ -184,6 +184,8 @@ cyclotomicFiveFiniteSumAlgebra = record
   ; sumAddZeroLeft = C5.scalarAddZeroLeft
   ; sumMulDistributesLeft = C5.scalarMulDistributesLeft
   ; sumMulDistributesRight = C5.scalarMulDistributesRight
+  ; sumMulAssociative = C5.scalarMulAssociative
+  ; sumMulCommutative = C5.scalarMulCommutative
   ; sumMulZeroLeft = C5.scalarMulZeroLeft
   ; sumMulZeroRight = C5.scalarMulZeroRight
   }
