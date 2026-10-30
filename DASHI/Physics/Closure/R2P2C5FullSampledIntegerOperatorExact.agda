@@ -428,3 +428,43 @@ cyclotomicFiveOriginalAxisCharacterResolution I.gridMinusOne I.gridMinusOne = C5
 
 -- Actual enumerated axes are owned by R2P2C4C5NyquistAntipodalFixedPointExact.
 -- Source-written proof terms; an Agda kernel run is still required.
+
+
+------------------------------------------------------------------------
+-- ORIGINAL SOURCE CUBE ENUMERATION: now exactly triple-Fubini,
+-- reusing the one generic semiring proof and existing Nyquist lists.
+-- Nothing requires an artificial parallel cube indexed by Z/4 or Z/5.
+------------------------------------------------------------------------
+
+cyclotomicFiveActualNyquistSumAsNested :
+  (term : Full.GridCube125 → C5.Cyclotomic5) →
+  Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveGridCubes term
+  ≡ Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveAxes
+      (λ x → Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveAxes
+        (λ y → Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveAxes
+          (λ z → term (Full.gridCube x y z))))
+cyclotomicFiveActualNyquistSumAsNested =
+  Bilinear.sourceCartesianTripleSumWith
+    cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+    Nyquist.allFiveAxes Nyquist.allFiveAxes Nyquist.allFiveAxes
+    Full.gridCube
+
+cyclotomicFiveActualNyquistSeparableProduct :
+  (fx fy fz : I.FiveGridMode → C5.Cyclotomic5)
+  (cubeTerm : Full.GridCube125 → C5.Cyclotomic5) →
+  ((x y z : I.FiveGridMode) →
+    cubeTerm (Full.gridCube x y z)
+    ≡ C5._*5_
+      (C5._*5_ (fx x) (fy y))
+      (fz z)) →
+  Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveGridCubes cubeTerm
+  ≡ C5._*5_
+      (C5._*5_
+        (Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveAxes fx)
+        (Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveAxes fy))
+      (Bilinear.sumAll cyclotomicFiveOps Nyquist.allFiveAxes fz)
+cyclotomicFiveActualNyquistSeparableProduct fx fy fz cubeTerm agreement =
+  Bilinear.sourceCartesianTripleProductFactorsWith
+    cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+    Nyquist.allFiveAxes Nyquist.allFiveAxes Nyquist.allFiveAxes
+    Full.gridCube fx fy fz cubeTerm agreement
