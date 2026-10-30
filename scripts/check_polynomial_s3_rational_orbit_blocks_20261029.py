@@ -194,6 +194,45 @@ def verify_rational_solver_source_integrity():
     assert "Identity.unresolved" in qid_owner
     assert "qidCannotPayPolynomialProof = Identity.qidDoesNotPaySourceTruth" in qid_owner
 
+
+    # O78--O79: explicit REUSE in the ORIGINAL orbit-sampling owner,
+    # with rational instantiation only in the established Q27 owner.
+    sampling=owner("PolynomialC3S3OrbitSamplingProjectionExact")
+    sample_names=(
+        "projectC3Any", "projectS3Any",
+        "projectC3AnyIdempotent", "projectS3AnyIdempotent",
+        "projectC3AnyInvariant", "projectS3AnyInvariant",
+        "projectS3AnyFixesInvariant",
+        "projectC3AnyAfterS3Any", "projectS3AnyAfterC3Any",
+        "projectC3AnyMatchesOriginal", "projectS3AnyMatchesOriginal",
+    )
+    for name in sample_names:
+        assert len(re.findall(r"^"+name+r" :",sampling,re.M))==1,name
+        assert re.search(r"^"+name+r" [^\n]* =",sampling,re.M),name
+    assert "Data.Rational" not in sampling
+    rational_sample_names=(
+        "projectRationalC3", "projectRationalS3",
+        "projectRationalC3IdempotentAt", "projectRationalS3IdempotentAt",
+        "projectRationalC3InvariantAt", "projectRationalS3InvariantAt",
+        "projectRationalS3FixesInvariantAt",
+        "projectRationalS3AdditiveAt", "projectRationalC3AdditiveAt",
+        "projectRationalC3AfterS3At", "projectRationalS3AfterC3At",
+        "projectRationalS3NativeActionInvariantAt",
+    )
+    assert "PolynomialC3S3OrbitSamplingProjectionExact as Sampling" in native_fields
+    for name in rational_sample_names:
+        assert len(re.findall(r"^"+name+r" :",native_fields,re.M))==1,name
+        assert re.search(r"^"+name+r" [^\n]* =",native_fields,re.M),name
+    for root in (
+        "DASHI/EverythingTOESymmetryResolved369.agda",
+        "DASHI/Unifier.agda", "DASHI/Unified/Everything.agda"
+    ):
+        root_text=(ROOT/root).read_text(encoding="utf-8")
+        for name in rational_sample_names:
+            assert name in root_text,(root,name)
+    print("PASS generic original orbit retraction reused on rational Q27;"
+          " 11 generic and 12 native declarations; 3 TOE roots")
+
     assert "MoonshineOrbifoldSectorProjectorExact" in adapter
     for name in ("positiveIntertwinesS3Parity",
                  "negativeIntertwinesS3Parity",
@@ -273,6 +312,29 @@ def test():
         for i,p in enumerate(PERMS):
             canonical[conjugate(p,rep)]=f"{title} Block.slot{i}"
     assert labels==canonical
+
+    # Sampling projector is a choice of ORIGINAL orbit representative;
+    # it is not group averaging, nor is its carrier an abstract polynomial.
+    def shape(c):
+        return canonical[c].split()[0]
+    rep_by_shape=dict(zip(SHAPES,REPS))
+    def projector(f,c):
+        return f(rep_by_shape[shape(c)])
+    f=lambda c: int(c==REPS[4])
+    g=lambda c: c[0]*9+c[1]*3+c[2]
+    for c in canonical:
+        assert projector(lambda x: projector(f,x),c)==projector(f,c)
+        assert projector(lambda x: projector(g,x),c)==projector(g,c)
+        assert projector(lambda x: f(x)+g(x),c)==(
+            projector(f,c)+projector(g,c))
+        for p in PERMS:
+            assert projector(f,conjugate(p,c))==projector(f,c)
+    assert projector(f,REPS[4])==1
+    assert sum(f(conjugate(p,REPS[4])) for p in PERMS)==1
+    assert Fraction(sum(f(conjugate(p,REPS[4]))
+                        for p in PERMS),6)==Fraction(1,6)
+    print("PASS 27 native S3 sampling idempotence, invariance, additivity;"
+          " non-Reynolds fixture sample=1 vs mean=1/6")
 
     for p in PERMS:
         for c in canonical:
