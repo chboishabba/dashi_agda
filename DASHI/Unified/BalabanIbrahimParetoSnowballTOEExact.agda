@@ -1,4 +1,9 @@
 module DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact where
+import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as PantsBridgeSym
+import DASHI.Topology.TernaryPantsFrontierExact as PantsFrontierSym
+import DASHI.Combinatorics.GraphColouring369PantsGridAdjacencyExact as GridPantsSym
+import DASHI.Combinatorics.GraphColouring369PantsSymmetryCutInvariantExact as S3Cut369
+import DASHI.Combinatorics.GraphColouring369PantsEdgeCoverageExact as EdgeChart369
 import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
 open import Data.Nat using (_≤_)open import Data.List using (List)import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
 import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
@@ -286,3 +291,19 @@ ibrahimQidCannotPromoteSameMonsterRepresentation :
   NativeQid369.SameConceptImpliesSameMonsterRepresentation → ⊥
 ibrahimQidCannotPromoteSameMonsterRepresentation =
   NativeQid369.conceptSamenessNotMonsterSameObject
+
+------------------------------------------------------------------------
+-- Ibrahim/Pareto finite result with explicit action, not a claim of
+-- weighted/asymmetric or Monster3B full representation equivariance.
+------------------------------------------------------------------------
+
+ibrahimNativeS3KeepsSelectedCut :
+  (g : GridPantsSym.S3CoordinatePermutation) ->
+  (p : PantsFrontierSym.PantsPath 3) ->
+  NativeMaxCut369.checkerCut
+    (PantsBridgeSym.pants3ToVoxel27
+      (GridPantsSym.actS3Pants g p))
+  ≡ NativeMaxCut369.checkerCut
+    (PantsBridgeSym.pants3ToVoxel27 p)
+ibrahimNativeS3KeepsSelectedCut =
+  S3Cut369.s3PreservesNativeMaxCutPartition
