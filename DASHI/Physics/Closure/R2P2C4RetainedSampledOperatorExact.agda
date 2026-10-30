@@ -497,3 +497,43 @@ gaussianOriginalAxisCharacterResolution Four.fourMinusOne Four.fourMinusOne = G.
 
 -- Actual enumerated axes are owned by R2P2C4C5NyquistAntipodalFixedPointExact.
 -- Source-written proof terms; an Agda kernel run is still required.
+
+
+------------------------------------------------------------------------
+-- ORIGINAL SOURCE CUBE ENUMERATION: now exactly triple-Fubini,
+-- reusing the one generic semiring proof and existing Nyquist lists.
+-- Nothing requires an artificial parallel cube indexed by Z/4 or Z/5.
+------------------------------------------------------------------------
+
+gaussianActualNyquistSumAsNested :
+  (term : Four.FourGridCube64 → G.Gaussian4) →
+  Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourGridCubes term
+  ≡ Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourAxes
+      (λ x → Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourAxes
+        (λ y → Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourAxes
+          (λ z → term (Four.fourCube x y z))))
+gaussianActualNyquistSumAsNested =
+  Bilinear.sourceCartesianTripleSumWith
+    gaussianCoefficientOps gaussianFiniteSumAlgebra
+    Nyquist.allFourAxes Nyquist.allFourAxes Nyquist.allFourAxes
+    Four.fourCube
+
+gaussianActualNyquistSeparableProduct :
+  (fx fy fz : Four.FourGridMode → G.Gaussian4)
+  (cubeTerm : Four.FourGridCube64 → G.Gaussian4) →
+  ((x y z : Four.FourGridMode) →
+    cubeTerm (Four.fourCube x y z)
+    ≡ G._*G_
+      (G._*G_ (fx x) (fy y))
+      (fz z)) →
+  Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourGridCubes cubeTerm
+  ≡ G._*G_
+      (G._*G_
+        (Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourAxes fx)
+        (Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourAxes fy))
+      (Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourAxes fz)
+gaussianActualNyquistSeparableProduct fx fy fz cubeTerm agreement =
+  Bilinear.sourceCartesianTripleProductFactorsWith
+    gaussianCoefficientOps gaussianFiniteSumAlgebra
+    Nyquist.allFourAxes Nyquist.allFourAxes Nyquist.allFourAxes
+    Four.fourCube fx fy fz cubeTerm agreement
