@@ -9,6 +9,7 @@ module DASHI.Foundations.PolynomialVietaRootSymmetryExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
 
@@ -43,31 +44,31 @@ rootSumInvariant :
   (p : Perm.TriPermutation) (r : ThreeRoots) →
   rootSum (permuteRoots p r) ≡ rootSum r
 rootSumInvariant Perm.permIdentity r = refl
-rootSumInvariant Perm.permRotate (roots a b c) = Ring.solve-∀ a b c
-rootSumInvariant Perm.permRotate2 (roots a b c) = Ring.solve-∀ a b c
-rootSumInvariant Perm.permSwapLowMid (roots a b c) = Ring.solve-∀ a b c
-rootSumInvariant Perm.permSwapLowHigh (roots a b c) = Ring.solve-∀ a b c
-rootSumInvariant Perm.permSwapMidHigh (roots a b c) = Ring.solve-∀ a b c
+rootSumInvariant Perm.permRotate (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootSumInvariant Perm.permRotate2 (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootSumInvariant Perm.permSwapLowMid (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootSumInvariant Perm.permSwapLowHigh (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootSumInvariant Perm.permSwapMidHigh (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
 
 rootPairSumInvariant :
   (p : Perm.TriPermutation) (r : ThreeRoots) →
   rootPairSum (permuteRoots p r) ≡ rootPairSum r
 rootPairSumInvariant Perm.permIdentity r = refl
-rootPairSumInvariant Perm.permRotate (roots a b c) = Ring.solve-∀ a b c
-rootPairSumInvariant Perm.permRotate2 (roots a b c) = Ring.solve-∀ a b c
-rootPairSumInvariant Perm.permSwapLowMid (roots a b c) = Ring.solve-∀ a b c
-rootPairSumInvariant Perm.permSwapLowHigh (roots a b c) = Ring.solve-∀ a b c
-rootPairSumInvariant Perm.permSwapMidHigh (roots a b c) = Ring.solve-∀ a b c
+rootPairSumInvariant Perm.permRotate (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootPairSumInvariant Perm.permRotate2 (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootPairSumInvariant Perm.permSwapLowMid (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootPairSumInvariant Perm.permSwapLowHigh (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootPairSumInvariant Perm.permSwapMidHigh (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
 
 rootProductInvariant :
   (p : Perm.TriPermutation) (r : ThreeRoots) →
   rootProduct (permuteRoots p r) ≡ rootProduct r
 rootProductInvariant Perm.permIdentity r = refl
-rootProductInvariant Perm.permRotate (roots a b c) = Ring.solve-∀ a b c
-rootProductInvariant Perm.permRotate2 (roots a b c) = Ring.solve-∀ a b c
-rootProductInvariant Perm.permSwapLowMid (roots a b c) = Ring.solve-∀ a b c
-rootProductInvariant Perm.permSwapLowHigh (roots a b c) = Ring.solve-∀ a b c
-rootProductInvariant Perm.permSwapMidHigh (roots a b c) = Ring.solve-∀ a b c
+rootProductInvariant Perm.permRotate (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootProductInvariant Perm.permRotate2 (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootProductInvariant Perm.permSwapLowMid (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootProductInvariant Perm.permSwapLowHigh (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+rootProductInvariant Perm.permSwapMidHigh (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
 
 -- Monic cubic with the three elementary symmetric coefficients.
 evaluateMonicCubic : ThreeRoots → ℚ → ℚ
@@ -82,7 +83,7 @@ evaluateFactoredCubic (roots a b c) x =
 cubicVietaIdentity :
   (r : ThreeRoots) (x : ℚ) →
   evaluateMonicCubic r x ≡ evaluateFactoredCubic r x
-cubicVietaIdentity (roots a b c) x = Ring.solve-∀ a b c x
+cubicVietaIdentity (roots a b c) x = Ring.solve (a ∷ b ∷ c ∷ x ∷ [])
 
 coefficientInvariantUnderRootPermutation :
   (p : Perm.TriPermutation) (r : ThreeRoots) (x : ℚ) →
@@ -95,17 +96,17 @@ coefficientInvariantUnderRootPermutation p r x
 firstRootIsZero :
   (r : ThreeRoots) →
   evaluateFactoredCubic r (firstRoot r) ≡ 0ℚ
-firstRootIsZero (roots a b c) = Ring.solve-∀ a b c
+firstRootIsZero (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
 
 secondRootIsZero :
   (r : ThreeRoots) →
   evaluateFactoredCubic r (secondRoot r) ≡ 0ℚ
-secondRootIsZero (roots a b c) = Ring.solve-∀ a b c
+secondRootIsZero (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
 
 thirdRootIsZero :
   (r : ThreeRoots) →
   evaluateFactoredCubic r (thirdRoot r) ≡ 0ℚ
-thirdRootIsZero (roots a b c) = Ring.solve-∀ a b c
+thirdRootIsZero (roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
 
 ------------------------------------------------------------------------
 -- x²+1=0 has the distinct rational-complex witnesses ±i.
