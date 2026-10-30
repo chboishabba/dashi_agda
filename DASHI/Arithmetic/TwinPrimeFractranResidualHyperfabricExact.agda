@@ -36,7 +36,7 @@ import DASHI.Analysis.RiemannVonMangoldtSpecification as VM
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as Correlation
 import DASHI.Arithmetic.TwinPrimeMangoldtActualPrimePowerResidualExact as Mangoldt
 open import Data.Product using (_×_)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Arithmetic.TwinPrimeNat270PeriodResidualBidiExact as Period
@@ -47,6 +47,9 @@ import DASHI.Core.ConsumerIndexedResidualRefinementExact as Repair
 import DASHI.Analysis.PickoverConsumerResidualFibreBridgeExact as Pickover
 import DASHI.Interop.VerifiedFractranCrankPipeline as Machine
 import DASHI.Combinatorics.SSP15FractranCompression as Compression
+import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as Sum
+import DASHI.Arithmetic.TwinPrimeWeilActualCorrelationPartitionExact as Fold
+import DASHI.Arithmetic.TwinPrimeMangoldtPrimeErrorFiniteSplitExact as Split
 
 ------------------------------------------------------------------------
 -- 59 = 59, versus 329 = 7 * 47: both SSP primes really exist in
@@ -339,3 +342,77 @@ actualMangoldtConsumerReopens space arithmetic mangoldt n =
 -- positive estimate of a sum over unbounded scales. In particular
 -- it does not prove cofinalObservedSeparationImpliesTwinInfinitude's
 -- premise. No numeric/SSP/Monster identity promotion.
+
+------------------------------------------------------------------------
+-- FINITE WINDOW/REFINEMENT AXIS: genuinely original Mangoldt
+-- correlation over all Nat positions, read by exact q,r fibres.
+-- This is the existing ordered finite-sum BIDI, specialised rather
+-- than duplicated. It works on ANY finite window and keeps the
+-- original scalar/term order. The prime-only / proper-power split
+-- stays the already-owned original M15 theorem.
+------------------------------------------------------------------------
+
+actualMangoldtWindowFibreForward :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (start count : Nat) →
+  Sum.sumDecodedInterval (Fold.weilAdditive space)
+    (Correlation.pairCorrelationAtPeriod
+      (Mangoldt.actualMangoldtPair space arithmetic mangoldt))
+    start count
+  ≡
+  Sum.sumInterval (Fold.weilAdditive space)
+    (actualMangoldtPairConsumer space arithmetic mangoldt)
+    start count
+actualMangoldtWindowFibreForward space arithmetic mangoldt start count =
+  Sum.pairFiniteSumBidiForward
+    (Fold.weilAdditive space)
+    (Mangoldt.actualMangoldtPair space arithmetic mangoldt)
+    start count
+
+actualMangoldtWindowFibreBackward :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (start count : Nat) →
+  Sum.sumInterval (Fold.weilAdditive space)
+    (actualMangoldtPairConsumer space arithmetic mangoldt)
+    start count
+  ≡
+  Sum.sumDecodedInterval (Fold.weilAdditive space)
+    (Correlation.pairCorrelationAtPeriod
+      (Mangoldt.actualMangoldtPair space arithmetic mangoldt))
+    start count
+actualMangoldtWindowFibreBackward space arithmetic mangoldt start count =
+  Sum.pairFiniteSumBidiBackward
+    (Fold.weilAdditive space)
+    (Mangoldt.actualMangoldtPair space arithmetic mangoldt)
+    start count
+
+-- This source-term correspondence holds FOR ALL finite window sizes.
+-- Its quantified length is unbounded, but it does not assert any
+-- prime-pair count grows or any correlation stays positive.
+actualMangoldtFibreWindowPrimeErrorSplit :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (laws : Split.AdditiveInterchangeLaws space)
+  (start count : Nat) →
+  Sum.sumDecodedInterval (Fold.weilAdditive space)
+    (Correlation.pairCorrelationAtPeriod
+      (Mangoldt.actualMangoldtPair space arithmetic mangoldt))
+    start count
+  ≡
+  Weil.WeilTestSpace._+S_ space
+    (Sum.sumInterval (Fold.weilAdditive space)
+      (Split.primeOnlyAtNat space arithmetic mangoldt) start count)
+    (Sum.sumInterval (Fold.weilAdditive space)
+      (Split.nonPrimeErrorAtNat space arithmetic mangoldt) start count)
+actualMangoldtFibreWindowPrimeErrorSplit
+    space arithmetic mangoldt laws start count =
+  trans
+    (actualMangoldtWindowFibreForward space arithmetic mangoldt
+      start count)
+    (Split.finiteMangoldtPrimeErrorSplit
+      space arithmetic mangoldt laws start count)
