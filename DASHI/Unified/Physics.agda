@@ -771,3 +771,23 @@ yangMillsBalabanRouteSP2PerLoopBoundAfterInterpretation :
   BalabanRGTOE.balabanRouteSP2TracePerLoopBoundFlag ≡ true
 yangMillsBalabanRouteSP2PerLoopBoundAfterInterpretation =
   BalabanRGTOE.balabanRouteSP2TracePaysPerLoopBounds
+
+
+------------------------------------------------------------------------
+-- Preferred native rational-Wilson P2 (actual measure producer), not
+-- the generic external trace-to-Gram compatibility adapter.
+------------------------------------------------------------------------
+
+yangMillsBalabanRouteSP2NativeNoProductPayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProduct ≡ true
+yangMillsBalabanRouteSP2NativeNoProductPayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProductIsTrue
+
+yangMillsBalabanRouteSP2NativeNoDistancePayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoDistance ≡ false
+yangMillsBalabanRouteSP2NativeNoDistancePayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoDistanceIsFalse
+
+yangMillsBalabanRouteSP2NativeCompilerLevel : ProofLevel
+yangMillsBalabanRouteSP2NativeCompilerLevel =
+  BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
