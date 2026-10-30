@@ -31,6 +31,14 @@ monitor surface.
   `conditional`, with no fabricated CI or external acceptance claim.
 
 
+
+- Extended the same branch with a rational SU(2) normalized-trace → same-Gram
+  loop boundedness producer, a canonical S2 constructor, and regression
+  proof. This reuses the existing quaternion trace theorem and the P2
+  expectation-limit compiler; physical trace/Gram interpretation, product
+  boundedness and continuum measure convergence remain explicit.
+
+
 ## 2026-07-19 — Wetsuit seam optimisation boundary
 
 - Added `DASHI.Geometry.WetsuitSeamOptimisationBoundary`, a fail-closed typed
