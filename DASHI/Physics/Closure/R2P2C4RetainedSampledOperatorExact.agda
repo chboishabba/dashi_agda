@@ -19,7 +19,7 @@ module DASHI.Physics.Closure.R2P2C4RetainedSampledOperatorExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Product using (proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Rational.Base using (ℚ; _*_; normalize)
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
@@ -305,3 +305,77 @@ gaussianActual729InputProductExpansion :
 gaussianActual729InputProductExpansion =
   Bilinear.source729ProductExpansion
     gaussianCoefficientOps gaussianFiniteSumAlgebra
+
+
+------------------------------------------------------------------------
+-- LITERAL SOURCE-MODE CHARACTER EXPANSION AT EACH FINITE SAMPLE POINT.
+--
+-- This is the missing raw-product bridge for the actual existing
+-- Four.FourGridCube64 cyclic sample carrier: any TWO independent original
+-- 27-mode fields produce the ORIGINAL 729 ordered input products,
+-- each weighted by the character of the actual group-summed index.
+-- This is NOT yet the normalized forward transform or integer-output
+-- projection: that still requires complete 3D character resolution.
+------------------------------------------------------------------------
+
+gaussianCubeCharacter :
+  Four.FourGridCube64 → Four.FourGridCube64 → G.Gaussian4
+gaussianCubeCharacter
+  (Four.fourCube a b c) (Four.fourCube x y z) =
+  G._*G_ (G._*G_ (G.character4 a x) (G.character4 b y)) (G.character4 c z)
+
+gaussianCubeCharacterAddition :
+  (p q x : Four.FourGridCube64) →
+  gaussianCubeCharacter (Four.fourGridGroupSum p q) x
+  ≡ G._*G_ (gaussianCubeCharacter p x) (gaussianCubeCharacter q x)
+gaussianCubeCharacterAddition
+  (Four.fourCube a b c) (Four.fourCube d e f)
+  (Four.fourCube x y z)
+  rewrite G.characterAdditionLaw a d x
+        | G.characterAdditionLaw b e y
+        | G.characterAdditionLaw c f z =
+  Bilinear.productShuffleSix gaussianCoefficientOps gaussianFiniteSumAlgebra
+    (G.character4 a x) (G.character4 d x)
+    (G.character4 b y) (G.character4 e y)
+    (G.character4 c z) (G.character4 f z)
+
+gaussianOriginal27UnscaledSynthesisAt :
+  (I.ModeCube27 → G.Gaussian4) →
+  Four.FourGridCube64 → G.Gaussian4
+gaussianOriginal27UnscaledSynthesisAt f x =
+  Bilinear.sumAll gaussianCoefficientOps I.cube27
+    (λ p → G._*G_ (f p) (gaussianCubeCharacter (Four.inputToFourGrid p) x))
+
+gaussianOriginal729PhaseContribution :
+  (I.ModeCube27 → G.Gaussian4) →
+  (I.ModeCube27 → G.Gaussian4) →
+  Four.FourGridCube64 → I.ModePair729 → G.Gaussian4
+gaussianOriginal729PhaseContribution f g x (p , q) =
+  G._*G_ (G._*G_ (f p) (g q)) (gaussianCubeCharacter (Four.fourGridGroupSum (Four.inputToFourGrid p) (Four.inputToFourGrid q)) x)
+
+gaussianSourceSampledProductExpands729 :
+  (f g : I.ModeCube27 → G.Gaussian4)
+  (x : Four.FourGridCube64) →
+  G._*G_ (gaussianOriginal27UnscaledSynthesisAt f x) (gaussianOriginal27UnscaledSynthesisAt g x)
+  ≡ Bilinear.sumAll gaussianCoefficientOps I.pair729
+      (gaussianOriginal729PhaseContribution f g x)
+gaussianSourceSampledProductExpands729 f g x =
+  trans
+    (Bilinear.source729ProductExpansion gaussianCoefficientOps gaussianFiniteSumAlgebra
+      (λ p → G._*G_ (f p) (gaussianCubeCharacter (Four.inputToFourGrid p) x))
+      (λ q → G._*G_ (g q) (gaussianCubeCharacter (Four.inputToFourGrid q) x)))
+    (Bilinear.sumAllCong gaussianCoefficientOps I.pair729
+      (λ pair →
+        G._*G_ (G._*G_ (f (proj₁ pair)) (gaussianCubeCharacter (Four.inputToFourGrid (proj₁ pair)) x)) (G._*G_ (g (proj₂ pair)) (gaussianCubeCharacter (Four.inputToFourGrid (proj₂ pair)) x)))
+      (gaussianOriginal729PhaseContribution f g x)
+      (λ { (p , q) →
+        trans
+          (Bilinear.productShuffle4 gaussianCoefficientOps gaussianFiniteSumAlgebra
+            (f p) (gaussianCubeCharacter (Four.inputToFourGrid p) x)
+            (g q) (gaussianCubeCharacter (Four.inputToFourGrid q) x))
+          (cong (λ χ → G._*G_ (G._*G_ (f p) (g q)) (χ))
+            (sym (gaussianCubeCharacterAddition
+              (Four.inputToFourGrid p) (Four.inputToFourGrid q) x))) }))
+
+-- The original carrier/table and ordered pair list occur literally.
+-- Source-written only until pinned Agda kernel checks the full module.
