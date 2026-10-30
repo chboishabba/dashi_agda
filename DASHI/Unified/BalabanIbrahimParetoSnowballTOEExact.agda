@@ -250,3 +250,13 @@ ibrahimParetoRouteSP2TraceNoPerLoopReproof :
   DirectYM.balabanRouteSP2TracePerLoopBoundFlag ≡ true
 ibrahimParetoRouteSP2TraceNoPerLoopReproof =
   DirectYM.balabanRouteSP2TracePaysPerLoopBounds
+
+
+ibrahimParetoR445NativeP2NoSecondMoment :
+  DirectYM.balabanRouteSP2R445IndependentMomentRequired ≡ false
+ibrahimParetoR445NativeP2NoSecondMoment =
+  DirectYM.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+ibrahimParetoR445NativeP2CompilerLevel : ProofLevel
+ibrahimParetoR445NativeP2CompilerLevel =
+  DirectYM.balabanRouteSP2R445NativeCompilerLevel
