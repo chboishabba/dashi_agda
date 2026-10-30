@@ -68,6 +68,8 @@ monitor surface.
   not a new spectral identification by receipt.
 
 
+- Reused the existing R445 marked-polymer moment producer on the native Wilson physical measure: `nativeWilsonPreferredFromMarked` and `nativeWilsonP2FromMarkedSource` now compose the SAME selected source into all three P2 convergence limits. No independent moment object is selected. Physical source and same-Hamiltonian witnesses remain conditional.
+
 ## 2026-07-19 — Wetsuit seam optimisation boundary
 
 - Added `DASHI.Geometry.WetsuitSeamOptimisationBoundary`, a fail-closed typed
