@@ -255,8 +255,97 @@ def verify_rational_solver_source_integrity():
     print("PASS rational ring-solver explicit argument lint; "
           "reuse of original rational C2 donor; 3 TOE root imports")
 
+
+def verify_original_polynomial_video_m1_m10():
+    """Source ownership + exact algebra; not a kernel or complex-loop receipt."""
+    disc=owner("PolynomialVandermondeDiscriminantExact")
+    spin=owner("PolynomialMonodromyTernaryQuaternionBridgeExact")
+    # Directly consumed v2.4 rational-domain theorem, not a postulate.
+    assert "Data.Rational.Properties as ℚProperties" in disc
+    assert "ℚProperties.p*q≡0⇒p≡0∨q≡0" in disc
+    assert "ℚProperties.+-inverseˡ" in disc
+    for name in (
+        "zeroDifferenceRational","rationalDomainLawWitness",
+        "zeroDiscriminantImpliesCollisionRational",
+        "collisionImpliesZeroDiscriminantRational",
+        "zeroDiscriminantIffRootCollisionRational",
+    ):
+        assert len(re.findall(r"^"+name+r" :",disc,re.M))==1,name
+        assert re.search(r"^"+name+r" [^\n]* =",disc,re.M),name
+    for name in (
+        "iTimesJIsK","jTimesIIsNegativeK",
+        "jTimesKIsI","kTimesJIsNegativeI",
+        "kTimesIIsJ","iTimesKIsNegativeJ",
+        "positiveSwapOfQuaternionAxesImpossible",
+        "positiveSwapIJImpossible","positiveSwapJKImpossible",
+        "positiveSwapIKImpossible",
+        "spinSignedSwapIJRightInverse","spinSignedSwapIJLeftInverse",
+        "signedSwapIJMapsIToJ","signedSwapIJMapsJToI",
+        "signedSwapIJMustNegateK","noFullPositiveQuaternionS3Action",
+    ):
+        assert len(re.findall(r"^"+name+r" :",spin,re.M))==1,name
+    assert "FullPositiveQuaternionS3Action" in spin
+    assert "Q._*q_ spinSignedSwapIJ spinSignedSwapIJInverse" in spin
+    assert "{!!}" not in disc+spin
+    for root in (
+        "DASHI/EverythingTOESymmetryResolved369.agda",
+        "DASHI/Unifier.agda","DASHI/Unified/Everything.agda"
+    ):
+        t=(ROOT/root).read_text(encoding="utf-8")
+        for name in ("zeroDiscriminantIffRootCollisionRational",
+                     "noFullPositiveQuaternionS3Action",
+                     "signedSwapIJMustNegateK"):
+            assert name in t,(root,name)
+
+    # Original rational Vieta/discriminant target, finite scalar domain:
+    # a,b,c ∈ {-2,-1,0,1,2}. This tests 125 triples and every S3 action.
+    vals=tuple(map(Fraction,(-2,-1,0,1,2)))
+    perms=((0,1,2),(1,2,0),(2,0,1),
+           (1,0,2),(2,1,0),(0,2,1))
+    count=0
+    for roots in product(vals,repeat=3):
+        a,b,c=roots
+        s1=a+b+c;s2=a*b+a*c+b*c;s3=a*b*c
+        discr=(a-b)**2*(a-c)**2*(b-c)**2
+        coef_discr=s1*s1*s2*s2-4*s2**3-4*s1**3*s3-27*s3*s3+18*s1*s2*s3
+        assert discr==coef_discr
+        assert (discr==0)==(a==b or a==c or b==c)
+        for perm in perms:
+            x,y,z=(roots[j] for j in perm)
+            assert (x-y)*(x-z)*(y-z) in (
+                (a-b)*(a-c)*(b-c),-((a-b)*(a-c)*(b-c)))
+            assert (x-y)**2*(x-z)**2*(y-z)**2==discr
+        count+=1
+    assert count==125
+
+    def mul(a,b):
+        a0,a1,a2,a3=a;b0,b1,b2,b3=b
+        return (a0*b0-a1*b1-a2*b2-a3*b3,
+                a0*b1+a1*b0+a2*b3-a3*b2,
+                a0*b2-a1*b3+a2*b0+a3*b1,
+                a0*b3+a1*b2-a2*b1+a3*b0)
+    zero=Fraction(0);one=Fraction(1);half=Fraction(1,2)
+    I=(zero,one,zero,zero);J=(zero,zero,one,zero)
+    K=(zero,zero,zero,one);One=(one,zero,zero,zero)
+    neg=lambda x: tuple(-v for v in x)
+    assert mul(I,J)==K and mul(J,I)==neg(K)
+    assert mul(J,K)==I and mul(K,J)==neg(I)
+    assert mul(K,I)==J and mul(I,K)==neg(J)
+    q=(zero,one,one,zero)
+    qi=(zero,-half,-half,zero)
+    assert mul(q,qi)==One and mul(qi,q)==One
+    assert mul(mul(q,I),qi)==J
+    assert mul(mul(q,J),qi)==I
+    assert mul(mul(q,K),qi)==neg(K)
+    print("PASS original M1: 125 exact rational triples × 6 root"
+          " permutations; Δ=0 iff collision, coefficient formula")
+    print("PASS original M10: all six quaternion basis products,"
+          " signed odd swap, exact two-sided inverse; kernel pending")
+
+
 def test():
     verify_rational_solver_source_integrity()
+    verify_original_polynomial_video_m1_m10()
     reg,small,native,assembly=map(owner,NAMES)
     B6=integer_matrices(reg,"basis6",6,"slot")
     C6=integer_matrices(reg,"scaledInverse6",6,"slot")
