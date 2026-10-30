@@ -21,6 +21,8 @@ open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import DASHI.Cognition.RecursiveFibreTower as Tower
 import DASHI.Foundations.PolynomialS3SmallRationalBlockCertificateExact as Small
 import DASHI.Foundations.PolynomialS3RegularRationalBlockCertificateExact as Big
+import DASHI.Foundations.TernaryEndomorphismS3ActionLawsExact as ActionLaws
+import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Foundations.PolynomialS3TwentySevenOrbitBlockAssemblyExact as Atlas
 import DASHI.Foundations.PolynomialS3RationalBlockFieldIsomorphismExact as Iso
 
@@ -537,3 +539,114 @@ decodeNativeIntertwinesAt p c x =
           (Atlas.codeToBlock
             (Perm.conjugateCode (Perm.inversePermutation p) y)))
         (Atlas.blockCodeRoundTrip x)))
+
+------------------------------------------------------------------------
+-- O73--O76: complete native S3 field-action and encoder equivariance.
+-- Inherited native code conjugation and pointwise Q27 inverse machinery.
+-- Finite-coordinate rewriting replaces function extensionality.
+-- Classical finite S3 actions (Dixon--Mortimer); this #1414 adapter
+-- does not identify polynomial-root monodromy or Monster 3B carriers.
+-- SOURCE WRITTEN; compiler/kernel verification outstanding.
+------------------------------------------------------------------------
+
+-- The native action is a genuine pointwise left S3 action.
+nativeSourceActionIdentityAt :
+  (f : NativeRationalField27) (x : Tower.LevelTwoCode) →
+  nativeSourceAction27 Perm.permIdentity f x ≡ f x
+nativeSourceActionIdentityAt f x =
+  cong f (ActionLaws.conjugateIdentity x)
+
+nativeSourceActionCompositionAt :
+  (p q : Perm.TriPermutation) (f : NativeRationalField27)
+  (x : Tower.LevelTwoCode) →
+  nativeSourceAction27 (S3._∙_ p q) f x ≡
+  nativeSourceAction27 p (nativeSourceAction27 q f) x
+nativeSourceActionCompositionAt p q f x =
+  trans
+    (cong (λ r → f (Perm.conjugateCode r x))
+      (ActionLaws.inverseProduct p q))
+    (cong f
+      (ActionLaws.conjugateComposition
+        (Perm.inversePermutation q) (Perm.inversePermutation p) x))
+
+nativeSourceActionAdditiveAt :
+  (p : Perm.TriPermutation) (f g : NativeRationalField27)
+  (x : Tower.LevelTwoCode) →
+  nativeSourceAction27 p (plusNativeFields f g) x ≡
+  plusNativeFields (nativeSourceAction27 p f)
+    (nativeSourceAction27 p g) x
+nativeSourceActionAdditiveAt p f g x = refl
+
+-- A pointwise equality over the actual Code27 carrier determines
+-- all seven rational block coordinates without funext. Rewrites
+-- expand the existing finite 1/2/3/6-point rational matrices.
+encodeNativeRespectsPointwiseAt :
+  (f g : NativeRationalField27) →
+  ((x : Tower.LevelTwoCode) → f x ≡ g x) →
+  (b : Atlas.OrbitBlock27) →
+  coordinateAt (encodeNative27 f) b ≡
+  coordinateAt (encodeNative27 g) b
+encodeNativeRespectsPointwiseAt f g equal Atlas.identityBlock =
+  equal (Atlas.blockToCode Atlas.identityBlock)
+encodeNativeRespectsPointwiseAt f g equal (Atlas.cycleBlock i)
+  rewrite equal (Atlas.blockToCode (Atlas.cycleBlock Small.pair0))
+        | equal (Atlas.blockToCode (Atlas.cycleBlock Small.pair1)) = refl
+encodeNativeRespectsPointwiseAt f g equal (Atlas.transpositionBlock i)
+  rewrite equal (Atlas.blockToCode (Atlas.transpositionBlock Small.axis0))
+        | equal (Atlas.blockToCode (Atlas.transpositionBlock Small.axis1))
+        | equal (Atlas.blockToCode (Atlas.transpositionBlock Small.axis2)) = refl
+encodeNativeRespectsPointwiseAt f g equal (Atlas.constantBlock i)
+  rewrite equal (Atlas.blockToCode (Atlas.constantBlock Small.axis0))
+        | equal (Atlas.blockToCode (Atlas.constantBlock Small.axis1))
+        | equal (Atlas.blockToCode (Atlas.constantBlock Small.axis2)) = refl
+encodeNativeRespectsPointwiseAt f g equal (Atlas.oneFixedBlock i)
+  rewrite equal (Atlas.blockToCode (Atlas.oneFixedBlock Big.slot0))
+        | equal (Atlas.blockToCode (Atlas.oneFixedBlock Big.slot1))
+        | equal (Atlas.blockToCode (Atlas.oneFixedBlock Big.slot2))
+        | equal (Atlas.blockToCode (Atlas.oneFixedBlock Big.slot3))
+        | equal (Atlas.blockToCode (Atlas.oneFixedBlock Big.slot4))
+        | equal (Atlas.blockToCode (Atlas.oneFixedBlock Big.slot5)) = refl
+encodeNativeRespectsPointwiseAt f g equal (Atlas.twoFixedBlock i)
+  rewrite equal (Atlas.blockToCode (Atlas.twoFixedBlock Big.slot0))
+        | equal (Atlas.blockToCode (Atlas.twoFixedBlock Big.slot1))
+        | equal (Atlas.blockToCode (Atlas.twoFixedBlock Big.slot2))
+        | equal (Atlas.blockToCode (Atlas.twoFixedBlock Big.slot3))
+        | equal (Atlas.blockToCode (Atlas.twoFixedBlock Big.slot4))
+        | equal (Atlas.blockToCode (Atlas.twoFixedBlock Big.slot5)) = refl
+encodeNativeRespectsPointwiseAt f g equal (Atlas.twoCycleBlock i)
+  rewrite equal (Atlas.blockToCode (Atlas.twoCycleBlock Big.slot0))
+        | equal (Atlas.blockToCode (Atlas.twoCycleBlock Big.slot1))
+        | equal (Atlas.blockToCode (Atlas.twoCycleBlock Big.slot2))
+        | equal (Atlas.blockToCode (Atlas.twoCycleBlock Big.slot3))
+        | equal (Atlas.blockToCode (Atlas.twoCycleBlock Big.slot4))
+        | equal (Atlas.blockToCode (Atlas.twoCycleBlock Big.slot5)) = refl
+
+-- Decode the transported coordinate field and compare pointwise
+-- to precomposition on the SAME native code carrier.
+decodedNativeEquivAt :
+  (p : Perm.TriPermutation) (f : NativeRationalField27)
+  (x : Tower.LevelTwoCode) →
+  decodeNative27 (coordinateAction27 p (encodeNative27 f)) x ≡
+  nativeSourceAction27 p f x
+decodedNativeEquivAt p f x =
+  trans
+    (decodeNativeIntertwinesAt p (encodeNative27 f) x)
+    (decodeEncodeNativeAt f
+      (Perm.conjugateCode (Perm.inversePermutation p) x))
+
+-- Complete encoder-side S3 equivariance by transporting the
+-- decoder commutative square across the original two-sided
+-- coordinate inverse. No pointwise rational proofs are duplicated.
+encodeNativeIntertwinesAt :
+  (p : Perm.TriPermutation) (f : NativeRationalField27)
+  (b : Atlas.OrbitBlock27) →
+  coordinateAt (encodeNative27 (nativeSourceAction27 p f)) b ≡
+  coordinateAt (coordinateAction27 p (encodeNative27 f)) b
+encodeNativeIntertwinesAt p f b =
+  trans
+    (sym (encodeNativeRespectsPointwiseAt
+      (decodeNative27 (coordinateAction27 p (encodeNative27 f)))
+      (nativeSourceAction27 p f)
+      (decodedNativeEquivAt p f) b))
+    (encodeDecodeNativeCoordinateAt
+      (coordinateAction27 p (encodeNative27 f)) b)
