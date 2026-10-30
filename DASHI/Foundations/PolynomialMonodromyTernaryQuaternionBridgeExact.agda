@@ -422,3 +422,39 @@ noFullPositiveQuaternionS3Action full =
       full Perm.permSwapLowMid Base.tri-mid)
     (FullPositiveQuaternionS3Action.positiveBasisPermutation
       full Perm.permSwapLowMid Base.tri-high)
+
+------------------------------------------------------------------------
+-- ORIGINAL M2 × M10 consumer: there is no positive-axis quaternion
+-- algebra lift of the video braid generators, because their exact
+-- permutation images include the odd adjacent transpositions.
+-- This does NOT say braid monodromy cannot act on polynomial roots;
+-- it only blocks an ill-typed full POSITIVE-AXIS quaternion weld.
+------------------------------------------------------------------------
+
+record PositiveQuaternionBraidGeneratorLift : Set₁ where
+  field
+    liftGenerator :
+      BraidLoopGenerator →
+      Q.RationalQuaternion → Q.RationalQuaternion
+    preservesGeneratorQuaternionProduct :
+      (g : BraidLoopGenerator) (x y : Q.RationalQuaternion) →
+      liftGenerator g (Q._*q_ x y) ≡
+      Q._*q_ (liftGenerator g x) (liftGenerator g y)
+    actsOnPositiveAxesAsRootLabels :
+      (g : BraidLoopGenerator) (a : Base.TriTruth) →
+      liftGenerator g (imaginaryBasis a) ≡
+      imaginaryBasis (Perm.applyPermutation (permutationImage g) a)
+
+noPositiveQuaternionBraidGeneratorLift :
+  PositiveQuaternionBraidGeneratorLift → ⊥
+noPositiveQuaternionBraidGeneratorLift lift =
+  positiveSwapIJImpossible
+    (PositiveQuaternionBraidGeneratorLift.liftGenerator lift swapAB)
+    (PositiveQuaternionBraidGeneratorLift.preservesGeneratorQuaternionProduct
+      lift swapAB)
+    (PositiveQuaternionBraidGeneratorLift.actsOnPositiveAxesAsRootLabels
+      lift swapAB Base.tri-low)
+    (PositiveQuaternionBraidGeneratorLift.actsOnPositiveAxesAsRootLabels
+      lift swapAB Base.tri-mid)
+    (PositiveQuaternionBraidGeneratorLift.actsOnPositiveAxesAsRootLabels
+      lift swapAB Base.tri-high)
