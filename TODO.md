@@ -17366,3 +17366,12 @@ pants/sheaf matching before promoting any real-world synthesis.
 - [ ] Consumer-specific genuine pants interface/gluing, provenance-
   justified independent face law, and exact C3/S3 action transport for
   particular consumer records. No automatic Monster/YM/physical claim.
+
+## QID role-type follow-on
+
+- [x] Reuse existing `KnowledgeCoordinate` for directed graph Dewey
+  511.54; avoid treating the wider 511.5 discipline as the same object.
+- [x] Distinct typed concept roles for graph homomorphism Q3385162,
+  graph isomorphism Q303100, max cut Q942557, and theorem Q184410.
+- [ ] Do not claim external QIDs certify kernel facts or identities
+  of particular DASHI synthetic graph, face, proof, or smooth surface.
