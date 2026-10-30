@@ -385,3 +385,64 @@ remittanceAdviceIndexDoesNotEstablishBeneficiaryPayment =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness adviceIndexedForApplicationAdmin
       adviceIndexedWithIndependentlyVerifiedTransfer refl differentDisposition)
+
+
+------------------------------------------------------------------------
+-- CHERISH'S ORIGINAL SUBMISSION 012: DENSITY CLAIM ≠ LEGAL CAPACITY CAP
+-- Original producer same as earlier Cherish source in the policy owner;
+-- do not count it a second independent claimant or a certified engineer.
+------------------------------------------------------------------------
+
+originalCherishSubmission012 : Source.AttributedSource
+originalCherishSubmission012 = Policy.cherishOriginalSubmission12
+
+record ClaimedPlanningDensity : Set where
+  constructor claimed-planning-density
+  field
+    source : Source.AttributedSource
+    quoteScope : String
+    purportedHistoricalEP : Nat
+    purportedMeritsSupportedEP : Nat
+    independentPlanningExpertReportPaid : Bool
+    statutoryDensityCapEstablished : Bool
+    present20198575ApprovalQuantityPaid : Bool
+open ClaimedPlanningDensity public
+
+cherishEPCThresholdContestation : ClaimedPlanningDensity
+cherishEPCThresholdContestation = claimed-planning-density
+  originalCherishSubmission012
+  "Submission 012 page 28: Cherish says planning/engineering advice could support up to 6600 EP, disputes that 4000 EP under 1998 SIA is an immutable cap, argues Council/QUU should determine servicing."
+  4000 6600 false false false
+
+-- Different worlds share the same developer assertion but differ in the
+-- status of an actual adjudicated and physically serviceable density limit.
+data DensityWorld : Set where
+  sameCherishClaimNoCertifiedCapacity : DensityWorld
+  sameCherishClaimWithSeparatelyCertifiedCapacity : DensityWorld
+
+data SubmissionDensityClaim : Set where
+  cherishSays6600Possible : SubmissionDensityClaim
+
+data CapacityDocumentState : Set where
+  certifiedCapacityNotEstablished : CapacityDocumentState
+  certifiedCapacityEstablished : CapacityDocumentState
+
+densityClaim : DensityWorld → SubmissionDensityClaim
+densityClaim sameCherishClaimNoCertifiedCapacity = cherishSays6600Possible
+densityClaim sameCherishClaimWithSeparatelyCertifiedCapacity = cherishSays6600Possible
+
+capacityReceipt : DensityWorld → CapacityDocumentState
+capacityReceipt sameCherishClaimNoCertifiedCapacity = certifiedCapacityNotEstablished
+capacityReceipt sameCherishClaimWithSeparatelyCertifiedCapacity = certifiedCapacityEstablished
+
+differentCapacityReceipt :
+  capacityReceipt sameCherishClaimNoCertifiedCapacity ≡
+  capacityReceipt sameCherishClaimWithSeparatelyCertifiedCapacity → ⊥
+differentCapacityReceipt ()
+
+quotedEngineerAdviceDoesNotProveCurrentCapacity :
+  INF.FactorsThrough densityClaim capacityReceipt → ⊥
+quotedEngineerAdviceDoesNotProveCurrentCapacity =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness sameCherishClaimNoCertifiedCapacity
+      sameCherishClaimWithSeparatelyCertifiedCapacity refl differentCapacityReceipt)
