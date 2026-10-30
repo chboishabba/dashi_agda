@@ -160,3 +160,44 @@ commutator charts, all 36 S3 family transport equations, six
 orientation-reversal pairs and the 6/3 orbit counts (PASS). This
 independent calculation is NOT execution of the committed Python
 script, and neither calculation is Agda kernel verification.
+
+
+## 6. Stronger constructive collapse: middle-child S3 index (2026-10-30)
+
+The 6→3 orbit reduction is not an arbitrary matching chosen
+by sorting words. It admits the **existing S3-equivariant three-code
+index**
+
+\`middleChildIndex(p) = p(b)\`.
+
+The three fibres, each of size two, are:
+
+| middle-child image | oriented members, conjugacy/inversion pair |
+|---|---|
+| b | ABC / CBA |
+| c | ACB / BCA |
+| a | BAC / CAB |
+
+The source-owned \`ABCSixPermutationPeripheralOrbit\` now proves by
+36 literal finite cases \`middleChildClassCriterion\`:
+\`p(b)=q(b)\` iff the selected parent images are conjugate **up to
+inversion**. The existing theorem
+\`TernaryPermutationS3LawsExact.applyComposition\` proves
+\`middleChildIndexEquivariant\` without a new multiplication table:
+\`middleChildIndex(p*q)=p(middleChildIndex(q))\`.
+Six cases of \`middleChildOrientationFlip\` show right multiplication
+by the orientation-reversing transposition \`swap(a,c)\` preserves
+this class label.
+
+This is an **equivariant classification of a three-element algebraic
+peripheral-class orbit**, and a reusable abstract S3-set chart.
+It is *not* an equality of internal child meridians with the external
+root sectors or a geometrically realized local S3 homeomorphism.
+This clarifies the G4 choice: build a geometric fibre of six
+oriented boundary charts over the three middle-child class labels,
+or retain one selected class with only its stabilizer. No new
+three-dimensional supplier is constructed.
+
+Independent Python finite verification passed all 36 pairwise
+class-equivalence tests and 36 index-equivariance tests. These are
+not exact-head Agda kernel receipts.
