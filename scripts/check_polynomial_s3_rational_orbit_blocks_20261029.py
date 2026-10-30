@@ -269,6 +269,7 @@ def verify_original_polynomial_video_m1_m10():
         "zeroDiscriminantImpliesCollisionRational",
         "collisionImpliesZeroDiscriminantRational",
         "zeroDiscriminantIffRootCollisionRational",
+        "coefficientDiscriminantZeroIffRootCollisionRational",
     ):
         assert len(re.findall(r"^"+name+r" :",disc,re.M))==1,name
         assert re.search(r"^"+name+r" [^\n]* =",disc,re.M),name
@@ -293,6 +294,7 @@ def verify_original_polynomial_video_m1_m10():
     ):
         t=(ROOT/root).read_text(encoding="utf-8")
         for name in ("zeroDiscriminantIffRootCollisionRational",
+                     "coefficientDiscriminantZeroIffRootCollisionRational",
                      "noFullPositiveQuaternionS3Action",
                      "signedSwapIJMustNegateK"):
             assert name in t,(root,name)
