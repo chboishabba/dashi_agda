@@ -24,6 +24,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
 import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
@@ -681,3 +682,22 @@ toeContinuumPromotionRemainsFalseIsFalse = refl
 toeClayPromotionRemainsFalseIsFalse :
   toeClayPromotionRemainsFalse ≡ false
 toeClayPromotionRemainsFalseIsFalse = refl
+
+------------------------------------------------------------------------
+-- Canonical R320/R295/R313/R296 -> R333 direct-source/OS reuse.
+-- Bałaban CMP 116 (1988) is the mathematical source; DASHI owns only
+-- the typed route compiler. Physical R320 and R333 inputs are not invented.
+------------------------------------------------------------------------
+
+balabanR320RouteSToOSCompilerLevel : ProofLevel
+balabanR320RouteSToOSCompilerLevel =
+  RouteS.routeSH1ToDirectOSCompilerLevel
+
+balabanR320RouteSSelectedPhysicalSourceLevel : ProofLevel
+balabanR320RouteSSelectedPhysicalSourceLevel =
+  RouteS.routeSH1SelectedPhysicalPaymentLevel
+
+balabanR320RouteSNoSecondAbsoluteMagnitudeInput :
+  RouteS.routeSH1ReusesR313MagnitudeCompiler ≡ false
+balabanR320RouteSNoSecondAbsoluteMagnitudeInput =
+  RouteS.routeSH1ReusesR313MagnitudeCompilerIsFalse
