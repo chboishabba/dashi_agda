@@ -5,6 +5,28 @@ Date: `2026-09-17`
 Version: `draft 2 — F1/F3/F4 recut`
 Status: live analytic manuscript draft; Clay-facing candidate preprint; non-promoting
 
+
+> **30 October 2026 cross-route corrigendum.** This paper establishes the
+> **strong F1/F3/F4 finite-gap/recovery route** and its conditional compiler
+> architecture; it is *not* a claim that F1/F3/F4 are globally mandatory for
+> all Yang–Mills mass-gap strategies. The preferred literal-Wilson **Route S**
+> in `YMClayLiteralWilsonRouteSThreeInputBoundaryExact` instead consumes P1
+> finite selected Wilson clustering, P2 three literal expectation limits and
+> P3 the same-H_OS correlation/spectral identification. The P1 and P2
+> projection compilers are already present: the surviving payments are their
+> physical source/presentation inhabitants and the same-object OS spectral
+> identification. The 30 October direct Agda composition in
+> `YMClayDirectSourceOSMassGapFrontierExact` concretely reuses the existing
+> R320 selected-source inequality through R295/R313/R296 to R333's physical
+> OS mass-gap compiler, without a second magnitude-localization proof.
+> R333 retains actual spectral/application inputs and this branch has not
+> earned an exact-head Agda kernel receipt. Neither route automatically
+> constructs the physical continuum inputs, local-QFT stress/OPE endpoint or
+> all compact simple groups. Bałaban's CMP 116/119/122 mathematics and all
+> other original source authors retain attribution; DASHI owns only its
+> independently authored formal interfaces and compositions.
+
+
 ## Abstract
 
 This manuscript presents a reduction of the four-dimensional Yang–Mills mass-gap problem on a literal finite SU(2) Wilson–Gibbs family to three physical inputs, denoted `F1`, `F3`, and `F4`. The finite lattice theory, transfer-form algebra, varying-Hilbert-space transport, vacuum-sector spectral consequences, and final continuum gap compiler are treated as already-paid mathematical infrastructure where stated. The surviving physical obligations are:
