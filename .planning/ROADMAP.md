@@ -91,3 +91,31 @@ Plans:
 See `Docs/TrialecticWeightedDirectedGraph369.md` for attribution, the weight convention, proofs and non-promotion obligations.
 
 - [x] Follow-on: finite weight-graph outgoing-row hyperfabric section with incidence/restriction compatibility and mediated two-step path result (A²)[A,C]=2.2.
+
+## 2026-10-30 — Pareto/max-cut revision: native pants adjacency
+
+- [x] Inspect existing `TritGridStep`/`HypervoxelAdjacent`, pants-path
+  round trips, generic `GraphHom`, and snowball/Ibrahim proof boundaries.
+- [x] Source-write explicit nearest-neighbour `Pants3Adjacent` and
+  both directions of native voxel/pants graph homomorphisms.
+- [x] Source-write C3 rotation, second-slot seam flip, all six distinct
+  S3 coordinate permutations, and adjacency transport.
+- [x] Source-write a nontrivial two-colour proper colouring,
+  a singleton-colour obstruction and colour pullbacks.
+- [x] Add independent finite exhaustive semantics audit and
+  Pareto/snowball/Ibrahim non-promotion consumption; link TOE roots.
+- [ ] **P0 verification**: exact-head safe Agda; then pinned Lean;
+  synchronize branch if master moves; no CI obligation in this tranche.
+- [ ] **P1 situated seam**: independently supplied branch-channel
+  mapping, `InterfaceMatch`, matching restrictions and provenance.
+- [ ] **P2 triadic mediation**: existing `FaceMediationLaw` /
+  `SecondOrderCellGluing` with original graph retained.
+- [ ] **P3 stronger actions**: preserve typed colourings and sourced
+  consumer invariants under specific permissible group actions.
+- [ ] **P4 TOE/physics**: only theorem-bearing cross-domain transport,
+  no 3B/smoothness/continuum/scientific authority from numerology.
+
+For the precise finite cut and citations, see
+`Docs/TrialecticWeightedDirectedGraph369.md`. Older MDL / signature
+closure obligations in the five-phase roadmap above are independent;
+this 369 lane does not mark those completed.
