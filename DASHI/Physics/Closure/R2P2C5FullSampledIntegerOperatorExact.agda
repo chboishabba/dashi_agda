@@ -11,6 +11,7 @@ module DASHI.Physics.Closure.R2P2C5FullSampledIntegerOperatorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Agda.Builtin.List using (List)
 open import Data.Product using (proj₁; proj₂)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
@@ -225,3 +226,77 @@ cyclotomicFiveActual729InputProductExpansion :
 cyclotomicFiveActual729InputProductExpansion =
   Bilinear.source729ProductExpansion
     cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+
+
+------------------------------------------------------------------------
+-- LITERAL SOURCE-MODE CHARACTER EXPANSION AT EACH FINITE SAMPLE POINT.
+--
+-- This is the missing raw-product bridge for the actual existing
+-- Full.GridCube125 cyclic sample carrier: any TWO independent original
+-- 27-mode fields produce the ORIGINAL 729 ordered input products,
+-- each weighted by the character of the actual group-summed index.
+-- This is NOT yet the normalized forward transform or integer-output
+-- projection: that still requires complete 3D character resolution.
+------------------------------------------------------------------------
+
+cyclotomicFiveCubeCharacter :
+  Full.GridCube125 → Full.GridCube125 → C5.Cyclotomic5
+cyclotomicFiveCubeCharacter
+  (Full.gridCube a b c) (Full.gridCube x y z) =
+  C5._*5_ (C5._*5_ (C5.character5 a x) (C5.character5 b y)) (C5.character5 c z)
+
+cyclotomicFiveCubeCharacterAddition :
+  (p q x : Full.GridCube125) →
+  cyclotomicFiveCubeCharacter (Full.fiveGridGroupSum p q) x
+  ≡ C5._*5_ (cyclotomicFiveCubeCharacter p x) (cyclotomicFiveCubeCharacter q x)
+cyclotomicFiveCubeCharacterAddition
+  (Full.gridCube a b c) (Full.gridCube d e f)
+  (Full.gridCube x y z)
+  rewrite C5.characterAdditionLaw a d x
+        | C5.characterAdditionLaw b e y
+        | C5.characterAdditionLaw c f z =
+  Bilinear.productShuffleSix cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+    (C5.character5 a x) (C5.character5 d x)
+    (C5.character5 b y) (C5.character5 e y)
+    (C5.character5 c z) (C5.character5 f z)
+
+cyclotomicFiveOriginal27UnscaledSynthesisAt :
+  (I.ModeCube27 → C5.Cyclotomic5) →
+  Full.GridCube125 → C5.Cyclotomic5
+cyclotomicFiveOriginal27UnscaledSynthesisAt f x =
+  Bilinear.sumAll cyclotomicFiveOps I.cube27
+    (λ p → C5._*5_ (f p) (cyclotomicFiveCubeCharacter (Full.inputToFiveGrid p) x))
+
+cyclotomicFiveOriginal729PhaseContribution :
+  (I.ModeCube27 → C5.Cyclotomic5) →
+  (I.ModeCube27 → C5.Cyclotomic5) →
+  Full.GridCube125 → I.ModePair729 → C5.Cyclotomic5
+cyclotomicFiveOriginal729PhaseContribution f g x (p , q) =
+  C5._*5_ (C5._*5_ (f p) (g q)) (cyclotomicFiveCubeCharacter (Full.fiveGridGroupSum (Full.inputToFiveGrid p) (Full.inputToFiveGrid q)) x)
+
+cyclotomicFiveSourceSampledProductExpands729 :
+  (f g : I.ModeCube27 → C5.Cyclotomic5)
+  (x : Full.GridCube125) →
+  C5._*5_ (cyclotomicFiveOriginal27UnscaledSynthesisAt f x) (cyclotomicFiveOriginal27UnscaledSynthesisAt g x)
+  ≡ Bilinear.sumAll cyclotomicFiveOps I.pair729
+      (cyclotomicFiveOriginal729PhaseContribution f g x)
+cyclotomicFiveSourceSampledProductExpands729 f g x =
+  trans
+    (Bilinear.source729ProductExpansion cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+      (λ p → C5._*5_ (f p) (cyclotomicFiveCubeCharacter (Full.inputToFiveGrid p) x))
+      (λ q → C5._*5_ (g q) (cyclotomicFiveCubeCharacter (Full.inputToFiveGrid q) x)))
+    (Bilinear.sumAllCong cyclotomicFiveOps I.pair729
+      (λ pair →
+        C5._*5_ (C5._*5_ (f (proj₁ pair)) (cyclotomicFiveCubeCharacter (Full.inputToFiveGrid (proj₁ pair)) x)) (C5._*5_ (g (proj₂ pair)) (cyclotomicFiveCubeCharacter (Full.inputToFiveGrid (proj₂ pair)) x)))
+      (cyclotomicFiveOriginal729PhaseContribution f g x)
+      (λ { (p , q) →
+        trans
+          (Bilinear.productShuffle4 cyclotomicFiveOps cyclotomicFiveFiniteSumAlgebra
+            (f p) (cyclotomicFiveCubeCharacter (Full.inputToFiveGrid p) x)
+            (g q) (cyclotomicFiveCubeCharacter (Full.inputToFiveGrid q) x))
+          (cong (λ χ → C5._*5_ (C5._*5_ (f p) (g q)) (χ))
+            (sym (cyclotomicFiveCubeCharacterAddition
+              (Full.inputToFiveGrid p) (Full.inputToFiveGrid q) x))) }))
+
+-- The original carrier/table and ordered pair list occur literally.
+-- Source-written only until pinned Agda kernel checks the full module.
