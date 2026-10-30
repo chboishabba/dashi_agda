@@ -27,7 +27,7 @@ open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NP
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using
-  (cong₂; sym; trans)
+  (cong₂; sym; trans; subst)
 
 import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannVonMangoldtSpecification as VM
@@ -191,3 +191,61 @@ twinUnboundedFromUnboundedNonzeroPrimeSums space arithmetic
   twinInIntervalReadout
     (nonzeroPrimeOnlySumGivesTwin space arithmetic
       mangoldt theta ownership laws N (length N) (nonzero N))
+
+------------------------------------------------------------------------
+-- CT09b: UPPER-BOUND PRESERVING FINITE INTERVAL WITNESS.
+--
+-- The original lower-only readout is retained for compatibility.
+-- Here we also retain the strict upper endpoint:
+--   start ≤ p < start + count.
+-- This is a pure finite inductive property, NOT prime infinitude.
+------------------------------------------------------------------------
+
+twinInIntervalBoundedReadout :
+  ∀ {start count} →
+  TwinInInterval start count →
+  Σ Nat (λ p →
+    (start ≤ p) × ((suc p ≤ start + count) × Twin.TwinPrimeAt p))
+twinInIntervalBoundedReadout {start} {suc count} (here tw) =
+  start ,
+    ( NP.≤-refl
+    , (subst
+        (λ end → suc start ≤ end)
+        (sym (NP.+-suc start count))
+        (NP.m≤m+n (suc start) count)
+      , tw)
+    )
+twinInIntervalBoundedReadout {start} {suc count} (there further)
+  with twinInIntervalBoundedReadout further
+... | p , (lower , (upper , tw)) =
+  p ,
+    ( NP.≤-trans (NP.n≤1+n start) lower
+    , (subst
+        (λ end → suc p ≤ end)
+        (sym (NP.+-suc start count))
+        upper
+      , tw)
+    )
+
+nonzeroPrimeOnlySumGivesBoundedTwin :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (theta : Cheb.PrimeLogWeightKernel space PrimeNat.natPrimePredicate)
+  (ownership : Cheb.ChebyshevPrimeOwnership
+    space PrimeNat.natPrimePredicate theta arithmetic)
+  (laws : Split.AdditiveInterchangeLaws space) →
+  (start count : Nat) →
+  (Sum.sumInterval (WeilBridge.weilAdditive space)
+    (Split.primeOnlyAtNat space arithmetic mangoldt)
+    start count
+     ≡ Weil.WeilTestSpace.zeroS space → ⊥) →
+  Σ Nat (λ p →
+    (start ≤ p) × ((suc p ≤ start + count) × Twin.TwinPrimeAt p))
+nonzeroPrimeOnlySumGivesBoundedTwin
+    space arithmetic mangoldt theta ownership laws
+    start count nonzero =
+  twinInIntervalBoundedReadout
+    (nonzeroPrimeOnlySumGivesTwin
+      space arithmetic mangoldt theta ownership laws
+      start count nonzero)
