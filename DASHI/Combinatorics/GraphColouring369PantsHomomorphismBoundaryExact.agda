@@ -1,4 +1,6 @@
 module DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact where
+import DASHI.Combinatorics.GraphColouring369PantsSymmetryCutInvariantExact as S3Cut369
+import DASHI.Combinatorics.GraphColouring369PantsEdgeCoverageExact as EdgeChart369
 
 open import DASHI.Core.Prelude
 
