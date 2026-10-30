@@ -1,4 +1,5 @@
 module DASHI.EverythingRelationalTrialecticHyperfabric where
+import DASHI.Reasoning.TrialecticWeightedGraphFaceMediationSelectedExact as SelectedFace369
 import DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact as GridPants369
 import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
 
