@@ -302,3 +302,53 @@ This is a finite sheaf-like compatibility proof, not a DSNN or Laplacian,
 not a genuine sheaf on a topological site, not pants surface gluing,
 and not an empirical graph-learning result. The 2026 DSNN and DSHN
 primary publications are **conceptual comparison roots only**.
+
+## Implemented this continuation (source-written; kernel pending)
+
+New golden owners:
+- `DASHI/Combinatorics/GraphColouring369PantsWeightedMaxCutExact.agda`
+  proves *edgewise* checkerboard saturation and a universally optimal
+  maximum cut for **any finite list of supported native 27-grid edges
+  with arbitrary Nat/nonnegative weights**. It explicitly constructs
+  54 unit-weight *undirected* edge witnesses (two forward steps per
+  coordinate axis, nine fixed coordinate pairs for each axis), and
+  gives both a list-length=54 and weight=54 finite proof term.
+  The separate no-missing-or-duplicate-full-graph enumeration proof
+  remains unverified/unimplemented; Python exhaustively checks 54
+  unique edges, but cannot replace the golden proof kernel.
+- `DASHI/Combinatorics/GraphColouring369PantsQidParetoSnowballExact.agda`
+  reuses the canonical Snowball identity resolution and source atlas.
+  It holds 10 verified concept QIDs, including graph homomorphism
+  `Q3385162` and maximum cut `Q942557`, while the precise synthetic
+  DASHI instance QID remains explicitly unresolved. QIDs do not
+  establish theorem ownership, primary-source attribution, external
+  authority, smooth pants, or a same-object Monster3B action.
+- `DASHI/Reasoning/TrialecticDirectedSourceTargetHyperfabricExact.agda`
+  reuses `TypedHyperfabricCore` and instantiates source/target
+  incidences over the actual asymmetric matrix. Outgoing source
+  evaluation and incoming target evaluation match on each **oriented**
+  edge; the reverse directed edge retains its independent weight.
+  The self-loop has both source and target incidence roles at the
+  same participant. No Sheaf Neural Network, spectral operator,
+  hyperedge, or physical gluing theorem is inferred.
+
+The two mathematical owners are consumed by
+`TOE369MaxCutKernelBidiTernaryExact`,
+`BalabanIbrahimParetoSnowballTOEExact`,
+`EverythingRelationalTrialecticHyperfabric`,
+`EverythingTOESymmetryResolved369`,
+`Unifier` and `Unified.Everything`, with Lean mirrors in
+`AgdaMirror/Reasoning/GraphColouring369PantsMaxCutQid.lean`
+and `TrialecticDirectedSourceTargetHyperfabric.lean`.
+The Agda graph-colouring paper atlas was corrected to
+`arXiv:2603.24880v3` revised 1 October 2026.
+
+The source script `scripts/verify_trialectic_369_graph_pants_finite.py`
+now audits distinct 54 unit edges, 14+13 checkerboard partition,
+nonuniform positive weights, selected single-vertex perturbations,
+six S3 permutations, reflection, directed fixture and the concept-only
+QID ledger. This remains a computational receipt, not a formal proof.
+
+**Status:** no Agda or Lean executable was available to check the
+exact new heads; all new theorem terms remain source-written and no
+kernel-approved/proved-real-world inference is promoted.
