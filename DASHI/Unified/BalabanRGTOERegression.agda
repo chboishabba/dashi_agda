@@ -722,8 +722,12 @@ balabanRouteSP2TracePhysicalInterpretationLevel : ProofLevel
 balabanRouteSP2TracePhysicalInterpretationLevel =
   P2Trace.rationalSU2TraceToGramInterpretationLevel
 
+balabanRouteSP2TracePerLoopBoundFlag : Bool
+balabanRouteSP2TracePerLoopBoundFlag =
+  P2Trace.rationalSU2TraceSourcePaysLiteralLoopBoundedness
+
 balabanRouteSP2TracePaysPerLoopBounds :
-  P2Trace.rationalSU2TraceSourcePaysLiteralLoopBoundedness ≡ true
+  balabanRouteSP2TracePerLoopBoundFlag ≡ true
 balabanRouteSP2TracePaysPerLoopBounds =
   P2Trace.rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue
 
