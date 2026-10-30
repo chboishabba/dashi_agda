@@ -431,3 +431,14 @@ rationalTraceProvidesP2LoopBoundsGivenInterpretation :
 rationalTraceProvidesP2LoopBoundsGivenInterpretation =
   Full.routeSP2LoopBoundsFromTraceGivenInterpretationIsTrue
 
+
+
+routeSP2NativeDoesNotRequireGenericProductPayment :
+  Full.routeSP2NativeNoSeparateBoundedProductLeaf ≡ true
+routeSP2NativeDoesNotRequireGenericProductPayment =
+  Full.routeSP2NativeNoSeparateBoundedProductLeafIsTrue
+
+routeSP2NativeDoesNotRequireTimeDistance :
+  Full.routeSP2NativeNoDistanceRequirement ≡ false
+routeSP2NativeDoesNotRequireTimeDistance =
+  Full.routeSP2NativeNoDistanceRequirementIsFalse
