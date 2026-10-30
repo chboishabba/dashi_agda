@@ -1234,3 +1234,68 @@ All M13 additions are imported through the three target TOE roots.
 No protected ESD files changed. No Agda kernel or CI receipt.
 External sources still distinguish Polymath/Maynard bounded
 gaps from the open H1=2 twin-prime conjecture.
+
+## 30 October 2026 — M13 TOTAL construction source-written, kernel pending
+
+**Implemented the next previously open mathematical source cut**
+`DASHI/Arithmetic/TwinPrimeMangoldtTotalIntervalPlanExact.agda`.
+
+- `distanceToBoundary`: `270 ∸ (start %270)`;
+  at exact boundaries this is 270, consistent with the
+  within-period branch of the corrected two-case plan.
+- `residueIsAtMost270`, `residueCompletes270`:
+  reuses `m%n<n`, `n≤1+n`, `m∸n+n≡m`.
+- `firstBoundaryExactForAnyStart`:
+  reuses `m≡m%n+[m/n]*n` and elementary Nat
+  associativity/commutativity to prove
+  `start + distanceToBoundary start
+      = (suc (start/270))*270`.
+- `plusLeftMonotone` and `shortWhenWithinDistance`:
+  translate the count bound into the exact
+  `start%270+count ≤270` within-period witness.
+- `mustCrossBoundary`: reuses the existing
+  `NP.≤-total` and a contradiction with the failed
+  `_≤?_` test, proving the prefix fits inside the count.
+- `splitCountAtBoundary`: decomposes the remaining
+  count with the original Euclidean identity, obtaining
+  `count=prefix+blocks*270+suffix`.
+- `completeIntervalPlan`: **total** source-written
+  construction of `CompleteIntervalPlan start count`,
+  using `NP._≤?_` and actual certified equality
+  witnesses in the crossing branch.
+- `totalIntervalCorrelationForward` and
+  `totalIntervalCorrelationBackward`: for ALL Nat
+  start/count, exact original correlation fold ↔
+  automatically constructed lossless plan, with no
+  additive commutativity assumption or prime heuristic.
+
+This **supersedes the earlier claim** that a single aligned
+schedule could be constructed for every interval: that type
+was impossible for short nonboundary intervals. The new
+two-case plan + total constructor fixes the problem at
+the interface level. The earlier conditional aligned schedule
+remains useful internally.
+
+**Numerical sanity evidence actually executed:**
+3,010 total plans, 335 within and 2,675 crossing,
+274 exact symbolic Mangoldt-pair comparisons,
+including [59,60), [269,270) and boundary-spanning
+intervals. Separately, 70,001 exact certified count-jump
+checks and 25,000 paired Mangoldt support checks passed.
+Scripts are committed in the PR.
+
+**Scope:** M13 is now **source-written for arbitrary finite
+intervals, still Agda-kernel-pending**. All three canonical
+TOE roots import the total module. Agda compiler/CI was
+not run. Strictly no ESD edits, postulate-based
+positivity or Monster/3B numerical identification.
+
+**Remaining highest-alpha proof cuts:** exact Agda typecheck
+of M13 (including stdlib normalization of Fin270/
+division lemmas), concrete Weil/AllPrimeArithmetic model,
+M14 proof-bearing prime-power count and extraction,
+M15 uniform proper-power weighted error bound,
+M16 **correlation-to-real certified count jumps**,
+F02/F04/F06 unconditional analytic gap-two estimate,
+G06 full safe kernel proof. Do not mark twin infinitude
+unconditional from the conditional count-jump field.
