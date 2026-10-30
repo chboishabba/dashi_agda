@@ -100,8 +100,8 @@ def verify_rational_solver_source_integrity():
     # quantified scalar helper lemmas with the ZERO-argument solve-∀
     # macro and then specializes them to the actual field values.
     q27=owner("PolynomialS3RationalBlockFieldIsomorphismExact")
-    scalar=re.findall(r"^([A-Za-z0-9_]+_scalar_[A-Za-z0-9_]+) = Ring[.]solve-∀$",q27,re.M)
-    applied=re.findall(r"^([A-Za-z0-9]+) (?:Perm[.]\w+ )?f(?: g)? (?:Small|Big)[.]\w+ = ([A-Za-z0-9_]+_scalar_[A-Za-z0-9_]+) ",q27,re.M)
+    scalar=re.findall(r"^([A-Za-z][A-Za-z0-9]*Scalar[A-Za-z0-9]+) = Ring[.]solve-∀$",q27,re.M)
+    applied=re.findall(r"^([A-Za-z0-9]+) (?:Perm[.]\w+ )?f(?: g)? (?:Small|Big)[.]\w+ = ([A-Za-z][A-Za-z0-9]*Scalar[A-Za-z0-9]+) ",q27,re.M)
     assert len(scalar)==176,len(scalar)
     assert len(applied)==176,len(applied)
     assert len(set(scalar))==176
