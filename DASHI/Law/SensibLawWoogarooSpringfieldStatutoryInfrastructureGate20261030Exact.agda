@@ -129,7 +129,7 @@ data EvidenceSlot : Set where
   infrastructureCategoryAndScope : EvidenceSlot
   applicableParcelAndAssets : EvidenceSlot
   specificGasReticulationContract : EvidenceSlot
-  2025LobbyMeetingActualSubject : EvidenceSlot
+  lobbyMeeting2025ActualSubject : EvidenceSlot
   commonwealth20198575DecisionFile : EvidenceSlot
 
 record IndexedCasePayment : Set where
@@ -266,7 +266,7 @@ record OriginalJudgmentState : Set where
     source : Source.AttributedSource
     determinedCase : HistoricalJudicialScope
     judgmentDelivered : Bool
-    2026FederalBreachJudged : Bool
+    federal2026BreachJudged : Bool
 open OriginalJudgmentState public
 
 qca266PriorJudgment : OriginalJudgmentState
