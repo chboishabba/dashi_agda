@@ -1760,3 +1760,59 @@ Monster/symmetry/QID representations.
 dilation/entropy parity limitations. It does NOT
 rule out all future approaches, but is a worthwhile
 adversarial test for any CT15 remainder claim.
+
+## 30 October 2026 — CT15a signed Möbius-convolution exact finite probe
+
+**Research objective:** Prove the new gap-two shifted Mangoldt
+correlation estimate ourselves, not import or assume it. Explicitly
+test the *signed residual* instead of quotienting it away.
+
+Reused/checked the actual original
+`DASHI/Analysis/RiemannPrimePowerCounting.agda`
+`MobiusScalarKernel` (a parametric Riemann prime-count
+inversion, NOT an already proved shifted-Lambda identity),
+`PrimeCountingTransforms.agda`,
+`RiemannVonMangoldtSpecification.agda`,
+`FiniteNatFloorSquareRootExact.agda`; actual
+`dashi_lean4/MoonshineFractran.lean`,
+`dashi_lean4/docs/DECLARATION_LANDSCAPE.md`,
+`agda2lean/README.md`. Refreshed heads #1244/#1275/
+#1408/#1414: no foreign branch was silently merged.
+Respected Pareto admissibility, Snowball provenance,
+Ibrahim 3B owner and QID identity-not-proof roles.
+
+**Committed exact symbolic local Python:**
+`scripts/check_twin_prime_ct15_exact_mobius_parity_probe.py`.
+It implements the CLASSICAL divisor identity, as a formal
+vector of integer coefficients of `log(p)`:
+`Lambda(n) = sum_{d|n} mu(d) log(n/d)`.
+The shifted product expands to a signed double-divisor sum.
+A surviving term has `d|n,e|n+2`, and therefore
+`gcd(d,e)|2` (necessary CRT compatibility).
+Independent direct prime-power classification matches
+the signed expansion EXACTLY over all 8 dyadic windows
+X=2,3,5,10,59,100,270,500. For X=500,
+34,943 positive and 34,930 negative signed unit
+coefficients cancel to just 13.
+All tested symbolic coefficient identities and necessary
+CRT conditions PASS.
+
+**Status:** CT15a has a compelling **finite computational
+identity**, but a corresponding unbounded Agda/analytic
+divisor-convolution theorem is not yet proved;
+CT15b/c remain OPEN. The cancellation magnitude shows
+why positive coarse finite-sieve survivors or bounded-gap
+estimates cannot be promoted to a uniform lower bound.
+To reach CT15c, an independently proved *uniform* signed
+bilinear remainder estimate is required. Neither the
+finite receipts nor a new `RemainderEstimate` field
+can discharge it. Treat the Wang 2026 parity-limitation
+report as an adversarial method check, not an external
+proof of impossibility or a resolution.
+
+**Committed incremental proof paydown:**
+CT09b now source-written with strict interval endpoint;
+CT10a/b and their rectangular conjunction source-written.
+CT11–CT14 remain complete-proof obligations; their
+local Python checks are finite. No protected ESD edits,
+no CI. Agda kernel proof still pending.
