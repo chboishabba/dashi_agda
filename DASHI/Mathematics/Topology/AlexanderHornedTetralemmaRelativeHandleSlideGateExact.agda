@@ -73,7 +73,9 @@ record RelativeHandleSlideSupplier : Set₁ where
 data Status : Set where
   algebraicallyWitnessed : Status
   classicallyAvailable : Status
-  impossibleUnderFullBoundaryFix : Status
+  impossibleUnderFullBoundaryFix
+  algebraicallyImpossibleForSelectedNormalizer
+  impossibleUnderNewmanOpenCapAndPeriodicity : Status
   sourceSpecificUnproved : Status
 
 status : RelativeGeometryClaim → Status
@@ -83,8 +85,8 @@ status fullBoundaryPointwiseFixing = impossibleUnderFullBoundaryFix
 status selectedCapPreservation = sourceSpecificUnproved
 status actualChildMeridianIdentification = sourceSpecificUnproved
 status wildLimitExteriorIdentification = sourceSpecificUnproved
-status localBasedNormalizerStrictOrderThree = impossibleUnderFullBoundaryFix
-status periodicMapFixesOpenBoundaryCapPointwise = impossibleUnderFullBoundaryFix
+status localBasedNormalizerStrictOrderThree = algebraicallyImpossibleForSelectedNormalizer
+status periodicMapFixesOpenBoundaryCapPointwise = impossibleUnderNewmanOpenCapAndPeriodicity
 
 -- User's tetralemma is retained as a separate four-position
 -- qualification, not equated to these proof-status categories.
