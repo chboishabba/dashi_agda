@@ -27,6 +27,8 @@ open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact as Existing
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as VectorOwner
 
 -- A model has precisely n+g bits, not an unrestricted Nat -> Bool tail.
@@ -107,3 +109,34 @@ encodeDecodeInput circuit model = refl
 -- explicit parsimonious width-three CNF encoding and canonical bit lengths;
 -- then machine-level bounds. No counting equality or speedup is asserted
 -- without those concrete receipts.
+
+
+------------------------------------------------------------------------
+-- SAME-OBJECT BRIDGE: an accepted finite-support model is a model of the
+-- ORIGINAL shared acceptance formula, and any original satisfying witness
+-- yields the finite-support model. Both arrows call the 2026-09 #1040
+-- semantic theorem; there is no new SAT solver or duplicated gate compiler.
+------------------------------------------------------------------------
+
+finiteSupportedGivesSharedSAT :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  FiniteSupportedModel circuit →
+  Cook.Satisfiable (Existing.sharedAcceptanceFormula circuit)
+finiteSupportedGivesSharedSAT circuit model =
+  Existing.acceptedInputGivesSharedSatisfiable
+    circuit (inputBits model) (outputTrue model)
+
+sharedSATGivesFiniteSupported :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Cook.Satisfiable (Existing.sharedAcceptanceFormula circuit) →
+  FiniteSupportedModel circuit
+sharedSATGivesFiniteSupported circuit witness
+  with Existing.sharedSatisfiableGivesAcceptedInput circuit witness
+... | bits , accepted =
+  encodeAccepted circuit (bits , accepted)
+
+-- Consequence: the specific existing shared SAT formula has precisely the
+-- finite normal-form witness semantics above. Numerically counting all
+-- unrestricted Cook.Assignment inhabitants would still overcount.
