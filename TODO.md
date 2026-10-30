@@ -17319,3 +17319,18 @@ identical weighted matrices. This is ONLY a selected fixture.
 Pending: kernel verification; prove an *independently justified*
 domain-specific mediation law, its action equivariance and actual
 pants/sheaf matching before promoting any real-world synthesis.
+
+## Trialectic graph QID/Pareto max-cut: 2026-10-30 additional obligations
+
+- [ ] Reuse existing two-colouring: give edgewise all-cut saturation
+  certificate and universal optimality for nonnegative weighted native grid.
+- [ ] Reuse SnowballExternalIdentityAvailabilityExact for verified
+  Q131476, Q1137726, Q727035, Q504843, Q174733, Q303100,
+  Q3385162, Q942557, Q840247, Q184410 identities.
+- [ ] Exact model edge enumeration: 54 undirected, 108 oriented edges;
+  do not confuse exhaustive Python run with Agda kernel certificate.
+- [ ] Link these results via existing Pareto/Ibrahim TOE consumer, and
+  mirror core mathematical claims in Lean after golden Agda.
+- [ ] Keep QID/source attribution and proof/physical promotion independent.
+- [ ] Kernel/type check and fix dependent Agda/Lean code at exact head
+  when compilers are available. No CI required.
