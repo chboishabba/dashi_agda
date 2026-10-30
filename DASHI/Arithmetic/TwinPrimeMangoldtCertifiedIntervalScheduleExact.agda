@@ -12,9 +12,11 @@ module DASHI.Arithmetic.TwinPrimeMangoldtCertifiedIntervalScheduleExact where
 -- source, QID, Ibrahim orbit or Pareto model gets proof authority
 -- merely through this representation.
 --
--- The schedule's construction for ALL start/count remains the
--- separately tracked algorithmic obligation; this theorem is the
--- exact consumer BIDI for any supplied correct schedule.
+-- This aligned schedule is NOT constructible for a short interval
+-- entirely before the next 270 boundary (e.g. start=59,count=1).
+-- TwinPrimeMangoldtTwoCaseIntervalPlanExact owns the corrected
+-- within-one-period OR crossing-boundary interface. Its total
+-- computational constructor remains a separate obligation.
 -- Source-written; kernel pending. 2026-10-30.
 ------------------------------------------------------------------------
 
