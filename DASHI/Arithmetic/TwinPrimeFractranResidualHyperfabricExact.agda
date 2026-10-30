@@ -30,12 +30,13 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin; toℕ)
-open import Data.Nat.DivMod using (_%_)
+open import Data.Nat.DivMod using (_%_; _/_)
 import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannVonMangoldtSpecification as VM
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as Correlation
 import DASHI.Arithmetic.TwinPrimeMangoldtActualPrimePowerResidualExact as Mangoldt
 open import Data.Product using (_×_)
+open import Agda.Builtin.List using (List; _∷_; [])
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
@@ -50,6 +51,7 @@ import DASHI.Combinatorics.SSP15FractranCompression as Compression
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as Sum
 import DASHI.Arithmetic.TwinPrimeWeilActualCorrelationPartitionExact as Fold
 import DASHI.Arithmetic.TwinPrimeMangoldtPrimeErrorFiniteSplitExact as Split
+import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact as Interpreter
 
 ------------------------------------------------------------------------
 -- 59 = 59, versus 329 = 7 * 47: both SSP primes really exist in
@@ -416,3 +418,53 @@ actualMangoldtFibreWindowPrimeErrorSplit
       start count)
     (Split.finiteMangoldtPrimeErrorSplit
       space arithmetic mangoldt laws start count)
+
+------------------------------------------------------------------------
+-- ACTUAL TWO-RULE NUMERIC FRACTRAN EXECUTION, importing the original
+-- "first applicable" operational semantics. This is intentionally a
+-- concrete, BOUNDED subprogram [1/7,1/47]. It is NOT the fourteen-
+-- fraction Conway PRIMEGAME, and does not decide all primes.
+------------------------------------------------------------------------
+
+data LocalDivisionRule : Set where
+  divideSeven : LocalDivisionRule
+  divideFortySeven : LocalDivisionRule
+
+localFractionEnabled : Nat → LocalDivisionRule → Set
+localFractionEnabled n divideSeven = n % 7 ≡ 0
+localFractionEnabled n divideFortySeven = n % 47 ≡ 0
+
+localFractionStep : Nat → LocalDivisionRule → Nat
+localFractionStep n divideSeven = n / 7
+localFractionStep n divideFortySeven = n / 47
+
+localFractranProgram : List LocalDivisionRule
+localFractranProgram =
+  divideSeven ∷ divideFortySeven ∷ []
+
+-- The source interpreter chooses 1/7 FIRST, yielding 47 on 329.
+-- This is a real step witness, not a Boolean metadata receipt.
+threeTwentyNineFractranChoosesSeven :
+  Interpreter.FirstApplicableStep
+    localFractionEnabled localFractionStep
+    localFractranProgram 329 47
+threeTwentyNineFractranChoosesSeven =
+  Interpreter.choose-head sevenDenominatorEnabledOn329
+
+-- 59 has neither 7 nor 47 denominator enabled, so this PARTICULAR
+-- two-rule program cannot make an integer step on input 59.
+fiftyNineHasNoLocalFractranStep :
+  {next : Nat} →
+  Interpreter.FirstApplicableStep
+    localFractionEnabled localFractionStep
+    localFractranProgram 59 next →
+  ⊥
+fiftyNineHasNoLocalFractranStep
+  (Interpreter.choose-head sevenEnabled) =
+  sevenDenominatorCannotFireOn59 sevenEnabled
+fiftyNineHasNoLocalFractranStep
+  (Interpreter.skip-head skipped
+    (Interpreter.choose-head fortySevenEnabled)) =
+  fortySevenDenominatorCannotFireOn59 fortySevenEnabled
+fiftyNineHasNoLocalFractranStep
+  (Interpreter.skip-head _ (Interpreter.skip-head _ ()))
