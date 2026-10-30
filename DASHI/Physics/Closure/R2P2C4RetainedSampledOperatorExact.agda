@@ -667,8 +667,9 @@ gaussianActualCubeCharacterResolution
           (gaussianCubeCharacter (Four.fourCube a b c) cube)
           (G.conjG
             (gaussianCubeCharacter (Four.fourCube d e f) cube))))
-      (gaussianCubeNormalizedPhaseSplit
-        (Four.fourCube a b c) (Four.fourCube d e f)))
+      (λ x y z → gaussianCubeNormalizedPhaseSplit
+        (Four.fourCube a b c) (Four.fourCube d e f)
+        (Four.fourCube x y z)))
     (trans
       (cong₂ G._*G_
         (cong₂ G._*G_
