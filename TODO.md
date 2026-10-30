@@ -17344,3 +17344,25 @@ pants/sheaf matching before promoting any real-world synthesis.
 - [ ] Consume the new owner from focused TOE imports and downstream Lean.
 - [ ] Do not promote ICLR2026 DSNN/DSHN source to empirical performance,
   spectral theorem, or invented sheaf-Laplacian implementation.
+
+## 2026-10-30 implementation status correction — max-cut/QID/directed hyperfabric
+
+- [x] Golden Agda source: edge-saturated native 27-grid weighted cut
+  optimal for any finite supported edge list with Nat weights.
+- [x] 54 constructed unit edges with source-level count/weight proof
+  candidates; external exhaustive audit 54 unique undirected edges,
+  108 orientations, 14/13 checkerboard split.
+- [x] Verified ten live QID concept labels; exact synthetic fixture QID
+  explicitly unresolved; source ownership non-promotion maintained.
+- [x] Two-ended directed source+target compatible hyperfabric, loop and
+  asymmetry witnesses, plus downstream Lean mirror.
+- [x] Imported new owners across TOE/Unifier/Unified/Ibrahim rollups,
+  refreshed 2026 four-colour article to arXiv v3.
+- [ ] **Kernel:** Agda exact-head check including safe import closure
+  and dependent pattern matching; Lean exact-head check on pinned
+  toolchain. No CI required.
+- [ ] Formal *coverage + uniqueness* theorem for 54 generated
+  undirected grid edges (Python exhaustiveness is not a formal receipt).
+- [ ] Consumer-specific genuine pants interface/gluing, provenance-
+  justified independent face law, and exact C3/S3 action transport for
+  particular consumer records. No automatic Monster/YM/physical claim.
