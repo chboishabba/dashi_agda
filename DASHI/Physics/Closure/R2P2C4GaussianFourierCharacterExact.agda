@@ -177,3 +177,74 @@ cubeSelfNorm64 = gauss-ext solve-∀ solve-∀
 -- Still-open: full sampled-field C4 tensor forward/inverse, normalized
 -- 1/64 pointwise quadratic product, Nyquist fixed-mode reality and
 -- actual NS/Leray lift.
+
+
+------------------------------------------------------------------------
+-- EXACT SCALAR RING LAWS FOR THE REPOSITORY-OWNED FINITE DFT.
+-- Needed for distributing sampled pointwise products through nested
+-- C4/C5 axis sums; they MUST precede any tensor convolution claim.
+-- Proofs are in the ORIGINAL Q(i)/Q(zeta5) scalar carriers, not ℚ
+-- coerced via an unproved equivalence. Source-written, kernel pending.
+------------------------------------------------------------------------
+
+scalarAddAssociative :
+  (x y z : Gaussian4) →
+  _+G_ (_+G_ x y) z ≡ _+G_ x (_+G_ y z)
+scalarAddAssociative (gauss a b) (gauss c d) (gauss e f) =
+  gauss-ext solve-∀ solve-∀
+
+scalarAddCommutative :
+  (x y : Gaussian4) → _+G_ x y ≡ _+G_ y x
+scalarAddCommutative (gauss a b) (gauss c d) =
+  gauss-ext solve-∀ solve-∀
+
+scalarAddZeroLeft :
+  (x : Gaussian4) → _+G_ zeroG x ≡ x
+scalarAddZeroLeft (gauss a b) = gauss-ext solve-∀ solve-∀
+
+scalarAddZeroRight :
+  (x : Gaussian4) → _+G_ x zeroG ≡ x
+scalarAddZeroRight (gauss a b) = gauss-ext solve-∀ solve-∀
+
+scalarMulAssociative :
+  (x y z : Gaussian4) →
+  _*G_ (_*G_ x y) z ≡ _*G_ x (_*G_ y z)
+scalarMulAssociative (gauss a b) (gauss c d) (gauss e f) =
+  gauss-ext solve-∀ solve-∀
+
+scalarMulCommutative :
+  (x y : Gaussian4) → _*G_ x y ≡ _*G_ y x
+scalarMulCommutative (gauss a b) (gauss c d) =
+  gauss-ext solve-∀ solve-∀
+
+scalarMulOneLeft :
+  (x : Gaussian4) → _*G_ oneG x ≡ x
+scalarMulOneLeft (gauss a b) = gauss-ext solve-∀ solve-∀
+
+scalarMulOneRight :
+  (x : Gaussian4) → _*G_ x oneG ≡ x
+scalarMulOneRight (gauss a b) = gauss-ext solve-∀ solve-∀
+
+scalarMulZeroLeft :
+  (x : Gaussian4) → _*G_ zeroG x ≡ zeroG
+scalarMulZeroLeft (gauss a b) = gauss-ext solve-∀ solve-∀
+
+scalarMulZeroRight :
+  (x : Gaussian4) → _*G_ x zeroG ≡ zeroG
+scalarMulZeroRight (gauss a b) = gauss-ext solve-∀ solve-∀
+
+scalarMulDistributesRight :
+  (x y z : Gaussian4) →
+  _*G_ (_+G_ x y) z ≡ _+G_ (_*G_ x z) (_*G_ y z)
+scalarMulDistributesRight (gauss a b) (gauss c d) (gauss e f) =
+  gauss-ext solve-∀ solve-∀
+
+scalarMulDistributesLeft :
+  (x y z : Gaussian4) →
+  _*G_ x (_+G_ y z) ≡ _+G_ (_*G_ x y) (_*G_ x z)
+scalarMulDistributesLeft (gauss a b) (gauss c d) (gauss e f) =
+  gauss-ext solve-∀ solve-∀
+
+-- The proof-critical part is distributivity, not the cyclic index
+-- counts. Finite sum-swap/scale can now reuse the original generic
+-- Grafakos and NS proof patterns at their actual cyclotomic types.
