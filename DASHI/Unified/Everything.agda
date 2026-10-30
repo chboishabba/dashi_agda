@@ -1228,3 +1228,30 @@ unifiedC5ActualSourceCharacterIndexedEquality :
     ≡ C5FullOperator.indexedFiveGridBilinearAt f g k
 unifiedC5ActualSourceCharacterIndexedEquality =
   C5FullOperator.cyclotomicFiveSourceSampledEqualsIndexed
+
+
+------------------------------------------------------------------------
+-- ORIGINAL INTEGER-FREQUENCY C4/C5 SOURCE CHARACTER-SUM THEOREMS.
+-- One-axis Nyquist and 3-axis normalized character deltas are
+-- source-written. The 729 indexed pair consumer is original.
+-- DO NOT PROMOTE to actual padded tensor FFT array or physical NS.
+------------------------------------------------------------------------
+
+unifiedC4OriginalIntegerSourceCharacterClosure :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (k : Fourier729.ModeCube27) →
+  C4Retained.gaussianSourceNormalizedSampledAt f g k
+    ≡ C4Retained.trueGaussianIntegerConvolutionAt
+        f g (Convolution729.retainedToWide k)
+unifiedC4OriginalIntegerSourceCharacterClosure =
+  C4Retained.gaussianSourceCharacterSumRecoversTrueIntegerRetained
+
+unifiedC5OriginalIntegerSourceCharacterClosure :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Convolution729.WideCube125) →
+  C5FullOperator.cyclotomicFiveSourceNormalizedSampledAt f g k
+    ≡ C5FullOperator.originalTrue125BilinearAt f g k
+unifiedC5OriginalIntegerSourceCharacterClosure =
+  C5FullOperator.cyclotomicFiveSourceCharacterSumRecoversTrueIntegerFull
+
+-- Kernel status PENDING; actual array source transport still open.
