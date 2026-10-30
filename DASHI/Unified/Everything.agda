@@ -1188,3 +1188,43 @@ unifiedC5CharacterResolutionExtractsSourceIndexed :
     ≡ C5FullOperator.indexedFiveGridBilinearAt f g k
 unifiedC5CharacterResolutionExtractsSourceIndexed =
   C5FullOperator.cyclotomicFiveSourceSampledEqualsIndexedGivenResolution
+
+
+------------------------------------------------------------------------
+-- FIRST UNCONDITIONAL C4(27 retained) / C5(125 full) ORIGINAL SOURCE
+-- CHARACTER-SUM CONVOLUTION, WITHOUT AN ABSTRACT RESOLUTION PREMISE.
+-- EXACT sampled tensor-FFT arrays have a separate transport obligation.
+-- These source-written terms remain kernel-pending, not machine-green.
+------------------------------------------------------------------------
+
+unifiedC4OriginalNyquistAxisResolution :
+  (a b : SampledC4Group.FourGridMode) →
+  C4Retained.gaussianSourceAxisCharacterKernel a b
+    ≡ Bilinear729.choose C4Gaussian.zeroG
+        (SampledC4Group.eqFour a b) C4Gaussian.oneG
+unifiedC4OriginalNyquistAxisResolution =
+  C4Retained.gaussianOriginalAxisCharacterResolution
+
+unifiedC5OriginalNyquistAxisResolution :
+  (a b : Fourier729.FiveGridMode) →
+  C5FullOperator.cyclotomicFiveSourceAxisCharacterKernel a b
+    ≡ Bilinear729.choose C5Character125.zero5
+        (C5Character125.eq5 a b) C5Character125.one5
+unifiedC5OriginalNyquistAxisResolution =
+  C5FullOperator.cyclotomicFiveOriginalAxisCharacterResolution
+
+unifiedC4ActualSourceCharacterIndexedEquality :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (k : Fourier729.ModeCube27) →
+  C4Retained.gaussianSourceNormalizedSampledAt f g k
+    ≡ C4Retained.fourGridGaussianIndexConvolutionAt f g k
+unifiedC4ActualSourceCharacterIndexedEquality =
+  C4Retained.gaussianSourceSampledEqualsIndexed
+
+unifiedC5ActualSourceCharacterIndexedEquality :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Convolution729.WideCube125) →
+  C5FullOperator.cyclotomicFiveSourceNormalizedSampledAt f g k
+    ≡ C5FullOperator.indexedFiveGridBilinearAt f g k
+unifiedC5ActualSourceCharacterIndexedEquality =
+  C5FullOperator.cyclotomicFiveSourceSampledEqualsIndexed
