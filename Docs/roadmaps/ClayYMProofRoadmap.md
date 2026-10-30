@@ -14,7 +14,7 @@ and the already-proved three selected expectation-limit compilers. This removes 
 
 The exact
 remaining P2 obligations are now the trace→Gram physical interpretation,
-bounded-product closure, identity boundedness, selected Euclidean
+bounded-product closure, exact literal identity same-object equality, selected Euclidean
 translate/support-time identity, and actual measure convergence on the same
 physical theory. The rational-quaternion argument alone is **not** a proof
 over full continuum Haar SU(2), nor an independent gauge-measure limit.
