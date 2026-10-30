@@ -328,3 +328,53 @@ computedPositionEnvelopeLengthBound upper =
     (NP.*-mono-≤
       (Cover.computedCandidateDistinctCountBound upper)
       NP.≤-refl)
+
+------------------------------------------------------------------------
+-- DISTINCT POSITION IMAGE: reuse the already-owned generic Nat list
+-- deduplicator. Every certified nonzero-error position stays present,
+-- the resulting list has no duplicates, and its length is bounded
+-- by the same 2*B*E upper envelope.
+------------------------------------------------------------------------
+
+distinctErrorPositionEnvelope : Nat → List Nat
+distinctErrorPositionEnvelope upper =
+  Rect.dedupPowerValues
+    (candidatePositionEnvelope (computedProperPowerCandidates upper))
+
+distinctErrorPositionNoDuplicates :
+  (upper : Nat) →
+  Rect.DistinctValues (distinctErrorPositionEnvelope upper)
+distinctErrorPositionNoDuplicates upper =
+  Rect.dedupValuesDistinct
+    (candidatePositionEnvelope (computedProperPowerCandidates upper))
+
+nonzeroErrorPositionInDistinctEnvelope :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (theta : Cheb.PrimeLogWeightKernel space PrimeNat.natPrimePredicate)
+  (ownership : Cheb.ChebyshevPrimeOwnership
+    space PrimeNat.natPrimePredicate theta arithmetic)
+  (zeroLaws : Zero.ProductZeroLaws space arithmetic)
+  (n upper : Nat) →
+  n + 2 ≤ upper →
+  (Split.nonPrimeErrorAtNat space arithmetic mangoldt n
+    ≡ Weil.WeilTestSpace.zeroS space → ⊥) →
+  Rect._member_ n (distinctErrorPositionEnvelope upper)
+nonzeroErrorPositionInDistinctEnvelope space arithmetic mangoldt
+    theta ownership zeroLaws n upper endBound nonzero =
+  Rect.dedupPreservesMember
+    (candidatePositionEnvelope (computedProperPowerCandidates upper))
+    (nonzeroErrorPositionInComputedEnvelope space arithmetic
+      mangoldt theta ownership zeroLaws n upper endBound nonzero)
+
+distinctErrorPositionEnvelopeLengthBound :
+  (upper : Nat) →
+  Reindex.listLength (distinctErrorPositionEnvelope upper)
+  ≤
+  (Root.floorSquareRoot upper * Binary.floorBinaryExponent upper) * 2
+distinctErrorPositionEnvelopeLengthBound upper =
+  NP.≤-trans
+    (Rect.dedupLengthAtMost
+      (candidatePositionEnvelope (computedProperPowerCandidates upper)))
+    (computedPositionEnvelopeLengthBound upper)
