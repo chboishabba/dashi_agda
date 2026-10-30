@@ -121,8 +121,6 @@ record RationalSU2TraceGramBoundSource
     identityBounded :
       Gram.BoundedObservable dataSet identityObservable
 
-open RationalSU2TraceGramBoundSource public
-
 rationalSU2TraceToSameAlgebraWilsonBounds :
   ∀ {Measure TestObservable Loop}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ} →
