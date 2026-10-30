@@ -1037,3 +1037,130 @@ Song & Yue, *Bounded Gaps Between Primes: An Upper Bound of 236*, SSRN 7408198 (
 Teorth bounded-prime-gap record https://teorth.github.io/optimizationproblems/constants/88a.html (reported H1<=186, distinct from established/peer-reviewed);
 Wang, *Why expansion methods for Chowla do not reach twin primes*, Zenodo 23694711, 27 Oct 2026 (method-limitation **report**, not a twin-prime result).
 Preserve original Conway/Guy, Zhang/Maynard/Polymath, original Agda/Lean and Ibrahim proof/source ownership. QID = source identity only. No claim of kernel certification, independent analytic verification or a solution to twin primes.
+
+## 30 October 2026 — highest-alpha follow-on: M14 support, M16 certified count and source-checked reuse
+
+**Concrete repo inspection, not just PR titles.** GitHub source fetched from
+`dashi_agda` (#1408 and `master`):
+`TwinPrimeNat270PeriodResidualBidiExact.agda`,
+`TwinPrimeMangoldtMultiPeriodConcatExact.agda`,
+`TwinPrimeMangoldtActualPrimePowerResidualExact.agda`,
+`TwinPrimeMangoldtFinIntervalReindexExact.agda`,
+`TwinPrimeResidualMangoldtBidiExact.agda`,
+`RiemannVonMangoldtSpecification.agda`,
+`RiemannPrimePowerCounting.agda`,
+`RiemannPrimePowerMangoldtIdentity.agda`,
+`ChebyshevPrimeCounting.agda`,
+`RiemannVonMangoldtPrimeSide.agda`,
+`TwinPrimeCertifiedEnumeratorExact.agda`,
+`PrimeCountingFunction.agda`, and `TwinPrimeSixWheelExact.agda`.
+Inspected `dashi_lean4` actual `MoonshineFractran.lean`,
+`Main.lean`, `DashiPerf.lean`,
+`docs/DECLARATION_LANDSCAPE.md`; and `agda2lean` README and
+`lean-toolchain`. The checked-in Lean FRACTRAN material covers
+finite SSP counters/equalities, **not** a proved twin-prime gap-two estimate.
+The translator is not a kernel proof by itself. Rechecked #1408, #1244,
+#1275, #1414 heads; #1244/#1414 have newer independent heads and
+must not be treated as merged owner branches.
+
+**New or fixed code on #1408** (all source-written, kernel pending):
+
+1. `TwinPrimeMangoldtMultiPeriodConcatExact.agda`: removed duplicate
+   `Data.Nat.Properties` import detected in the actual branch source.
+2. `TwinPrimeMangoldtPrimePowerPairBothSidesExact.agda`:
+   `ProperPrimePowerOccurrence` distinguishes exponent >=2 from
+   prime exponent 1; `properPowerMangoldtPeriod`,
+   `rightPrimePowerWeight`, `bothPrimePowerWeights`,
+   `bothPrimePowerPeriodBidi` reuse the original
+   `lambdaAtPrimePower` and proof-bearing occurrence type.
+   The identity is `Lambda(p^k)=log(p)`, NOT k log(p).
+3. `TwinPrimeMangoldtOutsidePrimePowersZeroExact.agda`:
+   `OutsideAllPrimePowers`, `mangoldtZeroOutside`
+   use the original relational `outsidePrimePowers` and
+   `specificationSingleValued`; `leftOutsidePairZero` and
+   `rightOutsidePairZero` plus exact period transport require
+   explicit `ProductZeroLaws`. These laws are **not** auto-entailed
+   by an arbitrary Weil space or claimed as new analytic results.
+4. `TwinPrimeMangoldtCertifiedIntervalScheduleExact.agda`:
+   `CertifiedIntervalSchedule` requires exact first-boundary
+   alignment and total-length equality.
+   `scheduleCorrelationForward`/`Backward` compose existing
+   ordered partial/full period proofs. `boundaryIntervalSchedule`
+   and `wholeRowsSchedule` are actual constructed instances.
+   The arbitrary nonaligned `start,count` schedule constructor
+   remains an OPEN obligation, distinct from this conditional BIDI.
+5. `TwinPrimeCertifiedCountJumpBidiExact.agda`: genuinely reuses
+   `TwinPrimeCertifiedEnumeratorExact` and original proof-bearing
+   `PrimeCountingFunction.primeCountAtPrime` /
+   `primeCountAtNonprime`. Proves
+   `TwinPrimeAt (k+2) ↔ count(k+2) ≢ count(k+1)`
+   as a structured two-sided criterion over all k >=0.
+   It is NOT the wheel-survivor count.
+6. `TwinPrimeConditionalUnboundedFromCountJumpsExact.agda`:
+   final `∀N ∃p≥N, TwinPrimeAt p` follows by an exact constructive
+   map **only after** supplying an explicit
+   `UnboundedCertifiedCountJumps.laterJump` assumption.
+   This assumption is mathematically equivalent in strength to the
+   remaining infinitude gate and is NOT discharged here.
+7. `TwinPrimeCertifiedNatPeriodWitnessBidiExact.agda`:
+   original `TwinPrimeAt` certificates move between
+   `Σ Nat TwinPrimeAt` and
+   `Σ NatPeriod270 (TwinPrimeAt ∘ decode)`.
+   Both underlying Nat/period-code round trips are proved via
+   existing codec inverse lemmas; no proof-irrelevance or promotion
+   of Ibrahim/sign-orbit class to a primality oracle.
+
+All six new modules are imported through
+`EverythingTOESymmetryResolved369`, `Unifier` and
+`Unified/Everything`, without ESD edits.
+
+**Independent local Python actually executed:**
+- 1,260 prefix + 0..4 whole rows + suffix interval index checks;
+  252 exact symbolic `log(p)log(q)` paired-weight sum comparisons;
+  30,000 Nat/period inverse checks; 66 powers `p^k` checks: PASS.
+- 25,000 independent pair-support comparisons using two different
+  prime-power algorithms; 66 proper-power checks; 59/209 and
+  59/329 distinction: PASS. `scripts/check_twin_prime_mangoldt_support_bidi.py`.
+- 70,001 original certified twin-count step comparisons (sieve
+  vs independent trial division): PASS, with 905 finite jump indices.
+  `scripts/check_twin_prime_count_jump_bidi.py`.
+These finite tests are not proof-assistant checks and do not imply
+infinitude. An executable local `agda` or `lean` is unavailable;
+CI was not run by request. Static new-module scan found no
+`postulate` declarations or `?` holes; this is not a kernel receipt.
+
+**Updated outstanding max-cut ledger:**
+
+- **M11 (partial):** concretely instantiate original all-prime
+  `VonMangoldtFunction`, proof-bearing Nat prime arithmetic
+  and `WeilAdditiveLaws`; scalar laws are explicit dependencies.
+- **M13 (partial):** for arbitrary unaligned `start,count`,
+  construct `CertifiedIntervalSchedule` with first-boundary
+  distance, all whole rows, suffix and two arithmetic equalities.
+  Existing guarded BIDI must then be kernel-checked.
+- **M14 (partial):** exact left/right prime-power and outside-support
+  term identities are written. Missing global proper-prime-power
+  occurrence classification, multiplicity handling, prime-only
+  extraction and full finite-sum accounting.
+- **M15 (open):** prove a uniform proper-power *weighted pair*
+  bound; note the standard O(sqrt X log^2 X) scale needs a
+  genuinely specified analytic scalar and a proof, not Python.
+- **M16 (partial):** certified count-jump BIDI and explicit
+  conditional unbounded implication written; an analytic
+  correlation-to-count-growth theorem requires M14/M15.
+- **F02/F04/F06/G01 (OPEN):** unconditional gap-two prime-pair
+  correlation and parity barrier. As of 30 October 2026 current
+  reported H1 bounds are still greater than 2; these reports do
+  not constitute a twin-prime proof.
+- **G06 (OPEN):** complete exact-head Agda kernel check; no CI
+  substitute claimed.
+
+**Provenance and semantic boundary:** Classical von Mangoldt,
+Riemann, Brun, Hardy–Littlewood, Zhang, Maynard/Tao, Polymath and
+the original Agda/Lean source owners retain their dated contributions.
+`ParetoSymmetryQuotientAdmissionExact` requires eligibility/objective
+preservation before quotienting; `SnowballAttributionProvenanceInvariantExact`
+preserves source role; Ibrahim `IbrahimSnowballParetoFrontierExact`
+is a separate historically attributed dataset-genealogy programme;
+QIDs identify entities but do not confer kernel proof. No new
+Monster 3B same-object representation is asserted. No ESD edits.
