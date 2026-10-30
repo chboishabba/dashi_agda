@@ -1,4 +1,5 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
+import DASHI.Reasoning.TrialecticC3WeightedOrbitSymmetrizationExact as C3Weighted369
 import Data.List as NativeList
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as NativePants369
 import DASHI.Topology.TernaryPantsFrontierExact as NativeFrontier
@@ -394,3 +395,23 @@ toeS3PreservesActualMaxCutPartition :
     (NativePants369.pants3ToVoxel27 p)
 toeS3PreservesActualMaxCutPartition =
   S3Cut369.s3PreservesNativeMaxCutPartition
+
+------------------------------------------------------------------------
+-- A genuine C3 action exists on the NEW orbit-sum weighted graph,
+-- not on the original asymmetric graph.
+------------------------------------------------------------------------
+toeNewOrbitSumWeightHasActualC3Symmetry :
+  (source target : DirectedObserver.Participant3) ->
+  C3Weighted369.equivariantImageWeight
+    (C3Weighted369.rotate source) (C3Weighted369.rotate target)
+  ≡ C3Weighted369.equivariantImageWeight source target
+toeNewOrbitSumWeightHasActualC3Symmetry =
+  C3Weighted369.orbitSumC3Invariant WeightedGraph369.dankaWeight
+
+toeOriginalWeightedImageStillNotC3 :
+  ((source target : DirectedObserver.Participant3) ->
+    WeightedGraph369.dankaWeight
+      (C3Weighted369.rotate source) (C3Weighted369.rotate target)
+    ≡ WeightedGraph369.dankaWeight source target) -> ⊥
+toeOriginalWeightedImageStillNotC3 =
+  C3Weighted369.originalGraphC3StillFails
