@@ -115,3 +115,14 @@ Owner: `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasingMaxCut.md`, section **5j
 - [x] Verify original de-aliasing attribution: S. A. Orszag 1971 J. Atmos. Sci. DOI 10.1175/1520-0469(1971)028<1074:OTEOAI>2.0.CO;2; G. S. Patterson Jr./S. A. Orszag 1971 Phys. Fluids DOI 10.1063/1.1693365.
 - [x] Normalize C4 four-point scalar explicitly as `normalize 4 1`.
 - [ ] **P0:** pinned Agda `--safe` type-check with source dependency audit; do not claim certified golden just because no holes/postulates appear in static scans. Preserve original unmerged branches and ESD write protection.
+
+
+## 2026-10-30 5m source-ordered 3D character resolution (PR #1407)
+
+- [x] Inspect actual 27/729, C4/C5/Nyquist source, original Lean NS R440, and newest #1441/#1440/#1438/#1437 Agda owner code; reuse source QID guards and Ibrahim Pareto custody ownership.
+- [x] Source-write exact original four/five axis Nyquist-order normalized character-resolution (16/25 cases), generic 3-axis source Cartesian Fubini and Boolean selector product, C4/C5 full cube phase normalization/conjugation factorization and delta (64/125 original sample carriers).
+- [x] Source-write **unconditional** `gaussianSourceSampledEqualsIndexed` and `cyclotomicFiveSourceSampledEqualsIndexed`, then inherited original 729 integer-frequency convolution transport; attach to all three TOE roots. **These results refer to source character sums**, not actual FFT arrays; Agda kernel pending.
+- [x] Independent local exact checks: 16/25 original axis character resolution and 19,683/91,125 original pair→integer target selectors passed. Original Ibrahim QID and full historical corpus remain unpromoted.
+- [ ] **P0:** prove exact runtime padded tensor FFT arrays `retainedSampledBilinear`/`fullSampledBilinear125` agree with newly closed source character-sum representations for every arbitrary field and target. Do not reuse C3 `spectralConvolutionDiagonalises` as the missing group formula.
+- [ ] **P0:** actual exact-head Agda kernel, transitive `--safe` import proof and resulting repair of any concrete errors, then review merge-base conflicts.
+- [ ] **P1:** real NS Complex3/Leray/Galerkin same-object transport; R440/R736/B4 analytic and time-bound evolution separate. QID is not 2014 historical dump/edge evidence, Monster 3B representations require original same-object custody.
