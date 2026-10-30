@@ -937,3 +937,28 @@ routeSH1AbsoluteMagnitudeIndependentPhysicalLeafIsFalse :
 routeSH1AbsoluteMagnitudeIndependentPhysicalLeafIsFalse =
   RouteS.routeSH1ReusesR313MagnitudeCompilerIsFalse
 
+
+
+------------------------------------------------------------------------
+-- P2 rational SU(2) normalized trace -> physical Gram boundedness -> S2.
+-- This is a conditional producer until the SAME Wilson/Gram interpretation
+-- and remaining physical time/support and measure inputs are inhabited.
+------------------------------------------------------------------------
+
+routeSP2RationalTraceToCanonicalS2CompilerLevel : ProofLevel
+routeSP2RationalTraceToCanonicalS2CompilerLevel =
+  S2.rationalSU2TraceToSameAlgebraCompilerLevel
+
+routeSP2RationalTraceGramInterpretationLevel : ProofLevel
+routeSP2RationalTraceGramInterpretationLevel =
+  S2.rationalSU2TraceToGramInterpretationLevel
+
+routeSP2LoopBoundsFromTraceGivenInterpretation : Bool
+routeSP2LoopBoundsFromTraceGivenInterpretation =
+  S2.rationalSU2TraceSourcePaysLiteralLoopBoundedness
+
+routeSP2LoopBoundsFromTraceGivenInterpretationIsTrue :
+  routeSP2LoopBoundsFromTraceGivenInterpretation ≡ true
+routeSP2LoopBoundsFromTraceGivenInterpretationIsTrue =
+  S2.rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue
+
