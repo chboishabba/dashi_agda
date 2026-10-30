@@ -24,7 +24,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (sym; cong₂)
+open import Relation.Binary.PropositionalEquality using (sym; cong; cong₂)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact as Existing
@@ -207,11 +207,11 @@ sumExactlyOneEqualVector :
   sumBoolVectors (λ candidate →
     indicator (equalBoolVectors candidate target)) ≡ suc zero
 sumExactlyOneEqualVector [] = refl
-sumExactlyOneEqualVector (false ∷ target)
+sumExactlyOneEqualVector {n = suc n} (false ∷ target)
   rewrite sumExactlyOneEqualVector target
-        | sumBoolVectorsZero = refl
-sumExactlyOneEqualVector (true ∷ target)
-  rewrite sumBoolVectorsZero
+        | sumBoolVectorsZero {n} = refl
+sumExactlyOneEqualVector {n = suc n} (true ∷ target)
+  rewrite sumBoolVectorsZero {n}
         | sumExactlyOneEqualVector target = refl
 
 -- A rejected input has no matching *accepted* gate extension.
@@ -277,3 +277,73 @@ finiteSupportedTseitinCountExact circuit =
       countAcceptedAuxiliaries
         (Circuit.evaluateCircuit circuit bits)
         (Circuit.evaluateProgram (Circuit.program circuit) bits))
+
+
+------------------------------------------------------------------------
+-- The executable counted predicate is the exact FINITE data predicate,
+-- not a proxy. Equal vector bits imply equal literal auxiliary vectors.
+------------------------------------------------------------------------
+
+equalBoolVectorsSound :
+  ∀ {n : Nat} (left right : Vec Bool n) →
+  equalBoolVectors left right ≡ true → left ≡ right
+equalBoolVectorsSound [] [] proof = refl
+equalBoolVectorsSound (false ∷ xs) (false ∷ ys) proof =
+  cong (λ rest → false ∷ rest)
+    (equalBoolVectorsSound xs ys proof)
+equalBoolVectorsSound (true ∷ xs) (true ∷ ys) proof =
+  cong (λ rest → true ∷ rest)
+    (equalBoolVectorsSound xs ys proof)
+equalBoolVectorsSound (false ∷ xs) (true ∷ ys) ()
+equalBoolVectorsSound (true ∷ xs) (false ∷ ys) ()
+
+equalBoolVectorsRefl :
+  ∀ {n : Nat} (bits : Vec Bool n) →
+  equalBoolVectors bits bits ≡ true
+equalBoolVectorsRefl [] = refl
+equalBoolVectorsRefl (false ∷ rest) = equalBoolVectorsRefl rest
+equalBoolVectorsRefl (true ∷ rest) = equalBoolVectorsRefl rest
+
+-- Every already constructed finite-supported model passes the Boolean test
+-- whose complete enumeration is used by countFiniteSupportedTseitin.
+finiteSupportedModelIsCounted :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (model : FiniteSupportedModel circuit) →
+  acceptedAuxiliaryMatch
+    (Circuit.evaluateCircuit circuit (inputBits model))
+    (Circuit.evaluateProgram
+      (Circuit.program circuit) (inputBits model))
+    (auxiliaryBits model)
+  ≡ true
+finiteSupportedModelIsCounted circuit model
+  rewrite outputTrue model
+        | encodeDecodeAuxiliary circuit model =
+  equalBoolVectorsRefl (auxiliaryBits model)
+
+-- Conversely, an accepted *counted* Boolean pair supplies exactly the
+-- original finite-supported model constructor, with the correct gate bits.
+countedPairGivesFiniteSupportedModel :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (bits : Vec Bool inputs)
+    (auxiliary : Vec Bool (Circuit.gateCount circuit)) →
+  acceptedAuxiliaryMatch
+    (Circuit.evaluateCircuit circuit bits)
+    (Circuit.evaluateProgram (Circuit.program circuit) bits)
+    auxiliary
+  ≡ true →
+  FiniteSupportedModel circuit
+countedPairGivesFiniteSupportedModel circuit bits auxiliary counted
+  with Circuit.evaluateCircuit circuit bits
+... | false with counted
+...   | ()
+... | true =
+  finite-supported-model
+    bits auxiliary
+    (λ i →
+      cong (Circuit.lookupVec i)
+        (equalBoolVectorsSound auxiliary
+          (Circuit.evaluateProgram (Circuit.program circuit) bits)
+          counted))
+    refl
