@@ -21,6 +21,7 @@ module DASHI.Foundations.PolynomialVandermondeDiscriminantExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
@@ -50,37 +51,37 @@ vandermondeTransformsByParity :
   vandermonde (Vieta.permuteRoots p r)
   ≡ isOdd p (vandermonde r)
 vandermondeTransformsByParity S3.permIdentity r = refl
-vandermondeTransformsByParity S3.permRotate (Vieta.roots a b c) = Ring.solve-∀ a b c
-vandermondeTransformsByParity S3.permRotate2 (Vieta.roots a b c) = Ring.solve-∀ a b c
-vandermondeTransformsByParity S3.permSwapLowMid (Vieta.roots a b c) = Ring.solve-∀ a b c
-vandermondeTransformsByParity S3.permSwapLowHigh (Vieta.roots a b c) = Ring.solve-∀ a b c
-vandermondeTransformsByParity S3.permSwapMidHigh (Vieta.roots a b c) = Ring.solve-∀ a b c
+vandermondeTransformsByParity S3.permRotate (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+vandermondeTransformsByParity S3.permRotate2 (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+vandermondeTransformsByParity S3.permSwapLowMid (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+vandermondeTransformsByParity S3.permSwapLowHigh (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+vandermondeTransformsByParity S3.permSwapMidHigh (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
 
 discriminantInvariant :
   (p : S3.TriPermutation) (r : Vieta.ThreeRoots) →
   discriminant (Vieta.permuteRoots p r)
   ≡ discriminant r
 discriminantInvariant S3.permIdentity r = refl
-discriminantInvariant S3.permRotate (Vieta.roots a b c) = Ring.solve-∀ a b c
-discriminantInvariant S3.permRotate2 (Vieta.roots a b c) = Ring.solve-∀ a b c
-discriminantInvariant S3.permSwapLowMid (Vieta.roots a b c) = Ring.solve-∀ a b c
-discriminantInvariant S3.permSwapLowHigh (Vieta.roots a b c) = Ring.solve-∀ a b c
-discriminantInvariant S3.permSwapMidHigh (Vieta.roots a b c) = Ring.solve-∀ a b c
+discriminantInvariant S3.permRotate (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+discriminantInvariant S3.permRotate2 (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+discriminantInvariant S3.permSwapLowMid (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+discriminantInvariant S3.permSwapLowHigh (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
+discriminantInvariant S3.permSwapMidHigh (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
 
 firstSecondCollisionGivesZero :
   (a c : ℚ) →
   discriminant (Vieta.roots a a c) ≡ 0ℚ
-firstSecondCollisionGivesZero a c = Ring.solve-∀ a c
+firstSecondCollisionGivesZero a c = Ring.solve (a ∷ c ∷ [])
 
 firstThirdCollisionGivesZero :
   (a b : ℚ) →
   discriminant (Vieta.roots a b a) ≡ 0ℚ
-firstThirdCollisionGivesZero a b = Ring.solve-∀ a b
+firstThirdCollisionGivesZero a b = Ring.solve (a ∷ b ∷ [])
 
 secondThirdCollisionGivesZero :
   (a b : ℚ) →
   discriminant (Vieta.roots a b b) ≡ 0ℚ
-secondThirdCollisionGivesZero a b = Ring.solve-∀ a b
+secondThirdCollisionGivesZero a b = Ring.solve (a ∷ b ∷ [])
 
 -- This is a concrete discriminant vanishing implication. The
 -- converse (Δ=0 -> collision) and a nonzero complex coefficient
@@ -117,7 +118,7 @@ discriminantDependsOnlyOnVietaCoefficients :
   coefficientDiscriminant
     (Vieta.rootSum r) (Vieta.rootPairSum r) (Vieta.rootProduct r)
 discriminantDependsOnlyOnVietaCoefficients
-  (Vieta.roots a b c) = Ring.solve-∀ a b c
+  (Vieta.roots a b c) = Ring.solve (a ∷ b ∷ c ∷ [])
 
 
 ------------------------------------------------------------------------
