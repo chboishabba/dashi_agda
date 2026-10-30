@@ -767,3 +767,19 @@ toeP2TracePaysPerLoopBoundsGivenInterpretation :
   TOE.toeBalabanRouteSP2PerLoopBoundAfterInterpretation
     ≡ Balaban.balabanRouteSP2TracePaysPerLoopBounds
 toeP2TracePaysPerLoopBoundsGivenInterpretation = refl
+
+
+toeR445NativeP2AgreesWithOwner :
+  TOE.toeBalabanRouteSP2R445CompilerLevel
+  ≡ Balaban.balabanRouteSP2R445NativeCompilerLevel
+toeR445NativeP2AgreesWithOwner = refl
+
+unifierR445NativeP2AgreesWithOwner :
+  Unifier.unifierBalabanRouteSP2R445CompilerLevel
+  ≡ Balaban.balabanRouteSP2R445NativeCompilerLevel
+unifierR445NativeP2AgreesWithOwner = refl
+
+physicsR445NativeP2AgreesWithOwner :
+  Physics.yangMillsBalabanRouteSP2R445CompilerLevel
+  ≡ Balaban.balabanRouteSP2R445NativeCompilerLevel
+physicsR445NativeP2AgreesWithOwner = refl
