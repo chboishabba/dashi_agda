@@ -295,6 +295,11 @@ def verify_original_polynomial_video_m1_m10():
     assert "Discriminant.coefficientDiscriminantZeroIffRootCollisionRational" in pareto
     assert "Spin.noFullPositiveQuaternionS3Action" in pareto
     assert "identicalMonster3BObjectPaid = false" in pareto
+    assert "PositiveQuaternionBraidGeneratorLift" in spin
+    assert "noPositiveQuaternionBraidGeneratorLift" in spin
+    assert "permutationImage g" in spin
+    assert "originalVideoM2M10BraidQuaternionNoGoReceipt" in pareto
+    assert "Spin.noPositiveQuaternionBraidGeneratorLift" in pareto
 
     assert "Q._*q_ spinSignedSwapIJ spinSignedSwapIJInverse" in spin
     assert "{!!}" not in disc+spin
@@ -308,7 +313,9 @@ def verify_original_polynomial_video_m1_m10():
                      "noFullPositiveQuaternionS3Action",
                      "signedSwapIJMustNegateK",
                      "originalVideoM1CoefficientDiscriminantReceipt",
-                     "originalVideoM10OrientationReceipt"):
+                     "originalVideoM10OrientationReceipt",
+                     "noPositiveQuaternionBraidGeneratorLift",
+                     "originalVideoM2M10BraidQuaternionNoGoReceipt"):
             assert name in t,(root,name)
 
     # Original rational Vieta/discriminant target, finite scalar domain:
