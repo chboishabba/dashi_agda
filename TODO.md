@@ -17403,3 +17403,13 @@ pants/sheaf matching before promoting any real-world synthesis.
 - [ ] Validate orbit-sum equations in Agda/Lean kernels; no CI needed.
 - [ ] Face mediation, provenance transport and actual Monster/physical
   action must be separately sourced/proved for their own consumers.
+
+### 2026-10-30 matrix–graph–wave/prime/Pickover crosscut
+- [x] Actual source inspection of PR #1438 graph/matrix C3 symmetrisation, directed hyperfabric, finite wave and consumer-indexed residual machinery (not PR text alone).
+- [x] Construct explicit 3-vertex C3 orbit-sum equality with divergent original directed-edge consumer; reuse graph source BIDI and generic collision theory; no auto-generating missing analytic source.
+- [x] Show any deterministic wave/spectral computation fed *only* the symmetrised matrix cannot recover the erased selected weight; attached original wave trit differs pos/zero.
+- [x] Reuse original directed source/target global-section owners to establish both fine graphs have compatible typed hyperfabric sections; global gluing alone is not sufficient.
+- [x] Wire into the four graph/TOE import roots; commit independent exact matrix checker and documentation. No ESD edits.
+- [ ] Agda/Lean kernel check for new and original graph module once compatible toolchain available (no CI obligation).
+- [ ] Twin CT15: prove actual arithmetic prime-only/error separation on cofinal windows; forbid replacing true `Λ(n)Λ(n+2)` with synthetic graph edge weights or using mere S3/C3 equivariance as a positivity theorem.
+- [ ] Pickover: construct a certified terminal analytic `π`-phase interval/sign at `99^(9999!)` with effective cost, not a finite CRT/C3/λ^9 graph label. Retain original Machin, wave and source-owner receipts.
