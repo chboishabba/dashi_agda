@@ -339,3 +339,17 @@ oneAxisSampledConvolutionIsCyclic
 
 -- IMPORTANT: source-written Agda proof candidate; no executed kernel
 -- check. The 125-sample three-axis sampled/index theorem is still open.
+
+
+------------------------------------------------------------------------
+-- EXACT TWO-FACTOR RATIONAL SCALING / CYCLOTOMIC MULTIPLICATION.
+-- This prevents handwaving the 3-axis 1/N³ factor in a finite
+-- sampled-character identity.
+------------------------------------------------------------------------
+
+cyclotomicFiveScaleOfProduct :
+  (q r : ℚ) (x y : C5.Cyclotomic5) →
+  scale5 (q * r) (C5._*5_ x y)
+  ≡ C5._*5_ (scale5 q x) (scale5 r y)
+cyclotomicFiveScaleOfProduct q r (C5.cyc5 a b c d) (C5.cyc5 e f g h) =
+  C5.cyc5-ext solve-∀ solve-∀ solve-∀ solve-∀
