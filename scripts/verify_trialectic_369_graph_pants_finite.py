@@ -153,7 +153,6 @@ def main() -> None:
     assert set(edges) == (
         set(canonical) | {(v, u) for u, v in canonical}
     )
-    assert all(parity == list(range(54))[parity] for parity in range(54))
     s3_parity_checks = sum(
         checker(tuple(v[i] for i in order)) == checker(v)
         for v in V for order in six
