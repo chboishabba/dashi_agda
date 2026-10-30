@@ -1543,3 +1543,22 @@ toeBalabanR320RouteSNoDuplicateMagnitude :
   BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
 toeBalabanR320RouteSNoDuplicateMagnitude =
   BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+
+
+------------------------------------------------------------------------
+-- Pareto P2: existing rational SU2 trace bound -> same-physical Gram
+-- boundedness producer -> canonical Wilson S2 input.
+------------------------------------------------------------------------
+
+toeBalabanRouteSP2TraceToS2Level : ProofLevel
+toeBalabanRouteSP2TraceToS2Level =
+  BalabanRGTOE.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+
+toeBalabanRouteSP2PhysicalInterpretationLevel : ProofLevel
+toeBalabanRouteSP2PhysicalInterpretationLevel =
+  BalabanRGTOE.balabanRouteSP2TracePhysicalInterpretationLevel
+
+toeBalabanRouteSP2PerLoopBoundAfterInterpretation :
+  BalabanRGTOE.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+toeBalabanRouteSP2PerLoopBoundAfterInterpretation =
+  BalabanRGTOE.balabanRouteSP2TracePaysPerLoopBounds
