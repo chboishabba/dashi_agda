@@ -17,13 +17,18 @@ module DASHI.Arithmetic.TwinPrimeProperPowerRectangleEnumerationExact where
 -- Source-written, Agda kernel pending. No postulate, no ESD edit.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)\nopen import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)\nopen import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_)\nopen import Data.Nat.Base using (_≤_; z≤n; s≤s)\nopen import Data.Empty using (⊥)\nopen import Data.Sum using (_⊎_; inj₁; inj₂)\nimport Data.Nat.Properties as NatP\nopen import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; subst; sym)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product using (_×_; _,_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Empty using (⊥)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
+import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; subst; sym)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Data.List.Base using (_++_; map)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 import DASHI.Analysis.RiemannPrimePowerArithmetic as Power
