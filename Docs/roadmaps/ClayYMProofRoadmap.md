@@ -37,7 +37,7 @@ follows from the existing literal unit observable and an exact same-object
 identity equality, rather than being independently assumed.
 
 This replaces the earlier fixed-quaternion-per-path approximation: path
-holonomy necessarily depends on the configuration. The S2 adapter also fixes the literal SU(2) scalar ABI definitionally: `one = 1ℚ`, `groupRank = 1ℚ + 1ℚ`, and scalar multiplication is rational multiplication, rather than accepting unconstrained numeric placeholders.
+holonomy necessarily depends on the configuration. The S2 adapter also fixes the literal SU(2) scalar ABI definitionally: `one = 1ℚ`, `groupRank = 1ℚ`, and scalar multiplication is rational multiplication, rather than accepting unconstrained numeric placeholders.
 
 Generic
 `Gram.BoundedObservable` multiplication closure is still a separate
