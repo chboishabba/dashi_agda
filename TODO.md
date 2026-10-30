@@ -17395,3 +17395,11 @@ pants/sheaf matching before promoting any real-world synthesis.
   negative-comparison soundness and constructive membership.
 - [ ] Verify this closed 54-slot no-duplicate proof and optional
   stronger generic slot-index/endpoint injectivity in kernel.
+
+- [x] Explicit new C3 orbit-symmetrized weight and corresponding
+  two-ended compatible section, without falsely equating it to
+  the asymmetric original directed matrix.
+- [x] Formal source-written outgoing/incoming C3 weight transports.
+- [ ] Validate orbit-sum equations in Agda/Lean kernels; no CI needed.
+- [ ] Face mediation, provenance transport and actual Monster/physical
+  action must be separately sourced/proved for their own consumers.
