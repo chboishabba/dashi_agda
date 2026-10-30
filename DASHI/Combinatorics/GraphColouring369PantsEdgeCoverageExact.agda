@@ -191,6 +191,156 @@ closedSlotIdentifierCensus :
   0 ∷ 1 ∷ 2 ∷ 3 ∷ 4 ∷ 5 ∷ 6 ∷ 7 ∷ 8 ∷ 9 ∷ 10 ∷ 11 ∷ 12 ∷ 13 ∷ 14 ∷ 15 ∷ 16 ∷ 17 ∷ 18 ∷ 19 ∷ 20 ∷ 21 ∷ 22 ∷ 23 ∷ 24 ∷ 25 ∷ 26 ∷ 27 ∷ 28 ∷ 29 ∷ 30 ∷ 31 ∷ 32 ∷ 33 ∷ 34 ∷ 35 ∷ 36 ∷ 37 ∷ 38 ∷ 39 ∷ 40 ∷ 41 ∷ 42 ∷ 43 ∷ 44 ∷ 45 ∷ 46 ∷ 47 ∷ 48 ∷ 49 ∷ 50 ∷ 51 ∷ 52 ∷ 53 ∷ []
 closedSlotIdentifierCensus = refl
 
+
+------------------------------------------------------------------------
+-- Explicit propositional NODUP for the 54 canonical slots.
+--
+-- A decidable syntactic slot-comparison function is used only to
+-- construct a proof of non-duplication for the closed enumerated list.
+-- It is NOT presumed to identify two distinct native graph owners.
+------------------------------------------------------------------------
+
+andBit : Bool -> Bool -> Bool
+andBit true b = b
+andBit false _ = false
+
+notBit : Bool -> Bool
+notBit true = false
+notBit false = true
+
+sameTrit : SSP.SSPTrit -> SSP.SSPTrit -> Bool
+sameTrit SSP.sspNegOne SSP.sspNegOne = true
+sameTrit SSP.sspNegOne SSP.sspZero = false
+sameTrit SSP.sspNegOne SSP.sspPosOne = false
+sameTrit SSP.sspZero SSP.sspNegOne = false
+sameTrit SSP.sspZero SSP.sspZero = true
+sameTrit SSP.sspZero SSP.sspPosOne = false
+sameTrit SSP.sspPosOne SSP.sspNegOne = false
+sameTrit SSP.sspPosOne SSP.sspZero = false
+sameTrit SSP.sspPosOne SSP.sspPosOne = true
+
+sameTritRefl : (x : SSP.SSPTrit) -> sameTrit x x ≡ true
+sameTritRefl SSP.sspNegOne = refl
+sameTritRefl SSP.sspZero = refl
+sameTritRefl SSP.sspPosOne = refl
+
+sameStep : PositiveStep -> PositiveStep -> Bool
+sameStep lowerStep lowerStep = true
+sameStep lowerStep upperStep = false
+sameStep upperStep lowerStep = false
+sameStep upperStep upperStep = true
+
+sameStepRefl : (x : PositiveStep) -> sameStep x x ≡ true
+sameStepRefl lowerStep = refl
+sameStepRefl upperStep = refl
+
+threeBits : Bool -> Bool -> Bool -> Bool
+threeBits a b c = andBit a (andBit b c)
+
+sameSlot : NativeEdgeSlot -> NativeEdgeSlot -> Bool
+sameSlot (slotX a b s) (slotX c d t) =
+  threeBits (sameTrit a c) (sameTrit b d) (sameStep s t)
+sameSlot (slotX a b s) (slotY c d t) = false
+sameSlot (slotX a b s) (slotZ c d t) = false
+sameSlot (slotY a b s) (slotX c d t) = false
+sameSlot (slotY a b s) (slotY c d t) =
+  threeBits (sameTrit a c) (sameTrit b d) (sameStep s t)
+sameSlot (slotY a b s) (slotZ c d t) = false
+sameSlot (slotZ a b s) (slotX c d t) = false
+sameSlot (slotZ a b s) (slotY c d t) = false
+sameSlot (slotZ a b s) (slotZ c d t) =
+  threeBits (sameTrit a c) (sameTrit b d) (sameStep s t)
+
+sameSlotRefl : (slot : NativeEdgeSlot) -> sameSlot slot slot ≡ true
+sameSlotRefl (slotX a b s)
+  rewrite sameTritRefl a | sameTritRefl b | sameStepRefl s = refl
+sameSlotRefl (slotY a b s)
+  rewrite sameTritRefl a | sameTritRefl b | sameStepRefl s = refl
+sameSlotRefl (slotZ a b s)
+  rewrite sameTritRefl a | sameTritRefl b | sameStepRefl s = refl
+
+andLeftTrue : (a b : Bool) -> andBit a b ≡ true -> a ≡ true
+andLeftTrue true b _ = refl
+andLeftTrue false b ()
+
+andRightTrue : (a b : Bool) -> andBit a b ≡ true -> b ≡ true
+andRightTrue true b eq = eq
+andRightTrue false b ()
+
+falseIsNotTrue : false ≡ true -> ⊥
+falseIsNotTrue ()
+
+slotNotEqualWhenComparisonFalse :
+  (a b : NativeEdgeSlot) ->
+  notBit (sameSlot a b) ≡ true ->
+  a ≡ b -> ⊥
+slotNotEqualWhenComparisonFalse a .a comparison refl =
+  falseIsNotTrue
+    (trans
+      (sym (cong notBit (sameSlotRefl a)))
+      comparison)
+
+noSlotMatch : NativeEdgeSlot -> List NativeEdgeSlot -> Bool
+noSlotMatch x [] = true
+noSlotMatch x (y ∷ ys) =
+  andBit (notBit (sameSlot x y)) (noSlotMatch x ys)
+
+data SlotMember (item : NativeEdgeSlot) : List NativeEdgeSlot -> Set where
+  memberHead : ∀ {rest} -> SlotMember item (item ∷ rest)
+  memberTail : ∀ {x rest} ->
+    SlotMember item rest -> SlotMember item (x ∷ rest)
+
+noSlotMatchExcludes :
+  (x : NativeEdgeSlot) (xs : List NativeEdgeSlot) ->
+  noSlotMatch x xs ≡ true ->
+  ∀ {y} -> SlotMember y xs -> x ≡ y -> ⊥
+noSlotMatchExcludes x [] _ ()
+noSlotMatchExcludes x (y ∷ ys) noMatch memberHead equality =
+  slotNotEqualWhenComparisonFalse x y
+    (andLeftTrue (notBit (sameSlot x y))
+      (noSlotMatch x ys) noMatch)
+    equality
+noSlotMatchExcludes x (y ∷ ys) noMatch (memberTail membership) equality =
+  noSlotMatchExcludes x ys
+    (andRightTrue (notBit (sameSlot x y))
+      (noSlotMatch x ys) noMatch)
+    membership equality
+
+noDuplicateSlotsBit : List NativeEdgeSlot -> Bool
+noDuplicateSlotsBit [] = true
+noDuplicateSlotsBit (x ∷ xs) =
+  andBit (noSlotMatch x xs) (noDuplicateSlotsBit xs)
+
+data NoDuplicateSlots : List NativeEdgeSlot -> Set where
+  emptyDistinct : NoDuplicateSlots []
+  prependDistinct : ∀ {x xs} ->
+    (∀ {y} -> SlotMember y xs -> x ≡ y -> ⊥) ->
+    NoDuplicateSlots xs -> NoDuplicateSlots (x ∷ xs)
+
+noDuplicateSlotsSound :
+  (xs : List NativeEdgeSlot) ->
+  noDuplicateSlotsBit xs ≡ true ->
+  NoDuplicateSlots xs
+noDuplicateSlotsSound [] _ = emptyDistinct
+noDuplicateSlotsSound (x ∷ xs) ok =
+  prependDistinct
+    (noSlotMatchExcludes x xs
+      (andLeftTrue (noSlotMatch x xs)
+        (noDuplicateSlotsBit xs) ok))
+    (noDuplicateSlotsSound xs
+      (andRightTrue (noSlotMatch x xs)
+        (noDuplicateSlotsBit xs) ok))
+
+closedFiftyFourSlotsDistinctBit :
+  noDuplicateSlotsBit allNativeSlots ≡ true
+closedFiftyFourSlotsDistinctBit = refl
+
+-- This is a genuine propositional absence-of-duplicate-slot witness,
+-- conditional only on the exact-head Agda typechecker accepting the file.
+allFiftyFourSlotsPairwiseDistinct : NoDuplicateSlots allNativeSlots
+allFiftyFourSlotsPairwiseDistinct =
+  noDuplicateSlotsSound allNativeSlots closedFiftyFourSlotsDistinctBit
+
 record EdgeChartCoverageBoundary : Set where
   constructor edge-chart-coverage-boundary
   field
