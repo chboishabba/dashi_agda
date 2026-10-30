@@ -212,3 +212,149 @@ statutoryRoleDoesNotDetermineSantoroRequest =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness statutoryRoleNoGasLobbyRequest
       statutoryRoleWithSeparatelyPaidGasRequest refl distinctLobbySubject)
+
+------------------------------------------------------------------------
+-- ACTUAL ORIGINAL INFRASTRUCTURE AGREEMENT / 2018 COURT HISTORY
+------------------------------------------------------------------------
+
+springfieldStructurePlan2025 : Source.AttributedSource
+springfieldStructurePlan2025 = Source.mkNoDOISource
+  "Ipswich City Council"
+  "Springfield Structure Plan, Ipswich City Plan 2025, section 1.7 p 4 and section 4 p 1"
+  "Council-published Springfield Structure Plan original PDF"
+  "2025"
+  "https://hdp-au-prod-app-ipsw-shapeyouripswich-files.s3.ap-southeast-2.amazonaws.com/9417/5607/4591/Springfield_Structure_Plan.pdf"
+  Source.governmentSource
+  "Council original expressly records Springfield Infrastructure Agreement 1998 entered by Council, Springfield Land Corporation Pty Ltd, Springfield Land Corporation (No.2) Pty Ltd and Cherish Enterprises Pty Ltd; deals with roads, water, sewer, drainage, open space, community facilities, development phasing. Distinct Town Centre agreement 2015. Source is the 2025 plan statement, not signed 1998 agreement or project-specific gas contract."
+  Source.publicAttribution
+
+qca266OfficialCarrier : Source.AttributedSource
+qca266OfficialCarrier = Source.mkNoDOISource
+  "Supreme Court of Queensland, Court of Appeal: Fraser and Gotterson JJA and Burns J"
+  "Springfield Land Corporation Pty Limited v Cherish Enterprises Pty Ltd and Ipswich City Council [2018] QCA 266"
+  "Ipswich City Council 2018 reproduction of original judicial reasons; indexed original attachment, download 403"
+  "12 October 2018"
+  "https://www.ipswich.qld.gov.au/__data/assets/pdf_file/0018/103383/Growth-Infra-07112018_Part5.pdf"
+  (Source.namedSourceKind "court judgment")
+  "Court of Appeal file 8535 of 2017, P&E Appeal 2948 of 2016; declaration that area development plan approval was necessary before assessment/approval of Cherish's application made about 17 March 2016; recorded 1998 infrastructure agreement and its parties. Official PDF text was indexed, physical PDF face not accessed in this pass. Not a 2026 EPBC holding."
+  Source.publicAttribution
+
+record HistoricAgreement : Set where
+  constructor historic-agreement
+  field
+    source : Source.AttributedSource
+    namedCouncilAndCherishParties : Bool
+    originalAgreementSignedFaceAcquired : Bool
+    specific20198575AgreementApplied : Bool
+    gasIncludedInAgreementEstablished : Bool
+open HistoricAgreement public
+
+springfield1998OriginalAgreementLocator : HistoricAgreement
+springfield1998OriginalAgreementLocator = historic-agreement
+  springfieldStructurePlan2025
+  true false false false
+
+data HistoricalJudicialScope : Set where
+  cherish2016PlanningApplication : HistoricalJudicialScope
+  federal20198575Approval : HistoricalJudicialScope
+
+record OriginalJudgmentState : Set where
+  constructor original-judgment-state
+  field
+    source : Source.AttributedSource
+    determinedCase : HistoricalJudicialScope
+    judgmentDelivered : Bool
+    2026FederalBreachJudged : Bool
+open OriginalJudgmentState public
+
+qca266PriorJudgment : OriginalJudgmentState
+qca266PriorJudgment = original-judgment-state
+  qca266OfficialCarrier cherish2016PlanningApplication true false
+
+historicalCaseNotPresentEPBCAction :
+  cherish2016PlanningApplication ≡ federal20198575Approval → ⊥
+historicalCaseNotPresentEPBCAction ()
+
+-- Planning agreement duties concern particular premises and effective terms.
+-- A recorded 1998 agreement does not identify later per-lot burdens, and the
+-- Council's own 2021 consultation reports a clause 229 residential lot
+-- successor-release provision requiring exact contract/title reconciliation.
+data AgreementIncidenceWorld : Set where
+  agreementBurdenPreservedForParcel : AgreementIncidenceWorld
+  residentialLotReleasedFromBurden : AgreementIncidenceWorld
+
+data HistoricAgreementObserved : Set where
+  councilNames1998Agreement : HistoricAgreementObserved
+
+data ParcelObligationStatus : Set where
+  successorBurdenProved : ParcelObligationStatus
+  successorBurdenNotProved : ParcelObligationStatus
+
+agreementObserved : AgreementIncidenceWorld → HistoricAgreementObserved
+agreementObserved agreementBurdenPreservedForParcel = councilNames1998Agreement
+agreementObserved residentialLotReleasedFromBurden = councilNames1998Agreement
+
+parcelObligation : AgreementIncidenceWorld → ParcelObligationStatus
+parcelObligation agreementBurdenPreservedForParcel = successorBurdenProved
+parcelObligation residentialLotReleasedFromBurden = successorBurdenNotProved
+
+differentParcelObligation :
+  parcelObligation agreementBurdenPreservedForParcel ≡
+  parcelObligation residentialLotReleasedFromBurden → ⊥
+differentParcelObligation ()
+
+historicalSIAAloneDoesNotPaySuccessorBurden :
+  INF.FactorsThrough agreementObserved parcelObligation → ⊥
+historicalSIAAloneDoesNotPaySuccessorBurden =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness agreementBurdenPreservedForParcel
+      residentialLotReleasedFromBurden refl differentParcelObligation)
+
+data IndexedDocketFace : Set where
+  scgReferral29June2023 : IndexedDocketFace
+  scgResponse14March2024 : IndexedDocketFace
+  councilDecision21March2024 : IndexedDocketFace
+  cherishLandownerConsent29June2023 : IndexedDocketFace
+  stocklandSubmissionConsent29June2023 : IndexedDocketFace
+
+council6243DocumentSequence : List IndexedDocketFace
+council6243DocumentSequence =
+  scgReferral29June2023 ∷
+  cherishLandownerConsent29June2023 ∷
+  stocklandSubmissionConsent29June2023 ∷
+  scgResponse14March2024 ∷
+  councilDecision21March2024 ∷ []
+
+-- These are INDEXED original documents, not independently inspected faces.
+-- SCG's 275Z clock may restart after new 275Y(3) materials: do not assume
+-- late reply by subtracting March 2024 from the June 2023 application date.
+data TimingWorld : Set where
+  responseToLaterInformationRequest : TimingWorld
+  responseWithoutKnownTriggerReceipt : TimingWorld
+
+data SameIndexDates : Set where
+  JuneAndMarchIndexDates : SameIndexDates
+
+data TenBusinessDayCompliance : Set where
+  complianceUnassessed : TenBusinessDayCompliance
+  triggeredTimelinessDocumented : TenBusinessDayCompliance
+
+indexDates : TimingWorld → SameIndexDates
+indexDates responseToLaterInformationRequest = JuneAndMarchIndexDates
+indexDates responseWithoutKnownTriggerReceipt = JuneAndMarchIndexDates
+
+timingProof : TimingWorld → TenBusinessDayCompliance
+timingProof responseToLaterInformationRequest = triggeredTimelinessDocumented
+timingProof responseWithoutKnownTriggerReceipt = complianceUnassessed
+
+distinctTiming :
+  timingProof responseToLaterInformationRequest ≡
+  timingProof responseWithoutKnownTriggerReceipt → ⊥
+distinctTiming ()
+
+indexDatesDoNotProveLateStatement :
+  INF.FactorsThrough indexDates timingProof → ⊥
+indexDatesDoNotProveLateStatement =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness responseToLaterInformationRequest
+      responseWithoutKnownTriggerReceipt refl distinctTiming)
