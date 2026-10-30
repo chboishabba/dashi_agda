@@ -237,6 +237,14 @@ record FiniteSumAlgebra {A : Set} (ops : CoefficientOps A) : Set where
       (x : A) →
       CoefficientOps.multiply ops (CoefficientOps.zero ops) x
         ≡ CoefficientOps.zero ops
+    sumMulAssociative :
+      (x y z : A) →
+      CoefficientOps.multiply ops (CoefficientOps.multiply ops x y) z
+      ≡ CoefficientOps.multiply ops x (CoefficientOps.multiply ops y z)
+    sumMulCommutative :
+      (x y : A) →
+      CoefficientOps.multiply ops x y
+      ≡ CoefficientOps.multiply ops y x
     sumMulZeroRight :
       (x : A) →
       CoefficientOps.multiply ops x (CoefficientOps.zero ops)
@@ -473,3 +481,61 @@ source729ProductExpansion ops laws f g =
         (λ pair → CoefficientOps.multiply ops
           (f (proj₁ pair))
           (g (proj₂ pair)))))
+
+
+
+------------------------------------------------------------------------
+-- Exact phase-pair permutation, analogous to additive sumShuffle4.
+-- This is needed to regroup the six one-axis characters in C4^3/C5^3.
+------------------------------------------------------------------------
+
+productShuffle4 :
+  ∀ {A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (a b c d : A) →
+  CoefficientOps.multiply ops
+    (CoefficientOps.multiply ops a b)
+    (CoefficientOps.multiply ops c d)
+  ≡ CoefficientOps.multiply ops
+    (CoefficientOps.multiply ops a c)
+    (CoefficientOps.multiply ops b d)
+productShuffle4 ops laws a b c d =
+  let
+    infixl 7 _⊗_
+    _⊗_ = CoefficientOps.multiply ops
+    assoc = FiniteSumAlgebra.sumMulAssociative laws
+    comm = FiniteSumAlgebra.sumMulCommutative laws
+  in
+  trans
+    (assoc a b (c ⊗ d))
+    (trans
+      (cong (a ⊗_) (sym (assoc b c d)))
+      (trans
+        (cong (λ x → a ⊗ (x ⊗ d)) (comm b c))
+        (trans
+          (cong (a ⊗_) (assoc c b d))
+          (sym (assoc a c (b ⊗ d))))))
+
+productShuffleSix :
+  ∀ {A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (a b c d e f : A) →
+  CoefficientOps.multiply ops
+    (CoefficientOps.multiply ops
+      (CoefficientOps.multiply ops a b)
+      (CoefficientOps.multiply ops c d))
+    (CoefficientOps.multiply ops e f)
+  ≡ CoefficientOps.multiply ops
+    (CoefficientOps.multiply ops
+      (CoefficientOps.multiply ops a c) e)
+    (CoefficientOps.multiply ops
+      (CoefficientOps.multiply ops b d) f)
+productShuffleSix ops laws a b c d e f =
+  trans
+    (cong
+      (λ x → CoefficientOps.multiply ops x
+        (CoefficientOps.multiply ops e f))
+      (productShuffle4 ops laws a b c d))
+    (productShuffle4 ops laws
+      (CoefficientOps.multiply ops a c)
+      (CoefficientOps.multiply ops b d) e f)
