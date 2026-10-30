@@ -58,3 +58,8 @@ monitor surface.
 
 - Added a stronger exact Machin-rational regression to `scripts/check_pickover_exact_interval_certificate.py`: the entire (99^k\bmod 9999) chart is identical (=297) for (k=120,720), yet actual `sin(99^k)` signs are rigorously opposite. Prior mod-101 witness and exact sign source owners reused.
 - Crosswalked PR #1438 graph C3 orbit-sum and `Physics.WaveAlgorithmLift`: compatible, symmetrized graph structure is not a real signed circle-phase certificate. The terminal `k=9999!` sign remains open; existing naive pi-interval width obstruction remains method-specific. No ESD modification, no CI, Golden kernel pending.
+
+## 2026-10-30 — Analytical j-invariant Bishop trigonometric phase to actual Pickover consumer
+
+- Added `PickoverAnalyticJHistoricalPhaseConsumerExact.agda`, reusing original `JInvariantBishopTrigUnitPhaseExact`, `JInvariantBishopQFromUnitPhaseExact`, analytical j-fibre and non-descent owners rather than a new abstract phase ontology.
+- Source-written exact equality `Im(bishopTrigPhase dataSet theta)=bishopSin dataSet theta`, consumer recovery from a retained three-time analytic phase and a separately required true-angle terminal producer certificate. No false identification of modular q/j finite values or their phase with the actual terminal sine. All three golden TOE roots import new owner; kernel pending, no ESD edit or CI.
