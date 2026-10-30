@@ -97,15 +97,33 @@ and \`Docs/topology/AlexanderHornedABCSixPermutationOrbit20261030.md\`.
 - [ ] Run exact-head golden Agda module kernel typecheck with pinned
   stdlib and (where appropriate) strict safe/trust-escape audit.
   **No kernel success is currently claimed; CI intentionally omitted.**
-- [ ] G2: cap-collar-disjoint actual PL homeomorphism and inverse.
+- [x] New G2/G4 obstruction: compute the source-owned exact threefold
+  Nielsen conjugator norm `phi²(q)phi(q)q=w^-1` and the selected
+  based normalizer's third iterate `Inn(w)≠id` on free generators.
+  Apply classical free-group cyclic centralizers to show every
+  other same-peripheral conjugator `q w^k` has residual exponent
+  `3k-1`, never zero. See
+  `Docs/topology/AlexanderHornedPeriodicCapCocycleMaxCut20261030.md`.
+- [x] Separate Newman (1931) periodicity barrier: a nontrivial
+  finite-order handlebody automorphism cannot fix a nonempty
+  OPEN disk in its connected boundary pointwise; a cap preserved
+  merely setwise is different. This is a classical paper
+  argument, not an Agda geometry kernel receipt.
+- [ ] G2: cap-collar-disjoint actual **non-periodic** supported
+  PL Nielsen slide homeomorphism and inverse; do NOT demand
+  nontrivial finite order plus pointwise-open-cap fixing.
 - [ ] G3: embedded once-punctured torus in actual child complement.
 - [x] Check the six source-owned genus-one commutator presentations,
   all 36 algebraic S3 transport cases, and the 36-case equivalence
   between middle-child label p(b) and unoriented parent class.
   These are finite source-written Agda, not 3D G3/G4 completion.
-- [ ] G4: choose and prove either one fixed parent class with its
-  stabilizer and actual conjugating paths, OR a geometrically
-  implemented S3-indexed six-boundary family with based naturality.
+- [ ] G4: prove actual based inclusion of either
+  (a) one selected parent class and its stabilizer,
+  (b) a geometrically implemented S3-indexed six-boundary
+  family, or (c) weak/groupoid relative transport with the
+  **nontrivial central boundary twist**.  Strict order-three
+  based normalization of the selected nonlinear phi is ruled out;
+  changing q by w^k does not repair it.
 - [ ] G5–G6: coherent wild satellite limit, collars, and actual
   exterior \`pi1\` via existing conditional van Kampen/colimit.
 - [ ] Only after golden Agda acceptance, add a faithful downstream
