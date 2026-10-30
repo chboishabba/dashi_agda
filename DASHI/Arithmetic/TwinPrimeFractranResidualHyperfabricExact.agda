@@ -30,6 +30,11 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin; toℕ)
+open import Data.Nat.DivMod using (_%_)
+import DASHI.Analysis.WeilTestSpace as Weil
+import DASHI.Analysis.RiemannVonMangoldtSpecification as VM
+import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as Correlation
+import DASHI.Arithmetic.TwinPrimeMangoldtActualPrimePowerResidualExact as Mangoldt
 open import Data.Product using (_×_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
@@ -232,3 +237,105 @@ certifiedFractranTwinOutput F encodeNat sound n
 -- A finite SSP phase or a bare five-prime EV5 projection can be
 -- treated as the above machine ONLY after somebody constructs the
 -- required sound instance. No such instance is fabricated here.
+
+------------------------------------------------------------------------
+-- CONCRETE ACTUAL FRACTRAN DENOMINATOR GUARDS.
+--
+-- A rule with denominator 7 can fire on 329 because 7 | 329,
+-- but not on 59. The same holds for denominator 47. This is
+-- direct integer divisibility (the arithmetic FRACTRAN guard),
+-- not an inference from Ogg labels or from a prime-output sequence.
+--
+-- FIRST-APPLICABLE priority, 14-fraction PRIMEGAME runtime and
+-- machine registration are separate verified-program obligations.
+------------------------------------------------------------------------
+
+sevenDenominatorEnabledOn329 : 329 % 7 ≡ 0
+sevenDenominatorEnabledOn329 = refl
+
+sevenDenominatorRemainderOn59 : 59 % 7 ≡ 3
+sevenDenominatorRemainderOn59 = refl
+
+fortySevenDenominatorEnabledOn329 : 329 % 47 ≡ 0
+fortySevenDenominatorEnabledOn329 = refl
+
+fortySevenDenominatorRemainderOn59 : 59 % 47 ≡ 12
+fortySevenDenominatorRemainderOn59 = refl
+
+sevenDenominatorCannotFireOn59 : 59 % 7 ≡ 0 → ⊥
+sevenDenominatorCannotFireOn59 ()
+
+fortySevenDenominatorCannotFireOn59 : 59 % 47 ≡ 0 → ⊥
+fortySevenDenominatorCannotFireOn59 ()
+
+------------------------------------------------------------------------
+-- Direct PICKOVER source theorem specialization. Not only generic
+-- analogy: inhabit its existing SignedPhaseFibre using the
+-- proof-bearing actual prime consumer and exact period residual.
+------------------------------------------------------------------------
+
+pickoverPatternForActualTwinConsumer :
+  Pickover.SignedPhaseFibre Nat (Fin 270) Nat Bool
+    (Fibre.coarse arithmeticCoarseFineFibre)
+    (Fibre.relativeFine arithmeticCoarseFineFibre)
+    Twin.twinStartBool
+pickoverPatternForActualTwinConsumer = record
+  { signedRepair = actualTwinResidualRepair }
+
+pickoverNecessityOfTwinPeriod :
+  Fibre.relativeFine arithmeticCoarseFineFibre 59
+    ≡ Fibre.relativeFine arithmeticCoarseFineFibre 329 →
+  ⊥
+pickoverNecessityOfTwinPeriod =
+  Pickover.residualNeededForSignedCollision
+    actualTwinCoarseCollision
+    pickoverPatternForActualTwinConsumer
+
+-- The concrete original Weil/Mangoldt producer can be transported
+-- through this SAME exact arithmetic fibre. This is a genuine
+-- pointwise consumer theorem, not a symbol-label comparison.
+actualMangoldtPairConsumer :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic) →
+  Nat → Weil.WeilTestSpace.Scalar space
+actualMangoldtPairConsumer space arithmetic mangoldt =
+  Correlation.pairCorrelationAtNat
+    (Mangoldt.actualMangoldtPair space arithmetic mangoldt)
+
+actualMangoldtConsumerResidualRepair :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic) →
+  Repair.ResidualRepair
+    (Fibre.coarse arithmeticCoarseFineFibre)
+    (Fibre.relativeFine arithmeticCoarseFineFibre)
+    (actualMangoldtPairConsumer space arithmetic mangoldt)
+actualMangoldtConsumerResidualRepair space arithmetic mangoldt =
+  record
+    { jointSufficient =
+        Repair.separatingObserverIsSufficientForEveryConsumer
+          (Fibre.coarseFineObserverSeparating arithmeticCoarseFineFibre)
+          (actualMangoldtPairConsumer space arithmetic mangoldt)
+    }
+
+actualMangoldtConsumerReopens :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (n : Nat) →
+  actualMangoldtPairConsumer space arithmetic mangoldt
+    (Fibre.reopen arithmeticCoarseFineFibre
+      (Fibre.coarse arithmeticCoarseFineFibre n)
+      (Fibre.relativeFine arithmeticCoarseFineFibre n))
+    ≡
+  actualMangoldtPairConsumer space arithmetic mangoldt n
+actualMangoldtConsumerReopens space arithmetic mangoldt n =
+  cong (actualMangoldtPairConsumer space arithmetic mangoldt)
+    (fullArithmeticReopening n)
+
+-- Opening a finite wheel cell plus keeping the period reconstructs
+-- every pointwise Mangoldt weight, but it does NOT deliver a uniform
+-- positive estimate of a sum over unbounded scales. In particular
+-- it does not prove cofinalObservedSeparationImpliesTwinInfinitude's
+-- premise. No numeric/SSP/Monster identity promotion.
