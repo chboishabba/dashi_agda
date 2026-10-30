@@ -1,0 +1,36 @@
+{
+  "all_images_constant": true,
+  "drive_file_id": "1MhhavOO3NUroXiiwgVcX8wJS_4mJgz9T",
+  "incident_photon_throughput_calibration_paid": false,
+  "matched_incident_photon_budget_paid": false,
+  "notebook_blob": "f8707b84dc696fc9218f6493467f0cda45193d3f",
+  "notebook_reported_fits": {
+    "diffusercam": {
+      "intercept_rounded": 0.36,
+      "slope_rounded": 0.03
+    },
+    "ground_truth": {
+      "intercept_rounded": 0.01,
+      "slope_rounded": 0.05
+    },
+    "rml": {
+      "intercept_rounded": 1.46,
+      "slope_rounded": 0.02
+    }
+  },
+  "physical_detected_photon_conversion_source_paid": true,
+  "receipt_kind": "public_photon_transfer_stimulus_and_notebook_conversion_validation",
+  "stimulus_dtype": "uint8",
+  "stimulus_images": 256,
+  "stimulus_levels_max": 255,
+  "stimulus_levels_min": 0,
+  "stimulus_levels_unique": 256,
+  "stimulus_shape": [
+    500,
+    500
+  ],
+  "zip_bytes": 278877,
+  "zip_sha256": "51b5c10d4fa5a3797185ba48bf88f2d7573725a13c378b7e0025d61a93979765",
+  "conversion_law": "photons = (image - intercept) / slope; clip at >=0",
+  "note": "Local execution verified exactly 256 constant 500x500 uint8 stimulus PNGs at levels 0..255. Notebook stdout coefficients are rounded to two decimals. The 5.23 GB three-camera response sweep was not locally re-executed."
+}

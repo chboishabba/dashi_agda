@@ -1,0 +1,37 @@
+{
+  "calibration": {
+    "coefficients_are_source_display_rounded": true,
+    "diffuser": {
+      "intercept": 0.36,
+      "slope": 0.03
+    },
+    "formula": "clip((digital - intercept) / slope, 0, infinity)",
+    "rml": {
+      "intercept": 1.46,
+      "slope": 0.02
+    }
+  },
+  "characterization_exposure_metadata_recovered": false,
+  "detected_photon_estimate_paid": true,
+  "diffuser_archive": {
+    "drive_id": "1-0rpd6gHgjdFshVMl6Gw1M0NqAliechM",
+    "sha256": "d9466f0ebc3d8f2633adefc9c4dec909dff4b3388fc2006726621f40f63b4a57"
+  },
+  "exposure_normalized_response_paid": false,
+  "incident_throughput_paid": false,
+  "matched_incident_photon_budget_paid": false,
+  "matched_positions": 15,
+  "ratio_summary": {
+    "max": 0.1317059368412121,
+    "mean": 0.06388591944326388,
+    "median": 0.058673780183631376,
+    "min": 0.02211386329642063
+  },
+  "real_measured_tiffs_used": true,
+  "receipt_kind": "real_system_characterization_detected_photon_estimate",
+  "rml_archive": {
+    "drive_id": "1mHJp99Twe0nSL3_HbNXjXjmV9zDy3YvI",
+    "sha256": "0f7f1f92c57476dba5e5033ebcbc5392084c93dfd3b0c7edf4e125dad10ee155"
+  },
+  "source_drive_folder": "1nr1pUrg80JQm8WyLa6wvFktmJ_pniOio"
+}
