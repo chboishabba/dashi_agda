@@ -224,7 +224,7 @@ def verify_rational_solver_source_integrity():
     assert "PolynomialC3S3OrbitSamplingProjectionExact as Sampling" in native_fields
     for name in rational_sample_names:
         assert len(re.findall(r"^"+name+r" :",native_fields,re.M))==1,name
-        assert re.search(r"^"+name+r" [^\n]* =",native_fields,re.M),name
+        assert re.search(r"^"+name+r"(?: [^\n]*)? =",native_fields,re.M),name
     for root in (
         "DASHI/EverythingTOESymmetryResolved369.agda",
         "DASHI/Unifier.agda", "DASHI/Unified/Everything.agda"
