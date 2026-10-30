@@ -164,3 +164,10 @@ monitor surface.
   C3 outgoing/incoming row transport.
 - Added and imported the downstream Lean mirror and wired the
   golden TOE and Ibrahim/Pareto roots; kernel validation pending.
+
+## 2026-10-30 — graph-wave consumer-loss max-cut for twin-prime and Pickover transfer
+
+- Added `DASHI/Reasoning/TrialecticGraphWaveConsumerLossCutExact.agda`: two actual directed 3-vertex graphs have identical C3-symmetrised 3×3 weighted adjacency matrices but different selected directed-weight and original `WaveAlgorithmLift` signed-trit consumers. Instantiates existing consumer-indexed collision and proves a generic no-postprocessing theorem for any deterministic wave/spectrum of the averaged matrix.
+- Original graph's full matrix BIDI recovers the selected edge; both fine directed hyperfabric global sections remain compatible. Thus neither orbit averaging nor compatible sheaf-like gluing automatically preserves a terminal signed consumer.
+- Related exact first-principles obligations to PR #1408 (actual prime correlation and cofinal analytic separation) and PR #1260 (true `π` phase enclosure at factorial index) in the graph documentation. No analytic twin or sine-sign theorem promoted, no independent Ibrahim/Pareto/Snowball/QID ownership changed.
+- Four canonical graph/TOE import roots updated; independent integer 3×3 audit passed; checker committed. Source-written Agda, kernel pending, no ESD edit or CI.
