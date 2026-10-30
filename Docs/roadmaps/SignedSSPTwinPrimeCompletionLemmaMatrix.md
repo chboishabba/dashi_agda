@@ -1614,6 +1614,7 @@ discovery to unspecified third parties.
 | CT07 | `FinitePrimeErrorSplitKernel`: original `Λ(n)Λ(n+2)` finite sum = sum of exponent-one pairs + retained all-other support terms, with all 9 cases and correct algebra | `TwinPrimeMangoldtPrimeErrorFiniteSplitExact`; source-written |
 | CT08 | `PrimeOneActualNatPrimeBidiKernel`: two first-exponent carrier certificates ↔ two actual NatPrimality.Prime proofs at gap two | `TwinPrimeMangoldtPrimeOneCertifiedBidiExact`; source-written conditional on CT02 |
 | CT09 | `FiniteNonzeroExtractsTwinKernel`: nonzero *prime-only* finite sum → `Σ p, TwinPrimeAt p` in the source interval, no new axiom | `TwinPrimeMangoldtNonzeroPrimeSumWitnessExact`; source-written conditional on CT02/CT05 |
+| CT09b | `TwinInIntervalUpperBound`: upgrade the current lower-only readout to `Σ p, (start ≤ p) × (p < start+count) × TwinPrimeAt p`; the existing `twinInIntervalReadout` does NOT return the upper bound | Missing explicit proof; elementary induction on `here` / `there` and Nat arithmetic |
 
 ### B. Classical elementary M15 lemmas WE CAN PROVE, not a research-paper dependency
 
