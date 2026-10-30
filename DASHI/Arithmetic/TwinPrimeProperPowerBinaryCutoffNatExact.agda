@@ -17,7 +17,8 @@ module DASHI.Arithmetic.TwinPrimeProperPowerBinaryCutoffNatExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; _^_; z≤n; s≤s)
+import Data.Nat.Logarithm as Log
 open import Data.Empty using (⊥; ⊥-elim)
 import Data.Nat.Properties as NP
 open import Relation.Binary.PropositionalEquality using
@@ -125,5 +126,49 @@ properPowerExponentBelowCutoff basePredecessor k upper bound =
   NP.≤-trans
     (NP.n≤1+n (suc k))
     (binaryPowerExponentBelowCutoff upper (suc (suc k))
+      (Binary.properPowerNeedsCoreBinaryCapacity
+        basePredecessor k upper bound))
+
+------------------------------------------------------------------------
+-- CT11 PARETO REUSE: THE EXISTING STANDARD-LIBRARY FLOOR LOG₂ IS A
+-- PROVED UNIVERSAL EXPONENT CUTOFF, NOT A NEW REAL LOG AUTHORITY.
+--
+-- Original stdlib owners: Data.Nat.Logarithm.⌊log₂⌋-mono-≤,
+-- ⌊log₂[2^n]⌋≡n. The same library is already imported by DASHI's
+-- NSTriadKNCeilLogShellBounds / LiteralDyadicShellConstants.
+-- Retain the previous executable floorBinaryExponent for clients;
+-- use this canonical stdlib mathematical bound where convenient.
+------------------------------------------------------------------------
+
+stdlibPowTwoEqualsCore :
+  (e : Nat) → 2 ^ e ≡ Core.pow2 e
+stdlibPowTwoEqualsCore zero = refl
+stdlibPowTwoEqualsCore (suc e) =
+  cong (2 *_) (stdlibPowTwoEqualsCore e)
+
+canonicalStdlibFloorLog₂ : Nat → Nat
+canonicalStdlibFloorLog₂ upper = Log.⌊log₂ upper ⌋
+
+binaryPowerExponentBelowStdlibLog :
+  (upper exponent : Nat) →
+  Core.pow2 exponent ≤ upper →
+  exponent ≤ canonicalStdlibFloorLog₂ upper
+binaryPowerExponentBelowStdlibLog upper exponent fits =
+  subst
+    (λ idx → idx ≤ canonicalStdlibFloorLog₂ upper)
+    (Log.⌊log₂[2^n]⌋≡n exponent)
+    (Log.⌊log₂⌋-mono-≤
+      (subst (λ value → value ≤ upper)
+        (sym (stdlibPowTwoEqualsCore exponent)) fits))
+
+properPowerExponentBelowStdlibLog :
+  (basePredecessor k upper : Nat) →
+  Power.natPow (suc (suc basePredecessor)) (suc (suc k))
+    ≤ upper →
+  suc k ≤ canonicalStdlibFloorLog₂ upper
+properPowerExponentBelowStdlibLog basePredecessor k upper bound =
+  NP.≤-trans
+    (NP.n≤1+n (suc k))
+    (binaryPowerExponentBelowStdlibLog upper (suc (suc k))
       (Binary.properPowerNeedsCoreBinaryCapacity
         basePredecessor k upper bound))
