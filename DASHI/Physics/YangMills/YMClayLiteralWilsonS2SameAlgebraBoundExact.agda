@@ -5,7 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; map)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -123,8 +123,8 @@ record RationalSU2TraceGramBoundSource
       Literal.PointwiseUnitBounded observable →
       Gram.BoundedObservable dataSet (physicalWilsonObservable observable)
 
-    one groupRank : ℚ
-    multiplyScalar : ℚ → ℚ → ℚ
+    -- Scalar one, SU(2) defining dimension two and scalar multiplication
+    -- are supplied canonically in the consumer. No arbitrary scalar witness.
 
     -- The target's generic Gram algebra needs full bounded-product closure,
     -- not just the existing rational-image multiplication theorem.
@@ -148,12 +148,9 @@ rationalSU2TraceToSameAlgebraWilsonBounds :
 rationalSU2TraceToSameAlgebraWilsonBounds {dataSet = dataSet} source = record
   { SameAlgebraWilsonBoundInputs.loopObservable =
       RationalSU2TraceGramBoundSource.literalWilsonLoopObservable source
-  ; SameAlgebraWilsonBoundInputs.one =
-      RationalSU2TraceGramBoundSource.one source
-  ; SameAlgebraWilsonBoundInputs.groupRank =
-      RationalSU2TraceGramBoundSource.groupRank source
-  ; SameAlgebraWilsonBoundInputs.multiplyScalar =
-      RationalSU2TraceGramBoundSource.multiplyScalar source
+  ; SameAlgebraWilsonBoundInputs.one = 1ℚ
+  ; SameAlgebraWilsonBoundInputs.groupRank = 1ℚ + 1ℚ
+  ; SameAlgebraWilsonBoundInputs.multiplyScalar = _*_
   ; SameAlgebraWilsonBoundInputs.literalLoopBounded =
       λ path →
         subst (Gram.BoundedObservable dataSet)
