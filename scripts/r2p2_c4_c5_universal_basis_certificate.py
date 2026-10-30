@@ -90,7 +90,48 @@ def check_actual_q4_tensor():
             assert forward[k] == val
 
 
+
+def check_original_sample_order_character_resolution():
+    """Actual Nyquist.allFour/FiveGridCubes order, not a factored proxy.
+
+    4^3 and 5^3 complete finite point lists are reconstructed from the
+    original Agda allFourAxes = (-1,0,+1,+2) and
+    allFiveAxes = (-2,-1,0,+1,+2). Exact roots and sums, no floating point.
+    """
+    orders = [(4, (3,0,1,2), 2), (5, (3,4,0,1,2), 4)]
+    for modulus, source_axis, dimension in orders:
+        samples = tuple(product(source_axis, repeat=3))
+        group = tuple(product(range(modulus), repeat=3))
+        assert len(samples) == modulus**3
+        phase = fourth_root_power if modulus == 4 else phase5
+        def kernel(delta):
+            return tuple(sum(
+                phase(sum(a*b for a,b in zip(delta,x)))[j]
+                for x in samples) for j in range(dimension))
+        cache = {d : kernel(d) for d in group}
+        zero = (0,) * dimension
+        one = (1,) + (0,) * (dimension-1)
+        for k in group:
+            for t in group:
+                diff = tuple((a-b) % modulus for a,b in zip(k,t))
+                expected = tuple(v*modulus**3 for v in one) if k==t else zero
+                assert cache[diff] == expected
+        targets = K if modulus == 4 else W
+        count = 0
+        for p in K:
+            for q in K:
+                signed = tuple(a+b for a,b in zip(p,q))
+                summed = tuple(v % modulus for v in signed)
+                for k in targets:
+                    diff = tuple((a-b) % modulus for a,b in zip(summed,k))
+                    expected = tuple(v*modulus**3 for v in one) if signed==k else zero
+                    assert cache[diff] == expected
+                    count += 1
+        assert count == 27*27*len(targets)
+        print(f'PASS: actual C{modulus} source-ordered {len(group)**2} character comparisons, {count} pair/output resolutions')
+
 def certificate():
+    check_original_sample_order_character_resolution()
     check_actual_q4_tensor()
     # All one-dimensional C4 and C5 root sums, not sampled profiles.
     assert [sum4(d) for d in range(4)] == [(4, 0), (0, 0), (0, 0), (0, 0)]
