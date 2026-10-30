@@ -23,8 +23,11 @@ module DASHI.Foundations.PolynomialVandermondeDiscriminantExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
+import Data.Rational.Properties as ℚProperties
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Foundations.PolynomialVietaRootSymmetryExact as Vieta
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as S3
@@ -168,3 +171,70 @@ zeroDiscriminantImpliesCollision laws a b c discZero
 -- The converse is now a short genuine constructive proof with two
 -- explicitly named missing field-property instances. It is not a
 -- claimed topological discriminant-complement construction.
+
+------------------------------------------------------------------------
+-- ORIGINAL M1 DISCRIMINANT-Locus: discharge the two outstanding
+-- rational-domain witness fields using the ACTUAL Agda stdlib v2.4.
+--
+-- Native owners: Data.Rational.Properties.p*q≡0⇒p≡0∨q≡0,
+-- +-assoc, +-inverseˡ, +-identityˡ, +-identityʳ.
+-- Reuse the existing conditional discriminant proof rather than
+-- writing another collision classifier / importing new axioms.
+-- Source-written, Agda kernel pending, no complex covering inferred.
+------------------------------------------------------------------------
+
+zeroDifferenceRational :
+  (x y : ℚ) → x - y ≡ 0ℚ → x ≡ y
+zeroDifferenceRational x y eq =
+  trans
+    (sym
+      (trans (ℚProperties.+-assoc x (- y) y)
+        (trans (cong (x +_) (ℚProperties.+-inverseˡ y))
+          (ℚProperties.+-identityʳ x))))
+    (trans (cong (_+ y) eq)
+      (ℚProperties.+-identityˡ y))
+
+rationalDomainLawWitness : RationalDomainLawWitness
+rationalDomainLawWitness = record
+  { zeroProduct = λ x y xyZero →
+      ℚProperties.p*q≡0⇒p≡0∨q≡0 xyZero
+  ; zeroDifference = zeroDifferenceRational
+  }
+
+zeroDiscriminantImpliesCollisionRational :
+  (a b c : ℚ) →
+  discriminant (Vieta.roots a b c) ≡ 0ℚ →
+  (a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c))
+zeroDiscriminantImpliesCollisionRational =
+  zeroDiscriminantImpliesCollision rationalDomainLawWitness
+
+-- The reverse direction closes the RATIONAL coefficient discriminant
+-- locus: a collision makes Δ zero, with no unproved field assumptions.
+collisionImpliesZeroDiscriminantRational :
+  (a b c : ℚ) →
+  (a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c)) →
+  discriminant (Vieta.roots a b c) ≡ 0ℚ
+collisionImpliesZeroDiscriminantRational a b c (inj₁ ab) =
+  trans
+    (cong (λ y → discriminant (Vieta.roots a y c)) (sym ab))
+    (firstSecondCollisionGivesZero a c)
+collisionImpliesZeroDiscriminantRational a b c (inj₂ (inj₁ ac)) =
+  trans
+    (cong (λ z → discriminant (Vieta.roots a b z)) (sym ac))
+    (firstThirdCollisionGivesZero a b)
+collisionImpliesZeroDiscriminantRational a b c (inj₂ (inj₂ bc)) =
+  trans
+    (cong (λ z → discriminant (Vieta.roots a b z)) (sym bc))
+    (secondThirdCollisionGivesZero a b)
+
+-- Exact bidirectional algebraic characterization, not a claim about
+-- complex-analytic branch covering or an arbitrary quintic Galois group.
+zeroDiscriminantIffRootCollisionRational :
+  (a b c : ℚ) →
+  ((discriminant (Vieta.roots a b c) ≡ 0ℚ) →
+    (a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c))) ×
+  (((a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c))) →
+    discriminant (Vieta.roots a b c) ≡ 0ℚ)
+zeroDiscriminantIffRootCollisionRational a b c =
+  zeroDiscriminantImpliesCollisionRational a b c ,
+  collisionImpliesZeroDiscriminantRational a b c
