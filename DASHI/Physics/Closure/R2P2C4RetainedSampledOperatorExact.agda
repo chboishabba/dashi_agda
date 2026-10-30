@@ -19,7 +19,7 @@ module DASHI.Physics.Closure.R2P2C4RetainedSampledOperatorExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Product using (_,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 open import Data.Rational.Base using (ℚ; _*_; normalize)
@@ -602,3 +602,80 @@ gaussianTripleNormalizedPhaseScale a b c d e f =
     (trans
       (cong (λ v → FFT.scaleG norm64 v) rearrange)
       factorScale)
+
+
+------------------------------------------------------------------------
+-- DISCHARGED THREE-AXIS ORIGINAL SOURCE-ORDER CHARACTER RESOLUTION.
+-- This is the exact 64-term Fourier delta, NOT the distinct actual
+-- sampled-FFT array-identification payment.  Uses 16 original
+-- one-axis cases, generic Fubini and Boolean triple selector.
+------------------------------------------------------------------------
+
+gaussianAxisNormalizedPhase :
+  Four.FourGridMode → Four.FourGridMode →
+  Four.FourGridMode → G.Gaussian4
+gaussianAxisNormalizedPhase k l x =
+  FFT.scaleG FFT.quarter
+    (G._*G_ (G.character4 k x) (G.conjG (G.character4 l x)))
+
+gaussianCubeNormalizedPhaseSplit :
+  (k l x : Four.FourGridCube64) →
+  FFT.scaleG norm64
+    (G._*G_ (gaussianCubeCharacter k x)
+      (G.conjG (gaussianCubeCharacter l x)))
+  ≡ G._*G_
+      (G._*G_
+        (gaussianAxisNormalizedPhase
+          (fourAxisX k) (fourAxisX l) (fourAxisX x))
+        (gaussianAxisNormalizedPhase
+          (fourAxisY k) (fourAxisY l) (fourAxisY x)))
+      (gaussianAxisNormalizedPhase
+        (fourAxisZ k) (fourAxisZ l) (fourAxisZ x))
+  where
+  fourAxisX : Four.FourGridCube64 → Four.FourGridMode
+  fourAxisX (Four.fourCube a b c) = a
+  fourAxisY : Four.FourGridCube64 → Four.FourGridMode
+  fourAxisY (Four.fourCube a b c) = b
+  fourAxisZ : Four.FourGridCube64 → Four.FourGridMode
+  fourAxisZ (Four.fourCube a b c) = c
+gaussianCubeNormalizedPhaseSplit
+  (Four.fourCube a b c)
+  (Four.fourCube d e f)
+  (Four.fourCube x y z) =
+  gaussianTripleNormalizedPhaseScale
+    (G.character4 a x) (G.character4 b y) (G.character4 c z)
+    (G.character4 d x) (G.character4 e y) (G.character4 f z)
+
+gaussianActualCubeCharacterResolution :
+  (k l : Four.FourGridCube64) →
+  Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourGridCubes
+    (λ x → FFT.scaleG norm64
+      (G._*G_ (gaussianCubeCharacter k x)
+        (G.conjG (gaussianCubeCharacter l x))))
+  ≡ Bilinear.choose G.zeroG (Four.eqFourCube k l) G.oneG
+gaussianActualCubeCharacterResolution
+  (Four.fourCube a b c) (Four.fourCube d e f) =
+  trans
+    (gaussianActualNyquistSeparableProduct
+      (gaussianAxisNormalizedPhase a d)
+      (gaussianAxisNormalizedPhase b e)
+      (gaussianAxisNormalizedPhase c f)
+      (λ cube → FFT.scaleG norm64
+        (G._*G_
+          (gaussianCubeCharacter (Four.fourCube a b c) cube)
+          (G.conjG
+            (gaussianCubeCharacter (Four.fourCube d e f) cube))))
+      (gaussianCubeNormalizedPhaseSplit
+        (Four.fourCube a b c) (Four.fourCube d e f)))
+    (trans
+      (cong₂ G._*G_
+        (cong₂ G._*G_
+          (gaussianOriginalAxisCharacterResolution a d)
+          (gaussianOriginalAxisCharacterResolution b e))
+        (gaussianOriginalAxisCharacterResolution c f))
+      (Bilinear.sourceChooseProductTriple
+        gaussianCoefficientOps gaussianFiniteSumAlgebra
+        G.oneG (G.scalarMulOneRight G.oneG)
+        (Four.eqFour a d)
+        (Four.eqFour b e)
+        (Four.eqFour c f)))
