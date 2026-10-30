@@ -1032,3 +1032,21 @@ explicitly isolates this analytic problem from the horned threefold
 geometric proof and from any eventual physical nonabelian-gauge emulator.
 Classical source owners Machin/Euler/Lindemann and existing DASHI
 constructive-pi/complex-power modules retain separate attribution.
+
+## 30 October 2026 — Matrix/graph C3 hyperfabric crosscut, ACTUAL real-phase collision
+
+Source-first comparison with the new graph/matrix PR #1438 (`TrialecticWeightedDirectedGraph369Exact`, `TrialecticC3WeightedOrbitSymmetrizationExact`, `TrialecticGraphWaveConsumerLossCutExact`), plus existing `Physics.WaveAlgorithmLift` and `Reasoning.TypedHyperfabricCore`: cyclic orbit averaging may create a compatible C3-symmetric graph and retain a global section while irreversibly erasing a selected signed original consumer. Its concrete source theorem uses two different directed-edge weights with the same averaged 3×3 graph.
+
+For the ORIGINAL Pickover phase—not a synthetic wave—the exact Machin interval checker now asserts a stronger finite diagnostic: for (k_1=5!=120) and (k_2=6!=720),
+
+```
+99^120 % 9999 = 99^720 % 9999 = 297,
+sign(sin(99^120)) = -1,
+sign(sin(99^720)) = +1.
+```
+
+Both sign claims are certified by rational Machin upper/lower bounds and equality of the exact floors of (99^k/π), without floating-point signs; the independent finite replay passed. The prior script already certified these opposite signs and common mod-101 residue. Here the new stronger test asserts collision of the COMPLETE mod-9999 chart (including 9 and 11 factors), not a new solution of the terminal 9999! sign. No arbitrary graph/spectrum/Fourier/wave post-processing of that chart can determine the original sign on every integer factorial-indexed input.
+
+The `PickoverConsumerResidualFibreBridgeExact` retained signed residual must therefore be a genuine real-phase / digit / sufficiently precise enclosure that distinguishes the two. Full unwrapped circle phase, exact Machin bounds, indexed wave towers and C3 matrix representations are useful *interfaces*. The outstanding obligation is a source-specific effective certificate for (k=9999!) proving the actual sign; `check_pickover_factorial_pi_interval_width_budget.py` already proves the immense lower bound for a P-digit **naive interval** method, not a universal impossibility of a clever representation. Matrix-power operation count (O(\log 99^{9999!})) does not bound operand precision or total runtime. Keep 9999! and 99^(9999!) distinct.
+
+Do not duplicate PR #1438 graph owner inside this branch until the import is available. Keep attribution to classical directed graphs and cyclic averaging; original graph authors, Machin (1706), prior Pickover source owner, Blackwell/Cousot method, and Ibrahim Monster 3B owners. No graph/S3/C3/wave symmetry, QID identity, or finite ring is a proof of this real sine sign. Agda kernel pending; no ESD edits.
