@@ -172,3 +172,52 @@ properPowerExponentBelowStdlibLog basePredecessor k upper bound =
     (binaryPowerExponentBelowStdlibLog upper (suc (suc k))
       (Binary.properPowerNeedsCoreBinaryCapacity
         basePredecessor k upper bound))
+
+------------------------------------------------------------------------
+-- The original bounded-search implementation and the library's
+-- floor-log₂ are EXTENSIONALLY IDENTICAL at every Nat bound.
+-- In particular upper=0 is handled separately: both yield zero.
+-- A numeric equality, not an assertion about residual fibre objects
+-- or a real-valued analytic logarithm.
+------------------------------------------------------------------------
+
+binaryCutoffUpToFits :
+  (upper bound : Nat) →
+  suc zero ≤ upper →
+  Core.pow2 (floorBinaryExponentUpTo upper bound) ≤ upper
+binaryCutoffUpToFits upper zero positive = positive
+binaryCutoffUpToFits upper (suc bound) positive
+  with Core.pow2 (suc bound) NP.≤? upper
+... | yes fits = fits
+... | no tooLarge = binaryCutoffUpToFits upper bound positive
+
+customFloorLogLeStdlib :
+  (upper : Nat) →
+  floorBinaryExponent upper ≤ canonicalStdlibFloorLog₂ upper
+customFloorLogLeStdlib zero = z≤n
+customFloorLogLeStdlib (suc upper) =
+  binaryPowerExponentBelowStdlibLog
+    (suc upper)
+    (floorBinaryExponent (suc upper))
+    (binaryCutoffUpToFits (suc upper) (suc upper) (s≤s z≤n))
+
+stdlibFloorLogLeCustom :
+  (upper : Nat) →
+  canonicalStdlibFloorLog₂ upper ≤ floorBinaryExponent upper
+stdlibFloorLogLeCustom zero = z≤n
+stdlibFloorLogLeCustom (suc upper) =
+  binaryPowerExponentBelowCutoff (suc upper)
+    (canonicalStdlibFloorLog₂ (suc upper))
+    (subst
+      (λ power → power ≤ suc upper)
+      (stdlibPowTwoEqualsCore
+        (canonicalStdlibFloorLog₂ (suc upper)))
+      (Log.2^⌊log₂n⌋≤n (suc upper)))
+
+customAndStdlibFloorLogAgree :
+  (upper : Nat) →
+  floorBinaryExponent upper ≡ canonicalStdlibFloorLog₂ upper
+customAndStdlibFloorLogAgree upper =
+  NP.≤-antisym
+    (customFloorLogLeStdlib upper)
+    (stdlibFloorLogLeCustom upper)
