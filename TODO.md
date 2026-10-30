@@ -17295,3 +17295,10 @@ See `.planning/ROADMAP.md` and `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasing
 - [ ] **P0 main theorem:** prove C4 64-point retained sampled/index and C5 125-point full sampled/index tensor equations by applying 729-term expansion plus exact finite character orthogonality and normalized inverse/forward.
 - [ ] **P1 finite physics:** obtain same-object Complex3/Leray projection of the finite convolution (including Hermitian and energy constraints) from original NS triads.
 - [ ] **P2 analysis/empiricism:** R440/R736/B4 cutoff-uniform estimates, real-time Galerkin transport and real R2P2 clock systematics remain distinct; preserve original Ibrahim snowball, Monster 3B and external NS/OpenAI attribution.
+
+
+### 2026-10-30 5k sampled-character 729-product follow-up (PR #1407)
+- [x] Original source C4/C5 character addition, six-factor scalar regrouping and actual 27→729 character-weighted source sampled product are source-written and TOE-connected (Agda kernel pending).
+- [x] Independent exact arithmetic passed all 64 C4 / 125 C5 samples at 729 ordered pair terms each; existing Python diagnostics extended in place.
+- [ ] **P0 next:** establish `synthesiseUnscaled∘pad27To64` and `unscaledSynthesis125∘pad27To125` equal source `Original27UnscaledSynthesisAt` on all actual sample cells; then normalized forward Fourier character extraction and exact tensor orthogonality give sampled→indexed coefficient equality.
+- [ ] Require pinned Agda type-check and original Complex3/Leray physical audit before any theorem-promotion; retain R440/B4 and all empirical/Monster nonpromotion gates.
