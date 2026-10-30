@@ -286,6 +286,16 @@ def verify_original_polynomial_video_m1_m10():
     ):
         assert len(re.findall(r"^"+name+r" :",spin,re.M))==1,name
     assert "FullPositiveQuaternionS3Action" in spin
+    # Highest-alpha / Pareto / Ibrahim lane must CONSUME source proofs,
+    # not promote boolean receipts or Wikidata concept identity to a proof.
+    pareto=owner("PolynomialIbrahimParetoSnowballMaxCutExact")
+    for name in ("originalVideoM1CoefficientDiscriminantReceipt",
+                 "originalVideoM10OrientationReceipt"):
+        assert len(re.findall(r"^"+name+r" :",pareto,re.M))==1,name
+    assert "Discriminant.coefficientDiscriminantZeroIffRootCollisionRational" in pareto
+    assert "Spin.noFullPositiveQuaternionS3Action" in pareto
+    assert "identicalMonster3BObjectPaid = false" in pareto
+
     assert "Q._*q_ spinSignedSwapIJ spinSignedSwapIJInverse" in spin
     assert "{!!}" not in disc+spin
     for root in (
@@ -296,7 +306,9 @@ def verify_original_polynomial_video_m1_m10():
         for name in ("zeroDiscriminantIffRootCollisionRational",
                      "coefficientDiscriminantZeroIffRootCollisionRational",
                      "noFullPositiveQuaternionS3Action",
-                     "signedSwapIJMustNegateK"):
+                     "signedSwapIJMustNegateK",
+                     "originalVideoM1CoefficientDiscriminantReceipt",
+                     "originalVideoM10OrientationReceipt"):
             assert name in t,(root,name)
 
     # Original rational Vieta/discriminant target, finite scalar domain:
