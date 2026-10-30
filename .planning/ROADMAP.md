@@ -99,3 +99,12 @@ Owner: `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasingMaxCut.md`, section **5j
 - [x] Independently verify each exact weighted 729-pair product at all 64 C4 and all 125 C5 source sample addresses; extend in-place regressions. No pinned checkout run.
 - [ ] **P0:** prove actual FFT-padded synthesis equals source 27-mode character sum, normalized sample analysis equals character coefficient extraction, and C4³/C5³ orthogonality collapses to the original indexed 729-term operator. Kernel type-check all new source.
 - [ ] Preserve separate original NS R440/R736/B4 physical walls, clock calibration, Ibrahim/Monster and external historical proof ownership.
+
+
+### 2026-10-30 5l character-resolution payment, exact original sample order (PR #1407)
+- [x] Read live #1440/#1438/#1437 **source Agdas**, current draft C4/C5/729 owner code, and actual `dashi_lean4` NS contract/R440 counterexample; retain distinct YM/Ibrahim/Monster and finite Max Cut attribution.
+- [x] Source-write one reusable `finiteFourierExtractionFromOriginal729GivenResolution` from existing `sumAllSwap` and `sumAllScaleLeft`; instantiate C4 retained and C5 full-output actual normalized phases, selection predicates and sample orders with explicit resolution premises; expose in all three TOE roots.
+- [x] Independently execute exact source-order finite character kernel checks: C4 4096 group pairs + 19683 original pair/output cases, C5 15625 group pairs + 91125 original pair/output cases; update existing universal basis certificate in-place. A first N-versus-N³ normalization-check mistake was repaired before full passing run. Exact GitHub checkout not tested.
+- [ ] **P0** Prove actual `gaussianActualCharacterResolution` and `cyclotomicFiveActualCharacterResolution` using existing 1D/tensor orthogonality and original source sample order, then pinned Agda check.
+- [ ] **P0** Prove tensor FFT/padding synthesis/analysis = corresponding source character sums for arbitrary coefficient fields; compose with the now generic original 729 extraction to close both sampled/index equations.
+- [ ] **P1/P2** Preserve original physical Complex3/Leray/R440/R736/B4 and experimental clock roots; no same-object YM/NS or Ibrahim/Monster 3B promotion from combinatorial equivalences.
