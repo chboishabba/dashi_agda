@@ -25,7 +25,7 @@ module DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Product using (_,_; proj₁; proj₂)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as Pairs
@@ -617,3 +617,138 @@ finiteFourierExtractionFromOriginal729GivenResolution
 -- The exact remaining C4/C5 'payment' is a proof of resolution
 -- for the ACTUAL sample list, normalized character kernel and
 -- retained/full output selection. No postulate or extracted oracle.
+
+
+------------------------------------------------------------------------
+-- THE ORIGINAL TRIPLE CARTESIAN ENUMERATION / PRODUCT FACTORIZATION.
+--
+-- Reuse source mapL/concatMapL and existing Fubini and finite scaling,
+-- not a new Cube64/Cube125 enumeration or another scalar ontology.
+-- The three axes may be of different types and different lengths.
+-- In particular this can be instantiated to original Nyquist 4^3/5^3.
+------------------------------------------------------------------------
+
+sourceCartesianTripleSumAsNested :
+  ∀ {X Y Z A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (xs : List X) (ys : List Y) (zs : List Z)
+  (f : X → Y → Z → A) →
+  sumAll ops
+    (Pairs.concatMapL (λ x →
+      Pairs.concatMapL (λ y →
+        Pairs.mapL (λ z → x , (y , z)) zs) ys) xs)
+    (λ { (x , (y , z)) → f x y z })
+  ≡ sumAll ops xs
+      (λ x → sumAll ops ys
+        (λ y → sumAll ops zs (λ z → f x y z)))
+sourceCartesianTripleSumAsNested ops laws xs ys zs f =
+  trans
+    (sumAllConcatMap ops laws
+      (λ x → Pairs.concatMapL (λ y →
+        Pairs.mapL (λ z → x , (y , z)) zs) ys)
+      xs
+      (λ { (x , (y , z)) → f x y z }))
+    (sumAllCong ops xs
+      (λ x → sumAll ops
+        (Pairs.concatMapL (λ y →
+          Pairs.mapL (λ z → x , (y , z)) zs) ys)
+        (λ { (a , (d , c)) → f a d c }))
+      (λ x → sumAll ops ys
+        (λ y → sumAll ops zs (λ z → f x y z)))
+      (λ x →
+        trans
+          (sumAllConcatMap ops laws
+            (λ y → Pairs.mapL (λ z → x , (y , z)) zs)
+            ys
+            (λ { (a , (d , c)) → f a d c }))
+          (sumAllCong ops ys
+            (λ y → sumAll ops
+              (Pairs.mapL (λ z → x , (y , z)) zs)
+              (λ { (a , (d , c)) → f a d c }))
+            (λ y → sumAll ops zs (λ z → f x y z))
+            (λ y → sumAllMap ops
+              (λ z → x , (y , z)) zs
+              (λ { (a , (d , c)) → f a d c })))))
+
+nestedTripleProductFactors :
+  ∀ {X Y Z A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (xs : List X) (ys : List Y) (zs : List Z)
+  (fx : X → A) (fy : Y → A) (fz : Z → A) →
+  sumAll ops xs
+    (λ x → sumAll ops ys
+      (λ y → sumAll ops zs
+        (λ z →
+          CoefficientOps.multiply ops
+            (CoefficientOps.multiply ops (fx x) (fy y)) (fz z))))
+  ≡ CoefficientOps.multiply ops
+      (CoefficientOps.multiply ops
+        (sumAll ops xs fx) (sumAll ops ys fy))
+      (sumAll ops zs fz)
+nestedTripleProductFactors ops laws xs ys zs fx fy fz =
+  let
+    infixl 7 _⊗_
+    _⊗_ = CoefficientOps.multiply ops
+    xsum = sumAll ops xs fx
+    ysum = sumAll ops ys fy
+    zsum = sumAll ops zs fz
+
+    inside :
+      (x : X) →
+      sumAll ops ys
+        (λ y → sumAll ops zs
+          (λ z → (fx x ⊗ fy y) ⊗ fz z))
+      ≡ (fx x ⊗ ysum) ⊗ zsum
+    inside x =
+      trans
+        (sumAllCong ops ys
+          (λ y → sumAll ops zs
+            (λ z → (fx x ⊗ fy y) ⊗ fz z))
+          (λ y → (fx x ⊗ fy y) ⊗ zsum)
+          (λ y → sumAllScaleLeft ops laws
+            (fx x ⊗ fy y) zs fz))
+        (trans
+          (sumAllScaleRight ops laws ys
+            (λ y → fx x ⊗ fy y) zsum)
+          (cong (_⊗ zsum)
+            (sumAllScaleLeft ops laws (fx x) ys fy)))
+  in
+  trans
+    (sumAllCong ops xs
+      (λ x → sumAll ops ys
+        (λ y → sumAll ops zs
+          (λ z → (fx x ⊗ fy y) ⊗ fz z)))
+      (λ x → (fx x ⊗ ysum) ⊗ zsum)
+      inside)
+    (trans
+      (sumAllScaleRight ops laws xs
+        (λ x → fx x ⊗ ysum) zsum)
+      (cong (_⊗ zsum)
+        (sumAllScaleRight ops laws xs fx ysum)))
+
+sourceCartesianTripleProductFactors :
+  ∀ {X Y Z A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (xs : List X) (ys : List Y) (zs : List Z)
+  (fx : X → A) (fy : Y → A) (fz : Z → A) →
+  sumAll ops
+    (Pairs.concatMapL (λ x →
+      Pairs.concatMapL (λ y →
+        Pairs.mapL (λ z → x , (y , z)) zs) ys) xs)
+    (λ { (x , (y , z)) →
+      CoefficientOps.multiply ops
+        (CoefficientOps.multiply ops (fx x) (fy y)) (fz z) })
+  ≡ CoefficientOps.multiply ops
+      (CoefficientOps.multiply ops
+        (sumAll ops xs fx) (sumAll ops ys fy))
+      (sumAll ops zs fz)
+sourceCartesianTripleProductFactors ops laws xs ys zs fx fy fz =
+  trans
+    (sourceCartesianTripleSumAsNested ops laws xs ys zs
+      (λ x y z →
+        CoefficientOps.multiply ops
+          (CoefficientOps.multiply ops (fx x) (fy y)) (fz z)))
+    (nestedTripleProductFactors ops laws xs ys zs fx fy fz)
+
+-- Agda kernel checking is mandatory: no new postulate, unsafe solver
+-- or declaration that the 3D normalized Fourier equation is complete.
