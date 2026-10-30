@@ -14,6 +14,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import Data.Nat.Properties as NP
+import Data.Nat.Properties as NP
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as Sum
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtBidiExact as Bidi
 import DASHI.Arithmetic.TwinPrimeMangoldtFinIntervalReindexExact as Row
@@ -84,3 +85,50 @@ codeBlockRows S C startPeriod (suc rows) =
 -- Use original pointwise BIDI in each row. The only indexing
 -- arithmetic used for the next start is (suc k)*270= k*270+270;
 -- Nat addition commutativity is allowed, scalar commutativity is NOT.
+
+------------------------------------------------------------------------
+-- M13 block BIDI closure: all period counts, both directions.
+--
+-- The sole conversion between (suc k)*270 and k*270+270 is
+-- elementary Nat arithmetic (commutativity); there is still NO
+-- reordering of Scalar terms.
+------------------------------------------------------------------------
+
+codeBlockRowsCorrect :
+  (S : Sum.AdditiveScalar) (C : Bidi.ArithmeticPairCorrelation (Sum.Scalar S))
+  (startPeriod rows : Nat) →
+  codeBlockRows S C startPeriod rows
+    ≡ blockRows S (Bidi.pairCorrelationAtNat C)
+        (startPeriod * 270) rows
+codeBlockRowsCorrect S C startPeriod zero = refl
+codeBlockRowsCorrect S C startPeriod (suc rows) =
+  cong₂ (Sum.add S)
+    (Sum.pairFiniteSumBidiForward S C (startPeriod * 270) 270)
+    (trans
+      (codeBlockRowsCorrect S C (suc startPeriod) rows)
+      (cong
+        (λ start → blockRows S (Bidi.pairCorrelationAtNat C) start rows)
+        (NP.+-comm 270 (startPeriod * 270))))
+
+codeBlockRowsToInterval :
+  (S : Sum.AdditiveScalar) (M : MonoidSum S)
+  (C : Bidi.ArithmeticPairCorrelation (Sum.Scalar S))
+  (startPeriod rows : Nat) →
+  codeBlockRows S C startPeriod rows
+    ≡ Sum.sumInterval S (Bidi.pairCorrelationAtNat C)
+        (startPeriod * 270) (rows * 270)
+codeBlockRowsToInterval S M C startPeriod rows =
+  trans
+    (codeBlockRowsCorrect S C startPeriod rows)
+    (blockRowsCorrect S M (Bidi.pairCorrelationAtNat C)
+      (startPeriod * 270) rows)
+
+intervalToCodeBlockRows :
+  (S : Sum.AdditiveScalar) (M : MonoidSum S)
+  (C : Bidi.ArithmeticPairCorrelation (Sum.Scalar S))
+  (startPeriod rows : Nat) →
+  Sum.sumInterval S (Bidi.pairCorrelationAtNat C)
+      (startPeriod * 270) (rows * 270)
+    ≡ codeBlockRows S C startPeriod rows
+intervalToCodeBlockRows S M C startPeriod rows =
+  sym (codeBlockRowsToInterval S M C startPeriod rows)
