@@ -17326,3 +17326,16 @@ Cleanup
 - [ ] Produce a complete proof-relevant Nat factor-list/Möbius parity classifier, including the three-factor/cube-root implication, using original stdlib factorisation, not an SSP15 finite class.
 - [ ] Prove genuine shifted-prime short-divisor/roughness cancellation or an unbounded cofinal actual Mangoldt separator; **this** is the front of the twin-prime conjecture and is NOT solved by this finite argument.
 - [ ] Prove `CT12–CT14` ordinary-real logarithmic weights and error sublinearity and unconditional `CT16–CT18` with Agda kernel acceptance. Keep original mathematical/Ibrahim/Pareto/Snowball/QID ownership and ESD isolation.
+
+### 2026-10-30 FRACTRAN / Pickover hyperfabric integration (#1408)
+
+- [x] Search actual fifteen-lane SSP signed valuation source: 7, 47, 59 ARE present. Verify the existing concrete FractranCOL interpreter is only five lanes; do not confuse symbolic SSP labels with arbitrary finite divisibility machines.
+- [x] Source-write explicit 59/329 genuine SSP valuation receipts and the factored 329=7×47 vs 59=59; use the previously certified twin outcomes, no invented factor proofs.
+- [x] Source-write actual ordered first-applicable FRACTRAN mini-rack [1/7,1/47]; 329→47, 59 no step, consuming FRACDASH numeric operational semantics.
+- [x] Instantiate exact CoarseFineReopening Nat using original 270-period BIDI; inhabit original Pickover SignedPhaseFibre and prove consumer-relevant residual necessity for 59/329 and generic exact-reopening twin sufficiency.
+- [x] Transport the actual Mangoldt pair correlation and its finite window S=P+E split through this SAME fibre using original sum BIDI; connect to all 3 TOE roots.
+- [x] Execute independent finite X=100,1000,10000 complete prime-denominator stage oracle (respectively 6,14,34 gates) and compare exact trial divisibility to actual twin decisions and lossy 270 wheel; commit reproducible checker (not executed from checkout).
+- [ ] Construct a **real** Nat→FRACTRAN machine compiler with verified first-applicable semantics, output readout and termination/step simulation, not just open SoundFractranTwinReadout record.
+- [ ] Build the growing prime-axis/scale-indexed arithmetic hyperfabric with genuinely scale-compatible analytic estimates, not just exact window gluing.
+- [ ] Prove CT15 cofinal actual Mangoldt total/error separation (or equivalent unbounded rough shifted-prime sector) and CT12–CT14 ordinary-real logarithms; twin-prime infinitude remains OPEN.
+- [ ] Run Agda transitive --safe kernel and Lean mirror checks once compiler available (not CI).
