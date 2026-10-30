@@ -41,6 +41,20 @@ def audit():
     print("PASS exact nine-entry graph orbit collision: directed A→B 1 vs 0")
     print("PASS source/target hyperfabric restrictions preserve original orientation")
     print("PASS selected finite wave trits: pos vs zero")
+    # Exact 4-site Gaussian integer DFT (i^-kn), no floating point.
+    # Positive Fourier energies do not force +2 correlation positive.
+    f = (1, 1, 0, 0)
+    powers = ((1, 0), (0, -1), (-1, 0), (0, 1))
+    gaussian = []
+    for k in range(4):
+        gaussian.append(tuple(sum(f[n] * powers[(k*n)%4][j]
+                                  for n in range(4)) for j in range(2)))
+    energies = [a*a + b*b for (a,b) in gaussian]
+    assert gaussian == [(2,0),(1,-1),(0,0),(1,1)]
+    assert energies == [4,2,0,2]
+    assert sum(f[n]*f[(n+2)%4] for n in range(4)) == 0
+    assert sum(((-1)**k)*energies[k] for k in range(4)) == 0
+    print("PASS exact C4 Gaussian wave: positive energy [4,2,0,2], lag2 = 0")
     print("BOUNDARY no arithmetic prime-pair estimate / no Pickover pi-phase sign")
 
 def orbit_left(s,t): return orbit(left,s,t)
