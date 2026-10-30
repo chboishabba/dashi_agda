@@ -238,3 +238,32 @@ zeroDiscriminantIffRootCollisionRational :
 zeroDiscriminantIffRootCollisionRational a b c =
   zeroDiscriminantImpliesCollisionRational a b c ,
   collisionImpliesZeroDiscriminantRational a b c
+
+------------------------------------------------------------------------
+-- M1 follow-on: expose the EXACT coefficient-space discriminant
+-- locus, using the existing Vieta coefficient formula and rational
+-- zero iff collision. No root permutation to coefficient-slot confusion.
+------------------------------------------------------------------------
+
+coefficientDiscriminantZeroIffRootCollisionRational :
+  (a b c : ℚ) →
+  (coefficientDiscriminant
+    (Vieta.rootSum (Vieta.roots a b c))
+    (Vieta.rootPairSum (Vieta.roots a b c))
+    (Vieta.rootProduct (Vieta.roots a b c)) ≡ 0ℚ →
+    (a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c))) ×
+  ((a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c)) →
+    coefficientDiscriminant
+      (Vieta.rootSum (Vieta.roots a b c))
+      (Vieta.rootPairSum (Vieta.roots a b c))
+      (Vieta.rootProduct (Vieta.roots a b c)) ≡ 0ℚ)
+coefficientDiscriminantZeroIffRootCollisionRational a b c =
+  (λ coefficientZero →
+     zeroDiscriminantImpliesCollisionRational a b c
+       (trans (discriminantDependsOnlyOnVietaCoefficients
+         (Vieta.roots a b c)) coefficientZero)) ,
+  (λ collision →
+     trans
+       (sym (discriminantDependsOnlyOnVietaCoefficients
+         (Vieta.roots a b c)))
+       (collisionImpliesZeroDiscriminantRational a b c collision))
