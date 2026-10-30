@@ -356,3 +356,123 @@ placedGateCNFClauseCountFour gate =
 
 -- This is an actual same-object clause-count transport from the source
 -- gate to its ORIGINAL placed CNF. Agda kernel verification pending.
+
+
+------------------------------------------------------------------------
+-- WHOLE CONCRETE DAG -> GLOBAL CNF, REUSING THE PRIOR PLACEMENT/APPEND
+-- OWNERS AND THE EXISTING CREATION-TIME GATE INDEXING. No new CNF datatype.
+------------------------------------------------------------------------
+
+-- Old circuit variables retain their identical numeric position when the
+-- next gate adds ONE fresh output variable at the end.
+extendEarlierFin :
+  ∀ {inputs gates : Nat} →
+  Fin.Fin (inputs + gates) → Fin.Fin (inputs + suc gates)
+extendEarlierFin {inputs} {gates} index =
+  Fin.fromℕ<
+    (NatP.<-trans
+      (FinP.toℕ<n index)
+      (newOutputBelow {inputs} {gates}))
+
+-- Structural, input-size-uniform assembly: each prior fixed-width clause
+-- is transported unchanged to a larger finite variable universe, and the
+-- new placed gate contributes its own four clauses.
+programPlacedCNF :
+  ∀ {inputs gates : Nat} →
+  Circuit.GateProgram inputs gates → CNF.CNF (inputs + gates)
+programPlacedCNF Circuit.noGates = []
+programPlacedCNF
+    (Circuit.appendGate previous gate) =
+  Placed.append
+    (Rename.renameCNF extendEarlierFin (programPlacedCNF previous))
+    (placedGateCNF gate)
+
+-- Canonical additive 4-per-gate clause budget. This is an actual
+-- structural count, not a floating asymptotic assertion.
+fourPerGate : Nat → Nat
+fourPerGate zero = zero
+fourPerGate (suc gates) = fourPerGate gates + four
+
+programPlacedCNFClauseCount :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates) →
+  Grid.listLength (programPlacedCNF program) ≡ fourPerGate gates
+programPlacedCNFClauseCount Circuit.noGates = refl
+programPlacedCNFClauseCount
+    (Circuit.appendGate previous gate) =
+  trans
+    (Grid.lengthAppend
+      (Rename.renameCNF extendEarlierFin (programPlacedCNF previous))
+      (placedGateCNF gate))
+    (cong₂ _+_
+      (trans
+        (renameCNFClauseCountExact
+          extendEarlierFin (programPlacedCNF previous))
+        (programPlacedCNFClauseCount previous))
+      (placedGateCNFClauseCountFour gate))
+
+-- The output wire already belongs to the n+g finite variable universe.
+-- Reuse the same compiler numbering; DO NOT introduce a new output var.
+wireNumberBelowAtCircuitEnd :
+  ∀ {inputs gates : Nat}
+    (source : Circuit.WireRef inputs gates) →
+  wireNumber source < inputs + gates
+wireNumberBelowAtCircuitEnd {inputs} {gates}
+    (Circuit.inputWire index) =
+  NatP.<-≤-trans
+    (FinP.toℕ<n index)
+    (NatP.m≤m+n inputs gates)
+wireNumberBelowAtCircuitEnd {inputs} {gates}
+    (Circuit.gateWire index) =
+  Semantics.gateVariableIndexBelowNext inputs index
+
+outputWireFin :
+  ∀ {inputs gates : Nat} →
+  Circuit.WireRef inputs gates → Fin.Fin (inputs + gates)
+outputWireFin wire =
+  Fin.fromℕ< (wireNumberBelowAtCircuitEnd wire)
+
+outputUnitCNF :
+  ∀ {inputs : Nat} →
+  (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  CNF.CNF (inputs + Circuit.gateCount circuit)
+outputUnitCNF circuit =
+  (CNF.positive (outputWireFin (Circuit.outputWire circuit)) ∷ [])
+  ∷ []
+
+-- The complete ORIGINAL DAG is compiled as already-placed gate clauses
+-- followed by the required acceptance/output unit clause.
+circuitPlacedCNF :
+  ∀ {inputs : Nat} →
+  (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  CNF.CNF (inputs + Circuit.gateCount circuit)
+circuitPlacedCNF circuit =
+  Placed.append
+    (programPlacedCNF (Circuit.program circuit))
+    (outputUnitCNF circuit)
+
+outputUnitCNFClauseCount :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Grid.listLength (outputUnitCNF circuit) ≡ suc zero
+outputUnitCNFClauseCount circuit = refl
+
+-- Exact total: 4 clauses per original DAG gate, plus ONE output unit.
+circuitPlacedCNFClauseCount :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Grid.listLength (circuitPlacedCNF circuit)
+    ≡ fourPerGate (Circuit.gateCount circuit) + suc zero
+circuitPlacedCNFClauseCount circuit =
+  trans
+    (Grid.lengthAppend
+      (programPlacedCNF (Circuit.program circuit))
+      (outputUnitCNF circuit))
+    (cong₂ _+_
+      (programPlacedCNFClauseCount (Circuit.program circuit))
+      (outputUnitCNFClauseCount circuit))
+
+-- All clauses in the programme are fixed-width, with no truth-table
+-- expansion in the original input dimension. Exact solution-set equivalence
+-- and global numeric #SAT parsimony remain the next proof obligations;
+-- this commit proves the syntax and uniform clause count at source level.
