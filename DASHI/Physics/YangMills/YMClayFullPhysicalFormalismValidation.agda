@@ -424,3 +424,10 @@ routeSH1NoDuplicateAbsoluteMagnitude :
 routeSH1NoDuplicateAbsoluteMagnitude =
   Full.routeSH1AbsoluteMagnitudeIndependentPhysicalLeafIsFalse
 
+
+
+rationalTraceProvidesP2LoopBoundsGivenInterpretation :
+  Full.routeSP2LoopBoundsFromTraceGivenInterpretation ≡ true
+rationalTraceProvidesP2LoopBoundsGivenInterpretation =
+  Full.routeSP2LoopBoundsFromTraceGivenInterpretationIsTrue
+
