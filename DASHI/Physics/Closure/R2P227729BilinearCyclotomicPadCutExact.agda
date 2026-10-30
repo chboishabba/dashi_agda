@@ -746,3 +746,98 @@ sourceCartesianTripleProductFactors ops laws xs ys zs fx fy fz =
 
 -- Agda kernel checking is mandatory: no new postulate, unsafe solver
 -- or declaration that the 3D normalized Fourier equation is complete.
+
+
+------------------------------------------------------------------------
+-- PARAMETRIC CARTESIAN TRIPLE ENUMERATION.  Takes the SOURCE cube
+-- constructor (e.g. Four.fourCube / Full.gridCube), so the actual
+-- Nyquist 64/125 sample lists can reuse exactly the same sum proof.
+------------------------------------------------------------------------
+
+sourceCartesianTripleSumWith :
+  ∀ {X Y Z W A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (xs : List X) (ys : List Y) (zs : List Z)
+  (mk : X → Y → Z → W) (term : W → A) →
+  sumAll ops
+    (Pairs.concatMapL (λ x →
+      Pairs.concatMapL (λ y →
+        Pairs.mapL (λ z → mk x y z) zs) ys) xs) term
+  ≡ sumAll ops xs
+      (λ x → sumAll ops ys
+        (λ y → sumAll ops zs (λ z → term (mk x y z))))
+sourceCartesianTripleSumWith ops laws xs ys zs mk term =
+  trans
+    (sumAllConcatMap ops laws
+      (λ x → Pairs.concatMapL (λ y →
+        Pairs.mapL (λ z → mk x y z) zs) ys)
+      xs term)
+    (sumAllCong ops xs
+      (λ x → sumAll ops
+        (Pairs.concatMapL (λ y →
+          Pairs.mapL (λ z → mk x y z) zs) ys) term)
+      (λ x → sumAll ops ys
+        (λ y → sumAll ops zs (λ z → term (mk x y z))))
+      (λ x →
+        trans
+          (sumAllConcatMap ops laws
+            (λ y → Pairs.mapL (λ z → mk x y z) zs)
+            ys term)
+          (sumAllCong ops ys
+            (λ y → sumAll ops
+              (Pairs.mapL (λ z → mk x y z) zs) term)
+            (λ y → sumAll ops zs (λ z → term (mk x y z)))
+            (λ y → sumAllMap ops (mk x y) zs term))))
+
+sourceCartesianTripleProductFactorsWith :
+  ∀ {X Y Z W A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (xs : List X) (ys : List Y) (zs : List Z)
+  (mk : X → Y → Z → W)
+  (fx : X → A) (fy : Y → A) (fz : Z → A)
+  (interpret : W → A)
+  (agreement :
+    (x : X) (y : Y) (z : Z) →
+    interpret (mk x y z)
+    ≡ CoefficientOps.multiply ops
+        (CoefficientOps.multiply ops (fx x) (fy y))
+        (fz z)) →
+  sumAll ops
+    (Pairs.concatMapL (λ x →
+      Pairs.concatMapL (λ y →
+        Pairs.mapL (λ z → mk x y z) zs) ys) xs)
+    interpret
+  ≡ CoefficientOps.multiply ops
+      (CoefficientOps.multiply ops
+        (sumAll ops xs fx) (sumAll ops ys fy))
+      (sumAll ops zs fz)
+sourceCartesianTripleProductFactorsWith
+  ops laws xs ys zs mk fx fy fz interpret agreement =
+  trans
+    (sourceCartesianTripleSumWith
+      ops laws xs ys zs mk interpret)
+    (trans
+      (sumAllCong ops xs
+        (λ x → sumAll ops ys (λ y → sumAll ops zs
+          (λ z → interpret (mk x y z))))
+        (λ x → sumAll ops ys (λ y → sumAll ops zs
+          (λ z → CoefficientOps.multiply ops
+            (CoefficientOps.multiply ops (fx x) (fy y))
+            (fz z))))
+        (λ x → sumAllCong ops ys
+          (λ y → sumAll ops zs (λ z → interpret (mk x y z)))
+          (λ y → sumAll ops zs (λ z →
+            CoefficientOps.multiply ops
+              (CoefficientOps.multiply ops (fx x) (fy y))
+              (fz z)))
+          (λ y → sumAllCong ops zs
+            (λ z → interpret (mk x y z))
+            (λ z → CoefficientOps.multiply ops
+              (CoefficientOps.multiply ops (fx x) (fy y))
+              (fz z))
+            (agreement x y))))
+      (nestedTripleProductFactors ops laws xs ys zs fx fy fz))
+
+-- A source cube is merely the constructor mk here. No claim that its
+-- actual Fourier character splits into 1D factors until an owner
+-- supplies the explicit pointwise agreement at this exact carrier.
