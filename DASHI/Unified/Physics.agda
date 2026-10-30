@@ -733,3 +733,22 @@ yangMillsYMA1CompletionDoesNotSelfPromote :
   ≡ false
 yangMillsYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- Highest-alpha YM Route-S selected source -> OS max-cut (canonical owner).
+-- Reuses R320 -> R295 -> R313 -> R296 -> R333; physical inputs not promoted.
+------------------------------------------------------------------------
+
+yangMillsBalabanR320RouteSToOSCompilerLevel : ProofLevel
+yangMillsBalabanR320RouteSToOSCompilerLevel =
+  BalabanRGTOE.balabanR320RouteSToOSCompilerLevel
+
+yangMillsBalabanR320RouteSSelectedSourceLevel : ProofLevel
+yangMillsBalabanR320RouteSSelectedSourceLevel =
+  BalabanRGTOE.balabanR320RouteSSelectedPhysicalSourceLevel
+
+yangMillsBalabanR320RouteSNoDuplicateMagnitude :
+  BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
+yangMillsBalabanR320RouteSNoDuplicateMagnitude =
+  BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
