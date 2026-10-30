@@ -17350,3 +17350,9 @@ Cleanup
 - [ ] Prove a real first-applicable paired source-register FRACTRAN simulation and obtain certified outputs on all bounded input windows.
 - [ ] Prove genuine cofinal *prime* pair survivors, not cofinal *composite* camouflage; the latter is evidence of the hard obstruction.
 - [ ] Kernel-check these source-written Agdas and the full three-root import graph; no CI necessary.
+
+### 2026-10-30 continued FRACTRAN first-applicable no-go
+- [x] Source-write exact ordered local trace `329→47→1`, terminal 1, and 59-stuck witness using original FRACDASH interpreter semantics.
+- [x] Source-write `noFixedFractranPrefixCanCertifyEveryTwin` as a genuine logical refutation of blocked finite-denominator prefix→TwinPrimeAt, not just a numeric counterexample; original factorable-survivor theorem owner retained.
+- [ ] Check these actual source terms in safe Agda kernel (toolchain unavailable here); repair any elaboration errors, do not promote source-written to kernel-verified.
+- [ ] Construct verified growing/machine-level FRACTRAN paired-register compiler and genuine analytic cofinal prime-pair separation; no finite rack or QID numerology can discharge this theorem.
