@@ -358,3 +358,55 @@ indexDatesDoNotProveLateStatement =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness responseToLaterInformationRequest
       responseWithoutKnownTriggerReceipt refl distinctTiming)
+
+------------------------------------------------------------------------
+-- EXACT IDENTIFIER / PRODUCER / STATUTORY ROLE ALIGNMENT
+------------------------------------------------------------------------
+
+-- The 2018 original court caption names Springfield Land Corporation
+-- Pty Limited ACN 055714531; the 2024 Act names Springfield City Group
+-- Pty Limited ACN 055714531. Same number, different dated public names.
+-- This is not a certificate establishing a particular ASIC rename date.
+historicalCourtPartyACN : String
+historicalCourtPartyACN = "055714531"
+
+historicalCourtAndPresentSCGACNMatch :
+  historicalCourtPartyACN ≡ scgACN
+historicalCourtAndPresentSCGACNMatch = refl
+
+data CouncilNamedService : Set where
+  roads : CouncilNamedService
+  waterSupply : CouncilNamedService
+  sewerage : CouncilNamedService
+  stormwaterDrainage : CouncilNamedService
+  openSpace : CouncilNamedService
+  communityFacilities : CouncilNamedService
+  electricityAndTelephone : CouncilNamedService
+
+-- Source: Council Springfield Structure Plan section 1.7 and section 4.
+-- Not an exhaustive inventory of executed 1998 deed schedules.
+publishedPlanServiceList : List CouncilNamedService
+publishedPlanServiceList =
+  roads ∷ waterSupply ∷ sewerage ∷ stormwaterDrainage ∷
+  openSpace ∷ communityFacilities ∷ electricityAndTelephone ∷ []
+
+-- Reuse prior Ibrahim original named public-law QID as navigation ONLY,
+-- never mint one for the SCG legal person, Cherish or an unseen agreement.
+environmentalLawNavigationQid : String
+environmentalLawNavigationQid = "Q328798"
+
+-- The 2024 s275Z text and Council index can motivate an infrastructure
+-- contract search without upgrading to an executed gas service or payment.
+data CommercialJoin : Set where
+  agreementIdentityAndParcel : CommercialJoin
+  specificUtilityScope : CommercialJoin
+  contractingPartiesAndConsideration : CommercialJoin
+  successorAndSubdivisionTerms : CommercialJoin
+  observedPhysicalAssetOrMeter : CommercialJoin
+  actualIncomeAndBeneficiary : CommercialJoin
+
+priorityCommercialJoins : List CommercialJoin
+priorityCommercialJoins =
+  agreementIdentityAndParcel ∷ specificUtilityScope ∷
+  contractingPartiesAndConsideration ∷ successorAndSubdivisionTerms ∷
+  observedPhysicalAssetOrMeter ∷ actualIncomeAndBeneficiary ∷ []
