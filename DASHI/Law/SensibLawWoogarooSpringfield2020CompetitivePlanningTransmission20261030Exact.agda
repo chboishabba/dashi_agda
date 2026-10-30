@@ -312,3 +312,47 @@ statePlanningPolicyTransmissionDoesNotProveFederalCause =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness state275WAmendedFederalApprovalIndependent
       state275WAmendedWithLaterEPBCEvidence refl federalDifferent)
+
+
+------------------------------------------------------------------------
+-- ORIGINAL ENACTED AMENDMENT, DISTINCT FROM SUBMISSION AND 2024 COMPILATION
+------------------------------------------------------------------------
+
+forestWind2020AsMadeOriginal : Source.AttributedSource
+forestWind2020AsMadeOriginal = Source.mkNoDOISource
+  "Queensland Parliament"
+  "Forest Wind Farm Development Act 2020 No.28, Part 8 section 75"
+  "Original enacted Queensland Act as made, official Parliamentary Counsel PDF"
+  "20 August 2020"
+  "https://www.legislation.qld.gov.au/view/whole/pdf/asmade/act-2020-028/lh"
+  Source.governmentSource
+  "Original as-made statute inserts Planning Act ss 275T-275ZB and records 275Z SCG must provide an infrastructure/adverse-effects/options statement within the specified receipt-triggered window; non-compliance with the statement requirement does not prevent Council deciding. Forest Wind energy project is NOT the Springfield EPBC action."
+  Source.publicAttribution
+
+record ThreeProducerLawChain : Set where
+  constructor three-producer-law-chain
+  field
+    proposalProducer : Source.AttributedSource
+    governmentResponseProducer : Source.AttributedSource
+    enactedStatuteProducer : Source.AttributedSource
+    creditsSpecificProposal : Bool
+    enactmentFacePaid : Bool
+    sameEPBCActionCausationPaid : Bool
+open ThreeProducerLawChain public
+
+scg275WPublicLegislativeTransmission : ThreeProducerLawChain
+scg275WPublicLegislativeTransmission = three-producer-law-chain
+  scgOriginalSubmission10
+  queenslandGovernmentFinalExplanation2020
+  forestWind2020AsMadeOriginal
+  true true false
+
+-- Although the same bill's main title refers to a wind farm, its separate
+-- Part 8 amendatory sections change Springfield planning rules.
+data ActPart : Set where
+  forestWindDevelopmentProjectPart : ActPart
+  springfieldPlanningAmendmentPart : ActPart
+
+differentActParts :
+  forestWindDevelopmentProjectPart ≡ springfieldPlanningAmendmentPart → ⊥
+differentActParts ()
