@@ -17339,3 +17339,14 @@ Cleanup
 - [ ] Build the growing prime-axis/scale-indexed arithmetic hyperfabric with genuinely scale-compatible analytic estimates, not just exact window gluing.
 - [ ] Prove CT15 cofinal actual Mangoldt total/error separation (or equivalent unbounded rough shifted-prime sector) and CT12–CT14 ordinary-real logarithms; twin-prime infinitude remains OPEN.
 - [ ] Run Agda transitive --safe kernel and Lean mirror checks once compiler available (not CI).
+
+### 2026-10-30 fixed FRACTRAN prefix parity/camouflage cut
+
+- [x] Prove source-level equivalence of certified finite pair-sieve survivor and paired FRACTRAN blocked-prefix semantics, explicitly distinguished from one actual rational fraction on a raw n.
+- [x] Reuse original finite double-factorisation owner to source-write cofinal fixed-rack false positives: any finite certified prime-test rack with a >=2 survivor has arbitrarily late composite pairs passing all its local checks.
+- [x] Directly instantiate Pickover strict-refinement theorem, not only its residual-separation necessity.
+- [x] Execute independent exact integer examples for finite racks [2,3,5], [2,3,5,7], [2,3,5,7,11] at t=1,10,100,100000.
+- [ ] Prove original finite sieve has a >=2 surviving seed for **all** certified finite axis lists (e.g. residue -1 modulo modulus product) rather than leaving seed explicit; do not duplicate underlying CRT/period machinery.
+- [ ] Prove a real first-applicable paired source-register FRACTRAN simulation and obtain certified outputs on all bounded input windows.
+- [ ] Prove genuine cofinal *prime* pair survivors, not cofinal *composite* camouflage; the latter is evidence of the hard obstruction.
+- [ ] Kernel-check these source-written Agdas and the full three-root import graph; no CI necessary.
