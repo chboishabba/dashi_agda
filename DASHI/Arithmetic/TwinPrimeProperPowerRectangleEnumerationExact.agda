@@ -233,15 +233,29 @@ properPowerCoveredByRootRectangle basePredecessor k upper cutoff
 -- directly, not by importing an unverified analytic counting bound.
 ------------------------------------------------------------------------
 
-notEqualNat : Nat → Nat → Bool
-notEqualNat x y with x NatP.≟ y
-... | yes same = false
-... | no different = true
+-- Structurally recursive insertion: do NOT recurse on a filtered
+-- argument. The original candidate implementation did so, which
+-- is not acceptable to Agda's termination checker.
+insertIfFresh : Nat → List Nat → List Nat
+insertIfFresh x [] = x ∷ []
+insertIfFresh x (y ∷ ys) with x NatP.≟ y
+... | yes equal = y ∷ ys
+... | no different = y ∷ insertIfFresh x ys
 
 dedupPowerValues : List Nat → List Nat
 dedupPowerValues [] = []
 dedupPowerValues (x ∷ xs) =
-  x ∷ dedupPowerValues (filterCandidate (notEqualNat x) xs)
+  insertIfFresh x (dedupPowerValues xs)
+
+insertIfFreshLengthAtMost :
+  (x : Nat) (xs : List Nat) →
+  Reindex.listLength (insertIfFresh x xs)
+    ≤ suc (Reindex.listLength xs)
+insertIfFreshLengthAtMost x [] = s≤s z≤n
+insertIfFreshLengthAtMost x (y ∷ ys) with x NatP.≟ y
+... | yes equal = NatP.≤-refl
+... | no different =
+  s≤s (insertIfFreshLengthAtMost x ys)
 
 dedupLengthAtMost :
   (xs : List Nat) →
@@ -249,9 +263,9 @@ dedupLengthAtMost :
     ≤ Reindex.listLength xs
 dedupLengthAtMost [] = z≤n
 dedupLengthAtMost (x ∷ xs) =
-  s≤s (NatP.≤-trans
-    (dedupLengthAtMost (filterCandidate (notEqualNat x) xs))
-    (filteredLengthAtMost (notEqualNat x) xs))
+  NatP.≤-trans
+    (insertIfFreshLengthAtMost x (dedupPowerValues xs))
+    (s≤s (dedupLengthAtMost xs))
 
 properPowerCandidateDistinctCount : Nat → Nat → Nat
 properPowerCandidateDistinctCount b e =
