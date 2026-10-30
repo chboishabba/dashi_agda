@@ -74,6 +74,42 @@ def main() -> None:
                 for k in range(3))
     assert a2_ac == 220
 
+    # Exact finite 54-edge unit-weight maximum-cut witness, and a
+    # deterministic nonuniform positive-weight stress test (not a proof).
+    undirected_edges = tuple((x, y) for x, y in edges if x < y)
+    assert len(undirected_edges) == 54
+    assert len(set(undirected_edges)) == 54
+    assert len({x for pair in undirected_edges for x in pair}) == 27
+    checker_unit_score = sum(checker(x) != checker(y) for x, y in undirected_edges)
+    assert checker_unit_score == 54
+    def weight(x, y):
+        return 1 + ((sum(3 ** i * (z + 1) for i, z in enumerate(x))
+                     + 7 * sum(3 ** i * (z + 1) for i, z in enumerate(y))) % 11)
+    weighted_total = sum(weight(x, y) for x, y in undirected_edges)
+    weighted_checker_score = sum(
+        weight(x, y) for x, y in undirected_edges if checker(x) != checker(y)
+    )
+    assert weighted_checker_score == weighted_total
+    for vertex in V:
+        perturbed = lambda x, pivot=vertex: checker(x) ^ (x == pivot)
+        score = sum(weight(x, y) for x, y in undirected_edges
+                    if perturbed(x) != perturbed(y))
+        assert score <= weighted_checker_score
+
+    # IDs inspected on actual Wikidata item pages; no QID created here.
+    verified_concept_qids = {
+        "graph_theory": "Q131476",
+        "directed_graph": "Q1137726",
+        "adjacency_matrix": "Q727035",
+        "graph_coloring": "Q504843",
+        "bipartite_graph": "Q174733",
+        "graph_isomorphism": "Q303100",
+        "graph_homomorphism": "Q3385162",
+        "maximum_cut": "Q942557",
+        "hypergraph": "Q840247",
+        "four_color_theorem": "Q184410",
+    }
+
     receipt = {
         "authority": "finite exhaustive Python semantics only; Agda and Lean kernel pending",
         "grid_vertices": len(V),
@@ -83,6 +119,10 @@ def main() -> None:
             sum(adjacent(x, y) for y in V) for x in V
         ).items())),
         "minimal_palette_size": 2,
+        "checkerboard_colour_class_sizes": dict(sorted(Counter(checker(v) for v in V).items())),
+        "max_cut_54_unit_edges": checker_unit_score,
+        "nonuniform_positive_weight_total_saturated": weighted_total,
+        "verified_concept_qids_navigation_only": verified_concept_qids,
         "distinct_s3_permutations": len(six),
         "s3_preserves_nearest_neighbour_adjacency": True,
         "flip_and_rotation_preserve_adjacency": True,
