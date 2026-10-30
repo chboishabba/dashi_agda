@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; map)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product.Base using (proj₁; proj₂)
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -17,6 +18,10 @@ import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Ex
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationExact as S2
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundExact as Trace
 import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonBoundedAlgebraExact as Literal
+import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonCylinderBoundDataExact as Bounds
+import DASHI.Physics.YangMills.BalabanLiteralWilsonNativeThermodynamicProducerExact as Native
+import DASHI.Physics.YangMills.BalabanLiteralWilsonNativePhysicalMeasureExact as NativeMeasure
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as NativeP2
 
 ------------------------------------------------------------------------
 -- ROUTE-S S2 / WILSON BOUNDS ON THE SAME T5 OBSERVABLE ALGEBRA
@@ -149,7 +154,7 @@ rationalSU2TraceToSameAlgebraWilsonBounds {dataSet = dataSet} source = record
   { SameAlgebraWilsonBoundInputs.loopObservable =
       RationalSU2TraceGramBoundSource.literalWilsonLoopObservable source
   ; SameAlgebraWilsonBoundInputs.one = 1ℚ
-  ; SameAlgebraWilsonBoundInputs.groupRank = 1ℚ + 1ℚ
+  ; SameAlgebraWilsonBoundInputs.groupRank = 1ℚ
   ; SameAlgebraWilsonBoundInputs.multiplyScalar = _*_
   ; SameAlgebraWilsonBoundInputs.literalLoopBounded =
       λ path →
@@ -181,6 +186,83 @@ rationalSU2TraceToGramInterpretationLevel = conditional
 
 rationalSU2TraceToSameAlgebraCompilerLevel : ProofLevel
 rationalSU2TraceToSameAlgebraCompilerLevel = conditional
+
+
+------------------------------------------------------------------------
+-- PREFERRED P2 CONSTRUCTION: canonical NATIVE Wilson measure.
+--
+-- The default-branch donors already construct ALL of the following:
+--   * the configuration-dependent rational SU2 Wilson function,
+--   * quantitative cylinder bounds for finite paths and identity,
+--   * Gram.BoundedObservable := Σ majorant, QuantitativeBound;
+--   * Gram multiplication := pointwise Wilson multiplication;
+--   * convergence of all three finite-Wilson P2 expectations.
+--
+-- Here, their *actual same measure* is used to inhabit our historical S2
+-- algebra without a second trace/Gram interpretation, bounded-product
+-- assumption, identity-boundedness premise, or source-carrier equality.
+-- The generic rationalSU2Trace* adapter above remains a compatibility route
+-- for other externally selected Gram carriers, NOT the preferred native cut.
+--
+-- RATIONAL NORMALISATION: the existing literal cylinder owner declares
+-- groupRank = 1 for the *normalised trace*, not the defining matrix
+-- dimension 2.  The companion adapter uses the same exact convention.
+------------------------------------------------------------------------
+
+nativeWilsonSameAlgebraBoundInputs :
+  ∀ {Measure n operationsInputs}
+    (inputs :
+      NativeMeasure.NativeWilsonPreferredPhysicalMeasureInputs
+        Measure n operationsInputs) →
+  SameAlgebraWilsonBoundInputs {Loop = Literal.RationalWilsonPath n}
+    (NativeMeasure.nativeWilsonPhysicalMeasureData inputs)
+nativeWilsonSameAlgebraBoundInputs inputs = record
+  { SameAlgebraWilsonBoundInputs.loopObservable =
+      Literal.literalWilsonPathObservable
+  ; SameAlgebraWilsonBoundInputs.one = 1ℚ
+  ; SameAlgebraWilsonBoundInputs.groupRank = 1ℚ
+  ; SameAlgebraWilsonBoundInputs.multiplyScalar = _*_
+  ; SameAlgebraWilsonBoundInputs.literalLoopBounded =
+      λ path →
+        NativeMeasure.quantitativeBoundIsNativePhysicalBounded
+          inputs (Literal.literalWilsonPathObservable path)
+          1ℚ (Bounds.quantitativeWilsonPathBound path)
+  ; SameAlgebraWilsonBoundInputs.boundedMultiplyClosed =
+      λ left right leftBounded rightBounded →
+        Native.quantitativeBoundIsBoundedObservable
+          (proj₁ leftBounded * proj₁ rightBounded)
+          (Bounds.quantitativeMultiplyBound
+            left right (proj₁ leftBounded) (proj₁ rightBounded)
+            (proj₂ leftBounded) (proj₂ rightBounded))
+  ; SameAlgebraWilsonBoundInputs.identityObservable =
+      Literal.oneObservable
+  ; SameAlgebraWilsonBoundInputs.identityBounded =
+      NativeMeasure.quantitativeBoundIsNativePhysicalBounded
+        inputs Literal.oneObservable 1ℚ Bounds.quantitativeOneBound
+  }
+
+nativeWilsonS2NoIndependentBoundedProductLeaf : Bool
+nativeWilsonS2NoIndependentBoundedProductLeaf = true
+
+nativeWilsonS2NoIndependentBoundedProductLeafIsTrue :
+  nativeWilsonS2NoIndependentBoundedProductLeaf ≡ true
+nativeWilsonS2NoIndependentBoundedProductLeafIsTrue = refl
+
+nativeWilsonS2NormalizedTraceRank : ℚ
+nativeWilsonS2NormalizedTraceRank = 1ℚ
+
+-- The native P2 convergence is already proved in NativeP2 and requires
+-- no Euclidean support-distance identification.
+nativeWilsonP2DoesNotNeedSupportDistance : Bool
+nativeWilsonP2DoesNotNeedSupportDistance =
+  NativeP2.p2SupportDistanceGeometryRequired
+
+nativeWilsonP2DoesNotNeedSupportDistanceIsFalse :
+  nativeWilsonP2DoesNotNeedSupportDistance ≡ false
+nativeWilsonP2DoesNotNeedSupportDistanceIsFalse = refl
+
+nativeWilsonS2CompilerLevel : ProofLevel
+nativeWilsonS2CompilerLevel = conditional
 
 record SameAlgebraCanonicalS2Inputs
     {Measure TestObservable Loop : Set}
