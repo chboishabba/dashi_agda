@@ -17375,3 +17375,18 @@ pants/sheaf matching before promoting any real-world synthesis.
   graph isomorphism Q303100, max cut Q942557, and theorem Q184410.
 - [ ] Do not claim external QIDs certify kernel facts or identities
   of particular DASHI synthetic graph, face, proof, or smooth surface.
+
+## 2026-10-30 edge coverage and max-cut symmetry follow-on
+
+- [x] Reuse native graph and 54-edge list; produce every native
+  adjacency's oriented canonical slot witness, including reversal.
+- [x] Exact slot count/0..53 source equality and Lean `Nodup`
+  source-written proof.
+- [x] S3 and seam preserve this *actual selected checkerboard*;
+  maintain asymmetric 3-node graph counterexample.
+- [x] Reproduce finite orientation/partition calculations in Python.
+- [ ] Kernel-check Agda and Lean (CI unnecessary); address any
+  exact-head errors, transitive --safe issues and source drift.
+- [ ] Discharge Agda generic slot-code injectivity/list uniqueness.
+- [ ] Source-authorised trialectic 2-cell, higher-order seam and
+  provenance/authority compatibility for particular consumers only.
