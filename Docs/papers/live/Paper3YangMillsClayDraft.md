@@ -28,11 +28,7 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 
 
 
-> **P2 boundedness supplement, 30 October.** The canonical rational-quaternion
-> SU(2) trace theorem now feeds the existing S2 Wilson algebra through a
-> typed `RationalSU2TraceGramBoundSource`, provided its normalized trace
-> interval is identified with the physical `Gram.BoundedObservable`
-> predicate. The carrier additionally requires an explicit `traceIsLiteralWilson` equality to the selected physical loop observable; the finite trace bound is transported along it rather than relabelling a synthetic trace family. A single interpretation theorem replaces individual loopwise
+> **P2 boundedness supplement, 30 October.** The canonical rational SU(2) Wilson-path function theorem now feeds the existing S2 Wilson algebra through a typed `RationalSU2TraceGramBoundSource`, provided its pointwise-unit-boundedness predicate is mapped to the physical `Gram.BoundedObservable` predicate. The carrier additionally requires an explicit `traceIsLiteralWilson` equality to the selected physical loop observable; the finite trace bound is transported along it rather than relabelling a synthetic trace family. A single interpretation theorem replaces individual loopwise
 > boundedness assumptions. The canonical S2 projection then feeds the
 > existing P2 three-expectation-limit compiler. This is an exact
 > implication conditional on the physical source-to-measure interpretation,
