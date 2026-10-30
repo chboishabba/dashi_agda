@@ -21,6 +21,7 @@ open import Agda.Builtin.List using (List)
 open import Data.Product using (_,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
 open import Data.Rational.Base using (ℚ; _*_; normalize)
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as I
 import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as M
@@ -451,3 +452,48 @@ gaussianSourceSampledEqualsIndexedGivenResolution f g target resolution =
 -- The condition above is the 64/125-character resolution,
 -- not the missing tensor-FFT synthesis/analysis same-object theorem.
 -- Neither is silently assumed from a numeric Python fixture.
+
+
+------------------------------------------------------------------------
+-- FIRST ACTUALLY DISCHARGED SOURCE-ORDER CHARACTER-RESOLUTION LEAF.
+-- Uses exact ORIGINAL Nyquist axis enumeration (not the phase owner's
+-- alternative cyclic listing), original character/group equality,
+-- and the original Q(i)/Q(zeta5) coefficient operations.
+--
+-- Finite 4² / 5² patterns, no postulate and no list-equality oracle.
+-- This is ONE AXIS.  Three-axis Fubini and the tensor FFT identification
+-- are separate downstream kernel obligations.
+------------------------------------------------------------------------
+
+gaussianSourceAxisCharacterKernel :
+  Four.FourGridMode → Four.FourGridMode → G.Gaussian4
+gaussianSourceAxisCharacterKernel k l =
+  Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourAxes
+    (λ x →
+      FFT.scaleG FFT.quarter
+        (G._*G_ (G.character4 k x)
+          (G.conjG (G.character4 l x))))
+
+gaussianOriginalAxisCharacterResolution :
+  (k l : Four.FourGridMode) →
+  gaussianSourceAxisCharacterKernel k l
+  ≡ Bilinear.choose G.zeroG (Four.eqFour k l) G.oneG
+gaussianOriginalAxisCharacterResolution Four.fourZero Four.fourZero = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourZero Four.fourPlusOne = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourZero Four.fourOuterTwo = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourZero Four.fourMinusOne = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourPlusOne Four.fourZero = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourPlusOne Four.fourPlusOne = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourPlusOne Four.fourOuterTwo = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourPlusOne Four.fourMinusOne = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourOuterTwo Four.fourZero = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourOuterTwo Four.fourPlusOne = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourOuterTwo Four.fourOuterTwo = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourOuterTwo Four.fourMinusOne = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourMinusOne Four.fourZero = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourMinusOne Four.fourPlusOne = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourMinusOne Four.fourOuterTwo = G.gauss-ext solve-∀ solve-∀
+gaussianOriginalAxisCharacterResolution Four.fourMinusOne Four.fourMinusOne = G.gauss-ext solve-∀ solve-∀
+
+-- Actual enumerated axes are owned by R2P2C4C5NyquistAntipodalFixedPointExact.
+-- Source-written proof terms; an Agda kernel run is still required.
