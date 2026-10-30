@@ -352,3 +352,31 @@ QID ledger. This remains a computational receipt, not a formal proof.
 **Status:** no Agda or Lean executable was available to check the
 exact new heads; all new theorem terms remain source-written and no
 kernel-approved/proved-real-world inference is promoted.
+
+## QID wrong-type and actual max-cut audit — final increment
+
+The concept crosswalk now has indexed `TypedKnowledgeConcept role`
+rather than only raw QID strings: academic discipline, graph
+structure, graph class, representation, graph morphism,
+computational problem, higher-arity structure and theorem. This
+preserves the distinction between a verified *graph homomorphism*
+concept Q3385162 and any particular kernel GraphHom proof.
+`directedGraphKnowledgeCoordinate` reuses the older
+`GraphColouringRecolourPantsSnowballExact.KnowledgeCoordinate`
+constructor, pays directed-graph Dewey **511.54** from the inspected
+Wikidata item and keeps coordinateIsProof=false; general graph
+theory retains 511.5. `Q184410` remains the *four-colour theorem*,
+not the same identifier as arXiv:2603.24880v3.
+
+A separate local exhaustive replay of the deterministic positive-weight
+sample calculated a cut score **344**, matching the total positive
+weights on the 54 undirected native edges; all 27 single-vertex-flip
+competitor scores were no greater. This is a sample receipt. The
+stronger generic weighted optimality is expressed by source-written
+Agda/Lean theorem terms, not by the sample alone.
+
+Actual remaining closure wall: exact-head Agda and Lean compilers
+unavailable; the two-ended directed fabric is finite/synthetic and
+still lacks a source-justified target-domain gluing/face-mediation
+interface. Avoid any claim of full TOE, physical YM/Monster same-object,
+or human intersectionality evidence from these examples.
