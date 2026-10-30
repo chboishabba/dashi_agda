@@ -147,6 +147,7 @@ import DASHI.Arithmetic.TwinPrimeMangoldtProperPowerCandidateCoverageExact
 import DASHI.Arithmetic.TwinPrimeMangoldtErrorSupportProperExact
 import DASHI.Arithmetic.TwinPrimeMangoldtPrimeOneCertifiedBidiExact
 import DASHI.Arithmetic.TwinPrimeMangoldtProperPower25_27NoGoExact
+import DASHI.Arithmetic.TwinPrimeOddCompositeCubeRoughCutExact
 import DASHI.Arithmetic.TwinPrimeResidualMangoldtFiniteSumBidiExact as MangoldtFiniteSum
 open MangoldtFiniteSum public using
   ( AdditiveScalar
