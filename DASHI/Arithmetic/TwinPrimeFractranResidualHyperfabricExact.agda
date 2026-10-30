@@ -50,6 +50,7 @@ import DASHI.Arithmetic.TwinPrimeTernary270IbrahimSurvivorCollisionExact as Witn
 import DASHI.Arithmetic.SignedSSPOrientationTwinClassifierNoGoExact as Twin
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
 import DASHI.Core.ConsumerIndexedResidualRefinementExact as Repair
+import DASHI.Core.ObserverRefinementLatticeExact as Observe
 import DASHI.Analysis.PickoverConsumerResidualFibreBridgeExact as Pickover
 import DASHI.Interop.VerifiedFractranCrankPipeline as Machine
 import DASHI.Combinatorics.SSP15FractranCompression as Compression
@@ -305,6 +306,19 @@ pickoverNecessityOfTwinPeriod =
     actualTwinCoarseCollision
     pickoverPatternForActualTwinConsumer
 
+-- This is the *strong* in-repo sin-9999 theorem: the pair
+-- observer is provably a STRICT refinement of the coarse residue.
+pickoverTwinStrictRefinement :
+  Observe.StrictRefinement
+    (Fibre.coarse arithmeticCoarseFineFibre)
+    (Observe.pairObserver
+      (Fibre.coarse arithmeticCoarseFineFibre)
+      (Fibre.relativeFine arithmeticCoarseFineFibre))
+pickoverTwinStrictRefinement =
+  Pickover.signedFibreStrictlyRefinesSector
+    actualTwinCoarseCollision
+    pickoverPatternForActualTwinConsumer
+
 -- The concrete original Weil/Mangoldt producer can be transported
 -- through this SAME exact arithmetic fibre. This is a genuine
 -- pointwise consumer theorem, not a symbol-label comparison.
@@ -481,8 +495,11 @@ fiftyNineHasNoLocalFractranStep
 ------------------------------------------------------------------------
 -- FINITE FRACTRAN PREFIX / LOCAL SIEVE EXACT CORRESPONDENCE.
 --
--- A two-endpoint fraction-denominator guard is activated iff a
--- certified prime modulus divides n OR n+2. This is a state-indexed
+-- The paired-test guard is activated iff a certified prime modulus
+-- divides n OR n+2. This combines TWO literal divisor tests, and
+-- is NOT itself one fraction applied directly to the integer n.
+-- Compiling both registers into one FRACTRAN machine state still
+-- needs a verified state-encoding/step-simulation theorem. This is a state-indexed
 -- "first applicable fraction" failure/blocked-prefix predicate.
 -- The source-owned CertifiedPrimePairModulusExact already has the
 -- exact complement: AllPairSurvive. Do NOT invent a second sieve.
