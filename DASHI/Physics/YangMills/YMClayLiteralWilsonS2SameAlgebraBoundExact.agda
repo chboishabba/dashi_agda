@@ -16,7 +16,7 @@ import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R2
 import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact as R304
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationExact as S2
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundExact as Trace
-import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as RationalSU2
+import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonBoundedAlgebraExact as Literal
 
 ------------------------------------------------------------------------
 -- ROUTE-S S2 / WILSON BOUNDS ON THE SAME T5 OBSERVABLE ALGEBRA
@@ -96,27 +96,38 @@ sameAlgebraWilsonCylinderBoundData {dataSet = dataSet} inputs = record
 ------------------------------------------------------------------------
 
 record RationalSU2TraceGramBoundSource
-    {Measure TestObservable Loop : Set}
+    {Measure TestObservable : Set}
+    (n : Nat)
     (dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ)
     : Set₁ where
   field
-    loopHolonomy : Loop → RationalSU2.RationalUnitQuaternion
-    traceObservable : RationalSU2.RationalUnitQuaternion → TestObservable
-    -- Physical same-object witness: never substitute a synthetic trace carrier
-    -- for the existing literal Wilson-loop observable.
-    literalWilsonLoopObservable : Loop → TestObservable
-    traceIsLiteralWilson : ∀ loop →
-      traceObservable (loopHolonomy loop) ≡ literalWilsonLoopObservable loop
+    -- Same configuration-dependent Wilson path owner as the rational
+    -- periodic-bond carrier; DO NOT replace by a fixed quaternion per path.
+    physicalWilsonObservable :
+      Literal.RationalWilsonObservable n → TestObservable
+
+    literalWilsonLoopObservable :
+      Literal.RationalWilsonPath n → TestObservable
+
+    -- Exact same-object equality for the literal path observable, not a
+    -- witness about a synthetic scalar function on a different carrier.
+    traceIsLiteralWilson : ∀ path →
+      physicalWilsonObservable (Literal.literalWilsonPathObservable path)
+      ≡ literalWilsonLoopObservable path
+
+    -- One physically meaningful bridge from canonical pointwise unit
+    -- boundedness on the literal rational SU(2) configuration space to
+    -- Gram.BoundedObservable on the intended same measure/carrier.
+    pointwiseUnitBoundGivesGramBounded :
+      ∀ observable →
+      Literal.PointwiseUnitBounded observable →
+      Gram.BoundedObservable dataSet (physicalWilsonObservable observable)
 
     one groupRank : ℚ
     multiplyScalar : ℚ → ℚ → ℚ
 
-    -- A single interpretation theorem on the same physical measure:
-    -- normalized rational SU(2) trace in [-1,1] is Gram-bounded.
-    traceIntervalIsGramBounded :
-      ∀ q → Trace.RationalSU2NormalizedTraceBound q →
-        Gram.BoundedObservable dataSet (traceObservable q)
-
+    -- The target's generic Gram algebra needs full bounded-product closure,
+    -- not just the existing rational-image multiplication theorem.
     boundedMultiplyClosed : ∀ left right →
       Gram.BoundedObservable dataSet left →
       Gram.BoundedObservable dataSet right →
@@ -124,33 +135,41 @@ record RationalSU2TraceGramBoundSource
         (Gram.multiplyObservable (Gram.operations dataSet) left right)
 
     identityObservable : TestObservable
-    identityBounded :
-      Gram.BoundedObservable dataSet identityObservable
+    literalIdentitySameObject :
+      physicalWilsonObservable (Literal.oneObservable {n})
+        ≡ identityObservable
 
 rationalSU2TraceToSameAlgebraWilsonBounds :
-  ∀ {Measure TestObservable Loop}
+  ∀ {Measure TestObservable}
+    {n : Nat}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ} →
-  RationalSU2TraceGramBoundSource {Loop = Loop} dataSet →
-  SameAlgebraWilsonBoundInputs {Loop = Loop} dataSet
+  RationalSU2TraceGramBoundSource n dataSet →
+  SameAlgebraWilsonBoundInputs {Loop = Literal.RationalWilsonPath n} dataSet
 rationalSU2TraceToSameAlgebraWilsonBounds {dataSet = dataSet} source = record
   { SameAlgebraWilsonBoundInputs.loopObservable =
       RationalSU2TraceGramBoundSource.literalWilsonLoopObservable source
-  ; SameAlgebraWilsonBoundInputs.one = RationalSU2TraceGramBoundSource.one source
-  ; SameAlgebraWilsonBoundInputs.groupRank = RationalSU2TraceGramBoundSource.groupRank source
-  ; SameAlgebraWilsonBoundInputs.multiplyScalar = RationalSU2TraceGramBoundSource.multiplyScalar source
+  ; SameAlgebraWilsonBoundInputs.one =
+      RationalSU2TraceGramBoundSource.one source
+  ; SameAlgebraWilsonBoundInputs.groupRank =
+      RationalSU2TraceGramBoundSource.groupRank source
+  ; SameAlgebraWilsonBoundInputs.multiplyScalar =
+      RationalSU2TraceGramBoundSource.multiplyScalar source
   ; SameAlgebraWilsonBoundInputs.literalLoopBounded =
-      λ loop →
+      λ path →
         subst (Gram.BoundedObservable dataSet)
-          (RationalSU2TraceGramBoundSource.traceIsLiteralWilson source loop)
-          (RationalSU2TraceGramBoundSource.traceIntervalIsGramBounded source
-            (RationalSU2TraceGramBoundSource.loopHolonomy source loop)
-            (Trace.normalizedTraceBound
-              (RationalSU2TraceGramBoundSource.loopHolonomy source loop)))
+          (RationalSU2TraceGramBoundSource.traceIsLiteralWilson source path)
+          (RationalSU2TraceGramBoundSource.pointwiseUnitBoundGivesGramBounded
+            source (Literal.literalWilsonPathObservable path)
+            (Literal.literalWilsonPathPointwiseUnitBounded path))
   ; SameAlgebraWilsonBoundInputs.boundedMultiplyClosed =
       RationalSU2TraceGramBoundSource.boundedMultiplyClosed source
   ; SameAlgebraWilsonBoundInputs.identityObservable =
       RationalSU2TraceGramBoundSource.identityObservable source
-  ; SameAlgebraWilsonBoundInputs.identityBounded = RationalSU2TraceGramBoundSource.identityBounded source
+  ; SameAlgebraWilsonBoundInputs.identityBounded =
+      subst (Gram.BoundedObservable dataSet)
+        (RationalSU2TraceGramBoundSource.literalIdentitySameObject source)
+        (RationalSU2TraceGramBoundSource.pointwiseUnitBoundGivesGramBounded
+          source Literal.oneObservable Literal.oneObservablePointwiseUnitBounded)
   }
 
 rationalSU2TraceSourcePaysLiteralLoopBoundedness : Bool
@@ -197,12 +216,14 @@ open SameAlgebraCanonicalS2Inputs public
 ------------------------------------------------------------------------
 
 rationalSU2TraceBuildsCanonicalS2 :
-  ∀ {Measure TestObservable Loop}
+  ∀ {Measure TestObservable}
+    {n : Nat}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
-    (source : RationalSU2TraceGramBoundSource {Loop = Loop} dataSet)
-    (translate : Loop → Nat → Loop) →
+    (source : RationalSU2TraceGramBoundSource n dataSet)
+    (translate :
+      Literal.RationalWilsonPath n → Nat → Literal.RationalWilsonPath n) →
   (supportTime : ∀ left right time →
     let bounds = sameAlgebraWilsonCylinderBoundData
           (rationalSU2TraceToSameAlgebraWilsonBounds source)
@@ -212,7 +233,7 @@ rationalSU2TraceBuildsCanonicalS2 :
       (Thermo.productLoopObservable bounds
         (map (λ loop → translate loop time) right))
       ≡ time) →
-  SameAlgebraCanonicalS2Inputs {Loop = Loop} finite
+  SameAlgebraCanonicalS2Inputs {Loop = Literal.RationalWilsonPath n} finite
 rationalSU2TraceBuildsCanonicalS2 source translate supportTime = record
   { SameAlgebraCanonicalS2Inputs.boundInputs =
       rationalSU2TraceToSameAlgebraWilsonBounds source
