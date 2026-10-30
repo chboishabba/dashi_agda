@@ -2064,3 +2064,90 @@ The deduplicated numeric candidate image was
 tested on 714 finite bounds; the source-written
 membership and no-duplicates proofs remain kernel
 pending. Do not claim a twin-prime discovery.
+
+## 30 October 2026 — CT11 universal binary cutoff + source-integrity repair (fresh repo/PR/Lean audit)
+
+**Current verified PR:** #1408 `feat/twin-prime-six-wheel-bounded-gap-reuse-20261028`; inspected
+the actual source of the existing `TwinPrimeProperPowerRectangleEnumerationExact`,
+`FiniteNatFloorSquareRootExact`,
+`FiniteWeightedReindexExact`,
+`TwinPrimeProperPowerFloorRootBoundExact` and
+`TwinPrimeProperPowerCoreBinaryCapacityReuseExact`.
+Checked actual `dashi_lean4/MoonshineFractran.lean`,
+`dashi_lean4/docs/DECLARATION_LANDSCAPE.md` and
+`agda2lean/README.md`, plus current PR heads #1244/#1275/#1414
+and original Ibrahim/QID/Pareto source. The Lean declaration map distinguishes
+checked-in statements from candidate bundles; no twin-prime gap-two
+positive theorem is thereby proved. Preserve original authorship.
+
+**REAL SOURCE DEFECT FOUND AND FIXED:** the CT11 rectangle module contained
+7 literal `\\n` sequences where Agda import lines should have had
+line breaks, plus duplicate `Agda.Builtin.Equality` and propositional
+equality imports. This is syntactically invalid Agda independent of
+Python mathematics. Repaired the header and consolidated imports on
+the PR. Added `scripts/check_twin_prime_agda_source_integrity.py` to
+detect literal escaped import newlines, duplicate module imports,
+postulates, explicit holes and termination pragmas; its four regex
+patterns initially had extra escaping and were corrected. It has an
+optional `--require-safe` check. It is a TEXT LINTER, not a kernel
+certificate. Current new proof modules do not have explicit
+`{-# OPTIONS --safe #-}` pragmas; do not promote them to Golden
+kernel-checked status.
+
+**NEW SOURCE-WRITTEN CT11:**
+`TwinPrimeProperPowerBinaryCutoffNatExact.agda` uses the ORIGINAL
+`GeneralResidualFibreCardinalityExact.pow2` and ORIGINAL floor-square-root
+maximality pattern to construct `floorBinaryExponent U`, with:
+`positiveBinaryPower`, `exponentLeBinaryPower`,
+`binaryExponentUpToMaximal`,
+`binaryPowerExponentBelowCutoff`,
+`properPowerExponentBelowCutoff`.
+The exact theorem is `pow2 e≤U ⇒ e≤floorBinaryExponent U`,
+for every Nat U,e, without importing real logarithm or a
+fixed-4-state logarithm certificate.
+
+`TwinPrimeProperPowerUniversalRectangleCoverageExact.agda`
+composes this computed cutoff with CT10 floor-square-root and the
+already source-written rectangular enumeration:
+`properPowerInComputedRectangle`,
+`properPowerInDedupComputedRectangle`,
+`computedCandidateDistinctCountBound`,
+`computedCandidateImageNoDuplicates`. For EVERY
+base b≥2, exponent k≥2 and upper bound U with
+`b^k≤U`, the numeric value belongs to the deduplicated list and
+the candidate-list size is at most
+`floorSquareRoot(U) * floorBinaryExponent(U)`.
+The list can overcount with composite base candidates or values >U,
+never omit an actual bounded proper power.
+Both modules have exactly one import in each of the three TOE roots.
+
+**Executed independent local arithmetic oracle:** for U=0..2048,
+2,049 computed cutoffs agreed with integer `bit_length-1` where
+defined, and 97,619 actual (base, exponent, bound) proper-power
+coordinate witnesses passed. This is finite computation, NOT Agda typing.
+The earlier 714 rectangle tests and 22,645 actual proper-power membership
+checks remain separate executed evidence.
+
+**Exact outstanding tasks, ordered by alpha:**
+CT01: compile the new Agda dependency chain under actual Golden `--safe`
+imports; repair all compiler failures, no postulates or unsafe pragmas.
+CT11: bridge proof-bearing actual `AllPrimeArithmetic.Prime` p≥2 to
+this numeric representation; prove finite distinct-value support
+cardinality in an explicit membership/counting predicate over [0,U].
+CT12–CT14: instantiate ordered logarithms and prove the global
+nonnegative proper-power weighted error bound and `o(X)`.
+CT15a/b/c: rigorously establish exact shifted prime-correlation
+signed expansion, positive main term, and unconditional one-sided
+cancellation estimate. **CT15 remains genuinely unproved new research.**
+CT16–CT18: unconditional positive prime-only sum, certified twin
+witnesses and final infinitude, not merely a conditional
+`UnboundedCertifiedCountJumps` field.
+
+**Fresh external adversarial reference:** Wang, Zenodo 23694711
+(27 Oct 2026), version 0.8, distinguishes proved-in-model parity
+counterfeits, computational claims, and independently unverified
+method-limit proposals. Lü–Wang–Wu, arXiv:2610.20242 (Oct 2026),
+studies cancellation of `Λ(n)μ(n+2)` (one shifted Möbius factor);
+that is NOT equivalent to a lower bound for
+`Λ(n)Λ(n+2)`. Neither may be promoted to a twin-prime proof.
+No ESD edits and no CI executed.
