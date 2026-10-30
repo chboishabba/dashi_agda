@@ -208,7 +208,9 @@ def verify_rational_solver_source_integrity():
     )
     for name in sample_names:
         assert len(re.findall(r"^"+name+r" :",sampling,re.M))==1,name
-        assert re.search(r"^"+name+r" [^\n]* =",sampling,re.M),name
+        assert (re.search(r"^"+name+r" [^\n]* =",sampling,re.M) or
+                (name=="projectS3AnyFixesInvariant" and
+                 "projectS3AnyFixesInvariant f invariant x\n  with" in sampling)),name
     assert "Data.Rational" not in sampling
     rational_sample_names=(
         "projectRationalC3", "projectRationalS3",
