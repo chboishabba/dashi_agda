@@ -16,12 +16,15 @@ module DASHI.Arithmetic.TwinPrimeMangoldtProperPower25_27NoGoExact where
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Nat.Base using (_≤_; _<_)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import Data.Nat.Primality as Prime
 open import Relation.Nullary.Decidable.Core using (from-yes)
 import DASHI.Analysis.RiemannPrimePowerArithmetic as Power
 import DASHI.Arithmetic.FiniteTwinSieveFactorableLiftExact as Factors
 import DASHI.Arithmetic.TwinPrimeSixWheelExact as Twin
+import DASHI.Arithmetic.TwinPrimeOddCompositeCubeRoughCutExact as Cube
+import Data.Nat.Properties as NatP
 
 fiveSquaredIs25 : Power.natPow 5 2 ≡ 25
 fiveSquaredIs25 = refl
@@ -173,3 +176,33 @@ negativeMobiusShapeCannotForceTwin inferred =
   hundredThreeDoesNotStartTwin
     (inferred 103 hundredThreeIsCertifiedPrime
       oddSquarefreeCounterfeit103)
+
+------------------------------------------------------------------------
+-- Receive the UNIVERSAL cube-roughness theorem in the original
+-- 103/105 parity counterfeit, not just in a separate numerical toy.
+-- Every factor of 105=3*5*7 is >=3, so 3^3<=105. The converse
+-- "negative Mobius and cube rough implies prime" additionally needs
+-- an actual total fundamental-theorem-of-arithmetic/Mobius classifier.
+------------------------------------------------------------------------
+
+oddComposite105CubeBound :
+  Cube.cubeThreshold 3 ≤ 105
+oddComposite105CubeBound =
+  Cube.cubeBelowCertifiedTripleValue
+    105 3 3 5 7 1
+    refl
+    NatP.≤-refl
+    (NatP.m≤m+n 3 2)
+    (NatP.m≤m+n 3 4)
+    NatP.≤-refl
+
+oddComposite105CannotBeCubeRoughAtThree :
+  105 < Cube.cubeThreshold 3 → ⊥
+oddComposite105CannotBeCubeRoughAtThree =
+  Cube.threeLargeFactorsContradictCubeRoughness
+    105 3 3 5 7 1
+    refl
+    NatP.≤-refl
+    (NatP.m≤m+n 3 2)
+    (NatP.m≤m+n 3 4)
+    NatP.≤-refl
