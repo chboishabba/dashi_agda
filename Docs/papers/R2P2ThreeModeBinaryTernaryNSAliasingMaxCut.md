@@ -675,3 +675,56 @@ To keep C4 and C5 equally audited, `scripts/r2p2_c4_3d_exact_sampled_quadratic_d
 Static source review also found a portability/implicit-instance hazard in the new operator modules: the unscaled Fourier normalization constants had been written as polymorphic bare numerals `64` and `125` of type `ℚ`. These were changed **in place** to the standard library's explicit rational constructors `normalize 64 1` and `normalize 125 1`. The complementary inverse scales remain `normalize 1 64` and `normalize 1 125`. This is a syntactic/type-directed hardening, not a claim of a verified algebraic theorem. The Agda standard-library `Data.Rational.Base.normalize` signature was checked against its actual source; it accepts nonzero-denominator natural arguments.
 
 The direct Agda and Lean source-inspection evidence, exact local Python checks, and new source commits are separate grades. No exact-branch Agda/Lean kernel, pinned checkout regression execution, or CI was run.
+
+
+## 5j. 30 October 2026 — direct current-head Agda/Lean audit and source-identical 729-product Fubini bridge
+
+### Verified donor discovery before writing code
+
+**Agda branch source read directly:** `FourierObserverIncidenceExact` owns `cube27`, `pair729`, 0..26/0..728 dense ranks; `FiniteQuadraticConvolutionExact` owns the original `fiveGroupAdd`; `FourGridRetainedQuadraticParetoExact` owns original `fourGroupAdd`; `BilinearCyclotomicPadCutExact` owns arbitrary-coefficient indexed 729-term exact convolution; `Orbit365PermutationReductionExact`, `Orbit365RankSortPermutationExact`, and `PlaneOrbit41RankSortConvolutionExact` own the earlier antipodal source candidate. Reused all, did not invent a second input-pair ABI.
+
+**Most important negative source finding:** `Biology/Physical/C3CubeCyclotomicFourierExact.agda` has `spectralConvolutionDiagonalises`, but its `FourierAuthorityBoundary` *explicitly records* `spectralConvolutionAlreadyProvesGroupSumFormulaIsFalse`. That theorem is based on `cubeFourierForwardInverse`, **not** the missing spatial pointwise-product-to-group-convolution formula. It cannot be invoked as the missing C4/C5 729-term bridge. The existing `NSTriadKNLuoFiniteFourierParsevalFromInversionExact` and `YangMills/BalabanFiniteSumFubiniExact` already prove rational-valued Fubini/sum-swap/distribution. These are **method donors** only: their target `ℚ` is not automatically `Q(i)` or `Q(ζ5)`.
+
+**Actual Lean main-source read:** `dashi_lean4/ExternalClayNS/AgdaContract.lean` transports space/time histories; `NSUnforcedAnalyticCuts.lean` contains the signed R440 physical zero-padding adversary. No unproved finite C4/C5 Fourier scalar equivalence was imported from Lean. **Latest PRs checked:** #1438 trialectic weighted directed graph with exact non-geometric opposition and no C3 invariance; #1437 separate combinatorial Max Cut/Pareto scheduling with explicit no-physics-promotion; #1433 actual A/B/C/D and BM2/R829; #1428 periodic-B R440 frontier. Their specific **Agda code** was read, not only their PR bodies. Their source ownership remains independent of the 27×729 sampled Fourier proof.
+
+### Exact coefficient algebra now source-written, without a parallel ontology
+
+Extended **existing** `R2P2C4GaussianFourierCharacterExact.agda` and `R2P2C5CyclotomicFullFourierCharacterExact.agda` with 12 exact scalar laws each: addition associativity, commutativity, zero identities, multiplication associativity, commutativity, one/zero identities and both distributivity directions. They are source-written rational ring-solver proof terms, not kernel receipts. They are the missing concrete field laws needed to use finite Fubini with Q(i) and Q(ζ5).
+
+Extended original **`R2P227729BilinearCyclotomicPadCutExact.agda`** with a **single** coefficient-polymorphic `FiniteSumAlgebra` law record and finite fold lemmas `sumAllCong`, `sumAllZero`, `sumShuffle4`, `sumAllAdd`, `sumAllSwap`, `sumAllScaleLeft/Right`, `sumAllAppend`, `sumAllMap`, `sumAllConcatMap`, `sumAllPair729AsDouble`, and `sumAllDoubleProduct`. The chief theorem is **`source729ProductExpansion`**:
+
+```text
+∀ f,g : original ModeCube27 -> A,
+     (Σ[p∈original cube27] f[p]) * (Σ[q∈original cube27] g[q])
+   = Σ[(p,q)∈original pair729] (f[p] * g[q])
+```
+
+It is a proof over exactly the existing **729 original ordered addresses** and an arbitrary `CoefficientOps A` equipped with explicitly supplied finite-sum algebra laws, not merely `27 × 27 = 729` counts. This reuses the source rational finite-sum Fubini proof pattern over the correct scalar carriers, and introduces no unproved scalar coercion. Instantiated as `gaussianActual729InputProductExpansion` in the existing C4 operator and `cyclotomicFiveActual729InputProductExpansion` in the existing C5 operator. Both are now named and projected into all three golden TOE roots.
+
+Added explicit finite **character-addition** in the **same existing C4/C5 character files**: `scalarIndexDistributivity` (64/125 original-index cases by the actual original group addition) and `characterAdditionLaw` (character of sum equals product). This is the exact group-representation law needed to turn each spatial Fourier product's 729 expanded terms into a frequency-indexed sum. It is **not** an identification with any Monster 3B representation.
+
+### Independent executed evidence versus claimed Agda authority
+
+A source-derived JavaScript checker parsed the actual C4/C5 Agda `scalarProduct4/5` and `fourGroupAdd/fiveGroupAdd` tables, including the source's generalized zero-identity cases, and evaluated **64/64 C4** and **125/125 C5** scalar-index distributivity clauses: **zero mismatches**. This tests the exact definitions entering `characterAdditionLaw`, not a separately invented group table.
+
+A separate local exact Python `Fraction` arithmetic test checked **all 8 Q(i) and 64 Q(ζ5) basis triples** for multiplication associativity and both distributivity directions; it then checked **five independent arbitrary dense 27-mode field pairs for each scalar** against the full **729** original ordered-product expansion. All passed. The two preexisting C4/C5 Python scripts were extended with basis-triple / 729-sum regression checks **in place**, not forked. This is independently executed arithmetic, **not** a committed-checkout regression run, nor the Agda kernel checking these terms.
+
+**Verification state:** The new Agda ring law proofs, generic finite-sum lemmas, 729-product expansion and C4/C5 character-addition terms are *source-written only*. An exact-head kernel check is necessary before calling them proved in Agda. No postulates, holes, termination/positivity/unsolved-meta bypasses were intentionally added; scan/readback must still not be confused with compiler verification.
+
+### Highest-alpha remaining cut (precise equation)
+
+The product-distribution step to literal `pair729` is now sourced. The remaining proof obligation is to transport the **actual Q(i)/Q(ζ5) tensor Fourier sample operators** into these algebraic sums, collapse the `64/125` normalized spatial character sums by the exact character orthogonality laws, and use the **original** output membership/aliasing maps, obtaining the two equations without any unverified intermediate postulate:
+
+```text
+∀ f,g : ModeCube27 -> Gaussian4, k : ModeCube27,
+  retainedSampledBilinear f g k
+   ≡ fourGridGaussianIndexConvolutionAt f g k
+
+∀ f,g : ModeCube27 -> Cyclotomic5, k : WideCube125,
+  fullSampledBilinear125 f g k
+   ≡ indexedFiveGridBilinearAt f g k
+```
+
+Then a separately verified native `ExactNSFourierInteractionStructure` / Complex3 / Leray transport is required, keeping original R440/R736/B4 analytic cut and physical real ODE separate. **OpenAI NavierStokesAndEuler 2026** formally proves the *forced* C/D breakdown and unforced Euler blowup, not this branch's unforced periodic-B estimate; original authors and Lean source priority are preserved ([original released code](https://github.com/openai/NavierStokesAndEuler), [released formalization manifest](https://github.com/openai/NavierStokesAndEuler/blob/main/formalization.yaml)). Weinan Wang's 2026 Lean result on 2D Galerkin constructions ([arXiv:2609.33033](https://arxiv.org/abs/2609.33033)) is independent prior art, not this exact 3D C4/C5 scalar transport.
+
+**Ibrahim/source-custody rule:** `IbrahimSnowballParetoFrontierExact`, prior source-produced first-link provenance, original Monster 3B authors, other repository proofs and kernel-verified certificates retain separate ownership and authority. No 27/729 spectral coincidence, matched character table, synthetic clock receipt, or generalized Pareto/Max Cut lane promotes same-object Monster, calibrated R2P2, or unforced NS closure. ESD untouched, CI untouched.
