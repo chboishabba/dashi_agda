@@ -17,6 +17,9 @@ module DASHI.Foundations.PolynomialIbrahimParetoSnowballMaxCutExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Rational.Base using (ℚ; 0ℚ)
+open import Data.Product using (_×_)
+open import Data.Sum using (_⊎_)
 
 import DASHI.Foundations.PolynomialVideo45ConceptContractsExact as Video
 import DASHI.Foundations.PolynomialBraidPermutationImageExact as Braid
@@ -25,6 +28,9 @@ import DASHI.Foundations.PolynomialNumerologyArithmeticAtlasExact as Numerology
 import DASHI.Foundations.Polynomial369TrialecticTransportExact as Trialectic
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ExistingTOE
 import DASHI.Wikimedia.IbrahimMonster3BRecognitionRouteParetoExact as Ibrahim
+import DASHI.Foundations.PolynomialVietaRootSymmetryExact as Vieta
+import DASHI.Foundations.PolynomialVandermondeDiscriminantExact as Discriminant
+import DASHI.Foundations.PolynomialMonodromyTernaryQuaternionBridgeExact as Spin
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 
 record PolynomialEvidenceMaxCut : Set₁ where
@@ -144,3 +150,32 @@ specificPolynomialMonodromyQid =
 
 qidCannotPayPolynomialProof : Identity.QidPaysSourceTruth → ⊥
 qidCannotPayPolynomialProof = Identity.qidDoesNotPaySourceTruth
+
+------------------------------------------------------------------------
+-- ORIGINAL VIDEO algebraic Pareto receipt, not a new proof owner.
+-- Exact forwarders consume the actual M1/M10 Agda proof terms, not
+-- bool labels, QIDs, source similarity or synthetic mathematical data.
+-- Source-written/KERNEL PENDING. Any complex-coefficient covering,
+-- quintic Galois theorem, smooth Spin lift and Monster 3B SAME OBJECT
+-- claim retain their distinct unfilled obligations above.
+------------------------------------------------------------------------
+
+originalVideoM1CoefficientDiscriminantReceipt :
+  (a b c : ℚ) →
+  (Discriminant.coefficientDiscriminant
+    (Vieta.rootSum (Vieta.roots a b c))
+    (Vieta.rootPairSum (Vieta.roots a b c))
+    (Vieta.rootProduct (Vieta.roots a b c)) ≡ 0ℚ →
+    (a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c))) ×
+  ((a ≡ b) ⊎ ((a ≡ c) ⊎ (b ≡ c)) →
+    Discriminant.coefficientDiscriminant
+      (Vieta.rootSum (Vieta.roots a b c))
+      (Vieta.rootPairSum (Vieta.roots a b c))
+      (Vieta.rootProduct (Vieta.roots a b c)) ≡ 0ℚ)
+originalVideoM1CoefficientDiscriminantReceipt =
+  Discriminant.coefficientDiscriminantZeroIffRootCollisionRational
+
+originalVideoM10OrientationReceipt :
+  Spin.FullPositiveQuaternionS3Action → ⊥
+originalVideoM10OrientationReceipt =
+  Spin.noFullPositiveQuaternionS3Action
