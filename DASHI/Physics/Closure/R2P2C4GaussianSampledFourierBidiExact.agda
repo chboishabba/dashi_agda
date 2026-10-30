@@ -316,7 +316,7 @@ oneAxisSampledConvolutionIsCyclic
 
 gaussianScaleOfProduct :
   (q r : ℚ) (x y : Gaussian4) →
-  scaleG (q * r) (G._*G_ x y)
-  ≡ G._*G_ (scaleG q x) (scaleG r y)
-gaussianScaleOfProduct q r (G.gauss a b) (G.gauss e f) =
+  scaleG (q * r) (C4._*G_ x y)
+  ≡ C4._*G_ (scaleG q x) (scaleG r y)
+gaussianScaleOfProduct q r (C4.gauss a b) (C4.gauss e f) =
   C4.gauss-ext solve-∀ solve-∀
