@@ -17303,3 +17303,16 @@ Cleanup
 - [ ] Kernel-check both the updated CT11/M15 module and the exact transitive import graph under --safe, no postulates/holes.
 - [ ] Connect genuine bounded-interval, indexed nonzero-error support count to the distinct covering image; instantiate real ordered logarithms, pointwise nonnegative residual weights, and the final O(sqrt(U) log³(U)) / o(X) estimate.
 - [ ] Prove CT15a/b/c unconditional positivity and signed correlation control; until then CT16-CT18 infinitude is unavailable.
+
+### 2026-10-30 CT15 frontier research continuation (#1408)
+
+- [x] Inspect actual Agda prime arithmetic, Mangoldt BIDI, signed Möbius finite probe, CT11 cutoff, real-log owners; actual Lean source, agda2lean; latest Riemann/3×3/YM/Ibrahim PR heads.
+- [x] Source-write 103→105=3×5×7 negative-Möbius parity false-positive in original no-go Agda owner; use certified NatPrime and genuine 105 factorisation.
+- [x] Independently run finite Möbius sign / odd-squarefree contamination / cube-roughness oracle on five dyadic windows; commit reproducible checker (not separately executed from checkout).
+- [x] In original M16 Agda owner, source-write scalar total-vs-error disequality and arbitrary-observer separation → bounded true twin, plus cofinal conditional twin infinitude; **separation premise remains missing**.
+- [x] Reuse original stdlib Log₂ and in-repo core pow2 to source-write canonical floor-log, rectangle and extensional equivalence with old cutoff; **compiler pending**.
+- [ ] CT01: run actual Agda --safe transitive compilation, fix elaboration issues; no postulates/holes/termination escapes.
+- [ ] CT12–CT14: instantiate nondegenerate ordered ordinary-real logarithm with real Mangoldt weights; prove actual weighted support sum domination and E(X)=o(X).
+- [ ] CT15: originate and prove a uniform or cofinal analytic/spectral/arithmetic separation of *actual* ΛΛ correlation from proper-power error; Möbius signed cancellation and finite geometry do not suffice.
+- [ ] CT16–CT18: discharge the real cofinal observer/positivity theorem *without assumption* and close TwinPrimesInfinitelyOften with kernel receipt.
+- [ ] Historical ownership unchanged: Brun, Hardy–Littlewood, Chebyshev/von Mangoldt/Möbius, Lü–Wang–Wu, independent repo/PR authors, Ibrahim Monster 3B, Pareto/Snowball, meta-introspector, QIDs navigation-only, no ESD edits.
