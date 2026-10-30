@@ -1979,3 +1979,56 @@ Prove rather than assume both.
 Agda/Lean binaries unavailable locally. No CI run.
 External sources (Song–Yue 2026, Wang 2026) provide
 claims/method diagnostics, not proof of gap 2.
+
+### 30 October 2026 — CT11 candidate-image uniqueness and soundness follow-on
+
+Extended `TwinPrimeProperPowerRectangleEnumerationExact.agda`
+with additional **source-written, kernel-pending** finite
+proofs after the rectangular enumeration:
+
+- Replaced an unguarded filtered-list recursion in
+  `dedupPowerValues` by structural `insertIfFresh`,
+  with `insertIfFreshLengthAtMost` and
+  `dedupLengthAtMost`; removed the need for any
+  `TERMINATING` escape.
+- `insertContainsNew`, `insertPreservesOld`,
+  `insertMembershipBack`: proof-bearing insertion
+  preserves every old element, adds the requested
+  element, and introduces no other element.
+- `dedupPreservesMember` and
+  `dedupMemberComesFromOriginal`: membership BIDI
+  between the mapped power candidate list and the
+  duplicate-eliminated list.
+- `DistinctValues`, `insertPreservesDistinct`,
+  `dedupValuesDistinct`: all output numeric values
+  occur at most once; a separate top-level
+  `insertedMemberContradiction` avoids nested
+  Agda with-clause scoping ambiguities.
+- The prior `properPowerCandidateDistinctCountBound`
+  gives length of the duplicate-free candidate image
+  ≤ B*E; combined with `powerValueRectangleCovers`
+  this is the desired finite-image domination
+  **once an exponent cutoff is established for every
+  proper power under the target U**.
+
+**Actually executed local arithmetic model:** 714
+targets; 361,752 candidate coordinates; all
+duplicate-free mapped numeric images preserved
+their source sets and obeyed the B*E upper bound.
+An independent 22,645 true proper-prime-power
+coordinate/value-membership sweep also passed.
+These were Python finite checks, not Agda kernel receipts.
+
+**Remaining CT11:** discharge `k<E(U)` for all
+proper powers under U with the concrete
+`E(U)=floor(log2 U)`; the existing binary
+envelope only proves `2^(k+2)≤U`.
+Formalise exact universal length/cardinality of
+actual distinct proper-prime-power support from
+the constructed membership BIDI.
+CT12–CT14 still require a concrete ordered
+logarithmic scalar and sublinear error theorem.
+CT15c genuine signed parity-sensitive shifted-prime
+correlation estimate remains NEW MATH and OPEN.
+No ESD changes or CI; preserve original mathematical,
+Agda/Lean, Ibrahim and QID ownership.
