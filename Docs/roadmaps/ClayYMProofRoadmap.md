@@ -1,5 +1,26 @@
 # Clay Yang-Mills Proof Roadmap
 
+
+### P2 rational-trace / same-algebra alternative (30 October extension)
+
+The canonical `BalabanSU2RationalWilsonTraceBoundExact` proves
+`-1 <= realPart(q) <= 1` for rational unit-quaternion SU(2) data.
+`YMClayLiteralWilsonS2SameAlgebraBoundExact` now defines the proof-bearing
+`RationalSU2TraceGramBoundSource` and the explicit projections
+`rationalSU2TraceToSameAlgebraWilsonBounds` and
+`rationalSU2TraceBuildsCanonicalS2`. Once one same-carrier
+`traceIntervalIsGramBounded` interpretation is exhibited, **all loopwise
+boundedness fields** are supplied by the existing trace theorem. The resulting
+canonical S2 inputs feed `YMClayLiteralWilsonP2ExpectationConvergenceExact`
+and the already-proved three selected expectation-limit compilers. This
+removes a family of duplicate P2 per-loop boundedness proofs. The exact
+remaining P2 obligations are now the trace→Gram physical interpretation,
+bounded-product closure, identity boundedness, selected Euclidean
+translate/support-time identity, and actual measure convergence on the same
+physical theory. The rational-quaternion argument alone is **not** a proof
+over full continuum Haar SU(2), nor an independent gauge-measure limit.
+
+
 ## 2026-10-30 — Route-S H1 direct-source Pareto weld
 
 The highest-value reuse cut is the **direct source/OS** mass-gap route, not a
