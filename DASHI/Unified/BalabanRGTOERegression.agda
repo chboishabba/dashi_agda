@@ -24,6 +24,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as P2Trace
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
@@ -705,3 +706,24 @@ balabanR320RouteSNoSecondAbsoluteMagnitudeInput :
   balabanR320RouteSMagnitudeNotNewPhysical ≡ false
 balabanR320RouteSNoSecondAbsoluteMagnitudeInput =
   RouteS.routeSH1ReusesR313MagnitudeCompilerIsFalse
+
+
+------------------------------------------------------------------------
+-- Preferred P2 bounded-observable alternative (rational SU2 trace).
+-- The trace theorem is literal rational quaternion arithmetic; physical
+-- Wilson/Gram interpretation is a separate conditional bridge.
+------------------------------------------------------------------------
+
+balabanRouteSP2TraceToCanonicalS2CompilerLevel : ProofLevel
+balabanRouteSP2TraceToCanonicalS2CompilerLevel =
+  P2Trace.rationalSU2TraceToSameAlgebraCompilerLevel
+
+balabanRouteSP2TracePhysicalInterpretationLevel : ProofLevel
+balabanRouteSP2TracePhysicalInterpretationLevel =
+  P2Trace.rationalSU2TraceToGramInterpretationLevel
+
+balabanRouteSP2TracePaysPerLoopBounds :
+  P2Trace.rationalSU2TraceSourcePaysLiteralLoopBoundedness ≡ true
+balabanRouteSP2TracePaysPerLoopBounds =
+  P2Trace.rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue
+
