@@ -40,6 +40,15 @@ monitor surface.
   boundedness and continuum measure convergence remain explicit.
 
 
+
+- Late P2 source-first correction: found and directly reused the pre-existing
+  `BalabanLiteralRationalSU2WilsonBoundedAlgebraExact` configuration-dependent
+  Wilson path bound, identity and product proofs. Replaced the narrower
+  fixed-quaternion adapter by a literal rational Wilson-function carrier and
+  derived identity boundedness from the canonical donor. Same-object and
+  pointwise-to-Gram interpretation remain explicit inputs.
+
+
 ## 2026-07-19 — Wetsuit seam optimisation boundary
 
 - Added `DASHI.Geometry.WetsuitSeamOptimisationBoundary`, a fail-closed typed
