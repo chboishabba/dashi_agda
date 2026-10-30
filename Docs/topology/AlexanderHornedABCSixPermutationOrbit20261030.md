@@ -201,3 +201,30 @@ three-dimensional supplier is constructed.
 Independent Python finite verification passed all 36 pairwise
 class-equivalence tests and 36 index-equivariance tests. These are
 not exact-head Agda kernel receipts.
+
+
+## 7. Ibrahim / polynomial non-promotion cross-check (actual Agda files read)
+
+Read source on \`master\`:
+\`DASHI/Wikimedia/IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact.agda\`
+and \`DASHI/Moonshine/Monster3BHighestAlphaValidation.agda\`.
+The former explicitly proves/records a crucial type distinction:
+**six position labels are not a six-dimensional vector space**;
+more generally 90 chosen multiplicity-basis labels are not by
+themselves an inertia linear representation and a character
+decomposition 12+78 does not give a permutation action on
+\`Fin 90\`. Its mathematical priority credits Barraclough–Wilson
+(2007), Serre (1977), prior Ibrahim models and the existing DASHI
+linear-action and snowball attribution owners.
+
+Also read actual independent polynomial PR #1414 files
+\`PolynomialHornedPerfectGroupObserverExact.agda\` and
+\`PolynomialHornedSpinSignNonDescentExact.agda\`.
+These distinguish commutator-generated groups from a claim that
+every element is a single commutator, and distinguish Q8/V4
+sign loss from 2I/A5 or S5. Nothing there equates the six
+ABC boundary classes with a Monster permutation or linear
+representation. The new three-class quotient is only a
+source-owned **S3-set**, not a representation of a Monster
+3B normalizer, a faithful braid action, physical spin holonomy,
+or a same-object wild-exterior computation.
