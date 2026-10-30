@@ -111,23 +111,24 @@ record ScopedRole : Set where
     legalRole : LegalRole
     objectKey : String
     source : Source.AttributedSource
-    sameObjectContractPaid : Bool
+    roleFromSourcePaid : Bool
+    directContractBetweenRolesPaid : Bool
 open ScopedRole public
 
 cherishProponent : ScopedRole
 cherishProponent = scoped-role epbcProponent
   "EPBC 2019/8575 — Cherish Enterprises Pty Ltd"
-  cherishPublicCommentNotice true
+  cherishPublicCommentNotice true false
 
 stocklandProposedDeveloper : ScopedRole
 stocklandProposedDeveloper = scoped-role proposedDeveloper
   "Springview project page — proposed developer"
-  stocklandSpringview true
+  stocklandSpringview true false
 
 landTitleStillOpen : ScopedRole
 landTitleStillOpen = scoped-role registeredLandowner
   "EPBC 2019/8575 — exact registered parcel title"
-  stocklandSpringview false
+  stocklandSpringview false false
 
 -- A programme-level gas expansion statement and an aggregate network owner
 -- are compatible with different exact project-pipe identities. The fact that
