@@ -18,13 +18,13 @@ module DASHI.Research.OpenAIMath.OpenAIMathFiniteSupportedTseitinModelsExact whe
 -- Source-written; Agda kernel and finite-cardinality theorem pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (sym; cong₂)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact as Existing
@@ -140,3 +140,140 @@ sharedSATGivesFiniteSupported circuit witness
 -- Consequence: the specific existing shared SAT formula has precisely the
 -- finite normal-form witness semantics above. Numerically counting all
 -- unrestricted Cook.Assignment inhabitants would still overcount.
+
+
+------------------------------------------------------------------------
+-- EXACT NAT-VALUED FINITE #SAT: same carrier, no arbitrary Nat->Bool tail.
+--
+-- Every n-vector is counted exactly once by structural binary recursion.
+-- The auxiliary test is the literal Boolean equality of the auxiliary
+-- vector with evaluateProgram for the original concrete DAG.
+-- The resulting equality is NUMERIC, not only an existential SAT bridge.
+--
+-- No new circuit/Tseitin compiler, no postulates, and no abstract
+-- counting-engine axioms. Kernel checking remains outstanding.
+------------------------------------------------------------------------
+
+-- The per-vector weight belongs to the finite Boolean model count.
+indicator : Bool → Nat
+indicator true = suc zero
+indicator false = zero
+
+sumBoolVectors :
+  ∀ {n : Nat} → (Vec Bool n → Nat) → Nat
+sumBoolVectors {zero} weight = weight []
+sumBoolVectors {suc n} weight =
+  sumBoolVectors (λ tail → weight (false ∷ tail)) +
+  sumBoolVectors (λ tail → weight (true ∷ tail))
+
+sumBoolVectorsExt :
+  ∀ {n : Nat} (weight₁ weight₂ : Vec Bool n → Nat) →
+  ((bits : Vec Bool n) → weight₁ bits ≡ weight₂ bits) →
+  sumBoolVectors weight₁ ≡ sumBoolVectors weight₂
+sumBoolVectorsExt {zero} weight₁ weight₂ pointwise =
+  pointwise []
+sumBoolVectorsExt {suc n} weight₁ weight₂ pointwise =
+  cong₂ _+_
+    (sumBoolVectorsExt
+      (λ tail → weight₁ (false ∷ tail))
+      (λ tail → weight₂ (false ∷ tail))
+      (λ tail → pointwise (false ∷ tail)))
+    (sumBoolVectorsExt
+      (λ tail → weight₁ (true ∷ tail))
+      (λ tail → weight₂ (true ∷ tail))
+      (λ tail → pointwise (true ∷ tail)))
+
+sumBoolVectorsZero :
+  ∀ {n : Nat} →
+  sumBoolVectors {n} (λ _ → zero) ≡ zero
+sumBoolVectorsZero {zero} = refl
+sumBoolVectorsZero {suc n}
+  rewrite sumBoolVectorsZero {n} = refl
+
+-- Computable equality on the exact finite auxiliary data carrier.
+equalBoolVectors : ∀ {n : Nat} → Vec Bool n → Vec Bool n → Bool
+equalBoolVectors [] [] = true
+equalBoolVectors (false ∷ xs) (false ∷ ys) =
+  equalBoolVectors xs ys
+equalBoolVectors (true ∷ xs) (true ∷ ys) =
+  equalBoolVectors xs ys
+equalBoolVectors (false ∷ xs) (true ∷ ys) = false
+equalBoolVectors (true ∷ xs) (false ∷ ys) = false
+
+-- Exhaustively searching a finite Boolean vector returns exactly ONE match
+-- to a given vector, even when the vector is empty.
+sumExactlyOneEqualVector :
+  ∀ {n : Nat} (target : Vec Bool n) →
+  sumBoolVectors (λ candidate →
+    indicator (equalBoolVectors candidate target)) ≡ suc zero
+sumExactlyOneEqualVector [] = refl
+sumExactlyOneEqualVector (false ∷ target)
+  rewrite sumExactlyOneEqualVector target
+        | sumBoolVectorsZero = refl
+sumExactlyOneEqualVector (true ∷ target)
+  rewrite sumBoolVectorsZero
+        | sumExactlyOneEqualVector target = refl
+
+-- A rejected input has no matching *accepted* gate extension.
+-- An accepted input has exactly one: the original DAG's evaluation.
+acceptedAuxiliaryMatch :
+  ∀ {n : Nat} →
+  Bool → Vec Bool n → Vec Bool n → Bool
+acceptedAuxiliaryMatch true target candidate =
+  equalBoolVectors candidate target
+acceptedAuxiliaryMatch false target candidate = false
+
+countAcceptedAuxiliaries :
+  ∀ {n : Nat} (accept : Bool) (target : Vec Bool n) →
+  sumBoolVectors (λ candidate →
+    indicator (acceptedAuxiliaryMatch accept target candidate))
+  ≡ indicator accept
+countAcceptedAuxiliaries true target =
+  sumExactlyOneEqualVector target
+countAcceptedAuxiliaries false target =
+  sumBoolVectorsZero
+
+-- Count accepting INPUT valuations of the already existing circuit.
+-- This does not enumerate an infinite Cook.Assignment.
+countAcceptedCircuitInputs :
+  ∀ {inputs : Nat} → Circuit.ConcreteBooleanCircuit inputs → Nat
+countAcceptedCircuitInputs circuit =
+  sumBoolVectors (λ bits →
+    indicator (Circuit.evaluateCircuit circuit bits))
+
+-- Count satisfying pairs of INPUT and GATE vectors with every gate
+-- constrained to the exact output of evaluateProgram. This is the
+-- finite-support, count-preserving same-object Tseitin model count.
+countFiniteSupportedTseitin :
+  ∀ {inputs : Nat} → Circuit.ConcreteBooleanCircuit inputs → Nat
+countFiniteSupportedTseitin circuit =
+  sumBoolVectors (λ bits →
+    sumBoolVectors (λ auxiliary →
+      indicator
+        (acceptedAuxiliaryMatch
+          (Circuit.evaluateCircuit circuit bits)
+          (Circuit.evaluateProgram (Circuit.program circuit) bits)
+          auxiliary)))
+
+-- THE NUMERIC CARDINALITY RESULT, for every concrete DAG, with no
+-- complexity assumptions. Uses a single canonical extension per input.
+-- This is NOT an OpenAI ETH runtime theorem, nor a bounded-width CNF theorem.
+finiteSupportedTseitinCountExact :
+  ∀ {inputs : Nat} (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  countFiniteSupportedTseitin circuit
+    ≡ countAcceptedCircuitInputs circuit
+finiteSupportedTseitinCountExact circuit =
+  sumBoolVectorsExt
+    (λ bits →
+      sumBoolVectors (λ auxiliary →
+        indicator
+          (acceptedAuxiliaryMatch
+            (Circuit.evaluateCircuit circuit bits)
+            (Circuit.evaluateProgram (Circuit.program circuit) bits)
+            auxiliary)))
+    (λ bits →
+      indicator (Circuit.evaluateCircuit circuit bits))
+    (λ bits →
+      countAcceptedAuxiliaries
+        (Circuit.evaluateCircuit circuit bits)
+        (Circuit.evaluateProgram (Circuit.program circuit) bits))
