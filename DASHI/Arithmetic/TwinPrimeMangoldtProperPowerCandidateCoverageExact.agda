@@ -22,7 +22,7 @@ module DASHI.Arithmetic.TwinPrimeMangoldtProperPowerCandidateCoverageExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product using (Σ; _,_)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Data.Nat.Base using (_≤_)
@@ -43,6 +43,7 @@ import DASHI.Arithmetic.TwinPrimeProperPowerUniversalRectangleCoverageExact as C
 import DASHI.Arithmetic.TwinPrimeProperPowerRectangleEnumerationExact as Rect
 import DASHI.Arithmetic.TwinPrimeProperPowerBinaryCutoffNatExact as Binary
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact as Root
+import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 
 record PrimeBaseAtLeastTwo
   (space : Weil.WeilTestSpace)
@@ -218,3 +219,112 @@ errorZeroOutsideImageFromCertifiedOwnership space arithmetic mangoldt
     zeroLaws
     (primeBaseFromChebyshevOwnership space arithmetic theta ownership)
     n upper endBound notLeft notRight
+
+------------------------------------------------------------------------
+-- CT13 FINITE SUPPORT POSITION ENVELOPE.
+--
+-- Each value v may occupy precisely two shifted-pair positions:
+-- the left coordinate n=v or right coordinate n=v-2.
+-- Include BOTH in a (possibly duplicate, possibly out-of-window)
+-- covering list. Its length is exactly 2 * image length. This is
+-- list coverage and size, not yet the injective cardinality of the
+-- filtered bounded interval, nor a real-valued weight estimate.
+------------------------------------------------------------------------
+
+backTwo : Nat → Nat
+backTwo zero = zero
+backTwo (suc zero) = zero
+backTwo (suc (suc n)) = n
+
+backTwoAfterPlusTwo : (n : Nat) → backTwo (n + 2) ≡ n
+backTwoAfterPlusTwo n =
+  trans (cong backTwo (NP.+-comm n 2)) refl
+
+candidatePositionEnvelope : List Nat → List Nat
+candidatePositionEnvelope [] = []
+candidatePositionEnvelope (v ∷ vs) =
+  v ∷ backTwo v ∷ candidatePositionEnvelope vs
+
+candidatePositionEnvelopeLength :
+  (values : List Nat) →
+  Reindex.listLength (candidatePositionEnvelope values)
+    ≡ Reindex.listLength values * 2
+candidatePositionEnvelopeLength [] = refl
+candidatePositionEnvelopeLength (v ∷ vs) =
+  cong (λ count → suc (suc count))
+    (candidatePositionEnvelopeLength vs)
+
+leftValuePositionInEnvelope :
+  ∀ {n : Nat} {values : List Nat} →
+  Rect._member_ n values →
+  Rect._member_ n (candidatePositionEnvelope values)
+leftValuePositionInEnvelope Rect.memberHead = Rect.memberHead
+leftValuePositionInEnvelope (Rect.memberTail proof) =
+  Rect.memberTail (Rect.memberTail
+    (leftValuePositionInEnvelope proof))
+
+decodedValuePositionInEnvelope :
+  ∀ {value : Nat} {values : List Nat} →
+  Rect._member_ value values →
+  Rect._member_ (backTwo value) (candidatePositionEnvelope values)
+decodedValuePositionInEnvelope Rect.memberHead =
+  Rect.memberTail Rect.memberHead
+decodedValuePositionInEnvelope (Rect.memberTail proof) =
+  Rect.memberTail (Rect.memberTail
+    (decodedValuePositionInEnvelope proof))
+
+rightValuePositionInEnvelope :
+  ∀ {n : Nat} {values : List Nat} →
+  Rect._member_ (n + 2) values →
+  Rect._member_ n (candidatePositionEnvelope values)
+rightValuePositionInEnvelope {n} {values} proof =
+  subst
+    (λ value → Rect._member_ value (candidatePositionEnvelope values))
+    (backTwoAfterPlusTwo n)
+    (decodedValuePositionInEnvelope proof)
+
+-- Certified errors are covered by this exact list of positions,
+-- regardless of whether a proper power occurs at left or right.
+nonzeroErrorPositionInComputedEnvelope :
+  (space : Weil.WeilTestSpace)
+  (arithmetic : VM.AllPrimeArithmetic space)
+  (mangoldt : VM.VonMangoldtFunction space arithmetic)
+  (theta : Cheb.PrimeLogWeightKernel space PrimeNat.natPrimePredicate)
+  (ownership : Cheb.ChebyshevPrimeOwnership
+    space PrimeNat.natPrimePredicate theta arithmetic)
+  (zeroLaws : Zero.ProductZeroLaws space arithmetic)
+  (n upper : Nat) →
+  n + 2 ≤ upper →
+  (Split.nonPrimeErrorAtNat space arithmetic mangoldt n
+    ≡ Weil.WeilTestSpace.zeroS space → ⊥) →
+  Rect._member_ n
+    (candidatePositionEnvelope (computedProperPowerCandidates upper))
+nonzeroErrorPositionInComputedEnvelope space arithmetic mangoldt
+    theta ownership zeroLaws n upper endBound nonzero
+  with nonzeroErrorEndpointFromCertifiedOwnership space arithmetic
+    mangoldt theta ownership zeroLaws n upper endBound nonzero
+... | inj₁ leftMember =
+  leftValuePositionInEnvelope leftMember
+... | inj₂ rightMember =
+  rightValuePositionInEnvelope rightMember
+
+-- The image size bound from CT11 transports monotonically through
+-- the two-positions-per-value expansion. No logarithmic REAL bound
+-- or prime-distribution result is used.
+computedPositionEnvelopeLengthBound :
+  (upper : Nat) →
+  Reindex.listLength
+    (candidatePositionEnvelope (computedProperPowerCandidates upper))
+  ≤
+  (Root.floorSquareRoot upper * Binary.floorBinaryExponent upper) * 2
+computedPositionEnvelopeLengthBound upper =
+  subst
+    (λ length →
+      length ≤
+        (Root.floorSquareRoot upper * Binary.floorBinaryExponent upper)
+        * 2)
+    (sym (candidatePositionEnvelopeLength
+      (computedProperPowerCandidates upper)))
+    (NP.*-mono-≤
+      (Cover.computedCandidateDistinctCountBound upper)
+      NP.≤-refl)
