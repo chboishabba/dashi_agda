@@ -1893,3 +1893,25 @@ G2–G3 and G5–G6 still open. External root-sector C3/S3 is a
 different action, and #1414 polynomial, #1438 trialectics and
 Ibrahim Monster 3B are not borrowed as embedded geometry.
 No Agda/Lean kernel, CI or physical same-object certification.
+
+
+## 2026-10-30 order-three relative cap G2/G4 obstruction (update)
+
+Read [primary cyclic basing and Newman theorem cut](AlexanderHornedPeriodicCapCocycleMaxCut20261030.md).
+The original abstract three-child word \`w=[a,b][b,c]\`
+and selected local Nielsen \`phi\` have
+\`phi²(q)phi(q)q=w^-1\`, so no conjugator \`q w^k\`
+can produce an exactly order-three **based** peripheral
+normalization. Classical cyclic centralizers exclude every other
+conjugator. Independently, Newman's 1931 periodic action theorem
+forbids nontrivial finite-order handlebody Nielsen actions
+fixing an open boundary cap **pointwise**. These are two distinct
+no-go results, not new wild-geometry constructions.
+
+Replace old ambiguous G2 "finite-order cap-fixed Nielsen"
+target by cap-fixed **non-periodic** supported relative slides,
+while permitting an independent SETWISE-cap/external root
+C3 symmetry. G3 actual embedded torus, G4 actual based inclusion,
+G5 nested ternary satellite and G6 exterior pi1 stay open;
+the alternative six-boundary family is a still-algebraic S3-set.
+No change to Monster 3B, #1414 polynomial or ESD surfaces.
