@@ -1,5 +1,15 @@
 # FOR TODO GO TO '# TODO'
 
+## 2026-10-30 YM direct-route R320/R313/R333 max-cut
+
+- [x] Search golden Agda and Lean owner files as well as live PRs before choosing route; prefer existing `YMClayRouteSH1DirectSelectedMarkedDecayExact`, R313 and R333.
+- [x] Reduce Route-S H1-to-gap compiler graph by a **typed direct composition** without manufacturing selected-source inequalities.
+- [ ] Physically inhabit `R320.DirectSelectedT5MarkedDecayPayment` on the selected literal CMP116 Wilson family (P1); retain Bałaban source attribution.
+- [ ] Physically construct R333 literal time/Wilson and finite-to-continuum expectation-limit inputs (P2), then the same reconstructed H_OS spectral pairing (P3).
+- [ ] Compare Route-S versus F1/F3/F4 strong path as separate Pareto alternatives; do not double-count P_a/E_a, dense-L2 norm calibration or Delta*a_k when Route-S is selected.
+- [ ] Prove local-QFT/nontriviality and all-compact-simple-group Clay endpoint separately; never promote receipt flags or imported analytic statements to kernel proof authority.
+- [ ] Exact-head Agda kernel check for the new direct bridge, and Lean semantic parity against the existing literal-Wilson source/OS proof. CI intentionally not required for this iteration.
+
 Current NS Gate 1 / Gate 2 roadmap note for `2026-07-02`:
 - Gate 1 finite-shell scouting is no longer the bottleneck. The live helical
   coupling certificate now repeats on `N = 6, 8, 10, 12, 14, 16` with
