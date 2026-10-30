@@ -179,6 +179,39 @@ record SameAlgebraCanonicalS2Inputs
 
 open SameAlgebraCanonicalS2Inputs public
 
+
+------------------------------------------------------------------------
+-- P2 Pareto compression: rational trace + ONE physical Gram interpretation
+-- plus Euclidean support/time identity gives the *existing* canonical S2
+-- witness. The three P2 expectation-limit proofs are then inherited by
+-- YMClayLiteralWilsonP2ExpectationConvergenceExact, without separate bounds
+-- for every selected loop.
+------------------------------------------------------------------------
+
+rationalSU2TraceBuildsCanonicalS2 :
+  ∀ {Measure TestObservable Loop}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
+    (source : RationalSU2TraceGramBoundSource {Loop = Loop} dataSet)
+    (translate : Loop → Nat → Loop) →
+  (supportTime : ∀ left right time →
+    let bounds = sameAlgebraWilsonCylinderBoundData
+          (rationalSU2TraceToSameAlgebraWilsonBounds source)
+    in
+    R304.physicalDistance (R296.asDirectT5TwoSourceShell finite)
+      (Thermo.productLoopObservable bounds left)
+      (Thermo.productLoopObservable bounds
+        (map (λ loop → translate loop time) right))
+      ≡ time) →
+  SameAlgebraCanonicalS2Inputs {Loop = Loop} finite
+rationalSU2TraceBuildsCanonicalS2 source translate supportTime = record
+  { SameAlgebraCanonicalS2Inputs.boundInputs =
+      rationalSU2TraceToSameAlgebraWilsonBounds source
+  ; SameAlgebraCanonicalS2Inputs.translateLoop = translate
+  ; SameAlgebraCanonicalS2Inputs.supportDistanceIsTime = supportTime
+  }
+
 asCanonicalWilsonProductS2Inputs :
   ∀ {Measure TestObservable Loop}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
