@@ -672,6 +672,95 @@ module ABCSixPermutationPeripheralOrbit where
        anchored Perm.permRotate2 ∷ []) ≡ true
   threeRepresentativeNormalFormsDistinct = refl
 
+
+  -- HIGHEST-ALPHA 3-CLASS INDEX: the orientation-forgotten
+  -- peripheral class is classified by the image of the MIDDLE
+  -- generator b.  This uses the old TriTruth/S3 carrier, not a
+  -- new quotient type or a claim that the actual geometric
+  -- meridian loops are the three end-sector addresses.
+  middleChildIndex : Perm.TriPermutation → Base.TriTruth
+  middleChildIndex sigma =
+    Perm.applyPermutation sigma Base.tri-mid
+
+  sameMiddleChild : Perm.TriPermutation →
+    Perm.TriPermutation → Bool
+  sameMiddleChild p q with middleChildIndex p | middleChildIndex q
+  ... | Base.tri-low | Base.tri-low = true
+  ... | Base.tri-mid | Base.tri-mid = true
+  ... | Base.tri-high | Base.tri-high = true
+  ... | _ | _ = false
+
+  sameUnorientedParentClass : Perm.TriPermutation →
+    Perm.TriPermutation → Bool
+  sameUnorientedParentClass p q =
+    eqWord (anchored p) (anchored q)
+    orBool
+    eqWord (anchored p) (anchor 6 (invert (imageOfParent q)))
+
+  -- 36 specific finite cases: no separate quotient axioms and no
+  -- promotion of a shared 3-cardinality to SAME 3D geometry.
+  middleChildClassCriterion :
+    (p q : Perm.TriPermutation) →
+    sameMiddleChild p q ≡ sameUnorientedParentClass p q
+  middleChildClassCriterion Perm.permIdentity Perm.permIdentity = refl
+  middleChildClassCriterion Perm.permIdentity Perm.permRotate = refl
+  middleChildClassCriterion Perm.permIdentity Perm.permRotate2 = refl
+  middleChildClassCriterion Perm.permIdentity Perm.permSwapLowMid = refl
+  middleChildClassCriterion Perm.permIdentity Perm.permSwapLowHigh = refl
+  middleChildClassCriterion Perm.permIdentity Perm.permSwapMidHigh = refl
+  middleChildClassCriterion Perm.permRotate Perm.permIdentity = refl
+  middleChildClassCriterion Perm.permRotate Perm.permRotate = refl
+  middleChildClassCriterion Perm.permRotate Perm.permRotate2 = refl
+  middleChildClassCriterion Perm.permRotate Perm.permSwapLowMid = refl
+  middleChildClassCriterion Perm.permRotate Perm.permSwapLowHigh = refl
+  middleChildClassCriterion Perm.permRotate Perm.permSwapMidHigh = refl
+  middleChildClassCriterion Perm.permRotate2 Perm.permIdentity = refl
+  middleChildClassCriterion Perm.permRotate2 Perm.permRotate = refl
+  middleChildClassCriterion Perm.permRotate2 Perm.permRotate2 = refl
+  middleChildClassCriterion Perm.permRotate2 Perm.permSwapLowMid = refl
+  middleChildClassCriterion Perm.permRotate2 Perm.permSwapLowHigh = refl
+  middleChildClassCriterion Perm.permRotate2 Perm.permSwapMidHigh = refl
+  middleChildClassCriterion Perm.permSwapLowMid Perm.permIdentity = refl
+  middleChildClassCriterion Perm.permSwapLowMid Perm.permRotate = refl
+  middleChildClassCriterion Perm.permSwapLowMid Perm.permRotate2 = refl
+  middleChildClassCriterion Perm.permSwapLowMid Perm.permSwapLowMid = refl
+  middleChildClassCriterion Perm.permSwapLowMid Perm.permSwapLowHigh = refl
+  middleChildClassCriterion Perm.permSwapLowMid Perm.permSwapMidHigh = refl
+  middleChildClassCriterion Perm.permSwapLowHigh Perm.permIdentity = refl
+  middleChildClassCriterion Perm.permSwapLowHigh Perm.permRotate = refl
+  middleChildClassCriterion Perm.permSwapLowHigh Perm.permRotate2 = refl
+  middleChildClassCriterion Perm.permSwapLowHigh Perm.permSwapLowMid = refl
+  middleChildClassCriterion Perm.permSwapLowHigh Perm.permSwapLowHigh = refl
+  middleChildClassCriterion Perm.permSwapLowHigh Perm.permSwapMidHigh = refl
+  middleChildClassCriterion Perm.permSwapMidHigh Perm.permIdentity = refl
+  middleChildClassCriterion Perm.permSwapMidHigh Perm.permRotate = refl
+  middleChildClassCriterion Perm.permSwapMidHigh Perm.permRotate2 = refl
+  middleChildClassCriterion Perm.permSwapMidHigh Perm.permSwapLowMid = refl
+  middleChildClassCriterion Perm.permSwapMidHigh Perm.permSwapLowHigh = refl
+  middleChildClassCriterion Perm.permSwapMidHigh Perm.permSwapMidHigh = refl
+
+  -- The already owned S3 action law means the middle-child class
+  -- indexing is genuinely S3-equivariant on the finite carrier.
+  middleChildIndexEquivariant :
+    (p q : Perm.TriPermutation) →
+    middleChildIndex (S3._∙_ p q) ≡
+      Perm.applyPermutation p (middleChildIndex q)
+  middleChildIndexEquivariant p q =
+    S3.applyComposition p q Base.tri-mid
+
+  -- Reversing the peripheral orientation swaps a and c, and
+  -- fixes the middle label b; this is why fibres have size two.
+  middleChildOrientationFlip :
+    (p : Perm.TriPermutation) →
+    middleChildIndex (S3._∙_ p Perm.permSwapLowHigh)
+      ≡ middleChildIndex p
+  middleChildOrientationFlip Perm.permIdentity = refl
+  middleChildOrientationFlip Perm.permRotate = refl
+  middleChildOrientationFlip Perm.permRotate2 = refl
+  middleChildOrientationFlip Perm.permSwapLowMid = refl
+  middleChildOrientationFlip Perm.permSwapLowHigh = refl
+  middleChildOrientationFlip Perm.permSwapMidHigh = refl
+
   -- A literal child three-cycle changes even the unoriented parent
   -- conjugacy class, whereas the external root-sector C3 is already
   -- equivariant for the source-owned ternary refinement.
