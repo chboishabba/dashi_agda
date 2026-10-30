@@ -25,7 +25,7 @@ module DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Product using (_,_)
+open import Data.Product using (_,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as Pairs
@@ -361,3 +361,115 @@ sumAllScaleRight ops laws (x ∷ xs) f scale =
 -- into the existing C4/C5 operator owners avoids copying Yang--Mills
 -- rational Fubini onto a different field or silently asserting FFT product
 -- equals 729-term group convolution.
+
+
+------------------------------------------------------------------------
+-- TRUE BILINEAR EXPANSION INTO THE ORIGINAL 729 ORDERED INPUT PAIRS.
+--
+-- Reuses exactly the existing Pairs.cube27, Pairs.pair729, mapL,
+-- concatMapL and CoefficientOps. This is the source-identical
+-- distributive/Fubini bridge from two arbitrary 27-mode Fourier sums
+-- to 729 symbolic pair products, independent of the C4/C5 root field.
+------------------------------------------------------------------------
+
+sumAllAppend :
+  ∀ {X A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (xs ys : List X) (term : X → A) →
+  sumAll ops (Pairs._++L_ xs ys) term
+  ≡ CoefficientOps.add ops
+      (sumAll ops xs term) (sumAll ops ys term)
+sumAllAppend ops laws [] ys term =
+  sym (FiniteSumAlgebra.sumAddZeroLeft laws (sumAll ops ys term))
+sumAllAppend ops laws (x ∷ xs) ys term =
+  trans
+    (cong (CoefficientOps.add ops (term x))
+      (sumAllAppend ops laws xs ys term))
+    (sym (FiniteSumAlgebra.sumAddAssoc laws
+      (term x) (sumAll ops xs term) (sumAll ops ys term)))
+
+sumAllMap :
+  ∀ {X Y A : Set} (ops : CoefficientOps A)
+  (reindex : X → Y) (xs : List X) (term : Y → A) →
+  sumAll ops (Pairs.mapL reindex xs) term
+  ≡ sumAll ops xs (λ x → term (reindex x))
+sumAllMap ops reindex [] term = refl
+sumAllMap ops reindex (x ∷ xs) term =
+  cong (CoefficientOps.add ops (term (reindex x)))
+    (sumAllMap ops reindex xs term)
+
+sumAllConcatMap :
+  ∀ {X Y A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (expand : X → List Y) (xs : List X)
+  (term : Y → A) →
+  sumAll ops (Pairs.concatMapL expand xs) term
+  ≡ sumAll ops xs (λ x → sumAll ops (expand x) term)
+sumAllConcatMap ops laws expand [] term = refl
+sumAllConcatMap ops laws expand (x ∷ xs) term =
+  trans
+    (sumAllAppend ops laws (expand x)
+      (Pairs.concatMapL expand xs) term)
+    (cong (CoefficientOps.add ops (sumAll ops (expand x) term))
+      (sumAllConcatMap ops laws expand xs term))
+
+sumAllPair729AsDouble :
+  ∀ {A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (term : Pairs.ModePair729 → A) →
+  sumAll ops Pairs.pair729 term
+  ≡ sumAll ops Pairs.cube27
+      (λ p → sumAll ops Pairs.cube27 (λ q → term (p , q)))
+sumAllPair729AsDouble ops laws term =
+  trans
+    (sumAllConcatMap ops laws
+      (λ p → Pairs.mapL (λ q → p , q) Pairs.cube27)
+      Pairs.cube27 term)
+    (sumAllCong ops Pairs.cube27
+      (λ p → sumAll ops
+        (Pairs.mapL (λ q → p , q) Pairs.cube27) term)
+      (λ p → sumAll ops Pairs.cube27
+        (λ q → term (p , q)))
+      (λ p → sumAllMap ops (λ q → p , q) Pairs.cube27 term))
+
+sumAllDoubleProduct :
+  ∀ {X Y A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (xs : List X) (ys : List Y)
+  (f : X → A) (g : Y → A) →
+  CoefficientOps.multiply ops
+    (sumAll ops xs f) (sumAll ops ys g)
+  ≡ sumAll ops xs
+      (λ x → sumAll ops ys
+        (λ y → CoefficientOps.multiply ops (f x) (g y)))
+sumAllDoubleProduct ops laws xs ys f g =
+  trans
+    (sym (sumAllScaleRight ops laws xs f (sumAll ops ys g)))
+    (sumAllCong ops xs
+      (λ x → CoefficientOps.multiply ops (f x) (sumAll ops ys g))
+      (λ x → sumAll ops ys
+        (λ y → CoefficientOps.multiply ops (f x) (g y)))
+      (λ x → sym (sumAllScaleLeft ops laws (f x) ys g)))
+
+-- The 729 products here are literal ordered pairs of the original
+-- cube27, not a parallel 729 index or an orbit-counting surrogate.
+source729ProductExpansion :
+  ∀ {A : Set}
+  (ops : CoefficientOps A) (laws : FiniteSumAlgebra ops)
+  (f g : Pairs.ModeCube27 → A) →
+  CoefficientOps.multiply ops
+    (sumAll ops Pairs.cube27 f)
+    (sumAll ops Pairs.cube27 g)
+  ≡ sumAll ops Pairs.pair729
+      (λ pair → CoefficientOps.multiply ops
+        (f (proj₁ pair))
+        (g (proj₂ pair)))
+source729ProductExpansion ops laws f g =
+  trans
+    (sumAllDoubleProduct ops laws
+      Pairs.cube27 Pairs.cube27 f g)
+    (sym
+      (sumAllPair729AsDouble ops laws
+        (λ pair → CoefficientOps.multiply ops
+          (f (proj₁ pair))
+          (g (proj₂ pair)))))
