@@ -97,6 +97,83 @@ fourColourTheoremExistingQidUnchanged :
   ≡ Snowball.fourColourTheoremCoordinate
 fourColourTheoremExistingQidUnchanged = refl
 
+
+------------------------------------------------------------------------
+-- QID role typing prevents wrong-type joins. The graph-theory QID is
+-- an academic discipline; the maximum-cut QID is a problem; graph
+-- colouring is a problem; a graph-isomorphism QID is a morphism concept.
+-- These are deliberately NOT same-object identifiers for our proof.
+------------------------------------------------------------------------
+
+data KnowledgeRole : Set where
+  academicDiscipline : KnowledgeRole
+  graphStructure : KnowledgeRole
+  graphClass : KnowledgeRole
+  graphRepresentation : KnowledgeRole
+  graphMorphism : KnowledgeRole
+  computationalProblem : KnowledgeRole
+  higherArityStructure : KnowledgeRole
+  mathematicalTheorem : KnowledgeRole
+
+record TypedKnowledgeConcept (role : KnowledgeRole) : Set where
+  constructor typed-knowledge-concept
+  field
+    identityDemand : Identity.ExternalIdentityDemand
+    roleNote : String
+
+graphTheoryConcept : TypedKnowledgeConcept academicDiscipline
+graphTheoryConcept =
+  typed-knowledge-concept graphTheoryQid "discipline, not graph object"
+
+directedGraphConcept : TypedKnowledgeConcept graphStructure
+directedGraphConcept =
+  typed-knowledge-concept directedGraphQid "oriented edge graph"
+
+adjacencyMatrixConcept : TypedKnowledgeConcept graphRepresentation
+adjacencyMatrixConcept =
+  typed-knowledge-concept adjacencyMatrixQid "matrix representation, not graph object identity"
+
+graphColouringConcept : TypedKnowledgeConcept computationalProblem
+graphColouringConcept =
+  typed-knowledge-concept graphColouringQid "colouring problem/assignment"
+
+bipartiteGraphConcept : TypedKnowledgeConcept graphClass
+bipartiteGraphConcept =
+  typed-knowledge-concept bipartiteGraphQid "graph class"
+
+graphIsomorphismConcept : TypedKnowledgeConcept graphMorphism
+graphIsomorphismConcept =
+  typed-knowledge-concept graphIsomorphismQid "structure preserving bijection"
+
+graphHomomorphismConcept : TypedKnowledgeConcept graphMorphism
+graphHomomorphismConcept =
+  typed-knowledge-concept graphHomomorphismQid "edge-preserving graph map"
+
+maximumCutConcept : TypedKnowledgeConcept computationalProblem
+maximumCutConcept =
+  typed-knowledge-concept maximumCutQid "maximum cut of a graph"
+
+hypergraphConcept : TypedKnowledgeConcept higherArityStructure
+hypergraphConcept =
+  typed-knowledge-concept hypergraphQid "higher arity relation carrier"
+
+fourColourTheoremConcept : TypedKnowledgeConcept mathematicalTheorem
+fourColourTheoremConcept =
+  typed-knowledge-concept fourColourTheoremQid "theorem, not one specific arXiv publication"
+
+-- Reuse the in-repository Dewey/QID navigation type; directed graph
+-- has independently inspected Wikidata Dewey 511.54, unlike the
+-- broader graph-theory parent 511.5.  Neither is formal authority.
+directedGraphKnowledgeCoordinate : Snowball.KnowledgeCoordinate
+directedGraphKnowledgeCoordinate =
+  Snowball.knowledgeCoordinate
+    "directed graph" (Snowball.qid "Q1137726") "511.54" false refl
+
+directedGraphDeweyIsNavigationOnly :
+  Snowball.KnowledgeCoordinate.coordinateIsProof
+    directedGraphKnowledgeCoordinate ≡ false
+directedGraphDeweyIsNavigationOnly = refl
+
 ------------------------------------------------------------------------
 -- Bibliographic provenance: 2019 Hedetniemi / 2026 4CT are DISTINCT
 -- contributions from the concept Q184410 and the DASHI checkerboard.
