@@ -17390,3 +17390,8 @@ pants/sheaf matching before promoting any real-world synthesis.
 - [ ] Discharge Agda generic slot-code injectivity/list uniqueness.
 - [ ] Source-authorised trialectic 2-cell, higher-order seam and
   provenance/authority compatibility for particular consumers only.
+
+- [x] Added typed `NoDuplicateSlots allNativeSlots` with
+  negative-comparison soundness and constructive membership.
+- [ ] Verify this closed 54-slot no-duplicate proof and optional
+  stronger generic slot-index/endpoint injectivity in kernel.
