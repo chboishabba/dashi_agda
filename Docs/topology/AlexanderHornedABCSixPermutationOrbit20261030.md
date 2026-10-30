@@ -135,3 +135,28 @@ Ibrahim/Monster 3B multiplicity work have separate object types,
 proof ownership and attribution. A common S3 or 3/6/9 count
 does not imply equivalent representations or physical interpretation.
 No protected ESD surfaces were edited.
+
+
+### 2026-10-30 genus-one transport across the six labels
+
+The canonical Agda owner was further extended with
+\`sixPuncturedTorusBoundary\`, a six-case source-written equality
+transporting the ORIGINAL Nielsen commutator coordinates
+\`u=b^-1\`, \`v=c^-1 a\`, \`p=a b a^-1 c\` through each S3
+child-generator relabelling. For each sigma,
+
+\`reduce(sigma(p)^-1 sigma(w) sigma(p)) = reduce([sigma(u),sigma(v)])\`.
+
+The equality is a direct free-word computation for each of six
+explicit existing S3 constructors. It establishes that **all six
+algebraic boundary words admit a genus-one mapped-surface
+presentation**, not that six properly embedded punctured tori
+have been constructed in the selected three-dimensional complement.
+The geometric G3/G4 acceptance gate still requires actual surfaces
+and peripheral based paths in the SAME complement.
+
+An independent executable JS finite model checked all six transported
+commutator charts, all 36 S3 family transport equations, six
+orientation-reversal pairs and the 6/3 orbit counts (PASS). This
+independent calculation is NOT execution of the committed Python
+script, and neither calculation is Agda kernel verification.
