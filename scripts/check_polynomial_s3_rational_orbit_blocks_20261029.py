@@ -120,6 +120,41 @@ def verify_rational_solver_source_integrity():
     print("PASS 176 true scalar solve-∀ lemmas with field instantiations;"
           "19 Vieta and 14 Vandermonde bound-variable solve macros")
 
+    # O69: a previous generated type signature accidentally repeated the
+    # function arrow after OrbitBlock27. Catch this at source level before
+    # continuing to an Agda kernel check.
+    assembly=owner("PolynomialS3TwentySevenOrbitBlockAssemblyExact")
+    assert "caseBlockAction : Shape.TriPermutation → OrbitBlock27 → OrbitBlock27\n" in assembly
+    assert "OrbitBlock27 Shape.TriPermutation" not in assembly
+
+    # O70--O72: actual native 27-code field operator transport; all
+    # declarations must have a source-written definition and TOE exports.
+    native_fields=owner("PolynomialS3RationalTwentySevenFieldIsomorphismExact")
+    native_receipts=(
+        "plusNativeFields",
+        "encodeNativeAdditiveAt",
+        "decodeNativeAdditiveAt",
+        "nativeSourceAction27",
+        "nativeActionAgreesWithBlockAt",
+        "decodeNativeIntertwinesAt",
+    )
+    for name in native_receipts:
+        assert len(re.findall(r"^"+name+r" :",native_fields,re.M))==1,name
+        assert len(re.findall(r"^"+name+r" [^\\n]* =",native_fields,re.M))==1,name
+    assert "Atlas.blockActionPreservesNative" in native_fields
+    assert "Atlas.blockCodeRoundTrip" in native_fields
+    assert "sourceBlockActionAgreesWithNative" in native_fields
+    for root in (
+        "DASHI/EverythingTOESymmetryResolved369.agda",
+        "DASHI/Unifier.agda","DASHI/Unified/Everything.agda"
+    ):
+        root_text=(ROOT/root).read_text(encoding="utf-8")
+        assert "PolynomialS3RationalTwentySevenFieldIsomorphismExact" in root_text
+        for name in native_receipts:
+            assert name in root_text,(root,name)
+    print("PASS repaired 27-code action type; native addition and S3 "
+          "transport source coverage; three TOE exports (kernel pending)")
+
     assert "MoonshineOrbifoldSectorProjectorExact" in adapter
     for name in ("positiveIntertwinesS3Parity",
                  "negativeIntertwinesS3Parity",
