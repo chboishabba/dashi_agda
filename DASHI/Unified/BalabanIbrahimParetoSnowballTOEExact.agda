@@ -1,4 +1,6 @@
 module DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact where
+open import Data.Nat using (_≤_)open import Data.List using (List)import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
+import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -261,3 +263,25 @@ ibrahimMoreDimensionsStillDoNotGuaranteeMoreKnowledge :
   IbrahimDependency.MoreDimensionsMeanMoreKnowledge -> ⊥
 ibrahimMoreDimensionsStillDoNotGuaranteeMoreKnowledge =
   IbrahimDependency.moreDimensionsDoNotMeanMoreKnowledge
+
+------------------------------------------------------------------------
+-- Ibrahim/Pareto high-alpha graph 369: real edgewise maximality,
+-- independently verified concept QIDs, explicit provenance authority.
+------------------------------------------------------------------------
+
+ibrahimGraphNativeWeightedMaxCut :
+  (edges : List NativeMaxCut369.NativeWeightedEdge) ->
+  (candidate : NativeMaxCut369.Partition) ->
+  NativeMaxCut369.cutScore candidate edges
+    ≤ NativeMaxCut369.cutScore NativeMaxCut369.checkerCut edges
+ibrahimGraphNativeWeightedMaxCut =
+  NativeMaxCut369.checkerMaximumCut
+
+ibrahimQidProofAuthorityStillBlocked :
+  NativeQid369.QidIdentityAsKernelTheorem → ⊥
+ibrahimQidProofAuthorityStillBlocked = NativeQid369.qidIdentityNotATheorem
+
+ibrahimQidCannotPromoteSameMonsterRepresentation :
+  NativeQid369.SameConceptImpliesSameMonsterRepresentation → ⊥
+ibrahimQidCannotPromoteSameMonsterRepresentation =
+  NativeQid369.conceptSamenessNotMonsterSameObject
