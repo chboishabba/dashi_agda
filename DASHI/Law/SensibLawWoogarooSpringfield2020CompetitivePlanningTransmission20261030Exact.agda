@@ -98,6 +98,8 @@ data Relationship : Set where
   competitorClaim : Relationship
   oldOwnerSaleClaim : Relationship
   developerAgreementClaim : Relationship
+  conservationDedicationClaim : Relationship
+  undevelopedLandExtentClaim : Relationship
   policySubmission : Relationship
   legislativeResponse : Relationship
   gasServicingTransaction : Relationship
@@ -244,3 +246,69 @@ firstPartyHistoryDoesNotSupplyOriginalDeed =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness salesNarrativeWithoutAuthenticatedDeed
       salesNarrativeWithAuthenticatedDeed refl deedDiffers)
+
+cherishConservationDedicationAssertion : BoundedClaim
+cherishConservationDedicationAssertion = bounded-claim
+  conservationDedicationClaim firstPartyPublishedArgument cherishOriginalSubmission12
+  "Cherish says conservation-designated land was dedicated to public use through 2017; exact titles, areas, dates, recipient and consideration must be obtained before a conservation-transfer fact."
+  false
+
+cherish158Hectares2020Assertion : BoundedClaim
+cherish158Hectares2020Assertion = bounded-claim
+  undevelopedLandExtentClaim firstPartyPublishedArgument cherishOriginalSubmission12
+  "Cherish describes about 158 hectares of remaining undeveloped Community Residential land in June 2020, not an exact 2026 EPBC 2019/8575 footprint or a verified GIS extent."
+  false
+
+-- Treasury's committee-quoted response recognises a historic EFFECTIVE veto
+-- under the formerly understood plan rules but identifies the Bill as NOT
+-- restoring SCG's exclusive precinct-plan applicant status. This is an
+-- official historical policy explanation, not evidence of a 2026 veto.
+record OfficialPolicyCounterreading : Set where
+  constructor policy-counterreading
+  field
+    carrier : Source.AttributedSource
+    treasuryNativeLetterAcquired : Bool
+    historicEffectiveVetoDescribed : Bool
+    currentBillRestoresExclusiveSCGApplication : Bool
+    otherDevelopersMayApply : Bool
+    scgInfrastructureCommentMayBeConsidered : Bool
+    provesMisconduct : Bool
+
+treasuryResponseAsQuoted : OfficialPolicyCounterreading
+treasuryResponseAsQuoted = policy-counterreading
+  parliamentaryCommitteeReport2020
+  false true false true true false
+
+-- Public original legislative comment influences the terms of a STATE
+-- planning statute. It cannot itself determine a different federal approval
+-- based on a separate 2026 Commonwealth EPBC action.
+data TransmissionWorld : Set where
+  state275WAmendedFederalApprovalIndependent : TransmissionWorld
+  state275WAmendedWithLaterEPBCEvidence : TransmissionWorld
+
+data PublicStateAmendment : Set where
+  statePlanningChangeRecorded : PublicStateAmendment
+
+data FederalApprovalCausalLink : Set where
+  noSameObjectFederalCausalRecord : FederalApprovalCausalLink
+  independentFederalLinkDocumentPaid : FederalApprovalCausalLink
+
+stateRecord : TransmissionWorld → PublicStateAmendment
+stateRecord state275WAmendedFederalApprovalIndependent = statePlanningChangeRecorded
+stateRecord state275WAmendedWithLaterEPBCEvidence = statePlanningChangeRecorded
+
+federalLink : TransmissionWorld → FederalApprovalCausalLink
+federalLink state275WAmendedFederalApprovalIndependent = noSameObjectFederalCausalRecord
+federalLink state275WAmendedWithLaterEPBCEvidence = independentFederalLinkDocumentPaid
+
+federalDifferent :
+  federalLink state275WAmendedFederalApprovalIndependent ≡
+  federalLink state275WAmendedWithLaterEPBCEvidence → ⊥
+federalDifferent ()
+
+statePlanningPolicyTransmissionDoesNotProveFederalCause :
+  INF.FactorsThrough stateRecord federalLink → ⊥
+statePlanningPolicyTransmissionDoesNotProveFederalCause =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness state275WAmendedFederalApprovalIndependent
+      state275WAmendedWithLaterEPBCEvidence refl federalDifferent)
