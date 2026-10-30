@@ -264,6 +264,8 @@ gaussianFiniteSumAlgebra = record
   ; sumAddZeroLeft = G.scalarAddZeroLeft
   ; sumMulDistributesLeft = G.scalarMulDistributesLeft
   ; sumMulDistributesRight = G.scalarMulDistributesRight
+  ; sumMulAssociative = G.scalarMulAssociative
+  ; sumMulCommutative = G.scalarMulCommutative
   ; sumMulZeroLeft = G.scalarMulZeroLeft
   ; sumMulZeroRight = G.scalarMulZeroRight
   }
