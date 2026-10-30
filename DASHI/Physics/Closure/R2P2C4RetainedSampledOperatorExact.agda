@@ -711,3 +711,20 @@ gaussianSourceSampledEqualsIndexed f g target =
 -- Original 27 retained frequency outputs now have source-written
 -- exact character-sum/indexed-convolution equality (Agda kernel pending).
 -- FFT array sample evaluation is a separate unsolved transport.
+
+
+------------------------------------------------------------------------
+-- TRANSITIVE SOURCE-IDENTICAL ORIGINAL INTEGER FREQUENCY BRIDGE.
+-- Reuses the ORIGINAL 729-term exact indexed carrier, not a merely
+-- modulo-N cyclic output count, and does not claim the tensor FFT
+-- computer's array values agree with this source sum yet.
+------------------------------------------------------------------------
+
+gaussianSourceCharacterSumRecoversTrueIntegerRetained :
+  (f g : I.ModeCube27 → G.Gaussian4)
+  (target : I.ModeCube27) →
+  gaussianSourceNormalizedSampledAt f g target ≡ trueGaussianIntegerConvolutionAt f g (Full.retainedToWide target)
+gaussianSourceCharacterSumRecoversTrueIntegerRetained f g target =
+  trans
+    (gaussianSourceSampledEqualsIndexed f g target)
+    (fourGridGaussianIndexIsTrueIntegerConvolution f g target)
