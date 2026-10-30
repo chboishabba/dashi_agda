@@ -147,3 +147,11 @@ coordinates and cannot provide source, semantics, physics, or authority.
 - [ ] Integrate into Ibrahim/Pareto snowball and downstream Lean.
 - [ ] Kernel-check each construction on exact branch head; keep
   source-written and kernel-paid status split until then.
+
+## 2026-10-30 additional P1: directed two-ended fabric
+
+Source-side outgoing-row hyperfabric is already a finite fixture.
+The higher-value next cut is a **both-endpoint compatible section**
+that preserves the orientation and witnesses asymmetry. Reuse the
+existing `TypedHyperfabricCore`, not a new sheaf/hypergraph ontology.
+QIDs and 2026 directed-sheaf sources are attribution/comparison only.
