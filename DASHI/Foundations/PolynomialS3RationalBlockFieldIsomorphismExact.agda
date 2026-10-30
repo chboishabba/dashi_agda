@@ -245,7 +245,7 @@ toCoordinates6Intertwines Perm.permSwapMidHigh f Big.slot5 = Ring.solve ((f Big.
 
 ------------------------------------------------------------------------
 -- Rational linearity and inverse-direction S3 equivariance.
--- Reuse the same Ring.solve-∀ machinery already owning polynomial
+-- Reuse the same Ring.solve variable-list machinery already owning polynomial
 -- Vieta invariants; this is no new algebraic axiom.
 ------------------------------------------------------------------------
 
