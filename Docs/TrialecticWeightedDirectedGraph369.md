@@ -438,3 +438,16 @@ generic Agda `slotIndex` injection (or an equivalent witnessed
 list-`Nodup` theorem); domain-sourced face/pants interface and any
 actual equivariant *weighted* action; Ibrahim Monster3B and YM
 same-object/physics work is not discharged.
+
+
+### 30 October 2026 — independent local-Python connectivity/Pareto cut
+
+The **existing** native weighted-cut source owner `GraphColouring369PantsWeightedMaxCutExact` already provides the exact finite selected checkerboard saturation theorem for any finite list of positively or zero-weighted native grid edges; `GraphColouring369PantsSymmetryCutInvariantExact` already provides the selected cut's six-coordinate-permutation/reflection invariance. No additional theorem ontology was invented.
+
+The original `scripts/verify_trialectic_369_graph_pants_finite.py` was extended (commit `0615b1452cdf3c6f8ff05119ced21f8896c7fa56`) with a **deterministic connectedness traversal** of all 27 vertices and 54 undirected native edges, and two forced proper-colouring reconstructions starting with each root bit. For full grid with **strictly positive** weights, any maximum cut attaining total edge weight must cross all edges. Connectedness then forces exactly two such partitions, checkerboard and global complement. This is a classical finite graph argument whose reachability and forced assignments were source-written in Python; a corresponding exact Agda proof of the **unique optimum up to complement** remains outstanding, as does execution of the *exact checked-out* updated script.
+
+An independent local Python audit (not a kernel checker) enumerated all 54 edges, all six S3 coordinate actions and three coordinate reflections, and PASSED 750 seeded nonnegative-weight assignments plus 150,000 sampled challenger cuts. The sample does not establish generic optimality; that generic result is already source-written in the original Agda owner. No transfer is made to OpenAI 2026's arbitrary simple-unweighted graph Max-Cut gap-hardness theorem: restricted finite bipartite grid maximum cuts are straightforward, and no uniform unrestricted-gap-preserving reduction is provided.
+
+QID verification was reuse-only: existing `GraphColouring369PantsQidParetoSnowballExact` owns the typed concepts for [maximum cut Q942557](https://www.wikidata.org/wiki/Q942557) and [bipartite graph Q174733](https://www.wikidata.org/wiki/Q174733) and the exact unnamed synthetic 27-vertex fixture stays **unresolved**. Neither a shared label/QID nor an apparent 27/11/7 count identifies the native grid with the different 27 ternary endomorphism functions or Ibrahim's Monster3B action.
+
+**Receipt separation:** previously published bipartite graph mathematics / original DASHI Agda source owner / original script's new connectivity extension / independently executed local Python tests / future Agda and Lean kernel checks are distinct. No protected ESD/CI changes. Roadmap updated.
