@@ -308,16 +308,16 @@ creekNameAndApprovedWorksDoNotIdentifyHistoricPipe =
 data PipeAcquisitionTarget : Set where
   council9281ApprovedExternalSewerCAD : PipeAcquisitionTarget
   quuAsBuilt2020ExistingTrunkSewer : PipeAcquisitionTarget
-  1998SIAAndCurrentSewerServicingAgreements : PipeAcquisitionTarget
-  2026ParcelAndStageGeometry : PipeAcquisitionTarget
+  signed1998SIAAndCurrentSewerServicingAgreements : PipeAcquisitionTarget
+  parcel2026AndStageGeometry : PipeAcquisitionTarget
   sameActionAndPrestartEvidence : PipeAcquisitionTarget
 
 samePipePareto : List PipeAcquisitionTarget
 samePipePareto =
   council9281ApprovedExternalSewerCAD ∷
   quuAsBuilt2020ExistingTrunkSewer ∷
-  1998SIAAndCurrentSewerServicingAgreements ∷
-  2026ParcelAndStageGeometry ∷
+  signed1998SIAAndCurrentSewerServicingAgreements ∷
+  parcel2026AndStageGeometry ∷
   sameActionAndPrestartEvidence ∷ []
 
 
