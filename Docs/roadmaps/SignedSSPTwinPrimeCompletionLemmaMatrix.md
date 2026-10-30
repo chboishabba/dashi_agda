@@ -1533,3 +1533,60 @@ comment **"Lemma 2 is false"**. This is NOT a candidate analytic
 ingredient, and neither the original title nor secondary arXiv
 mirrors may override its current withdrawn status. No
 F02/F04/F06/G01 promotion is justified.
+
+## 30 October 2026 — further M16 constructive closure from nonzero prime-only finite sums
+
+Source written (kernel pending):
+`DASHI/Arithmetic/TwinPrimeMangoldtNonzeroPrimeSumWitnessExact.agda`.
+
+This module REUSES `TwinPrimeCertifiedEnumeratorExact.twinPrimeAt?`,
+`ChebyshevPrimeOwnership`, `NatPrimeCountingInstance`,
+`TwinPrimeMangoldtPrimeOneCertifiedBidiExact`,
+the prior `exponentOne` vs proper-power support split,
+and the explicitly supplied `AdditiveInterchangeLaws.zeroLeft`.
+It introduces the constructive indexed finite certificates
+`TwinInInterval` and `NoTwinInInterval`, and proves:
+
+- `finiteTwinSearch`: a complete finite decision BIDI
+  returns a genuine Nat-primality twin witness or
+  a proof that the entire bounded interval contains none.
+- `primeOnlyWeightZeroIfNotTwin`: all 9 source support
+  cases analysed; the exponent-one/exponent-one case is
+  ruled out by the ORIGINAL `ChebyshevPrimeOwnership`
+  and `primeOnePairToTwin` if no twin exists.
+- `primeOnlySumZeroWithoutTwins`: finite sum
+  is zero on a certificate-free interval, by recursion
+  with the explicit additive left-zero law.
+- `nonzeroPrimeOnlySumGivesTwin`: if an interval's
+  actual **certified** prime-only sum is not equal to zero,
+  return a genuine `TwinInInterval` witness.
+- `twinInIntervalReadout`: extract its exact Nat magnitude,
+  lower-bound index, and two standard NatPrime certificates.
+- `twinUnboundedFromUnboundedNonzeroPrimeSums`:
+  `∀N∃p≥N TwinPrimeAt p` is obtained **CONDITIONALLY**
+  from a separately supplied window-length function and
+  a proof that the certified prime-only sum never vanishes
+  on each such future window. This premise is the unpaid
+  **twin-prime-infinite arithmetic/analytic gate**. It is
+  NOT proved by the finite-sum transport or the 27-wheel.
+
+**Actually executed local Python:** the independently written
+`check_m16_nonzero_prime_sum.py` checked 2,206 finite windows;
+534 zero/non-witness cases and 1,672 nonzero/witness cases:
+PASS. The committed corresponding regression is
+`scripts/check_twin_prime_m16_nonzero_prime_sum.py`.
+No claims of infinite nonzero windows, Agda kernel verification,
+new positive correlation, or safe full-build closure.
+
+**Full remaining analytic join:**
+(1) certify the original Weil scalar as an ordered analytic ring
+with additive and multiplicative positivity and the needed
+positive log-prime weights;
+(2) prove a uniform M15 upper bound on the retained proper-power
+pair error (including multiplicity and window boundaries);
+(3) prove a new lower bound on the ORIGINAL gap-two lambda correlation
+strong enough to force prime-only sum nonzero beyond the error,
+then use this M16 theorem. The missing (3) is not supplied by
+currently known bounded-gap results, nor by any S3/C2/Ibrahim
+quotient equivalence. Check all Agda with the golden safe kernel
+before claiming a theorem. No ESD edits.
