@@ -17,7 +17,7 @@ module DASHI.Foundations.PolynomialS3RationalTwentySevenFieldIsomorphismExact wh
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _+_)
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import DASHI.Cognition.RecursiveFibreTower as Tower
 import DASHI.Foundations.PolynomialS3SmallRationalBlockCertificateExact as Small
 import DASHI.Foundations.PolynomialS3RegularRationalBlockCertificateExact as Big
@@ -475,3 +475,65 @@ sourceBlockActionAgreesWithNative Perm.permSwapMidHigh f (Atlas.twoCycleBlock Bi
 -- isomorphism over actual Code27, transported through the original
 -- 27-code group-set bijection. A kernel receipt remains mandatory;
 -- no arbitrary F3 full-S3 splitting is asserted.
+
+------------------------------------------------------------------------
+-- Native rational transport receipts (O69--O72).
+--
+-- These consume the ORIGINAL 27-code atlas and the existing 2/3/6
+-- block-coordinate proofs. Equality stays pointwise: there is no
+-- function-extensionality axiom and no identification with a different
+-- action, Galois group or Monster representation.
+-- SOURCE-WRITTEN / Agda kernel acceptance still pending.
+------------------------------------------------------------------------
+
+plusNativeFields : NativeRationalField27 →
+  NativeRationalField27 → NativeRationalField27
+plusNativeFields f g x = f x + g x
+
+encodeNativeAdditiveAt :
+  (f g : NativeRationalField27) (b : Atlas.OrbitBlock27) →
+  coordinateAt (encodeNative27 (plusNativeFields f g)) b ≡
+  coordinateAt (plusCoordinates27 (encodeNative27 f) (encodeNative27 g)) b
+encodeNativeAdditiveAt f g b =
+  encodeBlocksAdditiveAt (Atlas.toBlockField f) (Atlas.toBlockField g) b
+
+decodeNativeAdditiveAt :
+  (c d : RationalCoordinates27) (x : Tower.LevelTwoCode) →
+  decodeNative27 (plusCoordinates27 c d) x ≡
+  plusNativeFields (decodeNative27 c) (decodeNative27 d) x
+decodeNativeAdditiveAt c d x =
+  decodeBlocksAdditiveAt c d (Atlas.codeToBlock x)
+
+-- Precompose with the inverse S3 permutation on the ORIGINAL native code.
+nativeSourceAction27 :
+  Perm.TriPermutation → NativeRationalField27 → NativeRationalField27
+nativeSourceAction27 p f x =
+  f (Perm.conjugateCode (Perm.inversePermutation p) x)
+
+nativeActionAgreesWithBlockAt :
+  (p : Perm.TriPermutation) (f : NativeRationalField27)
+  (b : Atlas.OrbitBlock27) →
+  Atlas.toBlockField (nativeSourceAction27 p f) b ≡
+  sourceBlockAction p (Atlas.toBlockField f) b
+nativeActionAgreesWithBlockAt p f b =
+  trans
+    (sym (cong f
+      (Atlas.blockActionPreservesNative (Perm.inversePermutation p) b)))
+    (sym (sourceBlockActionAgreesWithNative p (Atlas.toBlockField f) b))
+
+decodeNativeIntertwinesAt :
+  (p : Perm.TriPermutation) (c : RationalCoordinates27)
+  (x : Tower.LevelTwoCode) →
+  decodeNative27 (coordinateAction27 p c) x ≡
+  nativeSourceAction27 p (decodeNative27 c) x
+decodeNativeIntertwinesAt p c x =
+  trans
+    (decodeBlocksIntertwinesAt p c (Atlas.codeToBlock x))
+    (trans
+      (sourceBlockActionAgreesWithNative p (decodeBlocks27 c)
+        (Atlas.codeToBlock x))
+      (cong
+        (λ y → decodeBlocks27 c
+          (Atlas.codeToBlock
+            (Perm.conjugateCode (Perm.inversePermutation p) y)))
+        (Atlas.blockCodeRoundTrip x)))
