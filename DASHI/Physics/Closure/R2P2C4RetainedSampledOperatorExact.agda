@@ -682,3 +682,32 @@ gaussianActualCubeCharacterResolution
         (Four.eqFour a d)
         (Four.eqFour b e)
         (Four.eqFour c f)))
+
+
+------------------------------------------------------------------------
+-- ORIGINAL C4 RETAINED 27-OUTPUT CHARACTER-SUM RESOLUTION PAYMENT.
+-- Follows from the genuine 64-source-sample cube delta, not
+-- normalized-field numerical testing or the distinct tensor FFT.
+------------------------------------------------------------------------
+
+gaussianActualCharacterResolutionPaid :
+  (target : I.ModeCube27) →
+  gaussianActualCharacterResolution target
+gaussianActualCharacterResolutionPaid target (p , q) =
+  gaussianActualCubeCharacterResolution
+    (Four.fourGridGroupSum
+      (Four.inputToFourGrid p) (Four.inputToFourGrid q))
+    (Four.wideToFourGrid (Full.retainedToWide target))
+
+gaussianSourceSampledEqualsIndexed :
+  (f g : I.ModeCube27 → G.Gaussian4)
+  (target : I.ModeCube27) →
+  gaussianSourceNormalizedSampledAt f g target
+    ≡ fourGridGaussianIndexConvolutionAt f g target
+gaussianSourceSampledEqualsIndexed f g target =
+  gaussianSourceSampledEqualsIndexedGivenResolution
+    f g target (gaussianActualCharacterResolutionPaid target)
+
+-- Original 27 retained frequency outputs now have source-written
+-- exact character-sum/indexed-convolution equality (Agda kernel pending).
+-- FFT array sample evaluation is a separate unsolved transport.
