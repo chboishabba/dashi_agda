@@ -21,7 +21,7 @@ module DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinGateCNFExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Vec.Base using (Vec)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -487,3 +487,31 @@ circuitPlacedCNFClauseCount circuit =
 -- expansion in the original input dimension. Exact solution-set equivalence
 -- and global numeric #SAT parsimony remain the next proof obligations;
 -- this commit proves the syntax and uniform clause count at source level.
+
+
+------------------------------------------------------------------------
+-- Closed-form cost, not only a recursive English "four per gate".
+-- Reuse the existing standard Nat commutativity theorem; no arithmetic
+-- algebra is re-proved for the local CNF.
+------------------------------------------------------------------------
+
+fourPerGateMultiply :
+  (gates : Nat) → fourPerGate gates ≡ gates * four
+fourPerGateMultiply zero = refl
+fourPerGateMultiply (suc gates) =
+  trans
+    (cong (λ total → total + four)
+      (fourPerGateMultiply gates))
+    (NatP.+-comm (gates * four) four)
+
+circuitPlacedCNFClosedClauseCount :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Grid.listLength (circuitPlacedCNF circuit) ≡
+    Circuit.gateCount circuit * four + suc zero
+circuitPlacedCNFClosedClauseCount circuit =
+  trans
+    (circuitPlacedCNFClauseCount circuit)
+    (cong
+      (λ total → total + suc zero)
+      (fourPerGateMultiply (Circuit.gateCount circuit)))
