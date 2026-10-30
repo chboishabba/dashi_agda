@@ -17309,3 +17309,13 @@ fingerprints or a three-node asymmetric weight fixture to a physical,
 VOA or smooth-surface theorem.
 
 See `Docs/TrialecticWeightedDirectedGraph369.md`.
+
+## 2026-10-30 P2 update — selected mediation
+
+Source-written selected finite face→next-depth-cell mediator through
+canonical Grothendieck T18 descent, with non-descent of output from
+identical weighted matrices. This is ONLY a selected fixture.
+
+Pending: kernel verification; prove an *independently justified*
+domain-specific mediation law, its action equivariance and actual
+pants/sheaf matching before promoting any real-world synthesis.
