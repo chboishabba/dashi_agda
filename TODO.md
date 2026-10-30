@@ -17316,3 +17316,13 @@ Cleanup
 - [ ] CT15: originate and prove a uniform or cofinal analytic/spectral/arithmetic separation of *actual* ΛΛ correlation from proper-power error; Möbius signed cancellation and finite geometry do not suffice.
 - [ ] CT16–CT18: discharge the real cofinal observer/positivity theorem *without assumption* and close TwinPrimesInfinitelyOften with kernel receipt.
 - [ ] Historical ownership unchanged: Brun, Hardy–Littlewood, Chebyshev/von Mangoldt/Möbius, Lü–Wang–Wu, independent repo/PR authors, Ibrahim Monster 3B, Pareto/Snowball, meta-introspector, QIDs navigation-only, no ESD edits.
+
+### 2026-10-30 CT15 additional number-theory arithmetic cut
+
+- [x] Reuse `Data.Nat.Properties.*-mono-≤` for arbitrary three-large-factor `B³` lower bound with no added postulates; add as `TwinPrimeOddCompositeCubeRoughCutExact.agda` (`--safe` declared).
+- [x] Import it into actual 103/105 odd squarefree counterfeit owner and prove its numerical cube bound; attach once to the three canonical TOE roots.
+- [x] State source equalities of computed/stdlib floor-log₂ power images and duplicate-free images; transport exact M15 position cover to `2*floorSquareRoot(U)*⌊log₂U⌋`.
+- [ ] Kernel-check new and existing sources with actual Agda and repair any parse/type/termination errors; no postulates or unsafe escapes.
+- [ ] Produce a complete proof-relevant Nat factor-list/Möbius parity classifier, including the three-factor/cube-root implication, using original stdlib factorisation, not an SSP15 finite class.
+- [ ] Prove genuine shifted-prime short-divisor/roughness cancellation or an unbounded cofinal actual Mangoldt separator; **this** is the front of the twin-prime conjecture and is NOT solved by this finite argument.
+- [ ] Prove `CT12–CT14` ordinary-real logarithmic weights and error sublinearity and unconditional `CT16–CT18` with Agda kernel acceptance. Keep original mathematical/Ibrahim/Pareto/Snowball/QID ownership and ESD isolation.
