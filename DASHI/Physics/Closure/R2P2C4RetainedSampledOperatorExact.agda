@@ -18,6 +18,7 @@ module DASHI.Physics.Closure.R2P2C4RetainedSampledOperatorExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Data.Product using (proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Rational.Base using (ℚ; _*_; normalize)
@@ -287,3 +288,18 @@ gaussianActualFiniteSumProductScale :
       (Bilinear.sumAll gaussianCoefficientOps xs f)
 gaussianActualFiniteSumProductScale =
   Bilinear.sumAllScaleLeft gaussianCoefficientOps gaussianFiniteSumAlgebra
+
+
+-- This is the genuine distributive Fourier-field product expansion,
+-- over the ORIGINAL source 729 ordered input pair addresses.
+gaussianActual729InputProductExpansion :
+  (f g : I.ModeCube27 → G.Gaussian4) →
+  G._*G_
+    (Bilinear.sumAll gaussianCoefficientOps I.cube27 f)
+    (Bilinear.sumAll gaussianCoefficientOps I.cube27 g)
+  ≡ Bilinear.sumAll gaussianCoefficientOps I.pair729
+      (λ pair → G._*G_
+        (f (proj₁ pair)) (g (proj₂ pair)))
+gaussianActual729InputProductExpansion =
+  Bilinear.source729ProductExpansion
+    gaussianCoefficientOps gaussianFiniteSumAlgebra
