@@ -234,11 +234,11 @@ qca266OfficialCarrier : Source.AttributedSource
 qca266OfficialCarrier = Source.mkNoDOISource
   "Supreme Court of Queensland, Court of Appeal: Fraser and Gotterson JJA and Burns J"
   "Springfield Land Corporation Pty Limited v Cherish Enterprises Pty Ltd and Ipswich City Council [2018] QCA 266"
-  "Ipswich City Council 2018 reproduction of original judicial reasons; indexed original attachment, download 403"
+  "Official Queensland Judgments reporter with original QCA court reasons"
   "12 October 2018"
-  "https://www.ipswich.qld.gov.au/__data/assets/pdf_file/0018/103383/Growth-Infra-07112018_Part5.pdf"
+  "https://www.queenslandjudgments.com.au/caselaw/qca/2018/266"
   (Source.namedSourceKind "court judgment")
-  "Court of Appeal file 8535 of 2017, P&E Appeal 2948 of 2016; declaration that area development plan approval was necessary before assessment/approval of Cherish's application made about 17 March 2016; recorded 1998 infrastructure agreement and its parties. Official PDF text was indexed, physical PDF face not accessed in this pass. Not a 2026 EPBC holding."
+  "Court of Appeal file 8535 of 2017, P&E Appeal 2948 of 2016; declaration that area development plan approval was necessary before assessment/approval of Cherish's application made about 17 March 2016; recorded 1998 infrastructure agreement and its parties. Original court judgment text is now independently accessible in the official Queensland Judgments reporter. Not a 2026 EPBC holding."
   Source.publicAttribution
 
 record HistoricAgreement : Set where
@@ -548,3 +548,155 @@ record SamePhaseLocalPayment : Set where
 samePhaseLocalResidual : SamePhaseLocalPayment
 samePhaseLocalResidual = same-phase-local-payment
   false false false false false
+
+------------------------------------------------------------------------
+-- 2016-2024 SPRINGFIELD PRIMARY JUDGMENT LINEAGE AND CONTRACT-EXHIBIT CUT
+-- The real SIA remains unacquired, but the judge records the appeal book
+-- exact pages: AB628-903 for 1998 SIA and AB904-942 for amendment deeds.
+------------------------------------------------------------------------
+
+cherish2017QPECOriginalCourt : Source.AttributedSource
+cherish2017QPECOriginalCourt = Source.mkNoDOISource
+  "Planning and Environment Court of Queensland, Kefford DCJ"
+  "Cherish Enterprises Pty Ltd v Ipswich City Council [2017] QPEC 38"
+  "Official Queensland Judgments litigation-history and court case record"
+  "14 July 2017"
+  "https://www.queenslandjudgments.com.au/caselaw/qpec/2017/38"
+  (Source.namedSourceKind "court judgment")
+  "Initial declaration favoured Cherish's March 2016 development application without prior ADP/precinct plans, but was SET ASIDE by Court of Appeal in [2018] QCA 266. Do not cite the 2017 declaration as governing law or a 2026 EPBC outcome."
+  Source.publicAttribution
+
+springLake2023QCAOriginalCourt : Source.AttributedSource
+springLake2023QCAOriginalCourt = Source.mkNoDOISource
+  "Supreme Court of Queensland Court of Appeal, Morrison, Dalton and Boddice JJA"
+  "Spring Lake Holdings Pty Ltd v Ipswich City Council [2023] QCA 233"
+  "Original Queensland Judgments court reasons, appeal 2994/2023 from QPEC 1428/2021"
+  "24 November 2023"
+  "https://www.queenslandjudgments.com.au/caselaw/qca/2023/233"
+  (Source.namedSourceKind "court judgment")
+  "Distinct Spring Lake Holdings applicant ACN 156492885 and separate parcel/proceeding. Court dismissed application for leave from jurisdictional finding concerning ADP modification. Cites 2018 QCA 266 but does not decide the 6243/2023/LAP consent or EPBC 2019/8575 merits."
+  Source.publicAttribution
+
+springLake2024HighCourtDisposition : Source.AttributedSource
+springLake2024HighCourtDisposition = Source.mkNoDOISource
+  "High Court of Australia, Gageler CJ and six Justices"
+  "Spring Lake Holdings Pty Ltd v Ipswich City Council [2024] HCASL 92"
+  "Original High Court special-leave disposition, file B71/2023"
+  "11 April 2024"
+  "https://www.hcourt.gov.au/sites/default/files/eresources/2024/HCASL/92.pdf"
+  (Source.namedSourceKind "High Court special-leave disposition")
+  "Special leave to appeal from [2023] QCA 233 refused with costs. Not a High Court merits decision endorsing every lower-court proposition, not a new precedent made in 2026, and not a 2019/8575 case."
+  Source.publicAttribution
+
+data JudicialTier : Set where
+  trialDeclarationSetAside : JudicialTier
+  appealsMeritsDetermined : JudicialTier
+  otherPartyLeaveDismissed : JudicialTier
+  specialLeaveDeniedNotMerits : JudicialTier
+
+record HistoricalCaseReceipt : Set where
+  constructor historical-case-receipt
+  field
+    exactCitation : String
+    caseSource : Source.AttributedSource
+    judgmentTier : JudicialTier
+    is20198575FederalProceeding : Bool
+    operativeOnOriginalPartyAndApplication : Bool
+
+cherish2017TrialState : HistoricalCaseReceipt
+cherish2017TrialState = historical-case-receipt
+  "[2017] QPEC 38"
+  cherish2017QPECOriginalCourt
+  trialDeclarationSetAside
+  false false
+
+cherish2018AppealState : HistoricalCaseReceipt
+cherish2018AppealState = historical-case-receipt
+  "[2018] QCA 266"
+  qca266OfficialCarrier
+  appealsMeritsDetermined
+  false true
+
+springLake2023AppealState : HistoricalCaseReceipt
+springLake2023AppealState = historical-case-receipt
+  "[2023] QCA 233"
+  springLake2023QCAOriginalCourt
+  otherPartyLeaveDismissed
+  false false
+
+springLake2024HighCourtState : HistoricalCaseReceipt
+springLake2024HighCourtState = historical-case-receipt
+  "[2024] HCASL 92"
+  springLake2024HighCourtDisposition
+  specialLeaveDeniedNotMerits
+  false false
+
+data HistoricCourtRecordItem : Set where
+  courtAppealBook1998SIA : HistoricCourtRecordItem
+  courtAppealBook1998DeedAmendments : HistoricCourtRecordItem
+  2016ADPApplication : HistoricCourtRecordItem
+  2026SameLotTitleAndContract : HistoricCourtRecordItem
+
+record CourtExhibitLocator : Set where
+  constructor court-exhibit-locator
+  field
+    object : HistoricCourtRecordItem
+    source : Source.AttributedSource
+    originalPages : String
+    quotedCourtFindingPaid : Bool
+    completeSignedContractFaceReceived : Bool
+
+appealBook1998Contract : CourtExhibitLocator
+appealBook1998Contract = court-exhibit-locator
+  courtAppealBook1998SIA qca266OfficialCarrier
+  "QCA 266 [17] note 19: appeal book AB628-903, original SIA"
+  true false
+
+appealBook1998Amendments : CourtExhibitLocator
+appealBook1998Amendments = court-exhibit-locator
+  courtAppealBook1998DeedAmendments qca266OfficialCarrier
+  "QCA 266 [17] note 19: appeal book AB904-942, deed amendments"
+  true false
+
+-- A case citation that establishes parties and prior land is not itself a
+-- signed deed, nor a finding that its duties attach to each present lot.
+data AppealBookWorld : Set where
+  agreementJudiciallyReferencedWithoutExecutionFile : AppealBookWorld
+  agreementJudiciallyReferencedWithCompleteFile : AppealBookWorld
+
+data SameCourtReference : Set where
+  appealBookPagesJudiciallyIdentified : SameCourtReference
+
+data ExactExecutedAgreementEvidence : Set where
+  executedAgreementNotReceived : ExactExecutedAgreementEvidence
+  executedAgreementNowReceived : ExactExecutedAgreementEvidence
+
+courtCitation : AppealBookWorld → SameCourtReference
+courtCitation agreementJudiciallyReferencedWithoutExecutionFile = appealBookPagesJudiciallyIdentified
+courtCitation agreementJudiciallyReferencedWithCompleteFile = appealBookPagesJudiciallyIdentified
+
+executedAgreementFace : AppealBookWorld → ExactExecutedAgreementEvidence
+executedAgreementFace agreementJudiciallyReferencedWithoutExecutionFile = executedAgreementNotReceived
+executedAgreementFace agreementJudiciallyReferencedWithCompleteFile = executedAgreementNowReceived
+
+differentSignedFace :
+  executedAgreementFace agreementJudiciallyReferencedWithoutExecutionFile ≡
+  executedAgreementFace agreementJudiciallyReferencedWithCompleteFile → ⊥
+differentSignedFace ()
+
+judiciallyIdentifiedAppealPagesDoNotSupplyExecutedDeed :
+  INF.FactorsThrough courtCitation executedAgreementFace → ⊥
+judiciallyIdentifiedAppealPagesDoNotSupplyExecutedDeed =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness agreementJudiciallyReferencedWithoutExecutionFile
+      agreementJudiciallyReferencedWithCompleteFile refl differentSignedFace)
+
+-- A refusal of High Court special leave is an ACTUAL court disposition,
+-- not a High Court judgment determining merits of the Springfield ADP rules.
+data DispositionKind : Set where
+  appellateMeritsDetermination : DispositionKind
+  discretionarySpecialLeaveRefusal : DispositionKind
+
+dispositionsAreDifferent :
+  appellateMeritsDetermination ≡ discretionarySpecialLeaveRefusal → ⊥
+dispositionsAreDifferent ()
