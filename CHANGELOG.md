@@ -53,3 +53,8 @@ monitor surface.
   landed through `walkObjectsSucMemberByVertices` and
   `walkObjectExtendMemberByVertices` in
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+
+## 2026-10-30 — Pickover real-phase versus graph orbit-sum collision
+
+- Added a stronger exact Machin-rational regression to `scripts/check_pickover_exact_interval_certificate.py`: the entire (99^k\bmod 9999) chart is identical (=297) for (k=120,720), yet actual `sin(99^k)` signs are rigorously opposite. Prior mod-101 witness and exact sign source owners reused.
+- Crosswalked PR #1438 graph C3 orbit-sum and `Physics.WaveAlgorithmLift`: compatible, symmetrized graph structure is not a real signed circle-phase certificate. The terminal `k=9999!` sign remains open; existing naive pi-interval width obstruction remains method-specific. No ESD modification, no CI, Golden kernel pending.
