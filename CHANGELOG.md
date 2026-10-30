@@ -75,3 +75,9 @@ monitor surface.
 - Extended existing C4/C5 operators with actual normalized character phase, original 64/125 Nyquist sample lists, source selected-pair kernels, and resolution-hypothesis-bearing `SourceSampledEqualsIndexedGivenResolution`. Projected these correctly conditional theorems in TOE, Unifier, Unified.Everything.
 - Independently checked full actual source-order finite characters: C4 4096 group comparisons/19683 original pair-targets and C5 15625 group comparisons/91125 original pair-targets, pure exact arithmetic. A preliminary 1D-vs-3D N/N³ diagnostic was fixed before complete passing run. Added source-order checks to existing universal Python certificate. Exact checkout Python suite and Agda/Lean kernels NOT run.
 - Remaining independent golden kernel obligations: actual normalized 3D character resolution, sample-array FFT/source character equivalence, final C4/C5 sampled→indexed, physical NS R440/R736/B4/real time, clock calibration, original Ibrahim Monster 3B; no ESD/CI modifications.
+
+
+### 2026-10-30 — exact spectral primary sources and `--safe` admission boundary
+- Verified historical Orszag (1971 J. Atmos. Sci.), Patterson/Orszag (1971 Phys. Fluids) and Orszag (1971 Galerkin spectral) primary-source authorship; kept finite method inheritance, branch-owned Agda proof terms and executed exact checks separate.
+- Source-audited original `Core.Prelude`, observer incidence and new C4/C5/bilinear modules: `{-# OPTIONS --safe #-}` is not declared in these files. Static hole/postulate scans do not certify safe mode. Recorded transitive `--safe` import closure and exact-head Agda checking as mandatory before golden certification; no ESD change and no CI run.
+- Made C4 four-point source rational normalization explicit with `normalize 4 1`.
