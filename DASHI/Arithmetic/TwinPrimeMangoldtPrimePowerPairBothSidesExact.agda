@@ -16,7 +16,7 @@ module DASHI.Arithmetic.TwinPrimeMangoldtPrimePowerPairBothSidesExact where
 -- Source-written; Agda kernel pending. 30 October 2026.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 import DASHI.Analysis.WeilTestSpace as Weil
@@ -43,7 +43,7 @@ properPowerAsOccurrence :
   ProperPrimePowerOccurrence space arith →
   PP.PrimePowerOccurrence space arith
 properPowerAsOccurrence (proper-prime-power p k) =
-  PP.occurrence p (Agda.Builtin.Nat.suc k)
+  PP.occurrence p (suc k)
 
 properPowerValue :
   (space : Weil.WeilTestSpace) →
@@ -65,7 +65,7 @@ properPowerMangoldtPeriod :
 properPowerMangoldtPeriod space arith mangoldt
     (proper-prime-power p k) =
   Actual.mangoldtPrimePowerPeriod space arith mangoldt
-    p (Agda.Builtin.Nat.suc k)
+    p (suc k)
 
 -- General RIGHT ENDPOINT: a supplied genuine equality n+2=p^j
 -- is essential; the weight is inherited from the original
