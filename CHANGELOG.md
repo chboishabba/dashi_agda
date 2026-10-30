@@ -53,3 +53,11 @@ monitor surface.
   landed through `walkObjectsSucMemberByVertices` and
   `walkObjectExtendMemberByVertices` in
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+
+
+## 2026-10-30 — OpenAI Math finite-supported Tseitin proof transport (PR #1212)
+
+- Added `DASHI/Research/OpenAIMath/OpenAIMathFiniteSupportedTseitinModelsExact.agda` and routed it through the existing focused OpenAI Research `Everything.agda`. On original DAG/circuit owners it defines finite input and auxiliary vectors, canonical accepted-input encoding, exact per-coordinate round trips, and a reuse-only bridge to the original shared SAT formula. No new SAT compiler or arbitrary-tail uniqueness.
+- Reused the pre-existing `PNotEqualsNPQ1TruthTableRepairGeneratorExact.vecExtensionality` instead of a second finite vector proof. Original PR #1040's executable circuit semantics and compiler ownership unchanged.
+- An independently executed local finite enumeration passed 59,293 small circuit/output cases and a negative control for one-way auxiliary implications. Source-written Agda module, not kernel-checked; numeric cardinality, bounded-width bit encoding and ETH machine cost all remain explicit open gates.
+- Updated both OpenAI Agda and Lean planning documents; tracked Jizhou Guo's October 29 **conditional**, externally owned sparse TSP/tensor-contraction follow-up, distinct from OpenAI Lean's fixed-width counting theorem. No ESD, Monster/Ibrahim ownership, or CI changes.
