@@ -791,3 +791,13 @@ yangMillsBalabanRouteSP2NativeNoDistancePayment =
 yangMillsBalabanRouteSP2NativeCompilerLevel : ProofLevel
 yangMillsBalabanRouteSP2NativeCompilerLevel =
   BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
+
+
+yangMillsBalabanRouteSP2R445NoSecondMoment :
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequired ≡ false
+yangMillsBalabanRouteSP2R445NoSecondMoment =
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+yangMillsBalabanRouteSP2R445CompilerLevel : ProofLevel
+yangMillsBalabanRouteSP2R445CompilerLevel =
+  BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
