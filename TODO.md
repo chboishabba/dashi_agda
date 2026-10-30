@@ -7,6 +7,12 @@
 - [ ] Supply the *physical* same-family trace→Gram boundedness interpretation for the actual Wilson/Haar carrier; prove bounded product and identity closure, selected time-distance, and actual continuum-measure convergence. Rational quaternion traces alone do not instantiate that theory.
 
 
+
+- [x] Search physical rational SU(2) Wilson path owners and **reuse** `BalabanLiteralRationalSU2WilsonBoundedAlgebraExact` instead of a synthetic fixed-holonomy or duplicate trace proof.
+- [x] Derive canonical S2 literal loop and identity boundedness from the owned configuration-dependent path/one pointwise theorems under one exact same-object physical observable interpretation.
+- [ ] Extend pointwise product closure across the *actual* selected Gram bounded-observable algebra, or narrow the target to the literal Wilson image in a proof-preserving way; do not assume generic closure from a rational-image-only bound.
+
+
 ## 2026-10-30 YM direct-route R320/R313/R333 max-cut
 
 - [x] Search golden Agda and Lean owner files as well as live PRs before choosing route; prefer existing `YMClayRouteSH1DirectSelectedMarkedDecayExact`, R313 and R333.
