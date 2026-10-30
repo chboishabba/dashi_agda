@@ -54,9 +54,23 @@ def count_whole_placed_cnf_models(n, gates, output):
     final_index = output[1] if output[0] == "i" else n + output[1]
     clauses.append(((final_index, True),))
     assert len(clauses) == 4 * len(gates) + 1
-    return sum(all(any(bits[j] == sign for j, sign in clause)
-                   for clause in clauses)
-               for bits in product((False, True), repeat=n + len(gates)))
+    models = 0
+    for bits in product((False, True), repeat=n + len(gates)):
+        compiled_accepts = all(
+            any(bits[j] == sign for j, sign in clause)
+            for clause in clauses
+        )
+        expected_gates = eval_circuit(n, gates, bits[:n])
+        final_true = bits[final_index]
+        # Stronger than equal TOTAL counts: equivalence of satisfying
+        # assignments on each finite input+gate vector, including invalid
+        # gate assignments, repeated wires and both output-wire kinds.
+        semantic_accepts = (bits[n:] == expected_gates and final_true)
+        assert compiled_accepts == semantic_accepts, (
+            n, gates, output, bits, compiled_accepts, semantic_accepts
+        )
+        models += compiled_accepts
+    return models
 
 def count_both(n, gates, output):
     n_input_accept = 0
@@ -191,7 +205,7 @@ def main():
     assert 2 * count_both(1, gates, ("g", 0)) == 4
     check_local_three_bit_gate_cnf()
     check_placed_gate_index_semantics()
-    print(f"PASS: {tests} exhaustive DAG/output cases: input = canonical Tseitin = full 4g+1 CNF counts")
+    print(f"PASS: {tests} exhaustive DAG/output cases: assignment-level semantic equivalence and all three counts")
     print("PASS: one-way-gate and unconstrained-tail counterexamples")
 
 
