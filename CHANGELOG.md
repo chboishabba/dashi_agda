@@ -75,3 +75,9 @@ monitor surface.
 - Extended original M16 Mangoldt finite witness module with exact `S!=E` and observed-separation lemmas and a conditional cofinal observer→twin infinitude composition. The missing cofinal separation is NOT asserted or proved.
 - Reused existing Core.pow2 and in-repo Data.Nat.Logarithm precedent; added standard library floor-log₂ bound, source equality with custom cutoff, and duplicate-safe stdlib-log rectangle coverage.
 - Updated research proof matrix, paper and TODO. No ESD paths touched, no CI. Agda/Lean compilers unavailable, all new Agda theorem source remains kernel pending; no twin-prime infinitude or parity breakthrough is claimed.
+
+## 2026-10-30 — universal cube-roughness arithmetic and canonical CT11→M15 images
+
+- Added `TwinPrimeOddCompositeCubeRoughCutExact.agda`, safe-source universal three-factor threshold cube lower bound and contradiction to cube-roughness. Wired into original certified 103/105 odd-squarefree counterfeit and all three TOE roots.
+- Transported original computed binary cutoff and candidate/deduplicated power lists to equal standard-library `⌊log₂⌋` counterparts, yielding a source-written exact M15 position-cover envelope `2*floorSquareRoot(U)*⌊log₂U⌋`.
+- Real Möbius shifted-prime contamination asymptotics, strict ordinary-real Mangoldt scalar and cofinal correlation separation remain mathematical research obligations. No Agda/Lean compiler receipt, no CI, no ESD changes; independent historical owners/PR authorship and Ibrahim/Monster 3B/QID distinctions retained.
