@@ -442,3 +442,9 @@ routeSP2NativeDoesNotRequireTimeDistance :
   Full.routeSP2NativeNoDistanceRequirement ≡ false
 routeSP2NativeDoesNotRequireTimeDistance =
   Full.routeSP2NativeNoDistanceRequirementIsFalse
+
+
+routeSP2R445NoSecondMoment :
+  Full.routeSP2R445IndependentMomentRequired ≡ false
+routeSP2R445NoSecondMoment =
+  Full.routeSP2R445IndependentMomentRequiredIsFalse
