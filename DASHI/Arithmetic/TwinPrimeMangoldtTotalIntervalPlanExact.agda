@@ -24,7 +24,7 @@ open import Data.Nat.DivMod using
   (_/_; _%_; m%n<n; m≡m%n+[m/n]*n)
 import Data.Nat.Properties as NP
 open import Data.Sum using (inj₁; inj₂)
-open import Data.Empty using (⊥-elim)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using
   (cong; trans; sym; subst)
@@ -103,7 +103,7 @@ shortWhenWithinDistance start count short =
 -- If r+count is NOT ≤270, then count ≥270-r.
 mustCrossBoundary :
   (start count : Nat) →
-  (start % 270 + count ≤ 270 → Data.Empty.⊥) →
+  (start % 270 + count ≤ 270 → ⊥) →
   distanceToBoundary start ≤ count
 mustCrossBoundary start count notWithin
   with NP.≤-total count (distanceToBoundary start)
