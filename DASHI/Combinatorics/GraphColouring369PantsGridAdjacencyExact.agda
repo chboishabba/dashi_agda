@@ -255,3 +255,112 @@ selectedPantsColouring = pantsToVoxelGraphHom
 selectedFlippedColouring : Colour.Colouring pantsGrid selectedPalette
 selectedFlippedColouring =
   pullbackProperColouringThroughFlip selectedPantsColouring
+
+------------------------------------------------------------------------
+-- 6. All SIX labelled-coordinate permutations, not just C3.
+--    This is S3 on the coordinates of the native grid, NOT an action on
+--    the asymmetric 3x3 directed-weight fixture or the Monster.
+------------------------------------------------------------------------
+
+swapPantsXY : Frontier.PantsPath 3 -> Frontier.PantsPath 3
+swapPantsXY (a vcons b vcons c vcons vnil) =
+  b vcons a vcons c vcons vnil
+
+swapPantsXYInvolutive : (p : Frontier.PantsPath 3) ->
+  swapPantsXY (swapPantsXY p) ≡ p
+swapPantsXYInvolutive (a vcons b vcons c vcons vnil) = refl
+
+swapPantsPreservesAdj : ∀ {p q} -> Pants3Adjacent p q ->
+  Pants3Adjacent (swapPantsXY p) (swapPantsXY q)
+swapPantsPreservesAdj (pantsAdjacentX step) = pantsAdjacentY step
+swapPantsPreservesAdj (pantsAdjacentY step) = pantsAdjacentX step
+swapPantsPreservesAdj (pantsAdjacentZ step) = pantsAdjacentZ step
+
+swapPantsGraphHom : Colour.GraphHom pantsGrid pantsGrid
+swapPantsGraphHom = Colour.graphHom swapPantsXY swapPantsPreservesAdj
+
+data S3CoordinatePermutation : Set where
+  permutationABC : S3CoordinatePermutation
+  permutationBCA : S3CoordinatePermutation
+  permutationCAB : S3CoordinatePermutation
+  permutationBAC : S3CoordinatePermutation
+  permutationCBA : S3CoordinatePermutation
+  permutationACB : S3CoordinatePermutation
+
+actS3Pants :
+  S3CoordinatePermutation -> Frontier.PantsPath 3 -> Frontier.PantsPath 3
+actS3Pants permutationABC p = p
+actS3Pants permutationBCA p = rotatePants p
+actS3Pants permutationCAB p = rotatePants (rotatePants p)
+actS3Pants permutationBAC p = swapPantsXY p
+actS3Pants permutationCBA p = swapPantsXY (rotatePants p)
+actS3Pants permutationACB p = swapPantsXY (rotatePants (rotatePants p))
+
+actS3PreservesAdj :
+  (permutation : S3CoordinatePermutation) -> ∀ {p q} ->
+  Pants3Adjacent p q ->
+  Pants3Adjacent (actS3Pants permutation p) (actS3Pants permutation q)
+actS3PreservesAdj permutationABC step = step
+actS3PreservesAdj permutationBCA step = rotatePantsPreservesAdj step
+actS3PreservesAdj permutationCAB step =
+  rotatePantsPreservesAdj (rotatePantsPreservesAdj step)
+actS3PreservesAdj permutationBAC step = swapPantsPreservesAdj step
+actS3PreservesAdj permutationCBA step =
+  swapPantsPreservesAdj (rotatePantsPreservesAdj step)
+actS3PreservesAdj permutationACB step =
+  swapPantsPreservesAdj
+    (rotatePantsPreservesAdj (rotatePantsPreservesAdj step))
+
+s3PantsGraphHom :
+  (permutation : S3CoordinatePermutation) -> Colour.GraphHom pantsGrid pantsGrid
+s3PantsGraphHom permutation =
+  Colour.graphHom (actS3Pants permutation) (actS3PreservesAdj permutation)
+
+s3DistinctAnchor : Frontier.PantsPath 3
+s3DistinctAnchor =
+  Pants.slot3 vcons Pants.slot6 vcons Pants.slot9 vcons vnil
+
+-- The anchor has all three different values.  The six images of that
+-- anchor are distinct, so these are six distinct maps, not six names for
+-- one map.  Agda's absurd patterns discharge all 30 off-diagonal cases.
+s3AnchorImageInjective :
+  (left right : S3CoordinatePermutation) ->
+  actS3Pants left s3DistinctAnchor ≡
+  actS3Pants right s3DistinctAnchor ->
+  left ≡ right
+s3AnchorImageInjective permutationABC permutationABC _ = refl
+s3AnchorImageInjective permutationABC permutationBCA ()
+s3AnchorImageInjective permutationABC permutationCAB ()
+s3AnchorImageInjective permutationABC permutationBAC ()
+s3AnchorImageInjective permutationABC permutationCBA ()
+s3AnchorImageInjective permutationABC permutationACB ()
+s3AnchorImageInjective permutationBCA permutationABC ()
+s3AnchorImageInjective permutationBCA permutationBCA _ = refl
+s3AnchorImageInjective permutationBCA permutationCAB ()
+s3AnchorImageInjective permutationBCA permutationBAC ()
+s3AnchorImageInjective permutationBCA permutationCBA ()
+s3AnchorImageInjective permutationBCA permutationACB ()
+s3AnchorImageInjective permutationCAB permutationABC ()
+s3AnchorImageInjective permutationCAB permutationBCA ()
+s3AnchorImageInjective permutationCAB permutationCAB _ = refl
+s3AnchorImageInjective permutationCAB permutationBAC ()
+s3AnchorImageInjective permutationCAB permutationCBA ()
+s3AnchorImageInjective permutationCAB permutationACB ()
+s3AnchorImageInjective permutationBAC permutationABC ()
+s3AnchorImageInjective permutationBAC permutationBCA ()
+s3AnchorImageInjective permutationBAC permutationCAB ()
+s3AnchorImageInjective permutationBAC permutationBAC _ = refl
+s3AnchorImageInjective permutationBAC permutationCBA ()
+s3AnchorImageInjective permutationBAC permutationACB ()
+s3AnchorImageInjective permutationCBA permutationABC ()
+s3AnchorImageInjective permutationCBA permutationBCA ()
+s3AnchorImageInjective permutationCBA permutationCAB ()
+s3AnchorImageInjective permutationCBA permutationBAC ()
+s3AnchorImageInjective permutationCBA permutationCBA _ = refl
+s3AnchorImageInjective permutationCBA permutationACB ()
+s3AnchorImageInjective permutationACB permutationABC ()
+s3AnchorImageInjective permutationACB permutationBCA ()
+s3AnchorImageInjective permutationACB permutationCAB ()
+s3AnchorImageInjective permutationACB permutationBAC ()
+s3AnchorImageInjective permutationACB permutationCBA ()
+s3AnchorImageInjective permutationACB permutationACB _ = refl
