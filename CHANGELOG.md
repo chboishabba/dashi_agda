@@ -173,3 +173,5 @@ monitor surface.
 - Four canonical graph/TOE import roots updated; independent integer 3×3 audit passed; checker committed. Source-written Agda, kernel pending, no ESD edit or CI.
 
 - Added an exact finite four-phase wave parity counterfeit to graph-wave consumer-loss Agda source: nonnegative four-site f=(1,1,0,0), DFT modes (2,1−i,0,1+i), mode norms (4,2,0,2), but zero +2 correlation and zero signed spectral numerator. Reuses existing `ShiftDiscreteWaveStep` and `ShiftUnitaryLikeConstraint`; independent exact integer test PASS. This is an analytical *method-discriminator*, not prime distribution or terminal sine-sign proof. Attribution and authority boundaries unchanged.
+
+- Completed the **positive** graph-wave residual repair: original unaveraged matrix is an inhabited consumer-sufficient residual for selected directed-weight and signed finite-wave observers, and `fullDirectedMatrixStrictlyRefinesC3Orbit` proves original source-owned strict refinement. This is all-graph source-level proof, not just the fixture. Agda kernel pending.
