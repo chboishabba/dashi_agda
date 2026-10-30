@@ -2184,3 +2184,33 @@ toeC5Actual729ProductExpansion :
       (g (FourierPairProjection.proj₂ pair)))
 toeC5Actual729ProductExpansion =
   C5FullOperator.cyclotomicFiveActual729InputProductExpansion
+
+
+------------------------------------------------------------------------
+-- Literal 27-into-729 Fourier CHARACTER-WEIGHTED product at each sample.
+-- Source Fubini + original character-addition law; no premature
+-- normalized sampled→indexed/physical NS promotion.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as SampledC4Group
+
+toeC4Source729CharacterWeightedSample :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (x : SampledC4Group.FourGridCube64) →
+  C4Gaussian._*G_
+    (C4Retained.gaussianOriginal27UnscaledSynthesisAt f x)
+    (C4Retained.gaussianOriginal27UnscaledSynthesisAt g x)
+  ≡ Bilinear729.sumAll C4Retained.gaussianCoefficientOps Fourier729.pair729
+      (C4Retained.gaussianOriginal729PhaseContribution f g x)
+toeC4Source729CharacterWeightedSample =
+  C4Retained.gaussianSourceSampledProductExpands729
+
+toeC5Source729CharacterWeightedSample :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (x : Convolution729.GridCube125) →
+  C5Character125._*5_
+    (C5FullOperator.cyclotomicFiveOriginal27UnscaledSynthesisAt f x)
+    (C5FullOperator.cyclotomicFiveOriginal27UnscaledSynthesisAt g x)
+  ≡ Bilinear729.sumAll C5FullOperator.cyclotomicFiveOps Fourier729.pair729
+      (C5FullOperator.cyclotomicFiveOriginal729PhaseContribution f g x)
+toeC5Source729CharacterWeightedSample =
+  C5FullOperator.cyclotomicFiveSourceSampledProductExpands729
