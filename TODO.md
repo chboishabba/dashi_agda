@@ -24,6 +24,12 @@
 - [ ] Physically instantiate P3's R281 spectrum as **the** actual H2 reconstructed Hamiltonian's spectrum; the current H3 records are exact typing and conditional construction compilers.
 
 
+
+- [x] Reuse the R444/R445 marked moment source via `nativeWilsonPreferredFromMarked` and `nativeWilsonP2FromMarkedSource` to construct all three P2 limits without reselecting moments, on the same native T5 family.
+- [ ] Discharge the *actual* R445 `boundedObservableTail` / `momentRealization` source conditions for the selected four-dimensional CMP119 Wilson theory and identify its probability/measure carrier with the native rational-Wilson implementation.
+- [ ] Prove the physical equality to the selected real CMP119 H2/H3 OS family; QID/DOI or source similarity is not an equality proof.
+
+
 ## 2026-10-30 YM direct-route R320/R313/R333 max-cut
 
 - [x] Search golden Agda and Lean owner files as well as live PRs before choosing route; prefer existing `YMClayRouteSH1DirectSelectedMarkedDecayExact`, R313 and R333.
