@@ -435,9 +435,9 @@ module ABCSixPermutationPeripheralOrbit where
   renameLetter p posA = positive (Perm.applyPermutation p Base.tri-low)
   renameLetter p posB = positive (Perm.applyPermutation p Base.tri-mid)
   renameLetter p posC = positive (Perm.applyPermutation p Base.tri-high)
-  renameLetter p negA = opposite (renameLetter p posA)
-  renameLetter p negB = opposite (renameLetter p posB)
-  renameLetter p negC = opposite (renameLetter p posC)
+  renameLetter p negA = opposite (positive (Perm.applyPermutation p Base.tri-low))
+  renameLetter p negB = opposite (positive (Perm.applyPermutation p Base.tri-mid))
+  renameLetter p negC = opposite (positive (Perm.applyPermutation p Base.tri-high))
 
   renameWord : Perm.TriPermutation → Word → Word
   renameWord p [] = []
