@@ -428,3 +428,22 @@ unifiedSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 unifiedSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+
+------------------------------------------------------------------------
+-- Highest-alpha YM Route-S selected source -> OS max-cut (canonical owner).
+-- Reuses R320 -> R295 -> R313 -> R296 -> R333; physical inputs not promoted.
+------------------------------------------------------------------------
+
+unifiedBalabanR320RouteSToOSCompilerLevel : ProofLevel
+unifiedBalabanR320RouteSToOSCompilerLevel =
+  BalabanRGTOE.balabanR320RouteSToOSCompilerLevel
+
+unifiedBalabanR320RouteSSelectedSourceLevel : ProofLevel
+unifiedBalabanR320RouteSSelectedSourceLevel =
+  BalabanRGTOE.balabanR320RouteSSelectedPhysicalSourceLevel
+
+unifiedBalabanR320RouteSNoDuplicateMagnitude :
+  BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
+unifiedBalabanR320RouteSNoDuplicateMagnitude =
+  BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
