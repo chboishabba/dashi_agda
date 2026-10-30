@@ -30,3 +30,13 @@ identityStillNeedsBoundedness :
   S2.identityObservableBoundednessStillPhysical ≡ true
 identityStillNeedsBoundedness =
   S2.identityObservableBoundednessStillPhysicalIsTrue
+
+------------------------------------------------------------------------
+-- Rational SU(2) trace produces loop-specific Gram boundedness from one
+-- explicit quantitative interpretation. No unconditional continuum claim.
+------------------------------------------------------------------------
+
+normalizedTraceSuppliesPerLoopBoundGivenInterpretation :
+  S2.rationalSU2TraceSourcePaysLiteralLoopBoundedness ≡ true
+normalizedTraceSuppliesPerLoopBoundGivenInterpretation =
+  S2.rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue
