@@ -2205,3 +2205,5 @@ In parallel, attack CT15c's genuine shifted gap-two
 signed cancellation; reject any bound relying only
 on the finite wheel survivor count, which admits
 composite–composite counterfeit pairs.
+
+**Reproducibility addendum:** `scripts/check_twin_prime_ct11_binary_cutoff.py` now contains the independently run finite arithmetic experiment covering 2,049 bounds and 97,619 proper-power coordinate witnesses, using exact integer powers and no floating logarithms. The script was committed after the inline local algorithm was executed; the checked-in file has not been separately run from a local repository clone in this environment (network unavailable). No kernel receipt implied.
