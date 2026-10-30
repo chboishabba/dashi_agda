@@ -41,7 +41,9 @@ open RationalNative27 public using
   ; decodedNativeEquivAt ; encodeNativeIntertwinesAt
   ; projectRationalC3 ; projectRationalS3 ; projectRationalC3IdempotentAt ; projectRationalS3IdempotentAt
   ; projectRationalC3InvariantAt ; projectRationalS3InvariantAt ; projectRationalS3FixesInvariantAt ; projectRationalS3AdditiveAt
-  ; projectRationalC3AdditiveAt ; projectRationalC3AfterS3At ; projectRationalS3AfterC3At ; projectRationalS3NativeActionInvariantAt )
+  ; projectRationalC3AdditiveAt ; projectRationalC3AfterS3At ; projectRationalS3AfterC3At ; projectRationalS3NativeActionInvariantAt
+  ; projectRationalC3FixesInvariantAt ; projectRationalC3NaturalityAt
+  ; projectRationalS3NaturalityAt )
 
 -- Separate F3 no-go: nonsemisimple three-point C3 permutation module
 -- has no C3-equivariant linear retraction onto its constant line.
