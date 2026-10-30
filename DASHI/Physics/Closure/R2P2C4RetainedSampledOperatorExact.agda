@@ -618,6 +618,15 @@ gaussianAxisNormalizedPhase k l x =
   FFT.scaleG FFT.quarter
     (G._*G_ (G.character4 k x) (G.conjG (G.character4 l x)))
 
+fourAxisX : Four.FourGridCube64 → Four.FourGridMode
+fourAxisX (Four.fourCube a b c) = a
+
+fourAxisY : Four.FourGridCube64 → Four.FourGridMode
+fourAxisY (Four.fourCube a b c) = b
+
+fourAxisZ : Four.FourGridCube64 → Four.FourGridMode
+fourAxisZ (Four.fourCube a b c) = c
+
 gaussianCubeNormalizedPhaseSplit :
   (k l x : Four.FourGridCube64) →
   FFT.scaleG norm64
@@ -631,13 +640,6 @@ gaussianCubeNormalizedPhaseSplit :
           (fourAxisY k) (fourAxisY l) (fourAxisY x)))
       (gaussianAxisNormalizedPhase
         (fourAxisZ k) (fourAxisZ l) (fourAxisZ x))
-  where
-  fourAxisX : Four.FourGridCube64 → Four.FourGridMode
-  fourAxisX (Four.fourCube a b c) = a
-  fourAxisY : Four.FourGridCube64 → Four.FourGridMode
-  fourAxisY (Four.fourCube a b c) = b
-  fourAxisZ : Four.FourGridCube64 → Four.FourGridMode
-  fourAxisZ (Four.fourCube a b c) = c
 gaussianCubeNormalizedPhaseSplit
   (Four.fourCube a b c)
   (Four.fourCube d e f)
