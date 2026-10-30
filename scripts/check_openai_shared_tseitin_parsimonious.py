@@ -68,6 +68,47 @@ def check_local_three_bit_gate_cnf():
             assert compiled == predicate(kind, candidate), (kind, candidate)
     print("PASS: 40 local three-bit gate/CNF evaluations; <=8 width-3 clauses")
 
+
+def check_placed_gate_index_semantics():
+    """Validate the same gate index mapping used by the Agda Fin placement.
+
+    Earlier gate refs are newest-first (Fin.zero is the most recent gate),
+    whereas the shared Tseitin numeric index is creation-time.
+    """
+    checked = 0
+    for n in (1, 2):
+        for older in (0, 1, 2):
+            wires = [("i", j) for j in range(n)] + [("g", j) for j in range(older)]
+            gates = [("const", (False,)), ("const", (True,))]
+            gates += [("not", (src,)) for src in wires]
+            gates += [(op, (a, b)) for op in ("and", "or")
+                      for a in wires for b in wires]
+            def wire_index(w):
+                return w[1] if w[0] == "i" else n + older - 1 - w[1]
+            for op, args in gates:
+                output_index = n + older
+                left_index = output_index if op == "const" else wire_index(args[0])
+                right_index = (wire_index(args[1]) if op in ("and", "or")
+                               else output_index)
+                assert all(0 <= index <= output_index
+                           for index in (left_index, right_index))
+                for bits in product((False, True), repeat=output_index + 1):
+                    out, left, right = (bits[output_index],
+                                        bits[left_index], bits[right_index])
+                    target = {
+                        "const": lambda: args[0],
+                        "not": lambda: not left,
+                        "and": lambda: left and right,
+                        "or": lambda: left or right,
+                    }[op]()
+                    assert (out == target) == (
+                        out == (args[0] if op == "const"
+                                else (not left if op == "not"
+                                      else (left and right if op == "and"
+                                            else left or right))))
+                    checked += 1
+    print(f"PASS: {checked} finite-index placed-gate cases")
+
 def main():
     tests = 0
     for n in (1, 2):
@@ -106,6 +147,7 @@ def main():
     # The unused Nat->Bool tail is not determined by the circuit.
     assert 2 * count_both(1, gates, ("g", 0)) == 4
     check_local_three_bit_gate_cnf()
+    check_placed_gate_index_semantics()
     print(f"PASS: {tests} exhaustive small DAG/output cases with exact-count equality")
     print("PASS: one-way-gate and unconstrained-tail counterexamples")
 
