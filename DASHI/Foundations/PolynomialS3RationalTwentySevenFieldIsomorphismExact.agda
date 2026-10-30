@@ -25,6 +25,7 @@ import DASHI.Foundations.TernaryEndomorphismS3ActionLawsExact as ActionLaws
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Foundations.PolynomialS3TwentySevenOrbitBlockAssemblyExact as Atlas
 import DASHI.Foundations.PolynomialS3RationalBlockFieldIsomorphismExact as Iso
+import DASHI.Foundations.PolynomialC3S3OrbitSamplingProjectionExact as Sampling
 
 BlockField27 : Set
 BlockField27 = Atlas.OrbitBlock27 → ℚ
@@ -650,3 +651,76 @@ encodeNativeIntertwinesAt p f b =
       (decodedNativeEquivAt p f) b))
     (encodeDecodeNativeCoordinateAt
       (coordinateAction27 p (encodeNative27 f)) b)
+
+------------------------------------------------------------------------
+-- O79: native rational sampling is a direct instance of the ORIGINAL
+-- trit-valued C3/S3 orbit retraction, now polymorphic in its value.
+-- Do NOT equate this choice-dependent section with Reynolds averaging.
+-- Both samples live on the genuine 27-code conjugation carrier.
+-- SOURCE-WRITTEN; Agda kernel acceptance remains open.
+------------------------------------------------------------------------
+
+projectRationalC3 : NativeRationalField27 → NativeRationalField27
+projectRationalC3 = Sampling.projectC3Any
+
+projectRationalS3 : NativeRationalField27 → NativeRationalField27
+projectRationalS3 = Sampling.projectS3Any
+
+projectRationalC3IdempotentAt :
+  (f : NativeRationalField27) (x : Tower.LevelTwoCode) →
+  projectRationalC3 (projectRationalC3 f) x ≡ projectRationalC3 f x
+projectRationalC3IdempotentAt = Sampling.projectC3AnyIdempotent
+
+projectRationalS3IdempotentAt :
+  (f : NativeRationalField27) (x : Tower.LevelTwoCode) →
+  projectRationalS3 (projectRationalS3 f) x ≡ projectRationalS3 f x
+projectRationalS3IdempotentAt = Sampling.projectS3AnyIdempotent
+
+projectRationalC3InvariantAt :
+  (f : NativeRationalField27) (x : Tower.LevelTwoCode) →
+  projectRationalC3 f (Perm.conjugateCode Perm.permRotate x) ≡
+  projectRationalC3 f x
+projectRationalC3InvariantAt = Sampling.projectC3AnyInvariant
+
+projectRationalS3InvariantAt :
+  (f : NativeRationalField27) (p : Perm.TriPermutation)
+  (x : Tower.LevelTwoCode) →
+  projectRationalS3 f (Perm.conjugateCode p x) ≡
+  projectRationalS3 f x
+projectRationalS3InvariantAt = Sampling.projectS3AnyInvariant
+
+projectRationalS3FixesInvariantAt :
+  (f : NativeRationalField27) →
+  ((p : Perm.TriPermutation) (x : Tower.LevelTwoCode) →
+    f (Perm.conjugateCode p x) ≡ f x) →
+  (x : Tower.LevelTwoCode) → projectRationalS3 f x ≡ f x
+projectRationalS3FixesInvariantAt = Sampling.projectS3AnyFixesInvariant
+
+projectRationalS3AdditiveAt :
+  (f g : NativeRationalField27) (x : Tower.LevelTwoCode) →
+  projectRationalS3 (plusNativeFields f g) x ≡
+  plusNativeFields (projectRationalS3 f) (projectRationalS3 g) x
+projectRationalS3AdditiveAt f g x = refl
+
+projectRationalC3AdditiveAt :
+  (f g : NativeRationalField27) (x : Tower.LevelTwoCode) →
+  projectRationalC3 (plusNativeFields f g) x ≡
+  plusNativeFields (projectRationalC3 f) (projectRationalC3 g) x
+projectRationalC3AdditiveAt f g x = refl
+
+projectRationalC3AfterS3At :
+  (f : NativeRationalField27) (x : Tower.LevelTwoCode) →
+  projectRationalC3 (projectRationalS3 f) x ≡ projectRationalS3 f x
+projectRationalC3AfterS3At = Sampling.projectC3AnyAfterS3Any
+
+projectRationalS3AfterC3At :
+  (f : NativeRationalField27) (x : Tower.LevelTwoCode) →
+  projectRationalS3 (projectRationalC3 f) x ≡ projectRationalS3 f x
+projectRationalS3AfterC3At = Sampling.projectS3AnyAfterC3Any
+
+projectRationalS3NativeActionInvariantAt :
+  (p : Perm.TriPermutation) (f : NativeRationalField27)
+  (x : Tower.LevelTwoCode) →
+  nativeSourceAction27 p (projectRationalS3 f) x ≡ projectRationalS3 f x
+projectRationalS3NativeActionInvariantAt p f x =
+  projectRationalS3InvariantAt f (Perm.inversePermutation p) x
