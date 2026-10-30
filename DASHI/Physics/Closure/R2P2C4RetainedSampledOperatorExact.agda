@@ -211,6 +211,7 @@ retainedSampledBilinear f g target =
 ------------------------------------------------------------------------
 import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as Bilinear
 import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Full
+import DASHI.Physics.Closure.R2P2C4C5NyquistAntipodalFixedPointExact as Nyquist
 
 gaussianCoefficientOps : Bilinear.CoefficientOps G.Gaussian4
 gaussianCoefficientOps = record
@@ -379,3 +380,74 @@ gaussianSourceSampledProductExpands729 f g x =
 
 -- The original carrier/table and ordered pair list occur literally.
 -- Source-written only until pinned Agda kernel checks the full module.
+
+------------------------------------------------------------------------
+-- FINITE SAMPLE EXTRACTION AT THE ORIGINAL C4 retained 27 TARGETS.
+-- Explicit character resolution remains an INPUT, not an axiom or a
+-- synthetic receipt. Reuses the generic 729/finite-Fubini compiler
+-- instead of a second indexed convolution or a wrong scalar carrier.
+------------------------------------------------------------------------
+
+gaussianSelectedOriginalPair :
+  I.ModeCube27 → I.ModePair729 → Bool
+gaussianSelectedOriginalPair target (p , q) =
+  Four.eqFourCube
+    (Four.fourGridGroupSum (Four.inputToFourGrid p) (Four.inputToFourGrid q))
+    (Four.wideToFourGrid (Full.retainedToWide target))
+
+gaussianNormalizedCharacterPhase :
+  I.ModeCube27 → I.ModePair729 → Four.FourGridCube64 → G.Gaussian4
+gaussianNormalizedCharacterPhase target (p , q) x =
+  FFT.scaleG norm64
+    (G._*G_
+      (gaussianCubeCharacter
+        (Four.fourGridGroupSum (Four.inputToFourGrid p) (Four.inputToFourGrid q)) x)
+      (G.conjG
+        (gaussianCubeCharacter (Four.wideToFourGrid (Full.retainedToWide target)) x)))
+
+gaussianOriginalPairCoefficient :
+  (I.ModeCube27 → G.Gaussian4) →
+  (I.ModeCube27 → G.Gaussian4) →
+  I.ModePair729 → G.Gaussian4
+gaussianOriginalPairCoefficient f g (p , q) =
+  G._*G_ (f p) (g q)
+
+gaussianSourceNormalizedSampledAt :
+  (I.ModeCube27 → G.Gaussian4) →
+  (I.ModeCube27 → G.Gaussian4) →
+  I.ModeCube27 → G.Gaussian4
+gaussianSourceNormalizedSampledAt f g target =
+  Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourGridCubes
+    (λ x → Bilinear.sumAll gaussianCoefficientOps I.pair729
+      (λ pair → G._*G_
+        (gaussianOriginalPairCoefficient f g pair)
+        (gaussianNormalizedCharacterPhase target pair x)))
+
+gaussianActualCharacterResolution :
+  I.ModeCube27 → Set
+gaussianActualCharacterResolution target =
+  (pair : I.ModePair729) →
+  Bilinear.sumAll gaussianCoefficientOps Nyquist.allFourGridCubes
+    (gaussianNormalizedCharacterPhase target pair)
+  ≡ Bilinear.choose G.zeroG
+    (gaussianSelectedOriginalPair target pair) G.oneG
+
+gaussianSourceSampledEqualsIndexedGivenResolution :
+  (f g : I.ModeCube27 → G.Gaussian4)
+  (target : I.ModeCube27) →
+  gaussianActualCharacterResolution target →
+  gaussianSourceNormalizedSampledAt f g target
+    ≡ fourGridGaussianIndexConvolutionAt f g target
+gaussianSourceSampledEqualsIndexedGivenResolution f g target resolution =
+  Bilinear.finiteFourierExtractionFromOriginal729GivenResolution
+    gaussianCoefficientOps gaussianFiniteSumAlgebra
+    Nyquist.allFourGridCubes
+    G.oneG G.scalarMulOneRight
+    (gaussianOriginalPairCoefficient f g)
+    (gaussianNormalizedCharacterPhase target)
+    (gaussianSelectedOriginalPair target)
+    resolution
+
+-- The condition above is the 64/125-character resolution,
+-- not the missing tensor-FFT synthesis/analysis same-object theorem.
+-- Neither is silently assumed from a numeric Python fixture.
