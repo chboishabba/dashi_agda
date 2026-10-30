@@ -1,4 +1,7 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
+import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as NativeIdentity
+import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
+import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
 import DASHI.Reasoning.TrialecticWeightedGraphFaceMediationSelectedExact as SelectedFace369
 import DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact as GridPants369
 import DASHI.Combinatorics.GraphColouringHomomorphismCoreExact as GridColour
@@ -10,6 +13,8 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact as DirectedDescent
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Nat using (_≤_)
+open import Data.List using (List)
 open import Data.Unit using (⊤)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
@@ -302,3 +307,29 @@ toeSelectedOutputNoGraphOnlyDecoder :
     SelectedFace369.selectedOutputConsumer -> ⊥
 toeSelectedOutputNoGraphOnlyDecoder =
   SelectedFace369.selectedNextDepthOutputCannotFactorThroughGraph
+
+------------------------------------------------------------------------
+-- Native 27-grid QID + genuine weighted maximum-cut Pareto max-cut.
+-- QID is concept identity only; no graph-object or Monster same-object claim.
+------------------------------------------------------------------------
+
+toeNativeEdgewiseWeightedMaximumCut :
+  (edges : List NativeMaxCut369.NativeWeightedEdge) ->
+  (candidate : NativeMaxCut369.Partition) ->
+  NativeMaxCut369.cutScore candidate edges
+  ≤ NativeMaxCut369.cutScore NativeMaxCut369.checkerCut edges
+toeNativeEdgewiseWeightedMaximumCut =
+  NativeMaxCut369.checkerMaximumCut
+
+toeNative54UnitCutWitness :
+  NativeMaxCut369.cutScore
+    NativeMaxCut369.checkerCut
+    NativeMaxCut369.unitNativeGridEdges ≡ 54
+toeNative54UnitCutWitness =
+  NativeMaxCut369.checkerWitnessScoreIs54
+
+toeVerifiedConceptQidsRetainNoAuthority :
+  NativeIdentity.SnowballExternalIdentityPolicy.externalIdentityCreatesSemanticAuthority
+    NativeIdentity.canonicalExternalIdentityPolicy ≡ false
+toeVerifiedConceptQidsRetainNoAuthority =
+  NativeQid369.verifiedConceptDoesNotCreateAuthority
