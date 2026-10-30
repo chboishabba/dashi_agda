@@ -17417,3 +17417,5 @@ pants/sheaf matching before promoting any real-world synthesis.
 - [x] Further exact C4 discrete-wave Fourier witness: positive spectral mode energies (4,2,0,2) but zero lag-two correlation for synthetic f=(1,1,0,0); reuse original Gaussian-integer `ShiftDiscreteWaveStep` and `ShiftUnitaryLikeConstraint` code, no new wave algebra.
 - [x] Independent integer-pair DFT replay and original graph C3 nine-entry matrix equality both PASS; checked-in Python test expanded; no analytic claim promoted.
 - [ ] Prove PRIME-SPECIFIC spectral correlation lower bound in an actual arithmetic producer, not from positive Hilbert/Fourier energy alone, and certify full interval Pickover phase separately.
+
+- [x] Inhabit actual matrix-vs-C3 `ResidualRepair` for every graph and original finite wave trit; prove explicit strict refinement from the existing source-owned consumer collision. No analytic cross-promotion.
