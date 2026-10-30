@@ -15,6 +15,8 @@ module DASHI.Arithmetic.TwinPrimeProperPowerUniversalRectangleCoverageExact wher
 
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (_≤_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong)
 import DASHI.Analysis.RiemannPrimePowerArithmetic as Power
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact as Root
 import DASHI.Arithmetic.TwinPrimeProperPowerBinaryCutoffNatExact as Cutoff
@@ -138,3 +140,38 @@ stdlibLogCandidateDistinctCountBound upper =
   Rect.properPowerCandidateDistinctCountBound
     (Root.floorSquareRoot upper)
     (Cutoff.canonicalStdlibFloorLog₂ upper)
+
+------------------------------------------------------------------------
+-- No duplicated candidate semantics: the custom numeric cutoff and
+-- the standard-library logarithmic cutoff select the SAME mapped
+-- list, not just upper bounds of comparable numerical sizes.
+------------------------------------------------------------------------
+
+computedAndStdlibPowerImagesAgree :
+  (upper : Nat) →
+  Rect.powerValueRectangle
+    (Root.floorSquareRoot upper)
+    (Cutoff.floorBinaryExponent upper)
+  ≡
+  Rect.powerValueRectangle
+    (Root.floorSquareRoot upper)
+    (Cutoff.canonicalStdlibFloorLog₂ upper)
+computedAndStdlibPowerImagesAgree upper =
+  cong
+    (Rect.powerValueRectangle (Root.floorSquareRoot upper))
+    (Cutoff.customAndStdlibFloorLogAgree upper)
+
+computedAndStdlibDedupPowerImagesAgree :
+  (upper : Nat) →
+  Rect.dedupPowerValues
+    (Rect.powerValueRectangle
+      (Root.floorSquareRoot upper)
+      (Cutoff.floorBinaryExponent upper))
+  ≡
+  Rect.dedupPowerValues
+    (Rect.powerValueRectangle
+      (Root.floorSquareRoot upper)
+      (Cutoff.canonicalStdlibFloorLog₂ upper))
+computedAndStdlibDedupPowerImagesAgree upper =
+  cong Rect.dedupPowerValues
+    (computedAndStdlibPowerImagesAgree upper)
