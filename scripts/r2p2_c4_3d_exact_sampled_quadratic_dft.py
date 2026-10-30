@@ -139,7 +139,27 @@ def check_gaussian_ring_and_original_729_product_expansion():
         assert mul(sum_f, sum_g) == ordered_sum
     print("PASS: Q(i) eight ring basis triples and 3 full original 729-term expansions")
 
+
+def check_source_729_character_weighted_sample_product():
+    """Every actual 4^3 sample: original signed integer 729 pair phases."""
+    rng = Random(204001)
+    left = {k: (Fraction(rng.randrange(-3, 4), 5),
+                Fraction(rng.randrange(-3, 4), 7)) for k in K}
+    right = {k: (Fraction(rng.randrange(-3, 4), 11),
+                 Fraction(rng.randrange(-3, 4), 13)) for k in K}
+    for x in X:
+        lhs = mul(
+            sum_complex(mul(left[p], chi(p, x)) for p in K),
+            sum_complex(mul(right[q], chi(q, x)) for q in K))
+        rhs = sum_complex(
+            mul(mul(left[p], right[q]),
+                chi(tuple(a + b for a, b in zip(p, q)), x))
+            for p in K for q in K)
+        assert lhs == rhs
+    print("PASS: C4 64 actual sample points, 729 exact character-weighted original input pairs each")
+
 def check():
+    check_source_729_character_weighted_sample_product()
     check_gaussian_ring_and_original_729_product_expansion()
     check_one_axis_sampled_convolution()
     # Exact fourth-root orthogonality on all 64 group characters.
