@@ -5,6 +5,79 @@ Date: `2026-09-17`
 Version: `draft 2 — F1/F3/F4 recut`
 Status: live analytic manuscript draft; Clay-facing candidate preprint; non-promoting
 
+
+> **30 October 2026 cross-route corrigendum.** This paper establishes the
+> **strong F1/F3/F4 finite-gap/recovery route** and its conditional compiler
+> architecture; it is *not* a claim that F1/F3/F4 are globally mandatory for
+> all Yang–Mills mass-gap strategies. The preferred literal-Wilson **Route S**
+> in `YMClayLiteralWilsonRouteSThreeInputBoundaryExact` instead consumes P1
+> finite selected Wilson clustering, P2 three literal expectation limits and
+> P3 the same-H_OS correlation/spectral identification. The P1 and P2
+> projection compilers are already present: the surviving payments are their
+> physical source/presentation inhabitants and the same-object OS spectral
+> identification. The 30 October direct Agda composition in
+> `YMClayDirectSourceOSMassGapFrontierExact` concretely reuses the existing
+> R320 selected-source inequality through R295/R313/R296 to R333's physical
+> OS mass-gap compiler, without a second magnitude-localization proof.
+> R333 retains actual spectral/application inputs and this branch has not
+> earned an exact-head Agda kernel receipt. Neither route automatically
+> constructs the physical continuum inputs, local-QFT stress/OPE endpoint or
+> all compact simple groups. Bałaban's CMP 116/119/122 mathematics and all
+> other original source authors retain attribution; DASHI owns only its
+> independently authored formal interfaces and compositions.
+
+
+
+> **P2 boundedness supplement, 30 October.** The canonical rational SU(2) Wilson-path function theorem now feeds the existing S2 Wilson algebra through a typed `RationalSU2TraceGramBoundSource`, provided its pointwise-unit-boundedness predicate is mapped to the physical `Gram.BoundedObservable` predicate. The carrier additionally requires an explicit `traceIsLiteralWilson` equality to the selected physical loop observable; the finite trace bound is transported along it rather than relabelling a synthetic trace family. A single interpretation theorem replaces individual loopwise
+> boundedness assumptions. The canonical S2 projection then feeds the
+> existing P2 three-expectation-limit compiler. This is an exact
+> implication conditional on the physical source-to-measure interpretation,
+> bounded product closure, literal-identity same-object equality and selected time-distance geometry; it
+> does not identify rational SU(2) with the full continuum Wilson measure.
+
+
+
+> **P2 canonical owner correction.** The strongest in-repo donor is
+> `BalabanLiteralRationalSU2WilsonBoundedAlgebraExact`, which constructs the
+> literal configuration-dependent path-holonomy observable and proves its
+> pointwise unit bound (and identity/product pointwise closure). The P2
+> adapter now consumes that specific function—not a fixed quaternion for
+> each path—and transports boundedness to the physical Gram observable
+> along an explicit literal-Wilson identity. The unit observable's Gram
+> boundedness is likewise derived, and the generic S2 adapter uses the canonical normalized Wilson-trace rank one, rather than the defining-representation dimension two, and rational multiplication. The remaining physical inputs are the
+> actual pointwise→Gram interpretation, generic target-algebra product
+> closure, time/support identification and continuum measure convergence.
+
+
+
+> **30 October further source-first correction (native P2).** The existing
+> `BalabanLiteralWilsonNativeThermodynamicProducerExact`,
+> `BalabanLiteralWilsonNativePhysicalMeasureExact`, and
+> `YMClayLiteralWilsonP2NativeMeasureExact` already construct the native
+> quantitative bounded-observable algebra and the complete three-expectation
+> P2 conclusion, conditional on actual physical measure/tail inputs. The new
+> `nativeWilsonSameAlgebraBoundInputs` compiles this directly into the old
+> S2 record. The earlier generic trace-to-Gram adapter is only for non-native
+> carriers; it is no longer a native proof obligation. P2 requires **no**
+> separate Euclidean support-distance input. The canonical normalized
+> Wilson-trace bound is rank `1ℚ`, not `2ℚ` (the latter is the defining
+> representation dimension). P3's native H2/H3 same-Hamiltonian spectral
+> identification remains physically proof-bearing.
+
+
+
+> **R445 producer reduction (30 October continuation).** The new
+> `nativeWilsonPreferredFromMarked` and `nativeWilsonP2FromMarkedSource`
+> compositions send one existing R444/R445 selected marked-polymer moment
+> realization into the native rational-Wilson physical measure, then directly
+> into all three P2 expectation limits. No separate marked-moment source or
+> P2 support-distance theorem is required. Physical R445 tail/convergence
+> witnesses, four-dimensional CMP119 same-object interpretation and the
+> real H2/H3 spectral witness remain explicit. Bałaban and the original
+> marked-polymer authors retain mathematical attribution; these terms are
+> independently authored DASHI compositions, not new published source lemmas.
+
+
 ## Abstract
 
 This manuscript presents a reduction of the four-dimensional Yang–Mills mass-gap problem on a literal finite SU(2) Wilson–Gibbs family to three physical inputs, denoted `F1`, `F3`, and `F4`. The finite lattice theory, transfer-form algebra, varying-Hilbert-space transport, vacuum-sector spectral consequences, and final continuum gap compiler are treated as already-paid mathematical infrastructure where stated. The surviving physical obligations are:

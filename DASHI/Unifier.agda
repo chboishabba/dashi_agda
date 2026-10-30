@@ -1766,3 +1766,71 @@ unifierSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 unifierSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+
+------------------------------------------------------------------------
+-- Highest-alpha YM Route-S selected source -> OS max-cut (canonical owner).
+-- Reuses R320 -> R295 -> R313 -> R296 -> R333; physical inputs not promoted.
+------------------------------------------------------------------------
+
+unifierBalabanR320RouteSToOSCompilerLevel : ProofLevel
+unifierBalabanR320RouteSToOSCompilerLevel =
+  BalabanRGTOE.balabanR320RouteSToOSCompilerLevel
+
+unifierBalabanR320RouteSSelectedSourceLevel : ProofLevel
+unifierBalabanR320RouteSSelectedSourceLevel =
+  BalabanRGTOE.balabanR320RouteSSelectedPhysicalSourceLevel
+
+unifierBalabanR320RouteSNoDuplicateMagnitude :
+  BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
+unifierBalabanR320RouteSNoDuplicateMagnitude =
+  BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+
+
+------------------------------------------------------------------------
+-- Pareto P2: existing rational SU2 trace bound -> same-physical Gram
+-- boundedness producer -> canonical Wilson S2 input.
+------------------------------------------------------------------------
+
+unifierBalabanRouteSP2TraceToS2Level : ProofLevel
+unifierBalabanRouteSP2TraceToS2Level =
+  BalabanRGTOE.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+
+unifierBalabanRouteSP2PhysicalInterpretationLevel : ProofLevel
+unifierBalabanRouteSP2PhysicalInterpretationLevel =
+  BalabanRGTOE.balabanRouteSP2TracePhysicalInterpretationLevel
+
+unifierBalabanRouteSP2PerLoopBoundAfterInterpretation :
+  BalabanRGTOE.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+unifierBalabanRouteSP2PerLoopBoundAfterInterpretation =
+  BalabanRGTOE.balabanRouteSP2TracePaysPerLoopBounds
+
+
+------------------------------------------------------------------------
+-- Preferred native rational-Wilson P2 (actual measure producer), not
+-- the generic external trace-to-Gram compatibility adapter.
+------------------------------------------------------------------------
+
+unifierBalabanRouteSP2NativeNoProductPayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProduct ≡ true
+unifierBalabanRouteSP2NativeNoProductPayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProductIsTrue
+
+unifierBalabanRouteSP2NativeNoDistancePayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoDistance ≡ false
+unifierBalabanRouteSP2NativeNoDistancePayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoDistanceIsFalse
+
+unifierBalabanRouteSP2NativeCompilerLevel : ProofLevel
+unifierBalabanRouteSP2NativeCompilerLevel =
+  BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
+
+
+unifierBalabanRouteSP2R445NoSecondMoment :
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequired ≡ false
+unifierBalabanRouteSP2R445NoSecondMoment =
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+unifierBalabanRouteSP2R445CompilerLevel : ProofLevel
+unifierBalabanRouteSP2R445CompilerLevel =
+  BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel

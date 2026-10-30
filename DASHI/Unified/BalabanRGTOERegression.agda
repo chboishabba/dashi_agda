@@ -24,6 +24,9 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as NativeP2
+import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as P2Trace
+import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
 import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
@@ -681,3 +684,92 @@ toeContinuumPromotionRemainsFalseIsFalse = refl
 toeClayPromotionRemainsFalseIsFalse :
   toeClayPromotionRemainsFalse ≡ false
 toeClayPromotionRemainsFalseIsFalse = refl
+
+------------------------------------------------------------------------
+-- Canonical R320/R295/R313/R296 -> R333 direct-source/OS reuse.
+-- Bałaban CMP 116 (1988) is the mathematical source; DASHI owns only
+-- the typed route compiler. Physical R320 and R333 inputs are not invented.
+------------------------------------------------------------------------
+
+balabanR320RouteSToOSCompilerLevel : ProofLevel
+balabanR320RouteSToOSCompilerLevel =
+  RouteS.routeSH1ToDirectOSCompilerLevel
+
+balabanR320RouteSSelectedPhysicalSourceLevel : ProofLevel
+balabanR320RouteSSelectedPhysicalSourceLevel =
+  RouteS.routeSH1SelectedPhysicalPaymentLevel
+
+balabanR320RouteSMagnitudeNotNewPhysical : Bool
+balabanR320RouteSMagnitudeNotNewPhysical =
+  RouteS.routeSH1ReusesR313MagnitudeCompiler
+
+balabanR320RouteSNoSecondAbsoluteMagnitudeInput :
+  balabanR320RouteSMagnitudeNotNewPhysical ≡ false
+balabanR320RouteSNoSecondAbsoluteMagnitudeInput =
+  RouteS.routeSH1ReusesR313MagnitudeCompilerIsFalse
+
+
+------------------------------------------------------------------------
+-- Preferred P2 bounded-observable alternative (rational SU2 trace).
+-- The trace theorem is literal rational quaternion arithmetic; physical
+-- Wilson/Gram interpretation is a separate conditional bridge.
+------------------------------------------------------------------------
+
+balabanRouteSP2TraceToCanonicalS2CompilerLevel : ProofLevel
+balabanRouteSP2TraceToCanonicalS2CompilerLevel =
+  P2Trace.rationalSU2TraceToSameAlgebraCompilerLevel
+
+balabanRouteSP2TracePhysicalInterpretationLevel : ProofLevel
+balabanRouteSP2TracePhysicalInterpretationLevel =
+  P2Trace.rationalSU2TraceToGramInterpretationLevel
+
+balabanRouteSP2TracePerLoopBoundFlag : Bool
+balabanRouteSP2TracePerLoopBoundFlag =
+  P2Trace.rationalSU2TraceSourcePaysLiteralLoopBoundedness
+
+balabanRouteSP2TracePaysPerLoopBounds :
+  balabanRouteSP2TracePerLoopBoundFlag ≡ true
+balabanRouteSP2TracePaysPerLoopBounds =
+  P2Trace.rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue
+
+
+
+balabanRouteSP2NativeNoExtraProduct : Bool
+balabanRouteSP2NativeNoExtraProduct =
+  P2Trace.nativeWilsonS2NoIndependentBoundedProductLeaf
+
+balabanRouteSP2NativeNoExtraProductIsTrue :
+  balabanRouteSP2NativeNoExtraProduct ≡ true
+balabanRouteSP2NativeNoExtraProductIsTrue =
+  P2Trace.nativeWilsonS2NoIndependentBoundedProductLeafIsTrue
+
+balabanRouteSP2NativeNoDistance : Bool
+balabanRouteSP2NativeNoDistance =
+  P2Trace.nativeWilsonP2DoesNotNeedSupportDistance
+
+balabanRouteSP2NativeNoDistanceIsFalse :
+  balabanRouteSP2NativeNoDistance ≡ false
+balabanRouteSP2NativeNoDistanceIsFalse =
+  P2Trace.nativeWilsonP2DoesNotNeedSupportDistanceIsFalse
+
+balabanRouteSP2NativeCompilerLevel : ProofLevel
+balabanRouteSP2NativeCompilerLevel = P2Trace.nativeWilsonS2CompilerLevel
+
+
+------------------------------------------------------------------------
+-- R445 SAME marked-source moment -> native preferred physical measure
+-- -> already-owned three P2 convergence limits (no second moment source).
+------------------------------------------------------------------------
+
+balabanRouteSP2R445IndependentMomentRequired : Bool
+balabanRouteSP2R445IndependentMomentRequired =
+  NativeP2.p2NativeIndependentMomentSelectionRequired
+
+balabanRouteSP2R445IndependentMomentRequiredIsFalse :
+  balabanRouteSP2R445IndependentMomentRequired ≡ false
+balabanRouteSP2R445IndependentMomentRequiredIsFalse =
+  NativeP2.p2NativeIndependentMomentSelectionRequiredIsFalse
+
+balabanRouteSP2R445NativeCompilerLevel : ProofLevel
+balabanRouteSP2R445NativeCompilerLevel =
+  NativeP2.p2CanonicalMarkedSourceCompilerLevel

@@ -1524,3 +1524,71 @@ toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 toeSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+
+------------------------------------------------------------------------
+-- Highest-alpha YM Route-S selected source -> OS max-cut (canonical owner).
+-- Reuses R320 -> R295 -> R313 -> R296 -> R333; physical inputs not promoted.
+------------------------------------------------------------------------
+
+toeBalabanR320RouteSToOSCompilerLevel : ProofLevel
+toeBalabanR320RouteSToOSCompilerLevel =
+  BalabanRGTOE.balabanR320RouteSToOSCompilerLevel
+
+toeBalabanR320RouteSSelectedSourceLevel : ProofLevel
+toeBalabanR320RouteSSelectedSourceLevel =
+  BalabanRGTOE.balabanR320RouteSSelectedPhysicalSourceLevel
+
+toeBalabanR320RouteSNoDuplicateMagnitude :
+  BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
+toeBalabanR320RouteSNoDuplicateMagnitude =
+  BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+
+
+------------------------------------------------------------------------
+-- Pareto P2: existing rational SU2 trace bound -> same-physical Gram
+-- boundedness producer -> canonical Wilson S2 input.
+------------------------------------------------------------------------
+
+toeBalabanRouteSP2TraceToS2Level : ProofLevel
+toeBalabanRouteSP2TraceToS2Level =
+  BalabanRGTOE.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+
+toeBalabanRouteSP2PhysicalInterpretationLevel : ProofLevel
+toeBalabanRouteSP2PhysicalInterpretationLevel =
+  BalabanRGTOE.balabanRouteSP2TracePhysicalInterpretationLevel
+
+toeBalabanRouteSP2PerLoopBoundAfterInterpretation :
+  BalabanRGTOE.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+toeBalabanRouteSP2PerLoopBoundAfterInterpretation =
+  BalabanRGTOE.balabanRouteSP2TracePaysPerLoopBounds
+
+
+------------------------------------------------------------------------
+-- Preferred native rational-Wilson P2 (actual measure producer), not
+-- the generic external trace-to-Gram compatibility adapter.
+------------------------------------------------------------------------
+
+toeBalabanRouteSP2NativeNoProductPayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProduct ≡ true
+toeBalabanRouteSP2NativeNoProductPayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProductIsTrue
+
+toeBalabanRouteSP2NativeNoDistancePayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoDistance ≡ false
+toeBalabanRouteSP2NativeNoDistancePayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoDistanceIsFalse
+
+toeBalabanRouteSP2NativeCompilerLevel : ProofLevel
+toeBalabanRouteSP2NativeCompilerLevel =
+  BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
+
+
+toeBalabanRouteSP2R445NoSecondMoment :
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequired ≡ false
+toeBalabanRouteSP2R445NoSecondMoment =
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+toeBalabanRouteSP2R445CompilerLevel : ProofLevel
+toeBalabanRouteSP2R445CompilerLevel =
+  BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel

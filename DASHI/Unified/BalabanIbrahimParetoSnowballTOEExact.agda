@@ -1,5 +1,7 @@
 module DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact where
 
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
+import DASHI.Unified.BalabanRGTOERegression as DirectYM
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
@@ -208,3 +210,53 @@ FiniteIrreducibilityCreatesMonsterHZetaRecognition =
 CurrentQidIdentifiesHistoricalTitle : Set
 CurrentQidIdentifiesHistoricalTitle =
   Historical.CurrentQidIdentifiesHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- Yang-Mills Route-S Pareto candidate reuses the canonical R320 -> R333
+-- source compiler. No Monster 3B / HZeta recognition implication follows
+-- from the shared search-priority or finite-invariant vocabulary.
+------------------------------------------------------------------------
+
+ibrahimParetoRouteSCompilerLevel : ProofLevel
+ibrahimParetoRouteSCompilerLevel =
+  DirectYM.balabanR320RouteSToOSCompilerLevel
+
+ibrahimParetoRouteSSelectedPhysicalSourceLevel : ProofLevel
+ibrahimParetoRouteSSelectedPhysicalSourceLevel =
+  DirectYM.balabanR320RouteSSelectedPhysicalSourceLevel
+
+ibrahimParetoRouteSDoesNotReproveMagnitude :
+  DirectYM.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
+ibrahimParetoRouteSDoesNotReproveMagnitude =
+  DirectYM.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+
+
+------------------------------------------------------------------------
+-- P2 rational-trace Pareto snowball: one source theorem feeds the SAME
+-- Gram boundedness/expectation-limit route; no Monster transfer or external
+-- kernel claim is manufactured by search priority.
+------------------------------------------------------------------------
+
+ibrahimParetoRouteSP2TraceCompilerLevel : ProofLevel
+ibrahimParetoRouteSP2TraceCompilerLevel =
+  DirectYM.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+
+ibrahimParetoRouteSP2PhysicalInterpretationLevel : ProofLevel
+ibrahimParetoRouteSP2PhysicalInterpretationLevel =
+  DirectYM.balabanRouteSP2TracePhysicalInterpretationLevel
+
+ibrahimParetoRouteSP2TraceNoPerLoopReproof :
+  DirectYM.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+ibrahimParetoRouteSP2TraceNoPerLoopReproof =
+  DirectYM.balabanRouteSP2TracePaysPerLoopBounds
+
+
+ibrahimParetoR445NativeP2NoSecondMoment :
+  DirectYM.balabanRouteSP2R445IndependentMomentRequired ≡ false
+ibrahimParetoR445NativeP2NoSecondMoment =
+  DirectYM.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+ibrahimParetoR445NativeP2CompilerLevel : ProofLevel
+ibrahimParetoR445NativeP2CompilerLevel =
+  DirectYM.balabanRouteSP2R445NativeCompilerLevel

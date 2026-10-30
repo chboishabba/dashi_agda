@@ -702,3 +702,84 @@ physicsDepthContinuumLimitPromotionImpossible =
 validationZKPFrame : Balaban.BalabanTOEZKPFrame
 validationZKPFrame =
   Balaban.canonicalBalabanTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Direct H1 (R320) -> R313/R296 -> R333 route: exact owner agreement.
+------------------------------------------------------------------------
+
+toeR320DirectOSCompilerIsCanonical :
+  TOE.toeBalabanR320RouteSToOSCompilerLevel
+  ≡ Balaban.balabanR320RouteSToOSCompilerLevel
+toeR320DirectOSCompilerIsCanonical = refl
+
+unifierR320DirectOSCompilerIsCanonical :
+  Unifier.unifierBalabanR320RouteSToOSCompilerLevel
+  ≡ Balaban.balabanR320RouteSToOSCompilerLevel
+unifierR320DirectOSCompilerIsCanonical = refl
+
+physicsR320DirectOSCompilerIsCanonical :
+  Physics.yangMillsBalabanR320RouteSToOSCompilerLevel
+  ≡ Balaban.balabanR320RouteSToOSCompilerLevel
+physicsR320DirectOSCompilerIsCanonical = refl
+
+toeR320NoSecondMagnitudeLeaf :
+  TOE.toeBalabanR320RouteSNoDuplicateMagnitude
+  ≡ Balaban.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+toeR320NoSecondMagnitudeLeaf = refl
+
+unifierR320NoSecondMagnitudeLeaf :
+  Unifier.unifierBalabanR320RouteSNoDuplicateMagnitude
+  ≡ Balaban.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+unifierR320NoSecondMagnitudeLeaf = refl
+
+physicsR320NoSecondMagnitudeLeaf :
+  Physics.yangMillsBalabanR320RouteSNoDuplicateMagnitude
+  ≡ Balaban.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+physicsR320NoSecondMagnitudeLeaf = refl
+
+
+------------------------------------------------------------------------
+-- Rational SU2 P2 trace/S2 same-owner regression.
+------------------------------------------------------------------------
+
+toeP2TraceCompilerMatchesOwner :
+  TOE.toeBalabanRouteSP2TraceToS2Level
+  ≡ Balaban.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+toeP2TraceCompilerMatchesOwner = refl
+
+unifierP2TraceCompilerMatchesOwner :
+  Unifier.unifierBalabanRouteSP2TraceToS2Level
+  ≡ Balaban.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+unifierP2TraceCompilerMatchesOwner = refl
+
+physicsP2TraceCompilerMatchesOwner :
+  Physics.yangMillsBalabanRouteSP2TraceToS2Level
+  ≡ Balaban.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+physicsP2TraceCompilerMatchesOwner = refl
+
+toeP2PhysicalInterpretationMatchesOwner :
+  TOE.toeBalabanRouteSP2PhysicalInterpretationLevel
+  ≡ Balaban.balabanRouteSP2TracePhysicalInterpretationLevel
+toeP2PhysicalInterpretationMatchesOwner = refl
+
+toeP2TracePaysPerLoopBoundsGivenInterpretation :
+  TOE.toeBalabanRouteSP2PerLoopBoundAfterInterpretation
+    ≡ Balaban.balabanRouteSP2TracePaysPerLoopBounds
+toeP2TracePaysPerLoopBoundsGivenInterpretation = refl
+
+
+toeR445NativeP2AgreesWithOwner :
+  TOE.toeBalabanRouteSP2R445CompilerLevel
+  ≡ Balaban.balabanRouteSP2R445NativeCompilerLevel
+toeR445NativeP2AgreesWithOwner = refl
+
+unifierR445NativeP2AgreesWithOwner :
+  Unifier.unifierBalabanRouteSP2R445CompilerLevel
+  ≡ Balaban.balabanRouteSP2R445NativeCompilerLevel
+unifierR445NativeP2AgreesWithOwner = refl
+
+physicsR445NativeP2AgreesWithOwner :
+  Physics.yangMillsBalabanRouteSP2R445CompilerLevel
+  ≡ Balaban.balabanRouteSP2R445NativeCompilerLevel
+physicsR445NativeP2AgreesWithOwner = refl

@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as NativeP2
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 import DASHI.Physics.YangMills.YMClayAristotleRouteSLiteralWilsonDonorExact as RouteSLean
 import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact as RouteS3
@@ -916,3 +917,90 @@ unconditionalClayPromotion = false
 unconditionalClayPromotionIsFalse :
   unconditionalClayPromotion ≡ false
 unconditionalClayPromotionIsFalse = refl
+
+
+-- The direct-source compiler now consumes H1 directly via R295/R313/R296.
+-- This is the existing route's proof-level export, not a new physical input.
+routeSH1DirectOSCompilerLevel : ProofLevel
+routeSH1DirectOSCompilerLevel =
+  RouteS.routeSH1ToDirectOSCompilerLevel
+
+routeSH1SelectedPhysicalPaymentLevel : ProofLevel
+routeSH1SelectedPhysicalPaymentLevel =
+  RouteS.routeSH1SelectedPhysicalPaymentLevel
+
+routeSH1AbsoluteMagnitudeIndependentPhysicalLeaf : Bool
+routeSH1AbsoluteMagnitudeIndependentPhysicalLeaf =
+  RouteS.routeSH1ReusesR313MagnitudeCompiler
+
+routeSH1AbsoluteMagnitudeIndependentPhysicalLeafIsFalse :
+  routeSH1AbsoluteMagnitudeIndependentPhysicalLeaf ≡ false
+routeSH1AbsoluteMagnitudeIndependentPhysicalLeafIsFalse =
+  RouteS.routeSH1ReusesR313MagnitudeCompilerIsFalse
+
+
+
+------------------------------------------------------------------------
+-- P2 rational SU(2) normalized trace -> physical Gram boundedness -> S2.
+-- This is a conditional producer until the SAME Wilson/Gram interpretation
+-- and remaining physical time/support and measure inputs are inhabited.
+------------------------------------------------------------------------
+
+routeSP2RationalTraceToCanonicalS2CompilerLevel : ProofLevel
+routeSP2RationalTraceToCanonicalS2CompilerLevel =
+  S2.rationalSU2TraceToSameAlgebraCompilerLevel
+
+routeSP2RationalTraceGramInterpretationLevel : ProofLevel
+routeSP2RationalTraceGramInterpretationLevel =
+  S2.rationalSU2TraceToGramInterpretationLevel
+
+routeSP2LoopBoundsFromTraceGivenInterpretation : Bool
+routeSP2LoopBoundsFromTraceGivenInterpretation =
+  S2.rationalSU2TraceSourcePaysLiteralLoopBoundedness
+
+routeSP2LoopBoundsFromTraceGivenInterpretationIsTrue :
+  routeSP2LoopBoundsFromTraceGivenInterpretation ≡ true
+routeSP2LoopBoundsFromTraceGivenInterpretationIsTrue =
+  S2.rationalSU2TraceSourcePaysLiteralLoopBoundednessIsTrue
+
+
+
+routeSP2NativeNoSeparateBoundedProductLeaf : Bool
+routeSP2NativeNoSeparateBoundedProductLeaf =
+  S2.nativeWilsonS2NoIndependentBoundedProductLeaf
+
+routeSP2NativeNoSeparateBoundedProductLeafIsTrue :
+  routeSP2NativeNoSeparateBoundedProductLeaf ≡ true
+routeSP2NativeNoSeparateBoundedProductLeafIsTrue =
+  S2.nativeWilsonS2NoIndependentBoundedProductLeafIsTrue
+
+routeSP2NativeNoDistanceRequirement : Bool
+routeSP2NativeNoDistanceRequirement =
+  S2.nativeWilsonP2DoesNotNeedSupportDistance
+
+routeSP2NativeNoDistanceRequirementIsFalse :
+  routeSP2NativeNoDistanceRequirement ≡ false
+routeSP2NativeNoDistanceRequirementIsFalse =
+  S2.nativeWilsonP2DoesNotNeedSupportDistanceIsFalse
+
+routeSP2NativeSameAlgebraCompilerLevel : ProofLevel
+routeSP2NativeSameAlgebraCompilerLevel = S2.nativeWilsonS2CompilerLevel
+
+
+------------------------------------------------------------------------
+-- R445 SAME marked-source moment -> native preferred physical measure
+-- -> already-owned three P2 convergence limits (no second moment source).
+------------------------------------------------------------------------
+
+routeSP2R445IndependentMomentRequired : Bool
+routeSP2R445IndependentMomentRequired =
+  NativeP2.p2NativeIndependentMomentSelectionRequired
+
+routeSP2R445IndependentMomentRequiredIsFalse :
+  routeSP2R445IndependentMomentRequired ≡ false
+routeSP2R445IndependentMomentRequiredIsFalse =
+  NativeP2.p2NativeIndependentMomentSelectionRequiredIsFalse
+
+routeSP2R445NativeCompilerLevel : ProofLevel
+routeSP2R445NativeCompilerLevel =
+  NativeP2.p2CanonicalMarkedSourceCompilerLevel

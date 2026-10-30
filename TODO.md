@@ -1,5 +1,45 @@
 # FOR TODO GO TO '# TODO'
 
+
+- [x] P2 Pareto: reuse the existing rational SU(2) literal path-holonomy pointwise algebra owner to construct `RationalSU2TraceGramBoundSource`, eliminating separate loop-specific Gram-boundedness inputs after one explicit trace-to-Gram interpretation.
+- [x] Reuse same canonical S2 carrier via `rationalSU2TraceBuildsCanonicalS2` so existing P2 selected-expectation-limit compilers consume the rational-trace producer directly.
+- [ ] Supply the physical `traceIsLiteralWilson` exact same-object equality on the selected physical Wilson family; a rational group trace alone cannot stand in for a separately selected observable.
+- [ ] Supply the *physical* same-family trace→Gram boundedness interpretation for the actual Wilson/Haar carrier; prove bounded product closure and literal-identity same-object equality, selected time-distance, and actual continuum-measure convergence. Rational quaternion traces alone do not instantiate that theory.
+
+
+
+- [x] Search physical rational SU(2) Wilson path owners and **reuse** `BalabanLiteralRationalSU2WilsonBoundedAlgebraExact` instead of a synthetic fixed-holonomy or duplicate trace proof.
+- [x] Derive canonical S2 literal loop and identity boundedness from the owned configuration-dependent path/one pointwise theorems under one exact same-object physical observable interpretation.
+- [ ] Extend pointwise product closure across the *actual* selected Gram bounded-observable algebra, or narrow the target to the literal Wilson image in a proof-preserving way; do not assume generic closure from a rational-image-only bound.
+
+
+
+### 2026-10-30 continuation: canonical native-P2 and P3 source archaeology
+- [x] Search native source and compiler files beyond PR descriptions; identify preexisting `BalabanLiteralWilsonNativePhysicalMeasureExact` and `YMClayLiteralWilsonP2NativeMeasureExact` as stronger owners.
+- [x] Compile native bounded loop/unit/product fields into the historical S2 record from the *same* native physical measure; the generic trace-to-Gram adapter is not mandatory.
+- [x] Keep P2 finite expectation limits separate from support-distance: the native P2 proof is valid without the P1 spatial/time-distance witness.
+- [x] Correct the canonical normalized rational-SU(2) cylinder `groupRank` to 1 rather than misidentifying it with defining representation dimension 2.
+- [x] Search P3 existing reconstructed-spectrum owners before new constructions: `YangMillsDirectSourceOSReconstructedSpectrumH3Exact`, `YangMillsClayCMP119RealSameOSH3Exact`.
+- [ ] Physically construct `NativeWilsonPreferredPhysicalMeasureInputs` (actual normalization/limit/tail inputs); prove the selected family and current CMP119 physical Wilson carrier agree.
+- [ ] Physically instantiate P3's R281 spectrum as **the** actual H2 reconstructed Hamiltonian's spectrum; the current H3 records are exact typing and conditional construction compilers.
+
+
+
+- [x] Reuse the R444/R445 marked moment source via `nativeWilsonPreferredFromMarked` and `nativeWilsonP2FromMarkedSource` to construct all three P2 limits without reselecting moments, on the same native T5 family.
+- [ ] Discharge the *actual* R445 `boundedObservableTail` / `momentRealization` source conditions for the selected four-dimensional CMP119 Wilson theory and identify its probability/measure carrier with the native rational-Wilson implementation.
+- [ ] Prove the physical equality to the selected real CMP119 H2/H3 OS family; QID/DOI or source similarity is not an equality proof.
+
+
+## 2026-10-30 YM direct-route R320/R313/R333 max-cut
+
+- [x] Search golden Agda and Lean owner files as well as live PRs before choosing route; prefer existing `YMClayRouteSH1DirectSelectedMarkedDecayExact`, R313 and R333.
+- [x] Reduce Route-S H1-to-gap compiler graph by a **typed direct composition** without manufacturing selected-source inequalities.
+- [ ] Physically inhabit `R320.DirectSelectedT5MarkedDecayPayment` on the selected literal CMP116 Wilson family (P1); retain Bałaban source attribution.
+- [ ] Physically construct R333 literal time/Wilson and finite-to-continuum expectation-limit inputs (P2), then the same reconstructed H_OS spectral pairing (P3).
+- [ ] Compare Route-S versus F1/F3/F4 strong path as separate Pareto alternatives; do not double-count P_a/E_a, dense-L2 norm calibration or Delta*a_k when Route-S is selected.
+- [ ] Prove local-QFT/nontriviality and all-compact-simple-group Clay endpoint separately; never promote receipt flags or imported analytic statements to kernel proof authority.
+- [ ] Exact-head Agda kernel check for the new direct bridge, and Lean semantic parity against the existing literal-Wilson source/OS proof. CI intentionally not required for this iteration.
+
 Current NS Gate 1 / Gate 2 roadmap note for `2026-07-02`:
 - Gate 1 finite-shell scouting is no longer the bottleneck. The live helical
   coupling certificate now repeats on `N = 6, 8, 10, 12, 14, 16` with
