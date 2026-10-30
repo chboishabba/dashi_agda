@@ -94,3 +94,9 @@ monitor surface.
 - Source-wrote the exact certified-modulus survivor ↔ paired two-register FRACTRAN blocked-prefix equivalence using the original FRACDASH first-applicable contract and CertifiedPrimePairModulusExact.
 - Reused existing `FiniteTwinSieveFactorableLiftExact` unbounded double-composite construction to prove source-level `cofinallyBlockedCompositePrimePairs` for any finite rack with a surviving seed. It rules out global prime classification from any fixed finite divisor rack, not from a genuine unbounded FRACTRAN computation.
 - Source-wrote Pickover's original `signedFibreStrictlyRefinesSector` specialized to the twin-consumer period fibre. Exact finite tests passed locally; Agda/Lean kernel pending, no ESD changes or CI.
+
+## 2026-10-30 — FRACTRAN fixed-prefix terminal classifier no-go
+
+- Extended the actual twin-prime FRACTRAN hyperfabric owner with ordered `329→47→1` trace and proof of 1 terminality; independent local Python check passed.
+- Proved in source `noFixedFractranPrefixCanCertifyEveryTwin` from the original cofinally blocked composite-pair construction; explicitly conditional on an inhabited surviving seed. Maintains distinction between fixed finite denominator prefix, general FRACTRAN machine and genuine unbounded prime-pair analytic theorem.
+- Golden source typecheck pending; no CI, no ESD edits, provenance unchanged.
