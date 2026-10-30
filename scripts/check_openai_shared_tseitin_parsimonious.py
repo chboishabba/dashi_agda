@@ -92,20 +92,25 @@ def check_placed_gate_index_semantics():
                                else output_index)
                 assert all(0 <= index <= output_index
                            for index in (left_index, right_index))
-                for bits in product((False, True), repeat=output_index + 1):
-                    out, left, right = (bits[output_index],
-                                        bits[left_index], bits[right_index])
+                def predicate(row):
+                    out, left, right = row
                     target = {
                         "const": lambda: args[0],
                         "not": lambda: not left,
                         "and": lambda: left and right,
                         "or": lambda: left or right,
                     }[op]()
-                    assert (out == target) == (
-                        out == (args[0] if op == "const"
-                                else (not left if op == "not"
-                                      else (left and right if op == "and"
-                                            else left or right))))
+                    return out == target
+
+                rows = tuple(product((False, True), repeat=3))
+                excluded = [row for row in rows if not predicate(row)]
+                assert len(excluded) == 4
+                for bits in product((False, True), repeat=output_index + 1):
+                    local = (bits[output_index], bits[left_index],
+                             bits[right_index])
+                    compiled = all(any(local[i] != row[i] for i in range(3))
+                                   for row in excluded)
+                    assert compiled == predicate(local), (n, older, op, args, bits)
                     checked += 1
     print(f"PASS: {checked} finite-index placed-gate cases")
 
