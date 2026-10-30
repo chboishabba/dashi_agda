@@ -17311,3 +17311,9 @@ See `.planning/ROADMAP.md` and `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasing
 - [ ] **P0** Construct finite-list 3D character-resolution bridge from existing C4/C5 tensor orthogonality (including original enumeration and factor (N^{-3})).
 - [ ] **P0** Connect actual C4/C5 padded array tensor transforms with source literal sample sums; compose generic extraction with indexed 729 equality and kernel-check under the golden Agdas.
 - [ ] **P1** Reuse native NS Complex3/Leray and preserve R440/R736/B4 analytic/real-ODE root; keep original Ibrahim Monster 3B proof custody separate.
+
+
+### 2026-10-30 exact source --safe gate (PR #1407)
+- [x] Actual `Core.Prelude`, original 27/729 incidence and C4/C5/bilinear owners lack top-level `{-# OPTIONS --safe #-}`; trust-escape scan is necessary, not sufficient. Historical Orszag/Patterson 1971 journal source attributions now pinned in paper §5l.
+- [x] C4 one-axis forward product scale uses explicit `normalize 4 1`.
+- [ ] **P0:** establish transitive Agda `--safe` eligibility of the source proof graph, exact-head typecheck without postulates/metas/termination bypasses, then discharge C4/C5 actual finite character-resolution and tensor sample-array bridges. Do not make a fake kernel-green receipt.
