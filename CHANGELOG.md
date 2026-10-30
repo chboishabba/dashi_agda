@@ -109,3 +109,7 @@ monitor surface.
 ## 2026-10-31 — actual Mangoldt proper-power error support estimate
 
 - Checked original `finiteMangoldtPrimeErrorSplit` against real-valued standard \(\Lambda\), deriving explicit elementary \(E(Y)\le2\lfloor\sqrt Y\rfloor\lfloor\log_2 Y\rfloor(\log Y)^2\). The generic abstract Weil scalar does **not** get this order structure for free. Added deterministic exact prime-power support checker and independently enumerated Y=100..100000. This leaves an honest, now sharply isolated missing positive shifted-correlation main-term estimate \(S(Y)\gg Y\); it is open, not proven from symmetry. No ESD modifications or CI.
+
+## 2026-10-31 — sharpen actual prime-power error bound, clarify record boundary
+
+- Replaced the unnecessary (\lfloor\log_2Y\rfloor\lfloor\sqrt Y\rfloor) count with (B(Y)=(\lfloor\sqrt Y\rfloor-1)+\max(\lfloor\log_2Y\rfloor-2,0)(\lfloor Y^{1/3}\rfloor-1)), establishing the classical standard-Mangoldt estimate (E(Y)\le2B(Y)(\log Y)^2=O(\sqrt Y\log^2 Y)). Updated original exact support regression to compute integer cube roots. This is a routine quantitative refinement, NOT a new twin-prime breakthrough or claimed world record; true (S(Y)\gg Y) remains open. Agda abstract scalar has no asserted real order/log bounds. 
