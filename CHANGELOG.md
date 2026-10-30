@@ -61,3 +61,9 @@ monitor surface.
 - Imported through `DASHI/EverythingTOESymmetryResolved369.agda`, `DASHI/Unifier.agda` and `DASHI/Unified/Everything.agda`; updated roadmap, paper and TODO; committed a finite overcount/support adversary regression.
 - Checked actual Agda/Lean and recent PR sources, not just PR descriptions; original authors and semantic admission gates retained, no ESD modifications.
 - **Evidence boundary:** source-written and independent numeric oracle only. Agda/Lean kernel closure, complete ordered scalar, CT13–CT14 error asymptotic and CT15 positivity remain unproved. CI not run.
+
+## 2026-10-30 — CT13 finite error-position image envelope (#1408 continuation)
+
+- Reused the CT11 candidate image and generic Nat-list deduplicator to source-write two-position-per-value coverage, exact envelope length, zero duplicate positions, and a bound `2*floorSquareRoot(U)*floorBinaryExponent(U)` for the numeric covering set.
+- Connected certified nonzero retained Mangoldt errors to this set; no candidate image is mistaken for certified primality or a signed-correlation theorem.
+- Independent local exact-number test covered 1,998,997 shifted positions across U=4..2000 with zero support misses. Updated the committed regression; exact checkout execution unavailable. Kernel typechecking, ordered real weight bounds and CT15 remain open.
