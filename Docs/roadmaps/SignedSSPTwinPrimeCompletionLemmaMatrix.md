@@ -2032,3 +2032,35 @@ CT15c genuine signed parity-sensitive shifted-prime
 correlation estimate remains NEW MATH and OPEN.
 No ESD changes or CI; preserve original mathematical,
 Agda/Lean, Ibrahim and QID ownership.
+
+### 30 October 2026 — CT10 numerical reuse of existing canonical Core pow2
+
+Additional repository-first search located
+`DASHI/Core/GeneralResidualFibreCardinalityExact.agda`
+(the original numerical `pow2` owner), as well as
+`DASHI/Cognition/PNF/OrientedZeroCeilLog2Exact.agda`
+(a **fixed four-state** ceil-log certificate, NOT a
+universal floor-log2 estimator). The latter cannot be
+reinterpreted as a proof for arbitrary Nat U.
+
+New source-written module (kernel pending):
+`DASHI/Arithmetic/TwinPrimeProperPowerCoreBinaryCapacityReuseExact.agda`.
+`numericPowTwoEqualsCoreCapacity` proves
+`RiemannPrimePowerArithmetic.natPow 2 e =
+ GeneralResidualFibreCardinalityExact.pow2 e`
+by primitive exponent induction, so CT10 reuses
+the existing generic binary capacity function.
+`properPowerNeedsCoreBinaryCapacity` transports the
+already source-written CT10b inequality to
+`Core.pow2 (k+2)≤U`, with NO invented
+same-object prime/future-fibre interpretation.
+All three canonical TOE roots import the bridge.
+
+**Still OPEN:** the actual total natural-number
+log2 cutoff for U (the fixed-4 `CeilLog2Certificate`
+does not solve it), full CT11 distinct power-value
+count theorem and CT12–CT15 ordered/analytic bounds.
+The deduplicated numeric candidate image was
+tested on 714 finite bounds; the source-written
+membership and no-duplicates proofs remain kernel
+pending. Do not claim a twin-prime discovery.
