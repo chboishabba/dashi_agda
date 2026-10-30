@@ -17,6 +17,7 @@ module DASHI.Physics.Closure.R2P2C4RetainedSampledOperatorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Rational.Base using (ℚ; _*_; normalize)
@@ -245,3 +246,44 @@ fourGridGaussianIndexIsTrueIntegerConvolution =
 --   fourGridGaussianIndexConvolutionAt f g target
 -- via the exact C4^3 root character, distributivity and 1/64 scaling.
 -- Do not introduce a postulate or assert an equality until proved.
+
+
+------------------------------------------------------------------------
+-- SAME-OBJECT CYCLOTOMIC FINITE FUBINI/SCALING INSTANTIATION.
+-- Reuses source Yang--Mills and NS finite sum proofs via the generic
+-- coefficient-polymorphic interface in BilinearCyclotomicPadCutExact.
+-- Needed for the actual 3D FFT sampled→index distribution proof;
+-- it is not yet that theorem.
+------------------------------------------------------------------------
+
+gaussianFiniteSumAlgebra : Bilinear.FiniteSumAlgebra gaussianCoefficientOps
+gaussianFiniteSumAlgebra = record
+  { sumAddAssoc = G.scalarAddAssociative
+  ; sumAddComm = G.scalarAddCommutative
+  ; sumAddZeroLeft = G.scalarAddZeroLeft
+  ; sumMulDistributesLeft = G.scalarMulDistributesLeft
+  ; sumMulDistributesRight = G.scalarMulDistributesRight
+  ; sumMulZeroLeft = G.scalarMulZeroLeft
+  ; sumMulZeroRight = G.scalarMulZeroRight
+  }
+
+gaussianActualFiniteSumSwap :
+  ∀ {X Y : Set} (xs : List X)
+  (ys : List Y)
+  (f : X → Y → G.Gaussian4) →
+  Bilinear.sumAll gaussianCoefficientOps xs
+    (λ x → Bilinear.sumAll gaussianCoefficientOps ys (f x))
+  ≡ Bilinear.sumAll gaussianCoefficientOps ys
+    (λ y → Bilinear.sumAll gaussianCoefficientOps xs (λ x → f x y))
+gaussianActualFiniteSumSwap =
+  Bilinear.sumAllSwap gaussianCoefficientOps gaussianFiniteSumAlgebra
+
+gaussianActualFiniteSumProductScale :
+  ∀ {X : Set} (z : G.Gaussian4)
+  (xs : List X) (f : X → G.Gaussian4) →
+  Bilinear.sumAll gaussianCoefficientOps xs
+    (λ x → G._*G_ z (f x))
+  ≡ G._*G_ z
+      (Bilinear.sumAll gaussianCoefficientOps xs f)
+gaussianActualFiniteSumProductScale =
+  Bilinear.sumAllScaleLeft gaussianCoefficientOps gaussianFiniteSumAlgebra
