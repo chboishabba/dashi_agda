@@ -43,7 +43,9 @@ data RelativeGeometryClaim : Set where
     fullBoundaryPointwiseFixing
     selectedCapPreservation
     actualChildMeridianIdentification
-    wildLimitExteriorIdentification : RelativeGeometryClaim
+    wildLimitExteriorIdentification
+    localBasedNormalizerStrictOrderThree
+    periodicMapFixesOpenBoundaryCapPointwise : RelativeGeometryClaim
 
 -- A record of the actual 3D geometric data a producer must supply.
 -- It deliberately does not assert the existence of such a record.
@@ -81,6 +83,8 @@ status fullBoundaryPointwiseFixing = impossibleUnderFullBoundaryFix
 status selectedCapPreservation = sourceSpecificUnproved
 status actualChildMeridianIdentification = sourceSpecificUnproved
 status wildLimitExteriorIdentification = sourceSpecificUnproved
+status localBasedNormalizerStrictOrderThree = impossibleUnderFullBoundaryFix
+status periodicMapFixesOpenBoundaryCapPointwise = impossibleUnderFullBoundaryFix
 
 -- User's tetralemma is retained as a separate four-position
 -- qualification, not equated to these proof-status categories.
@@ -91,6 +95,8 @@ tetralemmaOfEvidence fullBoundaryPointwiseFixing = Tetra.negation
 tetralemmaOfEvidence selectedCapPreservation = Tetra.neither
 tetralemmaOfEvidence actualChildMeridianIdentification = Tetra.neither
 tetralemmaOfEvidence wildLimitExteriorIdentification = Tetra.neither
+tetralemmaOfEvidence localBasedNormalizerStrictOrderThree = Tetra.negation
+tetralemmaOfEvidence periodicMapFixesOpenBoundaryCapPointwise = Tetra.negation
 
 nielsenIsAffirmed :
   tetralemmaOfEvidence nielsenAlgebra ≡ Tetra.affirmation
@@ -109,3 +115,41 @@ data TetralemmaClassificationMakesEmbeddedWildBall : Set where
 noGeometricPromotionFromFourPositions :
   TetralemmaClassificationMakesEmbeddedWildBall → ⊥
 noGeometricPromotionFromFourPositions ()
+
+
+------------------------------------------------------------------------
+-- THE STRICT BASED C3 G4 ALTERNATIVE IS REFUTED IN THE EXISTING
+-- SOURCE-WRITTEN FREE-WORD OWNER, independent of a geometric claim.
+--
+-- If psi=Inn(q^-1)◦phi fixes w, then the threefold composition
+-- differs from the identity on the generator a; the exact finite
+-- reduction is supplied, not postulated, by the canonical boundary.
+--
+-- This does NOT rule out non-periodic cap-relative Nielsen handle
+-- slides, nor the separate external-sector C3 family.
+------------------------------------------------------------------------
+
+localBasedNormalizerCubeIsNotIdentity :
+  Boundary.LocalNielsenReducedCertificate.basedPhi
+    (Boundary.LocalNielsenReducedCertificate.basedPhi
+      (Boundary.LocalNielsenReducedCertificate.basedPhi
+        Boundary.LocalNielsenReducedCertificate.a))
+  ≡ Boundary.LocalNielsenReducedCertificate.a → ⊥
+localBasedNormalizerCubeIsNotIdentity =
+  Boundary.LocalNielsenReducedCertificate.basedPhiCubeNotIdentityOnA
+
+-- NEWMAN 1931 EXTERNAL TOPOLOGICAL INPUT (not encoded as a fake
+-- postulate): a periodic homeomorphism on a connected surface that
+-- fixes a nonempty OPEN disk pointwise is globally the identity.
+-- For a compact genus-3 handlebody, restriction to its connected
+-- boundary then gives identity on boundary.  Since pi1(boundary)
+-- SURJECTS onto pi1(handlebody), induced action on handlebody
+-- pi1 is trivial.  Therefore a nontrivial Nielsen action cannot
+-- be simultaneously finite-order and pointwise cap-fixed in
+-- that geometric setting.  Cap SETWISE preservation (the weak
+-- record above) is DIFFERENT, and can admit a periodic rotation.
+--
+-- No connected-boundary surface, cap-openness, homeomorphism or
+-- fundamental group exists in the present source carrier; the
+-- full Newman implication is therefore recorded in the roadmap
+-- and NOT asserted here as a geometrically proved Agda theorem.
