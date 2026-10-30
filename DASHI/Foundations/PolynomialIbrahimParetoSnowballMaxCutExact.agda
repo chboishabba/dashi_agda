@@ -179,3 +179,11 @@ originalVideoM10OrientationReceipt :
   Spin.FullPositiveQuaternionS3Action → ⊥
 originalVideoM10OrientationReceipt =
   Spin.noFullPositiveQuaternionS3Action
+
+-- Original M2/M10: a root braid generator's finite S3 transposition
+-- cannot be silently welded to a positive-axis quaternion automorphism.
+-- This is a proof-forwarder, not analytic braid monodromy or Monster 3B.
+originalVideoM2M10BraidQuaternionNoGoReceipt :
+  Spin.PositiveQuaternionBraidGeneratorLift → ⊥
+originalVideoM2M10BraidQuaternionNoGoReceipt =
+  Spin.noPositiveQuaternionBraidGeneratorLift
