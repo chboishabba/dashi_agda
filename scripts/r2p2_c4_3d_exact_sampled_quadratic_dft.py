@@ -115,7 +115,32 @@ def check_one_axis_sampled_convolution():
             one_axis_cyclic_convolution(left, right))
     print("PASS: C4 all 16 one-axis monomial pairs and 12 arbitrary dense Q(i) input pairs")
 
+
+def check_gaussian_ring_and_original_729_product_expansion():
+    """All eight Gaussian basis triples plus exact original 729 pair sums."""
+    basis = [ONE, I]
+    for a, b, c in product(basis, repeat=3):
+        assert mul(mul(a, b), c) == mul(a, mul(b, c))
+        assert mul(a, add(b, c)) == add(mul(a, b), mul(a, c))
+        assert mul(add(a, b), c) == add(mul(a, c), mul(b, c))
+    for seed in range(3):
+        rng = Random(8100 + seed)
+        f = {k: (Fraction(rng.randrange(-8, 9), 7),
+                 Fraction(rng.randrange(-8, 9), 7)) for k in K}
+        g = {k: (Fraction(rng.randrange(-8, 9), 11),
+                 Fraction(rng.randrange(-8, 9), 11)) for k in K}
+        sum_f, sum_g = ZERO, ZERO
+        for k in K:
+            sum_f, sum_g = add(sum_f, f[k]), add(sum_g, g[k])
+        ordered_sum = ZERO
+        for p in K:
+            for q in K:
+                ordered_sum = add(ordered_sum, mul(f[p], g[q]))
+        assert mul(sum_f, sum_g) == ordered_sum
+    print("PASS: Q(i) eight ring basis triples and 3 full original 729-term expansions")
+
 def check():
+    check_gaussian_ring_and_original_729_product_expansion()
     check_one_axis_sampled_convolution()
     # Exact fourth-root orthogonality on all 64 group characters.
     residues = tuple(product(range(4), repeat=3))
