@@ -1,4 +1,9 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
+import Data.List as NativeList
+import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as NativePants369
+import DASHI.Topology.TernaryPantsFrontierExact as NativeFrontier
+import DASHI.Combinatorics.GraphColouring369PantsSymmetryCutInvariantExact as S3Cut369
+import DASHI.Combinatorics.GraphColouring369PantsEdgeCoverageExact as EdgeChart369
 import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as NativeIdentity
 import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
@@ -362,3 +367,30 @@ toeDirectedFabricForwardReverseRemainDistinct :
   -> ⊥
 toeDirectedFabricForwardReverseRemainDistinct =
   DirectedFabric369.forwardBackwardNotSymmetric
+
+------------------------------------------------------------------------
+-- Maximum-cut chart completion: any native oriented adjacency has a
+-- canonical 54-slot chart representative or its reversal; all six S3
+-- maps and the second seam flip fix the selected checkerboard partition.
+------------------------------------------------------------------------
+
+toeAnyNativeEdgeClassifiedIn54Slots :
+  ∀ {u v} -> Geometry.HypervoxelAdjacent u v ->
+  EdgeChart369.OrientedSlotCertificate u v
+toeAnyNativeEdgeClassifiedIn54Slots =
+  EdgeChart369.classifyNativeAdjacency
+
+toeFiftyFourSlotIdsExact :
+  NativeList.length EdgeChart369.allNativeSlots ≡ 54
+toeFiftyFourSlotIdsExact = EdgeChart369.allNativeSlotsCount54
+
+toeS3PreservesActualMaxCutPartition :
+  (g : NativeGridPants.S3CoordinatePermutation) ->
+  (p : NativeFrontier.PantsPath 3) ->
+  NativeMaxCut369.checkerCut
+    (NativePants369.pants3ToVoxel27
+      (NativeGridPants.actS3Pants g p))
+  ≡ NativeMaxCut369.checkerCut
+    (NativePants369.pants3ToVoxel27 p)
+toeS3PreservesActualMaxCutPartition =
+  S3Cut369.s3PreservesNativeMaxCutPartition
