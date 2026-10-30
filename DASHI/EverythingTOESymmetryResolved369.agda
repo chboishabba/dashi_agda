@@ -304,6 +304,7 @@ open PolynomialMonodromy public using
   ; spinThirdTurnHasUnitNorm
   ; spinConjugationIntertwinesABCThreeCycle
   ; iTimesJIsK ; jTimesIIsNegativeK ; jTimesKIsI ; kTimesJIsNegativeI ; kTimesIIsJ ; iTimesKIsNegativeJ
+  ; positiveINotNegative ; positiveJNotNegative ; positiveKNotNegative
   ; positiveSwapOfQuaternionAxesImpossible ; positiveSwapIJImpossible ; positiveSwapJKImpossible ; positiveSwapIKImpossible ; spinSignedSwapIJRightInverse
   ; spinSignedSwapIJLeftInverse ; signedSwapIJMapsIToJ ; signedSwapIJMapsJToI ; signedSwapIJMustNegateK ; noFullPositiveQuaternionS3Action
   ; spinThreeStepsCentralMinus
