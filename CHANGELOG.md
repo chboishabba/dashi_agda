@@ -32,6 +32,7 @@ monitor surface.
 
 
 
+- Strengthened the rational SU(2) carrier with `traceIsLiteralWilson` as an explicit equality to the actual Wilson-loop observable and transported boundedness by `subst`; no synthetic same-object identification is inferred.
 - Extended the same branch with a rational SU(2) normalized-trace → same-Gram
   loop boundedness producer, a canonical S2 constructor, and regression
   proof. This reuses the existing quaternion trace theorem and the P2
