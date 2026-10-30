@@ -28,11 +28,14 @@ module DASHI.Reasoning.TrialecticGraphWaveConsumerLossCutExact where
 -- a phase-digit at 9999!, or a Monster same-object theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Data.Integer using (ℤ; +_; -[1+_]) renaming (_+_ to _+ℤ_)
+import DASHI.Physics.ShiftDiscreteWaveStep as SDWS
+import DASHI.Physics.ShiftUnitaryLikeConstraint as SULC
 
 import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as Graph
 import DASHI.Reasoning.TrialecticC3WeightedOrbitSymmetrizationExact as Orbit
@@ -183,3 +186,105 @@ rightDirectedSection = Orbit.compatibleSectionFor rightGraph
 -- project/evolution/observation commutation. No such analytic
 -- instance on actual shifted-prime correlations or circle phase
 -- was constructed in this finite example.
+
+------------------------------------------------------------------------
+-- C4 / QUARTER-TURN WAVE: POSITIVE SPECTRAL ENERGY DOES NOT FORCE
+-- POSITIVE TWO-POINT CORRELATION.
+--
+-- The genuine integer shifted-prime correlation is at lag TWO.
+-- The original DASHI wave module has a cyclic quarter-turn mulI
+-- (Gaussian integer pairs), not a full analytic Fourier theory.
+-- Here a FOUR-site finite counterexample uses the same carrier and
+-- exact norms. This is a discrete Fourier identity, not a statement
+-- that the artificial f has anything to do with real von Mangoldt.
+--
+-- f=(1,1,0,0) on the four-cycle has total positive mass TWO, but
+-- sum_{j mod 4} f(j)f(j+2)=0.
+-- Its Gaussian Fourier modes are (2,1-i,0,1+i), norms 4,2,0,2.
+-- The lag-two spectral multiplier is (-1)^k. Thus the exact
+-- signed spectral numerator is 4-2+0-2=0, even though every
+-- individual norm-square is nonnegative.
+--
+-- Consequently, a Hilbert/spectral-mode norm or a graph's positive
+-- energy alone cannot guarantee a nonzero +2 arithmetic correlation.
+-- Actual prime-specific distribution estimates are indispensable.
+------------------------------------------------------------------------
+
+data FourSite : Set where
+  siteZero siteOne siteTwo siteThree : FourSite
+
+lagTwoSite : FourSite -> FourSite
+lagTwoSite siteZero = siteTwo
+lagTwoSite siteOne = siteThree
+lagTwoSite siteTwo = siteZero
+lagTwoSite siteThree = siteOne
+
+positiveMassCounterfeit : FourSite -> Nat
+positiveMassCounterfeit siteZero = 1
+positiveMassCounterfeit siteOne = 1
+positiveMassCounterfeit siteTwo = 0
+positiveMassCounterfeit siteThree = 0
+
+counterfeitTotalMass :
+  positiveMassCounterfeit siteZero
+  + positiveMassCounterfeit siteOne
+  + positiveMassCounterfeit siteTwo
+  + positiveMassCounterfeit siteThree
+  ≡ 2
+counterfeitTotalMass = refl
+
+counterfeitLagTwoCorrelation : Nat
+counterfeitLagTwoCorrelation =
+  positiveMassCounterfeit siteZero
+    * positiveMassCounterfeit (lagTwoSite siteZero)
+  + positiveMassCounterfeit siteOne
+    * positiveMassCounterfeit (lagTwoSite siteOne)
+  + positiveMassCounterfeit siteTwo
+    * positiveMassCounterfeit (lagTwoSite siteTwo)
+  + positiveMassCounterfeit siteThree
+    * positiveMassCounterfeit (lagTwoSite siteThree)
+
+counterfeitLagTwoIsZero : counterfeitLagTwoCorrelation ≡ 0
+counterfeitLagTwoIsZero = refl
+
+gaussianFourierZero : SDWS.DiscreteWave
+gaussianFourierZero = SDWS.mkDiscreteWave (+ 2) (+ 0)
+
+gaussianFourierOne : SDWS.DiscreteWave
+gaussianFourierOne = SDWS.mkDiscreteWave (+ 1) (-[1+ 0 ])
+
+gaussianFourierTwo : SDWS.DiscreteWave
+gaussianFourierTwo = SDWS.mkDiscreteWave (+ 0) (+ 0)
+
+gaussianFourierThree : SDWS.DiscreteWave
+gaussianFourierThree = SDWS.mkDiscreteWave (+ 1) (+ 1)
+
+fourierZeroEnergy : SULC.waveNormSq gaussianFourierZero ≡ + 4
+fourierZeroEnergy = refl
+
+fourierOneEnergy : SULC.waveNormSq gaussianFourierOne ≡ + 2
+fourierOneEnergy = refl
+
+fourierTwoEnergy : SULC.waveNormSq gaussianFourierTwo ≡ + 0
+fourierTwoEnergy = refl
+
+fourierThreeEnergy : SULC.waveNormSq gaussianFourierThree ≡ + 2
+fourierThreeEnergy = refl
+
+-- This is the real part of the FOURIER shift-by-two spectral sum.
+-- The earlier wave norm theorem justifies each energy as an exact
+-- Gaussian-integer squared norm, while the lag-two multiplier
+-- contributes signs; it is NOT all-positive.
+lagTwoSignedSpectralNumerator : ℤ
+lagTwoSignedSpectralNumerator =
+  (+ 4 +ℤ (-[1+ 1 ]))
+  +ℤ ((+ 0) +ℤ (-[1+ 1 ]))
+
+lagTwoSignedSpectralNumeratorZero :
+  lagTwoSignedSpectralNumerator ≡ + 0
+lagTwoSignedSpectralNumeratorZero = refl
+
+-- Positive total density plus positive spectral magnitudes does
+-- not supply a positive off-diagonal (+2) arithmetic correlation.
+-- The example is deliberately synthetic, and therefore is only a
+-- fail-fast countermodel to an UNSUPPORTED generic inference.
