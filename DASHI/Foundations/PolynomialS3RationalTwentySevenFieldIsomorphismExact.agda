@@ -724,3 +724,29 @@ projectRationalS3NativeActionInvariantAt :
   nativeSourceAction27 p (projectRationalS3 f) x ≡ projectRationalS3 f x
 projectRationalS3NativeActionInvariantAt p f x =
   projectRationalS3InvariantAt f (Perm.inversePermutation p) x
+
+------------------------------------------------------------------------
+-- O80: C3 invariant-range characterization and value-map naturality.
+-- Consume the original generic proof, not a rational-specific clone.
+------------------------------------------------------------------------
+
+projectRationalC3FixesInvariantAt :
+  (f : NativeRationalField27) →
+  ((x : Tower.LevelTwoCode) →
+    f (Perm.conjugateCode Perm.permRotate x) ≡ f x) →
+  (x : Tower.LevelTwoCode) → projectRationalC3 f x ≡ f x
+projectRationalC3FixesInvariantAt = Sampling.projectC3AnyFixesInvariant
+
+projectRationalC3NaturalityAt :
+  (h : ℚ → ℚ) (f : NativeRationalField27)
+  (x : Tower.LevelTwoCode) →
+  projectRationalC3 (λ y → h (f y)) x ≡
+  h (projectRationalC3 f x)
+projectRationalC3NaturalityAt = Sampling.projectC3AnyNaturality
+
+projectRationalS3NaturalityAt :
+  (h : ℚ → ℚ) (f : NativeRationalField27)
+  (x : Tower.LevelTwoCode) →
+  projectRationalS3 (λ y → h (f y)) x ≡
+  h (projectRationalS3 f x)
+projectRationalS3NaturalityAt = Sampling.projectS3AnyNaturality
