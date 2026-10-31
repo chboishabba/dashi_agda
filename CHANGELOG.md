@@ -101,3 +101,12 @@ monitor surface.
 - Conditional upstream encoding bound on translated width-three Finset CNF with v=inputs+gates and m<=3g+1: L<=v+2+(24v+28)*(3g+1). A List-to-Finset semantic transport and upstream machine-cost composition are not kernel-paid. Previous finite-model numeric proof is not the global compiled CNF #SAT equality without further finite gate-value reification.
 - Original #1438 27-grid/54-edge native weighted max-cut/QID and #1414 different 27-function C3 quotient inspected, not duplicated. Classical Cook/Levin/Tseitin, prior DASHI proof authors, independent OpenAI ETH family 378 and Ibrahim Monster3B attribution retained. No ESD/CI edit.
 
+
+
+## 2026-10-31 — Exact numeric CNF compiler-count preservation and normalization generators
+
+- Reused existing OpenAIMathSharedTseitinOptimizedCNFExact (opt-in, not global imported) and old whole-CNF pointwise theorem. Source-wrote `sumFiniteBits`, `sumFiniteBitsExt`, `countSourceCNF`, and `optCircuitCountEqualsOriginal`: equality of **Nat-valued satisfying-assignment counts** for original four-clause and optimized one/two/three-clause whole-CNF encodings over the same finite variable carrier. This does not yet identify global satisfying assignments with the original circuit's input-only model count; Agda kernel acceptance remains pending.
+- Added original-CNF Boolean semantics and numeric count invariants for duplicate literals, duplicate clauses, adjacent swaps and tautological clauses, as a source-level donor for future explicit Agda-List-to-Lean-Finset normalization; no new CNF/Finset ontology and no cross-kernel transfer claim.
+- Extended original `scripts/check_openai_shared_tseitin_parsimonious.py` in-place with a 26-clause exhaustive three-variable gate-CNF minimum-cover check. Independently executed finite search PASS: local minimal gate templates 1 constant / 2 NOT / 3 AND or OR, without extra variables. Fresh deterministic local Python PASS: 375 bounded DAG/output fixtures, 10,850 finite assignments, 176 normalization evaluations, 1,059 source clauses saved in this bounded sample. Attempted previous larger suite replay exceeded execution cap; do not present it as a successful fresh run. Exact-head GitHub script and Agda/Lean kernel not run.
+- Updated both original Agda/Lean integration roadmaps; original proof authors and dated Cook–Levin/Tseitin, OpenAI family-378, Ibrahim/Monster3B, QID and native weighted 27-grid PR owners retained. No protected ESD or CI edits.
+
