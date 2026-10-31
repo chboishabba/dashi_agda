@@ -15,6 +15,7 @@ import DASHI.Core.ConsumerQuotientBaseChangeExact as Consumer
 import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact as Argument
 import DASHI.Reasoning.LeechSignedHistoryExpertBidiExact as Sign
 import DASHI.Reasoning.LeechWeightedHistoryMoEBidiExact as Finite
+import DASHI.Reasoning.LeechFullOutputHistoryTraceBidiExact as FullTrace
 import DASHI.Reasoning.IEEEOrbitSignWitnessBidiExact as IEEE
 import DASHI.Reasoning.FederatedExpertTransportBidiExact as Wire
 
@@ -205,3 +206,16 @@ consumerAfterAdmittedAction :
     ≡ observeAction P a (observe P (compute P x h))
 consumerAfterAdmittedAction P a x h witness =
   observeActionCompatible P a x h witness
+
+-- Concrete finite theorem, not just a field in the abstract record:
+-- the consumer's entire per-step trace (output, route, history)
+-- survives arbitrary segmentation when the continuation is threaded.
+finiteMoEFullTraceReplay :
+  (family : Finite.LearnedFamily)
+  (k : Finite.TopK) (w : Finite.Weights) →
+  (xs ys : Finite.Inputs) (h : Finite.Memories)
+  (continuation : Finite.Memories → FullTrace.Trace) →
+  FullTrace.runK family k w (Finite.append xs ys) h continuation
+  ≡ FullTrace.runK family k w xs h
+      (λ afterPrefix → FullTrace.runK family k w ys afterPrefix continuation)
+finiteMoEFullTraceReplay = FullTrace.splitFullTrace
