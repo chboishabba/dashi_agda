@@ -21,6 +21,9 @@ import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact as Matrix
 import DASHI.Foundations.BalancedTernaryAntipodal369OrbitHierarchyExact as Orbit
 import DASHI.Physics.WaveAlgorithmLift as Wave
 import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact as Response
+import DASHI.Foundations.TernaryGolay.ChannelC3OrbitDecomposition as Channels
+import DASHI.Foundations.TernaryGolay.CoxeterToddRoutesBoundary as K12
+import DASHI.Foundations.UBP.LeechValidMoveSet as LeechMove
 
 ------------------------------------------------------------------------
 -- Concrete learner dimensions, not a coincidence-to-geometry theorem.
@@ -93,3 +96,41 @@ semanticResponse = Response.ResponseKind
 -- now live in LeechTransformer/models/trialectic_wave_prior.py and
 -- models/history_orbit_moe.py. Python numerical tolerances and
 -- learner quality require their own checked BIDI correspondence.
+
+------------------------------------------------------------------------
+-- The already-owned 3 + 6 = 9 ordered relational channels:
+-- three diagonal self channels; three cyclic directed channels; three
+-- anti-cyclic directed channels. A role reversal exchanges chiral
+-- direction rather than acting as the antipodal map on an activation.
+-- The operational Python route projects x/H into these coordinates.
+------------------------------------------------------------------------
+
+orderedChannelsAreNine : Channels.listCount Channels.allChannels ≡ 9
+orderedChannelsAreNine = Channels.channelCountIsNine
+
+directedChannelsAreSix : Channels.listCount Channels.allDirectedFaces ≡ 6
+directedChannelsAreSix = Channels.faceCountIsSix
+
+selfChannelsAreThree : Channels.listCount Channels.allDiagonalChannels ≡ 3
+selfChannelsAreThree = Channels.diagonalCountIsThree
+
+cyclicChannelOrbitLaw :
+  (c : Channels.Channel) →
+  Channels.c3OrbitOf (Channels.rotateChannel c) ≡ Channels.c3OrbitOf c
+cyclicChannelOrbitLaw = Channels.c3OrbitRotationInvariant
+
+reversingDirectedRelationSwapsChirality :
+  Channels.c3OrbitOf
+    (Channels.swapLowMidChannel Channels.low-mid)
+    ≡ Channels.antiCyclicOrbit
+reversingDirectedRelationSwapsChirality =
+  Channels.swapExchangesCyclicOrientation
+
+-- The current learned 24D QR chart is an ambient orthogonal map;
+-- arbitrary coordinate flips/rotations are NOT Leech lattice moves.
+-- The UBP LeechValidMoveSet owner requires lattice membership/closure
+-- certificates. The CoxeterToddRoutesBoundary gives two candidate
+-- K12 constructions and explicitly does not deliver an automorphism
+-- witness for an arbitrary LeechTransformer C3 coordinate action.
+-- This boundary prevents a symbolic wave-phase action from masquerading
+-- as an actual order-three Leech automorphism.
