@@ -812,3 +812,132 @@ realizationTransportToExtendedBits {inputs} {gates}
 -- This is the hard same-assignment prefix bridge, *not* a proof that all
 -- bits satisfy a circuit. It enables the direct existing realization
 -- induction below rather than repeating the circuit evaluator in Agda.
+
+
+------------------------------------------------------------------------
+-- P1 GLOBAL SOUNDNESS: use the pre-existing (2026-09 #1040) ORIGINAL
+-- ProgramAssignmentRealizes source, not a second circuit evaluator.
+-- Every new gate has already been proved functional, and the earlier
+-- realization is preserved by the prefix-transport lemma just above.
+------------------------------------------------------------------------
+
+finiteCNFCookInputAtSourceNumber :
+  ∀ {inputs gates : Nat}
+    (bits : CNF.Bits (inputs + gates))
+    (index : Fin inputs) →
+  finiteCNFToCookAssignment bits (FinBase.toℕ index)
+    ≡ Circuit.lookupVec index (inputVectorFromGlobal bits)
+finiteCNFCookInputAtSourceNumber {gates = gates} bits index =
+  trans
+    (cong (finiteCNFToCookAssignment bits)
+      (sym (finLeftOriginalInputNumber {gates = gates} index)))
+    (finiteCNFCookInputExact bits index)
+
+globalPlacedProgramGivesOriginalRealization :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (bits : CNF.Bits (inputs + gates)) →
+  Original.ProgramPlacedGatesValid program bits →
+  Existing.ProgramAssignmentRealizes program
+    (finiteCNFToCookAssignment bits)
+globalPlacedProgramGivesOriginalRealization
+    Circuit.noGates bits Original.emptyProgramValid =
+  Existing.program-assignment-realizes
+    (inputVectorFromGlobal bits)
+    (finiteCNFCookInputAtSourceNumber bits)
+    (λ ())
+globalPlacedProgramGivesOriginalRealization
+    (Circuit.appendGate previous gate)
+    bits
+    (Original.extendedProgramValid oldValid gateValid) =
+  Existing.program-assignment-realizes
+    (Existing.inputValues lifted)
+    (Existing.inputVariablesCorrect lifted)
+    gateCorrect
+  where
+    oldRealization =
+      globalPlacedProgramGivesOriginalRealization
+        previous
+        (Rename.pullbackBits Original.extendEarlierFin bits)
+        oldValid
+    lifted =
+      realizationTransportToExtendedBits bits oldRealization
+
+    gateCorrect :
+      (index : Fin (suc _)) →
+      finiteCNFToCookAssignment bits
+        (Compiler.gateVariableIndex _ index)
+      ≡ Circuit.lookupVec index
+        (Circuit.evaluateProgram
+          (Circuit.appendGate previous gate)
+          (Existing.inputValues lifted))
+    gateCorrect fzero =
+      finiteCNFPlacedGateOriginalStep gate bits lifted gateValid
+    gateCorrect (fsuc index) =
+      Existing.gateVariablesCorrect lifted index
+
+-- Uniqueness of input interpretation for any pre-existing realization.
+-- This reuses prior #1040's field-level input correctness and the Q1
+-- source's vector extensionality, not a new extensionality axiom.
+realizationInputsAreGlobalPrefix :
+  ∀ {inputs gates : Nat}
+    {program : Circuit.GateProgram inputs gates}
+    (bits : CNF.Bits (inputs + gates))
+    (realization : Existing.ProgramAssignmentRealizes program
+      (finiteCNFToCookAssignment bits)) →
+  Existing.inputValues realization ≡ inputVectorFromGlobal bits
+realizationInputsAreGlobalPrefix bits realization =
+  VectorOwner.vecExtensionality
+    (Existing.inputValues realization)
+    (inputVectorFromGlobal bits)
+    (λ index →
+      trans
+        (sym (Existing.inputVariablesCorrect realization index))
+        (finiteCNFCookInputAtSourceNumber bits index))
+
+-- The output wire is read using the same original compiler variable
+-- number. No extra variable is introduced by this proof or by the CNF.
+finiteCookAtCircuitOutput :
+  ∀ {inputs gates : Nat}
+    (wire : Circuit.WireRef inputs gates)
+    (bits : CNF.Bits (inputs + gates)) →
+  finiteCNFToCookAssignment bits (Original.wireNumber wire)
+    ≡ CNF.lookupBit bits (Original.outputWireFin wire)
+finiteCookAtCircuitOutput wire bits =
+  trans
+    (cong (finiteCNFToCookAssignment bits)
+      (sym
+        (FinP.toℕ-fromℕ<
+          (Original.wireNumberBelowAtCircuitEnd wire))))
+    (finiteCNFToCookLookup bits (Original.outputWireFin wire))
+
+-- THE LITERAL GLOBAL-SOUNDNESS RESULT: every model of the ORIGINAL
+-- assembled 3-CNF has an accepted original circuit input valuation.
+-- No cardinality statement or converse is silently inferred.
+originalPlacedCNFImpliesAcceptedInput :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (bits : CNF.Bits (inputs + Circuit.gateCount circuit)) →
+  CNF.evaluateCNF (Original.circuitPlacedCNF circuit) bits ≡ true →
+  Circuit.evaluateCircuit circuit (inputVectorFromGlobal bits) ≡ true
+originalPlacedCNFImpliesAcceptedInput circuit bits accepted =
+  trans
+    (sym (cong (Circuit.evaluateCircuit circuit)
+      (realizationInputsAreGlobalPrefix bits realization)))
+    (trans
+      (sym
+        (Existing.wireFormulaCorrect realization
+          (Circuit.outputWire circuit)))
+      (trans
+        (finiteCookAtCircuitOutput (Circuit.outputWire circuit) bits)
+        (Original.WholeCircuitPlacedMeaning.outputAccepted meaning)))
+  where
+    meaning = Original.wholeCircuitPlacedCNFSound circuit bits accepted
+    realization = globalPlacedProgramGivesOriginalRealization
+      (Circuit.program circuit) bits
+      (Original.WholeCircuitPlacedMeaning.gateRelations meaning)
+
+-- SOURCE-WRITTEN GLOBAL SOUNDNESS, NOT YET AGDA KERNEL VERIFIED.
+-- Converse and P2 numerical #SAT equality still require completeness
+-- against canonical original gate assignments. Reuse previous original
+-- Semantics.canonicalProgramRealization and source fixed-bit codec for it.
