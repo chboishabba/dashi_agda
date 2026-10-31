@@ -165,7 +165,10 @@
       "owners": [
         "scripts/compile_dashi_circuit_openai378.py",
         "Integration/OpenAIMath/Upstream378FiniteCNFBridge.lean",
-        "OAI/Algorithms/SubexponentialSAT/Encoding.lean"
+        "OAI/Algorithms/SubexponentialSAT/Encoding.lean",
+        "DASHI/ComputerScience/LocalOptimizationCompilerExact.agda",
+        "DASHI/Mathematics/Complexity/StandardSingleTapeMachineExact.agda",
+        "DASHI/Mathematics/Complexity/PNotEqualsNPQ1ExecutedConstructionMachineExact.agda"
       ],
       "search_terms": [
         "encodeCNF",
@@ -178,12 +181,12 @@
         "encodeNat",
         "encodeList",
         "frame",
-        "sorted",
-        "insertion",
+        "LocalSemanticCompiler",
+        "StreamingResidencyCertificate",
         "tapeCount",
         "polynomial space",
-        "canonical frontend",
-        "binary length"
+        "StandardSingleTapeMachine",
+        "ExecutedQ1ConstructionRun"
       ],
       "related_symbols": []
     },
