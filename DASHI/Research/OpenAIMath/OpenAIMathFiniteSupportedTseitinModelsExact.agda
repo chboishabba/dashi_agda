@@ -23,6 +23,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 import Data.Fin.Base as FinBase
+import Data.Fin.Properties as FinP
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong; cong₂)
@@ -35,6 +36,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canoni
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalWindowPlacementExact as Placement
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact as Slice
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as VectorOwner
+import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinGateCNFExact as Original
 
 -- A model has precisely n+g bits, not an unrestricted Nat -> Bool tail.
 -- Each auxiliary gate bit is REQUIRED to equal concrete DAG evaluation.
@@ -550,3 +552,42 @@ finiteCNFCookGateIndexExact = finiteCNFToCookLookup
 -- chronological vs newest-first evaluation, and the already-authored
 -- numeric finite-source-#SAT theorem.
 -- SOURCE-WRITTEN; no Agda kernel check in this environment.
+
+
+------------------------------------------------------------------------
+-- EXACT ORIGINAL-COMPILER NUMERIC GATE/INPUT-WIRE PROVENANCE.
+-- Prior and newest gate variables reuse the SOURCE compiler indices,
+-- rather than an invented assignment numbering scheme.
+------------------------------------------------------------------------
+
+finiteCNFCookPriorWireExact : ∀ {inputs gates : Nat}
+  (source : Circuit.WireRef inputs gates)
+  (bits : CNF.Bits (inputs + suc gates)) →
+  finiteCNFToCookAssignment bits (Original.wireNumber source)
+    ≡ CNF.lookupBit bits (Original.wireFin source)
+finiteCNFCookPriorWireExact source bits =
+  trans
+    (cong (finiteCNFToCookAssignment bits)
+      (sym (FinP.toℕ-fromℕ< (Original.wireNumberBelow source))))
+    (finiteCNFToCookLookup bits (Original.wireFin source))
+
+finiteCNFCookNewestGateExact : ∀ {inputs gates : Nat}
+  (gate : Circuit.Gate inputs gates)
+  (bits : CNF.Bits (inputs + suc gates)) →
+  finiteCNFToCookAssignment bits (inputs + gates)
+    ≡ CNF.lookupBit bits
+      (Original.gateWindowRename gate FinBase.zero)
+finiteCNFCookNewestGateExact gate bits =
+  trans
+    (cong (finiteCNFToCookAssignment bits)
+      (sym (Original.gateOutputIndexExact gate)))
+    (finiteCNFToCookLookup bits
+      (Original.gateWindowRename gate FinBase.zero))
+
+-- Together with Existing.gateExpressionCorrect and
+-- Original.compiledProgramLastGateOutputForced, these are the literal
+-- left/right numerical joins for the existing ORIGINAL
+-- ProgramAssignmentRealizes semantic induction. It remains necessary
+-- to prove that the older finite assignment prefix agrees with the
+-- original entire Cook assignment on all previously used coordinates.
+-- No global #SAT promotion until that statement is paid.
