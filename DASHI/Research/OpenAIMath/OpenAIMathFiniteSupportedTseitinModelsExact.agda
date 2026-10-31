@@ -28,6 +28,7 @@ import Data.Nat.Properties as NatP
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Data.Product using (Σ; _,_)
 open import Data.Sum.Base using (inj₁; inj₂)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong; cong₂; subst)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
@@ -1515,3 +1516,165 @@ originalPlacedCNFModelsUniqueForInputs
 -- Genuine source-written injective/surjective finite canonical model
 -- transport. The N A T model-count equality remains a separate numeric
 -- finite-sum theorem and cannot be claimed from this term alone.
+
+
+------------------------------------------------------------------------
+-- FINITE BIT COUNTS: sourced from the original CNF.Bits datatype.
+-- A structural Fubini law splits global inputs and chronological gates
+-- without assuming the two representations are definitionally identical.
+------------------------------------------------------------------------
+
+sumOriginalFiniteCNFBits :
+  ∀ {n : Nat} → (CNF.Bits n → Nat) → Nat
+sumOriginalFiniteCNFBits {zero} weight = weight CNF.[]ᵇ
+sumOriginalFiniteCNFBits {suc n} weight =
+  sumOriginalFiniteCNFBits
+    (λ bits → weight (false CNF.∷ᵇ bits))
+  +
+  sumOriginalFiniteCNFBits
+    (λ bits → weight (true CNF.∷ᵇ bits))
+
+sumOriginalFiniteCNFBitsExt :
+  ∀ {n : Nat}
+    (left right : CNF.Bits n → Nat) →
+  ((bits : CNF.Bits n) → left bits ≡ right bits) →
+  sumOriginalFiniteCNFBits left ≡ sumOriginalFiniteCNFBits right
+sumOriginalFiniteCNFBitsExt {zero} left right ext = ext CNF.[]ᵇ
+sumOriginalFiniteCNFBitsExt {suc n} left right ext =
+  cong₂ _+_
+    (sumOriginalFiniteCNFBitsExt
+      (λ bits → left (false CNF.∷ᵇ bits))
+      (λ bits → right (false CNF.∷ᵇ bits))
+      (λ bits → ext (false CNF.∷ᵇ bits)))
+    (sumOriginalFiniteCNFBitsExt
+      (λ bits → left (true CNF.∷ᵇ bits))
+      (λ bits → right (true CNF.∷ᵇ bits))
+      (λ bits → ext (true CNF.∷ᵇ bits)))
+
+sumOriginalFiniteCNFBitsAppend :
+  ∀ {inputs gates : Nat}
+    (weight : CNF.Bits (inputs + gates) → Nat) →
+  sumOriginalFiniteCNFBits weight ≡
+    sumOriginalFiniteCNFBits
+      (λ inputBits →
+        sumOriginalFiniteCNFBits
+          (λ gateBits →
+            weight (Canonical.appendBits inputBits gateBits)))
+sumOriginalFiniteCNFBitsAppend {inputs = zero} weight = refl
+sumOriginalFiniteCNFBitsAppend {inputs = suc inputs} weight =
+  cong₂ _+_
+    (sumOriginalFiniteCNFBitsAppend
+      (λ bits → weight (false CNF.∷ᵇ bits)))
+    (sumOriginalFiniteCNFBitsAppend
+      (λ bits → weight (true CNF.∷ᵇ bits)))
+
+sumOriginalFiniteCNFBitsAsVec :
+  ∀ {n : Nat} (weight : Vec Bool n → Nat) →
+  sumOriginalFiniteCNFBits
+    (λ bits → weight (bitsToFiniteVec bits))
+  ≡ sumBoolVectors weight
+sumOriginalFiniteCNFBitsAsVec {zero} weight = refl
+sumOriginalFiniteCNFBitsAsVec {suc n} weight =
+  cong₂ _+_
+    (sumOriginalFiniteCNFBitsAsVec
+      (λ bits → weight (false ∷ bits)))
+    (sumOriginalFiniteCNFBitsAsVec
+      (λ bits → weight (true ∷ bits)))
+
+sumOriginalFiniteCNFBitsZero :
+  ∀ {n : Nat} (weight : CNF.Bits n → Nat) →
+  ((bits : CNF.Bits n) → weight bits ≡ zero) →
+  sumOriginalFiniteCNFBits weight ≡ zero
+sumOriginalFiniteCNFBitsZero {zero} weight zeroWeight =
+  zeroWeight CNF.[]ᵇ
+sumOriginalFiniteCNFBitsZero {suc n} weight zeroWeight
+  rewrite sumOriginalFiniteCNFBitsZero
+            (λ bits → weight (false CNF.∷ᵇ bits))
+            (λ bits → zeroWeight (false CNF.∷ᵇ bits))
+        | sumOriginalFiniteCNFBitsZero
+            (λ bits → weight (true CNF.∷ᵇ bits))
+            (λ bits → zeroWeight (true CNF.∷ᵇ bits)) = refl
+
+boolNotTrueIsFalse : (value : Bool) →
+  (value ≡ true → ⊥) → value ≡ false
+boolNotTrueIsFalse false noTrue = refl
+boolNotTrueIsFalse true noTrue = ⊥-elim (noTrue refl)
+
+falsePrefixNotTruePrefix :
+  ∀ {n : Nat} {left right : CNF.Bits n} →
+  false CNF.∷ᵇ left ≡ true CNF.∷ᵇ right → ⊥
+falsePrefixNotTruePrefix ()
+truePrefixNotFalsePrefix :
+  ∀ {n : Nat} {left right : CNF.Bits n} →
+  true CNF.∷ᵇ left ≡ false CNF.∷ᵇ right → ⊥
+truePrefixNotFalsePrefix ()
+
+sameFalsePrefix :
+  ∀ {n : Nat} {left right : CNF.Bits n} →
+  false CNF.∷ᵇ left ≡ false CNF.∷ᵇ right → left ≡ right
+sameFalsePrefix refl = refl
+
+sameTruePrefix :
+  ∀ {n : Nat} {left right : CNF.Bits n} →
+  true CNF.∷ᵇ left ≡ true CNF.∷ᵇ right → left ≡ right
+sameTruePrefix refl = refl
+
+-- A finite Boolean predicate with EXACTLY ONE positive witness has count
+-- one. This is proved by recursion, not by unproved cardinality transfer.
+sumOriginalFiniteCNFBitsUnique :
+  ∀ {n : Nat} (predicate : CNF.Bits n → Bool)
+    (uniqueBits : CNF.Bits n) →
+  predicate uniqueBits ≡ true →
+  ((bits : CNF.Bits n) →
+    predicate bits ≡ true → bits ≡ uniqueBits) →
+  sumOriginalFiniteCNFBits (λ bits → indicator (predicate bits))
+    ≡ suc zero
+sumOriginalFiniteCNFBitsUnique {zero}
+    predicate CNF.[]ᵇ accepted unique
+  rewrite accepted = refl
+sumOriginalFiniteCNFBitsUnique {suc n}
+    predicate (false CNF.∷ᵇ uniqueTail) accepted unique
+  rewrite sumOriginalFiniteCNFBitsUnique
+    (λ bits → predicate (false CNF.∷ᵇ bits))
+    uniqueTail
+    accepted
+    (λ bits proof → sameFalsePrefix
+      (unique (false CNF.∷ᵇ bits) proof))
+  | sumOriginalFiniteCNFBitsZero
+    (λ bits → indicator (predicate (true CNF.∷ᵇ bits)))
+    (λ bits →
+      cong indicator
+        (boolNotTrueIsFalse
+          (predicate (true CNF.∷ᵇ bits))
+          (λ proof →
+            truePrefixNotFalsePrefix
+              (unique (true CNF.∷ᵇ bits) proof))) = refl
+sumOriginalFiniteCNFBitsUnique {suc n}
+    predicate (true CNF.∷ᵇ uniqueTail) accepted unique
+  rewrite sumOriginalFiniteCNFBitsZero
+    (λ bits → indicator (predicate (false CNF.∷ᵇ bits)))
+    (λ bits →
+      cong indicator
+        (boolNotTrueIsFalse
+          (predicate (false CNF.∷ᵇ bits))
+          (λ proof →
+            falsePrefixNotTruePrefix
+              (unique (false CNF.∷ᵇ bits) proof))))
+  | sumOriginalFiniteCNFBitsUnique
+    (λ bits → predicate (true CNF.∷ᵇ bits))
+    uniqueTail
+    accepted
+    (λ bits proof → sameTruePrefix
+      (unique (true CNF.∷ᵇ bits) proof)) = refl
+
+originalCompiledCNFModelCount :
+  ∀ {inputs : Nat} (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Nat
+originalCompiledCNFModelCount circuit =
+  sumOriginalFiniteCNFBits
+    (λ bits → indicator
+      (CNF.evaluateCNF (Original.circuitPlacedCNF circuit) bits))
+
+-- Source CNF model counts are now literally computed Nats.
+-- Still need the per-fixed-input one/no-gate-extension theorem to
+-- apply sumOriginalFiniteCNFBitsUnique and the Fubini count identity.
