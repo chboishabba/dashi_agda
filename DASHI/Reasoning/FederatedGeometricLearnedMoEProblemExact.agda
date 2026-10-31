@@ -8,6 +8,7 @@ module DASHI.Reasoning.FederatedGeometricLearnedMoEProblemExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Bool using (Bool; true; false)
+import Agda.Builtin.Fin
 
 import DASHI.Foundations.BalancedTernaryAntipodal369OrbitHierarchyExact as Orbits
 import DASHI.Foundations.TernaryHypervoxelPermutationTransportExact as Hyper
@@ -16,6 +17,7 @@ import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact as Argument
 import DASHI.Reasoning.LeechSignedHistoryExpertBidiExact as Sign
 import DASHI.Reasoning.LeechWeightedHistoryMoEBidiExact as Finite
 import DASHI.Reasoning.LeechFullOutputHistoryTraceBidiExact as FullTrace
+import DASHI.Reasoning.LeechGenericTopKActionTransportExact as Generic
 import DASHI.Reasoning.IEEEOrbitSignWitnessBidiExact as IEEE
 import DASHI.Reasoning.FederatedExpertTransportBidiExact as Wire
 
@@ -219,3 +221,19 @@ finiteMoEFullTraceReplay :
   ≡ FullTrace.runK family k w xs h
       (λ afterPrefix → FullTrace.runK family k w ys afterPrefix continuation)
 finiteMoEFullTraceReplay = FullTrace.splitFullTrace
+
+
+-- Actual generic arbitrary expert-count E and selected-count k theorem,
+-- reducing conditional weighted full-mixture transport to an explicit
+-- per-selected-expert equivariance witness.
+genericWholeMixtureTransport :
+  ∀ {E k : Nat} →
+  (selected : Generic.TopKRoute E k) →
+  (expertAction : Agda.Builtin.Fin.Fin E → Agda.Builtin.Fin.Fin E) →
+  (before after : Agda.Builtin.Fin.Fin E → Nat) →
+  ((e : Agda.Builtin.Fin.Fin E) →
+    after (expertAction e) ≡ before e) →
+  Generic.weightedTotal
+    (Generic.entries (Generic.transportTopK selected expertAction)) after
+    ≡ Generic.weightedTotal (Generic.entries selected) before
+genericWholeMixtureTransport = Generic.transportPreservesWeightedMixture
