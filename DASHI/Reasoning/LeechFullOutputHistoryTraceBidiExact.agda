@@ -5,9 +5,10 @@ module DASHI.Reasoning.LeechFullOutputHistoryTraceBidiExact where
 -- Unlike memory-only segmentReplay, output, route and next memories
 -- are retained for every token. No Python/float simulation is asserted.
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 import DASHI.Reasoning.LeechWeightedHistoryMoEBidiExact as M
+open M using (Inputs; []; _::_; append)
 import DASHI.Reasoning.LeechSignedHistoryExpertBidiExact as S
 
 record Event : Set where
@@ -35,8 +36,8 @@ makeEvent s = event (M.result s) (M.chosen s) (M.next s)
 -- explicit and avoids assuming commutativity of weighted history steps.
 runK : M.LearnedFamily → M.TopK → M.Weights →
        M.Inputs → M.Memories → (M.Memories → Trace) → Trace
-runK family k w M.[] h continuation = continuation h
-runK family k w (x M.:: xs) h continuation =
+runK family k w [] h continuation = continuation h
+runK family k w (x :: xs) h continuation =
   prepend (makeEvent step)
     (runK family k w xs (M.next step) continuation)
   where
@@ -44,7 +45,7 @@ runK family k w (x M.:: xs) h continuation =
     step = M.step family k w x h
 
 finish : M.Memories → Trace
-finish h = trace [] h
+finish h = trace (Agda.Builtin.List.[]) h
 
 run : M.LearnedFamily → M.TopK → M.Weights →
       M.Inputs → M.Memories → Trace
@@ -60,8 +61,8 @@ splitFullTrace :
   runK family k w (M.append xs ys) h continuation
   ≡ runK family k w xs h
       (λ afterPrefix → runK family k w ys afterPrefix continuation)
-splitFullTrace family k w M.[] ys h continuation = refl
-splitFullTrace family k w (x M.:: xs) ys h continuation
+splitFullTrace family k w [] ys h continuation = refl
+splitFullTrace family k w (x :: xs) ys h continuation
   rewrite splitFullTrace family k w xs ys
     (M.next (M.step family k w x h)) continuation = refl
 
