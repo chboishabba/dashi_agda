@@ -131,6 +131,14 @@ record FederatedMoEProblem : Set₁ where
     consumerFactorisation :
       (x : Input) (h : History) →
       projected x h ≡ observe (compute x h)
+    observeAction : GeometricAction →
+                    ConsumerObservation → ConsumerObservation
+    modelActionSound : GeometricAction → Input → History → Set
+    observeActionCompatible :
+      (a : GeometricAction) (x : Input) (h : History) →
+      modelActionSound a x h →
+      observe (compute (actGeometric a x) (actionOnHistory a h))
+        ≡ observeAction a (observe (compute x h))
 
     -- Encoding and decoding are about a complete transportable
     -- state sufficient for the consumer, not just a sign byte.
@@ -184,3 +192,16 @@ consumerAfterWire P x h
 -- Consumer-relative transport is a weaker criterion than exact wire
 -- reopening, but it requires its own proof. The finite numbers and
 -- opposite-argument witnesses never discharge that criterion by count.
+
+-- Under a *separate* action-admissibility receipt, the transformed
+-- computation has the agreed consumer observation. A sign flip or
+-- semantic objection alone does not construct the receipt.
+consumerAfterAdmittedAction :
+  (P : FederatedMoEProblem)
+  (a : GeometricAction P) (x : Input P) (h : History P) →
+  modelActionSound P a x h →
+  observe P (compute P (actGeometric P a x)
+                      (actionOnHistory P a h))
+    ≡ observeAction P a (observe P (compute P x h))
+consumerAfterAdmittedAction P a x h witness =
+  observeActionCompatible P a x h witness
