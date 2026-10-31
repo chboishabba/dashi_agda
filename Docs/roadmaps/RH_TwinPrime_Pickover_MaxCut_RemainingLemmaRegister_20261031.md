@@ -215,3 +215,10 @@ Independent local exact integer computation recomputed the same chosen 15×15 ma
 ## Faithful SSP ultrametric observer: max-cut status
 
 New source `DASHI.Geometry.SSPJetExistingOwnerTransportExact` defines `FaithfulSSPAddress`, `faithfulAddressConsumerSufficient`, and `coarseCollisionRequiresAddressDistinction` by reusing canonical `SSP369Ultrametric` and `ConsumerIndexedResidualRefinementExact`. The theorem is conditional on an injective encoding of the original History; finite fixed-depth trits cannot automatically encode arbitrary unbounded integer histories or real Bishop phases. For such consumers retain residuals or variable depths. Source-written on PR #1408 (commits f753662b and 3e46cac8), not kernel checked. Specific bounded signed-SSP history instances, terminal estimates and verified ten-jet inverse remain open.
+
+
+## 31 October actionable handoff: native signed SSP15 source, no duplicate jet system
+
+`DASHI.Biology.SSP15SignedHistoryConsumerBidiExact` is now source-written over **existing** `SignedSSPFRACTRANWeaveExact.SSPValuation`. Its `encode` retains sign orientation and the original signed multiplicity as an explicit residual, `decodeEncode` preserves the original, `retainedObserverSufficient` yields all-consumer sufficiency, and `signCollisionForcesSignedResidual` pays the native consumer-collision necessity condition. It is lossless rather than minimal and does **not** pretend a finite address contains every unbounded magnitude. In parallel the existing `SSP369Ultrametric` remains the primary observer/refinement owner; the C3 ten-derivative matrix is a specialized finite certificate, **not** the original notion of jet.
+
+**Practical verification and future-work entrypoint:** `Docs/roadmaps/SSP15_Ultrametric_Jet_Consumer_Handoff_20261031.md` contains source ordering, Python commands, Agda commands, the typecheck/safety boundary and precise remaining kernel/analytic cuts. This is a source-ready handoff, not an Agda-kernel-verified or terminal-conjecture-complete proof.
