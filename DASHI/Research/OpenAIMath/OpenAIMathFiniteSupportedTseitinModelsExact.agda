@@ -24,6 +24,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 import Data.Fin.Base as FinBase
 import Data.Fin.Properties as FinP
+import Data.Nat.Properties as NatP
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong; cong₂)
@@ -701,3 +702,113 @@ finiteCNFPlacedGateOriginalStep (Circuit.orGate left right) bits prior valid =
 -- induction glue: extend the prior realization from the old pulled-back
 -- finite CNF to the new global assignment while preserving input and all
 -- previously used gate values. Do not claim P1/P2 closed until then.
+
+
+------------------------------------------------------------------------
+-- P1 INDUCTION GLUE: extending the whole-program CNF by one gate preserves
+-- all earlier variable VALUES in the ORIGINAL Cook.Assignment carrier.
+-- Reuses exact old gate-numbering and original Fin placement.
+------------------------------------------------------------------------
+
+originalEarlierIndexNumberExact :
+  ∀ {inputs gates : Nat}
+    (index : Fin (inputs + gates)) →
+  FinBase.toℕ (Original.extendEarlierFin index) ≡ FinBase.toℕ index
+originalEarlierIndexNumberExact {inputs} {gates} index =
+  FinP.toℕ-fromℕ<
+    (NatP.<-trans
+      (FinP.toℕ<n index)
+      (Original.newOutputBelow {inputs} {gates}))
+
+finiteCNFPrefixCookAgreement :
+  ∀ {inputs gates : Nat}
+    (bits : CNF.Bits (inputs + suc gates))
+    (index : Fin (inputs + gates)) →
+  finiteCNFToCookAssignment
+    (Rename.pullbackBits Original.extendEarlierFin bits)
+    (FinBase.toℕ index)
+  ≡ finiteCNFToCookAssignment bits (FinBase.toℕ index)
+finiteCNFPrefixCookAgreement bits index =
+  trans
+    (finiteCNFToCookLookup
+      (Rename.pullbackBits Original.extendEarlierFin bits) index)
+    (trans
+      (Rename.pullbackLookup Original.extendEarlierFin bits index)
+      (trans
+        (sym
+          (finiteCNFToCookLookup bits (Original.extendEarlierFin index)))
+        (cong (finiteCNFToCookAssignment bits)
+          (originalEarlierIndexNumberExact index))))
+
+finLeftOriginalInputNumber :
+  ∀ {inputs gates : Nat} (index : Fin inputs) →
+  FinBase.toℕ (Placement.finLeft {n = gates} index) ≡
+    FinBase.toℕ index
+finLeftOriginalInputNumber {inputs = zero} ()
+finLeftOriginalInputNumber {inputs = suc inputs} fzero = refl
+finLeftOriginalInputNumber {inputs = suc inputs} (fsuc index) =
+  cong suc (finLeftOriginalInputNumber index)
+
+-- The actual dependent #1040 realization proof can be reused on an
+-- enlarged global bit assignment without changing ANY previously
+-- interpreted circuit inputs or gate outputs.
+realizationTransportToExtendedBits :
+  ∀ {inputs gates : Nat}
+    {program : Circuit.GateProgram inputs gates}
+    (bits : CNF.Bits (inputs + suc gates)) →
+  Existing.ProgramAssignmentRealizes program
+    (finiteCNFToCookAssignment
+      (Rename.pullbackBits Original.extendEarlierFin bits)) →
+  Existing.ProgramAssignmentRealizes program
+    (finiteCNFToCookAssignment bits)
+realizationTransportToExtendedBits {inputs} {gates}
+    {program} bits previousRealization =
+  Existing.program-assignment-realizes
+    (Existing.inputValues previousRealization)
+    (λ index →
+      trans
+        (sym (inputAssignmentPrefixAgreement index))
+        (Existing.inputVariablesCorrect previousRealization index))
+    (λ index →
+      trans
+        (sym (gateAssignmentPrefixAgreement index))
+        (Existing.gateVariablesCorrect previousRealization index))
+  where
+    oldAssignment = finiteCNFToCookAssignment
+      (Rename.pullbackBits Original.extendEarlierFin bits)
+    newAssignment = finiteCNFToCookAssignment bits
+
+    inputAssignmentPrefixAgreement :
+      (index : Fin inputs) →
+      oldAssignment (FinBase.toℕ index) ≡
+      newAssignment (FinBase.toℕ index)
+    inputAssignmentPrefixAgreement index =
+      trans
+        (cong oldAssignment
+          (sym (finLeftOriginalInputNumber {gates = gates} index)))
+        (trans
+          (finiteCNFPrefixCookAgreement bits
+            (Placement.finLeft {n = gates} index))
+          (cong newAssignment
+            (finLeftOriginalInputNumber {gates = gates} index)))
+
+    gateAssignmentPrefixAgreement :
+      (index : Fin gates) →
+      oldAssignment (Compiler.gateVariableIndex inputs index) ≡
+      newAssignment (Compiler.gateVariableIndex inputs index)
+    gateAssignmentPrefixAgreement index =
+      trans
+        (cong oldAssignment
+          (sym (FinP.toℕ-fromℕ<
+            (Existing.gateVariableIndexBelowNext inputs index))))
+        (trans
+          (finiteCNFPrefixCookAgreement bits
+            (FinBase.fromℕ<
+              (Existing.gateVariableIndexBelowNext inputs index)))
+          (cong newAssignment
+            (FinP.toℕ-fromℕ<
+              (Existing.gateVariableIndexBelowNext inputs index))))
+
+-- This is the hard same-assignment prefix bridge, *not* a proof that all
+-- bits satisfy a circuit. It enables the direct existing realization
+-- induction below rather than repeating the circuit evaluator in Agda.
