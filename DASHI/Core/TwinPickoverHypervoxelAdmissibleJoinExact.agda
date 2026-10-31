@@ -72,9 +72,14 @@ retainedPairSufficient :
   {consumer : History → Outcome} →
   FineAddressFactorisation rank coarseDepth fineDepth coarse suffix consumer →
   Residual.ConsumerSufficient (λ h → coarse h , suffix h) consumer
-retainedPairSufficient witness x y same with same
-... | refl =
-  trans (factorLaw witness x) (sym (factorLaw witness y))
+retainedPairSufficient witness x y same =
+  trans (factorLaw witness x)
+    (trans
+      (cong
+        (λ pair → decodeFine witness
+          (Hyper.joinAddress (proj₁ pair) (proj₂ pair)))
+        same)
+      (sym (factorLaw witness y)))
 
 -- Construct an explicit original-repository residual repair certificate
 -- rather than inventing a competing observer/quotient proof ontology.
