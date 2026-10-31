@@ -67,3 +67,46 @@ consumerDifferenceForcesPositiveResolution :
   SSP.distance left right ≡ zero → ⊥
 consumerDifferenceForcesPositiveResolution consumer left right different d0 =
   different (zeroDistanceConsumerAgreement consumer left right d0)
+
+-- Consumer-indexed version of the existing full-depth zero-distance law.
+-- This is a nontrivial observer theorem because the hypothesis concerns
+-- observable distance rather than definitional equality of consumers.
+import DASHI.Core.ConsumerIndexedResidualRefinementExact as Residual
+
+ultrametricZeroSufficient :
+  ∀ {depth : Nat} {Outcome : Set}
+  (consumer : SSP.Address depth → Outcome) →
+  (x y : SSP.Address depth) →
+  SSP.distance x y ≡ zero → consumer x ≡ consumer y
+ultrametricZeroSufficient = zeroDistanceConsumerAgreement
+
+-- A *supplied* observation map, not a conflation of arbitrary producer
+-- types with SSP addresses. It must separate all original histories.
+record FaithfulSSPAddress
+    (History : Set) (depth : Nat) : Set₁ where
+  field
+    encode : History → SSP.Address depth
+    faithful : ∀ x y → encode x ≡ encode y → x ≡ y
+open FaithfulSSPAddress public
+
+faithfulAddressConsumerSufficient :
+  ∀ {History Outcome : Set} {depth : Nat}
+  (address : FaithfulSSPAddress History depth)
+  (consumer : History → Outcome) →
+  Residual.ConsumerSufficient (encode address) consumer
+faithfulAddressConsumerSufficient address consumer x y same =
+  cong consumer (faithful address x y same)
+
+-- A collision on an insufficient coarse observer is *forced* to differ
+-- on any sufficiently faithful SSP ultrametric address.
+coarseCollisionRequiresAddressDistinction :
+  ∀ {History Coarse Outcome : Set} {depth : Nat}
+  {coarse : History → Coarse}
+  {consumer : History → Outcome}
+  (collision : Residual.ConsumerRelevantCollision coarse consumer)
+  (address : FaithfulSSPAddress History depth) →
+  encode address (Residual.left collision) ≡
+  encode address (Residual.right collision) → ⊥
+coarseCollisionRequiresAddressDistinction collision address =
+  Residual.everySufficientObserverSeparatesRelevantCollision
+    collision (faithfulAddressConsumerSufficient address consumer)
