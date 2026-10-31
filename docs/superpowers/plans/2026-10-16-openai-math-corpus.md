@@ -1,5 +1,8 @@
 # OpenAI Math Corpus Agda Integration Implementation Plan
 
+**CURRENT EXACT-LEMMA AUTHORITY (39 typed obligations/owners):** [OpenAI SAT/corpus/analytic exact max-cut ledger](https://github.com/chboishabba/dashi_agda/blob/integration/openai-math-corpus/docs/superpowers/plans/2026-10-31-openai-math-exact-lemma-maxcut-ledger.md). Read this BEFORE historical append-only entries: it supersedes obsolete “P1/P2 source still unwritten” notes, not the original Golden proof owners. Includes every missing numeric, chronological/polarity, input/gate, canonical normalization, encoding bitstream, fixed-machine runtime/prefix-space, 208-entry catalogue and genuine RH/twin/YM/Pickover analytic certificate cut. **No exact-head Agda or Lean kernel run**. Native graph/369/parity donors remain distinct typed carriers; ESD import-only.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Record the pinned OpenAI mathematics corpus as an attribution-safe cross-prover source for Agda.
