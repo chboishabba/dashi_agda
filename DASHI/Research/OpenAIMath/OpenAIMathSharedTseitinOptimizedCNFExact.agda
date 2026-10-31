@@ -341,3 +341,62 @@ optCircuitThreeClauseBudget circuit =
 -- Multiplication is a closed-form restatement of structural threePerGate.
 -- Unlike the original four-clause template, no truth table is expanded
 -- over the full original input dimension.
+
+
+------------------------------------------------------------------------
+-- EXACT NUMERIC #SAT EQUIVALENCE FOR THE TWO WHOLE CNF COMPILERS.
+-- Uses the EXISTING pointwise proof above. No new gate-evaluation engine,
+-- no oracle, no unbounded Nat -> Bool assignment, no new compiler.
+------------------------------------------------------------------------
+
+indicator : Bool → Nat
+indicator false = zero
+indicator true = suc zero
+
+-- Entirely finite global CNF assignment carrier, not Cook.Assignment.
+sumFiniteBits : ∀ {n : Nat} → (CNF.Bits n → Nat) → Nat
+sumFiniteBits {zero} weight = weight CNF.[]ᵇ
+sumFiniteBits {suc n} weight =
+  sumFiniteBits (λ bits → weight (false CNF.∷ᵇ bits)) +
+  sumFiniteBits (λ bits → weight (true CNF.∷ᵇ bits))
+
+sumFiniteBitsExt : ∀ {n : Nat}
+  (left right : CNF.Bits n → Nat) →
+  ((bits : CNF.Bits n) → left bits ≡ right bits) →
+  sumFiniteBits left ≡ sumFiniteBits right
+sumFiniteBitsExt {zero} left right equality =
+  equality CNF.[]ᵇ
+sumFiniteBitsExt {suc n} left right equality =
+  cong₂ _+_
+    (sumFiniteBitsExt
+      (λ bits → left (false CNF.∷ᵇ bits))
+      (λ bits → right (false CNF.∷ᵇ bits))
+      (λ bits → equality (false CNF.∷ᵇ bits)))
+    (sumFiniteBitsExt
+      (λ bits → left (true CNF.∷ᵇ bits))
+      (λ bits → right (true CNF.∷ᵇ bits))
+      (λ bits → equality (true CNF.∷ᵇ bits)))
+
+countSourceCNF : ∀ {n : Nat} → CNF.CNF n → Nat
+countSourceCNF formula =
+  sumFiniteBits (λ bits → indicator (CNF.evaluateCNF formula bits))
+
+optCircuitCountEqualsOriginal : ∀ {inputs : Nat}
+  (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  countSourceCNF (optCircuitCNF circuit) ≡
+    countSourceCNF (Original.circuitPlacedCNF circuit)
+optCircuitCountEqualsOriginal circuit =
+  sumFiniteBitsExt
+    (λ bits → indicator (CNF.evaluateCNF (optCircuitCNF circuit) bits))
+    (λ bits → indicator (CNF.evaluateCNF (Original.circuitPlacedCNF circuit) bits))
+    (λ bits → cong-indicator (optCircuitEqualsOriginal circuit bits))
+  where
+    cong-indicator : ∀ {left right : Bool} →
+      left ≡ right → indicator left ≡ indicator right
+    cong-indicator refl = refl
+
+-- **Paid only at source level**: same finite assignment domain and exactly
+-- equal computed Nat counts for optimized vs original full source CNFs.
+-- NOT yet the stronger equation with original accepted Circuit input count;
+-- that demands original finite-gate-value normalization, and any cross-
+-- language Finset conversion needs separate semantics + cardinality proof.
