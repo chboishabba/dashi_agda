@@ -13,6 +13,7 @@ open import Data.Nat.Base using (_≤_)
 open import Data.Product using (Σ; _×_; _,_)
 import DASHI.Arithmetic.TwinPrimeSixWheelExact as Twin
 import DASHI.Arithmetic.TwinPrimeMangoldtNonzeroPrimeSumWitnessExact as Witness
+import DASHI.Arithmetic.TwinPrimeConditionalUnboundedFromCountJumpsExact as CountGrowth
 import Data.Nat.Properties as NP
 
 -- The exact weak research target, stripped of numerical representation:
@@ -61,3 +62,26 @@ twinInfinitudeToCofinalWindow twins N with twins N
 -- not supply this.
 --
 -- In particular no proof of either analytic target is given here.
+
+-- The three currently exact *arithmetic* T0 formulations are now
+-- mutually reducible through EXISTING ORIGINAL source owners:
+-- (i) cofinal windows carrying actual twin certificates;
+-- (ii) arbitrary large original certified twin starts;
+-- (iii) cofinal changes in the original exact twin-start counter.
+--
+-- This is a closed logical comparison, not a source for ANY of
+-- their existential premises. The real Mangoldt P(X) bridge still
+-- requires the true positive log-weight and interval semantics.
+cofinalWindowToCertifiedCountJumps :
+  CofinalTwinWindow →
+  CountGrowth.UnboundedCertifiedCountJumps
+cofinalWindowToCertifiedCountJumps windows =
+  CountGrowth.twinInfinitudeGivesUnboundedCertifiedCountJumps
+    (cofinalWindowToTwinInfinitude windows)
+
+certifiedCountJumpsToCofinalWindow :
+  CountGrowth.UnboundedCertifiedCountJumps →
+  CofinalTwinWindow
+certifiedCountJumpsToCofinalWindow jumps =
+  twinInfinitudeToCofinalWindow
+    (CountGrowth.twinPrimesUnboundedIfCountJumps jumps)
