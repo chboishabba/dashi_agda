@@ -6,7 +6,7 @@ module DASHI.Reasoning.FederatedGeometricLearnedMoEProblemExact where
 -- Reuse existing ownership without equating finite numerology to
 -- trained tensor semantics or opposing arguments to an antipode.
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Foundations.BalancedTernaryAntipodal369OrbitHierarchyExact as Orbits
