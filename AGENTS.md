@@ -53,3 +53,26 @@ remain normative and are preserved verbatim in
 read that file before making repository changes.** This root file is the
 front-door style contract; the linked operational notes are part of the same
 agent instructions.
+
+
+## Native proof-symbol snowball for active SAT/ETH max-cut
+
+For the OpenAI SAT/ETH integration, **discover before writing a new proof**.
+The authoritative [39 exact remaining lemma/certificate register](docs/superpowers/plans/2026-10-31-openai-math-exact-lemma-maxcut-ledger.md),
+[175 prioritized symbol-search terms](docs/superpowers/plans/2026-10-31-local-symbol-snowball-terms.json),
+and [workstation-agent workflow](docs/superpowers/plans/2026-10-31-local-symbol-snowball-agent.md)
+are maintained on the existing Agda #1212 integration branch.
+Run `scripts/run_openai_math_symbol_snowball.py` against the native
+`dashi-repo` semantic index and, optionally, the sibling Lean repository.
+Do **not** implement a competing symbol database, redefine the original
+circuit evaluator or unique-gate proof, or treat a similar name/number/DA51
+or QID as a kernel-verified same-object theorem.
+
+The Agda Golden proofs and Lean downstream remain distinct authorities.
+The original source-written P1/P2 and staged Lean P3/P4 require exact-head
+compiler acceptance and a verified real executable source-to-machine
+translation with time and **every-prefix** space costs.
+No CI is required for this research workflow; executable Python checks
+do not establish Lean or Agda kernel acceptance. Preserve the existing
+attribution and operational policies above, including ESD import-only
+and original Ibrahim Monster 3B proof ownership.
