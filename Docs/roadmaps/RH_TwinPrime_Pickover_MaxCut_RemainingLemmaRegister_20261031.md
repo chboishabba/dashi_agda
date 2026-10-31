@@ -45,3 +45,14 @@ A 15×15 nonsingular minor from m=10 produces an explicit rational left inverse 
 7. **All:** kernel check exact heads; provenance of original Hardy–Littlewood, Keating–Smith, Bishop, Ogg/Monster, previous Ibrahim 3B, repo-specific proof owners; protected ESD import-only.
 
 **Completion acceptance:** no invented axioms, no SOTA promotion from finite signals, every proof must name the actual terminal consumer and both directions of BIDI; terminal RH/TP/P9999 statuses stay OPEN until genuine certified theorems are produced.
+
+
+## 2026-10-31 W05 constructive collision is now explicit (commit 3b0e4e457e93)
+
+The canonical rational nine-jet matrix `M9` has a **primitive integral** nonzero null direction in SSP prime order (2,3,5,7,11,13,17,19,23,29,31,41,47,59,71):
+
+`v=(-360448,0,1136200,0,-2624622,0,4499352,0,-4686825,2499640,0,-807576,374946,-32890,2223)`.
+
+Direct exact integer arithmetic shows `M9*v=0` while tenth-jet A-coordinate `(M10*v)[9]=-571323080827699200 != 0`. Splitting `v=v_plus-v_minus` with `v_plus,v_minus>=0` supplies **two distinct nonnegative SSP valuations** whose first nine complex Eisenstein-valued winding jets agree but whose tenth-jet differs. This is a concrete consumer-relevant collision even with nonnegative factor multiplicity. The numerical values are exact integers, not floating approximations. An updated regression `scripts/check_ssp15_c3_winding_jet_rank.py` checks both equalities and rank-15 inverse.
+
+**Status change:** W05 explicit finite witness from OPEN to **FINITE-TEST/CONSTRUCTED**, Agda kernel formalisation still **OPEN**. W04 rational inverse remains exact linear-algebra check, also kernel-pending. These counterexamples concern the *finite truncated jet observer*, not an individual state with no history; full winding histories remain the canonical starting point. Next higher-alpha frontier is certified conditioning/real analytic and actual infinite-prime two-point bounds (W06–W08, T04–T10), not more claims that one-point histories fail.
