@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Geometry.SSPJetExistingOwnerTransportExact where
 
 -- Canonical import seam between existing SSP ultrametric histories,
@@ -32,9 +31,9 @@ metricTwoJetHistoryPreserved =
 -- The original jet order is retained in its source row.
 metricTwoJetOrderIsDepth :
   Jet.jetOrder (Bridge.admissibilitySpec Bridge.metricTwoJetUltrametricRow)
-  ≡ Jet.addressDepth Bridge.metricTwoJetUltrametricRow
+  ≡ Bridge.addressDepth Bridge.metricTwoJetUltrametricRow
 metricTwoJetOrderIsDepth =
-  Jet.jetOrderMatchesAddressDepth Bridge.metricTwoJetUltrametricRow
+  Bridge.jetOrderMatchesAddressDepth Bridge.metricTwoJetUltrametricRow
 
 -- Any consumer on a retained full SSP address respects equality of
 -- actual histories; equality of truncated prefixes alone is insufficient.
