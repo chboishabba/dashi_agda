@@ -29,6 +29,7 @@ open import Relation.Binary.PropositionalEquality using (sym; cong; cong₂)
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact as Existing
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as VectorOwner
 
 -- A model has precisely n+g bits, not an unrestricted Nat -> Bool tail.
@@ -347,3 +348,44 @@ countedPairGivesFiniteSupportedModel circuit bits auxiliary counted
           (Circuit.evaluateProgram (Circuit.program circuit) bits)
           counted))
     refl
+
+
+------------------------------------------------------------------------
+-- SAME-CARRIER BIT/VEC REIFICATION: actual source DAG finite Boolean
+-- vectors and the older Cook-Levin CNF.Bits have the same finite data.
+-- Search found older bitsExt/takeBits/block slice owners but no direct codec;
+-- this is the minimal adapter needed before gate-value induction.
+------------------------------------------------------------------------
+
+bitsToFiniteVec : ∀ {n : Nat} → CNF.Bits n → Vec Bool n
+bitsToFiniteVec CNF.[]ᵇ = []
+bitsToFiniteVec (bit CNF.∷ᵇ rest) = bit ∷ bitsToFiniteVec rest
+
+finiteVecToBits : ∀ {n : Nat} → Vec Bool n → CNF.Bits n
+finiteVecToBits [] = CNF.[]ᵇ
+finiteVecToBits (bit ∷ rest) = bit CNF.∷ᵇ finiteVecToBits rest
+
+bitsVecRoundTrip : ∀ {n : Nat} (bits : CNF.Bits n) →
+  finiteVecToBits (bitsToFiniteVec bits) ≡ bits
+bitsVecRoundTrip CNF.[]ᵇ = refl
+bitsVecRoundTrip (bit CNF.∷ᵇ rest) =
+  cong (λ tail → bit CNF.∷ᵇ tail) (bitsVecRoundTrip rest)
+
+vecBitsRoundTrip : ∀ {n : Nat} (bits : Vec Bool n) →
+  bitsToFiniteVec (finiteVecToBits bits) ≡ bits
+vecBitsRoundTrip [] = refl
+vecBitsRoundTrip (bit ∷ rest) =
+  cong (λ tail → bit ∷ tail) (vecBitsRoundTrip rest)
+
+lookupCNFToVec : ∀ {n : Nat}
+  (bits : CNF.Bits n) (index : Fin n) →
+  CNF.lookupBit bits index ≡
+    Circuit.lookupVec index (bitsToFiniteVec bits)
+lookupCNFToVec (bit CNF.∷ᵇ rest) fzero = refl
+lookupCNFToVec (bit CNF.∷ᵇ rest) (fsuc index) =
+  lookupCNFToVec rest index
+
+-- Data reification only: constructing the gate vector in creation order,
+-- reifying every original numbered gate variable, and proving the whole
+-- circuit CNF count equals accepted input count remain separate obligations.
+-- No postulates, infinite tail assignment, or duplicate CNF datatype.
