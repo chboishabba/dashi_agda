@@ -60,3 +60,28 @@ Constrain quality, reproducibility, exact consumer reconstruction, authorized pr
 | Verification | kernel-checked Agda, executable Python regression, cross-language refinement | NOT VERIFIED HERE |
 
 **Absolute prohibition:** count matches, character fingerprints, sign symmetry, geometric opposites or synthetic receipts do not prove a physical model, Monster module, Riemann zeta same-object relation, ethical polarity or learned expert action. No ESD source modified; original sources/authors attributed by domain.
+
+
+## Concrete trace-replay theorem (31 October, subsequent formal cut)
+
+`DASHI/Reasoning/LeechFullOutputHistoryTraceBidiExact.agda`
+now consumes the *existing* `LeechWeightedHistoryMoEBidiExact.step`
+to accumulate an event for every time step: **weighted output,
+selected route, and both updated expert histories**. The
+`splitFullTrace` theorem uses a parameterized continuation to show
+that splitting the input sequence and resuming with exactly the
+retained state yields the identical *entire event trace*, not just
+terminal memory. `FederatedGeometricLearnedMoEProblemExact.agda`
+reexports this theorem as `finiteMoEFullTraceReplay`, so the
+integrated problem consumes a concrete proof instead of only
+listing replay as a field.
+
+This proof is finite (two expert slots, Nat weights and trit
+histories). It does NOT claim PyTorch top-k/softmax semantics,
+network-delivered state consistency, cryptographic security or
+actual Leech group actions. Source written in safe Agda, but
+the Agda kernel is unavailable in the current execution
+environment and therefore not typechecked. Remaining top-level
+max-cut: formalize generic E/k, normalized weighted selection and
+action/permutation/correction behavior of the *whole* mixture,
+plus an executable refinement to the current model.
