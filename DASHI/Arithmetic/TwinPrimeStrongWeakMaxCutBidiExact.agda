@@ -27,12 +27,18 @@ CofinalTwinWindow =
 -- The repo's original definition uses true Nat prime certificates.
 cofinalWindowToTwinInfinitude :
   CofinalTwinWindow → Twin.TwinPrimesInfinitelyOften
-cofinalWindowToTwinInfinitude windows N
-  with windows N
-... | start , (late , count , observed)
-  with Witness.twinInIntervalReadout observed
-... | p , (afterStart , twin) =
-  p , (NP.≤-trans late afterStart , twin)
+cofinalWindowToTwinInfinitude windows N with windows N
+... | start , (late , (count , observed)) =
+  lift start late count observed
+  where
+  lift :
+    (start : Nat) → N ≤ start → (count : Nat) →
+    Witness.TwinInInterval start count →
+    Σ Nat (λ p → (N ≤ p) × Twin.TwinPrimeAt p)
+  lift start late count observed
+    with Witness.twinInIntervalReadout observed
+  ... | p , (afterStart , twin) =
+    p , (NP.≤-trans late afterStart , twin)
 
 -- A singleton starting at each certified twin supplies an interval.
 twinInfinitudeToCofinalWindow :
