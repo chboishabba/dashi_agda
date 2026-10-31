@@ -178,3 +178,10 @@ Correction: **do not propose a new generic SSP-jet architecture**. The existing 
 - `DASHI.Moonshine.OggPrimeFourierWindingExact` from PR #1140: existing exact finite SSP/Ogg winding and C3 conjugation owner.
 
 The ten-derivative SSP15 Eisenstein winding *rank experiment* in `scripts/check_ssp15_c3_winding_jet_rank.py` is a specific new exact finite certificate. Searches did not locate a pre-existing source file formalising precisely this ten-derivative **15×15 inverse**, so the narrow remaining task is a concrete kernel-checked adapter to the above existing jet owners, **not** 'integrate jet machinery' wholesale. Neither a bivariate Wilson jet nor a finite SSP rank proof automatically gives uniform arithmetic pair-correlation estimates.
+
+
+## 31 October: universal finite SSP15 C3 ten-jet inverse certificate
+
+New owner `scripts/check_ssp15_c3_winding_adjugate_inverse.py` (commit `662b4e4125d4eefb004da566f89ed60c4873041c`) implements the **all-input** rational inverse law, improving on a sample-vector test. For `M=M10[0:15,:]` (the first ten A-rows plus first five B-rows, in SSP prime order), exact determinant:
+`det(M)=-68973567202690493145068231495208746474043983233237147979454873600000000 != 0`.
+The universal identity `adj(M)*M=det(M)*I_15` yields `v = adj(M)*selectedJets/det(M)` for EVERY signed rational/integer 15-lane valuation history. The script also checks an explicit **nonnegative** nine-jet collision with tenth-jet separation. The finite C3 winding derivative transport now has a constructive algorithmic decoder rather than mere injective rank evidence. This does **not** prove an arbitrary analytic infinite Fourier transform, a uniform stable numerical inverse, or a prime-pair lower bound. Kernel formalisation of this integer matrix identity remains a narrow outstanding W04 task, not a missing generic SSP jet framework. No CI/compiler claimed.
