@@ -17391,3 +17391,11 @@ Cleanup
 - [ ] K04c: prove actual signed prime-valuation decomposition including non-SSP residual for every rational stage and a faithful readout BIDI.
 - [ ] K04d: actual zeta continuation domain, continuity at the named argument, completed commuting square.
 - [ ] K05: Agda trig/classical pi same-object identification, independent of the source-written Lean receipt.
+
+## 2026-10-31 — K04a actual finite signed Bishop stage
+
+- [x] Source-write `BishopMachinSignedFiniteHistoryExact` over original `Machin.atanSignedTerm`, 16/4 weighted finite series, with a proof that signed partial stage is the original finite sum difference via `BishopFiniteSeriesDifferenceExact`.
+- [x] Import K04a leaf in three canonical TOE roots.
+- [ ] Kernel-check the new concrete Bishop K04a source owner and transitive golden imports.
+- [ ] Remaining K04a rational-stage equality: computational `q_n` formula = original Bishop `Sequence.SeriesOf` signed stage after exact rational embedding, avoiding artificial real comparisons.
+- [ ] K04b: combine original actual arctan Bishop convergence with finite linearity and explicit alternating remainder modulus.
