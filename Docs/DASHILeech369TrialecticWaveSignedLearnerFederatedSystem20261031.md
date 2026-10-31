@@ -125,3 +125,30 @@ python -m scripts.export_signed_wave_model \
 ```
 
 All new submodules are opt-in. Existing dense checkpoint remains strict-load compatible. Do not interpret an exported candidate as a successful model until heldout language and paired semantic results support it.
+
+
+## 8. Paired training and outcome test, separately from sign-chart training
+
+New `models/paired_intervention_geometry_loss.py`: the supplied correct target for each member of a semantic pair is required. `paired_training_objective` uses both cross-entropies, plus an optional geometry penalty **only when a separate explicit action label** `identity`, `C2_inversion` or `C3_cyclic` was independently licensed for that sample. `none` is the default: a `challengeEvidence`, `alternativeExplanation` or `acceptWithQualification` kind never automatically assigns a negative sign, a flip or a specific latent action. It is differentiable and suitable for a later real end-to-end learning run. Gradient tests are source written, not claimed as a completed semantic training benchmark.
+
+`scripts/eval_paired_semantic_geometry.py` loads the actual dense or exported student checkpoint and an NPZ with `tokens_a`, `tokens_b`, `targets_a`, `targets_b`, and `kinds` (one of the nine exact response categories in `ArgumentResponseNonGeometricOppositeBidiExact`). The evaluator reports **both members correct**, actual target-change frequency, predicted flip frequency, flip-decision accuracy, and independent identity/C2/C3 hidden-state fit without promoting it to semantic identity. A synthetic counterexample regression shows two different response kinds can map to the same antipodal geometry, and perfect flip rate can coexist with zero paired correctness.
+
+```bash
+python -m scripts.eval_paired_semantic_geometry \
+  --checkpoint data/best_model.pt --config leech_dense_config.json \
+  --pairs /path/to/typed_pairs.npz --device cpu \
+  --output artifacts/dense_paired_receipt.json
+
+python -m scripts.eval_paired_semantic_geometry \
+  --checkpoint artifacts/signed_wave_full_model.pt \
+  --pairs /path/to/typed_pairs.npz --device cpu \
+  --output artifacts/student_paired_receipt.json
+```
+
+Interpret all outputs as **test evidence**. Neither an exact C2 equivariance law nor a high observed flip rate proves that a network reasons well, is safe, or is superior to Sophontic. The 384D/24D prior is a useful hypothesis to train, route and ablate, not an automatic semantic theorem.
+
+## 9. Full-stream correctness
+
+The same branch fixes the previous Q/K cache-mask offset bug for resumed chunks longer than one token: query mask rows must be indexed by `past_len:past_len+T`, not always `0:T`. `test_leech_moe_integration.py` now tests full vs cache equivalence under (2,3,2)-token chunks for dense, raw MoE and the deployed C2/C3 even+odd model. This is required for distributed replays in which a peer accepts multiple tokens between acknowledgments.
+
+**Execution status:** the source-equivalent local PyTorch CPU check of the core signed-wave student, 3-point Fourier and odd/even distillation passed; a full checkout test suite, kernel checks and your actual 12-layer student training were not run here. The new paired dataset must be sourced with its own correct answers; absent source labels are not guessed.
