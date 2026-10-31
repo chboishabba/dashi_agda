@@ -188,7 +188,7 @@ optProgramEqualsOriginal (Circuit.appendGate previous gate) bits =
         (Placed.evaluateCNFAppend
           (Rename.renameCNF Original.extendEarlierFin
             (Original.programPlacedCNF previous))
-          (Original.placedGateCNF gate) bits))))
+          (Original.placedGateCNF gate) bits)))
 
 optCircuitCNF : ∀ {inputs : Nat} →
   (circuit : Circuit.ConcreteBooleanCircuit inputs) →
