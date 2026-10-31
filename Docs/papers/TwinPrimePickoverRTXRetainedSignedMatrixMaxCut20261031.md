@@ -55,3 +55,16 @@ holds for linear endomorphisms on a common module (check orientation). Taking a 
 5. Attribute separately the historic Hardy–Littlewood conjecture, original LP/Bony mathematics, original dashiRTX implementation, original DASHI/9999/prime-fibre theorem owners. No ESD edits.
 
 **Status:** quantitative finite probes and algebraic estimate proposals; neither analytic arithmetic estimate nor Pickover terminal certificate is proved. No Agda kernel verification claimed.
+
+
+## Hyperfabric / hypervoxel / p-adic / cubie strengthened Pickover 9999 steelman (31 October)
+
+**Reused actual owners:** `RecursiveRadixHypervoxel` supplies reversible rank/depth suffix refinement; `HypervoxelAdicYoungFibonacciBridge` has typed chart/valuation/parent/braid relation; `TrialecticStageThirteenMarkedC3CubieExact` supplies cubie C3 and reflection; `BalancedTernaryAntipodalOrbitExact` and `BalancedTernaryAntipodal369OrbitHierarchyExact` supply 13 signed antipodal pairs plus one uniquely fixed centre; `JInvariantBishopTrigUnitPhaseExact`, the vendored Bishop library and Pickover PR #1260 supply the *actual* analytic sine and historical phase readout. No extra phase owner or 27-cube reinvention.
+
+**Forward BIDI:** actual exact exponent `N=99^(9999!)` → rigorous complex/unit-circle evolution with full winding and accumulated error history → hypervoxel rank/depth chart `coarseAddress + relativeAddress` with exact `fineAddressIsJoin` → sign-retaining antipodal/cubie/fibre projection with centre as one state → effective certified Bishop terminal `Im phase` interval → a true negative/positive terminal sign. This is a **required proof pipeline**, not an assertion that p-adic residue fixes the real sine sign.
+
+**Backward BIDI:** demanded terminal orientation + certified `0∉[L,U]` → required numerical precision, phase winding, acceptable interval width → minimal query-sufficient hypervoxel/chart and adaptive refinement of its suffix. If sign is unresolved, refine without conflating unresolved with actual zero; neither ternary 27 nor 13 antipodal classes alone supplies the continuous phase margin. Prove every chart restriction/overlap preserves the genuine Bishop imaginary coordinate and certified error.
+
+**Direct RH analogy, nonidentification:** Pickover requires *one* certified nonzero real sine; RH requires *all* zeta zeros on the line, and twin primes require unbounded arithmetic pairs. The common structure is globally consistent signed spectral gluing and quantified error/zero-exclusion. A p-adic cubie orbit count or an analytic-j chart match is not a reduction from either problem to another.
+
+**Additional acceptances**: PH01 exact factorial/exponent representation; PH02 actual Bishop phase, normalization, and exact history; PH03 join/coarsen suffix commutation; PH04 cube antipodal class+retained sign+fixed centre and admissible consumer gluing; PH05 certified complex matrix transport and truncation error with a real scalar norm; PH06 effective winding/angle reduction at huge N; PH07 formally checked interval enclosure `0∉[L,U]` for the true sine, producing its actual sign; PH08 independent interval/proof checker and complexity receipt. Reuse phase and geometry owners first; PH05–PH08 are not discharged by finite geometric BIDI. No ESD edits.
