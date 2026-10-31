@@ -88,3 +88,10 @@ Direct exact integer arithmetic shows `M9*v=0` while tenth-jet A-coordinate `(M1
 **Highest-alpha next cut:** concrete consumer-indexed `NineSheet × Orientation → Ternary27Point` implementation that chooses an explicit third-trit face and proves preservation, followed by gluing of signed SSP Fourier jets with actual overlap and conditioning. In particular, *history is prior state*, not an afterthought to a one-sample quotient. Preserve Ibrahim source ownership and prior Monster-3B provenance. No ESD changes.
 
 All preceding 61 IDs remain in the register; H01–H12 expand the canonical tracked dependency inventory to **73 IDs**. The 73 are **not** 73 unproved theorems; many are reused existing owners. Source inspection does not imply Agda kernel verification.
+
+
+## 31 October concrete H03/H04 oriented-face implementation
+
+Added `DASHI/Moonshine/Base369OrientedNineSheetInto27BidiExact.agda` (commit `98526c8fdb90323d9ada65ceac49d57e39472e6c`) reusing `Triadic.NineSheet`, `Mobius.OrientationPolarity`, `Wheel.kernelToSSP`, `Wheel.sspToKernel` and the original 27-point geometry. The module sends `(a,b,positive/negative)` to cube `(a,b,+/-)`, proves the embedded sheet round trip, orientation determination, image injectivity and disjointness from the neutral z-face. The neutral plane is parametrised by the full nine-sheet; the joined carrier is **18 oriented face points plus nine neutral points**, never 18≅27. This is explicitly a *face* and consumer-transport structure, not proof of global analytic spectral gluing. Source-written Agda; kernel verification pending.
+
+H03/H04 promoted from 'OPEN exact instantiation' to 'SOURCE implementation; kernel-pending'. H06-H08, H10-H12 remain concrete outstanding proofs. Key next max-cut: compare the existing `NineOrbit` five-of-nine quotient with these *retained* oriented faces, preserving the label of gauge-vs-observed orientation; then build a typed map carrying 10-jet **full signed vector** as residual along each sheet. Still no uniform all-prime correlation estimate.
