@@ -1,0 +1,24 @@
+# Cross-repository max-cut: irrational histories, RH left side, prime valuation experiments
+2026-10-31. Provenance and acceptance audit; no ESD modification.
+
+## Irrationals as evolving FRACTRAN/hyperfabric history
+
+Actual owners: `DASHI/Moonshine/QuadraticIrrationalSignedApproximationFibreExact.agda` (finite rational p/q represented as signed prime valuations; algebraic target side determined by quadratic defect, but no new real number is constructed); `DASHI/Moonshine/QuadraticApproximationPrimeCompressionBidiExact.agda` (dictionary plus residual prime tail); `DASHI/Reasoning/TypedHyperfabricPantsGluingBridgeExact.agda` (selected edge/interface matching, not arbitrary stalk equality); `DASHI/Moonshine/JInvariantFibonacciJCoarseFineVoxelBidiExact.agda` (local 27 observer, not whole infinite fibre); `DASHI/Geometry/SSP369Ultrametric.agda` (fixed-depth prefix agreement and ultrametric).
+
+A **defensible steelman** represents an irrational Bishop real by a *compatible infinite family* of rational approximation fibres with an explicit modulus of convergence and uniqueness in the Bishop real setoid. Signed FRACTRAN valuations can encode each rational approximant (including residual primes), and selected/punctured 369–27 voxel/pants charts may glue when matching interfaces and coherence/cocycle proofs exist. One finite FRACTRAN valuation or 27-cube does NOT represent an arbitrary irrational; convergence, compatibility, and actual real equality are further obligations. For pi, use pre-existing `BishopMachinArctanConstructionExact`, `BishopMachinQuarterAngleBranchExact`, and actual `JInvariantBishopTrigUnitPhaseExact`. In particular Machin-real equals trigonometric-pi must be proved before terminal sine semantics.
+
+Pickover's 99^(9999!) can be kept as an exact arithmetic circuit; rational surrogate modular exponentiation alone cannot establish its archimedean sign. Carry winding error, selected gluing seam and explicit Bishop phase-error interval as separate typed objects.
+
+## RH: left vs right vs +/-1/2
+
+Canonical owner `DASHI/Mathematics/NumberTheory/RiemannXiSymmetryExact.agda` proves on rational coordinate geometry conjugation (sigma,tau)->(sigma,-tau), functional involution (sigma,tau)->(1-sigma,-tau), and critical reflection (sigma,tau)->(1-sigma,tau). `DASHI/Analysis/RiemannReflectionOrbitDefectExact.agda` and `DASHI/Mathematics/NumberTheory/RiemannReflectionOrbitDefectExact.agda` retain centred alpha=sigma-1/2 under alpha->-alpha. Thus **negative-side displacement alpha<0 is not a second critical line at sigma=-1/2**. The left-hand side Re(s)<1/2 is a genuine separate half-strip; the reflection map is already formalized. `RiemannBishopPositiveHeightSymmetryCutExact.agda` handles a different symmetry: positive vs negative ordinates t, with a source-specific conjugation proof obligation. The negative real half-plane Re(s)<0 belongs instead to zeta's trivial-zero/analytic-continuation context and is not the same as the nontrivial critical strip. Keep all three signs distinct.
+
+The previously added `RiemannQuasiRHExternalZeroFreeBidiExact.agda` redefines an abstract reflection. Refactor it to import `RiemannXiSymmetryExact.criticalReflection` and attach a genuine analytic nontrivial-zero predicate before asserting the external paper's right/left exclusion. The OpenAI Sept 30 and Oct 5 2026 preprints require separate attribution and proof verification; no same-object identity via C3/SSP numerology.
+
+## Dashifine/dashitest prime valuation experiments
+
+`chboishabba/dashifine/newtest/primes_krr.py`: learned kernel ridge regression prediction of divisibility, p-adic valuation v_p(n), and p^k-divisibility with residue embeddings. `chboishabba/dashitest/docs/valuation_primes_plan.md`: planned full valuation vector, maximum prime power, and ultrametric distance d_p(n,m)=p^{-v_p(n-m)}; quotient-consistent depth losses. Output directories in dashitest contain run summaries/plots. These are observed experimental and planned sources, not a provably exact sieve or twin-prime lower bound.
+
+In DASHI reuse `DASHI/Arithmetic/SixWheelSieveCountExact.agda`, `SixWheelCRTExact.agda`, and `FinitePrimeProductSieveExact.agda` for exact residue/exclusion verification. A sound experimental-to-proof pipeline: candidate proposal by kernel model -> exact CRT/sieve verifier -> exact primality of finite candidates -> genuinely new asymptotic shifted-pair estimate if aiming for infinity. No generalization from finite prediction accuracy to unbounded prime pair positivity.
+
+Attribution: original arithmetic/complex analysis authors own their theorems; external preprint authors own imported estimates; dashifine/dashitest own experimental implementations; DASHI owns independent proof adapters; executed tests and kernel verified proofs are separate statuses. No postulates, no synthetic receipts, no numerical same-object promotion.
