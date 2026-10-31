@@ -151,3 +151,12 @@ Added `DASHI/Core/TwinPickoverHypervoxelAdmissibleJoinExact.agda` (`df1cbbc2880a
 This upgrades existing TH03/TH04 and PH03/PH04 *generic join* ingredients to SOURCE; instantiation for actual Mangoldt two-point and Bishop complex spectral histories, quantitative error propagation, and kernel acceptance remain explicitly OPEN. The earlier `TwinPickoverHistoryHypervoxelTransportExact` only preserved the entire original state definitionally; do not misrepresent that trivial readout as analytic factorisation.
 
 CI/Agda compiler intentionally deferred at user's request; file has not received a kernel receipt. Preserve all downstream terminal requirements and source provenance.
+
+
+## 31 October highest-alpha consumer descent implementation (1c7129e, 5e901f6)
+
+`DASHI/Core/TwinPickoverHypervoxelAdmissibleJoinExact.agda` now defines `FineAddressFactorisation` with *nontrivial domain witness* `consumer h = decodeFine(joinAddress (coarse h) (suffix h))`. From this supplied **actual** factorLaw it constructs `retainedPairSufficient` using congruence over the paired observer, `canonicalResidualRepair` importing the original `ConsumerIndexedResidualRefinementExact.ResidualRepair`, and `retainedSuffixSeparatesConsumerCollision` using the original necessity theorem. Unlike the older `readRetained=readOriginal` tautology, these claims are conditional sound preservation and a genuine collision/separation obligation.
+
+**Pivotal distinction:** `FineAddressFactorisation` is NOT automatically inhabited for either terminal consumer. True Mangoldt pair correlation and Bishop imaginary phase must each provide `factorLaw` and a decoding scalar with correct analytic meaning. A finite bit-address alone cannot encode arbitrary real analytic phase without retained mathematical residual. Next TP/PH implementation cut is to connect canonical actual-history/actual-scalar proof owners with those factorisation witnesses, not assume them.
+
+**Status:** source committed, no holes or new axioms in the new statements; no Agda kernel run (user requested verification later). TH04/PH04 generic necessity/repair laws now source-written. Terminal TP-E, P9-D/E/F and RH zero exclusion remain open.
