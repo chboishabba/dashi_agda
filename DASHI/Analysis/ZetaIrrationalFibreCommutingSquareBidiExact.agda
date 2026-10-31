@@ -69,3 +69,33 @@ finitePrimeCountIsUnchangedByEqualBound :
   (arithmetic : Prime.PrimePredicate) {m n : Nat} →
   m ≡ n → finitePrimeCount arithmetic m ≡ finitePrimeCount arithmetic n
 finitePrimeCountIsUnchangedByEqualBound arithmetic refl = refl
+
+-- A nontrivial exact finite sieve consumer on the staged history:
+-- any two consecutive stages with equal retained readout have equal
+-- *proof-bearing* prime counts, without claiming an analytic limit.
+primeCountStableAcrossOneStep :
+  ∀ {Stage : Nat → Set}
+  {readout : (n : Nat) → Stage n → Nat} →
+  (arithmetic : Prime.PrimePredicate) →
+  (history : CompatibleFibreHistory Stage readout) →
+  (n : Nat) →
+  finitePrimeCount arithmetic (readout n (at history n))
+  ≡ finitePrimeCount arithmetic
+      (readout (n + 1) (at history (n + 1)))
+primeCountStableAcrossOneStep arithmetic history n =
+  cong (finitePrimeCount arithmetic) (coherent history n)
+
+-- Two consecutive coherent charts glue without choosing another prime
+-- counter. The proof composes existing equalities across the seam.
+primeCountStableAcrossTwoSteps :
+  ∀ {Stage : Nat → Set}
+  {readout : (n : Nat) → Stage n → Nat} →
+  (arithmetic : Prime.PrimePredicate) →
+  (history : CompatibleFibreHistory Stage readout) →
+  (n : Nat) →
+  finitePrimeCount arithmetic (readout n (at history n))
+  ≡ finitePrimeCount arithmetic
+      (readout ((n + 1) + 1) (at history ((n + 1) + 1)))
+primeCountStableAcrossTwoSteps arithmetic history n =
+  trans (primeCountStableAcrossOneStep arithmetic history n)
+        (primeCountStableAcrossOneStep arithmetic history (n + 1))
