@@ -733,3 +733,78 @@ wholeCircuitPlacedCNFComplete circuit bits
 -- equivalence with evaluateProgram on the finite original input vector,
 -- which is needed to reuse finiteSupportedTseitinCountExact on THIS CNF.
 -- All declarations in this cut are source-written, Agda kernel pending.
+
+
+------------------------------------------------------------------------
+-- REUSE-ONLY DAG REIFICATION CUT: each existing placed Boolean gate
+-- constraint forces the ACTUAL original gate output, at the original
+-- creation-time index. This is the local elimination needed before the
+-- full newest-first GateProgram induction. No new SAT carrier.
+------------------------------------------------------------------------
+
+eqBoolTrueImpliesEqual :
+  (left right : Bool) →
+  eqBool left right ≡ true → left ≡ right
+eqBoolTrueImpliesEqual false false accepted = refl
+eqBoolTrueImpliesEqual false true ()
+eqBoolTrueImpliesEqual true false ()
+eqBoolTrueImpliesEqual true true accepted = refl
+
+-- Three-bit window uses output, left operand, right operand in that order.
+-- Constants and NOT ignore unused dummy inputs in the existing window.
+localGateExpectedOutput :
+  ∀ {inputs gates : Nat} →
+  Circuit.Gate inputs gates → GateWindow → Bool
+localGateExpectedOutput (Circuit.constantGate value) bits = value
+localGateExpectedOutput (Circuit.notGate source) bits =
+  Cook.notBool (CNF.lookupBit bits (Fin.suc Fin.zero))
+localGateExpectedOutput (Circuit.andGate left right) bits =
+  Cook.andBool
+    (CNF.lookupBit bits (Fin.suc Fin.zero))
+    (CNF.lookupBit bits (Fin.suc (Fin.suc Fin.zero)))
+localGateExpectedOutput (Circuit.orGate left right) bits =
+  Cook.orBool
+    (CNF.lookupBit bits (Fin.suc Fin.zero))
+    (CNF.lookupBit bits (Fin.suc (Fin.suc Fin.zero)))
+
+localGateOutputForced :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates)
+    (bits : GateWindow) →
+  localGateConsistent gate bits ≡ true →
+  CNF.lookupBit bits Fin.zero ≡ localGateExpectedOutput gate bits
+localGateOutputForced (Circuit.constantGate value) bits accepted =
+  eqBoolTrueImpliesEqual _ _ accepted
+localGateOutputForced (Circuit.notGate source) bits accepted =
+  eqBoolTrueImpliesEqual _ _ accepted
+localGateOutputForced (Circuit.andGate left right) bits accepted =
+  eqBoolTrueImpliesEqual _ _ accepted
+localGateOutputForced (Circuit.orGate left right) bits accepted =
+  eqBoolTrueImpliesEqual _ _ accepted
+
+-- Original placement sends local slot zero to the fresh gate output.
+-- This theorem does not assume that the remaining global gate bits are
+-- consistent; the program-induction must supply those from earlier gates.
+placedGateOutputForced :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates)
+    (globalBits : CNF.Bits (inputs + suc gates)) →
+  localGateConsistent gate
+    (Rename.pullbackBits (gateWindowRename gate) globalBits) ≡ true →
+  CNF.lookupBit globalBits newOutputFin ≡
+    localGateExpectedOutput gate
+      (Rename.pullbackBits (gateWindowRename gate) globalBits)
+placedGateOutputForced gate globalBits accepted =
+  trans
+    (sym
+      (Rename.pullbackLookup
+        (gateWindowRename gate) globalBits Fin.zero))
+    (localGateOutputForced gate
+      (Rename.pullbackBits (gateWindowRename gate) globalBits)
+      accepted)
+
+-- Separate, unpaid global leaf: relate every prior gate operand in the
+-- pulled-back window to Circuit.evaluateWire on the original
+-- newest-first evaluateProgram vector; combine with
+-- ProgramPlacedGatesValid, inputVectorFromGlobal, and source #SAT count.
+-- SOURCE-WRITTEN ONLY; Agda kernel has not accepted this file.
