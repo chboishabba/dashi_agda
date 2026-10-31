@@ -37,6 +37,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalWindowPlacementExact as
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact as Slice
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as VectorOwner
 import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinGateCNFExact as Original
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedCompilerExact as Compiler
+import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 
 -- A model has precisely n+g bits, not an unrestricted Nat -> Bool tail.
 -- Each auxiliary gate bit is REQUIRED to equal concrete DAG evaluation.
@@ -591,3 +593,111 @@ finiteCNFCookNewestGateExact gate bits =
 -- to prove that the older finite assignment prefix agrees with the
 -- original entire Cook assignment on all previously used coordinates.
 -- No global #SAT promotion until that statement is paid.
+
+
+------------------------------------------------------------------------
+-- REUSE the original #1040 ProgramAssignmentRealizes invariant to pay
+-- actual gate semantics. The placed CNF has the SAME numeric variables.
+------------------------------------------------------------------------
+
+finiteCNFCookWireValueFromRealization :
+  ∀ {inputs gates : Nat}
+    {previous : Circuit.GateProgram inputs gates}
+    (bits : CNF.Bits (inputs + suc gates))
+    (prior : Existing.ProgramAssignmentRealizes previous
+      (finiteCNFToCookAssignment bits))
+    (source : Circuit.WireRef inputs gates) →
+  CNF.lookupBit bits (Original.wireFin source)
+    ≡ Circuit.evaluateWire source
+      (Existing.inputValues prior)
+      (Circuit.evaluateProgram previous (Existing.inputValues prior))
+finiteCNFCookWireValueFromRealization bits prior source =
+  trans
+    (sym (finiteCNFCookPriorWireExact source bits))
+    (Existing.wireFormulaCorrect prior source)
+
+-- The finite global CNF's operands have exactly the original source
+-- wire values when the previous program's semantics are realized.
+finiteCNFWindowWireValue :
+  ∀ {inputs gates : Nat}
+    {previous : Circuit.GateProgram inputs gates}
+    (gate : Circuit.Gate inputs gates)
+    (bits : CNF.Bits (inputs + suc gates))
+    (prior : Existing.ProgramAssignmentRealizes previous
+      (finiteCNFToCookAssignment bits))
+    (source : Circuit.WireRef inputs gates)
+    (index : Fin Original.three)
+    (sourceAtIndex :
+      Original.gateWindowRename gate index ≡ Original.wireFin source) →
+  CNF.lookupBit
+      (Rename.pullbackBits (Original.gateWindowRename gate) bits)
+      index
+    ≡ Circuit.evaluateWire source
+      (Existing.inputValues prior)
+      (Circuit.evaluateProgram previous (Existing.inputValues prior))
+finiteCNFWindowWireValue gate bits prior source index sourceAtIndex =
+  trans
+    (Rename.pullbackLookup
+      (Original.gateWindowRename gate) bits index)
+    (trans
+      (cong (CNF.lookupBit bits) sourceAtIndex)
+      (finiteCNFCookWireValueFromRealization bits prior source))
+
+-- This is the exact structural gate-induction *step* on an existing
+-- realization: new finite-CNF fresh output must equal original evaluateGate.
+finiteCNFPlacedGateOriginalStep :
+  ∀ {inputs gates : Nat}
+    {previous : Circuit.GateProgram inputs gates}
+    (gate : Circuit.Gate inputs gates)
+    (bits : CNF.Bits (inputs + suc gates))
+    (prior : Existing.ProgramAssignmentRealizes previous
+      (finiteCNFToCookAssignment bits)) →
+  Original.localGateConsistent gate
+    (Rename.pullbackBits (Original.gateWindowRename gate) bits) ≡ true →
+  finiteCNFToCookAssignment bits (inputs + gates)
+    ≡ Circuit.evaluateGate gate
+      (Existing.inputValues prior)
+      (Circuit.evaluateProgram previous (Existing.inputValues prior))
+finiteCNFPlacedGateOriginalStep (Circuit.constantGate value) bits prior valid =
+  trans
+    (finiteCNFCookNewestGateExact (Circuit.constantGate value) bits)
+    (Original.placedGateOutputForced (Circuit.constantGate value) bits valid)
+finiteCNFPlacedGateOriginalStep (Circuit.notGate source) bits prior valid =
+  trans
+    (trans
+      (finiteCNFCookNewestGateExact (Circuit.notGate source) bits)
+      (Original.placedGateOutputForced (Circuit.notGate source) bits valid))
+    (cong Cook.notBool
+      (finiteCNFWindowWireValue
+        (Circuit.notGate source) bits prior source
+        (fsuc fzero) refl))
+finiteCNFPlacedGateOriginalStep (Circuit.andGate left right) bits prior valid =
+  trans
+    (trans
+      (finiteCNFCookNewestGateExact (Circuit.andGate left right) bits)
+      (Original.placedGateOutputForced (Circuit.andGate left right) bits valid))
+    (cong₂ Cook.andBool
+      (finiteCNFWindowWireValue
+        (Circuit.andGate left right) bits prior left
+        (fsuc fzero) refl)
+      (finiteCNFWindowWireValue
+        (Circuit.andGate left right) bits prior right
+        (fsuc (fsuc fzero)) refl))
+finiteCNFPlacedGateOriginalStep (Circuit.orGate left right) bits prior valid =
+  trans
+    (trans
+      (finiteCNFCookNewestGateExact (Circuit.orGate left right) bits)
+      (Original.placedGateOutputForced (Circuit.orGate left right) bits valid))
+    (cong₂ Cook.orBool
+      (finiteCNFWindowWireValue
+        (Circuit.orGate left right) bits prior left
+        (fsuc fzero) refl)
+      (finiteCNFWindowWireValue
+        (Circuit.orGate left right) bits prior right
+        (fsuc (fsuc fzero)) refl))
+
+-- The imported original #1040 owner already proves both directions
+-- once ProgramAssignmentRealizes is available. Remaining unpaid
+-- induction glue: extend the prior realization from the old pulled-back
+-- finite CNF to the new global assignment while preserving input and all
+-- previously used gate values. Do not claim P1/P2 closed until then.
