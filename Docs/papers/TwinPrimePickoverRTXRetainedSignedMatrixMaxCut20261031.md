@@ -68,3 +68,49 @@ holds for linear endomorphisms on a common module (check orientation). Taking a 
 **Direct RH analogy, nonidentification:** Pickover requires *one* certified nonzero real sine; RH requires *all* zeta zeros on the line, and twin primes require unbounded arithmetic pairs. The common structure is globally consistent signed spectral gluing and quantified error/zero-exclusion. A p-adic cubie orbit count or an analytic-j chart match is not a reduction from either problem to another.
 
 **Additional acceptances**: PH01 exact factorial/exponent representation; PH02 actual Bishop phase, normalization, and exact history; PH03 join/coarsen suffix commutation; PH04 cube antipodal class+retained sign+fixed centre and admissible consumer gluing; PH05 certified complex matrix transport and truncation error with a real scalar norm; PH06 effective winding/angle reduction at huge N; PH07 formally checked interval enclosure `0∉[L,U]` for the true sine, producing its actual sign; PH08 independent interval/proof checker and complexity receipt. Reuse phase and geometry owners first; PH05–PH08 are not discharged by finite geometric BIDI. No ESD edits.
+
+
+## Complete executable-facing formalism — Pickover 9999 steelman v3
+
+### 0. Actual input and retained original phase history
+
+`m=9999!`, `N=99^m` as a mathematical natural number, and `z=exp(iN)=cos N+i sin N` in the genuine Bishop complex analytic carrier. Original state `H` retains the complete exponentiation lineage, CRT/p-adic residue information when relevant, signed/winding phase, interval error and chosen exact hypervoxel refinement suffix. The terminal query is `Sign(Im z)`, not a finite trit count.
+
+### 1. Exact producer and transport identities
+
+`phase(0)=1`, `phase(a+b)=phase(a)*phase(b)`, `phase(a*b)=phase(a)^b` for integer input, after proving the corresponding Bishop exponential laws on the actual analytic scalar. Exponentiation by squaring and factorial recursion produce a compact *algorithmic description* of `N`; they do not make the huge-bit integer inexpensive to materialise.
+
+Reuse `RecursiveRadixHypervoxel`: `fine=joinAddress coarse suffix`; exact coarsening/relative refinement witnesses. Use the actual `BalancedTernaryAntipodalOrbitExact` action and 13 signed paired orbits + unique fixed centre. The 9→18→27 z-face map is a distinct chart. A phase may cross a trit boundary on refinement; only the original complex phase plus residual controls whether sign survives transport.
+
+### 2. Quantitative forward error certificate
+
+For complex approximate transfer `T_j`, exact `U_j`, use telescoping:
+`U_m...U_1 - T_m...T_1 = sum_{j=1}^m T_m...T_{j+1} (U_j-T_j) U_{j-1}...U_1`
+(with empty products identity). Supply actual submultiplicative operator norms and propagated interval roundoff for all factors, including phase-reduction and exponentiation steps. The final complex interval/enclosure `Z` must contain the **actual Bishop** `exp(iN)`, with `Im Z⊂(0,infty)` or `Im Z⊂(-infty,0)`. Distinguish exact sine zero (provably impossible for positive integer N, via π transcendence) from an unresolved interval crossing zero.
+
+### 3. Canonical hypervoxel/adic/cubie certificate
+
+The supplied p-adic chart carries digit, valuation, parent and residue, while complex sine uses archimedean real phase. A formal bridge requires a **specified compatible map**; p-adic congruence by itself does not determine `N mod 2π`. The canonical cube quotient `27=1+13*2` is a **discrete observer**, not an assumption that there are 13 analytic phase classes. Signed history can be stored through that observer only if `FactorsThrough` is proved for the terminal imaginary-coordinate consumer or an explicit residual is added.
+
+Admissible joining must have exact agreement of signed complex local sections, phase/winding consistency, cocycle and propagated certified error. Use existing `JInvariantAnalyticHyperformChartGluingExact`, `JInvariantSheafHyperformAdmissibleDescentExact` and Bishop sine rather than claiming similarity of numbers proves same-object identity.
+
+### 4. BIDI directions
+
+Forward `N + original exponentiation/winding history -> recursively refined hypervoxel/adic charts -> glued unit-complex transfer -> exact actual Bishop Im -> rigorous enclosure -> sign`.
+
+Backward `required terminal signed separation -> acceptable enclosure radius and norm budget -> necessary phase reduction precision and historical winding -> refinement depth + jet order + residual suffix -> exact producer H`.
+
+An effective irrationality estimate for π could bound proximity to `kπ`, but usefulness requires explicit constants and algorithmic cost. A proof that `sin N ≠0` without a computable enclosure does **not** provide the sign.
+
+### 5. Final concrete lemmas
+
+- P9-A: kernel-check shared original-history hypervoxel BIDI, antipodal sign+fixed-centre and true Bishop carrier imports.
+- P9-B: prove actual Bishop complex exponential semigroup/power identities for the chosen construction.
+- P9-C: certified recursive exponentiation with submultiplicative complex error propagation.
+- P9-D: explicit phase winding/argument-reduction of the specific `N=99^(9999!)`.
+- P9-E: rigorous explicit interval enclosure for `Im exp(iN)` that **excludes 0** (terminal sign theorem).
+- P9-F: independent proof-producing/checkable finite certificate and error/complexity receipt.
+- P9-G: backwards fibre sufficiency and minimal adequate jet/refinement depth for the *actual* sign query.
+- P9-H: verify only after proof any proposed connection between the zeta-zero spectral chart and this finite sine phase; analogy is not a theorem.
+
+The exact history and refinement modules are implemented as source; P9-D/E/F are actual mathematical/computational deliverables, not free interface fields.
