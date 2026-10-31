@@ -100,3 +100,29 @@ producerConsumerRoundtrip = restoreOrientedHistory
 
 -- No Boolean "good"/"evil" polarity, no Co_0 lattice action, and no
 -- measured compression ratio are introduced by this finite theorem.
+
+------------------------------------------------------------------------
+-- COMMUTING SQUARE: inverse chart followed by expert transport agrees
+-- with running the conjugate expert and inverting the result.
+-- The "sign" acts on BOTH activation and historical state.
+--
+--             I
+--       z ------------> I z
+--       |                 |
+--       F                 conjugate F inverse
+--       |                 |
+--       v                 v
+--      F z -----------> I (F z)
+--             I
+------------------------------------------------------------------------
+
+conjugateIntertwinesInverse :
+  (F : HistoryState → HistoryState) (state : HistoryState) →
+  conjugate F inverse (invertHistory state)
+  ≡ invertHistory (F state)
+conjugateIntertwinesInverse F state
+  rewrite invertHistoryInvolutive state = refl
+
+-- The same theorem applies to every transition, including the function
+-- that outputs the next history state. It is not a theorem about Leech
+-- weights, complex zeta zeros, or the floating GELU implementation.
