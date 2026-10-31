@@ -207,6 +207,56 @@ def check_placed_gate_index_semantics():
                     checked += 1
     print(f"PASS: {checked} finite-index placed-gate cases")
 
+
+def check_local_gate_clause_optimality():
+    """Exact 3-bit no-new-variable CNF clause lower bounds, not a kernel proof.
+
+    Enumerates all 3^3-1 = 26 nonempty, non-tautological clauses and uses
+    minimum-cover breadth-first search on the eight Boolean truth rows.
+    No general claim about global circuits, auxiliary variables or bit length.
+    """
+    from collections import deque
+    rows = tuple(product((False, True), repeat=3))
+    choices = tuple(
+        tuple((i, p) for i, p in enumerate(pattern) if p is not None)
+        for pattern in product((None, False, True), repeat=3)
+        if any(p is not None for p in pattern)
+    )
+    assert len(choices) == 26
+    def falsemask(clause):
+        return sum(1 << j for j, row in enumerate(rows)
+                   if not any(row[i] == polarity for i, polarity in clause))
+    def truth(kind, row):
+        out, left, right = row
+        target = {
+            "const0": False, "const1": True,
+            "not": not left, "and": left and right,
+            "or": left or right
+        }[kind]
+        return out == target
+    mins = {}
+    for kind in ("const0", "const1", "not", "and", "or"):
+        rejected = sum(1 << j for j, row in enumerate(rows)
+                       if not truth(kind, row))
+        allowed = [falsemask(clause) for clause in choices
+                   if falsemask(clause) and
+                   (falsemask(clause) & ~rejected) == 0]
+        covered = {0: 0}
+        frontier = deque([0])
+        while frontier:
+            current = frontier.popleft()
+            for mask in allowed:
+                next_mask = current | mask
+                if next_mask not in covered:
+                    covered[next_mask] = covered[current] + 1
+                    frontier.append(next_mask)
+        assert rejected in covered
+        mins[kind] = covered[rejected]
+    assert mins == {"const0": 1, "const1": 1,
+                    "not": 2, "and": 3, "or": 3}
+    print("PASS: exact local clause minima for 5 gates / 26 candidate clauses")
+
+
 def main():
     tests = 0
     for n in (1, 2):
@@ -245,6 +295,7 @@ def main():
     # The unused Nat->Bool tail is not determined by the circuit.
     assert 2 * count_both(1, gates, ("g", 0)) == 4
     check_local_three_bit_gate_cnf()
+    check_local_gate_clause_optimality()
     check_placed_gate_index_semantics()
     print(f"PASS: {tests} exhaustive DAG/output cases: 4g+1 vs optional 1/2/3-gate CNF, identical semantics and counts")
     print("PASS: one-way-gate and unconstrained-tail counterexamples")
