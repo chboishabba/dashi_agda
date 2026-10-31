@@ -1437,3 +1437,81 @@ usedOriginalAssignmentsAgree
       (FinP.join-splitAt inputs gates index))
     (originalRealizationsAgreeAtGate
       leftRealization rightRealization sameInput gateIndex)
+
+
+------------------------------------------------------------------------
+-- EVERY SAT MODEL OF THE ACTUAL ORIGINAL COMPILED CNF IS EXACTLY THE
+-- CANONICAL BIT VECTOR OF ITS EXTRACTED INPUTS. This is the strong
+-- global UNIQUE-EXTENSION theorem, not just existential SAT equivalence.
+-- Uses the old Q1/ConcreteTape bits extensionality and original #1040
+-- realization fields. Does not require a second reverse-vector ontology.
+------------------------------------------------------------------------
+
+originalPlacedCNFModelCanonical :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (bits : CNF.Bits (inputs + Circuit.gateCount circuit)) →
+  CNF.evaluateCNF (Original.circuitPlacedCNF circuit) bits ≡ true →
+  bits ≡ canonicalOriginalProgramBits
+    (Circuit.program circuit) (inputVectorFromGlobal bits)
+originalPlacedCNFModelCanonical circuit bits accepted =
+  Placement.bitsExt
+    (λ index →
+      trans
+        (sym (finiteCNFToCookLookup bits index))
+        (trans
+          (usedOriginalAssignmentsAgree
+            realization canonicalRealization inputAgreement index)
+          (finiteCNFToCookLookup canonicalBits index)))
+  where
+    values = inputVectorFromGlobal bits
+    canonicalBits =
+      canonicalOriginalProgramBits (Circuit.program circuit) values
+    meaning = Original.wholeCircuitPlacedCNFSound circuit bits accepted
+    realization = globalPlacedProgramGivesOriginalRealization
+      (Circuit.program circuit) bits
+      (Original.WholeCircuitPlacedMeaning.gateRelations meaning)
+    canonicalRealization =
+      canonicalOriginalProgramFiniteRealization
+        (Circuit.program circuit) values
+    inputAgreement =
+      realizationInputsAreGlobalPrefix bits realization
+
+canonicalOriginalProgramInputRoundTrip :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (values : Vec Bool inputs) →
+  inputVectorFromGlobal (canonicalOriginalProgramBits program values)
+    ≡ values
+canonicalOriginalProgramInputRoundTrip program values =
+  VectorOwner.vecExtensionality
+    (inputVectorFromGlobal canonicalBits) values
+    (λ index →
+      trans
+        (sym (finiteCNFCookInputAtSourceNumber canonicalBits index))
+        (Existing.inputVariablesCorrect realization index))
+  where
+    canonicalBits = canonicalOriginalProgramBits program values
+    realization = canonicalOriginalProgramFiniteRealization program values
+
+originalPlacedCNFModelsUniqueForInputs :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (left right : CNF.Bits
+      (inputs + Circuit.gateCount circuit)) →
+  CNF.evaluateCNF (Original.circuitPlacedCNF circuit) left ≡ true →
+  CNF.evaluateCNF (Original.circuitPlacedCNF circuit) right ≡ true →
+  inputVectorFromGlobal left ≡ inputVectorFromGlobal right →
+  left ≡ right
+originalPlacedCNFModelsUniqueForInputs
+    circuit left right leftAccepted rightAccepted sameInputs =
+  trans
+    (originalPlacedCNFModelCanonical circuit left leftAccepted)
+    (trans
+      (cong (canonicalOriginalProgramBits (Circuit.program circuit))
+        sameInputs)
+      (sym (originalPlacedCNFModelCanonical circuit right rightAccepted)))
+
+-- Genuine source-written injective/surjective finite canonical model
+-- transport. The N A T model-count equality remains a separate numeric
+-- finite-sum theorem and cannot be claimed from this term alone.
