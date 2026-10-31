@@ -125,3 +125,10 @@ monitor surface.
 - Extended `TwinPrimeStrongWeakMaxCutBidiExact` with two-way cofinal finite-window/count-jump adapters; all three canonical TOE roots import it. No new primality decision procedure or arithmetic axiom.
 - Reconciled T13/M16 (semantic equivalence source-written) against CT15/T10 (still open unbounded prime-specific correlation) in the six-direction and exact remaining-lemma roadmaps and TODO. Recorded the prior sharper `E(X)=O(√X log²X)` classical mathematical envelope, which still needs ordered-real Agda transport.
 - **Evidence:** GitHub source written and readback, **no Agda kernel verification, no CI, no terminal analytic solution claimed**. Original Brun/Hardy–Littlewood, earlier DASHI authors and Ibrahim Monster 3B priority retained; ESD untouched.
+
+## 2026-10-31 — K04 Bishop root reuse, arbitrary finite-time fibre closure and syntax repair
+
+- Inspected genuine `BishopMachinArctanConstructionExact` and `BishopRound11MachinSetoidComplexInstanceExact`: both arctangent series already converge on a genuine Bishop real, and `bishopMachinPi` already exists. Also inspected original tangent, π branch/window and Lean semantic receipt. Corrected K04 roadmap not to rebuild the original real.
+- Added `stageIndexAfter`, `readoutStableAcrossFiniteSteps`, `consumerStableAcrossFiniteSteps`, `primeCountStableAcrossFiniteSteps` in the original zeta/fibre square; they compose the supplied retained-Nat equality over any finite number of stages. This is finite consumer agreement only, no analytic `ζ` convergence.
+- Fixed malformed constructor type syntax in `QuadraticIrrationalSignedApproximationFibreExact` for sqrt(3)/2 and golden-ratio defects, preserving the original 3-direction classification.
+- Updated K04a–d / K05 exact outstanding mathematical/source/kernel gates. **Source-written only; no Agda compiler, no CI, no external Lean proof promotion.** ESD unchanged; source authorship retained.
