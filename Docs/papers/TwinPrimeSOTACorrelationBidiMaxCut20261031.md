@@ -76,3 +76,27 @@ Backward obligations: actual weight nonnegativity and prime-one positivity; exha
 - `300,000: (155,393317.3863,391321.3631,1996.0232,1.30440,1.31106)`
 
 These finite observations are consistent with the Hardy–Littlewood prediction but do not prove either max-cut. This doc and its related Agda module are source-written; no Agda executable was available in this tool session, so they are **not kernel-verified**. No ESD surface changed.
+
+## 31 Oct max-cut continuation and executable check
+
+**Two attempted cuts:**
+- **Strong**: prove a positive linear lower bound on the true classical Mangoldt total, or at least a positive limsup after scaling by X. The already derived `E=o(X)` would then yield a positive linear prime-only subsequence. Neither lower bound follows from available finite sieves or the public bounded-gap formalisation.
+- **Weak**: prove unbounded real `P(X)=S(X)-E(X)`; by strictly positive prime-one logarithmic weights, this is equivalent to twin-prime infinitude. An abstract cofinal finite-window witness is constructively bidirectional with `TwinPrimesInfinitelyOften`, and is source-written in `TwinPrimeStrongWeakMaxCutBidiExact.agda`. This is an equivalence, not a solution of its premise.
+
+**Verified independently in local Python this turn:** `scripts/check_twin_prime_strong_weak_maxcut.py` computes distinct actual proper prime powers, actual Mangoldt correlation, prime-only contribution, and all remaining support contributions. It checks numerical splitting and the overcounted proper-power support bound. Output columns `N, twin-count, proper-prime-powers, S/N, P/N, E/N`:
+
+```text
+100 8 10 1.128880 0.799745 0.329135
+1000 35 25 1.135463 1.028369 0.107094
+10000 205 51 1.330292 1.295059 0.035234
+100000 1224 108 1.315229 1.302244 0.012985
+300000 2994 155 1.311058 1.304405 0.006653
+```
+
+Logarithms are Python floating-point, so the numerical test is not an interval-certified real proof. The exact count of 1224 twins in the evaluated range `n+2 <= 100000` is subject to that endpoint convention (earlier scripts with a different start range can differ). 
+
+**New source-written owner:** `DASHI/Arithmetic/TwinPrimeStrongWeakMaxCutBidiExact.agda`, with a helper-based lower-bound transitivity readout; Agda compiler was not available in the container, therefore it has **not** been kernel-checked. It imports the established certified Nat twin and finite interval owners and does not change protected ESD paths.
+
+**Source verification:** Public [Axiom Math PrimeGapsLib](https://primegaps.axiommath.ai/paper/) explicitly takes Bombieri–Vinogradov as an analytic input for H1<=246. [OpenAI PrimeGaps186](https://github.com/openai/PrimeGaps186) explicitly assumes three inputs: rank-three hyper-Kloosterman bound, rank-two Kloosterman correlation bound, and a collection of physical-integral/cap numerical bounds. Its conditional Lean theorem is not gap 2. No existing source proves the needed unconditional prime-only correlation lower bound.
+
+**Max-cut decision:** further manipulation of the exact finite `S=P+E` identity or bounded-gap hypotheses alone does not yield a positive contribution. A new theorem must establish either positive actual prime-one correlation on an unbounded sequence or its dyadic nonvanishing, without smuggling prime ownership/density into an axiom.
