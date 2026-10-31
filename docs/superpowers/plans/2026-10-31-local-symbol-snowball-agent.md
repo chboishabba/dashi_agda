@@ -1,6 +1,6 @@
 # Local-agent symbol snowball — Agda Golden first, Lean downstream
 
-Date: 31 October 2026. Authority: the EXISTING tools/agda_preflight repository-intelligence product and its dashi-repo command. The current exact proof/analytic register has **39 obligations** in [the original roadmap](2026-10-31-openai-math-exact-lemma-maxcut-ledger.md). Machine-readable search [175 terms across 13 ranked lanes](2026-10-31-local-symbol-snowball-terms.json). The driver is [scripts/run_openai_math_symbol_snowball.py](../../../../scripts/run_openai_math_symbol_snowball.py). This does not introduce a second repository index or database.
+Date: 31 October 2026. Authority: the EXISTING tools/agda_preflight repository-intelligence product and its dashi-repo command. The current exact proof/analytic register has **39 obligations** in [the original roadmap](2026-10-31-openai-math-exact-lemma-maxcut-ledger.md). Machine-readable search [175 terms across 13 ranked lanes](2026-10-31-local-symbol-snowball-terms.json). The driver is [scripts/run_openai_math_symbol_snowball.py](../../../scripts/run_openai_math_symbol_snowball.py). This does not introduce a second repository index or database.
 
 ## Workstation commands
 
