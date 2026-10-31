@@ -400,3 +400,95 @@ optCircuitCountEqualsOriginal circuit =
 -- NOT yet the stronger equation with original accepted Circuit input count;
 -- that demands original finite-gate-value normalization, and any cross-
 -- language Finset conversion needs separate semantics + cardinality proof.
+
+
+------------------------------------------------------------------------
+-- FORMAL NORMALIZATION GENERATORS FOR FUTURE AGDA-LIST -> LEAN-FINSET
+-- TRANSPORT. All are proved on the ORIGINAL CNF Boolean semantics:
+-- duplicate elimination, adjacent permutations, tautological clauses.
+-- They do not yet construct or import Lean's Finset quotient.
+------------------------------------------------------------------------
+
+cnfOrSwap : (a b c : Bool) →
+  CNF.orBool a (CNF.orBool b c) ≡
+    CNF.orBool b (CNF.orBool a c)
+cnfOrSwap false false c = refl
+cnfOrSwap false true c = refl
+cnfOrSwap true false c = refl
+cnfOrSwap true true c = refl
+
+cnfAndSwap : (a b c : Bool) →
+  CNF.andBool a (CNF.andBool b c) ≡
+    CNF.andBool b (CNF.andBool a c)
+cnfAndSwap false false c = refl
+cnfAndSwap false true c = refl
+cnfAndSwap true false c = refl
+cnfAndSwap true true c = refl
+
+duplicateLiteralPreserves :
+  ∀ {n : Nat}
+    (literal : CNF.Literal n)
+    (tail : CNF.Clause n)
+    (bits : CNF.Bits n) →
+  CNF.evaluateClause (literal ∷ literal ∷ tail) bits ≡
+    CNF.evaluateClause (literal ∷ tail) bits
+duplicateLiteralPreserves literal tail bits
+  with CNF.evaluateLiteral literal bits
+... | false = refl
+... | true = refl
+
+duplicateClausePreserves :
+  ∀ {n : Nat}
+    (clause : CNF.Clause n)
+    (tail : CNF.CNF n)
+    (bits : CNF.Bits n) →
+  CNF.evaluateCNF (clause ∷ clause ∷ tail) bits ≡
+    CNF.evaluateCNF (clause ∷ tail) bits
+duplicateClausePreserves clause tail bits
+  with CNF.evaluateClause clause bits
+... | false = refl
+... | true = refl
+
+swapAdjacentLiteralsPreserves :
+  ∀ {n : Nat}
+    (left right : CNF.Literal n)
+    (tail : CNF.Clause n)
+    (bits : CNF.Bits n) →
+  CNF.evaluateClause (left ∷ right ∷ tail) bits ≡
+    CNF.evaluateClause (right ∷ left ∷ tail) bits
+swapAdjacentLiteralsPreserves left right tail bits =
+  cnfOrSwap
+    (CNF.evaluateLiteral left bits)
+    (CNF.evaluateLiteral right bits)
+    (CNF.evaluateClause tail bits)
+
+swapAdjacentClausesPreserves :
+  ∀ {n : Nat}
+    (left right : CNF.Clause n)
+    (tail : CNF.CNF n)
+    (bits : CNF.Bits n) →
+  CNF.evaluateCNF (left ∷ right ∷ tail) bits ≡
+    CNF.evaluateCNF (right ∷ left ∷ tail) bits
+swapAdjacentClausesPreserves left right tail bits =
+  cnfAndSwap
+    (CNF.evaluateClause left bits)
+    (CNF.evaluateClause right bits)
+    (CNF.evaluateCNF tail bits)
+
+tautologicalClauseTrue :
+  ∀ {n : Nat}
+    (variable : Fin.Fin n)
+    (tail : CNF.Clause n)
+    (bits : CNF.Bits n) →
+  CNF.evaluateClause
+    (CNF.positive variable ∷ CNF.negative variable ∷ tail)
+    bits ≡ true
+tautologicalClauseTrue variable tail bits
+  with CNF.lookupBit bits variable
+... | false = refl
+... | true = refl
+
+-- These six source-level lemmas show CNF semantics is invariant under
+-- the elementary equality generators of finite literal/clause SETS.
+-- Full Agda->Lean Finset normalization (especially finite cardinal bounds,
+-- compiler/machine costs, and kernel receipt) remains explicitly unpaid.
