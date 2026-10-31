@@ -1678,3 +1678,199 @@ originalCompiledCNFModelCount circuit =
 -- Source CNF model counts are now literally computed Nats.
 -- Still need the per-fixed-input one/no-gate-extension theorem to
 -- apply sumOriginalFiniteCNFBitsUnique and the Fubini count identity.
+
+
+------------------------------------------------------------------------
+-- P2: FIBREWISE NUMERIC #SAT TRANSPORT FOR THE ACTUAL WHOLE-SOURCE CNF.
+-- Reuse the proved canonical model and exact model uniqueness; the gate
+-- suffix, which is chronological, is obtained from the canonical ORIGINAL
+-- assignment instead of recreating a reversed evaluator.
+------------------------------------------------------------------------
+
+inputFromOriginalBitAppend :
+  ∀ {inputs gates : Nat}
+    (inputBits : CNF.Bits inputs)
+    (gateBits : CNF.Bits gates) →
+  inputVectorFromGlobal (Canonical.appendBits inputBits gateBits)
+    ≡ bitsToFiniteVec inputBits
+inputFromOriginalBitAppend inputBits gateBits =
+  cong bitsToFiniteVec (Canonical.takeAppendBits inputBits gateBits)
+
+canonicalOriginalCNFPrefixEquals :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (inputBits : CNF.Bits inputs) →
+  Canonical.takeBits inputs
+    (canonicalOriginalProgramBits program
+      (bitsToFiniteVec inputBits))
+    ≡ inputBits
+canonicalOriginalCNFPrefixEquals program inputBits =
+  trans
+    (sym (bitsVecRoundTrip
+      (Canonical.takeBits _
+        (canonicalOriginalProgramBits program
+          (bitsToFiniteVec inputBits)))))
+    (trans
+      (cong finiteVecToBits
+        (canonicalOriginalProgramInputRoundTrip
+          program (bitsToFiniteVec inputBits)))
+      (bitsVecRoundTrip inputBits))
+
+canonicalOriginalCNFReassemble :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (inputBits : CNF.Bits inputs) →
+  Canonical.appendBits inputBits
+    (Canonical.dropBits inputs
+      (canonicalOriginalProgramBits program
+        (bitsToFiniteVec inputBits)))
+    ≡ canonicalOriginalProgramBits program
+      (bitsToFiniteVec inputBits)
+canonicalOriginalCNFReassemble program inputBits =
+  trans
+    (cong₂ Canonical.appendBits
+      (sym (canonicalOriginalCNFPrefixEquals program inputBits))
+      refl)
+    (reassembleTakeDrop
+      (canonicalOriginalProgramBits program
+        (bitsToFiniteVec inputBits)))
+
+originalCNFGateFibreCanonical :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (inputBits : CNF.Bits inputs)
+    (gateBits : CNF.Bits (Circuit.gateCount circuit)) →
+  CNF.evaluateCNF (Original.circuitPlacedCNF circuit)
+    (Canonical.appendBits inputBits gateBits) ≡ true →
+  gateBits ≡
+    Canonical.dropBits inputs
+      (canonicalOriginalProgramBits (Circuit.program circuit)
+        (bitsToFiniteVec inputBits))
+originalCNFGateFibreCanonical circuit inputBits gateBits accepted =
+  trans
+    (sym (Canonical.dropAppendBits inputBits gateBits))
+    (cong (Canonical.dropBits _)
+      (trans
+        (originalPlacedCNFModelCanonical circuit
+          (Canonical.appendBits inputBits gateBits) accepted)
+        (cong (canonicalOriginalProgramBits (Circuit.program circuit))
+          (inputFromOriginalBitAppend inputBits gateBits))))
+
+originalCanonicalGateFibreAccepted :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (inputBits : CNF.Bits inputs) →
+  Circuit.evaluateCircuit circuit (bitsToFiniteVec inputBits) ≡ true →
+  CNF.evaluateCNF (Original.circuitPlacedCNF circuit)
+    (Canonical.appendBits inputBits
+      (Canonical.dropBits inputs
+        (canonicalOriginalProgramBits (Circuit.program circuit)
+          (bitsToFiniteVec inputBits))))
+    ≡ true
+originalCanonicalGateFibreAccepted circuit inputBits accepted =
+  trans
+    (cong (CNF.evaluateCNF (Original.circuitPlacedCNF circuit))
+      (canonicalOriginalCNFReassemble
+        (Circuit.program circuit) inputBits))
+    (canonicalGlobalPlacedCNFCompleteness
+      circuit (bitsToFiniteVec inputBits) accepted)
+
+falseIsNotTrue : false ≡ true → ⊥
+falseIsNotTrue ()
+
+originalRejectedGateFibreEmpty :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (inputBits : CNF.Bits inputs) →
+  Circuit.evaluateCircuit circuit (bitsToFiniteVec inputBits) ≡ false →
+  (gateBits : CNF.Bits (Circuit.gateCount circuit)) →
+  CNF.evaluateCNF (Original.circuitPlacedCNF circuit)
+    (Canonical.appendBits inputBits gateBits) ≡ false
+originalRejectedGateFibreEmpty circuit inputBits rejected gateBits =
+  boolNotTrueIsFalse
+    (CNF.evaluateCNF (Original.circuitPlacedCNF circuit)
+      (Canonical.appendBits inputBits gateBits))
+    (λ accepted →
+      falseIsNotTrue
+        (trans
+          (sym rejected)
+          (trans
+            (sym (cong (Circuit.evaluateCircuit circuit)
+              (inputFromOriginalBitAppend inputBits gateBits)))
+            (originalPlacedCNFImpliesAcceptedInput
+              circuit (Canonical.appendBits inputBits gateBits)
+              accepted))))
+
+originalOneOrZeroGateFibreCount :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (inputBits : CNF.Bits inputs) →
+  sumOriginalFiniteCNFBits
+    (λ gateBits →
+      indicator
+        (CNF.evaluateCNF (Original.circuitPlacedCNF circuit)
+          (Canonical.appendBits inputBits gateBits)))
+  ≡ indicator (Circuit.evaluateCircuit circuit
+      (bitsToFiniteVec inputBits))
+originalOneOrZeroGateFibreCount circuit inputBits
+  with Circuit.evaluateCircuit circuit (bitsToFiniteVec inputBits) in decision
+... | true =
+  sumOriginalFiniteCNFBitsUnique
+    (λ gateBits →
+      CNF.evaluateCNF (Original.circuitPlacedCNF circuit)
+        (Canonical.appendBits inputBits gateBits))
+    (Canonical.dropBits _
+      (canonicalOriginalProgramBits (Circuit.program circuit)
+        (bitsToFiniteVec inputBits)))
+    (originalCanonicalGateFibreAccepted circuit inputBits decision)
+    (λ gateBits accepted →
+      originalCNFGateFibreCanonical
+        circuit inputBits gateBits accepted)
+... | false =
+  sumOriginalFiniteCNFBitsZero
+    (λ gateBits →
+      indicator
+        (CNF.evaluateCNF (Original.circuitPlacedCNF circuit)
+          (Canonical.appendBits inputBits gateBits)))
+    (λ gateBits →
+      cong indicator
+        (originalRejectedGateFibreEmpty
+          circuit inputBits decision gateBits))
+
+-- THE NUMERIC END-TO-END SAME-CIRCUIT RESULT, SOURCE-WRITTEN:
+--
+-- count (compiled original finite 3-CNF models)
+--   = count (accepted original source-circuit input vectors).
+--
+-- Uses actual original Boolean-vector finite sums, not an oracle call,
+-- nor just logical satisfiability. Agda kernel STILL NOT EXECUTED.
+originalGlobalCNFCountExact :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  originalCompiledCNFModelCount circuit ≡
+    countAcceptedCircuitInputs circuit
+originalGlobalCNFCountExact circuit =
+  trans
+    (sumOriginalFiniteCNFBitsAppend
+      (λ bits →
+        indicator
+          (CNF.evaluateCNF (Original.circuitPlacedCNF circuit) bits)))
+    (trans
+      (sumOriginalFiniteCNFBitsExt
+        (λ inputBits →
+          sumOriginalFiniteCNFBits
+            (λ gateBits →
+              indicator
+                (CNF.evaluateCNF (Original.circuitPlacedCNF circuit)
+                  (Canonical.appendBits inputBits gateBits))))
+        (λ inputBits →
+          indicator (Circuit.evaluateCircuit circuit
+            (bitsToFiniteVec inputBits)))
+        (originalOneOrZeroGateFibreCount circuit))
+      (sumOriginalFiniteCNFBitsAsVec
+        (λ values → indicator (Circuit.evaluateCircuit circuit values))))
+
+-- The other already-authored source owner
+-- OpenAIMathSharedTseitinOptimizedCNFExact.optCircuitCountEqualsOriginal
+-- transports this exact count to the optional <=3g+1-clause compiler.
+-- P3 List→Lean Finset, resource bounds and P0 Agda/Lean checks remain.
