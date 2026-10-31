@@ -115,3 +115,9 @@ Remaining **specific mathematical lemmas**:
 - TP-F: weighted/unweighted asymptotic and reverse T0 BIDI, with explicit multiplicative constants.
 - TP-G: quantitative conditioning/interval error of the 10-jet finite SSP pilot and a justified transfer to the all-prime producer if such a map exists.
 No assumptions or Boolean status receipts may stand in for TP-E.
+
+## Implementation continuation: exact arithmetic-history ↔ period-code hypervoxel BIDI
+
+New `DASHI.Arithmetic.TwinPrimeHypervoxelPeriodConsumerBidiExact` reuses the original `NatPeriod270` period/residual codec and `RecursiveRadixHypervoxel` address/suffix objects; this is materially stronger than a tautological consumer equality on one retained state. Its `encode` and `decode` have actual inverse laws `decodeEncode` and `encodeDecode`. Both original `n` and coarse/fine suffix survive exactly, and `finePreserved` proves exact refined-address reconstruction. The generic consumer forward/backward laws apply to the **actual pair** via `actualMangoldtPairForward` imported from `TwinPrimeActualPairSectionGluingExact`.
+
+Crucial distinction: no proof of `FactorsThrough` for a *coarse-only* observer and no arithmetic positivity. Original histories and fine residuals survive without collapsing into marginal signals. This closes a meaningful representation-side obligation; the remaining analytical steelman is unchanged: exact signed Fourier shift-two reconstruction, faithful real `Lambda`, unbounded prime-only correlation and/or `S(X)=2C2X+o(X)`. Source-written, not compiler verified.
