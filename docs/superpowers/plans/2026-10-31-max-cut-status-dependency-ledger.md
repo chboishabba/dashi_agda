@@ -102,3 +102,11 @@ Prove the concrete conversion algorithm, unary/framed output, finite enumeration
 
 **Pareto order:** (1) direct exact Agda/Lean toolchain typecheck and repair—source-written P1/P2 is not accepted; (2) actual OAI4.34 frontend/machine proof and executable bit/time/space; (3) formalize/consume only the highest-value externally proved upstream lemmas with same-object owners; (4) keep RH/twin/Pickover/YM terminal analytic/physical certificates as active mathematical research tasks. Source indexing cannot replace genuine missing estimates. Preserve historical authors, PR attribution, Ibrahim Monster3B custody and no ESD edits.
 
+
+### 31 Oct latest execution frontier: actual output bitstream, still unproved machine transport
+Lean #78 now has an **executable** `scripts/compile_dashi_circuit_openai378.py` frontend in addition to the generic source List→Finset proof and version-gated `Upstream378FiniteCNFBridge.lean`. This is not a replacement original Agda compiler: it reads the SAME gate types and creation-order references serialized as JSON, emits old original source opt-1/2/3 CNF, removes duplications by Finset semantics, sorts numeric literal codes and clauses and writes the explicit unary/framed bitstream in the order of the actual upstream `Encoding.lean`. It records literal source count, Finset count and exact emitted bit count against the existing mathematical bound.
+
+Independently executed local Python audit: **1,485** circuits / **104,720** complete assignments, literal source/CNF counting agreement, normalized finite-set truth agreement, exact Python bitstream readback, and bit-size bound, all PASS; 795 cases with source clause collapsing. This is a **finite regression and executable algorithm**, not proof that the Python implementation is equivalent to Agda or to the Lean kernel's encoder; tests were independent and the exact checked-in script wasn't run from GitHub checkout.
+
+P4 still needs: (i) formalize/or certify this concrete computable source frontend, (ii) actual OpenAI 4.34.1 Lean kernel acceptance and same-object literal polarity/Fin indices, (iii) verified conversion time and all-prefix visited space on the target primitive machine, (iv) compose upstream `exact_count_and_sat` with P2 in a single accepted proof. The current Agda fixed-size count proof cannot alone entail such cost bounds.
+
