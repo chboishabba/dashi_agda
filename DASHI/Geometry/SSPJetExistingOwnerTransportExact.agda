@@ -8,6 +8,8 @@ module DASHI.Geometry.SSPJetExistingOwnerTransportExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (cong)
 import DASHI.Geometry.SSP369Ultrametric as SSP
 import DASHI.Geometry.AdmissibilityJetSpec as Jet
 import DASHI.Geometry.Admissibility369UltrametricBridge as Bridge
@@ -42,3 +44,26 @@ retainedJetConsumerAgreement :
   (left right : SSP.Address depth) →
   left ≡ right → consumer left ≡ consumer right
 retainedJetConsumerAgreement consumer left right refl = refl
+
+-- Zero ultrametric distance is a genuine sufficient observation for
+-- EVERY consumer of the original finite SSP address. A short prefix
+-- (small but nonzero distance) does NOT license this conclusion.
+zeroDistanceConsumerAgreement :
+  ∀ {depth : Nat} {Outcome : Set}
+  (consumer : SSP.Address depth → Outcome)
+  (left right : SSP.Address depth) →
+  SSP.distance left right ≡ zero →
+  consumer left ≡ consumer right
+zeroDistanceConsumerAgreement consumer left right d0 =
+  cong consumer (SSP.distance-zero→equal left right d0)
+
+-- Conversely, whenever a specific consumer distinguishes two addresses,
+-- those full histories cannot be at zero ultrametric distance.
+consumerDifferenceForcesPositiveResolution :
+  ∀ {depth : Nat} {Outcome : Set}
+  (consumer : SSP.Address depth → Outcome)
+  (left right : SSP.Address depth) →
+  (consumer left ≡ consumer right → ⊥) →
+  SSP.distance left right ≡ zero → ⊥
+consumerDifferenceForcesPositiveResolution consumer left right different d0 =
+  different (zeroDistanceConsumerAgreement consumer left right d0)
