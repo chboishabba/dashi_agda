@@ -942,3 +942,157 @@ originalPlacedCNFImpliesAcceptedInput circuit bits accepted =
 -- Converse and P2 numerical #SAT equality still require completeness
 -- against canonical original gate assignments. Reuse previous original
 -- Semantics.canonicalProgramRealization and source fixed-bit codec for it.
+
+
+------------------------------------------------------------------------
+-- P1 CONVERSE: a model satisfying the ORIGINAL #1040 circuit realization
+-- invariant induces the EXACT existing placed 3-CNF gate relations.
+------------------------------------------------------------------------
+
+finiteCookPrefixInputAgreement :
+  ∀ {inputs gates : Nat}
+    (bits : CNF.Bits (inputs + suc gates))
+    (index : Fin inputs) →
+  finiteCNFToCookAssignment
+    (Rename.pullbackBits Original.extendEarlierFin bits)
+    (FinBase.toℕ index)
+  ≡ finiteCNFToCookAssignment bits (FinBase.toℕ index)
+finiteCookPrefixInputAgreement {gates = gates} bits index =
+  trans
+    (cong
+      (finiteCNFToCookAssignment
+        (Rename.pullbackBits Original.extendEarlierFin bits))
+      (sym (finLeftOriginalInputNumber {gates = gates} index)))
+    (trans
+      (finiteCNFPrefixCookAgreement bits
+        (Placement.finLeft {n = gates} index))
+      (cong (finiteCNFToCookAssignment bits)
+        (finLeftOriginalInputNumber {gates = gates} index)))
+
+finiteCookPrefixGateAgreement :
+  ∀ {inputs gates : Nat}
+    (bits : CNF.Bits (inputs + suc gates))
+    (index : Fin gates) →
+  finiteCNFToCookAssignment
+    (Rename.pullbackBits Original.extendEarlierFin bits)
+    (Compiler.gateVariableIndex inputs index)
+  ≡ finiteCNFToCookAssignment bits
+    (Compiler.gateVariableIndex inputs index)
+finiteCookPrefixGateAgreement {inputs} bits index =
+  trans
+    (cong
+      (finiteCNFToCookAssignment
+        (Rename.pullbackBits Original.extendEarlierFin bits))
+      (sym (FinP.toℕ-fromℕ<
+        (Existing.gateVariableIndexBelowNext inputs index))))
+    (trans
+      (finiteCNFPrefixCookAgreement bits
+        (FinBase.fromℕ<
+          (Existing.gateVariableIndexBelowNext inputs index)))
+      (cong (finiteCNFToCookAssignment bits)
+        (FinP.toℕ-fromℕ<
+          (Existing.gateVariableIndexBelowNext inputs index))))
+
+realizationTransportToPrefixBits :
+  ∀ {inputs gates : Nat}
+    {program : Circuit.GateProgram inputs gates}
+    (bits : CNF.Bits (inputs + suc gates)) →
+  Existing.ProgramAssignmentRealizes program
+    (finiteCNFToCookAssignment bits) →
+  Existing.ProgramAssignmentRealizes program
+    (finiteCNFToCookAssignment
+      (Rename.pullbackBits Original.extendEarlierFin bits))
+realizationTransportToPrefixBits bits realization =
+  Existing.program-assignment-realizes
+    (Existing.inputValues realization)
+    (λ index →
+      trans
+        (finiteCookPrefixInputAgreement bits index)
+        (Existing.inputVariablesCorrect realization index))
+    (λ index →
+      trans
+        (finiteCookPrefixGateAgreement bits index)
+        (Existing.gateVariablesCorrect realization index))
+
+finiteCNFExpectedGateFromRealization :
+  ∀ {inputs gates : Nat}
+    {previous : Circuit.GateProgram inputs gates}
+    (gate : Circuit.Gate inputs gates)
+    (bits : CNF.Bits (inputs + suc gates))
+    (prior : Existing.ProgramAssignmentRealizes previous
+      (finiteCNFToCookAssignment bits)) →
+  Original.localGateExpectedOutput gate
+    (Rename.pullbackBits (Original.gateWindowRename gate) bits)
+    ≡ Circuit.evaluateGate gate
+      (Existing.inputValues prior)
+      (Circuit.evaluateProgram previous (Existing.inputValues prior))
+finiteCNFExpectedGateFromRealization (Circuit.constantGate value) bits prior =
+  refl
+finiteCNFExpectedGateFromRealization (Circuit.notGate source) bits prior =
+  cong Cook.notBool
+    (finiteCNFWindowWireValue
+      (Circuit.notGate source) bits prior source
+      (fsuc fzero) refl)
+finiteCNFExpectedGateFromRealization (Circuit.andGate left right) bits prior =
+  cong₂ Cook.andBool
+    (finiteCNFWindowWireValue
+      (Circuit.andGate left right) bits prior left
+      (fsuc fzero) refl)
+    (finiteCNFWindowWireValue
+      (Circuit.andGate left right) bits prior right
+      (fsuc (fsuc fzero)) refl)
+finiteCNFExpectedGateFromRealization (Circuit.orGate left right) bits prior =
+  cong₂ Cook.orBool
+    (finiteCNFWindowWireValue
+      (Circuit.orGate left right) bits prior left
+      (fsuc fzero) refl)
+    (finiteCNFWindowWireValue
+      (Circuit.orGate left right) bits prior right
+      (fsuc (fsuc fzero)) refl)
+
+finiteCNFGateRelationFromOriginalRealization :
+  ∀ {inputs gates : Nat}
+    {previous : Circuit.GateProgram inputs gates}
+    (gate : Circuit.Gate inputs gates)
+    (bits : CNF.Bits (inputs + suc gates)) →
+  Existing.ProgramAssignmentRealizes
+    (Circuit.appendGate previous gate)
+    (finiteCNFToCookAssignment bits) →
+  Original.localGateConsistent gate
+    (Rename.pullbackBits (Original.gateWindowRename gate) bits) ≡ true
+finiteCNFGateRelationFromOriginalRealization
+    gate bits realization =
+  Original.placedGateOutputComplete gate bits
+    (trans
+      (sym (finiteCNFCookNewestGateExact gate bits))
+      (trans
+        (Existing.gateVariablesCorrect realization fzero)
+        (sym (finiteCNFExpectedGateFromRealization
+          gate bits (Existing.previousRealization realization)))))
+
+globalOriginalRealizationGivesPlacedValid :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (bits : CNF.Bits (inputs + gates)) →
+  Existing.ProgramAssignmentRealizes program
+    (finiteCNFToCookAssignment bits) →
+  Original.ProgramPlacedGatesValid program bits
+globalOriginalRealizationGivesPlacedValid
+    Circuit.noGates bits realization =
+  Original.emptyProgramValid
+globalOriginalRealizationGivesPlacedValid
+    (Circuit.appendGate previous gate)
+    bits realization =
+  Original.extendedProgramValid
+    (globalOriginalRealizationGivesPlacedValid
+      previous
+      (Rename.pullbackBits Original.extendEarlierFin bits)
+      (realizationTransportToPrefixBits bits
+        (Existing.previousRealization realization)))
+    (finiteCNFGateRelationFromOriginalRealization
+      gate bits realization)
+
+-- This provides both directions for ProgramPlacedGatesValid versus the
+-- original earlier-source ProgramAssignmentRealizes on the same finite
+-- assignment. The circuit-output unit and numeric counting still require
+-- a canonical finite supported witness and a finite-sum transport.
