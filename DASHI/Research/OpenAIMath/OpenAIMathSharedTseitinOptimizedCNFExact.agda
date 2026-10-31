@@ -13,6 +13,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import Data.Fin.Base as Fin
@@ -295,3 +297,47 @@ optCircuitClauseCount circuit =
 -- Original fixed-width truth-table implementation uses 4 per gate +1.
 -- The original theorem remains intact. List counts are NOT Finset.card.
 -- No claimed ETH/P=NP or general Max-Cut speedup.
+
+
+------------------------------------------------------------------------
+-- A UNIFORM SOURCE-CLAUSE BUDGET: <= 3*g+1 for any concrete original DAG.
+-- The numeric bound is a Nat theorem about literal source clause LISTS;
+-- the upstream deduplicated Finset.card can be smaller.
+------------------------------------------------------------------------
+
+optGateCostAtMostThree : ∀ {inputs gates : Nat}
+  (gate : Circuit.Gate inputs gates) → optGateClauseCost gate ≤ 3
+optGateCostAtMostThree (Circuit.constantGate _) = s≤s z≤n
+optGateCostAtMostThree (Circuit.notGate _) = s≤s (s≤s z≤n)
+optGateCostAtMostThree (Circuit.andGate _ _) =
+  s≤s (s≤s (s≤s z≤n))
+optGateCostAtMostThree (Circuit.orGate _ _) =
+  s≤s (s≤s (s≤s z≤n))
+
+threePerGate : Nat → Nat
+threePerGate zero = zero
+threePerGate (suc gates) = threePerGate gates + 3
+
+optProgramLeThreePerGate : ∀ {inputs gates : Nat}
+  (program : Circuit.GateProgram inputs gates) →
+  optProgramCost program ≤ threePerGate gates
+optProgramLeThreePerGate Circuit.noGates = z≤n
+optProgramLeThreePerGate (Circuit.appendGate previous gate) =
+  NatP.+-mono-≤
+    (optProgramLeThreePerGate previous)
+    (optGateCostAtMostThree gate)
+
+optCircuitThreeClauseBudget : ∀ {inputs : Nat}
+  (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Grid.listLength (optCircuitCNF circuit)
+    ≤ threePerGate (Circuit.gateCount circuit) + suc zero
+optCircuitThreeClauseBudget circuit =
+  NatP.≤-trans
+    (NatP.≤-reflexive (optCircuitClauseCount circuit))
+    (NatP.+-mono-≤
+      (optProgramLeThreePerGate (Circuit.program circuit))
+      (s≤s z≤n))
+
+-- Multiplication is a closed-form restatement of structural threePerGate.
+-- Unlike the original four-clause template, no truth table is expanded
+-- over the full original input dimension.
