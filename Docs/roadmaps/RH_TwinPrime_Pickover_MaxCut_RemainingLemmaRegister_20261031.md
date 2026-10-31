@@ -56,3 +56,35 @@ The canonical rational nine-jet matrix `M9` has a **primitive integral** nonzero
 Direct exact integer arithmetic shows `M9*v=0` while tenth-jet A-coordinate `(M10*v)[9]=-571323080827699200 != 0`. Splitting `v=v_plus-v_minus` with `v_plus,v_minus>=0` supplies **two distinct nonnegative SSP valuations** whose first nine complex Eisenstein-valued winding jets agree but whose tenth-jet differs. This is a concrete consumer-relevant collision even with nonnegative factor multiplicity. The numerical values are exact integers, not floating approximations. An updated regression `scripts/check_ssp15_c3_winding_jet_rank.py` checks both equalities and rank-15 inverse.
 
 **Status change:** W05 explicit finite witness from OPEN to **FINITE-TEST/CONSTRUCTED**, Agda kernel formalisation still **OPEN**. W04 rational inverse remains exact linear-algebra check, also kernel-pending. These counterexamples concern the *finite truncated jet observer*, not an individual state with no history; full winding histories remain the canonical starting point. Next higher-alpha frontier is certified conditioning/real analytic and actual infinite-prime two-point bounds (W06–W08, T04–T10), not more claims that one-point histories fail.
+
+
+## 31 October: 369 SSP hyperfabric / 13-of-27 / 5-of-9 / nine-sheet transport / existing jets — direct source audit
+
+**Confirmed exact owners (read the Agdas):**
+- `DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact`: genuine `TriTruth ↔ KernelTrit ↔ SSPTrit` round trips, `NineSheet ↔ PantsPath 2` round trips and `Ternary27Point ↔ PantsPath 3` round trips. A **six-state signed wheel** sits in a **nine-sheet** with explicit neutral completion. The nine-sheet and cube are typed carriers, not automatically the same representation or an analytic global section.
+- `DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact`: outgoing residual `Triadic.NineSheet ↔ Codec.Sheet9` with both inverse laws, carrying `PhaseOrbit15 × Sheet9`. Use existing BIDI instead of a new sheet decoder.
+- `DASHI.Moonshine.Base369P2FiveOrbitOrientationGroupoidsExact`: five global-inversion classes of a nine-sheet; gauge versus **retained** orientation distinguish five versus ten connected-component targets. Arithmetic/Fricke consumer must select the intended quotient; cannot silently gauge out the sign.
+- `DASHI.Wikimedia.IbrahimA027907PathCubeTernaryExceptionalThirteenSnowballExact`: non-periodic 27 path-cube spectral multiplicities `1,3,6,7,6,3,1`, 13 as `1+6+6=(27-1)/2` and `1+3+9`. This is arithmetic/combinatorial; explicitly **not** same-object evidence for exceptional representation or a signed analytic prime correlation.
+- `DASHI.Foundations.Base369Ternary27StratumStabiliserFibreAdmissibilityExact`: base-point stabilisers differ inside the same geometric stratum, hence the exact fine point must survive admissibility/quotient decisions.
+- `DASHI.Geometry.AdmissibilityJetSpec`: typed finite jet order/redundancy/invariant-generator table, with physical-derivation flag false. Jet order is selected for the actual consumer, not a magical universal depth.
+- Existing related `DASHI.Moonshine.JInvariantSheafHyperformAdmissibleDescentExact`, `DASHI.Moonshine.JInvariantAnalyticHyperformChartGluingExact`, `DASHI.Core.QueryFactorisationSufficiency`, `DASHI.Core.ConsumerIndexedResidualRefinementExact` remain the gluing and consumer-descent owners.
+
+**Resolve the user's '9 → 18 → 27' as typed transitions, not one count identity.** Confirmed `NineSheet` (two trits), its two possible orientation lifts (up to eighteen states when orientation is independent), and `Ternary27Point` (three trits). A bijection from 18 to 27 does **not** exist. A valid *admissible join* must choose an embedding/partial map, provide a nine-element complement or a residual to distinguish the omitted third-coordinate sector, and preserve signed orientation and terminal consumer. The existing 5-of-9 groupoid quotient is a **different** quotient with separate gauge/retained semantics. The 13-of-27 combinatorial spectral decomposition is **another** coordinate count, not a proof that all 13 supported states are admissible. No cardinality welding.
+
+**Re-scoped concrete lemma dependencies (H-series):**
+- H01 (REUSE) nine-sheet/kernel/codec/pants BIDI with exact round trips;
+- H02 (REUSE) original oriented six-wheel inclusion and neutral nine-sheet completion;
+- H03 (OPEN exact instantiation) define which polarity/orientation 18-state lift is intended and exhibit signed consumer compatibility for that lift;
+- H04 (OPEN exact instantiation) 18→27 injection/partial relation and explicit complementary nine-point face; prove no claimed 18↔27 isomorphism;
+- H05 (REUSE arithmetic) path-cube spectral 13-of-27 multiplicity and 5-of-9 orbit class owners, with types and non-identity faithfully preserved;
+- H06 (OPEN concrete) verify a specified *actual* spectral/prime/SSP signed consumer factors through each proposed quotient; otherwise construct collision and retain necessary residual;
+- H07 (OPEN) admissible seam/pants join with exact base stabiliser, sign, provenance, and analytical Fourier phase;
+- H08 (OPEN) projective transition compatibility/commuting square across 9→18→27 and back, with history and residual, not just cardinality;
+- H09 (REUSE) prior `AdmissibilityJetSpec`, Bishop phase/complex analytic and SSP C3 Fourier owners;
+- H10 (OPEN) embed W04/W05 **concrete** C3 derivative jets into the existing typed finite-jet surface; jet depth=10 rank sufficient for SSP15, but neither finite-jet admissibility nor stable inversion follows from dimension alone;
+- H11 (OPEN quantitative) condition numbers and certified finite precision for jet reconstruction, including rotations/chirality and cross-sheet errors;
+- H12 (OPEN analytic) only after completed H06–H11 connect actual all-prime signed `Lambda(n)Lambda(n+2)`, zeta-zero pair statistics or huge Pickover Bishop phase. These require independent real analytic bounds.
+
+**Highest-alpha next cut:** concrete consumer-indexed `NineSheet × Orientation → Ternary27Point` implementation that chooses an explicit third-trit face and proves preservation, followed by gluing of signed SSP Fourier jets with actual overlap and conditioning. In particular, *history is prior state*, not an afterthought to a one-sample quotient. Preserve Ibrahim source ownership and prior Monster-3B provenance. No ESD changes.
+
+All preceding 61 IDs remain in the register; H01–H12 expand the canonical tracked dependency inventory to **73 IDs**. The 73 are **not** 73 unproved theorems; many are reused existing owners. Source inspection does not imply Agda kernel verification.
