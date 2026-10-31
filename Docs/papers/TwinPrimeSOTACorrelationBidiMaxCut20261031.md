@@ -100,3 +100,7 @@ Logarithms are Python floating-point, so the numerical test is not an interval-c
 **Source verification:** Public [Axiom Math PrimeGapsLib](https://primegaps.axiommath.ai/paper/) explicitly takes Bombieri–Vinogradov as an analytic input for H1<=246. [OpenAI PrimeGaps186](https://github.com/openai/PrimeGaps186) explicitly assumes three inputs: rank-three hyper-Kloosterman bound, rank-two Kloosterman correlation bound, and a collection of physical-integral/cap numerical bounds. Its conditional Lean theorem is not gap 2. No existing source proves the needed unconditional prime-only correlation lower bound.
 
 **Max-cut decision:** further manipulation of the exact finite `S=P+E` identity or bounded-gap hypotheses alone does not yield a positive contribution. A new theorem must establish either positive actual prime-one correlation on an unbounded sequence or its dyadic nonvanishing, without smuggling prime ownership/density into an axiom.
+
+## Steelman upgrade, 31 October 2026
+
+The research target is now tiered rather than moved: [TwinPrimeSteelmanAsymptoticBidiTarget20261031.md](TwinPrimeSteelmanAsymptoticBidiTarget20261031.md). T0 is exact twin-prime infinitude ↔ unbounded real prime-only correlation; T1 positive limsup S(X)/X, T2 positive liminf, T3 Hardy–Littlewood S(X)~2C2 X, and T4 the counting asymptotic pi2(X)~2C2 Li2(X). Neither existing bounded-gap results nor source-written Agda establish T0–T4. Read the separate document for explicit assumption and weight-transport boundaries.
