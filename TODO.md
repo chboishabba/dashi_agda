@@ -17379,3 +17379,15 @@ Cleanup
 - [ ] R01/R02: independently audit source 7/8 theorem, same-object ξ reflection and true boundary arithmetic; R10 full off-line zero exclusion remains open.
 - [ ] P03/P10: effective certified winding and rational sign-separated interval for `sin(99^(9999!))`; fail closed on insufficient precision.
 - [ ] W04/W05: kernel-check original SSP15 ten-jet Vandermonde inverse and nine-jet integral collision; preserve retained sign, consumer and mathematical source owners.
+
+## 2026-10-31 — K04 existing-Bishop reuse / quadratic import repair
+
+- [x] Inspect actual `BishopMachinArctanConstructionExact`, `BishopRound11MachinSetoidComplexInstanceExact`, rational tangent, branch/window and Lean cross-prover semantic receipt; recognize existing actual Bishop-real convergence instead of duplicating foundations.
+- [x] Repair malformed `SqrtThreeHalfDefect` and `GoldenRatioDefect` constructor result syntax in the canonical imported quadratic signed-fibre owner.
+- [x] Source-write arbitrary finite-stage compatibility, all-Nat-consumer and canonical prime-count induction in the existing zeta commuting-square owner.
+- [ ] Agda compiler verify changed dependent owners and all canonical imports (no CI requested, do not claim verification).
+- [ ] K04a: identify executable rational `q_n` with actual original Bishop `SeriesOf` partial sums under rational embedding.
+- [ ] K04b: prove explicit `4/25^n` modulus and `ConvergesTo q_n bishopMachinPi` on the real/setoid carrier using existing per-arctan convergence.
+- [ ] K04c: prove actual signed prime-valuation decomposition including non-SSP residual for every rational stage and a faithful readout BIDI.
+- [ ] K04d: actual zeta continuation domain, continuity at the named argument, completed commuting square.
+- [ ] K05: Agda trig/classical pi same-object identification, independent of the source-written Lean receipt.
