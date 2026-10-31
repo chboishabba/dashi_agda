@@ -75,6 +75,8 @@ import DASHI.Moonshine.Base369MonsterHistoryIndexedComputationObserverExact
 import DASHI.Moonshine.OggPolyhedralReductionControlExact
 import DASHI.Moonshine.OggTetrahedralReductionControlExact
 import DASHI.Moonshine.OggPrimeControlMatrixExact
+import DASHI.Moonshine.OggPrimeFourierWindingExact
+import DASHI.Moonshine.OggPrimeFourierWindingValidation
 import DASHI.Moonshine.PrimeFrickeGenusControlExact
 import DASHI.Moonshine.PrimeFrickeOrbitSaturationExact
 import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact
