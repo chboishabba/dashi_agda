@@ -53,3 +53,26 @@ Backward obligations: actual weight nonnegativity and prime-one positivity; exha
 - 2026 reported 186 and qualifications https://mathworld.wolfram.com/BoundedGapsBetweenPrimes.html
 
 **Status:** Documentation/proof specification, not a new unconditional twin-prime theorem. All prior author and repository proof ownership retained. No ESD surfaces touched.
+
+
+## Two genuine attempts, same max-cut (31 Oct continuation)
+
+**Strong attempt (linear-order):** Seek `c>0`, `X0`, such that for all `X>=X0`, `S(X)>=cX`. Given the classical real `E(X)=o(X)`, choose `X1` with `E(X)<=cX/2`. Then `P(X)>=cX/2` for every `X>=max(X0,X1)`, yielding unbounded P and true twin-prime infinitude. This is a valid conditional deduction, **not** a derivation of the missing strong hypothesis.
+
+**Intermediate attempt (cofinal linear subsequence):** It suffices to prove `limsup_{X→∞}S(X)/X>0`. Select `c>0` and unbounded `X_j` with `S(X_j)>=cX_j`, then subtract `E(X_j)=o(X_j)`. This relaxes eventual uniformity of the strong bound, but still requires genuinely new positive prime-correlation information.
+
+**Weak attempt (exact necessary-and-sufficient target):** `P(X)=S(X)-E(X)` unbounded. Since every twin contributes `log p log(p+2)>=log 3 log 5>0`, infinitely many pairs force unbounded P. Conversely finitely many twin pairs make P eventually constant. This does not imply `S(X)>=cX`: the abstract nonnegative toy model `P(X)=sqrt(X), E(X)=0` is unbounded but sublinear. It is **not** a model of the primes, only a logical non-implication witness.
+
+**Dyadic localization:** Infinitely many twins iff infinitely many dyadic slabs `[2^k,2^{k+1})` contain a twin starting point. Under strictly positive real prime-one weights, equivalently infinitely many dyadic increments of P (with careful consistent endpoint convention) are nonzero. A proof of a single dyadic block, or infinitely many sieve survivors, is insufficient.
+
+**Highest-impact discriminator:** Current polynomial/CRT finite sieve labels and weighted bounded gaps do not distinguish genuine prime-one pairs from parity-matched composite survivors at arbitrarily high moduli. Neither route currently produces a new source of positive signed prime-specific correlation. A candidate lemma must directly discriminate the true prime ownership after every refinement rather than assume it in a record.
+
+**Executed finite numerical probe:** `python /mnt/data/check_twin_routes.py` evaluated the classical von Mangoldt weights by prime-power enumeration in the local session, with floating-point logs (not interval-certified): 
+`(X, proper-powers, S, P, E, P/X, S/X)`
+- `100: (10,112.8880,79.9745,32.9135,0.79975,1.12888)`
+- `1,000: (25,1135.4628,1028.3687,107.0940,1.02837,1.13546)`
+- `10,000: (51,13302.9243,12950.5862,352.3382,1.29506,1.33029)`
+- `100,000: (108,131522.9125,130224.4190,1298.4935,1.30224,1.31523)`
+- `300,000: (155,393317.3863,391321.3631,1996.0232,1.30440,1.31106)`
+
+These finite observations are consistent with the Hardy–Littlewood prediction but do not prove either max-cut. This doc and its related Agda module are source-written; no Agda executable was available in this tool session, so they are **not kernel-verified**. No ESD surface changed.
