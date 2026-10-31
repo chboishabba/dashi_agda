@@ -10,6 +10,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Fin using (Fin)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true; false)
 
 cong₂ : ∀ {A B C : Set} (f : A → B → C)
         {a a' : A} {b b' : B} →
@@ -94,3 +95,32 @@ transportPreservesWeightedMixture (topKRoute es size) permutation before after w
 -- the learned router may select different experts under inversion.
 -- Histories, state update, semantic action fitting, floating weights,
 -- and remote consumer decoding require separately checked refinement.
+
+
+-- Selected-only history transition over an arbitrary expert index.
+-- A route/membership implementation supplies selected : Fin E → Bool.
+-- An unselected expert's state is definitionally unchanged.
+updateHistory :
+  ∀ {E : Nat} {H : Set} →
+  (selected : Fin E → Bool) →
+  (old : Fin E → H) →
+  (advance : Fin E → H → H) →
+  Fin E → H
+updateHistory selected old advance e with selected e
+... | true = advance e (old e)
+... | false = old e
+
+inactiveHistoryPreserved :
+  ∀ {E : Nat} {H : Set} →
+  (selected : Fin E → Bool) →
+  (old : Fin E → H) →
+  (advance : Fin E → H → H) →
+  (e : Fin E) → selected e ≡ false →
+  updateHistory selected old advance e ≡ old e
+inactiveHistoryPreserved selected old advance e selectedFalse
+  rewrite selectedFalse = refl
+
+-- State compatibility is a distinct, non-derivable hypothesis:
+-- source routing and weighted output agreement do not suffice.
+-- If s' selects mapped IDs and histories are transported by p,
+-- require selected' (p e)=selected e and transitions commute.
