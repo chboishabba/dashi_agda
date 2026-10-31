@@ -76,7 +76,7 @@ class LocalSymbolSnowballTest(unittest.TestCase):
             result = subprocess.run(
                 [sys.executable, str(RUNNER), "--agda-root", str(root),
                  "--lean-root", str(lean), "--group", "P1",
-                 "--mode", "grep", "--max-terms", "1"],
+                 "--mode", "grep", "--max-terms", "2"],
                 text=True, capture_output=True, check=True)
             self.assertIn("Golden.agda", result.stdout)
             self.assertIn("Adapter.lean", result.stdout)
