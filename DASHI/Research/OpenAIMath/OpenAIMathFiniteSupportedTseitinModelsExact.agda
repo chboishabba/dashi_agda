@@ -1648,7 +1648,7 @@ sumOriginalFiniteCNFBitsUnique {suc n}
           (predicate (true CNF.∷ᵇ bits))
           (λ proof →
             truePrefixNotFalsePrefix
-              (unique (true CNF.∷ᵇ bits) proof))) = refl
+              (unique (true CNF.∷ᵇ bits) proof)))) = refl
 sumOriginalFiniteCNFBitsUnique {suc n}
     predicate (true CNF.∷ᵇ uniqueTail) accepted unique
   rewrite sumOriginalFiniteCNFBitsZero
