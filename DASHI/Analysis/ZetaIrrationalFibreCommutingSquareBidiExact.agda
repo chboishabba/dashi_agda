@@ -7,7 +7,7 @@ module DASHI.Analysis.ZetaIrrationalFibreCommutingSquareBidiExact where
 -- The analytic limit and actual zeta interpretation are separate obligations.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Moonshine.DepthTwoNonaryResidueFibreExact as Nonary
