@@ -199,3 +199,13 @@ where `zeta=exp(2*pi*i/3)`, lies in the Eisenstein `Q(zeta)` carrier. Writing `J
 ## Canonical status register
 
 **Read alongside:** [`RH_TwinPrime_Pickover_MaxCut_RemainingLemmaRegister_20261031.md`](RH_TwinPrime_Pickover_MaxCut_RemainingLemmaRegister_20261031.md). It maps all 61 F/R/T/P/W dependency labels to actual owners, status (`REUSE`, `SOURCE`, `FINITE-TEST`, `OPEN`), next proof obligations and terminal acceptance. The earlier 53 items are not 53 missing foundations; 8 W-series items supplement the SSP15 constructive winding inverse. Current exact rational rank sequence for 1–10 jets is `2,4,6,8,10,11,12,13,14,15`. All three infinite/giant analytic terminals remain open. No compiler verification claim.
+
+## 31 October — T0/T13 exact cofinal arithmetic BIDI closure (PR #1408)
+
+The original `TwinPrimeCertifiedCountJumpBidiExact` already proved, indexwise, `TwinPrimeAt(suc(suc k))` iff its proof-bearing exact finite twin-start counter changes at that index. The companion `TwinPrimeConditionalUnboundedFromCountJumpsExact` previously supplied only cofinal jumps ⇒ cofinal actual twins.
+
+Now `certifiedCountJumpsFromTwinInfinitude` obtains the reverse using each assumed true twin at a cutoff >=N+2; its 0/1 elimination and monotone cutoff transport are explicit. The existing `TwinPrimeStrongWeakMaxCutBidiExact` also composes cofinal finite windows with this count-jump equivalence in *both* directions. Imported in all three canonical TOE roots.
+
+**Closed in mathematical source:** T13 exact Nat-prime/window/count-jump semantic reduction, subject to kernel checking. **Not closed:** T02 actual nonnegative ordered-real `Λ` error in Agda, T09 signed Hardy–Littlewood remainder, T10 existence of any cofinal jumps/twin witnesses, T12 real partial summation, R10 zero exclusion, P10 the giant sign. Neither the count-jump BIDI nor finite SSP15 jets circumvent parity. Real-P-to-Nat-count equivalence still requires proof of genuine logarithm positivity and support-equivalence, not a synthetic Weil scalar or SOTA bounded-gap claim.
+
+Prior properly attributed prime-power envelope refinement yields `E(X)=O(√X log²X)` at the mathematical level (the earlier `O(√X log³X)` remains a valid weaker bound). Kernel execution was not requested/performed.
