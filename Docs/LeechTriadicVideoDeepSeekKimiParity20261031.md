@@ -11,8 +11,7 @@ Primary sources explicitly inspected:
   requires orientation, deterministic decoder, correction, and
   charged side information.
 - `DASHI/Physics/Closure/LightTransportFibreClosure.agda` is an abstract
-  proof/receipt interface, not the source of a verified 600-frame
-  0.032-bpp numerical codec result in the inspected lines.
+  proof/receipt interface, not the receipt owner for the 600-frame benchmark. The correct owners are `DASHI/Compression/TriadicCodecBoundary.agda` and `Docs/TriadicCompressionEvidenceBoundary.md`: 600 grayscale frames 1280x720, 1.418 bpp zlib original vs 0.032 bpp temporal-byte-residual + zlib, ~44.3x smaller stream, *not* a real triadic entropy coder.
 
 External engineering comparators, attributed to original authors:
 - DeepSeek-V3: arXiv:2412.19437; 1 always-active shared expert,
