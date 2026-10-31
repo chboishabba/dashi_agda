@@ -160,3 +160,8 @@ CI/Agda compiler intentionally deferred at user's request; file has not received
 **Pivotal distinction:** `FineAddressFactorisation` is NOT automatically inhabited for either terminal consumer. True Mangoldt pair correlation and Bishop imaginary phase must each provide `factorLaw` and a decoding scalar with correct analytic meaning. A finite bit-address alone cannot encode arbitrary real analytic phase without retained mathematical residual. Next TP/PH implementation cut is to connect canonical actual-history/actual-scalar proof owners with those factorisation witnesses, not assume them.
 
 **Status:** source committed, no holes or new axioms in the new statements; no Agda kernel run (user requested verification later). TH04/PH04 generic necessity/repair laws now source-written. Terminal TP-E, P9-D/E/F and RH zero exclusion remain open.
+
+
+## Exact finite shift-two cyclic group-ring witness
+
+Added `scripts/check_twin_prime_cyclic_group_ring_shift_two.py` (commit `a92de769fb5b0a205ea043171327d32bd9bf84ef`). Checks the precise `t^{-2}` coefficient of `F(t)F(t^{-1})` in an integer cyclic group ring, with zero padding and all signed mixed shell terms; uses prime-indicator windows, **not** `Lambda` log weights. `DASHI.Physics.Closure.NSTriadKNLuoFiniteFourierParsevalFromInversionExact` is an inspected existing rational finite-Fourier source. TP-B/T03 now have a committed finite-experiment witness, but no general Agda cyclic DFT proof; T09/T10 prime-distribution estimates remain OPEN. Script existence is not an execution receipt.
