@@ -1236,3 +1236,47 @@ canonicalGlobalPlacedCNFCompleteness circuit values accepted =
 --   source accepting input -> compiled-CNF canonical model.
 -- Both are source-written. The numerical model-count equality and
 -- Agda-kernel acceptance remain separate obligations.
+
+
+------------------------------------------------------------------------
+-- P1 SAME-CIRCUIT GLOBAL 3-CNF SAT EQUIVALENCE, BOTH DIRECTIONS.
+-- Quantifies the original finite carriers; no implicit Cook.Assignment
+-- tail, no additional gate, no assumption about global model cardinality.
+------------------------------------------------------------------------
+
+OriginalPlacedCNFSatisfiable :
+  ∀ {inputs : Nat} (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Set
+OriginalPlacedCNFSatisfiable {inputs} circuit =
+  Σ (CNF.Bits (inputs + Circuit.gateCount circuit))
+    (λ bits → CNF.evaluateCNF (Original.circuitPlacedCNF circuit) bits
+      ≡ true)
+
+OriginalCircuitHasAcceptedInput :
+  ∀ {inputs : Nat} (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Set
+OriginalCircuitHasAcceptedInput {inputs} circuit =
+  Σ (Vec Bool inputs)
+    (λ values → Circuit.evaluateCircuit circuit values ≡ true)
+
+originalPlacedCNFSatisfiabilityToCircuit :
+  ∀ {inputs : Nat} (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  OriginalPlacedCNFSatisfiable circuit →
+  OriginalCircuitHasAcceptedInput circuit
+originalPlacedCNFSatisfiabilityToCircuit circuit (bits , accepted) =
+  inputVectorFromGlobal bits ,
+  originalPlacedCNFImpliesAcceptedInput circuit bits accepted
+
+originalCircuitToPlacedCNFSatisfiability :
+  ∀ {inputs : Nat} (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  OriginalCircuitHasAcceptedInput circuit →
+  OriginalPlacedCNFSatisfiable circuit
+originalCircuitToPlacedCNFSatisfiability circuit (values , accepted) =
+  canonicalOriginalProgramBits (Circuit.program circuit) values ,
+  canonicalGlobalPlacedCNFCompleteness circuit values accepted
+
+-- Both logical implications are now SOURCE-WRITTEN against the actual
+-- assembled CNF, not merely inherited from the Cook formula.
+-- The stronger equation countSourceCNF C = countAcceptedCircuitInputs C
+-- remains unpaid: multiple global assignments have to be proved
+-- impossible at a given accepted input, and finite sums transported.
