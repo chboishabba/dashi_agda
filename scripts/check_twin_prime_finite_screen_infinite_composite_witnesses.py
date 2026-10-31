@@ -15,7 +15,7 @@ primality or yields twin-prime infinitude from survivor density alone.
 Math: elementary Chinese remainder theorem, original classical source.
 Implementation: independent finite witness, not an infinite Agda kernel proof.
 """
-from math import prod,isqrt
+from math import prod,isqrt,gcd
 
 SSP15=(2,3,5,7,11,13,17,19,23,29,31,41,47,59,71)
 
@@ -29,7 +29,7 @@ def next_prime_after(n):
 
 def merge_crt(a,m,b,n):
     assert m>0 and n>1
-    assert all(m%p or n%p for p in range(2,isqrt(min(m,n))+1))
+    assert gcd(m,n)==1
     # The caller supplies pairwise-coprime moduli. pow inverse rejects
     # a non-coprime input instead of silently inventing a CRT section.
     k=((b-a)*pow(m,-1,n))%n
