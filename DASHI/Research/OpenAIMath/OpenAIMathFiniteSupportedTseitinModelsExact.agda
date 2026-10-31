@@ -1096,3 +1096,143 @@ globalOriginalRealizationGivesPlacedValid
 -- original earlier-source ProgramAssignmentRealizes on the same finite
 -- assignment. The circuit-output unit and numeric counting still require
 -- a canonical finite supported witness and a finite-sum transport.
+
+
+------------------------------------------------------------------------
+-- P1 COMPLETE SAT EQUIVALENCE: reuse the 2026-09 #1040 canonical
+-- assignmentFromProgram (which ALREADY computes chronological gate values)
+-- and tabulate it as the current source's exact finite CNF.Bits carrier.
+-- No extra evaluator and no reversed-gate shadow encoding is invented.
+------------------------------------------------------------------------
+
+canonicalOriginalProgramBits :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (values : Vec Bool inputs) →
+  CNF.Bits (inputs + gates)
+canonicalOriginalProgramBits program values =
+  Rename.tabulateBits
+    (λ index →
+      Existing.assignmentFromProgram program values
+        (FinBase.toℕ index))
+
+canonicalOriginalProgramBitLookup :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (values : Vec Bool inputs)
+    (index : Fin (inputs + gates)) →
+  finiteCNFToCookAssignment
+    (canonicalOriginalProgramBits program values)
+    (FinBase.toℕ index)
+  ≡ Existing.assignmentFromProgram program values
+    (FinBase.toℕ index)
+canonicalOriginalProgramBitLookup program values index =
+  trans
+    (finiteCNFToCookLookup
+      (canonicalOriginalProgramBits program values) index)
+    (Rename.lookupTabulateBits
+      (λ i → Existing.assignmentFromProgram program values
+        (FinBase.toℕ i)) index)
+
+canonicalOriginalProgramFiniteRealization :
+  ∀ {inputs gates : Nat}
+    (program : Circuit.GateProgram inputs gates)
+    (values : Vec Bool inputs) →
+  Existing.ProgramAssignmentRealizes program
+    (finiteCNFToCookAssignment
+      (canonicalOriginalProgramBits program values))
+canonicalOriginalProgramFiniteRealization
+    {inputs} {gates} program values =
+  Existing.program-assignment-realizes
+    values
+    inputCorrect
+    gateCorrect
+  where
+    bits = canonicalOriginalProgramBits program values
+    originalAssignment = Existing.assignmentFromProgram program values
+
+    inputCorrect :
+      (index : Fin inputs) →
+      finiteCNFToCookAssignment bits (FinBase.toℕ index)
+        ≡ Circuit.lookupVec index values
+    inputCorrect index =
+      trans
+        (cong (finiteCNFToCookAssignment bits)
+          (sym (finLeftOriginalInputNumber {gates = gates} index)))
+        (trans
+          (canonicalOriginalProgramBitLookup
+            program values (Placement.finLeft {n = gates} index))
+          (trans
+            (cong originalAssignment
+              (finLeftOriginalInputNumber {gates = gates} index))
+            (Existing.assignmentFromProgramInputCorrect
+              program values index)))
+
+    gateCorrect :
+      (index : Fin gates) →
+      finiteCNFToCookAssignment bits
+        (Compiler.gateVariableIndex inputs index)
+      ≡ Circuit.lookupVec index (Circuit.evaluateProgram program values)
+    gateCorrect index =
+      trans
+        (cong (finiteCNFToCookAssignment bits)
+          (sym (FinP.toℕ-fromℕ<
+            (Existing.gateVariableIndexBelowNext inputs index))))
+        (trans
+          (canonicalOriginalProgramBitLookup
+            program values
+            (FinBase.fromℕ<
+              (Existing.gateVariableIndexBelowNext inputs index)))
+          (trans
+            (cong originalAssignment
+              (FinP.toℕ-fromℕ<
+                (Existing.gateVariableIndexBelowNext inputs index)))
+            (Existing.assignmentFromProgramGateCorrect
+              program values index)))
+
+canonicalOriginalOutputValue :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (values : Vec Bool inputs) →
+  CNF.lookupBit
+    (canonicalOriginalProgramBits (Circuit.program circuit) values)
+    (Original.outputWireFin (Circuit.outputWire circuit))
+  ≡ Circuit.evaluateCircuit circuit values
+canonicalOriginalOutputValue circuit values =
+  trans
+    (Rename.lookupTabulateBits
+      (λ i → Existing.assignmentFromProgram (Circuit.program circuit)
+        values (FinBase.toℕ i))
+      (Original.outputWireFin (Circuit.outputWire circuit)))
+    (trans
+      (cong (Existing.assignmentFromProgram
+        (Circuit.program circuit) values)
+        (FinP.toℕ-fromℕ<
+          (Original.wireNumberBelowAtCircuitEnd
+            (Circuit.outputWire circuit))))
+      (Existing.canonicalOutputFormulaCorrect circuit values))
+
+canonicalGlobalPlacedCNFCompleteness :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs)
+    (values : Vec Bool inputs) →
+  Circuit.evaluateCircuit circuit values ≡ true →
+  CNF.evaluateCNF (Original.circuitPlacedCNF circuit)
+    (canonicalOriginalProgramBits (Circuit.program circuit) values)
+    ≡ true
+canonicalGlobalPlacedCNFCompleteness circuit values accepted =
+  Original.wholeCircuitPlacedCNFComplete circuit
+    (canonicalOriginalProgramBits (Circuit.program circuit) values)
+    (Original.whole-circuit-placed-meaning
+      (globalOriginalRealizationGivesPlacedValid
+        (Circuit.program circuit)
+        (canonicalOriginalProgramBits (Circuit.program circuit) values)
+        (canonicalOriginalProgramFiniteRealization
+          (Circuit.program circuit) values))
+      (trans (canonicalOriginalOutputValue circuit values) accepted))
+
+-- At the SAME concrete circuit:
+--   compiled-CNF model -> source accepting input,
+--   source accepting input -> compiled-CNF canonical model.
+-- Both are source-written. The numerical model-count equality and
+-- Agda-kernel acceptance remain separate obligations.
