@@ -882,3 +882,44 @@ placedGateCNFOutputComplete gate globalBits equals =
 -- It does not yet prove that recursively assembled previous gate values
 -- are source-Circuit.evaluateProgram: the GateProgram chronological-vs-
 -- newest-first induction remains an explicit dependency.
+
+
+------------------------------------------------------------------------
+-- THE EXISTING WHOLE-PROGRAM SEMANTIC RECURRENCE PAYS ITS LAST GATE.
+-- Constructors and meanings belong to ProgramPlacedGatesValid above;
+-- this merely consumes them using placedGateOutputForced.
+------------------------------------------------------------------------
+
+validProgramLastGateOutputForced :
+  ∀ {inputs gates : Nat}
+    (previous : Circuit.GateProgram inputs gates)
+    (gate : Circuit.Gate inputs gates)
+    (globalBits : CNF.Bits (inputs + suc gates)) →
+  ProgramPlacedGatesValid (Circuit.appendGate previous gate) globalBits →
+  CNF.lookupBit globalBits newOutputFin ≡
+    localGateExpectedOutput gate
+      (Rename.pullbackBits (gateWindowRename gate) globalBits)
+validProgramLastGateOutputForced previous gate globalBits
+    (extendedProgramValid oldValid gateValid) =
+  placedGateOutputForced gate globalBits gateValid
+
+compiledProgramLastGateOutputForced :
+  ∀ {inputs gates : Nat}
+    (previous : Circuit.GateProgram inputs gates)
+    (gate : Circuit.Gate inputs gates)
+    (globalBits : CNF.Bits (inputs + suc gates)) →
+  CNF.evaluateCNF
+    (programPlacedCNF (Circuit.appendGate previous gate))
+    globalBits ≡ true →
+  CNF.lookupBit globalBits newOutputFin ≡
+    localGateExpectedOutput gate
+      (Rename.pullbackBits (gateWindowRename gate) globalBits)
+compiledProgramLastGateOutputForced previous gate globalBits accepted =
+  validProgramLastGateOutputForced previous gate globalBits
+    (programPlacedCNFSound
+      (Circuit.appendGate previous gate) globalBits accepted)
+
+-- Each program's last gate is now pinned. Unpaid:
+-- recursively transport all earlier gates' assignments through
+-- extendEarlierFin, then identify newest-first Circuit.evaluateProgram
+-- with chronological global gate bits, and close numeric CNF #SAT.
