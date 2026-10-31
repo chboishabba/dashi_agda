@@ -85,9 +85,11 @@ def certify(m,pi_terms=32,sine_terms=24):
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
     parser.add_argument("--m",type=int,default=8)
+    parser.add_argument("--pickover",action="store_true",help="attempt m=9999!; return inconclusive rather than fake a sign")
     parser.add_argument("--pi-terms",type=int,default=32)
     parser.add_argument("--sine-terms",type=int,default=24)
     args=parser.parse_args()
-    result=certify(args.m,args.pi_terms,args.sine_terms)
+    m=factorial(9999) if args.pickover else args.m
+    result=certify(m,args.pi_terms,args.sine_terms)
     for name,value in result.items(): print(f"{name}: {value}")
     if result["status"]!="CERTIFIED": raise SystemExit(2)
