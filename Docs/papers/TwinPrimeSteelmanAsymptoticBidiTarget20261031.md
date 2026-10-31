@@ -59,3 +59,59 @@ The former three arrows demand source-level exact reconstruction and typed seam 
 **Quantitative steelman:** retain all real signed correlations across scales; require a uniform bound on the *actual* arithmetic signed remainder, or unbounded positive prime-only correlation. A finite 13×2 antipodal/cubie or 10-jet SSP representation cannot by itself imply infinitely many prime pairs. In particular, one cannot identify all arithmetic primes with the 15 SSP lanes. Riemann–von Mangoldt and Keating–Smith zero-pair inversion must be instantiated on a genuine global analytic scalar with correct smoothing/tails/singular series.
 
 **Additional acceptances**: TH01 imported parent/suffix BIDI; TH02 actual 13-pair+centre sign chart; TH03 signed relation-preserving 9/18/27 and cubie transition; TH04 typed overlap cocycle and consumer descent; TH05 finite Fourier shifted pair reconstruct; TH06 certified norm/error propagation across adaptive depth; TH07 joint zeta-zero/arithmetical two-point smoothing and inversion; TH08 actual `P(X)` unbounded (T0) or `S(X)~2C2X` (T3). TH01–TH04 reuse owners but require actual twin-prime instantiation; TH05–TH08 remain theorem obligations. No ESD edits.
+
+
+## Complete executable-facing formalism — twin-prime steelman v3
+
+### 0. Original history and signature
+
+Let `H_n` be the entire admissibly transported *original* arithmetic history, including `n`, its full relevant prime-power provenance, `Lambda(n)`, `Lambda(n+2)`, the shift-two edge, signed complex harmonics, multiplicity, resolved/unresolved status and recursively refinable hypervoxel address. The scalar `Lambda` is the actual `RiemannVonMangoldtSpecification` producer once a faithful ordered real/log implementation is supplied. A bare input `n` or a one-point quotient is not the state.
+
+For each rank `r` and depths `d,e`, reuse `RecursiveRadixHypervoxel`:
+`coarse : TernaryAddress r d`,
+`suffix : AddressSuffix r e`,
+`fine = joinAddress coarse suffix : TernaryAddress r (d ⊕ e)`.
+Do not identify radix with primality; p-adic `AdicChart p` is a separately typed refinement and may require a domain-specific intertwiner.
+
+### 1. Consumer and exact finite identities
+
+`pair(H_n) := Lambda(n)*Lambda(n+2)`.
+`S(X):= sum_{n+2<=X} pair(H_n)`.
+`P(X):=sum_{p+2<=X; p,p+2 prime} log(p)*log(p+2)`.
+`E(X):=S(X)-P(X)`; prove `E(X)>=0` for the genuine real `Lambda` and `E(X)=o(X)`, treating proper prime powers explicitly.
+`Pi2(X) := #{p <= X-2 : p,p+2 prime}`.
+Exact T0: `(forall B, exists p>B, prime(p) & prime(p+2)) <=> P(X) unbounded`.
+Strong T3: `S(X)=2*C2*X + o(X)`, where `C2=prod_{q>2}(1-1/(q-1)^2)`.
+T3 ⇒ T0 after `E=o(X)`, and ⇒ twin-pair counting asymptotic by rigorous weighted partial summation.
+
+### 2. Genuinely joint Fourier/winding object
+
+For a window `W_X`, `f_X(n)=Lambda(n)*1_W(n)` on a cyclic group of length `M>2X+4` with zero padding. `F_X(k)=sum_n f_X(n) exp(-2*pi*i*k*n/M)`. Define
+`S(X) = (1/M) sum_k |F_X(k)|² exp(-4*pi*i*k/M)`
+under the exactly specified no-wrap window and index convention, with real extraction. A Littlewood–Paley shell decomposition `F=sum_j F_j` requires the **full mixed terms** `F_j conj(F_l)`, not only `|F_j|²`. All signed terms plus phase, overlap, shifted pair provenance and remainder survive each quotient. The winding derivative history at C3 is the existing finite SSP15 pilot, not an all-prime transform.
+
+### 3. Canonical symmetry and hyperfabric joining
+
+For the 3-trit cubie, `T3^3 = {0} ⊎ (AntipodalNonzero13 × Sign2)`; the unique centre is not double-covered. The nine-sheet has five antipodal orbit classes. Preserve choice of gauge versus retained sign as a **consumer-driven decision**. The z-face decomposition 9×2+9 is a chart, **not** this quotient. A join `G(U,V)` is admissible only if: (i) signed fine sections agree after restriction to overlaps, (ii) witness `joinAddress(coarse,suffix)=fine`, (iii) cocycle compatibility holds on triple overlaps, (iv) the genuine pair consumer factors through the retained join, and (v) a uniform analytic remainder bound is carried through the join. Existing `JInvariantSheafHyperformAdmissibleDescentExact`, `QueryFactorisationSufficiency`, `BalancedTernaryAntipodalOrbitExact` own the generic terms; instantiated arithmetic estimates are not inherited from them.
+
+### 4. Forward / backward BIDI proof graph
+
+Forward `H -> refinable (coarse,suffix,13-sign orbit,complex phase) -> admissible joined history -> exact pair consumer -> cyclic Fourier reconstruction -> signed global S(X) -> T0 or T3`.
+
+Backward `target T0/T3 -> required uniform arithmetic error budget -> zero-pair/prime-pair correlation strength -> admissible Fourier shell and overlap requirements -> minimal consumer-sufficient hypervoxel depth/jet and preserved residual -> H`.
+
+Fourier coefficients must reconstruct the true arithmetic **joint** observable; do not infer positivity from an individual sample or from unsigned shell energies. Keating–Smith zero-pair inversion (2019) motivates the missing analytic producer but is heuristic until quantitative smoothing/inversion/singular-series error terms are discharged.
+
+### 5. Concrete reusable implementation owners and final lemmas
+
+`DASHI.Core.TwinPickoverHistoryHypervoxelTransportExact` is a shared history/voxel transport source module, using `RecursiveRadixHypervoxel.joinAddress`, `coarsenAfterRefine` and exact original consumer. `TwinPrimeActualPairSectionGluingExact` instantiates the actual abstract von Mangoldt pair consumer; `TwinPrimeResidualMangoldtBidiExact` owns exact period/residual transport. Together with the canonical antipodal owners, these implement finite representation contracts.
+
+Remaining **specific mathematical lemmas**:
+- TP-A: kernel-check all source-written import and typed joining interfaces, including generic history transport.
+- TP-B: finite cyclic exact complex Fourier autocorrelation at shift two, with shell cross-terms and no-wrap.
+- TP-C: build genuine prime-weighted scalar, endpoint convention and `E(X)=o(X)`.
+- TP-D: actual two-point zero-pair ↔ prime-pair transform with smoothing/regularisation, overlap cocycles, and error bound.
+- TP-E: demonstrate *arithmetic* signed remainder `o(X)` or at least infinite prime-only positive slabs; this is the terminal **hard open theorem**.
+- TP-F: weighted/unweighted asymptotic and reverse T0 BIDI, with explicit multiplicative constants.
+- TP-G: quantitative conditioning/interval error of the 10-jet finite SSP pilot and a justified transfer to the all-prime producer if such a map exists.
+No assumptions or Boolean status receipts may stand in for TP-E.
