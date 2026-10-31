@@ -115,8 +115,12 @@ def main(argv=None):
         "lane\tquery\tbackend\tresult_or_command",
     ]
     selected = set(args.group)
+    try:
+        jobs = list(parse_groups(args.terms_file, selected, args.max_terms))
+    except (ValueError, KeyError, json.JSONDecodeError) as exc:
+        parser.error(f"term pack: {exc}")
     groups_seen = {}
-    for group, term in parse_groups(args.terms_file, selected, args.max_terms):
+    for group, term in jobs:
         lane = group["lane"]
         groups_seen.setdefault(lane, group)
         tasks = [( "native", semantic_command(agda, term, args.max_lines))]
