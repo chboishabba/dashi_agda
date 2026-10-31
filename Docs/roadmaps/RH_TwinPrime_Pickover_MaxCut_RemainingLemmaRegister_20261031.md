@@ -142,3 +142,12 @@ Directly inspected the following existing Agdas:
 **Verification:** source definitions and import theorem names were fetched and checked against GitHub; Agda kernel **not run**, CI ignored by user request. No claim that arbitrary chart coarsening is consumer-sufficient, or that RH/twin-prime asymptotics/Pickover terminal sign have been proved.
 
 **Next source-to-kernel leaves:** typecheck the current head on user's machine; instantiate the original Bishop complex signed interval consumer from PR #1260 on the new *retained history* (without copying/rewriting the owner), construct the true exact finite shift-two signed Fourier correlation and the scalar-order connection, then pay the mathematically open analytic bounds. These are terminal work items, not missing representation folklore.
+
+
+## 31 October continued max-cut — original hypervoxel join and exact consumer descent
+
+Added `DASHI/Core/TwinPickoverHypervoxelAdmissibleJoinExact.agda` (`df1cbbc2880aa964d846916747324c800dd61e40`) importing the canonical `RecursiveRadixHypervoxel` owner rather than inventing a new sheaf. The source-written proofs are `fineAgreement` (parent/suffix equality implies identical joined address), `addressConsumerDescent` (any consumer of that exact fine address agrees), and `seamConsumerAgreement` (the original `CrossObjectJoin.interfaceCompatible` implies equality for any postcomposed joined consumer). These are **genuine transport laws conditional on given endpoint/overlap equalities**, but do not create those equalities or establish global analytic gluing.
+
+This upgrades existing TH03/TH04 and PH03/PH04 *generic join* ingredients to SOURCE; instantiation for actual Mangoldt two-point and Bishop complex spectral histories, quantitative error propagation, and kernel acceptance remain explicitly OPEN. The earlier `TwinPickoverHistoryHypervoxelTransportExact` only preserved the entire original state definitionally; do not misrepresent that trivial readout as analytic factorisation.
+
+CI/Agda compiler intentionally deferred at user's request; file has not received a kernel receipt. Preserve all downstream terminal requirements and source provenance.
