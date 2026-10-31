@@ -1274,3 +1274,15 @@ Every new diagnostic should have:
 4. a documented boundary describing what it does not infer.
 
 The preflight checker is an error firewall, not a second theorem prover.
+
+## SAT/ETH exact-lemma snowball search (research-agent adapter, not a new index)
+
+The existing native `dashi-repo` is reused by [scripts/run_openai_math_symbol_snowball.py](../../scripts/run_openai_math_symbol_snowball.py), with [175 term/owner matches](../../docs/superpowers/plans/2026-10-31-local-symbol-snowball-terms.json) prioritized by the [39 exact theorem/certificate obligations](../../docs/superpowers/plans/2026-10-31-openai-math-exact-lemma-maxcut-ledger.md). Do not implement a competing SQLite symbol store. This query driver delegates semantic and historical search to `dashi-repo`, uses plain ripgrep as a Lean/Python fallback, and cannot certify theorem equality, absence or Agda-kernel acceptance.
+
+~~~
+python scripts/run_openai_math_symbol_snowball.py --agda-root . --lean-root ../dashi_lean4 --mode plan --group P0 --group P1 --group P2 --max-terms 40
+python scripts/run_openai_math_symbol_snowball.py --agda-root . --lean-root ../dashi_lean4 --mode both --max-terms 175 --related --out /tmp/dashi-similar-symbols.tsv
+python -m unittest discover -s scripts -p 'test_openai_math_symbol_snowball.py' -v
+~~~
+
+Read the [local agent workflow](../../docs/superpowers/plans/2026-10-31-local-symbol-snowball-agent.md) before editing original source or attributing same-object theorems. Native `LocalOptimizationCompilerExact`, `StandardSingleTapeMachineExact`, `PNotEqualsNPQ1ExecutedConstructionMachineExact`, and `OpenAIMathSharedTseitinUniqueExtensionExact` are important upstream reuse donors. ESD is import-only and no CI gate is involved.
