@@ -118,3 +118,16 @@ The exact history and refinement modules are implemented as source; P9-D/E/F are
 ## Implementation continuation: distinguish exact shared history from a true Bishop sign evaluator
 
 `DASHI.Core.TwinPickoverHistoryHypervoxelTransportExact` retains the original state and `RecursiveRadixHypervoxel` addresses/suffix; its readout equations are definitional. The companion new arithmetic concrete BIDI module proves invertibility of a real Nat-period codec while transporting the full hypervoxel history. Do **not** substitute this number-theoretic codec for the archimedean sine sign: actual Bishop exponential identities, validated phase reduction and a zero-excluding interval are still necessary. For Pickover use the true Bishop historical phase owner from PR #1260 and transport a *certified phase interval* with a consumer-specific refiner. A finite trit label or 270-residue is insufficient by itself. No fabricated terminal sign.
+
+
+## Verified in-repo jet owner audit — 31 October 2026
+
+Correction: **do not propose a new generic SSP-jet architecture**. The existing Agda surfaces include:
+- `DASHI.Geometry.SSP369Ultrametric`: exact `Address d`, `PrefixMatch`, `agreementDepth`, `distance` and prefix soundness.
+- `DASHI.Geometry.AdmissibilityJetSpec` + `DASHI.Geometry.Admissibility369UltrametricBridge`: jet-order/redundancy/field/invariant-generator discipline and a concrete 369 ultrametric depth bridge (explicitly not a physical identity).
+- `DASHI.Biology.OrientedZeroJetTransitionExact`, imported by `ConsciousAccessRound5CompletionBoundary` beside `SignedSSPFRACTRANWeaveExact`, `SSPHyperfibreSymmetryTowerExact` and `TernaryHypercubeHyperfabricExact`.
+- `DASHI.Analysis.RiemannQuarticSignedPoleJointHorizontalJetExact` and `RiemannQuarticSignedPoleBidiMarkedFourthExact`: the real joint horizontal/vertical quartic and even 0/2/4 marked moment owners; their sign/cancellation estimates remain explicitly open.
+- `DASHI.Physics.YangMills.BalabanWilsonBivariateMarkedJetExact` and `BalabanWilsonMarkedClusterJetExact`: exact mixed coefficient bivariate jet and finite coefficient extraction, with actual analytic producer still separate.
+- `DASHI.Moonshine.OggPrimeFourierWindingExact` from PR #1140: existing exact finite SSP/Ogg winding and C3 conjugation owner.
+
+The ten-derivative SSP15 Eisenstein winding *rank experiment* in `scripts/check_ssp15_c3_winding_jet_rank.py` is a specific new exact finite certificate. Searches did not locate a pre-existing source file formalising precisely this ten-derivative **15×15 inverse**, so the narrow remaining task is a concrete kernel-checked adapter to the above existing jet owners, **not** 'integrate jet machinery' wholesale. Neither a bivariate Wilson jet nor a finite SSP rank proof automatically gives uniform arithmetic pair-correlation estimates.
