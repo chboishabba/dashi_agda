@@ -46,3 +46,10 @@ Canonical owners: BishopMachinArctanConstructionExact, BishopMachinQuarterAngleB
 ## Attribution / evidence distinctions
 
 Original Brun/Polymath/Hardy-Littlewood mathematical results remain original. The OpenAI 7/8 and 11/12 manuscripts and Lean proof own their theorem; the new DASHI analytic bridge is an independent proof adapter. A kernel-verified external theorem is not an Agda-kernel theorem without a witnessed semantic import. Experimental counts, numeric matches and finite scripts do not certify infinite arithmetic conclusions. Do not touch ESD or promote Monster/SSP/C3 numerology into same-object Hecke representations.
+
+
+## 2026-10-31 concrete infinite fixed-sieve failure certificate
+
+New `scripts/check_twin_prime_finite_screen_infinite_composite_witnesses.py` (commit `0c9e12545cbc535c4f5c38ea1568df44abc8c354`) constructs a proof-bearing **infinite family of composite false positives** for each fixed finite set F of primes containing 2 and 3. Set W=∏_{p∈F}p, choose distinct P,Q>max(F), and CRT-solve n≡−1 (mod W), n≡0 (mod P), n≡−2 (mod Q). All n=n0+tWPQ for t≥1 survive every p∈F while n and n+2 are both composite. For full canonical SSP15 F, one locally independently checked example is n=13050476785267491359789, with 73|n and 79|(n+2), yet no SSP15 prime divides either endpoint. This is a theorem for arbitrary fixed F, with one test example, and completely rules out *fixed-screen survivor counting alone* as a twin-infinitude proof. It does NOT rule out genuinely dynamic or parity-breaking prime-distribution mathematics. The remaining lemma T03 must inject genuinely global arithmetic beyond any fixed finite chart.
+
+New actual xi zero-carrier adapter, explicit Brun upper estimate, and Pickover fail-closed phase test are detailed above. The original terminal goals remain RH at 1/2, positive gap-two lower correlation, and the true giant sine sign, none of which is accomplished by this finite-sieve no-go.
