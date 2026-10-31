@@ -41,6 +41,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as VectorOwner
 import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinGateCNFExact as Original
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedCompilerExact as Compiler
+import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinUniqueExtensionExact as Unique
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 
 -- A model has precisely n+g bits, not an unrestricted Nat -> Bool tail.
@@ -1347,6 +1348,8 @@ finiteCookChronologicalGateExact {inputs} bits index =
 -- ProgramAssignmentRealizes. Reuse the stdlib splitAt/join and opposite.
 ------------------------------------------------------------------------
 
+-- Reuse the earlier ORIGINAL uniqueUsedCoordinates theorem, not a
+-- second proof of evaluateProgram gate-value determination.
 originalRealizationsAgreeAtInput :
   ∀ {inputs gates : Nat}
     {program : Circuit.GateProgram inputs gates}
@@ -1358,18 +1361,15 @@ originalRealizationsAgreeAtInput :
     (index : Fin inputs) →
   left (FinBase.toℕ (FinBase.join inputs gates (inj₁ index))) ≡
   right (FinBase.toℕ (FinBase.join inputs gates (inj₁ index)))
-originalRealizationsAgreeAtInput
-    {gates = gates} {left = left} {right = right}
+originalRealizationsAgreeAtInput {gates = gates} {left = left} {right = right}
     leftRealization rightRealization sameInput index =
   trans
     (cong left (FinP.toℕ-↑ˡ index gates))
     (trans
-      (Existing.inputVariablesCorrect leftRealization index)
-      (trans
-        (cong (Circuit.lookupVec index) sameInput)
-        (trans
-          (sym (Existing.inputVariablesCorrect rightRealization index))
-          (cong right (sym (FinP.toℕ-↑ˡ index gates))))))
+      (Unique.uniqueUsedCoordinates
+        leftRealization rightRealization sameInput
+        (Unique.inputCoordinate index))
+      (cong right (sym (FinP.toℕ-↑ˡ index gates))))
 
 originalRealizationsAgreeAtGate :
   ∀ {inputs gates : Nat}
@@ -1382,29 +1382,19 @@ originalRealizationsAgreeAtGate :
     (index : Fin gates) →
   left (FinBase.toℕ (FinBase.join inputs gates (inj₂ index))) ≡
   right (FinBase.toℕ (FinBase.join inputs gates (inj₂ index)))
-originalRealizationsAgreeAtGate
-    {inputs} {program = program} {left} {right}
+originalRealizationsAgreeAtGate {inputs} {left = left} {right = right}
     leftRealization rightRealization sameInput index =
   trans
     (cong left (FinP.toℕ-↑ʳ inputs index))
     (trans
       (cong left (sym (chronologicalGateNumberExact inputs index)))
       (trans
-        (Existing.gateVariablesCorrect leftRealization
+        (Unique.uniqueAuxiliaryGateValues
+          leftRealization rightRealization sameInput
           (FinBase.opposite index))
         (trans
-          (cong
-            (λ values →
-              Circuit.lookupVec (FinBase.opposite index)
-                (Circuit.evaluateProgram program values))
-            sameInput)
-          (trans
-            (sym (Existing.gateVariablesCorrect rightRealization
-              (FinBase.opposite index)))
-            (trans
-              (cong right (chronologicalGateNumberExact inputs index))
-              (cong right
-                (sym (FinP.toℕ-↑ʳ inputs index))))))))
+          (cong right (chronologicalGateNumberExact inputs index))
+          (cong right (sym (FinP.toℕ-↑ʳ inputs index))))))
 
 usedOriginalAssignmentsAgree :
   ∀ {inputs gates : Nat}
