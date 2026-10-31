@@ -146,3 +146,19 @@ The ten-derivative SSP15 Eisenstein winding *rank experiment* in `scripts/check_
 New owner `scripts/check_ssp15_c3_winding_adjugate_inverse.py` (commit `662b4e4125d4eefb004da566f89ed60c4873041c`) implements the **all-input** rational inverse law, improving on a sample-vector test. For `M=M10[0:15,:]` (the first ten A-rows plus first five B-rows, in SSP prime order), exact determinant:
 `det(M)=-68973567202690493145068231495208746474043983233237147979454873600000000 != 0`.
 The universal identity `adj(M)*M=det(M)*I_15` yields `v = adj(M)*selectedJets/det(M)` for EVERY signed rational/integer 15-lane valuation history. The script also checks an explicit **nonnegative** nine-jet collision with tenth-jet separation. The finite C3 winding derivative transport now has a constructive algorithmic decoder rather than mere injective rank evidence. This does **not** prove an arbitrary analytic infinite Fourier transform, a uniform stable numerical inverse, or a prime-pair lower bound. Kernel formalisation of this integer matrix identity remains a narrow outstanding W04 task, not a missing generic SSP jet framework. No CI/compiler claimed.
+
+
+## 31 October: ten-jet versus existing ten-state/rank-ten owner disambiguation
+
+**Repository and PR search performed:** exact aliases `ten jet`, `10-jet`, `tenJet`, `TenJet`, `SSP15Jet`, `winding derivative`; SSP/rank owners; ten-jet PR title/body. No existing *identical* Agda theorem of the **15-lane, ten-derivative, full-rank rational Eisenstein winding inverse** was located by these searches. This is a limited negative search result, not a claim that the proof does not exist under another name or branch.
+
+**Actual nearby owners inspected:**
+- `DASHI.Moonshine.JInvariant369TenRankSeventeenHyperformalismExact`: **ten-state** completion 9+1, 5×2, rank indexing to 17, SSP signed-FRACTRAN fine fibre; 'ten' does not denote ten Fourier derivatives.
+- `DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact`: same ten-state completion, distinct C6 reflection/phase structure, not the SSP15 jet inverse.
+- `DASHI.Biology.SSP15JCoarseFineIntegratedExact`: actual per-prime nine-observer atlas, p=9q+r address, j-coarse/fine evaluation.
+- `DASHI.Biology.SSP15NineObserverAtlasExact`: lane-specific observer distinctions; actual quotient semantics require specific projections.
+- Previously indexed `SSP369Ultrametric`, `Admissibility369UltrametricBridge`, `OrientedZeroJetTransitionExact`, `OggPrimeFourierWindingExact` (#1140), RH quartic and YM bivariate jets.
+
+**New minimal finite proof certificate:** `scripts/check_ssp15_c3_winding_modular_inverse.py` (commit `da059117d6ae062a8157316d56643418da143d08`) constructs the exact selected 15×15 `M10` submatrix and verifies `det(M) mod 101 = 98`. This independently implies `det(M) ≠ 0` over integers, hence rational full rank. The modular residue **does not itself reconstruct signed integer histories**; the existing exact rational adjugate formula supplies that. To kernel-check the narrow inverse, it suffices to compute a nonzero minor modulo 101 in the existing finite matrix owner then lift nonzero integer determinant and exact rational injectivity. Avoid a new generic jet algebra.
+
+**Corrected next highest-alpha:** (1) import any *actual* existing finite modular-matrix determinant owner, (2) instantiate this concrete 15×15 and prove the residue 98, (3) lift to Q and prove the inverse, (4) signed SSP history/hyperfabric factor-through in the real observer, (5) return to genuine arithmetic/analytic terminal estimates. The code is source-written, no CI or kernel proof claimed. Do not collapse ten-state completion with ten derivative samples.
