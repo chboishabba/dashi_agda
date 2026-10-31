@@ -61,6 +61,5 @@ signCollisionForcesSignedResidual :
   (collision : Residual.ConsumerRelevantCollision coarse consumer) →
   signedResidual (encode (Residual.left collision))
     ≡ signedResidual (encode (Residual.right collision)) → ⊥
-signCollisionForcesSignedResidual {consumer = consumer} collision =
-  Residual.everySufficientObserverSeparatesRelevantCollision
-    collision (retainedObserverSufficient consumer)
+signCollisionForcesSignedResidual {consumer = consumer} collision same =
+  Residual.differentOutcome collision (cong consumer same)
