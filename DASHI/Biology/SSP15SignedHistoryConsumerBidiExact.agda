@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Biology.SSP15SignedHistoryConsumerBidiExact where
 
 -- Reuse the ACTUAL fifteen-lane FRACTRAN SSPValuation.
@@ -9,6 +8,9 @@ module DASHI.Biology.SSP15SignedHistoryConsumerBidiExact where
 open import DASHI.Core.Prelude
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSP
 import DASHI.Core.ConsumerIndexedResidualRefinementExact as Residual
+
+-- The imported canonical SSP weave owner is not declared --safe;
+-- this companion cannot honestly claim --safe until upstream is audited.
 
 SSPHistory : Set
 SSPHistory = SSP.SSPValuation
