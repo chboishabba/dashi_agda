@@ -808,3 +808,77 @@ placedGateOutputForced gate globalBits accepted =
 -- newest-first evaluateProgram vector; combine with
 -- ProgramPlacedGatesValid, inputVectorFromGlobal, and source #SAT count.
 -- SOURCE-WRITTEN ONLY; Agda kernel has not accepted this file.
+
+
+------------------------------------------------------------------------
+-- SAME-OBJECT COMPLETION: gate relation holds iff the original output
+-- bit equals the corresponding original gate operation at the actual
+-- global variable coordinates.
+------------------------------------------------------------------------
+
+eqBoolEqualImpliesTrue :
+  (left right : Bool) →
+  left ≡ right → eqBool left right ≡ true
+eqBoolEqualImpliesTrue false false refl = refl
+eqBoolEqualImpliesTrue true true refl = refl
+
+localGateOutputComplete :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates)
+    (bits : GateWindow) →
+  CNF.lookupBit bits Fin.zero ≡ localGateExpectedOutput gate bits →
+  localGateConsistent gate bits ≡ true
+localGateOutputComplete (Circuit.constantGate value) bits equals =
+  eqBoolEqualImpliesTrue _ _ equals
+localGateOutputComplete (Circuit.notGate source) bits equals =
+  eqBoolEqualImpliesTrue _ _ equals
+localGateOutputComplete (Circuit.andGate left right) bits equals =
+  eqBoolEqualImpliesTrue _ _ equals
+localGateOutputComplete (Circuit.orGate left right) bits equals =
+  eqBoolEqualImpliesTrue _ _ equals
+
+placedGateOutputComplete :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates)
+    (globalBits : CNF.Bits (inputs + suc gates)) →
+  CNF.lookupBit globalBits newOutputFin ≡
+    localGateExpectedOutput gate
+      (Rename.pullbackBits (gateWindowRename gate) globalBits) →
+  localGateConsistent gate
+    (Rename.pullbackBits (gateWindowRename gate) globalBits) ≡ true
+placedGateOutputComplete gate globalBits equals =
+  localGateOutputComplete gate
+    (Rename.pullbackBits (gateWindowRename gate) globalBits)
+    (trans
+      (Rename.pullbackLookup
+        (gateWindowRename gate) globalBits Fin.zero)
+      equals)
+
+placedGateCNFOutputSound :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates)
+    (globalBits : CNF.Bits (inputs + suc gates)) →
+  CNF.evaluateCNF (placedGateCNF gate) globalBits ≡ true →
+  CNF.lookupBit globalBits newOutputFin ≡
+    localGateExpectedOutput gate
+      (Rename.pullbackBits (gateWindowRename gate) globalBits)
+placedGateCNFOutputSound gate globalBits accepted =
+  placedGateOutputForced gate globalBits
+    (placedGateSound gate globalBits accepted)
+
+placedGateCNFOutputComplete :
+  ∀ {inputs gates : Nat}
+    (gate : Circuit.Gate inputs gates)
+    (globalBits : CNF.Bits (inputs + suc gates)) →
+  CNF.lookupBit globalBits newOutputFin ≡
+    localGateExpectedOutput gate
+      (Rename.pullbackBits (gateWindowRename gate) globalBits) →
+  CNF.evaluateCNF (placedGateCNF gate) globalBits ≡ true
+placedGateCNFOutputComplete gate globalBits equals =
+  placedGateComplete gate globalBits
+    (placedGateOutputComplete gate globalBits equals)
+
+-- This settles local and globally PLACED one-gate functional semantics.
+-- It does not yet prove that recursively assembled previous gate values
+-- are source-Circuit.evaluateProgram: the GateProgram chronological-vs-
+-- newest-first induction remains an explicit dependency.
