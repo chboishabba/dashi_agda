@@ -1,4 +1,7 @@
-{-# OPTIONS --safe #-}
+-- Cross-owner adapter: several authoritative imported DASHI donors predate
+-- safe-kernel certification. Do not advertise this integrated adapter as a
+-- Golden --safe theorem; prove safe leaf lemmas separately and kernel-check
+-- the import closure before promotion.
 module DASHI.Reasoning.Leech369TrialecticWaveLearningArchitectureBidiExact where
 
 -- This is a bridge to EXISTING DASHI 369/wave/trialectic knowledge,
