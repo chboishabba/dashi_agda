@@ -134,3 +134,50 @@ history version and time-indexed consumer.
 
 Do not touch `*ESD*` surfaces. No unsolved metas, `postulate`,
 or terminating pragmas permitted in new Golden Agda modules.
+
+
+## Commuting-square and C3 comparison (31 October update)
+
+Source-level owner audit:
+- `DASHI/Moonshine/C3FourierConjugationExact.agda` proves conjugate pairing
+  of the two nontrivial characters of cyclic order-three phase.
+- `DASHI/Moonshine/C3RiemannConjugationBridgeExact.agda` separates the
+  involution/fixed-locus analogy from any Riemann-zero identification.
+- `DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda`
+  states explicitly that the comparison stops at orbit shape.
+- `DASHI/Moonshine/JInvariant369ReflectionEquivarianceExact.agda`
+  provides explicit finite involutions on 3, 6, 9, 27 carriers and
+  demands observer intertwining to obtain a commuting square.
+
+For our expert the correct square is
+  conjugate(F,I)(I z) = I(F z),
+where z includes the activation AND history. The new
+`conjugateIntertwinesInverse` theorem in
+`LeechSignedHistoryExpertBidiExact.agda` proves this finite identity.
+This is a genuine reuse of *commuting square proof architecture*;
+there is no identification of a network expert with zeta zeros,
+Monster representations or the C3 regular representation.
+
+A second square remains to prove for an actual router/observer q:
+  q(I z) = I_Q(q z),
+with concrete chart, time-indexed memory and corresponding
+orientation action on the quotient carrier. For a float32 tensor
+the finite sign group must also specify exact bit-level handling of
+negative zero and NaN payloads.
+
+**Parity correction:** On an additive real codomain,
+  even_F(z)=(F(z)+F(I z))/2,
+  odd_F(z) =(F(z)-F(I z))/2,
+and F(z)=even_F(z)+odd_F(z) exactly.
+A residual R is *not* part of this exact decomposition. Introduce
+R only for compressed/learned/approximated implementations:
+  R(z)=F(z)-decode(estimated_even,estimated_odd,...).
+For a full history transition, ensure all state/output coordinates
+have specified additive structures, not just their signed trit labels.
+Doubled parity formulas may be used to avoid division-by-two
+in discrete carriers; do not equate that with an exact real-valued
+GELU theorem.
+
+C3 conjugation is an order-two automorphism of an order-three
+phase group. The group order-three operation and the reflection
+operation are different; neither is a declaration of ethical polarity.
