@@ -17367,3 +17367,15 @@ Cleanup
 - [ ] Kernel check new Agda terms and construct Lean mirrors from exact source owners.
 - [ ] Import/translate the actual Lean PrimeGapsLib/PrimeGaps186 analytic declarations with their assumptions before claiming *the SOTA papers themselves* are formally integrated. Don't turn three external axioms or Bombieri–Vinogradov into invisible facts.
 - [ ] Build genuinely new prime-pair +2 distribution estimate or alternative cofinal exact-shift-two witness; open.
+
+## 2026-10-31 — exact T0 cofinal BIDI / Pareto terminal backlog (PR #1408)
+
+- [x] Source-write `TwinPrimesInfinitelyOften → UnboundedCertifiedCountJumps` via actual prime witness at N+2, original certified exact count-jump theorem, and explicit Nat-order transport.
+- [x] Source-write two-way cofinal-window ⇔ exact-count-jumps transport; import the owner in all three canonical TOE roots.
+- [ ] Focused Agda kernel check (pinned golden configuration), strict safe import/zero-postulate closure and repair any errors. **No CI run requested.**
+- [ ] Build ordered-real exact prime-only weight bridge (positive log(p)log(p+2)) from `ΛΛ` to the original `TwinPrimeAt` count-jump/window readout; prove actual finite-endpoint S=P+E equality and error bound.
+- [ ] T10/CT15 **unconditional** cofinal genuine count jump or equivalent actual shifted-prime correlation lower bound. The equivalence proved above does **not** satisfy this.
+- [ ] K04/K05: actual Bishop-real Machin Cauchy modulus/limit setoid equality, true π branch and analytic zeta consumer continuity (not just abstract limit record).
+- [ ] R01/R02: independently audit source 7/8 theorem, same-object ξ reflection and true boundary arithmetic; R10 full off-line zero exclusion remains open.
+- [ ] P03/P10: effective certified winding and rational sign-separated interval for `sin(99^(9999!))`; fail closed on insufficient precision.
+- [ ] W04/W05: kernel-check original SSP15 ten-jet Vandermonde inverse and nine-jet integral collision; preserve retained sign, consumer and mathematical source owners.
