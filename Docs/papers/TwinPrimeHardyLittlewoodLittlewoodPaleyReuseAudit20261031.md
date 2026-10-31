@@ -35,3 +35,18 @@ One arithmetic Fourier bridge should provide:
 Finite Fourier/LP is a powerful exact change of coordinates but cannot alone overcome sieve parity. The hardest lemma becomes **signed shift-two phase cancellation** of the nonzero frequencies sufficiently sharp to leave a positive main term. Hardy–Littlewood singular series 2C2 and R(X)=o(X) remain a separate conjectural target. Do not confuse Hardy–Littlewood maximal functions with the Hardy–Littlewood prime-pair conjecture or Hardy–Ramanujan asymptotics.
 
 **Status:** documented owner reuse and discriminator; no Agda kernel run or new analytic theorem; no ESD edits. All original mathematical and in-repo owners remain attributed.
+
+
+## Executed arithmetic Fourier bridge test (31 October)
+
+New independent finite regression `scripts/check_twin_prime_fourier_signed_shell_maxcut.py` computes the *actual* finite classical von Mangoldt sequence on zero-extended cyclic domains, directly reconstructs shift-two correlation through the DFT, and divides the frequency sum into disjoint signed shells. Ran with local Python: PASS.
+
+| X | M | original correlation | signed LP-like shell contributions |
+|---:|---:|---:|---|
+|10|32|7.51822365|4.82568794, 0.93643475, 1.75610096|
+|20|64|24.64528461|14.25092113, 2.03913758, 8.35522590|
+|40|128|46.72241952|25.80865086, 2.47086861, 18.44290004|
+
+For positive-support adversarial sequences `[1,0,0,0,0,0,0,0]` and `[1,1,0,0,0,0,0,0]`, each total shift-two correlation is zero despite positive total Fourier energy. Signed shell contributions are `[0.125,-0.25,0.125]` and `[0.5,-0.5,0]`, respectively. A shell norm/energy bound by itself therefore cannot yield shifted-prime positivity. No Fourier phase is dropped. All computations are float-based sanity checks, not certified Fourier theorems.
+
+**Remaining maximal cut:** exact Agda finite cyclic transform and signed-shell identity (finite algebra), followed by a *new unconditional prime-specific signed remainder bound* (hard number theory). Existing Z^3 Navier–Stokes Littlewood–Paley source cannot be silently treated as scalar Z/M arithmetic analysis. No kernel proof, no twin-prime infinitude proof. Reuse and attribution of all source owners preserved.
