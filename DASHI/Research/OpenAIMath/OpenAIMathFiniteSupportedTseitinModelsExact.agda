@@ -1280,3 +1280,61 @@ originalCircuitToPlacedCNFSatisfiability circuit (values , accepted) =
 -- The stronger equation countSourceCNF C = countAcceptedCircuitInputs C
 -- remains unpaid: multiple global assignments have to be proved
 -- impossible at a given accepted input, and finite sums transported.
+
+
+------------------------------------------------------------------------
+-- The EXISTING compiler's newest-first indices are the stdlib Fin.opposite
+-- of chronological suffix indices. Reuse FinP.opposite-involutive,
+-- FinP.toℕ-fromℕ, FinP.toℕ-inject₁ and the existing Canonical right
+-- embedding; never create a second gate-numbering convention.
+------------------------------------------------------------------------
+
+gateNumberEqualsOppositeIndex :
+  ∀ (inputs : Nat) {gates : Nat} (index : Fin gates) →
+  Compiler.gateVariableIndex inputs index ≡
+    inputs + FinBase.toℕ (FinBase.opposite index)
+gateNumberEqualsOppositeIndex inputs {gates = suc gates} fzero =
+  cong (λ position → inputs + position)
+    (sym (FinP.toℕ-fromℕ gates))
+gateNumberEqualsOppositeIndex inputs {gates = suc gates} (fsuc index) =
+  trans
+    (gateNumberEqualsOppositeIndex inputs index)
+    (cong (λ position → inputs + position)
+      (sym (FinP.toℕ-inject₁ (FinBase.opposite index))))
+
+chronologicalGateNumberExact :
+  ∀ (inputs : Nat) {gates : Nat} (index : Fin gates) →
+  Compiler.gateVariableIndex inputs (FinBase.opposite index) ≡
+    inputs + FinBase.toℕ index
+chronologicalGateNumberExact inputs index =
+  trans
+    (gateNumberEqualsOppositeIndex inputs (FinBase.opposite index))
+    (cong (λ position → inputs + position)
+      (FinP.opposite-involutive index))
+
+finRightOriginalGateNumber :
+  ∀ (inputs : Nat) {gates : Nat} (index : Fin gates) →
+  FinBase.toℕ (Placement.finRight inputs index) ≡
+    inputs + FinBase.toℕ index
+finRightOriginalGateNumber zero index = refl
+finRightOriginalGateNumber (suc inputs) index =
+  cong suc (finRightOriginalGateNumber inputs index)
+
+finiteCookChronologicalGateExact :
+  ∀ {inputs gates : Nat}
+    (bits : CNF.Bits (inputs + gates)) (index : Fin gates) →
+  finiteCNFToCookAssignment bits
+    (Compiler.gateVariableIndex inputs (FinBase.opposite index))
+  ≡ CNF.lookupBit bits (Placement.finRight inputs index)
+finiteCookChronologicalGateExact {inputs} bits index =
+  trans
+    (cong (finiteCNFToCookAssignment bits)
+      (chronologicalGateNumberExact inputs index))
+    (trans
+      (cong (finiteCNFToCookAssignment bits)
+        (sym (finRightOriginalGateNumber inputs index)))
+      (finiteCNFToCookLookup bits
+        (Placement.finRight inputs index)))
+
+-- These are genuine typed index identities on the original finite support.
+-- No absolute-size overhead, approximate graph theorem or ETH claim follows.
