@@ -281,3 +281,14 @@ This supersedes older vague “finish representation” notes. Status labels: **
 ## 31 October follow-on: exact prime-counting across time-indexed fibre gluing
 
 Commit `589a27760c2a56c51a0c2ca4573cb09938e57687` extends `DASHI/Analysis/ZetaIrrationalFibreCommutingSquareBidiExact.agda` with `primeCountStableAcrossOneStep` and `primeCountStableAcrossTwoSteps`. Both consume the canonical `PrimeCountingFunction.primeCountLE` and a *supplied* coherent retained Nat readout; the proofs are `cong` and `trans` along actual stage-equality witnesses, not a synthetic prime theorem. This closes exact one/two-stage equality of the finite prime-count consumer **conditional on the history's coherence**, while the essential genuinely varying approximants/real zeta limit, analytic PNT estimates, actual shifted-prime correlation, RH zero exclusion and Pickover irrational-winding sign still need their own substantive mathematical producers. Source-written only; kernel check remains outstanding by the user's no-CI instruction.
+
+
+## 2026-10-31 finite/convergence cut: genuine nonconstant rational Machin history
+
+New executable exact-arithmetic `scripts/check_machin_fractran_cauchy_history.py` (commit `f22a521c`) is a mathematical producer beyond merely prescribing a limit attachment. Define for n>=1
+
+`q_n=16 Σ_{j<n} (-1)^j/((2j+1)5^(2j+1)) -4 Σ_{j<n} (-1)^j/((2j+1)239^(2j+1))`.
+
+The alternating-series theorem yields `|q_n-π|<=e_n`, where `e_n=16/((2n+1)5^(2n+1))+4/((2n+1)239^(2n+1))<=4/25^n`. Thus `|q_j-q_k|<=8/25^n` for all `j,k>=n`; this is a **quantified Cauchy modulus**. `q_(n+1)-q_n = (-1)^n/(2n+1)*(16/5^(2n+1)-4/239^(2n+1)) !=0`, so this history is explicitly nonconstant. Each `q_n` is rational and therefore has a finite signed prime-valuation encoding, including residual primes not in the SSP15 dictionary. Local exact rational checks for eight stages and prime reconstruction for the first two stages were executed; the committed script checks 24 stages without expensive factorisation. The convergence proof relies on the classical Machin identity and alternating remainder theorem; the existing Bishop Machin construction supplies the intended real producer. **Still required:** proof in the actual Agda/Bishop setoid that these rational stages map into that canonical Bishop real and satisfy its located-Cauchy modulus, and a continuity/analytic producer attaching a zeta consumer. Exact exponent/rational-history compression does not decide the real Pickover sign.
+
+The terminal analytic obligations (actual twin-prime correlation, RH zero exclusion, and the requested Pickover sine sign) remain explicitly OPEN; this finite construction should be used as a real constructive donor, not as a replacement analytic theorem.
