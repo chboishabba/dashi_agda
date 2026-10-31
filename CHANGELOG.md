@@ -132,3 +132,8 @@ monitor surface.
 - Added `stageIndexAfter`, `readoutStableAcrossFiniteSteps`, `consumerStableAcrossFiniteSteps`, `primeCountStableAcrossFiniteSteps` in the original zeta/fibre square; they compose the supplied retained-Nat equality over any finite number of stages. This is finite consumer agreement only, no analytic `ζ` convergence.
 - Fixed malformed constructor type syntax in `QuadraticIrrationalSignedApproximationFibreExact` for sqrt(3)/2 and golden-ratio defects, preserving the original 3-direction classification.
 - Updated K04a–d / K05 exact outstanding mathematical/source/kernel gates. **Source-written only; no Agda compiler, no CI, no external Lean proof promotion.** ESD unchanged; source authorship retained.
+
+## 2026-10-31 — actual Bishop Machin finite signed stage (K04a source cut)
+
+- Added `DASHI.Analysis.BishopMachinSignedFiniteHistoryExact`. Its actual Bishop `SeriesOf` stage uses original Machin 1/5 and 1/239 signed terms, 16/4 weights, and proves stagewise signed difference using previously owned `BishopFiniteSeriesDifferenceExact.finiteSeriesDifference`; no generic carrier or duplicate sum library.
+- Imported into all three TOE roots and updated roadmap/TODO. Quantitative rational-q_n embedding, Bishop combined convergence, classical trigonometric π, meromorphic ζ continuation and all three terminal RH/TP/Pickover gates remain open. **Only source-written, no Agda kernel/CI claim.** Original Machin/Bishop/Murray, repository and independent Lean proof ownership unchanged, ESD untouched.
