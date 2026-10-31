@@ -30,6 +30,9 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact a
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact as Existing
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
+import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
+import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalWindowPlacementExact as Placement
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact as Slice
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as VectorOwner
 
 -- A model has precisely n+g bits, not an unrestricted Nat -> Bool tail.
@@ -389,3 +392,32 @@ lookupCNFToVec (bit CNF.∷ᵇ rest) (fsuc index) =
 -- reifying every original numbered gate variable, and proving the whole
 -- circuit CNF count equals accepted input count remain separate obligations.
 -- No postulates, infinite tail assignment, or duplicate CNF datatype.
+
+
+------------------------------------------------------------------------
+-- REUSE original Cook-Levin GLOBAL BLOCK SLICE as the input-vector owner.
+-- This pays the input-wire half of original-circuit CNF reification, rather
+-- than proving a new Fin addition/left-injection lemma.
+------------------------------------------------------------------------
+
+inputVectorFromGlobal : ∀ {inputs gates : Nat} →
+  CNF.Bits (inputs + gates) → Vec Bool inputs
+inputVectorFromGlobal {inputs} bits =
+  bitsToFiniteVec (Canonical.takeBits inputs bits)
+
+inputVectorLookupExact : ∀ {inputs gates : Nat}
+  (bits : CNF.Bits (inputs + gates))
+  (index : Fin inputs) →
+  Circuit.lookupVec index (inputVectorFromGlobal bits) ≡
+    CNF.lookupBit bits (Placement.finLeft index)
+inputVectorLookupExact {inputs} bits index =
+  trans
+    (sym (lookupCNFToVec (Canonical.takeBits inputs bits) index))
+    (Slice.lookupTakeBits bits index)
+
+-- Original producer/owner attribution: source finite DAG input indexing,
+-- ConcreteTapeCanonicalCellBitsExact.takeBits,
+-- ConcreteTapeCanonicalWindowPlacementExact.finLeft,
+-- ConcreteTapeGlobalBlockSliceConsistencyExact.lookupTakeBits.
+-- Remaining step is recursive newest-first GATE vector construction and
+-- exact gate-value lookup at Compiler.gateVariableIndex; kernel pending.
