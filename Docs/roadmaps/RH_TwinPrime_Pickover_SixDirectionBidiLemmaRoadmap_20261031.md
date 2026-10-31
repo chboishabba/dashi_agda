@@ -119,3 +119,42 @@ The **useful commonality** is a consumer-indexed signed spectral calculus. The *
 **P7 (steelman asymptotic):** T11–T16, reverse direction and stringent error/complexity audits.
 
 No compiler/kernel result or terminal proof is asserted by this roadmap.
+
+
+## 31 October 2026 source re-audit: do not duplicate existing J/pants/FactorThrough/Bishop proofs
+
+**Observed on default-branch source reads (actual files, not just PRs):**
+- `DASHI.Moonshine.JInvariantAnalyticHyperformChartGluingExact` supplies q-series/lattice same-object chart gluing conditional on a real `BishopQSeriesLatticeSameObject` and `parameterToFinePoint`; the code explicitly warns that a local 27 chart is not a complete analytic fine point and finite PantsPath3 is not a smooth pair of pants.
+- `DASHI.Moonshine.JInvariantSheafHyperformAdmissibleDescentExact` owns presheaf restriction/admissible seam infrastructure and imports `ConsumerDescentMinimalObserverExact`, `ObserverFactorizedRefinementExact`, `CoarseFineRelativeFibreExact`, `JInvariantRiemannObserverResidualSufficiencyBidiExact` and typed-stratum admissibility. Its categorical interface must NOT be called a proved analytic Grothendieck site.
+- `DASHI.Reasoning.TypedHyperfabricPantsGluingBridgeExact` owns explicit proposition/capacity/phase seam matching and says the interface certificate does not itself reorganise the fabric.
+- `DASHI.Core.QueryFactorisationSufficiency` owns `FactorsThrough` and `StaticSufficient`: a query factors as `q=qbar∘pi`; this does **not** prove physical world coverage or a prime-pair estimate.
+- `DASHI.Moonshine.JInvariantBishopTrigUnitPhaseExact` owns genuine Bishop complex cosine+i*sine and conditional Pythagorean norm. The repo contains `bishop.agda-lib` and multiple native Bishop components; external vendored Bishop must be checked at its pinned path, not reinvented.
+- PR #1260 Pickover analytically consumes the Bishop phase, with history/readout; PR #1140 finite Ogg Fourier winding is separate. PR #1272 is Fourier-pixel optics; neither has been confirmed to cite the 3Blue1Brown video.
+- Searches of GitHub PR titles/bodies for `3b1b` and `3Blue1Brown`, and default-branch code for those strings, returned no actual video-specific formalisation. *Absence from the index does not establish absence from all branches/files.* Keep this as an attribution discovery task, not a fabricated prior PR.
+
+### Refined gluing BIDI hypothesis
+
+Let `U,V` be two frequency/zero/arithmetical charts, with genuine actual spectral sections `s_U,s_V`; on overlaps require **equality in a common analytic scalar/setoid**:
+`restrict(U∩V,s_U) ≈ restrict(U∩V,s_V)`.
+Retain full signed complex amplitudes, multiplicity, winding and local error enclosure in the fine fibre. Ask whether the final consumers `C_RH`, `C_TP`, `C_P9999` factor through a proposed chart quotient. If not, exhibit consumer-relevant collisions and add precisely the missing residual (existing `ConsumerIndexedResidualRefinementExact`).
+
+**A successful gluing theorem requires:** compatible local sections; exact restriction cocycle; enough coverage; a global section existence/uniqueness theorem for the *specific analytic carrier*; preservation of the actual arithmetic `Lambda` and actual zeta zeros; **uniform quantitative estimates across overlaps and truncation limits**. None of the finite pants/27-cube interfaces supplies the last two obligations automatically.
+
+**Potential high-alpha insight:** pair-correlation is an *overlap statistic*: even when each chart gives a correct one-point marginal, gluing two charts and retaining the joint signed coupling is essential. The new forward consumer should be the true mixed product `Lambda(n)Lambda(n+2)` (and independently the two-zero statistic), not merely a product of separately averaged one-point counts.
+
+### Replace duplicated lemma families with imports
+
+| Old obligations | Import / previous owner | Truly remaining leaf |
+|---|---|---|
+| F02–F04 Fourier phase basics | `C3FourierConjugationExact`, Fourier PR #1140, optics PR #1272, existing integer Fourier modes | Genuine arbitrary finite cyclic DFT over chosen exact scalar with phase convention |
+| F06–F08 signed history/descent | `WaveAlgorithmLift.Trit`, `TwinPrimeResidualMangoldtBidiExact`, `ConsumerIndexedResidualRefinementExact` | Concrete real signed shell and approximation enclosure certificate |
+| F12 gluing/commuting squares | `JInvariantAnalyticHyperformChartGluingExact`, `JInvariantSheafHyperformAdmissibleDescentExact`, `TypedHyperfabricPantsGluingBridgeExact`, `QueryFactorisationSufficiency` | Instantiate seam, cocycle and quantitative overlap bounds for actual zeta/prime-pair fields |
+| R01–R02 von Mangoldt | `RiemannVonMangoldtSpecification`, `RiemannTrackedToVonMangoldtBridge` | Actual ordered real-log interpretation and rigorous global explicit-formula estimate |
+| P02/P08 Bishop phase and retained sign | `JInvariantBishopTrigUnitPhaseExact`, `PickoverAnalyticJHistoricalPhaseConsumerExact`, vendor `bishop.agda-lib` | Effective huge-phase producer and certified terminal sign separation |
+| T04–T08 pair producer | `RiemannAristotle*Fourth*` RH #1026, signed Schur/Gram RH #642; analytical j + admissible pants seam owners | Genuine joint zero-pair measure, regularised inversion, singular-series normalization and uniform removal of smoothing |
+
+### The exact research frontier is narrower than 53 new lemmas
+
+The original F/R/T/P inventory is a **dependency audit**, with multiple lines already covered by source owners and others needing small instantiation proofs. The remaining highest-cut independent analytic obligations are: (A) exact arithmetic one-to-two zero-correlation transform with controlled smoothing; (B) certified sign/phase and error for a concrete P9999 exponent; (C) signed prime-specific two-point estimate; (D) off-critical-zero exclusion for RH. Do not replace any with abstract `record` inhabitants or finite 27-cube data.
+
+**Evidence:** source-inspected GitHub owners, not a fresh Agda kernel run. Preserve ESD import-only and historical provenance.
