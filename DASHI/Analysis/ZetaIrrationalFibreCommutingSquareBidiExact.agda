@@ -7,7 +7,7 @@ module DASHI.Analysis.ZetaIrrationalFibreCommutingSquareBidiExact where
 -- The analytic limit and actual zeta interpretation are separate obligations.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Moonshine.DepthTwoNonaryResidueFibreExact as Nonary
@@ -99,3 +99,57 @@ primeCountStableAcrossTwoSteps :
 primeCountStableAcrossTwoSteps arithmetic history n =
   trans (primeCountStableAcrossOneStep arithmetic history n)
         (primeCountStableAcrossOneStep arithmetic history (n + 1))
+
+------------------------------------------------------------------------
+-- FINITE-TIME CLOSURE OF THE ORIGINAL COHERENCE CONTRACT.
+-- Reuses the *same* readout equality, without requiring a constant
+-- or even non-varying Stage object. No real-limit or zeta theorem
+-- is inferred from equality of retained integer observations.
+------------------------------------------------------------------------
+
+-- Using n+1 in this recursion retains the exact syntax of coherent:
+-- a step index is not silently replaced by a different Nat codec.
+stageIndexAfter : Nat → Nat → Nat
+stageIndexAfter n zero = n
+stageIndexAfter n (suc steps) = stageIndexAfter (n + 1) steps
+
+readoutStableAcrossFiniteSteps :
+  ∀ {Stage : Nat → Set}
+  {readout : (n : Nat) → Stage n → Nat} →
+  (history : CompatibleFibreHistory Stage readout) →
+  (n steps : Nat) →
+  readout n (at history n)
+    ≡ readout (stageIndexAfter n steps)
+        (at history (stageIndexAfter n steps))
+readoutStableAcrossFiniteSteps history n zero = refl
+readoutStableAcrossFiniteSteps history n (suc steps) =
+  trans (coherent history n)
+    (readoutStableAcrossFiniteSteps history (n + 1) steps)
+
+-- Every ordinary downstream consumer of the *retained readout*,
+-- not merely the canonical prime counter, factors along this
+-- exact finite-time equality. It does not assert analytic continuity.
+consumerStableAcrossFiniteSteps :
+  ∀ {Stage : Nat → Set} {Y : Set}
+  {readout : (n : Nat) → Stage n → Nat} →
+  (history : CompatibleFibreHistory Stage readout) →
+  (consumer : Nat → Y) →
+  (n steps : Nat) →
+  consumer (readout n (at history n))
+    ≡ consumer (readout (stageIndexAfter n steps)
+        (at history (stageIndexAfter n steps)))
+consumerStableAcrossFiniteSteps history consumer n steps =
+  cong consumer (readoutStableAcrossFiniteSteps history n steps)
+
+primeCountStableAcrossFiniteSteps :
+  ∀ {Stage : Nat → Set}
+  {readout : (n : Nat) → Stage n → Nat} →
+  (arithmetic : Prime.PrimePredicate) →
+  (history : CompatibleFibreHistory Stage readout) →
+  (n steps : Nat) →
+  finitePrimeCount arithmetic (readout n (at history n))
+    ≡ finitePrimeCount arithmetic
+        (readout (stageIndexAfter n steps)
+          (at history (stageIndexAfter n steps)))
+primeCountStableAcrossFiniteSteps arithmetic history =
+  consumerStableAcrossFiniteSteps history (finitePrimeCount arithmetic)
