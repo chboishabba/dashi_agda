@@ -51,3 +51,49 @@ staleHistoryRejects packet = refl
 -- This symbolic contract deliberately does not claim a real string
 -- equality algorithm, authenticated encryption, hash validation,
 -- remote history synchronization or bitwise Python correspondence.
+
+
+------------------------------------------------------------------------
+-- Pareto decision contract: an encoding may be smaller in bytes yet
+-- slower after encoder and decoder costs. A network oracle is explicit.
+-- Natural time units are abstract calibrated costs, not WAN benchmarks.
+------------------------------------------------------------------------
+
+record CandidateCost : Set where
+  constructor candidateCost
+  field
+    encoderTime : Nat
+    wireTime : Nat
+    decoderTime : Nat
+open CandidateCost public
+
+totalTime : CandidateCost → Nat
+totalTime c = encoderTime c + wireTime c + decoderTime c
+
+-- Returning the chosen candidate and its exact receipt is required:
+-- the receiver must not infer a codec from time or size alone.
+record Candidate : Set where
+  constructor candidate
+  field
+    packet : ExpertWire
+    cost : CandidateCost
+open Candidate public
+
+-- A real comparator/argmin is not assumed: a supplied selector must
+-- carry an admissibility certificate for its choice. This lets latency
+-- be an objective without claiming compression is intrinsically faster.
+record Admission (proposal : Candidate) : Set where
+  field
+    acceptedCodec : Codec
+    exactCodecWitness : acceptedCodec ≡ codec (packet proposal)
+    acceptedModel : String
+    exactModelWitness : acceptedModel ≡ modelRevision (packet proposal)
+    acceptedHistory : String
+    exactHistoryWitness : acceptedHistory ≡ historyRevision (packet proposal)
+open Admission public
+
+costDecomposition : (candidate : Candidate) →
+  totalTime (cost candidate) ≡
+  encoderTime (cost candidate) + wireTime (cost candidate) +
+  decoderTime (cost candidate)
+costDecomposition c = refl
