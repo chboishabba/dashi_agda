@@ -110,3 +110,11 @@ monitor surface.
 - Extended original `scripts/check_openai_shared_tseitin_parsimonious.py` in-place with a 26-clause exhaustive three-variable gate-CNF minimum-cover check. Independently executed finite search PASS: local minimal gate templates 1 constant / 2 NOT / 3 AND or OR, without extra variables. Fresh deterministic local Python PASS: 375 bounded DAG/output fixtures, 10,850 finite assignments, 176 normalization evaluations, 1,059 source clauses saved in this bounded sample. Attempted previous larger suite replay exceeded execution cap; do not present it as a successful fresh run. Exact-head GitHub script and Agda/Lean kernel not run.
 - Updated both original Agda/Lean integration roadmaps; original proof authors and dated Cook–Levin/Tseitin, OpenAI family-378, Ibrahim/Monster3B, QID and native weighted 27-grid PR owners retained. No protected ESD or CI edits.
 
+
+
+## 2026-10-31 — Original Cook-Levin global bit/vector reification donor reused
+
+- Extended the EXISTING `OpenAIMathFiniteSupportedTseitinModelsExact.agda` with lossless `CNF.Bits n` to `Vec Bool n` codecs, both directions, and pointwise lookup equality; reused original `ConcreteTapeCanonicalCellBitsExact` and `ConcreteTapeGlobalBlockSliceConsistencyExact` instead of duplicating their take/drop/append and `finLeft` proofs.
+- Source-written `inputVectorLookupExact`, `globalBitsFromFiniteVectors`, `inputVectorSplitRoundTrip`, `gateVectorSplitRoundTrip`, `reassembleTakeDrop` and `globalFiniteVectorsRoundTrip`: exact finite data decomposition of global `inputs+gates` CNF bits. This is **not** yet the newest-first GateProgram evaluation proof; chronological CNF gate suffix reversal/induction remains unpaid.
+- Fresh independent local Python passed 511 simple codec examples and 961 global input/gate split/reassemble cases. No Agda kernel, no exact checked-out script execution. Source-written is not a trusted kernel theorem. Agda and Lean integration roadmaps updated with the precise remaining chronological-gate semantic bridge; all earlier classical and original DASHI/Ibrahim/QID ownership retained; no ESD or CI edit.
+
