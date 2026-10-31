@@ -421,3 +421,76 @@ inputVectorLookupExact {inputs} bits index =
 -- ConcreteTapeGlobalBlockSliceConsistencyExact.lookupTakeBits.
 -- Remaining step is recursive newest-first GATE vector construction and
 -- exact gate-value lookup at Compiler.gateVariableIndex; kernel pending.
+
+
+------------------------------------------------------------------------
+-- FULL FINITE-CARRIER REASSEMBLY at inputs+gates, reusing the old tape
+-- take/append/drop proofs. The gate suffix is in chronological global
+-- variable order; original GateProgram's evaluateProgram is newest-first,
+-- so reordering/semantic gate induction is STILL an explicit next lemma.
+------------------------------------------------------------------------
+
+gateVectorFromGlobal : ∀ {inputs gates : Nat} →
+  CNF.Bits (inputs + gates) → Vec Bool gates
+gateVectorFromGlobal {inputs} bits =
+  bitsToFiniteVec (Canonical.dropBits inputs bits)
+
+globalBitsFromFiniteVectors : ∀ {inputs gates : Nat} →
+  Vec Bool inputs → Vec Bool gates → CNF.Bits (inputs + gates)
+globalBitsFromFiniteVectors inputValues gateValues =
+  Canonical.appendBits
+    (finiteVecToBits inputValues)
+    (finiteVecToBits gateValues)
+
+inputVectorSplitRoundTrip : ∀ {inputs gates : Nat}
+  (inputValues : Vec Bool inputs)
+  (gateValues : Vec Bool gates) →
+  inputVectorFromGlobal
+    (globalBitsFromFiniteVectors inputValues gateValues)
+    ≡ inputValues
+inputVectorSplitRoundTrip inputValues gateValues =
+  trans
+    (cong bitsToFiniteVec
+      (Canonical.takeAppendBits
+        (finiteVecToBits inputValues) (finiteVecToBits gateValues)))
+    (vecBitsRoundTrip inputValues)
+
+gateVectorSplitRoundTrip : ∀ {inputs gates : Nat}
+  (inputValues : Vec Bool inputs)
+  (gateValues : Vec Bool gates) →
+  gateVectorFromGlobal
+    (globalBitsFromFiniteVectors inputValues gateValues)
+    ≡ gateValues
+gateVectorSplitRoundTrip inputValues gateValues =
+  trans
+    (cong bitsToFiniteVec
+      (Canonical.dropAppendBits
+        (finiteVecToBits inputValues) (finiteVecToBits gateValues)))
+    (vecBitsRoundTrip gateValues)
+
+reassembleTakeDrop : ∀ {inputs gates : Nat}
+  (bits : CNF.Bits (inputs + gates)) →
+  Canonical.appendBits
+    (Canonical.takeBits inputs bits)
+    (Canonical.dropBits inputs bits) ≡ bits
+reassembleTakeDrop {zero} bits = refl
+reassembleTakeDrop {suc inputs} (bit CNF.∷ᵇ rest) =
+  cong (λ tail → bit CNF.∷ᵇ tail) (reassembleTakeDrop rest)
+
+globalFiniteVectorsRoundTrip : ∀ {inputs gates : Nat}
+  (bits : CNF.Bits (inputs + gates)) →
+  globalBitsFromFiniteVectors
+    (inputVectorFromGlobal bits)
+    (gateVectorFromGlobal bits)
+    ≡ bits
+globalFiniteVectorsRoundTrip {inputs} bits =
+  trans
+    (cong₂ Canonical.appendBits
+      (bitsVecRoundTrip (Canonical.takeBits inputs bits))
+      (bitsVecRoundTrip (Canonical.dropBits inputs bits)))
+    (reassembleTakeDrop bits)
+
+-- This pays the whole global finite-data isomorphism, not the original
+-- circuit gate evaluator relation or global #SAT of accepted input vectors.
+-- The original gate's newest-first vs global chronological order is retained
+-- as a checked, explicitly unpaid semantic bridge. Agda kernel pending.
