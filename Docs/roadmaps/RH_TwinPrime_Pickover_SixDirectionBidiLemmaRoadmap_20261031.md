@@ -1,0 +1,121 @@
+# RH × twin primes × Pickover 9999: six directed steelman BIDI roadmap
+
+Date: 2026-10-31. **Source-written research roadmap, not a proof of any open conjecture.**
+
+## Verified existing owners / source chronology
+
+- `DASHI.Analysis.RiemannVonMangoldtSpecification` **already** specifies actual abstract von Mangoldt weights, prime-power support and single-valuedness, with explicit carrier-to-real bridge still required. `RiemannTrackedToVonMangoldtBridge` transports tracked prime-power terms subject to agreement witnesses.
+- RH PR #1026 (`agent/rh-quartic-signed-pole-frontier-20260922`): a marked fourth-angular target/reflection `D_A(M0,M2,M4)` ledger and an **open** target-centered local signed zero-minus-background producer, prime-side bound and far coupling.
+- RH PR #642: kernel-checked Lean *finite Schur/Gram determinant algebra* according to its PR receipt; signed off-ordinate near-core bound remains open. No RH theorem follows from a finite algebra receipt.
+- Twin PR #1408: `TwinPrimeMangoldtPrimeErrorFiniteSplitExact` and `TwinPrimeResidualMangoldtBidiExact` provide the source-written finite pair split and exact retained Nat/period consumer BIDI. Twin-prime-specific distribution remains open.
+- Pickover PR #1260: `PickoverAnalyticJHistoricalPhaseConsumerExact` actual Bishop sine consumer and retained history; `PickoverConsumerResidualFibreBridgeExact` sign-relevant residual necessity. Actual N=99^(9999!) terminal sign is not certified.
+- Fourier PR #1140: `OggPrimeFourierWindingExact` exact finite C3/cyclotomic winding and DC cancellation, explicitly **not** analytic arbitrary-real phase control or a prime-counting theorem.
+- Fourier optics PR #1272: exact 4-site Fourier inversion/phase ambiguity and finite quadrature recovery; it formalises optical *source-bound* Fourier pixel design, not the 3Blue1Brown video itself.
+- 3Blue1Brown (Grant Sanderson), *But what is the Fourier Transform? A visual introduction* (2018), https://www.3blue1brown.com/lessons/fourier-transforms/ : wrap the signal around the complex plane, plot complex centroid versus winding frequency to recover peaks. **Magnitude-only centroids erase phase**; full complex coefficient is required for signed/inverse BIDI.
+- J. P. Keating and D. J. Smith (2019), *Twin prime correlations from the pair correlation of Riemann zeros*, https://arxiv.org/abs/1903.07057 : **formal/heuristic** Fourier inversion, not a proved full-strength twin-prime equivalence.
+- dashiRTX original transport/refinement: signed residual history, consumer adequacy, not automatic arithmetic bounds.
+
+## Three terminal targets (do not conflate)
+
+**RH:** all nontrivial zeta zeros `rho=beta+i gamma` satisfy `beta=1/2`. A zero-level equality over *all zeros*, or a known mathematically equivalent global Chebyshev error bound, is required. A finite positive fourth-harmonic receipt alone is not RH.
+
+**TP:** for every `N` exists `p>N` with `p,p+2` certified prime. Equivalently, real prime-only `P(X)=S(X)-E(X)` unbounded. Steelman asymptotic `S(X)~2*C2*X` (strictly stronger). Correct classical proper-prime-power estimate `E(X)=o(X)`.
+
+**P9999:** `N=99^(9999!)`. Certify `sin N>0` or `sin N<0` from the genuine Bishop analytic sine and a terminal sign-separated interval. This is **one finite input**, whereas a *uniform parameterised Pickover problem* `all n decide sign(sin(99^(n!))) with explicit certified complexity` is an infinite family; neither is logically equivalent to RH or TP by mere reparameterisation.
+
+## All six directed cross-problem experiments
+
+| Edge | Exact forward mathematical interface | Backward / failure test | Missing proof obligation |
+|---|---|---|---|
+| RH → TP | Explicit formula yields `psi(X)=X+O(sqrt(X)log²X)` under RH; promote to **two-point zero-correlation** by retaining pairs, complex winding and covariance | Build signals with identical marginal counts/spectra magnitudes but different lag-2 correlations | Quantitative pair-zero inversion with valid regularisation, arithmetic singular-series at h=2, and o(X) remainder. RH alone insufficient. |
+| TP → RH | Treat Hardy–Littlewood pair asymptotics as *data about two-point prime correlations*; test which uniform-in-shift information constrains zeta pair statistics | One fixed shift h=2 does not determine locations of all zeros | A sufficiently uniform family of correlations, transform inversion, analytic continuation, and off-line-zero exclusion; not implied by TP alone. |
+| RH → P9999 | Use explicit-formula methods as a **certificate methodology** (signed zero/phase sum, controlled tail, zero exclusion), not as an identity for `sin N` | RH can hold while finite arbitrary phase remains unspecified by RH proof alone | Exact identity reducing this sine to an RH-controlled observable, or independently a certified Bishop exponential/π interval and nonzero separation. |
+| P9999 → RH | Generalise one phase decision into a **parameterised spectral sign / zero separation certificate** with arbitrary precision and height | A single terminal sign contains at most finite-choice information; RH is infinitely quantified | Uniform spectral zero-location test with sound completeness and a global termination/completeness principle. Finite Pickover cannot entail RH. |
+| TP → P9999 | Use CRT/prime-power phase producers and arithmetic Fourier winding as computation strategies; pair correlation provides no direct identity to `sin(99^(9999!))` | Construct the exact terminal sine without invoking prime-pair frequency estimates | A genuine reduction to prime-pair data, or independent certified huge-exponent phase evolution and pi enclosure. |
+| P9999 → TP | Port history-preserving cancellation/error-enclosure machinery to every finite shifted Mangoldt window | Perfectly certify all finitely sampled windows yet fail to prove unbounded growth | Uniform asymptotic signed-correlation lower bound or cofinal analytic witness, not inferred from one input. |
+
+The **useful commonality** is a consumer-indexed signed spectral calculus. The **useful difference** is the quantifier and correlation order: RH universally locates zeros, TP universally demands arbitrarily late pair coincidences, P9999 decides a single sign. A finite sign certificate is a `Σ`-style one-instance witness; a reusable decision procedure is a universal computational claim; RH/TP are universal infinite mathematical claims. No reduction may swap these quantifiers unacknowledged.
+
+## Explicit lemma dependency ladder: from current sources to terminal completion
+
+### F. Shared exact finite signed transport (reusable in all three)
+- **F01** import original exact finite Fourier character/group algebra and canonical ring normalisation, with no new axial shell model.
+- **F02** exact circular-winding centroid = complex DFT coefficient; preserve imaginary coordinate and conjugation.
+- **F03** finite DFT inversion/orthogonality/Parseval with orientation convention test.
+- **F04** finite shift and phase multiplier: shift by h ↔ complex phase `exp(2*pi*i*kh/M)`.
+- **F05** signed lag-2 correlation reconstruction from `|F|²` **with phase**, full cross-shell terms.
+- **F06** shell partition-of-unity and signed shell value + orientation trit, plus unresolved-vs-exact-zero witness.
+- **F07** retained fibre state BIDI: encode/decode and consumer equality, including prior/live/terminal history and exact fine residual.
+- **F08** consumer collision necessity: exhibit loss of sign under energy-only / phase-only / modulo-only observers and prove residual refinement separates it.
+- **F09** matrix/kernel transport telescoping identity with correct operator order.
+- **F10** error bound in normed scalar/operator carrier, requiring separately proved submultiplicativity and growth inputs.
+- **F11** rigorous interval arithmetic semantics for signed real/complex values; controlled roundoff and approximation.
+- **F12** end-to-end commuting-square theorem from concrete source data through Fourier/winding/fibre to certified consumer with unmodified constants.
+- **F13** checker receipts: rational finite DFT fixtures, cancellation adversaries, wrong-sign aliases, cross-shell overlap/no-wrap tests, and Agda+Lean kernel evidence.
+
+### R. Riemann zeta / von Mangoldt producer and RH completion
+- **R01** use `RiemannVonMangoldtSpecification` prime-power support with genuine Nat prime ownership and real log scalar faithful interpretation.
+- **R02** precise classical `psi` and finite-support weighted identities, including endpoint conventions.
+- **R03** meromorphic zeta / log derivative and its Euler product, with stated analytic continuation hypotheses.
+- **R04** zero multiset (locations, multiplicities), conjugation/reflection and convergence/truncation policy.
+- **R05** explicit formula with exact zero, pole, trivial-zero and endpoint contributions.
+- **R06** zero-free regions and exceptional cases sufficient for permitted contour moves.
+- **R07** certified finite zero sum + rigorous far-tail/remainder bounds, uniformly in the requested height.
+- **R08** exact critical-line/off-line zero predicate and equivalence with the classical RH statement.
+- **R09** trace the PR #642 finite Schur/Gram near-core with signed marked fourth-harmonic PR #1026, including balance no-go; keep unresolved signed local zero-minus-background producer explicit.
+- **R10** prove a genuinely uniform sign/bias or norm contradiction excluding any off-line zero: **RH HARD GATE, OPEN**.
+- **R11** independent RH BIDI to classical `psi(X)=X+O(sqrt X log² X)`, with constants/quantifiers and converse proved, not assumed.
+- **R12** reverse audit: if any finite harmonic or phase-lattice witness allows off-line zeros, record precise countermodel and missing analytic premise.
+
+### T. Twin prime two-point correlation and Hardy–Littlewood
+- **T01** reuse true `Lambda`, certified prime/power classification and finite `S=P+E`.
+- **T02** prove real `E(X)>=0` and `E(X)=o(X)` via proper-power count, including full real-order transport.
+- **T03** finite scalar arithmetic Fourier `S(X)=lag_2(Lambda)` with exact no-wrap proof and retained ternary signed shells.
+- **T04** explicitly correlate **overlapping two shifts / two zero components**, keeping complex covariance rather than independent marginal controls.
+- **T05** Keating–Smith zero-pair model: introduce test function smoothing, spectral density normalisation and zero-pair diagonal/off-diagonal split.
+- **T06** prove finite-window Fourier inversion with correct shift variable and full phase, avoiding unsupported termwise inversion.
+- **T07** uniform integrability/dominated convergence and removal of smoothing under proved estimates.
+- **T08** transport exact arithmetic off-diagonal terms to the singular-series `2C2` at h=2; prove error budget.
+- **T09** prove `sum_j R_j(X)=o(X)` **for actual defined signed frequency contributions**: **HARDY–LITTLEWOOD HARD GATE, OPEN**.
+- **T10** weaker alternative: prove `P(X)` unbounded or infinitely many certified positive dyadic prime-only increments: **TWIN PRIME HARD GATE, OPEN**.
+- **T11** prove T09 ⇒ weighted `S(X)~2C2X` ⇒ T10 via T02.
+- **T12** prove weighted/unweighted partial-summation transfer to `pi_2(X)~2C2Li_2(X)`, with exact endpoint treatment.
+- **T13** prove backward BIDI (actual twins ⇒ P unbounded) using true positive log weights, not arbitrary Weil scalars.
+- **T14** import bounded-gap/Chen SOTA only with exact hypotheses; document counterexamples to <=B ⇒ shift 2.
+- **T15** prove uniform-in-shift spectral-inversion route **only if** seeking a genuine inverse relationship with zeta zero-pair correlation; fixed h=2 is not sufficient for all heights.
+- **T16** independent analytic validation, adversarial parity-sieve survivors, precise provenance and zero-postulate Agda kernel audit.
+
+### P. Pickover 99^(9999!) phase orientation
+- **P01** exact arbitrary Nat factorial/exponent computation specification and binary/exponentiation-by-squaring (not materialising the giant integer).
+- **P02** preserve the actual Bishop complex exponential, sine and cosine normalization with analytic equality.
+- **P03** exact `N mod 2pi` via certified multiple-precision interval arithmetic, not a fixed modulus 270/369/etc.
+- **P04** accurate integer winding number and residual phase with exact signed orientation.
+- **P05** exponentiation evolution on the unit complex circle: associative power algorithm and rigorous interval-error propagation.
+- **P06** derive a phase-separation certificate `|sin N|>eps` or equivalent exclusion of all relevant `k*pi`; nonzero existence via classical transcendence does **not** provide an economically useful effective distance bound.
+- **P07** derive precision complexity from separation margin, with explicit dependence on huge exponent bit length and loss of significant digits.
+- **P08** reuse Pickover PR #1260 analytic terminal history and consumer-indexed strict-refinement theorem.
+- **P09** connect Fourier unwinding/winding centroid through the same F02–F04 exact complex Fourier machinery; do not claim arbitrary-real Fourier reconstruction from the finite C3 PR #1140.
+- **P10** certified explicit rational interval `[L,U]` for `sin(99^(9999!))` with either `0<L` or `U<0`: **PICKOVER HARD GATE, OPEN**.
+- **P11** reverse consumer BIDI: sign-separated interval ⇒ sign; true sign + continuity ⇒ existence of some enclosing interval (not necessarily efficient).
+- **P12** independent interval checker and source/Agda/Lean/real-analytic proof-status separation.
+
+## Quantitative bidirectional discrimination and progress criteria
+
+1. **Find exact preexisting theorem owners** first. Distinguish the abstract von Mangoldt specification from analytic explicit formula proof and RH.
+2. For every edge in the six-way table, specify the exact transform's input/output, error norm, required uniformity, and whether the arrow is an analogy, conditional theorem, heuristic inversion or proved result.
+3. Preserve **full signed scalar and complex phase** plus resolved/unresolved status; ternary trit is an observer, not a lossy replacement for real magnitude.
+4. Demand a literal certificate: a complete Agda kernel run for finite formalisation; a uniformly quantified signed lower/upper estimate for RH/TP; an outward-rounded zero-excluding interval for P9999.
+5. Never move terminal acceptance to asymptotic when weaker exact T0 succeeds; never claim an RH result follows from Keating–Smith's heuristic inversion.
+6. Protect all ESD sources; preserve original historical authors, previous Ibrahim Monster 3B and source-written vs kernel-verified credit.
+
+## Sequenced max-cut plan
+**P0 (repository evidence):** source files and PR owners cited above; check fresh heads, ensure imports available on actual branch.
+**P1 (finite kernel):** F01–F09 and selected F11 with existing 369/Fourier machinery.
+**P2 (consumer BIDI):** F10–F13; exact tensor/27-cube sign plus magnitude and phase fidelity checks.
+**P3 (RH spectral bridge):** R01–R09 and R11/R12 without pretending R10; learn from fourth-harmonic projective balance no-go.
+**P4 (two-point prime bridge):** T01–T08 with smoothing and Keating–Smith's heuristic explicitly tagged; try T10 before attempting full T09.
+**P5 (Pickover precision):** P01–P09 and P11/P12, perform certified narrowing attempts toward P10.
+**P6 (terminal mathematical gates):** R10, T10/T09 and P10 independently; no invented axioms or finite stand-ins.
+**P7 (steelman asymptotic):** T11–T16, reverse direction and stringent error/complexity audits.
+
+No compiler/kernel result or terminal proof is asserted by this roadmap.
