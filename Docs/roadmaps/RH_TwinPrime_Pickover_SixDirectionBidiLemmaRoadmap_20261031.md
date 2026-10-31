@@ -194,3 +194,8 @@ where `zeta=exp(2*pi*i/3)`, lies in the Eisenstein `Q(zeta)` carrier. Writing `J
 **Philosophical correction enforced:** the canonical starting state is *history-rich*; one-point-marginal failures are adversarial tests of inadmissible quotient choices, not news that history matters. Stop rebuilding the same generic fibre or proving another toy marginal failure instead of attacking the explicit winding inverse and uniform analytic estimate.
 
 **Status:** exact SymPy arithmetic runtime plus committed executable script; Agda kernel proof still pending. Prior mathematical provenance and all source proof ownership retained. No ESD edits.
+
+
+## Canonical status register
+
+**Read alongside:** [`RH_TwinPrime_Pickover_MaxCut_RemainingLemmaRegister_20261031.md`](RH_TwinPrime_Pickover_MaxCut_RemainingLemmaRegister_20261031.md). It maps all 61 F/R/T/P/W dependency labels to actual owners, status (`REUSE`, `SOURCE`, `FINITE-TEST`, `OPEN`), next proof obligations and terminal acceptance. The earlier 53 items are not 53 missing foundations; 8 W-series items supplement the SSP15 constructive winding inverse. Current exact rational rank sequence for 1–10 jets is `2,4,6,8,10,11,12,13,14,15`. All three infinite/giant analytic terminals remain open. No compiler verification claim.
