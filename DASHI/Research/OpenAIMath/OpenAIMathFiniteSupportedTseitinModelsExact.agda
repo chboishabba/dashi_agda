@@ -22,9 +22,10 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
+import Data.Fin.Base as FinBase
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (sym; cong; cong₂)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong; cong₂)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact as Existing
@@ -494,3 +495,58 @@ globalFiniteVectorsRoundTrip {inputs} bits =
 -- circuit gate evaluator relation or global #SAT of accepted input vectors.
 -- The original gate's newest-first vs global chronological order is retained
 -- as a checked, explicitly unpaid semantic bridge. Agda kernel pending.
+
+
+------------------------------------------------------------------------
+-- FINITE CNF.Bits -> ORIGINAL Cook.Assignment ADAPTER (no second SAT logic)
+--
+-- Cook.Assignment = Nat -> Bool is total. The finite compiled circuit uses
+-- only indices < n; all indices outside that fixed support get arbitrary
+-- false. This is NOT uniqueness of the entire Nat -> Bool tail.
+------------------------------------------------------------------------
+
+finiteCNFToCookAssignment : ∀ {n : Nat} →
+  CNF.Bits n → Cook.Assignment
+finiteCNFToCookAssignment CNF.[]ᵇ index = false
+finiteCNFToCookAssignment (bit CNF.∷ᵇ rest) zero = bit
+finiteCNFToCookAssignment (bit CNF.∷ᵇ rest) (suc index) =
+  finiteCNFToCookAssignment rest index
+
+finiteCNFToCookLookup : ∀ {n : Nat}
+  (bits : CNF.Bits n) (index : Fin n) →
+  finiteCNFToCookAssignment bits (FinBase.toℕ index)
+    ≡ CNF.lookupBit bits index
+finiteCNFToCookLookup (bit CNF.∷ᵇ rest) fzero = refl
+finiteCNFToCookLookup (bit CNF.∷ᵇ rest) (fsuc index) =
+  finiteCNFToCookLookup rest index
+
+-- The input-value extractor is EXACTLY the one already used by the
+-- concrete-DAG source proof: it reads the first inputs bits from the
+-- original finite CNF assignment, not a new model ontology.
+finiteCNFCookInputExact : ∀ {inputs gates : Nat}
+  (bits : CNF.Bits (inputs + gates))
+  (index : Fin inputs) →
+  finiteCNFToCookAssignment bits
+    (FinBase.toℕ (Placement.finLeft index))
+    ≡ Circuit.lookupVec index (inputVectorFromGlobal bits)
+finiteCNFCookInputExact bits index =
+  trans
+    (finiteCNFToCookLookup bits (Placement.finLeft index))
+    (sym (inputVectorLookupExact bits index))
+
+-- A proof-friendly form of the same gate-variable identity, without
+-- introducing a second numbered-gate compiler.
+finiteCNFCookGateIndexExact : ∀ {inputs gates : Nat}
+  (bits : CNF.Bits (inputs + gates))
+  (index : Fin (inputs + gates)) →
+  finiteCNFToCookAssignment bits (FinBase.toℕ index)
+    ≡ CNF.lookupBit bits index
+finiteCNFCookGateIndexExact = finiteCNFToCookLookup
+
+-- Next outstanding *same-object* bridge: prove that the placed original
+-- gate constraints in ProgramPlacedGatesValid imply the original
+-- Compiler.programSharedConstraints under this finite adapter, then
+-- directly reuse Existing.sharedConstraintsGiveRealization for the
+-- chronological vs newest-first evaluation, and the already-authored
+-- numeric finite-source-#SAT theorem.
+-- SOURCE-WRITTEN; no Agda kernel check in this environment.
