@@ -169,8 +169,8 @@ def check_placed_gate_index_semantics():
     whereas the shared Tseitin numeric index is creation-time.
     """
     checked = 0
-    for n in (1, 2):
-        for older in (0, 1, 2):
+    for n in (1, 2, 3):
+        for older in (0, 1, 2, 3):
             wires = [("i", j) for j in range(n)] + [("g", j) for j in range(older)]
             gates = [("const", (False,)), ("const", (True,))]
             gates += [("not", (src,)) for src in wires]
@@ -204,6 +204,11 @@ def check_placed_gate_index_semantics():
                     compiled = all(any(local[i] != row[i] for i in range(3))
                                    for row in excluded)
                     assert compiled == predicate(local), (n, older, op, args, bits)
+                    if compiled:
+                        assert bits[output_index] == target, (
+                            "placed output not functionally forced",
+                            n, older, op, args, bits
+                        )
                     checked += 1
     print(f"PASS: {checked} finite-index placed-gate cases")
 
