@@ -21,7 +21,7 @@ module DASHI.Research.OpenAIMath.OpenAIMathFiniteSupportedTseitinModelsExact whe
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
+open import Data.Fin.Base using (Fin; zero; suc) renaming (zero to fzero; suc to fsuc)
 import Data.Fin.Base as FinBase
 import Data.Fin.Properties as FinP
 import Data.Nat.Properties as NatP
