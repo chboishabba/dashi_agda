@@ -50,6 +50,10 @@ record FederatedMoEProblem : Set₁ where
     Peer : Set
     SchedulerDecision : Set
     Cost : Set
+    TrainingState : Set
+    TrainingExample : Set
+    AuthenticationReceipt : Set
+    HistoryRevision : Set
 
     -- Learned functions are indexed by distinct expert identities.
     -- The training rule is independently supplied, never inferred
@@ -58,6 +62,12 @@ record FederatedMoEProblem : Set₁ where
     update : ExpertId → Input → History → History
     router : Input → History → Route
     weights : Input → History → Route → ExpertWeights
+    learn : TrainingState → TrainingExample → TrainingState
+    parametersAt : TrainingState → ExpertId → Input → History →
+                   ExpertOutput
+    routeUnderAction : GeometricAction → Route → Route
+    weightsUnderAction : GeometricAction → ExpertWeights →
+                         ExpertWeights
     aggregate : Route → ExpertWeights →
                 (ExpertId → ExpertOutput) → ModelOutput
     compute : Input → History → ModelOutput
@@ -84,6 +94,27 @@ record FederatedMoEProblem : Set₁ where
     actGeometric : GeometricAction → Input → Input
     actionOnOutput : GeometricAction → ModelOutput → ModelOutput
     actionOnHistory : GeometricAction → History → History
+    fittedSemanticAction : SemanticAction → GeometricAction
+    actionFitEvidence : SemanticAction → Input → History → Set
+    fittedActionMatches :
+      (s : SemanticAction) (x : Input) (h : History) →
+      actionFitEvidence s x h →
+      actGeometric (fittedSemanticAction s) x ≡ actSemantic s x
+
+    -- A positive action-commuting receipt is conditional on the actual
+    -- route, weights, selected computations and history update.
+    RoutingCompatible : GeometricAction → Input → History → Set
+    routeCompatible :
+      (a : GeometricAction) (x : Input) (h : History) →
+      RoutingCompatible a x h →
+      router (actGeometric a x) (actionOnHistory a h)
+        ≡ routeUnderAction a (router x h)
+    weightCompatible :
+      (a : GeometricAction) (x : Input) (h : History) →
+      RoutingCompatible a x h →
+      weights (actGeometric a x) (actionOnHistory a h)
+        (router (actGeometric a x) (actionOnHistory a h))
+        ≡ weightsUnderAction a (weights x h (router x h))
 
     -- The full model may NOT commute. A residual/corrective operation
     -- is therefore explicit and consumer-relative.
@@ -119,6 +150,23 @@ record FederatedMoEProblem : Set₁ where
 
     -- A history update is not averaged with expert outputs.
     stepHistory : Input → History → History
+    stepHistoryCompatible :
+      (a : GeometricAction) (x : Input) (h : History) →
+      RoutingCompatible a x h →
+      stepHistory (actGeometric a x) (actionOnHistory a h)
+        ≡ actionOnHistory a (stepHistory x h)
+
+    -- Authentication is not inferred from hashing or compression.
+    historyVersion : History → HistoryRevision
+    authenticate : Peer → EncodedPacket → AuthenticationReceipt
+    Authenticated : Peer → EncodedPacket → AuthenticationReceipt → Set
+    ValidSession : Peer → EncodedPacket → Set
+    admissibleReceipt :
+      (peer : Peer) (x : Input) (h : History) →
+      Authenticated peer (packet x h)
+        (authenticate peer (packet x h)) →
+      ValidSession peer (packet x h) →
+      receiveHistory (packet x h) ≡ h
 
 open FederatedMoEProblem public
 
