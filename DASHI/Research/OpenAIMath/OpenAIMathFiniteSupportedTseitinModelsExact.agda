@@ -27,7 +27,8 @@ import Data.Fin.Properties as FinP
 import Data.Nat.Properties as NatP
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (sym; trans; cong; cong₂)
+open import Data.Sum.Base using (inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong; cong₂; subst)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact as Existing
@@ -1338,3 +1339,101 @@ finiteCookChronologicalGateExact {inputs} bits index =
 
 -- These are genuine typed index identities on the original finite support.
 -- No absolute-size overhead, approximate graph theorem or ETH claim follows.
+
+
+------------------------------------------------------------------------
+-- WHOLE FINITE-SUPPORT SAME-INPUT UNIQUENESS from the original #1040
+-- ProgramAssignmentRealizes. Reuse the stdlib splitAt/join and opposite.
+------------------------------------------------------------------------
+
+originalRealizationsAgreeAtInput :
+  ∀ {inputs gates : Nat}
+    {program : Circuit.GateProgram inputs gates}
+    {left right : Cook.Assignment}
+    (leftRealization : Existing.ProgramAssignmentRealizes program left)
+    (rightRealization : Existing.ProgramAssignmentRealizes program right)
+    (sameInput : Existing.inputValues leftRealization ≡
+      Existing.inputValues rightRealization)
+    (index : Fin inputs) →
+  left (FinBase.toℕ (FinBase.join inputs gates (inj₁ index))) ≡
+  right (FinBase.toℕ (FinBase.join inputs gates (inj₁ index)))
+originalRealizationsAgreeAtInput
+    {gates = gates} {left = left} {right = right}
+    leftRealization rightRealization sameInput index =
+  trans
+    (cong left (FinP.toℕ-↑ˡ index gates))
+    (trans
+      (Existing.inputVariablesCorrect leftRealization index)
+      (trans
+        (cong (Circuit.lookupVec index) sameInput)
+        (trans
+          (sym (Existing.inputVariablesCorrect rightRealization index))
+          (cong right (sym (FinP.toℕ-↑ˡ index gates))))))
+
+originalRealizationsAgreeAtGate :
+  ∀ {inputs gates : Nat}
+    {program : Circuit.GateProgram inputs gates}
+    {left right : Cook.Assignment}
+    (leftRealization : Existing.ProgramAssignmentRealizes program left)
+    (rightRealization : Existing.ProgramAssignmentRealizes program right)
+    (sameInput : Existing.inputValues leftRealization ≡
+      Existing.inputValues rightRealization)
+    (index : Fin gates) →
+  left (FinBase.toℕ (FinBase.join inputs gates (inj₂ index))) ≡
+  right (FinBase.toℕ (FinBase.join inputs gates (inj₂ index)))
+originalRealizationsAgreeAtGate
+    {inputs} {program = program} {left} {right}
+    leftRealization rightRealization sameInput index =
+  trans
+    (cong left (FinP.toℕ-↑ʳ inputs index))
+    (trans
+      (cong left (sym (chronologicalGateNumberExact inputs index)))
+      (trans
+        (Existing.gateVariablesCorrect leftRealization
+          (FinBase.opposite index))
+        (trans
+          (cong
+            (λ values →
+              Circuit.lookupVec (FinBase.opposite index)
+                (Circuit.evaluateProgram program values))
+            sameInput)
+          (trans
+            (sym (Existing.gateVariablesCorrect rightRealization
+              (FinBase.opposite index)))
+            (trans
+              (cong right (chronologicalGateNumberExact inputs index))
+              (cong right
+                (sym (FinP.toℕ-↑ʳ inputs index))))))))
+
+usedOriginalAssignmentsAgree :
+  ∀ {inputs gates : Nat}
+    {program : Circuit.GateProgram inputs gates}
+    {left right : Cook.Assignment}
+    (leftRealization : Existing.ProgramAssignmentRealizes program left)
+    (rightRealization : Existing.ProgramAssignmentRealizes program right)
+    (sameInput : Existing.inputValues leftRealization ≡
+      Existing.inputValues rightRealization)
+    (index : Fin (inputs + gates)) →
+  left (FinBase.toℕ index) ≡ right (FinBase.toℕ index)
+usedOriginalAssignmentsAgree
+    {inputs} {gates} {left = left} {right = right}
+    leftRealization rightRealization sameInput index
+    with FinBase.splitAt inputs index in split
+... | inj₁ inputIndex =
+  subst
+    (λ position → left (FinBase.toℕ position) ≡
+      right (FinBase.toℕ position))
+    (trans
+      (cong (FinBase.join inputs gates) (sym split))
+      (FinP.join-splitAt inputs gates index))
+    (originalRealizationsAgreeAtInput
+      leftRealization rightRealization sameInput inputIndex)
+... | inj₂ gateIndex =
+  subst
+    (λ position → left (FinBase.toℕ position) ≡
+      right (FinBase.toℕ position))
+    (trans
+      (cong (FinBase.join inputs gates) (sym split))
+      (FinP.join-splitAt inputs gates index))
+    (originalRealizationsAgreeAtGate
+      leftRealization rightRealization sameInput gateIndex)
