@@ -152,3 +152,20 @@ Interpret all outputs as **test evidence**. Neither an exact C2 equivariance law
 The same branch fixes the previous Q/K cache-mask offset bug for resumed chunks longer than one token: query mask rows must be indexed by `past_len:past_len+T`, not always `0:T`. `test_leech_moe_integration.py` now tests full vs cache equivalence under (2,3,2)-token chunks for dense, raw MoE and the deployed C2/C3 even+odd model. This is required for distributed replays in which a peer accepts multiple tokens between acknowledgments.
 
 **Execution status:** the source-equivalent local PyTorch CPU check of the core signed-wave student, 3-point Fourier and odd/even distillation passed; a full checkout test suite, kernel checks and your actual 12-layer student training were not run here. The new paired dataset must be sourced with its own correct answers; absent source labels are not guessed.
+
+## 10. The precise DASHI ordered 3+6=9 directional/chiral prior
+
+Canonical finite owner is `DASHI/Foundations/TernaryGolay/ChannelC3OrbitDecomposition.agda`, **not** a fresh MoE hypothesis: nine ordered channels = three diagonals + six directed off-diagonal channels. The rotation group C3 partitions the directed channels into the *cyclic* (A→B→C→A) and *anti-cyclic* (A→C→B→A) triples. Transposing source/target exchanges these two orbits, while S3 sees one full six-channel orbit. The exact same channel decomposition is narrated in `Docs/support/reference/TernaryGolayCrossPollination.md`.
+
+New `directed_trialectic_invariants(left,right)` in `models/trialectic_wave_prior.py` computes three C2/C3-invariant **bilinear** channels for each ordered real triple:
+- self = aA + bB + cC
+- cyclic = aB + bC + cA
+- anti-cyclic = aC + bA + cB.
+
+Swapping left and right swaps the cyclic and anti-cyclic channels, **not** the sign of the state. Under simultaneous inversion of both role vectors, all three channels are unchanged. This is a principled additional inductive bias that lets the signed expert router read *directional relational structure* instead of equating disagreement with a negative activation. The new `c2c3_wave` router consumes 3-point unary wave invariants of activation and these three signed relational channel sums against each expert's history. **The output expert is C2-conjugate, NOT proven C3-equivariant**. Ordered role assignment is essential.
+
+The Agda bridge `Leech369TrialecticWaveLearningArchitectureBidiExact.agda` now reuses the actual channel owner's `channelCountIsNine`, `faceCountIsSix`, `diagonalCountIsThree`, C3 orbit-invariance, and chirality transposition law. Separately, `TrialecticBoundaryFaceNonfactorabilityExact.agda` proves these three dyadic edge values cannot infer every irreducible triadic face. Therefore a semantic/Sophontic response cannot be recovered solely from the three channel sums; an independent face history/context or explicit residual remains necessary.
+
+Additional crucial Leech geometry caution: `Foundations/UBP/LeechValidMoveSet.agda` demands lattice membership/closure proof for a true Leech move; a sign flip on arbitrary ambient coordinates or C3 rotation of consecutive neural trits is NOT by itself a Leech group action. `Foundations/TernaryGolay/CoxeterToddRoutesBoundary.agda` describes an order-three Leech automorphism fixed-lattice route to K12 with separate unsatisfied same-object recognition; it cannot be silently used to certify this neural wave-coordinate action. `Docs/support/reference/TernaryGolayCrossPollination.md` credits independently authored ternary Golay code results (Noam D. Elkies et al.), and UBP work to Euan R. A. Craig. Those are mathematical donors, not source claims for this branch's trained expert model.
+
+**Testing and evaluation:** local source-equivalent finite CPU check sees role swap exchange chiral channels and C2-invariant router with signed outputs/history for sampled states. The newly committed official branch Python tests and Agda module have not yet been fully executed/typechecked in this environment; full trained-checkpoint signed-distillation and heldout Sophontic paired improvement still require running on the local data.
