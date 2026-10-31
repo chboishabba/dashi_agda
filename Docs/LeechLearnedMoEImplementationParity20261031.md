@@ -52,3 +52,27 @@ Provenance: original Leech-LILA architecture (Anatolii Kornienko);
 DASHI in-repo sign/orbit, BIDI and parity authorship retained.
 Original email observations are experiment motivation, **not** proof
 that sign orientation indicates harmlessness. No ESD surface touched.
+
+
+## Revised implementation counterpart after source integration
+
+LeechTransformer PR #4 now changes the actual `LeechGPT`
+forward path under an explicit default-off `moe_experts>=2`
+configuration. The `LeechBlock` MoE variant retains real
+attention/resonance, replaces FFN, returns updated expert histories
+on explicit opt-in, and rejects KV-cache continuation that omits
+the required expert histories. Dense mode preserves its original
+4-tuple and strict checkpoint parameter structure.
+`tests/test_leech_moe_integration.py` was committed to verify
+dense checkpoint compatibility, loss/backprop, cache/sequence
+equivalence, and history-presence checks but is not yet executed.
+
+The Agda source is still weaker: it has an exact finite
+state replay theorem but no multi-layer KV+expert-memory
+bisimulation; it also lacks a formal train/eval flag, dropout,
+real softmax and optimizer state. The new
+`IEEEOrbitSignWitnessBidiExact.agda` proves arbitrary symbolic
+payload/sign-bit roundtrip but is NOT the canonical block code
+implemented by `scripts/ieee_sign_orbit_codec.py`.
+This parity ledger is intentionally fail-closed until executable
+tests and Agda kernel checks are completed.
