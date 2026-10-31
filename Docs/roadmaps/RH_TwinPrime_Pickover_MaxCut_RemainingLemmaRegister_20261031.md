@@ -349,3 +349,9 @@ The source-first audit corrected a formerly broad handoff: **the Bishop-real Mac
 - K05, OPEN: establish trigonometric classical-π characterization in **Agda** through the original branch and tangent/sine/cosine owners; the independently source-written Lean theorem is not automatically an Agda proof.
 
 **Evidence:** all newly added Agda source is committed but not kernel checked; the older individual Bishop modules report own prior proof levels, not a check of this branch. The only global terminal analytic hard gates remain T10, R10, P10.
+
+## 31 October — K04a concrete source stage (after canonical Bishop reuse)
+
+New `DASHI.Analysis.BishopMachinSignedFiniteHistoryExact` imports the ORIGINAL `Machin.atanSignedTerm` at the real embedded (1/5) and (1/239), and `BishopFiniteSeriesDifferenceExact.finiteSeriesDifference`. It gives `machinFifthWeightedTerm` (16×), `machin239WeightedTerm` (4×), `machinSignedTerm` (their signed difference), `machinSignedPartialStage` (original Bishop `SeriesOf`), and the for-all-n theorem `machinSignedPartialIsOriginalDifference`. This is the actual **finite Bishop signed-series history** and exact decomposition, not another abstract carrier or a proof of `q_n` rational embedding.
+
+**K04a refined:** actual source series and finite signed decomposition SOURCE-WRITTEN; still OPEN the rational `q_n` ↔ Bishop `SeriesOf` embedding with coefficient/denominator and finite-sum normalization. **K04b:** explicit quantitative Cauchy modulus plus same-object convergent series limit OPEN even though both original per-atan Bishop convergence proofs already exist. **K04c/K04d/K05:** residual-complete signed valuation, actual meromorphic `ζ` continuity, and Agda trigonometric/classical π identification OPEN. No synthetic source witness or third-party Lean receipt substituted. The new leaf is imported into all three canonical TOE roots, kernel pending, no CI.
