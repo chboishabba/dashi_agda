@@ -1,0 +1,432 @@
+{
+  "schema": "dashi-symbol-snowball-v1",
+  "date": "2026-10-31",
+  "purpose": "Reusable symbol/name/signature neighborhood queries for LOCAL AGENT, seeded by the exact 39-obligation SAT/ETH max-cut ledger; no independent proof authority.",
+  "canonical_tool": "dashi-repo",
+  "canonical_database": ".dashi/repository.sqlite3",
+  "lean_fallback": "rg on a local dashi_lean4 checkout",
+  "negative_controls": [
+    "Do not infer same theorem from matching symbols or numbers.",
+    "Never edit ESD sources; import-only.",
+    "Do not claim Agda/Lean kernel acceptance from preflight, Python, a signature hash, source-written text or PR history.",
+    "Do not treat 27 source Boolean variables as the distinct 27 ternary endomorphisms or as a Monster representation.",
+    "Do not equate 208 upstream main-result declaration routes with 208 accepted DASHI proof ports.",
+    "The original 3-CNF counting goal remains first: P0/P1/P2, then P3/P4."
+  ],
+  "groups": [
+    {
+      "lane": "P0",
+      "priority": 0,
+      "goal": "Compiler blockers and exact pinned Agda/Lean acceptance",
+      "obligations": [
+        "K00",
+        "K01",
+        "K02"
+      ],
+      "owners": [
+        "tools/agda_preflight/agda_preflight/repository_cli.py",
+        "DASHI/Research/OpenAIMath/Everything.agda",
+        "Integration/OpenAIMath/Everything.lean"
+      ],
+      "search_terms": [
+        "gateExpressionCorrect",
+        "elaboration",
+        "termination",
+        "--safe",
+        "trust",
+        "unsolved metas",
+        "module import",
+        "originalRealizationsAgreeAtInput",
+        "sourceListExactCountMachine"
+      ],
+      "related_symbols": [
+        "DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact.gateExpressionCorrect"
+      ]
+    },
+    {
+      "lane": "P1",
+      "priority": 1,
+      "goal": "Reuse original DAG evaluator, gate-numbering and unique extension",
+      "obligations": [
+        "S00",
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08"
+      ],
+      "owners": [
+        "DASHI/Mathematics/Complexity/PNotEqualsNPConcreteCircuitSharedSemanticsExact.agda",
+        "DASHI/Research/OpenAIMath/OpenAIMathSharedTseitinUniqueExtensionExact.agda",
+        "DASHI/Research/OpenAIMath/OpenAIMathFiniteSupportedTseitinModelsExact.agda"
+      ],
+      "search_terms": [
+        "ProgramAssignmentRealizes",
+        "uniqueUsedCoordinates",
+        "uniqueAuxiliaryGateValues",
+        "gateVariableIndex",
+        "Fin.opposite",
+        "splitAt",
+        "join-splitAt",
+        "wireFormulaCorrect",
+        "assignmentFromProgram",
+        "inputVectorFromGlobal",
+        "prefix agreement",
+        "evaluateProgram",
+        "gateWindowRename",
+        "pullbackLookup"
+      ],
+      "related_symbols": [
+        "DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinUniqueExtensionExact.uniqueUsedCoordinates",
+        "DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedSemanticsExact.sharedConstraintsGiveRealization"
+      ]
+    },
+    {
+      "lane": "P2",
+      "priority": 2,
+      "goal": "Exact finite #SAT input/gate fibre count and optimized original-CNF equality",
+      "obligations": [
+        "N00",
+        "N01",
+        "N02",
+        "N03",
+        "N04"
+      ],
+      "owners": [
+        "DASHI/Research/OpenAIMath/OpenAIMathFiniteSupportedTseitinModelsExact.agda",
+        "DASHI/Research/OpenAIMath/OpenAIMathSharedTseitinOptimizedCNFExact.agda"
+      ],
+      "search_terms": [
+        "originalGlobalCNFCountExact",
+        "optGlobalCNFCountExact",
+        "sumOriginalFiniteCNFBitsUnique",
+        "Fubini",
+        "oneOrZero",
+        "exact model count",
+        "countAcceptedCircuitInputs",
+        "finiteSupportedTseitinCountExact",
+        "parsimonious",
+        "unique extension",
+        "Tseitin",
+        "indicator"
+      ],
+      "related_symbols": [
+        "DASHI.Research.OpenAIMath.OpenAIMathFiniteSupportedTseitinModelsExact.originalGlobalCNFCountExact"
+      ]
+    },
+    {
+      "lane": "P3",
+      "priority": 3,
+      "goal": "Actual Agda list-of-lists to OpenAI Literal/Finset same-object truth and count transport",
+      "obligations": [
+        "L00",
+        "L01",
+        "L02",
+        "L03",
+        "L04"
+      ],
+      "owners": [
+        "Integration/OpenAIMath/ListFinsetCNFTransport.lean",
+        "Integration/OpenAIMath/Upstream378FiniteCNFBridge.lean",
+        "DASHI/Mathematics/Complexity/FixedWidthTruthTableCNFExact.agda"
+      ],
+      "search_terms": [
+        "List.toFinset",
+        "Finset.card",
+        "normalizedModelCountExact",
+        "SAT.Literal",
+        "SAT.CNF",
+        "SAT.count",
+        "literalCode",
+        "duplicate clause",
+        "tautological clause",
+        "positive literal",
+        "negative literal",
+        "width at most 3",
+        "source clause"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "P4",
+      "priority": 4,
+      "goal": "Canonical binary emitter and fixed-machine time/space source transport",
+      "obligations": [
+        "M00",
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05"
+      ],
+      "owners": [
+        "scripts/compile_dashi_circuit_openai378.py",
+        "Integration/OpenAIMath/Upstream378FiniteCNFBridge.lean",
+        "OAI/Algorithms/SubexponentialSAT/Encoding.lean"
+      ],
+      "search_terms": [
+        "encodeCNF",
+        "formulaBitLength_upper",
+        "runtimeBound",
+        "visitedSpace",
+        "prefixSteps",
+        "PrimitiveMachine",
+        "locatedStep",
+        "encodeNat",
+        "encodeList",
+        "frame",
+        "sorted",
+        "insertion",
+        "tapeCount",
+        "polynomial space",
+        "canonical frontend",
+        "binary length"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "P5",
+      "priority": 5,
+      "goal": "External ETH/OAI theorem source, machine bridging and provenance",
+      "obligations": [
+        "M04",
+        "M05",
+        "C00",
+        "C01",
+        "C02"
+      ],
+      "owners": [
+        "Integration/OpenAIMath/SourceAtlas.lean",
+        "Integration/OpenAIMath/FullUpstreamMainResultsCatalogue.lean",
+        "lean/formalization.yaml"
+      ],
+      "search_terms": [
+        "exact_count_and_sat",
+        "SubexponentialSAT",
+        "square root log",
+        "countWord",
+        "FrontEnd.pre_polyT",
+        "ethIsFalse_of_claim",
+        "upstreamCommit",
+        "source atlas",
+        "ComparatorChallenges",
+        "main_results",
+        "theorem_names",
+        "source pin",
+        "axioms"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "R00",
+      "priority": 6,
+      "goal": "27-node native ternary grid and two-checkerboard #SAT cross-carrier certificate",
+      "obligations": [
+        "R00",
+        "R01"
+      ],
+      "owners": [
+        "DASHI/Combinatorics/GraphColouring369PantsWeightedMaxCutExact.agda",
+        "DASHI/Combinatorics/GraphColouring369PantsGridAdjacencyExact.agda",
+        "scripts/check_openai378_27grid_maxcut_bridge.py"
+      ],
+      "search_terms": [
+        "unitNativeGridEdges",
+        "checkerMaximumCut",
+        "checkerCutsEveryNativeEdge",
+        "unitWitnessCountIs54",
+        "connected",
+        "bipartite",
+        "checkerColour",
+        "xorBool",
+        "54",
+        "27",
+        "MaxCut",
+        "cutScore",
+        "strict positive",
+        "unique colouring"
+      ],
+      "related_symbols": [
+        "DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact.checkerMaximumCut"
+      ]
+    },
+    {
+      "lane": "R02",
+      "priority": 7,
+      "goal": "Keep distinct ternary endomorphism C3/S3 orbit, reflection projector and Monster 3B identity",
+      "obligations": [
+        "R02",
+        "R07"
+      ],
+      "owners": [
+        "DASHI/Foundations/PolynomialC3S3RationalCharacterAlgebraExact.agda",
+        "DASHI/Biology/MoonshineOrbifoldSectorProjectorExact.agda"
+      ],
+      "search_terms": [
+        "Orbit11",
+        "Orbit7",
+        "reflectionOn11",
+        "positiveProjection",
+        "negativeProjection",
+        "11",
+        "7 + 4",
+        "C3",
+        "S3",
+        "Reynolds",
+        "Fourier",
+        "characters",
+        "Monster3B",
+        "orbifold",
+        "same-object"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "R03",
+      "priority": 8,
+      "goal": "Prime-specific shifted correlation and genuine unbounded twin pair counts",
+      "obligations": [
+        "R03"
+      ],
+      "owners": [
+        "DASHI/Arithmetic/TwinPrimeConditionalUnboundedFromCountJumpsExact.agda",
+        "DASHI/Analysis/PrimeCountingFunction.agda"
+      ],
+      "search_terms": [
+        "laterJump",
+        "TwinPrime",
+        "prime sieve",
+        "Meissel",
+        "Legendre",
+        "shifted correlation",
+        "von Mangoldt",
+        "sieve",
+        "major arcs",
+        "minor arcs",
+        "parity barrier",
+        "positive lower bound",
+        "FRACRAN",
+        "SSP15",
+        "Ogg"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "R04",
+      "priority": 9,
+      "goal": "RH uniform curvature, signed scalar and correlation certificates",
+      "obligations": [
+        "R04"
+      ],
+      "owners": [
+        "DASHI/Unified/RiemannRHMaxCutTOEExact.agda"
+      ],
+      "search_terms": [
+        "RiemannRHMaxCutTOEExact",
+        "signed fifth",
+        "strict scalar",
+        "zero-free",
+        "critical strip",
+        "explicit formula",
+        "Mellin",
+        "theta",
+        "Perron",
+        "zeta commuting square",
+        "A1",
+        "A2",
+        "compensation",
+        "B"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "R05",
+      "priority": 10,
+      "goal": "Pickover gigantic real phase enclosure and CRT/Eisenstein tail",
+      "obligations": [
+        "R05"
+      ],
+      "owners": [
+        "DASHI/Analysis/PickoverBase99SignedTailExact.agda"
+      ],
+      "search_terms": [
+        "PickoverBase99",
+        "signed tail",
+        "sin(99",
+        "CRT",
+        "Eisenstein",
+        "phase digit",
+        "interval enclosure",
+        "factorial",
+        "base99",
+        "rational approximation",
+        "modular phase",
+        "signed boundary"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "R06",
+      "priority": 11,
+      "goal": "Yang-Mills genuine continuum measure/OS reconstruction and spectral gap",
+      "obligations": [
+        "R06"
+      ],
+      "owners": [
+        "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda"
+      ],
+      "search_terms": [
+        "Osterwalder Schrader",
+        "reflection positivity",
+        "Balaban",
+        "tightness",
+        "continuum limit",
+        "physical measure",
+        "OS reconstruction",
+        "Yang Mills",
+        "mass gap",
+        "spectral bound",
+        "renormalization",
+        "uniform estimates",
+        "route S"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "R07",
+      "priority": 12,
+      "goal": "QID/DA51/ITIL topology, attribution and symmetries without cross-carrier conflation",
+      "obligations": [
+        "R07",
+        "C01",
+        "C02"
+      ],
+      "owners": [
+        "DASHI/Combinatorics/GraphColouring369PantsQidParetoSnowballExact.agda",
+        "tools/agda_preflight/agda_preflight/proof_router.py",
+        "DASHI/Core/SymbolIdentityEvolutionExact.agda"
+      ],
+      "search_terms": [
+        "DA51",
+        "proof route",
+        "object identity",
+        "Q942557",
+        "Q174733",
+        "QID",
+        "Wikidata",
+        "source-written",
+        "kernel receipt",
+        "same object",
+        "Ibrahim",
+        "EverythingTOESymmetryResolved369",
+        "Unifier",
+        "SSP",
+        "369"
+      ],
+      "related_symbols": []
+    }
+  ]
+}
