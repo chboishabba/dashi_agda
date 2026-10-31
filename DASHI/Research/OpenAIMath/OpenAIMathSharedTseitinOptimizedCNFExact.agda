@@ -24,6 +24,7 @@ import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
 import DASHI.Mathematics.Complexity.CookLevinGridReplicationExact as Grid
 import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinGateCNFExact as Original
+import DASHI.Research.OpenAIMath.OpenAIMathFiniteSupportedTseitinModelsExact as FiniteSource
 
 outputIndex : Fin.Fin Original.three
 outputIndex = Fin.zero
@@ -577,3 +578,41 @@ duplicateLiteralCountInvariant literal restClause restFormula =
 -- clause/literal dedup and tautology deletion on the future Lean Finset
 -- conversion. Finset construction and the upstream machine theorem remain
 -- separate, not silently proved here. Kernel acceptance remains pending.
+
+
+------------------------------------------------------------------------
+-- P2 OPTIMIZED FULL #SAT: compose the prior pointwise count equality
+-- with the ORIGINAL assembled-CNF -> accepted-source-circuit numeric theorem.
+-- The two previously authored finite Boolean-recursion implementations
+-- are identified extensionally, rather than silently treated as identical.
+------------------------------------------------------------------------
+
+sumFiniteBitsMatchesSource :
+  ∀ {n : Nat} (weight : CNF.Bits n → Nat) →
+  sumFiniteBits weight ≡ FiniteSource.sumOriginalFiniteCNFBits weight
+sumFiniteBitsMatchesSource {zero} weight = refl
+sumFiniteBitsMatchesSource {suc n} weight =
+  cong₂ _+_
+    (sumFiniteBitsMatchesSource
+      (λ bits → weight (false CNF.∷ᵇ bits)))
+    (sumFiniteBitsMatchesSource
+      (λ bits → weight (true CNF.∷ᵇ bits)))
+
+optGlobalCNFCountExact :
+  ∀ {inputs : Nat}
+    (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  countSourceCNF (optCircuitCNF circuit) ≡
+    FiniteSource.countAcceptedCircuitInputs circuit
+optGlobalCNFCountExact circuit =
+  trans
+    (optCircuitCountEqualsOriginal circuit)
+    (trans
+      (sumFiniteBitsMatchesSource
+        (λ bits →
+          indicator (CNF.evaluateCNF
+            (Original.circuitPlacedCNF circuit) bits)))
+      (FiniteSource.originalGlobalCNFCountExact circuit))
+
+-- This is the literal SOURCE-WRITTEN numeric count identity for the
+-- optional <=3g+1-clause original-DAG CNF. No change to the original
+-- #1040 circuit owner or original 4g+1 compiler. Agda/Lean kernel pending.
