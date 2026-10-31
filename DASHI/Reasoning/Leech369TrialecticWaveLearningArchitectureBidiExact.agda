@@ -47,6 +47,22 @@ each48HeadHasTwo24Blocks = refl
 each48HeadHas16Triads : 48 ≡ 16 * 3
 each48HeadHas16Triads = refl
 
+-- Nontrivial tiling seam: a 24D source block has eight triads,
+-- not a complete number of 9-trit observer hyperfabric cells.
+-- The 384D hidden width has 42 full nine-coordinate charts and
+-- SIX unpaired coordinates. Never drop that residual silently.
+each24BlockHasT9Remainder6 : 24 ≡ 2 * 9 + 6
+each24BlockHasT9Remainder6 = refl
+
+d384HasT9Remainder6 : 384 ≡ 42 * 9 + 6
+d384HasT9Remainder6 = refl
+
+each48HeadHasT9Remainder3 : 48 ≡ 5 * 9 + 3
+each48HeadHasT9Remainder3 = refl
+
+three24BlocksHaveEightT9Charts : 3 * 24 ≡ 8 * 9
+three24BlocksHaveEightT9Charts = refl
+
 rank3OrbitHasCentreAnd13Pairs :
   27 ≡ 1 + 13 * 2
 rank3OrbitHasCentreAnd13Pairs =
