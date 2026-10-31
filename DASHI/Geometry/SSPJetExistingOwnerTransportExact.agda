@@ -107,6 +107,6 @@ coarseCollisionRequiresAddressDistinction :
   (address : FaithfulSSPAddress History depth) →
   encode address (Residual.left collision) ≡
   encode address (Residual.right collision) → ⊥
-coarseCollisionRequiresAddressDistinction collision address =
+coarseCollisionRequiresAddressDistinction {consumer = consumer} collision address =
   Residual.everySufficientObserverSeparatesRelevantCollision
     collision (faithfulAddressConsumerSufficient address consumer)
