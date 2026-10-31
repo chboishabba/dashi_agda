@@ -37,10 +37,11 @@ def verify():
         assert polynomial_laurent_coefficient(padded,M,M-2)==direct
     # Cross-shell terms must survive; decomposing f=g+h requires 4 terms.
     g=[1,0,1,0,0,0,0]
-    h=[0,1,0,1,0,0,0]
+    h=[0,0,1,1,0,0,0]
     M=len(g)
     f=[a+b for a,b in zip(g,h)]
     mixed=sum(g[i]*h[i+2]+h[i]*g[i+2] for i in range(M-2))
+    assert mixed != 0
     assert linear_at_shift(f,2)==linear_at_shift(g,2)+linear_at_shift(h,2)+mixed
     print("PASS exact shifted cyclic group-ring correlation, no wrap, and mixed shells")
 if __name__=="__main__":verify()
