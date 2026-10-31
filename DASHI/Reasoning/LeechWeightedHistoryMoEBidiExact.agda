@@ -10,7 +10,6 @@ module DASHI.Reasoning.LeechWeightedHistoryMoEBidiExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Agda.Builtin.Sigma using (Σ; _,_; fst; snd)
 import DASHI.Reasoning.LeechSignedHistoryExpertBidiExact as Sign
 
 -- Concrete top-k comparison: deterministic tie -> expert 0.
@@ -138,6 +137,7 @@ unselectedHistory1 family w x state = refl
 
 -- The state machine can be unrolled and resumed without changing
 -- output or terminal history. A segment boundary preserves all memory.
+infixr 5 _::_
 data Inputs : Set where
   [] : Inputs
   _::_ : Sign.Trit → Inputs → Inputs
