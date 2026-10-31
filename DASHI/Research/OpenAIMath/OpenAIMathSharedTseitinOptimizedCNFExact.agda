@@ -492,3 +492,88 @@ tautologicalClauseTrue variable tail bits
 -- the elementary equality generators of finite literal/clause SETS.
 -- Full Agda->Lean Finset normalization (especially finite cardinal bounds,
 -- compiler/machine costs, and kernel receipt) remains explicitly unpaid.
+
+
+------------------------------------------------------------------------
+-- Transport CNF normalization through the finite numeric #SAT COUNT.
+-- This is strictly stronger than Boolean equisatisfiability: it states
+-- equality of the actual number of supported finite assignments.
+------------------------------------------------------------------------
+
+countFromPointwise : ∀ {n : Nat}
+  (left right : CNF.CNF n) →
+  ((bits : CNF.Bits n) →
+    CNF.evaluateCNF left bits ≡ CNF.evaluateCNF right bits) →
+  countSourceCNF left ≡ countSourceCNF right
+countFromPointwise left right pointwise =
+  sumFiniteBitsExt
+    (λ bits → indicator (CNF.evaluateCNF left bits))
+    (λ bits → indicator (CNF.evaluateCNF right bits))
+    (λ bits → cong-indicator (pointwise bits))
+  where
+    cong-indicator : ∀ {a b : Bool} →
+      a ≡ b → indicator a ≡ indicator b
+    cong-indicator refl = refl
+
+duplicateClauseCountInvariant : ∀ {n : Nat}
+  (clause : CNF.Clause n) (tail : CNF.CNF n) →
+  countSourceCNF (clause ∷ clause ∷ tail) ≡
+    countSourceCNF (clause ∷ tail)
+duplicateClauseCountInvariant clause tail =
+  countFromPointwise (clause ∷ clause ∷ tail)
+    (clause ∷ tail)
+    (duplicateClausePreserves clause tail)
+
+swapClauseCountInvariant : ∀ {n : Nat}
+  (left right : CNF.Clause n) (tail : CNF.CNF n) →
+  countSourceCNF (left ∷ right ∷ tail) ≡
+    countSourceCNF (right ∷ left ∷ tail)
+swapClauseCountInvariant left right tail =
+  countFromPointwise
+    (left ∷ right ∷ tail)
+    (right ∷ left ∷ tail)
+    (swapAdjacentClausesPreserves left right tail)
+
+tautologyRemovesFromCNF : ∀ {n : Nat}
+  (variable : Fin.Fin n)
+  (clauseTail : CNF.Clause n)
+  (remaining : CNF.CNF n)
+  (bits : CNF.Bits n) →
+  CNF.evaluateCNF
+    ((CNF.positive variable ∷ CNF.negative variable ∷ clauseTail) ∷ remaining)
+    bits ≡ CNF.evaluateCNF remaining bits
+tautologyRemovesFromCNF variable clauseTail remaining bits
+  rewrite tautologicalClauseTrue variable clauseTail bits = refl
+
+tautologyRemovalCountInvariant : ∀ {n : Nat}
+  (variable : Fin.Fin n)
+  (clauseTail : CNF.Clause n)
+  (remaining : CNF.CNF n) →
+  countSourceCNF
+    ((CNF.positive variable ∷ CNF.negative variable ∷ clauseTail) ∷ remaining)
+    ≡ countSourceCNF remaining
+tautologyRemovalCountInvariant variable clauseTail remaining =
+  countFromPointwise
+    ((CNF.positive variable ∷ CNF.negative variable ∷ clauseTail) ∷ remaining)
+    remaining
+    (tautologyRemovesFromCNF variable clauseTail remaining)
+
+duplicateLiteralCountInvariant : ∀ {n : Nat}
+  (literal : CNF.Literal n)
+  (restClause : CNF.Clause n)
+  (restFormula : CNF.CNF n) →
+  countSourceCNF ((literal ∷ literal ∷ restClause) ∷ restFormula) ≡
+    countSourceCNF ((literal ∷ restClause) ∷ restFormula)
+duplicateLiteralCountInvariant literal restClause restFormula =
+  countFromPointwise
+    ((literal ∷ literal ∷ restClause) ∷ restFormula)
+    ((literal ∷ restClause) ∷ restFormula)
+    (λ bits →
+      cong₂ CNF.andBool
+        (duplicateLiteralPreserves literal restClause bits)
+        refl)
+
+-- These are the exact same-assignment cardinality laws needed to justify
+-- clause/literal dedup and tautology deletion on the future Lean Finset
+-- conversion. Finset construction and the upstream machine theorem remain
+-- separate, not silently proved here. Kernel acceptance remains pending.
