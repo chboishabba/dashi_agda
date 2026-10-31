@@ -26,6 +26,20 @@ def main():
     observed=A10*v
     recovered=minor.inv()*observed[list(pivot_rows),:]
     assert recovered==v
+    # An explicit primitive integer kernel: two nonnegative valuation histories
+    # with equal first nine complex jets, but different tenth jet.
+    kernel=s.Matrix([-360448,0,1136200,0,-2624622,0,4499352,0,
+                     -4686825,2499640,0,-807576,374946,-32890,2223])
+    assert A9*kernel==s.zeros(18,1)
+    assert A10*kernel!=s.zeros(20,1)
+    positive=kernel.applyfunc(lambda x:max(x,0))
+    negative=kernel.applyfunc(lambda x:max(-x,0))
+    assert A9*positive==A9*negative
+    assert A10*positive!=A10*negative
+    # A single coordinate of the 10th jet separates the collision.
+    assert (A10*kernel)[9]==-571323080827699200
+    print("PASS explicit integral nine-jet collision and tenth-jet separation")
+    print("primitive integer collision direction:",list(kernel))
     print("PASS canonical 15 SSP lanes; rank first 9 jets=14; rank first 10 jets=15")
     print("independent real/Eisenstein coordinates:",pivot_rows)
     print("nonzero 15x15 minor determinant:",determinant)
