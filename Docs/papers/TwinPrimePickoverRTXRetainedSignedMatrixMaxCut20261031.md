@@ -114,3 +114,7 @@ An effective irrationality estimate for π could bound proximity to `kπ`, but u
 - P9-H: verify only after proof any proposed connection between the zeta-zero spectral chart and this finite sine phase; analogy is not a theorem.
 
 The exact history and refinement modules are implemented as source; P9-D/E/F are actual mathematical/computational deliverables, not free interface fields.
+
+## Implementation continuation: distinguish exact shared history from a true Bishop sign evaluator
+
+`DASHI.Core.TwinPickoverHistoryHypervoxelTransportExact` retains the original state and `RecursiveRadixHypervoxel` addresses/suffix; its readout equations are definitional. The companion new arithmetic concrete BIDI module proves invertibility of a real Nat-period codec while transporting the full hypervoxel history. Do **not** substitute this number-theoretic codec for the archimedean sine sign: actual Bishop exponential identities, validated phase reduction and a zero-excluding interval are still necessary. For Pickover use the true Bishop historical phase owner from PR #1260 and transport a *certified phase interval* with a consumer-specific refiner. A finite trit label or 270-residue is insufficient by itself. No fabricated terminal sign.
