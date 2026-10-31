@@ -118,3 +118,10 @@ monitor surface.
 
 - Inspected actual `TwinPrimeSixWheelExact`, its exact `BoundedPrimePair` record and CT18 actual Mangoldt total/error separator. Added `TwinPrimeSOTABoundedGapBidiExact.agda`: two-way exact-gap-two proof transport and cofinal-family equivalence through a *retained shift equality* rather than treating a 186/246 bound as twin primes. Three TOE roots now import the bridge.
 - Grounded source ledger in GPY, Zhang, Maynard/Tao, Polymath8b (unconditional 246), Axiom Math Lean 246 blueprint, OpenAI PrimeGaps186 (three explicit conditional inputs) and Chen prime/almost-prime result, with original author/AI/repository attribution and no promotion of conditional, almost-prime or finite model claims to gap two. Kernel typecheck pending; no ESD edits or CI.
+
+## 2026-10-31 — exact cofinal certified twin count-jump BIDI and terminal register (PR #1408)
+
+- Extended original `TwinPrimeConditionalUnboundedFromCountJumpsExact` with `certifiedCountJumpsFromTwinInfinitude`, `twinInfinitudeGivesUnboundedCertifiedCountJumps` and the full `certifiedCountJumpInfinitudeBidi` record. The reverse direction uses actual certified twin witnesses at cutoff N+2, handles 0/1 by absurd lower-bound patterns, and reuses the original count-jump theorem.
+- Extended `TwinPrimeStrongWeakMaxCutBidiExact` with two-way cofinal finite-window/count-jump adapters; all three canonical TOE roots import it. No new primality decision procedure or arithmetic axiom.
+- Reconciled T13/M16 (semantic equivalence source-written) against CT15/T10 (still open unbounded prime-specific correlation) in the six-direction and exact remaining-lemma roadmaps and TODO. Recorded the prior sharper `E(X)=O(√X log²X)` classical mathematical envelope, which still needs ordered-real Agda transport.
+- **Evidence:** GitHub source written and readback, **no Agda kernel verification, no CI, no terminal analytic solution claimed**. Original Brun/Hardy–Littlewood, earlier DASHI authors and Ibrahim Monster 3B priority retained; ESD untouched.
