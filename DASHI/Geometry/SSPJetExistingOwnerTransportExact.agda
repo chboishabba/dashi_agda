@@ -29,7 +29,7 @@ metricTwoJetHistoryPreserved =
 
 -- The original jet order is retained in its source row.
 metricTwoJetOrderIsDepth :
-  Jet.jetOrder (Jet.admissibilitySpec Bridge.metricTwoJetUltrametricRow)
+  Jet.jetOrder (Bridge.admissibilitySpec Bridge.metricTwoJetUltrametricRow)
   ≡ Jet.addressDepth Bridge.metricTwoJetUltrametricRow
 metricTwoJetOrderIsDepth =
   Jet.jetOrderMatchesAddressDepth Bridge.metricTwoJetUltrametricRow
