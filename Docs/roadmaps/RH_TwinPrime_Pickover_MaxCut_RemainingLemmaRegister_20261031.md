@@ -165,3 +165,16 @@ CI/Agda compiler intentionally deferred at user's request; file has not received
 ## Exact finite shift-two cyclic group-ring witness
 
 Added `scripts/check_twin_prime_cyclic_group_ring_shift_two.py` (commit `a92de769fb5b0a205ea043171327d32bd9bf84ef`). Checks the precise `t^{-2}` coefficient of `F(t)F(t^{-1})` in an integer cyclic group ring, with zero padding and all signed mixed shell terms; uses prime-indicator windows, **not** `Lambda` log weights. `DASHI.Physics.Closure.NSTriadKNLuoFiniteFourierParsevalFromInversionExact` is an inspected existing rational finite-Fourier source. TP-B/T03 now have a committed finite-experiment witness, but no general Agda cyclic DFT proof; T09/T10 prime-distribution estimates remain OPEN. Script existence is not an execution receipt.
+
+
+## Verified in-repo jet owner audit — 31 October 2026
+
+Correction: **do not propose a new generic SSP-jet architecture**. The existing Agda surfaces include:
+- `DASHI.Geometry.SSP369Ultrametric`: exact `Address d`, `PrefixMatch`, `agreementDepth`, `distance` and prefix soundness.
+- `DASHI.Geometry.AdmissibilityJetSpec` + `DASHI.Geometry.Admissibility369UltrametricBridge`: jet-order/redundancy/field/invariant-generator discipline and a concrete 369 ultrametric depth bridge (explicitly not a physical identity).
+- `DASHI.Biology.OrientedZeroJetTransitionExact`, imported by `ConsciousAccessRound5CompletionBoundary` beside `SignedSSPFRACTRANWeaveExact`, `SSPHyperfibreSymmetryTowerExact` and `TernaryHypercubeHyperfabricExact`.
+- `DASHI.Analysis.RiemannQuarticSignedPoleJointHorizontalJetExact` and `RiemannQuarticSignedPoleBidiMarkedFourthExact`: the real joint horizontal/vertical quartic and even 0/2/4 marked moment owners; their sign/cancellation estimates remain explicitly open.
+- `DASHI.Physics.YangMills.BalabanWilsonBivariateMarkedJetExact` and `BalabanWilsonMarkedClusterJetExact`: exact mixed coefficient bivariate jet and finite coefficient extraction, with actual analytic producer still separate.
+- `DASHI.Moonshine.OggPrimeFourierWindingExact` from PR #1140: existing exact finite SSP/Ogg winding and C3 conjugation owner.
+
+The ten-derivative SSP15 Eisenstein winding *rank experiment* in `scripts/check_ssp15_c3_winding_jet_rank.py` is a specific new exact finite certificate. Searches did not locate a pre-existing source file formalising precisely this ten-derivative **15×15 inverse**, so the narrow remaining task is a concrete kernel-checked adapter to the above existing jet owners, **not** 'integrate jet machinery' wholesale. Neither a bivariate Wilson jet nor a finite SSP rank proof automatically gives uniform arithmetic pair-correlation estimates.
