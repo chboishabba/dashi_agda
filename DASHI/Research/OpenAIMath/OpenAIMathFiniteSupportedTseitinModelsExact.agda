@@ -746,8 +746,8 @@ finLeftOriginalInputNumber :
     FinBase.toℕ index
 finLeftOriginalInputNumber {inputs = zero} ()
 finLeftOriginalInputNumber {inputs = suc inputs} fzero = refl
-finLeftOriginalInputNumber {inputs = suc inputs} (fsuc index) =
-  cong suc (finLeftOriginalInputNumber index)
+finLeftOriginalInputNumber {inputs = suc inputs} {gates = gates} (fsuc index) =
+  cong suc (finLeftOriginalInputNumber {gates = gates} index)
 
 -- The actual dependent #1040 realization proof can be reused on an
 -- enlarged global bit assignment without changing ANY previously
@@ -847,6 +847,7 @@ globalPlacedProgramGivesOriginalRealization
     (finiteCNFCookInputAtSourceNumber bits)
     (λ ())
 globalPlacedProgramGivesOriginalRealization
+    {inputs = inputs} {gates = suc gates}
     (Circuit.appendGate previous gate)
     bits
     (Original.extendedProgramValid oldValid gateValid) =
@@ -864,9 +865,9 @@ globalPlacedProgramGivesOriginalRealization
       realizationTransportToExtendedBits bits oldRealization
 
     gateCorrect :
-      (index : Fin (suc _)) →
+      (index : Fin (suc gates)) →
       finiteCNFToCookAssignment bits
-        (Compiler.gateVariableIndex _ index)
+        (Compiler.gateVariableIndex inputs index)
       ≡ Circuit.lookupVec index
         (Circuit.evaluateProgram
           (Circuit.appendGate previous gate)
