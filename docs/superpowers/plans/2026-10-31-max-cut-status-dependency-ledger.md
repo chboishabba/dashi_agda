@@ -110,3 +110,6 @@ Independently executed local Python audit: **1,485** circuits / **104,720** comp
 
 P4 still needs: (i) formalize/or certify this concrete computable source frontend, (ii) actual OpenAI 4.34.1 Lean kernel acceptance and same-object literal polarity/Fin indices, (iii) verified conversion time and all-prefix visited space on the target primitive machine, (iv) compose upstream `exact_count_and_sat` with P2 in a single accepted proof. The current Agda fixed-size count proof cannot alone entail such cost bounds.
 
+
+**Quantitative encoding improvement:** the current Lean #78 version-gated OAI378 source adapter derives the explicit closed-form output length
+`L≤72*(v+1)^2` with `v=inputs+gates` and `g≤v`, using the previous exact upstream width-three bound `L≤v+2+(24v+28)(3g+1)`. This is source-written Lean and rerun independently in Python on 1,485 original-DAG circuits/104,720 assignments. It removes an unspecified-polynomial output-size obligation; it does NOT establish the required machine frontend time/space or Agda/Lean kernel soundness of the cross-language circuit-to-CNF transport.
