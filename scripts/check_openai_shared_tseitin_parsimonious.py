@@ -22,6 +22,42 @@ def eval_circuit(inputs, gates, input_bits):
 
 
 
+
+def optimized_clauses(n, gates, output):
+    """Optional 1/2/3 clause templates on the SAME source gate indices."""
+    clauses = []
+    for older, (op, args) in enumerate(gates):
+        y = n + older
+        def index(wire):
+            return wire[1] if wire[0] == "i" else n + wire[1]
+        if op == "const":
+            clauses.append(((y, args[0]),))
+        elif op == "not":
+            x = index(args[0])
+            clauses.extend([((y, False), (x, False)),
+                            ((y, True), (x, True))])
+        else:
+            x = index(args[0])
+            z = index(args[1])
+            if op == "and":
+                clauses.extend([((y, False), (x, True)),
+                                ((y, False), (z, True)),
+                                ((y, True), (x, False), (z, False))])
+            elif op == "or":
+                clauses.extend([((y, True), (x, False)),
+                                ((y, True), (z, False)),
+                                ((y, False), (x, True), (z, True))])
+            else:
+                raise AssertionError(op)
+    last = output[1] if output[0] == "i" else n + output[1]
+    clauses.append(((last, True),))
+    expected_count = 1 + sum({"const": 1, "not": 2, "and": 3, "or": 3}[op]
+                             for op, _ in gates)
+    assert len(clauses) == expected_count
+    assert len(clauses) <= 3 * len(gates) + 1
+    return clauses
+
+
 def count_whole_placed_cnf_models(n, gates, output):
     """Full 4g+1-clause CNF of the source DAG; count every finite model.
 
@@ -54,6 +90,7 @@ def count_whole_placed_cnf_models(n, gates, output):
     final_index = output[1] if output[0] == "i" else n + output[1]
     clauses.append(((final_index, True),))
     assert len(clauses) == 4 * len(gates) + 1
+    smaller = optimized_clauses(n, gates, output)
     models = 0
     for bits in product((False, True), repeat=n + len(gates)):
         compiled_accepts = all(
@@ -66,6 +103,10 @@ def count_whole_placed_cnf_models(n, gates, output):
         # assignments on each finite input+gate vector, including invalid
         # gate assignments, repeated wires and both output-wire kinds.
         semantic_accepts = (bits[n:] == expected_gates and final_true)
+        optimized_accepts = all(any(bits[j] == sign for j, sign in clause)
+                                for clause in smaller)
+        assert optimized_accepts == compiled_accepts, (
+            'optimized-not-equivalent', n, gates, output, bits)
         assert compiled_accepts == semantic_accepts, (
             n, gates, output, bits, compiled_accepts, semantic_accepts
         )
@@ -205,7 +246,7 @@ def main():
     assert 2 * count_both(1, gates, ("g", 0)) == 4
     check_local_three_bit_gate_cnf()
     check_placed_gate_index_semantics()
-    print(f"PASS: {tests} exhaustive DAG/output cases: assignment-level semantic equivalence and all three counts")
+    print(f"PASS: {tests} exhaustive DAG/output cases: 4g+1 vs optional 1/2/3-gate CNF, identical semantics and counts")
     print("PASS: one-way-gate and unconstrained-tail counterexamples")
 
 
