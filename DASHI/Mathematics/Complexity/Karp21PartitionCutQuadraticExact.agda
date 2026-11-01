@@ -18,7 +18,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+
+import Data.Integer.Properties as IntP
+open import Data.Sum.Base using (inj₁; inj₂)
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
@@ -213,3 +217,124 @@ completeGraphCutQuadratic items =
     (cong (λ weight → (+ 4) * weight)
       (completeGraphCutEqualsPartitionProduct items))
     (partitionCutProductForSelection items)
+
+
+------------------------------------------------------------------------
+-- Exact (non-rounded) algebraic optimum characterisation:
+--   4 * crossingEdgeWeight = totalWeight²  iff leftTotal = rightTotal.
+-- This is a universal signed-integer theorem, not merely a test.
+--
+-- The Karp target requires the *integer* threshold ceil(total²/4)
+-- and a positive W. Its rounding/parity and zero-total guards remain
+-- separate obligations; do not conflate this lemma with the target iff.
+------------------------------------------------------------------------
+
+subtractionCancellation : (a b : ℤ) → (a - b) + b ≡ a
+subtractionCancellation a b =
+  RingZ.solve 2
+    (λ a b → (((a ⊕ (⊝ b)) ⊕ b) , a))
+    refl a b
+
+zeroPlusIdentity : (a : ℤ) → (+ 0) + a ≡ a
+zeroPlusIdentity a =
+  RingZ.solve 1
+    (λ a → ((Κ (+ 0)) ⊕ a , a))
+    refl a
+
+differenceZeroImpliesBalance :
+  (a b : ℤ) → a - b ≡ + 0 → a ≡ b
+differenceZeroImpliesBalance a b diffZero =
+  trans
+    (sym (subtractionCancellation a b))
+    (trans
+      (cong (λ diff → diff + b) diffZero)
+      (zeroPlusIdentity b))
+
+recoverSquareFromDifference : (t d : ℤ) →
+  (t * t) - ((t * t) - (d * d)) ≡ d * d
+recoverSquareFromDifference t d =
+  RingZ.solve 2
+    (λ t d →
+      ((t ⊗ t) ⊕
+         (⊝ ((t ⊗ t) ⊕ (⊝ (d ⊗ d))))
+      , d ⊗ d))
+    refl t d
+
+squareMinusSelf : (t : ℤ) → t * t - (t * t) ≡ + 0
+squareMinusSelf t =
+  RingZ.solve 1
+    (λ t →
+      ((t ⊗ t) ⊕ (⊝ (t ⊗ t))
+      , Κ (+ 0)))
+    refl t
+
+squareZeroFromExactSquare :
+  (t d : ℤ) →
+  t * t - (d * d) ≡ t * t →
+  d * d ≡ + 0
+squareZeroFromExactSquare t d eq =
+  trans
+    (sym (recoverSquareFromDifference t d))
+    (trans
+      (cong (λ remaining → (t * t) - remaining) eq)
+      (squareMinusSelf t))
+
+squareZeroImpliesScalarZero :
+  (d : ℤ) → d * d ≡ + 0 → d ≡ + 0
+squareZeroImpliesScalarZero d zeroProduct
+  with IntP.i*j≡0⇒i≡0∨j≡0 d zeroProduct
+... | inj₁ dZero = dZero
+... | inj₂ dZero = dZero
+
+balancedCutReachesExactSquare :
+  (a b : ℤ) →
+  a ≡ b →
+  (+ 4) * (a * b) ≡ (a + b) * (a + b)
+balancedCutReachesExactSquare a .a refl =
+  RingZ.solve 1
+    (λ a →
+      ((Κ (+ 4)) ⊗ (a ⊗ a)
+      , (a ⊕ a) ⊗ (a ⊕ a)))
+    refl a
+
+balancedSelectionImpliesExactMaximum :
+  (items : List (ℤ × Bool)) →
+  leftTotal items ≡ rightTotal items →
+  (+ 4) * completeGraphCut items ≡
+  (leftTotal items + rightTotal items) *
+  (leftTotal items + rightTotal items)
+balancedSelectionImpliesExactMaximum items balanced =
+  trans
+    (cong (λ cut → (+ 4) * cut)
+      (completeGraphCutEqualsPartitionProduct items))
+    (balancedCutReachesExactSquare
+      (leftTotal items) (rightTotal items) balanced)
+
+exactMaximumImpliesBalancedSelection :
+  (items : List (ℤ × Bool)) →
+  (+ 4) * completeGraphCut items ≡
+  (leftTotal items + rightTotal items) *
+  (leftTotal items + rightTotal items) →
+  leftTotal items ≡ rightTotal items
+exactMaximumImpliesBalancedSelection items exact =
+  differenceZeroImpliesBalance
+    (leftTotal items)
+    (rightTotal items)
+    (squareZeroImpliesScalarZero
+      (leftTotal items - rightTotal items)
+      (squareZeroFromExactSquare
+        (leftTotal items + rightTotal items)
+        (leftTotal items - rightTotal items)
+        (trans (sym (completeGraphCutQuadratic items)) exact)))
+
+balancedSelectionIffExactMaximum :
+  (items : List (ℤ × Bool)) →
+  PR.Iff
+    (leftTotal items ≡ rightTotal items)
+    ((+ 4) * completeGraphCut items ≡
+      (leftTotal items + rightTotal items) *
+      (leftTotal items + rightTotal items))
+balancedSelectionIffExactMaximum items =
+  PR.iff
+    (balancedSelectionImpliesExactMaximum items)
+    (exactMaximumImpliesBalancedSelection items)
