@@ -13,6 +13,7 @@ SCRIPTS = (
     "check_karp_historical_reductions.py",
     "check_karp_remaining_four_gadgets.py",
     "check_karp_partition_maxcut.py",
+    "check_karp_flow_cut_apx.py",
 )
 
 
@@ -21,7 +22,7 @@ def main() -> None:
     for script in SCRIPTS:
         print("KARP RUN:", script, flush=True)
         subprocess.run([sys.executable, str(root / script)], cwd=root, check=True)
-    print("PASS KARP finite controls: 20 historical edges exercised; "
+    print("PASS KARP finite controls: 20 historical edges plus flow/mincut/APX checks; "
           "zero claims about Agda kernel acceptance or polynomial clocks")
 
 
