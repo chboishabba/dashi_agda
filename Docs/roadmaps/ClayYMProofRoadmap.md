@@ -820,3 +820,28 @@ Four new concrete source-aligned Agda owners are now linked from `BalabanRGTOERe
 The exact remaining selected physical cuts are **inverse-edge extension**, **full closed plaquette action and C3 reindexing** on actual finite complete SU2/SU(N) group values, **product/constrained Haar change of variables**, actual **selected R443 finite action/Gibbs density**, **R445 preferred physical measure tail/convergence** and **R320/R333 same-H_OS spectral/UV–IR limit**. The existing R443→R431→normalized→continuum chain is already theorem-code; don't ask for another abstract facade. Rational unit quaternions need compact completion/Haar source and continuity, not categorical arithmetic promotion.
 
 **Trust:** all new Agda is SOURCE-WRITTEN (not exact-head kernel-verified); no CI run.
+
+
+### 2026-11-01 finite signed/native R443 symmetry closure
+
+`YMClayNativeRationalSU2AllSignedC3WilsonExact.agda` closes the finite native
+rational SU2 n=3 / side-four C3 graph-word transport for **both** positive
+and inverse oriented links, using the actual existing path-holonomy/adjacency
+operators. `YMClayNativeRationalSU2OrderedPlaquetteC3ActionExact.agda`
+then proves a four-axis-site and 4×4 **ordered** oriented Wilson plaquette
+real-trace sum is C3 invariant, via rational exact finite reindexing.
+This is genuine finite selected group-valued Wilson algebra, independent
+of a jFine/Monster analogy.
+
+Source-next exact leaves in ranked order:
+1. **R443-six**: prove the 16 ordered plaquette sum reduces to exactly the
+   source six `μ<ν` action with sign/inverse trace equality, diagonal
+   constant and physical beta-normalisation; selected SU2 group values.
+2. **R443-Haar**: literal 4D C3 configuration action preserves actual compact
+   group product/constrained Haar integral (not merely rational point samples).
+3. **R443-W/R445-T**: actual source physical Wilson/Gibbs action/density and
+   preferred full measure/family attached to this same carrier with uniform
+   bounded-observable tails; feed existing R443/R431/OS3 compiler.
+4. **R320/R333**: real selected decay, OS Hilbert Hamiltonian and uniform
+   positive gap after continuum/infinite-volume.
+No Clay promotion. Exact-head Agda compilation remains outstanding.
