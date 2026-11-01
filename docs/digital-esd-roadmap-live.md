@@ -2,6 +2,14 @@
 
 **Branch:** `agent/digital-esd-adaptive-screening-p0a-g`
 
+**Origins and non-black-box derivation (current):** [Research origins and derivation, PR archaeology, original nine sources, seven-principle selection debt and 1 Nov source intake](digital-esd-research-origins-and-derivation.md). This is the canonical collaborator entrypoint; `#341` began the source-bound loom with seven *papers*, whereas the current nine-item registry supports a later seven-*principle* interpretive synthesis. Do not conflate them.
+
+**Current date / sprint (1 November 2026):** target Friday **6 November** for internal title/abstract approval *if coauthors confirm*. The 23 October brief below is retained as historical planning, not the current-week instruction. The final *Sustainability* journal abstract is expected to be around 200 words maximum under the separate [#1446 publisher-guidance PR](https://github.com/chboishabba/dashi_agda/pull/1446); the optional planned-paper enquiry permits about 250 words. No editor receipt or team approval is inferred.
+
+**November EfS source intake:** [#1448](https://github.com/chboishabba/dashi_agda/pull/1448) is stacked on [#1237](https://github.com/chboishabba/dashi_agda/pull/1237): **14 new attributed entries plus two reused Tilbury/IUCN sources**, 16 candidate comparisons, with **no source-span admission or final principle-survival result**. Source role, rival interpretation, context and claim ceiling remain first class. [#1446](https://github.com/chboishabba/dashi_agda/pull/1446) is a separate master-based documentation PR; merge/reconcile rather than overwrite its sections 30–32.
+
+**Immediate highest-alpha order:** (1) freeze coauthor-reviewed question, paper type, abstract, and disclosure/permissions owners; (2) pay the historical selection gaps (seven-source→nine-item registry commits; why seven principles; alternatives and rejected partitions); (3) assign independent blind EfS coding and exact-source-span verification for #1448; (4) run an actual current PostgreSQL world/census receipt on the real ERIC records and verify remaining database coverage; (5) write two context-indexed worked applications and only then produce a supported/narrowed/split/defeated survival table. Formal structure and metadata candidate counts do not replace study admission.
+
 **Status:** current working roadmap. This file records design intent, repository state and unpaid review work. It is not scholarly evidence and cannot pay a manuscript claim.
 
 ## 1. Paper centre
