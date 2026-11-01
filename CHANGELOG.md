@@ -161,3 +161,9 @@ monitor surface.
 - Added all 16 *ordered* 4D plaquette words and actual 256-site nested rational Wilson trace sum; source-written C3 action invariance via reindexing.
 - Independent exact Fraction arithmetic PASS on 4096 full signed plaquettes and total 23384/25 = 23384/25 under C3 in a nonconstant rational quaternion sample. No Agda compile, committed blob replay or physical Haar normalization.
 - Remaining R443-six canonical six-plane comparison, actual physical SU2/SU(N) Haar / Gibbs / measure family, R445 uniform tails, R320 decay/R333 OS-Hamiltonian spectral gap and full continuum remain open.
+
+
+## 2026-11-01 — canonical six-positive-plane source identified
+
+- Reused actual `PositivePlane4`, original native `plaquetteBoundaryDirections` and `rationalSU2PlaquetteHolonomy` for a source-written definitionally same-object native six-plane signed Wilson group/real-trace theorem; the source six-plane trace action is now an actual native module term.
+- Independent exact Fraction test on same field: six-plane before=after `-1108/25`, and the 16-term sum equals 2×six + four diagonals/site. The **universal Agda** orientation/normalization and selected Haar measure still need mathematical proof/verified code.
