@@ -192,7 +192,7 @@ openAIFiveYearCashProjection = sourceReceipt
   "Reuters / Financial Times, citing OpenAI company investor presentation"
   "OpenAI forecasts cash burn near USD278bn by 2030"
   "2026-09-18"
-  "https://www.reuters.com/business/openai-forecasts-cash-burn-near-280-billion-by-2030-ft-reports-2026-09-18/"
+  "https://www.investing.com/news/economy-news/openai-expects-to-burn-through-almost-280-billion-by-2030-ft-reports-4907970"
   secondaryContext
   "Secondary report of OpenAI forecast: cumulative negative free cash flow USD278bn for 2026-2030, infrastructure spending projection USD856bn, cumulative revenue forecast USD840bn."
   "Forecast is not realised failure, enacted bailout or independently acquired original investor presentation."
