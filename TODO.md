@@ -17409,3 +17409,7 @@ Cleanup
 - [x] Source-write proper Wilson deficit (1−ReTr): `orderedDeficit16 = 2*sixPhysicalDeficit` pointwise, and original-six physical Wilson deficit C3 invariance.
 - [x] Change native R443 Gibbs action to actual six-positive Wilson deficit `Σ(1−ReTr)`, with selected compact-Haar/Gibbs source still hypotheses.
 - [ ] Run Agda exact-head compiler for all new normalisation/six-plane owners. Do not promote source-written to kernel-verified.
+
+
+- [x] Expose the actual six-positive-plane Wilson deficit as the original n=3 R445 rational Wilson-observable function, with definitional same-object proof.
+- [ ] R445 finite source majorant: prove six-plane deficit ∈ [0,3072] on fixed side-four rational SU2 links using native trace bounds/additive sums; this is *not* uniform physical cutoff/volume convergence.
