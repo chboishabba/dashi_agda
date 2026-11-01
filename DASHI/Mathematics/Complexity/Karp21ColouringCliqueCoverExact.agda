@@ -35,6 +35,10 @@ CliqueFibres {Vertex} adjacent sameColour colouring =
     sameColour (colouring u) (colouring v) ≡ true →
     Graph.complementAdjacency adjacent u v ≡ true
 
+trueFalseImpossible : ∀ {value : Bool} → value ≡ true → value ≡ false → ⊥
+trueFalseImpossible {true} refl ()
+trueFalseImpossible {false} () _
+
 colouringToComplementCliqueFibres :
   ∀ {Vertex Colour : Set}
     (adjacent : Vertex → Vertex → Bool)
@@ -46,9 +50,8 @@ colouringToComplementCliqueFibres adjacent sameColour colouring proper
   u v distinct same
   with adjacent u v
 ... | false = refl
-... | true
-  with proper u v distinct refl
-... | ()
+... | true =
+  ⊥-elim (trueFalseImpossible same (proper u v distinct refl))
 
 complementCliqueFibresToColouring :
   ∀ {Vertex Colour : Set}
@@ -61,9 +64,12 @@ complementCliqueFibresToColouring adjacent sameColour colouring fibres
   u v distinct connected
   with sameColour (colouring u) (colouring v)
 ... | false = refl
-... | true
-  with fibres u v distinct refl
-... | ()
+... | true =
+  ⊥-elim
+    (Graph.trueAndNegationImpossible
+      (adjacent u v)
+      connected
+      (fibres u v distinct refl))
 
 karpColouringCliqueCoverWitnessIff :
   ∀ {Vertex Colour : Set}
