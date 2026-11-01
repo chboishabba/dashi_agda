@@ -27,6 +27,8 @@ import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact as Response
 import DASHI.Foundations.TernaryGolay.ChannelC3OrbitDecomposition as Channels
 import DASHI.Foundations.TernaryGolay.CoxeterToddRoutesBoundary as K12
 import DASHI.Foundations.UBP.LeechValidMoveSet as LeechMove
+import DASHI.Reasoning.LeechPuncturedNineArithmeticExact as PunctureArithmetic
+import DASHI.Reasoning.LeechPuncturedNineLearningBridgeExact as PunctureBridge
 
 ------------------------------------------------------------------------
 -- Concrete learner dimensions, not a coincidence-to-geometry theorem.
@@ -153,3 +155,29 @@ reversingDirectedRelationSwapsChirality =
 -- witness for an arbitrary LeechTransformer C3 coordinate action.
 -- This boundary prevents a symbolic wave-phase action from masquerading
 -- as an actual order-three Leech automorphism.
+
+
+------------------------------------------------------------------------
+-- CORRECTED ARCHITECTURAL PRIOR: 384 is sixteen 3×(3²−1) blocks;
+-- the old 128×3 chart is still arithmetic but not the source-owned
+-- punctured-nine geometry. The 42×9+6 remainder only arises if a
+-- FULL nine-position observer cell is physically placed in each width.
+-- Our native learned 24D representation instead uses three eight-site
+-- punctured lanes, with independent centre side-state when required.
+------------------------------------------------------------------------
+
+primeAlignedHidden : 384 ≡ 16 * 3 * PunctureArithmetic.puncturedNineCount
+primeAlignedHidden = PunctureArithmetic.fullLearner
+
+primeAlignedHead : 48 ≡ 2 * 3 * PunctureArithmetic.puncturedNineCount
+primeAlignedHead = PunctureArithmetic.oneHead
+
+primeAlignedConjugatePairs :
+  PunctureArithmetic.puncturedNineCount ≡ 4 * 2
+primeAlignedConjugatePairs = PunctureArithmetic.puncturedNineIsFourPairs
+
+-- PunctureBridge reuses the exact eight actual POINT indices and their
+-- antipodal involution. A separate real Fourier isomorphism is
+-- implemented/checked in LeechTransformer (not an Agda proof of ℝ).
+-- Existing cyclic C9 modular-level / analytic j is not identified
+-- with the phase plane C3×C3.
