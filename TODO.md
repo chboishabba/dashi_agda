@@ -17420,3 +17420,6 @@ Cleanup
 - [x] Import its owner through the three canonical TOE roots.
 - [ ] Golden kernel verify `actualArctanEvenRemainderBound`, `actualArctanOddRemainderBound`, concrete four specializations, and transitive imports.
 - [ ] Prove exact first-omitted magnitude = embedded rational `1/((2n+1)d^(2n+1))` on original `Machin.atanMagnitudeTerm` (reusing power/nonnegative embedding), then scale/add all Bishop order inequalities to `|⋆q_n−pi_M|≤e_n≤4/25^n` and `|q_j−q_k|≤8/25^n`.
+
+- [x] K04b2 source: identify every actual positive Bishop `atanMagnitudeTerm` with embedded original rational inverse-odd/power term; instantiate both 5 and 239 using original real-order nonnegativity.
+- [ ] K04b2 remaining: parity-aware combine weighted first-omitted source bounds to actual Machin `|⋆q_n−pi_M|`, prove rational power/denominator majorant and `4/25^n` all-n order in Agda; kernel-check.
