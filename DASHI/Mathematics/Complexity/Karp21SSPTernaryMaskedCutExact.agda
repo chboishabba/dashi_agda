@@ -21,6 +21,7 @@ module DASHI.Mathematics.Complexity.Karp21SSPTernaryMaskedCutExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
+import Data.Fin.Base as Fin
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; -_; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
@@ -123,7 +124,10 @@ ternaryInducedBleedEdge w SSP.sspNegOne SSP.sspPosOne =
   rightZero (ternaryEnergyEdge w SSP.sspNegOne SSP.sspPosOne)
 ternaryInducedBleedEdge w SSP.sspZero SSP.sspNegOne =
   leftZero (ternaryEnergyEdge w SSP.sspZero SSP.sspNegOne)
-ternaryInducedBleedEdge w SSP.sspZero SSP.sspZero = refl
+ternaryInducedBleedEdge w SSP.sspZero SSP.sspZero =
+  RingZ.solve 1
+    (λ x → (x ⊗ Κ (+ 0) , Κ (+ 0) ⊕ Κ (+ 0)))
+    refl w
 ternaryInducedBleedEdge w SSP.sspZero SSP.sspPosOne =
   leftZero (ternaryEnergyEdge w SSP.sspZero SSP.sspPosOne)
 ternaryInducedBleedEdge w SSP.sspPosOne SSP.sspNegOne =
@@ -220,6 +224,14 @@ binaryTernaryEdgeQuadratic w true false = refl
 binaryTernaryEdgeQuadratic w false true = refl
 binaryTernaryEdgeQuadratic w false false = refl
 
+lookupMappedBinaryTrit :
+  ∀ {n} (labels : Vec.Vec Bool n) (i : Fin.Fin n) →
+  Vec.lookup (binaryToSSPTritLabels labels) i ≡
+  boolToSSPTrit (Vec.lookup labels i)
+lookupMappedBinaryTrit (bit Vec.∷ tail) Fin.zero = refl
+lookupMappedBinaryTrit (bit Vec.∷ tail) (Fin.suc i) =
+  lookupMappedBinaryTrit tail i
+
 binaryTernaryEdgeListSpecialization :
   ∀ {n : Nat}
     (edges : List (Cut.SignedUndirectedEdge n))
@@ -229,7 +241,11 @@ binaryTernaryEdgeListSpecialization :
 binaryTernaryEdgeListSpecialization [] labels = refl
 binaryTernaryEdgeListSpecialization (e ∷ es) labels =
   cong₂ _+_
-    (binaryTernaryEdgeQuadratic (Cut.weight e)
-      (Vec.lookup labels (Cut.first e))
-      (Vec.lookup labels (Cut.second e)))
+    (trans
+      (cong₂ (ternaryEnergyEdge (Cut.weight e))
+        (lookupMappedBinaryTrit labels (Cut.first e))
+        (lookupMappedBinaryTrit labels (Cut.second e)))
+      (binaryTernaryEdgeQuadratic (Cut.weight e)
+        (Vec.lookup labels (Cut.first e))
+        (Vec.lookup labels (Cut.second e))))
     (binaryTernaryEdgeListSpecialization es labels)
