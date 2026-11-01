@@ -101,8 +101,10 @@ fourFrustrationEqualsSignedPSDSpinEdge :
   (w : ℤ) (a b : Bool) →
   (+ 4) * frustrationEdge w a b ≡
   signedPSDSpinEnergyEdge w a b
-fourFrustrationEqualsSignedPSDSpinEdge (+ n) true true = refl
-fourFrustrationEqualsSignedPSDSpinEdge (+ n) false false = refl
+fourFrustrationEqualsSignedPSDSpinEdge (+ n) true true =
+  RingZ.solve 1 (λ x → (Κ (+ 4) ⊗ Κ (+ 0) , x ⊗ Κ (+ 0))) refl (+ n)
+fourFrustrationEqualsSignedPSDSpinEdge (+ n) false false =
+  RingZ.solve 1 (λ x → (Κ (+ 4) ⊗ Κ (+ 0) , x ⊗ Κ (+ 0))) refl (+ n)
 fourFrustrationEqualsSignedPSDSpinEdge (+ n) true false =
   RingZ.solve 1 (λ x → (Κ (+ 4) ⊗ x , x ⊗ Κ (+ 4))) refl (+ n)
 fourFrustrationEqualsSignedPSDSpinEdge (+ n) false true =
@@ -111,8 +113,10 @@ fourFrustrationEqualsSignedPSDSpinEdge (-[1+ n ]) true true =
   RingZ.solve 1 (λ x → (Κ (+ 4) ⊗ x , x ⊗ Κ (+ 4))) refl (+ (suc n))
 fourFrustrationEqualsSignedPSDSpinEdge (-[1+ n ]) false false =
   RingZ.solve 1 (λ x → (Κ (+ 4) ⊗ x , x ⊗ Κ (+ 4))) refl (+ (suc n))
-fourFrustrationEqualsSignedPSDSpinEdge (-[1+ n ]) true false = refl
-fourFrustrationEqualsSignedPSDSpinEdge (-[1+ n ]) false true = refl
+fourFrustrationEqualsSignedPSDSpinEdge (-[1+ n ]) true false =
+  RingZ.solve 1 (λ x → (Κ (+ 4) ⊗ Κ (+ 0) , x ⊗ Κ (+ 0))) refl (+ (suc n))
+fourFrustrationEqualsSignedPSDSpinEdge (-[1+ n ]) false true =
+  RingZ.solve 1 (λ x → (Κ (+ 4) ⊗ Κ (+ 0) , x ⊗ Κ (+ 0))) refl (+ (suc n))
 
 negativeMagnitudeSum :
   ∀ {n : Nat} → List (Cut.SignedUndirectedEdge n) → ℤ
@@ -161,11 +165,11 @@ signedMaxCutFrustrationAffineBidi :
 signedMaxCutFrustrationAffineBidi [] bits = refl
 signedMaxCutFrustrationAffineBidi (e ∷ es) bits =
   trans
-    (sym (addReassociate
+    (addReassociate
       (Cut.edgeContribution e bits)
       (Cut.edgeListCutValue es bits)
       (negativeMagnitude (Cut.weight e))
-      (negativeMagnitudeSum es)))
+      (negativeMagnitudeSum es))
     (cong₂ _+_
       (trans
         (cong
