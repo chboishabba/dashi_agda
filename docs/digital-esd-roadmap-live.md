@@ -20,6 +20,8 @@ Read [Digital-ESD hyperfabric implications and evidence-gate contract](digital-e
 
 **Architecture boundary:** no second SLR pipeline, no new cultural authority model, no diagnostic inference from trauma/learning mathematics, no 43,996-fold tensor materialisation. Source and provenance fibres survive manuscript projection with reopenable residuals; section disagreement and reviewer dissent are valid retained states.
 
+**Second proof obligation closed at representation level, not empirically:** an initial seven-principle survival label is not globally answer-sufficient. The joint hyperfabric owner gives a finite witness in which two consumers ask different questions of the same agency principle and require different provisional dispositions; `FactorsThrough principleLabel consumerVerdict` is impossible. Results planning must therefore produce **context × question × source-role × authority × time indexed verdicts**, not a flat survived-principles tally. The source-welded review path must include explicit scope and independent author adjudication.
+
 ## 1. Paper centre
 
 The paper remains a translational, evidence-governed review:
