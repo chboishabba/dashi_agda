@@ -845,3 +845,18 @@ Source-next exact leaves in ranked order:
 4. **R320/R333**: real selected decay, OS Hilbert Hamiltonian and uniform
    positive gap after continuum/infinite-volume.
 No Clay promotion. Exact-head Agda compilation remains outstanding.
+
+
+The native six-positive-plane geometry and actual `Native.rationalSU2PlaquetteHolonomy`
+are now directly reused by `YMClayNativeRationalSU2SixPlaneSameSourceExact`.
+It proves source six-plane `Bond.plaquetteBoundaryDirections` equals our signed
+ordered path, and source native group value/real trace equals the 16-term
+subfamily on those exact 6 planes. The actual `sixPlanePhysicalTraceAction`
+is thereby on the original named six-plane carrier. Independent exact Fraction
+positive-six-plane sums remain -1108/25 before and after C3 on the tested
+fixture, and its ordered action satisfies 2×six + 4×256 = 23384/25.
+
+The *general Agda* six-vs-ordered identity (reverse orientation + diagonal +
+2× multiplicity), full source action couplings, actual compact Haar, same
+R443/R445 selected finite measure, and continuum R320/R333 remain genuine
+open physical-source obligations. This six-plane file is source-written only.
