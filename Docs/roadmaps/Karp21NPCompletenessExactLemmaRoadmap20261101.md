@@ -23,17 +23,17 @@
 | `DASHI/Mathematics/Complexity/PolynomialReductionExact.agda` | generic `composeReduction`, `pullbackPAlongReduction`, `npCompleteInPImpliesPEqualsNP` over a common `Word` and assumed cost-model laws | prior source owner; *not* 21 concrete instances |
 | `.../CookLevinCircuitGCTBoundary.agda` | literal Boolean formula evaluator and a sample tautology; Cook–Levin `Simulation` is a record of **unfilled obligations** | partial |
 | `.../PNotEqualsNPClayCoreExact.agda` | SAT-not-in-P ↔ P!=NP *assuming* standard completeness premises | conditional |
-| `.../Karp21ReductionTransportExact.agda` | `npCompleteIsHard`, `transportNPHard`, `transportNPComplete` given costed reductions | source-written in #1445, kernel acceptance **not checked here** |
+| `.../Karp21HistoricalDagExact.agda` | `twentyOneNamedNodes`, `twentyHistoricalEdges`, `allNodesHistoricallyReachable` on a **source-authored historical graph** | source-written; no concrete reduction or Agda kernel receipt |\n| `.../Karp21ReductionTransportExact.agda` | `npCompleteIsHard`, `transportNPHard`, `transportNPComplete` given costed reductions | source-written in #1445, kernel acceptance **not checked here** |
 | `.../Karp21CliqueVertexCoverExact.agda` | `karpCliqueCoverSemanticEquivalence` over Boolean selected-vertex predicates; off-diagonal semantics | source-written; cardinality/bit cost unpaid |
 | `.../Karp21CliqueSetPackingExact.agda` | `karpCliquePackingSemanticEquivalence` on symmetric adjacency and vertex-indexed nonedge-incidence subsets | source-written; finite instance/duplicate sets/bit cost unpaid |
 | `.../Karp21WeightedCutObjectiveExact.agda` | `cutObjectiveFlip`, `flipThresholdCut`: global side reversal preserves edge-list objective | source-written; PARTITION→cut exact polynomial map unpaid |
 | `.../Karp21Everything.agda` | focused import/check root for above | source-written; no pinned Agda receipt shown |
-| `scripts/check_karp_partition_maxcut.py` | exhaustive positive-list PARTITION/cut identity and threshold finite regression | 19,530 cases passed in an independently executed local Python audit; not a proof |
+| `scripts/check_karp_partition_maxcut.py` | exhaustive positive-list PARTITION/cut identity and threshold finite regression | 19,530 strictly positive plus 3,906 signed/zero instances independently audited (23,436 total); all cut assignments, signed product identity, zero-total fixed YES instance and positive-threshold guard; not a proof |
 | `dashi_lean4` PR #78 | pinned `openai/math` vendor + catalogue, `OAI.OptimalMaxCut.main` and `OAI.VertexCover.every_fixed_factor_below_two` routing | sources inspected; no Agda same-object port |
 | `DASHI/Planning/NetworkFlowCapacityCongestionExact.agda` | qualitative toy joint-capacity no-promotion | not Ford–Fulkerson or maxflow/mincut |
 | `DASHI/Computation/BellmanFordRelaxationScheduleFibreExact.agda` | shortest-path Bellman–Ford schedule fibre | **not** Ford–Fulkerson |
 
-**Checked end-to-end Karp problem completions in this PR: 0/21. Checked direct concrete Karp reductions with polynomial time proof: 0/20.** Four named Agda implementation owners are source-written; their semantics do not discharge NP-hardness without the resource/certificate adapters. Do not overwrite these counts based on module names.
+**Checked end-to-end Karp problem completions in this PR: 0/21. Checked direct concrete Karp reductions with polynomial time proof: 0/20.** The historical DAG and four semantic/transport Agda owners are source-written; their semantics do not discharge NP-hardness without the resource/certificate adapters. Do not overwrite these counts based on module names.
 
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
@@ -77,7 +77,7 @@ Each row's exact named `<stem>InNP` is the final NP-membership lemma; the unifor
 | N17 | 3-DIMENSIONAL MATCHING — disjoint triples cover designated three sets | `karpThreeDimensionalMatchingInNP` | open |
 | N18 | KNAPSACK — Karp's *subset-sum-like* feasibility variant; not a generic utility optimisation | `karpKnapsackInNP` | open |
 | N19 | JOB SEQUENCING — single machine, deadlines, durations, tardiness penalties and budget | `karpJobSequencingInNP` | open; NOT Job-shop scheduling |
-| N20 | PARTITION — split positive integer multiset into equal sums | `karpPartitionInNP` | Python finite identity only |
+| N20 | PARTITION — split **signed integer vector** into equal sums (original `Z^s`) | `karpPartitionInNP` | Python finite identity only |
 | N21 | MAX CUT — weighted graph has cut with weight ≥ threshold, Karp's sign/weight domain preserved | `karpWeightedMaxCutInNP` | generic edge-objective/reversal only |
 
 For Karp's exact historical variants, normalize against the 1972 original before fixing the machine encoding. For example, clique-cover convention (partition versus cover) and negative-edge/zero-weight domains require explicit variant bridges if the original and modern statements differ. Do not silently substitute an easier optimization variant.
@@ -115,7 +115,7 @@ Every `reduce...` below is a concrete **polynomial-time total encoder**; every `
 
 - **E04/Set Packing:** finite universe of nonedge pairs, vertex-indexed sets and optional unique private tokens; `nonedgeIncidenceCorrect`, `packingPairwiseDisjointIffClique`, `packingIndexInjective`, `packingPreservesAtLeastK`, `packingSetListSizeQuadratic`, `packingBitEncodingPoly`. If duplicate empty sets collapse in a set-of-sets carrier, the reduction is invalid without an indexed-family or uniqueness repair.
 - **E05/Vertex Cover:** `simpleComplementOffDiagonal`, `complementSymmetric`, `cliqueCoverFiniteCardinalityComplement` (|V\\S|=n-|S|), `cliqueVertexCoverThresholdIff` (k↔n−k, explicit k>n cases), `complementGraphBitsQuadratic`, `cliqueVertexCoverPoly`. Existing `karpCliqueCoverSemanticEquivalence` handles the pointwise predicate, not these bounds.
-- **E20/Max Cut:** `partitionCompleteGraphWeights`, `partitionCutProductIdentity` (cut(S)=A(T−A)), `partitionCutSquareIdentity` (4cut=T²−(T−2A)²), `partitionCeilThresholdIffEquality` (cut≥⌈T²/4⌉ ↔ 2A=T), `partitionCutWeightedGraphEncodingPoly`, `partitionMaxCutReductionPoly`. Positive integer input, binary input size, empty/zero corner cases and loop/duplicate handling explicitly fixed. The 19,530-case Python regression is **not** these lemmas.
+- **E20/Max Cut:** `partitionCompleteGraphWeights`, `partitionCutProductIdentity` (cut(S)=A(T−A)), `partitionCutSquareIdentity` (4cut=T²−(T−2A)²), `partitionCeilThresholdIffEquality` (for T≠0, cut≥⌈T²/4⌉ ↔ 2A=T), `partitionZeroTotalFixedYes`, `partitionSignedWeightBitCost`, `partitionCutWeightedGraphEncodingPoly`, `partitionMaxCutReductionPoly`. Original **signed** integer vector input `Z^s`, binary input size, empty/zero-total corner cases and loop/duplicate handling explicitly fixed; when total T=0, the raw formula gives W=0, which is **not a valid Karp MAX CUT target**, so emit a fixed positive-threshold YES instance. The 23,436-case positive/signed Python regression is **not** these lemmas.
 - **E01/Binary IP:** `binaryClauseInequalityIff`, `slackVariableBound`, `inequalityToEqualitiesIff`, `satToBinaryIPWitnessEquivalence`, `binaryCoefficientBitCost`.
 - **E03/SAT→3SAT:** `tseitinExtensionIff` (existential rather than unique unless actually proved), `threeSATWidthBound`, `threeSATClausesLinear`, `threeSATCompilerCost`, `threeSATSharedOpenAISemantics` (cross-repo exact literal identity only once proved).
 
@@ -129,7 +129,7 @@ These are *not* extra nodes in Karp's 21. Keep as lanes consuming common graph/N
 | X02 Set packing optimisation | `maximumPackingObjective`, `packingCliqueThresholdIff`, `packingApproximationRatioBridge` | E04 supplies decision hardness, *not* approximation hardness |
 | X03 Vertex cover optimisation | `minimumVertexCoverObjective`, `minimumCoverComplementMaximumClique`, `vertexCoverGapSameObjectWithOAI` | upstream `openai/math/lean/OAI/Computability/VertexCover/Main.lean` theorem `OAI.VertexCover.every_fixed_factor_below_two`: separate α<2 approximation-gap donor |
 | X04 Job-shop scheduling | `jobShopInstance`, `jobShopScheduleSoundComplete`, `jobSequencingEmbeddingHypotheses`, `jobShopFeasibilityCost` | Karp N19 is single-machine job sequencing; never rename it Job-shop |
-| X05 MAX CUT/APX | `maxCutDecisionOptimizationBridge`, `maxCutNonnegativeFiniteApproxObjective`, `maxCutGapSameObjectWithOAI`, `maxCutGoemansWilliamsonRatioCertificate` | upstream `OAI.OptimalMaxCut.main` is gap/hardness for unweighted finite simple graphs, not E20; OAI #1438 27-grid example is finite |
+| X05 MAX CUT/APX | `maxCutDecisionOptimizationBridge`, `maxCutNonnegativeFiniteApproxObjective`, `maxCutGapSameObjectWithOAI`, `maxCutGoemansWilliamsonRatioCertificate` | upstream `OAI.OptimalMaxCut.main` is gap/hardness for unweighted finite simple graphs, not E20; DASHI #1438 27-grid example is finite |
 | X06 Minimum k-cut | `kCutPartitionSound`, `kCutObjective`, `minSTCutIsTerminalConstrainedTwoCut`, `fixedKPolynomialWithCost`, `variableKDecisionHardness` | separate MINIMUM objective; nonnegative capacities; k=2 *global* cut is not an s-t mincut without specified terminals |
 | X07 APX | `NPOObjectiveEncoding`, `approxFactorValid`, `apReductionPreservesApproxGuarantee`, `lReductionPreservesGap`, `apxMaxCutMembership`, `apxVertexCoverMembership` | zero-optimum, negative-weight, minimization/maximization, fixed-factor and PTAS domains explicit. Normal many-one reductions do not imply approximation preservation |
 | X08 Ford–Fulkerson | `residualCapacityNonnegative`, `augmentPathPreservesFlowFeasibility`, `augmentRaisesFlowValue`, `noAugmentingPathProducesCut`, `flowValueLeqCutCapacity`, `maxFlowMinCutEquality`, `edmondsKarpBFSRuntimePolynomial` | no same-object algorithm found on indexed `dashi_agda` master; `NetworkFlowCapacityCongestionExact` is toy; Bellman–Ford shortest paths is unrelated |
@@ -171,7 +171,7 @@ These are *not* extra nodes in Karp's 21. Keep as lanes consuming common graph/N
 ## H. Source bibliography / exact URLs
 
 - Cook (1971): https://doi.org/10.1145/800157.805047
-- Karp (1972): https://doi.org/10.1007/978-1-4684-2001-2_9
+- Karp (1972): https://doi.org/10.1007/978-1-4684-2001-2_9\n- Karp 1972 source PDF (pages 96–100 for the list, reduction diagram and E20): https://cgi.di.uoa.gr/~sgk/teaching/grad/handouts/karp.pdf
 - Karp original/tree overview: https://en.wikipedia.org/wiki/Karp%27s_21_NP-complete_problems
 - Zuckerman constrained approximation distinction: https://doi.org/10.1137/S0097539794266407
 - OpenAI original Max-Cut Lean: https://github.com/openai/math/blob/main/lean/OAI/Computability/MaxCut/Main.lean
