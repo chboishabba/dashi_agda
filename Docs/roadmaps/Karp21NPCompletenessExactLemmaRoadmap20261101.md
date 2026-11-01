@@ -203,6 +203,15 @@ The new source-written modules are imported from the focused `Karp21Everything.a
 4. `e20EncodedPolynomialReduction`: instantiate `compileHeterogeneousKarpReduction` with the actual graph target, source language, semantic iff, and paid machine cost. `weightedMaxCutInNP` still requires concrete bounded cut labels, exact signed sum bit-cost and verifier clock.
 5. Run the pinned Agda type-check root and audit actual compiled imports for holes/axioms. **Source-written ≠ kernel-verified.**
 
+## 2026-11-01 E05 cardinality max-cut (source-written)
+
+`Karp21FiniteCliqueCoverCardinalityExact.agda` is included in the focused Agda root and derives:
+- `chosenAndUnchosenAddToLength`, `countFlippedEqualsNotChosen` and `cliqueCoverFiniteCardinalityComplement`: finite vertex-list slots partition exactly into selected and complement sets, preserving duplicate vertex-position identity.
+- `cliqueBoundToCoverBound`, `coverBoundToCliqueBound`, and `karpCliqueCoverFiniteThresholdIff`: **for every natural k, including k>n**, the cardinality inequality `k≤cliqueCount` iff `complementCoverCount+k≤n`. This avoids truncated Nat subtraction while proving the mathematically exact threshold relation.
+- The prior source `Karp21CliqueVertexCoverExact.karpCliqueCoverSemanticEquivalence` already has the pointwise adjacency complement iff. **Unpaid E05**: combine both in the *same finite indexed graph model* (vector-to-list selection/lookup correspondence), materialize complement graph and target budget `n-k` with its k>n fixed-NO case, prove the binary graph map and clock, and kernel-check source.
+
+An independent local Python truth-table audit of the E05 finite cardinality theorem covered **26,622** choice-list/threshold combinations (length 0..10, k 0..n+3) with no counterexample. This is secondary evidence, not Agda acceptance.
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
@@ -282,7 +291,7 @@ Every `reduce...` below is a concrete **polynomial-time total encoder**; every `
 ### Concrete proof obligations on the currently closest edges
 
 - **E04/Set Packing:** finite universe of nonedge pairs, vertex-indexed sets and optional unique private tokens; `nonedgeIncidenceCorrect`, `packingPairwiseDisjointIffClique`, `packingIndexInjective`, `packingPreservesAtLeastK`, `packingSetListSizeQuadratic`, `packingBitEncodingPoly`. If duplicate empty sets collapse in a set-of-sets carrier, the reduction is invalid without an indexed-family or uniqueness repair.
-- **E05/Vertex Cover:** `simpleComplementOffDiagonal`, `complementSymmetric`, `cliqueCoverFiniteCardinalityComplement` (|V\\S|=n-|S|), `cliqueVertexCoverThresholdIff` (k↔n−k, explicit k>n cases), `complementGraphBitsQuadratic`, `cliqueVertexCoverPoly`. Existing `karpCliqueCoverSemanticEquivalence` handles the pointwise predicate, not these bounds.
+- **E05/Vertex Cover:** `simpleComplementOffDiagonal`, `complementSymmetric`, `cliqueCoverFiniteCardinalityComplement` (source-written, plus `karpCliqueCoverFiniteThresholdIff` additive cardinality bridge; finite graph index model still open), `cliqueVertexCoverThresholdIff` (k↔n−k, explicit k>n cases), `complementGraphBitsQuadratic`, `cliqueVertexCoverPoly`. Existing `karpCliqueCoverSemanticEquivalence` handles the pointwise predicate, not these bounds.
 - **E20/Max Cut:** `partitionCompleteGraphWeights`, `partitionCutProductIdentity` (cut(S)=A(T−A)), `partitionCutSquareIdentity` (4cut=T²−(T−2A)²), `partitionCeilThresholdIffEquality` (for T≠0, cut≥⌈T²/4⌉ ↔ 2A=T), `partitionZeroTotalFixedYes`, `partitionSignedWeightBitCost`, `partitionCutWeightedGraphEncodingPoly`, `partitionMaxCutReductionPoly`. Original **signed** integer vector input `Z^s`, binary input size, empty/zero-total corner cases and loop/duplicate handling explicitly fixed; when total T=0, the raw formula gives W=0, which is **not a valid Karp MAX CUT target**, so emit a fixed positive-threshold YES instance. The 23,436-case positive/signed Python regression is **not** these lemmas.
 - **E19/signed Knapsack:** `signedSubsetSumDigitPairSound`, `signedSubsetSumDigitPairComplete`, `signedSubsetSumNoCarry`, `signedSubsetSumEncodingPolynomialBits`, `positiveSubsetSumPartitionIff`, `signedKnapsackPartitionCompositeIff`. The pure two-extra-number Karp construction only follows after a positive normalization for signed source input.\n- **E01/Binary IP:** `binaryClauseInequalityIff`, `slackVariableBound`, `inequalityToEqualitiesIff`, `satToBinaryIPWitnessEquivalence`, `binaryCoefficientBitCost`.
 - **E03/SAT→3SAT:** `tseitinExtensionIff` (existential rather than unique unless actually proved), `threeSATWidthBound`, `threeSATClausesLinear`, `threeSATCompilerCost`, `threeSATSharedOpenAISemantics` (cross-repo exact literal identity only once proved).
