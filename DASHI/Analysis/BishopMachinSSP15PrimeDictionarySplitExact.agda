@@ -29,6 +29,7 @@ import Data.Nat.ListAction as Product
 import Data.List.Base as List
 import Data.List.Relation.Unary.All as All
 import Data.Nat.Primality as Prime
+import Data.Nat.Primality.Factorisation as Fact
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Nullary using (yes; no)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -165,6 +166,18 @@ denominatorProductBidi n = productAgreement (denominatorSplit n)
 -- The original signed numerator is retained in Raw.canonicalStage.
 ------------------------------------------------------------------------
 
+-- Prove the distinction generically on the exact *indexed*
+-- factorisation owner. No attempted dependent split on a blocked
+-- stageNumeratorMagnitude n expression is needed.
+factorisationZeroOrProduct :
+  ∀ {m} (factorisation : Raw.FactorisationOrZero m) →
+  (m ≡ zero) ⊎
+  (m ≡ Product.product (Raw.factorList factorisation))
+factorisationZeroOrProduct Raw.zeroFactorisation =
+  inj₁ refl
+factorisationZeroOrProduct (Raw.positiveFactorisation f) =
+  inj₂ (sym (Fact.isFactorisation f))
+
 numeratorMagnitudeZeroOrReconstructs :
   (n : Nat) →
   (Raw.stageNumeratorMagnitude n ≡ zero) ⊎
@@ -172,13 +185,10 @@ numeratorMagnitudeZeroOrReconstructs :
     ≡ Product.product (dictionary (numeratorSplit n)) *
       Product.product (residual (numeratorSplit n)))
 numeratorMagnitudeZeroOrReconstructs n
-  with Raw.numeratorFactorisation n
-... | Raw.zeroFactorisation = inj₁ refl
-... | Raw.positiveFactorisation f =
-  inj₂
-    (trans
-      (sym (Raw.numeratorReconstructs n))
-      (numeratorProductBidi n))
+  with factorisationZeroOrProduct (Raw.numeratorFactorisation n)
+... | inj₁ isZero = inj₁ isZero
+... | inj₂ nonzeroProduct =
+  inj₂ (trans nonzeroProduct (numeratorProductBidi n))
 
 denominatorMagnitudeZeroOrReconstructs :
   (n : Nat) →
@@ -187,13 +197,10 @@ denominatorMagnitudeZeroOrReconstructs :
     ≡ Product.product (dictionary (denominatorSplit n)) *
       Product.product (residual (denominatorSplit n)))
 denominatorMagnitudeZeroOrReconstructs n
-  with Raw.denominatorFactorisation n
-... | Raw.zeroFactorisation = inj₁ refl
-... | Raw.positiveFactorisation f =
-  inj₂
-    (trans
-      (sym (Raw.denominatorReconstructs n))
-      (denominatorProductBidi n))
+  with factorisationZeroOrProduct (Raw.denominatorFactorisation n)
+... | inj₁ isZero = inj₁ isZero
+... | inj₂ nonzeroProduct =
+  inj₂ (trans nonzeroProduct (denominatorProductBidi n))
 
 -- The existing unnormalised ℚᵘ type has denominator suc(d-1), and
 -- numerator is the existing signed integer Raw.stageSignedNumerator.
