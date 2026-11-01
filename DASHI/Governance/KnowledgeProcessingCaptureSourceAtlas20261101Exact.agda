@@ -265,6 +265,53 @@ humanityPlusBlackDraft = sourceReceipt
   "DOJ indexed EFTA00587395, transcribed draft letter describes USD300k proposed AI cognitive-architecture support with unfilled author/foundation variants and transfer language."
   "Unsigned bracketed draft != bank-settlement confirmation; DOJ release != independent endorsement of embedded facts."
 
+------------------------------------------------------------------------
+-- ORIGINAL REGULATOR + CURRENT PUBLIC S-1 AS OF 2026-11-01.
+-- This adds genuine primary-source warnings of financial contagion, not a
+-- finding that public intervention, nationalisation or vendor misconduct
+-- has already happened.
+------------------------------------------------------------------------
+
+rbaOct2026FinancialStability : SourceReceipt
+rbaOct2026FinancialStability = sourceReceipt
+  "Reserve Bank of Australia"
+  "Financial Stability Review, October 2026, The Global Macro-financial Environment: Funding the AI investment boom"
+  "2026-10"
+  "https://www.rba.gov.au/publications/fsr/2026/oct/the-global-macro-financial-environment.html"
+  governmentInstrument
+  "Primary central-bank financial-stability assessment explicitly notes opaque AI capital links, vendor financing/circular arrangements, growing debt exposure and risks from disappointed AI investment returns."
+  "Financial-stability vulnerability != recorded public rescue, monetary bailout, forced acquisition or proved irrecoverable loss; bank's risk analysis is not a causal identification of a particular actor's intent."
+
+rbaOct2026FinancialAssessment : SourceReceipt
+rbaOct2026FinancialAssessment = sourceReceipt
+  "Reserve Bank of Australia"
+  "Financial Stability Review, October 2026, Financial Stability Assessment"
+  "2026-10"
+  "https://www.rba.gov.au/publications/fsr/2026/oct/financial-stability-assessment.html"
+  governmentInstrument
+  "Official RBA risk assessment states AI profitability reappraisal could sharply reprice markets, exacerbated by market concentration, leverage and opacity, and that vulnerability spillovers could grow."
+  "Could pose systemic risk != has already crossed public-intervention threshold."
+
+anthropicCurrentPublicS1 : SourceReceipt
+anthropicCurrentPublicS1 = sourceReceipt
+  "Anthropic, PBC; U.S. Securities and Exchange Commission"
+  "Anthropic Form S-1, SEC accession 0001628280-26-067168"
+  "2026-10-26"
+  "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm"
+  firstPartyIssuer
+  "Latest publicly filed S-1 available for this cut: first-half 2026 operating cash +USD3,929m, investing cash -USD17,181m, financing cash +USD110,774m; significant fixed compute purchase commitments independent of utilisation; 2026 year-to-date customer and platform dependence described."
+  "Positive cash from operations != terminal independently funded cash; cash raised != revenue; disclosed multi-year purchase/lease schedule includes some unpriced blanks in preliminary prospectus; externally calculated ~USD637bn partner-specific sums are NOT a literal fully quantified issuer total here."
+
+anthropicCurrentSECIndex : SourceReceipt
+anthropicCurrentSECIndex = sourceReceipt
+  "U.S. Securities and Exchange Commission"
+  "Form S-1 filing index 0001628280-26-067168"
+  "2026-10-26"
+  "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm"
+  governmentInstrument
+  "Primary filing/index fixes October 26 filing date, accession and current public document identity, superseding a September 3 confidential draft."
+  "Prior draft and later public S-1 are different temporal versions; do not promote September-specific figures when October-specific amended statements supersede them."
+
 -- An original primary statement is a receipt for what the named original
 -- says, not a receipt for the correctness of every empirical prediction.
 record AttributionBoundary : Set where
