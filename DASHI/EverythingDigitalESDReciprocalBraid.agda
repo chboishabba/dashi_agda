@@ -215,6 +215,11 @@ import DASHI.Education.DigitalESDFirstRetainedStudyParseRegression
 
 
 
+import DASHI.Education.DigitalESDConnectedTimeFibreHyperfabricExact
+import DASHI.Education.DigitalESDReviewedTemporalWorldJoinExact
+
+import DASHI.Education.DigitalESDWorldSourceCoverageCensusExact
+
 module DASHI.EverythingDigitalESDReciprocalBraid where
 
 ------------------------------------------------------------------------
