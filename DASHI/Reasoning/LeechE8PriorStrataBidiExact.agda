@@ -28,7 +28,7 @@ rootCountE8 : Nat
 rootCountE8 = Geometry.shortestVectorCount Geometry.E8Benchmark
 
 rankE8IsEight : rankE8 ≡ 8
-rankE8IsEight = Geometry.E8Benchmark .Geometry.dimensionCertificate
+rankE8IsEight = refl
 
 E8Has240Roots : rootCountE8 ≡ 240
 E8Has240Roots = refl
