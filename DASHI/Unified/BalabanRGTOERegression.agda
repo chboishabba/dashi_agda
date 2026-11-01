@@ -906,3 +906,16 @@ open SixSource public using
   ; nativeSixPlaneTraceIsOrdered
   ; sixPlanePhysicalTraceAction
   ; nativeSixPlaneTraceSumEqualsOrderedSixSubfamily)
+
+
+------------------------------------------------------------------------
+-- Universal native SU2 group inverse / real Wilson orientation reversal
+-- on the exact norm-one quaternion link carrier; selected lattice inverse-
+-- edge endpoint identification remains a separate source theorem.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2FourFactorReversalExact as NativeReverse
+
+open NativeReverse public using
+  (forwardPlaquetteFour; reversePlaquetteFour
+  ; inverseFourIsReversedPlaquette
+  ; realTraceInverse; forwardReverseFourTraceSame)
