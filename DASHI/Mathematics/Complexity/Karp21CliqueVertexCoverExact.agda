@@ -67,6 +67,15 @@ cliqueToComplementCover adjacency picked clique u v distinct nonEdge
   ⊥-elim (trueAndNegationImpossible (adjacency u v)
     (clique u v distinct refl refl) nonEdge)
 
+bothPickedImpossible :
+  ∀ {left right} →
+  (negBool left ≡ true ⊎ negBool right ≡ true) →
+  left ≡ true → right ≡ true → ⊥
+bothPickedImpossible {left} (inj₁ missingLeft) leftTrue _ =
+  trueAndNegationImpossible left leftTrue missingLeft
+bothPickedImpossible {right = right} (inj₂ missingRight) _ rightTrue =
+  trueAndNegationImpossible right rightTrue missingRight
+
 complementCoverToClique :
   ∀ {Vertex : Set}
     (adjacency : Vertex → Vertex → Bool)
@@ -78,11 +87,8 @@ complementCoverToClique :
 complementCoverToClique adjacency picked cover u v distinct pickedU pickedV
   with adjacency u v
 ... | true = refl
-... | false with cover u v distinct refl
-...   | inj₁ unpickedU =
-  ⊥-elim (trueAndNegationImpossible (picked u) pickedU unpickedU)
-...   | inj₂ unpickedV =
-  ⊥-elim (trueAndNegationImpossible (picked v) pickedV unpickedV)
+... | false = ⊥-elim
+  (bothPickedImpossible (cover u v distinct refl) pickedU pickedV)
 
 karpCliqueCoverSemanticEquivalence :
   ∀ {Vertex : Set}
