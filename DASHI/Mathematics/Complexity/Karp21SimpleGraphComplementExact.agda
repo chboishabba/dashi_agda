@@ -16,7 +16,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; _+_; _≤_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
@@ -147,3 +147,45 @@ karpCliqueSimpleComplementCoverIff graph choices k =
   PR.iff
     (finiteCliqueToSimpleComplementCover graph choices k)
     (finiteSimpleComplementCoverToClique graph choices k)
+
+
+------------------------------------------------------------------------
+-- Instance-level existential reduction, now with a genuine simple
+-- complement graph: both directions preserve the finite selected
+-- witness and its additive cover budget. There is no search/oracle.
+------------------------------------------------------------------------
+
+CliqueYES :
+  ∀ {n} → SimpleGraph n → Nat → Set
+CliqueYES {n} graph k =
+  Σ (Vec.Vec Bool n)
+    (λ choices →
+      Combined.FiniteCliqueAt (adjacency graph) choices k)
+
+ComplementCoverYES :
+  ∀ {n} → SimpleGraph n → Nat → Set
+ComplementCoverYES {n} graph k =
+  Σ (Vec.Vec Bool n)
+    (λ choices → FiniteSimpleComplementCoverAt graph choices k)
+
+simpleGraphCliqueToComplementCoverYES :
+  ∀ {n} (graph : SimpleGraph n) (k : Nat) →
+  CliqueYES graph k → ComplementCoverYES graph k
+simpleGraphCliqueToComplementCoverYES graph k
+  (choices , witness) =
+  choices , finiteCliqueToSimpleComplementCover graph choices k witness
+
+simpleGraphComplementCoverToCliqueYES :
+  ∀ {n} (graph : SimpleGraph n) (k : Nat) →
+  ComplementCoverYES graph k → CliqueYES graph k
+simpleGraphComplementCoverToCliqueYES graph k
+  (choices , witness) =
+  choices , finiteSimpleComplementCoverToClique graph choices k witness
+
+karpSimpleGraphCliqueCoverInstanceIff :
+  ∀ {n} (graph : SimpleGraph n) (k : Nat) →
+  PR.Iff (CliqueYES graph k) (ComplementCoverYES graph k)
+karpSimpleGraphCliqueCoverInstanceIff graph k =
+  PR.iff
+    (simpleGraphCliqueToComplementCoverYES graph k)
+    (simpleGraphComplementCoverToCliqueYES graph k)
