@@ -1,5 +1,6 @@
 module DASHI.Education.DigitalESDJointHyperfabricConsumerRegression where
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
