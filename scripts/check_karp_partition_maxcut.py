@@ -42,6 +42,39 @@ def reduce_partition_to_cut(
     return len(parts), edges, (total * total + 3) // 4
 
 
+def reduce_partition_to_cut_scaled(
+    parts: tuple[int, ...]
+) -> tuple[int, list[tuple[int, int, int]], int]:
+    """Ceiling-free integer reduction: w_ij = 4*c_i*c_j; W = (sum c_i)^2.
+
+    Zero sum is an unconditional YES in PARTITION (select nothing) but
+    Karp demands W>0, hence use the fixed 2-vertex YES instance.
+    """
+    total = sum(parts)
+    if total == 0:
+        return 2, [(0, 1, 1)], 1
+    return (len(parts),
+            [(i, j, 4*parts[i]*parts[j])
+             for i in range(len(parts))
+             for j in range(i+1, len(parts))],
+            total*total)
+
+
+def verify_scaled_instance(parts: tuple[int, ...]) -> None:
+    n, edges, threshold = reduce_partition_to_cut_scaled(parts)
+    assert threshold > 0
+    target = has_partition(parts)
+    assert (max_cut(n, edges) >= threshold) == target
+    if sum(parts) != 0:
+        for bits in product((0,1), repeat=len(parts)):
+            lhs = sum(w for i, j, w in edges if bits[i] != bits[j])
+            cut = cut_weight(parts, bits)
+            balance = (2 * sum(x for x,b in zip(parts, bits) if b) ==
+                       sum(parts))
+            assert lhs == 4*cut
+            assert (lhs >= threshold) == balance
+
+
 def max_cut(n: int, edges: list[tuple[int, int, int]]) -> int:
     return max(sum(w for i, j, w in edges if bits[i] != bits[j])
                for bits in product((0, 1), repeat=n))
@@ -123,12 +156,14 @@ def main() -> None:
     for n in range(1, 7):
         for parts in product(range(1, 6), repeat=n):
             verify_instance(parts)
+            verify_scaled_instance(parts)
             positive_count += 1
 
     signed_count = 0
     for n in range(0, 6):
         for parts in product(range(-2, 3), repeat=n):
             verify_instance(parts)
+            verify_scaled_instance(parts)
             signed_count += 1
 
     test_printed_1972_threshold_counterexample()
@@ -136,7 +171,7 @@ def main() -> None:
     print("PASS Karp p.100 printed-threshold counterexample (2, 1); "
           "repaired square-of-total formulation distinguished")
     print(f"PASS: {positive_count} positive and {signed_count} signed/zero "
-          "partition instances; exact quadratic cut identity, both side "
+          "partition instances; original-ceiling and scaled-integer threshold routes, exact quadratic cut identity, both side "
           "orientations, zero-total mapping and threshold equivalence")
 
 
