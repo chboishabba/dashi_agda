@@ -1,3 +1,15 @@
+### 1 November selected gauge/Wilson coarse-fine theorem contract
+
+`YMClayVoyagerCovariantWilsonCoarseFineBidiExact` now proves a conditional
+same-fine-carrier Wilson gauge-invariance result by *both* selected physical
+commuting squares: `block∘gaugeFine=gaugeCoarse∘block` and
+`Wfine=Wcoarse∘block`, plus gauge invariance of coarse Wilson. The second
+equality is a strong test target, NOT automatically true for generic RG
+blocking; correct coarse effective observables may need retained fibre or
+quantitative defects. Do NOT turn this into an unconditional physical
+theorem. The canonical OS-form pullback uses the distinct existing
+`BalabanWilsonTransferBlockingExact` owner.
+
 
 ## 2026-11-01 further Yang-Mills symmetry/source recut
 
