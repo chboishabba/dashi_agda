@@ -27,8 +27,9 @@ module DASHI.Foundations.BishopMachinQuarterAngleBranchExact where
 -- ambiguity.  This file does not assume that tangent theorem.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (refl)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised using (_/_)
+open import Data.Rational.Unnormalised as Q using (_/_; _*_; *≡*)
 
 import Real as Bishop
 import RealProperties as BishopP
@@ -90,24 +91,53 @@ quarterIsFourthOfMachinPi =
         machinQuarterAngle))
     (BishopP.*-congʳ fourTimesQuarterIsMachinPi)
 
+
+-- The source bounds 3<pi_M<22/7 must first be scaled by the
+-- STRICTLY POSITIVE quarter. Comparing 3/4 to 3/4 (or 11/14 to
+-- 11/14) would be an invalid strict-order "proof".
+fourthPositive : Bishop.Positive fourth
+fourthPositive = BishopP.0<x⇒posx Machin.quarterPositive
+
+quarterTimesThreeEquivalentThreeFourths :
+  Bishop._≃_
+    (Bishop._*_ fourth (embed (+ 3 / 1)))
+    threeFourths
+quarterTimesThreeEquivalentThreeFourths =
+  BishopP.≃-trans
+    (BishopP.≃-symm
+      (BishopP.⋆-distrib-* (+ 1 / 4) (+ 3 / 1)))
+    (BishopP.⋆-cong (Q.*≡* refl))
+
+quarterTimesTwentyTwoSeventhsEquivalentElevenFourteenths :
+  Bishop._≃_
+    (Bishop._*_ fourth (embed (+ 22 / 7)))
+    elevenFourteenths
+quarterTimesTwentyTwoSeventhsEquivalentElevenFourteenths =
+  BishopP.≃-trans
+    (BishopP.≃-symm
+      (BishopP.⋆-distrib-* (+ 1 / 4) (+ 22 / 7)))
+    (BishopP.⋆-cong (Q.*≡* refl))
+
 threeFourthsBelowQuarter : Bishop._<_ threeFourths machinQuarterAngle
 threeFourthsBelowQuarter =
   BishopP.<-respʳ-≃
     (BishopP.≃-symm quarterIsFourthOfMachinPi)
-    (BishopP.p<q⇒p⋆<q⋆
-      (+ 3 / 4)
-      (+ 1 / 4 * (+ 3 / 1))
-      (λ ()))
+    (BishopP.<-respˡ-≃
+      quarterTimesThreeEquivalentThreeFourths
+      (BishopP.*-monoʳ-<-pos
+        fourthPositive
+        Window.threeBelowMachinPi))
 
 quarterBelowElevenFourteenths :
   Bishop._<_ machinQuarterAngle elevenFourteenths
 quarterBelowElevenFourteenths =
-  BishopP.<-respˡ-≃
-    quarterIsFourthOfMachinPi
-    (BishopP.p<q⇒p⋆<q⋆
-      (+ 1 / 4 * (+ 22 / 7))
-      (+ 11 / 14)
-      (λ ()))
+  BishopP.<-respʳ-≃
+    quarterTimesTwentyTwoSeventhsEquivalentElevenFourteenths
+    (BishopP.<-respˡ-≃
+      quarterIsFourthOfMachinPi
+      (BishopP.*-monoʳ-<-pos
+        fourthPositive
+        Window.machinPiBelowTwentyTwoSevenths))
 
 -- Algebraic target already computed independently: the rational tangent
 -- parameter obtained by four doublings from 1/5 followed by subtraction of
