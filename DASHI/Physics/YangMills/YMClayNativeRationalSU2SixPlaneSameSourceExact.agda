@@ -109,7 +109,7 @@ nativeSixPlaneTraceSumEqualsOrderedSixSubfamily :
   ≡
   SU2.sumMap (Plaquette.ownedPeriodicPlaquettes site)
     (λ plaquette →
-      Ordered.orderedWilsonPlaquette dataSet site
+      Ordered.orderedWilsonPlaquette dataSet (Torus.first plaquette)
         (Torus.first (Plaquette.planeAxes (Torus.second plaquette)))
         (Torus.second (Plaquette.planeAxes (Torus.second plaquette))))
 nativeSixPlaneTraceSumEqualsOrderedSixSubfamily dataSet site =
