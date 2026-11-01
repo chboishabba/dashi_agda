@@ -93,7 +93,7 @@ record ClosureAdmission
     (verifier : SourceVerifier)
     (rule : CommunityRule Agent)
     (creator : Agent)
-    (caseFile : DeliberationCase) : Set where
+    (caseFile : DeliberationCase) : Set₁ where
   constructor closureAdmission
   field
     proposalAuthenticated : Authenticated verifier (proposal caseFile)
