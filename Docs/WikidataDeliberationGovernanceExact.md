@@ -74,3 +74,8 @@ The exact-head golden-kernel typecheck, physical source/PG replay, and historica
 ### Canonical synchronized K00–K13 / A00–A07 status (2026-11-01)
 
 See the [single four-repo max-cut roadmap](https://github.com/chboishabba/ITIR-suite/blob/agent/epistemic-deliberation-candidate-governance-20261101/docs/planning/wikidata_deliberation_maxcut_exact_20261101.md) for each exact owner, source-written code, and remaining primary-source acceptance. The latest canonical source ABI uses SensibLaw's length-framed SHA-256 INGEST-1 source identity, independently reverified by ITIR against original UTF-8 text and byte anchors, and SLR's full typed JSON replay into existing INGEST-1 + atomic S29 review. This is committed source code, not an executed kernel/PG check. Historical P10322 original bytes, applicable policy, creator rights, consensus, actual S30 permission and cross-language formal proof remain independent obligations; no external Wikidata edits are authorised.
+
+
+### Formal policy-window bridge to runtime (source-written)
+
+`CommunityRule.PolicyWindowValid` is now an independent abstract witness over the proposal-time and closure-time policy source revisions, and `ClosureAdmission.historicalPolicyStableThroughClosure` requires it. `admissionRequiresPolicyWindow` and `missingPolicyWindowBlocksClosure` project and block the obligation, respectively, and `WikidataWorkingGroupRegression` imports the theorem from the original owner. This reflects actual *held* policy drift in the SensibLaw/ITIR/SLR source replay, rather than confusing the runtime `unchanged` source digest flag with authenticated historical legal/community normative applicability. Original creators/consensus still require independent witnesses; Agda typecheck not executed.
