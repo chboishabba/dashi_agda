@@ -104,6 +104,14 @@ DASHI/EverythingDigitalESDReciprocalBraid.agda
 | Roadmap source audit, editorial/attribution and SLR boundaries | Open PR #1446, separate documentation branch |
 | Historical unauthorised Follow Through/ESD coupling | PR #1264 closed without merge; **not an accepted ESD research dependency** |
 
+### Exact composition boundary: what is *not* yet a populated hyperfabric
+
+The printed formal owners already relate the Alice loom, the independently nominated EfS concepts, seven digital principles, six comparison receipts, seven survival receipts, and sixteen additional-source cases. **But source-attributed candidate bridges are not the same object as admitted source-audit fibres.** The new `DigitalESDEfSSourceCrossPollinationExact` cases each contain an `AttributedSource`, a `ReciprocalPedagogicalBridge`, a same-locator equality and `admittedToFullReview ≡ false`. They do **not** each contain an instantiated `SourceAuditHyperfabric source` populated by same-source observations, full-text source-span receipts, intersection fibres and independent reviewer decisions.
+
+The existing `DigitalESDSourceAuditHyperfabricExact` is the reusable source-indexed **type**, not a certificate that every paper in this new atlas has passed that type's evidence and admissibility requirements. The umbrella file imports the candidate cases and audit owner separately. This is a **source-connected candidate overlay**, not one automatically fused, empirically admitted Alice–EfS world.
+
+The print includes complete code text for 35 specified central owners and the whole Digital-ESD direct-import manifest. It does **not** print the entire transitive repository closure (including every support module imported by the Alice loom and ESD umbrella), nor does it claim a completed Agda kernel check on the draft branch. Canonical source files and review receipts remain the sources of truth.
+
 ### Verification and provenance of this print
 
 Each full text was fetched from the #1448 branch and copied *verbatim* into its corresponding section. Its original Git blob SHA is printed immediately above the code. The source-print documents are copies for reading, not canonical code owners. The canonical Agda source paths remain authoritative; regenerate print after a substantive source change.
