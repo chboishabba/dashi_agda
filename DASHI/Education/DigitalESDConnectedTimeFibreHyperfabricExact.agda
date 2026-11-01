@@ -91,6 +91,7 @@ record ConnectedDigitalESDTimeHyperfabric : Set₁ where
   field
     canonicalFabric : Fabric.PNFHyperfabric369Surface
     canonicalAliceSourceLoom : Alice.AliceBrownCorpusLoom
+    temporalAliceDiagnosis : Lineage.AliceBrownTemporalDiagnosisBoundary
     canonicalESDReciprocity : ESD.DigitalESDReciprocalBraid
 
     -- EfS remains independently derived before comparison to digital strands.
@@ -133,6 +134,9 @@ canonicalFabricOwner = Fabric.canonicalPNFHyperfabric369Surface
 
 canonicalAliceOwner : Alice.AliceBrownCorpusLoom
 canonicalAliceOwner = Alice.canonicalAliceBrownCorpusLoom
+
+canonicalTemporalLineageOwner : Lineage.AliceBrownTemporalDiagnosisBoundary
+canonicalTemporalLineageOwner = Lineage.canonicalAliceBrownTemporalDiagnosisBoundary
 
 canonicalReciprocalOwner : ESD.DigitalESDReciprocalBraid
 canonicalReciprocalOwner = ESD.canonicalDigitalESDReciprocalBraid
