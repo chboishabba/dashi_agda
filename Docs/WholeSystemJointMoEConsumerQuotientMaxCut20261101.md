@@ -208,3 +208,47 @@ causal route/history replay → exact JQ1 reopening → consumer quality +
 bidirectional bitrate and latency comparison. Do not substitute the
 prior two-sequence synthetic smoke score or 82-pass earlier branch
 verification for an actual learned-student result.
+
+
+## 8. User-executed real-text gate: failure is learning, not codec admissibility
+
+User ran the original checked-in vocabulary on 64 TinyStories training and
+32 disjoint heldout sequences, one epoch, and completed the manual student
+pipeline after an ITIR-venc interpreter-finalisation crash in the
+orchestrator. Dense teacher heldout CE=2.58.
+The `c2_invariant` 12-layer MoE achieved CE=8.63, and the
+`punctured9_wave` MoE CE=17.30. Both are *worse* than the uniform
+2048-class log-loss `ln 2048 ≈ 7.625`. These students are NOT usable
+replacement learners. This does not falsify the geometry of the
+punctured T² wave representation: the trained student is deeply
+undertrained and every FFN was independently replaced.
+
+Each geometry produced 2048 captured token frames with byte-exact JQ1
+reopening, 9.25–9.26MB wire versus 10.07MB raw framed, and no winning
+punctured-site, signed, previous-history or temporal orbit predictor:
+every frame selected plain joint zlib. Under 1Gb/s assumed RTT and the
+measured local encoding costs, ~11.42ms JQ1 vs ~5.16ms raw. Both
+quality and transport Pareto gates FAIL.
+
+**Previously missing mathematical separation now formalised** in
+`DASHI/Reasoning/LeechPerExpertSymmetryDoesNotForceHistoryReuseExact.agda`:
+even two experts with *the same* perfectly C2-equivariant identity
+history transition can retain histories in disjoint C2 orbits
+(one centre, the other noncentral). A per-expert conjugation proof cannot
+force within-sample cross-expert exact compression. No reclassification
+of semantic dissent as a negated activation is warranted.
+
+The high-alpha source-level diagnostic is now
+`LeechTransformer/scripts/diagnose_moe_quality_collapse.py` with
+regression `tests/test_moe_quality_collapse_diagnostics.py`. It isolates
+single-layer teacher→student substitutions, cumulative prefix
+replacement, same-teacher-input FFN relative MSE, router entropy,
+expert load, signed orientations and recurrent history amplification.
+This distinguishes cumulative distillation error, one catastrophic
+layer, and route-scale collapse *before* another large training run.
+
+Run the diagnostic on the user's saved real student checkpoints and
+original heldout split; the GitHub connector cannot access their local
+`/tmp/real_text_moe_jq1_smoke` directory or execute the new scripts.
+Agda kernel status: new no-go source written with `--safe`, **not
+kernel checked**.
