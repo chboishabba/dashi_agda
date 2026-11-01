@@ -19,6 +19,13 @@ module DASHI.Analysis.BishopMachinZetaRegularHalfPlaneExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Nat.Base using (_≤_)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised as Q using (_/_; _<_)
+import Data.Rational.Unnormalised.Properties as QP
+open import Relation.Nullary.Decidable.Core using (toWitness)
+open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product.Base using (proj₁; proj₂)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Real as Bishop
 import RealProperties as RP
@@ -27,6 +34,8 @@ import Sequence as Series
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Rational
+import DASHI.Analysis.BishopMachinEventualHalfPlaneExact as Eventual
+import DASHI.Foundations.BishopMachinPiRationalWindowExact as Window
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 
 module AtActualBishopCarrier
@@ -135,3 +144,66 @@ module AtActualBishopCarrier
   --         including local uniform convergence and no poles.
   -- K04d3: true coordinatewise convergence of zetaAtStage to
   --         zetaAtLimit, as a *derived* theorem from K04d2.
+
+
+  ------------------------------------------------------------------------
+  -- K04d1: TRUE BISHOP ORDER REGULARITY OF ALL SUFFICIENTLY LATE
+  -- ORIGINAL POINTS. The existing generic analytic carrier's
+  -- realPartGreaterThanOne predicate is opaque; domainAdequacy is
+  -- consequently explicit, not fabricated.
+  ------------------------------------------------------------------------
+
+  oneStrictlyBelowThree : Bishop._<_ Bishop.1ℝ (Window.embed Window.three)
+  oneStrictlyBelowThree =
+    RP.p<q⇒p⋆<q⋆
+      (+ 1 / 1)
+      Window.three
+      (toWitness
+        {a? = QP._<?_ (+ 1 / 1) Window.three} _)
+
+  actualStageRealPartEventuallyAboveOne :
+    Σ Nat (λ start →
+      ∀ n → start ≤ n →
+      Bishop._<_ Bishop.1ℝ (BC.re (stagePoint n)))
+  actualStageRealPartEventuallyAboveOne =
+    proj₁ Eventual.machinRationalStagesEventuallyAboveThree ,
+    (λ n nLarge →
+      RP.<-trans
+        oneStrictlyBelowThree
+        (proj₂ Eventual.machinRationalStagesEventuallyAboveThree
+          n nLarge))
+
+  actualStageEventuallyInOriginalZetaDomain :
+    ((point : BC.BishopComplex) →
+      Bishop._<_ Bishop.1ℝ (BC.re point) →
+      Analytic.ZetaHalfPlaneLayer.realPartGreaterThanOne
+        halfPlane point) →
+    Σ Nat (λ start →
+      ∀ n → start ≤ n →
+      Analytic.ZetaHalfPlaneLayer.realPartGreaterThanOne
+        halfPlane (stagePoint n))
+  actualStageEventuallyInOriginalZetaDomain domainAdequacy =
+    proj₁ actualStageRealPartEventuallyAboveOne ,
+    (λ n nLarge →
+      domainAdequacy (stagePoint n)
+        (proj₂ actualStageRealPartEventuallyAboveOne
+          n nLarge))
+
+  -- The ORIGINAL completed-zeta function agrees with the ORIGINAL
+  -- half-plane function at each sufficiently late actual q_n.
+  -- This is not a continuity theorem, nor an analytic realization.
+  actualZetaEqualsOriginalDirichletEventually :
+    ((point : BC.BishopComplex) →
+      Bishop._<_ Bishop.1ℝ (BC.re point) →
+      Analytic.ZetaHalfPlaneLayer.realPartGreaterThanOne
+        halfPlane point) →
+    Σ Nat (λ start →
+      ∀ n → start ≤ n →
+      zetaAtStage n ≡ halfPlaneZetaAtStage n)
+  actualZetaEqualsOriginalDirichletEventually domainAdequacy =
+    proj₁ (actualStageEventuallyInOriginalZetaDomain domainAdequacy) ,
+    (λ n nLarge →
+      originalZetaEqualsDirichletAtStage n
+        (proj₂ (actualStageEventuallyInOriginalZetaDomain domainAdequacy)
+          n nLarge))
+
