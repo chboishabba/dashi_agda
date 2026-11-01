@@ -188,12 +188,42 @@ everyPairCountMatches authorityByEcology pair01 = refl
 everyPairCountMatches authorityByEcology pair10 = refl
 everyPairCountMatches authorityByEcology pair11 = refl
 
-data PairwiseSummary : Set where
-  everyPairBalanced : PairwiseSummary
+-- Unlike a label-only shadow, this summary stores *all 12 actual counts*
+-- from the three pairwise joint tables. No function extensionality assumed.
+record PairwiseSummary : Set where
+  constructor pairwise-signature
+  field
+    pedagogyByAuthority00 : Nat
+    pedagogyByAuthority01 : Nat
+    pedagogyByAuthority10 : Nat
+    pedagogyByAuthority11 : Nat
+    pedagogyByEcology00 : Nat
+    pedagogyByEcology01 : Nat
+    pedagogyByEcology10 : Nat
+    pedagogyByEcology11 : Nat
+    authorityByEcology00 : Nat
+    authorityByEcology01 : Nat
+    authorityByEcology10 : Nat
+    authorityByEcology11 : Nat
 
 pairwiseSummary : Population → PairwiseSummary
-pairwiseSummary evenTriple = everyPairBalanced
-pairwiseSummary oddTriple = everyPairBalanced
+pairwiseSummary p = pairwise-signature
+  (count p pedagogyByAuthority pair00)
+  (count p pedagogyByAuthority pair01)
+  (count p pedagogyByAuthority pair10)
+  (count p pedagogyByAuthority pair11)
+  (count p pedagogyByEcology pair00)
+  (count p pedagogyByEcology pair01)
+  (count p pedagogyByEcology pair10)
+  (count p pedagogyByEcology pair11)
+  (count p authorityByEcology pair00)
+  (count p authorityByEcology pair01)
+  (count p authorityByEcology pair10)
+  (count p authorityByEcology pair11)
+
+pairwiseSummariesAgree :
+  pairwiseSummary evenTriple ≡ pairwiseSummary oddTriple
+pairwiseSummariesAgree = refl
 
 -- Which three-way parity family the complete episode population occupies:
 -- a higher-order interaction, not a causal/ethical outcome.
