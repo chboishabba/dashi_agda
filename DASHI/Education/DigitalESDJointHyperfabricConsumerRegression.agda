@@ -7,6 +7,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Education.DigitalESDJointHyperfabricConsumerExact as Joint
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as Sources
 import DASHI.Education.DigitalESDEvidenceBraidTensionExact as Braid
@@ -97,3 +98,25 @@ labelCannotPayEveryConsumer :
     Joint.candidateVerdictForConsumer → ⊥
 labelCannotPayEveryConsumer =
   Joint.noUniversalCandidateVerdictFromPrincipleLabel
+
+-- The authored overlap remains source-indexed, not a fused global study.
+overlapRetainsFirstSource :
+  Braid.TensionReceipt.leftProvenanceRef
+    (Joint.CandidateSourceOverlap.overlap Joint.communityCollectiveOverlap)
+  ≡
+  Attr.canonicalURL
+    (Sources.attributedSource Sources.adefilaEcoCOIL)
+overlapRetainsFirstSource = refl
+
+overlapRetainsSecondSource :
+  Braid.TensionReceipt.rightProvenanceRef
+    (Joint.CandidateSourceOverlap.overlap Joint.communityCollectiveOverlap)
+  ≡
+  Attr.canonicalURL
+    (Sources.attributedSource Sources.singhCommunity)
+overlapRetainsSecondSource = refl
+
+overlapStillRequiresReview :
+  Joint.CandidateSourceOverlap.reviewNeeded Joint.communityCollectiveOverlap
+  ≡ true
+overlapStillRequiresReview = refl
