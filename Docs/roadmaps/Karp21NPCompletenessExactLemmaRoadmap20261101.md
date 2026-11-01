@@ -239,6 +239,12 @@ The exact semantic transport continues through `finiteAbstractCoverToSimpleCover
 
 **Exact remaining E05 targets**: `simpleGraphMatrixEncodingRoundtrip`, `simpleComplementCanonicalBitMap`, `simpleComplementPolynomialMachineClock`, `complementCoverAdditiveToStandardBudget` (including `k>n` fixed-NO), `finiteCliqueCertPackedCodec`, `finiteCoverCertPackedCodec`, `finiteCliqueInNP`, `finiteVertexCoverInNP`, `e05EncodedPolynomialReduction`, and pinned kernel receipt. For N21, `cutCertificateHasVertexCountBits` is source-written, but bit-level certificate parsers and a polynomial verifier clock remain open.
 
+### E12 reused finite graph/palette theorem (source-written)
+
+`Karp21FiniteColouringCliqueCoverExact.agda` reuses the **same** loop-free `SimpleGraph n` and `simpleComplementAdjacency` owner as E05. It defines a `Vec (Fin k) n` palette assignment so each actual vertex has exactly one colour from `k` choices. The finite `samePaletteColour` equality test has reflexivity/soundness lemmas. `colouringToSimpleCliqueCover` and `simpleCliqueCoverToColouring` transport the existing `Karp21ColouringCliqueCoverExact` pointwise theorem across the *actual off-diagonal simple complement*. `karpFiniteColouringCliqueCoverInstanceIff` upgrades this to the full existential source/target finite decision iff, with exactly the **same** colour assignment witness and finite graph.
+
+**Remaining E12:** `colouringCanonicalWordParser`, `cliqueCoverCanonicalWordParser`, `colouringToComplementGraphBitMap`, `colouringToCliqueCoverPolyClock`, `colouringPaletteLargeKGuard` (binary `k≥n` direct YES), `colouringNPVerifierClock`, `cliqueCoverNPVerifierClock`, `e12EncodedPolynomialReduction`; the full targeted Agda kernel typecheck remains unrun. This does not by itself complete E11 SAT→colouring, E13 colouring→EXACT COVER, nor any other E01–E20 costed reduction.
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
