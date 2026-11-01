@@ -17401,3 +17401,11 @@ Cleanup
 - [ ] **R445**: actual selected bounded-observable uniform tails, coercive moment tightness, physical limiting measure and source-normalised continuum Wilson cylinder compatibility.
 - [ ] **R320**: selected CMP116 derivative of logZ marked J family satisfies source rooted-shell decay at uniform scale/volume constants.
 - [ ] **R333**: same selected OS reconstructed Hamiltonian and spectral data, positive uniform gap, continuum Wightman nontriviality.
+
+
+### 2026-11-01 original-six versus ordered-sixteen normalization paid in source
+- [x] Source-write actual native n=3 SU2 diagonal holonomy=unit from existing reverse-opposite path theorem and inverseRight, with real Wilson trace=1.
+- [x] Source-write universal all-16-ordered trace = twice original six-positive trace + four diagonal identity terms per site, using all six native orientation inversion proofs and exact rational ring solver.
+- [x] Source-write proper Wilson deficit (1−ReTr): `orderedDeficit16 = 2*sixPhysicalDeficit` pointwise, and original-six physical Wilson deficit C3 invariance.
+- [x] Change native R443 Gibbs action to actual six-positive Wilson deficit `Σ(1−ReTr)`, with selected compact-Haar/Gibbs source still hypotheses.
+- [ ] Run Agda exact-head compiler for all new normalisation/six-plane owners. Do not promote source-written to kernel-verified.
