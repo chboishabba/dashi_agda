@@ -172,7 +172,7 @@ closedPower = record
   ; controlsWhichDistinctionsCount = ⊤
   ; controlsWhichEvidenceIsLegible = ⊤
   ; controlsWhichClaimsPromote = ⊤
-  ; accountabilityWitness = ⊤
+  ; accountabilityWitness = ⊥  -- captured case has no internal accountability proof
   }
 
 privateEvidenceLegible :
