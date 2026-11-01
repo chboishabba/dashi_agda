@@ -17376,3 +17376,8 @@ Cleanup
 - [ ] **R443-Haar/W:** actual compact group Haar change-of-variables on the original finite physical source and Gibbs/Wilson selected action; then feed already-existing R431→OS3.
 - [ ] **R445/R320/R333:** selected physical uniform tails, OS/Wightman same-H_OS, infinite-volume mass-gap estimate; no Clay result.
 - [ ] Exact-head Agda compiler and committed Python regression blob replay; independent local exact test is not kernel verification.
+
+
+- [x] Reuse original `PositivePlane4` six-plane source and `Native.rationalSU2PlaquetteHolonomy` to source-write six-plane vs ordered subfamily boundary, native holonomy and real-trace same-object identities.
+- [x] Independent exact Fraction sample verifies six-positive-plane trace `-1108/25` unchanged under C3 and `2*six + 4*256 = 16ordered`, all 4096 reversal tests in its native rational quaternion fixture.
+- [ ] **R443-six exact universally quantified Agda:** derive native Wilson orientation reversal and 16-to-six rational trace action identity (including coupling and vacuum diagonal shift), then selected six-plane C3 source.
