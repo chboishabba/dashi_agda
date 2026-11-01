@@ -115,6 +115,14 @@ def directed_ham_dp(n, arcs):
 
 
 def three_sat_to_colouring(n, clauses):
+    # Dense renaming makes the palette linear in actual occurrence count,
+    # not in a potentially huge binary-encoded maximum variable identifier.
+    ids = sorted({abs(lit) for c in clauses for lit in c})
+    assert all(0 < x <= n for x in ids)
+    dense = {x:i+1 for i,x in enumerate(ids)}
+    clauses = tuple(tuple(dense[abs(lit)] if lit>0 else -dense[-lit]
+                          for lit in clause) for clause in clauses)
+    n = len(ids)
     # (m+1)-colour construction, pad m>=4 to force an unused variable
     # in each width<=3 clause, hence block the extra colour in a bad clause.
     assert all(len(c) <= 3 for c in clauses)
