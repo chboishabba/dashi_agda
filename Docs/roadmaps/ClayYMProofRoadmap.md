@@ -1,4 +1,58 @@
 
+## 2026-11-01 further Yang-Mills symmetry/source recut
+
+Full cross-repo source map: `Docs/physics/YMClayVoyagerCrossDomainSymmetryMaxCut20261101.md`.
+
+Highest-priority pre-existing *theorem-bearing* direct physical C3 owners were omitted in the first video pass:
+`BalabanC3MonsterEquivarianceAuditExact`,
+`CMP119FlatSide4SpatialC3FieldCovarianceExact`,
+`CMP119ClassicalCurvatureSpatialC3CovarianceExact`,
+`BalabanWilsonD4SubsetCharacterExact`, and
+`BalabanWilsonTransferBlockingExact`.
+The literal four-axis site/bond/curvature C3 action is already source-written;
+the full nonlinear generated-action R144/OS/R445 same-object lift and
+intermediate equivariance are NOT inhabited. The target is selected SU2/compact
+simple physical Wilson source, not a generic 369 observer.
+
+Original jCOARSE/jFINE and `CoarseFineFabricCalculusExact` are genuine prior
+projection nonfactorability theorems. `CompactLieLatticeGauge` is a **different**
+genuine group-valued Wilson holonomy owner; `Base369Ternary27StratifiedFibreHolonomyExact`
+is an explicitly-labelled finite holonomy *analogue*. The particularly
+strong Agda #1249/Lean #84 donor supplies path graph 27/729/19683 gauge
+covariance/negative flux controls. Import only after same-source field,
+plaquette, gauge-group, blocking and Wilson-observable identities are proved.
+
+Complex `i` = 90° real-linear J on an oriented 2-plane, NOT a third spatial
+coordinate; source `ConcreteComplex` / `OrdinaryComplexPolar`, new finite
+`YMClayVoyagerImaginaryC3DimensionBidiExact` quarter-turn/C3 discriminator,
+`PolynomialMonodromyTernaryQuaternionBridgeExact` from branch Agda #1414
+(quaternion Spin(3)). Wick, SO2, SO3 and SU2 must remain distinct maps.
+
+`dashifine` 26/31 signature experiments and canonical Agda
+`OrbitSignatureDiscriminant` / `CausalOrderLorentzClosure`: conditional
+3+1 normal form but the selected tag 31 is included in the profile input;
+independent tag-free derivation from physical data remains unpaid. The
+`YMClayVoyagerDimensionSignatureForkExact` finite 2/3/4/5 YM coupling weight
+and Creutz-5D/KK-5D/stochastic-time distinction do NOT prove dimensional
+compactification, Lorentz selection or physical theory.
+
+Probability `Markov` **inequality** in
+`BalabanClayT5Path4MarkovProkhorovExact` differs from stochastic
+Markov `transition`/invariant-law `YMClayVoyager2026CoverageExact`,
+`DashiMarkov` transition sufficiency and
+`FiniteStochasticBisimulationExact` coarse-kernel negative control.
+
+Proposed YM spectral ζ must be constructed from same reconstructed
+`H_OS`, with zero-mode removal/heat trace/Mellin domain and
+infinite-volume trace regularization justified. Existing number-theory
+Riemann ζ, modular j, Casimir ζ(-3) are *separate functions/objects*.
+No zeta phrase in Voyager video.
+
+**Do not demote the live P0:** same selected R445 measure/tail/moment and
+R320/H1, actual R333/H_OS physical spectral attachment, OS/UV/IR
+continuum, nontriviality and compact-simple-group scope.
+
+
 ## 1 November 2026: Voyager video completeness / source-calibration crosswalk
 
 The chapter-by-chapter source-to-owner audit is
