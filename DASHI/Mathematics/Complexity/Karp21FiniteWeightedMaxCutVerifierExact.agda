@@ -17,6 +17,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Bool.Base using (T)
 open import Data.Empty using (⊥)
+open import Data.Product using (Σ; _,_)
 open import Data.List.Base using (List; []; _∷_)
 import Data.Integer.Base as Int
 open Int using (ℤ; +_; _+_)
@@ -120,3 +121,40 @@ karpFiniteWeightedMaxCutVerifierIff g labels =
   PR.iff
     (weightedMaxCutVerifierSound g labels)
     (weightedMaxCutVerifierComplete g labels)
+
+
+------------------------------------------------------------------------
+-- Existential decision problem and certificate exactness on one finite
+-- graph; no claimed resource bound on constructing/serializing witnesses.
+------------------------------------------------------------------------
+
+WeightedMaxCutYES :
+  ∀ {n} → WeightedCutGraph n → Set
+WeightedMaxCutYES {n} g =
+  Σ (Vec.Vec Bool n) (AcceptedCut g)
+
+VerifierWeightedMaxCutYES :
+  ∀ {n} → WeightedCutGraph n → Set
+VerifierWeightedMaxCutYES {n} g =
+  Σ (Vec.Vec Bool n) (λ labels →
+    T (verifyWeightedMaxCut g labels))
+
+verifiedWitnessGivesWeightedCut :
+  ∀ {n} (g : WeightedCutGraph n) →
+  VerifierWeightedMaxCutYES g → WeightedMaxCutYES g
+verifiedWitnessGivesWeightedCut g (labels , accepted) =
+  labels , weightedMaxCutVerifierSound g labels accepted
+
+weightedCutGivesVerifiedWitness :
+  ∀ {n} (g : WeightedCutGraph n) →
+  WeightedMaxCutYES g → VerifierWeightedMaxCutYES g
+weightedCutGivesVerifiedWitness g (labels , accepted) =
+  labels , weightedMaxCutVerifierComplete g labels accepted
+
+karpWeightedMaxCutExistentialIff :
+  ∀ {n} (g : WeightedCutGraph n) →
+  PR.Iff (WeightedMaxCutYES g) (VerifierWeightedMaxCutYES g)
+karpWeightedMaxCutExistentialIff g =
+  PR.iff
+    (weightedCutGivesVerifiedWitness g)
+    (verifiedWitnessGivesWeightedCut g)
