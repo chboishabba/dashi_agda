@@ -1,3 +1,16 @@
+
+### 2026-11-01 YM Voyager chapter-completeness max-cut
+- [x] Crosswalk every mathematical video chapter against **actual** Agda YM, Wilson, Balaban, RG, Hodge, OS and same-Hamiltonian owners in `Docs/physics/YMClayVoyager20260929CoverageAudit.md`.
+- [x] Reuse literal rational Wilson path bound and R445-native-P2 / R320→R333 conditional source split; no duplicate finite proof.
+- [x] Formalise the valid uniform-gap→pointwise-positive implication and strict local-stochastic-flow vs invariant-law typed gate.
+- [x] Prove six signed 4D Euclidean Hodge-basis `*²=+1` equations (source-written; Agda kernel not run).
+- [x] Attribute Creutz **1979** phase scan separately from **1980** fixed-string-tension simulation, and 2024 local 3D vs 2026 renormalisation uniqueness separately.
+- [ ] Kernel-check both new `--safe` modules at the exact stacked PR head on user's local machine; inspect transitive safe imports.
+- [ ] Construct R445 physical `boundedObservableTail` and `momentRealization` on actual 4D CMP119 Wilson measure plus same-carrier identification.
+- [ ] Prove same-`H_OS` spectrum/transfer correspondence, nontrivial OS axioms and 4D UV/IR limits, infinite-volume uniform physical mass gap.
+- [ ] Extend finite Euclidean R4 signed Hodge basis to actual 2-form vector space and SD/ASD projectors, metric connection, instanton moduli; do not infer quantum mass gap.
+- [ ] If pursuing stochastic donor, formalise same-flow law, all stochastic times, invariant 3D gauge orbit measure and matching Wilson observables; do not import 3D local SPDE as 4D Clay proof.
+
 # FOR TODO GO TO '# TODO'
 
 
