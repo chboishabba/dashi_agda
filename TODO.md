@@ -17426,3 +17426,18 @@ Cleanup
 
 - [x] K04c3 source: compose actual indexed zero-or-product factorisation with both SSP15 dictionary/residual product certificates, keeping zero numerator exceptional and source sign retained.
 - [ ] K04c3 kernel check and, if consumer requires a strict record round-trip, prove the signed-numerator/positive-denominator rational reconstruction from the existing encoded factor lists (not only absolute magnitudes).
+
+### 2026-11-01 second K04/K05 max-cut — implementation reality
+
+- [x] New `BishopMachinCombinedRemainderBoundExact`: source-written real-order absolute triangle and weighted 16/4 remainder at both parity classes plus all-Nat parity completion and total actual `⋆q_n` first-omitted error theorem.
+- [x] New `BishopMachinGeometricEnvelopeNatExact`: all-natural exact cross-multiplied bound `3824·57121^n+20·25^n≤(2n+1)·4780·57121^n`; no finite-only induction shortcut.
+- [x] New `BishopMachinEventualHalfPlaneExact`: source-written constructive Bishop convergence eventually above any strict bound; instantiation to original `⋆q_n>3`.
+- [x] Repair invalid K05 strict rational-endpoint comparisons in original `BishopMachinQuarterAngleBranchExact` via actual source `3<pi_M<22/7`, positivity of 1/4 and exact rational equivalences.
+- [x] New `BishopMachinQuarterPhaseQuadruplicationAlgebraExact`: actual Round11 quarter sine/cosine values; algebraic fourfold 0/−1 phase from explicit quarter-equal/unit inputs; proof transporting TRUE sine/cosine fourfold analytic identities to original `sin(pi_M)=0`, `cos(pi_M)=-1` conditional on explicitly stated analytic premises.
+- [x] Import all four new owners in all three canonical TOE roots.
+- [x] Locally execute standalone Python Fraction assertions for q_n, e_n, nonconstant steps (n=0..100), and Cauchy windows (n=1..39). Source checks are NOT kernel proofs.
+- [ ] **Kernel-check and repair** new K04/K05 Agda files, original K04a/K04b source and three TOE imports. No compiler or CI was run in this session.
+- [ ] K04b2 finish **rational denominators** and positive-order transport from new Nat cross-product inequality through rational `*≤*` to Bishop `≤`. Then finish all-j,k Cauchy via triangle inequality.
+- [ ] K04d identify actual Bishop half-plane predicate, construct true complex `n^{-s}` via Bishop exp/log, uniform σ>1 tails and same-object completed-ζ continuity, and derive ζ(stage)→ζ(limit).
+- [ ] K05 prove concrete Round11 sine/cosine addition/fourfold laws, quarter equality from original tangent=1 and correct nonzero/branch, unit Pythagorean law, and independent classical π uniqueness. Conditional endpoint theorem is not a terminal theorem.
+- [ ] Retain terminal T10/R10/P10 research gates separately; do not promote analogies, estimates or source-written comparisons to kernel proofs.
