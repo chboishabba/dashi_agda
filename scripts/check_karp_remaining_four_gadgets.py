@@ -12,6 +12,10 @@ from check_karp_historical_reductions import (
 
 
 def colouring_to_exact_cover(n, edges, k):
+    # The colour bound is binary encoded: k >= n is a constant-size YES case.
+    # Without this guard, enumerating k colour slots is exponential in log(k).
+    if k >= n:
+        return (frozenset((0,)),)
     # The historical problem defines the universe as union of the family.
     # Guard impossible small palettes with a fixed no-instance.
     if (n and k == 0) or (edges and k < 2):
@@ -200,6 +204,9 @@ def main():
                 nv,edges,k,anchor=three_sat_to_colouring(n,simplify_cnf(clauses))
                 assert sat(n,clauses)==k_graph_colourable(nv,edges,k,anchor)
                 counts['E11']+=1
+    for n in range(0,4):
+        for k in (n, n+1, 2**128):
+            assert exact_cover(colouring_to_exact_cover(n,frozenset(),k))
     print('PASS final four historical edge gadgets:',counts)
 
 
