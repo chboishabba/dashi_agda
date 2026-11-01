@@ -145,6 +145,22 @@ The repo's earlier `DASHI/Planning/NetworkFlowCapacityCongestionExact.agda` rema
 
 With the original 55,824 Karp-edge finite checks plus 2,669 additional flow/mincut/APX test instances, the independently executed bounded controls now cover **58,493 edge/consumer cases**. The source-committed runner `scripts/run_karp21_reduction_regressions.py` enumerates all four scripts; no exact GitHub checkout execution or pinned Agda kernel acceptance is claimed for the new source.
 
+## 2026-11-01 genuine E20 source proof cut (signed graph objective)
+
+New canonical owner: `DASHI/Mathematics/Complexity/Karp21PartitionCutQuadraticExact.agda`, directly imported by `Karp21Everything.agda`. This is **new Agda proof source**, not an Agda kernel receipt:
+
+1. `signedTotalDecomposes`: over a list of signed integer values paired with Boolean side labels, total equals left sum + right sum.
+2. `partitionCutProductIdentity`: reuse existing DASHI integer ring solver to prove `4ab=(a+b)²-(a-b)²` for arbitrary `a,b:ℤ`.
+3. `crossWithTrue` / `crossWithFalse`: crossing edges from a fixed source vertex sum to that vertex weight times the **opposite-side** total.
+4. `completeGraphCutEqualsPartitionProduct`: induction on the *actual triangular complete-graph edge enumeration*, each pair counted once; the weighted cut equals leftTotal × rightTotal for **all** signed-weight inputs and **all** side labelings.
+5. `completeGraphCutQuadratic`: compose (2) and (4) to give `4*cut=T²-(A-B)²` on the actual cut objective.
+
+This is no longer a merely assumed objective identity. Remaining E20 mathematical gates are `integerSquareNonnegative`, `integerSquareZeroImpliesZero`, `partitionCeilThresholdIffEquality` (including parity/integer ceil handling), `partitionZeroTotalFixedYes`, and `partitionSignedWeightBitCost` / the actual total encoded machine transducer.
+
+**Source-critical counterexample:** Karp p.100's printed typography renders the MAX CUT threshold as a bracketed quarter of a **sum of squared inputs** `ceil((Σ cᵢ²)/4)`; used literally this is **not** equivalent to PARTITION. Independent local counterexample `c=(2,1)`: source partition is NO, but graph edge weight 2 meets the printed threshold `ceil(5/4)=2`. The actual algebraically justified threshold is `ceil((Σ cᵢ)²/4)=3`, making the cut NO. Other published discussions identify the same distinction; do not silently upgrade the literal printed expression to a proof. The executable `check_karp_partition_maxcut.py` now includes this explicit false-positive regression, alongside its signed-integer/zero-total checks. The original source remains credited to Karp; the corrected formula/diagnostic is an independently documented DASHI reconstruction, not claimed as his verbatim statement.
+
+**E09 totality repair:** `graph_to_directed_hamiltonian` no longer raises an assertion for a graph with a nonempty edge set and zero cover budget; it maps this impossible source case to a fixed 3-node NO instance. This is a total-function repair, not a universal Hamiltonian-gadget proof.
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
