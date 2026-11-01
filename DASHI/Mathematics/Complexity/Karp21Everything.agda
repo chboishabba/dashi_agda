@@ -22,3 +22,5 @@ import DASHI.Mathematics.Complexity.Karp21SATToThreeSATGadgetExact
 import DASHI.Mathematics.Complexity.Karp21ScaledThresholdExact
 
 import DASHI.Mathematics.Complexity.Karp21PartitionScaledInstanceExact
+
+import DASHI.Mathematics.Complexity.Karp21HeterogeneousEncodingExact
