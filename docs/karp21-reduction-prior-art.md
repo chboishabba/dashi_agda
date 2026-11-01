@@ -28,6 +28,20 @@ The original 1972 HITTING SET is **exactly one** selection from every transposed
 
 No source paper, number of sampled instances, or loop-free Agda source automatically establishes an Agda kernel-accepted NP-completeness theorem.
 
+
+### 2026-11-01 semantic max-cut continuation: scaled E20 + E05 + machine-reduction assembly
+
+**New DASHI Agda source owners:**
+- `Karp21ScaledThresholdExact.agda`: `scaledThresholdIffBalanced` proves the *ordered* signed integer cut-threshold witness iff by reusing the earlier integer no-zero-divisors and nonnegative-square results; `nonzeroTotalSquareIsPositiveThreshold` certifies `T²` is positive whenever `T≠0`.
+- `Karp21PartitionScaledInstanceExact.agda`: each signed input element carries a separate Boolean label (multiplicity preserved); `signedPartitionScaledCutInstanceIff` gives *existential* source/target equivalence, `zeroTotalPartitionYES` supplies the empty-side witness, and `totalPartitionToPositiveCut` / `totalPartitionPositiveCutIff` handle the full zero/nonzero split with proof-bearing positive target thresholds. The target is currently algebraically represented as a signed complete graph, not yet an explicitly serialized bitstring.
+- `Karp21HeterogeneousEncodingExact.agda`: `compileHeterogeneousKarpReduction` is a generic proof-term assembler from a heterogeneous semantic iff, faithful source/target byte contracts and an actual word-polynomial-time witness to the existing `PR.PolynomialManyOneReduction`. No polynomial clock is fabricated by this proof.
+- `Karp21FiniteCliqueCoverCardinalityExact.agda`: `karpCliqueCoverFiniteThresholdIff` proves for every finite Boolean vertex selection and natural `k`, including `k>n`, the exact equivalence between `k≤chosenCount` and `complementCount+k≤n`; 26,622 independent local finite Boolean/threshold controls pass.
+- `Karp21PartitionCutQuadraticExact.agda` now also source-writes `historicalPartitionEquationIffBalanced`, explicitly identifying the original signed source equation `2A=T` with the equal-side predicate.
+
+**Scaled E20 construction and source priority:** Karp (1972) owns the PARTITION→MAX CUT reduction. DASHI's equivalent integer-scaled variant chooses edge weights `4*c_i*c_j` and target weight threshold `T²`, with a special fixed positive-threshold YES graph for `T=0`. It is correct at the witness arithmetic level and **does not require the historical ceiling step**. The earlier ceiling-route proof obligation remains only for literal unscaled reconstruction; for the scaled route the remaining gap is an explicit faithful labelled graph edge-list/word codec, actual general polynomial machine time, MAX CUT NP verifier, and Agda kernel acceptance.
+
+**Independent source-computation result:** 23,436 positive/signed instances independently checked for the scaled formula and the original signed source witnesses; no counterexamples found. This is a finite arithmetic regression, not kernel evidence. The PR does not add a new unconditional NP-completeness theorem.
+
 ## Historical provenance
 - Stephen Cook (1971), *The Complexity of Theorem-Proving Procedures*, DOI 10.1145/800157.805047: original SAT complexity root.
 - Richard Karp (1972), *Reducibility Among Combinatorial Problems*, DOI 10.1007/978-1-4684-2001-2_9: the original 21-problem reduction network.
