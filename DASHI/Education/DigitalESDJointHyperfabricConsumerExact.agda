@@ -15,6 +15,8 @@ import DASHI.Education.DigitalESDSourceAuditAdmissionExact as Admission
 import DASHI.Education.DigitalESDSLRSourceReviewBridgeExact as Review
 import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
 import DASHI.Education.DigitalESDEvidenceBraidTensionExact as Braid
+import DASHI.Education.DigitalESDTransferablePedagogicalPrinciplesExact as Principles
+import DASHI.Education.DigitalESDPrincipleSurvivalAuditExact as Survival
 import DASHI.Education.DigitalESDEfSPedagogicalReciprocityExact as EfS
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as Cases
 import DASHI.Education.DigitalESDReciprocalBraidExact as Reciprocal
@@ -251,6 +253,55 @@ relabelledPairwiseTablesCannotRecoverThirdOrder :
 relabelledPairwiseTablesCannotRecoverThirdOrder relabel =
   INF.rechartingCannotRecoverErasedPhenomenon
     relabel pairwiseDoesNotDetermineTriple
+
+------------------------------------------------------------------------
+-- CONSUMER-RELATIVE SURVIVAL, NOT ONE UNIVERSAL VERDICT PER PRINCIPLE.
+--
+-- Both are *candidate interpretations* BEFORE full-corpus review. The
+-- principle label is the same but the requested question is different.
+-- The original seven-row survival ledger remains the canonical aggregate;
+-- this is an obstruction to mistaking that coarse label as the whole result.
+------------------------------------------------------------------------
+
+data AgencyConsumer : Set where
+  learnerVoiceInDigitalCourse : AgencyConsumer
+  communityDecisionRightsInEfS : AgencyConsumer
+
+agencyPrincipleProjection :
+  AgencyConsumer → Principles.TransferablePedagogicalPrinciple
+agencyPrincipleProjection learnerVoiceInDigitalCourse =
+  Principles.constitutiveLearnerAgency
+agencyPrincipleProjection communityDecisionRightsInEfS =
+  Principles.constitutiveLearnerAgency
+
+candidateVerdictForConsumer :
+  AgencyConsumer → Survival.SurvivalVerdict
+candidateVerdictForConsumer learnerVoiceInDigitalCourse =
+  Survival.provisionallyRetain
+candidateVerdictForConsumer communityDecisionRightsInEfS =
+  Survival.provisionalSplitCandidate
+
+candidateVerdictsDiffer :
+  candidateVerdictForConsumer learnerVoiceInDigitalCourse ≡
+  candidateVerdictForConsumer communityDecisionRightsInEfS → ⊥
+candidateVerdictsDiffer ()
+
+principleNameDoesNotDetermineConsumerVerdict :
+  INF.NonFactorabilityWitness agencyPrincipleProjection
+    candidateVerdictForConsumer
+principleNameDoesNotDetermineConsumerVerdict =
+  INF.nonFactorabilityWitness
+    learnerVoiceInDigitalCourse
+    communityDecisionRightsInEfS
+    refl
+    candidateVerdictsDiffer
+
+noUniversalCandidateVerdictFromPrincipleLabel :
+  INF.FactorsThrough agencyPrincipleProjection
+    candidateVerdictForConsumer → ⊥
+noUniversalCandidateVerdictFromPrincipleLabel =
+  INF.witnessRulesOutEveryFlatFactorisation
+    principleNameDoesNotDetermineConsumerVerdict
 
 ------------------------------------------------------------------------
 -- Scope / authority firewall: no fake constructor from candidate to
