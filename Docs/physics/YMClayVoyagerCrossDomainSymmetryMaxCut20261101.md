@@ -161,3 +161,14 @@ The existing `BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact` defines `Pos
 New `YMClayNativeRationalSU2SixPlaneSameSourceExact.agda` **reuses exactly those original source types**, proves its original six-plane `Bond.plaquetteBoundaryDirections` is equal to the new ordered `+a,+b,-a,-b` path, then identifies the exact native plaquette group holonomy and normalized real Wilson trace with the six-plane subfamily of our full signed-word C3 term. `sixPlanePhysicalTraceAction` is the exact native six-plane real-part Wilson sum (not an abstract new carrier); a list-congruence proof equates it with the ordered-word restricted six-plane family.
 
 Independent exact Python evaluation on the same nontrivial 256-site rational-quaternion fixture gives six-plane trace `-1108/25` before and after C3; all 4096 ordered single-site axis-reversal pairs agree. The 16-ordered sum is `2*(-1108/25)+4*256=23384/25`, as expected from double orientation plus four diagonal identity terms per site. The missing **Agda** theorem is precisely that 16-to-six rational Wilson expression identity for every native field, with orientation swapping and canonical coupling. Do not label the identity proved until a source-native Agda witness is supplied and checked.
+
+
+## 12. Source-native universal rational SU(2) four-factor orientation reversal
+
+`YMClayNativeRationalSU2FourFactorReversalExact.agda` now proves, directly on the pre-existing **unit quaternion group-value carrier** with existing `Q.inverseProduct` and `Q.inverseInverse`, the universal algebraic identity
+
+`inverse(A·B·C⁻¹·D⁻¹) = ((D·C)·B⁻¹)·A⁻¹`
+
+for every literal rational SU2 four-factor input. Since `realPart(q⁻¹)=realPart(q)` definitionally in that native group, it derives exact `forwardReverseFourTraceSame`. This is the selected norm-one group version of the existing older rational quaternion jet orientation theorem; no duplicate source ownership.
+
+Remaining **geometry** seam is to instantiate those A/B/C/D with the actual native four-site oriented positive link evaluations, show `Bond.pathHolonomy(+b,+a,-b,-a)` equals that specific `reversePlaquetteFour` under the already-proven side-four forward-shift commutation, and close the sum/multiplicity identity for all native fields. The generic group identity alone is **not** sufficient to promote the physical R443 six-plane action invariance or Haar.
