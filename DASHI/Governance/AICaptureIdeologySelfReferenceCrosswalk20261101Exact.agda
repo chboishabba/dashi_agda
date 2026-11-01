@@ -11,6 +11,15 @@ module DASHI.Governance.AICaptureIdeologySelfReferenceCrosswalk20261101Exact whe
 --   https://www.lesswrong.com/w/rokos-basilisk
 -- Hegel, Science of Logic, 1812-1816; Marx, Capital I, 1867.
 -- DASHI trialectic math is neither Hegel's literal diagram nor Land's.
+-- Prior in-repo Land implementation already exists on OPEN PR #1131:
+-- DASHI/Cognition/NickLandProvocationOverreactionPopulistTransferExact.agda
+-- head d1f5c91bef2df0982493d5fcae2223f7db430aff.
+-- It owns provocation/overreaction -> threat amplification -> constraint
+-- erosion -> institutional lock-in -> future capacity; no direct
+-- Land-to-Bannon source transfer is asserted. This independent branch
+-- must NOT import unmerged #1131 or claim priority over its construction.
+-- This module is solely a consumer-side source/semantics crosswalk.
+
 --
 -- This does NOT assert Land/Thiel/Roko/Epstein share an ideology, that a
 -- hypothetical future AI threatens anyone, or that policy is engineered.
