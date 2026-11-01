@@ -267,6 +267,70 @@ def check_additional():
             counts['E10'] += 1
     print('PASS additional direct reduction checks',counts)
 
+
+def exact_to_steiner(sets):
+    elements = sorted(frozenset().union(*sets) if sets else frozenset())
+    if not elements:
+        return 2, ((0,1,1),), frozenset((0,1)), 1
+    n = 1 + len(sets) + len(elements)
+    edges = [(0,1+j,len(sets[j])) for j in range(len(sets))]
+    edges.extend((1+j,1+len(sets)+i,0) for j, subset in enumerate(sets)
+                 for i,e in enumerate(elements) if e in subset)
+    required = frozenset((0,)+tuple(range(1+len(sets), n)))
+    return n, tuple(edges), required, len(elements)
+
+
+def steiner_tree(n, edges, required, budget):
+    # Exponential independent oracle, not a polynomial decision algorithm.
+    for bits in product((0,1), repeat=len(edges)):
+        selected = [e for e,b in zip(edges,bits) if b]
+        if sum(w for _,_,w in selected) > budget:
+            continue
+        parent = list(range(n))
+        def find(u):
+            while parent[u] != u:
+                u = parent[u]
+            return u
+        tree = True
+        for u,v,_ in selected:
+            a,b = find(u),find(v)
+            if a == b:
+                tree = False
+                break
+            parent[a] = b
+        if tree and len({find(u) for u in required}) <= 1:
+            return True
+    return False
+
+
+def knapsack_to_sequencing(numbers, target):
+    positive, goal = signed_to_positive_knapsack(numbers, target)
+    budget = sum(positive) - goal
+    if budget == 0:
+        return (1,), (1,), (1,), 1  # fixed YES with positive budget
+    return positive, (goal,)*len(positive), positive, budget
+
+
+def job_sequencing(times, deadlines, penalties, budget):
+    return any(sum(penalties[i] for j,i in enumerate(ordering)
+                   if sum(times[v] for v in ordering[:j+1]) > deadlines[i]) <= budget
+               for ordering in __import__('itertools').permutations(range(len(times))))
+
+
+def check_more():
+    counters = dict(E15=0,E18=0)
+    subsets = tuple(frozenset(i for i in range(2) if mask>>i&1) for mask in range(4))
+    for m in range(0,4):
+        for family in product(subsets,repeat=m):
+            assert exact_cover(family) == steiner_tree(*exact_to_steiner(family))
+            counters['E15'] += 1
+    for m in range(0,4):
+        for nums in product(range(-1,2),repeat=m):
+            for b in range(-1,2):
+                assert knapsack(nums,b) == job_sequencing(*knapsack_to_sequencing(nums,b))
+                counters['E18'] += 1
+    print('PASS terminal Steiner/scheduling checks',counters)
+
 def main():
     counts = {k: 0 for k in ('E02', 'E03', 'E04', 'E05', 'E06', 'E12', 'E14', 'E17', 'E19')}
     for n in range(0, 3):
@@ -312,6 +376,7 @@ def main():
                 counts['E19'] += 1
     print('PASS exact finite reductions:', counts)
     check_additional()
+    check_more()
 
 
 if __name__ == '__main__':
