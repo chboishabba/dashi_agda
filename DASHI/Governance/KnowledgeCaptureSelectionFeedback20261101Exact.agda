@@ -94,9 +94,30 @@ select : PolicyState → RegulatoryRoute
 select pluralChoice = proportionalReview
 select concentratedChoice = exclusiveFixedCostGate
 
+-- The decisive condition is whether the institution's actual
+-- selection machinery privileges concentrated capture, not a universal
+-- law that all policy processes must converge on a gate.
+data SelectionPressure : Set where
+  publiclyContestedEvaluation incumbentAgendaControl : SelectionPressure
+
+conditionalFeedback : SelectionPressure → PolicyState → PolicyState
+conditionalFeedback publiclyContestedEvaluation pluralChoice = pluralChoice
+conditionalFeedback publiclyContestedEvaluation concentratedChoice = pluralChoice
+conditionalFeedback incumbentAgendaControl pluralChoice = concentratedChoice
+conditionalFeedback incumbentAgendaControl concentratedChoice = concentratedChoice
+
 benefitFeedback : PolicyState → PolicyState
-benefitFeedback pluralChoice = concentratedChoice
-benefitFeedback concentratedChoice = concentratedChoice
+benefitFeedback = conditionalFeedback incumbentAgendaControl
+
+countervailingAccountabilityReopensPlurality :
+  conditionalFeedback publiclyContestedEvaluation concentratedChoice
+  ≡ pluralChoice
+countervailingAccountabilityReopensPlurality = refl
+
+concentratedCaptureIsConditional :
+  conditionalFeedback incumbentAgendaControl pluralChoice
+  ≡ concentratedChoice
+concentratedCaptureIsConditional = refl
 
 benefitReinforced :
   benefitFeedback concentratedChoice ≡ concentratedChoice
