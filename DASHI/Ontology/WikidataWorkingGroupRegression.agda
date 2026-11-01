@@ -89,6 +89,19 @@ deliberationNoEvidenceDoesNotEqualDisagreement :
   Deliberation.supportObserved Deliberation.neitherObserved ≡ false
 deliberationNoEvidenceDoesNotEqualDisagreement = refl
 
+deliberationClosureRequiresHistoricalPolicyWindow :
+  ∀ {Agent : Set}
+    {verifier : Deliberation.SourceVerifier}
+    {rule : Deliberation.CommunityRule Agent}
+    {creator : Agent}
+    {caseFile : Deliberation.DeliberationCase} →
+  Deliberation.ClosureAdmission verifier rule creator caseFile →
+  Deliberation.PolicyWindowValid rule
+    (Deliberation.historicalPolicyRef caseFile)
+    (Deliberation.closingPolicyRef caseFile)
+deliberationClosureRequiresHistoricalPolicyWindow =
+  Deliberation.admissionRequiresPolicyWindow
+
 deliberationCheckerCannotApproveOntologyRevision :
   Governance.DiagnosticAuthorises Governance.formalChecker
     CoreGovernance.revisionCoordinate → ⊥
