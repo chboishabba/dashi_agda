@@ -17455,3 +17455,14 @@ Cleanup
 - [ ] K04d full genuine Bishop-complex exp/log Dirichlet-series uniform convergence and same-original completed-ζ continuity; derive ζ(q_n)→ζ(pi_M) from a concrete, not opaque, analytic realization.
 - [ ] K05 actual Round11 Bishop sine/cosine addition/Cauchy convolution, quarter-angle sine≈cosine and Pythagoras, fourfold identities, and unique classical-trigonometric π characterization in Agda. Other-real-carrier transcendentals do NOT discharge this bridge.
 - [ ] T10 / R10 / P10 terminal theorem conditions remain independently open, not inferred from K04b.
+
+### 2026-11-01 fourth K04/K05 max-cut: reuse original shared Round11 source weld and derive genuine continuous-image convergence
+
+- [x] Source-write `BishopMachinQuarterSharedTrigWeldBidiExact`: use EXISTING `BishopRound11ClassicalTrigObjectWeldExact.compileRound11Pythagorean` to supply actual Round11/Machin quarter unit without duplicating a Pythagorean source authority, and compose the existing conditional endpoint at `bishopMachinPi`.
+- [x] Source-write `BishopMachinZetaSequentialContinuityReducerExact`: genuine Bishop epsilon-delta `BishopContinuousAt`, `bishopContinuousImageConverges` using original `Sequence.fast-ε-from-convergence` and `Sequence.con*`, and exact real+imag actual completed-zeta component convergence conditional on explicit local continuity of the ORIGINAL function.
+- [x] Wire both source owners into `EverythingTOESymmetryResolved369`, `Unifier`, `Unified/Everything` imports.
+- [x] Independently execute Python Fraction 64-stage Machin q_n and 475-pair cutoff/Cauchy assertions (bounded exact checks only).
+- [ ] **Pinned Agda kernel** check and repair all K04a–d/K05 source leaves and the three TOE roots; no typecheck/CI run from this connector-only implementation turn.
+- [ ] **K04d actual analytic terminal:** implement Bishop complex n^{−s} via original compatible exp/log and prove uniform convergence for σ>1, real/imag epsilon-delta continuity at original Machin π, and use the new continuous-image reducer. The abstract Meromorphic predicate is not a proof.
+- [ ] **K05 actual trig terminal:** prove the EXISTING shared Round11 classical/Bishop object weld (or direct native identity), genuine Bishop sine/cosine addition/quadruple-angle, quarter tangent/branch identification, and independent π uniqueness. Conditional polynomial and DLMF-source receipts alone do not suffice.
+- [ ] Keep T10 genuine twin-prime lower bound, R10 RH zero-exclusion and P10 giant sine sign independent/open.
