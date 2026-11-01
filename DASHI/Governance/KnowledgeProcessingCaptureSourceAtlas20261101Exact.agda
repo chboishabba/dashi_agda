@@ -416,6 +416,70 @@ thielRomeAP2026 = sourceReceipt
   "Journalistic account of Rome four-part lecture and theological/political controversy; Catholic institutions explicitly denied organising/hosting."
   "Near the Vatican != Vatican sponsorship, papal agreement, clandestine religious programme or direct executive influence."
 
+------------------------------------------------------------------------
+-- October CDS stress + original philosophical and historical-network leads
+------------------------------------------------------------------------
+
+coreweaveCreditReutersOct2026 : SourceReceipt
+coreweaveCreditReutersOct2026 = sourceReceipt
+  "Reuters, 15-16 October 2026, using LSEG market data"
+  "CoreWeave debt stress tests private credit's AI financing boom"
+  "2026-10-16"
+  "https://www.investing.com/news/stock-market-news/coreweave-bond-rout-tests-market-s-math-on-ai-buildout-4954178"
+  secondaryContext
+  "Reported CoreWeave USD50bn financing obligations, five-year CDS near 1000-1200bp, and 2031 bond yields near 15-16pct; original Reuters report references LSEG."
+  "Credit spreads are time-, bond- and instrument-specific; not a realised default, audited balance sheet sum, or proof of public rescue."
+
+jpmorganCreditOct2026 : SourceReceipt
+jpmorganCreditOct2026 = sourceReceipt
+  "Justin Biemann / J.P. Morgan Private Bank"
+  "Credit markets look for AI's weak links"
+  "2026-10-23"
+  "https://privatebank.jpmorgan.com/nam/en/insights/markets-and-investing/tmt/credit-markets-look-for-ai-s-weak-links"
+  firstPartyIssuer
+  "Bank analysis reports investment-grade CDS 50-120bp, infrastructure CDS toward 300bp, financing-dependent borrower above 1100bp; juxtaposes Lehman 2007 below 100bp, 2008 above 1400bp."
+  "Analogy is risk-signal comparison, not an identical collateral/counterparty structure or a statistical insolvency forecast."
+
+landFangedNoumenaPublisher : SourceReceipt
+landFangedNoumenaPublisher = sourceReceipt
+  "Nick Land; Robin Mackay and Ray Brassier (eds.); Urbanomic/Sequence"
+  "Fanged Noumena: Collected Writings 1987-2007, ISBN 978-0-9553087-8-9"
+  "2011-03"
+  "https://www.sequencepress.com/products/fanged-noumena-collected-writings-1987-2007"
+  attributedAuthor
+  "Original publisher records 2011 collection, intellectual trajectory of Land's accelerationist/CCRU writings."
+  "Land's theory is not a documented shared policy of Thiel, Epstein, Anthropic, Roko or the Commanding Heights authors."
+
+rokoBasiliskRetrospective : SourceReceipt
+rokoBasiliskRetrospective = sourceReceipt
+  "LessWrong editors, describing Roko's 2010 thought experiment"
+  "Roko's Basilisk retrospective, LessWrong"
+  "2010/retrospective"
+  "https://www.lesswrong.com/w/rokos-basilisk"
+  secondaryContext
+  "A thought experiment about speculative acausal blackmail, heavily disputed and broadly rejected in its original community; discussion ban caused publicity amplification."
+  "No observed dangerous agent, genuine blackmail, prophetic information hazard or objective threat to readers is established."
+
+epsteinThielWiredResearch : SourceReceipt
+epsteinThielWiredResearch = sourceReceipt
+  "WIRED / 2026 DOJ correspondence review"
+  "The Tech Elites in the Epstein Files"
+  "2026-02"
+  "https://www.wired.com/story/epstein-files-tech-elites-gates-thiel-musk/"
+  secondaryContext
+  "Journalists report repeated 2014-2019 Thiel-Epstein scheduling and direct correspondence, distinct from third-party mere mentions; named 2016 lunch request."
+  "Meeting correspondence is not evidence of Epstein's sex offences by any named contact or collective government-tech command."
+
+epsteinThiel2014Correspondence : SourceReceipt
+epsteinThiel2014Correspondence = sourceReceipt
+  "US DOJ Epstein Library, released email chain"
+  "EFTA02587213-EFTA02587214: Epstein-Thiel August 2014 introductions and invitation"
+  "2014-08"
+  "https://epstein-data.com/EFTA02587213"
+  secondaryContext
+  "Source-access mirror of original DOJ Bates-identified email chain: Epstein offered introduction to William Burns and invitation to island, with Thiel's NYC timing response."
+  "An introduction offer or island invitation is not verified meeting with Burns, travel to island, endorsement or wrongdoing."
+
 -- An original primary statement is a receipt for what the named original
 -- says, not a receipt for the correctness of every empirical prediction.
 record AttributionBoundary : Set where
