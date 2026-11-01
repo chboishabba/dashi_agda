@@ -22,10 +22,13 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
+import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinGateCNFExact as Original
+import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinOptimizedCNFExact as Opt
 
 -- Use the ORIGINAL Fin index, not a Nat that can point out of range.
 data UpstreamLiteral (n : Nat) : Set where
@@ -120,6 +123,47 @@ sourceCNFTruthRoundTrip : ∀ {n : Nat} (source : CNF.CNF n)
 sourceCNFTruthRoundTrip source bits =
   cong (λ formula → CNF.evaluateCNF formula bits)
     (decodeEncodeSourceCNF source)
+
+-- Literal-code LIST identity before Finset deduplication and sorting.
+-- The OpenAI code rule is checked at each source literal recursively.
+sourceClauseCodes : ∀ {n : Nat} → CNF.Clause n → List Nat
+sourceClauseCodes = CNF.mapList sourceLiteralCode
+
+upstreamClauseCodes : ∀ {n : Nat} →
+  List (UpstreamLiteral n) → List Nat
+upstreamClauseCodes = CNF.mapList upstreamLiteralCode
+
+sourceClauseCodesExact : ∀ {n : Nat} (clause : CNF.Clause n) →
+  upstreamClauseCodes (encodeClause clause) ≡ sourceClauseCodes clause
+sourceClauseCodesExact [] = refl
+sourceClauseCodesExact (literal ∷ rest) =
+  cong₂ _∷_ (literalCodeExact literal) (sourceClauseCodesExact rest)
+
+sourceCNFCodes : ∀ {n : Nat} → CNF.CNF n → List (List Nat)
+sourceCNFCodes = CNF.mapList sourceClauseCodes
+
+upstreamCNFCodes : ∀ {n : Nat} →
+  List (List (UpstreamLiteral n)) → List (List Nat)
+upstreamCNFCodes = CNF.mapList upstreamClauseCodes
+
+sourceCNFCodesExact : ∀ {n : Nat} (source : CNF.CNF n) →
+  upstreamCNFCodes (encodeSourceCNF source) ≡ sourceCNFCodes source
+sourceCNFCodesExact [] = refl
+sourceCNFCodesExact (clause ∷ rest) =
+  cong₂ _∷_ (sourceClauseCodesExact clause) (sourceCNFCodesExact rest)
+
+-- Most importantly this is now a consumer of the ORIGINAL optimized
+-- source DAG CNF and the original placed-CNF semantics (not a fixture CNF).
+originalOptimizedCircuitLiteralTruthExact : ∀ {inputs : Nat}
+  (circuit : Circuit.ConcreteBooleanCircuit inputs)
+  (bits : CNF.Bits (inputs + Circuit.gateCount circuit)) →
+  CNF.evaluateCNF
+    (decodeSourceCNF (encodeSourceCNF (Opt.optCircuitCNF circuit))) bits
+  ≡ CNF.evaluateCNF (Original.circuitPlacedCNF circuit) bits
+originalOptimizedCircuitLiteralTruthExact circuit bits =
+  trans
+    (sourceCNFTruthRoundTrip (Opt.optCircuitCNF circuit) bits)
+    (Opt.optCircuitEqualsOriginal circuit bits)
 
 -- OPEN M01a/M01b: connect this typed Agda list of finite literals to the
 -- *actual* OAI SAT.Literal (Fin n), prove normalize-to-Finset yields the
