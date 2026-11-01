@@ -187,3 +187,19 @@ Remaining **geometry** seam is to instantiate those A/B/C/D with the actual nati
 **R320/R333 source-owner audit:** `YMClayRouteSH1DirectSelectedMarkedDecayExact` already reduces H1 to ONE genuine selected R320 derivative/localized rooted-shell estimate and compiles it to R295/R274, without a second decay estimate. `YMClayDirectSourceOSMassGapFrontierExact` composes R320→R313/R296→R333 *provided* actual R333 physical completion, while `YangMillsDirectSourceOSReconstructedSpectrumH3Exact` requires the R281 selected spectrum to be the same H2 reconstructed OS Hamiltonian. Those hypotheses remain open and are not theorems merely from source-written record definitions.
 
 **Trust discipline:** new code is source-written Agda and read back through GitHub, not kernel-verified (Agda unavailable locally, CI not run). `--safe` on importing modules must be checked transitively. No proof holes/postulates were intentionally introduced. All older source author/proof ownership and original Wilson, Bałaban, Osterwalder–Schrader/Lüscher/Creutz attributions retained.
+
+
+## 14. Exact positive-six vs sixteen-ordered Wilson convention and Gibbs action
+
+Added `YMClayNativeSixPlaneOrderedIdentityExact.agda` using **existing** `BalabanClayGate4PeriodicPathInverseBianchiExact.holonomyAppend`, `pathHolonomyReverseOpposite`, exact rational SU2 `inverseRight`, original six-plane orientation proof, four-index nested sums and rational ring solver.
+
+The universal native group-valued diagonal path `+a,+a,-a,-a` is a two-edge prefix followed by its reverse-opposite, giving identity holonomy and `realPart=1`. The other 12 ordered paths are six original positive planes plus their proved inverse orientations. Thus on every selected original rational SU2 finite 4D bond field at each site,
+`orderedTrace16 = 2 * originalSixPositiveTrace + 4`, and
+`orderedWilsonDeficit16 = 2 * originalSixPositiveWilsonDeficit`.
+This second identity is the **correct** Wilson `1-ReTr` action normalization, independent of a new fixed-beta assumption. The canonical source-six action remains the preferred owner and the earlier ordered action is a twofold redundant convention.
+
+`YMClayR443NativeSixPlaneHaarNumeratorExact.nativeSixPlaneR443` now consumes precisely the original six-positive-plane **Wilson deficit** `Σ(1−ReTr)`, not a raw trace sum; `SixOrdered.sixPhysicalDeficitActionSpatialC3` derives its spatial C3 invariance on the same original n=3 record. The R443 Gibbs density is an explicit unspecified `gibbsWeight (rationalIntoReal sixDeficit)` source input; a true beta/counterterm identification and real compact SU2/SUN Haar integral are still not provided by rational unit quaternions.
+
+**Independent exact arithmetic executed** using Python Fractions on a nonconstant 256-site rational SU2 configuration: 4096 all-ordered signed plaquettes, reverse-trace equality, all diagonal unit holonomies, and 1536 original positive plaquettes. The measured `orderedTrace16=23384/25 = 2*(-1108/25) + 1024`, C3 symmetry of both sums, and ordered Wilson deficit=2× original six Wilson deficit all pass. These checks verify the finite arithmetic scenario, **not** the Agda kernel, general all-fields proof, Haar or continuum. Full local Agda unavailable.
+
+This pays R443 finite six-plane orientation/reindexing/normalization in **source-written theorem code**, but R443 true physical Gibbs/Haar source and UV/infinite-volume input, R445 uniform tails, and R320/R333 physical mass gap remain open. The formerly separate six-vs-sixteen convention task is now source-written; mark as Agda-kernel pending, not a live mathematical leaf after successful compilation.
