@@ -26,6 +26,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AIFinancingReflexivityExact as Reflexive
+import DASHI.Economics.ReflexiveFlowValidationExact as Econ
 import DASHI.Governance.KnowledgeProcessingCaptureSourceAtlas20261101Exact as Sources
 
 data Issuer : Set where
@@ -79,24 +80,27 @@ hyperscalerGroupPremium33 :
   hyperscalerGroupOAS ≡ broadIndexOAS + 33
 hyperscalerGroupPremium33 = refl
 
-cdsOctober21 : Issuer → Nat
-cdsOctober21 microsoft = 56
-cdsOctober21 amazon = 80
-cdsOctober21 oracle = 331
-cdsOctober21 alphabet = 0
-cdsOctober21 meta = 0
+-- No zero-filled missing CDS observations: only the three acquired
+-- issuer-price records inhabit this indexed family.
+data CDSObserved : Issuer → Nat → Set where
+  microsoftOct21 : CDSObserved microsoft 56
+  amazonOct21 : CDSObserved amazon 80
+  oracleOct21 : CDSObserved oracle 331
 
--- The 0 above means NOT ACQUIRED for Alphabet/Meta CDS, not zero risk.
--- Consumer MUST check the coverage predicate before using CDS.
-cdsObserved : Issuer → Bool
-cdsObserved microsoft = true
-cdsObserved amazon = true
-cdsObserved oracle = true
-cdsObserved alphabet = false
-cdsObserved meta = false
+oracleCDS : Nat
+oracleCDS = 331
+
+amazonCDS : Nat
+amazonCDS = 80
+
+microsoftCDS : Nat
+microsoftCDS = 56
+
+oracleCDSReceipt : CDSObserved oracle oracleCDS
+oracleCDSReceipt = oracleOct21
 
 oracleCdsVsAmazon251 :
-  cdsOctober21 oracle ≡ cdsOctober21 amazon + 251
+  oracleCDS ≡ amazonCDS + 251
 oracleCdsVsAmazon251 = refl
 
 -- Fixed-point tenths of USD billions to avoid rounding and accidental
@@ -123,16 +127,19 @@ broadAndIndexEligibleAreDifferentObjects ()
 data RateAction : Set where
   raise25BasisPoints holdRate : RateAction
 
-fomcAction : String → RateAction
-fomcAction "2026-09-16" = raise25BasisPoints
-fomcAction _ = holdRate
+data FomcMeeting : Set where
+  september16_2026 october28_2026 : FomcMeeting
 
--- Finite date-specific identity; general default above is NOT a current
--- Fed-rate oracle or a universal mapping from arbitrary dates.
-septemberDidHike : fomcAction "2026-09-16" ≡ raise25BasisPoints
+fomcAction : FomcMeeting → RateAction
+fomcAction september16_2026 = raise25BasisPoints
+fomcAction october28_2026 = holdRate
+
+septemberDidHike :
+  fomcAction september16_2026 ≡ raise25BasisPoints
 septemberDidHike = refl
 
-octoberDidNotHike : fomcAction "2026-10-28" ≡ holdRate
+octoberDidNotHike :
+  fomcAction october28_2026 ≡ holdRate
 octoberDidNotHike = refl
 
 data OctoberFedHikeClaim : Set where
@@ -173,7 +180,7 @@ spreadCannotPromoteCaptureMotive :
 spreadCannotPromoteCaptureMotive ()
 
 financingOriginalOwner :
-  Reflexive.Econ.MarkedGainImpliesExternalCashPermission → ⊥
+  Econ.MarkedGainImpliesExternalCashPermission → ⊥
 financingOriginalOwner =
   Reflexive.markedGainDoesNotCloseExternalCash
 
