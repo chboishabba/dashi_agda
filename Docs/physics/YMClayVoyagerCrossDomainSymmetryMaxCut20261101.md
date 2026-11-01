@@ -107,3 +107,10 @@ only where convergent and after defining the same actual spectral measure. In in
 6. **F — zeta on selected H_OS**: require vacuum-removed trace class, Mellin domain, analytic continuation and same spectral operator before any Casimir/RH/modular reuse.
 
 **Status:** source-read and source-written finite modules; no Agda kernel check/CI. PR-only #1249/#1414/#1241/#1407/#1438 and Lean #84 remain separate proof ownership until compatible imports are actually merged/transported.
+
+## 8. Native physical Wilson/gauge coarse-fine commuting-square compiler
+
+Added `DASHI/Physics/YangMills/YMClayVoyagerCovariantWilsonCoarseFineBidiExact.agda`. Its `SelectedWilsonCoarseFine` is *one chosen* fine gauge carrier, coarse gauge carrier, group-action carrier and scalar Wilson observable. It requires:
+`block(gaugeFine(g,U)) = gaugeCoarse(g,block(U))` and
+`WilsonFine(U) = WilsonCoarse(block(U))`, plus coarse Wilson gauge invariance.
+The new Agda proof `selectedFineWilsonGaugeInvariant` composes exactly those **two** squares to give fine Wilson invariance. It **does not construct** either square for the physical selected gauge theory, so it cannot supplant the existing direct `CompactLieLatticeGauge.loopObservableGaugeInvariant` proof. Instead it makes precise which extra equality is needed to attach `jCoarse/jFine`, #1249's covariant refinement, CMP119 C3 and the R445 P2 physical measure without inventing same-object semantics. OS positivity is **not** an extra assertion here: use the separately owned `BalabanWilsonTransferBlockingExact.composeReflectionPositiveBlocking` only after actual observable-lift/source agreement. No C3=local gauge claim.
