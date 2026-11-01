@@ -951,3 +951,22 @@ open R443Limit public using
   (nativeC3FiniteNumeratorSource
   ; nativeC3NormalizedExpectationAtEveryCutoff
   ; nativeC3SelectedSequenceLimitInvariant)
+
+
+------------------------------------------------------------------------
+-- Actual original native SU2 source 16ordered = 2x six positive planes
+-- plus 4 identity terms/site; Wilson 1-ReTrace deficit = 2x six deficit.
+-- R443 Gibbs consumes the SIX-source physical Wilson deficit, not raw trace.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeSixPlaneOrderedIdentityExact as SixOrdered
+
+open SixOrdered public using
+  (diagonalWordIsReverseOpposite
+  ; nativeDiagonalHolonomyIdentity; nativeDiagonalTraceIsOne
+  ; orderedAtIsTwiceSixPlusDiagonal
+  ; orderedActionIsSixSourceTwicePlusDiagonal
+  ; orderedDeficitAtIsTwiceSixDeficit
+  ; sixPhysicalDeficitAction
+  ; sixPhysicalDeficitActionSpatialC3)
+open R443Six public using
+  (nativeSixWilsonDeficit; nativeSixWilsonDeficitC3)
