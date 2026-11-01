@@ -42,6 +42,8 @@ import DASHI.Physics.YangMills.YMClayNativeRationalSU2OrderedPlaquetteC3ActionEx
 import DASHI.Physics.YangMills.YMClayNativeRationalSU2SixPlaneSameSourceExact as Six
 import DASHI.Physics.YangMills.YMClayNativeSixPlaneC3SourceReductionExact as Reduction
 import DASHI.Physics.YangMills.YMClayNativeSixPlaneC3ActualPhysicalSourceExact as Source
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2AllSignedC3WilsonExact as SignedC3
+import DASHI.Physics.Foundations.CMP119FlatSide4SpatialC3FieldCovarianceExact as SpatialC3
 
 twoPositive : ∀ axis → List Signed.SignedAxis4
 twoPositive axis = Bond.positiveDirection axis ∷ Bond.positiveDirection axis ∷ []
@@ -176,3 +178,41 @@ orderedDeficitAtIsTwiceSixDeficit dataSet site
   rewrite Reduction.nativeSixPlaneAtIsLiteralSix dataSet site
         | orderedAtIsTwiceSixPlusDiagonal dataSet site
   = ℚRing.solve-∀ (Reduction.sixPhysicalAt dataSet site)
+
+------------------------------------------------------------------------
+-- Six ORIGINAL positive Wilson plaquette deficits = source-normalised
+-- Euclidean Wilson action WITHOUT its coupling coefficient beta.
+-- Its finite spatial-C3 invariance is a proved consequence of the
+-- selected source six-positive-trace theorem and site-sum reindexing.
+------------------------------------------------------------------------
+
+sixPhysicalDeficitAction :
+  Native.RationalSU2BondData Weld.three → ℚ
+sixPhysicalDeficitAction dataSet =
+  Hodge.sumSites (sixPhysicalDeficitAt dataSet)
+
+sixPhysicalDeficitAtC3 :
+  ∀ dataSet site →
+  sixPhysicalDeficitAt (SignedC3.c3NativeData dataSet) site
+  ≡ sixPhysicalDeficitAt dataSet (SpatialC3.spatialC3Site site)
+sixPhysicalDeficitAtC3 dataSet site =
+  cong (λ trace → sixℚ - trace)
+    (trans
+      (Reduction.nativeSixPlaneAtIsLiteralSix
+        (SignedC3.c3NativeData dataSet) site)
+      (trans
+        (Reduction.nativeSixC3At dataSet
+          (Source.nativeSelectedSixOrientation dataSet) site)
+        (sym (Reduction.nativeSixPlaneAtIsLiteralSix
+          dataSet (SpatialC3.spatialC3Site site)))))
+
+sixPhysicalDeficitActionSpatialC3 :
+  ∀ dataSet →
+  sixPhysicalDeficitAction (SignedC3.c3NativeData dataSet)
+  ≡ sixPhysicalDeficitAction dataSet
+sixPhysicalDeficitActionSpatialC3 dataSet =
+  trans
+    (Hodge.sumSitesCong _ _
+      (sixPhysicalDeficitAtC3 dataSet))
+    (Ordered.sumSitesSpatialC3
+      (sixPhysicalDeficitAt dataSet))
