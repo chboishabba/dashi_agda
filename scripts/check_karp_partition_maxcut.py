@@ -1,23 +1,20 @@
 #!/usr/bin/env python3
-"""Finite arithmetic regression for Karp (1972) PARTITION -> weighted MAX CUT.
+"""Bounded arithmetic regression: signed Karp PARTITION -> weighted MAX CUT.
 
-Source: R. M. Karp, "Reducibility Among Combinatorial Problems",
-1972, DOI 10.1007/978-1-4684-2001-2_9, original p. 100.
+Primary: Richard M. Karp (1972), "Reducibility Among Combinatorial
+Problems", p. 100. DOI 10.1007/978-1-4684-2001-2_9.
 
-DASHI reconstructs the exact scalar identity using arbitrary-precision
-integers. These exhaustive bounded tests are independent computational
-checks, NOT an Agda proof, bit-costed reduction, or kernel certificate.
-Karp's threshold is a positive integer; this regression uses nonempty
-strictly positive input parts, so T > 0 and threshold >= 1.
+The original PARTITION input lies in Z^s and MAX CUT weights are integers,
+with a POSITIVE integer threshold. For T=sum(c_i) != 0, use the complete
+graph weights w(i,j)=c_i*c_j and threshold ceil(T*T/4). When T=0, a
+partition always exists (the empty side works); map that case to a fixed
+positive-threshold YES graph (2 vertices, edge weight 1, threshold 1).
+
+These finite exhaustive runs are independent computational controls, NOT
+a bit-costed polynomial reduction proof or Agda/Lean kernel certificate.
 """
 
 from itertools import product
-
-
-def threshold(parts: tuple[int, ...]) -> int:
-    assert parts and all(x > 0 for x in parts)
-    total = sum(parts)
-    return (total * total + 3) // 4  # ceil(T^2/4)
 
 
 def has_partition(parts: tuple[int, ...]) -> bool:
@@ -33,28 +30,52 @@ def cut_weight(parts: tuple[int, ...], bits: tuple[int, ...]) -> int:
                if bits[i] != bits[j])
 
 
+def reduce_partition_to_cut(
+    parts: tuple[int, ...]
+) -> tuple[int, list[tuple[int, int, int]], int]:
+    total = sum(parts)
+    if total == 0:
+        return 2, [(0, 1, 1)], 1
+    edges = [(i, j, parts[i] * parts[j])
+             for i in range(len(parts))
+             for j in range(i + 1, len(parts))]
+    return len(parts), edges, (total * total + 3) // 4
+
+
+def max_cut(n: int, edges: list[tuple[int, int, int]]) -> int:
+    return max(sum(w for i, j, w in edges if bits[i] != bits[j])
+               for bits in product((0, 1), repeat=n))
+
+
 def verify_instance(parts: tuple[int, ...]) -> None:
     total = sum(parts)
-    target = threshold(parts)
-    weights = []
     for bits in product((0, 1), repeat=len(parts)):
-        a = sum(x for x, side in zip(parts, bits) if side)
+        subtotal = sum(x for x, side in zip(parts, bits) if side)
         objective = cut_weight(parts, bits)
-        assert objective == a * (total - a)
-        assert 4 * objective == total * total - (total - 2 * a) ** 2
+        assert objective == subtotal * (total - subtotal)
+        assert 4 * objective == total * total - (total - 2 * subtotal) ** 2
         assert objective == cut_weight(parts, tuple(1 - b for b in bits))
-        weights.append(objective)
-    assert (max(weights) >= target) == has_partition(parts)
+    n, edges, threshold = reduce_partition_to_cut(parts)
+    assert threshold > 0
+    assert (max_cut(n, edges) >= threshold) == has_partition(parts)
 
 
 def main() -> None:
-    tested = 0
+    positive_count = 0
     for n in range(1, 7):
         for parts in product(range(1, 6), repeat=n):
             verify_instance(parts)
-            tested += 1
-    print(f"PASS: {tested} positive partition instances; full cut enumeration,"
-          " exact identity, complemented cut, threshold equivalence")
+            positive_count += 1
+
+    signed_count = 0
+    for n in range(0, 6):
+        for parts in product(range(-2, 3), repeat=n):
+            verify_instance(parts)
+            signed_count += 1
+
+    print(f"PASS: {positive_count} positive and {signed_count} signed/zero "
+          "partition instances; exact quadratic cut identity, both side "
+          "orientations, zero-total mapping and threshold equivalence")
 
 
 if __name__ == "__main__":
