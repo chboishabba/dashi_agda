@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.YMClayVoyagerImaginaryC3DimensionBidiExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 data SignedAxis2 : Set where
   positiveX : SignedAxis2
@@ -105,32 +106,14 @@ noC3ToQuarterTurnIntertwiner :
   (f : TritPosition → SignedAxis2) →
   ((t : TritPosition) →
     f (rotateC3 t) ≡ quarterTurn (f t)) → ⊥
-noC3ToQuarterTurnIntertwiner f intertwines
-  with f phase0
-... | positiveX = contradiction
-  where
-    contradiction : ⊥
-    contradiction with intertwines phase0 | intertwines phase1 | intertwines phase2
-    ... | refl | refl | refl =
-      quarterTurnCubedHasNoFixedAxis positiveX refl
-... | positiveY = contradiction
-  where
-    contradiction : ⊥
-    contradiction with intertwines phase0 | intertwines phase1 | intertwines phase2
-    ... | refl | refl | refl =
-      quarterTurnCubedHasNoFixedAxis positiveY refl
-... | negativeX = contradiction
-  where
-    contradiction : ⊥
-    contradiction with intertwines phase0 | intertwines phase1 | intertwines phase2
-    ... | refl | refl | refl =
-      quarterTurnCubedHasNoFixedAxis negativeX refl
-... | negativeY = contradiction
-  where
-    contradiction : ⊥
-    contradiction with intertwines phase0 | intertwines phase1 | intertwines phase2
-    ... | refl | refl | refl =
-      quarterTurnCubedHasNoFixedAxis negativeY refl
+noC3ToQuarterTurnIntertwiner f intertwines =
+  quarterTurnCubedHasNoFixedAxis (f phase0)
+    (trans
+      (cong (λ axis → quarterTurn (quarterTurn axis))
+        (sym (intertwines phase0)))
+      (trans
+        (cong quarterTurn (sym (intertwines phase1)))
+        (sym (intertwines phase2))))
 
 -- Cross-domain interpretation:
 -- * A phase axis counts directions, not extra coordinates.
