@@ -5,6 +5,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.String using (String)
 
+open import Data.Empty using (⊥)
+
 import DASHI.Biology.EducationCorpusSourceRegistry as Alice
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as EfS
@@ -79,5 +81,5 @@ combinedRegistryCount = refl
 data RegistryRowImpliesReviewedEvidence : Set where
 
 registryRowDoesNotProveReview :
-  RegistryRowImpliesReviewedEvidence → {A : Set} → A
+  RegistryRowImpliesReviewedEvidence → ⊥
 registryRowDoesNotProveReview () 
