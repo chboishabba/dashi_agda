@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as
 import DASHI.Physics.YangMills.YMClayNativeRationalSU2AllSignedC3WilsonExact as C3
 import DASHI.Physics.YangMills.YMClayNativeRationalSU2SixPlaneSameSourceExact as Six
 import DASHI.Physics.YangMills.YMClayNativeSixPlaneC3ActualPhysicalSourceExact as SixC3
+import DASHI.Physics.YangMills.YMClayNativeSixPlaneOrderedIdentityExact as SixWilson
 import Data.Rational.Base as ℚ using (ℚ)
 
 -- The original native source record now lives in its minimal Set universe.
@@ -48,6 +49,17 @@ nativeSixTrace = Six.sixPlanePhysicalTraceAction
 nativeSixTraceC3 : ∀ dataSet →
   nativeSixTrace (C3.c3NativeData dataSet) ≡ nativeSixTrace dataSet
 nativeSixTraceC3 = SixC3.nativeSixPositiveWilsonActionSpatialC3
+
+-- The actual Euclidean Wilson Gibbs action is built from 1−ReTr,
+-- not the raw trace sum (the latter remains a native R445 observable).
+nativeSixWilsonDeficit : NativeConfiguration → ℚ
+nativeSixWilsonDeficit = SixWilson.sixPhysicalDeficitAction
+
+nativeSixWilsonDeficitC3 : ∀ dataSet →
+  nativeSixWilsonDeficit (C3.c3NativeData dataSet)
+  ≡ nativeSixWilsonDeficit dataSet
+nativeSixWilsonDeficitC3 =
+  SixWilson.sixPhysicalDeficitActionSpatialC3
 
 data SpatialC3Generator : Set where
   c3 : SpatialC3Generator
@@ -69,11 +81,11 @@ record NativeSixPlaneHaarBoundary
     rationalIntoReal : ℚ → ℝ
     gibbsWeight : ℝ → ℝ
 
-    -- Actual physical finite Wilson action/density/coupling identification.
+    -- Actual physical 1−ReTr six-plane Wilson deficit/action density/coupling identification.
     gibbsIsNativeSixPlaneWilson : ∀ configuration →
       Physical.density measure configuration
       ≡ gibbsWeight
-          (rationalIntoReal (nativeSixTrace configuration))
+          (rationalIntoReal (nativeSixWilsonDeficit configuration))
 
     -- Product/constrained-Haar change of variables on SAME configuration.
     -- This is NOT delivered by a rational-point counting measure.
@@ -100,7 +112,7 @@ nativeSixPlaneR443 {measure = measure} inputs = record
       λ c3 observable configuration → refl
   ; R443.WilsonGibbsHaarAction.finiteAction =
       λ configuration →
-        rationalIntoReal inputs (nativeSixTrace configuration)
+        rationalIntoReal inputs (nativeSixWilsonDeficit configuration)
   ; R443.WilsonGibbsHaarAction.gibbsWeight =
       gibbsWeight inputs
   ; R443.WilsonGibbsHaarAction.densityIsGibbsWeight =
@@ -108,7 +120,7 @@ nativeSixPlaneR443 {measure = measure} inputs = record
   ; R443.WilsonGibbsHaarAction.finiteActionInvariant =
       λ c3 configuration →
         cong (rationalIntoReal inputs)
-          (nativeSixTraceC3 configuration)
+          (nativeSixWilsonDeficitC3 configuration)
   ; R443.WilsonGibbsHaarAction.haarIntegralPullbackInvariant =
       λ c3 integrand → selectedPhysicalHaarC3Invariant inputs integrand
   }
