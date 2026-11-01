@@ -13,6 +13,7 @@ import DASHI.Moonshine.C3FourierConjugationExact as Fourier
 import DASHI.Moonshine.JInvariant369CodecBidiExact as JCodec
 import DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact as Nonary
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as JLevel
+import DASHI.Moonshine.OggSSPP2TrialecticNineCentreResidualBidiExact as Centre
 import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact as Response
 
 -- The eight nonzero spatial points of F3², not eight Fourier modes.
@@ -122,3 +123,15 @@ phaseNineNotCyclicNonaryGroupIso =
 -- JInvariant369PhaseLevelSeparationExact proves phase-only C3
 -- cannot recover nontrivial level translations; no Fourier-to-j
 -- identification or modular-level 9-action is claimed here.
+
+
+-- A concrete existing dependent centre-only residual theorem:
+-- duplicated-centre p=2 state = phase nine plus a centre-only bit.
+-- This is a discrete exact BIDI pattern for what the full learned
+-- nine-sheet receiver must retain; it is NOT a neural-float codec.
+dependentCentreBidiAlreadyProved :
+  (state : Plane.DuplicatedCentreNineSheet) →
+  Centre.reopenPhaseNine
+    (Centre.projectToPhaseNine state)
+    (Centre.centreResidualOf state) ≡ state
+dependentCentreBidiAlreadyProved = Centre.reopenPhaseNineExact
