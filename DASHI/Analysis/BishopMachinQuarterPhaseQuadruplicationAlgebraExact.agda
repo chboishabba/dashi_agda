@@ -21,11 +21,13 @@ module DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact where
 
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ; _/_)
-open import Data.Product.Base using (_×_; _,_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
 import Real as R
 import RealProperties as RP
 import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Q
+import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
+import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
@@ -169,3 +171,73 @@ quarterUnitPhaseGivesFourfoldEndpoint inputs equal unit =
   ,
   cosFourfoldIsMinusOneAtEqualUnitPhase
     (quarterCos inputs) (quarterSin inputs) equal unit
+
+------------------------------------------------------------------------
+-- K05 actual endpoint bridge. The only additional premises are the
+-- genuine, independently owed same-object sine/cosine quadruplication
+-- identities and true quarter-angle predicates. The proof itself
+-- invokes original Round11 term identification and original
+-- fourTimesQuarterIsMachinPi; no Lean result is imported to Agda.
+------------------------------------------------------------------------
+
+fourTimesQuarter : R.ℝ
+fourTimesQuarter =
+  R._*_ (R._⋆ (+ 4 / 1)) Q.machinQuarterAngle
+
+round11Sine round11Cos :
+  Round11.Round11BishopCutset → R.ℝ → R.ℝ
+round11Sine inputs =
+  E.bishopSin (Round11.elementarySeries inputs)
+round11Cos inputs =
+  E.bishopCos (Round11.elementarySeries inputs)
+
+-- The true analytic addition theorem must establish these two identities
+-- independently; they are not exported as a postulate or smuggled into the
+-- original core. All other proof transport below is algebra/setoid.
+quarterSemanticBridgeToActualMachinPi :
+  (inputs : Round11.Round11BishopCutset) →
+  R._≃_ (quarterCos inputs) (quarterSin inputs) →
+  R._≃_
+    (R._+_
+      (R._*_ (quarterCos inputs) (quarterCos inputs))
+      (R._*_ (quarterSin inputs) (quarterSin inputs)))
+    R.1ℝ →
+  R._≃_
+    (round11Sine inputs fourTimesQuarter)
+    (sinFourfoldPolynomial (quarterCos inputs) (quarterSin inputs)) →
+  R._≃_
+    (round11Cos inputs fourTimesQuarter)
+    (cosFourfoldPolynomial (quarterCos inputs) (quarterSin inputs)) →
+  (R._≃_ (round11Sine inputs Machin.bishopMachinPi) R.0ℝ)
+  ×
+  (R._≃_ (round11Cos inputs Machin.bishopMachinPi) (R.-_ R.1ℝ))
+quarterSemanticBridgeToActualMachinPi
+  inputs quarterEqual pythag sineQuad cosineQuad =
+  let
+    endpoint =
+      quarterUnitPhaseGivesFourfoldEndpoint
+        inputs quarterEqual pythag
+    actualSinTransport :
+      R._≃_
+        (round11Sine inputs Machin.bishopMachinPi)
+        (round11Sine inputs fourTimesQuarter)
+    actualSinTransport =
+      RP.≃-symm
+        (TrigCong.bishopSinCongruent
+          (Round11.round11ConcreteTermIdentification inputs)
+          Q.fourTimesQuarterIsMachinPi)
+    actualCosTransport :
+      R._≃_
+        (round11Cos inputs Machin.bishopMachinPi)
+        (round11Cos inputs fourTimesQuarter)
+    actualCosTransport =
+      RP.≃-symm
+        (TrigCong.bishopCosCongruent
+          (Round11.round11ConcreteTermIdentification inputs)
+          Q.fourTimesQuarterIsMachinPi)
+  in
+  RP.≃-trans actualSinTransport
+    (RP.≃-trans sineQuad (proj₁ endpoint))
+  ,
+  RP.≃-trans actualCosTransport
+    (RP.≃-trans cosineQuad (proj₂ endpoint))
