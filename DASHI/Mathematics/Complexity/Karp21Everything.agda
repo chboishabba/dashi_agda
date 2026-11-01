@@ -34,3 +34,5 @@ import DASHI.Mathematics.Complexity.Karp21SimpleGraphComplementExact
 import DASHI.Mathematics.Complexity.Karp21FiniteColouringCliqueCoverExact
 
 import DASHI.Mathematics.Complexity.Karp21SignedLaplacianCutExact
+
+import DASHI.Mathematics.Complexity.Karp21SignedGraphScaleAndAppendExact
