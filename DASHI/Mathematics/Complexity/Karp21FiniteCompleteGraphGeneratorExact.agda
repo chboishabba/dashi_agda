@@ -21,6 +21,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; _*_)
 open import Data.List.Base using (List; []; _∷_; _++_; map)
 
+import Data.List.Properties as ListP
+open import Relation.Binary.PropositionalEquality using (cong)
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
@@ -89,3 +91,33 @@ completePairEdgesEmpty = refl
 completePairEdgesSingleton : (x : ℤ) →
   completePairEdges (x Vec.∷ Vec.[]) ≡ []
 completePairEdgesSingleton x = refl
+
+
+------------------------------------------------------------------------
+-- Exactly n(n-1)/2 emitted edges (structural upper-triangle count).
+-- This is independent of the binary cut assignment and edge weights.
+------------------------------------------------------------------------
+
+headPairCount :
+  ∀ {n} (x : ℤ) (rest : Vec.Vec ℤ n) →
+  Data.List.Base.length (headPairs x rest) ≡ n
+headPairCount x Vec.[] = refl
+headPairCount x (y Vec.∷ ys)
+  rewrite ListP.length-map promoteHeadEdge (headPairs x ys)
+        | headPairCount x ys = refl
+
+triangularPairCount : Nat → Nat
+triangularPairCount zero = zero
+triangularPairCount (suc n) = n + triangularPairCount n
+
+completePairCount :
+  ∀ {n} (source : Vec.Vec ℤ n) →
+  Data.List.Base.length (completePairEdges source) ≡
+  triangularPairCount n
+completePairCount Vec.[] = refl
+completePairCount (x Vec.∷ xs)
+  rewrite ListP.length-++ (headPairs x xs)
+      (map promoteTailEdge (completePairEdges xs))
+        | ListP.length-map promoteTailEdge (completePairEdges xs)
+        | headPairCount x xs
+        | completePairCount xs = refl
