@@ -25,6 +25,16 @@ The 23 October and 30 October rows are **historical proposed checkpoints**. No c
 
 **Current evidence status:** #1448's 16 cases are bibliographic/candidate interpretation surfaces, not 16 admitted studies. #1446's publisher rules remain independent of the research-quality gates and of #1448's Agda proof/representation status. Preserve proposed 30 April 2027 internal manuscript milestone and 30 August 2027 public special-issue deadline as distinct dates.
 
+### Hyperfabric decisions added 1 November
+
+**6 November:** approval of the paper as reciprocal, context-indexed evidence synthesis rather than a universal seven-label prescription; editorial abstract must not claim an empirical joint outcome. Require the coauthors to decide which research consumers the proposed method must answer and which views remain insufficient.
+
+**13 November:** allocate two independent EfS review lanes; coding should record *joint* pedagogy × learner/community authority × ecology/outcome relations and possible higher-order absences, not only one principle per paper. Include negative cases and a dissent/alternative partition register.
+
+**20 November:** retrospective trace of one exact source revision/span through the canonical reviewed SLR + SourceAuditAdmission + source-indexed claim ceiling (or explicitly record where the path is blocked). Include one credible three-way collision that motivates a richer consumer. Do not infer a higher-order empirical pattern from the finite mathematical witness alone.
+
+Method and exact paths: [hyperfabric implications](digital-esd-hyperfabric-implications-and-consumer-gates.md) · [origins](digital-esd-research-origins-and-derivation.md).
+
 ## Friday-by-Friday decisions and deliverables
 
 | Friday | Must be decided by end of week | Acceptance surface |
