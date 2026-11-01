@@ -54,7 +54,7 @@ reopen :
   JointState E X H →
   SelectedQuotient E X H selected →
   JointState E X H
-reopen selected retained payload =
+reopen {E = E} {X = X} {H = H} selected retained payload =
   jointState (sharedActivation payload)
     (λ e → reopenOne e (selected e))
   where
