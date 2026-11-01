@@ -294,3 +294,4 @@ import DASHI.Governance.IRISDenaIranContraOpacityNonanalogyExact
 -- Source-bound epistemic monopoly / regulatory-to-sovereign capture max-cut.
 import DASHI.Governance.KnowledgeProcessingCaptureSourceAtlas20261101Exact
 import DASHI.Governance.KnowledgeProcessingSovereignCaptureExact
+import DASHI.Governance.KnowledgeCaptureSelectionFeedback20261101Exact
