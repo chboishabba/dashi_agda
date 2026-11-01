@@ -875,3 +875,20 @@ open NativePath public using
   ; nativePositiveStepEqualsHodge
   ; nativeGraphHolonomyEqualsExistingPathHolonomy
   ; nativeGraphWilsonEqualsExistingPathWilson)
+
+
+------------------------------------------------------------------------
+-- Native signed (positive and inverse) Wilson source and 16 ordered
+-- plaquette sum, physical side-four C3.  The latter is not yet canonical
+-- six-unordered-plaquette Gibbs/Haar finite action.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2AllSignedC3WilsonExact as AllSignedC3
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2OrderedPlaquetteC3ActionExact as OrderedC3
+
+open AllSignedC3 public using
+  (c3SignedDirection; c3NativeData; c3SignedStepNaturality
+  ; c3NativeSignedPathHolonomy; c3NativeSignedWilson)
+open OrderedC3 public using
+  (orientedOrderedPlaquetteWord; c3PlaquetteWord
+  ; orderedWilsonPlaquetteC3; sumIndexC3
+  ; sumSitesSpatialC3; orderedWilsonActionSpatialC3Invariant)
