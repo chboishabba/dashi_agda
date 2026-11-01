@@ -1,5 +1,6 @@
 module DASHI.Education.DigitalESDJointHyperfabricConsumerExact where
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
