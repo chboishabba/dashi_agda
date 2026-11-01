@@ -159,6 +159,114 @@ def three_sat(n, clauses):
     return n, tuple(clauses_new)
 
 
+
+def sat_to_binary_ip(n, clauses):
+    # Clause truth count >=1, encoded as an equality using binary slack.
+    widths = [max(0, (len(clause)-1).bit_length()) for clause in clauses]
+    total = n + sum(widths)
+    rows, rhs, index = [], [], n
+    for clause, width in zip(clauses, widths):
+        row = [0]*total
+        neg = 0
+        for lit in clause:
+            row[abs(lit)-1] += 1 if lit > 0 else -1
+            neg += lit < 0
+        for i in range(width):
+            row[index+i] = -(1 << i)
+        index += width
+        rows.append(tuple(row))
+        rhs.append(1-neg)
+    return tuple(rows), tuple(rhs), total
+
+
+def binary_ip(rows, rhs, variables):
+    return any(all(sum(c*x for c,x in zip(row, bits)) == target
+                   for row, target in zip(rows, rhs))
+               for bits in product((0,1), repeat=variables))
+
+
+def cover_to_feedback_vertex(n, edges, k):
+    return n, frozenset((u,v) for a,b in edges for u,v in ((a,b),(b,a))), k
+
+
+def acyclic(n, arcs):
+    reachable = [set() for _ in range(n)]
+    for u,v in arcs:
+        reachable[u].add(v)
+    for k in range(n):
+        for i in range(n):
+            if k in reachable[i]:
+                reachable[i].update(reachable[k])
+    return all(i not in reachable[i] for i in range(n))
+
+
+def feedback_vertex(n, arcs, k):
+    return any(acyclic(n, frozenset((u,v) for u,v in arcs if u not in subset and v not in subset))
+               for length in range(min(k,n)+1)
+               for selected in choices(n,length) for subset in (set(selected),))
+
+
+def cover_to_feedback_arc(n, edges, k):
+    arcs = {(2*u, 2*u+1) for u in range(n)}
+    arcs |= {(2*u+1, 2*v) for a,b in edges for u,v in ((a,b),(b,a))}
+    return 2*n, frozenset(arcs), k
+
+
+def feedback_arc(n, arcs, k):
+    arcs = tuple(sorted(arcs))
+    return any(acyclic(n, frozenset(e for i,e in enumerate(arcs) if i not in deleted))
+               for length in range(min(k,len(arcs))+1)
+               for selected in choices(len(arcs),length) for deleted in (set(selected),))
+
+
+def directed_to_undirected_hamiltonian(n, arcs):
+    edges = {(3*u, 3*u+1) for u in range(n)} | {(3*u+1, 3*u+2) for u in range(n)}
+    edges |= {tuple(sorted((3*u+2, 3*v))) for u,v in arcs}
+    return 3*n, frozenset(edges)
+
+
+def directed_hamiltonian(n, arcs):
+    if n == 0:
+        return False
+    return any(all((path[i],path[(i+1)%n]) in arcs for i in range(n))
+               for rest in __import__('itertools').permutations(range(1,n))
+               for path in ((0,)+rest,))
+
+
+def undirected_hamiltonian(n, edges):
+    if n < 3:
+        return False
+    return any(all(tuple(sorted((path[i],path[(i+1)%n]))) in edges for i in range(n))
+               for rest in __import__('itertools').permutations(range(1,n))
+               for path in ((0,)+rest,))
+
+
+def check_additional():
+    counts = dict(E01=0, E07=0, E08=0, E10=0)
+    for n in range(3):
+        lits = tuple(i for i in range(-n,n+1) if i)
+        pool = ((),)+tuple((lit,) for lit in lits)+tuple((a,b) for a in lits for b in lits)
+        for size in range(3):
+            for f in product(pool, repeat=size):
+                assert binary_ip(*sat_to_binary_ip(n,f)) == sat(n,f)
+                counts['E01'] += 1
+    for n in range(0,4):
+        possible = tuple(combinations(range(n),2))
+        for presence in product((0,1), repeat=len(possible)):
+            edges = frozenset(e for e,b in zip(possible,presence) if b)
+            for k in range(n+1):
+                expected = vertex_cover(n, edges, k)
+                assert feedback_vertex(*cover_to_feedback_vertex(n, edges, k)) == expected
+                assert feedback_arc(*cover_to_feedback_arc(n, edges, k)) == expected
+                counts['E07'] += 1; counts['E08'] += 1
+    for n in range(1,4):
+        arcs = tuple((u,v) for u in range(n) for v in range(n) if u!=v)
+        for pres in product((0,1),repeat=len(arcs)):
+            source = frozenset(e for e,b in zip(arcs,pres) if b)
+            assert undirected_hamiltonian(*directed_to_undirected_hamiltonian(n,source)) == directed_hamiltonian(n,source)
+            counts['E10'] += 1
+    print('PASS additional direct reduction checks',counts)
+
 def main():
     counts = {k: 0 for k in ('E02', 'E03', 'E04', 'E05', 'E06', 'E12', 'E14', 'E17', 'E19')}
     for n in range(0, 3):
@@ -203,6 +311,7 @@ def main():
                 assert partition(knapsack_to_partition(numbers,b)) == knapsack(numbers,b)
                 counts['E19'] += 1
     print('PASS exact finite reductions:', counts)
+    check_additional()
 
 
 if __name__ == '__main__':
