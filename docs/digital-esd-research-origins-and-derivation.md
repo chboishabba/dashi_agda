@@ -40,7 +40,7 @@ An academic Methods section must identify each claimed conclusion's register. S 
 | 1 November | [#1448](https://github.com/chboishabba/dashi_agda/pull/1448), stacked on #1237 | 14 additional attributed EfS source entries + two canonical Tilbury/IUCN sources, 16 candidate comparisons; **zero source-review admission implied**. |
 | 1 November | [#1446](https://github.com/chboishabba/dashi_agda/pull/1446), separate docs PR on master | MDPI/publisher, attribution and SLR domain boundary guidance; independent sibling, not a merged ancestor of #1448. |
 
-These PR dates were read from GitHub PR metadata. PR #341 initially reported **seven papers**, whereas the current [education registry](../DASHI/Biology/EducationCorpusSourceRegistry.agda) has **nine papers/items**. These are **not** the seven principles. The current registry additionally contains a humour framework item and a parental fear/independent-mobility study; the exact commit where each was added to the nine-row registry is **not yet verified**. PR #531 and #612 show related formal activity, but proximity does not prove the insertion commit. Recover exact diffs/file history before asserting it.
+These PR dates were read from GitHub PR metadata. PR #341 initially reported **seven papers**, whereas the current [education registry](../DASHI/Biology/EducationCorpusSourceRegistry.agda) has **nine papers/items**. These are **not** the seven principles. The current registry additionally contains a humour framework item and a parental fear/independent-mobility study. **Eight → nine is now exactly verified** by [commit 378ac3b7](https://github.com/chboishabba/dashi_agda/commit/378ac3b7ea0d47d3abc9a2fc28f2539f4c567e95) (24 August 2026): its diff adds O'Connor–Brown's source record and changes the registry count wording from eight to nine. **Seven → eight (the humour source's exact insertion into this registry) remains unverified**; later humour cross-pollination commits on 29 August do not prove this earlier insertion. Recover the 7→8 file-level diff before asserting its author/date.
 
 The original DASHI repository and still-earlier mathematical inspirations have broader histories than this verified educational lineage. Avoid guessing an inception date or identifying the first mathematical antecedent as the sole cause of the paper's eventual topic.
 
@@ -154,7 +154,8 @@ No final supported/narrowed/split/merged/defeated label is paid merely by an Agd
 | Debt | Minimum evidence needed | Owner / stage | Status at 1 Nov |
 | --- | --- | --- | --- |
 | Earliest reusable owner vs actual historical project motivation | Exact commit and author/designer decision records; distinguish temporal precedence from causal motivation | PR archaeology | **Partially verified** |
-| Seven → nine paper/item registry history | File-level introduction diffs for humour and parental-fear rows | Git history | **Open** |
+| Seven → eight paper/item expansion | File-level source-registry introduction diff for humour source | Git history | **Open** |
+| Eight → nine registry expansion | [378ac3b7](https://github.com/chboishabba/dashi_agda/commit/378ac3b7ea0d47d3abc9a2fc28f2539f4c567e95) adds O'Connor–Brown with count eight→nine | Git history | **Verified** |
 | Who initially nominated the seven-source set and by what criteria? | Source selection/rejection decisions or contemporaneous rationale; author review | Author corpus protocol | **Open** |
 | Why seven, not competing partitions? | Alternatives and source/consumer collision comparisons, negative decisions | Independent author coding | **Open** |
 | EfS independent coding truly blind to seven labels | Reviewer allocations, prespecified guide, blinded coding and adjudication receipts | EfS team | **Open** |
