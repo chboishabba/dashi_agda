@@ -100,7 +100,7 @@ record ConnectedDigitalESDTimeHyperfabric : Set₁ where
 
     -- The five detailed manuscript questions remain canonical; the two
     -- public-facing directions are projections/consumers of that study.
-    manuscriptPaperType : Method.ManuscriptResearchQuestion
+    canonicalResearchQuestion : Method.ManuscriptResearchQuestion
     retrospectiveQuestion : InquiryDirection
     prospectiveQuestion : InquiryDirection
 
@@ -109,7 +109,8 @@ record ConnectedDigitalESDTimeHyperfabric : Set₁ where
     observationsAt : Nat → SituatedObserver → TemporalSourceFibre
 
     sourceIdentityAt : Nat → SituatedObserver → String
-    sourceIdentityAt t who = sourceIdentity (observationsAt t who)
+    sourceIdentityAtPreserved : (t : Nat) (who : SituatedObserver) →
+      sourceIdentityAt t who ≡ sourceIdentity (observationsAt t who)
 
     timeIndexIsPreserved : (t : Nat) (who : SituatedObserver) →
       time (observationsAt t who) ≡ t
@@ -139,12 +140,13 @@ canonicalReciprocalOwner = ESD.canonicalDigitalESDReciprocalBraid
 -- Expose existing source-level non-factorability and query sufficiency
 -- theorems rather than rebuilding them as ESD-specific mathematics.
 querySufficiencyIsRelative :
-  {World Representation Answer : Set}
-  (projection : World → Representation)
-  (question : World → Answer) →
-  Sufficiency.FactorsThrough projection question →
-  Sufficiency.FactorsThrough projection question
-querySufficiencyIsRelative projection question witness = witness
+  {State Surface Query : Set}
+  (questions : Sufficiency.InquiryQuestionFamily State Query)
+  (projection : State → Surface)
+  (question : Query) →
+  Sufficiency.FactorsThrough questions projection question →
+  Sufficiency.FactorsThrough questions projection question
+querySufficiencyIsRelative questions projection question witness = witness
 
 coarseAgendaStillInsufficient :
   Intersection.FactorsThrough ESD.coarseAgendaObservation ESD.braidAdequacy → ⊥
