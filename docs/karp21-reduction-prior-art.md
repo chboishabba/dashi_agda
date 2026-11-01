@@ -75,6 +75,10 @@ The graph is the historical source diagram. Validate individual transformations 
 - **K09a** residual max-flow and min s-t cut, exposing a direct graph-cut objective bridge but explicitly **no** mincut-to-maxcut equivalence.
 - **K10a** job sequencing versus job-shop typed adapters and upstream ThreeMachine provenance audit.
 
+## Exact finite historical graph
+
+`Karp21HistoricalDagExact.agda` source-writes 21 problem constructors, 20 historical edge constructors, the two list-length equations `twentyOneNamedNodes` / `twentyHistoricalEdges`, and `allNodesHistoricallyReachable`. Those are finite historical **graph indexing** lemmas; they are not proofs that the edges preserve truth or execute in polynomial time. The module is included in `Karp21Everything.agda` for focused later pinned Agda checks.
+
 ## Important boundaries
 The phrase *max-cut* used for research prioritization in DASHI is not Karp's weighted graph MAX CUT. Likewise Yang-Mills finite compatibility cliques are not the general CLIQUE NP-completeness result. Keep the two uses separate. Optimization and decision variants must be connected by explicit bridges.
 
@@ -82,6 +86,6 @@ Do not promote conditional assumptions, synthetic receipts, small test cases, or
 
 ## Executed bounded arithmetic check, and independent Agda build gate
 
-- `scripts/check_karp_partition_maxcut.py` contains an exhaustive positive-instance audit with all cut assignments for lengths 1–6 and entries 1–5. **An independently executed same-formula local Python check passed 19,530 instances on 2026-11-01**; all cuts were enumerated. The committed GitHub script has not been executed from a local checkout.
+- `scripts/check_karp_partition_maxcut.py` contains the original signed-integer E20 arithmetic check, including zero-total inputs with a fixed positive-threshold YES graph. **Independent local Python checks passed 19,530 positive + 3,906 signed/zero cases = 23,436 total on 2026-11-01**, enumerating all cuts in the same input ranges. The updated committed script itself has not been executed from an exact GitHub checkout.
 - The exact arithmetic identity inspected in each case is `4 * score = T*T - (T - 2*A)**2`, with `A` the sum of one side and threshold `ceil(T*T/4)`. This validates the restricted **positive**-integer source transformation experimentally, not the unbounded algorithm, encoded complexity or Agda proof.
 - Focused check root: `DASHI/Mathematics/Complexity/Karp21Everything.agda` imports original polynomial reductions plus the four new theorem modules. For a worker with the pinned toolchain: `scripts/run_agda29_parallel_check.sh DASHI/Mathematics/Complexity/Karp21Everything.agda` is fast feedback, but Track A flake remains final promotion authority. **No Agda kernel or checkout-native Python check has been run in this PR yet.**
