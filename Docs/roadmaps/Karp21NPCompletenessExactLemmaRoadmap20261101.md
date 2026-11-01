@@ -108,7 +108,7 @@ New executable checked against **independent brute-force instance predicates**:
  
 E11's construction checks the literal-source SAT truth after removing tautological clauses and duplicate literals, and uses `m≥4` so every ≤3-literal clause omits a variable to rule out spurious extra-colour assignments. E16 **only** constructs the Karp gadget for nonempty sets with ≥2 elements, exactly matching the quoted "without loss of generality" source precondition; preprocessing the general exact-cover domain remains an explicit lemma. E09 has source-domain guards (nonempty edge incidence, positive budget), with trivial positive-budget YES cases handled separately. Neither the bounded DP/DFS nor the graph-colouring backtracker is claimed polynomial.
 
-**Revised finite implementation coverage: 20/20 historical direct reductions have a source-written executable candidate and passing bounded equivalence controls, spread across three scripts** (`check_karp_historical_reductions.py`, `check_karp_remaining_four_gadgets.py`, `check_karp_partition_maxcut.py`). This does **not** prove any complete reduction theorem in Agda. All 20 remain open for general correctness proofs, binary encoding, constructive witness sizes, and actual polynomial machine costs. Completion count for 21 NP-completeness theorems remains 0/21.
+**Revised finite implementation coverage: 20/20 historical direct reductions have a source-written executable candidate and passing bounded equivalence controls, spread across three scripts** (`check_karp_historical_reductions.py`, `check_karp_remaining_four_gadgets.py`, `check_karp_partition_maxcut.py`), plus a fourth independent flow/APX consumer. This does **not** prove any complete reduction theorem in Agda. All 20 remain open for general correctness proofs, binary encoding, constructive witness sizes, and actual polynomial machine costs. Completion count for 21 NP-completeness theorems remains 0/21.
 
 ## Conditional kernel-facing 21-node proof compiler (source-written)
 
@@ -121,6 +121,21 @@ E11's construction checks the literal-source SAT truth after removing tautologic
 This is a substantive proof-composition function, not a vacuous Boolean completion flag. **It assumes real evidence for each of the 20 edges, SAT-root completeness and all NP-membership certificates.** The source has not yet been kernel-checked in the pinned Agda environment; the theorem is not promoted to 21 accepted NP-completeness certificates.
 
 The **remaining graph cut** is no longer inventing repeated completeness wrappers. It is constructing these exact `CertifiedKarpNetwork` inputs and proving their machine costs in the common encoded carrier.
+
+## Additional exact finite consumer audit: flow, minimum cuts and APX
+
+The repo's earlier `DASHI/Planning/NetworkFlowCapacityCongestionExact.agda` remains a **qualitative** capacity example and is not overwritten. New `scripts/check_karp_flow_cut_apx.py` provides separate executable implementations and independent finite checks:
+
+| Target / algorithm | Exact executable invariant checked | Passed bounded cases | Missing Agda theorem |
+| --- | --- | ---: | --- |
+| Edmonds–Karp BFS residual max-flow | each augmentation strictly increases total integer flow; terminal residual reachable set excludes sink; net flow conserved at interior vertices; value equals cut capacity and exhaustive min **s-t** cut optimum | 738 directed capacitated networks | `augmentPathPreservesFlowFeasibility`, `augmentRaisesFlowValue`, `flowValueLeqCutCapacity`, `maxFlowMinCutEquality`, `edmondsKarpBFSRuntimePolynomial` |
+| MAX CUT nonnegative APX baseline | deterministic conditional expectation yields cut at least half total edge weight, hence at least half optimum | 759 weighted graphs | `conditionalExpectationMaxCutHalf`, `maxCutNonnegativeApproximationRatioTwo`, explicit bit-cost polynomial algorithm |
+| VERTEX COVER nonnegative APX baseline | endpoints of a maximal matching cover every edge and have cardinality `2*matchingSize ≤ 2*OPT` | 1,098 simple graphs | `maximalMatchingEndpointsCover`, `maximalMatchingLowerBoundOptimalCover`, `vertexCoverTwoApproximation` |
+| MINIMUM k-CUT / min-s-t relation | canonical unlabelled `k`-partitions; global 2-cut = minimum over all distinct terminal-pair s-t mincuts; min-k objective nondecreasing in k for finite nonnegative graphs | 74 finite undirected graphs | `globalTwoCutEqualsMinOverST`, `minKCutMonotone`, fixed-k vs variable-k resource bounds |
+
+**Historical boundaries:** Ford–Fulkerson is the general residual augmenting-path method, not the Bellman–Ford shortest-path algorithm. Edmonds–Karp adds BFS selection, yielding polynomial `O(VE²)` (source complexity still to be proved in Agda). Min s-t cut is a **minimum** nonnegative-capacity objective, not Karp's **maximum** signed-weight threshold objective. Constant-factor APX algorithms are not the OpenAI `OAI.OptimalMaxCut.main` optimal-inapproximability theorem and do not supply its Lean/Agda same-object port. Minimum k-cut for variable k has a different complexity contract than fixed-k.
+
+With the original 55,824 Karp-edge finite checks plus 2,669 additional flow/mincut/APX test instances, the independently executed bounded controls now cover **58,493 edge/consumer cases**. The source-committed runner `scripts/run_karp21_reduction_regressions.py` enumerates all four scripts; no exact GitHub checkout execution or pinned Agda kernel acceptance is claimed for the new source.
 
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
