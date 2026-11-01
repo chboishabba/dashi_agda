@@ -892,3 +892,26 @@ The literal native SU2 n=3 bond field <-> dependent positive-edge graph map now 
 - **R333-H3/P3**: selected R281 physical decay spectrum equals the H2 OS reconstructed Hamiltonian, OS positivity/reflection, mass-gap lower bound independent of volume/lattice spacing, and infinite-volume/UV nontriviality. Claiming these from symmetry would be a Clay problem breakthrough not proved by the code.
 
 **No Clay promotion.** Universal 16ordered↔6 constant relation still not kernel proved but **not needed for the now source-backed six-plane C3 route**.
+
+
+### 2026-11-01 six-plane / 16-ordered physical Wilson normalization
+
+`YMClayNativeSixPlaneOrderedIdentityExact` now source-writes a universal
+same-original-n=3-carrier proof that `orderedTrace16 = 2*sixPositiveTrace+4`
+at **every** side-four site: four diagonal `+a,+a,-a,-a` loops are
+source-native prefix/reverse-opposite identities, six negative orientations
+are the already-proved native inverse-path traces. Consequently the correct
+physical Wilson action deficits satisfy
+`orderedDeficit16 = 2*sixPositiveDeficit`. `Six.sixPlanePhysicalTraceAction`
+is retained for the original six trace, while R443 source action is now
+`SixOrdered.sixPhysicalDeficitAction = Σ_6(1−ReTr)`, with a direct finite C3
+proof, leaving beta and original CMP119 effective Gibbs counterterms explicitly
+unpaid. Independent exact arithmetic 4096 checks passes for the selected
+fixture; kernel unverified.
+
+Re-ranked residual: **Agda exact-head**, **actual physical R443 product/constrained
+compact Haar and exact CMP119 finite Wilson Gibbs density with UV-varying source
+family**, **R445 bounded tail/uniform volume tightness and physical continuum
+expectations**, **R320 physical CMP116 marked-J source derivative decay**, and
+**R333 same OS H2/H3 Hamiltonian, nontriviality and uniform physical gap**.
+No other finite plane-counting or new C3/369 formalism is the mass-gap max-cut.
