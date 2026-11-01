@@ -2,7 +2,7 @@
 """Fail-closed executable regression entrypoint for Karp's 21-problem programme.
 
 Runs historical E01-E19 gadget fixtures (including E09/E11/E13/E16) and
-the signed E20 Partition -> Max-Cut fixture. This is finite executable
+the signed E20 Partition -> Max-Cut fixture, exact signed spin/Laplacian\nquadratic and global label-flip controls, and the historical flow/APX lane. This is finite executable
 regression only, never an Agda kernel or polynomial machine-time proof.
 """
 from pathlib import Path
@@ -13,6 +13,7 @@ SCRIPTS = (
     "check_karp_historical_reductions.py",
     "check_karp_remaining_four_gadgets.py",
     "check_karp_partition_maxcut.py",
+    "check_karp_signed_laplacian.py",
     "check_karp_flow_cut_apx.py",
 )
 
