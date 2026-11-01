@@ -168,7 +168,7 @@ This is no longer a merely assumed objective identity. Remaining E20 mathematica
 - `signedTotalDecomposes`: every signed weighted partition equals the sum of its two sides.
 - `completeGraphCutEqualsPartitionProduct`: recursively enumerated complete-graph *crossing edges* sum to `leftTotal*rightTotal`.
 - `completeGraphCutQuadratic`: compose with previously existing DASHI integer RingZ solver, yielding `4*actualCut = total²-(left-right)²`.
-- The source is part of the focused Agda root. Independent SymPy symbolic expansion passed; no pinned Agda check yet. **E20 residuals:** (1) nonnegative square ordering and discrete ceiling comparison; (2) ceiling/positive threshold including total=0; (3) encoded weighted graph exactly representing the triangular enumeration; (4) bit-cost polynomial proof; (5) actual `PR.PolynomialManyOneReduction`.
+- The source is part of the focused Agda root. Independent SymPy symbolic expansion passed; no pinned Agda check yet. **Unscaled historical E20 alternative residuals:** (1) discrete ceiling comparison (the scaled reduction avoids it); (2) ceiling/positive threshold including total=0; (3) encoded weighted graph exactly representing the triangular enumeration; (4) bit-cost polynomial proof; (5) actual `PR.PolynomialManyOneReduction`.
 
 **E03 Cook-origin four-to-three exact Boolean gadget**, `Karp21SATToThreeSATGadgetExact.agda`:
 - `fourToThreeWitness`: explicit fresh assignment `x=(c∨d)` takes an accepted `a∨b∨c∨d` to both true `a∨b∨x` and `¬x∨c∨d`.
@@ -186,13 +186,30 @@ This is no longer a merely assumed objective identity. Remaining E20 mathematica
 
 The E20 script now measures a conservative **bit count** of each vertex identifier, sign/magnitude edge weight and positive threshold, rather than just counting arithmetic operations or edges. It checks the loose polynomial envelope `outputBits ≤ 32*(sourceBits+1)^3` on 54 zero/positive/signed instances with input magnitudes up to `2^1024`; an independently executed matching local Python check passed all 54 cases. The formal residual remains `partitionSignedWeightBitCost`: a theorem bounding **all** signed integer inputs under a precise canonical serializer and fixed machine-clock model. Sampled bit lengths do **not** close that universal obligation.
 
+## 2026-11-01 advanced E20 closure: exact signed decision iff **without ceiling**
+
+The new source-written modules are imported from the focused `Karp21Everything.agda` root:
+
+- `Karp21ScaledThresholdExact.agda`: `squareSubtractBound`, `scaledScoreBelowSquare`, `scaledThresholdIffBalanced`, `nonzeroIntegerSquare`, `nonzeroTotalSquareIsPositiveThreshold`. The scaled graph has signed weights `4*c_i*c_j` and integer threshold `T²`, where `T=Σc_i`; for nonzero T the threshold is certified as nonnegative and nonzero, hence positive. The score is at most `T²` by the previously proved exact signed quadratic identity and pre-existing integer square nonnegativity, so threshold acceptance iff balance.
+- `Karp21PartitionScaledInstanceExact.agda`: `Selection` is one Boolean label for **each input list element** (duplicates preserved); `taggedTotalMatchesSource` transports the sum independently of labels; `signedPartitionScaledCutInstanceIff` proves the existential source/target YES equivalence; `zeroTotalPartitionYES` constructs the all-false choice witness for every zero-total input. `totalPartitionToPositiveCut` returns a genuine proof-tagged positive-threshold `PositiveCutTarget` in **both** cases: the zero-total fixed two-vertex unit-edge YES graph, or the scaled signed complete graph with T≠0 proof. `positiveTargetThresholdCertified` and `totalPartitionPositiveCutIff` prove its exact threshold validity and universal total reduction YES-iff, respectively.
+- `Karp21HeterogeneousEncodingExact.agda`: `compileHeterogeneousKarpReduction` proves the **general** faithful source parser / source iff / heterogeneous instance transform / target iff / encoded map → `PR.PolynomialManyOneReduction` result, explicitly demanding a *real* `PR.polynomialTimeMap` witness. Every source word, including malformed encodings, is handled by the source-faithfulness premise. There is **no** invented polynomial time assertion.
+
+**Decisive result:** the E20 arithmetic, integer order/threshold acceptance, zero-total guard, positive threshold, and existential signed-input **semantic** equivalence are now present as source-written Agda theorems. The earlier `partitionCeilThresholdIffEquality` obligation becomes **optional** for the historical literal unscaled formula: E20's new integer-scaled reduction uses no ceiling. Attribution: Karp (1972) originated PARTITION→MAX CUT, whereas DASHI's scaled threshold `w(i,j)=4c_ic_j, W=T²` is an equivalent reconstructed convenience formulation.
+
+**E20 exact residuals before `PR.PolynomialManyOneReduction` and NP-completeness can be claimed:**
+1. `scaledCompleteGraphEdgeListFaithful`: materialize actual labelled finite undirected simple-graph edge lists/vertex ids from the input list, and prove their cut objective equals the current list-based triangular complete-graph sum (without reading any selection witness while constructing the graph).
+2. `scaledGraphCanonicalWordEncoding` / `scaledGraphMalformedInputPolicy`: canonical signed integer and graph byte serialization, faithful source and target parsers for all words (including bad encodings), and exact roundtrip.
+3. `scaledSignedWeightBitBound` / `scaledPartitionGraphMachineClock`: binary output length and real time for all input bitstrings in the repository's explicit machine cost model; the 23,436-instance Python oracle and 54 large integer bit-size samples are only secondary evidence.
+4. `e20EncodedPolynomialReduction`: instantiate `compileHeterogeneousKarpReduction` with the actual graph target, source language, semantic iff, and paid machine cost. `weightedMaxCutInNP` still requires concrete bounded cut labels, exact signed sum bit-cost and verifier clock.
+5. Run the pinned Agda type-check root and audit actual compiled imports for holes/axioms. **Source-written ≠ kernel-verified.**
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
 | --- | --- | --- |
 | K00a | `parseEncodeRoundTrip` | parsed canonical finite instances recover same instance; `decode(encode(x)) = x`, malformed cases deterministic |
 | K00b | `encodingLengthPolynomial` | bits of every encoded finite graph, set-family, schedule, integer matrix/weights are polynomial in explicitly measured source bit-length |
-| K00c | `heterogeneousReductionToWord` | embed `A:InstanceA→Set`, `B:InstanceB→Set` into common `Word` without changing truth; no oracle or unproved cost assumption |
+| K00c | `heterogeneousReductionToWord` (reuses `compileHeterogeneousKarpReduction`, source-written in `Karp21HeterogeneousEncodingExact.agda`) | embed `A:InstanceA→Set`, `B:InstanceB→Set` into common `Word` without changing truth; no oracle or unproved cost assumption |
 | K00d | `polynomialMapComposeConcrete` | prove actual clock polynomial composition/bit-comparison cost, instantiate `PR.PolynomialMapComposition` |
 | K00e | `verifierPolynomialWitnessLength` | witness has finite encoded length polynomial in input size; verifier computes in bounded time, *including* arithmetic bit complexity |
 | K00f | `reductionMalformedInputIff` | every source input, including bad encodings, reduces to a correctly classified target input |
