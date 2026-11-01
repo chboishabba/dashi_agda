@@ -915,3 +915,6 @@ family**, **R445 bounded tail/uniform volume tightness and physical continuum
 expectations**, **R320 physical CMP116 marked-J source derivative decay**, and
 **R333 same OS H2/H3 Hamiltonian, nontriviality and uniform physical gap**.
 No other finite plane-counting or new C3/369 formalism is the mass-gap max-cut.
+
+
+New exact native same-object owner `nativeR443SixDeficitR445Observable` proves the six-source Gibbs Wilson deficit is a R445 rational-observable *function* on the original `RationalSU2BondData 3`. It is not yet proved a physically bounded R445 input, and even such boundedness would not by itself imply convergent selected Gibbs expectations or a uniform physical continuum limit. **Next exact numerical lemma:** finite six-plane deficit majorant (at fixed side-four, ≤3072) from existing single plaquette trace bound and additive finite fold; then connect selected real/cutoff/volume weight and measure tail separately. Existing `NativeP2.nativeWilsonP2Limits` already handles products of individual loops under its actual measure hypotheses.
