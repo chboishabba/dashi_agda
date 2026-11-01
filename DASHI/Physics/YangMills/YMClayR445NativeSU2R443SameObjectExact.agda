@@ -52,12 +52,12 @@ nativeR443SixPlaneR445Observable = R443.nativeSixTrace
 -- exactly the same physical configuration type as native R443, no cast.
 -- The selected physical measure and its actual tails stay SOURCE inputs.
 nativeR443R445FiniteCylinderLimits :
-  ∀ {Measure : Set}
+  ∀ {M : Set}
     {operationsInputs :
-      Operations.NativeWilsonOSOperationsInputs Measure Weld.three}
+      Operations.NativeWilsonOSOperationsInputs M Weld.three}
     (measureInputs :
       Measure.NativeWilsonPreferredPhysicalMeasureInputs
-        Measure Weld.three operationsInputs)
+        M Weld.three operationsInputs)
     (translateLoop :
       Wilson.RationalWilsonPath Weld.three → Nat →
       Wilson.RationalWilsonPath Weld.three)
