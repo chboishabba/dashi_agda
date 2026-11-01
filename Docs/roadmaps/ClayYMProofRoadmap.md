@@ -860,3 +860,12 @@ The *general Agda* six-vs-ordered identity (reverse orientation + diagonal +
 2× multiplicity), full source action couplings, actual compact Haar, same
 R443/R445 selected finite measure, and continuum R320/R333 remain genuine
 open physical-source obligations. This six-plane file is source-written only.
+
+
+The native norm-one rational SU2 four-factor reverse Wilson trace is now
+source-written exactly in `YMClayNativeRationalSU2FourFactorReversalExact`,
+reusing `Q.inverseProduct`, `Q.inverseInverse` on the original group
+and `realPart(inv q)=realPart q`. The remaining six-plane cut narrows to
+the **physical oriented contour evaluation/reindexing** and universal
+16ordered↔6positive multiplicity and coupling norm; generic 4factor
+group reversal itself no longer needs an arbitrary external assumption.
