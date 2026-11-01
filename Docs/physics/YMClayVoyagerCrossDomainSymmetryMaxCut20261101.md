@@ -152,3 +152,12 @@ Exact surviving R443 measure max-cut (now narrower):
 - **R443-Haar**: actual compact SU2/SU(N) normalized product/constrained Haar measure is invariant under the literal finite C3 action on every selected bond; rational unit quaternion field assignments alone do not construct Haar probability.
 - **R443-W**: identify that action with the original selected CMP119/R443 Gibbs density and each true R445 cutoff family, including interactions/renormalized counterterms. Existing source chain R443→R431→finite normalized→OS3/continuum must then be applied with its actual inputs.
 - **R445/R320/R333**: physical uniform tails/convergence, OS reflection positivity/time continuity, same-H_OS and strictly positive uniform infinite-volume spectral mass gap remain distinct, open analytic source obligations.
+
+
+## 11. Original six physical planes are now a same-object term, not a diagram
+
+The existing `BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact` defines `PositivePlane4` with six nonduplicated source coordinate planes. `BalabanClayGate4PeriodicBondPathBianchiExact` already defines their native signed boundary contour, and `BalabanClayGate4RationalSU2BondCarrierExact` already defines their native normalized SU2 rational quaternion plaquette holonomy.
+
+New `YMClayNativeRationalSU2SixPlaneSameSourceExact.agda` **reuses exactly those original source types**, proves its original six-plane `Bond.plaquetteBoundaryDirections` is equal to the new ordered `+a,+b,-a,-b` path, then identifies the exact native plaquette group holonomy and normalized real Wilson trace with the six-plane subfamily of our full signed-word C3 term. `sixPlanePhysicalTraceAction` is the exact native six-plane real-part Wilson sum (not an abstract new carrier); a list-congruence proof equates it with the ordered-word restricted six-plane family.
+
+Independent exact Python evaluation on the same nontrivial 256-site rational-quaternion fixture gives six-plane trace `-1108/25` before and after C3; all 4096 ordered single-site axis-reversal pairs agree. The 16-ordered sum is `2*(-1108/25)+4*256=23384/25`, as expected from double orientation plus four diagonal identity terms per site. The missing **Agda** theorem is precisely that 16-to-six rational Wilson expression identity for every native field, with orientation swapping and canonical coupling. Do not label the identity proved until a source-native Agda witness is supplied and checked.
