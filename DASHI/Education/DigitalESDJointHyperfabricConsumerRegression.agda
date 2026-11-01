@@ -10,6 +10,8 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Education.DigitalESDJointHyperfabricConsumerExact as Joint
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as Sources
 import DASHI.Education.DigitalESDEvidenceBraidTensionExact as Braid
+import DASHI.Education.DigitalESDPrincipleSurvivalAuditExact as Survival
+import DASHI.Education.DigitalESDTransferablePedagogicalPrinciplesExact as Principles
 
 -- Concrete 1 November source case is not a generic evidence source:
 -- its original locator, role and braid stay welded through the new view.
@@ -72,3 +74,26 @@ noCommunityAuthorityFromEcologyDonor :
   Joint.LESDonorConveysCommunityOrCulturalAuthority → ⊥
 noCommunityAuthorityFromEcologyDonor =
   Joint.noCulturalAuthorityFromStructuralDonor
+
+-- The same candidate principle label legitimately answers different
+-- research consumers; no global verdict follows from the label alone.
+sameAgencyPrincipleAcrossConsumers :
+  Joint.agencyPrincipleProjection Joint.learnerVoiceInDigitalCourse ≡
+  Joint.agencyPrincipleProjection Joint.communityDecisionRightsInEfS
+sameAgencyPrincipleAcrossConsumers = refl
+
+localVoiceCandidateRetained :
+  Joint.candidateVerdictForConsumer Joint.learnerVoiceInDigitalCourse ≡
+  Survival.provisionallyRetain
+localVoiceCandidateRetained = refl
+
+communityAuthorityCandidateNeedsSplit :
+  Joint.candidateVerdictForConsumer Joint.communityDecisionRightsInEfS ≡
+  Survival.provisionalSplitCandidate
+communityAuthorityCandidateNeedsSplit = refl
+
+labelCannotPayEveryConsumer :
+  INF.FactorsThrough Joint.agencyPrincipleProjection
+    Joint.candidateVerdictForConsumer → ⊥
+labelCannotPayEveryConsumer =
+  Joint.noUniversalCandidateVerdictFromPrincipleLabel
