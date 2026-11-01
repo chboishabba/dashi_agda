@@ -110,7 +110,7 @@ nativeSixPlaneR443 {measure = measure} inputs = record
       λ c3 observable configuration → refl
   ; R443.WilsonGibbsHaarAction.finiteAction =
       λ configuration →
-        rationalIntoReal inputs (Six.sixPlanePhysicalTraceAction configuration)
+        rationalIntoReal inputs (nativeSixTrace configuration)
   ; R443.WilsonGibbsHaarAction.gibbsWeight =
       gibbsWeight inputs
   ; R443.WilsonGibbsHaarAction.densityIsGibbsWeight =
