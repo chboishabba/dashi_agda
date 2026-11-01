@@ -19,6 +19,7 @@ module DASHI.Analysis.BishopMachinGeometricBishopRateExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Integer.Base using (+_)
 import Data.Nat.Properties as NatP
 open import Data.Rational.Unnormalised as Q using (_/_; _≤_; _+_; _*_; *≡*)
@@ -324,3 +325,114 @@ machinBishopFourOver25RationalStage n =
       (RP.≃-symm (Rational.qPowEmbeds (+ 1 / 25) n))
       RP.≃-refl)
     (machinBishopFourOver25Pow n)
+
+------------------------------------------------------------------------
+-- K04b TWO-INDEX REAL CAUCHY MODULUS.
+--
+-- The actual Bishop order rate is antitone because 0<=1/25<=1.
+-- This obtains the full claimed |q_j-q_k|<=8/25^n for j,k>=n,
+-- rather than an unquantified or only finite-sample limit.
+------------------------------------------------------------------------
+
+oneOver25BelowOne : R._≤_ oneOver25 R.1ℝ
+oneOver25BelowOne =
+  RP.p≤q⇒p⋆≤q⋆ (+ 1 / 25) Q.1ℚᵘ
+    (toWitness {a? = QP._≤?_ (+ 1 / 25) Q.1ℚᵘ} _)
+
+rateSuccessorBelow : (n : Nat) →
+  R._≤_
+    (R.pow oneOver25 (suc n))
+    (R.pow oneOver25 n)
+rateSuccessorBelow n =
+  RP.≤-respʳ-≃
+    (RP.*-identityʳ (R.pow oneOver25 n))
+    (RP.*-monoˡ-≤-nonNeg
+      oneOver25BelowOne
+      (oneOver25PowerNonnegative n))
+
+rateBelowOne : (n : Nat) →
+  R._≤_ (R.pow oneOver25 n) R.1ℝ
+rateBelowOne zero = RP.≤-refl
+rateBelowOne (suc n) =
+  RP.≤-trans (rateSuccessorBelow n) (rateBelowOne n)
+
+rateAntitone :
+  ∀ {n m} → n ≤ m →
+  R._≤_ (R.pow oneOver25 m) (R.pow oneOver25 n)
+rateAntitone {zero} {m} z≤n = rateBelowOne m
+rateAntitone {suc n} {zero} ()
+rateAntitone {suc n} {suc m} (s≤s proof) =
+  RP.*-monoʳ-≤-nonNeg
+    (rateAntitone proof)
+    oneOver25NonNegative
+
+machinTwoIndexBishopError :
+  (j k : Nat) →
+  R._≤_
+    (R.∣_∣
+      (R._-_
+        (R._⋆ (Rational.qMachinStage j))
+        (R._⋆ (Rational.qMachinStage k))))
+    (R._+_
+      (R._*_ (R.pow oneOver25 j) Combined.four)
+      (R._*_ (R.pow oneOver25 k) Combined.four))
+machinTwoIndexBishopError j k =
+  let
+    a = R._⋆ (Rational.qMachinStage j)
+    c = R._⋆ (Rational.qMachinStage k)
+    pi = M.bishopMachinPi
+    split :
+      R._≃_
+        (R._-_ a c)
+        (R._+_ (R._-_ a pi) (R._-_ pi c))
+    split =
+      let open RP.ℝ-Solver
+      in solve 3
+        (λ x p y → (x ⊖ y) ⊜ ((x ⊖ p) ⊕ (p ⊖ y)))
+        RP.≃-refl a pi c
+    first :
+      R._≤_
+        (R.∣_∣ (R._-_ a pi))
+        (R._*_ (R.pow oneOver25 j) Combined.four)
+    first =
+      RP.≤-respˡ-≃
+        (RP.≃-symm (RP.∣x-y∣≃∣y-x∣ a pi))
+        (machinBishopFourOver25Pow j)
+  in
+  RP.≤-respˡ-≃
+    (RP.≃-symm (RP.∣-∣-cong split))
+    (RP.≤-trans
+      (RP.∣x+y∣≤∣x∣+∣y∣
+        (R._-_ a pi)
+        (R._-_ pi c))
+      (RP.+-mono-≤ first (machinBishopFourOver25Pow k)))
+
+-- Exact indexed finite-stage Bishop Cauchy envelope. The Nat index
+-- bounds are genuine arguments; no implicit "eventually" parameter
+-- or numerical stage cutoff is guessed.
+machinBishopEightOver25PowCauchy :
+  (n j k : Nat) → n ≤ j → n ≤ k →
+  R._≤_
+    (R.∣_∣
+      (R._-_
+        (R._⋆ (Rational.qMachinStage j))
+        (R._⋆ (Rational.qMachinStage k))))
+    (R._*_
+      (R._⋆ (+ 8 / 1))
+      (R.pow oneOver25 n))
+machinBishopEightOver25PowCauchy n j k n≤j n≤k =
+  RP.≤-trans
+    (machinTwoIndexBishopError j k)
+    (RP.≤-respʳ-≃
+      (let open RP.ℝ-Solver
+       in solve 1
+         (λ r →
+           (r ⊗ Κ (+ 4 / 1)) ⊕ (r ⊗ Κ (+ 4 / 1))
+           ⊜ Κ (+ 8 / 1) ⊗ r)
+         RP.≃-refl
+         (R.pow oneOver25 n))
+      (RP.+-mono-≤
+        (RP.*-monoʳ-≤-nonNeg
+          (rateAntitone n≤j) W.fourNN)
+        (RP.*-monoʳ-≤-nonNeg
+          (rateAntitone n≤k) W.fourNN)))
