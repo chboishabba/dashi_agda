@@ -58,9 +58,9 @@ New executable checked against **independent brute-force instance predicates**:
 | E18 signed KNAPSACK → JOB SEQUENCING | sign-safe digit-pair normalization → positive times/penalties → deadlines | 120 |
 | E19 signed KNAPSACK → PARTITION | sign-safe digit-pair normalization before Karp's positive subset-sum gadget | 780 |
 
-**Total: 15 of 20 direct edges with executable transformations and bounded independent truth-equivalence checks; 5 still without such an implementation: E09, E11, E13, E16, E20.** However E20 has a separate `scripts/check_karp_partition_maxcut.py` signed-domain finite construction/check (23,436 independently tested instances), so **16/20** have some executed finite checks when that stand-alone edge is counted. Do **not** translate 15/20 or 16/20 into 15/20 kernel-verified reductions: the latter remains **0/20**. E20 is intentionally not duplicated into the consolidated Python file.
+**Earlier intermediate cut: 15 of 20 direct edges in the first consolidated executable, with E09, E11, E13, E16 in the second executable and E20 in a separate `scripts/check_karp_partition_maxcut.py` signed-domain finite construction/check (23,436 independently tested instances), so **20/20** now have independently executed bounded finite checks across the three scripts. Do **not** translate 15/20 or 16/20 into 15/20 kernel-verified reductions: the latter remains **0/20**. E20 is intentionally not duplicated into the consolidated Python file.
 
-**Exact missing direct edge implementations after these executable checks:** E09 NODE COVER→DIRECTED HAMILTONIAN, E11 3-SAT→CHROMATIC NUMBER, E13 CHROMATIC NUMBER→EXACT COVER, E16 EXACT COVER→3-DIMENSIONAL MATCHING. The universal mathematical correctness/cost/NP-membership obligations remain for all E01–E20.
+**All 20 direct edge executable constructors are now present in the three scripts**, though E16 requires its Karp source preprocessing assumption and E09 needs full malformed/zero-budget handling. The universal mathematical correctness/cost/NP-membership obligations remain for all E01–E20.
 
 ### Newly audited Agda semantic bridges
 
@@ -88,11 +88,27 @@ New executable checked against **independent brute-force instance predicates**:
 
 - Historical problem definitions indexed: 21/21 (source-written Agda DAG, not kernel verified).
 - Direct reduction graph entries indexed: 20/20 (source-written Agda DAG, not kernel verified).
-- Finite executable edge implementations tested independently: 15/20 in consolidated script; 16/20 counting separate E20 script.
+- Finite executable edge implementations tested independently: 20/20 across three scripts, all still awaiting Agda end-to-end kernel proof.
 - Agda kernel-verified **concrete** direct polynomial reductions on this PR: 0/20.
 - Agda kernel-verified **end-to-end** NP-completeness results on this PR: 0/21.
 - OpenAI approximation/scheduling donor same-object kernel ports into Agda: 0.
 - Source authorship, tests and conditional interfaces are tracked separately.
+
+
+### Final 4-edge finite construction expansion (separate executable)
+
+`scripts/check_karp_remaining_four_gadgets.py` now implements and tests the remaining historical edges:
+
+| Edge | Exact finite construction | Passing bounded cases | Universal missing lemma |
+| --- | --- | ---: | --- |
+| E09 | Karp's node-cover → directed Hamiltonian anchor/incident-edge gadget; independent Held–Karp subset DP | 15 | `vertexCoverDirectedHamiltonianIff`, `vertexCoverDirectedHamiltonianCost`, incidence enumeration/isolated-node guards |
+| E11 | 3-SAT → (m+1)-colour graph, four-variable padding, clause-literal adjacency; independent finite graph-colouring backtracker | 7,555 | `threeSATColouringIff`, `threeSATColouringCost`, tautology normalization and padded-anchor palette argument |
+| E13 | Colouring → Exact Cover with vertex, edge, incident-colour slot tokens and indexed sets | 36 | `colouringExactCoverIff`, `colouringExactCoverCost`, small-palette fixed-NO guards |
+| E16 | Exact Cover → 3D Matching incidence-cycle/permutation gadget `(alpha(i),sigma,sigma)` / `(beta,sigma,pi(sigma))`; independent perfect matching DFS | 21 | `exactCoverThreeDimensionalMatchingIff`, `exactCoverThreeDimensionalMatchingCost`, general singleton/empty-set preprocessing |
+ 
+E11's construction checks the literal-source SAT truth after removing tautological clauses and duplicate literals, and uses `m≥4` so every ≤3-literal clause omits a variable to rule out spurious extra-colour assignments. E16 **only** constructs the Karp gadget for nonempty sets with ≥2 elements, exactly matching the quoted "without loss of generality" source precondition; preprocessing the general exact-cover domain remains an explicit lemma. E09 has source-domain guards (nonempty edge incidence, positive budget), with trivial positive-budget YES cases handled separately. Neither the bounded DP/DFS nor the graph-colouring backtracker is claimed polynomial.
+
+**Revised finite implementation coverage: 20/20 historical direct reductions have a source-written executable candidate and passing bounded equivalence controls, spread across three scripts** (`check_karp_historical_reductions.py`, `check_karp_remaining_four_gadgets.py`, `check_karp_partition_maxcut.py`). This does **not** prove any complete reduction theorem in Agda. All 20 remain open for general correctness proofs, binary encoding, constructive witness sizes, and actual polynomial machine costs. Completion count for 21 NP-completeness theorems remains 0/21.
 
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
