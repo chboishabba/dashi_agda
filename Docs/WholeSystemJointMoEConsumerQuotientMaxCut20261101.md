@@ -174,3 +174,37 @@ Original Leech-LILA architecture by Anatolii Kornienko. DASHI original
 geometry, j369, consumer-fibre, temporal codec and Sophontic/intervention
 proof ownership follows existing source attribution. The phase nine
 C3×C3 is NOT cyclic C9; no ESD edits or Monster 3B ownership reassignment.
+
+
+## 7. Dataset/provenance cut resolved at source level (1 November)
+
+The missing `.npy` arrays are generated artefacts, **not** missing
+mathematical datasets. LeechTransformer has `vocab/e8_morpheme_.model`
+(the saved original SentencePiece model),
+`training/train.py` / `data_utils/streaming_dataset.py`
+(FineWeb-Edu train skip first 5000, validation first 5000), and an
+earlier `notebooks/lila_leechtransformer-new.py`
+(`roneneldan/TinyStories`). Its published TinyStories corpus has
+independent train/validation splits. All generated token ID arrays
+must use the *actual* checkpoint tokenizer and retain disjoint source
+documents, source revision, independent heldout split and data hashes.
+
+LeechTransformer PR #4 now adds
+`scripts/prepare_real_leech_tokens.py`,
+`scripts/run_real_moe_jq1_experiment.py` and
+`tests/test_prepare_real_leech_tokens.py`.
+The one-command pipeline streams real corpus samples, fits both
+`c2_invariant` and `punctured9_wave` history-MoE students from the
+same frozen dense teacher, separately evaluates full-model heldout CE
+and then records actual selected history reuse/codec Pareto.
+This resolves the **inputs/experimental procedure** max-cut but NOT
+the empirical quality/compression result: no local training process
+was executed by the GitHub connector. TinyStories text is originally
+AI-generated short stories: real corpus rather than random token IDs.
+
+Formal promotion gate: provenance-compatible source → verified tokenizer
+identity → disjoint training/heldout → trained non-synthetic student →
+causal route/history replay → exact JQ1 reopening → consumer quality +
+bidirectional bitrate and latency comparison. Do not substitute the
+prior two-sequence synthetic smoke score or 82-pass earlier branch
+verification for an actual learned-student result.
