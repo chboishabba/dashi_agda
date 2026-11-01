@@ -480,6 +480,26 @@ epsteinThiel2014Correspondence = sourceReceipt
   "Source-access mirror of original DOJ Bates-identified email chain: Epstein offered introduction to William Burns and invitation to island, with Thiel's NYC timing response."
   "An introduction offer or island invitation is not verified meeting with Burns, travel to island, endorsement or wrongdoing."
 
+coreweaveOriginalRating2026 : SourceReceipt
+coreweaveOriginalRating2026 = sourceReceipt
+  "S&P Global Ratings"
+  "CoreWeave Outlook Revised To Positive; B+ Issuer Rating Affirmed; Notes Rated B"
+  "2026-04-09"
+  "https://www.spglobal.com/ratings/en/regulatory/article/-/view/type/HTML/id/3543327"
+  firstPartyIssuer
+  "Rating agency affirms CoreWeave B+ speculative-grade issuer, assigns B unsecured-note rating with specific recovery rating 5 (10-30pct estimated recovery)."
+  "Issuer rating, specific unsecured bond rating, secured GPU-backed loans and market CDS are distinct instruments. Recovery for rated notes cannot be silently used as CDS recovery assumption for all liabilities."
+
+coreweaveFINRATradeSnapshot : SourceReceipt
+coreweaveFINRATradeSnapshot = sourceReceipt
+  "FINRA TRACE as collected by Kilambi Research"
+  "CoreWeave fixed income issuer snapshot, bond trade date 2026-10-30"
+  "2026-10-31"
+  "https://news.kilambi.com/leverage/issuer/coreweave/"
+  secondaryContext
+  "Secondary retrieval of FINRA trade prints: multiple CoreWeave notes traded below 90 pct of par on Oct30; some near 80 pct; current bond-level issue credit data shown."
+  "Illiquid trade prints, holder fund marks and modelled prices are different observations; one last trade does not guarantee executable size or company-wide marginal funding cost."
+
 -- An original primary statement is a receipt for what the named original
 -- says, not a receipt for the correctness of every empirical prediction.
 record AttributionBoundary : Set where
