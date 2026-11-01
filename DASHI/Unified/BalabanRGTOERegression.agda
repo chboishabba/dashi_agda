@@ -892,3 +892,17 @@ open OrderedC3 public using
   (orientedOrderedPlaquetteWord; c3PlaquetteWord
   ; orderedWilsonPlaquetteC3; sumIndexC3
   ; sumSitesSpatialC3; orderedWilsonActionSpatialC3Invariant)
+
+
+------------------------------------------------------------------------
+-- Source six positive coordinate planes (not sixteen ordered pairs):
+-- native SU2 plaquette holonomy is exactly the older signed-word Wilson.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2SixPlaneSameSourceExact as SixSource
+
+open SixSource public using
+  (nativeSixPlaneBoundaryIsOrdered
+  ; nativeSixPlaneHolonomyIsOrdered
+  ; nativeSixPlaneTraceIsOrdered
+  ; sixPlanePhysicalTraceAction
+  ; nativeSixPlaneTraceSumEqualsOrderedSixSubfamily)
