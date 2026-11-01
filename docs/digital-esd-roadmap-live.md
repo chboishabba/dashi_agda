@@ -1422,7 +1422,7 @@ These operations must use exact source, revision, context, study identity and re
 **P0 — proposal / group alignment:**
 
 - Retain the reciprocal research question and integrative-review paper type. Present DASHI as research infrastructure, not the object of the Sustainability paper.
-- Finalise one abstract within the coauthors' current **200-word working limit** (verify journal submission requirements separately), title, source/method synopsis and coauthor decision record. The internal **30 October 2026** freeze target has passed; group sign-off was **not verified** in this repository review. The **6 November 2026** editorial suitability enquiry is an optional internal target, not a journal mandate.
+- Finalise a canonical **approximately 200-word maximum one-paragraph manuscript abstract** under the Sustainability author instructions. The Special Issue separately invites an optional **about 250-word planned-paper abstract** for editorial suitability feedback; the shorter canonical abstract can serve both purposes., title, source/method synopsis and coauthor decision record. The internal **30 October 2026** freeze target has passed; group sign-off was **not verified** in this repository review. The **6 November 2026** editorial suitability enquiry is an optional internal target, not a journal mandate.
 - Retain the Special Issue alignment questions: problem significance; transformation beyond uptake; independent digital/EfS theoretical integration; whether/how/conditions; reciprocal sustainability impacts; inclusion, rights and agency; methodological credibility; and transferable retrospective/prospective contribution.
 - Treat those editorial criteria as separate from three non-compensatory DASHI gates: (A) query-relative representational sufficiency; (B) source/claim ceiling and audit admission; (C) performed research steps and human authority. Do not collapse the gates into an authoritative total score.
 
@@ -1489,7 +1489,7 @@ The previously supplied published digital-learning articles also retain exact co
 
 ### 31.3 Confidential drafts, group word limit, and scientific status
 
-A **privately supplied** working group proposal sets a **200-word maximum** for its abstract, includes the seven provisional principles and specifies both retrospective and prospective application. This is the group's working limit, not a verified MDPI journal rule. Earlier roadmap language of approximately 250 words is superseded for the next group draft.
+A **privately supplied** working group proposal sets a **200-word maximum** for its abstract, includes the seven provisional principles and specifies both retrospective and prospective application. This 200-word limit is also stated by the journal's Instructions for Authors for the **submitted manuscript**, not merely a working-group convention. The Special Issue separately permits an optional about 250-word planned-paper abstract for editorial assessment. A single approved approximately 200-word abstract is suitable for both.
 
 Other privately supplied unpublished manuscripts on student perspectives, online engagement fatigue, equity participation and Online Engagement Framework application are **version-specific candidate sources**. They must not be reproduced in this public roadmap, assumed to have final peer-reviewed status, assigned unverified DOIs, or counted automatically as independent evidence units. Reconcile versions, authors and published identity before further promotion.
 
@@ -1509,4 +1509,66 @@ The existing integrative conceptual review and external EfS comparison can alrea
 These are **candidate source-derived challenges and DASHI cross-source research questions**, not empirical outcomes attributed to the cited authors.
 
 **Next admissibility steps:** deduplicate by exact DOI and document identity (not title alone); check existing repo source ownership and local preflight; verify venue/year/version metadata; code independently grounded EfS source spans and context limits; apply existing screening and SourceAuditAdmission; then let admitted evidence support, narrow, split, merge, defeat or extend the seven principles. Keep Fleet/TOE outside the ESD plan and preserve external meta-introspector contributions as separately attributed reference material only.
+
+## 32. 2026-11-01 journal / Special Issue submission-rule reconciliation
+
+**Authority and source roles:** these are *publisher requirements and editorial scope statements*, not new scientific results, source-admission receipts or Agda theorems. Verified against supplied copies of (a) *Sustainability — Instructions for Authors* (45 pages), (b) *Digital Innovation for Transformative Education and Sustainable Development* Special Issue flyer (2 pages), and (c) *Special Issue Details and Invitation* (6 pages). The public corresponding sources are the [Sustainability author instructions](https://www.mdpi.com/journal/sustainability/instructions) and [Special Issue call](https://www.mdpi.com/journal/sustainability/special_issues/W6I7Z68592), checked 2026-11-01. Publisher rules can change; recheck prior to submission. This section supersedes the outdated 250-word-universal and "200 words is only internal" readings in earlier planning prose.
+
+### 32.1 Two distinct abstract uses; do not mix them
+
+| Deliverable | Publisher statement | ESD action |
+| --- | --- | --- |
+| **Final journal manuscript abstract** | About **200 words maximum**, **one paragraph**, structured in substance but without subheadings; present background, methods, findings, conclusions; no unreported or exaggerated results. *Instructions for Authors*, page 10, Abstract. | Freeze one <=200-word canonical group-approved abstract. Express the provisional framework and planned review as such until the admitted results exist. |
+| **Optional planned-paper editor enquiry** | The Special Issue invites a **title and short abstract (about 250 words)** for preliminary editorial suitability assessment. *Special Issue Details and Invitation*, page 5, Manuscript Submission Information. | A separate 250-word rewrite is **not required**: the canonical <=200-word abstract can be sent with the title. This is not manuscript submission or peer-review acceptance. |
+| **Manuscript deadline** | **30 August 2027**. *Special Issue flyer*, page 1; *Special Issue Details and Invitation*, page 1; live call. | Maintain the existing research/author decision schedule; do not infer that the optional 6 November 2026 enquiry is publisher-mandated. |
+
+The journal requests **three to ten** pertinent keywords and a concise, specific title. *Instructions*, page 10.
+
+### 32.2 Review genre and honest findings
+
+The Special Issue explicitly invites **empirical, conceptual, comparative, methodological, and review studies**. *Invitation*, page 3. The journal's **Review** category calls for comprehensive, critical and constructive treatment of prior literature and future research directions. **No new unpublished data** may be introduced as review results. *Instructions*, page 2, Types of Publications.
+
+Therefore retain the already specified **integrative conceptual review with transparent structured search**. Do not relabel it a systematic review or scoping review to obtain an editorial checkbox. The **PRISMA-ScR checklist/flow requirements apply to a paper submitted as a Scoping Review**. They do not, by themselves, convert our integrative review into a scoping review. Keep transparent screening/reporting nonetheless. Authors must choose a truthful article category at submission and reconcile any journal-specific display/section requirements.
+
+The pre-existing seven pedagogical principles, independent EfS comparisons and retrospective/prospective worked applications remain **candidate method/synthesis products** until appropriate source review and scholarly adjudication. Do not report unperformed interventions, proposed outcomes or the review's incomplete corpus as published empirical results.
+
+### 32.3 Publisher submission-compliance gate (independent of ESD rubric and DASHI evidence checks)
+
+This administrative gate adds **no numerical score** and does not compensate for a failure of representation, evidence admission, or review execution.
+
+| Requirement | Source | Required pre-submission check |
+| --- | --- | --- |
+| **Authorship and approval** | *Instructions*, pages 1–2, 5, 12 | Confirm every eligible coauthor, exact role, affiliation and approval of the submitted version. Record individual CRediT contributions. GenAI tools must **not** be listed as authors. |
+| **Cover letter** | *Instructions*, pages 4–5 | Explain originality, significance and fit. Include publisher-required assertions that the manuscript is not being considered or published elsewhere and all authors approve submission. Confirm these statements are true before signing; disclose relevant prior MDPI submissions. |
+| **Abstract/keywords and review sections** | *Instructions*, pages 2, 6, 10 | Use <=200-word one-paragraph abstract and 3–10 keywords. Retain review-appropriate critical synthesis, methods transparency, discussion and future directions. Follow the editor's current required front/back matter. |
+| **AI involvement and tool authority** | *Instructions*, pages 10, 13 | Disclose substantive GenAI assistance in study design, analysis, interpretation or content generation as applicable; cosmetic spelling/grammar edits have a different rule. Record tool purpose and author oversight; do not attribute scholarly judgement or authorship to tools. |
+| **Data, code and reproducibility** | *Instructions*, pages 9, 13, 18–22 | Include a Data Availability Statement, even when constraints limit sharing. State whether and where the DASHI/SLR method code, protocols, screened source records, export manifests and parameters can be accessed, to the extent legitimately shareable. Do not publish third-party copyrighted full texts, private drafts, unconsented human data or unreviewed records. |
+| **Ethics, COI and funding** | *Instructions*, pages 12–14 | Add relevant ethics/consent statements, funding sources, conflicts and acknowledgments, or justified non-applicability. Review reused human-study data and participant restrictions before depositing anything. |
+| **Source citation and intellectual property** | *Instructions*, pages 15–18, 22 | Cite all original educational and EfS authors and stable DOI/URL identifiers, version the unpublished drafts, acknowledge source-derived artefacts and do not republish copyrighted figures without permission. Cite source code where used. |
+| **Submission and fee** | *Instructions*, pages 3–4; *Invitation*, page 5 | Use the journal submission system. The supplied Special Issue invitation quotes an APC of **2400 CHF**; reconfirm the current charge and institutional coverage before committing funds. |
+
+**Publication-attribution boundary:** The publisher's CRediT author-contribution statement and DASHI's scientific-work/source-role attribution are complementary. Institutional affiliation does not confer authorship. Citing an external ESD study does not give DASHI credit for that study's findings. A formal reconstruction remains an attributed DASHI interpretation, not a theorem published by the external researchers.
+
+### 32.4 Special Issue editorial criteria, derived from the editors' own text
+
+The Special Issue explicitly seeks:
+
+1. **Transformation beyond technology adoption**: distinguish access and digital activity from changed pedagogy, learning, competencies and durable system practices.
+2. **Two-way theoretical integration**: digital education and independently grounded ESD/EfS research must challenge each other; do not treat either as a decorative source.
+3. **Whether / how / under what conditions**: identify the claim ceiling, mechanisms, populations, contextual limits, quality of outcome evidence, and competing explanations.
+4. **Reciprocal sustainability impacts**: consider learning for sustainability *and* the sustainability of digital education across social, environmental, economic, institutional and temporal obligations.
+5. **Methodological credibility**: transparent review type, source roles, provenance, eligibility screening, independent EfS challenge, researcher judgement and non-promotion.
+6. **Transferable research contribution**: retrospective critical examination of earlier digital-learning/SoTL studies; prospective design of sustainability-aware higher-education research.
+7. **Inclusion, competencies, leadership and governance**: consider participant authority, equity, accessibility, educator development and institutional/policy conditions without claiming measured effects where studies did not measure them.
+
+These are **editorial alignment questions**, not a substitute for the independent DASHI gates: (A) question-relative representational sufficiency; (B) source/claim admissibility and ceilings; (C) completed review obligations, performed verification and human authority. The separate publisher compliance gate in 32.3 must also pass before submission. No authoritative aggregate "acceptance score" exists.
+
+### 32.5 Immediate actions and boundary conditions
+
+- Preserve the paper's title, integrative conceptual review, seven provisional principles, both retrospective and prospective intended uses, and source-governed SLR process. Do **not** devise another fundamental methodology to meet journal formatting.
+- Revise the current abstract/cover letter for honest claim status, close antecedents and the journal's 200-word limit.
+- Reconcile the manuscript's stale five-database execution status: ERIC already has an observed export/deduplication receipt; other database and final admission obligations remain open.
+- Confirm coauthor roles and the approved current group version. Preserve exact source author, DOI, version and review/authority distinctions.
+- Prepare a **publicly shareable minimal method/provenance record** without releasing restricted manuscripts or protected evidence.
+- Keep ESD separate from Fleet/TOE. SLR is an execution dependency only. JMD/meta-introspector repositories are separately attributed technical references, not the study's central scientific evidence.
 
