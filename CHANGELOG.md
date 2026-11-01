@@ -1,3 +1,14 @@
+
+## 2026-11-01 — YM Voyager 2026 chapter audit on Route-S #1440
+
+- Source-audited all mathematical chapters of the 29 September 2026 Voyager transcript against current canonical Yang–Mills sources, retaining original research attribution and external status.
+- Added `YMClayVoyager2026CoverageExact` for chapter-to-sector routing, actual native literal Wilson bound reuse, P2 support-distance distinction, conditional Route-S Clay non-promotion, uniform gap implication, and local/global stationary stochastic time distinction.
+- Added flat oriented Euclidean `YMClayVoyagerR4HodgeBasisExact` with six signed basis directions and exact `*²=+1`; not smooth instantons or quantum Yang–Mills.
+- Wired both through `BalabanRGTOERegression` and synchronized the YM roadmap, TODO and complete source matrix.
+- Corrected 1979 versus 1980 Creutz source chronology, 3D YM-Higgs finite stochastic time versus equilibrium, and 2026 Chevyrev-Shen 3D/2D boundaries.
+- **Source-written, exact-head Agda kernel pending; no ESD file, no physical/Clay promotion.**
+
+
 # Changelog
 
 This changelog is append-only. Older mentions of `false` are historical wave
