@@ -28,8 +28,9 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; -[1+_]; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym; subst)
 
+import Data.Integer.Base as Int
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
 import Data.Integer.Tactic.RingSolver as IntRS
@@ -165,8 +166,6 @@ karpCutEqualsSignedLaplacianQuadratic (e ∷ es) labels =
     (cong₂ _+_
       (edgeCutEqualsSpinQuadratic e labels)
       (karpCutEqualsSignedLaplacianQuadratic es labels))
-  where
-    open import Relation.Binary.PropositionalEquality using (cong₂)
 
 -- A concrete counterexample to assuming the signed graph quadratic is
 -- PSD. One crossing edge of signed weight -1 produces Q = -4.
@@ -183,3 +182,111 @@ negativeEdgeSignedQuadratic :
     negativeEdgeLabels
   ≡ -[1+ 3 ]
 negativeEdgeSignedQuadratic = refl
+
+
+------------------------------------------------------------------------
+-- GLOBAL Z2/COMPLEMENT GAUGE: flipping every vertex label preserves
+-- the literal signed cut and signed quadratic. No positivity assumption.
+-- This is useful for exact search-quotient symmetry, not an NP=P claim.
+------------------------------------------------------------------------
+
+flipBit : Bool → Bool
+flipBit true = false
+flipBit false = true
+
+flipLabels : ∀ {n} → Vec.Vec Bool n → Vec.Vec Bool n
+flipLabels Vec.[] = Vec.[]
+flipLabels (x Vec.∷ xs) = flipBit x Vec.∷ flipLabels xs
+
+lookupFlippedLabels :
+  ∀ {n} (labels : Vec.Vec Bool n) (i : Fin.Fin n) →
+  Vec.lookup (flipLabels labels) i ≡
+  flipBit (Vec.lookup labels i)
+lookupFlippedLabels (x Vec.∷ xs) Fin.zero = refl
+lookupFlippedLabels (x Vec.∷ xs) (Fin.suc i) =
+  lookupFlippedLabels xs i
+
+bitCutWeightFlipInvariant :
+  (w : ℤ) (a b : Bool) →
+  bitCutWeight w (flipBit a) (flipBit b) ≡
+  bitCutWeight w a b
+bitCutWeightFlipInvariant w true true = refl
+bitCutWeightFlipInvariant w true false = refl
+bitCutWeightFlipInvariant w false true = refl
+bitCutWeightFlipInvariant w false false = refl
+
+edgeContributionGlobalFlip :
+  ∀ {n} (e : Cut.SignedUndirectedEdge n)
+    (labels : Vec.Vec Bool n) →
+  Cut.edgeContribution e (flipLabels labels) ≡
+  Cut.edgeContribution e labels
+edgeContributionGlobalFlip e labels =
+  trans
+    (edgeContributionMatchesBitCut e (flipLabels labels))
+    (trans
+      (cong₂ (bitCutWeight (Cut.weight e))
+        (lookupFlippedLabels labels (Cut.first e))
+        (lookupFlippedLabels labels (Cut.second e)))
+      (trans
+        (bitCutWeightFlipInvariant
+          (Cut.weight e)
+          (Vec.lookup labels (Cut.first e))
+          (Vec.lookup labels (Cut.second e)))
+        (sym (edgeContributionMatchesBitCut e labels))))
+
+signedMaxCutGlobalFlipInvariant :
+  ∀ {n} (edges : List (Cut.SignedUndirectedEdge n))
+    (labels : Vec.Vec Bool n) →
+  Cut.edgeListCutValue edges (flipLabels labels) ≡
+  Cut.edgeListCutValue edges labels
+signedMaxCutGlobalFlipInvariant [] labels = refl
+signedMaxCutGlobalFlipInvariant (e ∷ es) labels =
+  cong₂ _+_
+    (edgeContributionGlobalFlip e labels)
+    (signedMaxCutGlobalFlipInvariant es labels)
+
+spinGapSquareGlobalFlip :
+  (a b : Bool) →
+  spinGapSquare (flipBit a) (flipBit b) ≡
+  spinGapSquare a b
+spinGapSquareGlobalFlip true true = refl
+spinGapSquareGlobalFlip true false = refl
+spinGapSquareGlobalFlip false true = refl
+spinGapSquareGlobalFlip false false = refl
+
+spinQuadraticEdgeGlobalFlip :
+  ∀ {n} (e : Cut.SignedUndirectedEdge n)
+    (labels : Vec.Vec Bool n) →
+  edgeSpinQuadratic e (flipLabels labels) ≡
+  edgeSpinQuadratic e labels
+spinQuadraticEdgeGlobalFlip e labels =
+  cong (λ gap → Cut.weight e * gap)
+    (trans
+      (cong₂ spinGapSquare
+        (lookupFlippedLabels labels (Cut.first e))
+        (lookupFlippedLabels labels (Cut.second e)))
+      (spinGapSquareGlobalFlip
+        (Vec.lookup labels (Cut.first e))
+        (Vec.lookup labels (Cut.second e))))
+
+signedLaplacianGlobalFlipInvariant :
+  ∀ {n} (edges : List (Cut.SignedUndirectedEdge n))
+    (labels : Vec.Vec Bool n) →
+  signedLaplacianQuadratic edges (flipLabels labels) ≡
+  signedLaplacianQuadratic edges labels
+signedLaplacianGlobalFlipInvariant [] labels = refl
+signedLaplacianGlobalFlipInvariant (e ∷ es) labels =
+  cong₂ _+_
+    (spinQuadraticEdgeGlobalFlip e labels)
+    (signedLaplacianGlobalFlipInvariant es labels)
+
+positiveThresholdAcceptanceGlobalFlip :
+  ∀ {n} (g : Cut.WeightedCutGraph n)
+    (labels : Vec.Vec Bool n) →
+  Cut.AcceptedCut g (flipLabels labels) →
+  Cut.AcceptedCut g labels
+positiveThresholdAcceptanceGlobalFlip g labels accepted =
+  subst
+    (λ value → Int._≤_ (Cut.threshold g) value)
+    (signedMaxCutGlobalFlipInvariant (Cut.edges g) labels)
+    accepted
