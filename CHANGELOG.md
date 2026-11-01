@@ -172,3 +172,12 @@ monitor surface.
 ## 2026-11-01 — native norm-one SU2 universal four-factor Wilson reverse trace
 
 - Reused existing actual rational-unit SU2 inverse-product/involutive group theorems to derive real-trace equality between arbitrary forward and reverse Wilson four-factor plaquette products. Distinct physical four-site contour geometry and source 16ordered↔6positive sum identification retained as remaining obligations.
+
+
+## 2026-11-01 — narrow R443/R445 and physical mass-gap source max-cut
+
+- Lowered original `BalabanClayGate4RationalSU2BondCarrierExact.RationalSU2BondData` from Set1 to Set; its two function fields are Set-level. This repairs the literal same-carrier incompatibility with `RationalWilsonObservable n : Set` and physical finite measures, without changing any mathematical content or constructors. Kernel verification outstanding.
+- Proved *in source-written Agda* original native six-plane Wilson C3 action invariance from the already-owned exact reverse-opposite path holonomy and periodic six-plane closure; no artificial 16ordered↔6 normalisation is now required for C3.
+- Built source-specific R443 six-plane finite Gibbs/Haar numerator compiler using original R443/R431, with actual compact Haar and Gibbs-density source hypotheses still explicit; composed through finite-normalized and selected scalar-limit C3 invariance under those inputs.
+- Matched R443 and R445 configuration/observable types definitionally on actual native rational SU2 record after universe fix and specialized existing native P2 finite cylinder convergence.
+- Re-read canonical Route-S/R320, physical R333 and R281/H2 same OS Hamiltonian owners; genuine selected decay, continuum tails and uniform nonzero physical gap remain open. No new Clay theorem and no Agda exact-head compile.
