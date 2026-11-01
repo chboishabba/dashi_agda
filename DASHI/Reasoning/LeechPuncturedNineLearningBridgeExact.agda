@@ -5,11 +5,14 @@ module DASHI.Reasoning.LeechPuncturedNineLearningBridgeExact where
 -- Distinguish point antipode, global coefficient sign, and Fourier
 -- character conjugation: they are not definitionally identical.
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 import DASHI.Moonshine.OggSSPP2BalancedTernaryPuncturedPlaneExact as Plane
 import DASHI.Reasoning.LeechPuncturedNineArithmeticExact as Arithmetic
 import DASHI.Foundations.Base369FaceSheetPunctureIncidenceIdentityExact as Face
 import DASHI.Moonshine.C3FourierConjugationExact as Fourier
 import DASHI.Moonshine.JInvariant369CodecBidiExact as JCodec
+import DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact as Nonary
+import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as JLevel
 import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact as Response
 
 -- The eight nonzero spatial points of F3², not eight Fourier modes.
@@ -104,3 +107,18 @@ faceNineHasEightPunctures = refl
 -- supplies no semantic-to-oppositePoint coercion.
 ArgumentKind : Set
 ArgumentKind = Response.ResponseKind
+
+
+-- Decisive previously-proved algebraic firewall:
+-- T² = C3 × C3 has exponent three, while Z/9 is cyclic and
+-- contains an element of order nine. The two nine-element carriers
+-- admit a set-theoretic rechart, NOT a group-action isomorphism.
+phaseNineNotCyclicNonaryGroupIso :
+  Nonary.Q9NonaryGroupIsomorphism → ⊥
+phaseNineNotCyclicNonaryGroupIso =
+  Nonary.q9NonaryGroupIsomorphismImpossible
+
+-- The analytic j observer lives over a same-point modular fibre.
+-- JInvariant369PhaseLevelSeparationExact proves phase-only C3
+-- cannot recover nontrivial level translations; no Fourier-to-j
+-- identification or modular-level 9-action is claimed here.
