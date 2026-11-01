@@ -137,3 +137,18 @@ The existing selected symmetry-to-limit code already closes the *abstract deduct
 - **R320/R333/OS-P3**: selected physical decay and the SAME reconstructed OS Hamiltonian, positive uniform spectral mass gap and infinite-volume control.
 
 **No Clay/mass-gap promotion.** New Agda declarations have not been kernel typechecked on this exact GitHub head. Any imported source labels `machineChecked` are historical/proof-level bookkeeping, not verification of these newly written modules.
+
+
+## 10. Complete finite signed-contour C3 and 4×4 ordered Wilson action
+
+Additional owner `YMClayNativeRationalSU2AllSignedC3WilsonExact.agda` pays the previously open inverse-edge extension: actual native `n=3` signed `±axis` step/connection/holonomy commutes with the **physically aligned CMP119 spatial C3**. The eight signed-axis cases and recursive full word proof reuse `Bond.walkStep`, `Bond.orientedLink`, `Native.realization`, `RationalUnitQuaternion`, and `Native.links/siteGauge` directly. It produces a same-source real-part Wilson C3 naturality theorem for *all signed words*, not just positive paths. This eliminates the earlier positive-only restriction but does **not** construct physical Haar integration.
+
+`YMClayNativeRationalSU2OrderedPlaquetteC3ActionExact.agda` then defines a true closed oriented plaquette contour `+a,+b,-a,-b` on the same n=3 unit-quaternion link group. It sums all sixteen **ordered** axis pairs and all `4⁴=256` lattice sites with the already-owned nested rational sum; 4-axis reindexing, a 16-term Fubini identity and spatial 3-cycle site-reindexing prove the total real-trace sum is unchanged by C3. Diagonal `a=b` terms and both orientations are included; do **not** silently call it the canonical Wilson six-unordered-plane action or claim its exact normalisation/coupling.
+
+Independent locally executed Fraction reference on an equivalent selected finite source construction: 256 sites; 1,024 bonds; 1,024 open positive paths; 1,024 closed gauge Wilson tests; 49 quaternion trace pairs; **4,096 ordered signed plaquette checks**, giving exact total `23384/25` before and after C3 on its nonconstant unit-quaternion test field. The committed regression `scripts/check_ym_side4_rational_su2_c3_source.py` now contains the same scenario, but was not byte-replayed from its GitHub blob. The two Agda owner files are source-written, not kernel-verified. This is **finite, exact algebra**, not a nonperturbative continuum estimate.
+
+Exact surviving R443 measure max-cut (now narrower):
+- **R443-six**: identify the 16 ordered sum with the source six positive geometric planes (inverse orientation equality for real SU2 trace, diagonal triviality, 2× factor and coupling normalisation), without changing the selected configurations.
+- **R443-Haar**: actual compact SU2/SU(N) normalized product/constrained Haar measure is invariant under the literal finite C3 action on every selected bond; rational unit quaternion field assignments alone do not construct Haar probability.
+- **R443-W**: identify that action with the original selected CMP119/R443 Gibbs density and each true R445 cutoff family, including interactions/renormalized counterterms. Existing source chain R443→R431→finite normalized→OS3/continuum must then be applied with its actual inputs.
+- **R445/R320/R333**: physical uniform tails/convergence, OS reflection positivity/time continuity, same-H_OS and strictly positive uniform infinite-volume spectral mass gap remain distinct, open analytic source obligations.
