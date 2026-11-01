@@ -134,3 +134,46 @@ zeroTotalPartitionYES parts totalZero =
       (allFalseHasZeroLeft parts)
       (sym
         (trans (allFalseHasFullRight parts) totalZero))
+
+
+------------------------------------------------------------------------
+-- Total input-level branch selection. A zero-total partition is always
+-- accepted; the corresponding literal Karp MaxCut instance cannot have
+-- the zero threshold, so it becomes a fixed 2-vertex, unit-edge YES
+-- graph. The remaining branch is the scaled complete weighted graph.
+--
+-- This Target is an algebraic graph-construction representation: a
+-- concrete byte-level GraphInstance serializer with polynomial clock is
+-- *not* produced by this record. It must be proved separately before
+-- promotion to the Karp MAX CUT polynomial reduction in PR.
+------------------------------------------------------------------------
+
+open import Relation.Nullary.Decidable.Core using (yes; no)
+
+data CutTarget : Set where
+  unitEdgeYes : CutTarget
+  scaledComplete : List ℤ → CutTarget
+
+cutTargetAccepts : CutTarget → Set
+cutTargetAccepts unitEdgeYes = ⊤
+cutTargetAccepts (scaledComplete parts) = ScaledCutYES parts
+
+partitionToScaledCutTarget : List ℤ → CutTarget
+partitionToScaledCutTarget parts
+  with Int._≟_ (sourceTotal parts) (+ 0)
+... | yes _ = unitEdgeYes
+... | no _ = scaledComplete parts
+
+sourcePartitionIffConstructedTarget :
+  (parts : List ℤ) →
+  PR.Iff
+    (PartitionYES parts)
+    (cutTargetAccepts (partitionToScaledCutTarget parts))
+sourcePartitionIffConstructedTarget parts
+  with Int._≟_ (sourceTotal parts) (+ 0)
+... | yes totalZero =
+  PR.iff
+    (λ _ → tt)
+    (λ _ → zeroTotalPartitionYES parts totalZero)
+... | no _ =
+  signedPartitionScaledCutInstanceIff parts
