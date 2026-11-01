@@ -17,7 +17,7 @@
 |---|---|---|---|
 | **K00** Agda P1/P2 import spine | Run exact-head Agda typecheck of `DASHI/Research/OpenAIMath/Everything.agda` and all transitive imports, plus optional `OpenAIMathSharedTseitinOptimizedCNFExact.agda`; fix every source elaboration failure; safe/0-postulate/0-metavariable audit before Golden promotion. | `Everything.agda`, `OpenAIMathFiniteSupportedTseitinModelsExact.agda`, `OpenAIMathSharedTseitinGateCNFExact.agda`, `OpenAIMathSharedTseitinUniqueExtensionExact.agda` | UNVERIFIED — source only |
 | **K01** Lean generic adapter | Compile `Integration/OpenAIMath/ListFinsetCNFTransport.lean` on pinned Lean 4.28.0/mathlib and prove no `sorry`/new axioms, then join import spine. | `ListFinsetCNFTransport.lean` | UNVERIFIED — staged source |
-| **K02** Lean version-gated later adapter | Pin/migrate an *explicit separate* OAI 378 4.34.1-compatible dependency environment; compile `Upstream378FiniteCNFBridge.lean`, inspect `#print axioms`, and only then enable consumers. Never silently rewrite old 4.28 vendor commit. | `Upstream378FiniteCNFBridge.lean`, `Upstream378EncodingLengthExact.lean`, upstream `SAT.lean`/`Encoding.lean`/`SqrtLogSpace/Final.lean` | UNVERIFIED — newer upstream not pinned; exact unary/framed formula source-written on Lean #78 |
+| **K02** Lean version-gated later adapter | Pin/migrate an *explicit separate* OAI 378 4.34.1-compatible dependency environment; compile `Upstream378FiniteCNFBridge.lean`, inspect `#print axioms`, and only then enable consumers. Never silently rewrite old 4.28 vendor commit. | `Upstream378FiniteCNFBridge.lean`, `Upstream378EncodingLengthExact.lean`, upstream `SAT.lean`/`Encoding.lean`/`SqrtLogSpace/Final.lean` | SEPARATE 7ef5c0c source pin staged and local check script exists on Lean #78; upstream 4.34.1 kernel STILL UNVERIFIED |
 
 ## ORIGINAL — 9 exact obligations or owners
 
@@ -127,6 +127,10 @@ python scripts/check_openai378_frontend_exact.py
 python scripts/check_openai378_27grid_maxcut_bridge.py
 python scripts/compile_dashi_circuit_openai378.py source.json --stream-bits-out source.bits --out receipt.json
 ```
+
+## 1 November — K02 isolated version gate now implemented (not checked)
+
+Lean PR #78 now owns `vendor/openai-math/PIN_378.json` at **7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a** (OpenAI OAI378 / Lean 4.34.1), independently of the original `1581d4cb...` Git submodule. The new `scripts/materialize_openai378_toolchain.sh` enforces the pin and refuses the old vendor path; `scripts/check_openai378_staged_lean.sh` builds the upstream 378 dependency and elaborates the generic normalization adapter, exact-length adapter and fixed-machine adapter in that newer environment. **Neither script was executed here.** K02 remains a missing kernel/axiom receipt, but the version/pin conflict now has a non-mutating executable local acceptance path. The length adapter reuses original `Encoding.length_encodeNat` / `length_encodeList_cons` rather than re-proving those lemmas.
 
 ## Max-cut execution order (do not replace a mathematical proof with a roadmap)
 
