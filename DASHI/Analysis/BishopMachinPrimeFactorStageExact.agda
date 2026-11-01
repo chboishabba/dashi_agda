@@ -125,10 +125,11 @@ stageResidualCompression : Nat → Compression.PrimeCompressionFibre
 stageResidualCompression n =
   Compression.prime-compression-fibre
     []
-    ( List.map positivePrimeCode
-        (factorList (numeratorFactorisation n))
-      List.++ List.map negativePrimeCode
-        (factorList (denominatorFactorisation n)) )
+    (List._++_
+      (List.map positivePrimeCode
+        (factorList (numeratorFactorisation n)))
+      (List.map negativePrimeCode
+        (factorList (denominatorFactorisation n))))
 
 -- The ORIGINAL signed numerator is retained separately from its
 -- absolute-value factorization. This prevents losing the q_n sign.
