@@ -167,3 +167,8 @@ monitor surface.
 
 - Reused actual `PositivePlane4`, original native `plaquetteBoundaryDirections` and `rationalSU2PlaquetteHolonomy` for a source-written definitionally same-object native six-plane signed Wilson group/real-trace theorem; the source six-plane trace action is now an actual native module term.
 - Independent exact Fraction test on same field: six-plane before=after `-1108/25`, and the 16-term sum equals 2×six + four diagonals/site. The **universal Agda** orientation/normalization and selected Haar measure still need mathematical proof/verified code.
+
+
+## 2026-11-01 — native norm-one SU2 universal four-factor Wilson reverse trace
+
+- Reused existing actual rational-unit SU2 inverse-product/involutive group theorems to derive real-trace equality between arbitrary forward and reverse Wilson four-factor plaquette products. Distinct physical four-site contour geometry and source 16ordered↔6positive sum identification retained as remaining obligations.
