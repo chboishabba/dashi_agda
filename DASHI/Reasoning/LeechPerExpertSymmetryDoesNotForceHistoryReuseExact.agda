@@ -11,7 +11,7 @@ module DASHI.Reasoning.LeechPerExpertSymmetryDoesNotForceHistoryReuseExact where
 -- Thus compression needs an additional shared-state/orbit-admission
 -- law or a complete exact residual, not merely sign-equivariance.
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Data.Empty using (⊥)
 
 data History : Set where
   centre positive negative : History
@@ -50,19 +50,18 @@ expertZeroHistory = centre
 expertOneHistory : History
 expertOneHistory = positive
 
-centreIsNotPositive : centre ≡ positive → Bool
+centreIsNotPositive : centre ≡ positive → ⊥
 centreIsNotPositive ()
 
 noSharedAntipodalRepresentative :
   (action : Orientation) →
   applyOrientation action expertZeroHistory ≡ expertOneHistory →
-  Bool
+  ⊥
 noSharedAntipodalRepresentative direct ()
 noSharedAntipodalRepresentative inverse ()
 
 -- The exact proof principle is absurd-pattern elimination: there is
 -- no C2 orientation which reconstructs positive from centre.
--- Return Bool only to avoid adding an unrelated empty-type import.
 -- The stronger consumer-level invariant is that both orbit classes
 -- need a distinct representative or an explicit reconstructive
 -- residual. Counterfactual C2 law cannot manufacture either.
