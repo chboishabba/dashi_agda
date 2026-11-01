@@ -153,3 +153,11 @@ monitor surface.
 - No rational quaternion group = full physical compact SU2 Haar measure, no tangent su2 = nonlinear unit link, no arbitrary 369 hyperfabric = physical source, no finite-source = 4D continuum/Clay promotion.
 - Still **UNVERIFIED** by exact-head Agda kernel; docs/roadmap/TODO explicitly retain R443 Haar/finite action, R445 tail, R320/R333 physical spectrum and all continuum gates.
 
+
+
+## 2026-11-01 — native inverse-link C3 Wilson and full finite ordered action
+
+- Added literal n=3 rational SU2 unit-quaternion **all-signed** path and Wilson C3 naturality, including the previously open inverse-bond gauge-field transport.
+- Added all 16 *ordered* 4D plaquette words and actual 256-site nested rational Wilson trace sum; source-written C3 action invariance via reindexing.
+- Independent exact Fraction arithmetic PASS on 4096 full signed plaquettes and total 23384/25 = 23384/25 under C3 in a nonconstant rational quaternion sample. No Agda compile, committed blob replay or physical Haar normalization.
+- Remaining R443-six canonical six-plane comparison, actual physical SU2/SU(N) Haar / Gibbs / measure family, R445 uniform tails, R320 decay/R333 OS-Hamiltonian spectral gap and full continuum remain open.
