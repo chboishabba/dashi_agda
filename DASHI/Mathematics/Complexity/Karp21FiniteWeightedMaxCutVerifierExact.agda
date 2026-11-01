@@ -15,6 +15,7 @@ module DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact wher
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (refl)
 open import Data.Bool.Base using (T)
 open import Data.Empty using (⊥)
 open import Data.Product using (Σ; _,_)
@@ -24,10 +25,11 @@ open Int using (ℤ; +_; _+_)
 import Data.Integer.Properties as IntP
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
-open import Relation.Binary.PropositionalEquality using (refl)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.Karp21ScaledThresholdExact as E20
+import DASHI.Mathematics.Complexity.Karp21FiniteCliqueVertexCoverCombinedExact as FiniteCounts
+import DASHI.Mathematics.Complexity.Karp21FiniteCliqueCoverCardinalityExact as Counts
 
 record SignedUndirectedEdge (n : Nat) : Set where
   constructor edge
@@ -158,3 +160,22 @@ karpWeightedMaxCutExistentialIff g =
   PR.iff
     (weightedCutGivesVerifiedWitness g)
     (verifiedWitnessGivesWeightedCut g)
+
+
+------------------------------------------------------------------------
+-- The combinatorial certificate has exactly n Boolean entries, rather
+-- than a function over unrestricted Nat. This is an *exact cardinality*
+-- result; a byte serialization and polynomial-bound certificate function
+-- over the shared Word carrier remain independent obligations.
+------------------------------------------------------------------------
+
+certificateBitCount :
+  ∀ {n} → Vec.Vec Bool n → Nat
+certificateBitCount labels =
+  Counts.length (Vec.toList labels)
+
+cutCertificateHasVertexCountBits :
+  ∀ {n} (labels : Vec.Vec Bool n) →
+  certificateBitCount labels ≡ n
+cutCertificateHasVertexCountBits labels =
+  FiniteCounts.selectionListLength labels
