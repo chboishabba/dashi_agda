@@ -215,6 +215,9 @@ def main():
     for n in range(0,4):
         for k in (n, n+1, 2**128):
             assert exact_cover(colouring_to_exact_cover(n,frozenset(),k))
+    # Variable indices are binary encoded and need not be dense.
+    nv,edge_list,k,anchor = three_sat_to_colouring(10**15, ((10**15,),))
+    assert nv == 13 and k == 5 and k_graph_colourable(nv,edge_list,k,anchor)
     print('PASS final four historical edge gadgets:',counts)
 
 
