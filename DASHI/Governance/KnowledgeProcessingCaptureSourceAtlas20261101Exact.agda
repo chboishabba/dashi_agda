@@ -312,6 +312,110 @@ anthropicCurrentSECIndex = sourceReceipt
   "Primary filing/index fixes October 26 filing date, accession and current public document identity, superseding a September 3 confidential draft."
   "Prior draft and later public S-1 are different temporal versions; do not promote September-specific figures when October-specific amended statements supersede them."
 
+------------------------------------------------------------------------
+-- 26-30 October 2026 new market/procurement and Thiel first-person roots.
+------------------------------------------------------------------------
+
+fedSeptemberHike2026 : SourceReceipt
+fedSeptemberHike2026 = sourceReceipt
+  "U.S. Federal Reserve, FOMC"
+  "Federal Reserve issues FOMC statement, 16 September 2026"
+  "2026-09-16"
+  "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm"
+  governmentInstrument
+  "12-0 FOMC vote raised target funds-rate range 25bp to 3.75-4.00%; official issuer."
+  "September increase is not an October rate increase; no statement that debt yields move one-for-one with the target."
+
+fedOctoberHold2026 : SourceReceipt
+fedOctoberHold2026 = sourceReceipt
+  "U.S. Federal Reserve, FOMC"
+  "Federal Reserve issues FOMC statement, 28 October 2026"
+  "2026-10-28"
+  "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm"
+  governmentInstrument
+  "10-2 vote HELD 3.75-4.00% range; Cook/Hammack dissented preferring a 25bp increase; future rates uncommitted."
+  "Dissents do not change the adopted decision; a December hike forecast is not enacted policy."
+
+lsegHyperscalerCredit20261029 : SourceReceipt
+lsegHyperscalerCredit20261029 = sourceReceipt
+  "Lydia Hamill; Paul Amery; FTSE Russell / LSEG"
+  "AI's borrowing boom: What it means for bond indices"
+  "2026-10-29"
+  "https://www.lseg.com/en/insights/ftse-russell/ais-borrowing-boom-what-it-means-for-bond-indices"
+  firstPartyIssuer
+  "Index-provider primary data: broad IG issuance USD218.1bn by early Oct 2026 vs USD107.3bn in all 2025; narrower USD fixed-rate index eligible issuance 151.75bn as of 2 Oct; approx USD500bn outstanding end-Aug; Sep30 OAS issuer Microsoft54, Alphabet74, Amazon75, Meta123, Oracle210 bp; group119 vs broad86; Oct21 Oracle CDS331, Amazon80, Microsoft56 bp."
+  "Issuance vs outstanding vs benchmark index eligibility differ; OAS vs CDS differ; credit spreads cannot by themselves establish lab default, full AI loss, bailout, legal capture or motive."
+
+reutersOct30EquityRisk : SourceReceipt
+reutersOct30EquityRisk = sourceReceipt
+  "Reuters / Wall Street close"
+  "Wall Street closes sharply lower as AI cash burn fears spark tech selloff"
+  "2026-10-30"
+  "https://www.reuters.com/business/nasdaq-futures-tumble-amazon-intel-results-deepen-ai-spending-woes-2026-10-30/"
+  secondaryContext
+  "Nasdaq -2.86pct Oct30, down 7.8pct from Oct6 peak; semiconductor index -7.2pct and S&P500 -1.82pct, with capital-recovery concerns."
+  "One bad session does not establish insolvency, the loss attributable solely to AI, or inevitable systemic collapse."
+
+ukMODExclusiveSupplier : SourceReceipt
+ukMODExclusiveSupplier = sourceReceipt
+  "United Kingdom Ministry of Defence"
+  "UK5 Transparency Notice 2025/S 000-083858 / MOD Palantir Enterprise Agreement"
+  "2025-12-17"
+  "https://www.find-tender.service.gov.uk/Notice/083858-2025"
+  governmentInstrument
+  "Official direct-award notice states USD-equivalent not needed: GBP240.6m 3-year 2026-29 Palantir contract, technical architecture only Palantir can license/support, with rebuilding, accreditation, retraining and interoperability disruption on substitution."
+  "MoD's contemporaneous vendor-specific justification proves stated procurement dependence, not universal technological impossibility or independent adjudication of proportionality."
+
+ukMODOriginalAward : SourceReceipt
+ukMODOriginalAward = sourceReceipt
+  "United Kingdom Ministry of Defence"
+  "UK6 award notice 006344-2026 / MOD Palantir Enterprise Agreement"
+  "2026-01-23"
+  "https://www.find-tender.service.gov.uk/Notice/006344-2026"
+  governmentInstrument
+  "Government award notice records GBP240.6m direct award to Palantir Technologies UK Ltd, contracted 2025-12-30, service 2026-04-01 through 2029-03-31."
+  "This awarded contract does not prove every Palantir service or other states' procurements are non-substitutable."
+
+ftUkPaymentReconciliation : SourceReceipt
+ftUkPaymentReconciliation = sourceReceipt
+  "Financial Times / Stotles independently reconciling original MoD spreadsheets"
+  "UK defence ministry spent GBP186m more on Palantir than value of public contracts"
+  "2026-10-28"
+  "https://www.ft.com/content/5c237fb3-23ba-4c1a-9257-fd66b9d42d6c"
+  secondaryContext
+  "Reporter/independent source comparison GBP282m MoD supplier payments in period versus GBP95.9m published contract notices; >80pct payments from noncompetitive procurement."
+  "Payments vs contract award notices differ in legal basis, period, classification and definitions; unexplained publication gap is not proof of corruption or illegal nondisclosure."
+
+thielCowenOriginal2024 : SourceReceipt
+thielCowenOriginal2024 = sourceReceipt
+  "Tyler Cowen interviews Peter Thiel"
+  "Peter Thiel on Political Theology, Conversations with Tyler episode 210"
+  "2024-04-17"
+  "https://conversationswithtyler.com/episodes/peter-thiel-political-theology/"
+  attributedAuthor
+  "Primary speaker transcript: Thiel fears safety-motivated one-world totalitarian government; says the katechon/restrainer may mimic or become Antichrist; discusses Girard, Schmitt and AI centralization, return to scale and possible harm from governance."
+  "Interview is authored spoken claim, not an agreed policy, proved theological doctrine of other people, or a company action."
+
+thielLecturesAttendeeRecording : SourceReceipt
+thielLecturesAttendeeRecording = sourceReceipt
+  "The Guardian / attendee-supplied audio, Thiel San Francisco lectures"
+  "Inside tech billionaire Peter Thiel's off-the-record lectures about the antichrist"
+  "2025-10-10"
+  "https://www.theguardian.com/us-news/2025/oct/10/peter-thiel-lectures-antichrist"
+  secondaryContext
+  "Journalists describe direct attendee recording, confirm spokesperson did not dispute authenticity while correcting a transcription, and identify Girard, Carl Schmitt and Newman in lecture content."
+  "Reporter transcript is not independent consent or company endorsement and the cited religious thinkers are not political co-conspirators."
+
+thielRomeAP2026 : SourceReceipt
+thielRomeAP2026 = sourceReceipt
+  "Associated Press"
+  "Thiel brings his Antichrist lectures to the Vatican's doorstep"
+  "2026-03"
+  "https://apnews.com/article/c3a6c7d2daba501caf8152558ac2d743"
+  secondaryContext
+  "Journalistic account of Rome four-part lecture and theological/political controversy; Catholic institutions explicitly denied organising/hosting."
+  "Near the Vatican != Vatican sponsorship, papal agreement, clandestine religious programme or direct executive influence."
+
 -- An original primary statement is a receipt for what the named original
 -- says, not a receipt for the correctness of every empirical prediction.
 record AttributionBoundary : Set where
