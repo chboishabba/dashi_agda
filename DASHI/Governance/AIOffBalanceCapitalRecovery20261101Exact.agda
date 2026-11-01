@@ -26,6 +26,9 @@ import DASHI.Economics.SoftBankOpenAIValuationLeverage2026Exact as SoftBank
 import DASHI.Economics.CoreWeaveGPUBackedStructuredFinance2026Exact as CoreWeave
 import DASHI.Economics.AIEnergyInfrastructureFundingStress2026Exact as Funding
 import DASHI.Economics.ReflexiveFlowValidationExact as Econ
+import DASHI.Economics.AIStructuredInfrastructureCommonFactorRiskExact as Shared
+import DASHI.Economics.CommonFactorStructuredFinanceExact as Structured
+import DASHI.Economics.AITerminalPayerEconomicValidationExact as Terminal
 import DASHI.Governance.KnowledgeProcessingCaptureSourceAtlas20261101Exact as Atlas
 
 data AccountingRole : Set where
@@ -198,6 +201,14 @@ data ProjectCapitalEqualsCustomerIndependentCash : Set where
 vendorFundingDoesNotPayTerminalDemand :
   ProjectCapitalEqualsCustomerIndependentCash → ⊥
 vendorFundingDoesNotPayTerminalDemand ()
+
+sharedDriverPrior : Structured.ProjectMultiplicityImpliesRiskIndependencePermission → ⊥
+sharedDriverPrior = Shared.projectMultiplicityDoesNotCloseRiskIndependence
+
+terminalRevenueNotValidation :
+  Terminal.SurroundingSignalsImplyEconomicValidationPermission → ⊥
+terminalRevenueNotValidation =
+  Terminal.surroundingSignalsDoNotAutoPromoteToEconomicValidation
 
 data SharedProjectLenderImpliesIndependentRisks : Set where
 distinctSPVsDoNotEstablishRiskIndependence :
