@@ -48,6 +48,11 @@ allThreeJointMarginsAgree :
   Joint.count Joint.oddTriple axes code
 allThreeJointMarginsAgree = Joint.everyPairCountMatches
 
+pairwiseSignatureExactlyAgrees :
+  Joint.pairwiseSummary Joint.evenTriple ≡
+  Joint.pairwiseSummary Joint.oddTriple
+pairwiseSignatureExactlyAgrees = Joint.pairwiseSummariesAgree
+
 tripleDoesNotDescend :
   INF.FactorsThrough Joint.pairwiseSummary Joint.threeWayPattern → ⊥
 tripleDoesNotDescend = Joint.pairwiseTabulationCannotPayThreeWayPattern
