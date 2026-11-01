@@ -828,3 +828,20 @@ voyagerPureYMFourMarginal =
 voyagerCreutzFiveNotKKFive :
   Dim.creutzFiveEuclideanLattice ≡ Dim.kkFourLorentzPlusCircle → ⊥
 voyagerCreutzFiveNotKKFive = Dim.creutzIsNotKK
+
+------------------------------------------------------------------------
+-- Gauge- and observable-preserving selected Wilson blocking: strictly
+-- conditional; the physical CMP119/R445 selection supplies the squares.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayVoyagerCovariantWilsonCoarseFineBidiExact as WilsonBlock
+
+voyagerSelectedBlockRetainsFineWilsonGaugeInvariant :
+  ∀ {Fine Coarse Gauge Scalar}
+    (selected : WilsonBlock.SelectedWilsonCoarseFine
+      Fine Coarse Gauge Scalar)
+    gauge fine →
+  WilsonBlock.wilsonFine selected
+    (WilsonBlock.gaugeOnFine selected gauge fine)
+  ≡ WilsonBlock.wilsonFine selected fine
+voyagerSelectedBlockRetainsFineWilsonGaugeInvariant =
+  WilsonBlock.selectedFineWilsonGaugeInvariant
