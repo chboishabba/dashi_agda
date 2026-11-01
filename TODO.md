@@ -1,3 +1,6 @@
+- [x] Add conditional selected-Wilson gauge/block/observable commuting-square theorem `YMClayVoyagerCovariantWilsonCoarseFineBidiExact`, wired through Balaban TOE; no surrogate physical field, Wilson action or OSC transport.
+- [ ] Supply an **actual** CMP119/R445 coarse effective observable and selected RG blocking satisfying exact square or prove a quantitative defect/counterexample (then use existing projection-loss machinery), plus separate OS-form pullback.
+
 
 ### 2026-11-01 requested full-symmetry source archaeology follow-on
 - [x] Inspect native `ConcreteComplex`, `OrdinaryComplexPolar`, Agda #1414 quaternion/Spin, derive finite 90° oriented-plane `J²=-Id` and prove a free C3 orbit cannot intertwine with a free quarter-turn orbit.
