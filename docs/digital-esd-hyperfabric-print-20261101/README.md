@@ -1,6 +1,19 @@
 # Alice Brown/associates → independently sourced EfS/ESD hyperfabric
 ## Exact Agda source print and research-claim boundary, 1 November 2026
 
+## Expanded source print and complete join derivation (1 November 2026)
+
+**Start here:** [Full research hyperfabric derivation, exact structural joins and missing evidence](./HYPERFABRIC_DERIVATION.md).
+
+- [All 211 Digital-ESD direct root import modules, 17 exact-source volumes and 837 direct dependency edges](./root-direct/IMPORT_GRAPH.md). Every module has its path, original source blob SHA, declared types/lemmas and imports, with a link to the complete code volume.
+- [First transitive support frontier: 87 further exact-source modules in eight volumes](./root-frontier/INDEX.md). The other sixteen first-frontier modules already appear in the original five-volume print below.
+- [Derived 16-case × Alice-original-source hyperedge matrix (55 candidate incidences)](./DERIVED_SOURCE_HYPEREDGES.md). These are links through existing principle sourceSupports, **not** independently reviewed findings.
+- [Unprinted deeper transitive frontier: 155 exact module paths](./root-frontier/SECOND_FRONTIER.md). Their source may exist in the repository; the print has not yet traversed the entire closure.
+
+**Scope accounting:** 35 original selected module prints, 211 root-direct module prints, 87 additional first-frontier module prints, with twelve overlaps between the original 35 and the direct-root set = **321 unique printed modules**, **1,472 declared DASHI import edges**, and **155 further imported paths beyond the print**. This is a source-text publication and join audit, **not** a typechecked full repository closure, a source-admission receipt, or proof of ESD effectiveness. The new work remains documentation-only. Neither Fleet nor TOE is modified.
+
+
+
 **Owner/source:** `chboishabba/dashi_agda`. **Print ref:** `agent/digital-esd-source-crosspollination-20261101`, stacked on [Digital-ESD PR #1237](https://github.com/chboishabba/dashi_agda/pull/1237). **Print PR:** [#1448](https://github.com/chboishabba/dashi_agda/pull/1448). **Roadmap PR:** [#1446](https://github.com/chboishabba/dashi_agda/pull/1446). **Status:** documentation snapshot of source-written formal owners. Not a new formalisation, external article, formal evidence-admission receipt, current-master proof certificate, or claim of complete transitive import closure.
 
 ### Read every line of the printed formalism
