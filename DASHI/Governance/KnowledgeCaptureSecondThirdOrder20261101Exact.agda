@@ -363,3 +363,104 @@ circularFinancingDoesNotForceRescue ()
 secondThirdOrderMaxCutStatement : String
 secondThirdOrderMaxCutStatement =
   "Primary: policy costs/security response. Secondary: access substitution, common provider and lender exposure. Tertiary: selection of standards, financing backstop incentives, institutional feedback and epistemic admission. Two paths can diverge after the same stated safety purpose; empirical causal promotion requires fresh named documents and matched same-object observations."
+
+
+------------------------------------------------------------------------
+-- 5. THIRD-ORDER COALITION RISK. The prior owner's single-actor
+-- independence certificate is NOT a multi-actor independence theorem.
+-- A pair of independently administered routes may be removed by a joint
+-- private/public/logistics coalition, or by shared upstream controls.
+--
+-- Finite synthetic cutset: 3 actor classes control respectively
+-- [cloud routes], [local route], [peer route]. Every 2-class coalition
+-- retains an escape, but the 3-class coalition covers all four routes.
+-- Not a statement that a government or any named firm has such powers.
+------------------------------------------------------------------------
+
+data ControllerCoalition : Set where
+  sharedAndLocal sharedAndPeer localAndPeer allThree : ControllerCoalition
+
+data CoalitionControl :
+  ControllerCoalition → Access.DemoRoute → Set where
+  sharedLocalCloudOne :
+    CoalitionControl sharedAndLocal Access.cloudOne
+  sharedLocalCloudTwo :
+    CoalitionControl sharedAndLocal Access.cloudTwo
+  sharedLocalLocal :
+    CoalitionControl sharedAndLocal Access.privateLocal
+
+  sharedPeerCloudOne :
+    CoalitionControl sharedAndPeer Access.cloudOne
+  sharedPeerCloudTwo :
+    CoalitionControl sharedAndPeer Access.cloudTwo
+  sharedPeerPeer :
+    CoalitionControl sharedAndPeer Access.federatedPeer
+
+  localPeerLocal :
+    CoalitionControl localAndPeer Access.privateLocal
+  localPeerPeer :
+    CoalitionControl localAndPeer Access.federatedPeer
+
+  allCloudOne :
+    CoalitionControl allThree Access.cloudOne
+  allCloudTwo :
+    CoalitionControl allThree Access.cloudTwo
+  allLocal :
+    CoalitionControl allThree Access.privateLocal
+  allPeer :
+    CoalitionControl allThree Access.federatedPeer
+
+allThreeControlsEveryRoute :
+  (route : Access.DemoRoute) →
+  CoalitionControl allThree route
+allThreeControlsEveryRoute Access.cloudOne = allCloudOne
+allThreeControlsEveryRoute Access.cloudTwo = allCloudTwo
+allThreeControlsEveryRoute Access.privateLocal = allLocal
+allThreeControlsEveryRoute Access.federatedPeer = allPeer
+
+record CoalitionIndependentRoute
+    (group : ControllerCoalition) : Set where
+  constructor coalitionIndependentRoute
+  field
+    route : Access.DemoRoute
+    feasible : Access.DemoFeasible
+      Access.citizen Access.independentScientificCheck route
+    outsideJointControl : CoalitionControl group route → ⊥
+
+open CoalitionIndependentRoute public
+
+sharedLocalStillHasPeer :
+  CoalitionIndependentRoute sharedAndLocal
+sharedLocalStillHasPeer =
+  coalitionIndependentRoute
+    Access.federatedPeer Access.federatedPeerRuns (λ ())
+
+sharedPeerStillHasLocal :
+  CoalitionIndependentRoute sharedAndPeer
+sharedPeerStillHasLocal =
+  coalitionIndependentRoute
+    Access.privateLocal Access.privateLocalRuns (λ ())
+
+localPeerStillHasCloud :
+  CoalitionIndependentRoute localAndPeer
+localPeerStillHasCloud =
+  coalitionIndependentRoute
+    Access.cloudOne Access.cloudOneRuns (λ ())
+
+allThreeCoalitionCanBlockEveryOption :
+  CoalitionIndependentRoute allThree → ⊥
+allThreeCoalitionCanBlockEveryOption independent =
+  outsideJointControl independent
+    (allThreeControlsEveryRoute (route independent))
+
+singleActorProofDoesNotDefeatCoalition :
+  Access.ActorIndependentKnowledge
+    Access.demoAccess Access.citizen Access.independentScientificCheck
+singleActorProofDoesNotDefeatCoalition =
+  Access.canonicalNoSingleActorCut
+
+-- Combined message: single actor escape + some pair escapes are proven
+-- for the toy graph, but full joint administrative control defeats them.
+-- Tests against real infrastructure require named provider identity,
+-- independent keys, hardware/energy, physical jurisdiction, deployable
+-- weights, policy/transport/revocation authority and workable cost bounds.
