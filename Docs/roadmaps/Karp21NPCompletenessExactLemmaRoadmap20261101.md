@@ -110,6 +110,14 @@ E11's construction checks the literal-source SAT truth after removing tautologic
 
 **Revised finite implementation coverage: 20/20 historical direct reductions have a source-written executable candidate and passing bounded equivalence controls, spread across three scripts** (`check_karp_historical_reductions.py`, `check_karp_remaining_four_gadgets.py`, `check_karp_partition_maxcut.py`), plus a fourth independent flow/APX consumer. This does **not** prove any complete reduction theorem in Agda. All 20 remain open for general correctness proofs, binary encoding, constructive witness sizes, and actual polynomial machine costs. Completion count for 21 NP-completeness theorems remains 0/21.
 
+### Binary-size repair (implemented, still awaiting formal time/size proofs)
+
+The finite executables now normalize actual SAT variable identifiers to a dense `1..m` index before E01 binary-IP matrix construction and E11 colouring palette construction. Otherwise an instance declaring variable index `10^15` but using only one literal would allocate `10^15` columns/anchor vertices, which is not polynomial in the input's **binary length**. Regressions include a sparse variable of index `10^15`.
+
+Likewise E13 `colouring_to_exact_cover` now returns a constant-size YES exact-cover instance whenever binary-encoded `k≥n`, rather than constructing `k` colour gadgets. The general branch only uses `k<n`. E09 already bounds nontrivial anchor count by the number of active vertices, with trivial YES guards.
+
+Required additional formal lemmas: `denseCNFRenamingSatisfiabilityIff`, `denseCNFRenamingBitCost`, `colouringBudgetAboveVertexCountAlwaysYes`, `colouringToExactCoverBoundedPalette`, `binaryIPSlackBitwidthSuffices`. Proving only the constructor's termination (or testing the above finite controls) does not discharge `PR.polynomialTimeMap` in the real encoded cost model.
+
 ## Conditional kernel-facing 21-node proof compiler (source-written)
 
 `DASHI/Mathematics/Complexity/Karp21CertifiedDagTransportExact.agda` now defines:
