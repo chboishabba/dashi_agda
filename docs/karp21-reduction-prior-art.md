@@ -13,8 +13,8 @@ Given a shared encoded word carrier, polynomial-time-map composition, an NP-hard
 - Clique -> set packing; vertex cover.
 - Vertex cover -> set covering; feedback vertex set; feedback arc set; directed Hamiltonian cycle.
 - Directed Hamiltonian cycle -> undirected Hamiltonian cycle.
-- 3-SAT -> chromatic number.
-- Chromatic number -> clique cover; exact cover.
+- 3-SAT -> chromatic number; clique cover.
+- Chromatic number -> exact cover.
 - Exact cover -> hitting set; Steiner tree; 3-dimensional matching; knapsack (Karp's subset-sum-like variant).
 - Knapsack -> sequencing; partition.
 - Partition -> max cut.
@@ -37,6 +37,41 @@ The graph is the historical source diagram. Validate individual transformations 
 - **K05**: EXACT COVER -> Karp KNAPSACK -> PARTITION -> weighted threshold MAX CUT (explicit arithmetic base/carry, signed weights and thresholds).
 - **K06**: remaining feedback-set, Hamiltonian, Steiner tree, hitting set, and sequencing edges.
 - **K07**: all 21 NP-membership proofs and end-to-end reduction-chain composition, runtime/encoding audit, independent verification.
+
+## 2026-11-01 extended tranche: eight user-selected subjects, with exact semantic ownership
+
+| Subject | Original Karp variant / separate definition | In-repo or upstream prior art | Unpaid edge |
+| --- | --- | --- | --- |
+| Integer programming | #2 is **0–1 feasibility of integer equations** Cx=d, not arbitrary optimisation or real LP. SAT clause inequalities require a proof-preserving 0–1 equality/slack encoding and polynomial bit bound. | `PolynomialReductionExact`; Cook source evaluator; Lean OAI SAT-378 staged compiler is distinct | SAT -> binary IP (full equations and slack) |
+| Set packing | #4: choose at least k pairwise disjoint sets; Karp's CLIQUE reduction uses vertex-indexed sets of **nonedges**. | New `Karp21CliqueVertexCoverExact` isolates related Boolean graph semantics; no concrete packing sets yet | CLIQUE -> SET PACKING incidence and cardinality |
+| Vertex cover | #5 NODE COVER: choose at most ℓ vertices meeting all edges. Original CLIQUE -> cover on complement graph with ℓ = n-k. | `Karp21CliqueVertexCoverExact` proves carrier-polymorphic constructive semantic equivalence for fixed vertex predicates; OAI source `OAI/Computability/VertexCover/Main.lean` derives separate approximation gap | Finite count lemma: |complement S|=n-|S|, bit-graph implementation, polynomial time |
+| Job-shop scheduling | **Not Karp's #19**. Karp's #19 is single-machine JOB SEQUENCING with processing times T, deadlines D, penalties P and total late penalty ≤ k. Job-shop additionally imposes multi-machine precedence/resource constraints. | OAI `ThreeMachine` is another different scheduling object | KNAPSACK -> Karp JOB SEQUENCING; independently typed job-shop instance bridge |
+| Maximum cut | #21 weighted threshold cut with integer edge weights and W>0, from PARTITION; not a generic DAG planning max-cut. | New `Karp21WeightedCutObjectiveExact` proves global-side-flip invariance of a weighted edge-list objective and threshold-witness transport. OAI `OptimalMaxCut.main` proves source-written strong **unweighted simple graph approximation-gap hardness**, separate from Karp's weighted exact decision variant. `#1438` 27-grid is a finite objective/test, not general NP-hardness. | Exact PARTITION -> weighted threshold MAX CUT, integer and binary-bit-size proofs; OAI general graph same-object bridge and transferred gap |
+| Minimum k-cut | Minimisation partition into k parts, not MAX CUT; fixed k has polynomial algorithms, variable k is NP-complete and parameterized-k hardness has separate results. For k=2 connects to s-t mincut (with terminal separation) and global mincut, but **not** MAX CUT. | Existing network-capacity planning owner is only qualitative | Positive-weight graph, k-partition exact objective; fixed-k/variable-k distinctions and algorithm/cost bridge |
+| APX | Class of NPO problems with constant-factor polynomial approximation. **Decision Karp reductions do not automatically preserve approximation ratios.** | OAI `OAI.OptimalMaxCut.main` gap construction, `OAI.VertexCover.every_fixed_factor_below_two`; these are family 102 and VertexCover source declarations, not copied proof ownership | AP-reduction / L-reduction and approximation-ratio transport (zero-optimum/weight-sign assumptions explicit) |
+| Ford-Fulkerson | Max **flow** through directed capacitated network, not maximum cut; value equals minimum *s-t* cut capacity. Integer capacities give pseudo-polynomial generic augmentations O(E·|f*|), BFS Edmonds–Karp O(V E²); irrational capacities may not terminate under path choice. | `DASHI/Planning/NetworkFlowCapacityCongestionExact.agda` is a toy shared-capacity counterexample, **not** a residual-network/max-flow formalization. `DASHI/Computation/BellmanFordRelaxationScheduleFibreExact.agda` concerns Bellman–Ford shortest-path schedule, **not** Ford–Fulkerson. No same-object algorithm owner found in indexed Agda head. | Explicit residual graph, flow conservation, augmentation preservation, no augmenting path -> min-cut certificate and machine cost |
+
+### Pin the concrete OpenAI math prior art, without a status promotion
+
+- `chboishabba/dashi_lean4` PR #78 imports upstream `openai/math` via a pin, and separately indexes a newer 208-declaration catalogue. Its `SourceAtlas` routes family 102 `OAI.OptimalMaxCut.main`; source inspection at `openai/math/lean/OAI/Computability/MaxCut/Main.lean` shows a Lean theorem constructing gap reductions for every alpha strictly above the Goemans–Williamson ratio, α ≤ 1, with finite TM and soundness/completeness fields.
+- OAI `lean/OAI/Computability/VertexCover/Main.lean` proves `VertexCover.every_fixed_factor_below_two` from an explicit gap reduction and a hypothesized α-approximation algorithm (1 ≤ α < 2). It does not establish P ≠ NP.
+- Comparator challenge files may include `sorry`; cite actual solution modules and kernel receipts, **not comparator statements**. Neither upstream theorem is automatically an accepted DASHI Lean port or Agda theorem.
+- The source-written `scripts/check_openai_maxcut_orbit_objective.py` computes finite quotient objectives, with a strict-loss example when a symmetry-constrained cut excludes unrestricted optima. This is a finite regression, **not** Karp NP-hardness, OAI gap-hardness, or global optimality after quotient.
+
+### Additional exact Agda modules now owned by DASHI
+
+1. `Karp21CliqueVertexCoverExact.agda`: constructive equivalence of a chosen clique and its complementary vertex cover in the complementary adjacency graph, for off-diagonal edges, both directions. It intentionally does not assume the quantitative ℓ=n−k identity; that must be proved for a concrete finite graph before claiming a reduction.
+2. `Karp21WeightedCutObjectiveExact.agda`: finite edge-list objective over any carrier/weight type/zero/combine, proves that reversing every Boolean side label preserves the objective, and transports threshold witnesses. This algebraic identity is valid even for **signed** weights. It is **not** a polynomial search algorithm.
+3. `Karp21ReductionTransportExact.agda`: inherited NP-completeness across a **supplied** concrete costed many-one reduction.
+
+### Highest-alpha next receipts
+
+- **K02a** concrete finite complement graph, exact vertex-count identity and polynomial bit-complexity witnesses.
+- **K03a** edge-indexed nonedge incidence construction for set packing; prove disjointness iff clique using symmetry and looplessness.
+- **K05a** Karp PARTITION -> MAX CUT weighted complete graph algebra. For c_i and T=Σc_i, the cut weight is (Σ_{i∈S} c_i)(T-Σ_{i∈S} c_i). Target threshold must be chosen with integer rounding to distinguish equality from near misses. Prove the sign/threshold and binary bit-size cases, not only this formula.
+- **K08a** APX / approximation-preserving reduction interfaces for OAI MaxCut and VertexCover with executable same-object source and author credit.
+- **K09a** residual max-flow and min s-t cut, exposing a direct graph-cut objective bridge but explicitly **no** mincut-to-maxcut equivalence.
+- **K10a** job sequencing versus job-shop typed adapters and upstream ThreeMachine provenance audit.
 
 ## Important boundaries
 The phrase *max-cut* used for research prioritization in DASHI is not Karp's weighted graph MAX CUT. Likewise Yang-Mills finite compatibility cliques are not the general CLIQUE NP-completeness result. Keep the two uses separate. Optimization and decision variants must be connected by explicit bridges.
