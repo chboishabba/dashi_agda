@@ -24,7 +24,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_; _++_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
 import Data.Nat.Properties as NatP
@@ -99,7 +99,7 @@ signlessOneListAppend (e ∷ es) right =
   trans
     (cong (λ score → signlessOneEdgeScore e + score)
       (signlessOneListAppend es right))
-    (NatP.+-assoc
+    (sym (NatP.+-assoc
       (signlessOneEdgeScore e)
       (signlessOneListScore es)
-      (signlessOneListScore right))
+      (signlessOneListScore right)))
