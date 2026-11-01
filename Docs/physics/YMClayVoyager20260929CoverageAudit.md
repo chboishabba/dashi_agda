@@ -82,3 +82,18 @@ Source-written Agda `DASHI/Physics/YangMills/YMClayVoyagerR4HodgeBasisExact.agda
 ### Physical interpretation corrections
 
 The video occasionally compresses distinct statements. Euclidean Wick rotation gives formal weights `exp(-S_E/hbar)` under suitable analytic assumptions; it does **not** alone prove a positive gauge-invariant measure or OS reflection positivity. The original four-dimensional Clay problem is about **nontrivial quantum pure Yang-Mills**, not the existence of arbitrary four-dimensional quantum field theories (free fields are mathematically well-defined). Similarly pure YM glueballs/observable excitations, QCD with quarks, and static external-quark confinement are not definitionally the same object. A lattice Wilson loop's normalized trace being bounded is not yet the theorem that its continuum expectation obeys the correct large-distance rate.
+
+
+## 1 November — requested full cross-domain symmetry follow-up
+
+The requested deeper source read is in [YMClayVoyagerCrossDomainSymmetryMaxCut20261101.md](YMClayVoyagerCrossDomainSymmetryMaxCut20261101.md), with exact module/PR paths for complex and imaginary `J²=-1`, SO2/SO3/Spin, 3+1 signature source/reconstruction status, C3 CMP119 physical field/stress, 27→729→19683 coarse/fine refinement, actual vs analogous Wilson holonomy, Markov kernel vs Markov inequality, 2D/3D/4D/5D comparison, KK/EM5, QCD/E6/Casimir/GRQFT and proposed same-`H_OS` spectral ζ bridge. The video itself does **not** mention zeta.
+
+New finite/source-typed Agda `YMClayVoyagerImaginaryC3DimensionBidiExact` proves signed-axis quarter turn square=antipodal, order four, C3 order three and the sharp no-equivariant-map result between the specific free three-cycle and quarter-turn four-cycle. It does not forbid a 120° C3 subgroup of physical SO2 or become a complex analytical field by itself. Actual complex pair/unit belongs to the older `ConcreteComplex` owner.
+
+New `YMClayVoyagerDimensionSignatureForkExact` distinguishes 2D/3D/4D/5D YM coupling mass exponent `(4-d)/2`, Creutz 5D Euclidean lattice versus dynamical KK 4+S1 versus 3D artificial stochastic time, and 4D Euclidean versus Lorentzian 3+1 as different model constructors. Full KK source/action/radion/EM/gauge/spectral compatibility remains a typed uninhabited input.
+
+The most important older **already-real** C3 owner is `BalabanC3MonsterEquivarianceAuditExact`, which itself reuses `CMP119FlatSide4SpatialC3FieldCovarianceExact` on the literal side-four SU2 bond field and plaquette curls, plus classical curvature and stress. It marks physical nonlinear generated-action same-object continuation and C3 on *every* intermediate recovery carrier as OPEN. Do **not** replace it with an arbitrary C3 phase chart. Use `BalabanWilsonTransferBlockingExact` for the selected OS pullback compatibility theorem. Separately #1249 proves a genuine finite 27/729/19683 path-graph gauge-covariant projection result with negative controls, **not yet this continuum YM object**.
+
+The `dashifine` signature experiments are real, but the current Agda orbit-profile unique-31 proof includes a **signature tag in its profile** and is conditional on the observed profile; it is not an independent physical derivation. Remove the tag and prove objective physical signature discrimination before promotion.
+
+This corrects the earlier completeness claim: **topic coverage is now much broader, but full use of existing symmetry for the selected 4D physical theory is definitely not finished.**
