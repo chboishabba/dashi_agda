@@ -24,7 +24,8 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List)
 open import Data.Product using (_×_)
-open import Data.Integer as Int using (ℤ; _+_; _-_; _*_; _≤_)
+import Data.Integer as Int
+open Int using (ℤ; _+_; _-_; _*_; _≤_)
 import Data.Integer.Properties as IntP
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 
