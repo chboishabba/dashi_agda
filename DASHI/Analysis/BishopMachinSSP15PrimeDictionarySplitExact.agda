@@ -29,6 +29,7 @@ import Data.Nat.ListAction as Product
 import Data.List.Base as List
 import Data.List.Relation.Unary.All as All
 import Data.Nat.Primality as Prime
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Nullary using (yes; no)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -156,3 +157,46 @@ denominatorProductBidi n = productAgreement (denominatorSplit n)
 -- reconstructed by Raw.numeratorReconstructs/denominatorReconstructs.
 -- A zero numerator is handled by Raw.zeroFactorisation and never
 -- reinterpreted as an empty factor product (=1).
+
+------------------------------------------------------------------------
+-- K04c3: TRUE NUMERIC RECONSTRUCTION WITH AN EXPLICIT ZERO CASE.
+-- In particular, [] has product 1 in Nat, so the zero numerator must
+-- NEVER silently round-trip through the empty factor list as 1.
+-- The original signed numerator is retained in Raw.canonicalStage.
+------------------------------------------------------------------------
+
+numeratorMagnitudeZeroOrReconstructs :
+  (n : Nat) →
+  (Raw.stageNumeratorMagnitude n ≡ zero) ⊎
+  (Raw.stageNumeratorMagnitude n
+    ≡ Product.product (dictionary (numeratorSplit n)) *
+      Product.product (residual (numeratorSplit n)))
+numeratorMagnitudeZeroOrReconstructs n
+  with Raw.numeratorFactorisation n
+... | Raw.zeroFactorisation = inj₁ refl
+... | Raw.positiveFactorisation f =
+  inj₂
+    (trans
+      (sym (Raw.numeratorReconstructs n))
+      (numeratorProductBidi n))
+
+denominatorMagnitudeZeroOrReconstructs :
+  (n : Nat) →
+  (Raw.stageDenominator n ≡ zero) ⊎
+  (Raw.stageDenominator n
+    ≡ Product.product (dictionary (denominatorSplit n)) *
+      Product.product (residual (denominatorSplit n)))
+denominatorMagnitudeZeroOrReconstructs n
+  with Raw.denominatorFactorisation n
+... | Raw.zeroFactorisation = inj₁ refl
+... | Raw.positiveFactorisation f =
+  inj₂
+    (trans
+      (sym (Raw.denominatorReconstructs n))
+      (denominatorProductBidi n))
+
+-- The existing unnormalised ℚᵘ type has denominator suc(d-1), and
+-- numerator is the existing signed integer Raw.stageSignedNumerator.
+-- These casewise statements are intentionally stronger than
+-- PrimeCompressionFibre's bare list-of-numbers fields: they cannot
+-- confuse numeric product 1 with zero and they retain arbitrary primes.
