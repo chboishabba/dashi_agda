@@ -6,6 +6,7 @@ module DASHI.Mathematics.Complexity.Karp21Everything where
 -- Source-written only until checked with the pinned Agda toolchain.
 ------------------------------------------------------------------------
 
+import DASHI.Mathematics.Complexity.Karp21HistoricalDagExact
 import DASHI.Mathematics.Complexity.PolynomialReductionExact
 import DASHI.Mathematics.Complexity.Karp21ReductionTransportExact
 import DASHI.Mathematics.Complexity.Karp21CliqueVertexCoverExact
