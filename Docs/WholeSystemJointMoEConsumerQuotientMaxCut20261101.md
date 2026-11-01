@@ -252,3 +252,56 @@ original heldout split; the GitHub connector cannot access their local
 `/tmp/real_text_moe_jq1_smoke` directory or execute the new scripts.
 Agda kernel status: new no-go source written with `--safe`, **not
 kernel checked**.
+
+
+## 9. E8-first correction and quality-guarded shared canonical-history programme
+
+The model's 384D width admits 48 coordinate charts of rank 8, grouped
+three per 24D block and six per 48D attention head. **E8** is the
+natural candidate rank-eight root-lattice inductive prior (240 actual
+roots), not the *eight points* of the punctured 9 index carrier.
+DASHI's earlier E8/Leech sources and engineering-only
+`LilaE8InitialisationPriorNote.agda` are explicitly reused in
+`Reasoning/LeechE8PriorStrataBidiExact.agda`.
+The neural model's currently trained QR Q/K gauge and E8-named
+tokenizer do not themselves certify the prior.
+
+Companion Python PR #4 now has executable `e8_root_invariant`
+routing with all 240 E8 roots, mathematically valid root reflections
+and numerical Weyl invariance tests, distinct from punctured-nine.
+It adds opt-in `moe_guarded_ffn` with teacher FFN residual at
+gate zero and progressive calibration on a split drawn only from
+training data. The untouched HELDOUT evaluates real quality after
+each experiment. Failure of standalone candidate CE=8.63/17.30
+cannot be papered over by a zero-gate fallback: the full teacher
+remains in memory and no parameter saving is claimed.
+
+New `Reasoning/LeechSharedCanonicalOrbitHistoryExact.agda` proves
+the arbitrary-E re-opening law for one canonical history and E
+invertible action charts. It supplies the missing *structural
+assumption* for compressibility that the old per-expert C2 proof
+does not entail. The Python `E8SharedOrbitHistoryMoE` maintains
+that invariant by construction, updates the single canonical
+source from route-weighted selected proposal inversions, and
+reconstructs arbitrary selected memories after dispatch.
+
+New JQ1 `shared_e8` can transmit one canonical history even when
+none of the selected expert IDs is the identity-chart owner, plus
+independently approved E8 action witnesses and every necessary exact
+byte correction. It is not a magical lossless compressor for
+arbitrary independently trained expert histories. Same learned
+model must pass task-quality and historical replay gates before any
+network improvement is promoted.
+
+User's prior 64/32 TinyStories 1-epoch result and 82 passing tests
+are historical evidence; new E8/guarded/shared-orbit source code is
+not kernel-checked or full-suite-executed in the current connector.
+For local commands and exact remaining max-cut, use the companion
+`LeechTransformer/docs/e8_first_quality_guarded_joint_history_maxcut_20261101.md`.
+
+Distinct ownership: E8 root system and Weyl group are classical
+mathematics, source formalized in prior DASHI Agda; Leech original
+engineering architecture by Anatolii Kornienko; finite F3²/
+punctured-nine, modular j and Sophontic argument opposition are
+independent operators with independent proof contracts. No Monster
+or ESD owner is overwritten.
