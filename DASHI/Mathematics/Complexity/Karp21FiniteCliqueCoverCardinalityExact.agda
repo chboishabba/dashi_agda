@@ -86,14 +86,17 @@ cliqueBoundToCoverBound :
   countChosen (flipChoices choices) + k ≤ length choices
 cliqueBoundToCoverBound choices k lower =
   NatP.≤-trans
-    (NatP.+-monoʳ-≤
-      (countChosen (flipChoices choices)) lower)
     (NatP.≤-reflexive
-      (trans
-        (NatP.+-comm
-          (countChosen (flipChoices choices))
-          (countChosen choices))
-        (cliqueCoverFiniteCardinalityComplement choices)))
+      (NatP.+-comm (countChosen (flipChoices choices)) k))
+    (NatP.≤-trans
+      (NatP.+-monoʳ-≤
+        (countChosen (flipChoices choices)) lower)
+      (NatP.≤-reflexive
+        (trans
+          (NatP.+-comm
+            (countChosen (flipChoices choices))
+            (countChosen choices))
+          (cliqueCoverFiniteCardinalityComplement choices))))
 
 coverBoundToCliqueBound :
   (choices : List Bool) (k : Nat) →
