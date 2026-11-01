@@ -82,6 +82,42 @@ def threshold_for_nonzero_total(parts: tuple[int, ...]) -> int:
     return (total * total + 3) // 4
 
 
+
+def signed_bit_budget(value: int) -> int:
+    """Conservative sign + magnitude bit count, never zero."""
+    return 2 + abs(value).bit_length()
+
+
+def graph_bit_budget(parts: tuple[int, ...]) -> tuple[int, int]:
+    """Count explicit node identifiers and binary edge weights only.
+
+    This bounds OUTPUT LENGTH; it does not prove a Turing machine's
+    construction runtime. A canonical separator/length framing adds at most
+    a polynomial additional overhead.
+    """
+    source_bits = (len(parts) + 1).bit_length()
+    source_bits += sum(signed_bit_budget(x) for x in parts)
+    n, edges, threshold = reduce_partition_to_cut(parts)
+    endpoint_bits = max(1, (n + 1).bit_length())
+    output_bits = (n + 1).bit_length() + threshold.bit_length() + 2
+    output_bits += sum(2*endpoint_bits + signed_bit_budget(w) + 3
+                       for _,_,w in edges)
+    return source_bits, output_bits
+
+
+def test_binary_size_envelope() -> None:
+    # This bound is deliberately loose but explicit and measured on
+    # genuinely binary-sized inputs, including million-bit-style magnitudes.
+    for n in range(0, 9):
+        for b in (0, 1, 2, 8, 64, 1024):
+            parts = tuple(((1 << b) if i % 2 == 0 else -(1 << b))
+                          for i in range(n))
+            source_bits, output_bits = graph_bit_budget(parts)
+            assert output_bits <= 32 * (source_bits + 1)**3
+    source_bits, output_bits = graph_bit_budget((2,1))
+    assert output_bits <= 32 * (source_bits + 1)**3
+
+
 def main() -> None:
     positive_count = 0
     for n in range(1, 7):
@@ -96,6 +132,7 @@ def main() -> None:
             signed_count += 1
 
     test_printed_1972_threshold_counterexample()
+    test_binary_size_envelope()
     print("PASS Karp p.100 printed-threshold counterexample (2, 1); "
           "repaired square-of-total formulation distinguished")
     print(f"PASS: {positive_count} positive and {signed_count} signed/zero "
