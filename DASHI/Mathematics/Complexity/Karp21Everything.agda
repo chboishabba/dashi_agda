@@ -24,3 +24,5 @@ import DASHI.Mathematics.Complexity.Karp21ScaledThresholdExact
 import DASHI.Mathematics.Complexity.Karp21PartitionScaledInstanceExact
 
 import DASHI.Mathematics.Complexity.Karp21HeterogeneousEncodingExact
+
+import DASHI.Mathematics.Complexity.Karp21FiniteCliqueCoverCardinalityExact
