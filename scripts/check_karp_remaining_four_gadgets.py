@@ -78,7 +78,11 @@ def graph_to_directed_hamiltonian(n, edges, k):
     # Empty graph and a budget covering all active vertices are fixed YES.
     if not edges or k >= len(set(v for e in edges for v in e)):
         return 3, frozenset({(0,1),(1,2),(2,0)})
-    assert k > 0
+    if k <= 0:
+        # For nonempty E, a zero (or negative) vertex budget is impossible.
+        # The original positive-k statement does not need this branch, but
+        # a total encoded reduction must never assert/crash on malformed k.
+        return 3, frozenset()
     ordered=tuple(sorted(edges))
     incident={v: [i for i,e in enumerate(ordered) if v in e] for v in range(n)}
     nodes=[('a',f) for f in range(k)]
@@ -193,7 +197,7 @@ def main():
             for k in range(0,3):
                 assert exact_cover(colouring_to_exact_cover(n,edges,k)) == colouring(n,edges,k)
                 counts['E13']+=1
-                if edges and 0 < k < n:
+                if k < n:
                     expected=vertex_cover(n,edges,k)
                     observed=directed_ham_dp(*graph_to_directed_hamiltonian(n,edges,k))
                     assert expected==observed,('E09',n,edges,k)
