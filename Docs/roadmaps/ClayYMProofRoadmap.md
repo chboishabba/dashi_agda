@@ -871,3 +871,24 @@ the **physical oriented contour evaluation/reindexing** and universal
 group reversal itself no longer needs an arbitrary external assumption.
 
 The literal native SU2 n=3 bond field <-> dependent positive-edge graph map now has **both** pointwise roundtrip theorems including arbitrary selected graph fields; no function extensionality nor off-carrier topology was used. Source-written, not kernel-verified.
+
+
+### 2026-11-01 decisive max-cut recut — original six-plane C3 and native universe
+
+**New actual-source lemmas on PR #1444 (source-written, Agda exact-head not run):**
+1. Lower the *original* `RationalSU2BondData n` from an unnecessarily lifted `Set₁` to `Set`, consistent with its fields and with existing `RationalWilsonObservable n : Set` / physical finite `Configuration : Set`. This is a required typed bridge; check all importers on compilation.
+2. `YMClayNativeSixPlaneC3SourceReductionExact.nativeSixC3Summed` reduces the **original six positive planes** to two concrete reversed orientations (21 and 31).
+3. `YMClayNativeSixPlaneC3ActualPhysicalSourceExact.nativeSixPositiveWilsonActionSpatialC3` uses **existing** `pathHolonomyReverseOpposite` + `periodicPlaquetteClosure` and native trace inverse to pay both orientation cases and assert universally quantified native finite six-plane Wilson C3 invariance. No novel source axiom.
+4. `YMClayR443NativeSixPlaneHaarNumeratorExact.nativeSixPlaneNumeratorC3Invariant` passes this same six-plane native finite action into the pre-existing R443 Gibbs/Haar and R431 numerator compilers, retaining only selected physical **Gibbs-density identification** and **compact product/constrained Haar C3 change-of-variables** as hypotheses.
+5. `YMClayR443NativeSixPlaneC3SequenceLimitExact` compiles actual cutoff-indexed R431 numerator → normalized finite expectation → selected scalar-limit C3 invariance with **the same n=3 native configuration**; this does not manufacture a 4D continuum, which requires scale/refinement identification.
+6. `YMClayR445NativeSU2R443SameObjectExact` proves definitional R443/R445 configuration identity, real native Wilson observable embedding and specializes the existing native P2 finite cylinder expectation convergence conditional on genuine preferred physical measure data.
+
+**Re-ranked exact remaining mathematical max-cut, not to be conflated with the above:**
+- **K0 compiler**: Agda exact-head kernel acceptance of native universe change and all 1 Nov modules/transitive safe imports; no claim until run.
+- **R443-Haar**: an actual compact SU2/SUN product/constrained Haar C3 change-of-variables theorem, plus the **same finite Wilson/Gibbs physical measure/density**, coupling normalisation and full real-group identification. The rational quaternion finite source theorem is only a rational subcarrier; genuine compact SU2 Haar lives on its real completion.
+- **R443-lattice**: selected UV-varying physical lattice, restriction/projection compatibility and actual original CMP119 nonlinear generated action: fixed n=3 finite side-four expectation sequences are not a continuum regularisation.
+- **R445-T**: uniform-in-cutoff/volume physical bounded-observable tail and moment/coercivity-tightness estimates, selected limiting measure, plus continuum Wilson observable compatibility; R444 supplies moments only subject to its source hypotheses, not the tails.
+- **R320-H1**: same original selected J-family marked second derivative exponential/rooted-shell estimate with volume/scale uniform constants, not the easy finite quaternion trace bound.
+- **R333-H3/P3**: selected R281 physical decay spectrum equals the H2 OS reconstructed Hamiltonian, OS positivity/reflection, mass-gap lower bound independent of volume/lattice spacing, and infinite-volume/UV nontriviality. Claiming these from symmetry would be a Clay problem breakthrough not proved by the code.
+
+**No Clay promotion.** Universal 16ordered↔6 constant relation still not kernel proved but **not needed for the now source-backed six-plane C3 route**.
