@@ -86,7 +86,7 @@ unresolvedNotAutomaticallyReviewed :
   MayPromoteToReviewed unresolved → ⊥
 unresolvedNotAutomaticallyReviewed ()
 
-record ConnectedDigitalESDTimeHyperfabric : Set₁ where
+record ConnectedDigitalESDTimeHyperfabric : Set₂ where
   constructor connected-digital-esd-time-hyperfabric
   field
     canonicalFabric : Fabric.PNFHyperfabric369Surface
