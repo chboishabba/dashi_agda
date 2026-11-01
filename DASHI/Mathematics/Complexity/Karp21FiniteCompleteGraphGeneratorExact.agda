@@ -22,7 +22,7 @@ open import Data.Integer using (ℤ; _*_)
 open import Data.List.Base using (List; []; _∷_; _++_; map)
 
 import Data.List.Properties as ListP
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
@@ -57,13 +57,38 @@ promoteHeadEdge e =
   Cut.edge Fin.zero (Fin.suc (Cut.second e)) (λ ())
     (Cut.weight e)
 
+-- Typed head/target pairs retain precisely the Fin tail address.
+-- The Karp edge serializer then supplies the off-diagonal proof.
+record HeadLink (n : Nat) : Set where
+  constructor head-link
+  field
+    target : Fin.Fin n
+    signedWeight : ℤ
+
+open HeadLink public
+
+promoteHeadLink :
+  ∀ {n} → HeadLink n → HeadLink (suc n)
+promoteHeadLink link =
+  head-link (Fin.suc (target link)) (signedWeight link)
+
+headLinks :
+  ∀ {n} → ℤ → Vec.Vec ℤ n → List (HeadLink n)
+headLinks x Vec.[] = []
+headLinks {suc n} x (y Vec.∷ ys) =
+  head-link Fin.zero (x * y)
+  ∷ map promoteHeadLink (headLinks x ys)
+
+emitHeadLink :
+  ∀ {n} → HeadLink n → Cut.SignedUndirectedEdge (suc n)
+emitHeadLink link =
+  Cut.edge Fin.zero (Fin.suc (target link))
+    (λ ()) (signedWeight link)
+
 headPairs :
   ∀ {n} → ℤ → Vec.Vec ℤ n →
   List (Cut.SignedUndirectedEdge (suc n))
-headPairs x Vec.[] = []
-headPairs {suc n} x (y Vec.∷ ys) =
-  Cut.edge Fin.zero (Fin.suc Fin.zero) (λ ()) (x * y)
-  ∷ map promoteHeadEdge (headPairs x ys)
+headPairs x xs = map emitHeadLink (headLinks x xs)
 
 -- Graph construction depends *only* on signed source weights.
 -- This construction is total for empty/singleton vectors too.
@@ -98,13 +123,21 @@ completePairEdgesSingleton x = refl
 -- This is independent of the binary cut assignment and edge weights.
 ------------------------------------------------------------------------
 
+headLinkCount :
+  ∀ {n} (x : ℤ) (rest : Vec.Vec ℤ n) →
+  Data.List.Base.length (headLinks x rest) ≡ n
+headLinkCount x Vec.[] = refl
+headLinkCount x (y Vec.∷ ys)
+  rewrite ListP.length-map promoteHeadLink (headLinks x ys)
+        | headLinkCount x ys = refl
+
 headPairCount :
   ∀ {n} (x : ℤ) (rest : Vec.Vec ℤ n) →
   Data.List.Base.length (headPairs x rest) ≡ n
-headPairCount x Vec.[] = refl
-headPairCount x (y Vec.∷ ys)
-  rewrite ListP.length-map promoteHeadEdge (headPairs x ys)
-        | headPairCount x ys = refl
+headPairCount x rest =
+  trans
+    (ListP.length-map emitHeadLink (headLinks x rest))
+    (headLinkCount x rest)
 
 triangularPairCount : Nat → Nat
 triangularPairCount zero = zero
