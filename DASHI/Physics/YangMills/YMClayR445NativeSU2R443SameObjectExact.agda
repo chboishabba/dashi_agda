@@ -48,6 +48,20 @@ r443SixPlaneActionIsNativeWilsonObservable dataSet = refl
 nativeR443SixPlaneR445Observable : Wilson.RationalWilsonObservable Weld.three
 nativeR443SixPlaneR445Observable = R443.nativeSixTrace
 
+-- The physical Wilson *deficit*, not just its raw trace, is also a
+-- function on the exact same R445 native observable carrier.
+-- Boundedness of each elementary Wilson loop is independently proved
+-- already; one must still compile the SIX-SITE-SUM bounded majorant to
+-- identify this particular total action with R445's BoundedObservable.
+nativeR443SixDeficitR445Observable : Wilson.RationalWilsonObservable Weld.three
+nativeR443SixDeficitR445Observable = R443.nativeSixWilsonDeficit
+
+r443SixDeficitIsNativeObservableSameObject :
+  ∀ dataSet →
+  nativeR443SixDeficitR445Observable dataSet
+  ≡ R443.nativeSixWilsonDeficit dataSet
+r443SixDeficitIsNativeObservableSameObject dataSet = refl
+
 -- Existing R445/P2 literal quaternion Wilson-cylinder theorem now accepts
 -- exactly the same physical configuration type as native R443, no cast.
 -- The selected physical measure and its actual tails stay SOURCE inputs.
