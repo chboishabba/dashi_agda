@@ -144,3 +144,12 @@ monitor surface.
   landed through `walkObjectsSucMemberByVertices` and
   `walkObjectExtendMemberByVertices` in
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+
+
+## 2026-11-01 — native Yang–Mills SU2 Wilson/C3 source max-cut
+
+- Explicit source search across continuum A/OS3/R443/R431/R445 and the actual pre-existing periodic rational SU2 group, n=3 physical side-four carrier, quaternion trace and native signed-word Wilson path.
+- Source-wrote actual physical side-four C3 gauge transport and rational SU2 class-function Wilson theorem, plus a bidirectional pointwise native rational bond graph codec and positive-word holonomy/Wilson trace same-object equality, linked to canonical Balaban TOE.
+- No rational quaternion group = full physical compact SU2 Haar measure, no tangent su2 = nonlinear unit link, no arbitrary 369 hyperfabric = physical source, no finite-source = 4D continuum/Clay promotion.
+- Still **UNVERIFIED** by exact-head Agda kernel; docs/roadmap/TODO explicitly retain R443 Haar/finite action, R445 tail, R320/R333 physical spectrum and all continuum gates.
+
