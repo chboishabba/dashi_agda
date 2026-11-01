@@ -22,7 +22,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Integer.Base using (+_)
 import Data.Nat.Properties as NatP
-open import Data.Rational.Unnormalised as Q using (_/_; _≤_; _+_; _*_; *≡*)
+open import Data.Rational.Unnormalised as Q using (ℚᵘ; 1ℚᵘ; _/_; _≤_; _+_; _*_; *≡*)
 import Data.Rational.Unnormalised.Properties as QP
 open import Relation.Nullary.Decidable.Core using (toWitness)
 import ExtraProperties as Extra
