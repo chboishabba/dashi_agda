@@ -17414,3 +17414,9 @@ Cleanup
 - [ ] K04d2: prove `q_n>1` n≥1 in Bishop order, concrete analytic zeta half-plane realization, local uniform Dirichlet convergence and same-object convergence of completed zeta evaluations.
 - [ ] K05b: actual Bishop sin/cos addition and tangent law, quarter-angle branch semantics, sine=0/cos=−1 at pi_M, and independently characterized trigonometric π on the same Agda Bishop carrier. Do not import the source-written Lean result as an Agda proof.
 - [ ] Keep T10 actual prime-pair correlation, R10 RH zero exclusion and P10 `sin(99^(9999!))` terminal certificate OPEN.
+
+### 2026-11-01 K04b2 direct Bishop alternating-tail follow-on
+- [x] Source-write `BishopMachinQuantitativeOmittedTailExact`: instantiate original Bishop arctan interlacing + first-omitted theorem for every even/odd prefix of the original 1/5 and 1/239 signed series, with true Bishop `_≤_` bounds and explicit source provenance.
+- [x] Import its owner through the three canonical TOE roots.
+- [ ] Golden kernel verify `actualArctanEvenRemainderBound`, `actualArctanOddRemainderBound`, concrete four specializations, and transitive imports.
+- [ ] Prove exact first-omitted magnitude = embedded rational `1/((2n+1)d^(2n+1))` on original `Machin.atanMagnitudeTerm` (reusing power/nonnegative embedding), then scale/add all Bishop order inequalities to `|⋆q_n−pi_M|≤e_n≤4/25^n` and `|q_j−q_k|≤8/25^n`.
