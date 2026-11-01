@@ -22,6 +22,8 @@ open Int using (ℤ; +_; _+_; _*_; _≤_)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Product using (_×_; _,_; Σ)
 open import Data.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
+open import Data.Nat using (z≤n)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -172,6 +174,63 @@ sourcePartitionIffConstructedTarget :
     (cutTargetAccepts (partitionToScaledCutTarget parts))
 sourcePartitionIffConstructedTarget parts
   with Int._≟_ (sourceTotal parts) (+ 0)
+... | yes totalZero =
+  PR.iff
+    (λ _ → tt)
+    (λ _ → zeroTotalPartitionYES parts totalZero)
+... | no _ =
+  signedPartitionScaledCutInstanceIff parts
+
+
+------------------------------------------------------------------------
+-- Faithful finite signed target family with a CONSTRUCTIVE positive
+-- threshold certificate, including the exceptional T=0 source case.
+-- A named Target never carries an unjustified zero threshold.
+------------------------------------------------------------------------
+
+data PositiveCutTarget : Set where
+  unitEdgeYesPositive : PositiveCutTarget
+  scaledCompletePositive :
+    (parts : List ℤ) →
+    Scaled.NonZero (sourceTotal parts) →
+    PositiveCutTarget
+
+positiveTargetThreshold : PositiveCutTarget → ℤ
+positiveTargetThreshold unitEdgeYesPositive = Int.+ 1
+positiveTargetThreshold (scaledCompletePositive parts _) =
+  sourceTotal parts * sourceTotal parts
+
+positiveTargetAccepts : PositiveCutTarget → Set
+positiveTargetAccepts unitEdgeYesPositive = ⊤
+positiveTargetAccepts (scaledCompletePositive parts _) =
+  ScaledCutYES parts
+
+unitNonzero : Int.+ 1 ≡ Int.+ 0 → ⊥
+unitNonzero ()
+
+positiveTargetThresholdCertified :
+  (instance : PositiveCutTarget) →
+  Scaled.PositiveThreshold (positiveTargetThreshold instance)
+positiveTargetThresholdCertified unitEdgeYesPositive =
+  Int.+≤+ z≤n , unitNonzero
+positiveTargetThresholdCertified (scaledCompletePositive parts nonzero) =
+  Scaled.nonzeroTotalSquareIsPositiveThreshold
+    (sourceTotal parts) nonzero
+
+totalPartitionToPositiveCut :
+  (parts : List ℤ) → PositiveCutTarget
+totalPartitionToPositiveCut parts
+  with Int._≟_ (sourceTotal parts) (Int.+ 0)
+... | yes _ = unitEdgeYesPositive
+... | no nonzero = scaledCompletePositive parts nonzero
+
+totalPartitionPositiveCutIff :
+  (parts : List ℤ) →
+  PR.Iff
+    (PartitionYES parts)
+    (positiveTargetAccepts (totalPartitionToPositiveCut parts))
+totalPartitionPositiveCutIff parts
+  with Int._≟_ (sourceTotal parts) (Int.+ 0)
 ... | yes totalZero =
   PR.iff
     (λ _ → tt)
