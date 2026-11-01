@@ -13,6 +13,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-16-openai-math-corpus-design.md`
 
+**1 November 2026 supplement — current executable boundary:** Lean PR #78 now contains stricter *constructor-exact* circuit JSON acceptance, Python `stream_original_circuit` bounded-chunk `Encoding.encodeCNF` output, the source-written `Upstream378EncodingLengthExact.exactFormulaBitLength` structural proof, and `sourceListExactBitLength` for the actual OAI finite CNF. The identity `L=v+2+Σ_c(4+Σ_k(4k+8))` is independently arithmetically checked and enforced by the Python code; exact checkout Python regressions and Lean 4.34.1 kernel remain unrun. The Golden 39-ID ledger records this as **partial M00–M03**, not as a finished Agda↔Lean source compiler or primitive-machine all-prefix certificate. No analytic frontier problem is promoted or silently closed.
+
 ## Global Constraints
 
 - Pin `openai/math` exactly at `1581d4cbdd69a0faf34b2089614fe2a814316a6a`.
