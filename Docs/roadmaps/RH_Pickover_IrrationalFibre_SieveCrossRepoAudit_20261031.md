@@ -84,3 +84,5 @@ All changed Agda owners and TOE roots need golden kernel verification. Provenanc
 ### K04b2 actual Bishop first-omitted theorem, not just a rational simulation
 
 `BishopMachinQuantitativeOmittedTailExact` now source-instances the already proved true Bishop alternating-interlacing and signed-first-omitted order certificates for both Machin arguments, proving exact even/odd partial limit remainder inequalities by source owner reuse. Remaining quantitative conversion is first-omitted magnitude → embedded rational power quotient → combined (16/4) signed bound `e_n` → all-n `4/25^n` and endpoint-safe Cauchy. **Kernel pending**; no claim the existing finite exact rational script proves Bishop order.
+
+The K04b2 true Bishop first-omitted magnitude is also source-identified with the **actual rational** `inverseOddRational*kPower` from K04a, by original `powNonnegative` and Bishop rational-power homomorphism. Both 1/5 and 1/239 specializations are supplied. Still OPEN: combined full Machin order envelope, all-index rational `4/25^n` proof in Agda, and kernel check. Do not claim completion of the real π error bound from the finite Python regression.
