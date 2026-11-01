@@ -13,6 +13,7 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Education.DigitalESDSourceAuditAdmissionExact as Admission
+import DASHI.Education.DigitalESDSourceAuditHyperfabricExact as Audit
 import DASHI.Education.DigitalESDSLRSourceReviewBridgeExact as Review
 import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as Canonical
 import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
@@ -114,6 +115,17 @@ record JointReviewHyperedge (case : Cases.CrossPollinationCase) : Set where
 
     sourceAuditAdmission :
       Admission.SourceAuditAdmission (Cases.attributedSource case)
+    -- A complete source-audit record is not sufficient unless the same
+    -- reviewed observation actually occurs inside that admitted hyperfabric.
+    admittedObservation :
+      Audit.SameSourceObservation (Cases.attributedSource case)
+    admittedObservationMatchesReviewed :
+      Audit.SameSourceObservation.observation admittedObservation ≡
+      Review.ReviewedSLRAuditObservation.reviewedObservation reviewedWitness
+    admittedObservationIsInHyperfabric :
+      admittedObservation ∈
+        Audit.SourceAuditHyperfabric.observations
+          (Admission.SourceAuditAdmission.hyperfabric sourceAuditAdmission)
     studyClaimProfile : Ceiling.StudyClaimProfile
     studyClaimIsSameSource :
       Ceiling.StudyClaimProfile.source studyClaimProfile ≡
