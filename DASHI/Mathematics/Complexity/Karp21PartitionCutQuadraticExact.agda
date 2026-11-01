@@ -338,3 +338,72 @@ balancedSelectionIffExactMaximum items =
   PR.iff
     (balancedSelectionImpliesExactMaximum items)
     (exactMaximumImpliesBalancedSelection items)
+
+
+------------------------------------------------------------------------
+-- Historical signed PARTITION uses the equation
+--     2 * sum(selected elements) = sum(all elements).
+-- In this module the selected side is leftTotal. Explicitly connect that
+-- historical equation to the equal-left/equal-right witness used above.
+------------------------------------------------------------------------
+
+twiceLeftMatchesBothWhenBalanced :
+  (a b : ℤ) → a ≡ b → (+ 2) * a ≡ a + b
+twiceLeftMatchesBothWhenBalanced a .a refl =
+  RingZ.solve 1
+    (λ x →
+      (Κ (+ 2) ⊗ x , x ⊕ x))
+    refl a
+
+differenceFromTwiceEqualsTotal :
+  (a b : ℤ) →
+  (+ 2) * a ≡ a + b →
+  a - b ≡ + 0
+differenceFromTwiceEqualsTotal a b eq =
+  trans
+    (RingZ.solve 2
+      (λ a b →
+        (a ⊕ (⊝ b)
+        , ((Κ (+ 2) ⊗ a) ⊕
+          (⊝ (a ⊕ b)))))
+      refl a b)
+    (trans
+      (cong (λ lhs → lhs - (a + b)) eq)
+      (RingZ.solve 2
+        (λ a b →
+          ((a ⊕ b) ⊕ (⊝ (a ⊕ b))
+          , Κ (+ 0)))
+        refl a b))
+
+balancedImpliesHistoricalPartitionEquation :
+  (items : List (ℤ × Bool)) →
+  leftTotal items ≡ rightTotal items →
+  (+ 2) * leftTotal items ≡ signedTotal items
+balancedImpliesHistoricalPartitionEquation items balanced =
+  trans
+    (twiceLeftMatchesBothWhenBalanced
+      (leftTotal items) (rightTotal items) balanced)
+    (sym (signedTotalDecomposes items))
+
+historicalPartitionEquationImpliesBalanced :
+  (items : List (ℤ × Bool)) →
+  (+ 2) * leftTotal items ≡ signedTotal items →
+  leftTotal items ≡ rightTotal items
+historicalPartitionEquationImpliesBalanced items half =
+  differenceZeroImpliesBalance
+    (leftTotal items)
+    (rightTotal items)
+    (differenceFromTwiceEqualsTotal
+      (leftTotal items)
+      (rightTotal items)
+      (trans half (signedTotalDecomposes items)))
+
+historicalPartitionEquationIffBalanced :
+  (items : List (ℤ × Bool)) →
+  PR.Iff
+    ((+ 2) * leftTotal items ≡ signedTotal items)
+    (leftTotal items ≡ rightTotal items)
+historicalPartitionEquationIffBalanced items =
+  PR.iff
+    (historicalPartitionEquationImpliesBalanced items)
+    (balancedImpliesHistoricalPartitionEquation items)
