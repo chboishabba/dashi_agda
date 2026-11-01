@@ -17385,3 +17385,5 @@ Cleanup
 
 - [x] Source-write *universal* four-factor orientation reversal `inverse(A B C⁻¹ D⁻¹)=D C B⁻¹ A⁻¹` and invariant scalar Wilson trace on exact pre-existing norm-one rational SU2 group carrier using native inverseProduct/inverseInverse.
 - [ ] Weld actual side-four native four-site plaquette evaluations to forward/reverse four-group factors; source-write universal 16ordered↔six plane + diagonal multiplicity and coupling normalisation.
+
+- [x] Complete the actual native n=3 positive-bond ↔ typed dependent graph field codec in **both** directions pointwise (`graphRoundTrip`, `nativeRoundTrip`), not just an identity after re-encoding native bonds.
