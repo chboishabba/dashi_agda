@@ -17399,3 +17399,18 @@ Cleanup
 - [ ] Kernel-check the new concrete Bishop K04a source owner and transitive golden imports.
 - [ ] Remaining K04a rational-stage equality: computational `q_n` formula = original Bishop `Sequence.SeriesOf` signed stage after exact rational embedding, avoiding artificial real comparisons.
 - [ ] K04b: combine original actual arctan Bishop convergence with finite linearity and explicit alternating remainder modulus.
+
+## 2026-11-01 — K04a–K05 exact-source max-cut (PR #1408)
+
+- [x] K04a source: implement true `ℚᵘ` Machin `qMachinStage` and all-index Bishop rational embedding `qMachinStageEmbedsAsOriginalBishopPartial` using the original arctangent series and native `RealProperties.⋆-distrib` laws.
+- [x] K04b1 source: compose true Bishop arctangent series convergence into `machinSignedPartialConvergesToOriginalMachinPi` and `rationalMachinStagesConvergeToOriginalMachinPi`.
+- [x] K04c source: reuse standard-library proof-bearing all-prime `factorise` for true numerator/denominator, zero-specific branch, retained signed integer, actual SSP15 dictionary vs residual split and exact multiplicative proof; q1 non-SSP adversary.
+- [x] K04d partial source: concrete Bishop-complex point/limit sequence and genuine existing completed-zeta function's conditional half-plane agreement.
+- [x] K05 partial source: exact Round11 configured pi/Bishop Machin pi identity, original quarter angle and configured complex pi coordinates; no invented trig period identity.
+- [x] Extend rational finite exact checker: n=0, symbolic universal error coefficient `3844/1195 < 4`, finite Cauchy comparisons and q1=3804/1195 residual checks.
+- [ ] **Golden Agda kernel check** the new Bishop rational embedding/limit, factorisation/split, zeta halfplane, K05 Round11 modules and all transitive imports; no CI requested or run.
+- [ ] K04b2: Agda Bishop setoid quantitative inequality `|⋆q_n − bishopMachinPi|≤⋆e_n≤⋆(4/25^n)` using existing alternating first-omitted inequalities, plus Cauchy bound for j,k≥n.
+- [ ] K04c3: if needed explicit inverse signed rational-from-codec theorem (numerator sign, zero, full dictionary+residual product); prove the compact code remains a faithful full irrational-approximation history.
+- [ ] K04d2: prove `q_n>1` n≥1 in Bishop order, concrete analytic zeta half-plane realization, local uniform Dirichlet convergence and same-object convergence of completed zeta evaluations.
+- [ ] K05b: actual Bishop sin/cos addition and tangent law, quarter-angle branch semantics, sine=0/cos=−1 at pi_M, and independently characterized trigonometric π on the same Agda Bishop carrier. Do not import the source-written Lean result as an Agda proof.
+- [ ] Keep T10 actual prime-pair correlation, R10 RH zero exclusion and P10 `sin(99^(9999!))` terminal certificate OPEN.
