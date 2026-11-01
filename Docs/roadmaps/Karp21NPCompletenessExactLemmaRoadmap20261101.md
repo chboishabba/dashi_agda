@@ -224,6 +224,13 @@ An independent local Python truth-table audit of the E05 finite cardinality theo
 
 **Global max-cut unchanged:** `K00` shared machine/word encoding and uniform Cook–Levin SAT completeness; `E01`–`E20` concrete encoded polynomial reductions and costs; `N01`–`N21` polynomial-time verifiers and certificate bounds; donor-source same-object correspondence and independent kernel checking. There are still **0/20** *new kernel-verified concrete costed* direct reductions and **0/21** *new kernel-verified complete problem theorems* on this PR. No CI or Agda typecheck was run.
 
+### Additional E05/N21 witness closure in the same tranche
+
+- `Karp21FiniteCliqueVertexCoverCombinedExact.karpFiniteCliqueVertexCoverInstanceIff`: quantifies over the **same** `Vec Bool n` and proves the full finite existential CLIQUE YES iff finite complement-cover YES decision predicate; not just a pointwise statement for a preselected vector. Exact source/target witness functions: `finiteCliqueYESImpliesComplementCoverYES`, `finiteComplementCoverYESImpliesCliqueYES`. The graph and threshold remain in the same typed `Fin n` representation; the concrete target bitstring's budget `n-k` and machine cost remain open.
+- `Karp21FiniteWeightedMaxCutVerifierExact.cutCertificateHasVertexCountBits`: every `Vec Bool n` cut certificate has exactly `n` Boolean entries, reusing the previously proved `FiniteCounts.selectionListLength`. `karpWeightedMaxCutExistentialIff` proves the actual existence of an accepted signed-cut witness iff the Boolean verifier accepts some witness. This closes the **mathematical finite certificate-length identity**, not the general bitstring length/clock portion of `PR.polynomialCertificateBound` / `PR.polynomialTimeVerifier`.
+
+**Still required for completion:** `e05EncodedPolynomialReduction` with a no-loop, undirected, unique-edge complement transducer and certified `k>n` guard; `e20CompleteGraphToWeightedCutEdgeListIff` connecting the signed pairweight constructor to the verifier's finite edge list; `weightedMaxCutGraphAndCertificatePackedCodec`; actual `PR.InNP` on the shared Word and polynomial clocks. The corresponding E01–E19 encoded machine reductions and all 21 NP members remain open except for explicitly reused source-level pieces.
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
