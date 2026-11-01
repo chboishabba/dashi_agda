@@ -17,7 +17,8 @@ module DASHI.Mathematics.Complexity.Karp21PartitionScaledInstanceExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer as Int using (ℤ; +_; _+_; _*_; _≤_)
+import Data.Integer as Int
+open Int using (ℤ; +_; _+_; _*_; _≤_)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Product using (_×_; _,_; Σ)
 open import Data.Unit using (⊤; tt)
