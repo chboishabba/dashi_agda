@@ -134,7 +134,10 @@ crossStepLeft = crossStepRight
 crossWithTrue :
   (x : ℤ) (items : List (ℤ × Bool)) →
   crossWith x true items ≡ x * rightTotal items
-crossWithTrue x [] = refl
+crossWithTrue x [] =
+  RingZ.solve 1
+    (λ x → (Κ (+ 0) , x ⊗ Κ (+ 0)))
+    refl x
 crossWithTrue x ((y , true) ∷ xs) =
   crossWithTrue x xs
 crossWithTrue x ((y , false) ∷ xs) =
@@ -145,7 +148,10 @@ crossWithTrue x ((y , false) ∷ xs) =
 crossWithFalse :
   (x : ℤ) (items : List (ℤ × Bool)) →
   crossWith x false items ≡ x * leftTotal items
-crossWithFalse x [] = refl
+crossWithFalse x [] =
+  RingZ.solve 1
+    (λ x → (Κ (+ 0) , x ⊗ Κ (+ 0)))
+    refl x
 crossWithFalse x ((y , false) ∷ xs) =
   crossWithFalse x xs
 crossWithFalse x ((y , true) ∷ xs) =
