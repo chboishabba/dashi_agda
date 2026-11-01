@@ -1,5 +1,7 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+**Canonical full current roadmap:** [`Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md`](../Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md). This shorter research note is not the authoritative status ledger; use the linked file for exactly 21 nodes, 20 historical edges, eight follow-on subjects, and named remaining lemmas.
+
 ## Historical provenance
 - Stephen Cook (1971), *The Complexity of Theorem-Proving Procedures*, DOI 10.1145/800157.805047: original SAT complexity root.
 - Richard Karp (1972), *Reducibility Among Combinatorial Problems*, DOI 10.1007/978-1-4684-2001-2_9: the original 21-problem reduction network.
@@ -13,8 +15,8 @@ Given a shared encoded word carrier, polynomial-time-map composition, an NP-hard
 - Clique -> set packing; vertex cover.
 - Vertex cover -> set covering; feedback vertex set; feedback arc set; directed Hamiltonian cycle.
 - Directed Hamiltonian cycle -> undirected Hamiltonian cycle.
-- 3-SAT -> chromatic number; clique cover.
-- Chromatic number -> exact cover.
+- 3-SAT -> chromatic number.
+- Chromatic number -> clique cover; exact cover.
 - Exact cover -> hitting set; Steiner tree; 3-dimensional matching; knapsack (Karp's subset-sum-like variant).
 - Knapsack -> sequencing; partition.
 - Partition -> max cut.
@@ -31,7 +33,7 @@ The graph is the historical source diagram. Validate individual transformations 
 ## Highest-reuse edges / roadmap
 - **K00**: heterogeneous encoded reductions and cost-model bridge (or explicit common-word encoding).
 - **K01**: CNF SAT and 3-SAT certificates and truth-preserving clause gadgets.
-- **K02**: 3-SAT -> CLIQUE and CLIQUE -> VERTEX COVER (finite graph complement, compatible literals).
+- **K02**: SAT -> CLIQUE and CLIQUE -> VERTEX COVER (finite graph complement, compatible literals; 3-SAT->CLIQUE is an optional alternative route, not the displayed historical edge).
 - **K03**: CLIQUE -> SET PACKING; VERTEX COVER -> SET COVER (finite set incidence).
 - **K04**: 3-SAT -> CHROMATIC NUMBER and the EXACT COVER/3-DIMENSIONAL MATCHING cluster.
 - **K05**: EXACT COVER -> Karp KNAPSACK -> PARTITION -> weighted threshold MAX CUT (explicit arithmetic base/carry, signed weights and thresholds).
@@ -43,7 +45,7 @@ The graph is the historical source diagram. Validate individual transformations 
 | Subject | Original Karp variant / separate definition | In-repo or upstream prior art | Unpaid edge |
 | --- | --- | --- | --- |
 | Integer programming | #2 is **0–1 feasibility of integer equations** Cx=d, not arbitrary optimisation or real LP. SAT clause inequalities require a proof-preserving 0–1 equality/slack encoding and polynomial bit bound. | `PolynomialReductionExact`; Cook source evaluator; Lean OAI SAT-378 staged compiler is distinct | SAT -> binary IP (full equations and slack) |
-| Set packing | #4: choose at least k pairwise disjoint sets; Karp's CLIQUE reduction uses vertex-indexed sets of **nonedges**. | New `Karp21CliqueVertexCoverExact` isolates related Boolean graph semantics; no concrete packing sets yet | CLIQUE -> SET PACKING incidence and cardinality |
+| Set packing | #4: choose at least k pairwise disjoint sets; Karp's CLIQUE reduction uses vertex-indexed sets of **nonedges**. | `Karp21CliqueSetPackingExact` proves abstract indexed nonedge-incidence semantic equivalence; no finite encoded set lists yet | CLIQUE -> SET PACKING incidence and cardinality |
 | Vertex cover | #5 NODE COVER: choose at most ℓ vertices meeting all edges. Original CLIQUE -> cover on complement graph with ℓ = n-k. | `Karp21CliqueVertexCoverExact` proves carrier-polymorphic constructive semantic equivalence for fixed vertex predicates; OAI source `OAI/Computability/VertexCover/Main.lean` derives separate approximation gap | Finite count lemma: |complement S|=n-|S|, bit-graph implementation, polynomial time |
 | Job-shop scheduling | **Not Karp's #19**. Karp's #19 is single-machine JOB SEQUENCING with processing times T, deadlines D, penalties P and total late penalty ≤ k. Job-shop additionally imposes multi-machine precedence/resource constraints. | OAI `ThreeMachine` is another different scheduling object | KNAPSACK -> Karp JOB SEQUENCING; independently typed job-shop instance bridge |
 | Maximum cut | #21 weighted threshold cut with integer edge weights and W>0, from PARTITION; not a generic DAG planning max-cut. | New `Karp21WeightedCutObjectiveExact` proves global-side-flip invariance of a weighted edge-list objective and threshold-witness transport. OAI `OptimalMaxCut.main` proves source-written strong **unweighted simple graph approximation-gap hardness**, separate from Karp's weighted exact decision variant. `#1438` 27-grid is a finite objective/test, not general NP-hardness. | Exact PARTITION -> weighted threshold MAX CUT, integer and binary-bit-size proofs; OAI general graph same-object bridge and transferred gap |
