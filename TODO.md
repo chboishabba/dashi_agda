@@ -17353,3 +17353,15 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+
+### 2026-11-01 native rational SU2 spatial-C3 physical Wilson max-cut
+- [x] Explicitly search and read direct native signed-word SU2 path, group, quartet site, C3, Wilson trace and exact finite Gibbs Haar/continuum owner terms (full list in the source crosswalk).
+- [x] Source-write side-four spatial-C3 transport of actual typed positive graph edges and paths, with gauge action, holonomy and Wilson loop naturality.
+- [x] Instantiate existing exact rational SU2 quaternion group laws as the group-valued Wilson graph carrier and source-write genuine class-function trace-cyclicity/conjugation theorem.
+- [x] Identify pre-existing `RationalSU2BondData 3` with side-four `BondField 4`; implement pointwise native graph field roundtrips and spatial-C3 bond square.
+- [x] Derive actual `Adj.cyclicSuccessor`/Hodge side-four shift equality and positive-word source `Bond.pathHolonomy` graph-holonomy / Wilson-trace same-object recursion.
+- [ ] **Compiler**: run exact-head Agda kernel for all four modules, their direct imports and `BalabanRGTOERegression`; no proof status until successful.
+- [ ] **R443-F**: complete opposite/negative-orientation path word and plaquette equivalence, actual total Wilson action C3 invariance and original Haar/group rather than rational-only equivalence.
+- [ ] **R443-H/S**: instantiate finite group/Haar C3 change of variables plus R431/R443 source on the selected true finite Gibbs measure and R445 cutoff family, not an arbitrary invented measure.
+- [ ] **R445-T/R320/R333**: source uniform tails and true selected physical Euclidean/Wilson OS decay; same H_OS infinite-volume strictly positive spectrum and nontriviality/compact-simple uniform conditions.
