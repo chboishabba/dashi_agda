@@ -196,3 +196,24 @@ This section updates existing **M00/M01/C02/K00** obligations; the canonical reg
 `OpenAIMathLiteralCodeTransportExact.agda` now SOURCE-WRITES a finite `CNF.Literal n` ↔ `UpstreamLiteral n` roundtrip with the same `Fin n` index and positive/negative polarity (encoding numbers `2*i+1` and `2*i`). The transported clause and entire source-CNF lists roundtrip; `sourceClauseCodesExact` and `sourceCNFCodesExact` preserve their exact numeric lists before Finset normalization. `originalOptimizedCircuitLiteralTruthExact` explicitly consumes the actual `Opt.optCircuitCNF circuit` and existing `Opt.optCircuitEqualsOriginal` theorem; no new SAT evaluator.
 
 This is **source-only Agda** and the synthetic `UpstreamLiteral` is a representation mirror, **not** OpenAI's Lean kernel object. The remaining M01 cut is exact typed Agda constructor ↔ Lean `SAT.Literal (Fin n)` and raw source list ↔ deduplicated sorted `Encoding.cnfNumbers` identity, actual `Encoding.encodeCNF` bytes, and both kernels. The standalone Agda module has been added to the local acceptance driver; nothing is promoted without K00.
+
+
+## 1 November 2026 — source-byte resource max-cut (M02/M03/M05)
+
+**Decisive counterexample identified:** unrestricted legacy JSON encodes `input_count=n` using only `O(log n)` decimal digits, but `Encoding.encodeNat n` already requires `n+1` unary bits. Thus a polynomial encoded output-size bound in `v=n+g` does **not** establish a polynomial frontend bound in legacy JSON **byte length**. For a gate-free source circuit with input count 10000 and output input 0, independently reproduced canonical JSON has **68 bytes** while the exact upstream unary variable-count header alone has **10001 bits**. As `n` grows, the mismatch is unbounded.
+
+**Executable repair on Lean #78:** `canonical_machine_circuit_json` adds an `input_unary` field of precisely `n` ASCII ones. `parse_machine_circuit_json` validates this against the integer arity, rejects duplicates and malformed/future wire references, and preserves the actual old source circuit after stripping only the resource witness. Hence the serialized UTF-8 byte count `B` is at least `n+g=v` (every gate must appear as a nonempty JSON object). The CLI `--machine-profile` requires that encoding, and reports `v ≤ B` and the **exact original OpenAI encoding's derived envelope** `L ≤ 72(v+1)^2 ≤ 72(B+1)^2`. Legacy JSON remains available for backward compatibility but must NOT be used as a uniform polynomial-byte-size proof input. The source regression now includes a decimal-compression counterexample, fixture roundtrips and CLI streaming/legacy rejection. **New code is committed; full repository suite not executed in this environment.**
+
+**Lean version-gated formal lemma:** `Upstream378FiniteCNFBridge.sourceByteQuadraticBitLengthBound` derives the OAI bit-length envelope in a separate explicit `sourceRepresentationBound : n ≤ inputBytes` premise (where `n` is total variable count). This is source-written, **not 4.34.1 kernel-accepted**, and the actual parser's byte-bound premise is **NOT** imported as a Golden or Lean theorem.
+
+**M05 source proof interface:** `OriginalCircuitCountIngress` explicitly requires an `originalFiniteModelCount` proof connecting the finite original circuit accepted-input count to the exact upstream source-list model count. `originalCountAtUpstreamCNF` composes that assumed bridge with the existing exact normalized upstream count theorem. It does not construct the witness or assert the terminal machine theorem.
+
+**Still missing:**
+1. M00: formal byte parser/serialization and creation-order AST equivalence, including its resource invariant.
+2. M01: actual Agda optimized source-CNF to upstream Lean `SAT.CNF` clause/index/polarity/canonical bitstream equality across the trust boundary.
+3. M02: a fixed primitive frontend machine, small-step simulation of parsing, normalized ordered insertion, bit output, and an actual primitive bit-time bound on input length `B`.
+4. M03: visited-tape-space bound for **every trace prefix** of the frontend and composed fixed machine, including input, preprocessing, output tape and retained work.
+5. K00–K02 and M04/M05: kernel acceptance, independent trust audit and final original-count/SAT/tape theorem composition.
+6. C01/C02: per-result same-object and attribution audits/verified ports, **not** promoted by the 721/373/208 catalogue.
+
+No CI change, ESD edit, original ownership rewrite, or unsupported physical/analytic terminal claim.
