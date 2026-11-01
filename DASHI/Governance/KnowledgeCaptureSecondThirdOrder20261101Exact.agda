@@ -29,6 +29,7 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
 import DASHI.Philosophy.PowerAndGrammar as Power
 import DASHI.Economics.AIFinancingReflexivityExact as Finance
+import DASHI.Economics.ReflexiveFlowValidationExact as Econ
 import DASHI.Governance.KnowledgeProcessingSovereignCaptureExact as Access
 import DASHI.Governance.KnowledgeCaptureSelectionFeedback20261101Exact as Selection
 
@@ -298,7 +299,7 @@ noHypotheticalExclusiveAuthority ()
 -- Separate model and finance owners already reject the illicit inference
 -- that circular valuation/capital returns equal independent terminal cash.
 reusedReflexiveFinanceFirewall :
-  Finance.Econ.MarkedGainImpliesExternalCashPermission → ⊥
+  Econ.MarkedGainImpliesExternalCashPermission → ⊥
 reusedReflexiveFinanceFirewall =
   Finance.markedGainDoesNotCloseExternalCash
 
@@ -327,7 +328,7 @@ record ProvenanceConstrainedHop : Set where
     observedEffectEstablished : Bool
     causalCounterfactualEstablished : Bool
 
-record CausalPromotionResidual : Set where
+record CausalPromotionResidual : Set₁ where
   constructor causalPromotionResidual
   field
     firstOrderOriginal : ProvenanceConstrainedHop
