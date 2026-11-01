@@ -35,6 +35,65 @@
 
 **Checked end-to-end Karp problem completions in this PR: 0/21. Checked direct concrete Karp reductions with polynomial time proof: 0/20.** The historical DAG and four semantic/transport Agda owners are source-written; their semantics do not discharge NP-hardness without the resource/certificate adapters. Do not overwrite these counts based on module names.
 
+## 2026-11-01 max-cut implementation tranche: concrete finite executables (not machine proofs)
+
+New executable checked against **independent brute-force instance predicates**:
+`scripts/check_karp_historical_reductions.py`, source-written on this PR and independently run locally, all passing.
+
+| Historical edge | Executable input construction and independent oracle | Exhaustive bounded checks |
+| --- | --- | ---: |
+| E01 SAT → 0–1 IP | literal true-count as integer equality with bounded binary slack | 523 |
+| E02 SAT → CLIQUE | one literal-occurrence node per clause; cross-clause noncomplement edges | 10,128 |
+| E03 SAT → 3-SAT | fresh-variable chain; no clauses wider than 3 | 10,132 |
+| E04 CLIQUE → SET PACKING | indexed vertex incident nonedge pairs | 437 |
+| E05 CLIQUE → NODE COVER | complement graph, threshold `n-k` with invalid `k>n` no-case | 437 |
+| E06 NODE COVER → SET COVER | universe of actual graph edges; vertex-indexed incidence sets | 437 |
+| E07 NODE COVER → FEEDBACK NODE SET | bidirected edge arcs and independent directed-acyclicity oracle | 41 |
+| E08 NODE COVER → FEEDBACK ARC SET | two-layer graph, backbone/cross arcs, independent directed-acyclicity oracle | 41 |
+| E10 DIRECTED → UNDIRECTED HAMILTON | three copies per vertex; exhaustive cycle oracle | 69 |
+| E12 CHROMATIC → CLIQUE COVER | complement graph with same palette threshold | 361 |
+| E14 EXACT COVER → HITTING SET | transpose incidence; **exactly one** hitting element | 585 |
+| E15 EXACT COVER → STEINER TREE | root-set-element weighted gadget; independent exhaustive forest/terminal connectivity oracle | 85 |
+| E17 EXACT COVER → KNAPSACK | carry-free base `numberOfSets+1` incidence digits | 585 |
+| E18 signed KNAPSACK → JOB SEQUENCING | sign-safe digit-pair normalization → positive times/penalties → deadlines | 120 |
+| E19 signed KNAPSACK → PARTITION | sign-safe digit-pair normalization before Karp's positive subset-sum gadget | 780 |
+
+**Total: 15 of 20 direct edges with executable transformations and bounded independent truth-equivalence checks; 5 still without such an implementation: E09, E11, E13, E16, E20.** However E20 has a separate `scripts/check_karp_partition_maxcut.py` signed-domain finite construction/check (23,436 independently tested instances), so **16/20** have some executed finite checks when that stand-alone edge is counted. Do **not** translate 15/20 or 16/20 into 15/20 kernel-verified reductions: the latter remains **0/20**. E20 is intentionally not duplicated into the consolidated Python file.
+
+**Exact missing direct edge implementations after these executable checks:** E09 NODE COVER→DIRECTED HAMILTONIAN, E11 3-SAT→CHROMATIC NUMBER, E13 CHROMATIC NUMBER→EXACT COVER, E16 EXACT COVER→3-DIMENSIONAL MATCHING. The universal mathematical correctness/cost/NP-membership obligations remain for all E01–E20.
+
+### Newly audited Agda semantic bridges
+
+- `Karp21VertexSetCoverIncidenceExact.agda`: `karpNodeCoverSetCoverWitnessIff` constructs incidence set-cover witnesses in both directions, for all off-diagonal graph edges.
+- `Karp21ColouringCliqueCoverExact.agda`: `karpColouringCliqueCoverWitnessIff` moves a given colour assignment across adjacency complement, for arbitrary Boolean colour equality.
+- `Karp21ExactHittingTransposeExact.agda`: `karpExactCoverHittingWitnessIff` retains the original **exactly-one** incidence requirement by transposition, with chosen-set uniqueness.
+- These are **source-written Agda** declarations included in `Karp21Everything.agda`; none has a pinned-toolchain Agda acceptance receipt yet. Do not count them as certified E06/E12/E14 until concrete finite cardinality/encoding and machine cost are also proved.
+
+### Critical Karp variant and signedness corrections
+
+- N15 (Karp 1972) is **exact hitting**, `|W∩U_i|=1` for every `i`; the modern unrestricted hitting set requires `|W∩U_i|≥1`. They must be separate typed problems. The historical reduction E14 uses the original one-hit formulation; a separate reduction is required for modern hitting set.
+- N18 KNAPSACK is signed subset sum `Σa_i x_i=b`, and the textbook two-extra-number E19 construction assumes positive nonnegative source items: applying it naively to arbitrary signed input admits spurious YES cases. For example `a=(-1), b=9` is NO but the naive resulting PARTITION has total 0 and an empty equal partition. **New DASHI executable extension** encodes each signed choice `a_i` by a pair of positive integers whose unique high digit forces exactly one member of each pair, with a low digit retaining the signed sum. The digit base exceeds the maximum low-digit sum, avoiding carries; then applies Karp's standard positive PARTITION gadget. Named Agda follow-on targets: `signedSubsetSumDigitPairSound`, `signedSubsetSumDigitPairComplete`, `signedSubsetSumNoCarry`, `signedSubsetSumEncodingPolynomialBits`, `positiveSubsetSumPartitionIff`, `signedKnapsackPartitionCompositeIff`.
+- E18 JOB SEQUENCING uses the same newly normalized positive subset-sum instance, with `T_i=P_i=a_i`, common deadline `D_i=b` and penalty budget `Σa_i-b`. Cases with zero penalty budget are mapped to a fixed positive-budget YES scheduling instance. This is a DASHI extension of the historic Karp positive-subset-sum reduction, **not** a new historical result attributed to Karp.
+- E01 0–1 IP is equality feasibility, not inequality-only optimization: each clause encodes `Σ_j truth(l_j) - Σ_h 2^h s_h = 1` using bounded Boolean slack. Need the exact malformed-input and bitwidth proofs.
+- For E07/E08, the directed-cycle oracle checks actual graph acyclicity, rather than relabelling graph cover as a theorem.
+- E15's bounded independent oracle checks the existence of an acyclic weighted subgraph connecting all required terminals. For nonnegative gadget weights, disconnected irrelevant forest components may be discarded without changing existence of a Steiner tree. The general proof still needs this discard lemma and a polynomial edge-count proof.
+
+### Reuse correction: SAT / Cook–Levin source already has much more than a record shell
+
+`DASHI/Mathematics/Complexity/FixedWidthCNFToCookFormulaExact.agda` source-writes `cnfCookSatisfiabilityExact` and literal CNF evaluation equivalence on the **same** `Cook.BooleanFormula` carrier.
+
+`DASHI/Mathematics/Complexity/ConcreteTapeCookLevinCookFormulaExact.agda` source-writes `cookFormulaExactBudgetIff`, connecting an **actual exact-budget concrete tape accepting run** to `Cook.Satisfiable(guardedCookFormula ...)`. This is earlier repository prior-art; do not rebuild the same semantic theorem just to satisfy K00i. Its missing universal cost/computation quantifiers and the standard `PR.NPComplete` machine witness still need an exact proved bridge. **Updated K00i:** `cookLevinSATRoot` should consume these actual owners, prove the uniform polynomial clock/bit-size and tape reduction for arbitrary NP instances, and instantiate the shared concrete SAT `PR.NPComplete`, rather than asserting it from a record field.
+
+### Exact completion acceptance counters (current)
+
+- Historical problem definitions indexed: 21/21 (source-written Agda DAG, not kernel verified).
+- Direct reduction graph entries indexed: 20/20 (source-written Agda DAG, not kernel verified).
+- Finite executable edge implementations tested independently: 15/20 in consolidated script; 16/20 counting separate E20 script.
+- Agda kernel-verified **concrete** direct polynomial reductions on this PR: 0/20.
+- Agda kernel-verified **end-to-end** NP-completeness results on this PR: 0/21.
+- OpenAI approximation/scheduling donor same-object kernel ports into Agda: 0.
+- Source authorship, tests and conditional interfaces are tracked separately.
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
@@ -72,7 +131,7 @@ Each row's exact named `<stem>InNP` is the final NP-membership lemma; the unifor
 | N12 | CHROMATIC NUMBER — proper colouring with ≤ k colours | `karpColouringInNP` | open |
 | N13 | CLIQUE COVER — partition vertices into ≤ k cliques | `karpCliqueCoverInNP` | open |
 | N14 | EXACT COVER — pairwise disjoint indexed subsets cover universe exactly | `karpExactCoverInNP` | open |
-| N15 | HITTING SET — choose ≤ k elements intersecting every family set | `karpHittingSetInNP` | open |
+| N15 | Karp's EXACT HITTING SET — select an index subset intersecting **each transposed set exactly once** (not modern ordinary hitting set) | `karpHittingSetInNP` | open |
 | N16 | STEINER TREE — connect required terminals with length/weight ≤ k | `karpSteinerTreeInNP` | open |
 | N17 | 3-DIMENSIONAL MATCHING — disjoint triples cover designated three sets | `karpThreeDimensionalMatchingInNP` | open |
 | N18 | KNAPSACK — Karp's *subset-sum-like* feasibility variant; not a generic utility optimisation | `karpKnapsackInNP` | open |
@@ -116,7 +175,7 @@ Every `reduce...` below is a concrete **polynomial-time total encoder**; every `
 - **E04/Set Packing:** finite universe of nonedge pairs, vertex-indexed sets and optional unique private tokens; `nonedgeIncidenceCorrect`, `packingPairwiseDisjointIffClique`, `packingIndexInjective`, `packingPreservesAtLeastK`, `packingSetListSizeQuadratic`, `packingBitEncodingPoly`. If duplicate empty sets collapse in a set-of-sets carrier, the reduction is invalid without an indexed-family or uniqueness repair.
 - **E05/Vertex Cover:** `simpleComplementOffDiagonal`, `complementSymmetric`, `cliqueCoverFiniteCardinalityComplement` (|V\\S|=n-|S|), `cliqueVertexCoverThresholdIff` (k↔n−k, explicit k>n cases), `complementGraphBitsQuadratic`, `cliqueVertexCoverPoly`. Existing `karpCliqueCoverSemanticEquivalence` handles the pointwise predicate, not these bounds.
 - **E20/Max Cut:** `partitionCompleteGraphWeights`, `partitionCutProductIdentity` (cut(S)=A(T−A)), `partitionCutSquareIdentity` (4cut=T²−(T−2A)²), `partitionCeilThresholdIffEquality` (for T≠0, cut≥⌈T²/4⌉ ↔ 2A=T), `partitionZeroTotalFixedYes`, `partitionSignedWeightBitCost`, `partitionCutWeightedGraphEncodingPoly`, `partitionMaxCutReductionPoly`. Original **signed** integer vector input `Z^s`, binary input size, empty/zero-total corner cases and loop/duplicate handling explicitly fixed; when total T=0, the raw formula gives W=0, which is **not a valid Karp MAX CUT target**, so emit a fixed positive-threshold YES instance. The 23,436-case positive/signed Python regression is **not** these lemmas.
-- **E01/Binary IP:** `binaryClauseInequalityIff`, `slackVariableBound`, `inequalityToEqualitiesIff`, `satToBinaryIPWitnessEquivalence`, `binaryCoefficientBitCost`.
+- **E19/signed Knapsack:** `signedSubsetSumDigitPairSound`, `signedSubsetSumDigitPairComplete`, `signedSubsetSumNoCarry`, `signedSubsetSumEncodingPolynomialBits`, `positiveSubsetSumPartitionIff`, `signedKnapsackPartitionCompositeIff`. The pure two-extra-number Karp construction only follows after a positive normalization for signed source input.\n- **E01/Binary IP:** `binaryClauseInequalityIff`, `slackVariableBound`, `inequalityToEqualitiesIff`, `satToBinaryIPWitnessEquivalence`, `binaryCoefficientBitCost`.
 - **E03/SAT→3SAT:** `tseitinExtensionIff` (existential rather than unique unless actually proved), `threeSATWidthBound`, `threeSATClausesLinear`, `threeSATCompilerCost`, `threeSATSharedOpenAISemantics` (cross-repo exact literal identity only once proved).
 
 ## E. Eight follow-on topics / exact external boundaries
