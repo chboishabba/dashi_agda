@@ -146,3 +146,8 @@ monitor surface.
 - Wrote `BishopMachinConfiguredTrigPiExact`: actual Round11 complex pi is definitionally original Bishop Machin pi, is 4× original quarter angle up to Bishop `≃`, with configured sine and cosine consumers. Independent trig/geometric pi identity in Agda remains K05b.
 - Strengthened exact-rational `check_machin_fractran_cauchy_history.py` n=0 and universal geometric-envelope algebra, finite Cauchy and q1 non-SSP residual tests; these remain executable bounded receipts, not Agda kernel proof.
 - Imported new K04/K05 owners through all three canonical TOE roots; roadmap/TODO synchronized. **All new Agda source is written/committed but NOT kernel typechecked; no CI; quantitative Bishop remainder, analytic zeta continuity and classical trig pi semantic theorem remain explicitly OPEN.** Previous authorship, independently authored Lean source and ESD import-only protected.
+
+## 2026-11-01 — K04b2 real Bishop alternating remainder narrowed to rational majorant
+
+- Added `BishopMachinQuantitativeOmittedTailExact.agda` using ORIGINAL positive-half-ball arctangent interlacing and first-omitted signed Bishop tail theorems for both actual Machin arguments. Source-proved even/odd partial difference `≤` first omitted term, not merely floating/exact-rational sampled tests. Imported into all three TOE roots.
+- Remaining numeric conversion: identify each omitted magnitude with embedded rational odd-power quotient and combine/transport the all-n `4/25^n` envelope into Bishop real order. Source written, **Agda kernel not run**; zeta uniform convergence and true trig-π characterization also remain open.
