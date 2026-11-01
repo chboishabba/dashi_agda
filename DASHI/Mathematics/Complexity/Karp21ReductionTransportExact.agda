@@ -15,6 +15,8 @@ module DASHI.Mathematics.Complexity.Karp21ReductionTransportExact where
 -- their concrete polynomial clocks, or the Cook-Levin theorem.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Setω)
+
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 
 -- NP-hardness is a reduction from every language already known to be in NP.
