@@ -165,7 +165,7 @@ monitor surface.
 - Source-added `BishopMachinQuarterPhaseQuadruplicationAlgebraExact.agda`: Bishop fourfold sine/cosine polynomials yield 0/−1 from unit/equal quarter-phase; explicit conditional real-series transfer to actual Round11 sine/cosine at original Machin pi.
 - Imported owners through all three canonical TOE roots, synchronized exact lemma register, cross-repo audit and TODO. Separate local Python Fraction checks passed n=0..100 with Cauchy finite windows; no golden Agda typecheck, no CI. K04b rational bound transfer, actual K04d zeta continuity, unconditional K05 trig/geometry remain OPEN; provenance and source-written vs kernel-verified boundaries preserved.
 
-## 2026-11-01 — third K04b/K04d max-cut: actual Bishop 25-adic modulus and Cauchy source
+## 2026-11-01 — third K04b/K04d max-cut: actual Bishop base-25 geometric modulus and Cauchy source
 
 - Created `BishopMachinGeometricBishopRateExact.agda`. Derived on the original Bishop carrier source arctangent square contraction at inputs 1/5 and 1/239 with common 1/25 factor, true all-index geometric magnitude majorants, original Machin 16/4 weighted coefficient, stdlib exact-rational comparison `16/5+4/239≤4`, source Bishop `|pi_M−⋆q_n|≤4(1/25)^n`, and two-index `|⋆q_j−⋆q_k|≤8(1/25)^n` for n≤j,k. Corrected qualified rational imports and preexisting malformed Bishop absolute-value syntax. Source-written Agda, not kernel checked.
 - Strengthened `BishopMachinZetaRegularHalfPlaneExact` by a genuine eventual Re(q_n)>1 theorem and conditional original-completed-zeta/Dirichlet equality for the actual q_n stage points. Original analytic substrate domain remains abstract; genuine zeta continuity is NOT established.
