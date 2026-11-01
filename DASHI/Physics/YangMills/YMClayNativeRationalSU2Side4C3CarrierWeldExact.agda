@@ -84,6 +84,18 @@ nativeRoundTrip :
   ≡ bonds (Torus.pair site axis)
 nativeRoundTrip bonds site axis = refl
 
+-- Both directions of the native <-> typed dependent graph map are proved
+-- pointwise, with no function extensionality and no chosen external decoder.
+graphRoundTrip :
+  ∀ {G : Set}
+  (field : Gauge.GaugeField {G = G} Spatial.ForwardBond4)
+  start finish (edge : Spatial.ForwardBond4 start finish) →
+  graphFieldFromNativeBonds (nativeBondsFromGraphField field)
+    start finish edge
+  ≡ field start finish edge
+graphRoundTrip field site .(Hodge.shiftForward axis site)
+    (Spatial.forwardBond axis) = refl
+
 -- A native rational SU2 BondData is not a fresh/free group wrapper:
 -- it is the actual existing (links, siteGauge) carrier.
 graphFieldFromActualNativeRationalSU2 :
