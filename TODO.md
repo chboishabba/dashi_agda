@@ -17381,3 +17381,7 @@ Cleanup
 - [x] Reuse original `PositivePlane4` six-plane source and `Native.rationalSU2PlaquetteHolonomy` to source-write six-plane vs ordered subfamily boundary, native holonomy and real-trace same-object identities.
 - [x] Independent exact Fraction sample verifies six-positive-plane trace `-1108/25` unchanged under C3 and `2*six + 4*256 = 16ordered`, all 4096 reversal tests in its native rational quaternion fixture.
 - [ ] **R443-six exact universally quantified Agda:** derive native Wilson orientation reversal and 16-to-six rational trace action identity (including coupling and vacuum diagonal shift), then selected six-plane C3 source.
+
+
+- [x] Source-write *universal* four-factor orientation reversal `inverse(A B C⁻¹ D⁻¹)=D C B⁻¹ A⁻¹` and invariant scalar Wilson trace on exact pre-existing norm-one rational SU2 group carrier using native inverseProduct/inverseInverse.
+- [ ] Weld actual side-four native four-site plaquette evaluations to forward/reverse four-group factors; source-write universal 16ordered↔six plane + diagonal multiplicity and coupling normalisation.
