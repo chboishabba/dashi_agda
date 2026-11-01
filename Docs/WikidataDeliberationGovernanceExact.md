@@ -27,24 +27,28 @@ Imported by `DASHI/Ontology/WikidataWorkingGroupEverything.agda`; exercised by t
 ## Exact implemented lemmas
 
 - `admissionRequiresCreatorAuthority`
+- `admissionRequiresIndependentCreator`
+- `admissionRequiresPolicySource`
 - `admissionRequiresConsensus`
 - `admissionRequiresPolicyVersion`
 - `admissionRequiresExactSource`
 - `noCreatorAuthorityBlocksClosure`
+- `sameActorCreatorBlocksClosure`
+- `missingPolicySourceBlocksClosure`
 - `missingConsensusBlocksClosure`
 - `missingSourceAuthenticationBlocksClosure`
 - `formalCheckerDoesNotSelfAuthoriseCommunityRevision`: reuses original `WikidataDiagnosticGovernanceExact` owner rather than reproving authority.
 - `sourceEvidenceDoesNotGrantAutomaticExternalEdit`: an explicit, uninhabited automatic-edit permission cannot be manufactured by source evidence.
 - `bothObserved` / `neitherObserved` and the working-group regressions: support and counter-support never collapse into one approval count.
 
-Theorems are **conditional interface laws**, not a kernel-verified historical consensus judgement, not an unconditional Wikidata policy assertion, and not formal verification of the Rust/Python adapters. In particular, `SourceVerifier.Authenticated` must be supplied by a separately trusted byte-reopening producer and `CommunityRule` must be grounded in the historically effective policy. Neither a property ID nor a user-provided checksum constructs these witnesses.
+The closure type additionally demands a separately authenticated *historical-policy source* and a creator/proposer separation witness; neither is supplied by a checksum string or by the recorded decision actor's name. Theorems are **conditional interface laws**, not a kernel-verified historical consensus judgement, not an unconditional Wikidata policy assertion, and not formal verification of the Rust/Python adapters. In particular, `SourceVerifier.Authenticated` must be supplied by a separately trusted byte-reopening producer and `CommunityRule` must be grounded in the historically effective policy. Neither a property ID nor a user-provided checksum constructs these witnesses.
 
 ## Physical cross-repository consumer contract
 
 - SLR PR **#76**: source revision seals and exact byte-span event anchors, canonical content reopen, scoped durable sidecar, existing S29 `OntologyDiagnostic` with evidence request, qualification and abstention (not an edit approval). Opt-in end-to-end PG regression needs a **disposable migrated database** with `SLR_DELIBERATION_PG_ACCEPTANCE=1`.
 - ITIR-suite PR **#70**: generic pure `itir.governance.deliberation_assessment`, `itir.governance.deliberation_slr_handoff` (ISO timestamp to SLR exact epoch-second shape, caller-supplied seals/anchors, **unverified**), and `itir.governance.deliberation_consumer_link` (candidate-only joins for existing `ChangeReviewPacket`, `sl.wikidata_signal_review_bundle.v0_1`, climate/Nat, P2738/Ege-Peter and Rosario/hotspot).
 - The ITIR packet ID and Rust serialized-packet digest are **not claimed equal**. They are different receipts over respective encodings; a witnessed same-object transport requires canonical field reconciliation and original source-backed anchor checking. The ITIR handoff records the precise Rust field grammar, not the independently verified source content.
-- Peter/Ege violations and culprits, Rosario benchmarks, climate/Nat A–E classification, and CheckChange `severity(after) <= severity(before)` remain **independent consumer obligations**, never paid by proof of proposal-history completeness.
+- Peter/Ege violations and culprits, Rosario benchmarks, climate/Nat A–E classification, and ChangeReviewPacket `severity(after) <= severity(before)` remain **independent consumer obligations**, never paid by proof of proposal-history completeness.
 
 ## Acceptance state and remaining mathematical/empirical cut
 
