@@ -32,3 +32,5 @@ import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact
 import DASHI.Mathematics.Complexity.Karp21SimpleGraphComplementExact
 
 import DASHI.Mathematics.Complexity.Karp21FiniteColouringCliqueCoverExact
+
+import DASHI.Mathematics.Complexity.Karp21SignedLaplacianCutExact
