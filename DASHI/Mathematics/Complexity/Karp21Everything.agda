@@ -12,3 +12,7 @@ import DASHI.Mathematics.Complexity.Karp21ReductionTransportExact
 import DASHI.Mathematics.Complexity.Karp21CliqueVertexCoverExact
 import DASHI.Mathematics.Complexity.Karp21CliqueSetPackingExact
 import DASHI.Mathematics.Complexity.Karp21WeightedCutObjectiveExact
+
+import DASHI.Mathematics.Complexity.Karp21VertexSetCoverIncidenceExact
+import DASHI.Mathematics.Complexity.Karp21ColouringCliqueCoverExact
+import DASHI.Mathematics.Complexity.Karp21ExactHittingTransposeExact
