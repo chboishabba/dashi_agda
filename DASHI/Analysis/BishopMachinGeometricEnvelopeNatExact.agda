@@ -49,7 +49,7 @@ combinedNumeratorBelowBase n =
       (P.*-mono-≤ P.≤-refl (pow25BelowPow57121 n)))
     (subst
       (λ x → x ≤ 4780 * pow57121 n)
-      (sym (P.*-distribʳ-+ (pow57121 n) 3824 20))
+      (P.*-distribʳ-+ (pow57121 n) 3824 20)
       (P.*-mono-≤ coefficientBelow P.≤-refl))
 
 -- Multiplication by the odd denominator (2n+1) can only enlarge
