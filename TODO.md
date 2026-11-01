@@ -17387,3 +17387,17 @@ Cleanup
 - [ ] Weld actual side-four native four-site plaquette evaluations to forward/reverse four-group factors; source-write universal 16ordered↔six plane + diagonal multiplicity and coupling normalisation.
 
 - [x] Complete the actual native n=3 positive-bond ↔ typed dependent graph field codec in **both** directions pointwise (`graphRoundTrip`, `nativeRoundTrip`), not just an identity after re-encoding native bonds.
+
+
+### 2026-11-01 source-owner R443/R445/R320/R333 max-cut
+- [x] Correct original Native.RationalSU2BondData universe from Set1 to Set to match actual R445 observable and physical finite measure types (source edit; exact-head compilation pending).
+- [x] Source-write exact six-positive-plane C3 reduction to only two reversed orientations, and fill both by original reverse-opposite signed path and literal six-plane closure theorems on n=3 rational unit SU2 links.
+- [x] Source-write actual original six-positive-plane C3 invariant Wilson trace action theorem; removes need for 16ordered↔six numerical conversion as symmetry prerequisite (compilation pending).
+- [x] Source-write native selected R443 finite Gibbs/Haar numerator compiler: physical Wilson action invariance is derived from source, only true Gibbs identification and compact Haar law remain explicit input.
+- [x] Source-write per-cutoff R443/R431 finite numerator→normalized→selected scalar-limit C3 proof; fixed n=3 configuration is not asserted physical UV continuum.
+- [x] Source-write R443/R445 native SU2 record same-object type and direct n=3 P2 cylinder convergence specialization under real physical-measure/continuum inputs.
+- [ ] **K0**: Agda exact-head kernel and transitive safe import/level check for all changed owner files, record package universe lowering, TOE root.
+- [ ] **R443**: actual compact group product/constrained Haar integral invariance, original physical Gibbs/Wilson source action plus genuine UV/increasing-volume trajectory.
+- [ ] **R445**: actual selected bounded-observable uniform tails, coercive moment tightness, physical limiting measure and source-normalised continuum Wilson cylinder compatibility.
+- [ ] **R320**: selected CMP116 derivative of logZ marked J family satisfies source rooted-shell decay at uniform scale/volume constants.
+- [ ] **R333**: same selected OS reconstructed Hamiltonian and spectral data, positive uniform gap, continuum Wightman nontriviality.
