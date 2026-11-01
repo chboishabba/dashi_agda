@@ -14,6 +14,7 @@ SCRIPTS = (
     "check_karp_remaining_four_gadgets.py",
     "check_karp_partition_maxcut.py",
     "check_karp_signed_laplacian.py",
+    "check_karp_pnf_signed_ternary.py",
     "check_karp_flow_cut_apx.py",
 )
 
