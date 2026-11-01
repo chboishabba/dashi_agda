@@ -89,7 +89,7 @@ New executable checked against **independent brute-force instance predicates**:
 - Historical problem definitions indexed: 21/21 (source-written Agda DAG, not kernel verified).
 - Direct reduction graph entries indexed: 20/20 (source-written Agda DAG, not kernel verified).
 - Finite executable edge implementations tested independently: 20/20 across three scripts, all still awaiting Agda end-to-end kernel proof.
-- Agda kernel-verified **concrete** direct polynomial reductions on this PR: 0/20.
+- Agda kernel-verified **concrete** direct polynomial reductions on this PR: 0/20. The new `CertifiedKarpNetwork` proof compiler consumes the still-missing certificates.
 - Agda kernel-verified **end-to-end** NP-completeness results on this PR: 0/21.
 - OpenAI approximation/scheduling donor same-object kernel ports into Agda: 0.
 - Source authorship, tests and conditional interfaces are tracked separately.
@@ -109,6 +109,18 @@ New executable checked against **independent brute-force instance predicates**:
 E11's construction checks the literal-source SAT truth after removing tautological clauses and duplicate literals, and uses `m≥4` so every ≤3-literal clause omits a variable to rule out spurious extra-colour assignments. E16 **only** constructs the Karp gadget for nonempty sets with ≥2 elements, exactly matching the quoted "without loss of generality" source precondition; preprocessing the general exact-cover domain remains an explicit lemma. E09 has source-domain guards (nonempty edge incidence, positive budget), with trivial positive-budget YES cases handled separately. Neither the bounded DP/DFS nor the graph-colouring backtracker is claimed polynomial.
 
 **Revised finite implementation coverage: 20/20 historical direct reductions have a source-written executable candidate and passing bounded equivalence controls, spread across three scripts** (`check_karp_historical_reductions.py`, `check_karp_remaining_four_gadgets.py`, `check_karp_partition_maxcut.py`). This does **not** prove any complete reduction theorem in Agda. All 20 remain open for general correctness proofs, binary encoding, constructive witness sizes, and actual polynomial machine costs. Completion count for 21 NP-completeness theorems remains 0/21.
+
+## Conditional kernel-facing 21-node proof compiler (source-written)
+
+`DASHI/Mathematics/Complexity/Karp21CertifiedDagTransportExact.agda` now defines:
+- `CertifiedKarpNetwork`: the **actual** shared `PR.PolynomialCostModel`, `PR.PolynomialMapComposition`, SAT NP-completeness root, all 21 NP membership proofs, and one `PR.PolynomialManyOneReduction` certificate for **each** historical `Dag.Edge`.
+- `npCompleteAlongReachability`: structural induction on a genuine `Dag.Reachable` proof; recursively applies existing `Transfer.transportNPComplete`.
+- `allTwentyOneNPCompleteIfCertified`: builds `PR.NPComplete cost (language p)` for **every** Karp node, using the source-written 21-node DAG reachability witnesses.
+- `anyKarpTargetInPImpliesPEqualsNP`: conditional classical P=NP consequence for any **independently established** polynomial-time decision algorithm on one complete target, using the existing `PR.npCompleteInPImpliesPEqualsNP`.
+
+This is a substantive proof-composition function, not a vacuous Boolean completion flag. **It assumes real evidence for each of the 20 edges, SAT-root completeness and all NP-membership certificates.** The source has not yet been kernel-checked in the pinned Agda environment; the theorem is not promoted to 21 accepted NP-completeness certificates.
+
+The **remaining graph cut** is no longer inventing repeated completeness wrappers. It is constructing these exact `CertifiedKarpNetwork` inputs and proving their machine costs in the common encoded carrier.
 
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
