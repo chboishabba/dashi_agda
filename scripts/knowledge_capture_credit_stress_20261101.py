@@ -2,7 +2,7 @@
 Usage: python scripts/knowledge_capture_credit_stress_20261101.py
 Not real-world default forecasts or an Agda kernel receipt.
 """
-from math import exp
+from math import exp, isclose
 
 SPREAD_BPS = {"microsoft": 56, "amazon": 80, "oracle": 331,
               "coreweave_stress": 1100, "coreweave_peak": 1200,
@@ -30,8 +30,8 @@ def run():
         print("Refinancing share", fraction,
               [(shock, refi_increment(50e9, fraction, shock))
                for shock in (200, 400, 600)])
-    assert refi_increment(50e9, .17, 400) == 340e6
-    assert refi_increment(50e9, 1., 400) == 2e9
+    assert isclose(refi_increment(50e9, .17, 400), 340e6, abs_tol=1e-6)
+    assert isclose(refi_increment(50e9, 1., 400), 2e9, abs_tol=1e-6)
     p, q = .1, .08
     independent, joint = two_plus_default(p), two_plus_default(p, q)
     print("3-obligor assumed p=.1, common shock=.08: P(>=2)", independent, joint)
