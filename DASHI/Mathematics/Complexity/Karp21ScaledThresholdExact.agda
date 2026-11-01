@@ -22,6 +22,9 @@ module DASHI.Mathematics.Complexity.Karp21ScaledThresholdExact where
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
+open import Data.Sum using (inj₁; inj₂)
 open import Data.List.Base using (List)
 open import Data.Product using (_×_)
 import Data.Integer as Int
@@ -131,3 +134,34 @@ scaledThresholdIffBalanced xs =
   PR.iff
     (balancedImpliesScaledThreshold xs)
     (scaledThresholdImpliesBalanced xs)
+
+
+------------------------------------------------------------------------
+-- A positive integer threshold is precisely a nonnegative integer
+-- with a proof that it is unequal to zero. The latter is proven
+-- constructively by zero-product-freeness of ℤ. This avoids depending
+-- on an unverified external positivity cast or a positivity Bool flag.
+------------------------------------------------------------------------
+
+NonZero : ℤ → Set
+NonZero value = value ≡ Int.+ 0 → ⊥
+
+PositiveThreshold : ℤ → Set
+PositiveThreshold value =
+  ((Int.+ 0) ≤ value) × NonZero value
+
+nonzeroIntegerSquare :
+  (value : ℤ) →
+  NonZero value → NonZero (value * value)
+nonzeroIntegerSquare value nonzero squaredZero
+  with IntP.i*j≡0⇒i≡0∨j≡0 value squaredZero
+... | inj₁ zeroValue = nonzero zeroValue
+... | inj₂ zeroValue = nonzero zeroValue
+
+nonzeroTotalSquareIsPositiveThreshold :
+  (value : ℤ) →
+  NonZero value →
+  PositiveThreshold (value * value)
+nonzeroTotalSquareIsPositiveThreshold value nonzero =
+  Square.squareNonnegative value ,
+  nonzeroIntegerSquare value nonzero
