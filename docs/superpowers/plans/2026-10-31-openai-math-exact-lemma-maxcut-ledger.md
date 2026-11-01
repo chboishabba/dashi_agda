@@ -217,3 +217,11 @@ This is **source-only Agda** and the synthetic `UpstreamLiteral` is a representa
 6. C01/C02: per-result same-object and attribution audits/verified ports, **not** promoted by the 721/373/208 catalogue.
 
 No CI change, ESD edit, original ownership rewrite, or unsupported physical/analytic terminal claim.
+
+
+### 1 November 2026 — typed original-count composition and staged axiom audit
+
+- **Golden M00→N03/N04:** `OpenAIMathCreationOrderSerializationExact.agda` now composes its exact creation-order circuit roundtrip with existing `Source.originalGlobalCNFCountExact` and `Opt.optGlobalCNFCountExact`. New declarations `creationOriginalCompiledCountExact`, `creationOriginalTseitinCountExact`, and `creationOptimizedTseitinCountExact` are **source-written** results about the same original circuit and its source CNF counts. They are not Lean or fixed-machine tape results; Agda exact-head acceptance is still **UNVERIFIED**.
+- **Lean M05:** `OriginalCircuitCountIngress` retains the genuine missing same-object `originalFiniteModelCount` premise. The new `originalCircuitExactCountMachineOfIngress` source-writes the **conditional** composition with `sourceListExactCountMachine`: it retains the original OAI primitive machine's count tape, SAT tape, final state, count decoder, runtime and every-prefix visited-space statement. This *does not construct the ingress*, prove JSON bits equal the upstream input, or add the frontend's primitive resource cost. It does not discharge unconditional M05.
+- **K02:** `scripts/check_openai378_staged_lean.sh` now stages actual pinned Lean 4.34.1 `#print axioms` for the new theorem declarations and fails if `sorryAx` is found. Script committed, **not executed** in this environment; any resulting receipt must be reviewed with the original OAI/mathlib theorem axiom boundaries.
+- **Scope:** No change to the 39 tracked IDs, nor false promotion of the 721 manuscripts/373 families/208 indexed declarations into 700+ verified downstream theorems. The original Golden/Lean compiler and resource proofs remain incomplete.
