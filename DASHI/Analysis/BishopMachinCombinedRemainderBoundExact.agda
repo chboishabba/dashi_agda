@@ -106,9 +106,10 @@ evenArctanAbsoluteError : ∀ {x} →
     (M.atanMagnitudeTerm x (Alternating.double k))
 evenArctanAbsoluteError p k =
   RP.≤-respˡ-≃
-    (RP.nonNegx⇒∣x∣≃x
-      (RP.0≤x⇒nonNegx
-        (Tail.lowerTailNonnegative (O.actualArctanTail p) k)))
+    (RP.≃-symm
+      (RP.nonNegx⇒∣x∣≃x
+        (RP.0≤x⇒nonNegx
+          (Tail.lowerTailNonnegative (O.actualArctanTail p) k))))
     (O.actualArctanEvenRemainderBound p k)
 
 oddArctanAbsoluteError : ∀ {x} →
@@ -122,14 +123,15 @@ oddArctanAbsoluteError : ∀ {x} →
     (M.atanMagnitudeTerm x (suc (Alternating.double k)))
 oddArctanAbsoluteError {x} p k =
   RP.≤-respˡ-≃
-    (RP.≃-trans
-      (RP.∣x-y∣≃∣y-x∣
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.∣x-y∣≃∣y-x∣
         (M.bishopAtanHalfBall x (I.insideHalf p))
         (Series.SeriesOf (M.atanSignedTerm x)
           (suc (Alternating.double k))))
       (RP.nonNegx⇒∣x∣≃x
         (RP.0≤x⇒nonNegx
-          (Tail.upperTailNonnegative (O.actualArctanTail p) k))))
+          (Tail.upperTailNonnegative (O.actualArctanTail p) k)))))
     (O.actualArctanOddRemainderBound p k)
 
 -- Two-factor absolute triangle bound with true 16/4 source constants.
@@ -209,7 +211,7 @@ machinEvenPartialError :
       (Bishop._*_ four (magnitude239 (Alternating.double k))))
 machinEvenPartialError k =
   RP.≤-respˡ-≃
-    (RP.∣-∣-cong (weightedErrorIdentity (Alternating.double k)))
+    (RP.≃-symm (RP.∣-∣-cong (weightedErrorIdentity (Alternating.double k))))
     (weightedAbsoluteTriangle
       (Bishop._-_
         M.bishopAtanOneFifth
@@ -234,7 +236,7 @@ machinOddPartialError :
       (Bishop._*_ four (magnitude239 (suc (Alternating.double k)))))
 machinOddPartialError k =
   RP.≤-respˡ-≃
-    (RP.∣-∣-cong (weightedErrorIdentity (suc (Alternating.double k))))
+    (RP.≃-symm (RP.∣-∣-cong (weightedErrorIdentity (suc (Alternating.double k)))))
     (weightedAbsoluteTriangle
       (Bishop._-_
         M.bishopAtanOneFifth
