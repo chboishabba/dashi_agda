@@ -245,6 +245,10 @@ The exact semantic transport continues through `finiteAbstractCoverToSimpleCover
 
 **Remaining E12:** `colouringCanonicalWordParser`, `cliqueCoverCanonicalWordParser`, `colouringToComplementGraphBitMap`, `colouringToCliqueCoverPolyClock`, `colouringPaletteLargeKGuard` (binary `k≥n` direct YES), `colouringNPVerifierClock`, `cliqueCoverNPVerifierClock`, `e12EncodedPolynomialReduction`; the full targeted Agda kernel typecheck remains unrun. This does not by itself complete E11 SAT→colouring, E13 colouring→EXACT COVER, nor any other E01–E20 costed reduction.
 
+### Agda source-compatibility repair before kernel validation
+
+A manual check against Agda's actual builtin module and existing DASHI stdlib imports found a concrete issue in three newly written E05 graph/cardinality owners: `Agda.Builtin.Nat` does **not** export propositional `_≤_`. This has been corrected to `Data.Nat.Base._≤_` in `Karp21FiniteCliqueCoverCardinalityExact`, `Karp21FiniteCliqueVertexCoverCombinedExact`, and `Karp21SimpleGraphComplementExact`. This is a real source repair; static/no-hole checks must not be misreported as successful compilation. The remaining required proof is the pinned Agda kernel typecheck of `Karp21Everything.agda` and its full dependency cone, followed by resolution of any actual diagnostics.
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
