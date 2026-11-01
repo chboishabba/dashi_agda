@@ -26,3 +26,6 @@ import DASHI.Mathematics.Complexity.Karp21PartitionScaledInstanceExact
 import DASHI.Mathematics.Complexity.Karp21HeterogeneousEncodingExact
 
 import DASHI.Mathematics.Complexity.Karp21FiniteCliqueCoverCardinalityExact
+
+import DASHI.Mathematics.Complexity.Karp21FiniteCliqueVertexCoverCombinedExact
+import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact
