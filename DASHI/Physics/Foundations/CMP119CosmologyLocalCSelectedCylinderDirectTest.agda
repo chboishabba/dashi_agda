@@ -1,0 +1,10 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyLocalCSelectedCylinderDirectTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyLocalCSelectedCylinderDirectExact as Direct
+
+round109PairSemanticsNotNeededForMarkedOSRegression =
+  Direct.round109PairSemanticsNotNeededForMarkedOS
+
+selectedCylinderComesFromExistingLocalCEncodingRegression =
+  Direct.selectedCylinderComesFromExistingLocalCEncoding

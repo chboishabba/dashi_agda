@@ -1,0 +1,6 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound133Validation where
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound132Validation
+import DASHI.Physics.Closure.NSTriadKNExternalHHOrthogonalDifferenceEndpointRound133Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound133Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound133Exact

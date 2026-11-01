@@ -1,0 +1,29 @@
+module DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact as Gate4
+
+rationalReferenceFoldCompilerIsMachineChecked :
+  Gate4.rationalReferenceFoldCompilerLevel ≡ machineChecked
+rationalReferenceFoldCompilerIsMachineChecked = refl
+
+normalizedReferenceProbabilityWeightIsMachineChecked :
+  Gate4.normalizedReferenceProbabilityWeightLevel ≡ machineChecked
+normalizedReferenceProbabilityWeightIsMachineChecked = refl
+
+normalizedReferenceCompilesFiniteRGProbability :
+  Gate4.normalizedReferenceToFiniteRGProbabilityCompilerLevel ≡ machineChecked
+normalizedReferenceCompilesFiniteRGProbability = refl
+
+allCutoffsCompileSelectedT5ProbabilityPresentation :
+  Gate4.gate4SelectedT5ProbabilityPresentationCompilerLevel ≡ machineChecked
+allCutoffsCompileSelectedT5ProbabilityPresentation = refl
+
+rationalReferenceFoldSemanticsStillPhysical :
+  Gate4.rationalReferenceFoldSemanticsLevel ≡ conditional
+rationalReferenceFoldSemanticsStillPhysical = refl
+
+referenceReopeningSameObjectStillPhysical :
+  Gate4.normalizedReferenceReopeningSameObjectLevel ≡ conditional
+referenceReopeningSameObjectStillPhysical = refl

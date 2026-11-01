@@ -1,0 +1,14 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyIrreducibleSourceTheorems20261004Test where
+
+import DASHI.Physics.Foundations.CMP119CosmologyIrreducibleSourceTheorems20261004Exact as F
+
+sourceTheoremCountRegression = F.irreducibleSourceTheoremCount
+
+a1SignedCovarianceStillMathematicalRegression = F.a1SignedCovarianceStillMathematical
+
+a2PairSemanticsStillMathematicalRegression = F.a2PairSemanticsStillMathematical
+
+b1SameSequenceIdentitiesStillMathematicalRegression = F.b1SameSequenceIdentitiesStillMathematical
+
+b2StrictGapStillMathematicalRegression = F.b2StrictGapStillMathematical

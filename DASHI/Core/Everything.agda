@@ -1,0 +1,196 @@
+import DASHI.Core.MereologyCoreExact
+import DASHI.Core.MereologyNonCollapseExact
+import DASHI.Core.MultipartSameObjectReconstructionExact
+import DASHI.Core.MultipartMereologyBridgeExact
+import DASHI.Core.ConsumerRelativeMereologyExact
+import DASHI.Core.FallacyObstructionEverything
+import DASHI.Core.TrajectoryResidueExact
+import DASHI.Core.ContrastiveHistoryResidualExact
+import DASHI.Core.ContrastiveInterventionResponseExact
+import DASHI.Core.GeneratorCoverageReachabilityExact
+import DASHI.Core.FormalClaimTransportGeometryExact
+import DASHI.Core.ObligationReducingExtensionGuardExact
+import DASHI.Core.PredictionEnvelopeExact
+import DASHI.Core.CalibratedExperimentInferenceExact
+import DASHI.Core.RobustExperimentInferenceFrontierExact
+import DASHI.Core.ConsumerRelativeReductionKernelExact
+import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact
+import DASHI.Core.ConsumerRelativeReductionSearchExact
+import DASHI.Core.ConsumerRelativeMinimalFidelityExact
+import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
+import DASHI.Core.ConsumerReductionDependencyReopeningExact
+import DASHI.Core.CoarseFineRelativeFibreExact
+import DASHI.Core.ConsumerRelativeCoarseGrainingBidiExact
+import DASHI.Core.RelativeFineModelFidelityOrthogonalityExact
+import DASHI.Core.ConsumerDecisionAdequacyFromReductionExact
+import DASHI.Core.ConsumerAdequacyJointPolicyBidiCompilerExact
+import DASHI.Core.RobustInterventionAcrossHypothesesExact
+import DASHI.Core.AdaptiveConsumerModelLoopExact
+import DASHI.Core.ExperimentalCoordinateDesignExact
+import DASHI.Core.ActionabilityCostedExperimentChoiceExact
+import DASHI.Core.CommonExperimentRealisationExact
+import DASHI.Core.DiscriminatorSynthesisExact
+import DASHI.Core.MechanismModelDiscriminationExact
+import DASHI.Core.MechanismDiscriminationApplicationAtlasExact
+import DASHI.Core.AdaptiveMechanismDiscriminationPlannerExact
+import DASHI.Core.SequentialConsumerExperimentPlannerExact
+import DASHI.Core.SequentialRobustActionabilityPlannerExact
+import DASHI.Core.SequentialRelationalExperimentPlannerExact
+import DASHI.Core.JointSequentialInformationFidelityPolicyExact
+import DASHI.Core.ConsumerReductionJointPolicyBridgeExact
+import DASHI.Core.JointSequentialInformationFidelityFixtureExact
+import DASHI.Core.AdmissibleTransitionHyperfabricExact
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact
+import DASHI.Core.ConsumerSafeRefinementPromotionExact
+import DASHI.Core.ConsumerSafeFuturePromotionExact
+import DASHI.Core.FormalizationRecoverySourceRegistryExact
+import DASHI.Core.FormalizationRecoveryGeometryExact
+import DASHI.Core.SourceAcquisitionGeometryExact
+import DASHI.Core.DeductionIndexedInterpretationExact
+import DASHI.Core.FormalSystemRevisionGeometryExact
+import DASHI.Core.RulePremiseDependencyGeometryExact
+import DASHI.Core.OrderedSubstitutionGeometryExact
+import DASHI.Core.RulePremiseTypingGeometryExact
+import DASHI.Core.ProofCarryingRuleApplicationExact
+import DASHI.Core.CoarseFineBranchAccessibilityExact
+import DASHI.Core.DecimalResidualRefinementExact
+import DASHI.Core.DecimalStageResidualBarrierExact
+import DASHI.Core.CoarseFineDepthDecompositionExact
+import DASHI.Core.FiniteBranchingCriticalityExact
+import DASHI.Core.FiniteTypedBranchingKernelExact
+import DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact
+import DASHI.Core.BinaryInteractionNonseparabilityExact
+import DASHI.Core.FiniteTypedBranchingInteractionBridgeExact
+import DASHI.Core.TrajectoryEndpointNonfactorabilityExact
+import DASHI.Core.HistoryConditionedChoiceExact
+import DASHI.Core.LogisticFoldCriticalityExact
+import DASHI.Core.NumberRoleProvenanceAtlasExact
+import DASHI.Core.IntersectionalNonFactorability
+import DASHI.Core.IntersectionalConstraintGeometryExact
+import DASHI.Core.IntersectionalBinaryInteractionBridgeExact
+import DASHI.Core.FeministRechartingSourceBridgeExact
+import DASHI.Core.TernaryRoleCarrierExact
+import DASHI.Core.LacanFregeTernaryRoleChartExact
+import DASHI.Core.LacanS2RoleSeparationExact
+import DASHI.Core.LacanSexuationTernarySeparationExact
+import DASHI.Core.IrigarayLabialRelationalCarrierExact
+import DASHI.Core.DifferenceWithoutHierarchyExact
+import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact
+import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact
+import DASHI.Core.FeministLabialRechartingCapstoneExact
+import DASHI.Core.RelationalRoleGrammarExact
+import DASHI.Core.ObserverAffordanceIncomparabilityExact
+import DASHI.Core.RelationalityGradeSeparationExact
+import DASHI.Core.CriticalRelationalGrammarSourceRegistryExact
+import DASHI.Core.CriticalThirdnessRoleGrammarExact
+import DASHI.Core.CriticalGrammarRelabellingBoundaryExact
+import DASHI.Core.TrinhSubjectInMakingNoncollapseExact
+import DASHI.Core.BadiouVoidCountAsOneBoundaryExact
+import DASHI.Core.LugonesPurityCurdlingNonfactorabilityExact
+import DASHI.Core.SocialEcologyHierarchyProjectionBoundaryExact
+import DASHI.Core.CriticalSocialEcologyObserverRegimeExact
+import DASHI.Core.ZeroValueFibreNontrivialityExact
+import DASHI.Core.CriticalRelationalGrammarCapstoneExact
+import DASHI.Core.RelationalAffordanceCoreExact
+import DASHI.Core.PlumwoodMasterModelOperationFamilyExact
+import DASHI.Core.McCallCategoryStrategyBoundaryExact
+import DASHI.Core.ButlerPerformativeGenesisNonDescentExact
+import DASHI.Core.InterpretiveFormalisationCoreExact
+import DASHI.Core.VocabularyProvenanceExact
+import DASHI.Core.SituatedFormalisationBoundaryExact
+import DASHI.Core.FormalisationAbuseLintExact
+import DASHI.Core.FormalisationCompatibilityExact
+import DASHI.Core.KernelSemanticClosureBoundaryExact
+import DASHI.Core.FormalisationGovernanceSourceRegistryExact
+import DASHI.Core.ConsumerIndexedTranslationRealisationExact
+import DASHI.Core.ResidualObligationPropagationExact
+import DASHI.Core.TranslationRealisationCrossPollinationExact
+import DASHI.Core.DialecticalStageSpectrumExact
+import DASHI.Core.ContextualDialecticRoleExact
+import DASHI.Core.DialecticalMaterialRevisionExact
+import DASHI.Core.DialecticalMaterialFutureSafetyExact
+import DASHI.Core.EpistemicSuspensionExact
+import DASHI.Core.StageTransitionBarrierExact
+import DASHI.Core.DialecticStageMotifBridgeExact
+import DASHI.Core.DialecticOriginSourceAtlasExact
+import DASHI.Core.ExceptionalSignalLatticeExact
+import DASHI.Core.Base369DialecticRoleBoundaryExact
+import DASHI.Core.ContradictionPreservingReasoningPipelineExact
+import DASHI.Core.RelationalEpistemicProcessSourceBridgeExact
+import DASHI.Core.DeclaredRealizedIntegrityResidualExact
+import DASHI.Core.SolisSituatedIntegrityBridgeExact
+import DASHI.Core.SituatedIntegrityNonfactorabilityExact
+import DASHI.Core.SolisInquiryPipelineExact
+import DASHI.Core.ResidualScalingLawEscapeExact
+import DASHI.Core.ResidualScalingDependencyCrossPollinationExact
+import DASHI.Core.DescriptorResidualPromotionAdmissibilityExact
+import DASHI.Core.RelationalTensionCompressionExact
+import DASHI.Core.RelationalObserverGainExact
+import DASHI.Core.RelationalHistoryFabricExact
+import DASHI.Core.ContextualConversionNonfactorabilityExact
+import DASHI.Core.ThresholdResidualTrajectoryGeometryExact
+import DASHI.Core.HistoryQualifiedSelectionTopologyExact
+import DASHI.Core.MeasurementBoundaryNonfactorabilityExact
+import DASHI.Core.ResponsibilityBurdenNonfactorabilityExact
+import DASHI.Core.PoliticalContestabilityExact
+import DASHI.Core.GovernanceTrajectoryRealisationExact
+import DASHI.Core.FriendlyjordiesGovernanceQuestionExact
+import DASHI.Core.CategoryAuthorityAuditExact
+import DASHI.Core.MultiaxialResidualBundleExact
+import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
+import DASHI.Core.SituatedClaimAuthoritySystemExact
+import DASHI.Core.KnowledgeContentAuthoritySeparationExact
+import DASHI.Core.TerminalRealisationValidationExact
+import DASHI.Core.SituatedActionabilityFibreExact
+import DASHI.Core.TrajectoryRecoveryFibreExact
+import DASHI.Core.MultiaxialIncidenceFibreExact
+import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact
+import DASHI.Core.ConsumerFibreRefinementSchedulerExact
+import DASHI.Core.BoundAcquisitionDemandExact
+import DASHI.Core.SituatedFibreDynamicsEverything
+import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
+import DASHI.Core.SharedStateCoalitionReachableEffectExact
+import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
+import DASHI.Core.SnowballPluralLensInvariantExact
+import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact
+import DASHI.Core.SnowballAtomWrongTypeScaleInvariantExact
+import DASHI.Core.SnowballOSINTAcquisitionInvariantExact
+import DASHI.Core.SnowballHistoricalProgrammeNameCollisionExact
+import DASHI.Core.SourceConditionedObservationExact
+import DASHI.Core.PortableSemanticInterpretationExact
+import DASHI.Core.PortableInteractiveViewExact
+import DASHI.Core.PortableLoopInterpretationExact
+import DASHI.Core.PortableSemanticConsumerAdequacyBridgeExact
+import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact
+import DASHI.Core.WorldRepresentationSeparationExact
+import DASHI.Core.TheoryUnderdeterminationExperimentExact
+import DASHI.Core.LawlikeRegularityCounterfactualExact
+import DASHI.Core.EmancipatoryVocabularyRelationalGrammarNoncollapseExact
+import DASHI.Core.ProtectionVocabularyUniversalContestabilityNoncollapseExact
+
+module DASHI.Core.Everything where
+
+-- Core domain rollup.  Specialized theorem-family rollups attach here.
+
+
+-- History-conditioned decision / relational compression / observer-gain core.
+
+-- Situated fibre dynamics / consumer-indexed adequacy.
+
+-- Proof-carrying physical execution / shared-state coalition / proof-search
+-- least-privilege closure.
+
+-- Snowball plural-lens invariant, discovery/admission, attribution, grain, OSINT,
+-- and historical programme-name provenance.
+
+-- Domain-neutral source/provenance/observation carrier.
+
+-- Portable consumer-indexed semantics with UI and loop interpretation fixtures.
+
+-- World/observation/theory/belief type separation and factorisation boundary.
+
+-- Theory underdetermination, epistemic suspension, and discriminating experiments.
+
+-- Law-like invariance under declared counterfactual/control families.
+import DASHI.Core.HistoricalMechanismCompilerExact

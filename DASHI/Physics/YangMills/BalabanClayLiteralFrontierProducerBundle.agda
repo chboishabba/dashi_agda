@@ -1,0 +1,149 @@
+module DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle where
+
+-- One import surface for the literal T2--T5 producer tranche.  The individual
+-- modules keep their remaining local analytic hypotheses explicit; this bundle
+-- performs no proof-level promotion by import alone.
+
+-- Canonical authors/title/venue/DOI/arXiv/section/relationship metadata and a
+-- theorem-disconnected quarantine for unverified completion claims.
+import DASHI.Physics.YangMills.BalabanClayLiteralFrontierVerifiedLiteratureExact
+import DASHI.Physics.YangMills.BalabanClayConfiguredVerifiedLiteratureExact
+import DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims
+
+-- Existing DASHI constructed-real and series spines, direct Bishop/FastCauchy
+-- setoid backends, layered ordered-field/rational-density/effective-convergence
+-- and derived transport capabilities, stable complete-real packages, canonical
+-- categoricity from rational approximants, explicit common-completion and
+-- concrete Bishop/FastCauchy instances, explicit legacy authority, canonical
+-- backend selection and the non-promoted Cubical HoTT boundary.
+import DASHI.Analysis.ConstructedRealBackendSpineExact
+import DASHI.Analysis.ConstructiveRealCapabilityHierarchyExact
+import DASHI.Analysis.ConstructiveRealTransportCapabilitiesExact
+import DASHI.Analysis.ConstructiveCompleteRealPackageExact
+import DASHI.Analysis.ConstructiveRealCategoricityExact
+import DASHI.Analysis.BishopConstructedRealBackendExact
+import DASHI.Analysis.FastCauchyConstructedRealBackendExact
+import DASHI.Analysis.BishopFastCauchyRealEquivalenceExact
+import DASHI.Analysis.BishopFastCauchyCapabilityPackagesExact
+import DASHI.Analysis.BishopFastCauchyCommonCompletionExact
+import DASHI.Analysis.BishopFastCauchyCategoricityInstanceExact
+import DASHI.Analysis.BishopConstructiveSeriesAdapterExact
+import DASHI.Analysis.CanonicalDASHIRealBackendExact
+import DASHI.Analysis.CubicalHoTTRealBackendBoundary
+import DASHI.Foundations.LegacyDASHIRealEquivalenceAuthorityExact
+
+-- Bishop constructive reals, concrete coefficients and series terms, series
+-- completeness and explicit transport into the older postulated real socket,
+-- followed by the shared interval machinery.
+import DASHI.Foundations.BishopConstructiveRealBridgeExact
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact
+import DASHI.Foundations.BishopElementarySeriesTermsExact
+import DASHI.Foundations.BishopReciprocalCoefficientConstructionExact
+import DASHI.Foundations.RealElementaryFunctionsBishopTransportExact
+import DASHI.Foundations.RealElementaryFunctionsAlternatingSeriesExact
+import DASHI.Foundations.RealElementaryFunctionsCanonicalInstanceExact
+import DASHI.Physics.YangMills.BalabanClayCommonCertifiedTaylorEnclosureExact
+import DASHI.Physics.YangMills.BalabanClayCommonTaylorRemainderToEnclosureExact
+import DASHI.Physics.YangMills.BalabanClayCommonNegativeLogSincReductionExact
+import DASHI.Physics.YangMills.BalabanClayCommonRationalSincCertificateExact
+import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact
+import DASHI.Physics.YangMills.BalabanClayCommonElementaryRealInhabitantsExact
+
+-- T3: reference coercivity, exact chart singular values, fixed named atom lists
+-- and mechanism bounds, periodic bond kernels, finite stencils, Fourier symbols,
+-- strip/RG/images and the configured Green gateway.
+import DASHI.Physics.YangMills.BalabanClayT3PhysicalUniformFluctuationCoercivityExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralPhysicalCoercivityProducerExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralBackgroundHessianRemaindersExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralSU2ChartIntervalBoundsExact
+import DASHI.Physics.YangMills.BalabanClayT3RightJacobianSampleCheckExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralFiveRemainderConstantsExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralCommonRadiusWitnessExact
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredFiveHessianDominationExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralPointwiseHessianEstimatesExact
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredFiniteAtomListsExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralFixedAtomFormulaInstanceExact
+import DASHI.Physics.YangMills.BalabanClayT3MechanismAtomBoundsExact
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExact
+import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredPhysicalGreenInstanceExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralHessianFourierImageInstanceExact
+import DASHI.Physics.YangMills.BalabanClayT3PeriodicTorusGreenCarrierExact
+import DASHI.Physics.YangMills.BalabanClayT3PeriodicHessianKernelFormulaExact
+import DASHI.Physics.YangMills.BalabanClayT3FiniteStencilStripImageClosureExact
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredPhysicalGatewayExact
+
+-- T2: action gain, component losses, Bishop-backed quaternion normalization,
+-- exact 96-slot collar, rooted encoding, actual periodic adjacency and concrete
+-- root-plus-word replay/decoder.
+import DASHI.Physics.YangMills.BalabanClayT2LiteralWilsonSixFactorProducerExact
+import DASHI.Physics.YangMills.BalabanClayT2LiteralActivityLossConstantsExact
+import DASHI.Physics.YangMills.BalabanClayT2LiteralPhysicalLossWitnessExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredActionGainThresholdExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredComponentLossBoundsExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredModelSpecificLossClosureExact
+import DASHI.Physics.YangMills.BalabanClayT2LiteralHaarTraceClassClosureExact
+import DASHI.Physics.YangMills.BalabanClayT2QuaternionCubicEnumerationExact
+import DASHI.Physics.YangMills.BalabanClayT2GeneratedQuaternionJetExact
+import DASHI.Physics.YangMills.BalabanClayT2BishopQuaternionNormalizationExact
+import DASHI.Physics.YangMills.BalabanClayT2QuaternionTailCollarClosureExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredStrictLossMarginExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredRobustOneSixteenthEndpointExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalLossInstanceExact
+import DASHI.Physics.YangMills.BalabanClayT2LiteralEightWayCliqueExact
+import DASHI.Physics.YangMills.BalabanClayT2PhysicalRootedPolymerEncodingExact
+import DASHI.Physics.YangMills.BalabanClayT2PhysicalPolymerCarrierInstanceExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact
+import DASHI.Physics.YangMills.BalabanClayT2RepositoryConnectedPolymerExtractionExact
+import DASHI.Physics.YangMills.BalabanClayT2RepositoryBreadthFirstTreeInstanceExact
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicTraversalDecoderExact
+
+-- T4: fixed Wilson/ghost/Haar conventions, symbolic diagram expressions, exact
+-- Ward balance normal form, generated normalized grid and recursive 240-box
+-- proof-producing evaluator.
+import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact
+import DASHI.Physics.YangMills.BalabanClayT4LiteralVacuumPolarizationIntegralExact
+import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopCoefficientClosureExact
+import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopConventionExact
+import DASHI.Physics.YangMills.BalabanClayT4LiteralDiagramWardCancellationExact
+import DASHI.Physics.YangMills.BalabanClayT4LiteralMomentumDiagramBoxDataExact
+import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact
+import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact
+import DASHI.Physics.YangMills.BalabanClayT4WardBoxCertificateClosureExact
+import DASHI.Physics.YangMills.BalabanClayT4Balaban1987TheoremShapeExact
+import DASHI.Physics.YangMills.BalabanClayT4Balaban536VacuumPolarizationTargetExact
+import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact
+import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact
+import DASHI.Physics.YangMills.BalabanClayT4ConfiguredPhysicalOneLoopInstanceExact
+
+-- T5: separate KP and sharper FP criteria, exact marked-activity margins,
+-- repository-specific rooted-shell injection, physical cancellation/RG/moment,
+-- the selected L^p -> reflected-product -> UI route, exact physical-measure
+-- record assembly, explicit reuse of the older gauge/RG/measure stack, measure
+-- topology and complete OS Gram transport.
+import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact
+import DASHI.Physics.YangMills.BalabanClayT5LpUniformIntegrabilityExact
+import DASHI.Physics.YangMills.BalabanClayT5LpPhysicalMeasureAdapterExact
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact
+import DASHI.Physics.YangMills.BalabanClayT5QuantitativeTailMomentCompactnessExact
+import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact
+import DASHI.Physics.YangMills.BalabanClayT5RootedShellBoundaryTailExact
+import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalRootedShellInjectionExact
+import DASHI.Physics.YangMills.BalabanClayT5BoundaryContinuumMomentMeasureExact
+import DASHI.Physics.YangMills.BalabanClayT5ConfiguredPhysicalTailMomentInstanceExact
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExact
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalTailMomentMeasureClosureExact
+import DASHI.Physics.YangMills.BalabanClayLegacyGaugeRGMeasureReuseExact
+
+-- Exact status split for configured arithmetic, Bishop integration and leaves.
+import DASHI.Physics.YangMills.BalabanClayConfiguredFrontierCompletionLedger
+import DASHI.Physics.YangMills.BalabanClayBishopFrontierCompletionLedger
+import DASHI.Physics.YangMills.BalabanClayCategoricityLpReuseCompletionLedger
+
+-- User-run authoritative typecheck receipt surface.
+import DASHI.Physics.YangMills.BalabanClayBranchHeadReceiptSurface

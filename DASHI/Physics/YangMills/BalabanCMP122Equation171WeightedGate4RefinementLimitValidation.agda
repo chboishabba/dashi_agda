@@ -1,0 +1,12 @@
+module DASHI.Physics.YangMills.BalabanCMP122Equation171WeightedGate4RefinementLimitValidation where
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP122Equation171WeightedGate4RefinementLimitExact as L
+refinementCompilerOwned : L.weightedEquation171RefinementLimitCompilerLevel ≡ machineChecked
+refinementCompilerOwned = refl
+sourceMassCompilerOwned : L.weightedEquation171SourceMassLimitCompilerLevel ≡ machineChecked
+sourceMassCompilerOwned = refl
+partitionFamilyStillPhysical : L.literalEquation171WeightedPartitionFamilyLevel ≡ conditional
+partitionFamilyStillPhysical = refl
+oscillationStillAnalytic : L.literalEquation171WeightedOscillationVanishesLevel ≡ conditional
+oscillationStillAnalytic = refl

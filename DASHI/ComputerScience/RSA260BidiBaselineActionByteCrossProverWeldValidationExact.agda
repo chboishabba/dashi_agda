@@ -1,0 +1,8 @@
+module DASHI.ComputerScience.RSA260BidiBaselineActionByteCrossProverWeldValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiBaselineActionByteCrossProverWeldExact
+
+open DASHI.ComputerScience.RSA260BidiBaselineActionByteCrossProverWeldExact
+
+validationBoundary : BaselineActionByteCrossProverWeldBoundary
+validationBoundary = canonicalBaselineActionByteCrossProverWeldBoundary

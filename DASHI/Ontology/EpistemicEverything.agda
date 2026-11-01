@@ -1,0 +1,7 @@
+module DASHI.Ontology.EpistemicEverything where
+
+import DASHI.Ontology.EpistemicTrit
+import DASHI.Ontology.ContextualClaimComposition
+import DASHI.Ontology.WikidataEpistemicBridge
+import DASHI.Ontology.WikidataEpistemicBridgeTests
+import DASHI.Ontology.LeanWikidataEverything

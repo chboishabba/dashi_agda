@@ -1,0 +1,4 @@
+module DASHI.Algebra.Quantum.MeasurementPromotionBridgeAll where
+
+import DASHI.Algebra.Quantum.MeasurementPromotionBridge
+import DASHI.Algebra.Quantum.MeasurementPromotionBridgeTests

@@ -1,0 +1,35 @@
+module DASHI.EverythingRiemannReflectionOrbitDefect2026 where
+
+-- Focused aggregate root for the 2026 zeta reflection/Hermitian-defect tranche.
+-- Analytic calibration: Alpöge--Furman, arXiv:2608.13637 (2026),
+-- DOI: 10.48550/arXiv.2608.13637.
+
+import DASHI.Analysis.RiemannReflectionOrbitDefectExact
+import DASHI.Analysis.RiemannReflectionPairBlockExact
+import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact
+import DASHI.Analysis.RiemannComplexPoissonChannelSplitExact
+import DASHI.Analysis.RiemannComplexPoissonHermitianReductionExact
+import DASHI.Analysis.RiemannComplexPoissonPairEnergyExact
+import DASHI.Analysis.RiemannPhiCoshCoercivityReductionExact
+import DASHI.Analysis.RiemannCenteredGridRetentionExact
+import DASHI.Analysis.RiemannG1FiniteRetentionAssemblyExact
+import DASHI.Analysis.RiemannComplexPoissonFiniteRetentionExact
+import DASHI.Analysis.RiemannWeilPairKernelFrobeniusExact
+import DASHI.Analysis.RiemannMixedKernelEnvelopeExact
+import DASHI.Analysis.RiemannMixedChannelAlmostOrthogonalityExact
+import DASHI.Analysis.RiemannPrimeSideExcessNormalizationExact
+import DASHI.Analysis.RiemannG3SourceTransportExact
+import DASHI.Analysis.RiemannHermitianDefectAssemblyExact
+import DASHI.Analysis.RiemannHermitianDetectabilityGapExact
+import DASHI.Analysis.RiemannHermitianExcessDetectabilityAssemblyExact
+import DASHI.Analysis.RiemannHermitianPowerAmplificationExact
+import DASHI.Analysis.RiemannHermitianLocalizationAmplificationExact
+import DASHI.Analysis.RiemannArithmeticUnitarityRigidityBoundary
+import DASHI.Analysis.RiemannHermitianEndgameTrichotomyExact
+import DASHI.Analysis.RiemannHermitianDreamRouteExact
+import DASHI.Analysis.RiemannHermitianTopDownAssemblyExact
+import DASHI.Analysis.RiemannHermitianSourceGapMapExact
+import DASHI.Analysis.RiemannHermitianIntrospectiveRoundTripExact
+import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact
+import DASHI.Analysis.RiemannReflectionOrbitDefectRegression
+import DASHI.Analysis.ZetaTheoremSurface

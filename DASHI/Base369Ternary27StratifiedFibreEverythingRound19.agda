@@ -1,0 +1,5 @@
+module DASHI.Base369Ternary27StratifiedFibreEverythingRound19 where
+
+import DASHI.Base369Ternary27StratifiedFibreEverythingRound18
+import DASHI.Moonshine.Monster3BG2FourSixtyFiveSeventyEightBridgeBidiExact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound19Exact

@@ -1,0 +1,19 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanSectorQFTRecoveryExportRound129Exact as R129
+import DASHI.Physics.YangMills.BalabanContinuumMetricStressPairingRound130Exact as R130
+import DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact as R131
+
+round129SectorExportCompiler : ProofLevel
+round129SectorExportCompiler = R129.balabanSectorQFTRecoveryExportCompilerLevel
+
+round130MetricPairingCompiler : ProofLevel
+round130MetricPairingCompiler = R130.continuumMetricStressPairingCompilerLevel
+
+round131CommonMetricSectorCompiler : ProofLevel
+round131CommonMetricSectorCompiler = R131.commonMetricReadyBalabanSectorCompilerLevel
+
+round131ConsumerMustNotReintroduceIndependentConvergence : ProofLevel
+round131ConsumerMustNotReintroduceIndependentConvergence = machineChecked

@@ -1,0 +1,14 @@
+module DASHI.ComputerScience.RSA260BidiSparseRawRankStressFrontierValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.ComputerScience.RSA260BidiSparseRawRankStressFrontierExact as Frontier
+
+boundary : Frontier.SparseRawRankStressFrontierBoundary
+boundary = Frontier.canonicalSparseRawRankStressFrontierBoundary
+
+selectedAdequacy : Frontier.SelectedStressSparseObserverAdequacy
+selectedAdequacy = Frontier.selectedStressSparseObserverAdequate
+
+firstResidual : Frontier.SparseRawRankStressResidual
+firstResidual = Frontier.firstSparseRawRankStressResidual

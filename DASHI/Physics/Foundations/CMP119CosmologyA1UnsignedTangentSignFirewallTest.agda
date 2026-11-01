@@ -1,0 +1,13 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyA1UnsignedTangentSignFirewallTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyA1UnsignedTangentSignFirewallExact as A1
+
+presentTangentCarrierIsUnsignedTenSlotRegression =
+  A1.presentTangentCarrierIsUnsignedTenSlot
+
+hypercubicReflectionsCarryIndependentBasisSignRegression =
+  A1.hypercubicReflectionsCarryIndependentBasisSign
+
+terminalA1SourceLawMustBeSignedReadoutCovarianceRegression =
+  A1.terminalA1SourceLawMustBeSignedReadoutCovariance

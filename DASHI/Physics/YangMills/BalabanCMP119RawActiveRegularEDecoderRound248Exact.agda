@@ -1,0 +1,288 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exact where
+
+------------------------------------------------------------------------
+-- ROUND248 / LEAST-PRIVILEGE RAW CMP119 E-LOCALIZATION DECODER
+--
+-- The finite-history raw CMP119 carrier already owns the selected density,
+-- the exact raw regular small-field term E_k, and the active Sect.-2 witness.
+-- However `ELocalizedAnalytic` is intentionally an opaque source predicate: it
+-- does not itself contain the repository's concrete components/activity/sum
+-- data required by the BC1-facing Round246 carrier.
+--
+-- This adapter names exactly that missing interpretation.  It is indexed by the
+-- SAME raw E_k, so a decoder cannot silently replace the source term by a more
+-- convenient function.  Once the interpretation is supplied, the existing
+-- active raw Sect.-2 witness compiles mechanically to Round246's least-privilege
+-- `ActiveRegularESection2FormWitness`, and Round247 can continue to CMP109/116.
+--
+-- PARETO REFINEMENT: because `CMP119Section2PredicateFamily` is a source-boundary
+-- vocabulary chosen before the active theorem witness, the preferred route may
+-- choose `ELocalizedAnalytic` itself to BE the concrete same-E localization
+-- record below.  On that representation the decoder is identity.  This removes
+-- a redundant decoder theorem; it does not manufacture source localization.
+--
+-- The raw finite-history constructor already makes runningCoupling equal to the
+-- finite-history coupling definitionally.  Therefore, once the genuine CMP122
+-- theorem witness is supplied on this concrete predicate family, the active raw
+-- Sect.-2 witness and the Round246 regular-E form witness are compiler output.
+--
+-- No new localization theorem is asserted here.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
+
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
+import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
+import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as FiniteBeta
+import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
+import DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact as Active
+import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
+import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact as Theorem1Raw
+import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact as RawHistory
+import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as R246
+
+record ExactRawRegularELocalization
+    (Background Volume Component : Set)
+    (regularE : Background → ℝ) : Set₁ where
+  field
+    components : Volume → List Component
+    localizedRegularActivity : Volume → Component → Background → ℝ
+    regularEIsLocalizedCompositeSum : ∀ volume background →
+      regularE background
+      ≡ Finite.sumFunctions
+          (Finite.mapList
+            (localizedRegularActivity volume)
+            (components volume))
+          background
+
+open ExactRawRegularELocalization public
+
+asRound246Form :
+  ∀ {Density Background Volume Component : Set}
+    {scale : Nat}
+    {density : Density}
+    {regularE : Background → ℝ} →
+  ExactRawRegularELocalization Background Volume Component regularE →
+  R246.CMP119RegularESection2Form
+    Density Background Volume Component scale density
+asRound246Form {regularE = regularE} localized = record
+  { R246.CMP119RegularESection2Form.regularE = regularE
+  ; R246.CMP119RegularESection2Form.components = components localized
+  ; R246.CMP119RegularESection2Form.localizedRegularActivity =
+      localizedRegularActivity localized
+  ; R246.CMP119RegularESection2Form.regularEIsLocalizedCompositeSum =
+      regularEIsLocalizedCompositeSum localized
+  }
+
+record RawELocalizedAnalyticDecoder
+    {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom : Set}
+    {betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom}
+    {history : History.FiniteModeInverseSquareTerminalHistoryData
+      trajectory Mode Atom betaData}
+    {Density Background Fluctuation
+      Action WilsonTerm RTerm BoundaryTerm Vacuum : Set}
+    (objects : RawHistory.CMP119RawObjectsOverHistory history
+      Density Background Fluctuation
+      Action WilsonTerm (Background → ℝ) RTerm BoundaryTerm Vacuum)
+    (predicates : Raw.CMP119Section2PredicateFamily
+      (RawHistory.rawStateFromFiniteBetaHistory objects)) : Set₂ where
+  field
+    Volume Component : Set
+
+    decodeELocalizedAnalytic : ∀ scale →
+      Raw.ELocalizedAnalytic predicates scale
+        (RawHistory.regularSmallFieldTerm objects scale) →
+      ExactRawRegularELocalization
+        Background Volume Component
+        (RawHistory.regularSmallFieldTerm objects scale)
+
+open RawELocalizedAnalyticDecoder public
+
+------------------------------------------------------------------------
+-- Preferred concrete-E predicate representation.
+------------------------------------------------------------------------
+
+record ConcreteELocalizationSection2PredicateInputs
+    {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom : Set}
+    {betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom}
+    {history : History.FiniteModeInverseSquareTerminalHistoryData
+      trajectory Mode Atom betaData}
+    {Density Background Fluctuation
+      Action WilsonTerm RTerm BoundaryTerm Vacuum : Set}
+    (objects : RawHistory.CMP119RawObjectsOverHistory history
+      Density Background Fluctuation
+      Action WilsonTerm (Background → ℝ) RTerm BoundaryTerm Vacuum) : Set₂ where
+  field
+    Volume Component : Set
+    RLocalizedAnalytic : Nat → RTerm → Set
+    BLocalizedAnalytic : Nat → BoundaryTerm → Set
+    RegularBackground : Nat → Background → Set
+    CompleteDensityForm : Nat → Density → Set
+
+open ConcreteELocalizationSection2PredicateInputs public
+
+preferredConcreteELocalizationPredicates :
+  ∀ {trajectory Mode Atom betaData history
+      Density Background Fluctuation
+      Action WilsonTerm RTerm BoundaryTerm Vacuum}
+    {objects : RawHistory.CMP119RawObjectsOverHistory history
+      Density Background Fluctuation
+      Action WilsonTerm (Background → ℝ) RTerm BoundaryTerm Vacuum} →
+  (inputs : ConcreteELocalizationSection2PredicateInputs objects) →
+  Raw.CMP119Section2PredicateFamily
+    (RawHistory.rawStateFromFiniteBetaHistory objects)
+preferredConcreteELocalizationPredicates
+    {Background = Background} inputs = record
+  { Raw.CMP119Section2PredicateFamily.ELocalizedAnalytic =
+      λ _ regularE →
+        ExactRawRegularELocalization
+          Background (Volume inputs) (Component inputs) regularE
+  ; Raw.CMP119Section2PredicateFamily.RLocalizedAnalytic =
+      RLocalizedAnalytic inputs
+  ; Raw.CMP119Section2PredicateFamily.BLocalizedAnalytic =
+      BLocalizedAnalytic inputs
+  ; Raw.CMP119Section2PredicateFamily.RegularBackground =
+      RegularBackground inputs
+  ; Raw.CMP119Section2PredicateFamily.CompleteDensityForm =
+      CompleteDensityForm inputs
+  }
+
+preferredConcreteELocalizationIdentityDecoder :
+  ∀ {trajectory Mode Atom betaData history
+      Density Background Fluctuation
+      Action WilsonTerm RTerm BoundaryTerm Vacuum}
+    {objects : RawHistory.CMP119RawObjectsOverHistory history
+      Density Background Fluctuation
+      Action WilsonTerm (Background → ℝ) RTerm BoundaryTerm Vacuum} →
+  (inputs : ConcreteELocalizationSection2PredicateInputs objects) →
+  RawELocalizedAnalyticDecoder
+    objects (preferredConcreteELocalizationPredicates inputs)
+preferredConcreteELocalizationIdentityDecoder inputs = record
+  { RawELocalizedAnalyticDecoder.Volume = Volume inputs
+  ; RawELocalizedAnalyticDecoder.Component = Component inputs
+  ; RawELocalizedAnalyticDecoder.decodeELocalizedAnalytic =
+      λ _ localized → localized
+  }
+
+preferredConcreteELocalizationPredicateCompilerLevel : ProofLevel
+preferredConcreteELocalizationPredicateCompilerLevel = machineChecked
+
+preferredConcreteELocalizationIdentityDecoderCompilerLevel : ProofLevel
+preferredConcreteELocalizationIdentityDecoderCompilerLevel = machineChecked
+
+asRound246ActiveInputs :
+  ∀ {trajectory Mode Atom betaData history
+      Density Background Fluctuation
+      Action WilsonTerm RTerm BoundaryTerm Vacuum}
+    {objects : RawHistory.CMP119RawObjectsOverHistory history
+      Density Background Fluctuation
+      Action WilsonTerm (Background → ℝ) RTerm BoundaryTerm Vacuum}
+    {predicates : Raw.CMP119Section2PredicateFamily
+      (RawHistory.rawStateFromFiniteBetaHistory objects)} →
+  (decoder : RawELocalizedAnalyticDecoder objects predicates) →
+  R246.ActiveRegularESection2Inputs betaData history
+asRound246ActiveInputs
+    {Density = Density} {Background = Background}
+    {objects = objects} {predicates = predicates} decoder = record
+  { R246.ActiveRegularESection2Inputs.Density = Density
+  ; R246.ActiveRegularESection2Inputs.Background = Background
+  ; R246.ActiveRegularESection2Inputs.Volume = Volume decoder
+  ; R246.ActiveRegularESection2Inputs.Component = Component decoder
+  ; R246.ActiveRegularESection2Inputs.densityAt =
+      RawHistory.effectiveDensity objects
+  ; R246.ActiveRegularESection2Inputs.Section2ConditionsAndBounds =
+      λ scale density →
+        density ≡ RawHistory.effectiveDensity objects scale →
+        Raw.CMP119Section2AtScale predicates scale
+  }
+
+activeRegularEFormWitnessFromRaw :
+  ∀ {trajectory Mode Atom betaData history
+      Density Background Fluctuation
+      Action WilsonTerm RTerm BoundaryTerm Vacuum}
+    {objects : RawHistory.CMP119RawObjectsOverHistory history
+      Density Background Fluctuation
+      Action WilsonTerm (Background → ℝ) RTerm BoundaryTerm Vacuum}
+    {predicates : Raw.CMP119Section2PredicateFamily
+      (RawHistory.rawStateFromFiniteBetaHistory objects)}
+    (decoder : RawELocalizedAnalyticDecoder objects predicates) →
+  Raw.ActiveCMP119Section2Witness
+    {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+    {betaData = betaData} {history = history}
+    {source = RawHistory.rawStateFromFiniteBetaHistory objects}
+    predicates →
+  R246.ActiveRegularESection2FormWitness
+    (asRound246ActiveInputs decoder)
+activeRegularEFormWitnessFromRaw decoder witness = record
+  { R246.ActiveRegularESection2FormWitness.regularEFormOnActiveScale =
+      λ scale active →
+        asRound246Form
+          (decodeELocalizedAnalytic decoder scale
+            (Raw.eSector
+              (Raw.section2OnActiveScale witness scale active)))
+  }
+
+------------------------------------------------------------------------
+-- Preferred theorem-1 entrypoint.
+--
+-- `rawStateFromFiniteBetaHistory` makes the coupling identity definitional.
+-- `preferredConcreteELocalizationIdentityDecoder` makes E-localization decoding
+-- definitional.  Therefore a genuine CMP122 theorem witness instantiated on the
+-- concrete predicate family compiles directly to the R246 form witness.
+------------------------------------------------------------------------
+
+preferredConcreteActiveRegularEFormWitnessFromTheorem1 :
+  ∀ {trajectory Mode Atom betaData history
+      Density Background Fluctuation
+      Action WilsonTerm RTerm BoundaryTerm Vacuum}
+    {objects : RawHistory.CMP119RawObjectsOverHistory history
+      Density Background Fluctuation
+      Action WilsonTerm (Background → ℝ) RTerm BoundaryTerm Vacuum} →
+  (inputs : ConcreteELocalizationSection2PredicateInputs objects) →
+  Active.ActiveBalaban1989Theorem1Witness
+    (Theorem1Raw.asActiveEffectiveDensityFlow
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      {betaData = betaData} {history = history}
+      (preferredConcreteELocalizationPredicates inputs)) →
+  R246.ActiveRegularESection2FormWitness
+    (asRound246ActiveInputs
+      (preferredConcreteELocalizationIdentityDecoder inputs))
+preferredConcreteActiveRegularEFormWitnessFromTheorem1
+    {objects = objects} inputs theorem1 =
+  activeRegularEFormWitnessFromRaw
+    (preferredConcreteELocalizationIdentityDecoder inputs)
+    (RawHistory.activeRawWitnessFromFiniteHistoryAndTheorem1 objects theorem1)
+
+preferredConcreteActiveRegularEFormFromTheorem1CompilerLevel : ProofLevel
+preferredConcreteActiveRegularEFormFromTheorem1CompilerLevel = machineChecked
+
+rawActiveRegularEDecoderCompilerLevel : ProofLevel
+rawActiveRegularEDecoderCompilerLevel = machineChecked
+
+rawActiveRegularEFormWitnessCompilerLevel : ProofLevel
+rawActiveRegularEFormWitnessCompilerLevel = machineChecked
+
+-- Legacy opaque-predicate route: source/repository payment is an explicit
+-- interpretation from the opaque Sect.-2 E predicate to concrete localization.
+literalRawELocalizedAnalyticDecoderLevel : ProofLevel
+literalRawELocalizedAnalyticDecoderLevel = conditional
+
+-- Preferred route: the source theorem witness is the remaining primitive input.
+-- The decoder, coupling weld, active raw witness, and R246 form projection all
+-- compile from it and the already-selected raw object/predicate carriers.
+literalCMP122Theorem1OnConcreteELocalizationPredicateLevel : ProofLevel
+literalCMP122Theorem1OnConcreteELocalizationPredicateLevel = conditional
+
+-- Compatibility frontier name retained for downstream archaeology. On the
+-- preferred concrete-predicate route this active witness is compiler output from
+-- the theorem1 input above rather than a separate theorem payment.
+literalConcreteELocalizationActiveSection2WitnessLevel : ProofLevel
+literalConcreteELocalizationActiveSection2WitnessLevel = conditional

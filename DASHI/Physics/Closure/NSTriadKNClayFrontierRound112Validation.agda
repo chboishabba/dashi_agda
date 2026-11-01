@@ -1,0 +1,11 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound112Validation where
+
+-- Focused kernel root for the Round112 same-functional external Waleffe
+-- residual frontier.
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound111Validation
+import DASHI.Physics.Closure.NSTriadKNExternalWaleffeResidualCarrierRound112Exact
+import DASHI.Physics.Closure.NSTriadKNExternalResidualPositiveMajorantRestrictionRound112Exact
+import DASHI.Physics.Closure.NSTriadKNExternalRealityPairingNoFreeCancellationRound112Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound112Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound112Exact

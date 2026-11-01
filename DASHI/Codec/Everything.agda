@@ -1,0 +1,41 @@
+module DASHI.Codec.Everything where
+
+-- Exhaustive codec ownership surface.
+
+import DASHI.Codec.BalancedTritBitFibre
+import DASHI.Codec.DNACarrierFibre
+import DASHI.Codec.DNACompactInvariants
+import DASHI.Codec.DNACompressiveMacros
+import DASHI.Codec.DNAConcreteLiftTower
+import DASHI.Codec.DNAConcreteReference
+import DASHI.Codec.DNAConcreteValidation
+import DASHI.Codec.DNADeBruijnCapacity
+import DASHI.Codec.DNADeBruijnGeometry
+import DASHI.Codec.DNADeBruijnMacros
+import DASHI.Codec.DNADeBruijnRegression
+import DASHI.Codec.DNADeBruijnValidation
+import DASHI.Codec.DNADeBruijnWalks
+import DASHI.Codec.DNAEigenMDLInvariant
+import DASHI.Codec.DNAFirstFormalism
+import DASHI.Codec.DNAFirstFormalismRegression
+import DASHI.Codec.DNAProductionChoices
+import DASHI.Codec.DNAProductionConstraints
+import DASHI.Codec.DNAProductionDeBruijn
+import DASHI.Codec.DNAProductionNormalization
+import DASHI.Codec.DNAProductionValidation
+import DASHI.Codec.RANSMaskSignModel
+import DASHI.Codec.TriadicCodecFactorisationCrossPollination
+import DASHI.Codec.TriadicCodecFactorisationCrossPollinationRegression
+import DASHI.Codec.TriadicExplodedTransformBridge
+import DASHI.Codec.TriadicExplodedTransformCompletion
+import DASHI.Codec.TriadicGlobalInversionFold
+import DASHI.Codec.TriadicMaskSign
+import DASHI.Codec.TriadicMaskSignEntropyContract
+import DASHI.Codec.TriadicMaskSignFactorization
+import DASHI.Codec.TriadicMaskSignRegression
+import DASHI.Codec.TriadicMaskSignSSPBridge
+import DASHI.Codec.TriadicPAdicCodec
+import DASHI.Codec.TriadicPAdicCodec369Bridge
+import DASHI.Codec.TriadicPAdicCodec369BridgeRegression
+import DASHI.Codec.TriadicPAdicCodecRegression
+import DASHI.Codec.VerifiedFiniteTritCoder

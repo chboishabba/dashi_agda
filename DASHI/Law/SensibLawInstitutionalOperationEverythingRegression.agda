@@ -1,0 +1,5 @@
+module DASHI.Law.SensibLawInstitutionalOperationEverythingRegression where
+
+import DASHI.Law.SensibLawInstitutionalOperationEverything
+import DASHI.Law.SensibLawOperationalLegalityRegression
+import DASHI.Law.SensibLawInstitutionalResponsibilityRegression

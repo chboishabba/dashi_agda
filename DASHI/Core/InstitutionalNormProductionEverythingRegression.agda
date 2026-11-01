@@ -1,0 +1,6 @@
+module DASHI.Core.InstitutionalNormProductionEverythingRegression where
+
+import DASHI.Core.InstitutionalNormProductionEverything
+import DASHI.Core.InstitutionalNormProductionRegression
+import DASHI.Core.FragmentationCompositionRegression
+import DASHI.Core.ObserverSituatedReasonablenessRegression

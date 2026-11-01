@@ -1,0 +1,9 @@
+module DASHI.ComputerScience.RSA260BidiProductionCompressedGeneratorResidualValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiProductionCompressedGeneratorResidualExact as Compressed
+
+boundary : Compressed.ProductionCompressedGeneratorResidualBoundary
+boundary = Compressed.canonicalProductionCompressedGeneratorResidualBoundary
+
+firstResidual : Compressed.ProductionCompressedGeneratorResidualResidual
+firstResidual = Compressed.firstProductionCompressedGeneratorResidualResidual

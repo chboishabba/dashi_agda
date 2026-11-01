@@ -1,0 +1,16 @@
+module DASHI.ComputerScience.RSA260BidiSyntheticSeedConstructorWeldValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiSyntheticSeedConstructorWeldExact as O
+
+leanSeedConstructorWritten :
+  O.SyntheticSeedConstructorWeldBoundary.leanExactSeedConstructorSourceWritten
+    O.canonicalSyntheticSeedConstructorWeldBoundary ≡ true
+leanSeedConstructorWritten = refl
+
+crossLanguageSeedIdentityOpen :
+  O.SyntheticSeedConstructorWeldBoundary.runtimeSeedBoundToLeanSeed
+    O.canonicalSyntheticSeedConstructorWeldBoundary ≡ false
+crossLanguageSeedIdentityOpen = refl
+
+firstResidualIsSeedTransport : O.SyntheticSeedConstructorResidual
+firstResidualIsSeedTransport = O.firstSyntheticSeedConstructorResidual

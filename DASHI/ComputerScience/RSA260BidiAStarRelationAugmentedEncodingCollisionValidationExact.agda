@@ -1,0 +1,12 @@
+module DASHI.ComputerScience.RSA260BidiAStarRelationAugmentedEncodingCollisionValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiAStarRelationAugmentedEncodingCollisionExact as Collision
+
+relationAugmentedBoundary : Collision.RelationAugmentedEncodingBoundary
+relationAugmentedBoundary = Collision.canonicalRelationAugmentedEncodingBoundary
+
+relationAugmentedBlocked : Collision.RelationAugmentedAdequacyDefect
+relationAugmentedBlocked = Collision.relationAugmentedEncodingCannotDetermineGeneratorIdentity
+
+firstResidual : Collision.RelationAugmentedEncodingResidual
+firstResidual = Collision.firstRelationAugmentedEncodingResidual

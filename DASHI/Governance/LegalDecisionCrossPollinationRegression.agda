@@ -1,0 +1,81 @@
+module DASHI.Governance.LegalDecisionCrossPollinationRegression where
+
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
+
+import DASHI.Core.FibreOrderNonfactorabilityExact as Order
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Governance.DecisionContestedAuthorityJusticeConvergenceExact as Convergence
+import DASHI.Governance.DecisionPotentialAuthorityOrthogonalityExact as PotentialAuthority
+import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
+import DASHI.Governance.LegalDecisionDoubleProjectionExact as Legal
+import DASHI.Governance.LegalDecisionFibreDynamicsExact as Dynamics
+import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact as PeaceJustice
+
+officialSurfaceNonfactorabilityRegression :
+  NF.FactorsThrough Legal.officialSurface Legal.fineLegalStateOf → ⊥
+officialSurfaceNonfactorabilityRegression = Legal.officialSurfaceCannotRecoverFineLegalState
+
+decisionResidualInsufficientRegression :
+  NF.FactorsThrough Legal.decisionResidualSurface Legal.fineLegalStateOf → ⊥
+decisionResidualInsufficientRegression = Legal.decisionResidualAloneCannotRecoverFineLegalState
+
+authorityResidualInsufficientRegression :
+  NF.FactorsThrough Legal.authorityResidualSurface Legal.fineLegalStateOf → ⊥
+authorityResidualInsufficientRegression = Legal.authorityResidualAloneCannotRecoverFineLegalState
+
+joinedResidualSufficiencyRegression :
+  NF.FactorsThrough Legal.joinedResidualSurface Legal.fineLegalStateOf
+joinedResidualSufficiencyRegression = Legal.joinedResidualRecoversChosenFineLegalState
+
+potentialCannotIssueAuthorityRegression :
+  NF.FactorsThrough PotentialAuthority.potentialReadout PotentialAuthority.authorityReadout → ⊥
+potentialCannotIssueAuthorityRegression = PotentialAuthority.potentialCannotIssueAuthority
+
+authorityCannotDeterminePotentialRegression :
+  NF.FactorsThrough PotentialAuthority.authorityReadout PotentialAuthority.potentialReadout → ⊥
+authorityCannotDeterminePotentialRegression =
+  PotentialAuthority.authorityDoesNotDetermineObserverPotential
+
+hiddenUpdateOrderRegression :
+  Dynamics.decisionAfterAuthorityAtBlocked
+  ≡ Dynamics.authorityAfterDecisionAtBlocked → ⊥
+hiddenUpdateOrderRegression = Dynamics.hiddenMotionsDoNotCommuteAtBlocked
+
+hiddenOrdersShareOfficialEndpointRegression :
+  Dynamics.witnessOfficialSurface Dynamics.decisionAfterAuthorityAtBlocked
+  ≡ Dynamics.witnessOfficialSurface Dynamics.authorityAfterDecisionAtBlocked
+hiddenOrdersShareOfficialEndpointRegression =
+  Dynamics.bothCompositeOrdersRemainOfficiallyInvisible
+
+hiddenOrderCannotFactorThroughOfficialSurfaceRegression :
+  NF.FactorsThrough
+    (Order.orderedSurface Dynamics.decisionMotion Dynamics.authorityMotion Dynamics.blockedDonorState)
+    (Order.orderedEndpoint Dynamics.decisionMotion Dynamics.authorityMotion Dynamics.blockedDonorState) → ⊥
+hiddenOrderCannotFactorThroughOfficialSurfaceRegression =
+  Dynamics.officialSurfaceCannotDecodeHiddenUpdateOrder
+
+institutionalSurfaceCannotRecoverDecisionAuthorityAutonomyJustice :
+  NF.FactorsThrough
+    Convergence.institutionalSurface
+    Convergence.fineInstitutionalStateOf → ⊥
+institutionalSurfaceCannotRecoverDecisionAuthorityAutonomyJustice =
+  Convergence.institutionalSurfaceCannotRecoverFineState
+
+sameInstitutionalSurfaceRegression :
+  Convergence.institutionalSurface Convergence.fineJustEpisode
+  ≡ Convergence.institutionalSurface Convergence.collapsedOpenEpisode
+sameInstitutionalSurfaceRegression = Convergence.sameInstitutionalSurface
+
+sameInstitutionalSurfaceDifferentJusticeResidualRegression :
+  Convergence.hiddenJusticeResidual
+    (Convergence.fineInstitutionalStateOf Convergence.fineJustEpisode)
+  ≡ Convergence.hiddenJusticeResidual
+    (Convergence.fineInstitutionalStateOf Convergence.collapsedOpenEpisode) → ⊥
+sameInstitutionalSurfaceDifferentJusticeResidualRegression =
+  Convergence.justiceResidualDiffers
+
+institutionalClosureNotJusticeClosureRegression :
+  PeaceJustice.JusticeClosureCertificate Rechart.suppressedQuietState → ⊥
+institutionalClosureNotJusticeClosureRegression =
+  Convergence.institutionalClosureDoesNotEstablishJusticeClosure

@@ -1,0 +1,18 @@
+module DASHI.Physics.Closure.NSPeriodicFourierUniversalTailRegression where
+
+-- Focused import-only regression for the complete six-package reduction.
+import DASHI.Physics.Closure.NSPeriodicFourierCancellationAlgebra
+import DASHI.Physics.Closure.NSCompactGammaFiveHalvesSummationReduction
+import DASHI.Physics.Closure.NSPeriodicFourierNearTriadPreYoung
+import DASHI.Physics.Closure.NSPeriodicFourierYoungFactorization
+import DASHI.Physics.Closure.NSPeriodicFourierAnalyticAuthorityBoundary
+import DASHI.Physics.Closure.NSPeriodicFourierAuthorityAdapters
+import DASHI.Physics.Closure.NSPeriodicFourierNearTriadAuthorityBridge
+import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction
+import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightAuthorityBridge
+import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction
+import DASHI.Physics.Closure.NSCompactGammaDiniFirstExitReduction
+import DASHI.Physics.Closure.NSPeriodicContinuationAuthorityAdapter
+import DASHI.Physics.Closure.NSCompactGammaCoverageFromContinuationAuthority
+import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction
+import DASHI.Physics.Closure.NSCompactGammaCertificateUniversalTailCompletion

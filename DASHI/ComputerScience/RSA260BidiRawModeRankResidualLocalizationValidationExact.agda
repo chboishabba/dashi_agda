@@ -1,0 +1,9 @@
+module DASHI.ComputerScience.RSA260BidiRawModeRankResidualLocalizationValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiRawModeRankResidualLocalizationExact as Raw
+
+boundary : Raw.RawModeRankResidualLocalizationBoundary
+boundary = Raw.canonicalRawModeRankResidualLocalizationBoundary
+
+firstResidual : Raw.RawModeRankResidual
+firstResidual = Raw.firstRawModeRankResidual

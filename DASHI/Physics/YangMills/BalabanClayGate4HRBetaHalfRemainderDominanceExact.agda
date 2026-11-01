@@ -1,0 +1,289 @@
+module DASHI.Physics.YangMills.BalabanClayGate4HRBetaHalfRemainderDominanceExact where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanClayGate4DyadicRunningCouplingConventionExact as Dyadic
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryCouplingAdmissibilityInductionExact as Induction
+import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
+import DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact as Running
+
+------------------------------------------------------------------------
+-- H-Rbeta half-remainder dominance.
+--
+-- Tadeusz Bałaban,
+-- "Renormalization Group Approach to Lattice Gauge Field Theories. I.
+-- Generation of Effective Actions in a Small Field Approximation and a
+-- Coupling Constant Renormalization in Four Dimensions",
+-- Communications in Mathematical Physics 109 (2) (1987), 249--301.
+-- DOI: 10.1007/BF01215223.
+--
+-- If |r_k| <= (1/2) Delta_k, ordered additive-group algebra gives
+-- (1/2) Delta_k <= Delta_k + r_k.  The result constructs the existing
+-- HRBetaRemainderDominance carrier and reuses the all-scale induction.
+------------------------------------------------------------------------
+
+record OrderedAdditiveGroupMeaning
+    {Scale Scalar : Set}
+    {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar}
+    (control : Dyadic.HRBetaRemainderControl convention) : Set₁ where
+  field
+    zero : Scalar
+    negate : Scalar → Scalar
+
+    transitive : ∀ {left middle right} →
+      Dyadic.LessEqual control left middle →
+      Dyadic.LessEqual control middle right →
+      Dyadic.LessEqual control left right
+
+    addMonotoneLeft : ∀ {lower upper} common →
+      Dyadic.LessEqual control lower upper →
+      Dyadic.LessEqual control
+        (Dyadic.add control common lower)
+        (Dyadic.add control common upper)
+
+    addAssociative : ∀ left middle right →
+      Dyadic.add control (Dyadic.add control left middle) right
+      ≡ Dyadic.add control left (Dyadic.add control middle right)
+
+    addZeroRight : ∀ value →
+      Dyadic.add control value zero ≡ value
+
+    addInverseRight : ∀ value →
+      Dyadic.add control value (negate value) ≡ zero
+
+    negateAntitone : ∀ {left right} →
+      Dyadic.LessEqual control left right →
+      Dyadic.LessEqual control (negate right) (negate left)
+
+    negativeAbsoluteBelow : ∀ value →
+      Dyadic.LessEqual control
+        (negate (Dyadic.absolute control value)) value
+
+    halfDecomposition : ∀ value →
+      Dyadic.add control
+        (Dyadic.halfOf control value)
+        (Dyadic.halfOf control value)
+      ≡ value
+
+open OrderedAdditiveGroupMeaning public
+
+leadingIncrementAt :
+  ∀ {Scale Scalar}
+    {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar} →
+  Dyadic.HRBetaRemainderControl convention → Scale → Scalar
+leadingIncrementAt {convention = convention} control scale =
+  P3.betaLogBlocking (Running.recursion (Dyadic.running convention)) scale
+
+halfIncrementBelowNetIncrement :
+  ∀ {Scale Scalar}
+    {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar}
+    {control : Dyadic.HRBetaRemainderControl convention}
+    (algebra : OrderedAdditiveGroupMeaning control)
+    scale →
+  Dyadic.LessEqual control
+    (Dyadic.halfOf control (leadingIncrementAt control scale))
+    (Dyadic.add control
+      (leadingIncrementAt control scale)
+      (Dyadic.inverseCouplingRemainder control scale))
+halfIncrementBelowNetIncrement {control = control} algebra scale =
+  let
+    increment = leadingIncrementAt control scale
+    halfIncrement = Dyadic.halfOf control increment
+    remainder = Dyadic.inverseCouplingRemainder control scale
+    negativeHalfBelowNegativeAbsolute =
+      negateAntitone algebra
+        (Dyadic.remainderBelowHalfDyadicIncrement control scale)
+    negativeHalfBelowRemainder =
+      transitive algebra
+        negativeHalfBelowNegativeAbsolute
+        (negativeAbsoluteBelow algebra remainder)
+    zeroBelowHalfPlusRemainder =
+      subst
+        (λ lower → Dyadic.LessEqual control lower
+          (Dyadic.add control halfIncrement remainder))
+        (addInverseRight algebra halfIncrement)
+        (addMonotoneLeft algebra halfIncrement
+          negativeHalfBelowRemainder)
+    halfBelowNestedSum =
+      subst
+        (λ lower → Dyadic.LessEqual control lower
+          (Dyadic.add control halfIncrement
+            (Dyadic.add control halfIncrement remainder)))
+        (addZeroRight algebra halfIncrement)
+        (addMonotoneLeft algebra halfIncrement
+          zeroBelowHalfPlusRemainder)
+    nestedSumEqualsNet =
+      trans
+        (sym (addAssociative algebra
+          halfIncrement halfIncrement remainder))
+        (cong
+          (λ doubledHalf → Dyadic.add control doubledHalf remainder)
+          (halfDecomposition algebra increment))
+  in
+  subst
+    (λ upper → Dyadic.LessEqual control halfIncrement upper)
+    nestedSumEqualsNet
+    halfBelowNestedSum
+
+record ScaleSuccessorMeaning
+    {Scale Scalar : Set}
+    {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar}
+    (control : Dyadic.HRBetaRemainderControl convention) : Set₁ where
+  field
+    next : Scale → Scale
+    previousNext : ∀ scale →
+      Dyadic.previous control (next scale) ≡ scale
+
+open ScaleSuccessorMeaning public
+
+asHRBetaRemainderDominance :
+  ∀ {Scale Scalar}
+    {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar}
+    {control : Dyadic.HRBetaRemainderControl convention}
+    (algebra : OrderedAdditiveGroupMeaning control)
+    (successor : ScaleSuccessorMeaning control) →
+  Induction.HRBetaRemainderDominance Scale Scalar
+asHRBetaRemainderDominance {control = control} algebra successor = let open Induction.HRBetaRemainderDominance in record
+  { inverseCoupling =
+      Dyadic.beta control
+  ; nextScale = next successor
+  ; leadingIncrement = λ scale →
+      leadingIncrementAt control (next successor scale)
+  ; remainder = λ scale →
+      Dyadic.inverseCouplingRemainder control (next successor scale)
+  ; netIncrement = λ scale →
+      Dyadic.add control
+        (leadingIncrementAt control (next successor scale))
+        (Dyadic.inverseCouplingRemainder control (next successor scale))
+  ; betaLower = λ scale →
+      Dyadic.halfOf control
+        (leadingIncrementAt control (next successor scale))
+  ; add = Dyadic.add control
+  ; LessEqual = Dyadic.LessEqual control
+  ; netIncrementMeaning = λ scale → refl
+  ; oneStepMeaning = λ scale →
+      subst
+        (λ previousScale →
+          Dyadic.beta control (next successor scale)
+          ≡ Dyadic.add control
+              (Dyadic.beta control previousScale)
+              (Dyadic.add control
+                (leadingIncrementAt control (next successor scale))
+                (Dyadic.inverseCouplingRemainder control
+                  (next successor scale))))
+        (previousNext successor scale)
+        (Dyadic.exactOneStepRecursion control (next successor scale))
+  ; betaDominatesRemainder = λ scale →
+      halfIncrementBelowNetIncrement algebra (next successor scale)
+  ; addMonotoneLeft =
+      addMonotoneLeft algebra
+  }
+
+record LowerIntervalAdmissibility
+    {Scale Scalar : Set}
+    {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar}
+    {control : Dyadic.HRBetaRemainderControl convention}
+    (algebra : OrderedAdditiveGroupMeaning control)
+    (successor : ScaleSuccessorMeaning control) : Set₁ where
+  field
+    initialScale : Scale
+    iterateScale : Nat → Scale
+    iterateZero : iterateScale Agda.Builtin.Nat.zero ≡ initialScale
+    iterateSuccessor : ∀ count →
+      iterateScale (suc count) ≡ next successor (iterateScale count)
+
+    threshold : Scalar
+    initialAboveThreshold :
+      Dyadic.LessEqual control threshold
+        (Dyadic.beta control initialScale)
+
+    betaLowerNonnegative : ∀ scale →
+      Dyadic.LessEqual control (zero algebra)
+        (Induction.betaLower
+          (asHRBetaRemainderDominance algebra successor) scale)
+
+open LowerIntervalAdmissibility public
+
+asPrimaryCouplingAdmissibilityInduction :
+  ∀ {Scale Scalar}
+    {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar}
+    {control : Dyadic.HRBetaRemainderControl convention}
+    {algebra : OrderedAdditiveGroupMeaning control}
+    {successor : ScaleSuccessorMeaning control} →
+  LowerIntervalAdmissibility algebra successor →
+  Induction.PrimaryCouplingAdmissibilityInduction Scalar
+asPrimaryCouplingAdmissibilityInduction {control = control}
+    {algebra = algebra} {successor = successor} meaning = let open Induction.PrimaryCouplingAdmissibilityInduction in record
+  { coupling = λ count →
+      Dyadic.beta control (iterateScale meaning count)
+  ; Admissible = λ value →
+      Dyadic.LessEqual control (threshold meaning) value
+  ; initialCouplingAdmissible =
+      subst
+        (λ selectedScale → Dyadic.LessEqual control
+          (threshold meaning) (Dyadic.beta control selectedScale))
+        (sym (iterateZero meaning))
+        (initialAboveThreshold meaning)
+  ; oneStepCouplingPreservesAdmissibility =
+      λ count admissible →
+        subst
+          (λ selectedScale → Dyadic.LessEqual control
+            (threshold meaning) (Dyadic.beta control selectedScale))
+          (sym (iterateSuccessor meaning count))
+          (transitive algebra
+            admissible
+            (transitive algebra
+              (subst
+                (λ lower → Dyadic.LessEqual control
+                  lower
+                  (Dyadic.add control
+                    (Dyadic.beta control (iterateScale meaning count))
+                    (Induction.betaLower
+                      (asHRBetaRemainderDominance algebra successor)
+                      (iterateScale meaning count))))
+                (addZeroRight algebra
+                  (Dyadic.beta control (iterateScale meaning count)))
+                (addMonotoneLeft algebra
+                  (Dyadic.beta control (iterateScale meaning count))
+                  (betaLowerNonnegative meaning
+                    (iterateScale meaning count))))
+              (Induction.inverseCouplingGrowsByBetaLower
+                (asHRBetaRemainderDominance algebra successor)
+                (iterateScale meaning count))))
+  }
+
+allIteratedScalesAboveThreshold :
+  ∀ {Scale Scalar}
+    {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar}
+    {control : Dyadic.HRBetaRemainderControl convention}
+    {algebra : OrderedAdditiveGroupMeaning control}
+    {successor : ScaleSuccessorMeaning control}
+    (meaning : LowerIntervalAdmissibility algebra successor)
+    count →
+  Dyadic.LessEqual control (threshold meaning)
+    (Dyadic.beta control (iterateScale meaning count))
+allIteratedScalesAboveThreshold meaning count =
+  Induction.allScalesCouplingAdmissible
+    (asPrimaryCouplingAdmissibilityInduction meaning) count
+
+halfRemainderDominanceLevel : ProofLevel
+halfRemainderDominanceLevel = machineChecked
+
+hrBetaDominanceCarrierAssemblyLevel : ProofLevel
+hrBetaDominanceCarrierAssemblyLevel = machineChecked
+
+lowerIntervalAllScaleAdmissibilityLevel : ProofLevel
+lowerIntervalAllScaleAdmissibilityLevel = machineChecked
+
+physicalHRBetaOrderedGroupInputsLevel : ProofLevel
+physicalHRBetaOrderedGroupInputsLevel = conditional
+
+physicalHRBetaSuccessorInputsLevel : ProofLevel
+physicalHRBetaSuccessorInputsLevel = conditional
+
+physicalHRBetaUniformRemainderInputsLevel : ProofLevel
+physicalHRBetaUniformRemainderInputsLevel = conditional

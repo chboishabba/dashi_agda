@@ -1,0 +1,113 @@
+module DASHI.EverythingTopDownObservationCalculus where
+
+------------------------------------------------------------------------
+-- TOP-DOWN OBSERVATION / FIBRE / RESIDUAL SPINE
+------------------------------------------------------------------------
+
+-- Static observation/refinement and exact consumer descent/minimal quotient.
+import DASHI.Core.ObserverRefinementLatticeExact
+import DASHI.Core.ObserverFactorizedRefinementExact
+import DASHI.Core.ConsumerDescentMinimalObserverExact
+import DASHI.Core.ConsumerKernelQuotientPresentationExact
+import DASHI.Core.ConsumerQuotientBaseChangeExact
+import DASHI.Core.ConsumerQuotientBaseChangeRegression
+import DASHI.Core.ConsumerIndexedResidualRefinementExact
+import DASHI.Core.TopDownObservationCalculusExact
+
+-- Governance-aware observation: value, provenance, epistemic status, authority,
+-- permission and obligation remain independently consumer-indexed. Translation
+-- effects retain coordinate lineage, so erase-then-add cannot masquerade as
+-- restoration of inherited information. Required governed axes may themselves
+-- vary by context/query; inactive axes are not failed axes. Context transport
+-- additionally requires governed-requirement transport; observation naturality
+-- alone certifies only the restricted image unless fine-state coverage is shown.
+-- Lineage transport is coordinate-wise and remains independent of consumer
+-- safety: a safe rechart may erase provenance, and later-added provenance is new
+-- lineage rather than restoration of the erased inherited coordinate.
+import DASHI.Core.GovernedObservationProvenanceExact
+import DASHI.Core.GovernedObservationProvenanceRegression
+import DASHI.Core.ContextIndexedGovernedObservationExact
+import DASHI.Core.ContextIndexedGovernedObservationRegression
+import DASHI.Core.ContextGovernedSafetyTransportExact
+import DASHI.Core.ContextGovernedSafetyTransportRegression
+import DASHI.Core.ContextGovernedLineageTransportExact
+import DASHI.Core.ContextGovernedLineageTransportRegression
+
+-- Residual dependency, certified quadratic control, future-language capability,
+-- and the independent pressure axis.  Receipt-backed SensibLaw residual order
+-- now maps monotonically into the pressure component of the healing preorder.
+import DASHI.Core.ResidualObserverDependencyExact
+import DASHI.Core.ResidualObserverDependencyRegression
+import DASHI.Core.ResidualObserverQuadraticControlExact
+import DASHI.Core.FutureLanguageQuadraticControlExact
+import DASHI.Core.PressureQuadraticHealingExact
+import DASHI.Interop.SensibLawPressureHealingBridgeExact
+import DASHI.Mathematics.LinearAlgebra.FiniteRationalQuadraticDominationExact
+import DASHI.Mathematics.LinearAlgebra.AffineSpectralIndependenceQuadraticExact
+
+-- Context-indexed carriers and exact finite regression.
+import DASHI.Core.ContextIndexedObservationFibrationExact
+import DASHI.Core.ContextIndexedObservationFibrationRegression
+
+-- Collision-fibre symmetry, orbit/stabilizer residuals and exact ternary cases.
+import DASHI.Core.ResidualSymmetryCollisionFibreExact
+import DASHI.Core.ResidualSymmetryCollisionFibreRegression
+import DASHI.Core.OrbitStabilizerResidualPresentationExact
+import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact
+
+-- Exact reopening with uniform and state-dependent residuals.
+import DASHI.Core.DependentRecoverableProjectionExact
+import DASHI.Core.RecoverableQuotientCompositionExact
+import DASHI.Core.RecoverableObserverRefinementTowerExact
+import DASHI.Core.SectionedProjectionProvenanceBridgeExact
+
+-- Native ternary minimality and exact optimal-width T^9 binary-locality result.
+import DASHI.Foundations.TernaryNativeMinimalityExact
+import DASHI.Foundations.TernaryNineOptimalBinaryDilationExact
+
+-- Existing canonical future-language minimality / dynamical realization.
+import DASHI.Core.FutureObservationLanguageQuotientExact
+import DASHI.Governance.MinimalSufficientObservationGovernanceExact
+import DASHI.Cognition.PNF.CanonicalFutureMinimalDynamicalRealizationExact
+
+-- Existing higher-arity/local restriction and authority boundaries.
+import DASHI.Reasoning.TypedHyperfabricCore
+import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
+
+------------------------------------------------------------------------
+-- Aggregate boundary
+--
+-- A consumer-relevant collision forces every sufficient repair to split it.
+-- Static consumer sufficiency != exact reconstruction.
+-- Static minimal observer != future-language minimal quotient.
+-- Value preservation != provenance / epistemic / governance preservation.
+-- Release/container provenance != embedded-content verification.
+-- Erased inherited provenance != a coordinate newly added downstream.
+-- Governed requirements may vary by context/query/use role.
+-- Inactive governance axis != failed governance axis.
+-- Safety for a weaker governed language != safety for a stronger one.
+-- Stronger governed safety descends to included weaker requirements.
+-- Context observation naturality != automatic governed-safety transport.
+-- Newly activated governed axis may invalidate a previously safe surface.
+-- Local context safety controls the restricted image exactly.
+-- Restricted-image safety != whole-context safety without coverage/section.
+-- Safe recontextualisation != provenance-lineage preservation.
+-- Coordinate-wise preserve keeps lineage; coordinate-wise erase removes it.
+-- Erase in one context then add downstream != restore inherited lineage.
+-- Current observation equality != action-indexed dependency equality.
+-- Low coupling score != action admissibility.
+-- Finite dependency score != affine spectral independence / SDP certificate.
+-- Certified quadratic domination != proof that a supplied form is an actual
+-- Bansal--Jiang covariance/probe/SDP object.
+-- Residual/pressure improvement != certified dependency improvement; the axes
+-- are kept separate in a product preorder.
+-- Capability preservation remains independent of both minimization axes.
+-- A required future trace is one capability constructor, not the only one.
+-- Residual labels still require receipts; the pressure bridge assigns none.
+-- Context-local adequacy != natural/base-change transport.
+-- Symmetry-preserving collision fibre != automatic spectral decomposition.
+-- Orbit quotient != exact reconstruction without residual/stabilizer data.
+-- Storage-optimal binary != one-bit local binary.
+-- Compact binary != necessarily unbounded locality distortion.
+-- Sector separation != semantic/world authority.
+------------------------------------------------------------------------

@@ -1,0 +1,21 @@
+module DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.ClarityTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.TransparencyTheorem as KLRWOTGRTRN
+open import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
+
+record KnownLimitsRecoveredWaveObservableTransportGeometryRegimeClarityTheorem : Setω where
+  constructor knownLimitsRecoveredWaveObservableTransportGeometryRegimeClarityTheorem
+  field
+    recoveredWaveObservableTransportGeometryRegimeTransparency :
+      KLRWOTGRTRN.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeTransparencyTheorem
+    localPhysicsCoherence :
+      KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
+
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeClarityTheorem :
+  KnownLimitsRecoveredWaveObservableTransportGeometryRegimeClarityTheorem
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeClarityTheorem =
+  knownLimitsRecoveredWaveObservableTransportGeometryRegimeClarityTheorem
+    KLRWOTGRTRN.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeTransparencyTheorem
+    KLLPC.canonicalKnownLimitsLocalPhysicsCoherenceTheorem

@@ -1,0 +1,5 @@
+module DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact where
+
+open import
+  DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderTransportBoundary
+  public

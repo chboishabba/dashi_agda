@@ -1,0 +1,28 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaCrystalReferenceAcquisitionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaCrystalReferenceAcquisitionExact as Target
+
+oneAK2 = Target.oneAK2Reference
+ntwoAK2 = Target.twoAK2Reference
+
+boundary = Target.canonicalAdKGammaCrystalReferenceBoundary
+
+liPaperNearGammaPaid : Bool
+liPaperNearGammaPaid = Target.AdKGammaCrystalReferenceBoundary.liPaperMapsBothNearGamma boundary
+
+primaryPaperOpenPaid : Bool
+primaryPaperOpenPaid = Target.AdKGammaCrystalReferenceBoundary.primaryPaperDescribesBothOpen boundary
+
+sameObjectsAcrossSourcesPaid : Bool
+sameObjectsAcrossSourcesPaid = Target.AdKGammaCrystalReferenceBoundary.samePdbObjectsAcrossSourcesPaid boundary
+
+gammaIdentityNotPaid : Bool
+gammaIdentityNotPaid = Target.AdKGammaCrystalReferenceBoundary.pdbObjectsEqualGammaState boundary
+
+sameSequenceEcoliNotPaid : Bool
+sameSequenceEcoliNotPaid = Target.AdKGammaCrystalReferenceBoundary.referencesAreEcoliSameSequence boundary
+
+roleDifferenceNotContradiction : Bool
+roleDifferenceNotContradiction = Target.AdKGammaCrystalReferenceBoundary.roleDifferenceProvesSourceContradiction boundary

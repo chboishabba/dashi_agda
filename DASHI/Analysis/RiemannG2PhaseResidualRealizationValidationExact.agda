@@ -1,0 +1,9 @@
+module DASHI.Analysis.RiemannG2PhaseResidualRealizationValidationExact where
+
+import DASHI.Analysis.RiemannG2PhaseResidualRealizationExact as Phase
+
+boundary : Phase.PhaseResidualRealizationBoundary
+boundary = Phase.canonicalPhaseResidualRealizationBoundary
+
+firstResidual : Phase.PhaseResidualRealizationResidual
+firstResidual = Phase.firstPhaseResidualRealizationResidual

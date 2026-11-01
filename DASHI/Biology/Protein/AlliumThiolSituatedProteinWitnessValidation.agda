@@ -1,0 +1,33 @@
+module DASHI.Biology.Protein.AlliumThiolSituatedProteinWitnessValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Biology.Protein.AlliumThiolSourceAttributionEnvelopeExact as Source
+import DASHI.Biology.Protein.AlliumThiolSituatedProteinWitnessExact as Witness
+
+sourceBoundary = Source.canonicalAlliumThiolSourceAttributionBoundary
+witnessBoundary = Witness.canonicalAlliumThiolSituatedBoundary
+
+sourceIdentityRetained : Bool
+sourceIdentityRetained =
+  Source.AlliumThiolSourceAttributionBoundary.doiPmidPmcidRetained sourceBoundary
+
+articleQidMayRemainUnresolved : Bool
+articleQidMayRemainUnresolved =
+  Source.AlliumThiolSourceAttributionBoundary.articleQidMayRemainUnresolved sourceBoundary
+
+cysteinePresenceProjectionInadequate : Bool
+cysteinePresenceProjectionInadequate =
+  Witness.AlliumThiolSituatedBoundary.cysteinePresenceProjectionInadequate witnessBoundary
+
+accessibilityRepairRetained : Bool
+accessibilityRepairRetained =
+  Witness.AlliumThiolSituatedBoundary.accessibilityAwareRepairRetained witnessBoundary
+
+sourceIdentifiersDoNotCreateModification : Bool
+sourceIdentifiersDoNotCreateModification =
+  Witness.AlliumThiolSituatedBoundary.sourceIdentifiersCreateModification witnessBoundary
+
+crossDomainMechanismTransferBlocked : Bool
+crossDomainMechanismTransferBlocked =
+  Witness.AlliumThiolSituatedBoundary.crossDomainMechanismTransfer witnessBoundary

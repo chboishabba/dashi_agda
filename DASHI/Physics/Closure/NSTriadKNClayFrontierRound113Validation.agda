@@ -1,0 +1,8 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound113Validation where
+
+-- Focused kernel root for the Round113 weighted shared-mode reindex frontier.
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound112Validation
+import DASHI.Physics.Closure.NSTriadKNExternalSharedModeWeightedFluxRound113Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound113Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound113Exact

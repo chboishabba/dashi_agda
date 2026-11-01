@@ -1,0 +1,34 @@
+module DASHI.Law.HerzogIncidentFascismComparatorValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.HerzogConcreteIncidentHypervoxelExact as Incident
+import DASHI.Law.GenocideFascismAnalyticalDefinitionBridgeExact as GF
+import DASHI.Law.SecurityRoutingComparatorHypervoxelExact as Comparator
+
+prayerPermissionDoesNotCloseFieldReceipt :
+  Incident.authorisedPrayerImpliesFieldOfficersReceivedAuthorisation
+    Incident.canonicalHerzogIncidentBoundary
+  ≡ false
+prayerPermissionDoesNotCloseFieldReceipt = refl
+
+leccInvestigationDoesNotEqualFinalMisconductFinding :
+  Incident.leccInvestigationEqualsMisconductFinding
+    Incident.canonicalHerzogIncidentBoundary
+  ≡ false
+leccInvestigationDoesNotEqualFinalMisconductFinding = refl
+
+genocideClassifiesAsFascisticUnderDASHIDefinition :
+  GF.criterionClassifiesAsFascistic GF.genocidalElimination ≡ GF.fascisticMechanism
+genocideClassifiesAsFascisticUnderDASHIDefinition = refl
+
+unFindingNotMisattributedAsUNFascismLabel :
+  GF.unGenocideFindingAutomaticallyAttributedAsUNFascismFinding
+    GF.canonicalGenocideFascismAttributionBoundary
+  ≡ false
+unFindingNotMisattributedAsUNFascismLabel = refl
+
+coarseHighSecurityStillCannotDetermineRouting :
+  Comparator.coarseSecurityObserver Comparator.syntheticProtectiveHigh ≡
+  Comparator.coarseSecurityObserver Comparator.syntheticCoerciveHigh
+coarseHighSecurityStillCannotDetermineRouting = Comparator.sameCoarseIntensity

@@ -1,0 +1,17 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Closure.UnificationUCT4ToModuloNullLinearityValidation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.UnificationUCT4ToModuloNullLinearityExact as UCT5
+
+uct4ToUCT5CompilerIsMachineChecked : ProofLevel
+uct4ToUCT5CompilerIsMachineChecked = UCT5.uct4ToUCT5CompilerLevel
+
+nullToQuotientRemainsConditional : ProofLevel
+nullToQuotientRemainsConditional = UCT5.nullToQuotientPhysicalLevel
+
+representativeInvarianceRemainsConditional : ProofLevel
+representativeInvarianceRemainsConditional = UCT5.quotientRepresentativeInvariancePhysicalLevel
+
+residualToModuloAdditivityRemainsConditional : ProofLevel
+residualToModuloAdditivityRemainsConditional = UCT5.residualToModuloAdditivityPhysicalLevel

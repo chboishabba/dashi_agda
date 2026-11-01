@@ -1,0 +1,17 @@
+module DASHI.ComputerScience.RSA260RHConsumerIndexedUntanglingRoadmapValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.ComputerScience.RSA260RHConsumerIndexedUntanglingRoadmapExact as Roadmap
+
+firstResearch : Roadmap.ResearchUntanglingTarget
+firstResearch = Roadmap.firstResearchUntanglingTarget
+
+firstProduction : Roadmap.ProductionReconstructionTarget
+firstProduction = Roadmap.firstProductionReconstructionTarget
+
+firstRH : Roadmap.RHAnalyticRefinementTarget
+firstRH = Roadmap.firstRHAnalyticRefinementTarget
+
+boundary : Roadmap.RSA260RHUntanglingRoadmapBoundary
+boundary = Roadmap.canonicalRSA260RHUntanglingRoadmapBoundary

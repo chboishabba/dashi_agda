@@ -1,0 +1,136 @@
+module DASHI.Physics.Closure.NSPeriodicOfficialCompletionRegression where
+
+open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+open import DASHI.Physics.Closure.NSPeriodicOfficialNormIdentification public
+open import DASHI.Physics.Closure.NSPeriodicOfficialNormBernsteinAdapter public
+open import DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryNormAdapter public
+open import DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryPythagoreanAdapter public
+open import DASHI.Physics.Closure.NSPeriodicConcreteModeOperatorPythagorean public
+open import DASHI.Physics.Closure.NSPeriodicOfficialOperatorFoldIdentification public
+open import DASHI.Physics.Closure.NSPeriodicConcreteOfficialOperatorNormAdapter public
+open import DASHI.Physics.Closure.NSPeriodicCanonicalRealAuthorities public
+open import DASHI.Physics.Closure.NSPeriodicGalerkinCoefficientFoldBridge public
+open import DASHI.Physics.Closure.NSPeriodicFiniteTriadPartition public
+open import DASHI.Physics.Closure.NSPeriodicNearCanonicalQuarterAdapter public
+open import DASHI.Physics.Closure.NSPeriodicFiniteWeightedSchurKernel public
+open import DASHI.Physics.Closure.NSPeriodicFarHighCanonicalEighthAdapter public
+open import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion public
+open import DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion public
+open import DASHI.Physics.Closure.NSPeriodicOfficialFarLowSchurAdapter public
+open import DASHI.Physics.Closure.NSPeriodicFarHighTailCompletion public
+open import DASHI.Physics.Closure.NSPeriodicOfficialHarmonicAuthorityCompletion public
+open import DASHI.Physics.Closure.NSPeriodicWallIHarmonicCompletion public
+open import DASHI.Physics.Closure.NSPeriodicIntegratedExpenditureCompletion public
+open import DASHI.Physics.Closure.NSPeriodicIntegratedExpenditureStandardAdapter public
+open import DASHI.Physics.Closure.NSCompactGammaNormalizedBoundaryInwardnessCompletion public
+open import DASHI.Physics.Closure.NSPeriodicAdaptiveSwitchCostCompletion public
+open import DASHI.Physics.Closure.NSPeriodicDiffuseSpectrumBKMCompletion public
+open import DASHI.Physics.Closure.NSPeriodicAllDataCoverageCompletion public
+open import DASHI.Physics.Closure.NSPeriodicAllDataCutoffCoverageAdapter public
+open import DASHI.Physics.Closure.NSPeriodicStandardContinuumAdapter public
+open import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion public
+open import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumAssembly public
+open import DASHI.Physics.Closure.NSPeriodicSevenAnalyticLeafCutset public
+open import DASHI.Physics.Closure.NSPeriodicRealVectorPolynomialIdentities public
+open import DASHI.Physics.Closure.NSPeriodicRealFourierVectorLaws public
+open import DASHI.Physics.Closure.NSPeriodicBiotSavartTransversality public
+open import DASHI.Physics.Closure.NSPeriodicLerayBiotSavartNormReduction public
+open import DASHI.Physics.Closure.NSPeriodicRealBiotSavartModeNorm public
+open import DASHI.Physics.Closure.NSPeriodicFinitePythagoreanSum public
+open import DASHI.Physics.Closure.NSPeriodicCanonicalStrictMarginCertificate public
+open import DASHI.Physics.Closure.NSPeriodicCanonicalStrictMarginInterpretation public
+open import DASHI.Physics.Closure.NSPeriodicCanonicalWallIMarginAdapter public
+open import DASHI.Physics.Closure.NSPeriodicStrictDissipationMargin public
+open import DASHI.Physics.Closure.NSPeriodicIntegratedExpenditureStrictMarginAdapter public
+open import DASHI.Physics.Closure.NSPeriodicPacketFractionQuotientSign public
+open import DASHI.Physics.Closure.NSPeriodicConcretePacketOffPartition public
+open import DASHI.Physics.Closure.NSPeriodicPacketOffDerivativeDuality public
+open import DASHI.Physics.Closure.NSPeriodicComplementaryBoundaryCoincidence public
+open import DASHI.Physics.Closure.NSPeriodicNormalizedBoundaryCommonParameters public
+open import DASHI.Physics.Closure.NSPeriodicNormalizedBoundaryCandidateTuple public
+open import DASHI.Physics.Closure.NSPeriodicThreeIndependentBoundarySigns public
+open import DASHI.Physics.Closure.NSPeriodicHysteresisSeparation public
+open import DASHI.Physics.Closure.NSPeriodicHysteresisDwellTime public
+open import DASHI.Physics.Closure.NSPeriodicAdaptiveSwitchSeparationAdapter public
+open import DASHI.Physics.Closure.NSPeriodicDiffuseDissipationCharging public
+open import DASHI.Physics.Closure.NSPeriodicDiffuseDissipationRouteAdapter public
+open import DASHI.Physics.Closure.NSPeriodicZeroChartDiffuseSelection public
+open import DASHI.Physics.Closure.NSPeriodicChartFailureCoverage public
+open import DASHI.Physics.Closure.NSPeriodicExtendedCoverageBKM public
+open import DASHI.Physics.Closure.NSPeriodicWeightedEnvelopeLimitTransport public
+open import DASHI.Physics.Closure.NSPeriodicWeightedEnvelopeContinuumAdapter public
+open import DASHI.Physics.Closure.NSPeriodicOfficialCompletionStatus public
+
+-- Compile-only imports for the narrowed concrete frontier.
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier
+import DASHI.Physics.Closure.NSPeriodicConcreteIntegerModeNorm
+import DASHI.Physics.Closure.NSPeriodicConcreteOfficialNormWeights
+import DASHI.Physics.Closure.NSPeriodicCanonicalNearYoungAllocation
+import DASHI.Physics.Closure.NSPeriodicConcreteCandidateBudgetArithmetic
+import DASHI.Physics.Closure.NSPeriodicCompactGammaPDEBalance
+import DASHI.Physics.Closure.NSPeriodicCanonicalThreeBoundaryTupleAdapter
+import DASHI.Physics.Closure.NSPeriodicObservableDerivativeBoundReduction
+import DASHI.Physics.Closure.NSPeriodicDiffuseLowHighSplit
+import DASHI.Physics.Closure.NSPeriodicChartFailureAnalyticRoutes
+import DASHI.Physics.Closure.NSPeriodicFixedShellFiniteRankConvergence
+import DASHI.Physics.Closure.NSPeriodicConcreteNearTriadSums
+import DASHI.Physics.Closure.NSPeriodicNearTriadClassification
+import DASHI.Physics.Closure.NSPeriodicNearTriadPartitionCorrectness
+import DASHI.Physics.Closure.NSPeriodicNearShellOverlapCount
+import DASHI.Physics.Closure.NSPeriodicNearConvolutionMultiplicity
+import DASHI.Physics.Closure.NSPeriodicNearAmplitudeScalingObstruction
+import DASHI.Physics.Closure.NSPeriodicFarLowSupportGeometry
+import DASHI.Physics.Closure.NSPeriodicConcreteFarLowKernel
+import DASHI.Physics.Closure.NSPeriodicFarLowKernelZeroExtension
+import DASHI.Physics.Closure.NSPeriodicFarLowShellIntersectionCount
+import DASHI.Physics.Closure.NSPeriodicFarLowRowMajorantFold
+import DASHI.Physics.Closure.NSPeriodicFarLowColumnMajorantFold
+import DASHI.Physics.Closure.NSPeriodicFarLowEnergyPairingCancellation
+import DASHI.Physics.Closure.NSPeriodicFarLowExactCommutatorIdentity
+import DASHI.Physics.Closure.NSPeriodicFarLowMultiplierDifferenceKernel
+import DASHI.Physics.Closure.NSPeriodicFarLowMultiplierDifferenceBound
+import DASHI.Physics.Closure.NSPeriodicConcreteFarHighPlacements
+import DASHI.Physics.Closure.NSPeriodicFarHighShellSeparation
+import DASHI.Physics.Closure.NSPeriodicFarHighFiniteTail
+import DASHI.Physics.Closure.NSPeriodicFarHighTailReindexing
+import DASHI.Physics.Closure.NSPeriodicFarHighDyadicTailArithmetic
+import DASHI.Physics.Closure.NSPeriodicInfinityShellModeCount
+import DASHI.Physics.Closure.NSPeriodicInfinityShellBernstein
+import DASHI.Physics.Closure.NSPeriodicInfinityShellDerivativeBound
+import DASHI.Physics.Closure.NSFrequencyLocalizedDissipativeBernsteinExact
+import DASHI.Physics.Closure.NSPeriodicFarHighOfficialPlacementReduction
+import DASHI.Physics.Closure.NSPeriodicFirstExitSmallnessInterface
+import DASHI.Physics.Closure.NSPeriodicGeometricDepletionRejectionStatus as DepletionStatus
+
+officialNormGateRegression :
+  allOfficialHarmonicInputsInhabited ≡ false
+officialNormGateRegression = refl
+
+integratedExpenditureGateRegression :
+  concreteIntegratedExpenditureInhabited ≡ false
+integratedExpenditureGateRegression = refl
+
+adaptiveCoverageGateRegression :
+  normalizedAdaptiveCoverageInhabited ≡ false
+adaptiveCoverageGateRegression = refl
+
+diffuseCoverageGateRegression :
+  diffuseAndSwitchCoverageInhabited ≡ false
+diffuseCoverageGateRegression = refl
+
+continuumCompletionGateRegression :
+  cutoffUniformContinuumCompletionInhabited ≡ false
+continuumCompletionGateRegression = refl
+
+globalRegularityGateRegression :
+  unconditionalPeriodicNavierStokesTheorem ≡ false
+globalRegularityGateRegression = refl
+
+geometricDepletionGateRegression :
+  DepletionStatus.geometricDepletionOfficialInputInhabited ≡ false
+geometricDepletionGateRegression = refl
+
+clayGateRegression : clayNavierStokesSubmissionPromoted ≡ false
+clayGateRegression = refl

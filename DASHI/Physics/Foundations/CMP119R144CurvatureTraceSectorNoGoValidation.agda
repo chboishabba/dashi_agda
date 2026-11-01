@@ -1,0 +1,21 @@
+module DASHI.Physics.Foundations.CMP119R144CurvatureTraceSectorNoGoValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.CMP119R144CurvatureTraceSectorNoGoExact as Cut
+
+classicalCurvatureTraceForcedZero :
+  Cut.classicalCurvatureDiagonalTraceForcedZero ≡ true
+classicalCurvatureTraceForcedZero = refl
+
+nonzeroTraceNeedsNonclassicalSector :
+  Cut.nonzeroGeneratedActionTraceRequiresNonclassicalSector ≡ true
+nonzeroTraceNeedsNonclassicalSector = refl
+
+fullGeneratedActionCannotBeSilentlyClassicalCurvature :
+  Cut.fullGeneratedActionMayBeClassicalCurvatureWithoutTracePayment ≡ false
+fullGeneratedActionCannotBeSilentlyClassicalCurvature = refl
+
+sameObjectWeldMustSplitTraceSector :
+  Cut.nonlinearSameObjectWeldMustSplitClassicalAndQuantumTrace ≡ true
+sameObjectWeldMustSplitTraceSector = refl

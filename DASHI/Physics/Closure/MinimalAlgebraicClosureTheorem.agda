@@ -1,0 +1,15 @@
+module DASHI.Physics.Closure.MinimalAlgebraicClosureTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.ParametricAlgebraicClosureTheorem as PACT
+open import DASHI.Physics.Closure.ParametricGaugeConstraintTheorem as PGCT
+open import DASHI.Physics.Closure.CanonicalConstraintGaugePackage as CCGP
+
+minimalConstraintGaugePackage : CCGP.CanonicalConstraintGaugePackage
+minimalConstraintGaugePackage = PGCT.canonicalConstraintGaugePackage
+
+minimalAlgebraicClosureTheorem :
+  PACT.ParametricAlgebraicClosureTheorem minimalConstraintGaugePackage
+minimalAlgebraicClosureTheorem =
+  PACT.parametricAlgebraicClosureTheorem minimalConstraintGaugePackage

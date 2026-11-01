@@ -1,0 +1,22 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound13Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound13Exact as Round13
+
+candidateStillRequiresCorpusAdmission :
+  Round13.Round13CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round13.round13CandidateDoesNotCreateIncludedStudy
+
+assessmentAvoidanceNotIncapacity :
+  Round13.AssessmentAvoidanceCreatesAcademicIncapacity → ⊥
+assessmentAvoidanceNotIncapacity = Round13.assessmentAvoidanceDoesNotCreateAcademicIncapacity
+
+withdrawalNotLowMotivation :
+  Round13.WithdrawalCreatesLowMotivation → ⊥
+withdrawalNotLowMotivation = Round13.withdrawalDoesNotCreateLowMotivation
+
+parentObserverNotStudentVoice :
+  Round13.ParentDigitalExclusionCreatesStudentVoice → ⊥
+parentObserverNotStudentVoice = Round13.parentDigitalExclusionDoesNotCreateStudentVoice

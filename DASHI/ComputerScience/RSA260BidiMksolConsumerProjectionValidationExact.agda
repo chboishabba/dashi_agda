@@ -1,0 +1,11 @@
+module DASHI.ComputerScience.RSA260BidiMksolConsumerProjectionValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.ComputerScience.RSA260BidiMksolConsumerProjectionExact as Mksol
+
+boundary : Mksol.MksolConsumerProjectionBoundary
+boundary = Mksol.canonicalMksolConsumerProjectionBoundary
+
+firstResidual : Mksol.MksolConsumerProjectionResidual
+firstResidual = Mksol.firstMksolConsumerProjectionResidual

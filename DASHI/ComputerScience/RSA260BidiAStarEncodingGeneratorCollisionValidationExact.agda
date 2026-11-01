@@ -1,0 +1,15 @@
+module DASHI.ComputerScience.RSA260BidiAStarEncodingGeneratorCollisionValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiAStarEncodingGeneratorCollisionExact as Collision
+
+encodingBoundary : Collision.AStarEncodingCollisionBoundary
+encodingBoundary = Collision.canonicalAStarEncodingCollisionBoundary
+
+coarseEncodingBlocked : Collision.CoarseEncodingAdequacyDefect
+coarseEncodingBlocked = Collision.compactEncodingCannotDetermineGeneratorIdentity
+
+refinedGeneratorIdentityPaid : Collision.RefinedGeneratorAdequacy
+refinedGeneratorIdentityPaid = Collision.generatorIdentityFactorsThroughRefinedObserver
+
+firstResidual : Collision.AStarEncodingCollisionResidual
+firstResidual = Collision.firstAStarEncodingCollisionResidual

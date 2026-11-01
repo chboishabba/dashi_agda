@@ -1,0 +1,3 @@
+module DASHI.Physics.YangMills.BalabanCoefficientCollarWeightRound357Validation where
+
+import DASHI.Physics.YangMills.BalabanCoefficientCollarWeightRound357Exact

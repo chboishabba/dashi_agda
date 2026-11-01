@@ -1,0 +1,52 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound216Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound216Exact as R216
+
+round216PaperSelfExternalCompilerClosed : Bool
+round216PaperSelfExternalCompilerClosed = R216.round216SelfExternalCompilerClosed
+
+round216PaperExternalRawCurlGapWeldClosed : Bool
+round216PaperExternalRawCurlGapWeldClosed = R216.round216ExternalRawCurlGapWeldClosed
+
+round216PaperInternalAgdaPortClosed : Bool
+round216PaperInternalAgdaPortClosed =
+  R216.round216InternalSelfPaymentAgdaSameObjectPortClosed
+
+round216PaperExternalSignedNetworkCompanionBudgetClosed : Bool
+round216PaperExternalSignedNetworkCompanionBudgetClosed =
+  R216.round216ExternalSignedNetworkCompanionBudgetClosed
+
+round216PaperNovelMathematicalLeafCount : Nat
+round216PaperNovelMathematicalLeafCount = R216.round216NovelMathematicalLeafCount
+
+round216PaperPackageAClosed : Bool
+round216PaperPackageAClosed = R216.round216PackageAClosed
+
+round216PaperClayPromotion : Bool
+round216PaperClayPromotion = R216.round216ClayPromotion
+
+round216PaperSelfExternalCompilerClosedIsTrue :
+  round216PaperSelfExternalCompilerClosed ≡ true
+round216PaperSelfExternalCompilerClosedIsTrue = refl
+
+round216PaperInternalAgdaPortClosedIsFalse :
+  round216PaperInternalAgdaPortClosed ≡ false
+round216PaperInternalAgdaPortClosedIsFalse = refl
+
+round216PaperExternalSignedNetworkCompanionBudgetClosedIsFalse :
+  round216PaperExternalSignedNetworkCompanionBudgetClosed ≡ false
+round216PaperExternalSignedNetworkCompanionBudgetClosedIsFalse = refl
+
+round216PaperNovelMathematicalLeafCountIsOne :
+  round216PaperNovelMathematicalLeafCount ≡ 1
+round216PaperNovelMathematicalLeafCountIsOne = refl
+
+round216PaperPackageAClosedIsFalse : round216PaperPackageAClosed ≡ false
+round216PaperPackageAClosedIsFalse = refl
+
+round216PaperClayPromotionIsFalse : round216PaperClayPromotion ≡ false
+round216PaperClayPromotionIsFalse = refl

@@ -1,0 +1,16 @@
+module DASHI.ComputerScience.RSA260BidiSyntheticIncidenceConstructorWeldValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiSyntheticIncidenceConstructorWeldExact as O
+
+runtimeExtensionalCheckPaid :
+  O.SyntheticIncidenceConstructorWeldBoundary.runtimeExtensionalConstructorMatchesOriginal
+    O.canonicalSyntheticIncidenceConstructorWeldBoundary ≡ true
+runtimeExtensionalCheckPaid = refl
+
+crossProverIdentityStillOpen :
+  O.SyntheticIncidenceConstructorWeldBoundary.runtimeConstructorBoundToLeanConstructor
+    O.canonicalSyntheticIncidenceConstructorWeldBoundary ≡ false
+crossProverIdentityStillOpen = refl
+
+firstResidualIsConstructorTransport : O.SyntheticIncidenceConstructorResidual
+firstResidualIsConstructorTransport = O.firstSyntheticIncidenceConstructorResidual

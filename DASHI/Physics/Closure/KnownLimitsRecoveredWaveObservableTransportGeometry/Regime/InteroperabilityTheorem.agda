@@ -1,0 +1,21 @@
+module DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.InteroperabilityTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.PortabilityTheorem as KLRWOTGRPORT
+open import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
+
+record KnownLimitsRecoveredWaveObservableTransportGeometryRegimeInteroperabilityTheorem : Setω where
+  constructor knownLimitsRecoveredWaveObservableTransportGeometryRegimeInteroperabilityTheorem
+  field
+    recoveredWaveObservableTransportGeometryRegimePortability :
+      KLRWOTGRPORT.KnownLimitsRecoveredWaveObservableTransportGeometryRegimePortabilityTheorem
+    localPhysicsCoherence :
+      KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
+
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeInteroperabilityTheorem :
+  KnownLimitsRecoveredWaveObservableTransportGeometryRegimeInteroperabilityTheorem
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeInteroperabilityTheorem =
+  knownLimitsRecoveredWaveObservableTransportGeometryRegimeInteroperabilityTheorem
+    KLRWOTGRPORT.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimePortabilityTheorem
+    KLLPC.canonicalKnownLimitsLocalPhysicsCoherenceTheorem

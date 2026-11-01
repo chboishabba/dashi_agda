@@ -1,0 +1,26 @@
+module DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.MaintainabilityConsumer where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
+open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.ComposabilityConsumer as CWOTGRCOMPC
+open import DASHI.Physics.Closure.Recovery.WaveRegime as RWR
+module KLRWOTGRMAIN = RWR
+
+record WaveObservableTransportGeometryRegimeMaintainabilityConsumerFromMinimal
+         (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where
+  constructor waveObservableTransportGeometryRegimeMaintainabilityConsumer
+  field
+    transportGeometryRegimeComposabilityConsumer :
+      CWOTGRCOMPC.WaveObservableTransportGeometryRegimeComposabilityConsumerFromMinimal cl
+    recoveredWaveObservableTransportGeometryRegimeMaintainability :
+      KLRWOTGRMAIN.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeMaintainabilityTheorem
+
+canonicalWaveObservableTransportGeometryRegimeMaintainabilityConsumer :
+  {cl : MCPC.MinimalCrediblePhysicsClosure} →
+  CWOTGRCOMPC.WaveObservableTransportGeometryRegimeComposabilityConsumerFromMinimal cl →
+  WaveObservableTransportGeometryRegimeMaintainabilityConsumerFromMinimal cl
+canonicalWaveObservableTransportGeometryRegimeMaintainabilityConsumer waveObsTransportGeometryRegimeComposability =
+  waveObservableTransportGeometryRegimeMaintainabilityConsumer
+    waveObsTransportGeometryRegimeComposability
+    KLRWOTGRMAIN.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeMaintainabilityTheorem

@@ -1,0 +1,251 @@
+module DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact where
+
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (zero)
+open import Data.Rational using (_≤_)
+open import Relation.Binary.PropositionalEquality using (subst)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact as UV
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Physical
+import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact as OS
+import DASHI.Physics.YangMills.BalabanClayT5ConditionalClusteringCutsetExact as Clustering
+import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
+import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact as Mass
+import DASHI.Physics.YangMills.BalabanClayConcreteUVToMassGapDependencyExact as Existing
+
+------------------------------------------------------------------------
+-- Primary provenance.
+--
+-- Konrad Osterwalder and Robert Schrader,
+-- "Axioms for Euclidean Green's Functions",
+-- Communications in Mathematical Physics 31 (1973), 83--112.
+-- DOI: 10.1007/BF01645738.
+--
+-- Konrad Osterwalder and Robert Schrader,
+-- "Axioms for Euclidean Green's Functions II",
+-- Communications in Mathematical Physics 42 (1975), 281--305.
+-- DOI: 10.1007/BF01608978.
+--
+-- P. Menotti and A. Pelissetto,
+-- "General Proof of Osterwalder-Schrader Positivity for the Wilson Action",
+-- Communications in Mathematical Physics 113 (1987), 369--373.
+-- DOI: 10.1007/BF01221251.
+--
+-- O. Penrose and J. L. Lebowitz,
+-- "On the Exponential Decay of Correlation Functions",
+-- Communications in Mathematical Physics 39 (1974), 165--184.
+-- DOI: 10.1007/BF01614239.
+--
+-- Secondary locator only, not theorem authority:
+-- Lluis Eriksson, "Exponential Clustering and Mass Gap for Four-Dimensional
+-- SU(N) Lattice Yang--Mills Theory Via Balaban's Renormalization Group and
+-- Multiscale Correlator Decoupling -- a Conditional Clustering Theorem --",
+-- ai.viXra:2602.0088v3, no DOI recorded. Version 3 explicitly leaves H-KP,
+-- H-LOC, H-Rbeta, H-P0', per-scale decoupling and OS1 conditional.
+------------------------------------------------------------------------
+
+record ReconstructedTransferTheory
+    (Hilbert Vector Scalar : Set) : Set₁ where
+  field
+    hilbertSpace : Hilbert
+    vacuum : Vector
+    hamiltonian : Vector → Vector
+    energy : Vector → Scalar
+    spectralGap : Scalar
+    Positive : Scalar → Set
+    spectralGapPositive : Positive spectralGap
+
+open ReconstructedTransferTheory public
+
+record PhysicalContinuumOSGapData
+    (State Bound Measure Observable Schwinger Scalar Hilbert Vector : Set) : Set₁ where
+  field
+    uvPackage : UV.Gate4UVCompletionPackage State Bound
+
+    physicalGramData :
+      Physical.PhysicalMeasureToOSGramData Measure Observable Scalar
+
+    continuumClosure : Limit.FiniteToContinuumOSClosure Measure Schwinger
+
+    physicalMeasureSequenceAgrees : ∀ cutoff →
+      Physical.measureSequence
+        (Physical.convergenceData physicalGramData) cutoff
+      ≡ Limit.finiteMeasures continuumClosure cutoff
+
+    physicalContinuumMeasureAgrees :
+      Physical.continuumMeasure
+        (Physical.convergenceData physicalGramData)
+      ≡ Limit.continuumMeasure continuumClosure
+
+    gramReflectionImpliesClosureReflection :
+      OS.GramReflectionPositive
+        (Physical.physicalMeasureTopologyControlsOSGram physicalGramData)
+        (Limit.continuumMeasure continuumClosure) →
+      Limit.ReflectionPositive continuumClosure
+        (Limit.schwinger continuumClosure
+          (Limit.continuumMeasure continuumClosure))
+
+    clusteringCutset :
+      Clustering.ConditionalClusteringAssembly Observable Scalar
+
+    clusteringBoundImpliesClosureClustered :
+      ((left right : Observable) →
+        Clustering.LessEqual clusteringCutset
+          (Clustering.covariance clusteringCutset left right)
+          (Clustering.targetClusteringBound clusteringCutset left right)) →
+      Limit.Clustered continuumClosure
+        (Limit.schwinger continuumClosure
+          (Limit.continuumMeasure continuumClosure))
+
+    reconstructedTheory : ReconstructedTransferTheory Hilbert Vector Scalar
+
+    reconstructionFromOSAxioms :
+      Existing.ContinuumOSAxioms continuumClosure →
+      ReconstructedTransferTheory Hilbert Vector Scalar
+
+    reconstructionAgrees :
+      reconstructionFromOSAxioms
+        (Existing.assembleContinuumOSAxioms continuumClosure)
+      ≡ reconstructedTheory
+
+    physicalInterlacing : Mass.PhysicalMassInterlacing
+
+    gapProducesPhysicalInterlacing :
+      Positive reconstructedTheory (spectralGap reconstructedTheory) →
+      Mass.PhysicalMassInterlacing
+
+    interlacingAgrees :
+      gapProducesPhysicalInterlacing
+        (spectralGapPositive reconstructedTheory)
+      ≡ physicalInterlacing
+
+open PhysicalContinuumOSGapData public
+
+continuumOSAxiomsFromPhysicalClosure :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
+    (dataSet : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
+  Existing.ContinuumOSAxioms (continuumClosure dataSet)
+continuumOSAxiomsFromPhysicalClosure dataSet =
+  Existing.assembleContinuumOSAxioms (continuumClosure dataSet)
+
+physicalGramReflectionPositiveAtClosure :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
+    (dataSet : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
+  OS.GramReflectionPositive
+    (Physical.physicalMeasureTopologyControlsOSGram
+      (physicalGramData dataSet))
+    (Limit.continuumMeasure (continuumClosure dataSet))
+physicalGramReflectionPositiveAtClosure dataSet =
+  subst
+    (OS.GramReflectionPositive
+      (Physical.physicalMeasureTopologyControlsOSGram
+        (physicalGramData dataSet)))
+    (physicalContinuumMeasureAgrees dataSet)
+    (Physical.physicalContinuumReflectionPositive
+      (physicalGramData dataSet))
+
+physicalContinuumReflectionPositive :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
+    (dataSet : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
+  Limit.ReflectionPositive (continuumClosure dataSet)
+    (Limit.schwinger (continuumClosure dataSet)
+      (Limit.continuumMeasure (continuumClosure dataSet)))
+physicalContinuumReflectionPositive dataSet =
+  gramReflectionImpliesClosureReflection dataSet
+    (physicalGramReflectionPositiveAtClosure dataSet)
+
+physicalContinuumClustered :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
+    (dataSet : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
+  Limit.Clustered (continuumClosure dataSet)
+    (Limit.schwinger (continuumClosure dataSet)
+      (Limit.continuumMeasure (continuumClosure dataSet)))
+physicalContinuumClustered dataSet =
+  clusteringBoundImpliesClosureClustered dataSet
+    (Clustering.conditionalUniformClustering (clusteringCutset dataSet))
+
+record PhysicalOS4SpectralGapInterpretation
+    {State Bound Measure Observable Schwinger Scalar Hilbert Vector Energy : Set}
+    (physical : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) : Set₁ where
+  field
+    spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Scalar
+    os4SpectralMeaning :
+      Gap.OS4SpectralInterpretation (continuumClosure physical) spectrum
+
+open PhysicalOS4SpectralGapInterpretation public
+
+physicalContinuumPositiveTransferGap :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector Energy}
+    {physical : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector} →
+  (interpretation : PhysicalOS4SpectralGapInterpretation
+    {Energy = Energy} physical) →
+  Gap.PositiveTransferGap (spectrum interpretation)
+physicalContinuumPositiveTransferGap {physical = physical} interpretation =
+  Gap.positiveTransferGapFromOS4
+    (os4SpectralMeaning interpretation)
+    (physicalContinuumClustered physical)
+
+constructedPhysicalMassTransport :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
+    (dataSet : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
+  Mass.survivingMass (physicalInterlacing dataSet)
+  ≤ Mass.physicalGap (physicalInterlacing dataSet) zero
+constructedPhysicalMassTransport dataSet =
+  Mass.positivePhysicalMassSurvives (physicalInterlacing dataSet)
+
+physicalMeasurePresentationAgreementLevel : ProofLevel
+physicalMeasurePresentationAgreementLevel = machineChecked
+
+physicalMeasureToGramClosureReuseLevel : ProofLevel
+physicalMeasureToGramClosureReuseLevel = machineChecked
+
+physicalContinuumReflectionPositivityAssemblyLevel : ProofLevel
+physicalContinuumReflectionPositivityAssemblyLevel = machineChecked
+
+conditionalClusteringToOS4AssemblyLevel : ProofLevel
+conditionalClusteringToOS4AssemblyLevel = machineChecked
+
+physicalOS4ToTransferGapAssemblyLevel : ProofLevel
+physicalOS4ToTransferGapAssemblyLevel = machineChecked
+
+physicalContinuumOSAxiomAssemblyLevel : ProofLevel
+physicalContinuumOSAxiomAssemblyLevel = machineChecked
+
+physicalGapToInterlacingAssemblyLevel : ProofLevel
+physicalGapToInterlacingAssemblyLevel = machineChecked
+
+physicalUVToContinuumMeasureInputsLevel : ProofLevel
+physicalUVToContinuumMeasureInputsLevel = conditional
+
+physicalExpectationConvergenceInputsLevel : ProofLevel
+physicalExpectationConvergenceInputsLevel = conditional
+
+physicalGramToClosureReflectionMeaningInputsLevel : ProofLevel
+physicalGramToClosureReflectionMeaningInputsLevel = conditional
+
+clusteringBoundToClosureOS4MeaningInputsLevel : ProofLevel
+clusteringBoundToClosureOS4MeaningInputsLevel = conditional
+
+-- Compatibility name for older consumers. The missing input is now the typed
+-- interpretation of the clustering cutset's bound as the closure's OS4 field.
+uniformClusteringOS4InputsLevel : ProofLevel
+uniformClusteringOS4InputsLevel = clusteringBoundToClosureOS4MeaningInputsLevel
+
+fullO4CovarianceOS1InputsLevel : ProofLevel
+fullO4CovarianceOS1InputsLevel = conditional
+
+-- Compatibility name for older consumers. The generic implication is now split
+-- by BalabanClayT5ClusteringToTransferGapExact into spectral representation,
+-- observable overlap, rate comparison and OS4 meaning.
+clusteringToPositiveTransferGapInputsLevel : ProofLevel
+clusteringToPositiveTransferGapInputsLevel = conditional

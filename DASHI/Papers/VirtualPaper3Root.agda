@@ -1,0 +1,10 @@
+module DASHI.Papers.VirtualPaper3Root where
+
+open import DASHI.Physics.Closure.YMFinalStateReceipt
+open import DASHI.Physics.Closure.YMH3aContinuumIntakeReceipt
+open import DASHI.Physics.Closure.YML7L8MassGapInhabitedReceipt
+open import DASHI.Physics.Closure.YMContinuumUniquenessReceipt
+open import DASHI.Physics.Closure.YMBRSTGaugeFixedOS3PhysicalSectorReceipt
+open import DASHI.Physics.Closure.YMGhostTimeReflectionGradedSignReceipt
+open import DASHI.Physics.Closure.YMContinuumGribovResolutionReceipt
+open import DASHI.Physics.Closure.SpectralConvergenceGate3Receipt

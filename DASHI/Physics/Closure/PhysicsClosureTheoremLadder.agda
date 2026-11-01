@@ -1,0 +1,115 @@
+module DASHI.Physics.Closure.PhysicsClosureTheoremLadder where
+
+open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Nat using (Nat)
+
+open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
+open import DASHI.Geometry.ProjectionDefectSplitForcesParallelogram as PDSP
+open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
+open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
+open import DASHI.Physics.Closure.ContractionForcesQuadraticStrong as CFQS
+open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
+open import DASHI.Physics.Closure.QuadraticToCliffordBridgeTheorem as QTCB
+open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
+open import DASHI.Physics.Closure.CliffordToEvenWaveLiftBridgeTheorem as CEW
+open import DASHI.Physics.Closure.PhysicsClosureCoreWitness as PCCW
+open import DASHI.Physics.Closure.PhysicsClosureConstructorTheorem as PCCT
+open import DASHI.Physics.Closure.ObservableResolutionInvarianceTheorem as ORIT
+open import DASHI.Physics.Closure.PhysicsClosureRealizationIndependenceTheorem as PCRIT
+open import DASHI.Physics.Closure.PhysicsClosureFullInstance as PCFI
+
+ProjectionDefectSplitForcesParallelogramTheorem : Set₁
+ProjectionDefectSplitForcesParallelogramTheorem =
+  ∀ {m : Nat} →
+  PDP.ProjectionDefectParallelogramPackage
+    (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
+
+ParallelogramForcesQuadraticFormTheorem : Setω
+ParallelogramForcesQuadraticFormTheorem =
+  CFQT.ContractionForcesQuadraticTheorem
+
+StrongContractionNormalizesQuadraticTheorem : Setω
+StrongContractionNormalizesQuadraticTheorem =
+  CFQS.ContractionForcesQuadraticStrong
+
+NormalizedQuadraticForcesLorentzSignatureTheorem : Setω
+NormalizedQuadraticForcesLorentzSignatureTheorem =
+  CQSB.ContractionQuadraticToSignatureBridgeTheorem
+
+LorentzSignatureForcesCliffordTheorem : Setω
+LorentzSignatureForcesCliffordTheorem =
+  QTCB.QuadraticToCliffordBridgeTheorem
+
+LorentzSignatureForcesSpinDiracTheorem : Setω
+LorentzSignatureForcesSpinDiracTheorem =
+  CSSDB.ContractionSignatureToSpinDiracBridgeTheorem
+
+WaveLiftFactorsThroughEvenCliffordTheorem : Setω
+WaveLiftFactorsThroughEvenCliffordTheorem =
+  CEW.CliffordToEvenWaveLiftBridgeTheorem
+
+ClosureCoreWitnessForcesFullClosureTheorem : Setω
+ClosureCoreWitnessForcesFullClosureTheorem =
+  PCCT.PhysicsClosureConstructorTheorem
+
+RealizationIndependentPhysicsClosureTheorem : Setω
+RealizationIndependentPhysicsClosureTheorem =
+  PCRIT.PhysicsClosureRealizationIndependenceTheorem
+
+ObservableResolutionInvariantPhysicsClosureTheorem : Setω
+ObservableResolutionInvariantPhysicsClosureTheorem =
+  ORIT.ObservableResolutionInvarianceTheorem
+
+projectionDefectSplitForcesParallelogramTheorem :
+  ProjectionDefectSplitForcesParallelogramTheorem
+projectionDefectSplitForcesParallelogramTheorem {m} =
+  PDSP.projectionDefectParallelogramFromSplit {m}
+
+parallelogramForcesQuadraticFormTheorem :
+  ParallelogramForcesQuadraticFormTheorem
+parallelogramForcesQuadraticFormTheorem =
+  CFQT.canonicalRealStackContractionForcesQuadraticTheorem
+
+strongContractionNormalizesQuadraticTheorem :
+  StrongContractionNormalizesQuadraticTheorem
+strongContractionNormalizesQuadraticTheorem =
+  CFQS.canonicalNontrivialInvariantStrong
+
+normalizedQuadraticForcesLorentzSignatureTheorem :
+  NormalizedQuadraticForcesLorentzSignatureTheorem
+normalizedQuadraticForcesLorentzSignatureTheorem =
+  CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
+
+lorentzSignatureForcesCliffordTheorem :
+  LorentzSignatureForcesCliffordTheorem
+lorentzSignatureForcesCliffordTheorem =
+  QTCB.canonicalQuadraticToCliffordBridgeTheorem
+
+lorentzSignatureForcesSpinDiracTheorem :
+  LorentzSignatureForcesSpinDiracTheorem
+lorentzSignatureForcesSpinDiracTheorem =
+  CSSDB.canonicalContractionSignatureToSpinDiracBridgeTheorem
+
+waveLiftFactorsThroughEvenCliffordTheorem :
+  WaveLiftFactorsThroughEvenCliffordTheorem
+waveLiftFactorsThroughEvenCliffordTheorem =
+  CEW.canonicalCliffordToEvenWaveLiftBridgeTheorem
+
+canonicalClosureCoreWitness :
+  PCCW.PhysicsClosureCoreWitness
+canonicalClosureCoreWitness = PCFI.physicsClosureCoreWitness
+
+closureCoreWitnessForcesFullClosureTheorem :
+  ClosureCoreWitnessForcesFullClosureTheorem
+closureCoreWitnessForcesFullClosureTheorem =
+  PCCT.canonicalPhysicsClosureConstructorTheorem
+
+realizationIndependentPhysicsClosureTheorem :
+  RealizationIndependentPhysicsClosureTheorem
+realizationIndependentPhysicsClosureTheorem =
+  PCRIT.b4PhysicsClosureRealizationIndependenceTheorem
+
+observableResolutionInvariantPhysicsClosureTheorem :
+  ObservableResolutionInvariantPhysicsClosureTheorem
+observableResolutionInvariantPhysicsClosureTheorem =
+  ORIT.physicsClosureInvariantUnderObservableResolution

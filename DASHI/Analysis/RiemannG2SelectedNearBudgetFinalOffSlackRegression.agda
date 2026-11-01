@@ -1,0 +1,53 @@
+module DASHI.Analysis.RiemannG2SelectedNearBudgetFinalOffSlackRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (true; false)
+
+import DASHI.Analysis.RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact as SelectedEval
+import DASHI.Analysis.RiemannG2SelectedNearBudgetFinalOffSlackCompilerExact as Slack
+import DASHI.Analysis.RiemannG2PoleQuotientOffIntermediateAllowanceCompilerExact as Intermediate
+
+selectedBudgetExtractionNeedsNoFreshEstimate :
+  SelectedEval.SelectedFiniteNearSameObjectBoundary.selectedBudgetExtractionNeedsFreshAnalyticEstimateAfterTransport
+    SelectedEval.canonicalSelectedFiniteNearSameObjectBoundary ≡ false
+selectedBudgetExtractionNeedsNoFreshEstimate = refl
+
+secondEvaluationNotRequired :
+  Slack.SelectedNearBudgetFinalOffSlackBoundary.genericEvaluatorBudgetRequiresSecondAnalyticEvaluation
+    Slack.canonicalSelectedNearBudgetFinalOffSlackBoundary ≡ false
+secondEvaluationNotRequired = refl
+
+selectedOrderTransportIsRepresentationPayment :
+  Slack.SelectedNearBudgetFinalOffSlackBoundary.selectedOrderNeedsOneTransportToFinalOffOrder
+    Slack.canonicalSelectedNearBudgetFinalOffSlackBoundary ≡ true
+selectedOrderTransportIsRepresentationPayment = refl
+
+sameObjectNearBudgetIdentityRequired :
+  Slack.SelectedNearBudgetFinalOffSlackBoundary.selectedNearBudgetNeedsSameObjectIdentityWithFinalNearBudget
+    Slack.canonicalSelectedNearBudgetFinalOffSlackBoundary ≡ true
+sameObjectNearBudgetIdentityRequired = refl
+
+determinantPaymentNotPromoted :
+  Slack.SelectedNearBudgetFinalOffSlackBoundary.determinantDirectConsumerPaymentRequiredByThisCompiler
+    Slack.canonicalSelectedNearBudgetFinalOffSlackBoundary ≡ false
+determinantPaymentNotPromoted = refl
+
+selectedNearSlackIsLiveAnalyticLeaf :
+  Slack.SelectedNearBudgetFinalOffSlackBoundary.liveAnalyticLeafIsSelectedNearBudgetPlusEpsilonBelowAssigned
+    Slack.canonicalSelectedNearBudgetFinalOffSlackBoundary ≡ true
+selectedNearSlackIsLiveAnalyticLeaf = refl
+
+finalNearFarFitCompiles :
+  Slack.SelectedNearBudgetFinalOffSlackBoundary.finalNearPlusFarFitCompilesAfterBridge
+    Slack.canonicalSelectedNearBudgetFinalOffSlackBoundary ≡ true
+finalNearFarFitCompiles = refl
+
+finalOffStillOpen :
+  Intermediate.PoleQuotientOffIntermediateAllowanceBoundary.finalOffAllowancePaymentClosed
+    Intermediate.canonicalPoleQuotientOffIntermediateAllowanceBoundary ≡ false
+finalOffStillOpen = refl
+
+rhStillOpen :
+  Slack.SelectedNearBudgetFinalOffSlackBoundary.rhDerived
+    Slack.canonicalSelectedNearBudgetFinalOffSlackBoundary ≡ false
+rhStillOpen = refl

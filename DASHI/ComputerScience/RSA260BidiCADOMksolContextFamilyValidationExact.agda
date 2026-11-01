@@ -1,0 +1,11 @@
+module DASHI.ComputerScience.RSA260BidiCADOMksolContextFamilyValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.ComputerScience.RSA260BidiCADOMksolContextFamilyExact as Family
+
+boundary : Family.CADOMksolContextFamilyBoundary
+boundary = Family.canonicalCADOMksolContextFamilyBoundary
+
+firstResidual : Family.CADOMksolContextFamilyResidual
+firstResidual = Family.firstCADOMksolContextFamilyResidual

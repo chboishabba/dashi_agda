@@ -1,0 +1,29 @@
+module DASHI.Environment.BiocontrolChemistryAcquisitionPromotionRegression where
+
+import DASHI.Core.EvidenceAcquisitionSelectiveReopeningExact as Acquisition
+import DASHI.Environment.BiocontrolChemistryAcquisitionPromotionExact as Promotion
+
+speciesAcquisitionObligation :
+  Acquisition.AcquisitionObligation Promotion.speciesAssayAcquisitionTarget
+speciesAcquisitionObligation = Promotion.speciesAssayAcquisitionObligation
+
+contextAcquisitionObligation :
+  Acquisition.AcquisitionObligation Promotion.contextAcquisitionTarget
+contextAcquisitionObligation = Promotion.contextAcquisitionObligation
+
+observationReopensClassification :
+  Acquisition.SelectiveAcquisitionReopening
+    Promotion.biocontrolAcquisitionDependencyGraph
+    Promotion.acquiredObservationArtifact
+    Promotion.calibratedClassificationArtifact
+observationReopensClassification = Promotion.observationReopensClassification
+
+observationReopensReboundConsumer :
+  Acquisition.SelectiveAcquisitionReopening
+    Promotion.biocontrolAcquisitionDependencyGraph
+    Promotion.acquiredObservationArtifact
+    Promotion.reboundConsumerArtifact
+observationReopensReboundConsumer = Promotion.observationReopensReboundConsumer
+
+boundary : Promotion.BiocontrolChemistryAcquisitionPromotionBoundary
+boundary = Promotion.canonicalBiocontrolChemistryAcquisitionPromotionBoundary

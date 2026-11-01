@@ -1,0 +1,21 @@
+module DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.TraceabilityTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.IntegrityTheorem as KLRWOTGRINT
+open import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
+
+record KnownLimitsRecoveredWaveObservableTransportGeometryRegimeTraceabilityTheorem : Setω where
+  constructor knownLimitsRecoveredWaveObservableTransportGeometryRegimeTraceabilityTheorem
+  field
+    recoveredWaveObservableTransportGeometryRegimeIntegrity :
+      KLRWOTGRINT.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeIntegrityTheorem
+    localPhysicsCoherence :
+      KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
+
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeTraceabilityTheorem :
+  KnownLimitsRecoveredWaveObservableTransportGeometryRegimeTraceabilityTheorem
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeTraceabilityTheorem =
+  knownLimitsRecoveredWaveObservableTransportGeometryRegimeTraceabilityTheorem
+    KLRWOTGRINT.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeIntegrityTheorem
+    KLLPC.canonicalKnownLimitsLocalPhysicsCoherenceTheorem

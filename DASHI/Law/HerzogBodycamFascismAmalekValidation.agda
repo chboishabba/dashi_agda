@@ -1,0 +1,45 @@
+module DASHI.Law.HerzogBodycamFascismAmalekValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.HerzogBodycamQuotedUtteranceProvenanceExact as Bodycam
+import DASHI.Law.GenocideFascismSourceGenealogyExact as Genealogy
+import DASHI.Law.GenocideFascismAnalyticalDefinitionBridgeExact as Bridge
+import DASHI.Law.HerzogFascismAntifascistAmalekCrossPollinationExact as Cross
+import DASHI.Governance.AmalekProvenanceRoleBinding as Amalek
+
+literalBodycamQuoteIsPreserved :
+  Bodycam.coordinateClosure Bodycam.literalPumpedUtterance ≡ Bodycam.mediaTranscriptionBacked
+literalBodycamQuoteIsPreserved = refl
+
+bodycamQuoteDoesNotSkipLawfulness :
+  Bodycam.coordinateClosure Bodycam.forceLawfulness ≡ Bodycam.openCoordinate
+bodycamQuoteDoesNotSkipLawfulness = refl
+
+genocideHasSourcedFascismGenealogy :
+  Genealogy.sourcedGenealogySupportsDASHISynthesis Genealogy.canonicalGenocideFascismGenealogyBoundary ≡ true
+genocideHasSourcedFascismGenealogy = refl
+
+genocideClassifiesAsFascisticTerminalisation :
+  Genealogy.genocideMechanismClassification ≡ Genealogy.fascisticTerminalisationMechanism
+genocideClassifiesAsFascisticTerminalisation = refl
+
+unGenocideFindingIsNotMisattributedAsUNFascismFinding :
+  Bridge.unGenocideFindingAutomaticallyAttributedAsUNFascismFinding Bridge.canonicalGenocideFascismAttributionBoundary ≡ false
+unGenocideFindingIsNotMisattributedAsUNFascismFinding = refl
+
+amalekRoleBindingDoesNotEqualIdentity :
+  Amalek.roleBindingEqualsIdentity Amalek.canonicalAmalekBoundary ≡ false
+amalekRoleBindingDoesNotEqualIdentity = refl
+
+amalekCommandTransportStillRequiresEvidence :
+  Amalek.commandTransportRequiresSeparateEvidence Amalek.canonicalAmalekBoundary ≡ true
+amalekCommandTransportStillRequiresEvidence = refl
+
+oneBodycamExchangeDoesNotCloseInstitutionalDiagnosis :
+  Cross.oneBodycamExchangeProvesWholeInstitutionFascist Cross.canonicalCrossPollinationBoundary ≡ false
+oneBodycamExchangeDoesNotCloseInstitutionalDiagnosis = refl
+
+antifascistInterruptionPreservesCorrection :
+  Cross.antifascistInterruptionPreservesEvidenceAndCorrection Cross.canonicalCrossPollinationBoundary ≡ true
+antifascistInterruptionPreservesCorrection = refl

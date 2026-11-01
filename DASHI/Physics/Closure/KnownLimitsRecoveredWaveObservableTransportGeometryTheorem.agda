@@ -1,0 +1,21 @@
+module DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometryTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportTheorem as KLRWOT
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableGeometryTheorem as KLRWOG
+
+record KnownLimitsRecoveredWaveObservableTransportGeometryTheorem : Setω where
+  constructor knownLimitsRecoveredWaveObservableTransportGeometryTheorem
+  field
+    recoveredWaveObservableTransport :
+      KLRWOT.KnownLimitsRecoveredWaveObservableTransportTheorem
+    recoveredWaveObservableGeometry :
+      KLRWOG.KnownLimitsRecoveredWaveObservableGeometryTheorem
+
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryTheorem :
+  KnownLimitsRecoveredWaveObservableTransportGeometryTheorem
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryTheorem =
+  knownLimitsRecoveredWaveObservableTransportGeometryTheorem
+    KLRWOT.canonicalKnownLimitsRecoveredWaveObservableTransportTheorem
+    KLRWOG.canonicalKnownLimitsRecoveredWaveObservableGeometryTheorem

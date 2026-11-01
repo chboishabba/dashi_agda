@@ -1,0 +1,15 @@
+module DASHI.ComputerScience.RSA260BidiCoefficientRankPrefixFrontierValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiCoefficientRankPrefixFrontierExact as Frontier
+
+boundary : Frontier.CoefficientRankPrefixFrontierBoundary
+boundary = Frontier.canonicalCoefficientRankPrefixFrontierBoundary
+
+fourLayerCollision : Frontier.FourLayerRankAdequacyDefect
+fourLayerCollision = Frontier.fourLayerRanksCannotDetermineGeneratorReceipt
+
+fiveLayerAdequacy : Frontier.FiveLayerRankAdequacy
+fiveLayerAdequacy = Frontier.generatorReceiptFactorsThroughFiveLayerRanks
+
+firstResidual : Frontier.CoefficientRankPrefixFrontierResidual
+firstResidual = Frontier.firstCoefficientRankPrefixFrontierResidual

@@ -1,0 +1,1 @@
+Validation-only marker for the current Round-36 head after cutoff-complete triad transport, proof-derived closure records, no-K validation, and the exact 7/16 strain-fibre coherence barrier. Do not merge this marker.

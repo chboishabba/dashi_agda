@@ -1,0 +1,3 @@
+module DASHI.Physics.Probes.UnificationPromotionProbe where
+
+open import DASHI.Physics.Closure.UnificationPromotionProbeCutsetReceipt public

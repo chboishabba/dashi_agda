@@ -1,0 +1,21 @@
+module DASHI.Wikimedia.IbrahimCannabisCommonResiduePanelRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Wikimedia.IbrahimCannabisCommonResiduePanelParetoExact as Residue
+
+commonPanelRetainsCoverageDebt :
+  Residue.panelCoverageComplete Residue.canonicalCommonResiduePanelBoundary ≡ false
+commonPanelRetainsCoverageDebt = refl
+
+glyphosateNotSmuggledIntoGenericMultiresiduePanel :
+  Residue.glyphosateCoveragePaid Residue.canonicalCommonResiduePanelBoundary ≡ false
+glyphosateNotSmuggledIntoGenericMultiresiduePanel = refl
+
+brandNameDoesNotCreateAnalyteIdentity :
+  Residue.brandOrTypoCreatesMolecule Residue.canonicalCommonResiduePanelBoundary ≡ false
+brandNameDoesNotCreateAnalyteIdentity = refl
+
+occurrenceDoesNotCreateInhalationToxicity :
+  Residue.occurrenceCreatesInhaledToxicDose Residue.canonicalCommonResiduePanelBoundary ≡ false
+occurrenceDoesNotCreateInhalationToxicity = refl

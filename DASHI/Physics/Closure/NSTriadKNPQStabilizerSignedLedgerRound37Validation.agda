@@ -1,0 +1,26 @@
+module DASHI.Physics.Closure.NSTriadKNPQStabilizerSignedLedgerRound37Validation where
+
+-- Round 37 is stacked on the complete Round-36 validation root.  Importing
+-- that root first makes the new tranche cumulative rather than a disconnected
+-- collection of experiments.
+open import DASHI.Physics.Closure.NSTriadKNSchurPrincipalAngleProjectiveRound36Validation
+
+open import DASHI.Physics.Closure.NSTriadKNComPQCrossChannelRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNComPQInvolutionRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNDirectionalProjectorStabilizerRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNDirectionalProjectorDefectBridgeRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNPhysicalProjectorDefectRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNVorticityLineC2QuotientRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNVortexStretchingGeometricFactorRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNVortexStretchingDirectionalBoundRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNFinitePVProjectorIncrementRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNHHBadScaleInvariantGeometryObstructionRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNHHBadStandardShellCoercivityRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNHHBadCrossingVariationCostRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNSignedOwnerPreledgerRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNScopedClassificationWitnessRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNShellBudgetProjectiveTelescopeRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNShellLedgerInverseSystemRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNCertifiedOwnerReserveOptimizationRound37Exact
+open import DASHI.Physics.Closure.NSTriadKNRationalPhysicalTriadEnergyRound37Exact

@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanCMP119FiniteDensityAssemblySemanticsValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119FiniteDensityAssemblySemanticsExact as Assembly
+
+finiteDensityAssemblyCompilerOwned :
+  Assembly.cmp119FiniteDensityAssemblyCompilerLevel ≡ machineChecked
+finiteDensityAssemblyCompilerOwned = refl
+
+selectedDensityEvaluationSameObjectCompilerOwned :
+  Assembly.cmp119SelectedDensityEvaluationSameObjectLevel ≡ machineChecked
+selectedDensityEvaluationSameObjectCompilerOwned = refl
+
+literalAssembleDensityEvaluationRemainsPhysical :
+  Assembly.literalCMP119AssembleDensityEvaluationLevel ≡ conditional
+literalAssembleDensityEvaluationRemainsPhysical = refl

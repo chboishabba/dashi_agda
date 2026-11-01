@@ -1,0 +1,80 @@
+module Ontology.Hecke.Everything where
+
+-- Hecke/observer-refinement ontology ownership surface.
+-- Historical intermediate representations, obstructions, current saturated
+-- refinements, and certified persistence results remain live provenance.
+
+import Ontology.Hecke.Scan
+import Ontology.Hecke.SignedTransport
+import Ontology.Hecke.PressureAdapter
+import Ontology.Hecke.PNFResidualBridge
+import Ontology.Hecke.TransportChambers
+import Ontology.Hecke.Layer2FiniteSearch
+import Ontology.Hecke.Layer2FiniteSearchShell
+import Ontology.Hecke.FactorVecSignedScan
+import Ontology.Hecke.ReverseRepresentation
+import Ontology.Hecke.QuotientRepresentation
+import Ontology.Hecke.CorrespondenceRepresentation
+import Ontology.Hecke.FactorVecCorrespondence
+import Ontology.Hecke.FactorVecSignedTransport
+import Ontology.Hecke.MultiLaneSignedTransport
+import Ontology.Hecke.FactorVecMultiLaneTransport
+import Ontology.Hecke.FactorVecMultiLaneDefects
+import Ontology.Hecke.DefectOrbitPressureOrder
+import Ontology.Hecke.DefectOrbitCollapsePressure
+import Ontology.Hecke.DefectOrbitCollapseBridge
+import Ontology.Hecke.RepresentativePressureOrder
+import Ontology.Hecke.FactorVecDefectHistograms
+import Ontology.Hecke.FactorVecDefectCorrespondence
+import Ontology.Hecke.FactorVecDefectOrbitSummaries
+import Ontology.Hecke.FactorVecHistogramObstruction
+import Ontology.Hecke.FactorVecOrbitSummaryObstruction
+import Ontology.Hecke.FactorVecChamberDefectHistograms
+import Ontology.Hecke.FactorVecChamberDefectRestrictions
+import Ontology.Hecke.FactorVecChamberDefectCorrespondence
+import Ontology.Hecke.FactorVecChamberDefectProfileCorrespondence
+import Ontology.Hecke.FactorVecDefectProfileCorrespondence
+import Ontology.Hecke.DefectCorrespondenceRepresentation
+import Ontology.Hecke.DefectPersistenceRefinement
+import Ontology.Hecke.DefectOrbitSummaryRefinement
+import Ontology.Hecke.TriadIndexedDefectOrbitSummaryRefinement
+import Ontology.Hecke.DefectProfileCollapseFactorization
+import Ontology.Hecke.SupportCascadePersistence
+import Ontology.Hecke.ForcedStableTransferBridge
+import Ontology.Hecke.ForcedStableCountDecomposition
+import Ontology.Hecke.ChamberToShiftWitnessBridge
+import Ontology.Hecke.StaysVsImmediateRepresentativeOrder
+import Ontology.Hecke.ImmediateExitRepresentativeComputations
+import Ontology.Hecke.ExitToAnchoredRepresentativeComputations
+import Ontology.Hecke.StaysOneMoreStepRepresentativeComputations
+import Ontology.Hecke.ProfileSummaryFamilySeparation
+import Ontology.Hecke.ObserverRefinementBridgeExact
+import Ontology.Hecke.ObserverRefinementLadderBridgeExact
+import Ontology.Hecke.TriadFiveSSPCoordinateBridge
+import Ontology.Hecke.PrimeHeckeEigenMotifPipeline
+import Ontology.Hecke.MoonshinePrimeCarrierMatch
+import Ontology.Hecke.DirectedCorrelationMDLPromotion
+import Ontology.Hecke.TriadSectorCorrelationRefinement
+import Ontology.Hecke.TriadSectorDirectedCorrelationRefinement
+import Ontology.Hecke.ContractiveCountLayer2Invariant
+import Ontology.Hecke.FactorVecInstances
+import Ontology.Hecke.SignedTransportObstruction
+
+-- Current saturated/certified endpoint family.
+import Ontology.Hecke.SaturatedInvariantRefinementStatus
+import Ontology.Hecke.CurrentGeneratorPersistenceRefinement
+import Ontology.Hecke.CurrentContractiveCountPartitionPreservation
+import Ontology.Hecke.CurrentSaturatedContractiveCountLayer2Invariant
+import Ontology.Hecke.CurrentSaturatedContractiveCountPartitionPreservation
+import Ontology.Hecke.CurrentSaturatedForcedStableCollapse
+import Ontology.Hecke.CurrentSaturatedOrbitSummaryCollapse
+import Ontology.Hecke.CurrentSaturatedPredictedSectorOrder
+import Ontology.Hecke.CurrentSaturatedPredictedPairComparisons
+import Ontology.Hecke.CurrentSaturatedTriadHistogramSeparation
+import Ontology.Hecke.CurrentSaturatedSectorHistogramComputations
+import Ontology.Hecke.CurrentSaturatedObserverRefinementBridgeExact
+import Ontology.Hecke.CurrentSaturatedProfileSummaryFamilySeparation
+import Ontology.Hecke.CertifiedRepresentativePersistence
+import Ontology.Hecke.CertifiedRepresentativeOrbitSummaryPersistence
+import Ontology.Hecke.CertifiedSaturatedForcedStableCollapse
+import Ontology.Hecke.FactorVecOrbitForcedStableLowerBound

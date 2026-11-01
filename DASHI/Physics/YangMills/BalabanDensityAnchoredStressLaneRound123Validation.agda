@@ -1,0 +1,23 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanLiteralDensityNormalizedSourceRound121Exact as R121
+import DASHI.Physics.YangMills.BalabanDensityAnchoredMetricStressRound122Exact as R122
+import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as R123
+
+round121LiteralDensityNormalizedSourceCompiler : ProofLevel
+round121LiteralDensityNormalizedSourceCompiler =
+  R121.literalDensityNormalizedSourceCompilerLevel
+
+round122DensityAnchoringCompiler : ProofLevel
+round122DensityAnchoringCompiler =
+  R122.densityAnchoredCanonicalMetricStressCompilerLevel
+
+round123DensityAnchoredStressLaneCompiler : ProofLevel
+round123DensityAnchoredStressLaneCompiler =
+  R123.densityAnchoredCanonicalMetricStressLaneCompilerLevel
+
+round123PhysicalInstantiationStillConditional : ProofLevel
+round123PhysicalInstantiationStillConditional =
+  R123.literalDensityAnchoredStressLaneInstantiationLevel

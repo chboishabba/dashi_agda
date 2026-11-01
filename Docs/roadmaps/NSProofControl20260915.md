@@ -1,0 +1,829 @@
+# Navier–Stokes proof-control record — live A/B/C/D coordinator
+
+Status: authoritative live routing/control document; non-promoting.
+
+Current-state date: `2026-09-23 AEST`.
+
+This is the default answer source for current NS proof-search state. Historical
+round/PR detail remains append-only in `CrossLaneProofArchaeologyLedgerExact`.
+Inspect exact owners only for a named unpaid theorem or field.
+
+## Operating hierarchy
+
+```text
+1. this current control / producer summary
+2. canonical archaeology ledger / PR chronology
+3. exact owner only for the named unpaid theorem/field
+```
+
+Always keep `MathematicalStatus`, `StatementStatus`, and `CertificationStatus`
+separate. Source code, a conditional compiler, another prover receipt, or a
+Boolean status field cannot manufacture a theorem or kernel receipt.
+
+## Coordinator ownership
+
+```text
+merged #937   canonical A/B/C/D baseline + S0/S1/S2a state
+open   #948   completed S2b finite/same-object packet representation
+open   #957   live S2b2 quantitative analytic successor
+#920          R571 -> Aug-5 paired-second-moment representation transplant
+#945          Gate-A cross-prover receipt/status surface
+#947          local Hermitian G0' splice
+#890          retained comparable/P3 route + negative controls
+#883 branch   append-only proof-archaeology/bookkeeping surface
+```
+
+## Four lane meanings — frozen
+
+```text
+A — unforced whole-space R^3 regularity       independent theorem obligation
+B — unforced periodic T^3 regularity          active proof-discovery lane
+C — forced whole-space R^3 breakdown          released-proof integration lane
+D — forced periodic T^3 breakdown             released-proof integration lane
+```
+
+This control plane tracks all four lanes.  The active internal proof-discovery
+lane remains B, A is audited bidirectionally against B, and C/D are
+released-proof integration lanes with their own source-alignment and
+same-object adapter residuals.
+
+Firewalls:
+
+```text
+B does not imply A;
+A does not imply B;
+forced C/D do not settle A/B;
+source-proof presence is not DASHI same-object payment.
+```
+
+Typed all-four mission owner:
+
+`DASHI/Physics/Closure/NSGlobalFourAlternativeMissionExact.agda`
+
+Canonical literal Clay proposition endpoint:
+
+`DASHI/Physics/Closure/NSClayLiteralABCDExact.agda`
+
+This is now the theorem-facing A/B/C/D surface.  It replaces the old practice
+of treating `PaymentA/B/C/D` scheduler tokens as if they were the Clay
+propositions themselves.  The legacy tokens remain only for compatibility;
+new terminal consumers should use `LiteralFourAlternativeCompletion` or
+`AnyOneClayResolution`.
+
+Typed current control-plane receipt:
+
+`DASHI/Physics/Closure/NSProofControlABCD20260916ReceiptExact.agda`
+`DASHI/Physics/Closure/NSProofControlABCD20260916ReceiptRegression.agda`
+
+Typed released-proof/source-alignment owners for C/D:
+
+```text
+NSTriadKNClayForcedBreakdownFormulationRound523Exact
+NSClayFourAlternativeReleasedProofBidiExact
+NSOpenAI2026ComparatorClayCDSourceExactAlignment
+NSOpenAI2026ReleasedClayCDTorus369BidiExact
+```
+
+Current all-four ledger:
+
+```text
+four-alternative mission implemented          true
+official any-one criterion separated          true
+C external released proof present             true
+D external released proof present             true
+C/D source alignment to Clay coordinates      closed
+DASHI independent Agda reconstruction of C/D  false
+C/D released-field -> DASHI Fourier/R406 weld false
+CMI prize / DASHI discovery claim             false
+all four internally paid                      false
+```
+
+# A — whole-space unforced: proof discovery deferred, portability BIDI ACTIVE
+
+A is no longer scheduler-idle. Fresh whole-space PDE proof search remains
+deferred while B exposes a sharper theorem spine, but every material B advance
+is now audited bidirectionally for A portability.
+
+Typed owner:
+
+`DASHI/Physics/Closure/NSABPortabilityBidiStatusExact.agda`
+
+Current firewall/status:
+
+```text
+B -> A implication allowed                 false
+A -> B implication allowed                 false
+A portability audit active                 true
+whole-space same-object transport observed false
+```
+
+The audit classifies each B theorem family as one of:
+
+```text
+domainIndependentCandidate
+torusSpecificRealization
+mixedNeedsFactorization
+unresolvedWholeSpaceTransport
+```
+
+Current coordinates include:
+
+```text
+R104 signed Abel/layer-cake algebra        domain-independent candidate
+R98 packet-boundary cancellation           mixed; selector algebra vs finite Fourier realization
+#957 low/collar/remote shell split         torus-specific realization
+R291/R573 signed Hermitian linearization   domain-independent candidate
+S2b2d0 output-local fixed-output reduction domain-independent candidate
+S2b2d1a damped-tangent residual identity   domain-independent analytic candidate
+S2b2d1b0 coherent-work scalar split        domain-independent analytic candidate
+S2b2d1b1 endpoint compiler                 domain-independent modulo ordinary calculus/FTC
+S2b2d1b2 coherent-covariance payment       unresolved whole-space transport
+#920 paired-second-moment compiler         mixed; generic centered algebra vs periodic realization
+R568/R572/R503 commutator chain            mixed; analytic core vs output-fibre/lattice plumbing
+R541/R573/R584/R503 ordered-kernel cone    mixed; signed consumer core vs periodic realization
+```
+
+The `S2b2d0` result is important for BIDI: once an output is selected, the
+periodic exact-shell 0/1 weight disappears completely on that fixed-output
+fibre. The hard local analytic object is therefore the ordinary unweighted
+fixed-output mixed commutator; `shellIndex` only decides which outputs are
+active.
+
+`S2b2d1a` sharpens this again without proving A from B: the unweighted
+commutator is exactly the forcing residual in the generic damped mixed-product
+tangent identity. Its algebra does not mention the periodic shell selector.
+
+`S2b2d1b0` then pushes that exact vector identity through the same real-Hermitian
+consumer and isolates, for any common rate, an endpoint/tangent term plus one
+signed coherent-covariance residual. `S2b2d1b1` constructs the actual fixed-
+output derivative on the R408 trajectory and compiles the endpoint term to a
+self-energy endpoint difference given ordinary derivative-of-zero and scalar
+FTC authority. Therefore the only genuinely nonlinear local d1b theorem left
+is the coherent-covariance payment `S2b2d1b2`. None of these classifications
+promotes B to A.
+
+BIDI questions:
+
+```text
+B -> A:
+  quotient paid B objects into domain-independent analytic core
+  + torus/lattice/cutoff realization
+  + explicit whole-space transport obligations.
+
+A -> B:
+  use the whole-space formulation to detect where a B lemma is accidentally
+  over-specialized to a finite lattice rather than structurally necessary.
+```
+
+No portability classification is a theorem transport. A changes from
+"portability audit" to active proof construction only when a named R^3 transport
+obligation is concrete enough to attack without pretending B already proves A.
+
+# B — periodic unforced: ACTIVE
+
+## B_comm
+
+Working routing assumption:
+
+```text
+recent L0-L6 obligations recoverable          true
+commit-specific Agda receipt                  false / not observed
+```
+
+Under that assumption the signed nested compiler chain
+
+```text
+R573 nested spacetime budget -> R568 -> R572 -> R503
+```
+
+is reconstruction/certification debt. An owner merely accepting R568 is not a
+producer. Do not reopen broad commutator archaeology unless an exact recovery
+field fails.
+
+## B_phase — current strict state
+
+```text
+R104 abstract signed-critical compiler                       DONE
+R414 literal-R406 remainder chosen definitionally            DONE
+R516/R517 critical radial/norm realization                   DONE
+S0 literal finite X_N,D_N,N_N fold                           DONE source
+S1a finite pointwise critical-energy algebra                 DONE source
+fixed nonzero cutoff mode carrier without S4                 DONE source
+S1b integrated-energy compiler given calculus                DONE conditional source
+concrete scalar FTC                                          OPEN infrastructure
+concrete integrateTo linearity                               OPEN infrastructure
+S2a literal N_N -> R39/R98 projected pairing                 DONE source
+S2b0 projected pairing -> R104 BandTransfer                  DONE source
+S2b1 full R104 layer-cake -> physical upper-shell flux       DONE source
+S2b2a packet-complement antisymmetry                         DONE source
+adjacent shellIndex -> Euclidean gap                         REFUTED source negative control
+S2b2b upper packet = exact-shell collar + remote             DONE source
+S2b2c0 low + collar + remote physical flux identity          DONE source
+S2b2c1 two-shell low/remote integer Euclidean gap            DONE source
+S2b2c2a integer gap -> live rational C3.normSquared          DONE source
+S2b2c2b literal low/remote R98 spectral datum                SOURCE-WRITTEN / certification pending
+S2b2d0 output-local collar weight -> active unweighted fibre DONE source
+S2b2d1a fixed-output damped tangent = decay + commutator      SOURCE-WRITTEN / certification pending
+S2b2d1b0 exact coherent-work/covariance scalar split          DONE source
+S2b2d1b1 literal fixed-output endpoint compiler               DONE conditional source
+concrete endpoint zero-derivative + scalar FTC               OPEN infrastructure
+S2b2d1b2 quantitative signed coherent covariance payment      OPEN PRIMARY
+S2b2d2 cutoff-uniform sum of fixed-output budgets             OPEN after d1b2
+S3 cutoff-uniform initial critical ceiling                   OPEN
+S4 positive retained viscosity 0 < 2*nu-a                   OPEN
+```
+
+No unconditional physical R104 slice or Clay promotion is claimed.
+
+## S0 / S1 — already reduced to standard-analysis infrastructure
+
+On the live R240 finite trajectory:
+
+```text
+X_N(t) = sum_k w(k)|u_N(k,t)|^2
+D_N(T) = int sum_k w(k)|k|^2|u_N(k,t)|^2 dt
+N_N(T) = int 2 sum_k w(k) Re<N_k(u_N),u_N(k)> dt
+w(k)   = 2^(shellIndex k).
+```
+
+S1a source-writes
+
+```text
+X'_N = N'_N - (2 nu)D'_N.
+```
+
+S1b source-writes the compiler
+
+```text
+X_N(T) + (2 nu)D_N(T) = X_N(0) + N_N(T)
+```
+
+given ordinary scalar FTC and integration congruence/additivity/scaling.
+Concrete authorities remain infrastructure/certification leaves, not nonlinear
+NS proof-search targets.
+
+# S2 — signed critical production
+
+## S2a/S2b1 representation — CLOSED SOURCE
+
+The selected same-object route is complete:
+
+```text
+literal N_N
+ -> R39/R98 projected pairing
+ -> R104 BandTransfer
+ -> literal shell sort/permutation
+ -> reject-zero full/nonzero cutoff bridge
+ -> upper-shell selector
+ -> canonical suffix / strict-jump tail
+ -> recursive-prefix weld
+ -> normalized physical R98 upper-shell boundary-flux layer-cake.
+```
+
+No Schur/Wiener/positive-part majorant, cardinality tax, or quantitative R406
+bound enters this representation chain.
+
+## S2b2 — PRIMARY nonlinear theorem
+
+Integrated target:
+
+```text
+N_N(T)
+  <= a D_N(T)
+     + literalR406RemainderIntegral(N,T).
+```
+
+#957 establishes the exact physical decomposition
+
+```text
+low    : shellIndex < j
+collar : shellIndex = j
+remote : shellIndex >= j+1
+
+F_low + F_collar + F_remote = 0.
+```
+
+The tempting adjacent-shell spectral-gap shortcut is permanently rejected by
+
+```text
+(2,2,2): shellIndex=1, |k|_2^2=12
+(3,0,0): shellIndex=2, |k|_2^2=9.
+```
+
+For `j=suc K`, the two-shell low/remote geometry instead gives
+
+```text
+shell(low) < j       -> |low|_2^2 <= 3*(2^K)^2
+j+1 <= shell(remote) -> 4*(2^K)^2 <= |remote|_2^2.
+```
+
+### S2b2c2a — DONE SOURCE: live rational norm transport
+
+`NSTriadKNRationalIntegerEmbeddingModeNormScaleExact` proves that for an
+arbitrary additive rational `IntegerEmbedding`, with `c = E(1)`,
+
+```text
+C3.normSquared I k
+  = c^2 * natAsRational(modeNatNormSquared k).
+```
+
+Because `c^2 >= 0`, the concrete `3 < 4` low/remote ordering transports to the
+same live `C3.normSquared` used by R407 viscosity. No separate calibration
+receipt is introduced.
+
+### S2b2c2b — REMOTE packet datum: SOURCE-WRITTEN, certification pending
+
+`NSTriadKNLowRemoteSpectralDatumRound98Exact` constructs the literal
+`R98.SpectralCrossDissipationDatum` on the same low/remote packets with
+
+```text
+E_P = (1/2) sum_P |u_k|^2
+D_P = nu sum_P |k|^2 |u_k|^2
+
+lambda_low    = 2*nu*omega_low
+lambda_remote = 2*nu*omega_remote.
+```
+
+It uses only ordinary physical `0 <= nu`, not S4's later `0 < 2*nu-a`.
+Existing R98 spectral-cross coercivity is therefore the remote compiler once
+this source surface is actually certified.
+
+### S2b2d0 — DONE SOURCE: periodic collar weight disappears on fixed output
+
+`NSTriadKNOutputLocalSelectorFixedOutputReductionExact` first proves the generic
+output-local theorem. For any Boolean selector depending only on the final
+output:
+
+```text
+selected(output)=true
+  -> weighted fixed-output commutator = ordinary unweighted fixed-output commutator
+
+selected(output)=false
+  -> weighted fixed-output commutator = 0.
+```
+
+The exact-shell collar is only a corollary. This removes `shellIndex` from the
+hard local analytic theorem and strengthens the A/B portability cut.
+
+### S2b2d1a — DONE SOURCE: exact damped-tangent residual identity
+
+`NSTriadKNFixedOutputMixedCommutatorDampedTangentExact` combines R231 and R230:
+
+```text
+sum_{p+q=k} dampedMixedTangent(p,q)
+  = sum_{p+q=k} variableViscousDecay(p,q)
+    + sum_{p+q=k} unweightedMixedCommutator(p,q).
+```
+
+This is an exact finite identity before norms. It removes the ambiguity about
+what the d1 commutator is dynamically: it is the forcing residual in the
+mixed-product tangent equation.
+
+R229 is the controlling no-go. Cellwise lower bounds on the viscous rates do
+not imply favorable damping of the coherent fixed-output sum; an explicit
+finite witness gives adverse signed covariance. Therefore d1a does not close
+the payment merely by inserting viscosity.
+
+The retained P3/raw-curl partner route is not silently identified with d1a:
+P3's compressed cells are quadratic velocity blocks, while the R230 commutator
+is cubic after inserting physical NS forcing. Any useful bridge must be a typed
+same-object theorem, not analogy.
+
+### S2b2d1b0 — DONE SOURCE: exact coherent-work decomposition
+
+`NSTriadKNFixedOutputCoherentCovarianceWorkExact` pushes d1a through the same
+real-Hermitian scalar consumer. For any common rate `lambda` it proves exactly
+
+```text
+W(M,C)
+  = W(M,T)
+    + lambda W(M,M)
+    - W(M, D + lambda M),
+```
+
+where `M` is the coherent fixed-output mixed-product sum, `T` its damped
+tangent, `D` the variable viscous-decay sum, and `C` the fixed-output
+commutator. The final term is the signed coherent covariance residual. No sign
+or inequality is assumed.
+
+### S2b2d1b1 — DONE CONDITIONAL SOURCE: endpoint term is ordinary calculus
+
+`NSTriadKNFixedOutputMixedEndpointCompilerExact` constructs the actual R408
+mixed-cell derivatives, folds them on the literal fixed-output fibre, and uses
+R94/R381/R292 to identify that tangent with the same physical damped tangent
+used in d1a. It then proves, given ordinary derivative-of-zero and scalar FTC
+authorities,
+
+```text
+integral W(M,T) dt
+  = Re<M(T),M(T)> - Re<M(0),M(0)>.
+```
+
+Thus the endpoint term is infrastructure/certification debt, not a new NS
+estimate. Concrete zero-derivative and FTC inhabitants remain explicitly open.
+
+### 2026-09-23 H2 weighted-carrier correction
+
+The endpoint-aware A3 audit has now separated two carriers that earlier
+bookkeeping risked conflating.
+
+The literal R406/R557 route is resolvent weighted.  The exact live temporal identity, **given the scalar FTC authority already isolated by R564/R565**, is now composed theorem-by-theorem in
+`NSTriadKNR406ExactEndpointNormalFormExact`:
+
+```text
+2 * integral R406
+  = integral FactoredFull
+    - integral SelfGram
+    - (SelfFlux(T) - SelfFlux(0)).
+```
+
+This uses R557 plus the same-object R570 self-flux tangent/FTC weld and
+introduces no new Navier--Stokes estimate.
+
+Separately, `NSTriadKNA3D1bDivisionFreeTransportExact` composes d1b0 with the
+existing covariance-centering identity.  On one fixed-output fibre it proves
+the division-free normalization
+
+```text
+n * W(M,commutator) + A3SignedPairDifference
+  = n * W(M,tangent) + (sum rates) * W(M,M).
+```
+
+Thus the current unweighted A3 pair-difference scalar is NOT definitionally
+the literal weighted R406/factored-full scalar.  The mean-rate self-work term
+and fibre-cardinality normalization are real algebraic coordinates, and R406
+also carries the nonseparable spectator resolvent
+`1 / (rate_alpha + rate_beta)`.
+
+The canonical weighted boundary owner
+`NSTriadKNA3WeightedR406EndpointCutExact` therefore keeps
+
+```text
+a3PairDifferenceIsLiteralFactoredFullSameObjectClosed = false
+unweightedD1b0DirectlyPaysWeightedR406Pointwise       = false
+```
+
+while recording the endpoint side as closed modulo ordinary scalar FTC.
+
+Consequently, do NOT classify
+
+```text
+integral R406 = endpoint + integral (4 * unweighted A3)
+```
+
+as representation plumbing.  The generic endpoint-aware compiler remains a
+valid conditional consumer, but the unit-coefficient A3/R406 equality is not
+derived by d1b0+d1b1.
+
+The actual weighted live producer remains R568:
+
+```text
+4 * integral GlobalForcingFull_resolvent <= B(T),
+```
+
+with R570/R572 compiling it to the existing R406/R503 consumer.  The unweighted
+A3/separation theorem is therefore a candidate donor to that weighted theorem,
+not already its same-object representation.
+
+This correction does not add a new theorem claim; it sharpens where any new
+analytic bridge would have to land.
+
+### S2b2d1b2 — PRIMARY analytic leaf: signed coherent covariance payment
+
+The only genuinely nonlinear fixed-output theorem remaining in d1b is now
+
+```text
+signed coherent covariance W(M, D + lambda M)
+  -> theorem-bearing fixed-output budget B_k
+  -> R432/R487 FixedOutputSignedCrossPayment.
+```
+
+The common rate may be chosen to optimize the later budget, but R229 forbids
+inferring a favorable coherent sign merely from cellwise nonnegative excess
+rates. R232 separately rules out a generic pointwise half-derivative gain.
+R432/R487 already own the cardinality-free downstream compiler once theorem-
+bearing local budgets exist.
+
+Same-object audit on 2026-09-16: the new
+`NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact` owner already closes
+the division-free finite algebra
+
+```text
+n * W(M, variableDecay) + (sum rates) * W(M,M)
+  = - sum_{i<j} (r_i-r_j)(w_i-w_j)
+```
+
+on the literal fixed-output mixed-helicity fibre. Thus the live local payment
+is no longer an unspecified covariance residual; it is the theorem-bearing
+signed pair-difference budget for that exact family. R472/R480 remain useful
+older R432 producers, but their own status lines still keep the physical
+snapshot/same-object weld false, so they do not currently close d1b2 by alias.
+The next search should be for a same-carrier pair-difference payment or a proof
+that the existing physical snapshot weld is exactly this d1b2 family.
+
+Recovered pair-difference archaeology: `NSTriadKNFixedOutputPairDifferenceDebtExact`
+and `NSTriadKNFixedOutputPairDifferenceAggregateExact` already close the finite
+Complex3 complete-graph identity and the literal R574 norm-sum aggregate:
+
+```text
+||sum_i B_i||^2 + PairDiffMass(B) = n * sum_i ||B_i||^2
+PairDiffMass(fixed output) = literal R574 pair-norm mass.
+```
+
+These are exactly the right vocabulary for the d1b2 pair-difference side, but
+their status lines keep the physical lower-bound/payment leaf false. So the
+follow-up is not new finite algebra.
+
+The P3 compiler `NSTriadKNFixedOutputPairDifferencePaymentExact` is also already
+present: an R574 lower-separation premise for the same fixed-output aggregate
+implies the same-output Gram-debt payment. Its status line keeps
+`fixedOutputPhysicalLowerSeparationClosed = false`, so the remaining leaf is the
+physical lower-separation/payment input and its attachment to d1b2's
+rate-weighted signed pair-difference carrier.
+
+The literal geometric donor immediately upstream is
+`NSTriadKNCenteredPartnerDifferenceAdapterExact`: it proves the R205 compressed
+partner difference is the R574/R446 difference value and, on the fixed-output
+carrier, rewrites each slot-kernel difference as two exact amplitude-increment
+branches via `fixedOutputSlotKernelDifferenceTelescopesByAmplitudeIncrements`.
+`NSTriadKNCenteredPartnerSlotDefectExact` then records the norm-level identity
+
+```text
+||B_alpha - B_beta||^2 = 4 ||K_alpha - K_beta||^2.
+```
+
+So the quotient/same-object/amplitude-telescope/slot-defect normalization is
+already source-written. The named open field is now specifically the
+radial/Pluecker lower weld for that slot defect:
+
+```text
+roundCenteredPartnerRadialPlueckerDefectWeldClosed = false
+roundCenteredPartnerSlotDefectRadialPlueckerLowerBoundClosed = false.
+```
+
+That is the next literal search vocabulary for the lower-separation input; it
+is not a request to rebuild the R205/R574 adapter or the norm-four identity.
+
+Literal search also finds the older Luo `CenteredPairCell` compiler in
+`NSTriadKNLuoPhysicalCenteredCommutatorAssemblyExact`; keep it as a structural
+donor, not a live splice. The current same-object adapter still records
+
+```text
+roundCenteredPartnerCenteredPairCellConstructed = false
+roundCenteredPartnerCutoffUniformAggregateClosed = false.
+```
+
+So any promotion through the old centered compiler still needs the live
+centered-partner cell weld, not merely the existence of the historical
+`CenteredPairCell` record.
+
+Guardrail donors around the radial/Pluecker weld are already in-repo.
+`NSTriadKNExternalHHSquareGapGramRound128Exact` closes the exact polynomial
+square-gap/Pluecker identity, but keeps the ordered drop/payment false:
+
+```text
+round128LowOutputTimesHighInputPolynomialIdentityClosed = true
+round128OrderedDropPluckerRemainderClosed = false.
+```
+
+And `NSTriadKNFixedOutputConcreteSlotCollisionWitnessExact` closes the concrete
+distinct-incidence same-slot collision witness. Therefore the live lower weld
+cannot be an incidence-label-only radial/Pluecker coercivity claim:
+
+```text
+roundFixedOutputConcreteDistinctCCCollisionWitnessConstructed = true
+roundFixedOutputIncidenceOnlyRadialPlueckerCoercivityRefuted = false.
+```
+
+The lower weld must see the actual quotient slot defect / amplitude-increment
+data, not merely raw fixed-output incidence separation.
+
+#### Recovered historical donor: R571 -> Aug-5 paired second moment
+
+Do not search for a missing centered scalarization adapter. PR #920 already
+source-wrote the representation chain
+
+```text
+R571 physical multiplier difference
+ -> R571/R311/R27 radial same-object weld
+ -> paired Taylor identity
+ -> paired second-order defect
+ -> absolute-magnitude PairedSecondMomentSample
+ -> finite family-scoped paired-second-moment compiler.
+```
+
+`NSTriadKNR571PhysicalSecondMomentEnvelopeSplitExact` shows that the remaining
+physical leaves of that donor route are only
+
+```text
+radial Taylor:
+  |L| <= |y| A1
+  |R+|,|R-| <= |y|^2 A2
+
+state side:
+  |g+ - g-| <= |y| G2
+  |g+|,|g-| <= G1.
+```
+
+PR #945 records theorem-bearing Lean receipts for the periodic-B A1/A2 radial
+mathematics. It keeps the Agda sample/same-object transport distinct, and it
+identifies the existing finite-path difference theorem as G2 donor and the
+Waleffe amplitude-energy theorem as an older G1 magnitude donor. The G0'
+local Hermitian vector->scalar splice is source-written, and the R579 local
+Hermitian Young owner now pays the same-carrier scalar G1 magnitude step
+without square roots or a fibre-cardinality factor. The remaining state-side
+work on this donor lane is therefore not a generic `|g_\pm| <= G1` search:
+it is the G2 physical-gradient crosswalk plus any cutoff-uniform
+shifted-coefficient/family transport needed to attach the local G1 envelope to
+the live physical family.
+
+For S2b2d1b2 this route remains a candidate donor only. Any attachment must land
+on the same coherent-covariance carrier without losing the signed cancellation.
+Otherwise retain #920/#945 as provenance donors and prove d1b2 directly. Do not
+reopen their representation/scalarization chain.
+
+#### Current signed consumer / ordered-kernel min-cut
+
+The later R541/R573/R584/R503 cone has already pushed the live nested
+four-sign carrier through the signed Hermitian consumer before norm. The
+canonical status owner is
+`NSTriadKNLiteralR406SpectatorWeightedClassNormEverythingExact`, with the
+local exact producers
+`NSTriadKNWeightedNestedSignedCrossThreeOrbitBidiExact`,
+`NSTriadKNDirectCompanionThreeOrbitSignedRowBidiExact`,
+`NSTriadKNNestedFactoredFullToOrderedOrientedForceBidiExact`, and
+`NSTriadKNOrderedOrientedForceToR503BidiExact`.
+
+The recorded same-object facts are:
+
+```text
+R329 -> R572 single-cell same-slot weld                 closed
+signed Hermitian consumer three-orbit reduction          closed
+live R503 direct companion rewritten as ordered kernel   closed
+OrderedOrientedSpacetimeBudget -> R503                  closed
+outer forcing Gram route mandatory for R503              false
+independent amplitude budget required                    false
+```
+
+Thus the narrowest current analytic field on the direct R503 route is:
+
+```text
+cutoff-uniform bound for
+  2 * integratedOrderedOrientedForce,
+where H(alpha,beta) = w(alpha,beta) Re <G_alpha,D_beta>.
+```
+
+This is the signed-consumer version of the same operating rule:
+
+```text
+pair / cancel -> scalarize -> envelope -> majorize.
+```
+
+Do not take the nested forcing norm-square as the primary route before this
+consumer: the homogeneity audit records that doing so changes the quintic
+signed cross into a sextic object and opens a degree-seven derivative
+remainder. The Gram/class-norm surfaces remain optional diagnostics or
+producer routes only if they descend to the signed ordered-kernel budget.
+
+# C/D — forced breakdown: RELEASED-PROOF INTEGRATION LANES
+
+C and D are not proof-discovery blockers for A/B.  They are separate
+Fefferman/Clay alternatives and now have released external theorem sources
+recorded in-repo.  The current task is accounting and same-object integration,
+not re-proving C/D by analogy and not using them to pay A/B.
+
+`NSTriadKNClayForcedBreakdownFormulationRound523Exact` records the exact source
+coordinates for:
+
+```text
+C: R^3 smooth forced breakdown with rapid spatial/space-time decay and
+   bounded-energy no-global-smooth-solution consumer.
+D: T^3 smooth periodic forced breakdown with rapid time-decay of all forcing
+   derivatives and no-global-periodic-smooth-solution consumer.
+```
+
+`NSOpenAI2026ComparatorClayCDSourceExactAlignment` records:
+
+```text
+released C exactly matches Clay C                  true
+released D exactly matches Clay D                  true
+released C/D source alignment closed               true
+released concrete field -> DASHI Fourier closed    false
+released forcing -> literal R406 comparison closed false
+independent Agda reconstruction of released proof   false
+CMI award / DASHI prize claim                       false
+```
+
+`NSClayFourAlternativeReleasedProofBidiExact` records the all-four firewall:
+
+```text
+A internally paid                                  false
+B internally paid                                  false
+C external released proof present                  true
+D external released proof present                  true
+forced breakdown pays unforced A/B                 impossible / rejected
+public theorem creates DASHI same-object payment   false
+first released-integration residual                released field -> DASHI Fourier
+```
+
+Therefore the narrow C/D integration route is:
+
+```text
+external released C/D theorem/source receipt
+  -> exact Clay C/D coordinate alignment        closed
+  -> concrete released field/forcing extraction open
+  -> DASHI Fourier/369/R406 same-object weld    open
+  -> optional internal Agda reconstruction       open
+  -> CMI/prize adjudication                      external, not a repo flag.
+```
+
+This released-proof lane should be kept synchronized with the A/B control
+plane, but it must not be used to infer unforced global regularity or to
+overwrite the B ordered-kernel frontier.
+
+### S2b2d2 — global aggregation after local payments
+
+Once d1b2 exists, the next residual is exactly R488's second node:
+
+```text
+4 * sum_k B_k <= B(T)
+```
+
+with no output-count factor. Do not search this global theorem before the local
+fixed-output family exists.
+
+# S3 / S4
+
+S3: S0 already supplies the literal initial functional; remaining payment is a
+cutoff-uniform initial-critical ceiling.
+
+S4: prove `0 < 2*nu-a` only after S2b2 produces `a`. Do not close S4 ahead of
+S2b2 except conditionally.
+
+# Historical/provenance routes — append-only
+
+```text
+A1-A9 / ESS / Abel-defect manuscript route     historicalAlternativeRoute
+R179-R214 comparable / P3 route                retainedComparator + negativeControls
+R303/R353/R372 signed-resolvent route          serious precursor; production identity stayed input
+#890 incidence/P3 work                         retained theorem-bearing comparator
+P1/P2/P3 fixed-output pair-difference chain    finite/R574/payment compiler donor; lower separation open
+Luo centered pair compiler                     structural donor; live centered-partner cell weld open
+#920 R571/Aug-5 paired-second-moment transplant theorem-bearing representation donor
+#945/#947 Gate-A/G0' work                      cross-prover + same-object donor surfaces
+R579 local Hermitian G1 envelope               same-carrier scalar magnitude donor
+R541/R573/R584/R503 ordered-kernel cone        selected signed-consumer same-object cone
+Round523 forced C/D source formulation         exact Clay C/D coordinate owner
+OpenAI2026 C/D released source alignment       external theorem/source receipt + firewall
+OpenAI2026 D torus/369 seam                    released D -> DASHI Fourier/R406 residual owner
+R576/R577 positive Gram/Schur route            fallbackProducerRoute
+constant shell-localization payment            refuted as sufficient by R214
+adjacent max-shell -> Euclidean gap             refuted by #957 explicit witness
+R229 cellwise damping -> coherent damping       refuted by exact signed covariance witness
+modern signed/nested commutator route           selected B_comm producer family
+```
+
+# Current Pareto allocation — A/B/C/D, B primary
+
+```text
+P0  keep this tracker + #957 + #883 archaeology summary synchronized
+P1  B_phase S2b2d1b2: quantitative signed coherent-covariance fixed-output payment
+P2  standard-analysis/certification: endpoint zero derivative + scalar FTC + S1b calculus
+P3  static/certification validation of d1a/d1b0/d1b1 + S2b2c2b remote datum + d0 reduction
+P4  A/B portability BIDI audit on each paid B theorem family (non-promoting)
+P5  C/D released-proof accounting: released field/forcing -> DASHI Fourier/R406 weld
+P6  B_phase S3/S4
+P7  B_comm reconstruction/certification
+P8  certify recovered S0/S1/S2/#957 source surfaces
+```
+
+Operating rule:
+
+```text
+track A/B/C/D in this control plane;
+A/B remain independent from C/D;
+A proof discovery deferred, A portability BIDI active;
+never restart broad NS archaeology;
+start every search from a named unpaid theorem/field;
+preserve failed/superseded routes as append-only provenance;
+B new mathematics starts at S2b2d1b2 coherent covariance only;
+C/D source alignment is closed but representation/reconstruction/adjudication remain distinct;
+preserve signed/local components before norms;
+only after d1b2 search the cutoff-uniform sum d2;
+never infer B -> A or A -> B without explicit same-object transport.
+```
+
+# Certification boundary
+
+```text
+source-written theorem
+  != validation source/root
+  != workflow target
+  != observed successful commit-specific Agda receipt.
+```
+
+Merged #937 is the coordinator baseline. Draft #948 owns the completed S2b
+representation. Draft #957 owns the live S2b2 analytic delta plus the current
+A/B portability audit.
+
+No unconditional Clay Navier–Stokes promotion is made here.

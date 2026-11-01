@@ -1,0 +1,597 @@
+module DASHI.Education.DigitalESDDatabaseExecutionReceiptExact where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDDatabaseTranslatedQueriesExact as Queries
+import DASHI.Education.DigitalESDStructuredSearchExact as Search
+
+------------------------------------------------------------------------
+-- EXACT DATABASE EXECUTION / RESULT-SET RECEIPTS
+--
+-- A translated query is not an execution. An execution attempt may itself stop
+-- before submission. Blocked-before-submission states therefore carry neither
+-- result counts nor exports by construction. querySubmitted remains an ordinary
+-- receipt coordinate so future successful executions may set it to true.
+------------------------------------------------------------------------
+
+data ExportState : Set where
+  exportObserved : String → String → ExportState
+  exportNotObserved : String → ExportState
+
+data ExecutionOutcome : Set where
+  executedWithObservedResultSet :
+    Nat → String → ExportState → String → ExecutionOutcome
+  accessBlockedBeforeSubmission : String → ExecutionOutcome
+  authenticationBlockedBeforeSubmission : String → ExecutionOutcome
+  interfaceFailureBeforeSubmission : String → ExecutionOutcome
+
+record DatabaseExecutionReceipt : Set where
+  constructor database-execution-receipt
+  field
+    translatedQuery : Queries.TranslatedQueryReceipt
+    surface : Search.SearchSurface
+    executionAttempted : Bool
+    executionAttemptedIsTrue : executionAttempted ≡ true
+    querySubmitted : Bool
+    attemptTimestamp : String
+    platformEntrypoint : String
+    outcome : ExecutionOutcome
+    executionEnvironment : String
+    promotionBoundary : String
+
+open DatabaseExecutionReceipt public
+
+------------------------------------------------------------------------
+-- 2026-09-16 execution attempts from the current ChatGPT web execution
+-- environment. Both database search entrypoints returned HTTP 403 before the
+-- query text could be submitted. Therefore all fourteen translated queries
+-- receive query-specific attempt receipts but no result count/export payload.
+------------------------------------------------------------------------
+
+attemptTimestamp20260916 : String
+attemptTimestamp20260916 = "2026-09-16T19:43:00+10:00"
+
+scopusEntrypoint : String
+scopusEntrypoint = "https://www.scopus.com/search/form.uri?display=advanced"
+
+wosCoreEntrypoint : String
+wosCoreEntrypoint = "https://www.webofscience.com/wos/woscc/basic-search"
+
+scopusBlockedOutcome : ExecutionOutcome
+scopusBlockedOutcome =
+  accessBlockedBeforeSubmission
+    "HTTP 403 at Scopus Advanced Search entrypoint in this execution environment"
+
+wosBlockedOutcome : ExecutionOutcome
+wosBlockedOutcome =
+  accessBlockedBeforeSubmission
+    "HTTP 403 at Web of Science Core Collection entrypoint in this execution environment"
+
+scopusBlockedExecution : Queries.TranslatedQueryReceipt → DatabaseExecutionReceipt
+scopusBlockedExecution q = database-execution-receipt
+  q
+  Search.scopus
+  true refl
+  false
+  attemptTimestamp20260916
+  scopusEntrypoint
+  scopusBlockedOutcome
+  "ChatGPT web retrieval environment; platform returned HTTP 403 before query submission"
+  "attempt receipt only: no query submission, result count, export, deduplication, screening, eligibility or evidence payment is created"
+
+wosBlockedExecution : Queries.TranslatedQueryReceipt → DatabaseExecutionReceipt
+wosBlockedExecution q = database-execution-receipt
+  q
+  Search.webOfScience
+  true refl
+  false
+  attemptTimestamp20260916
+  wosCoreEntrypoint
+  wosBlockedOutcome
+  "ChatGPT web retrieval environment; platform returned HTTP 403 before query submission"
+  "attempt receipt only: no query submission, result count, export, deduplication, screening, eligibility or evidence payment is created"
+
+scopusQ1Execution : DatabaseExecutionReceipt
+scopusQ1Execution = scopusBlockedExecution Queries.scopusQ1DigitalEducationESD
+
+scopusQ2Execution : DatabaseExecutionReceipt
+scopusQ2Execution = scopusBlockedExecution Queries.scopusQ2Transformation
+
+scopusQ3Execution : DatabaseExecutionReceipt
+scopusQ3Execution = scopusBlockedExecution Queries.scopusQ3ReflexiveSustainability
+
+scopusQ4Execution : DatabaseExecutionReceipt
+scopusQ4Execution = scopusBlockedExecution Queries.scopusQ4LifecycleCircularity
+
+scopusQ5Execution : DatabaseExecutionReceipt
+scopusQ5Execution = scopusBlockedExecution Queries.scopusQ5ParticipantGovernance
+
+scopusQ6Execution : DatabaseExecutionReceipt
+scopusQ6Execution = scopusBlockedExecution Queries.scopusQ6LongitudinalInstitutional
+
+scopusQ7Execution : DatabaseExecutionReceipt
+scopusQ7Execution = scopusBlockedExecution Queries.scopusQ7OpenInteroperableRepairable
+
+wosQ1Execution : DatabaseExecutionReceipt
+wosQ1Execution = wosBlockedExecution Queries.wosQ1DigitalEducationESD
+
+wosQ2Execution : DatabaseExecutionReceipt
+wosQ2Execution = wosBlockedExecution Queries.wosQ2Transformation
+
+wosQ3Execution : DatabaseExecutionReceipt
+wosQ3Execution = wosBlockedExecution Queries.wosQ3ReflexiveSustainability
+
+wosQ4Execution : DatabaseExecutionReceipt
+wosQ4Execution = wosBlockedExecution Queries.wosQ4LifecycleCircularity
+
+wosQ5Execution : DatabaseExecutionReceipt
+wosQ5Execution = wosBlockedExecution Queries.wosQ5ParticipantGovernance
+
+wosQ6Execution : DatabaseExecutionReceipt
+wosQ6Execution = wosBlockedExecution Queries.wosQ6LongitudinalInstitutional
+
+wosQ7Execution : DatabaseExecutionReceipt
+wosQ7Execution = wosBlockedExecution Queries.wosQ7OpenInteroperableRepairable
+
+
+------------------------------------------------------------------------
+-- 2026-09-19 ERIC public-API execution attempt.
+--
+-- The exact ERIC translations and public API syntax are now frozen, but this
+-- execution environment's web transport refused direct access to
+-- api.ies.ed.gov before a response body/result count could be observed.
+-- Therefore these are interface-failure-before-submission receipts only.
+------------------------------------------------------------------------
+
+attemptTimestamp20260919 : String
+attemptTimestamp20260919 = "2026-09-19T13:31:00+10:00"
+
+ericAPIEntrypoint : String
+ericAPIEntrypoint = "https://api.ies.ed.gov/eric/"
+
+ericInterfaceFailureOutcome : ExecutionOutcome
+ericInterfaceFailureOutcome =
+  interfaceFailureBeforeSubmission
+    "current web transport refused direct api.ies.ed.gov access before a result response could be observed"
+
+ericInterfaceFailureExecution : Queries.TranslatedQueryReceipt → DatabaseExecutionReceipt
+ericInterfaceFailureExecution q = database-execution-receipt
+  q
+  Search.eric
+  true refl
+  false
+  attemptTimestamp20260919
+  ericAPIEntrypoint
+  ericInterfaceFailureOutcome
+  "ChatGPT web retrieval environment; official ERIC API syntax verified, direct API response retrieval unavailable in this transport"
+  "attempt receipt only: no observed API response, result count, export, deduplication, screening, eligibility or evidence payment is created"
+
+ericQ1Execution : DatabaseExecutionReceipt
+ericQ1Execution = ericInterfaceFailureExecution Queries.ericQ1DigitalEducationESD
+
+ericQ2Execution : DatabaseExecutionReceipt
+ericQ2Execution = ericInterfaceFailureExecution Queries.ericQ2Transformation
+
+ericQ3Execution : DatabaseExecutionReceipt
+ericQ3Execution = ericInterfaceFailureExecution Queries.ericQ3ReflexiveSustainability
+
+ericQ4Execution : DatabaseExecutionReceipt
+ericQ4Execution = ericInterfaceFailureExecution Queries.ericQ4LifecycleCircularity
+
+ericQ5Execution : DatabaseExecutionReceipt
+ericQ5Execution = ericInterfaceFailureExecution Queries.ericQ5ParticipantGovernance
+
+ericQ6Execution : DatabaseExecutionReceipt
+ericQ6Execution = ericInterfaceFailureExecution Queries.ericQ6LongitudinalInstitutional
+
+ericQ7Execution : DatabaseExecutionReceipt
+ericQ7Execution = ericInterfaceFailureExecution Queries.ericQ7OpenInteroperableRepairable
+
+
+
+------------------------------------------------------------------------
+-- 2026-09-19 operator-observed live ERIC result-count executions.
+--
+-- A later local execution environment reached the official public ERIC API
+-- successfully for all seven frozen queries and observed HTTP 200 JSON
+-- responses with exact numFound counts. Those probes did not yet retain the
+-- paginated result-set export, so exportNotObserved remains explicit and these
+-- receipts cannot cross the successful structured-search bridge.
+------------------------------------------------------------------------
+
+ericObservedExecutionTimestamp : String
+ericObservedExecutionTimestamp =
+  "2026-09-19 local operator execution; exact clock time not retained in attached execution log"
+
+ericObservedCountExecution :
+  Queries.TranslatedQueryReceipt → Nat → String → String → DatabaseExecutionReceipt
+ericObservedCountExecution q count resultSetRef note =
+  database-execution-receipt
+    q
+    Search.eric
+    true refl
+    true
+    ericObservedExecutionTimestamp
+    ericAPIEntrypoint
+    (executedWithObservedResultSet
+      count
+      resultSetRef
+      (exportNotObserved
+        "count-only probe observed; paginated JSON/CSV export not yet retained")
+      note)
+    "local operator Python execution against official https://api.ies.ed.gov/eric/ public API"
+    "observed result-count receipt only: query submission and result-set existence are paid, but retained export/digest, deduplication, screening, eligibility and evidence payment remain unpaid"
+
+ericQ1ObservedExecution : DatabaseExecutionReceipt
+ericQ1ObservedExecution = ericObservedCountExecution
+  Queries.ericQ1DigitalEducationESD
+  642
+  "ERIC Q1 live JSON result set observed from official public API"
+  "HTTP 200; numFound=642"
+
+ericQ2ObservedExecution : DatabaseExecutionReceipt
+ericQ2ObservedExecution = ericObservedCountExecution
+  Queries.ericQ2Transformation
+  290
+  "ERIC Q2 live JSON result set observed from official public API"
+  "HTTP 200; numFound=290"
+
+ericQ3ObservedExecution : DatabaseExecutionReceipt
+ericQ3ObservedExecution = ericObservedCountExecution
+  Queries.ericQ3ReflexiveSustainability
+  1594
+  "ERIC Q3 live JSON result set observed from official public API"
+  "HTTP 200; numFound=1594"
+
+ericQ4ObservedExecution : DatabaseExecutionReceipt
+ericQ4ObservedExecution = ericObservedCountExecution
+  Queries.ericQ4LifecycleCircularity
+  41889
+  "ERIC Q4 live JSON result set observed from official public API"
+  "HTTP 200; numFound=41889"
+
+ericQ5ObservedExecution : DatabaseExecutionReceipt
+ericQ5ObservedExecution = ericObservedCountExecution
+  Queries.ericQ5ParticipantGovernance
+  214
+  "ERIC Q5 live JSON result set observed from official public API"
+  "HTTP 200; numFound=214"
+
+ericQ6ObservedExecution : DatabaseExecutionReceipt
+ericQ6ObservedExecution = ericObservedCountExecution
+  Queries.ericQ6LongitudinalInstitutional
+  293
+  "ERIC Q6 live JSON result set observed from official public API"
+  "HTTP 200; numFound=293"
+
+ericQ7ObservedExecution : DatabaseExecutionReceipt
+ericQ7ObservedExecution = ericObservedCountExecution
+  Queries.ericQ7OpenInteroperableRepairable
+  1675
+  "ERIC Q7 live JSON result set observed from official public API"
+  "HTTP 200; numFound=1675"
+
+canonicalERICObservedCountExecutions : List DatabaseExecutionReceipt
+canonicalERICObservedCountExecutions =
+  ericQ1ObservedExecution
+  ∷ ericQ2ObservedExecution
+  ∷ ericQ3ObservedExecution
+  ∷ ericQ4ObservedExecution
+  ∷ ericQ5ObservedExecution
+  ∷ ericQ6ObservedExecution
+  ∷ ericQ7ObservedExecution
+  ∷ []
+
+------------------------------------------------------------------------
+-- 2026-09-19 operator-observed live ERIC paginated export executions.
+--
+-- All seven queries were executed against the official public ERIC API,
+-- paginating rows=200 until numFound was exhausted. All 237 raw JSON page
+-- artifacts and 7 summary.json files are retained with exact SHA-256 digests.
+-- These receipts carry exportObserved and are ready to cross the success bridge.
+------------------------------------------------------------------------
+
+ericObservedExportExecution :
+  Queries.TranslatedQueryReceipt →
+  Nat →
+  String →
+  String →
+  String →
+  String →
+  DatabaseExecutionReceipt
+ericObservedExportExecution q count timestamp exportPath resultSetRef note =
+  database-execution-receipt
+    q
+    Search.eric
+    true refl
+    true
+    timestamp
+    ericAPIEntrypoint
+    (executedWithObservedResultSet
+      count
+      resultSetRef
+      (exportObserved exportPath "JSON")
+      note)
+    "local operator Python execution against official https://api.ies.ed.gov/eric/ public API"
+    "observed result-export receipt: query submission, result-set existence, and paginated JSON export/digests are paid; deduplication, screening, eligibility and evidence payment remain downstream review payments"
+
+ericQ1ObservedExportExecution : DatabaseExecutionReceipt
+ericQ1ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ1DigitalEducationESD
+  642
+  "2026-09-19T22:46:25+10:00"
+  "artifacts/digital-esd/eric/Q1/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q1/summary.json); pagination complete"
+  "HTTP 200; numFound=642; 4 pages fetched (642 docs); summarySha256=faa8cf35e1a34ec06a9cc97a816f78099752605aaf4a70c6b1493e1d24dd2e4b"
+
+ericQ2ObservedExportExecution : DatabaseExecutionReceipt
+ericQ2ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ2Transformation
+  290
+  "2026-09-19T22:46:37+10:00"
+  "artifacts/digital-esd/eric/Q2/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q2/summary.json); pagination complete"
+  "HTTP 200; numFound=290; 2 pages fetched (290 docs); summarySha256=5a01ede4bcd53a8068f32fefd9e47d2e7f113a3acec214ed7b9609f47d0a110d"
+
+ericQ3ObservedExportExecution : DatabaseExecutionReceipt
+ericQ3ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ3ReflexiveSustainability
+  1594
+  "2026-09-19T22:47:45+10:00"
+  "artifacts/digital-esd/eric/Q3/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q3/summary.json); pagination complete"
+  "HTTP 200; numFound=1594; 8 pages fetched (1594 docs); summarySha256=76ad0a9a971a6f9dadb90df29f18ce70533ab839ca78489ecf7f6b606e410c88"
+
+ericQ4ObservedExportExecution : DatabaseExecutionReceipt
+ericQ4ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ4LifecycleCircularity
+  41889
+  "2026-09-19T23:07:37+10:00"
+  "artifacts/digital-esd/eric/Q4/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q4/summary.json); pagination complete"
+  "HTTP 200; numFound=41889; 210 pages fetched (41889 docs); summarySha256=bee52dd930f2ae6da0004ea56c0378f0445ad3ec0877a479f8fecb6ec557b53f"
+
+ericQ5ObservedExportExecution : DatabaseExecutionReceipt
+ericQ5ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ5ParticipantGovernance
+  214
+  "2026-09-19T22:45:43+10:00"
+  "artifacts/digital-esd/eric/Q5/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q5/summary.json); pagination complete"
+  "HTTP 200; numFound=214; 2 pages fetched (214 docs); summarySha256=0302dfbc15b67be4d1664653bda4d5e0dcb99d547345f09c58588a2ea44feb90"
+
+ericQ6ObservedExportExecution : DatabaseExecutionReceipt
+ericQ6ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ6LongitudinalInstitutional
+  293
+  "2026-09-19T22:47:56+10:00"
+  "artifacts/digital-esd/eric/Q6/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q6/summary.json); pagination complete"
+  "HTTP 200; numFound=293; 2 pages fetched (293 docs); summarySha256=f96cf23bef0516d4f4fc2fa2d0cfb992cf187c67e7ca7389111b6eedb5122cb0"
+
+ericQ7ObservedExportExecution : DatabaseExecutionReceipt
+ericQ7ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ7OpenInteroperableRepairable
+  1675
+  "2026-09-19T22:49:33+10:00"
+  "artifacts/digital-esd/eric/Q7/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q7/summary.json); pagination complete"
+  "HTTP 200; numFound=1675; 9 pages fetched (1675 docs); summarySha256=2cac198aa4c2270cdc30691edbf67387341026ea77adc671c9007ee1efe4a88d"
+
+canonicalERICObservedExportExecutions : List DatabaseExecutionReceipt
+canonicalERICObservedExportExecutions =
+  ericQ1ObservedExportExecution
+  ∷ ericQ2ObservedExportExecution
+  ∷ ericQ3ObservedExportExecution
+  ∷ ericQ4ObservedExportExecution
+  ∷ ericQ5ObservedExportExecution
+  ∷ ericQ6ObservedExportExecution
+  ∷ ericQ7ObservedExportExecution
+  ∷ []
+
+------------------------------------------------------------------------
+-- 2026-09-19 IEEE Xplore and ACM DL search-result retrieval attempts.
+--
+-- Exact query translations exist, but the current web transport could not
+-- retrieve the live search-result pages. These remain interface failures with
+-- no observed counts/exports and therefore cannot cross the success bridge.
+------------------------------------------------------------------------
+
+ieeeEntrypoint : String
+ieeeEntrypoint = "https://ieeexplore.ieee.org/search/searchresult.jsp"
+
+acmEntrypoint : String
+acmEntrypoint = "https://dl.acm.org/action/doSearch"
+
+ieeeInterfaceFailureOutcome : ExecutionOutcome
+ieeeInterfaceFailureOutcome =
+  interfaceFailureBeforeSubmission
+    "current web transport could not retrieve an IEEE Xplore search-result page for the query-bearing URL"
+
+acmInterfaceFailureOutcome : ExecutionOutcome
+acmInterfaceFailureOutcome =
+  interfaceFailureBeforeSubmission
+    "current web transport could not retrieve an ACM Digital Library search-result page for the query-bearing URL"
+
+ieeeInterfaceFailureExecution : Queries.TranslatedQueryReceipt → DatabaseExecutionReceipt
+ieeeInterfaceFailureExecution q = database-execution-receipt
+  q
+  Search.ieeeXplore
+  true refl
+  false
+  attemptTimestamp20260919
+  ieeeEntrypoint
+  ieeeInterfaceFailureOutcome
+  "ChatGPT web retrieval environment; exact IEEE translation available, live search-result retrieval inaccessible"
+  "attempt receipt only: no observed result page, count, export, deduplication, screening, eligibility or evidence payment is created"
+
+acmInterfaceFailureExecution : Queries.TranslatedQueryReceipt → DatabaseExecutionReceipt
+acmInterfaceFailureExecution q = database-execution-receipt
+  q
+  Search.acmDigitalLibrary
+  true refl
+  false
+  attemptTimestamp20260919
+  acmEntrypoint
+  acmInterfaceFailureOutcome
+  "ChatGPT web retrieval environment; exact ACM translation available, live search-result retrieval inaccessible"
+  "attempt receipt only: no observed result page, count, export, deduplication, screening, eligibility or evidence payment is created"
+
+ieeeQ1Execution : DatabaseExecutionReceipt
+ieeeQ1Execution = ieeeInterfaceFailureExecution Queries.ieeeQ1DigitalEducationESD
+ieeeQ2Execution : DatabaseExecutionReceipt
+ieeeQ2Execution = ieeeInterfaceFailureExecution Queries.ieeeQ2Transformation
+ieeeQ3Execution : DatabaseExecutionReceipt
+ieeeQ3Execution = ieeeInterfaceFailureExecution Queries.ieeeQ3ReflexiveSustainability
+ieeeQ4Execution : DatabaseExecutionReceipt
+ieeeQ4Execution = ieeeInterfaceFailureExecution Queries.ieeeQ4LifecycleCircularity
+ieeeQ5Execution : DatabaseExecutionReceipt
+ieeeQ5Execution = ieeeInterfaceFailureExecution Queries.ieeeQ5ParticipantGovernance
+ieeeQ6Execution : DatabaseExecutionReceipt
+ieeeQ6Execution = ieeeInterfaceFailureExecution Queries.ieeeQ6LongitudinalInstitutional
+ieeeQ7Execution : DatabaseExecutionReceipt
+ieeeQ7Execution = ieeeInterfaceFailureExecution Queries.ieeeQ7OpenInteroperableRepairable
+
+acmQ1Execution : DatabaseExecutionReceipt
+acmQ1Execution = acmInterfaceFailureExecution Queries.acmQ1DigitalEducationESD
+acmQ2Execution : DatabaseExecutionReceipt
+acmQ2Execution = acmInterfaceFailureExecution Queries.acmQ2Transformation
+acmQ3Execution : DatabaseExecutionReceipt
+acmQ3Execution = acmInterfaceFailureExecution Queries.acmQ3ReflexiveSustainability
+acmQ4Execution : DatabaseExecutionReceipt
+acmQ4Execution = acmInterfaceFailureExecution Queries.acmQ4LifecycleCircularity
+acmQ5Execution : DatabaseExecutionReceipt
+acmQ5Execution = acmInterfaceFailureExecution Queries.acmQ5ParticipantGovernance
+acmQ6Execution : DatabaseExecutionReceipt
+acmQ6Execution = acmInterfaceFailureExecution Queries.acmQ6LongitudinalInstitutional
+acmQ7Execution : DatabaseExecutionReceipt
+acmQ7Execution = acmInterfaceFailureExecution Queries.acmQ7OpenInteroperableRepairable
+
+canonicalExecutionReceipts : List DatabaseExecutionReceipt
+canonicalExecutionReceipts =
+  scopusQ1Execution
+  ∷ scopusQ2Execution
+  ∷ scopusQ3Execution
+  ∷ scopusQ4Execution
+  ∷ scopusQ5Execution
+  ∷ scopusQ6Execution
+  ∷ scopusQ7Execution
+  ∷ wosQ1Execution
+  ∷ wosQ2Execution
+  ∷ wosQ3Execution
+  ∷ wosQ4Execution
+  ∷ wosQ5Execution
+  ∷ wosQ6Execution
+  ∷ wosQ7Execution
+  ∷ ericQ1Execution
+  ∷ ericQ2Execution
+  ∷ ericQ3Execution
+  ∷ ericQ4Execution
+  ∷ ericQ5Execution
+  ∷ ericQ6Execution
+  ∷ ericQ7Execution
+  ∷ ieeeQ1Execution
+  ∷ ieeeQ2Execution
+  ∷ ieeeQ3Execution
+  ∷ ieeeQ4Execution
+  ∷ ieeeQ5Execution
+  ∷ ieeeQ6Execution
+  ∷ ieeeQ7Execution
+  ∷ acmQ1Execution
+  ∷ acmQ2Execution
+  ∷ acmQ3Execution
+  ∷ acmQ4Execution
+  ∷ acmQ5Execution
+  ∷ acmQ6Execution
+  ∷ acmQ7Execution
+  ∷ ericQ1ObservedExecution
+  ∷ ericQ2ObservedExecution
+  ∷ ericQ3ObservedExecution
+  ∷ ericQ4ObservedExecution
+  ∷ ericQ5ObservedExecution
+  ∷ ericQ6ObservedExecution
+  ∷ ericQ7ObservedExecution
+  ∷ ericQ1ObservedExportExecution
+  ∷ ericQ2ObservedExportExecution
+  ∷ ericQ3ObservedExportExecution
+  ∷ ericQ4ObservedExportExecution
+  ∷ ericQ5ObservedExportExecution
+  ∷ ericQ6ObservedExportExecution
+  ∷ ericQ7ObservedExportExecution
+  ∷ []
+
+executionReceiptCount : Nat
+executionReceiptCount = 49
+
+------------------------------------------------------------------------
+-- Promotion firewalls.
+------------------------------------------------------------------------
+
+data BlockedExecutionCreatesObservedResultCount : Set where
+data BlockedExecutionCreatesExport : Set where
+data ExecutionReceiptCreatesIncludedCorpus : Set where
+data ExecutionAttemptEqualsQuerySubmission : Set where
+data ResultCountEqualsSearchCompleteness : Set where
+
+blockedExecutionDoesNotCreateObservedResultCount :
+  BlockedExecutionCreatesObservedResultCount → ⊥
+blockedExecutionDoesNotCreateObservedResultCount ()
+
+blockedExecutionDoesNotCreateExport : BlockedExecutionCreatesExport → ⊥
+blockedExecutionDoesNotCreateExport ()
+
+executionReceiptDoesNotCreateIncludedCorpus :
+  ExecutionReceiptCreatesIncludedCorpus → ⊥
+executionReceiptDoesNotCreateIncludedCorpus ()
+
+executionAttemptDoesNotEqualQuerySubmission :
+  ExecutionAttemptEqualsQuerySubmission → ⊥
+executionAttemptDoesNotEqualQuerySubmission ()
+
+resultCountDoesNotEqualSearchCompleteness : ResultCountEqualsSearchCompleteness → ⊥
+resultCountDoesNotEqualSearchCompleteness ()
+
+record DatabaseExecutionBoundary : Set where
+  constructor database-execution-boundary
+  field
+    exactTranslatedQueryRetained : Bool
+    exactTranslatedQueryRetainedIsTrue : exactTranslatedQueryRetained ≡ true
+    attemptTimestampRetained : Bool
+    attemptTimestampRetainedIsTrue : attemptTimestampRetained ≡ true
+    platformEntrypointRetained : Bool
+    platformEntrypointRetainedIsTrue : platformEntrypointRetained ≡ true
+    blockedBeforeSubmissionDistinctFromZeroResults : Bool
+    blockedBeforeSubmissionDistinctFromZeroResultsIsTrue :
+      blockedBeforeSubmissionDistinctFromZeroResults ≡ true
+    blockedExecutionCarriesNoResultCountOrExport : Bool
+    blockedExecutionCarriesNoResultCountOrExportIsTrue :
+      blockedExecutionCarriesNoResultCountOrExport ≡ true
+    successfulExecutionMayRecordSubmittedQuery : Bool
+    successfulExecutionMayRecordSubmittedQueryIsTrue :
+      successfulExecutionMayRecordSubmittedQuery ≡ true
+    executionAttemptCreatesIncludedCorpus : Bool
+    executionAttemptCreatesIncludedCorpusIsFalse :
+      executionAttemptCreatesIncludedCorpus ≡ false
+
+open DatabaseExecutionBoundary public
+
+canonicalDatabaseExecutionBoundary : DatabaseExecutionBoundary
+canonicalDatabaseExecutionBoundary = database-execution-boundary
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
+  false refl
+
+executionReceiptReading : String
+executionReceiptReading =
+  "The append-only execution ledger now contains forty-nine receipts: the original thirty-five platform-specific attempts, seven earlier local ERIC count-only observations, plus seven later local ERIC paginated export executions that successfully submitted the frozen queries to the official public API, observed HTTP 200 JSON numFound counts (Q1=642, Q2=290, Q3=1594, Q4=41889, Q5=214, Q6=293, Q7=1675), and retained all 237 paginated JSON artifacts and SHA-256 digests. Earlier failure and count-only attempts remain append-only provenance. The seven new ERIC receipts use executedWithObservedResultSet with exportObserved, enabling ERIC to cross the structured-search success bridge. Retained exports are now 7/35 query identities, while Scopus, WoS, IEEE, and ACM remain unexecuted or access-blocked."
+

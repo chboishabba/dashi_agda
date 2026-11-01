@@ -1,0 +1,14 @@
+module DASHI.ComputerScience.RSA260BidiHybridTailCostShapeCollisionValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiHybridTailCostShapeCollisionExact as Collision
+
+boundary : Collision.HybridTailCostShapeCollisionBoundary
+boundary = Collision.canonicalHybridTailCostShapeCollisionBoundary
+
+collision :
+  Collision.codecShape Collision.rotate3Tail
+  ≡ Collision.codecShape Collision.affine7Tail
+collision = Collision.rotate3Affine7SameCodecShape
+
+firstResidual : Collision.HybridTailCostShapeResidual
+firstResidual = Collision.firstHybridTailCostShapeResidual

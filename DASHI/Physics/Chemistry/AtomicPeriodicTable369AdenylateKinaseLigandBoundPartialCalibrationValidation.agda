@@ -1,0 +1,22 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandBoundPartialCalibrationValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandBoundPartialCalibrationExact as Target
+
+allEightEnergiesPaid : Bool
+allEightEnergiesPaid = Target.allEightEnergiesPaid
+
+allSixteenRatesPaid : Bool
+allSixteenRatesPaid = Target.allSixteenRatesPaid
+
+closedClusterGeometryPaid : Bool
+closedClusterGeometryPaid = Target.closedClusterGeometryPaid
+
+gammaLExactGeometryPaid : Bool
+gammaLExactGeometryPaid = Target.gammaLExactGeometryPaid
+
+namedIntermediateDLnPaid : Bool
+namedIntermediateDLnPaid = Target.namedIntermediateDLnPaid
+
+boundary = Target.canonicalLigandBoundPartialCalibrationBoundary

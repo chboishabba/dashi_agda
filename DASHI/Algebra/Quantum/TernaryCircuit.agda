@@ -1,0 +1,274 @@
+module DASHI.Algebra.Quantum.TernaryCircuit where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using (List; []; _∷_; map)
+
+import DASHI.Algebra.Trit as Trit
+
+------------------------------------------------------------------------
+-- A finite basis-level qutrit circuit layer.  It is a reversible permutation
+-- semantics, not yet an amplitude/superposition simulator.
+
+data QutritBasis : Set where
+  qNeg : QutritBasis
+  qZero : QutritBasis
+  qPos : QutritBasis
+
+basisToTrit : QutritBasis → Trit.Trit
+basisToTrit qNeg = Trit.neg
+basisToTrit qZero = Trit.zer
+basisToTrit qPos = Trit.pos
+
+tritToBasis : Trit.Trit → QutritBasis
+tritToBasis Trit.neg = qNeg
+tritToBasis Trit.zer = qZero
+tritToBasis Trit.pos = qPos
+
+basisToTrit-tritToBasis :
+  ∀ t →
+  basisToTrit (tritToBasis t) ≡ t
+basisToTrit-tritToBasis Trit.neg = refl
+basisToTrit-tritToBasis Trit.zer = refl
+basisToTrit-tritToBasis Trit.pos = refl
+
+tritToBasis-basisToTrit :
+  ∀ q →
+  tritToBasis (basisToTrit q) ≡ q
+tritToBasis-basisToTrit qNeg = refl
+tritToBasis-basisToTrit qZero = refl
+tritToBasis-basisToTrit qPos = refl
+
+cycleQutrit : QutritBasis → QutritBasis
+cycleQutrit qNeg = qZero
+cycleQutrit qZero = qPos
+cycleQutrit qPos = qNeg
+
+inverseCycleQutrit : QutritBasis → QutritBasis
+inverseCycleQutrit qNeg = qPos
+inverseCycleQutrit qZero = qNeg
+inverseCycleQutrit qPos = qZero
+
+cycle³ : ∀ q → cycleQutrit (cycleQutrit (cycleQutrit q)) ≡ q
+cycle³ qNeg = refl
+cycle³ qZero = refl
+cycle³ qPos = refl
+
+inverseCycleLeft :
+  ∀ q →
+  inverseCycleQutrit (cycleQutrit q) ≡ q
+inverseCycleLeft qNeg = refl
+inverseCycleLeft qZero = refl
+inverseCycleLeft qPos = refl
+
+inverseCycleRight :
+  ∀ q →
+  cycleQutrit (inverseCycleQutrit q) ≡ q
+inverseCycleRight qNeg = refl
+inverseCycleRight qZero = refl
+inverseCycleRight qPos = refl
+
+data QutritGate : Set where
+  identityGate : QutritGate
+  cycleGate : QutritGate
+  inverseCycleGate : QutritGate
+
+applyGate : QutritGate → QutritBasis → QutritBasis
+applyGate identityGate q = q
+applyGate cycleGate q = cycleQutrit q
+applyGate inverseCycleGate q = inverseCycleQutrit q
+
+inverseGate : QutritGate → QutritGate
+inverseGate identityGate = identityGate
+inverseGate cycleGate = inverseCycleGate
+inverseGate inverseCycleGate = cycleGate
+
+inverseGateLeft :
+  ∀ g q →
+  applyGate (inverseGate g) (applyGate g q) ≡ q
+inverseGateLeft identityGate q = refl
+inverseGateLeft cycleGate q = inverseCycleLeft q
+inverseGateLeft inverseCycleGate q = inverseCycleRight q
+
+inverseGateRight :
+  ∀ g q →
+  applyGate g (applyGate (inverseGate g) q) ≡ q
+inverseGateRight identityGate q = refl
+inverseGateRight cycleGate q = inverseCycleRight q
+inverseGateRight inverseCycleGate q = inverseCycleLeft q
+
+------------------------------------------------------------------------
+-- Two-qutrit reversible gates.  `controlledCycle` is the ternary SUM gate on
+-- the basis encoding qNeg=0, qZero=1, qPos=2; `swapPair` is self-inverse.
+
+record QutritPair : Set where
+  constructor qpair
+  field
+    control : QutritBasis
+    target : QutritBasis
+
+open QutritPair public
+
+controlledCycle : QutritPair → QutritPair
+controlledCycle (qpair qNeg targetValue) =
+  qpair qNeg targetValue
+controlledCycle (qpair qZero targetValue) =
+  qpair qZero (cycleQutrit targetValue)
+controlledCycle (qpair qPos targetValue) =
+  qpair qPos (inverseCycleQutrit targetValue)
+
+inverseControlledCycle : QutritPair → QutritPair
+inverseControlledCycle (qpair qNeg targetValue) =
+  qpair qNeg targetValue
+inverseControlledCycle (qpair qZero targetValue) =
+  qpair qZero (inverseCycleQutrit targetValue)
+inverseControlledCycle (qpair qPos targetValue) =
+  qpair qPos (cycleQutrit targetValue)
+
+controlledCycleInverseLeft :
+  ∀ pair →
+  inverseControlledCycle (controlledCycle pair) ≡ pair
+controlledCycleInverseLeft (qpair qNeg targetValue) = refl
+controlledCycleInverseLeft (qpair qZero targetValue)
+  rewrite inverseCycleLeft targetValue = refl
+controlledCycleInverseLeft (qpair qPos targetValue)
+  rewrite inverseCycleRight targetValue = refl
+
+controlledCycleInverseRight :
+  ∀ pair →
+  controlledCycle (inverseControlledCycle pair) ≡ pair
+controlledCycleInverseRight (qpair qNeg targetValue) = refl
+controlledCycleInverseRight (qpair qZero targetValue)
+  rewrite inverseCycleRight targetValue = refl
+controlledCycleInverseRight (qpair qPos targetValue)
+  rewrite inverseCycleLeft targetValue = refl
+
+swapPair : QutritPair → QutritPair
+swapPair (qpair first second) = qpair second first
+
+swapPairInvolutive :
+  ∀ pair →
+  swapPair (swapPair pair) ≡ pair
+swapPairInvolutive (qpair first second) = refl
+
+data QutritPairGate : Set where
+  pairIdentityGate : QutritPairGate
+  controlledCycleGate : QutritPairGate
+  inverseControlledCycleGate : QutritPairGate
+  swapPairGate : QutritPairGate
+
+applyPairGate : QutritPairGate → QutritPair → QutritPair
+applyPairGate pairIdentityGate pair = pair
+applyPairGate controlledCycleGate pair = controlledCycle pair
+applyPairGate inverseControlledCycleGate pair = inverseControlledCycle pair
+applyPairGate swapPairGate pair = swapPair pair
+
+inversePairGate : QutritPairGate → QutritPairGate
+inversePairGate pairIdentityGate = pairIdentityGate
+inversePairGate controlledCycleGate = inverseControlledCycleGate
+inversePairGate inverseControlledCycleGate = controlledCycleGate
+inversePairGate swapPairGate = swapPairGate
+
+inversePairGateLeft :
+  ∀ gate pair →
+  applyPairGate (inversePairGate gate) (applyPairGate gate pair) ≡ pair
+inversePairGateLeft pairIdentityGate pair = refl
+inversePairGateLeft controlledCycleGate pair = controlledCycleInverseLeft pair
+inversePairGateLeft inverseControlledCycleGate pair = controlledCycleInverseRight pair
+inversePairGateLeft swapPairGate pair = swapPairInvolutive pair
+
+inversePairGateRight :
+  ∀ gate pair →
+  applyPairGate gate (applyPairGate (inversePairGate gate) pair) ≡ pair
+inversePairGateRight pairIdentityGate pair = refl
+inversePairGateRight controlledCycleGate pair = controlledCycleInverseRight pair
+inversePairGateRight inverseControlledCycleGate pair = controlledCycleInverseLeft pair
+inversePairGateRight swapPairGate pair = swapPairInvolutive pair
+
+------------------------------------------------------------------------
+-- Single-qutrit circuit composition.
+
+data QutritCircuit : Set where
+  halt : QutritCircuit
+  applyThen : QutritGate → QutritCircuit → QutritCircuit
+
+runCircuit : QutritCircuit → QutritBasis → QutritBasis
+runCircuit halt q = q
+runCircuit (applyThen g rest) q = runCircuit rest (applyGate g q)
+
+appendCircuit : QutritCircuit → QutritCircuit → QutritCircuit
+appendCircuit halt right = right
+appendCircuit (applyThen g left) right =
+  applyThen g (appendCircuit left right)
+
+runAppendCircuit :
+  ∀ left right q →
+  runCircuit (appendCircuit left right) q
+  ≡ runCircuit right (runCircuit left q)
+runAppendCircuit halt right q = refl
+runAppendCircuit (applyThen g left) right q =
+  runAppendCircuit left right (applyGate g q)
+
+reverseCircuit : QutritCircuit → QutritCircuit
+reverseCircuit halt = halt
+reverseCircuit (applyThen g rest) =
+  appendCircuit
+    (reverseCircuit rest)
+    (applyThen (inverseGate g) halt)
+
+reverseCircuitLeft :
+  ∀ circuit q →
+  runCircuit (reverseCircuit circuit) (runCircuit circuit q) ≡ q
+reverseCircuitLeft halt q = refl
+reverseCircuitLeft (applyThen g rest) q
+  rewrite runAppendCircuit
+            (reverseCircuit rest)
+            (applyThen (inverseGate g) halt)
+            (runCircuit rest (applyGate g q))
+        | reverseCircuitLeft rest (applyGate g q) =
+  inverseGateLeft g q
+
+QutritRegister : Set
+QutritRegister = List QutritBasis
+
+applyGateToRegister : QutritGate → QutritRegister → QutritRegister
+applyGateToRegister g = map (applyGate g)
+
+runCircuitOnRegister : QutritCircuit → QutritRegister → QutritRegister
+runCircuitOnRegister halt qs = qs
+runCircuitOnRegister (applyThen g rest) qs =
+  runCircuitOnRegister rest (applyGateToRegister g qs)
+
+record FiniteQutritPermutationSemantics : Set₁ where
+  field
+    basis : Set
+    gate : Set
+    apply : gate → basis → basis
+    inverse : gate → gate
+    inverseLeft : ∀ g q → apply (inverse g) (apply g q) ≡ q
+    inverseRight : ∀ g q → apply g (apply (inverse g) q) ≡ q
+
+open FiniteQutritPermutationSemantics public
+
+canonicalFiniteQutritPermutationSemantics :
+  FiniteQutritPermutationSemantics
+canonicalFiniteQutritPermutationSemantics =
+  record
+    { basis = QutritBasis
+    ; gate = QutritGate
+    ; apply = applyGate
+    ; inverse = inverseGate
+    ; inverseLeft = inverseGateLeft
+    ; inverseRight = inverseGateRight
+    }
+
+canonicalFiniteQutritPairPermutationSemantics :
+  FiniteQutritPermutationSemantics
+canonicalFiniteQutritPairPermutationSemantics =
+  record
+    { basis = QutritPair
+    ; gate = QutritPairGate
+    ; apply = applyPairGate
+    ; inverse = inversePairGate
+    ; inverseLeft = inversePairGateLeft
+    ; inverseRight = inversePairGateRight
+    }

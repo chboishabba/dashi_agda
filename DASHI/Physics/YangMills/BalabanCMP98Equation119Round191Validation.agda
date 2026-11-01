@@ -1,0 +1,120 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanCMP98Equation119Round191Validation where
+
+import DASHI.Physics.YangMills.BalabanCMP98RawUnitPathHomomorphismRound189Exact as R189
+import DASHI.Physics.YangMills.BalabanCMP98ClayBoundarySupersessionRound190Exact as R190
+import DASHI.Physics.YangMills.BalabanCMP98BidiWallRound191Exact as R191
+import DASHI.Physics.YangMills.BalabanCMP98Path13PhysicalPeriodicRealizationRound192Exact as R192
+import DASHI.Physics.YangMills.BalabanCMP98Path13Equation119SourceRound193Exact as R193
+import DASHI.Physics.YangMills.BalabanRootedCoarseAnchoredOrbitSectionRound194Exact as R194
+import DASHI.Physics.YangMills.BalabanCMP109RootedEquation012OrbitSectionRound195Exact as R195
+import DASHI.Physics.YangMills.BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact as R196
+import DASHI.Physics.YangMills.BalabanFiniteRootedGaugeQuotientL2Round197Exact as R197
+import DASHI.Physics.YangMills.BalabanFiniteQuotientTerminalSupersessionRound198Exact as R198
+import DASHI.Physics.YangMills.BalabanRootedQuotientHamiltonianDescentRound199Exact as R199
+import DASHI.Physics.YangMills.BalabanBasedGaugeActionGroupoidRound200Exact as R200
+import DASHI.Physics.YangMills.BalabanRootedHamiltonianGaugeFunctorRound201Exact as R201
+import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
+import DASHI.Physics.YangMills.BalabanFiniteSampleObservablePairingRound203Exact as R203
+import DASHI.Physics.YangMills.BalabanEquation119DerivativeDoesNotDetermineAverageRound204Exact as R204
+
+round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
+round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
+round191WallAudit = R191.cmp98BidiWallAuditRound191Level
+
+round191HistoricalGenericSourceWall =
+  R191.literalArbitraryPeriodicSelectedBackgroundProducerRound191Level
+
+round192Path13PhysicalRealization =
+  R192.cmp98Path13PhysicalPeriodicRealizationRound192Level
+round192Path13CarrierSameObject =
+  R192.cmp98Path13PhysicalCarrierSameObjectRound192Level
+round192Path13PathErasure =
+  R192.cmp98Path13PeriodicPathErasureRound192Level
+
+round193Path13Equation119Source =
+  R193.cmp98Path13Equation119SourceRound193Level
+round193PhysicalRealizationDerived =
+  R193.cmp98Path13RealizationDerivedRound193Level
+round193OperatorSourceSemantics =
+  R193.literalCMP98Path13OperatorSourceSemanticsRound193Level
+round193SelectedBackgroundCutWeld =
+  R193.literalCMP98Path13SelectedBackgroundCutWeldRound193Level
+
+-- R204 sharpens the remaining qSource part: Eq.(119) constructs qPrime but the
+-- underlying one-step Q(V0) cannot factor through the derivative observation.
+round204DerivativeCollision =
+  R204.equation119DerivativeCollisionRound204Level
+round204QSourceDoesNotFollowFromQPrime =
+  R204.qSourceDoesNotFollowFromQPrimeRound204Level
+round204LiteralOneStepAverageQSource =
+  R204.literalCMP98OneStepAverageQSourceSameObjectRound204Level
+
+round194RootedCoarseAnchoredOrbitSection =
+  R194.cmp98RootedCoarseAnchoredOrbitSectionRound194Level
+round194RootedOrbitUniqueness =
+  R194.cmp98RootedCoarseAnchoredOrbitUniquenessRound194Level
+
+round195RootedEquation012OrbitSection =
+  R195.cmp109RootedEquation012OrbitSectionRound195Level
+round195RootedEquation012MapPreservation =
+  R195.cmp109RootedEquation012MapPreservationRound195Level
+round195GaugeActionPhysical =
+  R195.literalCMP109Equation012GaugeActionPhysicalRound195Level
+round195CoarseEndpointsAreRoot =
+  R195.literalCMP109Equation012CoarseEndpointsAreRootRound195Level
+round195IdentityIsPhysicalUnit =
+  R195.literalCMP109Equation012IdentityIsPhysicalUnitRound195Level
+
+round196FinitePhysicalGaugeQuotientCarrier =
+  R196.finitePhysicalGaugeQuotientCarrierRound196Level
+round196FiniteGaugeQuotientIdempotence =
+  R196.finitePhysicalGaugeQuotientIdempotenceRound196Level
+round196FiniteGaugeQuotientUniqueness =
+  R196.finitePhysicalGaugeQuotientUniquenessRound196Level
+round196FiniteGaugeQuotientSelectedFibreCompatibility =
+  R196.finitePhysicalGaugeQuotientSelectedFibreCompatibilityRound196Level
+
+-- Historical R197 used the exhaustive FiniteSelector carrier as though it were
+-- merely a finite ensemble. R203 is the corrected weaker sample-local surface.
+round197HistoricalExhaustiveSelectorPairing =
+  R197.finiteRootedGaugeQuotientL2PairingRound197Level
+round203FiniteSamplePairing =
+  R203.finiteSampleObservablePairingRound203Level
+round203SampleVsExhaustiveSelectorSeparation =
+  R203.finiteSampleExhaustiveSelectorSeparationRound203Level
+
+round198FiniteRepresentativeCarrierConstructed =
+  R198.finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level
+
+-- Historical R199-R201 field-endomorphism Hamiltonian plumbing is retained only
+-- as audit history. R202 corrects the semantic carrier: H acts on invariant
+-- wavefunctions/observables over configuration space, not on gauge fields.
+round199HistoricalFieldEndomorphismDescent =
+  R199.rootedQuotientHamiltonianDescentRound199Level
+round200BasedGaugeActionGroupoid =
+  R200.basedGaugeActionGroupoidRound200Level
+round201HistoricalFieldHamiltonianFunctor =
+  R201.rootedHamiltonianGaugeFunctorRound201Level
+
+round202GaugeInvariantWavefunctionCarrier =
+  R202.basedGaugeInvariantWavefunctionCarrierRound202Level
+round202RootedQuotientEvaluation =
+  R202.rootedQuotientWavefunctionEvaluationRound202Level
+round202OperatorNormalizationHandoff =
+  R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
+
+round202PhysicalGaugeInvariantL2Measure =
+  R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
+round203PhysicalHaarGibbsL2NotFiniteSample =
+  R203.literalPhysicalHaarGibbsL2FromFiniteSampleRound203Level
+round202FiniteYMHamiltonianOnWavefunctions =
+  R202.literalFiniteYMHamiltonianOnGaugeInvariantWavefunctionsRound202Level
+round202FiniteYMHamiltonianSelfAdjointness =
+  R202.literalFiniteYMHamiltonianSymmetricSelfAdjointRound202Level
+round198FiniteToContinuumCarrierMaps =
+  R198.literalFiniteToContinuumPhysicalCarrierMapsRound198Level
+round198ProjectionVacuumCompatibility =
+  R198.literalPhysicalProjectionAndVacuumSectorCompatibilityRound198Level
+
+round191TerminalClayWall = R191.literalTerminalClayCompositionTheoremRound191Level

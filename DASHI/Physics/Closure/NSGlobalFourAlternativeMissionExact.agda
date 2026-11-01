@@ -1,0 +1,270 @@
+module DASHI.Physics.Closure.NSGlobalFourAlternativeMissionExact where
+
+------------------------------------------------------------------------
+-- GLOBAL NAVIER--STOKES FOUR-ALTERNATIVE MISSION
+--
+-- Source authority: Charles L. Fefferman, "Existence and Smoothness of the
+-- Navier--Stokes Equation", Clay Mathematics Institute Millennium Problem
+-- description (2000). DOI not assigned to the official problem description.
+--
+-- This owner is deliberately STRONGER than the Clay award criterion:
+-- official Clay mathematical resolution needs any one of A/B/C/D; DASHI's
+-- global research mission independently tracks A AND B AND C AND D.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+
+import DASHI.Physics.Closure.NSTriadKNPeriodicNavierStokesSubmissionTheoremExact as BSurface
+import DASHI.Physics.Closure.NSTriadKNClayForcedBreakdownFormulationRound523Exact as CD
+import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact as LeafA
+import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as Cut
+import DASHI.Physics.Closure.NSFirstImplementationPriorityLedgerExact as Priority
+import DASHI.Physics.Closure.NSClayLiteralABCDExact as Literal
+import DASHI.Physics.Closure.NSClayFacingABCDProofStatusExact as ClayFacing
+
+data NSAlternative : Set where
+  A-euclidean-unforced-global : NSAlternative
+  B-periodic-unforced-global : NSAlternative
+  C-euclidean-forced-breakdown : NSAlternative
+  D-periodic-forced-breakdown : NSAlternative
+
+data NSDomain : Set where
+  euclideanR3 : NSDomain
+  periodicT3 : NSDomain
+
+data NSForcingRegime : Set where
+  unforced : NSForcingRegime
+  smoothForced : NSForcingRegime
+
+domainOf : NSAlternative → NSDomain
+domainOf A-euclidean-unforced-global = euclideanR3
+domainOf B-periodic-unforced-global = periodicT3
+domainOf C-euclidean-forced-breakdown = euclideanR3
+domainOf D-periodic-forced-breakdown = periodicT3
+
+forcingOf : NSAlternative → NSForcingRegime
+forcingOf A-euclidean-unforced-global = unforced
+forcingOf B-periodic-unforced-global = unforced
+forcingOf C-euclidean-forced-breakdown = smoothForced
+forcingOf D-periodic-forced-breakdown = smoothForced
+
+data StatementAuthority : Set where
+  feffermanOfficialStatement : StatementAuthority
+  dashiTypedReconstruction : StatementAuthority
+  externalReleasedFormalProofSource : StatementAuthority
+
+data InternalPaymentStatus : Set where
+  internallyOpen : InternalPaymentStatus
+  internallyPaid : InternalPaymentStatus
+
+record AlternativeMissionStatus : Set where
+  constructor alternative-mission-status
+  field
+    alternative : NSAlternative
+    authority : StatementAuthority
+    sourceStatementAligned : Bool
+    internalPayment : InternalPaymentStatus
+
+open AlternativeMissionStatus public
+
+statusA : AlternativeMissionStatus
+statusA = alternative-mission-status
+  A-euclidean-unforced-global feffermanOfficialStatement true internallyOpen
+statusB : AlternativeMissionStatus
+statusB = alternative-mission-status
+  B-periodic-unforced-global dashiTypedReconstruction
+  BSurface.submissionTheoremStatementConstructed internallyOpen
+statusC : AlternativeMissionStatus
+statusC = alternative-mission-status
+  C-euclidean-forced-breakdown externalReleasedFormalProofSource true internallyOpen
+statusD : AlternativeMissionStatus
+statusD = alternative-mission-status
+  D-periodic-forced-breakdown externalReleasedFormalProofSource true internallyOpen
+
+externalCDReleaseDate : String
+externalCDReleaseDate = "2026-09-08"
+
+cMapsToRound523 : CD.ClayBreakdownAlternative523
+cMapsToRound523 = CD.clayAlternativeC523
+dMapsToRound523 : CD.ClayBreakdownAlternative523
+dMapsToRound523 = CD.clayAlternativeD523
+
+unforcedLeafAIsCanonicalSingleR503Budget : Bool
+unforcedLeafAIsCanonicalSingleR503Budget =
+  LeafA.round592CanonicalLeafAIsSingleDirectOffDiagonalBudget
+unforcedLeafAPaid : Bool
+unforcedLeafAPaid = LeafA.round592CanonicalLeafAClosed
+unforcedLeafBIndependent : Bool
+unforcedLeafBIndependent = true
+unforcedLeafBPaid : Bool
+unforcedLeafBPaid = Cut.round504CriticalProductionSliceClosed
+
+data PaymentA : Set where
+data PaymentB : Set where
+data PaymentC : Set where
+data PaymentD : Set where
+
+record GlobalFourAlternativeCompletion : Set where
+  constructor global-four-alternative-completion
+  field
+    paymentA : PaymentA
+    paymentB : PaymentB
+    paymentC : PaymentC
+    paymentD : PaymentD
+
+open GlobalFourAlternativeCompletion public
+
+data AnyOneClayAlternativePayment : Set where
+  paidA : PaymentA → AnyOneClayAlternativePayment
+  paidB : PaymentB → AnyOneClayAlternativePayment
+  paidC : PaymentC → AnyOneClayAlternativePayment
+  paidD : PaymentD → AnyOneClayAlternativePayment
+
+allFourImpliesAtLeastOneClayAlternative :
+  GlobalFourAlternativeCompletion → AnyOneClayAlternativePayment
+allFourImpliesAtLeastOneClayAlternative completion = paidA (paymentA completion)
+
+------------------------------------------------------------------------
+-- Canonical proposition-level endpoint.
+--
+-- The legacy PaymentA/B/C/D tokens above remain for compatibility with older
+-- coordinator consumers.  New theorem-facing work should use the literal
+-- Fefferman propositions below: these are the actual A/B/C/D theorem types,
+-- not scheduler tokens.
+------------------------------------------------------------------------
+
+LiteralClayABCDInstance : Set₂
+LiteralClayABCDInstance = Literal.LiteralClayABCDInstance
+
+LiteralGlobalFourAlternativeCompletion :
+  LiteralClayABCDInstance → Set₂
+LiteralGlobalFourAlternativeCompletion =
+  Literal.LiteralFourAlternativeCompletion
+
+LiteralAnyOneClayResolution :
+  LiteralClayABCDInstance → Set₂
+LiteralAnyOneClayResolution =
+  Literal.AnyOneClayResolution
+
+literalGlobalAllFourImpliesAnyOneClayResolution :
+  ∀ {instance} →
+  LiteralGlobalFourAlternativeCompletion instance →
+  LiteralAnyOneClayResolution instance
+literalGlobalAllFourImpliesAnyOneClayResolution =
+  Literal.literalAllFourImpliesAnyOne
+
+data OneAlternativeAutomaticallyPaysAllFour : Set where
+oneAlternativeDoesNotAutomaticallyPayAllFour :
+  OneAlternativeAutomaticallyPaysAllFour → ⊥
+oneAlternativeDoesNotAutomaticallyPayAllFour ()
+
+data ForcedPaysUnforced : Set where
+data PeriodicPaysEuclidean : Set where
+data ExternalSourcePaysInternalProof : Set where
+data TimestampPaysMathematics : Set where
+
+forcedDoesNotPayUnforced : ForcedPaysUnforced → ⊥
+forcedDoesNotPayUnforced ()
+periodicDoesNotPayEuclidean : PeriodicPaysEuclidean → ⊥
+periodicDoesNotPayEuclidean ()
+externalSourceDoesNotPayInternalProof : ExternalSourcePaysInternalProof → ⊥
+externalSourceDoesNotPayInternalProof ()
+timestampDoesNotPayMathematics : TimestampPaysMathematics → ⊥
+timestampDoesNotPayMathematics ()
+
+data GlobalNSResidual : Set where
+  proveUnforcedLeafA : GlobalNSResidual
+  proveUnforcedLeafB : GlobalNSResidual
+  weldPeriodicBToCompleteSubmission : GlobalNSResidual
+  transportPeriodicToEuclideanA : GlobalNSResidual
+  independentlyReconstructExternalC : GlobalNSResidual
+  independentlyReconstructExternalD : GlobalNSResidual
+  globalAllFourComplete : GlobalNSResidual
+
+currentFirstIndependentUnforcedResidual : GlobalNSResidual
+currentFirstIndependentUnforcedResidual = proveUnforcedLeafA
+currentFirstExternalReconstructionResidual : GlobalNSResidual
+currentFirstExternalReconstructionResidual = independentlyReconstructExternalC
+
+------------------------------------------------------------------------
+-- Clay-facing routing after source-exact C/D audit.
+--
+-- C/D independent Agda reconstruction remains available as an optional
+-- verification programme, but it is no longer the first mathematical residual.
+------------------------------------------------------------------------
+
+clayFacingCSourceExact : Bool
+clayFacingCSourceExact = ClayFacing.cReleasedSourceExact
+
+clayFacingDSourceExact : Bool
+clayFacingDSourceExact = ClayFacing.dReleasedSourceExact
+
+clayFacingCDSourceAlignmentClosed : Bool
+clayFacingCDSourceAlignmentClosed =
+  ClayFacing.cdReleasedSourceAlignmentClosed
+
+clayFacingCDRequiresIndependentAgdaReconstruction : Bool
+clayFacingCDRequiresIndependentAgdaReconstruction =
+  ClayFacing.cdIndependentAgdaReconstructionGatesClayFacingAudit
+
+internalResearchPriorityA : ClayFacing.ActiveAction
+internalResearchPriorityA = ClayFacing.proveInternalSameObjectLeaf
+
+internalResearchPriorityB : ClayFacing.ActiveAction
+internalResearchPriorityB = ClayFacing.proveInternalSameObjectLeaf
+
+externalReconstructionIsOptionalVerification : Bool
+externalReconstructionIsOptionalVerification = true
+
+-- Authoritative research scheduler.  The older GlobalNSResidual values are
+-- retained for compatibility with historical dashboards only.
+data ClayFacingResearchResidual : Set where
+  provePeriodicBPhysicalSameObject : ClayFacingResearchResidual
+  proveEuclideanAPhysicalSameObject : ClayFacingResearchResidual
+  optionalReconstructExternalC : ClayFacingResearchResidual
+  optionalReconstructExternalD : ClayFacingResearchResidual
+  noInternalResearchResidual : ClayFacingResearchResidual
+
+currentClayFacingResearchResidual : ClayFacingResearchResidual
+currentClayFacingResearchResidual = provePeriodicBPhysicalSameObject
+
+nextClayFacingResearchResidual : ClayFacingResearchResidual
+nextClayFacingResearchResidual = proveEuclideanAPhysicalSameObject
+
+cIndependentReconstructionResearchPriority : Bool
+cIndependentReconstructionResearchPriority = false
+
+dIndependentReconstructionResearchPriority : Bool
+dIndependentReconstructionResearchPriority = false
+
+bPrimaryActiveResearchLane : Bool
+bPrimaryActiveResearchLane = true
+
+aSecondaryActiveResearchLane : Bool
+aSecondaryActiveResearchLane = true
+
+roundGlobalFourAlternativeMissionImplemented : Bool
+roundGlobalFourAlternativeMissionImplemented = true
+roundGlobalAllFourInternallyPaid : Bool
+roundGlobalAllFourInternallyPaid = false
+roundOfficialClayAnyOneCriterionSeparatedFromAllFourMission : Bool
+roundOfficialClayAnyOneCriterionSeparatedFromAllFourMission = true
+roundPriorityChronologyDoesNotPromoteNS : Bool
+roundPriorityChronologyDoesNotPromoteNS =
+  Priority.r503AnalyticPaymentWasAlreadyProvedByThatConsumerCommit
+
+roundGlobalFourAlternativeMissionImplementedIsTrue :
+  roundGlobalFourAlternativeMissionImplemented ≡ true
+roundGlobalFourAlternativeMissionImplementedIsTrue = refl
+roundGlobalAllFourInternallyPaidIsFalse :
+  roundGlobalAllFourInternallyPaid ≡ false
+roundGlobalAllFourInternallyPaidIsFalse = refl
+roundOfficialClayAnyOneCriterionSeparatedFromAllFourMissionIsTrue :
+  roundOfficialClayAnyOneCriterionSeparatedFromAllFourMission ≡ true
+roundOfficialClayAnyOneCriterionSeparatedFromAllFourMissionIsTrue = refl
+roundPriorityChronologyDoesNotPromoteNSIsFalse :
+  roundPriorityChronologyDoesNotPromoteNS ≡ false
+roundPriorityChronologyDoesNotPromoteNSIsFalse = refl

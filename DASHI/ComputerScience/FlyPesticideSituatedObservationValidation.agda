@@ -1,0 +1,25 @@
+module DASHI.ComputerScience.FlyPesticideSituatedObservationValidation where
+
+open import DASHI.Core.Prelude
+import DASHI.ComputerScience.FlyPesticideSituatedObservationExact as Situated
+
+boundary : Situated.FlyPesticideSituatedObservationBoundary
+boundary = Situated.canonicalFlyPesticideSituatedObservationBoundary
+
+pesticideIdentityInsufficient : Bool
+pesticideIdentityInsufficient = Situated.pesticideIdentityInsufficientForObservation boundary
+
+speciesIdentityInsufficient : Bool
+speciesIdentityInsufficient = Situated.speciesIdentityInsufficientForObservation boundary
+
+measurementDefinitionRetained : Bool
+measurementDefinitionRetained = Situated.measurementDefinitionRetained boundary
+
+exposureWindowRetained : Bool
+exposureWindowRetained = Situated.exposureWindowRetained boundary
+
+sourceProvenanceRetained : Bool
+sourceProvenanceRetained = Situated.sourceProvenanceRetained boundary
+
+connectomeFibreCreatesToxicologyMechanism : Bool
+connectomeFibreCreatesToxicologyMechanism = Situated.connectomeFibreCreatesToxicologyMechanism boundary

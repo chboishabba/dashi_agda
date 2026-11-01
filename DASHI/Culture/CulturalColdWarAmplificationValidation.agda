@@ -1,0 +1,3 @@
+module DASHI.Culture.CulturalColdWarAmplificationValidation where
+
+import DASHI.Culture.CulturalColdWarAmplificationEverything

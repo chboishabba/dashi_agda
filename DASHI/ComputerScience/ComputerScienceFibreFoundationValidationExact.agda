@@ -1,0 +1,85 @@
+module DASHI.ComputerScience.ComputerScienceFibreFoundationValidationExact where
+
+------------------------------------------------------------------------
+-- SMALL VALIDATION ROOT FOR THE CLASSICAL / REPRESENTATION CS SPINE
+------------------------------------------------------------------------
+
+import DASHI.ComputerScience.FibreMachineFoundation369Exact
+import DASHI.ComputerScience.TemporalStorageFibreExact
+import DASHI.ComputerScience.FibreProgramComplexityExact
+import DASHI.ComputerScience.AgdaElaborationResidencyComplexityExact
+import DASHI.ComputerScience.AgdaProfilerObservationFibreExact
+import DASHI.ComputerScience.AgdaProofDebtFibrePreparationExact
+import DASHI.ComputerScience.StreamingResidencyComplexityErrorDNABidiExact
+
+import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact
+import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact
+import DASHI.ComputerScience.BinaryThreeBitTrit27FibreLiftExact
+import DASHI.ComputerScience.FixedNineBitFramed27WordStorageExact
+import DASHI.ComputerScience.HelloWorldFibreExact
+import DASHI.ComputerScience.HelloWorldStoredProgramMachineExact
+import DASHI.ComputerScience.HelloWorldEncodedWordMachineExact
+import DASHI.ComputerScience.HelloWorldTemporalStorageHyperfibreExact
+import DASHI.ComputerScience.HelloWorldBalancedTritStorageFibreExact
+import DASHI.ComputerScience.HelloWorldJacquardExact
+import DASHI.ComputerScience.HelloWorldFibreComplexityCrossCodecExact
+import DASHI.ComputerScience.HelloWorldExecutionPathComplexityExact
+import DASHI.ComputerScience.HelloWorldBinaryTernaryFramedWordStorageExact
+import DASHI.ComputerScience.HelloWorldBinaryTernaryExecutionPathBidiExact
+import DASHI.ComputerScience.HelloWorldBinaryTernaryExecutionCostComparisonExact
+import DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact
+import DASHI.ComputerScience.CountdownExecutionPathComplexityExact
+import DASHI.ComputerScience.EuclidGCDRegisterMachineExact
+import DASHI.ComputerScience.EuclidGCDBinaryTernaryRegisterFibreExact
+import DASHI.ComputerScience.ModularExponentiationRegisterMachineExact
+import DASHI.ComputerScience.ClassicalOrderFindingRegisterMachineExact
+import DASHI.ComputerScience.TinyISAClosedProgramCodebookFibreExact
+import DASHI.ComputerScience.ShorFactoringToClassicalBinaryTernaryMachineExact
+import DASHI.ComputerScience.ShorFactoringClassicalExecutionDescentExact
+import DASHI.ComputerScience.ShorStandardBinaryTernaryStoredProgramComputerExact
+import DASHI.ComputerScience.FactorProducerReceiptExact
+import DASHI.ComputerScience.SelfReferenceLimitsNamedPhenomenaBridgeExact
+import DASHI.ComputerScience.ExecutableHaltingCertificateFibreExact
+import DASHI.ComputerScience.BoundedBusyBeaverExecutionEnvelopeExact
+import DASHI.ComputerScience.ProgramInputSemanticNonDescentExact
+import DASHI.ComputerScience.FiniteBoundedSemanticDecisionExact
+import DASHI.ComputerScience.FiniteDecisionConsumerDescentBridgeExact
+import DASHI.ComputerScience.TernaryResidualBinaryDecisionRefinementExact
+import DASHI.ComputerScience.Ternary27ResidualProgramDecisionBridgeExact
+import DASHI.ComputerScience.TernarySemanticDecisionRefinementExact
+import DASHI.ComputerScience.ConsumerIndexedTernarySearchKernelExact
+import DASHI.ComputerScience.RuntimeTernaryDecisionKernelBridgeExact
+import DASHI.ComputerScience.TernaryProofSearchDecisionDebtBridgeExact
+import DASHI.ComputerScience.TernaryProofCandidateStatusBridgeExact
+import DASHI.ComputerScience.TernaryDecisionCertificationProductExact
+import DASHI.ComputerScience.ComputabilityRecentFormalisationSOTAExact
+import DASHI.ComputerScience.UniversalComputabilityExternalResultExact
+import DASHI.ComputerScience.IsabelleAFPBusyBeaverAdapterTargetExact
+
+import DASHI.ComputerScience.GodelTuringNamedLimitsSourceStatusAtlasExact
+import DASHI.ComputerScience.GodelDiagonalProvabilityContractExact
+import DASHI.ComputerScience.GodelArithmetisedFormalSystemShapeAuthorityExact
+import DASHI.ComputerScience.GodelExternalArithmeticABIMinimalCompilerExact
+import DASHI.ComputerScience.GodelExternalDiagonalResultCompilerExact
+import DASHI.ComputerScience.GodelExternalProvabilityResultCompilerExact
+import DASHI.ComputerScience.GodelArithmeticRawSyntaxExact
+import DASHI.ComputerScience.GodelArithmeticDeBruijnInstantiationExact
+import DASHI.ComputerScience.GodelArithmeticPrefixStreamCodecExact
+import DASHI.ComputerScience.GodelArithmeticBase12StreamStepExact
+import DASHI.ComputerScience.GodelArithmeticBase12NatRetractionExact
+import DASHI.ComputerScience.GodelArithmetisedSubstitutionCompilerExact
+import DASHI.ComputerScience.GodelDiagonalConcreteFirstResidualExact
+import DASHI.ComputerScience.GodelPrimitiveRecursiveRepresentabilityBridgeExact
+import DASHI.ComputerScience.GodelTheoremVRelationGraphAdapterExact
+import DASHI.ComputerScience.GodelBase12SelfSubstitutionPRFrontierExact
+import DASHI.ComputerScience.GodelSourceNativeDiagonalFrontierExact
+import DASHI.ComputerScience.GodelConcreteCodecProofDebtExact
+import DASHI.ComputerScience.GodelConcreteDiagonalCurrentCutExact
+import DASHI.ComputerScience.GodelDiagonalSourceAlignmentDemandExact
+import DASHI.ComputerScience.GodelRecentFormalisationSOTAExact
+import DASHI.ComputerScience.GodelCoquandT4AdapterFrontierExact
+import DASHI.ComputerScience.GodelCoquandT4AdapterCompilerTargetExact
+import DASHI.ComputerScience.GodelCoquandT4DiagonalCompilerTargetExact
+import DASHI.ComputerScience.GodelCoquandT4ProvabilityCompilerTargetExact
+import DASHI.ComputerScience.GodelCoquandT4ExternalImportRoadmapReceiptExact
+import DASHI.ComputerScience.GodelNamedLimitsProofDebtBridgeExact

@@ -1,0 +1,13 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanMarkedStressLiteralDerivativeRound111Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanMarkedStressLiteralDerivativeRound111Exact as R111
+
+round111MarkedStressDerivativeCompilerIsMachineChecked : ProofLevel
+round111MarkedStressDerivativeCompilerIsMachineChecked =
+  R111.markedStressLiteralDerivativeCompilerLevel
+
+round111CMP119ToMarkedDerivativeRemainsConditional : ProofLevel
+round111CMP119ToMarkedDerivativeRemainsConditional =
+  R111.cmp119StressCompletionIsMarkedSourceDerivativeLevel

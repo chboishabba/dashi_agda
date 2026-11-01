@@ -1,0 +1,54 @@
+module DASHI.Law.AustralianFamilyCourtTraumaPresentationManifestationRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Law.AustralianFamilyCourtTraumaPresentationManifestationExact as Manifestation
+
+abcSourceBoundRegression :
+  Manifestation.abc2026SourceBound Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ true
+abcSourceBoundRegression = refl
+
+traumaEvidenceParentReusedRegression :
+  Manifestation.traumaNarrativeEvidenceParentReused
+    Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ true
+traumaEvidenceParentReusedRegression = refl
+
+difficultWitnessReportedRegression :
+  Manifestation.difficultWitnessCharacterisationReported Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ true
+difficultWitnessReportedRegression = refl
+
+fragmentedNarrationResearcherStatementReportedRegression :
+  Manifestation.fragmentedNarrationTruthBoundaryReported Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ true
+fragmentedNarrationResearcherStatementReportedRegression = refl
+
+uncertaintySevereOutcomeReportedRegression :
+  Manifestation.considerableUncertaintyAndSevereOrderReported Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ true
+uncertaintySevereOutcomeReportedRegression = refl
+
+articleAutomaticallyCourtRecordRegression :
+  Manifestation.newsArticleAutomaticallyPrimaryCourtRecord Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ false
+articleAutomaticallyCourtRecordRegression = refl
+
+neurodivergenceAutomaticallyExplainsPresentationRegression :
+  Manifestation.reportedNeurodivergenceAutomaticallyExplainsWitnessPresentation Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ false
+neurodivergenceAutomaticallyExplainsPresentationRegression = refl
+
+traumaAutomaticallyTruthRegression :
+  Manifestation.reportedTraumaAutomaticallyEstablishesUnderlyingAllegationTruth Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ false
+traumaAutomaticallyTruthRegression = refl
+
+analyticalMappingAutomaticallySourceHoldingRegression :
+  Manifestation.analyticalConsequenceMappingAutomaticallySourceHolding
+    Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ false
+analyticalMappingAutomaticallySourceHoldingRegression = refl

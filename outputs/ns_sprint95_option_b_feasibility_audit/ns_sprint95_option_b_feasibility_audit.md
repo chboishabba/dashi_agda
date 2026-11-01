@@ -1,0 +1,22 @@
+# NS Sprint 95 Option B Feasibility Audit
+
+- Contract: `ns_sprint95_option_b_feasibility_audit`
+- Surface: `NSSprint95 Sprint95 OptionB Feasibility fail_closed Clay blowup Sprint94`
+- Complete: `False`
+- Fail closed: `True`
+- Final decision: `FAIL_CLOSED_OPTION_B_FEASIBILITY`
+- Option B feasibility ledger closed: `True`
+- optionBFeasibilityLedgerClosed: `True`
+- Sprint94 inherited: `True`
+- Conditional-criterion exclusion gate closed: `False`
+- General data Clay route closed: `False`
+- Blowup construction closed: `False`
+- Option B blowup construction closed: `False`
+- K-star collapse mechanism closed: `False`
+- Compatibility with Leray energy closed: `False`
+- Exclusion of conditional K-star lower bound closed: `False`
+- Finite-time singularity extraction closed: `False`
+- Four open gates false: `True`
+- Sprint94 conditional/obstruction inherited true: `True`
+- Clay Navier-Stokes promoted: `False`
+- Required residual gate: `finite-time K* collapse mechanism`

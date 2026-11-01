@@ -1,0 +1,21 @@
+module DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.NormalizationTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.CalibrationTheorem as KLRWOTGRCAL
+open import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
+
+record KnownLimitsRecoveredWaveObservableTransportGeometryRegimeNormalizationTheorem : Setω where
+  constructor knownLimitsRecoveredWaveObservableTransportGeometryRegimeNormalizationTheorem
+  field
+    recoveredWaveObservableTransportGeometryRegimeCalibration :
+      KLRWOTGRCAL.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeCalibrationTheorem
+    localPhysicsCoherence :
+      KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
+
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeNormalizationTheorem :
+  KnownLimitsRecoveredWaveObservableTransportGeometryRegimeNormalizationTheorem
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeNormalizationTheorem =
+  knownLimitsRecoveredWaveObservableTransportGeometryRegimeNormalizationTheorem
+    KLRWOTGRCAL.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeCalibrationTheorem
+    KLLPC.canonicalKnownLimitsLocalPhysicsCoherenceTheorem

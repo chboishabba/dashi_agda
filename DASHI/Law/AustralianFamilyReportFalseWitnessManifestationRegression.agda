@@ -1,0 +1,82 @@
+module DASHI.Law.AustralianFamilyReportFalseWitnessManifestationRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Law.AustralianFamilyReportFalseWitnessManifestationExact as FalseWitness
+import DASHI.Law.AustralianFamilyReportWriterIntegrityExact as AU
+import DASHI.Core.AttributedSourceCore as Attribution
+
+parentAustralianIntegrityBoundaryReused : AU.AustralianFamilyReportWriterBoundary
+parentAustralianIntegrityBoundaryReused = FalseWitness.parentAustralianIntegrityBoundary
+
+solicitorContactMapsExParte :
+  FalseWitness.manifestationPrimaryAxis FalseWitness.reportedSolicitorContact ≡ AU.exParteIntegrity
+solicitorContactMapsExParte = refl
+
+psychometricPressureMapsPsychometricUse :
+  FalseWitness.manifestationPrimaryAxis FalseWitness.reportedPsychometricPressure ≡ AU.psychometricUseAdequacy
+psychometricPressureMapsPsychometricUse = refl
+
+differentialAdministrationMapsPsychometricUse :
+  FalseWitness.manifestationPrimaryAxis FalseWitness.reportedDifferentialTestAdministration ≡ AU.psychometricUseAdequacy
+differentialAdministrationMapsPsychometricUse = refl
+
+familyViolenceMaterialMapsRiskCoverage :
+  FalseWitness.manifestationPrimaryAxis FalseWitness.reportedFamilyViolenceMaterialDismissal ≡ AU.riskInformationCoverage
+familyViolenceMaterialMapsRiskCoverage = refl
+
+therapeuticInterventionMapsRoleSeparation :
+  FalseWitness.manifestationPrimaryAxis FalseWitness.reportedTherapeuticIntervention ≡ AU.forensicTherapeuticRoleSeparation
+therapeuticInterventionMapsRoleSeparation = refl
+
+earlyOutcomeViewMapsRecommendationTiming :
+  FalseWitness.manifestationPrimaryAxis FalseWitness.reportedEarlyCourtOutcomeView ≡ AU.recommendationTiming
+earlyOutcomeViewMapsRecommendationTiming = refl
+
+abcCitationIsNonPromoting :
+  Attribution.citationCreatesAuthority FalseWitness.abcFalseWitnessSource ≡ false
+abcCitationIsNonPromoting =
+  Attribution.citationCreatesAuthorityIsFalse FalseWitness.abcFalseWitnessSource
+
+courtResponseCitationIsNonPromoting :
+  Attribution.citationCreatesAuthority FalseWitness.fcfcoaFalseWitnessResponseSource ≡ false
+courtResponseCitationIsNonPromoting =
+  Attribution.citationCreatesAuthorityIsFalse FalseWitness.fcfcoaFalseWitnessResponseSource
+
+rawRecordingCustodyRemainsUnpaid :
+  FalseWitness.rawRecordingsAcquiredByDashi FalseWitness.currentFalseWitnessFrontier ≡ false
+rawRecordingCustodyRemainsUnpaid = refl
+
+laterRegulatoryOutcomeRemainsUnlocated :
+  FalseWitness.laterRegulatoryOutcomeLocatedInCurrentSearch FalseWitness.currentFalseWitnessFrontier ≡ false
+laterRegulatoryOutcomeRemainsUnlocated = refl
+
+absenceOfRegulatoryOutcomeIsNotProved :
+  FalseWitness.absenceOfLaterRegulatoryOutcomeProved FalseWitness.currentFalseWitnessFrontier ≡ false
+absenceOfRegulatoryOutcomeIsNotProved = refl
+
+protectedIdentityRemainsOpaque :
+  FalseWitness.protectedIdentityRetainedOpaque FalseWitness.currentFalseWitnessFrontier ≡ true
+protectedIdentityRemainsOpaque = refl
+
+courtEmploymentDistinctionIsRetained :
+  FalseWitness.privatePsychologistNotCourtEmployedOrEngaged FalseWitness.currentFalseWitnessFrontier ≡ true
+courtEmploymentDistinctionIsRetained = refl
+
+publicationTitleDoesNotProveFalseWitness :
+  FalseWitness.PublicationTitleAutomaticallyProvesFalseWitness → ⊥
+publicationTitleDoesNotProveFalseWitness =
+  FalseWitness.publicationTitleDoesNotProveFalseWitness
+
+institutionalConcernDoesNotProveBreach :
+  FalseWitness.InstitutionalConcernAutomaticallyEstablishesBreach → ⊥
+institutionalConcernDoesNotProveBreach =
+  FalseWitness.institutionalConcernDoesNotEstablishBreach
+
+reportedInvestigationDoesNotProveAdverseFinding :
+  FalseWitness.ReportedInvestigationAutomaticallyAdverseFinding → ⊥
+reportedInvestigationDoesNotProveAdverseFinding =
+  FalseWitness.reportedInvestigationDoesNotProveAdverseFinding

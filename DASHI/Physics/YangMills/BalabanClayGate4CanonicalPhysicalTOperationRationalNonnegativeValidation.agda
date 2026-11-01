@@ -1,0 +1,9 @@
+module DASHI.Physics.YangMills.BalabanClayGate4CanonicalPhysicalTOperationRationalNonnegativeValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayGate4CanonicalPhysicalTOperationRationalNonnegativeExact as T
+
+canonicalPhysicalTOperationRationalNonnegativeClosed :
+  T.canonicalPhysicalTOperationRationalNonnegativeLevel ≡ machineChecked
+canonicalPhysicalTOperationRationalNonnegativeClosed = refl

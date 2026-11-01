@@ -1,0 +1,8 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyR144R109DirectTailAnchorTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyR144R109DirectTailAnchorExact as New
+
+oneDirectInequalityRegression = New.preferredB1CompressedToOneDirectTailInequality
+noSignedDifferenceRegression = New.directTailAnchorNeedsNoSignedDifferenceIdentity
+noSeparateEndpointRegression = New.directTailAnchorNeedsNoSeparateEndpointEquality

@@ -1,0 +1,23 @@
+module DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.CalibrationSummary where
+
+open import Agda.Builtin.Nat using (Nat)
+
+open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.ResolutionSummary as MTWOTGRRSLS
+open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.Summary as MTWOTGRS
+
+record MoonshineTwinedWaveObservableTransportGeometryRegimeCalibrationSummary : Set where
+  constructor moonshineTwinedWaveObservableTransportGeometryRegimeCalibrationSummary
+  field
+    waveObservableTransportGeometryRegimeResolutionSummary :
+      MTWOTGRRSLS.MoonshineTwinedWaveObservableTransportGeometryRegimeResolutionSummary
+    waveObservableTransportGeometryRegimeSummary :
+      MTWOTGRS.MoonshineTwinedWaveObservableTransportGeometryRegimeSummary
+    summaryCount : Nat
+
+canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeCalibrationSummary :
+  MoonshineTwinedWaveObservableTransportGeometryRegimeCalibrationSummary
+canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeCalibrationSummary =
+  moonshineTwinedWaveObservableTransportGeometryRegimeCalibrationSummary
+    MTWOTGRRSLS.canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeResolutionSummary
+    MTWOTGRS.canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeSummary
+    2

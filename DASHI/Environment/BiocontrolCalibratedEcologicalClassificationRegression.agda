@@ -1,0 +1,31 @@
+module DASHI.Environment.BiocontrolCalibratedEcologicalClassificationRegression where
+
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
+import DASHI.Environment.BiocontrolCalibratedEcologicalClassificationExact as Calibration
+
+calibrationContext : Calibration.CalibrationContext
+calibrationContext = Calibration.canonicalCalibrationContext
+
+classificationBoundary : Calibration.BiocontrolCalibrationBoundary
+classificationBoundary = Calibration.canonicalBiocontrolCalibrationBoundary
+
+universalThresholdCounterexample :
+  MDL.ConsumerCounterexample Calibration.thresholdProblem Calibration.universalHardThreshold
+universalThresholdCounterexample = Calibration.universalThresholdCounterexample
+
+contextualThresholdRepair :
+  MDL.LocalRefinementRepair
+    Calibration.thresholdProblem
+    Calibration.universalHardThreshold
+    Calibration.contextualThreshold
+contextualThresholdRepair = Calibration.universalToContextualRepair
+
+contextualThresholdEligible :
+  MDL.Eligible Calibration.thresholdProblem Calibration.contextualThreshold
+contextualThresholdEligible = Calibration.contextualRepairProvidesEligibility
+
+contextualThresholdLocal :
+  MDL.sameNeighbourhood Calibration.thresholdNeighbourhood
+    (MDL.address Calibration.thresholdNeighbourhood Calibration.universalHardThreshold)
+    (MDL.address Calibration.thresholdNeighbourhood Calibration.contextualThreshold)
+contextualThresholdLocal = Calibration.thresholdRepairStaysLocal

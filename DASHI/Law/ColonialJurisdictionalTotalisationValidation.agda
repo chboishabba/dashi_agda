@@ -1,0 +1,52 @@
+module DASHI.Law.ColonialJurisdictionalTotalisationValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.ColonialJurisdictionalTotalisationAuthorityCrossPollinationExact as Total
+import DASHI.Law.AustralianColonialPrimarySourceAttributionExact as Primary
+import DASHI.Cognition.PNF.SensibLawApplicabilityPrerequisiteMeetExact as Meet
+
+cooperReachIsTotalisedInsideModel :
+  Total.reach Total.cooperJurisdictionalTotalisation ≡ Total.assertedTotalReach
+cooperReachIsTotalisedInsideModel = refl
+
+cooperAntecedentOrderIsRepresentedNonGoverning :
+  Total.antecedentOrderPosition Total.cooperJurisdictionalTotalisation ≡ Total.nonGoverningOrder
+cooperAntecedentOrderIsRepresentedNonGoverning = refl
+
+jurisdictionDoesNotProveCession :
+  Total.crownJurisdictionReceiptProvesFirstNationsCession
+    Total.canonicalJurisdictionalTotalisationBoundary ≡ false
+jurisdictionDoesNotProveCession = refl
+
+sourceAuthorityDoesNotProveCrossSystemLegitimacy :
+  Total.crownSourceAuthorityProvesCrossSystemLegitimacy
+    Total.canonicalJurisdictionalTotalisationBoundary ≡ false
+sourceAuthorityDoesNotProveCrossSystemLegitimacy = refl
+
+internalPriorityDoesNotSetCrossSystemPriority :
+  Total.intraSystemSourcePriorityDeterminesCrossSystemPriority
+    Total.canonicalJurisdictionalTotalisationBoundary ≡ false
+internalPriorityDoesNotSetCrossSystemPriority = refl
+
+dominantSystemCannotSelfCertifyExhaustiveness :
+  Total.dominantSystemCanProveItsOwnCrossSystemExhaustivenessByInternalReceipt
+    Total.canonicalJurisdictionalTotalisationBoundary ≡ false
+dominantSystemCannotSelfCertifyExhaustiveness = refl
+
+modernJurisdictionDoesNotProveColonialMotive :
+  Total.validModernPoliceJurisdictionProvesColonialMotive
+    Total.canonicalJurisdictionalTotalisationBoundary ≡ false
+modernJurisdictionDoesNotProveColonialMotive = refl
+
+neverCededAttributionRemainsFirstNations :
+  Total.neverCededSourceRole ≡ Primary.firstNationsPoliticalStatement
+neverCededAttributionRemainsFirstNations = refl
+
+jurisdictionStillNeedsAuthorityForApplicability :
+  Meet.legalSourceAuthorityRequired Meet.canonicalApplicabilityPrerequisiteMeetBoundary ≡ true
+jurisdictionStillNeedsAuthorityForApplicability = refl
+
+jurisdictionStillNeedsResolvedJurisdictionForApplicability :
+  Meet.resolvedJurisdictionRequired Meet.canonicalApplicabilityPrerequisiteMeetBoundary ≡ true
+jurisdictionStillNeedsResolvedJurisdictionForApplicability = refl

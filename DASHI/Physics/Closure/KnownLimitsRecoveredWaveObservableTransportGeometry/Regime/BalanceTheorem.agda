@@ -1,0 +1,21 @@
+module DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.BalanceTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.HarmonyTheorem as KLRWOTGRHAR
+open import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
+
+record KnownLimitsRecoveredWaveObservableTransportGeometryRegimeBalanceTheorem : Setω where
+  constructor knownLimitsRecoveredWaveObservableTransportGeometryRegimeBalanceTheorem
+  field
+    recoveredWaveObservableTransportGeometryRegimeHarmony :
+      KLRWOTGRHAR.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeHarmonyTheorem
+    localPhysicsCoherence :
+      KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
+
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeBalanceTheorem :
+  KnownLimitsRecoveredWaveObservableTransportGeometryRegimeBalanceTheorem
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeBalanceTheorem =
+  knownLimitsRecoveredWaveObservableTransportGeometryRegimeBalanceTheorem
+    KLRWOTGRHAR.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeHarmonyTheorem
+    KLLPC.canonicalKnownLimitsLocalPhysicsCoherenceTheorem

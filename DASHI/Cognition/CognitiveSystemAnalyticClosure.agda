@@ -1,0 +1,266 @@
+module DASHI.Cognition.CognitiveSystemAnalyticClosure where
+
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Empty using (⊥)
+open import Data.List using (length)
+open import Data.Nat using (_≤_)
+open import Data.Product using (_×_; _,_)
+open import Data.Vec using (Vec)
+
+import DASHI.Algebra.BalancedTernary as BT
+import DASHI.Cognition.AnesthesiaLanguagePhaseControl
+import DASHI.Cognition.AnesthesiaLanguagePhaseDynamics as Dynamics
+import DASHI.Cognition.Base369ZeroFibre as Fibre
+import DASHI.Cognition.BaselineMarginModelSelection as Baseline
+import DASHI.Cognition.CommaDiffusionLanguage as Comma
+import DASHI.Cognition.CognitiveObservableDistributions
+import DASHI.Cognition.CognitiveProjectionCategory as Category
+import DASHI.Cognition.CognitiveVacuumClassBoundary as Vacuum
+import DASHI.Cognition.DashiCognitiveSystem as Cognitive
+import DASHI.Cognition.ElectrochemicalDiffusionBridge as Electro
+import DASHI.Cognition.FibreBraidReasoning as Braid
+import DASHI.Cognition.IdEgoSuperego369 as Self
+import DASHI.Cognition.IdentityVacuumClosure as IdentityVacuum
+import DASHI.Cognition.KepplerFiniteResonanceMDL as Keppler
+import DASHI.Cognition.KepplerGlutamateZPFMDLTest
+import DASHI.Cognition.LatentAttractorDenoising as Latent
+import DASHI.Cognition.Monoidal369Nonseparability as Nonseparable
+import DASHI.Cognition.MultipleDraftsQuotient as Drafts
+import DASHI.Cognition.NetworkIntegritySynchronyMetrics as NetworkMetrics
+import DASHI.Cognition.PhaseEnrichedTrit as Phase
+import DASHI.Cognition.PhaseObservableIndependence as Independence
+import DASHI.Cognition.PhysicalCouplingFactorisation as Coupling
+import DASHI.Cognition.PsychedelicNetworkDiffusion as Network
+import DASHI.Cognition.RecursiveFibreTower as Tower
+import DASHI.Cognition.ResidualPhaseEmpiricalContact
+import DASHI.Cognition.ResidualPhaseGeometry as RPG
+import DASHI.Cognition.TernaryCommitmentLogic as Logic
+import DASHI.Cognition.TernaryDerivationAddress as Address
+import DASHI.Cognition.TernaryDerivationUltrametric as TritMetric
+import DASHI.Cognition.VisualAttractorDefect as VisualDefect
+import DASHI.Cognition.VisualCompressionAttractors
+import DASHI.Cognition.VisualPatternGeneratorMDL as Visual
+import DASHI.Cognition.VisualSymmetryFixedPoint as VisualFixed
+import DASHI.Cognition.ZeroFibreContextuality as Contextual
+import DASHI.Combinatorics.PDA_MDL.KernelSelection
+import DASHI.Combinatorics.PDA_MDL.PDA
+import DASHI.Core.ProjectionCategory as PC
+import Ultrametric as U
+
+record CognitiveAnalyticClosure : Set₁ where
+  field
+    ternaryUltrametric :
+      ∀ {n} → U.Ultrametric (Vec BT.Trit n)
+
+    cognitionCategory : PC.ProjectionCategory
+
+    threeDigitAddressClosed :
+      Address.encode3 (BT.neg ∷ BT.zero ∷ BT.pos ∷ []) ≡ 21
+
+    multipleDraftHistoriesDistinct :
+      Drafts.orwellianHistory ≡ Drafts.stalinesqueHistory → ⊥
+
+    multipleDraftPublicQuotientEqual :
+      RPG.Projection.observe Drafts.publicProjection Drafts.orwellianHistory
+      ≡ RPG.Projection.observe Drafts.publicProjection Drafts.stalinesqueHistory
+
+    cubicControlKinkClosed :
+      Dynamics.marginAt Dynamics.canonicalKinkDynamics 1 0 0
+      ≡ Cognitive.positiveMargin 13
+
+    cuspBoundaryClosed : Dynamics.CuspBoundary 3 2
+
+    guardOnlyCouplingClosed :
+      Coupling.GuardOnlyCoupling Vacuum.booleanCognitiveSystem
+
+    equalBranchingCanCarryDifferentStackDepth :
+      Cognitive.PhaseObservables.feasibleBranching Independence.emptyObservation
+      ≡ Cognitive.PhaseObservables.feasibleBranching Independence.obligatedObservation
+
+    scalarControlFixtureRejectsExtraCoupling :
+      Baseline.couplingImprovesMDL 3 Baseline.scalarDataset ≡ false
+
+    coupledFixtureSelectsExtraCoupling :
+      Baseline.couplingImprovesMDL 3 Baseline.coupledDataset ≡ true
+
+    inBandResonanceClosed :
+      Keppler.resonanceScore
+        Keppler.canonicalGlutamateSpectrum
+        Keppler.canonicalInBandField
+      ≡ 15
+
+    offBandControlClosed :
+      Keppler.resonanceScore
+        Keppler.canonicalGlutamateSpectrum
+        Keppler.canonicalOffBandField
+      ≡ 0
+
+    geometricCompressionClosed :
+      Visual.visualMDL Visual.lattice 0
+      ≤ Visual.visualMDL Visual.semanticScene 0
+
+    stableClassNeedNotBeVacuum :
+      Vacuum.VacuumClass
+        Vacuum.booleanCognitiveSystem
+        Vacuum.booleanDefectModel
+        false
+      → ⊥
+
+    phaseBearingZeroFibreClosed :
+      Phase.observeTrit Phase.balancedOpposition ≡ BT.zero
+
+    sixZeroFibreClosed : length Fibre.allZeroHex ≡ 2
+    nineZeroFibreClosed : length Fibre.allZeroNonary ≡ 3
+    zeroPullbackClosed : length Fibre.zeroSixNineFibreProduct ≡ 6
+
+    zeroJointSupportNonfactorable :
+      Nonseparable.ProductFactorisation → ⊥
+
+    zeroFieldHasNoGlobalSection :
+      Contextual.GlobalZeroSection → ⊥
+
+    triadicTetrationLevelTwoClosed : Tower.tetration 3 2 ≡ 27
+    triadicTetrationLevelThreeClosed : Tower.tetration 3 3 ≡ Tower.pow 3 27
+
+    recursiveZeroInverseLimitClosed :
+      Tower.InverseLimitPoint Tower.recursivePhaseTower
+
+    excludedMiddleAndProjectiveCommitmentCoexist :
+      (Logic.publicTruth Logic.truthKnownCommitmentOpen ≡ true)
+      ×
+      (Logic.gate Logic.truthKnownCommitmentOpen ≡ BT.zero)
+
+    commaBoundaryFixedUnderDenoising :
+      Comma.commaProjection
+        (Comma.denoiseSentence
+          (Comma.sentence
+            Comma.feltSelfClause
+            Comma.commaBoundary
+            Comma.blankClause
+            Comma.contrast))
+      ≡ Comma.commaBoundary
+
+    commaAnchorPlannerClosed :
+      Comma.firstPlannedCoordinate Comma.anchorFirstPlan
+      ≡ Comma.boundaryPosition
+
+    latentGeometricFixedPointClosed :
+      Latent.reducedSemanticDenoise Latent.geometricIntermediate
+      ≡ Latent.geometricIntermediate
+
+    latentGeometricEnergyWinsReducedPrecision :
+      Latent.totalEnergy
+        (Latent.reducedSemanticEnergy Latent.geometricIntermediate)
+      ≤
+      Latent.totalEnergy
+        (Latent.reducedSemanticEnergy Latent.semanticCompletion)
+
+    latentGeometricResidenceClosed :
+      Latent.countGeometric Latent.reducedPrecisionTrajectory ≡ 2
+
+    selfTriadDiscrepancyClosed :
+      Self.selfDiscrepancy Self.canonicalContestedSelf ≡ 2
+
+    auxiliaryFibreLowersReasoningDefect :
+      Braid.globalReasoningDefect Braid.resolvedByHighAuxiliary ≡ 1
+
+    physicalDiffusionConservesTotal :
+      Electro.totalConcentration Electro.initialConcentration
+      ≡ Electro.totalConcentration Electro.afterOneDiffusiveFlux
+
+    physicalDiffusionReducesGradient :
+      Electro.concentrationGradient Electro.afterOneDiffusiveFlux ≡ 2
+
+    psychedelicWithinIntegrityClosed :
+      Network.withinIntegrity Network.psychedelicProfile ≡ 12
+
+    psychedelicCrossTransportClosed :
+      Network.crossCommunication Network.psychedelicProfile ≡ 8
+
+    psychedelicZeroResidenceClosed :
+      Network.countProjective Network.psychedelicCommitmentTrajectory ≡ 3
+
+    crossTransportCanCoexistWithLowSynchrony :
+      (Network.crossCommunication Network.psychedelicProfile ≡ 8)
+      ×
+      (NetworkMetrics.countPhaseAgreement
+        NetworkMetrics.psychedelicTransmodalPhases
+        NetworkMetrics.psychedelicSensoryPhases ≡ 1)
+
+    visualBasisNoiseDefectClosed :
+      VisualDefect.compressionAttractorScore Visual.lattice ≡ 4
+
+    visualSymmetryFixedPointClosed :
+      VisualFixed.symmetryTransport VisualFixed.checkerFixedPoint
+      ≡ VisualFixed.checkerFixedPoint
+
+    visualFixedPointDefectClosed :
+      VisualFixed.fixedPointDefect VisualFixed.checkerFixedPoint ≡ 0
+
+    identityNeutralDefectLawClosed :
+      IdentityVacuum.IdentityNeutralDefectLaw
+        Vacuum.booleanCognitiveSystem
+        IdentityVacuum.shiftedBooleanDefectModel
+        true
+
+    identityVacuumAtNonzeroFloorClosed :
+      Vacuum.VacuumClass
+        Vacuum.booleanCognitiveSystem
+        IdentityVacuum.shiftedBooleanDefectModel
+        true
+
+canonicalCognitiveAnalyticClosure : CognitiveAnalyticClosure
+canonicalCognitiveAnalyticClosure = record
+  { ternaryUltrametric = TritMetric.TritUltrametric
+  ; cognitionCategory = Category.cognitiveProjectionCategory
+  ; threeDigitAddressClosed = Address.negativeZeroPositiveAddress
+  ; multipleDraftHistoriesDistinct = Drafts.historiesAreDistinct
+  ; multipleDraftPublicQuotientEqual = Drafts.samePublicReport
+  ; cubicControlKinkClosed = Dynamics.marginInitiallyRises
+  ; cuspBoundaryClosed = Dynamics.canonicalCuspBoundary
+  ; guardOnlyCouplingClosed = Coupling.booleanGuardOnlyCoupling
+  ; equalBranchingCanCarryDifferentStackDepth = Independence.sameFeasibleBranching
+  ; scalarControlFixtureRejectsExtraCoupling =
+      Baseline.extraCouplingDoesNotImproveScalarDataset
+  ; coupledFixtureSelectsExtraCoupling =
+      Baseline.couplingWinsThisFiniteDataset
+  ; inBandResonanceClosed = Keppler.inBandScoreIsFifteen
+  ; offBandControlClosed = Keppler.offBandScoreIsZero
+  ; geometricCompressionClosed = Visual.latticeIsCheaperThanSemanticBinding
+  ; stableClassNeedNotBeVacuum = Vacuum.falseStableClassIsNotVacuum
+  ; phaseBearingZeroFibreClosed = Phase.balancedOppositionObservesZero
+  ; sixZeroFibreClosed = Fibre.zeroHexFibreHasTwoRepresentatives
+  ; nineZeroFibreClosed = Fibre.zeroNonaryFibreHasThreeRepresentatives
+  ; zeroPullbackClosed = Fibre.visibleZeroHidesSixInteractionStates
+  ; zeroJointSupportNonfactorable = Nonseparable.jointSupportDoesNotFactor
+  ; zeroFieldHasNoGlobalSection = Contextual.noGlobalZeroSection
+  ; triadicTetrationLevelTwoClosed = Tower.triadicTetrationTwo
+  ; triadicTetrationLevelThreeClosed = Tower.triadicTetrationThree
+  ; recursiveZeroInverseLimitClosed = Tower.canonicalZeroInverseLimit
+  ; excludedMiddleAndProjectiveCommitmentCoexist = refl , refl
+  ; commaBoundaryFixedUnderDenoising = refl
+  ; commaAnchorPlannerClosed = Comma.commaAnchorIsPlannedFirst
+  ; latentGeometricFixedPointClosed =
+      Latent.geometricIntermediateIsReducedPrecisionFixedPoint
+  ; latentGeometricEnergyWinsReducedPrecision =
+      Latent.geometricWinsReducedPrecisionLandscape
+  ; latentGeometricResidenceClosed =
+      Latent.reducedPrecisionGeometricResidenceIsTwo
+  ; selfTriadDiscrepancyClosed = Self.canonicalContestedSelfHasTwoDiscrepancies
+  ; auxiliaryFibreLowersReasoningDefect = Braid.auxiliaryTransportLowersDefect
+  ; physicalDiffusionConservesTotal = refl
+  ; physicalDiffusionReducesGradient = Electro.afterFluxGradientIsTwo
+  ; psychedelicWithinIntegrityClosed = Network.psychedelicIntegrityIsTwelve
+  ; psychedelicCrossTransportClosed = Network.psychedelicCrossCommunicationIsEight
+  ; psychedelicZeroResidenceClosed = Network.psychedelicZeroResidenceIsThree
+  ; crossTransportCanCoexistWithLowSynchrony =
+      NetworkMetrics.crossTransportHighSynchronyLow
+  ; visualBasisNoiseDefectClosed = VisualDefect.latticeAttractorScoreIsFour
+  ; visualSymmetryFixedPointClosed = VisualFixed.checkerIsSymmetryFixedPoint
+  ; visualFixedPointDefectClosed = VisualFixed.checkerFixedPointDefectIsZero
+  ; identityNeutralDefectLawClosed = IdentityVacuum.shiftedIdentityLaw
+  ; identityVacuumAtNonzeroFloorClosed =
+      IdentityVacuum.nonzeroResidualIdentityIsVacuum
+  }

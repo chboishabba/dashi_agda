@@ -1,0 +1,26 @@
+module DASHI.Biology.Protein.ProteinTemporalObligationProfilesValidation where
+
+import DASHI.Biology.Protein.ProteinTemporalObligationChainExact as Chain
+import DASHI.Biology.Protein.TRPA1SingleResidueThermalAdaptationExact as TRPA1
+import DASHI.Biology.Protein.AdenylateKinaseSituatedProteinWitnessExact as AdK
+import DASHI.Biology.Protein.ProteinTemporalObligationProfilesExact as Profiles
+
+profileSurface : Set
+profileSurface = Profiles.ProteinTemporalPaymentProfile
+
+trpa1Profile : Profiles.ProteinTemporalPaymentProfile
+trpa1Profile = Profiles.trpa1TemporalPaymentProfile
+
+adkProfile : Profiles.ProteinTemporalPaymentProfile
+adkProfile = Profiles.adkTemporalPaymentProfile
+
+boundarySurface : Profiles.ProteinTemporalProfilesBoundary
+boundarySurface = Profiles.canonicalProteinTemporalProfilesBoundary
+
+-- Source-local payments must not totalise the generic chain.
+trpa1NoTotalisation = Profiles.trpa1ProfileDoesNotCreateCompleteTemporalChain
+adkNoTotalisation = Profiles.adkProfileDoesNotCreateCompleteTemporalChain
+crossSourceNoPaymentTransfer = Profiles.crossSourcePaymentDoesNotTransfer
+
+chainBoundary : Chain.ProteinTemporalObligationBoundary
+chainBoundary = Chain.canonicalProteinTemporalObligationBoundary

@@ -1,0 +1,302 @@
+module DASHI.Physics.Closure.NSPeriodicOfficialCompletionStatus where
+
+open import Agda.Builtin.Bool using (Bool; false)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+------------------------------------------------------------------------
+-- Consolidated status for the official-norm -> expenditure -> coverage -> BKM
+-- program.  These values are deliberately independent of finite receipts.
+------------------------------------------------------------------------
+
+concreteBernsteinBE1ToBE8AdapterLevel : ProofLevel
+concreteBernsteinBE1ToBE8AdapterLevel = machineChecked
+
+publishedPeriodicHarmonicAuthorityAdapterLevel : ProofLevel
+publishedPeriodicHarmonicAuthorityAdapterLevel = machineChecked
+
+officialFarLowSchurFactorAdapterLevel : ProofLevel
+officialFarLowSchurFactorAdapterLevel = machineChecked
+
+coefficientUnitaryNormAdapterStatusLevel : ProofLevel
+coefficientUnitaryNormAdapterStatusLevel = machineChecked
+
+concreteRealIntegrationAdapterLevel : ProofLevel
+concreteRealIntegrationAdapterLevel = machineChecked
+
+galerkinG1ToG19ContinuumAdapterLevel : ProofLevel
+galerkinG1ToG19ContinuumAdapterLevel = machineChecked
+
+allDataCutoffCoverageAdapterLevel : ProofLevel
+allDataCutoffCoverageAdapterLevel = machineChecked
+
+cutoffContinuumAssemblyLevel : ProofLevel
+cutoffContinuumAssemblyLevel = machineChecked
+
+biotSavartTransversalityReductionLevel : ProofLevel
+biotSavartTransversalityReductionLevel = machineChecked
+
+strictDissipationMarginReductionLevel : ProofLevel
+strictDissipationMarginReductionLevel = machineChecked
+
+strictMarginExpenditureAdapterStatusLevel : ProofLevel
+strictMarginExpenditureAdapterStatusLevel = machineChecked
+
+packetFractionQuotientSignReductionLevel : ProofLevel
+packetFractionQuotientSignReductionLevel = machineChecked
+
+normalizedBoundaryCommonParameterReductionLevel : ProofLevel
+normalizedBoundaryCommonParameterReductionLevel = machineChecked
+
+normalizedBoundaryCandidateTupleStatusLevel : ProofLevel
+normalizedBoundaryCandidateTupleStatusLevel = machineChecked
+
+hysteresisSeparationReductionLevel : ProofLevel
+hysteresisSeparationReductionLevel = machineChecked
+
+adaptiveSwitchSeparationAdapterStatusLevel : ProofLevel
+adaptiveSwitchSeparationAdapterStatusLevel = machineChecked
+
+diffuseDissipationChargingReductionLevel : ProofLevel
+diffuseDissipationChargingReductionLevel = machineChecked
+
+diffuseDissipationRouteAdapterStatusLevel : ProofLevel
+diffuseDissipationRouteAdapterStatusLevel = machineChecked
+
+zeroChartDiffuseSelectionReductionLevel : ProofLevel
+zeroChartDiffuseSelectionReductionLevel = machineChecked
+
+extendedCoverageBKMStatusLevel : ProofLevel
+extendedCoverageBKMStatusLevel = machineChecked
+
+weightedEnvelopeLimitTransportReductionLevel : ProofLevel
+weightedEnvelopeLimitTransportReductionLevel = machineChecked
+
+weightedEnvelopeContinuumAdapterStatusLevel : ProofLevel
+weightedEnvelopeContinuumAdapterStatusLevel = machineChecked
+
+concreteCutoffCubeCarrierStatusLevel : ProofLevel
+concreteCutoffCubeCarrierStatusLevel = machineChecked
+
+concreteIntegerModeNormStatusLevel : ProofLevel
+concreteIntegerModeNormStatusLevel = machineChecked
+
+concreteOfficialNormWeightsStatusLevel : ProofLevel
+concreteOfficialNormWeightsStatusLevel = machineChecked
+
+concreteModeOperatorPythagoreanStatusLevel : ProofLevel
+concreteModeOperatorPythagoreanStatusLevel = machineChecked
+
+officialOperatorFoldIdentificationStatusLevel : ProofLevel
+officialOperatorFoldIdentificationStatusLevel = machineChecked
+
+concreteOfficialOperatorNormAdapterStatusLevel : ProofLevel
+concreteOfficialOperatorNormAdapterStatusLevel = machineChecked
+
+canonicalRealAuthoritiesStatusLevel : ProofLevel
+canonicalRealAuthoritiesStatusLevel = machineChecked
+
+galerkinCoefficientFoldBridgeStatusLevel : ProofLevel
+galerkinCoefficientFoldBridgeStatusLevel = machineChecked
+
+finiteNearTriadPartitionStatusLevel : ProofLevel
+finiteNearTriadPartitionStatusLevel = machineChecked
+
+nearCanonicalQuarterAdapterStatusLevel : ProofLevel
+nearCanonicalQuarterAdapterStatusLevel = machineChecked
+
+finiteWeightedSchurKernelStatusLevel : ProofLevel
+finiteWeightedSchurKernelStatusLevel = machineChecked
+
+farHighCanonicalEighthAdapterStatusLevel : ProofLevel
+farHighCanonicalEighthAdapterStatusLevel = machineChecked
+
+concreteNearTriadSumsStatusLevel : ProofLevel
+concreteNearTriadSumsStatusLevel = machineChecked
+
+nearTriadClassificationStatusLevel : ProofLevel
+nearTriadClassificationStatusLevel = machineChecked
+
+nearTriadPartitionCorrectnessStatusLevel : ProofLevel
+nearTriadPartitionCorrectnessStatusLevel = machineChecked
+
+nearShellOverlapCountStatusLevel : ProofLevel
+nearShellOverlapCountStatusLevel = machineChecked
+
+nearConvolutionMultiplicityStatusLevel : ProofLevel
+nearConvolutionMultiplicityStatusLevel = machineChecked
+
+farLowSupportGeometryStatusLevel : ProofLevel
+farLowSupportGeometryStatusLevel = machineChecked
+
+concreteFarLowKernelStatusLevel : ProofLevel
+concreteFarLowKernelStatusLevel = machineChecked
+
+farLowKernelZeroExtensionStatusLevel : ProofLevel
+farLowKernelZeroExtensionStatusLevel = machineChecked
+
+farLowShellIntersectionCountStatusLevel : ProofLevel
+farLowShellIntersectionCountStatusLevel = machineChecked
+
+farLowRowMajorantFoldStatusLevel : ProofLevel
+farLowRowMajorantFoldStatusLevel = machineChecked
+
+farLowColumnMajorantFoldStatusLevel : ProofLevel
+farLowColumnMajorantFoldStatusLevel = machineChecked
+
+farLowEnergyPairingCancellationStatusLevel : ProofLevel
+farLowEnergyPairingCancellationStatusLevel = machineChecked
+
+farLowExactCommutatorIdentityStatusLevel : ProofLevel
+farLowExactCommutatorIdentityStatusLevel = machineChecked
+
+farLowMultiplierDifferenceKernelStatusLevel : ProofLevel
+farLowMultiplierDifferenceKernelStatusLevel = machineChecked
+
+farLowMultiplierDifferenceReductionStatusLevel : ProofLevel
+farLowMultiplierDifferenceReductionStatusLevel = machineChecked
+
+concreteSmoothDyadicProfileGradientStatusLevel : ProofLevel
+concreteSmoothDyadicProfileGradientStatusLevel = conditional
+
+cutoffUniformDifferenceKernelSchurStatusLevel : ProofLevel
+cutoffUniformDifferenceKernelSchurStatusLevel = conditional
+
+concreteFarHighPlacementsStatusLevel : ProofLevel
+concreteFarHighPlacementsStatusLevel = machineChecked
+
+farHighShellSeparationStatusLevel : ProofLevel
+farHighShellSeparationStatusLevel = machineChecked
+
+farHighFiniteTailStatusLevel : ProofLevel
+farHighFiniteTailStatusLevel = machineChecked
+
+farHighTailReindexingStatusLevel : ProofLevel
+farHighTailReindexingStatusLevel = machineChecked
+
+infinityShellModeCountStatusLevel : ProofLevel
+infinityShellModeCountStatusLevel = machineChecked
+
+coarseTwentySevenTimesDyadicCubeBoundStatusLevel : ProofLevel
+coarseTwentySevenTimesDyadicCubeBoundStatusLevel = machineChecked
+
+finiteScalarCauchySchwarzSquaredStatusLevel : ProofLevel
+finiteScalarCauchySchwarzSquaredStatusLevel = machineChecked
+
+coefficientBernsteinSquaredStatusLevel : ProofLevel
+coefficientBernsteinSquaredStatusLevel = machineChecked
+
+pointwiseSynthesisBoundStatusLevel : ProofLevel
+pointwiseSynthesisBoundStatusLevel = machineChecked
+
+infinityShellBernsteinReductionStatusLevel : ProofLevel
+infinityShellBernsteinReductionStatusLevel = machineChecked
+
+infinityShellBernsteinSquaredReductionStatusLevel : ProofLevel
+infinityShellBernsteinSquaredReductionStatusLevel = machineChecked
+
+infinityShellDerivativeReductionStatusLevel : ProofLevel
+infinityShellDerivativeReductionStatusLevel = machineChecked
+
+farHighPlacementReductionStatusLevel : ProofLevel
+farHighPlacementReductionStatusLevel = machineChecked
+
+finiteFourierCauchySchwarzStatusLevel : ProofLevel
+finiteFourierCauchySchwarzStatusLevel = standardImported
+
+literalCubeModewiseDerivativeEstimateStatusLevel : ProofLevel
+literalCubeModewiseDerivativeEstimateStatusLevel = machineChecked
+
+farHighOfficialSobolevConversionStatusLevel : ProofLevel
+farHighOfficialSobolevConversionStatusLevel = conditional
+
+farHighStructuralConstantDerivationStatusLevel : ProofLevel
+farHighStructuralConstantDerivationStatusLevel = conditional
+
+firstExitSmallnessReductionStatusLevel : ProofLevel
+firstExitSmallnessReductionStatusLevel = machineChecked
+
+firstExitAdmissibleImpliesSmallStatusLevel : ProofLevel
+firstExitAdmissibleImpliesSmallStatusLevel = conditional
+
+geometricDepletionRejectionStatusLevel : ProofLevel
+geometricDepletionRejectionStatusLevel = machineChecked
+
+canonicalNearYoungAllocationStatusLevel : ProofLevel
+canonicalNearYoungAllocationStatusLevel = machineChecked
+
+concreteCandidateBudgetArithmeticStatusLevel : ProofLevel
+concreteCandidateBudgetArithmeticStatusLevel = machineChecked
+
+compactGammaPDEBalanceStatusLevel : ProofLevel
+compactGammaPDEBalanceStatusLevel = machineChecked
+
+canonicalThreeBoundaryTupleStatusLevel : ProofLevel
+canonicalThreeBoundaryTupleStatusLevel = machineChecked
+
+observableDerivativeBoundReductionStatusLevel : ProofLevel
+observableDerivativeBoundReductionStatusLevel = machineChecked
+
+diffuseLowHighSplitStatusLevel : ProofLevel
+diffuseLowHighSplitStatusLevel = machineChecked
+
+chartFailureAnalyticRoutesStatusLevel : ProofLevel
+chartFailureAnalyticRoutesStatusLevel = machineChecked
+
+fixedShellFiniteRankConvergenceStatusLevel : ProofLevel
+fixedShellFiniteRankConvergenceStatusLevel = machineChecked
+
+-- Remaining official-carrier theorem packages.
+officialNormIdentificationLevel : ProofLevel
+officialNormIdentificationLevel = conditional
+
+nearTriadUniformEstimateLevel : ProofLevel
+nearTriadUniformEstimateLevel = conditional
+
+farLowOfficialSchurEstimateLevel : ProofLevel
+farLowOfficialSchurEstimateLevel = conditional
+
+farHighOfficialTailEstimateLevel : ProofLevel
+farHighOfficialTailEstimateLevel = conditional
+
+wallIHarmonicEstimateLevel : ProofLevel
+wallIHarmonicEstimateLevel = conditional
+
+integratedCompactGammaExpenditureLevel : ProofLevel
+integratedCompactGammaExpenditureLevel = conjectural
+
+normalizedAdaptiveBoundaryLevel : ProofLevel
+normalizedAdaptiveBoundaryLevel = conjectural
+
+universalSwitchingControlLevel : ProofLevel
+universalSwitchingControlLevel = conjectural
+
+diffuseSpectrumBKMLevel : ProofLevel
+diffuseSpectrumBKMLevel = conjectural
+
+allDataAdaptiveCoverageLevel : ProofLevel
+allDataAdaptiveCoverageLevel = conjectural
+
+cutoffUniformContinuumPassageLevel : ProofLevel
+cutoffUniformContinuumPassageLevel = conjectural
+
+allOfficialHarmonicInputsInhabited : Bool
+allOfficialHarmonicInputsInhabited = false
+
+concreteIntegratedExpenditureInhabited : Bool
+concreteIntegratedExpenditureInhabited = false
+
+normalizedAdaptiveCoverageInhabited : Bool
+normalizedAdaptiveCoverageInhabited = false
+
+diffuseAndSwitchCoverageInhabited : Bool
+diffuseAndSwitchCoverageInhabited = false
+
+cutoffUniformContinuumCompletionInhabited : Bool
+cutoffUniformContinuumCompletionInhabited = false
+
+unconditionalPeriodicNavierStokesTheorem : Bool
+unconditionalPeriodicNavierStokesTheorem = false
+
+clayNavierStokesSubmissionPromoted : Bool
+clayNavierStokesSubmissionPromoted = false

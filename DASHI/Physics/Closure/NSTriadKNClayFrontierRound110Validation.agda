@@ -1,0 +1,10 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound110Validation where
+
+-- Focused kernel root for the Round110 internal-payment/external-residue frontier.
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound109Validation
+import DASHI.Physics.Closure.NSTriadKNProjectedCrossEnergyBoundRound110Exact
+import DASHI.Physics.Closure.NSTriadKNSelfPhaseEDKernelRound110Exact
+import DASHI.Physics.Closure.NSTriadKNSelectedPairEnergyDissipationProductRound109Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound110Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound110Exact

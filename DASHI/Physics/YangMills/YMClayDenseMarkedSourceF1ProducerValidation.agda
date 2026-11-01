@@ -1,0 +1,49 @@
+module DASHI.Physics.YangMills.YMClayDenseMarkedSourceF1ProducerValidation where
+
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.YangMills.YMClayDenseMarkedSourceF1ProducerExact as Producer
+
+denseMarkedSourceDecayCompilerIsOwned :
+  Producer.denseMarkedSourceDecayCompilerOwned ≡ true
+denseMarkedSourceDecayCompilerIsOwned =
+  Producer.denseMarkedSourceDecayCompilerOwnedIsTrue
+
+linfinityJointDensityIsNotRequiredByThisRoute :
+  Producer.fullJointDensityLinfinityRequiredByDenseMarkedRoute ≡ false
+linfinityJointDensityIsNotRequiredByThisRoute =
+  Producer.fullJointDensityLinfinityRequiredByDenseMarkedRouteIsFalse
+
+sameObjectNormalizationWeldRemainsExplicit :
+  Producer.sameObjectEnvelopeToPhysicalL2NormalizationStillRequired ≡ true
+sameObjectNormalizationWeldRemainsExplicit =
+  Producer.sameObjectEnvelopeToPhysicalL2NormalizationStillRequiredIsTrue
+
+sameObservableTwiceIsRejected :
+  Producer.sameObservableInsertedTwiceIsCorrectF1Pair ≡ false
+sameObservableTwiceIsRejected =
+  Producer.sameObservableInsertedTwiceIsCorrectF1PairIsFalse
+
+translatedPairIsRequired :
+  Producer.translatedTwoSlicePairRequired ≡ true
+translatedPairIsRequired =
+  Producer.translatedTwoSlicePairRequiredIsTrue
+
+envelopeEqualityIsNotRequired :
+  Producer.envelopeEqualityRequired ≡ false
+envelopeEqualityIsNotRequired =
+  Producer.envelopeEqualityRequiredIsFalse
+
+oneSidedEnvelopeUpperIsEnough :
+  Producer.oneSidedEnvelopeUpperSuffices ≡ true
+oneSidedEnvelopeUpperIsEnough =
+  Producer.oneSidedEnvelopeUpperSufficesIsTrue
+
+selectedPhysicalMarkedDecayIsCompilerOutput :
+  Producer.selectedPhysicalMarkedDecayProducerStillRequired ≡ false
+selectedPhysicalMarkedDecayIsCompilerOutput =
+  Producer.selectedPhysicalMarkedDecayProducerStillRequiredIsFalse
+
+noClayPromotionFromCompilerAlone :
+  Producer.clayPromotion ≡ false
+noClayPromotionFromCompilerAlone = Producer.clayPromotionIsFalse

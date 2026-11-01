@@ -1,0 +1,3 @@
+module DASHI.Physics.YangMills.BalabanConnectedCollarSpanRound356Validation where
+
+import DASHI.Physics.YangMills.BalabanConnectedCollarSpanRound356Exact

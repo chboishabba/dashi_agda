@@ -1,0 +1,21 @@
+module DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawAttributionRegression where
+
+import DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawAttributionExact as Update
+
+currentGradientExists : Update.OscillatorUpdateLawCandidate
+currentGradientExists = Update.currentGradientCandidate
+
+hebbianExists : Update.OscillatorUpdateLawCandidate
+hebbianExists = Update.hebbianCandidate
+
+ojaExists : Update.OscillatorUpdateLawCandidate
+ojaExists = Update.ojaCandidate
+
+kuramotoExists : Update.OscillatorUpdateLawCandidate
+kuramotoExists = Update.kuramotoCandidate
+
+sourceBoundaryExists : Update.OscillatorUpdateLawSourceBoundary
+sourceBoundaryExists = Update.canonicalOscillatorUpdateLawSourceBoundary
+
+comparisonBoundaryExists : Update.OscillatorUpdateLawComparisonBoundary
+comparisonBoundaryExists = Update.canonicalOscillatorUpdateLawComparisonBoundary

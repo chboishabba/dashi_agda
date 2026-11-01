@@ -1,0 +1,9 @@
+module DASHI.ComputerScience.RSA260BidiDegreeRawRankMinimalFrontierValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiDegreeRawRankMinimalFrontierExact as Frontier
+
+boundary : Frontier.DegreeRawRankMinimalFrontierBoundary
+boundary = Frontier.canonicalDegreeRawRankMinimalFrontierBoundary
+
+firstResidual : Frontier.DegreeRawRankMinimalFrontierResidual
+firstResidual = Frontier.firstDegreeRawRankMinimalFrontierResidual

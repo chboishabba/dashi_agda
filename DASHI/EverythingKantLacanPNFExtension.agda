@@ -1,0 +1,4 @@
+module DASHI.EverythingKantLacanPNFExtension where
+
+import DASHI.EverythingZizekPNFExtension
+import DASHI.Reasoning.KantLacanEverything

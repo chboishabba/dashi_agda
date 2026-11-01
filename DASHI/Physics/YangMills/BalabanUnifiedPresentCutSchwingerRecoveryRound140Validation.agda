@@ -1,0 +1,69 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanUnifiedPresentCutSchwingerRecoveryRound140Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionFirstVariationRound133Exact as R133
+import DASHI.Physics.YangMills.BalabanPresentCutCanonicalMetricDomainRound134Exact as R134
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as R135
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionA2HistoryRound137Exact as R137
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionA1HistoryRound138Exact as R138
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionPhysicalHistoryRound139Exact as R139
+import DASHI.Physics.YangMills.BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact as R140
+import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as R141
+import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionFirstVariationRound142Exact as R142
+import DASHI.Physics.YangMills.BalabanBC2FiniteLocalizedFirstVariationRound143Exact as R143
+import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact as R144
+
+round132SameActionDensityCompiler : ProofLevel
+round132SameActionDensityCompiler = R132.unifiedGeneratedActionDensityCompilerLevel
+
+round133SameActionFirstVariationCompiler : ProofLevel
+round133SameActionFirstVariationCompiler = R133.unifiedGeneratedActionFirstVariationCompilerLevel
+
+round134PresentCutMetricDomainCompiler : ProofLevel
+round134PresentCutMetricDomainCompiler = R134.presentCutCanonicalMetricDomainCompilerLevel
+
+round135SameSourceScaleCompiler : ProofLevel
+round135SameSourceScaleCompiler = R135.unifiedGeneratedActionStressScaleCompilerLevel
+
+round136UnifiedRecoveryCompiler : ProofLevel
+round136UnifiedRecoveryCompiler = R136.unifiedGeneratedActionRecoveryCompilerLevel
+
+round137A2SameHistoryCompiler : ProofLevel
+round137A2SameHistoryCompiler = R137.unifiedGeneratedActionA2HistoryCompilerLevel
+
+round138A1SameHistoryCompiler : ProofLevel
+round138A1SameHistoryCompiler = R138.unifiedGeneratedActionA1HistoryCompilerLevel
+
+round139PhysicalHistoryCompiler : ProofLevel
+round139PhysicalHistoryCompiler = R139.unifiedGeneratedActionPhysicalHistoryCompilerLevel
+
+round140PresentCutSchwingerCompiler : ProofLevel
+round140PresentCutSchwingerCompiler = R140.unifiedPresentCutSchwingerRecoveryCompilerLevel
+
+round141CombinedRGActionRealizationCompiler : ProofLevel
+round141CombinedRGActionRealizationCompiler =
+  R141.completeDensityEffectiveActionRealizationCompilerLevel
+
+round142FiniteLocalizedD1Compiler : ProofLevel
+round142FiniteLocalizedD1Compiler = R142.finiteEffectiveActionFirstVariationAssemblyLevel
+
+round143BC2FiniteLocalizedD1Compiler : ProofLevel
+round143BC2FiniteLocalizedD1Compiler = R143.bc2FiniteLocalizedFirstVariationCompilerLevel
+
+round144CompositeStressD1Compiler : ProofLevel
+round144CompositeStressD1Compiler = R144.compositeStressFirstVariationCompilerLevel
+
+-- Physical source instantiation remains fail-closed.  This root checks the
+-- compiler graph, not a fabricated Clay or QFT/GR inhabitant.
+round140LiteralInstantiation : ProofLevel
+round140LiteralInstantiation = R140.literalUnifiedPresentCutSchwingerRecoveryLevel
+
+round141LiteralInstantiation : ProofLevel
+round141LiteralInstantiation = R141.literalCompleteDensityEffectiveActionRealizationLevel
+
+round144LiteralInstantiation : ProofLevel
+round144LiteralInstantiation = R144.literalCompositeStressFirstVariationIdentificationLevel

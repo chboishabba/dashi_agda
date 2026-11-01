@@ -1,0 +1,245 @@
+module DASHI.Physics.YangMills.BalabanPhysicalProgressLedger where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanFiniteEnumerationDistinctExact
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
+import DASHI.Physics.YangMills.BalabanPhysicalBlockEnumerationDistinctExact
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
+import DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact
+import DASHI.Physics.YangMills.BalabanFourAxisMartingaleExact
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact
+import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact
+import DASHI.Physics.YangMills.BalabanCommutingProjectionMartingaleExact
+import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
+import DASHI.Physics.YangMills.BalabanPath4PhysicalMartingaleOrthogonalityExact
+import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact
+import DASHI.Physics.YangMills.BalabanPath4AverageJensenExact
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageNormContractionExact
+import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact
+import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact
+import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact
+import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
+import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
+import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
+import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
+import DASHI.Physics.YangMills.BalabanPath4SU2ReferenceHodgePhysicalExact
+import DASHI.Physics.YangMills.BalabanConfiguredSideLatticeSpacingExact
+import DASHI.Physics.YangMills.BalabanConfiguredSideTranslatedBlockExact
+import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
+import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
+import DASHI.Physics.YangMills.BalabanSU2AdjointPointwiseRadiusSquared
+import DASHI.Physics.YangMills.BalabanSU2RadialExponentialChartExact
+import DASHI.Physics.YangMills.BalabanSU2RadialTrigAuthority
+import DASHI.Physics.YangMills.BalabanNonlinearDifferenceIdentitiesExact
+import DASHI.Physics.YangMills.BalabanQuadraticOperatorPerturbationExact
+import DASHI.Physics.YangMills.BalabanMultilinearLipschitzCalculus
+import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact
+import DASHI.Physics.YangMills.BalabanConcreteRootedTracePolymer
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact
+import DASHI.Physics.YangMills.BalabanRunningCouplingIterationExact
+
+------------------------------------------------------------------------
+-- Exact progress and the remaining producer boundary are intentionally listed
+-- side by side.  A downstream aggregate cannot mistake a finite reduction for
+-- the missing physical Wilson, polymer-activity or beta-remainder theorem.
+------------------------------------------------------------------------
+
+literalPhysicalBlockCarrierLevel : ProofLevel
+literalPhysicalBlockCarrierLevel = machineChecked
+
+literalPhysicalBlockDistinctnessLevel : ProofLevel
+literalPhysicalBlockDistinctnessLevel = machineChecked
+
+literalPhysicalFibreMeanZeroEnergyLevel : ProofLevel
+literalPhysicalFibreMeanZeroEnergyLevel = machineChecked
+
+path4PhysicalFibreCertificateLevel : ProofLevel
+path4PhysicalFibreCertificateLevel = machineChecked
+
+path4AxisAverageAlgebraLevel : ProofLevel
+path4AxisAverageAlgebraLevel = computed
+
+finiteSumFubiniLevel : ProofLevel
+finiteSumFubiniLevel = machineChecked
+
+finiteFibreAverageSelfAdjointnessLevel : ProofLevel
+finiteFibreAverageSelfAdjointnessLevel = machineChecked
+
+finiteFibreAverageIdempotenceLevel : ProofLevel
+finiteFibreAverageIdempotenceLevel = machineChecked
+
+commutingProjectionOrthogonalityLevel : ProofLevel
+commutingProjectionOrthogonalityLevel = machineChecked
+
+physicalAxisPartitionInnerProductMatchLevel : ProofLevel
+physicalAxisPartitionInnerProductMatchLevel = machineChecked
+
+path4PhysicalAxisAverageSelfAdjointnessLevel : ProofLevel
+path4PhysicalAxisAverageSelfAdjointnessLevel = machineChecked
+
+path4PhysicalMartingaleOrthogonalityLevel : ProofLevel
+path4PhysicalMartingaleOrthogonalityLevel = machineChecked
+
+path4PhysicalVarianceDecompositionLevel : ProofLevel
+path4PhysicalVarianceDecompositionLevel = machineChecked
+
+path4AxisAverageNormContractionLevel : ProofLevel
+path4AxisAverageNormContractionLevel = machineChecked
+
+path4DistinctAxisDirectionalEnergyContractionLevel : ProofLevel
+path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked
+
+path4ScalarGlobalPoincareLevel : ProofLevel
+path4ScalarGlobalPoincareLevel = machineChecked
+
+path4BondComponentPoincareLevel : ProofLevel
+path4BondComponentPoincareLevel = machineChecked
+
+path4BondReferenceHodgeCoercivityLevel : ProofLevel
+path4BondReferenceHodgeCoercivityLevel = machineChecked
+
+configuredRGSideSelectionLevel : ProofLevel
+configuredRGSideSelectionLevel = machineChecked
+
+configuredRGSideCertificateLevel : ProofLevel
+configuredRGSideCertificateLevel = machineChecked
+
+configuredRGCoercivityConstantPositiveLevel : ProofLevel
+configuredRGCoercivityConstantPositiveLevel = machineChecked
+
+arbitraryRGSideClaimLevel : ProofLevel
+arbitraryRGSideClaimLevel = conditional
+
+path4SU2PhysicalTangentCarrierLevel : ProofLevel
+path4SU2PhysicalTangentCarrierLevel = machineChecked
+
+physicalPositiveBondEnumeration4DuplicateFreeLevel : ProofLevel
+physicalPositiveBondEnumeration4DuplicateFreeLevel = machineChecked
+
+physicalTangentNormMatchesBondNormLevel : ProofLevel
+physicalTangentNormMatchesBondNormLevel = machineChecked
+
+physicalBlockConstraintRemovesComponentMeansLevel : ProofLevel
+physicalBlockConstraintRemovesComponentMeansLevel = machineChecked
+
+physicalGaugeFixingQuadraticFormExactLevel : ProofLevel
+physicalGaugeFixingQuadraticFormExactLevel = machineChecked
+
+physicalBlockPenaltyQuadraticFormExactLevel : ProofLevel
+physicalBlockPenaltyQuadraticFormExactLevel = machineChecked
+
+path4SU2ReferenceHodgeAssemblyLevel : ProofLevel
+path4SU2ReferenceHodgeAssemblyLevel = machineChecked
+
+referenceWilsonGaugeDifferenceIdentificationLevel : ProofLevel
+referenceWilsonGaugeDifferenceIdentificationLevel = conditional
+
+configuredSideLatticeSpacingNormalizationLevel : ProofLevel
+configuredSideLatticeSpacingNormalizationLevel = machineChecked
+
+configuredSideInverseSquareCoefficientLevel : ProofLevel
+configuredSideInverseSquareCoefficientLevel = machineChecked
+
+configuredSideTranslatedBlockReindexingLevel : ProofLevel
+configuredSideTranslatedBlockReindexingLevel = machineChecked
+
+configuredSideTranslatedBlockCoercivityLevel : ProofLevel
+configuredSideTranslatedBlockCoercivityLevel = machineChecked
+
+configuredSideHaloMultiplicityLevel : ProofLevel
+configuredSideHaloMultiplicityLevel = machineChecked
+
+globalWilsonToLocalTranslatedBlockLevel : ProofLevel
+globalWilsonToLocalTranslatedBlockLevel = conditional
+
+physicalArbitrarySideAverageNormalizationLevel : ProofLevel
+physicalArbitrarySideAverageNormalizationLevel = conditional
+
+physicalFourDimensionalTensorizationLevel : ProofLevel
+physicalFourDimensionalTensorizationLevel = conditional
+
+physicalBondHodgeIdentificationLevel : ProofLevel
+physicalBondHodgeIdentificationLevel = conditional
+
+literalPhysicalHaloOriginLevel : ProofLevel
+literalPhysicalHaloOriginLevel = machineChecked
+
+physicalOriginWilsonContainmentMatchLevel : ProofLevel
+physicalOriginWilsonContainmentMatchLevel = conditional
+
+su2SquaredRadiusTransportLevel : ProofLevel
+su2SquaredRadiusTransportLevel = machineChecked
+
+su2PointwiseRadiusInterfaceRepairLevel : ProofLevel
+su2PointwiseRadiusInterfaceRepairLevel = machineChecked
+
+su2RadialQuaternionAlgebraLevel : ProofLevel
+su2RadialQuaternionAlgebraLevel = computed
+
+su2RadialExponentialChartReductionLevel : ProofLevel
+su2RadialExponentialChartReductionLevel = machineChecked
+
+su2RadialTrigAuthoritySurfaceLevel : ProofLevel
+su2RadialTrigAuthoritySurfaceLevel = machineChecked
+
+su2RadialTrigToQuaternionChartLevel : ProofLevel
+su2RadialTrigToQuaternionChartLevel = machineChecked
+
+sinCosPythagoreanAuthorityLevel : ProofLevel
+sinCosPythagoreanAuthorityLevel = conditional
+
+sinOverArgumentAbsBelowOneAuthorityLevel : ProofLevel
+sinOverArgumentAbsBelowOneAuthorityLevel = conditional
+
+sinOverArgumentAtZeroAuthorityLevel : ProofLevel
+sinOverArgumentAtZeroAuthorityLevel = conditional
+
+su2ExponentialChartRadiusInputLevel : ProofLevel
+su2ExponentialChartRadiusInputLevel = conditional
+
+su2RadialScalarUnitIdentityLevel : ProofLevel
+su2RadialScalarUnitIdentityLevel = conditional
+
+su2RadialScalarRadiusBoundLevel : ProofLevel
+su2RadialScalarRadiusBoundLevel = conditional
+
+quadraticOperatorExpansionLevel : ProofLevel
+quadraticOperatorExpansionLevel = machineChecked
+
+multilinearLipschitzReductionLevel : ProofLevel
+multilinearLipschitzReductionLevel = machineChecked
+
+literalFiveWilsonOperatorBoundsLevel : ProofLevel
+literalFiveWilsonOperatorBoundsLevel = conditional
+
+literalSevenNonlinearMapBoundsLevel : ProofLevel
+literalSevenNonlinearMapBoundsLevel = conditional
+
+rootedTracePolymerEntropyLevel : ProofLevel
+rootedTracePolymerEntropyLevel = machineChecked
+
+finiteTraceKoteckyPreissLevel : ProofLevel
+finiteTraceKoteckyPreissLevel = machineChecked
+
+physicalPolymerTraceInjectionLevel : ProofLevel
+physicalPolymerTraceInjectionLevel = conditional
+
+physicalLargeFieldActivitySuppressionLevel : ProofLevel
+physicalLargeFieldActivitySuppressionLevel = conditional
+
+runningCouplingIterationLevel : ProofLevel
+runningCouplingIterationLevel = machineChecked
+
+terminalOffsetScaleFactorizationLevel : ProofLevel
+terminalOffsetScaleFactorizationLevel = machineChecked
+
+physicalBetaRemainderLevel : ProofLevel
+physicalBetaRemainderLevel = conditional
+
+physicalTerminalOffsetBoundLevel : ProofLevel
+physicalTerminalOffsetBoundLevel = conjectural
+
+dimensionalTransmutationInvariantLevel : ProofLevel
+dimensionalTransmutationInvariantLevel = conjectural

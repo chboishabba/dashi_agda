@@ -1,0 +1,12 @@
+module DASHI.Cognition.PNF.ContinuousOscillatorLyapunovDiscriminationRegression where
+
+import DASHI.Cognition.PNF.ContinuousOscillatorLyapunovDiscriminationExact as Lyap
+
+abstractSurfaceExists : Set₁
+abstractSurfaceExists = Lyap.DiscreteDescentSystem
+
+candidateBoundaryExists : Lyap.ContinuousOscillatorLyapunovBoundary
+candidateBoundaryExists = Lyap.canonicalContinuousOscillatorLyapunovBoundary
+
+numericalReceiptBoundaryExists : Lyap.SampledDescentReceiptBoundary
+numericalReceiptBoundaryExists = Lyap.canonicalSampledDescentReceiptBoundary

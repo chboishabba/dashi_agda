@@ -1,0 +1,21 @@
+module DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.RefinementTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.AlignmentTheorem as KLRWOTGRALIGN
+open import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
+
+record KnownLimitsRecoveredWaveObservableTransportGeometryRegimeRefinementTheorem : Setω where
+  constructor knownLimitsRecoveredWaveObservableTransportGeometryRegimeRefinementTheorem
+  field
+    recoveredWaveObservableTransportGeometryRegimeAlignment :
+      KLRWOTGRALIGN.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeAlignmentTheorem
+    localPhysicsCoherence :
+      KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
+
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeRefinementTheorem :
+  KnownLimitsRecoveredWaveObservableTransportGeometryRegimeRefinementTheorem
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeRefinementTheorem =
+  knownLimitsRecoveredWaveObservableTransportGeometryRegimeRefinementTheorem
+    KLRWOTGRALIGN.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeAlignmentTheorem
+    KLLPC.canonicalKnownLimitsLocalPhysicsCoherenceTheorem

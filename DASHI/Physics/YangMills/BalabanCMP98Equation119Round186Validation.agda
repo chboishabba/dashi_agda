@@ -1,0 +1,25 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanCMP98Equation119Round186Validation where
+
+import DASHI.Physics.YangMills.BalabanCMP98Equation119PhysicalSelectedBackgroundRound185Exact as R185
+import DASHI.Physics.YangMills.BalabanCMP98Equation119ClayTerminalBidiRound186Exact as R186
+import DASHI.Physics.YangMills.BalabanCMP98TerminalStatusVsClayTheoremBoundaryExact as TerminalBoundary
+import DASHI.Physics.YangMills.BalabanCMP98TerminalWireAuthorityCorrectionExact as WireBoundary
+
+round185PhysicalSelectedBackground =
+  R185.cmp98Equation119PhysicalSelectedBackgroundRound185Level
+
+round186ClayTerminalBidi =
+  R186.cmp98Equation119ClayTerminalBidiRound186Level
+
+round186SourceLeaf =
+  R186.literalCMP98PhysicalBackgroundRealizationRound186Level
+
+round186TerminalMathLeaf =
+  R186.physicalHamiltonianClayIdentificationRound186Level
+
+terminalStatusDoesNotConstructClayComposition =
+  TerminalBoundary.terminalSprintStatusDoesNotByItselfConstructClayCompositionLevel
+
+terminalWireOpenBridgesRemainAuthoritative =
+  WireBoundary.cmp98TerminalWireOpenBridgeAuthorityLevel

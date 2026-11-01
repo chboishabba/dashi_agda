@@ -1,0 +1,37 @@
+module DASHI.Physics.YangMills.YMClayDenseL2CorrelationBidiParityValidation where
+
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.YangMills.YMClayDenseL2CorrelationBidiParityExact as Dense
+
+-- Focused acceptance surface for the dense-local-observable F1 recut.
+
+denseCarrierIsPhysicalVacuumComplement :
+  Dense.denseSubsetLivesInsidePhysicalVacuumComplement ≡ true
+denseCarrierIsPhysicalVacuumComplement =
+  Dense.denseSubsetLivesInsidePhysicalVacuumComplementIsTrue
+
+connectedCorrelationIsLiteralTransferPairing :
+  Dense.connectedCorrelationEqualsTransferPairingOnVacuumComplement ≡ true
+connectedCorrelationIsLiteralTransferPairing =
+  Dense.connectedCorrelationEqualsTransferPairingOnVacuumComplementIsTrue
+
+denseCriterionExtendsToFullL2 :
+  Dense.denseTransferCriterionEquivalentToFullL2VacuumCriterion ≡ true
+denseCriterionExtendsToFullL2 =
+  Dense.denseTransferCriterionEquivalentToFullL2VacuumCriterionIsTrue
+
+linfinityDensityDefectIsNotPrimitive :
+  Dense.fullJointDensityLinfinityDefectRequiredByCompiler ≡ false
+linfinityDensityDefectIsNotPrimitive =
+  Dense.fullJointDensityLinfinityDefectRequiredByCompilerIsFalse
+
+physicalDenseCorrelationEstimateRemainsProducerDebt :
+  Dense.physicalDenseLocalCorrelationEstimateConstructedHere ≡ false
+physicalDenseCorrelationEstimateRemainsProducerDebt =
+  Dense.physicalDenseLocalCorrelationEstimateConstructedHereIsFalse
+
+noFreshLeanKernelReceiptClaimed :
+  Dense.freshLeanKernelReceiptObservedHere ≡ false
+noFreshLeanKernelReceiptClaimed =
+  Dense.freshLeanKernelReceiptObservedHereIsFalse

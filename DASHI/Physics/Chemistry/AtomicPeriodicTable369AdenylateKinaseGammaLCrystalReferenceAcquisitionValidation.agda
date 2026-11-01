@@ -1,0 +1,31 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaLCrystalReferenceAcquisitionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaLCrystalReferenceAcquisitionExact as Target
+
+oneDVR = Target.oneDVRReference
+twoC9Y = Target.twoC9YReference
+
+boundary = Target.canonicalAdKGammaLCrystalReferenceBoundary
+
+liPaperNearGammaLPaid : Bool
+liPaperNearGammaLPaid = Target.AdKGammaLCrystalReferenceBoundary.liPaperMapsBothNearGammaL boundary
+
+samePdbObjectsAcrossSourcesPaid : Bool
+samePdbObjectsAcrossSourcesPaid = Target.AdKGammaLCrystalReferenceBoundary.samePdbObjectsAcrossSourcesPaid boundary
+
+oneDVRPrimaryArticlePaid : Bool
+oneDVRPrimaryArticlePaid = Target.AdKGammaLCrystalReferenceBoundary.oneDVRPrimaryArticleIdentityPaid boundary
+
+twoC9YPublicationUnresolved : Bool
+twoC9YPublicationUnresolved = Target.AdKGammaLCrystalReferenceBoundary.twoC9YPrimaryPublicationResolved boundary
+
+gammaLIdentityNotPaid : Bool
+gammaLIdentityNotPaid = Target.AdKGammaLCrystalReferenceBoundary.pdbObjectsEqualGammaLState boundary
+
+sameSequenceEcoliNotPaid : Bool
+sameSequenceEcoliNotPaid = Target.AdKGammaLCrystalReferenceBoundary.referencesAreEcoliSameSequence boundary
+
+qidNotAuthority : Bool
+qidNotAuthority = Target.AdKGammaLCrystalReferenceBoundary.qidCreatesGammaLScientificAuthority boundary

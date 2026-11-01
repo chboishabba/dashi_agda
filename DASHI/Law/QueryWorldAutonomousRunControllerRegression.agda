@@ -1,0 +1,55 @@
+module DASHI.Law.QueryWorldAutonomousRunControllerRegression where
+
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Law.QueryWorldAutonomousRunControllerExact as Controller
+
+boundary : Controller.QueryWorldAutonomousRunControllerBoundary
+boundary =
+  Controller.canonicalQueryWorldAutonomousRunControllerBoundary
+
+invariantMayPreserveOperationalClosure :
+  Controller.consumerInvariantChangeMayPreserveOperationalClosure boundary ≡ true
+invariantMayPreserveOperationalClosure =
+  Controller.consumerInvariantChangeMayPreserveOperationalClosureIsTrue boundary
+
+preservedClosureIsNotAdequacy :
+  Controller.preservedOperationalClosureIsConsumerAdequacyProof boundary ≡ false
+preservedClosureIsNotAdequacy =
+  Controller.preservedOperationalClosureIsConsumerAdequacyProofIsFalse boundary
+
+relevantChangeCannotPreserveOldClosure :
+  Controller.consumerRelevantChangeMayPreserveOldClosureWithoutProof boundary ≡ false
+relevantChangeCannotPreserveOldClosure =
+  Controller.consumerRelevantChangeMayPreserveOldClosureWithoutProofIsFalse boundary
+
+relevantChangeMayReopen :
+  Controller.consumerRelevantChangeMayReopenExactResearch boundary ≡ true
+relevantChangeMayReopen =
+  Controller.consumerRelevantChangeMayReopenExactResearchIsTrue boundary
+
+freshWitnessMayCertify :
+  Controller.freshFactorsThroughWitnessMayCertifyCurrentWorld boundary ≡ true
+freshWitnessMayCertify =
+  Controller.freshFactorsThroughWitnessMayCertifyCurrentWorldIsTrue boundary
+
+stalePositiveCannotCertify :
+  Controller.stalePositiveWitnessMayCertifyCurrentWorld boundary ≡ false
+stalePositiveCannotCertify =
+  Controller.stalePositiveWitnessMayCertifyCurrentWorldIsFalse boundary
+
+staleNegativeCannotReopen :
+  Controller.staleNegativeWitnessMayReopenCurrentWorld boundary ≡ false
+staleNegativeCannotReopen =
+  Controller.staleNegativeWitnessMayReopenCurrentWorldIsFalse boundary
+
+runStopIsNotFrontierClosure :
+  Controller.runMayStopMeansOperationalFrontierClosed boundary ≡ false
+runStopIsNotFrontierClosure =
+  Controller.runMayStopMeansOperationalFrontierClosedIsFalse boundary
+
+frontierClosureIsNotAdequacy :
+  Controller.operationalFrontierClosedMeansConsumerAdequate boundary ≡ false
+frontierClosureIsNotAdequacy =
+  Controller.operationalFrontierClosedMeansConsumerAdequateIsFalse boundary

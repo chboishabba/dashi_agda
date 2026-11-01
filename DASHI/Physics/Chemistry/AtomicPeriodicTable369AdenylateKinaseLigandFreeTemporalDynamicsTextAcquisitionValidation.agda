@@ -1,0 +1,31 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandFreeTemporalDynamicsTextAcquisitionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandFreeTemporalDynamicsTextAcquisitionExact as Target
+
+boundary = Target.canonicalLigandFreeTemporalDynamicsTextBoundary
+
+lidClosesTenNs : Bool
+lidClosesTenNs = Target.LigandFreeTemporalDynamicsTextBoundary.lidClosureTenNsPaid boundary
+
+lidReopensHundredNs : Bool
+lidReopensHundredNs = Target.LigandFreeTemporalDynamicsTextBoundary.lidReopenHundredNsPaid boundary
+
+openSemiOpenWindowPaid : Bool
+openSemiOpenWindowPaid = Target.LigandFreeTemporalDynamicsTextBoundary.openSemiOpenCycleHundredToEightHundredNsPaid boundary
+
+crackingRegionsPaid : Bool
+crackingRegionsPaid = Target.LigandFreeTemporalDynamicsTextBoundary.threeCrackingRegionsPaid boundary
+
+crackingTimescalePaid : Bool
+crackingTimescalePaid = Target.LigandFreeTemporalDynamicsTextBoundary.crackingTenToHundredNsPaid boundary
+
+notExperimental : Bool
+notExperimental = Target.LigandFreeTemporalDynamicsTextBoundary.simulationTimescaleEqualsExperimentalKinetics boundary
+
+notKramers : Bool
+notKramers = Target.LigandFreeTemporalDynamicsTextBoundary.simulationTimescaleEqualsKramersRate boundary
+
+qidNotAuthority : Bool
+qidNotAuthority = Target.LigandFreeTemporalDynamicsTextBoundary.qidCreatesTemporalAuthority boundary

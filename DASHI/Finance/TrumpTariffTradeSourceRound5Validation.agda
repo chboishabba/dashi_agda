@@ -1,0 +1,7 @@
+module DASHI.Finance.TrumpTariffTradeSourceRound5Validation where
+
+import DASHI.Finance.TrumpTariffMarketSignalSourceExact
+import DASHI.Finance.TrumpTradeDecisionProvenanceExact
+import DASHI.Finance.TrumpTariffMarketPNFGameBridgeExact
+import DASHI.Finance.TrumpTariffDashiTradeBoundaryExact
+import DASHI.Finance.TrumpTariffTradeAcquisitionRound5Exact

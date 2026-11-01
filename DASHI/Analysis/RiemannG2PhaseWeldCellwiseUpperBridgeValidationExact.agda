@@ -1,0 +1,11 @@
+module DASHI.Analysis.RiemannG2PhaseWeldCellwiseUpperBridgeValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Analysis.RiemannG2PhaseWeldCellwiseUpperBridgeExact as Bridge
+
+boundary : Bridge.PhaseWeldCellwiseUpperBridgeBoundary
+boundary = Bridge.canonicalPhaseWeldCellwiseUpperBridgeBoundary
+
+firstResidual : Bridge.PhaseWeldCellwiseUpperBridgeResidual
+firstResidual = Bridge.firstPhaseWeldCellwiseUpperBridgeResidual

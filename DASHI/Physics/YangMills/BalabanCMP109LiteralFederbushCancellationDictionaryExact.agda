@@ -1,0 +1,244 @@
+module DASHI.Physics.YangMills.BalabanCMP109LiteralFederbushCancellationDictionaryExact where
+
+------------------------------------------------------------------------
+-- PRIMARY SOURCES
+--
+-- Tadeusz Bałaban,
+-- "Averaging Operations for Lattice Gauge Theories",
+-- Communications in Mathematical Physics 98 (1985), 17--51.
+-- DOI: 10.1007/BF01211042.
+--
+-- Tadeusz Bałaban,
+-- "Renormalization Group Approach to Lattice Gauge Field Theories. I.",
+-- Communications in Mathematical Physics 109 (1987), 249--301.
+-- DOI: 10.1007/BF01215223.
+--
+-- Brian C. Hall,
+-- "Lie Groups, Lie Algebras, and Representations: An Elementary
+-- Introduction", second edition, Springer, 2015.
+-- DOI: 10.1007/978-3-319-13467-3.
+--
+-- DASHI CONTRIBUTION
+--
+-- Close the finite/rational half of the remaining G1 convention dictionary
+-- WITHOUT accepting the desired component cancellation as a field.  The
+-- printed equation contributes the same J_j and T_j to the centre matrix
+--
+--        K_j = J_j T_j.
+--
+-- A caller now supplies only the literal left/right dexp data
+--
+--        dexp+ = Ad_exp o dexp-,
+--        J+ dexp+ = I,
+--        dexp- J- = I.
+--
+-- BalabanCMP109FiniteMatrixLeftRightDexpCancellationExact derives
+--
+--        J+ Ad_exp = J-
+--
+-- entrywise from inverse uniqueness and coordinate-basis evaluation.  Hence
+-- the cancellation consumed by the normalized 4/3 inverse is a theorem, not a
+-- restated assumption.  The remaining physical leaf is source calculus:
+-- identify the printed J/T and the opposite inverse-dexp with those literal
+-- trivializations, plus the Bishop-real coefficient/norm realization.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using (length)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; ∣_∣)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact as Fibre
+import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
+import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
+import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
+import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualExact as Component
+import DASHI.Physics.YangMills.BalabanCMP109PhysicalFederbushDifferentiatedEquation011Exact as Printed
+import DASHI.Physics.YangMills.BalabanCMP109FederbushCancellationNormalizedInverseExact as Cancellation
+import DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterReopeningExact as Quarter
+import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogSourceRadiusDefectExact as Source
+import DASHI.Physics.YangMills.BalabanCMP109SU2AdCoordinateMassExact as Ad
+import DASHI.Physics.YangMills.BalabanCMP109SU2AdSquareVariationMassExact as AdSq
+import DASHI.Physics.YangMills.BalabanCMP109SU2PrincipalLogAdPolynomialVariationMassExact as JVar
+import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentVariationExact as Variation
+import DASHI.Physics.YangMills.BalabanCMP109FiniteMatrixLeftRightDexpCancellationExact as LR
+
+record LiteralFederbushCancellationDictionary (Index : Set) : Set₁ where
+  field
+    differential : Printed.PhysicalFederbushEquation011Differential Index
+    weight : ℚ
+    weightNonnegative : 0ℚ ≤ weight
+    normalizedWeight :
+      weight * Fibre.natAsRational
+        (length (Printed.indices differential)) ≡ 1ℚ
+
+    c1 c2 x0 x1 x2 : Index → ℚ
+    sourceRadiusData : ∀ index →
+      Source.SourceRadiusPrincipalLogData
+        (c1 index) (c2 index)
+        (x0 index) (x1 index) (x2 index)
+
+    oppositeInverseDexp : Index → Jacobian.Lie3Matrix
+    oppositeInverseDexpIsSourcePolynomial : ∀ index row column →
+      oppositeInverseDexp index row column
+      ≡ JVar.principalLogAdMatrix
+          (c1 index) (c2 index)
+          (Ad.adMatrix (x0 index) (x1 index) (x2 index))
+          (AdSq.adSquare
+            (Ad.adMatrix (x0 index) (x1 index) (x2 index)))
+          row column
+
+    -- This is source-facing dexp/trivialisation data, not the target matrix
+    -- cancellation.  LR derives that cancellation from these inverse laws.
+    leftRightDexpData : ∀ index →
+      LR.MatrixLeftRightDexpCancellationData
+        (Printed.principalLogJacobian differential index)
+        (Printed.centreTransport differential index)
+        (oppositeInverseDexp index)
+
+open LiteralFederbushCancellationDictionary public
+
+literalComponentCancellation :
+  ∀ {Index} (dictionary : LiteralFederbushCancellationDictionary Index)
+    index row column →
+  Printed.composeMatrix
+    (Printed.principalLogJacobian (differential dictionary) index)
+    (Printed.centreTransport (differential dictionary) index)
+    row column
+  ≡ oppositeInverseDexp dictionary index row column
+literalComponentCancellation dictionary index =
+  LR.leftRightDexpMatrixCancellation (leftRightDexpData dictionary index)
+
+sourcePolynomial :
+  ∀ {Index} → LiteralFederbushCancellationDictionary Index →
+  Index → Jacobian.Lie3Matrix
+sourcePolynomial dictionary index =
+  JVar.principalLogAdMatrix
+    (c1 dictionary index) (c2 dictionary index)
+    (Ad.adMatrix
+      (x0 dictionary index) (x1 dictionary index) (x2 dictionary index))
+    (AdSq.adSquare
+      (Ad.adMatrix
+        (x0 dictionary index) (x1 dictionary index) (x2 dictionary index)))
+
+oppositeResidualEqualsPolynomialResidual :
+  ∀ {Index} (dictionary : LiteralFederbushCancellationDictionary Index)
+    index row column →
+  Component.logJacobianResidual
+      (oppositeInverseDexp dictionary index) row column
+  ≡ Component.logJacobianResidual
+      (sourcePolynomial dictionary index) row column
+oppositeResidualEqualsPolynomialResidual dictionary index row column =
+  cong
+    (λ value → value - Jacobian.identity3 row column)
+    (oppositeInverseDexpIsSourcePolynomial dictionary index row column)
+
+sourcePolynomialResidualColumnBound :
+  ∀ {Index} (dictionary : LiteralFederbushCancellationDictionary Index)
+    index column →
+  RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+    (Component.logJacobianResidual (sourcePolynomial dictionary index)) column
+  ≤ Source.sourcePrincipalLogColumnBound
+sourcePolynomialResidualColumnBound dictionary index column =
+  let
+    current = sourcePolynomial dictionary index
+    zero = JVar.principalLogAdMatrix
+      (c1 dictionary index) Source.c2AtZero
+      Source.zeroAd Source.zeroAdSquare
+    raw = Source.sourcePrincipalLogVariationColumn
+      (c1 dictionary index) (c2 dictionary index)
+      (x0 dictionary index) (x1 dictionary index) (x2 dictionary index)
+      (sourceRadiusData dictionary index) column
+    identify :
+      RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+        (Variation.matrixDifference current zero) column
+      ≡ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+        (Component.logJacobianResidual current) column
+    identify = Sums.sumRationalCong Physical.lieCoordinates3 _ _
+      (λ row → cong ∣_∣
+        (subst
+          (λ reference →
+            current row column - reference
+            ≡ current row column - Jacobian.identity3 row column)
+          (Source.principalLogAtZeroIsIdentity
+            (c1 dictionary index) row column)
+          refl))
+  in
+  subst
+    (λ lower → lower ≤ Source.sourcePrincipalLogColumnBound)
+    identify raw
+
+oppositeInverseDexpSourceDefect :
+  ∀ {Index} (dictionary : LiteralFederbushCancellationDictionary Index)
+    index column →
+  RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+    (Component.logJacobianResidual
+      (oppositeInverseDexp dictionary index)) column
+  ≤ Source.sourcePrincipalLogColumnBound
+oppositeInverseDexpSourceDefect dictionary index column =
+  let
+    identify :
+      RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+        (Component.logJacobianResidual
+          (oppositeInverseDexp dictionary index)) column
+      ≡ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+        (Component.logJacobianResidual
+          (sourcePolynomial dictionary index)) column
+    identify = Sums.sumRationalCong Physical.lieCoordinates3 _ _
+      (λ row → cong ∣_∣
+        (oppositeResidualEqualsPolynomialResidual
+          dictionary index row column))
+  in
+  subst
+    (λ lower → lower ≤ Source.sourcePrincipalLogColumnBound)
+    (sym identify)
+    (sourcePolynomialResidualColumnBound dictionary index column)
+
+asCancellationData :
+  ∀ {Index} → LiteralFederbushCancellationDictionary Index →
+  Cancellation.FederbushCancellationData Index
+asCancellationData dictionary = record
+  { Cancellation.FederbushCancellationData.indices =
+      Printed.indices (differential dictionary)
+  ; Cancellation.FederbushCancellationData.weight = weight dictionary
+  ; Cancellation.FederbushCancellationData.physicalComponent = λ index →
+      Printed.composeMatrix
+        (Printed.principalLogJacobian (differential dictionary) index)
+        (Printed.centreTransport (differential dictionary) index)
+  ; Cancellation.FederbushCancellationData.oppositeInverseDexp =
+      oppositeInverseDexp dictionary
+  ; Cancellation.FederbushCancellationData.weightNonnegative =
+      weightNonnegative dictionary
+  ; Cancellation.FederbushCancellationData.normalizedWeight =
+      normalizedWeight dictionary
+  ; Cancellation.FederbushCancellationData.componentCancellation =
+      literalComponentCancellation dictionary
+  ; Cancellation.FederbushCancellationData.oppositeInverseDexpSourceDefect =
+      oppositeInverseDexpSourceDefect dictionary
+  }
+
+literalFederbushCancellationInverseFourThirds :
+  ∀ {Index} (dictionary : LiteralFederbushCancellationDictionary Index)
+    solution source →
+  Cancellation.cancellationFederbushEquation
+    (asCancellationData dictionary) solution source →
+  L1.vectorL1 Physical.lieCoordinates3 solution
+  ≤ Quarter.fourThirds * L1.vectorL1 Physical.lieCoordinates3 source
+literalFederbushCancellationInverseFourThirds dictionary =
+  Cancellation.cancellationInverseFourThirds (asCancellationData dictionary)
+
+cmp109LiteralFederbushCancellationDictionaryLevel : ProofLevel
+cmp109LiteralFederbushCancellationDictionaryLevel = machineChecked
+
+cmp109LiteralFederbushCancellationDerivedLevel : ProofLevel
+cmp109LiteralFederbushCancellationDerivedLevel = machineChecked
+
+cmp109LiteralFederbushSourceRadiusDefectTransportLevel : ProofLevel
+cmp109LiteralFederbushSourceRadiusDefectTransportLevel = machineChecked
+
+cmp109LiteralFederbushDexpTrivializationIdentificationLevel : ProofLevel
+cmp109LiteralFederbushDexpTrivializationIdentificationLevel = conditional

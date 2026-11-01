@@ -1,0 +1,155 @@
+module DASHI.Interop.PenroseLocalGlobalHyperfabricCrossPollinationRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Interop.PenroseLocalGlobalHyperfabricCrossPollinationExact as Cross
+import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact as Penrose
+
+localValidityFirewallRegression :
+  Cross.localValidityDoesNotImplyGlobalValidity ≡ true
+localValidityFirewallRegression =
+  Cross.localValidityDoesNotImplyGlobalValidityIsTrue
+
+projectionSufficiencyFirewallRegression :
+  Cross.projectionValidityDoesNotImplySourceSufficiency ≡ true
+projectionSufficiencyFirewallRegression =
+  Cross.projectionValidityDoesNotImplySourceSufficiencyIsTrue
+
+boundedLocalCarrierFirewallRegression :
+  Cross.boundedLocalCarrierDoesNotImplyGlobalCompactnessOrClosure ≡ true
+boundedLocalCarrierFirewallRegression =
+  Cross.boundedLocalCarrierDoesNotImplyGlobalCompactnessOrClosureIsTrue
+
+sharedArchitectureFirewallRegression :
+  Cross.sharedProofArchitectureDoesNotIdentifyDomainTheorems ≡ true
+sharedArchitectureFirewallRegression =
+  Cross.sharedProofArchitectureDoesNotIdentifyDomainTheoremsIsTrue
+
+penroseProjectionIdentityFirewallRegression :
+  Cross.penroseProjectionIsNotParetoAxisProjection ≡ true
+penroseProjectionIdentityFirewallRegression =
+  Cross.penroseProjectionIsNotParetoAxisProjectionIsTrue
+
+horismosGlobalSectionIdentityFirewallRegression :
+  Cross.horismosIsNotHyperfabricGlobalSection ≡ true
+horismosGlobalSectionIdentityFirewallRegression =
+  Cross.horismosIsNotHyperfabricGlobalSectionIsTrue
+
+graphLorentzianCompatibilityFirewallRegression :
+  Cross.graphSeamCompatibilityIsNotLorentzianCompatibility ≡ true
+graphLorentzianCompatibilityFirewallRegression =
+  Cross.graphSeamCompatibilityIsNotLorentzianCompatibilityIsTrue
+
+sameObjectIdentityRegression :
+  Cross.sameObjectReductioRequiresSameObjectIdentity ≡ true
+sameObjectIdentityRegression =
+  Penrose.sameHorismosObjectCarriesBothReductioClaimsIsTrue
+    Penrose.canonicalPenroseGlobalHorismosBoundary
+
+noNewSourceAuthorityRegression :
+  Cross.crossPollinationAddsNoNewSourceAuthority ≡ true
+noNewSourceAuthorityRegression =
+  Cross.crossPollinationAddsNoNewSourceAuthorityIsTrue
+
+retrospectiveNotHistoricalRegression :
+  Cross.crossPollinationIsRetrospectiveNotHistoricalInfluence ≡ true
+retrospectiveNotHistoricalRegression =
+  Cross.crossPollinationIsRetrospectiveNotHistoricalInfluenceIsTrue
+
+snowballPaymentCannotSkipParentRegression :
+  Cross.snowballPaymentMaySkipUnpaidParentDependency ≡ false
+snowballPaymentCannotSkipParentRegression =
+  Cross.snowballPaymentMaySkipUnpaidParentDependencyIsFalse
+
+analogyDoesNotCreateAuthorityRegression :
+  Cross.crossDomainAnalogyCreatesSourceAuthority ≡ false
+analogyDoesNotCreateAuthorityRegression =
+  Cross.crossDomainAnalogyCreatesSourceAuthorityIsFalse
+
+rsaClosureStillRequiredRegression :
+  Cross.coRequirementClosureRequired Cross.canonicalRSACompatibilityClosureAdapter ≡ true
+rsaClosureStillRequiredRegression =
+  Cross.coRequirementClosureRequiredIsTrue Cross.canonicalRSACompatibilityClosureAdapter
+
+rsaGlobalCommutationStillRequiredRegression :
+  Cross.globalCommutationRequired Cross.canonicalRSACompatibilityClosureAdapter ≡ true
+rsaGlobalCommutationStillRequiredRegression =
+  Cross.globalCommutationRequiredIsTrue Cross.canonicalRSACompatibilityClosureAdapter
+
+rsaSnowballPaymentRegression :
+  Cross.snowballPaymentOutOfOrderAllowed Cross.canonicalRSACompatibilityClosureAdapter ≡ false
+rsaSnowballPaymentRegression =
+  Cross.snowballPaymentOutOfOrderAllowedIsFalse Cross.canonicalRSACompatibilityClosureAdapter
+
+flyCompatibilityNotGlobalImprovementRegression :
+  Cross.localCompatibilityAutomaticallyPaysGlobalImprovement
+    Cross.canonicalFlyHeldOutCompatibilityAdapter ≡ false
+flyCompatibilityNotGlobalImprovementRegression =
+  Cross.localCompatibilityAutomaticallyPaysGlobalImprovementIsFalse
+    Cross.canonicalFlyHeldOutCompatibilityAdapter
+
+flyHeldOutStillRequiredRegression :
+  Cross.globalHeldOutEvaluationRequired Cross.canonicalFlyHeldOutCompatibilityAdapter ≡ true
+flyHeldOutStillRequiredRegression =
+  Cross.globalHeldOutEvaluationRequiredIsTrue Cross.canonicalFlyHeldOutCompatibilityAdapter
+
+paretoIneligibleCannotWinRegression :
+  Cross.inadmissibleCandidateMayWinByShortCode
+    Cross.canonicalParetoEligibilityBeforeOptimizationAdapter ≡ false
+paretoIneligibleCannotWinRegression =
+  Cross.inadmissibleCandidateMayWinByShortCodeIsFalse
+    Cross.canonicalParetoEligibilityBeforeOptimizationAdapter
+
+paretoConsumerInadequateCannotWinRegression :
+  Cross.consumerInadequateCandidateMayWinByShortCode
+    Cross.canonicalParetoEligibilityBeforeOptimizationAdapter ≡ false
+paretoConsumerInadequateCannotWinRegression =
+  Cross.consumerInadequateCandidateMayWinByShortCodeIsFalse
+    Cross.canonicalParetoEligibilityBeforeOptimizationAdapter
+
+recursiveParetoNoAuthorityRegression :
+  Cross.frontierRefinementCreatesProofAuthority
+    Cross.canonicalRecursiveParetoAdmissionAdapter ≡ false
+recursiveParetoNoAuthorityRegression =
+  Cross.frontierRefinementCreatesProofAuthorityIsFalse
+    Cross.canonicalRecursiveParetoAdmissionAdapter
+
+recursiveParetoOldCostsPreservedRegression :
+  Cross.oldAxisCostsMayChangeSilently Cross.canonicalRecursiveParetoAdmissionAdapter ≡ false
+recursiveParetoOldCostsPreservedRegression =
+  Cross.oldAxisCostsMayChangeSilentlyIsFalse Cross.canonicalRecursiveParetoAdmissionAdapter
+
+liveParetoAuthorityGateRegression :
+  Cross.authorityHardGateBeforePareto Cross.canonicalLiveSetParetoSchedulerAdapter ≡ true
+liveParetoAuthorityGateRegression =
+  Cross.authorityHardGateBeforeParetoIsTrue Cross.canonicalLiveSetParetoSchedulerAdapter
+
+liveParetoConsumerGateRegression :
+  Cross.consumerRelevanceHardGateBeforePareto
+    Cross.canonicalLiveSetParetoSchedulerAdapter ≡ true
+liveParetoConsumerGateRegression =
+  Cross.consumerRelevanceHardGateBeforeParetoIsTrue
+    Cross.canonicalLiveSetParetoSchedulerAdapter
+
+liveParetoNoUniqueTruthRegression :
+  Cross.paretoChoiceCreatesUniqueScientificTruth
+    Cross.canonicalLiveSetParetoSchedulerAdapter ≡ false
+liveParetoNoUniqueTruthRegression =
+  Cross.paretoChoiceCreatesUniqueScientificTruthIsFalse
+    Cross.canonicalLiveSetParetoSchedulerAdapter
+
+terminalConsumerPaymentRegression :
+  Cross.terminalConsumerStillMustBePaid ≡ true
+terminalConsumerPaymentRegression =
+  Cross.terminalConsumerStillMustBePaidIsTrue
+
+architectureTransferNoAuthorityRegression :
+  Cross.sourceArchitectureCreatesRSAAction Cross.canonicalRSACompatibilityClosureAdapter ≡ false
+architectureTransferNoAuthorityRegression =
+  Cross.sourceArchitectureCreatesRSAActionIsFalse Cross.canonicalRSACompatibilityClosureAdapter
+
+downstreamCandidateMapDoesNotMutateDonorsRegression :
+  Cross.downstreamCandidateMapMutatesDonorKernels ≡ false
+downstreamCandidateMapDoesNotMutateDonorsRegression =
+  Cross.downstreamCandidateMapMutatesDonorKernelsIsFalse

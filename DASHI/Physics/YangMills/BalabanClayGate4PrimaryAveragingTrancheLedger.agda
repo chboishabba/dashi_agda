@@ -1,0 +1,213 @@
+module DASHI.Physics.YangMills.BalabanClayGate4PrimaryAveragingTrancheLedger where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryAveragingDimensionAuditExact as Dimension
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryBibliographyChainExact as Bibliography
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryAveragingLocalityExact as Locality
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkFiniteKernelBudgetExact as Kernel
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkAdjointColumnExact as Adjoint
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkSchurBridgeExact as Schur
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkPhysicalSchurAssemblyExact as PhysicalSchur
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteWeightedSchurBlockAdjointExact as WeightedSchur
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkWeightedSchurExact as PrimaryWeighted
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicQkSupportEnumerationExact as PeriodicSupport
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicQkUniformSupportBoundsExact as UniformSupport
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicQkPrimaryKernelInstantiationExact as PeriodicKernel
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicQkWeightedSchurInstantiationExact as PeriodicWeighted
+import DASHI.Physics.YangMills.BalabanClayGate4ConstrainedMinimizerProjectionExact as Minimizer
+import DASHI.Physics.YangMills.BalabanClayGate4ConstrainedHessianRestrictionExact as HessianRestriction
+import DASHI.Physics.YangMills.BalabanClayGate4T3ConstrainedHessianRestrictionReuseExact as T3Restriction
+import DASHI.Physics.YangMills.BalabanClayGate4T3RestrictedDeterminantAdapterExact as T3Determinant
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryBetaFiniteDifferenceExact as PrimaryBeta
+
+------------------------------------------------------------------------
+-- Exact primary-source and finite reductions.
+------------------------------------------------------------------------
+
+primaryAveragingNormalizationLevel =
+  Dimension.primaryAveragingNormalizationLevel
+dyadicDimensionArithmeticLevel = Dimension.dyadicDimensionArithmeticLevel
+averagingOperatorConventionDistinctionLevel =
+  Dimension.averagingOperatorConventionDistinctionLevel
+qkPrimaryKernelBoundProvenanceLevel =
+  Dimension.qkPrimaryKernelBoundProvenanceLevel
+
+primaryBibliographyMetadataLevel =
+  Bibliography.primaryBibliographyMetadataLevel
+cmp102AdjacentPaperSeparationLevel =
+  Bibliography.cmp102AdjacentPaperSeparationLevel
+
+primaryOneStepFormulaLevel = Locality.primaryOneStepFormulaLevel
+localityClosedUnderCompositionLevel =
+  Locality.localityClosedUnderCompositionLevel
+finitePointwiseToRowSumLevel = Kernel.finitePointwiseToRowSumLevel
+primaryQkLocalityToFiniteSupportLevel =
+  Kernel.primaryQkLocalityToFiniteSupportLevel
+primaryQkPointwiseKernelBoundLevel =
+  Kernel.primaryQkPointwiseKernelBoundLevel
+adjointEntryBoundFromPrimaryTransposeLevel =
+  Adjoint.adjointEntryBoundFromPrimaryTransposeLevel
+adjointColumnFiniteSumLevel = Adjoint.adjointColumnFiniteSumLevel
+primaryQkPointwiseToStrongSchurRowsLevel =
+  Schur.primaryQkPointwiseToStrongSchurRowsLevel
+primaryQkStrongSchurAdapterLevel = Schur.primaryQkStrongSchurAdapterLevel
+primaryQkRelativeOneEighthAssemblyLevel =
+  Schur.primaryQkRelativeOneEighthAssemblyLevel
+primaryQkPhysicalSchurAssemblyLevel =
+  PhysicalSchur.primaryQkPhysicalSchurAssemblyLevel
+primaryQkPhysicalRelativeContractionLevel =
+  PhysicalSchur.primaryQkPhysicalRelativeContractionLevel
+
+finiteWeightedSchurInterfaceLevel =
+  WeightedSchur.finiteWeightedSchurInterfaceLevel
+weightedRelativeOneEighthAssemblyLevel =
+  WeightedSchur.weightedRelativeOneEighthAssemblyLevel
+physicalScaleWeightedSchurAssemblyLevel =
+  WeightedSchur.physicalScaleWeightedSchurAssemblyLevel
+primaryQkWeightedKernelAttachmentLevel =
+  PrimaryWeighted.primaryQkWeightedKernelAttachmentLevel
+primaryQkWeightedRelativeContractionLevel =
+  PrimaryWeighted.primaryQkWeightedRelativeContractionLevel
+
+periodicQkRowSupportEnumerationLevel =
+  PeriodicSupport.periodicQkRowSupportEnumerationLevel
+periodicQkColumnIncidenceEnumerationLevel =
+  PeriodicSupport.periodicQkColumnIncidenceEnumerationLevel
+periodicQkExactFiniteCountDefinitionLevel =
+  PeriodicSupport.periodicQkExactFiniteCountDefinitionLevel
+periodicQkSupportFromEndpointPredicateLevel =
+  PeriodicSupport.periodicQkSupportFromEndpointPredicateLevel
+periodicQkUniformRowBoundConstructionLevel =
+  UniformSupport.periodicQkUniformRowBoundConstructionLevel
+periodicQkUniformColumnBoundConstructionLevel =
+  UniformSupport.periodicQkUniformColumnBoundConstructionLevel
+periodicQkUniformSupportBoundComputationLevel =
+  UniformSupport.periodicQkUniformSupportBoundComputationLevel
+periodicPrimaryRowBudgetInstantiationLevel =
+  PeriodicKernel.periodicPrimaryRowBudgetInstantiationLevel
+periodicPrimaryAdjointColumnBudgetInstantiationLevel =
+  PeriodicKernel.periodicPrimaryAdjointColumnBudgetInstantiationLevel
+periodicQkLiteralWeightedRowSumLevel =
+  PeriodicWeighted.periodicQkLiteralWeightedRowSumLevel
+periodicQkLiteralWeightedColumnSumLevel =
+  PeriodicWeighted.periodicQkLiteralWeightedColumnSumLevel
+periodicQkWeightedSchurInstantiationLevel =
+  PeriodicWeighted.periodicQkWeightedSchurInstantiationLevel
+periodicQkWeightedRelativeContractionAssemblyLevel =
+  PeriodicWeighted.periodicQkWeightedRelativeContractionAssemblyLevel
+
+constrainedMinimizerFormulaLevel = Minimizer.constrainedMinimizerFormulaLevel
+constraintProjectionKernelLevel = Minimizer.constraintProjectionKernelLevel
+balabanMinimizerProvenanceLevel = Minimizer.balabanMinimizerProvenanceLevel
+constrainedHessianRestrictionSplitLevel =
+  HessianRestriction.constrainedHessianRestrictionSplitLevel
+projectedPerturbationNormTransportLevel =
+  HessianRestriction.projectedPerturbationNormTransportLevel
+t3PhysicalHessianRestrictionReuseLevel =
+  T3Restriction.t3PhysicalHessianRestrictionReuseLevel
+t3RestrictedHessianSplitLevel =
+  T3Restriction.t3RestrictedHessianSplitLevel
+t3ProjectedOperatorNormTransportLevel =
+  T3Restriction.t3ProjectedOperatorNormTransportLevel
+t3RestrictedDeterminantRepresentationLevel =
+  T3Determinant.t3RestrictedDeterminantRepresentationLevel
+t3PerturbationNormToDeterminantOrderLevel =
+  T3Determinant.t3PerturbationNormToDeterminantOrderLevel
+
+primaryBetaFiniteDifferenceOrientationLevel =
+  PrimaryBeta.primaryBetaFiniteDifferenceOrientationLevel
+finiteDifferenceToAdditiveRecursionLevel =
+  PrimaryBeta.finiteDifferenceToAdditiveRecursionLevel
+primaryTheoremOneAdmissibleFlowArchitectureLevel =
+  PrimaryBeta.primaryTheoremOneAdmissibleFlowArchitectureLevel
+
+------------------------------------------------------------------------
+-- Exact corrected boundary.
+------------------------------------------------------------------------
+
+qstarOneEighthContractionFromPrimaryCoefficientLevel =
+  Dimension.qstarOneEighthContractionFromPrimaryCoefficientLevel
+
+physicalAveragingConventionSelectionInputsLevel =
+  Dimension.physicalAveragingConventionSelectionInputsLevel
+physicalConstantToPrimaryPaperAttributionInputsLevel =
+  Bibliography.physicalConstantToPrimaryPaperAttributionInputsLevel
+physicalAveragingFormulaIdentificationInputsLevel =
+  Locality.physicalAveragingFormulaIdentificationInputsLevel
+physicalIteratedSupportEnumerationInputsLevel =
+  Locality.physicalIteratedSupportEnumerationInputsLevel
+physicalQkKernelAndNormIdentificationInputsLevel =
+  Kernel.physicalQkKernelAndNormIdentificationInputsLevel
+physicalQkSupportCardinalityInputsLevel =
+  Kernel.physicalQkSupportCardinalityInputsLevel
+physicalQkAdjointTransposeIdentificationInputsLevel =
+  Adjoint.physicalQkAdjointTransposeIdentificationInputsLevel
+physicalQkColumnIncidenceCardinalityInputsLevel =
+  Adjoint.physicalQkColumnIncidenceCardinalityInputsLevel
+physicalQkAdjointTransposeMeaningInputsLevel =
+  Schur.physicalQkAdjointTransposeMeaningInputsLevel
+physicalQkRowColumnProductBudgetInputsLevel =
+  Schur.physicalQkRowColumnProductBudgetInputsLevel
+physicalQkPrimalSupportEnumerationInputsLevel =
+  PhysicalSchur.physicalQkPrimalSupportEnumerationInputsLevel
+physicalQkAdjointIncidenceEnumerationInputsLevel =
+  PhysicalSchur.physicalQkAdjointIncidenceEnumerationInputsLevel
+physicalQkNormalizedSchurBudgetInputsLevel =
+  PhysicalSchur.physicalQkNormalizedSchurBudgetInputsLevel
+
+physicalWeightedKernelSumMeaningInputsLevel =
+  WeightedSchur.physicalWeightedKernelSumMeaningInputsLevel
+physicalScaleWeightChoiceInputsLevel =
+  WeightedSchur.physicalScaleWeightChoiceInputsLevel
+physicalWeightedRowColumnBudgetInputsLevel =
+  WeightedSchur.physicalWeightedRowColumnBudgetInputsLevel
+physicalPrimaryQkWeightedSumInputsLevel =
+  PrimaryWeighted.physicalPrimaryQkWeightedSumInputsLevel
+physicalPrimaryQkScaleWeightMeaningInputsLevel =
+  PrimaryWeighted.physicalPrimaryQkScaleWeightMeaningInputsLevel
+physicalPrimaryQkWeightedProductBudgetInputsLevel =
+  PrimaryWeighted.physicalPrimaryQkWeightedProductBudgetInputsLevel
+
+physicalQkEndpointBlockUnionPredicateInputsLevel =
+  PeriodicSupport.physicalQkEndpointBlockUnionPredicateInputsLevel
+physicalSupportPredicateAndKernelIdentificationInputsLevel =
+  PeriodicKernel.physicalSupportPredicateAndKernelIdentificationInputsLevel
+physicalEntryBoundCountMonotonicityInputsLevel =
+  PeriodicKernel.physicalEntryBoundCountMonotonicityInputsLevel
+physicalPeriodicQkWeightChoiceInputsLevel =
+  PeriodicWeighted.physicalPeriodicQkWeightChoiceInputsLevel
+physicalPeriodicQkWeightedBoundsInputsLevel =
+  PeriodicWeighted.physicalPeriodicQkWeightedBoundsInputsLevel
+physicalPeriodicQkRelativeProductInputsLevel =
+  PeriodicWeighted.physicalPeriodicQkRelativeProductInputsLevel
+
+physicalConstraintProjectionMeaningInputsLevel =
+  Minimizer.physicalConstraintProjectionMeaningInputsLevel
+physicalConstrainedFiniteHessianMeaningInputsLevel =
+  Minimizer.physicalConstrainedFiniteHessianMeaningInputsLevel
+physicalProjectionAdjointMeaningInputsLevel =
+  HessianRestriction.physicalProjectionAdjointMeaningInputsLevel
+physicalHessianSecondVariationSplitInputsLevel =
+  HessianRestriction.physicalHessianSecondVariationSplitInputsLevel
+physicalAmbientHessianPerturbationBoundInputsLevel =
+  HessianRestriction.physicalAmbientHessianPerturbationBoundInputsLevel
+physicalT3ProjectionMeaningInputsLevel =
+  T3Restriction.physicalT3ProjectionMeaningInputsLevel
+physicalT3AmbientRemainderOperatorNormInputsLevel =
+  T3Restriction.physicalT3AmbientRemainderOperatorNormInputsLevel
+relativeFormBudgetToOperatorNormAcceptedWithoutProof =
+  T3Restriction.relativeFormBudgetToOperatorNormAcceptedWithoutProof
+physicalFiniteMatrixRestrictionMeaningInputsLevel =
+  T3Determinant.physicalFiniteMatrixRestrictionMeaningInputsLevel
+physicalDeterminantOrderIdentificationInputsLevel =
+  T3Determinant.physicalDeterminantOrderIdentificationInputsLevel
+physicalReferenceInverseNormIdentificationInputsLevel =
+  T3Determinant.physicalReferenceInverseNormIdentificationInputsLevel
+
+physicalPrimaryBetaFunctionIdentificationInputsLevel =
+  PrimaryBeta.physicalPrimaryBetaFunctionIdentificationInputsLevel
+physicalPrimaryAdmissibleIntervalInputsLevel =
+  PrimaryBeta.physicalPrimaryAdmissibleIntervalInputsLevel
+physicalHRBetaRemainderUniformityInputsLevel =
+  PrimaryBeta.physicalHRBetaRemainderUniformityInputsLevel
