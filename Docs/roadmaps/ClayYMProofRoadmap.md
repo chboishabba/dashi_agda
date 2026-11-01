@@ -869,3 +869,5 @@ and `realPart(inv q)=realPart q`. The remaining six-plane cut narrows to
 the **physical oriented contour evaluation/reindexing** and universal
 16ordered↔6positive multiplicity and coupling norm; generic 4factor
 group reversal itself no longer needs an arbitrary external assumption.
+
+The literal native SU2 n=3 bond field <-> dependent positive-edge graph map now has **both** pointwise roundtrip theorems including arbitrary selected graph fields; no function extensionality nor off-carrier topology was used. Source-written, not kernel-verified.
