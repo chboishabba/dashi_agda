@@ -176,7 +176,7 @@ factorisationZeroOrProduct :
 factorisationZeroOrProduct Raw.zeroFactorisation =
   inj₁ refl
 factorisationZeroOrProduct (Raw.positiveFactorisation f) =
-  inj₂ (sym (Fact.isFactorisation f))
+  inj₂ (Fact.isFactorisation f)
 
 numeratorMagnitudeZeroOrReconstructs :
   (n : Nat) →
