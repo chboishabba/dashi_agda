@@ -23,11 +23,12 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Vec.Base using (Vec)
 import Data.Fin.Base as Fin
 import Data.Fin.Properties as FinP
-open import Relation.Binary.PropositionalEquality using (cong; cong₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedCompilerExact as Compiler
 import DASHI.Research.OpenAIMath.OpenAIMathFiniteSupportedTseitinModelsExact as Source
+import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinOptimizedCNFExact as Opt
 
 -- This carrier is the typed AST corresponding to the JSON wire's
 -- "input" and "gate" constructors, not a permissive Nat index.
@@ -215,6 +216,37 @@ creationCircuitAcceptedCountExact : ∀ {inputs : Nat}
   Source.countAcceptedCircuitInputs circuit
 creationCircuitAcceptedCountExact circuit =
   cong Source.countAcceptedCircuitInputs (decodeEncodeCircuit circuit)
+
+-- Composition with the SAME original Golden P2 theorem. These are
+-- original typed source counts, not OAI machine output counts.
+creationOriginalCompiledCountExact : ∀ {inputs : Nat}
+  (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Source.originalCompiledCNFModelCount (decodeCircuit (encodeCircuit circuit))
+    ≡ Source.originalCompiledCNFModelCount circuit
+creationOriginalCompiledCountExact circuit =
+  cong Source.originalCompiledCNFModelCount (decodeEncodeCircuit circuit)
+
+creationOriginalTseitinCountExact : ∀ {inputs : Nat}
+  (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Source.originalCompiledCNFModelCount (decodeCircuit (encodeCircuit circuit))
+    ≡ Source.countAcceptedCircuitInputs circuit
+creationOriginalTseitinCountExact circuit =
+  trans (creationOriginalCompiledCountExact circuit)
+    (Source.originalGlobalCNFCountExact circuit)
+
+-- Same source numerical bridge using the EXISTING optional three-clause
+-- owner. This carries the actual original optimized compiler, not a new
+-- truth-table or SAT implementation.
+creationOptimizedTseitinCountExact : ∀ {inputs : Nat}
+  (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Opt.countSourceCNF
+    (Opt.optCircuitCNF (decodeCircuit (encodeCircuit circuit)))
+    ≡ Source.countAcceptedCircuitInputs circuit
+creationOptimizedTseitinCountExact circuit =
+  trans
+    (cong (λ source → Opt.countSourceCNF (Opt.optCircuitCNF source))
+      (decodeEncodeCircuit circuit))
+    (Opt.optGlobalCNFCountExact circuit)
 
 -- OPEN: prove the concrete JSON *bytes* parser recognizes precisely the
 -- finite-indexed creation AST above, and that its emitted clauses and bits
