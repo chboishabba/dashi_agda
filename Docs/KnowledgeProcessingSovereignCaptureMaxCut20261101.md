@@ -133,3 +133,53 @@ P1. Project 2025 author/spans → administration acts → procurement → actual
 P1. Runtime test selected actual independent knowledge routes under common cloud/auth/supply restrictions, rather than counting model deployments. Distinguish safety governance from discriminatory model gatekeeping.
 
 **Status:** source/original material inspected in web and GitHub, separate source-written Agda bridge on draft PR, no exact-head kernel run, real-world causal estimation or runtime federation test claimed.
+
+
+## 1 November 2026: primary RBA risk recognition and source-specific third-order cut
+
+**Genuinely new original financial-stability owner:** Reserve Bank of Australia, *Financial Stability Review — October 2026*, "The Global Macro-financial Environment", original `https://www.rba.gov.au/publications/fsr/2026/oct/the-global-macro-financial-environment.html` and "Financial Stability Assessment", `https://www.rba.gov.au/publications/fsr/2026/oct/financial-stability-assessment.html`. These official documents explicitly recognise **rising AI-sector debt, opaque on/off-balance-sheet interlinkages and circular vendor financing**, naming clouds investing in model developers and chipmakers financing their neocloud customers. They warn that disappointing returns could contribute to widespread repricing and financial-stability vulnerability. **No public rescue, bankruptcy, coerced state equity, or exclusive intellectual-property transfer is stated to have occurred**. This pays a stronger original-source *institutional recognition of potential systemic risk* than investor/commentator assertions, not the stronger terminal-outcome proposition.
+
+**Latest SEC issuer version**: Anthropic **public S-1 filed 26 Oct 2026**, accession `0001628280-26-067168`, `https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm`, filing index `https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm`, supersedes the previously used September 3 confidential draft as the most recent directly inspected public object. It directly gives six-month 2026 operating cash **USD+3,929m**, investing cash **USD−17,181m**, financing cash **USD+110,774m** in its historical table; its compute terms state fixed contractual obligations largely independent of actual utilisation. Some aggregate commitment amounts remain blanks in the preliminary public prospectus. The often-cited **roughly USD637B** across named supplier contracts is a reconstruction rather than a completed single same-object total printed in that prospectus, and some supplier figures are upper bounds rather than unconditional minimums. Preserve that distinction.
+
+### Exact orders of effect
+
+**Order 0 (source or event):** original incident, documented security test, policy proposal, presidential meeting, disclosed lender contract, RBA warning; none is itself a realised policy outcome.
+
+**Order 1 (direct effect):** observable compliance fixed cost, required test, procurement contract, cloud/compute purchase, safety mitigation, independent researcher exclusion, selected evaluation regime; measured on the affected actor, period, and jurisdiction.
+
+**Order 2 (indirect effect):** supplier↔financier↔customer feedback; cost spread asymmetrically across incumbents/open weights; loss of feasible independent computation; shared credential/control dependencies among nominally multiple providers; exit/migration and disaster-recovery costs; political salience from genuine cyber incidents. This order is not equal to mere co-occurrence of named firms.
+
+**Order 3 (feedback on future selection):** who writes evaluation standards, what evidence is admissible, which vendors can certify, incumbent lobbying/coalition leverage, altered future procurement and funding, public rescue incentives under systemic financial stress, and possible defensive state buildout. Contested possibilities include orderly private recapitalisation, public backstop **without** IP transfer, effective state operational control, or greater interoperability from public procurement. Higher-order feedback remains a causal hypothesis until a matched sequence and comparison establish it.
+
+### Two concrete counterfactual paths in Agda
+
+New `DASHI/Governance/KnowledgeCaptureSecondThirdOrder20261101Exact.agda` deliberately routes the **same security-policy objective** into:
+
+1. *Proportionate review* → independent verification remains available → plural knowledge infrastructure → contestable standards.
+2. *Common exclusive certification* → independent verification and exit contract → incumbent-driven standard setting and closed epistemic admission.
+
+These are synthetic contrasting models. Proofs `declarationCannotDetermineSecondOrderAccess` and `declarationCannotDetermineThirdOrderPower` consume canonical `DASHI.Core.IntersectionalNonFactorability`; `policySystem` directly instantiates canonical `DASHI.Core.OperationalSystemBehaviourSemanticsExact` (POSIWID original owner); `closedPower` instantiates canonical `DASHI.Philosophy.PowerAndGrammar.SecondOrderPower`. This **reuses** the existing mathematics and ensures we are not falsely attributing them to new work or Beer.
+
+`concentratingResponsePath` and `resilientResponsePath` are positive typed *hypothetical* three-hop witnesses. A separate `stressCanReachInterventionIncentive` two-hop path stops at **intervention incentive**. There is no constructor for `interventionPoliticalIncentive → actualGovernmentStepIn` or `actualGovernmentStepIn → actualExclusiveKnowledgeAuthority` because neither has a same-object paid source. Type `CausalPromotionResidual` requires source, date, precise event identity, a full first/second/third provenance chain and an externally supplied causal design. It is **not inhabited from a news article or a speaker's rhetoric**.
+
+### Second and third-order policy/environmental regressions to test
+
+| Immediate intervention | Plausible second-order change | Plausible third-order feedback | Distinguishing primary or runtime test |
+|---|---|---|---|
+| Mandatory frontier safety evaluation | Entrant pays higher fraction of compliance costs; independent audits may also improve safety | Large firms define certification standards, procurement whitelist and acceptable evaluation grammar | Actual rule clauses, disaggregated cost ledger, safety outcomes, admissions, independent evaluator conflicts |
+| Frontier AI included in military architecture | Classified users gain robust access; single supplier replacement becomes expensive | State develops sovereign in-house compute and alters contract rights, or chooses genuine multivendor interoperability | Original procurement annexes, control/key ownership, termination, migration and override clauses |
+| Supplier vendor-finances AI customer | Supplier sale/customer purchases reinforce reported demand; collateral and lender risk concentrate | Public financial-stability concern leads to private recap, regulation, guarantee or equity step-in possibilities | Same-object lender/borrower/customer cash, credit covenants, exact intervention instrument, borrower survival and full counterfactual |
+| AI cybersecurity incident disclosed | Defensive urgency grows; independent research may be curtailed or strengthened | Security narratives shape legal permission to audit models and expose vulnerabilities; common certification can become attack chokepoint | CVE publication and exploit dates; patch and remediation chronology; policy proposals versus enacted restrictions; alternative security benefit |
+| Broad access to open-weight/local inference | Incumbent per-unit inference rents may fall and sovereign users can acquire independent execution | Capital recovery pressure rises for sunk proprietary infrastructure; domestic/open providers may diversify or shift scarcity into chip, energy, update, attestation and distribution controls | Actual cost/performance and uptime of independent paths with all upstream control keys and suppliers |
+| State emergency financial protection | Critical workloads may survive, lenders may avoid immediate losses | Moral-hazard reinvestment/market concentration may rise, or emergency conditions can require interoperability/open access | Who bears loss, equity stakes, votes, IP, compulsory licensing, new entrant share, eventual divestiture |
+| OpenAI/Anthropic/Thiel public narrative advocacy | Media salience and policy agenda attention changes | Recurring institutional selection of particular validators/gatekeepers | Original author → sponsor → commissioner → hearing → draft → adopted clause → operative enforcement → observed differential outcome |
+
+**Non-factorability / causal test discipline:** The same announced safety objective can yield different actual access, and the same published corporate financial figure can hide independent-customer and circular vendor-funded demand. Do not infer *one observed beneficiary* is the sole decision maker; do not infer *every security vulnerability* is intentionally produced; do not infer *all regulation is capture*. Also do not excuse measured monopolistic effects simply because no document establishes subjective malicious intent.
+
+**Attribution and ownership:**
+- Stafford Beer POSIWID as an antecedent, with prior exact Agda owner `DASHI.Core.OperationalSystemBehaviourSemanticsExact`; no claim Beer authored this finite model.
+- Stigler (1971), Pitkin (1967), Hannah Arendt (1963) only in their genuine intellectual roles; Arendt's historically specific 'banality of evil' is not a predicate declaring any real actor culpable.
+- `DASHI.Philosophy.PowerAndGrammar` (pre-existing second-order institutional grammar) and `DASHI.Core.IntersectionalNonFactorability` retain earlier DASHI mathematical ownership.
+- `DASHI.Economics.AIFinancingReflexivityExact` keeps ownership of circular-flow vs independently validated cash. The same-object October 2026 CoreWeave/OpenAI filing enrichments remain on OPEN PR #1101; this branch links and describes them but **does not copy** draft source.
+- RBA original financial-stability assessment, Anthropic original SEC filing, Project 2025 original editor/chapter author, published Amodei, Thiel and Manidis/Roberts texts, PHP Foundation/Wiz original security accounts and separately sourced Epstein record provenance each retain their authorship and claim limits. ESD remains external read-only.
+- No source or code is treated as kernel checked until exact-head Agda returns success. New finite code proof declarations require verification.
