@@ -76,6 +76,10 @@ record CommunityRule (Agent : Set) : Set₁ where
     IndependentCreator : Agent → SourceAnchoredEvent → Set
     ConsensusWitnessed : String → Set
     PolicyVersionValid : String → Set
+    -- Historical beginning and closing rule witnesses must be
+    -- independently reconciled; a one-time policy snapshot is not
+    -- automatically applicable at the terminal community decision.
+    PolicyWindowValid : String → String → Set
     RequiredAgeSatisfied : Nat → Nat → Set
 
 open CommunityRule public
@@ -86,6 +90,7 @@ record DeliberationCase : Set where
     proposal : SourceAnchoredEvent
     closingDecision : SourceAnchoredEvent
     historicalPolicyRef : String
+    closingPolicyRef : String
     proposalRef : String
 
 open DeliberationCase public
@@ -108,6 +113,9 @@ record ClosureAdmission
     deliberativeConsensus : ConsensusWitnessed rule (proposalRef caseFile)
     historicalPolicyApplicable :
       PolicyVersionValid rule (historicalPolicyRef caseFile)
+    historicalPolicyStableThroughClosure :
+      PolicyWindowValid rule
+        (historicalPolicyRef caseFile) (closingPolicyRef caseFile)
     policyTimeGuard :
       RequiredAgeSatisfied rule
         (observedAtEpochSeconds (proposal caseFile))
@@ -172,6 +180,30 @@ admissionRequiresPolicyVersion :
   PolicyVersionValid rule (historicalPolicyRef caseFile)
 admissionRequiresPolicyVersion admission =
   historicalPolicyApplicable admission
+
+admissionRequiresPolicyWindow :
+  ∀ {Agent : Set}
+    {verifier : SourceVerifier}
+    {rule : CommunityRule Agent}
+    {creator : Agent}
+    {caseFile : DeliberationCase} →
+  ClosureAdmission verifier rule creator caseFile →
+  PolicyWindowValid rule
+    (historicalPolicyRef caseFile) (closingPolicyRef caseFile)
+admissionRequiresPolicyWindow admitted =
+  historicalPolicyStableThroughClosure admitted
+
+missingPolicyWindowBlocksClosure :
+  ∀ {Agent : Set}
+    {verifier : SourceVerifier}
+    {rule : CommunityRule Agent}
+    {creator : Agent}
+    {caseFile : DeliberationCase} →
+  (PolicyWindowValid rule
+     (historicalPolicyRef caseFile) (closingPolicyRef caseFile) → ⊥) →
+  ClosureAdmission verifier rule creator caseFile → ⊥
+missingPolicyWindowBlocksClosure noWindow admitted =
+  noWindow (historicalPolicyStableThroughClosure admitted)
 
 admissionRequiresExactSource :
   ∀ {Agent : Set}
