@@ -142,3 +142,22 @@ qMachinStageEmbedsAsOriginalBishopPartial (suc n) =
     (RP.+-cong
       (qMachinStageEmbedsAsOriginalBishopPartial n)
       (qMachinTermEmbeds n))
+
+------------------------------------------------------------------------
+-- K04b same-object convergence: this is a theorem on the actual
+-- Bishop-real embedding of EVERY rational q_n, not on an abstract
+-- Real or a merely supplied AnalyticLimitAttachment. The quantitative
+-- e_n / 4*25^(-n) modulus is separate and remains to be kernel proved.
+------------------------------------------------------------------------
+
+rationalMachinStagesConvergeToOriginalMachinPi :
+  Series._ConvergesTo_
+    (λ n → Bishop._⋆ (qMachinStage n))
+    Machin.bishopMachinPi
+rationalMachinStagesConvergeToOriginalMachinPi =
+  Series.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc n) →
+      RP.≃-symm
+        (qMachinStageEmbedsAsOriginalBishopPartial (suc n))})
+    ( Machin.bishopMachinPi
+    , Signed.machinSignedPartialConvergesToOriginalMachinPi )
