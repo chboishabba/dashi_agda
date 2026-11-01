@@ -12,7 +12,7 @@ import DASHI.Education.DigitalESDTransferablePedagogicalPrinciplesExact as Digit
 import DASHI.Education.DigitalESDEvidenceBraidTensionExact as Braid
 
 sourceCandidateCount : Attr.sourceCount
-  (Attr.AttributedSourceAtlas.sources Cases.candidateEfSSources) ≡ 13
+  (Attr.AttributedSourceAtlas.sources Cases.candidateEfSSources) ≡ 16
 sourceCandidateCount = refl
 
 firstLocatorPreserved : Cases.CrossPollinationCase.sameLocator Cases.taimurOnuki
@@ -87,3 +87,18 @@ reviewCountDoesNotPayOurSearch = Cases.otherReviewDoesNotPaySearch
 universityObserverCannotOverrideCommunity :
   Cases.UniversityVoiceOverridesCommunityAuthority → ⊥
 universityObserverCannotOverrideCommunity = Cases.universityDoesNotOverrideCommunity
+
+blackRyanJiCaseStaysCandidate :
+  Prior.ReciprocalPedagogicalBridge.promotion
+    (Cases.CrossPollinationCase.candidateBridge Cases.blackRyanJiNature)
+  ≡ Prior.candidate
+blackRyanJiCaseStaysCandidate = refl
+
+unescoIsInstitutionalNotAcademicAuthority :
+  Attr.sourceKind Cases.unescoTLSSFSource ≡ Attr.institutionalSource
+unescoIsInstitutionalNotAcademicAuthority = refl
+
+leadershipSourceStillUnadmitted :
+  Cases.CrossPollinationCase.admittedToFullReview Cases.ferreiraRyanDavisDeepDive
+  ≡ false
+leadershipSourceStillUnadmitted = refl
