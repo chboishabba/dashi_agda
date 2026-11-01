@@ -189,3 +189,10 @@ This section updates existing **M00/M01/C02/K00** obligations; the canonical reg
 - **K00 runner:** The A+B local driver now separately typechecks the creation-order Golden module before optional CNF specialization. No actual Agda kernel was run in this environment.
 
 **Still decisive:** original `GateProgram` to the *actual* OAI `SAT.CNF (Fin (n+g))` exact clause/literal/source identity; the uniform primitive-machine compiler and its real bit-operation/time and every-prefix visited-space simulation; final same-original-machine tape/count/SAT result. The full 721/373/208 corpus still requires statement-by-statement attribution, oldest applicable DASHI theorem owner, typed bridge, independent proof checks and imported kernel receipts.
+
+
+### M01 typed literal/polarity continuation (Golden)
+
+`OpenAIMathLiteralCodeTransportExact.agda` now SOURCE-WRITES a finite `CNF.Literal n` ↔ `UpstreamLiteral n` roundtrip with the same `Fin n` index and positive/negative polarity (encoding numbers `2*i+1` and `2*i`). The transported clause and entire source-CNF lists roundtrip; `sourceClauseCodesExact` and `sourceCNFCodesExact` preserve their exact numeric lists before Finset normalization. `originalOptimizedCircuitLiteralTruthExact` explicitly consumes the actual `Opt.optCircuitCNF circuit` and existing `Opt.optCircuitEqualsOriginal` theorem; no new SAT evaluator.
+
+This is **source-only Agda** and the synthetic `UpstreamLiteral` is a representation mirror, **not** OpenAI's Lean kernel object. The remaining M01 cut is exact typed Agda constructor ↔ Lean `SAT.Literal (Fin n)` and raw source list ↔ deduplicated sorted `Encoding.cnfNumbers` identity, actual `Encoding.encodeCNF` bytes, and both kernels. The standalone Agda module has been added to the local acceptance driver; nothing is promoted without K00.
