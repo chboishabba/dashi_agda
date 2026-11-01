@@ -773,3 +773,25 @@ balabanRouteSP2R445IndependentMomentRequiredIsFalse =
 balabanRouteSP2R445NativeCompilerLevel : ProofLevel
 balabanRouteSP2R445NativeCompilerLevel =
   NativeP2.p2CanonicalMarkedSourceCompilerLevel
+
+
+------------------------------------------------------------------------
+-- Voyager 2026 video: use the canonical Route-S/P2 theorem owners and
+-- a separate flat Euclidean R4 classical Hodge-basis donor. No Clay,
+-- stochastic equilibrium or Donaldson-moduli promotion follows.
+------------------------------------------------------------------------
+
+import DASHI.Physics.YangMills.YMClayVoyager2026CoverageExact as VoyagerCoverage
+import DASHI.Physics.YangMills.YMClayVoyagerR4HodgeBasisExact as VoyagerHodge
+
+voyager2026ChapterReceipts : List VoyagerCoverage.ChapterReceipt
+voyager2026ChapterReceipts = VoyagerCoverage.chapterReceipts
+
+voyager2026CurrentRouteSNotClay : RouteS.clayPromotion ≡ false
+voyager2026CurrentRouteSNotClay = VoyagerCoverage.routeSStillNotClay
+
+voyager2026EuclideanHodgeSquare :
+  ∀ b → VoyagerHodge.euclideanHodgeStar
+      (VoyagerHodge.euclideanHodgeStar b) ≡ b
+voyager2026EuclideanHodgeSquare =
+  VoyagerHodge.hodgeSquareOnSignedBasis
