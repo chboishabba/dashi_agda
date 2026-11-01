@@ -20,6 +20,7 @@ module DASHI.Research.OpenAIMath.OpenAIMathCreationOrderSerializationExact where
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Vec.Base using (Vec)
 import Data.Fin.Base as Fin
 import Data.Fin.Properties as FinP
 open import Relation.Binary.PropositionalEquality using (cong; cong₂)
@@ -194,6 +195,26 @@ creationWireVariableExact : ∀ {inputs gates : Nat}
 creationWireVariableExact (creationInput index) = refl
 creationWireVariableExact {inputs} (creationGate index) =
   Source.chronologicalGateNumberExact inputs index
+
+-- Preserve the ORIGINAL evaluator by an equality of original circuits,
+-- not by constructing another evaluator for creation-order syntax.
+creationCircuitEvaluationExact : ∀ {inputs : Nat}
+  (circuit : Circuit.ConcreteBooleanCircuit inputs)
+  (bits : Vec Bool inputs) →
+  Circuit.evaluateCircuit (decodeCircuit (encodeCircuit circuit)) bits ≡
+  Circuit.evaluateCircuit circuit bits
+creationCircuitEvaluationExact circuit bits =
+  cong (λ c → Circuit.evaluateCircuit c bits)
+    (decodeEncodeCircuit circuit)
+
+-- Reuse the earlier original finite-count owner. This is a statement
+-- about that SAME Nat-valued accepted-input counting function.
+creationCircuitAcceptedCountExact : ∀ {inputs : Nat}
+  (circuit : Circuit.ConcreteBooleanCircuit inputs) →
+  Source.countAcceptedCircuitInputs (decodeCircuit (encodeCircuit circuit)) ≡
+  Source.countAcceptedCircuitInputs circuit
+creationCircuitAcceptedCountExact circuit =
+  cong Source.countAcceptedCircuitInputs (decodeEncodeCircuit circuit)
 
 -- OPEN: prove the concrete JSON *bytes* parser recognizes precisely the
 -- finite-indexed creation AST above, and that its emitted clauses and bits
