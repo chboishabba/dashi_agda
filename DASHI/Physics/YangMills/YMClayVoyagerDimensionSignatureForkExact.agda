@@ -55,10 +55,10 @@ fiveDimensionalNegativeCouplingDimension :
   ymTwiceCouplingDimension five ≡ negativeOne
 fiveDimensionalNegativeCouplingDimension = refl
 
-data FiveDimensionalSource : Set where
-  creutzFiveEuclideanLattice : FiveDimensionalSource
-  kkFourLorentzPlusCircle : FiveDimensionalSource
-  stochasticThreePlusArtificialTime : FiveDimensionalSource
+data DimensionInterpretation : Set where
+  creutzFiveEuclideanLattice : DimensionInterpretation
+  kkFourLorentzPlusCircle : DimensionInterpretation
+  stochasticThreePlusArtificialTime : DimensionInterpretation
 
 creutzIsNotKK :
   creutzFiveEuclideanLattice ≡ kkFourLorentzPlusCircle → ⊥
