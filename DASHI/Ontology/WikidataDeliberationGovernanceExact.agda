@@ -62,6 +62,7 @@ record SourceVerifier : Set₁ where
   constructor sourceVerifier
   field
     Authenticated : SourceAnchoredEvent → Set
+    PolicyAuthenticated : String → Set
 
 open SourceVerifier public
 
@@ -72,6 +73,7 @@ record CommunityRule (Agent : Set) : Set₁ where
   constructor communityRule
   field
     CreatorAuthorised : Agent → Set
+    IndependentCreator : Agent → SourceAnchoredEvent → Set
     ConsensusWitnessed : String → Set
     PolicyVersionValid : String → Set
     RequiredAgeSatisfied : Nat → Nat → Set
@@ -98,7 +100,11 @@ record ClosureAdmission
   field
     proposalAuthenticated : Authenticated verifier (proposal caseFile)
     decisionAuthenticated : Authenticated verifier (closingDecision caseFile)
+    policySourceAuthenticated :
+      PolicyAuthenticated verifier (historicalPolicyRef caseFile)
     creatorAuthority : CreatorAuthorised rule creator
+    creatorDistinctFromProposer :
+      IndependentCreator rule creator (proposal caseFile)
     deliberativeConsensus : ConsensusWitnessed rule (proposalRef caseFile)
     historicalPolicyApplicable :
       PolicyVersionValid rule (historicalPolicyRef caseFile)
@@ -122,6 +128,28 @@ admissionRequiresCreatorAuthority :
   CreatorAuthorised rule creator
 admissionRequiresCreatorAuthority admission =
   creatorAuthority admission
+
+admissionRequiresIndependentCreator :
+  ∀ {Agent : Set}
+    {verifier : SourceVerifier}
+    {rule : CommunityRule Agent}
+    {creator : Agent}
+    {caseFile : DeliberationCase} →
+  ClosureAdmission verifier rule creator caseFile →
+  IndependentCreator rule creator (proposal caseFile)
+admissionRequiresIndependentCreator admission =
+  creatorDistinctFromProposer admission
+
+admissionRequiresPolicySource :
+  ∀ {Agent : Set}
+    {verifier : SourceVerifier}
+    {rule : CommunityRule Agent}
+    {creator : Agent}
+    {caseFile : DeliberationCase} →
+  ClosureAdmission verifier rule creator caseFile →
+  PolicyAuthenticated verifier (historicalPolicyRef caseFile)
+admissionRequiresPolicySource admission =
+  policySourceAuthenticated admission
 
 admissionRequiresConsensus :
   ∀ {Agent : Set}
@@ -166,6 +194,28 @@ noCreatorAuthorityBlocksClosure :
   ClosureAdmission verifier rule creator caseFile → ⊥
 noCreatorAuthorityBlocksClosure noAuthority admitted =
   noAuthority (creatorAuthority admitted)
+
+sameActorCreatorBlocksClosure :
+  ∀ {Agent : Set}
+    {verifier : SourceVerifier}
+    {rule : CommunityRule Agent}
+    {creator : Agent}
+    {caseFile : DeliberationCase} →
+  (IndependentCreator rule creator (proposal caseFile) → ⊥) →
+  ClosureAdmission verifier rule creator caseFile → ⊥
+sameActorCreatorBlocksClosure notIndependent admitted =
+  notIndependent (creatorDistinctFromProposer admitted)
+
+missingPolicySourceBlocksClosure :
+  ∀ {Agent : Set}
+    {verifier : SourceVerifier}
+    {rule : CommunityRule Agent}
+    {creator : Agent}
+    {caseFile : DeliberationCase} →
+  (PolicyAuthenticated verifier (historicalPolicyRef caseFile) → ⊥) →
+  ClosureAdmission verifier rule creator caseFile → ⊥
+missingPolicySourceBlocksClosure noWitness admitted =
+  noWitness (policySourceAuthenticated admitted)
 
 missingConsensusBlocksClosure :
   ∀ {Agent : Set}
