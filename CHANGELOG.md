@@ -1,4 +1,14 @@
 
+## 2026-11-01 — YM source reuse: complex i, SO2/SO3, C3, 3+1, 5D and 27–19683 hyperfabric
+
+- Rechecked source files across Agda/Lean/dashifine and found mature *physical* CMP119 spatial-C3 field/plaquette/stress owners absent from the first Voyager audit.
+- Added exact signed-axis imaginary quarter-turn/C3 cycle obstruction module and dimension/Creutz-vs-KK-vs-stochastic-time finite fork; reused older canonical complex/quaternion/Wilson/C3 owners by attribution instead of claiming same-object imports.
+- Documented distinct jCoarse/Fine projection, gauge holonomy, finite P3³/P3⁶/P3⁹ covariant blocking and selected Wilson physics. Surfaced signature profile label-31 circularity and distinct Markov notions.
+- Routed potential spectral ζ to same reconstructed H_OS (not transcript, RH, modular j or Casimir plates); cross-domain source map + YM roadmap/TODO updated.
+- No original scientific/source authorship overwritten; **source-written, kernel not executed**, 4D continuum and Clay promotions false.
+
+
+
 ## 2026-11-01 — YM Voyager 2026 chapter audit on Route-S #1440
 
 - Source-audited all mathematical chapters of the 29 September 2026 Voyager transcript against current canonical Yang–Mills sources, retaining original research attribution and external status.
