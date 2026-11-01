@@ -795,3 +795,36 @@ voyager2026EuclideanHodgeSquare :
       (VoyagerHodge.euclideanHodgeStar b) ≡ b
 voyager2026EuclideanHodgeSquare =
   VoyagerHodge.hodgeSquareOnSignedBasis
+
+
+------------------------------------------------------------------------
+-- 1 Nov cross-domain source-forced symmetry / dimension fork.
+-- Genuine existing C3 CMP119 source owner is cited in the audit, and
+-- not replaced by the new signed-axis finite C3/quarter-turn theorem.
+------------------------------------------------------------------------
+
+import DASHI.Physics.YangMills.YMClayVoyagerImaginaryC3DimensionBidiExact as Imaginary
+import DASHI.Physics.YangMills.YMClayVoyagerDimensionSignatureForkExact as Dim
+
+voyagerImaginaryQuarterSquared :
+  ∀ axis →
+  Imaginary.quarterTurn (Imaginary.quarterTurn axis)
+  ≡ Imaginary.axisNegation axis
+voyagerImaginaryQuarterSquared =
+  Imaginary.quarterTurnSquaredIsNegation
+
+voyagerC3CannotIntertwineWithFourCycle :
+  (f : Imaginary.TritPosition → Imaginary.SignedAxis2) →
+  ((t : Imaginary.TritPosition) →
+    f (Imaginary.rotateC3 t) ≡ Imaginary.quarterTurn (f t)) → ⊥
+voyagerC3CannotIntertwineWithFourCycle =
+  Imaginary.noC3ToQuarterTurnIntertwiner
+
+voyagerPureYMFourMarginal :
+  Dim.ymTwiceCouplingDimension Dim.four ≡ Dim.zero
+voyagerPureYMFourMarginal =
+  Dim.fourDimensionalMarginal
+
+voyagerCreutzFiveNotKKFive :
+  Dim.creutzFiveEuclideanLattice ≡ Dim.kkFourLorentzPlusCircle → ⊥
+voyagerCreutzFiveNotKKFive = Dim.creutzIsNotKK
