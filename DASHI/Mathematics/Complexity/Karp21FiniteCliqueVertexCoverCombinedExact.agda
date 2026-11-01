@@ -16,7 +16,8 @@ module DASHI.Mathematics.Complexity.Karp21FiniteCliqueVertexCoverCombinedExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _≤_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Nat.Base using (_≤_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
