@@ -231,6 +231,14 @@ An independent local Python truth-table audit of the E05 finite cardinality theo
 
 **Still required for completion:** `e05EncodedPolynomialReduction` with a no-loop, undirected, unique-edge complement transducer and certified `k>n` guard; `e20CompleteGraphToWeightedCutEdgeListIff` connecting the signed pairweight constructor to the verifier's finite edge list; `weightedMaxCutGraphAndCertificatePackedCodec`; actual `PR.InNP` on the shared Word and polynomial clocks. The corresponding E01–E19 encoded machine reductions and all 21 NP members remain open except for explicitly reused source-level pieces.
 
+### Further E05 actual simple-graph closure (source-written)
+
+`Karp21SimpleGraphComplementExact.agda` eliminates the diagonal defect of naïve pointwise Boolean negation. Its `SimpleGraph n` contract explicitly records symmetric adjacency and absent self-loops. `simpleComplementAdjacency` uses a decidable `Fin n` equality test and negates adjacency **only off the diagonal**. Reused `Data.Fin.Properties._≟_` yields: `simpleComplementLoopFree`, `simpleComplementSymmetric`, and `simpleComplementOffDiagonal`. `complementSimpleGraph` constructs the genuine simple target graph.
+
+The exact semantic transport continues through `finiteAbstractCoverToSimpleCover` and `finiteSimpleCoverToAbstractCover`, giving `karpCliqueSimpleComplementCoverIff` for a chosen `Vec Bool n`; `karpSimpleGraphCliqueCoverInstanceIff` then proves the **existential full finite source/target decision iff** without losing the source selection or its all-`k` additive cardinality bound. This supersedes the earlier abstract finite complement for simple graph semantics, but does not claim the **canonical binary** complement graph serializer, classical `n-k` budget guard, or costed many-one reduction.
+
+**Exact remaining E05 targets**: `simpleGraphMatrixEncodingRoundtrip`, `simpleComplementCanonicalBitMap`, `simpleComplementPolynomialMachineClock`, `complementCoverAdditiveToStandardBudget` (including `k>n` fixed-NO), `finiteCliqueCertPackedCodec`, `finiteCoverCertPackedCodec`, `finiteCliqueInNP`, `finiteVertexCoverInNP`, `e05EncodedPolynomialReduction`, and pinned kernel receipt. For N21, `cutCertificateHasVertexCountBits` is source-written, but bit-level certificate parsers and a polynomial verifier clock remain open.
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
