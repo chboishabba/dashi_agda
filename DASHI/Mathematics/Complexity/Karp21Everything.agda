@@ -19,3 +19,4 @@ import DASHI.Mathematics.Complexity.Karp21ExactHittingTransposeExact
 import DASHI.Mathematics.Complexity.Karp21CertifiedDagTransportExact
 import DASHI.Mathematics.Complexity.Karp21PartitionCutQuadraticExact
 import DASHI.Mathematics.Complexity.Karp21SATToThreeSATGadgetExact
+import DASHI.Mathematics.Complexity.Karp21ScaledThresholdExact
