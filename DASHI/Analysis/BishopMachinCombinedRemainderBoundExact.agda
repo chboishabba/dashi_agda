@@ -15,7 +15,10 @@ module DASHI.Analysis.BishopMachinCombinedRemainderBoundExact where
 -- lemma to be supplied separately. Agda kernel check pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
+open import Data.Product.Base using (Σ; _,_)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; subst)
 import Real as Bishop
 import RealProperties as RP
 import Sequence as Series
@@ -276,3 +279,46 @@ machinOddRationalError :
 machinOddRationalError k =
   combinedMachinAtIndex
     (suc (Alternating.double k)) (machinOddPartialError k)
+
+------------------------------------------------------------------------
+-- UNIFORM NAT INDEX: EVERY SOURCE STAGE IS AN EVEN OR ODD PARTIAL.
+-- This avoids hiding a parity choice in K04b2 consumers.
+------------------------------------------------------------------------
+
+parityComplete :
+  (n : Nat) →
+  (Σ Nat (λ k → n ≡ Alternating.double k))
+  ⊎ (Σ Nat (λ k → n ≡ suc (Alternating.double k)))
+parityComplete zero = inj₁ (zero , refl)
+parityComplete (suc zero) = inj₂ (zero , refl)
+parityComplete (suc (suc n)) with parityComplete n
+... | inj₁ (k , eq) =
+  inj₁ (suc k , cong (λ x → suc (suc x)) eq)
+... | inj₂ (k , eq) =
+  inj₂ (suc k , cong (λ x → suc (suc x)) eq)
+
+MachinBishopRemainderAt : Nat → Set
+MachinBishopRemainderAt n =
+  Bishop._≤_
+    (Bishop.∣_∣
+      (Bishop._-_
+        M.bishopMachinPi
+        (Bishop._⋆ (Q.qMachinStage n))))
+    (Bishop._+_
+      (Bishop._*_ sixteen (magnitude5 n))
+      (Bishop._*_ four (magnitude239 n)))
+
+-- All stages including q_0; no hidden "n>0" restriction or
+-- synthetic real target. This is the combined first-omitted
+-- bound before rational 4/25^n normalization.
+machinRationalAllStagesRemainder :
+  (n : Nat) → MachinBishopRemainderAt n
+machinRationalAllStagesRemainder n with parityComplete n
+... | inj₁ (k , eq) =
+  subst MachinBishopRemainderAt
+    (sym eq)
+    (machinEvenRationalError k)
+... | inj₂ (k , eq) =
+  subst MachinBishopRemainderAt
+    (sym eq)
+    (machinOddRationalError k)
