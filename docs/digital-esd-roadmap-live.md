@@ -1364,3 +1364,90 @@ run world
 ```
 
 not "serialize the whole corpus graph to JSON".
+
+## 30. 2026-11-01 recut: keep Digital-ESD separate from Fleet and TOE; use SLR as a bounded execution dependency
+
+**Decision scope:** This is a Digital-ESD research-roadmap update. It does not assert a coauthor vote, a completed literature review, an Agda kernel run, or new source admission. The status below reflects inspected GitHub source and PR metadata on 2026-11-01. It does not infer the content of the separately supplied \`OneDrive_2026-11-01.zip\`, which was not readable in the review environment.
+
+### 30.1 Scope and repository ownership
+
+**ESD stays out of Fleet and TOE for now.** The Fleet programme, its 584 discharged fibres / 44 contradiction gaps / selected 58 formal gaps, and the focused TOE aggregate (\`DASHI/EverythingTOESymmetryResolved369.agda\`, \`DASHI/Unifier.agda\`, \`DASHI/Unified/\`) are **not** Digital-ESD milestones, proof owners, data sources, or admission gates. Current Fleet/TOE PRs are separate work. Their existence does not advance the ESD review.
+
+- **Digital-ESD formal research owners:** retain the existing \`DASHI/Education/DigitalESD*\` and related Alice Brown, learning, memory, intersectionality, authority, source-audit, sustainability and manuscript modules. Reuse their existing imports and boundaries. Do not move ESD into the TOE import graph.
+- **Paper / human research owners:** maintain the integrative-review manuscript, bounded scholarly corpus, independent EfS challenges, source interpretation, coauthor decisions and final claims in the ESD research lane. The Teams manuscript is a human editorial surface; a repository proof does not sign off for an author.
+- **SLR / SensibLaw execution owners:** use the existing SLR source-revision, long-document, parser, PNF, reconciliation, review and PostgreSQL persistence facilities for ESD processing. The ESD wrapper is a domain overlay; it does not create a competing academic evidence ontology.
+- **External reference owners:** JMD / meta-introspector repositories (including \`zkperf\`, \`zos-server\`, \`erdfa-py\`, \`aristotle-cli-rs\`) may inform narrow infrastructure comparisons where relevant. Preserve the original authors and repository identities. Do not treat those repositories, their fleet measurements, or their proof-checker work as primary ESD evidence or as a priority research workstream. Do not silently import their semantic authority.
+
+**Non-promotion:** shared tooling, an analogy, a repository import, a matched identifier, or an operational receipt does not create educational findings, participant authority, legal authority, environmental impact measurements, or completed review claims.
+
+### 30.2 Existing ESD research remains the centre
+
+The current paper type remains an **integrative conceptual review with a transparent structured search**. Its two reciprocal questions remain: how digital education can support transformative ESD, and under what conditions digital education itself is sustainable.
+
+The source-bounded starting point is the existing nine-item Alice Brown / collaborator registry. Its papers have distinct claims and limits. Cross-paper hypotheses, the seven provisional transferable principles, the transformation ladder, social/material/economic/institutional sustainability constraints, the externality-incidence audit, intersectional absence and disability audits, student epistemic authority, and context-transfer boundaries are already formalised.
+
+The core foundations are research-relevant. \`QueryFactorisationSufficiency\` and \`IntersectionalNonFactorability\` address when an observer loses distinctions needed by a question. \`LearningAlgebra\` and \`MemoryFibre\` prevent performance, learning, trust and historical experience from being flattened. Trauma authority boundaries block clinical promotion. The Alice Brown corpus loom, diagnosis/repair scheduler and recursive selective truth maintenance preserve source roles and the ability to revise dependent interpretations. These are already reused in ESD; none requires Fleet/TOE convergence to justify the present study.
+
+The independent EfS-first comparison in **dashi_agda PR #1237** (open, draft as checked 2026-11-01) provides provisional challenges, including sustainability values, collective agency, futures, educator praxis and ecological/more-than-human relationships that the seven digital principles do not fully cover. It remains a source-written, author-review-requiring challenge. Do not report its candidate comparisons as empirical effectiveness findings or as exact-head kernel-certified review results.
+
+The paper's transferable value includes **retrospective** critical re-examination of established digital-learning/SoTL scholarship and **prospective** research design. Those applications are principal scholarly contributions. They are not a reason to invent a new empirical study or assume prior authors measured sustainability.
+
+### 30.3 ESD functionality in the SLR repository: observed PR boundaries
+
+The separate \`chboishabba/slr\` repository contains genuine Digital-ESD work. Preserve this provenance when describing implementation.
+
+| SLR PR | Status checked 2026-11-01 | ESD functionality and authority boundary |
+| --- | --- | --- |
+| [#35](https://github.com/chboishabba/slr/pull/35) | Open draft | Real ERIC record parsing, verified export digests, fail-closed screening ledger, candidate-only Pareto queue and explicit reviewed overlays. It corrects the invalid inference that metadata records are verified full texts. |
+| [#37](https://github.com/chboishabba/slr/pull/37) | **Merged** | Reviewed screening packets, explicit decision overlay, stage census and containment. Candidate assessments do not create reviewed screening decisions. |
+| [#38](https://github.com/chboishabba/slr/pull/38) | Open draft | Live retrieval, verified full-text specimen, source-bounded scholarly parsing and resumable reviewed-study ingestion. Its PR reports an exact historical checkpoint with 51/51 Python tests and one verified parsed study, not a current-head or corpus-wide certification. |
+| [#50](https://github.com/chboishabba/slr/pull/50) | Open draft | Reuses shared PostgreSQL source/PNF/review stores; adds ESD corpus membership, 19-coordinate source-tied **candidate** nominations, study-family hypotheses, world revisions and bounded inspection. This is source-written DB-native execution, not a certified completed production pipeline. |
+
+PR #49 is a superseded earlier DB-native attempt; do not count #49 and #50 as separate successful deployments. SLR Fleet PR #75 is **not** an ESD dependency. SLR deliberation PR #76 can be considered for generic review-pattern inspiration only if a concrete ESD consumer requires it; do not import its unresolved consensus/history authority claims as ESD outcomes.
+
+The proper ESD execution chain is:
+
+1. Retain exact search exports and source IDs; the repository documents seven executed ERIC queries, **46,597 occurrences**, **43,996 unique metadata records**, and **2,601 duplicate occurrences removed**.
+2. Apply reviewed screening decisions to the exact retained denominator. Keep unreviewed, excluded and unresolved records visible.
+3. Retrieve and verify full-text bytes only for authoritatively retained studies. Distinguish metadata, download, materialisation, parse, review and admission.
+4. Reuse the shared SLR source/revision/span/PNF/reconciliation substrate. Keep parser output and candidate coordinates non-authoritative.
+5. Retain exact 19-coordinate manuscript extraction. The separate study-claim-ceiling bundle remains a design-relative constraint; do not misrepresent it as completed extraction for every study.
+6. Require human review and \`SourceAuditAdmission\` before source claims enter final synthesis.
+7. Challenge and revise the seven candidate principles and sustainability/representation audits against the admitted wider corpus.
+
+These operations must use exact source, revision, context, study identity and receipt lineage. A database count, successful parse, candidate nomination, title match or same-family hypothesis does not establish an independently reviewed evidence unit.
+
+### 30.4 Open research and submission obligations
+
+**P0 — proposal / group alignment:**
+
+- Retain the reciprocal research question and integrative-review paper type. Present DASHI as research infrastructure, not the object of the Sustainability paper.
+- Finalise one approximately 250-word abstract, title, source/method synopsis and coauthor decision record. The internal **30 October 2026** freeze target has passed; group sign-off was **not verified** in this repository review. The **6 November 2026** editorial suitability enquiry is an optional internal target, not a journal mandate.
+- Retain the Special Issue alignment questions: problem significance; transformation beyond uptake; independent digital/EfS theoretical integration; whether/how/conditions; reciprocal sustainability impacts; inclusion, rights and agency; methodological credibility; and transferable retrospective/prospective contribution.
+- Treat those editorial criteria as separate from three non-compensatory DASHI gates: (A) query-relative representational sufficiency; (B) source/claim ceiling and audit admission; (C) performed research steps and human authority. Do not collapse the gates into an authoritative total score.
+
+**P0 — actual review execution:**
+
+- Finish the remaining Scopus, Web of Science, ACM Digital Library and IEEE Xplore export obligations.
+- Perform five-database deduplication, reviewed eligibility screening, admitted full-text extraction and source-level evidence checks.
+- Retain design, realised sample, uncertainty, independent evidence units, time horizon and transfer limits for empirical claims. Preserve the distinction between what a study observed and what the ESD framework proposes.
+
+**P1 — challenge and manuscript:**
+
+- Obtain independent EfS source-span and coauthor review for PR #1237's candidate comparisons and principle-survival dispositions.
+- Let admitted evidence **support | narrow | split | merge | defeat | extend** the principles. Preserve an unmatched EfS requirement when no defensible digital counterpart exists.
+- Produce retrospective and prospective worked applications without promoting source results into new populations or reporting an unperformed intervention.
+- Correct the existing manuscript's stale opening statement that **none** of the five database searches were executed. The ERIC work is documented; the four other surfaces and final review still remain unpaid.
+- Record limitations and unanswered questions. Do not claim an authoritative aggregate source-quality ranking or empirical sustainability effects without same-object evidence.
+
+### 30.5 Verification and attribution ledger
+
+- **GitHub status:** PR metadata and source files checked on 2026-11-01. Branch-local code does not equal merged code. A historical test receipt belongs only to the commit and environment that produced it.
+- **Digital-ESD Agda:** the roadmap's earlier aggregate-green local receipt is commit-scoped. It does not automatically certify current \`master\`, the open EfS PR, or SLR's Rust/Python/PostgreSQL runtime.
+- **SLR review acceptance:** source identity, reviewer action, parser output and source audit remain distinct. No synthetic 43,996-row fixture pays actual ERIC screening.
+- **External inspiration:** attribute original authors and meta-introspector repositories when used; keep their work reference-only unless a specific ESD question requires a justified adapter.
+- **Attached ZIP:** \`OneDrive_2026-11-01.zip\` (received 2026-11-01) was not readable by the available archive runtime during this update. No conclusions or new source facts are drawn from its unseen contents. Reconcile it in a separate source-audit step when extraction is possible.
+- **No Fleet/TOE integration work:** this roadmap change creates no import, proof, data flow, or required milestone linking ESD to the Fleet 58-gap programme or TOE roots.
+
+**Next action:** circulate the 30 October decision packet for explicit group approval; verify the independent EfS challenge and external database access; continue source-governed SLR review execution. Reopen cross-domain construction only for a concrete ESD question that existing formal and runtime owners cannot answer.
+
