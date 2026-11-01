@@ -1,7 +1,7 @@
 module DASHI.Ontology.WikidataWorkingGroupRegression where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Product using (proj₁)
 
@@ -14,6 +14,7 @@ import DASHI.Ontology.BFOContinuantOccurrentWikidataAttributionExact as BFO
 import DASHI.Ontology.RdfViewInformationOrderJMDBridgeExact as RDF
 import DASHI.Ontology.WikidataInterpretiveDiagnosticExact as Interpretive
 import DASHI.Ontology.WikidataDiagnosticGovernanceExact as Governance
+import DASHI.Ontology.WikidataDeliberationGovernanceExact as Deliberation
 import DASHI.Ontology.WikidataRepairReopeningExact as Reopen
 import DASHI.Ontology.WikidataCheckerResultAttributionExact as Checker
 import DASHI.Ontology.DependentDefinitionFibreExact as Dependent
@@ -79,6 +80,20 @@ formalCheckerDoesNotSelfAuthoriseRevision :
   Governance.DiagnosticAuthorises Governance.formalChecker
     CoreGovernance.revisionCoordinate → ⊥
 formalCheckerDoesNotSelfAuthoriseRevision = Governance.formalCheckerCannotSelfAuthoriseRevision
+
+deliberationCounterSupportSurvivesPositiveSupport :
+  Deliberation.counterSupportObserved Deliberation.bothObserved ≡ true
+deliberationCounterSupportSurvivesPositiveSupport = refl
+
+deliberationNoEvidenceDoesNotEqualDisagreement :
+  Deliberation.supportObserved Deliberation.neitherObserved ≡ false
+deliberationNoEvidenceDoesNotEqualDisagreement = refl
+
+deliberationCheckerCannotApproveOntologyRevision :
+  Governance.DiagnosticAuthorises Governance.formalChecker
+    CoreGovernance.revisionCoordinate → ⊥
+deliberationCheckerCannotApproveOntologyRevision =
+  Deliberation.formalCheckerDoesNotSelfAuthoriseCommunityRevision
 
 strongerInferenceLanguageActivatesMissingObligation :
   Active.ResolvedFor Active.demoFamily Active.disjointnessTransport Active.disjointnessQuery → ⊥
