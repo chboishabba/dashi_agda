@@ -87,7 +87,7 @@ giridharanCompetenciesSource = Attr.mkNoDOISource
   "Introduction to Sustainable Development Leadership and Strategies in Higher Education, chapter 8, Emerald, pp. 155-166"
   "2020"
   "https://ebookcentral.proquest.com/lib/usq/detail.action?docID=6238640"
-  Attr.practitionerSource
+  Attr.academicChapterSource
   "Develops a strategic account of future-facing competencies, flexible learning, digital provision and changing institutional models. BOUNDARY: Conceptual and policy-facing discussion does not supply measured evidence of sustainability competence, durability or employment benefit."
   Attr.publicAttribution
 
