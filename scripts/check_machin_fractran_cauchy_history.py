@@ -5,7 +5,7 @@ q_n = 16 Σ_{j<n} (-1)^j/((2j+1)5^(2j+1))
     - 4 Σ_{j<n} (-1)^j/((2j+1)239^(2j+1)).
 The alternating remainder guarantees
 |q_n-π| <= e_n = 16/((2n+1)5^(2n+1))+4/((2n+1)239^(2n+1))
-             <= 4/25^n for n>=1.
+             <= 4/25^n for n>=0.
 Consequently |q_j-q_k| <= 8/25^n whenever j,k>=n.
 Each difference q_(n+1)-q_n is nonzero (compare 4*239^(2n+1)
 against 5^(2n+1)); every rational stage admits a finite signed
@@ -23,7 +23,7 @@ def error(n):
     return F(16,(2*n+1)*5**(2*n+1))+F(4,(2*n+1)*239**(2*n+1))
 
 def step(n):
-    assert n>=1
+    assert n>=0
     return F((-1)**n,2*n+1)*(F(16,5**(2*n+1))-F(4,239**(2*n+1)))
 
 SSP15 = frozenset((2,3,5,7,11,13,17,19,23,29,31,41,47,59,71))
@@ -53,9 +53,8 @@ def check():
         assert error(n) <= coefficient/F(25**n)
         assert error(n) <= F(4,25**n)
         assert error(n+1) < error(n)
-        if n >= 1:
-            assert q(n+1)-q(n)==step(n)
-            assert step(n)!=0
+        assert q(n+1)-q(n)==step(n)
+        assert step(n)!=0
     for cutoff in range(1,10):
         for j in range(cutoff,cutoff+4):
             for k in range(cutoff,cutoff+4):
