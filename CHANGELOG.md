@@ -187,3 +187,6 @@ monitor surface.
 
 - Added source-written universal original native rational SU2 group proof: 16 ordered plaquette traces = twice original six positive traces plus four identity traces per site; all diagonal paths use existing inverse-path theorem, remaining six reverse orientations reuse source path closure. Corresponding Wilson deficits have exact factor two.
 - R443 now consumes the **actual six-positive 1−normalized real trace Wilson deficit** instead of raw Wilson trace, retaining unproved source beta/Gibbs density, compact Haar and physical UV cutoff. Independent exact arithmetic PASS, but Agda not compiled.
+
+
+- R445 n=3 selected source Wilson **deficit** is now an actual native R445 observable on the same original SU2 bond record; boundedness of the complete six-plane sum and actual R445 continuum tail remain unproved distinct obligations.
