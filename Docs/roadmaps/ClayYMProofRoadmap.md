@@ -811,3 +811,12 @@ authority boundaries are discharged:
 - any inference of the form "`14 < 15`; therefore Yang-Mills mass gap"
 - treating finite/strong-coupling carrier YM as continuum Clay YM
 - terminal/unification promotion
+
+
+### Max-cut 2026-11-01: native side-four rational-SU2 Wilson/C3 source carrier
+
+Four new concrete source-aligned Agda owners are now linked from `BalabanRGTOERegression` (full audit in `Docs/physics/YMClayVoyagerCrossDomainSymmetryMaxCut20261101.md`): literal side-four C3 shifts/forward-bond path, group-valued loop naturality, `RationalUnitQuaternion` exact SU2 trace cyclicity/class-function invariance, and the `PeriodicBlock n=3` ↔ `Site4` bond graph pointwise codec. The positive-directed source signed-word holonomy and graph Wilson normalized real trace are same-object by finite induction, not merely two matching diagrams. Old `BalabanP33CMP109PeriodicPathHolonomyBridgeExact` independently verifies a signed-word/occurrence convention; it is imported as prior owner, not re-proved.
+
+The exact remaining selected physical cuts are **inverse-edge extension**, **full closed plaquette action and C3 reindexing** on actual finite complete SU2/SU(N) group values, **product/constrained Haar change of variables**, actual **selected R443 finite action/Gibbs density**, **R445 preferred physical measure tail/convergence** and **R320/R333 same-H_OS spectral/UV–IR limit**. The existing R443→R431→normalized→continuum chain is already theorem-code; don't ask for another abstract facade. Rational unit quaternions need compact completion/Haar source and continuity, not categorical arithmetic promotion.
+
+**Trust:** all new Agda is SOURCE-WRITTEN (not exact-head kernel-verified); no CI run.
