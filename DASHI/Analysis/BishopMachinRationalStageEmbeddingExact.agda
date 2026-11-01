@@ -17,7 +17,7 @@ module DASHI.Analysis.BishopMachinRationalStageEmbeddingExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Unnormalised as Q using
-  (ℚᵘ; 0ℚᵘ; 1ℚᵘ; _+_; _*_; _-_)
+  (ℚᵘ; 0ℚᵘ; 1ℚᵘ; _+_; _*_; _-_; -_)
 import Real as Bishop
 import RealProperties as RP
 import Sequence as Series
