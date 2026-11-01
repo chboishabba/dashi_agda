@@ -76,6 +76,8 @@ def three_dimensional_matching(triples, size):
 def graph_to_directed_hamiltonian(n, edges, k):
     # The historical positive-k gadget assumes nonempty edge incidence.
     # Empty graph and a budget covering all active vertices are fixed YES.
+    if k < 0:
+        return 3, frozenset()  # malformed negative budget, fixed NO
     if not edges or k >= len(set(v for e in edges for v in e)):
         return 3, frozenset({(0,1),(1,2),(2,0)})
     if k <= 0:
@@ -222,6 +224,8 @@ def main():
     # Variable indices are binary encoded and need not be dense.
     nv,edge_list,k,anchor = three_sat_to_colouring(10**15, ((10**15,),))
     assert nv == 13 and k == 5 and k_graph_colourable(nv,edge_list,k,anchor)
+    assert not directed_ham_dp(*graph_to_directed_hamiltonian(2,frozenset(),-1))
+    assert not directed_ham_dp(*graph_to_directed_hamiltonian(2,frozenset({(0,1)}),0))
     print('PASS final four historical edge gadgets:',counts)
 
 
