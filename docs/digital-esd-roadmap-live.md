@@ -12,6 +12,20 @@
 
 **Status:** current working roadmap. This file records design intent, repository state and unpaid review work. It is not scholarly evidence and cannot pay a manuscript claim.
 
+### 1 November — Hyperfabric joint-consumer max-cut (new)
+
+Read [Digital-ESD hyperfabric implications and evidence-gate contract](digital-esd-hyperfabric-implications-and-consumer-gates.md) with the canonical [origins history](digital-esd-research-origins-and-derivation.md). The research's common object is **not** the scalar seven-principle crosswalk: it is source-, observer-, time-, authority- and consumer-indexed *sparse higher-order relationships*. Same label / matching pairwise evidence does not establish identical joint outcomes. See the newly source-written `DigitalESDJointHyperfabricConsumerExact.agda` and regression: a finite computed 12-cell pairwise-count profile is equal between two synthetic four-episode populations, but their three-way parity differs. **This is not empirical Digital-ESD data or a kernel check.**
+
+**Multi-source overlap:** a new typed `CandidateSourceOverlap` retains the two original source identities and their *authored* braid/tension, common consumer and rival interpretation. The Adefila/EcoCOIL ↔ Singh community-engagement specimen is candidate-only. Review must explicitly adjudicate study family, independence, context, authority and shared outcome before cross-source synthesis; common terms/DOI visibility are not sufficient.
+
+**Source-to-claim max-cut:** the joint review now requires a reviewed observation **provably in the reviewed packet**, an exact span and observation→full-text revision equality, plus the packet→analysis full-text equality. The same reviewed observation must also be an actual member of the admitted source-hyperfabric observations, not merely share the source. A shared DOI/source label alone is not enough. 
+
+**New P0:** require the abstract/manuscript framing to state what can legitimately be synthesised from the source/collaboration hyperfabric, including what cannot be inferred from a seven-label or pooled-scalar view. **P1:** have independent EfS reviewers code candidate sources without seven-category prompts; retain at least one pedagogy × collective authority × ecological outcome three-way case and a negative/rival interpretation. **P2:** exact source revision/span, SLR review, SourceAuditAdmission, same-source claim ceiling, history/context/transfer receipts. **P3:** author-reviewed principle survival and two worked applications, without treating interface/corpus completeness as proof of effects. Continue using PG-native 19 coordinates plus existing study ceiling rather than an expansive new schema.
+
+**Architecture boundary:** no second SLR pipeline, no new cultural authority model, no diagnostic inference from trauma/learning mathematics, no 43,996-fold tensor materialisation. Source and provenance fibres survive manuscript projection with reopenable residuals; section disagreement and reviewer dissent are valid retained states.
+
+**Second proof obligation closed at representation level, not empirically:** an initial seven-principle survival label is not globally answer-sufficient. The joint hyperfabric owner gives a finite witness in which two consumers ask different questions of the same agency principle and require different provisional dispositions; `FactorsThrough principleLabel consumerVerdict` is impossible. Results planning must therefore produce **context × question × source-role × authority × time indexed verdicts**, not a flat survived-principles tally. The source-welded review path must include explicit scope and independent author adjudication.
+
 ## 1. Paper centre
 
 The paper remains a translational, evidence-governed review:
