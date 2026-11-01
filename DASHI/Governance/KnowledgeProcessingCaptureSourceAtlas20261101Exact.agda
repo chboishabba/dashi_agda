@@ -155,6 +155,107 @@ commandingHeights = sourceReceipt
   "Authors' forecasting thesis on scarce controllable distribution routes and sovereign AI frontier."
   "Author rhetoric != authored Thiel doctrine, endorsement by named feedback contributors, or observed sovereign capture."
 
+------------------------------------------------------------------------
+-- Followthrough 2026-11-01: first-person regulatory proposal, same-object
+-- compute financing, preceding Project 2025 policy, measured vulnerability
+-- disclosure baseline, and Epstein/Black AI research evidence.
+------------------------------------------------------------------------
+
+darioPolicyJune2026 : SourceReceipt
+darioPolicyJune2026 = sourceReceipt
+  "Dario Amodei" "Policy on the AI Exponential"
+  "2026-06" "https://darioamodei.com/post/policy-on-the-ai-exponential"
+  attributedAuthor
+  "Explicitly asks for mandatory external frontier-model tests and scoped government power to block/reverse unsafe deployments; discusses protection against state and corporate autocracy and AI parity for citizens in adverse proceedings."
+  "Authored policy proposal != enacted regulation; advocating it != evidence that cyber incidents were fabricated or that entrants were intentionally excluded."
+
+anthropicRegulatoryImplementation : SourceReceipt
+anthropicRegulatoryImplementation = sourceReceipt
+  "Anthropic" "Our compliance framework for California SB 53"
+  "2025-12-19"
+  "https://www.anthropic.com/news/compliance-framework-SB53"
+  firstPartyIssuer
+  "Anthropic says it advocated for federal rules and endorsed California transparency law; its existing safety procedures became compliance baseline."
+  "Corporate advocacy/first-party account != measured market capture; small-company exemptions and provenance of each enacted clause must remain visible."
+
+anthropicSECRegistration : SourceReceipt
+anthropicSECRegistration = sourceReceipt
+  "Anthropic, PBC / US SEC archive" "Form S-1 amended draft registration statement"
+  "2026-09-03"
+  "https://www.sec.gov/Archives/edgar/data/2130357/000162827926001111/filename1.htm"
+  firstPartyIssuer
+  "Six months to June 2026 company-reported operations +USD3.929bn, investing -USD17.181bn, financing +USD110.774bn; compute commitments generally payable regardless of use or revenue; material partner-provided/facilitated credit."
+  "Operating cash != free cash; contractual compute spending != all currently due; source reported operating profitability != sustainable terminal risk-adjusted recovery."
+
+openAIFiveYearCashProjection : SourceReceipt
+openAIFiveYearCashProjection = sourceReceipt
+  "Reuters / Financial Times, citing OpenAI company investor presentation"
+  "OpenAI forecasts cash burn near USD278bn by 2030"
+  "2026-09-18"
+  "https://www.reuters.com/business/openai-forecasts-cash-burn-near-280-billion-by-2030-ft-reports-2026-09-18/"
+  secondaryContext
+  "Secondary report of OpenAI forecast: cumulative negative free cash flow USD278bn for 2026-2030, infrastructure spending projection USD856bn, cumulative revenue forecast USD840bn."
+  "Forecast is not realised failure, enacted bailout or independently acquired original investor presentation."
+
+anthropicLobbyingSecondary : SourceReceipt
+anthropicLobbyingSecondary = sourceReceipt
+  "Maria Curi / Axios" "Anthropic ramps up lobbying spending amid AI policy fights"
+  "2026-07-21"
+  "https://www.axios.com/2026/07/21/anthropic-ramps-up-lobbying-spending-ai-policy-fights"
+  secondaryContext
+  "Federal disclosure-based report: more than USD3.5m Anthropic lobbying in first half 2026 versus USD3.1m in 2025, including cybersecurity, model standards, procurement and export controls."
+  "Lobbying spending != causal efficacy; retrieve exact original filings and post-policy differential costs for promotion."
+
+heritagePolicy2025Defense : SourceReceipt
+heritagePolicy2025Defense = sourceReceipt
+  "Christopher Miller; Paul Dans and Steven Groves (eds.); Heritage Foundation"
+  "Mandate for Leadership: The Conservative Promise, Dept of Defense, print p106"
+  "2023"
+  "https://static.heritage.org/project2025/2025_MandateForLeadership_FULL.pdf"
+  attributedAuthor
+  "Printed page 106 proposes expanding DoD machine-learning/AI processing of public and classified intelligence and integrated cyber operations."
+  "Proposed 2023 policy != implemented 2026 rule; evidence of programme origin != private company selection."
+
+heritagePolicy2025Trade : SourceReceipt
+heritagePolicy2025Trade = sourceReceipt
+  "Peter Navarro; Paul Dans and Steven Groves (eds.); Heritage Foundation"
+  "Mandate for Leadership: The Conservative Promise, trade chapter, print p790"
+  "2023"
+  "https://static.heritage.org/project2025/2025_MandateForLeadership_FULL.pdf"
+  attributedAuthor
+  "Printed page 790 recommends DHS/DOJ contracting with US-owned AI firms to detect and disrupt specified social-media influence networks and funding."
+  "Proposed procurement != resulting award, operational behaviour or legitimate targeting of specific groups."
+
+octoberCveVolumeSecondary : SourceReceipt
+octoberCveVolumeSecondary = sourceReceipt
+  "Bryant Eadon / Balance Bits Consulting"
+  "Black October 2026: the month the CVE count broke"
+  "2026-10-28"
+  "https://www.balancebitsconsulting.com/insights/black-october-2026-the-month-the-cve-count-broke"
+  secondaryContext
+  "Reproducible stated 1-27 Oct 2026 baseline: 14,514 published CVE records and 30 CISA known-exploited additions through Oct 27; denominator and censoring stated."
+  "Published CVEs != exploited in the wild != AI-discovered != artificially induced for a regulatory narrative."
+
+goertzelEpsteinReporting : SourceReceipt
+goertzelEpsteinReporting = sourceReceipt
+  "Connor Mycroft / South China Morning Post"
+  "Epstein funded AI pioneer, helped him get HKD8.9m government grants"
+  "2026-02-16"
+  "https://www.scmp.com/news/hong-kong/society/article/3343645/epstein-funded-ai-pioneer-helped-him-get-hk89-million-hong-kong-government-grants"
+  secondaryContext
+  "Journalistic review of roughly 800 pages of original Epstein records describes at least USD113k OpenCog support during 2010-2015 and grant-brokerage claims."
+  "Historical support or brokerage != present-day AI industry command, unified programme, or wrongdoing by recipients."
+
+humanityPlusBlackDraft : SourceReceipt
+humanityPlusBlackDraft = sourceReceipt
+  "DOJ EFTA00587395 (original release); third-party text mirrors"
+  "Bracketed draft letter for Humanity+ / Ben Goertzel, proposed Leon Black / family foundation donation"
+  "2014-12 (incomplete draft)"
+  "https://www.justice.gov/epstein/files/DataSet%209/EFTA00587395.pdf"
+  secondaryContext
+  "DOJ indexed EFTA00587395, transcribed draft letter describes USD300k proposed AI cognitive-architecture support with unfilled author/foundation variants and transfer language."
+  "Unsigned bracketed draft != bank-settlement confirmation; DOJ release != independent endorsement of embedded facts."
+
 -- An original primary statement is a receipt for what the named original
 -- says, not a receipt for the correctness of every empirical prediction.
 record AttributionBoundary : Set where
