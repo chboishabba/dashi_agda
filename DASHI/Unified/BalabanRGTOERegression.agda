@@ -920,3 +920,34 @@ open NativeReverse public using
   (forwardPlaquetteFour; reversePlaquetteFour
   ; inverseFourIsReversedPlaquette
   ; realTraceInverse; forwardReverseFourTraceSame)
+
+
+------------------------------------------------------------------------
+-- November source-complete six ORIGINAL positive plaquettes and native
+-- R443/R445 SAME-config Set-universe weld. These are source-written
+-- algebraic implications: no product Haar, R445 tail or gap constructed.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeSixPlaneC3SourceReductionExact as SixCut
+import DASHI.Physics.YangMills.YMClayNativeSixPlaneC3ActualPhysicalSourceExact as SixActual
+import DASHI.Physics.YangMills.YMClayR443NativeSixPlaneHaarNumeratorExact as R443Six
+import DASHI.Physics.YangMills.YMClayR445NativeSU2R443SameObjectExact as R445Weld
+import DASHI.Physics.YangMills.YMClayR443NativeSixPlaneC3SequenceLimitExact as R443Limit
+
+open SixActual public using
+  (inversePositivePlaneIsSwappedWord
+  ; swappedPositivePlaquetteIsInverse
+  ; swappedPositivePlaquetteTrace
+  ; nativeSelectedSixOrientation
+  ; nativeSixPositiveWilsonActionSpatialC3)
+open R443Six public using
+  (NativeConfiguration; nativeSixTrace; nativeSixTraceC3
+  ; NativeSixPlaneHaarBoundary; nativeSixPlaneR443
+  ; nativeSixPlaneNumeratorC3Invariant)
+open R445Weld public using
+  (r443R445NativeConfigurationSameObject
+  ; nativeR443SixPlaneR445Observable
+  ; nativeR443R445FiniteCylinderLimits)
+open R443Limit public using
+  (nativeC3FiniteNumeratorSource
+  ; nativeC3NormalizedExpectationAtEveryCutoff
+  ; nativeC3SelectedSequenceLimitInvariant)
