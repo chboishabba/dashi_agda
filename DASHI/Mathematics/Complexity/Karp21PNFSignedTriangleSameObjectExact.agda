@@ -35,16 +35,16 @@ import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as C
 import DASHI.Mathematics.Complexity.Karp21SignedLaplacianCutExact as Lap
 
 pnfWeight01 : ℤ
-pnfWeight01 = + PNFGraph.magnitude
-  (Hodge.graphWeight Hodge.canonicalResidualOneCell)
+pnfWeight01 = + (PNFGraph.magnitude
+  (Hodge.graphWeight Hodge.canonicalResidualOneCell))
 
 pnfWeight12 : ℤ
-pnfWeight12 = + PNFGraph.magnitude
-  (Hodge.graphWeight Hodge.canonicalTransportOneCell)
+pnfWeight12 = + (PNFGraph.magnitude
+  (Hodge.graphWeight Hodge.canonicalTransportOneCell))
 
 pnfWeight20 : ℤ
-pnfWeight20 = - (+ PNFGraph.magnitude
-  (Hodge.graphWeight Hodge.canonicalContradictionOneCell))
+pnfWeight20 = - (+ (PNFGraph.magnitude
+  (Hodge.graphWeight Hodge.canonicalContradictionOneCell)))
 
 pnfWeight01IsOne : pnfWeight01 ≡ + 1
 pnfWeight01IsOne = cong (+_) PNF.edge01MagnitudeIsOne
