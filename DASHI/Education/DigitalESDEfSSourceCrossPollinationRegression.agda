@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attr
+import DASHI.Education.DigitalESDTilburySourceRoleExact as Tilbury
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as Cases
 import DASHI.Education.DigitalESDEfSPedagogicalReciprocityExact as Prior
 import DASHI.Education.DigitalESDTransferablePedagogicalPrinciplesExact as Digital
@@ -40,7 +41,7 @@ nonAdmissionRetained = refl
 
 tilburyReusesExistingSource :
   Cases.CrossPollinationCase.attributedSource Cases.tilburyWortman2004
-  ≡ Cases.Tilbury.tilburyWortman2004
+  ≡ Tilbury.tilburyWortman2004
 tilburyReusesExistingSource = refl
 
 ecoCOILCollectiveChallenge :
