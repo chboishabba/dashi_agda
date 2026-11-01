@@ -209,3 +209,13 @@ Now `certifiedCountJumpsFromTwinInfinitude` obtains the reverse using each assum
 **Closed in mathematical source:** T13 exact Nat-prime/window/count-jump semantic reduction, subject to kernel checking. **Not closed:** T02 actual nonnegative ordered-real `Λ` error in Agda, T09 signed Hardy–Littlewood remainder, T10 existence of any cofinal jumps/twin witnesses, T12 real partial summation, R10 zero exclusion, P10 the giant sign. Neither the count-jump BIDI nor finite SSP15 jets circumvent parity. Real-P-to-Nat-count equivalence still requires proof of genuine logarithm positivity and support-equivalence, not a synthetic Weil scalar or SOTA bounded-gap claim.
 
 Prior properly attributed prime-power envelope refinement yields `E(X)=O(√X log²X)` at the mathematical level (the earlier `O(√X log³X)` remains a valid weaker bound). Kernel execution was not requested/performed.
+
+## 2026-11-01 K04d/K05 source-driven max-cut continuation
+
+K04b source: `BishopMachinGeometricBishopRateExact.machinBishopFourOver25Pow` and `machinBishopEightOver25PowCauchy` are source-written full actual Bishop-real quantitative targets. Local exact rational tests cover 64 stages and 475 Cauchy pairs, **not** a kernel proof; pinned Agda remains required.
+
+K04d source: `BishopMachinZetaSequentialContinuityReducerExact.bishopContinuousImageConverges` constructs epsilon-delta continuous-image convergence on the pinned Bishop `Sequence.con*`. `AtActualCompletedZeta.realComponentConvergesFromActualContinuity` and `imagComponentConvergesFromActualContinuity` instantiate the true `CompletedRiemannZeta.zeta` at the existing `qMachinStage` and `bishopMachinPi`. Missing exact inputs: authentic Bishop-analytic Dirichlet n^{−s} with local σ>1 uniform tails and proven actual real/imag epsilon-delta continuity; generic `Meromorphic` is opaque.
+
+K05 source: `BishopMachinQuarterSharedTrigWeldBidiExact.AtExistingRound11Weld.quarterUnitFromOriginalSharedWeld` consumes the PREEXISTING `BishopRound11ClassicalTrigObjectWeldExact.compileRound11Pythagorean` for actual Round11 data and original quarter angle. `quarterWeldedTrigEndpoint` then composes that unit with the existing conditional actual sine/cosine fourfold transfer. Missing exact inputs: original same-classical/Bishop trig object weld evidence, true sine/cosine addition and quarter tangent=1 identification, independent geometric π uniqueness. Avoid re-proving or silently assuming DLMF source authority.
+
+All above are source-written Agda, no kernel/CI. T10/R10/P10 remain separate open conjectural gates. Retain dated source attribution and ESD import-only rule.
