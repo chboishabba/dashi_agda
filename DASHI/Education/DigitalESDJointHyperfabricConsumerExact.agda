@@ -148,6 +148,65 @@ situatedEcologyDonor : LES.LESSituatedSocioEcologicalBoundary
 situatedEcologyDonor = LES.canonicalLESSituatedSocioEcologicalBoundary
 
 ------------------------------------------------------------------------
+-- TWO-SOURCE OVERLAPS ARE EXPLICIT, NOT AUTOMATIC IDENTIFICATION.
+-- A pair of #1448 cases can ask a shared question while retaining each
+-- original source, role and possible disagreement. The authored relation is
+-- a *candidate* interpretation. Neither common theme nor citation similarity
+-- decides empirical study identity or source independence.
+------------------------------------------------------------------------
+
+record CandidateSourceOverlap
+    (left right : Cases.CrossPollinationCase) : Set where
+  constructor candidate-source-overlap
+  field
+    leftHyperedge : CandidateJointHyperedge left
+    rightHyperedge : CandidateJointHyperedge right
+    overlap : Braid.TensionReceipt
+    overlapLeftIsSource :
+      Braid.TensionReceipt.leftProvenanceRef overlap ≡
+      Attr.canonicalURL (Cases.attributedSource left)
+    overlapRightIsSource :
+      Braid.TensionReceipt.rightProvenanceRef overlap ≡
+      Attr.canonicalURL (Cases.attributedSource right)
+    researchConsumer : String
+    competingInterpretation : String
+    reviewNeeded : Bool
+    reviewNeededIsTrue : reviewNeeded ≡ true
+
+open CandidateSourceOverlap public
+
+proposeOverlap :
+  (left right : Cases.CrossPollinationCase) →
+  Braid.BraidRelation →
+  String →
+  String →
+  CandidateSourceOverlap left right
+proposeOverlap left right relationship question rival =
+  candidate-source-overlap
+    (candidateJointHyperedge left)
+    (candidateJointHyperedge right)
+    (Braid.tension-receipt
+      (EfS.ReciprocalPedagogicalBridge.mechanismHypothesis
+        (Cases.candidateBridge left))
+      (EfS.ReciprocalPedagogicalBridge.mechanismHypothesis
+        (Cases.candidateBridge right))
+      (Attr.canonicalURL (Cases.attributedSource left))
+      (Attr.canonicalURL (Cases.attributedSource right))
+      relationship
+      "The relation is a hypothetical cross-source comparison; common EfS labels do not establish source identity, independence, transfer, consent or effectiveness.")
+    refl refl
+    question rival
+    true refl
+
+communityCollectiveOverlap :
+  CandidateSourceOverlap Cases.adefilaEcoCOIL Cases.singhCommunity
+communityCollectiveOverlap =
+  proposeOverlap Cases.adefilaEcoCOIL Cases.singhCommunity
+    Braid.productiveTension
+    "When does student online co-creation actually share sustainability inquiry and decision authority with community partners?"
+    "Institution-level digital participation may improve student experience without changing community benefit, representation or authority."
+
+------------------------------------------------------------------------
 -- CONSTRUCTIVE HIGHER-ORDER OBSTRUCTION.
 --
 -- Four synthetic records in each population. All *three pairwise joint
