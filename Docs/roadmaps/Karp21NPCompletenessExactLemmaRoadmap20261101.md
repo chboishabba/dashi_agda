@@ -182,6 +182,10 @@ This is no longer a merely assumed objective identity. Remaining E20 mathematica
 
 **Numerical regression status is unchanged:** the earlier bounded finite controls are evidence, not universal proofs. The new small SymPy/truth-table checks do not change the per-edge 0/20 kernel acceptance count.
 
+### Signed integer binary size regression (E20)
+
+The E20 script now measures a conservative **bit count** of each vertex identifier, sign/magnitude edge weight and positive threshold, rather than just counting arithmetic operations or edges. It checks the loose polynomial envelope `outputBits ≤ 32*(sourceBits+1)^3` on 54 zero/positive/signed instances with input magnitudes up to `2^1024`; an independently executed matching local Python check passed all 54 cases. The formal residual remains `partitionSignedWeightBitCost`: a theorem bounding **all** signed integer inputs under a precise canonical serializer and fixed machine-clock model. Sampled bit lengths do **not** close that universal obligation.
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
