@@ -273,6 +273,9 @@ def check_additional():
             source = frozenset(e for e,b in zip(arcs,pres) if b)
             assert undirected_hamiltonian(*directed_to_undirected_hamiltonian(n,source)) == directed_hamiltonian(n,source)
             counts['E10'] += 1
+    # Sparse one-based input: binary n is huge, output columns must be small.
+    rows, rhs, cols = sat_to_binary_ip(10**15, ((10**15,),))
+    assert cols == 1 and binary_ip(rows, rhs, cols)
     print('PASS additional direct reduction checks',counts)
 
 
