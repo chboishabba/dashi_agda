@@ -181,3 +181,9 @@ monitor surface.
 - Built source-specific R443 six-plane finite Gibbs/Haar numerator compiler using original R443/R431, with actual compact Haar and Gibbs-density source hypotheses still explicit; composed through finite-normalized and selected scalar-limit C3 invariance under those inputs.
 - Matched R443 and R445 configuration/observable types definitionally on actual native rational SU2 record after universe fix and specialized existing native P2 finite cylinder convergence.
 - Re-read canonical Route-S/R320, physical R333 and R281/H2 same OS Hamiltonian owners; genuine selected decay, continuum tails and uniform nonzero physical gap remain open. No new Clay theorem and no Agda exact-head compile.
+
+
+## 2026-11-01 — finish finite six-plane physical Wilson convention
+
+- Added source-written universal original native rational SU2 group proof: 16 ordered plaquette traces = twice original six positive traces plus four identity traces per site; all diagonal paths use existing inverse-path theorem, remaining six reverse orientations reuse source path closure. Corresponding Wilson deficits have exact factor two.
+- R443 now consumes the **actual six-positive 1−normalized real trace Wilson deficit** instead of raw Wilson trace, retaining unproved source beta/Gibbs density, compact Haar and physical UV cutoff. Independent exact arithmetic PASS, but Agda not compiled.
