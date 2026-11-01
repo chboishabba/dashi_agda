@@ -117,45 +117,65 @@ data Reachable : Problem → Set where
   satRoot : Reachable sat
   useEdge : (e : Edge) → Reachable (source e) → Reachable (target e)
 
+
+-- Nonrecursive named reachability receipts: avoid termination claims
+-- from recursive calls on unrelated nullary Problem constructors.
+reachClique : Reachable clique
+reachClique = useEdge e02-sat-clique satRoot
+
+reachVertexCover : Reachable vertexCover
+reachVertexCover = useEdge e05-clique-cover reachClique
+
+reachDirectedHamiltonian : Reachable directedHamiltonian
+reachDirectedHamiltonian =
+  useEdge e09-cover-directedHamiltonian reachVertexCover
+
+reachThreeSAT : Reachable threeSAT
+reachThreeSAT = useEdge e03-sat-threeSAT satRoot
+
+reachGraphColouring : Reachable graphColouring
+reachGraphColouring = useEdge e11-threeSAT-colouring reachThreeSAT
+
+reachExactCover : Reachable exactCover
+reachExactCover = useEdge e13-colouring-exactCover reachGraphColouring
+
+reachKarpKnapsack : Reachable karpKnapsack
+reachKarpKnapsack = useEdge e17-exactCover-knapsack reachExactCover
+
+reachPartition : Reachable partition
+reachPartition = useEdge e19-knapsack-partition reachKarpKnapsack
+
 allNodesHistoricallyReachable : (p : Problem) → Reachable p
 allNodesHistoricallyReachable sat = satRoot
 allNodesHistoricallyReachable binaryIntegerProgramming =
   useEdge e01-sat-IP satRoot
-allNodesHistoricallyReachable clique =
-  useEdge e02-sat-clique satRoot
+allNodesHistoricallyReachable clique = reachClique
 allNodesHistoricallyReachable setPacking =
-  useEdge e04-clique-packing (allNodesHistoricallyReachable clique)
-allNodesHistoricallyReachable vertexCover =
-  useEdge e05-clique-cover (allNodesHistoricallyReachable clique)
+  useEdge e04-clique-packing reachClique
+allNodesHistoricallyReachable vertexCover = reachVertexCover
 allNodesHistoricallyReachable setCover =
-  useEdge e06-cover-setCover (allNodesHistoricallyReachable vertexCover)
+  useEdge e06-cover-setCover reachVertexCover
 allNodesHistoricallyReachable feedbackVertex =
-  useEdge e07-cover-feedbackVertex (allNodesHistoricallyReachable vertexCover)
+  useEdge e07-cover-feedbackVertex reachVertexCover
 allNodesHistoricallyReachable feedbackArc =
-  useEdge e08-cover-feedbackArc (allNodesHistoricallyReachable vertexCover)
-allNodesHistoricallyReachable directedHamiltonian =
-  useEdge e09-cover-directedHamiltonian (allNodesHistoricallyReachable vertexCover)
+  useEdge e08-cover-feedbackArc reachVertexCover
+allNodesHistoricallyReachable directedHamiltonian = reachDirectedHamiltonian
 allNodesHistoricallyReachable undirectedHamiltonian =
-  useEdge e10-directed-undirected (allNodesHistoricallyReachable directedHamiltonian)
-allNodesHistoricallyReachable threeSAT =
-  useEdge e03-sat-threeSAT satRoot
-allNodesHistoricallyReachable graphColouring =
-  useEdge e11-threeSAT-colouring (allNodesHistoricallyReachable threeSAT)
+  useEdge e10-directed-undirected reachDirectedHamiltonian
+allNodesHistoricallyReachable threeSAT = reachThreeSAT
+allNodesHistoricallyReachable graphColouring = reachGraphColouring
 allNodesHistoricallyReachable cliqueCover =
-  useEdge e12-colouring-cliqueCover (allNodesHistoricallyReachable graphColouring)
-allNodesHistoricallyReachable exactCover =
-  useEdge e13-colouring-exactCover (allNodesHistoricallyReachable graphColouring)
+  useEdge e12-colouring-cliqueCover reachGraphColouring
+allNodesHistoricallyReachable exactCover = reachExactCover
 allNodesHistoricallyReachable hittingSet =
-  useEdge e14-exactCover-hitting (allNodesHistoricallyReachable exactCover)
+  useEdge e14-exactCover-hitting reachExactCover
 allNodesHistoricallyReachable steinerTree =
-  useEdge e15-exactCover-steiner (allNodesHistoricallyReachable exactCover)
+  useEdge e15-exactCover-steiner reachExactCover
 allNodesHistoricallyReachable threeDimensionalMatching =
-  useEdge e16-exactCover-threeMatching (allNodesHistoricallyReachable exactCover)
-allNodesHistoricallyReachable karpKnapsack =
-  useEdge e17-exactCover-knapsack (allNodesHistoricallyReachable exactCover)
+  useEdge e16-exactCover-threeMatching reachExactCover
+allNodesHistoricallyReachable karpKnapsack = reachKarpKnapsack
 allNodesHistoricallyReachable jobSequencing =
-  useEdge e18-knapsack-sequencing (allNodesHistoricallyReachable karpKnapsack)
-allNodesHistoricallyReachable partition =
-  useEdge e19-knapsack-partition (allNodesHistoricallyReachable karpKnapsack)
+  useEdge e18-knapsack-sequencing reachKarpKnapsack
+allNodesHistoricallyReachable partition = reachPartition
 allNodesHistoricallyReachable weightedMaxCut =
-  useEdge e20-partition-maxCut (allNodesHistoricallyReachable partition)
+  useEdge e20-partition-maxCut reachPartition
