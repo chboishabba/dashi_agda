@@ -17441,3 +17441,17 @@ Cleanup
 - [ ] K04d identify actual Bishop half-plane predicate, construct true complex `n^{-s}` via Bishop exp/log, uniform σ>1 tails and same-object completed-ζ continuity, and derive ζ(stage)→ζ(limit).
 - [ ] K05 prove concrete Round11 sine/cosine addition/fourfold laws, quarter equality from original tangent=1 and correct nonzero/branch, unit Pythagorean law, and independent classical π uniqueness. Conditional endpoint theorem is not a terminal theorem.
 - [ ] Retain terminal T10/R10/P10 research gates separately; do not promote analogies, estimates or source-written comparisons to kernel proofs.
+
+### 2026-11-01 K04b source quantitative closure / K04d domain reuse
+
+- [x] Source-written `DASHI.Analysis.BishopMachinGeometricBishopRateExact`: square(1/5) = 1/25 and square(1/239) ≤ 1/25, Nat-indexed source Bishop magnitude contraction; original 16/4 weighted sum, exact native rational base 16/5+4/239 = 3844/1195 ≤ 4.
+- [x] Source-written all-stage `machinBishopFourOver25Pow` and rational-power bridge `machinBishopFourOver25RationalStage` on the ACTUAL Bishop Machin π and exact rational q_n.
+- [x] Source-written monotone Bishop 1/25 powers and full two-index `machinBishopEightOver25PowCauchy` for all n≤j,k, using original real triangle.
+- [x] Extended exact rational Python regression to 64 stages, all-index Nat cross-product sample tests and 475 cutoff/Cauchy pairs; independently reproduced with Python Fraction.
+- [x] Fixed malformed Bishop absolute-value term in previous `BishopMachinCombinedRemainderBoundExact.weightedAbsoluteTriangle`.
+- [x] Extended actual `BishopMachinZetaRegularHalfPlaneExact`: eventual Bishop Re(q_n)>1 and conditional original zeta/Dirichlet equality, explicitly requiring interpretation of opaque analytic half-plane predicate.
+- [x] Wired new geometric Bishop rate owner into three canonical TOE roots.
+- [ ] **Kernel verification needed** for all K04b proofs, K04d additions and three TOE roots: only source-written candidates so far, Agda/CI not run.
+- [ ] K04d full genuine Bishop-complex exp/log Dirichlet-series uniform convergence and same-original completed-ζ continuity; derive ζ(q_n)→ζ(pi_M) from a concrete, not opaque, analytic realization.
+- [ ] K05 actual Round11 Bishop sine/cosine addition/Cauchy convolution, quarter-angle sine≈cosine and Pythagoras, fourfold identities, and unique classical-trigonometric π characterization in Agda. Other-real-carrier transcendentals do NOT discharge this bridge.
+- [ ] T10 / R10 / P10 terminal theorem conditions remain independently open, not inferred from K04b.
