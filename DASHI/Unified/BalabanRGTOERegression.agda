@@ -845,3 +845,33 @@ voyagerSelectedBlockRetainsFineWilsonGaugeInvariant :
   ≡ WilsonBlock.wilsonFine selected fine
 voyagerSelectedBlockRetainsFineWilsonGaugeInvariant =
   WilsonBlock.selectedFineWilsonGaugeInvariant
+
+
+------------------------------------------------------------------------
+-- 2026-11-01 actual selected finite side-four Wilson-C3 seam.
+-- The same rational SU2 n=3 periodic bond carrier is now explicit.
+-- These are proofs written on the physical finite lattice source, not
+-- a new 369 analogy, not an infinite-volume measure/Clay promotion.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClaySide4SpatialC3WilsonNaturalityExact as Side4C3
+import DASHI.Physics.YangMills.YMClaySide4RationalSU2C3WilsonTraceExact as RationalC3
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as NativeC3Weld
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4PathSameObjectExact as NativePath
+
+open Side4C3 public using
+  (spatialC3ShiftForward; holonomyC3Naturality; wilsonC3Naturality)
+open RationalC3 public using
+  (rationalSU2Group; rationalTraceCyclic
+  ; rationalTraceConjugationInvariant
+  ; rationalSU2Side4WilsonC3GaugeInvariant)
+open NativeC3Weld public using
+  (nativeSiteIsSide4; nativePositiveBondIsSide4
+  ; graphFieldFromActualNativeRationalSU2
+  ; nativeRationalSU2Side4C3Wilson
+  ; nativeRationalSU2Side4C3GaugeWilson
+  ; nativeGraphC3Square)
+open NativePath public using
+  (side4CyclicSuccessorIsHodge
+  ; nativePositiveStepEqualsHodge
+  ; nativeGraphHolonomyEqualsExistingPathHolonomy
+  ; nativeGraphWilsonEqualsExistingPathWilson)
