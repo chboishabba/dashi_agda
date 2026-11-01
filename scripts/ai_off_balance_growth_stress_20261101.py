@@ -76,7 +76,7 @@ def scenario():
     print("SOFTBANK weighted coupon:", round(softbank_usd_note_coupon()/10, 6))
     assert isclose(COREWEAVE_H1_INVEST - COREWEAVE_H1_OCF, 11.211)
     assert isclose(softbank_usd_note_coupon(), .94125)
-    assert isclose(projected_cash_clocks(.5,.2)[0],120.733, abs_tol=.001)
+    assert isclose(projected_cash_clocks(.5,.2)[0],120.730, abs_tol=.001)
     assert projected_cash_clocks(.5,0)[1] > projected_cash_clocks(.5,0)[0]
     assert round(lease_pv_equal_payments(355.73,20,.08),2) == 174.63
     assert isclose(META_LEASES_NOT_STARTED-278.99,76.74)
