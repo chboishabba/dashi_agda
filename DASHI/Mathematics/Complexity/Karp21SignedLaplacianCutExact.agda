@@ -26,6 +26,7 @@ module DASHI.Mathematics.Complexity.Karp21SignedLaplacianCutExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ; +_; -[1+_]; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym; subst)
@@ -290,3 +291,25 @@ positiveThresholdAcceptanceGlobalFlip g labels accepted =
     (λ value → Int._≤_ (Cut.threshold g) value)
     (signedMaxCutGlobalFlipInvariant (Cut.edges g) labels)
     accepted
+
+
+------------------------------------------------------------------------
+-- Countermodel as a NEGATED theorem proposition, not just a numerical
+-- diagnostic: an unrestricted signed Karp-Laplacian cannot be PSD.
+------------------------------------------------------------------------
+
+zeroNotBelowNegativeFour : Int._≤_ (+ 0) (-[1+ 3 ]) → ⊥
+zeroNotBelowNegativeFour ()
+
+unrestrictedSignedLaplacianNotPSD :
+  (∀ {n : Nat}
+    (edges : List (Cut.SignedUndirectedEdge n))
+    (labels : Vec.Vec Bool n) →
+    Int._≤_ (+ 0) (signedLaplacianQuadratic edges labels)) →
+  ⊥
+unrestrictedSignedLaplacianNotPSD assumesPSD =
+  zeroNotBelowNegativeFour
+    (subst
+      (λ value → Int._≤_ (+ 0) value)
+      negativeEdgeSignedQuadratic
+      (assumesPSD (negativeEdge ∷ []) negativeEdgeLabels))
