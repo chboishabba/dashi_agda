@@ -143,11 +143,10 @@ weightedAbsoluteTriangle :
   Bishop._≤_ (Bishop.∣_∣ u) a →
   Bishop._≤_ (Bishop.∣_∣ v) d →
   Bishop._≤_
-    (Bishop.∣
-      Bishop._-_
+    (Bishop.∣_∣
+      (Bishop._-_
         (Bishop._*_ sixteen u)
-        (Bishop._*_ four v)
-    ∣)
+        (Bishop._*_ four v)))
     (Bishop._+_
       (Bishop._*_ sixteen a)
       (Bishop._*_ four d))
