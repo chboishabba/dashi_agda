@@ -44,3 +44,5 @@ import DASHI.Mathematics.Complexity.Karp21SSPDualCheegerSignlessOneExact
 import DASHI.Mathematics.Complexity.Karp21FiniteCompleteGraphGeneratorExact
 import DASHI.Mathematics.Complexity.Karp21FiniteCompleteGraphObjectiveExact
 import DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExact
+
+import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphYESExact
