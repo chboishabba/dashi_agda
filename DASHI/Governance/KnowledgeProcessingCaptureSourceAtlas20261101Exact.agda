@@ -500,6 +500,101 @@ coreweaveFINRATradeSnapshot = sourceReceipt
   "Secondary retrieval of FINRA trade prints: multiple CoreWeave notes traded below 90 pct of par on Oct30; some near 80 pct; current bond-level issue credit data shown."
   "Illiquid trade prints, holder fund marks and modelled prices are different observations; one last trade does not guarantee executable size or company-wide marginal funding cost."
 
+------------------------------------------------------------------------
+-- FIRST-PARTY OFF-BALANCE + SOFTBANK + ED ZITRON ORIGINAL COMMENTARY
+-- The formal consumer uses these only as typed observation/argument roots.
+------------------------------------------------------------------------
+
+metaSept30LeaseAndCommitments : SourceReceipt
+metaSept30LeaseAndCommitments = sourceReceipt
+  "Meta Platforms, Inc.; SEC Form 10-Q"
+  "Third-quarter 2026 notes: leases and contractual commitments"
+  "2026-09-30"
+  "https://www.sec.gov/Archives/edgar/data/1326801/000162828026066773/meta-20260930_htm.xml"
+  firstPartyIssuer
+  "Meta reports USD355.73bn uncommenced leases, USD454.52bn noncancel commitments, USD84.00bn senior notes, 2027 contractual payments USD121.41bn, and additional USD14.72bn contingent purchases; leases commence through 2036."
+  "The two future obligation buckets MAY overlap; do not add the categories, call disclosed future rent fraudulent hidden debt, or replace 2027 commitments with 2027 bond maturity."
+
+microsoftFY26LeaseDisclosure : SourceReceipt
+microsoftFY26LeaseDisclosure = sourceReceipt
+  "Microsoft Corp."
+  "Microsoft 2026 Annual Report, Leases"
+  "2026-06-30"
+  "https://www.microsoft.com/investor/reports/ar26/"
+  firstPartyIssuer
+  "Annual report gives USD329.1bn datacentre-related leases not yet commenced, potentially conditional, commencing fiscal 2027-2033 and lasting 1-20 years."
+  "Unsigned options and commencement conditions are not necessarily unconditional present debt. Do not merge cross-issuer lease totals into a single legally callable loan."
+
+metaHyperionBlueOwlOriginal : SourceReceipt
+metaHyperionBlueOwlOriginal = sourceReceipt
+  "Meta Platforms Inc."
+  "Meta Announces Joint Venture With Blue Owl Capital to Develop Hyperion Data Center"
+  "2025-10-21"
+  "https://investor.atmeta.com/investor-news/press-release-details/2025/Meta-Announces-Joint-Venture-with-Funds-Managed-by-Blue-Owl-Capital-to-Develop-Hyperion-Data-Center/"
+  firstPartyIssuer
+  "Blue Owl funds own 80pct and Meta 20pct of JV, ~USD27bn construction budget; Meta will lease completed facility and granted capped conditional residual-value guarantee for first 16 years, linked to nonrenewal/termination; third-party bonds issued."
+  "JV project debt is not necessarily consolidated Meta corporate debt; guarantee is conditional and capped, not equivalent to current payable principal; do not infer same-accounting total without full annex."
+
+coreWeaveH1SecCashClock : SourceReceipt
+coreWeaveH1SecCashClock = sourceReceipt
+  "CoreWeave Inc.; SEC Form 10-Q"
+  "Quarter ended 30 June 2026, cash and financing liquidity note"
+  "2026-06-30"
+  "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm"
+  firstPartyIssuer
+  "H1 operating cash USD3.663bn, investing outflow USD14.874bn, financing inflow USD13.985bn; USD5.524bn cash and USD10.014bn available debt draws, USD15.553bn company-defined liquidity; USD35.6bn debt and USD16.3bn recognised operating-lease liabilities. Facilities include specific GPU/cashflow security and guarantee differences."
+  "H1 run-rate is not full-year forecast; undrawn debt is NOT cash; customer backlog is NOT free cash; secured/unsecured/operating leases require distinct claims and maturities."
+
+softBankSep24SecuredNoneNotes : SourceReceipt
+softBankSep24SecuredNoneNotes = sourceReceipt
+  "SoftBank Group Corp."
+  "Issuance of Foreign Currency-Denominated Senior Notes"
+  "2026-09-24"
+  "https://group.softbank/en/news/press/20260924"
+  firstPartyIssuer
+  "USD10bn unsecured BB+ notes: USD1bn 2030 at 8.625pct, USD4.5bn 2032 at 9.25pct, USD4.5bn 2034 at 9.75pct; plus EUR1bn separate notes. Announced use included USD10bn OpenAI follow-on tranche; implied annual USD coupons USD941.25m excluding EUR notes and other debt."
+  "Do not treat note coupons as total portfolio funding costs or count the replaced bridge as still borrowed."
+
+softBankOctober1BridgeResolved : SourceReceipt
+softBankOctober1BridgeResolved = sourceReceipt
+  "SoftBank Group Corp."
+  "Execution of Follow-on Investment (Third Tranche) in OpenAI"
+  "2026-10-01"
+  "https://group.softbank/en/news/press/20261001"
+  firstPartyIssuer
+  "Executed USD10bn third tranche funded by proceeds of 24 September notes; completed USD30bn follow-on, cumulative USD64.6bn OpenAI investment, ~13pct interest; fully repaid and cancelled USD40bn bridge facility by end September."
+  "Old bridge liability must not be double-counted with the newly issued takeout notes. Equity stake value and company NAV are not independent external cash or cash servicing."
+
+softBankCFOFY26NonRecoursePlan : SourceReceipt
+softBankCFOFY26NonRecoursePlan = sourceReceipt
+  "Yoshimitsu Goto / SoftBank Group Corp."
+  "SoftBank Group Report 2026 CFO Message"
+  "2026"
+  "https://group.softbank/en/ir/financials/annual_reports/2026/message/goto"
+  firstPartyIssuer
+  "SoftBank CFO describes portfolio-backed takeout financing, NAV/LTV management, and project-level nonrecourse AI infrastructure debt intended not to increase SoftBank parent LTV."
+  "Stated nonrecourse policy is not evidence every project is legally remote from all parent risks, nor proof project returns exceed financing."
+
+edZitronCreditCrunch2026 : SourceReceipt
+edZitronCreditCrunch2026 = sourceReceipt
+  "Ed Zitron"
+  "Credit Crunch"
+  "2026-10-06"
+  "https://www.wheresyoured.at/credit-crunch/"
+  attributedAuthor
+  "Authored critical financial interpretation of AI debt, rising Treasury funding costs, SPVs, compute contract economics and off-balance project funding."
+  "Original critical commentary, not independent regulator measurement; quantify assertions against issuer filings and preserve interpretations as attributed."
+
+edZitronAnnualizedEnron2026 : SourceReceipt
+edZitronAnnualizedEnron2026 = sourceReceipt
+  "Ed Zitron"
+  "Annualized Enron Rate"
+  "2026-10-13"
+  "https://www.wheresyoured.at/annualized-enron-rate/"
+  attributedAuthor
+  "Authored critique of annualised run-rate representations and gross/net customer revenue, including alleged OpenAI definition changes."
+  "Criticism and reporting are not audited issuer statements; trailing-realised revenues and annualised hypothetical run rates are different metrics."
+
 -- An original primary statement is a receipt for what the named original
 -- says, not a receipt for the correctness of every empirical prediction.
 record AttributionBoundary : Set where
