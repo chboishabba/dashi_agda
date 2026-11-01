@@ -1572,3 +1572,30 @@ These are **editorial alignment questions**, not a substitute for the independen
 - Prepare a **publicly shareable minimal method/provenance record** without releasing restricted manuscripts or protected evidence.
 - Keep ESD separate from Fleet/TOE. SLR is an execution dependency only. JMD/meta-introspector repositories are separately attributed technical references, not the study's central scientific evidence.
 
+## 33. 2026-11-01 source-by-source EfS formal cross-pollination: implementation PR
+
+**Implementation link:** [dashi_agda PR #1448](https://github.com/chboishabba/dashi_agda/pull/1448) is a draft stacked on the still-open independent EfS [PR #1237](https://github.com/chboishabba/dashi_agda/pull/1237). This is source-written candidate synthesis, not current-master proof certification or completed scholarly review.
+
+### Existing owner reuse and changes
+
+- Exactly four file paths change in #1448: two new Digital-ESD Agda exact/regression modules, two added imports to the Digital-ESD umbrella, and an expanded source-by-source EfS methods note. Neither Fleet nor TOE is involved.
+- The new source module reuses the canonical AttributedSourceCore, snowball attribution boundary, EfS reciprocal pedagogical bridges, evidence-braid relation vocabulary and existing Tilbury/IUCN source owners. No competing attribution or review ontology is introduced.
+- Sixteen candidate cases are represented: fourteen independently attributed published papers, chapters, conference/industry or institutional programme items, and two existing IUCN/Tilbury references reused without duplication.
+- Each case preserves source identity, source role, context, candidate digital-to-EfS mapping, reverse EfS-to-digital question, competing interpretation, evidence debt, exact locator equality, and an explicit false reviewed-admission flag. This is not a source-audit certificate.
+
+### New exact bibliographic corrections
+
+- Ryan and Ferreira (2024) *Embedding Sustainability in Teacher Education in Australia*: the Oxford publisher DOI is **10.1093/acrefore/9780190264093.013.1810**; an earlier supplied manuscript printed an incorrect longer ending.
+- Black and Ryan (with Okjong Ji, 2024) *Listening to young children with/in nature*: the Cambridge chapter credits Ji as "with"; DOI **10.1017/9781009199971.008**. Do not erase Ji's contribution or silently equate it to an otherwise specified author role.
+- Ferreira, Ryan and Davis, *A Deep Dive into Sustainability Leadership Through Education for Sustainability*: published Palgrave chapter DOI **10.1007/978-3-030-99097-8_68**. Preserve the distinction between earlier online and later final chapter versions.
+- UNESCO (2002), *Teaching and Learning for a Sustainable Future*: institutional programme with 25 teacher-learning modules and approximately 100 hours of materials. Griffith University and programme specialists contributed; their roles must not be converted into individual programme authorship.
+
+### Manuscript and proof boundaries
+
+The new independent sources are strong antecedents for digital transformative sustainability pedagogy, community agency, accessibility, sustainable competence and system-wide EfS leadership. They should **challenge the seven provisional digital principles**, not be cited as if those principles were already independently empirically validated. The intended paper contribution remains an evidence-governed, retrospective and prospective research method that preserves question-relative adequacy, missing observers, institutional and ecological burdens, context transfer, and source authority.
+
+The publisher's manuscript abstract is about **200 words maximum** in one paragraph; the optional prior editorial enquiry may use approximately **250 words**. Neither requires inventing completed review results.
+
+**Verification:** a repository static-source inspection found 14 new public source records, 16 source-case values, the two Digital-ESD umbrella imports and no forbidden Agda bypass keywords. An exact-head Agda kernel, local preflight, human EfS coding, database screening and SourceAuditAdmission were **not performed** in this environment. GitHub returned no combined-status checks for #1448's head when inspected.
+
+**Next evidence tasks:** resolve exact source spans, duplicates/versioning, participant authority, EfS and digital researcher adjudication, full-text eligibility, and final claim ceilings. Unpublished group manuscripts remain private. ESD remains independent of Fleet/TOE.
