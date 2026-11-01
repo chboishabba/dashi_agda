@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Data.List.Membership.Propositional using (_∈_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -13,6 +14,7 @@ import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Education.DigitalESDSourceAuditAdmissionExact as Admission
 import DASHI.Education.DigitalESDSLRSourceReviewBridgeExact as Review
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as Canonical
 import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
 import DASHI.Education.DigitalESDEvidenceBraidTensionExact as Braid
 import DASHI.Education.DigitalESDTransferablePedagogicalPrinciplesExact as Principles
@@ -82,6 +84,34 @@ record JointReviewHyperedge (case : Cases.CrossPollinationCase) : Set where
     candidate : CandidateJointHyperedge case
     reviewedSourcePacket :
       Review.SLRSourceReviewPacket (Cases.attributedSource case)
+
+    -- Publication-level agreement is insufficient; pay the reviewed
+    -- *observation*, actual packet membership and exact source revision.
+    reviewedWitness :
+      Review.ReviewedSLRAuditObservation (Cases.attributedSource case)
+    reviewedWitnessInPacket :
+      reviewedWitness ∈
+        Review.SLRSourceReviewPacket.reviewedObservations reviewedSourcePacket
+    packetAndAnalysisUseSameFullText :
+      Review.SLRSourceReviewPacket.fullText reviewedSourcePacket ≡
+      Review.SLRSourceUnitAnalysisReceipt.fullText
+        (Review.SLRSourceReviewPacket.analysis reviewedSourcePacket)
+    canonicalEvidenceWitness : Canonical.EvidenceObservation
+    canonicalEvidenceIsReviewedCandidate :
+      canonicalEvidenceWitness ≡
+      Review.SLRCandidateAuditObservation.canonicalEvidenceObservation
+        (Review.SLRObservationReviewReceipt.candidate
+          (Review.ReviewedSLRAuditObservation.reviewReceipt reviewedWitness))
+    evidenceRevisionMatchesReviewedFullText :
+      Canonical.EvidenceObservation.observationSourceRevisionRef
+        canonicalEvidenceWitness ≡
+      Review.FullTextArtifactReceipt.fullTextRevisionReference
+        (Review.SLRSourceReviewPacket.fullText reviewedSourcePacket)
+    evidenceSpan : Canonical.EvidenceSpan
+    evidenceSpanIsCanonical :
+      evidenceSpan ≡ Canonical.EvidenceObservation.observationSpan
+        canonicalEvidenceWitness
+
     sourceAuditAdmission :
       Admission.SourceAuditAdmission (Cases.attributedSource case)
     studyClaimProfile : Ceiling.StudyClaimProfile
