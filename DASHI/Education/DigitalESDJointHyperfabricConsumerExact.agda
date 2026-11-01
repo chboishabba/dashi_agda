@@ -240,7 +240,8 @@ patternDifferent ()
 pairwiseDoesNotDetermineTriple :
   INF.NonFactorabilityWitness pairwiseSummary threeWayPattern
 pairwiseDoesNotDetermineTriple =
-  INF.nonFactorabilityWitness evenTriple oddTriple refl patternDifferent
+  INF.nonFactorabilityWitness evenTriple oddTriple
+    pairwiseSummariesAgree patternDifferent
 
 pairwiseTabulationCannotPayThreeWayPattern :
   INF.FactorsThrough pairwiseSummary threeWayPattern → ⊥
