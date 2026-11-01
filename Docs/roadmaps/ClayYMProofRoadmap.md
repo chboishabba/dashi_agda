@@ -1,3 +1,42 @@
+
+## 1 November 2026: Voyager video completeness / source-calibration crosswalk
+
+The chapter-by-chapter source-to-owner audit is
+`Docs/physics/YMClayVoyager20260929CoverageAudit.md`. Golden Agda:
+`YMClayVoyager2026CoverageExact.agda` (coverage/status, native P2
+reuse, Route-S no-promotion, finite-versus-uniform gap theorem, stochastic
+local/global/invariant-measure type separation), plus
+`YMClayVoyagerR4HodgeBasisExact.agda` (six signed Euclidean four-dimensional
+2-form basis directions and proof that `*^2 = +1` on those signed bases).
+These are source-written proof candidates; **exact-head Agda kernel not run**.
+
+Video topics indexed: Landau QED pole, Gross-Wilczek/Politzer beta sign,
+Wilson blocking, lattice gauge/closed holonomy, strong-coupling area law,
+Creutz 1979 **and distinct 1980** numerical studies, dimensional transmutation,
+Balaban and MRS fixed-IR vs infinite-volume limitation, stochastic Parisi-Wu
+and 2024 local 3D YM-Higgs, Chevyrev-Shen 2026 3D gauge-covariant
+renormalisation uniqueness and 2D invariant YM Langevin law, classical
+Donaldson/Freedman/Casson/Gompf instanton topology and exotic R4.
+
+**Exact live highest-alpha payment remains unchanged:** actual R445
+selected same-source physical 4D CMP119 Wilson measure/tails/moments, real
+selected continuum family and OS axioms, R281/P3 literal spectrum =
+reconstructed `H_OS` spectrum, nontriviality, uniform IR infinite-volume
+gap and Clay group scope. Finite loop bounds and R320→R333 compilers are
+not these inputs.
+
+New finite classical Hodge result is **not** the metric Hodge-star of a
+smooth 4-manifold: the missing lifts are linear extension, oriented metric,
+2-form half projections, ASD/SD curvature, classical YM E-L implication,
+instanton moduli and external smooth four-manifold topology theorems.
+The existing `YMStrictSelectedHodgeAlgebraLaws` is finite 2D/selected and
+must not be identified with this new flat Euclidean R4 basis. Likewise,
+3D local-time Markov existence, equilibrium of the *same* 3D stochastic
+flow and a 4D pure YM QFT are separate theorem targets.
+
+**Attribution:** named original authors hold source claims; DASHI owns
+source-written adapters only. No Monster/3B, ESD or Clay promotion.
+
 # Clay Yang-Mills Proof Roadmap
 
 
