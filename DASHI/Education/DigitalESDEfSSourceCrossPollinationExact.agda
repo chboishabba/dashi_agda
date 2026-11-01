@@ -150,11 +150,46 @@ ryanFerreira2024Source = Attr.mkDOISource
   "Reviews policy, curriculum, educator preparation, accreditation and common-vision strategies in embedding EfS. BOUNDARY: A programme case and reference synthesis do not establish measured digital-EfS effects or direct transfer across countries and HE sectors."
   Attr.publicAttribution
 
+blackRyanJiNatureSource : Attr.AttributedSource
+blackRyanJiNatureSource = Attr.mkDOISource
+  "Ali Black; Lisa Ryan; Okjong Ji (credited with)"
+  "Listening to young children with/in nature: Relational, pedagogical and community approaches that work"
+  "Young Children and the Environment: Early Education for Sustainability, 3rd ed., chapter 5, pp. 91-119, Cambridge University Press"
+  "2024"
+  "10.1017/9781009199971.008"
+  "https://doi.org/10.1017/9781009199971.008"
+  Attr.academicChapterSource
+  "Early-childhood nature and community projects in Korea and Australia; relational listening, trust and partnerships. BOUNDARY: Children aged 3-10 and community settings cannot be treated as direct digital higher-education effectiveness evidence; source-specific participation rights must be retained."
+  Attr.publicAttribution
+
+ferreiraRyanDavisDeepDiveSource : Attr.AttributedSource
+ferreiraRyanDavisDeepDiveSource = Attr.mkDOISource
+  "Jo-Anne L. Ferreira; Lisa D. Ryan; Julie M. Davis"
+  "A Deep Dive into Sustainability Leadership Through Education for Sustainability"
+  "The Palgrave Handbook of Educational Leadership and Management Discourse, pp. 829-849"
+  "2022"
+  "10.1007/978-3-030-99097-8_68"
+  "https://doi.org/10.1007/978-3-030-99097-8_68"
+  Attr.academicChapterSource
+  "Critically examines sustainability leadership and contested strong/weak sustainability assumptions. BOUNDARY: Scholarly critique and historical framing do not provide direct digital-intervention causal effects or complete authority over community values."
+  Attr.publicAttribution
+
+unescoTLSSFSource : Attr.AttributedSource
+unescoTLSSFSource = Attr.mkNoDOISource
+  "UNESCO (programme owner; Griffith University prepared initial materials with documented contributors)"
+  "Teaching and Learning for a Sustainable Future: A Multimedia Teacher Education Programme"
+  "UNESCO / Griffith University; multimedia teacher development programme, CD-ROM version 3.0"
+  "2002"
+  "http://www.unesco.org/education/tlsf/"
+  Attr.institutionalSource
+  "Institutional multimedia teacher-education programme with 25 modules and around 100 hours of designed professional learning. BOUNDARY: Tool/module availability does not establish observed teacher capacity or transformation. Project participation is not automatically individual authorship."
+  Attr.publicAttribution
+
 candidateEfSSources : Attr.AttributedSourceAtlas
 candidateEfSSources = Attr.mkSourceAtlas
   "published independent EfS source candidates for cross-pollination"
   "DASHI.Education.DigitalESDEfSSourceCrossPollinationExact"
-  (taimurOnukiSource ∷ nilssonDahlstromSource ∷ adefilaEcoCOILSource ∷ singhCommunitySource ∷ barthCompetenciesSource ∷ giridharanCompetenciesSource ∷ jepsenCookeAccessibilitySource ∷ ferreiraRyanTilburySource ∷ ferreiraRyanSystemSource ∷ ferreiraRyanDavisSource ∷ ryanFerreira2024Source ∷ Tilbury.tilbury2002 ∷ Tilbury.tilburyWortman2004 ∷ [])
+  (taimurOnukiSource ∷ nilssonDahlstromSource ∷ adefilaEcoCOILSource ∷ singhCommunitySource ∷ barthCompetenciesSource ∷ giridharanCompetenciesSource ∷ jepsenCookeAccessibilitySource ∷ ferreiraRyanTilburySource ∷ ferreiraRyanSystemSource ∷ ferreiraRyanDavisSource ∷ ryanFerreira2024Source ∷ blackRyanJiNatureSource ∷ ferreiraRyanDavisDeepDiveSource ∷ unescoTLSSFSource ∷ Tilbury.tilbury2002 ∷ Tilbury.tilburyWortman2004 ∷ [])
   "Acquisition and candidate interpretive challenge only; exact-study admission requires reviewed source spans, eligibility and claim ceilings."
 
 record CrossPollinationCase : Set where
@@ -394,6 +429,60 @@ tilburyWortman2004 = source-case Tilbury.tilburyWortman2004
     Prior.candidate refl)
   refl false refl
 
+blackRyanJiNature : CrossPollinationCase
+blackRyanJiNature = source-case blackRyanJiNatureSource
+  (Prior.pedagogical-bridge
+    Digital.pluralSituatedObservers Prior.ecologicalAndMoreThanHumanRelations
+    (Prior.efs-source (Attr.canonicalURL blackRyanJiNatureSource)
+      Prior.empiricalContextBound
+      "Early-childhood education for sustainability in Australian and Korean nature/community projects."
+      "Source discusses relational listening to children, shared goals, partners and ecological/community participation."
+      "No direct transfer to university digital learning, and adult interpretations cannot stand in for child voice or other-than-human testimony.")
+    Prior.productiveTension
+    "A situated learner/child/community observer may contest institutional assumptions about ecological education."
+    "How could digital higher education retain participant/partner authority rather than treating engagement surveys as sufficient?"
+    "What non-human ecological relationships and community decisions remain unobserved by an online course?"
+    "Adult-led nature activities can be labelled participatory without granting consequential agency."
+    "Participant voice, community decisions, ecological observations, population-transfer and outcome review."
+    Prior.candidate refl)
+  refl false refl
+
+ferreiraRyanDavisDeepDive : CrossPollinationCase
+ferreiraRyanDavisDeepDive = source-case ferreiraRyanDavisDeepDiveSource
+  (Prior.pedagogical-bridge
+    Digital.contextualCustodianship Prior.valuesAndCriticalReflection
+    (Prior.efs-source (Attr.canonicalURL ferreiraRyanDavisDeepDiveSource)
+      Prior.crossPaperInterpretation
+      "Critical sustainability leadership chapter in a published handbook."
+      "Examines the competing normative traditions and disrupted histories of education for sustainability."
+      "Critical-theoretical genealogy does not itself prove learning, implementation or system change.")
+    Prior.productiveTension
+    "Historical, political and normative ESD distinctions constrain how a digital innovation can claim transformation."
+    "Which sustainability vision and organisational interests are presupposed by the digital education evaluation?"
+    "Can learners and communities contest weak or purely technocratic interpretations of sustainability?"
+    "An apparently successful digital innovation can satisfy a narrow sustainability metric while reinforcing an inequitable governance structure."
+    "Explicit normative frame, competing perspectives, participant authority, policy context and same-object observations."
+    Prior.candidate refl)
+  refl false refl
+
+unescoTLSSF : CrossPollinationCase
+unescoTLSSF = source-case unescoTLSSFSource
+  (Prior.pedagogical-bridge
+    Digital.iterativeEvidenceReturnAndRecharting Prior.transformativeEducatorPraxis
+    (Prior.efs-source (Attr.canonicalURL unescoTLSSFSource)
+      Prior.practitionerTheoretical
+      "UNESCO institutional teacher-education multimedia programme of 25 modules, around 100 hours."
+      "Programme design supports educator learning opportunities concerning ESD and multimedia methods."
+      "The programme's existence, duration and activity descriptions do not establish competence, uptake, durable practice or impact.")
+    Prior.complementary
+    "An early institutional digital EfS programme provides a prior-art example of designed teacher capacity support."
+    "Which observed teacher practices distinguish multimedia availability from sustained ESD enactment?"
+    "Can educator professional learning retain values reflection and system transformation rather than only digital content delivery?"
+    "A large module count is an implementation input and cannot be promoted to a sustainable learning outcome."
+    "Training exposure, teacher practice changes, student outcomes, adoption across institutions and longitudinal follow-up."
+    Prior.candidate refl)
+  refl false refl
+
 canonicalSourceCases : List CrossPollinationCase
 canonicalSourceCases =
   taimurOnuki ∷
@@ -407,6 +496,9 @@ canonicalSourceCases =
   ferreiraRyanSystem ∷
   ferreiraRyanDavis ∷
   ryanFerreira2024 ∷
+  blackRyanJiNature ∷
+  ferreiraRyanDavisDeepDive ∷
+  unescoTLSSF ∷
   tilburyIUCN2002 ∷
   tilburyWortman2004 ∷ []
 
