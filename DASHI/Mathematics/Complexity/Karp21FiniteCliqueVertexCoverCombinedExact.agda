@@ -18,7 +18,7 @@ module DASHI.Mathematics.Complexity.Karp21FiniteCliqueVertexCoverCombinedExact w
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _≤_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 import Data.Fin.Base as Fin
@@ -113,3 +113,57 @@ karpFiniteCliqueVertexCoverIff adjacency choices k =
   PR.iff
     (finiteCliqueToComplementCover adjacency choices k)
     (finiteComplementCoverToClique adjacency choices k)
+
+
+------------------------------------------------------------------------
+-- Quantify the same-owner witness relation to obtain a genuine
+-- finite INSTANCE-LEVEL YES iff for any n, any adjacency, any k.
+-- This still does not supply the encoded polynomial-time complement
+-- graph transducer or the classical n-k output-budget encoding.
+------------------------------------------------------------------------
+
+FiniteCliqueYES :
+  ∀ {n} →
+  (Fin.Fin n → Fin.Fin n → Bool) → Nat → Set
+FiniteCliqueYES {n} adjacency k =
+  Σ (Vec.Vec Bool n) (λ choices →
+    FiniteCliqueAt adjacency choices k)
+
+FiniteComplementCoverYES :
+  ∀ {n} →
+  (Fin.Fin n → Fin.Fin n → Bool) → Nat → Set
+FiniteComplementCoverYES {n} adjacency k =
+  Σ (Vec.Vec Bool n) (λ choices →
+    FiniteComplementCoverAt adjacency choices k)
+
+finiteCliqueYESImpliesComplementCoverYES :
+  ∀ {n}
+    (adjacency : Fin.Fin n → Fin.Fin n → Bool)
+    (k : Nat) →
+  FiniteCliqueYES adjacency k →
+  FiniteComplementCoverYES adjacency k
+finiteCliqueYESImpliesComplementCoverYES adjacency k
+  (choices , witness) =
+  choices , finiteCliqueToComplementCover adjacency choices k witness
+
+finiteComplementCoverYESImpliesCliqueYES :
+  ∀ {n}
+    (adjacency : Fin.Fin n → Fin.Fin n → Bool)
+    (k : Nat) →
+  FiniteComplementCoverYES adjacency k →
+  FiniteCliqueYES adjacency k
+finiteComplementCoverYESImpliesCliqueYES adjacency k
+  (choices , witness) =
+  choices , finiteComplementCoverToClique adjacency choices k witness
+
+karpFiniteCliqueVertexCoverInstanceIff :
+  ∀ {n}
+    (adjacency : Fin.Fin n → Fin.Fin n → Bool)
+    (k : Nat) →
+  PR.Iff
+    (FiniteCliqueYES adjacency k)
+    (FiniteComplementCoverYES adjacency k)
+karpFiniteCliqueVertexCoverInstanceIff adjacency k =
+  PR.iff
+    (finiteCliqueYESImpliesComplementCoverYES adjacency k)
+    (finiteComplementCoverYESImpliesCliqueYES adjacency k)
