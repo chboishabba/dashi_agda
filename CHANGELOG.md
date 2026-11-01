@@ -153,3 +153,5 @@ monitor surface.
 - Remaining numeric conversion: identify each omitted magnitude with embedded rational odd-power quotient and combine/transport the all-n `4/25^n` envelope into Bishop real order. Source written, **Agda kernel not run**; zeta uniform convergence and true trig-π characterization also remain open.
 
 - Continued K04b2: `BishopMachinQuantitativeOmittedTailExact` now source-identifies the native Bishop omitted magnitudes with the original rational inverse-odd/exponent expression via existing nonnegative-power and rational-embedding theorems. Remaining direct mathematical work is signed 16/4 tail combination, all-n rational geometric majorant and kernel verification; no CI.
+
+- K04c3 source follow-on: zero-sensitive indexed raw-factor `factorisationZeroOrProduct`, and stage-wise numerator/denominator magnitude reconstruction through dictionary and residual product witnesses. Original signed numerator retained; full rational codec inverse and kernel verification remain open.
