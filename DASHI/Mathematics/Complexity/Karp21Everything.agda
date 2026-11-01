@@ -17,3 +17,4 @@ import DASHI.Mathematics.Complexity.Karp21VertexSetCoverIncidenceExact
 import DASHI.Mathematics.Complexity.Karp21ColouringCliqueCoverExact
 import DASHI.Mathematics.Complexity.Karp21ExactHittingTransposeExact
 import DASHI.Mathematics.Complexity.Karp21CertifiedDagTransportExact
+import DASHI.Mathematics.Complexity.Karp21PartitionCutQuadraticExact
