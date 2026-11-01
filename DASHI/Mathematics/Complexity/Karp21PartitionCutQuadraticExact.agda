@@ -95,3 +95,115 @@ partitionCutProductForSelection :
    (leftTotal items - rightTotal items))
 partitionCutProductForSelection items =
   partitionCutProductIdentity (leftTotal items) (rightTotal items)
+
+
+------------------------------------------------------------------------
+-- Literal complete-graph weighted cut, represented as a triangular edge
+-- enumeration. Each pair (head,tail) is counted EXACTLY ONCE. In
+-- particular, no duplicate directed pairs or omitted off-diagonal pairs
+-- are hidden in a closed-form definition of the objective.
+------------------------------------------------------------------------
+
+crossWith : ℤ → Bool → List (ℤ × Bool) → ℤ
+crossWith x side [] = + 0
+crossWith x true  ((y , true) ∷ xs) = crossWith x true xs
+crossWith x true  ((y , false) ∷ xs) =
+  (x * y) + crossWith x true xs
+crossWith x false ((y , false) ∷ xs) = crossWith x false xs
+crossWith x false ((y , true) ∷ xs) =
+  (x * y) + crossWith x false xs
+
+completeGraphCut : List (ℤ × Bool) → ℤ
+completeGraphCut [] = + 0
+completeGraphCut ((x , side) ∷ xs) =
+  crossWith x side xs + completeGraphCut xs
+
+crossStepRight : (x y right : ℤ) →
+  (x * y) + (x * right) ≡ x * (y + right)
+crossStepRight x y right =
+  RingZ.solve 3
+    (λ x y right →
+      ((x ⊗ y) ⊕ (x ⊗ right)
+      , x ⊗ (y ⊕ right)))
+    refl x y right
+
+crossStepLeft : (x y left : ℤ) →
+  (x * y) + (x * left) ≡ x * (y + left)
+crossStepLeft = crossStepRight
+
+crossWithTrue :
+  (x : ℤ) (items : List (ℤ × Bool)) →
+  crossWith x true items ≡ x * rightTotal items
+crossWithTrue x [] = refl
+crossWithTrue x ((y , true) ∷ xs) =
+  crossWithTrue x xs
+crossWithTrue x ((y , false) ∷ xs) =
+  trans
+    (cong (λ tail → x * y + tail) (crossWithTrue x xs))
+    (crossStepRight x y (rightTotal xs))
+
+crossWithFalse :
+  (x : ℤ) (items : List (ℤ × Bool)) →
+  crossWith x false items ≡ x * leftTotal items
+crossWithFalse x [] = refl
+crossWithFalse x ((y , false) ∷ xs) =
+  crossWithFalse x xs
+crossWithFalse x ((y , true) ∷ xs) =
+  trans
+    (cong (λ tail → x * y + tail) (crossWithFalse x xs))
+    (crossStepLeft x y (leftTotal xs))
+
+cutStepTrue : (x left right : ℤ) →
+  (x * right) + (left * right) ≡ (x + left) * right
+cutStepTrue x left right =
+  RingZ.solve 3
+    (λ x left right →
+      ((x ⊗ right) ⊕ (left ⊗ right)
+      , (x ⊕ left) ⊗ right))
+    refl x left right
+
+cutStepFalse : (x left right : ℤ) →
+  (x * left) + (left * right) ≡ left * (x + right)
+cutStepFalse x left right =
+  RingZ.solve 3
+    (λ x left right →
+      ((x ⊗ left) ⊕ (left ⊗ right)
+      , left ⊗ (x ⊕ right)))
+    refl x left right
+
+completeGraphCutEqualsPartitionProduct :
+  (items : List (ℤ × Bool)) →
+  completeGraphCut items ≡ leftTotal items * rightTotal items
+completeGraphCutEqualsPartitionProduct [] = refl
+completeGraphCutEqualsPartitionProduct ((x , true) ∷ xs) =
+  trans
+    (cong (λ tail → crossWith x true xs + tail)
+      (completeGraphCutEqualsPartitionProduct xs))
+    (trans
+      (cong (λ first → first + (leftTotal xs * rightTotal xs))
+        (crossWithTrue x xs))
+      (cutStepTrue x (leftTotal xs) (rightTotal xs)))
+completeGraphCutEqualsPartitionProduct ((x , false) ∷ xs) =
+  trans
+    (cong (λ tail → crossWith x false xs + tail)
+      (completeGraphCutEqualsPartitionProduct xs))
+    (trans
+      (cong (λ first → first + (leftTotal xs * rightTotal xs))
+        (crossWithFalse x xs))
+      (cutStepFalse x (leftTotal xs) (rightTotal xs)))
+
+-- Actual E20 bridge: the cut is defined from crossing edges, not by
+-- *assuming* it equals a product. This closes the universal scalar/graph
+-- equality, but NOT the threshold iff or the encoded polynomial map.
+completeGraphCutQuadratic :
+  (items : List (ℤ × Bool)) →
+  (+ 4) * completeGraphCut items ≡
+  ((leftTotal items + rightTotal items) *
+   (leftTotal items + rightTotal items)) -
+  ((leftTotal items - rightTotal items) *
+   (leftTotal items - rightTotal items))
+completeGraphCutQuadratic items =
+  trans
+    (cong (λ weight → (+ 4) * weight)
+      (completeGraphCutEqualsPartitionProduct items))
+    (partitionCutProductForSelection items)
