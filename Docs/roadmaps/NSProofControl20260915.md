@@ -1,3 +1,206 @@
+# 2026-10-27 R734 CRITICAL RESIDENCE MAX-CUT — SHARP ALL-DATA INTEGRAL, NOT GLOBAL REGULARITY
+
+**Original proof owners preserved:** classical Leray energy, Fourier interpolation,
+Fujita–Kato small critical data; the existing R734/R735 exact cube-dyadic
+source and R369/R92 helical formalisation remain their existing DASHI owners.
+Full derivation: `Docs/research/ns_r734_critical_residence_pareto_20261027.md`.
+Dedicated exact local suite: `tests/test_ns_r734_critical_residence.py`.
+
+**Paid without data-smallness, for every full unforced finite periodic
+Galerkin cutoff:** `integral_0^infinity X_N(t)^2 dt <= E0^2/nu` with the
+actual R734 dyadic critical energy `X_N(t)=sum w(k)|u_k|^2`.
+The coefficient 1 is **sharp** on same-equation real divergence-free
+heat shears at `n=2^(j-1)+1`, where the quotient tends to one.
+This pays a global-time critical **integrability/residence** leaf, not
+a uniform-in-time supremum or a signed nonlinear production estimate.
+The supercritical-threshold residence set obeys
+`meas{t:X_N(t)>B}<=E0^2/(nu*B^2)`; spikes remain possible.
+
+**Improved late entry:** set `A=Ccrit^2*E0/nu^2`. The older optimal
+single-window certificate from separate energy/enstrophy averages used
+`sqrt(2)*A` and is **superseded**. The sharper correlated-energy
+certificate gives one common entry time
+`T_res=A^2/nu` if `A<=1/2`, and
+`T_res=(1/4+log(2A)/2)/nu` otherwise.
+For `t>=T_res`, `X_N(t)<=4nu^2/(Ccrit^2(1+exp(nu(t-T_res)))^2)`,
+with original source `Ccrit=4*3^(3/4)*C6*C3`.
+All quantities refer to the **same** cutoff Galerkin solution.
+
+
+**New same-equation discriminator:** The real, transverse heat shear has
+identically **zero actual nonlinear production**, but for fixed \(E_0,\nu\)
+the absolute-majorant expenditure diverges as frequency grows:
+\(\int_0^\infty\sqrt{X_N}D_N\,dt
+=w(n)^{3/2}E_0^{3/2}/(3\nu)\to\infty\).
+Therefore the paid \(\int X_N^2\) estimate does NOT pay the absolute
+nonlinear majorant. The bound yields \(L_t^4\dot H_x^{1/2}\) /
+\(L_t^4 L_x^3\), with Serrin index \(3/2\), **not** a continuation
+criterion. These are original-equation sharp nonpromotion checks,
+not evidence of singularity. Existing R92/Waleffe signed-helicity
+cancellations remain separate. Focused local suite: **22 passed**
+(13 critical residence + nine earlier small-critical); not a full
+exact-GitHub-head or Agda kernel run.
+
+**Still unpaid at the real mathematical wall:** arbitrary-large-data
+pre-entry/middle-time **pointwise** critical bound; full source signed
+R734/W2 universal margin is **refuted** by the earlier positive-helicity
+physical witness; replacement signed same-solution dyadic transfer
+with phase plus generated H-minus; R369 *actual* Gram same-operator
+bridge; R406 continuum source, A1/A2/A3/B7 unrestricted continuation.
+Do not infer a Clay proof from global-time L2 integrability or
+the source-written Agda commentary. Latest focused local arithmetic/
+symbolic suite passed 22 cases (13 new + 9 earlier) but there is
+no Agda/Lean kernel receipt or exact-head whole-repository suite.
+
+---
+
+# 2026-10-27 NS369 × R734/W2 PHYSICAL ORBIT: FINITE SYMMETRY REUSED, FALSE POSITIVE LEAF STILL EXCLUDED
+
+**Source-first:** `Docs/research/ns_369_pure_plus_w2_orbit_audit_20261027.md`.
+Original Waleffe 1992 helical triad attribution retained; the NS369
+finite/cyclic construction and existing R92/R102/R529/R530/R531/R369
+and high-high Gram owners retain their own original source authors.
+
+**Exact new same-physical calculation:** On the genuine REAL six-mode
+positive-helicity datum p=(1,0,0), q=(0,1,2), k=(1,1,2), projected
+full unforced NS Galerkin force at sharp cutoff N=2 gives
+`Xdyadic=8`, `Ddyadic=36`,
+`Pcritical=(5+sqrt(5)-sqrt(30))/10>0`,
+`M_H+×H-(0)=0`. The exact physical W2 universal positive margin
+fails at sufficiently large amplitude. That failure persists under
+all three proper cyclic coordinate orientations, with *identical*
+X, D and P and three distinct R529/R531 ternary sign-profile
+triples. Under all SIX axis permutations the Fourier sign quotient
+has only THREE distinct profiles, each accommodating opposite true
+helical chirality (proper vs improper parity); the original
+orientation data must therefore accompany the sign observations.
+Amplitude multiplication does not alter a finite sign profile
+but makes the cubic nonlinear growth defeat quadratic dissipation.
+
+**Existing R92 mathematical join NOW EXPLICIT:** the actual projected
+Galerkin modal transfer on this physical source has genuine Waleffe
+common amplitude
+`A=(5-sqrt5+sqrt30)/10>0`, physical lengths
+`|p|=1,|q|=sqrt5,|k|=sqrt6`, and modal contributions
+`T_p=(sqrt5-sqrt6)A<0`,
+`T_q=(sqrt6-1)A>0`,
+`T_k=(1-sqrt5)A<0`.
+Original R92 energy and helicity invariant sums vanish EXACTLY.
+At original dyadic weights (1,2,2),
+`Pcrit=T_p+2T_q+2T_k=-T_p>0`.
+This provides an ACTUAL finite high-high middle-leg-gain
+candidate for the 369 sign/profile classifier, not an identified
+Gram K_N(A) Rayleigh eigenvalue or cutoff-uniform coercive estimate.
+The seventh exact regression checks this full common-amplitude
+source join. Original author Waleffe (1992) retained.
+
+**Source-written formal reuse:** Existing `NSCross369OrientationBridgeExact`
+now carries `cyclic369CrossEquivariant` and
+`cyclic369ThirdPowerIdentity` on the existing polymorphic
+Complex3 cross product, not on an invented cyclic group C3.
+`NSTriadKN369HighHighGramBridgeReceipt` explicitly retains its
+separate unsolved `lambda_min(K_N(A))>=c/N` Rayleigh owner:
+NO same-object identity to this physical triad's Gram operator
+has been established; neither a Gram proof nor its refutation is
+inferred. `NSTriadKNPackageAToSameSolutionSerrinRound369Exact`
+is a DIFFERENT conditional same-limiting-solution compiler that
+does NOT produce Package A/W2. R528/R532 Euclidean counting-vs-
+continuum measure transport remains open.
+
+**Execution:** seven locally passed exact SymPy tests for the full
+proper/improper orientation orbit and finite sign-fibre collapse,
+source-matching regression
+`tests/test_ns_369_pure_plus_w2_orbit.py`.
+No exact PR-head suite or Agda/Lean kernel typechecking;
+no unrestricted Clay A/B result.
+
+**Pareto after reuse:** prove a genuinely cutoff-uniform signed
+estimate for actual negative-helicity exchange and exact-versus-
+dyadic weight-defect transfer (R92/R102/R734), keeping all four
+helical channels and same physical projection; or find a different
+valid critical-continuation route. Only THEN attach any eligible
+finite 369 sign/profile reduction, high-high Gram operator or
+Round369 same-solution Serrin consumer. Do not re-assert the FALSE
+universal positive-margin R734 W2 estimate or old padding-based B4.
+
+---
+
+# 2026-10-27 CRITICAL PR #1271: UNIVERSAL R734/R735 W2 IS REFUTED ON THE ORIGINAL PHYSICAL GALERKIN SYSTEM
+
+**Read this amendment first; it supersedes all earlier entries calling
+R734 W2 a plausible universally provable input.** The source-written
+R734/R735 conditional compilers remain mathematically valid; their
+unrestricted physical positive-margin hypothesis is FALSE.
+
+**Exact physical evidence:** `tests/test_ns_r734_pure_plus_physical_w2_no_go.py`,
+10 independent locally passing exact SymPy checks. Three positive
+frequencies p=(1,0,0), q=(0,1,2), k=(1,1,2), with conjugate
+negative modes, receive the normalized PHYSICAL positive curl
+projectors of real transverse seed vectors (0,1,1), (1,0,0),
+(1,-1,0). The field is real, divergence free and initially H+
+polarized at every frequency, within literal sharp Galerkin cube
+N=2. Consequently all H+×H- source incidences vanish at t=0:
+  E_M(0)=E_M'(0)=0, and original weighted W'(0)=0.
+But source-defined dyadic critical mass X=8, dissipation D=36,
+and exact projected NSE nonlinear production
+  Pcrit=(5+sqrt5-sqrt30)/10>3/20>0.
+At viscosity 1, multiplying the SAME actual smooth Fourier datum
+by a=512 yields
+  X'(0)=a²(a Pcrit -72) > a²*(24/5)>0.
+The R734 augmented critical W2 residual with ANY delta>0
+therefore has positive derivative at T=0. Galerkin ODE
+continuity gives a sufficiently small fixed T>0 where
+`AugmentedCriticalWeightedPayment` fails for ALL delta>0,
+even if delta may depend on N,T. This is an AUXILIARY GLOBAL
+INEQUALITY COUNTEREXAMPLE, not an NSE blowup. The exact
+unweighted nonlinear kinetic-energy work is 0, so there is
+no energy-creation artifact, and full NSE nonlinear forcing
+immediately produces H- modes, so there is no illicit
+helical-decimation substitution.
+
+**Critical existing repo donor:** R92
+`NSTriadKNWaleffeCommonAmplitudeInvariantsRound92Exact`
+and R102 `NSTriadKNHelicalCriticalExchangeReductionRound102Exact`
+already capture the original Waleffe exact signed-helicity
+invariant. On the same pure-plus physical datum, nonlinear
+`|k|`-weighted true-helicity production is EXACTLY ZERO,
+while rounded-up source `2^ceil(log2||k||infty)` weighted
+production is positive. The exact equality is
+  `P_dyadic =
+    2 Re Σ_m [w_dyadic(m)-|m|]<u_m,F_m>`.
+This is a **signed time-derivative weight defect**, NOT
+a violation of the standard positive norm equivalence.
+Previously R102 conditionally removed homochiral production
+for the TRUE helicity carrier; it does not pay the R734
+DYADIC residual. Attribution remains Waleffe 1992,
+Lei--Lin--Zhou 2015 and prior DASHI theorem-owner authors.
+This test/counterexample/critical-operator join is new
+source-specific DASHI analysis.
+
+**Pareto replacement, not another placeholder theorem:** retire
+UNRESTRICTED old R734/R735 W2 positive-margin leaf. Search a
+genuine physical critical cancellation estimate across all
+(++), (--), (+-), (-+) classes using exact signed helicity
+and a controlled dyadic weight-defect commutator, or produce
+a different noncircular critical continuation proof with
+independent evidence. Keep exact source-selected outputs,
+the same Galerkin velocity, no cutoff-dependent constants,
+actual viscous margin and physical initial data. A new
+positive leaf must be checked against THIS six-mode witness
+before any conditional record is claimed inhabited.
+R735 W1 local/small-data/late-time upper bounds remain
+valid; the general large-H1 middle interval remains open.
+A1 Bishop real continuation/A2/A3 remain separate.
+The Clay A/B theorem is NOT proved.
+
+**Evidence/provenance:** `Docs/research/ns_r734_pure_plus_physical_w2_no_go_20261027.md`.
+Original R734/R735 modules have been annotated without altering
+their conditional proof types or falsely flipping Boolean closure.
+10 locally passed exact SymPy tests; no Agda/Lean kernel check,
+no exact-PR-head suite, no unrestricted theorem.
+
+---
+
 # Navier–Stokes proof-control record — live A/B/C/D coordinator
 
 Status: authoritative live routing/control document; non-promoting.

@@ -53,6 +53,49 @@ nsCrossZCoordinate :
 nsCrossZCoordinate a b = refl
 
 ------------------------------------------------------------------------
+-- 2026-10-27 NS 369: ACTUAL C3 COORDINATE CYCLE OF THE NS CROSS
+--
+-- Three-axis cyclic rotation is an orientation-preserving symmetry
+-- (determinant +1). Thus the SAME literal NS Complex3 cross product
+-- commutes definitionally with the three coordinate cycle.
+-- This uses the *existing* Complex3 cross carrier, not an asserted
+-- identification of Complex3 with the cyclic group C3.
+--
+-- The related physical helical projectors, Fourier Leray force,
+-- dyadic max-coordinate weight and cutoff are checked separately
+-- in tests/test_ns_369_pure_plus_w2_orbit.py.
+------------------------------------------------------------------------
+
+cyclic369Complex3 :
+  ∀ {r} {F : C3Vector.RealField r} →
+  C3Vector.Complex3 F → C3Vector.Complex3 F
+cyclic369Complex3 (C3Vector.complex3 a b c) =
+  C3Vector.complex3 b c a
+
+cyclic369CrossEquivariant :
+  ∀ {r} {F : C3Vector.RealField r}
+    (a b : C3Vector.Complex3 F) →
+  Cross.complex3Cross
+    (cyclic369Complex3 a)
+    (cyclic369Complex3 b)
+  ≡ cyclic369Complex3 (Cross.complex3Cross a b)
+cyclic369CrossEquivariant
+    (C3Vector.complex3 ax ay az)
+    (C3Vector.complex3 bx by bz) = refl
+
+cyclic369ThirdPowerIdentity :
+  ∀ {r} {F : C3Vector.RealField r}
+    (a : C3Vector.Complex3 F) →
+  cyclic369Complex3
+    (cyclic369Complex3 (cyclic369Complex3 a)) ≡ a
+cyclic369ThirdPowerIdentity
+    (C3Vector.complex3 ax ay az) = refl
+
+-- This exact 3-cycle identity cannot, by itself, establish
+-- R369 high-high Gram lambda_min >= c/N, physical signed R734
+-- critical production payment, R406 continuum transport or Clay B.
+
+------------------------------------------------------------------------
 -- 2. Existing rotational/curl consumers.
 ------------------------------------------------------------------------
 
