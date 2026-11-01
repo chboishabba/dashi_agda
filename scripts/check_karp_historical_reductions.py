@@ -161,6 +161,14 @@ def three_sat(n, clauses):
 
 
 def sat_to_binary_ip(n, clauses):
+    # Rename used variables densely: binary-encoded n can be enormous while
+    # the formula mentions only a handful of variables. Do not emit n columns.
+    ids = sorted({abs(lit) for c in clauses for lit in c})
+    assert all(0 < i <= n for i in ids)
+    dense = {x:i+1 for i,x in enumerate(ids)}
+    clauses = tuple(tuple(dense[abs(lit)] if lit>0 else -dense[-lit]
+                          for lit in clause) for clause in clauses)
+    n = len(ids)
     # Clause truth count >=1, encoded as an equality using binary slack.
     widths = [max(0, (len(clause)-1).bit_length()) for clause in clauses]
     total = n + sum(widths)
