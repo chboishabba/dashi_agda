@@ -17423,3 +17423,6 @@ Cleanup
 
 - [x] K04b2 source: identify every actual positive Bishop `atanMagnitudeTerm` with embedded original rational inverse-odd/power term; instantiate both 5 and 239 using original real-order nonnegativity.
 - [ ] K04b2 remaining: parity-aware combine weighted first-omitted source bounds to actual Machin `|⋆q_n−pi_M|`, prove rational power/denominator majorant and `4/25^n` all-n order in Agda; kernel-check.
+
+- [x] K04c3 source: compose actual indexed zero-or-product factorisation with both SSP15 dictionary/residual product certificates, keeping zero numerator exceptional and source sign retained.
+- [ ] K04c3 kernel check and, if consumer requires a strict record round-trip, prove the signed-numerator/positive-denominator rational reconstruction from the existing encoded factor lists (not only absolute magnitudes).
