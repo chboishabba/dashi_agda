@@ -1,6 +1,6 @@
 # Exact remaining lemma and certificate register — DASHI/OpenAI SAT / corpus / adjacent max-cuts
 
-**Audited 31 October 2026.** Authority: original Golden Agda source owners, Lean downstream, upstream `openai/math`, actual PR branches. This register is a *live statement-and-status inventory*, not a declaration that every source term has been checked.
+**Audited 31 October 2026; addendum 1 November 2026.** Authority: original Golden Agda source owners, Lean downstream, upstream `openai/math`, actual PR branches. This register is a *live statement-and-status inventory*, not a declaration that every source term has been checked.
 
 **Critical distinction:** `SOURCE-WRITTEN` means source text exists on a PR; `KERNEL` means an exact toolchain independently accepted the proof. This run had **no Agda/Lean compiler** and the GitHub runner at the inspected head offered no existing result. Nothing in this register promotes source-only P1/P2 into theorem acceptance.
 
@@ -17,7 +17,7 @@
 |---|---|---|---|
 | **K00** Agda P1/P2 import spine | Run exact-head Agda typecheck of `DASHI/Research/OpenAIMath/Everything.agda` and all transitive imports, plus optional `OpenAIMathSharedTseitinOptimizedCNFExact.agda`; fix every source elaboration failure; safe/0-postulate/0-metavariable audit before Golden promotion. | `Everything.agda`, `OpenAIMathFiniteSupportedTseitinModelsExact.agda`, `OpenAIMathSharedTseitinGateCNFExact.agda`, `OpenAIMathSharedTseitinUniqueExtensionExact.agda` | UNVERIFIED — source only |
 | **K01** Lean generic adapter | Compile `Integration/OpenAIMath/ListFinsetCNFTransport.lean` on pinned Lean 4.28.0/mathlib and prove no `sorry`/new axioms, then join import spine. | `ListFinsetCNFTransport.lean` | UNVERIFIED — staged source |
-| **K02** Lean version-gated later adapter | Pin/migrate an *explicit separate* OAI 378 4.34.1-compatible dependency environment; compile `Upstream378FiniteCNFBridge.lean`, inspect `#print axioms`, and only then enable consumers. Never silently rewrite old 4.28 vendor commit. | `Upstream378FiniteCNFBridge.lean`, upstream `SAT.lean`/`Encoding.lean`/`SqrtLogSpace/Final.lean` | UNVERIFIED — newer upstream not pinned |
+| **K02** Lean version-gated later adapter | Pin/migrate an *explicit separate* OAI 378 4.34.1-compatible dependency environment; compile `Upstream378FiniteCNFBridge.lean`, inspect `#print axioms`, and only then enable consumers. Never silently rewrite old 4.28 vendor commit. | `Upstream378FiniteCNFBridge.lean`, `Upstream378EncodingLengthExact.lean`, upstream `SAT.lean`/`Encoding.lean`/`SqrtLogSpace/Final.lean` | UNVERIFIED — newer upstream not pinned; exact unary/framed formula source-written on Lean #78 |
 
 ## ORIGINAL — 9 exact obligations or owners
 
@@ -57,10 +57,10 @@
 
 | ID | Exact task / precondition / required postcondition | Reuse owner / consumer | Evidence / missing receipt |
 |---|---|---|---|
-| **M00** Verified executable original DAG serialization | Define actual original `GateProgram` ↔ Python JSON frontend relation, accepting only creation-ordered earlier gate indices. Show each source gate maps to original indexed window/clauses. | `scripts/compile_dashi_circuit_openai378.py`, `Circuit.GateProgram`, original compiler | MISSING FORMAL SAME-OBJECT RELATION; executable Python exists |
-| **M01** Verified executable literal/polarity/Finset serializer | Prove actual finite list from M00 equals `Upstream378FiniteCNFBridge.toUpstreamCNF`; output bitstream equals upstream `Encoding.encodeCNF`, including literalCode, sorted numbers, unary and frame. | Python frontend, upstream `Encoding.lean` | MISSING FORMAL CROSS-LANGUAGE CODE PROOF |
-| **M02** Uniform source frontend primitive time | Give concrete algorithm and trace/certificate showing finite source-gate → emitted canonical bitstream time bounded by a polynomial in `inputs+gates`; no free oracle, no uncosted sort or noncomputable Finset choice. | Python frontend, `PNotEqualsNPQ1ExecutedConstructionMachineExact.ExecutedQ1ConstructionRun`, `StandardSingleTapeMachineExact.standardNext`, `LocalOptimizationCompilerExact.LocalSemanticCompiler` | MISSING SAME-OBJECT MACHINE TIME CERTIFICATE |
-| **M03** Uniform source frontend all-prefix visited space | Show each prefix of input preprocessing/serializer uses polynomially many cells, then compose with upstream `SqrtLogSpace.exact_count_and_sat` all-prefix bound. | OAI `Computation/VisitedTape/Final`; existing `LocalOptimizationCompilerExact.StreamingResidencyCertificate` and `peakBoundIsLocalSum` for bounded/local-vs-prefix separation | MISSING WHOLE-PREFIX MACHINE SPACE CERTIFICATE |
+| **M00** Verified executable original DAG serialization | Define actual original `GateProgram` ↔ Python JSON frontend relation, accepting only creation-ordered earlier gate indices and *exact constructor-specific JSON keys*. Show each source gate maps to original indexed window/clauses. | `scripts/compile_dashi_circuit_openai378.py`, `Circuit.GateProgram`, original compiler | EXECUTABLE STRICT SCHEMA now staged Lean #78; Agda↔JSON typed relation and kernel proof STILL MISSING |
+| **M01** Verified executable literal/polarity/Finset serializer | Prove actual finite list from M00 equals `Upstream378FiniteCNFBridge.toUpstreamCNF`; bitstream equals upstream `Encoding.encodeCNF`, including sorted numbers, unary/frame. The exact length statement must be `v+2+Σ_C (4+Σ_code (4*code+8))`. | Python frontend, Lean `Upstream378EncodingLengthExact.exactFormulaBitLength`, upstream `Encoding.lean` | EXECUTABLE exact-length assertion and source-written Lean length induction; no Lean kernel or Agda↔Lean source identity |
+| **M02** Uniform source frontend primitive time | Give a concrete source→bitstream primitive-machine transducer and all-prefix runtime certificate. Reuse executed source clause bound `m≤3g+1`, ordered normalization comparisons ≤`6m+m(m−1)/2`, and exact bit-write count `L`; account for integer comparison bit costs and input parsing, not merely Python calls. | Python frontend, `PNotEqualsNPQ1ExecutedConstructionMachineExact.ExecutedQ1ConstructionRun`, `StandardSingleTapeMachineExact.standardNext`, `LocalOptimizationCompilerExact.LocalSemanticCompiler` | PARTIAL executable operation-count + exact output-bits certificate; STILL MISSING native TM trace / primitive bit-cost theorem |
+| **M03** Uniform source frontend all-prefix visited space | Show each prefix of input preprocessing/serializer uses polynomially many primitive tape cells, compose with the OAI `SqrtLogSpace.exact_count_and_sat` all-prefix bound. Python `stream_original_circuit` now retains ≤`chunk_bits` pending **logical output bits**, plus input and clause lists; do not identify this with visited tape cells. | OAI `Computation/VisitedTape/Final`; existing `LocalOptimizationCompilerExact.StreamingResidencyCertificate` and `peakBoundIsLocalSum` | PARTIAL bounded streaming implementation + checkout-native regression staged; STILL MISSING original primitive machine/prefix-space proof |
 | **M04** Fixed machine source-list count/SAT output | `sourceListExactCountMachine` rewrites actual machine count tape, SAT tape, time, space to source **list** model counts, same machine not new algorithm. | `Upstream378FiniteCNFBridge.lean`, upstream `Final.exact_count_and_sat` | STAGED — 4.34.1 kernel pending |
 | **M05** Complete end-to-end Agda circuit count as machine tape result | Given genuine source circuit and its checked serialized compiled bitstream, compose N03/N04+L02/L03+M01-M04 into statement that tape yields original `countAcceptedCircuitInputs`. Preserve polynomial frontend and upstream complexity. | DASHI #1040/#1212; Lean #78; OAI 378 | MISSING FINAL SAME-OBJECT KERNEL COMPOSITION |
 
@@ -102,6 +102,31 @@ The current default-branch Agda repository already contains these **distinct, re
 - `DASHI/ComputerScience/TriadicActiveCountPhysicalLoweringExact.agda`: total trit-popcount is not prefix-address knowledge; this supplies a negative-control pattern for not inferring every-prefix space from a whole-run count or a final bitstream size.
 
 These were **read from actual source** in this continuation; search terms for P4 were redirected to these owner declaration names rather than creating a competing optimization/machine ontology. Remaining typed joins M02/M03 must instantiate a real source step machine and prove its simulation/cost; matching symbolic names do not constitute a machine run receipt.
+
+## 1 November finite SAT machine-interface advance — exact acceptance boundaries
+
+Lean PR #78 now stages the executable JSON **constructor grammar** (no ignored fields), the *exact* OAI unary/framed bit-length identity, a source-written Lean structural proof of that identity, and a bounded-chunk streaming output path. The eager and streaming paths share the source-ordered finite clause normalizer. Python test scripts have additional strict-schema, finite-assignment, exact-bit and bit-for-bit streaming checks, including the original 27-node/54-edge graph witness; **these changed scripts were not run from the exact current GitHub head**. A separate small arithmetical fixture independently checked the nested-frame identity.
+
+For `v=n+g`, canonical normalized clause codes `C`, `m≤3g+1`, and three literals per clause:
+
+```text
+L = v+2 + Σ_(clause∈C) (4 + Σ_(code∈clause) (4*code + 8))
+  ≤ v+2 + (24v+16)(3g+1)
+  ≤ v+2 + (24v+28)(3g+1)
+  ≤ 72(v+1)^2.
+```
+
+The exact equality is implemented on both sides as (i) an executed Python assertion over actual output bits and (ii) *source-written, not kernel-checked* Lean `Upstream378EncodingLengthExact.exactFormulaBitLength` applied to the actual `SAT.CNF (Fin v)`. The sharpened constant `16` is currently a Python arithmetic bound, not a separate accepted Lean theorem. The full M00/M01 same-object `Agda GateProgram → JSON → ordered source clauses → Finset clauses → encodeCNF` chain, primitive-machine source compiler, combined trace, and end-to-end M05 count remain OPEN. These changes do not change the 39-ID count or resolve RH, twin primes, Pickover, or physical YM.
+
+**Executable exact acceptance to run locally (no CI needed):**
+```sh
+# Lean source checks require a separate upstream OAI 378 / Lean 4.34.1 environment:
+# Integration/OpenAIMath/Upstream378EncodingLengthExact.lean
+# Integration/OpenAIMath/Upstream378FiniteCNFBridge.lean
+python scripts/check_openai378_frontend_exact.py
+python scripts/check_openai378_27grid_maxcut_bridge.py
+python scripts/compile_dashi_circuit_openai378.py source.json --stream-bits-out source.bits --out receipt.json
+```
 
 ## Max-cut execution order (do not replace a mathematical proof with a roadmap)
 
