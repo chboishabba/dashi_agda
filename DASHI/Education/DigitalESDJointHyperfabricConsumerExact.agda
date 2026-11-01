@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AttributedSourceCore as Attr
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Education.DigitalESDSourceAuditAdmissionExact as Admission
 import DASHI.Education.DigitalESDSLRSourceReviewBridgeExact as Review
 import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
@@ -35,15 +36,12 @@ import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact as LES
 -- Neither row count nor a matching title can manufacture those objects.
 ------------------------------------------------------------------------
 
-relationFor : EfS.BridgeStatus → Braid.BraidRelation
-relationFor EfS.complementary = Braid.complementarity
-relationFor EfS.mutuallyRefining = Braid.convergence
-relationFor EfS.productiveTension = Braid.productiveTension
-relationFor EfS.unresolved = Braid.unresolvedConflict
+-- Reuse Cases.relationFor and Cases.canonicalBraid: no second mapping.
 
 record CandidateJointHyperedge (case : Cases.CrossPollinationCase) : Set where
   constructor candidate-joint-hyperedge
   field
+    sourceRole : Snowball.SourceRoleSnowballReceipt (Cases.attributedSource case)
     bridge : EfS.ReciprocalPedagogicalBridge
     bridgeIsExactlyCase :
       bridge ≡ Cases.candidateBridge case
@@ -53,7 +51,7 @@ record CandidateJointHyperedge (case : Cases.CrossPollinationCase) : Set where
     comparison : Braid.TensionReceipt
     relationMatchesSourceBridge :
       Braid.TensionReceipt.relation comparison ≡
-        relationFor (EfS.ReciprocalPedagogicalBridge.status bridge)
+        Cases.relationFor (EfS.ReciprocalPedagogicalBridge.status bridge)
     candidateOnly : Bool
     candidateOnlyIsTrue : candidateOnly ≡ true
 
@@ -63,16 +61,11 @@ candidateJointHyperedge :
   (case : Cases.CrossPollinationCase) → CandidateJointHyperedge case
 candidateJointHyperedge case =
   candidate-joint-hyperedge
+    (Cases.sourceRoleReceipt case)
     (Cases.candidateBridge case)
     refl
     (Cases.sameLocator case)
-    (Braid.tension-receipt
-      "original digital-pedagogy source loom, provisional seven-principle synthesis"
-      (Attr.canonicalURL (Cases.attributedSource case))
-      "DASHI cross-paper interpretation; not an empirical finding of one author"
-      (Attr.canonicalURL (Cases.attributedSource case))
-      (relationFor (EfS.ReciprocalPedagogicalBridge.status (Cases.candidateBridge case)))
-      "The source, disciplinary interpretation, role and context are retained; sharing a theme does not erase disagreement, authority or competing interpretation.")
+    (Cases.canonicalBraid case)
     refl
     true refl
 
