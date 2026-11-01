@@ -17413,3 +17413,6 @@ Cleanup
 
 - [x] Expose the actual six-positive-plane Wilson deficit as the original n=3 R445 rational Wilson-observable function, with definitional same-object proof.
 - [ ] R445 finite source majorant: prove six-plane deficit ∈ [0,3072] on fixed side-four rational SU2 links using native trace bounds/additive sums; this is *not* uniform physical cutoff/volume convergence.
+
+
+- [ ] **R443-linkHaar:** remove/integrate auxiliary `siteGauge` parameter from the native R443/R445 record family or prove normalized expectation pushforward to literal compact link-only Haar configurations; code-level type equality is not physical gauge quotient/probability equivalence.
