@@ -48,7 +48,7 @@ import DASHI.Governance.KnowledgeProcessingCaptureSourceAtlas20261101Exact as So
 
 data NamedActor : Set where
   thiel wolfe cowen girard schmitt newman bacon
-    manidis roberts palantirInstitution : NamedActor
+    manidis roberts palantirInstitution karp cohen vance : NamedActor
 
 data StatementRole : Set where
   authoredText liveInterview recordedLectureJournalist accountOfIdeas
@@ -105,7 +105,8 @@ commandingAuthors2026 = attributedText manidis
 
 data ConnectionType : Set where
   namedCoauthor sourceInterviewer citesIntellectualPrecedent
-    foundingCorporateConnection laterAuthorRhetoric : ConnectionType
+    foundingCorporateConnection laterAuthorRhetoric
+    financialElectoralSupport votingTrustMember : ConnectionType
 
 data DocumentedConnection :
   NamedActor → NamedActor → ConnectionType → Set where
@@ -125,6 +126,12 @@ data DocumentedConnection :
     DocumentedConnection thiel palantirInstitution foundingCorporateConnection
   manidisAndRoberts :
     DocumentedConnection manidis roberts namedCoauthor
+  thielKarpFoundersVotingTrust :
+    DocumentedConnection thiel karp votingTrustMember
+  thielCohenFoundersVotingTrust :
+    DocumentedConnection thiel cohen votingTrustMember
+  thielVanceCampaignFunding :
+    DocumentedConnection thiel vance financialElectoralSupport
 
 data AttributionPath : Set where
   directlyAuthored documentedIntellectualCitation institutionalConnection
@@ -145,6 +152,49 @@ corporateTieDoesNotDefineReligion ()
 coauthorshipDoesNotAutomaticallyCausePolicy :
   CoauthorshipMeansGovPolicy → ⊥
 coauthorshipDoesNotAutomaticallyCausePolicy ()
+
+------------------------------------------------------------------------
+-- ASSOCIATE INTERFACES: typed financial/administrative ties, not a
+-- collective political theology.
+------------------------------------------------------------------------
+
+record NamedRelationshipReceipt : Set where
+  constructor namedRelationshipReceipt
+  field
+    leftActor rightActor : NamedActor
+    relationship : ConnectionType
+    firstPartyOrSecondarySource : String
+    boundedEvent : String
+    sourceGradeAndCaveat : String
+
+foundersVotingTrust2025 : NamedRelationshipReceipt
+foundersVotingTrust2025 = namedRelationshipReceipt
+  thiel karp votingTrustMember
+  "Palantir Technologies 2025 10-K / SEC: https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/pltr-20251231.htm"
+  "Class F founder voting trust established by Cohen, Karp and Thiel, potentially up to 49.999999pct founder voting power if threshold holds at 2025-12-31."
+  "Filed structural corporate governance link; not proof Karp/Cohen accepted Thiel's religious doctrine or directed particular model actions."
+
+vanceHistoricalFunding2022 : NamedRelationshipReceipt
+vanceHistoricalFunding2022 = namedRelationshipReceipt
+  thiel vance financialElectoralSupport
+  "University of Queensland, Luke Munn, 2025-08-01; corroborated FT/WP historical reporting, FEC/OpenSecrets original transaction acquisition still pending"
+  "Thiel donated USD15m supporting Vance's 2022 Senate campaign through independent-expenditure political committee; former Mithril employer relationship also reported."
+  "The documented financial support is not direct evidence Vance endorses Antichrist doctrine or that any later White House action was purchased."
+
+-- A jointly filed corporate voting structure, an independent political
+-- donation, and named theological coauthorship are three different
+-- edge types. In particular, their composition is NOT a public-policy or
+-- theological adherence proof.
+data VotingControlImpliesTheologicalAgreement : Set where
+data PoliticalDonationImpliesPolicyInstruction : Set where
+
+founderStatusCannotDictateDoctrine :
+  VotingControlImpliesTheologicalAgreement → ⊥
+founderStatusCannotDictateDoctrine ()
+
+donationCannotSubstituteForInstruction :
+  PoliticalDonationImpliesPolicyInstruction → ⊥
+donationCannotSubstituteForInstruction ()
 
 ------------------------------------------------------------------------
 -- Distinct doctrinal/operational claims: an actor can oppose a universal
