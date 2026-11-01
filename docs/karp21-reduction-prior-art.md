@@ -18,6 +18,16 @@ Agda DAG owner `Karp21HistoricalDagExact.agda` defines all 21 problem constructo
 
 The original 1972 HITTING SET is **exactly one** selection from every transposed set, not ordinary modern at-least-one hitting. Signed KNAPSACK→PARTITION requires DASHI's extra digit-guarded positive normalization before applying the nonnegative historical two-extra-number gadget. These are semantic requirements, not cosmetic renamings.
 
+
+### Signed E20 and Cook E03 exact Agda lemma tranches (2026-11-01)
+
+- `Karp21PartitionCutQuadraticExact.agda` reuses the repo's prior integer `RingZ` algebra, defines the actual triangular complete-graph crossing-edge sum (not an assumed scalar objective), proves `signedTotalDecomposes`, `completeGraphCutEqualsPartitionProduct`, `completeGraphCutQuadratic`, and `balancedSelectionIffExactMaximum`: the exact signed identity `4*cut = total²` holds iff the two sides sum equally. This is substantive source-written proof code, **not a pinned Agda kernel receipt**, and the original Karp *decision* threshold `ceil(total²/4)` still needs a discrete inequality/rounding proof and machine cost.
+- Karp 1972 p.100's printed typography can be read literally as `ceil(sum(cᵢ²)/4)`; this is **not equivalent** to the source PARTITION predicate. The explicit counterexample `(2,1)` has NO equal partition, but a cut of weight 2 meets literal threshold 2. The corrected mathematical construction uses `ceil((sum cᵢ)²/4)=3`, which rejects the same instance. An independent local Python check verified the counterexample. Keep the *printed source claim*, *corrected DASHI mathematical reconstruction*, and *later secondary explanation* separately attributed. See `scripts/check_karp_partition_maxcut.py`.
+- `Karp21SATToThreeSATGadgetExact.agda` credits **Cook 1971** as the original 3-literal reduction owner; it proves the constructive local four-to-three clause splitting equivalence, with `x = c∨d` as the forward fresh-bit witness. The standalone independent Python truth-table audit passed all 16 Boolean source assignments, and checked both choices of the new bit. The full recursive clause compiler and binary machine clock remain open.
+- E09's source-written directed Hamiltonian gadget now maps zero/negative node-cover budgets to fixed NO instances when required, rather than raising/asserting or incorrectly accepting an empty graph with a negative budget.
+
+No source paper, number of sampled instances, or loop-free Agda source automatically establishes an Agda kernel-accepted NP-completeness theorem.
+
 ## Historical provenance
 - Stephen Cook (1971), *The Complexity of Theorem-Proving Procedures*, DOI 10.1145/800157.805047: original SAT complexity root.
 - Richard Karp (1972), *Reducibility Among Combinatorial Problems*, DOI 10.1007/978-1-4684-2001-2_9: the original 21-problem reduction network.
