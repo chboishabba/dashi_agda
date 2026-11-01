@@ -155,3 +155,12 @@ monitor surface.
 - Continued K04b2: `BishopMachinQuantitativeOmittedTailExact` now source-identifies the native Bishop omitted magnitudes with the original rational inverse-odd/exponent expression via existing nonnegative-power and rational-embedding theorems. Remaining direct mathematical work is signed 16/4 tail combination, all-n rational geometric majorant and kernel verification; no CI.
 
 - K04c3 source follow-on: zero-sensitive indexed raw-factor `factorisationZeroOrProduct`, and stage-wise numerator/denominator magnitude reconstruction through dictionary and residual product witnesses. Original signed numerator retained; full rational codec inverse and kernel verification remain open.
+
+## 2026-11-01 — second K04/K05 mathematical max-cut (PR #1408)
+
+- Source-added `BishopMachinCombinedRemainderBoundExact.agda`: from source-owned Bishop alternating arctan tail brackets, actual Bishop 16/4 Machin Pi, signed partial series, finite rational embedding and source real absolute triangle, derived explicit first-omitted total error for both parities and an all-Nat parity closure.
+- Source-added `BishopMachinGeometricEnvelopeNatExact.agda`: exact induction `25^n≤57121^n` and `3824·57121^n+20·25^n≤(2n+1)·4780·57121^n`. This is the full all-n positive cross-multiplied arithmetic comparison for e_n≤4/25^n; rational/Bishop order transport still needed.
+- Source-added `BishopMachinEventualHalfPlaneExact.agda`: actual convergent Bishop rational Machin stages eventually >3 by original source 3<pi_M and Bishop epsilon extraction. Analytic zeta domain remains a distinct opaque predicate.
+- Replaced invalid strict-equal rational endpoint arguments in `BishopMachinQuarterAngleBranchExact.agda` with correct strict positive 1/4 multiplication of original 3<pi_M<22/7 and rational setoid equality.
+- Source-added `BishopMachinQuarterPhaseQuadruplicationAlgebraExact.agda`: Bishop fourfold sine/cosine polynomials yield 0/−1 from unit/equal quarter-phase; explicit conditional real-series transfer to actual Round11 sine/cosine at original Machin pi.
+- Imported owners through all three canonical TOE roots, synchronized exact lemma register, cross-repo audit and TODO. Separate local Python Fraction checks passed n=0..100 with Cauchy finite windows; no golden Agda typecheck, no CI. K04b rational bound transfer, actual K04d zeta continuity, unconditional K05 trig/geometry remain OPEN; provenance and source-written vs kernel-verified boundaries preserved.
