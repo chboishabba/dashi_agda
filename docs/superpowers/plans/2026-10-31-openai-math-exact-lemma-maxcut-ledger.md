@@ -164,3 +164,16 @@ Lean PR #78 now owns `vendor/openai-math/PIN_378.json` at **7ef5c0cc5ca4b0e072b7
 | Monster / QID / TOE connection | Explicit identity/action/representation proof, not matching numerical fingerprints or topical category labels |
 
 No CI changes requested, no protected ESD edit, no independent author credit overwritten.
+
+
+## 1 November 2026 — M00 parser ambiguity and corpus discovery max-cut continuation
+
+These are **sub-obligations of the existing 39 IDs**, not additional completed proof certificates.
+
+- **M00a, executed input boundary:** the actual Lean #78 Python frontend now has `parse_original_circuit_json`, which rejects duplicate object members (including nested wire/gate members), non-JSON numeric constants, and malformed/out-of-range/future-gate references. The previous `json.loads` CLI could silently overwrite repeated keys, so strict constructor-field validation alone was not enough. `canonical_original_circuit_json` supplies a deterministic validated JSON output form and its regression asserts parse/serialize/parse roundtrips. **STATUS: SOURCE-WRITTEN, SCRIPT CHECK NOT RUN IN THIS ENVIRONMENT; Agda GateProgram ↔ JSON typed relation, serialization injectivity and kernel receipt OPEN.** The decoder accepts multiple legal whitespace/key orders; text uniqueness is claimed only for the canonical encoder, not the input grammar.
+- **C01, native owner discovery:** Lean #78's offline corpus candidate router now indexes *actual Agda top-level type signatures and Lean declaration names* as well as source paths, with a separate synthetic regression for filename-invisible owners. This improves search reach, **not** statement equality, inherited ownership, proof strength, or kernel verification. Real provenance/first-commit inspection and per-result typed transport remain open.
+- **C02, source integrity:** Lean #78 adds a fail-closed, 208-row upstream declaration-source identifier audit. It intentionally reports `IDENTIFIER_TEXT_FOUND_UNVERIFIED` rather than inferring a theorem proof from matching text; absent file/identifier is a blocker. Requires the exact matching upstream revision and remains **NOT EXECUTED** here; an identifier hit does not discharge type checking, axiom audits, or imports.
+- **Regression driver:** `run_openai_math_ab_acceptance_local.sh` now includes the owner-discovery and declaration-source audits alongside its Agda/Lean and original-DAG checks. Actual acceptance on the correct toolchains remains K00–K02 and M00–M05.
+
+**Max-cut precedence unchanged:** K00→K02 kernel acceptance; M00/M01 typed original-object equivalence; M02/M03 fixed-machine compiler trace and all-prefix resource bounds; M04/M05 same-machine composition; then C01/C02 individual upstream theorem audit and genuine imports. The corpus count 721/373/208 is metadata, not a proof-count assertion.
+
