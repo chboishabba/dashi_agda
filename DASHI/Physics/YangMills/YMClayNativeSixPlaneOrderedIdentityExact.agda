@@ -23,7 +23,7 @@ module DASHI.Physics.YangMills.YMClayNativeSixPlaneOrderedIdentityExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -140,3 +140,39 @@ orderedActionIsSixSourceTwicePlusDiagonal dataSet =
       (cong
         (λ six → six + (six + fourℚ))
         (sym (Reduction.nativeSixPlaneAtIsLiteralSix dataSet site))))
+
+------------------------------------------------------------------------
+-- Physical Wilson action convention: sum of (1 - normalized real trace)
+-- instead of the trace sum itself. Exact finite-site normalization:
+-- sixteen ORDERED deficits = twice the SIX original positive-plane deficits.
+-- The four diagonal loops contribute zero Wilson deficit (holonomy 1).
+------------------------------------------------------------------------
+
+sixℚ : ℚ
+sixℚ = 1ℚ + (1ℚ + (1ℚ + (1ℚ + (1ℚ + 1ℚ))))
+
+sixteenℚ : ℚ
+sixteenℚ = (sixℚ + sixℚ) + fourℚ
+
+sixPhysicalDeficitAt :
+  Native.RationalSU2BondData Weld.three → Hodge.Site4 → ℚ
+sixPhysicalDeficitAt dataSet site =
+  sixℚ - Six.nativeSixPlaneTraceSumAt dataSet site
+
+orderedDeficitAt :
+  Native.RationalSU2BondData Weld.three → Hodge.Site4 → ℚ
+orderedDeficitAt dataSet site =
+  sixteenℚ -
+    Hodge.sumIndex4 (λ a →
+      Hodge.sumIndex4 (λ b →
+        Ordered.orderedWilsonPlaquette dataSet site a b))
+
+orderedDeficitAtIsTwiceSixDeficit :
+  ∀ (dataSet : Native.RationalSU2BondData Weld.three) site →
+  orderedDeficitAt dataSet site
+  ≡ sixPhysicalDeficitAt dataSet site
+      + sixPhysicalDeficitAt dataSet site
+orderedDeficitAtIsTwiceSixDeficit dataSet site
+  rewrite Reduction.nativeSixPlaneAtIsLiteralSix dataSet site
+        | orderedAtIsTwiceSixPlusDiagonal dataSet site
+  = ℚRing.solve-∀ (Reduction.sixPhysicalAt dataSet site)
