@@ -70,6 +70,15 @@ usNSPM = sourceReceipt
   "Calls for frontier multi-vendor access, high-security compute and government approval before vendor impairment of defence AI systems."
   "Operational security mandate != lab acquisition, nationalisation, exclusive state access or proved capture."
 
+whiteHouseMeeting : SourceReceipt
+whiteHouseMeeting = sourceReceipt
+  "The White House" "President Trump Participates in a Meeting and Luncheon on Super Intelligence"
+  "2026-09-29"
+  "https://www.whitehouse.gov/videos/president-trump-participates-in-a-meeting-and-luncheon-on-super-intelligence/"
+  governmentInstrument
+  "Original White House event documents direct executive meeting with leading AI-industry participants; compare published accord and statements."
+  "Meeting presence != proof of improper influence, adopted regulation or government operational control."
+
 usTerminologyEO : SourceReceipt
 usTerminologyEO = sourceReceipt
   "White House" "Inaugurating The Era Of Super Intelligence, Executive Order 14434"
