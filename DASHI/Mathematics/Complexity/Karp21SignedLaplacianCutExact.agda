@@ -32,6 +32,7 @@ open import Data.List.Base using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym; subst)
 
 import Data.Integer.Base as Int
+import Data.Integer.Properties as IntP
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
 import Data.Integer.Tactic.RingSolver as IntRS
@@ -299,7 +300,8 @@ positiveThresholdAcceptanceGlobalFlip g labels accepted =
 ------------------------------------------------------------------------
 
 zeroNotBelowNegativeFour : Int._≤_ (+ 0) (-[1+ 3 ]) → ⊥
-zeroNotBelowNegativeFour ()
+zeroNotBelowNegativeFour proof with IntP.≤⇒≤ᵇ proof
+... | ()
 
 unrestrictedSignedLaplacianNotPSD :
   (∀ {n : Nat}
