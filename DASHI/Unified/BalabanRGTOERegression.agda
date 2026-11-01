@@ -867,6 +867,7 @@ open RationalC3 public using
 open NativeC3Weld public using
   (nativeSiteIsSide4; nativePositiveBondIsSide4
   ; graphFieldFromActualNativeRationalSU2
+  ; graphRoundTrip
   ; nativeRationalSU2Side4C3Wilson
   ; nativeRationalSU2Side4C3GaugeWilson
   ; nativeGraphC3Square)
