@@ -21,13 +21,18 @@ module DASHI.Analysis.BishopMachinGeometricBishopRateExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 import Data.Nat.Properties as NatP
-open import Data.Rational.Unnormalised as Q using (_/_; _≤_; *≡*)
+open import Data.Rational.Unnormalised as Q using (_/_; _≤_; _+_; _*_; *≡*)
+import Data.Rational.Unnormalised.Properties as QP
+open import Relation.Nullary.Decidable.Core using (toWitness)
 import ExtraProperties as Extra
 import Real as R
 import RealProperties as RP
 
 import DASHI.Foundations.BishopMachinArctanConstructionExact as M
 import DASHI.Foundations.BishopMachinPiRationalWindowExact as W
+import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Rational
+import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as Concrete
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Square
 import DASHI.Analysis.BishopMachinCombinedRemainderBoundExact as Combined
 
@@ -200,3 +205,122 @@ actualMachinBishopGeometricEnvelope n =
   where
   importedMachinRationalStage = Rational.qMachinStage
   open import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Rational
+
+------------------------------------------------------------------------
+-- Exact base coefficient. No floating-point comparison:
+--     16/5 + 4/239 = 3844/1195 <= 4 = 4780/1195.
+-- Its rational comparison is decided by the stdlib _≤?_ and lifted to
+-- the ACTUAL Bishop source carrier by the original embedding theorem.
+------------------------------------------------------------------------
+
+atanMagnitudeZeroIsInput :
+  (x : R.ℝ) →
+  R.NonNegative x →
+  R._≃_ (M.atanMagnitudeTerm x zero) x
+atanMagnitudeZeroIsInput x nonnegative =
+  RP.≃-trans
+    (RP.*-cong
+      RP.≃-refl
+      (RP.nonNegx⇒∣x∣≃x
+        (Concrete.powNonnegative nonnegative
+          (Estimates.oddExponent zero))))
+    (RP.≃-trans
+      (RP.*-identityˡ
+        (R.pow x (Estimates.oddExponent zero)))
+      (RP.*-identityˡ x))
+
+weightedInitialRational : Q.ℚᵘ
+weightedInitialRational =
+  (M.sixteen Q.* M.oneFifth)
+  Q.+ (M.four Q.* M.oneTwoHundredThirtyNinth)
+
+weightedInitialRationalBelowFour :
+  weightedInitialRational Q.≤ M.four
+weightedInitialRationalBelowFour =
+  toWitness {a? = QP._≤?_ weightedInitialRational M.four} _
+
+weightedInitialBishopEqualsRational :
+  R._≃_
+    (R._+_
+      (R._*_ Combined.sixteen (Combined.magnitude5 zero))
+      (R._*_ Combined.four (Combined.magnitude239 zero)))
+    (R._⋆ weightedInitialRational)
+weightedInitialBishopEqualsRational =
+  RP.≃-trans
+    (RP.+-cong
+      (RP.*-cong RP.≃-refl
+        (atanMagnitudeZeroIsInput
+          M.bishopOneFifth M.oneFifthNonnegative))
+      (RP.*-cong RP.≃-refl
+        (atanMagnitudeZeroIsInput
+          M.bishopOneTwoHundredThirtyNinth
+          M.oneTwoHundredThirtyNinthNonnegative)))
+    (RP.≃-trans
+      (RP.+-cong
+        (RP.≃-symm
+          (RP.⋆-distrib-* M.sixteen M.oneFifth))
+        (RP.≃-symm
+          (RP.⋆-distrib-*
+            M.four M.oneTwoHundredThirtyNinth)))
+      (RP.≃-symm
+        (RP.⋆-distrib-+
+          (M.sixteen Q.* M.oneFifth)
+          (M.four Q.* M.oneTwoHundredThirtyNinth))))
+
+weightedInitialBishopBelowFour :
+  R._≤_
+    (R._+_
+      (R._*_ Combined.sixteen (Combined.magnitude5 zero))
+      (R._*_ Combined.four (Combined.magnitude239 zero)))
+    Combined.four
+weightedInitialBishopBelowFour =
+  RP.≤-respˡ-≃
+    (RP.≃-symm weightedInitialBishopEqualsRational)
+    (RP.p≤q⇒p⋆≤q⋆
+      weightedInitialRational M.four
+      weightedInitialRationalBelowFour)
+
+oneOver25PowerNonnegative :
+  (n : Nat) → R.NonNegative (R.pow oneOver25 n)
+oneOver25PowerNonnegative zero =
+  M.embeddedInverseOddNonnegative zero
+oneOver25PowerNonnegative (suc n) =
+  RP.nonNegx,y⇒nonNegx*y
+    (oneOver25PowerNonnegative n)
+    oneOver25NonNegative
+
+-- Full K04b: ACTUAL Bishop real error is <= 4*(1/25)^n,
+-- on the original same-object pi_M / q_n, for every n (including 0).
+machinBishopFourOver25Pow :
+  (n : Nat) →
+  R._≤_
+    (R.∣_∣
+      (R._-_ M.bishopMachinPi
+        (R._⋆ (Rational.qMachinStage n))))
+    (R._*_
+      (R.pow oneOver25 n)
+      Combined.four)
+machinBishopFourOver25Pow n =
+  RP.≤-trans
+    (actualMachinBishopGeometricEnvelope n)
+    (RP.*-monoʳ-≤-nonNeg
+      weightedInitialBishopBelowFour
+      (oneOver25PowerNonnegative n))
+
+-- Explicit rational 25-adic stage rate; the source theorem is not
+-- merely a real-power approximation to an unspecified constant.
+machinBishopFourOver25RationalStage :
+  (n : Nat) →
+  R._≤_
+    (R.∣_∣
+      (R._-_ M.bishopMachinPi
+        (R._⋆ (Rational.qMachinStage n))))
+    (R._*_
+      (R._⋆ (Rational.qPow (+ 1 / 25) n))
+      Combined.four)
+machinBishopFourOver25RationalStage n =
+  RP.≤-respʳ-≃
+    (RP.*-cong
+      (RP.≃-symm (Rational.qPowEmbeds (+ 1 / 25) n))
+      RP.≃-refl)
+    (machinBishopFourOver25Pow n)
