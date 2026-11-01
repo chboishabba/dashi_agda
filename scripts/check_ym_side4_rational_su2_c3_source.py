@@ -130,3 +130,55 @@ def run():
 if __name__ == "__main__":
     import json
     print(json.dumps(run(), indent=2, sort_keys=True))
+
+
+# Extended same-source check for *all* signed orientations and the 16 ordered
+# coordinate pairs at every one of the 256 sites. This is the finite ordered
+# action, NOT the convention-specific physical six-plaquette Wilson action.
+def signed_holonomy(site, word, field):
+    product_value = O
+    for axis, sign in word:
+        if sign:
+            product_value = product_q(product_value, field(site, axis))
+            site = next_site(site, axis)
+        else:
+            prev = list(site)
+            prev[axis] = (prev[axis] - 1) % N
+            site = tuple(prev)
+            product_value = product_q(product_value, inv(field(site, axis)))
+    return site, product_value
+
+
+def ordered_action_check():
+    original_action = F(0)
+    c3_action = F(0)
+    checked = 0
+    for site in SITES:
+        for a in AXES:
+            for b in AXES:
+                word = ((a, True), (b, True), (a, False), (b, False))
+                end, orig = signed_holonomy(site, word, source_field)
+                c3_end, c3_value = signed_holonomy(site, word, c3_field)
+                moved_end, moved_value = signed_holonomy(
+                    c3_site(site),
+                    tuple((c3_axis(axis), orientation)
+                          for axis, orientation in word),
+                    source_field,
+                )
+                assert end == site
+                assert c3_end == site and moved_end == c3_site(site)
+                assert c3_value == moved_value
+                original_action += orig[0]
+                c3_action += c3_value[0]
+                checked += 1
+    assert original_action == c3_action
+    return {
+        "all_ordered_plaq_tests": checked,
+        "sum_before_C3": str(original_action),
+        "sum_after_C3": str(c3_action),
+        "result": "PASS (exact Fraction; not physical six-plane/Haar)",
+    }
+
+
+if __name__ == "__main__":
+    print(json.dumps(ordered_action_check(), indent=2, sort_keys=True))
