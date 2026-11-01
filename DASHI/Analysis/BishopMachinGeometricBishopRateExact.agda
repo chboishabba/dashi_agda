@@ -99,7 +99,7 @@ oneOver25NonNegative =
       (RP.nonNeg∣x∣ M.bishopOneFifth))
 
 -- Any given native Bishop arctan magnitude with this exact
--- oneOver25 square contract satisfies the same 25-adic decay envelope.
+-- oneOver25 square contract satisfies the same base-25 geometric decay envelope.
 magnitudeStepAtOneOver25 :
   (x : R.ℝ) →
   Square.bishopMagnitudeSquare x R.≤ oneOver25 →
@@ -308,7 +308,7 @@ machinBishopFourOver25Pow n =
       weightedInitialBishopBelowFour
       (oneOver25PowerNonnegative n))
 
--- Explicit rational 25-adic stage rate; the source theorem is not
+-- Explicit rational base-25 geometric stage rate; the source theorem is not
 -- merely a real-power approximation to an unspecified constant.
 machinBishopFourOver25RationalStage :
   (n : Nat) →
