@@ -126,6 +126,15 @@ html2shellNegative = sourceReceipt
   "Viral HTML2Shell claim was a joke misusing an unrelated CVE, not a second corroborated PHP incident."
   "Memetic recurrence != independent technical evidence."
 
+thielOriginal2009 : SourceReceipt
+thielOriginal2009 = sourceReceipt
+  "Peter Thiel" "The Education of a Libertarian, Cato Unbound"
+  "2009-04-13"
+  "https://www.cato-unbound.org/2009/04/13/peter-thiel/education-libertarian/"
+  attributedAuthor
+  "Author rejects compatibility of freedom and democracy, seeks technology-enabled escape from conventional politics, and explicitly calls himself libertarian."
+  "Authored anti-democratic/libertarian argument != demonstration of a coordinated actor-network conspiracy; compare actual investments, state contracts and policy consequences."
+
 thielWolfeOriginal : SourceReceipt
 thielWolfeOriginal = sourceReceipt
   "Peter Thiel; Sam Wolfe"
