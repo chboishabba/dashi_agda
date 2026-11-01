@@ -161,6 +161,26 @@ This is no longer a merely assumed objective identity. Remaining E20 mathematica
 
 **E09 totality repair:** `graph_to_directed_hamiltonian` no longer raises an assertion for a graph with a nonempty edge set and zero cover budget; it maps this impossible source case to a fixed 3-node NO instance. This is a total-function repair, not a universal Hamiltonian-gadget proof.
 
+## 2026-11-01 additional exact-source lemma tranches
+
+**E20 signed complete-graph algebra**, `Karp21PartitionCutQuadraticExact.agda`:
+- `signedTotalDecomposes`: every signed weighted partition equals the sum of its two sides.
+- `completeGraphCutEqualsPartitionProduct`: recursively enumerated complete-graph *crossing edges* sum to `leftTotal*rightTotal`.
+- `completeGraphCutQuadratic`: compose with previously existing DASHI integer RingZ solver, yielding `4*actualCut = total²-(left-right)²`.
+- The source is part of the focused Agda root. Independent SymPy symbolic expansion passed; no pinned Agda check yet. **E20 residuals:** (1) nonnegative squares and equality test; (2) ceiling/positive threshold including total=0; (3) encoded weighted graph exactly representing the triangular enumeration; (4) bit-cost polynomial proof; (5) actual `PR.PolynomialManyOneReduction`.
+
+**E03 Cook-origin four-to-three exact Boolean gadget**, `Karp21SATToThreeSATGadgetExact.agda`:
+- `fourToThreeWitness`: explicit fresh assignment `x=(c∨d)` takes an accepted `a∨b∨c∨d` to both true `a∨b∨x` and `¬x∨c∨d`.
+- `threeToFourWitness`: conversely any accepted two-clause model implies the original four-literal clause; false case closes by impossible Booleans.
+- `cookKarpFourToThreeClauseIff`: a constructive `PR.Iff` for the gadget, using no postulates or oracle.
+- Independent local truth-table check passed 16/16 assignments with both values of fresh bit examined. Still **not kernel checked**. **E03 residuals:** general >3 recursive clause compiler, fresh-name hygiene, bounded extension witnesses, global CNF satisfiability preservation, canonical source SAT/3SAT encodings, polynomial input/output tape cost.
+
+**New counterexample/malformed regression controls**:
+- `scripts/check_karp_partition_maxcut.py` pins `(2,1)` against the literal sum-of-squares reading of Karp's printed threshold, and distinguishes the mathematically correct square-of-sum threshold.
+- `scripts/check_karp_remaining_four_gadgets.py` is now total on zero/negative node-cover budgets for E09, including empty graphs; negative k is mapped to a fixed NO digraph before the vacuous edge-empty YES case.
+
+**Numerical regression status is unchanged:** the earlier bounded finite controls are evidence, not universal proofs. The new small SymPy/truth-table checks do not change the per-edge 0/20 kernel acceptance count.
+
 ## B. Canonical shared obligations (finish once; all problem nodes consume)
 
 | ID | Required exact lemma/declaration | Statement and done condition |
