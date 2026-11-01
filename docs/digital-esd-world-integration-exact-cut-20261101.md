@@ -30,3 +30,12 @@ The original `SourcePreservingRevision` from #1449 is retained for compatibility
 5. Kernel-check the exact combined branch, run source-specific regressions and reconcile documentation-only #1452 and roadmap #1446.
 
 **Epistemic boundary:** a reconciled branch and well-formed dependent record are not a reviewed, populated empirical world. Attribution remains attached to original authors and individual PR proof owners.
+
+
+## 1 November 2026 — registry-derived K01 first cut
+
+`DASHI/Education/DigitalESDWorldSourceCoverageCensusExact.agda` now derives one combined **25-row identity/claim-boundary census** from the exact nine-item `EducationCorpusSourceRegistry` and sixteen-item `DigitalESDEfSSourceCrossPollinationExact.canonicalSourceCases`. It proves the registry row lengths by `refl`, with no arbitrary title/URL duplicates and no claimed review promotion.
+
+**Critical scope limit:** this 25-row ledger is only the Alice-plus-new-EfS slice; it is **not the complete Digital-ESD study-pilot universe** or the 43,996-record ERIC metadata universe. No claim/observation/span counts, graph-connected-component census, genuine reviewed `JointReviewHyperedge` inhabitant or temporal invalidation receipts are generated. The pre-existing `DigitalESDStudyProcessingCensusExact` is the separate metadata/stage ledger; it must be joined by exact identities to study/claim/world objects before calling K01 complete. The 25 rows carry `reviewNotAsserted`, not `unreviewed`: the census cannot infer absence or presence of source review from registries.
+
+Compiler not executed; `refl` derivations are source-written, pending Agda kernel confirmation. This branch now has 25 owner-derived identity rows; the full world is still open.
