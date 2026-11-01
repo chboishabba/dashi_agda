@@ -13,7 +13,9 @@ prime-exponent representation, with non-SSP primes in a residual tail.
 No claim of an Agda-kernel Bishop-real identification or Pickover sign.
 """
 from fractions import Fraction as F
+from functools import lru_cache
 
+@lru_cache(maxsize=None)
 def q(n):
     assert n>=0
     return 16*sum((F((-1)**j,(2*j+1)*5**(2*j+1)) for j in range(n)),F())-4*sum((F((-1)**j,(2*j+1)*239**(2*j+1)) for j in range(n)),F())
@@ -49,15 +51,18 @@ def check():
     coefficient = F(16,5) + F(4,239)
     assert coefficient == F(3844,1195) and coefficient < 4
     assert q(0) == 0
-    for n in range(0,25):
+    for n in range(0,64):
+        # Source-written Agda Nat theorem, checked independently here:
+        # 3824*57121^n+20*25^n <= (2n+1)*4780*57121^n.
+        assert 3824*57121**n + 20*25**n <= (2*n+1)*4780*57121**n
         assert error(n) <= coefficient/F(25**n)
         assert error(n) <= F(4,25**n)
         assert error(n+1) < error(n)
         assert q(n+1)-q(n)==step(n)
         assert step(n)!=0
-    for cutoff in range(1,10):
-        for j in range(cutoff,cutoff+4):
-            for k in range(cutoff,cutoff+4):
+    for cutoff in range(1,20):
+        for j in range(cutoff,cutoff+5):
+            for k in range(cutoff,cutoff+5):
                 assert abs(q(j)-q(k)) <= error(j)+error(k)
                 assert abs(q(j)-q(k)) <= F(8,25**cutoff)
     # Genuine non-SSP primes already occur at q_1. Zero is separately
@@ -73,7 +78,7 @@ def check():
             product *= factor
         assert product == value
     assert 317 not in SSP15 and 239 not in SSP15
-    print("PASS exact Machin q_n, universal geometric-envelope algebra, finite Cauchy pairs, genuine q1 non-SSP residual")
+    print("PASS 64 exact Machin rational stages and all-Nat envelope samples, 475 finite Cauchy pairs, q1 non-SSP residual; not an Agda kernel proof")
 
 if __name__=="__main__":
     check()
