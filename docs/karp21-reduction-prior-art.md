@@ -77,3 +77,9 @@ The graph is the historical source diagram. Validate individual transformations 
 The phrase *max-cut* used for research prioritization in DASHI is not Karp's weighted graph MAX CUT. Likewise Yang-Mills finite compatibility cliques are not the general CLIQUE NP-completeness result. Keep the two uses separate. Optimization and decision variants must be connected by explicit bridges.
 
 Do not promote conditional assumptions, synthetic receipts, small test cases, or source-written code into kernel-verified completeness theorems.
+
+## Executed bounded arithmetic check, and independent Agda build gate
+
+- `scripts/check_karp_partition_maxcut.py` contains an exhaustive positive-instance audit with all cut assignments for lengths 1–6 and entries 1–5. **An independently executed same-formula local Python check passed 19,530 instances on 2026-11-01**; all cuts were enumerated. The committed GitHub script has not been executed from a local checkout.
+- The exact arithmetic identity inspected in each case is `4 * score = T*T - (T - 2*A)**2`, with `A` the sum of one side and threshold `ceil(T*T/4)`. This validates the restricted **positive**-integer source transformation experimentally, not the unbounded algorithm, encoded complexity or Agda proof.
+- Focused check root: `DASHI/Mathematics/Complexity/Karp21Everything.agda` imports original polynomial reductions plus the three new theorem modules. For a worker with the pinned toolchain: `scripts/run_agda29_parallel_check.sh DASHI/Mathematics/Complexity/Karp21Everything.agda` is fast feedback, but Track A flake remains final promotion authority. **No Agda kernel or checkout-native Python check has been run in this PR yet.**
