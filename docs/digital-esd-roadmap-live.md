@@ -1367,16 +1367,16 @@ not "serialize the whole corpus graph to JSON".
 
 ## 30. 2026-11-01 recut: keep Digital-ESD separate from Fleet and TOE; use SLR as a bounded execution dependency
 
-**Decision scope:** This is a Digital-ESD research-roadmap update. It does not assert a coauthor vote, a completed literature review, an Agda kernel run, or new source admission. The status below reflects inspected GitHub source and PR metadata on 2026-11-01. It does not infer the content of the separately supplied \`OneDrive_2026-11-01.zip\`, which was not readable in the review environment.
+**Decision scope:** This is a Digital-ESD research-roadmap update. It does not assert a coauthor vote, a completed literature review, an Agda kernel run, or new source admission. The status below reflects inspected GitHub source and PR metadata on 2026-11-01. It does not infer the content of the separately supplied `OneDrive_2026-11-01.zip`, which was not readable in the review environment.
 
 ### 30.1 Scope and repository ownership
 
-**ESD stays out of Fleet and TOE for now.** The Fleet programme, its 584 discharged fibres / 44 contradiction gaps / selected 58 formal gaps, and the focused TOE aggregate (\`DASHI/EverythingTOESymmetryResolved369.agda\`, \`DASHI/Unifier.agda\`, \`DASHI/Unified/\`) are **not** Digital-ESD milestones, proof owners, data sources, or admission gates. Current Fleet/TOE PRs are separate work. Their existence does not advance the ESD review.
+**ESD stays out of Fleet and TOE for now.** The Fleet programme, its 584 discharged fibres / 44 contradiction gaps / selected 58 formal gaps, and the focused TOE aggregate (`DASHI/EverythingTOESymmetryResolved369.agda`, `DASHI/Unifier.agda`, `DASHI/Unified/`) are **not** Digital-ESD milestones, proof owners, data sources, or admission gates. Current Fleet/TOE PRs are separate work. Their existence does not advance the ESD review.
 
-- **Digital-ESD formal research owners:** retain the existing \`DASHI/Education/DigitalESD*\` and related Alice Brown, learning, memory, intersectionality, authority, source-audit, sustainability and manuscript modules. Reuse their existing imports and boundaries. Do not move ESD into the TOE import graph.
+- **Digital-ESD formal research owners:** retain the existing `DASHI/Education/DigitalESD*` and related Alice Brown, learning, memory, intersectionality, authority, source-audit, sustainability and manuscript modules. Reuse their existing imports and boundaries. Do not move ESD into the TOE import graph.
 - **Paper / human research owners:** maintain the integrative-review manuscript, bounded scholarly corpus, independent EfS challenges, source interpretation, coauthor decisions and final claims in the ESD research lane. The Teams manuscript is a human editorial surface; a repository proof does not sign off for an author.
 - **SLR / SensibLaw execution owners:** use the existing SLR source-revision, long-document, parser, PNF, reconciliation, review and PostgreSQL persistence facilities for ESD processing. The ESD wrapper is a domain overlay; it does not create a competing academic evidence ontology.
-- **External reference owners:** JMD / meta-introspector repositories (including \`zkperf\`, \`zos-server\`, \`erdfa-py\`, \`aristotle-cli-rs\`) may inform narrow infrastructure comparisons where relevant. Preserve the original authors and repository identities. Do not treat those repositories, their fleet measurements, or their proof-checker work as primary ESD evidence or as a priority research workstream. Do not silently import their semantic authority.
+- **External reference owners:** JMD / meta-introspector repositories (including `zkperf`, `zos-server`, `erdfa-py`, `aristotle-cli-rs`) may inform narrow infrastructure comparisons where relevant. Preserve the original authors and repository identities. Do not treat those repositories, their fleet measurements, or their proof-checker work as primary ESD evidence or as a priority research workstream. Do not silently import their semantic authority.
 
 **Non-promotion:** shared tooling, an analogy, a repository import, a matched identifier, or an operational receipt does not create educational findings, participant authority, legal authority, environmental impact measurements, or completed review claims.
 
@@ -1386,7 +1386,7 @@ The current paper type remains an **integrative conceptual review with a transpa
 
 The source-bounded starting point is the existing nine-item Alice Brown / collaborator registry. Its papers have distinct claims and limits. Cross-paper hypotheses, the seven provisional transferable principles, the transformation ladder, social/material/economic/institutional sustainability constraints, the externality-incidence audit, intersectional absence and disability audits, student epistemic authority, and context-transfer boundaries are already formalised.
 
-The core foundations are research-relevant. \`QueryFactorisationSufficiency\` and \`IntersectionalNonFactorability\` address when an observer loses distinctions needed by a question. \`LearningAlgebra\` and \`MemoryFibre\` prevent performance, learning, trust and historical experience from being flattened. Trauma authority boundaries block clinical promotion. The Alice Brown corpus loom, diagnosis/repair scheduler and recursive selective truth maintenance preserve source roles and the ability to revise dependent interpretations. These are already reused in ESD; none requires Fleet/TOE convergence to justify the present study.
+The core foundations are research-relevant. `QueryFactorisationSufficiency` and `IntersectionalNonFactorability` address when an observer loses distinctions needed by a question. `LearningAlgebra` and `MemoryFibre` prevent performance, learning, trust and historical experience from being flattened. Trauma authority boundaries block clinical promotion. The Alice Brown corpus loom, diagnosis/repair scheduler and recursive selective truth maintenance preserve source roles and the ability to revise dependent interpretations. These are already reused in ESD; none requires Fleet/TOE convergence to justify the present study.
 
 The independent EfS-first comparison in **dashi_agda PR #1237** (open, draft as checked 2026-11-01) provides provisional challenges, including sustainability values, collective agency, futures, educator praxis and ecological/more-than-human relationships that the seven digital principles do not fully cover. It remains a source-written, author-review-requiring challenge. Do not report its candidate comparisons as empirical effectiveness findings or as exact-head kernel-certified review results.
 
@@ -1394,7 +1394,7 @@ The paper's transferable value includes **retrospective** critical re-examinatio
 
 ### 30.3 ESD functionality in the SLR repository: observed PR boundaries
 
-The separate \`chboishabba/slr\` repository contains genuine Digital-ESD work. Preserve this provenance when describing implementation.
+The separate `chboishabba/slr` repository contains genuine Digital-ESD work. Preserve this provenance when describing implementation.
 
 | SLR PR | Status checked 2026-11-01 | ESD functionality and authority boundary |
 | --- | --- | --- |
@@ -1412,7 +1412,7 @@ The proper ESD execution chain is:
 3. Retrieve and verify full-text bytes only for authoritatively retained studies. Distinguish metadata, download, materialisation, parse, review and admission.
 4. Reuse the shared SLR source/revision/span/PNF/reconciliation substrate. Keep parser output and candidate coordinates non-authoritative.
 5. Retain exact 19-coordinate manuscript extraction. The separate study-claim-ceiling bundle remains a design-relative constraint; do not misrepresent it as completed extraction for every study.
-6. Require human review and \`SourceAuditAdmission\` before source claims enter final synthesis.
+6. Require human review and `SourceAuditAdmission` before source claims enter final synthesis.
 7. Challenge and revise the seven candidate principles and sustainability/representation audits against the admitted wider corpus.
 
 These operations must use exact source, revision, context, study identity and receipt lineage. A database count, successful parse, candidate nomination, title match or same-family hypothesis does not establish an independently reviewed evidence unit.
@@ -1422,7 +1422,7 @@ These operations must use exact source, revision, context, study identity and re
 **P0 — proposal / group alignment:**
 
 - Retain the reciprocal research question and integrative-review paper type. Present DASHI as research infrastructure, not the object of the Sustainability paper.
-- Finalise one approximately 250-word abstract, title, source/method synopsis and coauthor decision record. The internal **30 October 2026** freeze target has passed; group sign-off was **not verified** in this repository review. The **6 November 2026** editorial suitability enquiry is an optional internal target, not a journal mandate.
+- Finalise one abstract within the coauthors' current **200-word working limit** (verify journal submission requirements separately), title, source/method synopsis and coauthor decision record. The internal **30 October 2026** freeze target has passed; group sign-off was **not verified** in this repository review. The **6 November 2026** editorial suitability enquiry is an optional internal target, not a journal mandate.
 - Retain the Special Issue alignment questions: problem significance; transformation beyond uptake; independent digital/EfS theoretical integration; whether/how/conditions; reciprocal sustainability impacts; inclusion, rights and agency; methodological credibility; and transferable retrospective/prospective contribution.
 - Treat those editorial criteria as separate from three non-compensatory DASHI gates: (A) query-relative representational sufficiency; (B) source/claim ceiling and audit admission; (C) performed research steps and human authority. Do not collapse the gates into an authoritative total score.
 
@@ -1443,11 +1443,70 @@ These operations must use exact source, revision, context, study identity and re
 ### 30.5 Verification and attribution ledger
 
 - **GitHub status:** PR metadata and source files checked on 2026-11-01. Branch-local code does not equal merged code. A historical test receipt belongs only to the commit and environment that produced it.
-- **Digital-ESD Agda:** the roadmap's earlier aggregate-green local receipt is commit-scoped. It does not automatically certify current \`master\`, the open EfS PR, or SLR's Rust/Python/PostgreSQL runtime.
+- **Digital-ESD Agda:** the roadmap's earlier aggregate-green local receipt is commit-scoped. It does not automatically certify current `master`, the open EfS PR, or SLR's Rust/Python/PostgreSQL runtime.
 - **SLR review acceptance:** source identity, reviewer action, parser output and source audit remain distinct. No synthetic 43,996-row fixture pays actual ERIC screening.
 - **External inspiration:** attribute original authors and meta-introspector repositories when used; keep their work reference-only unless a specific ESD question requires a justified adapter.
-- **Attached ZIP:** \`OneDrive_2026-11-01.zip\` (received 2026-11-01) was not readable by the available archive runtime during this update. No conclusions or new source facts are drawn from its unseen contents. Reconcile it in a separate source-audit step when extraction is possible.
+- **Attached ZIP:** `OneDrive_2026-11-01.zip` (received 2026-11-01) was not readable by the available archive runtime during this update. No conclusions or new source facts are drawn from its unseen contents. Reconcile it in a separate source-audit step when extraction is possible.
 - **No Fleet/TOE integration work:** this roadmap change creates no import, proof, data flow, or required milestone linking ESD to the Fleet 58-gap programme or TOE roots.
 
 **Next action:** circulate the 30 October decision packet for explicit group approval; verify the independent EfS challenge and external database access; continue source-governed SLR review execution. Reopen cross-domain construction only for a concrete ESD question that existing formal and runtime owners cannot answer.
+
+## 31. 2026-11-01 attributed source audit: supplied EfS and social sustainability research
+
+**Status: source candidate review; no source admission.** A second batch of published and working materials was examined on 2026-11-01. This section retains only public bibliographic metadata and bounded descriptions. It does not upload private draft text, certify peer review of unpublished items, execute the SLR screening process, or create an Agda receipt.
+
+**Policy and reuse:** Docs/SourceAttributionPolicy.md; DASHI/Core/AttributedSourceCore.agda; DASHI/Core/ScientificWorkAttributionExact.agda; DASHI/Core/SnowballAttributionProvenanceInvariantExact.agda; DASHI/Biology/EducationCorpusSourceRegistry.agda; DASHI/Biology/CrossPaperDialecticalDevelopment.agda. Their source roles, publication identifiers, attribution-visibility rules, and source/cross-paper/formal-extension distinctions remain canonical. Do not make another ESD attribution ontology.
+
+Source claim != DASHI reconstruction != cross-source synthesis != DASHI theorem != externally admitted evidence. Citation does not create proof or domain authority. Affiliation does not establish authorship or programme ownership. A manuscript version is not automatically the published version. An uploaded paper is not automatically a screened, admitted, independent evidence unit.
+
+### 31.1 Independently attributed EfS/social sustainability source candidates
+
+These papers challenge the initial digital-education synthesis. They are **not** additions to the nine-item education corpus by default. Source titles, authors, DOIs and abstract-level descriptions were read from supplied documents. Scholarly judgement, duplicate reconciliation and source admission remain unpaid.
+
+| Source (authors, year, DOI or stable locator) | Legitimate source role and bounded contribution | Candidate challenge; no unsupported promotion |
+| --- | --- | --- |
+| **Sadaf Taimur & Motoharu Onuki (2022)**, *Design thinking as digital transformative pedagogy in higher sustainability education: Cases from Japan and Germany*. [10.1016/j.ijer.2022.101994](https://doi.org/10.1016/j.ijer.2022.101994) | Empirical comparison of two university courses and participant experiences of design thinking under digital/hybrid transformative pedagogy. | A close digital-plus-sustainability antecedent. Framework-component enactment does not alone establish universal learning transformation, long-term durability, or ecological effects. |
+| **Åsa Nilsson Dahlström (2025)**, *Challenges and opportunities for social sustainability in education: a scoping review*. [10.1080/23311886.2025.2491706](https://doi.org/10.1080/23311886.2025.2491706) | Scoping review of 2018–2023 education literature: 120 articles screened, 76 full texts and 42 included in final analysis; reports conceptual/measurement difficulties. | Prior review coverage narrows novelty. Its search and inclusion counts belong to the original author, not to DASHI's own ERIC census or review admission. |
+| **Arinola Adefila, Osman Arrobbio, Geraldine Brown, Zoe Robinson, Gary Spolander, Ilkhom Soliev, Bret Willers, Luca Morini, Dario Padovan & Katherine Wimpenny (2021)**, *Ecologized Collaborative Online International Learning: Tackling Wicked Sustainability Problems Through Education for Sustainable Development*. [10.2478/jtes-2021-0004](https://doi.org/10.2478/jtes-2021-0004) | EcoCOIL collaborative digital sustainability model, co-created knowledge, intercultural and community-oriented learning. | Collective and community agency cannot be inferred from individual learner choice. A proposed approach does not prove generalised environmental or social outcomes. |
+| **Wafa Singh, Raisuyah Bhagwan & Manju Singh (2026)**, *Leveraging community-engaged teaching and learning in higher education institutions for advancing sustainable development: a literature review*. [10.1108/IJSHE-01-2024-0066](https://doi.org/10.1108/IJSHE-01-2024-0066) | Independent review of community partnerships, pedagogy, competencies, implementation constraints and sustainable development. | Community authority is not just institutional consultation. Review synthesis does not create causal intervention effects or participant approval. |
+| **Matthias Barth, Jasmin Godemann, Marco Rieckmann & Ute Stoltenberg (2007)**, *Developing key competencies for sustainable development in higher education*. [10.1108/14676370710823582](https://doi.org/10.1108/14676370710823582) | Exploratory focus groups on formal/informal learning, cognitive and non-cognitive competencies and interdisciplinary settings. | Activity and competence are not equivalent; the original paper notes unresolved interdependencies. |
+| **Beena Giridharan (2020)**, *Learning for a Sustainable Future: Developing Key Competencies*, chapter 8 in *Introduction to Sustainable Development Leadership and Strategies in Higher Education* (Emerald; no chapter DOI verified). | Conceptual chapter on higher education competencies, access, technology and institutional sustainability. | Strategic institutional discussion is not a source-specific causal or durability estimate. |
+| **Thomas F. Jepsen & Theo Cooke (2023)**, *Intentional Inclusion in HigherEd E-Learning: Embedding Universal Accessibility Through Digital Technology*, 2nd Global Trends in E-learning Forum. [SSRN 4320172](https://ssrn.com/abstract=4320172) | Industry/conference perspective on accessible design, intersectional circumstances and heterogeneous disability needs. | Accessibility trade-offs deserve attention; employment, retention and wellbeing effectiveness claims need independent evidence beyond advocacy or design assertions. |
+
+### 31.2 Previously supplied independent EfS materials
+
+Retain these as independent scholarly sources, not as derivatives of the digital-education corpus:
+
+- **Jo-Anne Ferreira, Lisa Ryan & Daniella Tilbury (2007)**, *Mainstreaming education for sustainable development in initial teacher education in Australia: a review of existing professional development models*. [10.1080/02607470701259515](https://doi.org/10.1080/02607470701259515). Professional development and whole-system change models.
+- **Jo-Anne Ferreira & Lisa Ryan (2013)**, *Working the System: A Model for System-Wide Change in Pre-Service Teacher Education*. [10.14221/ajte.2012v37n12.3](https://doi.org/10.14221/ajte.2012v37n12.3). System transformation in pre-service teacher education; not a measured digital higher education intervention.
+- **Jo-Anne Ferreira, Lisa Ryan & Julie Davis (2015)**, *Developing Knowledge and Leadership in Pre-Service Teacher Education Systems*. [10.1017/aee.2015.24](https://doi.org/10.1017/aee.2015.24). Leadership capacity is distinct from sustainability topic knowledge.
+- **Lisa Ryan & Jo-Anne Ferreira (2024)**, *Embedding Sustainability in Teacher Education in Australia*, Oxford Research Encyclopedia of Education. DOI provided in supplied manuscript as 10.1093/acrefore/9780190264093.013.01810; independent DOI validation is still due. Teacher-education system/policy/accreditation context.
+- **Ali Black & Lisa Ryan**, *Listening to Young Children with/in Nature: Relational, Pedagogical, and Community Approaches that Work*, chapter 5 (exact publisher/identifier not confirmed from current supplied file). Early childhood, nature, community and participant voice; no automatic population transfer to digital HE.
+- **Jo-Anne Ferreira, Elizabeth (Lisa) Ryan & Julie Davis**, *A Deep Dive into Sustainability Leadership Through Education for Sustainability*, supplied chapter proof; publication status/identifier needs a separate metadata check. Critical reflexivity and leadership context.
+- **UNESCO (2002)**, *Teaching and Learning for a Sustainable Future: A Multimedia Teacher Education Programme*. UNESCO institutional programme prepared by Griffith University. Project credits and individual publication authorship are different roles.
+
+The previously supplied published digital-learning articles also retain exact coauthor lists and original findings: Brown and colleagues (2022), DOI 10.1080/07294360.2022.2157798; Lawrence and colleagues (2024), DOI 10.5204/ssj.3453; Brown and colleagues (2026), DOI 10.24059/olj.v30i3.5032. Do not relabel these collective outputs as one person's exclusive research result.
+
+### 31.3 Confidential drafts, group word limit, and scientific status
+
+A **privately supplied** working group proposal sets a **200-word maximum** for its abstract, includes the seven provisional principles and specifies both retrospective and prospective application. This is the group's working limit, not a verified MDPI journal rule. Earlier roadmap language of approximately 250 words is superseded for the next group draft.
+
+Other privately supplied unpublished manuscripts on student perspectives, online engagement fatigue, equity participation and Online Engagement Framework application are **version-specific candidate sources**. They must not be reproduced in this public roadmap, assumed to have final peer-reviewed status, assigned unverified DOIs, or counted automatically as independent evidence units. Reconcile versions, authors and published identity before further promotion.
+
+One one-page supplementary document supplied only fragmentary text and supports no specific research claim.
+
+### 31.4 Changes to the review challenge, not changes to study design
+
+The existing integrative conceptual review and external EfS comparison can already process these inputs. The source candidates create six concrete review questions:
+
+1. What does the Digital-ESD synthesis add beyond published digital transformative sustainability pedagogy and existing social-sustainability reviews?
+2. How do the seven provisional principles accommodate **collective and community** decision authority, not merely individual learner agency?
+3. What observations establish learning or sustainability competencies rather than participation or platform activity?
+4. Can ecological and more-than-human relationships remain explicit where no digital-pedagogy counterpart is justified?
+5. Which system, leadership, professional development, and policy conditions support enduring transformation?
+6. Whose accessibility requirements conflict, and what participant/context evidence is needed before calling provision equitable?
+
+These are **candidate source-derived challenges and DASHI cross-source research questions**, not empirical outcomes attributed to the cited authors.
+
+**Next admissibility steps:** deduplicate by exact DOI and document identity (not title alone); check existing repo source ownership and local preflight; verify venue/year/version metadata; code independently grounded EfS source spans and context limits; apply existing screening and SourceAuditAdmission; then let admitted evidence support, narrow, split, merge, defeat or extend the seven principles. Keep Fleet/TOE outside the ESD plan and preserve external meta-introspector contributions as separately attributed reference material only.
 
