@@ -17365,3 +17365,14 @@ Cleanup
 - [ ] **R443-F**: complete opposite/negative-orientation path word and plaquette equivalence, actual total Wilson action C3 invariance and original Haar/group rather than rational-only equivalence.
 - [ ] **R443-H/S**: instantiate finite group/Haar C3 change of variables plus R431/R443 source on the selected true finite Gibbs measure and R445 cutoff family, not an arbitrary invented measure.
 - [ ] **R445-T/R320/R333**: source uniform tails and true selected physical Euclidean/Wilson OS decay; same H_OS infinite-volume strictly positive spectrum and nontriviality/compact-simple uniform conditions.
+
+
+### 2026-11-01 all signed native source and finite ordered action
+- [x] Source-write `c3SignedStepNaturality` eight signed cases and `c3NativeOrientedLink` for positive and inverse native links on n=3 actual SU2 bond fields.
+- [x] Source-write all signed-word `c3NativeSignedPathHolonomy` / `c3NativeSignedWilson` on same native source, not a fresh holonomy model.
+- [x] Source-write all 16 ordered geometric plaquette paths, source-side C3 action, 4-axis and 3-cycle site reindexing and C3 invariance of rational SU2 **ordered** Wilson action.
+- [x] Execute independent exact Fraction side-four test 256 sites/1024 bonds/1024 paths/1024 gauge Wilson/49 trace pairs and 4096 ordered plaquette comparisons with total 23384/25 invariant in its selected fixture.
+- [ ] **R443-six:** reduce all ordered plaquettes to the original six `μ<ν` action, real trace inverse and diagonal triviality with source coupling normalisation.
+- [ ] **R443-Haar/W:** actual compact group Haar change-of-variables on the original finite physical source and Gibbs/Wilson selected action; then feed already-existing R431→OS3.
+- [ ] **R445/R320/R333:** selected physical uniform tails, OS/Wightman same-H_OS, infinite-volume mass-gap estimate; no Clay result.
+- [ ] Exact-head Agda compiler and committed Python regression blob replay; independent local exact test is not kernel verification.
