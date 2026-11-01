@@ -60,6 +60,28 @@ def verify_instance(parts: tuple[int, ...]) -> None:
     assert (max_cut(n, edges) >= threshold) == has_partition(parts)
 
 
+def test_printed_1972_threshold_counterexample() -> None:
+    """Karp p.100 prints [1/4 sum_i c_i^2]; the literal square placement
+    does NOT yield the stated equivalence. This is a textual formula audit,
+    not a claim of discovering a new NP-hardness theorem.
+    """
+    parts = (2, 1)
+    original_printed_threshold = (sum(x*x for x in parts) + 3) // 4
+    repaired_threshold = threshold_for_nonzero_total(parts)
+    assert not has_partition(parts)
+    assert original_printed_threshold == 2
+    assert repaired_threshold == 3
+    assert cut_weight(parts, (0, 1)) == 2
+    assert cut_weight(parts, (0, 1)) >= original_printed_threshold
+    assert cut_weight(parts, (0, 1)) < repaired_threshold
+
+
+def threshold_for_nonzero_total(parts: tuple[int, ...]) -> int:
+    total = sum(parts)
+    assert total != 0
+    return (total * total + 3) // 4
+
+
 def main() -> None:
     positive_count = 0
     for n in range(1, 7):
@@ -73,6 +95,9 @@ def main() -> None:
             verify_instance(parts)
             signed_count += 1
 
+    test_printed_1972_threshold_counterexample()
+    print("PASS Karp p.100 printed-threshold counterexample (2, 1); "
+          "repaired square-of-total formulation distinguished")
     print(f"PASS: {positive_count} positive and {signed_count} signed/zero "
           "partition instances; exact quadratic cut identity, both side "
           "orientations, zero-total mapping and threshold equivalence")
