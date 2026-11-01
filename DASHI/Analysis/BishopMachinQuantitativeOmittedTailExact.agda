@@ -20,7 +20,13 @@ module DASHI.Analysis.BishopMachinQuantitativeOmittedTailExact where
 
 open import Agda.Builtin.Nat using (Nat; suc)
 import Real as Bishop
+import RealProperties as RP
 import Sequence as Series
+import Data.Rational.Unnormalised as Q using (ℚᵘ; _*_)
+
+import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Rational
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
+import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as Concrete
 
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopArctanHalfBallInterlacingExact as Atan
@@ -117,3 +123,60 @@ twoHundredThirtyNineOddRemainderBound : ∀ k →
       (suc (Alternating.double k)))
 twoHundredThirtyNineOddRemainderBound =
   actualArctanOddRemainderBound Window.oneTwoHundredThirtyNinthPoint
+
+------------------------------------------------------------------------
+-- K04b2: ACTUAL FIRST-OMITTED BISHOP MAGNITUDE = RATIONAL SOURCE
+-- (under the ORIGINAL certified nonnegative Machin arguments).
+--
+-- This uses the earlier all-index qPowEmbeds from K04a and the
+-- pre-existing source's pointwise power-nonnegativity theorem. The
+-- absolute value is not silently dropped for arbitrary signed x.
+------------------------------------------------------------------------
+
+atanMagnitudeIsEmbeddedRational :
+  (x : Q.ℚᵘ) →
+  (nonnegative : Bishop.NonNegative (Bishop._⋆ x)) →
+  ∀ k →
+  Bishop._≃_
+    (Machin.atanMagnitudeTerm (Bishop._⋆ x) k)
+    (Bishop._⋆
+      (Machin.inverseOddRational k Q.*
+        Rational.qPow x (Estimates.oddExponent k)))
+atanMagnitudeIsEmbeddedRational x nonnegative k =
+  RP.≃-trans
+    (RP.*-congˡ
+      (RP.nonNegx⇒∣x∣≃x
+        (Concrete.powNonnegative nonnegative
+          (Estimates.oddExponent k))))
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.⋆-distrib-*
+          (Machin.inverseOddRational k)
+          (Rational.qPow x (Estimates.oddExponent k)))
+        (RP.*-cong RP.≃-refl
+          (Rational.qPowEmbeds x (Estimates.oddExponent k)))))
+
+fifthFirstOmittedEqualsEmbeddedRational :
+  ∀ k →
+  Bishop._≃_
+    (Machin.atanMagnitudeTerm Machin.bishopOneFifth k)
+    (Bishop._⋆
+      (Machin.inverseOddRational k Q.*
+        Rational.qPow Machin.oneFifth (Estimates.oddExponent k)))
+fifthFirstOmittedEqualsEmbeddedRational =
+  atanMagnitudeIsEmbeddedRational
+    Machin.oneFifth Machin.oneFifthNonnegative
+
+twoHundredThirtyNineFirstOmittedEqualsEmbeddedRational :
+  ∀ k →
+  Bishop._≃_
+    (Machin.atanMagnitudeTerm
+      Machin.bishopOneTwoHundredThirtyNinth k)
+    (Bishop._⋆
+      (Machin.inverseOddRational k Q.*
+        Rational.qPow Machin.oneTwoHundredThirtyNinth
+          (Estimates.oddExponent k)))
+twoHundredThirtyNineFirstOmittedEqualsEmbeddedRational =
+  atanMagnitudeIsEmbeddedRational
+    Machin.oneTwoHundredThirtyNinth
+    Machin.oneTwoHundredThirtyNinthNonnegative
