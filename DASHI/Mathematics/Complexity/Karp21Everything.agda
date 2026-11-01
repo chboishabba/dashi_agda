@@ -9,4 +9,5 @@ module DASHI.Mathematics.Complexity.Karp21Everything where
 import DASHI.Mathematics.Complexity.PolynomialReductionExact
 import DASHI.Mathematics.Complexity.Karp21ReductionTransportExact
 import DASHI.Mathematics.Complexity.Karp21CliqueVertexCoverExact
+import DASHI.Mathematics.Complexity.Karp21CliqueSetPackingExact
 import DASHI.Mathematics.Complexity.Karp21WeightedCutObjectiveExact
