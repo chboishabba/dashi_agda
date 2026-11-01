@@ -1,4 +1,20 @@
 
+### 2026-11-01 requested full-symmetry source archaeology follow-on
+- [x] Inspect native `ConcreteComplex`, `OrdinaryComplexPolar`, Agda #1414 quaternion/Spin, derive finite 90° oriented-plane `J²=-Id` and prove a free C3 orbit cannot intertwine with a free quarter-turn orbit.
+- [x] Re-open **existing** physical C3 YM files `BalabanC3MonsterEquivarianceAuditExact`, `CMP119FlatSide4SpatialC3FieldCovarianceExact`, `BalabanWilsonD4SubsetCharacterExact` and `BalabanWilsonTransferBlockingExact`; note stronger already-owned literal SU2 field/curl action.
+- [x] Re-open actual 27 plaquette and holonomy-analogue, jCoarse/fine projection nonfactorability, native Wilson closed-loop holonomy, Agda #1249/Lean #84 finite 27→729→19683 gauge covariant projection/negative controls.
+- [x] Locate `dashifine` signature experiments and Agda 3+1 conditional proof; flag label-31 feature leakage and lack of tag-independent physical derivation.
+- [x] Inspect 2/3/4/5 perturbative dimensions and Creutz Euclidean 5D ≠ KK EM/graviphoton 5D ≠ artificial stochastic time, including KK #1241 constraints.
+- [x] Distinguish `DashiMarkov` transition sufficiency, finite kernel bisimulation, Markov inequality for tightness, and Parisi-Wu actual stochastic kernel.
+- [x] Crosswalk possible selected-H_OS spectral ζ without attributing zeta to the transcript or confusing RH/modular j/Casimir ζ(-3).
+- [ ] Exact-head Agda typecheck on new quarter-turn/C3 obstruction and dimension fork plus imports. Preserve source-written status until checked.
+- [ ] Prove actual nonlinear same-source CMP109/116 C3 transport through R445 Wilson expectations, R333 OS and selected physical Hamiltonian; align all intermediate maps.
+- [ ] Produce same physical SU2 gauge-covariant coarse/fine Wilson blocking commuting square and prove OS-form pullback and infinite-volume operator compatibility.
+- [ ] Derive selected 3+1 physical signature using untagged observable discrimination rather than an input profile carrying code 31.
+- [ ] Produce selected KK 5D physical action/compactification and U1 photon source if pursued separately; this is not a shortcut to Clay 4D YM.
+- [ ] Formalise same-H_OS heat semigroup and positive spectral ζ only with trace-class/subtracted finite-volume assumptions, then preserve continuum limits.
+
+
 ### 2026-11-01 YM Voyager chapter-completeness max-cut
 - [x] Crosswalk every mathematical video chapter against **actual** Agda YM, Wilson, Balaban, RG, Hodge, OS and same-Hamiltonian owners in `Docs/physics/YMClayVoyager20260929CoverageAudit.md`.
 - [x] Reuse literal rational Wilson path bound and R445-native-P2 / R320→R333 conditional source split; no duplicate finite proof.
