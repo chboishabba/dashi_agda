@@ -13,6 +13,18 @@
 
 Current primary type is **reflexive, source-governed integrative conceptual review**, with author-nominated bounded HE/digital-scholarship corpus and structured external EfS challenge. The seven principles are provisional intermediary syntheses. Methods must distinguish this from both independent human action research and statistical meta-analysis. A quantitative pooling sub-study is conditional on source-admitted independent effect estimates of compatible estimands and designs, with heterogeneity, bias and uncertainty checks; otherwise provide context-indexed narrative synthesis.
 
+## Updated current-week gate — Sunday 1 November 2026
+
+The 23 October and 30 October rows are **historical proposed checkpoints**. No coauthor meeting decision receipts were verified as closed in this 1 November source audit; do not mark them complete retroactively.
+
+**Friday 6 November P0 (proposed internal deadline):** record the approved research question; two-way EfS/digital-sustainability scope; integrative conceptual review vs optional gated statistical pooling; the seven as *provisional* interpretive themes; 200-word single-paragraph publisher-safe abstract (also usable for an optional ~250-word enquiry); title/corresponding author; coauthor approval and disclosure owner. If not approved, record a named blocker and next decision date, not an invented editorial deadline.
+
+**Friday 13 November P1:** each coauthor nominates papers with inclusion rationale and source role; designate independent EfS-coded (blind-to-seven) literature lane; begin passage-level review of the 14 new + 2 reused #1448 source cases; record alternative seven-principle partitions, disagreement and selective source-admission outcomes. The new [origins/derivation ledger](digital-esd-research-origins-and-derivation.md) is the required audit handoff.
+
+**Friday 20 November P2:** exact seven-source→nine-item history where recoverable, or formal unresolved genealogy receipt; first agreed cross-paper derivation example and competing grouping; current real ERIC/PG world-census run receipt if environment permits (no invented counts).
+
+**Current evidence status:** #1448's 16 cases are bibliographic/candidate interpretation surfaces, not 16 admitted studies. #1446's publisher rules remain independent of the research-quality gates and of #1448's Agda proof/representation status. Preserve proposed 30 April 2027 internal manuscript milestone and 30 August 2027 public special-issue deadline as distinct dates.
+
 ## Friday-by-Friday decisions and deliverables
 
 | Friday | Must be decided by end of week | Acceptance surface |
