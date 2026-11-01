@@ -1,3 +1,7 @@
+## 2026-11-01 — exact conditional Wilson gauge/RG commuting square
+
+- Added `YMClayVoyagerCovariantWilsonCoarseFineBidiExact`: proof that an actual chosen fine Wilson observable remains gauge invariant when both selected block/gauge action and Wilson observable commuting squares hold; imported by Balaban TOE. **Neither physical square is claimed inhabited**. For actual Wilson transport and OS form use existing source owners.
+
 
 ## 2026-11-01 — YM source reuse: complex i, SO2/SO3, C3, 3+1, 5D and 27–19683 hyperfabric
 
