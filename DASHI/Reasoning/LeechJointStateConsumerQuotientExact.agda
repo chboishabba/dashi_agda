@@ -56,11 +56,15 @@ reopen :
   JointState E X H
 reopen {E = E} {X = X} {H = H} selected retained payload =
   jointState (sharedActivation payload)
-    (λ e → reopenOne e (selected e))
+    (λ e → reopenOne e (selected e) refl)
   where
-    reopenOne : (e : Fin E) → (flag : Bool) → H
-    reopenOne e true = selectedHistory payload e refl
-    reopenOne e false = history retained e
+    -- Crucial dependent proof: merely passing the Bool flag does not
+    -- justify coercing it to selected e ≡ true.
+    reopenOne :
+      (e : Fin E) (flag : Bool) → selected e ≡ flag → H
+    reopenOne e true selectedTrue =
+      selectedHistory payload e selectedTrue
+    reopenOne e false selectedFalse = history retained e
 
 reopenSharedActivation :
   ∀ {E : Nat}{X H : Set}
