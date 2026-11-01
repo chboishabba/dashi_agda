@@ -154,8 +154,9 @@ New canonical owner: `DASHI/Mathematics/Complexity/Karp21PartitionCutQuadraticEx
 3. `crossWithTrue` / `crossWithFalse`: crossing edges from a fixed source vertex sum to that vertex weight times the **opposite-side** total.
 4. `completeGraphCutEqualsPartitionProduct`: induction on the *actual triangular complete-graph edge enumeration*, each pair counted once; the weighted cut equals leftTotal × rightTotal for **all** signed-weight inputs and **all** side labelings.
 5. `completeGraphCutQuadratic`: compose (2) and (4) to give `4*cut=T²-(A-B)²` on the actual cut objective.
+6. `balancedSelectionIffExactMaximum`: using the earlier repo's `IntP.i*j≡0⇒i≡0∨j≡0` no-zero-divisors owner and RingZ cancellation, prove the exact bidirectional equivalence `leftTotal=rightTotal` **iff** `4*actualCompleteGraphCut=total²` for all signed input lists.
 
-This is no longer a merely assumed objective identity. Remaining E20 mathematical gates are `integerSquareNonnegative`, `integerSquareZeroImpliesZero`, `partitionCeilThresholdIffEquality` (including parity/integer ceil handling), `partitionZeroTotalFixedYes`, and `partitionSignedWeightBitCost` / the actual total encoded machine transducer.
+This is no longer a merely assumed objective identity. Remaining E20 mathematical gates are `integerSquareNonnegative`, `partitionCeilThresholdIffEquality` (including parity/integer ceil handling), `partitionZeroTotalFixedYes`, and `partitionSignedWeightBitCost` / the actual total encoded machine transducer.
 
 **Source-critical counterexample:** Karp p.100's printed typography renders the MAX CUT threshold as a bracketed quarter of a **sum of squared inputs** `ceil((Σ cᵢ²)/4)`; used literally this is **not** equivalent to PARTITION. Independent local counterexample `c=(2,1)`: source partition is NO, but graph edge weight 2 meets the printed threshold `ceil(5/4)=2`. The actual algebraically justified threshold is `ceil((Σ cᵢ)²/4)=3`, making the cut NO. Other published discussions identify the same distinction; do not silently upgrade the literal printed expression to a proof. The executable `check_karp_partition_maxcut.py` now includes this explicit false-positive regression, alongside its signed-integer/zero-total checks. The original source remains credited to Karp; the corrected formula/diagnostic is an independently documented DASHI reconstruction, not claimed as his verbatim statement.
 
@@ -167,7 +168,7 @@ This is no longer a merely assumed objective identity. Remaining E20 mathematica
 - `signedTotalDecomposes`: every signed weighted partition equals the sum of its two sides.
 - `completeGraphCutEqualsPartitionProduct`: recursively enumerated complete-graph *crossing edges* sum to `leftTotal*rightTotal`.
 - `completeGraphCutQuadratic`: compose with previously existing DASHI integer RingZ solver, yielding `4*actualCut = total²-(left-right)²`.
-- The source is part of the focused Agda root. Independent SymPy symbolic expansion passed; no pinned Agda check yet. **E20 residuals:** (1) nonnegative squares and equality test; (2) ceiling/positive threshold including total=0; (3) encoded weighted graph exactly representing the triangular enumeration; (4) bit-cost polynomial proof; (5) actual `PR.PolynomialManyOneReduction`.
+- The source is part of the focused Agda root. Independent SymPy symbolic expansion passed; no pinned Agda check yet. **E20 residuals:** (1) nonnegative square ordering and discrete ceiling comparison; (2) ceiling/positive threshold including total=0; (3) encoded weighted graph exactly representing the triangular enumeration; (4) bit-cost polynomial proof; (5) actual `PR.PolynomialManyOneReduction`.
 
 **E03 Cook-origin four-to-three exact Boolean gadget**, `Karp21SATToThreeSATGadgetExact.agda`:
 - `fourToThreeWitness`: explicit fresh assignment `x=(c∨d)` takes an accepted `a∨b∨c∨d` to both true `a∨b∨x` and `¬x∨c∨d`.
