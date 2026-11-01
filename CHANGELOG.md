@@ -151,3 +151,5 @@ monitor surface.
 
 - Added `BishopMachinQuantitativeOmittedTailExact.agda` using ORIGINAL positive-half-ball arctangent interlacing and first-omitted signed Bishop tail theorems for both actual Machin arguments. Source-proved even/odd partial difference `≤` first omitted term, not merely floating/exact-rational sampled tests. Imported into all three TOE roots.
 - Remaining numeric conversion: identify each omitted magnitude with embedded rational odd-power quotient and combine/transport the all-n `4/25^n` envelope into Bishop real order. Source written, **Agda kernel not run**; zeta uniform convergence and true trig-π characterization also remain open.
+
+- Continued K04b2: `BishopMachinQuantitativeOmittedTailExact` now source-identifies the native Bishop omitted magnitudes with the original rational inverse-odd/exponent expression via existing nonnegative-power and rational-embedding theorems. Remaining direct mathematical work is signed 16/4 tail combination, all-n rational geometric majorant and kernel verification; no CI.
