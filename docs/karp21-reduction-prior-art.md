@@ -2,6 +2,22 @@
 
 **Canonical full current roadmap:** [`Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md`](../Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md). This shorter research note is not the authoritative status ledger; use the linked file for exactly 21 nodes, 20 historical edges, eight follow-on subjects, and named remaining lemmas.
 
+## 2026-11-01 full finite-network completion (NOT proof completion)
+
+All 20 historical source-labelled edges now have a bounded executable candidate and independently checked finite truth-equivalence controls, via:
+- `scripts/check_karp_historical_reductions.py` (15 edges);
+- `scripts/check_karp_remaining_four_gadgets.py` (E09, E11, E13, E16);
+- `scripts/check_karp_partition_maxcut.py` (E20 signed/zero-total arithmetic).
+- `scripts/run_karp21_reduction_regressions.py` runs all three fail-closed.
+
+Independent local finite audit: **55,824 edge-instance checks** (the sum of per-edge test rows, including 23,436 E20 positive/signed instances). The committed GitHub scripts are source-written and have **not** been executed from an exact branch checkout in this session.
+
+Agda DAG owner `Karp21HistoricalDagExact.agda` defines all 21 problem constructors, 20 edge constructors, and the source-written `allNodesHistoricallyReachable`. The new `Karp21CertifiedDagTransportExact.agda` is a structural completeness *proof compiler*: `allTwentyOneNPCompleteIfCertified` would derive all 21 results from **actual** `PR.PolynomialManyOneReduction` certificates and membership witnesses. No caller currently supplies those general certificates; no Agda pinned-toolchain receipt has been run. The formal end-to-end completion count remains **0/21**.
+
+**Attribution precision:** Karp explicitly credits Cook (1971) for SAT→3-SAT, a Cook (1970) implicit construction and Raymond Reiter for SAT→CLIQUE, Cornell's Algorithms Seminar for NODE COVER→FEEDBACK NODE SET, Eugene Lawler and Karp jointly for NODE COVER→FEEDBACK ARC SET, Lawler for EXACT COVER→3-DIMENSIONAL MATCHING, and Robert Tarjan for DIRECTED→UNDIRECTED HAMILTONIAN CIRCUIT. Keep the original discoverers separate from Karp's 1972 network and DASHI's 2026 executable/formal reconstructions.
+
+The original 1972 HITTING SET is **exactly one** selection from every transposed set, not ordinary modern at-least-one hitting. Signed KNAPSACK→PARTITION requires DASHI's extra digit-guarded positive normalization before applying the nonnegative historical two-extra-number gadget. These are semantic requirements, not cosmetic renamings.
+
 ## Historical provenance
 - Stephen Cook (1971), *The Complexity of Theorem-Proving Procedures*, DOI 10.1145/800157.805047: original SAT complexity root.
 - Richard Karp (1972), *Reducibility Among Combinatorial Problems*, DOI 10.1007/978-1-4684-2001-2_9: the original 21-problem reduction network.
