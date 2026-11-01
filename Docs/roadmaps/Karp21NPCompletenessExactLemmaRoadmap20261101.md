@@ -58,7 +58,7 @@ New executable checked against **independent brute-force instance predicates**:
 | E18 signed KNAPSACK → JOB SEQUENCING | sign-safe digit-pair normalization → positive times/penalties → deadlines | 120 |
 | E19 signed KNAPSACK → PARTITION | sign-safe digit-pair normalization before Karp's positive subset-sum gadget | 780 |
 
-**Earlier intermediate cut: 15 of 20 direct edges in the first consolidated executable, with E09, E11, E13, E16 in the second executable and E20 in a separate `scripts/check_karp_partition_maxcut.py` signed-domain finite construction/check (23,436 independently tested instances), so **20/20** now have independently executed bounded finite checks across the three scripts. Do **not** translate 15/20 or 16/20 into 15/20 kernel-verified reductions: the latter remains **0/20**. E20 is intentionally not duplicated into the consolidated Python file.
+**Current finite cut:** E01–E08, E10, E12, E14–E15 and E17–E19 are checked in the first script; E09/E11/E13/E16 in the second; and E20 in the signed-domain script. **All 20/20 edges have independently executed bounded finite checks**, including 23,436 E20 instances. Do **not** translate 15/20 or 16/20 into 15/20 kernel-verified reductions: the latter remains **0/20**. E20 is intentionally not duplicated into the consolidated Python file.
 
 **All 20 direct edge executable constructors are now present in the three scripts**, though E16 requires its Karp source preprocessing assumption and E09 needs full malformed/zero-budget handling. The universal mathematical correctness/cost/NP-membership obligations remain for all E01–E20.
 
@@ -274,7 +274,7 @@ These are *not* extra nodes in Karp's 21. Keep as lanes consuming common graph/N
 
 - Cook (1971): https://doi.org/10.1145/800157.805047
 - Karp (1972): https://doi.org/10.1007/978-1-4684-2001-2_9\n- Karp 1972 source PDF (pages 96–100 for the list, reduction diagram and E20): https://cgi.di.uoa.gr/~sgk/teaching/grad/handouts/karp.pdf
-- Karp original/tree overview: https://en.wikipedia.org/wiki/Karp%27s_21_NP-complete_problems
+- Zuckerman (1996), *On Unapproximable Versions of NP-Complete Problems*, SIAM J. Comput. 25(6):1293–1304, DOI 10.1137/S0097539794266407: applies additional constraints to 21 historical problem families; **not** the claim that their ordinary variants all have the same approximation difficulty.\n- Karp original/tree overview: https://en.wikipedia.org/wiki/Karp%27s_21_NP-complete_problems
 - Zuckerman constrained approximation distinction: https://doi.org/10.1137/S0097539794266407
 - OpenAI original Max-Cut Lean: https://github.com/openai/math/blob/main/lean/OAI/Computability/MaxCut/Main.lean
 - OpenAI original Vertex Cover Lean: https://github.com/openai/math/blob/main/lean/OAI/Computability/VertexCover/Main.lean
