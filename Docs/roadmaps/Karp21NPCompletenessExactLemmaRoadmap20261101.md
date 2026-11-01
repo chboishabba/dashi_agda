@@ -390,6 +390,15 @@ These are *not* extra nodes in Karp's 21. Keep as lanes consuming common graph/N
 
 **All remaining K00a–K00j, E01–E20, N01–N21 and X01–X08 remain in earlier sections.** Do not drop the other 19 historical reductions because E20 now has a Laplacian bridge. Current Agda receipt count: **0/20** new complete costed direct reductions; **0/21** new concrete NP-completeness conclusions. This pass did not run CI or Agda and does not claim a proof of P≠NP.
 
+### E20 signed graph scaling/list decomposition (same indexed edge object)
+
+`Karp21SignedGraphScaleAndAppendExact.agda` (imported in `Karp21Everything.agda`) now proves **three additional universal finite-graph laws** from the actual N21 signed weighted edge carrier:
+- `edgeListCutAppend`: `cut(E++F, bits)=cut(E,bits)+cut(F,bits)`, preserving edge multiplicities and weight signs.
+- `scaleEdgeFourContribution` / `scaleEdgeListFourCut`: changing **only** each edge's signed weight to `4*w`, keeping its original `Fin n` endpoints and off-diagonal proof, yields `cut(scale4(E),bits)=4*cut(E,bits)` for **every** finite graph and Boolean label vector.
+- `scaledSignedGraphCutEqualsSpinQuadratic`: exact same-object weld of the E20 scaled finite-edge-list graph objective to the signed ±1 Laplacian quadratic (from `Karp21SignedLaplacianCutExact`) on precisely the unscaled source edges; no unsupported spectral-eigen positive definiteness or linear-time algorithm inferred.
+
+This removes another purely semantic E20 multiplier and graph-edge-sum gap, but leaves one crucial **unpaid** construction: `e20CompleteGraphEdgesFiniteIndexed` and its `e20CompleteGraphToWeightedCutEdgeListIff` tying the **original signed PARTITION list** to the unique pairwise indexed graph without access to a cut witness. This is followed by actual canonical signed graph `Word` coding and a polynomial machine clock. The source-written lemmas still need pinned Agda kernel checking, as do all other Karp edges and NP-membership witnesses.
+
 ## F. Priority cut / dependency order (Pareto and snowball)
 
 **Tier 0 — proof-system blockers (must precede any "21 done" claim):**
