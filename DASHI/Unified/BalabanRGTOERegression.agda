@@ -970,3 +970,7 @@ open SixOrdered public using
   ; sixPhysicalDeficitActionSpatialC3)
 open R443Six public using
   (nativeSixWilsonDeficit; nativeSixWilsonDeficitC3)
+
+
+-- Original six-plane Wilson deficit is also exactly a R445 native observable.
+open R445Weld public using (nativeR443SixDeficitR445Observable; r443SixDeficitIsNativeObservableSameObject)
