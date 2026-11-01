@@ -57,6 +57,12 @@ The canonical [new Agda owner](../DASHI/Education/DigitalESDJointHyperfabricCons
 
 The six initial EfS themes remain an independent source-derived *coding proposal*, not a reverse label mapping. New candidate cases on #1448 do not promote any of these seven labels. There is no guarantee the final synthesis is seven-dimensional; principled **splits, merges, defeaters, unmatched constructs and consumer-relative views** must remain live.
 
+## 3A. Principle survival is a *section over contexts/consumers*, not a scalar
+
+The existing `DigitalESDPrincipleSurvivalAuditExact` deliberately records provisional global-readable snapshots for seven principles. The new joint-consumer owner adds a finite **consumer-relative non-descent witness**: two questions, *digital-course learner voice* and *EfS community decision rights*, share the exact original `constitutiveLearnerAgency` label but yield different provisional classification needs (`provisionallyRetain` and `provisionalSplitCandidate`). By the canonical non-factorability theorem no single function of *the label alone* can answer both.
+
+This is **not an empirical finding** that agency is effective in one setting and ineffective in the other. It is a methodological proof that **the requested research question and situated context belong in the evidence unit**. A final seven-principle survival count is therefore inappropriate without an explicitly declared consumer, population, transfer rule and aggregation criterion. Report a *context-by-question survival matrix with reasons, counterexamples, dissent and missingness*; a single “five of seven survived” headline is at best a bounded, qualified projection, not the authoritative research object.
+
 ## 4. Evidence review: how to use the 43,996 ERIC records without fabricating a 43,996-study hypercube
 
 The already acquired/deduplicated metadata universe is a *search denominator*, not a full-text study denominator. Keep canonical PG world revisions, exact manifestation/source revision/span, semantic proposal, reviewed observation, SourceAuditAdmission, study-family independence and claim ceiling. The 19 extraction coordinates and existing 16-subcoordinate study-claim ceiling are *available projections*, not a theorem that every intersection is represented in every source.
