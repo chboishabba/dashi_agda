@@ -627,3 +627,79 @@ there is no actual golden kernel acceptance in this tranche.
 remain `OPEN` wherever they require independent new mathematics
 or an actual kernel check. RH, twin-prime infinitude and giant-angle
 Pickover sign remain unrelated terminal `OPEN` gates.
+
+
+## 2026-11-02 K04d rational interval and exponent-two follow-on
+
+**Source commits:** `fdfbaa0144e650a161a5a0ed13fb413b012e055b`,
+`f6ec49f3674bb64c67a4b2f69e82a0745b0182a8`,
+`cdfba07ca02a4d5c749703e9df5144303f32b4e7`,
+`cd84bc2a665364b331c5f09393766df17e1d1ce6`,
+`a6567975415756490fd29b05a999958dd113cd73`.
+
+Reuse path: original `BishopMachinArctanConstructionExact` and
+`BishopMachinPiRationalWindowExact` for constructive Machin history;
+`BishopExponentialCauchyProductExact.bishopExpAdd`,
+`BishopExponentialPositiveOrderExact.bishopExpZero`,
+`BishopInverseSquareProductExact.inverseFromCancellation`,
+`BishopNatRealReciprocalSquareBaselExact`,
+`BishopBaselReciprocalSquareConvergenceExact` and
+`BishopFiniteSeriesExtensionalityExact` for the Dirichlet analytic series.
+
+**Source-written new exact lemma cuts** in
+`BishopRiemannDirichletExponentialTermExact.agda`:
+
+- `natLogArgumentPositiveRational` and
+  `natLogArgumentBelowOneRational` prove the all-index strictly
+  positive unnormalised rational
+  `0 < (n+1)/(n+2) < 1`. The corresponding
+  `natLogArgumentPositiveBishop` and
+  `natLogArgumentBelowOneBishop` transport both inequalities to
+  the original Bishop reals.
+- `configuredNatLogArgumentsInside` consumes the *one remaining
+  actual configured predicate bridge*, mapping these strict Bishop
+  inequalities into the Round11 data field
+  `InOpenUnitInterval`. This field was user-configurable, so the
+  lemma must NOT claim it is definitionally the order interval.
+- `originalNatLogAtOneExpIsOne` closes the first Nat coefficient
+  from `log_B(1)=0` (by construction) and the independent original
+  `bishopExpZero`. Thus
+  `originalNatLogInverseFromPositiveSuccessors` reduces the entire
+  Nat-log inverse to genuine positive-successor instances.
+- `negativeDoubleNatLogExponentialIsBasel` and
+  `negativeTwoNatLogExponentialIsBasel` compile the actual
+  original exponential Cauchy-product law and inverse-square
+  embedding into
+  `exp_B(-2 logNat(n)) ≃ Basel.baselTerm(n)`, conditional only on
+  `exp_B(logNat(n)) ≃ n+1`.
+- `originalSeriesNatLogAtTwoIsBasel` specializes that statement
+  to the *same convergent Bishop -log(1-x) series* already used in
+  the original completed-zeta commuting-square candidate.
+
+**Remaining precise analytic cut:**
+
+1. Instantiate the configured unit-interval predicate for the
+   selected Round11 instance using the now proven Bishop order bounds.
+2. Supply the original Bishop `exp_B(-log(1-x))` inverse theorem
+   at all positive-successor arguments. The n=0 base is paid.
+3. Identify the complex exponential at real `s=2` with its
+   real `exp_B(-2 logNat(n))` coefficient, including the original
+   Bishop sine/cosine at zero and correct index.
+4. Prove a whole-neighborhood coefficient domination (not just
+   equality at `s=2`), a **uniform** Basel-tail modulus
+   and continuity, and same-object equality with
+   `CompletedRiemannZeta.zeta` via the original half-plane record.
+5. K05 still needs one real Round11 signed-factorial addition theorem,
+   the actual quarter-angle tangent/branch identity and trigonometric
+   pi uniqueness. K04b-DENOM's separate unnormalised denominator
+   route is still pending despite the already source-written direct
+   Bishop `4/25^n` and `8/25^n` results.
+6. **Kernel verification** remains unperformed: this environment has
+   no pinned Agda/bishop execution checkout or compiler. No source
+   commit is represented as an accepted Agda elaboration.
+
+**Evidence:** SOURCE-WRITTEN; GitHub readback and a limited exact
+rational arithmetic regression are not a proof of kernel acceptance.
+Nothing here establishes full RH, twin-prime infinitude or the Pickover
+giant-angle sign. Preserve external historical and original in-repo
+ownership separately.
