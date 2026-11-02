@@ -24,7 +24,9 @@ def fixture():
                            "participant_sparql_response_sha256": "sha256:rxn",
                            "raw_sha256": "sha256:rhea-rest",
                            "row": {"Gene Ontology": "GO:0001234",
-                                   "Cross-reference (Reactome)": "R-HSA-12345"},
+                                   "Cross-reference (Reactome)": "R-HSA-12345.1",
+                                   "Cross-reference (KEGG)": "R01716",
+                                   "Cross-reference (MetaCyc)": "PABASYN-RXN"},
                            "participants": [
                                {"chebi_id": "CHEBI:123", "side": "substrate", "coefficient": 1},
                                {"chebi_id": "CHEBI:456", "side": "product", "coefficient": 1}
@@ -77,6 +79,11 @@ def main() -> int:
     assert result["promotion_boundary"]["ontology_match_pays_flux"] is False
     ld = jsonld(result)
     assert len(result["ontology_cross_references"]) == 2
+    assert len(result["unparsed_external_annotation_fields"]) == 2
+    assert {x["source_field"] for x in result["unparsed_external_annotation_fields"]} == {
+        "Cross-reference (KEGG)", "Cross-reference (MetaCyc)"}
+    assert next(x for x in result["ontology_cross_references"] if
+                x["target"]["namespace"] == "reactome")["target"]["identifier"] == "R-HSA-12345.1"
     assert {x["target"]["namespace"] for x in result["ontology_cross_references"]} == {"go", "reactome"}
     assert all(not x["same_biological_event_verified"] for x in result["ontology_cross_references"])
     assert len(ld["@graph"]) == 6
