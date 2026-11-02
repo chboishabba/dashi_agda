@@ -595,6 +595,30 @@ edZitronAnnualizedEnron2026 = sourceReceipt
   "Authored critique of annualised run-rate representations and gross/net customer revenue, including alleged OpenAI definition changes."
   "Criticism and reporting are not audited issuer statements; trailing-realised revenues and annualised hypothetical run rates are different metrics."
 
+------------------------------------------------------------------------
+-- CONTINUING CAPITAL CYCLE, OCTOBER 2026 issuer-report refinements.
+------------------------------------------------------------------------
+
+coreWeaveCashPrepaymentsOriginal2026 : SourceReceipt
+coreWeaveCashPrepaymentsOriginal2026 = sourceReceipt
+  "CoreWeave Inc.; U.S. SEC"
+  "2026-06-30 Form 10-Q, consolidated statements of cash flow: deferred revenue movement and liquidity note"
+  "2026-06-30"
+  "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm"
+  firstPartyIssuer
+  "Six months operating cash +USD3663m include +USD1365m net movement in deferred revenue; reported company liquidity USD15553m is cash USD5524m, securities USD15m and unused SECURED borrowing capacity USD10014m."
+  "Customer prepayment is genuine cash and a future service commitment, not automatically independently recurring terminal cash; subtracting the deferred revenue movement is a sensitivity, not a corrected GAAP OCF or proof of round-tripped demand."
+
+metaEscrowRestricted2026 : SourceReceipt
+metaEscrowRestricted2026 = sourceReceipt
+  "Meta Platforms Inc.; U.S. SEC"
+  "2026-09-30 Form 10-Q, Note 10: restricted cash tied to multi-year infrastructure agreements"
+  "2026-09-30"
+  "https://www.sec.gov/Archives/edgar/data/1326801/000162828026066773/meta-20260930.htm"
+  firstPartyIssuer
+  "USD10800m money-market funds reclassified as restricted cash equivalents under infrastructure escrow conditions, release expected in 2028-30 contingent on obligations; in addition to issuer's USD355730m future not-commenced leases and USD454520m noncancel commitments."
+  "Restricted funds are not free corporate liquidity; do not add escrow to gross liability amounts or automatically count the two future-obligation categories as disjoint."
+
 -- An original primary statement is a receipt for what the named original
 -- says, not a receipt for the correctness of every empirical prediction.
 record AttributionBoundary : Set where
