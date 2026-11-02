@@ -431,3 +431,161 @@ twoHundredThirtyNineOddNaturalPowerFactor : (n : Nat) →
   239 * Cross.pow57121 n
 twoHundredThirtyNineOddNaturalPowerFactor =
   oddNaturalPowerFactor 239
+
+
+------------------------------------------------------------------------
+-- K04b: LITERAL RATIONAL ODD-POWER NORMALISATION (ALL Nat INDICES).
+-- The existing qPow operator is the actual qMachinStage embedding owner.
+-- Use its recursion and the original unnormalised rational setoid.
+------------------------------------------------------------------------
+
+reciprocalNatPower :
+  (base : Nat) → .{{_ : Nat.NonZero base}} → Nat → Q.ℚᵘ
+reciprocalNatPower base n =
+  let
+    instance
+      powerNZ = NatP.m^n≢0 base n
+  in
+  + 1 / (base ^ n)
+
+rationalReciprocalPower :
+  (base : Nat) → .{{_ : Nat.NonZero base}} →
+  (n : Nat) →
+  Q._≃_
+    (Stage.qPow (+ 1 / base) n)
+    (reciprocalNatPower base n)
+rationalReciprocalPower base zero = QP.≃-refl
+rationalReciprocalPower base (suc n) =
+  QP.≃-trans
+    (QP.*-cong
+      (rationalReciprocalPower base n)
+      QP.≃-refl)
+    (Q.*≡*
+      (cong +_ (NatP.*-comm base (base ^ n))))
+
+fiveOddPowerRational : (n : Nat) →
+  Q._≃_
+    (Stage.qPow Machin.oneFifth (Estimates.oddExponent n))
+    (+ 1 / (5 * Cross.pow25 n))
+fiveOddPowerRational n =
+  let
+    instance
+      fivePowerNZ = NatP.m*n≢0 5 (Cross.pow25 n)
+        {{_}} {{pow25NonZero n}}
+  in
+  QP.≃-trans
+    (rationalReciprocalPower 5 (Estimates.oddExponent n))
+    (QP.≃-reflexive
+      (QP./-cong refl (fiveOddNaturalPowerFactor n)))
+
+twoHundredThirtyNineOddPowerRational : (n : Nat) →
+  Q._≃_
+    (Stage.qPow Machin.oneTwoHundredThirtyNinth
+      (Estimates.oddExponent n))
+    (+ 1 / (239 * Cross.pow57121 n))
+twoHundredThirtyNineOddPowerRational n =
+  let
+    instance
+      powerNZ = NatP.m*n≢0 239 (Cross.pow57121 n)
+        {{_}} {{pow57121NonZero n}}
+  in
+  QP.≃-trans
+    (rationalReciprocalPower 239 (Estimates.oddExponent n))
+    (QP.≃-reflexive
+      (QP./-cong refl
+        (twoHundredThirtyNineOddNaturalPowerFactor n)))
+
+fiveOmittedPowerIsOriginalFraction : (n : Nat) →
+  Q._≃_
+    (omittedPowerRational Machin.oneFifth n)
+    (+ 1 / sourceFiveDenominator n)
+fiveOmittedPowerIsOriginalFraction n =
+  let
+    instance
+      fivePowerNZ = NatP.m*n≢0 5 (Cross.pow25 n)
+        {{_}} {{pow25NonZero n}}
+      denominatorNZ = sourceFiveDenominatorNonZero n
+  in
+  QP.≃-trans
+    (QP.*-cong QP.≃-refl (fiveOddPowerRational n))
+    (Q.*≡*
+      (cong +_
+        (NatP.*-assoc
+          (Estimates.oddExponent n)
+          5
+          (Cross.pow25 n))))
+
+twoHundredThirtyNineOmittedPowerIsOriginalFraction : (n : Nat) →
+  Q._≃_
+    (omittedPowerRational Machin.oneTwoHundredThirtyNinth n)
+    (+ 1 / source239Denominator n)
+twoHundredThirtyNineOmittedPowerIsOriginalFraction n =
+  let
+    instance
+      powerNZ = NatP.m*n≢0 239 (Cross.pow57121 n)
+        {{_}} {{pow57121NonZero n}}
+      denominatorNZ = source239DenominatorNonZero n
+  in
+  QP.≃-trans
+    (QP.*-cong QP.≃-refl
+      (twoHundredThirtyNineOddPowerRational n))
+    (Q.*≡*
+      (cong +_
+        (NatP.*-assoc
+          (Estimates.oddExponent n)
+          239
+          (Cross.pow57121 n))))
+
+sourceWeightedPowerEqualsOriginalFraction : (n : Nat) →
+  Q._≃_
+    (sourceWeightedOmittedPowerRational n)
+    (sourceOmittedRationalEnvelope n)
+sourceWeightedPowerEqualsOriginalFraction n =
+  let
+    instance
+      fiveNZ = sourceFiveDenominatorNonZero n
+      otherNZ = source239DenominatorNonZero n
+  in
+  QP.+-cong
+    (QP.≃-trans
+      (QP.*-cong
+        QP.≃-refl
+        (fiveOmittedPowerIsOriginalFraction n))
+      (Q.*≡* refl))
+    (QP.≃-trans
+      (QP.*-cong
+        QP.≃-refl
+        (twoHundredThirtyNineOmittedPowerIsOriginalFraction n))
+      (Q.*≡* refl))
+
+sourceWeightedOmittedIsEmbeddedOriginalFraction : (n : Nat) →
+  R._≃_
+    (R._+_
+      (R._*_
+        (R._⋆ Machin.sixteen)
+        (Machin.atanMagnitudeTerm Machin.bishopOneFifth n))
+      (R._*_
+        (R._⋆ Machin.four)
+        (Machin.atanMagnitudeTerm
+          Machin.bishopOneTwoHundredThirtyNinth n)))
+    (R._⋆ (sourceOmittedRationalEnvelope n))
+sourceWeightedOmittedIsEmbeddedOriginalFraction n =
+  RP.≃-trans
+    (sourceWeightedOmittedIsEmbeddedPowerRational n)
+    (RP.⋆-cong (sourceWeightedPowerEqualsOriginalFraction n))
+
+sourceOriginalOmittedBishopBelowGeometric : (n : Nat) →
+  R._≤_
+    (R._+_
+      (R._*_
+        (R._⋆ Machin.sixteen)
+        (Machin.atanMagnitudeTerm Machin.bishopOneFifth n))
+      (R._*_
+        (R._⋆ Machin.four)
+        (Machin.atanMagnitudeTerm
+          Machin.bishopOneTwoHundredThirtyNinth n)))
+    (R._⋆ (sourceGeometricRationalEnvelope n))
+sourceOriginalOmittedBishopBelowGeometric n =
+  RP.≤-respˡ-≃
+    (sourceWeightedOmittedIsEmbeddedOriginalFraction n)
+    (sourceOmittedBishopBelowGeometric n)
