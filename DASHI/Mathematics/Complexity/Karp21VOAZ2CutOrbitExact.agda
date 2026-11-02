@@ -21,7 +21,11 @@ import Data.Integer.Base as Int
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+open import Data.List.Base using (List)
+import Data.List.Base as List
+import Data.Maybe.Base as Maybe
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
+import DASHI.Mathematics.Complexity.Karp21MaxCutCertificateBinaryCodecExact as BitCode
 import DASHI.Mathematics.Complexity.Karp21SignedLaplacianCutExact as Lap
 
 canonicalBitLabels :
@@ -92,3 +96,38 @@ canonicalVerifierValue :
 canonicalVerifierValue graph bits =
   cong (Int._≤ᵇ_ (Cut.threshold graph))
     (canonicalCutScore graph bits)
+
+
+------------------------------------------------------------------------
+-- Same computation on the EXISTING N21 List Bool word carrier.
+-- Normalisation does not change certificate size. The absolute binary
+-- size does not get halved: only the search-orbit representative count.
+------------------------------------------------------------------------
+
+canonicalCertificateWord :
+  ∀ {n : Nat} → Vec.Vec Bool (suc n) → List Bool
+canonicalCertificateWord bits =
+  BitCode.encodeCutLabels (canonicalBitLabels bits)
+
+canonicalCertificateWordLength :
+  ∀ {n : Nat} (bits : Vec.Vec Bool (suc n)) →
+  Data.List.Base.length (canonicalCertificateWord bits) ≡ suc n
+canonicalCertificateWordLength bits =
+  BitCode.cutCertificateWordLength (canonicalBitLabels bits)
+
+canonicalCertificateWordDecodes :
+  ∀ {n : Nat} (bits : Vec.Vec Bool (suc n)) →
+  BitCode.decodeCutLabels (suc n)
+    (canonicalCertificateWord bits)
+  ≡ Data.Maybe.Base.just (canonicalBitLabels bits)
+canonicalCertificateWordDecodes bits =
+  BitCode.decodeEncodeCutLabels (canonicalBitLabels bits)
+
+canonicalCertificateWordVerifierEqualsOriginal :
+  ∀ {n : Nat} (graph : Cut.WeightedCutGraph (suc n))
+    (bits : Vec.Vec Bool (suc n)) →
+  BitCode.wordCutVerifier graph (canonicalCertificateWord bits)
+  ≡ Cut.verifyWeightedMaxCut graph bits
+canonicalCertificateWordVerifierEqualsOriginal graph bits
+  rewrite canonicalCertificateWordDecodes bits =
+  canonicalVerifierValue graph bits
