@@ -19,12 +19,12 @@ module DASHI.Analysis.BishopDirichletUniformBaselTailsExact where
 -- DASHI Basel and EllipticDirichletBaselMajorantExact owners.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base as Nat using (_≤_; _≥_; NonZero)
 import Data.Nat.Properties as NatP
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (_/_)
-open import Data.Product.Base using (proj₁; proj₂)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (inj₁; inj₂)
 
 import Real as R
@@ -158,3 +158,52 @@ regionImagUniformFiniteTail terms Region bound k s inside m n mPast nPast =
     (Dirichlet.imagTerm terms s)
     (imagEverywhere bound s inside)
     k m n mPast nPast
+
+
+------------------------------------------------------------------------
+-- SAME PROOF WITNESS -> POINTWISE COMPLEX DIRICHLET LIMITS.
+-- No second convergence authority and no hidden choice of a majorant:
+-- uniform region domination contains the exact all-index comparison.
+------------------------------------------------------------------------
+
+regionPointwiseMajorant :
+  (terms : Dirichlet.BishopDirichletTermFamily) →
+  (Region : BC.BishopComplex → Set) →
+  (bound : RegionBaselDomination terms Region) →
+  (s : BC.BishopComplex) → Region s →
+  Dirichlet.BishopDirichletBaselMajorantAt terms s
+regionPointwiseMajorant terms Region bound s inside = record
+  { Dirichlet.dominationStart = zero
+  ; Dirichlet.realDomination = λ index _ →
+      realEverywhere bound s inside index
+  ; Dirichlet.imagDomination = λ index _ →
+      imagEverywhere bound s inside index
+  }
+
+regionDirichletValue :
+  (terms : Dirichlet.BishopDirichletTermFamily) →
+  (Region : BC.BishopComplex → Set) →
+  (bound : RegionBaselDomination terms Region) →
+  (s : BC.BishopComplex) → Region s →
+  BC.BishopComplex
+regionDirichletValue terms Region bound s inside =
+  Dirichlet.dirichletValue terms s
+    (regionPointwiseMajorant terms Region bound s inside)
+
+regionValueConvergesCoordinatewise :
+  (terms : Dirichlet.BishopDirichletTermFamily) →
+  (Region : BC.BishopComplex → Set) →
+  (bound : RegionBaselDomination terms Region) →
+  (s : BC.BishopComplex) → (inside : Region s) →
+  (Seq._ConvergesTo_
+    (λ index →
+      BC.re (Dirichlet.dirichletPartial terms s index))
+    (BC.re (regionDirichletValue terms Region bound s inside)))
+  ×
+  (Seq._ConvergesTo_
+    (λ index →
+      BC.im (Dirichlet.dirichletPartial terms s index))
+    (BC.im (regionDirichletValue terms Region bound s inside)))
+regionValueConvergesCoordinatewise terms Region bound s inside =
+  Dirichlet.dirichletPartialConverges terms s
+    (regionPointwiseMajorant terms Region bound s inside)
