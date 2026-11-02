@@ -1,0 +1,26 @@
+{
+  "schema": "dashi.kitzerow-bh4-claim-ledger.v1",
+  "authority": "candidate-DASHI-reconstruction-not-primary-transcription",
+  "claims": [
+    {
+      "source_id": "SRC-KIT-2024-08",
+      "source_locator": "DASHI/Biology/KitzerowBH4SystemNongNangMaxCutExact.agda: EDGE-BH4-NOS-COUPLING; original preprint page/figure not pinned",
+      "repo_reconstruction_owner": "DASHI.Biology.KitzerowBH4SystemNongNangMaxCutExact",
+      "subject": "BH4/BH2/redox state",
+      "predicate": "proposed influence on",
+      "object": "NOS coupling and nitric oxide/superoxide outputs",
+      "status": "source-reconstruction-candidate",
+      "independent_primary_text_verification": false
+    },
+    {
+      "source_id": "SRC-KIT-2024-08",
+      "source_locator": "DASHI/Biology/KitzerowBH4SystemNongNangMaxCutExact.agda: AAAH competition edge; original preprint page/figure not pinned",
+      "repo_reconstruction_owner": "DASHI.Biology.KitzerowBH4SystemNongNangMaxCutExact",
+      "subject": "shared BH4 availability",
+      "predicate": "proposed resource-allocation interaction",
+      "object": "AAAH, NOS and AGMO branches",
+      "status": "source-reconstruction-candidate",
+      "independent_primary_text_verification": false
+    }
+  ]
+}
