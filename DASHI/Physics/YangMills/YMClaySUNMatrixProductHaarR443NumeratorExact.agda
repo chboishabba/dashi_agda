@@ -20,13 +20,15 @@ module DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact wher
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; -ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using
+  (ℝ; 0ℝ; -ℝ_; _≤ℝ_; _<ℝ_)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as Gibbs
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as ProductC3
 import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
@@ -66,18 +68,59 @@ module _
           (Weld.nativeForwardC3Bonds links)
         ≡ Gibbs.nativeSUNWilsonAction theory traceData beta links
 
-      -- Existing finite integration law package on the exact product-Haar
-      -- Gibbs measure; not a second, independently selected finite measure.
-      integrationLaws : Finite.PhysicalFiniteMeasureIntegrationLaws physicalMeasure
+      -- Reuse one-link ordered laws; all 1024-link laws are derived below.
+      oneLinkOrdered : Ordered.OneLinkOrderedHaarAlgebra oneLink
+
+      -- The existing real exponent is strictly positive. The minimal
+      -- order embedding < -> <= is explicit because RealAnalysisAxioms
+      -- currently exposes no strict-to-weak lemma.
+      strictPositiveIsNonnegative : ∀ {value} →
+        0ℝ <ℝ value → 0ℝ ≤ℝ value
 
   open PhysicalC3ActionBoundary public
+
+  nativePhysicalIntegrationLaws :
+    (boundary : PhysicalC3ActionBoundary) →
+    Finite.PhysicalFiniteMeasureIntegrationLaws physicalMeasure
+  nativePhysicalIntegrationLaws boundary = record
+    { Finite.PhysicalFiniteMeasureIntegrationLaws.densityNonnegative =
+        λ links →
+          strictPositiveIsNonnegative boundary
+            (Gibbs.nativeSUNWilsonGibbsDensityStrictlyPositive
+              theory traceData exponential beta links)
+    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralCongruent =
+        λ left right equality →
+          ProductC3.productIntegralCongruent oneLink
+            (λ vector → left (ProductC3.decode codec vector))
+            (λ vector → right (ProductC3.decode codec vector))
+            (λ vector → equality (ProductC3.decode codec vector))
+    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralZero =
+        Ordered.productIntegralZero oneLink (oneLinkOrdered boundary)
+    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralAdd =
+        λ left right →
+          Ordered.productIntegralAdd oneLink (oneLinkOrdered boundary)
+            (λ vector → left (ProductC3.decode codec vector))
+            (λ vector → right (ProductC3.decode codec vector))
+    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralScale =
+        λ scalar observable →
+          Ordered.productIntegralScale oneLink (oneLinkOrdered boundary)
+            scalar
+            (λ vector → observable (ProductC3.decode codec vector))
+    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralPositive =
+        λ observable pointwise →
+          Ordered.productIntegralPositive oneLink (oneLinkOrdered boundary)
+            (λ vector → observable (ProductC3.decode codec vector))
+            (λ vector → pointwise (ProductC3.decode codec vector))
+    ; Finite.PhysicalFiniteMeasureIntegrationLaws.partitionFunctionIsDensityIntegral =
+        refl
+    }
 
   nativeProductHaarR443 :
     (boundary : PhysicalC3ActionBoundary) →
     R443.WilsonGibbsHaarAction
       {Configuration = Native.SUNSideFourLinks N theory}
       {Action = SpatialC3}
-      physicalMeasure (integrationLaws boundary)
+      physicalMeasure (nativePhysicalIntegrationLaws boundary)
   nativeProductHaarR443 boundary = record
     { R443.WilsonGibbsHaarAction.actConfiguration =
         λ c3 links → Weld.nativeForwardC3Bonds links
