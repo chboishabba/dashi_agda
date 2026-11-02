@@ -31,7 +31,7 @@ module DASHI.Analysis.BishopRiemannDirichletExponentialTermExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 import Data.Nat.Properties as NatP
-open import Data.Nat.Base using (_≤_; _<_; _≥_; NonZero; z≤n)
+open import Data.Nat.Base using (_≤_; _<_; _≥_; NonZero; z≤n; s≤s)
 open import Data.Integer.Base as Int using (+_; +<+)
 open import Data.Rational.Unnormalised as Rat using (_/_; 0ℚᵘ; 1ℚᵘ; _<_)
 import Data.Rational.Unnormalised.Properties as RatP
@@ -890,3 +890,61 @@ sourceExponentTwoUniformLimitError
     (Dirichlet.imagDirichletConvergent
       terms sourceExponentTwo majorant)
     k m mPast
+
+
+------------------------------------------------------------------------
+-- K04d REGION / ORIGINAL COEFFICIENT RADIUS:
+-- the NAT-recipient exp(-log(n+1)) lies in the closed unit interval.
+--
+-- This uses the original ℚᵘ positive rational reciprocal bound and
+-- the already compiled inverse-from-Cauchy-product theorem. The only
+-- unproved input is the TRUE selected exp(log(n+1))=n+1 equation.
+-- Unlike an unspecified generic modulus authority, this is actual
+-- Bishop order for the actual exp/log coefficients at every Nat n.
+------------------------------------------------------------------------
+
+sourceNatReciprocalNonnegative :
+  (n : Nat) →
+  R.NonNegative (R._⋆ (BaselNat.reciprocalNatRational n))
+sourceNatReciprocalNonnegative n =
+  RP.0≤x⇒nonNegx
+    (RP.p≤q⇒p⋆≤q⋆
+      Rat.0ℚᵘ
+      (BaselNat.reciprocalNatRational n)
+      (RatP.nonNegative⁻¹ (BaselNat.reciprocalNatRational n)))
+
+sourceNatReciprocalBelowOrEqualOneRational :
+  (n : Nat) →
+  Rat._≤_ (BaselNat.reciprocalNatRational n) Rat.1ℚᵘ
+sourceNatReciprocalBelowOrEqualOneRational n =
+  Rat.*≤* (Int.+≤+ (s≤s z≤n))
+
+sourceNatReciprocalBelowOrEqualOne :
+  (n : Nat) →
+  R._≤_ (R._⋆ (BaselNat.reciprocalNatRational n)) R.1ℝ
+sourceNatReciprocalBelowOrEqualOne n =
+  RP.p≤q⇒p⋆≤q⋆
+    (BaselNat.reciprocalNatRational n)
+    Rat.1ℚᵘ
+    (sourceNatReciprocalBelowOrEqualOneRational n)
+
+sourceNatLogNegativeExponentialUnitInterval :
+  (logNat : NatLogCandidate) (n : Nat) →
+  R._≃_ (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  (R.NonNegative (Exp.bishopExp (R.- (logNat n))))
+  ×
+  (R._≤_ (Exp.bishopExp (R.- (logNat n))) R.1ℝ)
+sourceNatLogNegativeExponentialUnitInterval logNat n inverseLaw =
+  RP.0≤x⇒nonNegx
+    (RP.≤-respʳ-≃
+      (RP.≃-symm
+        (negativeExponentialAtNatLogIsEmbeddedReciprocal
+          logNat n inverseLaw))
+      (RP.nonNegx⇒0≤x
+        (sourceNatReciprocalNonnegative n)))
+  ,
+  RP.≤-respˡ-≃
+    (negativeExponentialAtNatLogIsEmbeddedReciprocal
+      logNat n inverseLaw)
+    (sourceNatReciprocalBelowOrEqualOne n)
