@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact where
 
 ------------------------------------------------------------------------
@@ -15,7 +14,7 @@ module DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact where
 -- site-bond coordinate codec, or identify the source Gibbs cutoff family.
 -- Fubini and single-link Haar are explicit mathematical prerequisites.
 --
--- Classical compact Haar/Fubini; see B. C. Hall, "Lie Groups, Lie Algebras,
+-- Classical compact Haar/Fubini (no assumption of global link permutation); see B. C. Hall, "Lie Groups, Lie Algebras,
 -- and Representations", 2nd ed., Springer 2015,
 -- DOI 10.1007/978-3-319-13467-3.
 -- DASHI owns this elementary finite-vector induction/commuting square.
