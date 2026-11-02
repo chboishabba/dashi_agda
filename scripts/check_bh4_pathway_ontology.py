@@ -22,6 +22,9 @@ def fixture():
             "rhea_release_reference": "2026_03", "source_uniprot_panel": "sha256:test",
             "reactions": [{"rhea_id": "RHEA:19897", "formula_charge_ready": True,
                            "participant_sparql_response_sha256": "sha256:rxn",
+                           "raw_sha256": "sha256:rhea-rest",
+                           "row": {"Gene Ontology": "GO:0001234",
+                                   "Cross-reference (Reactome)": "R-HSA-12345"},
                            "participants": [
                                {"chebi_id": "CHEBI:123", "side": "substrate", "coefficient": 1},
                                {"chebi_id": "CHEBI:456", "side": "product", "coefficient": 1}
@@ -73,7 +76,10 @@ def main() -> int:
     assert result["species"][0]["compartment"] is None
     assert result["promotion_boundary"]["ontology_match_pays_flux"] is False
     ld = jsonld(result)
-    assert len(ld["@graph"]) == 4
+    assert len(result["ontology_cross_references"]) == 2
+    assert {x["target"]["namespace"] for x in result["ontology_cross_references"]} == {"go", "reactome"}
+    assert all(not x["same_biological_event_verified"] for x in result["ontology_cross_references"])
+    assert len(ld["@graph"]) == 6
     assert all("owl:sameAs" not in str(node) for node in ld["@graph"])
     bad = deepcopy(m); bad["matrix"] = [[-2], [1]]
     rejects(bad, r, x, c)
