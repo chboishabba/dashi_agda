@@ -83,6 +83,20 @@ New `DASHI/Education/DigitalESDCrossCorpusDependencyFrontierExact.agda` defines 
 
 This is useful for testing selective invalidation and explicit nonreachability. But it is **not** the full observed historical dependency graph: new reviewed source interactions may add dependency edges and require revisiting the proof. The Alice source already has the more substantive `DerivedInvalidatedAxis` example, retained by exact owner rather than being repackaged as a new causal result.
 
+## 2026-11-02 stronger full sixteen-case Alice-to-EfS genealogy
+
+`DASHI/Education/DigitalESDAllSourceSupportHyperedgesExact.agda` now makes the previous documentation-derived 55-case-source lookup into **source-written Agda**, without manual paper IDs:
+
+- `canonicalRowFor : TransferablePedagogicalPrinciple → TransferablePrincipleRow` reuses precisely the seven existing `DigitalESDTransferablePedagogicalPrinciplesExact` rows. `rowIsExactlyPrinciple`, `rowSourceIsBound` and `rowStillCandidate` prove the canonical row's principle identity and candidate/source role.
+- `CasePrincipleGenealogy c` requires equality of the row's principle to the bridge's actual digital principle, exact equality of the original source-support list, canonical EfS URL equality and candidate flags.
+- `AppearsIn paper xs` is a dependent membership proof over the **actual original `PaperReference` values**; `enumerateOriginalSupports` constructs those witnesses for every support in the canonical source list rather than matching author/title/DOI Strings.
+- `CaseSourceIncidence c` is an actual typed original-paper membership cell. `allSixteenSourceGenealogies` is derived directly by mapping this constructor over `EfS.canonicalSourceCases`.
+- `allSixteenCasesRetained : length ... ≡ 16` and `sourceGenealogyIncidencesAreFiftyFive : allSourceIncidenceCount ≡ 55` are **source-written `refl` proofs**. Kernel check is still outstanding. A regression checks the original EcoCOIL support list contains three entries.
+
+This means the **entire 16-case candidate source-genealogy layer is now structurally instantiated** and can preserve the original Alice paper identity instead of remaining a printed prose join. Source membership is *not* a reviewed source passage, actual finding, causal effect or empirical support for sustainability. None of K02/K03 human/source evidence payments can be bypassed by these 55 cells.
+
+The cross-corpus lens also consumes the original `HyperfabricIntersectionalBodyMemoryBridge` and its full canonical certificate, plus the Crenshaw-motivated non-additive `IntersectionalInteractionAdmission`. It now includes the actual `Feminist.positiveRechartingStrictlyRefinesInheritedChart` witness: the supplied positive residual must split a collision in the inherited observer. This is mathematical/representational refinement, **not** proof that any participant experienced a measured intersectional, clinical, feminist or ecological outcome.
+
 ## 5. Max-cut remaining statuses and evidence gates
 
 | Cut | Current state after this cut | Exact outstanding evidence / work |
