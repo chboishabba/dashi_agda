@@ -27,10 +27,11 @@ open import Data.List.Base as List using (List; []; _∷_; _++_; length)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Product using (Σ; _,_)
 open import Data.Bool.Base using (T)
-open import Relation.Binary.PropositionalEquality using (cong; sym; subst)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 
 import Data.Vec.Base as Vec
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 import DASHI.Mathematics.Complexity.Karp21FiniteCliqueVertexCoverCombinedExact as Finite
 
@@ -135,3 +136,26 @@ n21PackedCertificateYESIff graph =
     (wordAcceptanceComplete graph)
     (λ { (bits , accepted) →
       wordAcceptanceSound graph bits accepted })
+
+
+------------------------------------------------------------------------
+-- N21's exact n-bit certificate bound on the SAME canonical size
+-- metric used by K00 and the generic polynomial-cost interfaces.
+-- Two separately inherited list-length definitions are identified by
+-- induction, not assumed judgmentally equal on abstract words.
+------------------------------------------------------------------------
+
+canonicalWordLengthMatchesListLength :
+  (bits : List Bool) →
+  Word.encodingSize bits ≡ length bits
+canonicalWordLengthMatchesListLength [] = refl
+canonicalWordLengthMatchesListLength (bit ∷ bits) =
+  cong suc (canonicalWordLengthMatchesListLength bits)
+
+cutCertificateCanonicalBitWordLength :
+  ∀ {n} (labels : Vec.Vec Bool n) →
+  Word.encodingSize (encodeCutLabels labels) ≡ n
+cutCertificateCanonicalBitWordLength labels =
+  trans
+    (canonicalWordLengthMatchesListLength (encodeCutLabels labels))
+    (cutCertificateWordLength labels)
