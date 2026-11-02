@@ -1067,3 +1067,167 @@ Remaining mathematical max-cut is K04d configured exp/log inverse,
 literal complex regional Basel domination and continuity/actual
 zeta same object; K05 full signed-factorial addition and
 Machin quarter-angle independent trigonometric π uniqueness.
+
+
+## 2026-11-02 K04d/K05 exact-source max-cut follow-on (uniform to-limit and origin laws)
+
+Implementation branch: `feat/twin-prime-six-wheel-bounded-gap-reuse-20261028`,
+PR #1408. This tranche explicitly searched the existing repo
+`InOpenUnitInterval`, `negativeLogOneMinus`, `expLog`,
+`logarithmExponentialInverse`, `ZetaHalfPlaneLayer`,
+`realPartGreaterThanOne`, `dirichletValue`, `sinAdd`,
+`cosAdd`, `BishopFiniteCauchy`, `quarterAngle`,
+`Machin tangent`, `BishopExponentialFiniteCauchyCoefficient`,
+`BishopExponentialBinomialCoefficient`, and
+`BishopMachinZetaSequentialContinuityReducerExact` owners.
+
+### K05 / concrete Round11 addition boundary paid
+
+Commits `f880f20a4a1eba52cc3f3e683c8cf3feb1c8028f`,
+`4ad768bbeac663ad830ce26c23d221fc1fed199e`
+extend the existing original
+`DASHI/Foundations/BishopRound11TrigAtZeroExact.agda`:
+
+- `round11SineAdditionRightZero`,
+  `round11CosineAdditionRightZero`,
+  `round11SineAdditionLeftZero`,
+  `round11CosineAdditionLeftZero`: both actual configured
+  Round11 sine/cosine addition formulas at zero on either side.
+  These compose existing ORIGINAL signed-factorial
+  `round11SineAtZero`/`round11CosineAtZero`, native
+  `bishopSinCongruent`/`bishopCosCongruent` and the pinned
+  Bishop real ring solver; no general addition theorem assumed.
+- `round11SineAdditionOpposite`: actual anti-diagonal
+  `sin_B(x+(-x)) ≃ sin_B(x)cos_B(-x)+cos_B(x)sin_B(-x)`
+  compiled from ORIGINAL `BalabanBishopSeriesParityAndLimitExact`
+  parity lemmas, zero-angle theorem and ring normalization.
+- `round11CosineAdditionOppositeFromPythagorean` makes
+  the counterpart precisely conditional on the actual
+  same-object Pythagorean equation at x. This is a reduction,
+  NOT an independent proof of `cosAdd` or Pythagorean.
+
+**Do not mark full K05 closed.** The arbitrary x,y
+signed-factorial Cauchy coefficient identities and subsequent
+Mertens/finite-wing limit passage remain genuine obligations.
+The earlier `PowerSeriesTranscendentals.TrigonometricFunctionalLaws`
+has `sinAdd`/`cosAdd` as *input fields*, not constructed
+inhabitants for selected Round11. Next: instantiate existing
+`BishopExponentialFiniteCauchyCoefficientExact`,
+`BishopExponentialBinomialCoefficientExact`,
+`BishopFiniteCauchyRowReindexExact` and
+`BishopFiniteCauchyWingAbsoluteBoundExact` for the concrete
+sine/cosine parity coefficients; prove actual quarter-angle
+tangent/branch and independent trigonometric pi uniqueness.
+
+### K04d / strengthened quantitative uniform-to-limit compiler
+
+Commit `48601aa0b7966a5fbafa03d818e8fa64e4e4f9b5`
+extends `BishopDirichletUniformBaselTailsExact.agda` with:
+
+- `partialMinusIsFiniteTail` for the vendor's *actual*
+  `Sequence.∑` operator;
+- `baselDominatedUniformLimitError`: once the original
+  Bishop sequence is proved convergent by the ORIGINAL
+  `BishopBaselReciprocalSquareConvergenceExact`
+  comparison owner and terms are dominated pointwise
+  by `baselTerm`, the SAME `baselUniformTailCutoff`
+  proves `|lim - partialSum_m| ≤ 1/k` uniformly for
+  all m beyond that cutoff, using genuine vendor
+  subsequence limit, absolute-value continuity,
+  and order closure under limits.
+- `regionRealUniformLimitError` and
+  `regionImagUniformLimitError`: the one cutoff
+  controls BOTH source Cartesian coordinates and EVERY
+  point of any region satisfying the explicit
+  `RegionBaselDomination` premise.
+
+This now goes beyond finite-tail Cauchy control to a
+*common uniform actual-limit error modulus*. It does
+NOT construct `RegionBaselDomination` for the original
+selected Machin neighborhood, and it does NOT prove
+continuity of arbitrary `ZetaHalfPlaneLayer` values.
+
+Commit `c0800b29a32a93698cab7e77e74a7094ab83b0e9`
+uses original `BishopMachinPiRationalWindowExact`
+`threeBelowMachinPi` to establish
+`twoBelowMachinBishopPi` and
+`machinSourceRealPartAboveTwo` for the ACTUAL Bishop
+Machin real in the ACTUAL Riemann pair carrier.
+
+Commit `3e924d3e16f4866a8ab277104dbe276ef2c1e8cf`
+adds `sourceExponentTwoUniformLimitError`:
+at s=2, the actual configured Round11 complex exponential
+Dirichlet sum has both coordinate limit errors bounded
+by the common `1/k` after the Basel cutoff, conditional
+on the genuine original source exp/log inverse.
+
+### Source-observed limits of reuse (do not silently promote)
+
+- `BishopElementaryPowerSeriesData.InOpenUnitInterval`
+  is a *free configured predicate*, not definitionally
+  `0<x<1`. The previously proved true rational/Bishop
+  inequalities need a selected field-bridge or a concrete
+  source-native configured record to inhabit it.
+- The original generic `InverseLogarithmFromExponential`
+  uses `expOntoPositive` as a field of a generic
+  exponential package. Its constructed inverse is **not
+  proven equal to the selected original Bishop
+  `bishopNegativeLogOneMinus` series**. It cannot
+  close K04d-LOG without same-object transport.
+- `RiemannAnalyticSubstrate.ZetaHalfPlaneLayer` exposes
+  `zetaHalfPlane` and `realPartGreaterThanOne`
+  as free abstract fields. Existing Dirichlet sum
+  comparison and its uniform limit modulus cannot prove
+  pointwise equality with an arbitrary selected
+  `zetaHalfPlane`; actual function identification
+  and finite-term continuity are still required.
+- `PowerSeriesTranscendentals.TrigonometricFunctionalLaws`
+  has `sinAdd` and `cosAdd` as unfilled **fields**;
+  the abstract generic log-exponential and trig package
+  is not native proof of selected Round11 functions.
+
+### Remaining exact post-max-cut gates
+
+1. **K04d-LOG-INSTANCE**: instantiate selected
+   `InOpenUnitInterval` from actual Bishop strict
+   inequalities; prove the original positive-successor
+   `exp_B(L((n+1)/(n+2)))≃n+2`, where
+   `L(x)=-log(1-x)` is the actual negative-log series,
+   not a generic inverse.
+2. **K04d-REGION-DOMINATION**: native
+   `|Re/Im(expC(-s*L_n))|≤BaselTerm n` for every n
+   and every complex s in a selected neighborhood
+   of Machin with Re(s)≥2 (a strict Re(s)>2
+   interior is already established at Machin).
+   The quantitative common cutoff and to-limit
+   bound **are paid conditional on this bound**.
+3. **K04d-FINITE-CONTINUITY**: prove native exp/sin/cos
+   term continuity in Bishop s for each fixed n;
+   combine with now-available uniform limit error
+   to obtain epsilon/delta continuity of the actual
+   constructed Dirichlet sum.
+4. **K04d-ZETA-SAME-OBJECT**: identify concrete
+   half-plane series and actual function value of
+   ORIGINAL `ZetaHalfPlaneLayer.zetaHalfPlane`,
+   including real domain predicate and the original
+   completed-zeta continuation value. Do not use
+   a generic opaque `ZetaEqualsDirichletSeries`
+   Set as if it were this same-object theorem.
+5. **K05-GENERAL-ADD**: actual signed-factorial
+   convolution coefficient equations and full
+   x+y sine/cosine addition, then native arctangent
+   derivative/inverse tangent identity, positive
+   branch and independent trigonometric pi uniqueness.
+6. **KERNEL**: all above new declarations are
+   SOURCE-WRITTEN; zero literal Agda proof holes
+   in changed files was checked by source readback,
+   but no Agda kernel or CI was run (per user direction).
+   No kernel-accepted theorem receipt is claimed.
+
+Historical attribution: John Machin; Dirichlet and
+Bernhard Riemann; Errett Bishop and Douglas Bridges;
+Zachary Murray's Agda constructive analysis;
+Viktor Csimma's pinned `vendor/bishop`; earlier
+DASHI source theorem owners. New source composition
+in this tranche is attributed to DASHI, not silently
+credited to an external theorem as an Agda proof.
