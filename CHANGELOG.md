@@ -1,3 +1,11 @@
+## 2026-11-03 — source-first all-gate audit; concrete complex adjoint trace and original gauge Haar
+
+- Searched all 6 physical gates by exact named symbols and nearby legacy terminology in `dashi_agda`, plus inspected the actual 291 changed files of Lean PR #15 and direct source theorem statements on the PR head; retrieved source-level CMP119, CMP116, marked R445 and real same-H OS owners.
+- `YMClayConstructedComplexFiniteAdjointTraceExact`: real trace equality for concrete Fin-indexed complex conjugate transpose, normalized version, same-object adapter to certified matrix theory. Actual physical N matrix/determinant and legacy scalar identity remain explicit.
+- `YMClaySUNProductHaarGaugeFromOneLinkExact`: derive all finite-link gauge Haar invariance from one-link left/right invariance. `YMClaySUNProductHaarNativeGaugeR443Exact`: apply it to literal periodic SUN gauge transformations and selected Wilson Gibbs numerator/normalized expectation, using original source-native Wilson action and R431, not a duplicate theorem. Codec naturality remains explicit.
+- Refactored original physical R443 integration laws into reusable `nativePhysicalIntegrationLawsFromOneLink` so local gauge and spatial C3 share exactly the same selected finite Gibbs measure. All new modules imported into `DASHI.Unified.BalabanRGTOERegression`.
+- R445 preferred marked moment, compact containment and Prokhorov machinery; R320 selected common J radius and canonical R406; real CMP119 R333 same reconstructed Hamiltonian all exist as **conditional compilers**. Source physical estimates/realizations remain open. No kernel or CI run; source-written only. Preserve original mathematical and DASHI/Lean attribution.
+
 ## 2026-11-02 — native real SU(N) six-plane spatial C3 source proof reduced to adjoint ReTr
 
 - Reused group-generic `BalabanClayGate4PeriodicPathInverseBianchiExact.pathHolonomyReverseOpposite` and original six-plane periodic source to prove actual SU(N) swapped plaquette = inverse holonomy on native links.
