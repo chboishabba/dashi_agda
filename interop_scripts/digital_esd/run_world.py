@@ -595,6 +595,48 @@ def rebuild_processing_ledger(
     return processing
 
 
+def audit_study_parts_when_supplied(artifact_root: Path) -> dict[str, Any]:
+    """Check a reviewed-source study-part manifest if one was provided.
+
+    This is a bounded, read-only projection of already decomposed research
+    objects. Metadata acquisition or the generic PNF parser must never
+    generate a fake study-part world. Without a manifest, report the gap.
+    """
+    manifest = artifact_root / "review" / "study-part-axis-world.json"
+    if not manifest.is_file():
+        return {
+            "status": "study-decomposition-manifest-not-supplied",
+            "candidate_only": True,
+            "empirical_world_admitted": False,
+        }
+
+    audit_path = artifact_root / "slr-parse" / "study-part-axis-world-audit.json"
+    run(
+        [
+            sys.executable,
+            str(HERE / "audit_open_axis_study_world.py"),
+            "--input",
+            str(manifest),
+            "--output",
+            str(audit_path),
+        ],
+        cwd=DASHI_ROOT,
+    )
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    if not isinstance(audit, dict):
+        raise ValueError("open-axis world audit must return a JSON object")
+    return {
+        "status": "declared-part-axis-coverage-structurally-audited",
+        "audit_reference": str(audit_path),
+        "audit_sha256": sha256_file(audit_path),
+        "declared_study_part_count": audit["declared_study_part_count"],
+        "axis_count": audit["axis_count"],
+        "connected_component_count": len(audit["connected_components_over_declared_parts"]),
+        "candidate_only": True,
+        "empirical_world_admitted": False,
+    }
+
+
 def main() -> int:
     slr_root = resolve_slr_root()
     artifact_root = resolve_artifact_root(slr_root)
@@ -636,6 +678,7 @@ def main() -> int:
     receipt["flat_json_is_canonical_runtime_state"] = False
     receipt["corpus_wide_json_graph_emitted"] = False
     receipt["legacy_scholarly_parser_invoked"] = False
+    receipt["open_axis_study_part_audit"] = audit_study_parts_when_supplied(artifact_root)
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0
 
