@@ -19,6 +19,7 @@ open import Agda.Builtin.Nat using (Nat; suc; _*_; _+_)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Base as Nat using (_≤_; NonZero)
 open import Data.Nat.Solver using (module +-*-Solver)
+import Data.Integer.Solver as ZRing
 open +-*-Solver using (solve; _:*_; con; _:=_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst)
 open import Data.Rational.Unnormalised as Q using (ℚᵘ; _/_; _≤_; _≃_; _+_; *≡*)
@@ -26,6 +27,7 @@ open import Data.Integer.Base using (+_)
 
 import Real as R
 import RealProperties as RP
+import Data.Rational.Unnormalised.Properties as QP
 
 import DASHI.Analysis.BishopMachinGeometricEnvelopeNatExact as Cross
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact as Fractions
@@ -236,3 +238,70 @@ sourceCommonBishopBelowGeometric n =
     (sourceCommonRationalEnvelope n)
     (sourceGeometricRationalEnvelope n)
     (sourceCommonRationalBelowGeometric n)
+
+
+------------------------------------------------------------------------
+-- FULL UNNORMALISED SOURCE RATIONAL ADDITION WELD.
+--
+-- The numerator and denominator of Q._+_ are the original
+-- unnormalised integer cross products; the solver proves their
+-- equality without cancellation of a variable denominator.
+-- Hence this is a same-object result, not merely the factorized
+-- Nat inequality.
+------------------------------------------------------------------------
+
+module SourceRatRing = ZRing.+-*-Solver
+  using (solve; _:+_; _:*_; con; _:=_)
+
+sourceOmittedRationalIsCommonRational : (n : Nat) →
+  Q._≃_
+    (sourceOmittedRationalEnvelope n)
+    (sourceCommonRationalEnvelope n)
+sourceOmittedRationalIsCommonRational n =
+  Q.*≡*
+    (SourceRatRing.solve 3
+      (λ odd p q →
+        ((SourceRatRing.con (+ 16)
+          SourceRatRing.:* ((odd SourceRatRing.:*
+            SourceRatRing.con (+ 239)) SourceRatRing.:* q))
+          SourceRatRing.:+
+          (SourceRatRing.con (+ 4)
+            SourceRatRing.:* ((odd SourceRatRing.:*
+              SourceRatRing.con (+ 5)) SourceRatRing.:* p)))
+        SourceRatRing.:*
+          (((((odd SourceRatRing.:* SourceRatRing.con (+ 5))
+            SourceRatRing.:* SourceRatRing.con (+ 239))
+            SourceRatRing.:* p) SourceRatRing.:* q))
+        SourceRatRing.:=
+        (((SourceRatRing.con (+ 3824) SourceRatRing.:* q)
+          SourceRatRing.:+
+          (SourceRatRing.con (+ 20) SourceRatRing.:* p))
+          SourceRatRing.:*
+          (((odd SourceRatRing.:* SourceRatRing.con (+ 5))
+            SourceRatRing.:* p)
+            SourceRatRing.:*
+            ((odd SourceRatRing.:* SourceRatRing.con (+ 239))
+              SourceRatRing.:* q))))
+      refl
+      (+ suc (2 * n))
+      (+ Cross.pow25 n)
+      (+ Cross.pow57121 n))
+
+sourceOmittedRationalBelowGeometric : (n : Nat) →
+  Q._≤_
+    (sourceOmittedRationalEnvelope n)
+    (sourceGeometricRationalEnvelope n)
+sourceOmittedRationalBelowGeometric n =
+  QP.≤-respˡ-≃
+    (sourceOmittedRationalIsCommonRational n)
+    (sourceCommonRationalBelowGeometric n)
+
+sourceOmittedBishopBelowGeometric : (n : Nat) →
+  R._≤_
+    (R._⋆ (sourceOmittedRationalEnvelope n))
+    (R._⋆ (sourceGeometricRationalEnvelope n))
+sourceOmittedBishopBelowGeometric n =
+  RP.p≤q⇒p⋆≤q⋆
+    (sourceOmittedRationalEnvelope n)
+    (sourceGeometricRationalEnvelope n)
+    (sourceOmittedRationalBelowGeometric n)
