@@ -38,6 +38,7 @@ import Sequence as Seq
 import Data.Rational.Unnormalised.Properties as QP
 
 import DASHI.Analysis.BishopMachinGeometricEnvelopeNatExact as Cross
+import DASHI.Analysis.BishopMachinCombinedRemainderBoundExact as Combined
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Stage
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
@@ -589,3 +590,30 @@ sourceOriginalOmittedBishopBelowGeometric n =
   RP.≤-respˡ-≃
     (sourceWeightedOmittedIsEmbeddedOriginalFraction n)
     (sourceOmittedBishopBelowGeometric n)
+
+
+------------------------------------------------------------------------
+-- K04b-DENOM: THE COMPLETE ALTERNATIVE SOURCE-NATIVE BISHOP BOUND.
+--
+-- The left side is the ACTUAL convergent Machin real and original
+-- rational finite stages from the source owner. The right side is
+-- the LITERAL unnormalised rational fraction 4/25^n embedded into
+-- the pinned Bishop real carrier, not a normalized synthetic bound.
+-- This composition consumes every proved prior lemma:
+-- first omitted actual two-term Bishop estimate, absolute-value
+-- and rational odd-power equivalences, original fraction equality,
+-- positive-denominator Nat inequality, rational-to-Bishop transport.
+------------------------------------------------------------------------
+
+machinActualCrossDenominatorFourOver25 :
+  (n : Nat) →
+  R._≤_
+    (R.∣_∣
+      (R._-_
+        Machin.bishopMachinPi
+        (R._⋆ (Stage.qMachinStage n))))
+    (R._⋆ (sourceGeometricRationalEnvelope n))
+machinActualCrossDenominatorFourOver25 n =
+  RP.≤-trans
+    (Combined.machinRationalAllStagesRemainder n)
+    (sourceOriginalOmittedBishopBelowGeometric n)
