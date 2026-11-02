@@ -41,6 +41,7 @@ import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as Gibbs
+import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGaugeInvariantExact as GaugeAction
 
 -- Dependent signed edge with its ACTUAL original periodic endpoint.
 -- This is exactly the +/- native Balaban bond move, not a second graph.
@@ -206,3 +207,45 @@ nativeSixAtSiteIsCanonicalSUNWilsonAction :
 nativeSixAtSiteIsCanonicalSUNWilsonAction theory traceData bonds site =
   canonicalNativeSUNWilsonSelectedListExact theory traceData bonds
     site (Plaquette.ownedPeriodicPlaquettes site)
+
+
+------------------------------------------------------------------------
+-- Exact original global six-plane action = the canonical existing
+-- SUNWilsonAction site fold, with the literal 4^4 periodic site sum.
+-- This eliminates an independent "generic SUN vs native SUN" action equality
+-- at the selected R443/R445 finite source.
+------------------------------------------------------------------------
+
+canonicalSUNSixWilsonDeficit :
+  ∀ {Matrix Complex : Set} {N : Nat}
+    (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+    (traceData : Trace.SUNMatrixRealTrace {Scalar = ℝ} theory) →
+  Native.SUNSideFourLinks N theory → ℝ
+canonicalSUNSixWilsonDeficit theory traceData bonds =
+  Gibbs.sumSitesReal
+    (λ site →
+      Wilson.sunWilsonAction
+        (canonicalNativeSiteSUNWilsonData theory traceData site)
+        (sunNativeSignedGaugeField theory bonds))
+
+nativeSixGlobalIsCanonicalSUNWilsonAction :
+  ∀ {Matrix Complex : Set} {N : Nat}
+    (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+    (traceData : Trace.SUNMatrixRealTrace {Scalar = ℝ} theory)
+    (bonds : Native.SUNSideFourLinks N theory) →
+  canonicalSUNSixWilsonDeficit theory traceData bonds
+  ≡ Gibbs.nativeSUNSixWilsonDeficit theory traceData bonds
+nativeSixGlobalIsCanonicalSUNWilsonAction theory traceData bonds =
+  GaugeAction.sumSitesRealCong _ _
+    (nativeSixAtSiteIsCanonicalSUNWilsonAction theory traceData bonds)
+
+nativeSUNBetaActionIsCanonicalWilsonAction :
+  ∀ {Matrix Complex : Set} {N : Nat}
+    (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+    (traceData : Trace.SUNMatrixRealTrace {Scalar = ℝ} theory)
+    (beta : ℝ) (bonds : Native.SUNSideFourLinks N theory) →
+  beta *ℝ canonicalSUNSixWilsonDeficit theory traceData bonds
+  ≡ Gibbs.nativeSUNWilsonAction theory traceData beta bonds
+nativeSUNBetaActionIsCanonicalWilsonAction theory traceData beta bonds =
+  cong (beta *ℝ_)
+    (nativeSixGlobalIsCanonicalSUNWilsonAction theory traceData bonds)
