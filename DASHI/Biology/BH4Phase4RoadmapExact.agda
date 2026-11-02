@@ -21,6 +21,12 @@ currentBH4Phase : BH4Phase
 currentBH4Phase = systemStateQuantitativePhase
 
 data BH4Phase4Residual : Set where
+  pinKitzerowPrimaryPathwayEdges : BH4Phase4Residual
+  auditKitzerowPathwayAgainstFinitePanel : BH4Phase4Residual
+  acquireVersionedPathwayOntologyCrossReferences : BH4Phase4Residual
+  payCompartmentContextForInteroperableModel : BH4Phase4Residual
+  validateSBMLBioPAXGOCAMExports : BH4Phase4Residual
+  reconcileKitzerowBranchStack : BH4Phase4Residual
   resolveNonFiniteMTORProteinReactionRepresentation : BH4Phase4Residual
   executeFluxPaymentPreparation : BH4Phase4Residual
   executeProteinAbundanceContextAcquisition : BH4Phase4Residual
@@ -43,7 +49,13 @@ data BH4Phase4Residual : Set where
 
 livePhase4Residuals : List BH4Phase4Residual
 livePhase4Residuals =
-  resolveNonFiniteMTORProteinReactionRepresentation
+  pinKitzerowPrimaryPathwayEdges
+  ∷ auditKitzerowPathwayAgainstFinitePanel
+  ∷ acquireVersionedPathwayOntologyCrossReferences
+  ∷ payCompartmentContextForInteroperableModel
+  ∷ validateSBMLBioPAXGOCAMExports
+  ∷ reconcileKitzerowBranchStack
+  ∷ resolveNonFiniteMTORProteinReactionRepresentation
   ∷ executeFluxPaymentPreparation
   ∷ executeProteinAbundanceContextAcquisition
   ∷ executeExchangeContextAcquisition
@@ -81,6 +93,15 @@ exchangeContextAcquisitionToolReady = true
 
 jointPaymentLedgerToolReady : Bool
 jointPaymentLedgerToolReady = true
+
+structuralPathwayOntologyExportToolReady : Bool
+structuralPathwayOntologyExportToolReady = true
+
+compartmentAndKineticSBMLExportReady : Bool
+compartmentAndKineticSBMLExportReady = false
+
+authorPathwayPrimaryTextFullyVerified : Bool
+authorPathwayPrimaryTextFullyVerified = false
 
 sabioKineticParameterCount : Nat
 sabioKineticParameterCount = SABIO.executedSABIOKineticParameterCount
