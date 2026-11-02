@@ -130,6 +130,60 @@ dirichletPartialConverges term s bound =
   ,
   proj₂ (imagDirichletConvergent term s bound)
 
+------------------------------------------------------------------------
+-- K04d COHERENCE: THE BISHOP LIMIT IS INDEPENDENT OF THE PROOF
+-- OF BASEL DOMINATION.
+--
+-- A Dirichlet-series value is selected by Sequence.lim from a
+-- convergence witness. Two legitimate witnesses may have different
+-- dominationStart indices and different inequality proofs. The
+-- original Bishop uniqueness-of-limits theorem proves that the
+-- resulting complex values agree in BOTH actual Bishop coordinates.
+-- No proof irrelevance axiom, opaque analytic function or new
+-- summation mechanism is used.
+------------------------------------------------------------------------
+
+dirichletRealValueIndependentOfMajorant :
+  (term : BishopDirichletTermFamily)
+  (s : BC.BishopComplex)
+  (first second : BishopDirichletBaselMajorantAt term s) →
+  R._≃_
+    (BC.re (dirichletValue term s first))
+    (BC.re (dirichletValue term s second))
+dirichletRealValueIndependentOfMajorant term s first second =
+  Seq.uniqueness-of-limits
+    (proj₂ (realDirichletConvergent term s first))
+    (proj₂ (realDirichletConvergent term s second))
+
+dirichletImagValueIndependentOfMajorant :
+  (term : BishopDirichletTermFamily)
+  (s : BC.BishopComplex)
+  (first second : BishopDirichletBaselMajorantAt term s) →
+  R._≃_
+    (BC.im (dirichletValue term s first))
+    (BC.im (dirichletValue term s second))
+dirichletImagValueIndependentOfMajorant term s first second =
+  Seq.uniqueness-of-limits
+    (proj₂ (imagDirichletConvergent term s first))
+    (proj₂ (imagDirichletConvergent term s second))
+
+dirichletValueIndependentOfMajorant :
+  (term : BishopDirichletTermFamily)
+  (s : BC.BishopComplex)
+  (first second : BishopDirichletBaselMajorantAt term s) →
+  (R._≃_
+    (BC.re (dirichletValue term s first))
+    (BC.re (dirichletValue term s second)))
+  ×
+  (R._≃_
+    (BC.im (dirichletValue term s first))
+    (BC.im (dirichletValue term s second)))
+dirichletValueIndependentOfMajorant term s first second =
+  dirichletRealValueIndependentOfMajorant term s first second
+  ,
+  dirichletImagValueIndependentOfMajorant term s first second
+
+------------------------------------------------------------------------
 -- The exact Basel series is already present at the INTEGER 2 point.
 -- This concrete data is not yet the real-variable ζ(π_M); an actual
 -- log/exp n^(-s) model must identify it as one of its fibres.
