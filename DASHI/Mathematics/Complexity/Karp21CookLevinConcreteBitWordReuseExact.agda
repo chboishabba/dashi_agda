@@ -36,6 +36,8 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Bits
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
+import DASHI.Mathematics.Complexity.Karp21CookStrictTripleBitBoundaryExact as Strict
+import Data.Maybe.Base as Maybe
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Tape
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -146,3 +148,25 @@ serializedCookFormulaWordLength states symbols nonempty input steps =
       (guardedCookLevinBitWord states symbols nonempty input steps))
     (Bits.formulaBitCodeLengthExact
       (CL.guardedCookFormula states symbols nonempty input steps))
+
+
+------------------------------------------------------------------------
+-- The actual Cook--Levin output also passes the new strict 3-bit
+-- token parser (as distinct from the legacy tail-dropping decoder).
+------------------------------------------------------------------------
+
+strictSerializedCookWordTokenParse :
+  ∀ {machine : Tape.ConcreteTapeMachine}
+    (states : Canonical.EnumerationCoverage (Tape.finiteState machine))
+    (symbols : Canonical.EnumerationCoverage (Tape.finiteSymbol machine))
+    (nonempty : Rules.NonemptyRuleTable machine)
+    (input : Input.InputWord machine)
+    (steps : Nat) →
+  Strict.strictDecodeThreeTokens
+    (guardedCookLevinBitWord states symbols nonempty input steps)
+  ≡ Maybe.just (Prefix.encodeCookFormula
+      (CL.guardedCookFormula states symbols nonempty input steps))
+strictSerializedCookWordTokenParse states symbols nonempty input steps =
+  Strict.strictCookFormulaTokenRoundTrip
+    (CL.guardedCookFormula states symbols nonempty input steps)
+
