@@ -23,6 +23,7 @@ import Sequence as Seq
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Foundations.BishopConcreteTrigSeriesConvergenceExact as Trig
+import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Analysis.BishopConcreteSineCosineFiniteTermDerivativeExact as Finite
@@ -126,3 +127,113 @@ round11CosineAtZero inputs =
     (Trig.concreteCosineSeriesConverges inputs R.0ℝ)
     (Seq.xₙ≃c⇒xₙ→c
       (λ {(suc n) → cosinePartialAtZero n}))
+
+
+------------------------------------------------------------------------
+-- K05: ALL FOUR *ACTUAL ROUND11* ADDITION ORIGIN-SPECIALIZATIONS.
+-- These consume the native signed-factorial zero/one proof and the
+-- existing Round11 termwise setoid congruence. They pay the origin
+-- boundaries of the eventual full two-variable addition laws.
+-- No hidden general sinAdd/cosAdd hypothesis is used.
+------------------------------------------------------------------------
+
+private
+  sinB : Round11.Round11BishopCutset → R.ℝ → R.ℝ
+  sinB inputs = E.bishopSin (Round11.elementarySeries inputs)
+
+  cosB : Round11.Round11BishopCutset → R.ℝ → R.ℝ
+  cosB inputs = E.bishopCos (Round11.elementarySeries inputs)
+
+round11SineAdditionRightZero :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (sinB inputs (R._+_ x R.0ℝ))
+    (R._+_
+      (R._*_ (sinB inputs x) (cosB inputs R.0ℝ))
+      (R._*_ (cosB inputs x) (sinB inputs R.0ℝ)))
+round11SineAdditionRightZero inputs x =
+  RP.≃-trans
+    (TrigCong.bishopSinCongruent
+      (Round11.round11ConcreteTermIdentification inputs)
+      (RP.+-identityʳ x))
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.+-cong
+          (RP.*-cong RP.≃-refl (round11CosineAtZero inputs))
+          (RP.*-cong RP.≃-refl (round11SineAtZero inputs)))
+        (let open RP.ℝ-Solver
+         in solve 2
+           (λ s c →
+             (s ⊗ Κ 1ℚᵘ) ⊕ (c ⊗ Κ 0ℚᵘ) ⊜ s)
+           RP.≃-refl (sinB inputs x) (cosB inputs x))))
+
+round11CosineAdditionRightZero :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (cosB inputs (R._+_ x R.0ℝ))
+    (R._-_
+      (R._*_ (cosB inputs x) (cosB inputs R.0ℝ))
+      (R._*_ (sinB inputs x) (sinB inputs R.0ℝ)))
+round11CosineAdditionRightZero inputs x =
+  RP.≃-trans
+    (TrigCong.bishopCosCongruent
+      (Round11.round11ConcreteTermIdentification inputs)
+      (RP.+-identityʳ x))
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.+-cong
+          (RP.*-cong RP.≃-refl (round11CosineAtZero inputs))
+          (RP.-‿cong
+            (RP.*-cong RP.≃-refl (round11SineAtZero inputs))))
+        (let open RP.ℝ-Solver
+         in solve 2
+           (λ s c →
+             (c ⊗ Κ 1ℚᵘ) ⊖ (s ⊗ Κ 0ℚᵘ) ⊜ c)
+           RP.≃-refl (sinB inputs x) (cosB inputs x))))
+
+round11SineAdditionLeftZero :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (sinB inputs (R._+_ R.0ℝ x))
+    (R._+_
+      (R._*_ (sinB inputs R.0ℝ) (cosB inputs x))
+      (R._*_ (cosB inputs R.0ℝ) (sinB inputs x)))
+round11SineAdditionLeftZero inputs x =
+  RP.≃-trans
+    (TrigCong.bishopSinCongruent
+      (Round11.round11ConcreteTermIdentification inputs)
+      (RP.+-identityˡ x))
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.+-cong
+          (RP.*-cong (round11SineAtZero inputs) RP.≃-refl)
+          (RP.*-cong (round11CosineAtZero inputs) RP.≃-refl))
+        (let open RP.ℝ-Solver
+         in solve 2
+           (λ s c →
+             (Κ 0ℚᵘ ⊗ c) ⊕ (Κ 1ℚᵘ ⊗ s) ⊜ s)
+           RP.≃-refl (sinB inputs x) (cosB inputs x))))
+
+round11CosineAdditionLeftZero :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (cosB inputs (R._+_ R.0ℝ x))
+    (R._-_
+      (R._*_ (cosB inputs R.0ℝ) (cosB inputs x))
+      (R._*_ (sinB inputs R.0ℝ) (sinB inputs x)))
+round11CosineAdditionLeftZero inputs x =
+  RP.≃-trans
+    (TrigCong.bishopCosCongruent
+      (Round11.round11ConcreteTermIdentification inputs)
+      (RP.+-identityˡ x))
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.+-cong
+          (RP.*-cong (round11CosineAtZero inputs) RP.≃-refl)
+          (RP.-‿cong
+            (RP.*-cong (round11SineAtZero inputs) RP.≃-refl)))
+        (let open RP.ℝ-Solver
+         in solve 2
+           (λ s c →
+             (Κ 1ℚᵘ ⊗ c) ⊖ (Κ 0ℚᵘ ⊗ s) ⊜ c)
+           RP.≃-refl (sinB inputs x) (cosB inputs x))))
