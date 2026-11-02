@@ -1,0 +1,44 @@
+# Wong et al. (2022) D-lysergic-acid evidence crosswalk
+
+**Primary source:** Garrett Wong, Li Rong Lim, Yong Quan Tan, Maybelle Kho Go, David J. Bell, Paul S. Freemont and Wen Shan Yew, *Reconstituting the complete biosynthesis of D-lysergic acid in yeast*, Nature Communications **13**, 712 (2022), DOI [10.1038/s41467-022-28386-6](https://doi.org/10.1038/s41467-022-28386-6). Credit experimental observations and article authorship to this team, not to DASHI.
+
+**Scope:** Non-operational, provenance-first formalisation of source-reported analytical and outcome evidence. This module does **not** reconstruct a wet-lab route, assemble an organism, supply sequence/plasmid or process parameters, optimize production, claim a validated commercial process, or establish pharmacological/clinical effects.
+
+## Exact source-scope claims
+
+- The paper reports reconstitution of D-lysergic-acid biosynthesis in engineered baker's yeast.
+- It reports product-identity checks by mass spectrometric analysis and NMR and a stable-isotope origin experiment. The work remains source-reported until independently checked.
+- It reports endpoint titres of **1.7 mg/L at 1 L** and **1.4 mg/L at 4 L**. These are two experimental observations, not a scale law, not a per-cell rate, and not a downstream fermentation forecast.
+- PubChem gives lysergic acid CID **6717** (C16H16N2O2). The existing Kluver source atlas identifies lysergic acid **diethylamide** as CID **5761** (C20H25N3O). Similar vocabulary or molecular relationship does not license same-compound substitution.
+- The paper's ability to produce a precursor does not itself demonstrate 5-HT2A receptor activation by the product, any psychedelic subjective effect, or therapeutic efficacy.
+
+## Existing owners reused, without duplicate mathematical or ontology authority
+
+| Task | Existing owner | Connection in this PR |
+|---|---|---|
+| Source authorship, DOI, role and no-promotion invariant | `DASHI.Core.AttributedSourceCore`; `Docs/SourceAttributionPolicy.md` | Typed article and PubChem citations; non-promotion proofs |
+| Molecular identity and related receptor context | `DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact`; `Kluver5HT2AMolecularProteinInstantiationExact` | Reuses existing LSD identity; explicitly forbids DLA/LSD tag collapse or receptor-efficacy transfer |
+| Tryptophan / serotonin pathway disambiguation | `DASHI.Biology.MonoamineBiosynthesisPathSeparationExact` | Reuses tryptophan vocabulary; distinct biological claim domains |
+| Open cellular metabolism | `DASHI.Biology.Cell.OpenMetabolicNetwork` | Parametric unpaid network-consumer gate; no invented flux or state |
+| Chemistry transition and quantitative obligations | `DASHI.Chemistry.TransitionKernel` | Existing solver-neutral kernel is the future consumer; no source-backed kinetic measurements are asserted |
+| BH4 / Rhea / ChEBI and external ontology | [DASHI #1159](https://github.com/chboishabba/dashi_agda/pull/1159), [#1226](https://github.com/chboishabba/dashi_agda/pull/1226), [#1454](https://github.com/chboishabba/dashi_agda/pull/1454) | Separate biochemical source/kinetic/ontology programs; do **not** infer a shared network or import unmerged branches |
+| Native candidate world and source-revision review | [SensibLaw #512](https://github.com/chboishabba/SensibLaw/pull/512) and existing `external_graph_bridge.py` / `world_model.py` | Reuse their review-required candidate path, never a parallel ontology or automatic public edit |
+| Provenance-bearing fibre / shared artifact routing | [ITIR #17](https://github.com/chboishabba/ITIR-suite/pull/17), [#22](https://github.com/chboishabba/ITIR-suite/pull/22), [#55](https://github.com/chboishabba/ITIR-suite/pull/55), [#56](https://github.com/chboishabba/ITIR-suite/pull/56) | Exact DOI/CID source coordinates may later be referenced by an existing fibre; no runtime handoff is claimed |
+
+## Minimal exact remaining cut
+
+1. **W22-01: Source reproducibility.** Pin the article version and source-data file digests. Retain figure/table/analytical-evidence locators. A DOI by itself does not prove that the downloaded supplement was inspected.
+2. **W22-02: Registry same-object identity.** Confirm stereochemical and charge/formulation qualifiers for the specific DLA assay. Map PubChem and ChEBI IDs through reviewed external identifiers. Never equate precursor and derivative.
+3. **W22-03: Observation normalization.** Add source-pinned scale, endpoint timing, replication and uncertainty for each value if the paper's source data support them. No interpolation or optimizer.
+4. **W22-04: Independent analytical evidence.** Review raw source-data rows against the paper's claims. Treat a paper-described assay as author evidence, not new DASHI validation.
+5. **W22-05: Cellular network bridge.** Only instantiate the existing `OpenMetabolicNetwork` or chemistry transition kernel after source-grounded organism/compartment/time, rate-unit, transport and calibrated-flux witnesses exist. No such witness is asserted here.
+6. **W22-06: External ontology admission.** Route DOI/CID and any separately verified Rhea/ChEBI/GO/Reactome candidates through the native SLR/SensibLaw candidate/review machinery, preserving source revision and abstaining on missing identity. Do not create a new ontology store.
+7. **W22-07: Independent proof and repo acceptance.** Run focused Agda check and full Biology/Everything import graph on the exact PR SHA; record the flags, checker version, postulates/metas, and result. Source-written is not kernel-accepted.
+
+## Source-to-proof ceiling
+
+`dLaTagDistinctFromLsdTag`, `productionEvidenceNotReceptorEvidence` and `reportedStatusNotIndependentValidation` prove **disjoint constructors in DASHI's finite evidence grammar**, not experimental correctness of chemical identity, metabolic same-object correspondence, or industrial performance. The source attribution core proves only that citation is not a theorem or authority.
+
+Original experiment/figures belong to Wong and collaborators; the stable identifier entries belong to PubChem and their database curators; all newly authored finite evidence types and bridge terms are DASHI source code. The original biochemical discovery and receptor literature owners remain independent.
+
+This work deliberately contains **no assembly protocol, gene list, reaction recipe, culture settings, or output-improvement instructions**.
