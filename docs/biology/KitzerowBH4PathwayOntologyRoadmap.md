@@ -20,6 +20,7 @@ The current 16-UniProt/24-protein–Rhea-link panel yields 12 finite Rhea reacti
 - DASHI.Core.XPollenationExact + #1227 and ITIR #22: typed external identities, transport-only artifact receipts.
 - BH4PathwayOntologyInteropExact and build_bh4_pathway_ontology.py: structural projection, not a new physiology solver.
 - BH4PathwayReviewInteropExact and build_bh4_pathway_review.py: readonly source-reopenable obligations, reusing existing PNF/Wikidata repair and ReadingTrail owners; not SLR native persistence.
+- Canonical imports: DASHI/Biology/Everything.agda and DASHI/Everything.agda now import KitzerowBH4EvidenceEverything; the symmetry-only TOE root is intentionally untouched.
 
 ## Executable first tranche in this stacked PR
 
@@ -105,5 +106,7 @@ Version/assay/source release still must be pinned in acquired receipts. No stand
     python3 scripts/check_kitzerow_bh4_priority_all.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PathwayOntologyInteropExact.agda
     scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
+    scripts/run_agda29_parallel_check.sh DASHI/Biology/Everything.agda
+    scripts/run_agda29_parallel_check.sh DASHI/Everything.agda
 
 No exact-head Agda type-check, remote ontology verification or SBML parser receipt is asserted by this PR.
