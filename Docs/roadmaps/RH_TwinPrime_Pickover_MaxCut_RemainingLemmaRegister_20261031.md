@@ -600,6 +600,28 @@ Riemann, Machin, Bishop/Bridges and Murray attribution.
    environment. Resolve errors and attach exact theorem/commit/checker
    receipts before promoting any new status to `KERNEL`.
 
+**Further K04d exp/log reuse (commit `37375de6af5b40eeff9b9d318180be6dcce3247e`):**
+`BishopRiemannDirichletExponentialTermExact` now constructs
+`negativeExponentialAtNatLogIsCanonicalReciprocal` and
+`negativeExponentialAtNatLogIsEmbeddedReciprocal`.
+The former combines the existing
+`BishopExponentialCauchyProductExact.bishopExpTimesNegativeIsOne`
+with `BishopInverseSquareProductExact.inverseFromCancellation` and
+`BishopNatRealPositiveExact.natRealSuccessorStrictlyPositive`.
+The latter uses
+`BishopNatRealReciprocalSquareBaselExact.natRealInverseIsEmbeddedReciprocal`.
+Thus the selected source value
+`exp_B(-log_B(n+1)) ≃ (n+1)⁻¹` is now formally *reduced*
+to the single precise hypothesis `exp_B(log_B(n+1)) ≃ n+1`.
+It is not supplied as an unconditional theorem; the original
+power-series logarithm inverse, rational configured interval witness,
+and all-index/sigma-neighborhood majorant remain OPEN.
+
+**Verification:** GitHub writes and exact-path readback are receipts
+for source contents only. The current execution container lacks an
+`agda` executable and the pinned vendored Bishop checkout; therefore
+there is no actual golden kernel acceptance in this tranche.
+
 **Acceptance state:** the two new convergence coherence results are
 `SOURCE`; all seven terminal K04b/K04d/K05 obligations above
 remain `OPEN` wherever they require independent new mathematics
