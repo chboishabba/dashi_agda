@@ -268,6 +268,96 @@ def acquire_panel(panel_path: Path) -> tuple[dict, int]:
     }, (0 if not errors else 3)
 
 
+def extract_source_chart_rhea(chart: dict) -> list[str]:
+    """Use *creator-source observed* Rhea identifiers, not a UniProt proxy.
+
+    This does not claim exhaustive access to Kitzerow's whole BioGene graph
+    or certify original PDF page geometry.
+    """
+    if (chart.get("schema") != "dashi.kitzerow-primary-chart-rhea-index.v1"
+            or chart.get("creator") != "Kimberly Kitzerow"
+            or not str(chart.get("publication_page", "")).startswith(
+                "https://www.researchgate.net/publication/377218425_")):
+        raise ValueError("original author chart source identity not supported")
+    for key in ("declared_publication_month", "observed_full_text_upload_date",
+                "license_declared", "disclosure_scope"):
+        if not chart.get(key):
+            raise ValueError("chart missing original source field: " + key)
+    for key in ("whole_proprietary_network_reconstructed",
+                "primary_claims_paid_by_source_index",
+                "same_compartment_flux_paid"):
+        if chart.get(key) is not False:
+            raise ValueError("source chart unearned identity/flux/coverage promotion")
+    observations = chart.get("rhea_identifiers")
+    if not isinstance(observations, list) or not observations:
+        raise ValueError("empty source-observed Rhea index")
+    seen: set[str] = set()
+    for item in observations:
+        if not isinstance(item, dict):
+            raise ValueError("source observation must be a mapping")
+        rid = item.get("rhea_id")
+        line = item.get("web_text_line")
+        if (not isinstance(rid, str) or not rid.startswith("RHEA:")
+                or not rid[5:].isdigit() or not isinstance(line, int)
+                or isinstance(line, bool) or line <= 0 or rid in seen):
+            raise ValueError("source Rhea ID or observation line invalid/duplicated")
+        seen.add(rid)
+    return sorted(seen)
+
+
+def acquire_source_chart(chart_path: Path, *, reaction_fetcher=None) -> tuple[dict, int]:
+    """Acquire actual Rhea receipts for creator-observed IDs only.
+
+    Inject reaction_fetcher in a local/offline regression; production uses
+    acquire_reaction with existing retry and source SHA mechanisms.
+    """
+    chart_bytes = chart_path.read_bytes()
+    chart = json.loads(chart_bytes.decode("utf-8"))
+    unique_ids = extract_source_chart_rhea(chart)
+    get_reaction = reaction_fetcher if reaction_fetcher is not None else acquire_reaction
+    reactions: list[dict] = []
+    errors: list[dict] = []
+    for rid in unique_ids:
+        try:
+            item = get_reaction(rid)
+            if not isinstance(item, dict) or item.get("rhea_id") != rid:
+                raise ValueError("Rhea response ID disagrees with creator source selection")
+            reactions.append(item)
+        except Exception as exc:
+            errors.append({"rhea_id": rid, "error": str(exc)})
+    formula_ready = sum(bool(row.get("formula_charge_ready")) for row in reactions)
+    return {
+        "schema": "dashi.rhea-chebi-bh4-source-chart.v1",
+        "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
+        "rhea_release_reference": "Rhea release 142 (2026-09-02); SPARQL release 2026_03",
+        "creator": "Kimberly Kitzerow",
+        "source_chart_publication": chart["publication_page"],
+        "source_chart_publication_month": chart["declared_publication_month"],
+        "source_chart_fulltext_upload_observed": chart["observed_full_text_upload_date"],
+        "source_chart_license": chart["license_declared"],
+        "source_chart_index_sha256": hashlib.sha256(chart_bytes).hexdigest(),
+        "source_chart_pdf_sha256_verified": False,
+        "source_observation_authority": "partial-original-creator-chart-web-text",
+        "whole_creator_network_complete": False,
+        "network_retry_policy": {"attempts": NETWORK_ATTEMPTS,
+                                 "initial_backoff_seconds": NETWORK_BACKOFF_SECONDS,
+                                 "exponential": True},
+        "source_rhea_ids_requested": unique_ids,
+        "unique_rhea_ids_requested": len(unique_ids),
+        "rhea_rows_acquired": len(reactions),
+        "rhea_rows_failed": len(errors),
+        "formula_charge_ready_reactions": formula_ready,
+        "formula_charge_residual_reactions": len(reactions) - formula_ready,
+        "complete_reaction_identity_acquisition": not errors,
+        "reactions": reactions,
+        "errors": errors,
+        "promotion_boundary": {**promotion_boundary(),
+                               "creator_chart_is_entire_BioGene_network": False,
+                               "rhea_id_match_proves_same_compartment_state": False,
+                               "creator_selected_pathway_is_DASHI_finite_panel": False},
+    }, (0 if not errors else 3)
+
+
 def render(payload: dict, output: Path | None) -> None:
     text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
     if output:
@@ -282,13 +372,18 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--qdpr", action="store_true", help="acquire the QDPR Rhea/ChEBI witness")
     mode.add_argument("--from-uniprot-panel", type=Path, metavar="PATH", help="acquire all Rhea xrefs found in the exact UniProt panel certificate")
+    mode.add_argument("--from-source-chart", type=Path, metavar="PATH",
+                      help="acquire source-observed creator chart Rhea IDs; preserves separate source provenance")
     parser.add_argument("-o", "--output", type=Path)
     args = parser.parse_args()
     if args.qdpr:
         payload = acquire_qdpr()
         render(payload, args.output)
         return 0 if payload["specific_chebi_fixture_paid"] else 3
-    payload, code = acquire_panel(args.from_uniprot_panel)
+    if args.from_source_chart:
+        payload, code = acquire_source_chart(args.from_source_chart)
+    else:
+        payload, code = acquire_panel(args.from_uniprot_panel)
     render(payload, args.output)
     return code
 
