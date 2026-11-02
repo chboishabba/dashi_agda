@@ -946,6 +946,7 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ord
 import DASHI.Physics.YangMills.YMClaySUNMatrixSpatialC3RealFubiniExact as SUNRealC3
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeInversePlaquetteRealTraceExact as SUNInversePlane
 import DASHI.Physics.YangMills.YMClayConstructedComplexFiniteAdjointTraceExact as SUNFiniteTrace
+import DASHI.Physics.YangMills.YMClayBishopSetoidFiniteAdjointTraceExact as SUNBishopTrace
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as SUNGaugeHaar
 import DASHI.Physics.YangMills.YMClaySUNProductHaarNativeGaugeR443Exact as SUNNativeGauge
 import DASHI.Physics.YangMills.YMClaySUNNativeWilsonBondPointwiseExact as SUNPointwise
@@ -1068,6 +1069,11 @@ open SUNRealC3 public using
 -- Original SUN inverse plaquette and six real plane C3 from one real
 -- matrix trace-inversion law. Not an abstract Wilson action assumption.
 -- Concrete finite complex-pair trace adjoint algebra (Bishop/real bridge pending).
+-- Vendored Bishop setoid, not the legacy axiomatic real equality:
+-- native ≃ adjoint real-trace invariance on finite complex matrices.
+open SUNBishopTrace public using
+  (bishopRealMatrixAdjointTrace
+  ; bishopNormalizedRealTraceAdjoint)
 open SUNFiniteTrace public using
   (realComplexMatrixAdjointTrace
   ; concreteNormalizedRealTraceAdjoint
