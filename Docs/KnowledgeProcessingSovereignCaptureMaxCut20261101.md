@@ -1,5 +1,8 @@
 # Knowledge-processing monopoly, regulatory capture and sovereign dependency — 2026-11-01 max-cut
 
+> **2 November 2026 iceberg reconciliation:** See [KnowledgeProcessingIcebergRoadmapReconciliation20261102.md](KnowledgeProcessingIcebergRoadmapReconciliation20261102.md) for the full finance × material × control × state × epistemic × ideology × historical-brokerage evidence map, its three conditional feedback cycles, falsifiers, and exact K0–K6 max-cut. This document remains the earlier source/Agda implementation ledger.
+
+
 **Objective (O):** falsifiable study of whether market concentration in knowledge/information processing plus compliance, incident and procurement incentives can create effective dependency and allow state capture. **Not** a blanket theory of collective intention, proof of lab insolvency, a political recommendation, or a claim that safety harms are invented.
 
 **Owner/reuse:** golden Agda `DASHI/Governance/KnowledgeProcessingSovereignCaptureExact.agda` (synthetic finite countermodels); source-bound `DASHI/Governance/KnowledgeProcessingCaptureSourceAtlas20261101Exact.agda`; existing proof donors:
