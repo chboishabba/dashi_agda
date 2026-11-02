@@ -90,6 +90,13 @@ def main() -> int:
     assert all("owl:sameAs" not in str(node) for node in ld["@graph"])
     bad = deepcopy(m); bad["matrix"] = [[-2], [1]]
     rejects(bad, r, x, c)
+    bad = deepcopy(r); del bad["reactions"][0]["raw_sha256"]
+    rejects(m, bad, x, c)
+    bad = deepcopy(r); bad["reactions"].append(deepcopy(bad["reactions"][0]))
+    rejects(m, bad, x, c)
+    bad = deepcopy(x); bad["neighbourhoods"][0]["edges"][0]["sameObjectVerified"] = True
+    bad["neighbourhoods"][0]["edges"][0]["sameObjectClaimed"] = True
+    rejects(m, r, bad, c)
     bad = deepcopy(r); bad["reactions"][0]["participants"][0]["coefficient"] = 2
     rejects(m, bad, x, c)
     # Non-ChEBI Rhea compound identifiers remain source-specific, not
