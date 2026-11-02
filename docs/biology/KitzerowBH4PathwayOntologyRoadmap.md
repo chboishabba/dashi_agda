@@ -21,6 +21,24 @@ source text or turn web-text lines into invented PDF page anchors:
 
 Each output is explicitly an unverified source-observation candidate until
 the real original figure/source and curator-approved mapping are checked.
+### Source-observed / golden-panel first comparison (literal Rhea ID only)
+
+The eight independently located identifiers in the publicly displayed
+Kitzerow chart have **zero literal-ID overlap** with the twelve finite Rhea
+IDs in the existing Agda golden owner
+DASHI/Biology/Molecular/BH4ExecutedPanelReactionReceiptExact.agda.
+The test scripts/check_kitzerow_primary_chart.py reads that actual
+Agda owner, rather than copying a second list, and checks 0/8/12
+identity intersection and symmetric differences.
+
+This shows the 12-reaction DASHI subset is not a textual copy of these
+eight source-chart reaction references. It does **not** show biochemical
+pathway disjointness: directional Rhea IDs, protonation/microspecies,
+stoichiometry, nested events, biological compartment and family mappings
+may differ. It is not the correct creator-network coverage fraction,
+because the entire creator chart and proprietary source network have
+not been exhaustively acquired or checked.
+
 The original full chart/PDF binary and layout remain unverified; these
 initial eight directly identified codes are a **bounded observation**,
 not the creator network's full reaction set. The creator's site says the
