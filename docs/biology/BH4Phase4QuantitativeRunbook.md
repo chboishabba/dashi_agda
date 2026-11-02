@@ -62,7 +62,19 @@ Kitzerow hypothesis ledger:
 
 See [KitzerowBH4PathwayOntologyRoadmap.md](KitzerowBH4PathwayOntologyRoadmap.md)
 for exact external ontology targets and the KPO-01 through KPO-12 obligations.
-The updated Rhea REST acquisition also requests GO and Reactome columns. Any observed links are exported with release/source metadata, but do not establish same-context pathway identity. The JSON-LD representation is an RDF-importable discovery graph, **not** a
+The updated Rhea REST acquisition also requests GO and Reactome columns. Any observed links are exported with release/source metadata, but do not establish same-context pathway identity. The runner also emits a deterministic, source-reopenable **candidate-only**
+worklist at artifacts/biology/bh4-pathway-review-worklist.json, classified by
+author primary passage, reaction direction/compartment/kinetics, species
+compartment/exchange, ontology mapping and non-finite chemistry.
+The worklist reuses existing DASHI Wikidata repair/PNF and ITIR user-story
+principles; it is neither an SLR S29 receipt nor a Dioxus implementation.
+Optional --source-reopen-packet adds caller-supplied source-envelope references
+but cannot authenticate a historical document. Internal/restricted source
+locators are not copied into the export. Follow
+[BH4ITIRSensibLawWikiRepairCrosswalk.md](BH4ITIRSensibLawWikiRepairCrosswalk.md)
+for exact integration owners and acceptance gates.
+
+The JSON-LD representation is an RDF-importable discovery graph, **not** a
 standards-compliant BioPAX/GO-CAM/SBML model or a paid kinetic simulator.
 It has no fabricated compartments, kinetic laws or exchange rates. Failed
 acquisition must not be reinterpreted as negative biology.
