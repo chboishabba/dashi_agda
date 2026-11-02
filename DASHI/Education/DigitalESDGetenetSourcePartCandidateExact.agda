@@ -292,12 +292,11 @@ partAxisAssessment negativeAndOutlierResponses pedagogyAndLearning =
     "Article reports sixth contrasting theme with N=15 outliers and N=26 challenges"
     "Check distinct statuses and author tables before reuse"
 partAxisAssessment p a =
-  World.unmeasuredForQuestion
-    (axisName a)
-    "No source-specific reviewed observation supplied for this part-axis address; further paper review may reclassify it"
+  World.notYetAssessed
+    "Per-part source/axis review not completed; no unmeasured or inapplicability claim is warranted"
 
--- The fallback intentionally has NO invented empirical findings. The
--- generic missing status above is a review query, not a proved absent effect.
+-- The fallback means no reviewed assessment YET. It never asserts that
+-- an actual absence or effect was observed in the source.
 studyWorld : World.AccountedStudyWorld studyScope
 studyWorld = World.accounted-study-world
   (λ { getenetStudy p a → partAxisAssessment p a })
