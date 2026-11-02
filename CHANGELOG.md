@@ -1,3 +1,10 @@
+## 2026-11-02 — original plaquette archaeology and canonical generic Wilson reconciliation
+
+- Explicitly searched all native signed/positive plaquettes, Wilson action/trace, finite quaternion/Hodge, Haar/Fubini, cutoff/projective and spectral sources and PRs. The existing `SUNWilsonAction` and `SUNWilsonClassFunction` already own the **generic** finite SU(N) action and gauge theorem.
+- `YMClayNativeSixPlaquetteSUNWilsonActionWeldExact` proves the original signed periodic dependent-edge and closed-plaquette paths are the canonical generic SUN Wilson paths, then derives site-by-site/global six-plane Wilson action agreement and same beta action. No duplicate generic theorem is promoted.
+- `YMClaySUNVariablePeriodicGibbsGaugeExact` constructs the **actual varying-size** original 4D positive-link SU(N) finite Wilson/Gibbs source with all-n local gauge invariance. It connects at n=3 to the prior side-four positive plaquette holonomy.
+- R443 global compact Haar and physical coupling, R445 UV/IR scale-uniform moments and cylinders, R320 uniform CMP116 selected-source decay and R333 OS same-H positive continuum gap/nontriviality remain mathematical source obligations. No Agda kernel or CI run.
+
 ## 2026-11-02 — R443 native six-plane SUN Gibbs local gauge invariance
 
 - Source-wrote `YMClaySUNMatrixSixPlaneGaugeInvariantExact` and imported it into canonical Balaban TOE. Derives native transformed-word same object and uses existing signed-plaquette gauge theorem to prove invariant original six-positive-plane SUN real Wilson deficit, beta-weighted action and exponential Gibbs density.
