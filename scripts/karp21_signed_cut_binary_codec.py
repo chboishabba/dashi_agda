@@ -210,3 +210,63 @@ def verifies_word(graph_word: Sequence[int], certificate: Sequence[int]) -> bool
         return verifies_cut(graph, word)
     except (ValueError, TypeError):
         return False
+
+
+def sparse_certificate_from_labels(
+    graph: CutGraph, labels: Sequence[int]
+) -> Bits:
+    """Encode just the two endpoints of each listed edge, in edge order.
+
+    This is 2*m bits, not n bits. It is essential for graphs whose n is
+    written in O(log n) bits, possibly much greater than input length.
+    """
+    graph.validate()
+    if len(labels) != graph.vertices or any(bit not in (0, 1) for bit in labels):
+        raise ValueError("invalid full label assignment")
+    return tuple(bit for u, v, _ in graph.edges
+                 for bit in (labels[u], labels[v]))
+
+
+def sparse_cut_certificate_verifier(
+    graph: CutGraph, certificate: Sequence[int]
+) -> bool:
+    """Correct polynomial-size witness format for binary-encoded vertex n.
+
+    A bit is assigned to each edge-endpoint occurrence. Repeated uses
+    of the same vertex MUST agree. Any assignment to the occurring
+    endpoints extends to all isolated vertices (choose false) without
+    altering the cut value. The check uses O(m) vertex-address entries,
+    independent of n, and processes O(m) signed integer weights.
+    """
+    graph.validate()
+    try:
+        local = _validate_bits(certificate)
+    except (ValueError, TypeError):
+        return False
+    if len(local) != 2 * len(graph.edges):
+        return False
+    by_vertex: dict[int, int] = {}
+    score = 0
+    for i, (u, v, weight) in enumerate(graph.edges):
+        first, second = local[2*i], local[2*i+1]
+        if (u in by_vertex and by_vertex[u] != first) or (
+            v in by_vertex and by_vertex[v] != second
+        ):
+            return False
+        by_vertex[u] = first
+        by_vertex[v] = second
+        if first != second:
+            score += weight
+    return score >= graph.threshold
+
+
+def verifies_sparse_word(
+    graph_word: Sequence[int], certificate: Sequence[int]
+) -> bool:
+    """Total fail-closed N21 verifier with a witness of exactly 2m bits."""
+    try:
+        return sparse_cut_certificate_verifier(
+            decode_graph(graph_word), certificate
+        )
+    except (ValueError, TypeError):
+        return False
