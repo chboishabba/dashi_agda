@@ -54,7 +54,12 @@ def compare(chart: dict, matrix: dict) -> dict:
         if not isinstance(ln, int) or ln <= 0:
             raise ValueError("source observation missing line anchor")
         ids.append(rid)
-        locators[rid] = chart["publication_page"] + "#L" + str(ln)
+        # Web extraction lines are reader coordinates, not actual URL fragments.
+        locators[rid] = {
+            "source_url": chart["publication_page"],
+            "web_text_line": ln,
+            "locator_kind": "web-extracted-text-line-not-original-pdf-page",
+        }
     if len(set(ids)) != len(ids):
         raise ValueError("duplicate source reaction id")
     panel_rows = matrix.get("reaction_index")
