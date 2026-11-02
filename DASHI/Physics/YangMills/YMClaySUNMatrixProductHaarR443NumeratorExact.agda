@@ -29,6 +29,7 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as Gibbs
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
+import DASHI.Physics.YangMills.YMClaySUNMatrixSpatialC3RealFubiniExact as Spatial
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as ProductC3
 import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
@@ -61,12 +62,16 @@ module _
 
   record PhysicalC3ActionBoundary : Set₁ where
     field
-      -- This is the original literal SUN six-positive-plane action equality.
-      -- A spatial C3 Wilson/trace identity on a different carrier is not enough.
-      sixPlaneActionC3 : ∀ links →
-        Gibbs.nativeSUNWilsonAction theory traceData beta
-          (Weld.nativeForwardC3Bonds links)
-        ≡ Gibbs.nativeSUNWilsonAction theory traceData beta links
+      -- Exactly the original SUN six-positive-plane local source
+      -- after C3. The GLOBAL action and density invariances are DERIVED
+      -- by the existing finite-monoid Fubini/sum permutation theorem.
+      -- In particular this does not assume another Gibbs/action theorem.
+      sixPlaneAtC3 : ∀ links site →
+        Gibbs.nativeSUNSixWilsonDeficitAt theory traceData
+          (Weld.nativeForwardC3Bonds links) site
+        ≡ Gibbs.nativeSUNSixWilsonDeficitAt theory traceData
+            links
+            (Spatial.C3.spatialC3Site site)
 
       -- Reuse one-link ordered laws; all 1024-link laws are derived below.
       oneLinkOrdered : Ordered.OneLinkOrderedHaarAlgebra oneLink
@@ -152,7 +157,10 @@ module _
     ; R443.WilsonGibbsHaarAction.densityIsGibbsWeight =
         λ links → refl
     ; R443.WilsonGibbsHaarAction.finiteActionInvariant =
-        λ c3 links → sixPlaneActionC3 boundary links
+        λ c3 links →
+          Spatial.nativeSUNWilsonActionC3FromLocal
+            theory traceData beta links
+            (sixPlaneAtC3 boundary links)
     ; R443.WilsonGibbsHaarAction.haarIntegralPullbackInvariant =
         λ c3 integrand →
           ProductC3.nativeSUNProductIntegralSpatialC3Invariant
