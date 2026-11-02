@@ -17417,3 +17417,16 @@ Cleanup
 
 - [x] **R443-auxiliary gauge marginal** SOURCE-WRITTEN: `YMClayR443BondMarginalC3Exact` proves six-plane action descends to links, bond-only measure pushforward, Gibbs density factorization, integration/partition laws, normalized expectation equality and existing R431 C3 numerator on the original rational SU2 source; exact-head compiler pending.
 - [ ] **R443-linkHaar physical remainder:** construct real compact SU2/SUN link configurations and normalized product/constrained Haar integration with genuine Wilson/Gibbs same-action comparison, not a rational-point counting or arbitrary-integral surrogate; complete variable cutoff/volume identification and independent physical analytic input.
+
+
+### 2026-11-02 physical SU(N) signed Wilson / product-Haar / R445 / R320 crosscut
+- [x] Source-write direct certified `SUNMatrixCarrier` adapter to original native n=3 positive and negative Balaban bond/plaquette holonomy, with spatial-C3 naturality and no rational SU2 Haar substitution; **Agda kernel pending**.
+- [x] Derive matrix Wilson trace conjugation invariance from a concrete cyclicity property, then literal original signed plaquette gauge invariance and native forward-edge C3; **matrix physical ReTr/N semantics remains an external proof obligation**.
+- [x] Define original six-positive-plane SUN real Wilson deficit, beta-weighted `exp(-S)` Gibbs density, finite partition and same-carrier R445 canonical normalized family with no duplicate finite-measure equality; **actual product Haar/partition nonzero still an input**.
+- [x] Prove finite N-link product integration invariance under generated permutations by single-link Fubini and normalized unit, then under a two-way original SUN bond-to-vector C3 codec; **the selected one-link normalized Haar/Fubini and 1024-link codec not yet inhabited**.
+- [x] Instantiate original canonical R278 real covariance on that same SUN Gibbs finite family; **CMP116 selected source-rooted-shell decay and physical cutoff convergence not proved**.
+- [ ] R443: concrete continuous complex SU(2)/SU(N) matrix theory, normalized physical trace, one-link Haar/Fubini, 1024 positive-bond exact C3 vector codec, selected product/constrained Haar and correct physical coupling/counterterms/partition.
+- [ ] R445: varied lattice spacing and volume with consistent cylinder projections, uniform marked FP/cluster moments/tails and UV/IR convergence on the exact same real SU(N) Gibbs source.
+- [ ] R320: selected CMP116 same-domain `D² log Z` estimate with actual uniform radii, rooted shell, scales and volume bounds, using the existing source-authority application.
+- [ ] R333: same physical continuum OS Hamiltonian, Wilson transfer-coordinate spectral identification, strictly positive limit-uniform mass gap, nontriviality and Clay compact-simple scope. No Clay claim from conditional compilers.
+- [ ] K0: user-run Agda exact-head/root import typecheck, transitive `--safe`/postulate inventory and CI. Current additions remain **source-written only**.
