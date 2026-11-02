@@ -43,13 +43,23 @@ def main() -> int:
 
     good_source = {"schema": "dashi.bh4-source-reopen-packet.v1", "sources": [{
         "source_id": "SRC-KIT-2024-08", "source_revision": "source-rev-1",
-        "snapshot_digest": "sha256:unverified", "content_locator": "private-source-ref"
+        "snapshot_digest": "sha256:unverified", "content_locator": "public-source-ref", "visibility": "public"
     }]}
     with_source = build_review(p, source_receipts=good_source)
     author = next(x for x in with_source["obligations"] if x["kind"] == "author-source")
-    assert "private-source-ref" in author["source_reopen_refs"]
+    assert "public-source-ref" in author["source_reopen_refs"]
     assert author["classification"] == "active-missing-evidence"
     assert with_source["external_source_envelopes_supplied"] == 1
+    internal = deepcopy(good_source)
+    internal["sources"][0]["visibility"] = "restricted"
+    internal["sources"][0]["content_locator"] = "secret-private-path"
+    held = build_review(p, source_receipts=internal)
+    assert "secret-private-path" not in str(held)
+    assert held["restricted_source_envelopes_not_exposed"] == 1
+    assert held["candidate_publication_allowed"] is False
+    invalid_visibility = deepcopy(good_source)
+    del invalid_visibility["sources"][0]["visibility"]
+    rejects(p, source_receipts=invalid_visibility)
 
     promoted = deepcopy(p)
     promoted["author_hypothesis_edges"][0]["independent_primary_text_verification"] = True
