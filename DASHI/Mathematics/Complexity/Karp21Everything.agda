@@ -88,3 +88,5 @@ import DASHI.Mathematics.Complexity.Karp21PartitionSparseCutBidiExact
 import DASHI.Mathematics.Complexity.Karp21CookExecutableFiniteVerifierBidiExact
 
 import DASHI.Mathematics.Complexity.Karp21CookStrictWordCanonicalReencodeExact
+
+import DASHI.Mathematics.Complexity.Karp21StrictSATBoundedCertificateNPBoundaryExact
