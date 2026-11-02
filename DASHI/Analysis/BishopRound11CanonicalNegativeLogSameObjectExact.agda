@@ -23,6 +23,7 @@ open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
 import Real as R
 import RealProperties as RP
+import Sequence as Seq
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Foundations.BishopNegativeLogGeometricSourceConvergenceExact as Native
@@ -135,3 +136,57 @@ canonicalNatLogIsOriginalBishopSum inputs n =
 -- The exponential inverse for L_n remains an ANALYTIC theorem;
 -- neither the canonical unit-interval witness nor convergence
 -- supplies exp_B(L_n) = n+1 by definitional equality.
+
+
+------------------------------------------------------------------------
+-- THREE EXPLICIT NONLOGARITHMIC SAME-OBJECT LIMIT WELDS.
+-- Reconfiguring the logarithm does not change even the BISHOP
+-- LIMIT VALUES of the original Round11 sine/cosine/exponential.
+-- Proof uses the original pinned Bishop uniqueness of limits,
+-- not a reliance on proof irrelevance for convergence witnesses.
+------------------------------------------------------------------------
+
+canonicalSineSameOriginal :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (E.bishopSin
+      (Round11.elementarySeries
+        (canonicalNegativeLogRound11 inputs)) x)
+    (E.bishopSin (Round11.elementarySeries inputs) x)
+canonicalSineSameOriginal inputs x =
+  Seq.uniqueness-of-limits
+    (E.bishopSinConvergence
+      (Round11.elementarySeries
+        (canonicalNegativeLogRound11 inputs)) x)
+    (E.bishopSinConvergence
+      (Round11.elementarySeries inputs) x)
+
+canonicalCosineSameOriginal :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (E.bishopCos
+      (Round11.elementarySeries
+        (canonicalNegativeLogRound11 inputs)) x)
+    (E.bishopCos (Round11.elementarySeries inputs) x)
+canonicalCosineSameOriginal inputs x =
+  Seq.uniqueness-of-limits
+    (E.bishopCosConvergence
+      (Round11.elementarySeries
+        (canonicalNegativeLogRound11 inputs)) x)
+    (E.bishopCosConvergence
+      (Round11.elementarySeries inputs) x)
+
+canonicalExponentialSameOriginal :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (E.bishopExp
+      (Round11.elementarySeries
+        (canonicalNegativeLogRound11 inputs)) x)
+    (E.bishopExp (Round11.elementarySeries inputs) x)
+canonicalExponentialSameOriginal inputs x =
+  Seq.uniqueness-of-limits
+    (E.bishopExpConvergence
+      (Round11.elementarySeries
+        (canonicalNegativeLogRound11 inputs)) x)
+    (E.bishopExpConvergence
+      (Round11.elementarySeries inputs) x)
