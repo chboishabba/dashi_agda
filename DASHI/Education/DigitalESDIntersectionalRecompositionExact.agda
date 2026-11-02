@@ -18,6 +18,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
+import DASHI.Education.DigitalESDGoldenIntersectionalKernelExact as Golden
 import DASHI.Core.IntersectionalNonFactorability as Factor
 import DASHI.Reasoning.TypedHyperfabricCore as Hyper
 import DASHI.Education.DigitalESDOpenAxisStudyPartWorldExact as World
@@ -51,6 +52,16 @@ sameSummaryImpliesSameSituated project cert left right same =
     (trans (cong (recover cert) same)
       (recoverAfterProject cert right))
 
+-- The Golden --safe core is the mathematical theorem owner. This adapter
+-- preserves the pre-existing ESD/IntersectionalNonFactorability types.
+asGoldenLossless :
+  {Situated Summary : Set} →
+  {project : Situated → Summary} →
+  LosslessRecomposition project →
+  Golden.Lossless project
+asGoldenLossless cert =
+  Golden.lossless (recover cert) (recoverAfterProject cert)
+
 -- XR02: any consumer of the original situated world factors through a
 -- truly lossless summary. Merely having an axis table never proves this.
 losslessSufficesForConsumer :
@@ -61,8 +72,13 @@ losslessSufficesForConsumer :
   Factor.FactorsThrough project consumer
 losslessSufficesForConsumer project consumer cert =
   Factor.factorsThrough
-    (λ summary → consumer (recover cert summary))
-    (λ situated → sym (cong consumer (recoverAfterProject cert situated)))
+    (Golden.interpret goldenFactor)
+    (Golden.factors goldenFactor)
+  where
+    goldenFactor : Golden.FactorsThrough project consumer
+    goldenFactor =
+      Golden.losslessConsumerFactorisation
+        project consumer (asGoldenLossless cert)
 
 -- XR03: a real source-specific non-factorability witness forbids claiming
 -- lossless recomposition. This uses the *existing* intersectional theorem.
@@ -137,6 +153,29 @@ record AxisFaithfulStalk
           (World.study part) (World.part part) axis
 
 open AxisFaithfulStalk public
+
+-- Same-object bridge: no invented second vertex carrier. Instantiate the
+-- standalone Golden source-safe theorem on the *actual* ESD PartAxisAccounting
+-- and the *actual* TypedHyperfabric vertex stalk. The section itself remains
+-- a separate condition, not something this adapter manufactures.
+asGoldenAxisRoundTrip :
+  (scope : World.StudyWorldScope) →
+  (world : World.AccountedStudyWorld scope) →
+  (Vertex Edge : Set) →
+  (fabric : Hyper.TypedHyperfabric Vertex Edge) →
+  (locate : World.StudyPart scope → Vertex) →
+  AxisFaithfulStalk scope world Vertex Edge fabric locate →
+  Golden.AllAxisRoundTrip
+    (λ part axis → World.PartAxisAccounting scope
+      (World.study part) (World.part part) axis)
+    (λ part → Hyper.vertexStalk fabric (locate part))
+asGoldenAxisRoundTrip scope world Vertex Edge fabric locate cert =
+  Golden.all-axis-round-trip
+    (encodePartAxes cert)
+    (decodePartAxes cert)
+    (everyAxisSurvives cert)
+
+
 
 -- XR06: the above proof lets the downstream consumer read the exact
 -- source-world axis at the recomposed fibre, never just a seven-label view.
