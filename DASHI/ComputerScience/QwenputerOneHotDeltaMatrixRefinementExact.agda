@@ -140,3 +140,84 @@ record NumericProofBoundary : Set where
 
 numericBoundary : NumericProofBoundary
 numericBoundary = numericProofBoundary true true false false
+
+
+------------------------------------------------------------------------
+-- Stronger arbitrary-length matrix/RAM simulation.
+-- The compiled-neural-data object is still *conditional* on DeltaScalar's
+-- subtraction/replacement laws; this theorem is not fp32/bf16 evidence.
+------------------------------------------------------------------------
+
+data MatrixWrite (D : DeltaScalar) (Column : Set) : Set where
+  end : MatrixWrite D Column
+  thenWrite :
+    RAM.Location → Vector D Column →
+    MatrixWrite D Column → MatrixWrite D Column
+
+runMatrix :
+  (D : DeltaScalar) {Column : Set} →
+  MatrixWrite D Column → Matrix D Column → Matrix D Column
+runMatrix D end matrix = matrix
+runMatrix D (thenWrite address value rest) matrix =
+  runMatrix D rest (oneHotMatrixUpdate D matrix address value)
+
+runVectorRAM :
+  (D : DeltaScalar) {Column : Set} →
+  MatrixWrite D Column →
+  RAM.Ram (Vector D Column) → RAM.Ram (Vector D Column)
+runVectorRAM D end ram = ram
+runVectorRAM D (thenWrite address value rest) ram =
+  runVectorRAM D rest (RAM.writeRam ram address value)
+
+RelatedMatrix :
+  (D : DeltaScalar) {Column : Set} →
+  Matrix D Column → RAM.Ram (Vector D Column) → Set
+RelatedMatrix D matrix ram =
+  (address : RAM.Location) (col : Column) →
+  matrix address col ≡ ram address col
+
+matrixWritePreservesRelation :
+  (D : DeltaScalar) {Column : Set}
+  (matrix : Matrix D Column) (ram : RAM.Ram (Vector D Column))
+  (selected : RAM.Location) (value : Vector D Column) →
+  RelatedMatrix D matrix ram →
+  RelatedMatrix D
+    (oneHotMatrixUpdate D matrix selected value)
+    (RAM.writeRam ram selected value)
+matrixWritePreservesRelation D matrix ram selected value related queried col
+  with RAM.sameLocation selected queried
+... | true =
+  replaceByDifference D (matrix queried col) (value col)
+... | false =
+  trans (addZeroRight D (matrix queried col)) (related queried col)
+
+matrixRunPreservesRelation :
+  (D : DeltaScalar) {Column : Set}
+  (writes : MatrixWrite D Column)
+  (matrix : Matrix D Column) (ram : RAM.Ram (Vector D Column)) →
+  RelatedMatrix D matrix ram →
+  RelatedMatrix D
+    (runMatrix D writes matrix)
+    (runVectorRAM D writes ram)
+matrixRunPreservesRelation D end matrix ram related = related
+matrixRunPreservesRelation D (thenWrite address value rest)
+  matrix ram related =
+  matrixRunPreservesRelation D rest
+    (oneHotMatrixUpdate D matrix address value)
+    (RAM.writeRam ram address value)
+    (matrixWritePreservesRelation D matrix ram address value related)
+
+matrixAsRam :
+  (D : DeltaScalar) {Column : Set} →
+  Matrix D Column → RAM.Ram (Vector D Column)
+matrixAsRam D matrix address col = matrix address col
+
+matrixAndRamSameAfterEveryWrite :
+  (D : DeltaScalar) {Column : Set}
+  (writes : MatrixWrite D Column) (matrix : Matrix D Column)
+  (queried : RAM.Location) (col : Column) →
+  runMatrix D writes matrix queried col ≡
+    runVectorRAM D writes (matrixAsRam D matrix) queried col
+matrixAndRamSameAfterEveryWrite D writes matrix queried col =
+  matrixRunPreservesRelation D writes matrix (matrixAsRam D matrix)
+    (λ address col → refl) queried col
