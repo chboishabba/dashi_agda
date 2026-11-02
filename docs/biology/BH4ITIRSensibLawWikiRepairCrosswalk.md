@@ -113,7 +113,7 @@ not a claim that the Dioxus UI already renders it.
 
 Only a *request for review*, for example:
 
-- An unparsed Rhea KEGG/MetaCyc annotation needs source-versioned target
+- An Rhea KEGG/MetaCyc annotation now becomes a typed candidate only if the source-displayed reaction identifier passes a strict namespace parser. Any unparsed residue needs source-versioned target
   mapping. This is **not** evidence of a broken ontology.
 - A Rhea-to-GO or Rhea-to-Reactome link needs typed cross-ontology
   relation (equivalent/broader/narrower/overlap/disjoint/bridge/abstain), taxon,
