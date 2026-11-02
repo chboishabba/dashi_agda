@@ -1,3 +1,17 @@
+### 2026-11-02 revived Yang–Mills physical R443/R445/R320/R333 selected-source max-cut
+
+- [x] Explicitly search source indices for every named Fubini, SU(N), Haar, Wilson, CMP119, CMP116, mixed-J, Hamiltonian/spectral and OS term; audit relevant Agda/Lean PR histories. Source/PR evidence recorded in the physics max-cut ledger. Do not claim this is an exhaustive inspection of every historical PR.
+- [x] Derive N-link real product-integral zero, addition, scalar pullout and positivity from existing one-link laws, without a new whole-lattice integration assumption. Source-written in `YMClayFiniteProductHaarOrderedAlgebraExact`, NOT kernel checked.
+- [x] Construct native original SUN six-positive-plane physical measure integration-law record and R443/R431 C3 numerator compiler by composing existing product-Haar permutation, original Wilson Gibbs density and numerator owner. Source-written in `YMClaySUNMatrixProductHaarR443NumeratorExact`, NOT kernel checked.
+- [x] Wire the new owners to `DASHI.Unified.BalabanRGTOERegression` and synchronize source ledger, roadmap and changelog.
+- [ ] Typecheck both new Agda modules, their focused transitive imports and the canonical TOE graph at exact PR head; inspect transitive postulates (especially `CompactLieStandardAuthority`). User defers CI.
+- [ ] Instantiate genuine compact-real/complex SU(N) normalized ReTr/N and one-link measurable compact Haar with Fubini, positivity and selected observables on the actual same real carrier; distinguish total `OneLinkProductHaar` from ordinary restricted Borel Haar integration.
+- [ ] Construct original 1024-bond two-sided Vec/C3 codec from native periodic enumeration and prove actual SU(N) six-plane spatial C3 action invariant. Reuse signed plaquette and trace-inversion owners rather than assuming an unrelated C3.
+- [ ] Construct actual R124/CMP119 selected beta-flow, counterterms and metric-insertion same-object match to native SU(N) physical Gibbs.
+- [ ] Prove variable-n R445 cutoff and volume cylinder consistency, tightness and uniform marked moments/tail estimates on the same physical measure family.
+- [ ] Instantiate selected CMP116 proof-bearing source on R318 and establish the exact mixed-J `mixedDerivativeMagnitudeBelowSelectedShell` inequality with matching source domain, radii and uniform constants.
+- [ ] Establish R333 H2/R281 same OS reconstructed Hamiltonian, strict uniform physical spectral lower bound, nontriviality, and Clay compact-simple-group 4D continuum scope. Lean PR #7 bounded-form and clustering-to-spectrum owners are conditional donors, not replacements.
+
 - [x] Add conditional selected-Wilson gauge/block/observable commuting-square theorem `YMClayVoyagerCovariantWilsonCoarseFineBidiExact`, wired through Balaban TOE; no surrogate physical field, Wilson action or OSC transport.
 - [ ] Supply an **actual** CMP119/R445 coarse effective observable and selected RG blocking satisfying exact square or prove a quantitative defect/counterexample (then use existing projection-loss machinery), plus separate OS-form pullback.
 
