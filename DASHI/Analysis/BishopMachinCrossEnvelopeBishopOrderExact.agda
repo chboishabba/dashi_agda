@@ -17,11 +17,11 @@ module DASHI.Analysis.BishopMachinCrossEnvelopeBishopOrderExact where
 
 open import Agda.Builtin.Nat using (Nat; suc; _*_; _+_)
 import Data.Nat.Properties as NatP
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base as Nat using (_≤_; NonZero)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:*_; con; _:=_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst)
-open import Data.Rational.Unnormalised as Q using (ℚᵘ; _/_; _≤_)
+open import Data.Rational.Unnormalised as Q using (ℚᵘ; _/_; _≤_; _≃_; _+_; *≡*)
 open import Data.Integer.Base using (+_)
 
 import Real as R
@@ -114,3 +114,125 @@ sourceCommonDenominatorCleared n =
     (NatP.*-mono-≤
       (normalizedNumeratorBelowDenominator n)
       NatP.≤-refl)
+
+
+------------------------------------------------------------------------
+-- K04b-DENOM: POSITIVE ORIGINAL VARIABLE DENOMINATORS.
+-- These are constructive NonZero witnesses, NOT informal claims
+-- that positive powers/products are nonzero.
+------------------------------------------------------------------------
+
+pow25NonZero : (n : Nat) → Nat.NonZero (Cross.pow25 n)
+pow25NonZero n = NatP.m^n≢0 25 n
+
+pow57121NonZero : (n : Nat) → Nat.NonZero (Cross.pow57121 n)
+pow57121NonZero n = NatP.m^n≢0 57121 n
+
+oddFiveNonZero : (n : Nat) →
+  Nat.NonZero (suc (2 * n) * 5)
+oddFiveNonZero n = NatP.m*n≢0 (suc (2 * n)) 5
+
+odd239NonZero : (n : Nat) →
+  Nat.NonZero (suc (2 * n) * 239)
+odd239NonZero n = NatP.m*n≢0 (suc (2 * n)) 239
+
+sourceFiveDenominator : Nat → Nat
+sourceFiveDenominator n =
+  (suc (2 * n) * 5) * Cross.pow25 n
+
+source239Denominator : Nat → Nat
+source239Denominator n =
+  (suc (2 * n) * 239) * Cross.pow57121 n
+
+sourceFiveDenominatorNonZero : (n : Nat) →
+  Nat.NonZero (sourceFiveDenominator n)
+sourceFiveDenominatorNonZero n =
+  NatP.m*n≢0 (suc (2 * n) * 5) (Cross.pow25 n)
+    {{oddFiveNonZero n}} {{pow25NonZero n}}
+
+source239DenominatorNonZero : (n : Nat) →
+  Nat.NonZero (source239Denominator n)
+source239DenominatorNonZero n =
+  NatP.m*n≢0 (suc (2 * n) * 239) (Cross.pow57121 n)
+    {{odd239NonZero n}} {{pow57121NonZero n}}
+
+sourceOddFive239NonZero : (n : Nat) →
+  Nat.NonZero ((suc (2 * n) * 5) * 239)
+sourceOddFive239NonZero n =
+  NatP.m*n≢0 (suc (2 * n) * 5) 239
+    {{oddFiveNonZero n}}
+
+sourceCommonDenominatorNonZero : (n : Nat) →
+  Nat.NonZero (sourceCommonDenominator n)
+sourceCommonDenominatorNonZero n =
+  NatP.m*n≢0
+    (((suc (2 * n) * 5) * 239) * Cross.pow25 n)
+    (Cross.pow57121 n)
+    {{NatP.m*n≢0
+        ((suc (2 * n) * 5) * 239)
+        (Cross.pow25 n)
+        {{sourceOddFive239NonZero n}}
+        {{pow25NonZero n}}}}
+    {{pow57121NonZero n}}
+
+------------------------------------------------------------------------
+-- LITERAL UNNORMALISED RATIONAL EXPRESSIONS:
+--
+-- source e_n = 16 / [(2n+1)5 25^n]
+--            + 4 / [(2n+1)239 57121^n]
+-- common e_n = (3824 57121^n + 20 25^n) /
+--            [(2n+1)5 239 25^n 57121^n]
+--
+-- Both rational constructors use actual variable NonZero witnesses.
+------------------------------------------------------------------------
+
+sourceOmittedRationalEnvelope : Nat → Q.ℚᵘ
+sourceOmittedRationalEnvelope n =
+  let
+    instance
+      fiveNZ = sourceFiveDenominatorNonZero n
+      otherNZ = source239DenominatorNonZero n
+  in
+  (+ 16 / sourceFiveDenominator n)
+  Q.+ (+ 4 / source239Denominator n)
+
+sourceCommonRationalEnvelope : Nat → Q.ℚᵘ
+sourceCommonRationalEnvelope n =
+  let
+    instance
+      commonNZ = sourceCommonDenominatorNonZero n
+  in
+  + normalizedNumerator n / sourceCommonDenominator n
+
+sourceGeometricRationalEnvelope : Nat → Q.ℚᵘ
+sourceGeometricRationalEnvelope n =
+  let
+    instance
+      powerNZ = pow25NonZero n
+  in
+  + 4 / Cross.pow25 n
+
+-- This is the *original source denominator* cross comparison, not
+-- the artificial denominator-one normalization.
+sourceCommonRationalBelowGeometric : (n : Nat) →
+  Q._≤_
+    (sourceCommonRationalEnvelope n)
+    (sourceGeometricRationalEnvelope n)
+sourceCommonRationalBelowGeometric n =
+  let
+    instance
+      commonNZ = sourceCommonDenominatorNonZero n
+      powerNZ = pow25NonZero n
+  in
+  Fractions.natFractionLe
+    (sourceCommonDenominatorCleared n)
+
+sourceCommonBishopBelowGeometric : (n : Nat) →
+  R._≤_
+    (R._⋆ (sourceCommonRationalEnvelope n))
+    (R._⋆ (sourceGeometricRationalEnvelope n))
+sourceCommonBishopBelowGeometric n =
+  RP.p≤q⇒p⋆≤q⋆
+    (sourceCommonRationalEnvelope n)
+    (sourceGeometricRationalEnvelope n)
+    (sourceCommonRationalBelowGeometric n)
