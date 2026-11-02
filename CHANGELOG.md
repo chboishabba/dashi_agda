@@ -1,3 +1,10 @@
+## 2026-11-02 — native real SU(N) six-plane spatial C3 source proof reduced to adjoint ReTr
+
+- Reused group-generic `BalabanClayGate4PeriodicPathInverseBianchiExact.pathHolonomyReverseOpposite` and original six-plane periodic source to prove actual SU(N) swapped plaquette = inverse holonomy on native links.
+- Added scalar `sunSwappedPositivePlaneRealTrace` conditional on one normalized SU(N) inverse trace identity; derived that identity from a single **concrete matrix adjoint real-trace law** for `ComplexMatrixOperations.daggerM`. It is a mathematical source requirement, not an invented group or Haar theorem.
+- Added native exact six-term C3 reindex of the **real SU(N)** 6 physical positive Wilson deficits, using the original path/C3 naturality, two reversed planes and the real additive laws. `nativeSUNSixAtC3FromInverseRealTrace` supplies the previously local original C3 input; `nativeC3BoundaryFromAdjointRealTrace` now builds physical R443 from it.
+- Canonical Balaban TOE imports the new proof files. Genuine selected compact matrix/trace, one-link full Haar, 1024-bond codec, CMP119 selected complete action/metric insertion, R445 continuum uniform tails, R320 differentiated CMP116, R333 same H continuum gap remain open. Source-written only; not Agda kernel checked and no CI.
+
 ## 2026-11-02 — original real SU(N) spatial C3 site-sum and normalized Gibbs mass (source-written)
 
 - Searched all named finite Wilson/plaquette, SU(N) trace, Haar/Fubini, CMP119, CMP116 mixed-J, R320/R333 and OS spectral terms and relevant earlier PR inventories before new implementation.
