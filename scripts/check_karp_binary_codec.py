@@ -10,7 +10,8 @@ from itertools import product
 from karp21_signed_cut_binary_codec import (
     CutGraph, decode_graph, decode_partition, encode_graph, encode_partition,
     gamma_nat, read_gamma_nat, reduction_word, cut_score, verifies_word,
-    partition_to_cut, signed_bits,
+    partition_to_cut, signed_bits, sparse_certificate_from_labels,
+    sparse_cut_certificate_verifier, verifies_sparse_word,
 )
 
 
@@ -110,12 +111,61 @@ def test_large_binary_weights() -> int:
     return count
 
 
+
+
+def test_sparse_endpoint_certificates() -> int:
+    """N21 witness bit bound is 2m, not binary-encoded vertex count n.
+
+    Huge n with only m=1 proves a genuine size counterexample to the
+    earlier assertion that n bits is polynomial in graph Word length.
+    """
+    checks = 0
+    for n in range(6):
+        for parts in product((-2, -1, 0, 1, 2), repeat=n):
+            graph = partition_to_cut(parts)
+            encoded = encode_graph(graph)
+            for labels in product((0, 1), repeat=graph.vertices):
+                short = sparse_certificate_from_labels(graph, labels)
+                assert len(short) == 2*len(graph.edges)
+                assert verifies_sparse_word(encoded, short) == verifies_word(encoded, labels)
+                checks += 1
+
+    # A graph whose number of isolated vertices is exponential in its
+    # binary graph word length has a 2-bit, rather than n-bit, witness.
+    huge_n = 2**1024
+    huge = CutGraph(huge_n, ((0, huge_n - 1, 3),), 1)
+    huge_word = encode_graph(huge)
+    assert len(huge_word) < 5000
+    assert verifies_sparse_word(huge_word, (0, 1))
+    assert not verifies_sparse_word(huge_word, (1, 1))
+    assert not verifies_sparse_word(huge_word, (0,))
+    assert not verifies_sparse_word(huge_word, (0, 1, 0))
+    checks += 4
+
+    repeated = CutGraph(3, ((0, 1, 3), (0, 2, 4)), 5)
+    repeated_word = encode_graph(repeated)
+    assert verifies_sparse_word(repeated_word, (0, 1, 0, 1))
+    assert not verifies_sparse_word(repeated_word, (0, 1, 1, 1))
+    # Even if individually crossing edges would pass, a vertex cannot
+    # receive contradictory labels in two edge-local assignments.
+    assert not verifies_sparse_word(repeated_word, (0, 1, 1, 0))
+    checks += 3
+
+    signed = CutGraph(3, ((0, 1, -5), (1, 2, 8)), 3)
+    for labels in product((0, 1), repeat=3):
+        assert verifies_sparse_word(
+            encode_graph(signed), sparse_certificate_from_labels(signed, labels)
+        ) == verifies_word(encode_graph(signed), labels)
+        checks += 1
+    return checks
+
 if __name__ == "__main__":
     gamma = test_gamma()
     test_invalid_source_maps_to_no()
     test_graph_parser_fail_closed()
     n, witness_checks = test_full_reduction()
     large = test_large_binary_weights()
+    sparse = test_sparse_endpoint_certificates()
     print(f"PASS exact E20 binary source/target codec: {n} source instances, "
           f"{witness_checks} bit-label checks; {large} 1024-bit envelope "
           f"controls; {gamma} gamma/signed int controls; malformed graph "
