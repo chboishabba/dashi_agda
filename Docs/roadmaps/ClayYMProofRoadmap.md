@@ -1,3 +1,11 @@
+### 2 November 2026: R443 auxiliary-gauge marginalisation / source cut
+
+**Source-written, exact-head Agda compilation pending.** `YMClayR443BondMarginalC3Exact` now factors the original native six-plane Wilson deficit through the actual n=3 bond field, proves its C3 square without the auxiliary `siteGauge`, constructs a pushforward finite measure on bond-only observables, derives that measure's integration/partition laws from the already-selected Gibbs source identity and source integration laws, proves normalized expectation equality, and reuses the existing R443→R431 numerator C3 compiler on that bond-only carrier.
+
+This **pays the auxiliary-coordinate algebraic marginalisation** subcut; it does not pay compact SU(2) Haar. Rational norm-one quaternions form a proper countable subgroup of full compact SU(2). A normalized compact-group Haar law cannot be obtained just by naming an arbitrary integral on rational points, or by pushing it along the bond projection. The next R443-Haar source is a *different* compact-real link carrier, with a proven rational-to-real holonomy/action comparison and an actual compact product-Haar/change-of-variables construction. Do not report `NativeSixPlaneHaarBoundary` as a constructed physical Haar law.
+
+The remaining high-alpha chain is: **real compact SU(2)/SU(N) source + Haar Gibbs ↔ same-action Wilson comparison → varying-cutoff R445 convergence/observable tails → selected R320 decay → same OS Hamiltonian R333 uniform positive gap → nontrivial full four-dimensional Clay scope.** n=3 is a fixed side-four lattice, not a UV scaling trajectory. K0 compilation remains deferred to the user.
+
 ### 1 November selected gauge/Wilson coarse-fine theorem contract
 
 `YMClayVoyagerCovariantWilsonCoarseFineBidiExact` now proves a conditional
