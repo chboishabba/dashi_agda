@@ -47,6 +47,17 @@ def main() -> int:
     rejects(chart, b)
     b = deepcopy(matrix); b["reaction_index"] = ["CHEBI:12"]
     rejects(chart, b)
+    # Prevent independent drift between the checked manual JSON observation
+    # and the small Agda source-typed list. Agda is the golden formal owner.
+    creator_owner = ROOT / "DASHI/Biology/BH4CreatorChartSourceBridgeExact.agda"
+    creator_text = creator_owner.read_text(encoding="utf-8")
+    chart_block = creator_text.split("observedSourceRheaIds =\n", 1)[1].split(
+        "\n\nobservedSourceRheaIdCount :", 1)[0]
+    agda_chart_ids = re.findall(r'"(RHEA:[0-9]+)"', chart_block)
+    json_chart_ids = [item["rhea_id"] for item in chart["rhea_identifiers"]]
+    assert len(agda_chart_ids) == len(json_chart_ids) == 8
+    assert len(set(agda_chart_ids)) == len(agda_chart_ids)
+    assert sorted(agda_chart_ids) == sorted(json_chart_ids)
     # Compare the real source-observed 8 IDs to the actual Agda golden
     # finitePanelReactionIds owner (not the synthetic fixture above).
     owner = ROOT / "DASHI/Biology/Molecular/BH4ExecutedPanelReactionReceiptExact.agda"
