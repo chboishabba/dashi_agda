@@ -976,3 +976,20 @@ open R443Six public using
 
 -- Original six-plane Wilson deficit is also exactly a R445 native observable.
 open R445Weld public using (nativeR443SixDeficitR445Observable; r443SixDeficitIsNativeObservableSameObject)
+
+
+-- 2 Nov: canonical import graph now exposes the *proved finite-source
+-- propositions*, without changing the physical Haar/continuum/OS gates.
+open R443BondMarginal public using
+  (sixDeficitFactorsThroughBonds
+  ; forgetC3CommutingSquare
+  ; densityFactorsThroughBonds
+  ; bondMarginalIntegrationLaws
+  ; normalizedBondExpectationAgreement
+  ; bondR431NumeratorC3)
+open R445FiniteBound public using
+  (nativeSixTraceLower
+  ; nativeSixTraceUpper
+  ; nativeSixDeficitNonnegative
+  ; nativeSixDeficitAtMost3072
+  ; nativeSixDeficitAbsoluteBound)
