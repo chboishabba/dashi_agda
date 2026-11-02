@@ -1,5 +1,13 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+## 2026-11-03 K00 all-word strict parsing and bounded-certificate origin
+
+The latest source-written K00 owners in PR #1445 are `Karp21CookStrictWordCanonicalReencodeExact.agda` and `Karp21StrictSATBoundedCertificateNPBoundaryExact.agda`. They reuse the existing Cook formula AST, DASHI unary Nat/prefix grammar, three-bit token codec, strict SAT parser, finite Cook witness and executable SAT verifier. The new proof statements are `k00StrictAcceptedWordCanonicalReencode`, `k00StrictAcceptedWordCertificateBound`, `k00StrictSATBoundedWitnessBidi`, `k00StrictSATInNPFromConcreteResourceReceipts` (conditional on actual polynomial-cost receipts), and `k00ConcreteTapeRunBoundedStrictSATWitnessBidi` on the earlier exact-budget Cook–Levin bitword. The nested grammar inverse includes `parsedFormulaTopMatchesInput` so mismatched token/formula constructor cases are addressed even when recursive child parsing is not definitionally reduced.
+
+Primary intellectual provenance remains Stephen Cook (1971, Boolean satisfiability and complexity reductions), Leonid Levin (1973, universal sequential search formulation), and Richard Karp (1972, 21 combinatorial reductions). DASHI's source-coded grammar/verifier BIDI and signed E20/N21 sparse bridge are independent formalisation contributions, not claims to have proved a new complexity separation. Michael Levin's biological work is not a substitute for or a coauthor of the complexity results. These are UNCHECKED Agda source implementations without pinned kernel receipts; no P0 machine clock, concrete SAT NP root, 20-edge certified network, or 21-node completeness promotion is claimed.
+
+
+
 **Canonical full current roadmap:** [`Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md`](../Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md). This shorter research note is not the authoritative status ledger; use the linked file for exactly 21 nodes, 20 historical edges, eight follow-on subjects, and named remaining lemmas.
 
 ## 2026-11-02 same-object K00/E20/N21 executable BIDI proof ownership
