@@ -231,6 +231,10 @@ import DASHI.Education.DigitalESDOpenAxisGapTransportExact
 import DASHI.Education.DigitalESDOpenAxisWorldRegression
 import DASHI.Education.DigitalESDGetenetSourcePartCandidateExact
 
+import DASHI.Education.DigitalESDIntersectionalRecompositionExact
+import DASHI.Education.DigitalESDHigherOrderFabricIncidenceExact
+import DASHI.Education.DigitalESDDependencyScopedWorldRevisionExact
+
 module DASHI.EverythingDigitalESDReciprocalBraid where
 
 ------------------------------------------------------------------------
