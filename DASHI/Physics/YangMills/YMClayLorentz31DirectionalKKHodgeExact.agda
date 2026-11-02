@@ -12,6 +12,8 @@ module DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact where
 -- reduction, or physical YM mass gap is inferred.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31
 import DASHI.Physics.YangMills.YMClayVoyagerR4HodgeBasisExact as Eu
@@ -74,7 +76,7 @@ record SameSourceKKYMContinuation : Set₁ where
     selectedMetricIsKKReduction :
       reduceKKMetric selectedMetric5D ≡ selectedMetric4D
 
-    signatureProbe : L31.Axis → Agda.Builtin.Bool.Bool
+    signatureProbe : L31.Axis → Bool
     signatureSigns : L31.Axis → L31.AxisSign
     observedDirectionalEvidence : L31.DirectionalProbe signatureProbe
     sameMetricCalibration : L31.AxisCalibration signatureProbe signatureSigns
@@ -103,3 +105,8 @@ sameSourceDirectionalLorentzSignature w =
     (SameSourceKKYMContinuation.observedDirectionalEvidence w)
     (SameSourceKKYMContinuation.sameMetricCalibration w)
 
+
+-- Re-export the source-level distinction rather than inventing a new proof.
+creutzFiveEuclideanIsNotKK :
+  Dim.creutzFiveEuclideanLattice ≡ Dim.kkFourLorentzPlusCircle → ⊥
+creutzFiveEuclideanIsNotKK = Dim.creutzIsNotKK
