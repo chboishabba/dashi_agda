@@ -57,12 +57,18 @@ def main() -> int:
     ontology = out / "bh4-pathway-ontology.json"
     ontology_jsonld = out / "bh4-pathway-ontology.jsonld"
     ontology_review = out / "bh4-pathway-review-worklist.json"
+    primary_chart_crosswalk = out / "kitzerow-primary-chart-rhea-crosswalk.json"
     claim_ledger = Path("docs/biology/KitzerowBH4ClaimLedgerCandidate.v1.json")
     interval = out / "bh4-interval-flux-feasibility.json"
     summary_path = out / "bh4-phase4-maxcut-summary.json"
 
     run([py, "scripts/acquire_rhea_chebi_bh4_reactions.py", "--from-uniprot-panel", str(a.panel), "-o", str(rhea)])
     run([py, "scripts/build_bh4_stoichiometric_matrix.py", str(rhea), "--output-prefix", str(mp)])
+    run([
+        py, "scripts/compare_kitzerow_primary_chart.py",
+        "--matrix", str(matrix), "-o", str(primary_chart_crosswalk),
+    ])
+    run([py, "scripts/check_kitzerow_primary_chart.py"])
     run([py, "scripts/acquire_bh4_parameter_evidence.py", "--template", "--matrix", str(matrix), "-o", str(template)])
     solver = template
     if a.manifest:
@@ -142,6 +148,7 @@ def main() -> int:
     abund = load(abundance); exch = load(exchange_context); joint = load(joint_payment)
     sf = load(sifts); xp = load(xpollenation); ont = load(ontology) if exits.get("pathway_ontology") == 0 else None
     review = load(ontology_review) if exits.get("pathway_review") == 0 else None
+    original_chart = load(primary_chart_crosswalk)
     network: dict[str, object] = {}
     if sab:
         network["sabio"] = {k: sab.get(k) for k in ("schema", "proteins_completed", "proteins_with_entries", "kinetic_entry_count", "kinetic_parameter_count")}
@@ -179,6 +186,14 @@ def main() -> int:
             "authority": ont.get("authority"),
         }
 
+    if original_chart:
+        network["kitzerow_original_chart"] = {
+            "schema": original_chart.get("schema"),
+            "observed_chart_rhea_ids": original_chart.get("creator_chart_observed_rhea_id_count"),
+            "finite_panel_ids": original_chart.get("dashi_finite_panel_rhea_id_count"),
+            "literal_overlap": len(original_chart.get("literal_rhea_identifier_intersection", [])),
+            "whole_creator_network_coverage_ratio": None,
+        }
     if review:
         network["pathway_review"] = {
             "schema": review.get("schema"),
@@ -206,6 +221,7 @@ def main() -> int:
             "xpollenation_neighbourhoods": str(xpollenation_dir),
             "pathway_ontology": str(ontology), "pathway_ontology_jsonld": str(ontology_jsonld),
             "pathway_review": str(ontology_review) if review else None,
+            "kitzerow_primary_chart_crosswalk": str(primary_chart_crosswalk),
             "interval": str(interval),
             "summary": str(summary_path),
         },
