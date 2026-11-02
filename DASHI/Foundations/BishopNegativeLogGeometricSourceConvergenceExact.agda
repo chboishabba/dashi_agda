@@ -25,6 +25,7 @@ module DASHI.Foundations.BishopNegativeLogGeometricSourceConvergenceExact where
 
 open import Agda.Builtin.Nat using (Nat; suc)
 import Real as R
+open import Data.Rational.Unnormalised as Rat using (0ℚᵘ; 1ℚᵘ)
 import RealProperties as RP
 import Sequence as Seq
 
@@ -137,3 +138,68 @@ sourceLogValueEqualsConfiguredBishopLog
     termSame
     (E.bishopNegativeLogConvergence dataSet x inside)
     (sourceNegativeLogValueConverges x zeroBelow belowOne)
+
+
+------------------------------------------------------------------------
+-- K04d-LOG POSITIVE OWNER: THE CANONICAL LOG SERIES IS AT LEAST x.
+-- The first coefficient is L_1(x)=x; every subsequent original
+-- reciprocal-power coefficient is nonnegative. The PINNED Bishop
+-- monotone-limit theorem, rather than an assumed monotonic-log law,
+-- gives x <= L(x) and therefore 0 < L(x) for every 0<x<1.
+------------------------------------------------------------------------
+
+sourceLogPartialIncreasing :
+  (x : R.ℝ) →
+  R.NonNegative x →
+  Seq._isIncreasing (Seq.SeriesOf (sourceNegativeLogTerm x))
+sourceLogPartialIncreasing x xNonnegative n =
+  RP.≤-respˡ-≃
+    (RP.≃-symm
+      (RP.+-identityʳ
+        (Seq.SeriesOf (sourceNegativeLogTerm x) n)))
+    (RP.+-monoʳ-≤
+      (Seq.SeriesOf (sourceNegativeLogTerm x) n)
+      (RP.nonNegx⇒0≤x
+        (sourceNegativeLogTermNonnegative x xNonnegative n)))
+
+sourceLogFirstPartialEqualsX :
+  (x : R.ℝ) →
+  R._≃_
+    (Seq.SeriesOf (sourceNegativeLogTerm x) (suc zero))
+    x
+sourceLogFirstPartialEqualsX x =
+  let open RP.ℝ-Solver
+  in solve 1
+    (λ point →
+      Κ Rat.0ℚᵘ ⊕
+        ((Κ Rat.1ℚᵘ ⊗ point) ⊗ Κ Rat.1ℚᵘ)
+      ⊜ point)
+    RP.≃-refl x
+
+sourceNegativeLogAtLeastPoint :
+  (x : R.ℝ) →
+  (zeroBelow : R._<_ R.0ℝ x) →
+  (belowOne : R._<_ x R.1ℝ) →
+  R._≤_
+    x
+    (sourceNegativeLogValue x zeroBelow belowOne)
+sourceNegativeLogAtLeastPoint x zeroBelow belowOne =
+  RP.≤-respˡ-≃
+    (RP.≃-symm (sourceLogFirstPartialEqualsX x))
+    (Seq.xₙisIncreasing⇒xₙ≤limxₙ
+      (sourceLogPartialIncreasing
+        x (RP.0≤x⇒nonNegx (RP.<⇒≤ zeroBelow)))
+      (Bishop.bishopAbsoluteSeriesConverges
+        (sourceNegativeLogAbsolutelyConvergent
+          x zeroBelow belowOne))
+      (suc zero))
+
+sourceNegativeLogStrictlyPositive :
+  (x : R.ℝ) →
+  (zeroBelow : R._<_ R.0ℝ x) →
+  (belowOne : R._<_ x R.1ℝ) →
+  R._<_ R.0ℝ (sourceNegativeLogValue x zeroBelow belowOne)
+sourceNegativeLogStrictlyPositive x zeroBelow belowOne =
+  RP.<-≤-trans
+    zeroBelow
+    (sourceNegativeLogAtLeastPoint x zeroBelow belowOne)
