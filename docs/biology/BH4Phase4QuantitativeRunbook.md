@@ -115,7 +115,7 @@ Kitzerow hypothesis ledger:
 
 See [KitzerowBH4PathwayOntologyRoadmap.md](KitzerowBH4PathwayOntologyRoadmap.md)
 for exact external ontology targets and the KPO-01 through KPO-12 obligations.
-The updated Rhea REST acquisition also requests GO and Reactome columns. Any observed links are exported with release/source metadata, but do not establish same-context pathway identity. The runner also emits a deterministic, source-reopenable **candidate-only**
+The updated Rhea REST acquisition requests GO, Reactome, KEGG and MetaCyc columns. The exporter now recognizes well-formed KEGG/MetaCyc reaction IDs as typed review-only candidates and retains unparsed residuals. Reactome mappings are automatically ChEBI-based, unlike the curated Rhea KEGG/MetaCyc mappings. Any observed links are exported with release/source metadata, but do not establish same-context pathway identity. The runner also emits a deterministic, source-reopenable **candidate-only**
 worklist at artifacts/biology/bh4-pathway-review-worklist.json, classified by
 author primary passage, reaction direction/compartment/kinetics, species
 compartment/exchange, ontology mapping and non-finite chemistry.
