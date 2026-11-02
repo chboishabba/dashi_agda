@@ -570,3 +570,45 @@ teacher-free validated checkpoint (open), D5 accepted Agda
 kernel/refinement receipts (open), D6 complete authenticated
 real-network Pareto (open), D7 independently labelled semantic
 pairs/trialectic cube (open).
+
+
+## 2 November cross-repository exact source update
+
+The authoritative C2 train-only diagnostic JSON is now embedded in
+LeechTransformer PR #4 at
+`docs/receipts/c2_train_only_quality_diagnosis_20261102.json`
+with SHA-256
+`e31dec9a6135d1e9b0a819e93947d8ebfb610491473c83e118fcbe3d58aff4fc`.
+It is a user-executed 4032-target receipt, not a new model-quality
+result. No saved teacher/student model file digests are claimed.
+
+New source-written golden leaves:
+
+- F02a `LeechOddOnlyApproximationObstructionExact.agda`:
+  jointly mirrored historical-state exact fitting impossibility
+  for an odd-only student against a nonodd target. F02b real
+  MSE/inner-product error floor remains **open**.
+- F07 `LeechLayerErrorTransportExact.agda`:
+  telescoping error majorant for a finite teacher/student layer
+  sequence under **explicit**, unproven-for-this-model triangle,
+  scaling monotonicity and Lipschitz premises. Numeric constants
+  and exact PyTorch refinement remain **open**.
+- Both imported through existing
+  `DASHI.Unified.LeechQualityGuardTOEBridgeExact` and existing
+  TOE roots; Agda kernel not run this session.
+
+New LeechTransformer D2 implementation:
+`scripts/ablate_early_layer_quality.py`, seven actual-weight
+counterfactuals plus same-probe pointwise F08 logit/NLL bound;
+`tests/test_early_layer_quality_ablations.py`. Focused D3
+training via `student_only_layers` and `--focus-layers`
+keeps the nonselected dense fallback, freezes nonselected MoE
+parameters and categorically forbids false full-model promotion.
+Exact commands and all remaining D1–D7 gates reside in
+`docs/early_layer_quality_rescue_maxcut_20261102.md`.
+
+Remaining: D2 test execution and actual saved-weight receipt;
+D3 trained focused/global CE recovery; D4 full-gate
+teacher erasure; F02b/F08 real analytic proof, F07 concrete
+constants and Agda kernel; D6 actual network, D7 labelled
+semantics. Original Kornienko and DASHI owners unchanged.
