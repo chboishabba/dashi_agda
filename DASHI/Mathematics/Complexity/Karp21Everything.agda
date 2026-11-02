@@ -70,3 +70,9 @@ import DASHI.Mathematics.Complexity.Karp21CookStrictTripleBitBoundaryExact
 import DASHI.Mathematics.Complexity.Karp21CookLevinConcreteBitWordReuseExact
 
 import DASHI.Mathematics.Complexity.Karp21CookStrictSATLanguageExact
+
+import DASHI.Mathematics.Complexity.Karp21MichaelLevinGoalExecutionWitnessExact
+
+import DASHI.Mathematics.Complexity.Karp21MichaelLevinObserverCutQuotientBoundaryExact
+
+import DASHI.Mathematics.Complexity.Karp21LevinPrefixFreeCookCodingExact
