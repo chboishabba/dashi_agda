@@ -28,8 +28,10 @@ module DASHI.Mathematics.Complexity.Karp21CookLevinConcreteBitWordReuseExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Nat using (Nat; _*_)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Bits
@@ -113,6 +115,17 @@ exactAcceptingRunToSerializedCookSAT states symbols nonempty input steps
   CL.exactBudgetRunToCookSatisfiable
     states symbols nonempty input steps
 
+-- TWO pre-existing List-length definitions, one actual word metric:
+-- pay their extensional equality explicitly instead of assuming it
+-- judgmentally for an abstract formula expression.
+wordLengthMatchesCookCodecLength :
+  (word : List Bool) →
+  Word.encodingSize word ≡ Bits.listLength word
+wordLengthMatchesCookCodecLength [] = refl
+wordLengthMatchesCookCodecLength (bit ∷ bits) =
+  cong (λ length → suc length)
+    (wordLengthMatchesCookCodecLength bits)
+
 -- Exact encoded bit-size identity inherited from the PREVIOUS codec:
 -- unlike a source-language theorem, this does NOT prove that the
 -- tape machine computes the encoding in polynomial bit time.
@@ -128,5 +141,8 @@ serializedCookFormulaWordLength :
   ≡ 3 * Prefix.cookFormulaTokenCount
       (CL.guardedCookFormula states symbols nonempty input steps)
 serializedCookFormulaWordLength states symbols nonempty input steps =
-  Bits.formulaBitCodeLengthExact
-    (CL.guardedCookFormula states symbols nonempty input steps)
+  trans
+    (wordLengthMatchesCookCodecLength
+      (guardedCookLevinBitWord states symbols nonempty input steps))
+    (Bits.formulaBitCodeLengthExact
+      (CL.guardedCookFormula states symbols nonempty input steps))
