@@ -67,8 +67,8 @@ record ResearchGapRoute
     -- Cross-source is a typed source-identity distinction. A paper compared
     -- with itself is an intrastudy reinterpretation, not independent support.
     donorIsDistinctSource :
-      World.studySource scope (World.study donor) ≡
-      World.studySource scope (World.study recipient) → ⊥
+      Attr.canonicalURL (World.studySource scope (World.study donor)) ≡
+      Attr.canonicalURL (World.studySource scope (World.study recipient)) → ⊥
     researchQuestion : String
     missingRecipientEvidence : String
     recipientReallyUnmeasured :
@@ -90,6 +90,65 @@ record ResearchGapRoute
     participantAuthorityDebt : String
 
 open ResearchGapRoute public
+
+------------------------------------------------------------------------
+-- N-AXIS GAP STATUS BEFORE OR AFTER FULL-TEXT ADJUDICATION
+--
+-- Before review, unknown content is NOT a proved unmeasured axis. The
+-- source may already report a relevant result that the current extractor
+-- has not reconstructed. Candidate comparisons may nominate such a review
+-- question, but cannot pay source evidence in the recipient study.
+------------------------------------------------------------------------
+
+data RecipientGapStatus
+    (scope : World.StudyWorldScope)
+    (world : World.AccountedStudyWorld scope)
+    (recipient : World.StudyPart scope)
+    (axis : World.Axis scope) : Set₁ where
+  awaitingIndependentReview :
+    (workRef : String) →
+    World.accounting world
+      (World.study recipient) (World.part recipient) axis ≡
+        World.notYetAssessed workRef →
+    RecipientGapStatus scope world recipient axis
+  sourceReviewedButUnmeasured :
+    (questionRef missingRef : String) →
+    World.accounting world
+      (World.study recipient) (World.part recipient) axis ≡
+        World.unmeasuredForQuestion questionRef missingRef →
+    RecipientGapStatus scope world recipient axis
+  sourceAccessBlocked :
+    (accessRef constraintRef : String) →
+    World.accounting world
+      (World.study recipient) (World.part recipient) axis ≡
+        World.sourceInaccessible accessRef constraintRef →
+    RecipientGapStatus scope world recipient axis
+
+record CandidateGapQuestionRoute
+    (scope : World.StudyWorldScope)
+    (world : World.AccountedStudyWorld scope)
+    (donor recipient : World.StudyPart scope)
+    (axis : World.Axis scope) : Set₁ where
+  constructor candidate-gap-question-route
+  field
+    sourcesAreDistinctByCanonicalURL :
+      Attr.canonicalURL (World.studySource scope (World.study donor)) ≡
+      Attr.canonicalURL (World.studySource scope (World.study recipient)) → ⊥
+    targetStatus : RecipientGapStatus scope world recipient axis
+    donorHasActualWorldAssessment :
+      World.PartAxisAccounting scope
+        (World.study donor) (World.part donor) axis
+    donorAssessmentMatchesWorld :
+      donorHasActualWorldAssessment ≡
+      World.accounting world
+        (World.study donor) (World.part donor) axis
+    question : String
+    transferConditionDebt : String
+    participantAndCulturalAuthorityDebt : String
+    sourceReviewDebt : String
+    use : CrossStudyResearchUse
+
+open CandidateGapQuestionRoute public
 
 -- The routing output remains a research question, not a reviewed finding.
 -- Materialising a donor's observation in the recipient study would need an
