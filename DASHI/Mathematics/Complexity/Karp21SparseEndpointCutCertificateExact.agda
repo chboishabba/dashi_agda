@@ -37,8 +37,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_; _++_; length)
 open import Data.Maybe.Base using (Maybe; nothing; just)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
+import Data.Fin.Base as Fin
+import Data.Fin.Properties as FinP
 import Data.Vec.Base as Vec
 import Data.Integer.Base as Int
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
@@ -221,3 +225,81 @@ fullAcceptedWitnessHasSparseWitness graph labels observed =
   trans
     (projectedSparseVerifierExactlyEqualsFull graph labels)
     observed
+
+
+------------------------------------------------------------------------
+-- Concrete endpoint-consistency checker on a SPARSE edge-label list.
+-- It compares every pair of occurrences at equal Fin n addresses;
+-- the arithmetic involves at most 2m addresses (not an n-sized array).
+-- Fin addresses are part of the actual graph, not inferred provenance.
+------------------------------------------------------------------------
+
+endpointObservations :
+  ∀ {n} (edges : List (Cut.SignedUndirectedEdge n)) →
+  EdgeBits edges → List (Fin.Fin n × Bool)
+endpointObservations [] emptyEdgeBits = []
+endpointObservations (edge ∷ tail) (addEdgeBits a b rest) =
+  (Cut.first edge , a) ∷ (Cut.second edge , b)
+  ∷ endpointObservations tail rest
+
+boolEqual : Bool → Bool → Bool
+boolEqual true true = true
+boolEqual false false = true
+boolEqual true false = false
+boolEqual false true = false
+
+andBool : Bool → Bool → Bool
+andBool true x = x
+andBool false x = false
+
+observationsCompatible :
+  ∀ {n} → (Fin.Fin n × Bool) → (Fin.Fin n × Bool) → Bool
+observationsCompatible (vertex , label) (other , otherLabel)
+  with FinP._≟_ vertex other
+... | yes _ = boolEqual label otherLabel
+... | no _ = true
+
+oneAgainstAll :
+  ∀ {n} →
+  (Fin.Fin n × Bool) → List (Fin.Fin n × Bool) → Bool
+oneAgainstAll observation [] = true
+oneAgainstAll observation (other ∷ rest) =
+  andBool (observationsCompatible observation other)
+    (oneAgainstAll observation rest)
+
+allEndpointOccurrencesConsistent :
+  ∀ {n} → List (Fin.Fin n × Bool) → Bool
+allEndpointOccurrencesConsistent [] = true
+allEndpointOccurrencesConsistent (one ∷ rest) =
+  andBool (oneAgainstAll one rest)
+    (allEndpointOccurrencesConsistent rest)
+
+-- Source-written executable verifier aligned with the Python sparse
+-- certificate semantics (same-edge double-bit representation, same
+-- endpoint consistency condition and same signed threshold).
+verifyConsistentSparseCut :
+  ∀ {n} (graph : Cut.WeightedCutGraph n) →
+  EdgeBits (Cut.edges graph) → Bool
+verifyConsistentSparseCut graph local =
+  andBool
+    (allEndpointOccurrencesConsistent
+      (endpointObservations (Cut.edges graph) local))
+    (verifySparseEdgeBits graph local)
+
+verifySparseCutBitWord :
+  ∀ {n} (graph : Cut.WeightedCutGraph n) →
+  List Bool → Bool
+verifySparseCutBitWord graph bits
+  with decodeSparseEdgeBits (Cut.edges graph) bits
+... | nothing = false
+... | just local = verifyConsistentSparseCut graph local
+
+-- This real verifier REJECTS a malformed one-bit suffix, not a
+-- success flag. It applies even when no edges are listed.
+sparseWordVerifierRejectsTrailingBit :
+  ∀ {n} (graph : Cut.WeightedCutGraph n)
+    (local : EdgeBits (Cut.edges graph)) (extra : Bool) →
+  verifySparseCutBitWord graph
+    (encodeSparseEdgeBits local ++ (extra ∷ [])) ≡ false
+sparseWordVerifierRejectsTrailingBit graph local extra
+  rewrite sparseRejectTrailingBit local extra = refl
