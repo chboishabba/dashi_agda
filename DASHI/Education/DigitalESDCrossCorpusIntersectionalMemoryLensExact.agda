@@ -10,6 +10,9 @@ import DASHI.Biology.AliceBrownCorpusLoom as Alice
 import DASHI.Biology.StudentVoiceEpistemicAgencyBridge as Voice
 import DASHI.Biology.ParentAllyshipMultiObserverBridge as MultiObserver
 import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact as TimeLineage
+import DASHI.Biology.AliceBrownDissentGovernanceCrossPollinationExact as Dissent
+import DASHI.Governance.AliceBrownInstitutionalAgencyChoiceBridgeExact as Agency
+import DASHI.Culture.CohnInstitutionalFeministTwoEyedCrossPollinationExact as Cohn
 import DASHI.Biology.AliceBrownDependencyDerivedInvalidationBidiExact as Invalidation
 import DASHI.Core.DependencyDerivedMinimalInvalidationBidiExact as Derived
 import DASHI.Biology.TraumaRelationalLearningNonpromotionExact as Trauma
@@ -68,6 +71,9 @@ record CandidateCrossCorpusLens
     traumaNonpromotion : Trauma.TraumaRelationalLearningBoundary
     trialecticLearning : Learning.TrialecticMemoryLearningBoundary
     aliceTemporalDiagnosis : TimeLineage.AliceBrownTemporalDiagnosisBoundary
+    aliceDissentGovernance : Dissent.AliceBrownDissentGovernanceBoundary
+    institutionalAgencyBoundary : Agency.AliceInstitutionalChoiceBoundary
+    attributedFeministTwoEyedBoundary : Cohn.CrossPollinationBoundary
 
     researcherQuestion : String
     missingSourceSpecificEvidence : String
@@ -100,6 +106,9 @@ candidateLens alicePaper efsCase question debt =
     Trauma.canonicalTraumaRelationalLearningBoundary
     Learning.canonicalTrialecticMemoryLearningBoundary
     TimeLineage.canonicalAliceBrownTemporalDiagnosisBoundary
+    Dissent.canonicalAliceBrownDissentGovernanceBoundary
+    Agency.canonicalAliceInstitutionalChoiceBoundary
+    Cohn.canonicalCrossPollinationBoundary
     question debt true refl
 
 -- Five explicitly attributed, candidate-only questions covering distinct
