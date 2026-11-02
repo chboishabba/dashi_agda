@@ -196,3 +196,8 @@ monitor surface.
 
 
 - Strengthened the K04d Basel fibre from a convergence citation into an actual original-term majorant instance and native uniqueness-of-limits proof identifying the compiled sum with the original Bishop Basel limit and zero imaginary part (source-written only).
+
+
+- Reused original `BishopSetoidComplexExact.expC` in the Riemann analytic Bishop carrier through exact source-written pair inverse/arithmetic/exp-congruence bridges; no duplicate complex exp implementation.
+- Defined original Bishop complex `exp(−s log(n+1))` Dirichlet-term family with provable real/imag component identities and Basel-majorant convergence reuse. Constructed an actual logarithm candidate with original convergent Bishop `−log(1−x)` series at rational x=n/(n+1), retaining membership/exp-log laws as open proofs.
+- Distinguished unproved legacy postulate-backed `RealElementaryFunctionsCanonicalInstanceExact` and generic constructed-real inverse-log owners from the genuine Bishop real completion. All new proofs are source-written pending Agda golden acceptance; zeta, RH, twin prime and Pickover terminals are not promoted.
