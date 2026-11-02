@@ -21,7 +21,11 @@ def fixture():
     rhea = {"schema": "dashi.rhea-chebi-bh4-panel.v2",
             "rhea_release_reference": "2026_03", "source_uniprot_panel": "sha256:test",
             "reactions": [{"rhea_id": "RHEA:19897", "formula_charge_ready": True,
-                           "participant_sparql_response_sha256": "sha256:rxn"}]}
+                           "participant_sparql_response_sha256": "sha256:rxn",
+                           "participants": [
+                               {"chebi_id": "CHEBI:123", "side": "substrate", "coefficient": 1},
+                               {"chebi_id": "CHEBI:456", "side": "product", "coefficient": 1}
+                           ]}]}
     xp = {"schema": "dashi.bh4-xpollenation.v1",
           "neighbourhoods": [{
               "subject": {"namespace": "rhea", "identifier": "RHEA:19897"},
@@ -73,6 +77,8 @@ def main() -> int:
     assert all("owl:sameAs" not in str(node) for node in ld["@graph"])
     bad = deepcopy(m); bad["matrix"] = [[-2], [1]]
     rejects(bad, r, x, c)
+    bad = deepcopy(r); bad["reactions"][0]["participants"][0]["coefficient"] = 2
+    rejects(m, bad, x, c)
     bad = deepcopy(m); bad["external_exchange"] = [1]
     rejects(bad, r, x, c)
     bad = deepcopy(x); bad["neighbourhoods"][0]["edges"][0]["promotionAllowed"] = True
