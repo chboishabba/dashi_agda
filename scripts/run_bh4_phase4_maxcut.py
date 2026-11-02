@@ -31,6 +31,10 @@ def main() -> int:
     p.add_argument("--manifest", type=Path)
     p.add_argument("--wikimedia", type=Path, help="optional pinned Wikimedia BH4 panel receipt; no network acquisition is implied")
     p.add_argument("--source-reopen-packet", type=Path, help="optional caller-supplied source/revision references; does not authenticate source text")
+    p.add_argument("--creator-source-text", type=Path,
+                   help="optional authorized local creator-chart text; source evidence only")
+    p.add_argument("--creator-source-revision", type=str,
+                   help="required with --creator-source-text; observed date/source, not authentication")
     p.add_argument("--max-pdb-per-protein", type=int, default=3)
     p.add_argument("--top-kinetic-candidates", type=int, default=10)
     p.add_argument("--skip-network-evidence", action="store_true")
@@ -58,16 +62,28 @@ def main() -> int:
     ontology_jsonld = out / "bh4-pathway-ontology.jsonld"
     ontology_review = out / "bh4-pathway-review-worklist.json"
     primary_chart_crosswalk = out / "kitzerow-primary-chart-rhea-crosswalk.json"
+    creator_chart_text_index = out / "kitzerow-chart-source-text-candidates.json"
     claim_ledger = Path("docs/biology/KitzerowBH4ClaimLedgerCandidate.v1.json")
     interval = out / "bh4-interval-flux-feasibility.json"
     summary_path = out / "bh4-phase4-maxcut-summary.json"
 
     run([py, "scripts/acquire_rhea_chebi_bh4_reactions.py", "--from-uniprot-panel", str(a.panel), "-o", str(rhea)])
     run([py, "scripts/build_bh4_stoichiometric_matrix.py", str(rhea), "--output-prefix", str(mp)])
-    run([
+    if bool(a.creator_source_text) != bool(a.creator_source_revision):
+        raise SystemExit("--creator-source-text and --creator-source-revision must occur together")
+    compare_cmd = [
         py, "scripts/compare_kitzerow_primary_chart.py",
         "--matrix", str(matrix), "-o", str(primary_chart_crosswalk),
-    ])
+    ]
+    if a.creator_source_text:
+        run([
+            py, "scripts/index_kitzerow_chart_source_text.py",
+            "--source-text", str(a.creator_source_text),
+            "--source-revision", a.creator_source_revision,
+            "-o", str(creator_chart_text_index),
+        ])
+        compare_cmd.extend(["--source-text-index", str(creator_chart_text_index)])
+    run(compare_cmd)
     run([py, "scripts/check_kitzerow_primary_chart.py"])
     run([py, "scripts/acquire_bh4_parameter_evidence.py", "--template", "--matrix", str(matrix), "-o", str(template)])
     solver = template
@@ -186,6 +202,14 @@ def main() -> int:
             "authority": ont.get("authority"),
         }
 
+    if original_chart and original_chart.get("local_source_text_observation"):
+        network["creator_chart_local_text_observation"] = {
+            "schema": original_chart["local_source_text_observation"]["schema"],
+            "source_text_sha256": original_chart["local_source_text_observation"]["source_utf8_sha256"],
+            "candidate_observed_ids": original_chart["local_source_text_observation"]["creator_chart_observed_rhea_id_count"],
+            "source_is_original_pdf": False,
+            "creator_whole_network_coverage": None,
+        }
     if original_chart:
         network["kitzerow_original_chart"] = {
             "schema": original_chart.get("schema"),
@@ -222,6 +246,7 @@ def main() -> int:
             "pathway_ontology": str(ontology), "pathway_ontology_jsonld": str(ontology_jsonld),
             "pathway_review": str(ontology_review) if review else None,
             "kitzerow_primary_chart_crosswalk": str(primary_chart_crosswalk),
+            "kitzerow_chart_source_text_candidates": str(creator_chart_text_index) if a.creator_source_text else None,
             "interval": str(interval),
             "summary": str(summary_path),
         },
