@@ -512,3 +512,96 @@ K04b Nat-denominator-route kernel verification, K05 native trig addition/quarter
 
 
 **Newest explicit K04d source consumer:** `BishopMachinQuantitativeZetaCommutingSquareExact.AtOriginalCompletedZeta.sourceExpDirichletTerms` specializes the original-completed-zeta commuting square to the **literal** original Bishop setoid complex exp, using the actual Bishop negative-log-one-minus finite input `natLogArgument k`. `originalCompletedZetaMatchesSourceExpAtStage` and `...AtLimit` now give BOTH original complex coordinates for this specific constructed term source, subject to exact configured unit-interval membership, original half-plane agreement, and the earlier analytic domain/continuity witness at the limit. These are source-written reductions, **not** evidence that the original analytic `ZetaHalfPlaneLayer` has been inhabited or that actual same-object ζ continuity is proved.
+
+
+## 2026-11-02 K04d Bishop-Dirichlet proof/coherence max-cut
+
+**Source commits:** `dade5e6b1de7d8c4e7a8f5d88eb8b6167c204c12` and
+`5d31292146f630b37403ee8db420cdb26c6dd46a` on PR #1408.
+
+**Reuse-first search:** `BishopBaselReciprocalSquareConvergenceExact`,
+`EllipticDirichletBaselMajorantExact`,
+`BishopNatRealReciprocalSquareBaselExact`,
+`BishopFiniteSeriesExtensionalityExact`,
+`BishopExponentialSeriesConvergenceExact`,
+`BishopExponentialCauchyProductExact`,
+`BishopExponentialNonnegativeMonotoneExact`,
+`BishopRiemannDirichletExponentialTermExact`,
+`BishopRiemannDirichletBaselSameObjectExact`,
+`BishopMachinQuantitativeZetaCommutingSquareExact`,
+`BishopMachinQuarterPhaseQuadruplicationAlgebraExact` and
+`BishopMachinQuarterSharedTrigWeldBidiExact`.
+Preserve these original theorem/code owners and historical Dirichlet,
+Riemann, Machin, Bishop/Bridges and Murray attribution.
+
+**New actual Bishop proof terms, source-written (Agda unchecked):**
+
+- `dirichletRealValueIndependentOfMajorant` and
+  `dirichletImagValueIndependentOfMajorant`: two Basel comparison
+  witnesses for the *same* original real/imaginary term series yield
+  equivalent Bishop limits by `Sequence.uniqueness-of-limits`.
+  The `dirichletValueIndependentOfMajorant` pair is the complex
+  proof-witness coherence square.
+- `dirichletValuesRespectTermwiseEquality`: given two actual complex
+  term families at the **same** original Bishop analytic argument,
+  pointwise Bishop setoid equivalence in both coordinates, and each
+  side's proven Basel domination, reuse the original
+  `BishopFiniteSeriesExtensionalityExact.termwiseEquivalentSeriesHaveEquivalentLimits`
+  to identify their two infinite-series values. It does *not*
+  assert the missing termwise `exp(-s log(n+1)) = (n+1)^(-s)`
+  theorem or value agreement with the original opaque analytic zeta
+  function.
+
+**Exact outstanding cut, without pretending that a conditional field is a proof:**
+
+1. **K04d-LOG-INTERVAL:** `BishopPowerSeriesElementaryBridgeExact.InOpenUnitInterval`
+   is a configurable predicate in the original Round11
+   `BishopElementaryPowerSeriesData`, not definitionally the pair of
+   Bishop inequalities. Prove the indexed rational argument
+   `(n+1)/(n+2)` lies strictly between 0 and 1 **and** supply a
+   verified bridge from those order proofs into this particular
+   configured `InOpenUnitInterval` field. A mere inequality does not
+   inhabit the field.
+2. **K04d-EXP-LOG:** Prove on the *original* Bishop power-series
+   functions that `exp_B(log_B(n+1)) ≃ n+1`, including zero/one
+   indexing, branch, positivity, and exponential additivity. Reuse
+   `BishopExponentialCauchyProductExact.bishopExpAdd` and the
+   already source-owned positive/nonnegative order facts.
+3. **K04d-TERM-DOMINATION:** Identify the actual configured
+   exponential terms with the intended Dirichlet coefficients and
+   prove the all-index `1/(n+1)^2` bound in a uniform neighborhood
+   where `Re(s)>2`. The existing pointwise Basel comparison is
+   proved; a supplied `BishopDirichletBaselMajorantAt` field is
+   not a proof that these exponential terms satisfy it.
+4. **K04d-UNIFORM/CONTINUITY:** Prove one neighborhood-wide tail
+   modulus and termwise continuity for these same source terms;
+   infer continuity of the concrete summed function. Finally prove
+   same-object agreement with
+   `ZetaHalfPlaneLayer.zetaHalfPlane` and transport through the
+   actual `CompletedRiemannZeta.agreesWithHalfPlane` field.
+   Pointwise convergence or the word `Meromorphic` cannot replace
+   these arguments.
+5. **K04b-DENOM:** The direct original-Bishop `4/25^n`
+   rate and `8/25^n` two-index Cauchy estimate are source-written
+   in `BishopMachinGeometricBishopRateExact`. Keep the separate
+   unnormalised rational cross-product-to-Bishop-order denominator
+   certificate open until the literal denominator-normalization and
+   positivity proofs are accepted by the pinned Agda environment.
+6. **K05-TRIG:** Derive the actual Round11 sine/cosine addition law
+   from signed-factorial Cauchy products. Its single double-angle
+   consequence feeds the existing quadruplication square. Separately
+   prove the actual quarter-angle `sin_B=cos_B` from Machin's
+   rational tangent calculation with correct branch control, then
+   independent trigonometric pi uniqueness. The current endpoints
+   consume explicit hypotheses, not completed trigonometric proofs.
+7. **KERNEL:** Source readback and no-hole text inspection do not
+   establish typechecking. Independently typecheck the focused
+   K04/K05 import root using the repo's pinned golden Agda/Bishop
+   environment. Resolve errors and attach exact theorem/commit/checker
+   receipts before promoting any new status to `KERNEL`.
+
+**Acceptance state:** the two new convergence coherence results are
+`SOURCE`; all seven terminal K04b/K04d/K05 obligations above
+remain `OPEN` wherever they require independent new mathematics
+or an actual kernel check. RH, twin-prime infinitude and giant-angle
+Pickover sign remain unrelated terminal `OPEN` gates.
