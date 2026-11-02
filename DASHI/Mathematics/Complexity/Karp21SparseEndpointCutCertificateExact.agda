@@ -126,6 +126,22 @@ sparseEdgeScore (edge ∷ tail) (addEdgeBits a b rest) =
   Int._+_ (edgeBitsCut (Cut.weight edge) a b)
     (sparseEdgeScore tail rest)
 
+-- Unfold both independently owned with-patterns on the same actual
+-- Boolean endpoint comparison; do not assume their names are equal.
+edgeBitsCutMatchesContribution :
+  ∀ {n} (edge : Cut.SignedUndirectedEdge n)
+    (labels : Vec.Vec Bool n) →
+  edgeBitsCut (Cut.weight edge)
+    (Vec.lookup labels (Cut.first edge))
+    (Vec.lookup labels (Cut.second edge))
+  ≡ Cut.edgeContribution edge labels
+edgeBitsCutMatchesContribution edge labels
+  with Cut.differentLabels
+    (Vec.lookup labels (Cut.first edge))
+    (Vec.lookup labels (Cut.second edge))
+... | true = refl
+... | false = refl
+
 -- This is exactly the original signed MaxCut edge objective (not a
 -- PSD approximation or a nonnegative-only graph).
 projectedEdgeScoreEqualsOriginal :
@@ -136,7 +152,7 @@ projectedEdgeScoreEqualsOriginal :
 projectedEdgeScoreEqualsOriginal [] labels = refl
 projectedEdgeScoreEqualsOriginal (edge ∷ tail) labels =
   cong₂ Int._+_
-    refl
+    (edgeBitsCutMatchesContribution edge labels)
     (projectedEdgeScoreEqualsOriginal tail labels)
 
 -- Every full graph certificate projects to a *short* edge-local code
