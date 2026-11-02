@@ -22,6 +22,7 @@ open import Agda.Builtin.Equality using (_≡_)
 import DASHI.Reasoning.LeechQualityGateTeacherErasureExact as Quality
 import DASHI.Reasoning.LeechSharedCanonicalOrbitHistoryExact as Orbit
 import DASHI.Reasoning.LeechOddOnlyApproximationObstructionExact as OddNoGo
+import DASHI.Reasoning.LeechLayerErrorTransportExact as ErrorTransport
 
 toeTeacherFreeReplayUnderFullAdmission :
   ∀ {L : Nat} {State : Set} →
@@ -60,3 +61,9 @@ toeStudentRolloutGateIndependent =
 -- OddNoGo.historyOddCannotMatchNonOddPair. The corresponding quantitative
 -- real-inner-product squared-error floor (F02b) and any concrete
 -- PyTorch-to-Agda function correspondence remain explicitly OPEN.
+
+-- F07: ErrorTransport.traceErrorBound supplies a full finite
+-- teacher-trajectory telescoping certificate ONLY after an actual
+-- metric, triangle inequality and per-layer Lipschitz witnesses are
+-- supplied. It does not derive those witnesses for learned networks,
+-- nor does it prove F08 softmax/cross-entropy numerical refinement.
