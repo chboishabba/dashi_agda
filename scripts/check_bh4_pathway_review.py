@@ -30,11 +30,11 @@ def main() -> int:
     assert kinds["reaction-flux"] == 1
     assert kinds["exchange-flux"] == 2
     assert kinds["direction"] == 1
-    assert kinds["ontology-mapping"] == 2
+    assert kinds["ontology-mapping"] == 4
     assert kinds["context"] == 3
     assert kinds["chemistry"] == 1
-    assert len(review["obligations"]) == 11
-    assert len({row["id"] for row in review["obligations"]}) == 11
+    assert len(review["obligations"]) == 13
+    assert len({row["id"] for row in review["obligations"]}) == 13
     assert all(row["source_reopen_refs"] and row["repair_disposition"] == "hold-for-review"
                and row["establishes_flux_payment"] is False
                and row["edited_external_ontology"] is False for row in review["obligations"])
