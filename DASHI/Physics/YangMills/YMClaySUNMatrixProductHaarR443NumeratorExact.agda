@@ -30,6 +30,7 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as Gibbs
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNMatrixSpatialC3RealFubiniExact as Spatial
+import DASHI.Physics.Foundations.CMP119FlatSide4SpatialC3FieldCovarianceExact as C3
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as ProductC3
 import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
@@ -71,7 +72,7 @@ module _
           (Weld.nativeForwardC3Bonds links) site
         ≡ Gibbs.nativeSUNSixWilsonDeficitAt theory traceData
             links
-            (Spatial.C3.spatialC3Site site)
+            (C3.spatialC3Site site)
 
       -- Reuse one-link ordered laws; all 1024-link laws are derived below.
       oneLinkOrdered : Ordered.OneLinkOrderedHaarAlgebra oneLink
