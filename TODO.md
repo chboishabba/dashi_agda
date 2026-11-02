@@ -1,3 +1,13 @@
+### 2026-11-02 native six-plane SU(N) C3 exact source algebra
+
+- [x] Prove group-generic original reversed signed-plaquette holonomy = inverse on actual SU(N) matrix-link carrier using prior `pathHolonomyReverseOpposite`, periodic closure and physical positive-plane words.
+- [x] Prove the actual six-term real Wilson plaquette C3 reindex from two inverse orientations and original positive-plane enumeration. Do not assume a whole action or local six-plane invariance when an adjoint real-trace law is supplied.
+- [x] Reduce the normalized inverse real trace law to `SUNMatrixAdjointRealTraceLaw.matrixAdjointRealTrace` on literal matrix `daggerM`; construct R443 boundary from it with `nativeC3BoundaryFromAdjointRealTrace` and export through Balaban TOE.
+- [ ] **Concrete mathematical scalar leaf**: instantiate actual complex matrix SU(N), `normalizedRealTrace` with the correct division by N and its cyclicity and adjoint real-trace identity, without treating a record hypothesis as a proved inhabitant.
+- [ ] Build concrete same original positive-bond 1024-vector C3 codec and selected measurable one-link SU(N) compact Haar/Fubini/strict positivity (Lean PR #15 is a mathematical donor only).
+- [ ] Prove selected R124/CMP119 complete E/R/B/V source and metric insertion on this same Wilson Gibbs family, R445 changing-cutoff physical limits, R320 uniform selected mixed-J CMP116 decay, and R333 same-OS physical uniform gap/nontriviality.
+- [ ] Kernel check exact focused golden Agdas and transitive trust; no CI in this tranche.
+
 ### 2026-11-02 new native real SU(N) finite spatial C3 / Gibbs probability max-cut
 - [x] Search older generic plaquette/SUNWilson/Hodge/curl, CMP119/116/mixed-J, Fubini/Haar, OS/Hamiltonian and spectral owners and relevant original PRs #151/#153/#335/#430/#439/#466/#497/#547 before implementation.
 - [x] Source-write original 4^4 real Wilson spatial C3 site-sum proof via pre-existing polymorphic `finiteFubini`; derive beta-weighted global Wilson C3 from only local original six-plaquette source C3 (`YMClaySUNMatrixSpatialC3RealFubiniExact`).
