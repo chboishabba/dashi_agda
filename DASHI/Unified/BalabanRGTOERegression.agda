@@ -1063,12 +1063,14 @@ open SUNRealC3 public using
 -- matrix trace-inversion law. Not an abstract Wilson action assumption.
 open SUNInversePlane public using
   (sunSwappedPositivePlaneIsInverse
-  ; sunSwappedPositivePlaneRealTrace)
+  ; sunSwappedPositivePlaneRealTrace
+  ; matrixAdjointGivesSUNTraceInverse)
 open SUNSixC3 public using
   (nativeSUNSixAtC3FromInverseRealTrace
   ; sixRealC3Reindex)
 open SUNHaarR443 public using
-  (nativeC3BoundaryFromInverseTrace
+  (nativeC3BoundaryFromAdjointRealTrace
+  ; nativeC3BoundaryFromInverseTrace
   ; nativePhysicalIntegrationLaws
   ; nativePhysicalPartitionPositive
   ; nativeProductHaarR443
