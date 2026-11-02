@@ -17412,7 +17412,8 @@ Cleanup
 
 
 - [x] Expose the actual six-positive-plane Wilson deficit as the original n=3 R445 rational Wilson-observable function, with definitional same-object proof.
-- [ ] R445 finite source majorant: prove six-plane deficit ∈ [0,3072] on fixed side-four rational SU2 links using native trace bounds/additive sums; this is *not* uniform physical cutoff/volume convergence.
+- [x] R445 finite source majorant SOURCE-WRITTEN: `YMClayR445NativeSixDeficitUniformFiniteBoundExact` proves 0..3072 on fixed side-four rational SU2 links from native trace and rational sum bounds; exact-head kernel check pending. This is NOT physical cutoff/volume tail convergence.
 
 
-- [ ] **R443-linkHaar:** remove/integrate auxiliary `siteGauge` parameter from the native R443/R445 record family or prove normalized expectation pushforward to literal compact link-only Haar configurations; code-level type equality is not physical gauge quotient/probability equivalence.
+- [x] **R443-auxiliary gauge marginal** SOURCE-WRITTEN: `YMClayR443BondMarginalC3Exact` proves six-plane action descends to links, bond-only measure pushforward, Gibbs density factorization, integration/partition laws, normalized expectation equality and existing R431 C3 numerator on the original rational SU2 source; exact-head compiler pending.
+- [ ] **R443-linkHaar physical remainder:** construct real compact SU2/SUN link configurations and normalized product/constrained Haar integration with genuine Wilson/Gibbs same-action comparison, not a rational-point counting or arbitrary-integral surrogate; complete variable cutoff/volume identification and independent physical analytic input.
