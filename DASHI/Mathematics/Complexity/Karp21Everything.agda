@@ -54,3 +54,5 @@ import DASHI.Mathematics.Complexity.Karp21IndexedUpperPairBijectionExact
 import DASHI.Mathematics.Complexity.Karp21FiniteCliquePackingDecisionExact
 
 import DASHI.Mathematics.Complexity.Karp21FiniteNodeSetCoverDecisionExact
+
+import DASHI.Mathematics.Complexity.Karp21MalformedWordTotalReductionExact
