@@ -128,7 +128,7 @@ existingS29DiagnosticOwner = S29.DiagnosticDisposition
 -- The Wikidata theorem is only a reusable *pattern*: its original finite
 -- counterexample is not automatically an empirical BH4 theorem.
 existingResidualOriginOwner : Set
-existingResidualOriginOwner = Residual.Checker.DiagnosticOrigin
+existingResidualOriginOwner = Residual.WikidataConsumerResidualRefinementBoundary
 
 existingReopeningCarrier : Set
 existingReopeningCarrier = Reopen.RepairCandidate
