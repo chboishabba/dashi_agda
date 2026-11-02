@@ -57,6 +57,9 @@ import DASHI.Foundations.BishopNatRealPositiveExact as NatPositive
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as BaselNat
 import DASHI.Foundations.BishopNegativeLogGeometricSourceConvergenceExact as NativeLog
+import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as NegativeExp
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as UnitRatio
+import DASHI.Foundations.BishopGeometricSeriesConvergenceExact as GeometricSeries
 import RealProperties as RP
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
@@ -1285,3 +1288,63 @@ sourceCanonicalOriginalExpLogInverseAtOne :
     (NatReal.natReal (suc zero))
 sourceCanonicalOriginalExpLogInverseAtOne =
   ExpPositive.bishopExpZero
+
+
+------------------------------------------------------------------------
+-- K04d: THE CANONICAL NEGATIVE-LOG NAT HISTORY IS POSITIVE AT
+-- EVERY ACTUAL POSITIVE-SUCCESSOR INDEX WITHOUT EXP/LOG INVERSION.
+--
+-- Existing Bishop geometric comparison proves the source negative-log
+-- first coefficient lower bound. Existing all-real exponential Cauchy
+-- product and inverse-order theorem gives 0<exp(-L_n)<1, a true
+-- contractive ratio, with no classical trichotomy or symbolic log.
+------------------------------------------------------------------------
+
+sourceCanonicalNatLogSuccessorPositive :
+  (n : Nat) →
+  R._<_ R.0ℝ (sourceCanonicalNatLogCandidate (suc n))
+sourceCanonicalNatLogSuccessorPositive n =
+  NativeLog.sourceNegativeLogStrictlyPositive
+    (natLogArgument n)
+    (natLogArgumentPositiveBishop n)
+    (natLogArgumentBelowOneBishop n)
+
+sourceCanonicalNatExpNegativeRatio :
+  (n : Nat) → R.ℝ
+sourceCanonicalNatExpNegativeRatio n =
+  Exp.bishopExp (R.- (sourceCanonicalNatLogCandidate (suc n)))
+
+sourceCanonicalNatExpNegativeRatioPositive :
+  (n : Nat) →
+  R._<_ R.0ℝ (sourceCanonicalNatExpNegativeRatio n)
+sourceCanonicalNatExpNegativeRatioPositive n =
+  NegativeExp.negativeExpPositive
+    (sourceCanonicalNatLogSuccessorPositive n)
+
+sourceCanonicalNatExpNegativeRatioBelowOne :
+  (n : Nat) →
+  R._<_ (sourceCanonicalNatExpNegativeRatio n) R.1ℝ
+sourceCanonicalNatExpNegativeRatioBelowOne n =
+  NegativeExp.negativeExpBelowOne
+    (sourceCanonicalNatLogSuccessorPositive n)
+
+sourceCanonicalNatExpNegativeUnitRatio :
+  (n : Nat) →
+  UnitRatio.BishopUnitIntervalRatio
+    (sourceCanonicalNatExpNegativeRatio n)
+sourceCanonicalNatExpNegativeUnitRatio n = record
+  { UnitRatio.ratioNonnegative =
+      RP.<⇒≤ (sourceCanonicalNatExpNegativeRatioPositive n)
+  ; UnitRatio.ratioBelowOne =
+      sourceCanonicalNatExpNegativeRatioBelowOne n
+  }
+
+sourceCanonicalNatExpNegativeGeometricConverges :
+  (n : Nat) →
+  Seq._isConvergent
+    (Seq.SeriesOf
+      (GeometricSeries.geometricTerm
+        (sourceCanonicalNatExpNegativeRatio n)))
+sourceCanonicalNatExpNegativeGeometricConverges n =
+  GeometricSeries.geometricSeriesConvergent
+    (sourceCanonicalNatExpNegativeUnitRatio n)
