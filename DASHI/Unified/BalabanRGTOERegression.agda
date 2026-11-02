@@ -949,6 +949,7 @@ import DASHI.Physics.YangMills.YMClayConstructedComplexFiniteAdjointTraceExact a
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as SUNGaugeHaar
 import DASHI.Physics.YangMills.YMClaySUNProductHaarNativeGaugeR443Exact as SUNNativeGauge
 import DASHI.Physics.YangMills.YMClaySUNNativeWilsonBondPointwiseExact as SUNPointwise
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact as SUNVariablePointwise
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSixPlaneC3FromInverseTraceExact as SUNSixC3
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact as SUNHaarR443
@@ -1078,6 +1079,15 @@ open SUNGaugeHaar public using
   ; productHaarNativeGaugeInvariant)
 -- Native periodic BondField is a function; original Wilson/Gibbs observables
 -- preserve pointwise bond equality without global function extensionality.
+-- Same original periodic source, arbitrary cutoff n; Wilson/Gibbs functions
+-- are extensional under pointwise bond equality without global funext.
+open SUNVariablePointwise public using
+  (variableOrientedLinkPointwise
+  ; variableSignedPathPointwise
+  ; variablePositivePlaquettePointwise
+  ; variableSixWilsonDeficitPointwise
+  ; variableWilsonActionPointwise
+  ; variableGibbsDensityPointwise)
 open SUNPointwise public using
   (nativeOrientedLinkPointwise
   ; nativeSignedPathPointwise
