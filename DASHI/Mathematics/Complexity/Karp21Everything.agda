@@ -78,3 +78,5 @@ import DASHI.Mathematics.Complexity.Karp21MichaelLevinObserverCutQuotientBoundar
 import DASHI.Mathematics.Complexity.Karp21LevinPrefixFreeCookCodingExact
 
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact
+
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointConsistencySoundExact
