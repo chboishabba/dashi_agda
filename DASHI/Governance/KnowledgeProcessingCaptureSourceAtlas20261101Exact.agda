@@ -619,6 +619,33 @@ metaEscrowRestricted2026 = sourceReceipt
   "USD10800m money-market funds reclassified as restricted cash equivalents under infrastructure escrow conditions, release expected in 2028-30 contingent on obligations; in addition to issuer's USD355730m future not-commenced leases and USD454520m noncancel commitments."
   "Restricted funds are not free corporate liquidity; do not add escrow to gross liability amounts or automatically count the two future-obligation categories as disjoint."
 
+------------------------------------------------------------------------
+-- ORIGINAL COREWEAVE DDTL 3.0 CASH WATERFALL + CONTRACT REALISATION
+-- Source priority: SEC-filed actual contractual text, not later synthesis.
+-- Prior independent source-written owner PR #1101 already reads DDTL3;
+-- this PR #1443 is ONLY a governance consumer of its contract economics.
+------------------------------------------------------------------------
+
+coreWeaveDDTL3Sec220WaterfallOriginal : SourceReceipt
+coreWeaveDDTL3Sec220WaterfallOriginal = sourceReceipt
+  "CoreWeave Inc., Compute Acquisition Co. VII / V; US SEC"
+  "2025-07-28 DDTL 3.0 Credit Agreement Exhibit 10.1, Section 2.20(b), pp 57-59"
+  "2025-07-28"
+  "https://www.sec.gov/Archives/edgar/data/1769628/000176962825000033/coreweave30-ex101xtermlo.htm"
+  firstPartyIssuer
+  "Original cash-control priority: (i) eligible operating expenses, up to USD50m per calendar month in that first step; (ii) trustee/administrative indemnity and fees; (iii) interest and scheduled swap payments; (iv) liquidity-account top-up; (v) scheduled principal and certain swap termination amounts; (vi) conditional cash trap; (vii) other operating/capital expenditure only with OpEx Payment Condition; (viii) remaining cash to distribution reserve. Section 2.20(d) says reserve withdrawal remains conditional."
+  "The account accepts parent deposits and certain reserves, not only external customer cash. These priority categories, timing and legal conditions are NOT a public statement of realised receipt or upstream legally distributable company cash."
+
+coreWeaveDDTL3CureDecember31Original : SourceReceipt
+coreWeaveDDTL3CureDecember31Original = sourceReceipt
+  "CoreWeave Inc.; US SEC"
+  "First Amendment to Credit Agreement and Parent Guarantee and Pledge Agreement, Exhibit 10.31, sections 1.01 and 6.12"
+  "2025-12-31"
+  "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000104/ex10311.htm"
+  firstPartyIssuer
+  "Amended Contract Realization Ratio numerator includes MSA billed/received contract amounts without duplication PLUS CRR Cure Proceeds from equity. Minimum ratio 0.85:1.00 after the specified February 2026 commencement, subject to the disclosed zero-denominator exception; projected contract cash denominator uses a financial model and 360-day convention."
+  "Passing CRR alone does not mean customers paid cash; billed revenue may be accrued, equity cure is not customer cash, compliance cannot establish actual observed ratio, and an amendment cannot prove any cure occurred."
+
 -- An original primary statement is a receipt for what the named original
 -- says, not a receipt for the correctness of every empirical prediction.
 record AttributionBoundary : Set where
