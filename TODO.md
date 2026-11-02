@@ -17499,3 +17499,6 @@ Cleanup
 - [x] K04d-LOG-CANDIDATE: construct n+1 logarithm candidate from original Bishop convergent negative-log-one-minus series at n/(n+1), with explicit membership and native convergence (source-written, kernel pending).
 - [ ] Prove all-n configured Round11 unit-interval membership and the actual Bishop exp(log(n+1))=n+1 normalization; use to certify negative-real exponents and full σ>2 Basel domination.
 - [ ] Prove genuinely local-uniform Dirichlet tails, original analytic zeta identity, continuity and completion of the Machin commuting square; do not borrow unproved legacy-real log authority.
+
+
+- [x] Attach the concrete original Bishop `exp(−s · negativeLogOneMinus(rational n/(n+1)))` source terms, not an arbitrary term oracle, to both original completed-zeta stage/limit coordinate squares (source-written; original equality witnesses still open).
