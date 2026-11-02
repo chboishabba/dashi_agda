@@ -28,7 +28,7 @@ module DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact where
 -- new composition is DASHI's, source-written / kernel pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; subst)
@@ -144,6 +144,33 @@ baselIntegerTwoRealConverges :
   Seq._ConvergesTo_ baselRealPartial Basel.baselLimit
 baselIntegerTwoRealConverges =
   proj₂ Basel.baselSeriesConvergent
+
+
+------------------------------------------------------------------------
+-- TRUE INTEGER-TWO DIRICHLET FIBRE.
+--
+-- This is the actual constructive sum of the literal coefficients
+-- 1/(n+1)^2 on the original real carrier, including the zero imaginary
+-- component. It is a BASE FIBRE and not yet proof that a separately
+-- constructed analytic ζ coincides at s=2 or at Machin pi.
+------------------------------------------------------------------------
+
+baselComplexPartial : Nat → BC.BishopComplex
+baselComplexPartial n =
+  BC.bishop-complex (baselRealPartial n) R.0ℝ
+
+baselIntegerTwoComplexConverges :
+  (Seq._ConvergesTo_
+    (λ n → BC.re (baselComplexPartial n))
+    Basel.baselLimit)
+  ×
+  (Seq._ConvergesTo_
+    (λ n → BC.im (baselComplexPartial n))
+    R.0ℝ)
+baselIntegerTwoComplexConverges =
+  baselIntegerTwoRealConverges
+  ,
+  Seq.xₙ≃c⇒xₙ→c (λ {(suc n) → RP.≃-refl})
 
 -- Same-object weld with the original Riemann half-plane function.
 -- Its evidence MUST be the actual function value and the actual
