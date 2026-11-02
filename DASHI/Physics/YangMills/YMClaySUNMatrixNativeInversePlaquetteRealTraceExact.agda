@@ -133,3 +133,37 @@ sunSwappedPositivePlaneRealTrace theory traceData inverseLaw
           (Torus.pair site plane)))
       (cong (Trace.matrixWilsonValue traceData)
         (sunOriginalPositivePlaquetteIsOrdered theory links site plane)))
+
+
+------------------------------------------------------------------------
+-- Narrow the remaining scalar authority to the actual matrix operation
+-- named by CertifiedSUNMatrixTheory, not a second SU(N) group theorem.
+------------------------------------------------------------------------
+
+record SUNMatrixAdjointRealTraceLaw
+    {Matrix Complex Scalar : Set} {N : Nat}
+    (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+    (traceData : Trace.SUNMatrixRealTrace {Scalar = Scalar} theory)
+    : Set₁ where
+  field
+    -- Standard finite complex-matrix identity:
+    -- Re Tr(A†)/N = Re Tr(A)/N.
+    -- The current ComplexMatrixOperations has daggerM, but does not expose
+    -- complex conjugation or real-part arithmetic; this is the exact seam.
+    matrixAdjointRealTrace : ∀ matrix →
+      Trace.normalizedRealTrace traceData
+        (SUN.daggerM (SUN.operations theory) matrix)
+      ≡ Trace.normalizedRealTrace traceData matrix
+
+open SUNMatrixAdjointRealTraceLaw public
+
+matrixAdjointGivesSUNTraceInverse :
+  ∀ {Matrix Complex Scalar : Set} {N : Nat}
+    (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+    (traceData : Trace.SUNMatrixRealTrace {Scalar = Scalar} theory) →
+  SUNMatrixAdjointRealTraceLaw theory traceData →
+  SUNRealTraceInverseOnNative theory traceData
+matrixAdjointGivesSUNTraceInverse theory traceData laws = record
+  { SUNRealTraceInverseOnNative.normalizedRealTraceInverse =
+      λ U → matrixAdjointRealTrace laws (SUN.matrix U)
+  }
