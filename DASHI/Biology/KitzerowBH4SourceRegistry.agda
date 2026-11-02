@@ -46,6 +46,17 @@ kitzerow2024BH4 = sourceRecord
   "formal public BH4/autism/comorbidity synthesis"
   "Credit Kitzerow for the specific synthesis actually present in this source; do not attribute older component biology to this source."
 
+kitzerow2024BH4FolateChart : SourceRecord
+kitzerow2024BH4FolateChart = sourceRecord
+  "SRC-KIT-CHART-2024-01"
+  "Kimberly Kitzerow"
+  "BH4/Folate/Cobalamin/Homocysteine Pathway"
+  "ResearchGate page lists 2024-01; displayed text reports separate full-text upload on 2025-08-08"
+  "https://www.researchgate.net/publication/377218425_BH4FolateCobalaminHomocysteine_Pathway"
+  creatorPreprint
+  "source-observed original Rhea reaction numbers with enzyme/substrate/product and cofactor chart, CC BY-NC-ND 4.0"
+  "Creator owns chart selection and organization; Rhea and primary biochemical researchers own underlying reactions. Public source observations are partial, original PDF binary/geometry unverified, and complete proprietary network not available."
+
 kitzerow2024Allostatic : SourceRecord
 kitzerow2024Allostatic = sourceRecord
   "SRC-KIT-2024-08"
