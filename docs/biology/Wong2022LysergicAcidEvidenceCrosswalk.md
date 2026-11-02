@@ -12,6 +12,12 @@
 - PubChem gives lysergic acid CID **6717** (C16H16N2O2). The existing Kluver source atlas identifies lysergic acid **diethylamide** as CID **5761** (C20H25N3O). Similar vocabulary or molecular relationship does not license same-compound substitution.
 - The paper's ability to produce a precursor does not itself demonstrate 5-HT2A receptor activation by the product, any psychedelic subjective effect, or therapeutic efficacy.
 
+## Golden versus adapter ownership
+
+- `DASHI.Biology.Wong2022LysergicAcidFiniteCore` is the self-contained `{-# OPTIONS --safe #-}` finite grammar. The four disjoint-constructor proofs live there. It imports only the Agda builtin equality definition.
+- `DASHI.Biology.Wong2022LysergicAcidEvidenceExact` is the source-linked adapter. It imports legacy Biology, Chemistry and attribution owners that are not all marked safe. It does **not** claim its entire import graph is a Golden safe graph.
+- No kernel acceptance is claimed until the commands in W22-07 run on the exact head. A safe option on the isolated core cannot prove independent source science or certify a legacy module's dependencies.
+
 ## Existing owners reused, without duplicate mathematical or ontology authority
 
 | Task | Existing owner | Connection in this PR |
@@ -33,11 +39,11 @@
 4. **W22-04: Independent analytical evidence.** Review raw source-data rows against the paper's claims. Treat a paper-described assay as author evidence, not new DASHI validation.
 5. **W22-05: Cellular network bridge.** Only instantiate the existing `OpenMetabolicNetwork` or chemistry transition kernel after source-grounded organism/compartment/time, rate-unit, transport and calibrated-flux witnesses exist. No such witness is asserted here.
 6. **W22-06: External ontology admission.** Route DOI/CID and any separately verified Rhea/ChEBI/GO/Reactome candidates through the native SLR/SensibLaw candidate/review machinery, preserving source revision and abstaining on missing identity. Do not create a new ontology store.
-7. **W22-07: Independent proof and repo acceptance.** Run focused Agda check and full Biology/Everything import graph on the exact PR SHA; record the flags, checker version, postulates/metas, and result. Source-written is not kernel-accepted.
+7. **W22-07: Independent proof and repo acceptance.** Check `Wong2022LysergicAcidFiniteCore.agda` with `--safe`, then the source-linked `Wong2022LysergicAcidEvidenceExact.agda` and full Biology/Everything import graph using their existing compatible options. Record exact PR SHA, checker version, postulates/metas and result. Source-written is not kernel-accepted.
 
 ## Source-to-proof ceiling
 
-`dLaTagDistinctFromLsdTag`, `productionEvidenceNotReceptorEvidence` and `reportedStatusNotIndependentValidation` prove **disjoint constructors in DASHI's finite evidence grammar**, not experimental correctness of chemical identity, metabolic same-object correspondence, or industrial performance. The source attribution core proves only that citation is not a theorem or authority.
+The Golden finite-core terms `dLaTagDistinctFromLsdTag`, `productionEvidenceNotReceptorEvidence` and `reportedStatusNotIndependentValidation` prove **disjoint constructors in DASHI's finite evidence grammar**, not experimental correctness of chemical identity, metabolic same-object correspondence, or industrial performance. The source attribution core proves only that citation is not a theorem or authority.
 
 Original experiment/figures belong to Wong and collaborators; the stable identifier entries belong to PubChem and their database curators; all newly authored finite evidence types and bridge terms are DASHI source code. The original biochemical discovery and receptor literature owners remain independent.
 
