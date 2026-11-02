@@ -948,6 +948,7 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixNativeInversePlaquetteRealTraceExa
 import DASHI.Physics.YangMills.YMClayConstructedComplexFiniteAdjointTraceExact as SUNFiniteTrace
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as SUNGaugeHaar
 import DASHI.Physics.YangMills.YMClaySUNProductHaarNativeGaugeR443Exact as SUNNativeGauge
+import DASHI.Physics.YangMills.YMClaySUNNativeWilsonBondPointwiseExact as SUNPointwise
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSixPlaneC3FromInverseTraceExact as SUNSixC3
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact as SUNHaarR443
@@ -1075,8 +1076,20 @@ open SUNGaugeHaar public using
   ; gaugeOneLinkHaarInvariant
   ; gaugeBondVector
   ; productHaarNativeGaugeInvariant)
+-- Native periodic BondField is a function; original Wilson/Gibbs observables
+-- preserve pointwise bond equality without global function extensionality.
+open SUNPointwise public using
+  (nativeOrientedLinkPointwise
+  ; nativeSignedPathPointwise
+  ; nativeSUNPositivePlaquettePointwise
+  ; nativeSUNSixDeficitPointwise
+  ; nativeSUNWilsonActionPointwise
+  ; nativeSUNGibbsDensityPointwise)
 open SUNNativeGauge public using
-  (nativeProductHaarGaugeInvariant
+  (nativeGaugePhysicalIntegrationLaws
+  ; nativeGaugeR443FromOneLink
+  ; nativeGaugeNormalizedFromOneLink
+  ; nativeProductHaarGaugeInvariant
   ; nativeGaugeWilsonGibbsR443
   ; nativeGaugeGibbsNumeratorInvariant
   ; nativeGaugeNormalizedExpectationInvariant)
