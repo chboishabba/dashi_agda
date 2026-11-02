@@ -259,3 +259,34 @@ objective or of actual PyTorch↔Agda same-object refinement.
 Source attribution remains Kornienko for Leech-LILA; Sophontic
 semantic tests are independently authored, and Ibrahim's Monster
 3B work remains separate.
+
+
+## 2 November executed-source cut: parity theorem vs fitted student
+
+Exact source F02a now exists as
+`DASHI/Reasoning/LeechOddOnlyApproximationObstructionExact.agda`.
+Its `historyOddCannotMatchNonOddPair` uses the previously
+defined `History.invertHistory` (joint activation+memory
+involution). It proves **algebraic exact non-fitting of an odd
+student at both mirrored states** if the target violates oddness.
+It does NOT prove the norm-squared quantitative F02b MSE floor.
+The full real-valued parity/projection and GELU source theorem
+still require the correct scalar/inner-product owner.
+
+F07 also exists in source as
+`LeechLayerErrorTransportExact.agda`, proving a finite teacher
+trajectory majorant given an explicit ordered error calculus,
+triangle law, monotone scaling and actual per-layer Lipschitz
+witnesses. It does NOT derive such constants for the
+trained sparse top-k router or the historical transition. The
+numeric F08 logit-infinity/NLL bound is checked on probed Torch
+logits by `ablate_early_layer_quality.py`; the real-analysis
+Agda proof is still open.
+
+The original unedited C2 train-only receipt is now committed
+under `LeechTransformer/docs/receipts/`. The layer-1 frozen-model
+counterfactual test and focused layer-1 CE/KL continuation
+are source-written in PR #4; none is a new executed training
+result. The full negative-control and ethics/geometry steelman
+above remains necessary. Kernel acceptance unexecuted. No
+claim that orientation sign indicates benevolence/harm.
