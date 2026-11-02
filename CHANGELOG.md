@@ -213,3 +213,9 @@ monitor surface.
 
 
 - R445 n=3 selected source Wilson **deficit** is now an actual native R445 observable on the same original SU2 bond record; boundedness of the complete six-plane sum and actual R445 continuum tail remain unproved distinct obligations.
+
+
+## 2026-11-02 — selected CMP119 Gibbs/NZDNDZ canonical owner reconciliation
+
+- Inspected existing source-level `CMP119WilsonGibbsFiniteMeasureSameObjectExact` and `CMP119SelectedWilsonGibbsAnchorExact` and identified their actual selected R124 beta-driven density/metric-insertion input as the unreplaced physical bridge. Wrote `Docs/physics/YMClaySourceOwnerReuseAndProofGate20261102.md` to prevent redundant compilers and separate finite native C3 arithmetic, real compact Haar and continuum source semantics.
+- R445 marked-moment source/finite bounded Wilson alone still does not supply physical uniform tails; R320 uniform selected connected source estimate and R333 same OS uniform spectral gap remain open. No kernel or CI run.
