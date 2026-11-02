@@ -1231,3 +1231,23 @@ Viktor Csimma's pinned `vendor/bishop`; earlier
 DASHI source theorem owners. New source composition
 in this tranche is attributed to DASHI, not silently
 credited to an external theorem as an Agda proof.
+
+
+### K05 anti-diagonal equivalence refinement
+
+Source commit `c745667872e52b76c32b80e1d7233575ea88fd5f`
+extends the true Round11 zero/parity proof owner with
+`round11PythagoreanFromCosineAdditionOpposite`. Together
+with the previously source-written
+`round11CosineAdditionOppositeFromPythagorean`,
+this establishes a **two-way equivalence** between
+the native Round11 cosine addition equation at
+`(x,-x)` and the *original same-object*
+Pythagorean identity `cos_B(x)^2+sin_B(x)^2 ≃ 1`.
+The proof uses the ORIGINAL `Round11.round11ParityInputs`,
+`bishopSinNeg`, `bishopCosNeg`,
+`round11CosineAtZero` and pinned Bishop real
+polynomial normalization. It is not a proof of
+arbitrary two-variable `cosAdd` or a proof of
+Pythagorean itself. Status: **SOURCE-WRITTEN,
+Agda kernel unchecked**, as requested.
