@@ -28,7 +28,7 @@ module DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact where
 -- new composition is DASHI's, source-written / kernel pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; subst)
@@ -250,3 +250,71 @@ module AtOriginalCompletedZeta
             completed s domain))
         RP.≃-refl)
       (halfPlaneImagIsDirichlet agreement)
+
+------------------------------------------------------------------------
+-- COMPLETE ORIGINAL BISHOP INTEGER-2 BASEL INSTANCE.
+--
+-- The previously generic comparison witness is now constructed for
+-- the ACTUAL rational source terms, and its compiled limit is proved
+-- equivalent to the original Basel owner (rather than a second
+-- symbolic "zeta value"). This is the one special analytic fibre
+-- which the repository can already realize without Bishop log/exp.
+------------------------------------------------------------------------
+
+baselIntegerTwoTermFamily : BishopDirichletTermFamily
+baselIntegerTwoTermFamily s n = baselComplexTerm n
+
+zeroAbsBelowBasel :
+  ∀ n →
+  R._≤_
+    (R.∣ R.0ℝ ∣)
+    (Basel.baselTerm n)
+zeroAbsBelowBasel n =
+  RP.≤-respˡ-≃
+    (RP.≃-symm
+      (RP.nonNegx⇒∣x∣≃x
+        (RP.0≤x⇒nonNegx RP.≤-refl)))
+    (RP.nonNegx⇒0≤x (Basel.baselTermNonnegative n))
+
+baselIntegerTwoMajorant :
+  (s : BC.BishopComplex) →
+  BishopDirichletBaselMajorantAt baselIntegerTwoTermFamily s
+baselIntegerTwoMajorant s = record
+  { dominationStart = zero
+  ; realDomination = λ n _ →
+      RP.≤-reflexive (Basel.absoluteBaselTerm n)
+  ; imagDomination = λ n _ → zeroAbsBelowBasel n
+  }
+
+baselCompiledRealLimitIsOriginal :
+  (s : BC.BishopComplex) →
+  R._≃_
+    (BC.re
+      (dirichletValue
+        baselIntegerTwoTermFamily s
+        (baselIntegerTwoMajorant s)))
+    Basel.baselLimit
+baselCompiledRealLimitIsOriginal s =
+  Seq.uniqueness-of-limits
+    (proj₂
+      (realDirichletConvergent
+        baselIntegerTwoTermFamily s
+        (baselIntegerTwoMajorant s)))
+    baselIntegerTwoRealConverges
+
+baselCompiledImagLimitIsZero :
+  (s : BC.BishopComplex) →
+  R._≃_
+    (BC.im
+      (dirichletValue
+        baselIntegerTwoTermFamily s
+        (baselIntegerTwoMajorant s)))
+    R.0ℝ
+baselCompiledImagLimitIsZero s =
+  Seq.uniqueness-of-limits
+    (proj₂
+      (imagDirichletConvergent
+        baselIntegerTwoTermFamily s
+        (baselIntegerTwoMajorant s)))
+    (Seq.xₙ≃c⇒xₙ→c
+      (λ {(suc n) → RP.≃-refl}))
