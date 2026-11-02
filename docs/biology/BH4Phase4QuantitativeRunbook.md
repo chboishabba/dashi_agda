@@ -132,6 +132,21 @@ standards-compliant BioPAX/GO-CAM/SBML model or a paid kinetic simulator.
 It has no fabricated compartments, kinetic laws or exchange rates. Failed
 acquisition must not be reinterpreted as negative biology.
 
+## Fail-closed interval-evidence validation
+
+The existing parameter normalization and HiGHS solver now reject duplicate
+parameter identifiers, nonfinite/reversed bounds, absent assay/source/context
+references and missing/mismatched flux units. A solver success must survive
+a separate finite S*v+e and interval-bound residual check. Its vector remains
+a **floating-point candidate with stated tolerance**, not an exact algebraic
+proof or independent authentication of biological source measurements.
+
+The regression
+`python3 scripts/check_bh4_numeric_flux_guard.py` includes duplicate,
+NaN/infinity, stale/missing-context, unit mismatch, and an optional synthetic
+HiGHS success case. No synthetic fixture is promoted to a paid clinical
+experimental or tissue-specific measurement.
+
 ## Live max-cut after the v8 run
 
 The run should tell us exactly which reaction columns have abundance context and which exchange species have human metabolomics context. The scientific payment frontier is then:
