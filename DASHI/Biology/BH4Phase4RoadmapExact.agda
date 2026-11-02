@@ -27,6 +27,9 @@ data BH4Phase4Residual : Set where
   payCompartmentContextForInteroperableModel : BH4Phase4Residual
   validateSBMLBioPAXGOCAMExports : BH4Phase4Residual
   reconcileKitzerowBranchStack : BH4Phase4Residual
+  supplySourceReopenableReviewEvidence : BH4Phase4Residual
+  persistReviewedBH4ConsumerIntoSLR : BH4Phase4Residual
+  exposeProgressiveBH4ReviewInDioxus : BH4Phase4Residual
   resolveNonFiniteMTORProteinReactionRepresentation : BH4Phase4Residual
   executeFluxPaymentPreparation : BH4Phase4Residual
   executeProteinAbundanceContextAcquisition : BH4Phase4Residual
@@ -55,6 +58,9 @@ livePhase4Residuals =
   ∷ payCompartmentContextForInteroperableModel
   ∷ validateSBMLBioPAXGOCAMExports
   ∷ reconcileKitzerowBranchStack
+  ∷ supplySourceReopenableReviewEvidence
+  ∷ persistReviewedBH4ConsumerIntoSLR
+  ∷ exposeProgressiveBH4ReviewInDioxus
   ∷ resolveNonFiniteMTORProteinReactionRepresentation
   ∷ executeFluxPaymentPreparation
   ∷ executeProteinAbundanceContextAcquisition
@@ -96,6 +102,15 @@ jointPaymentLedgerToolReady = true
 
 structuralPathwayOntologyExportToolReady : Bool
 structuralPathwayOntologyExportToolReady = true
+
+sourceReopenableReviewWorklistToolReady : Bool
+sourceReopenableReviewWorklistToolReady = true
+
+nativeSLRReviewPersistenceReady : Bool
+nativeSLRReviewPersistenceReady = false
+
+nativeDioxusPathwayReaderReady : Bool
+nativeDioxusPathwayReaderReady = false
 
 compartmentAndKineticSBMLExportReady : Bool
 compartmentAndKineticSBMLExportReady = false
