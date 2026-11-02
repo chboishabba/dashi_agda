@@ -957,3 +957,90 @@ and term continuity near Machin; literal original completed
 zeta same-object continuity; K05 Round11 full trig addition,
 arctan-tangent branch and independent trig pi; focused Agda
 kernel verification (deferred by explicit user instruction).
+
+
+## 2026-11-02 K04b source-native actual error and K04d all-real-axis coefficient
+
+**Source commits:** `7579f7fdc6c966d91cd8d23f46ac2f3b5f2dd934`,
+`23c35547354e1915a780723fef90cff12f75bbed`,
+`fc5ac99cdbf6f051449df7c772975f7985e3eef1`,
+`c6ab34505aa49f2e1be03a557a73e69cadff9d8a`,
+`61be29b0ba65f056b4b2dcecccfdc5f5c1d0cce9`.
+All source-written; no CI or Agda elaboration was run.
+
+### K04b independent unnormalised-denominator path: end-to-end SOURCE
+
+`BishopMachinCrossEnvelopeBishopOrderExact` now reaches
+the full original source bound, not just normalized Nat arithmetic.
+`magnitudeIsEmbeddedOmittedPower` converts the actual Bishop
+arctangent FIRST OMITTED magnitudes to existing `Stage.qPow`
+rational powers with original absolute-value/nonnegative powers.
+`oddNaturalPowerFactor` proves for every Nat n both
+`5^(2n+1)=5*25^n` and
+`239^(2n+1)=239*57121^n`.
+`rationalReciprocalPower`,
+`fiveOmittedPowerIsOriginalFraction`, and
+`twoHundredThirtyNineOmittedPowerIsOriginalFraction`
+then identify the exact original qPow coefficients with
+the original rational positive denominators for ALL indices.
+`sourceWeightedPowerEqualsOriginalFraction` and
+`sourceWeightedOmittedIsEmbeddedOriginalFraction` weld both
+weighted ORIGINAL Bishop magnitudes to the exact source
+unnormalised rational envelope. Finally
+`sourceOriginalOmittedBishopBelowGeometric` bounds these
+magnitudes by embedded `4/25^n`, and
+`machinActualCrossDenominatorFourOver25` composes the literal
+original all-stage
+`Combined.machinRationalAllStagesRemainder` to prove
+`|bishopMachinPi - embed(qMachinStage n)| ≤ embed(4/25^n)`.
+This is mathematically the same original Bishop target as the
+independent direct geometric proof
+`BishopMachinGeometricBishopRateExact.machinBishopFourOver25Pow`.
+The alternate rational-certificate completion should not yet
+be labelled Agda KERNEL; SOURCE code has been committed without
+an Agda checker execution. The existing direct real Cauchy
+`machinBishopEightOver25PowCauchy` remains available.
+
+### K04d source complex Dirichlet real-axis coordinate identification
+
+`BishopRiemannDirichletExponentialTermExact` now has
+`sourceRealAxisExponent`,
+`sourceRealAxisExponentialRealCoefficient`, and
+`sourceRealAxisExponentialImaginaryZero`. Reusing actual
+Round11 `round11SineAtZero`, `round11CosineAtZero` and
+`BishopSineCosineSetoidCongruenceExact`, they prove the
+literal original source complex exponential at *every Bishop
+real sigma* has real coordinate
+`exp_B(-sigma*logNat(n))` and imaginary coordinate 0,
+without needing to assume exp/log inversion or zeta
+owner agreement. This closes the carrier/coordinate starting
+point for a real-σ half-plane comparison, but does NOT
+establish uniform decay over complex σ+it nor continuity.
+
+### Outstanding actual mathematical owner cuts
+
+1. K04d-LOG source configured interval proof and exp/log inverse
+   for all positive Nat successors; the integer zero base is paid.
+2. K04d COMPLEX REGIONAL DOMINATION of literal
+   `exp_B(-(σ+it) logNat(n))` real/imag coordinates in a
+   neighborhood of the actual Machin limit with `Re(s)>2`,
+   including concrete unit-magnitude trig estimates. The
+   `BishopDirichletUniformBaselTailsExact` compiler already
+   supplies one cutoff after this region-wide inequality.
+3. K04d actual summand continuity, uniform-limit
+   continuity, `realPartGreaterThanOne` predicate bridge,
+   and completed-zeta *same-object* identification on the
+   original `ZetaHalfPlaneLayer` carrier.
+4. K05 mixed signed-factorial Cauchy coefficient identities,
+   general sine/cosine addition, arctan-tangent branch,
+   and independent trig-pi uniqueness. Existing native trig at
+   origin, quadruplication polynomial identities, finite
+   Cauchy wings and exponential additivity are reused, not
+   a same-object replacement for the missing mixed identity.
+5. Agda kernel acceptance intentionally deferred by user
+   direction. No CI run; the source commits and GitHub
+   readback are NOT evidence of Agda elaboration.
+
+Preserve attribution and ownership: Machin (1706), Dirichlet,
+Riemann, Bishop & Bridges, Murray, pinned Viktor Csimma Bishop,
+and existing DASHI original theorem owners.
