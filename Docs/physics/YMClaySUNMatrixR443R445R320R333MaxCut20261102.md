@@ -127,3 +127,30 @@ The GitHub search of `dashi_lean4`'s default branch is insufficient: PR #15 has 
 **Corrected R445/R320/R333:** Lean PR #15 also has concrete Prokhorov/OS/covariance *transport* theorem bodies, but the source-provenance `CMP119SelectedSourceInstantiation` record, actual physical cutoff-uniform tightness, finite mixed-J CMP116 half-rate, same-H OS reconstruction and physical spectral-window lower bound remain substantive inputs. No same-object Agda acceptance or continuum mass gap follows.
 
 No Lean/Agda kernel was run here and transitive trust remains uninspected. PR-head readbacks were performed, not an exhaustive review of all 291 Lean files. Preserve authorship and the current physical non-promotion.
+
+## 2026-11-02 follow-on — reuse old real-monoid Fubini; pay global physical C3 summation
+
+### Exact source/PR searches before new implementation
+Explicit indexed file searches included: `BalabanPeriodicPlaquetteHolonomy`, `BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact`, `BalabanClayGate4PeriodicBondPathBianchiExact`, `BalabanClayGate4LiteralPeriodicPlaquetteHolonomyGaugeExact`, `SUNWilsonClassFunction`, `SUNWilsonAction`, `Hodge`, `curl`, `Wilson-variation`, `Fubini`, `Haar`, `ReTr`, `SU(N)`, `CMP119Selected`, `CMP116`, `mixed-J`, `mixedDerivativeMagnitudeBelowSelectedShell`, `R320`, `R333`, `Hamiltonian`, `spectral gap`, `OSReconstructedSpectrum`, `ContinuumProkhorov`, `normalizedRealTrace`, `CompactLieStandardAuthority`, `normalizedExpectationOne`, `normalizedExpectationInvariant` and `partitionFunctionPositive`. Searches of PR titles used `plaquette`, `R443`, `R445`, `R320`, `R333`, `CMP119`, `CMP116`, `Haar`, `Fubini`, `OS mass gap`, `SU(N)`, `Wilson`. PR changed-file inventories additionally covered #151, #153, #335, #430, #439, #462, #466, #497, #547, #1440 and #1444; Lean PR #15's real source is separately indexed in the Lean donor ledger. This was a targeted evidence inventory, **not** a false claim to have individually read every historical PR in the organization.
+
+### Newly paid finite source theorem, no duplicate generic Wilson proof
+The **existing** `BalabanClayGate4FiniteWeightedAdjointFubiniExact.finiteFubini` is polymorphic over additive commutative monoids. `YMClaySUNMatrixSpatialC3RealFubiniExact.agda` reuses it with the existing postulated real scalar algebra and the original `Gibbs.sumFourReal/sumSitesReal` definitions, proving:
+- `realSumFourSwap`, the real site/axis finite Fubini identity;
+- `realSumSitesSpatialC3`, exact original side-four real site-sum reindex under spatial C3, using two nested finite-Fubini swaps;
+- `nativeSUNSixDeficitC3FromLocal`, the **global actual six-positive-plane real Wilson deficit** from the *local* transformed-plane identity;
+- `nativeSUNWilsonActionC3FromLocal`, the beta-weighted **same** real Wilson action C3 theorem.
+
+`YMClaySUNMatrixProductHaarR443NumeratorExact.PhysicalC3ActionBoundary` no longer assumes `sixPlaneActionC3` on the whole lattice. Its only C3 Wilson assumption is `sixPlaneAtC3` at each **original** site. The existing product-Haar Fubini theorem then gives the full Gibbs/numerator result on the original source. This is a stronger exact reduction than a second global physical action-invariance record.
+
+That source module also derives `nativeProductHaarNormalizedC3`, `nativeProductHaarUnitNumerator`, and `nativeNormalizedWilsonUnit`: the *actual same-record normalized expectation* is C3 invariant, its unit numerator is the selected partition, and with strict one-link partition positivity plus the standard `divide z z=1` scalar law the finite normalized measure assigns mass one. These results reuse the preexisting R431 numerator, `Physical.normalizedExpectation`, `Finite.numeratorOneIsPartitionFunction` and the strict-positive product-integral induction.
+
+### Exact remaining original SU(N) finite/physical proof leaves
+1. `R443-SIX-LOCAL`: prove the **actual native SU(N) matrix** local transformed six-plane equality `sixPlaneAtC3`. The rational SU2 proof already gives the exact orientation geometry pattern; its only nontransportable ingredient is the real matrix normalized trace under inversion (unitary conjugate transpose). `SUNMatrixRealTrace` currently supplies trace **cyclicity** but not that inversion theorem. Do not claim the existing rational quaternion C3 is automatically a real SU(N) trace.
+2. `R443-HAAR-CODEC`: construct literal original 1024-bond finite vector/C3 codec and selected measurable/integrable Agda one-link Haar source. **Lean PR #15 already source-writes** actual compact SU2 Haar and product Haar, but no golden same-object transport or valid arbitrary-function extension exists.
+3. `R443-CMP119`: select published R124 beta-flow complete E/R/B/V action and **actual** metric insertion, not only original bare Wilson Gibbs.
+4. `R445`: selected varying-n 4D laws, cylinder maps, physical cutoff-uniform moment/tightness/tail estimates.
+5. `R320`: selected mixed-J source derivatives equal same finite physical covariance, CMP116 analytic source-domain and cutoff-uniform rooted-shell bound.
+6. `R333`: same selected OS Hilbert/Hamiltonian, strong continuity and unbounded-generator source, physical strictly positive spectral window and nontrivial continuum mass gap.
+
+### Verification
+GitHub new-file/update API succeeded and source/readback checked. New modules are SOURCE-WRITTEN, not Agda kernel accepted; no CI or transitive postulate audit was run. The transitive foundational `RealAnalysisAxioms` and `BalabanRealPolynomialRing` contain source postulates, which must **not** be mislabeled as a complete zero-axiom proof. Mathematical/implementation/Agda-kernel/physical theorem levels remain distinct. Original owners: Wilson (1974), Balaban (1985/1988), OS, Haar/Fubini standard theory, DASHI finite-monoid Fubini and indexed source owners; Lean/mathlib PR #15 retains original authorship.
