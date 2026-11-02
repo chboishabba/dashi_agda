@@ -29,7 +29,7 @@ module DASHI.Analysis.BishopRiemannDirichletExponentialTermExact where
 -- Source-written Agda; kernel verification pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Base using (_≤_; _<_)
 open import Data.Integer.Base as Int using (+_; +<+)
