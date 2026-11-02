@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from copy import deepcopy
 from pathlib import Path
 from compare_kitzerow_primary_chart import compare, compare_text_candidate_index, compare_chart_and_optional_text
@@ -46,6 +47,22 @@ def main() -> int:
     rejects(chart, b)
     b = deepcopy(matrix); b["reaction_index"] = ["CHEBI:12"]
     rejects(chart, b)
+    # Compare the real source-observed 8 IDs to the actual Agda golden
+    # finitePanelReactionIds owner (not the synthetic fixture above).
+    owner = ROOT / "DASHI/Biology/Molecular/BH4ExecutedPanelReactionReceiptExact.agda"
+    owner_text = owner.read_text(encoding="utf-8")
+    finite_src = owner_text.split("finitePanelReactionIds =\\n", 1)[1].split(
+        "\\n\\nresidualPanelReactionIds :", 1)[0]
+    canonical_ids = re.findall(r'"(RHEA:[0-9]+)"', finite_src)
+    assert len(canonical_ids) == 12 and len(set(canonical_ids)) == 12
+    actual = compare(chart, {"schema": "dashi.bh4-stoichiometric-matrix.v1",
+                             "reaction_index": canonical_ids})
+    # Source-index cardinality 8 is not a whole-author-network denominator.
+    assert actual["literal_rhea_identifier_intersection"] == []
+    assert len(actual["creator_chart_observed_only"]) == 8
+    assert len(actual["dashi_finite_panel_only"]) == 12
+    assert actual["creator_network_coverage_ratio"] is None
+
     # Original-chart source-text indexing is an optional *additional*
     # candidate observation; it must not replace the manually inspected
     # source ID set or claim a complete creator network.
