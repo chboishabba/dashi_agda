@@ -27,6 +27,11 @@
 
 **Remaining 20 historical direct edges and 21 NP members are retained below**, including E20/N21 gamma/zigzag signed graph Word encoding and real runtime cost, E04/E05/E06/E12 finite semantics, and E01–E19 machine reductions. Existing Monster/VOA/PNF/SSP, character, eigenspace and finite sampling work cannot stand in for any of the above universal complexity statements. No CI or Agda kernel run.
 
+
+### Common K00/N21 canonical Word size — no second binary carrier
+
+`Karp21MaxCutCertificateBinaryCodecExact.agda` now additionally imports the **same** `FiniteWordSizeExact` used by the strict K00 language. `canonicalWordLengthMatchesListLength` proves the two source-owned length functions coincide for all `List Bool` words; `cutCertificateCanonicalBitWordLength` then proves `FiniteWordSizeExact.encodingSize (encodeCutLabels bits) ≡ n` on every actual `Vec Bool n` MAX CUT witness. This pays the N21 **exact certificate bit length on the canonical K00 metric**. It does **not** establish `n ≤ encodingSize graphWord` until a faithful target graph-word codec supplies the vertex-count bound, nor a time complexity theorem for graph parsing and signed summation. No user instruction to skip CI is treated as permission to promote uncompiled sources.
+
 ## O/R/C/S/L/P/G/F: objective and contracts
 
 - **O — Objective:** one typed executable, bounded and independently auditable reduction network preserving Karp (1972) problem definitions. Exactly one DAG owner per distinct mathematical proposition.
