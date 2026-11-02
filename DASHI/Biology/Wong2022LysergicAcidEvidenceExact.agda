@@ -197,7 +197,7 @@ record UnpaidMetabolicModelBridge
 -- The existing generic chemistry kernel is another possible future consumer.
 -- Passing that kernel does not give this paper a measured reaction network.
 record UnpaidChemistryKernelBridge
-    (kernel : Chemistry.ChemistryTransitionKernel) : Set where
+    (kernel : Chemistry.ChemistryTransitionKernel) : Set₁ where
   field
     measuredNetworkParametersPaid : Bool
     measuredNetworkParametersPaidIsFalse :
