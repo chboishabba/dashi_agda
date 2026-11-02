@@ -228,6 +228,7 @@ import DASHI.Education.DigitalESDResearchWorldMaxCutRegression
 
 import DASHI.Education.DigitalESDOpenAxisStudyPartWorldExact
 import DASHI.Education.DigitalESDOpenAxisGapTransportExact
+import DASHI.Education.DigitalESDOpenAxisWorldRegression
 
 module DASHI.EverythingDigitalESDReciprocalBraid where
 
