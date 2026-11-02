@@ -29,14 +29,14 @@ import DASHI.Education.DigitalESDStudyProcessingCensusExact as Processing
 
 pilotStudyProfiles : List Ceiling.StudyClaimProfile
 pilotStudyProfiles =
-  Pilot.pilotProfiles
-  Registry.++ Extended.extensionProfiles
-  Registry.++ (Quantitative.brasslerPilotProfile
-             ∷ Uncertainty.iaqPilotProfile
-             ∷ Institutional.uneceFifthEvaluationPilotProfile
-             ∷ Randomized.greenMolloyDugganPilotProfile
-             ∷ Longitudinal.colladoLongitudinalProfile
-             ∷ [])
+  Registry._++_ Pilot.pilotProfiles
+    (Registry._++_ Extended.extensionProfiles
+      (Quantitative.brasslerPilotProfile
+      ∷ Uncertainty.iaqPilotProfile
+      ∷ Institutional.uneceFifthEvaluationPilotProfile
+      ∷ Randomized.greenMolloyDugganPilotProfile
+      ∷ Longitudinal.colladoLongitudinalProfile
+      ∷ []))
 
 pilotProfileOccurrenceCount : Registry.length pilotStudyProfiles ≡ 14
 pilotProfileOccurrenceCount = refl
@@ -55,7 +55,7 @@ studyProfileOccurrences =
 
 combinedResearchOccurrences : List CorpusOccurrence
 combinedResearchOccurrences =
-  registeredOccurrences Registry.++ studyProfileOccurrences
+  Registry._++_ registeredOccurrences studyProfileOccurrences
 
 registeredOccurrenceCount : Registry.length registeredOccurrences ≡ 25
 registeredOccurrenceCount = refl
