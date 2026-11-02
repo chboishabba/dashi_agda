@@ -12,10 +12,10 @@ def fixture():
     ]
     parts = [
         {"source_ref": "source-A", "source_revision_ref": "shaA",
-         "part_ref": "method", "part_kind": "method",
+         "part_ref": "method", "part_kind": "component",
          "decomposition_receipt_ref": "reconstruction-A"},
         {"source_ref": "source-B", "source_revision_ref": "shaB",
-         "part_ref": "inference", "part_kind": "inference",
+         "part_ref": "inference", "part_kind": "component",
          "decomposition_receipt_ref": "reconstruction-B"},
     ]
     accounts = [
@@ -28,7 +28,7 @@ def fixture():
     return {
         "axis_registry_revision": "synthetic-test-v1",
         "part_taxonomy_revision": "synthetic-study-parts-v1",
-        "required_part_kinds": ["method", "inference"],
+        "required_part_kinds": ["component"],
         "axes": axes, "parts": parts, "accounts": accounts,
         "relations": [{
             "relation_ref": "question-not-empirical-join",
@@ -128,7 +128,7 @@ class StudyWorldAxisTests(unittest.TestCase):
         item = fixture()
         item["parts"].append({
             "source_ref": "source-C", "source_revision_ref": "shaC",
-            "part_ref": "observer", "part_kind": "epistemic-observer",
+            "part_ref": "observer", "part_kind": "component",
             "decomposition_receipt_ref": "reconstruction-C",
         })
         for axis in item["axes"]:
