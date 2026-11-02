@@ -25,6 +25,18 @@ The additional `DASHI.ComputerScience.QwenputerRv32LayerScheduleSourceExact` rec
 
 Both are **new DASHI models motivated by Agrawal**. Their proofs must not be described as kernel-checked until the pinned Agda toolchain accepts them. This PR contains source-written code only.
 
+## Repository implementation lineage
+
+GitHub commit objects provide source-presence identifiers for this new tranche. These are **first source-written appearances**, not the first kernel-accepted proof receipts. The precise author/committer UTC timestamps were not returned by the available commit metadata and are not inferred from PR chronology.
+
+| Source-written owner | First commit containing its new source |
+|---|---|
+| Finite GDN RAM, trace and representation bridge | [`e0d67c3be228c956ddf2c65375c03c340a55c9c4`](https://github.com/chboishabba/dashi_agda/commit/e0d67c3be228c956ddf2c65375c03c340a55c9c4) |
+| Token ownership, snapshots, finite file store | [`c40dcfcc8ed1e6b49a6294914bc92ddf9af8ca36`](https://github.com/chboishabba/dashi_agda/commit/c40dcfcc8ed1e6b49a6294914bc92ddf9af8ca36) |
+| RV32 source P2 layer schedule | [`a8045910e443847dd038f1f81fc12a300b79bc07`](https://github.com/chboishabba/dashi_agda/commit/a8045910e443847dd038f1f81fc12a300b79bc07) |
+| TOE binary/ternary aggregate | [`ff9cab3cba92d006bdfc96c9d6d570c8cec24c36`](https://github.com/chboishabba/dashi_agda/commit/ff9cab3cba92d006bdfc96c9d6d570c8cec24c36) |
+| Exhaustive small-state Python oracle | [`5fefb9ab9cd9876ea69067d9437cd618cf140b91`](https://github.com/chboishabba/dashi_agda/commit/5fefb9ab9cd9876ea69067d9437cd618cf140b91) |
+
 ## Complete architecture decomposition and source boundaries
 
 The source has **distinct generations**; never merge their layer budgets, RAM capacity or validation results.
