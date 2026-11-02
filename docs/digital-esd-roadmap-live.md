@@ -8,7 +8,7 @@
 
 **November EfS source intake:** [#1448](https://github.com/chboishabba/dashi_agda/pull/1448) is stacked on [#1237](https://github.com/chboishabba/dashi_agda/pull/1237): **14 new attributed entries plus two reused Tilbury/IUCN sources**, 16 candidate comparisons, with **no source-span admission or final principle-survival result**. Source role, rival interpretation, context and claim ceiling remain first class. [#1446](https://github.com/chboishabba/dashi_agda/pull/1446) is a separate master-based documentation PR; merge/reconcile rather than overwrite its sections 30–32.
 
-**Immediate highest-alpha order:** (1) freeze coauthor-reviewed question, paper type, abstract, and disclosure/permissions owners; (2) pay the historical selection gaps (seven-source→nine-item registry commits; why seven principles; alternatives and rejected partitions); (3) assign independent blind EfS coding and exact-source-span verification for #1448; (4) run an actual current PostgreSQL world/census receipt on the real ERIC records and verify remaining database coverage; (5) write two context-indexed worked applications and only then produce a supported/narrowed/split/defeated survival table. Formal structure and metadata candidate counts do not replace study admission.
+**Immediate highest-alpha order:** (1) freeze coauthor-reviewed question, paper type, abstract, and disclosure/permissions owners; (2) pay the historical selection gaps (seven-source→nine-item registry commits; why seven principles; alternatives and rejected partitions); (3) assign independent blind EfS coding and exact-source-span verification for #1448; (4) run an actual current PostgreSQL world/census receipt on the existing real ERIC records; broader five-database coverage is D5-DEFERRED; (5) write two context-indexed worked applications and only then produce a supported/narrowed/split/defeated survival table. Formal structure and metadata candidate counts do not replace study admission.
 
 **Status:** current working roadmap. This file records design intent, repository state and unpaid review work. It is not scholarly evidence and cannot pay a manuscript claim.
 
@@ -310,7 +310,7 @@ same programme != same measurement object
 
 DOI/PMID/PMCID/etc. are retained only at independently verified same-object scope. Publication QIDs remain unresolved unless an exact publication item is verified. Author QID cannot substitute for publication QID. Dewey is navigation/classification only.
 
-## 10. P0 — actual review execution
+## 10. Historical P0 — actual review execution (multi-database expansion superseded by D5 deferral on 2 November)
 
 The highest-alpha scientific path is now:
 
