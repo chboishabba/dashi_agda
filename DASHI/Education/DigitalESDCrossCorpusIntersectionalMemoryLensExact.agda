@@ -13,8 +13,10 @@ import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact as Ti
 import DASHI.Biology.AliceBrownDependencyDerivedInvalidationBidiExact as Invalidation
 import DASHI.Core.DependencyDerivedMinimalInvalidationBidiExact as Derived
 import DASHI.Biology.TraumaRelationalLearningNonpromotionExact as Trauma
+import DASHI.Biology.HyperfabricIntersectionalBodyMemoryBridge as BodyMemory
 import DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact as Learning
 import DASHI.Core.IntersectionalNonFactorability as Intersection
+import DASHI.Core.IntersectionalBinaryInteractionBridgeExact as Interaction
 import DASHI.Core.FeministRechartingSourceBridgeExact as Feminist
 import DASHI.Core.McCallCategoryStrategyBoundaryExact as McCall
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as EfS
@@ -45,6 +47,12 @@ record CandidateCrossCorpusLens
     intersectionalCollision :
       Intersection.NonFactorabilityWitness
         Intersection.flatProjection Intersection.relationalOutcome
+    intersectionalJointInteraction : Interaction.IntersectionalInteractionAdmission
+    bodyMemoryHyperfabric : BodyMemory.HyperfabricIntersectionalBodyMemoryBridge
+    bodyMemoryIsCanonical :
+      bodyMemoryHyperfabric ≡ BodyMemory.canonicalHyperfabricIntersectionalBodyMemoryBridge
+    bodyMemorySourceCertificate :
+      BodyMemory.HyperfabricIntersectionalBodyMemoryCertificate bodyMemoryHyperfabric
     positiveFeministRepair :
       Feminist.PositiveRecharting {Residual = Feminist.PositiveMultiplicity} Feminist.inheritedChart
     categoricalMethod : McCall.CategoryStrategy
@@ -73,6 +81,9 @@ candidateLens alicePaper efsCase question debt =
     Alice.canonicalAliceBrownCorpusLoom refl
     (Joint.candidateJointHyperedge efsCase)
     Intersection.canonicalIntersectionalNonFactorability
+    Interaction.canonicalIntersectionalInteractionAdmission
+    BodyMemory.canonicalHyperfabricIntersectionalBodyMemoryBridge refl
+    BodyMemory.canonicalHyperfabricIntersectionalBodyMemoryCertificate
     Feminist.canonicalPositiveRecharting
     McCall.intercategorical
     Voice.canonicalStudentVoiceEpistemicAgencyBridge
