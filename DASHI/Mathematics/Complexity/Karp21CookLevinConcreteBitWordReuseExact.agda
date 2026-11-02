@@ -31,7 +31,8 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Data.Nat.Base using (_<_)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; subst)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Bits
@@ -47,6 +48,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Rules
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinExactBudgetIff as Runs
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinCookFormulaExact as CL
+import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinQuotationGrowthExact as Growth
 
 -- The exact same word type as the N21 certificate and the repository's
 -- finite Boolean-word size model: no hidden new encoding carrier.
@@ -229,3 +231,36 @@ exactRunToStrictCookSATWordAcceptance states symbols nonempty input steps
     states symbols nonempty input steps =
   CL.exactBudgetRunToCookSatisfiable
     states symbols nonempty input steps
+
+
+------------------------------------------------------------------------
+-- The actual earlier COOK-LEVIN quotation-growth theorem applies to
+-- this SAME canonical Boolean Word, not only a parallel codec length.
+--
+-- On every nonempty literal concrete tape input the full emitted SAT
+-- word is strictly LONGER than the input symbol count. This is a
+-- size lower bound, not a failure of the polynomial-size theorem.
+-- In particular, it must not be used as an unsupported P!=NP proof.
+------------------------------------------------------------------------
+
+nonemptyInputBelowActualSATWordSize :
+  ∀ {machine : Tape.ConcreteTapeMachine}
+    (states : Canonical.EnumerationCoverage (Tape.finiteState machine))
+    (symbols : Canonical.EnumerationCoverage (Tape.finiteSymbol machine))
+    (nonempty : Rules.NonemptyRuleTable machine)
+    (first : Tape.Symbol machine)
+    (rest : List (Tape.Symbol machine))
+    (steps : Nat) →
+  Input.inputPayloadLength (first ∷ rest)
+  < Word.encodingSize
+      (guardedCookLevinBitWord
+        states symbols nonempty (first ∷ rest) steps)
+nonemptyInputBelowActualSATWordSize states symbols nonempty first rest steps =
+  subst
+    (λ encodedSize →
+      Input.inputPayloadLength (first ∷ rest) < encodedSize)
+    (sym (wordLengthMatchesCookCodecLength
+      (guardedCookLevinBitWord
+        states symbols nonempty (first ∷ rest) steps)))
+    (Growth.nonemptyPayloadStrictlyBelowCookFormulaBitCode
+      states symbols nonempty first rest steps)
