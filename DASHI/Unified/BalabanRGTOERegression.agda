@@ -943,6 +943,7 @@ import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as SUNVa
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
+import DASHI.Physics.YangMills.YMClaySUNMatrixSpatialC3RealFubiniExact as SUNRealC3
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact as SUNHaarR443
 import DASHI.Physics.YangMills.YMClaySUNMatrixR445R320SameCovarianceExact as SUNCov
@@ -1050,11 +1051,20 @@ open OrderedHaar public using
   ; productIntegralScale
   ; productIntegralPositive
   ; productIntegralStrictlyPositive)
+-- Real physical-site C3 finite Fubini is now sourced from generic
+-- commutative-monoid finite-Fubini, not postulated as a global action.
+open SUNRealC3 public using
+  (realSumSitesSpatialC3
+  ; nativeSUNSixDeficitC3FromLocal
+  ; nativeSUNWilsonActionC3FromLocal)
 open SUNHaarR443 public using
   (nativePhysicalIntegrationLaws
   ; nativePhysicalPartitionPositive
   ; nativeProductHaarR443
-  ; nativeProductHaarNumeratorC3)
+  ; nativeProductHaarNumeratorC3
+  ; nativeProductHaarNormalizedC3
+  ; nativeProductHaarUnitNumerator
+  ; nativeNormalizedWilsonUnit)
 
 open SUNCov public using
   (originalSUNR278FiniteSameExpectation
