@@ -76,6 +76,7 @@ headLinksAreCanonical {n = suc n} x (y Vec.∷ xs) =
 edgeAtUpperPair :
   ∀ {n} (values : Vec.Vec ℤ n) →
   Pair.UpperPair n → Cut.SignedUndirectedEdge n
+edgeAtUpperPair Vec.[] ()
 edgeAtUpperPair (x Vec.∷ xs) (Pair.headTail j) =
   Cut.edge Fin.zero (Fin.suc j) (λ ())
     (x * Vec.lookup xs j)
