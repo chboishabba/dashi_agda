@@ -62,6 +62,16 @@ class DDTL3WaterfallRegression(unittest.TestCase):
         self.assertEqual(z["conditional_eligible_release_ceiling"],D(85))
         self.assertFalse(z["actual_company_dividend_observed"])
 
+    def test_hedged_rate_exposure_is_only_a_conditional_subset(self):
+        f=self.ns["floating_rate_basis_stress_assuming_effective_hedge"]
+        # Assumed full $2.6bn draw (not actual), +400bp parallel rate shock.
+        # Fully effective 75% hedge: $26m vs $104m without hedge.
+        self.assertEqual(f(2.6,.04,.75,1),D(".026"))
+        self.assertEqual(f(2.6,.04,0,1),D(".104"))
+        self.assertEqual(f(2.6,.04,.75,0),D(".104"))
+        with self.assertRaises(ValueError):
+            f(2.6,.04,1.1,1)
+
     def test_source_priors_and_aggregate(self):
         a=AGDA.read_text()
         atlas=ATLAS.read_text()
