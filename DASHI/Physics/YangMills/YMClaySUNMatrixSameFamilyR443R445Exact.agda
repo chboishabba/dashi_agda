@@ -58,30 +58,41 @@ record SUNOriginalWilsonFiniteFamily
       Nat →
       (Native.SUNSideFourLinks N theory → ℝ) → ℝ
 
-    finitePhysicalMeasure :
-      Nat →
-      Physical.PhysicalFiniteYMMeasure
-        (Native.SUNSideFourLinks N theory) ℝ
-
-    finiteMeasureIsOriginalSixGibbs : ∀ cutoff →
-      finitePhysicalMeasure cutoff
-      ≡ Gibbs.nativeSUNFiniteGibbsMeasure
-          theory traceData exponential (beta cutoff)
-          (productHaar cutoff) (Quotient.divide quotient)
-
+    -- The measure is NOT a new arbitrary field. It is definitionally the
+    -- literal original six-plane SU(N) Gibbs source at every cutoff.
     actualIntegrationLaws : ∀ cutoff →
       Finite.PhysicalFiniteMeasureIntegrationLaws
-        (finitePhysicalMeasure cutoff)
+        (Gibbs.nativeSUNFiniteGibbsMeasure
+          theory traceData exponential (beta cutoff)
+          (productHaar cutoff) (Quotient.divide quotient))
 
     actualPartitionNonzero : ∀ cutoff →
       Quotient.Nonzero quotient
-        (Physical.partitionFunction (finitePhysicalMeasure cutoff))
+        (Physical.partitionFunction
+          (Gibbs.nativeSUNFiniteGibbsMeasure
+            theory traceData exponential (beta cutoff)
+            (productHaar cutoff) (Quotient.divide quotient)))
 
 open SUNOriginalWilsonFiniteFamily public
 
--- Remove the arbitrary duplicate finite-measure choice by using the
--- given same-source equality. The EXISTING selected expectation compiler
--- receives the original data and builds no new continuum postulates.
+finitePhysicalMeasure :
+  ∀ {Matrix Complex : Set} {N : Nat}
+    {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex}
+    {traceData : Trace.SUNMatrixRealTrace {Scalar = ℝ} theory}
+    {exponential : Exp.StrictPositiveRealExponential}
+    {sequenceLimit limitLaws quotient division} →
+  (source : SUNOriginalWilsonFiniteFamily
+    theory traceData exponential
+    {sequenceLimit = sequenceLimit} limitLaws quotient division) →
+  Nat → Physical.PhysicalFiniteYMMeasure (Native.SUNSideFourLinks N theory) ℝ
+finitePhysicalMeasure {theory = theory} {traceData = traceData}
+    {exponential = exponential} {quotient = quotient} source cutoff =
+  Gibbs.nativeSUNFiniteGibbsMeasure
+    theory traceData exponential (beta source cutoff)
+    (productHaar source cutoff) (Quotient.divide quotient)
+
+-- Reuse canonical finite-normalized and selected-expectation compiler.
+-- No second continuum object, no measure equality assumption.
 sameOriginalFiniteMeasureFamily :
   ∀ {Matrix Complex : Set} {N : Nat}
     {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex}
@@ -103,8 +114,8 @@ sameOriginalFiniteMeasureFamily source = record
       actualPartitionNonzero source
   }
 
--- At each cutoff, partition is the integral of the very same
--- SU(N)-matrix six-plane Gibbs density, not an unrelated real source.
+-- Partition is DEFINITIONALLY the Haar integral of the original SU(N)
+-- six-plane exponential on this very same finite configuration.
 originalSixPartitionSameObject :
   ∀ {Matrix Complex : Set} {N : Nat}
     {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex}
@@ -119,13 +130,7 @@ originalSixPartitionSameObject :
   ≡ productHaar source cutoff
       (Gibbs.nativeSUNWilsonGibbsDensity
         theory traceData exponential (beta source cutoff))
-originalSixPartitionSameObject
-    {theory = theory} {traceData = traceData} {exponential = exponential}
-    source cutoff
-  rewrite finiteMeasureIsOriginalSixGibbs source cutoff =
-  Gibbs.nativeSUNFiniteMeasurePartitionSameObject
-    theory traceData exponential (beta source cutoff)
-    (productHaar source cutoff) (Quotient.divide _)
+originalSixPartitionSameObject source cutoff = refl
 
 -- This provides the literal canonical R445 cutoff expectation; it does
 -- not assert that the selected real sequence converges physically.
@@ -138,7 +143,8 @@ originalSixFiniteExpectation :
     (source : SUNOriginalWilsonFiniteFamily
       theory traceData exponential
       {sequenceLimit = sequenceLimit} limitLaws quotient division)
-    cutoff observable →
+    (cutoff : Nat)
+    (observable : Native.SUNSideFourLinks N theory → ℝ) →
   ℝ
 originalSixFiniteExpectation source cutoff observable =
   Limit.finiteExpectation (sameOriginalFiniteMeasureFamily source)
