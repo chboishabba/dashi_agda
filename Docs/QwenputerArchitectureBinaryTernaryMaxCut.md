@@ -162,6 +162,19 @@ For a fixed source commit `c`, compiled checkpoint `W(c)`, and reference RV32 ma
 together with token-owner isolation, no-spurious-state-update, required exact numerical bounds and compositional run semantics, then independently replay actual QEMU compliance and C/MicroPython programs. This theorem is not supplied by the new finite proof models and is not presently promoted.
 
 
+
+### Source qualification and later strengthening
+
+The P2 source reports the 32 KiB RAM at 0, DROM at 0x20000 (128 KiB) and ROM at 0x40000 (256 KiB). `QwenputerRv32LayerScheduleSourceExact.p2Memory` records these values. The P3 source says its new 80-token capture window is at 0x8000 with 16 bytes per token. The new arithmetic lemmas prove only the stated **1280-byte capture budget** and that the capture starts at the numerical end of P2 RAM; they do **not** invent a P3 memory-extension implementation.
+
+`QwenputerOneHotDeltaMatrixRefinementExact.matrixAndRamSameAfterEveryWrite` strengthens the prior selected-row result to **arbitrary-length** matrices of typed vector writes, under a provided DeltaScalar algebra. It is exported to TOE. `QwenputerHybridStateAndFileStoreExact.allCircuitStepsMuteLanguage` and `allLanguageStepsPreserveChip` likewise strengthen the abstract state isolation equations from one token to any natural-number-length burst.
+
+`QwenputerRv32RecordCommitExact` now includes the source's `BYTE` putchar record, plus its `SC` control constructor. The latter remains opaque because the exact P2 `spec.py` implementation and any instruction-commit interpretation have not been reconstructed. Real program counter anchoring, R refresh timing, QD quotient-digit semantics, BD carry and memory writes are explicit W04/W05 gaps, not silently discharged.
+
+**Corrected version-scoped claim:** According to the upstream RV32 documentation, MicroPython ran on P2's standalone core and executor. The P3 merged Qwen model's MicroPython bridge build was not yet complete. It is incorrect to promote the P2 MicroPython demonstration to a test of MicroPython *inside* the P3 merged language model. The blog's general wording cannot replace the detailed source's version distinction.
+
+**Verifiability restriction:** The user's repositories are accessible through the GitHub connector. The upstream `divagr18/qwenputer` Python `spec.py` and `ref.py` files were not retrievable from that connector in this execution (404). We could read the public upstream architectural documentation, but did **not** inspect or replay those concrete source files. The full-source decoder/compiler proof cannot honestly be marked complete.
+
 ## Local follow-up checks (not executed in this GitHub-only tranche)
 
 ```bash
