@@ -51,8 +51,8 @@ def main() -> int:
     # finitePanelReactionIds owner (not the synthetic fixture above).
     owner = ROOT / "DASHI/Biology/Molecular/BH4ExecutedPanelReactionReceiptExact.agda"
     owner_text = owner.read_text(encoding="utf-8")
-    finite_src = owner_text.split("finitePanelReactionIds =\\n", 1)[1].split(
-        "\\n\\nresidualPanelReactionIds :", 1)[0]
+    finite_src = owner_text.split("finitePanelReactionIds =\n", 1)[1].split(
+        "\n\nresidualPanelReactionIds :", 1)[0]
     canonical_ids = re.findall(r'"(RHEA:[0-9]+)"', finite_src)
     assert len(canonical_ids) == 12 and len(set(canonical_ids)) == 12
     actual = compare(chart, {"schema": "dashi.bh4-stoichiometric-matrix.v1",
@@ -67,7 +67,7 @@ def main() -> int:
     # candidate observation; it must not replace the manually inspected
     # source ID set or claim a complete creator network.
     extracted = index_text(
-        b"Rhea:21708\\nRhea 10112\\nRhea:21708\\n",
+        b"Rhea:21708\nRhea 10112\nRhea:21708\n",
         source_url=chart["publication_page"],
         source_revision="source-text-observation:2026-11-02",
     )
