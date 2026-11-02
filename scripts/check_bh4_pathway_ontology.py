@@ -78,15 +78,25 @@ def main() -> int:
     assert result["species"][0]["compartment"] is None
     assert result["promotion_boundary"]["ontology_match_pays_flux"] is False
     ld = jsonld(result)
-    assert len(result["ontology_cross_references"]) == 2
-    assert len(result["unparsed_external_annotation_fields"]) == 2
-    assert {x["source_field"] for x in result["unparsed_external_annotation_fields"]} == {
-        "Cross-reference (KEGG)", "Cross-reference (MetaCyc)"}
+    assert len(result["ontology_cross_references"]) == 4
+    assert result["unparsed_external_annotation_fields"] == []
+    assert {x["target"]["namespace"] for x in result["ontology_cross_references"]} == {
+        "go", "reactome", "kegg.reaction", "metacyc.reaction" }
+    assert {x["curation_basis"] for x in result["ontology_cross_references"]} == {
+        "GO-consortium-annotation", "ChEBI-automatic-mapping", "Rhea-curated-mapping"
+    }
+    assert next(x for x in result["ontology_cross_references"] if
+                x["target"]["namespace"] == "kegg.reaction")["target"]["uri"] == (
+                "https://identifiers.org/kegg.reaction:R01716")
+    assert next(x for x in result["ontology_cross_references"] if
+                x["target"]["namespace"] == "metacyc.reaction")["target"]["uri"] == (
+                "https://identifiers.org/metacyc.reaction:PABASYN-RXN")
     assert next(x for x in result["ontology_cross_references"] if
                 x["target"]["namespace"] == "reactome")["target"]["identifier"] == "R-HSA-12345.1"
-    assert {x["target"]["namespace"] for x in result["ontology_cross_references"]} == {"go", "reactome"}
+    assert all(x["same_biological_event_verified"] is False
+               for x in result["ontology_cross_references"])
     assert all(not x["same_biological_event_verified"] for x in result["ontology_cross_references"])
-    assert len(ld["@graph"]) == 6
+    assert len(ld["@graph"]) == 8
     assert all("owl:sameAs" not in str(node) for node in ld["@graph"])
     # Creator-observed reaction selection is a separate provenance owner,
     # not a synonym for the original 16-UniProt source-selected panel.
@@ -115,6 +125,14 @@ def main() -> int:
     bad_chart = deepcopy(source_chart)
     bad_chart["source_rhea_ids_requested"] = ["RHEA:99999"]
     rejects(m, bad_chart, None, None)
+    bad_source_row = deepcopy(r)
+    bad_source_row["reactions"][0]["row"]["Cross-reference (KEGG)"] = "R01716; invalid candidate"
+    unresolved = build(m, bad_source_row, x, c)
+    assert any(z["source_value"] == "invalid candidate"
+               and z["source_field"] == "Cross-reference (KEGG)"
+               for z in unresolved["unparsed_external_annotation_fields"])
+    assert len(unresolved["ontology_cross_references"]) == 4
+    assert all(z["flux_paid"] is False for z in unresolved["ontology_cross_references"])
     bad = deepcopy(m); bad["matrix"] = [[-2], [1]]
     rejects(bad, r, x, c)
     bad = deepcopy(r); del bad["reactions"][0]["raw_sha256"]
