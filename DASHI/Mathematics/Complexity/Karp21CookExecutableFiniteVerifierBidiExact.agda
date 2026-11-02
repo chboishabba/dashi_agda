@@ -248,3 +248,33 @@ strictCookExecutableVerifierBidi :
 strictCookExecutableVerifierBidi word =
   PR.iff (strictCookExecutableVerifierComplete word)
          (strictCookExecutableVerifierSound word)
+
+------------------------------------------------------------------------
+-- Explicit encoded-word BIDI triangle. The formula encoder, strict
+-- parser and Boolean certificate verifier act on the SAME Cook object.
+-- This pays the canonical-word length comparison without asserting
+-- arbitrary-input canonical re-encoding or an actual tape clock.
+------------------------------------------------------------------------
+
+strictCanonicalCookVerifierBidi :
+  (formula : Cook.BooleanFormula) →
+  PR.Iff (Cook.Satisfiable formula)
+    (StrictCookExecutableVerifierYES
+      (DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact.encodeFormulaBits formula))
+strictCanonicalCookVerifierBidi formula
+  rewrite Strict.strictCookFormulaRoundTrip formula =
+  cookExecutableVerifierBidi formula
+
+strictCanonicalCookCertificateBound :
+  (formula : Cook.BooleanFormula)
+  (bits : Word.BitWord) →
+  verifyStrictCookSATWord
+    (DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact.encodeFormulaBits formula)
+    bits ≡ true →
+  Data.Nat.Base._≤_
+    (Word.encodingSize bits)
+    (Word.encodingSize
+      (DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact.encodeFormulaBits formula))
+strictCanonicalCookCertificateBound formula bits checked
+  rewrite Strict.strictCookFormulaRoundTrip formula =
+  cookExecutableCertificateCanonicalSize formula bits checked
