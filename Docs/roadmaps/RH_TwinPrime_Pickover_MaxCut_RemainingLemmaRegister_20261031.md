@@ -815,3 +815,90 @@ Bishop and Bridges; Zachary Murray's analysis; pinned
 `viktorcsimma/bishop` gitlink
 `240e38c7f6938f20f865b1f956c5f084da48bd54`.
 DASHI owns the above new composition proofs.
+
+## 2026-11-02 K04b denominator and K04d uniform-tail max-cut
+
+### Implemented source-written lemmas; no CI
+
+- `DASHI/Analysis/BishopDirichletUniformBaselTailsExact.agda`
+  reuses the ORIGINAL pinned `vendor/bishop/Sequence.agda` operators
+  `∑-triangle-inequality`, `∑-mono-≤`,
+  `neg-flips-∑`, and `cauchyConvergenceTest-if`.
+  `baselUniformTailCutoff` extracts an actual Nat threshold from
+  `BishopBaselReciprocalSquareConvergenceExact.baselSeriesConvergent`.
+  `baselDominatedFiniteTailSmall` proves the same
+  (1/k) bound for every finite tail, in either endpoint order,
+  of every Bishop real term family dominated at ALL indices by
+  the original Basel coefficients. Both `regionRealUniformFiniteTail`
+  and `regionImagUniformFiniteTail` use precisely the same
+  cutoff for every selected complex point in the supplied region.
+  `regionPointwiseMajorant`, `regionDirichletValue`, and
+  `regionValueConvergesCoordinatewise` build actual Bishop
+  componentwise sums and limits from one region-wide certificate.
+  This is substantive constructive local-uniform *finite-tail*
+  machinery, not yet continuity of the original analytic zeta owner.
+
+- `DASHI/Analysis/BishopRiemannDirichletExponentialTermExact.agda`
+  specializes this theorem to both actual complex coordinates at
+  (s=2) through `sourceExponentTwoUniformFiniteTails`
+  and the actual configured -log series via
+  `originalSourceExponentTwoUniformFiniteTails`.
+  In both cases the already explicit same-object
+  `exp_B(log_B(n+1))≃n+1` premise remains OPEN.
+  All three TOE roots import the uniform tails owner.
+
+- `DASHI/Analysis/BishopMachinCrossEnvelopeBishopOrderExact.agda`
+  now proves `sourceCommonDenominatorFactor` by the existing
+  `Data.Nat.Solver` and `sourceCommonDenominatorCleared` by
+  the existing `BishopMachinGeometricEnvelopeNatExact`
+  all-index Nat inequality. It has the LITERAL source denominator
+  `(2n+1)*5*239*25^n*57121^n` and proves
+  `(3824*57121^n+20*25^n)*25^n ≤ 4*D_n`
+  for every n. This is a genuine denominator-cleared
+  INTEGER theorem. The equality of the ORIGINAL two unnormalised
+  rational fractions with the displayed common fraction, the
+  positivity instances for their denominators, and final
+  setoid/Bishop real order transport remain OPEN.
+
+**Correction: the negative-log power series** \(L(x)=-\log(1-x)\) is positive, so the correct
+inversion route is \(\exp_B(-L(x))=1-x\) and
+\(\exp_B(L(x))=(1-x)^{-1}\).
+Earlier draft wording `exp_B(-log(1-x))=1-x` is ambiguous
+because the symbol `log` could denote either the conventional
+logarithm or the *negative*-log series. Always write `L(x)`
+and the two explicit identities above. The actual value
+`natLogViaOriginalNegativeLog` is the positive `L(x)`,
+so the logical premise is precisely
+`exp_B(natLog(n))≃n+1`.
+
+### Still open and distinct
+
+1. **K04d-LOG:** discharge configured `InOpenUnitInterval`
+   for the original selected Round11 data and prove the native
+   -log/exp inverse for all successor rational arguments.
+2. **K04d-REGION:** construct, for the actual exponentials
+   `ExpBridge.bishopAnalyticComplexExp` near Machin `pi_B`,
+   the regional all-index bound consumed by the *now implemented*
+   uniform tail compiler. Pay trigonometric coordinate
+   bounds, negative-exponential order, and termwise continuity.
+3. **K04d-SAME-OBJECT:** prove literal equality with
+   `ZetaHalfPlaneLayer.zetaHalfPlane` and identify the
+   original opaque half-plane predicate. Do not substitute
+   the mere existence of an uninhabited analytic record.
+4. **K05:** signed-factorial sine/cosine Cauchy
+   addition, quarter-angle tangent and branch, independent
+   trigonometric π uniqueness. Native sine/cosine at zero and
+   the polynomial quadruplication endpoint are separately paid.
+5. **K04b-DENOM:** rational common fraction equivalence
+   with positive variable denominators, followed by embedding
+   into the same original Bishop real order. This is
+   independent of the existing direct (4/25^n) and
+   (8/25^n) estimates.
+6. **KERNEL:** deferred by explicit user request; SOURCE
+   statuses do not become Agda kernel acceptance without
+   elaboration. No CI check was run.
+
+Attribution: original Machin, Dirichlet and Riemann mathematics,
+Bishop/Bridges, Zachary Murray and `viktorcsimma/bishop`
+at the recorded pinned gitlink; reused DASHI theorem owners
+and newly committed DASHI source code are distinct.
