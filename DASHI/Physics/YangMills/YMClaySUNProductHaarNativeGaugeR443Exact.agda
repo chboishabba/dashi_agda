@@ -24,7 +24,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Vec.Base using (Vec)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; -ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; -ℝ_; _<ℝ_; _≤ℝ_)
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
@@ -32,6 +32,8 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as Gibbs
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGaugeInvariantExact as Gauge
+import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact as Integrated
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as ProductC3
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
@@ -158,3 +160,41 @@ module _
       (λ numerator →
         divide numerator (Physical.partitionFunction nativeMeasure))
       (nativeGaugeGibbsNumeratorInvariant integration weld gamma observable)
+
+  -- Construct the literal physical integration laws on this SAME Gibbs
+  -- measure from one-link ordered Haar alone. Neither C3 nor a separate
+  -- whole-lattice gauge invariant measure record is needed.
+  nativeGaugePhysicalIntegrationLaws :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra source)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value) →
+    Finite.PhysicalFiniteMeasureIntegrationLaws nativeMeasure
+  nativeGaugePhysicalIntegrationLaws ordered strictToWeak =
+    Integrated.nativePhysicalIntegrationLawsFromOneLink
+      theory traceData exponential beta source codec divide
+      ordered strictToWeak
+
+  nativeGaugeR443FromOneLink :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra source)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (weld : OriginalBondGaugeVectorNaturality) →
+    R443.WilsonGibbsHaarAction
+      {Configuration = Native.SUNSideFourLinks N theory}
+      {Action = Gamma}
+      nativeMeasure (nativeGaugePhysicalIntegrationLaws ordered strictToWeak)
+  nativeGaugeR443FromOneLink ordered strictToWeak weld =
+    nativeGaugeWilsonGibbsR443
+      (nativeGaugePhysicalIntegrationLaws ordered strictToWeak) weld
+
+  nativeGaugeNormalizedFromOneLink :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra source)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (weld : OriginalBondGaugeVectorNaturality) →
+    ∀ gamma observable →
+    Physical.normalizedExpectation nativeMeasure
+      (λ links →
+        observable (Gauge.sunGaugeTransformedBonds theory links gamma))
+    ≡ Physical.normalizedExpectation nativeMeasure observable
+  nativeGaugeNormalizedFromOneLink ordered strictToWeak weld =
+    nativeGaugeNormalizedExpectationInvariant
+      (nativeGaugePhysicalIntegrationLaws ordered strictToWeak)
+      weld
