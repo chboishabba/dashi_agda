@@ -495,3 +495,6 @@ This tranche continues existing PR #1408. The new modules are **source-written A
 - **K05:** Need original Round11 sine/cosine signed-factorial addition/double-angle, quarter rational tangent+branch, inhabited classical/Bishop weld, and uniquely characterized trig π; finite polynomial quadruplication is not an unconditional analytic theorem.
 
 **Verification:** new files/bridges and TOE imports are source-written and read-back from GitHub only; no Agda kernel execution or CI. T10, R10 and P10 remain OPEN. The original source and repository authors retain distinct attribution.
+
+
+**Further 2026-11-02 finite true-fibre closure:** `BishopRiemannDirichletBaselSameObjectExact` now constructs an *actual* `BishopDirichletBaselMajorantAt` instance for the original Basel integer-two terms (real component `baselTerm`, imaginary component zero), using `Basel.absoluteBaselTerm` and `Basel.baselTermNonnegative`. `baselCompiledRealLimitIsOriginal` and `baselCompiledImagLimitIsZero` use the source's `Sequence.uniqueness-of-limits` to identify the newly compiled sum with the **original Basel limit and zero**, not a new free limit. This closes the concrete integer-two comparison-to-original-limit square as Agda *source*, kernel verification still pending. It does **not** prove the original abstract `CompletedRiemannZeta.zeta` agrees at s=2 or provide n^(−π_M).
