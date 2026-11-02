@@ -11,6 +11,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Maybe using (just)
 
 import DASHI.ComputerScience.QwenputerGatedDeltaArchitectureExact as GDN
+import DASHI.ComputerScience.QwenputerRv32LayerScheduleSourceExact as Layers
 import DASHI.ComputerScience.QwenputerHybridStateAndFileStoreExact as Store
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact as Binary
 import DASHI.ComputerScience.ShorStandardBinaryTernaryStoredProgramComputerExact as BinaryTernary
@@ -51,3 +52,6 @@ toePriorBinaryTernaryOrder15Equal :
   BinaryTernary.order15BinaryFinal ≡ BinaryTernary.order15TernaryFinal
 toePriorBinaryTernaryOrder15Equal =
   BinaryTernary.order15BinaryAndTernaryExecutionEqual
+
+toeQwenputerSourceHeadSum : Layers.reportedKeyHeadTotal ≡ 99
+toeQwenputerSourceHeadSum = Layers.keyHeadSumMatchesAuthor
