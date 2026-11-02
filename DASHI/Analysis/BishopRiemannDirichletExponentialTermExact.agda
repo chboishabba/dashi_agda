@@ -63,6 +63,9 @@ import DASHI.Foundations.BishopRound11TrigAtZeroExact as Origin
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
+import DASHI.Foundations.BishopMachinPiRationalWindowExact as MachinWindow
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 -- The exact logarithm of positive Nat is still the next nontrivial
 -- mathematical lemma. Its expected argument is the indexed integer n+1.
@@ -794,3 +797,33 @@ sourceRealAxisExponentialImaginaryZero inputs logNat sigma n =
        RP.≃-refl
        (Exp.bishopExp
          (R._*_ (R.- sigma) (logNat n))))
+
+
+------------------------------------------------------------------------
+-- K04d: THE SELECTED *ACTUAL MACHIN REAL* IS IN Re(s)>2.
+-- This is a genuine geometric precondition for the Basel-majorized
+-- Dirichlet neighborhood, beyond merely proving Re(s)>1. It reuses
+-- the ORIGINAL constructive 3<pi_M<22/7 interval.
+------------------------------------------------------------------------
+
+twoBelowThreeRational : Rat._<_ (+ 2 / 1) (+ 3 / 1)
+twoBelowThreeRational =
+  toWitness {a? = RatP._<?_ (+ 2 / 1) (+ 3 / 1)} _
+
+twoBelowMachinBishopPi :
+  R._<_ (R._⋆ (+ 2 / 1)) Machin.bishopMachinPi
+twoBelowMachinBishopPi =
+  RP.<-trans
+    (RP.p<q⇒p⋆<q⋆
+      (+ 2 / 1) (+ 3 / 1)
+      twoBelowThreeRational)
+    MachinWindow.threeBelowMachinPi
+
+machinSourceRealPoint : A.BishopComplex
+machinSourceRealPoint =
+  sourceRealAxisExponent Machin.bishopMachinPi
+
+machinSourceRealPartAboveTwo :
+  R._<_ (R._⋆ (+ 2 / 1)) (A.re machinSourceRealPoint)
+machinSourceRealPartAboveTwo =
+  twoBelowMachinBishopPi
