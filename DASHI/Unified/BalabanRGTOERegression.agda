@@ -28,6 +28,7 @@ import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as Native
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as P2Trace
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31Probe
+import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as TSFVArrow
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
@@ -69,6 +70,13 @@ import DASHI.Physics.YangMills.YangMillsConstructivePathPrePostInvariantExact as
 -- The selected physical observed dynamics and OS/KK same-action witness
 -- remain explicit inputs, not fabricated inhabitants.
 ------------------------------------------------------------------------
+open TSFVArrow public using
+  ( earlyObserverCannotSeeFinal
+  ; lateObserverCanSeeFinal
+  ; earlyAndLateVisibilityDiffer
+  ; futureBoundaryChangesSmoothing
+  ; selectedTSFVPhysicalSignatureIs31
+  )
 open L31Probe public using
   ( calibratedProbeForcesThreePlusOne
   ; realizedDynamicsThreePlusOne
