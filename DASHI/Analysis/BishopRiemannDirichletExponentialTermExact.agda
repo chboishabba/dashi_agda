@@ -46,6 +46,7 @@ import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Analysis.BishopRiemannAnalyticSetoidExpReuseExact as ExpBridge
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpPositive
 import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpAdd
 import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
@@ -265,6 +266,42 @@ bishopDirichletTermFromOriginalLogSeries T inside =
 
 
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- LOG(1) IS ALREADY CLOSED: the source Nat logarithm at the first
+-- coefficient is literally zero. Thus exp_B(log_B 1)=1 follows
+-- from the original (independent) Bishop exponential-zero theorem.
+-- All remaining log-inverse work can be restricted to Nat successors.
+------------------------------------------------------------------------
+
+originalNatLogAtOneExpIsOne :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  (inside : (n : Nat) →
+    E.InOpenUnitInterval (C.dataSet T) (natLogArgument n)) →
+  R._≃_
+    (Exp.bishopExp (natLogViaOriginalNegativeLog T inside zero))
+    (NatReal.natReal (suc zero))
+originalNatLogAtOneExpIsOne T inside =
+  ExpPositive.bishopExpZero
+
+originalNatLogInverseFromPositiveSuccessors :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  (inside : (n : Nat) →
+    E.InOpenUnitInterval (C.dataSet T) (natLogArgument n)) →
+  ((n : Nat) →
+    R._≃_
+      (Exp.bishopExp
+        (natLogViaOriginalNegativeLog T inside (suc n)))
+      (NatReal.natReal (suc (suc n)))) →
+  (n : Nat) →
+  R._≃_
+    (Exp.bishopExp (natLogViaOriginalNegativeLog T inside n))
+    (NatReal.natReal (suc n))
+originalNatLogInverseFromPositiveSuccessors T inside successorInverse zero =
+  originalNatLogAtOneExpIsOne T inside
+originalNatLogInverseFromPositiveSuccessors T inside successorInverse (suc n) =
+  successorInverse n
+
 -- K04d LOG-INVERSE -> RECIPROCAL: A NEW CONCRETE REDUCTION.
 --
 -- The remaining exp(log(n+1)) theorem is a genuine series theorem;
