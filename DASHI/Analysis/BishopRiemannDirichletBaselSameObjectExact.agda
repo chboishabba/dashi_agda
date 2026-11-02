@@ -41,6 +41,7 @@ import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Mathematics.Automorphic.EllipticDirichletBaselMajorantExact as Majorant
+import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact as Ext
 
 -- The function is a literal Nat-indexed complex series on the
 -- ORIGINAL Bishop Cartesian complex, not the legacy constructed-real
@@ -182,6 +183,42 @@ dirichletValueIndependentOfMajorant term s first second =
   dirichletRealValueIndependentOfMajorant term s first second
   ,
   dirichletImagValueIndependentOfMajorant term s first second
+
+------------------------------------------------------------------------
+-- K04d SAME-OBJECT EXTENSIONALITY: source terms, not names.
+-- Once two independently constructed Dirichlet term families are
+-- pointwise equivalent on the SAME Bishop analytic argument, the
+-- original finite-series extensionality theorem identifies their
+-- Bishop limits. This is the exact bridge required to weld
+-- exp(-s log n) to a separately given zeta half-plane series.
+-- Neither term equality nor the Basel majorants are fabricated here.
+dirichletValuesRespectTermwiseEquality :
+  (left right : BishopDirichletTermFamily)
+  (s : BC.BishopComplex)
+  (leftBound : BishopDirichletBaselMajorantAt left s)
+  (rightBound : BishopDirichletBaselMajorantAt right s) →
+  ((n : Nat) →
+    R._≃_ (realTerm left s n) (realTerm right s n)) →
+  ((n : Nat) →
+    R._≃_ (imagTerm left s n) (imagTerm right s n)) →
+  (R._≃_
+    (BC.re (dirichletValue left s leftBound))
+    (BC.re (dirichletValue right s rightBound)))
+  ×
+  (R._≃_
+    (BC.im (dirichletValue left s leftBound))
+    (BC.im (dirichletValue right s rightBound)))
+dirichletValuesRespectTermwiseEquality
+    left right s leftBound rightBound realSame imagSame =
+  Ext.termwiseEquivalentSeriesHaveEquivalentLimits
+    realSame
+    (proj₂ (realDirichletConvergent left s leftBound))
+    (proj₂ (realDirichletConvergent right s rightBound))
+  ,
+  Ext.termwiseEquivalentSeriesHaveEquivalentLimits
+    imagSame
+    (proj₂ (imagDirichletConvergent left s leftBound))
+    (proj₂ (imagDirichletConvergent right s rightBound))
 
 ------------------------------------------------------------------------
 -- The exact Basel series is already present at the INTEGER 2 point.
