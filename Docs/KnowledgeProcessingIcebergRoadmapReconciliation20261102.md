@@ -106,3 +106,28 @@ spread/collateral/contract stress → correlated non-bank losses → systemic/cr
 - **P**: Synthetic finite lemmas are source written; numeric forecasts are conditional; a source quote is not an independently proved cause.
 - **G**: Reconcile economic/technical/state/cognition/historical source ownership and governance status without editing ESD or unmerged sibling branches.
 - **F**: Execute K0→K1→K2 Pareto, branch at early disconfirmation and re-evaluate K3–K6 as soon as new actual receipts arrive.
+
+
+## 2 November K0 recut — funding supply is a separate feasibility constraint
+
+**Corrections to earlier model:** The `USD3.823bn` *five-year end-net deficit* and `USD37.046bn` *interim peak* refer ONLY to **50% OCF growth and flat investing cash**, not the **50% OCF and 20% investing growth** case. That latter simple annualised envelope yields a five-year accumulated gap `USD120.730bn`; both old forecasts omitted incremental debt coupons, cash-conversion/prepayment uncertainties, financing-supply limits and additional hardware refresh. They cannot legitimately be presented as full real-borrower forecasts.
+
+New [dated capital-cycle K0 research ledger](AIContinuingCapitalFundingMaxCut20261102.md), [scenario code](../scripts/ai_capital_cycle_network_20261102.py), [source-written Agda non-factorability bridge](../DASHI/Governance/AIContinuingCapitalFundingMaxCut20261102Exact.agda), and [tests](../tests/test_ai_capital_cycle_network_20261102.py).
+
+The corrected object is a time-sequenced **realized OCF vs capex vs incremental borrowed-money interest** loop subject to debt-money availability, project completion, and customer receipt timing. In the source-written finite model, two worlds show the same covered current debt maturity yet different feasible *next build* status, reusing canonical DASHI consumer-indexed fibre and funding state owners. The empirical forecast is **not** proved by this synthetic lemma.
+
+**Local independent Python results (not source-head execution):**
+- 50% OCF / 20% investing annual growth: peak `120.730bn` before financing costs (old baseline).
+- With annual 12% hypothetical interest on new borrowing: `152.994bn` pre-financing peak.
+- Add a one-year receipt lag and extra GPU refresh spending of 20% of projected investment from 2029: `250.725bn`.
+- Add an OCF haircut of 15% after 2028: `263.543bn`.
+- Substitute hypothetical 16% new coupon and 4% repricing premium on an ASSUMED rolled 17% × USD35.6bn 2027 maturity: `282.413bn` peak, `278.374bn` new modeled debt-money draws after assumed USD4.039bn usable company cash, and `284.426bn` gross issuance including USD6.052bn rolled principal ONCE.
+- With USD20bn/yr cap on **other new market debt** (plus eligible original unused secured lines), the 12%-coupon growth plan first has USD8.834bn unfunded continuation **in 2028**; USD10bn/yr cap first creates USD0.656bn unfunded **in 2027**. Those are hypothetical supply limits, not lender filings or bankruptcy findings. The calculation halts future-build assumptions immediately at first funding shortfall.
+- For a synthetic one-project lender USD15bn loan and USD10.5bn collateral recovery, a 5bn *ASSUMED* sponsor guarantee shifts a USD4.5bn loss from lender to sponsor **only if triggered**. This is not Meta's contractual cap or recoverability.
+- Original SEC working-capital statement shows USD1.365bn six-month increase in CoreWeave deferred revenue. A separate conditional sensitivity removes 2× that from annualised pre-growth OCF (not a claim of fabricated revenue); this raises the 12% new-interest peak above USD200bn. Actual future recurring external payer cash remains unmeasured.
+
+**Second-order loop missing from historical maturity arguments:** Existing scheduled debt can be rolled, yet further capex and GPU vintages may demand a rising stock of new interest-bearing finance. Drawing the *USD10.014bn unused secured facilities* is conditional debt, not free cash or an economic cure. Deferred revenue can advance genuine cash receipts without establishing that future service obligations are cash-free. Presenting a long-dated maturity schedule without a vintage-level capital renewal and independent terminal payer ledger is consumer-inadequate.
+
+**Third-order loop missing from a borrower-only model:** Customer compute spending may be funded by equity raised from a strategic vendor, while project loans are secured by that customer contract, and financially vulnerable suppliers/pension funds hold the resulting loans. Without a same-object look-through graph, summing customer commitment, loan principal, note, sponsor investment and lease as independent new demand is double counting. A rescue incentive can be significant without an executed public rescue or later exclusive knowledge-processing authority.
+
+**Exact K0 executable gates, not a broad 'need more data':** acquire instrument-specific lender/guarantee annexes and exact dates; reconcile original leases/commitments under accounting recognition; map GPU vintage–delivery–revenue start–power commissioning–refresh and actual residual auctions; settle independent customer cash rather than annualised ARR/backlog; obtain each actual annual credit line availability/covenant and financing issuer/rate; and reconstruct SPV/lender/insurer/pension/supplier loss incidence under explicit defaults, collateral haircuts and guarantee triggers. Only then attach K2's legal/epistemic access consequences. Original source authors and earlier `dashi_agda` proof owners retain attribution, with unmerged #1101 remaining an external sibling.
