@@ -460,3 +460,38 @@ This tranche continues existing PR #1408. The new modules are **source-written A
 - **K05-TRIG still OPEN**: Prove native signed-factorial sine/cosine Cauchy products to inhabit `Round11BishopDoubleAngle`; prove actual quarter-angle `cos θ≃sin θ` from Machin's rational tangent subtraction using nonzero cosine and interval/branch control; inhabit the original same-object classical/Bishop trig weld without source-claim promotion; prove independent geometric positive-period π uniqueness. The source-written endpoint is not an unconditional `sin_B(pi_M)=0` theorem.
 
 **Status:** all above are authored GitHub Agda **source candidates** attached to all three canonical TOE roots. No pinned Agda kernel check, local compilation or CI was performed; source/readback is not acceptance. T10, R10 and P10 terminal conjecture cuts remain OPEN. Sources: Machin (1706), Riemann (1859), Bishop/Bridges (1985), Murray (2022), original pinned Bishop library and original DASHI owners.
+
+
+## 2026-11-02 K04d Dirichlet reuse max-cut (source-written, not kernel-accepted)
+
+**Correction to proposed standalone Dirichlet implementation:** this repository already has the exact constructive Basel comparison compiler. Reuse `DASHI/Mathematics/Automorphic/EllipticDirichletBaselMajorantExact.baselDominatedDirichletSeriesConvergent`, which directly consumes original `DASHI/Foundations/BishopBaselReciprocalSquareConvergenceExact.baselSeriesConvergent` and pinned `Sequence.proposition-3-5`. No second convergence/completeness authority may be added.
+
+**NEW K04d-BASEL owner:** `DASHI/Analysis/BishopRiemannDirichletBaselSameObjectExact.agda`, with a literal original `BishopComplex`-valued `Nat` Dirichlet term function, `BishopDirichletBaselMajorantAt` (per-component eventually `|term|≤1/(n+1)^2`), `realDirichletConvergent`, `imagDirichletConvergent`, `dirichletValue` (native Bishop `Sequence.lim`), and `dirichletPartialConverges` (actual constructive coordinatewise convergence). It also exhibits a **real, source-owned integer-two Basel fibre** `baselComplexTerm`, `baselComplexPartial`, `baselIntegerTwoComplexConverges`. This integer-two series is NOT automatically the abstract analytic substrate's ζ(2), nor ζ(π_M). The model uses the exact original complex carrier, not the legacy ConstructedOrderedCompleteReal.
+
+**NEW K04d-ORIGINAL AGREEMENT:** `OriginalHalfPlaneDirichletAgreement` names the exact termwise/model-identification and actual *value* setoid equality with the original half-plane function. `AtOriginalCompletedZeta.originalCompletedZeta{Real,Imag}AgreesWithDirichlet` proves the two paths commute under the supplied original source domain predicate and genuine value agreement. It does **not** replace the opaque `ZetaEqualsDirichletSeries` field with a trivial boolean/Set or declare source claims proved.
+
+**SAME-OBJECT CONSUMER:** `DASHI/Analysis/BishopMachinQuantitativeZetaCommutingSquareExact` now imports this owner. `originalCompletedZeta{Real,Imag}EqualsSummedDirichletAtStage` and `...AtLimit` are exact specializations to the original Machin rational stages and actual Machin π; the original completed ζ is evaluated, not a synthetic zeta symbol. All three TOE roots import the new owner and the existing square.
+
+### Source-owner / Pareto register (search-first; do not conflate)
+
+| Original source | Actual proven reuse | Unpaid semantic or quantitative gate |
+| --- | --- | --- |
+| `Foundations/BishopBaselReciprocalSquareConvergenceExact` | Native Bishop convergence of Σ(n+1)^(-2), source `baselTerm`, `baselLimit` | No generic complex logarithm |
+| `Automorphic/EllipticDirichletBaselMajorantExact` | Any real term family dominated eventually by Basel has convergent original `Sequence.SeriesOf` | No global coefficient domination for original elliptic L; no zeta n^(-s) term constructor |
+| `Foundations/BishopNatRealReciprocalSquareBaselExact` | Identifies inverse of native positive Nat real squared with **same literal Basel term** | Only exponent 2; cannot substitute π_M without exponentiation/log |
+| `Foundations/BishopExponentialCauchyProductExact` | Actual Bishop **real** exp additivity and exp(x)exp(−x)=1 | Still need same-carrier Bishop **complex** exp/log and positive-natural log |
+| `Mathematics/NumberTheory/FiniteMultiplicativeDirichletExact` | Exact finite factor/Dirichlet monomial multiplicativity | Its local analytic weights are supplied, not canonical n^(−s) |
+| `Mathematics/NumberTheory/FiniteEulerProductExact` | Finite semiring Euler-product expansion | Infinite zeta Euler product and same-object convergence remain unpaid |
+| `Analysis/AbelZeta` | Algebraic Abel/eta sample values at nonregular integers | Not zeta in Re(s)>1; cannot establish Dirichlet convergence at π_M |
+| `Analysis/ConstructiveSeries`, `PowerSeriesTranscendentals`, `PrincipalComplexLog`, `RiemannConstructedComplexExpAddReductionExact` | Useful **constructed-real** convergence/complex exp/log interfaces and reductions | `LegacyDASHIRealEquivalenceAuthorityExact` has no inhabited same-object carrier bridge; do not silently coerce |
+| `Physics/YangMills/BalabanPositiveRGDirichletGeometryExact` and PDE Dirichlet boundaries | Boundary-value/spectral geometry, useful in their own PDE lanes | **Not** complex Dirichlet L-series or Riemann ζ |
+
+### Remaining exact source/kernel obligations
+
+- **K04d-TERM:** On the original `BishopComplex`, construct `log(n+1)` for every positive Nat and the *actual* `exp(−s log(n+1))` with branch and multiplication laws. Prove its coordinate majorant ≤ `Basel.baselTerm` for all points of a neighborhood of π_M, using Re(π_M)>3. A concrete pointwise all-n bound is required to invoke `BishopDirichletBaselMajorantAt`; no fabricated witnesses.
+- **K04d-UNIFORM:** Prove a single local uniform tail estimate on an open neighborhood with Re(s)>1 (or the stronger Re(s)>3 neighborhood of π_M), then derive the actual completed-zeta component continuity by uniform limits of continuous terms. Pointwise Basel comparison alone does **not** prove continuity, and the endpoint's `AnalyticSameObjectGate` therefore remains uninhabited.
+- **K04d-SAME:** Prove the source's `ZetaHalfPlaneLayer.realPartGreaterThanOne` matches genuine `Re(s)>1`, and construct `OriginalHalfPlaneDirichletAgreement` for the exact n^(−s) value with the original `CompletedRiemannZeta.zeta`. Then the existing actual Machin square yields ζ(q_n)→ζ(π_M).
+- **K04b:** Original 4/25^n and 8/25^n same-object bounds exist as source-written Agda, but all transitive imports require pinned golden Agda kernel test; independent Nat denominator normalization is still owed if retaining that proof route.
+- **K05:** Need original Round11 sine/cosine signed-factorial addition/double-angle, quarter rational tangent+branch, inhabited classical/Bishop weld, and uniquely characterized trig π; finite polynomial quadruplication is not an unconditional analytic theorem.
+
+**Verification:** new files/bridges and TOE imports are source-written and read-back from GitHub only; no Agda kernel execution or CI. T10, R10 and P10 remain OPEN. The original source and repository authors retain distinct attribution.
