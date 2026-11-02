@@ -185,3 +185,11 @@ monitor surface.
 - Added `BishopMachinQuantitativeZetaCommutingSquareExact`: original rational q_n, signed finite Bishop history, true complex real-axis points, 4/25^n error, 8/25^n two-index Cauchy estimate, original completed/half-plane zeta agreement at eligible stages and limit, and coordinatewise zeta convergence from an explicit analytic-continuity gate.
 - Attached new analytic square to all three canonical TOE root import graphs; updated lemma register, cross-repo provenance, and TODO.
 - **Verification/provenance:** source-written Agda, not kernel verified, no CI run. Nat denominator realization, real analytic Dirichlet-series construction, exact K05 double-angle/quarter/unique-π proofs, T10/R10/P10 remain open.
+
+
+### 2026-11-02 — reuse the in-repo Dirichlet/Basel continuum
+
+- Found/reused `BishopBaselReciprocalSquareConvergenceExact`, `BishopNatRealReciprocalSquareBaselExact`, `EllipticDirichletBaselMajorantExact`, `BishopExponentialCauchyProductExact` and original finite Euler/Dirichlet owners.
+- Created `BishopRiemannDirichletBaselSameObjectExact`: original Bishop-complex finite Dirichlet sums, real/imag comparisons to the actual Basel majorant, genuine Bishop coordinatewise series limits, a concrete integer-two Basel fibre, and explicit original half-plane same-object equality transport to completed ζ. No false generic Dirichlet continuity inferred.
+- Extended `BishopMachinQuantitativeZetaCommutingSquareExact` with direct original ζ-to-summed-Dirichlet claims at the actual Machin stages/limit. Added imports to all three TOE roots and updated exact K04d-TERM/UNIFORM/SAME obligations.
+- Attribution retained (Riemann, Dirichlet, Bishop/Bridges, Murray, original in-repo authors). Source-written candidates; pinned Agda kernel/CI not run. The real log/exp n^(−s), locally uniform tail, true analytic same-object and K05/R10/T10/P10 terminals are not proved.
