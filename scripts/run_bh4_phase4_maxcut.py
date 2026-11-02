@@ -68,6 +68,9 @@ def main() -> int:
     creator_chart_rhea = out / "kitzerow-creator-chart-rhea-reactions.json"
     creator_chart_matrix_prefix = out / "kitzerow-creator-chart-stoichiometric-matrix"
     creator_chart_matrix = creator_chart_matrix_prefix.with_suffix(".json")
+    creator_chart_ontology = out / "kitzerow-creator-chart-ontology.json"
+    creator_chart_jsonld = out / "kitzerow-creator-chart-ontology.jsonld"
+    creator_chart_review = out / "kitzerow-creator-chart-review.json"
     claim_ledger = Path("docs/biology/KitzerowBH4ClaimLedgerCandidate.v1.json")
     interval = out / "bh4-interval-flux-feasibility.json"
     summary_path = out / "bh4-phase4-maxcut-summary.json"
@@ -107,6 +110,22 @@ def main() -> int:
                 str(creator_chart_rhea),
                 "--output-prefix", str(creator_chart_matrix_prefix),
             ])
+            creator_matrix_ready = load(creator_chart_matrix)
+            if creator_matrix_ready and creator_matrix_ready.get("reaction_count", 0) > 0:
+                # Reuse the existing candidate-only chemistry adapter, not
+                # a second author-chart ontology/compiler or mixed matrix.
+                run([
+                    py, "scripts/build_bh4_pathway_ontology.py",
+                    "--matrix", str(creator_chart_matrix),
+                    "--rhea", str(creator_chart_rhea),
+                    "-o", str(creator_chart_ontology),
+                    "--jsonld-output", str(creator_chart_jsonld),
+                ])
+                run([
+                    py, "scripts/build_bh4_pathway_review.py",
+                    "--pathway", str(creator_chart_ontology),
+                    "-o", str(creator_chart_review),
+                ])
     run([py, "scripts/acquire_bh4_parameter_evidence.py", "--template", "--matrix", str(matrix), "-o", str(template)])
     solver = template
     if a.manifest:
@@ -191,6 +210,10 @@ def main() -> int:
                            if a.acquire_creator_chart_reactions else None)
     creator_matrix = (load(creator_chart_matrix)
                       if a.acquire_creator_chart_reactions else None)
+    creator_ontology = (load(creator_chart_ontology)
+                        if a.acquire_creator_chart_reactions else None)
+    creator_review = (load(creator_chart_review)
+                      if a.acquire_creator_chart_reactions else None)
     network: dict[str, object] = {}
     if sab:
         network["sabio"] = {k: sab.get(k) for k in ("schema", "proteins_completed", "proteins_with_entries", "kinetic_entry_count", "kinetic_parameter_count")}
@@ -240,6 +263,9 @@ def main() -> int:
             "acquisition_exit_code": creator_chart_acquisition_exit,
             "separate_matrix_species": creator_matrix.get("species_count") if creator_matrix else None,
             "separate_matrix_reactions": creator_matrix.get("reaction_count") if creator_matrix else None,
+            "separate_ontology_reactions": len(creator_ontology.get("reactions", [])) if creator_ontology else None,
+            "separate_review_obligations": len(creator_review.get("obligations", [])) if creator_review else None,
+            "same_compartment_network_merge_executed": False,
         }
     if original_chart and original_chart.get("local_source_text_observation"):
         network["creator_chart_local_text_observation"] = {
@@ -288,6 +314,9 @@ def main() -> int:
             "kitzerow_chart_source_text_candidates": str(creator_chart_text_index) if a.creator_source_text else None,
             "kitzerow_creator_chart_rhea": str(creator_chart_rhea) if a.acquire_creator_chart_reactions else None,
             "kitzerow_creator_chart_matrix": str(creator_chart_matrix) if creator_matrix else None,
+            "kitzerow_creator_chart_ontology": str(creator_chart_ontology) if creator_ontology else None,
+            "kitzerow_creator_chart_jsonld": str(creator_chart_jsonld) if creator_ontology else None,
+            "kitzerow_creator_chart_review": str(creator_chart_review) if creator_review else None,
             "interval": str(interval),
             "summary": str(summary_path),
         },
