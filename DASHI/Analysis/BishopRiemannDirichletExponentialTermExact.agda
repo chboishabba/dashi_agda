@@ -37,7 +37,7 @@ open import Data.Rational.Unnormalised as Rat using (_/_; 0ℚᵘ; 1ℚᵘ; _<_)
 import Data.Rational.Unnormalised.Properties as RatP
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym)
-open import Data.Product.Base using (_×_; _,_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
 import Real as R
 import Sequence as Seq
@@ -564,3 +564,85 @@ sourceExponentTwoBaselMajorant inputs logNat logInverse = record
             (sourceExponentTwoImagIsZero inputs logNat n)))
         (Dirichlet.zeroAbsBelowBasel n)
   }
+
+
+------------------------------------------------------------------------
+-- ACTUAL COMPLEX DIRICHLET LIMIT AT s=2 IS THE ORIGINAL BISHOP BASEL
+-- LIMIT. This consumes the literal native Nat-log inverse, not an
+-- unidentified analytic zeta function.
+------------------------------------------------------------------------
+
+sourceExponentTwoSumIsOriginalBasel :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate) →
+  (inverseLaw : (n : Nat) →
+    R._≃_ (Exp.bishopExp (logNat n))
+           (NatReal.natReal (suc n))) →
+  let
+    terms =
+      bishopDirichletExponentialTerm
+        (Route.round11MachinTranscendentals inputs) logNat
+    bound = sourceExponentTwoBaselMajorant inputs logNat inverseLaw
+  in
+  (R._≃_
+    (A.re (Dirichlet.dirichletValue terms sourceExponentTwo bound))
+    Basel.baselLimit)
+  ×
+  (R._≃_
+    (A.im (Dirichlet.dirichletValue terms sourceExponentTwo bound))
+    R.0ℝ)
+sourceExponentTwoSumIsOriginalBasel inputs logNat inverseLaw =
+  let
+    terms =
+      bishopDirichletExponentialTerm
+        (Route.round11MachinTranscendentals inputs) logNat
+    bound = sourceExponentTwoBaselMajorant inputs logNat inverseLaw
+    same =
+      Dirichlet.dirichletValuesRespectTermwiseEquality
+        terms Dirichlet.baselIntegerTwoTermFamily sourceExponentTwo
+        bound (Dirichlet.baselIntegerTwoMajorant sourceExponentTwo)
+        (λ n → sourceExponentTwoRealIsBasel
+          inputs logNat n (inverseLaw n))
+        (λ n → sourceExponentTwoImagIsZero inputs logNat n)
+  in
+  RP.≃-trans
+    (proj₁ same)
+    (Dirichlet.baselCompiledRealLimitIsOriginal sourceExponentTwo)
+  ,
+  RP.≃-trans
+    (proj₂ same)
+    (Dirichlet.baselCompiledImagLimitIsZero sourceExponentTwo)
+
+-- Concrete original -log(1-x) source, not an arbitrary NatLogCandidate.
+originalSourceExponentTwoSumIsBasel :
+  (inputs : Round11.Round11BishopCutset) →
+  (inside : (n : Nat) →
+    E.InOpenUnitInterval
+      (Round11.elementarySeries inputs) (natLogArgument n)) →
+  (inverseLaw : (n : Nat) →
+    R._≃_
+      (Exp.bishopExp
+        (natLogViaOriginalNegativeLog
+          (Route.round11MachinTranscendentals inputs) inside n))
+      (NatReal.natReal (suc n))) →
+  let
+    logNat =
+      natLogViaOriginalNegativeLog
+        (Route.round11MachinTranscendentals inputs) inside
+    terms = bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs) logNat
+    bound = sourceExponentTwoBaselMajorant inputs logNat inverseLaw
+  in
+  (R._≃_
+    (A.re (Dirichlet.dirichletValue terms sourceExponentTwo bound))
+    Basel.baselLimit)
+  ×
+  (R._≃_
+    (A.im (Dirichlet.dirichletValue terms sourceExponentTwo bound))
+    R.0ℝ)
+originalSourceExponentTwoSumIsBasel inputs inside inverseLaw =
+  sourceExponentTwoSumIsOriginalBasel
+    inputs
+    (natLogViaOriginalNegativeLog
+      (Route.round11MachinTranscendentals inputs) inside)
+    inverseLaw
