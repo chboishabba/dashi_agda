@@ -654,6 +654,10 @@ def main() -> int:
         env,
     )
     processing_ledger = rebuild_processing_ledger(artifact_root)
+    # Validate a supplied source-decomposed axis manifest before the
+    # persistent-world revision. A malformed supplied manifest must fail
+    # closed without allowing the world receipt to appear complete.
+    open_axis_audit = audit_study_parts_when_supplied(artifact_root)
 
     receipt = run_json(
         [
@@ -678,7 +682,7 @@ def main() -> int:
     receipt["flat_json_is_canonical_runtime_state"] = False
     receipt["corpus_wide_json_graph_emitted"] = False
     receipt["legacy_scholarly_parser_invoked"] = False
-    receipt["open_axis_study_part_audit"] = audit_study_parts_when_supplied(artifact_root)
+    receipt["open_axis_study_part_audit"] = open_axis_audit
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0
 
