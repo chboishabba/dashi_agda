@@ -106,6 +106,20 @@ module _
       ; PhysicalC3ActionBoundary.strictPositiveIsNonnegative = strictToWeak
       }
 
+  -- Preferred matrix source: prove ReTr(A†)=ReTr(A) on the actual
+  -- finite complex-matrix arithmetic once. Every reversed physical
+  -- plaquette, six-plane C3 identity and whole Wilson action follows.
+  nativeC3BoundaryFromAdjointRealTrace :
+    (adjointTrace : Inverse.SUNMatrixAdjointRealTraceLaw theory traceData)
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value) →
+    PhysicalC3ActionBoundary
+  nativeC3BoundaryFromAdjointRealTrace adjointTrace ordered strictToWeak =
+    nativeC3BoundaryFromInverseTrace
+      (Inverse.matrixAdjointGivesSUNTraceInverse
+        theory traceData adjointTrace)
+      ordered strictToWeak
+
   nativePhysicalIntegrationLaws :
     (boundary : PhysicalC3ActionBoundary) →
     Finite.PhysicalFiniteMeasureIntegrationLaws physicalMeasure
