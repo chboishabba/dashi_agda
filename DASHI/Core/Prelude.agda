@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Core.Prelude where
 
 open import Data.Nat public
