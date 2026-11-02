@@ -34,9 +34,13 @@ open import Data.Integer.Base using (+_)
 
 import Real as R
 import RealProperties as RP
+import Sequence as Seq
 import Data.Rational.Unnormalised.Properties as QP
 
 import DASHI.Analysis.BishopMachinGeometricEnvelopeNatExact as Cross
+import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
+import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Stage
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact as Fractions
 
 normalizedNumerator normalizedDenominator : Nat → Nat
@@ -295,3 +299,102 @@ sourceOmittedBishopBelowGeometric n =
     (sourceOmittedRationalEnvelope n)
     (sourceGeometricRationalEnvelope n)
     (sourceOmittedRationalBelowGeometric n)
+
+
+------------------------------------------------------------------------
+-- K04b: THE LITERAL ORIGINAL FIRST-OMITTED MAGNITUDE AS A RATIONAL
+-- POWER ON THE SAME VENDORED BISHOP REAL.
+--
+-- Previously the denominator bound lived only in rational arithmetic.
+-- Here the source's actual |x^(2n+1)| positive-power magnitude is
+-- identified with its ORIGINAL qPow term, without assuming that
+-- rational powers have already been put in 5*25^n normal form.
+------------------------------------------------------------------------
+
+omittedPowerRational : Q.ℚᵘ → Nat → Q.ℚᵘ
+omittedPowerRational base n =
+  Machin.inverseOddRational n Q.*
+    Stage.qPow base (Estimates.oddExponent n)
+
+magnitudeIsEmbeddedOmittedPower :
+  (base : Q.ℚᵘ) →
+  R.NonNegative (R._⋆ base) →
+  (n : Nat) →
+  R._≃_
+    (Machin.atanMagnitudeTerm (R._⋆ base) n)
+    (R._⋆ (omittedPowerRational base n))
+magnitudeIsEmbeddedOmittedPower base baseNonnegative n =
+  RP.≃-trans
+    (RP.*-congˡ
+      (RP.nonNegx⇒∣x∣≃x
+        (Seq.nonNegx⇒nonNegxⁿ
+          (Estimates.oddExponent n) baseNonnegative)))
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.⋆-distrib-*
+          (Machin.inverseOddRational n)
+          (Stage.qPow base (Estimates.oddExponent n)))
+        (RP.*-cong
+          RP.≃-refl
+          (Stage.qPowEmbeds base (Estimates.oddExponent n)))))
+
+fiveMagnitudeIsEmbeddedOmittedPower : (n : Nat) →
+  R._≃_
+    (Machin.atanMagnitudeTerm Machin.bishopOneFifth n)
+    (R._⋆ (omittedPowerRational Machin.oneFifth n))
+fiveMagnitudeIsEmbeddedOmittedPower n =
+  magnitudeIsEmbeddedOmittedPower
+    Machin.oneFifth Machin.oneFifthNonnegative n
+
+twoHundredThirtyNineMagnitudeIsEmbeddedOmittedPower : (n : Nat) →
+  R._≃_
+    (Machin.atanMagnitudeTerm
+      Machin.bishopOneTwoHundredThirtyNinth n)
+    (R._⋆ (omittedPowerRational
+      Machin.oneTwoHundredThirtyNinth n))
+twoHundredThirtyNineMagnitudeIsEmbeddedOmittedPower n =
+  magnitudeIsEmbeddedOmittedPower
+    Machin.oneTwoHundredThirtyNinth
+    Machin.oneTwoHundredThirtyNinthNonnegative n
+
+sourceWeightedOmittedPowerRational : Nat → Q.ℚᵘ
+sourceWeightedOmittedPowerRational n =
+  (Machin.sixteen Q.* omittedPowerRational Machin.oneFifth n)
+  Q.+
+  (Machin.four Q.* omittedPowerRational
+    Machin.oneTwoHundredThirtyNinth n)
+
+sourceWeightedOmittedIsEmbeddedPowerRational : (n : Nat) →
+  R._≃_
+    (R._+_
+      (R._*_
+        (R._⋆ Machin.sixteen)
+        (Machin.atanMagnitudeTerm Machin.bishopOneFifth n))
+      (R._*_
+        (R._⋆ Machin.four)
+        (Machin.atanMagnitudeTerm
+          Machin.bishopOneTwoHundredThirtyNinth n)))
+    (R._⋆ (sourceWeightedOmittedPowerRational n))
+sourceWeightedOmittedIsEmbeddedPowerRational n =
+  RP.≃-trans
+    (RP.+-cong
+      (RP.*-cong RP.≃-refl
+        (fiveMagnitudeIsEmbeddedOmittedPower n))
+      (RP.*-cong RP.≃-refl
+        (twoHundredThirtyNineMagnitudeIsEmbeddedOmittedPower n)))
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.⋆-distrib-+
+          (Machin.sixteen Q.*
+            omittedPowerRational Machin.oneFifth n)
+          (Machin.four Q.*
+            omittedPowerRational
+              Machin.oneTwoHundredThirtyNinth n))
+        (RP.+-cong
+          (RP.⋆-distrib-*
+            Machin.sixteen
+            (omittedPowerRational Machin.oneFifth n))
+          (RP.⋆-distrib-*
+            Machin.four
+            (omittedPowerRational
+              Machin.oneTwoHundredThirtyNinth n)))))
