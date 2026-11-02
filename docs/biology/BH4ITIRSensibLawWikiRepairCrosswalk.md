@@ -3,6 +3,38 @@
 Date: 2026-11-02. Scope: source-level consumer adapter on DASHI Agda #1454.
 Status: **candidate-only, no live SLR/ITIR/GO-CAM/SBML or Dioxus execution**.
 
+## Source-first correction and actual native external ontology owner
+
+Kitzerow's *BH4/Folate/Cobalamin/Homocysteine Pathway* source
+(ResearchGate 377218425) predates our independent small finite panel
+and already uses Rhea identifiers. Source observations are owned by the
+creator; their Rhea reaction definitions and cross-resource mappings
+remain independently curated. A bounded eight-ID factual index is
+recorded in KitzerowPublishedRheaChartObservedIndex.v1.json.
+The full proprietary network and original diagram have not been acquired.
+
+Our original BH4-only ontology exporter is a **source interchange
+projection**, not a second semantic compiler, reviewed ontology, or
+global provider engine. The actual reusable owner is:
+
+- SensibLaw src/policy/external_graph_bridge.py: generic source revision,
+  coverage, bridge/pressure, evidence-before-decision.
+- SensibLaw src/policy/world_model.py and world_model_projections.py:
+  existing candidate semantic graph plus review projection.
+- SensibLaw src/policy/linkage_adapters.py and linkage_depth.py:
+  generic source -> candidate -> external -> review -> tranche audit.
+- SensibLaw src/policy/external_enrichment.py and src/pnf/
+  external_reconciliation.py: deterministic lookup demand and typed
+  candidate reconciliation, with no identity promotion.
+- ITIR-suite docs/planning/generic_world_model_compiler_convergence_20260716.md
+  and linkage_adapter_kit_20260704.md: one compiler, thin lane adapter.
+- Native implementation: https://github.com/chboishabba/SensibLaw/pull/512.
+
+Reactome itself publishes SBML3 and BioPAX3, human ChEBI/UniProt
+reaction and pathway mappings. Those curator-owned exports should be
+consumed rather than rebuilt without source necessity. The original
+Kitzerow causal synthesis remains independently attributed.
+
 ## Existing owners read before extending
 
 - ITIR-suite docs/user_stories.md:
