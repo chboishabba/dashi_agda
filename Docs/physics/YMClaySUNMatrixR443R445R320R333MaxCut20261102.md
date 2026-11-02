@@ -68,3 +68,23 @@ Previously existing and **already proved generic finite mathematics**, not newly
 - **R445:** new `periodicSUNSixDeficit n` is indexed by genuine lattice size, but a **single continuum cylinder configuration and scale-compatible restriction/renormalization maps** are still missing. Require the physical spacing/volume law, uniform marked moments/tails/cluster estimates and projective limit, not merely arbitrary selection of `Nat → ℝ` functionals. Reuse existing R444/R445 selected Prokhorov and `YangMillsLiteralProjectiveCylinderSourceExact` after concrete physical families and their consistency proofs are paid.
 - **R320:** same selected `CMP116` differentiated real log partition function, mixed `J` directions, common uniform source domain/radii, exact selected rooted-shell envelope and physical scale/volume constants. Prior published source differentiation and compilers do not establish these source-weld inputs automatically.
 - **R333:** literal OS-reflection-positive physical continuum from the new varying-size source, same rebuilt Hilbert space/vacuum/Hamiltonian and selected Wilson transfer coordinates. Strictly positive spectral gap **uniform in actual physical units across both limits**, nontriviality and Clay compact simple group scope remain open.
+
+
+## 2026-11-02 revived-thread source audit: executable max-cut and non-promotion
+
+**Readback scope:** this branch's actual Agda owners `YMClayR443NativeSixPlaneHaarNumeratorExact`, `CMP119WilsonGibbsFiniteMeasureSameObjectExact`, and the present SU(N) owner ledger above. An independent code search for `HaarMeasure`, `SpecialUnitaryGroup`, `WilsonAction` and `YangMills` in `dashi_lean4` returned no matching indexed files; **this is not a complete Lean file-tree audit** and supplies no Lean-to-Agda authority.
+
+### Exact selected boundary: do not erase hypotheses
+
+In `YMClayR443NativeSixPlaneHaarNumeratorExact`, `nativeSixWilsonDeficitC3` is proved on the rational SU(2) bond carrier. But `nativeSixPlaneNumeratorC3Invariant` consumes `NativeSixPlaneHaarBoundary measure laws`: its fields `rationalIntoReal`, `gibbsWeight`, `gibbsIsNativeSixPlaneWilson` and `selectedPhysicalHaarC3Invariant` are **inputs**. The derived `R443.WilsonGibbsHaarAction` and subsequent `R431.numeratorInvariantFromHaarAndDensity` are genuine conditional theorems, not constructed full SU(2) Haar. The `CMP119WilsonGibbsFiniteMeasureSameObjectExact` owner already provides the finite N/Z/DN/DZ transport, conditional on its selected Wilson insertion and R124 beta-driven density weld. These two constructions do **not** coincide automatically: one is a fixed rational spatial C3 carrier; the other selects a beta/metric-derivative stress insertion on a cutoff family.
+
+### Next source-level edits, dependency order
+
+1. **R443-MATRIX:** Locate/instantiate a concrete continuous compact SU(N) matrix carrier; prove the chosen normalized real trace is the actual `ReTr/N`. No abstract `CertifiedSUNMatrixTheory` may be reported as this concrete instance.
+2. **R443-HAAR:** Instantiate normalized one-link probability Haar and two-link Fubini on that carrier, then the actual original periodic positive-bond vector codec and C3 permutation. Only then consume `YMClayFiniteProductHaarPermutationExact` and `YMClaySUNMatrixProductHaarC3Exact`.
+3. **R443-SELECT:** Prove literal identity of selected action, beta/counterterm, density, selected metric insertion and R124 cutoff family to CMP119. This is a typed cross-owner commuting square, not two merely similar Wilson formulas.
+4. **R445-PHYSICAL:** Supply actual lattice/refinement maps, volume/cutoff-uniform tightness, marked tails and moment defects. Only then apply the existing physical expectation/Prokhorov producers.
+5. **R320-CMP116:** Inhabit `mixedDerivativeMagnitudeBelowSelectedShell` on `R318.UnlocalizedT5StateFamilyJPresentation` with physical uniform constants and identical J-domain.
+6. **R333-OS:** Bind covariance and reconstructed `H_OS` to the preceding physical limit, prove a strictly positive cutoff/volume-uniform spectral lower bound, prevent subgap pollution, and establish nontriviality and group scope.
+
+**Validation gate:** before promoting any item, record its Agda module, exact field/theorem, unchanged selected carrier, all remaining record parameters, focused Agda typecheck status and transitive trust. Source-written is not kernel-accepted; a numerical plaquette fixture is not an analytic estimate. CI remains deferred at user direction.
