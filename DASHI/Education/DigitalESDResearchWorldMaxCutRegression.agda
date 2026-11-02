@@ -9,6 +9,7 @@ import DASHI.Education.DigitalESDResearchWorldCorpusCensusExact as Census
 import DASHI.Education.DigitalESDCrossCorpusIntersectionalMemoryLensExact as Lens
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as EfS
 import DASHI.Biology.EducationCorpusSourceRegistry as Alice
+import DASHI.Biology.HyperfabricIntersectionalBodyMemoryBridge as BodyMemory
 import DASHI.Biology.AliceBrownDependencyDerivedInvalidationBidiExact as Invalidation
 import DASHI.Core.RecursiveSelectiveInvalidationParetoTruthMaintenanceBidiExact as Recursive
 import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
@@ -56,6 +57,19 @@ accessibilityLensIsExactlyJepsenCooke :
   Lens.efsSourceCase Lens.aiFeedbackEffectiveAccess ≡ EfS.jepsenCookeAccessibility
 accessibilityLensIsExactlyJepsenCooke =
   Lens.efsCaseIsExact Lens.aiFeedbackEffectiveAccess
+
+bodyMemoryRetainsExistingCanonicalHyperfabric :
+  Lens.bodyMemoryHyperfabric Lens.voiceCollectiveAuthority ≡
+    BodyMemory.canonicalHyperfabricIntersectionalBodyMemoryBridge
+bodyMemoryRetainsExistingCanonicalHyperfabric =
+  Lens.bodyMemoryIsCanonical Lens.voiceCollectiveAuthority
+
+-- The 1500-line original body-memory certificate is reused, not reconstructed.
+bodyMemoryCertificateRemainsCandidate :
+  BodyMemory.HyperfabricIntersectionalBodyMemoryCertificate
+    (Lens.bodyMemoryHyperfabric Lens.voiceCollectiveAuthority)
+bodyMemoryCertificateRemainsCandidate =
+  Lens.bodyMemorySourceCertificate Lens.voiceCollectiveAuthority
 
 -- The independent Alice selective invalidation example is preserved:
 -- a survey/voice diagnostic update does not automatically dirty an unrelated
