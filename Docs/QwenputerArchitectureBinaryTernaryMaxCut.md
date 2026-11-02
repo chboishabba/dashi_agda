@@ -91,6 +91,14 @@ scripts/run_agda29_parallel_check.sh DASHI/ComputerScience/QwenputerHybridStateA
 scripts/run_agda29_parallel_check.sh DASHI/ComputerScience/ComputerScienceFibreFoundationValidationExact.agda
 ```
 
+Finite-state auxiliary regression (independent of Agda, not yet executed here):
+
+```bash
+python3 scripts/check_qwenputer_finite_semantics.py
+```
+
+This enumerates all 64 six-bit RAM states, six addresses, both writes, all queried rows, one ADDR/VAL/STEP transition, ternary-image preservation, all 4^3 three-name store states with three suffixes, and the reported head/MLP totals. Its success would provide a computational regression only, never a kernel proof or checkpoint verification.
+
 For final promotion use the pinned Track A toolchain and existing repo rules. The source branch/PR establishes implementation existence, not type-check, CI or a theorem's first validated timestamp.
 
 ## Suggested cross-repo contracts
