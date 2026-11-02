@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_; map)
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -26,6 +27,7 @@ import DASHI.Physics.YangMills.CompactLieGroupCore as Core
 import DASHI.Physics.YangMills.CompactLieGroupDerived as Derived
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
+import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Hodge
 import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact as Signed
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExact as Covariance
@@ -108,7 +110,7 @@ sunSignedPathHolonomy :
   ∀ {Matrix Complex : Set} {N : Nat}
   (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex) →
   SUNSideFourLinks N theory →
-  Torus.periodicTorus4Definition (Agda.Builtin.Nat.suc Weld.three) →
+  Hodge.Site4 →
   List Signed.SignedAxis4 →
   SUN.SUNMatrixElement theory
 sunSignedPathHolonomy theory bonds site word =
@@ -141,12 +143,12 @@ sunSignedC3OrientedLink :
   ≡ Bond.orientedLink (sunSignedRealization theory bonds)
       (SpatialC3.spatialC3Site site)
       (SignedC3.c3SignedDirection direction)
-sunSignedC3OrientedLink theory bonds site (Torus.pair axis Agda.Builtin.Bool.true) =
+sunSignedC3OrientedLink theory bonds site (Torus.pair axis true) =
   refl
-sunSignedC3OrientedLink theory bonds site (Torus.pair axis Agda.Builtin.Bool.false) =
+sunSignedC3OrientedLink theory bonds site (Torus.pair axis false) =
   cong (SUN.sunInverse theory)
     (sym (SignedC3.c3SignedStepNaturality site
-      (Torus.pair axis Agda.Builtin.Bool.false)))
+      (Torus.pair axis false)))
 
 sunSignedC3Holonomy :
   ∀ {Matrix Complex : Set} {N : Nat}
