@@ -134,6 +134,22 @@ class StudyWorldAxisTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "revision != study"):
             validate(item)
 
+    def test_unscored_candidate_is_not_a_ternary_zero(self):
+        item = fixture()
+        item["relations"][0]["valence"] = {"kind": "unscored", "value": None}
+        item["relations"][0]["epistemic_status"] = "candidate"
+        result = validate(item)
+        self.assertFalse(result["empirical_world_admitted"])
+        item["relations"][0]["epistemic_status"] = "reviewed"
+        with self.assertRaisesRegex(ValueError, "cannot be promoted"):
+            validate(item)
+
+    def test_unscored_cannot_smuggle_numeric_zero(self):
+        item = fixture()
+        item["relations"][0]["valence"] = {"kind": "unscored", "value": 0}
+        with self.assertRaisesRegex(ValueError, "cannot carry"):
+            validate(item)
+
     def test_trit_is_not_epistemic_status(self):
         item = fixture()
         item["relations"][0]["epistemic_status"] = None
