@@ -67,6 +67,19 @@ intersection does not prove identical reaction context, causal ownership,
 whole-model coverage, or in-vivo flux. Native SensibLaw generic-world
 consumer: https://github.com/chboishabba/SensibLaw/pull/512 .
 
+For source-authorized local text, a second optional route is:
+
+    python3 scripts/run_bh4_phase4_maxcut.py \
+      --creator-source-text YOUR_AUTHORIZED_CHART_TEXT.txt \
+      --creator-source-revision "publisher display 2025-08-08; not independently authenticated"
+
+This indexes all Rhea occurrences in those *supplied* UTF-8 bytes, including
+the observed private-use font glyphs, retains the input SHA-256 and per-line
+coordinates, and compares a separate candidate observation with the original
+manual eight-ID index. No protected chart body is committed. The optional
+source-text candidate cannot replace an independently verified original
+PDF/figure or establish whole-author-network completeness.
+
 Prefer curated Reactome SBML Level 3 and BioPAX Level 3 releases for
 already-published pathways before implementing new standards export.
 
