@@ -30,6 +30,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import Data.Integer.Base as Int
 import Data.Vec.Base as Vec
@@ -110,3 +111,13 @@ module ActualKarpGoalSystem
     ; Levin.commandAccepted = refl
     ; Levin.reachesCommandedGoal = accepted
     }
+
+
+  -- On every NONEMPTY graph these policies do not merely carry
+  -- different names. They produce distinct literal Boolean witnesses.
+  -- The same accepted goal is compatible with different trajectories.
+  distinctRealisedCutWitnesses :
+    (bits : Vec.Vec Bool (suc n)) →
+    applyPolicy false bits ≡ applyPolicy true bits → ⊥
+  distinctRealisedCutWitnesses (true Vec.∷ tail) ()
+  distinctRealisedCutWitnesses (false Vec.∷ tail) ()
