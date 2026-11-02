@@ -2,6 +2,12 @@
 
 **Canonical full current roadmap:** [`Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md`](../Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md). This shorter research note is not the authoritative status ledger; use the linked file for exactly 21 nodes, 20 historical edges, eight follow-on subjects, and named remaining lemmas.
 
+## Leonid Levin's independently original 1973 search-problem root (2026-11-02)
+
+Leonid A. Levin, *Universal Sequential Search Problems*, *Problemy Peredachi Informatsii* 9(3), 115–116 (1973); translated as *Problems of Information Transmission* 9(3), 265–266. [Historical primary bibliographic record](https://www.mathnet.ru/eng/ppi914). Cook (1971) and Levin (1973) have distinct contributions; Karp (1972) owns the 21-problem historical reduction map. Michael Levin's biological problem-space work is **not** Leonid Levin's complexity theory. The earlier DASHI Cook–Levin source and strict bitword decoder are retained as primary in-repo proof owners.
+
+New `Karp21LeonidLevinSearchDecisionExact.agda` constructs the exact SAT decision ↔ explicit satisfying-assignment search relation on the same strict bitword; composes it with the concrete Cook–Levin accepting-run iff; and reuses N21's sparse-certificate search ↔ signed graph decision iff. It is a mathematical search/decision witness bridge, **not** a finite binary SAT witness cost, an executable universal Levin search, a Kt-optimality result, or an NP-completeness certificate. See the canonical roadmap for exact unpaid encoding, clock, and kernel gates.
+
 ## 2026-11-01 full finite-network completion (NOT proof completion)
 
 All 20 historical source-labelled edges now have a bounded executable candidate and independently checked finite truth-equivalence controls, via:
