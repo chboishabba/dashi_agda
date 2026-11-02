@@ -948,3 +948,113 @@ sourceNatLogNegativeExponentialUnitInterval logNat n inverseLaw =
     (negativeExponentialAtNatLogIsEmbeddedReciprocal
       logNat n inverseLaw)
     (sourceNatReciprocalBelowOrEqualOne n)
+
+
+------------------------------------------------------------------------
+-- K04d INTEGER REGION: ALL NATIVE EXPONENTIAL POWERS OF
+-- -log_B(n+1) WITH NAT EXPONENT >= 2 ARE BASEL-DOMINATED.
+--
+-- Crucially, this is a theorem on the ORIGINAL Bishop exp produced
+-- by the previously proved Cauchy product, not a standalone
+-- rational model. The only remaining assumption is the correct
+-- actual-source Nat exp/log inverse. The scalar parameter is an
+-- explicit Nat count, NOT an arbitrarily chosen Re(s) > 2; regional
+-- complex domination remains an independently owed analytic gate.
+------------------------------------------------------------------------
+
+sourceNegativeLogSum : NatLogCandidate → Nat → Nat → R.ℝ
+sourceNegativeLogSum logNat n zero = R.0ℝ
+sourceNegativeLogSum logNat n (suc k) =
+  R._+_
+    (sourceNegativeLogSum logNat n k)
+    (R.- (logNat n))
+
+sourceExpNegativeLogSumIsReciprocalPower :
+  (logNat : NatLogCandidate) (n : Nat) →
+  R._≃_ (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  (k : Nat) →
+  let q = R._⋆ (BaselNat.reciprocalNatRational n)
+  in
+  R._≃_
+    (Exp.bishopExp (sourceNegativeLogSum logNat n k))
+    (R.pow q k)
+sourceExpNegativeLogSumIsReciprocalPower
+    logNat n inverseLaw zero =
+  ExpPositive.bishopExpZero
+sourceExpNegativeLogSumIsReciprocalPower
+    logNat n inverseLaw (suc k) =
+  RP.≃-trans
+    (ExpAdd.bishopExpAdd
+      (sourceNegativeLogSum logNat n k)
+      (R.- (logNat n)))
+    (RP.*-cong
+      (sourceExpNegativeLogSumIsReciprocalPower
+        logNat n inverseLaw k)
+      (negativeExponentialAtNatLogIsEmbeddedReciprocal
+        logNat n inverseLaw))
+
+sourceNatReciprocalSquarePowerIsBasel :
+  (n : Nat) →
+  let q = R._⋆ (BaselNat.reciprocalNatRational n)
+  in
+  R._≃_
+    (R.pow q (suc (suc zero)))
+    (Basel.baselTerm n)
+sourceNatReciprocalSquarePowerIsBasel n =
+  RP.≃-trans
+    (let
+       q = R._⋆ (BaselNat.reciprocalNatRational n)
+       open RP.ℝ-Solver
+     in solve 1
+       (λ x →
+          ((Κ Rat.1ℚᵘ ⊗ x) ⊗ x) ⊜ (x ⊗ x))
+       RP.≃-refl q)
+    (RP.≃-trans
+      (RP.≃-symm
+        (RP.⋆-distrib-*
+          (BaselNat.reciprocalNatRational n)
+          (BaselNat.reciprocalNatRational n)))
+      (RP.⋆-cong
+        (BaselNat.reciprocalNatSquareIsBaselRational n)))
+
+sourceNegativeLogSumAboveTwoBaselMajorant :
+  (logNat : NatLogCandidate) (n k : Nat) →
+  R._≃_ (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  R._≤_
+    (Exp.bishopExp
+      (sourceNegativeLogSum logNat n (suc (suc k))))
+    (Basel.baselTerm n)
+sourceNegativeLogSumAboveTwoBaselMajorant logNat n k inverseLaw =
+  RP.≤-respˡ-≃
+    (sourceExpNegativeLogSumIsReciprocalPower
+      logNat n inverseLaw (suc (suc k)))
+    (RP.≤-respʳ-≃
+      (sourceNatReciprocalSquarePowerIsBasel n)
+      (BaselNat.reciprocalExtraPowersBelowSquare n k))
+
+sourceNegativeLogSumAboveTwoAbsoluteMajorant :
+  (logNat : NatLogCandidate) (n k : Nat) →
+  R._≃_ (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  R._≤_
+    (R.∣
+      Exp.bishopExp
+        (sourceNegativeLogSum logNat n (suc (suc k)))
+    ∣)
+    (Basel.baselTerm n)
+sourceNegativeLogSumAboveTwoAbsoluteMajorant
+    logNat n k inverseLaw =
+  RP.≤-respˡ-≃
+    (RP.≃-trans
+      (RP.∣-∣-cong
+        (sourceExpNegativeLogSumIsReciprocalPower
+          logNat n inverseLaw (suc (suc k))))
+      (RP.nonNegx⇒∣x∣≃x
+        (Seq.nonNegx⇒nonNegxⁿ
+          (suc (suc k))
+          (BaselNat.reciprocalNonnegative n))))
+    (RP.≤-respʳ-≃
+      (sourceNatReciprocalSquarePowerIsBasel n)
+      (BaselNat.reciprocalExtraPowersBelowSquare n k))
