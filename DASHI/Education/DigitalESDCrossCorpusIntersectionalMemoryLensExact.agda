@@ -11,6 +11,7 @@ import DASHI.Biology.StudentVoiceEpistemicAgencyBridge as Voice
 import DASHI.Biology.ParentAllyshipMultiObserverBridge as MultiObserver
 import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact as TimeLineage
 import DASHI.Biology.AliceBrownDependencyDerivedInvalidationBidiExact as Invalidation
+import DASHI.Core.DependencyDerivedMinimalInvalidationBidiExact as Derived
 import DASHI.Biology.TraumaRelationalLearningNonpromotionExact as Trauma
 import DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact as Learning
 import DASHI.Core.IntersectionalNonFactorability as Intersection
@@ -45,8 +46,10 @@ record CandidateCrossCorpusLens
       Intersection.NonFactorabilityWitness
         Intersection.flatProjection Intersection.relationalOutcome
     positiveFeministRepair :
-      Feminist.PositiveRecharting Feminist.inheritedChart
+      Feminist.PositiveRecharting {Residual = Feminist.PositiveMultiplicity} Feminist.inheritedChart
     categoricalMethod : McCall.CategoryStrategy
+    sourceVoiceGate : Voice.StudentVoiceEpistemicAgencyBridge
+    parentMultiObserver : MultiObserver.ParentAllyshipMultiObserverBridge
     traumaNonpromotion : Trauma.TraumaRelationalLearningBoundary
     trialecticLearning : Learning.TrialecticMemoryLearningBoundary
     aliceTemporalDiagnosis : TimeLineage.AliceBrownTemporalDiagnosisBoundary
@@ -72,6 +75,8 @@ candidateLens alicePaper efsCase question debt =
     Intersection.canonicalIntersectionalNonFactorability
     Feminist.canonicalPositiveRecharting
     McCall.intercategorical
+    Voice.canonicalStudentVoiceEpistemicAgencyBridge
+    MultiObserver.canonicalParentAllyshipMultiObserverBridge
     Trauma.canonicalTraumaRelationalLearningBoundary
     Learning.canonicalTrialecticMemoryLearningBoundary
     TimeLineage.canonicalAliceBrownTemporalDiagnosisBoundary
@@ -152,6 +157,6 @@ studentVoiceNotCommunityAuthority ()
 -- Retain the existing Alice selective-revision owner separately. This is
 -- one real dependency-derived example, not a source-reviewed EfS revision.
 aliceDerivedDependencyOwner :
-  Invalidation.Derived.DerivedInvalidatedAxis
+  Derived.DerivedInvalidatedAxis
     Invalidation.aliceInvalidationProblem
 aliceDerivedDependencyOwner = Invalidation.aliceDerivedDiagnosticInvalidation
