@@ -24,7 +24,7 @@ The current 16-UniProt/24-protein–Rhea-link panel yields 12 finite Rhea reacti
 
 1. Validate Rhea, ChEBI, the existing finite matrix and optional xPollenation. Reject contradictory reaction participants, a zero reaction or false promotion.
 2. Preserve signed substrate/product coefficients, source revision and acquisition receipt. Rhea master-reaction orientation is not in-vivo physiological direction.
-3. Export one deterministic JSON pathway manifest and one RDF-importable JSON-LD discovery graph using identifiers.org for exact Rhea, ChEBI and UniProt coordinates. Unresolved Rhea compounds and all other namespaces remain literal source identifiers until their resolvers are independently acquired. No owl:sameAs is manufactured.
+3. Export one deterministic JSON pathway manifest and one RDF-importable JSON-LD discovery graph using identifiers.org for exact Rhea, ChEBI and UniProt coordinates. When present in the newly acquired Rhea REST row, retain GO and Reactome cross-references as separately sourced, non-promoting edges. Unresolved Rhea compounds and all other namespaces remain literal source identifiers until their resolvers are independently acquired. No owl:sameAs is manufactured.
 4. Keep author-level *hypothesis* edges in the independent KitzerowBH4ClaimLedgerCandidate.v1.json. Two initially transcribed edges are repo reconstructions of existing BH4 owner claims; original paper page/figure pins remain unverified.
 5. Keep 12 reaction-flux and 29 external-exchange coordinates null/unresolved. No SBML, BioPAX or GO-CAM conformance, simulator kinetics or clinical finding is claimed.
 
@@ -46,7 +46,7 @@ The Phase-4 runner invokes the exporter from receipts produced in that run, with
 |---|---|---|
 | KPO-01 | Pin source passages, figures/pages, versioned dates and edge directions for every Kitzerow model assertion. Transcribe the entire documented source-level graph with unresolved statements retained. | Kitzerow primary works. No backdating from later texts. |
 | KPO-02 | Compare creator graph nodes/edges against the 16-protein finite panel; report coverage, nonmatches, ambiguity and explicit prior-art subtraction. | Distinct source/claim and chemistry ownership. |
-| KPO-03 | Acquire versioned Rhea/UniProt links to GO, EC, Reactome, MetaCyc, KEGG, and pathway families, with taxon/direction and negative matches. | Rhea/UniProt/Reactome. Annotation is not the same biological event. |
+| KPO-03 | Rhea REST now requests GO and Reactome cross-reference columns and the exporter preserves source revision, mapped IDs and unparsed values. **Still required:** execute acquisition, adjudicate GO evidence/taxon/Reactome event identity, and extend to EC, MetaCyc, KEGG and pathway families. | Rhea/UniProt/Reactome. A cross-reference is not the same biological event. |
 | KPO-04 | Adjudicate GO/ECO evidence codes, GO-CAM causal assertions, GO cellular components, Cell Ontology/UBERON tissue and sample/taxon scope. | Source-specific GO evidence, not generic ontology matching. |
 | KPO-05 | Acquire explicit transport/uptake/export/oxidation reactions and appropriate source/sink boundaries for the 29 exchange *coordinates*. | A coordinate is not proof a transport reaction occurs. |
 | KPO-06 | Pin NOS1/NOS2/NOS3 isoform, exact tissue, sample, time, compartment, BH4/BH2/redox, substrate, volume and protein abundance. | Cross-tissue abundance does not create one physical state. |
