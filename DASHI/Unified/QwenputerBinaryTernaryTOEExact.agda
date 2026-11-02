@@ -7,6 +7,7 @@ module DASHI.Unified.QwenputerBinaryTernaryTOEExact where
 -- Existing binary/ternary owner is reused rather than replaced.
 
 open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Maybe using (just)
 
@@ -106,3 +107,18 @@ toeAllAbstractDeltaMatrixWritesCommute :
       queried col
 toeAllAbstractDeltaMatrixWritesCommute =
   Matrix.matrixAndRamSameAfterEveryWrite
+
+
+toeArbitraryChipBurstMutesLanguage :
+  {L C : Set} (fuel : Nat) (f : C → C)
+  (state : Store.HybridState L C) →
+  Store.language (Store.repeatCircuit fuel f state)
+    ≡ Store.language state
+toeArbitraryChipBurstMutesLanguage =
+  Store.allCircuitStepsMuteLanguage
+
+toeP3SourceCaptureBudget :
+  Layers.bytesPerToken Layers.p3ReportedTextBridge
+    * Layers.maxCapturedTokens Layers.p3ReportedTextBridge
+    ≡ 1280
+toeP3SourceCaptureBudget = Layers.p3CaptureMaximumBytes
