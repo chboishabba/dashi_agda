@@ -88,6 +88,33 @@ def main() -> int:
     assert all(not x["same_biological_event_verified"] for x in result["ontology_cross_references"])
     assert len(ld["@graph"]) == 6
     assert all("owl:sameAs" not in str(node) for node in ld["@graph"])
+    # Creator-observed reaction selection is a separate provenance owner,
+    # not a synonym for the original 16-UniProt source-selected panel.
+    source_chart = deepcopy(r)
+    source_chart.update({
+        "schema": "dashi.rhea-chebi-bh4-source-chart.v1",
+        "creator": "Kimberly Kitzerow",
+        "source_chart_publication": "https://www.researchgate.net/publication/377218425_BH4FolateCobalaminHomocysteine_Pathway",
+        "source_chart_pdf_sha256_verified": False,
+        "whole_creator_network_complete": False,
+        "source_chart_index_sha256": "1" * 64,
+        "source_rhea_ids_requested": ["RHEA:19897"],
+        "rhea_rows_acquired": 1,
+        "rhea_rows_failed": 0,
+        "errors": [],
+    })
+    original = build(m, source_chart)
+    assert original["model_kind"] == "creator-chart-selected-rhea-curated-biochemistry-subset"
+    assert original["source_releases"]["creator_original_pdf_verified"] is False
+    assert original["source_releases"]["creator_chart_source"].startswith("https://")
+    assert original["author_hypothesis_edges"] == []
+    assert original["promotion_boundary"]["source_chart_selection_is_complete_author_network"] is False
+    bad_chart = deepcopy(source_chart)
+    bad_chart["whole_creator_network_complete"] = True
+    rejects(m, bad_chart, None, None)
+    bad_chart = deepcopy(source_chart)
+    bad_chart["source_rhea_ids_requested"] = ["RHEA:99999"]
+    rejects(m, bad_chart, None, None)
     bad = deepcopy(m); bad["matrix"] = [[-2], [1]]
     rejects(bad, r, x, c)
     bad = deepcopy(r); del bad["reactions"][0]["raw_sha256"]
