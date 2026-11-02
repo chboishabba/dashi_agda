@@ -35,7 +35,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.List.Base using (List; []; _∷_; length)
+open import Data.List.Base using (List; []; _∷_; _++_; length)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
@@ -82,6 +82,18 @@ sparseDecodeEncode :
 sparseDecodeEncode emptyEdgeBits = refl
 sparseDecodeEncode (addEdgeBits a b tail)
   rewrite sparseDecodeEncode tail = refl
+
+
+-- A one-bit extra suffix must be rejected at every graph size, even
+-- n=0 and m=0. The certificate decoder never silently truncates.
+sparseRejectTrailingBit :
+  ∀ {n} {edges : List (Cut.SignedUndirectedEdge n)}
+    (local : EdgeBits edges) (extra : Bool) →
+  decodeSparseEdgeBits edges
+    (encodeSparseEdgeBits local ++ (extra ∷ [])) ≡ nothing
+sparseRejectTrailingBit emptyEdgeBits extra = refl
+sparseRejectTrailingBit (addEdgeBits a b tail) extra
+  rewrite sparseRejectTrailingBit tail extra = refl
 
 -- Correct 2m witness size, defined by a linear recurrence so no
 -- arithmetic import/associativity assumptions are hidden in a code.
@@ -175,3 +187,37 @@ fullWitnessHasTwoBitsPerListedEdge :
     ≡ twoPerEdge (length (Cut.edges graph))
 fullWitnessHasTwoBitsPerListedEdge graph labels =
   sparseWordBitCount (projectEdgeBits (Cut.edges graph) labels)
+
+
+------------------------------------------------------------------------
+-- Executable Boolean correspondence and mathematical completeness
+-- for a projected witness. The remaining arbitrary-certificate
+-- SOUNDNESS needs the same-ID endpoint consistency construction.
+------------------------------------------------------------------------
+
+verifySparseEdgeBits :
+  ∀ {n} (graph : Cut.WeightedCutGraph n) →
+  EdgeBits (Cut.edges graph) → Bool
+verifySparseEdgeBits graph local =
+  Int._≤ᵇ_ (Cut.threshold graph)
+    (sparseEdgeScore (Cut.edges graph) local)
+
+projectedSparseVerifierExactlyEqualsFull :
+  ∀ {n} (graph : Cut.WeightedCutGraph n)
+    (labels : Vec.Vec Bool n) →
+  verifySparseEdgeBits graph (projectEdgeBits (Cut.edges graph) labels)
+    ≡ Cut.verifyWeightedMaxCut graph labels
+projectedSparseVerifierExactlyEqualsFull graph labels =
+  cong (Int._≤ᵇ_ (Cut.threshold graph))
+    (fullWitnessHasExactSparseScore graph labels)
+
+fullAcceptedWitnessHasSparseWitness :
+  ∀ {n} (graph : Cut.WeightedCutGraph n)
+    (labels : Vec.Vec Bool n) →
+  Cut.verifyWeightedMaxCut graph labels ≡ true →
+  verifySparseEdgeBits graph (projectEdgeBits (Cut.edges graph) labels)
+    ≡ true
+fullAcceptedWitnessHasSparseWitness graph labels observed =
+  trans
+    (projectedSparseVerifierExactlyEqualsFull graph labels)
+    observed
