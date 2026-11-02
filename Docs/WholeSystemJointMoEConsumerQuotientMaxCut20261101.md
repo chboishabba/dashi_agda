@@ -414,3 +414,88 @@ python -m unittest \\
   tests.test_e8_canonical_history_jq1 \\
   tests.test_joint_transport_latency_policy -v
 ```
+
+
+## 2 November further max-cut — zero-gate student trace and same-model source provenance
+
+**Golden Agda owner:** `DASHI.Reasoning.LeechQualityGateTeacherErasureExact`
+now also contains:
+- `studentRollout`: the teacher-free student trace evaluated
+  regardless of the deployed layer gates;
+- `studentRolloutIndependentOfGates`: for any two finite layer
+  programs with **pointwise identical studentStep** functions,
+  the student-only trace is equal for any finite schedule and initial
+  state, even if their dense teacher implementations and gate values
+  are different;
+- `studentRolloutSameProgramEveryGate`: definition-level equality
+  of one student-only trace and its underlying teacher-free trace.
+
+`DASHI.Unified.LeechQualityGuardTOEBridgeExact` exports the theorem as
+`toeStudentRolloutGateIndependent`, already imported by the canonical
+`DASHI.Unifier` and `EverythingTOESymmetryResolved369` roots.
+This is a **source-written `--safe` finite trace theorem**,
+NOT an Agda-kernel-executed certificate this turn and NOT a proof of
+end-to-end PyTorch differentiability or a bound on real trained CE.
+Its precondition is exact equality of the student functions,
+not an inference from the E8 root geometry or the numerology 3/6/9.
+
+**Executable LeechTransformer PR #4 ownership:** the guarded
+model implements `student_only=True` as a second independent
+full network rollout. This branch bypasses the dense teacher
+FFN and provides CE and teacher-KL training gradients even when
+the deployed quality gate is zero. Actual quality requires measured
+positive gates and eventually all gates one. The strict standalone
+teacher-erasure procedure still checks weights, logits and CE; no
+equivalence from a merely nonzero gate is allowed.
+
+The same original model/file SHA-256 and source token-file SHA-256
+are now bound to real JQ1 capture/benchmark receipts; a mismatched
+pair is rejected before policy or arithmetic. Previously calibrated
+model/history-revision-specific policy may choose raw/JQ1 before
+encoding and wraps the selected-only JQ1 packet with existing HMAC
+session authentication. No source-side selected top-k policy replaces
+the authoritative consumer/state owner. The prototype's `verify`
+does not call `commit`; durable execution and cross-peer ACK remain
+open. This proof imports the existing
+`LeechJointStateConsumerQuotientExact` and
+`LeechSharedCanonicalOrbitHistoryExact` ownership boundaries
+rather than identifying all histories with arbitrary true E8 orbits.
+
+**Semantic M5:** the existing independently supplied labelled pair
+evaluator remains separate from a newly implemented 2×2×2 trialectic
+cube evaluator. The latter explicitly uses the 8 corner conditions
+000,001,010,011,100,101,110,111 and requires the same fixed probe
+token for all eight log-probabilities in a single third-order
+difference. The independent gold targets at each corner determine
+task correctness; a nonzero third-order difference by itself does
+not prove semantic opposition, intervention independence, a
+nonfactorable Sophontic argument, or lattice equivariance. Actual
+source-labelled cubes and paired results are **not yet available or
+executed in this edit**.
+
+**Exact remaining proof/experimental frontier:**
+
+1. Agda kernel-check `fullAdmissionPreservesEntireTrace`,
+   `studentRolloutIndependentOfGates`,
+   `everyExpertReopensSharedCanonical` and relevant TOE imports.
+2. Audit faithful Python↔Agda concrete state/step correspondence;
+   finite abstract trace equality is not same-object neural machine
+   verification.
+3. Run original real checkpoint and already saved failed students
+   through train-only depth/route/history diagnostics.
+4. Train a full student-only E8/shared-history candidate until
+   strict teacher-free final heldout-quality export succeeds on
+   unseen data; no result can be manufactured from a zero gate.
+5. Run selected-expert byte-exact and task-quality ablations on
+   the SAME promoted checkpoint and source split, then measure real
+   roundtrip network including auth+ACK+remote computation.
+6. Source labelled paired and 8-corner trialectic correctness
+   studies; distinguish additive/multiway output interactions
+   from external semantic and causal validity.
+
+Attribution: Anatolii Kornienko owns the original Leech-LILA model,
+DOI 10.5281/zenodo.18784424. Prior mathematical and repository
+owners of E8 roots, Leech gluing, C3/369, finite consumers and
+Ibrahim's Monster 3B remain credited in their original sources.
+No *digital_esd*/ESD modules were edited. No tests, CI or
+Agda kernel invocation are claimed for this tranche.
