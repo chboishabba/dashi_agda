@@ -934,6 +934,13 @@ import DASHI.Physics.YangMills.YMClayR445NativeSU2R443SameObjectExact as R445Wel
 import DASHI.Physics.YangMills.YMClayR443NativeSixPlaneC3SequenceLimitExact as R443Limit
 import DASHI.Physics.YangMills.YMClayR443BondMarginalC3Exact as R443BondMarginal
 import DASHI.Physics.YangMills.YMClayR445NativeSixDeficitUniformFiniteBoundExact as R445FiniteBound
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as SUNSigned
+import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as SUNGauge
+import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as SUNGibbs
+import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
+import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
+import DASHI.Physics.YangMills.YMClaySUNMatrixR445R320SameCovarianceExact as SUNCov
 
 open SixActual public using
   (inversePositivePlaneIsSwappedWord
@@ -993,3 +1000,42 @@ open R445FiniteBound public using
   ; nativeSixDeficitNonnegative
   ; nativeSixDeficitAtMost3072
   ; nativeSixDeficitAbsoluteBound)
+
+
+------------------------------------------------------------------------
+-- 2026-11-02: REUSE THE ORIGINAL SU(N) MATRIX CARRIER, NOT RATIONAL HAAR.
+-- These are source-written conditional theorem bodies, without kernel receipt.
+-- The selected real physical Haar/Fubini, 1024-link codec, R445 uniform
+-- continuum convergence, R320 true physical decay and R333 same-H spectral
+-- gap are NOT discharged by the import graph.
+------------------------------------------------------------------------
+
+open SUNSigned public using
+  (toExactSignedBondGroup
+  ; sunSignedC3Holonomy
+  ; sunSignedC3Wilson
+  ; sunPositivePlaquetteHolonomy)
+open SUNGauge public using
+  (sunTraceConjugationInvariant
+  ; sunOriginalPlaquetteTraceGaugeInvariant
+  ; sunSideFourWilsonC3)
+open SUNGibbs public using
+  (nativeSUNSixWilsonDeficit
+  ; nativeSUNWilsonGibbsDensity
+  ; nativeSUNWilsonGibbsDensityStrictlyPositive
+  ; nativeSUNFiniteGibbsMeasure)
+open SUNFamily public using
+  (sameOriginalFiniteMeasureFamily
+  ; originalSixPartitionSameObject
+  ; originalSixFiniteExpectation)
+open FiniteHaar public using
+  (productIntegralUnit
+  ; productHaarPermutationInvariant)
+open SUNHaar public using
+  (nativeSUNProductIntegral
+  ; nativeSUNProductIntegralSpatialC3Invariant
+  ; nativeSUNProductIntegralUnit)
+open SUNCov public using
+  (originalSUNR278FiniteSameExpectation
+  ; originalSUNR278ContinuumSameLimit
+  ; originalSUNRealCovarianceExtension)
