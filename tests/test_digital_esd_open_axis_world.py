@@ -20,9 +20,9 @@ def fixture():
     ]
     accounts = [
         {"source_ref": part["source_ref"], "part_ref": part["part_ref"],
-         "axis_ref": axis["axis_ref"], "state": "unmeasured",
-         "reason": "No demonstrated source-specific observation",
-         "missing_observation_ref": "question-for-review"}
+         "axis_ref": axis["axis_ref"], "state": "not_yet_assessed",
+         "reason": "Source-specific review is not complete",
+         "review_work_ref": "question-for-review"}
         for part in parts for axis in axes
     ]
     return {
@@ -70,6 +70,22 @@ class StudyWorldAxisTests(unittest.TestCase):
         item["axes"].append({"axis_ref": "community-authority", "meaning": "Community veto"})
         with self.assertRaisesRegex(ValueError, "axis accounting incomplete: 2"):
             validate(item)
+
+    def test_unmeasured_requires_source_scope_review(self):
+        item = fixture()
+        account = item["accounts"][0]
+        account.update(state="unmeasured", missing_observation_ref="no observed measurement")
+        with self.assertRaisesRegex(ValueError, "reviewed_source_scope_ref"):
+            validate(item)
+        account["reviewed_source_scope_ref"] = "reviewed-methods-and-results-scope"
+        result = validate(item)
+        self.assertEqual(result["evidence_state_counts"]["unmeasured"], 1)
+        self.assertFalse(result["empirical_world_admitted"])
+
+    def test_unreviewed_counts_prevent_closure(self):
+        result = validate(fixture())
+        self.assertEqual(result["unassessed_part_axis_count"], 6)
+        self.assertFalse(result["all_part_axis_reviews_closed"])
 
     def test_author_report_pending_review_stays_unadmitted(self):
         item = fixture()
