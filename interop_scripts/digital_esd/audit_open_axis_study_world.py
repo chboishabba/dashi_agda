@@ -78,6 +78,16 @@ def validate(value: dict[str, Any]) -> dict[str, Any]:
     if not axes or not parts:
         raise ValueError("an empty declared axis or study-part universe is not an admitted world")
 
+    required_string(value, "part_taxonomy_revision", "world")
+    required_part_kinds = value.get("required_part_kinds")
+    if not isinstance(required_part_kinds, list) or not required_part_kinds:
+        raise ValueError("world: nonempty source-declared required_part_kinds needed")
+    required_roles = [
+        required_string({"role": role}, "role", "required part kind")
+        for role in required_part_kinds
+    ]
+    require_distinct(required_roles, "required_part_kinds")
+
     axis_ids = [required_string(a, "axis_ref", "axis") for a in axes]
     for axis in axes:
         required_string(axis, "meaning", "axis")
@@ -87,20 +97,26 @@ def validate(value: dict[str, Any]) -> dict[str, Any]:
     part_ids = []
     revision_by_source: dict[str, str] = {}
     parts_by_source = Counter()
+    part_roles_by_source: dict[str, set[str]] = defaultdict(set)
     for part in parts:
         source = required_string(part, "source_ref", "part")
         rev = required_string(part, "source_revision_ref", "part")
         ident = required_string(part, "part_ref", "part")
-        required_string(part, "part_kind", "part")
+        kind = required_string(part, "part_kind", "part")
         required_string(part, "decomposition_receipt_ref", "part")
         if source in revision_by_source and revision_by_source[source] != rev:
             raise ValueError(f"{source}: different source revisions need separate versioned source identities")
         revision_by_source[source] = rev
         part_ids.append((source, ident))
         parts_by_source[source] += 1
+        part_roles_by_source[source].add(kind)
     if len(set(part_ids)) != len(part_ids):
         raise ValueError("duplicate source/part identity")
     part_set = set(part_ids)
+    for source, found in part_roles_by_source.items():
+        absent_roles = sorted(set(required_roles) - found)
+        if absent_roles:
+            raise ValueError(f"{source}: missing declared required study part kinds {absent_roles}")
 
     status_counts = Counter()
     indexed = set()
@@ -202,6 +218,8 @@ def validate(value: dict[str, Any]) -> dict[str, Any]:
         "schema": "digital-esd-n-axis-candidate-world-audit-v1",
         "input_sha256": hashlib.sha256(canonical).hexdigest(),
         "axis_registry_revision": value["axis_registry_revision"],
+        "part_taxonomy_revision": value["part_taxonomy_revision"],
+        "required_part_kinds": required_roles,
         "axis_count": len(axis_set),
         "source_count": len(revision_by_source),
         "declared_study_part_count": len(part_set),
