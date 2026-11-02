@@ -161,6 +161,7 @@ def main() -> int:
             "species": len(ont.get("species", [])),
             "unpromoted_hypothesis_edges": len(ont.get("author_hypothesis_edges", [])),
             "external_edges": len(ont.get("external_edges", [])),
+            "rhea_go_reactome_cross_references": len(ont.get("ontology_cross_references", [])),
             "authority": ont.get("authority"),
         }
 
