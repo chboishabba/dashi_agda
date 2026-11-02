@@ -220,6 +220,7 @@ import DASHI.Education.DigitalESDReviewedTemporalWorldJoinExact
 
 import DASHI.Education.DigitalESDWorldSourceCoverageCensusExact
 
+import DASHI.Education.DigitalESDAllSourceSupportHyperedgesExact
 import DASHI.Education.DigitalESDResearchWorldCorpusCensusExact
 import DASHI.Education.DigitalESDCrossCorpusIntersectionalMemoryLensExact
 import DASHI.Education.DigitalESDCrossCorpusDependencyFrontierExact
