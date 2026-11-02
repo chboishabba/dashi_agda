@@ -17466,3 +17466,15 @@ Cleanup
 - [ ] **K04d actual analytic terminal:** implement Bishop complex n^{−s} via original compatible exp/log and prove uniform convergence for σ>1, real/imag epsilon-delta continuity at original Machin π, and use the new continuous-image reducer. The abstract Meromorphic predicate is not a proof.
 - [ ] **K05 actual trig terminal:** prove the EXISTING shared Round11 classical/Bishop object weld (or direct native identity), genuine Bishop sine/cosine addition/quadruple-angle, quarter tangent/branch identification, and independent π uniqueness. Conditional polynomial and DLMF-source receipts alone do not suffice.
 - [ ] Keep T10 genuine twin-prime lower bound, R10 RH zero-exclusion and P10 giant sine sign independent/open.
+
+
+### K04b–K04d–K05 2026-11-02 same-object commuting square (PR #1408)
+
+- [x] Source-write actual rational q_n → Bishop signed finite-history → true zeta-input square and reuse K04b real-order 4/25^n and 8/25^n certificates (pending kernel).
+- [x] Source-write 1<Re(Machin pi) and actual original completed-zeta/half-plane stage/limit agreement and coordinatewise convergence **conditional on named analytic witnesses** (pending kernel).
+- [x] Source-write derivation of both Round11 fourfold identities from **one uniform signed-factorial double-angle law**, reusing original same-object Pythagorean weld (pending kernel).
+- [ ] Run pinned Agda Track A on K04/K05 imported leaves and all three TOE roots; repair all proof syntax, order transport, universe and definitional-equality failures; retain the source-only status until then.
+- [ ] Independent K04b-DENOM witness: translate all-n denominator Nat cross-multiplication into the actual unnormalised rational remainder and Bishop order; compare with independently written stronger direct Bishop rate.
+- [ ] K04d: implement original Bishop-complex log/exp and n^(−s) Dirichlet series, compact Re(s)>1 locally uniform tail bound, the original half-plane domain predicate, same-object zeta equality, component continuity, and inhabit AnalyticSameObjectGate.
+- [ ] K05: prove original Round11 signed-factorial sine/cosine double-angle Cauchy product, construct and verify the original classical/Bishop weld, prove actual quarter tangent/branch gives cos=sin, and prove independent trig π uniqueness.
+- [ ] Keep twin-prime positive shifted correlation (T10), RH mid-strip zero exclusion (R10), and giant sine phase sign (P10) OPEN and separate.
