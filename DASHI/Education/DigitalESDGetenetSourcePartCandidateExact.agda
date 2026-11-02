@@ -283,6 +283,10 @@ partAxisAssessment communityAndInteraction pedagogyAndLearning =
 partAxisAssessment scaffoldingAndGuidance pedagogyAndLearning =
   World.sourceReportedPendingReview (sectionName scaffoldingAndGuidance)
     "Source reports N=100 coded responses" "Original denominator/quote review pending"
+partAxisAssessment selfOrganisation pedagogyAndLearning =
+  World.sourceReportedPendingReview (sectionName selfOrganisation)
+    "Source reports N=115 coded responses for self-management"
+    "Original denominator/quote review pending"
 partAxisAssessment negativeAndOutlierResponses pedagogyAndLearning =
   World.sourceReportedPendingReview (sectionName negativeAndOutlierResponses)
     "Article reports sixth contrasting theme with N=15 outliers and N=26 challenges"
