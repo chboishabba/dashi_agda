@@ -120,13 +120,17 @@ module _
         theory traceData adjointTrace)
       ordered strictToWeak
 
-  nativePhysicalIntegrationLaws :
-    (boundary : PhysicalC3ActionBoundary) →
+  -- The physical finite integration algebra needs ONLY one-link ordered
+  -- Haar and the strict-to-weak real order law; C3 is irrelevant here.
+  -- This is reused by both native C3 and native LOCAL GAUGE branches.
+  nativePhysicalIntegrationLawsFromOneLink :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value) →
     Finite.PhysicalFiniteMeasureIntegrationLaws physicalMeasure
-  nativePhysicalIntegrationLaws boundary = record
+  nativePhysicalIntegrationLawsFromOneLink ordered strictToWeak = record
     { Finite.PhysicalFiniteMeasureIntegrationLaws.densityNonnegative =
         λ links →
-          strictPositiveIsNonnegative boundary
+          strictToWeak
             (Gibbs.nativeSUNWilsonGibbsDensityStrictlyPositive
               theory traceData exponential beta links)
     ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralCongruent =
@@ -136,26 +140,34 @@ module _
             (λ vector → right (ProductC3.decode codec vector))
             (λ vector → equality (ProductC3.decode codec vector))
     ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralZero =
-        Ordered.productIntegralZero oneLink (oneLinkOrdered boundary)
+        Ordered.productIntegralZero oneLink (ordered)
     ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralAdd =
         λ left right →
-          Ordered.productIntegralAdd oneLink (oneLinkOrdered boundary)
+          Ordered.productIntegralAdd oneLink (ordered)
             (λ vector → left (ProductC3.decode codec vector))
             (λ vector → right (ProductC3.decode codec vector))
     ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralScale =
         λ scalar observable →
-          Ordered.productIntegralScale oneLink (oneLinkOrdered boundary)
+          Ordered.productIntegralScale oneLink (ordered)
             scalar
             (λ vector → observable (ProductC3.decode codec vector))
     ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralPositive =
         λ observable pointwise →
-          Ordered.productIntegralPositive oneLink (oneLinkOrdered boundary)
+          Ordered.productIntegralPositive oneLink (ordered)
             (λ vector → observable (ProductC3.decode codec vector))
             (λ vector → pointwise (ProductC3.decode codec vector))
     ; Finite.PhysicalFiniteMeasureIntegrationLaws.partitionFunctionIsDensityIntegral =
         refl
     }
 
+
+  nativePhysicalIntegrationLaws :
+    (boundary : PhysicalC3ActionBoundary) →
+    Finite.PhysicalFiniteMeasureIntegrationLaws physicalMeasure
+  nativePhysicalIntegrationLaws boundary =
+    nativePhysicalIntegrationLawsFromOneLink
+      (oneLinkOrdered boundary)
+      (strictPositiveIsNonnegative boundary)
 
   -- Genuine strict positivity of the selected finite Wilson partition,
   -- provided only the one-link full-support/integrable strict positivity
