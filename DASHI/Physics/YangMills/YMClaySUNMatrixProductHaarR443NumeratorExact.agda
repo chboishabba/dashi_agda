@@ -115,6 +115,22 @@ module _
         refl
     }
 
+
+  -- Genuine strict positivity of the selected finite Wilson partition,
+  -- provided only the one-link full-support/integrable strict positivity
+  -- authority. This is not a continuum uniform lower bound.
+  nativePhysicalPartitionPositive :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink) →
+    0ℝ <ℝ Physical.partitionFunction physicalMeasure
+  nativePhysicalPartitionPositive strict =
+    Ordered.productIntegralStrictlyPositive oneLink strict
+      (λ vector →
+        Gibbs.nativeSUNWilsonGibbsDensity
+          theory traceData exponential beta (ProductC3.decode codec vector))
+      (λ vector →
+        Gibbs.nativeSUNWilsonGibbsDensityStrictlyPositive
+          theory traceData exponential beta (ProductC3.decode codec vector))
+
   nativeProductHaarR443 :
     (boundary : PhysicalC3ActionBoundary) →
     R443.WilsonGibbsHaarAction
