@@ -35,6 +35,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as Sums
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
@@ -226,3 +227,33 @@ periodicSUNFiniteGibbsMeasure theory traceData exponential n beta productHaar di
     ; Physical.partitionFunction =
         productHaar (periodicSUNGibbsDensity theory traceData exponential n beta)
     }
+
+
+------------------------------------------------------------------------
+-- Fixed n=3 is the ACTUAL old side-four native signed plaquette object.
+-- This is a local same-holonomy equation; global-sum reassociation and
+-- physical UV compatibility must not be inferred from it without proof.
+------------------------------------------------------------------------
+
+sideFourPlaquetteSameNativeHolonomy :
+  ∀ {Matrix Complex : Set} {N : Nat}
+    (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+    (links : Native.SUNSideFourLinks N theory)
+    (p : Plaquette.PeriodicPlaquette Weld.three) →
+  periodicSUNPositivePlaquette theory Weld.three links p
+  ≡ Native.sunPositivePlaquetteHolonomy theory links p
+sideFourPlaquetteSameNativeHolonomy theory links p = refl
+
+sideFourPlaquetteSameNativeWilsonTrace :
+  ∀ {Matrix Complex Scalar : Set} {N : Nat}
+    (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+    (traceData : Trace.SUNMatrixRealTrace {Scalar = Scalar} theory)
+    (links : Native.SUNSideFourLinks N theory)
+    (p : Plaquette.PeriodicPlaquette Weld.three) →
+  Trace.matrixWilsonValue traceData
+    (periodicSUNPositivePlaquette theory Weld.three links p)
+  ≡ Trace.matrixWilsonValue traceData
+    (Native.sunPositivePlaquetteHolonomy theory links p)
+sideFourPlaquetteSameNativeWilsonTrace theory traceData links p =
+  cong (Trace.matrixWilsonValue traceData)
+    (sideFourPlaquetteSameNativeHolonomy theory links p)
