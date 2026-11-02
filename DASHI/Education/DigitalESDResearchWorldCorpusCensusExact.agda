@@ -29,7 +29,7 @@ import DASHI.Education.DigitalESDStudyProcessingCensusExact as Processing
 
 pilotStudyProfiles : List Ceiling.StudyClaimProfile
 pilotStudyProfiles =
-  Registry.map (λ p → p) Pilot.pilotProfiles
+  Pilot.pilotProfiles
   Registry.++ Extended.extensionProfiles
   Registry.++ (Quantitative.brasslerPilotProfile
              ∷ Uncertainty.iaqPilotProfile
@@ -94,8 +94,6 @@ record ResultClaimFibre (audit : Result.StudyResultAudit) : Set where
     profileIsAuditOwner : exactProfile ≡ Result.profile audit
     ownerFibre : StudySourceFibre exactProfile
 
-open ResultClaimFibre public
-
 resultClaimFibre :
   (audit : Result.StudyResultAudit) → ResultClaimFibre audit
 resultClaimFibre audit =
@@ -108,8 +106,6 @@ record EvidenceClaimFibre (audit : Evidence.StudyEvidencePNFAudit) : Set where
     exactProfile : Ceiling.StudyClaimProfile
     profileIsAuditOwner : exactProfile ≡ Evidence.profile audit
     ownerFibre : StudySourceFibre exactProfile
-
-open EvidenceClaimFibre public
 
 evidenceClaimFibre :
   (audit : Evidence.StudyEvidencePNFAudit) → EvidenceClaimFibre audit
