@@ -175,8 +175,8 @@ record UnresolvedSourceObjects : Set where
     originalSupplementDigestVerifiedIsFalse :
       originalSupplementDigestVerified ≡ false
 
-unresolvedSourceObjects : UnresolvedSourceObjects
-unresolvedSourceObjects =
+paperUnresolvedSourceObjects : UnresolvedSourceObjects
+paperUnresolvedSourceObjects =
   unresolvedSourceObjects
     "10.1038/s41467-022-28386-6"
     "2022-02-07"
