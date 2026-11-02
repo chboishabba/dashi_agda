@@ -79,4 +79,5 @@ import DASHI.Mathematics.Complexity.Karp21LevinPrefixFreeCookCodingExact
 
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact
 
-import DASHI.Mathematics.Complexity.Karp21SparseEndpointConsistencySoundExact
+
+import DASHI.Mathematics.Complexity.Karp21LeonidLevinSearchDecisionExact
