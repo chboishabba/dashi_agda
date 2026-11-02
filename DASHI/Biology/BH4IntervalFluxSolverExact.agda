@@ -65,12 +65,21 @@ record IntervalFluxSolverBoundary : Set where
     solverInfeasibleProvesAllDynamicStatesImpossible : Bool
     solverInfeasibleProvesAllDynamicStatesImpossibleIsFalse :
       solverInfeasibleProvesAllDynamicStatesImpossible ≡ false
+    duplicatePaidFluxCoordinatesAdmitted : Bool
+    duplicatePaidFluxCoordinatesAdmittedIsFalse :
+      duplicatePaidFluxCoordinatesAdmitted ≡ false
+    nonFiniteFluxIntervalAdmitted : Bool
+    nonFiniteFluxIntervalAdmittedIsFalse :
+      nonFiniteFluxIntervalAdmitted ≡ false
+    floatingPointCandidateIsExactCertifiedEquality : Bool
+    floatingPointCandidateIsExactCertifiedEqualityIsFalse :
+      floatingPointCandidateIsExactCertifiedEquality ≡ false
 
 open IntervalFluxSolverBoundary public
 
 canonicalIntervalFluxSolverBoundary : IntervalFluxSolverBoundary
 canonicalIntervalFluxSolverBoundary =
-  interval-flux-solver-boundary false refl false refl false refl false refl false refl
+  interval-flux-solver-boundary false refl false refl false refl false refl false refl false refl false refl
 
 canonicalBH4IntervalFluxSolverReceipt : Receipt.GenericReceipt
 canonicalBH4IntervalFluxSolverReceipt =
@@ -78,6 +87,6 @@ canonicalBH4IntervalFluxSolverReceipt =
     "BH4 interval flux solver"
     "DASHI.Biology.BH4IntervalFluxSolverExact"
     "source-paid reaction/exchange intervals + executed stoichiometric matrix -> linear steady-state feasibility search"
-    "searches for an admissible S*v+e=0 witness once every required interval is paid; missing bounds and unavailable solver are explicit statuses"
-    "missing coordinates are not zero; steady-state feasibility is not allocator causality or disease mechanism; steady-state infeasibility is not global dynamic impossibility"
+    "requires all source/context/interval coordinates; rejects duplicate, reversed, NaN and infinite bounds; postchecks solver float candidates against S*v+e and bound residual tolerances"
+    "an accepted HiGHS float vector is numerical candidate only, not exact certified equality, independently authenticated source truth, allocator causality or clinical mechanism"
     "python3 scripts/solve_bh4_flux_intervals.py --help"
