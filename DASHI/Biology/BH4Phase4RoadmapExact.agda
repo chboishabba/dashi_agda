@@ -23,6 +23,8 @@ currentBH4Phase = systemStateQuantitativePhase
 data BH4Phase4Residual : Set where
   completeKitzerowOriginalChartSourceVerification : BH4Phase4Residual
   validateNativeSensibLawOntologyBridge : BH4Phase4Residual
+  executeCreatorSelectedRheaAcquisition : BH4Phase4Residual
+  adjudicateCreatorSourceRheaToCuratedPathway : BH4Phase4Residual
   pinKitzerowPrimaryPathwayEdges : BH4Phase4Residual
   auditKitzerowPathwayAgainstFinitePanel : BH4Phase4Residual
   acquireVersionedPathwayOntologyCrossReferences : BH4Phase4Residual
@@ -56,6 +58,8 @@ livePhase4Residuals : List BH4Phase4Residual
 livePhase4Residuals =
   completeKitzerowOriginalChartSourceVerification
   ∷ validateNativeSensibLawOntologyBridge
+  ∷ executeCreatorSelectedRheaAcquisition
+  ∷ adjudicateCreatorSourceRheaToCuratedPathway
   ∷ pinKitzerowPrimaryPathwayEdges
   ∷ auditKitzerowPathwayAgainstFinitePanel
   ∷ acquireVersionedPathwayOntologyCrossReferences
@@ -124,6 +128,15 @@ authorPathwayPrimaryTextFullyVerified = false
 
 originalCreatorChartRheaIndexPresent : Bool
 originalCreatorChartRheaIndexPresent = true
+
+creatorSelectedRheaAcquisitionToolReady : Bool
+creatorSelectedRheaAcquisitionToolReady = true
+
+creatorSelectedRheaAcquisitionExecutedOnThisPRHead : Bool
+creatorSelectedRheaAcquisitionExecutedOnThisPRHead = false
+
+creatorSelectedReactionSetSharesCompartmentWithPanel : Bool
+creatorSelectedReactionSetSharesCompartmentWithPanel = false
 
 originalCreatorFullNetworkObtained : Bool
 originalCreatorFullNetworkObtained = false
