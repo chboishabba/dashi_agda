@@ -5,7 +5,8 @@ from __future__ import annotations
 import json
 from copy import deepcopy
 from pathlib import Path
-from compare_kitzerow_primary_chart import compare
+from compare_kitzerow_primary_chart import compare, compare_text_candidate_index, compare_chart_and_optional_text
+from index_kitzerow_chart_source_text import index_text
 
 ROOT = Path(__file__).resolve().parents[1]
 CHART = ROOT / "docs/biology/KitzerowPublishedRheaChartObservedIndex.v1.json"
@@ -45,6 +46,31 @@ def main() -> int:
     rejects(chart, b)
     b = deepcopy(matrix); b["reaction_index"] = ["CHEBI:12"]
     rejects(chart, b)
+    # Original-chart source-text indexing is an optional *additional*
+    # candidate observation; it must not replace the manually inspected
+    # source ID set or claim a complete creator network.
+    extracted = index_text(
+        b"Rhea:21708\\nRhea 10112\\nRhea:21708\\n",
+        source_url=chart["publication_page"],
+        source_revision="source-text-observation:2026-11-02",
+    )
+    alt = compare_text_candidate_index(extracted, matrix)
+    assert alt["literal_rhea_identifier_intersection"] == ["RHEA:21708"]
+    assert alt["creator_chart_observed_rhea_id_count"] == 2
+    assert alt["source_text_occurrence_count"] == 3
+    assert alt["creator_network_coverage_ratio"] is None
+    joined = compare_chart_and_optional_text(chart, matrix, extracted)
+    assert joined["local_source_text_observation"] == alt
+    assert joined["creator_chart_observed_rhea_id_count"] == 8
+    tampered = deepcopy(extracted)
+    tampered["candidate_only"] = False
+    try:
+        compare_text_candidate_index(tampered, matrix)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("source text was automatically promoted")
+
     print("Kitzerow original-source Rhea crosswalk regression: ok")
     return 0
 
