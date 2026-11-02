@@ -46,8 +46,9 @@ unrestrictedExchangeIsNotPhysicalEvidence = unrestrictedExchangeBalance
 
 -- Existing owners remain responsible for physical same-state balance
 -- and context-indexed feasibility, not this abstract existence result.
-existingMetabolicOpenBalanceOwner : Set₁
-existingMetabolicOpenBalanceOwner = MetabolicBalance.MetabolicOpenBalanceBridge
+-- Existing MetabolicBalance.MetabolicOpenBalanceBridge is indexed by
+-- a concrete network N and stoichiometric bridge S. We intentionally do
+-- not invent a concrete N/S instance from an abstract group theorem.
 
 existingFluxFeasibilityStatus : Set
 existingFluxFeasibilityStatus = Flux.FluxFeasibilityStatus
