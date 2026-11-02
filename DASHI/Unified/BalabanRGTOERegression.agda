@@ -942,6 +942,7 @@ import DASHI.Physics.YangMills.YMClayNativeSixPlaquetteSUNWilsonActionWeldExact 
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as SUNVariable
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact as SUNHaarR443
 import DASHI.Physics.YangMills.YMClaySUNMatrixR445R320SameCovarianceExact as SUNCov
@@ -1042,8 +1043,15 @@ open SUNHaar public using
 -- Exact same Gibbs measure: product Haar C3 + literal Wilson action -> R443/R431.
 -- Remaining one-link Haar/Fubini, codec, integration laws and action C3
 -- remain explicit sources; no independent whole-lattice Haar law is assumed.
+-- N-link zero/linearity/scale/positivity are derived, not new premises.
+open OrderedHaar public using
+  (productIntegralZero
+  ; productIntegralAdd
+  ; productIntegralScale
+  ; productIntegralPositive)
 open SUNHaarR443 public using
-  (nativeProductHaarR443
+  (nativePhysicalIntegrationLaws
+  ; nativeProductHaarR443
   ; nativeProductHaarNumeratorC3)
 
 open SUNCov public using
