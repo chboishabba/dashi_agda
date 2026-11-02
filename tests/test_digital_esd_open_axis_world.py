@@ -63,6 +63,27 @@ class StudyWorldAxisTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "axis accounting incomplete: 2"):
             validate(item)
 
+    def test_author_report_pending_review_stays_unadmitted(self):
+        item = fixture()
+        item["accounts"][0].update(
+            state="source_reported_pending_review",
+            source_section_ref="published Method section",
+            reported_observation_ref="author-reported response",
+            review_debt_ref="SLR exact full-text span and independent review pending",
+        )
+        result = validate(item)
+        self.assertEqual(
+            result["evidence_state_counts"]["source_reported_pending_review"], 1
+        )
+        self.assertEqual(result["direct_reviewed_structural_receipt_count"], 0)
+        self.assertFalse(result["empirical_world_admitted"])
+
+    def test_pending_author_report_needs_actual_section(self):
+        item = fixture()
+        item["accounts"][0].update(state="source_reported_pending_review")
+        with self.assertRaisesRegex(ValueError, "source_section_ref"):
+            validate(item)
+
     def test_no_duplicate_account(self):
         item = fixture()
         item["accounts"].append(item["accounts"][0].copy())
