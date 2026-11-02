@@ -241,3 +241,132 @@ quarterSemanticBridgeToActualMachinPi
   ,
   RP.≃-trans actualCosTransport
     (RP.≃-trans cosineQuad (proj₂ endpoint))
+
+------------------------------------------------------------------------
+-- K05 DOUBLE-ANGLE -> FOURFOLD COMMUTING SQUARE.
+--
+-- The classical fourfold equations are now DERIVED from one uniform
+-- theorem about the ACTUAL Round11 Bishop series at every input.
+-- No independent fourfold-angle assumption is needed.
+--
+-- The uniform double-angle law is an explicit analytic obligation;
+-- this file does NOT assert that source-written trigonometric series
+-- already satisfy it. In particular, the law must be obtained by a
+-- same-carrier Cauchy product and signed factorial coefficient proof.
+------------------------------------------------------------------------
+
+record Round11BishopDoubleAngle
+  (inputs : Round11.Round11BishopCutset) : Set where
+  field
+    sineDouble :
+      (point : R.ℝ) →
+      R._≃_
+        (round11Sine inputs (R._+_ point point))
+        (sinDoublePolynomial
+          (round11Cos inputs point)
+          (round11Sine inputs point))
+    cosineDouble :
+      (point : R.ℝ) →
+      R._≃_
+        (round11Cos inputs (R._+_ point point))
+        (cosDoublePolynomial
+          (round11Cos inputs point)
+          (round11Sine inputs point))
+
+open Round11BishopDoubleAngle public
+
+sinDoublePolynomialCongruent :
+  ∀ {x x′ y y′} →
+  R._≃_ x x′ →
+  R._≃_ y y′ →
+  R._≃_ (sinDoublePolynomial x y) (sinDoublePolynomial x′ y′)
+sinDoublePolynomialCongruent cosineSame sineSame =
+  RP.*-cong
+    (RP.*-cong RP.≃-refl cosineSame)
+    sineSame
+
+cosDoublePolynomialCongruent :
+  ∀ {x x′ y y′} →
+  R._≃_ x x′ →
+  R._≃_ y y′ →
+  R._≃_ (cosDoublePolynomial x y) (cosDoublePolynomial x′ y′)
+cosDoublePolynomialCongruent cosineSame sineSame =
+  RP.+-cong
+    (RP.*-cong cosineSame cosineSame)
+    (RP.-‿cong (RP.*-cong sineSame sineSame))
+
+twiceQuarter : R.ℝ
+twiceQuarter =
+  R._+_ Q.machinQuarterAngle Q.machinQuarterAngle
+
+twiceTwiceQuarter : R.ℝ
+twiceTwiceQuarter = R._+_ twiceQuarter twiceQuarter
+
+twiceTwiceIsFourTimesQuarter :
+  R._≃_ twiceTwiceQuarter fourTimesQuarter
+twiceTwiceIsFourTimesQuarter =
+  let open RP.ℝ-Solver
+  in solve 1
+    (λ q →
+      ((q ⊕ q) ⊕ (q ⊕ q))
+      ⊜ Κ (+ 4 / 1) ⊗ q)
+    RP.≃-refl Q.machinQuarterAngle
+
+-- First path: double theta, then double again, using only the
+-- same original Round11 series. Second path: canonical 4*theta.
+-- They commute through the Bishop real setoid and source congruence.
+actualSineFourfoldFromDouble :
+  (inputs : Round11.Round11BishopCutset) →
+  Round11BishopDoubleAngle inputs →
+  R._≃_
+    (round11Sine inputs fourTimesQuarter)
+    (sinFourfoldPolynomial (quarterCos inputs) (quarterSin inputs))
+actualSineFourfoldFromDouble inputs law =
+  RP.≃-trans
+    (TrigCong.bishopSinCongruent
+      (Round11.round11ConcreteTermIdentification inputs)
+      (RP.≃-symm twiceTwiceIsFourTimesQuarter))
+    (RP.≃-trans
+      (sineDouble law twiceQuarter)
+      (sinDoublePolynomialCongruent
+        (cosineDouble law Q.machinQuarterAngle)
+        (sineDouble law Q.machinQuarterAngle)))
+
+actualCosineFourfoldFromDouble :
+  (inputs : Round11.Round11BishopCutset) →
+  Round11BishopDoubleAngle inputs →
+  R._≃_
+    (round11Cos inputs fourTimesQuarter)
+    (cosFourfoldPolynomial (quarterCos inputs) (quarterSin inputs))
+actualCosineFourfoldFromDouble inputs law =
+  RP.≃-trans
+    (TrigCong.bishopCosCongruent
+      (Round11.round11ConcreteTermIdentification inputs)
+      (RP.≃-symm twiceTwiceIsFourTimesQuarter))
+    (RP.≃-trans
+      (cosineDouble law twiceQuarter)
+      (cosDoublePolynomialCongruent
+        (cosineDouble law Q.machinQuarterAngle)
+        (sineDouble law Q.machinQuarterAngle)))
+
+-- One exact shared double-angle law replaces TWO independent
+-- fourfold-angle analytic inputs in the K05 endpoint theorem.
+actualMachinTrigEndpointFromDoubleAngle :
+  (inputs : Round11.Round11BishopCutset) →
+  Round11BishopDoubleAngle inputs →
+  R._≃_ (quarterCos inputs) (quarterSin inputs) →
+  R._≃_
+    (R._+_
+      (R._*_ (quarterCos inputs) (quarterCos inputs))
+      (R._*_ (quarterSin inputs) (quarterSin inputs)))
+    R.1ℝ →
+  (R._≃_ (round11Sine inputs Machin.bishopMachinPi) R.0ℝ)
+  ×
+  (R._≃_
+    (round11Cos inputs Machin.bishopMachinPi)
+    (R.-_ R.1ℝ))
+actualMachinTrigEndpointFromDoubleAngle inputs law equal unit =
+  quarterSemanticBridgeToActualMachinPi
+    inputs equal unit
+    (actualSineFourfoldFromDouble inputs law)
+    (actualCosineFourfoldFromDouble inputs law)
