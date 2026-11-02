@@ -28,7 +28,8 @@ data TraceToken : Set where
   V : Nat → TraceToken
   R : Nat → TraceToken
   QS QD BD : Nat → TraceToken
-  FLT HEX : Nat → TraceToken
+  FLT HEX BYTE : Nat → TraceToken
+  SC : TraceToken
   F0 F1 F2 NT : TraceToken
   J : Nat → TraceToken
   ST0 ST1 SS0 SS1 : TraceToken
@@ -45,6 +46,7 @@ data CommitToken : Set where
   shortValue mediumValue longValue noWrite : CommitToken
   jumpWord : Nat → CommitToken
   storeFullLow storeFullHigh storePartialLow storePartialHigh : CommitToken
+  printByte : Nat → CommitToken
   terminate : CommitToken
 
 encodePrefix : PrefixToken → TraceToken
@@ -66,6 +68,7 @@ encodeCommit storeFullLow = ST0
 encodeCommit storeFullHigh = ST1
 encodeCommit storePartialLow = SS0
 encodeCommit storePartialHigh = SS1
+encodeCommit (printByte n) = BYTE n
 encodeCommit terminate = HALT
 
 -- Abstract ISA-state transition: the actual RV32 reference transition
@@ -78,6 +81,9 @@ stepToken execute (QD _) s = s
 stepToken execute (BD _) s = s
 stepToken execute (FLT _) s = s
 stepToken execute (HEX _) s = s
+-- SC is preserved as an opaque P2 control. Source-level control timing
+-- and whether SC ends a digit-file subrecord require the actual spec.py.
+stepToken execute SC s = s
 stepToken execute F0 s = execute s
 stepToken execute F1 s = execute s
 stepToken execute F2 s = execute s
@@ -87,6 +93,7 @@ stepToken execute ST0 s = execute s
 stepToken execute ST1 s = execute s
 stepToken execute SS0 s = execute s
 stepToken execute SS1 s = execute s
+stepToken execute (BYTE _) s = execute s
 stepToken execute HALT s = execute s
 
 prefixDoesNotCommit :
@@ -114,6 +121,7 @@ finalTokenCommits execute storeFullLow s = refl
 finalTokenCommits execute storeFullHigh s = refl
 finalTokenCommits execute storePartialLow s = refl
 finalTokenCommits execute storePartialHigh s = refl
+finalTokenCommits execute (printByte n) s = refl
 finalTokenCommits execute terminate s = refl
 
 -- Executable, typed record emitter and independent flat-token interpreter.
@@ -155,6 +163,7 @@ data SourceRecord : Set where
   storeWord : Bool → SourceRecord
   storeBytes : Nat → Nat → Nat → Bool → SourceRecord
   faultRecord : Nat → Nat → SourceRecord
+  putChar : Nat → SourceRecord
   divisionResult : Nat → List Nat → Nat → SourceRecord
   bignumResult : List Nat → Nat → SourceRecord
 
@@ -181,6 +190,7 @@ recordPrefix (takenBranch _) = []
 recordPrefix (storeWord _) = []
 recordPrefix (storeBytes a b c _) =
   payload a ∷ payload b ∷ payload c ∷ []
+recordPrefix (putChar _) = []
 recordPrefix (faultRecord cause pcword) =
   faultCause cause ∷ faultHex pcword ∷ []
 recordPrefix (divisionResult k digits value) =
@@ -199,6 +209,7 @@ recordEnd (storeWord true) = storeFullHigh
 recordEnd (storeBytes a b c false) = storePartialLow
 recordEnd (storeBytes a b c true) = storePartialHigh
 recordEnd (faultRecord _ _) = terminate
+recordEnd (putChar n) = printByte n
 recordEnd (divisionResult _ _ _) = mediumValue
 recordEnd (bignumResult _ _) = mediumValue
 
@@ -232,3 +243,13 @@ record SourceTraceBoundary : Set where
 
 canonicalSourceTraceBoundary : SourceTraceBoundary
 canonicalSourceTraceBoundary = sourceTraceBoundary true true true false
+
+
+putCharRecordExample :
+  emitSourceRecord (putChar 65) ≡ BYTE 65 ∷ []
+putCharRecordExample = refl
+
+-- The P2 SC control is present as a source token but no claim about
+-- its instruction-state semantics is promoted from a name alone.
+sourceSCStatus : TraceToken
+sourceSCStatus = SC
