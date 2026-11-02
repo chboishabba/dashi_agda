@@ -1251,3 +1251,225 @@ polynomial normalization. It is not a proof of
 arbitrary two-variable `cosAdd` or a proof of
 Pythagorean itself. Status: **SOURCE-WRITTEN,
 Agda kernel unchecked**, as requested.
+
+
+## 2026-11-03 K04d source-log geometric convergence, integer Basel slices and K05 imaginary phase max-cut
+
+Branch `feat/twin-prime-six-wheel-bounded-gap-reuse-20261028`,
+PR #1408. Source-written, **NOT Agda kernel-accepted**.
+No CI executed, per user direction. All claims are about the actual
+pinned Murray/Bishop backend; external paper theorems and generic
+record fields are not treated as inhabited source results.
+
+### Explicit repository term archaeology
+
+GitHub default-branch symbol searches (plus direct PR-branch
+source fetches) included:
+`InOpenUnitInterval`, `negativeLogAbsoluteConvergence`,
+`negativeLogOneMinusTerm`, `expLog`, `logExp`,
+`expOntoPositive`, `bishopNegativeLog`,
+`BishopNaturalLog`, `bishopExpAdd`, `expStrictMonotone`,
+`complex exponential modulus`, `normSqC`,
+`trigonometric unit phase`, `cosineMagnitude`,
+`phase modulus`, `cosAdd`, `sinAdd`,
+`sineSignedTerm`, `cosineSignedTerm`,
+`CauchyProduct`, `FiniteCauchy`,
+`arctan tangent`, `tangent branch`,
+`first cosine zero`, `pi uniqueness`,
+`zetaHalfPlane`, `ZetaEqualsDirichletSeries`,
+`locally uniform`, `uniform limit continuity`,
+`BishopContinuousAt`, `bishopExpPositive`,
+`expPositiveAll`, `positiveExponential`,
+`BishopExponentialGlobal`,
+`negativeExpBelowOne`, `BishopGeometricSeriesConvergence`,
+`GeometricDominationConvergence`,
+`BishopReciprocalCoefficientConstructionExact`,
+`BishopGeometricMajorantSeriesConvergenceExact`,
+`BishopPolynomialGeometricDominationConvergenceExact`,
+`BishopFiniteSeriesExtensionalityExact`.
+Search was rate-limited for several terms; key named owners
+were also explicitly fetched by exact branch path. No claim
+of a globally exhaustive repository scan is made.
+
+### K04d-LOG source native convergence and positivity PAID IN SOURCE
+
+New `DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda`
+commits `19b22586d3067cdd42a730087d2638fa6c100b61`,
+`d126ba2afd4366ad4e3f8c65fc58022c09d430c4`,
+`ff171df816c05b2367d88a63bb066f3dd9665fd0`.
+
+- `sourceNegativeLogTerm x n = x^(n+1) * embed(1/(n+1))`,
+  specifically with the EXISTING `BishopNatRealReciprocalSquareBaselExact`
+  rational reciprocal owner, not an invented new rational codec.
+- `sourceNegativeLogAbsoluteBelowGeometric` proves all-index
+  `|sourceNegativeLogTerm x n| <= x*x^n` for nonnegative x.
+- `sourceNegativeLogAbsolutelyConvergent` compiles 0<x<1
+  into real **Bishop absolute convergence** through existing
+  `BishopGeometricMajorantSeriesConvergenceExact.seriesConvergentFromScaledGeometricMajorant`,
+  which itself uses vendored Bishop ratio and comparison tests.
+- `sourceNegativeLogValue`, `sourceNegativeLogValueConverges`:
+  actual native Bishop negative-log series limit and convergence.
+- `sourceLogValueEqualsConfiguredBishopLog` uses ORIGINAL
+  finite-series extensionality to prove source-native and
+  configured series values equivalent whenever the real configured
+  interval witness AND literal coefficient identity are given.
+  Neither of those inputs is inferred from an abstract record field.
+- `sourceLogPartialIncreasing`,
+  `sourceLogFirstPartialEqualsX`,
+  `sourceNegativeLogAtLeastPoint`, and
+  `sourceNegativeLogStrictlyPositive` use the ORIGINAL
+  Bishop nonnegative term order and monotone-limit theorem
+  to prove `L(x)>=x>0` for all genuine 0<x<1.
+- Foundations rollup import attached by commit
+  `ba7b0613226f4fd80e6233fb8cdde6ba79003693`.
+
+`DASHI/Analysis/BishopRiemannDirichletExponentialTermExact.agda`
+commit `63d4988c0973b2d4244c6861e6d42cfeafaba6c9` adds
+`sourceCanonicalNatLogCandidate`,
+`sourceCanonicalNatLogSuccessorConverges`,
+`sourceOriginalConfiguredNatLogAgreement` and
+`sourceCanonicalOriginalExpLogInverseAtOne`. Therefore the full
+canonical `log(n+1)` history is constructed directly from the
+convergent native source term for EVERY n, **without** the opaque
+`InOpenUnitInterval` requirement used by the *different*
+`natLogViaOriginalNegativeLog T inside` candidate.
+
+Commit `275c6a8d8bed0c35a05157ac3fd6d707379ff370` adds
+`sourceCanonicalNatLogSuccessorPositive` and the actual
+`sourceCanonicalNatExpNegativeRatio{Positive,BelowOne}`
+using existing global negative exponential unit-interval proof
+from `BishopNegativeExponentialGlobalUnitIntervalExact`.
+It also builds the original `BishopUnitIntervalRatio` and
+`sourceCanonicalNatExpNegativeGeometricConverges`.
+This certifies, **without an inverse assumption**, that
+`0 < exp_B(-L_n) < 1` for canonical positive successor logs,
+NOT that `exp_B(-L_n)=1/(n+1)`.
+
+**K04d-LOG inverse still OPEN:** prove for all n positive
+successors that `exp_B(sourceCanonicalNatLogCandidate n)`
+equals the original embedded `NatReal.natReal(suc n)`.
+Separately, identify the Round11-configured log coefficient
+family with `sourceNegativeLogTerm` and supply its
+`InOpenUnitInterval` evidence or make the selected record
+interpretation concrete and prove source coincidence.
+Neither a generic `InverseLogarithmFromExponential.expLog`
+record field nor arbitrary conditional evidence pays this.
+
+### K04d-REGION integer exponent subfamily PAID IN SOURCE
+
+`DASHI/Foundations/BishopNatRealReciprocalSquareBaselExact.agda`
+commits `828642348b447fbbc393e98209fd830893693a43`,
+`8e75c14b4a4d0572f594977a6ed106802ad16329`:
+`reciprocalAtMostOne`, `reciprocalNonnegative`,
+`oneToAnyNatPower`, `reciprocalPowersAtMostOne`,
+`reciprocalExtraPowersBelowSquare`.
+For each positive-Nat reciprocal `q=1/(n+1)`
+and *every* Nat `k`, prove `q^(2+k)<=q^2` on the
+actual embedded Bishop real carrier.
+
+`DASHI/Analysis/BishopRiemannDirichletExponentialTermExact.agda`
+commits `9be263273c85fec13084eb18789d6087f3345b56`,
+`a1f790da88991ee980ba1c8cd68b69b1c1c7d68f`,
+`d93262e33de4921ad15776f9c6e57900be09d16c`,
+`6cd1823abab8b6a145f130e946a70a758c6f3ea8`:
+
+- Actual Nat reciprocal and conditional negative exponential
+  closed-unit-radius theorem,
+  `sourceNatLogNegativeExponentialUnitInterval`.
+- `sourceNegativeLogSum` is repeated *actual original* negative
+  logarithm input; `sourceExpNegativeLogSumIsReciprocalPower`
+  is proved by induction through the ORIGINAL
+  `BishopExponentialCauchyProductExact.bishopExpAdd`.
+- `sourceNegativeLogSumAboveTwoBaselMajorant` and its
+  absolute-value version prove that for every integer exponent
+  `2+k`, `|exp_B(-(2+k)logNat(n))|<=BaselTerm(n)`
+  **assuming the genuine Nat exp/log inverse**.
+- `sourceIntegralExpTerm{Real,ImagZero}`,
+  `sourceIntegralExp{Real,Imag}BaselMajorant`,
+  `sourceIntegralExpFamilyMajorant`, and
+  `sourceIntegralExpFamilyConverges` lift this to *both*
+  actual Round11 Bishop complex exponential coordinates and
+  the existing native Basel series convergence compiler.
+  The fixed-integer term family is **not falsely advertised**
+  as the full complex-variable `zetaHalfPlane`.
+
+**K04d-REGION continuous complex neighborhood still OPEN:**
+one still needs the original exp/log inverse, proof of
+`|sin_B(theta)|<=1`, `|cos_B(theta)|<=1` (a native
+Pythagorean-square order proof is a natural donor),
+global monotonicity/multiplicative order of exp on
+noninteger real exponents and resulting uniform all-index
+domination near the ACTUAL Machin `pi`.
+The quantitative region finite- and to-limit Basel
+cutoffs are already source-written conditional on that.
+
+### K05 pure-imaginary exponential equivalence PAID IN SOURCE
+
+`DASHI/Analysis/BishopSetoidComplexExact.agda`
+commit `160293411730cae5a4a09cbaf47e3a256c4e166b`
+implements actual same-object two-way bridge:
+
+- `imaginaryPhase`, `pureImaginary`,
+  `imaginaryExponentialIsPhase` using ORIGINAL
+  `BishopExponentialPositiveOrderExact.bishopExpZero`
+  and selected original sine/cosine term limits;
+- `BishopSineAdditionAt`, `BishopCosineAdditionAt`
+  are **the actual source equations** for the same dataset;
+- `imaginaryPhaseProductFromAddition`,
+  `imaginaryPhaseProductGives{Sine,Cosine}Addition`;
+- `imaginaryExponentialProductFromAddition`,
+  `imaginaryExponentialProductGivesPhaseProduct`,
+  `imaginaryExponentialProductGivesAddition`.
+
+Thus `expC(i(x+y))≈expC(ix)*expC(iy)`
+on original Bishop pairs is *equivalent* to both native
+Round11 sine/cosine additions. This does NOT pay
+the infinite-series multiplicativity itself; its
+remaining genuine proof is the signed-factorial mixed
+complex Cauchy coefficient identity and exact convergence
+of its finite rectangle/triangle reindexing.
+
+### Exact remaining terminal cut after this tranche
+
+1. **L-INV**: `exp_B(L((n+1)/(n+2)))=n+2` for the concrete
+   positive-successor Bishop source negative-log power series,
+   all n; same-object configured `negativeLogOneMinusTerm`
+   and interval `InOpenUnitInterval` witnesses.
+2. **D-COMPLEX-NEIGHBORHOOD**: all-index Basel majorant
+   for `expC(-s L_n)` on an actual open complex region
+   about `(pi_M,0)`. Integer nonnegative/real fibres and
+   common uniform tail limit bounds are now source-written,
+   not the full neighborhood.
+3. **C-CONTINUITY**: native finite-term exp/sine/cosine
+   epsilon/delta continuity and Bishop uniform-limit
+   continuity on that same region. The source quantitative
+   uniformly common limit-tail modulus is owned.
+4. **Z-SAME-OBJECT**: *pointwise actual function equality*
+   of the constructed complex Dirichlet sum and the selected
+   `Analytic.ZetaHalfPlaneLayer.zetaHalfPlane`,
+   `realPartGreaterThanOne` predicate bridge,
+   and the original completed-`zeta` value
+   from `CompletedRiemannZeta.agreesWithHalfPlane`.
+   Generic `ZetaEqualsDirichletSeries : Complex→Set`
+   is not evidence for this.
+5. **T-MIXED-Cauchy**: prove finite signed-factorial
+   mixed complex exponent coefficient identities for all
+   x,y, combine already owned Bishop Cauchy wing/tail
+   convergence and the exact phase bidirectional reduction,
+   thereby obtain genuine sine/cosine addition.
+6. **T-ATAN-PI**: prove actual arctangent tangent law and
+   branch selection at the Machin quarter, native
+   Pythagorean and trigonometric first-positive-zero
+   uniqueness; preserve the already proved rational
+   tangent arithmetic and interval (3/4, 11/14).
+7. **KERNEL**: no Agda checker or CI ran. All new code is
+   source-written with no intention to claim kernel
+   acceptance, even if GitHub source readback succeeds.
+
+Historical attribution: John Machin (1706), Dirichlet,
+Riemann (1859), Bishop & Bridges (1985), Zachary Murray
+(2022, arXiv:2205.08354), Viktor Csimma's pinned
+`vendor/bishop`, and relevant original DASHI theorem
+owners. Any new reductions are owned by the
+DASHI formalisation project; external generic theorem
+reports must never be recorded as kernel proof receipts.
