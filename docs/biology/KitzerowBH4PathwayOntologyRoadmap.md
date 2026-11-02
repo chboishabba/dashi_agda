@@ -88,6 +88,32 @@ Kitzerow causal edge as a separate typed claim.
 
 The current 16-UniProt/24-protein–Rhea-link panel yields 12 finite Rhea reactions, 29 indexed Rhea/ChEBI source species, three non-finite MTOR residuals and a 56-coordinate open-state manifest (15 state/context + 12 reaction flux + 29 exchange). This is not Kitzerow's entire proposed pathway, not a compartment-resolved model and not disease-causation evidence. The flux solver remains underdetermined.
 
+## Structural identifiability limit (exact non-promoting theorem)
+
+The existing open-system owner gives S*v+e=0, separating internal
+reactions from environmental exchange. The new source-written Agda
+module `BH4ExchangeIdentifiabilityExact` proves a general additive
+cancellation theorem: for any prescribed internal signed total s=S*v,
+an **unrestricted** external e=-s exists and balances it exactly.
+The concrete helper `bh4_exchange_identifiability.py` checks this
+identity with exact integer matrices/vectors, not approximate kinetics,
+and the regression exhibits caller-assumed exchange intervals that can
+exclude that particular candidate.
+
+**This identifies the test's discriminating max-cut**: an apparent
+steady-state feasible point with arbitrary freely chosen exchanges
+does not support Kitzerow's simultaneous-demand mechanism.
+Pay specific transport/source/sink bounds for each relevant species
+with coherent compartment, tissue, state, and time; then use the
+existing HiGHS feasibility solver and a separate reviewed hypothesis
+test. There are no manufactured observational exchange values.
+
+The new abstract theorem and exact-integer fixture are source-written
+and **not** current-head Agda-kernel/pytest verified.
+
+    python3 scripts/check_bh4_exchange_identifiability.py
+    scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4ExchangeIdentifiabilityExact.agda
+
 ## Original chart -> curated biochemical resource (implemented acquisition path)
 
 An explicit, optional source-first mode now **reuses the existing Rhea
@@ -227,6 +253,7 @@ Version/assay/source release still must be pinned in acquired receipts. No stand
     python3 scripts/check_kitzerow_chart_source_text.py
     python3 scripts/check_kitzerow_source_chart_acquisition.py
     python3 scripts/check_bh4_numeric_flux_guard.py
+    python3 scripts/check_bh4_exchange_identifiability.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4CreatorChartSourceBridgeExact.agda
     python3 scripts/check_kitzerow_bh4_priority_all.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PathwayOntologyInteropExact.agda
