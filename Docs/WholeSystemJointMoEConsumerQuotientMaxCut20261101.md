@@ -386,3 +386,31 @@ are not Leech lattice automorphisms without a separate proof.
 No ESD modules were edited. **Previous measured quality gate still
 fails**: dense CE 2.58; C2 CE 8.63; punctured-nine CE 17.30 on the
 reported 64/32 TinyStories sample. No new quality numbers are claimed.
+
+### Additional 2 November transport Pareto cut: policy before encoding
+
+`scripts/benchmark_joint_state_quotient.py` now uses the first
+half of captured frames to select **raw or JQ1** for each 1/10 Gbit/s
+assumed link. It then reports the unchanged policy's whole-message
+cost on the subsequent half. The full estimated round trip includes
+measured local encode/decode CPU time, both serialisations and the
+stated RTT/ACK/response-size assumptions. Small packets no longer
+count as a gain if the predicted total latency is worse. Fewer than
+four captured frames default to raw (insufficient calibration).
+`tests/test_joint_transport_latency_policy.py` gives deterministic
+slow-encoder and heldout-distribution-shift counterexamples.
+This is a **prior-profile decision simulation**, not a real remote
+deployment, authenticated state-owner protocol or measured WAN.
+The actual request API already supports `permit_compression=False`;
+deployment must select that before encoding, from a revision-bound
+profile, rather than running both encoders on every message.
+New tests are source-written and have not been executed here.
+
+Focused local checks (optional; no CI dependency):
+```bash
+python -m unittest \\
+  tests.test_guarded_moe_continuation \\
+  tests.test_teacher_free_promotion \\
+  tests.test_e8_canonical_history_jq1 \\
+  tests.test_joint_transport_latency_policy -v
+```
