@@ -133,6 +133,12 @@ data PartAxisAccounting
   directReviewed :
     ReviewedPartAxisEvidence scope s p a →
     PartAxisAccounting scope s p a
+  -- Author-reported content seen in an article or abstract, still awaiting
+  -- the exact SLR full-text, span, reviewer and audit membership receipts.
+  -- This is *not* absent evidence and is *not* directReviewed evidence.
+  sourceReportedPendingReview :
+    (sourceSectionRef reportedObservationRef reviewDebt : String) →
+    PartAxisAccounting scope s p a
   inferredUnderConditions :
     (premiseReference conditionReference limitation : String) →
     PartAxisAccounting scope s p a
