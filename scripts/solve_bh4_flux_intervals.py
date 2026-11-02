@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 
@@ -25,11 +26,22 @@ def parameter_map(parameters: dict) -> dict[str, dict]:
 
 
 def paid_bound(row: dict | None) -> tuple[float, float] | None:
-    if not row or row.get("payment_status") == "unresolved" or not row.get("usable_for_joint_flux_witness"):
+    if not isinstance(row, dict) or row.get("payment_status") not in (
+        "measured", "derived", "bounded-literature"
+    ) or row.get("usable_for_joint_flux_witness") is not True:
         return None
-    if row.get("lower") is None or row.get("upper") is None:
+    if not all(row.get(key) for key in (
+        "source_reference", "same_object_reference",
+        "compartment_reference", "measurement_time_reference"
+    )) or not isinstance(row.get("unit"), str) or not row["unit"].strip():
         return None
-    return float(row["lower"]), float(row["upper"])
+    try:
+        lower, upper = float(row["lower"]), float(row["upper"])
+    except (TypeError, ValueError, OverflowError):
+        return None
+    if not math.isfinite(lower) or not math.isfinite(upper) or lower > upper:
+        return None
+    return lower, upper
 
 
 def promotion_boundary() -> dict:
@@ -47,6 +59,26 @@ def solve(matrix_receipt: dict, parameter_receipt: dict) -> dict:
     reactions = list(matrix_receipt.get("reaction_index", []))
     species = list(matrix_receipt.get("species_index", []))
     matrix = matrix_receipt.get("matrix", [])
+    source_rows = parameter_receipt.get("parameters", [])
+    if not isinstance(source_rows, list) or any(
+        not isinstance(row, dict) for row in source_rows
+    ):
+        return {
+            "schema": "dashi.bh4-interval-flux-solver.v1",
+            "status": "underdetermined",
+            "reason": "parameter manifest malformed",
+            "candidate_flux_balance_witness": None,
+            "promotion_boundary": promotion_boundary(),
+        }
+    ids = [str(row.get("parameter_id")) for row in source_rows if row.get("parameter_id")]
+    if len(ids) != len(set(ids)):
+        return {
+            "schema": "dashi.bh4-interval-flux-solver.v1",
+            "status": "underdetermined",
+            "reason": "duplicate parameter coordinates",
+            "candidate_flux_balance_witness": None,
+            "promotion_boundary": promotion_boundary(),
+        }
     pmap = parameter_map(parameter_receipt)
 
     if len(matrix) != len(species) or any(len(row) != len(reactions) for row in matrix):
@@ -71,7 +103,7 @@ def solve(matrix_receipt: dict, parameter_receipt: dict) -> dict:
 
     solver_rows = [row for _, row in reaction_rows + exchange_rows]
     units = sorted({str(row.get("unit")) for row in solver_rows})
-    if len(units) != 1:
+    if len(units) != 1 or units[0] in ("None", "", "nan", "unknown"):
         return {
             "schema": "dashi.bh4-interval-flux-solver.v1",
             "status": "underdetermined",
@@ -110,7 +142,47 @@ def solve(matrix_receipt: dict, parameter_receipt: dict) -> dict:
         flux = {rid: float(result.x[j]) for j, rid in enumerate(reactions)}
         exchange = {sid: float(result.x[n_r + i]) for i, sid in enumerate(species)}
         status = "feasible"
+        # SciPy/HiGHS provides a floating-point candidate, not a
+        # mathematical exact-equality certificate or laboratory receipt.
+        # Check its returned vector against the input intervals and S*v+e
+        # separately. An unchecked solver success never creates a witness.
+        x_values = [float(value) for value in result.x]
+        max_balance_residual = max(
+            [abs(sum(float(matrix[i][j]) * x_values[j]
+                     for j in range(n_r)) + x_values[n_r + i])
+             for i in range(len(species))] or [0.0]
+        )
+        max_bound_violation = max(
+            [max(lower - value, value - upper, 0.0)
+             for value, (lower, upper) in zip(x_values, bounds)] or [0.0]
+        )
+        tolerance = 1e-7 * max(
+            1.0, max((abs(x) for x in x_values), default=0.0)
+        )
+        numerically_checked = (
+            all(math.isfinite(x) for x in x_values)
+            and math.isfinite(max_balance_residual)
+            and math.isfinite(max_bound_violation)
+            and max_balance_residual <= tolerance
+            and max_bound_violation <= tolerance
+        )
+        if not numerically_checked:
+            return {
+                "schema": "dashi.bh4-interval-flux-solver.v1",
+                "status": "underdetermined",
+                "reason": "solver candidate failed independent finite residual/bound check",
+                "candidate_flux_balance_witness": None,
+                "postcheck_tolerance": tolerance,
+                "max_balance_residual": max_balance_residual,
+                "max_bound_violation": max_bound_violation,
+                "promotion_boundary": promotion_boundary(),
+            }
         witness = {
+            "postcheck_max_balance_residual": max_balance_residual,
+            "postcheck_max_bound_violation": max_bound_violation,
+            "postcheck_tolerance": tolerance,
+            "numeric_candidate_only": True,
+            "original_source_receipts_independently_authenticated": False,
             "reaction_flux": flux,
             "external_exchange": exchange,
             "normalized_flux_unit": units[0],
