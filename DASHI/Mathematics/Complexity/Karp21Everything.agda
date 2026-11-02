@@ -80,4 +80,5 @@ import DASHI.Mathematics.Complexity.Karp21LevinPrefixFreeCookCodingExact
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact
 
 
+import DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact
 import DASHI.Mathematics.Complexity.Karp21LeonidLevinSearchDecisionExact
