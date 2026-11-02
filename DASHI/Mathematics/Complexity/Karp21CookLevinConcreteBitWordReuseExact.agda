@@ -37,6 +37,8 @@ import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Bits
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
 import DASHI.Mathematics.Complexity.Karp21CookStrictTripleBitBoundaryExact as Strict
+import DASHI.Mathematics.Complexity.Karp21CookStrictSATLanguageExact as SAT
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import Data.Maybe.Base as Maybe
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Tape
@@ -188,3 +190,42 @@ strictSerializedCookWordParsesExactFormula :
 strictSerializedCookWordParsesExactFormula states symbols nonempty input steps =
   Strict.strictCookFormulaRoundTrip
     (CL.guardedCookFormula states symbols nonempty input steps)
+
+
+------------------------------------------------------------------------
+-- Actual canonical Word-language Cook--Levin equivalence, not a
+-- decoded-expression proxy: acceptance is PR.accepts strictSATLanguage.
+-- This is the same Word=List Bool carrier expected by the Karp DAG.
+------------------------------------------------------------------------
+
+strictCookSATWordAcceptanceToRun :
+  ∀ {machine : Tape.ConcreteTapeMachine}
+    (states : Canonical.EnumerationCoverage (Tape.finiteState machine))
+    (symbols : Canonical.EnumerationCoverage (Tape.finiteSymbol machine))
+    (nonempty : Rules.NonemptyRuleTable machine)
+    (input : Input.InputWord machine)
+    (steps : Nat) →
+  PR.accepts SAT.strictSATLanguage
+    (guardedCookLevinBitWord states symbols nonempty input steps)
+  → Runs.ExactBudgetAcceptingRun input steps
+strictCookSATWordAcceptanceToRun states symbols nonempty input steps
+  rewrite strictSerializedCookWordParsesExactFormula
+    states symbols nonempty input steps =
+  CL.cookSatisfiableToExactBudgetRun
+    states symbols nonempty input steps
+
+exactRunToStrictCookSATWordAcceptance :
+  ∀ {machine : Tape.ConcreteTapeMachine}
+    (states : Canonical.EnumerationCoverage (Tape.finiteState machine))
+    (symbols : Canonical.EnumerationCoverage (Tape.finiteSymbol machine))
+    (nonempty : Rules.NonemptyRuleTable machine)
+    (input : Input.InputWord machine)
+    (steps : Nat) →
+  Runs.ExactBudgetAcceptingRun input steps →
+  PR.accepts SAT.strictSATLanguage
+    (guardedCookLevinBitWord states symbols nonempty input steps)
+exactRunToStrictCookSATWordAcceptance states symbols nonempty input steps
+  rewrite strictSerializedCookWordParsesExactFormula
+    states symbols nonempty input steps =
+  CL.exactBudgetRunToCookSatisfiable
+    states symbols nonempty input steps
