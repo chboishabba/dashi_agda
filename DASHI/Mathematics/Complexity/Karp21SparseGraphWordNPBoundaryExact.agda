@@ -139,9 +139,9 @@ module OnCodec (codec : SparseGraphWordCodec) where
       { PR.Certificate = Word.BitWord
       ; PR.verifies = verifyCanonicalSparseGraphWord
       ; PR.certificateAdmissible = canonicalSparseCertificateAdmissible
-      ; PR.sound = λ word bits _ check →
+      ; PR.sound = λ word bits bound check →
           boundedSparseToCanonicalGraphWord word
-            (bits , (NatP.≤-refl , check))
+            (bits , (bound , check))
       ; PR.complete = canonicalGraphWordToBoundedSparse
       ; PR.polynomialVerification = verifierClock
       ; PR.polynomialCertificateSize = certificateBound
