@@ -1,3 +1,10 @@
+## 2026-11-03 — original native bond setoid/variable-cutoff Wilson and Bishop matrix ReTr
+
+- After explicit functional-extensionality, Bishop and original periodic enum source searches, added `YMClaySUNNativeWilsonBondPointwiseExact` and `YMClaySUNVariablePeriodicBondPointwiseExact`: actual Wilson signed path, plaquettes, all-site six-plane action and Gibbs density respect pointwise original bond equality, including every finite cutoff n. No arbitrary function equality postulated.
+- Added `YMClaySUNNativeSetoidBondProductHaarExact`: original bond-function to Vec setoid codec and physical C3 product-Haar change of variables for selected pointwise-congruent observables, including native Wilson action and Gibbs density. The actual 1024-bond codec and one-link Haar instance remain source obligations.
+- Reused actual vendored Bishop backend and `BishopSetoidComplexExact` to prove `bishopRealMatrixAdjointTrace` and `bishopNormalizedRealTraceAdjoint` on Bishop setoid equality, instead of conflating it with the legacy `RealAnalysisAxioms.ℝ` propositional-equality carrier. Preserve original Bishop/Murray/Csimma and DASHI attribution.
+- Imported and re-exported all new source-written golden Agda owners in `DASHI.Unified.BalabanRGTOERegression`; updated exact max-cut ledger and roadmap. No Agda kernel run, no CI; Clay mass gap OPEN.
+
 ## 2026-11-03 — source-first all-gate audit; concrete complex adjoint trace and original gauge Haar
 
 - Searched all 6 physical gates by exact named symbols and nearby legacy terminology in `dashi_agda`, plus inspected the actual 291 changed files of Lean PR #15 and direct source theorem statements on the PR head; retrieved source-level CMP119, CMP116, marked R445 and real same-H OS owners.
