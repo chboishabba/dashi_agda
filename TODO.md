@@ -17490,3 +17490,6 @@ Cleanup
 - [ ] K04d-TERM: original Bishop complex log of positive Nat, complex exponential and literal n^(−s) with true σ>3 Basel coordinate domination.
 - [ ] K04d-UNIFORM: locally uniform Dirichlet tails, finite term continuity, original completed-zeta epsilon-delta continuity; produce the actual analytic same-object evidence.
 - [ ] K04d-SAME: match original half-plane domain predicate and construct real original half-plane Dirichlet value agreement. Distinguish analytic zeta from finite/elliptic/PDE Dirichlet owners.
+
+
+- [x] K04d Basel at integer two: source-write all-Nat Bishop real/imag domination, construct the shared comparison witness and identify compiled limits by native uniqueness of limits (kernel pending).
