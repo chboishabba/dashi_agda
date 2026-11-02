@@ -26,6 +26,8 @@ GO_ID = re.compile(r"GO:[0-9]{7}$")
 REACTOME_ID = re.compile(r"R-[A-Z]{3}-[0-9]+(?:\.[0-9]+)?$")
 GO_IN_TEXT = re.compile(r"GO:[0-9]{7}")
 REACTOME_IN_TEXT = re.compile(r"R-[A-Z]{3}-[0-9]+(?:\.[0-9]+)?")
+KEGG_REACTION = re.compile(r"R[0-9]{5}$")
+METACYC_REACTION = re.compile(r"(?:[A-Za-z0-9+_.%:-]+-RXN|RXN[0-9]*-[0-9]+)$")
 SOURCE_IDS = {"SRC-KIT-2024-01", "SRC-KIT-2024-08", "SRC-KIT-2025-07"}
 
 
@@ -55,6 +57,12 @@ def coordinate(ns: str, identifier: str) -> dict:
     elif ns == "reactome":
         ensure(bool(REACTOME_ID.fullmatch(identifier)), "invalid Reactome event")
         uri = "https://identifiers.org/reactome/" + identifier
+    elif ns == "kegg.reaction":
+        ensure(bool(KEGG_REACTION.fullmatch(identifier)), "invalid KEGG reaction")
+        uri = "https://identifiers.org/kegg.reaction:" + identifier
+    elif ns == "metacyc.reaction":
+        ensure(bool(METACYC_REACTION.fullmatch(identifier)), "invalid MetaCyc reaction")
+        uri = "https://identifiers.org/metacyc.reaction:" + identifier
     else:
         # A source-provided external identifier is not assumed to have a
         # canonical resolver or an owl:sameAs relation.
@@ -230,7 +238,11 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
                     "reaction": coordinate("rhea", rid),
                     "target": coordinate(namespace, term),
                     "relation": "Rhea-displayed-cross-reference",
-                    "source_owner": "Rhea curated/mapped cross-resource table",
+                    "source_owner": "Rhea cross-resource table",
+                    "curation_basis": (
+                        "ChEBI-automatic-mapping" if namespace == "reactome"
+                        else "GO-consortium-annotation"
+                    ),
                     "source_field": field, "source_value": raw,
                     "source_revision": rhea.get("rhea_release_reference") or rhea.get("schema"),
                     "source_receipt": source_reactions[rid].get("raw_sha256"),
@@ -239,12 +251,35 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
                 })
     for rid in reactions:
         row = source_reactions[rid].get("row") or {}
-        for field in ("Cross-reference (KEGG)", "Cross-reference (MetaCyc)"):
+        for field, namespace, matcher in (
+            ("Cross-reference (KEGG)", "kegg.reaction", KEGG_REACTION),
+            ("Cross-reference (MetaCyc)", "metacyc.reaction", METACYC_REACTION),
+        ):
             raw = str(row.get(field) or "").strip()
-            if raw:
-                result["unparsed_external_annotation_fields"].append({
-                    "rhea_id": rid, "source_field": field, "source_value": raw,
-                    "reason": "await-typed-source-revision-mapping-adjudication",
+            if not raw:
+                continue
+            for token in re.split(r"[;,\n]+", raw):
+                candidate = token.strip()
+                if not candidate:
+                    continue
+                if not matcher.fullmatch(candidate):
+                    result["unparsed_external_annotation_fields"].append({
+                        "rhea_id": rid, "source_field": field,
+                        "source_value": candidate,
+                        "reason": "unparsed-identifier-requires-curator-review",
+                    })
+                    continue
+                result["ontology_cross_references"].append({
+                    "reaction": coordinate("rhea", rid),
+                    "target": coordinate(namespace, candidate),
+                    "relation": "Rhea-displayed-cross-reference",
+                    "source_owner": "Rhea curated reaction mapping",
+                    "curation_basis": "Rhea-curated-mapping",
+                    "source_field": field, "source_value": candidate,
+                    "source_revision": rhea.get("rhea_release_reference") or rhea.get("schema"),
+                    "source_receipt": source_reactions[rid].get("raw_sha256"),
+                    "same_biological_event_verified": False,
+                    "biological_context_paid": False, "flux_paid": False,
                 })
     result["unparsed_external_annotation_fields"].sort(
         key=lambda x: (x["rhea_id"], x["source_field"], x["source_value"]))
