@@ -1,5 +1,11 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+## 2026-11-03 N21 graph-word and E20 actual-graph reductions
+
+Karp 1972 retains original ownership of signed PARTITION and weighted positive-threshold MAX CUT. New `Karp21SparseGraphWordNPBoundaryExact.agda` explicitly requires the canonical signed graph-word decoder and `2m ≤ inputWordBits` theorem to obtain finite sparse witness BIDI and conditional N21 NP membership from the existing DASHI `Karp21SparseEndpointConsistencySoundExact` and `Karp21PartitionSparseCutBidiExact` owners. New `Karp21SignedPartitionActualGraphWordBoundaryExact.agda` plugs the existing signed list→actual finite indexed weighted graph iff into the earlier malformed-input totalization compiler. New `Karp21WeightedMaxCutFixedNoGraphExact.agda` uses an actual two-vertex one-edge weight +1 graph with positive threshold +2, eliminating all four cuts as witnesses; E20 uses it for malformed input. The intended serialized binary model remains `scripts/karp21_signed_cut_binary_codec.py`, based on gamma(n+1) and zigzag signed weights, source-pinned to the original Agda graph construction only after future direct codec equivalence proofs. These are source-written `--safe` Agda additions on PR #1445 with no independent Agda kernel acceptance or concrete polynomial machine cost receipts, so no completed NP-completeness claims are promoted.
+
+
+
 ## 2026-11-03 K00 all-word strict parsing and bounded-certificate origin
 
 The latest source-written K00 owners in PR #1445 are `Karp21CookStrictWordCanonicalReencodeExact.agda` and `Karp21StrictSATBoundedCertificateNPBoundaryExact.agda`. They reuse the existing Cook formula AST, DASHI unary Nat/prefix grammar, three-bit token codec, strict SAT parser, finite Cook witness and executable SAT verifier. The new proof statements are `k00StrictAcceptedWordCanonicalReencode`, `k00StrictAcceptedWordCertificateBound`, `k00StrictSATBoundedWitnessBidi`, `k00StrictSATInNPFromConcreteResourceReceipts` (conditional on actual polynomial-cost receipts), and `k00ConcreteTapeRunBoundedStrictSATWitnessBidi` on the earlier exact-budget Cook–Levin bitword. The nested grammar inverse includes `parsedFormulaTopMatchesInput` so mismatched token/formula constructor cases are addressed even when recursive child parsing is not definitionally reduced.
