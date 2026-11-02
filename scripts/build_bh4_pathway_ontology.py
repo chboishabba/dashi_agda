@@ -22,6 +22,10 @@ AUTHORITY = "navigation-and-hypothesis-only"
 RHEA = re.compile(r"RHEA:[0-9]+$")
 CHEBI = re.compile(r"CHEBI:[0-9]+$")
 UNIPROT = re.compile(r"[A-Z0-9]{6,10}$")
+GO_ID = re.compile(r"GO:[0-9]{7}$")
+REACTOME_ID = re.compile(r"R-[A-Z]{3}-[0-9]+$")
+GO_IN_TEXT = re.compile(r"GO:[0-9]{7}")
+REACTOME_IN_TEXT = re.compile(r"R-[A-Z]{3}-[0-9]+")
 SOURCE_IDS = {"SRC-KIT-2024-01", "SRC-KIT-2024-08", "SRC-KIT-2025-07"}
 
 
@@ -45,6 +49,12 @@ def coordinate(ns: str, identifier: str) -> dict:
     elif ns == "uniprot":
         ensure(bool(UNIPROT.fullmatch(identifier)), "invalid UniProt coordinate: " + identifier)
         uri = "https://identifiers.org/uniprot/" + identifier
+    elif ns == "go":
+        ensure(bool(GO_ID.fullmatch(identifier)), "invalid GO term")
+        uri = "https://identifiers.org/go/" + identifier
+    elif ns == "reactome":
+        ensure(bool(REACTOME_ID.fullmatch(identifier)), "invalid Reactome event")
+        uri = "https://identifiers.org/reactome/" + identifier
     else:
         # A source-provided external identifier is not assumed to have a
         # canonical resolver or an owl:sameAs relation.
@@ -138,6 +148,8 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
         ],
         "excluded_nonfinite_reactions": matrix.get("finite_formula_residuals", []),
         "external_edges": [],
+        "ontology_cross_references": [],
+        "unparsed_external_annotation_fields": [],
         "author_hypothesis_edges": [],
         "unresolved_external_ontology_targets": [
             "Reactome", "GO/GO-CAM with ECO", "BioPAX Level 3",
@@ -159,6 +171,35 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
             "entire_kitzerow_model_confirmed": False,
         },
     }
+    # Rhea owns the cross-resource link. In particular, Rhea-to-Reactome
+    # mappings do NOT establish the same human/tissue/compartment event.
+    for rid in reactions:
+        row = source_reactions[rid].get("row") or {}
+        for field, namespace, matcher in (
+            ("Gene Ontology", "go", GO_IN_TEXT),
+            ("Cross-reference (Reactome)", "reactome", REACTOME_IN_TEXT),
+        ):
+            raw = str(row.get(field) or "").strip()
+            matches = sorted(set(matcher.findall(raw)))
+            if raw and not matches:
+                result["unparsed_external_annotation_fields"].append(
+                    {"rhea_id": rid, "source_field": field, "source_value": raw})
+            for term in matches:
+                result["ontology_cross_references"].append({
+                    "reaction": coordinate("rhea", rid),
+                    "target": coordinate(namespace, term),
+                    "relation": "Rhea-displayed-cross-reference",
+                    "source_owner": "Rhea curated/mapped cross-resource table",
+                    "source_field": field, "source_value": raw,
+                    "source_revision": rhea.get("rhea_release_reference") or rhea.get("schema"),
+                    "source_receipt": source_reactions[rid].get("raw_sha256"),
+                    "same_biological_event_verified": False,
+                    "biological_context_paid": False, "flux_paid": False,
+                })
+    result["ontology_cross_references"].sort(
+        key=lambda x: (x["reaction"]["identifier"], x["target"]["namespace"],
+                       x["target"]["identifier"]))
+
     if xp:
         ensure(xp.get("schema") == "dashi.bh4-xpollenation.v1", "unexpected xPollenation schema")
         neighbourhoods = xp.get("neighbourhoods", [])
@@ -243,6 +284,17 @@ def jsonld(model: dict) -> dict:
                       "dashi:sourceReference": edge["source_ref"],
                       "dashi:acquisitionReceipt": edge["acquisition_receipt"],
                       "dashi:promotionAllowed": False})
+    for xref in model["ontology_cross_references"]:
+        graph.append({"@id": "urn:dashi:bh4:rhea-xref:" +
+                      xref["reaction"]["identifier"].split(":")[1] + ":" +
+                      xref["target"]["namespace"] + ":" + xref["target"]["identifier"],
+                      "@type": "dashi:UnpromotedRheaCrossReference",
+                      "dashi:subject": {"@id": xref["reaction"]["uri"]},
+                      "dashi:object": {"@id": xref["target"]["uri"]},
+                      "dashi:sourceOwner": xref["source_owner"],
+                      "dashi:sourceRevision": xref["source_revision"],
+                      "dashi:sourceReceipt": xref["source_receipt"],
+                      "dashi:sameBiologicalEventVerified": False})
     for i, row in enumerate(model["author_hypothesis_edges"]):
         graph.append({"@id": "urn:dashi:bh4:kitzerow-hypothesis:" + str(i),
                       "@type": "dashi:UnverifiedAuthorHypothesisReconstruction",
