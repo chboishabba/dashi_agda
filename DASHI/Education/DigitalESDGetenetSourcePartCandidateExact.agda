@@ -20,7 +20,7 @@ module DASHI.Education.DigitalESDGetenetSourcePartCandidateExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Membership.Propositional using (_∈_)
@@ -218,6 +218,28 @@ sourceReportedSample = author-reported-sample
   885 refl 584 refl 45 refl
   "Method: Participants, Data collection, Data analysis"
   "Published author-reported numbers; no independently signed full-text packet"
+
+-- Source-reported category arithmetic. The five helpful-theme frequencies
+-- are 101, 126, 146, 100 and 115. The author describes 26 negative cases
+-- and 15 outliers, with 45 of 584 responses coded twice. The equality
+-- reconciles reported ASSIGNMENT counts, not 629 independent participants.
+reportedCategoryAssignmentCount : Nat
+reportedCategoryAssignmentCount =
+  101 + 126 + 146 + 100 + 115 + 26 + 15
+
+reportedResponseAssignmentCount : Nat
+reportedResponseAssignmentCount = 584 + 45
+
+reportedThemeAccountingReconciles :
+  reportedCategoryAssignmentCount ≡ reportedResponseAssignmentCount
+reportedThemeAccountingReconciles = refl
+
+-- This equality cannot verify the underlying source coding decisions or
+-- imply any higher-education, EfS, disability, ecological or causal effect.
+data AssignmentAccountingCreatesIndependentRespondents : Set where
+assignmentsAreNotAdditionalRespondents :
+  AssignmentAccountingCreatesIndependentRespondents → ⊥
+assignmentsAreNotAdditionalRespondents ()
 
 -- Author-reported, not reviewer-admitted, where supported by the specified
 -- published section. Other axis questions remain genuinely unpaid.
