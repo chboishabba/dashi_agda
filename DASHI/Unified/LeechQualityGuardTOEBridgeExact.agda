@@ -39,3 +39,18 @@ toeCanonicalHistoryReopensFromAnyExpert :
   Orbit.recoverCanonical family expert ≡ Orbit.canonical family
 toeCanonicalHistoryReopensFromAnyExpert =
   Orbit.everyExpertReopensSharedCanonical
+
+-- Global student-only training does NOT require the deployed gate
+-- configuration to change. The proof's premise matches only the
+-- student functions; teacher functions and gate values may differ.
+toeStudentRolloutGateIndependent :
+  ∀ {L : Nat} {State : Set} →
+  (first second : Quality.LayerProgram L State) →
+  ((layer : Fin L) (state : State) →
+      Quality.studentStep first layer state
+        ≡ Quality.studentStep second layer state) →
+  (schedule : List (Fin L)) (initial : State) →
+  Quality.studentRollout first schedule initial
+    ≡ Quality.studentRollout second schedule initial
+toeStudentRolloutGateIndependent =
+  Quality.studentRolloutIndependentOfGates
