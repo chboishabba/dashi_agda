@@ -88,6 +88,47 @@ Kitzerow causal edge as a separate typed claim.
 
 The current 16-UniProt/24-protein–Rhea-link panel yields 12 finite Rhea reactions, 29 indexed Rhea/ChEBI source species, three non-finite MTOR residuals and a 56-coordinate open-state manifest (15 state/context + 12 reaction flux + 29 exchange). This is not Kitzerow's entire proposed pathway, not a compartment-resolved model and not disease-causation evidence. The flux solver remains underdetermined.
 
+## Original chart -> curated biochemical resource (implemented acquisition path)
+
+An explicit, optional source-first mode now **reuses the existing Rhea
+REST/SPARQL acquisition and signed stoichiometric matrix builder**:
+
+    python3 scripts/acquire_rhea_chebi_bh4_reactions.py \
+      --from-source-chart docs/biology/KitzerowPublishedRheaChartObservedIndex.v1.json \
+      -o artifacts/biology/kitzerow-creator-chart-rhea-reactions.json
+
+    python3 scripts/build_bh4_stoichiometric_matrix.py \
+      artifacts/biology/kitzerow-creator-chart-rhea-reactions.json \
+      --output-prefix artifacts/biology/kitzerow-creator-chart-stoichiometric-matrix
+
+    python3 scripts/build_bh4_pathway_ontology.py \
+      --matrix artifacts/biology/kitzerow-creator-chart-stoichiometric-matrix.json \
+      --rhea artifacts/biology/kitzerow-creator-chart-rhea-reactions.json \
+      -o artifacts/biology/kitzerow-creator-chart-ontology.json \
+      --jsonld-output artifacts/biology/kitzerow-creator-chart-ontology.jsonld
+
+Alternatively opt in through the canonical Phase-4 runner:
+
+    python3 scripts/run_bh4_phase4_maxcut.py \
+      --acquire-creator-chart-reactions
+
+The outputs are distinct from the 16-protein-selected DASHI 29×12 matrix.
+No net transport equations, kinetic assignments, same-state pool merges or
+author-causal predictions are produced by the source-chart matrix.
+The acquisition stores explicit errors and source REST/SPARQL SHA receipts,
+and **does not claim a verified Rhea release number** when using live
+endpoints without a release-manifest receipt. Source identity, actor,
+creator-chart source index digest, acquisition date and missing original
+PDF verification are retained.
+
+The corresponding native source consumer in SensibLaw #512 can now
+take an optional creator-selected Rhea acquisition receipt and present
+the independently curated ChEBI participant candidates within the
+existing provider-neutral external graph view. Its mappings are
+review-required; a same-compartment or in-vivo relation is still unproved.
+None of these source-written changes has been locally executed or
+referee-checked on the current PR heads.
+
 ## Canonical reuse — no parallel biological ontology
 
 - KitzerowBH4SourceRegistry, KitzerowPriorityGenealogyExact, KitzerowBH4EvidenceAtlasExact: author/source chronology, attribution, bounded research.
@@ -145,7 +186,7 @@ avoids legacy SensibLaw Python and ITIR Svelte as production owners.
 | ID | Required proof, evidence or implementation | Source/owner and firewall |
 |---|---|---|
 | KPO-01 | **Source-first correction:** original Kitzerow Jan-2024 Rhea-coded BH4/folate chart found, eight identifiers indexed with web-text coordinates; acquire the original PDF bytes, source revision and all source-observed reactions and pin exact source passages, figures/pages and proposal edges. Transcribe without republishing protected diagram. Original proprietary network coverage remains unknown. | Kitzerow primary works. No backdating from later texts. |
-| KPO-02 | Compare creator graph nodes/edges against the 16-protein finite panel; report coverage, nonmatches, ambiguity and explicit prior-art subtraction. | Distinct source/claim and chemistry ownership. |
+| KPO-02 | Creator chart Rhea-ID subset is indexed and a separate source-selected REST/SPARQL-to-matrix/ontology pipeline has been implemented. Execute and verify it; complete original diagram transcription and adjudicate structural reaction family/compartment alignment with the independent 16-protein panel, reporting unknown coverage and prior-art subtraction. | Distinct source/claim and chemistry ownership. |
 | KPO-03 | Rhea REST now requests GO and Reactome cross-reference columns and the exporter preserves source revision, mapped IDs and unparsed values. **Still required:** execute acquisition, adjudicate GO evidence/taxon/Reactome event identity, and extend to EC, MetaCyc, KEGG and pathway families. | Rhea/UniProt/Reactome. A cross-reference is not the same biological event. |
 | KPO-04 | Adjudicate GO/ECO evidence codes, GO-CAM causal assertions, GO cellular components, Cell Ontology/UBERON tissue and sample/taxon scope. | Source-specific GO evidence, not generic ontology matching. |
 | KPO-05 | Acquire explicit transport/uptake/export/oxidation reactions and appropriate source/sink boundaries for the 29 exchange *coordinates*. | A coordinate is not proof a transport reaction occurs. |
@@ -184,6 +225,7 @@ Version/assay/source release still must be pinned in acquired receipts. No stand
     python3 scripts/check_bh4_pathway_review.py
     python3 scripts/check_kitzerow_primary_chart.py
     python3 scripts/check_kitzerow_chart_source_text.py
+    python3 scripts/check_kitzerow_source_chart_acquisition.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4CreatorChartSourceBridgeExact.agda
     python3 scripts/check_kitzerow_bh4_priority_all.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PathwayOntologyInteropExact.agda
