@@ -1,3 +1,11 @@
+### 2026-11-02 source recovery: Lean PR #15 compact Haar, CMP119, CMP116 and OS
+
+- [x] Inspect **actual** `dashi_lean4` PR #15 head, not only default-branch index: 291 changed files and real mathlib SU2 one-link/product Haar, native 4D Haar product equality, finite CMP119 Gibbs, Prokhorov, mixed J and OS spectral donors. Ledger: `Docs/physics/YMClayLeanPR15FullPhysicalDonorCrosswalk20261102.md`.
+- [x] Agda source-write finite product strict-positivity induction and same-measure positive Wilson–Gibbs partition theorem; export from Balaban TOE; leave one-link full-support positivity explicit. Not typechecked.
+- [ ] Port/identify `literalSU2OneLinkHaar` and `literalSU2ProductLinkHaar` in **golden Agda** via actual equivalent compact SU2 carrier and selected integrable algebra; source/codec/coupling must match CMP119 selected measure.
+- [ ] Audit mathlib Lean PR #15 exact-head kernel / transitive trust separately (no claims from PR title or source alone); keep its existing theorem ownership and credits.
+- [ ] Discharge the source-instantiation record `CMP119SelectedSourceInstantiation`, physical varying-cutoff tightness, CMP116 finite same-J half-rate, OS reflected same-H generator and uniform spectral window lower bound. These are not provided by the Lean transport lemma statements.
+
 ### 2026-11-02 revived Yang–Mills physical R443/R445/R320/R333 selected-source max-cut
 
 - [x] Explicitly search source indices for every named Fubini, SU(N), Haar, Wilson, CMP119, CMP116, mixed-J, Hamiltonian/spectral and OS term; audit relevant Agda/Lean PR histories. Source/PR evidence recorded in the physics max-cut ledger. Do not claim this is an exhaustive inspection of every historical PR.
