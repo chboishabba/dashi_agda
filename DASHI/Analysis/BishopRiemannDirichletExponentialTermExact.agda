@@ -47,6 +47,8 @@ import DASHI.Analysis.BishopRiemannAnalyticSetoidExpReuseExact as ExpBridge
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpAdd
+import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
+import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Foundations.BishopInverseSquareProductExact as Inverse
 import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact as Reciprocal
 import DASHI.Foundations.BishopNatRealPositiveExact as NatPositive
@@ -322,3 +324,64 @@ negativeExponentialAtNatLogIsEmbeddedReciprocal logNat n correct =
     (negativeExponentialAtNatLogIsCanonicalReciprocal
       logNat n correct)
     (BaselNat.natRealInverseIsEmbeddedReciprocal n)
+
+
+------------------------------------------------------------------------
+-- K04d REAL EXPONENTIAL FIBRE AT s = 2:
+-- exp_B(-2 log_B(n+1)) = 1/(n+1)^2 after the *same-object*
+-- positive logarithm inversion has been established.
+-- The target is Basel.baselTerm n, not an unrelated rational model.
+-- This is a precise conditional reduction, not a surrogate proof of
+-- the open exp(log n) identity or complex sine/cosine at zero.
+------------------------------------------------------------------------
+
+negativeDoubleNatLogExponentialIsBasel :
+  (logNat : NatLogCandidate) (n : Nat) →
+  R._≃_
+    (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  R._≃_
+    (Exp.bishopExp
+      (R._+_ (R.- (logNat n)) (R.- (logNat n))))
+    (Basel.baselTerm n)
+negativeDoubleNatLogExponentialIsBasel logNat n correct =
+  RP.≃-trans
+    (ExpAdd.bishopExpAdd
+      (R.- (logNat n))
+      (R.- (logNat n)))
+    (RP.≃-trans
+      (RP.*-cong
+        (negativeExponentialAtNatLogIsEmbeddedReciprocal
+          logNat n correct)
+        (negativeExponentialAtNatLogIsEmbeddedReciprocal
+          logNat n correct))
+      (RP.≃-trans
+        (RP.≃-symm
+          (RP.⋆-distrib-*
+            (BaselNat.reciprocalNatRational n)
+            (BaselNat.reciprocalNatRational n)))
+        (RP.⋆-cong
+          (BaselNat.reciprocalNatSquareIsBaselRational n))))
+
+negativeTwoNatLogExponentialIsBasel :
+  (logNat : NatLogCandidate) (n : Nat) →
+  R._≃_
+    (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  R._≃_
+    (Exp.bishopExp
+      (R._*_
+        (R.- (R._⋆ (+ 2 / 1)))
+        (logNat n)))
+    (Basel.baselTerm n)
+negativeTwoNatLogExponentialIsBasel logNat n correct =
+  RP.≃-trans
+    (ExpCong.bishopExpCongruent
+      (let open RP.ℝ-Solver
+       in solve 1
+         (λ l →
+           (⊝ (Κ (+ 2 / 1))) ⊗ l
+           ⊜ (⊝ l) ⊕ (⊝ l))
+         RP.≃-refl
+         (logNat n)))
+    (negativeDoubleNatLogExponentialIsBasel logNat n correct)
