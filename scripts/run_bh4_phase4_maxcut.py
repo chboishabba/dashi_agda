@@ -53,6 +53,9 @@ def main() -> int:
     sifts = out / "bh4-pdbe-sifts.json"
     xpollenation = out / "bh4-xpollenation.json"
     xpollenation_dir = out / "xpollenation-neighbourhoods"
+    ontology = out / "bh4-pathway-ontology.json"
+    ontology_jsonld = out / "bh4-pathway-ontology.jsonld"
+    claim_ledger = Path("docs/biology/KitzerowBH4ClaimLedgerCandidate.v1.json")
     interval = out / "bh4-interval-flux-feasibility.json"
     summary_path = out / "bh4-phase4-maxcut-summary.json"
 
@@ -104,6 +107,18 @@ def main() -> int:
         if exits["xpollenation"] == 0:
             run([py, "scripts/check_bh4_xpollenation.py"])
 
+    ontology_cmd = [
+        py, "scripts/build_bh4_pathway_ontology.py",
+        "--matrix", str(matrix), "--rhea", str(rhea),
+        "--claims", str(claim_ledger), "-o", str(ontology),
+        "--jsonld-output", str(ontology_jsonld),
+    ]
+    if exits.get("xpollenation") == 0 and xpollenation.exists():
+        ontology_cmd.extend(["--xpollenation", str(xpollenation)])
+    exits["pathway_ontology"] = run(ontology_cmd, allow_partial=True)
+    if exits["pathway_ontology"] == 0:
+        run([py, "scripts/check_bh4_pathway_ontology.py"])
+
     interval_exit = run([py, "scripts/solve_bh4_flux_intervals.py", "--matrix", str(matrix), "--parameters", str(solver), "-o", str(interval)], allow_partial=True)
     run([py, "scripts/check_kitzerow_bh4_priority_all.py"])
 
@@ -112,7 +127,7 @@ def main() -> int:
     inter = json.loads(interval.read_text())
     sab = load(sabio); ad = load(adj); rk = load(ranking); pay = load(payment)
     abund = load(abundance); exch = load(exchange_context); joint = load(joint_payment)
-    sf = load(sifts); xp = load(xpollenation)
+    sf = load(sifts); xp = load(xpollenation); ont = load(ontology) if exits.get("pathway_ontology") == 0 else None
     network: dict[str, object] = {}
     if sab:
         network["sabio"] = {k: sab.get(k) for k in ("schema", "proteins_completed", "proteins_with_entries", "kinetic_entry_count", "kinetic_parameter_count")}
@@ -139,6 +154,16 @@ def main() -> int:
             "authority": "navigation-enrichment-only", "establishes_payment": False,
         }
 
+    if ont:
+        network["pathway_ontology"] = {
+            "schema": ont.get("schema"),
+            "finite_reactions": len(ont.get("reactions", [])),
+            "species": len(ont.get("species", [])),
+            "unpromoted_hypothesis_edges": len(ont.get("author_hypothesis_edges", [])),
+            "external_edges": len(ont.get("external_edges", [])),
+            "authority": ont.get("authority"),
+        }
+
     summary = {
         "schema": "dashi.bh4-phase4-maxcut-run.v8",
         "panel": str(a.panel),
@@ -155,7 +180,9 @@ def main() -> int:
             "sabio_flux_payment": str(payment), "protein_abundance": str(abundance),
             "exchange_context": str(exchange_context), "joint_payment": str(joint_payment),
             "sifts": str(sifts), "xpollenation": str(xpollenation),
-            "xpollenation_neighbourhoods": str(xpollenation_dir), "interval": str(interval),
+            "xpollenation_neighbourhoods": str(xpollenation_dir),
+            "pathway_ontology": str(ontology), "pathway_ontology_jsonld": str(ontology_jsonld),
+            "interval": str(interval),
             "summary": str(summary_path),
         },
     }
