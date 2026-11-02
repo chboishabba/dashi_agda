@@ -17493,3 +17493,9 @@ Cleanup
 
 
 - [x] K04d Basel at integer two: source-write all-Nat Bishop real/imag domination, construct the shared comparison witness and identify compiled limits by native uniqueness of limits (kernel pending).
+
+
+- [x] K04d-EXP: construct literal original-Riemann-carrier complex exponential by isomorphism from existing BishopSetoidComplexExact; identify Cartesian coordinates, arithmetic, setoid congruence (source-written, kernel pending).
+- [x] K04d-LOG-CANDIDATE: construct n+1 logarithm candidate from original Bishop convergent negative-log-one-minus series at n/(n+1), with explicit membership and native convergence (source-written, kernel pending).
+- [ ] Prove all-n configured Round11 unit-interval membership and the actual Bishop exp(log(n+1))=n+1 normalization; use to certify negative-real exponents and full σ>2 Basel domination.
+- [ ] Prove genuinely local-uniform Dirichlet tails, original analytic zeta identity, continuity and completion of the Machin commuting square; do not borrow unproved legacy-real log authority.
