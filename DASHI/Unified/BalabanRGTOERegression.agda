@@ -950,6 +950,7 @@ import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as SUNG
 import DASHI.Physics.YangMills.YMClaySUNProductHaarNativeGaugeR443Exact as SUNNativeGauge
 import DASHI.Physics.YangMills.YMClaySUNNativeWilsonBondPointwiseExact as SUNPointwise
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact as SUNVariablePointwise
+import DASHI.Physics.YangMills.YMClaySUNNativeSetoidBondProductHaarExact as SUNSetoidHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSixPlaneC3FromInverseTraceExact as SUNSixC3
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact as SUNHaarR443
@@ -1088,6 +1089,15 @@ open SUNVariablePointwise public using
   ; variableSixWilsonDeficitPointwise
   ; variableWilsonActionPointwise
   ; variableGibbsDensityPointwise)
+-- Keep the ACTUAL periodic bond function carrier. Setoid round-trip and
+-- observable congruence replace overstrong whole-function equality.
+open SUNSetoidHaar public using
+  (SUNNativeSetoidBondCodec
+  ; nativeSetoidProductHaar
+  ; nativeSetoidHaarC3Invariant
+  ; nativeSUNWilsonActionRespectsBondPointwise
+  ; nativeSUNGibbsDensityRespectsBondPointwise
+  ; nativeSUNPhysicalGibbsSetoidHaarC3)
 open SUNPointwise public using
   (nativeOrientedLinkPointwise
   ; nativeSignedPathPointwise
