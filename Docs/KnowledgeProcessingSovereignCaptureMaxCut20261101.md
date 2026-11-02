@@ -1,5 +1,7 @@
 # Knowledge-processing monopoly, regulatory capture and sovereign dependency — 2026-11-01 max-cut
 
+> **2 November 2026 K0 capital-cycle correction:** The earlier $3.823bn five-year net gap / $37.046bn interim peak was for 50% OCF growth with **flat investing**, not the 20%-investment-growth scenario. See [AIContinuingCapitalFundingMaxCut20261102.md](AIContinuingCapitalFundingMaxCut20261102.md) for the new debt-interest, cash conversion, GPU refresh, contract delivery, rollover gross-versus-net and funding-availability max-cut. The model halts at the first unfinanced year. The $120bn+ values are *scenario exposures*, never present liabilities or issuer forecasts.
+
 > **2 November 2026 iceberg reconciliation:** See [KnowledgeProcessingIcebergRoadmapReconciliation20261102.md](KnowledgeProcessingIcebergRoadmapReconciliation20261102.md) for the full finance × material × control × state × epistemic × ideology × historical-brokerage evidence map, its three conditional feedback cycles, falsifiers, and exact K0–K6 max-cut. This document remains the earlier source/Agda implementation ledger.
 
 
