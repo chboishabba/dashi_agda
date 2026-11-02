@@ -12,6 +12,10 @@ open import Agda.Builtin.Maybe using (just)
 
 import DASHI.ComputerScience.QwenputerGatedDeltaArchitectureExact as GDN
 import DASHI.ComputerScience.QwenputerRv32LayerScheduleSourceExact as Layers
+import DASHI.ComputerScience.QwenputerOneHotDeltaMatrixRefinementExact as Matrix
+import DASHI.ComputerScience.QwenputerRv32RecordCommitExact as Records
+import DASHI.ComputerScience.QwenputerBinaryTernaryRamTraceSimulationExact as Trace
+import DASHI.ComputerScience.QwenputerBinary32Framed27CodecExact as Word32
 import DASHI.ComputerScience.QwenputerHybridStateAndFileStoreExact as Store
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact as Binary
 import DASHI.ComputerScience.ShorStandardBinaryTernaryStoredProgramComputerExact as BinaryTernary
@@ -55,3 +59,38 @@ toePriorBinaryTernaryOrder15Equal =
 
 toeQwenputerSourceHeadSum : Layers.reportedKeyHeadTotal ≡ 99
 toeQwenputerSourceHeadSum = Layers.keyHeadSumMatchesAuthor
+
+
+------------------------------------------------------------------------
+-- New source-accurate and codec theorem consumers. All source-written:
+-- use the pinned toolchain before claiming kernel-verified results.
+------------------------------------------------------------------------
+
+toeOneHotDeltaRefinesRAM :
+  (D : Matrix.DeltaScalar) {Column : Set}
+  (matrix : Matrix.Matrix D Column) (selected : GDN.Location)
+  (value : Matrix.Vector D Column)
+  (queried : GDN.Location) (col : Column) →
+  Matrix.oneHotMatrixUpdate D matrix selected value queried col
+  ≡ GDN.writeRam (λ a → matrix a col) selected (value col) queried
+toeOneHotDeltaRefinesRAM = Matrix.refineMatrixWrite
+
+toeRv32RecordCommitsAtLastToken :
+  {State : Set} (execute : State → State)
+  (rec : Records.SourceRecord) (s : State) →
+  Records.runTokens execute (Records.emitSourceRecord rec) s ≡ execute s
+toeRv32RecordCommitsAtLastToken = Records.eachSourceRecordCommitsOnce
+
+toeAllBinaryTernaryWriteTraces :
+  (commands : Trace.Writes) (store : GDN.Ram Bool)
+  (queried : GDN.Location) →
+  Binary.decodeEmbeddedBit
+    (Trace.runTernary commands (GDN.embedBinaryRam store) queried)
+    ≡ Trace.runBinary commands store queried
+toeAllBinaryTernaryWriteTraces =
+  Trace.binaryTernaryCompleteWriteTrace
+
+toeBinary32Ternary27RoundTrip :
+  (word : Word32.BinaryWord32) →
+  Word32.decode32 (Word32.encode32 word) ≡ word
+toeBinary32Ternary27RoundTrip = Word32.word32RoundTrip
