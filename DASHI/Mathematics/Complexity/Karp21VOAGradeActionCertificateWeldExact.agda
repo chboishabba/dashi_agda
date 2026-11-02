@@ -31,7 +31,7 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; subst)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 
 import Data.Integer.Base as Int
 import Data.Vec.Base as Vec
@@ -131,3 +131,35 @@ module SameGradeWitness
   sameGradeActionPreservesGraphYES weld g (bits , accepted) =
     transformedLabels weld g bits ,
     sameGradeActionPreservesAcceptedCut weld g bits accepted
+
+
+  -- The same decisive lemma shape as the 3B full-grade max-cut:
+  -- decoding after encoding makes certificate inclusion INJECTIVE.
+  -- Dimensional agreement cannot substitute for the left inverse.
+  certificateInclusionInjective :
+    (weld : ExactCertificateActionWeld)
+    (left right : Vec.Vec Bool n) →
+    encodeCertificate weld left ≡ encodeCertificate weld right →
+    left ≡ right
+  certificateInclusionInjective weld left right gradeEquality =
+    trans
+      (sym (decodeAfterEncode weld left))
+      (trans
+        (cong (decodeCertificate weld) gradeEquality)
+        (decodeAfterEncode weld right))
+
+  -- If a selected VOA grade-action output is identified with the
+  -- encoding of a particular Boolean witness, decoding gives the
+  -- *same* finite witness. This is the exact selected-3B "compare
+  -- after inclusion, then use faithfulness" strategy, without an
+  -- unverified Monster 3B action or a character-only promotion.
+  gradeActionAgreementReflectsCutWitness :
+    (weld : ExactCertificateActionWeld)
+    (g : G) (left right : Vec.Vec Bool n) →
+    gradeAction g (encodeCertificate weld left)
+      ≡ encodeCertificate weld right →
+    transformedLabels weld g left ≡ right
+  gradeActionAgreementReflectsCutWitness weld g left right equality =
+    trans
+      (cong (decodeCertificate weld) equality)
+      (decodeAfterEncode weld right)
