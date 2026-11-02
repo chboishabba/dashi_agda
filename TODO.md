@@ -17442,3 +17442,15 @@ Cleanup
 - [x] Explicitly search for and inspect original `CMP119WilsonGibbsFiniteMeasureSameObjectExact`, `CMP119SelectedWilsonGibbsAnchorExact`, `YangMillsCMP119WilsonGibbsHaarActionRound443Exact`, R431, R445 marked moment/diagonal/tail, R320 H1 and R333 same-H OS owners; record their exact consumed fields in `Docs/physics/YMClaySourceOwnerReuseAndProofGate20261102.md`.
 - [ ] Instantiate **existing** selected CMP119 Wilson–Gibbs metric numerator from original R124 density anchor/cutoff in actual real compact SU2/SUN link-only Haar carrier; no parallel generic N/Z/DN/DZ compiler.
 - [ ] Construct the selected physical R445 tail and R320 rooted-shell estimate, and R333 same-H spectral gap; don't mark a record declaration as an inhabited physical theorem.
+
+
+### 2026-11-02 prior plaquette owner max-cut — native SUN source and cutoff indexing
+
+- [x] Explicit code search of `plaquette` / `periodic plaquette` / `signed` / `Wilson` / `Haar` / `Fubini` / `Peter Weyl` / `CMP116` / `R443` / `R445` / `R320` / `R333` / `spectral gap` and relevant PRs. Reuse existing Balaban original signed bond/path, complete six positive plane, P33 Hodge, canonical `SUNWilsonClassFunction`, `SUNWilsonAction`, literal T4 bare coupling, T5 marked and projective sources before adding.
+- [x] Source-write `YMClayNativeSixPlaquetteSUNWilsonActionWeldExact`: generic `SUNWilsonActionData` instantiated with the **actual** signed periodic edges and native positive plaquette closure; exact per-plaquette, per-site and full six-plane action equality, beta action match to selected Gibbs source. Kernel receipt pending.
+- [x] Source-write `YMClaySUNVariablePeriodicGibbsGaugeExact`: genuine variable periodic side-`suc n` positive SU(N) link lattice, exact six-plane Wilson/Gibbs finite measure and all-n local gauge invariance; side-four plaquette same-object identity. Kernel receipt pending.
+- [ ] Construct real compact SU(N) one-link and product Haar/factorization plus physical beta/counterterms on the same arbitrary-n source, and correct finite-to-UV cylinder maps.
+- [ ] Prove physical R445 uniform marked tails/moments and continuum selected expectations for that same varying-n source; do not count old constant 3072 fixed-volume estimate as uniform.
+- [ ] Prove selected source-domain/derivative CMP116 R320 rooted-shell decay with genuinely uniform physical radii and constants.
+- [ ] Reconstruct same physical OS Hamiltonian with strictly positive continuum/infinite-volume spectral bound and nontriviality (R333); no Clay promotion from conditional compilers.
+- [ ] Run Agda kernel, exact-head root import preflight, transitive trust scan and CI when user runs checks.
