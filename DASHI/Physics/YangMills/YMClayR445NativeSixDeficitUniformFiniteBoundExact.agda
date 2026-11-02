@@ -21,10 +21,10 @@ module DASHI.Physics.YangMills.YMClayR445NativeSixDeficitUniformFiniteBoundExact
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _≤_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _≤_; _/_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; subst₂)
+open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
 
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundExact as Trace
@@ -173,3 +173,15 @@ nativeSixDeficitAtMost3072 dataSet =
     sideFourTwelveSum
     (SiteOrder.sumSitesMonotone _ _
       (nativeSixDeficitAtMostTwelve dataSet))
+
+-- This is the corresponding literal absolute-value bounded-observable
+-- certificate for the original R445 rational Wilson function algebra.
+nativeSixDeficitAbsoluteBound :
+  ∀ (dataSet : Native.RationalSU2BondData Weld.three) →
+  ∣ Action.sixPhysicalDeficitAction dataSet ∣ ≤ threeThousandSeventyTwoℚ
+nativeSixDeficitAbsoluteBound dataSet =
+  subst
+    (λ value → value ≤ threeThousandSeventyTwoℚ)
+    (sym
+      (ℚP.0≤p⇒∣p∣≡p (nativeSixDeficitNonnegative dataSet)))
+    (nativeSixDeficitAtMost3072 dataSet)
