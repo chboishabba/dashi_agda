@@ -19,7 +19,14 @@ open import Agda.Builtin.Nat using (Nat; suc; _*_; _+_)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Base as Nat using (_≤_; NonZero)
 open import Data.Nat.Solver using (module +-*-Solver)
-import Data.Integer.Solver as ZRing
+open import Data.Integer.Solver renaming (module +-*-Solver to ℤSolver)
+open ℤSolver using () renaming
+  ( solve to Zsolve
+  ; _:+_ to _⊕_
+  ; _:*_ to _⊗_
+  ; con to ZK
+  ; _:=_ to _⊜_
+  )
 open +-*-Solver using (solve; _:*_; con; _:=_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst)
 open import Data.Rational.Unnormalised as Q using (ℚᵘ; _/_; _≤_; _≃_; _+_; *≡*)
@@ -250,38 +257,21 @@ sourceCommonBishopBelowGeometric n =
 -- Nat inequality.
 ------------------------------------------------------------------------
 
-module SourceRatRing = ZRing.+-*-Solver
-  using (solve; _:+_; _:*_; con; _:=_)
-
 sourceOmittedRationalIsCommonRational : (n : Nat) →
   Q._≃_
     (sourceOmittedRationalEnvelope n)
     (sourceCommonRationalEnvelope n)
 sourceOmittedRationalIsCommonRational n =
   Q.*≡*
-    (SourceRatRing.solve 3
+    (Zsolve 3
       (λ odd p q →
-        ((SourceRatRing.con (+ 16)
-          SourceRatRing.:* ((odd SourceRatRing.:*
-            SourceRatRing.con (+ 239)) SourceRatRing.:* q))
-          SourceRatRing.:+
-          (SourceRatRing.con (+ 4)
-            SourceRatRing.:* ((odd SourceRatRing.:*
-              SourceRatRing.con (+ 5)) SourceRatRing.:* p)))
-        SourceRatRing.:*
-          (((((odd SourceRatRing.:* SourceRatRing.con (+ 5))
-            SourceRatRing.:* SourceRatRing.con (+ 239))
-            SourceRatRing.:* p) SourceRatRing.:* q))
-        SourceRatRing.:=
-        (((SourceRatRing.con (+ 3824) SourceRatRing.:* q)
-          SourceRatRing.:+
-          (SourceRatRing.con (+ 20) SourceRatRing.:* p))
-          SourceRatRing.:*
-          (((odd SourceRatRing.:* SourceRatRing.con (+ 5))
-            SourceRatRing.:* p)
-            SourceRatRing.:*
-            ((odd SourceRatRing.:* SourceRatRing.con (+ 239))
-              SourceRatRing.:* q))))
+        ((ZK (+ 16) ⊗ ((odd ⊗ ZK (+ 239)) ⊗ q))
+          ⊕ (ZK (+ 4) ⊗ ((odd ⊗ ZK (+ 5)) ⊗ p)))
+          ⊗ ((((odd ⊗ ZK (+ 5)) ⊗ ZK (+ 239)) ⊗ p) ⊗ q)
+        ⊜
+        ((ZK (+ 3824) ⊗ q) ⊕ (ZK (+ 20) ⊗ p))
+          ⊗ (((odd ⊗ ZK (+ 5)) ⊗ p)
+               ⊗ ((odd ⊗ ZK (+ 239)) ⊗ q)))
       refl
       (+ suc (2 * n))
       (+ Cross.pow25 n)
