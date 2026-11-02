@@ -28,7 +28,7 @@ module DASHI.Analysis.BishopMachinQuantitativeZetaCommutingSquareExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Agda.Builtin.Sigma using (Σ)
