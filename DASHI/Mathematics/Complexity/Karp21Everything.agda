@@ -92,3 +92,5 @@ import DASHI.Mathematics.Complexity.Karp21CookStrictWordCanonicalReencodeExact
 import DASHI.Mathematics.Complexity.Karp21StrictSATBoundedCertificateNPBoundaryExact
 
 import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact
+
+import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundaryExact
