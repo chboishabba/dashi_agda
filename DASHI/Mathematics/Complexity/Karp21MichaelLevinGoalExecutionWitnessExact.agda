@@ -60,17 +60,17 @@ module ActualKarpGoalSystem
   -- The abstract Levin policy is explicitly instantiated to Bool.
   sameGoalExecution : Levin.GoalExecutionSystem
   sameGoalExecution = record
-    { Levin.State = Vec.Vec Bool (suc n)
-    ; Levin.Goal = ⊤
-    ; Levin.Command = ⊤
-    ; Levin.Policy = Bool
-    ; Levin.interpret = λ _ → tt
-    ; Levin.accept = λ _ _ → true
-    ; Levin.discover = λ _ _ → false
-    ; Levin.execute = applyPolicy
-    ; Levin.satisfies =
+    { Levin.GoalExecutionSystem.State = Vec.Vec Bool (suc n)
+    ; Levin.GoalExecutionSystem.Goal = ⊤
+    ; Levin.GoalExecutionSystem.Command = ⊤
+    ; Levin.GoalExecutionSystem.Policy = Bool
+    ; Levin.GoalExecutionSystem.interpret = λ _ → tt
+    ; Levin.GoalExecutionSystem.accept = λ _ _ → true
+    ; Levin.GoalExecutionSystem.discover = λ _ _ → false
+    ; Levin.GoalExecutionSystem.execute = applyPolicy
+    ; Levin.GoalExecutionSystem.satisfies =
         λ bits _ → Cut.verifyWeightedMaxCut graph bits
-    ; Levin.samePolicy = samePolicy
+    ; Levin.GoalExecutionSystem.samePolicy = samePolicy
     }
 
   -- Every signed edge crossing survives the true global C2 action.
@@ -89,13 +89,13 @@ module ActualKarpGoalSystem
     Cut.verifyWeightedMaxCut graph bits ≡ true →
     Levin.GoalUnderdeterminesTrajectoryWitness sameGoalExecution
   goalUnderdeterminesKarpPolicy bits accepted = record
-    { Levin.initial = bits
-    ; Levin.command = tt
-    ; Levin.policy₁ = false
-    ; Levin.policy₂ = true
-    ; Levin.distinctPolicies = refl
-    ; Levin.policy₁Succeeds = accepted
-    ; Levin.policy₂Succeeds = trans
+    { Levin.GoalUnderdeterminesTrajectoryWitness.initial = bits
+    ; Levin.GoalUnderdeterminesTrajectoryWitness.command = tt
+    ; Levin.GoalUnderdeterminesTrajectoryWitness.policy₁ = false
+    ; Levin.GoalUnderdeterminesTrajectoryWitness.policy₂ = true
+    ; Levin.GoalUnderdeterminesTrajectoryWitness.distinctPolicies = refl
+    ; Levin.GoalUnderdeterminesTrajectoryWitness.policy₁Succeeds = accepted
+    ; Levin.GoalUnderdeterminesTrajectoryWitness.policy₂Succeeds = trans
         (flipVerifierInvariant bits) accepted
     }
 
@@ -106,10 +106,10 @@ module ActualKarpGoalSystem
     Cut.verifyWeightedMaxCut graph bits ≡ true →
     Levin.CompetentExecutionWitness sameGoalExecution
   competentGoalExecutionFromAcceptedCut bits accepted = record
-    { Levin.initial = bits
-    ; Levin.command = tt
-    ; Levin.commandAccepted = refl
-    ; Levin.reachesCommandedGoal = accepted
+    { Levin.CompetentExecutionWitness.initial = bits
+    ; Levin.CompetentExecutionWitness.command = tt
+    ; Levin.CompetentExecutionWitness.commandAccepted = refl
+    ; Levin.CompetentExecutionWitness.reachesCommandedGoal = accepted
     }
 
 
