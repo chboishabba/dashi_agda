@@ -9,6 +9,7 @@ import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact as KluverSources
 import DASHI.Biology.Kluver5HT2AMolecularProteinInstantiationExact as Kluver
 import DASHI.Biology.MonoamineBiosynthesisPathSeparationExact as Monoamine
 import DASHI.Biology.Cell.OpenMetabolicNetwork as Metabolic
+import DASHI.Chemistry.TransitionKernel as Chemistry
 
 ------------------------------------------------------------------------
 -- WONG ET AL. (2022): ATTRIBUTED EXPERIMENTAL EVIDENCE, NOT A RECIPE
@@ -226,6 +227,19 @@ record UnpaidMetabolicModelBridge
     compartmentAndTimeTransportPaid : Bool
     compartmentAndTimeTransportPaidIsFalse :
       compartmentAndTimeTransportPaid ≡ false
+
+-- The existing generic chemistry kernel is another possible future consumer.
+-- Passing that kernel does not give this paper a measured reaction network.
+record UnpaidChemistryKernelBridge
+    (kernel : Chemistry.ChemistryTransitionKernel) : Set where
+  field
+    measuredNetworkParametersPaid : Bool
+    measuredNetworkParametersPaidIsFalse :
+      measuredNetworkParametersPaid ≡ false
+
+    mechanismAndObservationSameObjectPaid : Bool
+    mechanismAndObservationSameObjectPaidIsFalse :
+      mechanismAndObservationSameObjectPaid ≡ false
 
 wongCitationImportsNoProof :
   Sources.citationImportsProof wongEtAl2022 ≡ false
