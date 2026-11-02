@@ -1,3 +1,8 @@
+## 2026-11-02 — R443 bond-only marginal and C3 numerator (source-written)
+
+- Added `YMClayR443BondMarginalC3Exact` using the original rational SU(2) n=3 source. It proves the Wilson six-plane action/selected C3 descend through forgetting the auxiliary siteGauge, then derives pushforward integration laws, unchanged partition and normalized-expectation equality under the existing R443 Gibbs witness, and reuses R431 on the bond-only measure.
+- Explicitly separates the rational link algebra from genuine compact-real SU(2) Haar, variable-cutoff R445 and R320/R333 OS mass-gap obligations; no Clay promotion. Existing Wilson/Bałaban and DASHI attribution retained. Agda/CI not run.
+
 ## 2026-11-01 — exact conditional Wilson gauge/RG commuting square
 
 - Added `YMClayVoyagerCovariantWilsonCoarseFineBidiExact`: proof that an actual chosen fine Wilson observable remains gauge invariant when both selected block/gauge action and Wilson observable commuting squares hold; imported by Balaban TOE. **Neither physical square is claimed inhabited**. For actual Wilson transport and OS form use existing source owners.
