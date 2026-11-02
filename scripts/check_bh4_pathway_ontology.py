@@ -79,6 +79,18 @@ def main() -> int:
     rejects(bad, r, x, c)
     bad = deepcopy(r); bad["reactions"][0]["participants"][0]["coefficient"] = 2
     rejects(m, bad, x, c)
+    # Non-ChEBI Rhea compound identifiers remain source-specific, not
+    # spuriously promoted to a ChEBI accession.
+    alternate = "http://rdf.rhea-db.org/compound/fixture-456"
+    no_chebi_matrix = deepcopy(m)
+    no_chebi_matrix["species_index"][1] = alternate
+    no_chebi_matrix["columns"][0]["nonzero_entries"][1]["species"] = alternate
+    no_chebi_rhea = deepcopy(r)
+    no_chebi_rhea["reactions"][0]["participants"][1]["chebi_id"] = None
+    no_chebi_rhea["reactions"][0]["participants"][1]["compound_uri"] = alternate
+    no_chebi_result = build(no_chebi_matrix, no_chebi_rhea, x, c)
+    assert no_chebi_result["species"][1]["coordinate"]["namespace"] == "rhea-source-participant"
+    assert no_chebi_result["species"][1]["coordinate"]["uri"] is None
     bad = deepcopy(m); bad["external_exchange"] = [1]
     rejects(bad, r, x, c)
     bad = deepcopy(x); bad["neighbourhoods"][0]["edges"][0]["promotionAllowed"] = True
