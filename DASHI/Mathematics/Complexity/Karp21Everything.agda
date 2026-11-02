@@ -68,3 +68,5 @@ import DASHI.Mathematics.Complexity.Karp21VOAGradeDimensionCutSeparationExact
 import DASHI.Mathematics.Complexity.Karp21CookStrictTripleBitBoundaryExact
 
 import DASHI.Mathematics.Complexity.Karp21CookLevinConcreteBitWordReuseExact
+
+import DASHI.Mathematics.Complexity.Karp21CookStrictSATLanguageExact
