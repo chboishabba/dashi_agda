@@ -61,6 +61,17 @@ StrictCookSearchWitness word =
     × Σ Cook.Assignment
         (λ assignment → Cook.evaluate formula assignment ≡ true))
 
+-- Destructure Cook's actual Satisfiable constructor. Do not assume
+-- that its record projections have been opened at top level.
+cookSatisfyingAssignmentToSearch :
+  (formula : Cook.BooleanFormula) →
+  Cook.Satisfiable formula →
+  Σ Cook.Assignment
+    (λ assignment → Cook.evaluate formula assignment ≡ true)
+cookSatisfyingAssignmentToSearch formula
+  (Cook.satisfyingAssignment assignment verified) =
+  assignment , verified
+
 strictCookDecisionToSearch :
   (word : Word.BitWord) →
   PR.accepts SAT.strictSATLanguage word →
@@ -69,8 +80,7 @@ strictCookDecisionToSearch word accepted
   with Strict.strictDecodeCookFormulaBits word
 ... | nothing = ⊥-elim accepted
 ... | just formula =
-  formula , (refl , (Cook.assignment accepted ,
-                     Cook.evaluatesTrue accepted))
+  formula , (refl , cookSatisfyingAssignmentToSearch formula accepted)
 
 strictCookSearchToDecision :
   (word : Word.BitWord) →
