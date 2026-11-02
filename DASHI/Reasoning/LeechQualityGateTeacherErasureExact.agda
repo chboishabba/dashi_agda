@@ -109,3 +109,39 @@ fullAdmissionPreservesEntireTrace program witness (layer ∷ rest) state
 -- be fabricated from the CE score or from a gate-zero dense fallback.
 -- The executable implementation additionally checks an independently
 -- heldout quality budget and numeric logit parity before export.
+
+-- Student-only training is an independent executable trace.
+-- The layer gate may stay denseOnly while this rollout is computed.
+-- This models the new Python student_only=True call, not differentiation
+-- or the numeric ability of an optimizer to reduce language CE.
+studentRollout :
+  ∀ {L : Nat} {State : Set} →
+  LayerProgram L State → List (Fin L) → State → State
+studentRollout = teacherFreeTrace
+
+studentRolloutIndependentOfGates :
+  ∀ {L : Nat} {State : Set} →
+  (first second : LayerProgram L State) →
+  ((layer : Fin L) (state : State) →
+      studentStep first layer state ≡ studentStep second layer state) →
+  (schedule : List (Fin L)) (initial : State) →
+  studentRollout first schedule initial
+    ≡ studentRollout second schedule initial
+studentRolloutIndependentOfGates first second agreement [] initial = refl
+studentRolloutIndependentOfGates first second agreement (layer ∷ rest) initial
+  rewrite agreement layer initial =
+  studentRolloutIndependentOfGates first second agreement rest
+    (studentStep second layer initial)
+
+studentRolloutSameProgramEveryGate :
+  ∀ {L : Nat} {State : Set} →
+  (program : LayerProgram L State) →
+  (schedule : List (Fin L)) (initial : State) →
+  studentRollout program schedule initial
+    ≡ teacherFreeTrace program schedule initial
+studentRolloutSameProgramEveryGate program schedule initial = refl
+
+-- Student-rollout equality alone does NOT discharge AllGatesFull.
+-- A separate CE-calibration gate remains necessary for deployment.
+-- The PyTorch program checks heldout CE, all gates exactly one, and
+-- removal of dense parameters. These tests are NOT Agda consequences.
