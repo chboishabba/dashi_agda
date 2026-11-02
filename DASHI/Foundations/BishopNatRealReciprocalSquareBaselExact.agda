@@ -15,7 +15,7 @@ open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Integer.Base as ℤ using (+_; +≤+)
 open import Data.Rational.Unnormalised as ℚ using
-  (ℚᵘ; 1ℚᵘ; _/_; _*_; _≃_; *≡*)
+  (ℚᵘ; 0ℚᵘ; 1ℚᵘ; _/_; _*_; _≤_; *≤*; _≃_; *≡*)
 
 open import Data.Nat.Base using (z≤n; s≤s)
 import Data.Rational.Unnormalised.Properties as ℚP
