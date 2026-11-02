@@ -24,6 +24,7 @@ import Sequence as Seq
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Foundations.BishopConcreteTrigSeriesConvergenceExact as Trig
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
+import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as Parity
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Analysis.BishopConcreteSineCosineFiniteTermDerivativeExact as Finite
@@ -237,3 +238,82 @@ round11CosineAdditionLeftZero inputs x =
            (λ s c →
              (Κ 1ℚᵘ ⊗ c) ⊖ (Κ 0ℚᵘ ⊗ s) ⊜ c)
            RP.≃-refl (sinB inputs x) (cosB inputs x))))
+
+
+------------------------------------------------------------------------
+-- K05 ANTI-DIAGONAL SINE ADDITION: x + (-x).
+-- This uses the same concrete Round11 sine/cosine and the existing
+-- *proven* Bishop series parity, not a hypothetical trig authority.
+-- Cosine on the anti-diagonal is equivalent to Pythagorean and must
+-- remain a separate genuine outstanding lemma.
+------------------------------------------------------------------------
+
+round11SineAdditionOpposite :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (sinB inputs (R._+_ x (R.- x)))
+    (R._+_
+      (R._*_ (sinB inputs x) (cosB inputs (R.- x)))
+      (R._*_ (cosB inputs x) (sinB inputs (R.- x))))
+round11SineAdditionOpposite inputs x =
+  RP.≃-trans
+    (RP.≃-trans
+      (TrigCong.bishopSinCongruent
+        (Round11.round11ConcreteTermIdentification inputs)
+        (RP.+-inverseʳ x))
+      (round11SineAtZero inputs))
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.+-cong
+          (RP.*-cong RP.≃-refl
+            (Parity.bishopCosNeg
+              (Round11.round11ParityInputs inputs) x))
+          (RP.*-cong RP.≃-refl
+            (Parity.bishopSinNeg
+              (Round11.round11ParityInputs inputs) x)))
+        (let open RP.ℝ-Solver
+         in solve 2
+           (λ s c → (s ⊗ c) ⊕ (c ⊗ (⊝ s)) ⊜ Κ 0ℚᵘ)
+           RP.≃-refl (sinB inputs x) (cosB inputs x))))
+
+-- A precise K05 reducer: the cosine opposite-angle addition formula
+-- is obtained from the SAME Round11 Pythagorean source statement.
+-- This is not a proof of Pythagorean or the full cosine addition law.
+round11CosineAdditionOppositeFromPythagorean :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (R._+_
+      (R._*_ (cosB inputs x) (cosB inputs x))
+      (R._*_ (sinB inputs x) (sinB inputs x)))
+    R.1ℝ →
+  R._≃_
+    (cosB inputs (R._+_ x (R.- x)))
+    (R._-_
+      (R._*_ (cosB inputs x) (cosB inputs (R.- x)))
+      (R._*_ (sinB inputs x) (sinB inputs (R.- x))))
+round11CosineAdditionOppositeFromPythagorean
+    inputs x pythagorean =
+  RP.≃-trans
+    (RP.≃-trans
+      (TrigCong.bishopCosCongruent
+        (Round11.round11ConcreteTermIdentification inputs)
+        (RP.+-inverseʳ x))
+      (round11CosineAtZero inputs))
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.+-cong
+          (RP.*-cong RP.≃-refl
+            (Parity.bishopCosNeg
+              (Round11.round11ParityInputs inputs) x))
+          (RP.-‿cong
+            (RP.*-cong RP.≃-refl
+              (Parity.bishopSinNeg
+                (Round11.round11ParityInputs inputs) x))))
+        (RP.≃-trans
+          (let open RP.ℝ-Solver
+           in solve 2
+             (λ s c →
+               (c ⊗ c) ⊖ (s ⊗ (⊝ s))
+               ⊜ (c ⊗ c) ⊕ (s ⊗ s))
+             RP.≃-refl (sinB inputs x) (cosB inputs x))
+          pythagorean)))
