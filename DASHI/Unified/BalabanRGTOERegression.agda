@@ -27,6 +27,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as NativeP2
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as P2Trace
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
+import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31Probe
+import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
 import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
@@ -61,6 +63,23 @@ import DASHI.Physics.YangMills.BalabanRGLane as LegacyRGLane
 import DASHI.Physics.YangMills.YangMillsHighestAlphaGateDependencyExact as Gate
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
 import DASHI.Physics.YangMills.YangMillsConstructivePathPrePostInvariantExact as Path
+
+------------------------------------------------------------------------
+-- Tag-free directional finite signature and YM/KK Hodge source bridge.
+-- The selected physical observed dynamics and OS/KK same-action witness
+-- remain explicit inputs, not fabricated inhabitants.
+------------------------------------------------------------------------
+open L31Probe public using
+  ( calibratedProbeForcesThreePlusOne
+  ; realizedDynamicsThreePlusOne
+  ; threePlusOneDiffersFromOnePlusThree
+  )
+open YMKKHodge public using
+  ( lorentzStarSquareIsNegative
+  ; euclideanStarSquareIsPositive
+  ; sameSourceDirectionalLorentzSignature
+  ; creutzFiveEuclideanIsNotKK
+  )
 
 ------------------------------------------------------------------------
 -- Exact theorem-owner re-exports.
