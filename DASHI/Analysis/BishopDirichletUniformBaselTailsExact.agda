@@ -19,7 +19,7 @@ module DASHI.Analysis.BishopDirichletUniformBaselTailsExact where
 -- DASHI Basel and EllipticDirichletBaselMajorantExact owners.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat.Base as Nat using (_≤_; _≥_; NonZero)
 import Data.Nat.Properties as NatP
 open import Data.Integer.Base using (+_)
