@@ -30,6 +30,7 @@ def main() -> int:
     p.add_argument("--artifact-dir", type=Path, default=Path("artifacts/biology"))
     p.add_argument("--manifest", type=Path)
     p.add_argument("--wikimedia", type=Path, help="optional pinned Wikimedia BH4 panel receipt; no network acquisition is implied")
+    p.add_argument("--source-reopen-packet", type=Path, help="optional caller-supplied source/revision references; does not authenticate source text")
     p.add_argument("--max-pdb-per-protein", type=int, default=3)
     p.add_argument("--top-kinetic-candidates", type=int, default=10)
     p.add_argument("--skip-network-evidence", action="store_true")
@@ -55,6 +56,7 @@ def main() -> int:
     xpollenation_dir = out / "xpollenation-neighbourhoods"
     ontology = out / "bh4-pathway-ontology.json"
     ontology_jsonld = out / "bh4-pathway-ontology.jsonld"
+    ontology_review = out / "bh4-pathway-review-worklist.json"
     claim_ledger = Path("docs/biology/KitzerowBH4ClaimLedgerCandidate.v1.json")
     interval = out / "bh4-interval-flux-feasibility.json"
     summary_path = out / "bh4-phase4-maxcut-summary.json"
@@ -119,6 +121,17 @@ def main() -> int:
     if exits["pathway_ontology"] == 0:
         run([py, "scripts/check_bh4_pathway_ontology.py"])
 
+    if exits.get("pathway_ontology") == 0:
+        review_cmd = [
+            py, "scripts/build_bh4_pathway_review.py",
+            "--pathway", str(ontology), "-o", str(ontology_review),
+        ]
+        if a.source_reopen_packet is not None:
+            review_cmd.extend(["--source-receipts", str(a.source_reopen_packet)])
+        exits["pathway_review"] = run(review_cmd, allow_partial=True)
+        if exits["pathway_review"] == 0:
+            run([py, "scripts/check_bh4_pathway_review.py"])
+
     interval_exit = run([py, "scripts/solve_bh4_flux_intervals.py", "--matrix", str(matrix), "--parameters", str(solver), "-o", str(interval)], allow_partial=True)
     run([py, "scripts/check_kitzerow_bh4_priority_all.py"])
 
@@ -128,6 +141,7 @@ def main() -> int:
     sab = load(sabio); ad = load(adj); rk = load(ranking); pay = load(payment)
     abund = load(abundance); exch = load(exchange_context); joint = load(joint_payment)
     sf = load(sifts); xp = load(xpollenation); ont = load(ontology) if exits.get("pathway_ontology") == 0 else None
+    review = load(ontology_review) if exits.get("pathway_review") == 0 else None
     network: dict[str, object] = {}
     if sab:
         network["sabio"] = {k: sab.get(k) for k in ("schema", "proteins_completed", "proteins_with_entries", "kinetic_entry_count", "kinetic_parameter_count")}
@@ -165,6 +179,14 @@ def main() -> int:
             "authority": ont.get("authority"),
         }
 
+    if review:
+        network["pathway_review"] = {
+            "schema": review.get("schema"),
+            "obligations": len(review.get("obligations", [])),
+            "family_counts": review.get("obligation_family_counts", {}),
+            "authority": review.get("authority"),
+        }
+
     summary = {
         "schema": "dashi.bh4-phase4-maxcut-run.v8",
         "panel": str(a.panel),
@@ -183,6 +205,7 @@ def main() -> int:
             "sifts": str(sifts), "xpollenation": str(xpollenation),
             "xpollenation_neighbourhoods": str(xpollenation_dir),
             "pathway_ontology": str(ontology), "pathway_ontology_jsonld": str(ontology_jsonld),
+            "pathway_review": str(ontology_review) if review else None,
             "interval": str(interval),
             "summary": str(summary_path),
         },
