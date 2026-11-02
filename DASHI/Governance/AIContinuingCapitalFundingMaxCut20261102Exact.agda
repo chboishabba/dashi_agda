@@ -35,6 +35,7 @@ import DASHI.Economics.CommonFactorStructuredFinanceExact as Structured
 import DASHI.Economics.GlobalFundingLiquidityRealisationExact as Liquidity
 import DASHI.Governance.AIOffBalanceCapitalRecovery20261101Exact as Base
 import DASHI.Governance.KnowledgeProcessingCaptureSourceAtlas20261101Exact as Atlas
+import DASHI.Governance.KnowledgeCaptureSecondThirdOrder20261101Exact as Third
 
 -- Observed CoreWeave six-month quantities, USD millions: source arithmetic.
 observedOperatingH1 : Nat
@@ -200,7 +201,28 @@ nonRecourseDoesNotEraseOtherObligations :
 nonRecourseDoesNotEraseOtherObligations ()
 
 source : Atlas.SourceReceipt
-source = Atlas.coreWeaveH1SecCashClock
+source = Atlas.coreWeaveCashPrepaymentsOriginal2026
+
+escrowOriginal : Atlas.SourceReceipt
+escrowOriginal = Atlas.metaEscrowRestricted2026
+
+-- Third-order selection is governed by a distinct existing hypothetical
+-- policy path and needs its own real instrument and observed access effect.
+-- No automatic private-credit-stress -> sovereign knowledge-control rule.
+financialStressCannotProveExecutedBailout :
+  Third.SupplierFinanceProvesPublicRescue → ⊥
+financialStressCannotProveExecutedBailout =
+  Third.circularFinancingDoesNotForceRescue
+
+existingContestableCounterfactual :
+  Third.ThreeHop
+    Third.protectivePolicyIntervention Third.contestablePublicOversight
+existingContestableCounterfactual = Third.resilientResponsePath
+
+existingConcentrationCounterfactual :
+  Third.ThreeHop
+    Third.protectivePolicyIntervention Third.entrenchedPrivateStandardsPower
+existingConcentrationCounterfactual = Third.concentratingResponsePath
 
 -- Scope: real forward debt availability, contractual GPU refresh, one-party
 -- exposure and any public/private intervention remain empirical obligations.
