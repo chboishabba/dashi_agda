@@ -94,3 +94,15 @@ toeBinary32Ternary27RoundTrip :
   (word : Word32.BinaryWord32) →
   Word32.decode32 (Word32.encode32 word) ≡ word
 toeBinary32Ternary27RoundTrip = Word32.word32RoundTrip
+
+
+toeAllAbstractDeltaMatrixWritesCommute :
+  (D : Matrix.DeltaScalar) {Column : Set}
+  (writes : Matrix.MatrixWrite D Column)
+  (matrix : Matrix.Matrix D Column)
+  (queried : GDN.Location) (col : Column) →
+  Matrix.runMatrix D writes matrix queried col ≡
+    Matrix.runVectorRAM D writes (Matrix.matrixAsRam D matrix)
+      queried col
+toeAllAbstractDeltaMatrixWritesCommute =
+  Matrix.matrixAndRamSameAfterEveryWrite
