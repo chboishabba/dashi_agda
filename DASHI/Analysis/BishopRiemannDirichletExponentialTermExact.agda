@@ -1058,3 +1058,158 @@ sourceNegativeLogSumAboveTwoAbsoluteMajorant
     (RP.≤-respʳ-≃
       (sourceNatReciprocalSquarePowerIsBasel n)
       (BaselNat.reciprocalExtraPowersBelowSquare n k))
+
+
+------------------------------------------------------------------------
+-- K04d / ALL NAT INTEGER EXPONENT FIBRES IN THE ORIGINAL
+-- ROUND11 COMPLEX EXPONENTIAL, both true Bishop coordinates.
+--
+-- The coefficient exp_C(-(2+k)*log_B(n+1)) is represented here
+-- by its original iterated additive exponent (sourceNegativeLogSum).
+-- The scalar <= Basel proof comes from the original exponential
+-- Cauchy product and reciprocal powers, not from an opaque
+-- complex modulus. Imaginary argument is literally ZERO, hence
+-- the original signed-factorial sine/cosine-at-zero lemmas apply.
+-- This is a discrete integer subfamily, not the desired open
+-- complex neighborhood around the noninteger Machin point.
+------------------------------------------------------------------------
+
+sourceIntegralComplexExponent :
+  (logNat : NatLogCandidate) (n count : Nat) →
+  A.BishopComplex
+sourceIntegralComplexExponent logNat n count =
+  A.bishop-complex
+    (sourceNegativeLogSum logNat n count)
+    R.0ℝ
+
+sourceIntegralExpTerm :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (n count : Nat) →
+  A.BishopComplex
+sourceIntegralExpTerm inputs logNat n count =
+  ExpBridge.bishopAnalyticComplexExp
+    (Route.round11MachinTranscendentals inputs)
+    (sourceIntegralComplexExponent logNat n count)
+
+sourceIntegralExpTermReal :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (n count : Nat) →
+  R._≃_
+    (A.re (sourceIntegralExpTerm inputs logNat n count))
+    (Exp.bishopExp (sourceNegativeLogSum logNat n count))
+sourceIntegralExpTermReal inputs logNat n count =
+  RP.≃-trans
+    (RP.*-cong RP.≃-refl (Origin.round11CosineAtZero inputs))
+    (RP.*-identityʳ
+      (Exp.bishopExp (sourceNegativeLogSum logNat n count)))
+
+sourceIntegralExpTermImagZero :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (n count : Nat) →
+  R._≃_
+    (A.im (sourceIntegralExpTerm inputs logNat n count))
+    R.0ℝ
+sourceIntegralExpTermImagZero inputs logNat n count =
+  RP.≃-trans
+    (RP.*-cong RP.≃-refl (Origin.round11SineAtZero inputs))
+    (let open RP.ℝ-Solver
+     in solve 1
+       (λ expFactor → expFactor ⊗ Κ Rat.0ℚᵘ ⊜ Κ Rat.0ℚᵘ)
+       RP.≃-refl
+       (Exp.bishopExp (sourceNegativeLogSum logNat n count)))
+
+sourceIntegralExpRealBaselMajorant :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (n k : Nat) →
+  R._≃_ (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  R._≤_
+    (R.∣
+      A.re (sourceIntegralExpTerm
+        inputs logNat n (suc (suc k)))
+    ∣)
+    (Basel.baselTerm n)
+sourceIntegralExpRealBaselMajorant inputs logNat n k inverseLaw =
+  RP.≤-respˡ-≃
+    (RP.∣-∣-cong
+      (sourceIntegralExpTermReal
+        inputs logNat n (suc (suc k))))
+    (sourceNegativeLogSumAboveTwoAbsoluteMajorant
+      logNat n k inverseLaw)
+
+sourceIntegralExpImagBaselMajorant :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (n k : Nat) →
+  R._≤_
+    (R.∣
+      A.im (sourceIntegralExpTerm
+        inputs logNat n (suc (suc k)))
+    ∣)
+    (Basel.baselTerm n)
+sourceIntegralExpImagBaselMajorant inputs logNat n k =
+  RP.≤-respˡ-≃
+    (RP.∣-∣-cong
+      (sourceIntegralExpTermImagZero
+        inputs logNat n (suc (suc k))))
+    (Dirichlet.zeroAbsBelowBasel n)
+
+sourceIntegralExpFamily :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (k : Nat) →
+  Dirichlet.BishopDirichletTermFamily
+sourceIntegralExpFamily inputs logNat k s n =
+  sourceIntegralExpTerm inputs logNat n (suc (suc k))
+
+-- The family is indexed by the *chosen fixed integer exponent k+2*;
+-- the half-plane parameter is deliberately unused. We do not
+-- misidentify this family as the full complex-variable zeta(s).
+sourceIntegralExpFamilyMajorant :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (inverseLaw : (n : Nat) →
+    R._≃_ (Exp.bishopExp (logNat n))
+      (NatReal.natReal (suc n)))
+  (k : Nat) (s : A.BishopComplex) →
+  Dirichlet.BishopDirichletBaselMajorantAt
+    (sourceIntegralExpFamily inputs logNat k) s
+sourceIntegralExpFamilyMajorant inputs logNat inverseLaw k s =
+  record
+    { Dirichlet.dominationStart = zero
+    ; Dirichlet.realDomination = λ n _ →
+        sourceIntegralExpRealBaselMajorant
+          inputs logNat n k (inverseLaw n)
+    ; Dirichlet.imagDomination = λ n _ →
+        sourceIntegralExpImagBaselMajorant inputs logNat n k
+    }
+
+sourceIntegralExpFamilyConverges :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (inverseLaw : (n : Nat) →
+    R._≃_ (Exp.bishopExp (logNat n))
+      (NatReal.natReal (suc n)))
+  (k : Nat) (s : A.BishopComplex) →
+  let
+    terms = sourceIntegralExpFamily inputs logNat k
+    bound = sourceIntegralExpFamilyMajorant
+      inputs logNat inverseLaw k s
+  in
+  (Seq._ConvergesTo_
+    (λ count → A.re (Dirichlet.dirichletPartial terms s count))
+    (A.re (Dirichlet.dirichletValue terms s bound)))
+  ×
+  (Seq._ConvergesTo_
+    (λ count → A.im (Dirichlet.dirichletPartial terms s count))
+    (A.im (Dirichlet.dirichletValue terms s bound)))
+sourceIntegralExpFamilyConverges inputs logNat inverseLaw k s =
+  Dirichlet.dirichletPartialConverges
+    (sourceIntegralExpFamily inputs logNat k)
+    s
+    (sourceIntegralExpFamilyMajorant
+      inputs logNat inverseLaw k s)
