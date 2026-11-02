@@ -240,10 +240,13 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
                             and obj.get("namespace") and obj.get("identifier")),
                        "malformed external edge")
                 ensure(bool(edge.get("edgeId")), "xPollenation edge lacks stable identity")
-                if edge.get("sameObjectVerified") is True:
-                    ensure(edge.get("sameObjectClaimed") is True and
-                           edge.get("relation") in ("exact-same-object", "curated-cross-reference"),
-                           "unlicensed same-object claim in xPollenation")
+                # xPollenation is discovery-only. No caller-provided flag
+                # may bootstrap verified identity, even with a plausible
+                # relation label. A separate reviewed/typed bridge is required.
+                ensure(edge.get("sameObjectVerified") is not True,
+                       "xPollenation cannot pay same-object identity")
+                ensure(edge.get("sameObjectClaimed") is not True,
+                       "xPollenation cannot self-assert exact identity")
                 if edge.get("relation") == "reaction-participant":
                     rid = neighbourhood["subject"]["identifier"]
                     expected_participants = {p["chebi_id"] for p in
