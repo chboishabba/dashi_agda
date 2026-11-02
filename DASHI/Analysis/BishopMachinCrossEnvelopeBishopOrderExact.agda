@@ -15,7 +15,7 @@ module DASHI.Analysis.BishopMachinCrossEnvelopeBishopOrderExact where
 -- Machin 1706; Bishop/Bridges 1985; Murray 2022 arXiv:2205.08354.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc; _*_; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_; _^_)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Base as Nat using (_≤_; NonZero)
 open import Data.Nat.Solver using (module +-*-Solver)
@@ -28,7 +28,7 @@ open ℤSolver using () renaming
   ; _:=_ to _⊜_
   )
 open +-*-Solver using (solve; _:*_; con; _:=_)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst; trans; cong)
 open import Data.Rational.Unnormalised as Q using (ℚᵘ; _/_; _≤_; _≃_; _+_; *≡*)
 open import Data.Integer.Base using (+_)
 
@@ -398,3 +398,36 @@ sourceWeightedOmittedIsEmbeddedPowerRational n =
             Machin.four
             (omittedPowerRational
               Machin.oneTwoHundredThirtyNinth n)))))
+
+
+------------------------------------------------------------------------
+-- Exact Nat odd-exponent base normalization, all indices.
+-- This is the polynomial exponent bridge behind the remaining
+-- original qPow rational equivalence; it uses the existing
+-- signed-factorial odd-index owner, not a parallel index definition.
+------------------------------------------------------------------------
+
+oddNaturalPowerFactor :
+  (base n : Nat) →
+  base ^ Estimates.oddExponent n ≡
+  base * ((base * base) ^ n)
+oddNaturalPowerFactor base zero = refl
+oddNaturalPowerFactor base (suc n) =
+  trans
+    (cong (λ power → base * (base * power))
+      (oddNaturalPowerFactor base n))
+    (solve 2
+      (λ b p →
+        b :* (b :* (b :* p))
+        := b :* ((b :* b) :* p))
+      refl base ((base * base) ^ n))
+
+fiveOddNaturalPowerFactor : (n : Nat) →
+  5 ^ Estimates.oddExponent n ≡ 5 * Cross.pow25 n
+fiveOddNaturalPowerFactor = oddNaturalPowerFactor 5
+
+twoHundredThirtyNineOddNaturalPowerFactor : (n : Nat) →
+  239 ^ Estimates.oddExponent n ≡
+  239 * Cross.pow57121 n
+twoHundredThirtyNineOddNaturalPowerFactor =
+  oddNaturalPowerFactor 239
