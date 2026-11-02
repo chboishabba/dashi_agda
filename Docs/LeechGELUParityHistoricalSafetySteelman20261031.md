@@ -181,3 +181,81 @@ GELU theorem.
 C3 conjugation is an order-two automorphism of an order-three
 phase group. The group order-three operation and the reflection
 operation are different; neither is a declaration of ethical polarity.
+
+
+## 2 November evidence-driven steelman: the C2 student fails before any safety claim
+
+The user has run the real C2 `train_only_quality_diagnosis.json`
+for the original 384D / 12-block / 4-expert top-2 signed
+candidate. Source authority is the local machine artifact, not a
+kernel proof or a dataset release. On **4032 next-token training
+targets**, dense CE=2.54566636, complete student CE=8.60841485,
+and uniform CE=7.62461899. Isolated replacement of layer 1 gives
+CE +3.42024; layers 0..1 yield CE +4.00670. All logits are finite.
+The teacher-forced small-layer probe shows layer-1 student RMS
+0.345658 versus teacher 0.0372746 (9.273x); relative MSE 86.6193;
+derived uncentered cosine about 0.0202. Signed orientation is positive
+only 6/256 selected assignments in this *small* teacher-forced probe,
+and [120,6,126,4] are the observed expert route counts.
+
+**Competing explanations, not verdicts:**
+- insufficient optimization (one epoch, small train corpus, all layers
+  trained on teacher-forced states but deployed recursively);
+- insufficient student even/odd width and rank-24 transition capacity;
+- a learned hard sign whose surrogate derivative saturates;
+- hard top-k starvation of rarely selected experts;
+- recurrent history-scale amplification;
+- aliasing between teacher-forced FFN data and student on-policy states;
+- mismatch from indiscriminately replacing all 12 FFNs at once.
+
+No observation uniquely identifies the cause. A scale-only clamp
+cannot recover an output whose teacher/student direction alignment
+is nearly zero. A sign learned as mostly negative does **not**
+classify outputs as harmful or disagreeing. Nor can a finite C2
+conjugation identity prove that a fitted neural student preserves
+teacher CE.
+
+**Steelman tests:** compare a capacity-matched non-geometric FFN
+distillation control, pure even/odd with no history, forced/fixed
+orientation, balanced versus learned top-k routing, frozen versus
+learned history, uncompressed/full-rank versus rank-24 transition,
+and teacher-forced versus on-policy hidden trajectories. Require
+same corpus, tokenizer, seeds, budget, task CE, FFN norms and
+selected-route statistics. Layer 1 first, then layer 0 and deeper
+layers. Source training/heldout/checkpoint hashes are mandatory
+for reproducible interpretation. Test original Leech geometry-only
+hypotheses separately with active geometry-loss variants, QR-only
+and no-geometry controls. The saved dense teacher used zero
+geometry-loss coefficient and an orthogonal Q/K gauge that cancels
+in exact attention scores.
+
+**Proposed exact parity capacity obstruction (open safe Agda target):**
+Let I be an involution on an input and history state space,
+V a real inner-product output space, and F any target map.
+Define E(z)=(F(z)+F(Iz))/2 and O(z)=(F(z)-F(Iz))/2.
+For ANY candidate S with S(Iz)=-S(z),
+
+    (||F(z)-S(z)||² + ||F(Iz)-S(Iz)||²)/2
+        = ||E(z)||² + ||O(z)-S(z)||²
+        >= ||E(z)||².
+
+Thus an odd-only student has an unavoidable pairwise squared-error
+floor whenever the dense target has a nonzero even component.
+Proof is elementary using the inner-product parallelogram identity,
+but it is **not yet a source-written/kernel-accepted Agda theorem**.
+Reusing the actual involution and additive owners is required.
+The existence of an even channel removes this obstruction only
+at the expressivity level, not at finite capacity, optimizer or
+recurrent-history deployment level. Scalar exact-CDF GELU gives a
+linear odd term and nonlinear even term; it does not imply the
+biased matrix FFN or trained router is odd/even as a whole.
+
+The unchanged `LeechSignedHistoryExpertBidiExact`,
+`LeechQualityGateTeacherErasureExact` and selected consumer-fibre
+lemmas remain conditional finite results. Prior Python regression
+acceptance (125 tests + 7 subtests, focused 34/34; reported by
+user for PR #4) is **not** a proof of the numerical training
+objective or of actual PyTorch↔Agda same-object refinement.
+Source attribution remains Kornienko for Leech-LILA; Sophontic
+semantic tests are independently authored, and Ibrahim's Monster
+3B work remains separate.
