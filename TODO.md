@@ -1,3 +1,13 @@
+### 2026-11-03 further source-first max-cut: native bonds/variable cutoff/Bishop setoid
+- [x] Search finite function extensionality, original periodic bond enumerations, Wilson-path congruence, Bishop real/complex and legacy real backend migration before implementation; distinguish field pointwise equality, Vec equality and arbitrary function equality.
+- [x] Source-write original 4D SU(N) signed-path, plaquette, beta action and Gibbs density congruence from *pointwise* original bond equality; prove same at arbitrary periodic cutoff n on the existing `YMClaySUNVariablePeriodicGibbsGaugeExact` action.
+- [x] Build setoid bond-vector interface (pointwise roundtrips, original C3 coordinate naturality), selected pointwise-extensional test algebra and exact physical Wilson/Gibbs product Haar C3 change-of-variables. This reduces function-extensionality assumptions; no codec inhabitant is manufactured.
+- [x] On genuine vendored Bishop `Real`, `RealProperties` and `BishopSetoidComplexExact`, prove finite-matrix `ReTr(A†) ≃ ReTr(A)` and normalized real-trace analogue by finite induction without global postulates.
+- [x] Wire these sources into golden canonical Balaban TOE and synchronized docs.
+- [ ] Construct physical original positive-bond vector/setoid codec with actual 1024-link enumeration and all needed gauge/C3 naturality; prove selected observable congruence and measurable product Haar for actual continuous SU(N).
+- [ ] Complete actual SU(N) finite determinant/multiplication/group laws and normalized ReTr/N on the same real and complex source, using Bishop equivalence properly; the legacy facade equality migration remains OPEN.
+- [ ] Physical source inputs R124/CMP119, R445 moment/tails/refinement, R320 CMP116 mixed J and R333 real same-H OS uniform spectral gap and H6 nontriviality as separately specified in canonical ledger.
+- [ ] Kernel-accept `--safe` focused source plus transitive imports, 0 new local postulates, 0 metas; CI deferred.
 ### 2026-11-03 source-first all-gate max-cut: constructive matrix ReTr and gauge Haar
 - [x] Search R443 complex matrix/SU(N)/ReTr/dagger, compact Haar/Fubini/one-link/product, R124/CMP119 source metric/stress, R445 marked moments/tails/Prokhorov, R320 CMP116 mixed J, R333 real same-H OS and spectral terms; inspect relevant genuine Lean PR #15 sources rather than the default branch only.
 - [x] Source-write concrete Fin-indexed complex-pair conjugate-transpose trace and normalized real-trace adjoint theorem. Use existing ConstructiveRealSpine/ConcreteComplex; expose the *exact* two-operation witness needed by old certified SU(N) trace authority.
