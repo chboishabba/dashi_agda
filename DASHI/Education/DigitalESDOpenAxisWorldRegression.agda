@@ -12,6 +12,7 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.List.Relation.Unary.Any using (here; there)
+open import Data.List.Membership.Propositional using (_∈_)
 
 import DASHI.Education.DigitalESDOpenAxisStudyPartWorldExact as W
 import DASHI.Education.DigitalESDOpenAxisGapTransportExact as Gap
@@ -34,6 +35,9 @@ data TestAxis : Set where
 testParts : List (TestPart taimurTestStudy)
 testParts = studyQuestion ∷ studyMethod ∷ studyInference ∷ []
 
+testPartsFor : (s : TestStudy) → List (TestPart s)
+testPartsFor taimurTestStudy = testParts
+
 testAxes : List TestAxis
 testAxes =
   participantAuthority ∷ ecologicalEffect ∷ historicalDurability ∷ []
@@ -50,13 +54,13 @@ testAxisName historicalDurability = "historical-durability"
 
 everyTestPartListed :
   (s : TestStudy) (p : TestPart s) →
-  p Data.List.Membership.Propositional.∈ testParts
+  p ∈ testPartsFor s
 everyTestPartListed taimurTestStudy studyQuestion = here refl
 everyTestPartListed taimurTestStudy studyMethod = there (here refl)
 everyTestPartListed taimurTestStudy studyInference = there (there (here refl))
 
 everyTestAxisListed :
-  (a : TestAxis) → a Data.List.Membership.Propositional.∈ testAxes
+  (a : TestAxis) → a ∈ testAxes
 everyTestAxisListed participantAuthority = here refl
 everyTestAxisListed ecologicalEffect = there (here refl)
 everyTestAxisListed historicalDurability = there (there (here refl))
@@ -72,7 +76,7 @@ testScope = W.study-world-scope
   testAxisName
   (taimurTestStudy ∷ [])
   (λ { taimurTestStudy → here refl })
-  (λ { taimurTestStudy → testParts })
+  testPartsFor
   everyTestPartListed
   testAxes
   everyTestAxisListed
