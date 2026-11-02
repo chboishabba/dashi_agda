@@ -114,18 +114,19 @@ def main() -> int:
             if creator_matrix_ready and creator_matrix_ready.get("reaction_count", 0) > 0:
                 # Reuse the existing candidate-only chemistry adapter, not
                 # a second author-chart ontology/compiler or mixed matrix.
-                run([
+                creator_ontology_exit = run([
                     py, "scripts/build_bh4_pathway_ontology.py",
                     "--matrix", str(creator_chart_matrix),
                     "--rhea", str(creator_chart_rhea),
                     "-o", str(creator_chart_ontology),
                     "--jsonld-output", str(creator_chart_jsonld),
-                ])
-                run([
-                    py, "scripts/build_bh4_pathway_review.py",
-                    "--pathway", str(creator_chart_ontology),
-                    "-o", str(creator_chart_review),
-                ])
+                ], allow_partial=True)
+                if creator_ontology_exit == 0:
+                    run([
+                        py, "scripts/build_bh4_pathway_review.py",
+                        "--pathway", str(creator_chart_ontology),
+                        "-o", str(creator_chart_review),
+                    ], allow_partial=True)
     run([py, "scripts/acquire_bh4_parameter_evidence.py", "--template", "--matrix", str(matrix), "-o", str(template)])
     solver = template
     if a.manifest:
@@ -211,9 +212,9 @@ def main() -> int:
     creator_matrix = (load(creator_chart_matrix)
                       if a.acquire_creator_chart_reactions else None)
     creator_ontology = (load(creator_chart_ontology)
-                        if a.acquire_creator_chart_reactions else None)
+                        if a.acquire_creator_chart_reactions and creator_chart_ontology.exists() else None)
     creator_review = (load(creator_chart_review)
-                      if a.acquire_creator_chart_reactions else None)
+                      if a.acquire_creator_chart_reactions and creator_chart_review.exists() else None)
     network: dict[str, object] = {}
     if sab:
         network["sabio"] = {k: sab.get(k) for k in ("schema", "proteins_completed", "proteins_with_entries", "kinetic_entry_count", "kinetic_parameter_count")}
