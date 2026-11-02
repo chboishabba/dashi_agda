@@ -51,6 +51,25 @@ For reactions it records whether abundance context exists while retaining `abund
 
 Crucially, `solver_payable` is read only from the existing normalized parameter manifest's `usable_for_joint_flux_witness`. Context coverage never flips a payment gate.
 
+## Creator-chart-first finite comparison
+
+The runner now compares the existing 12-reaction finite panel against
+a bounded **original creator chart Rhea-ID observation index**. Input:
+docs/biology/KitzerowPublishedRheaChartObservedIndex.v1.json.
+Output:
+artifacts/biology/kitzerow-primary-chart-rhea-crosswalk.json.
+
+The source is Kimberly Kitzerow's *BH4/Folate/Cobalamin/Homocysteine
+Pathway* (ResearchGate 377218425); the page dates the work January 2024
+but also reports a distinct 2025-08-08 full-text upload. Its original
+PDF layout and whole proprietary graph are not verified. Literal ID
+intersection does not prove identical reaction context, causal ownership,
+whole-model coverage, or in-vivo flux. Native SensibLaw generic-world
+consumer: https://github.com/chboishabba/SensibLaw/pull/512 .
+
+Prefer curated Reactome SBML Level 3 and BioPAX Level 3 releases for
+already-published pathways before implementing new standards export.
+
 ## Source-attributed pathway/ontology interop
 
 The Phase-4 runner also emits a partial BH4 pathway graph from the existing
