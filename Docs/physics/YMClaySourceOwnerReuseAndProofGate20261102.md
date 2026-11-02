@@ -78,3 +78,22 @@ All new claims about source-written Agda files mean proof *terms* are
 present in GitHub; their kernel acceptance is not observed. Preserve
 historical theorem attribution: Wilson; Bałaban; Osterwalder and Schrader;
 CMP119/CMP116 cited authors and original DASHI contributors.
+
+
+## 2026-11-02 follow-on: reused finite R443 integration algebra
+
+This earlier document's R443-H open gate has been **narrowed**, not fully discharged.
+Read the updated [source/PR archaeology and actual implementation ledger](YMClaySUNMatrixR443R445R320R333MaxCut20261102.md#explicit-repo-and-pr-archaeology-and-new-finite-r443-implementation-2026-11-02).
+The Agda branch now source-writes `YMClayFiniteProductHaarOrderedAlgebraExact` and
+`YMClaySUNMatrixProductHaarR443NumeratorExact`. Together they derive the
+**whole finite product** zero/add/scale/positivity laws and R443/R431 numerator
+C3 invariance from existing one-link Fubini/permutation and *the same*
+literal SU(N) Wilson–Gibbs density. The needed single-link ordered Haar
+authority, real compact matrix/normalized trace, 1024-bond C3 codec, selected
+six-plane action symmetry and source integration test algebra remain explicit.
+The imported compact Lie standard analysis owner contains postulates.
+Do not identify this finite-source theorem with the selected R124/CMP119
+stress/mixed-metric source or R445/R320/R333 physical continuum target.
+
+**Proof status:** connector readback and doc sync; Agda kernel and CI not run,
+transitive trust not cleared, full Clay physical theorem OPEN.
