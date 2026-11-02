@@ -1473,3 +1473,27 @@ Riemann (1859), Bishop & Bridges (1985), Zachary Murray
 owners. Any new reductions are owned by the
 DASHI formalisation project; external generic theorem
 reports must never be recorded as kernel proof receipts.
+
+
+### 2026-11-03 final source-readback and explicit import fixes
+
+Post-tranche source hygiene commits:
+`2df7a6fc8d6c6e9b45a39d1f93a4cb4d4acd4c75`
+explicitly imports the Nat reciprocal rational-order
+constructor `Int.+≤+` in the original
+`BishopRiemannDirichletExponentialTermExact`;
+`f8ef6a4bed6145a747a09ee51087a05d8af6783e`
+explicitly imports Nat addition `_+_` in the
+vendor-subsequence-based `BishopDirichletUniformBaselTailsExact`.
+
+The GitHub connector read back all 7 changed source/rollup
+and roadmap paths after these commits. The new declared
+names are present. The edited source does not contain a literal
+`postulate` declaration or an Agda `{! !}` source hole.
+A static delimiter count checked balanced `()` and `{}`
+in the key mathematical modules. Those checks are *not*
+Agda parser, elaborator, positivity, termination, safe-mode,
+dependency or kernel receipts. This is an intentional
+SOURCE-ONLY state under the instruction to skip CI;
+the canonical mathematical terminal proof gates above
+remain exactly as recorded.
