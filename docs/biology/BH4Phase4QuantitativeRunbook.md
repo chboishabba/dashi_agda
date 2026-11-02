@@ -83,6 +83,27 @@ PDF/figure or establish whole-author-network completeness.
 Prefer curated Reactome SBML Level 3 and BioPAX Level 3 releases for
 already-published pathways before implementing new standards export.
 
+## Optional creator-selected Rhea/ChEBI acquisition
+
+The same Phase-4 runner also supports
+
+    python3 scripts/run_bh4_phase4_maxcut.py --acquire-creator-chart-reactions
+
+This does **not** enlarge or silently merge the original 12-reaction/29-species
+matrix. It requests the bounded creator-observed Rhea IDs from a separate
+source index, retains errors and source hashes, produces an independent
+source-selected stoichiometric matrix and reuses the same partial ontology
+and review builders for that separate object. A creator source reaction
+in Rhea is evidence of its curated equation and participants; it does not
+supply shared compartment, transport, enzyme abundance, causal direction
+or flux. Source acquisition can fail, and the side-path must not automatically
+invalidate the independent finite-panel run.
+
+Rhea live REST/SPARQL receipts carry acquisition-time details; the exact
+release must be separately verified rather than a previous release label
+being inherited as current. The author original PDF binary and entire
+proprietary BioGene graph are not available in this workflow.
+
 ## Source-attributed pathway/ontology interop
 
 The Phase-4 runner also emits a partial BH4 pathway graph from the existing
