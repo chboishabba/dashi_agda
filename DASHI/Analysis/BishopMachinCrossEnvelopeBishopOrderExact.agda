@@ -17,6 +17,7 @@ module DASHI.Analysis.BishopMachinCrossEnvelopeBishopOrderExact where
 
 open import Agda.Builtin.Nat using (Nat; suc; _*_; _+_)
 import Data.Nat.Properties as NatP
+open import Data.Nat.Base using (_≤_)
 open import Data.Rational.Unnormalised as Q using (ℚᵘ; _/_; _≤_)
 open import Data.Integer.Base using (+_)
 
@@ -33,7 +34,7 @@ normalizedDenominator n =
   suc (2 * n) * (4780 * Cross.pow57121 n)
 
 normalizedNumeratorBelowDenominator : (n : Nat) →
-  normalizedNumerator n NatP.≤ normalizedDenominator n
+  normalizedNumerator n ≤ normalizedDenominator n
 normalizedNumeratorBelowDenominator n =
   Cross.machinGeometricEnvelopeCrossMultiplied n
 
