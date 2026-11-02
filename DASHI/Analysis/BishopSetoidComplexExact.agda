@@ -22,13 +22,14 @@ module DASHI.Analysis.BishopSetoidComplexExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Product.Base using (_×_; _,_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
 import Real as BishopReal
 import RealProperties as BishopP
 
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpPositive
+import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpAdd
 import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
@@ -454,3 +455,82 @@ imaginaryExponentialProductGivesAddition T x y product =
   ,
   imaginaryPhaseProductGivesCosineAddition T x y
     (imaginaryExponentialProductGivesPhaseProduct T x y product)
+
+
+------------------------------------------------------------------------
+-- K05/K04d: THE FULL ORIGINAL BISHOP COMPLEX EXPONENTIAL PRODUCT
+-- IS A PURE CARTESIAN CONSEQUENCE OF ITS ALREADY-PROVED REAL
+-- CAUCHY PRODUCT AND THE TWO STILL-REQUIRED NATIVE TRIG LAWS.
+--
+-- This is a SAME-OBJECT theorem on the pinned BishopComplex carrier
+-- and original Round11 factorial series. It does NOT assume a
+-- generic constructed-real complex character or trigonometric
+-- identity record. It also does not claim to prove the missing
+-- pure-imaginary Cauchy multiplication identity.
+------------------------------------------------------------------------
+
+expCAddFromRealAndTrigAddition :
+  (T : BishopSetoidComplexTranscendentals) →
+  (x y a b : BishopReal.ℝ) →
+  BishopSineAdditionAt T y b →
+  BishopCosineAdditionAt T y b →
+  expC T ((complex x y) +C (complex a b))
+    ≈C (expC T (complex x y) *C expC T (complex a b))
+expCAddFromRealAndTrigAddition
+    T x y a b sineAdd cosineAdd =
+  complex-equivalent
+    (BishopP.≃-trans
+      (BishopP.*-cong
+        (ExpAdd.bishopExpAdd x a)
+        cosineAdd)
+      (let open BishopP.ℝ-Solver
+       in solve 6
+         (λ ex ea cy sy cb sb →
+           (ex ⊗ ea) ⊗ ((cy ⊗ cb) ⊖ (sy ⊗ sb))
+           ⊜ ((ex ⊗ cy) ⊗ (ea ⊗ cb))
+             ⊖ ((ex ⊗ sy) ⊗ (ea ⊗ sb)))
+         BishopP.≃-refl
+         (Exp.bishopExp x)
+         (Exp.bishopExp a)
+         (Elementary.bishopCos (dataSet T) y)
+         (Elementary.bishopSin (dataSet T) y)
+         (Elementary.bishopCos (dataSet T) b)
+         (Elementary.bishopSin (dataSet T) b)))
+    (BishopP.≃-trans
+      (BishopP.*-cong
+        (ExpAdd.bishopExpAdd x a)
+        sineAdd)
+      (let open BishopP.ℝ-Solver
+       in solve 6
+         (λ ex ea cy sy cb sb →
+           (ex ⊗ ea) ⊗ ((sy ⊗ cb) ⊕ (cy ⊗ sb))
+           ⊜ ((ex ⊗ cy) ⊗ (ea ⊗ sb))
+             ⊕ ((ex ⊗ sy) ⊗ (ea ⊗ cb)))
+         BishopP.≃-refl
+         (Exp.bishopExp x)
+         (Exp.bishopExp a)
+         (Elementary.bishopCos (dataSet T) y)
+         (Elementary.bishopSin (dataSet T) y)
+         (Elementary.bishopCos (dataSet T) b)
+         (Elementary.bishopSin (dataSet T) b)))
+
+-- Consequently only ONE remaining PURE-IMAGINARY exponential
+-- multiplicativity equation, on ALL Bishop real pairs, is needed
+-- to establish expC(z+w)=expC(z)expC(w) on the entire ORIGINAL
+-- Bishop Cartesian complex and thereby transport to K04d.
+expCAddFromImaginaryMultiplicativity :
+  (T : BishopSetoidComplexTranscendentals) →
+  ((y b : BishopReal.ℝ) →
+    expC T (pureImaginary (BishopReal._+_ y b))
+      ≈C (expC T (pureImaginary y) *C
+           expC T (pureImaginary b))) →
+  (z w : BishopComplex) →
+  expC T (z +C w) ≈C (expC T z *C expC T w)
+expCAddFromImaginaryMultiplicativity
+    T imaginaryProduct (complex x y) (complex a b) =
+  let
+    laws = imaginaryExponentialProductGivesAddition
+      T y b (imaginaryProduct y b)
+  in
+  expCAddFromRealAndTrigAddition
+    T x y a b (proj₁ laws) (proj₂ laws)
