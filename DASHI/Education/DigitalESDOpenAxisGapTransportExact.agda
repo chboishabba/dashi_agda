@@ -64,6 +64,11 @@ record ResearchGapRoute
     (axis : World.Axis scope) : Set₁ where
   constructor research-gap-route
   field
+    -- Cross-source is a typed source-identity distinction. A paper compared
+    -- with itself is an intrastudy reinterpretation, not independent support.
+    donorIsDistinctSource :
+      World.studySource scope (World.study donor) ≡
+      World.studySource scope (World.study recipient) → ⊥
     researchQuestion : String
     missingRecipientEvidence : String
     recipientReallyUnmeasured :
