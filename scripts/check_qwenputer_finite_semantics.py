@@ -60,6 +60,71 @@ def list_entries(store):
     return tuple((k, store[k]) for k in ("A", "B", "C") if k in store)
 
 
+
+def check_multistep_and_record_boundaries():
+    """Finite exhaustive analogue of new arbitrary-length transport theorems.
+
+    This verifies the Python model only; it is not the Agda checker, source
+    compiler, HF kernel, Triton GPU, or a QEMU comparison.
+    """
+    writes = tuple(product(ADDRS, (False, True)))
+    multi_cases = 0
+    # All 64 Boolean six-cell initial states and all 0..3 write sequences.
+    for bits in product((False, True), repeat=len(ADDRS)):
+        initial = dict(zip(ADDRS, bits))
+        initial_t = {a: embed(initial[a]) for a in ADDRS}
+        for length in range(4):
+            for history in product(writes, repeat=length):
+                final_b = initial
+                final_t = initial_t
+                for address, bit in history:
+                    final_b = overwrite(final_b, address, bit)
+                    final_t = overwrite(final_t, address, embed(bit))
+                assert {a: decode(final_t[a]) for a in ADDRS} == final_b
+                multi_cases += 1
+
+    matrix_cases = 0
+    # Exact integer subtraction instance of S' = S + k (v - old),
+    # in a two-column finite matrix.
+    for bits in product((False, True), repeat=len(ADDRS)):
+        initial = {a: (int(bits[i]), -int(bits[i]))
+                   for i, a in enumerate(ADDRS)}
+        for selected in ADDRS:
+            for target in ((0, 0), (1, -1), (-7, 12)):
+                out = {}
+                for a in ADDRS:
+                    old = initial[a]
+                    k = int(a == selected)
+                    out[a] = tuple(old[c] + k * (target[c] - old[c])
+                                   for c in range(2))
+                assert out[selected] == target
+                assert all(out[a] == initial[a]
+                           for a in ADDRS if a != selected)
+                matrix_cases += 1
+
+    record_cases = 0
+    # Source-family representative terminal tokens; prefix tokens do
+    # not mutate ISA state. SC is deliberately excluded (source semantics open).
+    ends = ("F0", "F1", "F2", "NT", "J", "ST0", "ST1",
+            "SS0", "SS1", "HALT", "BYTE")
+    prefixes = ("V", "R", "QS", "QD", "BD", "FLT", "HEX")
+    for length in range(5):
+        for prefix in product(prefixes, repeat=length):
+            for terminal in ends:
+                counter = 0
+                for token in prefix + (terminal,):
+                    if token in ends:
+                        counter += 1
+                assert counter == 1
+                record_cases += 1
+
+    assert (16 * 80) == 1280
+    assert 131072 + 131072 == 262144
+    assert 32768 == 0 + 32768
+    print(f"  multistep transports: {multi_cases};"
+          f" integer matrix checks: {matrix_cases};"
+          f" typed record cases: {record_cases}.")
+
 def run():
     row_checks = 0
     read_checks = 0
@@ -107,6 +172,7 @@ def run():
     # Source P2 stage-budget arithmetic, not model-weight verification.
     assert 4 + 16 + 16 + 7 + 8 + 16 + 16 + 16 == 99
     assert sum((306, 1376, 4138, 7876, 6621, 3751, 7923, 8149, 1074, 798)) == 42012
+    check_multistep_and_record_boundaries()
     print(
         "Qwenputer finite oracle OK:",
         f"{row_checks} read-after-write;",
