@@ -45,7 +45,10 @@ import DASHI.Analysis.BishopMachinZetaRegularHalfPlaneExact as OriginalZeta
 import DASHI.Analysis.BishopMachinZetaSequentialContinuityReducerExact as Continuity
 import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Rational
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
+import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as ExpTerm
 import DASHI.Analysis.BishopMachinGeometricBishopRateExact as Rate
+import DASHI.Analysis.BishopSetoidComplexExact as Setoid
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Analysis.BishopMachinSignedFiniteHistoryExact as Signed
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopMachinPiRationalWindowExact as Window
@@ -296,3 +299,85 @@ module AtOriginalCompletedZeta
       Z.limitPoint
       (domainAdequacy gate Z.limitPoint limitInsideRealHalfPlane)
       agreement
+
+  ------------------------------------------------------------------------
+  -- K04d: ACTUAL SOURCE SERIES SPECIALIZATION.
+  --
+  -- This is the selected original Bishop exp_C and original convergent
+  -- Bishop -log(1-x) Nat-log candidate, rather than an arbitrary free
+  -- Dirichlet term family. The original half-plane same-value theorem
+  -- still must be established by the analytic implementer, as must
+  -- the σ>2 Basel comparison and local uniform continuity.
+  ------------------------------------------------------------------------
+
+  sourceExpDirichletTerms :
+    (T : Setoid.BishopSetoidComplexTranscendentals) →
+    ((n : Nat) →
+      Elementary.InOpenUnitInterval
+        (Setoid.dataSet T) (ExpTerm.natLogArgument n)) →
+    Dirichlet.BishopDirichletTermFamily
+  sourceExpDirichletTerms T inside =
+    ExpTerm.bishopDirichletTermFromOriginalLogSeries T inside
+
+  originalCompletedZetaMatchesSourceExpAtStage :
+    (T : Setoid.BishopSetoidComplexTranscendentals) →
+    (inside : (k : Nat) →
+      Elementary.InOpenUnitInterval
+        (Setoid.dataSet T) (ExpTerm.natLogArgument k)) →
+    (n : Nat) →
+    (regular :
+      Analytic.ZetaHalfPlaneLayer.realPartGreaterThanOne
+        halfPlane (Z.stagePoint n)) →
+    (agreement : Dirichlet.OriginalHalfPlaneDirichletAgreement
+      functions halfPlane (sourceExpDirichletTerms T inside)
+      (Z.stagePoint n)) →
+    (Bishop._≃_
+      (BC.re (Z.zetaAtStage n))
+      (BC.re
+        (Dirichlet.dirichletValue
+          (sourceExpDirichletTerms T inside) (Z.stagePoint n)
+          (Dirichlet.seriesBound agreement))))
+    ×
+    (Bishop._≃_
+      (BC.im (Z.zetaAtStage n))
+      (BC.im
+        (Dirichlet.dirichletValue
+          (sourceExpDirichletTerms T inside) (Z.stagePoint n)
+          (Dirichlet.seriesBound agreement))))
+  originalCompletedZetaMatchesSourceExpAtStage
+      T inside n regular agreement =
+    originalCompletedZetaRealEqualsSummedDirichletAtStage
+      (sourceExpDirichletTerms T inside) n regular agreement
+    ,
+    originalCompletedZetaImagEqualsSummedDirichletAtStage
+      (sourceExpDirichletTerms T inside) n regular agreement
+
+  originalCompletedZetaMatchesSourceExpAtLimit :
+    (T : Setoid.BishopSetoidComplexTranscendentals) →
+    (inside : (k : Nat) →
+      Elementary.InOpenUnitInterval
+        (Setoid.dataSet T) (ExpTerm.natLogArgument k)) →
+    (gate : AnalyticSameObjectGate) →
+    (agreement : Dirichlet.OriginalHalfPlaneDirichletAgreement
+      functions halfPlane (sourceExpDirichletTerms T inside)
+      Z.limitPoint) →
+    (Bishop._≃_
+      (BC.re Z.zetaAtLimit)
+      (BC.re
+        (Dirichlet.dirichletValue
+          (sourceExpDirichletTerms T inside) Z.limitPoint
+          (Dirichlet.seriesBound agreement))))
+    ×
+    (Bishop._≃_
+      (BC.im Z.zetaAtLimit)
+      (BC.im
+        (Dirichlet.dirichletValue
+          (sourceExpDirichletTerms T inside) Z.limitPoint
+          (Dirichlet.seriesBound agreement))))
+  originalCompletedZetaMatchesSourceExpAtLimit
+      T inside gate agreement =
+    originalCompletedZetaRealEqualsSummedDirichletAtLimit
+      (sourceExpDirichletTerms T inside) gate agreement
+    ,
+    originalCompletedZetaImagEqualsSummedDirichletAtLimit
+      (sourceExpDirichletTerms T inside) gate agreement
