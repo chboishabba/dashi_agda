@@ -499,3 +499,74 @@ owners of E8 roots, Leech gluing, C3/369, finite consumers and
 Ibrahim's Monster 3B remain credited in their original sources.
 No *digital_esd*/ESD modules were edited. No tests, CI or
 Agda kernel invocation are claimed for this tranche.
+
+
+## 2 November — C2 train-only diagnosis and exact F-ledger synchronization
+
+The source-written finite JQ1/teacher-erasure results are now accompanied
+by a **user-executed diagnostic** for the original trained C2 candidate:
+dense CE 2.54566636 versus student 8.60841485 over 4032 targets
+(training split); layer-1 isolated substitution +3.42024 CE,
+layers 0–1 +4.00670 CE. Teacher-forced layer-1 relative FFN MSE
+86.6193 and RMS ratio 9.273. All logits finite. Route/sign statistics
+come from only the first two sampled training sequences, not from
+the entire split. User verified LeechTransformer PR #4 125 passing
+tests plus 7 subtests, including a corrected zero-residual shared-E8
+history decode. **The same numerical failures remain open; no
+teacher-free student or WAN superiority has been demonstrated.**
+
+The primary executable ledger is the new 2 November section of
+`LeechTransformer/docs/e8_first_quality_guarded_joint_history_maxcut_20261101.md`.
+Golden theorem owners/reuse and exact outstanding hypotheses:
+
+- **F01 parity**: reuse
+  `DASHI.Physics.YangMills.PhysicalInvolutionParityExact` and
+  `LeechSignedHistoryExpertBidiExact`. Formally construct even/odd
+  decomposition with declared additive/half laws. The scalar GELU
+  reflection identity is a separate analytic authority boundary.
+- **F02 odd-only error floor (OPEN)**: for an involution I and
+  inner-product V, prove pair-MSE lower bound by norm² of target
+  even component. This explains why a pure signed/odd network
+  cannot model a non-odd biased dense teacher; it does not prove
+  adequacy of the implemented even channel.
+- **F03–F04 chart/action**: keep
+  `conjugateIntertwinesInverse` separate from a concrete router,
+  selected top-k weights/tie-breaking and full recurrent-state
+  equivariance. Reuse `LeechGenericTopKActionTransportExact`.
+- **F05–F06 learning gate**: reuse
+  `studentRolloutIndependentOfGates` and
+  `fullAdmissionPreservesEntireTrace`, including full gates
+  as an explicit premise. Actual numerical autograd, learning,
+  checkpoint parity, all-gate admission and model quality are
+  Python/experimental obligations, not `refl`.
+- **F07–F08 error transport (OPEN)**: prove the
+  layerwise norm/error inequality
+  `e(i+1) <= Lip(S(i))*e(i) + delta(i)`,
+  telescope the exact products, then derive a
+  same-target logit CE bound using existing norm/real-analysis owners.
+  No fabricated teacher/student Lipschitz constants.
+- **F09–F10 history and consumer**: reuse
+  `everyExpertReopensSharedCanonical`,
+  `LeechJointStateConsumerQuotientExact` and
+  `ConsumerQuotientBaseChangeExact`; decode/corrections and
+  selected-history authority remain separate.
+- **F11–F12 distributed/semantic**: HMAC verify is not
+  crash-durable exactly-once execution; independent labelled
+  2x2x2 cube target correctness and common-probe triadic
+  difference are not causality or argument semantics.
+
+User workstation evidence, Python regression execution,
+source-written Agda theorem and Agda kernel certification must stay
+**four separate receipt classes**. Current Agda PR #1442
+kernel status for this tranche remains **not executed**, even though
+the Python PR #4 regressions have passed. No ESD edits, source
+renaming, import-graph replacement, analytic same-object promotion
+or Ibrahim Monster 3B ownership reassignment.
+
+**Deliverable cut:** D1 source-bound C2 receipt (user executed, local
+not repo-stored), D2 layer-one causal ablations (open),
+D3 global CE/KL trained candidate (open), D4 all-gates-one
+teacher-free validated checkpoint (open), D5 accepted Agda
+kernel/refinement receipts (open), D6 complete authenticated
+real-network Pareto (open), D7 independently labelled semantic
+pairs/trialectic cube (open).
