@@ -944,6 +944,8 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFami
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixSpatialC3RealFubiniExact as SUNRealC3
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeInversePlaquetteRealTraceExact as SUNInversePlane
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSixPlaneC3FromInverseTraceExact as SUNSixC3
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact as SUNHaarR443
 import DASHI.Physics.YangMills.YMClaySUNMatrixR445R320SameCovarianceExact as SUNCov
@@ -1057,8 +1059,17 @@ open SUNRealC3 public using
   (realSumSitesSpatialC3
   ; nativeSUNSixDeficitC3FromLocal
   ; nativeSUNWilsonActionC3FromLocal)
+-- Original SUN inverse plaquette and six real plane C3 from one real
+-- matrix trace-inversion law. Not an abstract Wilson action assumption.
+open SUNInversePlane public using
+  (sunSwappedPositivePlaneIsInverse
+  ; sunSwappedPositivePlaneRealTrace)
+open SUNSixC3 public using
+  (nativeSUNSixAtC3FromInverseRealTrace
+  ; sixRealC3Reindex)
 open SUNHaarR443 public using
-  (nativePhysicalIntegrationLaws
+  (nativeC3BoundaryFromInverseTrace
+  ; nativePhysicalIntegrationLaws
   ; nativePhysicalPartitionPositive
   ; nativeProductHaarR443
   ; nativeProductHaarNumeratorC3
