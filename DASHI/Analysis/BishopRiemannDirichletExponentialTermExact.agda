@@ -42,6 +42,14 @@ import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Analysis.BishopRiemannAnalyticSetoidExpReuseExact as ExpBridge
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpAdd
+import DASHI.Foundations.BishopInverseSquareProductExact as Inverse
+import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact as Reciprocal
+import DASHI.Foundations.BishopNatRealPositiveExact as NatPositive
+import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
+import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as BaselNat
+import RealProperties as RP
+
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 
 -- The exact logarithm of positive Nat is still the next nontrivial
@@ -187,3 +195,65 @@ bishopDirichletTermFromOriginalLogSeries :
 bishopDirichletTermFromOriginalLogSeries T inside =
   bishopDirichletExponentialTerm T
     (natLogViaOriginalNegativeLog T inside)
+
+
+------------------------------------------------------------------------
+-- K04d LOG-INVERSE -> RECIPROCAL: A NEW CONCRETE REDUCTION.
+--
+-- The remaining exp(log(n+1)) theorem is a genuine series theorem;
+-- it is NOT assumed globally or replaced by a legacy logarithm.
+-- Once supplied for the selected original Bishop log candidate,
+-- the *already proved* exp(x)*exp(-x)=1 and the original Bishop
+-- inverse-uniqueness theorem force its negative exponential to be
+-- the actual inverse of the embedded positive natural number.
+-- The canonical Nat reciprocal identification then gives 1/(n+1).
+------------------------------------------------------------------------
+
+negativeExponentialAtNatLogIsCanonicalReciprocal :
+  (logNat : NatLogCandidate) (n : Nat) →
+  R._≃_
+    (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  R._≃_
+    (Exp.bishopExp (R.- (logNat n)))
+    (Inverse.inverse
+      (NatReal.natReal (suc n))
+      (Reciprocal.xNonzero
+        (NatPositive.natRealSuccessorStrictlyPositive n)))
+negativeExponentialAtNatLogIsCanonicalReciprocal logNat n correct =
+  RP.≃-symm
+    (Inverse.inverseFromCancellation
+      (NatReal.natReal (suc n))
+      (Exp.bishopExp (R.- (logNat n)))
+      (Reciprocal.xNonzero
+        (NatPositive.natRealSuccessorStrictlyPositive n))
+      candidateCancels)
+  where
+    candidateCancels :
+      R._≃_
+        (R._*_
+          (Exp.bishopExp (R.- (logNat n)))
+          (NatReal.natReal (suc n)))
+        R.1ℝ
+    candidateCancels =
+      RP.≃-trans
+        (RP.*-congˡ (RP.≃-symm correct))
+        (RP.≃-trans
+          (RP.*-comm
+            (Exp.bishopExp (R.- (logNat n)))
+            (Exp.bishopExp (logNat n)))
+          (ExpAdd.bishopExpTimesNegativeIsOne (logNat n)))
+
+negativeExponentialAtNatLogIsEmbeddedReciprocal :
+  (logNat : NatLogCandidate) (n : Nat) →
+  R._≃_
+    (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  R._≃_
+    (Exp.bishopExp (R.- (logNat n)))
+    (R._⋆ (BaselNat.reciprocalNatRational n))
+negativeExponentialAtNatLogIsEmbeddedReciprocal logNat n correct =
+  RP.≃-trans
+    (negativeExponentialAtNatLogIsCanonicalReciprocal
+      logNat n correct)
+    (BaselNat.natRealInverseIsEmbeddedReciprocal n)
