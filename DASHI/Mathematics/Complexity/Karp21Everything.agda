@@ -58,3 +58,9 @@ import DASHI.Mathematics.Complexity.Karp21FiniteNodeSetCoverDecisionExact
 import DASHI.Mathematics.Complexity.Karp21MalformedWordTotalReductionExact
 
 import DASHI.Mathematics.Complexity.Karp21UpperPairGraphEnumerationExact
+
+import DASHI.Mathematics.Complexity.Karp21VOAZ2CutOrbitExact
+
+import DASHI.Mathematics.Complexity.Karp21VOAGradeActionCertificateWeldExact
+
+import DASHI.Mathematics.Complexity.Karp21VOAGradeDimensionCutSeparationExact
