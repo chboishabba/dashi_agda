@@ -1,3 +1,10 @@
+## 2026-11-02 — source/PR-wide Yang–Mills max-cut reuse, finite product Haar algebra and R443 numerator
+
+- Explicitly searched named Fubini, SU(N), Haar, Wilson, CMP119, CMP116, mixed-J, OS/Hamiltonian and spectral terms in both code indices and the current Agda branch; inspected relevant historical Agda/Lean PR changed-file inventories. Recovered older `CompactLieAnalyticPackage.NormalizedHaarTheory`, `BalabanFiniteSumFubiniExact`, selected CMP119 stress source, CMP116 R406 and R320 owner, and Lean PR #7 bounded-spectrum/Cauchy mixed-source donors.
+- Added `YMClayFiniteProductHaarOrderedAlgebraExact`, which derives N-link zero/add/scale/positive integration from existing one-link ordered laws; `YMClaySUNMatrixProductHaarR443NumeratorExact`, which constructs real SU(N) same-Gibbs finite integration laws and routes existing finite-product C3 symmetry through original R443/R431 to the physical numerator; wired both into the Balaban TOE regression imports. Source-written, NOT Agda-kernel-accepted.
+- The `OneLinkProductHaar` record is a total functional on arbitrary link functions. It is **not** automatically continuous Borel Haar, which requires appropriate measurability and integrability. Existing compact-Lie standard authority includes explicit postulates. Actual compact matrix/trace, one-link physical Haar, source codec, selected spatial C3, CMP119/R124 metric insertion, R445 UV/IR, R320 CMP116 source estimate and R333 same-OS physical mass gap remain OPEN.
+- More detail and proof-status separation: `Docs/physics/YMClaySUNMatrixR443R445R320R333MaxCut20261102.md`. No kernel run and no CI (deferred). Standard Wilson/Bałaban/OS authors, prior DASHI owners and Aristotle Lean donors retain ownership.
+
 ## 2026-11-02 — original plaquette archaeology and canonical generic Wilson reconciliation
 
 - Explicitly searched all native signed/positive plaquettes, Wilson action/trace, finite quaternion/Hodge, Haar/Fubini, cutoff/projective and spectral sources and PRs. The existing `SUNWilsonAction` and `SUNWilsonClassFunction` already own the **generic** finite SU(N) action and gauge theorem.
