@@ -1,5 +1,7 @@
 # Yang–Mills cross-domain symmetry and dimension max-cut (1 November 2026)
 
+**2026-11-03 Lorentz directional 3+1 follow-on (source-written):** [exact attribution/derivation and KK/YM max-cut](Lorentz31SignatureKKYMProvenanceMaxCut20261103.md). The older original arrow/isotropy proof (PR #70), dashifine numeric search and B4 comparison are genuine prior DASHI owners. New safe finite directional probe theorem has no 31 label, and the new Lorentzian Hodge square is -I versus existing Euclidean +I. These do NOT yet inhabit physical probe calibration, OS analytic continuation or KK same-selected-action stress. The old tagged-profile critique applies to that source route only; it does not deny earlier independently pursued directional work. Independent Agda kernel check remains OPEN.
+
 Stacked on the canonical [Voyager source audit](YMClayVoyager20260929CoverageAudit.md) and Agda PR #1444 / its base YM #1440. This is **repository source archaeology plus bounded new finite theorems**, not a new physical TOE or a Clay acceptance claim. Video: Voyager, *How Close Are We To Proving Yang-Mills and Mass Gap?*, 2026-09-29. **The user-supplied transcript does not contain “zeta”, “ζ”, “Riemann zeta”, “spectral zeta”, or “zeta regularisation”.** Zeta below is cross-pollination proposed by DASHI, not attributable to the narrator.
 
 ## ZKP O/R/C/S/L/P/G/F
