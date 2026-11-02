@@ -1,3 +1,10 @@
+## 2026-11-02 — original real SU(N) spatial C3 site-sum and normalized Gibbs mass (source-written)
+
+- Searched all named finite Wilson/plaquette, SU(N) trace, Haar/Fubini, CMP119, CMP116 mixed-J, R320/R333 and OS spectral terms and relevant earlier PR inventories before new implementation.
+- Reused `BalabanClayGate4FiniteWeightedAdjointFubiniExact.finiteFubini` as a real additive-monoid theorem. New `YMClaySUNMatrixSpatialC3RealFubiniExact` proves two finite swaps for the native 4D side-four real C3 site-sum and constructs global six-positive-plane Wilson deficit and beta-action invariance **from** the local original six-plane identity.
+- Replaced the `YMClaySUNMatrixProductHaarR443NumeratorExact` global action-invariance source field with `sixPlaneAtC3`. Added native normalized expectation C3, numerator-of-one = selected partition, and probability mass-one via one-link positive Haar partition and a single real self-division law.
+- Canonical Balaban TOE regression imports these owners. Exact pending physical leaf is local real SU(N) inverse-trace orientation, genuine original bond/compact Haar interface, CMP119 physical source extraction, varying-lattice R445, differentiated CMP116 R320 and same-H OS R333 uniform spectral mass gap. Source written, not Agda kernel checked; CI deferred. No Clay promotion.
+
 ## 2026-11-02 — corrected Lean PR #15 compact Haar and physical conditional donor inventory
 
 - GitHub PR-title search exposed Lean PR #15 (291 changed files), previously missed by default-branch code index. Direct `refs/pull/15/head` source inspection confirms mathlib compact unit-quaternion SU2 one-link Haar, literal independent product-Haar on 4D link configuration, whole-link Haar/product identification, canonical selected finite CMP119 Gibbs conditional on source and integrability, Prokhorov extraction conditional on physical tightness, CMP116 mixed two-observable half-rate transport conditional on finite localization, and OS/spectral conditional no-pollution.
