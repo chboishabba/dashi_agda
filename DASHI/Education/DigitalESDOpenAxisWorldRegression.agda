@@ -85,13 +85,12 @@ testScope = W.study-world-scope
 testWorld : W.AccountedStudyWorld testScope
 testWorld = W.accounted-study-world
   (λ s p axis →
-    W.unmeasuredForQuestion
-      (studyPartName s p)
-      (testAxisName axis))
+    W.notYetAssessed
+      "synthetic fixture: source/axis review not performed")
 
 allThreeAxesAccountedAtMethod :
   W.accounting testWorld taimurTestStudy studyMethod historicalDurability
-  ≡ W.unmeasuredForQuestion "method" "historical-durability"
+  ≡ W.notYetAssessed "synthetic fixture: source/axis review not performed"
 allThreeAxesAccountedAtMethod = refl
 
 threePartHigherRelation : W.HigherOrderStudyRelation testScope Nat
@@ -104,7 +103,7 @@ threePartHigherRelation = W.higher-order-study-relation
   "Which higher-order joint dependencies must future EfS research observe?"
   ("DASHI synthetic test; no empirical source observations" ∷ [])
   "ternary is only a relational view"
-  "all three part/axis accounts are explicitly unmeasured"
+  "all three part/axis accounts explicitly await review"
 
 threePartRelationRetainsWorld : W.SituatedWorldRelation testScope Nat
 threePartRelationRetainsWorld =
