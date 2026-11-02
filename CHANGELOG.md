@@ -1,3 +1,10 @@
+## 2026-11-02 — source-first SU(N) matrix Wilson, product Haar and R445/R320 real-source weld
+
+- Seven Agda theorem-owner modules extend actual certified SU(N) matrix-valued original signed periodic link and six positive plaquette source. Reuses native bond group, gauge cancellation, exact spatial C3 and the physical R443→R445→R278 carriers. Derives trace class/gauge invariance, defines real Gibbs density and partition without a second free equality, and constructs the identical selected R445 finite expectation/R278 covariance.
+- Derives finite product integration permutation invariance from one-link Fubini and supplies the original SUN side-four coordinate/C3 adapter, rather than assuming arbitrary full-lattice C3 Haar invariance.
+- Canonical Balaban TOE imports/reexports the new proofs. Source audit: `Docs/physics/YMClaySUNMatrixR443R445R320R333MaxCut20261102.md`. Standard sources and all previous DASHI theorem owners credited.
+- **Still open:** concrete full SU(N) normalized Haar and vector codec, actual physical cutoff/volume R445 tails and convergence, source CMP116 R320 decay, same-OS Hamiltonian R333 uniform positive gap/nontriviality. Kernel/CI not run; **no Clay promotion**.
+
 ## 2026-11-02 — native R445 six-plane finite majorant (source-written)
 
 - Added `YMClayR445NativeSixDeficitUniformFiniteBoundExact`: applies previous rational SU(2) normalized-trace theorem, literal six positive planes and side-four nested summation monotonicity to the 0 ≤ native six-plane Wilson deficit ≤ 3072 theorem on every fixed n=3 native configuration.
