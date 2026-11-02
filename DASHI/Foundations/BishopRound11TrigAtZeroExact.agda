@@ -317,3 +317,55 @@ round11CosineAdditionOppositeFromPythagorean
                ⊜ (c ⊗ c) ⊕ (s ⊗ s))
              RP.≃-refl (sinB inputs x) (cosB inputs x))
           pythagorean)))
+
+
+------------------------------------------------------------------------
+-- REVERSE K05 ANTI-DIAGONAL CUT.
+--
+-- On the same original signed-factorial Bishop objects, the cosine
+-- addition theorem at (x,-x) is EQUIVALENT to the Pythagorean
+-- identity at x. This is not a second way of assuming trig laws:
+-- the reverse implication is proven from the native parity, cos(0),
+-- and Bishop ring identities, so the source-minimal blocker is exact.
+------------------------------------------------------------------------
+
+round11PythagoreanFromCosineAdditionOpposite :
+  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  R._≃_
+    (cosB inputs (R._+_ x (R.- x)))
+    (R._-_
+      (R._*_ (cosB inputs x) (cosB inputs (R.- x)))
+      (R._*_ (sinB inputs x) (sinB inputs (R.- x)))) →
+  R._≃_
+    (R._+_
+      (R._*_ (cosB inputs x) (cosB inputs x))
+      (R._*_ (sinB inputs x) (sinB inputs x)))
+    R.1ℝ
+round11PythagoreanFromCosineAdditionOpposite
+    inputs x cosineAddOpposite =
+  RP.≃-trans
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.+-cong
+          (RP.*-cong RP.≃-refl
+            (Parity.bishopCosNeg
+              (Round11.round11ParityInputs inputs) x))
+          (RP.-‿cong
+            (RP.*-cong RP.≃-refl
+              (Parity.bishopSinNeg
+                (Round11.round11ParityInputs inputs) x))))
+        (let open RP.ℝ-Solver
+         in solve 2
+           (λ s c →
+             (c ⊗ c) ⊖ (s ⊗ (⊝ s))
+             ⊜ (c ⊗ c) ⊕ (s ⊗ s))
+           RP.≃-refl
+           (sinB inputs x)
+           (cosB inputs x))))
+    (RP.≃-trans
+      (RP.≃-symm cosineAddOpposite)
+      (RP.≃-trans
+        (TrigCong.bishopCosCongruent
+          (Round11.round11ConcreteTermIdentification inputs)
+          (RP.+-inverseʳ x))
+        (round11CosineAtZero inputs)))
