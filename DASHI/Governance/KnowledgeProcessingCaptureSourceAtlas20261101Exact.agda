@@ -646,6 +646,16 @@ coreWeaveDDTL3CureDecember31Original = sourceReceipt
   "Amended Contract Realization Ratio numerator includes MSA billed/received contract amounts without duplication PLUS CRR Cure Proceeds from equity. Minimum ratio 0.85:1.00 after the specified February 2026 commencement, subject to the disclosed zero-denominator exception; projected contract cash denominator uses a financial model and 360-day convention."
   "Passing CRR alone does not mean customers paid cash; billed revenue may be accrued, equity cure is not customer cash, compliance cannot establish actual observed ratio, and an amendment cannot prove any cure occurred."
 
+coreWeaveDDTL3OriginalHedgeSerialRelease : SourceReceipt
+coreWeaveDDTL3OriginalHedgeSerialRelease = sourceReceipt
+  "CoreWeave Compute Acquisition Co. VII / V; US SEC"
+  "2025-07-28 Credit Agreement Exhibit 10.1 §§5.22–5.23, 6.06"
+  "2025-07-28"
+  "https://www.sec.gov/Archives/edgar/data/1769628/000176962825000033/coreweave30-ex101xtermlo.htm"
+  firstPartyIssuer
+  "§5.22 requires borrower to provide financed GPU-rack serial numbers to lenders within 60 days of each borrowing, but individual GPU serial lists from NVIDIA/Dell are subject to receipt and reasonable efforts. §5.23 requires swap/cap protection on at least 75pct of reasonably projected floating-rate loan principal by deadlines and adjustment on draws/prepayments, subject to derivative basis/conditions. §6.06 limits restricted payments by distribution conditions and specified exceptions."
+  "A 12pct flat new-money interest simulation does not describe the hedged actual DDTL 3.0 coupon; projected hedge notional != verified effective coverage, parent sponsor distribution or public GPU registry. Section 2.20 priorities and separate Interparty Agreement are not fully executable from this summary."
+
 -- An original primary statement is a receipt for what the named original
 -- says, not a receipt for the correctness of every empirical prediction.
 record AttributionBoundary : Set where
