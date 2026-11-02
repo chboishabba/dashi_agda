@@ -17478,3 +17478,15 @@ Cleanup
 - [ ] K04d: implement original Bishop-complex log/exp and n^(−s) Dirichlet series, compact Re(s)>1 locally uniform tail bound, the original half-plane domain predicate, same-object zeta equality, component continuity, and inhabit AnalyticSameObjectGate.
 - [ ] K05: prove original Round11 signed-factorial sine/cosine double-angle Cauchy product, construct and verify the original classical/Bishop weld, prove actual quarter tangent/branch gives cos=sin, and prove independent trig π uniqueness.
 - [ ] Keep twin-prime positive shifted correlation (T10), RH mid-strip zero exclusion (R10), and giant sine phase sign (P10) OPEN and separate.
+
+
+### Dirichlet-native K04d cross-pollination — 2026-11-02
+
+- [x] Reuse existing concrete Bishop Basel sum and automorphic Dirichlet comparison owner; create no new comparison/completeness authority.
+- [x] Source-write original Bishop-complex Dirichlet coordinate convergence from explicit literal Basel domination, with integer-2 Basel fibre and native `lim`.
+- [x] Source-write actual original completed-zeta ↔ Dirichlet coordinate commuting square on original Machin rational stages and π_M, conditional on exact analytic term/value identification.
+- [x] Attach source to three canonical TOE roots and synchronize provenance/missing-lemma register.
+- [ ] Pinned Agda golden typecheck of every K04b/K04d/K05 new owner and TOE imports; repair source candidates; no CI required by user.
+- [ ] K04d-TERM: original Bishop complex log of positive Nat, complex exponential and literal n^(−s) with true σ>3 Basel coordinate domination.
+- [ ] K04d-UNIFORM: locally uniform Dirichlet tails, finite term continuity, original completed-zeta epsilon-delta continuity; produce the actual analytic same-object evidence.
+- [ ] K04d-SAME: match original half-plane domain predicate and construct real original half-plane Dirichlet value agreement. Distinguish analytic zeta from finite/elliptic/PDE Dirichlet owners.
