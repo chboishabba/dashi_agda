@@ -2,6 +2,10 @@
 
 **Canonical full current roadmap:** [`Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md`](../Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md). This shorter research note is not the authoritative status ledger; use the linked file for exactly 21 nodes, 20 historical edges, eight follow-on subjects, and named remaining lemmas.
 
+## 2026-11-02 same-object K00/E20/N21 executable BIDI proof ownership
+
+The current PR adds `Karp21CookExecutableFiniteVerifierBidiExact.agda` (Cook 1971 original Boolean AST, strict SAT word parser, Boolean finite-certificate verifier with soundness/completeness and canonical-formula certificate bit bound) and `Karp21PartitionSparseCutBidiExact.agda` (Karp 1972 original signed PARTITION ↔ existing positive-threshold weighted Max-Cut graph ↔ accepted N21 two-bits-per-edge sparse certificate; upper-triangular pair-count proof). Search motivation includes Leonid Levin's 1973 search relation, **not** Michael Levin's biological work. The mathematics builds on independently existing DASHI finite-graph and Cook SAT theorem owners. Both additions are source-written and imported by `Karp21Everything.agda`, not yet kernel-accepted, not resource-bounded NP-membership or universal search proofs. The graph-word input codec, bit-machine clocks and all-21 certified DAG premises remain open.
+
 ## Leonid Levin's independently original 1973 search-problem root (2026-11-02)
 
 Leonid A. Levin, *Universal Sequential Search Problems*, *Problemy Peredachi Informatsii* 9(3), 115–116 (1973); translated as *Problems of Information Transmission* 9(3), 265–266. [Historical primary bibliographic record](https://www.mathnet.ru/eng/ppi914). Cook (1971) and Levin (1973) have distinct contributions; Karp (1972) owns the 21-problem historical reduction map. Michael Levin's biological problem-space work is **not** Leonid Levin's complexity theory. The earlier DASHI Cook–Levin source and strict bitword decoder are retained as primary in-repo proof owners.
