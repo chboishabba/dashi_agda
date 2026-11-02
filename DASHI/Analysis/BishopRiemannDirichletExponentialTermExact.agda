@@ -827,3 +827,66 @@ machinSourceRealPartAboveTwo :
   R._<_ (R._⋆ (+ 2 / 1)) (A.re machinSourceRealPoint)
 machinSourceRealPartAboveTwo =
   twoBelowMachinBishopPi
+
+
+------------------------------------------------------------------------
+-- K04d s=2: SAME ORIGINAL COMPLEX EXPONENTIAL HAS A UNIFORM
+-- TO-LIMIT ERROR CERTIFICATE ON BOTH BISHOP COORDINATES.
+--
+-- This is stronger than a finite Cauchy bound: it compares the
+-- actual selected real/imaginary Bishop limits to their true source
+-- finite prefixes. The common cutoff comes solely from the existing
+-- Basel owner. It remains conditional on the native Nat-log inverse.
+------------------------------------------------------------------------
+
+sourceExponentTwoUniformLimitError :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (inverseLaw : (n : Nat) →
+    R._≃_ (Exp.bishopExp (logNat n))
+      (NatReal.natReal (suc n))) →
+  (k : Nat) → .{{_ : NonZero k}} →
+  (m : Nat) →
+  m ≥ UniformTails.baselUniformTailCutoff k →
+  let
+    terms = bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs) logNat
+    majorant = sourceExponentTwoBaselMajorant
+      inputs logNat inverseLaw
+  in
+  (R._≤_
+    (R.∣
+      R._-_
+        (A.re (Dirichlet.dirichletValue terms sourceExponentTwo majorant))
+        (Seq.SeriesOf (Dirichlet.realTerm terms sourceExponentTwo) m)
+    ∣)
+    (R._⋆ (+ 1 / k)))
+  ×
+  (R._≤_
+    (R.∣
+      R._-_
+        (A.im (Dirichlet.dirichletValue terms sourceExponentTwo majorant))
+        (Seq.SeriesOf (Dirichlet.imagTerm terms sourceExponentTwo) m)
+    ∣)
+    (R._⋆ (+ 1 / k)))
+sourceExponentTwoUniformLimitError
+    inputs logNat inverseLaw k m mPast =
+  let
+    terms = bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs) logNat
+    majorant = sourceExponentTwoBaselMajorant
+      inputs logNat inverseLaw
+  in
+  UniformTails.baselDominatedUniformLimitError
+    (Dirichlet.realTerm terms sourceExponentTwo)
+    (λ n → Dirichlet.realDomination majorant n z≤n)
+    (Dirichlet.realDirichletConvergent
+      terms sourceExponentTwo majorant)
+    k m mPast
+  ,
+  UniformTails.baselDominatedUniformLimitError
+    (Dirichlet.imagTerm terms sourceExponentTwo)
+    (λ n → Dirichlet.imagDomination majorant n z≤n)
+    (Dirichlet.imagDirichletConvergent
+      terms sourceExponentTwo majorant)
+    k m mPast
