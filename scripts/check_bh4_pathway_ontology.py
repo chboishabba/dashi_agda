@@ -97,6 +97,11 @@ def main() -> int:
     bad = deepcopy(x); bad["neighbourhoods"][0]["edges"][0]["sameObjectVerified"] = True
     bad["neighbourhoods"][0]["edges"][0]["sameObjectClaimed"] = True
     rejects(m, r, bad, c)
+    bad = deepcopy(x)
+    bad["neighbourhoods"][0]["edges"][0]["sameObjectVerified"] = True
+    bad["neighbourhoods"][0]["edges"][0]["sameObjectClaimed"] = True
+    bad["neighbourhoods"][0]["edges"][0]["relation"] = "exact-same-object"
+    rejects(m, r, bad, c)
     bad = deepcopy(r); bad["reactions"][0]["participants"][0]["coefficient"] = 2
     rejects(m, bad, x, c)
     # Non-ChEBI Rhea compound identifiers remain source-specific, not
