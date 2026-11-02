@@ -1,4 +1,5 @@
 module DASHI.ComputerScience.ComputerScienceFibreFoundationValidationExact where
+import DASHI.ComputerScience.QwenputerRv32LayerScheduleSourceExact
 import DASHI.ComputerScience.QwenputerGatedDeltaArchitectureExact
 import DASHI.ComputerScience.QwenputerHybridStateAndFileStoreExact
 
