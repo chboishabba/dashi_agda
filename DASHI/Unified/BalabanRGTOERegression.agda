@@ -939,6 +939,7 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as SUNGauge
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as SUNGibbs
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGaugeInvariantExact as SUNGaugeAction
 import DASHI.Physics.YangMills.YMClayNativeSixPlaquetteSUNWilsonActionWeldExact as SUNCanonicalWilsonWeld
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as SUNVariable
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
@@ -1062,3 +1063,22 @@ open SUNCanonicalWilsonWeld public using
   ; canonicalNativeSiteSUNWilsonData
   ; canonicalNativeSUNWilsonSelectedListExact
   ; nativeSixAtSiteIsCanonicalSUNWilsonAction)
+
+
+-- Variable-n original periodic SUN Wilson source: n genuinely changes the
+-- four-torus, unlike a beta-only sequence on the fixed side-four source.
+-- All-n local gauge invariance and n=3 source matching are proof terms,
+-- but the continuous SU(N) Haar/UV-IR/CMP116/OS physical gates stay open.
+open SUNCanonicalWilsonWeld public using
+  (canonicalSUNSixWilsonDeficit
+  ; nativeSixGlobalIsCanonicalSUNWilsonAction
+  ; nativeSUNBetaActionIsCanonicalWilsonAction)
+open SUNVariable public using
+  (SUNPeriodicLinks
+  ; periodicSUNPositivePlaquette
+  ; periodicSUNSixDeficit
+  ; periodicSUNSixDeficitGaugeInvariant
+  ; periodicSUNWilsonActionGaugeInvariant
+  ; periodicSUNGibbsDensityGaugeInvariant
+  ; periodicSUNFiniteGibbsMeasure
+  ; sideFourPlaquetteSameNativeHolonomy)
