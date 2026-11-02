@@ -207,6 +207,11 @@ record ResearchFabricProjection
     world : AccountedStudyWorld scope
     fabric : Hyper.TypedHyperfabric Vertex Edge
     locatePart : StudyPart scope → Vertex
+    -- Flattening two differently identified study parts into one vertex
+    -- would lose the very observational distinction this projection needs.
+    locatePartPreservesIdentity :
+      (left right : StudyPart scope) →
+      locatePart left ≡ locatePart right → left ≡ right
     provenancePreservationReceipt : String
     projectionScopeReceipt : String
 
