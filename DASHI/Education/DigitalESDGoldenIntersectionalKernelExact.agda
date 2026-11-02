@@ -10,6 +10,7 @@ module DASHI.Education.DigitalESDGoldenIntersectionalKernelExact where
 -- not assert findings about any Digital-ESD participants or papers.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Primitive using (Level; lsuc)
 
 data Empty : Set where
 
@@ -83,8 +84,9 @@ collisionRulesOutLossless project answer witness cert =
 -- The certificate must reconstruct *every* declared axis observation.
 record AllAxisRoundTrip
     {Part Axis : Set}
-    (Observation : Part → Axis → Set)
-    (Stalk : Part → Set) : Set₁ where
+    {ℓ : Level}
+    (Observation : Part → Axis → Set ℓ)
+    (Stalk : Part → Set) : Set (lsuc ℓ) where
   constructor all-axis-round-trip
   field
     encode :
@@ -105,7 +107,8 @@ open AllAxisRoundTrip public
 -- an equality of summaries, names, paper DOIs or source-count receipts.
 roundTripReadback :
   {Part Axis : Set}
-  {Observation : Part → Axis → Set}
+  {ℓ : Level}
+  {Observation : Part → Axis → Set ℓ}
   {Stalk : Part → Set} →
   (cert : AllAxisRoundTrip Observation Stalk) →
   (part : Part) →
