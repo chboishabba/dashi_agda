@@ -25,7 +25,7 @@ open import Data.Vec.Base using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _+ℝ_; _*ℝ_; _≤ℝ_)
+  (ℝ; 0ℝ; _+ℝ_; _*ℝ_; _≤ℝ_; _<ℝ_)
 
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 
@@ -113,3 +113,40 @@ productIntegralPositive {n = suc n} source laws observable positive =
       productIntegralPositive {n = n} source laws
         (λ tail → observable (link ∷ tail))
         (λ tail → positive (link ∷ tail)))
+
+
+------------------------------------------------------------------------
+-- A strictly positive normalizer is a distinct condition: nonnegative
+-- integration alone does not show that a pointwise positive function has
+-- positive integral. On compact real Haar with full support, the selected
+-- continuous Gibbs weight satisfies the intended condition; the source must
+-- still justify its measurable test class and full-support authority.
+------------------------------------------------------------------------
+
+record OneLinkStrictlyPositiveIntegration {Link : Set}
+    (source : Product.OneLinkProductHaar Link) : Set₁ where
+  field
+    oneStrictPositive : ∀ observable →
+      (∀ link → 0ℝ <ℝ observable link) →
+      0ℝ <ℝ Product.integrateOne source observable
+
+open OneLinkStrictlyPositiveIntegration public
+
+productIntegralStrictlyPositive :
+  ∀ {Link : Set} {n : Nat}
+    (source : Product.OneLinkProductHaar Link)
+    (strict : OneLinkStrictlyPositiveIntegration source)
+    (observable : Vec Link n → ℝ) →
+  (∀ links → 0ℝ <ℝ observable links) →
+  0ℝ <ℝ Product.productIntegral source observable
+productIntegralStrictlyPositive {n = zero}
+    source strict observable pointwise =
+  pointwise []
+productIntegralStrictlyPositive {n = suc n}
+    source strict observable pointwise =
+  oneStrictPositive strict _
+    (λ link →
+      productIntegralStrictlyPositive {n = n}
+        source strict
+        (λ tail → observable (link ∷ tail))
+        (λ tail → pointwise (link ∷ tail)))
