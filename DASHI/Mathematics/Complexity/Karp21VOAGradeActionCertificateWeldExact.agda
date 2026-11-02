@@ -29,10 +29,10 @@ module DASHI.Mathematics.Complexity.Karp21VOAGradeActionCertificateWeldExact whe
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
-
+open import Data.List.Base using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans; subst)
 import Data.Integer.Base as Int
 import Data.Vec.Base as Vec
 import DASHI.Moonshine.GradedRepresentation as GR
@@ -163,3 +163,49 @@ module SameGradeWitness
     trans
       (cong (decodeCertificate weld) equality)
       (decodeAfterEncode weld right)
+
+
+  -- Discharge the GLOBAL actionPreservesScore obligation from a family
+  -- of LOCAL proofs against the graph's literal signed edge list.
+  -- This is the bridge from proof-fibre/PNF-style local observations
+  -- to the unchanged Karp signed weighted graph objective. It uses
+  -- the actual edgeContribution and its full multiplicity, so a
+  -- character trace or orbit count cannot be substituted here.
+  module LocalEdgewiseCertificate
+    (encode : Vec.Vec Bool n →
+      VOA.Homogeneous (VOA.voa actionData) (Hom.grade homogeneous))
+    (decode :
+      VOA.Homogeneous (VOA.voa actionData) (Hom.grade homogeneous) →
+      Vec.Vec Bool n)
+    (roundtrip :
+      ∀ bits → decode (encode bits) ≡ bits)
+    (preservesEachEdge :
+      (g : G) (bits : Vec.Vec Bool n)
+      (edge : Cut.SignedUndirectedEdge n) →
+      Cut.edgeContribution edge
+        (decode (gradeAction g (encode bits)))
+      ≡ Cut.edgeContribution edge bits)
+    where
+
+    actionPreservesEdgeList :
+      (g : G) (bits : Vec.Vec Bool n)
+      (edges : List (Cut.SignedUndirectedEdge n)) →
+      Cut.edgeListCutValue edges
+        (decode (gradeAction g (encode bits)))
+      ≡ Cut.edgeListCutValue edges bits
+    actionPreservesEdgeList g bits [] =
+      refl
+    actionPreservesEdgeList g bits (edge ∷ tail) =
+      cong₂ Int._+_
+        (preservesEachEdge g bits edge)
+        (actionPreservesEdgeList g bits tail)
+
+    constructExactWeld : ExactCertificateActionWeld
+    constructExactWeld = record
+      { encodeCertificate = encode
+      ; decodeCertificate = decode
+      ; decodeAfterEncode = roundtrip
+      ; actionPreservesScore =
+          λ g bits →
+            actionPreservesEdgeList g bits (Cut.edges graph)
+      }
