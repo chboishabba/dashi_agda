@@ -29,7 +29,9 @@ module DASHI.Analysis.BishopRiemannDirichletExponentialTermExact where
 -- Source-written Agda; kernel verification pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (_/_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product.Base using (_×_; _,_)
 
@@ -119,3 +121,69 @@ bishopExponentialDirichletConvergesFromBasel
   T logNat s domination =
   Dirichlet.dirichletPartialConverges
     (bishopDirichletExponentialTerm T logNat) s domination
+
+------------------------------------------------------------------------
+-- SOURCE-OWNED NAT LOG CANDIDATE VIA -log(1 - x), NOT A FRESH LOG.
+--
+-- For m=n+1>1 choose x=(m-1)/m in (0,1). The source's
+-- Bishop negative-log-one-minus power series is CONVERGENT at x
+-- when its original InOpenUnitInterval evidence is supplied.
+-- log(1)=0 is handled separately, since x=0 need not be covered
+-- by an open *strictly positive* unit-interval predicate.
+--
+-- Missing: actual membership for each rational x, plus native proof
+-- that this constructed series is an inverse of Exp.bishopExp and
+-- agrees with log(m). This is a genuine candidate construction,
+-- not an automatic global log theorem.
+------------------------------------------------------------------------
+
+natLogArgument : Nat → R.ℝ
+natLogArgument n =
+  R._⋆ (+ suc n / suc (suc n))
+
+natLogViaOriginalNegativeLog :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  ((n : Nat) →
+    E.InOpenUnitInterval (C.dataSet T) (natLogArgument n)) →
+  NatLogCandidate
+natLogViaOriginalNegativeLog T inside zero = R.0ℝ
+natLogViaOriginalNegativeLog T inside (suc n) =
+  E.bishopNegativeLogOneMinus
+    (C.dataSet T)
+    (natLogArgument n)
+    (inside n)
+
+natLogAtOneIsZero :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  (inside : (n : Nat) →
+    E.InOpenUnitInterval (C.dataSet T) (natLogArgument n)) →
+  natLogViaOriginalNegativeLog T inside zero ≡ R.0ℝ
+natLogAtOneIsZero T inside = refl
+
+natLogSuccessorHasOriginalSeriesConvergence :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  (inside : (n : Nat) →
+    E.InOpenUnitInterval (C.dataSet T) (natLogArgument n)) →
+  (n : Nat) →
+  Seq._ConvergesTo_
+    (Seq.SeriesOf
+      (E.negativeLogOneMinusTerm
+        (C.dataSet T) (natLogArgument n)))
+    (natLogViaOriginalNegativeLog T inside (suc n))
+natLogSuccessorHasOriginalSeriesConvergence T inside n =
+  E.bishopNegativeLogConvergence
+    (C.dataSet T) (natLogArgument n) (inside n)
+
+-- The selected n^(-s) term now uses the original, genuinely
+-- convergent Bishop -log(1-x) series for its log candidate,
+-- and the already-constructed original Bishop exp/sin/cos series.
+-- Only membership is supplied; the key exp∘log and majorant
+-- identities are NOT inferred from mere convergence.
+bishopDirichletTermFromOriginalLogSeries :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  (inside : (n : Nat) →
+    E.InOpenUnitInterval (C.dataSet T) (natLogArgument n)) →
+  Dirichlet.BishopDirichletTermFamily
+bishopDirichletTermFromOriginalLogSeries T inside =
+  bishopDirichletExponentialTerm T
+    (natLogViaOriginalNegativeLog T inside)
