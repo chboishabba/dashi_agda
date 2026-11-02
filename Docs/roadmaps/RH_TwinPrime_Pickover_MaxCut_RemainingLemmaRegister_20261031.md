@@ -1044,3 +1044,26 @@ establish uniform decay over complex σ+it nor continuity.
 Preserve attribution and ownership: Machin (1706), Dirichlet,
 Riemann, Bishop & Bridges, Murray, pinned Viktor Csimma Bishop,
 and existing DASHI original theorem owners.
+
+## 2026-11-02 K04b source rate exact same-object weld
+
+Source commit `b7aff799ceb4bf14bebdfbd388654eaba0785623`
+adds `sourceGeometricRationalAsQPow`,
+`sourceGeometricAsOriginalBishopPowerRate` and
+`machinActualCrossDenominatorFourOver25Pow` to the original
+same-object denominator module. These transport the literal
+unnormalised rational source bound `4/25^n` through the
+*existing* `Stage.qPow` source owner and its Bishop embedding
+to the identical power-rate expression
+`pow_B(embed(1/25),n) * embed(4)` targeted by the
+independent `BishopMachinGeometricBishopRateExact` owner.
+The alternative cross-denominator derivation is now
+source-written end-to-end in the actual source Bishop carrier
+and represented geometric rate; the independent direct Bishop
+derivation remains separate. Do not mark either derivation KERNEL
+until actual Agda elaboration, deliberately skipped by user request.
+
+Remaining mathematical max-cut is K04d configured exp/log inverse,
+literal complex regional Basel domination and continuity/actual
+zeta same object; K05 full signed-factorial addition and
+Machin quarter-angle independent trigonometric π uniqueness.
