@@ -131,7 +131,42 @@ che2019 =
     "CHE motivates relational and non-flattening inquiry practice; it does not by itself prove the DASHI reopening, quotient-safety or governance constructions."
     true refl
 
+------------------------------------------------------------------------
+-- Coauthor-identified 2026 Online Learning paper. Bibliography confirmed
+-- against the author correspondence (Alice Brown, 13 October 2026), the
+-- Online Learning DOI, and the journal-indexed article record.
+--
+-- Brown A, Cohen J, Lawrence J, Redmond P, Foote SM, Kimber M (2026).
+-- "Online strategies instructors employ to support and enhance student
+-- engagement and learning in higher education."
+-- Online Learning 30(3), 377-401. DOI: 10.24059/olj.v30i3.5032.
+--
+-- SOURCE ROLE: original instructor-facing engagement scholarship.
+-- Do NOT substitute the independent Getenet/Burke/Fanshawe/Brown 2026
+-- student-identified support study for this paper. No full-text
+-- claim decomposition, reviewed observations or sustainability
+-- intervention effect is asserted by this bibliographic entry.
+------------------------------------------------------------------------
+
+instructorStrategies2026Authors : List String
+instructorStrategies2026Authors =
+  "Alice Brown" ∷ "Jay Cohen" ∷ "Jill Lawrence" ∷
+  "Petrea Redmond" ∷ "Stephanie M. Foote" ∷ "Megan Kimber" ∷ []
+
+instructorStrategies2026 : EngagementReference
+instructorStrategies2026 =
+  engagementReference
+    "online-instructor-engagement-strategies-2026"
+    "Online strategies instructors employ to support and enhance student engagement and learning in higher education"
+    instructorStrategies2026Authors
+    "10.24059/olj.v30i3.5032"
+    "Online Learning 30(3), 377-401"
+    2026
+    "New separately identified source for instructor-facing online-engagement strategy research; substantive reported results require full-text source and passage review."
+    "Do not infer student preferences, learner authority, causal outcomes, EfS effects, ecological sustainability or intergenerational durability from bibliographic metadata or the paper title."
+    true refl
+
 canonicalEngagementReferences : List EngagementReference
 canonicalEngagementReferences =
   oef2018 ∷ conceptual2022 ∷ criticalReflection2022 ∷
-  nudge2023 ∷ design2025 ∷ che2019 ∷ []
+  nudge2023 ∷ design2025 ∷ che2019 ∷ instructorStrategies2026 ∷ []
