@@ -127,6 +127,7 @@ def test_sparse_endpoint_certificates() -> int:
             for labels in product((0, 1), repeat=graph.vertices):
                 short = sparse_certificate_from_labels(graph, labels)
                 assert len(short) == 2*len(graph.edges)
+                assert len(short) <= len(encoded)
                 assert verifies_sparse_word(encoded, short) == verifies_word(encoded, labels)
                 checks += 1
 
@@ -136,6 +137,7 @@ def test_sparse_endpoint_certificates() -> int:
     huge = CutGraph(huge_n, ((0, huge_n - 1, 3),), 1)
     huge_word = encode_graph(huge)
     assert len(huge_word) < 5000
+    assert 2*len(huge.edges) <= len(huge_word)
     assert verifies_sparse_word(huge_word, (0, 1))
     assert not verifies_sparse_word(huge_word, (1, 1))
     assert not verifies_sparse_word(huge_word, (0,))
