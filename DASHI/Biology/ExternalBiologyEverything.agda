@@ -29,6 +29,7 @@ import DASHI.Biology.BH4Phase4RoadmapExact
 import DASHI.Biology.BH4PathwayOntologyInteropExact
 import DASHI.Biology.BH4PathwayReviewInteropExact
 import DASHI.Biology.BH4CreatorChartSourceBridgeExact
+import DASHI.Biology.BH4ExchangeIdentifiabilityExact
 import DASHI.Interop.BH4Atomic369RefinementExact
 import DASHI.Biology.BH4ReactionNetworkRunnerReceipt
 import DASHI.Unified.BH4BiochemicalCrossScaleAdapter
