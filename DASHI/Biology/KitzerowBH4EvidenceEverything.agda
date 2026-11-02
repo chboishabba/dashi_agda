@@ -26,6 +26,7 @@ import DASHI.Biology.BH4NOSCouplingSameObjectExact
 import DASHI.Biology.BH4JointFluxFeasibilityExact
 import DASHI.Biology.BH4OpenMetabolicNetworkAdapterExact
 import DASHI.Biology.BH4Phase4RoadmapExact
+import DASHI.Biology.BH4PathwayOntologyInteropExact
 import DASHI.Interop.BH4Atomic369RefinementExact
 import DASHI.Biology.BH4ReactionNetworkRunnerReceipt
 import DASHI.Unified.BH4BiochemicalCrossScaleAdapter
