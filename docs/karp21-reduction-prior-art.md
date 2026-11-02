@@ -121,6 +121,12 @@ No source paper, number of sampled instances, or loop-free Agda source automatic
 
 **Exact open before `N21 InNP`:** Agda proof that every locally consistent two-bits-per-edge certificate extends to some global assignment; source-complete soundness of `verifySparseCutBitWord`; the canonical graph `Word` Agda decoder, actual uniform bound `2m≤encodedWordLength`, and a real bit-operation/tape clock for index equality, signed arithmetic and parsing. The source-written 2m certificate/consistency algorithms are genuine progress but the NP certificate remains *uncertified*. K00 and E01–E20 source-to-target maps and remaining 20 NP membership results are unchanged. This correction does not modify Michael Levin's biology corpus, original VOA owners or the original Karp 1972 theorem.
 
+### 2026-11-02 full finite N21 sparse certificate theorem, independently owned from Karp
+
+The further DASHI source-written `Karp21SparseEndpointConsistencySoundExact` now derives an exact global labelling from **every accepted locally consistent sparse endpoint certificate**. It uses a structural list membership proof, real Fin-index comparison, pairwise Boolean label consistency, first-occurrence readout, finite function-to-vector construction for the **mathematical proof only**, and equality of reconstructed edge-pair bits. It constructs the exact `n21SparseBitWordDecisionIff`: original `Cut.WeightedMaxCutYES` iff acceptance of the genuine strictly decoded 2m-bit signed edge-local word verifier. That is the **finite semantic** part of N21; attribution to the original Karp (1972) decision theorem is unchanged, as is ownership of prior DASHI `FiniteWeightedMaxCutVerifierExact` and sparse codec. It does not imply physically realised Michael Levin goal control or a Monster/VOA character action.
+
+The **unpaid machine layer** is the actual canonical graph-word parser and malformed policy, a proof that its bit length bounds `2m`, and a concrete polynomial tape verifier for endpoint consistency and signed integer arithmetic. The source code is not yet Agda kernel-accepted, and no CI was requested. None of the other 20 NP-membership results or 19 additional direct reductions is silently promoted.
+
 ## Historical provenance
 - Stephen Cook (1971), *The Complexity of Theorem-Proving Procedures*, DOI 10.1145/800157.805047: original SAT complexity root.
 - Richard Karp (1972), *Reducibility Among Combinatorial Problems*, DOI 10.1007/978-1-4684-2001-2_9: the original 21-problem reduction network.
