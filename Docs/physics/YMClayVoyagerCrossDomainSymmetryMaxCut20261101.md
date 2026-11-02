@@ -230,3 +230,8 @@ New owner: `DASHI/Physics/YangMills/YMClayR443BondMarginalC3Exact.agda`, attache
 ## 2 November fixed side-four six-plane majorant (source-written)
 
 `YMClayR445NativeSixDeficitUniformFiniteBoundExact.agda` now applies the pre-existing literal normalized SU(2) trace bounds and original six-plane enumeration through monotone exact rational sums. New terminal Agda source claims `nativeSixDeficitNonnegative` and `nativeSixDeficitAtMost3072` for every native n=3 rational SU(2) bond configuration. The 0..3072 range follows from 256 lattice sites, six original positive plaquettes per site, and the per-plaquette 0..2 normalized Wilson deficit. This is the explicitly requested **fixed-volume** R445 bound, not any R445 uniform tightness/moment/continuum bound for variable cutoffs. Earlier trace/chordal owners and Wilson retain attribution. Exact-head Agda compiler and CI deferred, source-written only.
+
+
+## Follow-up on 2 November 2026: matrix SU(N) physical source
+
+Seven additional source-written same-carrier modules, exact remaining math leaves and citations are indexed at [YMClaySUNMatrixR443R445R320R333MaxCut20261102](YMClaySUNMatrixR443R445R320R333MaxCut20261102.md). This supersedes the *previous* purely rational n=3 physical-Haar expectation as a construction route, **not** the original rational finite theorem proofs or their attribution. The actual compact Haar, changing-lattice UV/IR, R320 physical estimate and R333 same-H spectral gap remain unproved.
