@@ -12,6 +12,16 @@
 
 **Status:** current working roadmap. This file records design intent, repository state and unpaid review work. It is not scholarly evidence and cannot pay a manuscript claim.
 
+### 2 November — Karp-style exact-lemma cut for the *full intersectional research hyperfabric*
+
+**Canonical exhaustive lemma catalogue:** [Digital-ESD intersectional hyperfabric exact-lemma max-cut](../Docs/roadmaps/DigitalESDIntersectionalHyperfabricExactLemmaMaxCut20261102.md). Following the owner-first, same-object, kernel/source-test/empirical-separation discipline of Karp-21 PR #1445, it enumerates **S00–S07, N00–N10, R00–R10, I00–I10, T00–T07, E00–E09, M00–M06 (66 named gates)**. This supersedes treating counts of papers, source-pairs or accounted cells as evidence of a complete world. The five-database expansion remains **D5-DEFERRED**.
+
+**New source-written proof terms:** `DigitalESDIntersectionalRecompositionExact` (lossless left-inverse, consumer factorisation, obstruction, pointwise n-axis stalk recovery), `DigitalESDHigherOrderFabricIncidenceExact` (nonempty n-ary edge, exact provenance and member incidence, reviewed at *every selected* part×axis, local restriction compatibility), `DigitalESDDependencyScopedWorldRevisionExact` (dependency-path affected cells reopen or revalidate, unrelated cells preserve exact assessment). Imported by the existing `EverythingDigitalESDReciprocalBraid` root, not a second world ontology. None has a kernel receipt or a real source-reviewed inhabitant yet.
+
+**Critical correction to prior accounting:** `notYetAssessed` is distinct from `unmeasuredForQuestion`; the Getenet candidate and synthetic fixture now default to no-reviewed-assessment, not a claim that the paper measured nothing. Python validator demands `reviewed_source_scope_ref` for a genuine `unmeasured` status and explicitly reports unclosed assessments. This prevents a 15×7 covered-cell ledger from masquerading as 105 completed evidence reviews.
+
+**End-to-end payment gate:** actual complete source decomposition, meaningful nontrivial part-axis evidence relevance, reviewed canonical SLR revision/span/packet membership, axis-faithful typed hyperfabric local stalks, nonempty source-specific higher interactions, consumer-relative non-factorability/sufficiency, dependency-scoped selective invalidation, exact-head Agda/runtime tests and coauthor-adjudicated retrospective/prospective findings. No one stage implies the next. Actual observed world remains OPEN.
+
 ### 2 November — existing-world closure first; five-database expansion DEFERRED
 
 **Explicit user priority change:** postpone execution of the additional four databases / five-database joint search, combined export deduplication and corresponding multi-database eligibility closure. Preserve the real ERIC 46,597 retrieval occurrences / 43,996 metadata records, existing screening ledgers, SLR/PostgreSQL processing, PNF and acquisition receipts. Do NOT invent an all-database result or delete the search obligations. The resumed search is a later **D5-DEFERRED** gate, after the existing source-specific ESD world has passed all internal method, evidence, temporal, review and manuscript demonstrations possible on the existing source corpus.
