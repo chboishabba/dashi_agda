@@ -1,10 +1,10 @@
-{-# OPTIONS --safe #-}
 module DASHI.Biology.Wong2022LysergicAcidEvidenceExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Sources
+import DASHI.Biology.Wong2022LysergicAcidFiniteCore as Core
 import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact as KluverSources
 import DASHI.Biology.Kluver5HT2AMolecularProteinInstantiationExact as Kluver
 import DASHI.Biology.MonoamineBiosynthesisPathSeparationExact as Monoamine
@@ -68,26 +68,7 @@ primarySourceAtlas =
 -- These constructors are DASHI curation tags, not a chemical proof.
 ------------------------------------------------------------------------
 
-data NamedMolecule : Set where
-  dLysergicAcid : NamedMolecule
-  lysergicAcidDiethylamide : NamedMolecule
-
-dLaTagDistinctFromLsdTag :
-  dLysergicAcid ≡ lysergicAcidDiethylamide → ⊥
-dLaTagDistinctFromLsdTag ()
-
-data EvidenceDomain : Set where
-  yeastBiosynthesisReport : EvidenceDomain
-  humanReceptorStructure : EvidenceDomain
-  monoamineBiosynthesis : EvidenceDomain
-
-productionEvidenceNotReceptorEvidence :
-  yeastBiosynthesisReport ≡ humanReceptorStructure → ⊥
-productionEvidenceNotReceptorEvidence ()
-
-productionEvidenceNotMonoaminePath :
-  yeastBiosynthesisReport ≡ monoamineBiosynthesis → ⊥
-productionEvidenceNotMonoaminePath ()
+-- Golden finite identities and claim-domain disjointness live in Core.
 
 ------------------------------------------------------------------------
 -- Reported endpoint values: not calculated or independently replicated.
@@ -95,84 +76,69 @@ productionEvidenceNotMonoaminePath ()
 -- There is no function that extrapolates to another vessel size.
 ------------------------------------------------------------------------
 
-data ReportedScale : Set where
-  oneLitreBioreactor : ReportedScale
-  fourLitreBioreactor : ReportedScale
 
-data ValidationStatus : Set where
-  reportedInPrimaryPaper : ValidationStatus
-  independentlyValidated : ValidationStatus
-
-record ReportedEndpoint (scale : ReportedScale) : Set where
+record ReportedEndpoint (scale : Core.ReportedScale) : Set where
   constructor reportedEndpoint
   field
     source : Sources.AttributedSource
-    molecularSubject : NamedMolecule
+    molecularSubject : Core.NamedMolecule
     amountAsPublished : String
     unitAsPublished : String
-    evidenceStatus : ValidationStatus
+    evidenceStatus : Core.ValidationStatus
 
-oneLitreEndpoint : ReportedEndpoint oneLitreBioreactor
+oneLitreEndpoint : ReportedEndpoint Core.oneLitreBioreactor
 oneLitreEndpoint =
   reportedEndpoint
-    wongEtAl2022 dLysergicAcid "1.7" "mg/L"
-    reportedInPrimaryPaper
+    wongEtAl2022 Core.dLysergicAcid "1.7" "mg/L"
+    Core.reportedInPrimaryPaper
 
-fourLitreEndpoint : ReportedEndpoint fourLitreBioreactor
+fourLitreEndpoint : ReportedEndpoint Core.fourLitreBioreactor
 fourLitreEndpoint =
   reportedEndpoint
-    wongEtAl2022 dLysergicAcid "1.4" "mg/L"
-    reportedInPrimaryPaper
+    wongEtAl2022 Core.dLysergicAcid "1.4" "mg/L"
+    Core.reportedInPrimaryPaper
 
-reportedStatusNotIndependentValidation :
-  reportedInPrimaryPaper ≡ independentlyValidated → ⊥
-reportedStatusNotIndependentValidation ()
 
 ------------------------------------------------------------------------
 -- Analytical evidence types are observational provenance, not protocols.
 ------------------------------------------------------------------------
 
-data PaperEvidenceKind : Set where
-  massSpectrometricIdentityComparison : PaperEvidenceKind
-  stableIsotopeOriginObservation : PaperEvidenceKind
-  nmrIdentityComparison : PaperEvidenceKind
-  scaleSpecificEndpointMeasurement : PaperEvidenceKind
 
 record SourceReportedEvidence : Set where
   constructor sourceReportedEvidence
   field
-    evidenceKind : PaperEvidenceKind
+    evidenceKind : Core.PaperEvidenceKind
     source : Sources.AttributedSource
     reading : String
-    domain : EvidenceDomain
-    status : ValidationStatus
+    domain : Core.EvidenceDomain
+    status : Core.ValidationStatus
 
 paperIdentityEvidence : SourceReportedEvidence
 paperIdentityEvidence =
   sourceReportedEvidence
-    massSpectrometricIdentityComparison
+    Core.massSpectrometricIdentityComparison
     wongEtAl2022
     "Paper reports analytical comparisons supporting the identity of the fermentation product."
-    yeastBiosynthesisReport
-    reportedInPrimaryPaper
+    Core.yeastBiosynthesisReport
+    Core.reportedInPrimaryPaper
 
 paperOriginEvidence : SourceReportedEvidence
 paperOriginEvidence =
   sourceReportedEvidence
-    stableIsotopeOriginObservation
+    Core.stableIsotopeOriginObservation
     wongEtAl2022
     "Paper reports labelled-substrate evidence consistent with biosynthetic origin."
-    yeastBiosynthesisReport
-    reportedInPrimaryPaper
+    Core.yeastBiosynthesisReport
+    Core.reportedInPrimaryPaper
 
 paperNmrEvidence : SourceReportedEvidence
 paperNmrEvidence =
   sourceReportedEvidence
-    nmrIdentityComparison
+    Core.nmrIdentityComparison
     wongEtAl2022
     "Paper reports an NMR comparison with the D-lysergic-acid reference."
-    yeastBiosynthesisReport
-    reportedInPrimaryPaper
+    Core.yeastBiosynthesisReport
+    Core.reportedInPrimaryPaper
 
 ------------------------------------------------------------------------
 -- Reuse the actual existing molecular-identity and monoamine owners.
