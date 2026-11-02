@@ -1,5 +1,8 @@
 module DASHI.Biology.Everything where
 
+-- BH4 source-attributed pathway, ontology review and flux-owner aggregate.
+import DASHI.Biology.KitzerowBH4EvidenceEverything
+
 import DASHI.Biology.Core.ContextIndexedSystem
 import DASHI.Biology.Molecular.MolecularAssemblyBoundary
 import DASHI.Biology.Molecular.MolecularConstrainedMinimizerBridge
