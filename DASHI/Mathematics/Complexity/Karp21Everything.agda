@@ -82,3 +82,5 @@ import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact
 
 import DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact
 import DASHI.Mathematics.Complexity.Karp21LeonidLevinSearchDecisionExact
+
+import DASHI.Mathematics.Complexity.Karp21PartitionSparseCutBidiExact
