@@ -76,3 +76,5 @@ import DASHI.Mathematics.Complexity.Karp21MichaelLevinGoalExecutionWitnessExact
 import DASHI.Mathematics.Complexity.Karp21MichaelLevinObserverCutQuotientBoundaryExact
 
 import DASHI.Mathematics.Complexity.Karp21LevinPrefixFreeCookCodingExact
+
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact
