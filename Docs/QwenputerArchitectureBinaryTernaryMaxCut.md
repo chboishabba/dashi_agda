@@ -47,7 +47,7 @@ The source has **distinct generations**; never merge their layer budgets, RAM ca
 | Compiled CPU | RV32IM + Zba + bignum unit; 11 compiled layers prepended; source P3 hidden width 3968 and vocabulary 478,656 | `rv32ReportedParameters` and `InstructionSimulation` contract | full opcodes, decode, XLEN=32, zero register, signed/unsigned semantics, exceptions/ECALL, bignum, firmware |
 | Compiled primitives | Gated DeltaNet RAM, SwiGLU truth tables, threshold tests, half-unit margins, SIMD nibble arithmetic | finite typed `Location`, `Ram`, `writeRam`, `readRam` | matrix-to-typed-RAM refinement at each layer, numerical exactness |
 | GDN recurrence | gate alpha=1, beta=1, one-hot read/write; key-head/value-head row mapping | `readWriteSame`, `readWriteOther`, `registerHeadUnchangedAfterDataWrite` | actual heads, addresses, vector widths, kernel floating point |
-| Instruction trace | ADDR, VAL, STEP token protocol, stateful control | `advance`, `singleWriteReadsBack`, `singleWritePreservesOther`, PC/count proofs | real trace vocabulary, ordering, multi-record instructions |
+| Earlier abstract RAM trace | DASHI-only ADDR, VAL, STEP toy protocol, **not RV32 on-wire tokens** | `advance`, `singleWriteReadsBack`, `singleWritePreservesOther`, PC/count proofs | real trace vocabulary, ordering, multi-record instructions |
 | Tool-call bridge | captures Qwen native `calc` call at closing tag; firmware outputs `tool_response`; chip token ownership | `TraceToken` and `TokenOwner` separate | tokenizer/class decoder and printed response bisimulation |
 | Host driver | prefill loads firmware/RAM snapshot; handles decode/cache and executor; **not an arithmetic tool executor** | `BOOT` finite transition; generic snapshot functions | real `RvChat` cache, startup, lockstep |
 | Isolation | Qwen's old attention/GDN state muted for chip tokens; `tau`, `mu`, output code and chip exit | `circuitTraceMutesLanguage`, `languageTracePreservesChip` | actual mute/anti-sink/exit RMSNorm byte-for-byte |
@@ -95,11 +95,82 @@ Source experimental evidence: compliance and programs compared with QEMU, arithm
 
 **Max-cut rule:** R01–R08 are the new bounded finite theorem surfaces. W01–W14 are *not* completed by construction, source claims, compiler analogy, structural coincidence, or a passing screenshot. Completing all of Qwenputer requires actual source compiler verification and independently executable evidence. A proof for the repository's radix-neutral machine cannot by itself establish proof of RV32. E8, FRACTRAN, 369 and ternary are optional representation consumers, not assumptions needed for one-hot RAM correctness.
 
+
+## Continuation tranche: explicit repository archaeology and exact lemma closure
+
+Date 2026-11-02. All new statements in this tranche are **source-written, not Agda kernel-accepted**. No CI or local Agda checker was run. This tranche adds the following modules to the same PR and its existing TOE/CS roots:
+
+- `QwenputerOneHotDeltaMatrixRefinementExact`: DeltaScalar with explicit difference/replacement laws; selected-row overwrite, non-target-row invariance, data/register separation, and a pointwise commuting square to the pre-existing RAM owner. A constructive Boolean-XOR scalar instance is supplied; it is explicitly **not** BF16.
+- `QwenputerRv32RecordCommitExact`: P0/P1/P2 *real source token-family names* (V, R, QS, QD, BD, FLT, HEX, F0/F1/F2, NT, J, ST0/ST1, SS0/SS1, HALT). A typed prefix/commit grammar and exact arbitrary-length prefix theorem show each well-formed modelled record commits exactly once at its terminal token, for a **supplied** abstract instruction transition. Real RISC-V decoding is not assumed. This corrects earlier illustrative ADDR/VAL/STEP wording: that protocol is only a DASHI finite RAM toy model.
+- `QwenputerBinaryTernaryRamTraceSimulationExact`: an **arbitrary-length** list of exact binary RAM writes has the same decoded observable memory at every addressed cell under the existing binary-in-balanced-trit embedding. The relation is pointwise and proof-relevant; no function-extensionality or equality of bit/trit carriers is assumed.
+- `QwenputerBinary32Framed27CodecExact`: explicit four-byte, 32-bit binary word and lossless framed-27 ternary encoding using the *existing* three-bit→two-trit antipodal codec and 9-bit→three-framed-27 codec. The eight payload bits of each byte occupy a nine-bit word with a fixed zero padding bit. All 32-bit values round-trip. This is a representation theorem, not an RV32 architecture or storage-efficiency theorem.
+
+### Source pin audit (the upstream's own anchors, not new DASHI priority)
+
+- Source architecture table: [Divyansh Agrawal, RV32 inside Qwen3.5, P2 section, commit `3c33d0f` (short source identifier)](https://github.com/divagr18/qwenputer/blob/main/experimental/riscv/docs/rv32.md). This is *not* a recovered full source SHA. A future archive must pin the entire source commit and exact relevant compiler files.
+- Source P0 commit rule: PC is inferred from instruction records; `R` refreshes the anchor and does not itself commit an instruction. The final `F0/F1/F2`, `NT`, `J`, store or `HALT` token ends a record. Source P2 extends the stream with `QS`, `QD`, `BD`, and control `SC`. The new typed model does not assert that all source formats are fully parsed or that every P2 token transition has been implemented.
+- P2 **uses one-hot** quotient heads because a previous eight-row multi-hot read left FP32 residues; the source's ROM is a controlled two-hot exception. An unqualified theorem that *all* source attention queries are one-hot is false.
+- The P2 source table sums to 99 key heads and 42,012 MLP units, with L3–L4 MLP units reported jointly at 4,138; the repository does not fabricate their split.
+- Distinguish P0, P1, P2 standalone, P3 merged Qwen tool, CHIP-8 and object-store v1. Their capacities, tokens, ISA subsets, numerical behavior and verification environments are not interchangeable.
+
+### Exact reuse/search ledger
+
+The connected GitHub searches covered the explicit term families:
+`Qwenputer`, `GatedDeltaNet`, `DeltaRule`, `oneHot`, `RecurrentState`, `RISC-V`, `RV32`, `ALU`, `compiler`, `trace`, `BitVector`, `Word32`, `microcode`, `bisimulation`, `ternary`, `balanced ternary`, `Tekum`, `storage`, `address`, `memory`, `register`, `firmware`, `SwiGLU`, `RMSNorm`, `BF16`, `FastWeight`, `GDN`, `Chip8`, plus PR searches for machine, codec, binary/ternary, state isolation, signed-history and distributed inference. GitHub code search covers the default branch; this explicitly does not establish exhaustiveness over all past/branch source history.
+
+Recovered exact owners:
+`BinaryBalancedTernarySubcarrierExact`,
+`FixedNineBitFramed27WordStorageExact`,
+`BinaryThreeBitTwoTritAntipodalCodecExact`,
+`BinaryThreeBitTrit27FibreLiftExact`,
+`TinyRadixNeutralRegisterMachineExact`,
+`TinyISAClosedProgramCodebookFibreExact`,
+`ShorStandardBinaryTernaryStoredProgramComputerExact`,
+`TemporalStorageFibreExact`,
+`FractranComputationEquivalence`,
+`BinaryFloatingPoint`,
+`SelfDescribingProofJacquardTapeExact`,
+`FiniteStochasticBisimulationExact`,
+`TernarySoftCarryLogicExact`,
+`FibreLocalPackedStorageExact`, and
+`StorageRecomputeResidualOptimizationExact`.
+The latter five are useful consumers or comparator boundaries, not evidence that the actual Qwenputer circuit is already verified.
+
+PR lineage consulted:
+[#839](https://github.com/chboishabba/dashi_agda/pull/839) binary/trit CS fibres,
+[#1083](https://github.com/chboishabba/dashi_agda/pull/1083) Tekum,
+[#1386](https://github.com/chboishabba/dashi_agda/pull/1386) finite-27 codec,
+[#1390](https://github.com/chboishabba/dashi_agda/pull/1390) ternary codec convergence,
+[#1442](https://github.com/chboishabba/dashi_agda/pull/1442) finite signed-history experts,
+[#1445](https://github.com/chboishabba/dashi_agda/pull/1445) machine/CNF bitwords and
+[#1456](https://github.com/chboishabba/dashi_agda/pull/1456) this tranche.
+First-implementation priority cannot be inferred from PR title or number; individual earliest commits still require source archaeology.
+
+### Recut of exact max-cut after implementation
+
+- **W02 (partly paid)**: abstract one-hot matrix/RAM commuting square and Boolean-XOR instance now source-written. Actual bf16 difference arithmetic, gate/beta exactness, whole-head output normalization, two-hot ROM and real Qwen tensor equality remain **OPEN**.
+- **W04 (partly paid)**: source-named record grammar and terminal-once invariant source-written. Exact RV32 step semantics and compiler-token bisimulation remain **OPEN**.
+- **W14 (partly paid)**: pointwise simulation of arbitrary-length writes, and a complete padded 32-bit binary↔framed-27 representation roundtrip now source-written. Correctness of an *actual* 32-bit RV32 ALU in the framed ternary storage and exact endian/address/program equivalence remain **OPEN**.
+- **W01/W03/W05–W13**: not yet closed by these new constructions. They require authentic source IR, codebook, register/ROM/RAM map, real compiler/export, finite numerical preconditions or measured hardware execution.
+
+#### Remaining terminal theorem requested before full Qwenputer promotion
+
+For a fixed source commit `c`, compiled checkpoint `W(c)`, and reference RV32 machine `M(c)`, build a concrete decoder `decode_c` and prove for **every valid compiled state** and emitted instruction record `r`:
+
+`decode_c (compiledRun W(c) r s) ≡ referenceStep (decode_c s)`,
+
+together with token-owner isolation, no-spurious-state-update, required exact numerical bounds and compositional run semantics, then independently replay actual QEMU compliance and C/MicroPython programs. This theorem is not supplied by the new finite proof models and is not presently promoted.
+
+
 ## Local follow-up checks (not executed in this GitHub-only tranche)
 
 ```bash
 scripts/run_agda29_parallel_check.sh DASHI/ComputerScience/QwenputerGatedDeltaArchitectureExact.agda
 scripts/run_agda29_parallel_check.sh DASHI/ComputerScience/QwenputerHybridStateAndFileStoreExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/ComputerScience/QwenputerOneHotDeltaMatrixRefinementExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/ComputerScience/QwenputerRv32RecordCommitExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/ComputerScience/QwenputerBinaryTernaryRamTraceSimulationExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/ComputerScience/QwenputerBinary32Framed27CodecExact.agda
 scripts/run_agda29_parallel_check.sh DASHI/ComputerScience/ComputerScienceFibreFoundationValidationExact.agda
 ```
 
