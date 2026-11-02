@@ -41,6 +41,7 @@ from typing import Any
 STATES = {
     "direct_reviewed", "conditional", "contested",
     "unmeasured", "inaccessible", "not_applicable", "source_reported_pending_review",
+    "not_yet_assessed",
 }
 EVIDENCE_FOR_DIRECT = (
     "reviewed_packet_ref", "reviewed_observation_ref",
@@ -147,6 +148,8 @@ def validate(value: dict[str, Any]) -> dict[str, Any]:
         elif state == "source_reported_pending_review":
             for field in ("source_section_ref", "reported_observation_ref", "review_debt_ref"):
                 required_string(a, field, f"source-reported pending-review account {key}")
+        elif state == "not_yet_assessed":
+            required_string(a, "review_work_ref", f"pending part-axis account {key}")
         elif state == "conditional":
             for field in EVIDENCE_FOR_CONDITIONAL:
                 required_string(a, field, f"conditional account {key}")
@@ -159,6 +162,7 @@ def validate(value: dict[str, Any]) -> dict[str, Any]:
             required_string(a, "access_constraint_ref", f"inaccessible account {key}")
         elif state == "unmeasured":
             required_string(a, "missing_observation_ref", f"unmeasured account {key}")
+            required_string(a, "reviewed_source_scope_ref", f"reviewed unmeasured account {key}")
 
     expected = {(source, part, axis) for source, part in part_set for axis in axis_set}
     missing = sorted(expected - indexed)
@@ -231,6 +235,10 @@ def validate(value: dict[str, Any]) -> dict[str, Any]:
         "relation_arity_counts": dict(sorted(counts_by_arity.items())),
         "connected_components_over_declared_parts": ordered_components,
         "reviewed_evidence_and_source_admission_verified": False,
+        "unassessed_part_axis_count": status_counts["not_yet_assessed"],
+        "published_pending_review_part_axis_count": status_counts["source_reported_pending_review"],
+        "all_part_axis_reviews_closed": (status_counts["not_yet_assessed"] == 0 and
+                                         status_counts["source_reported_pending_review"] == 0),
         "empirical_world_admitted": False,
         "warnings": warnings,
     }
