@@ -933,6 +933,7 @@ import DASHI.Physics.YangMills.YMClayR443NativeSixPlaneHaarNumeratorExact as R44
 import DASHI.Physics.YangMills.YMClayR445NativeSU2R443SameObjectExact as R445Weld
 import DASHI.Physics.YangMills.YMClayR443NativeSixPlaneC3SequenceLimitExact as R443Limit
 import DASHI.Physics.YangMills.YMClayR443BondMarginalC3Exact as R443BondMarginal
+import DASHI.Physics.YangMills.YMClayR445NativeSixDeficitUniformFiniteBoundExact as R445FiniteBound
 
 open SixActual public using
   (inversePositivePlaneIsSwappedWord
