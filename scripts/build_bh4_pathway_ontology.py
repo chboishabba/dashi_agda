@@ -52,6 +52,13 @@ def coordinate(ns: str, identifier: str) -> dict:
     return {"namespace": ns, "identifier": identifier, "uri": uri}
 
 
+def species_coordinate(identifier: str) -> dict:
+    """Do not manufacture ChEBI membership for a Rhea compound URI/name."""
+    if CHEBI.fullmatch(identifier):
+        return coordinate("chebi", identifier)
+    return coordinate("rhea-source-participant", identifier)
+
+
 def checked_matrix(matrix: dict) -> tuple[list[str], list[str], dict[str, list[dict]]]:
     ensure(matrix.get("schema") == "dashi.bh4-stoichiometric-matrix.v1", "unexpected matrix schema")
     reactions = matrix.get("reaction_index", [])
@@ -60,7 +67,7 @@ def checked_matrix(matrix: dict) -> tuple[list[str], list[str], dict[str, list[d
     ensure(isinstance(reactions, list) and isinstance(species, list), "missing matrix index")
     ensure(len(reactions) == len(set(reactions)) and len(species) == len(set(species)), "duplicate matrix identity")
     ensure(all(RHEA.fullmatch(r) for r in reactions), "non-Rhea reaction")
-    ensure(all(CHEBI.fullmatch(s) for s in species), "non-ChEBI species")
+    ensure(all(isinstance(s, str) and s and s != "unidentified" for s in species), "invalid source species")
     ensure(len(values) == len(species), "matrix species count mismatch")
     ensure(all(isinstance(row, list) and len(row) == len(reactions)
                and all(type(v) is int for v in row) for row in values),
@@ -90,9 +97,9 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
     for rid in reactions:
         source_entries = {}
         for participant in source_reactions[rid].get("participants", []):
-            key = participant.get("chebi_id")
-            ensure(isinstance(key, str) and bool(CHEBI.fullmatch(key)),
-                   "finite reaction contains non-ChEBI participant")
+            key = str(participant.get("chebi_id") or participant.get("compound_uri")
+                      or participant.get("name") or "unidentified")
+            ensure(key != "unidentified", "finite reaction participant lacks identity")
             coeff = participant.get("coefficient", 1)
             try:
                 coeff = int(str(coeff))
@@ -116,11 +123,11 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
             "source_certificate": rhea.get("source_uniprot_panel"),
             "matrix": matrix.get("schema"),
         },
-        "species": [{"coordinate": coordinate("chebi", s), "compartment": None,
+        "species": [{"coordinate": species_coordinate(s), "compartment": None,
                      "external_exchange_interval": None} for s in species],
         "reactions": [
             {"coordinate": coordinate("rhea", rid), "participants": [
-                {"coordinate": coordinate("chebi", e["species"]),
+                {"coordinate": species_coordinate(e["species"]),
                  "role": "reactant" if e["signed_coefficient"] < 0 else "product",
                  "stoichiometry": abs(e["signed_coefficient"])}
                 for e in columns[rid]
@@ -221,7 +228,10 @@ def jsonld(model: dict) -> dict:
         for p in reaction["participants"]:
             node["dashi:participants"].append({
                 "@type": "dashi:StoichiometricParticipation",
-                "dashi:entity": {"@id": p["coordinate"]["uri"]},
+                "dashi:entity": ({"@id": p["coordinate"]["uri"]}
+                    if p["coordinate"]["uri"] else
+                    {"dashi:sourceIdentifier": p["coordinate"]["identifier"],
+                     "dashi:sourceNamespace": p["coordinate"]["namespace"]}),
                 "dashi:role": p["role"], "dashi:stoichiometry": p["stoichiometry"]})
         graph.append(node)
     for edge in model["external_edges"]:
