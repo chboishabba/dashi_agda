@@ -95,7 +95,16 @@ def main() -> int:
     run([py, "scripts/check_kitzerow_primary_chart.py"])
     run([py, "scripts/check_kitzerow_source_chart_acquisition.py"])
     creator_chart_acquisition_exit: int | None = None
+    creator_ontology_exit: int | None = None
+    creator_review_exit: int | None = None
     if a.acquire_creator_chart_reactions:
+        # The optional derived files are overwritten in-place. Clear only
+        # this optional namespace so a new partial/failing source call
+        # cannot silently reuse an earlier green creator-chart artifact.
+        for stale in (creator_chart_rhea, creator_chart_matrix,
+                      creator_chart_ontology, creator_chart_jsonld,
+                      creator_chart_review):
+            stale.unlink(missing_ok=True)
         creator_chart_acquisition_exit = run([
             py, "scripts/acquire_rhea_chebi_bh4_reactions.py",
             "--from-source-chart",
@@ -122,7 +131,7 @@ def main() -> int:
                     "--jsonld-output", str(creator_chart_jsonld),
                 ], allow_partial=True)
                 if creator_ontology_exit == 0:
-                    run([
+                    creator_review_exit = run([
                         py, "scripts/build_bh4_pathway_review.py",
                         "--pathway", str(creator_chart_ontology),
                         "-o", str(creator_chart_review),
@@ -212,9 +221,9 @@ def main() -> int:
     creator_matrix = (load(creator_chart_matrix)
                       if a.acquire_creator_chart_reactions else None)
     creator_ontology = (load(creator_chart_ontology)
-                        if a.acquire_creator_chart_reactions and creator_chart_ontology.exists() else None)
+                        if creator_ontology_exit == 0 else None)
     creator_review = (load(creator_chart_review)
-                      if a.acquire_creator_chart_reactions and creator_chart_review.exists() else None)
+                      if creator_review_exit == 0 else None)
     network: dict[str, object] = {}
     if sab:
         network["sabio"] = {k: sab.get(k) for k in ("schema", "proteins_completed", "proteins_with_entries", "kinetic_entry_count", "kinetic_parameter_count")}
@@ -262,6 +271,8 @@ def main() -> int:
             "separate_creator_chart_selection": True,
             "original_pdf_binary_verified": False,
             "acquisition_exit_code": creator_chart_acquisition_exit,
+            "ontology_exit_code": creator_ontology_exit,
+            "review_exit_code": creator_review_exit,
             "separate_matrix_species": creator_matrix.get("species_count") if creator_matrix else None,
             "separate_matrix_reactions": creator_matrix.get("reaction_count") if creator_matrix else None,
             "separate_ontology_reactions": len(creator_ontology.get("reactions", [])) if creator_ontology else None,
