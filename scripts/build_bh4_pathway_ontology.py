@@ -87,6 +87,25 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
     source_reactions = {r.get("rhea_id"): r for r in rhea.get("reactions", [])}
     ensure(all(rid in source_reactions and source_reactions[rid].get("formula_charge_ready")
                for rid in reactions), "finite reaction lacks formula/charge-ready Rhea receipt")
+    for rid in reactions:
+        source_entries = {}
+        for participant in source_reactions[rid].get("participants", []):
+            key = participant.get("chebi_id")
+            ensure(isinstance(key, str) and bool(CHEBI.fullmatch(key)),
+                   "finite reaction contains non-ChEBI participant")
+            coeff = participant.get("coefficient", 1)
+            try:
+                coeff = int(str(coeff))
+            except (TypeError, ValueError) as exc:
+                raise ValueError("invalid source stoichiometry") from exc
+            ensure(coeff >= 0, "negative source stoichiometry")
+            ensure(participant.get("side") in ("substrate", "product"), "invalid source side")
+            sign = -1 if participant["side"] == "substrate" else 1
+            source_entries[key] = source_entries.get(key, 0) + sign * coeff
+        net_source = {k: v for k, v in source_entries.items() if v}
+        net_matrix = {p["species"]: p["signed_coefficient"] for p in columns[rid]}
+        ensure(net_source == net_matrix,
+               "Rhea participant receipt disagrees with matrix column: " + rid)
     ensure(not matrix.get("external_exchange"), "external exchange must not enter internal S")
     result = {
         "schema": SCHEMA,
@@ -153,11 +172,15 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
                 ensure(bool(subject.get("namespace") and subject.get("identifier")
                             and obj.get("namespace") and obj.get("identifier")),
                        "malformed external edge")
+                ensure(bool(edge.get("edgeId")), "xPollenation edge lacks stable identity")
                 if edge.get("relation") == "reaction-participant":
-                    ensure(subject == neighbourhood["subject"] and obj.get("namespace") == "chebi"
-                           and obj.get("identifier") in {p["coordinate"]["identifier"]
-                               for p in next(r for r in result["reactions"] if r["coordinate"]["identifier"] == found[found.index(neighbourhood["subject"]["identifier"])])["participants"]},
-                           "participant link contradicts finite Rhea column")
+                    rid = neighbourhood["subject"]["identifier"]
+                    expected_participants = {p["chebi_id"] for p in
+                        source_reactions[rid].get("participants", [])}
+                    ensure(subject == neighbourhood["subject"]
+                           and obj.get("namespace") == "chebi"
+                           and obj.get("identifier") in expected_participants,
+                           "participant link contradicts acquired Rhea receipt")
                 result["external_edges"].append({
                     "edge_id": edge.get("edgeId"), "subject": coordinate(subject["namespace"], subject["identifier"]),
                     "relation": edge.get("relation"), "object": coordinate(obj["namespace"], obj["identifier"]),
