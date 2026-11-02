@@ -1,3 +1,7 @@
+### 2 November R445 native fixed-volume majorant
+
+New source-written (kernel not yet run): `YMClayR445NativeSixDeficitUniformFiniteBoundExact` reuses the native normalized SU(2) trace inequalities, original six positive plaquettes and side-four rational sums. It proves the **literal rational action bounds** `nativeSixDeficitNonnegative` and `nativeSixDeficitAtMost3072` for every `RationalSU2BondData 3`. The constant is exact: six planes × 256 sites × maximum Wilson deficit 2 = 3072. This pays the finite R445 original-six Wilson majorant mentioned in the 1 November backlog. It is **not** a uniform bound across increasing lattice volumes/cutoffs, and says nothing by itself about compact Haar integrability, stochastic tightness or a continuum OS mass gap.
+
 ### 2 November 2026: R443 auxiliary-gauge marginalisation / source cut
 
 **Source-written, exact-head Agda compilation pending.** `YMClayR443BondMarginalC3Exact` now factors the original native six-plane Wilson deficit through the actual n=3 bond field, proves its C3 square without the auxiliary `siteGauge`, constructs a pushforward finite measure on bond-only observables, derives that measure's integration/partition laws from the already-selected Gibbs source identity and source integration laws, proves normalized expectation equality, and reuses the existing R443→R431 numerator C3 compiler on that bond-only carrier.
