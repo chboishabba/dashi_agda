@@ -132,6 +132,19 @@ standards-compliant BioPAX/GO-CAM/SBML model or a paid kinetic simulator.
 It has no fabricated compartments, kinetic laws or exchange rates. Failed
 acquisition must not be reinterpreted as negative biology.
 
+## Why source-paid exchange intervals are the mathematical cut
+
+The source-written Agda `BH4ExchangeIdentifiabilityExact` states the
+elementary but decisive non-identifiability theorem: with unrestricted
+exchange, for any internal S*v choose e = -S*v and obtain exact
+balance. The exact-integer regression shows the resulting algebraic
+identity and demonstrates that imposing an exchange bound can reject
+one particular candidate. This is **not** a global constrained-network
+infeasibility theorem, nor an assertion that real tissue can supply
+that exchange. See KitzerowBH4PathwayOntologyRoadmap.md.
+
+    python3 scripts/check_bh4_exchange_identifiability.py
+
 ## Fail-closed interval-evidence validation
 
 The existing parameter normalization and HiGHS solver now reject duplicate
