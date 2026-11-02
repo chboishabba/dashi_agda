@@ -385,3 +385,34 @@ negativeTwoNatLogExponentialIsBasel logNat n correct =
          RP.≃-refl
          (logNat n)))
     (negativeDoubleNatLogExponentialIsBasel logNat n correct)
+
+------------------------------------------------------------------------
+-- ACTUAL ORIGINAL SOURCE SPECIALIZATION AT INTEGER-TWO.
+--
+-- Here the logarithm is precisely the original convergent
+-- Bishop -log(1-x) series from the configured elementary data,
+-- not an arbitrary logNat function. With the remaining original
+-- exp/log inverse evidence, its real negative-two coefficient
+-- agrees with the independently proved Basel term for EVERY n.
+------------------------------------------------------------------------
+
+originalSeriesNatLogAtTwoIsBasel :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  (inside : (n : Nat) →
+    E.InOpenUnitInterval (C.dataSet T) (natLogArgument n)) →
+  ((n : Nat) →
+    R._≃_
+      (Exp.bishopExp (natLogViaOriginalNegativeLog T inside n))
+      (NatReal.natReal (suc n))) →
+  (n : Nat) →
+  R._≃_
+    (Exp.bishopExp
+      (R._*_
+        (R.- (R._⋆ (+ 2 / 1)))
+        (natLogViaOriginalNegativeLog T inside n)))
+    (Basel.baselTerm n)
+originalSeriesNatLogAtTwoIsBasel T inside logInverse n =
+  negativeTwoNatLogExponentialIsBasel
+    (natLogViaOriginalNegativeLog T inside)
+    n
+    (logInverse n)
