@@ -127,3 +127,57 @@ strictRejectTwoExtraBits (token ∷ tokens) first second
   rewrite strictRejectTwoExtraBits tokens first second = refl
 ... | Prefix.formulaOrToken
   rewrite strictRejectTwoExtraBits tokens first second = refl
+
+
+------------------------------------------------------------------------
+-- Genuine AST-level STRICT parser using the repository's already
+-- source-written suffix-preserving Cook prefix grammar.
+--
+-- Before this pass, decoding could silently discard dangling bits and
+-- the older decodeCookFormula also selected a default formula when
+-- parsing failed. The strict boundary instead returns nothing for:
+--   * incomplete 3-bit tokens,
+--   * token streams that are not a formula,
+--   * a complete formula followed by ANY unconsumed token(s).
+------------------------------------------------------------------------
+
+strictDecodeCookFormulaBits :
+  List Bool → Maybe Cook.BooleanFormula
+strictDecodeCookFormulaBits word
+  with strictDecodeThreeTokens word
+... | nothing = nothing
+... | just tokens with Prefix.parseCookFormula tokens
+...   | Prefix.parseFailure = nothing
+...   | Prefix.parsed formula [] = just formula
+...   | Prefix.parsed formula (_ ∷ _) = nothing
+
+strictCookFormulaRoundTrip :
+  (formula : Cook.BooleanFormula) →
+  strictDecodeCookFormulaBits (Binary.encodeFormulaBits formula)
+  ≡ just formula
+strictCookFormulaRoundTrip formula
+  rewrite strictCookFormulaTokenRoundTrip formula
+        | Prefix.parseEncodedCookFormula formula = refl
+
+-- Even three COMPLETE extra bits forming a valid additional formula
+-- token are rejected, rather than ignored by a prefix decoder.
+strictRejectTrailingCompleteFormulaToken :
+  (formula : Cook.BooleanFormula) →
+  strictDecodeCookFormulaBits
+    (Binary.encodeTokenStream
+      (Prefix.encodeCookFormulaInto formula
+        (Prefix.formulaFalseToken ∷ [])))
+  ≡ nothing
+strictRejectTrailingCompleteFormulaToken formula
+  rewrite strictDecodeThreeTokensAfterEncode
+    (Prefix.encodeCookFormulaInto formula
+      (Prefix.formulaFalseToken ∷ []))
+        | Prefix.parseCookFormulaEncodeInto formula
+            (Prefix.formulaFalseToken ∷ []) = refl
+
+-- A standalone token used only for integer encoding is never a
+-- complete top-level Boolean formula.
+strictRejectStandaloneNatZero :
+  strictDecodeCookFormulaBits
+    (Binary.tokenBits Prefix.natZeroToken) ≡ nothing
+strictRejectStandaloneNatZero = refl
