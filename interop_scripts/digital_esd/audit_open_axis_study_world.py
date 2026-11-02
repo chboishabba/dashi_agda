@@ -196,7 +196,12 @@ def validate(value: dict[str, Any]) -> dict[str, Any]:
             raise ValueError(f"{r}: axes must be a nonempty subset of the declared n-axis family")
         valence = relation.get("valence", {})
         kind, v = valence.get("kind"), valence.get("value")
-        if kind == "balanced_ternary":
+        if kind == "unscored":
+            if v is not None:
+                raise ValueError(f"{r}: unscored relation cannot carry a scalar or ternary value")
+            if relation.get("epistemic_status") not in ("candidate", "unresolved", "contested"):
+                raise ValueError(f"{r}: unscored relation cannot be promoted to reviewed")
+        elif kind == "balanced_ternary":
             if v not in ("neg", "zero", "pos"):
                 raise ValueError(f"{r}: balanced ternary must be neg/zero/pos")
         elif kind == "scalar":
