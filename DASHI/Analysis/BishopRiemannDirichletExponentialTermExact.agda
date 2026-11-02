@@ -56,6 +56,7 @@ import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact as Recipr
 import DASHI.Foundations.BishopNatRealPositiveExact as NatPositive
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as BaselNat
+import DASHI.Foundations.BishopNegativeLogGeometricSourceConvergenceExact as NativeLog
 import RealProperties as RP
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
@@ -1213,3 +1214,74 @@ sourceIntegralExpFamilyConverges inputs logNat inverseLaw k s =
     s
     (sourceIntegralExpFamilyMajorant
       inputs logNat inverseLaw k s)
+
+
+------------------------------------------------------------------------
+-- K04d-LOG: NEW FULLY CONSTRUCTED CANONICAL NAT LOG SOURCE CANDIDATE
+-- from the original reciprocal-coefficient Bishop negative-log series.
+--
+-- This eliminates InOpenUnitInterval as a precondition for *constructing*
+-- the Nat-log history: native strict interval inequalities plus the
+-- geometric-majorant absolute-convergence proof actually select
+-- Bishop series limits. Unlike the older Round11-configured candidate,
+-- this does not depend on an opaque InOpenUnitInterval field.
+-- The separately selected Round11 log term family still requires
+-- coefficient-level same-object identification. The exp/log inverse
+-- remains a genuine missing analytic theorem.
+------------------------------------------------------------------------
+
+sourceCanonicalNatLogCandidate : NatLogCandidate
+sourceCanonicalNatLogCandidate zero = R.0ℝ
+sourceCanonicalNatLogCandidate (suc n) =
+  NativeLog.sourceNegativeLogValue
+    (natLogArgument n)
+    (natLogArgumentPositiveBishop n)
+    (natLogArgumentBelowOneBishop n)
+
+sourceCanonicalNatLogAtOne :
+  sourceCanonicalNatLogCandidate zero ≡ R.0ℝ
+sourceCanonicalNatLogAtOne = refl
+
+sourceCanonicalNatLogSuccessorConverges :
+  (n : Nat) →
+  Seq._ConvergesTo_
+    (Seq.SeriesOf
+      (NativeLog.sourceNegativeLogTerm (natLogArgument n)))
+    (sourceCanonicalNatLogCandidate (suc n))
+sourceCanonicalNatLogSuccessorConverges n =
+  NativeLog.sourceNegativeLogValueConverges
+    (natLogArgument n)
+    (natLogArgumentPositiveBishop n)
+    (natLogArgumentBelowOneBishop n)
+
+sourceOriginalConfiguredNatLogAgreement :
+  (T : C.BishopSetoidComplexTranscendentals)
+  (inside : (n : Nat) →
+    E.InOpenUnitInterval (C.dataSet T) (natLogArgument n)) →
+  ((n index : Nat) →
+    R._≃_
+      (E.negativeLogOneMinusTerm
+        (C.dataSet T) (natLogArgument n) index)
+      (NativeLog.sourceNegativeLogTerm (natLogArgument n) index)) →
+  (n : Nat) →
+  R._≃_
+    (natLogViaOriginalNegativeLog T inside n)
+    (sourceCanonicalNatLogCandidate n)
+sourceOriginalConfiguredNatLogAgreement
+    T inside coefficientsAgree zero = RP.≃-refl
+sourceOriginalConfiguredNatLogAgreement
+    T inside coefficientsAgree (suc n) =
+  NativeLog.sourceLogValueEqualsConfiguredBishopLog
+    (C.dataSet T)
+    (natLogArgument n)
+    (natLogArgumentPositiveBishop n)
+    (natLogArgumentBelowOneBishop n)
+    (inside n)
+    (coefficientsAgree n)
+
+sourceCanonicalOriginalExpLogInverseAtOne :
+  R._≃_
+    (Exp.bishopExp (sourceCanonicalNatLogCandidate zero))
+    (NatReal.natReal (suc zero))
+sourceCanonicalOriginalExpLogInverseAtOne =
+  ExpPositive.bishopExpZero
