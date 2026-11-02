@@ -177,6 +177,8 @@ open AccountedStudyWorld public
 -- A signed trit is a *qualified view*, not a statement that an
 -- epistemically unknown / N/A / contested state all means zero.
 data RelationValue (Scalar : Set) : Set where
+  -- No score is known. Neither a scalar zero nor ternary neutral is assumed.
+  unscoredCandidate : RelationValue Scalar
   scalarValue : Scalar → RelationValue Scalar
   signedTernaryView : Balanced.Trit → RelationValue Scalar
 
