@@ -1497,3 +1497,121 @@ dependency or kernel receipts. This is an intentional
 SOURCE-ONLY state under the instruction to skip CI;
 the canonical mathematical terminal proof gates above
 remain exactly as recorded.
+
+
+## 2026-11-03 K04d canonical Round11 configuration and K05 full complex exponential transport
+
+This follow-on is **SOURCE-WRITTEN**, not Agda-kernel verified; CI left
+untouched. It closes explicit small same-object and reusable
+Cartesian boundaries, not the terminal analytic open cuts.
+
+### K04d: construction of a concrete configured interval and same-object log
+
+`DASHI/Analysis/BishopRound11CanonicalNegativeLogSameObjectExact.agda`
+(commit `ab838741905676085eb960f7f61c642b85368273`,
+then `f6258148800b6c0f39c871d24900624f3bc5c8e5`)
+reuses the earlier geometric-series owner, original
+`Round11BishopCutset`, and vendored Bishop
+`Sequence.uniqueness-of-limits`.
+
+- `canonicalNegativeLogDataSet old` builds a
+  `BishopElementaryPowerSeriesData` with the literal predicate
+  `InOpenUnitInterval x = (0<_B x) × (x<_B 1)`.
+  Its logarithm terms are the original coefficient expression
+  `x^(n+1)·embed(1/(n+1))`; the previously proved native
+  `sourceNegativeLogAbsolutelyConvergent` supplies an actual
+  convergence witness for this definition.
+  Sine, cosine and exponential terms and their original
+  absolute-convergence sources are reused unchanged.
+- `canonicalNegativeLogRound11 inputs` constructs a genuine
+  Round11BishopCutset. The existing configured sine/cosine
+  propositional term definitions are preserved.
+- `canonicalUnitIntervalWitness inputs n` constructs an
+  ACTUAL selected predicate witness for every original
+  `natLogArgument n=(n+1)/(n+2)` using native Bishop order.
+- `canonicalNatLogFromConfiguredSource` now uses the
+  original `natLogViaOriginalNegativeLog` evaluator with
+  this inhabited concrete field, not an uninstantiated
+  `inside` assumption.
+- `canonicalNatLogIsOriginalBishopSum` proves equality of
+  the canonical-configured negative-log result and
+  `sourceCanonicalNatLogCandidate` on the same Bishop real,
+  by original series extensionality.
+- `canonicalSineSameOriginal`,
+  `canonicalCosineSameOriginal` and
+  `canonicalExponentialSameOriginal` prove the original
+  selected nonlogarithmic Bishop limits are unchanged
+  despite the selected log-field reconstruction. This
+  does not assume definitional equality of the limit
+  witnesses themselves.
+
+**Critical distinction:** This creates a compatible, now
+CONCRETE Round11 data record; it does NOT prove that an
+arbitrarily supplied earlier `elementarySeries inputs` has
+the same `negativeLogOneMinusTerm` and
+`InOpenUnitInterval`. The backward identification requires
+a real termwise equality and a bridge to that previous
+predicate; neither follows from an abstract record field.
+The independent true source exponential inverse
+`exp_B(L(x)) = 1/(1-x)` remains mathematically OPEN.
+The generic `expLog` authority is not substituted for it.
+
+### K05/K04d: general complex exponential homomorphism reducer
+
+`DASHI/Analysis/BishopSetoidComplexExact.agda`
+(commit `978d33b5241b9d2e3ad4f5216382a07b32c99637`)
+now includes:
+
+- `expCAddFromRealAndTrigAddition`, proving the full
+  original Bishop complex equation
+  `expC(x+iy+a+ib) ≈ expC(x+iy) *C expC(a+ib)`
+  from the **already proved** real
+  `BishopExponentialCauchyProductExact.bishopExpAdd`
+  and the actual Round11 sine/cosine addition equations.
+  All Cartesian normalisation is done with the original
+  Bishop real polynomial solver.
+- `expCAddFromImaginaryMultiplicativity` shows that
+  the original pure-imaginary multiplication equation
+  (for every real pair y,b) is enough to prove
+  multiplicativity on ALL of the original Bishop complex
+  carrier. This consumes the already proved bidirectional
+  sine/cosine-phase reduction.
+
+The combined cut is now precise: **one actual pure-imaginary
+signed-factorial Cauchy-product theorem** supplies BOTH
+native general trig addition identities AND full complex
+exponential multiplicativity. Neither implication proves
+that outstanding complex product law by itself.
+
+The existing `DASHI/Foundations/BishopNatRealReciprocalSquareBaselExact.agda`
+and `DASHI/Analysis/BishopRiemannDirichletExponentialTermExact.agda`
+continue to provide integer real exponent Basel domination,
+but no open complex neighborhood estimate is inferred.
+
+### Max-cut still required
+
+1. **K04d-LOG-INV:** prove the actual source native log inverse
+   for all positive successors. The canonical configured
+   instance is now source-written, but the inverse analytic
+   identity is not.
+2. **K04d-COMPLEX:** obtain all-index coefficient majorant
+   on an actual complex neighborhood near the Machin π
+   for noninteger real and arbitrary imaginary parts,
+   paying the signed-factorial trigonometric modulus
+   and real-exponential order estimates.
+3. **K04d-CONTINUITY:** prove finite-term continuity,
+   apply existing uniform limit modulus, identify
+   same-object actual selected half-plane and completed
+   zeta functions and predicate.
+4. **K05-PUREIMAG:** prove the original mixed signed-factorial
+   Cauchy coefficient identity and limit passage, then
+   tangent/arctan branch and independently characterized π.
+5. **KERNEL:** kernel acceptance, dependency resolution
+   and any elaboration repairs still required; no Agda
+   checker or CI was run in this turn.
+
+Preserve ownership and provenance for Machin, Riemann,
+Dirichlet, Bishop & Bridges, Zachary Murray, Viktor Csimma
+and the preexisting DASHI proof owners. Source-written
+conditional reductions must not be promoted to theorem
+completion without proving their exact input predicates.
