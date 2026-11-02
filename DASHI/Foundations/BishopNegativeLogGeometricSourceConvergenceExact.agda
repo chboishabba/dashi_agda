@@ -65,7 +65,7 @@ sourceNegativeLogAbsoluteBelowGeometric x xNonnegative n =
       (RP.*-comm (R.pow x n) x)
       (RP.≤-respʳ-≃
         (RP.*-identityʳ (R.pow x (suc n)))
-        (RP.*-monoʳ-≤-nonNeg
+        (RP.*-monoˡ-≤-nonNeg
           (NatRecip.reciprocalAtMostOne n)
           (Seq.nonNegx⇒nonNegxⁿ (suc n) xNonnegative))))
 
