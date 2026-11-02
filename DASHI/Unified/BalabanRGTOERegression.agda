@@ -1048,9 +1048,11 @@ open OrderedHaar public using
   (productIntegralZero
   ; productIntegralAdd
   ; productIntegralScale
-  ; productIntegralPositive)
+  ; productIntegralPositive
+  ; productIntegralStrictlyPositive)
 open SUNHaarR443 public using
   (nativePhysicalIntegrationLaws
+  ; nativePhysicalPartitionPositive
   ; nativeProductHaarR443
   ; nativeProductHaarNumeratorC3)
 
