@@ -70,6 +70,8 @@ def build(pathway: dict, *, source_receipts: dict | None = None) -> dict:
         if not all(row.get(field) for field in
                    ("source_id", "source_revision", "snapshot_digest", "content_locator")):
             raise ValueError("source envelope missing revision, digest or locator")
+        if row.get("visibility") not in ("public", "internal", "restricted"):
+            raise ValueError("source envelope missing explicit visibility")
         key = row["source_id"]
         if key in source_index:
             raise ValueError("duplicate source envelope")
@@ -95,7 +97,13 @@ def build(pathway: dict, *, source_receipts: dict | None = None) -> dict:
         packet = source_index.get(sid)
         refs = [str(row["source_locator"]), str(row["repo_reconstruction_owner"])]
         if packet:
-            refs += [str(packet["content_locator"]), str(packet["source_revision"]), str(packet["snapshot_digest"])]
+            if packet["visibility"] == "public":
+                refs += [str(packet["content_locator"]), str(packet["source_revision"]),
+                         str(packet["snapshot_digest"])]
+            else:
+                # Retain an opaque source handle; the receiving authorized
+                # inspector may resolve it inside SLR, never in public export.
+                refs.append("restricted-source-handle:" + str(sid))
         add("author-source", owner, "original-passage-not-authenticated",
             refs=refs,
             witness="primary source revision + exact passage/figure and source-to-edge correspondence",
@@ -191,6 +199,10 @@ def build(pathway: dict, *, source_receipts: dict | None = None) -> dict:
         "obligations": work,
         "obligation_family_counts": families,
         "external_source_envelopes_supplied": len(source_index),
+        "restricted_source_envelopes_not_exposed": sum(
+            row["visibility"] != "public" for row in source_index.values()),
+        "source_packet_hashes_independently_authenticated": False,
+        "candidate_publication_allowed": False,
         "evidence_mode": "external claims, source text and review status are independent",
         "promotion_boundary": {
             "read_only": True, "mutates_wikidata": False, "mutates_slr": False,
