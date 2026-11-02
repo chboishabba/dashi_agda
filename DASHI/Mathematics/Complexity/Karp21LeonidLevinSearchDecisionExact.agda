@@ -40,6 +40,7 @@ import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.Karp21CookStrictTripleBitBoundaryExact as Strict
 import DASHI.Mathematics.Complexity.Karp21CookStrictSATLanguageExact as SAT
 import DASHI.Mathematics.Complexity.Karp21CookLevinConcreteBitWordReuseExact as K00
+import DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact as Finite
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Tape
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Rules
@@ -96,6 +97,44 @@ strictCookSearchDecisionIff :
 strictCookSearchDecisionIff word =
   PR.iff (strictCookDecisionToSearch word)
          (strictCookSearchToDecision word)
+
+------------------------------------------------------------------------
+-- Strengthened K00: a FINITE bitword search witness, not an unbounded
+-- Nat -> Bool assignment supplied as the certificate.
+-- The formula's own Nat indices are retained as source-owned syntax.
+-- See Finite.compactWitnessExactBitCount for the exact bit count.
+------------------------------------------------------------------------
+
+FiniteStrictCookSearchWitness : Word.BitWord → Set
+FiniteStrictCookSearchWitness word =
+  Σ Cook.BooleanFormula (λ formula →
+    (Strict.strictDecodeCookFormulaBits word ≡ just formula)
+    × Finite.CompactCookWitness formula)
+
+strictCookDecisionToFiniteSearch :
+  (word : Word.BitWord) →
+  PR.accepts SAT.strictSATLanguage word →
+  FiniteStrictCookSearchWitness word
+strictCookDecisionToFiniteSearch word accepted
+  with Strict.strictDecodeCookFormulaBits word
+... | nothing = ⊥-elim accepted
+... | just formula =
+  formula , (refl , Finite.cookSatisfiableToCompact formula accepted)
+
+finiteStrictCookSearchToDecision :
+  (word : Word.BitWord) →
+  FiniteStrictCookSearchWitness word →
+  PR.accepts SAT.strictSATLanguage word
+finiteStrictCookSearchToDecision word (formula , (parsed , compact))
+  rewrite parsed = Finite.compactToCookSatisfiable formula compact
+
+finiteStrictCookSearchDecisionIff :
+  (word : Word.BitWord) →
+  PR.Iff (PR.accepts SAT.strictSATLanguage word)
+    (FiniteStrictCookSearchWitness word)
+finiteStrictCookSearchDecisionIff word =
+  PR.iff (strictCookDecisionToFiniteSearch word)
+         (finiteStrictCookSearchToDecision word)
 
 ------------------------------------------------------------------------
 -- Actual concrete Cook-Levin instance, NOT a hypothetical simulator.
@@ -177,3 +216,57 @@ n21SameGraphSearchDecisionIff :
 n21SameGraphSearchDecisionIff graph =
   PR.iff (n21DecisionToSparseSearch graph)
          (n21SparseSearchToDecision graph)
+
+------------------------------------------------------------------------
+-- FINITE Cook search witness on the same exact-budget machine instance.
+-- This is a stronger source-level search statement than the earlier
+-- unbounded Assignment search form; its tape-clock remains open.
+------------------------------------------------------------------------
+
+concreteRunToFiniteCookSearch :
+  ∀ {machine : Tape.ConcreteTapeMachine}
+    (states : Canonical.EnumerationCoverage (Tape.finiteState machine))
+    (symbols : Canonical.EnumerationCoverage (Tape.finiteSymbol machine))
+    (nonempty : Rules.NonemptyRuleTable machine)
+    (input : Input.InputWord machine)
+    (steps : Nat) →
+  Runs.ExactBudgetAcceptingRun input steps →
+  FiniteStrictCookSearchWitness
+    (K00.guardedCookLevinBitWord states symbols nonempty input steps)
+concreteRunToFiniteCookSearch states symbols nonempty input steps run =
+  strictCookDecisionToFiniteSearch
+    (K00.guardedCookLevinBitWord states symbols nonempty input steps)
+    (K00.exactRunToStrictCookSATWordAcceptance
+      states symbols nonempty input steps run)
+
+finiteCookSearchToConcreteRun :
+  ∀ {machine : Tape.ConcreteTapeMachine}
+    (states : Canonical.EnumerationCoverage (Tape.finiteState machine))
+    (symbols : Canonical.EnumerationCoverage (Tape.finiteSymbol machine))
+    (nonempty : Rules.NonemptyRuleTable machine)
+    (input : Input.InputWord machine)
+    (steps : Nat) →
+  FiniteStrictCookSearchWitness
+    (K00.guardedCookLevinBitWord states symbols nonempty input steps) →
+  Runs.ExactBudgetAcceptingRun input steps
+finiteCookSearchToConcreteRun states symbols nonempty input steps witness =
+  K00.strictCookSATWordAcceptanceToRun
+    states symbols nonempty input steps
+    (finiteStrictCookSearchToDecision
+      (K00.guardedCookLevinBitWord states symbols nonempty input steps)
+      witness)
+
+concreteRunFiniteCookSearchIff :
+  ∀ {machine : Tape.ConcreteTapeMachine}
+    (states : Canonical.EnumerationCoverage (Tape.finiteState machine))
+    (symbols : Canonical.EnumerationCoverage (Tape.finiteSymbol machine))
+    (nonempty : Rules.NonemptyRuleTable machine)
+    (input : Input.InputWord machine)
+    (steps : Nat) →
+  PR.Iff (Runs.ExactBudgetAcceptingRun input steps)
+    (FiniteStrictCookSearchWitness
+      (K00.guardedCookLevinBitWord states symbols nonempty input steps))
+concreteRunFiniteCookSearchIff states symbols nonempty input steps =
+  PR.iff
+    (concreteRunToFiniteCookSearch states symbols nonempty input steps)
+    (finiteCookSearchToConcreteRun states symbols nonempty input steps)
