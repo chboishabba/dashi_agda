@@ -171,6 +171,8 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
             "entire_kitzerow_model_confirmed": False,
         },
     }
+    # Source-displayed KEGG/MetaCyc fields are preserved as raw review inputs.
+    # A stable external target identity is not invented from an unparsed field.
     # Rhea owns the cross-resource link. In particular, Rhea-to-Reactome
     # mappings do NOT establish the same human/tissue/compartment event.
     for rid in reactions:
@@ -196,6 +198,17 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
                     "same_biological_event_verified": False,
                     "biological_context_paid": False, "flux_paid": False,
                 })
+    for rid in reactions:
+        row = source_reactions[rid].get("row") or {}
+        for field in ("Cross-reference (KEGG)", "Cross-reference (MetaCyc)"):
+            raw = str(row.get(field) or "").strip()
+            if raw:
+                result["unparsed_external_annotation_fields"].append({
+                    "rhea_id": rid, "source_field": field, "source_value": raw,
+                    "reason": "await-typed-source-revision-mapping-adjudication",
+                })
+    result["unparsed_external_annotation_fields"].sort(
+        key=lambda x: (x["rhea_id"], x["source_field"], x["source_value"]))
     result["ontology_cross_references"].sort(
         key=lambda x: (x["reaction"]["identifier"], x["target"]["namespace"],
                        x["target"]["identifier"]))
