@@ -28,6 +28,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥-elim)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.List.Base using (List; []; _∷_; _++_; length)
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Nullary.Decidable.Core using (yes; no)
@@ -36,6 +37,7 @@ import Data.Nat.Properties as NatP
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 
 formulaVariables : Cook.BooleanFormula → List Nat
@@ -346,3 +348,52 @@ compactWitnessExactBitCount :
 compactWitnessExactBitCount formula witness =
   trans (canonicalBitWordIsListLength (proj₁ witness))
         (proj₁ (proj₂ witness))
+
+------------------------------------------------------------------------
+-- Quantitative syntax bound: one bit per variable occurrence is no
+-- longer than the ACTUAL source-owned unary-prefix Cook token count.
+-- In particular a huge Nat variable index does NOT force an
+-- exponentially long (maxIndex + 1)-sized satisfying assignment.
+-- A 3*token-count SAT word is already serialized by the existing
+-- K00 binary codec; the complete bit-machine clock remains open.
+------------------------------------------------------------------------
+
+appendNatListLength :
+  (xs ys : List Nat) →
+  length (xs ++ ys) ≡ length xs + length ys
+appendNatListLength [] ys = refl
+appendNatListLength (x ∷ rest) ys
+  rewrite appendNatListLength rest ys = refl
+
+leqSuccRight :
+  ∀ {a b : Nat} → a ≤ b → a ≤ suc b
+leqSuccRight z≤n = z≤n
+leqSuccRight (s≤s proof) = s≤s (leqSuccRight proof)
+
+variableCountWithinCookTokenCount :
+  (formula : Cook.BooleanFormula) →
+  length (formulaVariables formula) ≤ Prefix.cookFormulaTokenCount formula
+variableCountWithinCookTokenCount (Cook.variable index) = s≤s z≤n
+variableCountWithinCookTokenCount (Cook.constant value) = z≤n
+variableCountWithinCookTokenCount (Cook.negate formula) =
+  leqSuccRight (variableCountWithinCookTokenCount formula)
+variableCountWithinCookTokenCount (Cook.conjunction left right)
+  rewrite appendNatListLength (formulaVariables left) (formulaVariables right) =
+  leqSuccRight
+    (NatP.+-mono-≤
+      (variableCountWithinCookTokenCount left)
+      (variableCountWithinCookTokenCount right))
+variableCountWithinCookTokenCount (Cook.disjunction left right)
+  rewrite appendNatListLength (formulaVariables left) (formulaVariables right) =
+  leqSuccRight
+    (NatP.+-mono-≤
+      (variableCountWithinCookTokenCount left)
+      (variableCountWithinCookTokenCount right))
+
+compactCookCertificateAtMostTokenCount :
+  (formula : Cook.BooleanFormula)
+  (witness : CompactCookWitness formula) →
+  Word.encodingSize (proj₁ witness) ≤ Prefix.cookFormulaTokenCount formula
+compactCookCertificateAtMostTokenCount formula witness
+  rewrite compactWitnessExactBitCount formula witness =
+  variableCountWithinCookTokenCount formula
