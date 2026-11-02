@@ -902,3 +902,58 @@ Attribution: original Machin, Dirichlet and Riemann mathematics,
 Bishop/Bridges, Zachary Murray and `viktorcsimma/bishop`
 at the recorded pinned gitlink; reused DASHI theorem owners
 and newly committed DASHI source code are distinct.
+
+## 2026-11-02 K04b variable-denominator rational weld
+
+**Source-written commits:** `0aca247e88e82e5380f96de92f14f9f41819cb3d`,
+`2910dcc005e80f99c97e545ff9118cfcb68c9681`,
+`e071bffd32a4b1ea04e45532ec27be470cbe22cf`.
+No CI or Agda compiler was run. All claims remain SOURCE, not KERNEL.
+
+The original `BishopMachinCrossEnvelopeBishopOrderExact.agda`
+now includes proof-producing **variable Nat nonzero** instances for:
+`25^n`, `57121^n`, each original
+`(2n+1)*5*25^n` and `(2n+1)*239*57121^n`
+denominator, and their shared product. It reuses the stdlib
+`Data.Nat.Properties.m^n≢0` and `m*n≢0` rather than
+hiding positivity in an arbitrary record.
+
+The source fractions are literal `Data.Rational.Unnormalised`:
+`sourceOmittedRationalEnvelope` is the actual
+`16/[(2n+1)5*25^n] + 4/[(2n+1)239*57121^n]`;
+`sourceCommonRationalEnvelope` is
+`(3824*57121^n+20*25^n)/D_n`;
+`sourceGeometricRationalEnvelope` is `4/25^n`.
+The newly source-written
+`sourceOmittedRationalIsCommonRational`
+uses the existing **integer polynomial solver** to verify exactly
+the full cross-product rational equality (no cancellation of a
+variable denominator). The Nat-cleared all-index inequality is
+transported by `FiniteNatFractionOrderExact.natFractionLe`
+to `sourceCommonRationalBelowGeometric`, and by
+`Data.Rational.Unnormalised.Properties.≤-respˡ-≃`
+to `sourceOmittedRationalBelowGeometric`. The original
+Bishop rational embedding then yields
+`sourceOmittedBishopBelowGeometric`.
+
+**What remains for the separate K04b-DENOM route:** prove,
+on the SAME original Bishop objects, that the actual
+weighted first omitted magnitudes
+`16*M.atanMagnitudeTerm bishopOneFifth n +
+4*M.atanMagnitudeTerm bishopOneTwoHundredThirtyNinth n`
+are Bishop-setoid equivalent to
+`R._⋆ (sourceOmittedRationalEnvelope n)`, including
+positive-power absolute value, signed factorial exponent,
+rational exponent/reindex equality, and both positive base
+embeddings. The already source-written DIRECT Bishop
+`machinBishopFourOver25Pow` and
+`machinBishopEightOver25PowCauchy` avoid this alternate
+route. Do not treat equivalent end bounds as the proof of
+this literal source-term representation.
+
+Other outstanding frontiers unchanged:
+K04d source exp/log inverse; all-index regional domination
+and term continuity near Machin; literal original completed
+zeta same-object continuity; K05 Round11 full trig addition,
+arctan-tangent branch and independent trig pi; focused Agda
+kernel verification (deferred by explicit user instruction).
