@@ -51,6 +51,22 @@ For reactions it records whether abundance context exists while retaining `abund
 
 Crucially, `solver_payable` is read only from the existing normalized parameter manifest's `usable_for_joint_flux_witness`. Context coverage never flips a payment gate.
 
+## Source-attributed pathway/ontology interop
+
+The Phase-4 runner also emits a partial BH4 pathway graph from the existing
+Rhea/ChEBI matrix, optional xPollenation evidence, and the separate candidate
+Kitzerow hypothesis ledger:
+
+- artifacts/biology/bh4-pathway-ontology.json
+- artifacts/biology/bh4-pathway-ontology.jsonld
+
+See [KitzerowBH4PathwayOntologyRoadmap.md](KitzerowBH4PathwayOntologyRoadmap.md)
+for exact external ontology targets and the KPO-01 through KPO-12 obligations.
+The JSON-LD representation is an RDF-importable discovery graph, **not** a
+standards-compliant BioPAX/GO-CAM/SBML model or a paid kinetic simulator.
+It has no fabricated compartments, kinetic laws or exchange rates. Failed
+acquisition must not be reinterpreted as negative biology.
+
 ## Live max-cut after the v8 run
 
 The run should tell us exactly which reaction columns have abundance context and which exchange species have human metabolomics context. The scientific payment frontier is then:
