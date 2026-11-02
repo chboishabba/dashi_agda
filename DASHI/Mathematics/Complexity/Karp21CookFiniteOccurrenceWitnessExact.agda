@@ -36,6 +36,7 @@ import Data.Nat.Properties as NatP
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 
 formulaVariables : Cook.BooleanFormula → List Nat
 formulaVariables (Cook.variable i) = i ∷ []
@@ -222,16 +223,73 @@ reconstructedEvaluationEqualsOriginal formula assignment =
     assignment
     (projectedEnvironmentAgreesAtOccurrence formula assignment)
 
+-- Use the previously source-written finite same-label checker on Bool,
+-- but compare Nat syntax indices instead of N21 finite vertex addresses.
+-- This rejects inconsistent REPEATED variable labels.
+compatibleCookObservations :
+  (Nat × Bool) → (Nat × Bool) → Bool
+compatibleCookObservations (index , bit) (other , otherBit)
+  with NatP._≟_ index other
+... | yes _ = Sparse.boolEqual bit otherBit
+... | no _ = true
+
+oneCookObservationAgainst :
+  (Nat × Bool) → List (Nat × Bool) → Bool
+oneCookObservationAgainst observation [] = true
+oneCookObservationAgainst observation (other ∷ rest) =
+  Sparse.andBool
+    (compatibleCookObservations observation other)
+    (oneCookObservationAgainst observation rest)
+
+allCookObservationsConsistent :
+  List (Nat × Bool) → Bool
+allCookObservationsConsistent [] = true
+allCookObservationsConsistent (observation ∷ rest) =
+  Sparse.andBool
+    (oneCookObservationAgainst observation rest)
+    (allCookObservationsConsistent rest)
+
+projectedCookPairCompatible :
+  (assignment : Cook.Assignment) (index other : Nat) →
+  compatibleCookObservations
+    (index , assignment index) (other , assignment other) ≡ true
+projectedCookPairCompatible assignment index other
+  with NatP._≟_ index other
+... | yes refl = Sparse.boolEqualSelf (assignment index)
+... | no _ = refl
+
+projectedCookObservationAgainst :
+  (assignment : Cook.Assignment) (index : Nat) (indices : List Nat) →
+  oneCookObservationAgainst (index , assignment index)
+    (projectObservations indices assignment) ≡ true
+projectedCookObservationAgainst assignment index [] = refl
+projectedCookObservationAgainst assignment index (other ∷ rest)
+  rewrite projectedCookPairCompatible assignment index other
+        | projectedCookObservationAgainst assignment index rest =
+  refl
+
+projectedCookObservationsConsistent :
+  (indices : List Nat) (assignment : Cook.Assignment) →
+  allCookObservationsConsistent
+    (projectObservations indices assignment) ≡ true
+projectedCookObservationsConsistent [] assignment = refl
+projectedCookObservationsConsistent (index ∷ rest) assignment
+  rewrite projectedCookObservationAgainst assignment index rest
+        | projectedCookObservationsConsistent rest assignment =
+  refl
+
 -- EXACT finite witness: number of Booleans equals number of syntactic
 -- variable occurrences, regardless of the magnitudes of their Nat IDs.
 CompactCookWitness : Cook.BooleanFormula → Set
 CompactCookWitness formula =
   Σ (List Bool) (λ bits →
     (length bits ≡ length (formulaVariables formula))
+    × ((allCookObservationsConsistent
+          (pairObservations (formulaVariables formula) bits) ≡ true)
     × (Cook.evaluate formula
         (recoverAssignment
           (pairObservations (formulaVariables formula) bits))
-        ≡ true))
+        ≡ true)))
 
 cookSatisfiableToCompact :
   (formula : Cook.BooleanFormula) →
@@ -240,7 +298,12 @@ cookSatisfiableToCompact formula
   (Cook.satisfyingAssignment assignment verified) =
   projectBits (formulaVariables formula) assignment ,
   ( projectBitsLength (formulaVariables formula) assignment
-  , trans
+  , ( trans
+        (cong allCookObservationsConsistent
+          (pairProjectedBits (formulaVariables formula) assignment))
+        (projectedCookObservationsConsistent
+          (formulaVariables formula) assignment)
+    , trans
       (cong
         (λ observations →
           Cook.evaluate formula (recoverAssignment observations))
@@ -248,12 +311,13 @@ cookSatisfiableToCompact formula
       (trans
         (reconstructedEvaluationEqualsOriginal formula assignment)
         verified)
+    )
   )
 
 compactToCookSatisfiable :
   (formula : Cook.BooleanFormula) →
   CompactCookWitness formula → Cook.Satisfiable formula
-compactToCookSatisfiable formula (bits , (size , verified)) =
+compactToCookSatisfiable formula (bits , (size , (consistent , verified))) =
   Cook.satisfyingAssignment
     (recoverAssignment
       (pairObservations (formulaVariables formula) bits))
