@@ -50,6 +50,7 @@ data BH4Phase4Residual : Set where
   payCompartmentSpecificBH4BH2RedoxState : BH4Phase4Residual
   paySimultaneousConsumerDemand : BH4Phase4Residual
   payTransportOxidationExchangeVector : BH4Phase4Residual
+  constrainFreeExchangeAndTestDemand : BH4Phase4Residual
   payIsoformSpecificNOSCouplingTransitions : BH4Phase4Residual
   payUpstreamToTSC2SameObjectTransport : BH4Phase4Residual
   discriminateAlternativeMechanisms : BH4Phase4Residual
@@ -85,6 +86,7 @@ livePhase4Residuals =
   ∷ payCompartmentSpecificBH4BH2RedoxState
   ∷ paySimultaneousConsumerDemand
   ∷ payTransportOxidationExchangeVector
+  ∷ constrainFreeExchangeAndTestDemand
   ∷ payIsoformSpecificNOSCouplingTransitions
   ∷ payUpstreamToTSC2SameObjectTransport
   ∷ discriminateAlternativeMechanisms
@@ -143,6 +145,15 @@ originalCreatorFullNetworkObtained = false
 
 nativeSensibLawExternalGraphBridgeRefereeVerified : Bool
 nativeSensibLawExternalGraphBridgeRefereeVerified = false
+
+unrestrictedExchangeNonidentifiabilityTheoremSourceWritten : Bool
+unrestrictedExchangeNonidentifiabilityTheoremSourceWritten = true
+
+unrestrictedExchangeNonidentifiabilityKernelChecked : Bool
+unrestrictedExchangeNonidentifiabilityKernelChecked = false
+
+biologicallyConstrainedJointBH4DemandTestExecuted : Bool
+biologicallyConstrainedJointBH4DemandTestExecuted = false
 
 sabioKineticParameterCount : Nat
 sabioKineticParameterCount = SABIO.executedSABIOKineticParameterCount
