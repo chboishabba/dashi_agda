@@ -21,6 +21,7 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Equality using (_≡_)
 import DASHI.Reasoning.LeechQualityGateTeacherErasureExact as Quality
 import DASHI.Reasoning.LeechSharedCanonicalOrbitHistoryExact as Orbit
+import DASHI.Reasoning.LeechOddOnlyApproximationObstructionExact as OddNoGo
 
 toeTeacherFreeReplayUnderFullAdmission :
   ∀ {L : Nat} {State : Set} →
@@ -54,3 +55,8 @@ toeStudentRolloutGateIndependent :
     ≡ Quality.studentRollout second schedule initial
 toeStudentRolloutGateIndependent =
   Quality.studentRolloutIndependentOfGates
+
+-- The finite signed-history F02a obstruction is now an imported owner:
+-- OddNoGo.historyOddCannotMatchNonOddPair. The corresponding quantitative
+-- real-inner-product squared-error floor (F02b) and any concrete
+-- PyTorch-to-Agda function correspondence remain explicitly OPEN.
