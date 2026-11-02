@@ -6,6 +6,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDWorldSourceCoverageCensusExact as Registry
 import DASHI.Education.DigitalESDResearchWorldCorpusCensusExact as Census
+import DASHI.Education.DigitalESDAllSourceSupportHyperedgesExact as Genealogy
 import DASHI.Education.DigitalESDCrossCorpusIntersectionalMemoryLensExact as Lens
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as EfS
 import DASHI.Biology.EducationCorpusSourceRegistry as Alice
@@ -35,6 +36,20 @@ fiveQuantitativeResultAudits = Census.resultClaimRowCount
 eightHeterogeneousPNFAudits :
   Registry.length Census.evidenceClaimRows ≡ 8
 eightHeterogeneousPNFAudits = Census.evidenceClaimRowCount
+
+allSixteenGenealogiesActuallyGenerated :
+  Registry.length Genealogy.allSixteenSourceGenealogies ≡ 16
+allSixteenGenealogiesActuallyGenerated =
+  Genealogy.allSixteenCasesRetained
+
+originalSourceSupportIncidencesFiftyFive :
+  Genealogy.allSourceIncidenceCount ≡ 55
+originalSourceSupportIncidencesFiftyFive =
+  Genealogy.sourceGenealogyIncidencesAreFiftyFive
+
+ecoCOILOriginalSupportsAreThree :
+  Registry.length (Genealogy.caseSourceIncidences EfS.adefilaEcoCOIL) ≡ 3
+ecoCOILOriginalSupportsAreThree = refl
 
 -- Case/source equalities are *typed identities* rather than similarity in
 -- author, DOI, principle label or source title.
