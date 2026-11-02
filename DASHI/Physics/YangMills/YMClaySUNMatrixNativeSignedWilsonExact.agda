@@ -146,9 +146,13 @@ sunSignedC3OrientedLink :
 sunSignedC3OrientedLink theory bonds site (Torus.pair axis true) =
   refl
 sunSignedC3OrientedLink theory bonds site (Torus.pair axis false) =
-  cong (SUN.sunInverse theory)
-    (sym (SignedC3.c3SignedStepNaturality site
-      (Torus.pair axis false)))
+  cong
+    (λ movedSite →
+      SUN.sunInverse theory
+        (bonds (Torus.pair movedSite (SpatialC3.spatialC3Axis axis))))
+    (sym
+      (SignedC3.c3SignedStepNaturality site
+        (Torus.pair axis false)))
 
 sunSignedC3Holonomy :
   ∀ {Matrix Complex : Set} {N : Nat}
