@@ -300,3 +300,59 @@ partAxisAssessment p a =
 studyWorld : World.AccountedStudyWorld studyScope
 studyWorld = World.accounted-study-world
   (λ { getenetStudy p a → partAxisAssessment p a })
+
+
+------------------------------------------------------------------------
+-- ORIGINAL-STUDY GROUNDED, NOT REVIEWED: joint intersectional question.
+--
+-- Candidate incidence is NOT a real reviewed hyperedge. Four distinct
+-- decomposed research parts and five axes are retained simultaneously,
+-- including who was absent and how author coding produced the findings.
+-- No numerical or ternary valence is inferred from the original study.
+------------------------------------------------------------------------
+
+sourceSpecificFourPartIntersectionQuestion :
+  World.HigherOrderStudyRelation studyScope Nat
+sourceSpecificFourPartIntersectionQuestion =
+  World.higher-order-study-relation
+    (World.study-part getenetStudy eligiblePopulationAndSampling ∷
+     World.study-part getenetStudy codingAndThematicMethod ∷
+     World.study-part getenetStudy negativeAndOutlierResponses ∷
+     World.study-part getenetStudy researcherPositionality ∷ [])
+    (participantVoice ∷ effectiveDisabilityAccess ∷
+     consequentialDecisionAuthority ∷ temporalInstitutionalDurability ∷
+     researcherEpistemicPosition ∷ [])
+    World.unscoredCandidate
+    "How do sampled and absent learner positions, coding decisions, negative experiences, accessibility and consequential authority jointly constrain retrospective ESD inference?"
+    ("Getenet/Burke/Fanshawe/Brown 2026 DOI 10.1080/01587919.2026.2669288" ∷
+     "DASHI higher-order question, not original paper result" ∷ [])
+    "No source-audited four-part/five-axis interaction, no measured relational score"
+    "Source revision, reviewer approval, individual responses, analysis strata, outcome relevance, and all cross-axis interactions remain open"
+
+getenetJointQuestionKeepsOriginalPopulationPart :
+  World.study-part getenetStudy eligiblePopulationAndSampling ∈
+    World.HigherOrderStudyRelation.participatingStudyParts
+      sourceSpecificFourPartIntersectionQuestion
+getenetJointQuestionKeepsOriginalPopulationPart = here refl
+
+getenetJointQuestionKeepsAuthorEpistemics :
+  World.study-part getenetStudy researcherPositionality ∈
+    World.HigherOrderStudyRelation.participatingStudyParts
+      sourceSpecificFourPartIntersectionQuestion
+getenetJointQuestionKeepsAuthorEpistemics =
+  there (there (there (here refl)))
+
+getenetJointQuestionKeepsAuthorityAxis :
+  consequentialDecisionAuthority ∈
+    World.HigherOrderStudyRelation.activeAxisReferences
+      sourceSpecificFourPartIntersectionQuestion
+getenetJointQuestionKeepsAuthorityAxis =
+  there (there (here refl))
+
+-- A candidate question is inside the accounted source-study world, but
+-- this type is purposely weaker than ReviewedHigherOrderFabricIncidence.
+sourceSpecificCandidateSituatedQuestion :
+  World.SituatedWorldRelation studyScope Nat
+sourceSpecificCandidateSituatedQuestion =
+  World.situated-world-relation studyWorld
+    sourceSpecificFourPartIntersectionQuestion
