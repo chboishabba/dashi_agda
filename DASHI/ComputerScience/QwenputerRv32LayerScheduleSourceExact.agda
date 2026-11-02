@@ -133,3 +133,65 @@ currentLayerScheduleStatus = sourcedFiniteLayout
 
 actualTensorWeldStatus : LayerScheduleStatus
 actualTensorWeldStatus = sameObjectLayerWeightsNotVerified
+
+
+------------------------------------------------------------------------
+-- P2 vs P3 source memory and bridge values. These are *reported* sizes.
+-- The P3 text capture starts exactly at the end of P2's 32 KiB RAM.
+-- That arithmetic fact DOES NOT prove P2's map alone implements P3.
+-- Source P2: RV32 docs, memory map v2 (commit 77fa2ae, short ID).
+-- Source P3: rv-q4p2 bridge documented above.
+------------------------------------------------------------------------
+
+record P2MemoryMap : Set where
+  constructor p2MemoryMap
+  field
+    ramStart ramLength : Nat
+    dromStart dromLength : Nat
+    romStart romLength : Nat
+open P2MemoryMap public
+
+p2Memory : P2MemoryMap
+p2Memory = p2MemoryMap 0 32768 131072 131072 262144 262144
+
+p2DromEndsAtRom :
+  dromStart p2Memory + dromLength p2Memory
+  ≡ romStart p2Memory
+p2DromEndsAtRom = refl
+
+p2RamEndsAtBridgeStart :
+  ramStart p2Memory + ramLength p2Memory ≡ 32768
+p2RamEndsAtBridgeStart = refl
+
+record P3TextBridge : Set where
+  constructor p3TextBridge
+  field
+    captureAddress : Nat
+    bytesPerToken : Nat
+    maxCapturedTokens : Nat
+    maximumDecimalDigits : Nat
+    preservedChipExitDimensions : Nat
+open P3TextBridge public
+
+p3ReportedTextBridge : P3TextBridge
+p3ReportedTextBridge = p3TextBridge 32768 16 80 62 23
+
+p3CaptureMaximumBytes :
+  bytesPerToken p3ReportedTextBridge
+    * maxCapturedTokens p3ReportedTextBridge ≡ 1280
+p3CaptureMaximumBytes = refl
+
+p3CaptureBeginsAtP2RamEnd :
+  captureAddress p3ReportedTextBridge
+  ≡ ramStart p2Memory + ramLength p2Memory
+p3CaptureBeginsAtP2RamEnd = refl
+
+data MapBridgeStatus : Set where
+  correctReportedBoundaries : MapBridgeStatus
+  actualP3CaptureMapSameObjectPending : MapBridgeStatus
+
+sourceMapStatus : MapBridgeStatus
+sourceMapStatus = correctReportedBoundaries
+
+realCaptureMappingStatus : MapBridgeStatus
+realCaptureMappingStatus = actualP3CaptureMapSameObjectPending
