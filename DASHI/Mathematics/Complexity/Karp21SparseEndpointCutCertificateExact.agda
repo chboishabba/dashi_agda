@@ -303,3 +303,108 @@ sparseWordVerifierRejectsTrailingBit :
     (encodeSparseEdgeBits local ++ (extra ∷ [])) ≡ false
 sparseWordVerifierRejectsTrailingBit graph local extra
   rewrite sparseRejectTrailingBit local extra = refl
+
+
+------------------------------------------------------------------------
+-- SPARSE VERIFIER COMPLETENESS on actual projected full assignments.
+-- Every edge endpoint in the projection reads the SAME original vertex
+-- lookup; repeated occurrences therefore satisfy the real checker.
+------------------------------------------------------------------------
+
+vertexOccurrences :
+  ∀ {n} → List (Cut.SignedUndirectedEdge n) → List (Fin.Fin n)
+vertexOccurrences [] = []
+vertexOccurrences (edge ∷ tail) =
+  Cut.first edge ∷ Cut.second edge ∷ vertexOccurrences tail
+
+observationsOfVertices :
+  ∀ {n} → List (Fin.Fin n) → Vec.Vec Bool n →
+  List (Fin.Fin n × Bool)
+observationsOfVertices [] labels = []
+observationsOfVertices (v ∷ rest) labels =
+  (v , Vec.lookup labels v) ∷ observationsOfVertices rest labels
+
+projectedObservationsAreActualVertexLookups :
+  ∀ {n} (edges : List (Cut.SignedUndirectedEdge n))
+    (labels : Vec.Vec Bool n) →
+  endpointObservations edges (projectEdgeBits edges labels)
+  ≡ observationsOfVertices (vertexOccurrences edges) labels
+projectedObservationsAreActualVertexLookups [] labels = refl
+projectedObservationsAreActualVertexLookups (edge ∷ tail) labels =
+  cong (λ rest →
+      (Cut.first edge , Vec.lookup labels (Cut.first edge))
+      ∷ (Cut.second edge , Vec.lookup labels (Cut.second edge))
+      ∷ rest)
+    (projectedObservationsAreActualVertexLookups tail labels)
+
+boolEqualSelf :
+  (value : Bool) → boolEqual value value ≡ true
+boolEqualSelf true = refl
+boolEqualSelf false = refl
+
+equalVertexObservationsAlwaysCompatible :
+  ∀ {n} (labels : Vec.Vec Bool n) (v w : Fin.Fin n) →
+  observationsCompatible
+    (v , Vec.lookup labels v)
+    (w , Vec.lookup labels w) ≡ true
+equalVertexObservationsAlwaysCompatible labels v w
+  with FinP._≟_ v w
+... | yes refl = boolEqualSelf (Vec.lookup labels v)
+... | no _ = refl
+
+oneVersusActualVertexObservations :
+  ∀ {n} (labels : Vec.Vec Bool n) (v : Fin.Fin n)
+    (vertices : List (Fin.Fin n)) →
+  oneAgainstAll
+    (v , Vec.lookup labels v)
+    (observationsOfVertices vertices labels)
+  ≡ true
+oneVersusActualVertexObservations labels v [] = refl
+oneVersusActualVertexObservations labels v (w ∷ tail)
+  rewrite equalVertexObservationsAlwaysCompatible labels v w
+        | oneVersusActualVertexObservations labels v tail =
+  refl
+
+allActualVertexObservationsConsistent :
+  ∀ {n} (labels : Vec.Vec Bool n)
+    (vertices : List (Fin.Fin n)) →
+  allEndpointOccurrencesConsistent
+    (observationsOfVertices vertices labels) ≡ true
+allActualVertexObservationsConsistent labels [] = refl
+allActualVertexObservationsConsistent labels (v ∷ tail)
+  rewrite oneVersusActualVertexObservations labels v tail
+        | allActualVertexObservationsConsistent labels tail = refl
+
+projectedSparseCertificateAlwaysConsistent :
+  ∀ {n} (edges : List (Cut.SignedUndirectedEdge n))
+    (labels : Vec.Vec Bool n) →
+  allEndpointOccurrencesConsistent
+    (endpointObservations edges (projectEdgeBits edges labels)) ≡ true
+projectedSparseCertificateAlwaysConsistent edges labels
+  rewrite projectedObservationsAreActualVertexLookups edges labels =
+  allActualVertexObservationsConsistent labels
+    (vertexOccurrences edges)
+
+-- Exact acceptance equality for the actual sparsity/consistency
+-- verifier, not merely its unconstrained signed objective.
+projectedConsistentSparseVerifierEqualsOriginal :
+  ∀ {n} (graph : Cut.WeightedCutGraph n)
+    (labels : Vec.Vec Bool n) →
+  verifyConsistentSparseCut graph
+    (projectEdgeBits (Cut.edges graph) labels)
+  ≡ Cut.verifyWeightedMaxCut graph labels
+projectedConsistentSparseVerifierEqualsOriginal graph labels
+  rewrite projectedSparseCertificateAlwaysConsistent
+    (Cut.edges graph) labels =
+  projectedSparseVerifierExactlyEqualsFull graph labels
+
+projectedSparseBitWordVerifierEqualsOriginal :
+  ∀ {n} (graph : Cut.WeightedCutGraph n)
+    (labels : Vec.Vec Bool n) →
+  verifySparseCutBitWord graph
+    (encodeSparseEdgeBits (projectEdgeBits (Cut.edges graph) labels))
+  ≡ Cut.verifyWeightedMaxCut graph labels
+projectedSparseBitWordVerifierEqualsOriginal graph labels
+  rewrite sparseDecodeEncode
+    (projectEdgeBits (Cut.edges graph) labels) =
+  projectedConsistentSparseVerifierEqualsOriginal graph labels
