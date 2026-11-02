@@ -17436,3 +17436,9 @@ Cleanup
 - [x] Source-write `sunTransformedPathSameSource` and `sunPlaquetteRealTraceGaugeInvariant` on the original signed SUN matrix Wilson source, then `sunSixDeficitGaugeInvariant`, `sunWilsonActionGaugeInvariant` and `sunGibbsDensityGaugeInvariant` using the full selected six-plane real action and same exponential. Canonical TOE imports the owner; Agda typecheck pending.
 - [x] Execute independent SU2 quaternion 4D side-four gauge fixture with 256 sites, 1024 positive links and 1536 original plaquettes; max real trace discrepancy 7.77e-16 (numerical check only).
 - [ ] Still mandatory: build actual real SU2/SUN matrix/trace source + globally normalized one-link Haar/Fubini and 1024-coordinate C3 bond codec; physical changing-cutoff R445 moments/limit; uniform selected CMP116 R320 decay; same OS H reconstruction with strictly positive limit-uniform R333 mass gap and nontriviality.
+
+
+### 2026-11-02 source-owner reconciliation
+- [x] Explicitly search for and inspect original `CMP119WilsonGibbsFiniteMeasureSameObjectExact`, `CMP119SelectedWilsonGibbsAnchorExact`, `YangMillsCMP119WilsonGibbsHaarActionRound443Exact`, R431, R445 marked moment/diagonal/tail, R320 H1 and R333 same-H OS owners; record their exact consumed fields in `Docs/physics/YMClaySourceOwnerReuseAndProofGate20261102.md`.
+- [ ] Instantiate **existing** selected CMP119 Wilson–Gibbs metric numerator from original R124 density anchor/cutoff in actual real compact SU2/SUN link-only Haar carrier; no parallel generic N/Z/DN/DZ compiler.
+- [ ] Construct the selected physical R445 tail and R320 rooted-shell estimate, and R333 same-H spectral gap; don't mark a record declaration as an inhabited physical theorem.
