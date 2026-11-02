@@ -945,3 +945,10 @@ New exact native same-object owner `nativeR443SixDeficitR445Observable` proves t
 
 
 **Physical-carrier caution:** the exact native `RationalSU2BondData 3` record also stores an arbitrary `siteGauge` function. Its type equality across R443/R445 is genuine, but physical link-Haar requires an explicit pushforward/integration of this redundant gauge coordinate or direct link-only compact SU2/SUN configuration correspondence. The Wilson observable is gauge-field independent, the arbitrary physical integration field is not proven equivalent. Add **R443-linkHaar** to the source leaves along with actual compact completion/Haar and physical UV.
+
+
+### 2026-11-02 source-first max-cut: selected CMP119 Gibbs numerator already owned
+
+A new primary source readback audit `Docs/physics/YMClaySourceOwnerReuseAndProofGate20261102.md` establishes that `CMP119WilsonGibbsFiniteMeasureSameObjectExact` and `CMP119SelectedWilsonGibbsAnchorExact` **already construct** the source-selected CMP119 metric-insertion N/Z/DN/DZ Wilson–Gibbs finite numerator same-object theorem under their stated selected beta-driven density anchor and Wilson insertion. Do not duplicate these compilers. The next concrete leaf is the correct source proof that the chosen R443 actual compact SU2/SUN link-only Haar Gibbs configurations and varying cutoff family instantiate *those* original CMP119/R124 owners; the native side-four rational C3 module alone cannot pay that.
+
+Likewise, pre-existing R445 selected marked moment and preferred diagonal producer structures do not imply the actual continuum tail, and R320 selected marked second source derivative and R333 same OS H3 Hamiltonian remain real theorem-bearing hypotheses, not syntactic construction tasks. All prior source-written new Agda remains exact-head kernel-unverified. Keep the max-cut list in the 2026-11-02 audit authoritative.
