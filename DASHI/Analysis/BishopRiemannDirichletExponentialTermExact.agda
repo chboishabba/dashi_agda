@@ -731,3 +731,66 @@ originalSourceExponentTwoUniformFiniteTails
     (natLogViaOriginalNegativeLog
       (Route.round11MachinTranscendentals inputs) inside)
     inverseLaw k m n mPast nPast
+
+
+------------------------------------------------------------------------
+-- K04d REAL-AXIS SOURCE EXPONENTIAL IDENTITY, ALL BISHOP SIGMA.
+-- No log-inverse, Basel domination, or completed-zeta agreement
+-- required. It is the actual source's original complex expC
+-- and the same Round11 sine/cosine at zero, at EVERY real sigma.
+------------------------------------------------------------------------
+
+sourceRealAxisExponent : R.ℝ → A.BishopComplex
+sourceRealAxisExponent sigma =
+  A.bishop-complex sigma R.0ℝ
+
+sourceRealAxisExponentialRealCoefficient :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (sigma : R.ℝ)
+  (n : Nat) →
+  R._≃_
+    (A.re
+      (bishopDirichletExponentialTerm
+        (Route.round11MachinTranscendentals inputs)
+        logNat (sourceRealAxisExponent sigma) n))
+    (Exp.bishopExp
+      (R._*_ (R.- sigma) (logNat n)))
+sourceRealAxisExponentialRealCoefficient inputs logNat sigma n =
+  RP.≃-trans
+    (RP.*-cong
+      RP.≃-refl
+      (RP.≃-trans
+        (TrigCong.bishopCosCongruent
+          (Round11.round11ConcreteTermIdentification inputs)
+          (sourceExponentTwoImaginaryArgumentZero logNat n))
+        (Origin.round11CosineAtZero inputs)))
+    (RP.*-identityʳ
+      (Exp.bishopExp (R._*_ (R.- sigma) (logNat n))))
+
+sourceRealAxisExponentialImaginaryZero :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (sigma : R.ℝ)
+  (n : Nat) →
+  R._≃_
+    (A.im
+      (bishopDirichletExponentialTerm
+        (Route.round11MachinTranscendentals inputs)
+        logNat (sourceRealAxisExponent sigma) n))
+    R.0ℝ
+sourceRealAxisExponentialImaginaryZero inputs logNat sigma n =
+  RP.≃-trans
+    (RP.*-cong
+      RP.≃-refl
+      (RP.≃-trans
+        (TrigCong.bishopSinCongruent
+          (Round11.round11ConcreteTermIdentification inputs)
+          (sourceExponentTwoImaginaryArgumentZero logNat n))
+        (Origin.round11SineAtZero inputs)))
+    (let open RP.ℝ-Solver
+     in solve 1
+       (λ realFactor → realFactor ⊗ Κ Rat.0ℚᵘ ⊜ Κ Rat.0ℚᵘ)
+       RP.≃-refl
+       (Exp.bishopExp
+         (R._*_ (R.- sigma) (logNat n))))
