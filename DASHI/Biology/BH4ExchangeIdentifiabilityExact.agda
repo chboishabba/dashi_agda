@@ -37,6 +37,19 @@ unrestrictedExchangeBalance :
 unrestrictedExchangeBalance C s =
   inverse C s , rightInverse C s
 
+-- Instantiating the internal signed total with a particular S*v
+-- preserves the theorem. The functional stoichiometric map is supplied
+-- by the existing matrix owner; no source-paid exchange is constructed.
+forAnyInternalReactionVector :
+  ∀ {V A : Set} →
+  (C : ExchangeCancellation A) →
+  (stoichiometricMap : V → A) →
+  (reactionFlux : V) →
+  Σ A (λ e →
+    _⊕_ C (stoichiometricMap reactionFlux) e ≡ zero C)
+forAnyInternalReactionVector C S v =
+  unrestrictedExchangeBalance C (S v)
+
 unrestrictedExchangeIsNotPhysicalEvidence :
   ∀ {A : Set} →
   (C : ExchangeCancellation A) →
