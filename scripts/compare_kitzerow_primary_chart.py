@@ -100,15 +100,110 @@ def compare(chart: dict, matrix: dict) -> dict:
         ],
     }
 
+def compare_text_candidate_index(extracted: dict, matrix: dict) -> dict:
+    """Compare all source-text observed IDs without promoting their authority.
+
+    The caller supplies an index of authorized local UTF-8 text. This
+    cannot establish the completeness of the author's original PDF or
+    the full proprietary BioGene pathway network.
+    """
+    if extracted.get("schema") != "dashi.kitzerow-chart-source-text-identifier-candidates.v1":
+        raise ValueError("wrong source-text candidate ABI")
+    if extracted.get("creator") != "Kimberly Kitzerow":
+        raise ValueError("source text creator identity mismatch")
+    if not extracted.get("source_url", "").startswith(
+        "https://www.researchgate.net/publication/377218425_"
+    ):
+        raise ValueError("unrecognized creator source")
+    if not extracted.get("source_utf8_sha256") or not extracted.get("source_revision"):
+        raise ValueError("source observation lacks digest or revision")
+    if any(extracted.get(k) is not expected for k, expected in (
+        ("candidate_only", True),
+        ("source_is_faithful_publisher_binary", False),
+        ("creator_pdf_figure_geometry_verified", False),
+        ("not_creator_full_network_coverage", True),
+        ("establishes_physical_flux", False),
+        ("establishes_causal_model", False),
+    )):
+        raise ValueError("unearned text-source promotion")
+    ids = extracted.get("text_observed_reaction_ids")
+    rows = extracted.get("occurrences")
+    if not isinstance(ids, list) or not isinstance(rows, list):
+        raise ValueError("source text candidate record incomplete")
+    if not ids or len(ids) != len(set(ids)) or any(
+        not isinstance(rid, str) or not RHEA_ID.fullmatch(rid) for rid in ids
+    ):
+        raise ValueError("invalid source-observed identifier set")
+    if not rows or {x.get("rhea_id") for x in rows} != set(ids):
+        raise ValueError("source occurrences do not cover all observed IDs")
+    for entry in rows:
+        if (not isinstance(entry.get("source_text_line"), int)
+                or entry["source_text_line"] <= 0
+                or not isinstance(entry.get("normalized_line_column"), int)
+                or entry["normalized_line_column"] <= 0
+                or entry.get("review_status") != "candidate-unverified-figure-location"):
+            raise ValueError("source occurrence has missing/invalid text anchors")
+    panel_ids = matrix.get("reaction_index")
+    if matrix.get("schema") != MATRIX_SCHEMA or not isinstance(panel_ids, list):
+        raise ValueError("matrix ABI invalid")
+    if len(panel_ids) != len(set(panel_ids)) or any(
+        not isinstance(rid, str) or not RHEA_ID.fullmatch(rid) for rid in panel_ids
+    ):
+        raise ValueError("invalid finite-panel identifiers")
+    chart_set, panel_set = set(ids), set(panel_ids)
+    return {
+        "schema": RESULT_SCHEMA,
+        "creator": "Kimberly Kitzerow",
+        "creator_work_source": extracted["source_url"],
+        "source_text_revision": extracted["source_revision"],
+        "source_utf8_sha256": extracted["source_utf8_sha256"],
+        "source_basis": "caller-supplied-text-observation-candidate",
+        "creator_chart_observed_rhea_id_count": len(chart_set),
+        "dashi_finite_panel_rhea_id_count": len(panel_set),
+        "literal_rhea_identifier_intersection": sorted(chart_set & panel_set),
+        "creator_chart_observed_only": sorted(chart_set - panel_set),
+        "dashi_finite_panel_only": sorted(panel_set - chart_set),
+        "source_text_occurrence_count": len(rows),
+        "source_occurrences": rows,
+        "creator_entire_network_reaction_count": None,
+        "creator_network_coverage_ratio": None,
+        "source_pdf_binary_verified": False,
+        "same_physiological_reaction_verified": False,
+        "matches_creator_causal_hypothesis": False,
+        "quantitative_flux_established": False,
+        "external_reaction_owner": "Rhea",
+        "formalisation_owner": "DASHI",
+        "unresolved": [
+            "source text was caller-supplied, not authenticated as original PDF",
+            "chart geometry and original PDF passages unverified",
+            "complete proprietary BioGene network remains unknown",
+            "same-context compartment, reaction direction and kinetics are unverified",
+        ],
+    }
+
+
+def compare_chart_and_optional_text(chart: dict, matrix: dict,
+                                    source_text: dict | None = None) -> dict:
+    base = compare(chart, matrix)
+    if source_text is not None:
+        base["local_source_text_observation"] = compare_text_candidate_index(
+            source_text, matrix)
+        base["source_observations_are_distinct"] = True
+    return base
+
 
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--chart", type=Path, default=Path(
         "docs/biology/KitzerowPublishedRheaChartObservedIndex.v1.json"))
     p.add_argument("--matrix", type=Path, required=True)
+    p.add_argument("--source-text-index", type=Path,
+                   help="optional candidate-only index produced from user-authorized local source text")
     p.add_argument("-o", "--output", type=Path, required=True)
     a = p.parse_args()
-    result = compare(json.loads(a.chart.read_text()), json.loads(a.matrix.read_text()))
+    text_index = json.loads(a.source_text_index.read_text()) if a.source_text_index else None
+    result = compare_chart_and_optional_text(
+        json.loads(a.chart.read_text()), json.loads(a.matrix.read_text()), text_index)
     a.output.parent.mkdir(parents=True, exist_ok=True)
     a.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(json.dumps({
