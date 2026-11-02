@@ -109,7 +109,7 @@ def fetch_rhea_row(rhea_id: str) -> dict:
     params = urllib.parse.urlencode(
         {
             "query": f"id:{numeric}",
-            "columns": "rhea-id,equation,chebi,chebi-id,ec,pubmed,go,reaction-xref(Reactome)",
+            "columns": "rhea-id,equation,chebi,chebi-id,ec,pubmed,go,reaction-xref(Reactome),reaction-xref(KEGG),reaction-xref(MetaCyc)",
             "format": "tsv",
             "limit": "10",
         }
