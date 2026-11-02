@@ -612,3 +612,34 @@ D3 trained focused/global CE recovery; D4 full-gate
 teacher erasure; F02b/F08 real analytic proof, F07 concrete
 constants and Agda kernel; D6 actual network, D7 labelled
 semantics. Original Kornienko and DASHI owners unchanged.
+
+
+### 2 November D2/D3 steelman executable closure
+
+LeechTransformer PR #4 now also includes:
+`scripts/prepare_train_only_development.py` and tests,
+which consume the trusted original one-document-per-window
+train preparation, verify its saved train-array digest,
+and create disjoint fit/development arrays WITHOUT reading
+the independent final heldout. It records selected row
+indices and cryptographic hashes.
+`scripts/train_early_layer_dense_control.py` and tests,
+which train one ordinary dense GELU FFN with parameter count
+within 2*d_model+1 of the signed MoE + even student,
+keeping the rest of the source transformer frozen.
+This is an original-model teacher-input MSE plus full
+CE/KL training control, not geometric proof or full
+teacher-free student acceptance.
+
+The constrained MoE competitor uses existing
+`train_guarded_moe_continuation.py --focus-layers 1`
+(or 0 / 0 1), with dense fallback elsewhere and
+unconditional refusal to call any focused run
+a complete teacher-free checkpoint. Both candidates
+must use the same fit/development rows, learning rate,
+epochs, random seed and evaluation procedure.
+Parameter matching ALONE is not FLOP/time matching.
+No user-local experiment results have yet been run for
+these new implementations. Exact source filenames and
+run commands are in
+`LeechTransformer/docs/early_layer_quality_rescue_maxcut_20261102.md`.
