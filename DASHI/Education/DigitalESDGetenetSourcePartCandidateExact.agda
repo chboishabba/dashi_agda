@@ -268,9 +268,7 @@ partAxisAssessment negativeAndOutlierResponses pedagogyAndLearning =
 partAxisAssessment p a =
   World.unmeasuredForQuestion
     (axisName a)
-    ("Review whether source evidence addresses " ++pending)
-  where
-    postulate ++pending : String
+    "No source-specific reviewed observation supplied for this part-axis address; further paper review may reclassify it"
 
 -- The fallback intentionally has NO invented empirical findings. The
 -- generic missing status above is a review query, not a proved absent effect.
