@@ -37,7 +37,7 @@ for token in [
     "bh4-flux-candidate-ranking.json",
     "rank_bh4_flux_candidates.py",
     "sabio_flux_ranking",
-    "dashi.bh4-phase4-maxcut-run.v5",
+    "dashi.bh4-phase4-maxcut-run.v8",
 ]:
     assert token in run_text, f"missing runner ranking token: {token}"
 
