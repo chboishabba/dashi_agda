@@ -181,11 +181,14 @@ def partition_to_cut(parts: Sequence[int]) -> CutGraph:
 
 
 def reduction_word(source_word: Sequence[int]) -> Bits:
-    # Strict source parsing first: malformed source words are deliberately
-    # REJECTED here, rather than silently treated as valid inputs.
-    # The complete PR.PolynomialManyOneReduction requires a TOTAL source
-    # language policy and an explicit fixed-NO target for invalid words.
-    parts = decode_partition(source_word)
+    # TOTAL map on the Boolean-word carrier (and fail-closed on invalid
+    # host input). Malformed source strings are false in source language;
+    # therefore map them to a *valid* two-vertex fixed-NO Max-Cut graph.
+    # This is necessary for reductions quantified over EVERY input Word.
+    try:
+        parts = decode_partition(source_word)
+    except (ValueError, TypeError):
+        return encode_graph(CutGraph(2, ((0, 1, 1),), 2))
     return encode_graph(partition_to_cut(parts))
 
 
