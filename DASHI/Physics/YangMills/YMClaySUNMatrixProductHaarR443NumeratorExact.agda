@@ -19,9 +19,10 @@ module DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; -ℝ_; _≤ℝ_; _<ℝ_)
+  (ℝ; 0ℝ; 1ℝ; -ℝ_; _≤ℝ_; _<ℝ_)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
@@ -181,3 +182,46 @@ module _
       (R443.asFiniteHaarMeasurePreservingAction
         (nativeProductHaarR443 boundary))
       c3 observable
+
+  -- R431's numerator invariant is already the full finite normalized
+  -- Gibbs expectation symmetry: the partition denominator is unchanged.
+  -- No independent normalized-expectation C3 hypothesis is introduced.
+  nativeProductHaarNormalizedC3 :
+    (boundary : PhysicalC3ActionBoundary)
+    (observable : Native.SUNSideFourLinks N theory → ℝ) →
+    Physical.normalizedExpectation physicalMeasure
+      (λ links → observable (Weld.nativeForwardC3Bonds links))
+    ≡ Physical.normalizedExpectation physicalMeasure observable
+  nativeProductHaarNormalizedC3 boundary observable =
+    cong
+      (λ numerator →
+        divide numerator (Physical.partitionFunction physicalMeasure))
+      (nativeProductHaarNumeratorC3 boundary observable)
+
+  -- The same physical partition is exactly the numerator of constant one.
+  -- This is an equation of the original measure record, not another law.
+  nativeProductHaarUnitNumerator :
+    (boundary : PhysicalC3ActionBoundary) →
+    Finite.unnormalizedNumerator physicalMeasure Finite.oneObservable
+    ≡ Physical.partitionFunction physicalMeasure
+  nativeProductHaarUnitNumerator boundary =
+    Finite.numeratorOneIsPartitionFunction
+      (nativePhysicalIntegrationLaws boundary)
+
+  -- Actual finite probability normalization. The real division field of
+  -- PhysicalFiniteYMMeasure is otherwise arbitrary, so only its standard
+  -- positive-self-division law is passed as a scalar input.
+  nativeNormalizedWilsonUnit :
+    (boundary : PhysicalC3ActionBoundary)
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink)
+    (divideSelf : ∀ z → 0ℝ <ℝ z → divide z z ≡ 1ℝ) →
+    Physical.normalizedExpectation physicalMeasure Finite.oneObservable
+    ≡ 1ℝ
+  nativeNormalizedWilsonUnit boundary strict divideSelf =
+    trans
+      (cong
+        (λ numerator →
+          divide numerator (Physical.partitionFunction physicalMeasure))
+        (nativeProductHaarUnitNumerator boundary))
+      (divideSelf (Physical.partitionFunction physicalMeasure)
+        (nativePhysicalPartitionPositive strict))
