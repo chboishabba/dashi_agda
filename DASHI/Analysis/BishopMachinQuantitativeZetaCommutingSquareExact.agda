@@ -50,6 +50,14 @@ import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopMachinPiRationalWindowExact as Window
 import DASHI.Analysis.BishopMachinCombinedRemainderBoundExact as Combined
 
+------------------------------------------------------------------------
+-- Rational constant: avoids an implicit integer/real coercion in
+-- the K04b two-index commuting-square bound.
+------------------------------------------------------------------------
+
+eight : ℚᵘ
+eight = (+ 8 / 1)
+
 module AtOriginalCompletedZeta
   (functions : BC.BishopComplexAnalyticFunctionLayer)
   (gamma : Analytic.GammaMellinLayer
@@ -199,10 +207,3 @@ module AtOriginalCompletedZeta
   stageZetaImagSquare n regular =
     cong BC.im (Z.originalZetaEqualsDirichletAtStage n regular)
 
-------------------------------------------------------------------------
--- Rational constant: avoids an implicit integer/real coercion in
--- the K04b two-index commuting-square bound.
-------------------------------------------------------------------------
-
-eight : ℚᵘ
-eight = (+ 8 / 1)
