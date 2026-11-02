@@ -94,3 +94,21 @@ module AtExistingRound11Weld
       quarterUnitFromOriginalSharedWeld
       sinQuad
       cosQuad
+
+  -- K05 strengthened: the old Pythagorean premise is inherited from
+  -- the same explicit weld, while the two fourfold premises are both
+  -- DERIVED from one uniform original Round11 double-angle theorem.
+  -- The latter is still owed by the signed-factorial Cauchy-product lane.
+  quarterWeldedTrigEndpointFromDoubleAngle :
+    Phase.Round11BishopDoubleAngle inputs →
+    Bishop._≃_ quarterCos quarterSin →
+    (Bishop._≃_
+      (Phase.round11Sine inputs Machin.bishopMachinPi)
+      Bishop.0ℝ)
+    ×
+    (Bishop._≃_
+      (Phase.round11Cos inputs Machin.bishopMachinPi)
+      (Bishop.-_ Bishop.1ℝ))
+  quarterWeldedTrigEndpointFromDoubleAngle doubleLaw quarterEqual =
+    Phase.actualMachinTrigEndpointFromDoubleAngle
+      inputs doubleLaw quarterEqual quarterUnitFromOriginalSharedWeld
