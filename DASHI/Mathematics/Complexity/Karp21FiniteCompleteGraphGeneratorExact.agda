@@ -16,7 +16,7 @@ module DASHI.Mathematics.Complexity.Karp21FiniteCompleteGraphGeneratorExact wher
 -- unique orientation/pair coverage and binary machine-time bounds.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; _*_)
 open import Data.List.Base using (List; []; _∷_; _++_; map)
