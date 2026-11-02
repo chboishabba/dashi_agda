@@ -170,3 +170,21 @@ strictSerializedCookWordTokenParse states symbols nonempty input steps =
   Strict.strictCookFormulaTokenRoundTrip
     (CL.guardedCookFormula states symbols nonempty input steps)
 
+
+
+-- The actual Cook--Levin output is parsed as exactly ONE syntactically
+-- valid formula, not merely a stream of valid three-bit tokens.
+strictSerializedCookWordParsesExactFormula :
+  ∀ {machine : Tape.ConcreteTapeMachine}
+    (states : Canonical.EnumerationCoverage (Tape.finiteState machine))
+    (symbols : Canonical.EnumerationCoverage (Tape.finiteSymbol machine))
+    (nonempty : Rules.NonemptyRuleTable machine)
+    (input : Input.InputWord machine)
+    (steps : Nat) →
+  Strict.strictDecodeCookFormulaBits
+    (guardedCookLevinBitWord states symbols nonempty input steps)
+  ≡ Maybe.just
+    (CL.guardedCookFormula states symbols nonempty input steps)
+strictSerializedCookWordParsesExactFormula states symbols nonempty input steps =
+  Strict.strictCookFormulaRoundTrip
+    (CL.guardedCookFormula states symbols nonempty input steps)
