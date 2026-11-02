@@ -945,6 +945,9 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Finite
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixSpatialC3RealFubiniExact as SUNRealC3
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeInversePlaquetteRealTraceExact as SUNInversePlane
+import DASHI.Physics.YangMills.YMClayConstructedComplexFiniteAdjointTraceExact as SUNFiniteTrace
+import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as SUNGaugeHaar
+import DASHI.Physics.YangMills.YMClaySUNProductHaarNativeGaugeR443Exact as SUNNativeGauge
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSixPlaneC3FromInverseTraceExact as SUNSixC3
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact as SUNHaarR443
@@ -1061,6 +1064,22 @@ open SUNRealC3 public using
   ; nativeSUNWilsonActionC3FromLocal)
 -- Original SUN inverse plaquette and six real plane C3 from one real
 -- matrix trace-inversion law. Not an abstract Wilson action assumption.
+-- Concrete finite complex-pair trace adjoint algebra (Bishop/real bridge pending).
+open SUNFiniteTrace public using
+  (realComplexMatrixAdjointTrace
+  ; concreteNormalizedRealTraceAdjoint
+  ; concreteSUNAdjointRealTrace)
+-- Coordinatewise gauge Haar invariance is a consequence of one-link bi-invariance.
+open SUNGaugeHaar public using
+  (OneLinkSUNBilateralHaar
+  ; gaugeOneLinkHaarInvariant
+  ; gaugeBondVector
+  ; productHaarNativeGaugeInvariant)
+open SUNNativeGauge public using
+  (nativeProductHaarGaugeInvariant
+  ; nativeGaugeWilsonGibbsR443
+  ; nativeGaugeGibbsNumeratorInvariant
+  ; nativeGaugeNormalizedExpectationInvariant)
 open SUNInversePlane public using
   (sunSwappedPositivePlaneIsInverse
   ; sunSwappedPositivePlaneRealTrace
