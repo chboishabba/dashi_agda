@@ -62,7 +62,7 @@ Kitzerow hypothesis ledger:
 
 See [KitzerowBH4PathwayOntologyRoadmap.md](KitzerowBH4PathwayOntologyRoadmap.md)
 for exact external ontology targets and the KPO-01 through KPO-12 obligations.
-The JSON-LD representation is an RDF-importable discovery graph, **not** a
+The updated Rhea REST acquisition also requests GO and Reactome columns. Any observed links are exported with release/source metadata, but do not establish same-context pathway identity. The JSON-LD representation is an RDF-importable discovery graph, **not** a
 standards-compliant BioPAX/GO-CAM/SBML model or a paid kinetic simulator.
 It has no fabricated compartments, kinetic laws or exchange rates. Failed
 acquisition must not be reinterpreted as negative biology.
