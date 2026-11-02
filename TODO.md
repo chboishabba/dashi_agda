@@ -1,3 +1,13 @@
+### 2026-11-02 new native real SU(N) finite spatial C3 / Gibbs probability max-cut
+- [x] Search older generic plaquette/SUNWilson/Hodge/curl, CMP119/116/mixed-J, Fubini/Haar, OS/Hamiltonian and spectral owners and relevant original PRs #151/#153/#335/#430/#439/#466/#497/#547 before implementation.
+- [x] Source-write original 4^4 real Wilson spatial C3 site-sum proof via pre-existing polymorphic `finiteFubini`; derive beta-weighted global Wilson C3 from only local original six-plaquette source C3 (`YMClaySUNMatrixSpatialC3RealFubiniExact`).
+- [x] Replace R443 full `sixPlaneActionC3` input with local native `sixPlaneAtC3`; derive full physical C3 numerator and `normalizedExpectation` invariance, unit numerator, and normalized expectation of one conditional on one-link strict Haar positivity and real self-division law.
+- [x] Wire new finite real C3 owners into canonical Balaban TOE regression and synchronize exact source ledger/roadmap/changelog.
+- [ ] Pay **local native matrix** six-positive-plane C3 law by deriving `ReTr_N(U⁻¹)=ReTr_N(U)` on original unitary SU(N), together with the two orientation-reversal planes already isolated in rational SU2. Neither generic gauge class-function invariance nor the rational-trace proof alone supplies this.
+- [ ] Actual original 1024-bond Vec/C3 codec, selected integrable one-link compact Haar and strict-positivity source; cross-transport Lean PR #15 concrete compact unit-quaternion/product-Haar theorems to Agda with carrier, measurability and integration matching.
+- [ ] Selected complete CMP119 E/R/B/V action, R124 metric insertion and physical beta/counterterm matching.
+- [ ] Uniform changing-cutoff R445 moments/tails/tightness, selected R320 mixed-J CMP116 rooted-shell derivative estimate, same-selected-H OS continuum uniform spectral gap and nontriviality.
+- [ ] Agda --safe exact-head kernel/typechecker/trust acceptance. CI deferred.
 ### 2026-11-02 source recovery: Lean PR #15 compact Haar, CMP119, CMP116 and OS
 
 - [x] Inspect **actual** `dashi_lean4` PR #15 head, not only default-branch index: 291 changed files and real mathlib SU2 one-link/product Haar, native 4D Haar product equality, finite CMP119 Gibbs, Prokhorov, mixed J and OS spectral donors. Ledger: `Docs/physics/YMClayLeanPR15FullPhysicalDonorCrosswalk20261102.md`.
