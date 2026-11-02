@@ -32,7 +32,7 @@ module DASHI.Analysis.BishopRiemannDirichletExponentialTermExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Base using (_≤_; _<_; _≥_; NonZero; z≤n; s≤s)
-open import Data.Integer.Base as Int using (+_; +<+)
+open import Data.Integer.Base as Int using (+_; +<+; +≤+)
 open import Data.Rational.Unnormalised as Rat using (_/_; 0ℚᵘ; 1ℚᵘ; _<_; _≤_; *≤*)
 import Data.Rational.Unnormalised.Properties as RatP
 open import Agda.Builtin.Equality using (_≡_; refl)
