@@ -21,6 +21,8 @@ currentBH4Phase : BH4Phase
 currentBH4Phase = systemStateQuantitativePhase
 
 data BH4Phase4Residual : Set where
+  completeKitzerowOriginalChartSourceVerification : BH4Phase4Residual
+  validateNativeSensibLawOntologyBridge : BH4Phase4Residual
   pinKitzerowPrimaryPathwayEdges : BH4Phase4Residual
   auditKitzerowPathwayAgainstFinitePanel : BH4Phase4Residual
   acquireVersionedPathwayOntologyCrossReferences : BH4Phase4Residual
@@ -52,7 +54,9 @@ data BH4Phase4Residual : Set where
 
 livePhase4Residuals : List BH4Phase4Residual
 livePhase4Residuals =
-  pinKitzerowPrimaryPathwayEdges
+  completeKitzerowOriginalChartSourceVerification
+  ∷ validateNativeSensibLawOntologyBridge
+  ∷ pinKitzerowPrimaryPathwayEdges
   ∷ auditKitzerowPathwayAgainstFinitePanel
   ∷ acquireVersionedPathwayOntologyCrossReferences
   ∷ payCompartmentContextForInteroperableModel
@@ -117,6 +121,15 @@ compartmentAndKineticSBMLExportReady = false
 
 authorPathwayPrimaryTextFullyVerified : Bool
 authorPathwayPrimaryTextFullyVerified = false
+
+originalCreatorChartRheaIndexPresent : Bool
+originalCreatorChartRheaIndexPresent = true
+
+originalCreatorFullNetworkObtained : Bool
+originalCreatorFullNetworkObtained = false
+
+nativeSensibLawExternalGraphBridgeRefereeVerified : Bool
+nativeSensibLawExternalGraphBridgeRefereeVerified = false
 
 sabioKineticParameterCount : Nat
 sabioKineticParameterCount = SABIO.executedSABIOKineticParameterCount
