@@ -44,6 +44,7 @@ import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopMachinZetaRegularHalfPlaneExact as OriginalZeta
 import DASHI.Analysis.BishopMachinZetaSequentialContinuityReducerExact as Continuity
 import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Rational
+import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopMachinGeometricBishopRateExact as Rate
 import DASHI.Analysis.BishopMachinSignedFiniteHistoryExact as Signed
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
@@ -207,3 +208,91 @@ module AtOriginalCompletedZeta
   stageZetaImagSquare n regular =
     cong BC.im (Z.originalZetaEqualsDirichletAtStage n regular)
 
+  ------------------------------------------------------------------------
+  -- K04d PARALLEL REAL DIRICHLET ROUTE:
+  -- Use the shared Bishop-Basel comparison compiler at the ACTUAL
+  -- Machin zeta inputs, not at an unrelated elliptic coefficient family.
+  -- The actual n^(-s) term identity and Basel majorants are required
+  -- at this boundary. If supplied, the result is on the literal
+  -- original CompletedRiemannZeta.zeta application.
+  ------------------------------------------------------------------------
+
+  originalCompletedZetaRealEqualsSummedDirichletAtStage :
+    (term : Dirichlet.BishopDirichletTermFamily) →
+    (n : Nat) →
+    Analytic.ZetaHalfPlaneLayer.realPartGreaterThanOne
+      halfPlane (Z.stagePoint n) →
+    (agreement : Dirichlet.OriginalHalfPlaneDirichletAgreement
+      functions halfPlane term (Z.stagePoint n)) →
+    Bishop._≃_
+      (BC.re (Z.zetaAtStage n))
+      (BC.re
+        (Dirichlet.dirichletValue
+          term (Z.stagePoint n)
+          (Dirichlet.seriesBound agreement)))
+  originalCompletedZetaRealEqualsSummedDirichletAtStage
+      term n regular agreement =
+    let module D = Dirichlet.AtOriginalCompletedZeta
+          functions gamma halfPlane completed term
+    in D.originalCompletedZetaRealAgreesWithDirichlet
+      (Z.stagePoint n) regular agreement
+
+  originalCompletedZetaImagEqualsSummedDirichletAtStage :
+    (term : Dirichlet.BishopDirichletTermFamily) →
+    (n : Nat) →
+    Analytic.ZetaHalfPlaneLayer.realPartGreaterThanOne
+      halfPlane (Z.stagePoint n) →
+    (agreement : Dirichlet.OriginalHalfPlaneDirichletAgreement
+      functions halfPlane term (Z.stagePoint n)) →
+    Bishop._≃_
+      (BC.im (Z.zetaAtStage n))
+      (BC.im
+        (Dirichlet.dirichletValue
+          term (Z.stagePoint n)
+          (Dirichlet.seriesBound agreement)))
+  originalCompletedZetaImagEqualsSummedDirichletAtStage
+      term n regular agreement =
+    let module D = Dirichlet.AtOriginalCompletedZeta
+          functions gamma halfPlane completed term
+    in D.originalCompletedZetaImagAgreesWithDirichlet
+      (Z.stagePoint n) regular agreement
+
+  originalCompletedZetaRealEqualsSummedDirichletAtLimit :
+    (term : Dirichlet.BishopDirichletTermFamily) →
+    (gate : AnalyticSameObjectGate) →
+    (agreement : Dirichlet.OriginalHalfPlaneDirichletAgreement
+      functions halfPlane term Z.limitPoint) →
+    Bishop._≃_
+      (BC.re Z.zetaAtLimit)
+      (BC.re
+        (Dirichlet.dirichletValue
+          term Z.limitPoint
+          (Dirichlet.seriesBound agreement)))
+  originalCompletedZetaRealEqualsSummedDirichletAtLimit
+      term gate agreement =
+    let module D = Dirichlet.AtOriginalCompletedZeta
+          functions gamma halfPlane completed term
+    in D.originalCompletedZetaRealAgreesWithDirichlet
+      Z.limitPoint
+      (domainAdequacy gate Z.limitPoint limitInsideRealHalfPlane)
+      agreement
+
+  originalCompletedZetaImagEqualsSummedDirichletAtLimit :
+    (term : Dirichlet.BishopDirichletTermFamily) →
+    (gate : AnalyticSameObjectGate) →
+    (agreement : Dirichlet.OriginalHalfPlaneDirichletAgreement
+      functions halfPlane term Z.limitPoint) →
+    Bishop._≃_
+      (BC.im Z.zetaAtLimit)
+      (BC.im
+        (Dirichlet.dirichletValue
+          term Z.limitPoint
+          (Dirichlet.seriesBound agreement)))
+  originalCompletedZetaImagEqualsSummedDirichletAtLimit
+      term gate agreement =
+    let module D = Dirichlet.AtOriginalCompletedZeta
+          functions gamma halfPlane completed term
+    in D.originalCompletedZetaImagAgreesWithDirichlet
+      Z.limitPoint
+      (domainAdequacy gate Z.limitPoint limitInsideRealHalfPlane)
+      agreement
