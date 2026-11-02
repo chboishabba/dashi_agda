@@ -226,6 +226,7 @@ Version/assay/source release still must be pinned in acquired receipts. No stand
     python3 scripts/check_kitzerow_primary_chart.py
     python3 scripts/check_kitzerow_chart_source_text.py
     python3 scripts/check_kitzerow_source_chart_acquisition.py
+    python3 scripts/check_bh4_numeric_flux_guard.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4CreatorChartSourceBridgeExact.agda
     python3 scripts/check_kitzerow_bh4_priority_all.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PathwayOntologyInteropExact.agda
