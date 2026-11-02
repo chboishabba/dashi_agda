@@ -23,9 +23,9 @@ RHEA = re.compile(r"RHEA:[0-9]+$")
 CHEBI = re.compile(r"CHEBI:[0-9]+$")
 UNIPROT = re.compile(r"[A-Z0-9]{6,10}$")
 GO_ID = re.compile(r"GO:[0-9]{7}$")
-REACTOME_ID = re.compile(r"R-[A-Z]{3}-[0-9]+$")
+REACTOME_ID = re.compile(r"R-[A-Z]{3}-[0-9]+(?:\.[0-9]+)?$")
 GO_IN_TEXT = re.compile(r"GO:[0-9]{7}")
-REACTOME_IN_TEXT = re.compile(r"R-[A-Z]{3}-[0-9]+")
+REACTOME_IN_TEXT = re.compile(r"R-[A-Z]{3}-[0-9]+(?:\.[0-9]+)?")
 SOURCE_IDS = {"SRC-KIT-2024-01", "SRC-KIT-2024-08", "SRC-KIT-2025-07"}
 
 
