@@ -45,7 +45,7 @@ The research paper is an **integrative conceptual review plus source-specific me
 3. Obtain reviewer-authoritative title/abstract screening decisions. Candidate assessment, Pareto queue and study-family hypotheses do not create decisions. `run_screen_review_retrieve_parse_loop.py` requires actual completed-decision input.
 4. For included/probable or explicitly screening-resolution cases, acquire and verify the real full-text bytes. `prepare_slr_source_units.py` validates content SHA and source identity before `run_slr_source_unit_parse.py`; `compile_study_extraction_packets.py` nominates candidates for the **existing 19 extraction coordinates**; parser output creates neither truth nor admission.
 5. Build the actual source-sensitive decomposition **question, theory, method, sample/eligibility/nonparticipants, observation, measurements, claim, limitation, omissions, researcher/governance position, history/recomposition**; preserve true source revision and passage spans. Use existing PNF/study method/claim ceiling owners.
-6. Declare a versioned **open n-axis registry**. For **every** study part and every declared axis, provide either reviewed evidence with source packet + same-source proof, a conditionally inferred hypothesis, contested readings, explicit unmeasured gap, inaccessibility or justified inapplicability. Unknown is not zero and N/A is not evidence of absence.
+6. Declare a versioned **open n-axis registry**. For **every** study part and every declared axis, provide either reviewed evidence with source packet + same-source proof, a candidate conditional inference, contested readings, explicit unmeasured gap, inaccessibility or justified inapplicability. Unknown is not zero and N/A is not evidence of absence.
 7. Audit all source-specific higher-order interactions and consumer relative projections; use `FactorsThrough` when a projection is adequate and a genuine obstruction where not. Do not force combinatorial materialisation of all axis subsets; record required sparse interactions and every unexamined consumer-relevant interaction.
 8. Use cross-study gap pointers/method suggestions to direct independent evidence collection; **do not transplant** source B's observations into source A's participants. For any proposed real cross-study inference require independently reviewed population/context/method/source authority and explicit transfer conditions.
 9. Reconcile historical revisions via existing Alice dependency-derived selective invalidation and candidate-world world-revision owners. Preserve original source fibres and incompatible observations.
@@ -56,7 +56,7 @@ The research paper is an **integrative conceptual review plus source-specific me
 ```bash
 scripts/run_agda29_parallel_check.sh DASHI/Education/DigitalESDOpenAxisWorldRegression.agda
 scripts/run_agda29_parallel_check.sh DASHI/EverythingDigitalESDReciprocalBraid.agda
-python3 -m unittest tests.test_digital_esd_open_axis_world
+python3 -m unittest discover -s tests -p 'test_digital_esd_open_axis_world.py'
 python3 interop_scripts/digital_esd/run_world.py
 # After actual reviewed study decompositions / axis-status manifest is exported:
 python3 interop_scripts/digital_esd/audit_open_axis_study_world.py --input /path/to/study-world.json --output /path/to/open-axis-audit.json
