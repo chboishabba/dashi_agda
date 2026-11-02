@@ -31,7 +31,7 @@ module DASHI.Analysis.BishopRiemannDirichletExponentialTermExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 import Data.Nat.Properties as NatP
-open import Data.Nat.Base using (_≤_; _<_)
+open import Data.Nat.Base using (_≤_; _<_; _≥_; NonZero; z≤n)
 open import Data.Integer.Base as Int using (+_; +<+)
 open import Data.Rational.Unnormalised as Rat using (_/_; 0ℚᵘ; 1ℚᵘ; _<_)
 import Data.Rational.Unnormalised.Properties as RatP
@@ -45,6 +45,7 @@ import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as A
 import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Analysis.BishopRiemannAnalyticSetoidExpReuseExact as ExpBridge
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
+import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as UniformTails
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpPositive
 import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpAdd
@@ -646,3 +647,87 @@ originalSourceExponentTwoSumIsBasel inputs inside inverseLaw =
     (natLogViaOriginalNegativeLog
       (Route.round11MachinTranscendentals inputs) inside)
     inverseLaw
+
+------------------------------------------------------------------------
+-- K04d: UNIFORM TAILS FOR THE ACTUAL CONSTRUCTED COMPLEX s=2 SERIES.
+--
+-- This specializes the pinned Bishop Basel Cauchy test to BOTH
+-- actual source complex coordinates, and uses ONE cutoff for ALL
+-- m,n. The only remaining hypothesis is the same source exp(log Nat)
+-- inverse as the previously established exact coefficient equality.
+-- No separate analytic convergence or new common modulus is assumed.
+------------------------------------------------------------------------
+
+sourceExponentTwoUniformFiniteTails :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (inverseLaw : (n : Nat) →
+    R._≃_
+      (Exp.bishopExp (logNat n))
+      (NatReal.natReal (suc n))) →
+  (k : Nat) → .{{_ : NonZero k}} →
+  (m n : Nat) →
+  m ≥ UniformTails.baselUniformTailCutoff k →
+  n ≥ UniformTails.baselUniformTailCutoff k →
+  let
+    terms = bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs) logNat
+  in
+  (R._≤_
+    (R.∣ Seq.∑ (Dirichlet.realTerm terms sourceExponentTwo) m n ∣)
+    (R._⋆ (+ 1 / k)))
+  ×
+  (R._≤_
+    (R.∣ Seq.∑ (Dirichlet.imagTerm terms sourceExponentTwo) m n ∣)
+    (R._⋆ (+ 1 / k)))
+sourceExponentTwoUniformFiniteTails
+    inputs logNat inverseLaw k m n mPast nPast =
+  let
+    terms = bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs) logNat
+    majorant =
+      sourceExponentTwoBaselMajorant inputs logNat inverseLaw
+  in
+  UniformTails.baselDominatedFiniteTailSmall
+    (Dirichlet.realTerm terms sourceExponentTwo)
+    (λ index → Dirichlet.realDomination majorant index z≤n)
+    k m n mPast nPast
+  ,
+  UniformTails.baselDominatedFiniteTailSmall
+    (Dirichlet.imagTerm terms sourceExponentTwo)
+    (λ index → Dirichlet.imagDomination majorant index z≤n)
+    k m n mPast nPast
+
+originalSourceExponentTwoUniformFiniteTails :
+  (inputs : Round11.Round11BishopCutset) →
+  (inside : (n : Nat) →
+    E.InOpenUnitInterval
+      (Round11.elementarySeries inputs) (natLogArgument n)) →
+  (inverseLaw : (n : Nat) →
+    R._≃_
+      (Exp.bishopExp
+        (natLogViaOriginalNegativeLog
+          (Route.round11MachinTranscendentals inputs) inside n))
+      (NatReal.natReal (suc n))) →
+  (k : Nat) → .{{_ : NonZero k}} →
+  (m n : Nat) →
+  m ≥ UniformTails.baselUniformTailCutoff k →
+  n ≥ UniformTails.baselUniformTailCutoff k →
+  let
+    terms = bishopDirichletTermFromOriginalLogSeries
+      (Route.round11MachinTranscendentals inputs) inside
+  in
+  (R._≤_
+    (R.∣ Seq.∑ (Dirichlet.realTerm terms sourceExponentTwo) m n ∣)
+    (R._⋆ (+ 1 / k)))
+  ×
+  (R._≤_
+    (R.∣ Seq.∑ (Dirichlet.imagTerm terms sourceExponentTwo) m n ∣)
+    (R._⋆ (+ 1 / k)))
+originalSourceExponentTwoUniformFiniteTails
+    inputs inside inverseLaw k m n mPast nPast =
+  sourceExponentTwoUniformFiniteTails
+    inputs
+    (natLogViaOriginalNegativeLog
+      (Route.round11MachinTranscendentals inputs) inside)
+    inverseLaw k m n mPast nPast
