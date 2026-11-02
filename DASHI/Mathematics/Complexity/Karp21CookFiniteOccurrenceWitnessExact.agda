@@ -25,7 +25,7 @@ module DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Nat using (Nat; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥-elim)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
@@ -38,6 +38,7 @@ import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 
 formulaVariables : Cook.BooleanFormula → List Nat
@@ -397,3 +398,50 @@ compactCookCertificateAtMostTokenCount :
 compactCookCertificateAtMostTokenCount formula witness
   rewrite compactWitnessExactBitCount formula witness =
   variableCountWithinCookTokenCount formula
+
+------------------------------------------------------------------------
+-- Actual CANONICAL Cook formula bitword certificate bound, not merely
+-- an informal comparison of "number of variables" with syntax size.
+-- This reuses the prior EXACT three-bit-per-token binary codec.
+-- Every formula's finite satisfying witness is at most the size of
+-- its own canonical encoded formula word. There is no max-index blowup.
+--
+-- A universal bound for every arbitrary accepted strict SAT word still
+-- requires canonical parser re-encoding; a verifier machine clock is
+-- independently required for PR.InNP.
+------------------------------------------------------------------------
+
+wordLengthMatchesCookBinaryLength :
+  (bits : List Bool) →
+  Word.encodingSize bits ≡ Binary.listLength bits
+wordLengthMatchesCookBinaryLength [] = refl
+wordLengthMatchesCookBinaryLength (bit ∷ rest) =
+  cong suc (wordLengthMatchesCookBinaryLength rest)
+
+canonicalCookFormulaWordSizeExact :
+  (formula : Cook.BooleanFormula) →
+  Word.encodingSize (Binary.encodeFormulaBits formula)
+  ≡ 3 * Prefix.cookFormulaTokenCount formula
+canonicalCookFormulaWordSizeExact formula =
+  trans
+    (wordLengthMatchesCookBinaryLength
+      (Binary.encodeFormulaBits formula))
+    (Binary.formulaBitCodeLengthExact formula)
+
+cookTokenCountWithinTripleCode :
+  (tokenCount : Nat) →
+  tokenCount ≤ 3 * tokenCount
+cookTokenCountWithinTripleCode tokenCount =
+  NatP.m≤m+n tokenCount (2 * tokenCount)
+
+compactCookWitnessAtMostCanonicalFormulaWord :
+  (formula : Cook.BooleanFormula)
+  (witness : CompactCookWitness formula) →
+  Word.encodingSize (proj₁ witness)
+    ≤ Word.encodingSize (Binary.encodeFormulaBits formula)
+compactCookWitnessAtMostCanonicalFormulaWord formula witness
+  rewrite canonicalCookFormulaWordSizeExact formula =
+  NatP.≤-trans
+    (compactCookCertificateAtMostTokenCount formula witness)
+    (cookTokenCountWithinTripleCode
+      (Prefix.cookFormulaTokenCount formula))
