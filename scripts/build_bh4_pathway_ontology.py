@@ -100,7 +100,32 @@ def checked_matrix(matrix: dict) -> tuple[list[str], list[str], dict[str, list[d
 
 def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None = None) -> dict:
     reactions, species, columns = checked_matrix(matrix)
-    ensure(rhea.get("schema") == "dashi.rhea-chebi-bh4-panel.v2", "unexpected Rhea receipt schema")
+    cert_schema = rhea.get("schema")
+    ensure(cert_schema in (
+        "dashi.rhea-chebi-bh4-panel.v2",
+        "dashi.rhea-chebi-bh4-source-chart.v1",
+    ), "unexpected Rhea receipt schema")
+    source_is_creator_chart = cert_schema == "dashi.rhea-chebi-bh4-source-chart.v1"
+    if source_is_creator_chart:
+        ensure(rhea.get("creator") == "Kimberly Kitzerow"
+               and str(rhea.get("source_chart_publication") or "").startswith(
+                   "https://www.researchgate.net/publication/377218425_")
+               and rhea.get("source_chart_pdf_sha256_verified") is False
+               and rhea.get("whole_creator_network_complete") is False
+               and bool(rhea.get("source_chart_index_sha256")),
+               "source-chart original author provenance incomplete or promoted")
+        selected = rhea.get("source_rhea_ids_requested") or []
+        ensure(len(selected) == len(set(selected))
+               and all(isinstance(i, str) and bool(RHEA.fullmatch(i)) for i in selected),
+               "invalid creator-selected Rhea ID set")
+        actual = [x.get("rhea_id") for x in rhea.get("reactions", [])]
+        failed = [x.get("rhea_id") for x in rhea.get("errors", [])]
+        ensure(sorted(actual + failed) == sorted(selected),
+               "creator source-chart acquisition did not account for all selected IDs")
+        ensure(len(actual) == rhea.get("rhea_rows_acquired")
+               and len(failed) == rhea.get("rhea_rows_failed"),
+               "source-curator acquisition counts disagree")
+
     source_rows = rhea.get("reactions", [])
     ensure(isinstance(source_rows, list), "Rhea reaction rows missing")
     source_reactions = {r.get("rhea_id"): r for r in source_rows}
@@ -132,11 +157,18 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
     ensure(not matrix.get("external_exchange"), "external exchange must not enter internal S")
     result = {
         "schema": SCHEMA,
-        "model_kind": "partial-source-curated-biochemistry-plus-separate-author-hypotheses",
+        "model_kind": ("creator-chart-selected-rhea-curated-biochemistry-subset"
+                       if source_is_creator_chart else
+                       "partial-source-curated-biochemistry-plus-separate-author-hypotheses"),
         "authority": AUTHORITY,
         "source_releases": {
             "rhea": rhea.get("rhea_release_reference") or rhea.get("schema"),
-            "source_certificate": rhea.get("source_uniprot_panel"),
+            "source_certificate": (rhea.get("source_chart_index_sha256")
+                                   if source_is_creator_chart else
+                                   rhea.get("source_uniprot_panel")),
+            "creator_chart_source": (rhea.get("source_chart_publication")
+                                     if source_is_creator_chart else None),
+            "creator_original_pdf_verified": False,
             "matrix": matrix.get("schema"),
         },
         "species": [{"coordinate": species_coordinate(s), "compartment": None,
@@ -175,6 +207,7 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
             "structural_jsonld_is_executable_sbml": False,
             "missing_flux_is_zero": False,
             "entire_kitzerow_model_confirmed": False,
+            "source_chart_selection_is_complete_author_network": False,
         },
     }
     # Source-displayed KEGG/MetaCyc fields are preserved as raw review inputs.
