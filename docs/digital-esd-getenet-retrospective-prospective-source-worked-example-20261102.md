@@ -36,7 +36,7 @@ That is a consistency check on the paper's reported numbers, not independent ver
 
 The source-specific Agda `StudyPart` enumerates **15 candidate analysis units**: original questions, theoretical lens, population/sampling, instrument, thematic method, researcher position, five positive themes, negative/outlier responses, bounded original conclusion, omitted/unsampled positions, and retrospective recomposition. Each must be considered across every currently declared research axis. The initial seven-axis example comprises pedagogy/learning, student voice, effective disability access, consequential decision authority, material/ecological burden, temporal/institutional durability and researcher epistemic position. This seven-axis list is an **extensible test projection**, not the world's total axis family or the seven manuscript principles.
 
-Original source-reported coordinates are explicitly `sourceReportedPendingReview`. Non-source-reviewed sustainability coordinates are `unmeasuredForQuestion` pending review. Do **not** replace these statuses with a false direct-reviewed `JointReviewHyperedge`. An independent reviewer can narrow, modify or invalidate any proposed axis account after checking exact passages.
+Original source-reported coordinates are explicitly `sourceReportedPendingReview`. Other coordinates are `notYetAssessed` pending review; `unmeasuredForQuestion` requires a scoped evidence review that establishes the relevant information was not measured or reported. Do **not** replace these statuses with a false direct-reviewed `JointReviewHyperedge`. An independent reviewer can narrow, modify or invalidate any proposed axis account after checking exact passages.
 
 ## C. Retrospective ESD/EfS questioning: legitimate reuse vs overclaim
 
@@ -60,7 +60,7 @@ A separate EfS case (for example Taimur–Onuki 2022, `10.1016/j.ijer.2022.10199
 
 Future researchers should distinguish **reported preference** from **actual control over educational decisions**; document who was eligible but absent or declined, without interpreting undisclosed identities as zero; obtain appropriately consented disability- and access-specific lived evidence where relevant; observe care/work/affordability × course-platform interaction rather than independent marginals; measure teacher/infrastructure maintenance and material externalities; permit adverse/contradictory participant experience to remain in the analysis; compare distinct observer roles without forced consensus; and observe institutional/learning change over meaningful time horizons.
 
-At each source-part and current `n)-axis address, state direct reviewed / author reported pending review / conditional candidate / contested / unmeasured / inaccessible / justified N/A. Do not force a full higher-order Cartesian tensor; instantiate an interaction when evidence, a consumer question or a constructive `FactorsThrough` obstruction requires it. Recomposition must reopen omitted information and preserve incompatible local interpretations.
+At each source-part and current `n`-axis address, state direct reviewed / author reported pending review / not-yet-assessed / conditional candidate / contested / source-reviewed unmeasured / inaccessible / justified N/A. Do not force a full higher-order Cartesian tensor; instantiate an interaction when evidence, a consumer question or a constructive `FactorsThrough` obstruction requires it. Recomposition must reopen omitted information and preserve incompatible local interpretations.
 
 ## F. Exact reproducibility gates before manuscript Results
 

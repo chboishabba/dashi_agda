@@ -145,6 +145,11 @@ data PartAxisAccounting
   contestedBySources :
     (positionReference counterpositionReference disputeReference : String) →
     PartAxisAccounting scope s p a
+  -- Not yet analysed is not "unmeasured". This state keeps candidate
+  -- source decompositions structurally total without pretending review.
+  notYetAssessed :
+    (reviewWorkReference : String) →
+    PartAxisAccounting scope s p a
   unmeasuredForQuestion :
     (questionReference missingEvidenceReference : String) →
     PartAxisAccounting scope s p a
@@ -172,6 +177,8 @@ open AccountedStudyWorld public
 -- A signed trit is a *qualified view*, not a statement that an
 -- epistemically unknown / N/A / contested state all means zero.
 data RelationValue (Scalar : Set) : Set where
+  -- No score is known. Neither a scalar zero nor ternary neutral is assumed.
+  unscoredCandidate : RelationValue Scalar
   scalarValue : Scalar → RelationValue Scalar
   signedTernaryView : Balanced.Trit → RelationValue Scalar
 

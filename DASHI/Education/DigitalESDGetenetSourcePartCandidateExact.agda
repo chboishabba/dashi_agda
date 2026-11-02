@@ -292,12 +292,67 @@ partAxisAssessment negativeAndOutlierResponses pedagogyAndLearning =
     "Article reports sixth contrasting theme with N=15 outliers and N=26 challenges"
     "Check distinct statuses and author tables before reuse"
 partAxisAssessment p a =
-  World.unmeasuredForQuestion
-    (axisName a)
-    "No source-specific reviewed observation supplied for this part-axis address; further paper review may reclassify it"
+  World.notYetAssessed
+    "Per-part source/axis review not completed; no unmeasured or inapplicability claim is warranted"
 
--- The fallback intentionally has NO invented empirical findings. The
--- generic missing status above is a review query, not a proved absent effect.
+-- The fallback means no reviewed assessment YET. It never asserts that
+-- an actual absence or effect was observed in the source.
 studyWorld : World.AccountedStudyWorld studyScope
 studyWorld = World.accounted-study-world
   (λ { getenetStudy p a → partAxisAssessment p a })
+
+
+------------------------------------------------------------------------
+-- ORIGINAL-STUDY GROUNDED, NOT REVIEWED: joint intersectional question.
+--
+-- Candidate incidence is NOT a real reviewed hyperedge. Four distinct
+-- decomposed research parts and five axes are retained simultaneously,
+-- including who was absent and how author coding produced the findings.
+-- No numerical or ternary valence is inferred from the original study.
+------------------------------------------------------------------------
+
+sourceSpecificFourPartIntersectionQuestion :
+  World.HigherOrderStudyRelation studyScope Nat
+sourceSpecificFourPartIntersectionQuestion =
+  World.higher-order-study-relation
+    (World.study-part getenetStudy eligiblePopulationAndSampling ∷
+     World.study-part getenetStudy codingAndThematicMethod ∷
+     World.study-part getenetStudy negativeAndOutlierResponses ∷
+     World.study-part getenetStudy researcherPositionality ∷ [])
+    (participantVoice ∷ effectiveDisabilityAccess ∷
+     consequentialDecisionAuthority ∷ temporalInstitutionalDurability ∷
+     researcherEpistemicPosition ∷ [])
+    World.unscoredCandidate
+    "How do sampled and absent learner positions, coding decisions, negative experiences, accessibility and consequential authority jointly constrain retrospective ESD inference?"
+    ("Getenet/Burke/Fanshawe/Brown 2026 DOI 10.1080/01587919.2026.2669288" ∷
+     "DASHI higher-order question, not original paper result" ∷ [])
+    "No source-audited four-part/five-axis interaction, no measured relational score"
+    "Source revision, reviewer approval, individual responses, analysis strata, outcome relevance, and all cross-axis interactions remain open"
+
+getenetJointQuestionKeepsOriginalPopulationPart :
+  World.study-part getenetStudy eligiblePopulationAndSampling ∈
+    World.HigherOrderStudyRelation.participatingStudyParts
+      sourceSpecificFourPartIntersectionQuestion
+getenetJointQuestionKeepsOriginalPopulationPart = here refl
+
+getenetJointQuestionKeepsAuthorEpistemics :
+  World.study-part getenetStudy researcherPositionality ∈
+    World.HigherOrderStudyRelation.participatingStudyParts
+      sourceSpecificFourPartIntersectionQuestion
+getenetJointQuestionKeepsAuthorEpistemics =
+  there (there (there (here refl)))
+
+getenetJointQuestionKeepsAuthorityAxis :
+  consequentialDecisionAuthority ∈
+    World.HigherOrderStudyRelation.activeAxisReferences
+      sourceSpecificFourPartIntersectionQuestion
+getenetJointQuestionKeepsAuthorityAxis =
+  there (there (here refl))
+
+-- A candidate question is inside the accounted source-study world, but
+-- this type is purposely weaker than ReviewedHigherOrderFabricIncidence.
+sourceSpecificCandidateSituatedQuestion :
+  World.SituatedWorldRelation studyScope Nat
+sourceSpecificCandidateSituatedQuestion =
+  World.situated-world-relation studyWorld
+    sourceSpecificFourPartIntersectionQuestion
