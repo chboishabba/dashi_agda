@@ -102,6 +102,8 @@ def main() -> int:
         # this optional namespace so a new partial/failing source call
         # cannot silently reuse an earlier green creator-chart artifact.
         for stale in (creator_chart_rhea, creator_chart_matrix,
+                      creator_chart_matrix_prefix.with_suffix(".csv"),
+                      creator_chart_matrix_prefix.with_suffix(".md"),
                       creator_chart_ontology, creator_chart_jsonld,
                       creator_chart_review):
             stale.unlink(missing_ok=True)
