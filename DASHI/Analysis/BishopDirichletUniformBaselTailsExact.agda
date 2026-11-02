@@ -23,6 +23,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base as Nat using (_≤_; _≥_; NonZero)
 import Data.Nat.Properties as NatP
 open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (0ℚᵘ; _/_)
 open import Data.Rational.Unnormalised using (_/_)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (inj₁; inj₂)
@@ -207,3 +208,152 @@ regionValueConvergesCoordinatewise :
 regionValueConvergesCoordinatewise terms Region bound s inside =
   Dirichlet.dirichletPartialConverges terms s
     (regionPointwiseMajorant terms Region bound s inside)
+
+
+------------------------------------------------------------------------
+-- COMPLETE UNIFORM TO-LIMIT TAIL ESTIMATE, not only finite Cauchy.
+--
+-- For any *existing actual Bishop convergence witness*, the same
+-- all-index Basel cutoff controls |limit - partialSum_N| uniformly
+-- over any family of terms dominated by the original Basel series.
+--
+-- We use original Sequence.∣xₙ∣→∣x₀∣, subsequence convergence,
+-- finite sum, and order closure under limits; no extra limiting
+-- oracle and no different real carrier. The pointwise limit already
+-- exists by the original Bishop comparison theorem.
+------------------------------------------------------------------------
+
+partialMinusIsFiniteTail :
+  (terms : Nat → R.ℝ) (m n : Nat) →
+  R._≃_
+    (R._-_ (Seq.SeriesOf terms n) (Seq.SeriesOf terms m))
+    (Seq.∑ terms m n)
+partialMinusIsFiniteTail terms zero n =
+  let open RP.ℝ-Solver
+  in solve 1 (λ prefix → prefix ⊖ Κ 0ℚᵘ ⊜ prefix)
+     RP.≃-refl (Seq.SeriesOf terms n)
+partialMinusIsFiniteTail terms (suc m) n = RP.≃-refl
+
+baselDominatedUniformLimitError :
+  (terms : Nat → R.ℝ) →
+  (dominated : (index : Nat) →
+    R._≤_ (R.∣ terms index ∣) (Basel.baselTerm index)) →
+  (convergent : Seq._isConvergent (Seq.SeriesOf terms)) →
+  (k : Nat) → .{{_ : NonZero k}} →
+  (m : Nat) →
+  m ≥ baselUniformTailCutoff k →
+  R._≤_
+    (R.∣
+      R._-_
+        (Seq.lim convergent)
+        (Seq.SeriesOf terms m)
+    ∣)
+    (R._⋆ (+ 1 / k))
+baselDominatedUniformLimitError
+    terms dominated convergent k m mPast =
+  let
+    cutoff = baselUniformTailCutoff k
+    partial = Seq.SeriesOf terms
+    limit = Seq.lim convergent
+    shifted : Nat → R.ℝ
+    shifted n = partial (n + cutoff)
+
+    shiftedConverges : Seq._ConvergesTo_ shifted limit
+    shiftedConverges =
+      Seq.xₙ⊆yₙ∧yₙ→y⇒xₙ→y
+        (Seq.subseq*
+          ((λ n → n + cutoff)
+          , (λ n → RP.≃-refl)
+          , (λ n → NatP.n<1+n (n + cutoff))))
+        convergent
+
+    constantNegative : Nat → R.ℝ
+    constantNegative n = R.- (partial m)
+
+    constantConverges :
+      Seq._isConvergent constantNegative
+    constantConverges =
+      R.- (partial m)
+      , Seq.xₙ≃c⇒xₙ→c
+          (λ {(suc n) → RP.≃-refl})
+
+    differenceConverges :
+      Seq._ConvergesTo_
+        (λ n → R._-_ (shifted n) (partial m))
+        (R._-_ limit (partial m))
+    differenceConverges =
+      Seq.xₙ+yₙ→x₀+y₀
+        (limit , shiftedConverges)
+        constantConverges
+
+    absConvergent :
+      Seq._isConvergent
+        (λ n → R.∣ R._-_ (shifted n) (partial m) ∣)
+    absConvergent =
+      (R.∣ R._-_ limit (partial m) ∣)
+      , Seq.∣xₙ∣→∣x₀∣
+          ((R._-_ limit (partial m)) , differenceConverges)
+
+    boundEach : (n : Nat) →
+      R._≤_
+        (R.∣ R._-_ (shifted n) (partial m) ∣)
+        (R._⋆ (+ 1 / k))
+    boundEach n =
+      RP.≤-respˡ-≃
+        (RP.∣-∣-cong
+          (partialMinusIsFiniteTail terms m (n + cutoff)))
+        (baselDominatedFiniteTailSmall
+          terms dominated k m (n + cutoff)
+          mPast (NatP.m≤n+m cutoff n))
+  in
+  Seq.xₙ≤y⇒limxₙ≤y
+    boundEach
+    absConvergent
+
+regionRealUniformLimitError :
+  (terms : Dirichlet.BishopDirichletTermFamily) →
+  (Region : BC.BishopComplex → Set) →
+  (bound : RegionBaselDomination terms Region) →
+  (k : Nat) → .{{_ : NonZero k}} →
+  (s : BC.BishopComplex) →
+  (inside : Region s) →
+  (m : Nat) →
+  m ≥ baselUniformTailCutoff k →
+  R._≤_
+    (R.∣
+      R._-_
+        (BC.re (regionDirichletValue terms Region bound s inside))
+        (Seq.SeriesOf (Dirichlet.realTerm terms s) m)
+    ∣)
+    (R._⋆ (+ 1 / k))
+regionRealUniformLimitError terms Region bound k s inside m mPast =
+  baselDominatedUniformLimitError
+    (Dirichlet.realTerm terms s)
+    (realEverywhere bound s inside)
+    (Dirichlet.realDirichletConvergent terms s
+      (regionPointwiseMajorant terms Region bound s inside))
+    k m mPast
+
+regionImagUniformLimitError :
+  (terms : Dirichlet.BishopDirichletTermFamily) →
+  (Region : BC.BishopComplex → Set) →
+  (bound : RegionBaselDomination terms Region) →
+  (k : Nat) → .{{_ : NonZero k}} →
+  (s : BC.BishopComplex) →
+  (inside : Region s) →
+  (m : Nat) →
+  m ≥ baselUniformTailCutoff k →
+  R._≤_
+    (R.∣
+      R._-_
+        (BC.im (regionDirichletValue terms Region bound s inside))
+        (Seq.SeriesOf (Dirichlet.imagTerm terms s) m)
+    ∣)
+    (R._⋆ (+ 1 / k))
+regionImagUniformLimitError terms Region bound k s inside m mPast =
+  baselDominatedUniformLimitError
+    (Dirichlet.imagTerm terms s)
+    (imagEverywhere bound s inside)
+    (Dirichlet.imagDirichletConvergent terms s
+      (regionPointwiseMajorant terms Region bound s inside))
+    k m mPast
