@@ -1,3 +1,16 @@
+### 2026-11-03 source-first all-gate max-cut: constructive matrix ReTr and gauge Haar
+- [x] Search R443 complex matrix/SU(N)/ReTr/dagger, compact Haar/Fubini/one-link/product, R124/CMP119 source metric/stress, R445 marked moments/tails/Prokhorov, R320 CMP116 mixed J, R333 real same-H OS and spectral terms; inspect relevant genuine Lean PR #15 sources rather than the default branch only.
+- [x] Source-write concrete Fin-indexed complex-pair conjugate-transpose trace and normalized real-trace adjoint theorem. Use existing ConstructiveRealSpine/ConcreteComplex; expose the *exact* two-operation witness needed by old certified SU(N) trace authority.
+- [x] Source-write finite product native SU(N) **local-gauge** Haar invariance by induction from one-link left/right Haar; reuse old original SU(N) Wilson action gauge theorem, R443 Gibbs and R431 numerator. This is not C3 permutation invariance.
+- [x] Refactor original physical product integration laws to construct from one-link ordered Haar without extra C3, then share between native C3 and original local gauge proof lanes.
+- [x] Wire new owners to canonical Balaban TOE and document exactly conditional arguments, mathlib PR #15 donors and all 6 physical gates.
+- [ ] Inhabit `CertifiedSUNMatrixTheory N (ConcreteComplexMatrix R N) (ComplexPair R)` on the actual constructive real carrier, the two selected matrix/trace source identities, ReTr/N and physical legacy-ℝ identification; do not substitute jets or rational quaternions.
+- [ ] Construct actual selected measurable compact one-link Haar/Fubini/bi-invariance/positivity and literal original 1024-bond vector/C3 **and gauge** coordinate equivalence; no arbitrary-function Haar claim.
+- [ ] Construct actual CMP119 R124 selected complete E/R/B/V beta-flow and metric-slot family witness and equality to this original Wilson Gibbs measure.
+- [ ] Prove physical `MarkedMomentTypedRealization`, `boundedObservableTail`, `momentBoundControlsCompactComplement`, and native varying-cutoff cylinder/refinement consistency; existing Prokhorov compilers cover the rest.
+- [ ] Prove selected R318/J coordinate weld and `sourceMagnitudeIsSelectedMagnitude` plus `sourceEnvelopeBelowSelectedRootedShell` under published CMP116 uniform physical source-domain constants; existing R103/R104/R327 reduce the common-J radius component.
+- [ ] Supply same REAL CMP119 H2 source OS reconstruction, selected spectral no-subgap window/positive uniform gap, H6 nontriviality and compact simple group scope. Do not rebuild definally same H3 Hamiltonian.
+- [ ] Focused golden Agda `--safe` typecheck, inspect transitive postulates and publish kernel receipts; user deferred CI.
 ### 2026-11-02 native six-plane SU(N) C3 exact source algebra
 
 - [x] Prove group-generic original reversed signed-plaquette holonomy = inverse on actual SU(N) matrix-link carrier using prior `pathHolonomyReverseOpposite`, periodic closure and physical positive-plane words.
