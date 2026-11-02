@@ -25,7 +25,7 @@ module DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥-elim)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
