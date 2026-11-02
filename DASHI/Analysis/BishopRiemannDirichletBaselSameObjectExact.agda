@@ -31,7 +31,7 @@ module DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact where
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; subst)
 
 import Real as R
 import RealProperties as RP
@@ -198,10 +198,12 @@ module AtOriginalCompletedZeta
       (BC.re (dirichletValue term s (seriesBound agreement)))
   originalCompletedZetaRealAgreesWithDirichlet s domain agreement =
     RP.≃-trans
-      (RP.≃-reflexive
+      (subst
+        (λ value → R._≃_ (BC.re (originalZetaValue s)) value)
         (cong BC.re
           (Analytic.CompletedRiemannZeta.agreesWithHalfPlane
-            completed s domain)))
+            completed s domain))
+        RP.≃-refl)
       (halfPlaneRealIsDirichlet agreement)
 
   originalCompletedZetaImagAgreesWithDirichlet :
@@ -214,8 +216,10 @@ module AtOriginalCompletedZeta
       (BC.im (dirichletValue term s (seriesBound agreement)))
   originalCompletedZetaImagAgreesWithDirichlet s domain agreement =
     RP.≃-trans
-      (RP.≃-reflexive
+      (subst
+        (λ value → R._≃_ (BC.im (originalZetaValue s)) value)
         (cong BC.im
           (Analytic.CompletedRiemannZeta.agreesWithHalfPlane
-            completed s domain)))
+            completed s domain))
+        RP.≃-refl)
       (halfPlaneImagIsDirichlet agreement)
