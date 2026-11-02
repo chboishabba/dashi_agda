@@ -116,6 +116,12 @@ sourceMemoryBudgetIsReported :
   ramBytes p2ReportedBudget ≡ 32768
 sourceMemoryBudgetIsReported = refl
 
+p2MLPReportedArithmeticSum :
+  306 + 1376 + reportedL3L4CombinedDecodeUnits
+  + 7876 + 6621 + 3751 + 7923 + 8149 + 1074 + 798
+  ≡ mlpUnitsReported p2ReportedBudget
+p2MLPReportedArithmeticSum = refl
+
 -- Do not infer the P3 3968 hidden width from the P2 standalone hidden 2816.
 -- P2 and P3 use distinct compiler/build configurations.
 data LayerScheduleStatus : Set where
