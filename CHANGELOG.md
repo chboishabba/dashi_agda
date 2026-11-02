@@ -193,3 +193,6 @@ monitor surface.
 - Created `BishopRiemannDirichletBaselSameObjectExact`: original Bishop-complex finite Dirichlet sums, real/imag comparisons to the actual Basel majorant, genuine Bishop coordinatewise series limits, a concrete integer-two Basel fibre, and explicit original half-plane same-object equality transport to completed ζ. No false generic Dirichlet continuity inferred.
 - Extended `BishopMachinQuantitativeZetaCommutingSquareExact` with direct original ζ-to-summed-Dirichlet claims at the actual Machin stages/limit. Added imports to all three TOE roots and updated exact K04d-TERM/UNIFORM/SAME obligations.
 - Attribution retained (Riemann, Dirichlet, Bishop/Bridges, Murray, original in-repo authors). Source-written candidates; pinned Agda kernel/CI not run. The real log/exp n^(−s), locally uniform tail, true analytic same-object and K05/R10/T10/P10 terminals are not proved.
+
+
+- Strengthened the K04d Basel fibre from a convergence citation into an actual original-term majorant instance and native uniqueness-of-limits proof identifying the compiled sum with the original Bishop Basel limit and zero imaginary part (source-written only).
