@@ -703,3 +703,115 @@ rational arithmetic regression are not a proof of kernel acceptance.
 Nothing here establishes full RH, twin-prime infinitude or the Pickover
 giant-angle sign. Preserve external historical and original in-repo
 ownership separately.
+
+
+## 2026-11-02 Bishop/Cauchy source-native max-cut follow-on
+
+Implementation on PR #1408: `c80a70e7088b0c7486f495410f35ad68b3661ac6`,
+`53fac955ac98a7576a2bba34db51af1e5a7ac1cd`,
+`a302769fc752ed777e1ea2ab65ca08a26db26928`,
+`a659878ccf8df19a7b08c3092fa1e488931e090c`,
+`fd684576364447edf21d37a2f86fee2034a33029`;
+all three TOE root imports added in following commits. Classification:
+SOURCE-WRITTEN, NOT AGDA-KERNEL-VERIFIED. CI intentionally not run.
+
+### K05/K04d: actual Round11 sine/cosine at zero
+
+`DASHI/Foundations/BishopRound11TrigAtZeroExact.agda` builds
+`sineSignedTermAtZero` and `cosineSignedTermAtZeroHead/Tail`
+from the original parity-indexed factorial terms. It derives
+`sinePartialAtZero` and `cosinePartialAtZero` for literal finite
+Bishop series, then uses
+`BishopConcreteTrigSeriesConvergenceExact` and the vendored
+`Sequence.uniqueness-of-limits` to establish
+`round11SineAtZero` and `round11CosineAtZero`. No classical
+sine/cosine oracle, differentiation assumption, or new real carrier.
+
+### K04d: actual complex source at exponent two
+
+`DASHI/Analysis/BishopRiemannDirichletExponentialTermExact.agda`
+now has:
+
+- `sourceExponentTwo`: exact original Bishop analytic complex
+  pair `(2,0)`;
+- `sourceExponentTwoImaginaryArgumentZero`: algebraic
+  zero imaginary exponent for arbitrary Nat-log candidates;
+- `sourceExponentTwoRealIsBasel` and
+  `sourceExponentTwoImagIsZero`: termwise complex exponential
+  values `(Basel.baselTerm n,0)` for EVERY n, provided the
+  explicit source `exp_B(logNat n)≃n+1` inverse;
+- `sourceExponentTwoBaselMajorant`: constructs the actual
+  `BishopDirichletBaselMajorantAt` from those native term
+  identities, rather than taking a free majorant field;
+- `sourceExponentTwoSumIsOriginalBasel`: invokes existing
+  `dirichletValuesRespectTermwiseEquality` and Basel limit
+  uniqueness to identify both actual summed coordinates with
+  the original `BishopBaselReciprocalSquareConvergenceExact`
+  limit and zero;
+- `originalSourceExponentTwoSumIsBasel`: same result with the
+  actual configured convergent -log(1-x) construction, not an
+  arbitrary NatLogCandidate.
+
+**No analytic zeta equality is inferred**: this is the concrete
+complex Dirichlet series `Σ(n+1)^(-2)`, conditional on the
+native Bishop exp/log inverse, not the separate
+`ZetaHalfPlaneLayer.zetaHalfPlane` function.
+
+### K04b: normalized cross inequality to the actual Bishop order
+
+`DASHI/Analysis/BishopMachinCrossEnvelopeBishopOrderExact.agda`
+imports the original all-n `machinGeometricEnvelopeCrossMultiplied`,
+reuses `FiniteNatFractionOrderExact.natFractionLe` and the
+original vendored `RealProperties.p≤q⇒p⋆≤q⋆`.
+This yields `normalizedNumeratorBelowDenominator`,
+`normalizedRationalOrder`, and `normalizedBishopOrder`
+for the explicit cross-product form
+`3824·57121^n + 20·25^n ≤ (2n+1)·4780·57121^n`.
+It is a genuine compiler of the NORMALIZED integer certificate,
+but does not yet prove the original three rational remainder
+fractions all equal that single normalized quotient under
+strictly positive common-denominator cancellation.
+
+### Pareto/max-cut remaining and verification
+
+1. **K04d-LOG:** actual configured `InOpenUnitInterval`
+   bridge and a **source-native** proof
+   `exp_B(-log(1-x)) ≃ 1-x` with the correct sign/orientation,
+   yielding `exp_B(log_B(n+1))≃n+1`.
+   The n=0 Nat-log base is already paid.
+2. **K04d-NBD:** extend the explicitly constructed exponent-two
+   complex Basel majorant to a neighborhood of the *actual
+   Machin real* with `Re(s)>2`. Pay monotonic negative
+   exponential, the original sine/cosine modulus bound, termwise
+   input continuity, and a shared uniform tail modulus.
+3. **K04d-OWNER:** identify the original analytic
+   `realPartGreaterThanOne` predicate, then prove the
+   concrete convergent source function agrees pointwise with
+   `ZetaHalfPlaneLayer.zetaHalfPlane` and hence the selected
+   `CompletedRiemannZeta.zeta`. The generic substrate's
+   `DirichletSeriesConverges` and `Meromorphic` Set fields do
+   not themselves discharge these theorems.
+4. **K05-CAPSTONE:** derive the full signed-factorial
+   Bishop sine/cosine addition law via the existing Cauchy
+   triangle/rectangle/wing machinery and coefficient identities.
+   Then prove arctan-to-tangent transport, Machin quarter-angle
+   branch selection and independently characterized trig pi.
+   Only the **origin special case** is now paid, not the
+   general addition law.
+5. **K04b-DENOM:** pay literal unnormalised rational
+   common-denominator identity and positive-normalization,
+   then transport the original remainder fraction into the
+   source-written normalized Bishop inequality. Direct
+   Bishop `4/25^n` and `8/25^n` estimates remain an
+   independent already source-written path.
+6. **KERNEL:** user explicitly deferred CI; no compiler,
+   library resolver or pinned Agda kernel acceptance was
+   run in this tranche. The SOURCE-WRITTEN claims require
+   independent elaboration, and any failure must be repaired
+   before declaring the gate complete.
+
+Original ownership: John Machin; classical Dirichlet/Riemann;
+Bishop and Bridges; Zachary Murray's analysis; pinned
+`viktorcsimma/bishop` gitlink
+`240e38c7f6938f20f865b1f956c5f084da48bd54`.
+DASHI owns the above new composition proofs.
