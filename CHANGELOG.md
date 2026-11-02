@@ -1,3 +1,9 @@
+## 2026-11-02 — corrected Lean PR #15 compact Haar and physical conditional donor inventory
+
+- GitHub PR-title search exposed Lean PR #15 (291 changed files), previously missed by default-branch code index. Direct `refs/pull/15/head` source inspection confirms mathlib compact unit-quaternion SU2 one-link Haar, literal independent product-Haar on 4D link configuration, whole-link Haar/product identification, canonical selected finite CMP119 Gibbs conditional on source and integrability, Prokhorov extraction conditional on physical tightness, CMP116 mixed two-observable half-rate transport conditional on finite localization, and OS/spectral conditional no-pollution.
+- Recorded exact [Lean→Agda source-owner and open-hypothesis map](Docs/physics/YMClayLeanPR15FullPhysicalDonorCrosswalk20261102.md). **Correction:** finite compact SU2 Haar was already source-written in Lean, though golden Agda same-object acceptance and actual CMP119 physical source selection are outstanding.
+- Extended new finite Agda product integration theorem with `productIntegralStrictlyPositive`, then derived `nativePhysicalPartitionPositive` for the exact six-plane Wilson Gibbs measure conditional only on the one-link strict positivity authority. Wired new theorem exports into canonical Balaban TOE. No kernel or CI run, no Clay promotion.
+
 ## 2026-11-02 — source/PR-wide Yang–Mills max-cut reuse, finite product Haar algebra and R443 numerator
 
 - Explicitly searched named Fubini, SU(N), Haar, Wilson, CMP119, CMP116, mixed-J, OS/Hamiltonian and spectral terms in both code indices and the current Agda branch; inspected relevant historical Agda/Lean PR changed-file inventories. Recovered older `CompactLieAnalyticPackage.NormalizedHaarTheory`, `BalabanFiniteSumFubiniExact`, selected CMP119 stress source, CMP116 R406 and R320 owner, and Lean PR #7 bounded-spectrum/Cauchy mixed-source donors.
