@@ -87,6 +87,82 @@ natSuccessCanonical tokens n suffix evidence =
   subst (NatReencoded tokens) evidence (natRebuildOutcome tokens)
 
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- Explicit first-token soundness of the original prefix parser.
+-- We need this to reject *all* constructor mismatches, including
+-- branches whose child parse results are not definitionally known.
+------------------------------------------------------------------------
+
+data FormulaTop : Set where
+  topVariable topFalse topTrue topNegate topConjunction topDisjunction
+    topInvalid : FormulaTop
+
+formulaTop : Cook.BooleanFormula → FormulaTop
+formulaTop (Cook.variable _) = topVariable
+formulaTop (Cook.constant false) = topFalse
+formulaTop (Cook.constant true) = topTrue
+formulaTop (Cook.negate _) = topNegate
+formulaTop (Cook.conjunction _ _) = topConjunction
+formulaTop (Cook.disjunction _ _) = topDisjunction
+
+tokenTop : Prefix.CookSyntaxToken → FormulaTop
+tokenTop Prefix.natZeroToken = topInvalid
+tokenTop Prefix.natSuccToken = topInvalid
+tokenTop Prefix.formulaVariableToken = topVariable
+tokenTop Prefix.formulaFalseToken = topFalse
+tokenTop Prefix.formulaTrueToken = topTrue
+tokenTop Prefix.formulaNegateToken = topNegate
+tokenTop Prefix.formulaAndToken = topConjunction
+tokenTop Prefix.formulaOrToken = topDisjunction
+
+parsedFormulaTopMatchesInput :
+  (token : Prefix.CookSyntaxToken)
+  (rest : List Prefix.CookSyntaxToken)
+  (formula : Cook.BooleanFormula)
+  (suffix : List Prefix.CookSyntaxToken) →
+  Prefix.parseCookFormula (token ∷ rest) ≡
+    Prefix.parsed formula suffix →
+  formulaTop formula ≡ tokenTop token
+parsedFormulaTopMatchesInput Prefix.natZeroToken rest formula suffix eq =
+  ⊥-elim (failureIsNotParsed eq)
+parsedFormulaTopMatchesInput Prefix.natSuccToken rest formula suffix eq =
+  ⊥-elim (failureIsNotParsed eq)
+parsedFormulaTopMatchesInput
+  Prefix.formulaFalseToken rest .(Cook.constant false) .rest refl = refl
+parsedFormulaTopMatchesInput
+  Prefix.formulaTrueToken rest .(Cook.constant true) .rest refl = refl
+parsedFormulaTopMatchesInput
+  Prefix.formulaVariableToken rest formula suffix eq
+  with Prefix.parseNat rest
+... | Prefix.parseFailure = ⊥-elim (failureIsNotParsed eq)
+... | Prefix.parsed n afterNat with eq
+...   | refl = refl
+parsedFormulaTopMatchesInput
+  Prefix.formulaNegateToken rest formula suffix eq
+  with Prefix.parseCookFormula rest
+... | Prefix.parseFailure = ⊥-elim (failureIsNotParsed eq)
+... | Prefix.parsed child afterChild with eq
+...   | refl = refl
+parsedFormulaTopMatchesInput
+  Prefix.formulaAndToken rest formula suffix eq
+  with Prefix.parseCookFormula rest
+... | Prefix.parseFailure = ⊥-elim (failureIsNotParsed eq)
+... | Prefix.parsed left afterLeft
+  with Prefix.parseCookFormula afterLeft
+...   | Prefix.parseFailure = ⊥-elim (failureIsNotParsed eq)
+...   | Prefix.parsed right afterRight with eq
+...     | refl = refl
+parsedFormulaTopMatchesInput
+  Prefix.formulaOrToken rest formula suffix eq
+  with Prefix.parseCookFormula rest
+... | Prefix.parseFailure = ⊥-elim (failureIsNotParsed eq)
+... | Prefix.parsed left afterLeft
+  with Prefix.parseCookFormula afterLeft
+...   | Prefix.parseFailure = ⊥-elim (failureIsNotParsed eq)
+...   | Prefix.parsed right afterRight with eq
+...     | refl = refl
+
 -- Strong parser inverse: structural recursion is on the decoded
 -- BooleanFormula, so both subformula calls in an AND/OR are smaller.
 -- The second parse may consume a suffix discovered by the first.
@@ -98,13 +174,34 @@ rebuildCook :
   Prefix.parseCookFormula tokens ≡ Prefix.parsed formula suffix →
   tokens ≡ Prefix.encodeCookFormulaInto formula suffix
 rebuildCook (Cook.variable index) [] suffix ()
-rebuildCook (Cook.variable index) (Prefix.natZeroToken ∷ rest) suffix ()
-rebuildCook (Cook.variable index) (Prefix.natSuccToken ∷ rest) suffix ()
-rebuildCook (Cook.variable index) (Prefix.formulaFalseToken ∷ rest) suffix ()
-rebuildCook (Cook.variable index) (Prefix.formulaTrueToken ∷ rest) suffix ()
-rebuildCook (Cook.variable index) (Prefix.formulaNegateToken ∷ rest) suffix ()
-rebuildCook (Cook.variable index) (Prefix.formulaAndToken ∷ rest) suffix ()
-rebuildCook (Cook.variable index) (Prefix.formulaOrToken ∷ rest) suffix ()
+rebuildCook (Cook.variable index) (Prefix.natZeroToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natZeroToken rest (Cook.variable index) suffix evidence))
+rebuildCook (Cook.variable index) (Prefix.natSuccToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natSuccToken rest (Cook.variable index) suffix evidence))
+rebuildCook (Cook.variable index) (Prefix.formulaFalseToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaFalseToken rest (Cook.variable index) suffix evidence))
+rebuildCook (Cook.variable index) (Prefix.formulaTrueToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaTrueToken rest (Cook.variable index) suffix evidence))
+rebuildCook (Cook.variable index) (Prefix.formulaNegateToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaNegateToken rest (Cook.variable index) suffix evidence))
+rebuildCook (Cook.variable index) (Prefix.formulaAndToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaAndToken rest (Cook.variable index) suffix evidence))
+rebuildCook (Cook.variable index) (Prefix.formulaOrToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaOrToken rest (Cook.variable index) suffix evidence))
 rebuildCook (Cook.variable index)
   (Prefix.formulaVariableToken ∷ rest) suffix evidence
   with Prefix.parseNat rest
@@ -115,35 +212,98 @@ rebuildCook (Cook.variable index)
     (natSuccessCanonical rest index suffix refl)
 
 rebuildCook (Cook.constant false) [] suffix ()
-rebuildCook (Cook.constant false) (Prefix.natZeroToken ∷ rest) suffix ()
-rebuildCook (Cook.constant false) (Prefix.natSuccToken ∷ rest) suffix ()
-rebuildCook (Cook.constant false) (Prefix.formulaVariableToken ∷ rest) suffix ()
-rebuildCook (Cook.constant false) (Prefix.formulaTrueToken ∷ rest) suffix ()
-rebuildCook (Cook.constant false) (Prefix.formulaNegateToken ∷ rest) suffix ()
-rebuildCook (Cook.constant false) (Prefix.formulaAndToken ∷ rest) suffix ()
-rebuildCook (Cook.constant false) (Prefix.formulaOrToken ∷ rest) suffix ()
+rebuildCook (Cook.constant false) (Prefix.natZeroToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natZeroToken rest (Cook.constant false) suffix evidence))
+rebuildCook (Cook.constant false) (Prefix.natSuccToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natSuccToken rest (Cook.constant false) suffix evidence))
+rebuildCook (Cook.constant false) (Prefix.formulaVariableToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaVariableToken rest (Cook.constant false) suffix evidence))
+rebuildCook (Cook.constant false) (Prefix.formulaTrueToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaTrueToken rest (Cook.constant false) suffix evidence))
+rebuildCook (Cook.constant false) (Prefix.formulaNegateToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaNegateToken rest (Cook.constant false) suffix evidence))
+rebuildCook (Cook.constant false) (Prefix.formulaAndToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaAndToken rest (Cook.constant false) suffix evidence))
+rebuildCook (Cook.constant false) (Prefix.formulaOrToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaOrToken rest (Cook.constant false) suffix evidence))
 rebuildCook (Cook.constant false)
   (Prefix.formulaFalseToken ∷ rest) .rest refl = refl
 
 rebuildCook (Cook.constant true) [] suffix ()
-rebuildCook (Cook.constant true) (Prefix.natZeroToken ∷ rest) suffix ()
-rebuildCook (Cook.constant true) (Prefix.natSuccToken ∷ rest) suffix ()
-rebuildCook (Cook.constant true) (Prefix.formulaVariableToken ∷ rest) suffix ()
-rebuildCook (Cook.constant true) (Prefix.formulaFalseToken ∷ rest) suffix ()
-rebuildCook (Cook.constant true) (Prefix.formulaNegateToken ∷ rest) suffix ()
-rebuildCook (Cook.constant true) (Prefix.formulaAndToken ∷ rest) suffix ()
-rebuildCook (Cook.constant true) (Prefix.formulaOrToken ∷ rest) suffix ()
+rebuildCook (Cook.constant true) (Prefix.natZeroToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natZeroToken rest (Cook.constant true) suffix evidence))
+rebuildCook (Cook.constant true) (Prefix.natSuccToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natSuccToken rest (Cook.constant true) suffix evidence))
+rebuildCook (Cook.constant true) (Prefix.formulaVariableToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaVariableToken rest (Cook.constant true) suffix evidence))
+rebuildCook (Cook.constant true) (Prefix.formulaFalseToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaFalseToken rest (Cook.constant true) suffix evidence))
+rebuildCook (Cook.constant true) (Prefix.formulaNegateToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaNegateToken rest (Cook.constant true) suffix evidence))
+rebuildCook (Cook.constant true) (Prefix.formulaAndToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaAndToken rest (Cook.constant true) suffix evidence))
+rebuildCook (Cook.constant true) (Prefix.formulaOrToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaOrToken rest (Cook.constant true) suffix evidence))
 rebuildCook (Cook.constant true)
   (Prefix.formulaTrueToken ∷ rest) .rest refl = refl
 
 rebuildCook (Cook.negate child) [] suffix ()
-rebuildCook (Cook.negate child) (Prefix.natZeroToken ∷ rest) suffix ()
-rebuildCook (Cook.negate child) (Prefix.natSuccToken ∷ rest) suffix ()
-rebuildCook (Cook.negate child) (Prefix.formulaVariableToken ∷ rest) suffix ()
-rebuildCook (Cook.negate child) (Prefix.formulaFalseToken ∷ rest) suffix ()
-rebuildCook (Cook.negate child) (Prefix.formulaTrueToken ∷ rest) suffix ()
-rebuildCook (Cook.negate child) (Prefix.formulaAndToken ∷ rest) suffix ()
-rebuildCook (Cook.negate child) (Prefix.formulaOrToken ∷ rest) suffix ()
+rebuildCook (Cook.negate child) (Prefix.natZeroToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natZeroToken rest (Cook.negate child) suffix evidence))
+rebuildCook (Cook.negate child) (Prefix.natSuccToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natSuccToken rest (Cook.negate child) suffix evidence))
+rebuildCook (Cook.negate child) (Prefix.formulaVariableToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaVariableToken rest (Cook.negate child) suffix evidence))
+rebuildCook (Cook.negate child) (Prefix.formulaFalseToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaFalseToken rest (Cook.negate child) suffix evidence))
+rebuildCook (Cook.negate child) (Prefix.formulaTrueToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaTrueToken rest (Cook.negate child) suffix evidence))
+rebuildCook (Cook.negate child) (Prefix.formulaAndToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaAndToken rest (Cook.negate child) suffix evidence))
+rebuildCook (Cook.negate child) (Prefix.formulaOrToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaOrToken rest (Cook.negate child) suffix evidence))
 rebuildCook (Cook.negate child)
   (Prefix.formulaNegateToken ∷ rest) suffix evidence
   with Prefix.parseCookFormula rest
@@ -154,13 +314,34 @@ rebuildCook (Cook.negate child)
     (rebuildCook child rest suffix refl)
 
 rebuildCook (Cook.conjunction left right) [] suffix ()
-rebuildCook (Cook.conjunction left right) (Prefix.natZeroToken ∷ rest) suffix ()
-rebuildCook (Cook.conjunction left right) (Prefix.natSuccToken ∷ rest) suffix ()
-rebuildCook (Cook.conjunction left right) (Prefix.formulaVariableToken ∷ rest) suffix ()
-rebuildCook (Cook.conjunction left right) (Prefix.formulaFalseToken ∷ rest) suffix ()
-rebuildCook (Cook.conjunction left right) (Prefix.formulaTrueToken ∷ rest) suffix ()
-rebuildCook (Cook.conjunction left right) (Prefix.formulaNegateToken ∷ rest) suffix ()
-rebuildCook (Cook.conjunction left right) (Prefix.formulaOrToken ∷ rest) suffix ()
+rebuildCook (Cook.conjunction left right) (Prefix.natZeroToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natZeroToken rest (Cook.conjunction left right) suffix evidence))
+rebuildCook (Cook.conjunction left right) (Prefix.natSuccToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natSuccToken rest (Cook.conjunction left right) suffix evidence))
+rebuildCook (Cook.conjunction left right) (Prefix.formulaVariableToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaVariableToken rest (Cook.conjunction left right) suffix evidence))
+rebuildCook (Cook.conjunction left right) (Prefix.formulaFalseToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaFalseToken rest (Cook.conjunction left right) suffix evidence))
+rebuildCook (Cook.conjunction left right) (Prefix.formulaTrueToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaTrueToken rest (Cook.conjunction left right) suffix evidence))
+rebuildCook (Cook.conjunction left right) (Prefix.formulaNegateToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaNegateToken rest (Cook.conjunction left right) suffix evidence))
+rebuildCook (Cook.conjunction left right) (Prefix.formulaOrToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaOrToken rest (Cook.conjunction left right) suffix evidence))
 rebuildCook (Cook.conjunction left right)
   (Prefix.formulaAndToken ∷ rest) suffix evidence
   with Prefix.parseCookFormula rest
@@ -177,13 +358,34 @@ rebuildCook (Cook.conjunction left right)
         (rebuildCook right afterLeft suffix refl)))
 
 rebuildCook (Cook.disjunction left right) [] suffix ()
-rebuildCook (Cook.disjunction left right) (Prefix.natZeroToken ∷ rest) suffix ()
-rebuildCook (Cook.disjunction left right) (Prefix.natSuccToken ∷ rest) suffix ()
-rebuildCook (Cook.disjunction left right) (Prefix.formulaVariableToken ∷ rest) suffix ()
-rebuildCook (Cook.disjunction left right) (Prefix.formulaFalseToken ∷ rest) suffix ()
-rebuildCook (Cook.disjunction left right) (Prefix.formulaTrueToken ∷ rest) suffix ()
-rebuildCook (Cook.disjunction left right) (Prefix.formulaNegateToken ∷ rest) suffix ()
-rebuildCook (Cook.disjunction left right) (Prefix.formulaAndToken ∷ rest) suffix ()
+rebuildCook (Cook.disjunction left right) (Prefix.natZeroToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natZeroToken rest (Cook.disjunction left right) suffix evidence))
+rebuildCook (Cook.disjunction left right) (Prefix.natSuccToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.natSuccToken rest (Cook.disjunction left right) suffix evidence))
+rebuildCook (Cook.disjunction left right) (Prefix.formulaVariableToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaVariableToken rest (Cook.disjunction left right) suffix evidence))
+rebuildCook (Cook.disjunction left right) (Prefix.formulaFalseToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaFalseToken rest (Cook.disjunction left right) suffix evidence))
+rebuildCook (Cook.disjunction left right) (Prefix.formulaTrueToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaTrueToken rest (Cook.disjunction left right) suffix evidence))
+rebuildCook (Cook.disjunction left right) (Prefix.formulaNegateToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaNegateToken rest (Cook.disjunction left right) suffix evidence))
+rebuildCook (Cook.disjunction left right) (Prefix.formulaAndToken ∷ rest) suffix evidence =
+  ⊥-elim ((λ ())
+    (parsedFormulaTopMatchesInput
+      Prefix.formulaAndToken rest (Cook.disjunction left right) suffix evidence))
 rebuildCook (Cook.disjunction left right)
   (Prefix.formulaOrToken ∷ rest) suffix evidence
   with Prefix.parseCookFormula rest
