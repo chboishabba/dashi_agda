@@ -8,6 +8,19 @@ January 2024, public full text reports later 2025-08-08 upload).
 The chart explicitly includes Rhea reaction numbers, enzyme/cofactor labels,
 substrates and products. The initial source-observed Rhea-ID index is
 docs/biology/KitzerowPublishedRheaChartObservedIndex.v1.json.
+There is now a reproducible candidate-only source-text extractor for
+a user-authorized local copy of the public chart text. It supports the
+publisher's observed private-use glyph representation of "Rhea", records
+input SHA-256 plus line/column per occurrence, and does NOT redistribute
+source text or turn web-text lines into invented PDF page anchors:
+
+    python3 scripts/index_kitzerow_chart_source_text.py \
+      --source-text YOUR_AUTHORIZED_CHART_TEXT.txt \
+      --source-revision "publisher display 2025-08-08; independently unverified" \
+      -o artifacts/biology/kitzerow-chart-source-text-candidates.json
+
+Each output is explicitly an unverified source-observation candidate until
+the real original figure/source and curator-approved mapping are checked.
 The original full chart/PDF binary and layout remain unverified; these
 initial eight directly identified codes are a **bounded observation**,
 not the creator network's full reaction set. The creator's site says the
@@ -152,6 +165,7 @@ Version/assay/source release still must be pinned in acquired receipts. No stand
     python3 scripts/check_bh4_pathway_ontology.py
     python3 scripts/check_bh4_pathway_review.py
     python3 scripts/check_kitzerow_primary_chart.py
+    python3 scripts/check_kitzerow_chart_source_text.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4CreatorChartSourceBridgeExact.agda
     python3 scripts/check_kitzerow_bh4_priority_all.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PathwayOntologyInteropExact.agda
