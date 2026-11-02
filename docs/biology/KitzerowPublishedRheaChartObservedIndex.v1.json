@@ -1,0 +1,50 @@
+{
+  "schema": "dashi.kitzerow-primary-chart-rhea-index.v1",
+  "creator": "Kimberly Kitzerow",
+  "title": "BH4/Folate/Cobalamin/Homocysteine Pathway",
+  "publication_page": "https://www.researchgate.net/publication/377218425_BH4FolateCobalaminHomocysteine_Pathway",
+  "declared_publication_month": "2024-01",
+  "observed_full_text_upload_date": "2025-08-08",
+  "license_declared": "CC BY-NC-ND 4.0",
+  "source_relationship": "creator-authored published chart with cited upstream Rhea reaction identifiers",
+  "disclosure_scope": "bounded HTML-rendered text only; original diagram/PDF pages and current file digest not verified",
+  "whole_proprietary_network_reconstructed": false,
+  "source_evidence_kind": "publisher_displayed_full_text_extract",
+  "rhea_identifiers": [
+    {
+      "rhea_id": "RHEA:21708",
+      "web_text_line": 91
+    },
+    {
+      "rhea_id": "RHEA:21080",
+      "web_text_line": 104
+    },
+    {
+      "rhea_id": "RHEA:10112",
+      "web_text_line": 116
+    },
+    {
+      "rhea_id": "RHEA:11172",
+      "web_text_line": 145
+    },
+    {
+      "rhea_id": "RHEA:23908",
+      "web_text_line": 159
+    },
+    {
+      "rhea_id": "RHEA:10580",
+      "web_text_line": 276
+    },
+    {
+      "rhea_id": "RHEA:19201",
+      "web_text_line": 3108
+    },
+    {
+      "rhea_id": "RHEA:23252",
+      "web_text_line": 3139
+    }
+  ],
+  "primary_claims_paid_by_source_index": false,
+  "reaction_identifier_proves_curated_reaction_identity": false,
+  "same_compartment_flux_paid": false
+}
