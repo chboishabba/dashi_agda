@@ -62,7 +62,7 @@ python3 interop_scripts/digital_esd/run_world.py
 python3 interop_scripts/digital_esd/audit_open_axis_study_world.py --input /path/to/study-world.json --output /path/to/open-axis-audit.json
 ```
 
-The runtime validator is read-only, and a successful exit only establishes **structural ledger totality over explicitly declared parts/axes**. It does not certify reviewed observation membership, study decomposition completeness or full corpus world closure. No zero-flag world run or Agda compiler check has been executed here.
+**Zero-flag integration:** `run_world.py` now checks for `<DIGITAL_ESD_ARTIFACT_ROOT>/review/study-part-axis-world.json` *after* its canonical SLR/PostgreSQL world update. If absent it returns `study-decomposition-manifest-not-supplied` (not false evidence). If present it runs the validator, emits a SHA-256 referenced bounded audit at `slr-parse/study-part-axis-world-audit.json`, and leaves `empirical_world_admitted=false`. This file must be generated only from genuine per-study decompositions, not from 43,996 metadata rows or the 19-coordinate candidate parser alone.\n\nThe runtime validator is read-only, and a successful exit only establishes **structural ledger totality over explicitly declared parts/axes**. It does not certify reviewed observation membership, study decomposition completeness or full corpus world closure. No zero-flag world run or Agda compiler check has been executed here.
 
 ## 4. Exact max-cut obligations (do not mark paid by import count)
 
