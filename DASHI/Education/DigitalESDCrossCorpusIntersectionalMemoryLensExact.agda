@@ -18,6 +18,7 @@ import DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact as Learning
 import DASHI.Core.IntersectionalNonFactorability as Intersection
 import DASHI.Core.IntersectionalBinaryInteractionBridgeExact as Interaction
 import DASHI.Core.FeministRechartingSourceBridgeExact as Feminist
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.McCallCategoryStrategyBoundaryExact as McCall
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as EfS
 import DASHI.Education.DigitalESDJointHyperfabricConsumerExact as Joint
@@ -55,6 +56,12 @@ record CandidateCrossCorpusLens
       BodyMemory.HyperfabricIntersectionalBodyMemoryCertificate bodyMemoryHyperfabric
     positiveFeministRepair :
       Feminist.PositiveRecharting {Residual = Feminist.PositiveMultiplicity} Feminist.inheritedChart
+    strictFeministRechart :
+      Observer.StrictRefinement
+        Feminist.inheritedChart
+        (Observer.pairObserver
+          Feminist.inheritedChart
+          (Feminist.PositiveRecharting.residual positiveFeministRepair))
     categoricalMethod : McCall.CategoryStrategy
     sourceVoiceGate : Voice.StudentVoiceEpistemicAgencyBridge
     parentMultiObserver : MultiObserver.ParentAllyshipMultiObserverBridge
@@ -85,6 +92,8 @@ candidateLens alicePaper efsCase question debt =
     BodyMemory.canonicalHyperfabricIntersectionalBodyMemoryBridge refl
     BodyMemory.canonicalHyperfabricIntersectionalBodyMemoryCertificate
     Feminist.canonicalPositiveRecharting
+    (Feminist.positiveRechartingStrictlyRefinesInheritedChart
+      Feminist.canonicalPositiveRecharting)
     McCall.intercategorical
     Voice.canonicalStudentVoiceEpistemicAgencyBridge
     MultiObserver.canonicalParentAllyshipMultiObserverBridge
