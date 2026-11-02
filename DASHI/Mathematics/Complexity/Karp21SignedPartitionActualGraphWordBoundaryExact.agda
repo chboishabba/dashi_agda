@@ -11,7 +11,7 @@ module DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundary
 -- an independently invented encoded language or Boolean status flag.
 --
 -- The only unprovided premises are the real canonical binary codecs,
--- target NO graph, their faithful parser-to-word correspondence, and
+-- their faithful parser-to-word correspondence, and
 -- the genuine polynomial-time machine clock. The finite reduction
 -- and both directions of its word-level semantic correctness are
 -- independently source-written here.
@@ -34,6 +34,7 @@ import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphYESExact as 
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as N21
 import DASHI.Mathematics.Complexity.Karp21MalformedWordTotalReductionExact as Malformed
+import DASHI.Mathematics.Complexity.Karp21WeightedMaxCutFixedNoGraphExact as FixedNo
 
 graphAccepts : N21.GraphInstance → Set
 graphAccepts graph =
@@ -92,8 +93,6 @@ record E20GraphWordBoundary : Set₁ where
     decodePartition : Word.BitWord → Maybe (List ℤ)
     encodeGraph : N21.GraphInstance → Word.BitWord
     graphLanguage : PR.Language Word.BitWord
-    validNoGraph : N21.GraphInstance
-    noGraphRejects : graphAccepts validNoGraph → ⊥
     faithfulGraphWord :
       (graph : N21.GraphInstance) →
       PR.Iff (graphAccepts graph)
@@ -110,8 +109,8 @@ module EncodedE20
       Source.PartitionYES
       graphAccepts
       e20ActualGraphOfSignedPartition
-      (validNoGraph boundary)
-      (noGraphRejects boundary)
+      FixedNo.fixedNoGraphInstance
+      FixedNo.fixedNoGraphInstanceRejects
       (encodeGraph boundary)
       (graphLanguage boundary)
       e20SignedPartitionActualGraphIff
