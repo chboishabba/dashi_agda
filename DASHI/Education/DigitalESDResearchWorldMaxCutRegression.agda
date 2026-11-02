@@ -10,7 +10,8 @@ import DASHI.Education.DigitalESDCrossCorpusIntersectionalMemoryLensExact as Len
 import DASHI.Education.DigitalESDEfSSourceCrossPollinationExact as EfS
 import DASHI.Biology.EducationCorpusSourceRegistry as Alice
 import DASHI.Biology.AliceBrownDependencyDerivedInvalidationBidiExact as Invalidation
-import DASHI.Biology.AliceBrownSelectiveInvalidationParetoBidiExact as Pareto
+import DASHI.Core.RecursiveSelectiveInvalidationParetoTruthMaintenanceBidiExact as Recursive
+import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
 
 -- Registered original/source candidates + separately counted study-profile
 -- OCCURRENCES. None of the equalities claim DOI-deduplicated publications.
@@ -60,10 +61,10 @@ accessibilityLensIsExactlyJepsenCooke =
 -- a survey/voice diagnostic update does not automatically dirty an unrelated
 -- parent-observer candidate. It is not a demonstrated EfS review event.
 aliceUnrelatedObserverStillUnaffected :
-  Invalidation.Recursive.candidateClass Invalidation.Recursive.layer1
-    (Invalidation.Recursive.liftCandidate Invalidation.aliceDerivedRecursiveStep
-      Invalidation.Recursive.frame0)
-  ≡ Pareto.Pareto.provablyUnaffected
+  Recursive.candidateClass Recursive.layer1
+    (Recursive.liftCandidate Invalidation.aliceDerivedRecursiveStep
+      Recursive.frame0)
+  ≡ Pareto.provablyUnaffected
 aliceUnrelatedObserverStillUnaffected =
   Invalidation.aliceParentObserverCandidateStillUnaffected
 
