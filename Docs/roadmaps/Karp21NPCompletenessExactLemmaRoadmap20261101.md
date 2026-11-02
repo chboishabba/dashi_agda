@@ -16,6 +16,41 @@
 - **G — Gates:** independent mathematical proof term, syntactic check in focused Agda root, actual pinned-toolchain check, axioms/postulates/hole audit, executable regression as secondary evidence, consumer parity, exact source commit attribution.
 - **F — Follow-through:** after each edge, add the checked reduction to a *single* 21-node graph and propagate completeness using the existing `transportNPComplete` rather than creating 21 copied proofs.
 
+## 2026-11-02 max-cut continuation — K00 malformed words, E04/E06 finite semantics, E20 pair coverage, N21 bitword certificate
+
+**Repo boundary:** all implementation stays in `chboishabba/dashi_agda`, PR #1445. Original Cook (1971)/Karp (1972), inherited repository proof owners and subsequent DASHI proof sources retain separate attribution. No CI or Agda kernel run was performed in this tranche.
+
+### New source-written Agda exact lemmas
+
+| Owner | Source-written exact theorem / contribution | Residual before verified reduction |
+| --- | --- | --- |
+| `Karp21MaxCutCertificateBinaryCodecExact.agda` | `decodeEncodeCutLabels` gives exact `Vec Bool n` → `List Bool` → `Vec Bool n` roundtrip; `cutCertificateWordLength` is exactly `n`; `rejectTrailingCertificateBit` rejects extra data; `wordAcceptanceSound`, `wordAcceptanceComplete`, `n21PackedCertificateYESIff` prove the full existential finite MAX CUT bitword-certificate correspondence. | Graph Word decoder; quantified packed graph/cert parser correctness; actual bit-verifier machine polynomial clock, `PR.InNP`, kernel receipt |
+| `Karp21IndexedUpperPairBijectionExact.agda` | `upperPairNoLoop`, `upperPairEndpointsInjective`, `upperPairCoversDistinct`, `allUpperPairsContains`, `enumeratedUpperPairCoversDistinct`: a canonical `UpperPair n` address covers every distinct vertex pair (either orientation), and its ordered endpoints identify it injectively. The enumerator includes each address as a **membership witness**. | Prove no duplicate *occurrences* in `allUpperPairs`, show exact indexed-address list equals `Gen.completePairEdges` under projection, kernel receipt. Count alone is not uniqueness |
+| `Karp21FiniteCliquePackingDecisionExact.agda` (historical E04) | Reuses original `Karp21CliqueSetPackingExact`, same `SimpleGraph n` and `Vec Bool n` cardinality; `karpFiniteCliquePackingInstanceIff` establishes existential finite CLIQUE YES iff nonedge-incidence SET PACKING YES, all k. | Canonical explicit set-family universe/payload, source/target packed Word codecs, polynomial transform machine clock, concrete NP membership for the graph/set owner and Agda acceptance |
+| `Karp21FiniteNodeSetCoverDecisionExact.agda` (historical E06) | Reuses `Karp21VertexSetCoverIncidenceExact` and finite graph/Boolean choice; `karpFiniteNodeSetCoverInstanceIff` gives existential node-cover iff indexed-edge set-cover with budget `countChosen ≤ k`. | Actual finite edge-universe and incidence set-family bit matrix, direct source/target Word parser/serializer and size proof, polynomial graph→family machine clock, NP certificate and Agda receipt |
+| `Karp21MalformedWordTotalReductionExact.agda` (shared K00) | `TotalMalformedSource.totalMalformedReductionIff`: a **total** `Word → Word` reduction handles malformed source words by mapping them to a target NO object with a real proof of NO; valid source words use the actual instance-iff and independent target-encoding faithfulness. `makeCostedTotalReduction` creates the existing `PR.PolynomialManyOneReduction` when and **only** when a real `polynomialTimeMap` certificate for this map is supplied. | Concrete signed source/graph codecs in Agda and the actual polynomial machine clock; no resource certificate is manufactured |
+
+**Agda source repair:** `Karp21FiniteCompleteGraphGeneratorExact.agda` incorrectly omitted Nat `_+_` from its import list while defining `triangularPairCount`. The import has been repaired. This is a static source fix, not evidence of pinned Agda acceptance.
+
+### Concrete executable binary Karp E20/N21 adapter
+
+`scripts/karp21_signed_cut_binary_codec.py` is an **actual** separate Python binary encoding/transducer implementation, not a generic codec record. It emits canonical, self-delimiting `gamma(n+1)` natural numbers with zigzag signed integers, source partition vectors, sorted off-diagonal unique undirected weighted edges, and a strictly positive MAX CUT threshold. An invalid source word maps to the valid fixed-NO graph (two vertices; one unit edge; W=2); a signed zero-sum source maps to a valid fixed-YES graph (same unit edge; W=1). Arbitrarily signed nonzero inputs use edges `w_uv=4*c_u*c_v` and `W=(Σ c)²`.
+
+The target decoder rejects nonbinary words, truncated gamma tokens, out-of-range/reversed/looped/duplicated/unsorted edges, zero threshold and trailing data; the cut certificate must have exactly `n` bits. This satisfies the executable *reference semantics* for malformed input and the same finite graph decision predicate; **the same-object Agda `Word` codec/clock remains unproved**.
+
+`scripts/check_karp_binary_codec.py` now contains exhaustive small-word roundtrip and YES/NO controls for **3906** signed source vectors of length 0..5, **111111** cut labelings, malformed words, exact reconstruction, positive/zero threshold branches, and **54** signed 1024-bit envelope scenarios; it is added to `run_karp21_reduction_regressions.py`. **The exact script has not been executed in this turn.** These are test cases authored, not test results or formal bit-complexity bounds. The observed heuristic envelope `outputLength ≤ 128*(inputLength+1)^3` on finite fixtures must not be promoted to a universally proven machine-time theorem.
+
+### Remaining unclosed mathematical cut, ordered by reuse
+
+1. **K00:** actual `Word=List Bool` decoding/encoding proof for signed integer vectors and canonical weighted graph, malformed source/target policies as language predicates, `PR.PolynomialCostModel` instantiated with an audited bit-operation/tape model, Cook–Levin SAT `NPComplete` for the **same** `Word`, and certified composition for all 20 direct reductions.
+2. **E20:** `e20UpperPairOccurrenceUniqueness` and `e20UpperPairToCompletePairEdges`; `e20AgdaSignedGammaCodecRoundtrip`; `e20AgdaGraphWordRoundtrip` and `e20GraphDecodeRejectsMalformed`; `e20IntMulBinaryBitCost`; `e20ConcreteTapeTransducerPolynomialClock`; `e20EncodedPolynomialReduction`. Signed finite cut objective and full finite positive-target YES iff are source-written already, not kernel accepted.
+3. **N21:** the new exact `n`-bit cut certificate codec must be paired with the graph's binary Word and verified worst-case integer summation/multiplication clock to produce the actual `PR.InNP`, not merely an existential finite verifier.
+4. **E04/E05/E06/E12 graph/set triangle:** retain the now-source-written finite existential iff; construct real packed set-universe/graph codecs, k-bound guards, polynomial clocks, and `PR.InNP` witnesses for each decision problem.
+5. **Other E01–E03, E07–E11, E13–E19 and N01–N20** remain *exactly* as separately listed below (20 reductions and 21 membership problems overall). No edge is marked costed from bounded Python controls, a semantic iff, or a typed source record.
+6. **Independent acceptance:** run pinned Agda source/axiom/termination check of `Karp21Everything.agda`, then source revision, exact statement and dependency SHA receipts. No CI was required or run in this tranche.
+
+**Status still 0/20 new end-to-end Agda kernel-certified costed concrete reductions; 0/21 new concrete Agda kernel-certified NP-complete problem proofs.** This does not diminish the finite source-written theorem additions, but it prevents a false "all done" promotion.
+
 ## A. Honest current status (audited against #1445 GitHub tree)
 
 | Proof owner / receipt | Verified object | State |
