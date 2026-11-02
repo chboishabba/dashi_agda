@@ -1,3 +1,9 @@
+## 2026-11-02 — R443 native six-plane SUN Gibbs local gauge invariance
+
+- Source-wrote `YMClaySUNMatrixSixPlaneGaugeInvariantExact` and imported it into canonical Balaban TOE. Derives native transformed-word same object and uses existing signed-plaquette gauge theorem to prove invariant original six-positive-plane SUN real Wilson deficit, beta-weighted action and exponential Gibbs density.
+- Added independent numerical quaternion reference `scripts/check_ym_sun_six_plane_gauge_invariance_reference.py`: 1024 links, 1536 plaquettes, maximum error 7.77e-16 and action equality 1538.045855541643 in selected nonconstant fixture. Not an Agda proof or physical Haar.
+- Reviewed original source-local SU2 Haar identity-chart and Jacobian modules: neither constructs full global compact Haar. R443 physical integration and remaining R445/R320/R333 mathematical leaves stay open. CI/Agda not run.
+
 ## 2026-11-02 — source-first SU(N) matrix Wilson, product Haar and R445/R320 real-source weld
 
 - Seven Agda theorem-owner modules extend actual certified SU(N) matrix-valued original signed periodic link and six positive plaquette source. Reuses native bond group, gauge cancellation, exact spatial C3 and the physical R443→R445→R278 carriers. Derives trace class/gauge invariance, defines real Gibbs density and partition without a second free equality, and constructs the identical selected R445 finite expectation/R278 covariance.
