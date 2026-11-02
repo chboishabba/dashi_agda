@@ -30,9 +30,13 @@ module DASHI.Analysis.BishopRiemannDirichletExponentialTermExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised using (_/_)
+import Data.Nat.Properties as NatP
+open import Data.Nat.Base using (_≤_; _<_)
+open import Data.Integer.Base as Int using (+_; +<+)
+open import Data.Rational.Unnormalised as Rat using (_/_; 0ℚᵘ; 1ℚᵘ; _<_)
+import Data.Rational.Unnormalised.Properties as RatP
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 open import Data.Product.Base using (_×_; _,_)
 
 import Real as R
@@ -148,6 +152,67 @@ bishopExponentialDirichletConvergesFromBasel
 natLogArgument : Nat → R.ℝ
 natLogArgument n =
   R._⋆ (+ suc n / suc (suc n))
+
+------------------------------------------------------------------------
+-- RATIONAL LOG ARGUMENT: THE TRUE OPEN UNIT INTERVAL.
+--
+-- For every n >= 0, x_n = (n+1)/(n+2) lies strictly between
+-- zero and one, both as an unnormalised rational and as the
+-- actual embedded Bishop real. The configured SeriesData's
+-- InOpenUnitInterval is still an independent predicate: a
+-- bridge into that field is made explicit below and NEVER
+-- silently identified with these strict order relations.
+------------------------------------------------------------------------
+
+natLogArgumentPositiveRational :
+  (n : Nat) →
+  Rat._<_ Rat.0ℚᵘ (+ suc n / suc (suc n))
+natLogArgumentPositiveRational n =
+  RatP.positive⁻¹ (+ suc n / suc (suc n))
+
+natLogArgumentBelowOneRational :
+  (n : Nat) →
+  Rat._<_ (+ suc n / suc (suc n)) Rat.1ℚᵘ
+natLogArgumentBelowOneRational n =
+  Rat.*<* (Int.+<+ cross)
+  where
+    cross : suc (suc n * 1) ≤ 1 * suc (suc n)
+    cross =
+      let open NatP.≤-Reasoning
+      in begin
+        suc (suc n * 1)
+          ≡⟨ cong suc (NatP.*-identityʳ (suc n)) ⟩
+        suc (suc n)
+          ≡⟨ sym (NatP.*-identityˡ (suc (suc n))) ⟩
+        1 * suc (suc n)
+      ∎
+
+natLogArgumentPositiveBishop :
+  (n : Nat) → R._<_ R.0ℝ (natLogArgument n)
+natLogArgumentPositiveBishop n =
+  RP.p<q⇒p⋆<q⋆
+    Rat.0ℚᵘ (+ suc n / suc (suc n))
+    (natLogArgumentPositiveRational n)
+
+natLogArgumentBelowOneBishop :
+  (n : Nat) → R._<_ (natLogArgument n) R.1ℝ
+natLogArgumentBelowOneBishop n =
+  RP.p<q⇒p⋆<q⋆
+    (+ suc n / suc (suc n)) Rat.1ℚᵘ
+    (natLogArgumentBelowOneRational n)
+
+configuredNatLogArgumentsInside :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  ((x : R.ℝ) →
+    R._<_ R.0ℝ x →
+    R._<_ x R.1ℝ →
+    E.InOpenUnitInterval (C.dataSet T) x) →
+  (n : Nat) →
+  E.InOpenUnitInterval (C.dataSet T) (natLogArgument n)
+configuredNatLogArgumentsInside T bridge n =
+  bridge (natLogArgument n)
+    (natLogArgumentPositiveBishop n)
+    (natLogArgumentBelowOneBishop n)
 
 natLogViaOriginalNegativeLog :
   (T : C.BishopSetoidComplexTranscendentals) →
