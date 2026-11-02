@@ -141,5 +141,22 @@ def compare_synthetic_worlds():
             'without_cash_trap_reserve':str(untrapped['distribution_reserve']),
             'automatic_distribution_proved':False}
 
+def floating_rate_basis_stress_assuming_effective_hedge(
+        assumed_drawn_usd_bn, rate_shock, hedge_notional_fraction,
+        effective_hedge_fraction=1):
+    """Pure conditional exposure, not actual DDTL 3.0 outstanding or hedge P&L.
+
+    DDTL3 §5.23 requires hedging notional >=75% of reasonably projected
+    outstanding FLOATING-rate loan principal at specified dates. Actual
+    swaps/caps, basis, resets, drawdowns and maturities must be verified.
+    """
+    loan=usd(assumed_drawn_usd_bn)
+    shock=usd(rate_shock)
+    coverage=usd(hedge_notional_fraction)
+    effective=usd(effective_hedge_fraction)
+    if coverage>1 or effective>1: raise ValueError("invalid hedge fraction")
+    return loan*shock*(D(1)-coverage*effective)
+
+
 if __name__ == "__main__":
     print(json.dumps(compare_synthetic_worlds(),indent=2))
