@@ -11,6 +11,8 @@ module DASHI.ComputerScience.QwenputerHybridStateAndFileStoreExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 import DASHI.ComputerScience.QwenputerGatedDeltaArchitectureExact as GDN
@@ -225,3 +227,43 @@ canonicalStoreBoundary =
   finitePutGetDeleteAppendListProved
   ∷ qwenputerHashAndChunkSameObjectOpen
   ∷ productionCacheSerializationOpen ∷ []
+
+
+------------------------------------------------------------------------
+-- Arbitrarily long chip-owned burst: the Qwen/Language component is
+-- invariant under the abstract routing model, not just for one token.
+-- This remains an *abstract* isolation theorem; real Qwen cache
+-- (DeltaNet, KV, convolution) numerical nonmutation stays OPEN.
+------------------------------------------------------------------------
+
+repeatCircuit :
+  {L C : Set} → Nat → (C → C) → HybridState L C → HybridState L C
+repeatCircuit zero f s = s
+repeatCircuit (suc n) f s =
+  repeatCircuit n f (route circuitOwns (λ x → x) f s)
+
+allCircuitStepsMuteLanguage :
+  {L C : Set} (n : Nat) (f : C → C) (s : HybridState L C) →
+  language (repeatCircuit n f s) ≡ language s
+allCircuitStepsMuteLanguage zero f s = refl
+allCircuitStepsMuteLanguage (suc n) f s =
+  trans
+    (allCircuitStepsMuteLanguage n f
+      (route circuitOwns (λ x → x) f s))
+    (circuitTraceMutesLanguage (λ x → x) f s)
+
+repeatLanguage :
+  {L C : Set} → Nat → (L → L) → HybridState L C → HybridState L C
+repeatLanguage zero f s = s
+repeatLanguage (suc n) f s =
+  repeatLanguage n f (route languageOwns f (λ x → x) s)
+
+allLanguageStepsPreserveChip :
+  {L C : Set} (n : Nat) (f : L → L) (s : HybridState L C) →
+  chip (repeatLanguage n f s) ≡ chip s
+allLanguageStepsPreserveChip zero f s = refl
+allLanguageStepsPreserveChip (suc n) f s =
+  trans
+    (allLanguageStepsPreserveChip n f
+      (route languageOwns f (λ x → x) s))
+    (languageTracePreservesChip f (λ x → x) s)
