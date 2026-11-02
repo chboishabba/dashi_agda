@@ -27,6 +27,7 @@ import DASHI.Physics.YangMills.CompactLieGroupCore as Core
 import DASHI.Physics.YangMills.CompactLieGroupDerived as Derived
 import DASHI.Physics.YangMills.CompactLieLatticeGauge as Gauge
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
+import DASHI.Physics.YangMills.SUNWilsonClassFunction as OriginalSUNTrace
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExact as Covariance
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as Geometry
@@ -158,3 +159,37 @@ sunSideFourWilsonC3 :
 sunSideFourWilsonC3 theory traceData field loop =
   Spatial.wilsonC3Naturality
     (SUN.sunMatrixGroup theory) (matrixWilsonValue traceData) field loop
+
+------------------------------------------------------------------------
+-- Reuse the older canonical SUNWilsonClassFunction theorem owner instead
+-- of maintaining a second distinct Wilson trace/class-function authority.
+-- The older record requires trace conjugation invariance; above we DERIVE
+-- it from matrix trace cyclicity and the existing group laws.
+------------------------------------------------------------------------
+
+asCanonicalSUNTraceAuthority :
+  ∀ {Matrix Complex Scalar : Set} {N : Nat}
+    {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex} →
+  SUNMatrixRealTrace theory →
+  OriginalSUNTrace.SUNWilsonTraceAuthority
+    {Scalar = Scalar} theory
+asCanonicalSUNTraceAuthority traceData = record
+  { OriginalSUNTrace.SUNWilsonTraceAuthority.normalizedRealTrace =
+      matrixWilsonValue traceData
+  ; OriginalSUNTrace.SUNWilsonTraceAuthority.traceConjugationInvariant =
+      sunTraceConjugationInvariant traceData
+  }
+
+canonicalSUNWilsonClassFunctionAgreement :
+  ∀ {Matrix Complex Scalar : Set} {N : Nat}
+    {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex}
+    (traceData : SUNMatrixRealTrace theory)
+    h x →
+  OriginalSUNTrace.normalizedRealTrace
+    (asCanonicalSUNTraceAuthority traceData)
+    (Derived.conjugate (SUN.sunMatrixGroup theory) h x)
+  ≡ OriginalSUNTrace.normalizedRealTrace
+    (asCanonicalSUNTraceAuthority traceData) x
+canonicalSUNWilsonClassFunctionAgreement traceData =
+  OriginalSUNTrace.traceConjugationInvariant
+    (asCanonicalSUNTraceAuthority traceData)
