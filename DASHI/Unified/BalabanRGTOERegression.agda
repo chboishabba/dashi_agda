@@ -937,6 +937,7 @@ import DASHI.Physics.YangMills.YMClayR445NativeSixDeficitUniformFiniteBoundExact
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as SUNSigned
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as SUNGauge
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as SUNGibbs
+import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGaugeInvariantExact as SUNGaugeAction
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
@@ -1039,3 +1040,13 @@ open SUNCov public using
   (originalSUNR278FiniteSameExpectation
   ; originalSUNR278ContinuumSameLimit
   ; originalSUNRealCovarianceExtension)
+
+
+-- Full source-native SU(N) Gibbs action (not just individual plaquettes)
+-- is gauge-invariant under original periodic link transformation.
+open SUNGaugeAction public using
+  (sunTransformedPathSameSource
+  ; sunPlaquetteRealTraceGaugeInvariant
+  ; sunSixDeficitGaugeInvariant
+  ; sunWilsonActionGaugeInvariant
+  ; sunGibbsDensityGaugeInvariant)
