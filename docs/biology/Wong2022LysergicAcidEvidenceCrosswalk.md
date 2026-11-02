@@ -48,3 +48,32 @@ The Golden finite-core terms `dLaTagDistinctFromLsdTag`, `productionEvidenceNotR
 Original experiment/figures belong to Wong and collaborators; the stable identifier entries belong to PubChem and their database curators; all newly authored finite evidence types and bridge terms are DASHI source code. The original biochemical discovery and receptor literature owners remain independent.
 
 This work deliberately contains **no assembly protocol, gene list, reaction recipe, culture settings, or output-improvement instructions**.
+
+## 2026-11-03 max-cut continuation: source locators and native world projection
+
+Primary-article text was checked against the publisher's public article page. This supports the *source-reported* reading only:
+
+| Paper object | Source locator | Evidence claim | Present receipt |
+|---|---|---|---|
+| Analytical product comparison | Fig. 5; Supplementary Fig. 14 | Article reports comparison of detected product with reference | Article text indexed; raw analytical files not reanalysed |
+| NMR comparison | Supplementary Table 11 (cited in paper text) | Paper reports chemical-shift comparison | Source-data binary still not downloaded/verified |
+| Isotope origin | Article isotope-tracing results | Paper reports labelled-input origin evidence | Article statement observed, not independently reproduced |
+| Endpoints and replicate scope | Fig. 6 and Supplementary Table 12 | 1.7 mg/L (1 L), 1.4 mg/L (4 L); Fig. 6 caption reports three biological replicates | Numeric means, standard deviations and underlying worksheet rows not independently checked |
+| Registry cross-reference | PubChem CID 6717 public identity and external reference listing | Formula C16H16N2O2, external identifier CHEBI:6604 | Registry *candidate* only; assay specimen same-object and source release independently unverified |
+| Related but nonidentical chemistry | PubChem CID 5761, existing Kluver owner | Lysergic acid diethylamide is a distinct substance | No product identity or receptor efficacy transport |
+
+Exact typed source-locator, registry and unresolved-object owner: `DASHI.Biology.Wong2022EvidenceLedgerExact`, imported by `DASHI.Biology.Everything`. The isolated Golden core remains `Wong2022LysergicAcidFiniteCore`.
+
+**Native runtime bridge:** Companion [SensibLaw PR #513](https://github.com/chboishabba/SensibLaw/pull/513) uses the existing `src.policy.external_graph_bridge` and `src.policy.world_model` APIs. It produces an incomplete, revision-scoped, deterministic **candidate-only** world with DOI and CID references, no accepted external bridge decisions, no public ontology editing, a source-data coverage residual and `abstain` pressure. This closes the *source-written native candidate adapter* subgate of W22-06; live S29/Postgres/ITIR review admission is not claimed.
+
+**Exact remaining source/execution cut after this continuation:**
+
+- W22-01: publisher source-data XLSX and Supplementary Information PDF authenticated by cryptographic digest and revision; no bytes were received in this connector session. The DOI/version-of-record is pinned, the binary hashes remain absent. Article license does not replace byte provenance.
+- W22-02: verify detailed chemical identity/stereochemistry/charge and original analytical sample against appropriately revised PubChem/ChEBI records. A displayed PubChem cross-reference is not an independently approved same-object weld.
+- W22-03: source-data endpoint row IDs, replicate-specific values and uncertainty estimates. The caption's replicate count must not be substituted for per-run data.
+- W22-04: independent raw-data and standard-comparison review, with reviewer and instrument/analysis provenance. The paper's description is evidence but not a second experiment.
+- W22-05: physical same-organism, compartment, time, exchange/kinetic units, absolute flux measurements and justified transport to `OpenMetabolicNetwork`/`Chemistry.TransitionKernel`. Neither chemical names nor source-reported titres pay these conditions.
+- W22-06: run, review and admit native SensibLaw/SLR candidate through the actual S29/Postgres/ITIR pipeline, with revision and access receipts. PR #513 provides code and tests but not a live admission receipt.
+- W22-07: execute the Golden Agda check, source-linked ledger/adapter checks and canonical Biology root on the **exact branch head**, plus focused SensibLaw `pytest`. This GitHub-only work has not executed these checks.
+
+Attribution: paper discoveries and measurements belong to Wong and colleagues. Molecular registry assertions belong to PubChem/ChEBI curators. Existing formal/ontology machinery retains its original DASHI, SensibLaw, SLR and ITIR owners. The new finite guards, candidate projection and documentation are DASHI/SensibLaw integrations and make no new wet-lab or biological-discovery claim.
