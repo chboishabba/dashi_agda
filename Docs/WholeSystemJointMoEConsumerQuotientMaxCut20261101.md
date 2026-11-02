@@ -305,3 +305,84 @@ engineering architecture by Anatolii Kornienko; finite F3²/
 punctured-nine, modular j and Sophontic argument opposition are
 independent operators with independent proof contracts. No Monster
 or ESD owner is overwritten.
+
+## 2 November max-cut: revalidated gates and strict teacher erasure (source-written)
+
+**Problem boundary.** A teacher-retaining hybrid at gate 0 matches the
+original dense inference, but it has not replaced a dense FFN. A partially
+opened gate also retains all dense weights. Reusing gate decisions after
+an optimizer update is unsafe without rechecking the changed student.
+
+**Implementation receipts (LeechTransformer PR #4):**
+
+- `scripts/train_guarded_moe_continuation.py` now revokes every former
+  gate before recalibrating each optimizer revision. Its zero-gate
+  dense fallback is explicitly rechecked on train-only calibration data.
+  Exact training/heldout token-window overlap is rejected for direct
+  callers that bypass the dataset preparer.
+- `scripts/promote_guarded_moe.py` refuses any gate not **exactly 1**.
+  It strips all original `.ffn.` and `.quality_gate` parameters,
+  strictly reloads the independent teacher-free model, and compares
+  its logits against the full-gate hybrid. It evaluates full-model CE
+  independently against the pinned original dense checkpoint. The
+  CLI requires the guarded source SHA and the prior independent
+  heldout-pass receipt. It refuses to write a promoted checkpoint
+  when these conditions fail.
+- `scripts/run_real_moe_jq1_experiment.py` invokes that export only
+  when the full-replacement gate passes. Otherwise its consolidated
+  report explicitly records why no standalone model exists.
+  Capture and JQ1 continue to diagnose candidate histories
+  without implying a quality or network win.
+- `E8SharedOrbitHistoryMoE.reconcile_selected` additionally refuses
+  negative/non-normalised/nonfinite routing weights and nonfinite
+  selected updates before the authoritative shared history is merged.
+  This is local data validation, NOT authenticated distributed commit.
+- Source-written regression suites:
+  `tests/test_guarded_moe_continuation.py`,
+  `tests/test_teacher_free_promotion.py`,
+  `tests/test_e8_canonical_history_jq1.py`.
+  They have **not** been executed via this GitHub-only editing session.
+
+**Agda contract (DASHI PR #1442):**
+`Reasoning/LeechQualityGateTeacherErasureExact.agda` gives a
+`--safe`, source-written finite-layer **conditional** theorem:
+the hybrid and teacher-free traces are equal for every finite
+execution schedule *if every gate has a proof of full admission*.
+Gate-zero teacher identity is a separate lemma. Numeric intermediate
+gate values, PyTorch floating-point parity, source authentication,
+training CE and real E8 action adequacy are NOT derived. The module
+has **not been Agda kernel-checked**.
+
+**Exact remaining gates:**
+
+1. **M0 (formal):** Agda kernel-accept the new gate/trace lemma and
+   existing canonical-history proof with the pinned DASHI toolchain.
+   Import them into the intended golden ownership graph if accepted.
+2. **M1 (diagnostic):** Execute both existing failed-student
+   isolated-layer/prefix CE and history-norm diagnostics on the saved
+   original real-text split, without fabricating student data.
+3. **M2 (quality):** Refit and recalibrate under a disjoint training
+   calibration partition. Obtain positive nonzero gates. Then satisfy
+   the **all-gates-one**, final heldout CE and strict standalone
+   export contract. Zero-gate teacher parity is NOT sufficient.
+4. **M3 (geometric reuse):** Run the independent E8-route and actual
+   shared-canonical-history ablations with matched split, seed,
+   capacity and updates. Inspect exact orbit corrections from real
+   captured states rather than theoretical constructed actions.
+5. **M4 (network):** Compare full request + response + ACK + versioned
+   state ownership and measured encoder/decoder time. Choose raw on
+   links where compression overhead dominates; no real WAN claim.
+6. **M5 (semantics):** Only paired, independently scored intervention
+   and trialectic-face tasks can establish reasoning quality, not
+   signed-orbit matching or language cross-entropy alone.
+
+**Source/attribution boundaries.** Original Leech-LILA author
+Anatolii Kornienko (DOI 10.5281/zenodo.18784424).
+Existing E8/Leech origins and Ibrahim Monster 3B work retain their
+separate authorship. This DASHI theorem and the LeechTransformer
+source implementation are repository-authored reconstructions, not
+results attributed to those external authors. E8 coordinate actions
+are not Leech lattice automorphisms without a separate proof.
+No ESD modules were edited. **Previous measured quality gate still
+fails**: dense CE 2.58; C2 CE 8.63; punctured-nine CE 17.30 on the
+reported 64/32 TinyStories sample. No new quality numbers are claimed.
