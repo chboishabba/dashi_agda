@@ -19,6 +19,7 @@ The current 16-UniProt/24-protein–Rhea-link panel yields 12 finite Rhea reacti
 - BH4JointPaymentAcquisitionExact: source and same-context rate/exchange admission.
 - DASHI.Core.XPollenationExact + #1227 and ITIR #22: typed external identities, transport-only artifact receipts.
 - BH4PathwayOntologyInteropExact and build_bh4_pathway_ontology.py: structural projection, not a new physiology solver.
+- BH4PathwayReviewInteropExact and build_bh4_pathway_review.py: readonly source-reopenable obligations, reusing existing PNF/Wikidata repair and ReadingTrail owners; not SLR native persistence.
 
 ## Executable first tranche in this stacked PR
 
@@ -27,6 +28,8 @@ The current 16-UniProt/24-protein–Rhea-link panel yields 12 finite Rhea reacti
 3. Export one deterministic JSON pathway manifest and one RDF-importable JSON-LD discovery graph using identifiers.org for exact Rhea, ChEBI and UniProt coordinates. When present in the newly acquired Rhea REST row, retain GO and Reactome cross-references as separately sourced, non-promoting edges. Unresolved Rhea compounds and all other namespaces remain literal source identifiers until their resolvers are independently acquired. No owl:sameAs is manufactured.
 4. Keep author-level *hypothesis* edges in the independent KitzerowBH4ClaimLedgerCandidate.v1.json. Two initially transcribed edges are repo reconstructions of existing BH4 owner claims; original paper page/figure pins remain unverified.
 5. Keep 12 reaction-flux and 29 external-exchange coordinates null/unresolved. No SBML, BioPAX or GO-CAM conformance, simulator kinetics or clinical finding is claimed.
+6. Acquire Rhea GO and Reactome crosslinks (with source REST hashes) and preserve KEGG/MetaCyc raw reference columns as unparsed review material. GO and Reactome crosslinks remain non-promoting; no same-context event is presumed.
+7. Project author-source gaps, ontology-mapping semantics, compartment/kinetic/rate and nonfinite chemistry into a deterministic read-only worklist. Never infer missing evidence is false. Source-envelope visibility blocks exporting restricted locators.
 
 Command using already-produced receipts:
 
@@ -39,6 +42,23 @@ Command using already-produced receipts:
       --jsonld-output artifacts/biology/bh4-pathway-ontology.jsonld
 
 The Phase-4 runner invokes the exporter from receipts produced in that run, with Rhea/matrix-only fallback when no new xPollenation receipt is emitted.
+
+## User-story review worklist
+
+    python3 scripts/build_bh4_pathway_review.py \
+      --pathway artifacts/biology/bh4-pathway-ontology.json \
+      -o artifacts/biology/bh4-pathway-review-worklist.json
+
+When an authorized, typed external source packet is already present, pass
+--source-receipts PACKET. The packet must contain explicit visibility and
+source/revision/locator/digest coordinates; strings are not an independent
+source-authentication certificate. Public locators can be presented for
+source opening, while internal/restricted locators remain opaque.
+
+See [BH4ITIRSensibLawWikiRepairCrosswalk.md](BH4ITIRSensibLawWikiRepairCrosswalk.md)
+for the exact ITIR-US-17 / WIKI-US-01..04 / SLR S29 / Dioxus user-story
+handoff, which reuses current Agda Wikidata repair/reopening types and
+avoids legacy SensibLaw Python and ITIR Svelte as production owners.
 
 ## Exact outstanding max-cut obligations
 
@@ -56,6 +76,12 @@ The Phase-4 runner invokes the exporter from receipts produced in that run, with
 | KPO-10 | After valid species-by-compartment mapping, produce SBML Level 3 Core (optional FBC/Groups), correct rate-of-extent units amount/time, annotations and a round-trip stoichiometry check. | Never fabricate a shared cytosol or a kinetic law. |
 | KPO-11 | Compare identified alternative redox, NO, immune and non-BH4 mechanisms with matched observables, identifiability and negative controls. | Local mechanism support != whole Kitzerow hypothesis. |
 | KPO-12 | Reconcile #1159 -> #1226 -> ontology PR with current master; independently reconcile #1227 and ITIR #22. Pin first-implementation commits and exact-head Agda/Python receipts. | Mergeability != type-check or scientific validity. |
+| KPO-13 | Admit genuine primary source bytes/revisions/spans, with source scope and no caller-hash authentication shortcut. | SLR INGEST-1; ITIR-US-17; Kitzerow attribution. |
+| KPO-14 | Bind existing candidate worklist through *native* SLR S29/PG source/review in a consumer-scoped transaction and demonstrate reopenability. | SLR #76 family; not a new parallel review database. |
+| KPO-15 | Implement an opt-in selected BH4 object Dioxus inspector: Orient -> Project -> Why? -> Source -> Meaning -> Follow -> Next unresolved. | Dioxus M10; Svelte is historic only; preserve restricted sources. |
+| KPO-16 | Consume PNF/SSSOM/OCTF/Wikidata repair only with typed inference language, source and context; never auto-edit or conflate GO/Reactome/Rhea/QID. | DASHI #1143, #1447; original JMD/Peter/Ege/Rosario attribution. |
+| KPO-17 | Obtain real 12 reaction and 29 exchange source-paid intervals, same-object tissue/time/volume and BH4 demands; rerun existing solver. | Primary kinetics and transporter studies; unknown != 0. |
+| KPO-18 | Verify/reconcile stacked #1159/#1226/#1454, peers #1227/ITIR #22/#70/SLR #76 and formal roots with exact-head runs and first-implementation receipts. | Git state + independent referee, not assertion of mergeability. |
 
 KPO-03 through KPO-06 make it easier to find transport candidates and matching physiological states. They can expose assumptions and guide experiments. They cannot independently pay the numerical measurements demanded by KPO-07/08.
 
@@ -75,6 +101,7 @@ Version/assay/source release still must be pinned in acquired receipts. No stand
 ## Validation (not yet observed on this new head)
 
     python3 scripts/check_bh4_pathway_ontology.py
+    python3 scripts/check_bh4_pathway_review.py
     python3 scripts/check_kitzerow_bh4_priority_all.py
     scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PathwayOntologyInteropExact.agda
     scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
