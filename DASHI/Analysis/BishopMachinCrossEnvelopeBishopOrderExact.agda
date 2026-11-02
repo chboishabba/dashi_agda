@@ -617,3 +617,60 @@ machinActualCrossDenominatorFourOver25 n =
   RP.≤-trans
     (Combined.machinRationalAllStagesRemainder n)
     (sourceOriginalOmittedBishopBelowGeometric n)
+
+
+------------------------------------------------------------------------
+-- SAME-OBJECT WELD: THE MULTI-DENOMINATOR SOURCE RATE IS THE ACTUAL
+-- BISHOP POWER RATE USED BY THE INDEPENDENT DIRECT K04b OWNER.
+--
+-- This prevents two mathematically equal 4/25^n certificates from
+-- living on incompatible carriers or in different representations.
+------------------------------------------------------------------------
+
+sourceGeometricRationalAsQPow :
+  (n : Nat) →
+  Q._≃_
+    (sourceGeometricRationalEnvelope n)
+    ((+ 4 / 1) Q.* Stage.qPow (+ 1 / 25) n)
+sourceGeometricRationalAsQPow n =
+  QP.≃-trans
+    (QP.≃-sym (Q.*≡* refl))
+    (QP.*-cong
+      QP.≃-refl
+      (QP.≃-sym (rationalReciprocalPower 25 n)))
+
+sourceGeometricAsOriginalBishopPowerRate :
+  (n : Nat) →
+  R._≃_
+    (R._⋆ (sourceGeometricRationalEnvelope n))
+    (R._*_
+      (R.pow (R._⋆ (+ 1 / 25)) n)
+      (R._⋆ (+ 4 / 1)))
+sourceGeometricAsOriginalBishopPowerRate n =
+  RP.≃-trans
+    (RP.⋆-cong (sourceGeometricRationalAsQPow n))
+    (RP.≃-trans
+      (RP.⋆-distrib-*
+        (+ 4 / 1)
+        (Stage.qPow (+ 1 / 25) n))
+      (RP.≃-trans
+        (RP.*-cong RP.≃-refl
+          (Stage.qPowEmbeds (+ 1 / 25) n))
+        (RP.*-comm
+          (R._⋆ (+ 4 / 1))
+          (R.pow (R._⋆ (+ 1 / 25)) n))))
+
+machinActualCrossDenominatorFourOver25Pow :
+  (n : Nat) →
+  R._≤_
+    (R.∣_∣
+      (R._-_
+        Machin.bishopMachinPi
+        (R._⋆ (Stage.qMachinStage n))))
+    (R._*_
+      (R.pow (R._⋆ (+ 1 / 25)) n)
+      (R._⋆ (+ 4 / 1)))
+machinActualCrossDenominatorFourOver25Pow n =
+  RP.≤-respʳ-≃
+    (sourceGeometricAsOriginalBishopPowerRate n)
+    (machinActualCrossDenominatorFourOver25 n)
