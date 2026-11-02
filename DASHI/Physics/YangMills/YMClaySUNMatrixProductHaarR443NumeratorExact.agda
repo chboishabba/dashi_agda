@@ -31,6 +31,8 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as Gibbs
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNMatrixSpatialC3RealFubiniExact as Spatial
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeInversePlaquetteRealTraceExact as Inverse
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSixPlaneC3FromInverseTraceExact as LocalSix
 import DASHI.Physics.Foundations.CMP119FlatSide4SpatialC3FieldCovarianceExact as C3
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as ProductC3
 import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
@@ -85,6 +87,24 @@ module _
         0ℝ <ℝ value → 0ℝ ≤ℝ value
 
   open PhysicalC3ActionBoundary public
+
+  -- Construct the *remaining local source* C3 equality from native
+  -- reversed ordered SU(N) holonomy plus exactly one normalized-real-trace
+  -- inverse theorem. Thus no separate whole Wilson action, Gibbs density,
+  -- or local six-plane invariance is left as a caller-supplied hypothesis.
+  nativeC3BoundaryFromInverseTrace :
+    (inverseLaw : Inverse.SUNRealTraceInverseOnNative theory traceData)
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value) →
+    PhysicalC3ActionBoundary
+  nativeC3BoundaryFromInverseTrace inverseLaw ordered strictToWeak =
+    record
+      { PhysicalC3ActionBoundary.sixPlaneAtC3 =
+          LocalSix.nativeSUNSixAtC3FromInverseRealTrace
+            theory traceData inverseLaw
+      ; PhysicalC3ActionBoundary.oneLinkOrdered = ordered
+      ; PhysicalC3ActionBoundary.strictPositiveIsNonnegative = strictToWeak
+      }
 
   nativePhysicalIntegrationLaws :
     (boundary : PhysicalC3ActionBoundary) →
