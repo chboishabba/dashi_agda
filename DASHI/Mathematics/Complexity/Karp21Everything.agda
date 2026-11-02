@@ -46,3 +46,7 @@ import DASHI.Mathematics.Complexity.Karp21FiniteCompleteGraphObjectiveExact
 import DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExact
 
 import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphYESExact
+
+import DASHI.Mathematics.Complexity.Karp21MaxCutCertificateBinaryCodecExact
+
+import DASHI.Mathematics.Complexity.Karp21IndexedUpperPairBijectionExact
