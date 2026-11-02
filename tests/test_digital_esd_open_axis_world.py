@@ -27,6 +27,8 @@ def fixture():
     ]
     return {
         "axis_registry_revision": "synthetic-test-v1",
+        "part_taxonomy_revision": "synthetic-study-parts-v1",
+        "required_part_kinds": ["method", "inference"],
         "axes": axes, "parts": parts, "accounts": accounts,
         "relations": [{
             "relation_ref": "question-not-empirical-join",
@@ -55,6 +57,12 @@ class StudyWorldAxisTests(unittest.TestCase):
         item = fixture()
         item["accounts"].pop()
         with self.assertRaisesRegex(ValueError, "axis accounting incomplete"):
+            validate(item)
+
+    def test_new_required_study_part_kind_must_be_present_in_each_study(self):
+        item = fixture()
+        item["required_part_kinds"].append("researcher-epistemics")
+        with self.assertRaisesRegex(ValueError, "missing declared required study part kinds"):
             validate(item)
 
     def test_new_axis_requires_reaccounting_all_parts(self):
