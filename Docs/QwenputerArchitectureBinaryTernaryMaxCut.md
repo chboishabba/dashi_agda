@@ -21,6 +21,8 @@ Internal pre-existing theorem ownership (reuse rather than duplicate):
 New repository-owned formal reconstructions:
 `DASHI.ComputerScience.QwenputerGatedDeltaArchitectureExact` and
 `DASHI.ComputerScience.QwenputerHybridStateAndFileStoreExact`.
+The additional `DASHI.ComputerScience.QwenputerRv32LayerScheduleSourceExact` records all 11 attributed P2 stages, the reported head counts (summing to 99), and the aggregated 42,012 MLP units without guessing the L3/L4 split. The aggregate `DASHI.Unified.QwenputerBinaryTernaryTOEExact` exports the bounded witnesses into the TOE roots.
+
 Both are **new DASHI models motivated by Agrawal**. Their proofs must not be described as kernel-checked until the pinned Agda toolchain accepts them. This PR contains source-written code only.
 
 ## Complete architecture decomposition and source boundaries
