@@ -226,6 +226,9 @@ import DASHI.Education.DigitalESDCrossCorpusIntersectionalMemoryLensExact
 import DASHI.Education.DigitalESDCrossCorpusDependencyFrontierExact
 import DASHI.Education.DigitalESDResearchWorldMaxCutRegression
 
+import DASHI.Education.DigitalESDOpenAxisStudyPartWorldExact
+import DASHI.Education.DigitalESDOpenAxisGapTransportExact
+
 module DASHI.EverythingDigitalESDReciprocalBraid where
 
 ------------------------------------------------------------------------
