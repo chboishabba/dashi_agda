@@ -40,7 +40,7 @@ from typing import Any
 
 STATES = {
     "direct_reviewed", "conditional", "contested",
-    "unmeasured", "inaccessible", "not_applicable",
+    "unmeasured", "inaccessible", "not_applicable", "source_reported_pending_review",
 }
 EVIDENCE_FOR_DIRECT = (
     "reviewed_packet_ref", "reviewed_observation_ref",
@@ -128,6 +128,9 @@ def validate(value: dict[str, Any]) -> dict[str, Any]:
             # References are pointers. Membership itself is proved in Agda,
             # and must not be certified merely by asserting a JSON boolean.
             warnings.append(f"{key}: external reviewed membership and relevance proofs require verification")
+        elif state == "source_reported_pending_review":
+            for field in ("source_section_ref", "reported_observation_ref", "review_debt_ref"):
+                required_string(a, field, f"source-reported pending-review account {key}")
         elif state == "conditional":
             for field in EVIDENCE_FOR_CONDITIONAL:
                 required_string(a, field, f"conditional account {key}")
