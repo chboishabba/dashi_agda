@@ -145,6 +145,11 @@ data PartAxisAccounting
   contestedBySources :
     (positionReference counterpositionReference disputeReference : String) →
     PartAxisAccounting scope s p a
+  -- Not yet analysed is not "unmeasured". This state keeps candidate
+  -- source decompositions structurally total without pretending review.
+  notYetAssessed :
+    (reviewWorkReference : String) →
+    PartAxisAccounting scope s p a
   unmeasuredForQuestion :
     (questionReference missingEvidenceReference : String) →
     PartAxisAccounting scope s p a
