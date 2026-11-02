@@ -101,9 +101,15 @@ def checked_matrix(matrix: dict) -> tuple[list[str], list[str], dict[str, list[d
 def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None = None) -> dict:
     reactions, species, columns = checked_matrix(matrix)
     ensure(rhea.get("schema") == "dashi.rhea-chebi-bh4-panel.v2", "unexpected Rhea receipt schema")
-    source_reactions = {r.get("rhea_id"): r for r in rhea.get("reactions", [])}
+    source_rows = rhea.get("reactions", [])
+    ensure(isinstance(source_rows, list), "Rhea reaction rows missing")
+    source_reactions = {r.get("rhea_id"): r for r in source_rows}
+    ensure(len(source_reactions) == len(source_rows), "duplicate Rhea source reaction")
     ensure(all(rid in source_reactions and source_reactions[rid].get("formula_charge_ready")
                for rid in reactions), "finite reaction lacks formula/charge-ready Rhea receipt")
+    ensure(all(source_reactions[rid].get("participant_sparql_response_sha256")
+               and source_reactions[rid].get("raw_sha256") for rid in reactions),
+           "finite reaction missing exact Rhea source digests")
     for rid in reactions:
         source_entries = {}
         for participant in source_reactions[rid].get("participants", []):
@@ -234,6 +240,10 @@ def build(matrix: dict, rhea: dict, xp: dict | None = None, claims: dict | None 
                             and obj.get("namespace") and obj.get("identifier")),
                        "malformed external edge")
                 ensure(bool(edge.get("edgeId")), "xPollenation edge lacks stable identity")
+                if edge.get("sameObjectVerified") is True:
+                    ensure(edge.get("sameObjectClaimed") is True and
+                           edge.get("relation") in ("exact-same-object", "curated-cross-reference"),
+                           "unlicensed same-object claim in xPollenation")
                 if edge.get("relation") == "reaction-participant":
                     rid = neighbourhood["subject"]["identifier"]
                     expected_participants = {p["chebi_id"] for p in
