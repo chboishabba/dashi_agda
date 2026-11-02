@@ -177,3 +177,162 @@ enumeratedUpperPairCoversDistinct i j distinct
   with upperPairCoversDistinct i j distinct
 ... | p , direction =
   p , (allUpperPairsContains p , direction)
+
+
+------------------------------------------------------------------------
+-- Injective upper-triangle addresses are also enumerated WITHOUT
+-- duplicate list occurrences. The count lemma alone would not prove
+-- this. No axiom, decidable oracle or cardinality arithmetic is used.
+------------------------------------------------------------------------
+
+data NoRepeat {A : Set} : List A → Set where
+  noRepeatNil : NoRepeat []
+  noRepeatCons :
+    ∀ {x xs} →
+    (x ∈ xs → ⊥) →
+    NoRepeat xs →
+    NoRepeat (x ∷ xs)
+
+mapSuccessorReflect :
+  ∀ {n} {i : Fin.Fin n} {xs : List (Fin.Fin n)} →
+  Fin.suc i ∈ map Fin.suc xs →
+  i ∈ xs
+mapSuccessorReflect {xs = _ ∷ _} here = here
+mapSuccessorReflect {xs = _ ∷ _} (there proof) =
+  there (mapSuccessorReflect proof)
+
+zeroNotInSuccessorMap :
+  ∀ {n} {xs : List (Fin.Fin n)} →
+  Fin.zero ∈ map Fin.suc xs → ⊥
+zeroNotInSuccessorMap {xs = _ ∷ _} (there proof) =
+  zeroNotInSuccessorMap proof
+
+mapSuccessorNoRepeat :
+  ∀ {n} {xs : List (Fin.Fin n)} →
+  NoRepeat xs → NoRepeat (map Fin.suc xs)
+mapSuccessorNoRepeat noRepeatNil = noRepeatNil
+mapSuccessorNoRepeat (noRepeatCons notIn unique) =
+  noRepeatCons
+    (λ proof → notIn (mapSuccessorReflect proof))
+    (mapSuccessorNoRepeat unique)
+
+allFinNoRepeat :
+  (n : Nat) → NoRepeat (allFin n)
+allFinNoRepeat zero = noRepeatNil
+allFinNoRepeat (suc n) =
+  noRepeatCons zeroNotInSuccessorMap
+    (mapSuccessorNoRepeat (allFinNoRepeat n))
+
+headMapReflect :
+  ∀ {n} {i : Fin.Fin n} {xs : List (Fin.Fin n)} →
+  headTail i ∈ map headTail xs → i ∈ xs
+headMapReflect {xs = _ ∷ _} here = here
+headMapReflect {xs = _ ∷ _} (there proof) =
+  there (headMapReflect proof)
+
+tailMapReflect :
+  ∀ {n} {p : UpperPair n} {xs : List (UpperPair n)} →
+  tailPair p ∈ map tailPair xs → p ∈ xs
+tailMapReflect {xs = _ ∷ _} here = here
+tailMapReflect {xs = _ ∷ _} (there proof) =
+  there (tailMapReflect proof)
+
+headMapNoRepeat :
+  ∀ {n} {xs : List (Fin.Fin n)} →
+  NoRepeat xs → NoRepeat (map headTail xs)
+headMapNoRepeat noRepeatNil = noRepeatNil
+headMapNoRepeat (noRepeatCons notIn unique) =
+  noRepeatCons
+    (λ proof → notIn (headMapReflect proof))
+    (headMapNoRepeat unique)
+
+tailMapNoRepeat :
+  ∀ {n} {xs : List (UpperPair n)} →
+  NoRepeat xs → NoRepeat (map tailPair xs)
+tailMapNoRepeat noRepeatNil = noRepeatNil
+tailMapNoRepeat (noRepeatCons notIn unique) =
+  noRepeatCons
+    (λ proof → notIn (tailMapReflect proof))
+    (tailMapNoRepeat unique)
+
+headNotInTailMap :
+  ∀ {n} {i : Fin.Fin n} {xs : List (UpperPair n)} →
+  headTail i ∈ map tailPair xs → ⊥
+headNotInTailMap {xs = _ ∷ _} (there proof) =
+  headNotInTailMap proof
+
+headMapOnlyHead :
+  ∀ {n} {p : UpperPair (suc n)}
+    {xs : List (Fin.Fin n)} →
+  p ∈ map headTail xs →
+  Σ (Fin.Fin n) (λ i → p ≡ headTail i)
+headMapOnlyHead {xs = j ∷ xs} here =
+  j , refl
+headMapOnlyHead {xs = j ∷ xs} (there proof) =
+  headMapOnlyHead proof
+
+splitAppendMembership :
+  ∀ {A : Set} {x : A}
+    (left right : List A) →
+  x ∈ (left ++ right) →
+  (x ∈ left) ⊎ (x ∈ right)
+splitAppendMembership [] right proof = inj₂ proof
+splitAppendMembership (x ∷ xs) right here = inj₁ here
+splitAppendMembership (x ∷ xs) right (there proof)
+  with splitAppendMembership xs right proof
+... | inj₁ inLeft = inj₁ (there inLeft)
+... | inj₂ inRight = inj₂ inRight
+
+noRepeatAppendSeparated :
+  ∀ {A : Set} (left right : List A) →
+  NoRepeat left →
+  NoRepeat right →
+  (∀ {x} → x ∈ left → x ∈ right → ⊥) →
+  NoRepeat (left ++ right)
+noRepeatAppendSeparated [] right noRepeatNil valid disjoint =
+  valid
+noRepeatAppendSeparated
+  (x ∷ xs) right (noRepeatCons notIn tailUnique)
+  valid disjoint =
+  noRepeatCons
+    (λ member →
+      caseSplit (splitAppendMembership xs right member))
+    (noRepeatAppendSeparated xs right tailUnique valid
+      (λ inTail inRight →
+        disjoint (there inTail) inRight))
+  where
+    caseSplit :
+      (x ∈ xs) ⊎ (x ∈ right) → ⊥
+    caseSplit (inj₁ inTail) = notIn inTail
+    caseSplit (inj₂ inRight) = disjoint here inRight
+
+headAndTailDisjoint :
+  ∀ {n}
+    {p : UpperPair (suc n)}
+    {heads : List (Fin.Fin n)}
+    {tails : List (UpperPair n)} →
+  p ∈ map headTail heads →
+  p ∈ map tailPair tails →
+  ⊥
+headAndTailDisjoint belongsHead belongsTail
+  with headMapOnlyHead belongsHead
+... | j , refl = headNotInTailMap belongsTail
+
+allUpperPairsNoRepeat :
+  (n : Nat) → NoRepeat (allUpperPairs n)
+allUpperPairsNoRepeat zero = noRepeatNil
+allUpperPairsNoRepeat (suc n) =
+  noRepeatAppendSeparated
+    (map headTail (allFin n))
+    (map tailPair (allUpperPairs n))
+    (headMapNoRepeat (allFinNoRepeat n))
+    (tailMapNoRepeat (allUpperPairsNoRepeat n))
+    headAndTailDisjoint
+
+-- Every distinct pair has one *unique* canonical typed address in
+-- allUpperPairs n: existence + no-repeated-address occurrence +
+-- injective ordered endpoint projection. The orientation flip remains
+-- exactly as in upperPairCoversDistinct, not a directed graph edge.
+upperTriangleOccurrenceUnique :
+  (n : Nat) → NoRepeat (allUpperPairs n)
+upperTriangleOccurrenceUnique = allUpperPairsNoRepeat
