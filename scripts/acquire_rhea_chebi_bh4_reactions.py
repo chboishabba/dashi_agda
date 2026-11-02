@@ -329,7 +329,10 @@ def acquire_source_chart(chart_path: Path, *, reaction_fetcher=None) -> tuple[di
     return {
         "schema": "dashi.rhea-chebi-bh4-source-chart.v1",
         "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
-        "rhea_release_reference": "Rhea release 142 (2026-09-02); SPARQL release 2026_03",
+        # This is a retrieval-time observation. The exact Rhea release must
+        # be independently pinned to an authoritative release manifest.
+        "rhea_release_reference": "Rhea live REST/SPARQL; release unverified",
+        "rhea_release_verified": False,
         "creator": "Kimberly Kitzerow",
         "source_chart_publication": chart["publication_page"],
         "source_chart_publication_month": chart["declared_publication_month"],
