@@ -197,6 +197,7 @@ vectorFromVertexFunction (suc n) f =
 vectorFromFunctionLookup :
   ∀ {n} (f : Fin.Fin n → Bool) (vertex : Fin.Fin n) →
   Vec.lookup (vectorFromVertexFunction n f) vertex ≡ f vertex
+vectorFromFunctionLookup {zero} f ()
 vectorFromFunctionLookup {suc n} f Fin.zero = refl
 vectorFromFunctionLookup {suc n} f (Fin.suc vertex) =
   vectorFromFunctionLookup (λ i → f (Fin.suc i)) vertex
@@ -295,6 +296,9 @@ sparseAcceptedLocalImpliesFullGraphYES graph local accepted
               (Sparse.verifySparseEdgeBits graph local)
               accepted))))
 
+falseNotTrue : false ≡ true → ⊥
+falseNotTrue ()
+
 sparseAcceptedBitWordImpliesFullGraphYES :
   ∀ {n} (graph : Cut.WeightedCutGraph n)
     (word : List Bool) →
@@ -303,9 +307,6 @@ sparseAcceptedBitWordImpliesFullGraphYES :
 sparseAcceptedBitWordImpliesFullGraphYES graph word accepted
   with Sparse.decodeSparseEdgeBits (Cut.edges graph) word
 ... | nothing = ⊥-elim (falseNotTrue accepted)
-  where
-    falseNotTrue : false ≡ true → ⊥
-    falseNotTrue ()
 ... | just local =
   sparseAcceptedLocalImpliesFullGraphYES graph local accepted
 
