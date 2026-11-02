@@ -58,6 +58,10 @@ import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as BaselNat
 import RealProperties as RP
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
+import DASHI.Foundations.BishopRound11TrigAtZeroExact as Origin
+import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
+import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
 
 -- The exact logarithm of positive Nat is still the next nontrivial
 -- mathematical lemma. Its expected argument is the indexed integer n+1.
@@ -453,3 +457,110 @@ originalSeriesNatLogAtTwoIsBasel T inside logInverse n =
     (natLogViaOriginalNegativeLog T inside)
     n
     (logInverse n)
+
+
+------------------------------------------------------------------------
+-- K04d SOURCE-NATIVE EXPONENT-TWO COMPLEX COEFFICIENT.
+--
+-- The previous lemma proved only the real exp(-2*log(n+1)) factor.
+-- Here the COMPLEX term is the actual Riemann-Bishop analytic carrier's
+-- original source exponent. At zero imaginary input the original Round11
+-- sine/cosine power series equal zero/one (independently proved above).
+-- Thus its real/imaginary parts are Basel.baselTerm and zero.
+-- This consumes ONLY the still-open exp(log(n+1)) identity; it does not
+-- smuggle a different complex realisation or classical trigonometry.
+------------------------------------------------------------------------
+
+sourceExponentTwo : A.BishopComplex
+sourceExponentTwo = A.bishop-complex (R._⋆ (+ 2 / 1)) R.0ℝ
+
+sourceExponentTwoImaginaryArgumentZero :
+  (logNat : NatLogCandidate) (n : Nat) →
+  R._≃_
+    (R._*_ (R.- R.0ℝ) (logNat n))
+    R.0ℝ
+sourceExponentTwoImaginaryArgumentZero logNat n =
+  let open RP.ℝ-Solver
+  in solve 1
+    (λ argument → (⊝ Κ Rat.0ℚᵘ) ⊗ argument ⊜ Κ Rat.0ℚᵘ)
+    RP.≃-refl (logNat n)
+
+sourceExponentTwoRealIsBasel :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (n : Nat) →
+  R._≃_
+    (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  R._≃_
+    (A.re
+      (bishopDirichletExponentialTerm
+        (Route.round11MachinTranscendentals inputs)
+        logNat sourceExponentTwo n))
+    (Basel.baselTerm n)
+sourceExponentTwoRealIsBasel inputs logNat n logInverse =
+  RP.≃-trans
+    (RP.*-cong
+      (negativeTwoNatLogExponentialIsBasel logNat n logInverse)
+      (RP.≃-trans
+        (TrigCong.bishopCosCongruent
+          (Round11.round11ConcreteTermIdentification inputs)
+          (sourceExponentTwoImaginaryArgumentZero logNat n))
+        (Origin.round11CosineAtZero inputs)))
+    (RP.*-identityʳ (Basel.baselTerm n))
+
+sourceExponentTwoImagIsZero :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate)
+  (n : Nat) →
+  R._≃_
+    (A.im
+      (bishopDirichletExponentialTerm
+        (Route.round11MachinTranscendentals inputs)
+        logNat sourceExponentTwo n))
+    R.0ℝ
+sourceExponentTwoImagIsZero inputs logNat n =
+  RP.≃-trans
+    (RP.*-cong
+      RP.≃-refl
+      (RP.≃-trans
+        (TrigCong.bishopSinCongruent
+          (Round11.round11ConcreteTermIdentification inputs)
+          (sourceExponentTwoImaginaryArgumentZero logNat n))
+        (Origin.round11SineAtZero inputs)))
+    (let open RP.ℝ-Solver
+     in solve 1
+       (λ expFactor → expFactor ⊗ Κ Rat.0ℚᵘ ⊜ Κ Rat.0ℚᵘ)
+       RP.≃-refl
+       (Exp.bishopExp
+         (R._*_ (R.- (R._⋆ (+ 2 / 1))) (logNat n))))
+
+-- No domination authority: reconstruct the comparison witness
+-- from the literal coefficient equality and the ORIGINAL Basel owner.
+sourceExponentTwoBaselMajorant :
+  (inputs : Round11.Round11BishopCutset)
+  (logNat : NatLogCandidate) →
+  ((n : Nat) →
+    R._≃_
+      (Exp.bishopExp (logNat n))
+      (NatReal.natReal (suc n))) →
+  Dirichlet.BishopDirichletBaselMajorantAt
+    (bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs) logNat)
+    sourceExponentTwo
+sourceExponentTwoBaselMajorant inputs logNat logInverse = record
+  { Dirichlet.dominationStart = zero
+  ; Dirichlet.realDomination = λ n _ →
+      RP.≤-respˡ-≃
+        (RP.≃-symm
+          (RP.∣-∣-cong
+            (sourceExponentTwoRealIsBasel
+              inputs logNat n (logInverse n))))
+        (RP.≤-reflexive (Basel.absoluteBaselTerm n))
+  ; Dirichlet.imagDomination = λ n _ →
+      RP.≤-respˡ-≃
+        (RP.≃-symm
+          (RP.∣-∣-cong
+            (sourceExponentTwoImagIsZero inputs logNat n)))
+        (Dirichlet.zeroAbsBelowBasel n)
+  }
