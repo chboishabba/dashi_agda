@@ -66,6 +66,35 @@ wrongProjectorIdempotent :
   wrongProjector (wrongProjector v) ≡ wrongProjector v
 wrongProjectorIdempotent (Overlap.ket₂ a b) = refl
 
+------------------------------------------------------------------------
+-- Genuine two-outcome projective measurement algebra on the same 2D
+-- coordinate carrier: completeness and mutual orthogonality, not merely
+-- separate idempotence of each outcome projector.
+------------------------------------------------------------------------
+
+addQubit :
+  Overlap.QubitNumerator →
+  Overlap.QubitNumerator →
+  Overlap.QubitNumerator
+addQubit (Overlap.ket₂ a b) (Overlap.ket₂ c d) =
+  Overlap.ket₂ (a + c) (b + d)
+
+projectorsSumToIdentity :
+  (v : Overlap.QubitNumerator) →
+  addQubit (rightProjector v) (wrongProjector v) ≡ v
+projectorsSumToIdentity (Overlap.ket₂ a b) =
+  cong₂ Overlap.ket₂ (ℕₚ.+-identityʳ a) refl
+
+rightAfterWrongZero :
+  (v : Overlap.QubitNumerator) →
+  rightProjector (wrongProjector v) ≡ Overlap.ket₂ zero zero
+rightAfterWrongZero (Overlap.ket₂ a b) = refl
+
+wrongAfterRightZero :
+  (v : Overlap.QubitNumerator) →
+  wrongProjector (rightProjector v) ≡ Overlap.ket₂ zero zero
+wrongAfterRightZero (Overlap.ket₂ a b) = refl
+
 record RationalCount : Set where
   constructor rationalCount
   field
