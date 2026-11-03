@@ -191,3 +191,15 @@ def test_cli_from_parser_report_is_reproducible(tmp_path):
     obj = json.loads(out.read_text())
     assert obj["component_classes"] == {"gene_annotation": 1}
     assert obj["record"]["replicon_context"] == "unresolved"
+
+
+def test_edit_like_labels_are_withheld_but_source_location_is_preserved():
+    reg = project_component_registry(report([
+        feat(0, "misc_feature", {"label": "Changed from ACG -> ACA in codon usage table"}),
+    ]))
+    component = reg["components"][0]
+    assert component["source_short_labels"] == []
+    assert component["source_labels_withheld_count"] == 1
+    assert component["source_location"] == span(0, 5)
+    assert component["source_reopen_refs"]
+    assert not reg["original_DNA_bases_redistributed"]
