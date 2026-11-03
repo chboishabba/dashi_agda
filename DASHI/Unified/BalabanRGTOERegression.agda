@@ -951,6 +951,8 @@ import DASHI.Physics.YangMills.YMClaySUNConstructedNativeC3SetoidHaarExact as SU
 import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateExact as SUNOneVectorC3
 import DASHI.Physics.YangMills.YMClayNativeCyclicFinIsoSafeExact as SUNNativeFinIso
 import DASHI.Physics.YangMills.YMClayNativeBlockedPeriodicBondWeldExact as SUNNativeBlockWeld
+import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as SUNNativeBlockHolonomy
+import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SUNPhysicalBlockedHolonomy
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
@@ -1344,3 +1346,37 @@ open SUNNativeBlockWeld public using
   ; unblockNativeBond
   ; blockNativeBondAfterUnblock
   ; unblockNativeBondAfterBlock)
+
+------------------------------------------------------------------------
+-- R445 moving-lattice actual GROUP-VALUED source join. The original
+-- Bałaban positive path holonomy now supplies a non-Abelian blocked-link
+-- field at every M×L, not merely a blocked bond-label coordinate. The
+-- source-write proves gauge cancellation and signed-path identification
+-- independently of arbitrary field funext. The coarse endpoint arithmetic
+-- is left as ONE explicit proposition, and no Gibbs pushforward, RG
+-- uniform estimates, continuum or OS spectral gap is promoted here.
+------------------------------------------------------------------------
+
+open SUNNativeBlockHolonomy public using
+  (positiveDirections
+  ; positiveSteps
+  ; positiveHolonomy
+  ; positiveHolonomyPointwise
+  ; positiveHolonomyGaugeCovariant
+  ; positiveHolonomyIsSelectedPath
+  ; fineBlockOrigin
+  ; positiveBlockDirections
+  ; nativeBlockedPositiveLinks
+  ; nativeBlockedPositiveLinksPointwise
+  ; nativeBlockedCoarseGauge
+  ; nativeBlockedGaugeLawAtFineEndpoint
+  ; BlockEndpointCompatibility
+  ; nativeBlockedGaugeLawOnCoarse)
+
+open SUNPhysicalBlockedHolonomy public using
+  (nativeSUNBlockLinks
+  ; nativeSUNBlockGauge
+  ; nativeSUNBlockAgreesSelectedPath
+  ; nativeSUNBlockGaugeLawAtFineEndpoint
+  ; NativeSUNBlockEndpoint
+  ; nativeSUNBlockGaugeLawOnCoarse)
