@@ -28,6 +28,7 @@ import RealProperties as RP
 
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
+import DASHI.Foundations.BishopRound11TrigAtZeroExact as Origin
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
 import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
@@ -118,3 +119,36 @@ round11TwoPiPeriodPair inputs product quarterEqual x =
   round11SineTwoPiPeriod inputs product quarterEqual x
   ,
   round11CosineTwoPiPeriod inputs product quarterEqual x
+
+------------------------------------------------------------------------
+-- The original signed-factorial origin values now determine BOTH
+-- period endpoints. No separate endpoint assumption is consumed.
+------------------------------------------------------------------------
+
+round11SineAtTwoPi :
+  (inputs : Round11.Round11BishopCutset) →
+  (product : Product.Round11ImaginaryExpMultiplicative inputs) →
+  R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
+  R._≃_ (Product.sinB inputs twoMachinPi) R.0ℝ
+round11SineAtTwoPi inputs product quarterEqual =
+  RP.≃-trans
+    (TrigCong.bishopSinCongruent
+      (Round11.round11ConcreteTermIdentification inputs)
+      (RP.≃-symm (RP.+-identityˡ twoMachinPi)))
+    (RP.≃-trans
+      (round11SineTwoPiPeriod inputs product quarterEqual R.0ℝ)
+      (Origin.round11SineAtZero inputs))
+
+round11CosineAtTwoPi :
+  (inputs : Round11.Round11BishopCutset) →
+  (product : Product.Round11ImaginaryExpMultiplicative inputs) →
+  R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
+  R._≃_ (Product.cosB inputs twoMachinPi) R.1ℝ
+round11CosineAtTwoPi inputs product quarterEqual =
+  RP.≃-trans
+    (TrigCong.bishopCosCongruent
+      (Round11.round11ConcreteTermIdentification inputs)
+      (RP.≃-symm (RP.+-identityˡ twoMachinPi)))
+    (RP.≃-trans
+      (round11CosineTwoPiPeriod inputs product quarterEqual R.0ℝ)
+      (Origin.round11CosineAtZero inputs))
