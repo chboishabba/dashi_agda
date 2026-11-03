@@ -51,6 +51,7 @@ New Golden safe module DASHI/Physics/Foundations/TSVFMacroscopicSingleBranchRobu
 
 - unperturbedMacroReadout: exact triple-code recovery with no fault.
 - singleFaultMacroRobust: total proof for both pointers and all three single-bit faults.
+- twoFaultsReverseSelectedMacro / twoFaultsDoNotPreserveOriginalPointer: sharp counterexample — exactly two flips can reverse the chosen pointer and defeat the one-error correction theorem.
 - singleFaultChangesFineData: any single flip changes microscopic code content.
 - firstAndLastFineDataDiffer: distinct fine fault patterns remain distinct.
 - noExactMicroRestorationFromMacro: no pointer-only decoder can recover both distinct disturbed microstates sharing one macro result.
