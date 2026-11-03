@@ -1,3 +1,9 @@
+### 2026-11-03 — Cross-lane emergent (3,1) / quantum / YM / KK exact-lemma phase roadmap
+
+**Read-first cross-lane source:** [Emergent31QuantumYMKKExactLemmaRoadmap20261103](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). It specifies **P00–P11, 176 numbered distinct proof obligations**, per-phase deliverables, original owners, exact R443/R445/R320/R333 source, source-native physical (3,1) time/metric/Hilbert, **same clock = same OS H** and KK/2D/3D/positive-G stress BIDI; it carries kernel/physical/experimental status firewalls and independent negative controls.
+
+**Critical branch caution:** #1444 head `5bb34d44bac92dfe16544fcde07c65e37d875172` has the new variable-periodic product-Haar and gauge-Haar files. They are **not yet on #1460**; a stack integration and exact-head safe kernel check are P00 blockers. This roadmap does not call the Clay problem solved. For the standalone Clay claim, P05 actual native R443 physical Haar, R124/CMP119 and P06 R445/R320/R333/H6 remain authoritative independently of the stronger proposed (3,1)/KK theory.
+
 **Additional candidate calculation:** The source-written rational identity `treeLevelCouplingTowerCoheres` composes three zero-mode inverse-coupling circumference factors (L_3L_4L_5); actual physical coupling matching, thresholds and dimensioned units remain unpaid.
 
 ### 2026-11-03: Constructed five-sector YM / Lorentz / KK / exotic-gravity BIDI steelman
