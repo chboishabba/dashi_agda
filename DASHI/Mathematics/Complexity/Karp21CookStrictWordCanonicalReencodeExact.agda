@@ -11,11 +11,9 @@ module DASHI.Mathematics.Complexity.Karp21CookStrictWordCanonicalReencodeExact w
 --   strictDecodeCookFormulaBits word = just formula
 --        => encodeFormulaBits formula = word.
 --
--- Both the unary Nat prefix parser and recursive formula parser are
--- checked on their original source-owned grammars. We also reconstruct
--- each exact 3-bit token word. Thus the existing finite Cook certificate
--- bound applies to EVERY accepted strict SAT input, not only words
--- directly produced by our encoder.
+-- Both unary Nat and recursive formula parsers use original source-owned
+-- grammar. The certificate bound is intentionally OUTSIDE this Golden
+-- parser inverse module, in Karp21CookAllWordCertificateBoundExact.
 --
 -- Reuse Cook (1971), Leonid Levin (1973) search, DASHI Prefix,
 -- Binary, Strict and executable Cook verifier owners.
@@ -29,15 +27,12 @@ open import Data.List.Base using (List; []; _∷_)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Unit using (⊤; tt)
 open import Data.Maybe.Base using (just; nothing)
-open import Data.Nat.Base using (_≤_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 import DASHI.Mathematics.Complexity.Karp21CookStrictTripleBitBoundaryExact as Strict
-import DASHI.Mathematics.Complexity.Karp21CookExecutableFiniteVerifierBidiExact as Verifier
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
-import DASHI.Mathematics.Complexity.Karp21SparseEndpointConsistencySoundExact as N21
 
 failureIsNotParsed :
   ∀ {A : Set} {value : A} {rest : List Prefix.CookSyntaxToken} →
@@ -458,20 +453,3 @@ k00StrictAcceptedWordCanonicalReencode word formula evidence
     (cong Binary.encodeTokenStream
       (sym (rebuildCook p tokens [] refl)))
     (reencodeThreeTokens word tokens refl)
-
--- Exact linear certificate-size bound in the ACTUAL input bit count
--- for every accepted verifier input, not only canonical sample words.
-k00StrictAcceptedWordCertificateBound :
-  (word bits : Word.BitWord) →
-  Verifier.verifyStrictCookSATWord word bits ≡ true →
-  Word.encodingSize bits ≤ Word.encodingSize word
-k00StrictAcceptedWordCertificateBound word bits verified
-  with Strict.strictDecodeCookFormulaBits word
-... | nothing = ⊥-elim (N21.falseNotTrue verified)
-... | just formula =
-  subst
-    (λ actualWord →
-      Word.encodingSize bits ≤ Word.encodingSize actualWord)
-    (k00StrictAcceptedWordCanonicalReencode word formula refl)
-    (Verifier.cookExecutableCertificateCanonicalSize
-      formula bits verified)
