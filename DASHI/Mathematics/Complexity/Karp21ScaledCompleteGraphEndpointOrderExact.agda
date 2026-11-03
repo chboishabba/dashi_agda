@@ -137,5 +137,9 @@ sourceIndexedScaledCompleteGraphEndpoints :
   ∀ {n : Nat} (source : Vec.Vec ℤ n) →
   AllCanonicalEdgeEndpoints (Gen.completeScaledPairEdges source)
 sourceIndexedScaledCompleteGraphEndpoints {n} source
-  rewrite Enum.actualKarpGraphCanonicalUpperPairs source =
+  rewrite Enum.actualKarpGraphCanonicalUpperPairs source
+        | Enum.mapCompose
+            Scale.scaleEdgeWeightFour
+            (Enum.edgeAtUpperPair source)
+            (Pair.allUpperPairs n) =
   canonicalScaledEnumeratedPairs source (Pair.allUpperPairs n)
