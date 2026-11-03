@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact where
+
+-- Integration owner: not --safe until the imported weighted-graph
+-- theorem chain is independently checked and transitively --safe.
 
 ------------------------------------------------------------------------
 -- N21: EXACT INPUT-WORD / SPARSE-WITNESS BOUNDARY FOR KARP MAX CUT.
