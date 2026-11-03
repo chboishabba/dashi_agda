@@ -111,6 +111,7 @@ open FiveSectorBIDI public using
   ; fourMatchesThreeForcesCrossZero
   ; threeMatchesTwoForcesCrossZero
   ; fiveDoesNotAutomaticallyMatchFour
+  ; treeLevelCouplingTowerCoheres
   ; matchedFiveToTwo
   ; selectedLorentzian31FromSameMetric
   )
