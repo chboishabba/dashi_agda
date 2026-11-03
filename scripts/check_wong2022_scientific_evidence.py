@@ -25,12 +25,13 @@ LEDGER = "DASHI/Biology/Wong2022EvidenceLedgerExact.agda"
 SCIENTIFIC = "DASHI/Biology/Wong2022ScientificMetabolicBridgeExact.agda"
 PATENT_GOLDEN = "DASHI/Biology/LysergicPriorArtFiniteCore.agda"
 PATENT_ATLAS = "DASHI/Biology/LysergicPriorArtAttributedCrosswalkExact.agda"
+PATENT_CLAIMS = "DASHI/Biology/LysergicPatentClaimGraphExact.agda"
 AGGREGATE = "DASHI/Biology/Everything.agda"
 DOC = "docs/biology/Wong2022LysergicAcidEvidenceCrosswalk.md"
 BYTES = "scripts/audit_wong2022_source_bytes.py"
 BYTE_TEST = "tests/test_wong2022_source_bytes.py"
-PATHS = (CORE, SOURCE, LEDGER, SCIENTIFIC, PATENT_GOLDEN, PATENT_ATLAS, AGGREGATE, DOC, BYTES, BYTE_TEST)
-AGDA_PATHS = (CORE, PATENT_GOLDEN, SOURCE, LEDGER, SCIENTIFIC, PATENT_ATLAS, AGGREGATE)
+PATHS = (CORE, SOURCE, LEDGER, SCIENTIFIC, PATENT_GOLDEN, PATENT_ATLAS, PATENT_CLAIMS, AGGREGATE, DOC, BYTES, BYTE_TEST)
+AGDA_PATHS = (CORE, PATENT_GOLDEN, PATENT_CLAIMS, SOURCE, LEDGER, SCIENTIFIC, PATENT_ATLAS, AGGREGATE)
 
 MARKERS: dict[str, tuple[str, ...]] = {
     CORE: (
@@ -101,7 +102,16 @@ MARKERS: dict[str, tuple[str, ...]] = {
         "territoryByTerritoryFamilyReviewPaidIsFalse",
         "freedomToOperateOpinionPaidIsFalse",
     ),
+    PATENT_CLAIMS: (
+        "{-# OPTIONS --safe #-}",
+        "htmlClaim28Dependencies = 26 ∷ 27 ∷ 28 ∷ []",
+        "htmlClaim28SelfReference = there (there here)",
+        "htmlRenderingNotOfficialVerification",
+        "originalClaimFileComparedIsFalse",
+        "legalDefectConcludedIsFalse",
+    ),
     AGGREGATE: (
+        "import DASHI.Biology.LysergicPatentClaimGraphExact",
         "import DASHI.Biology.LysergicPriorArtFiniteCore",
         "import DASHI.Biology.LysergicPriorArtAttributedCrosswalkExact",
         "import DASHI.Biology.Wong2022LysergicAcidEvidenceExact",
@@ -147,11 +157,11 @@ def inspect_source_bundle(contents: Mapping[str, str]) -> list[str]:
         for marker in MARKERS[path]:
             if marker not in source:
                 failures.append(f"missing marker in {path}: {marker}")
-        if path in (CORE, SOURCE, LEDGER, SCIENTIFIC, PATENT_GOLDEN, PATENT_ATLAS):
+        if path in (CORE, SOURCE, LEDGER, SCIENTIFIC, PATENT_GOLDEN, PATENT_ATLAS, PATENT_CLAIMS):
             for pattern in UNTRUSTED_AGDA:
                 if pattern.search(source):
                     failures.append(f"trust escape/hole in {path}: {pattern.pattern}")
-    for golden in (CORE, PATENT_GOLDEN):
+    for golden in (CORE, PATENT_GOLDEN, PATENT_CLAIMS):
         if golden in contents and not contents[golden].startswith("{-# OPTIONS --safe #-}"):
             failures.append(f"Golden core must start with safe option: {golden}")
     if SOURCE in contents and contents[SOURCE].startswith("{-# OPTIONS --safe #-}"):
@@ -169,7 +179,7 @@ def inspect_source_bundle(contents: Mapping[str, str]) -> list[str]:
             failures.append("missing same-context transport firewall")
         if "physicalFluxUnitsPaidIsFalse" not in scientific:
             failures.append("missing physical flux unit firewall")
-    for path in (CORE, SOURCE, LEDGER, SCIENTIFIC, PATENT_GOLDEN, PATENT_ATLAS):
+    for path in (CORE, SOURCE, LEDGER, SCIENTIFIC, PATENT_GOLDEN, PATENT_ATLAS, PATENT_CLAIMS):
         if path in contents and re.search(r"^\s*import\s+DASHI\.Wikimedia\.SensibLaw", contents[path], re.M):
             failures.append(f"deferred SLR/SensibLaw import in {path}")
     return failures
