@@ -23,7 +23,7 @@ module DASHI.Mathematics.Complexity.Karp21CanonicalParsedGraphAcceptanceExact wh
 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; length)
-open import Data.Integer.Base using (ℤ; _*_)
+open import Data.Integer using (ℤ; _*_)
 open import Data.Maybe.Base using (just)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (Σ; _×_; _,_)
