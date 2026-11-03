@@ -33,10 +33,17 @@ import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as Uniform
 import DASHI.Analysis.BishopRound11TrigModulusFromPythagoreanExact as Modulus
 import DASHI.Foundations.BishopRound11TrigAtZeroExact as Origin
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+
+-- The Round11 zero-angle owner keeps these local abbreviations private.
+-- Give THIS source a transparent abbreviation of the same literal terms.
+sinB cosB : Round11.Round11BishopCutset → R.ℝ → R.ℝ
+sinB inputs = E.bishopSin (Round11.elementarySeries inputs)
+cosB inputs = E.bishopCos (Round11.elementarySeries inputs)
 
 Round11ImaginaryExpMultiplicative :
   Round11.Round11BishopCutset → Set
@@ -58,8 +65,8 @@ round11PythagoreanFromImaginaryProduct :
   Round11ImaginaryExpMultiplicative inputs →
   (theta : R.ℝ) →
   let
-    c = Origin.cosB inputs theta
-    s = Origin.sinB inputs theta
+    c = cosB inputs theta
+    s = sinB inputs theta
   in
   R._≃_
     (R._+_ (R._*_ c c) (R._*_ s s))
@@ -78,9 +85,9 @@ round11ModulusFromImaginaryProduct :
   (inputs : Round11.Round11BishopCutset) →
   Round11ImaginaryExpMultiplicative inputs →
   (theta : R.ℝ) →
-  (R._≤_ (R.∣ Origin.cosB inputs theta ∣) R.1ℝ)
+  (R._≤_ (R.∣ cosB inputs theta ∣) R.1ℝ)
   ×
-  (R._≤_ (R.∣ Origin.sinB inputs theta ∣) R.1ℝ)
+  (R._≤_ (R.∣ sinB inputs theta ∣) R.1ℝ)
 round11ModulusFromImaginaryProduct inputs product theta =
   Modulus.round11ModulusFromPythagorean
     inputs theta
