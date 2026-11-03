@@ -28,7 +28,7 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21CookStrictSATLanguageExact as SAT
 import DASHI.Mathematics.Complexity.Karp21CookExecutableFiniteVerifierBidiExact as Verify
-import DASHI.Mathematics.Complexity.Karp21CookStrictWordCanonicalReencodeExact as Canonical
+import DASHI.Mathematics.Complexity.Karp21CookAllWordCertificateBoundExact as Canonical
 import DASHI.Mathematics.Complexity.Karp21CookLevinConcreteBitWordReuseExact as K00
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Tape
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Cell
