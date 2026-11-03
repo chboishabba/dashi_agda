@@ -50,6 +50,7 @@ def run() -> None:
         assert damaged != original
         assert macro_readout(damaged) == p
         all_corrupted[(p, site)] = damaged
+    assert macro_readout(flip_once(flip_once(encode(0), 0), 1)) == 1
     assert all_corrupted[(0, 0)] != all_corrupted[(0, 2)]
     assert macro_readout(all_corrupted[(0, 0)]) == macro_readout(all_corrupted[(0, 2)])
     # No function of this common macro value recovers two distinct fine records.
@@ -63,6 +64,7 @@ def run() -> None:
         assert reverse_history(reverse_history(h)) == h
         assert transition_cost(reverse_history(h)) == transition_cost(h)
     print("PASS: 6/6 one-fault macro restorations, every single flip changes fine data")
+    print("PASS: sharp two-fault counterexample reverses the selected macro pointer")
     print("PASS: macro cannot recover two distinct corrupted microscopic encodings")
     print("PASS: original selected-branch past record fixed, hidden histories distinct")
     print("PASS: 9/9 reversible two-step histories and reversal-symmetric transition costs")
