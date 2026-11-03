@@ -113,6 +113,8 @@ open YMKKHodge public using
 -- or same-H_OS theorem. Original Aharonov/Cohen/Gruss/Landsberger credited.
 open TSVFMacro public using
   ( singleFaultMacroRobust
+  ; twoFaultsReverseSelectedMacro
+  ; twoFaultsDoNotPreserveOriginalPointer
   ; singleFaultChangesFineData
   ; noExactMicroRestorationFromMacro
   ; originalPastRecordUnchanged
