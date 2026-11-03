@@ -54,3 +54,49 @@ The `dashi_lean4` companion contains a more specific result than the phrase “t
 - Lean PR [#24](https://github.com/chboishabba/dashi_lean4/pull/24) is **provenance/kernel replay tooling**; its own description explicitly says it is not an Agda-to-Lean proof-term translator.
 
 **Consequences:** the classical Machin semantic direction is *source-written in Lean*, not an unknown mathematical construction. Agda can reuse its exact statement and attribution when planning the terminal weld, but cannot silently use a Lean proof term as an Agda proof term. The remaining golden acceptance criterion is native Agda theorem/proof object (or a genuinely verified proof-term import) connecting the exact original Round11 term limits to that same semantics, plus any independently specified positive-least-period characterization. This distinction prevents re-solving classical Machin arithmetic while preserving the user's Agda-first standard.
+
+
+## 2026-11-03 continuation — original four gates, new proof subcuts
+
+GitHub Agda PR [#1408](https://github.com/chboishabba/dashi_agda/pull/1408) is the **golden** lane. Lean companion is new **draft** [#104](https://github.com/chboishabba/dashi_lean4/pull/104), branched from `main` (do NOT count the older merged/closed Lean PR #24 as the live review). No exact-head Agda or Lean kernel check is observed for the new work. Source readback is not elaboration.
+
+### K04d-LOG — actual native exponential inverse
+
+New golden file `DASHI/Foundations/BishopNegativeLogExponentialReciprocalFromCancellationExact.agda` proves the source-level lemma:
+
+- for the **actual convergent original** `sourceNegativeLogValue x` and `0<x<1`, `exp_B(-L(x)) ≃ 1-x` implies `exp_B(L(x)) ≃ BishopInverse(1-x)`;
+- `negativeLogExpAndMinusExpCancel` is unconditional from the preexisting exact Bishop all-real Cauchy theorem;
+- `negativeLogExpCancelsOneMinus` and `negativeLogExpIsActualBishopInverse` are fully proof-written reducers. The *newly isolated mathematical gate* is **the native negative exponential geometric identity** `exp_B(-L(x)) ≃ 1-x`. Its own coefficient convergence/analytic proof is still OPEN.
+
+Companion Lean file `Integration/BishopNegativeLogNativeRound11Semantics.lean` source-mirrors precisely `x^(n+1)/(n+1)`, faithful Bishop resampled finite sums, and actual Bishop convergence, then uses Mathlib's `Real.hasSum_pow_div_log_of_abs_lt_one` and the evaluator's setoid reflection to derive `originalNatLog_successor_exp_inverse` in the source-faithful **Lean** Bishop completion when its *existing Agda* original series convergence is bound. This is a conditional **cross-prover** path, not an Agda kernel proof-term import.
+
+### K05-PRODUCT — same original sine/cosine
+
+Lean `Integration/BishopRound11ImaginaryProductSemanticReflection.lean` source-writes `sourceSineAddition`, `sourceCosineAddition`, and `sourceImaginaryExponentialProduct` for every `Round11MachinSourceBinding`. It evaluates the *original* signed-factorial Bishop limits, applies independently proved classical trig equations, and reflects equality into the vendored Bishop setoid. This is a real mathematical **Lean semantic proof** on source-faithful functions. It is **not** a direct native Agda mixed signed-factorial finite Cauchy coefficient proof. That exact native coefficient theorem and limit transport remain OPEN. Existing `BishopRound11ImaginaryProductPythagoreanReuseExact` already compiles the required Agda Pythagorean and modulus as consumers once product is paid.
+
+### K04d-CONTINUITY — selected zeta must be the same function
+
+Lean `Integration/BishopRiemannZetaNativeMachinContinuity.lean` source-writes:
+- finite `originalDirichletTerm_continuous` for `exp(-s log(n+1))`;
+- `originalDirichletTerm_eq_cpow` and genuine `originalDirichletValue_eq_riemannZeta` for `Re(s)>1`, using Mathlib's independently proved exact classical sum;
+- `riemannZeta_continuousAtMachinPi` and `completedRiemannZeta_continuousAtMachinPi` on the **selected original Mathlib zeta** at the source-faithfully evaluated Bishop Machin pi.
+
+This is not equality with an arbitrary instance of Agda `RiemannAnalyticSubstrate.ZetaHalfPlaneLayer`. The golden Agda obligations remain: actual local finite-term continuity, common-Basel to-limit continuity on original Bishop complex, concrete selected half-plane zeta function construction/identification, and the completed function's same-object bridge. A selected arbitrary `Function` record is not enough.
+
+### K05-PI — first sine zero and source quarter equality
+
+New golden `DASHI/Analysis/BishopMachinFirstPositiveSineZeroFromNativePhaseExact.agda`:
+- `sourceMachinPiStrictPositive` reuses the actual rational Machin lower window;
+- `sourceMachinFirstSineZeroFromNativePhase` packages `sin_B(pi_M)≃0` via the **same** original imaginary product and quarter `cos_B(theta_M)≃sin_B(theta_M)`;
+- `nativeSineNoPriorZero` rules out *any earlier positive zero*, given only `NativeSinePositiveBeforeMachinPi` on the actual series. This avoids a logically invalid classical trichotomy on Bishop reals. The sign theorem is still OPEN.
+
+Lean `sourceMachinQuarterCosineEqualsSine`, `sourceMachinPiEvaluatesToClassicalPi`, and `sourceMachinPi_is_first_positive_sine_zero` prove the mirror's full classical first-positive-zero semantics, via the existing source-faithful completion and independent Mathlib trig inequalities. Again, no unobserved proof-term transfer to golden Agda and no assertion of least-positive-**period** uniqueness.
+
+### Updated minimal dependency cut and completion test
+
+- **P0-L:** native source analytic identity `exp_B(-L(x)) ≃ 1-x` on the original Bishop negative-log sum, plus direct rational Nat substitution/reciprocal cancellation.
+- **P0-T:** native mixed signed-factorial finite Cauchy coefficients and convergence through the original `BishopSetoidComplexExact.expC` on the selected Round11 dataset.
+- **P1-Z:** native selected Bishop finite-term continuity and its uniform-limit theorem, plus *actual* `ZetaHalfPlaneLayer.zetaHalfPlane` / `CompletedRiemannZeta.zeta` same-object identification.
+- **P1-π:** native source atan/tangent quarter equality and `NativeSinePositiveBeforeMachinPi` (or a correctly imported source-faithful semantic proof) for first-positive-zero minimality. A distinct period-uniqueness statement requires its own theorem.
+
+All new Agda golden files begin with `{-# OPTIONS --safe #-}`, contain no literal `postulate`, meta hole or termination bypass in the source. Their **transitive imports and exact-head elaboration have not been kernel-verified**, so acceptance remains OPEN. All Lean claims likewise remain source-written until their focused `lake env lean` checks run and pass on exact head. Lean PR #104 adds commands to its focused workflow and axiom printout. Preserve original mathematical and implementation author attribution.
