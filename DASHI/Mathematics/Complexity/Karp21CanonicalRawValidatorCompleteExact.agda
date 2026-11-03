@@ -116,7 +116,7 @@ validateCanonicalRawEdgesSameCut :
       (Decode.validateRawEdges n prev (Raw.rawOfEdges originals)
         ≡ just decoded)
       × Score.SameWeightedEdgeLists originals decoded)
-validateCanonicalRawEdgesSameCut prev originals conditions
+validateCanonicalRawEdgesSameCut {n} prev originals conditions
   with validateCanonicalRawEdgesSuccess prev originals conditions
 ... | decoded , accepted =
   decoded ,
@@ -124,7 +124,7 @@ validateCanonicalRawEdgesSameCut prev originals conditions
       Observe.observedEdgeListHasSameCutFields
         originals decoded
         (Observe.validateRawEdgesSuccessFields
-          _ prev (Raw.rawOfEdges originals) decoded accepted))
+          n prev (Raw.rawOfEdges originals) decoded accepted))
 
 ------------------------------------------------------------------------
 -- Specialization to original upper-triangle construction. No access
