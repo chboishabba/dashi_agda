@@ -30,3 +30,9 @@
 - Superseded by the subsequent executed local replay below: the exact original source's raw Git blob was verified and Biopython parsed all features with zero parity mismatches. The GitHub branch's own exact-head test execution remains outstanding.
 - Exact-head repository pytest, Agda kernel and Lean checks are outstanding.
 - Not an in-vivo phenotype, successful gene edit or native ITIR/SLR repair authority.
+
+
+### Executed original full-record semantic roundtrip
+- The exact original creator file passed Biopython parse/serialize/parse locally: sequence hash and length, molecule type/topology, annotated feature types, every original feature location and qualifier array, and record ID all preserved.
+- Serializer rewrote formatting (18,278 original bytes → 18,377 normalized bytes). This demonstrates **semantic**, not byte-exact, roundtrip. The creator's original raw file SHA remains separate.
+- Added `scripts/check_genbank_semantic_roundtrip.py` and a generic synthetic parser roundtrip test. Formal all-input correctness and exact-head kernel acceptance remain open.
