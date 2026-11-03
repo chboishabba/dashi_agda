@@ -77,6 +77,8 @@
 | TRUST.K02 | OPEN | Transitive postulate/source authority audit. `DASHI/Foundations/RealAnalysisAxioms.agda` explicitly postulates the real carrier and laws. `BalabanClayFrozenFourCompletionContractExact.agda` carries `--safe` while importing that authority. Local `--safe` syntax ≠ accepted trusted proof |
 | TRUST.K03 | OPEN | Independent compiler clean-room receipt, exact theorem names, revisions, dependency graph, author/source provenance and manuscript correspondence |
 
+**Executable R443.F07 swap-word receipt (reference, not Agda):** `scripts/check_ym_native_c3_adjacent_swap_word.py` constructs the exact original positive-bond spatial C3 permutation and a minimal adjacent-transposition word by left insertion. Independent local Python execution of that algorithm verified side four has **46,592 adjacent swaps** (SHA-256 of comma-separated swap indices `a61adb9c6fe7bbfaa12f9255f8fd0fc139e26991e5c158e0643cfa174eca4dc7`), 1,024 links and order three. The generated swap sequence is a runnable reference, **not** an inhabitant of `Product.LinkPermutation 1024` in Agda and not a proof of the `onCanonicalLabels` term. Constructing that Agda term is still an R443.F07 requirement.
+
 ## G. Programmatic checks and stable owners
 
 - Sources are under `DASHI/Physics/YangMills/`, with the new native owners re-exported by `DASHI/Unified/BalabanRGTOERegression.agda`. The repo is authoritative; Lean donor results must be same-object mapped into Agda before counting as Golden closure.
