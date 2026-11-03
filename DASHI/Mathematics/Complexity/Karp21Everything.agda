@@ -132,3 +132,13 @@ import DASHI.Mathematics.Complexity.Karp21UpperPairStructuralLexOrderExact
 import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictLexExact
 
 import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictAfterExact
+
+import DASHI.Mathematics.Complexity.Karp21FinDecoderIndexBidiExact
+
+import DASHI.Mathematics.Complexity.Karp21DecodedWeightedCutSemanticBidiExact
+
+import DASHI.Mathematics.Complexity.Karp21RawGraphValidatorObservationExact
+
+import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorPremisesExact
+
+import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorCompleteExact
