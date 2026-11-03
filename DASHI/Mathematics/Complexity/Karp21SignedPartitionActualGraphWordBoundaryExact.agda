@@ -44,6 +44,8 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Gra
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
 import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact as Size
 import DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact as Raw
+import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphEndpointOrderExact as Order
+import DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExact as Indexed
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact as FixedWords
 open import Data.Empty using (⊥; ⊥-elim)
@@ -67,6 +69,21 @@ graphOfPositiveTarget (Source.scaledCompletePositive parts nonzero) =
 -- separate family of coefficients or a parallel graph definition.
 -- The lexicographic validator and threshold decoder remain open.
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- All actual E20 nonzero-total graph edges satisfy numeric u < v < n.
+-- This is independent of the sorted-adjacency proof still needed for
+-- the literal GraphWord validator and its proof-field reconstruction.
+------------------------------------------------------------------------
+
+e20ActualScaledGraphEndpointBounds :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts)) →
+  Order.AllCanonicalEdgeEndpoints
+    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+e20ActualScaledGraphEndpointBounds parts nonzero =
+  Order.sourceIndexedScaledCompleteGraphEndpoints
+    (Indexed.vectorOfList parts)
 
 e20ScaledActualRawEdgeRoundTrip :
   (parts : List ℤ)
