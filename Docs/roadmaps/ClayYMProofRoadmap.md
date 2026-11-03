@@ -1,3 +1,7 @@
+### 2026-11-03 original OS-indexed TSVF clock connection — not a Clay shortcut
+
+[Quantitative complex ABL, 2017 source and original R331 same-clock proof cut](../physics/TSVF2017ComplexABLAndOSSameClockMaxCut20261103.md): source-written all-k complex environment Born overlap, exact original TSVF ABL postselection normalization, quantified conditional robust odds, and finite observer/OS step/readout commuting on the original selected OS.hamiltonian. The actual source-selected Hilbert unitary, Stone domain, physical R443 Haar, R445 continuum, R320 differentiated-source decay and R333 same-H gap/H6 remain OPEN.
+
 ### 2026-11-03 Admissible → TSVF quantum overlap source (additional independent consumer)
 
 [Finite exact original-source ABL/quantum tensor BIDI](../physics/TSVFAdmissibleTensorOverlapABLMaxCut20261103.md) now gives a nontrivial bounded model of selected two-boundary histories, Born-normalized right/wrong alternative outcomes and environmental overlap q=(9/25)^k. This is SOURCE-WRITTEN with no Agda kernel receipt, and **does not** construct R443 continuous Haar, physical R445/R320 or R333 same-H mass gap. Use the populated finite Q.ablProbability as an independent future P07 observer-state/OS comparator once the real physical gauge/quantum source is supplied.
