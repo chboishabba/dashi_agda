@@ -49,6 +49,8 @@ open import Data.Product using (_×_; _,_; Σ)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as ℕₚ
 open import Data.Vec.Base using (Vec; []; _∷_)
+open import Agda.Builtin.List using (List) renaming ([] to []ₗ; _∷_ to _∷ₗ_)
+open import Data.Nat.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
@@ -326,6 +328,57 @@ tensorOverlap :
 tensorOverlap zero = refl
 tensorOverlap (suc k) =
   cong (λ z → 15 * z) (tensorOverlap k)
+
+------------------------------------------------------------------------
+-- THE NONTRIVIAL TENSOR QUANTUM OVERLAP IDENTITY.
+-- Repeated inner products factor because the environmental state is a
+-- tensor product. No "overlap" Boolean or arbitrary q parameter is used.
+------------------------------------------------------------------------
+
+tensorRearrange :
+  ∀ (a b c d : Nat) →
+    (a * b) * (c * d) ≡ (a * c) * (b * d)
+tensorRearrange a b c d = solve (a ∷ₗ b ∷ₗ c ∷ₗ d ∷ₗ []ₗ)
+
+tensorPowerMultiplicative :
+  (a b k : Nat) →
+  power a k * power b k ≡ power (a * b) k
+tensorPowerMultiplicative a b zero = refl
+tensorPowerMultiplicative a b (suc k) =
+  trans
+    (tensorRearrange a (power a k) b (power b k))
+    (cong (λ v → (a * b) * v) (tensorPowerMultiplicative a b k))
+
+-- (15/25)^(2k) = (9/25)^k. This is an exact cross-multiplication
+-- identity between the unreduced and reduced rational squared overlaps.
+tensorSquaredOverlapReduces :
+  (k : Nat) →
+  (power 15 k * power 15 k) * power 25 k
+  ≡ power 9 k * (power 25 k * power 25 k)
+tensorSquaredOverlapReduces k =
+  trans
+    (cong (λ v → v * power 25 k)
+      (tensorPowerMultiplicative 15 15 k))
+    (trans
+      (tensorPowerMultiplicative 225 25 k)
+      (trans
+        (sym (tensorPowerMultiplicative 9 625 k))
+        (cong (λ v → power 9 k * v)
+          (sym (tensorPowerMultiplicative 25 25 k)))))
+
+actualTensorSquaredOverlapIsNineOverTwentyFivePower :
+  (k : Nat) →
+  (tensorDot (replicate epsRight k) (replicate epsWrong k)
+    * tensorDot (replicate epsRight k) (replicate epsWrong k))
+    * power 25 k
+  ≡ power 9 k *
+      (tensorDot (replicate epsRight k) (replicate epsRight k)
+        * tensorDot (replicate epsWrong k) (replicate epsWrong k))
+actualTensorSquaredOverlapIsNineOverTwentyFivePower k
+  rewrite tensorOverlap k
+        | rightTensorNorm k
+        | wrongTensorNorm k =
+  tensorSquaredOverlapReduces k
 
 ------------------------------------------------------------------------
 -- EXACT NORMALIZED FINITE BORN PROBABILITY (COMMON-DENOMINATOR FORM).
