@@ -1,5 +1,12 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+## 2026-11-03 signed graph-word certificate size — actual Karp N21 owners
+
+The new `Karp21EncodedGraphSparseBitBoundExact.agda` is a source-written proof about the literal `Karp21GammaZigzagWordEncodeExact` weighted-graph serializer. It shows each listed edge contributes at least two gamma endpoint bits and therefore that the existing `Karp21SparseEndpointCutCertificateExact.twoPerEdge(length edges)` sparse witness is no longer than the complete encoded graph word. It reuses the existing `WeightedCutGraph`, signed edge weights and prefix encodings. The result is strictly an encoder-size lower bound and does not certify the decoder, graph equivalence, polynomial clock or `InNP`.
+
+Historical credit: Karp's 1972 weighted MAX CUT (and PARTITION→MAX CUT), Elias gamma coding for the natural-number binary prefix fields, and prior DASHI finite signed-graph, N21 sparse endpoint, E20 serializer and signed gamma owners. The new proof is DASHI source integration, not a new NP-hardness theorem. The Agda integration module intentionally does **not** claim Golden `--safe`: the existing graph dependencies still need a transitive safe import closure. No Agda kernel acceptance or CI evidence exists for this addition.
+
+
 ## 2026-11-03 numeric gamma and original signed-partition codec theorem ownership
 
 The source-written P1 proof sequence in PR #1445 is `Karp21GammaZigzagPartitionWordDecodeExact.readGammaPayloadExact` → `Karp21GammaBinaryPayloadValueExact.successorBitsNumericValue` → `Karp21GammaBinaryRoundTripExact.gammaReadEncodeSuffix/gammaReadEncodeRoundTrip` → `Karp21GammaSignedListRoundTripExact.partitionWordDecodeEncode` → `Karp21GammaZigzagWordEncodeExact.encodedPartitionWordSamePure/partitionWordDecodeEncode`. The literal encoder remains the original Agda standard-library binary `fromℕ` path, using its `toℕ-fromℕ` theorem; the literal decoder is the DASHI Agda translation of the existing `scripts/karp21_signed_cut_binary_codec.py` contract. The auxiliary Golden encoder is proved equal to the existing E20 signed-list wire serializer; this is a same-object proof obligation rather than an independent replacement.
