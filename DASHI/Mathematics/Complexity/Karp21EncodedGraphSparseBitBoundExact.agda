@@ -25,8 +25,9 @@ module DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (∣_∣)
-open import Data.Nat.Base using (_≤_; z≤n)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.List.Base using (List; []; _∷_; _++_; length)
 import Data.List.Properties as ListP
@@ -43,7 +44,41 @@ import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as Grap
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
 
 ------------------------------------------------------------------------
--- One gamma bit for each endpoint, even for a huge declared vertex n.
+-- Elementary list facts, proved by structural recursion. These avoid
+-- depending on a version-specific stdlib append-bound lemma.
+------------------------------------------------------------------------
+
+appendLeftLengthLower :
+  ∀ {A : Set} (prefix suffix : List A) →
+  length prefix ≤ length (prefix ++ suffix)
+appendLeftLengthLower [] suffix = z≤n
+appendLeftLengthLower (_ ∷ rest) suffix =
+  s≤s (appendLeftLengthLower rest suffix)
+
+naturalAtMostSuccessor : (n : Nat) → n ≤ suc n
+naturalAtMostSuccessor zero = z≤n
+naturalAtMostSuccessor (suc n) =
+  s≤s (naturalAtMostSuccessor n)
+
+appendRightLengthLower :
+  ∀ {A : Set} (prefix suffix : List A) →
+  length suffix ≤ length (prefix ++ suffix)
+appendRightLengthLower [] suffix = NatP.≤-refl
+appendRightLengthLower (_ ∷ rest) suffix =
+  NatP.≤-trans
+    (appendRightLengthLower rest suffix)
+    (naturalAtMostSuccessor (length (rest ++ suffix)))
+
+bitWordLengthSameObject :
+  (bits : Word.BitWord) →
+  length bits ≡ Word.encodingSize bits
+bitWordLengthSameObject [] = refl
+bitWordLengthSameObject (_ ∷ rest)
+  rewrite bitWordLengthSameObject rest = refl
+
+------------------------------------------------------------------------
+-- Each original signed edge contains at least two gamma endpoint bits.
+-- Its (possibly negative or zero) weight contributes extra bits.
 ------------------------------------------------------------------------
 
 encodedEdgeAtLeastTwoBits :
@@ -53,17 +88,20 @@ encodedEdgeAtLeastTwoBits edge =
   NatP.≤-trans
     (NatP.+-mono-≤
       (Signed.gammaNatHasBit (Fin.toℕ (Cut.first edge)))
-      (NatP.≤-trans
-        (Signed.gammaNatHasBit (Fin.toℕ (Cut.second edge)))
-        (ListP.length-++-≤ˡ
-          (Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge))))))
-    (NatP.≤-reflexive
-      (sym (ListP.length-++
-        (Gamma.encodeGammaNat (Fin.toℕ (Cut.first edge))))))
+      (Signed.gammaNatHasBit (Fin.toℕ (Cut.second edge))))
+    (NatP.≤-trans
+      (NatP.+-mono-≤ NatP.≤-refl
+        (appendLeftLengthLower
+          (Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge)))
+          (Encode.encodeSignedGamma (Cut.weight edge))))
+      (NatP.≤-reflexive
+        (sym (ListP.length-++
+          (Gamma.encodeGammaNat (Fin.toℕ (Cut.first edge)))
+          (Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge))
+            ++ Encode.encodeSignedGamma (Cut.weight edge))))))
 
 ------------------------------------------------------------------------
--- Exactly the original Sparse.twoPerEdge, not a substitute 2*m
--- arithmetic definition. No assumption of nonempty edge lists.
+-- Use the ORIGINAL Sparse.twoPerEdge and the original edge list.
 ------------------------------------------------------------------------
 
 encodedEdgeWordsAtLeastSparseBits :
@@ -72,15 +110,16 @@ encodedEdgeWordsAtLeastSparseBits :
     ≤ length (Encode.encodeEdgeWords edges)
 encodedEdgeWordsAtLeastSparseBits [] = z≤n
 encodedEdgeWordsAtLeastSparseBits (edge ∷ rest)
-  rewrite ListP.length-++ (Encode.encodeEdgeWord edge) =
+  rewrite ListP.length-++ (Encode.encodeEdgeWord edge)
+    (Encode.encodeEdgeWords rest) =
   NatP.+-mono-≤
     (encodedEdgeAtLeastTwoBits edge)
     (encodedEdgeWordsAtLeastSparseBits rest)
 
 ------------------------------------------------------------------------
--- Graph headers and target W only INCREASE wire length.
--- This is the original graph instance's literal encoder, including
--- signed edge weights, positive threshold and declared vertex count.
+-- Prefix count fields and positive W can only add bits. The theorem
+-- holds for every typed graph, including empty lists and sparse graphs
+-- whose declared vertex count is exponentially larger than the word.
 ------------------------------------------------------------------------
 
 encodedGraphAtLeastSparseBits :
@@ -91,17 +130,20 @@ encodedGraphAtLeastSparseBits (n , graph) =
   NatP.≤-trans
     (encodedEdgeWordsAtLeastSparseBits (Cut.edges graph))
     (NatP.≤-trans
-      (ListP.length-++-≤ˡ
-        (Encode.encodeEdgeWords (Cut.edges graph)))
+      (appendLeftLengthLower
+        (Encode.encodeEdgeWords (Cut.edges graph))
+        (Gamma.encodeGammaNat (∣ Cut.threshold graph ∣)))
       (NatP.≤-trans
-        (ListP.length-++-≤ʳ
+        (appendRightLengthLower
+          (Gamma.encodeGammaNat (length (Cut.edges graph)))
           (Encode.encodeEdgeWords (Cut.edges graph)
-            ++ Gamma.encodeGammaNat
-              (∣ Cut.threshold graph ∣))
-          {xs = Gamma.encodeGammaNat (length (Cut.edges graph))})
-        (ListP.length-++-≤ʳ
-          (Gamma.encodeGammaNat (length (Cut.edges graph))
-            ++ Encode.encodeEdgeWords (Cut.edges graph)
-            ++ Gamma.encodeGammaNat
-              (∣ Cut.threshold graph ∣))
-          {xs = Gamma.encodeGammaNat n})))
+            ++ Gamma.encodeGammaNat (∣ Cut.threshold graph ∣)))
+        (NatP.≤-trans
+          (appendRightLengthLower
+            (Gamma.encodeGammaNat n)
+            (Gamma.encodeGammaNat (length (Cut.edges graph))
+              ++ Encode.encodeEdgeWords (Cut.edges graph)
+              ++ Gamma.encodeGammaNat (∣ Cut.threshold graph ∣)))
+          (NatP.≤-reflexive
+            (bitWordLengthSameObject
+              (Encode.encodeGraphWord (n , graph)))))))
