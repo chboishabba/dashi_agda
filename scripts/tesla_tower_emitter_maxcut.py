@@ -45,6 +45,18 @@ def cavity_mode_budget(input_w=1e6, coupling=0.01, q=5.0,
                 characteristic_field_rms_v_m=e_characteristic,
                 toy_received_field_rms_v_m=e_characteristic*receiver_amplitude_transfer)
 
+def driven_mode_magnitude(f0_hz, quality, drive_hz):
+    """Undimensioned damped-oscillator response, not actual Schumann overlap."""
+    assert f0_hz > 0 and quality > 0 and drive_hz >= 0
+    x=drive_hz/f0_hz
+    return 1/sqrt((1-x*x)**2+(x/quality)**2)
+
+def free_ringdown_times(f0_hz, quality):
+    """Single-mode linear energy and amplitude e-fold times in seconds."""
+    assert f0_hz > 0 and quality > 0
+    energy=quality/(2*pi*f0_hz)
+    return {"energy_s":energy,"amplitude_s":2*energy,"linewidth_hz":f0_hz/quality}
+
 def test():
     # Frequency non-promotion: an 8Hz envelope is not a radiated 8Hz line.
     spectrum = linear_am_spectrum(100000, 8)
@@ -65,6 +77,12 @@ def test():
     assert cavity_mode_budget(receiver_amplitude_transfer=0)["toy_received_field_rms_v_m"] == 0
     assert isclose(a["mode_power_w"],
                    a["stored_energy_j"]*2*pi*7.83/5.0)
+    rd=free_ringdown_times(7.83,5)
+    assert isclose(rd["energy_s"],.10163,rel_tol=.001)
+    assert isclose(rd["amplitude_s"],.20325,rel_tol=.001)
+    assert isclose(rd["linewidth_hz"],1.566,rel_tol=.001)
+    assert isclose(driven_mode_magnitude(7.83,5,7.83),5.0,rel_tol=1e-12)
+    assert driven_mode_magnitude(7.83,5,6.0)<5.0
     return a
 
 if __name__ == "__main__":
