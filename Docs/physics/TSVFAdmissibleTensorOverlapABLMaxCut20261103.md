@@ -1,3 +1,7 @@
+## 2026-11-03 stronger phase-aware complex-source continuation
+
+[Actual rational-complex original TSVF ABL and OS-indexed clock proof dossier](TSVF2017ComplexABLAndOSSameClockMaxCut20261103.md) now provides arbitrary complex gamma amplitude lists, exact Hermitian k-factor environmental overlap, original Q.ablProbability normalization with a selected nonzero total, an all-k 2^k robust-odds bound under explicitly ordered Born disturbance weights, the original R331 same-H physical clock interface and a sharp Eq25 complex-phase ambiguity test. Real N-body 2017 environmental dynamics, physical observer (3,1), OS/Stone and Clay 4D YM remain OPEN. Golden kernel checking pending.
+
 ## Subsequent exact nonvacuous admissibility and true projective-completeness payment
 
 The concrete original TSVF Q.ProjectiveMeasurement now also has theorem terms projectorsSumToIdentity, rightAfterWrongZero and wrongAfterRightZero: the right/wrong coordinate projectors **sum to the identity on the entire coordinate carrier** and are mutually orthogonal, in addition to being idempotent.
