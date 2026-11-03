@@ -1,3 +1,14 @@
+### 2026-11-03 P0 follow-on — TSVF single-branch macroscopic robustness, multiverse separation and YM native codec sync
+- [x] Primary-source audit Aharonov/Cohen/Gruss/Landsberger 2014 and Aharonov/Cohen/Landsberger 2017 macroscopic time-reversibility; independent Everett/observer-selection 2025. Distinguish micro reversibility, selected macro record recovery, operational filtration and physical multiverse ontology.
+- [x] Reuse existing FiniteHistoryOrientationExact, TSFVMultiverseViabilityCrossPollinationExact and MultiverseAttractorDiscriminatorBidiExact. Source-write safe TSVFMacroscopicSingleBranchRobustnessExact with 6/6 one-flip majority restorations, fine-data nonrecoverability, original same-past/different-branch proof and reversal conjunction; Golden root exported. **Not Agda-kernel checked**.
+- [x] Independently replicate 6 finite selected-pointer disturbances plus nine microhistories; commit reference test check_tsvf_macroscopic_single_branch_robustness.py. A numerical check is not a physical quantum robustness proof.
+- [x] Selectively sync #1444@7c6b2efd native bond enumeration, finite gauge naturality, constructed SUN gauge codec and variable-periodic Haar/Gibbs source plus reference scripts into #1460; original source owner/SHAs retained. **Not full branch merge or Agda acceptance**.
+- [x] Update P00–P11 exact roadmap **176→186** (new P01.L13–19, P07.L15–16, P11.L19); sync source audit, phase deliverables and non-promotion firewalls.
+- [ ] Prove literal 2017 selected many-body postselection/overlap robustness ratio Eq.(25) with N−n and genuine physical Born/ABL probability, gamma factors, nonzero denominator and quantitative lower bound; finite triple-majority analogue insufficient.
+- [ ] Source-inhabit single selected observer/clock ↔ physical Lorentz (3,1) metric ↔ OS reflection/Hamiltonian, preserving no backwards signalling and avoiding a second time dimension.
+- [ ] Finish full #1444↔#1460 branch reconciliation, Golden exact-head compile + transitive no-postulate audit; keep non-safe moving-cutoff family out of Golden imports until safe checked.
+- [ ] R443 actual compact one-link SU(N) Haar/R124-CMP119, R445 real cutoff-uniform moments/tails, R320 selected CMP116 differentiated-source decay, R333 same-H OS gap/H6/nontriviality and physical 2D/3D/5D BIDI remain OPEN.
+
 ### 2026-11-03 further source-first max-cut: native bonds/variable cutoff/Bishop setoid
 - [x] Search finite function extensionality, original periodic bond enumerations, Wilson-path congruence, Bishop real/complex and legacy real backend migration before implementation; distinguish field pointwise equality, Vec equality and arbitrary function equality.
 - [x] Source-write original 4D SU(N) signed-path, plaquette, beta action and Gibbs density congruence from *pointwise* original bond equality; prove same at arbitrary periodic cutoff n on the existing `YMClaySUNVariablePeriodicGibbsGaugeExact` action.
