@@ -2,7 +2,9 @@
 
 **3 November 2026 — research conjecture, NOT a theorem, publication, experimental finding, or kernel-checked Agda result.** This paper is intentionally audacious. The Golden Agdas are the subsequent BS-test; no conditional source or finite test is promoted to full physics.
 
-> **Companion implementation roadmap (3 November 2026):** [P00–P11: 176 individually numbered exact lemma obligations, dependencies, deliverables, checks and completion contracts](../roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). This proposed article is the research hypothesis; the roadmap is its fail-closed mathematical test. #1444's new variable-periodic Haar code has **not yet been integrated** into the #1460 branch.
+> **Companion implementation roadmap (3 November 2026):** [P00–P11: 186 individually numbered exact lemma obligations, dependencies, deliverables, checks and completion contracts](../roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). This proposed article is the research hypothesis; the roadmap is its fail-closed mathematical test. The latest #1444 variable-Haar and concrete native bond/gauge-codec sources were selectively copied into #1460 (source SHA 7c6b2efd); full merge and kernel acceptance remain outstanding. See the primary TSVF macro-robustness and multiverse BIDI audit.
+
+**Source follow-on:** [2014/2017 TSVF selected single-branch macroscopic reversibility vs Everett multiverse — exact finite theorem and quantum robustness max-cut](TSVFMacroscopicReversibilityMultiverseBidiSourceAudit20261103.md). The 3-bit majority robustness finite theorem does **not** substitute for the original many-body overlap ratio or entail backward signalling or thermodynamic entropy reversal.
 
 ## Proposed theorem (the desired endpoint)
 
