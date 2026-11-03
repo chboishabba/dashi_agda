@@ -23,6 +23,8 @@ module DASHI.Physics.YangMills.YMClayNativeBlockedSU2PathHolonomyGaugeExact wher
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
@@ -353,6 +355,79 @@ rationalSU2BlockedPathGaugeCovariant M L n sameSide links gauge bond =
   nativeBlockedPathGaugeCovariant M L n sameSide
     SU2Law.rationalSU2ExactLinkGroup
     (rationalSU2NativeRealization n links gauge) bond
+
+------------------------------------------------------------------------
+-- R445 genuine ORIGINAL rational SU(2) *real Wilson trace* on closed
+-- blocked paths, not merely an abstract supplied class-function witness.
+-- Scalar is exactly the rational real component of the existing unit
+-- quaternion owner. Trace cyclicity is proved by the rational ring solver.
+------------------------------------------------------------------------
+
+rationalSU2RealTraceCyclic :
+  (a b : SU2.RationalUnitQuaternion) →
+  SU2.realPart (SU2Law.multiplyRationalSU2 a b)
+  ≡ SU2.realPart (SU2Law.multiplyRationalSU2 b a)
+rationalSU2RealTraceCyclic a b =
+  solve
+    (SU2.realPart a ∷ SU2.imagI a ∷ SU2.imagJ a ∷ SU2.imagK a
+      ∷ SU2.realPart b ∷ SU2.imagI b ∷ SU2.imagJ b ∷ SU2.imagK b ∷ [])
+
+rationalSU2RealTraceConjugationInvariant :
+  (g x : SU2.RationalUnitQuaternion) →
+  SU2.realPart
+    (SU2Law.multiplyRationalSU2
+      (SU2Law.multiplyRationalSU2 g x)
+      (SU2Law.inverseRationalSU2 g))
+  ≡ SU2.realPart x
+rationalSU2RealTraceConjugationInvariant g x =
+  let group = SU2Law.rationalSU2ExactLinkGroup in
+  trans
+    (rationalSU2RealTraceCyclic
+      (Path.multiply group g x) (Path.inverse group g))
+    (trans
+      (cong SU2.realPart
+        (sym (Path.multiplyAssociative group
+          (Path.inverse group g) g x)))
+      (trans
+        (cong
+          (λ intermediate →
+            SU2.realPart (Path.multiply group intermediate x))
+          (Path.inverseLeft group g))
+        (cong SU2.realPart (Path.identityLeft group x))))
+
+module _
+  (M L n : Nat) (sameSide : suc n ≡ M * L)
+  (links : Path.PeriodicBondField n SU2.RationalUnitQuaternion)
+  (gauge : Path.PeriodicSiteGauge n SU2.RationalUnitQuaternion)
+  where
+
+  private
+    exactSU2 = SU2Law.rationalSU2ExactLinkGroup
+    selected = rationalSU2NativeRealization n links gauge
+
+  -- Constructed real part, no generic SU(N) trace authority assumed here.
+  rationalSU2BlockedRealTraceObservable :
+    NativeBlockedClassObservable M L n sameSide exactSU2 selected ℚ
+  rationalSU2BlockedRealTraceObservable = record
+    { evaluate = SU2.realPart
+    ; conjugationInvariant = rationalSU2RealTraceConjugationInvariant
+    }
+
+  -- This is literal original rational SU(2) WILSON-LOOP gauge invariance
+  -- for any properly endpoint-indexed closed blocked path.
+  rationalSU2BlockedClosedWilsonRealTraceInvariant :
+    ∀ {site}
+      (loop : NativeBlockedWalk M L n sameSide exactSU2
+                selected site site) →
+    SU2.realPart
+      (nativeTransformedWalkHolonomy M L n sameSide
+        exactSU2 selected loop)
+    ≡
+    SU2.realPart
+      (nativeWalkHolonomy M L n sameSide exactSU2 selected loop)
+  rationalSU2BlockedClosedWilsonRealTraceInvariant loop =
+    nativeClosedWilsonObservableGaugeInvariant M L n sameSide
+      exactSU2 selected rationalSU2BlockedRealTraceObservable loop
 
 -- Source status: SOURCE-WRITTEN, exact-head Agda NOT RUN. This theorem
 -- does not claim the walked endpoint equals a physically selected
