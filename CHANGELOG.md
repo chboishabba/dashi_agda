@@ -53,3 +53,12 @@ monitor surface.
   landed through `walkObjectsSucMemberByVertices` and
   `walkObjectExtendMemberByVertices` in
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+
+
+## 2026-11-03 — Karp-21 E20 canonical graph-word source refinements (PR #1445)
+
+- Refactored `Karp21EncodedGraphSparseBitBoundExact.agda` to prove the original sparse `2m ≤ encoded graph word length` inequality using structural append bounds on the existing signed graph serializer.
+- Added `Karp21ScaledCompleteGraphEndpointOrderExact.agda` and instantiated its `u < v < n` endpoint validity theorem on the original nonzero-total signed PARTITION graph.
+- Added `Karp21UpperPairStructuralLexOrderExact.agda`, `Karp21ScaledCompleteGraphStrictLexExact.agda`, and `Karp21ScaledCompleteGraphStrictAfterExact.agda` to source-write strict global upper-triangle ordering and its reflection into the actual graph parser's `strictAfter` Boolean comparator; specialized the results to E20's source-generated scaled graph.
+- Imported the modules in `Karp21Everything.agda` and updated the exact-lemma roadmap and attribution ledger. Python upper-pair recursion smoke checked n=0 through n=39; this is not an Agda check.
+- **Not promoted:** the dependent `Fin.fromℕ<` graph reconstruction, original signed-weight threshold/same-object transport, concrete SAT/N21/E20 polynomial machine clocks, universal Cook–Levin, E01–E19 encoded reductions and 21 NP-membership results, and instantiated `CertifiedKarpNetwork` are still open. No Agda kernel acceptance occurred. Certified 0/20 reductions and 0/21 terminal NP-complete conclusions are unchanged.
