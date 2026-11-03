@@ -57,8 +57,11 @@ sameWeightedEdgeContribution :
   SameWeightedEdgeFields original decoded →
   Cut.edgeContribution original labels
     ≡ Cut.edgeContribution decoded labels
-sameWeightedEdgeContribution original decoded labels
-  (same-weighted-edge refl refl refl) = refl
+sameWeightedEdgeContribution original decoded labels fieldsSame
+  rewrite firstSame fieldsSame
+        | secondSame fieldsSame
+        | signedWeightSame fieldsSame =
+  refl
 
 data SameWeightedEdgeLists {n : Nat} :
   List (Cut.SignedUndirectedEdge n) →
@@ -108,11 +111,11 @@ sameWeightedGraphsAccept :
   SameWeightedEdgeLists (Cut.edges original) (Cut.edges decoded) →
   PR.Iff (Cut.WeightedMaxCutYES original)
          (Cut.WeightedMaxCutYES decoded)
-sameWeightedGraphsAccept original decoded thresholdSame edgesSame =
+sameWeightedGraphsAccept {n} original decoded thresholdSame edgesSame =
   PR.iff forward backward
   where
     scoreSame :
-      (labels : Vec.Vec Bool _) →
+      (labels : Vec.Vec Bool n) →
       Cut.cutValue original labels ≡ Cut.cutValue decoded labels
     scoreSame labels = sameGraphCutScore original decoded labels edgesSame
 
