@@ -10,10 +10,25 @@ open import Data.Empty using (⊥)
 -- Contract fields below are conservative specification defaults, not
 -- extracted runtime profiles. Runtime correspondence remains unproved.
 data ToolKind : Set where
-  ingestion validation repair reporting governance artifactTransport candidateClosure residualGeometry : ToolKind
+  ingestion : ToolKind
+  validation : ToolKind
+  repair : ToolKind
+  reporting : ToolKind
+  governance : ToolKind
+  artifactTransport : ToolKind
+  candidateClosure : ToolKind
+  residualGeometry : ToolKind
 
 data AuthorityStatus : Set where
-  bottom observed candidate diagnostic proposal receipt reviewed delegated promoted : AuthorityStatus
+  bottom : AuthorityStatus
+  observed : AuthorityStatus
+  candidate : AuthorityStatus
+  diagnostic : AuthorityStatus
+  proposal : AuthorityStatus
+  receipt : AuthorityStatus
+  reviewed : AuthorityStatus
+  delegated : AuthorityStatus
+  promoted : AuthorityStatus
 
 data ITIRMCPToolId : Set where
   itir_terminal_state : ITIRMCPToolId
@@ -321,10 +336,12 @@ all93ToolsHaveValidAuthorityProfile itir_ao_report_result = validContract refl r
 all93ToolsHaveValidAuthorityProfile itir_ao_gap_check = validContract refl refl
 
 data TransportMode : Set where
-  headlessCFFI explicitBootstrapCDP : TransportMode
+  headlessCFFI : TransportMode
+  explicitBootstrapCDP : TransportMode
 
 data RetryPolicy : Set where
-  noUncertainCommitRetry readOnlyRetry : RetryPolicy
+  noUncertainCommitRetry : RetryPolicy
+  readOnlyRetry : RetryPolicy
 
 data ReGPTMCPFunctionId : Set where
   chatgpt_adapter_health : ReGPTMCPFunctionId
