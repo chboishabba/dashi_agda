@@ -1,4 +1,8 @@
 
+### 2026-11-03 — generic all-L positive-link counting payment
+
+`YMClayNativePositiveBondEnumerationVectorExact` also proves `listLengthMap`, `listLengthAppend`, `listLengthCartesian`, `listLengthAllCyclic`, `originalSiteCountFormula`, and `originalPositiveBondCountFormula`. Thus the **actual canonical** original periodic configuration has exactly `((L*L)*(L*L))*4` positive bonds for every finite side `L`; the 1,024-link side-four equation is now derived from the generic count. These theorems are finite enumeration/coordinate laws, not cutoff-independent physical moment bounds. Source-written, kernel check pending.
+
 ### 2026-11-03 native finite bond codec independent exact-rational fixture
 
 Committed `scripts/check_ym_native_periodic_bond_vec_codec.py`. The local execution of this same script (standard Python `fractions.Fraction`, no external dependencies) passed: side 2 (16 sites / 64 bonds), side 3 (81 sites / 324 bonds) and side 4 (256 sites / **1,024 bonds**); for every bond, field→vector→field, vector→field→vector, and original `(gamma_x U) gamma_y^{-1}` versus vector `gamma_x (U gamma_y^{-1})` agree exactly. Wrong target inverse disagreed on 52, 256, 820 bonds respectively, and a duplicate-label enumeration fails the vector roundtrip as expected. These diagnostics cross-check enumeration order and group-product association, **not** Agda kernel acceptance, compact Haar, all-observable integrability, R445 physical limits, CMP116 or OS.
