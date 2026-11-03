@@ -238,7 +238,7 @@ def project_component_registry(report: dict) -> dict:
             "id": component_id, "index": i, "source_feature_key": key,
             "source_feature_class": feature_class,
             "source_location": loc,
-            "original_location_rendering": f.get("location_as_parsed"),
+            "parser_location_rendering": f.get("location_as_parsed"),
             "original_qualifier_names": [row["key"] for row in f["qualifiers"]],
             "source_short_labels": source_labels,
             "source_labels_withheld_count": len(all_source_labels) - len(source_labels),
