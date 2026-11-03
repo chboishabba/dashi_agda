@@ -116,6 +116,7 @@ import DASHI.Biology.AvianCryptochromeMagnetoreceptionInhabitant
 import DASHI.Biology.AvianMagnetoreceptionStreamFiniteCore
 import DASHI.Biology.AvianMagnetoreceptionThoughtEmporiumEvidenceExact
 import DASHI.Codec.GenBankLocationFiniteCore
+import DASHI.Codec.GenBankComponentOntologyFiniteCore
 import DASHI.Biology.GenBankInterpretationInteropExact
 import DASHI.Biology.AvianHepaticMacrophageMagnetoreception
 import DASHI.Biology.AvianMagnetoreceptionSourceRegistry
