@@ -91,6 +91,25 @@ def pairwise_endpoint_comparison_count(m: int) -> int:
     return m * (m - 1)
 
 
+def maximum_edges_from_canonical_input_bits(input_length: int) -> int:
+    """Universal bound for this exact gamma graph grammar.
+
+    There are at least two header bits (n,m), at least three gamma
+    fields per edge, and at least one positive-threshold gamma bit.
+    Hence for every accepted word 3*m + 3 <= input_length.
+    This bound is independent of the potentially exponential n.
+    """
+    if type(input_length) is not int or input_length < 0:
+        raise ValueError("negative graph word bit count")
+    return max(0, (input_length - 3) // 3)
+
+
+def binary_native_pairwise_comparisons_bound(input_length: int) -> int:
+    """Deterministic worst-case count, not a Python machine-time bound."""
+    m_max = maximum_edges_from_canonical_input_bits(input_length)
+    return pairwise_endpoint_comparison_count(m_max)
+
+
 if __name__ == "__main__":
     import sys
     print(
