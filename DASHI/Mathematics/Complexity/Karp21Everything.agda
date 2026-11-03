@@ -112,3 +112,11 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact
 
 import DASHI.Mathematics.Complexity.Karp21StrictSATConcreteRunBidiExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryPayloadValueExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryRoundTripExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaSignedListRoundTripExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaGoldenEverything
