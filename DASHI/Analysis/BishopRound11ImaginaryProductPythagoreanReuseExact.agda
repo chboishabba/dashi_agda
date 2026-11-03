@@ -1,0 +1,108 @@
+{-# OPTIONS --safe #-}
+module DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact where
+
+------------------------------------------------------------------------
+-- K04d / K05 SAME-OBJECT MAX-CUT REUSE.
+--
+-- One source-native pure-imaginary exponential multiplication theorem
+-- implies BOTH original Bishop trig additions (Cartesian projections).
+-- Cosine addition at (theta,-theta) plus already-owned native parity
+-- and cosine-zero proves the ORIGINAL Pythagorean identity.
+--
+-- Thus the entire variable-s complex Basel comparison may consume
+-- the single mixed signed-factorial Cauchy-product theorem, not a
+-- SECOND independently assumed Pythagorean theorem. The remaining
+-- exp_B(L_n)=n+1 is still an independent genuine analytic obligation.
+--
+-- No postulates, axioms, generic classical trig equations or
+-- alternate real/complex carriers are introduced in this source.
+--
+-- Attribution: Bishop & Bridges (constructive reals);
+-- Zachary Murray and Viktor Csimma (vendor/bishop);
+-- existing DASHI Round11, imaginary-phase, and Dirichlet owners.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Product.Base using (_×_; proj₂)
+
+import Real as R
+import DASHI.Analysis.BishopSetoidComplexExact as C
+import DASHI.Analysis.BishopRiemannComplexAboveTwoBaselExact as Region
+import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
+import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
+import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as Uniform
+import DASHI.Analysis.BishopRound11TrigModulusFromPythagoreanExact as Modulus
+import DASHI.Foundations.BishopRound11TrigAtZeroExact as Origin
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
+import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+
+Round11ImaginaryExpMultiplicative :
+  Round11.Round11BishopCutset → Set
+Round11ImaginaryExpMultiplicative inputs =
+  (x y : R.ℝ) →
+  let T = Route.round11MachinTranscendentals inputs
+  in
+  C._≈C_
+    (C.expC T
+      (C.pureImaginary (R._+_ x y)))
+    (C._*C_
+      (C.expC T (C.pureImaginary x))
+      (C.expC T (C.pureImaginary y)))
+
+-- The true Pythagorean identity is DERIVED using only the
+-- anti-diagonal instance of the original source product.
+round11PythagoreanFromImaginaryProduct :
+  (inputs : Round11.Round11BishopCutset) →
+  Round11ImaginaryExpMultiplicative inputs →
+  (theta : R.ℝ) →
+  let
+    c = Origin.cosB inputs theta
+    s = Origin.sinB inputs theta
+  in
+  R._≃_
+    (R._+_ (R._*_ c c) (R._*_ s s))
+    R.1ℝ
+round11PythagoreanFromImaginaryProduct inputs product theta =
+  Origin.round11PythagoreanFromCosineAdditionOpposite inputs theta
+    (proj₂
+      (C.imaginaryExponentialProductGivesAddition
+        (Route.round11MachinTranscendentals inputs)
+        theta (R.- theta)
+        (product theta (R.- theta))))
+
+-- The same ONE Cauchy-product obligation now produces the
+-- original Round11 phase magnitude bounds used by Dirichlet.
+round11ModulusFromImaginaryProduct :
+  (inputs : Round11.Round11BishopCutset) →
+  Round11ImaginaryExpMultiplicative inputs →
+  (theta : R.ℝ) →
+  (R._≤_ (R.∣ Origin.cosB inputs theta ∣) R.1ℝ)
+  ×
+  (R._≤_ (R.∣ Origin.sinB inputs theta ∣) R.1ℝ)
+round11ModulusFromImaginaryProduct inputs product theta =
+  Modulus.round11ModulusFromPythagorean
+    inputs theta
+    (round11PythagoreanFromImaginaryProduct inputs product theta)
+
+-- The constructed original Dirichlet series now depends on exactly:
+--   1. Native exponential inverse at the canonical Nat logs.
+--   2. Native pure-imaginary exp multiplicativity, which also
+--      yields full sine/cosine addition and the Pythagorean law.
+-- No THIRD trig-modulus or arbitrary-zeta authority is present.
+sourceRegionWideFromSingleImaginaryProduct :
+  (inputs : Round11.Round11BishopCutset) →
+  ((n : Nat) →
+    R._≃_
+      (Exp.bishopExp (Terms.sourceCanonicalNatLogCandidate n))
+      (NatReal.natReal (suc n))) →
+  Round11ImaginaryExpMultiplicative inputs →
+  Uniform.RegionBaselDomination
+    (Terms.bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs)
+      Terms.sourceCanonicalNatLogCandidate)
+    Region.sourceAboveTwoRegion
+sourceRegionWideFromSingleImaginaryProduct inputs inverse product =
+  Region.sourceRegionWideBaselCertificate inputs inverse
+    (round11PythagoreanFromImaginaryProduct inputs product)
