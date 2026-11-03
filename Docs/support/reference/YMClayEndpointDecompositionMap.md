@@ -2,6 +2,10 @@
 
 # Yang–Mills Clay Endpoint / Decomposition / Producer Map
 
+**Current exact field coordinates (3 November 2026):** [Full 219-field source inventory](../../roadmaps/YMClaySubmission219FieldInventory20261103.json) (all individual statuses NOT_AUDITED, no false closure) and [43-entry producer-leaf exact lemma ledger](../../roadmaps/YMClayCurrentExactLemmaLedger20261103.md) are companions to this decomposition reference.
+
+
+
 Status: repository navigation and proof-search reference, not theorem authority.
 
 Companions:
