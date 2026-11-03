@@ -20,9 +20,14 @@ module DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (trans; sym)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_<_)
+open import Data.Nat.Properties as NatP using (<-irrefl)
+open import Data.Product using (_,_)
 
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31
 import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as Arrow
+import DASHI.Physics.Foundations.FiniteHistoryOrientationExact as Micro
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as KK
 
 -- A selected KK four-metric must represent the VERY SAME physical
@@ -92,3 +97,18 @@ sameMetricKKReversedCountExcluded w reversed =
 -- comparison are still required. Nor does it construct R443 Haar,
 -- R445 continuum, R320 decay, R333 spectral gap, KK source equality,
 -- or the 4D OS reconstruction itself.
+
+-- Independent obstruction to identifying *microscopic history reversal*
+-- itself with a globally strictly contracting pressure/descent step.
+-- The original time-reversal map fixes the history (stateZero,stateZero).
+-- Therefore NO Nat-valued rank can strictly decrease under that map for
+-- every history. Observable/quotient dynamics can still have a direction,
+-- but require an explicitly different selected map or boundary condition.
+globalStrictReversalRankImpossible :
+  (rank : Micro.History2 → Nat) →
+  ((h : Micro.History2) →
+    rank (Micro.reverseHistory h) < rank h) →
+  L31.⊥
+globalStrictReversalRankImpossible rank strict =
+  NatP.<-irrefl refl (strict (Micro.stateZero , Micro.stateZero))
+
