@@ -47,3 +47,7 @@ No operational human or animal gene editing or delivery protocols in this lane.
 - [x] GB04-LOCAL: actual original GenBank source passed Biopython parse/serialize/parse, with all seven semantic equality checks true; normalized output 18,377 bytes is not the same raw text as original 18,278 bytes.
 - [x] GB04-REUSABLE: committed `scripts/check_genbank_semantic_roundtrip.py` and `tests/test_genbank_semantic_roundtrip.py`.
 - [ ] GB04-FORMAL: obtain a Golden Agda theorem for the parser/serialized AST refinement or appropriately scoped formal certificate; original local finite result does not imply general verified parser.
+
+
+- [x] GB07-SOURCE-FIXTURE: committed 22-feature/30-review-hold source-inspection candidate graph with creator/paper attribution and source-reopenable claim IDs.
+- [ ] GB07-NATIVE-ABI: native ITIR/SLR and external ontology recipient compliance remains an unverified, separately scoped gate.
