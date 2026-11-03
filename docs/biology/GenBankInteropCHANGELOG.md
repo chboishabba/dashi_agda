@@ -42,3 +42,16 @@
 - Added `docs/biology/data/ThoughtEmporiumMagnetoreceptionCandidateReviewGraph.json` with 22 source-annotated feature statements and 30 source-reopenable review holds. The designer's feature-8 label is linked to Nimpf 2019 only at candidate hypothesis tier; Xu 2021/Lisowski 2026 are later context, not source plasmid features.
 - Added `tests/test_genbank_source_candidate_graph.py` ensuring feature/count/source-identity parity, candidate-only authority and no original-sequence redistribution.
 - This is an inspection fixture, not a native ITIR, SLR S29, Wikidata or GO schema and not an automatic ontology edit.
+
+
+### Reusable GenBank component registry integration
+
+- Added a gene/CDS/regulatory/mobile/repeat/replicon source-annotation
+  classifier using INSDC v11.4. A `mobile_element` subtype is accepted
+  only from its explicit key and supported qualifier; `repeat_region`
+  and creator labels cannot create mobile-element authority.
+- Added a Golden source taxonomy, canonical import and Biology owner reuse,
+  source-inspected three-file fixture (22/53/20 features), and 17 local
+  passing synthetic tests. Original source and theorem attributions retained.
+- Exact Agda and native ITIR/SLR API receipts remain open; no genetic parts
+  selection, DNA bases, editing protocol or phenotype assertion emitted.
