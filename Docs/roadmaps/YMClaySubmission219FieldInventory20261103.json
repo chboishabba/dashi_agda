@@ -1,0 +1,2952 @@
+{
+  "schema": "DASHI.YM.full-submission-field-inventory.v1",
+  "snapshot_date": "2026-11-03",
+  "source_branch": "research/ym-voyager2026-completeness-crosswalk-20261101",
+  "note": "These 219 items are literal Agda record-field obligations. Their enumeration/count was checked against the two source files. Individual theorem proof discharge has NOT been audited. Hints do not assert an implication, closure, or equivalence with the four-row research cut / R443-R333 producer gates. Neither this JSON nor its count inhabits ClayYangMillsSolution.",
+  "theorem_spine_count": 191,
+  "foundation_and_gauge_count": 28,
+  "formal_submission_count": 219,
+  "lane_counts": {
+    "A": 58,
+    "B": 56,
+    "C": 13,
+    "D": 10,
+    "E": 13,
+    "F": 20,
+    "G": 21,
+    "H": 15,
+    "I": 13
+  },
+  "rows": [
+    {
+      "id": "YM-A001",
+      "contract_record": "CMP109Round6Cutset",
+      "field": "executableWordHolonomyIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A002",
+      "contract_record": "CMP109Round6Cutset",
+      "field": "rectangleCurvatureProductIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A003",
+      "contract_record": "CMP109Round6Cutset",
+      "field": "adjacentSwapCurvatureEstimate",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A004",
+      "contract_record": "CMP109Round6Cutset",
+      "field": "sixSwapBoundInsideGroupAverageDiameter",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A005",
+      "contract_record": "CMP109Round6Cutset",
+      "field": "principalLogChartOnAveragedContour",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A006",
+      "contract_record": "BishopRound6Cutset",
+      "field": "halfBallSquareBelowQuarter",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A007",
+      "contract_record": "BishopRound6Cutset",
+      "field": "sineCoefficientRecurrence",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A008",
+      "contract_record": "BishopRound6Cutset",
+      "field": "cosineCoefficientRecurrence",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A009",
+      "contract_record": "BishopRound6Cutset",
+      "field": "sineAlternatingFirstOmittedTail",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A010",
+      "contract_record": "BishopRound6Cutset",
+      "field": "cosineAlternatingFirstOmittedTail",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A011",
+      "contract_record": "BishopRound6Cutset",
+      "field": "inverseDexpBernoulliTail",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A012",
+      "contract_record": "BishopRound6Cutset",
+      "field": "coefficientDifferenceTermBounds",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A013",
+      "contract_record": "BishopRound6Cutset",
+      "field": "orderClosedPowerSeriesLimit",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A014",
+      "contract_record": "BishopRound6Cutset",
+      "field": "normalizedSineHaarIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A015",
+      "contract_record": "BishopRound6Cutset",
+      "field": "scalarHaarLogRemainder",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A016",
+      "contract_record": "FederbushRound6Cutset",
+      "field": "geometryChannelWithinAllocation",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A017",
+      "contract_record": "FederbushRound6Cutset",
+      "field": "contourTransportChannelWithinAllocation",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A018",
+      "contract_record": "FederbushRound6Cutset",
+      "field": "chartChannelWithinAllocation",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A019",
+      "contract_record": "FederbushRound6Cutset",
+      "field": "inverseSeedChannelWithinAllocation",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A020",
+      "contract_record": "FederbushRound6Cutset",
+      "field": "centreForcingWithinQuarter",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A021",
+      "contract_record": "BackgroundGaugeRound6Cutset",
+      "field": "sourceConfigurationIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A022",
+      "contract_record": "BackgroundGaugeRound6Cutset",
+      "field": "siteSupremumNormIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A023",
+      "contract_record": "BackgroundGaugeRound6Cutset",
+      "field": "scaledDerivativeNormIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A024",
+      "contract_record": "BackgroundGaugeRound6Cutset",
+      "field": "mixedNormSourceEquality",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A025",
+      "contract_record": "BackgroundGaugeRound6Cutset",
+      "field": "alpha0Alpha1PhysicalMeaning",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A026",
+      "contract_record": "BackgroundGaugeRound6Cutset",
+      "field": "centreForcingBound",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A027",
+      "contract_record": "BackgroundGaugeRound6Cutset",
+      "field": "backgroundActionConstraintIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A028",
+      "contract_record": "BackgroundGaugeRound6Cutset",
+      "field": "backgroundFineBondNormIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A029",
+      "contract_record": "HessianRound6Cutset",
+      "field": "linkExponentialC1C2C3Bounds",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A030",
+      "contract_record": "HessianRound6Cutset",
+      "field": "plaquetteDerivativeIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A031",
+      "contract_record": "HessianRound6Cutset",
+      "field": "federbushAverageFirstJet",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A032",
+      "contract_record": "HessianRound6Cutset",
+      "field": "federbushAverageSecondJet",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A033",
+      "contract_record": "HessianRound6Cutset",
+      "field": "constraintNormalPerturbationIdentification",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A034",
+      "contract_record": "HessianRound6Cutset",
+      "field": "referenceAndPhysicalNormalInverseBounds",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A035",
+      "contract_record": "HessianRound6Cutset",
+      "field": "curvatureLinearSmallFieldConstant",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A036",
+      "contract_record": "HessianRound6Cutset",
+      "field": "transportLinearSmallFieldConstant",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A037",
+      "contract_record": "HessianRound6Cutset",
+      "field": "chartLinearSmallFieldConstant",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A038",
+      "contract_record": "HessianRound6Cutset",
+      "field": "gaugeLinearSmallFieldConstant",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A039",
+      "contract_record": "HessianRound6Cutset",
+      "field": "constraintLinearSmallFieldConstant",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A040",
+      "contract_record": "HessianRound6Cutset",
+      "field": "commonSmallFieldRadiusTargets",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A041",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "physicalCovarianceSmallness",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A042",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "gaussianCompletionIdentity",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A043",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "integratedLocalFluctuationMajorant",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A044",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "WilsonAnimalEntropyConstant",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A045",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "WilsonDecayWeightAndReservedSlack",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A046",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "WilsonPenaltyCompatibility",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A047",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "physicalWeakeningDependencyGraph",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A048",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "connectedActivityTreeRepresentation",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A049",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "perLinkOscillationEstimate",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A050",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "rootedAnimalCountConstant",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A051",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "weightedInfluenceRatioBelowOne",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A052",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "rOperationSourceRepositoryDictionary",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A053",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "smallFieldROperationBoundaryIdentity",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A054",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "determinantRelativeSpectrumTraceLog",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A055",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "normalizedTaylorInteractionBound",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A056",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "BishopHaarChartActivityBound",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A057",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "backgroundGaugeActivityBound",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-A058",
+      "contract_record": "PolymerRound6Cutset",
+      "field": "propagatorLocalizationActivityBound",
+      "source_path": "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda",
+      "source_blob_sha": "1ed00390e8401f86313f0440d6edfb29870dd31d",
+      "producer_gate_hints": [
+        "R445",
+        "R320"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B001",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "finiteSupportGraphPathExistence",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B002",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "shortestPathMinimality",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B003",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "treePathLengthBoundedByTreeEdgeCount",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B004",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "uniformYMSupportGraphBoundedDegree",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B005",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "boundedDegreeRootBallGrowth",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B006",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "rootedConnectedSkeletonSpanningTree",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B007",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "rootedSpanningTreeControlledDFS",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B008",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "boundedDegreeRootedWalkCount",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B009",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "connectedSkeletonCoveredByDFSVisitedSet",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B010",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "rootedConnectedSkeletonSizeShellCount",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B011",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "diameterSizeShellRootBallContainment",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B012",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "reducedSkeletonComplexityLinearInDiameter",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B013",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "diameterShellSkeletonCount",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B014",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "polymerDecorationMultiplicity",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B015",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "skeletonDecorationEncoding",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B016",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "skeletonDecorationEncodingControlledMultiplicity",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B017",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "skeletonDecorationAnimalCount",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B018",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "p06ModelLeafDischargePackage",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B019",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "p0UniformPositivity",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B020",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "largeFieldCoerciveConstantLowerBound",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B021",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "entropyLargeFieldAbsorptionInequality",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B022",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "absorptionUniformityInScaleSupportBoundary",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B023",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "nonpostulatedImportedAbsorptionCondition",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B024",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "badFieldEventImpliesBlockTailLowerBound",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B025",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "badBlockGaussianTailSuppression",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B026",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "supportProductLocalization",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B027",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "localSuppressionProductOverPolymerSupport",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B028",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "totalBadFieldPenaltyControlsComplexity",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B029",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "complexityControlsOrdinaryDiameter",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B030",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "canonicalDiameterDecayEnvelope",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B031",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "uniformScaleConstantCompatibility",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B032",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "physicalP10LargeFieldSuppressionPackage",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B033",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "localLinkMetricReferencePerturbationDecomposition",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B034",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "linkMetricPerturbationNormBound",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B035",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "positiveBackgroundMetricFloor",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B036",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "perturbationBelowMetricFloor",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B037",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "positivePerturbedLinkMetricLowerBound",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B038",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "metricLowerBoundToLinkWeightComparison",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B039",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "linkEllipticityUniformInScalePolymerEdge",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B040",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "linkLowerBoundNormalisedToOne",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B041",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "weightedTreeDistanceDominatesOrdinaryDiameter",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B042",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "p33a1AnalyticDischargePackage",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B043",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "orderedRealTransitivityOnActualBackend",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B044",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "realExponentialConstructionAndLaws",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B045",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "stepVConstantNonnegative",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B046",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "exponentialAntitoneUnderNegativeArgument",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B047",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "nonnegativeConstantMultiplicationMonotone",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B048",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "expDecayMonotone",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B049",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "physicalWeightedActivityDecay",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B050",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "ordinaryDiameterDecayAfterP33b",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B051",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "kpNeighbourhoodShellDecomposition",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B052",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "p06DiameterShellCountApplied",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B053",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "geometricShellMajorantSummed",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B054",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "strictShellRatioGivesFiniteKPBound",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B055",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "allDiameterKPFromEntropyMargin",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-B056",
+      "contract_record": "LocalStepVExactCutset",
+      "field": "abstractConcreteStepVCertificateEquivalence",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R320",
+        "R445"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C001",
+      "contract_record": "RGTransferExactCutset",
+      "field": "polymerDecayImpliesDLRSmallness",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C002",
+      "contract_record": "RGTransferExactCutset",
+      "field": "crossScaleInfluenceSummable",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C003",
+      "contract_record": "RGTransferExactCutset",
+      "field": "dlrSmallnessAndCrossScaleGiveUniformLSI",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C004",
+      "contract_record": "RGTransferExactCutset",
+      "field": "uniformLSIImpliesExponentialClustering",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C005",
+      "contract_record": "RGTransferExactCutset",
+      "field": "uniformLSIImpliesPositiveLatticeSpectralGap",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C006",
+      "contract_record": "RGTransferExactCutset",
+      "field": "stepVKPImpliesAssumptionA2",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C007",
+      "contract_record": "RGTransferExactCutset",
+      "field": "a2ImpliesB6InfluenceBound",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C008",
+      "contract_record": "RGTransferExactCutset",
+      "field": "b6InfluenceImpliesRGCauchySummability",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C009",
+      "contract_record": "RGTransferExactCutset",
+      "field": "rgCauchyImpliesBlockedObservableConvergence",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C010",
+      "contract_record": "RGTransferExactCutset",
+      "field": "dlrSmallnessImpliesClusterExpansionStability",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C011",
+      "contract_record": "RGTransferExactCutset",
+      "field": "asymptoticallyFreeRunningCouplingControl",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C012",
+      "contract_record": "RGTransferExactCutset",
+      "field": "dlrAndRGCauchyLimitCompatibility",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-C013",
+      "contract_record": "RGTransferExactCutset",
+      "field": "blockingChoiceIndependence",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R320",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D001",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "anisotropyCoefficientQuadraticBound",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D002",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "terminalKPInPhysicalNorm",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D003",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "localPolymerAssemblyMapCorrect",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D004",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "uniformFixedVolumeLSI",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D005",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "lsiImpliesGeneratorSpectralGap",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D006",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "spectralGapImpliesExponentialClustering",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D007",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "exponentialClusteringImpliesFixedLatticeMassGap",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D008",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "finiteVolumeUniformityOfGapConstants",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D009",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "admissibleBoundaryComparison",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-D010",
+      "contract_record": "FixedLatticeGapExactCutset",
+      "field": "euclideanDecayTransferMatrixPhysicalMassEquivalence",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E001",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "finiteVolumeGaugeMeasuresExist",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E002",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "uniformObservableExponentialMoments",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E003",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "finiteVolumeFamilyTight",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E004",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "infiniteVolumeSubsequenceExists",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E005",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "subsequentialLimitsDLRConsistent",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E006",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "infiniteVolumeLimitUnique",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E007",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "boundaryConditionIndependent",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E008",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "reflectionPositivityPreservedInVolumeLimit",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E009",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "gaugeInvariancePreservedInVolumeLimit",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E010",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "exponentialClusteringPreservedInVolumeLimit",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E011",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "fixedLatticeMassGapSurvivesVolumeLimit",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E012",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "allRequiredSchwingerFunctionsConverge",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-E013",
+      "contract_record": "ThermodynamicLimitExactCutset",
+      "field": "limitingSchwingerFamilyCompatibleAndSymmetric",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F001",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "latticeSpacingSequenceTendsToZero",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F002",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "runningCouplingTunedAlongSequence",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F003",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "renormalizedLocalObservablesUniformlyControlled",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F004",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "continuumSchwingerDistributionsTight",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F005",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "continuumSubsequenceExists",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F006",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "rgCauchyMakesContinuumLimitUnique",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F007",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "continuumIndependentOfSequenceAndBlocking",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F008",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "reflectionPositivityPreservedUnderCutoffRemoval",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F009",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "translationInvarianceRestored",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F010",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "fullO4EuclideanCovarianceRestored",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F011",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "wardIdentityControlsRotationalBreaking",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F012",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "symanzikInvariantAnisotropicDecomposition",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F013",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "anisotropicCoefficientsVanish",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F014",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "triangularMixingExclusion",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F015",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "insertionIntegrabilityForWardLimit",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F016",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "osRegularityAndGrowth",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F017",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "continuumFieldTheoryNontrivial",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F018",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "physicalScaleExponentialClusteringPreserved",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F019",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "massGapSurvivesCutoffRemoval",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-F020",
+      "contract_record": "ContinuumLimitExactCutset",
+      "field": "dimensionfulContinuumGapStrictlyPositive",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G001",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "os0RegularityTemperedness",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G002",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "os1EuclideanInvariance",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G003",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "os2ReflectionPositivity",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G004",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "os3Symmetry",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G005",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "os4ClusterProperty",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G006",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "reconstructionAnalyticGrowth",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G007",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "gaugeInvariantObservableDomain",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G008",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "reflectionPositiveNullQuotient",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G009",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "hilbertSpaceCompletion",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G010",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "timeTranslationSemigroup",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G011",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "positiveSelfAdjointHamiltonian",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G012",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "vacuumExistenceAndUniqueness",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G013",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "wightmanDistributionReconstruction",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G014",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "poincareCovarianceAfterContinuation",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G015",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "spectrumCondition",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G016",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "localityOfGaugeInvariantFields",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G017",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "nontrivialQuantumYangMillsIdentification",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G018",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "euclideanClusteringImpliesVacuumSpectralGap",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G019",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "physicalUnitsGapStrictlyPositive",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G020",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "clayMassGapStatementIdentification",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-G021",
+      "contract_record": "OSPhysicalGapExactCutset",
+      "field": "finalYangMillsQFTAndPhysicalMassGap",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H001",
+      "contract_record": "FoundationExactCutset",
+      "field": "theoremCriticalRealBackendBridge",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H002",
+      "contract_record": "FoundationExactCutset",
+      "field": "constructedRealOrderedRingLaws",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H003",
+      "contract_record": "FoundationExactCutset",
+      "field": "constructedRealCompletenessForUsedLimits",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H004",
+      "contract_record": "FoundationExactCutset",
+      "field": "constructedRealExponentialAndLogarithm",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H005",
+      "contract_record": "FoundationExactCutset",
+      "field": "powerSeriesDifferentiationUniformConvergence",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H006",
+      "contract_record": "FoundationExactCutset",
+      "field": "finiteNormedVectorSpaceInfrastructure",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H007",
+      "contract_record": "FoundationExactCutset",
+      "field": "complexMatrixInfrastructure",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H008",
+      "contract_record": "FoundationExactCutset",
+      "field": "concreteSUNMatrixCarriers",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H009",
+      "contract_record": "FoundationExactCutset",
+      "field": "haarOrChartMeasure",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H010",
+      "contract_record": "FoundationExactCutset",
+      "field": "finiteDimensionalGaugeIntegration",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H011",
+      "contract_record": "FoundationExactCutset",
+      "field": "covarianceAndGaussianIntegration",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H012",
+      "contract_record": "FoundationExactCutset",
+      "field": "spectralTheoremForUsedOperators",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H013",
+      "contract_record": "FoundationExactCutset",
+      "field": "measureTightnessWeakConvergence",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H014",
+      "contract_record": "FoundationExactCutset",
+      "field": "schwingerDistributionFramework",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-H015",
+      "contract_record": "FoundationExactCutset",
+      "field": "hilbertAndUnboundedOperatorFramework",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333",
+        "CLAY"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I001",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "concreteLatticeGaugeConfigurationSpace",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I002",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "gaugeGroupActionAndLaws",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I003",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "wilsonActionAndObservableGaugeInvariance",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I004",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "gaugeOrbitEquivalenceRelation",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I005",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "gaugeQuotientOrRepresentativeTheorem",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I006",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "faddeevPopovBackgroundGaugeDeterminant",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I007",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "restrictedChartGribovControl",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I008",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "chartMeasureGaugeCompatibility",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I009",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "reflectionActionOnLinksPlaquettesObservables",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I010",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "finiteLatticeWilsonReflectionPositivity",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I011",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "gaugeInvariancePreservedByRG",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I012",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "blockingCompatibleWithReflection",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    },
+    {
+      "id": "YM-I013",
+      "contract_record": "GaugeStructuralExactCutset",
+      "field": "exactSUNScopeOfFinalTheorem",
+      "source_path": "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda",
+      "source_blob_sha": "0a69198469e601f124d6da8397c3a766bf61ec72",
+      "producer_gate_hints": [
+        "R443",
+        "R445",
+        "R333"
+      ],
+      "individual_discharge": "NOT_AUDITED",
+      "is_clay_proof": false
+    }
+  ]
+}
