@@ -148,6 +148,10 @@ open TSVFGamma public using
 open TSVFQubit public using
   ( rightProjectorIdempotent
   ; wrongProjectorIdempotent
+  ; projectorsSumToIdentity
+  ; rightAfterWrongZero
+  ; wrongAfterRightZero
+  ; excludedCannotBeJointlyAdmissible
   ; rightTransitionAmplitude
   ; wrongTransitionAmplitude
   ; rightBornNumerator
