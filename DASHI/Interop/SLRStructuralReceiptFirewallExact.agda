@@ -138,3 +138,135 @@ passiveCoherenceNoPath :
   CoherenceAdmissible (coherenceGateReceipt true true) → ⊥
 passiveCoherenceNoPath (coherenceAdmissible blocks) with blocks refl
 ... | ()
+
+
+-- These are links to the original mathematical owners, not new models.
+postgresOwner : PG.PostgresWorldPersistenceBoundary
+postgresOwner = PG.canonicalPostgresWorldPersistenceBoundary
+
+fleetOwner : Set
+fleetOwner = Fleet.SlotPartition
+
+commitBoundOwner : ∀ {c₁ c₂} →
+  {A : Set} → A → A
+commitBoundOwner _ = λ x → x
+
+productionOwner : Roadmap.ProductionGoldenSplit
+productionOwner = Roadmap.canonicalProductionGoldenSplit
+
+-- Feature-set receipt gates. Each rejection is a constructor mismatch.
+record SourceStoreDeliberationReceipt : Set where
+  constructor sourceStoreDeliberationReceipt
+  field
+    ingest1CanonicalWikiSource : Bool
+    atomicS29DeliberationSidecar : Bool
+    k14ToK17ClosurePolicyWitness : Bool
+
+record SourceStoreDeliberationAdmissible (r : SourceStoreDeliberationReceipt) : Set where
+  constructor sourceStoreDeliberationAdmissible
+  field
+    ingest : SourceStoreDeliberationReceipt.ingest1CanonicalWikiSource r ≡ true
+    sidecar : SourceStoreDeliberationReceipt.atomicS29DeliberationSidecar r ≡ true
+    closure : SourceStoreDeliberationReceipt.k14ToK17ClosurePolicyWitness r ≡ true
+
+missingIngest1NoPath : (s k : Bool) →
+  SourceStoreDeliberationAdmissible (sourceStoreDeliberationReceipt false s k) → ⊥
+missingIngest1NoPath s k (sourceStoreDeliberationAdmissible () _ _)
+
+missingS29SidecarNoPath : (i k : Bool) →
+  SourceStoreDeliberationAdmissible (sourceStoreDeliberationReceipt i false k) → ⊥
+missingS29SidecarNoPath i k (sourceStoreDeliberationAdmissible _ () _)
+
+missingK14K17WitnessNoPath : (i s : Bool) →
+  SourceStoreDeliberationAdmissible (sourceStoreDeliberationReceipt i s false) → ⊥
+missingK14K17WitnessNoPath i s (sourceStoreDeliberationAdmissible _ _ ())
+
+record CFFISessionLifecycleReceipt : Set where
+  constructor cffiSessionLifecycleReceipt
+  field
+    browserUsedInRefreshOrPrecommit : Bool
+    staleCookieFailsClosed : Bool
+    healthStoreClosedCleanly : Bool
+
+record CFFISessionLifecycleAdmissible (r : CFFISessionLifecycleReceipt) : Set where
+  constructor cffiSessionLifecycleAdmissible
+  field
+    headless : CFFISessionLifecycleReceipt.browserUsedInRefreshOrPrecommit r ≡ false
+    stale : CFFISessionLifecycleReceipt.staleCookieFailsClosed r ≡ true
+    closed : CFFISessionLifecycleReceipt.healthStoreClosedCleanly r ≡ true
+
+browserRefreshFallbackNoPath : (s c : Bool) →
+  CFFISessionLifecycleAdmissible (cffiSessionLifecycleReceipt true s c) → ⊥
+browserRefreshFallbackNoPath s c (cffiSessionLifecycleAdmissible () _ _)
+
+silentStaleSessionNoPath : (b c : Bool) →
+  CFFISessionLifecycleAdmissible (cffiSessionLifecycleReceipt b false c) → ⊥
+silentStaleSessionNoPath b c (cffiSessionLifecycleAdmissible _ () _)
+
+unclosedAdapterHealthStoreNoPath : (b s : Bool) →
+  CFFISessionLifecycleAdmissible (cffiSessionLifecycleReceipt b s false) → ⊥
+unclosedAdapterHealthStoreNoPath b s (cffiSessionLifecycleAdmissible _ _ ())
+
+record MultiParentRevivalReceipt : Set where
+  constructor multiParentRevivalReceipt
+  field
+    parentCountInRange2To10 : Bool
+    trimmedParentsDistinctAndNonEmpty : Bool
+    requestIdAtMost128 : Bool
+    validatedBeforeAdapterAndFilesystem : Bool
+    retriedOnUncertainCommit : Bool
+
+record MultiParentRevivalAdmissible (r : MultiParentRevivalReceipt) : Set where
+  constructor multiParentRevivalAdmissible
+  field
+    count : MultiParentRevivalReceipt.parentCountInRange2To10 r ≡ true
+    distinct : MultiParentRevivalReceipt.trimmedParentsDistinctAndNonEmpty r ≡ true
+    request : MultiParentRevivalReceipt.requestIdAtMost128 r ≡ true
+    early : MultiParentRevivalReceipt.validatedBeforeAdapterAndFilesystem r ≡ true
+    noRetry : MultiParentRevivalReceipt.retriedOnUncertainCommit r ≡ false
+
+invalidParentCountNoPath : (d r v u : Bool) →
+  MultiParentRevivalAdmissible (multiParentRevivalReceipt false d r v u) → ⊥
+invalidParentCountNoPath d r v u (multiParentRevivalAdmissible () _ _ _ _)
+
+duplicateOrEmptyParentNoPath : (c r v u : Bool) →
+  MultiParentRevivalAdmissible (multiParentRevivalReceipt c false r v u) → ⊥
+duplicateOrEmptyParentNoPath c r v u (multiParentRevivalAdmissible _ () _ _ _)
+
+oversizedRequestIdNoPath : (c d v u : Bool) →
+  MultiParentRevivalAdmissible (multiParentRevivalReceipt c d false v u) → ⊥
+oversizedRequestIdNoPath c d v u (multiParentRevivalAdmissible _ _ () _ _)
+
+preGateAdapterTouchNoPath : (c d r u : Bool) →
+  MultiParentRevivalAdmissible (multiParentRevivalReceipt c d r false u) → ⊥
+preGateAdapterTouchNoPath c d r u (multiParentRevivalAdmissible _ _ _ () _)
+
+uncertainCommitRetryNoPath : (c d r v : Bool) →
+  MultiParentRevivalAdmissible (multiParentRevivalReceipt c d r v true) → ⊥
+uncertainCommitRetryNoPath c d r v (multiParentRevivalAdmissible _ _ _ _ ())
+
+record MacroPresetExpansionReceipt : Set where
+  constructor macroPresetExpansionReceipt
+  field
+    hyphenNormalizedToUnderscore : Bool
+    multiMacroLineFullyExpanded : Bool
+    literalMacroTokenLeaked : Bool
+
+record MacroPresetExpansionAdmissible (r : MacroPresetExpansionReceipt) : Set where
+  constructor macroPresetExpansionAdmissible
+  field
+    normalized : MacroPresetExpansionReceipt.hyphenNormalizedToUnderscore r ≡ true
+    expanded : MacroPresetExpansionReceipt.multiMacroLineFullyExpanded r ≡ true
+    noLeak : MacroPresetExpansionReceipt.literalMacroTokenLeaked r ≡ false
+
+unnormalizedHyphenMacroNoPath : (e l : Bool) →
+  MacroPresetExpansionAdmissible (macroPresetExpansionReceipt false e l) → ⊥
+unnormalizedHyphenMacroNoPath e l (macroPresetExpansionAdmissible () _ _)
+
+incompleteMacroChainNoPath : (n l : Bool) →
+  MacroPresetExpansionAdmissible (macroPresetExpansionReceipt n false l) → ⊥
+incompleteMacroChainNoPath n l (macroPresetExpansionAdmissible _ () _)
+
+leakedLiteralMacroTokenNoPath : (n e : Bool) →
+  MacroPresetExpansionAdmissible (macroPresetExpansionReceipt n e true) → ⊥
+leakedLiteralMacroTokenNoPath n e (macroPresetExpansionAdmissible _ _ ())
