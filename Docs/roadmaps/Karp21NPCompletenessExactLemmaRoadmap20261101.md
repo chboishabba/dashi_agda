@@ -1,5 +1,30 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-03 P0 Golden safety cut and exact universe repair
+
+**Referee correction:** Agda `{-# OPTIONS --safe #-}` is coinfective. Previous PR #1445 modules were marked safe while importing older unsafeguarded DASHI modules. That is an **import-time acceptance blocker**, even in the absence of local postulates or holes. The earlier claim that a safe pragma on an importing leaf sufficed was incorrect. Also, `PR.Iff` consumes `Set` propositions, but `Runs.ExactBudgetAcceptingRun` is `Set₁`; the original P0 machine-run BIDI was ill-sorted.
+
+**Actual source changes (not merely roadmap labels):**
+
+- Promoted `FiniteWordSizeExact.agda` and `PolynomialReductionExact.agda` to `--safe` as stdlib-only/no-DASHI-import foundations.
+- Promoted `KleinGroupActionInvariantExact.agda`, `CookLevinCircuitGCTBoundary.agda`, `PNotEqualsNPCookFormulaPrefixCodecExact.agda`, `PNotEqualsNPCookFormulaBinaryCodecExact.agda`, `Karp21CookStrictTripleBitBoundaryExact.agda`, and `Karp21CookStrictSATLanguageExact.agda` in dependency order. None had local postulates/metas or explicit unsafe termination pragmas in the source audit.
+- Extracted the exact prior N21 Boolean equality/conjunction code into `Karp21BoolGoldenExact.agda` with `boolEqual`, `andBool`, `boolEqualSelf`, `andLeftTrue`, `andRightTrue`, `boolEqualTrueImpliesEqual`, `falseNotTrue`. The original N21 owners re-export these names; `Karp21CookFiniteOccurrenceWitnessExact.agda` and `Karp21CookExecutableFiniteVerifierBidiExact.agda` now import this one shared Golden owner instead of the graph verifier/consistency modules. The finite Cook witness is marked `--safe` with no local non-safe DASHI dependencies in the scanned import graph.
+- Split `Karp21CookStrictWordCanonicalReencodeExact.agda` (now imports only the above safe Cook syntax/Word chain) from `Karp21CookAllWordCertificateBoundExact.agda` (same verified-in-source inverse plus finite SAT verifier). The second theorem remains `k00StrictAcceptedWordCertificateBound` with the original exact type; `Karp21StrictSATBoundedCertificateNPBoundaryExact` imports the new owner.
+- Repaired the exact-run/witness BIDI universe mismatch via an `ExactRunWitnessIff (Run : Set₁) (Witness : Set)` record. The concrete tape bridge is now in **`Karp21StrictSATConcreteRunBidiExact.agda`**, explicitly *not* Golden because its older machine imports remain open. The separate `Karp21StrictSATBoundedCertificateNPBoundaryExact.agda` contains only the bounded strict SAT witness BIDI and conditional `PR.InNP` constructor and has a transitive-safe **repository source** import chain.
+- Isolated `Karp21GammaBinaryGoldenCoreExact.agda` with literal gamma(n+1) binary encoder, `successorBitsLeadingOne`, `successorBitsLength`, and `gammaPrefixExactlyBinarySize`. The weighted-graph serializer imports/re-exports this exact owner rather than owning a separate binary-digit definition. `Karp21GammaZigzagPartitionWordDecodeExact.agda` adds `zigzagUnzigzag`, completing the source-written **both-direction** ℤ↔ℕ zigzag equivalence.
+- Created explicit source-only checker roots `Karp21CookGoldenEverything.agda` and `Karp21GammaGoldenEverything.agda`, each marked `{-# OPTIONS --safe #-}` and importing only transitive-safe DASHI owners in the static review. **No Agda binary was available locally and neither root has an acceptance receipt.**
+- Added `scripts/check_karp21_golden_agda_import_closure.py`. It deterministically reports missing DASHI dependencies, importer/imported `--safe` violations, postulate/hole/unsafe termination markers, mismatched module paths, and a non-Golden focused entry root. It is a static preflight and explicitly does **not** claim Agda kernel acceptance. The full `Karp21Everything.agda` root is not Golden and its imports remain open.
+
+**Precise remaining theorem cut:**
+1. Run and repair real `agda -i . DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda` and the gamma Golden root; record pinned SHA, compiler version, full diagnostics, and success only after the kernel accepts them.
+2. P0 actual `k00StrictSATMachineVerifierClock` and nondegenerate `PR.PolynomialCostModel` evidence for `k00StrictSATInNP`; `k00UniformConcreteTapeToSATWordPolynomialClock`; universal Cook–Levin reduction source and same-language kernel receipt.
+3. P1 full `gammaReadEncodeRoundTrip`, `partitionWordDecodeEncode`, `completeGraphGammaGraphDecodeSameObject`, `scaledCompleteWordFaithful`, parser budget-guard redundancy, signed weight bit-cost and N21/E20 concrete polynomial machine clocks.
+4. P2 the 19 other historical reductions, all 21 verifier/membership receipts, total binary encoders and costs; P3 instantiate `CertifiedKarpNetwork` and kernel accept the 21 conclusions.
+
+**Accounting:** import-safe *source* closure for two focused Golden roots is not synonymous with typechecking, machine-clock certificates, Karp NP-completeness or the Clay separation. Certified 20-edge/21-node counts remain **0/20 and 0/21**. Keep Cook 1971, Leonid Levin 1973, Karp 1972, Elias gamma code and Agda stdlib numerical owners separately credited.
+
+
+
 ## 2026-11-03 E20 image-only exceptional encoded-word closure
 
 `Karp21EncodedFixedGraphWordsExact.agda` is imported into the focused root. It source-writes `encodedFixedUnitWordAccepts` (literal gamma-encoded original +1 edge / W=1 target has a true/false cut), `encodedFixedNoWordRejects` (same +1 edge / W=2 rejects all four cuts after the actual binary graph decoder), and `fixedUnitWordFaithful` (BIDI on the source-owned unit graph). No alternative target truth marker is used.
