@@ -31,6 +31,7 @@ import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31Probe
 import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as TSFVArrow
 import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as TSFVKKSameMetric
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
+import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
 import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
@@ -101,6 +102,17 @@ open YMKKHodge public using
   ; euclideanStarSquareIsPositive
   ; sameSourceDirectionalLorentzSignature
   ; creutzFiveEuclideanIsNotKK
+  )
+open FiveSectorBIDI public using
+  ( threeToTwoExact
+  ; fourToThreeExact
+  ; fiveToFourExact
+  ; fiveMatchesFourForcesCrossZero
+  ; fourMatchesThreeForcesCrossZero
+  ; threeMatchesTwoForcesCrossZero
+  ; fiveDoesNotAutomaticallyMatchFour
+  ; matchedFiveToTwo
+  ; selectedLorentzian31FromSameMetric
   )
 
 ------------------------------------------------------------------------
