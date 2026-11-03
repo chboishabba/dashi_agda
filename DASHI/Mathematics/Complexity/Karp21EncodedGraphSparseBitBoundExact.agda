@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact where
 
 ------------------------------------------------------------------------
@@ -21,9 +20,12 @@ module DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact where
 -- Attribution: Karp (1972) weighted MAX CUT; DASHI original gamma
 -- signed graph serializer, finite weighted verifier and N21 sparse
 -- endpoint certificate owners. No postulates or oracle-cost flags.
+-- This integration owner does NOT declare --safe until upstream graph
+-- modules have a transitive-safe import closure and a kernel receipt.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Integer.Base using (∣_∣)
 open import Data.Nat.Base using (_≤_; z≤n)
 import Data.Nat.Properties as NatP
 open import Data.List.Base using (List; []; _∷_; _++_; length)
@@ -31,7 +33,6 @@ import Data.List.Properties as ListP
 open import Data.Product using (_,_; proj₂)
 open import Relation.Binary.PropositionalEquality using (sym)
 import Data.Fin.Base as Fin
-import Data.Integer.Base
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact as Gamma
@@ -96,11 +97,11 @@ encodedGraphAtLeastSparseBits (n , graph) =
         (ListP.length-++-≤ʳ
           (Encode.encodeEdgeWords (Cut.edges graph)
             ++ Gamma.encodeGammaNat
-              (Data.Integer.Base.∣ Cut.threshold graph ∣))
+              (∣ Cut.threshold graph ∣))
           {xs = Gamma.encodeGammaNat (length (Cut.edges graph))})
         (ListP.length-++-≤ʳ
           (Gamma.encodeGammaNat (length (Cut.edges graph))
             ++ Encode.encodeEdgeWords (Cut.edges graph)
             ++ Gamma.encodeGammaNat
-              (Data.Integer.Base.∣ Cut.threshold graph ∣))
-          {xs = Gamma.encodeGammaNat n})))
+              (∣ Cut.threshold graph ∣))
+          {xs = Gamma.encodeGammaNat n}))))
