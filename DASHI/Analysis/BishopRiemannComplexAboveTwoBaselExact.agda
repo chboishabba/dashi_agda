@@ -28,6 +28,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
+open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 import Real as R
 import RealProperties as RP
 import Sequence as Seq
@@ -38,6 +39,10 @@ import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopRound11TrigModulusFromPythagoreanExact as Modulus
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpPositive
+import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
+import DASHI.Foundations.BishopRound11TrigAtZeroExact as Origin
+import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
 import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as NegativeExp
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
@@ -254,3 +259,123 @@ sourceComplexAboveTwoConverges inputs s aboveTwo inverseLaw pythagorean =
     s
     (sourceComplexAboveTwoMajorant
       inputs s aboveTwo inverseLaw pythagorean)
+
+
+------------------------------------------------------------------------
+-- FINITE SOURCE HEAD n=0: L(1)=0, exp_C(-s*0)=(1,0).
+-- Thus the original Basel comparison holds at every index, and
+-- the region-wide common-cutoff compiler needs no exceptional tail.
+------------------------------------------------------------------------
+
+zeroLogScalarExponent : (value : R.ℝ) →
+  R._≃_
+    (R._*_ (R.- value) (D.sourceCanonicalNatLogCandidate zero))
+    R.0ℝ
+zeroLogScalarExponent value =
+  let open RP.ℝ-Solver
+  in solve 1
+    (λ u → (⊝ u) ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+    RP.≃-refl value
+
+sourceComplexZeroRealIsOne :
+  (inputs : Round11.Round11BishopCutset)
+  (s : A.BishopComplex) →
+  let terms = D.bishopDirichletExponentialTerm
+       (Route.round11MachinTranscendentals inputs)
+       D.sourceCanonicalNatLogCandidate
+  in
+  R._≃_ (A.re (terms s zero)) R.1ℝ
+sourceComplexZeroRealIsOne inputs s =
+  RP.≃-trans
+    (RP.*-cong
+      (RP.≃-trans
+        (ExpCong.bishopExpCongruent
+          (zeroLogScalarExponent (A.re s)))
+        ExpPositive.bishopExpZero)
+      (RP.≃-trans
+        (TrigCong.bishopCosCongruent
+          (Round11.round11ConcreteTermIdentification inputs)
+          (zeroLogScalarExponent (A.im s)))
+        (Origin.round11CosineAtZero inputs)))
+    (RP.*-identityˡ R.1ℝ)
+
+sourceComplexZeroImagIsZero :
+  (inputs : Round11.Round11BishopCutset)
+  (s : A.BishopComplex) →
+  let terms = D.bishopDirichletExponentialTerm
+       (Route.round11MachinTranscendentals inputs)
+       D.sourceCanonicalNatLogCandidate
+  in
+  R._≃_ (A.im (terms s zero)) R.0ℝ
+sourceComplexZeroImagIsZero inputs s =
+  RP.≃-trans
+    (RP.*-cong
+      (RP.≃-trans
+        (ExpCong.bishopExpCongruent
+          (zeroLogScalarExponent (A.re s)))
+        ExpPositive.bishopExpZero)
+      (RP.≃-trans
+        (TrigCong.bishopSinCongruent
+          (Round11.round11ConcreteTermIdentification inputs)
+          (zeroLogScalarExponent (A.im s)))
+        (Origin.round11SineAtZero inputs)))
+    (let open RP.ℝ-Solver
+     in solve 0
+       (Κ 1ℚᵘ ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+       RP.≃-refl)
+
+sourceComplexZeroBaselBound :
+  (inputs : Round11.Round11BishopCutset)
+  (s : A.BishopComplex) →
+  let terms = D.bishopDirichletExponentialTerm
+       (Route.round11MachinTranscendentals inputs)
+       D.sourceCanonicalNatLogCandidate
+  in
+  (R._≤_ (R.∣ A.re (terms s zero) ∣) (Basel.baselTerm zero))
+  ×
+  (R._≤_ (R.∣ A.im (terms s zero) ∣) (Basel.baselTerm zero))
+sourceComplexZeroBaselBound inputs s =
+  RP.≤-respˡ-≃
+    (RP.≃-symm
+      (RP.∣-∣-cong (sourceComplexZeroRealIsOne inputs s)))
+    (RP.≤-reflexive (Basel.absoluteBaselTerm zero))
+  ,
+  RP.≤-respˡ-≃
+    (RP.≃-symm
+      (RP.∣-∣-cong (sourceComplexZeroImagIsZero inputs s)))
+    (Dirichlet.zeroAbsBelowBasel zero)
+
+-- All-index variable-complex-s majorant. The Pythagorean at each
+-- literal source phase and canonical exp/log inverse remain explicit.
+sourceComplexAboveTwoMajorantAllIndices :
+  (inputs : Round11.Round11BishopCutset)
+  (s : A.BishopComplex) →
+  R._<_ D.sourceTwoReal (A.re s) →
+  ((n : Nat) →
+    R._≃_
+      (Exp.bishopExp (D.sourceCanonicalNatLogCandidate n))
+      (NatReal.natReal (suc n))) →
+  ((n : Nat) → sourceSelectedPythagorean inputs s n) →
+  Dirichlet.BishopDirichletBaselMajorantAt
+    (D.bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs)
+      D.sourceCanonicalNatLogCandidate)
+    s
+sourceComplexAboveTwoMajorantAllIndices
+    inputs s aboveTwo inverseLaw pythagorean = record
+  { Dirichlet.dominationStart = zero
+  ; Dirichlet.realDomination = λ
+      { zero _ → proj₁ (sourceComplexZeroBaselBound inputs s)
+      ; (suc n) _ →
+          proj₁ (sourceComplexAboveTwoCoordinateBounds
+            inputs s n aboveTwo (inverseLaw (suc n))
+            (pythagorean n))
+      }
+  ; Dirichlet.imagDomination = λ
+      { zero _ → proj₂ (sourceComplexZeroBaselBound inputs s)
+      ; (suc n) _ →
+          proj₂ (sourceComplexAboveTwoCoordinateBounds
+            inputs s n aboveTwo (inverseLaw (suc n))
+            (pythagorean n))
+      }
+  }
