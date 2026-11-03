@@ -953,6 +953,7 @@ import DASHI.Physics.YangMills.YMClayNativeCyclicFinIsoSafeExact as SUNNativeFin
 import DASHI.Physics.YangMills.YMClayNativeBlockedPeriodicBondWeldExact as SUNNativeBlockWeld
 import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as SUNNativeBlockHolonomy
 import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SUNPhysicalBlockedHolonomy
+import DASHI.Physics.YangMills.YMClayNativeSideFourTwoBlockEndpointExact as SUNSideFourBlockEndpoint
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
@@ -1380,3 +1381,14 @@ open SUNPhysicalBlockedHolonomy public using
   ; nativeSUNBlockGaugeLawAtFineEndpoint
   ; NativeSUNBlockEndpoint
   ; nativeSUNBlockGaugeLawOnCoarse)
+
+------------------------------------------------------------------------
+-- R445 finite selected side-four M=L=2 witness:
+-- exact periodic 2-step fine endpoint for the existing original
+-- 1024-link lattice; consequently no externally supplied block-endpoint
+-- equality remains for the *specific* side-four SU(N) coarse block.
+-- General M,L, physical Gibbs/RG pushforward, RP and limits stay open.
+------------------------------------------------------------------------
+open SUNSideFourBlockEndpoint public using
+  (sideFourTwoBlockEndpoint
+  ; sideFourSUNBlockGaugeCovariant)
