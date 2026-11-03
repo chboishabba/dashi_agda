@@ -104,4 +104,4 @@ encodedGraphAtLeastSparseBits (n , graph) =
             ++ Encode.encodeEdgeWords (Cut.edges graph)
             ++ Gamma.encodeGammaNat
               (∣ Cut.threshold graph ∣))
-          {xs = Gamma.encodeGammaNat n}))))
+          {xs = Gamma.encodeGammaNat n})))
