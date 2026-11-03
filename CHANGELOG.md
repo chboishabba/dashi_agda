@@ -204,3 +204,11 @@ monitor surface.
 
 
 - Specialized the Machin actual completed-zeta square directly to original Bishop exp/negative-log constructed Dirichlet terms, preserving exact real+imag coordinate equality and explicit original analytic agreement gates.
+
+
+## 2026-11-03 — Bishop K04d/K05 exact source reuse and conditional 2π period
+
+- Added `DASHI/Analysis/BishopMachinTwoPiPeriodFromImaginaryProductExact.agda`: from existing source-native `Round11ImaginaryExpMultiplicative` and actual Machin quarter `cos_B ≃ sin_B`, derive sine and cosine period `2 * bishopMachinPi` via two π-shifts, trig setoid congruence, reassociation and double negation. No new axioms.
+- Attached new source owner to `EverythingTOESymmetryResolved369.agda`, `Unifier.agda`, and `Unified/Everything.agda`.
+- Added exact theorem-owner audit `Docs/roadmaps/BishopK04dK05SourceNativeMaxCut20261103.md`; synchronized canonical remaining-lemma register and TODO.
+- **Evidence:** source-written and GitHub-committed, not Agda-kernel-checked. Full completion is still blocked by the canonical native exp/log inverse at Nat successors, mixed signed-factorial imaginary exponential Cauchy product, real finite-term/limit zeta continuity with original same-object identification, and independent trigonometric π characterization. The previously separated Pythagorean proof is a *consumer* of the mixed product, not a third gate.
