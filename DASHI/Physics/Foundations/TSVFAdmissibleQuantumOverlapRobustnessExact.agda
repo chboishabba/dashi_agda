@@ -487,7 +487,84 @@ wrongOddsAtThree = refl
 -- contradict logical admissibility of both histories.
 
 ------------------------------------------------------------------------
--- ACTUAL ADMISSIBLE HISTORY COUNTEREXAMPLE.
+-- LARGE-BOUNDS VERSION WITH TWO INDEPENDENT DISTURBED-FACTOR WEIGHTS.
+-- gammaRight/gammaWrong below are nonnegative BORN WEIGHTS, not
+-- unspecified complex gamma amplitudes. Their physical derivation from
+-- the original 2017 disturbed-environment states remains a separate leaf.
+------------------------------------------------------------------------
+
+weightedRightRaw : Nat → Nat → Nat
+weightedRightRaw gammaRight k = gammaRight * rightRaw k
+
+weightedWrongRaw : Nat → Nat → Nat
+weightedWrongRaw gammaWrong k = gammaWrong * wrongRaw k
+
+weightedBornMass :
+  (gammaRight gammaWrong k : Nat) →
+  1 ≤ gammaRight →
+  BinaryRationalMass
+weightedBornMass gammaRight gammaWrong k gammaRightPositive =
+  binaryRationalMass
+    (weightedRightRaw gammaRight k)
+    (weightedWrongRaw gammaWrong k)
+    (weightedRightRaw gammaRight k + weightedWrongRaw gammaWrong k)
+    refl
+    (ℕₚ.≤-trans
+      (ℕₚ.*-mono-≤ gammaRightPositive (oneAtMostRightPower k))
+      (ℕₚ.m≤m+n
+        (weightedRightRaw gammaRight k)
+        (weightedWrongRaw gammaWrong k)))
+
+weightedBornNormalizes :
+  (gammaRight gammaWrong k : Nat)
+  (positive : 1 ≤ gammaRight) →
+  rightNumerator (weightedBornMass gammaRight gammaWrong k positive)
+    + wrongNumerator (weightedBornMass gammaRight gammaWrong k positive)
+  ≡ denominator (weightedBornMass gammaRight gammaWrong k positive)
+weightedBornNormalizes gammaRight gammaWrong k positive =
+  normalized (weightedBornMass gammaRight gammaWrong k positive)
+
+-- The cross-multiplication form of the wrong-branch upper bound
+--   P_wrong <= (9/25)^k
+-- after common positive denominators are cancelled.
+-- No division under an unproved nonzero denominator is used.
+wrongBornTailBoundCrossMultiplied :
+  (k : Nat) →
+  wrongRaw k * rightRaw k
+  ≤ wrongRaw k * (rightRaw k + wrongRaw k)
+wrongBornTailBoundCrossMultiplied k =
+  ℕₚ.*-mono-≤ ℕₚ.≤-refl
+    (ℕₚ.m≤m+n (rightRaw k) (wrongRaw k))
+
+-- A zero wrong disturbance factor is an explicit infinite-odds branch,
+-- not a division-by-zero theorem.
+oneAtMostOne : 1 ≤ 1
+oneAtMostOne = ℕₚ.≤-refl
+
+zeroWrongFactorGivesZeroWrongMassCorrect :
+  (k : Nat) →
+  wrongNumerator (weightedBornMass 1 0 k oneAtMostOne)
+  ≡ zero
+zeroWrongFactorGivesZeroWrongMassCorrect k = refl
+
+-- Disturbance factors can overwhelm any one finite redundancy regime.
+-- At k=2 the selected right weight is 1*625 and wrong weight 100*81.
+-- This concretely refutes the invalid conclusion "k positive => robust"
+-- without a controlled gamma ratio.
+adversarialWrongWeightAtTwo :
+  weightedWrongRaw 100 2 ≡ 8100
+adversarialWrongWeightAtTwo = refl
+
+adversarialRightWeightAtTwo :
+  weightedRightRaw 1 2 ≡ 625
+adversarialRightWeightAtTwo = refl
+
+adversarialWrongDominatesRightAtTwo :
+  weightedRightRaw 1 2 ≤ weightedWrongRaw 100 2
+adversarialWrongDominatesRightAtTwo =
+  ℕₚ.m≤m+n 625 7475
+
+
 -- One of the two original bidirectional toy histories can be compatible
 -- and assigned *zero* quantum weight. Logical admissibility alone is
 -- insufficient for nonzero postselection or finite division.
