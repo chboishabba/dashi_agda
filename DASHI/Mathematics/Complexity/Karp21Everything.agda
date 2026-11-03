@@ -126,3 +126,9 @@ import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact
 import DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact
 
 import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphEndpointOrderExact
+
+import DASHI.Mathematics.Complexity.Karp21UpperPairStructuralLexOrderExact
+
+import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictLexExact
+
+import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictAfterExact
