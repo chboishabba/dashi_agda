@@ -1,3 +1,5 @@
+**Additional exact finite obstruction:** `globalStrictReversalRankImpossible` in the same Golden module proves that no Nat-valued rank can strictly decrease under **the original history-reversal involution on every history**: the explicit `(stateZero,stateZero)` history is fixed by reversal, making strict descent irreflexive. This is a useful no-go for conflating reversal with collapse evolution; it does **not** prohibit coarse-grained, filtered or boundary-selected directional dynamics. Agda exact-head check remains pending.
+
 ## 2026-11-03 — actual same-metric TSFV → KK/YM transport (source-written)
 
 New Golden Agda adapter: `DASHI/Physics/Foundations/TSFVKKSameMetricTransportExact.agda`.
