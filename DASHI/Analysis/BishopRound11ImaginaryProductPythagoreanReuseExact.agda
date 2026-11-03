@@ -25,6 +25,7 @@ module DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact where
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Product.Base using (_×_; proj₁; proj₂)
 
+open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 import Real as R
 import RealProperties as RP
 import DASHI.Analysis.BishopSetoidComplexExact as C
@@ -179,3 +180,81 @@ round11MachinTrigEndpointFromImaginaryProduct
     quarterCosEqualsSin
     (round11PythagoreanFromImaginaryProduct
       inputs product Quarter.machinQuarterAngle)
+
+
+------------------------------------------------------------------------
+-- K05: GENUINE ORIGINAL ROUND11 π-SHIFT SEMANTICS.
+-- Once the source quarter-angle tangent equality and the one
+-- imaginary Cauchy product hold, the same original signed-factorial
+-- sine/cosine satisfy the pi-shift sign changes. These results are
+-- NOT used to assume an independent geometric pi characterization.
+------------------------------------------------------------------------
+
+round11SineShiftByMachinPi :
+  (inputs : Round11.Round11BishopCutset) →
+  (product : Round11ImaginaryExpMultiplicative inputs) →
+  R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
+  (x : R.ℝ) →
+  R._≃_
+    (sinB inputs (R._+_ x Machin.bishopMachinPi))
+    (R.-_ (sinB inputs x))
+round11SineShiftByMachinPi inputs product quarterEqual x =
+  let
+    endpoint =
+      round11MachinTrigEndpointFromImaginaryProduct
+        inputs product quarterEqual
+    laws =
+      C.imaginaryExponentialProductGivesAddition
+        (Route.round11MachinTranscendentals inputs)
+        x Machin.bishopMachinPi
+        (product x Machin.bishopMachinPi)
+  in
+  RP.≃-trans
+    (proj₁ laws)
+    (RP.≃-trans
+      (RP.+-cong
+        (RP.*-cong RP.≃-refl (proj₂ endpoint))
+        (RP.*-cong RP.≃-refl (proj₁ endpoint)))
+      (let open RP.ℝ-Solver
+       in solve 2
+         (λ sx cx →
+           (sx ⊗ (⊝ Κ 1ℚᵘ)) ⊕ (cx ⊗ Κ 0ℚᵘ)
+           ⊜ (⊝ sx))
+         RP.≃-refl
+         (sinB inputs x)
+         (cosB inputs x)))
+
+round11CosineShiftByMachinPi :
+  (inputs : Round11.Round11BishopCutset) →
+  (product : Round11ImaginaryExpMultiplicative inputs) →
+  R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
+  (x : R.ℝ) →
+  R._≃_
+    (cosB inputs (R._+_ x Machin.bishopMachinPi))
+    (R.-_ (cosB inputs x))
+round11CosineShiftByMachinPi inputs product quarterEqual x =
+  let
+    endpoint =
+      round11MachinTrigEndpointFromImaginaryProduct
+        inputs product quarterEqual
+    laws =
+      C.imaginaryExponentialProductGivesAddition
+        (Route.round11MachinTranscendentals inputs)
+        x Machin.bishopMachinPi
+        (product x Machin.bishopMachinPi)
+  in
+  RP.≃-trans
+    (proj₂ laws)
+    (RP.≃-trans
+      (RP.+-cong
+        (RP.*-cong RP.≃-refl (proj₂ endpoint))
+        (RP.-‿cong
+          (RP.*-cong RP.≃-refl (proj₁ endpoint))))
+      (let open RP.ℝ-Solver
+       in solve 2
+         (λ cx sx →
+           (cx ⊗ (⊝ Κ 1ℚᵘ)) ⊖ (sx ⊗ Κ 0ℚᵘ)
+           ⊜ (⊝ cx))
+         RP.≃-refl
+         (cosB inputs x)
+         (sinB inputs x)))
