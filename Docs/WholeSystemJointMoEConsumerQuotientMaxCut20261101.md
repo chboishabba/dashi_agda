@@ -700,3 +700,60 @@ ownership unchanged. No ESD edits, postulates or theorem
 reclassification. The local JSON files are not available
 through this connector, so these scores are the user's
 reported results rather than independently parsed artifacts.
+
+
+## 3 November 2026 — uploaded source-backed D3 result and GFX803 Nix admission
+
+The two **uploaded** (not guessed) matched-objective CPU training
+receipts are committed unchanged in LeechTransformer PR #4:
+`docs/receipts/c2_focused_matched_loss_20261103.json` and
+`docs/receipts/c2_dense_matched_loss_control_20261103.json`.
+Their teacher/student checkpoint identities and *exact exported
+optimizer training-window file hash* agree. Development scores
+for 45 fit rows and 13 dev rows (819 next-token targets) are:
+
+| Source model / execution | CE, nats |
+| --- | ---: |
+| Frozen dense | 2.5132008088 |
+| C2 guarded hybrid, alpha=.5 | 2.5158496153 |
+| Strict focused layer-1 C2 | 2.8918613345 |
+| Strict all-layer student-only C2 | 11.5599299653 |
+| Matched dense GELU control | **2.2160529764** |
+
+Difference strict C2 minus matched dense control =
+**+0.6758083581 CE nats**. The hybrid is *worse*
+than frozen dense by 0.0026488 CE nats on this train-derived
+development partition, yet remains calibration-admitted with
+its original dense FFN retained. No teacher erasure or
+C2 quality/efficiency win. Original model: Anatolii Kornienko
+(Leech-LILA). Attribution and theorem owner boundaries unchanged.
+
+The user correctly recalled a separate existing Nix runtime:
+`chboishabba/gfx803_compat_graph/gfx803_flake_v1`.
+It contains frozen ROCm 6.4 Python/PyTorch old-HSA/HIP control
+and a diagnostic upgrade shell with Cachix artifacts. Its
+historical Leech GPU numerical correctness verdict is
+**negative** despite successful GPU enumeration; some
+runs also trigger long async host resets. LeechTransformer
+now adds `scripts/gfx803_moe_gpu_gate.py` and
+`scripts/run_gfx803_moe_nix.sh` (plus CPU-only source
+tests), reusing that Nix+host-docker-python runtime with
+a fail-closed check of the REAL saved Leech teacher/student
+checkpoints, full actual training token window, intra-GPU
+repeatability, matched-objective gradients and one AdamW
+update before any `--device cuda` training run.
+Exact instructions/limitations:
+`docs/gfx803_gpu_training_admission_20261103.md`.
+
+**Evidence boundaries:** Nix shell source exists; physical
+GPU parity pass does NOT exist in this conversation.
+This new source has not been run on the user's hardware.
+`torch.cuda.is_available` alone cannot promote
+numerical correctness. A single-step pass cannot
+prove long-duration reset safety, speedup, token-quality
+success or the full student D4 criterion. The model's
+GPU optimization remains contingent on per-workload
+admission; CPU remains the verified quality reference.
+The existing Golden Agda `GFX803CompatibilityReceiptExact`
+already describes the query-indexed visibility/correctness
+separation; no new Agda machine-check acceptance claimed.
