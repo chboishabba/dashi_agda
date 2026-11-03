@@ -170,7 +170,7 @@ round11MachinTrigEndpointFromImaginaryProduct :
   ×
   (R._≃_
     (Quad.round11Cos inputs Machin.bishopMachinPi)
-    (R.- R.1ℝ))
+    (R.-_ R.1ℝ))
 round11MachinTrigEndpointFromImaginaryProduct
     inputs product quarterCosEqualsSin =
   Quad.actualMachinTrigEndpointFromDoubleAngle
