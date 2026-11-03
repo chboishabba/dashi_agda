@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact where
+
+-- Integration owner: not --safe until the imported weighted-graph
+-- theorem chain is independently checked and transitively --safe.
 
 ------------------------------------------------------------------------
 -- CANONICAL WIRE ENCODING FOR KARP'S SIGNED PARTITION / MAX CUT.
