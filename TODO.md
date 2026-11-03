@@ -1,3 +1,4 @@
+- [x] Reference-synthesize/check the exact original 1024-link C3 adjacent-transposition word: minimum 46,592 swaps (`scripts/check_ym_native_c3_adjacent_swap_word.py`), with independent Python action/cube checks; this is NOT an Agda proof of R443.F07.
 ### 2026-11-03 — YM authoritative exact-lemma max-cut / acceptance (PR #1444)
 
 - [x] Reconcile current R443/R445/R320/R333 producer families against `YangMillsSubmissionExactCutset` (191 theorem + 28 foundations/gauge = 219 field inventory), `BalabanClayFrozenFourCompletionContractExact` (four physically OPEN research families), and the literal `YangMillsClayProblemContractExact.ClayYangMillsSolution` endpoint.
