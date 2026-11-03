@@ -19,6 +19,7 @@ module DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact wh
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.List.Base using (List; []; _∷_; _++_; length)
 import Data.List.Properties as ListP
 open import Data.Maybe.Base using (just)
@@ -51,6 +52,34 @@ rawOfEdges :
   ∀ {n} → List (Cut.SignedUndirectedEdge n) → List Decode.RawEdge
 rawOfEdges [] = []
 rawOfEdges (edge ∷ rest) = rawOfEdge edge ∷ rawOfEdges rest
+
+------------------------------------------------------------------------
+-- Exact raw projection coordinates and count: the decoder's raw edge
+-- carrier is not merely equinumerous, but records the same Fin-to-Nat
+-- endpoints and the SAME signed weight, including negative and zero.
+------------------------------------------------------------------------
+
+rawOfEdgeFirstSame :
+  ∀ {n} (edge : Cut.SignedUndirectedEdge n) →
+  Decode.source (rawOfEdge edge) ≡ Fin.toℕ (Cut.first edge)
+rawOfEdgeFirstSame edge = refl
+
+rawOfEdgeSecondSame :
+  ∀ {n} (edge : Cut.SignedUndirectedEdge n) →
+  Decode.target (rawOfEdge edge) ≡ Fin.toℕ (Cut.second edge)
+rawOfEdgeSecondSame edge = refl
+
+rawOfEdgeSignedWeightSame :
+  ∀ {n} (edge : Cut.SignedUndirectedEdge n) →
+  Decode.signedWeight (rawOfEdge edge) ≡ Cut.weight edge
+rawOfEdgeSignedWeightSame edge = refl
+
+rawOfEdgesLength :
+  ∀ {n} (edges : List (Cut.SignedUndirectedEdge n)) →
+  length (rawOfEdges edges) ≡ length edges
+rawOfEdgesLength [] = refl
+rawOfEdgesLength (edge ∷ rest) =
+  cong suc (rawOfEdgesLength rest)
 
 ------------------------------------------------------------------------
 -- The ORIGINAL encodeEdgeWord is
