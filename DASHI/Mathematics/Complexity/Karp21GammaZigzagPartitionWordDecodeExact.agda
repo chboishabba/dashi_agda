@@ -158,6 +158,26 @@ readLowBitsAppendExact (bit ∷ bits) suffix
 -- Prefix compression does not inspect, alter or discard the suffix.
 -- Retaining a general starting zero count makes the proof reusable
 -- inside graph-edge, source-list and threshold decoders.
+------------------------------------------------------------------------
+-- The literal gamma(n + 1) decoder.
+-- Zero prefix count k -> leading 1 -> exactly k payload bits.
+-- A naked leading zero or an incomplete payload is rejected.
+------------------------------------------------------------------------
+
+readGammaZeros :
+  Nat → Word.BitWord → Maybe (Nat × Word.BitWord)
+readGammaZeros zeros [] = nothing
+readGammaZeros zeros (false ∷ rest) =
+  readGammaZeros (suc zeros) rest
+readGammaZeros zeros (true ∷ rest)
+  with readLowBits zeros rest
+... | nothing = nothing
+... | just (low , suffix) =
+  just ((pow2 zeros + low) ∸ suc zero , suffix)
+
+readGamma : Word.BitWord → Maybe (Nat × Word.BitWord)
+readGamma = readGammaZeros zero
+
 zeroPrefix : Nat → Word.BitWord
 zeroPrefix zero = []
 zeroPrefix (suc n) = false ∷ zeroPrefix n
@@ -190,26 +210,6 @@ readGammaPayloadExact payload suffix
     (payload ++ suffix)
         | readLowBitsAppendExact payload suffix =
   refl
-
-------------------------------------------------------------------------
--- The literal gamma(n + 1) decoder.
--- Zero prefix count k -> leading 1 -> exactly k payload bits.
--- A naked leading zero or an incomplete payload is rejected.
-------------------------------------------------------------------------
-
-readGammaZeros :
-  Nat → Word.BitWord → Maybe (Nat × Word.BitWord)
-readGammaZeros zeros [] = nothing
-readGammaZeros zeros (false ∷ rest) =
-  readGammaZeros (suc zeros) rest
-readGammaZeros zeros (true ∷ rest)
-  with readLowBits zeros rest
-... | nothing = nothing
-... | just (low , suffix) =
-  just ((pow2 zeros + low) ∸ suc zero , suffix)
-
-readGamma : Word.BitWord → Maybe (Nat × Word.BitWord)
-readGamma = readGammaZeros zero
 
 readSignedGamma :
   Word.BitWord → Maybe (ℤ × Word.BitWord)
