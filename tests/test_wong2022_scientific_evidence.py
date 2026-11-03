@@ -152,3 +152,32 @@ def test_patent_family_does_not_promote_to_legal_clearance():
         "freedomToOperateOpinionPaidIsFalse" in failure
         for failure in inspect_source_bundle(bundle)
     )
+
+
+def test_patent_claim_28_html_self_reference_stays_source_scoped():
+    from scripts.check_wong2022_scientific_evidence import PATENT_CLAIMS
+
+    bundle = load_source_bundle(ROOT)
+    assert not inspect_source_bundle(bundle)
+    bundle[PATENT_CLAIMS] = bundle[PATENT_CLAIMS].replace(
+        "htmlClaim28Dependencies = 26 ∷ 27 ∷ 28 ∷ []",
+        "htmlClaim28Dependencies = 26 ∷ 27 ∷ []",
+    )
+    assert any(
+        "htmlClaim28Dependencies" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
+
+
+def test_patent_claim_graph_does_not_implicitly_validate_legal_defect():
+    from scripts.check_wong2022_scientific_evidence import PATENT_CLAIMS
+
+    bundle = load_source_bundle(ROOT)
+    bundle[PATENT_CLAIMS] = bundle[PATENT_CLAIMS].replace(
+        "legalDefectConcludedIsFalse",
+        "legalDefectConcludedWithoutReview",
+    )
+    assert any(
+        "legalDefectConcludedIsFalse" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
