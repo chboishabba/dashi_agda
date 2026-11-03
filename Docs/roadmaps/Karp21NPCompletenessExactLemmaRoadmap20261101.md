@@ -1,5 +1,18 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-03 — E20 original gamma edge-triple and edge-list source correspondence
+
+**Source-written, NOT kernel-accepted:** `Karp21GammaWeightedEdgeListRoundTripExact.agda` (imported by the focused `Karp21Everything.agda` root), reusing the *existing* weighted edge serializer `Karp21GammaZigzagWordEncodeExact.encodeEdgeWord/encodeEdgeWords`, literal raw graph parser `Karp21GammaZigzagGraphWordDecodeExact.readOneRawEdge/readRawEdges`, numeric `gammaReadEncodeSuffix` and signed `readSignedGammaEncodeSuffix`. It does not manufacture an alternative graph.
+
+- `rawOfEdgeFirstSame`, `rawOfEdgeSecondSame`, `rawOfEdgeSignedWeightSame`, `rawOfEdgesLength`: exact `Fin.toℕ` endpoint addresses, unchanged `ℤ` weight (negative, zero, positive), and original edge count in the raw field projection.
+- `readActualEdgeWordSuffix`: `readOneRawEdge (encodeEdgeWord edge ++ suffix) ≡ just (rawOfEdge edge , suffix)`.
+- `readActualEdgeListWordSuffix`: `readRawEdges (length edges) (encodeEdgeWords edges ++ suffix) ≡ just (rawOfEdges edges , suffix)`, by induction, including empty lists and duplicate/order-preserving source lists.
+- `Karp21SignedPartitionActualGraphWordBoundaryExact.e20ScaledActualRawEdgeRoundTrip`: instantiates that identity **on `Actual.sourceIndexedWeightedGraph parts nonzero`**, not an independently chosen graph. Existing `Karp21UpperPairGraphEnumerationExact.actualKarpGraphCanonicalUpperPairs` and `Karp21IndexedUpperPairBijectionExact.upperTriangleOccurrenceUnique` are the reusable combinatorial source owners for the next validator theorem.
+
+**Precise remaining same-object lemmas** (do not erase them under the raw-parser equality): `sourceIndexedUpperPairLexIncreasing` for strict numeric lex order; `validateRawEdgesEncodedUpperPairs` showing the original `Fin.fromℕ<` endpoints and signed weights survive graph validation; `completeGraphGammaGraphDecodeSameObject` for vertex count, all edge occurrences, positive threshold and proof-field-independent cut acceptance; `scaledCompleteWordFaithful` for the actual source/output language. After this, pay graph parser/verification and E20 map polynomial machine clocks and NP-membership premises.
+
+**Verification authority:** only source-written Agda files, static delimiter/hole/postulate checks and explicit GitHub commits; no Agda kernel or CI run. These integration owners intentionally are not `--safe` until the old weighted graph dependency closure is refactored and checked. P0 universal Cook–Levin, all E01–E19 and 21 membership receipts, and concrete `CertifiedKarpNetwork` remain uncompleted. Certification stays 0/20 and 0/21.
+
 ## 2026-11-03 — N21 actual serialized signed-graph sparse certificate bit-bound
 
 **Completed at source level, NOT Agda-kernel accepted:** `Karp21EncodedGraphSparseBitBoundExact.agda`, imported by `Karp21Everything.agda`. It reuses the actual `Karp21GammaZigzagWordEncodeExact.encodeEdgeWord/encodeEdgeWords/encodeGraphWord`, `Karp21GammaSignedListRoundTripExact.gammaNatHasBit`, `Karp21SparseEndpointCutCertificateExact.twoPerEdge`, and `Karp21FiniteWeightedMaxCutVerifierExact.WeightedCutGraph`; it introduces no alternative graph or word carrier. Exact new declarations:
