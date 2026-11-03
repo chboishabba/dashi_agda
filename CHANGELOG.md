@@ -1,5 +1,10 @@
 
 
+### 2026-11-03 variable periodic finite gauge reference
+
+Extended the existing `scripts/check_ym_sun_six_plane_gauge_invariance_reference.py` (the original side-four fixture is preserved) to cover actual distinct periodic sides 2, 3, 5 with 64/324/2500 positive links and 96/486/3750 six-positive-plane plaquettes, respectively. Each test compares the original quaternion real traces under `gamma(source) * U * inverse(gamma(target))` and explicitly tests the intentionally WRONG missing-inverse action as a negative control. An independent local execution of the equivalent arithmetic passed on all three sizes: maximum correct real-trace differences 5.55e-16, 6.66e-16, 9.99e-16, while wrong-inverse controls had maxima 1.25, 1.82, 1.79. The **committed script itself has only been read back, not run in the repository environment**. These numerical checks are orientation diagnostics, not a kernel check, Haar integration, cylinder consistency, uniform decay or mass-gap proof.
+
+
 ### 2026-11-03 — R443/R445 every-n native gauge and Haar numerator theorem
 
 Added `YMClaySUNVariablePeriodicGaugeHaarExact.agda` atop the new variable-size product-Haar source. It reuses `YMClaySUNVariablePeriodicGibbsGaugeExact.periodicSUNGibbsDensityGaugeInvariant`, `YMClaySUNProductHaarGaugeFromOneLinkExact.productHaarNativeGaugeInvariant` and `YMClaySUNVariablePeriodicBondPointwiseExact.variableGibbsDensityPointwise`. The owner proves `periodicProductGaugeHaarInvariant`, `periodicGaugeNumeratorInvariant`, and `periodicGaugeNormalizedExpectationInvariant` for every actual periodic cutoff and every explicitly pointwise-congruent cylinder observable. It derives *whole finite product integral* local gauge invariance from one-link left/right invariance without a second independent full-lattice Haar axiom.
