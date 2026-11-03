@@ -30,6 +30,7 @@ import DASHI.Quantum.TSVF as TSVF
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as Source
 import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as SameMetric
+import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as Arrow
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
 import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact as R331
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31
@@ -93,11 +94,10 @@ record OriginalTSVFToOSClock
       (x : TSVF.QuantumSurface.Ket Q) →
       osRead (embedObserver x) ≡ observerRead x
 
-    -- Beyond integer iterates: physical group/semigroup time calibration,
-    -- strong continuity, domains, Stone uniqueness and gauge-invariant
-    -- OS source/observable covariance remain named, unpopulated here.
-    ContinuumStoneOSClockMatch : Set
-    realContinuumStoneOSClockMatch : ContinuumStoneOSClockMatch
+    -- Critical scope: no continuum Stone group is packaged as an arbitrary
+    -- freely chosen proof type here. The physical strongly continuous
+    -- translation group, common dense domain, spectral correspondence and
+    -- real OS gauge-invariant source are genuinely ABSENT and still required.
 
 open OriginalTSVFToOSClock public
 
@@ -161,7 +161,30 @@ record SameMetric31ClockUpgrade
   field
     sameObservedMetric : SameMetric.SameMetricTSFVKK
 
+    -- The chosen arrow/metric physical state is now explicitly linked to
+    -- the ORIGINAL observed forward TSVF ket, not just a signature label.
+    observerKetToSelectedPhysicalState :
+      TSVF.QuantumSurface.Ket Q →
+      Arrow.SelectedTSFVToLorentzPhysicalSource.PhysicalState
+        (SameMetric.arrowSource sameObservedMetric)
+
+    observedForwardKetIsMetricPhysicalState :
+      observerKetToSelectedPhysicalState (TSVF.forwardState E)
+      ≡ Arrow.SelectedTSFVToLorentzPhysicalSource.selectedState
+          (SameMetric.arrowSource sameObservedMetric)
+
 open SameMetric31ClockUpgrade public
+
+selectedObserverKetReallyIsMetricState :
+  ∀ {F Q E Observable Point Scalar system reconstruction Energy}
+    {clock : OriginalTSVFToOSClock {F} {Q} E
+      {Observable} {Point} {Scalar} {system} reconstruction Energy} →
+  (upgrade : SameMetric31ClockUpgrade clock) →
+  observerKetToSelectedPhysicalState upgrade (TSVF.forwardState E)
+  ≡ Arrow.SelectedTSFVToLorentzPhysicalSource.selectedState
+      (SameMetric.arrowSource (sameObservedMetric upgrade))
+selectedObserverKetReallyIsMetricState =
+  observedForwardKetIsMetricPhysicalState
 
 sameClockPhysicalMetricHas31Signature :
   ∀ {F Q E Observable Point Scalar system reconstruction Energy}
