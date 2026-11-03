@@ -75,6 +75,12 @@ open TSFVArrow public using
   ; lateObserverCanSeeFinal
   ; earlyAndLateVisibilityDiffer
   ; futureBoundaryChangesSmoothing
+  ; microscopicReversalInvolutive
+  ; microscopicActionTimeReversalInvariant
+  ; futureChoicesKeepSamePast
+  ; futureChoicesChangeHiddenHistory
+  ; futureChoicesHaveSameMicroscopicAction
+  ; historyNotRecoverableFromActionAlone
   ; selectedTSFVPhysicalSignatureIs31
   )
 open L31Probe public using
