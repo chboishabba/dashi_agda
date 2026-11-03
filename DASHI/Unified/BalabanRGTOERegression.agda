@@ -31,6 +31,8 @@ import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31Probe
 import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as TSFVArrow
 import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as TSFVKKSameMetric
 import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
+import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
+import DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact as TSVFQubit
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
@@ -111,6 +113,42 @@ open YMKKHodge public using
   )
 -- Genuine finite selected single-branch macro restoration, not a quantum
 -- or same-H_OS theorem. Original Aharonov/Cohen/Gruss/Landsberger credited.
+-- Source-native original two-boundary admissibility → original TSVF ABL
+-- plus actual nontrivial finite tensor environmental overlap and exact
+-- selected ABL normalization. Physical Hilbert/2017 gamma/OS still OPEN.
+open TSVFOverlap public using
+  ( rightAmplitude
+  ; wrongAmplitude
+  ; twoOutcomeABLNormalizes
+  ; sourceMatchedOriginalABLNormalizes
+  ; tensorOverlap
+  ; tensorSquaredOverlapReduces
+  ; actualTensorSquaredOverlapIsNineOverTwentyFivePower
+  ; selectedBornMass
+  ; selectedBornRightDominates
+  ; selectedBornDenominatorIsSum
+  ; weightedBornMass
+  ; weightedBornNormalizes
+  ; wrongBornTailBoundCrossMultiplied
+  ; zeroWrongFactorGivesZeroWrongMassCorrect
+  ; admissibleDoesNotForcePositiveWeight
+  ; adversarialWrongDominatesRightAtTwo
+  )
+open TSVFQubit public using
+  ( rightProjectorIdempotent
+  ; wrongProjectorIdempotent
+  ; rightTransitionAmplitude
+  ; wrongTransitionAmplitude
+  ; rightBornNumerator
+  ; wrongBornNumerator
+  ; finiteMeasurementTotalPositive
+  ; finiteOriginalABLContext
+  ; finiteOriginalABLNormalization
+  ; selectedJointTSVFSource
+  ; admissibleRightIsOriginalABLProjector
+  ; admissibleWrongIsOriginalABLProjector
+  ; selectedFiniteABLRightAtLeastWrong
+  )
 open TSVFMacro public using
   ( singleFaultMacroRobust
   ; twoFaultsReverseSelectedMacro
