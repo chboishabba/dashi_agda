@@ -204,3 +204,66 @@ sourceNegativeLogStrictlyPositive x zeroBelow belowOne =
   RP.<-≤-trans
     zeroBelow
     (sourceNegativeLogAtLeastPoint x zeroBelow belowOne)
+
+
+------------------------------------------------------------------------
+-- K04d-LOG: CONSTRUCTIVE MONOTONICITY OF THE ACTUAL CANONICAL
+-- NEGATIVE-LOG SERIES ON 0 < x <= y < 1.
+--
+-- This uses no generic logarithm order axiom. Every actual signed
+-- coefficient is x^(n+1)*1/(n+1). The pinned Bishop power-order
+-- theorem and multiplication by a nonnegative reciprocal prove the
+-- coordinate comparison. The pinned finite-sum monotonicity and
+-- order closure for limits yield the same-object analytic result.
+------------------------------------------------------------------------
+
+sourceNegativeLogTermMonotone :
+  (x y : R.ℝ) →
+  R.NonNegative x →
+  R._≤_ x y →
+  (n : Nat) →
+  R._≤_
+    (sourceNegativeLogTerm x n)
+    (sourceNegativeLogTerm y n)
+sourceNegativeLogTermMonotone x y xNonnegative x≤y n =
+  RP.*-monoʳ-≤-nonNeg
+    (Seq.x≤y∧nonNegx⇒xⁿ≤yⁿ
+      (suc n) x≤y xNonnegative)
+    (NatRecip.reciprocalNonnegative n)
+
+sourceNegativeLogPartialMonotone :
+  (x y : R.ℝ) →
+  R.NonNegative x →
+  R._≤_ x y →
+  (count : Nat) →
+  R._≤_
+    (Seq.SeriesOf (sourceNegativeLogTerm x) count)
+    (Seq.SeriesOf (sourceNegativeLogTerm y) count)
+sourceNegativeLogPartialMonotone x y xNonnegative x≤y count =
+  Seq.∑₀-mono-≤
+    (sourceNegativeLogTermMonotone x y xNonnegative x≤y)
+    count
+
+sourceNegativeLogMonotone :
+  (x y : R.ℝ) →
+  (xPositive : R._<_ R.0ℝ x) →
+  (xBelowOne : R._<_ x R.1ℝ) →
+  (yPositive : R._<_ R.0ℝ y) →
+  (yBelowOne : R._<_ y R.1ℝ) →
+  R._≤_ x y →
+  R._≤_
+    (sourceNegativeLogValue x xPositive xBelowOne)
+    (sourceNegativeLogValue y yPositive yBelowOne)
+sourceNegativeLogMonotone
+    x y xPositive xBelowOne yPositive yBelowOne x≤y =
+  Seq.xₙ≤yₙ⇒limxₙ≤limyₙ
+    (sourceNegativeLogPartialMonotone
+      x y
+      (RP.0≤x⇒nonNegx (RP.<⇒≤ xPositive))
+      x≤y)
+    (Bishop.bishopAbsoluteSeriesConverges
+      (sourceNegativeLogAbsolutelyConvergent
+        x xPositive xBelowOne))
+    (Bishop.bishopAbsoluteSeriesConverges
+      (sourceNegativeLogAbsolutelyConvergent
+        y yPositive yBelowOne))
