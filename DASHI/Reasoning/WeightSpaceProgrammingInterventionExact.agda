@@ -6,9 +6,6 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
-import DASHI.Reasoning.StructuralMetaphorTaskCompressionExact as Compression
-import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
-
 ------------------------------------------------------------------------
 -- WEIGHT-SPACE PROGRAMMING: SOURCE-SCOPED FINITE INTERVENTION CORE
 --
@@ -202,15 +199,28 @@ taskBehavior : ToyWorld → TaskBehavior
 taskBehavior loopingWorld = loops
 taskBehavior productiveWorld = completes
 
-stableChannelCollision :
-  Compression.CompressionFailureWitness stableChannel taskBehavior
-stableChannelCollision =
-  Compression.compressionFailureWitness
-    loopingWorld productiveWorld refl (λ ())
+-- Local proof: a common retained-channel observation cannot decode
+-- distinct task behaviors, even though both states have that observation.
+--
+-- Keep this theorem in the standalone --safe owner.  The separately
+-- imported non-golden bridge reuses canonical DASHI compression/realization
+-- owners, without forcing their legacy import graph into this safe core.
 
-stableChannelDoesNotDetermineTaskBehavior :
-  Realization.RepresentationRealizationWitness
-    stableChannel taskBehavior → ⊥
-stableChannelDoesNotDetermineTaskBehavior =
-  Realization.representationCollisionBlocksRealization
-    stableChannelCollision
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl q = q
+
+loopsNotCompletes : loops ≡ completes → ⊥
+loopsNotCompletes ()
+
+stableChannelCannotDecodeBehavior :
+  (decode : StableChannel → TaskBehavior) →
+  ((world : ToyWorld) →
+   taskBehavior world ≡ decode (stableChannel world)) →
+  ⊥
+stableChannelCannotDecodeBehavior decode commutes =
+  loopsNotCompletes
+    (trans (commutes loopingWorld)
+           (sym (commutes productiveWorld)))
