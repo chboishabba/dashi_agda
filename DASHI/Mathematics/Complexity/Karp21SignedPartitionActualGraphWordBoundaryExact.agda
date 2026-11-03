@@ -29,7 +29,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ)
 open import Data.List.Base using (List; _++_; length)
 open import Data.Nat.Base using (_≤_)
-open import Data.Product using (Σ; _,_; proj₂)
+open import Data.Product using (Σ; _×_; _,_; proj₂)
 open import Data.Maybe.Base using (Maybe; just)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -52,6 +52,8 @@ import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictLexExact as S
 import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictAfterExact as StrictAfter
 import DASHI.Mathematics.Complexity.Karp21DecodedWeightedCutSemanticBidiExact as Observed
 import DASHI.Mathematics.Complexity.Karp21FinDecoderIndexBidiExact as FinRound
+import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorPremisesExact as Premises
+import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorCompleteExact as Validator
 import DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExact as Indexed
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact as FixedWords
@@ -120,6 +122,71 @@ e20ActualScaledGraphReconstructionScoreSame parts nonzero labels =
     (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
     (e20ActualScaledGraphEndpointBounds parts nonzero)
     labels
+
+
+------------------------------------------------------------------------
+-- The exact requested P1 validator theorem on the SOURCE-OWNED E20
+-- complete graph. It proves real validation SUCCESS and equality of
+-- signed scores for every Boolean cut. The output is the parser's own
+-- dependent Fin edge list; no equality of offDiagonal proofs is used.
+-- This is not yet the outer gamma(n),gamma(m),gamma(W) word theorem.
+------------------------------------------------------------------------
+
+validateRawEdgesEncodedUpperPairs :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts))
+  (labels : Vec.Vec Bool (length parts)) →
+  Σ (List (Cut.SignedUndirectedEdge (length parts)))
+    (λ decoded →
+      (GraphWord.validateRawEdges (length parts)
+        GraphWord.noPrevious
+        (Raw.rawOfEdges
+          (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero)))
+        ≡ just decoded)
+      × (Cut.edgeListCutValue
+          (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+          labels
+         ≡ Cut.edgeListCutValue decoded labels))
+validateRawEdgesEncodedUpperPairs parts nonzero labels =
+  Validator.scaledCompleteRawValidatorCutScore
+    (Indexed.vectorOfList parts) labels
+
+-- The actual encoded edge payload decodes to the same raw triples,
+-- and precisely those triples are accepted by the source validator.
+-- The outer graph word and threshold transport remain separate.
+e20EncodedUpperPairsRawParserAndValidator :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts))
+  (suffix : Word.BitWord)
+  (labels : Vec.Vec Bool (length parts)) →
+  Σ (List (Cut.SignedUndirectedEdge (length parts)))
+    (λ decoded →
+      (GraphWord.readRawEdges
+        (length (Cut.edges
+          (Actual.sourceIndexedWeightedGraph parts nonzero)))
+        (Encode.encodeEdgeWords
+          (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+          ++ suffix)
+       ≡ just
+          (Raw.rawOfEdges
+            (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+          , suffix))
+      × ((GraphWord.validateRawEdges (length parts)
+          GraphWord.noPrevious
+          (Raw.rawOfEdges
+            (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero)))
+          ≡ just decoded)
+      × (Cut.edgeListCutValue
+          (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+          labels
+         ≡ Cut.edgeListCutValue decoded labels)))
+e20EncodedUpperPairsRawParserAndValidator
+  parts nonzero suffix labels
+  with validateRawEdgesEncodedUpperPairs parts nonzero labels
+... | decoded , (accepted , equalScore) =
+  decoded ,
+    (e20ScaledActualRawEdgeRoundTrip parts nonzero suffix ,
+      (accepted , equalScore))
 
 e20ActualScaledGraphPassesStrictAfter :
   (parts : List ℤ)
