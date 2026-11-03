@@ -78,6 +78,19 @@ agda -i . DASHI/Biology/GenBankInterpretationInteropExact.agda
 
 The Agda commands may require the repository's existing standard-library include configuration and compatible toolchain. An Agda source file and a static byte inventory do not substitute for an actual accepted kernel check.
 
+### Source-specific same-file crosswalk
+
+The reusable parser is kept generic. The separate `scripts/genbank_magnetoreception_crosswalk.py` invokes it and **requires successful original Git-blob parity in the same process** before linking the exact source feature labelled `cacna1d human plus pigeon` (index 8, `misc_feature`) to the Nimpf 2019 vestibular hypothesis and Justin Atkin's June 2020 discussion. It retains the original creator/paper-author distinction and marks both CRY4 and hepatic-macrophage research as **later contextual comparisons**, not parts identified in the 2020 GenBank file. The output's same-object protein, phenotype, public ontology edit, and native ITIR/SLR acceptance flags are all false.
+
+To reproduce after obtaining original bytes, also run:
+
+```sh
+python3 scripts/genbank_magnetoreception_crosswalk.py /path/to/original.gb \
+  --output /tmp/magnetoreception-source-crosswalk.json
+```
+
+Its source-written implementation and synthetic contract tests do **not** mean the exact creator-byte parity has been executed on this branch.
+
 ## Exact implementation cut
 
 | Gate | Deliverable / owner | Acceptance |
