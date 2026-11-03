@@ -19,12 +19,12 @@ module DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 import Agda.Builtin.List as List
 import Data.Vec.Base as Vec
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 open import Data.Empty using (⊥-elim)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (_∈_)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
@@ -68,11 +68,87 @@ originalPositiveBondCount : Nat → Nat
 originalPositiveBondCount L =
   listLength (Torus.elements (originalPositiveBondFinite L))
 
+-- The existing canonical cartesian enumeration has an exact count,
+-- not merely a list with a completeness proof.
+listLengthMap :
+  ∀ {A B : Set} (f : A → B) (xs : List.List A) →
+  listLength (Torus.map f xs) ≡ listLength xs
+listLengthMap f List.[] = refl
+listLengthMap f (List._∷_ x xs) =
+  cong suc (listLengthMap f xs)
+
+listLengthAppend :
+  ∀ {A : Set} (xs ys : List.List A) →
+  listLength (Torus._++_ xs ys)
+  ≡ listLength xs + listLength ys
+listLengthAppend List.[] ys = refl
+listLengthAppend (List._∷_ x xs) ys =
+  cong suc (listLengthAppend xs ys)
+
+listLengthCartesian :
+  ∀ {A B : Set} (xs : List.List A) (ys : List.List B) →
+  listLength (Torus.cartesian xs ys)
+  ≡ listLength xs * listLength ys
+listLengthCartesian List.[] ys = refl
+listLengthCartesian (List._∷_ x xs) ys =
+  trans
+    (listLengthAppend
+      (Torus.map (λ y → Torus.pair x y) ys)
+      (Torus.cartesian xs ys))
+    (cong₂ _+_
+      (listLengthMap (λ y → Torus.pair x y) ys)
+      (listLengthCartesian xs ys))
+
+listLengthAllCyclic :
+  (L : Nat) →
+  listLength (Torus.allCyclicIndices L) ≡ L
+listLengthAllCyclic zero = refl
+listLengthAllCyclic (suc L) =
+  cong suc
+    (trans
+      (listLengthMap Torus.sucᵢ (Torus.allCyclicIndices L))
+      (listLengthAllCyclic L))
+
+originalSiteCountFormula :
+  (L : Nat) →
+  listLength (Torus.elements (Torus.periodicTorus4Finite L))
+  ≡ (L * L) * (L * L)
+originalSiteCountFormula L =
+  trans
+    (listLengthCartesian
+      (Torus.cartesian (Torus.allCyclicIndices L) (Torus.allCyclicIndices L))
+      (Torus.cartesian (Torus.allCyclicIndices L) (Torus.allCyclicIndices L)))
+    (cong₂ _*_
+      (trans
+        (listLengthCartesian
+          (Torus.allCyclicIndices L) (Torus.allCyclicIndices L))
+        (cong₂ _*_
+          (listLengthAllCyclic L) (listLengthAllCyclic L)))
+      (trans
+        (listLengthCartesian
+          (Torus.allCyclicIndices L) (Torus.allCyclicIndices L))
+        (cong₂ _*_
+          (listLengthAllCyclic L) (listLengthAllCyclic L))))
+
+originalPositiveBondCountFormula :
+  (L : Nat) →
+  originalPositiveBondCount L
+  ≡ ((L * L) * (L * L)) * Torus.four
+originalPositiveBondCountFormula L =
+  trans
+    (listLengthCartesian
+      (Torus.elements (Torus.periodicTorus4Finite L))
+      (Torus.allCyclicIndices Torus.four))
+    (cong₂ _*_
+      (originalSiteCountFormula L)
+      (listLengthAllCyclic Torus.four))
+
 -- The side-four selected physical source uses 256 sites x 4 positive axes.
--- This is definitional enumeration cardinality, not a free linkCount field.
+-- It is a specialization of the general link-count theorem, not an axiom.
 originalSideFourCountIs1024 :
   originalPositiveBondCount Torus.four ≡ 1024
-originalSideFourCountIs1024 = refl
+originalSideFourCountIs1024 =
+  trans (originalPositiveBondCountFormula Torus.four) refl
 
 listValues :
   ∀ {A B : Set} (xs : List.List A) →
