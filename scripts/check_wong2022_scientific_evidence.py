@@ -25,7 +25,9 @@ LEDGER = "DASHI/Biology/Wong2022EvidenceLedgerExact.agda"
 SCIENTIFIC = "DASHI/Biology/Wong2022ScientificMetabolicBridgeExact.agda"
 AGGREGATE = "DASHI/Biology/Everything.agda"
 DOC = "docs/biology/Wong2022LysergicAcidEvidenceCrosswalk.md"
-PATHS = (CORE, SOURCE, LEDGER, SCIENTIFIC, AGGREGATE, DOC)
+BYTES = "scripts/audit_wong2022_source_bytes.py"
+BYTE_TEST = "tests/test_wong2022_source_bytes.py"
+PATHS = (CORE, SOURCE, LEDGER, SCIENTIFIC, AGGREGATE, DOC, BYTES, BYTE_TEST)
 AGDA_PATHS = (CORE, SOURCE, LEDGER, SCIENTIFIC, AGGREGATE)
 
 MARKERS: dict[str, tuple[str, ...]] = {
@@ -79,6 +81,18 @@ MARKERS: dict[str, tuple[str, ...]] = {
         "W22-01",
         "W22-07",
         "10.1038/s41467-022-28386-6",
+    ),
+    BYTES: (
+        "def file_digest_receipt(",
+        "publisher_file_identity_authenticated",
+        "independent_experiment_verification",
+        "source_data_xlsx",
+        "supplementary_pdf",
+    ),
+    BYTE_TEST: (
+        "test_local_workbook_digest_is_not_publisher_authentication",
+        "test_missing_workbook_structure_fails_closed",
+        "test_bad_expected_hash_rejected",
     ),
 }
 
