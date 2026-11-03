@@ -1,5 +1,11 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+## 2026-11-03 encoded fixed-graph exceptional branches
+
+`Karp21EncodedFixedGraphWordsExact.agda` implements the existing two-vertex unit-edge YES target and same edge with W=2 NO target as literal gamma/zigzag wire words. It explicitly constructs a cut for the unit-YES word and eliminates all four cut labels for the fixed-NO word using the source-owned signed integer threshold verifier; this is additional source-written verification of Karp's (1972) two exceptional reduction outputs, not a separate reduction concept. The E20 encoded-transport boundary now retains one `scaledCompleteWordFaithful` image obligation on the original source-only complete signed graph. The original Cook/Levin SAT roots, Karp combinatorial reduction and Agda standard-library binary conversion are credited in the companion roadmap. No Agda kernel acceptance or full source/target same-word proof is claimed.
+
+
+
 ## 2026-11-03 exact gamma/zigzag binary word model — source owners
 
 Original Karp-21 attribution: Richard M. Karp, "Reducibility Among Combinatorial Problems" (1972), DOI 10.1007/978-1-4684-2001-2_9. The independent Cook–Levin SAT root is attributed to Stephen Cook (1971) and Leonid A. Levin (1973). The gamma code follows the classical Elias prefix-code construction, applied here as gamma(n+1); signed zigzag maps positive n to 2n and negative -(n+1) to 2n+1. The exact reference implementation already lives in `scripts/karp21_signed_cut_binary_codec.py`. The Agda source owners added in PR #1445 are `Karp21GammaZigzagPartitionWordDecodeExact.agda`, `Karp21GammaZigzagGraphWordDecodeExact.agda` and `Karp21GammaZigzagWordEncodeExact.agda`. Binary conversion reuses the Agda standard library `Data.Nat.Binary.Base.fromℕ` (credit its original maintainers). The graph parser directly constructs the prior DASHI `WeightedCutGraph` with signed weights, range checks, ordered unique pairs and positive threshold; it does not use a parallel graph truth type.
