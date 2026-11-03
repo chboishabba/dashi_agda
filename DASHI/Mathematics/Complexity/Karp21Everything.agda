@@ -122,3 +122,5 @@ import DASHI.Mathematics.Complexity.Karp21GammaSignedListRoundTripExact
 import DASHI.Mathematics.Complexity.Karp21GammaGoldenEverything
 
 import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact
