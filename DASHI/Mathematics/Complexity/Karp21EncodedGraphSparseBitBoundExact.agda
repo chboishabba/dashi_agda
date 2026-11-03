@@ -24,7 +24,7 @@ module DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact where
 -- modules have a transitive-safe import closure and a kernel receipt.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (∣_∣)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
@@ -37,6 +37,7 @@ import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact as Gamma
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Zigzag
 import DASHI.Mathematics.Complexity.Karp21GammaSignedListRoundTripExact as Signed
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
@@ -147,3 +148,56 @@ encodedGraphAtLeastSparseBits (n , graph) =
           (NatP.≤-reflexive
             (bitWordLengthSameObject
               (Encode.encodeGraphWord (n , graph)))))))
+
+
+------------------------------------------------------------------------
+-- Original graph decoder's separate m*3 parse guard. Each listed edge
+-- literally contains gamma(u), gamma(v), gamma(zigzag(weight)).
+-- All THREE fields are nonempty, including zero and negative weights.
+------------------------------------------------------------------------
+
+encodedEdgeAtLeastThreeBits :
+  ∀ {n} (edge : Cut.SignedUndirectedEdge n) →
+  suc (suc (suc zero)) ≤ length (Encode.encodeEdgeWord edge)
+encodedEdgeAtLeastThreeBits edge
+  rewrite ListP.length-++
+    (Gamma.encodeGammaNat (Fin.toℕ (Cut.first edge)))
+    (Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge))
+      ++ Encode.encodeSignedGamma (Cut.weight edge))
+        | ListP.length-++
+    (Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge)))
+    (Encode.encodeSignedGamma (Cut.weight edge)) =
+  NatP.+-mono-≤
+    (Signed.gammaNatHasBit (Fin.toℕ (Cut.first edge)))
+    (NatP.+-mono-≤
+      (Signed.gammaNatHasBit (Fin.toℕ (Cut.second edge)))
+      (Signed.gammaNatHasBit
+        (Zigzag.zigzag (Cut.weight edge))))
+
+encodedEdgeWordsAtLeastTripleBits :
+  ∀ {n} (edges : List (Cut.SignedUndirectedEdge n)) →
+  (length edges * suc (suc (suc zero)))
+    ≤ length (Encode.encodeEdgeWords edges)
+encodedEdgeWordsAtLeastTripleBits [] = z≤n
+encodedEdgeWordsAtLeastTripleBits (edge ∷ rest)
+  rewrite ListP.length-++ (Encode.encodeEdgeWord edge)
+    (Encode.encodeEdgeWords rest) =
+  NatP.+-mono-≤
+    (encodedEdgeAtLeastThreeBits edge)
+    (encodedEdgeWordsAtLeastTripleBits rest)
+
+-- The positive threshold field comes after all edges, so the exact
+-- parser guard is implied by the actual source-generated serialization.
+encodedGraphEdgeParserBudget :
+  (instance : Graph.GraphInstance) →
+  (length (Cut.edges (proj₂ instance)) * suc (suc (suc zero)))
+    ≤ length
+       (Encode.encodeEdgeWords (Cut.edges (proj₂ instance))
+       ++ Gamma.encodeGammaNat (∣ Cut.threshold (proj₂ instance) ∣))
+encodedGraphEdgeParserBudget (n , graph) =
+  NatP.≤-trans
+    (encodedEdgeWordsAtLeastTripleBits (Cut.edges graph))
+    (appendLeftLengthLower
+      (Encode.encodeEdgeWords (Cut.edges graph))
+      (Gamma.encodeGammaNat (∣ Cut.threshold graph ∣)))
+
