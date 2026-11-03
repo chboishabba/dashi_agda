@@ -100,3 +100,9 @@ Lean `sourceMachinQuarterCosineEqualsSine`, `sourceMachinPiEvaluatesToClassicalP
 - **P1-π:** native source atan/tangent quarter equality and `NativeSinePositiveBeforeMachinPi` (or a correctly imported source-faithful semantic proof) for first-positive-zero minimality. A distinct period-uniqueness statement requires its own theorem.
 
 All new Agda golden files begin with `{-# OPTIONS --safe #-}`, contain no literal `postulate`, meta hole or termination bypass in the source. Their **transitive imports and exact-head elaboration have not been kernel-verified**, so acceptance remains OPEN. All Lean claims likewise remain source-written until their focused `lake env lean` checks run and pass on exact head. Lean PR #104 adds commands to its focused workflow and axiom printout. Preserve original mathematical and implementation author attribution.
+
+### 2026-11-03 final source-audit detail: literal K05 quarter bridge
+
+The Lean companion [PR #104](https://github.com/chboishabba/dashi_lean4/pull/104) now includes `originalSourceMachinAtanQuarter`, the **literal** `4 atan_B(1/5) - atan_B(1/239)` on the same pinned Bishop arctangent convergence binding. `originalAtanQuarter_equiv_MachinPiQuarter` transports this expression to the Bishop setoid class of `machinPiB/4`, and `originalAtanQuarterCosineEqualsSine` proves the quarter sin=cos at that *actual* arctangent expression in the faithful Lean mirror. This corrects the possible same-object gap of proving only a synthetic pi/4 alias. No cross-prover proof-term replay or exact-head Lean/Agda kernel acceptance is observed. In native golden Agda the original quarter equality remains OPEN.
+
+Pinned Mathlib v4.28 source readback verified the exact series theorem `Real.hasSum_pow_div_log_of_abs_lt_one`, the actual `zeta_eq_tsum_one_div_nat_add_one_cpow`, `differentiableAt_riemannZeta`, `differentiableAt_completedZeta`, and complex `natCast_log`. This is an API source check, not a successful Lean elaboration.
