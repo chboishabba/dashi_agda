@@ -1,3 +1,5 @@
+**P07 fail-closed correction:** the optional (3,1)/5D-KK same-metric upgrade now requires a typed actual original TSVF forward-ket → selected causal/Lorentz physical-state map with equality to the very selected reduced 4D metric-state object. Finite observer/OS one-step intertwiners still prove all finite iterates, while the earlier arbitrary ContinuumStoneOSClockMatch Set field has been removed: real-time strongly continuous group, Stone/Ward dense-core and full OS-gauge Hilbert are NOT manufactured. This respects standalone pure 4D Clay independence.
+
 ### 2026-11-03 exact 2017 complex ABL and original indexed OS-clock MAX-CUT
 
 [New four-module quantitative source ledger](../physics/TSVF2017ComplexABLAndOSSameClockMaxCut20261103.md). Original BidirectionallyAdmissibleHistoryFibre, original Q.TSVF, original CayleyDickson complex, rational order and original R331 OS-indexed Hamiltonian ownership are reused.
