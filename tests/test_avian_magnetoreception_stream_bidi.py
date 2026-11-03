@@ -101,3 +101,41 @@ def test_transcript_provenance_and_research_cut_preserved():
     assert "59388d04a5e7baa3465f84bcf25d71830e9e5d61c3ebc011d7c8ca05fda758c8" in src[DOC]
     assert "M08" in src[DOC]
     assert "No tested animal or human genetic gain of function" in src[DOC]
+
+
+def test_creator_published_design_is_dated_after_original_livestream():
+    src = load_sources(ROOT)
+    assert not inspect_source_contract(src)
+    assert "2020-06-17" in src[ADAPTER]
+    assert "2020-07-04T03:23:52Z" in src[ADAPTER]
+    assert "sourcePublishedMagnetoreceptionDesign" in src[ADAPTER]
+
+
+def test_publication_does_not_promote_to_validated_plasmid_or_human_sense():
+    src = load_sources(ROOT)
+    src[ADAPTER] = src[ADAPTER].replace(
+        "archivedDesignCorrectnessIndependentlyCheckedIsFalse",
+        "assumedDesignWorksBecauseFileExists",
+    )
+    assert any("archivedDesignCorrectnessIndependentlyCheckedIsFalse" in x
+               for x in inspect_source_contract(src))
+    src = load_sources(ROOT)
+    src[ADAPTER] = src[ADAPTER].replace(
+        "magnetoreceptionInEditedOrganismProvenIsFalse",
+        "assumedMagneticSenseBecauseDesignPublished",
+    )
+    assert any("magnetoreceptionInEditedOrganismProvenIsFalse" in x
+               for x in inspect_source_contract(src))
+
+
+def test_original_creator_license_and_commit_provenance_are_retained():
+    src = load_sources(ROOT)
+    src[DOC] = src[DOC].replace("CC BY-SA 4.0", "unattributed")
+    assert any("CC BY-SA 4.0" in x for x in inspect_source_contract(src))
+    src = load_sources(ROOT)
+    src[ADAPTER] = src[ADAPTER].replace(
+        "f83aaf2b3ada085d02d8a25cfdc4ae32c80fe09d",
+        "not_source_pinned",
+    )
+    assert any("f83aaf2b3ada085d02d8a25cfdc4ae32c80fe09d" in x
+               for x in inspect_source_contract(src))
