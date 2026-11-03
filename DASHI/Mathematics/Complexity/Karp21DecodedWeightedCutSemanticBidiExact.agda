@@ -23,11 +23,14 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Nat.Base using (_<_)
 open import Data.Product using (Σ; _,_)
 open import Data.Integer.Base using (ℤ)
 import Data.Integer.Base as Int
 open import Data.Empty using (⊥)
 import Data.Fin.Base as Fin
+import Data.Nat.Properties as NatP
+import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphEndpointOrderExact as Bounds
 import Data.Vec.Base as Vec
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -209,3 +212,53 @@ reconstructedWeightedEdgeScoreSame original firstBound secondBound labels =
     (reconstructWeightedEdge original firstBound secondBound)
     labels
     (reconstructWeightedEdgeFields original firstBound secondBound)
+
+
+------------------------------------------------------------------------
+-- Extend the SAME fieldwise Fin reconstruction pointwise over any
+-- original graph edge list whose actual endpoint bounds are known.
+-- This is not a second graph definition or a new encoding; it is a
+-- semantic lens for the original parser's dependent edge constructors.
+------------------------------------------------------------------------
+
+reconstructCanonicalEdges :
+  ∀ {n : Nat}
+    (originals : List (Cut.SignedUndirectedEdge n)) →
+  Bounds.AllCanonicalEdgeEndpoints originals →
+  List (Cut.SignedUndirectedEdge n)
+reconstructCanonicalEdges [] Bounds.canonicalNil = []
+reconstructCanonicalEdges
+  (edge ∷ rest)
+  (Bounds.canonicalCons (ordered , secondBound) tailBounds) =
+  reconstructWeightedEdge edge
+    (NatP.<-trans ordered secondBound)
+    secondBound
+  ∷ reconstructCanonicalEdges rest tailBounds
+
+reconstructCanonicalEdgesFields :
+  ∀ {n : Nat}
+    (originals : List (Cut.SignedUndirectedEdge n))
+    (bounds : Bounds.AllCanonicalEdgeEndpoints originals) →
+  SameWeightedEdgeLists originals
+    (reconstructCanonicalEdges originals bounds)
+reconstructCanonicalEdgesFields [] Bounds.canonicalNil = sameEdgeNil
+reconstructCanonicalEdgesFields
+  (edge ∷ rest)
+  (Bounds.canonicalCons (ordered , secondBound) tailBounds) =
+  sameEdgeCons
+    (reconstructWeightedEdgeFields edge
+      (NatP.<-trans ordered secondBound) secondBound)
+    (reconstructCanonicalEdgesFields rest tailBounds)
+
+reconstructedCanonicalListScoreSame :
+  ∀ {n : Nat}
+    (originals : List (Cut.SignedUndirectedEdge n))
+    (bounds : Bounds.AllCanonicalEdgeEndpoints originals)
+    (labels : Vec.Vec Bool n) →
+  Cut.edgeListCutValue originals labels
+    ≡ Cut.edgeListCutValue
+        (reconstructCanonicalEdges originals bounds) labels
+reconstructedCanonicalListScoreSame originals bounds labels =
+  sameWeightedEdgeListScore
+    originals (reconstructCanonicalEdges originals bounds)
+    labels (reconstructCanonicalEdgesFields originals bounds)
