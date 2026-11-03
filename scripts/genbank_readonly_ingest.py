@@ -93,6 +93,24 @@ def location_normalize(ast: dict) -> dict:
     raise ValueError("unknown location kind")
 
 
+def location_from_tree(ast: dict):
+    """Reconstruct Biopython exact locations from a normalized location AST."""
+    normalized = location_normalize(ast)
+    if normalized["kind"] == "span":
+        return SimpleLocation(
+            ExactPosition(normalized["start0"]),
+            ExactPosition(normalized["end0"]),
+            strand=normalized["strand"],
+        )
+    reconstructed = CompoundLocation(
+        [location_from_tree(p) for p in normalized["parts"]],
+        operator=normalized["operator"],
+    )
+    _require(reconstructed.strand == normalized["strand"],
+             "compound strand cannot round-trip")
+    return reconstructed
+
+
 def _spans(location: dict):
     if location["kind"] == "span":
         yield location
@@ -148,6 +166,10 @@ def parse_genbank_bytes(
         location = location_tree(feature.location, len(bases))
         _require(location_normalize(location) == location,
                  "feature location normalization differs")
+        _require(
+            location_tree(location_from_tree(location), len(bases)) == location,
+            "location AST reconstruction mismatch",
+        )
         _require(all(0 <= span["start0"] < span["end0"] <= len(bases)
                      for span in _spans(location)),
                  "compound location out of bounds")
