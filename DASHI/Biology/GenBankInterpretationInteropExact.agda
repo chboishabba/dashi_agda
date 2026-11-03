@@ -77,7 +77,7 @@ existingReopenOwner : Set
 existingReopenOwner = Reopen.RepairCandidate
 
 existingAvianPNFOwner : Set₁
-existingAvianPNFOwner = PNF.AvianCompassPNFSemanticBridge
+existingAvianPNFOwner = PNF.AvianCompassPNFSemanticBridgeCertificate
 
 originalCreatorAttribution : Sources.AttributedSource
 originalCreatorAttribution = Avian.thoughtEmporiumDigitalArchive
