@@ -1,5 +1,20 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-03 — N21 actual serialized signed-graph sparse certificate bit-bound
+
+**Completed at source level, NOT Agda-kernel accepted:** `Karp21EncodedGraphSparseBitBoundExact.agda`, imported by `Karp21Everything.agda`. It reuses the actual `Karp21GammaZigzagWordEncodeExact.encodeEdgeWord/encodeEdgeWords/encodeGraphWord`, `Karp21GammaSignedListRoundTripExact.gammaNatHasBit`, `Karp21SparseEndpointCutCertificateExact.twoPerEdge`, and `Karp21FiniteWeightedMaxCutVerifierExact.WeightedCutGraph`; it introduces no alternative graph or word carrier. Exact new declarations:
+
+- `encodedEdgeAtLeastTwoBits`: each signed graph edge's original wire serialization has at least two endpoint gamma bits, independent of weight magnitude or declared vertex count.
+- `encodedEdgeWordsAtLeastSparseBits`: `twoPerEdge (length edges) ≤ length (encodeEdgeWords edges)`, by induction on the *actual listed edges*, valid for empty graphs and arbitrary signed weights.
+- `encodedGraphAtLeastSparseBits`: `twoPerEdge (length (edges g)) ≤ encodingSize (encodeGraphWord (n , g))` for every typed graph. The source-owned gamma headers and threshold field cannot decrease bit length.
+
+This is the **encoder-side** size theorem, not the decoder's previously checked side condition. It rules out a specific incorrect `n ≤ inputBits` inference in sparse graphs; the certificate remains exactly `2m` bits where `m` is the listed edge count. It does **not** prove the canonical graph decoder accepts all legal serializer outputs, or the `m`-edge correspondence after parsing, or the graph cut-score/signed weight same-object theorem. `completeGraphGammaGraphDecodeSameObject`, `scaledCompleteWordFaithful`, `graphWordSizeGuardRedundantForCanonicalInputs`, `n21SparseVerifierBitTapePolynomialClock`, `scaledPartitionGraphMachineClock`, and `e20EncodedPolynomialReduction` stay OPEN.
+
+**Golden rule:** This integration owner intentionally has no `{-# OPTIONS --safe #-}` claim because it imports graph modules whose own transitive-safe closure is outstanding. No postulate, unsolved-hole marker, or termination pragma was introduced in this new source. No Agda kernel compilation or CI was run. Only the new source inequality is paid; keep 0/20 costed edges and 0/21 terminal NP-completeness results as **uncertified**. Continue the full K00→E01–E20/N01–N21→`CertifiedKarpNetwork` roadmap without treating this as a polynomial verifier clock.
+
+**Implementation TODO:** (1) kernel-check the focused K00 and gamma Golden roots; (2) establish sorted-unique `completeScaledPairEdges` graph-word decode/encode with the actual `Fin` endpoints and signed weights, using `Karp21UpperPairGraphEnumerationExact` and `Karp21IndexedUpperPairBijectionExact`; (3) derive the N21 decoder budget without a new rejection policy; (4) construct the concrete bit-machine cost receipts; (5) complete all remaining E01–E19/N01–N21 and the concrete DAG instance.
+
+
 ## 2026-11-03 P1 source-written gamma and signed PARTITION roundtrips
 
 The literal gamma/zigzag proof cut has moved from an open binary-value bridge to source-written same-object codec lemmas. All declarations below must still pass Agda kernel acceptance before being called proved.
