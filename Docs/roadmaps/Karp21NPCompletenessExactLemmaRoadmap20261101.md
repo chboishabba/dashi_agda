@@ -1,5 +1,19 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-03 — source-written original upper-triangle global lex order and parser guard reflection
+
+**Reuses original owner, no substitute graph:** \`Karp21IndexedUpperPairBijectionExact.allFin/allUpperPairs\`, \`Karp21UpperPairGraphEnumerationExact.actualKarpGraphCanonicalUpperPairs/mapCompose\`, \`Karp21FiniteCompleteGraphGeneratorExact.completeScaledPairEdges\`, \`Karp21SignedGraphScaleAndAppendExact.scaleEdgeWeightFour\`, and the literal \`Karp21GammaZigzagGraphWordDecodeExact.strictAfter\` Boolean comparator.
+
+- \`Karp21UpperPairStructuralLexOrderExact.agda\`: introduces structurally inductive \`AllAfter\`, \`StrictSorted\`, \`CrossBefore\`, and \`UpperPairBefore\` for source-owned finite pair addresses. \`allFinStrictIncreasing\` and \`allUpperPairsStrictLexOrder\` prove **every earlier listed address precedes every later address**, not merely distinctness. Uses the original head block \`headTail\`, tail lift \`tailPair\`, and proof that the entire head block precedes the entire tail block.
+- \`Karp21ScaledCompleteGraphStrictLexExact.agda\`: \`upperPairBeforeNumeric\` transports structural pair ordering into ordinary lex order of \`Fin.toℕ\` endpoints; \`scaledAddressNumericBefore\` and \`sourceIndexedScaledCompleteGraphStrictLex\` apply that to **every pair of earlier/later edges in the original signed 4× complete graph**. \`Karp21SignedPartitionActualGraphWordBoundaryExact.e20ActualScaledGraphStrictLex\` instantiates this on \`Actual.sourceIndexedWeightedGraph parts nonzero\`.
+- \`Karp21ScaledCompleteGraphStrictAfterExact.agda\`: \`strictAfterRecognizesLex\` proves that the existing parser's Boolean \`strictAfter (previous a b) u v\` evaluates to true for an actual numeric lex increase; \`numericLexImpliesActualParserAfter\` and \`sourceIndexedScaledGraphPassesStrictAfter\` apply that check to the original scaled edge list. \`E20.e20ActualScaledGraphPassesStrictAfter\` imports the same result on the original complete signed graph.
+- \`Karp21ScaledCompleteGraphEndpointOrderExact.agda\` and the earlier real graph \`2m≤encodedWordBits\` theorem remain independent antecedents for each edge's \`u<v<n\` validity and sparse witness size.
+
+**Mathematical boundary now narrower:** after raw gamma edge-list parse/replay, per-edge endpoint validity, all-pairs strict numeric lex order, and Bool \`strictAfter\` agreement, the E20 graph-word same-object wall is primarily \`validateRawEdgesEncodedUpperPairs\`: reconstruct the same \`Fin n\` indices from their natural numbers and comparator proofs, carry signed weights and ordered edges, handle dependent \`offDiagonal\` proof irrelevance semantically (not literal field equality), and identify decoded positive threshold. The existing standard-library \`FinP.toℕ-injective\`, \`FinP.toℕ-fromℕ<\`, \`FinP.toℕ<n\` are the correct owners for this next bridge, already referenced by other DASHI modules. Then pay \`completeGraphGammaGraphDecodeSameObject\`, \`scaledCompleteWordFaithful\`, N21/E20 genuine bit-machine clocks and \`PR.InNP\`.
+
+**Acceptance:** Source-written only. An independent finite Python sanity check of the *mathematical recursive upper-pair construction* for n=0..39 yielded no ordering/uniqueness/coverage discrepancies, but this does **not** compile or kernel-validate Agda. There is no local Agda binary or GitHub build receipt for these new owners. No \`--safe\` promotion for graph integration, no postulates/metas/termination pragmas intentionally introduced, no actual Cook–Levin polynomial clock or all-21 completion claim. The original P0 universal SAT, P2 E01–E19 and all membership clocks, and P3 \`CertifiedKarpNetwork\` remain open; certified counters 0/20 and 0/21.
+
+
 ## 2026-11-03 — original E20 complete-graph endpoint order, not yet global lex order
 
 **GitHub PR #1445 source-written additions (Agda kernel unrun):**
