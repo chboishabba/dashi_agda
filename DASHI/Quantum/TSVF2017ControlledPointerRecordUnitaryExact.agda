@@ -32,6 +32,7 @@ import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact as 
 import DASHI.Quantum.TSVF2017ComplexEnvironmentRobustnessExact as Env
 import DASHI.Quantum.TSVF2017HeterogeneousEnvironmentABLExact as Hetero
 import DASHI.Quantum.TSVFComplexGammaProductBornExact as Gamma
+import DASHI.Quantum.TSVF2017OriginalComplexABLSelectedExact as OriginalABL
 
 record CertifiedRotation : Set where
   constructor certifiedRotation
@@ -133,7 +134,7 @@ emittedSiteList = map emittedEnvironmentSite
 -- norm-preserving controlled pulses rather than arbitrary overlap labels.
 pulseGeneratedWrongABLFactorization :
   (gammas : List C.RationalComplex) (pulses : List CertifiedRotation) →
-  Hetero.OriginalABL.numerator
+  OriginalABL.numerator
     (Hetero.wrongABL gammas (emittedSiteList pulses))
   ≡ Gamma.complexGammaBornWeight gammas
       * Hetero.tensorBornProduct (emittedSiteList pulses)
@@ -143,11 +144,11 @@ pulseGeneratedWrongABLFactorization gammas pulses =
 
 pulseGeneratedOriginalABLNormalizes :
   (gammas : List C.RationalComplex) (pulses : List CertifiedRotation) →
-  Hetero.OriginalABL.numerator
+  OriginalABL.numerator
     (Hetero.rightABL gammas (emittedSiteList pulses))
-  + Hetero.OriginalABL.numerator
+  + OriginalABL.numerator
     (Hetero.wrongABL gammas (emittedSiteList pulses))
-  ≡ Hetero.OriginalABL.denominator
+  ≡ OriginalABL.denominator
     (Hetero.rightABL gammas (emittedSiteList pulses))
 pulseGeneratedOriginalABLNormalizes gammas pulses =
   Hetero.heterogeneousOriginalABLNormalizes
