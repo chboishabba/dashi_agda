@@ -1,4 +1,6 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+import DASHI.Interop.ITIRMCPFullRegistryCoverageExact
+import DASHI.Interop.SLRFullWorkspaceCrateCoverageExact
 import DASHI.Interop.SLRStructuralReceiptFirewallExact
 import DASHI.Interop.SLRNoPathFirewallExact
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
