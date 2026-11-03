@@ -24,6 +24,7 @@ module DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundary
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer using (ℤ)
 open import Data.List.Base using (List; length)
+open import Data.Nat.Base using (_≤_)
 open import Data.Product using (Σ; _,_; proj₂)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (Maybe)
@@ -40,6 +41,8 @@ import DASHI.Mathematics.Complexity.Karp21WeightedMaxCutFixedNoGraphExact as Fix
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Gamma
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as GraphWord
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
+import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact as Size
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact as FixedWords
 open import Relation.Binary.PropositionalEquality using (refl)
 open import Data.Empty using (⊥; ⊥-elim)
@@ -149,6 +152,48 @@ e20OutputWord (positiveTarget target) =
   Encode.encodeGraphWord (graphOfPositiveTarget target)
 e20OutputWord malformedFixedNo =
   Encode.encodeGraphWord FixedNo.fixedNoGraphInstance
+
+------------------------------------------------------------------------
+-- The actual E20 output modes share the SAME underlying N21 graph:
+-- fixed zero-sum YES; nonzero signed complete graph; and malformed NO.
+-- The original emitted word is exactly the literal graph serialization,
+-- so sparse 2m witnesses fit into each E20 output's own binary length.
+-- This is a true serializer-size fact, not the missing graph-parser
+-- same-object iff and not a machine polynomial-time certificate.
+------------------------------------------------------------------------
+
+e20OutputGraph : E20OutputMode → N21.GraphInstance
+e20OutputGraph (positiveTarget target) =
+  graphOfPositiveTarget target
+e20OutputGraph malformedFixedNo =
+  FixedNo.fixedNoGraphInstance
+
+e20OutputWordUsesSameGraph :
+  (output : E20OutputMode) →
+  e20OutputWord output ≡ Encode.encodeGraphWord (e20OutputGraph output)
+e20OutputWordUsesSameGraph (positiveTarget target) = refl
+e20OutputWordUsesSameGraph malformedFixedNo = refl
+
+e20OutputWordSparseBitBound :
+  (output : E20OutputMode) →
+  Sparse.twoPerEdge (length (Cut.edges (proj₂ (e20OutputGraph output))))
+    ≤ Word.encodingSize (e20OutputWord output)
+e20OutputWordSparseBitBound output
+  rewrite e20OutputWordUsesSameGraph output =
+  Size.encodedGraphAtLeastSparseBits (e20OutputGraph output)
+
+-- The real signed PARTITION source map has the same size receipt,
+-- regardless of the exceptional total-zero dispatch.
+e20SignedPartitionOutputSparseBitBound :
+  (parts : List ℤ) →
+  Sparse.twoPerEdge
+    (length (Cut.edges
+      (proj₂ (e20OutputGraph (e20OutputFromPartition parts)))))
+    ≤ Word.encodingSize
+      (e20OutputWord (e20OutputFromPartition parts))
+e20SignedPartitionOutputSparseBitBound parts =
+  e20OutputWordSparseBitBound (e20OutputFromPartition parts)
+
 
 e20SourceOutputModeIff :
   (parts : List ℤ) →
