@@ -49,6 +49,7 @@ payloadValueAppendBit [] false = refl
 payloadValueAppendBit [] true = refl
 payloadValueAppendBit (first ∷ rest) bit
   rewrite ListP.length-++-sucʳ rest bit []
+        | ListP.++-identityʳ rest
         | payloadValueAppendBit rest bit =
   twiceDistributesOverPayload
     (Dec.bitNat first)
