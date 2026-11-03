@@ -150,7 +150,7 @@ completePairCount :
 completePairCount Vec.[] = refl
 completePairCount (x Vec.∷ xs)
   rewrite ListP.length-++ (headPairs x xs)
-      (map promoteTailEdge (completePairEdges xs))
+      {ys = map promoteTailEdge (completePairEdges xs)}
         | ListP.length-map promoteTailEdge (completePairEdges xs)
         | headPairCount x xs
         | completePairCount xs = refl
