@@ -25,3 +25,7 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact
 import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointConsistencySoundExact
+
+import DASHI.Mathematics.Complexity.Karp21FinFreeEndpointScanComparisonCountExact
+
+import DASHI.Mathematics.Complexity.Karp21FinFreePairwiseQuadraticCountExact
