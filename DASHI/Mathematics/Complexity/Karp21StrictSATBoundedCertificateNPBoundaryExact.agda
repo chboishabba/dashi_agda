@@ -144,6 +144,18 @@ boundedStrictSATWitnessToConcreteRun
       (K00.guardedCookLevinBitWord states symbols nonempty input steps)
       witness)
 
+------------------------------------------------------------------------
+-- Universe-correct BIDI: Runs.ExactBudgetAcceptingRun : Set₁, whereas
+-- PR.Iff is defined ONLY for two Set-valued propositions.
+-- Reusing PR.Iff here was ill-sorted, not a missing typeclass instance.
+------------------------------------------------------------------------
+
+record ExactRunWitnessIff (Run : Set₁) (Witness : Set) : Set₁ where
+  constructor exact-run-iff
+  field
+    runToWitness : Run → Witness
+    witnessToRun : Witness → Run
+
 k00ConcreteTapeRunBoundedStrictSATWitnessBidi :
   ∀ {machine : Tape.ConcreteTapeMachine}
     (states : Cell.EnumerationCoverage (Tape.finiteState machine))
@@ -151,13 +163,13 @@ k00ConcreteTapeRunBoundedStrictSATWitnessBidi :
     (nonempty : Rules.NonemptyRuleTable machine)
     (input : Input.InputWord machine)
     (steps : Nat) →
-  PR.Iff
+  ExactRunWitnessIff
     (Runs.ExactBudgetAcceptingRun input steps)
     (BoundedStrictSATWitnessYES
       (K00.guardedCookLevinBitWord states symbols nonempty input steps))
 k00ConcreteTapeRunBoundedStrictSATWitnessBidi
   states symbols nonempty input steps =
-  PR.iff
+  exact-run-iff
     (concreteRunToBoundedStrictSATWitness
       states symbols nonempty input steps)
     (boundedStrictSATWitnessToConcreteRun
