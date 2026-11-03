@@ -24,6 +24,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_<_)
 open import Data.Nat.Properties as NatP using (<-irrefl)
 open import Data.Product using (_,_)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31
 import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as Arrow
@@ -108,7 +109,7 @@ globalStrictReversalRankImpossible :
   (rank : Micro.History2 → Nat) →
   ((h : Micro.History2) →
     rank (Micro.reverseHistory h) < rank h) →
-  L31.⊥
+  ⊥
 globalStrictReversalRankImpossible rank strict =
   NatP.<-irrefl refl (strict (Micro.stateZero , Micro.stateZero))
 
