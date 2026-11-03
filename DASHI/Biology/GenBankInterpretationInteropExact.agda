@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Codec.GenBankLocationFiniteCore as GB
+import DASHI.Codec.GenBankFeatureGeometrySymmetryExact as Geometry
 import DASHI.Codec.GenBankComponentOntologyFiniteCore as Components
 import DASHI.Codec.DNAFirstFormalism as DNA
 import DASHI.Codec.DNACarrierFibre as Fibre
@@ -65,6 +66,10 @@ situatedProteinOwner = Situated.ProteinSituatedHyperfabric
 
 reusableGenBankLocationOwner : Set
 reusableGenBankLocationOwner = GB.Location
+
+reusableGenBankExactGeometryOwner : Set
+reusableGenBankExactGeometryOwner = Geometry.Geometry
+
 
 reusableGenBankComponentOwner : Set
 reusableGenBankComponentOwner = Components.SourceComponent
