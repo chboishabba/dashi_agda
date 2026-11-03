@@ -1216,6 +1216,8 @@ open SUNBondCodec public using
   (originalPositiveBondFinite
   ; originalPositiveBondDistinct
   ; originalPositiveBondCount
+  ; originalSiteCountFormula
+  ; originalPositiveBondCountFormula
   ; originalSideFourCountIs1024
   ; originalBondsDecodeEncodeAt
   ; originalBondsEncodeDecodeExactly
