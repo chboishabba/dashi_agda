@@ -22,115 +22,153 @@ data SLRCrateLayer : Set where
   formalProofAndReopen : SLRCrateLayer
   legalRuntimeAndProviders : SLRCrateLayer
 
+data SLRCarrierKind : Set where
+  benchmarkFixture : SLRCarrierKind
+  throughputReceipt : SLRCarrierKind
+  cliCommandArgs : SLRCarrierKind
+  cliProjectionOutput : SLRCarrierKind
+  referenceFixture : SLRCarrierKind
+  parityAuditReceipt : SLRCarrierKind
+  sourceSpanStream : SLRCarrierKind
+  canonicalAtomIdAndPnfUnit : SLRCarrierKind
+  readerProjectionCarrier : SLRCarrierKind
+  segmentedTokenStream : SLRCarrierKind
+  pgCorpusMessageRow : SLRCarrierKind
+  sourceAnchorAndDocumentUnit : SLRCarrierKind
+  wikimediaRevisionDump : SLRCarrierKind
+  externalCandidateBridge : SLRCarrierKind
+  candidateWorldModel : SLRCarrierKind
+  expandedWorldCandidate : SLRCarrierKind
+  pgWorldModelProjection : SLRCarrierKind
+  consumerResidualVector : SLRCarrierKind
+  proofSearchTrace : SLRCarrierKind
+  scheduledSearchFrontier : SLRCarrierKind
+  residualRepairPlan : SLRCarrierKind
+  selectedRoutePlan : SLRCarrierKind
+  routeExecutionReceipt : SLRCarrierKind
+  admissionCandidateReceipt : SLRCarrierKind
+  semanticStatusSummary : SLRCarrierKind
+  evidencePaymentLedger : SLRCarrierKind
+  reopenTriggerReceipt : SLRCarrierKind
+  certificateCandidate : SLRCarrierKind
+  reviewedPaymentReceipt : SLRCarrierKind
+  kernelVerificationObligation : SLRCarrierKind
+  legalSourceDocument : SLRCarrierKind
+  legalProvisionCandidate : SLRCarrierKind
+  counterfactualObligationSlice : SLRCarrierKind
+  legalFollowGraphPlan : SLRCarrierKind
+  obligationAlignmentReceipt : SLRCarrierKind
+  nswLegislationXml : SLRCarrierKind
+
 data SLRCrateId : Set where
-  sl_bench : SLRCrateId
-  sl_cli : SLRCrateId
-  sl_parity : SLRCrateId
-  sl_core : SLRCrateId
-  sl_reader_model : SLRCrateId
-  sl_stream : SLRCrateId
-  sl_pg_source_store : SLRCrateId
-  sl_wikimedia_candidate_provider : SLRCrateId
-  sl_world_compiler : SLRCrateId
-  sl_world_expansion_runtime : SLRCrateId
-  sl_world_store : SLRCrateId
-  sl_consumer_residual : SLRCrateId
-  sl_proof_search_loop : SLRCrateId
-  sl_proof_search_scheduler : SLRCrateId
-  sl_residual_planner : SLRCrateId
-  sl_route_executor : SLRCrateId
-  sl_route_selector : SLRCrateId
-  sl_semantic_admission : SLRCrateId
-  sl_semantic_expansion : SLRCrateId
-  sl_semantic_status : SLRCrateId
-  sl_evidence_payment : SLRCrateId
-  sl_evidential_reopen : SLRCrateId
-  sl_expanded_cert : SLRCrateId
-  sl_reviewed_evidence_payment : SLRCrateId
-  sl_formal_proof_bridge : SLRCrateId
-  sl_formal_proof_reopen : SLRCrateId
-  sl_governed_legal_provider : SLRCrateId
-  sl_legal_counterfactual : SLRCrateId
-  sl_legal_follow_plan : SLRCrateId
-  sl_legal_runtime : SLRCrateId
-  sl_nsw_legislation_provider : SLRCrateId
+  slBench : SLRCrateId
+  slCli : SLRCrateId
+  slParity : SLRCrateId
+  slCore : SLRCrateId
+  slReaderModel : SLRCrateId
+  slStream : SLRCrateId
+  slPgSourceStore : SLRCrateId
+  slWikimediaCandidateProvider : SLRCrateId
+  slWorldCompiler : SLRCrateId
+  slWorldExpansionRuntime : SLRCrateId
+  slWorldStore : SLRCrateId
+  slConsumerResidual : SLRCrateId
+  slProofSearchLoop : SLRCrateId
+  slProofSearchScheduler : SLRCrateId
+  slResidualPlanner : SLRCrateId
+  slRouteExecutor : SLRCrateId
+  slRouteSelector : SLRCrateId
+  slSemanticAdmission : SLRCrateId
+  slSemanticExpansion : SLRCrateId
+  slSemanticStatus : SLRCrateId
+  slEvidencePayment : SLRCrateId
+  slEvidentialReopen : SLRCrateId
+  slExpandedCert : SLRCrateId
+  slReviewedEvidencePayment : SLRCrateId
+  slFormalProofBridge : SLRCrateId
+  slFormalProofReopen : SLRCrateId
+  slGovernedLegalProvider : SLRCrateId
+  slLegalCounterfactual : SLRCrateId
+  slLegalFollowPlan : SLRCrateId
+  slLegalRuntime : SLRCrateId
+  slNswLegislationProvider : SLRCrateId
 
 record SLRCrateContract : Set where
   constructor crateContract
   field
     crateName : String
     layer : SLRCrateLayer
-    inputCarrier : String
-    outputCarrier : String
+    inputCarrier : SLRCarrierKind
+    outputCarrier : SLRCarrierKind
     createsSemanticTruth : Bool
     requiresReviewedOrKernelGate : Bool
 
 slrCrateSpec : SLRCrateId → SLRCrateContract
-slrCrateSpec sl_bench = crateContract "sl-bench" verificationAndCLI "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_cli = crateContract "sl-cli" verificationAndCLI "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_parity = crateContract "sl-parity" verificationAndCLI "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_core = crateContract "sl-core" coreCarrier "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_reader_model = crateContract "sl-reader-model" coreCarrier "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_stream = crateContract "sl-stream" coreCarrier "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_pg_source_store = crateContract "sl-pg-source-store" worldIngestionAndCompiler "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_wikimedia_candidate_provider = crateContract "sl-wikimedia-candidate-provider" worldIngestionAndCompiler "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_world_compiler = crateContract "sl-world-compiler" worldIngestionAndCompiler "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_world_expansion_runtime = crateContract "sl-world-expansion-runtime" worldIngestionAndCompiler "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_world_store = crateContract "sl-world-store" worldIngestionAndCompiler "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_consumer_residual = crateContract "sl-consumer-residual" residualAndRoutePlanning "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_proof_search_loop = crateContract "sl-proof-search-loop" residualAndRoutePlanning "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_proof_search_scheduler = crateContract "sl-proof-search-scheduler" residualAndRoutePlanning "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_residual_planner = crateContract "sl-residual-planner" residualAndRoutePlanning "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_route_executor = crateContract "sl-route-executor" residualAndRoutePlanning "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_route_selector = crateContract "sl-route-selector" residualAndRoutePlanning "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_semantic_admission = crateContract "sl-semantic-admission" residualAndRoutePlanning "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_semantic_expansion = crateContract "sl-semantic-expansion" residualAndRoutePlanning "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_semantic_status = crateContract "sl-semantic-status" residualAndRoutePlanning "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_evidence_payment = crateContract "sl-evidence-payment" evidenceReviewAndPayment "source-scoped-input" "candidate-or-receipt" false true
-slrCrateSpec sl_evidential_reopen = crateContract "sl-evidential-reopen" evidenceReviewAndPayment "source-scoped-input" "candidate-or-receipt" false true
-slrCrateSpec sl_expanded_cert = crateContract "sl-expanded-cert" evidenceReviewAndPayment "source-scoped-input" "candidate-or-receipt" false true
-slrCrateSpec sl_reviewed_evidence_payment = crateContract "sl-reviewed-evidence-payment" evidenceReviewAndPayment "source-scoped-input" "candidate-or-receipt" false true
-slrCrateSpec sl_formal_proof_bridge = crateContract "sl-formal-proof-bridge" formalProofAndReopen "source-scoped-input" "candidate-or-receipt" false true
-slrCrateSpec sl_formal_proof_reopen = crateContract "sl-formal-proof-reopen" formalProofAndReopen "source-scoped-input" "candidate-or-receipt" false true
-slrCrateSpec sl_governed_legal_provider = crateContract "sl-governed-legal-provider" legalRuntimeAndProviders "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_legal_counterfactual = crateContract "sl-legal-counterfactual" legalRuntimeAndProviders "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_legal_follow_plan = crateContract "sl-legal-follow-plan" legalRuntimeAndProviders "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_legal_runtime = crateContract "sl-legal-runtime" legalRuntimeAndProviders "source-scoped-input" "candidate-or-receipt" false false
-slrCrateSpec sl_nsw_legislation_provider = crateContract "sl-nsw-legislation-provider" legalRuntimeAndProviders "source-scoped-input" "candidate-or-receipt" false false
+slrCrateSpec slBench = crateContract "sl-bench" verificationAndCLI benchmarkFixture throughputReceipt false false
+slrCrateSpec slCli = crateContract "sl-cli" verificationAndCLI cliCommandArgs cliProjectionOutput false false
+slrCrateSpec slParity = crateContract "sl-parity" verificationAndCLI referenceFixture parityAuditReceipt false false
+slrCrateSpec slCore = crateContract "sl-core" coreCarrier sourceSpanStream canonicalAtomIdAndPnfUnit false false
+slrCrateSpec slReaderModel = crateContract "sl-reader-model" coreCarrier canonicalAtomIdAndPnfUnit readerProjectionCarrier false false
+slrCrateSpec slStream = crateContract "sl-stream" coreCarrier sourceSpanStream segmentedTokenStream false false
+slrCrateSpec slPgSourceStore = crateContract "sl-pg-source-store" worldIngestionAndCompiler pgCorpusMessageRow sourceAnchorAndDocumentUnit false false
+slrCrateSpec slWikimediaCandidateProvider = crateContract "sl-wikimedia-candidate-provider" worldIngestionAndCompiler wikimediaRevisionDump externalCandidateBridge false false
+slrCrateSpec slWorldCompiler = crateContract "sl-world-compiler" worldIngestionAndCompiler sourceAnchorAndDocumentUnit candidateWorldModel false false
+slrCrateSpec slWorldExpansionRuntime = crateContract "sl-world-expansion-runtime" worldIngestionAndCompiler candidateWorldModel expandedWorldCandidate false false
+slrCrateSpec slWorldStore = crateContract "sl-world-store" worldIngestionAndCompiler candidateWorldModel pgWorldModelProjection false false
+slrCrateSpec slConsumerResidual = crateContract "sl-consumer-residual" residualAndRoutePlanning candidateWorldModel consumerResidualVector false false
+slrCrateSpec slProofSearchLoop = crateContract "sl-proof-search-loop" residualAndRoutePlanning consumerResidualVector proofSearchTrace false false
+slrCrateSpec slProofSearchScheduler = crateContract "sl-proof-search-scheduler" residualAndRoutePlanning proofSearchTrace scheduledSearchFrontier false false
+slrCrateSpec slResidualPlanner = crateContract "sl-residual-planner" residualAndRoutePlanning consumerResidualVector residualRepairPlan false false
+slrCrateSpec slRouteExecutor = crateContract "sl-route-executor" residualAndRoutePlanning selectedRoutePlan routeExecutionReceipt false false
+slrCrateSpec slRouteSelector = crateContract "sl-route-selector" residualAndRoutePlanning residualRepairPlan selectedRoutePlan false false
+slrCrateSpec slSemanticAdmission = crateContract "sl-semantic-admission" residualAndRoutePlanning expandedWorldCandidate admissionCandidateReceipt false false
+slrCrateSpec slSemanticExpansion = crateContract "sl-semantic-expansion" residualAndRoutePlanning candidateWorldModel expandedWorldCandidate false false
+slrCrateSpec slSemanticStatus = crateContract "sl-semantic-status" residualAndRoutePlanning admissionCandidateReceipt semanticStatusSummary false false
+slrCrateSpec slEvidencePayment = crateContract "sl-evidence-payment" evidenceReviewAndPayment admissionCandidateReceipt evidencePaymentLedger false true
+slrCrateSpec slEvidentialReopen = crateContract "sl-evidential-reopen" evidenceReviewAndPayment evidencePaymentLedger reopenTriggerReceipt false true
+slrCrateSpec slExpandedCert = crateContract "sl-expanded-cert" evidenceReviewAndPayment expandedWorldCandidate certificateCandidate false true
+slrCrateSpec slReviewedEvidencePayment = crateContract "sl-reviewed-evidence-payment" evidenceReviewAndPayment evidencePaymentLedger reviewedPaymentReceipt false true
+slrCrateSpec slFormalProofBridge = crateContract "sl-formal-proof-bridge" formalProofAndReopen certificateCandidate kernelVerificationObligation false true
+slrCrateSpec slFormalProofReopen = crateContract "sl-formal-proof-reopen" formalProofAndReopen kernelVerificationObligation reopenTriggerReceipt false true
+slrCrateSpec slGovernedLegalProvider = crateContract "sl-governed-legal-provider" legalRuntimeAndProviders legalSourceDocument legalProvisionCandidate false false
+slrCrateSpec slLegalCounterfactual = crateContract "sl-legal-counterfactual" legalRuntimeAndProviders legalProvisionCandidate counterfactualObligationSlice false false
+slrCrateSpec slLegalFollowPlan = crateContract "sl-legal-follow-plan" legalRuntimeAndProviders legalProvisionCandidate legalFollowGraphPlan false false
+slrCrateSpec slLegalRuntime = crateContract "sl-legal-runtime" legalRuntimeAndProviders legalFollowGraphPlan obligationAlignmentReceipt false false
+slrCrateSpec slNswLegislationProvider = crateContract "sl-nsw-legislation-provider" legalRuntimeAndProviders nswLegislationXml legalSourceDocument false false
 
 record CandidateDoesNotClaimTruth (c : SLRCrateContract) : Set where
   constructor candidateDoesNotClaimTruth
   field noTruthClaim : SLRCrateContract.createsSemanticTruth c ≡ false
 
 all31CratesDoNotSelfCertifyTruth : (c : SLRCrateId) → CandidateDoesNotClaimTruth (slrCrateSpec c)
-all31CratesDoNotSelfCertifyTruth sl_bench = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_cli = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_parity = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_core = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_reader_model = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_stream = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_pg_source_store = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_wikimedia_candidate_provider = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_world_compiler = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_world_expansion_runtime = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_world_store = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_consumer_residual = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_proof_search_loop = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_proof_search_scheduler = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_residual_planner = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_route_executor = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_route_selector = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_semantic_admission = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_semantic_expansion = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_semantic_status = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_evidence_payment = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_evidential_reopen = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_expanded_cert = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_reviewed_evidence_payment = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_formal_proof_bridge = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_formal_proof_reopen = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_governed_legal_provider = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_legal_counterfactual = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_legal_follow_plan = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_legal_runtime = candidateDoesNotClaimTruth refl
-all31CratesDoNotSelfCertifyTruth sl_nsw_legislation_provider = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slBench = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slCli = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slParity = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slCore = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slReaderModel = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slStream = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slPgSourceStore = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slWikimediaCandidateProvider = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slWorldCompiler = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slWorldExpansionRuntime = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slWorldStore = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slConsumerResidual = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slProofSearchLoop = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slProofSearchScheduler = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slResidualPlanner = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slRouteExecutor = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slRouteSelector = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slSemanticAdmission = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slSemanticExpansion = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slSemanticStatus = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slEvidencePayment = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slEvidentialReopen = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slExpandedCert = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slReviewedEvidencePayment = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slFormalProofBridge = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slFormalProofReopen = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slGovernedLegalProvider = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slLegalCounterfactual = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slLegalFollowPlan = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slLegalRuntime = candidateDoesNotClaimTruth refl
+all31CratesDoNotSelfCertifyTruth slNswLegislationProvider = candidateDoesNotClaimTruth refl
