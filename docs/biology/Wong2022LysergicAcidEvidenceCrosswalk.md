@@ -93,3 +93,43 @@ The new Golden finite-core review-tier and identity-carrier gates prevent paper-
 Active research residuals: verified source-data and supplement hashes; exact replicate values and uncertainty; external analytical adjudication; stereochemical and experimental sample same-object evidence; justified same-organism/compartment/time rate and transport data; exact-head Agda/Python execution. The separate runtime connector is excluded from this cut.
 
 **W22-02 source discrepancy newly indexed:** PubChem CID 6717 displays InChIKey `ZAGRKAFMISFKIO-QMTHXVAHSA-N`, whereas IUPHAR/BPS ligand 139 displays `ZAGRKAFMISFKIO-IAPIXIRKSA-N` while linking to PubChem CID 6717 / ChEBI:6604. `Wong2022EvidenceLedgerExact.registryDescriptorReview` preserves the independently attributable strings and leaves both stereochemical normalization and original assay-sample identity false/unpaid. This does **not** conclude that these are chemically distinct compounds. Compare source revisions, normalized representation and stereochemistry before equality; do not use the misleading shortcut `same CID => verified sample identity`.
+
+
+## Patent prior-art extension: Robinson / Panaccione (2014–2015)
+
+**New independently attributable sources:**
+
+- **2014 research:** Sarah L. Robinson and Daniel G. Panaccione, *Heterologous expression of lysergic acid and novel ergot alkaloids in Aspergillus fumigatus*, Applied and Environmental Microbiology **80**(20):6465–6472, DOI [10.1128/AEM.02137-14](https://doi.org/10.1128/AEM.02137-14), PMID 25107976. Scientific authorship and original observations remain with Robinson and Panaccione. The article's acknowledgment explicitly associates the work with US provisional patent application **62/012,658**.
+- **2015 patent:** Inventors Daniel G. Panaccione and Sarah L. Robinson, original assignee **West Virginia University**, *Production of lysergic acid by genetic modification of a fungus*, [WO2015195535A2](https://patents.google.com/patent/WO2015195535A2/en), family PCT/US2015/035784. Google Patents displays claimed priority **2014-06-16**, filing **2015-06-15**, WO A2 publication **2015-12-23**, and international publication/family status **Ceased**, with an explicit legal-status disclaimer.
+- **2022 yeast study:** Wong et al. as already cited above, DOI 10.1038/s41467-022-28386-6, published **2022-02-07**.
+
+**Chronology matters:** the patent's *claimed priority* predates the 2014 article's online publication (**2014-09-19**), while the 2014 research publication predates the WO patent's **2015-12-23** publication. Do not collapse priority, filing, disclosure, research conduct, journal acceptance, published evidence or legal enforceability into one date.
+
+| Comparison coordinate | Robinson & Panaccione, 2014 | WO2015195535A2, 2015 | Wong et al., 2022 |
+|---|---|---|---|
+| Source role | Original scientific research article | Published patent disclosure and claims | Original scientific research article |
+| Host reported/claimed | Filamentous fungal study | Filamentous fungal invention context | Engineered yeast |
+| Scientific evidence ceiling | Source-authored experimental observations | Patent disclosure; patent claims are **not** independent experimental reproduction | Source-authored analytic and outcome observations |
+| Species/compound relationship | Ergot alkaloids and lysergic-acid-related chemistry | Related patent technical field | D-lysergic-acid pathway reconstitution |
+| Same-host / same-experiment witness | **Not paid across sources** | **Not paid across sources** | **Not paid across sources** |
+| Quantitative cross-study flux equivalence | Not derived | Not derived | Not derived |
+| Novelty / IP clearance | Not assessed | Jurisdiction-specific family/claim status **not reviewed** | Not assessed |
+
+**Prior-art implication:** the 2022 article is not the first authored observation of heterologous lysergic-acid production *in any fungal system*: the 2014 original paper establishes relevant earlier scientific work. This does **not** contradict the later yeast-specific reconstitution claim. Host-level novelty and pathway completeness require claim-by-claim, organism-specific evidence. A patent citation also does not automatically make every dependent claim experimentally verified.
+
+**New DASHI modules:**
+
+- `DASHI.Biology.LysergicPriorArtFiniteCore`: isolated `{-# OPTIONS --safe #-}` source, host, claim-type and legal-conclusion constructor barriers. A patent claim cannot inhabit the author's observation type, nor can a database status label inhabit a territory-specific legal opinion or freedom-to-operate witness. These are **syntactic** no-promotion rules only.
+- `DASHI.Biology.LysergicPriorArtAttributedCrosswalkExact`: reuses `AttributedSourceCore`, `ScientificMechanismEvidenceBidiExact`, the existing `Wong2022LysergicAcidEvidenceExact` source and `Wong2022ScientificMetabolicBridgeExact` observation owner. Keeps original academic authors, inventors, assignee, identifier and distinct date coordinates. Imports no native external ontology or SensibLaw connector.
+- Both modules are imported by `DASHI.Biology.Everything`. The Python-focused `check_wong2022_scientific_evidence.py` includes static source contracts for both and optional Agda checks. `test_wong2022_scientific_evidence.py` includes patent/2014-author attribution, legal firewall and claim-versus-evidence regression cases.
+
+**Remaining exact max-cut for this prior-art link:**
+
+1. **PA15-01 — Exact patent source revision:** authenticate the filed PCT publication/claim-set revision and official WIPO/PCT/US national records, not only an indexed Google Patents rendering.
+2. **PA15-02 — Claim chart:** extract stable numbered-claim dependencies and amendment lineage *as legal/text metadata only*. Do not turn a method claim into an operational production protocol. Review particular claim scope against the **exact 2014 paper** and **2022 yeast source** separately.
+3. **PA15-03 — Observed versus asserted:** identify paper-supported experiments, provisional hypotheses and patent claim language as separate source observations. Do not use a patent assertion as a second independent replication.
+4. **PA15-04 — Context-sensitive comparison:** distinguish the 2014/patent filamentous fungal system from the 2022 yeast host; require exact product, analytical, organism, context and scale witnesses before same-object quantitative comparison.
+5. **PA15-05 — Legal-status boundary:** independently verify any relevant national-family legal status in official registers if needed. The Google Patents `Ceased` label does not establish universal expiration, validity, noninfringement or freedom to operate.
+6. **PA15-06 — Exact-head acceptance:** execute both Agda modules and their imported owner graph, and run the updated Python negative tests. Source-written/imported does not mean Agda-kernel accepted.
+
+**Safety and attribution:** The original research belongs to Robinson and Panaccione (2014) and Wong et al. (2022); the patent invention is attributed to Panaccione and Robinson, originally assigned to West Virginia University. This integration does not reproduce sequences, construct designs, step-by-step production methods, compound synthesis or experimental optimisation. Patent claims and chemical precursor nomenclature are not clinical, manufacturing or legal permissions.
