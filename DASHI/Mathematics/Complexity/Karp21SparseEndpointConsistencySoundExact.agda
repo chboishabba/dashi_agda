@@ -45,6 +45,8 @@ import Data.Vec.Base as Vec
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Golden
+open Golden public using (andLeftTrue; andRightTrue; boolEqualTrueImpliesEqual; falseNotTrue)
 
 ------------------------------------------------------------------------
 -- A real membership proof, not an unproved Boolean "all-consistent"
@@ -54,26 +56,6 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 data _∈_ {A : Set} (x : A) : List A → Set where
   here : ∀ {rest} → x ∈ (x ∷ rest)
   there : ∀ {head rest} → x ∈ rest → x ∈ (head ∷ rest)
-
-andLeftTrue :
-  (a b : Bool) →
-  Sparse.andBool a b ≡ true → a ≡ true
-andLeftTrue true b proof = refl
-andLeftTrue false b ()
-
-andRightTrue :
-  (a b : Bool) →
-  Sparse.andBool a b ≡ true → b ≡ true
-andRightTrue true b proof = proof
-andRightTrue false b ()
-
-boolEqualTrueImpliesEqual :
-  (a b : Bool) →
-  Sparse.boolEqual a b ≡ true → a ≡ b
-boolEqualTrueImpliesEqual true true proof = refl
-boolEqualTrueImpliesEqual false false proof = refl
-boolEqualTrueImpliesEqual true false ()
-boolEqualTrueImpliesEqual false true ()
 
 compatibleSameVertexLabels :
   ∀ {n} (a b : Fin.Fin n × Bool) →
@@ -295,9 +277,6 @@ sparseAcceptedLocalImpliesFullGraphYES graph local accepted
                 (Sparse.endpointObservations (Cut.edges graph) local))
               (Sparse.verifySparseEdgeBits graph local)
               accepted))))
-
-falseNotTrue : false ≡ true → ⊥
-falseNotTrue ()
 
 sparseAcceptedBitWordImpliesFullGraphYES :
   ∀ {n} (graph : Cut.WeightedCutGraph n)
