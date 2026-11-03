@@ -41,3 +41,16 @@ Repository audited: `dashi_agda` at draft PR #1408, branch `feat/twin-prime-six-
 4. This tranche does **not** claim the Riemann hypothesis, twin-prime infinitude, or any independent Clay theorem.
 
 **Additional K05 source corollaries:** `round11SineAtTwoPi` and `round11CosineAtTwoPi` identify the original same-series values at `2 * bishopMachinPi` as zero and one, respectively. They reuse the origin values and newly derived period. Both remain conditional on the exact same two upstream K05 inputs; no independent π uniqueness has been supplied.
+
+
+## Independent Lean companion discoveries (verified repository sources)
+
+The `dashi_lean4` companion contains a more specific result than the phrase “trig pi still entirely absent” suggests:
+
+- `Integration/BishopVendoredMachinPiSemantics.lean` proves `eval_machinPi_eq_real_pi` for its source-faithful Bishop Machin arctangent-series mirror, by transporting actual series limits through the vendored Bishop evaluator and applying the Mathlib Machin identity.
+- `Integration/BishopVendoredTrigSemantics.lean` proves `eval_sin_eq_real_sin` and `eval_cos_eq_real_cos` for source-faithful Bishop series limits.
+- `Integration/BishopVendoredExponentialSemantics.lean` proves `eval_exp_eq_real_exp` for its source-faithful exponential mirror.
+- `Integration/BishopRound11MachinCanonicalBinding.lean` constructs a canonical Lean Bishop binding via classical functions encoded into the Bishop completion and proves every binding with the convergence receipts equivalent in the Bishop setoid.
+- Lean PR [#24](https://github.com/chboishabba/dashi_lean4/pull/24) is **provenance/kernel replay tooling**; its own description explicitly says it is not an Agda-to-Lean proof-term translator.
+
+**Consequences:** the classical Machin semantic direction is *source-written in Lean*, not an unknown mathematical construction. Agda can reuse its exact statement and attribution when planning the terminal weld, but cannot silently use a Lean proof term as an Agda proof term. The remaining golden acceptance criterion is native Agda theorem/proof object (or a genuinely verified proof-term import) connecting the exact original Round11 term limits to that same semantics, plus any independently specified positive-least-period characterization. This distinction prevents re-solving classical Machin arithmetic while preserving the user's Agda-first standard.
