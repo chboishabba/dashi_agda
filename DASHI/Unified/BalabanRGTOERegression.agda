@@ -37,6 +37,8 @@ import DASHI.Quantum.TSVFComplexGammaProductBornExact as TSVFGamma
 import DASHI.Quantum.TSVF2017ComplexEnvironmentRobustnessExact as TSVF2017Env
 import DASHI.Quantum.TSVF2017OriginalComplexABLSelectedExact as TSVF2017ABL
 import DASHI.Quantum.TSVF2017QuantitativeRateExact as TSVF2017Rate
+import DASHI.Quantum.TSVF2017HeterogeneousEnvironmentABLExact as TSVFHeteroABL
+import DASHI.Quantum.TSVF2017HeterogeneousRateExact as TSVFHeteroRate
 import DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact as TSVFOSClock
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
@@ -179,6 +181,31 @@ open TSVF2017Rate public using
   ; weightedDoublingBound
   ; wrongProbabilityExponentialDenominatorBound
   ; adversarialNoGammaControl
+  )
+-- General distinct-site complex tensor source and original ABL, plus
+-- genuinely nonuniform all-site exponential robustness. The complex-to-Nat
+-- calibration and selected pointer/environment dynamics remain unpaid.
+open TSVFHeteroABL public using
+  ( heterogeneousTensorBornFactorization
+  ; homogeneousOverlapMatchesExisting
+  ; homogeneousBornMatchesExisting
+  ; heterogeneousWrongBornFactorization
+  ; heterogeneousWrongBornNonnegative
+  ; rightOriginalAmplitude
+  ; wrongOriginalAmplitude
+  ; originalHeterogeneousTotal
+  ; positiveHeterogeneousTotal
+  ; heterogeneousOriginalABLNormalizes
+  ; heterogeneousOriginalABLHasCorrectBornFactor
+  ; actualHeterogeneousAdmissibleSource
+  ; admittedWrongHistoryAmplitudeIsProduct
+  )
+open TSVFHeteroRate public using
+  ( heterogeneousExponentialRate
+  ; weightedHeterogeneousRate
+  ; heterogeneousWrongProbabilityCrossBound
+  ; originalRightProductRecovered
+  ; originalWrongProductRecovered
   )
 open TSVFOSClock public using
   ( observerOSClockAllFiniteTimes
