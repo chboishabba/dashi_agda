@@ -1,5 +1,12 @@
 
 
+### 2026-11-03 — R443/R445 every-n native gauge and Haar numerator theorem
+
+Added `YMClaySUNVariablePeriodicGaugeHaarExact.agda` atop the new variable-size product-Haar source. It reuses `YMClaySUNVariablePeriodicGibbsGaugeExact.periodicSUNGibbsDensityGaugeInvariant`, `YMClaySUNProductHaarGaugeFromOneLinkExact.productHaarNativeGaugeInvariant` and `YMClaySUNVariablePeriodicBondPointwiseExact.variableGibbsDensityPointwise`. The owner proves `periodicProductGaugeHaarInvariant`, `periodicGaugeNumeratorInvariant`, and `periodicGaugeNormalizedExpectationInvariant` for every actual periodic cutoff and every explicitly pointwise-congruent cylinder observable. It derives *whole finite product integral* local gauge invariance from one-link left/right invariance without a second independent full-lattice Haar axiom.
+
+`OriginalPeriodicGaugeVectorNaturality.gaugeDecodeAt` remains a typed physical input **at each original positive bond**. The native vector decoder, gauge factors, measurable one-link continuous Haar and same carrier scalar transport are not yet inhabited. This result does **not** establish exact varying-cutoff cylinder refinement, CMP119 E/R/B/V selected metric insertions, uniform R445 moments, physical CMP116 R320 bounds, or R333 continuum OS spectral positivity. Preserve the Golden Agda source-written / kernel-pending boundary.
+
+
 ### 2026-11-03 — YM all-cutoff finite product-Haar bridge (source-written)
 
 Added `YMClaySUNVariablePeriodicProductHaarExact.agda` to the canonical Balaban TOE import graph. It reuses the existing original variable-periodic SU(N) Wilson-Gibbs family, one-link finite product-Haar/Fubini, ordered integration, and strict positivity to derive each finite partition's positivity and physical cylinder integration laws, without a separate all-link integration axiom. Selected native decoder, actual compact Haar, R124 metric source, changing-cutoff uniform bounds, CMP116 source and same-H OS continuum gap remain OPEN. No Agda kernel/CI verification; no Clay promotion. See the Yang–Mills roadmap and exact source ledger.
