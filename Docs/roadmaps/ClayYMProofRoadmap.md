@@ -1,3 +1,5 @@
+**R443.F07 executable reference update:** `scripts/check_ym_native_c3_adjacent_swap_word.py` deterministically synthesizes the selected spatial C3 adjacent-swap word; for the side-four original 1024-link list, an independent reference execution produced 46,592 adjacent swaps and verified the resulting permutation. This is a finite reference receipt, not the Agda `LinkPermutation`/`onCanonicalLabels` proof; F07 remains OPEN.
+
 ## 2026-11-03 — AUTHORITATIVE current YM exact-lemma reconciliation
 
 **Read this before historical append-only sections:** [YMClayCurrentExactLemmaLedger20261103.md](YMClayCurrentExactLemmaLedger20261103.md) is the canonical current *source-status* ledger for R443/R445/R320/R333/Clay. Its IDs are stable for the current max-cut: R443.F01–F07/P01–P05; R445.F01–F03/P01–P09; R320.P01–P06; R333.P01–P07; CLAY.P01–P03; TRUST.K01–K03. The older 219-field submission inventory and frozen four-family research scoreboard remain separate uncompleted formulations of the same Clay endpoint, not five additional official Clay problems.
