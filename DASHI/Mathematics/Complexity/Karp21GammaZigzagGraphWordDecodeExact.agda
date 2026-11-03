@@ -25,13 +25,13 @@ module DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat.Base using (z≤n)
+open import Data.Nat.Base using (_≤_; z≤n)
 import Data.Nat.Properties as NatP
 open import Data.List.Base using (List; []; _∷_; length)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Integer.Base using (ℤ; +_)
-open import Data.Product using (_×_; _,_; proj₂)
-open import Data.Empty using (⊥)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 import Data.Fin.Base as Fin
 import Data.Fin.Properties as FinP
@@ -40,6 +40,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as N21
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import Data.Integer.Base as Int
 
 record RawEdge : Set where
@@ -120,9 +121,22 @@ validateRawEdges n prev (raw-edge u v w ∷ tail)
 -- * NO remaining suffix.
 ------------------------------------------------------------------------
 
-decodeGraphWord :
-  Word.BitWord → Maybe N21.GraphInstance
-decodeGraphWord word with Gamma.readGamma word
+-- A successful parse carries its OWN explicit N21 sparse
+-- certificate bound; it is not an unverified Bool status marker.
+-- Each valid edge triple has 3 positive-length gamma fields.
+-- The additional two-per-edge guard is therefore redundant on
+-- valid canonical Python words, but proving that redundancy as an
+-- Agda semantic agreement theorem remains a separate task.
+GraphWordWithSparseBudget : (word : Word.BitWord) → Set
+GraphWordWithSparseBudget word =
+  Σ N21.GraphInstance (λ graph →
+    Sparse.twoPerEdge (length (Cut.edges (proj₂ graph)))
+      ≤ Word.encodingSize word)
+
+decodeGraphWordCertified :
+  (word : Word.BitWord) →
+  Maybe (GraphWordWithSparseBudget word)
+decodeGraphWordCertified word with Gamma.readGamma word
 ... | nothing = nothing
 ... | just (n , afterN) with Gamma.readGamma afterN
 ...   | nothing = nothing
@@ -137,11 +151,50 @@ decodeGraphWord word with Gamma.readGamma word
 ...         | just (suc threshold , []) with
             validateRawEdges n noPrevious raw
 ...           | nothing = nothing
-...           | just edges =
+...           | just edges
+  with NatP._≤?_
+    (Sparse.twoPerEdge (length edges))
+    (Word.encodingSize word)
+...             | no _ = nothing
+...             | yes budget =
   just
-    (n , Cut.graph edges (+ (suc threshold))
-      (Int.+≤+ z≤n , (λ ())))
+    ((n , Cut.graph edges (+ (suc threshold))
+       (Int.+≤+ z≤n , (λ ())))
+     , budget)
 ...         | just (suc threshold , _ ∷ _) = nothing
+
+decodeGraphWord : Word.BitWord → Maybe N21.GraphInstance
+decodeGraphWord word with decodeGraphWordCertified word
+... | nothing = nothing
+... | just (graph , _) = just graph
+
+noGraphOnDecodeFailure :
+  ∀ {word : Word.BitWord} {graph : N21.GraphInstance} →
+  nothing ≡ just graph → ⊥
+noGraphOnDecodeFailure ()
+
+n21GraphWordEdgeCountBitBound :
+  (word : Word.BitWord)
+  (graph : N21.GraphInstance) →
+  decodeGraphWord word ≡ just graph →
+  Sparse.twoPerEdge (length (Cut.edges (proj₂ graph)))
+    ≤ Word.encodingSize word
+n21GraphWordEdgeCountBitBound word graph decoded
+  with decodeGraphWordCertified word
+... | nothing = ⊥-elim (noGraphOnDecodeFailure decoded)
+... | just (selected , certified) with decoded
+...   | refl = certified
+
+-- This is an ACTUAL N21 codec, not a user-supplied hypothetical
+-- decoder/edge-size field. Machine verifier cost remains open.
+literalGammaSparseGraphCodec : N21.SparseGraphWordCodec
+literalGammaSparseGraphCodec =
+  record
+    { N21.decodeGraph = decodeGraphWord
+    ; N21.edgeBitBound = n21GraphWordEdgeCountBitBound
+    }
+
+module LiteralN21 = N21.OnCodec literalGammaSparseGraphCodec
 
 ------------------------------------------------------------------------
 -- Literal small examples, including empty and malformed target words.
