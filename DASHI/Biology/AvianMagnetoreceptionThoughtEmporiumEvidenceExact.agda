@@ -175,7 +175,7 @@ vestibularEvidenceReceipt =
 -- Explicit reuse of independently maintained owners.
 ------------------------------------------------------------------------
 
-record CrossChannelOwners : Set₁ where
+record CrossChannelOwners : Set₂ where
   field
     retinalCryptochromeCandidate : Generic.MagnetoreceptionSurface
     retinalOwnerMatches :
