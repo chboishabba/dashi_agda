@@ -57,11 +57,11 @@ successorBitsLength :
   length (successorBits b) ≡ suc (Bin.size b)
 successorBitsLength Bin.zero = refl
 successorBitsLength (Bin.2[1+ b ])
-  rewrite ListP.length-++ (successorBits b) (true ∷ [])
+  rewrite ListP.length-++ (successorBits b) {ys = true ∷ []}
         | NatP.+-comm (length (successorBits b)) (suc zero)
         | successorBitsLength b = refl
 successorBitsLength (Bin.1+[2 b ])
-  rewrite ListP.length-++ (successorBits b) (false ∷ [])
+  rewrite ListP.length-++ (successorBits b) {ys = false ∷ []}
         | NatP.+-comm (length (successorBits b)) (suc zero)
         | successorBitsLength b = refl
 
