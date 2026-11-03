@@ -144,6 +144,7 @@ open TSVFQubit public using
   ; finiteMeasurementTotalPositive
   ; finiteOriginalABLContext
   ; finiteOriginalABLNormalization
+  ; selectedABLMatchesActualTensorOverlap
   ; selectedJointTSVFSource
   ; admissibleRightIsOriginalABLProjector
   ; admissibleWrongIsOriginalABLProjector
