@@ -39,6 +39,7 @@ import DASHI.Quantum.TSVF2017OriginalComplexABLSelectedExact as TSVF2017ABL
 import DASHI.Quantum.TSVF2017QuantitativeRateExact as TSVF2017Rate
 import DASHI.Quantum.TSVF2017HeterogeneousEnvironmentABLExact as TSVFHeteroABL
 import DASHI.Quantum.TSVF2017HeterogeneousRateExact as TSVFHeteroRate
+import DASHI.Quantum.TSVF2017ControlledPointerRecordUnitaryExact as TSVFControlled
 import DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact as TSVFOSClock
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
@@ -206,6 +207,23 @@ open TSVFHeteroRate public using
   ; heterogeneousWrongProbabilityCrossBound
   ; originalRightProductRecovered
   ; originalWrongProductRecovered
+  )
+-- Original selected-ABL complex site lists are now emitted by a genuine
+-- certified finite controlled C^2-pointer/C^2-environment rotation. This
+-- remains a finite four-complex-coordinate isometry, NOT the physical 2017
+-- many-body device or a continuum strongly continuous Stone/OS Hamiltonian.
+open TSVFControlled public using
+  ( rotationNormScalesExactly
+  ; rotationPreservesBornNorm
+  ; controlledRecordPreservesFullBornNorm
+  ; rightEmissionIsOriginalVacuum
+  ; wrongEmissionIsControlledRotation
+  ; pulseGeneratedWrongABLFactorization
+  ; pulseGeneratedOriginalABLNormalizes
+  ; threeFourCircleLaw
+  ; threeFourPulseEmitsOriginalWrongQubit
+  ; threeFourPulseOverlap
+  ; threeFourPulseBornNineTwentyFifths
   )
 open TSVFOSClock public using
   ( observerOSClockAllFiniteTimes
