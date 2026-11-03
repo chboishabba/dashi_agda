@@ -35,7 +35,7 @@ module DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact whe
 -- Original attribution: Wilson, Bałaban, and existing DASHI proofs.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
@@ -50,7 +50,7 @@ import DASHI.Physics.YangMills.YMClayNativeBlockedPeriodicBondWeldExact as Weld
 
 -- Signed directions use the SAME original axis and positive orientation as
 -- Bond.walkStep / Bond.pathHolonomy, not a reconstructed arrow type.
-positiveDirections : Nat → Torus.Axis4 → List (Torus.Product Torus.Axis4 Agda.Builtin.Bool.Bool)
+positiveDirections : Nat → Torus.Axis4 → List (Torus.Product Torus.Axis4 Bool)
 positiveDirections zero axis = []
 positiveDirections (suc k) axis =
   Torus.pair axis true ∷ positiveDirections k axis
@@ -154,7 +154,7 @@ module _
       (Block.blockedCube4 (Weld.siteToCube site) zeroOffset)
 
   positiveBlockDirections : Torus.Axis4 →
-    List (Torus.Product Torus.Axis4 Agda.Builtin.Bool.Bool)
+    List (Torus.Product Torus.Axis4 Bool)
   positiveBlockDirections axis = positiveDirections (suc l) axis
 
   -- Source-defined selected directed coarse link on *actual* original
