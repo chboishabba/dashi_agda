@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateE
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 import Agda.Builtin.List as List
 import Data.Vec.Base as Vec
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -36,7 +37,7 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Produc
 Bond : Set
 Bond = Torus.PositiveBond Torus.four
 
-Count : Agda.Builtin.Nat.Nat
+Count : Nat
 Count = Codec.originalPositiveBondCount Torus.four
 
 labels : List.List Bond
@@ -76,7 +77,7 @@ reconstructFromCanonicalLabels values =
 -- Adjacent-swap permutation programs are natural under an arbitrary map.
 -- This uses exactly the pre-existing Product constructors and Vec.map.
 permuteLinksMap :
-  ∀ {A B : Set} {n : Agda.Builtin.Nat.Nat}
+  ∀ {A B : Set} {n : Nat}
     (f : A → B) (program : Product.LinkPermutation n)
     (values : Vec.Vec A n) →
   Vec.map f (Product.permuteLinks program values)
@@ -138,9 +139,9 @@ singleVectorC3ImpliesAllVectors :
   ∀ {Value : Set} (values : Vec.Vec Value Count) →
   Product.permuteLinks (program certificate) values
   ≡ C3.forwardVector values
-singleVectorC3ImpliesAllVectors certificate values =
+singleVectorC3ImpliesAllVectors certificate {Value = Value} values =
   let
-    read : Bond → _
+    read : Bond → Value
     read = Codec.decodeOriginalBonds Torus.four values
   in
   trans
