@@ -129,3 +129,15 @@ The original source GenBank content may remain in an immutable external source l
 This work is for **interpretation and source validation**, not design of human interventions. No guides, sequence edits, target optimization, delivery routes, experimental protocols or executable plasmid construction plans belong in this integration. Computational validity of a GenBank file does not establish expression, tissue targeting, neural coupling, magnetic perception, safety or any same-species cross-context transfer.
 
 **First highest-value implementation:** GB02/GB03 source-first parse and formal witness, then GB04 semantic round-trip, then GB05/GB07 biology and PNF joins. The 2020 stream supplies motivation and evidence about design decisions; the GenBank artifact is the authoritative object for a claim about what its actual annotations contain.
+
+
+### GB04 executable full-record semantic round-trip (local original)
+
+The original file also passed an actual Biopython GenBank **parse → serialize → parse** comparison locally. All **seven semantic checks** passed: sequence digest and length, molecule type and topology, feature types, all 22 feature location and qualifier arrays, and record ID. Serialized output is **18,377 bytes** versus **18,278 original bytes**; it is *not byte-identical*, so raw source provenance remains a separate immutable digest. The reusable runner is now `scripts/check_genbank_semantic_roundtrip.py` with a generic synthetic regression.
+
+This is an **executed semantic equality observation**, not a proof that arbitrary GenBank inputs universally round-trip or that the Agda/Lean kernel accepted a theorem. Such a theorem remains GB04-FORMAL and source-parser refinement is still to be paid. Exact-head checkout execution remains open.
+
+```sh
+python3 scripts/check_genbank_semantic_roundtrip.py /path/to/original.gb
+python3 -m pytest -q tests/test_genbank_semantic_roundtrip.py
+```
