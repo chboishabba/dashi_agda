@@ -13,6 +13,10 @@
 - **Connie X. Wang and colleagues (2019)**, “Transduction of the geomagnetic field as evidenced from alpha-band activity in the human brain,” *eNeuro* 6:ENEURO.0483-18.2019. DOI [10.1523/ENEURO.0483-18.2019](https://doi.org/10.1523/ENEURO.0483-18.2019). EEG magnetic response is an **electrophysiological observation**, not conscious human magnetic perception or a validated gene-editing target.
 - **Caution regarding MagR/magnetite:** the video proposes broad dismissal of particular candidates. That should remain the **video author's 2020 interpretation**, not a universal experimental theorem. The later mechanism-plural literature, especially the 2026 hepatic macrophage finding, makes blanket “birds do not use magnetic material” claims unsound.
 
+## Original GenBank document ingestion (next exact work)
+
+See [the source-inspected GenBank → DASHI integration plan](ThoughtEmporiumMagnetoreceptionGenBankIngestPlan.md) for the original 11,214-base circular archive, its 22 annotation features, lossless location AST, Golden codec and protein-context owner reuse, ontology/PNF join, and exact acceptance gates GB01–GB08. The external GenBank file exists and was metadata-inspected; **it has not yet been imported as a kernel-verified source-derived term**. The source author and GitHub commit remain credited.
+
 ## Transcript-to-evidence crosswalk
 
 | Transcript window | Stream claim or discussion | Science/evidence ceiling |
