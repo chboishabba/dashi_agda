@@ -64,6 +64,18 @@ Phase DAG:
 - [ ] **P01.L11** Prove observer probability/refinement convergence (tightness or appropriate projective/infinite source construction) and normalized physical limit.
 - [ ] **P01.L12** Construct one physically continuous clock from the actual selected observer process, with operational acyclicity and state identity preserved downstream.
 
+### 2026-11-03 primary-source TSVF single-branch macro-reversibility max-cut
+
+Original 2014/2017 Aharonov–Cohen–Gruss–Landsberger / Aharonov–Cohen–Landsberger papers explicitly allow conditional **single-branch macro record reconstruction despite failed fine micro-reconstruction**. It is NOT an Everett multiple-real-worlds theorem and NOT reversed thermodynamic entropy. See [source audit](../physics/TSVFMacroscopicReversibilityMultiverseBidiSourceAudit20261103.md). Existing multiverse TSFV/attractor classifiers distinguish physical realizations from a counterfactual parameter scan. The new Golden TSVFMacroscopicSingleBranchRobustnessExact finite selected pointer majority theorem is SOURCE-written and locally reference-tested, not kernel/physical quantum verified.
+
+- [ ] **P01.L13** Construct an actual chosen pointer/environment quantum tensor-factor source with N redundant microscopic pointer records, selected physical decoherent alternatives and specified allowed disturbance class; no finite label-only witness.
+- [ ] **P01.L14** Construct an actual nonzero postselected final bra/effect and normalized ABL/Born right/wrong branch probabilities on the *same* quantum Hilbert state, with zero-denominator/orthogonality cases isolated.
+- [ ] **P01.L15** Prove the original 2017 quantitative robustness ratio from the actual N−n surviving environment overlap, branch gamma disturbance factors, positive normalization and all necessary assumptions; show R grows under a genuinely sourced overlap bound rather than N≫n alone.
+- [ ] **P01.L16** Prove physical same-single-branch backward macro pointer reconstruction with explicit high-probability bound while fine micro recovery may fail; distinguish source quantum reversal from thermal entropy reversal.
+- [ ] **P01.L17** Preserve and prove no controllable backwards signalling: later postselection/smoothing changes conditioned inference, not earlier recorded interventions; include actual selected measurement/Born source.
+- [ ] **P01.L18** Source-classify **one selected TSVF branch**, Everett decoherent branches, counterfactual multiverse parameter points and genuinely physically realized universes as different physical claims, with existing TSFVMultiverseViabilityCrossPollinationExact nonpromotion and MultiverseAttractorDiscriminatorBidiExact hypothesis fibres.
+- [ ] **P01.L19** Kernel-accept and source-pin new TSVFMacroscopicSingleBranchRobustnessExact: six one-flip triple-code macro restorations, all fine-data-change proofs, no fine decoder, same original past with different hidden branch, microscopic reversal conjunction; **SOURCE written / physical interpretation not paid**.
+
 **Owners:** FiniteHistoryOrientationExact, HistoryWeightFiltrationExact, TSFVFiltrationArrowLorentzBridgeExact, TSVF/TSFVFeynman sources; original Aharonov–Bergmann–Lebowitz and Aharonov–Vaidman. **Status:** finite OWNED / physical continuum OPEN.
 
 ## P02 — independently derived physical (3,1) cone, metric and orientation
@@ -198,6 +210,11 @@ Phase DAG:
 - [ ] **P07.L13** Verify *typed* classical finite Hodge (*²=-1 Lorentz two-forms, *²=+1 Euclidean two-forms) as convention check, not substitute for actual U.
 - [ ] **P07.L14** Prove genuine same-physical-source identification with the P08 reduced KK 4-metric, if claiming the full five-sector theorem.
 
+### Same-source macro robustness → OS-clock interaction (not a theorem from macro coding alone)
+
+- [ ] **P07.L15** Identify the physical selected macro pointer/observer of P01.L13–16 with P07's actual Hilbert, clock and metric; separately construct/compare the time-reversal antiunitary, conditional backward quantum state and Euclidean OS reflection (three different operations).
+- [ ] **P07.L16** Prove conditional single-branch macro robustness does not introduce a second timelike direction, does not invert observed filtration and preserves **the same physical OS gauge-invariant observables** under the explicitly allowed source reversal/comparison; otherwise return a quantified mismatch/counterexample.
+
 **Owners:** TSFVKKSameMetricTransportExact, TSFVFiltrationArrowLorentzBridgeExact, YMClayLorentz31DirectionalKKHodgeExact, OS reconstruction owners and SchrodingerSelfAdjointEvolutionReceipt. **Status:** conditional same-metric SOURCE, actual U/generator equivalence OPEN. **Highest-value cross-domain lemma: P07.L05–L07.**
 
 ## P08 — spacelike fifth-circle KK effective theory and Möbius/internal holonomy
@@ -288,6 +305,10 @@ Phase DAG:
 - [ ] **P11.L17** Independent physical falsification and instrumentation audit for measured causal dimension, lower-D observables, KK thresholds and four-channel gravity if claimed.
 - [ ] **P11.L18** Prove terminal theorem only after all actually required physical fields are inhabited; else publish exact smallest unsatisfied primitive-leaf cut.
 
+### Multiverse ontology / TSVF interpretation independent BIDI
+
+- [ ] **P11.L19** Complete a source-matched, observable-indexed discriminator among (i) TSVF selected-single-branch, (ii) Everett/decoherent-histories observer-selection, (iii) unique-law/dynamical-attractor and (iv) actual physically realized multiverse; prove a prediction/experimental comparison or **document underdetermination**. Never promote a viable parameter or branch count into real cosmological multiplicity, (3,1) or an OS/YM gap.
+
 **Owners:** BalabanRGTOERegression and TOE imports plus all owners above. **Status:** OPEN.
 
 ## 3. Phase acceptance matrix and deliverables
@@ -295,18 +316,18 @@ Phase DAG:
 | Phase | Exact lemma count | Deliverable | Required acceptance receipt | Current status |
 |---|---:|---|---|---|
 | P00: source + integration | 10 | one actual multi-PR proof import graph | pinned SHAs, newest #1444 available to #1460, exact-head safe compile, transitive assumption inventory | OPEN; #1444 source ahead of #1460 |
-| P01: histories and arrow | 12 | selected physical continuum observer with non-backwards-signalling arrow | source-native state/refinement/probabilities and filtration proof | finite OWNED; physical OPEN |
+| P01: histories and arrow | 19 | selected physical continuum observer with non-backwards-signalling arrow | source-native state/refinement/probabilities and filtration proof | finite OWNED; physical OPEN |
 | P02: 3+1 causal geometry | 16 | independently derived dimension four, rank-three space and one clock | source dimension estimator, metric principal symbol, cone and time orientation | COND/OPEN |
 | P03: Hilbert/quantum | 14 | symplectic-to-J complex structure and genuine Stone/CCR/Schrödinger evolution | positive completion, unbounded operator convergence, domains, hbar SI | finite OWNED; physical OPEN |
 | P04: physical gauge | 12 | source-native U(1)/compact simple G, separate pure YM sector | local group/gauge bundle/connection; SM authority extra only if claimed | COND/OPEN |
 | P05: R443 finite YM | 16 | actual compact SU(N) native product Haar and finite physical Wilson Gibbs | one-link Haar, function↔Vec decoder, selected R124/CMP119 density | #1444 SOURCE; physical OPEN |
 | P06: R445/R320/R333 | 20 | nontrivial infinite-volume 4D pure Yang–Mills with Δ>0 | actual uniform UV/tail/mixed-J/OS/gap source, full Clay scope | OPEN |
-| P07: same-clock OS | 14 | physically selected H_clock ≃ H_OS and same metric/observables | unitary/spectral/domain and reflection-positivity correspondence | SOURCE/COND; physical OPEN |
+| P07: same-clock OS | 16 | physically selected H_clock ≃ H_OS and same metric/observables | unitary/spectral/domain and reflection-positivity correspondence | SOURCE/COND; physical OPEN |
 | P08: 5D KK | 17 | selected spacelike-circle EFT → same 4D geometry/gauge + scalar/radion | action reduction, couplings, decoupling, thresholds, holonomy | COND/OPEN |
 | P09: lower-dimensional BIDI | 13 | correct 2D and scoped 3D known-physics observable comparison | real scalar-aware reduction and quantitative errors | external sources available, maps OPEN |
 | P10: gravity | 14 | one physical stress source and one positive-G metric | Ward/conservation, real W variation, independent four-channel predictions | conditional owners, source OPEN |
-| P11: finish | 18 | full physically inhabited theorem and independent referee | every matched-observable commuting square, negative tests, exact-head acceptance | OPEN |
-| **Total** | **176** | **finite scoped theorem-dependent inventory** | added analytic sublemmas must be tracked as discovered | **not completed** |
+| P11: finish | 19 | full physically inhabited theorem and independent referee | every matched-observable commuting square, negative tests, exact-head acceptance | OPEN |
+| **Total** | **186** | **finite scoped theorem-dependent inventory** | added analytic sublemmas must be tracked as discovered | **not completed** |
 
 ### Priority and parallel worker allocation
 
