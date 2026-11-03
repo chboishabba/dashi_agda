@@ -4,6 +4,14 @@
 
 **Primary interpretation finding:** the creator's source label \`"cacna1d human plus pigeon"\` is attached to **feature index 8, \`misc_feature\`**, not a \`CDS\`. The only two \`CDS\` feature labels are \`"Factor Xa site"\` and \`"AmpR"\`. This does not disprove the suggested coding function, but it means the file's own feature table does **not** carry an explicit gene/CDS/translation witness for the presumed target. Preserve this as a review hold, not a fabricated translation.
 
+## Actual-original-byte local verification receipt — 3 Nov 2026
+
+**GB02-REAL (local prototype) is paid.** Exact original creator file bytes were reconstructed locally from the original GitHub source, then independently checked against the original Git blob SHA `0578ad167666789fbfd3faa849a455c25097b90c`. The resulting 18,278-byte file was parsed with Biopython 1.86; it gave **11,214 concrete DNA bases**, **circular ds-DNA**, **22/22 source features in original order**, and **0 feature-geometry/strand/compound/qualifier discrepancies** under the source parity checker. Raw SHA-256: `43e7f588788e36c7a3b7d4e794dde21311781a9eae9fd857fe5cac79b46f03d1`. Normalized sequence SHA-256: `7e1449a229c1182bc787bf861a906b42313e5e0d6676770a9d8bfa0a7bbd71db`.
+
+The source-derived candidate-only projection produced **22 feature statements and 30 reopening/identity review holds** (22 source-label-to-external-identity; eight missing CDS gene/product/translation/codon_start fields). The local synthetic parser test suite yielded **7 passed / 0 failed**. See `docs/biology/data/ThoughtEmporiumMagnetoreceptionLocalExecutionReceipt.json` for the bounded machine-readable receipt; no original bases are distributed.
+
+**Do not overpromote:** these commands used a locally executed prototype corresponding to the PR scripts, **not the exact PR checkout**. The full exact-head pytest acceptance, Agda kernel, full-record parser/serializer roundtrip and native ITIR/SLR ABI are still OPEN. Neither source structure nor candidate ontology graph validates a realised protein or magnetic sense.
+
 ## Primary object and original ownership
 
 The original design belongs to **Justin Atkin / The Thought Emporium** and is available at:
