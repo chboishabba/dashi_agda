@@ -21,6 +21,7 @@ data SourceObject : Set where
   researchArticle2014 : SourceObject
   patentPublication2015 : SourceObject
   yeastArticle2022 : SourceObject
+  yeastPatentPublication2023 : SourceObject
 
 data SourceRole : Set where
   scientificResearchArticle : SourceRole
@@ -91,6 +92,10 @@ patentPublicationNotYeastStudy :
   patentPublication2015 ≡ yeastArticle2022 → NoWitness
 patentPublicationNotYeastStudy ()
 
+yeastPatentNotYeastResearchArticle :
+  yeastPatentPublication2023 ≡ yeastArticle2022 → NoWitness
+yeastPatentNotYeastResearchArticle ()
+
 data StudyHostRelation : HostContext → HostContext → Set where
   sameFilamentousContext :
     StudyHostRelation filamentousFungalSystem filamentousFungalSystem
@@ -128,6 +133,8 @@ data ClaimTransport : SourceObject → SourceObject → Set where
     ClaimTransport patentPublication2015 patentPublication2015
   sameYeastSource :
     ClaimTransport yeastArticle2022 yeastArticle2022
+  sameYeastPatentSource :
+    ClaimTransport yeastPatentPublication2023 yeastPatentPublication2023
 
 patentToYeastClaimTransportUnpaid :
   ClaimTransport patentPublication2015 yeastArticle2022 → NoWitness
@@ -136,6 +143,10 @@ patentToYeastClaimTransportUnpaid ()
 patentToResearchClaimTransportUnpaid :
   ClaimTransport patentPublication2015 researchArticle2014 → NoWitness
 patentToResearchClaimTransportUnpaid ()
+
+laterPatentToYeastStudyTransportUnpaid :
+  ClaimTransport yeastPatentPublication2023 yeastArticle2022 → NoWitness
+laterPatentToYeastStudyTransportUnpaid ()
 
 ------------------------------------------------------------------------
 -- This proof boundary is intentionally descriptive, not constructive.
