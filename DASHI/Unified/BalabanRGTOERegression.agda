@@ -29,6 +29,7 @@ import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as P2T
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31Probe
 import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as TSFVArrow
+import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as TSFVKKSameMetric
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
@@ -83,6 +84,11 @@ open TSFVArrow public using
   ; historyNotRecoverableFromActionAlone
   ; pastRecordCannotRecoverSelectedMicroHistory
   ; selectedTSFVPhysicalSignatureIs31
+  )
+open TSFVKKSameMetric public using
+  ( SameMetricTSFVKK
+  ; sameMetricKKSignatureFromTSFV
+  ; sameMetricKKReversedCountExcluded
   )
 open L31Probe public using
   ( calibratedProbeForcesThreePlusOne
