@@ -142,3 +142,7 @@ import DASHI.Mathematics.Complexity.Karp21RawGraphValidatorObservationExact
 import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorPremisesExact
 
 import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorCompleteExact
+
+import DASHI.Mathematics.Complexity.Karp21OriginalGammaGraphWordFieldsReplayExact
+
+import DASHI.Mathematics.Complexity.Karp21PositiveThresholdGammaExact
