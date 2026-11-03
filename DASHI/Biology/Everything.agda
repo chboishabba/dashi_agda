@@ -106,6 +106,7 @@ import DASHI.Biology.Kluver5HT2AMolecularProteinInstantiationExact
 -- Attributed yeast biosynthesis evidence / precursor identity; no synthesis protocol.
 import DASHI.Biology.Wong2022LysergicAcidEvidenceExact
 import DASHI.Biology.Wong2022EvidenceLedgerExact
+import DASHI.Biology.Wong2022ScientificMetabolicBridgeExact
 import DASHI.Biology.FiveHT2ASignalingDialecticExact
 import DASHI.Biology.FiveHT2AProtocolIndexedSignalTransportExact
 import DASHI.Biology.FiveHT2AVisualCortexBioelectricBridgeExact
