@@ -73,7 +73,7 @@ MOBILE_TYPES = {
     "transposon", "retrotransposon", "integron", "insertion sequence",
     "non-LTR retrotransposon", "SINE", "MITE", "LINE", "other",
 }
-SOURCE_CONTEXT_KEYS = {"plasmid", "chromosome"}
+SOURCE_CONTEXT_KEYS = ("plasmid", "chromosome")
 HEX_SHA = re.compile(r"[a-f0-9]{64}\Z")
 
 
