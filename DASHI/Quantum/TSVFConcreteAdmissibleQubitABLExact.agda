@@ -36,7 +36,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as ℕₚ
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 import DASHI.Quantum.TSVF as Q
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
@@ -252,8 +252,7 @@ finiteOriginalABLNormalization k =
       Overlap.rightRaw n + Overlap.wrongRaw n
       ≡ denominator (finiteABLRight n)
     symmetryToRightDenominator n =
-      Relation.Binary.PropositionalEquality.sym
-        (rightOriginalABLDenominator n)
+      sym (rightOriginalABLDenominator n)
 
 -- Both boundary constraints genuinely admit BOTH measured histories in
 -- this finite selected two-branch source. The original Bidi fibre owner
