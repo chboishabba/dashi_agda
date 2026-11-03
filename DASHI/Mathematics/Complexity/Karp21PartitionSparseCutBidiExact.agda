@@ -1,6 +1,8 @@
-{-# OPTIONS --safe #-}
 
 module DASHI.Mathematics.Complexity.Karp21PartitionSparseCutBidiExact where
+
+-- Integration owner: not --safe until the imported weighted-graph
+-- theorem chain is independently checked and transitively --safe.
 
 ------------------------------------------------------------------------
 -- E20 x N21: ORIGINAL SIGNED PARTITION <-> ACTUAL SPARSE CUT WORD.
