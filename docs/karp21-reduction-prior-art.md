@@ -1,5 +1,12 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+## 2026-11-03 upper-pair strict order and executable comparator bridge
+
+The following independent DASHI source-written proof glue reuses, rather than replaces, the existing E20 finite indexed complete graph. \`Karp21UpperPairStructuralLexOrderExact\` proves global ordering over the original \`Pair.allFin\` and \`Pair.allUpperPairs\` enumeration. \`Karp21ScaledCompleteGraphStrictLexExact\` identifies that order with the numeric first/second endpoints of every source-owned scaled weighted graph edge. \`Karp21ScaledCompleteGraphStrictAfterExact\` connects numeric lex increase to the original \`Karp21GammaZigzagGraphWordDecodeExact.strictAfter\` Boolean parser gate. The E20 boundary imports and instantiates all three on \`Actual.sourceIndexedWeightedGraph parts nonzero\`. This distinguishes global numeric ordering from previously paid no-duplicate and per-edge \`u<v<n\` conditions.
+
+Attribution: original historical Karp (1972) reduction and MAX CUT; prior DASHI owners \`Karp21IndexedUpperPairBijectionExact\`, \`Karp21UpperPairGraphEnumerationExact\`, \`Karp21FiniteCompleteGraphGeneratorExact\`, \`Karp21SignedGraphScaleAndAppendExact\` and the N21 graph-word parser; Agda \`Fin\`, finite list and Nat decision-procedure standard library contributors. Original signed weights and edge order are unchanged. This proof is not an independent new complexity result or a machine-time theorem. The dependent reconstructed graph, positive threshold, complete E20 BIDI, all 21 NP-membership and the terminal network remain open until Agda kernel verification and real clocks.
+
+
 ## 2026-11-03 E20 original complete-graph endpoint validation
 
 The new source-written \`Karp21ScaledCompleteGraphEndpointOrderExact.agda\` uses the original \`UpperPair\` carrier and \`Gen.completeScaledPairEdges\` construction, with the already-owned \`actualKarpGraphCanonicalUpperPairs\` theorem. It proves that every emitted signed graph edge has numeric endpoints \`u < v < n\` and that scaling its signed weight preserves those addresses. \`Karp21SignedPartitionActualGraphWordBoundaryExact.e20ActualScaledGraphEndpointBounds\` attaches that receipt to the *actual* E20 signed PARTITION graph. The existing \`Karp21EncodedGraphSparseBitBoundExact\` theorem was refactored to use explicit structural list-length lemmas rather than unconfirmed standard-library append-bound names. This credits the prior DASHI combinatorial/graph theorem owners instead of replacing them.
