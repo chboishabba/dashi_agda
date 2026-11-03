@@ -150,3 +150,28 @@ The source-inspected [`data/ThoughtEmporiumMagnetoreceptionCandidateReviewGraph.
 This is a deterministic **read-only source-inventory projection** verified against the local original-byte execution receipt, with source labels/locations/qualifier *names* but not all qualifier values or original DNA bases. Its namespace is `dashi.genbank.source-inspection-graph-fixture.v1`; **it is not** a native ITIR MCP, SLR S29, Wikidata or Gene Ontology API payload. Native recipient integration, external identity lookup, and real same-object gene/protein inference remain distinct proof gates.
 
 The fixture answers the current user query: *which feature types and labels were written by the designer, which source-backed hypothesis is being discussed, and which external identities/translation claims remain unverified?* It does **not** answer whether the construct functions biologically.
+
+
+## Reusable gene/regulatory/mobile/replicon classification (3 Nov 2026)
+
+The generic read-only `scripts/genbank_component_registry.py` now consumes
+the existing `dashi.genbank.readonly.v1` parser report and distinguishes
+`gene`, `CDS`, regulatory feature keys, `mobile_element` with its INSDC
+`/mobile_element_type` source qualifier, `repeat_region`, replication
+origins, binding, and unclassified `misc_feature` annotations. Source
+`/plasmid` and `/chromosome` qualifiers are independent of circular
+topology; absent/conflicting source contexts stay unresolved. It preserves the
+existing feature-location AST and provenance, and emits only source-backed
+candidate review graph claims. Golden source taxonomy:
+`DASHI.Codec.GenBankComponentOntologyFiniteCore`. Contract:
+[GenBankComponentOntologyRegistry.md](GenBankComponentOntologyRegistry.md).
+
+Three original creator sources have an independently pinned
+[sequence-free feature-key inventory](data/ThoughtEmporiumComponentTaxonomyReadOnly.json)
+covering 22, 53, and 20 features. No `mobile_element` key or explicit
+source `/plasmid`/`/chromosome` qualifier was found in these source
+inspections. This is **not** a transposon-design tool, phenotype proof,
+or validated external ontology import.
+
+Local source-equivalent Python regression: **17 passed**; exact GitHub branch
+pytest, Golden Agda kernel and native ITIR/SLR API acceptance are not run.
