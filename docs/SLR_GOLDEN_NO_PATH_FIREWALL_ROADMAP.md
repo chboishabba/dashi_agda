@@ -78,3 +78,19 @@ The new Phase 3 changes have not been independently type-checked in this session
 
 ### Changelog
 2026-11-03: Four feature-set receipts and fourteen structural rejection proofs added. No runtime implementation changed.
+
+## Phase 4 — complete finite registry inventories (2026-11-03)
+- [x] Source-write 93 ITIR tool constructors and a total conservative contract function.
+- [x] Source-write 26 re_gpt MCP function constructors and a total transport/retry contract.
+- [x] Source-write 31 SLR crate constructors and a total candidate-authority contract.
+- [x] Attach both new modules to all three TOE roots.
+- [ ] Verify all inventories against the actual runtime registry, MCP decorators and Cargo workspace manifest at fixed revisions. The names above come from the supplied audit.
+- [ ] Replace conservative default tool kinds, mutability, authority, backing-store and gate metadata with the exact source-owned per-tool profiles. The current all-93 proof checks the model's defaults, not runtime profiles.
+- [ ] Replace descriptive crate carrier strings with typed existing SLR owner interfaces. The current all-31 proof only states the model's no-self-certification policy.
+- [ ] Prove authority-order bounds for the actual per-tool output status lists and check explicit gate metadata for self-promoting statuses.
+- [ ] Add a source-to-constructor bijection and reject missing, duplicate and extra runtime entries.
+- [ ] Run Agda safe checks and record a fresh referee receipt for the two new modules and three TOE roots.
+- [ ] Mirror accepted results to dashi_lean4. Golden Agda remains authoritative.
+
+### Phase 4 changelog
+2026-11-03: Added `DASHI/Interop/ITIRMCPFullRegistryCoverageExact.agda` and `DASHI/Interop/SLRFullWorkspaceCrateCoverageExact.agda`. This closes the finite name-inventory drafting task only. Exact runtime parity remains open. No Python, Rust or ESD changes.
