@@ -12,7 +12,11 @@ import DASHI.Interop.SLRSharedEvidenceReducerExact as Evidence
 import DASHI.Interop.SLRProductionRoadmapParityExact as Roadmap
 
 data StoreKind : Set where
-  postgresCanonicalDSN sqliteLocal jsonLedger slrwStream unconfiguredPG : StoreKind
+  postgresCanonicalDSN : StoreKind
+  sqliteLocal : StoreKind
+  jsonLedger : StoreKind
+  slrwStream : StoreKind
+  unconfiguredPG : StoreKind
 
 record StorageReceipt : Set where
   constructor storageReceipt
@@ -27,7 +31,9 @@ record StorageAdmissible (r : StorageReceipt) : Set where
     configured : StorageReceipt.dsnConfigured r ≡ true
 
 data ExtractorKind : Set where
-  sensiblawSharedReducerOrSLRCompiler rawRegex regexAgdaDeclarationScrape : ExtractorKind
+  sensiblawSharedReducerOrSLRCompiler : ExtractorKind
+  rawRegex : ExtractorKind
+  regexAgdaDeclarationScrape : ExtractorKind
 
 record ExtractionReceipt : Set where
   constructor extractionReceipt
@@ -38,7 +44,8 @@ record ExtractionAdmissible (r : ExtractionReceipt) : Set where
   field checked : ExtractionReceipt.extractorKind r ≡ sensiblawSharedReducerOrSLRCompiler
 
 data MatcherKind : Set where
-  astExactSymbolAndType sqlLikeProseSubstring : MatcherKind
+  astExactSymbolAndType : MatcherKind
+  sqlLikeProseSubstring : MatcherKind
 
 record SymbolLinkReceipt : Set where
   constructor symbolLinkReceipt
@@ -49,7 +56,10 @@ record SymbolLinkAdmissible (r : SymbolLinkReceipt) : Set where
   field checked : SymbolLinkReceipt.matcherKind r ≡ astExactSymbolAndType
 
 data RouterKind : Set where
-  pgPNFCostedParetoConductor hardcodedSlotTable alphabeticalFileSlice positionalRosterZip : RouterKind
+  pgPNFCostedParetoConductor : RouterKind
+  hardcodedSlotTable : RouterKind
+  alphabeticalFileSlice : RouterKind
+  positionalRosterZip : RouterKind
 
 record RoutingReceipt : Set where
   constructor routingReceipt
