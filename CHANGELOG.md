@@ -1,3 +1,9 @@
+## 2026-11-03 — exact complex TSVF gamma norm-product and conjugation payment
+
+- Declared original rational-complex Cayley–Dickson algebra owner --safe after local axiom inspection (transitive Agda still pending). Added TSVFComplexGammaProductBornExact.agda reusing its actual complexNormMultiplicative, conjugation and rational complex carrier to prove for all finite gamma lists |product gamma_j|²=product |gamma_j|². Proved combined Born invariance under componentwise conjugation and exact imaginary-unit phase insertion; these remain distinct from physically reversing an observed Lorentzian clock/OS Hamiltonian.
+- Exported new Golden theorem owners in BalabanRGTOERegression; independently reproduced 10,000 rational-complex gamma product/phase/conjugation reference cases; committed check_tsvf_complex_gamma_product_born.py.
+- Updated exact source audit and P01.L15/P07.L15 open physical-source statuses: the original 2017 gamma_j environmental branch amplitudes, ABL physical projection source, nonfactorized disturbance evolution and same-clock/OS bridge are not yet populated. No Agda kernel check, full physical Eq.(25), multiverse claim or Clay YM completion.
+
 ## 2026-11-03 — largest TSVF max-cut: original bidirectional admissibility → populated original ABL tensor probability
 
 - Reused the original source-owned BidirectionallyAdmissibleHistoryFibreExact, TwoBoundarySystem, and DASHI.Quantum.TSVF; added --safe declarations after a local no-postulate inspection of these original modules, **without claiming exact-head Agda acceptance**.
