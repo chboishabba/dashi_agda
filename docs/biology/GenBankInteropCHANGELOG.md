@@ -55,3 +55,13 @@
   passing synthetic tests. Original source and theorem attributions retained.
 - Exact Agda and native ITIR/SLR API receipts remain open; no genetic parts
   selection, DNA bases, editing protocol or phenotype assertion emitted.
+
+## 2026-11-03 — Max-cut referee: bounded RC square and native ITIR input
+
+- Added Golden `GenBankFeatureGeometrySymmetryExact.agda` with length-bounded source intervals, total mirror action, source→normalized coordinate commuting square, and double-reversal observable equalities for compound geometry. Explicitly distinct part-order policies reflect Biopython 1.86: **all child strands absent ⇒ reverse part order; otherwise retain order**, including mixed strand. Source-written proof terms; **no Agda kernel receipt**.
+- Added `GenBankCanonicalDNAFibreIndexExact.agda` as a non-Golden adapter using existing DNAFirstFormalism/DNACarrierFibre; all-length finite-vector lookup/encode equivariance and reconstruction source-written. No competing DNA alphabet, no claim of exact original-byte parse proof.
+- Added source-equivalent `check_genbank_feature_geometry_square.py` and regression covering exact reversed intervals, origin-spanning joins, all-unstranded and mixed-strand joins. Independent local Biopython reference tests: **2,000 randomized cases passed**, 1,471 with mixed strand assignments.
+- Rechecked original original-creator feature geometry for **95** source annotations (22 magnetoreception, 53 penicillin yeast, 20 yeast backbone), with all exact span bounds and mirror-twice checks passing in an independent source-text geometry audit. This is not the committed checker running against original bytes.
+- Added `genbank_itir_native_review_adapter.py`: native `itir_mcp.domain_tools.wikidata_review_packet` input mapping based on actual ITIR source, fail-closed real native invocation and optional installed-package conformance test. No nonnative lookalike response can be claimed as ITIR acceptance.
+- Canonical Codec/Biology/Everything imports updated. Reconciled stale paid/open duplicate TODO entries, replaced direct scripts invocation with reproducible `python3 -m scripts.*` invocation. Scoped receipt: `GenBankMaxCutRefereeReceipt20261103.md`.
+- **Remaining open:** actual exact-head Python suite, Agda kernel, real source-byte execution of the new checker on all three original files, raw parser↔Golden n-ary AST refinement, native ITIR/SLR consumer execution, and source-backed biological identity/experimental claims.
