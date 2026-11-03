@@ -49,7 +49,7 @@ open import Data.Product using (_×_; _,_; Σ)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as ℕₚ
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
 import DASHI.Quantum.TSVF as TSVF
@@ -162,6 +162,88 @@ twoOutcomeABLNormalizes {Q = Q} source laws =
       (cong (λ x → TSVF.QuantumSurface.divideWeight Q x (total laws))
         (sym (totalFromSource laws)))
       (quotientUnit laws))
+
+------------------------------------------------------------------------
+-- ACTUAL ORIGINAL TSVF ABL INTERFACE, NOT AN UNRELATED NEW PROBABILITY.
+-- Projection and total are source-matched to the original measurement.
+------------------------------------------------------------------------
+
+record SourceMatchedABLMeasurement
+    {F Q E}
+    (source : AdmissibleTSVFQuantumSource F Q E)
+    (laws : TwoOutcomeABLAlgebra source) : Set₁ where
+  field
+    measurement : TSVF.ProjectiveMeasurement Q
+    rightOutcome wrongOutcome :
+      TSVF.ProjectiveMeasurement.Outcome measurement
+
+    rightProjectorMatches :
+      TSVF.ProjectiveMeasurement.projector measurement rightOutcome
+      ≡ projectorOf source (rightHistory source) (rightAllowed source)
+    wrongProjectorMatches :
+      TSVF.ProjectiveMeasurement.projector measurement wrongOutcome
+      ≡ projectorOf source (wrongHistory source) (wrongAllowed source)
+
+    measurementTotalMatches :
+      TSVF.ProjectiveMeasurement.totalPathWeight measurement E
+      ≡ total laws
+    measurementPositive :
+      TSVF.QuantumSurface.Positive Q
+        (TSVF.ProjectiveMeasurement.totalPathWeight measurement E)
+
+open SourceMatchedABLMeasurement public
+
+selectedABLContext :
+  ∀ {F Q E} {source : AdmissibleTSVFQuantumSource F Q E}
+    {laws : TwoOutcomeABLAlgebra source} →
+  (M : SourceMatchedABLMeasurement source laws) →
+  TSVF.ABLContext Q (measurement M) E
+selectedABLContext M =
+  TSVF.ablContext (measurementPositive M)
+
+rightABLEqualsOriginalSourceWeight :
+  ∀ {F Q E}
+    {source : AdmissibleTSVFQuantumSource F Q E}
+    {laws : TwoOutcomeABLAlgebra source} →
+  (M : SourceMatchedABLMeasurement source laws) →
+  TSVF.ablProbability (selectedABLContext M) (rightOutcome M)
+  ≡ TSVF.QuantumSurface.divideWeight Q
+      (rightBornWeight source) (total laws)
+rightABLEqualsOriginalSourceWeight {Q = Q} {E = E} M =
+  cong₂ (TSVF.QuantumSurface.divideWeight Q)
+    (cong (TSVF.transitionWeight E) (rightProjectorMatches M))
+    (measurementTotalMatches M)
+
+wrongABLEqualsOriginalSourceWeight :
+  ∀ {F Q E}
+    {source : AdmissibleTSVFQuantumSource F Q E}
+    {laws : TwoOutcomeABLAlgebra source} →
+  (M : SourceMatchedABLMeasurement source laws) →
+  TSVF.ablProbability (selectedABLContext M) (wrongOutcome M)
+  ≡ TSVF.QuantumSurface.divideWeight Q
+      (wrongBornWeight source) (total laws)
+wrongABLEqualsOriginalSourceWeight {Q = Q} {E = E} M =
+  cong₂ (TSVF.QuantumSurface.divideWeight Q)
+    (cong (TSVF.transitionWeight E) (wrongProjectorMatches M))
+    (measurementTotalMatches M)
+
+-- Normalization is now proved for the ORIGINAL TSVF.ablProbability path,
+-- not a second ad hoc branch probability interface.
+sourceMatchedOriginalABLNormalizes :
+  ∀ {F Q E}
+    {source : AdmissibleTSVFQuantumSource F Q E}
+    {laws : TwoOutcomeABLAlgebra source} →
+  (M : SourceMatchedABLMeasurement source laws) →
+  add laws
+    (TSVF.ablProbability (selectedABLContext M) (rightOutcome M))
+    (TSVF.ablProbability (selectedABLContext M) (wrongOutcome M))
+  ≡ one laws
+sourceMatchedOriginalABLNormalizes {source = source} {laws = laws} M =
+  trans
+    (cong₂ (add laws)
+      (rightABLEqualsOriginalSourceWeight M)
+      (wrongABLEqualsOriginalSourceWeight M))
+    (twoOutcomeABLNormalizes source laws)
 
 ------------------------------------------------------------------------
 -- EXACT NONTRIVIAL 2-LEVEL REAL HILBERT SUBSPACE.
