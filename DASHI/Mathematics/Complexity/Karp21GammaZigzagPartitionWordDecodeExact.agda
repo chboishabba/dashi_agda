@@ -109,9 +109,9 @@ oddHalfExact (suc (suc n)) observed =
   cong suc (cong suc (oddHalfExact n observed))
 
 zigzagUnzigzag : (n : Nat) → zigzag (unzigzag n) ≡ n
-zigzagUnzigzag n with even n
-... | true = evenHalfExact n refl
-... | false = oddHalfExact n refl
+zigzagUnzigzag n with even n in observed
+... | true = evenHalfExact n observed
+... | false = oddHalfExact n observed
 
 
 ------------------------------------------------------------------------
