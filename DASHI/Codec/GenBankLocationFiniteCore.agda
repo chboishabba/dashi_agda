@@ -100,17 +100,16 @@ data EvidenceTier : Set where
   externallyCuratedIdentityCandidate : EvidenceTier
   independentlyVerifiedSameObject : EvidenceTier
 
+data NoWitness : Set where
+
 data SourceFeatureIsIndependentProteinProof : Set where
 data SourceFeatureIsHumanMagnetoreception : Set where
 
 featureLabelCannotProveProteinIdentity :
-  SourceFeatureIsIndependentProteinProof → 
-  SourceFeatureIsIndependentProteinProof
-featureLabelCannotProveProteinIdentity impossible = impossible
+  SourceFeatureIsIndependentProteinProof → NoWitness
+featureLabelCannotProveProteinIdentity ()
 
--- No constructor exists for the promotion: no certificate can be made
--- solely from an annotation or a source-label string.
+-- These are finite type-separation guards, not empirical biology proofs.
 creatorAnnotationCannotProveHumanMagnetoreception :
-  SourceFeatureIsHumanMagnetoreception →
-  SourceFeatureIsHumanMagnetoreception
-creatorAnnotationCannotProveHumanMagnetoreception impossible = impossible
+  SourceFeatureIsHumanMagnetoreception → NoWitness
+creatorAnnotationCannotProveHumanMagnetoreception ()
