@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact where
+
+-- Integration owner: not --safe until the imported weighted-graph
+-- theorem chain is independently checked and transitively --safe.
 
 ------------------------------------------------------------------------
 -- E20: THE TWO LITERAL FIXED GRAPH EXCEPTIONS, FULLY SOURCED.
