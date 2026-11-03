@@ -1,3 +1,7 @@
+## 2026-11-03 actual complex original ABL and same-clock continuation
+
+[Published Eq25 complex-gamma and original TSVF ABL source audit](TSVF2017ComplexABLAndOSSameClockMaxCut20261103.md) now derives the finite correct Born ratio with actual Hermitian complex environmental records, source-selected ABL projectors, gamma phases, and a conditional exponential robustness rate. This does not imply literal many-worlds universes, a controllable past signal, empirical macroscopic time reversal, a new timelike direction or an OS/Clay mass-gap theorem.
+
 ## Highest-alpha continuation: native admissibility to ORIGINAL ABL (3 November 2026)
 
 The earlier 3-bit macro code is no longer the strongest finite source. See [exact finite quantum ABL tensor calculation and full source-pinned physical max-cut](TSVFAdmissibleTensorOverlapABLMaxCut20261103.md). The new safe/source-written TSVFAdmissibleQuantumOverlapRobustnessExact and TSVFConcreteAdmissibleQubitABLExact reuse the original bidirectionally admissible histories and original TSVF QuantumSurface/ABL functions; a true two-level, length-indexed rational tensor-environment source gives overlap squared (9/25)^k and original source ABL Born weights 25^k:9^k. The exact same-source cross identity, positive denominator, original-ABL normalization, both admitted positive branch numerators and adverse-gamma counterexample are source written. **Full complex many-body Hilbert, 2017 physical gamma factors, real backward apparatus, (3,1)/OS source and Agda kernel are still OPEN.** No multiverse ontology promotion.
