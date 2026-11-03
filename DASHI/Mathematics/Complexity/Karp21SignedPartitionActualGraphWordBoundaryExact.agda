@@ -31,6 +31,7 @@ open import Data.Maybe.Base using (Maybe)
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21PartitionScaledInstanceExact as Source
+import DASHI.Mathematics.Complexity.Karp21ScaledThresholdExact as Threshold
 import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphYESExact as Actual
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as N21
@@ -39,6 +40,7 @@ import DASHI.Mathematics.Complexity.Karp21WeightedMaxCutFixedNoGraphExact as Fix
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Gamma
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as GraphWord
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
+import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact as FixedWords
 open import Relation.Binary.PropositionalEquality using (refl)
 open import Data.Empty using (⊥; ⊥-elim)
 
@@ -110,15 +112,20 @@ e20SignedPartitionActualGraphIff parts =
 
 record E20ImageWordReceipts : Set₁ where
   field
-    positiveTargetWordFaithful :
-      (target : Source.PositiveCutTarget) →
-      PR.Iff (Actual.ActualPositiveTargetAccepts target)
+    -- The only still-open semantic output-fidelity premise:
+    -- actual ordered weighted complete-graph image of a signed
+    -- source PARTITION with nonzero total.
+    scaledCompleteWordFaithful :
+      (parts : List ℤ)
+      (nonzero : Threshold.NonZero
+        (Source.sourceTotal parts)) →
+      PR.Iff
+        (Actual.ActualPositiveTargetAccepts
+          (Source.scaledCompletePositive parts nonzero))
         (PR.accepts GraphWord.concreteGraphWordLanguage
-          (Encode.encodeGraphWord (graphOfPositiveTarget target)))
-
-    fixedNoWordRejects :
-      PR.accepts GraphWord.concreteGraphWordLanguage
-        (Encode.encodeGraphWord FixedNo.fixedNoGraphInstance) → ⊥
+          (Encode.encodeGraphWord
+            (graphOfPositiveTarget
+              (Source.scaledCompletePositive parts nonzero))))
 
 open E20ImageWordReceipts public
 
@@ -157,12 +164,15 @@ module EncodedE20 (receipts : E20ImageWordReceipts) where
     PR.Iff (e20OutputAccepts target)
       (PR.accepts GraphWord.concreteGraphWordLanguage
         (e20OutputWord target))
-  outputWordFaithful (positiveTarget target) =
-    positiveTargetWordFaithful receipts target
+  outputWordFaithful (positiveTarget Source.unitEdgeYesPositive) =
+    FixedWords.fixedUnitWordFaithful
+  outputWordFaithful
+    (positiveTarget (Source.scaledCompletePositive parts nonzero)) =
+    scaledCompleteWordFaithful receipts parts nonzero
   outputWordFaithful malformedFixedNo =
     PR.iff
       (λ ())
-      (λ accepted → fixedNoWordRejects receipts accepted)
+      (λ accepted → FixedWords.encodedFixedNoWordRejects accepted)
 
   module Total =
     Malformed.TotalMalformedSource
