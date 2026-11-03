@@ -1,5 +1,12 @@
 # GenBank ingestion / avian magnetoreception change log
 
+### Original source bytes exercised after source-writing
+- The exact original GitHub creator source was reconstructed locally, independently confirmed against Git blob SHA `0578ad167666789fbfd3faa849a455c25097b90c`, then parsed with local Biopython 1.86 prototype.
+- Local original run: 18,278 bytes; 11,214 DNA bases; circular ds-DNA; all 22 source annotations in original order; source geometry/qualifier parity **PASS, zero discrepancies**.
+- Local candidate-only ontology projection: 22 source-annotation statements and 30 reversible lookup/annotation worklist holds.
+- Local synthetic parser tests: 7 passed, 0 failed. Bounded receipt: `docs/biology/data/ThoughtEmporiumMagnetoreceptionLocalExecutionReceipt.json`.
+- Exact-head pytest/Agda/Lean, native ITIR/SLR ABI and independently tested biology are not included in these claims.
+
 ## 2026-11-03 — Source → reusable parsing and candidate review
 
 ### Attribution and documentation
