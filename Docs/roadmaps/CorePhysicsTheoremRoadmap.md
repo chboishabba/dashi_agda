@@ -1,3 +1,9 @@
+## 2026-11-03 supplement — Emergent (3,1) / quantum-to-YM / KK exact proof network
+
+The [canonical new cross-lane P00–P11 roadmap](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md) contains **176 distinct numbered exact lemma obligations**, acceptance statements, original theorem owners and minimal dependency cuts. It extends but **does not replace** this original eight-gate Paper 1–7 inventory. The direct owner overlaps are Gate 4 non-flat metric and signature, Gate 5 genuine Hilbert/Stone (P03/P07), Gate 3 physical non-Abelian source and Yang–Mills (P04–P06), Gate 1/6 local physical carrier/gauge representations and Gate 8 composition. Finite S8/CCR/signature or conditional compiler receipts must not promote actual spacetime or Clay closure.
+
+The decisive cross-lane result is one physically selected source, same Lorentzian metric, same observed clock and same OS-reconstructed Hamiltonian (P07). #1444 newest variable-size Haar inputs are not yet present on #1460; actual physical one-link Haar/vector decoder, RG continuum/OS spectral gap and real source transport remain open.
+
 # Core Physics Theorem Roadmap
 
 Date: `2026-05-22`
