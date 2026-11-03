@@ -11,7 +11,7 @@
   original qualifier names and reopenable provenance.
 - [x] Preserve unknown/legacy keys and deficient qualifiers as review holds.
 - [x] Emit an ITIR/PNF-style read-only candidate graph; zero external edits.
-- [x] Local tests of synthetic component/replicon classifications (16 passed).
+- [x] Local tests of synthetic component/replicon classifications (17 passed).
 - [ ] Execute new exact-head GitHub-branch Python tests in the actual checkout.
 - [ ] Execute the classifier on the creator's exact source `.gb` files with
   independent Git blob identity and report a source-derived fixture.
@@ -25,3 +25,5 @@
   accession and version; review holds must not auto-promote to function.
 - [ ] Reconcile the BH4 PR #1454 interop as a separate reusable consumer;
   no edits to ESD, archived/deprecated SensibLaw production surfaces.
+
+- [x] Suppress edit-like/codon-change source labels in candidate output while retaining exact source reopening; local 17-case regression rerun passed.
