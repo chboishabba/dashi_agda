@@ -1,3 +1,16 @@
+### 2026-11-03 exact 2017 complex ABL and original indexed OS-clock MAX-CUT
+
+[New four-module quantitative source ledger](../physics/TSVF2017ComplexABLAndOSSameClockMaxCut20261103.md). Original BidirectionallyAdmissibleHistoryFibre, original Q.TSVF, original CayleyDickson complex, rational order and original R331 OS-indexed Hamiltonian ownership are reused.
+
+- **P01.L13:** actual finite rational-complex Hermitian two-coordinate/environment source and arbitrary complex gamma products SOURCE; physical N-body apparatus with independent/correlated disturbance classes OPEN.
+- **P01.L14:** nonvacuous original two-boundary histories, orthogonal complete projectors, original Q.ABLContext with constructed positive selected total and original Q.ablProbability common-denominator normalization SOURCE; physical Hilbert/pre-postselection OPEN.
+- **P01.L15:** complex gamma Born product, environment overlap norm for all k=N-n, exact probability-odds cross identity, unsquared gamma i-phase no-go and exponential source bound SOURCE; physical Eq.23–25 gamma conventions and disturbance bounds OPEN.
+- **P01.L16:** conditional finite original ABL robustness and adversarial gamma negative controls SOURCE; actual physical macroscopic reverse-evolution OPEN.
+- **P07.L15–16:** original OS.hamiltonian reconstruction indexed by original R331 transfer coordinate, and finite all-n observer/OS step-readout commuting from explicit one-step physical intertwiner SOURCE. Full real-time strong continuity, physical unitary, Stone common domain and same-state gauge observables OPEN. Optional 5D KK same-metric continuation remains separate; standalone 4D Clay R443/R445/R320/R333/H6 unchanged.
+- **Primary paper Eq25 ambiguity:** Eqs23–24 use gamma as overlaps, yet printed probability odds display unsquared gamma products. The complex i vs 1 negative control separates phase amplitudes from Born weights. The physical paper's intended convention is unresolved, not silently repaired.
+
+**Total remains 186 exact lemma IDs; physical terminals OPEN. No kernel typechecking or original physical source claim.**
+
 **Further P01.L13/L14 finite source strengthening:** the concrete original TSVF two-outcome projectors now prove completeness (P_R+P_W=identity), mutual orthogonality and idempotence. The source-owned two-boundary admissibility relation is no longer all-true: the chosen three-history carrier admits two outcomes and **excludes a third** by a genuine empty-admissibility proof. Both selected outcomes still use the original Q.ablProbability with one positive denominator and the same independent tensor overlap. This is SOURCE, not kernel/physical. The finite quantum state remains a rational real/nonnegative coordinate submodel, not physical complex Hilbert, and P01/P07 physical inputs remain OPEN.
 
 # Emergent (3,1) → quantum mechanics → Yang–Mills → KK: exact-lemma roadmap
