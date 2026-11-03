@@ -49,6 +49,19 @@ Both outcomes are actual inhabitants of one explicitly selected original bidirec
 
 The original Q.QuantumSurface needs a total divideWeight operation; this finite realization represents fractions as raw numerator/denominator pairs. Only the *selected* positive-denominator ABLContext is claimed a valid conditional probability. The unnormalized initial/final vectors differ from normalized representatives only by common positive factors that cancel in ratios. Projectors are actual coordinate idempotents; no arbitrary selected-result flag is supplied.
 
+## C. Original rational-complex gamma amplitude and Born-product theorem
+
+The highest-alpha *phase-sensitive* improvement is now SOURCE-WRITTEN as DASHI/Quantum/TSVFComplexGammaProductBornExact.agda. It reuses **the existing original** DASHI/Mathematics/Algebra/CayleyDicksonRationalComplexQuaternionExact.agda RationalComplex, complex multiplication, conjugation, norm-square and the existing complexNormMultiplicative theorem. That original owner now carries a --safe header after a local no-postulate audit; no Agda kernel has run.
+
+For an arbitrary finite list of **complex** disturbance amplitudes gamma_j, the exact theorem complexGammaBornWeightIsNormOfProduct proves
+[
+left|prod_{j=1}^{n}gamma_jight|^2
+=prod_{j=1}^{n}|gamma_j|^2.
+]
+The equalities are literal rational-complex norm-square polynomial identities, not a postulated bridge between amplitude and Born weight. The separate theorems complexConjugateBornNormInvariant, gammaBornProductConjugationInvariant and complexGammaProductConjugationBornInvariant prove that conjugating *all* gamma factors leaves the combined Born weight unchanged. imaginaryUnitGammaDoesNotChangeBornWeight proves inserting the exact i-phase factor does not change the probability weight. These are **finite algebraic** conjugation/phase invariants, not a physical antiunitary time reversal or dynamical environment theorem.
+
+This resolves the earlier ambiguous notation **at the algebraic carrier level**: the 2017 paper's gamma_j are complex overlaps, whereas the earlier comparison model's Gamma_R/Gamma_W were nonnegative already-squared effective weights. Their connection is now the exact norm-of-product theorem once a physical source supplies gamma_j. The remaining hard source is to prove those literal gamma_j equal the physical postselected environment overlaps, to connect their norm-product with the chosen source's right/wrong projection probabilities and to pay the corresponding uniform N−n overlap bound. The published paper Eq.(25) is not simply re-labelled as our own result.
+
 ## The exact 2017 physics still missing
 
 Original source: Aharonov, Cohen, Landsberger (2017), Entropy 19(3), 111, Eq.(25), https://doi.org/10.3390/e19030111. The published gamma_j are complex overlaps/amplitudes in a specific disturbed-environment evolution, not necessarily the **effective nonnegative Born weights** Gamma_R/Gamma_W of our comparison. Do not conflate the two; retain complex conjugation, squared amplitude and joint normalization where appropriate.
