@@ -30,7 +30,8 @@ import Data.Nat.Properties as NatP
 open import Data.List.Base using (List; []; _∷_; length)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Integer.Base using (ℤ; +_)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₂)
+open import Data.Empty using (⊥)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 import Data.Fin.Base as Fin
 import Data.Fin.Properties as FinP
@@ -38,6 +39,7 @@ import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Gamma
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as N21
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import Data.Integer.Base as Int
 
 record RawEdge : Set where
@@ -166,3 +168,18 @@ rejectIncompleteGraphHeader = refl
 rejectZeroThreshold :
   decodeGraphWord (true ∷ true ∷ true ∷ []) ≡ nothing
 rejectZeroThreshold = refl
+
+------------------------------------------------------------------------
+-- The original signed MAX CUT *language* is now fixed to this literal
+-- input parser. Future E20 reductions cannot silently choose a
+-- different graph-acceptance predicate to make the iff easier.
+------------------------------------------------------------------------
+
+concreteGraphWordAccepts : Word.BitWord → Set
+concreteGraphWordAccepts word with decodeGraphWord word
+... | nothing = ⊥
+... | just graph = Cut.WeightedMaxCutYES (proj₂ graph)
+
+concreteGraphWordLanguage : PR.Language Word.BitWord
+concreteGraphWordLanguage =
+  record { PR.accepts = concreteGraphWordAccepts }
