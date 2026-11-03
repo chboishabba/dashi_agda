@@ -25,6 +25,7 @@ module DASHI.Analysis.BishopMachinFirstPositiveSineZeroFromNativePhaseExact wher
 ------------------------------------------------------------------------
 
 open import Data.Empty using (⊥)
+open import Data.Product.Base using (proj₁)
 open import Data.Rational.Unnormalised as Q using (0ℚᵘ)
 import Data.Rational.Unnormalised.Properties as QP
 import Real as R
@@ -103,7 +104,7 @@ sourceMachinFirstSineZeroFromNativePhase
     inputs imaginaryProduct quarterEquality sinePositive =
   source-machin-first-positive-sine-zero
     sourceMachinPiStrictPositive
-    (Data.Product.Base.proj₁
+    (proj₁
       (Product.round11MachinTrigEndpointFromImaginaryProduct
         inputs imaginaryProduct quarterEquality))
     (nativeSineNoPriorZero inputs sinePositive)
