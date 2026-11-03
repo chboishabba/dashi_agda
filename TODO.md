@@ -17514,3 +17514,5 @@ Cleanup
 - [ ] K04d-CONTINUITY: finite-source term continuity, regional uniform-limit continuity, selected original ZetaHalfPlaneLayer/completed-zeta same-object identification.
 - [ ] K05-PI: actual Bishop atan/tangent quarter equality, independent first-positive-zero/least-positive-period trigonometric pi uniqueness.
 - [ ] Exact Agda `--safe` kernel type-check of new module, focused dependency root and full TOE imports, with zero postulates, holes and termination bypasses. No Agda executable available in this pass.
+
+- [x] K05 source corollaries: conditional `round11SineAtTwoPi ≃ 0` and `round11CosineAtTwoPi ≃ 1` on the original Round11 Bishop series; exact-head Agda elaboration remains pending.
