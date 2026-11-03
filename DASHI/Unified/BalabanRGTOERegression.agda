@@ -30,6 +30,7 @@ import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as Route
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31Probe
 import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as TSFVArrow
 import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as TSFVKKSameMetric
+import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
 
@@ -102,6 +103,18 @@ open YMKKHodge public using
   ; euclideanStarSquareIsPositive
   ; sameSourceDirectionalLorentzSignature
   ; creutzFiveEuclideanIsNotKK
+  )
+-- Genuine finite selected single-branch macro restoration, not a quantum
+-- or same-H_OS theorem. Original Aharonov/Cohen/Gruss/Landsberger credited.
+open TSVFMacro public using
+  ( singleFaultMacroRobust
+  ; singleFaultChangesFineData
+  ; noExactMicroRestorationFromMacro
+  ; originalPastRecordUnchanged
+  ; originalMicroHistoriesDiffer
+  ; selectedBranchMacroRobust
+  ; pastOnlyCannotDetermineSelectedMacroBranch
+  ; reversalAndRobustMacroCoexist
   )
 open FiveSectorBIDI public using
   ( threeToTwoExact
