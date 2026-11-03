@@ -945,6 +945,9 @@ import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as SUNVar
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as SUNBondCodec
 import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as SUNConstructedGauge
 import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact as SUNFiniteSafe
+import DASHI.Physics.YangMills.YMClayFiniteNativeBondReindexingSafeExact as SUNFiniteReindex
+import DASHI.Physics.YangMills.YMClayNativeSideFourC3VectorWeldExact as SUNNativeC3Vec
+import DASHI.Physics.YangMills.YMClaySUNConstructedNativeC3SetoidHaarExact as SUNNativeC3Haar
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
@@ -1265,3 +1268,37 @@ open SUNMovingFamily public using
   ; physicalSixDeficitGaugeExpectation
   ; physicalWilsonActionAt
   ; physicalWilsonActionGauge)
+
+------------------------------------------------------------------------
+-- 2026-11-03 R443: original spatial C3 bond coordinates -> actual
+-- side-four 1024-link Vec. Exact native order-three/inverse source.
+-- This does NOT yet construct an adjacent-swap LinkPermutation witness.
+------------------------------------------------------------------------
+open SUNFiniteReindex public using
+  (reindexBonds
+  ; reindexAt
+  ; reindexIdentity
+  ; reindexCompose
+  ; reindexAsIdentity
+  ; reindexInverseLeft
+  ; reindexInverseRight
+  ; reindexOrderThree)
+
+open SUNNativeC3Vec public using
+  (forwardBond
+  ; backwardBond
+  ; forwardAfterBackward
+  ; backwardAfterForward
+  ; bondOrderThree
+  ; forwardVector
+  ; backwardVector
+  ; nativeForwardIsVectorAt
+  ; nativeForwardEncodesExactly
+  ; forwardBackwardVector
+  ; backwardForwardVector
+  ; forwardVectorOrderThree)
+
+open SUNNativeC3Haar public using
+  (ExactC3AdjacentSwapWitness
+  ; originalNativeC3SetoidCodec
+  ; originalNativeC3GibbsHaarInvariant)
