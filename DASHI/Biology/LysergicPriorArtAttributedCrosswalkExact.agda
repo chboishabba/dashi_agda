@@ -55,6 +55,26 @@ panaccioneRobinsonPatent2015 =
     "Patent claims/disclosure concerning a filamentous fungal context. Claim language, legal status and source discussion do not themselves prove experiments, validity, safety, freedom to operate, quantitative yields or yeast equivalence."
     Sources.publicAttribution
 
+------------------------------------------------------------------------
+-- A DISTINCT 2023 patent publication for the Wong-associated yeast work.
+-- Listed inventors are SIX people and must not be mislabelled as identical
+-- to the SEVEN scientific authors of the 2022 original research article.
+-- Inventors as listed: Wong; Lim; Go; Yew; Freemont; Bell.
+-- Scientific article additionally credits Yong Quan Tan.
+------------------------------------------------------------------------
+
+wongAssociatedPatent2023 : Sources.AttributedSource
+wongAssociatedPatent2023 =
+  Sources.mkNoDOISource
+    "Wei Jie Garrett Wong; Li Rong Lim; Maybelle Darlene Kho Go; Wen Shan Yew; Paul S. Freemont; David John Bell (listed inventors)"
+    "Production of D-lysergic acid"
+    "WO2023096577A2; PCT/SG2022/050840; originally National University of Singapore and Imperial College Innovations Ltd"
+    "2023"
+    "https://patents.google.com/patent/WO2023096577A2/en"
+    (Sources.namedSourceKind "patent publication")
+    "Patent publication linked to later yeast research, priority shown 2021-11-26, published 2023-06-01. Patent inventorship differs from the seven-author 2022 scientific paper. It references the earlier 2015 West Virginia patent family. Neither patent status nor claim text grants scientific or legal authority."
+    Sources.publicAttribution
+
 historicalLysergicSourceAtlas : Sources.AttributedSourceAtlas
 historicalLysergicSourceAtlas =
   Sources.mkSourceAtlas
@@ -63,6 +83,7 @@ historicalLysergicSourceAtlas =
     (robinsonPanaccione2014
       ∷ panaccioneRobinsonPatent2015
       ∷ Wong.wongEtAl2022
+      ∷ wongAssociatedPatent2023
       ∷ [])
     "Non-operational source chronology and scientific-claim boundaries; source repetition is not independent validation, legal clearance, chemical same-object or physical flux calibration."
 
@@ -236,3 +257,67 @@ researchCitationImportsNoProof = refl
 lineageAtlasCreatesNoAuthority :
   Sources.atlasCreatesAuthority historicalLysergicSourceAtlas ≡ false
 lineageAtlasCreatesNoAuthority = refl
+
+------------------------------------------------------------------------
+-- 2021 claimed priority, 2022 paper, 2023 WO publication.
+-- The article and associated patent are not interchangeable records.
+------------------------------------------------------------------------
+
+record YeastPatentFamilyLineage : Set where
+  constructor yeastPatentFamilyLineage
+  field
+    original2022Research : Sources.AttributedSource
+    laterAssociatedPatent : Sources.AttributedSource
+    earlier2015Family : Sources.AttributedSource
+    laterPatentProvisionalPriority : String
+    articlePublication : String
+    laterPatentFiling : String
+    laterPatentWOA2Publication : String
+
+    exactPatentInventorSetEquals2022AuthorSet : Bool
+    exactPatentInventorSetEquals2022AuthorSetIsFalse :
+      exactPatentInventorSetEquals2022AuthorSet ≡ false
+
+    patentPublicationIsIndependentReplication : Bool
+    patentPublicationIsIndependentReplicationIsFalse :
+      patentPublicationIsIndependentReplication ≡ false
+
+    nationalPatentRightStatusIndependentlyVerified : Bool
+    nationalPatentRightStatusIndependentlyVerifiedIsFalse :
+      nationalPatentRightStatusIndependentlyVerified ≡ false
+
+yeastPatentFamilyLineage : YeastPatentFamilyLineage
+yeastPatentFamilyLineage =
+  yeastPatentFamilyLineage
+    Wong.wongEtAl2022
+    wongAssociatedPatent2023
+    panaccioneRobinsonPatent2015
+    "2021-11-26"
+    "2022-02-07"
+    "2022-11-18"
+    "2023-06-01"
+    false refl
+    false refl
+    false refl
+
+laterPatentWOStatusAsDisplayed : PatentStatusUncertainty
+laterPatentWOStatusAsDisplayed =
+  patentStatusUncertainty
+    wongAssociatedPatent2023
+    "Ceased (WO PCT/SG2022/050840 Google Patents label as displayed)"
+    "Separate national family entries for US, EP, AU, CA, CN and JP are shown pending by Google Patents; these status labels need official-jurisdiction confirmation."
+    Core.databaseStatusLabel
+    false refl
+    false refl
+
+laterPatentCitationImportsNoProof :
+  Sources.citationImportsProof wongAssociatedPatent2023 ≡ false
+laterPatentCitationImportsNoProof = refl
+
+laterPatentToYeastPaperClaimUnpaid :
+  Core.ClaimTransport
+    Core.yeastPatentPublication2023 Core.yeastArticle2022 →
+  Core.NoWitness
+laterPatentToYeastPaperClaimUnpaid =
+  Core.laterPatentToYeastStudyTransportUnpaid
+
