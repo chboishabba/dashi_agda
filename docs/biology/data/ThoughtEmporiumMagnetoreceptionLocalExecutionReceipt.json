@@ -61,10 +61,12 @@
   "serialized_roundtrip_raw_byte_count": 18377,
   "raw_byte_identical_serialization": false,
   "local_semantic_roundtrip_checks": {
-    "dna_sequence": true,
-    "topology": true,
-    "feature_types": true,
-    "feature_locations_and_qualifiers": true,
-    "record_id": true
+    "dna_sequence_hash_equal": true,
+    "sequence_length_equal": true,
+    "molecule_type_equal": true,
+    "topology_equal": true,
+    "feature_types_equal": true,
+    "every_feature_location_and_qualifier_equal": true,
+    "source_record_id_equal": true
   }
 }
