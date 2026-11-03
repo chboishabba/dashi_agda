@@ -48,11 +48,18 @@ def mirror_geometry(tree: dict, length: int) -> dict:
             "end1": length - start,
             "strand": _reverse_strand(tree["strand"]),
         }
+    # Biopython CompoundLocation._flip (1.86) preserves source part order
+    # when ANY part has a defined strand. Only when ALL child strands are
+    # None does it reverse part order (circular origin representation).
+    # Using compound.strand is insufficient: mixed child strands also
+    # yield compound.strand=None yet MUST retain part order.
+    source_parts = tree["parts"]
+    if all(part["strand"] is None for part in source_parts):
+        source_parts = list(reversed(source_parts))
     return {
         "kind": "compound", "operator": tree["operator"],
         "strand": _reverse_strand(tree["strand"]),
-        "parts": [mirror_geometry(part, length)
-                  for part in reversed(tree["parts"])],
+        "parts": [mirror_geometry(part, length) for part in source_parts],
     }
 
 
