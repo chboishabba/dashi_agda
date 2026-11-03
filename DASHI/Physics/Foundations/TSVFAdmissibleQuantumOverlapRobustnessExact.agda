@@ -341,7 +341,7 @@ tensorRearrange :
   ∀ (a b c d : Nat) →
     (a * b) * (c * d) ≡ (a * c) * (b * d)
 tensorRearrange a b c d =
-  trans (sym (ℕₚ.*-assoc a b (c * d)))
+  trans (ℕₚ.*-assoc a b (c * d))
     (trans
       (cong (λ v → a * v) (sym (ℕₚ.*-assoc b c d)))
       (trans
