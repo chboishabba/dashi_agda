@@ -1,3 +1,5 @@
+> **TSVF admissibility/quantum-ABL source upgrade (3 November 2026):** [Exact tensor/environmental overlap, ORIGINAL TSVF ABL normalization, and same-source finite BIDI](TSVFAdmissibleTensorOverlapABLMaxCut20261103.md). Unlike the earlier majority-code analogue this source-written Agda work actually instantiates the original two-boundary quantum probability interface, but not its physical complex-Hilbert or OS-selected time. The physical same-clock conjecture remains OPEN.
+
 # The world as a selected history: a speculative (3,1) Yang–Mills/KK steelman
 
 **3 November 2026 — research conjecture, NOT a theorem, publication, experimental finding, or kernel-checked Agda result.** This paper is intentionally audacious. The Golden Agdas are the subsequent BS-test; no conditional source or finite test is promoted to full physics.
