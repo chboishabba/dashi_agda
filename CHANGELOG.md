@@ -95,3 +95,11 @@ monitor surface.
 - Imported the new theorem owners into the Karp and binary-runtime roots, synchronized roadmap and attribution.
 - **Not complete or kernel accepted:** full original gamma `decodeGraphWord`/encoder same-object transport, E20 image `scaledCompleteWordFaithful`, SAT/N21/E20 bit-machine clocks, universal Cook–Levin, E01–E19 + all 21 `InNP` instances and final `CertifiedKarpNetwork` remain unfilled. A comparison count is not a Turing machine clock; no Agda binary or CI acceptance receipt was available. Certified reductions and NP-completeness results remain 0/20 and 0/21.
 
+
+## 2026-11-03 — E05 exact original graph complement / canonical bit-word payload (PR #1445)
+
+- Source-wrote the upper-triangular off-diagonal binary complement codec `Karp21CliqueComplementUpperTriangleWordExact.agda`, including involution, exact word-length preservation and emitted-bit count.
+- Connected this to the **original** source-owned simple graph complement using `Karp21CliqueComplementSameGraphWordExact.agda`; proved `e05CanonicalComplementGraphWordSameObject` for actual `allUpperPairs` addresses with `upperPairNoLoop`, ruling out accidental diagonal self-loops.
+- Both new modules are imported into `Karp21Everything.agda`; the exact roadmap and prior-art ledger distinguish source-written payload correctness from an encoded many-one reduction.
+- **Still unverified/open:** Agda acceptance, E05 strict graph/threshold bitword transformation and machine cost, P0 Cook–Levin, P1 E20/N21 full graph-word iff and polynomial clocks, other E01–E19 reductions, 21 `InNP` instances and the unconditional `CertifiedKarpNetwork`. No certified NP-completeness terminals claimed.
+
