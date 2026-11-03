@@ -1,4 +1,10 @@
 
+### 2026-11-03 native finite bond codec independent exact-rational fixture
+
+Committed `scripts/check_ym_native_periodic_bond_vec_codec.py`. The local execution of this same script (standard Python `fractions.Fraction`, no external dependencies) passed: side 2 (16 sites / 64 bonds), side 3 (81 sites / 324 bonds) and side 4 (256 sites / **1,024 bonds**); for every bond, field→vector→field, vector→field→vector, and original `(gamma_x U) gamma_y^{-1}` versus vector `gamma_x (U gamma_y^{-1})` agree exactly. Wrong target inverse disagreed on 52, 256, 820 bonds respectively, and a duplicate-label enumeration fails the vector roundtrip as expected. These diagnostics cross-check enumeration order and group-product association, **not** Agda kernel acceptance, compact Haar, all-observable integrability, R445 physical limits, CMP116 or OS.
+
+This narrows the literal R443/R445 finite **codec + gauge naturality** from assumed record inputs to source-written canonical enumerations. Still NOT paid: the selected C3 product permutation syntax/witness, continuous compact one-link Haar and scalar-carrier weld, selected CMP119 R124 metric insertion, continuum/UV estimates and same-H gap.
+
 
 ### 2026-11-03 — P0 original bond codec + native gauge naturality (YM PR #1444)
 
