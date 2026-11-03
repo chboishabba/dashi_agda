@@ -12,9 +12,15 @@ https://patents.google.com/patent/US787412A/en . Tesla described an
 Earth-conduction/standing-wave design and reported wavelengths of about
 25–70 km. These are patent claims, **not independent demonstrations** of
 global power transmission or any mental effects. If one uses free-space c
-merely for comparison, those wavelengths are approximately 4.3–12 kHz, not
-the 7.83 Hz Schumann fundamental. Actual ground phase velocity is an
-independent unknown. Do not attribute modern quantum-mind claims to Tesla.
+merely for comparison, those observed lightning-disturbance wavelengths are
+approximately 4.3–12 kHz: the VLF Earth–ionosphere waveguide regime, not
+the **fundamental** Schumann mode. Critically, the *same patent also explicitly*
+proposes a resonant driving range below 20 kHz, naming **6 Hz as its
+suggested lower limit**. That operating proposal includes the measured
+first Schumann mode near 7.8 Hz. It was incorrect to treat Tesla's quoted
+25–70 km lightning observations as the exclusive range for his transmitter.
+Actual ground phase velocity is an independent unknown. Do not attribute
+modern quantum-mind claims to Tesla.
 
 ## Source-owner reuse and exact legal promotion boundary
 
@@ -109,7 +115,7 @@ or empirical propagation.
 | T1 tower + ground source | Original conductor/electrode geometry, ground conductivity, Maxwell current distribution | OPEN |
 | T2 phase/mode matching | Actual boundary-value field solution and overlap with Earth–ionosphere eigenmode | OPEN |
 | T3 power and loss | Coupling, dissipation, spectral purity, realistic modal Q | OPEN |
-| T4 conversion | Actual low-frequency source or experimentally measured frequency-mixing nonlinearity | OPEN |
+| T4 conversion | Actual low-frequency source or *selected* measured nonlinear frequency mixing; artificial 7.8–8.0 Hz excitation via ionospheric heating was shown experimentally in 2014, but is not a Wardenclyffe bridge | OPEN for Wardenclyffe |
 | T5 conventional receiver | Calibrated received E/B, impedance, SNR and information bandwidth | OPEN |
 | T6 biological receiver | Same-field inside-tissue exposure and reproducible neurophysiological decoding | OPEN |
 | T7 novel physics | Competing ordinary-EM null model, measured anomalous-source/probe response, replicated exclusion of ordinary EM | OPEN |
@@ -133,3 +139,62 @@ holes or termination pragmas, but **no independent Agda kernel acceptance was
 obtained in this workspace**. Do not promote it to a golden accepted theorem
 until `agda --safe` executes against this exact revision. Do not promote
 Wardenclyffe-to-brain communication at all absent physical validation.
+
+## Correction/addendum: Schumann excitation, damping versus coherence
+
+Tesla's patent 787,412 contains *both* the 25–70 km **observational
+lightning-wave estimate** and the explicit **6 Hz suggested low-frequency
+operating bound** (with suggested frequency below 20 kHz). Schumann's first
+resonance at ~7.8 Hz therefore sits in his contemplated operating band,
+although no contemporaneous Wardenclyffe 7.8 Hz excitation or corresponding
+measurement has been verified.
+
+Two physically distinct electromagnetic regimes remain admissible:
+
+- VLF propagation around Earth (4.3–12 kHz from Tesla's observed wavelengths
+  if converted at free-space c): a real guided electromagnetic propagation
+  regime, but **not** the low-order 7.8 Hz Schumann resonance.
+- A transmitter with **actual drive spectral support and nonzero source-to-mode
+  overlap near 7.8 Hz** could maintain a planet-scale forced Schumann response.
+  Grounded tower geometry alone does not provide either datum.
+
+**New experimental lead:** Streltsov et al., *Artificial excitation of ELF waves
+with frequency of Schumann resonance* (2014), DOI
+https://doi.org/10.1016/j.jastp.2014.07.004 . HAARP's modulated HF ionospheric
+heating yielded observed 7.8–8.0 Hz ELF waves in 8 of 46 cases.
+The relevant current-modulation/conductivity response is **nonlinear**,
+so this does not contradict the *linear AM spectrum counterexample* and
+does not establish Wardenclyffe's direct ground-coupling efficiency.
+
+For a single **linear damped resonator** with f0=7.83 Hz, Q=5:
+`Delta f=f0/Q≈1.57 Hz`, `tau_energy=Q/(2*pi*f0)≈0.102 s`,
+`tau_amplitude=2*Q/(2*pi*f0)≈0.203 s`.
+These are **free ringdown** measures after drive removal, not limits on
+driven phase coherence. Continuous phase-stable driving can maintain a forced
+phase coherent response, at the cost of ongoing dissipation. Actual observed
+Schumann peak frequency is variable; 7.83 Hz is an illustrative center.
+
+**Quantum scope:** a spatially extensive coherent electromagnetic field is not,
+by itself, a nonclassical entangled field. Ordinary coherent quantum states
+may be separable between modes; linear mixing of coherent inputs does not
+produce entanglement. `Q` alone does **not** prove or disprove entanglement.
+At T=300 K, `k_B T/(h f0)≈8e11` sets a high thermal occupation scale
+for 7.83 Hz, implying stringent noise/isolation requirements for
+nonclassical witness tests. No such experiment is supplied by the transcript.
+
+**Critical correction to physical toy budget:** The hypothetical 1%-coupled,
+1-MW source yielding 1.68 mV/m under a *uniform cavity-equivalent volume*
+is neither a historical estimate nor a plausible coupling certificate.
+With the separate short-57m-monopole **far-field** approximation at 7.83 Hz
+and 1000 A RMS, the illustrative far-field radiated power is only ~0.875 mW.
+Those deliberately different coupling models must **not** be silently joined.
+A grounded-Earth-mode overlap is not established by that antenna result.
+
+Additional primary research and reviews:
+- https://doi.org/10.1016/j.jastp.2014.07.004 (artificial ELF excitation)
+- https://doi.org/10.1029/2011GL049668 (Schumann modes, Q)
+- https://doi.org/10.1002/2015RS005683 (Earth–ionosphere ELF/VLF waveguide)
+- https://doi.org/10.1103/PhysRevA.71.062319 (coherent states vs entanglement)
+
+Status: source-written correction; no actual receiver or Schumann-mode tower
+source-coupling measurement, and no kernel acceptance claimed.
