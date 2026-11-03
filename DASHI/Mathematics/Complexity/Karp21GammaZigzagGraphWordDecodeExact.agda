@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact where
+
+-- Integration owner: not --safe until the imported weighted-graph
+-- theorem chain is independently checked and transitively --safe.
 
 ------------------------------------------------------------------------
 -- N21: LITERAL SIGNED WEIGHTED MAX CUT GRAPH WORD PARSER.
