@@ -100,6 +100,28 @@ historyNotRecoverableFromActionAlone decode correct =
       (trans (cong decode futureChoicesHaveSameMicroscopicAction)
         (correct Micro.choosePlusBoundary)))
 
+-- The exact source-owned coarse past observation is also lossy:
+-- both future choices yield the *same* recorded past, but distinct
+-- underlying histories. No deterministic decoder from that one coarse
+-- observation can reconstruct the true selected history in both cases.
+--
+-- This directly models the conjecture in dashiQ/PHYSICS_TARGETS.md:
+-- reversible microscopic history + lossy observation. It is a finite
+-- non-factorability theorem, not a proof of thermodynamic entropy growth
+-- or an emergent Lorentzian clock.
+pastRecordCannotRecoverSelectedMicroHistory :
+  (recover : Micro.PastRecord → Micro.History2) →
+  (correct :
+    (choice : Micro.LaterChoice) →
+    recover (Micro.pastAccessibleOutcome choice)
+    ≡ Micro.hiddenHistory choice) →
+  ⊥
+pastRecordCannotRecoverSelectedMicroHistory recover correct =
+  futureChoicesChangeHiddenHistory
+    (trans (sym (correct Micro.chooseMinusBoundary))
+      (trans (cong recover futureChoicesKeepSamePast)
+        (correct Micro.choosePlusBoundary)))
+
 -- The exact physical promotion boundary. The observer's source is
 -- explicitly the SAME selected state; the measured arrow must be
 -- calibrated to the signs of the same actual quadratic.
