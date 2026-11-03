@@ -1921,3 +1921,11 @@ All three TOE roots import the new owner, commits
 Attribution retained: Machin (1706), Dirichlet, Riemann,
 Bishop and Bridges, Murray, Viktor Csimma's pinned
 vendor/bishop and all reused in-repo original owner paths.
+
+
+## 2026-11-03 Bishop K04d/K05 same-object minimum cut
+
+See [the audited theorem-owner and exact-lemma map](BishopK04dK05SourceNativeMaxCut20261103.md).
+Source-written on PR #1408: `BishopMachinTwoPiPeriodFromImaginaryProductExact.agda` derives original Round11 sine/cosine two-Machin-pi periodicity from the **single** pure-imaginary exponential multiplication hypothesis and original quarter-angle sine/cosine equality. It does not prove either premise or least-positive-period uniqueness.
+
+Reconciled live gates: **(1)** source-native exp_B(log_B(n+1))=n+1 for n≥1, **(2)** same-Round11 mixed signed-factorial Cauchy/exponential product for all x,y, **(3)** native finite-term plus uniform-limit continuity and selected same-object ZetaHalfPlaneLayer/completed-zeta weld, **(4)** arctangent-to-tangent quarter-angle equality and *independent* trigonometric pi characterization. Pythagorean, original phase-modulus, noninteger Basel comparison, Machin π-shift, and the new 2π period are **downstream**, not separately assumed. Source readback only; no Agda kernel acceptance claimed.
