@@ -289,3 +289,100 @@ Phase DAG:
 - [ ] **P11.L18** Prove terminal theorem only after all actually required physical fields are inhabited; else publish exact smallest unsatisfied primitive-leaf cut.
 
 **Owners:** BalabanRGTOERegression and TOE imports plus all owners above. **Status:** OPEN.
+
+## 3. Phase acceptance matrix and deliverables
+
+| Phase | Exact lemma count | Deliverable | Required acceptance receipt | Current status |
+|---|---:|---|---|---|
+| P00: source + integration | 10 | one actual multi-PR proof import graph | pinned SHAs, newest #1444 available to #1460, exact-head safe compile, transitive assumption inventory | OPEN; #1444 source ahead of #1460 |
+| P01: histories and arrow | 12 | selected physical continuum observer with non-backwards-signalling arrow | source-native state/refinement/probabilities and filtration proof | finite OWNED; physical OPEN |
+| P02: 3+1 causal geometry | 16 | independently derived dimension four, rank-three space and one clock | source dimension estimator, metric principal symbol, cone and time orientation | COND/OPEN |
+| P03: Hilbert/quantum | 14 | symplectic-to-J complex structure and genuine Stone/CCR/Schrödinger evolution | positive completion, unbounded operator convergence, domains, hbar SI | finite OWNED; physical OPEN |
+| P04: physical gauge | 12 | source-native U(1)/compact simple G, separate pure YM sector | local group/gauge bundle/connection; SM authority extra only if claimed | COND/OPEN |
+| P05: R443 finite YM | 16 | actual compact SU(N) native product Haar and finite physical Wilson Gibbs | one-link Haar, function↔Vec decoder, selected R124/CMP119 density | #1444 SOURCE; physical OPEN |
+| P06: R445/R320/R333 | 20 | nontrivial infinite-volume 4D pure Yang–Mills with Δ>0 | actual uniform UV/tail/mixed-J/OS/gap source, full Clay scope | OPEN |
+| P07: same-clock OS | 14 | physically selected H_clock ≃ H_OS and same metric/observables | unitary/spectral/domain and reflection-positivity correspondence | SOURCE/COND; physical OPEN |
+| P08: 5D KK | 17 | selected spacelike-circle EFT → same 4D geometry/gauge + scalar/radion | action reduction, couplings, decoupling, thresholds, holonomy | COND/OPEN |
+| P09: lower-dimensional BIDI | 13 | correct 2D and scoped 3D known-physics observable comparison | real scalar-aware reduction and quantitative errors | external sources available, maps OPEN |
+| P10: gravity | 14 | one physical stress source and one positive-G metric | Ward/conservation, real W variation, independent four-channel predictions | conditional owners, source OPEN |
+| P11: finish | 18 | full physically inhabited theorem and independent referee | every matched-observable commuting square, negative tests, exact-head acceptance | OPEN |
+| **Total** | **176** | **finite scoped theorem-dependent inventory** | added analytic sublemmas must be tracked as discovered | **not completed** |
+
+### Priority and parallel worker allocation
+
+**Track A — Lorentz/TSFV (P01+P02+P07):** prove source-selected causal dimension, unique operational clock and physically constructed metric. The selected source is the same object P07 transports to OS. First hard no-go to look for: the operational arrow and chosen causal cone may not select the same time orientation.
+
+**Track B — quantum/SM source (P03+P04):** derive compatible complex J, positive Hilbert completion and actual Stone time generator; keep genuine pure YM source separate from full SM. First hard no-go: finite Weyl representations do not automatically converge to the claimed unbounded CCR, and a finite C3 carrier does not certify SU(3) color.
+
+**Track C — finite Yang–Mills (P00+P05):** reconcile latest #1444 onto the chosen #1460 source and pay physical one-link compact Haar, native positive-bond vector decoder and R124/CMP119 first variation. First hard no-go: the actual selected one-link source/test algebra may not satisfy the conditional product-Haar proof owners' assumptions.
+
+**Track D — 4D analytic/Clay (P06):** prove literal changing-cutoff R445 physical moment/tail estimates and CMP116 R320 differentiated-source decay, then same-H OS spectral inequality R333 and H6 nontriviality in the correct full mathematical scope. This track is the central independently valid Clay research programme even if the spacetime conjecture fails.
+
+**Track E — higher/lower dimensions (P08+P09):** source-first 5D KK/4D gravity/gauge+scalar reduction with EFT errors and actual lower-dimensional 3D/2D observables. First hard no-go: nontrivial cross-fibre curvature or light radion/adjoint scalar invalidates a claimed pure YM truncation.
+
+**Track F — common gravity/BIDI (P10+P11):** source-native real effective variation, four-channel gravitational comparator and all-sector same-observable commuting squares; independently test wrong-orientation, wrong-Hamiltonian, wrong-gauge and wrong-KK cases before promoting anything.
+
+### Mandatory negative controls
+
+1. Wrong number of timelike directions, wrong causal volume dimension or imposed diagonal signature must **not** certify an emergent (3,1) theorem.
+2. Microscopic history reversal fixed point prevents strict global reversal-rank descent; an observer-filter arrow is a different object.
+3. Negative gauge-covariance fixture with the wrong inverse gauge orientation must fail at every selected lattice side.
+4. Missing fifth-axis curvature weight must fail exact 5→4 action equality unless the cross-fibre remainder vanishes; the #1460 finite one-plane fixture proves a genuine no-go in its Nat-valued scope.
+5. A formally positive finite-volume mass gap that decreases to zero as volume grows must fail P06/P07.
+6. Any OS Hilbert state/Hamiltonian different from the observed one must fail P07, even if both carry a positive spectral gap.
+7. A 2D pure-YM area law comparison with an unremoved adjoint scalar must fail P09.
+8. A Möbius orientation flip of **physical time** without justified double cover must fail P02/P08.
+9. A negative trace, unverified history-sign coefficient or anomalous force without same-source metric response must fail P10.
+10. A terminal theorem assembled from uninhabited records, original postulates, CI assumptions or numeric tests without real physical source proof must fail P11.
+
+## 4. Definition of completed: four different claims
+
+- **Finite formal tranche completed:** named finite theorems have exact-head KERNEL receipts; all assumptions/physical limitations remain explicit. Not a Clay, spacetime or KK completion.
+- **Standalone Clay Yang–Mills completed:** P05+P06 all physical/analytic statements inhabited for literal Clay compact simple G, 4D continuum and infinite volume, nontrivial OS Hilbert and Δ>0. The speculative history/KK hypothesis may be false without invalidating a genuinely independent proof.
+- **Emergent (3,1) quantum construction completed:** P01+P02+P03 true selected physical source and causal metric, plus P07 clock side where it is independent. If P06/P07 same-OS is not proved, do not claim the full YM/OS join.
+- **Full five-sector proposed steelman completed:** all mandatory P00–P11 physical sources/limit maps, matched observable equalities and theorem terminals inhabited, exact-head Golden Agda accepted and independent mathematical/physical checks passed. Full Standard Model/E6 and experimental exotic gravity are additional separate subclaims only when explicitly asserted.
+
+### Per-lemma closure receipt (all fields required)
+
+| Field | Required evidence |
+|---|---|
+| Lemma ID | canonical Pxx.Lyy, original source module and new proof module if different |
+| Proposition | fully quantified theorem type including actual group, manifold, regulator, boundary, measure, source and limits |
+| Proof body | safe proof term; if analytic source is external, exact attribution/scope and in-repo same-object import theorem |
+| Authority | source SHA, upstream PR/commit, original scientific theorem author, imports and no-postulate cone |
+| Verification | compiler version, exact-head run result, 0 metas/unsafe bypass; independent finite reference tests as appropriate |
+| Physical identity | selected original object and actual non-circular population of all conditional inputs |
+| Comparison | matched observable, bounded epsilon or explicit falsifier, plus gauge/coupling/units/limit normalization |
+| Residual | exact smallest unproved analytic/empirical source, if any; never silently mark it paid |
+
+**Claim ledger accounting:** a checked source-written *conditional* lemma becomes KERNEL but remains COND until its physical hypothesis has a genuine inhabitant. A physical source lemma without executed exact-head safe checking is not KERNEL. A proof about a *finite* model is not a continuum physical theorem. Experimental tests do not replace mathematical proof; mathematical proof does not replace experimental verification for a claimed phenomenon.
+
+## 5. Direct original-owner crosswalk
+
+| Critical target | Existing theorem owner / donor | New exact transport obligation |
+|---|---|---|
+| Finite reversible history | FiniteHistoryOrientationExact, HistoryWeightFiltrationExact | P01 selected source and continuum |
+| Filter → operational arrow | TSFVFiltrationArrowLorentzBridgeExact | P01.07–12 physical source |
+| Intrinsic causal 3+1 | Signature31Canonical, Signature31FromIntrinsicShellForcing, CausalForcesLorentz31, LargePosetContinuumLorentz31 | P02 actual metric/continuum |
+| Finite Weyl/CCR | FiniteTreeWeyl, CCRFromAdmissibleFlow, TreeHeisenbergScalingLimit | P03 complex J, domains and limit |
+| Schrödinger/Stone | SchrodingerSelfAdjointEvolutionReceipt, SchrodingerQuotientDescentReceipt, Quantum.Stone | P03 real self-adjoint H_clock |
+| U(1)/SU(N) | native gauge/Wilson owners, StandardModelGaugeCouplingAuthorityFrontier, QCDRunningFromCarrierScaleReceipt | P04 physical gauge representation |
+| R443 finite Haar | #1444 YMClaySUNVariablePeriodicProductHaarExact / YMClaySUNVariablePeriodicGaugeHaarExact | P00 integration + P05 real Haar/decoder |
+| CMP119/R124 | CMP119 source metric/E/R/B/V density owners, native SU(N) Gibbs | P05.13/14, P10.04 physical source |
+| R445 UV | R445 native same-family, original Balaban RG and combined UV module | P06 true cutoff-uniform analytic source |
+| R320 differentiated mixed-J | CMP116 and #1440 Route-S | P06.13/14 true source decay |
+| R333/H6 OS | #1440 + #1444 reconstruction/gap consumers | P06.15–20 same-H gap |
+| Same-clock and metric | TSFVKKSameMetricTransportExact, YMClayLorentz31DirectionalKKHodgeExact | P07 physical unitary and metric |
+| KK/E6 | #1241 KKSteelmanBidirectionalConsumerExact, #1460 YMClayFiveSectorBidiSteelmanExact | P08 actual EFT and scalar accounting |
+| Möbius orientation | MobiusOrientationGate (candidate-only) | P08.14/15 internal bundle |
+| 2D/3D published comparators | rigorous 2D YM; local stochastic 3D YMH, original authors | P09 actual matching maps |
+| Exotic GR/stress | #1120/#1132/#1045/#1284, CMP119 Local-C/Wightman | P10 one real W/stress/metric |
+| TOE | BalabanRGTOERegression and existing TOE import graph | P11 only after actual physical close |
+
+## 6. Source priority and status reporting protocol
+
+**Reuse → unify duplicate source constructions → extend selected physical source → build a new carrier only if no existing owner can supply it.** Search exact terms and nearby original owners before coding; preserve original attribution.
+
+After each update, report **exact lemma IDs, old versus new minimal dependency cut, source file + full commit SHA, actual Agda kernel status, physical population status, independent negative control and remaining smallest analytic/source premise**. "All gates closed" must never describe a numerical regression or a collection of conditional input records.
+
+**Next concrete work:** integrate the latest #1444 head into #1460; compile the focused Golden roots; in parallel begin (A) P02 real causal volume/signature source, (B) P03 Hilbert/Stone physical clock and (C) P05 genuine compact SU(N) one-link Haar/native decoder. Then concentrate P06 actual R445/CMP116/R333 analytic estimates and P07 same-H theorem. Do not postpone source falsification until the end.
