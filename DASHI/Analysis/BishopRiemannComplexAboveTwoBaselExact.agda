@@ -25,10 +25,11 @@ module DASHI.Analysis.BishopRiemannComplexAboveTwoBaselExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base as Nat using (_≤_; _≥_; NonZero; z≤n)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
-open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
+open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ; _/_)
+open import Data.Integer.Base using (+_)
 import Real as R
 import RealProperties as RP
 import Sequence as Seq
@@ -36,6 +37,7 @@ import Sequence as Seq
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as A
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as D
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
+import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as UniformTails
 import DASHI.Analysis.BishopRound11TrigModulusFromPythagoreanExact as Modulus
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
@@ -379,3 +381,127 @@ sourceComplexAboveTwoMajorantAllIndices
             (pythagorean n))
       }
   }
+
+
+------------------------------------------------------------------------
+-- REGION-WIDE UNIFORMITY ON THE ACTUAL BISHOP HALF-PLANE Re(s)>2.
+--
+-- Combine the genuine all-index complex coefficient comparison with
+-- the preexisting common-cutoff Bishop Dirichlet compiler.
+--
+-- Only the ORIGINAL canonical exp/log inverse and same-object
+-- all-angle signed-factorial Pythagorean remain as analytic inputs.
+-- In particular, no generic function-valued majorant field is supplied
+-- and the value is the literal original expC(-s*L_n) Dirichlet sum.
+------------------------------------------------------------------------
+
+sourceAboveTwoRegion : A.BishopComplex → Set
+sourceAboveTwoRegion s =
+  R._<_ D.sourceTwoReal (A.re s)
+
+sourceAllAnglesPythagorean :
+  Round11.Round11BishopCutset → Set
+sourceAllAnglesPythagorean inputs =
+  (theta : R.ℝ) →
+  let
+    dataSet = Round11.elementarySeries inputs
+    c = E.bishopCos dataSet theta
+    t = E.bishopSin dataSet theta
+  in
+  R._≃_ (R._+_ (R._*_ c c) (R._*_ t t)) R.1ℝ
+
+sourceRegionWideBaselCertificate :
+  (inputs : Round11.Round11BishopCutset) →
+  ((n : Nat) →
+    R._≃_
+      (Exp.bishopExp (D.sourceCanonicalNatLogCandidate n))
+      (NatReal.natReal (suc n))) →
+  sourceAllAnglesPythagorean inputs →
+  UniformTails.RegionBaselDomination
+    (D.bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs)
+      D.sourceCanonicalNatLogCandidate)
+    sourceAboveTwoRegion
+sourceRegionWideBaselCertificate
+    inputs inverseLaw pythagorean = record
+  { UniformTails.realEverywhere = λ s aboveTwo n →
+      let
+        bound = sourceComplexAboveTwoMajorantAllIndices
+          inputs s aboveTwo inverseLaw
+          (λ index → pythagorean (sourceDirichletAngle s index))
+      in
+      Dirichlet.realDomination bound n Nat.z≤n
+  ; UniformTails.imagEverywhere = λ s aboveTwo n →
+      let
+        bound = sourceComplexAboveTwoMajorantAllIndices
+          inputs s aboveTwo inverseLaw
+          (λ index → pythagorean (sourceDirichletAngle s index))
+      in
+      Dirichlet.imagDomination bound n Nat.z≤n
+  }
+
+sourceRegionUniformDirichletValue :
+  (inputs : Round11.Round11BishopCutset)
+  (inverseLaw : (n : Nat) →
+    R._≃_
+      (Exp.bishopExp (D.sourceCanonicalNatLogCandidate n))
+      (NatReal.natReal (suc n)))
+  (pythagorean : sourceAllAnglesPythagorean inputs)
+  (s : A.BishopComplex) →
+  sourceAboveTwoRegion s →
+  A.BishopComplex
+sourceRegionUniformDirichletValue
+    inputs inverseLaw pythagorean s aboveTwo =
+  UniformTails.regionDirichletValue
+    (D.bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs)
+      D.sourceCanonicalNatLogCandidate)
+    sourceAboveTwoRegion
+    (sourceRegionWideBaselCertificate
+      inputs inverseLaw pythagorean)
+    s aboveTwo
+
+sourceRegionUniformLimitError :
+  (inputs : Round11.Round11BishopCutset)
+  (inverseLaw : (n : Nat) →
+    R._≃_
+      (Exp.bishopExp (D.sourceCanonicalNatLogCandidate n))
+      (NatReal.natReal (suc n)))
+  (pythagorean : sourceAllAnglesPythagorean inputs)
+  (k : Nat) → .{{_ : Nat.NonZero k}} →
+  (s : A.BishopComplex)
+  (aboveTwo : sourceAboveTwoRegion s)
+  (m : Nat) →
+  m Nat.≥ UniformTails.baselUniformTailCutoff k →
+  let
+    terms = D.bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs)
+      D.sourceCanonicalNatLogCandidate
+    value = sourceRegionUniformDirichletValue
+      inputs inverseLaw pythagorean s aboveTwo
+  in
+  (R._≤_
+    (R.∣ R._-_ (A.re value)
+      (Seq.SeriesOf (Dirichlet.realTerm terms s) m) ∣)
+    (R._⋆ (+ 1 / k)))
+  ×
+  (R._≤_
+    (R.∣ R._-_ (A.im value)
+      (Seq.SeriesOf (Dirichlet.imagTerm terms s) m) ∣)
+    (R._⋆ (+ 1 / k)))
+sourceRegionUniformLimitError
+    inputs inverseLaw pythagorean k s aboveTwo m mPast =
+  let
+    terms = D.bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs)
+      D.sourceCanonicalNatLogCandidate
+    bound = sourceRegionWideBaselCertificate
+      inputs inverseLaw pythagorean
+  in
+  UniformTails.regionRealUniformLimitError
+    terms sourceAboveTwoRegion bound
+    k s aboveTwo m mPast
+  ,
+  UniformTails.regionImagUniformLimitError
+    terms sourceAboveTwoRegion bound
+    k s aboveTwo m mPast
