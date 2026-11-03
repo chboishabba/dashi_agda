@@ -35,10 +35,11 @@ def check_roadmap(text: str) -> dict[str, int]:
     assert all_ids == expected_ids, "IDs are missing, nonconsecutive, or out of order"
     assert text.count("**Deliverable:**") >= 11, "phase deliverables not enumerated"
     assert text.count("**Exit:**") >= 11, "phase exit conditions not enumerated"
-    assert "5bb34d44bac92dfe16544fcde07c65e37d875172" in text, "missing pinned #1444 source"
+    assert "7c6b2efd2a68ff4b280160af54616663f9b3a8a6" in text, "missing pinned #1444 source"
     assert "H_OS" in text and "H_clock" in text, "missing central clock/OS physical bridge"
     assert "R443" in text and "R445" in text and "R320" in text and "R333" in text, "missing Clay source"
     assert "Standalone Clay completion" in text, "missing Clay independence boundary"
+    assert "P01.L19" in text and "P07.L16" in text and "P11.L19" in text, "TSVF branch/BIDI physical leaves missing"
     return {f"P{p:02d}": counts[p] for p in range(12)}
 
 def main() -> None:
