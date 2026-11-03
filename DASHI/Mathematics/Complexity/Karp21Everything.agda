@@ -104,3 +104,5 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact
 
 import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact
+
+import DASHI.Mathematics.Complexity.Karp21CookAllWordCertificateBoundExact
