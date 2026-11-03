@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Complexity.Karp21WeightedMaxCutFixedNoGraphExact where
+
+-- Integration owner: not --safe until the imported weighted-graph
+-- theorem chain is independently checked and transitively --safe.
 
 ------------------------------------------------------------------------
 -- KARP WEIGHTED MAX CUT: CONCRETE POSITIVE-W "NO" GRAPH FOR
