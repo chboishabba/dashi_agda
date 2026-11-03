@@ -1,3 +1,5 @@
+**Additional candidate calculation:** The source-written rational identity `treeLevelCouplingTowerCoheres` composes three zero-mode inverse-coupling circumference factors (L_3L_4L_5); actual physical coupling matching, thresholds and dimensioned units remain unpaid.
+
 ### 2026-11-03: Constructed five-sector YM / Lorentz / KK / exotic-gravity BIDI steelman
 
 Full proposed physical mathematical model, original-source attribution, known 2D and partial 3D anchors, 4D Euclidean/3+1 OS reconstruction, effective 5D KK fields, positive-G typed-stress exotic gravity, actual falsifiers, and exact source-holder proof cuts: [YMClayFiveSectorBidiSteelman20261103](../physics/YMClayFiveSectorBidiSteelman20261103.md). This is a **conditional candidate complete-theory specification**, NOT a published physical proof or closed Clay claim.
