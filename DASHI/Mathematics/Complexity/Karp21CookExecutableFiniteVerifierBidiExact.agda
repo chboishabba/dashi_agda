@@ -43,8 +43,7 @@ import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact as Finite
 import DASHI.Mathematics.Complexity.Karp21CookStrictTripleBitBoundaryExact as Strict
 import DASHI.Mathematics.Complexity.Karp21CookStrictSATLanguageExact as SAT
-import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
-import DASHI.Mathematics.Complexity.Karp21SparseEndpointConsistencySoundExact as N21
+import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Golden
 
 natEqualBool : Nat → Nat → Bool
 natEqualBool a b with NatP._≟_ a b
@@ -56,7 +55,7 @@ natEqualBoolSound :
   natEqualBool a b ≡ true → a ≡ b
 natEqualBoolSound a b accepted with NatP._≟_ a b
 ... | yes equal = equal
-... | no _ = N21.falseNotTrue accepted
+... | no _ = Golden.falseNotTrue accepted
 
 natEqualBoolComplete :
   (a b : Nat) →
@@ -71,10 +70,10 @@ natEqualBoolComplete a .a refl with NatP._≟_ a a
 verifyCompactCookBits :
   Cook.BooleanFormula → Word.BitWord → Bool
 verifyCompactCookBits formula bits =
-  Sparse.andBool
+  Golden.andBool
     (natEqualBool
       (length bits) (length (Finite.formulaVariables formula)))
-    (Sparse.andBool
+    (Golden.andBool
       (Finite.allCookObservationsConsistent
         (Finite.pairObservations (Finite.formulaVariables formula) bits))
       (Cook.evaluate formula
@@ -96,10 +95,10 @@ verifyCompactCookBitsSound :
 verifyCompactCookBitsSound formula bits verified =
   ( natEqualBoolSound
       (length bits) (length (Finite.formulaVariables formula))
-      (N21.andLeftTrue
+      (Golden.andLeftTrue
         (natEqualBool
           (length bits) (length (Finite.formulaVariables formula)))
-        (Sparse.andBool
+        (Golden.andBool
           (Finite.allCookObservationsConsistent
             (Finite.pairObservations (Finite.formulaVariables formula) bits))
           (Cook.evaluate formula
@@ -107,17 +106,17 @@ verifyCompactCookBitsSound formula bits verified =
               (Finite.pairObservations
                 (Finite.formulaVariables formula) bits))))
         verified)
-  , ( N21.andLeftTrue
+  , ( Golden.andLeftTrue
         (Finite.allCookObservationsConsistent
           (Finite.pairObservations (Finite.formulaVariables formula) bits))
         (Cook.evaluate formula
           (Finite.recoverAssignment
             (Finite.pairObservations
               (Finite.formulaVariables formula) bits)))
-        (N21.andRightTrue
+        (Golden.andRightTrue
           (natEqualBool
             (length bits) (length (Finite.formulaVariables formula)))
-          (Sparse.andBool
+          (Golden.andBool
             (Finite.allCookObservationsConsistent
               (Finite.pairObservations (Finite.formulaVariables formula) bits))
             (Cook.evaluate formula
@@ -125,17 +124,17 @@ verifyCompactCookBitsSound formula bits verified =
                 (Finite.pairObservations
                   (Finite.formulaVariables formula) bits))))
           verified)
-    , N21.andRightTrue
+    , Golden.andRightTrue
         (Finite.allCookObservationsConsistent
           (Finite.pairObservations (Finite.formulaVariables formula) bits))
         (Cook.evaluate formula
           (Finite.recoverAssignment
             (Finite.pairObservations
               (Finite.formulaVariables formula) bits)))
-        (N21.andRightTrue
+        (Golden.andRightTrue
           (natEqualBool
             (length bits) (length (Finite.formulaVariables formula)))
-          (Sparse.andBool
+          (Golden.andBool
             (Finite.allCookObservationsConsistent
               (Finite.pairObservations (Finite.formulaVariables formula) bits))
             (Cook.evaluate formula
@@ -227,7 +226,7 @@ strictCookExecutableVerifierSound :
   PR.accepts SAT.strictSATLanguage word
 strictCookExecutableVerifierSound word (bits , verified)
   with Strict.strictDecodeCookFormulaBits word
-... | nothing = ⊥-elim (N21.falseNotTrue verified)
+... | nothing = ⊥-elim (Golden.falseNotTrue verified)
 ... | just formula =
   cookExecutableCertificateToSAT formula (bits , verified)
 
