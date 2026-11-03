@@ -33,6 +33,7 @@ import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as TSFVKKSameMet
 import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
 import DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact as TSVFQubit
+import DASHI.Quantum.TSVFComplexGammaProductBornExact as TSVFGamma
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
@@ -134,6 +135,15 @@ open TSVFOverlap public using
   ; zeroWrongFactorGivesZeroWrongMassCorrect
   ; admissibleDoesNotForcePositiveWeight
   ; adversarialWrongDominatesRightAtTwo
+  )
+-- Exact complex gamma amplitude/Born factor product using the original
+-- rational Cayley-Dickson complex owner. Physical 2017 Eq25 source OPEN.
+open TSVFGamma public using
+  ( complexGammaBornWeightIsNormOfProduct
+  ; complexConjugateBornNormInvariant
+  ; gammaBornProductConjugationInvariant
+  ; complexGammaProductConjugationBornInvariant
+  ; imaginaryUnitGammaDoesNotChangeBornWeight
   )
 open TSVFQubit public using
   ( rightProjectorIdempotent
