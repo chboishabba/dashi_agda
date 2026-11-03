@@ -189,4 +189,8 @@ module _
                 (decode
                   (vectorGauge
                     (leftVector gamma) (rightVector gamma) vector))
-                index))))
+                index))
+          (cong (λ selected → Vec.lookup selected index)
+            (Codec.originalBondsEncodeDecodeExactly L
+              (vectorGauge
+                (leftVector gamma) (rightVector gamma) vector)))))
