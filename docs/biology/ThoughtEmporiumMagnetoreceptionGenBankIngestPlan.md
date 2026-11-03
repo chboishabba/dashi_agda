@@ -141,3 +141,12 @@ This is an **executed semantic equality observation**, not a proof that arbitrar
 python3 scripts/check_genbank_semantic_roundtrip.py /path/to/original.gb
 python3 -m pytest -q tests/test_genbank_semantic_roundtrip.py
 ```
+
+
+## Queryable sequence-free candidate graph fixture
+
+The source-inspected [`data/ThoughtEmporiumMagnetoreceptionCandidateReviewGraph.json`](data/ThoughtEmporiumMagnetoreceptionCandidateReviewGraph.json) exposes **22 original annotated feature statements, 30 source-reopenable identity/CDS review holds, and one explicitly attributed candidate vestibular mechanism link** (feature index 8, `misc_feature`; The Thought Emporium / Justin Atkin creator, Nimpf et al. 2019 scientific hypothesis). It includes later Xu 2021 CRY4 and Lisowski 2026 hepatic research in a **separate contextual-comparator field**, not as falsely assumed original GenBank annotations.
+
+This is a deterministic **read-only source-inventory projection** verified against the local original-byte execution receipt, with source labels/locations/qualifier *names* but not all qualifier values or original DNA bases. Its namespace is `dashi.genbank.source-inspection-graph-fixture.v1`; **it is not** a native ITIR MCP, SLR S29, Wikidata or Gene Ontology API payload. Native recipient integration, external identity lookup, and real same-object gene/protein inference remain distinct proof gates.
+
+The fixture answers the current user query: *which feature types and labels were written by the designer, which source-backed hypothesis is being discussed, and which external identities/translation claims remain unverified?* It does **not** answer whether the construct functions biologically.
