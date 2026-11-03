@@ -51,3 +51,15 @@ No operational human or animal gene editing or delivery protocols in this lane.
 
 - [x] GB07-SOURCE-FIXTURE: committed 22-feature/30-review-hold source-inspection candidate graph with creator/paper attribution and source-reopenable claim IDs.
 - [ ] GB07-NATIVE-ABI: native ITIR/SLR and external ontology recipient compliance remains an unverified, separately scoped gate.
+
+
+## General component / replicon taxonomy link (2026-11-03)
+
+- [x] Reusable read-only classifier, Golden source-typed taxonomy and 17
+      passing local synthetic tests: see
+      `docs/biology/GenBankComponentOntologyRegistry.md` and
+      `GenBankComponentOntologyTODO.md`.
+- [x] Source-inspected original creator three-file feature-key inventory
+      with original git blob SHA, independent topology/context separation.
+- [ ] Exact-head Agda kernel and actual ITIR/SLR native recipient API conformance
+      are still independent, unpaid acceptance gates.
