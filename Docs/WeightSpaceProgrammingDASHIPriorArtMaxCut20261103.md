@@ -52,6 +52,12 @@ actual runtime on fixed decoder -------> held-out paired effects
 
 Only the top abstract mask square has source-written proofs in this tranche. The real extractor, exact BF16 witness, runtime model execution and measured causal changes are **open**. An experimental score alone is not a weight-mechanism identity or a proof of preserved ability.
 
+## LILA/E8 learner cross-PR reconciliation (2026-11-03)
+
+The focused [WSP × LILA/E8 reuse ledger](WeightSpaceProgrammingLilaE8Reuse20261103.md) inspects actual unmerged #1094 (semantic intervention), #1095 (E8 quantizer, rank-one attention bias and shared Q/K orthogonal gauge), #1265 (Dust forward-only real-projection adapter with only local analogue runtime receipt), and #1442/LeechTransformer #4 (E8-first prior/history). The actual accessible Sovereign-LILA mirror sources `models/model.py` and `training/train.py` were inspected. A pure shared orthogonal Q/K coordinate transform preserves ideal dot-product scores and should not be cited as an intervention that fixes repetition. E8 geometry, root counts, rank-one score bias, and a Dust update are **distinct** from the edited 64+64 Qwen MLP columns.
+
+The new golden candidate `DASHI.Reasoning.WeightSpaceProgrammingLilaE8InterventionExact` uses the existing standalone WSP finite owner and proves scope separation for projection, quantizer, attention, root-codebook and memory *state coordinates*. This is not an E8GPT runtime or output-noninterference theorem. A real source-root/hidden/parameter intertwiner and matched experimental controls remain open.
+
 ## Exact remaining max-cut (ordered)
 
 1. **WSP-01, external custody:** Pin per-file Git revision and hash each external manifest, code, base model revision and edited artifact. Preserve the source-generated columns and names. Re-run `code/apply_edit.py` against exactly the pinned base checkpoint and compare both tensor SHA256 hashes. This also catches changed rounding and non-target writes.
