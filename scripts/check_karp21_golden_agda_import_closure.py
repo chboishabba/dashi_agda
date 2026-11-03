@@ -95,6 +95,10 @@ def check(root: Path, entry: str) -> dict:
         safe_now = safe_ancestor or info.safe
         for dependency in reversed(info.imports):
             stack.append((dependency, chain, safe_now))
+    # The focused root itself must be declared Golden before its imports
+    # can count as an authoritative --safe acceptance target.
+    if entry in modules and not modules[entry].safe:
+        issues.add(("entry-not-safe", entry, entry))
     return {
         "entry": entry,
         "reachable_repository_modules": len(modules),
