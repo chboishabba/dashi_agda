@@ -21,6 +21,11 @@ def test_actual_original_source_receipt_is_byte_and_feature_bound():
     assert r["sequence_length"] == 11214
     assert r["candidate_only_graph_statements"] == 22
     assert r["source_reopenable_review_holds"] == 30
+    assert r["local_full_record_semantic_roundtrip_passed"] is True
+    assert r["serialized_roundtrip_raw_byte_count"] == 18377
+    assert r["raw_byte_identical_serialization"] is False
+    assert all(r["local_semantic_roundtrip_checks"].values())
+
 
 
 def test_execution_receipt_does_not_claim_unexecuted_or_biological_gates():
