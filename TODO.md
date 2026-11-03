@@ -17522,3 +17522,5 @@ Cleanup
 
 
 - [ ] YM R443/R445: Instantiate actual compact SU(2)/SU(N) one-link Haar and native variable-size positive-bond vector decoder on the **same** original Gibbs carrier; `YMClaySUNVariablePeriodicProductHaarExact` now derives every-n product normalization, ordered integration laws and strict finite Wilson partition positivity *conditional on that source*. Then prove physical cutoff refinement, selected CMP119 R124 E/R/B/V metric insertion, R445 uniform marked tails/moments, R320 physical CMP116 mixed-J source inequality, R333 same-H OS spectral gap/H6. Source-written, Agda kernel not run (2026-11-03).
+
+- [ ] YM all-periodic-n local gauge Haar: supply `OriginalPeriodicGaugeVectorNaturality` at each physical positive bond for `YMClaySUNVariablePeriodicGaugeHaarExact` and an actual continuous measurable compact-group one-link source. Source-written gauge numerator/normalized expectation transport is conditional on this native decoder/naturality and pointwise-congruent observable class; Agda kernel pending.
