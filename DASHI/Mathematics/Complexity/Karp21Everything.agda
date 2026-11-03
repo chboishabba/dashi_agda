@@ -98,3 +98,7 @@ import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundary
 import DASHI.Mathematics.Complexity.Karp21WeightedMaxCutFixedNoGraphExact
 
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact
