@@ -98,8 +98,8 @@ encodedEdgeAtLeastTwoBits edge =
       (NatP.≤-reflexive
         (sym (ListP.length-++
           (Gamma.encodeGammaNat (Fin.toℕ (Cut.first edge)))
-          (Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge))
-            ++ Encode.encodeSignedGamma (Cut.weight edge))))))
+          {ys = Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge))
+            ++ Encode.encodeSignedGamma (Cut.weight edge)}))))
 
 ------------------------------------------------------------------------
 -- Use the ORIGINAL Sparse.twoPerEdge and the original edge list.
@@ -112,7 +112,7 @@ encodedEdgeWordsAtLeastSparseBits :
 encodedEdgeWordsAtLeastSparseBits [] = z≤n
 encodedEdgeWordsAtLeastSparseBits (edge ∷ rest)
   rewrite ListP.length-++ (Encode.encodeEdgeWord edge)
-    (Encode.encodeEdgeWords rest) =
+    {ys = Encode.encodeEdgeWords rest} =
   NatP.+-mono-≤
     (encodedEdgeAtLeastTwoBits edge)
     (encodedEdgeWordsAtLeastSparseBits rest)
@@ -162,11 +162,11 @@ encodedEdgeAtLeastThreeBits :
 encodedEdgeAtLeastThreeBits edge
   rewrite ListP.length-++
     (Gamma.encodeGammaNat (Fin.toℕ (Cut.first edge)))
-    (Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge))
-      ++ Encode.encodeSignedGamma (Cut.weight edge))
+    {ys = Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge))
+      ++ Encode.encodeSignedGamma (Cut.weight edge)}
         | ListP.length-++
     (Gamma.encodeGammaNat (Fin.toℕ (Cut.second edge)))
-    (Encode.encodeSignedGamma (Cut.weight edge)) =
+    {ys = Encode.encodeSignedGamma (Cut.weight edge)} =
   NatP.+-mono-≤
     (Signed.gammaNatHasBit (Fin.toℕ (Cut.first edge)))
     (NatP.+-mono-≤
@@ -181,7 +181,7 @@ encodedEdgeWordsAtLeastTripleBits :
 encodedEdgeWordsAtLeastTripleBits [] = z≤n
 encodedEdgeWordsAtLeastTripleBits (edge ∷ rest)
   rewrite ListP.length-++ (Encode.encodeEdgeWord edge)
-    (Encode.encodeEdgeWords rest) =
+    {ys = Encode.encodeEdgeWords rest} =
   NatP.+-mono-≤
     (encodedEdgeAtLeastThreeBits edge)
     (encodedEdgeWordsAtLeastTripleBits rest)
