@@ -81,8 +81,8 @@ record AdmissibleTSVFQuantumSource
       TSVF.QuantumSurface.Operator Q
 
     -- Same actual ensemble E is used for both alternatives.
-    rightProjectorIsSelected : Set
-    wrongProjectorIsSelected : Set
+    -- Physical projectors/completeness and postselection are independently
+    -- tested at the chosen source; no placeholder Set fields manufacture them.
 
 open AdmissibleTSVFQuantumSource public
 
