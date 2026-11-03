@@ -7,7 +7,7 @@ from scripts.check_genbank_source_inventory import (
     verify_inspected_source,
 )
 from scripts.genbank_readonly_ingest import parse_genbank_bytes
-from tests.test_genbank_readonly_ingest import synthetic_genbank
+from test_genbank_readonly_ingest import synthetic_genbank
 
 
 def toy_inspection():
