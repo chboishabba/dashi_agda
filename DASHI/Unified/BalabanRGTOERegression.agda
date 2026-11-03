@@ -940,6 +940,7 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as SUNGi
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGaugeInvariantExact as SUNGaugeAction
 import DASHI.Physics.YangMills.YMClayNativeSixPlaquetteSUNWilsonActionWeldExact as SUNCanonicalWilsonWeld
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as SUNVariable
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
@@ -1181,3 +1182,15 @@ open SUNVariable public using
   ; periodicSUNGibbsDensityGaugeInvariant
   ; periodicSUNFiniteGibbsMeasure
   ; sideFourPlaquetteSameNativeHolonomy)
+
+-- Every actual periodic cutoff: derive product-Haar integration and positive
+-- Wilson Gibbs partition from one-link laws, without inventing continuum data.
+open SUNVariableHaar public using
+  (periodicProductHaar
+  ; periodicProductFiniteMeasure
+  ; periodicProductHaarUnit
+  ; periodicActualDensityStrictPositive
+  ; periodicProductPartitionStrictPositive
+  ; periodicProductIntegrationLaws
+  ; periodicProductDensitySameObject
+  ; periodicProductPartitionSameObject)
