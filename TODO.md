@@ -17519,3 +17519,6 @@ Cleanup
 - [ ] Prove selected source-domain/derivative CMP116 R320 rooted-shell decay with genuinely uniform physical radii and constants.
 - [ ] Reconstruct same physical OS Hamiltonian with strictly positive continuum/infinite-volume spectral bound and nontriviality (R333); no Clay promotion from conditional compilers.
 - [ ] Run Agda kernel, exact-head root import preflight, transitive trust scan and CI when user runs checks.
+
+
+- [ ] YM R443/R445: Instantiate actual compact SU(2)/SU(N) one-link Haar and native variable-size positive-bond vector decoder on the **same** original Gibbs carrier; `YMClaySUNVariablePeriodicProductHaarExact` now derives every-n product normalization, ordered integration laws and strict finite Wilson partition positivity *conditional on that source*. Then prove physical cutoff refinement, selected CMP119 R124 E/R/B/V metric insertion, R445 uniform marked tails/moments, R320 physical CMP116 mixed-J source inequality, R333 same-H OS spectral gap/H6. Source-written, Agda kernel not run (2026-11-03).
