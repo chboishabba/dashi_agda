@@ -1,6 +1,8 @@
 # The Thought Emporium magnetoreception GenBank interpretation → DASHI integration
 
-**Status (3 November 2026):** Source read and metadata/feature inventory carried out using the creator's public repository. The GenBank → typed AST importer, independent full-file parser, Agda proof receipts and same-object biological claims are **not yet implemented or kernel accepted**. This plan is an executable acceptance specification, not an account of a completed implementation.
+**Status (3 November 2026, implementation tranche):** Source inspection and feature inventory are committed, as are a **reusable read-only Biopython-based GenBank parser**, a separate original Git-blob/feature-location parity verifier, a **Golden** source-written Agda location core, a non-Golden adapter that reuses the existing DNA/protein/repair owners, and candidate-only graph/worklist emitters. A local prototype of the reusable parser passed **7 synthetic tests** and source-parity mutation exercises. **The published original GenBank has not been run through the Python importer on an exact GitHub checkout; Agda/Lean kernel acceptance, exact-head pytest and native ITIR/SLR API compliance remain unverified.** No sequence-to-function or human phenotype claim is established.
+
+**Primary interpretation finding:** the creator's source label \`"cacna1d human plus pigeon"\` is attached to **feature index 8, \`misc_feature\`**, not a \`CDS\`. The only two \`CDS\` feature labels are \`"Factor Xa site"\` and \`"AmpR"\`. This does not disprove the suggested coding function, but it means the file's own feature table does **not** carry an explicit gene/CDS/translation witness for the presumed target. Preserve this as a review hold, not a fabricated translation.
 
 ## Primary object and original ownership
 
@@ -32,6 +34,49 @@ These are **inspected file-structure claims**, not a claim of biological correct
 5. **Source/PNF and governance**: `DASHI.Core.AttributedSourceCore`, `DASHI.Interop.AvianCompassPNFSemanticBridge`, and `DASHI.Biology.MultiscaleCausalProvenanceProofSearchRouterExact`. Distinguish `publishedDigitalArtifact`, `parsedSequence`, `sourceAnnotation`, `sequenceIdentityVerified`, `proteinInterpretation`, `reportedExperiment`, `validatedPhenotype` as *independent receipts*. The text PNF graph is an indexed evidential view, not a science theorem.
 
 **Not a GenBank importer:** `DASHI.Codec.DNAProductionConstraints` and `DNAProductionNormalization` describe a *generative* constrained DNA code / normalization machine, not a biological guarantee or blanket compliance test for externally authored sequences. Reuse only for structurally appropriate optional analysis; do not make them ingest-gating requirements.
+
+## Concrete source-written implementation (this PR)
+
+| Source | Purpose | Acceptance level |
+|---|---|---|
+| \`scripts/genbank_readonly_ingest.py\` | Reusable strict Biopython \`SeqIO\` parser; normalized 0-based half-open spans, source 1-based inclusive labels, \`join/order\` locations, complements, circular/linear topology, source and semantic hashes, qualifier order, no emitted DNA sequence | Local synthetic parser tests executed, original same-object full-byte run open |
+| \`scripts/check_genbank_source_inventory.py\` | Independent source Git-blob SHA-1, 22-entry feature inventory and source-location spelling parity; reject feature-order/strand/coordinate/qualifier drift | Local synthetic parity and mutation check executed; original file run open |
+| \`scripts/genbank_ontology_review.py\` | Candidate-only, source-reopenable ontology review holds modelled on BH4 and ITIR user stories; no live Wikidata edits | Local synthetic worklist check executed; native ITIR/SLR interface open |
+| \`DASHI/Codec/GenBankLocationFiniteCore.agda\` | Golden \`--safe\` generic location type, positive source-start encoding, 0/1 coordinate and strand-involution lemmas | Source written; Agda kernel pending |
+| \`DASHI/Biology/GenBankInterpretationInteropExact.agda\` | Existing \`DNAFirstFormalism\`/\`DNACarrierFibre\`, \`Protein.TranslationContext\`, situated protein, creator attribution, Wikidata repair/reopening and avian PNF proof-owner reuse | Source written; exact-head kernel pending |
+| \`docs/biology/data/ThoughtEmporiumMagnetoreceptionGenBankSourceInventory.json\` | Independent source-text inspection: immutable creator Git blob, 11,214 base count, all 22 original feature types, source labels, location text, qualifier names, and non-authority flags; does not redistribute bases | GitHub readback and deterministic source inspection completed |
+| \`tests/test_genbank_*.py\` | Synthetic parser/roundtrip, source fixture, original metadata, ontology nonpromotion and mutation checks | Author-written on branch; exact-head pytest pending |
+
+The source-inventory feature table is **not an automatically generated assertion of correct translation**. It is a bounded source-text transcription. Independently replaying the Python importer against the exact original bytes is the next required step. \`DNAProductionConstraints\` remains an unrelated generative codec policy and never screens or modifies this imported source.
+
+### Reproduce on a checkout with the original author file available
+
+Use the original creator's publicly attributed GenBank file. Do not modify it. The following commands **read and summarize it without emitting sequence bases**:
+
+\`\`\`sh
+python3 scripts/genbank_readonly_ingest.py /path/to/original.gb \
+  --creator "The Thought Emporium / Justin Atkin" \
+  --source-ref "https://github.com/thethoughtemporium/Whose-gene-is-it-anyway/tree/master/magnetoreception" \
+  --revision "f83aaf2b3ada085d02d8a25cfdc4ae32c80fe09d" \
+  --output /tmp/magnetoreception-source-report.json
+
+python3 scripts/check_genbank_source_inventory.py /path/to/original.gb
+
+python3 scripts/genbank_ontology_review.py \
+  /tmp/magnetoreception-source-report.json \
+  --output /tmp/magnetoreception-review-holds.json
+
+python3 -m pytest -q \
+  tests/test_genbank_readonly_ingest.py \
+  tests/test_genbank_source_inventory.py \
+  tests/test_genbank_ontology_review.py \
+  tests/test_genbank_creator_source_inventory.py
+
+agda -i . DASHI/Codec/GenBankLocationFiniteCore.agda
+agda -i . DASHI/Biology/GenBankInterpretationInteropExact.agda
+\`\`\`
+
+The Agda commands may require the repository's existing standard-library include configuration and compatible toolchain. An Agda source file and a static byte inventory do not substitute for an actual accepted kernel check.
 
 ## Exact implementation cut
 
