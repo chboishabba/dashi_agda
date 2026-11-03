@@ -13,6 +13,7 @@ Original source: Justin Atkin / The Thought Emporium. Parser: Biopython.
 - [x] Golden Agda GenBankLocationFiniteCore source-written with coordinate reconstruction and strand involution.
 - [x] Non-Golden adapter to DNA, contextual translation, situated protein, avian PNF, Wikidata repair/reopening owners.
 - [x] Candidate-only source-reopenable ontology and protein annotation review worklist implemented.
+- [x] Source-specific creator-file feature-index-8 -> Nimpf vestibular hypothesis crosswalk is source-written and requires full Git-blob parity before emitting candidate links.
 - [x] Source inspection notes gene-like cacna1d source label is misc_feature, NOT one of two CDS.
 - [x] Synthetic tests, read-only boundaries and canonical import roots updated.
 
