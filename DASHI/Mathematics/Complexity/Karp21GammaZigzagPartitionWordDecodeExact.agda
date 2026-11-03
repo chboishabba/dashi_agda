@@ -84,6 +84,36 @@ unzigzagZigzag (-[1+ n ])
   rewrite oddTwice n | halfOddTwice n = refl
 
 ------------------------------------------------------------------------
+-- Reverse direction, required for a genuine zigzag integer/Nat
+-- bijection on the canonical gamma numeral representation.
+-- The two parity branches reconstruct the original Nat code exactly.
+------------------------------------------------------------------------
+
+evenHalfExact :
+  (n : Nat) →
+  even n ≡ true →
+  twice (half n) ≡ n
+evenHalfExact zero observed = refl
+evenHalfExact (suc zero) ()
+evenHalfExact (suc (suc n)) observed =
+  cong suc (cong suc (evenHalfExact n observed))
+
+oddHalfExact :
+  (n : Nat) →
+  even n ≡ false →
+  suc (twice (half n)) ≡ n
+oddHalfExact zero ()
+oddHalfExact (suc zero) observed = refl
+oddHalfExact (suc (suc n)) observed =
+  cong suc (cong suc (oddHalfExact n observed))
+
+zigzagUnzigzag : (n : Nat) → zigzag (unzigzag n) ≡ n
+zigzagUnzigzag n with even n
+... | true = evenHalfExact n refl
+... | false = oddHalfExact n refl
+
+
+------------------------------------------------------------------------
 -- Exactly k low-order binary payload bits, high-to-low on the wire.
 -- This is the post-leading-1 section of an Elias-gamma natural.
 ------------------------------------------------------------------------
