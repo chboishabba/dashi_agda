@@ -1,3 +1,7 @@
+- [x] R445.F04: construct original-positive-link `positiveHolonomy`, `nativeBlockedPositiveLinks`, same selected signed path equivalence, generic group gauge cancellation and pointwise-link congruence; instantiate actual existing SU(N) group/links/gauge transform. **Source-written, Agda unverified.**
+- [x] R445.F05: write selected side-four M=L=2 endpoint clauses and resulting SU(N) 2×2 blocked gauge covariance on original 1024 fine links; exact-head Agda acceptance still OPEN.
+- [x] Execute independent noncommutative Q8 gauge cancellation and periodic endpoint control at M,L=(1,3),(2,2),(2,3),(3,2),(4,2), including missing-inverse negative controls; commit `scripts/check_ym_native_blocked_positive_holonomy.py`.
+- [ ] R445.P02/P04: general periodic block endpoint proof, selected physical Wilson coarse plaquette/action and real Haar/Gibbs pushforward/disintegration; **source-written finite 2×2 block does not pay these all-scale physical producers.**
 - [x] Reference-synthesize/check the exact original 1024-link C3 adjacent-transposition word: minimum 46,592 swaps (`scripts/check_ym_native_c3_adjacent_swap_word.py`), with independent Python action/cube checks; this is NOT an Agda proof of R443.F07.
 ### 2026-11-03 — YM authoritative exact-lemma max-cut / acceptance (PR #1444)
 
