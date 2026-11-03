@@ -27,6 +27,7 @@ from karp21_signed_cut_binary_codec import (
 from karp21_binary_native_sparse_verifier import (
     verifies_sparse_word_binary_native,
     pairwise_endpoint_comparison_count,
+    pairwise_endpoint_scan_iterations,
     maximum_edges_from_canonical_input_bits,
     binary_native_pairwise_comparisons_bound,
 )
@@ -105,7 +106,8 @@ def huge_sparse_and_signed() -> int:
             count += 1
 
     for m in range(100):
-        assert pairwise_endpoint_comparison_count(m) == 2 * sum(range(m))
+        assert pairwise_endpoint_scan_iterations(m) == 2 * sum(range(m))
+        assert pairwise_endpoint_comparison_count(m) == 2 * pairwise_endpoint_scan_iterations(m)
         count += 1
     return count
 
