@@ -186,6 +186,7 @@ open TSVFOSClock public using
   ; selectedOSClockHamiltonian
   ; selectedTransferIsOfExactlyReconstructedH
   ; sameClockPhysicalMetricHas31Signature
+  ; selectedObserverKetReallyIsMetricState
   ; identityEmbeddingCannotIntertwineWrongOSStep
   )
 open TSVFGamma public using
