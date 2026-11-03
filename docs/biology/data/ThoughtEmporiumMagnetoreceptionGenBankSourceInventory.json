@@ -1,0 +1,287 @@
+{
+  "schema": "dashi.genbank.creator-source-observation.v1",
+  "source": {
+    "creator": "The Thought Emporium / Justin Atkin",
+    "source_uri": "https://github.com/thethoughtemporium/Whose-gene-is-it-anyway/blob/master/magnetoreception/paav%20syn%20with%20pigeonized%20human%20cacna1d.gb",
+    "git_blob_sha": "0578ad167666789fbfd3faa849a455c25097b90c",
+    "source_commit": "f83aaf2b3ada085d02d8a25cfdc4ae32c80fe09d",
+    "commit_timestamp_utc": "2020-07-04T03:23:52Z",
+    "internal_header_date": "16-JUN-2020",
+    "license_statement": "CC BY-SA 4.0 (repository README)"
+  },
+  "observed": {
+    "length_declared": 11214,
+    "length_sequence_letters": 11214,
+    "alphabet": "ACGT",
+    "molecule_type": "ds-DNA",
+    "topology": "circular",
+    "feature_count": 22,
+    "feature_types": {
+      "primer_bind": 9,
+      "promoter": 2,
+      "rep_origin": 2,
+      "polyA_signal": 1,
+      "repeat_region": 3,
+      "misc_feature": 2,
+      "CDS": 2,
+      "source": 1
+    },
+    "compound_locations": 1,
+    "complement_locations": 7
+  },
+  "features": [
+    {
+      "index": 0,
+      "type": "primer_bind",
+      "raw_location": "8862..8884",
+      "source_label": "\"pGEX 3'\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 1,
+      "type": "promoter",
+      "raw_location": "join(11134..11214,1..367)",
+      "source_label": "\"hSyn promoter\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 2,
+      "type": "rep_origin",
+      "raw_location": "10144..10732",
+      "source_label": "\"ori\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 3,
+      "type": "primer_bind",
+      "raw_location": "complement(7733..7752)",
+      "source_label": "\"hGH-PA-R\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 4,
+      "type": "primer_bind",
+      "raw_location": "complement(8743..8762)",
+      "source_label": "\"pRS-marker\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 5,
+      "type": "polyA_signal",
+      "raw_location": "7534..8010",
+      "source_label": "\"hGH poly(A) signal\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 6,
+      "type": "primer_bind",
+      "raw_location": "8568..8589",
+      "source_label": "\"F1ori-F\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 7,
+      "type": "repeat_region",
+      "raw_location": "8056..8196",
+      "source_label": "\"AAV2 ITR\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 8,
+      "type": "misc_feature",
+      "raw_location": "392..6904",
+      "source_label": "\"cacna1d human plus pigeon\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 9,
+      "type": "primer_bind",
+      "raw_location": "complement(8358..8377)",
+      "source_label": "\"F1ori-R\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 10,
+      "type": "primer_bind",
+      "raw_location": "10633..10652",
+      "source_label": "\"pBR322ori-F\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 11,
+      "type": "rep_origin",
+      "raw_location": "8271..8726",
+      "source_label": "\"f1 ori\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 12,
+      "type": "repeat_region",
+      "raw_location": "10794..10923",
+      "source_label": "\"AAV2 ITR (alternate)\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 13,
+      "type": "CDS",
+      "raw_location": "complement(7397..7408)",
+      "source_label": "\"Factor Xa site\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 14,
+      "type": "source",
+      "raw_location": "1..11214",
+      "source_label": "\"source\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 15,
+      "type": "repeat_region",
+      "raw_location": "8056..8185",
+      "source_label": "\"AAV2 ITR\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 16,
+      "type": "primer_bind",
+      "raw_location": "complement(9331..9350)",
+      "source_label": "\"Amp-R\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 17,
+      "type": "primer_bind",
+      "raw_location": "complement(6979..6999)",
+      "source_label": "\"WPRE-R\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 18,
+      "type": "CDS",
+      "raw_location": "9113..9973",
+      "source_label": "\"AmpR\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 19,
+      "type": "misc_feature",
+      "raw_location": "6926..7514",
+      "source_label": "\"WPRE\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 20,
+      "type": "promoter",
+      "raw_location": "9008..9112",
+      "source_label": "\"AmpR promoter\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    },
+    {
+      "index": 21,
+      "type": "primer_bind",
+      "raw_location": "complement(8922..8940)",
+      "source_label": "\"pBRforEco\"",
+      "qualifier_names": [
+        "label",
+        "ApEinfo_revcolor",
+        "ApEinfo_fwdcolor"
+      ]
+    }
+  ],
+  "authority_boundary": {
+    "read_only": true,
+    "non_authoritative": true,
+    "canonical_truth_mutated": false,
+    "candidate_only": true,
+    "promotion_authority": false
+  },
+  "sequence_bases_redistributed": false,
+  "genbank_parser_executed_on_original": false,
+  "independent_biological_function_verified": false,
+  "notes": "Source inspection uses GitHub file text and deterministic syntax inventory, not a completed Biopython full-file parse; observations are not a validated plasmid, protein identity, or phenotype."
+}
