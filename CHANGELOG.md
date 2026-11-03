@@ -86,3 +86,12 @@ monitor surface.
 - Extended `scripts/referee_karp21_maxcut.sh preflight` with real Python codec/bitbound/binary-native regression and an Agda-arity preflight. Golden and E20 modes now explicitly check the new typed roots, fail closed without Agda and print revision/compiler provenance. No Agda kernel run or CI acceptance was obtained in this environment.
 - Updated the canonical exact-lemma roadmap and authorship ledger. **No promotion** to `PR.InNP`, `PR.NPComplete`, the universal Cook–Levin root, 20 complete polynomial maps or `CertifiedKarpNetwork`: certificates still 0/20 costed reductions and 0/21 terminal NP-completeness conclusions.
 
+
+## 2026-11-03 — Karp E20 typed raw graph acceptance and binary-native N21 scan counting (PR #1445)
+
+- Reused the original `validateRawEdges`, `WeightedCutGraph` and `sameWeightedGraphsAccept` to source-write `scaledRawParsedGraphAcceptanceBidi` and `e20ScaledCanonicalRawGraphAcceptsIff`, preserving original signed thresholds and signed cut objectives rather than comparing `offDiagonal` proof functions.
+- Corrected a source-visible Agda stdlib `length-++` implicit-argument error in the canonical complete-graph generator.
+- Instrumented the existing Fin-free N21 endpoint history scan and source-wrote equivalence of its Boolean output and exact count of address equality checks. Proved a quadratic deterministic comparison-count bound `2*m*(m∸1)` by recurrence; finite Python arithmetic regression passed 10,001 input counts.
+- Imported the new theorem owners into the Karp and binary-runtime roots, synchronized roadmap and attribution.
+- **Not complete or kernel accepted:** full original gamma `decodeGraphWord`/encoder same-object transport, E20 image `scaledCompleteWordFaithful`, SAT/N21/E20 bit-machine clocks, universal Cook–Levin, E01–E19 + all 21 `InNP` instances and final `CertifiedKarpNetwork` remain unfilled. A comparison count is not a Turing machine clock; no Agda binary or CI acceptance receipt was available. Certified reductions and NP-completeness results remain 0/20 and 0/21.
+
