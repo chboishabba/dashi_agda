@@ -1,3 +1,11 @@
+## Subsequent exact nonvacuous admissibility and true projective-completeness payment
+
+The concrete original TSVF Q.ProjectiveMeasurement now also has theorem terms projectorsSumToIdentity, rightAfterWrongZero and wrongAfterRightZero: the right/wrong coordinate projectors **sum to the identity on the entire coordinate carrier** and are mutually orthogonal, in addition to being idempotent.
+
+To prevent the selected admissibility relation from being the trivially true predicate, the finite source was strengthened from a permissive two-outcome fixture to a **three-history predicate** on the original BidirectionallyAdmissibleHistoryFibre owner: admittedRightHistory and admittedWrongHistory carry explicit proofs for the same selected initial/final boundary, while excludedHistory is impossible by a source-written excludedCannotBeJointlyAdmissible no-go. Only admitted histories can be mapped to the physical coordinate projector; the excluded case has no constructor. The original Q.TSVF selected projectors still match, and the original ABL normalization/Born-overlap calculations remain source-written against this tighter fibre. This *remains* a finite constructed admissibility model, not a law selecting real cosmic histories.
+
+A further static proof-typing risk was reduced by expanding the Nat left-unit multiplication step explicitly in rightOriginalABLDenominator and wrongOriginalABLDenominator. All changes remain unverified by an actual Agda compiler; declarations and local proof terms are not a kernel receipt.
+
 # TSVF admissible-from-both → quantum ABL → environmental overlap: maximum-cut implementation
 
 **3 November 2026. SOURCE-WRITTEN; Agda kernel and full physical quantum construction pending.** This is the quantitative continuation of [TSVF macroscopic reversibility and multiverse audit](TSVFMacroscopicReversibilityMultiverseBidiSourceAudit20261103.md).
