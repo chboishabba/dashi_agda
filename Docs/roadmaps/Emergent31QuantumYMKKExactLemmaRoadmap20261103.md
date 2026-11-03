@@ -151,3 +151,141 @@ Phase DAG:
 - [ ] **P05.L16** Execute deterministic sides 2,3,4,5 gauge regression plus deliberately wrong inverse-gauge orientation and lost-link negative controls, separately from kernel proof.
 
 **Owners:** latest #1444 YMClaySUNVariablePeriodicProductHaarExact, YMClaySUNVariablePeriodicGaugeHaarExact, YMClaySUNConstructedPeriodicGaugeCodecExact, YMClaySUNVariablePeriodicBondPointwiseExact, YMClayNativeSixPlaquetteSUNWilsonActionWeldExact, selected CMP119 and original Wilson/Haar. **Status:** new all-size finite algebra SOURCE; actual Haar, decoder, R124 OPEN.
+
+## P06 — actual 4D Euclidean Yang–Mills continuum and mass-gap analytic core (R445/R320/R333)
+
+**Deliverable:** one genuinely physical 4D pure compact-simple-G gauge quantum theory, changing-cutoff continuum, reflection-positive OS reconstruction, strictly positive spectral gap and H6 nontriviality. **Exit:** every literal Clay source requirement is proved; fixed-lattice positivity does not suffice.
+
+- [ ] **P06.L01** Construct directed native physical Wilson cylinder family at all scales and finite volumes, including valid observable restriction/refinement maps.
+- [ ] **P06.L02** Prove actual chosen cutoff compatibility or quantified blocking/RG residuals; do not falsely equate unequal finite lattice measures.
+- [ ] **P06.L03** Inhabit selected Bałaban *one-step* RG physical source bounds with true constants, analytic norms and gauge/matrix content.
+- [ ] **P06.L04** Prove multiscale RG induction uniformly in regulator and volume from those true one-step estimates; no conditional one-step axiom.
+- [ ] **P06.L05** Prove physical R445 uniform marked-source moments, regularity and scaling with constants independent of cutoff.
+- [ ] **P06.L06** Prove R445 uniform tails/large-field control, tightness and nontrivial quantum state candidates on the actual physical measure.
+- [ ] **P06.L07** Construct continuum gauge-invariant Schwinger expectation distributions as cutoff→0 with correct metric/counterterm and observable meaning.
+- [ ] **P06.L08** Prove infinite-volume construction (volume→∞), valid ordering/diagonal limit, vacuum normalization and independence of approximation choice.
+- [ ] **P06.L09** Prove full required Euclidean rotations/translations, symmetry and clustering where used; finite C3 invariance alone is insufficient.
+- [ ] **P06.L10** Prove OS reflection positivity for selected real physical measure/cylinder algebra, preserved through continuum and infinite-volume limits.
+- [ ] **P06.L11** Prove remaining necessary OS axioms, distributional/temperedness regularity and correct gauge-invariant reconstruction hypotheses on that state.
+- [ ] **P06.L12** Build actual OS Hilbert quotient, vacuum, positive semigroup and self-adjoint **H_OS** from exactly those limit Schwinger functions.
+- [ ] **P06.L13** Identify literal selected CMP116 **mixed-J differentiated-source** expectation, source differentiation and rooted-shell coordinates on exactly the R445 family.
+- [ ] **P06.L14** Prove selected R320 uniform rooted-shell decay in cutoff, volume, sources and shell distances with physically controlled constants.
+- [ ] **P06.L15** Derive Route-S R320→R333 spectral consequence for **the identical H_OS** and gauge-invariant spectrum, including validity of all analytic limit interchanges.
+- [ ] **P06.L16** Prove a physical energy-unit Δ>0 independent of cutoff/volume with spec(H_OS) ⊆ {0}∪[Δ,∞), preserving actual ground-state/vacuum identification.
+- [ ] **P06.L17** Prove H6 nontriviality: interacting limit theory with nonzero gauge-invariant observables/Hilbert content; rule out a trivial Hilbert/empty operator trick.
+- [ ] **P06.L18** Prove all literal Clay scope: four-dimensional R^4 (not only periodic T^4), every required compact simple group or precisely scoped G, continuum axiom status and nontrivial quantum theory.
+- [ ] **P06.L19** Discharge transitive Bishop/constructive-real and external analytic assumptions and quantify regularity, source group, cutoff and volume hypotheses explicitly.
+- [ ] **P06.L20** Publish exact-head source/lemma/constant/dependency/referee receipts, and compare genuinely same physical OS Hamiltonian with independent proof methods.
+
+**Owners:** #1440 Route-S, #1444 R443–R445, BalabanClayGate4CombinedRGUVIterationExact and BalabanClayConcreteUVToMassGapDependencyExact; original Bałaban, Wilson, Osterwalder–Schrader. **Status:** significant finite and conditional sources OWNED/SOURCE; actual P06 source/limits/Δ OPEN. **This is the independent standalone Clay finish.**
+
+## P07 — central unification theorem: observed clock = actual OS Hamiltonian/metric
+
+**Deliverable:** a source-selected physically meaningful unitary equivalence of the same observed time and OS reconstruction, same metric/gauge observables and spectrum. **Exit:** no equality based only on two independent signature-(3,1) labels.
+
+- [ ] **P07.L01** Select independent P01/P02/P03 clock, accessible-record state and causal metric before importing the target OS continuation.
+- [ ] **P07.L02** Construct Euclidean involution/reflection theta from **that exact clock/physical source** with correct positive-time observable sector.
+- [ ] **P07.L03** Prove P06 physical Wilson/Schwinger OS reflection is the same theta on selected observables, not a second invented reflection.
+- [ ] **P07.L04** Prove physical Lorentzian metric/causal cone from P02 agrees with OS reconstructed geometry under actual continuation and scale/units.
+- [ ] **P07.L05** Construct a unitary surjective isometry U: H_clock → H_OS with actual domains, null quotients, chosen state/vacuum and observable algebra compatibility.
+- [ ] **P07.L06** Prove U U_clock(t) = U_OS(t) U for every real t, with correct source time normalization and domain continuity.
+- [ ] **P07.L07** Derive U H_clock = H_OS U and spectral-projection intertwinement on the self-adjoint generator domains; transport one physical Δ.
+- [ ] **P07.L08** Prove equality of selected time-correlations and Wilson/gauge-invariant observables at *matched couplings/boundaries* under the chosen U.
+- [ ] **P07.L09** Construct actual physical inhabitants of SameMetricTSFVKK: arrowSource, kkSource, physicalStateOfMetric, same metric/operational orientation—not just its conditional proof term.
+- [ ] **P07.L10** Prove Lorentzian/Euclidean stress/Wightman continuation refers to the same physical state when used; do not equate formal Hodge-star signatures with OS.
+- [ ] **P07.L11** Prove uniqueness of selected OS analytic continuation in the relevant class, and a negative-control scenario with mismatched clock/metric or failed reflection positivity.
+- [ ] **P07.L12** Prove full central commuting square with canonical sector-indexed observable keys, including independent physical interpretation of both forward and backward maps.
+- [ ] **P07.L13** Verify *typed* classical finite Hodge (*²=-1 Lorentz two-forms, *²=+1 Euclidean two-forms) as convention check, not substitute for actual U.
+- [ ] **P07.L14** Prove genuine same-physical-source identification with the P08 reduced KK 4-metric, if claiming the full five-sector theorem.
+
+**Owners:** TSFVKKSameMetricTransportExact, TSFVFiltrationArrowLorentzBridgeExact, YMClayLorentz31DirectionalKKHodgeExact, OS reconstruction owners and SchrodingerSelfAdjointEvolutionReceipt. **Status:** conditional same-metric SOURCE, actual U/generator equivalence OPEN. **Highest-value cross-domain lemma: P07.L05–L07.**
+
+## P08 — spacelike fifth-circle KK effective theory and Möbius/internal holonomy
+
+**Deliverable:** one actual Lorentzian five-dimensional EFT with correctly reduced 4D metric/action, radion, graviphoton, gauge scalar, thresholds and pure-YM decoupling. **Exit:** low-energy 4D physics matches P07 in stated sectors.
+
+- [ ] **P08.L01** Select an actual spacelike circle principal bundle S¹ over P02 physical time-orientable 3+1 base with correct global spin/orientation.
+- [ ] **P08.L02** Derive source-selected Lorentzian 5D metric ansatz and unique declared Jordan/Einstein-frame normalization, preserving one timelike axis.
+- [ ] **P08.L03** Construct 5D Einstein–YM–matter **effective** action with boundary, cutoff, physical couplings, group action and counterterms, not a claimed 5D UV completion.
+- [ ] **P08.L04** Compute full scalar/vector/gravity curvature action reduction including radion, graviphoton and non-vanishing cross/boundary terms.
+- [ ] **P08.L05** Decompose gauge A_A = (A_mu,Phi=A_y) on the same bundle and prove F_AB reductions into 4D YM curvature, covariant scalar derivative and scalar interactions.
+- [ ] **P08.L06** Prove 5D and 4D gauge transformations, source variation/stress and field equations commute with zero-mode reduction when admissible.
+- [ ] **P08.L07** Prove tree-level g4²=g5²/ell and kappa4^-2=ell*kappa5^-2 only under stated unwarped/constant-circle conventions, with units.
+- [ ] **P08.L08** Derive orthonormal KK modes and untwisted flat-circle m_n²=m_0²+(2πn/ell)², identifying the spectrum in the actual effective field source.
+- [ ] **P08.L09** Prove physical low-energy KK truncation or integrate out massive modes with explicit E*ell-dependent Wilson/metric/stress bounds and threshold terms.
+- [ ] **P08.L10** Prove stabilization or justified decoupling of radion/adjoint scalar/graviphoton, or retain their full physical observable contributions.
+- [ ] **P08.L11** Construct and prove controlled *pure 4D YM* decoupling limit of the gravity/matter/KK theory, matching P06 chosen Wilson/Schwinger source.
+- [ ] **P08.L12** Prove the same KK-reduced metric/time/observable algebra as P07, with controlled EFT epsilon, not merely equal signature counts.
+- [ ] **P08.L13** If claiming E6/trinification, prove actual global group, chirality, nonliftable quotient bundles, anomalies, CS/WZ/eta/spin regulator and gravity-consistent source on the same field theory.
+- [ ] **P08.L14** If claiming Möbius/internal twist, construct genuine associated bundle and Z₂ monodromy, one-loop flip and two-loop return with source-compatible boundary fields.
+- [ ] **P08.L15** Prove internal Möbius twist leaves physical base global time orientable or supplies lawful orientable double-cover descent without contradictory operational clocks.
+- [ ] **P08.L16** Preserve strict **5D Euclidean lattice ≠ Lorentzian KK ≠ stochastic auxiliary time ≠ complex i** type distinction; require typed maps to compare any two.
+- [ ] **P08.L17** Transport #1460 finite ten-plane (five-axis) action/omitted-fibre no-go into the physical 5D curvature source with actual nonnegative norm and retained scalar cross-fibre terms.
+
+**Owners:** #1241 KKSteelmanBidirectionalConsumerExact/E6 global quotient, #1460 YMClayLorentz31DirectionalKKHodgeExact/YMClayFiveSectorBidiSteelmanExact, MobiusOrientationGate (target-only). **Status:** physical 5D action/weld OPEN, finite geometry SOURCE.
+
+## P09 — rigorous selected lower-dimensional backward checks: 4→3→2
+
+**Deliverable:** controlled reductions and *independent* observables corresponding to the actual 2D known YM theorem and precisely scoped local 3D stochastic YM–Higgs construction. **Exit:** comparison with correct scalar/gauge/limit/coupling scope.
+
+- [ ] **P09.L01** Construct a selected compactification and observable reduction R_(d→d-1) at d=4,3 (and 5 as P08) with selected boundary and source conditions.
+- [ ] **P09.L02** Derive physical decomposition of F_d into F_(d-1), covariant adjoint-scalar Phi and scalar interactions with all gauge transformation laws.
+- [ ] **P09.L03** Prove tree-level coupling g_(d-1)²=g_d²/ell plus correct loop thresholds and physical scheme/scale matching.
+- [ ] **P09.L04** Prove selected Wilson-loop holonomy/cylinder source naturality under actual dimensional reduction for loops retained in the base.
+- [ ] **P09.L05** Prove 4D→3D gauge+scalar low-energy effective measure/observable agreement with a quantified mode/truncation residual.
+- [ ] **P09.L06** Match the *actual locally renormalized* 3D stochastic YM–Higgs gauge-covariant dynamics and mass-renormalization counterterms in the published local scope; do not infer global stationary distribution.
+- [ ] **P09.L07** Prove 3D→2D gauge+scalar reduction and valid scalar decoupling to standalone pure 2D YM if claiming that comparator.
+- [ ] **P09.L08** Reproduce rigorously the normalized planar simple-loop 2D Wilson expectation exp[-(g2²*C2(R)/2)*Area], in the proper representation/topological scope.
+- [ ] **P09.L09** Prove correspondence of the selected 2D Euclidean/Hamiltonian Wilson observable to the external rigorous construction, not only formula resemblance.
+- [ ] **P09.L10** Establish quantitative finite-circle/finite-cutoff error and legitimate order of limits for every lower-D comparison.
+- [ ] **P09.L11** Retain extra d→d-1 adjoint scalar mode and gauge polarizations; mere numerical polarization accounting cannot replace field/action comparison.
+- [ ] **P09.L12** Construct negative controls: wrong loop topology/representation, wrong scalar truncation, wrong coupling, noncommuting limits and invalid gauge state.
+- [ ] **P09.L13** Inhabit each adjacent MatchedEuclideanGaugeTower physical observation equality before claiming automatic 5→2 transitive agreement.
+
+**Original external owners:** Ashtekar–Lewandowski–Marolf–Mourão–Thiemann rigorous 2D YM and Chandra–Chevyrev–Hairer–Shen / Chevyrev–Shen stochastic 3D YM–Higgs results; their actual scope controls the bridge. **Status:** published 2D and scoped 3D EXTERNAL; physical DASHI same-sector maps OPEN.
+
+## P10 — same-effective-action stress/GR and exotic-gravity consumers
+
+**Deliverable:** physical metric-dependent effective action, conserved source stress, one positive-G metric and independent multi-channel predictions. **Exit:** source-native physics, not exotic-label promotion.
+
+- [ ] **P10.L01** Construct selected renormalized W[g,A,Psi;B_±] on P07 physical state, including actual metric-dependent counterterms and global boundary conditions.
+- [ ] **P10.L02** Prove source metric variation exists and yields T_mu nu=-(2/sqrt(-g))*δW/δg^mu nu with the declared convention and actual tensor domain.
+- [ ] **P10.L03** Prove covariant Ward identity/nabla^mu T_mu nu=0 with gauge/matter anomalies, conservation and boundary flux accounted for.
+- [ ] **P10.L04** Identify physical R124/CMP119 native metric/stress first variation and all ten independent symmetric stress readouts with the same selected Wilson measure.
+- [ ] **P10.L05** Prove Einstein equation with the *same* P07 metric, actual normalized G_N>0 and selected QFT stress, not an independently assumed gravitational state.
+- [ ] **P10.L06** Inhabit #1120 Local-C/Wightman source-first P1 Q1 (one-path first variation + reflection) and A2 (source-native stress cylinder identity).
+- [ ] **P10.L07** Inhabit #1120 P2 same cosmological renormalization convention, stress×length²/apparatus physical scale, native metric perturbation and controls.
+- [ ] **P10.L08** If history/birthmark gravity claimed, prove actual history-sensitive W source and Eq.(2.23) N_V>0, N_ERB≥0 signs, not entropy-memory⇒curvature.
+- [ ] **P10.L09** Prove physically allowed defocusing/repulsive geometry from relevant active stress and energy constraints; negative trace alone is insufficient and scalar Kottler shift is not TT wave.
+- [ ] **P10.L10** Prove one selected source→stress→metric produces coherent weight/support, geodesic free fall, clock and optical channel predictions.
+- [ ] **P10.L11** Close ordinary momentum, electromagnetic, thermal and mechanical nuisance channels, match controls and replicate before observational anomaly promotion.
+- [ ] **P10.L12** Preserve material-effective negative G versus universal sign-flipped G and their differing positive-density weak-field fingerprints; no universal negative-G inference.
+- [ ] **P10.L13** Prove evidence promotion firewall: an antigravity report, GW signal, history label or stress fixture does not solve Clay YM or imply TOE.
+- [ ] **P10.L14** Verify physical same-stress/same-metric continuation through P07 OS and P08 KK when asserted, with actual normalization, or produce discrepancy/error.
+
+**Owners:** #1120 Local-C/Wightman and four-channel, #1132 birthmark Eq.(2.23), #1045 negative-G strongest conditional theorem, #1284 nonpromotion, #1050 source D1, #1241 KK metric/stress. **Status:** many conditional/local fixtures, physical source OPEN.
+
+## P11 — global BIDI, exact-head Golden receipts and final proof
+
+**Deliverable:** one fully inhabited Emergent31YangMillsKKPhysicalClosure theorem (or smallest surviving blocker certificates). **Exit:** all mandatory phases checked, with no hidden circular assumption.
+
+- [ ] **P11.L01** Define canonical physical comparison key (selected source, state, gauge group, coupling, regulator, boundary, observable, limit) for every claimed equality.
+- [ ] **P11.L02** Construct physically source-first forward construction from microscopic history → operational causal (3,1) → J/H/Stone → gauge → Wilson → OS.
+- [ ] **P11.L03** Construct independent backward steelman from rigorous 2D + scoped 3D sources, independent constructive 4D YM/OS and observed 3+1 physical tests, without importing the desired source identity.
+- [ ] **P11.L04** Prove Os(4D Euclidean)→3+1 is a reconstruction and 5D KK→4D is a reduction; stochastic flow auxiliary time and Euclidean five-axis YM are different typed sources.
+- [ ] **P11.L05** Prove all selected Wilson/state/hilbert/spectral/time/metric same-observable commuting squares; otherwise retain explicit approximation epsilon or no-go.
+- [ ] **P11.L06** Give explicit error bounds ε_O(a,L,ell,mu) for every effective comparison and exact-zero proofs only for genuinely identical sectors.
+- [ ] **P11.L07** Prove spectral projection equivalence and Δ>0 on the one physical H clock/H_OS and pure G state, not a different gapped theory.
+- [ ] **P11.L08** Prove stress and geometry are the same physical source across Lorentz, Euclidean OS and KK whenever a stress comparison is asserted.
+- [ ] **P11.L09** Establish justified limit ordering and permitted interchanges (cutoff→0, volume→∞, KK-radius→0, stochastic time→∞, history-refinement, OS).
+- [ ] **P11.L10** Pass independent selected 2D/3D observables and at least one 5D→4D coupling/action same-source comparison at known, defined scales.
+- [ ] **P11.L11** Run negative controls: wrong Lorentz clock/signature, wrong Haar inverse orientation, failed OS positivity, mismatched KK scalar, curved geometry mismatch, fake finite gap and universal negative-G fingerprint.
+- [ ] **P11.L12** Establish SI metrology, original publication authority, actual global gauge group, measured-coupling and empirical distinctions.
+- [ ] **P11.L13** Kernel-check final source graph under Golden Agda safe/zero-postulate/zero-meta/zero-termination-bypass and provide complete exact source HEAD/stdlib logs.
+- [ ] **P11.L14** If Lean mirror used, audit exact corresponding theorem and actual source content separately; no automatic Agda↔Lean proof transfer.
+- [ ] **P11.L15** Produce distinct standalone Clay YM theorem/receipt and stronger 3+1/KK/GR unification theorem; optional SM and exotic experimental claims remain optional.
+- [ ] **P11.L16** Independent mathematics referee audit: domains, genuine source inequalities, nontriviality, volume, spectral theory and all source preconditions; preserve failed no-go.
+- [ ] **P11.L17** Independent physical falsification and instrumentation audit for measured causal dimension, lower-D observables, KK thresholds and four-channel gravity if claimed.
+- [ ] **P11.L18** Prove terminal theorem only after all actually required physical fields are inhabited; else publish exact smallest unsatisfied primitive-leaf cut.
+
+**Owners:** BalabanRGTOERegression and TOE imports plus all owners above. **Status:** OPEN.
