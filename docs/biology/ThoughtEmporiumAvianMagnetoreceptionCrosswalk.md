@@ -15,7 +15,7 @@
 
 ## Original GenBank document ingestion (next exact work)
 
-See [the source-inspected GenBank → DASHI integration plan](ThoughtEmporiumMagnetoreceptionGenBankIngestPlan.md) for the original 11,214-base circular archive, its 22 annotation features, lossless location AST, Golden codec and protein-context owner reuse, ontology/PNF join, and exact acceptance gates GB01–GB08. The external GenBank file exists and was metadata-inspected; **it has not yet been imported as a kernel-verified source-derived term**. The source author and GitHub commit remain credited.
+See [the source-inspected GenBank → DASHI integration plan](ThoughtEmporiumMagnetoreceptionGenBankIngestPlan.md) for the original 11,214-base circular archive, its 22 annotation features, lossless location AST, Golden codec and protein-context owner reuse, ontology/PNF join, and exact acceptance gates GB01–GB08. The external GenBank file exists and was metadata-inspected. **The reusable parser, candidate-only ontology worklist, source inventory and Golden location core are now source-written on PR #1461; exact original-file Python replay, full semantic record roundtrip and Agda kernel acceptance remain OPEN.** The source author and GitHub commit remain credited. Importantly, the original feature labelled `cacna1d human plus pigeon` is a `misc_feature`, not one of its two `CDS` features, so it cannot be silently promoted into a validated protein identity.
 
 ## Transcript-to-evidence crosswalk
 
