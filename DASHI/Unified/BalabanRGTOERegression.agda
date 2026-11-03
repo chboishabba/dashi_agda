@@ -81,6 +81,7 @@ open TSFVArrow public using
   ; futureChoicesChangeHiddenHistory
   ; futureChoicesHaveSameMicroscopicAction
   ; historyNotRecoverableFromActionAlone
+  ; pastRecordCannotRecoverSelectedMicroHistory
   ; selectedTSFVPhysicalSignatureIs31
   )
 open L31Probe public using
