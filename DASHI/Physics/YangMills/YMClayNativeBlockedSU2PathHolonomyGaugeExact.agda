@@ -185,6 +185,120 @@ module _
           (destinationGaugeMatchesOriginalPath
             (Torus.pair blocked axis))))
 
+  ----------------------------------------------------------------------
+  -- P06.L02 strengthened: FULL COMPOSABLE BLOCKED PATHS.
+  --
+  -- Crucially, intermediate sites are the ACTUAL computed reblocked
+  -- endpoints. The type checker rejects an invalid naive concatenation.
+  ----------------------------------------------------------------------
+
+  data NativeBlockedWalk : BlockedSite → BlockedSite → Set where
+    emptyNativeBlockedWalk :
+      ∀ {site} → NativeBlockedWalk site site
+    prependNativeBlockedLink :
+      ∀ {finish} (bond : BlockedBond) →
+      NativeBlockedWalk (nativeBlockedPathDestination bond) finish →
+      NativeBlockedWalk (Torus.first bond) finish
+
+  nativeWalkHolonomy :
+    ∀ {start finish} → NativeBlockedWalk start finish → Value
+  nativeWalkHolonomy emptyNativeBlockedWalk = Path.identity group
+  nativeWalkHolonomy (prependNativeBlockedLink bond rest) =
+    Path.multiply group
+      (nativeBlockedPathLink bond)
+      (nativeWalkHolonomy rest)
+
+  nativeTransformedWalkHolonomy :
+    ∀ {start finish} → NativeBlockedWalk start finish → Value
+  nativeTransformedWalkHolonomy emptyNativeBlockedWalk =
+    Path.identity group
+  nativeTransformedWalkHolonomy (prependNativeBlockedLink bond rest) =
+    Path.multiply group
+      (nativeTransformedBlockedPathLink bond)
+      (nativeTransformedWalkHolonomy rest)
+
+  -- Derive endpoint gauge covariance for ALL typed composite blocked
+  -- paths, with actual cancellation at every source-native intermediate
+  -- site. This is NOT an assumed source-invariance field.
+  nativeWalkGaugeCovariant :
+    ∀ {start finish} (walk : NativeBlockedWalk start finish) →
+    nativeTransformedWalkHolonomy walk
+    ≡ Path.multiply group
+        (Path.multiply group
+          (nativeGaugeAtBlock start)
+          (nativeWalkHolonomy walk))
+        (Path.inverse group (nativeGaugeAtBlock finish))
+  nativeWalkGaugeCovariant {start = start} emptyNativeBlockedWalk =
+    Path.conjugateIdentity group (nativeGaugeAtBlock start)
+  nativeWalkGaugeCovariant {finish = finish}
+      (prependNativeBlockedLink bond rest) =
+    let
+      startGauge = nativeGaugeAtBlock (Torus.first bond)
+      middleGauge = nativeGaugeAtBlock (nativeBlockedPathDestination bond)
+      finishGauge = nativeGaugeAtBlock finish
+      firstLink = nativeBlockedPathLink bond
+      suffixLink = nativeWalkHolonomy rest
+      transformedFirst = nativeTransformedBlockedPathLink bond
+    in
+    trans
+      (cong
+        (λ head → Path.multiply group head
+          (nativeTransformedWalkHolonomy rest))
+        (nativeBlockedPathGaugeCovariant bond))
+      (trans
+        (cong
+          (λ tail →
+            Path.multiply group
+              (Path.multiply group
+                (Path.multiply group startGauge firstLink)
+                (Path.inverse group middleGauge))
+              tail)
+          (nativeWalkGaugeCovariant rest))
+        (Path.composeGaugeSegments group
+          startGauge middleGauge finishGauge firstLink suffixLink))
+
+  -- A genuine closed blocked path has identical physical endpoint,
+  -- so its holonomy transforms by one conjugation.
+  nativeClosedWalkTransformsByConjugation :
+    ∀ {site} (loop : NativeBlockedWalk site site) →
+    nativeTransformedWalkHolonomy loop
+    ≡ Path.multiply group
+        (Path.multiply group
+          (nativeGaugeAtBlock site) (nativeWalkHolonomy loop))
+        (Path.inverse group (nativeGaugeAtBlock site))
+  nativeClosedWalkTransformsByConjugation =
+    nativeWalkGaugeCovariant
+
+  -- Exactly the ORIGINAL Wilson class-function contract: a trace or
+  -- other scalar observable must justify conjugation invariance.
+  -- This input is not a Haar/continuum/source assumption.
+  record NativeBlockedClassObservable (Scalar : Set) : Set₁ where
+    field
+      evaluate : Value → Scalar
+      conjugationInvariant :
+        ∀ gaugeAtBase loopValue →
+        evaluate
+          (Path.multiply group
+            (Path.multiply group gaugeAtBase loopValue)
+            (Path.inverse group gaugeAtBase))
+        ≡ evaluate loopValue
+
+  open NativeBlockedClassObservable public
+
+  nativeClosedWilsonObservableGaugeInvariant :
+    ∀ {Scalar : Set} {site}
+      (observable : NativeBlockedClassObservable Scalar)
+      (loop : NativeBlockedWalk site site) →
+      evaluate observable (nativeTransformedWalkHolonomy loop)
+      ≡ evaluate observable (nativeWalkHolonomy loop)
+  nativeClosedWilsonObservableGaugeInvariant
+      {site = site} observable loop =
+    trans
+      (cong (evaluate observable)
+        (nativeClosedWalkTransformsByConjugation loop))
+      (conjugationInvariant observable
+        (nativeGaugeAtBlock site) (nativeWalkHolonomy loop))
+
   -- One-step check: the coarse holonomy for L=1 is literally the
   -- ORIGINAL native positive bond, not an unrelated endpoint proxy.
   -- General L retains the same path multiplication and orientation.
