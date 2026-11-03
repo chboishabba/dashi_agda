@@ -49,8 +49,6 @@ open import Data.Product using (_×_; _,_; Σ)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as ℕₚ
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Agda.Builtin.List using (List; []; _∷_) renaming ([] to []ₗ; _∷_ to _∷ₗ_)
-open import Data.Nat.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
@@ -342,7 +340,15 @@ tensorOverlap k = tensorRepeatedDot epsRight epsWrong k
 tensorRearrange :
   ∀ (a b c d : Nat) →
     (a * b) * (c * d) ≡ (a * c) * (b * d)
-tensorRearrange a b c d = solve (a ∷ₗ b ∷ₗ c ∷ₗ d ∷ₗ []ₗ)
+tensorRearrange a b c d =
+  trans (sym (ℕₚ.*-assoc a b (c * d)))
+    (trans
+      (cong (λ v → a * v) (sym (ℕₚ.*-assoc b c d)))
+      (trans
+        (cong (λ v → a * (v * d)) (ℕₚ.*-comm b c))
+        (trans
+          (cong (λ v → a * v) (ℕₚ.*-assoc c b d))
+          (sym (ℕₚ.*-assoc a c (b * d))))))
 
 tensorPowerMultiplicative :
   (a b k : Nat) →
