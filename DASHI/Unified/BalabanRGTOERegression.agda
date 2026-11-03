@@ -89,6 +89,7 @@ open TSFVKKSameMetric public using
   ( SameMetricTSFVKK
   ; sameMetricKKSignatureFromTSFV
   ; sameMetricKKReversedCountExcluded
+  ; globalStrictReversalRankImpossible
   )
 open L31Probe public using
   ( calibratedProbeForcesThreePlusOne
