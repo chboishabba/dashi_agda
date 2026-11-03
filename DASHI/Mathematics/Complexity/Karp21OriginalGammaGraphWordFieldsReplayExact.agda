@@ -21,9 +21,10 @@ module DASHI.Mathematics.Complexity.Karp21OriginalGammaGraphWordFieldsReplayExac
 -- graph word and raw edge-list source owners. Agda kernel unrun.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _++_; length)
+open import Data.Nat.Base using (_≤_)
 open import Data.Maybe.Base using (just)
 open import Data.Product using (_,_; proj₁; proj₂)
 open import Data.Integer.Base using (∣_∣)
@@ -37,6 +38,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryRoundTripExact as Numeric
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Graph
 import DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact as Raw
+import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact as Size
 
 -- Exact tail of the serialized gamma vertex-count header. The source
 -- graph may have an enormous vertex count and zero listed edges.
@@ -105,3 +107,18 @@ readEncodedGraphThresholdMagnitude :
 readEncodedGraphThresholdMagnitude (n , graph) =
   Numeric.gammaReadEncodeRoundTrip
     (∣ Cut.threshold graph ∣)
+
+
+------------------------------------------------------------------------
+-- The EXACT parser-side 3m guard is already implied by the original
+-- canonical graph serialization. It is not a separately assumed
+-- Boolean condition and it never bounds declared vertex count by bits.
+------------------------------------------------------------------------
+
+readEncodedGraphEdgeCountBudget :
+  (instance : Instance.GraphInstance) →
+  (length (Cut.edges (proj₂ instance)) * suc (suc (suc zero)))
+    ≤ length (graphWordAfterEdgeCount instance)
+readEncodedGraphEdgeCountBudget instance =
+  Size.encodedGraphEdgeParserBudget instance
+
