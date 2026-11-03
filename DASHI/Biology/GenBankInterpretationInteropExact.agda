@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Codec.GenBankLocationFiniteCore as GB
 import DASHI.Codec.GenBankFeatureGeometrySymmetryExact as Geometry
+import DASHI.Biology.GenBankCanonicalDNAFibreIndexExact as IndexedDNA
 import DASHI.Codec.GenBankComponentOntologyFiniteCore as Components
 import DASHI.Codec.DNAFirstFormalism as DNA
 import DASHI.Codec.DNACarrierFibre as Fibre
@@ -53,6 +54,11 @@ canonicalBaseFibreRoundTrip :
   (base : DNA.Base) →
   Fibre.decodeBaseFibre (Fibre.encodeBaseFibre base) ≡ base
 canonicalBaseFibreRoundTrip = Fibre.decode-encode-base
+
+allLengthIndexedBaseFibreRoundTrip :
+  {n : Nat} (xs : IndexedDNA.Vec DNA.Base n) →
+  IndexedDNA.decode (IndexedDNA.encode xs) ≡ xs
+allLengthIndexedBaseFibreRoundTrip = IndexedDNA.decodeEncode
 
 -- Existing contextual protein owner; no default frame or isoform.
 contextualProteinCodonCarrier : Set
