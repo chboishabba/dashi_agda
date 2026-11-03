@@ -281,7 +281,16 @@
     "promotion_authority": false
   },
   "sequence_bases_redistributed": false,
-  "genbank_parser_executed_on_original": false,
+  "genbank_parser_executed_on_original": true,
   "independent_biological_function_verified": false,
-  "notes": "Source inspection uses GitHub file text and deterministic syntax inventory, not a completed Biopython full-file parse; observations are not a validated plasmid, protein identity, or phenotype."
+  "notes": "Author-published source bytes were reconstructed and verified by exact Git blob SHA; local prototype Biopython parse and all 22 original features/qualifier/strand/part-order parity passed. This is not exact-head repository execution, semantic full-record roundtrip proof, Agda acceptance, protein identity, functionality, or human enhancement.",
+  "genbank_parser_execution_scope": "local Python prototype using Biopython 1.86 against byte-identical original GitHub blob; full exact-head GitHub repo pytest not executed",
+  "original_raw_git_blob_parity_passed_locally": true,
+  "original_source_raw_sha256": "43e7f588788e36c7a3b7d4e794dde21311781a9eae9fd857fe5cac79b46f03d1",
+  "original_normalized_sequence_sha256": "7e1449a229c1182bc787bf861a906b42313e5e0d6676770a9d8bfa0a7bbd71db",
+  "original_source_feature_parity_passed_locally": true,
+  "original_bases_redistributed": false,
+  "native_itir_slr_ontology_review_conformance_claim": false,
+  "exact_head_agda_accepted": false,
+  "local_execution_receipt_ref": "docs/biology/data/ThoughtEmporiumMagnetoreceptionLocalExecutionReceipt.json"
 }
