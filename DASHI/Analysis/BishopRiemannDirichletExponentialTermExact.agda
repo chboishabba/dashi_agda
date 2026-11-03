@@ -949,8 +949,9 @@ sourceNatLogNegativeExponentialUnitInterval logNat n inverseLaw =
         (sourceNatReciprocalNonnegative n)))
   ,
   RP.≤-respˡ-≃
-    (negativeExponentialAtNatLogIsEmbeddedReciprocal
-      logNat n inverseLaw)
+    (RP.≃-symm
+      (negativeExponentialAtNatLogIsEmbeddedReciprocal
+        logNat n inverseLaw))
     (sourceNatReciprocalBelowOrEqualOne n)
 
 
@@ -1032,8 +1033,9 @@ sourceNegativeLogSumAboveTwoBaselMajorant :
     (Basel.baselTerm n)
 sourceNegativeLogSumAboveTwoBaselMajorant logNat n k inverseLaw =
   RP.≤-respˡ-≃
-    (sourceExpNegativeLogSumIsReciprocalPower
-      logNat n inverseLaw (suc (suc k)))
+    (RP.≃-symm
+      (sourceExpNegativeLogSumIsReciprocalPower
+        logNat n inverseLaw (suc (suc k))))
     (RP.≤-respʳ-≃
       (sourceNatReciprocalSquarePowerIsBasel n)
       (BaselNat.reciprocalExtraPowersBelowSquare n k))
@@ -1051,14 +1053,15 @@ sourceNegativeLogSumAboveTwoAbsoluteMajorant :
 sourceNegativeLogSumAboveTwoAbsoluteMajorant
     logNat n k inverseLaw =
   RP.≤-respˡ-≃
-    (RP.≃-trans
-      (RP.∣-∣-cong
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.∣-∣-cong
         (sourceExpNegativeLogSumIsReciprocalPower
           logNat n inverseLaw (suc (suc k))))
       (RP.nonNegx⇒∣x∣≃x
         (Seq.nonNegx⇒nonNegxⁿ
           (suc (suc k))
-          (BaselNat.reciprocalNonnegative n))))
+          (BaselNat.reciprocalNonnegative n)))))
     (RP.≤-respʳ-≃
       (sourceNatReciprocalSquarePowerIsBasel n)
       (BaselNat.reciprocalExtraPowersBelowSquare n k))
@@ -1139,9 +1142,10 @@ sourceIntegralExpRealBaselMajorant :
     (Basel.baselTerm n)
 sourceIntegralExpRealBaselMajorant inputs logNat n k inverseLaw =
   RP.≤-respˡ-≃
-    (RP.∣-∣-cong
-      (sourceIntegralExpTermReal
-        inputs logNat n (suc (suc k))))
+    (RP.≃-symm
+      (RP.∣-∣-cong
+        (sourceIntegralExpTermReal
+          inputs logNat n (suc (suc k)))))
     (sourceNegativeLogSumAboveTwoAbsoluteMajorant
       logNat n k inverseLaw)
 
@@ -1157,9 +1161,10 @@ sourceIntegralExpImagBaselMajorant :
     (Basel.baselTerm n)
 sourceIntegralExpImagBaselMajorant inputs logNat n k =
   RP.≤-respˡ-≃
-    (RP.∣-∣-cong
-      (sourceIntegralExpTermImagZero
-        inputs logNat n (suc (suc k))))
+    (RP.≃-symm
+      (RP.∣-∣-cong
+        (sourceIntegralExpTermImagZero
+          inputs logNat n (suc (suc k)))))
     (Dirichlet.zeroAbsBelowBasel n)
 
 sourceIntegralExpFamily :
