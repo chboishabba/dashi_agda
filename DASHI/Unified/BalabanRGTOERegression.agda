@@ -954,6 +954,8 @@ import DASHI.Physics.YangMills.YMClayNativeBlockedPeriodicBondWeldExact as SUNNa
 import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as SUNNativeBlockHolonomy
 import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SUNPhysicalBlockedHolonomy
 import DASHI.Physics.YangMills.YMClayNativeSideFourTwoBlockEndpointExact as SUNSideFourBlockEndpoint
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedWilsonGaugeExact as SUNSideFourBlockedWilson
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedFineHaarObservableExact as SUNBlockedFineHaar
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
@@ -1392,3 +1394,38 @@ open SUNPhysicalBlockedHolonomy public using
 open SUNSideFourBlockEndpoint public using
   (sideFourTwoBlockEndpoint
   ; sideFourSUNBlockGaugeCovariant)
+
+------------------------------------------------------------------------
+-- R445 selected original side-four -> side-two Wilson/Gibbs observable.
+-- These are the actual SU(N) matrix Wilson plaquettes and original
+-- variable-periodic six-plane and Gibbs functions evaluated on the
+-- constructed noncommutative coarse link holonomies. Invariance is
+-- proved at the source, then at the SAME original fine product-Haar
+-- Gibbs expectation conditionally on ONE chosen one-link Haar.
+--
+-- Neither source asserts that a fine Wilson pushforward equals a new
+-- coarse Wilson Gibbs law, nor that reflection positivity, Haar
+-- measurability, continuum R445 or same-Hamiltonian R333 are paid.
+------------------------------------------------------------------------
+open SUNSideFourBlockedWilson public using
+  (fineToCoarse
+  ; gaugeToCoarse
+  ; blockFineGaugeCoarsePointwise
+  ; blockedSelectedPlaquette
+  ; blockedSelectedPlaquetteGauge
+  ; blockedSelectedPlaquetteWilsonGauge
+  ; blockedSelectedSixDeficit
+  ; blockedSelectedSixDeficitGaugeInvariant
+  ; blockedSelectedWilsonAction
+  ; blockedSelectedWilsonActionGaugeInvariant
+  ; blockedSelectedGibbsDensity
+  ; blockedSelectedGibbsDensityGaugeInvariant)
+
+open SUNBlockedFineHaar public using
+  (CoarsePointwiseObservable
+  ; blockedPullbackPointwise
+  ; originalFineMeasureBlockedGaugeInvariant
+  ; blockedCoarseWilsonPointwise
+  ; originalFineGibbsBlockedWilsonGaugeInvariant
+  ; blockedCoarseGibbsPointwise
+  ; originalFineGibbsBlockedGibbsGaugeInvariant)
