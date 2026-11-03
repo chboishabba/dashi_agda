@@ -254,6 +254,21 @@ finiteOriginalABLNormalization k =
     symmetryToRightDenominator n =
       sym (rightOriginalABLDenominator n)
 
+-- Each source-admissible selected ABL branch has strictly positive Born
+-- numerator in this concrete example. Logical admissibility *in general*
+-- is still too weak to imply this, as the separate zero-weight model proves.
+finiteABLRightBornPositive :
+  (k : Nat) → 1 ≤ numerator (finiteABLRight k)
+finiteABLRightBornPositive k
+  rewrite rightOriginalABLNumerator k =
+  Overlap.oneAtMostRightPower k
+
+finiteABLWrongBornPositive :
+  (k : Nat) → 1 ≤ numerator (finiteABLWrong k)
+finiteABLWrongBornPositive k
+  rewrite wrongOriginalABLNumerator k =
+  Overlap.oneAtMostWrongPower k
+
 -- Both boundary constraints genuinely admit BOTH measured histories in
 -- this finite selected two-branch source. The original Bidi fibre owner
 -- is instantiated, rather than being replaced by a new admissibility idea.
