@@ -105,3 +105,19 @@ The new Phase 3 changes have not been independently type-checked in this session
 
 ### Changelog
 2026-11-03: Restorative parse fix and typed SLR carrier correction pushed. Exact ITIR authority parity and new referee acceptance remain open.
+
+## Phase 5 — PNF → Hecke → spectral shrinkage → AST proof join (2026-11-03)
+- [x] Fix `AdmissibleCoordinateRow` binder indentation in the spectral coordinate rebuildability owner.
+- [x] Add `SLRPNFToAgdaPreflightProofJoinPipelineExact.agda` and import it in all three TOE roots.
+- [x] Source-write R1 invalidation and slot conservation, R2 quotient-count conservation, R3 lifecycle split, R4 protected bulk-shrinkage selection, and R5 AST preflight routing and typed proof join.
+- [x] Enumerate 26 DashiAgda preflight operations with a total projection to four ITIR formal tool IDs.
+- [ ] Re-run local Agda safe verification for the new module and three roots at the new commit.
+- [ ] Establish same-object links from count summaries to revision-pinned PostgreSQL query receipts; arithmetic equalities alone do not prove the observed counts.
+- [ ] Formalize the Marchenko–Pastur edge and covariance-eigenspectrum inequality using the existing numeric ABI owner. The current band classification is an input, not a derived statistical theorem.
+- [ ] Bind the protected Boolean to concrete formally required/reviewed protection witnesses; prevent forged Boolean claims.
+- [ ] Bind actual AST compiler output, source digest, exact symbol/type ownership, and checked coboundary witnesses to the proof join. The receipt fields currently express requirements but do not prove the runtime emitted them.
+- [ ] Confirm the 26 preflight operation names and ITIR projection against source-owned MCP registry metadata.
+- [ ] Mirror only locally kernel-accepted golden results into Lean4, preserving source provenance and prior author attribution.
+
+### Phase 5 changelog
+2026-11-03: Added staged formal pipeline, corrected spectral coordinate parse indentation, and wired TOE roots. Python/Rust/ESD unchanged. Kernel acceptance and same-object runtime receipt correspondence remain open.
