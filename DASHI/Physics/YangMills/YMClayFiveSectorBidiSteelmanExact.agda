@@ -31,6 +31,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Data.Empty using (⊥)
+open import Data.Rational.Base using (ℚ; _*_)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 import DASHI.Physics.YangMills.YMClayVoyagerDimensionSignatureForkExact as Dim
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as Lorentz
@@ -152,6 +154,37 @@ fiveDoesNotAutomaticallyMatchFour :
     ≡ fourPlane fiveFibreCounterexample →
   ⊥
 fiveDoesNotAutomaticallyMatchFour ()
+
+------------------------------------------------------------------------
+-- TREE-LEVEL inverse-coupling product for three consistent circle
+-- reductions: 5E -> 4E -> 3E -> 2E (gauge zero-mode sector only).
+--
+-- If lambda_d = 1/g_d^2, the *conditional* tree-level zero-mode
+-- relation is lambda_(d-1) = L_d * lambda_d. The following is a real
+-- rational algebra identity with the three physical circle lengths
+-- still uncalibrated. It does not account for loops, threshold terms,
+-- radion variation, physical SI units or a five-dimensional UV theory.
+------------------------------------------------------------------------
+
+inverseCoupling54 : ℚ → ℚ → ℚ
+inverseCoupling54 length5 inverseCoupling5 =
+  length5 * inverseCoupling5
+
+inverseCoupling43 : ℚ → ℚ → ℚ
+inverseCoupling43 length4 inverseCoupling4 =
+  length4 * inverseCoupling4
+
+inverseCoupling32 : ℚ → ℚ → ℚ
+inverseCoupling32 length3 inverseCoupling3 =
+  length3 * inverseCoupling3
+
+treeLevelCouplingTowerCoheres :
+  ∀ (length5 length4 length3 inverseCoupling5 : ℚ) →
+    inverseCoupling32 length3
+      (inverseCoupling43 length4
+        (inverseCoupling54 length5 inverseCoupling5))
+    ≡ ((length3 * length4) * length5) * inverseCoupling5
+treeLevelCouplingTowerCoheres = solve-∀
 
 ------------------------------------------------------------------------
 -- Sector-indexed BIDI. The observer matches only the chosen states.
