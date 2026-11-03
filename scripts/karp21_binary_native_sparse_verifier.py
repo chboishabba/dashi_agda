@@ -79,16 +79,27 @@ def verifies_sparse_word_binary_native(
         return False
 
 
-def pairwise_endpoint_comparison_count(m: int) -> int:
-    """Exact number of previous-endpoint comparisons for m edges.
+def pairwise_endpoint_scan_iterations(m: int) -> int:
+    """Maximum prior-assignment loop iterations for m edges.
 
-    At edge j there are 2j previous endpoint assignments. Each is
-    inspected at most once, so total <= sum_{j<m} 2j = m(m-1).
-    This counts logical comparisons, not their bit-tape cost.
+    At edge j there are 2j prior endpoint assignments, so a
+    successful full scan makes exactly sum_{j<m} 2j = m(m-1)
+    iterations. Invalid certificates may exit earlier.
     """
     if type(m) is not int or m < 0:
         raise ValueError("invalid edge count")
     return m * (m - 1)
+
+
+def pairwise_endpoint_comparison_count(m: int) -> int:
+    """Upper bound on integer-address equality comparisons.
+
+    Each prior-assignment loop iteration can compare its address to
+    BOTH the new u and new v (short circuit may skip the second).
+    Thus at most 2*m*(m-1) integer equality checks, not m*(m-1).
+    Binary bit-tape cost per comparison is a separate proof gate.
+    """
+    return 2 * pairwise_endpoint_scan_iterations(m)
 
 
 def maximum_edges_from_canonical_input_bits(input_length: int) -> int:
