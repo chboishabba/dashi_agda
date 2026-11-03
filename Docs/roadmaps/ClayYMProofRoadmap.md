@@ -2,6 +2,10 @@
 
 ## 2026-11-03 — AUTHORITATIVE current YM exact-lemma reconciliation
 
+**Per-field canonical inventory:** [YMClaySubmission219FieldInventory20261103.json](YMClaySubmission219FieldInventory20261103.json) now literally lists the 219 A–I source record-field names, IDs and source blob SHAs, and `scripts/check_ym_219_field_inventory.py` detects source drift. This is a verified 219-field enumeration, NOT individual theorem discharge or Clay closure. The current 43-entry producer-level R443/R445/R320/R333/Clay/TRUST lemma matrix remains in [YMClayCurrentExactLemmaLedger20261103.md](YMClayCurrentExactLemmaLedger20261103.md).
+
+
+
 **Read this before historical append-only sections:** [YMClayCurrentExactLemmaLedger20261103.md](YMClayCurrentExactLemmaLedger20261103.md) is the canonical current *source-status* ledger for R443/R445/R320/R333/Clay. Its IDs are stable for the current max-cut: R443.F01–F07/P01–P05; R445.F01–F03/P01–P09; R320.P01–P06; R333.P01–P07; CLAY.P01–P03; TRUST.K01–K03. The older 219-field submission inventory and frozen four-family research scoreboard remain separate uncompleted formulations of the same Clay endpoint, not five additional official Clay problems.
 
 **New actual code**: `YMClayNativeC3SingleVectorPermutationCertificateExact.singleVectorC3ImpliesAllVectors` derives the formerly universal 1024-coordinate `ExactC3AdjacentSwapWitness.matchesNativeVector` from ONE exact equality on the canonical original bond-label Vec. `YMClaySUNConstructedNativeC3SetoidHaarExact.adjacentSwapFromOneVector` and `originalNativeC3GibbsHaarInvariantFromOneVector` attach this to the **existing original native SU(N) Wilson/Gibbs Haar consumer**. R443.F07 — finding the actual `LinkPermutation 1024` program and proving the one label-vector equality — is still OPEN. Constructing genuine compact Haar remains a separately OPEN physical R443.P01–P03 input, not solved by C3 combinatorics.
