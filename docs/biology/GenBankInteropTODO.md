@@ -92,12 +92,12 @@ canonical. No ESD edits, external ontology edits or operational DNA designs.
 ```sh
 python3 -m pip install -r requirements-genbank.txt
 python3 -m pytest -q tests/test_genbank_*.py
-python3 scripts/check_genbank_source_inventory.py /path/to/original.gb
-python3 scripts/check_genbank_semantic_roundtrip.py /path/to/original.gb
-python3 scripts/check_genbank_feature_geometry_square.py /path/to/original.gb
+python3 -m scripts.check_genbank_source_inventory /path/to/original.gb
+python3 -m scripts.check_genbank_semantic_roundtrip /path/to/original.gb
+python3 -m scripts.check_genbank_feature_geometry_square /path/to/original.gb
 python3 -m scripts.genbank_component_registry --genbank /path/to/original.gb --output /tmp/components.json
-python3 scripts/genbank_itir_native_review_adapter.py /tmp/components.json --output /tmp/itir-input.json
-python3 scripts/genbank_itir_native_review_adapter.py /tmp/components.json --itir-src /path/to/ITIR-suite/itir-mcp/src --execute-native --output /tmp/itir-native-receipt.json
+python3 -m scripts.genbank_itir_native_review_adapter /tmp/components.json --output /tmp/itir-input.json
+python3 -m scripts.genbank_itir_native_review_adapter /tmp/components.json --itir-src /path/to/ITIR-suite/itir-mcp/src --execute-native --output /tmp/itir-native-receipt.json
 agda -i . DASHI/Codec/GenBankFeatureGeometrySymmetryExact.agda
 agda -i . DASHI/Codec/GenBankComponentOntologyFiniteCore.agda
 agda -i . DASHI/Biology/GenBankCanonicalDNAFibreIndexExact.agda
