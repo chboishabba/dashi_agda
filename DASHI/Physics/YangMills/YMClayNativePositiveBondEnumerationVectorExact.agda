@@ -157,6 +157,18 @@ listValues List.[] f = Vec.[]
 listValues (List._∷_ x xs) f =
   Vec._∷_ (f x) (listValues xs f)
 
+-- Finite encoding respects pointwise equality without global function ext.
+listValuesCong :
+  ∀ {A B : Set} (xs : List.List A)
+    (left right : A → B) →
+  (∀ label → left label ≡ right label) →
+  listValues xs left ≡ listValues xs right
+listValuesCong List.[] left right same = refl
+listValuesCong (List._∷_ label labels) left right same =
+  cong₂ Vec._∷_
+    (same label)
+    (listValuesCong labels left right same)
+
 -- Canonical list-membership position lookup, without an equality oracle.
 memberValue :
   ∀ {A B : Set} {x : A} {xs : List.List A} →
@@ -287,6 +299,15 @@ encodeDecodeExactly finite distinct vector =
             (listAtMember (Torus.elements finite) index)))
         (listAtMemberValue (Torus.elements finite) index vector)))
 
+encodeFieldPointwise :
+  ∀ {A B : Set}
+    (finite : Torus.FiniteEnumeration A)
+    (left right : A → B) →
+  (∀ label → left label ≡ right label) →
+  encodeField finite left ≡ encodeField finite right
+encodeFieldPointwise finite left right same =
+  listValuesCong (Torus.elements finite) left right same
+
 -- Instantiation: SAME original periodic function carrier at every cutoff.
 encodeOriginalBonds :
   ∀ {B : Set} (L : Nat) →
@@ -312,3 +333,11 @@ originalBondsEncodeDecodeExactly L =
   encodeDecodeExactly
     (originalPositiveBondFinite L)
     (originalPositiveBondDistinct L)
+
+originalBondsEncodePointwise :
+  ∀ {B : Set} (L : Nat)
+    (left right : Torus.BondField L B) →
+  (∀ bond → left bond ≡ right bond) →
+  encodeOriginalBonds L left ≡ encodeOriginalBonds L right
+originalBondsEncodePointwise L =
+  encodeFieldPointwise (originalPositiveBondFinite L)
