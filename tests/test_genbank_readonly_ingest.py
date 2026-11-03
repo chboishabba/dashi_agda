@@ -16,6 +16,8 @@ from scripts.genbank_readonly_ingest import (
     parse_genbank_bytes,
     candidate_review_graph,
     location_normalize,
+    location_from_tree,
+    location_tree,
 )
 
 
@@ -63,6 +65,8 @@ def test_compound_circular_reverse_and_exact_coordinates():
     assert joined["parts"][0]["start0"] == 71
     assert joined["parts"][1]["start0"] == 0
     assert location_normalize(joined) == joined
+    assert location_tree(location_from_tree(joined), 80) == joined
+    assert location_tree(location_from_tree(span), 80) == span
 
 
 def test_candidate_graph_provenance_and_nonpromotion():
