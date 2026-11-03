@@ -62,15 +62,15 @@ The source-inventory feature table is **not an automatically generated assertion
 Use the original creator's publicly attributed GenBank file. Do not modify it. The following commands **read and summarize it without emitting sequence bases**:
 
 \`\`\`sh
-python3 scripts/genbank_readonly_ingest.py /path/to/original.gb \
+python3 -m scripts.genbank_readonly_ingest /path/to/original.gb \
   --creator "The Thought Emporium / Justin Atkin" \
   --source-ref "https://github.com/thethoughtemporium/Whose-gene-is-it-anyway/tree/master/magnetoreception" \
   --revision "f83aaf2b3ada085d02d8a25cfdc4ae32c80fe09d" \
   --output /tmp/magnetoreception-source-report.json
 
-python3 scripts/check_genbank_source_inventory.py /path/to/original.gb
+python3 -m scripts.check_genbank_source_inventory /path/to/original.gb
 
-python3 scripts/genbank_ontology_review.py \
+python3 -m scripts.genbank_ontology_review \
   /tmp/magnetoreception-source-report.json \
   --output /tmp/magnetoreception-review-holds.json
 
@@ -93,7 +93,7 @@ The reusable parser is kept generic. The separate `scripts/genbank_magnetorecept
 To reproduce after obtaining original bytes, also run:
 
 ```sh
-python3 scripts/genbank_magnetoreception_crosswalk.py /path/to/original.gb \
+python3 -m scripts.genbank_magnetoreception_crosswalk /path/to/original.gb \
   --output /tmp/magnetoreception-source-crosswalk.json
 ```
 
@@ -138,7 +138,7 @@ The original file also passed an actual Biopython GenBank **parse → serialize 
 This is an **executed semantic equality observation**, not a proof that arbitrary GenBank inputs universally round-trip or that the Agda/Lean kernel accepted a theorem. Such a theorem remains GB04-FORMAL and source-parser refinement is still to be paid. Exact-head checkout execution remains open.
 
 ```sh
-python3 scripts/check_genbank_semantic_roundtrip.py /path/to/original.gb
+python3 -m scripts.check_genbank_semantic_roundtrip /path/to/original.gb
 python3 -m pytest -q tests/test_genbank_semantic_roundtrip.py
 ```
 
