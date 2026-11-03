@@ -23,10 +23,14 @@ module DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Product.Base using (_×_; proj₂)
+open import Data.Product.Base using (_×_; proj₁; proj₂)
 
 import Real as R
+import RealProperties as RP
 import DASHI.Analysis.BishopSetoidComplexExact as C
+import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
+import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
+import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Analysis.BishopRiemannComplexAboveTwoBaselExact as Region
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
@@ -113,3 +117,65 @@ sourceRegionWideFromSingleImaginaryProduct :
 sourceRegionWideFromSingleImaginaryProduct inputs inverse product =
   Region.sourceRegionWideBaselCertificate inputs inverse
     (round11PythagoreanFromImaginaryProduct inputs product)
+
+
+------------------------------------------------------------------------
+-- K05: SOURCE-NATIVE DOUBLE-ANGLE FROM THE SAME SINGLE IMAGINARY
+-- CAUCHY PRODUCT. Reuse the independently compiled fourfold Machin
+-- polynomial / original-Round11-sine-cosine commuting square.
+------------------------------------------------------------------------
+
+round11DoubleAngleFromImaginaryProduct :
+  (inputs : Round11.Round11BishopCutset) →
+  Round11ImaginaryExpMultiplicative inputs →
+  Quad.Round11BishopDoubleAngle inputs
+round11DoubleAngleFromImaginaryProduct inputs product = record
+  { Quad.sineDouble = λ point →
+      let
+        laws = C.imaginaryExponentialProductGivesAddition
+          (Route.round11MachinTranscendentals inputs)
+          point point
+          (product point point)
+        sineAt = Quad.round11Sine inputs point
+        cosineAt = Quad.round11Cos inputs point
+      in
+      RP.≃-trans
+        (proj₁ laws)
+        (RP.≃-trans
+          (RP.+-comm
+            (R._*_ sineAt cosineAt)
+            (R._*_ cosineAt sineAt))
+          (RP.≃-symm
+            (Quad.sinDoubleAsCrossSum cosineAt sineAt)))
+  ; Quad.cosineDouble = λ point →
+      proj₂
+        (C.imaginaryExponentialProductGivesAddition
+          (Route.round11MachinTranscendentals inputs)
+          point point
+          (product point point))
+  }
+
+-- At the ORIGINAL Machin angle, exact sin(pi_M)=0 and
+-- cos(pi_M)=-1 follow from the same product law and only the
+-- separately owed atan/tan QUARTER semantic relation cos θ=sin θ.
+-- The Pythagorean is now DERIVED, not passed as a second hypothesis.
+round11MachinTrigEndpointFromImaginaryProduct :
+  (inputs : Round11.Round11BishopCutset) →
+  (product : Round11ImaginaryExpMultiplicative inputs) →
+  R._≃_
+    (Quad.quarterCos inputs)
+    (Quad.quarterSin inputs) →
+  (R._≃_
+    (Quad.round11Sine inputs Machin.bishopMachinPi) R.0ℝ)
+  ×
+  (R._≃_
+    (Quad.round11Cos inputs Machin.bishopMachinPi)
+    (R.- R.1ℝ))
+round11MachinTrigEndpointFromImaginaryProduct
+    inputs product quarterCosEqualsSin =
+  Quad.actualMachinTrigEndpointFromDoubleAngle
+    inputs
+    (round11DoubleAngleFromImaginaryProduct inputs product)
+    quarterCosEqualsSin
+    (round11PythagoreanFromImaginaryProduct
+      inputs product Quarter.machinQuarterAngle)
