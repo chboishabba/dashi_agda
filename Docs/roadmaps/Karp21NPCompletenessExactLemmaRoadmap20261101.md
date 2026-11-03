@@ -1,5 +1,15 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-03 — E05 original CLIQUE→NODE COVER canonical binary complement payload
+
+**Source-written at PR #1445; no Agda acceptance receipt:** `Karp21CliqueComplementUpperTriangleWordExact.agda` defines the literal off-diagonal bitwise negation of a sorted `List Bool` upper-triangle adjacency section, with `complementUpperTriangleInvolution`, `complementUpperTrianglePreservesLength` and `emittedComplementBitCountExact`. The pure binary owner imports only `--safe` DASHI definitions and is itself marked `--safe`.
+
+`Karp21CliqueComplementSameGraphWordExact.agda` imports the **original** `Karp21SimpleGraphComplementExact.SimpleGraph`, `complementSimpleGraph`, `simpleComplementOffDiagonal` and `Karp21IndexedUpperPairBijectionExact.allUpperPairs/upperPairNoLoop`. `encodeUpperPairAdjacencyBits` reads the actual original adjacency function at canonical `i<j` endpoints; `sourceComplementAddressBit` and `sourceComplementWordSameBytes` prove the original complement's off-diagonal values are **exactly the negated original bit payload**, including no erroneous diagonal loops. `e05CanonicalComplementGraphWordSameObject` and `e05CanonicalComplementGraphWordPreservesBits` specialize to the source-owned full upper-triangle enumeration. Existing `Karp21SimpleGraphComplementExact.karpSimpleGraphCliqueCoverInstanceIff` remains the actual finite witness/decision owner; no new truth markers or graph carriers were introduced.
+
+**Remaining E05 encoded reduction:** strict total graph-and-k parser over arbitrary source bit words, accepted-word language including malformed handling, same-output canonical target graph-word serializer, threshold `k→n-k` on the source-owned `Combined.complementCount` objective, and a true polynomial bit-machine clock for the full map (not merely one output bit per edge). The P2 full E01–E19, all 21 NP memberships, P0 universal SAT and P3 `CertifiedKarpNetwork` remain OPEN. The new lemmas are **binary payload / same-object finite graph facts only**, not certified NP-complete edges. No Agda kernel/CI receipt; counters 0/20 costed edges and 0/21 terminal conclusions.
+
+
+
 ## 2026-11-03 — E20 actual parsed graph acceptance and N21 Fin-free comparison-count cut
 
 **Source-written in PR #1445; Agda kernel acceptance still OPEN.**
