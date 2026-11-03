@@ -18,11 +18,11 @@ module DASHI.Mathematics.Complexity.Karp21DecodedWeightedCutSemanticBidiExact wh
 -- Agda acceptance and graph parser validation are still separate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
-open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Base using (List; []; _∷_; length)
 open import Data.Nat.Base using (_<_)
 open import Data.Product using (Σ; _,_)
 open import Data.Integer.Base using (ℤ)
@@ -262,3 +262,23 @@ reconstructedCanonicalListScoreSame originals bounds labels =
   sameWeightedEdgeListScore
     originals (reconstructCanonicalEdges originals bounds)
     labels (reconstructCanonicalEdgesFields originals bounds)
+
+
+------------------------------------------------------------------------
+-- The actual decoder-side 2m guard uses the RETURNED edge list count.
+-- Fieldwise preservation proves that parser success retains exactly
+-- the original number of listed edges, so the original encoder-size
+-- certificate applies to that same returned list.
+------------------------------------------------------------------------
+
+sameWeightedEdgeListLength :
+  ∀ {n : Nat}
+    (originals decodeds : List (Cut.SignedUndirectedEdge n)) →
+  SameWeightedEdgeLists originals decodeds →
+  length originals ≡ length decodeds
+sameWeightedEdgeListLength [] [] sameEdgeNil = refl
+sameWeightedEdgeListLength
+  (original ∷ originals) (decoded ∷ decodeds)
+  (sameEdgeCons fields tailSame) =
+  cong suc (sameWeightedEdgeListLength originals decodeds tailSame)
+
