@@ -24,7 +24,7 @@ module DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _<ℝ_)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
