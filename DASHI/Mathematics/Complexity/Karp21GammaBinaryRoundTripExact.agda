@@ -26,6 +26,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (_∸_)
 open import Data.List.Base using (List; []; _∷_; _++_; length)
 open import Data.Product using (Σ; _,_)
+open import Data.Maybe.Base using (just)
 import Data.List.Properties as ListP
 import Data.Nat.Properties as NatP
 import Data.Nat.Binary.Base as Bin
