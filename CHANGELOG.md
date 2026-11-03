@@ -214,3 +214,12 @@ monitor surface.
 - **Evidence:** source-written and GitHub-committed, not Agda-kernel-checked. Full completion is still blocked by the canonical native exp/log inverse at Nat successors, mixed signed-factorial imaginary exponential Cauchy product, real finite-term/limit zeta continuity with original same-object identification, and independent trigonometric π characterization. The previously separated Pythagorean proof is a *consumer* of the mixed product, not a third gate.
 
 Additional K05 source theorem outputs: `round11SineAtTwoPi` and `round11CosineAtTwoPi` transport the existing Round11 origin values through the new period. They remain conditional and kernel-pending.
+
+
+## 2026-11-03 — Bishop K04d/K05 source-native and cross-prover continuation
+
+- Golden Agda `BishopNegativeLogExponentialReciprocalFromCancellationExact.agda`: original convergent Bishop negative-log value plus preexisting true exp Cauchy and actual inverse-uniqueness reduce LOG to `exp_B(-L(x)) ≃ 1-x`. Source reduction, **not** a proved native inverse.
+- Golden Agda `BishopMachinFirstPositiveSineZeroFromNativePhaseExact.agda`: original Machin pi positive via rational window; native first sine zero compiler consumes the existing one K05 imaginary product, quarter equality and new precise interval sine-sign obligation. Does not claim these assumptions inhabited.
+- Three TOE root imports updated for both owners; no ESD changes.
+- Open draft Lean PR [#104](https://github.com/chboishabba/dashi_lean4/pull/104) contains source-faithful native-log, imaginary-product/quarter, genuine Riemann zeta/continuity Lean companion proofs and focused source-level checks. Prior Lean PR #24 is merged/closed, not the live work.
+- All four mathematical gates remain **OPEN on golden Agda** pending native proofs or verified proof-term import and independent exact-head Agda elaboration. No kernel pass, zero-axiom receipt or complete theorem is claimed from GitHub source readback.
