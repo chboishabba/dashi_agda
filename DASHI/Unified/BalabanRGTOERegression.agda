@@ -942,6 +942,8 @@ import DASHI.Physics.YangMills.YMClayNativeSixPlaquetteSUNWilsonActionWeldExact 
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as SUNVariable
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as SUNVariableGaugeHaar
+import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as SUNBondCodec
+import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as SUNConstructedGauge
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
@@ -1206,3 +1208,27 @@ open SUNVariableGaugeHaar public using
   ; periodicWeightedPointwise
   ; periodicGaugeNumeratorInvariant
   ; periodicGaugeNormalizedExpectationInvariant)
+
+-- The ORIGINAL positive-bond enumeration is an actually constructed all-n
+-- Vec codec. The previous R443/R445 decoder and gauge naturality fields
+-- no longer need to be supplied independently on this finite source.
+open SUNBondCodec public using
+  (originalPositiveBondFinite
+  ; originalPositiveBondDistinct
+  ; originalPositiveBondCount
+  ; originalSideFourCountIs1024
+  ; originalBondsDecodeEncodeAt
+  ; originalBondsEncodeDecodeExactly
+  ; encodeOriginalBonds
+  ; decodeOriginalBonds)
+open SUNConstructedGauge public using
+  (nativeDecode
+  ; nativeEncode
+  ; constructedOriginalPeriodicGaugeNaturality
+  ; actualGaugeVectorEncoded
+  ; actualGaugeVectorDecodedAt
+  ; actualPeriodicProductMeasure
+  ; actualPeriodicPartitionPositive
+  ; actualPeriodicGaugeHaar
+  ; actualPeriodicGaugeNormalized
+  ; actualSixDeficitGaugeNormalized)
