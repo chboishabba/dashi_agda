@@ -33,6 +33,11 @@ import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as TSFVKKSameMet
 import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as SUNVariableGaugeHaar
+import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as SUNBondCodec
+import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as SUNConstructedGauge
+import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact as SUNFiniteSafe
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
 import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
@@ -116,6 +121,59 @@ open TSVFMacro public using
   ; pastOnlyCannotDetermineSelectedMacroBranch
   ; reversalAndRobustMacroCoexist
   )
+-- #1444@7c6b2efd finite same-source native gauge/codec/conditional Haar
+-- explicitly copied into #1460. The further analysis-only moving-cutoff
+-- module has no Golden --safe header and is NOT imported into this root.
+open SUNVariableHaar public using
+  ( periodicProductHaar
+  ; periodicProductFiniteMeasure
+  ; periodicProductHaarUnit
+  ; periodicActualDensityStrictPositive
+  ; periodicProductPartitionStrictPositive
+  ; periodicProductIntegrationLaws
+  ; periodicProductDensitySameObject
+  ; periodicProductPartitionSameObject
+  )
+open SUNVariableGaugeHaar public using
+  ( OriginalPeriodicGaugeVectorNaturality
+  ; PeriodicPointwiseObservable
+  ; periodicProductGaugeHaarInvariant
+  ; periodicGibbsPointwise
+  ; periodicWeightedPointwise
+  ; periodicGaugeNumeratorInvariant
+  ; periodicGaugeNormalizedExpectationInvariant
+  )
+open SUNBondCodec public using
+  ( originalPositiveBondFinite
+  ; originalPositiveBondDistinct
+  ; originalPositiveBondCount
+  ; originalSiteCountFormula
+  ; originalPositiveBondCountFormula
+  ; originalSideFourCountIs1024
+  ; originalBondsDecodeEncodeAt
+  ; originalBondsEncodePointwise
+  ; originalBondsEncodeDecodeExactly
+  ; encodeOriginalBonds
+  ; decodeOriginalBonds
+  )
+open SUNConstructedGauge public using
+  ( nativeDecode
+  ; nativeEncode
+  ; constructedOriginalPeriodicGaugeNaturality
+  ; actualGaugeVectorEncoded
+  ; actualGaugeVectorDecodedAt
+  ; actualPeriodicProductMeasure
+  ; actualPeriodicPartitionPositive
+  ; actualPeriodicGaugeHaar
+  ; actualPeriodicGaugeNormalized
+  ; actualSixDeficitGaugeNormalized
+  )
+open SUNFiniteSafe public using
+  ( originalGaugeDecodedAt
+  ; encodeGaugeNatural
+  ; vectorGaugeDecodedAt
+  )
+
 open FiveSectorBIDI public using
   ( threeToTwoExact
   ; fourToThreeExact
