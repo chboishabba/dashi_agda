@@ -10,7 +10,7 @@ module DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundary
 -- Karp21MalformedWordTotalReductionExact TOTALIZATION compiler, not
 -- an independently invented encoded language or Boolean status flag.
 --
--- The only unprovided premises are the real canonical binary codecs,
+-- The unprovided representation premise is the real graph binary codec,
 -- their faithful parser-to-word correspondence, and
 -- the genuine polynomial-time machine clock. The finite reduction
 -- and both directions of its word-level semantic correctness are
@@ -35,6 +35,7 @@ import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as C
 import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as N21
 import DASHI.Mathematics.Complexity.Karp21MalformedWordTotalReductionExact as Malformed
 import DASHI.Mathematics.Complexity.Karp21WeightedMaxCutFixedNoGraphExact as FixedNo
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Gamma
 
 graphAccepts : N21.GraphInstance → Set
 graphAccepts graph =
@@ -77,8 +78,9 @@ e20SignedPartitionActualGraphIff parts =
       (Source.totalPartitionToPositiveCut parts))
 
 ------------------------------------------------------------------------
--- The canonical binary source decoder and graph serializer do NOT
--- currently have kernel-checked exact representation theorems.
+-- The canonical binary graph serializer does NOT
+-- currently have a kernel-checked exact representation theorem.
+-- The source decoder is now the actual gamma/zigzag implementation.
 -- Keep their data as required REAL functions, and their
 -- faithful graph acceptance correspondence as a proof obligation.
 --
@@ -90,7 +92,6 @@ e20SignedPartitionActualGraphIff parts =
 
 record E20GraphWordBoundary : Set₁ where
   field
-    decodePartition : Word.BitWord → Maybe (List ℤ)
     encodeGraph : N21.GraphInstance → Word.BitWord
     graphLanguage : PR.Language Word.BitWord
     faithfulGraphWord :
@@ -105,7 +106,7 @@ module EncodedE20
 
   module Total =
     Malformed.TotalMalformedSource
-      (decodePartition boundary)
+      Gamma.decodePartitionWord
       Source.PartitionYES
       graphAccepts
       e20ActualGraphOfSignedPartition
