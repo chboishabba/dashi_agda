@@ -36,3 +36,9 @@
 - The exact original creator file passed Biopython parse/serialize/parse locally: sequence hash and length, molecule type/topology, annotated feature types, every original feature location and qualifier array, and record ID all preserved.
 - Serializer rewrote formatting (18,278 original bytes → 18,377 normalized bytes). This demonstrates **semantic**, not byte-exact, roundtrip. The creator's original raw file SHA remains separate.
 - Added `scripts/check_genbank_semantic_roundtrip.py` and a generic synthetic parser roundtrip test. Formal all-input correctness and exact-head kernel acceptance remain open.
+
+
+### Machine-readable candidate graph handoff
+- Added `docs/biology/data/ThoughtEmporiumMagnetoreceptionCandidateReviewGraph.json` with 22 source-annotated feature statements and 30 source-reopenable review holds. The designer's feature-8 label is linked to Nimpf 2019 only at candidate hypothesis tier; Xu 2021/Lisowski 2026 are later context, not source plasmid features.
+- Added `tests/test_genbank_source_candidate_graph.py` ensuring feature/count/source-identity parity, candidate-only authority and no original-sequence redistribution.
+- This is an inspection fixture, not a native ITIR, SLR S29, Wikidata or GO schema and not an automatic ontology edit.
