@@ -94,3 +94,61 @@ def test_source_stereochemical_descriptor_drift_stays_review_blocking():
         "ZAGRKAFMISFKIO-IAPIXIRKSA-N" in failure
         for failure in inspect_source_bundle(bundle)
     )
+
+
+def test_patent_is_a_distinct_attributed_source_not_a_biological_proof():
+    from scripts.check_wong2022_scientific_evidence import PATENT_ATLAS
+
+    bundle = load_source_bundle(ROOT)
+    assert not inspect_source_bundle(bundle)
+    bundle[PATENT_ATLAS] = bundle[PATENT_ATLAS].replace(
+        "10.1128/AEM.02137-14", "unattributed-2014-paper"
+    )
+    assert any(
+        "10.1128/AEM.02137-14" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
+
+
+def test_patent_does_not_replace_original_2014_research_owner():
+    from scripts.check_wong2022_scientific_evidence import PATENT_ATLAS
+
+    bundle = load_source_bundle(ROOT)
+    bundle[PATENT_ATLAS] = bundle[PATENT_ATLAS].replace(
+        "robinsonPanaccione2014", "lostOriginalResearchOwner"
+    )
+    assert any(
+        "robinsonPanaccione2014" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
+
+
+def test_patent_golden_core_forbids_claim_to_experiment_promotion():
+    from scripts.check_wong2022_scientific_evidence import PATENT_GOLDEN
+
+    bundle = load_source_bundle(ROOT)
+    bundle[PATENT_GOLDEN] = bundle[PATENT_GOLDEN].replace(
+        "patentClaimNotObservedExperiment",
+        "patentClaimTreatedAsExperimentalEvidence",
+    )
+    assert any(
+        "patentClaimNotObservedExperiment" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
+    bundle = load_source_bundle(ROOT)
+    bundle[PATENT_GOLDEN] += "\npostulate\n  invented : Set\n"
+    assert any("trust escape/hole" in failure for failure in inspect_source_bundle(bundle))
+
+
+def test_patent_family_does_not_promote_to_legal_clearance():
+    from scripts.check_wong2022_scientific_evidence import PATENT_ATLAS
+
+    bundle = load_source_bundle(ROOT)
+    bundle[PATENT_ATLAS] = bundle[PATENT_ATLAS].replace(
+        "freedomToOperateOpinionPaidIsFalse",
+        "falseLegalClearanceClaim",
+    )
+    assert any(
+        "freedomToOperateOpinionPaidIsFalse" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
