@@ -431,6 +431,14 @@ oneAtMostRightPower zero = ℕₚ.≤-refl
 oneAtMostRightPower (suc k) =
   ℕₚ.*-mono-≤ oneAtMost25 (oneAtMostRightPower k)
 
+oneAtMostNine : 1 ≤ 9
+oneAtMostNine = ℕₚ.m≤m+n 1 8
+
+oneAtMostWrongPower : (k : Nat) → 1 ≤ wrongRaw k
+oneAtMostWrongPower zero = ℕₚ.≤-refl
+oneAtMostWrongPower (suc k) =
+  ℕₚ.*-mono-≤ oneAtMostNine (oneAtMostWrongPower k)
+
 wrongAtMostRight : (k : Nat) → wrongRaw k ≤ rightRaw k
 wrongAtMostRight zero = ℕₚ.≤-refl
 wrongAtMostRight (suc k) =
