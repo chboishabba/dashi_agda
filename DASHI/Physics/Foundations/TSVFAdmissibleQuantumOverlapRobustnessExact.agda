@@ -305,29 +305,33 @@ power : Nat → Nat → Nat
 power base zero = 1
 power base (suc k) = base * power base k
 
+-- General finite independent-factor theorem; the chosen (3/5)
+-- environment is an actual instance rather than a fixed-label axiom.
+tensorRepeatedDot :
+  (a b : QubitNumerator) (k : Nat) →
+  tensorDot (replicate a k) (replicate b k)
+  ≡ power (dot₂ a b) k
+tensorRepeatedDot a b zero = refl
+tensorRepeatedDot a b (suc k) =
+  cong (λ z → dot₂ a b * z) (tensorRepeatedDot a b k)
+
 rightTensorNorm :
   (k : Nat) →
   tensorDot (replicate epsRight k) (replicate epsRight k)
   ≡ power 25 k
-rightTensorNorm zero = refl
-rightTensorNorm (suc k) =
-  cong (λ z → 25 * z) (rightTensorNorm k)
+rightTensorNorm k = tensorRepeatedDot epsRight epsRight k
 
 wrongTensorNorm :
   (k : Nat) →
   tensorDot (replicate epsWrong k) (replicate epsWrong k)
   ≡ power 25 k
-wrongTensorNorm zero = refl
-wrongTensorNorm (suc k) =
-  cong (λ z → 25 * z) (wrongTensorNorm k)
+wrongTensorNorm k = tensorRepeatedDot epsWrong epsWrong k
 
 tensorOverlap :
   (k : Nat) →
   tensorDot (replicate epsRight k) (replicate epsWrong k)
   ≡ power 15 k
-tensorOverlap zero = refl
-tensorOverlap (suc k) =
-  cong (λ z → 15 * z) (tensorOverlap k)
+tensorOverlap k = tensorRepeatedDot epsRight epsWrong k
 
 ------------------------------------------------------------------------
 -- THE NONTRIVIAL TENSOR QUANTUM OVERLAP IDENTITY.
