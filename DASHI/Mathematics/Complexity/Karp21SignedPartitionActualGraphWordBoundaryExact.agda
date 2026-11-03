@@ -45,6 +45,8 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
 import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact as Size
 import DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact as Raw
 import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphEndpointOrderExact as Order
+import DASHI.Mathematics.Complexity.Karp21UpperPairStructuralLexOrderExact as PairLex
+import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictLexExact as StrictLex
 import DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExact as Indexed
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact as FixedWords
@@ -75,6 +77,21 @@ graphOfPositiveTarget (Source.scaledCompletePositive parts nonzero) =
 -- This is independent of the sorted-adjacency proof still needed for
 -- the literal GraphWord validator and its proof-field reconstruction.
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- Every earlier edge in E20's actual nonzero-total complete graph
+-- has a strictly lexicographically smaller (u,v) numeric pair than
+-- every later edge. This is stronger than a no-duplicate receipt.
+------------------------------------------------------------------------
+
+e20ActualScaledGraphStrictLex :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts)) →
+  PairLex.StrictSorted StrictLex.CanonicalEdgeNumericBefore
+    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+e20ActualScaledGraphStrictLex parts nonzero =
+  StrictLex.sourceIndexedScaledCompleteGraphStrictLex
+    (Indexed.vectorOfList parts)
 
 e20ActualScaledGraphEndpointBounds :
   (parts : List ℤ)
