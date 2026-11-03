@@ -1,5 +1,12 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+## 2026-11-03 original E05 upper-triangular complement binary payload
+
+`Karp21CliqueComplementUpperTriangleWordExact.agda` implements the exact `List Bool` off-diagonal adjacency-bit negation, proves its involution and canonical word-length preservation, and counts emitted bits without pretending to have a machine clock. `Karp21CliqueComplementSameGraphWordExact.agda` then proves this is *identical* to sampling the already-owned `Karp21SimpleGraphComplementExact.complementSimpleGraph` at the original `Karp21IndexedUpperPairBijectionExact.allUpperPairs` canonical addresses. The source's `upperPairNoLoop` proof ensures that graph-complement negation never invents diagonal self-loops; this is the actual Karp CLIQUE→NODE COVER graph transformation rather than an unrelated binary toy. The existing finite witness/threshold owner remains `Karp21SimpleGraphComplementExact.karpSimpleGraphCliqueCoverInstanceIff`, and its strict binary parser, total many-one transformation and polynomial machine clock remain OPEN.
+
+Credits: Richard M. Karp's 1972 CLIQUE→NODE COVER reduction, Agda stdlib Boolean/list and finite-index libraries, and the preceding independent DASHI simple-graph complement and upper-pair owners. All new Agda proofs are **source-written but not kernel accepted**. The bit-length theorem is not a full costed E05 reduction or an all-21 completeness result.
+
+
 ## 2026-11-03 typed parsed Max-Cut acceptance and Fin-free sparse scan operation count
 
 `Karp21CanonicalParsedGraphAcceptanceExact.agda` transports the **existing** `Karp21CanonicalRawValidatorCompleteExact` and `Karp21DecodedWeightedCutSemanticBidiExact` owners into a genuine `PR.Iff` for the original `Cut.WeightedMaxCutYES` on raw-validated complete signed edge lists with the original positive threshold. The specialization `e20ScaledCanonicalRawGraphAcceptsIff` refers directly to `Actual.sourceIndexedWeightedGraph parts nonzero`. The encoded outer graph word and its exact positive-threshold/budget proof remain pending; no extra graph representation, proof extensionality, or machine clock is assumed.
