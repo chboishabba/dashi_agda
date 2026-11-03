@@ -1,6 +1,11 @@
 - [x] Reference-synthesize/check the exact original 1024-link C3 adjacent-transposition word: minimum 46,592 swaps (`scripts/check_ym_native_c3_adjacent_swap_word.py`), with independent Python action/cube checks; this is NOT an Agda proof of R443.F07.
 ### 2026-11-03 — YM authoritative exact-lemma max-cut / acceptance (PR #1444)
 
+- [x] Extract and source-verify ALL 219 exact A–I contract fields from `BalabanClayGate4PhysicalClosureRound6ExactCutset` and `YangMillsSubmissionExactCutset` into `Docs/roadmaps/YMClaySubmission219FieldInventory20261103.json`; precise record and field IDs, group cardinalities, source blob SHA, all statuses explicitly NOT_AUDITED.
+- [x] Add deterministic source-drift verifier `scripts/check_ym_219_field_inventory.py` checking the 219 field names/order, Git blob IDs and class count; this is not proof acceptance.
+- [ ] Individually audit existing in-repo inhabitants of each source field and populate evidence-backed per-field status; DO NOT infer discharge from type declarations, generic compilers, status flags or external citations.
+
+
 - [x] Reconcile current R443/R445/R320/R333 producer families against `YangMillsSubmissionExactCutset` (191 theorem + 28 foundations/gauge = 219 field inventory), `BalabanClayFrozenFourCompletionContractExact` (four physically OPEN research families), and the literal `YangMillsClayProblemContractExact.ClayYangMillsSolution` endpoint.
 - [x] Create `Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md` as source-pinned canonical current exact-lemma status/owner map with stable R443/R445/R320/R333/Clay/TRUST IDs. Preserve historical roadmaps as archaeology; no invented row completion.
 - [x] Source-write `YMClayNativeC3SingleVectorPermutationCertificateExact`: canonical original 1024-label Vec, map naturality and `singleVectorC3ImpliesAllVectors`; import into `YMClaySUNConstructedNativeC3SetoidHaarExact`, attach same native original SU(N) Gibbs/C3 consumer and re-export by `DASHI.Unified.BalabanRGTOERegression`.
