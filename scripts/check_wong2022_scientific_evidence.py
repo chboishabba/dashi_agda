@@ -23,12 +23,14 @@ CORE = "DASHI/Biology/Wong2022LysergicAcidFiniteCore.agda"
 SOURCE = "DASHI/Biology/Wong2022LysergicAcidEvidenceExact.agda"
 LEDGER = "DASHI/Biology/Wong2022EvidenceLedgerExact.agda"
 SCIENTIFIC = "DASHI/Biology/Wong2022ScientificMetabolicBridgeExact.agda"
+PATENT_GOLDEN = "DASHI/Biology/LysergicPriorArtFiniteCore.agda"
+PATENT_ATLAS = "DASHI/Biology/LysergicPriorArtAttributedCrosswalkExact.agda"
 AGGREGATE = "DASHI/Biology/Everything.agda"
 DOC = "docs/biology/Wong2022LysergicAcidEvidenceCrosswalk.md"
 BYTES = "scripts/audit_wong2022_source_bytes.py"
 BYTE_TEST = "tests/test_wong2022_source_bytes.py"
-PATHS = (CORE, SOURCE, LEDGER, SCIENTIFIC, AGGREGATE, DOC, BYTES, BYTE_TEST)
-AGDA_PATHS = (CORE, SOURCE, LEDGER, SCIENTIFIC, AGGREGATE)
+PATHS = (CORE, SOURCE, LEDGER, SCIENTIFIC, PATENT_GOLDEN, PATENT_ATLAS, AGGREGATE, DOC, BYTES, BYTE_TEST)
+AGDA_PATHS = (CORE, PATENT_GOLDEN, SOURCE, LEDGER, SCIENTIFIC, PATENT_ATLAS, AGGREGATE)
 
 MARKERS: dict[str, tuple[str, ...]] = {
     CORE: (
@@ -75,7 +77,33 @@ MARKERS: dict[str, tuple[str, ...]] = {
         "Stoich.certifyMetabolicStoichiometry bridge",
         "currentUnpaidEmpiricalTransport",
     ),
+    PATENT_GOLDEN: (
+        "{-# OPTIONS --safe #-}",
+        "patentClaimNotObservedExperiment",
+        "patentCitationNotReplication",
+        "sharedTopicCannotWeldHost",
+        "statusLabelNotFreedomToOperate",
+        "patentToYeastClaimTransportUnpaid",
+    ),
+    PATENT_ATLAS: (
+        "10.1128/AEM.02137-14",
+        "WO2015195535A2",
+        "62/012,658",
+        "2014-06-16",
+        "2014-09-19",
+        "2015-12-23",
+        "robinsonPanaccione2014",
+        "panaccioneRobinsonPatent2015",
+        "import DASHI.Core.AttributedSourceCore as Sources",
+        "import DASHI.Core.ScientificMechanismEvidenceBidiExact as Science",
+        "patentCitationImportsNoProof = refl",
+        "lineageAtlasCreatesNoAuthority = refl",
+        "territoryByTerritoryFamilyReviewPaidIsFalse",
+        "freedomToOperateOpinionPaidIsFalse",
+    ),
     AGGREGATE: (
+        "import DASHI.Biology.LysergicPriorArtFiniteCore",
+        "import DASHI.Biology.LysergicPriorArtAttributedCrosswalkExact",
         "import DASHI.Biology.Wong2022LysergicAcidEvidenceExact",
         "import DASHI.Biology.Wong2022EvidenceLedgerExact",
         "import DASHI.Biology.Wong2022ScientificMetabolicBridgeExact",
@@ -119,12 +147,13 @@ def inspect_source_bundle(contents: Mapping[str, str]) -> list[str]:
         for marker in MARKERS[path]:
             if marker not in source:
                 failures.append(f"missing marker in {path}: {marker}")
-        if path in (CORE, SOURCE, LEDGER, SCIENTIFIC):
+        if path in (CORE, SOURCE, LEDGER, SCIENTIFIC, PATENT_GOLDEN, PATENT_ATLAS):
             for pattern in UNTRUSTED_AGDA:
                 if pattern.search(source):
                     failures.append(f"trust escape/hole in {path}: {pattern.pattern}")
-    if CORE in contents and not contents[CORE].startswith("{-# OPTIONS --safe #-}"):
-        failures.append("Golden core must start with safe option")
+    for golden in (CORE, PATENT_GOLDEN):
+        if golden in contents and not contents[golden].startswith("{-# OPTIONS --safe #-}"):
+            failures.append(f"Golden core must start with safe option: {golden}")
     if SOURCE in contents and contents[SOURCE].startswith("{-# OPTIONS --safe #-}"):
         failures.append("legacy source adapter is not asserted Golden safe")
     if LEDGER in contents:
@@ -140,7 +169,7 @@ def inspect_source_bundle(contents: Mapping[str, str]) -> list[str]:
             failures.append("missing same-context transport firewall")
         if "physicalFluxUnitsPaidIsFalse" not in scientific:
             failures.append("missing physical flux unit firewall")
-    for path in (CORE, SOURCE, LEDGER, SCIENTIFIC):
+    for path in (CORE, SOURCE, LEDGER, SCIENTIFIC, PATENT_GOLDEN, PATENT_ATLAS):
         if path in contents and re.search(r"^\s*import\s+DASHI\.Wikimedia\.SensibLaw", contents[path], re.M):
             failures.append(f"deferred SLR/SensibLaw import in {path}")
     return failures
@@ -208,6 +237,8 @@ def main() -> int:
         "external_experiment_independently_reanalysed": False,
         "supplementary_file_sha256_verified": False,
         "same_object_flux_bridge_paid": False,
+        "patent_legal_validity_or_freedom_to_operate_verified": False,
+        "patent_claims_independently_reproduced": False,
         "agda": {"state": "not_requested", "success": False},
     }
     if args.agda and not failures:
