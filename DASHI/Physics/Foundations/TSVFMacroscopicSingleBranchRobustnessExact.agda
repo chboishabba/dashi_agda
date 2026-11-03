@@ -112,6 +112,22 @@ singleFaultMacroRobust pointerPlus faultFirst   = refl
 singleFaultMacroRobust pointerPlus faultMiddle  = refl
 singleFaultMacroRobust pointerPlus faultLast    = refl
 
+-- Sharp failure control: one flip is correctable, but two flips in the
+-- same three-bit code can reverse the decoded macroscopic branch.
+-- This blocks any claim of arbitrary-noise or universal reversal stability.
+twoFaultsReverseSelectedMacro :
+  macroReadout
+    (singleFault faultMiddle
+      (singleFault faultFirst (encode pointerMinus))) ≡ pointerPlus
+twoFaultsReverseSelectedMacro = refl
+
+twoFaultsDoNotPreserveOriginalPointer :
+  macroReadout
+    (singleFault faultMiddle
+      (singleFault faultFirst (encode pointerMinus))) ≡ pointerMinus → ⊥
+twoFaultsDoNotPreserveOriginalPointer ()
+
+------------------------------------------------------------------------
 -- At the fine representation level a single flip is never identical
 -- to the unperturbed code. Restored macro record != restored microstate.
 singleFaultChangesFineData :
