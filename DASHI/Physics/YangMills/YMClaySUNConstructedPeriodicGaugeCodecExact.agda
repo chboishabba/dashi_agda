@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact as Pointwise
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
+import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact as FiniteSafe
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
@@ -149,6 +150,51 @@ module _
             (nativeDecode vector label))
         bond)
 
+  -- The truly finite proof lives in the --safe owner. This adapter only
+  -- identifies the original periodic SU(N) target with its gauge action,
+  -- and the independent bilateral-Haar Vec action with that finite action.
+  originalTarget :
+    Torus.PositiveBond (suc n) →
+    Torus.periodicTorus4Definition (suc n)
+  originalTarget (Torus.pair site axis) = Bond.positiveStep site axis
+
+  safeVectorMatchesBilateral :
+    ∀ {count} (left right values : Vec.Vec Link count) →
+    FiniteSafe.vectorGauge
+      (suc n) (SUN.sunMatrixGroup theory) originalTarget
+      left right values
+    ≡
+    Bilateral.gaugeBondVector theory oneLink bilateral
+      left right values
+  safeVectorMatchesBilateral Vec.[] Vec.[] Vec.[] = refl
+  safeVectorMatchesBilateral
+      (left Vec.∷ lefts) (right Vec.∷ rights)
+      (value Vec.∷ values) =
+    cong
+      (Vec._∷_
+        (Bilateral.gaugeOneLink theory oneLink bilateral
+          left right value))
+      (safeVectorMatchesBilateral lefts rights values)
+
+  safeNativeGaugeDecodeAt :
+    ∀ gamma vector bond →
+    Variable.periodicSUNGaugeTransform theory n
+      (nativeDecode vector) gamma bond
+    ≡
+    nativeDecode
+      (Bilateral.gaugeBondVector theory oneLink bilateral
+        (leftFactors gamma) (rightFactors gamma) vector)
+      bond
+  safeNativeGaugeDecodeAt gamma vector bond =
+    trans
+      (FiniteSafe.originalGaugeDecodedAt
+        (suc n) (SUN.sunMatrixGroup theory) originalTarget
+        gamma vector bond)
+      (cong
+        (λ transformed → nativeDecode transformed bond)
+        (safeVectorMatchesBilateral
+          (leftFactors gamma) (rightFactors gamma) vector))
+
   -- PAY the original dependent physical naturality record, pointwise.
   -- No arbitrary lattice-level gauge/Haar transformation is assumed.
   constructedOriginalPeriodicGaugeNaturality :
@@ -161,16 +207,7 @@ module _
     ; GaugeHaar.OriginalPeriodicGaugeVectorNaturality.rightFactors =
         rightFactors
     ; GaugeHaar.OriginalPeriodicGaugeVectorNaturality.gaugeDecodeAt =
-        λ gamma vector → λ where
-          (Torus.pair site axis) →
-            trans
-              (Core.multiplyAssociative (SUN.sunMatrixGroup theory)
-                (gamma site)
-                (nativeDecode vector (Torus.pair site axis))
-                (SUN.sunInverse theory
-                  (gamma (Bond.positiveStep site axis))))
-              (sym (actualGaugeVectorDecodedAt
-                gamma vector (Torus.pair site axis)))
+        safeNativeGaugeDecodeAt
     }
 
   actualPeriodicProductMeasure :
