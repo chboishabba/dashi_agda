@@ -1,5 +1,14 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+## 2026-11-03 typed parsed Max-Cut acceptance and Fin-free sparse scan operation count
+
+`Karp21CanonicalParsedGraphAcceptanceExact.agda` transports the **existing** `Karp21CanonicalRawValidatorCompleteExact` and `Karp21DecodedWeightedCutSemanticBidiExact` owners into a genuine `PR.Iff` for the original `Cut.WeightedMaxCutYES` on raw-validated complete signed edge lists with the original positive threshold. The specialization `e20ScaledCanonicalRawGraphAcceptsIff` refers directly to `Actual.sourceIndexedWeightedGraph parts nonzero`. The encoded outer graph word and its exact positive-threshold/budget proof remain pending; no extra graph representation, proof extensionality, or machine clock is assumed.
+
+`Karp21FinFreeEndpointScanComparisonCountExact.agda` instruments the prior binary-native `Karp21FinFreeRawSparseWordVerifierExact.endpointConsistent`, preserving Boolean results while counting direct address comparisons against previous endpoint occurrences. `Karp21FinFreePairwiseQuadraticCountExact.agda` source-writes the exact deterministic full-history upper count `2m(m−1)`, matching the original `scripts/karp21_binary_native_sparse_verifier.py` reference logic, not an invented hash table or average-case complexity assumption. These are program operation-count refinements, NOT certified bit-tape runtime costs. The latter must pay potentially long binary address equality, signed arithmetic and gamma parsing before claiming polynomial `PR.InNP`.
+
+Attribution remains Richard M. Karp (1972) for historical PARTITION→MAX CUT; Elias for prefix coding; Agda standard-library finite-index and list-length library maintainers; and the earlier DASHI weighted graph, source-dependent parser, signed objective, sparse certificate and binary-native verifier owners. The standard-library `length-++` repair in `Karp21FiniteCompleteGraphGeneratorExact.agda` is an implementation correction only. No Agda kernel acceptance or 20-edge/21-node NP-completeness result is asserted.
+
+
 
 ## 2026-11-03 binary-native N21 runtime and explicit Fin representation cost
 
