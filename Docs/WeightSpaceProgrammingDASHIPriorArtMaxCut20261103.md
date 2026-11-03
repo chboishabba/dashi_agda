@@ -1,11 +1,11 @@
 # Weight-Space Programming × DASHI — source-pinned prior art and exact max-cut
 
-Date: 2026-11-03. Golden root: `DASHI/Reasoning/WeightSpaceProgrammingInterventionExact.agda` (`{-# OPTIONS --safe #-}`). This is a source-written independent finite abstraction, **not** a kernel-accepted real Qwen proof.
+Date: 2026-11-03. Golden root: `DASHI/Reasoning/WeightSpaceProgrammingInterventionExact.agda` (`{-# OPTIONS --safe #-}`). Legacy-owner adapter: `DASHI/Reasoning/WeightSpaceProgrammingOwnerBridgeExact.agda` (deliberately non-golden because pre-existing compression/realization imports are not all safe-qualified). Both are included by `DASHI.Reasoning.Everything`. This is a source-written independent finite abstraction, **not** a kernel-accepted real Qwen proof.
 
 ## Primary attribution and evidence
 
 - **External original:** Rikiya Takehi, Jayden Teoh, Alex Zhang, Omar Khattab (MIT CSAIL), *Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights*, 2 Nov 2026, https://rikiyat.github.io/blog/weight-space-programming/ . Credit the authors for the name, conceptual finding, diagnostic and intervention.
-- **Reproducibility receipts:** https://github.com/RikiyaT/lm_understand-logs/tree/main/exp8_math , specifically `README.md`, `runs/p50c/final_answer.md`, `runs/p50c/edit/manifest.json`, `runs/p50c/work_notes/frozen_weights_manifest.json`, `code/apply_edit.py` and `eval/{unedited,p50c}/merged.json`. Third-party benchmark licensing applies; logs and model data are CC BY 4.0, scripts MIT.
+- **Reproducibility receipts:** pinned external logs commit `4d09ba6d6a7e891dd8063974dfe81b3d78e3494f`; https://github.com/RikiyaT/lm_understand-logs/tree/main/exp8_math , specifically `README.md`, `runs/p50c/final_answer.md`, `runs/p50c/edit/manifest.json`, `runs/p50c/work_notes/frozen_weights_manifest.json`, `code/apply_edit.py` and `eval/{unedited,p50c}/merged.json`. Third-party benchmark licensing applies; logs and model data are CC BY 4.0, scripts MIT.
 - **Edited checkpoint:** Qwen/Qwen3.5-0.8B public text checkpoint at base revision `2fc06364715b967f1860aea9cf38778875588b17`. No DASHI work on Qwen weights has been run by this tranche.
 - **Architectural prior:** Divyansh Agrawal, *Qwenputer*, 22 Oct 2026, https://github.com/divagr18/qwenputer; prior formal DASHI work in PR #1456. That project and this weight-editing experiment are **distinct** and should not be conflated.
 
@@ -34,7 +34,7 @@ Date: 2026-11-03. Golden root: `DASHI/Reasoning/WeightSpaceProgrammingInterventi
 
 ## Formal target
 
-For checkpoint parameters \(W\), an allowed coordinate mask \(M\), and a proposed local rewrite \(T\), define coordinatewise \(W'_{\ell,j}=T(W_{\ell,j})\) when \(M(\ell,j)\), otherwise \(W'_{\ell,j}=W_{\ell,j}\). The finite Agda owner proves, by source-written terms, selection soundness, unselected-cell invariance, conditional idempotence, and a toy two-axis removal/retention square. It imports the existing compression/realization owner to show that preserving a channel does *not* determine task behavior.
+For checkpoint parameters \(W\), an allowed coordinate mask \(M\), and a proposed local rewrite \(T\), define coordinatewise \(W'_{\ell,j}=T(W_{\ell,j})\) when \(M(\ell,j)\), otherwise \(W'_{\ell,j}=W_{\ell,j}\). The finite golden Agda owner provides source-written terms for selection soundness, unselected-cell invariance, conditional idempotence, a toy two-axis removal/retention square, and a constructive no-decoder counterexample. A separate non-golden owner bridge imports the repository's existing compression/realization owners and proves the analogous collision firewall. Neither identifies the actual Qwen patch.
 
 For a real vector direction \(u\) and a matrix column \(w\), a mathematical target worth separately proving is \(P_u w=w-u(u^\top w)/(u^\top u)\), assuming \(u^\top u>0\). Then \(u^\top P_u w=0\) and \(P_u^2=P_u\) in exact arithmetic. **The published numerical patch is not automatically equal to this exact orthogonal projector.** Recovery of actual floating-point constants, scaling, basis, selected-index lists, and BF16 cast behavior is a separate same-object obligation.
 
@@ -60,6 +60,10 @@ Only the top abstract mask square has source-written proofs in this tranche. The
 4. **WSP-04, inference/same-object:** Establish Qwen3.5-specific tensor-to-operator bridge including normalization, MLP/SwiGLU, residual, Gated DeltaNet/attention, tokenization, generation settings and BF16 effects. Prove that the runtime loads precisely the edited checkpoint; no claim of runtime equivalence from abstract identity alone.
 5. **WSP-05, causal and benchmark:** Pre-register exact fixed seeds/data/sampling; re-evaluate both source and modified model, paired negative/random/norm-matched controls and unedited/10/25/50 regimes. Report bootstrap uncertainty, memorization/contamination checks, output truncation, and net changes in accuracy/length. Separate causal localization, removal of loops, and new generalization.
 6. **WSP-06, cross-system reuse:** For Qwenputer, Leech/MoE/federation, test patch-then-quantize vs quantize-then-patch, revision custody, content-addressed transport and selected expert history. A changed checkpoint or routing graph must invalidate stale inference caches until updated or revalidated.
+
+## Executed bounded manifest audit (not kernel acceptance)
+
+The connected-source JSON manifests were parsed and checked in this review: two tensors, shapes 1024×3584, 64 distinct bounded columns each, 131,072 addressed positions, 130,188 BF16 changed entries, 884 rounded-back positions. The new repository script `scripts/check_weight_space_programming_p50c_manifest.py` provides repeatable local checks (not yet independently executed in this session). Structural source checks confirmed the `--safe` header, absence of postulate/hole spellings and separate non-golden legacy bridge. These checks are **not** a proof of the tensor hashes, the actual floating-point edit or Agda typechecking.
 
 ## Verification/provenance limits
 
