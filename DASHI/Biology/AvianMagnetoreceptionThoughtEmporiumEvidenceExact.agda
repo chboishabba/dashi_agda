@@ -123,6 +123,73 @@ sourceAtlas =
     "Mechanism-plural, source-scoped observations and hypotheses. The video provides neither a new animal experiment nor proof of human biological enhancement."
 
 ------------------------------------------------------------------------
+-- VERIFIED REPOSITORY ARTIFACT METADATA, SEPARATE FROM THE 2020 STREAM.
+--
+-- The Thought Emporium / Justin Atkin's public GitHub repository states
+-- CC BY-SA 4.0 attribution and share-alike licensing for its plasmid
+-- collection. A magnetoreception .gb artifact was added on 2020-07-04.
+-- The 2020-06-17 stream itself says final design was postponed.
+-- DO NOT import its sequence or infer correct assembly, viable biology,
+-- independent validation, delivery safety, or a human phenotype.
+------------------------------------------------------------------------
+
+thoughtEmporiumDigitalArchive : Source.AttributedSource
+thoughtEmporiumDigitalArchive =
+  Source.mkNoDOISource
+    "The Thought Emporium; Justin Atkin (original creator and repository attribution)"
+    "Whose-gene-is-it-anyway: magnetoreception digital GenBank artifact"
+    "GitHub public archive; artifact commit f83aaf2b3ada085d02d8a25cfdc4ae32c80fe09d; 2020-07-04T03:23:52Z"
+    "2020"
+    "https://github.com/thethoughtemporium/Whose-gene-is-it-anyway/tree/master/magnetoreception"
+    (Source.namedSourceKind "digital genetic-design archive; metadata only")
+    "Author-published GenBank file exists after the original 17 June 2020 livestream. Archive presence cannot establish which later session completed it, sequence/assembly correctness, actual synthesis, physiological function, or genetic enhancement."
+    Source.publicAttribution
+
+record SourcePublishedDesignReceipt : Set where
+  constructor sourcePublishedDesignReceipt
+  field
+    originalPublisher : Source.AttributedSource
+    namedDigitalArtifact : String
+    archivedFileSizeBytes : Nat
+    sourceCommitSHA : String
+    sourceCommitTimestampUTC : String
+    sourceRepositoryLicense : String
+
+    originalStreamCompletedOnJune17 : Bool
+    originalStreamCompletedOnJune17IsFalse :
+      originalStreamCompletedOnJune17 ≡ false
+
+    archivedDesignCorrectnessIndependentlyChecked : Bool
+    archivedDesignCorrectnessIndependentlyCheckedIsFalse :
+      archivedDesignCorrectnessIndependentlyChecked ≡ false
+
+    physicalAssemblyOrExpressionVerifiedHere : Bool
+    physicalAssemblyOrExpressionVerifiedHereIsFalse :
+      physicalAssemblyOrExpressionVerifiedHere ≡ false
+
+    magnetoreceptionInEditedOrganismProven : Bool
+    magnetoreceptionInEditedOrganismProvenIsFalse :
+      magnetoreceptionInEditedOrganismProven ≡ false
+
+sourcePublishedMagnetoreceptionDesign : SourcePublishedDesignReceipt
+sourcePublishedMagnetoreceptionDesign =
+  sourcePublishedDesignReceipt
+    thoughtEmporiumDigitalArchive
+    "magnetoreception/paav syn with pigeonized human cacna1d.gb"
+    18278
+    "f83aaf2b3ada085d02d8a25cfdc4ae32c80fe09d"
+    "2020-07-04T03:23:52Z"
+    "CC BY-SA 4.0 (as stated in repository README)"
+    false refl
+    false refl
+    false refl
+    false refl
+
+digitalArchiveCitationImportsNoProof :
+  Source.citationImportsProof thoughtEmporiumDigitalArchive ≡ false
+digitalArchiveCitationImportsNoProof = refl
+
+------------------------------------------------------------------------
 -- Existing mechanism-neutral owner: vestibular route is one inhabitant,
 -- not a replacement for the already-present retinal / hepatic branches.
 -- A finite token model cannot prove real afferent encoding.
