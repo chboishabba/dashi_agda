@@ -63,7 +63,8 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   for root in \
     DASHI.Mathematics.Complexity.Karp21CookGoldenEverything \
     DASHI.Mathematics.Complexity.Karp21GammaGoldenEverything \
-    DASHI.Mathematics.Complexity.Karp21FinDecoderIndexBidiExact
+    DASHI.Mathematics.Complexity.Karp21FinDecoderIndexBidiExact \
+    DASHI.Mathematics.Complexity.Karp21BinaryFinMaterializationCostExact
   do
     python3 scripts/check_karp21_golden_agda_import_closure.py \
       --entry "$root"
@@ -72,6 +73,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FinDecoderIndexBidiExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryFinMaterializationCostExact.agda
 fi
 
 if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
@@ -81,6 +83,8 @@ if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21CanonicalRawValidatorCompleteExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21OriginalGammaGraphWordFieldsReplayExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21PositiveThresholdGammaExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeRawSparseWordVerifierExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryRuntimeEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21Everything.agda
 fi
 
