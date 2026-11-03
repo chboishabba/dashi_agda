@@ -126,6 +126,7 @@ open TSVFOverlap public using
   ; actualTensorSquaredOverlapIsNineOverTwentyFivePower
   ; selectedBornMass
   ; selectedBornRightDominates
+  ; oneAtMostWrongPower
   ; selectedBornDenominatorIsSum
   ; weightedBornMass
   ; weightedBornNormalizes
@@ -144,6 +145,8 @@ open TSVFQubit public using
   ; finiteMeasurementTotalPositive
   ; finiteOriginalABLContext
   ; finiteOriginalABLNormalization
+  ; finiteABLRightBornPositive
+  ; finiteABLWrongBornPositive
   ; selectedABLMatchesActualTensorOverlap
   ; selectedJointTSVFSource
   ; admissibleRightIsOriginalABLProjector
