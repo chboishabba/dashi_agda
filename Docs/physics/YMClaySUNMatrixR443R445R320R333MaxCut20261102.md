@@ -1,5 +1,13 @@
 # Yang–Mills source-first SU(N) physical max-cut — 2 November 2026
 
+## 3 November 2026 current receipt / precedence
+
+**Canonical exact-lemma ownership:** [YMClayCurrentExactLemmaLedger20261103.md](../roadmaps/YMClayCurrentExactLemmaLedger20261103.md) lists current R443/R445/R320/R333/P5/Clay physical leaves and the source-vs-kernel boundary. This supersedes any older statement in this historical file that the original C3 gauge/bond codec is an externally assumed field. The concrete 1024-label native C3 action is source-written and the universal adjacent-swap witness now follows from a **single original bond-label Vec** equality (owner `YMClayNativeC3SingleVectorPermutationCertificateExact`). The actual adjacent-swap program and this equality are **not yet constructed**.
+
+**Canonical inventory:** 219 formal submission fields = 191 theorem-spine + 28 foundation/gauge; frozen four research completion rows A–D still physically open. The five gates R443/R445/R320/R333/Clay are producer families, not additional official endpoints or a completed proof. Selected real SU(N) Haar on an honest integrable test algebra, actual selected Wilson-Gibbs measure/refinement, CMP116 mixed-J rooted-shell estimates, OS same-H dimensionful positive gap and nontrivial QFT remain open. Agda source-written, kernel pending; no transitive `--safe` claim on imported real-analysis postulates.
+
+
+
 **Implementation:** [DASHI Agda PR #1444](https://github.com/chboishabba/dashi_agda/pull/1444), stacked on #1440. **Status:** all new theorem bodies are *source-written*; exact-head Agda compilation, transitive trust inventory and CI were not run. **The four-dimensional Clay problem remains open.** Do not promote any data/assumption record, imported source attribution, Bool status, or an abstract limit into a constructed physical Yang–Mills theory.
 
 ## Source owners and attribution
