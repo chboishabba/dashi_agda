@@ -1,3 +1,7 @@
+## Strict P07 same-observer correction
+
+The Lorentz+KK same-metric upgrade is no longer just a pairing of a selected (3,1) signature with an unrelated selected quantum clock. The revised SameMetric31ClockUpgrade carries an explicit mapping from the **original TSVF forward ket** into the original Lorentz arrow-source physical state, plus a proof that this forward ket maps to the same state selected by the physically reduced KK/4D metric. selectedObserverKetReallyIsMetricState projects this exact same-object witness. The core standalone Euclidean-4D YM/OS finite clock remains independent of 5D KK. The former arbitrary untyped ContinuumStoneOSClockMatch Set/witness has been **removed**: physically unprovided strongly continuous groups, Ward/Stone domains, same-source OS Hilbert and spectral estimates are honestly OPEN, not represented by a freely inhabited record token.
+
 # 2017 TSVF complex gamma → original ABL → selected OS clock
 
 **DASHI 3 November 2026 max-cut. SOURCE-WRITTEN ONLY. No Agda kernel or physical Yang–Mills/TSVF completion.**
