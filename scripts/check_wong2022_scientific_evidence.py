@@ -85,6 +85,8 @@ MARKERS: dict[str, tuple[str, ...]] = {
         "sharedTopicCannotWeldHost",
         "statusLabelNotFreedomToOperate",
         "patentToYeastClaimTransportUnpaid",
+        "laterPatentToYeastStudyTransportUnpaid",
+        "yeastPatentNotYeastResearchArticle",
     ),
     PATENT_ATLAS: (
         "10.1128/AEM.02137-14",
@@ -101,6 +103,13 @@ MARKERS: dict[str, tuple[str, ...]] = {
         "lineageAtlasCreatesNoAuthority = refl",
         "territoryByTerritoryFamilyReviewPaidIsFalse",
         "freedomToOperateOpinionPaidIsFalse",
+        "WO2023096577A2",
+        "2021-11-26",
+        "2023-06-01",
+        "yeastPatentFamilyLineageReceipt",
+        "exactPatentInventorSetEquals2022AuthorSetIsFalse",
+        "laterPatentWOStatusAsDisplayed",
+        "laterPatentCitationImportsNoProof = refl",
     ),
     PATENT_CLAIMS: (
         "{-# OPTIONS --safe #-}",
