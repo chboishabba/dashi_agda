@@ -1,6 +1,6 @@
 # SLR Golden Agda No-Path Firewall — Roadmap
 
-Status: source-written; Agda kernel acceptance pending.
+Status: original seven-module focused local referee pass reported at 7d0be834. New structural receipt module and root changes await local Agda verification.
 
 ## Objective and owners
 The golden source is `DASHI/Interop/SLRNoPathFirewallExact.agda`.
@@ -24,12 +24,17 @@ This is a type-level admissibility policy. It is not a runtime audit receipt.
 ## Phase 2 — Formal semantics
 - [x] Encode a closed admissibility predicate over twelve legacy routes.
 - [x] Prove each route has no inhabitant in that predicate.
-- [ ] Replace the closed policy predicate with a typed mapping from actual parser, storage, routing and join receipts.
+- [x] Add typed storage, extraction, symbol, routing, join and coherence receipt predicates. These are structural models, not runtime receipt decoders.
+- [ ] Implement and verify the same-object mapping from actual parser, storage, routing and join receipts.
 - [ ] Prove that runtime receipts cannot forge the typed mapping.
-- [ ] Prove that a valid cross-domain bridge requires both an AST bridge and a checked coboundary witness.
-- [ ] Prove that coherence violations prevent dispatch, not merely set a diagnostic flag.
+- [x] Prove that structural join admissibility requires both Boolean witnesses.
+- [ ] Prove that the Boolean coboundary witness comes from an actual checked delta-transpose-delta computation.
+- [x] Prove that a structural coherence receipt cannot admit dispatch when noise is true.
+- [ ] Connect the coherence receipt to the real worker dispatch boundary.
 
 ## Phase 3 — Verification and release
+- [x] Local referee reports the original focused module passed at 7d0be834.
+- [ ] Type-check the new structural receipt module with `agda --safe --no-libraries -i . -i /home/c/.cache/codex-dashi/agda-stdlib-experimental/src DASHI/Interop/SLRStructuralReceiptFirewallExact.agda`.
 - [ ] Type-check the focused module with `agda --safe -i . -i ~/.agda/libraries DASHI/Interop/SLRNoPathFirewallExact.agda`.
 - [ ] Type-check all three TOE roots under `--safe`.
 - [ ] Run source scans for postulates, unsolved metas and TERMINATING pragmas.
@@ -45,3 +50,12 @@ Do not promote source-written terms to kernel-verified claims.
 ## Changelog
 2026-11-03: Added the twelve-route Agda policy firewall and TOE root imports.
 Outstanding work is explicit above. No runtime enforcement or kernel acceptance is claimed.
+
+## Phase 2 implementation notes — 2026-11-03
+- Added `DASHI/Interop/SLRStructuralReceiptFirewallExact.agda` with six typed receipts and constructive contradictions for forbidden variants.
+- Imported the new module into the three canonical TOE roots.
+- Consolidated root library include paths into `dashi-agda.agda-lib` and removed duplicate root manifests.
+- The canonical library manifest still declares external dependencies. Check registered libraries before declaring out-of-box library discovery fixed.
+- Runtime counterexamples reported by the local referee: SQLite and regex in `pnf_work_packet_provider.py`; SQLite in `governed_revival.py` and `formal_tools.py`; SQLite and LIKE in `latex_math_bridge.py`; missing adapter-health close; missing canonical SLR .env auto-loading. These are reported observations, not independently executed checks here.
+- No Python, Rust or ESD implementation files changed.
+- Remaining: same-object receipt decoding; source-backed 33-crate parity; kernel checks; Lean mirror; dispatch and DSN runtime enforcement.
