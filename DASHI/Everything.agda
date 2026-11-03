@@ -113,6 +113,13 @@ import DASHI.Biology.AvianCompassSurface
 import DASHI.Biology.AvianCompassExamples
 import DASHI.Biology.MagnetoreceptionSurface
 import DASHI.Biology.AvianCryptochromeMagnetoreceptionInhabitant
+import DASHI.Biology.AvianMagnetoreceptionStreamFiniteCore
+import DASHI.Biology.AvianMagnetoreceptionThoughtEmporiumEvidenceExact
+import DASHI.Codec.GenBankLocationFiniteCore
+import DASHI.Codec.GenBankFeatureGeometrySymmetryExact
+import DASHI.Codec.GenBankComponentOntologyFiniteCore
+import DASHI.Biology.GenBankInterpretationInteropExact
+import DASHI.Biology.GenBankCanonicalDNAFibreIndexExact
 import DASHI.Biology.AvianHepaticMacrophageMagnetoreception
 import DASHI.Biology.AvianMagnetoreceptionSourceRegistry
 import DASHI.Biology.AvianMagneticFieldPerturbationReceipt
