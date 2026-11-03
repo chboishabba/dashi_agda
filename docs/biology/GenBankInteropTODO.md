@@ -3,6 +3,15 @@
 Owner: DASHI DNA codec × attributed biology × ITIR/SensibLaw candidate repair interop.
 Original source: Justin Atkin / The Thought Emporium. Parser: Biopython.
 
+## New executed original-source evidence (3 Nov 2026)
+
+- [x] GB02-REAL local prototype: reconstructed exact original creator Git blob SHA, ran Biopython 1.86 on the original byte-identical file, verified 11,214 bases and all 22 feature/source-coordinate/qualifier signatures with zero mismatches.
+- [x] Candidate-only source projection: 22 statements and 30 source-reopenable identity/annotation review holds; 7 local synthetic pytest cases passed.
+- [ ] GB02-EXACT-HEAD: replay the newly committed GitHub branch's **exact** scripts and tests in its real checked-out runtime; local prototype success is not an exact-head receipt.
+- [ ] GB03-AGDA-KERNEL and GB04-SEMANTIC-FULL-ROUNDTRIP remain open.
+- [ ] GB07-native ITIR/SLR/Wikidata review ABI remains open (the candidate-only report is not native conformance).
+- See `docs/biology/data/ThoughtEmporiumMagnetoreceptionLocalExecutionReceipt.json` for SHA and acceptance evidence.
+
 ## Source-written completion
 
 - [x] Original GitHub GenBank Git blob, commit, attribution and CC BY-SA license pinned.
