@@ -42,7 +42,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
@@ -227,9 +227,8 @@ record PositiveSelected2017Total
     (rightGammas wrongGammas : List C.RationalComplex)
     (right wrong : ComplexPointerRecord) (k : Nat) : Set where
   field
-    Positive : ℚ → Set
-    totalPositive :
-      Positive (totalBorn rightGammas wrongGammas right wrong k)
+    totalStrictlyPositive :
+      0ℚ < totalBorn rightGammas wrongGammas right wrong k
 
 -- Native probability-numerator normalization, not a postulated equality.
 selectedNumeratorsSumToSameTotal :
