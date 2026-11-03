@@ -214,3 +214,15 @@ The proofs are finite induction using the existing vendored `BishopP.+-cong` and
 **Canonical graph:** All four owner groups are imported/explicitly re-exported in `DASHI.Unified.BalabanRGTOERegression`. The new setoid route does not replace or invalidate the original strong codec; it has a weaker, correctly typed selected-test interface.
 
 **Physical open cut remains unchanged in kind:** selected concrete compact SU2/SU(N) group and determinant+trace normalization, test-algebra Haar with source codec and applicable setoid equality, selected R124/CMP119 E/R/B/V finite metric insertion, R445 physical moment/tail + cylinder limits, R320 CMP116 selected mixed J source localization, R333 SAME selected real CMP119 H2 OS continuum positive spectral gap and H6 nontriviality. None are inferred from a finite algebraic argument. `--safe` text exists in new files; the actual Agda kernel has NOT been run. Transitive source trust is NOT zero-postulate.
+
+
+## 2026-11-03 subsequent tranche — all-periodic-size finite product-Haar and partition positivity
+
+**New owner:** `YMClaySUNVariablePeriodicProductHaarExact`. This directly composes:
+`YMClaySUNVariablePeriodicGibbsGaugeExact.periodicSUNFiniteGibbsMeasure` (actual original n-periodic bond function, signed plaquettes, six-positive-plane action),
+`YMClayFiniteProductHaarPermutationExact.productIntegral/productIntegralUnit`,
+`YMClayFiniteProductHaarOrderedAlgebraExact.productIntegralZero/Add/Scale/Positive/StrictlyPositive`, and
+`YMClaySUNMatrixProductHaarC3Exact.productIntegralCongruent`.
+The resulting `periodicProductFiniteMeasure` is *definitionally the existing selected n-periodic Wilson Gibbs density*, integrated over a decoded vector with one-link product law. Six source-written lemmas prove normalization, pointwise positivity, strict partition positivity, all finite measure integration laws, and same-object density/partition.
+
+The new module closes **only finite algebra conditional on one-link compact-Haar/test-algebra and the actual decoder**; it does not build genuine compact one-link Haar or a native 1024-link decoder, nor prove varying-cutoff refinement, R445 tightness, R320 derivative decay, R333 same-H gap or H6. Thus no Clay/YM theorem promotion. The earlier `SUNOriginalWilsonFiniteFamily` is beta-varying on n=3 and remains distinct from this every-n finite implementation. Verification: GitHub commit and file readback; no Agda kernel run. One-link and legacy `ℝ` are still conditional authorities. Wilson, Bałaban, Haar/Fubini and original in-repo owners retained.
