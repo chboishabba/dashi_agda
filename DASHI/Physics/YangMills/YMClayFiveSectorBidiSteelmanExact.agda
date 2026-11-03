@@ -35,6 +35,7 @@ open import Data.Empty using (⊥)
 import DASHI.Physics.YangMills.YMClayVoyagerDimensionSignatureForkExact as Dim
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as Lorentz
 import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as SameMetric
+import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as KK
 
 ------------------------------------------------------------------------
 -- A dimensionally nested finite gauge-curvature accounting experiment.
@@ -198,7 +199,7 @@ matchedFiveToTwo tower =
 selectedLorentzian31FromSameMetric :
   (w : SameMetric.SameMetricTSFVKK) →
   Lorentz.actualAxisCounts
-    (DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact.SameSourceKKYMContinuation.signatureSigns
+    (KK.SameSourceKKYMContinuation.signatureSigns
        (SameMetric.kkSource w))
   ≡ Lorentz.signature 3 1
 selectedLorentzian31FromSameMetric =
