@@ -18,6 +18,7 @@ import DASHI.Codec.DNADeBruijnWalks
 import DASHI.Codec.DNAEigenMDLInvariant
 import DASHI.Codec.DNAFirstFormalism
 import DASHI.Codec.GenBankLocationFiniteCore
+import DASHI.Codec.GenBankComponentOntologyFiniteCore
 import DASHI.Codec.DNAFirstFormalismRegression
 import DASHI.Codec.DNAProductionChoices
 import DASHI.Codec.DNAProductionConstraints
