@@ -47,6 +47,8 @@ import Data.Vec.Base as Vec
 import Data.Integer.Base as Int
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
+import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Golden
+open Golden public using (boolEqual; andBool; boolEqualSelf)
 
 -- Exactly two endpoint Boolean bits for each literal signed edge
 -- occurrence, with no dependence on total number of vertex IDs.
@@ -242,16 +244,6 @@ endpointObservations (edge ∷ tail) (addEdgeBits a b rest) =
   (Cut.first edge , a) ∷ (Cut.second edge , b)
   ∷ endpointObservations tail rest
 
-boolEqual : Bool → Bool → Bool
-boolEqual true true = true
-boolEqual false false = true
-boolEqual true false = false
-boolEqual false true = false
-
-andBool : Bool → Bool → Bool
-andBool true x = x
-andBool false x = false
-
 observationsCompatible :
   ∀ {n} → (Fin.Fin n × Bool) → (Fin.Fin n × Bool) → Bool
 observationsCompatible (vertex , label) (other , otherLabel)
@@ -336,11 +328,6 @@ projectedObservationsAreActualVertexLookups (edge ∷ tail) labels =
       ∷ (Cut.second edge , Vec.lookup labels (Cut.second edge))
       ∷ rest)
     (projectedObservationsAreActualVertexLookups tail labels)
-
-boolEqualSelf :
-  (value : Bool) → boolEqual value value ≡ true
-boolEqualSelf true = refl
-boolEqualSelf false = refl
 
 equalVertexObservationsAlwaysCompatible :
   ∀ {n} (labels : Vec.Vec Bool n) (v w : Fin.Fin n) →
