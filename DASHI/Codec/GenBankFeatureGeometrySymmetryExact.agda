@@ -93,53 +93,74 @@ mirrorStrandTwice : {n : Nat} (span : BoundedSpan n) →
 mirrorStrandTwice (boundedSpan l w r within direction) =
   GB.reverseStrandInvolutive direction
 
--- Source-coordinate AST: binary join/order are the structural presentation
--- of finite compound locations; parser adapters must prove their flattening
--- and original part-order correspondence. Reverse complement reverses
--- compound part order, as for GenBank source-coordinate reorientation.
+-- Source-coordinate AST: binary joins/order preserve an explicit
+-- compound order policy. Biopython CompoundLocation._flip (v1.86) reverses
+-- parts only if ALL the child part strands are absent/None. Otherwise it
+-- preserves the original biological part order (even with mixed strands).
+-- This policy is an input classification; the parser adapter must
+-- provide the witness that it correctly classified child strands.
+data CompoundOrderPolicy : Set where
+  allPartsWithoutStrand : CompoundOrderPolicy
+  atLeastOneStrandedPart : CompoundOrderPolicy
+
 data FeatureLocation (n : Nat) : Set where
   interval : BoundedSpan n → FeatureLocation n
-  join : FeatureLocation n → FeatureLocation n → FeatureLocation n
-  order : FeatureLocation n → FeatureLocation n → FeatureLocation n
+  join : CompoundOrderPolicy →
+         FeatureLocation n → FeatureLocation n → FeatureLocation n
+  order : CompoundOrderPolicy →
+          FeatureLocation n → FeatureLocation n → FeatureLocation n
   complement : FeatureLocation n → FeatureLocation n
 
 reverseFeature : {n : Nat} → FeatureLocation n → FeatureLocation n
 reverseFeature (interval span) = interval (mirrorSpan span)
-reverseFeature (join a b) = join (reverseFeature b) (reverseFeature a)
-reverseFeature (order a b) = order (reverseFeature b) (reverseFeature a)
+reverseFeature (join allPartsWithoutStrand a b) =
+  join allPartsWithoutStrand (reverseFeature b) (reverseFeature a)
+reverseFeature (join atLeastOneStrandedPart a b) =
+  join atLeastOneStrandedPart (reverseFeature a) (reverseFeature b)
+reverseFeature (order allPartsWithoutStrand a b) =
+  order allPartsWithoutStrand (reverseFeature b) (reverseFeature a)
+reverseFeature (order atLeastOneStrandedPart a b) =
+  order atLeastOneStrandedPart (reverseFeature a) (reverseFeature b)
 reverseFeature (complement a) = complement (reverseFeature a)
 
--- Erases only the covers proof, not coordinates, strand, compound order or
--- location constructor. This is an observable semantic AST, NOT raw text.
+-- This erases only the covers equality proof, not coordinates, strand,
+-- compound order, or the explicit order policy.
 data Geometry : Set where
   intervalG : Nat → Nat → Nat → GB.Strand → Geometry
-  joinG : Geometry → Geometry → Geometry
-  orderG : Geometry → Geometry → Geometry
+  joinG : CompoundOrderPolicy → Geometry → Geometry → Geometry
+  orderG : CompoundOrderPolicy → Geometry → Geometry → Geometry
   complementG : Geometry → Geometry
 
 geometry : {n : Nat} → FeatureLocation n → Geometry
 geometry (interval span) =
   intervalG (left span) (width span) (right span) (strand span)
-geometry (join a b) = joinG (geometry a) (geometry b)
-geometry (order a b) = orderG (geometry a) (geometry b)
+geometry (join policy a b) = joinG policy (geometry a) (geometry b)
+geometry (order policy a b) = orderG policy (geometry a) (geometry b)
 geometry (complement a) = complementG (geometry a)
 
 mirrorGeometry : Geometry → Geometry
 mirrorGeometry (intervalG l w r direction) =
   intervalG r w l (GB.reverseStrandOf direction)
-mirrorGeometry (joinG a b) =
-  joinG (mirrorGeometry b) (mirrorGeometry a)
-mirrorGeometry (orderG a b) =
-  orderG (mirrorGeometry b) (mirrorGeometry a)
-mirrorGeometry (complementG a) =
-  complementG (mirrorGeometry a)
+mirrorGeometry (joinG allPartsWithoutStrand a b) =
+  joinG allPartsWithoutStrand (mirrorGeometry b) (mirrorGeometry a)
+mirrorGeometry (joinG atLeastOneStrandedPart a b) =
+  joinG atLeastOneStrandedPart (mirrorGeometry a) (mirrorGeometry b)
+mirrorGeometry (orderG allPartsWithoutStrand a b) =
+  orderG allPartsWithoutStrand (mirrorGeometry b) (mirrorGeometry a)
+mirrorGeometry (orderG atLeastOneStrandedPart a b) =
+  orderG atLeastOneStrandedPart (mirrorGeometry a) (mirrorGeometry b)
+mirrorGeometry (complementG a) = complementG (mirrorGeometry a)
 
 geometryOfReverse : {n : Nat} (location : FeatureLocation n) →
   geometry (reverseFeature location) ≡ mirrorGeometry (geometry location)
 geometryOfReverse (interval (boundedSpan l w r within direction)) = refl
-geometryOfReverse (join a b)
+geometryOfReverse (join allPartsWithoutStrand a b)
   rewrite geometryOfReverse a | geometryOfReverse b = refl
-geometryOfReverse (order a b)
+geometryOfReverse (join atLeastOneStrandedPart a b)
+  rewrite geometryOfReverse a | geometryOfReverse b = refl
+geometryOfReverse (order allPartsWithoutStrand a b)
+  rewrite geometryOfReverse a | geometryOfReverse b = refl
+geometryOfReverse (order atLeastOneStrandedPart a b)
   rewrite geometryOfReverse a | geometryOfReverse b = refl
 geometryOfReverse (complement a)
   rewrite geometryOfReverse a = refl
@@ -148,9 +169,13 @@ mirrorGeometryTwice : (g : Geometry) →
   mirrorGeometry (mirrorGeometry g) ≡ g
 mirrorGeometryTwice (intervalG l w r direction)
   rewrite GB.reverseStrandInvolutive direction = refl
-mirrorGeometryTwice (joinG a b)
+mirrorGeometryTwice (joinG allPartsWithoutStrand a b)
   rewrite mirrorGeometryTwice a | mirrorGeometryTwice b = refl
-mirrorGeometryTwice (orderG a b)
+mirrorGeometryTwice (joinG atLeastOneStrandedPart a b)
+  rewrite mirrorGeometryTwice a | mirrorGeometryTwice b = refl
+mirrorGeometryTwice (orderG allPartsWithoutStrand a b)
+  rewrite mirrorGeometryTwice a | mirrorGeometryTwice b = refl
+mirrorGeometryTwice (orderG atLeastOneStrandedPart a b)
   rewrite mirrorGeometryTwice a | mirrorGeometryTwice b = refl
 mirrorGeometryTwice (complementG a)
   rewrite mirrorGeometryTwice a = refl
