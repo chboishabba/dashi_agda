@@ -30,7 +30,6 @@ def validate_manifests():
     assert len(tensors) == edit["changed_tensors"] == 2
     assert set(frozen) == set(BASE_TENSORS)
     by_name = {item["name"]: item for item in tensors}
-    assert set(by_name.values()) if False else True  # no implicit hash equality claim
     assert set(by_name) == set(BASE_TENSORS.values())
 
     touched = 0
