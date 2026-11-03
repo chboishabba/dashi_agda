@@ -35,12 +35,16 @@ def file_digest_receipt(
         raise FileNotFoundError(path)
     if kind == "source_data_xlsx":
         if path.suffix.lower() != ".xlsx" or not zipfile.is_zipfile(path):
-            raise ValueError("source_data_xlsx requires a valid .xlsx ZIP container")
+            raise ValueError("source_data_xlsx requires an .xlsx ZIP container")
         with zipfile.ZipFile(path) as archive:
             if "xl/workbook.xml" not in archive.namelist():
                 raise ValueError("source_data_xlsx has no xl/workbook.xml")
-    elif path.suffix.lower() != ".pdf" or path.open("rb").read(5) != b"%PDF-":
-        raise ValueError("supplementary_pdf requires a %PDF- header")
+    else:
+        if path.suffix.lower() != ".pdf":
+            raise ValueError("supplementary_pdf requires a .pdf extension")
+        with path.open("rb") as stream:
+            if stream.read(5) != b"%PDF-":
+                raise ValueError("supplementary_pdf requires a %PDF- header")
     hash_state = hashlib.sha256()
     byte_count = 0
     with path.open("rb") as handle:
