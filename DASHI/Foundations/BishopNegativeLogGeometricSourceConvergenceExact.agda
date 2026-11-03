@@ -60,8 +60,9 @@ sourceNegativeLogAbsoluteBelowGeometric :
     (Geom.scaledGeometricTerm x x n)
 sourceNegativeLogAbsoluteBelowGeometric x xNonnegative n =
   RP.≤-respˡ-≃
-    (RP.nonNegx⇒∣x∣≃x
-      (sourceNegativeLogTermNonnegative x xNonnegative n))
+    (RP.≃-symm
+      (RP.nonNegx⇒∣x∣≃x
+        (sourceNegativeLogTermNonnegative x xNonnegative n)))
     (RP.≤-respʳ-≃
       (RP.*-comm (R.pow x n) x)
       (RP.≤-respʳ-≃
@@ -84,8 +85,9 @@ sourceNegativeLogAbsolutelyConvergent x zeroBelow belowOne =
     (RP.0≤x⇒nonNegx (RP.<⇒≤ zeroBelow))
     (λ n →
       RP.≤-respˡ-≃
-        (RP.nonNegx⇒∣x∣≃x
-          (RP.nonNeg∣x∣ (sourceNegativeLogTerm x n)))
+        (RP.≃-symm
+          (RP.nonNegx⇒∣x∣≃x
+            (RP.nonNeg∣x∣ (sourceNegativeLogTerm x n))))
         (sourceNegativeLogAbsoluteBelowGeometric
           x
           (RP.0≤x⇒nonNegx (RP.<⇒≤ zeroBelow))
@@ -154,9 +156,8 @@ sourceLogPartialIncreasing :
   Seq._isIncreasing (Seq.SeriesOf (sourceNegativeLogTerm x))
 sourceLogPartialIncreasing x xNonnegative n =
   RP.≤-respˡ-≃
-    (RP.≃-symm
-      (RP.+-identityʳ
-        (Seq.SeriesOf (sourceNegativeLogTerm x) n)))
+    (RP.+-identityʳ
+      (Seq.SeriesOf (sourceNegativeLogTerm x) n))
     (RP.+-monoʳ-≤
       (Seq.SeriesOf (sourceNegativeLogTerm x) n)
       (RP.nonNegx⇒0≤x
@@ -185,7 +186,7 @@ sourceNegativeLogAtLeastPoint :
     (sourceNegativeLogValue x zeroBelow belowOne)
 sourceNegativeLogAtLeastPoint x zeroBelow belowOne =
   RP.≤-respˡ-≃
-    (RP.≃-symm (sourceLogFirstPartialEqualsX x))
+    (sourceLogFirstPartialEqualsX x)
     (Seq.xₙisIncreasing⇒xₙ≤limxₙ
       (sourceLogPartialIncreasing
         x (RP.0≤x⇒nonNegx (RP.<⇒≤ zeroBelow)))
