@@ -941,6 +941,7 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGaugeInvariantExact as SUN
 import DASHI.Physics.YangMills.YMClayNativeSixPlaquetteSUNWilsonActionWeldExact as SUNCanonicalWilsonWeld
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as SUNVariable
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as SUNVariableGaugeHaar
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
@@ -1194,3 +1195,14 @@ open SUNVariableHaar public using
   ; periodicProductIntegrationLaws
   ; periodicProductDensitySameObject
   ; periodicProductPartitionSameObject)
+
+-- Every-n native original finite Gibbs gauge symmetry, using one-link
+-- bilateral Haar and a pointwise gauge/bond vector naturality witness.
+open SUNVariableGaugeHaar public using
+  (OriginalPeriodicGaugeVectorNaturality
+  ; PeriodicPointwiseObservable
+  ; periodicProductGaugeHaarInvariant
+  ; periodicGibbsPointwise
+  ; periodicWeightedPointwise
+  ; periodicGaugeNumeratorInvariant
+  ; periodicGaugeNormalizedExpectationInvariant)
