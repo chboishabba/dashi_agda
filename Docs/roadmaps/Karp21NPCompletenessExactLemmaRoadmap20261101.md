@@ -18,6 +18,9 @@
 
 **Gold/kernel boundary:** No local Agda compiler or repo checkout was available for independent acceptance, and no CI was run. The source leaves above have not passed Agda type checking; the graph integration modules deliberately do not claim `--safe` until older imports are safe. The focused Golden SAT and pure gamma roots also lack an acceptance receipt. **Do not count conditional/source-written lemmas as certified reductions.** P0 SAT `InNP` concrete verifier and universal costed Cook–Levin root remain OPEN, as do P2 E01–E19 + all 21 memberships, and P3 `CertifiedKarpNetwork`. Certified counters remain **0/20 costed polynomial reductions and 0/21 terminal NP-completeness theorems**.
 
+
+**Fail-closed reproducible referee entry:** `bash scripts/referee_karp21_maxcut.sh golden`, `bash scripts/referee_karp21_maxcut.sh e20`, or `bash scripts/referee_karp21_maxcut.sh all`. This new script prints Git SHA + Agda version, executes the Golden import-closure preflight, and then requires actual Agda acceptance of the focused roots; it exits 127 if Agda is missing and never invents a success receipt. It was committed but **could not be executed successfully here**, because Agda is absent.
+
 **Next referee commands** (on a machine with Agda, stdlib and repo checkout): `agda -i . DASHI/Mathematics/Complexity/Karp21FinDecoderIndexBidiExact.agda`, `agda -i . DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda`, `agda -i . DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda`, `agda -i . DASHI/Mathematics/Complexity/Karp21CanonicalRawValidatorCompleteExact.agda`, and `agda -i . DASHI/Mathematics/Complexity/Karp21Everything.agda`. Record the exact compiler version, SHA and complete diagnostics; compiler success has not been established here.
 
 
