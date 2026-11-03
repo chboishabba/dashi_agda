@@ -40,3 +40,10 @@ Original source: Justin Atkin / The Thought Emporium. Parser: Biopython.
 
 Priority: original same-object parser replay, then Golden kernel, then full-record semantic and ontology ABI.
 No operational human or animal gene editing or delivery protocols in this lane.
+
+
+## GB04 semantic progress
+
+- [x] GB04-LOCAL: actual original GenBank source passed Biopython parse/serialize/parse, with all seven semantic equality checks true; normalized output 18,377 bytes is not the same raw text as original 18,278 bytes.
+- [x] GB04-REUSABLE: committed `scripts/check_genbank_semantic_roundtrip.py` and `tests/test_genbank_semantic_roundtrip.py`.
+- [ ] GB04-FORMAL: obtain a Golden Agda theorem for the parser/serialized AST refinement or appropriately scoped formal certificate; original local finite result does not imply general verified parser.
