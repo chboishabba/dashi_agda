@@ -146,3 +146,9 @@ import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorCompleteExact
 import DASHI.Mathematics.Complexity.Karp21OriginalGammaGraphWordFieldsReplayExact
 
 import DASHI.Mathematics.Complexity.Karp21PositiveThresholdGammaExact
+
+import DASHI.Mathematics.Complexity.Karp21BinaryFinMaterializationCostExact
+
+import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact
+
+import DASHI.Mathematics.Complexity.Karp21BinaryRuntimeEverything
