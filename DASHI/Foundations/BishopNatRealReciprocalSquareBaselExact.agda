@@ -174,8 +174,7 @@ reciprocalExtraPowersBelowSquare n k =
         qSquareNN
   in
   BishopP.≤-respˡ-≃
-    (BishopP.≃-symm
-      (BishopP.xⁿxᵐ≃xⁿ⁺ᵐ q (suc (suc zero)) k))
+    (BishopP.xⁿxᵐ≃xⁿ⁺ᵐ q (suc (suc zero)) k)
     (BishopP.≤-respʳ-≃
       (BishopP.*-identityʳ qSquare)
       productBound)
