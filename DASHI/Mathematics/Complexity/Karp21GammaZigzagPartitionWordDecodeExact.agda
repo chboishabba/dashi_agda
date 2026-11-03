@@ -25,12 +25,13 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (_∸_)
 open import Data.Nat.Properties as NatP using (_≤?_)
-open import Data.List.Base using (List; []; _∷_; length)
+open import Data.List.Base using (List; []; _∷_; _++_; length)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Integer.Base using (ℤ; +_; -[1+_])
 open import Data.Product using (_×_; _,_)
 open import Relation.Nullary.Decidable.Core using (yes; no)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
+import Data.Nat.Properties as Arithmetic
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 
@@ -135,6 +136,60 @@ readLowBits (suc k) (bit ∷ rest)
 ... | nothing = nothing
 ... | just (low , suffix) =
   just (bitNat bit * pow2 k + low , suffix)
+
+------------------------------------------------------------------------
+-- The source-owned payload decoder is EXACT and suffix-preserving.
+-- These are equalities about the literal executable bit parser.
+------------------------------------------------------------------------
+
+payloadValue : Word.BitWord → Nat
+payloadValue [] = zero
+payloadValue (bit ∷ bits) =
+  bitNat bit * pow2 (length bits) + payloadValue bits
+
+readLowBitsAppendExact :
+  (payload suffix : Word.BitWord) →
+  readLowBits (length payload) (payload ++ suffix)
+    ≡ just (payloadValue payload , suffix)
+readLowBitsAppendExact [] suffix = refl
+readLowBitsAppendExact (bit ∷ bits) suffix
+  rewrite readLowBitsAppendExact bits suffix = refl
+
+-- Prefix compression does not inspect, alter or discard the suffix.
+-- Retaining a general starting zero count makes the proof reusable
+-- inside graph-edge, source-list and threshold decoders.
+zeroPrefix : Nat → Word.BitWord
+zeroPrefix zero = []
+zeroPrefix (suc n) = false ∷ zeroPrefix n
+
+readGammaZeroPrefixExact :
+  (seen zeros : Nat)
+  (suffix : Word.BitWord) →
+  readGammaZeros seen
+    (zeroPrefix zeros ++ (true ∷ suffix))
+    ≡ readGammaZeros (seen + zeros) (true ∷ suffix)
+readGammaZeroPrefixExact seen zero suffix
+  rewrite Arithmetic.+-identityʳ seen = refl
+readGammaZeroPrefixExact seen (suc zeros) suffix
+  rewrite Arithmetic.+-suc seen zeros =
+  readGammaZeroPrefixExact (suc seen) zeros suffix
+
+-- This is the exact decoded number of an arbitrary well-formed
+-- gamma header with k payload bits. The numeric "same n" theorem
+-- still needs the separate binary numeral VALUE identity.
+readGammaPayloadExact :
+  (payload suffix : Word.BitWord) →
+  readGamma
+    (zeroPrefix (length payload)
+      ++ (true ∷ (payload ++ suffix)))
+    ≡ just
+      ((pow2 (length payload) + payloadValue payload) ∸ suc zero
+      , suffix)
+readGammaPayloadExact payload suffix
+  rewrite readGammaZeroPrefixExact zero (length payload)
+    (payload ++ suffix)
+        | readLowBitsAppendExact payload suffix =
+  refl
 
 ------------------------------------------------------------------------
 -- The literal gamma(n + 1) decoder.
