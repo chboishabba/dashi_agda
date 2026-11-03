@@ -55,5 +55,16 @@
   "native_Wikidata_edit_performed": false,
   "original_bases_redistributed": false,
   "wet_lab_function_verified": false,
-  "independent_human_magnetoreception_verified": false
+  "independent_human_magnetoreception_verified": false,
+  "local_full_record_semantic_roundtrip_passed": true,
+  "local_full_record_roundtrip_verification": "Biopython GenBank parse original raw -> SeqIO.write normalized GenBank -> parse again, compare DNA sequence digest, topology, feature type counts, all 22 nested locations/qualifiers and record ID",
+  "serialized_roundtrip_raw_byte_count": 18377,
+  "raw_byte_identical_serialization": false,
+  "local_semantic_roundtrip_checks": {
+    "dna_sequence": true,
+    "topology": true,
+    "feature_types": true,
+    "feature_locations_and_qualifiers": true,
+    "record_id": true
+  }
 }
