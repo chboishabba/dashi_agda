@@ -43,7 +43,7 @@ MARKERS: dict[str, tuple[str, ...]] = {
         "import DASHI.Biology.Wong2022LysergicAcidFiniteCore as Core",
         "Kluver.lsdIdentity",
         "Monoamine.tryptophan",
-        '"6717"',
+        "PubChem Compound CID 6717",
         '"1.7"',
         '"1.4"',
         "Chemistry.ChemistryTransitionKernel",
@@ -58,7 +58,7 @@ MARKERS: dict[str, tuple[str, ...]] = {
         "reportedUnit",
         "replicateCountReportedInFigureCaption",
         '"CHEBI:6604"',
-        "rawMeasurementTableReviewed =",
+        "rawMeasurementTableReviewedIsFalse",
     ),
     SCIENTIFIC: (
         "import DASHI.Core.ScientificMechanismEvidenceBidiExact as Science",
