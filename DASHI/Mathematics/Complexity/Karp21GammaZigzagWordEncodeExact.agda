@@ -35,8 +35,10 @@ import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (cong)
 import Data.Fin.Base as Fin
 import Data.Nat.Binary.Base as Bin
+import Data.Maybe.Base
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact as Golden
+import DASHI.Mathematics.Complexity.Karp21GammaSignedListRoundTripExact as Pure
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Decode
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as Graph
@@ -68,6 +70,37 @@ encodeSignedValues (z ∷ rest) =
 encodePartitionWord : List ℤ → Word.BitWord
 encodePartitionWord values =
   encodeGammaNat (length values) ++ encodeSignedValues values
+
+------------------------------------------------------------------------
+-- ORIGINAL E20 SOURCE ENCODER = PURE GOLDEN SIGNED LIST ENCODER.
+-- The recursive equality is explicit: gamma and zigzag are
+-- source-owned single functions, not a pair of proxy representations.
+------------------------------------------------------------------------
+
+encodedSignedValuesSamePure :
+  (values : List ℤ) →
+  encodeSignedValues values ≡ Pure.encodeSignedValuesPure values
+encodedSignedValuesSamePure [] = refl
+encodedSignedValuesSamePure (value ∷ rest) =
+  cong (λ suffix → encodeSignedGamma value ++ suffix)
+    (encodedSignedValuesSamePure rest)
+
+encodedPartitionWordSamePure :
+  (values : List ℤ) →
+  encodePartitionWord values ≡ Pure.encodePartitionWordPure values
+encodedPartitionWordSamePure values =
+  cong
+    (λ bits → encodeGammaNat (length values) ++ bits)
+    (encodedSignedValuesSamePure values)
+
+-- Actual graph/E20 input serialization, ACTUAL same-word parser.
+partitionWordDecodeEncode :
+  (values : List ℤ) →
+  Decode.decodePartitionWord (encodePartitionWord values)
+    ≡ Data.Maybe.Base.just values
+partitionWordDecodeEncode values
+  rewrite encodedPartitionWordSamePure values =
+  Pure.partitionWordDecodeEncode values
 
 ------------------------------------------------------------------------
 -- The actual dependent Karp weighted graph carrier. A graph's edge
