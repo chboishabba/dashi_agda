@@ -1,5 +1,7 @@
 # Wong et al. (2022) D-lysergic-acid evidence crosswalk
 
+> **Current scope: DASHI Biology/Chemistry only (3 November 2026).** No SensibLaw, SLR, ITIR, external ontology connector, review store, or cross-repo runtime handoff is required for this tranche. Previous companion work is deferred, not an acceptance dependency.
+
 **Primary source:** Garrett Wong, Li Rong Lim, Yong Quan Tan, Maybelle Kho Go, David J. Bell, Paul S. Freemont and Wen Shan Yew, *Reconstituting the complete biosynthesis of D-lysergic acid in yeast*, Nature Communications **13**, 712 (2022), DOI [10.1038/s41467-022-28386-6](https://doi.org/10.1038/s41467-022-28386-6). Credit experimental observations and article authorship to this team, not to DASHI.
 
 **Scope:** Non-operational, provenance-first formalisation of source-reported analytical and outcome evidence. This module does **not** reconstruct a wet-lab route, assemble an organism, supply sequence/plasmid or process parameters, optimize production, claim a validated commercial process, or establish pharmacological/clinical effects.
@@ -28,8 +30,8 @@
 | Open cellular metabolism | `DASHI.Biology.Cell.OpenMetabolicNetwork` | Parametric unpaid network-consumer gate; no invented flux or state |
 | Chemistry transition and quantitative obligations | `DASHI.Chemistry.TransitionKernel` | Existing solver-neutral kernel is the future consumer; no source-backed kinetic measurements are asserted |
 | BH4 / Rhea / ChEBI and external ontology | [DASHI #1159](https://github.com/chboishabba/dashi_agda/pull/1159), [#1226](https://github.com/chboishabba/dashi_agda/pull/1226), [#1454](https://github.com/chboishabba/dashi_agda/pull/1454) | Separate biochemical source/kinetic/ontology programs; do **not** infer a shared network or import unmerged branches |
-| Native candidate world and source-revision review | [SensibLaw #512](https://github.com/chboishabba/SensibLaw/pull/512) and existing `external_graph_bridge.py` / `world_model.py` | Reuse their review-required candidate path, never a parallel ontology or automatic public edit |
-| Provenance-bearing fibre / shared artifact routing | [ITIR #17](https://github.com/chboishabba/ITIR-suite/pull/17), [#22](https://github.com/chboishabba/ITIR-suite/pull/22), [#55](https://github.com/chboishabba/ITIR-suite/pull/55), [#56](https://github.com/chboishabba/ITIR-suite/pull/56) | Exact DOI/CID source coordinates may later be referenced by an existing fibre; no runtime handoff is claimed |
+| Scientific mechanism evidence | `DASHI.Core.ScientificMechanismEvidenceBidiExact` | Existing observation/source interpretation and independent-evidence reverse obligations |
+| Stoichiometric theorem reuse | `DASHI.Biology.Cell.MetabolicStoichiometricConservation` | Conditional existing conservation certificate; no new paper-specific physical flux witness |
 
 ## Minimal exact remaining cut
 
@@ -38,8 +40,8 @@
 3. **W22-03: Observation normalization.** Add source-pinned scale, endpoint timing, replication and uncertainty for each value if the paper's source data support them. No interpolation or optimizer.
 4. **W22-04: Independent analytical evidence.** Review raw source-data rows against the paper's claims. Treat a paper-described assay as author evidence, not new DASHI validation.
 5. **W22-05: Cellular network bridge.** Only instantiate the existing `OpenMetabolicNetwork` or chemistry transition kernel after source-grounded organism/compartment/time, rate-unit, transport and calibrated-flux witnesses exist. No such witness is asserted here.
-6. **W22-06: External ontology admission.** Route DOI/CID and any separately verified Rhea/ChEBI/GO/Reactome candidates through the native SLR/SensibLaw candidate/review machinery, preserving source revision and abstaining on missing identity. Do not create a new ontology store.
-7. **W22-07: Independent proof and repo acceptance.** Check `Wong2022LysergicAcidFiniteCore.agda` with `--safe`, then the source-linked `Wong2022LysergicAcidEvidenceExact.agda` and full Biology/Everything import graph using their existing compatible options. Record exact PR SHA, checker version, postulates/metas and result. Source-written is not kernel-accepted.
+6. **W22-06: DASHI-only scientific and stoichiometric owner reuse.** `Wong2022ScientificMetabolicBridgeExact.agda` reuses `ScientificMechanismEvidenceBidiExact` and `MetabolicStoichiometricConservation`. Source-written bridge complete; kernel execution remains W22-07. Physical flux remains W22-05; no external connector is needed.
+7. **W22-07: Exact-head execution.** Run `python3 scripts/check_wong2022_scientific_evidence.py`, `python3 -m pytest tests/test_wong2022_scientific_evidence.py -q`, then `python3 scripts/check_wong2022_scientific_evidence.py --agda` for Golden core, source adapter, ledger, scientific bridge and Biology root. Record exact revision, checker version, and result.
 
 ## Source-to-proof ceiling
 
@@ -64,7 +66,7 @@ Primary-article text was checked against the publisher's public article page. Th
 
 Exact typed source-locator, registry and unresolved-object owner: `DASHI.Biology.Wong2022EvidenceLedgerExact`, imported by `DASHI.Biology.Everything`. The isolated Golden core remains `Wong2022LysergicAcidFiniteCore`.
 
-**Native runtime bridge:** Companion [SensibLaw PR #513](https://github.com/chboishabba/SensibLaw/pull/513) uses the existing `src.policy.external_graph_bridge` and `src.policy.world_model` APIs. It produces an incomplete, revision-scoped, deterministic **candidate-only** world with DOI and CID references, no accepted external bridge decisions, no public ontology editing, a source-data coverage residual and `abstain` pressure. This closes the *source-written native candidate adapter* subgate of W22-06; live S29/Postgres/ITIR review admission is not claimed.
+**Deferred historical companion:** SensibLaw PR #513 was separately drafted as a candidate-only runtime adapter. The current DASHI-only work does not depend on or advance it. W22-06 is now a native scientific/metabolic bridge obligation.
 
 **Exact remaining source/execution cut after this continuation:**
 
@@ -73,7 +75,17 @@ Exact typed source-locator, registry and unresolved-object owner: `DASHI.Biology
 - W22-03: source-data endpoint row IDs, replicate-specific values and uncertainty estimates. The caption's replicate count must not be substituted for per-run data.
 - W22-04: independent raw-data and standard-comparison review, with reviewer and instrument/analysis provenance. The paper's description is evidence but not a second experiment.
 - W22-05: physical same-organism, compartment, time, exchange/kinetic units, absolute flux measurements and justified transport to `OpenMetabolicNetwork`/`Chemistry.TransitionKernel`. Neither chemical names nor source-reported titres pay these conditions.
-- W22-06: run, review and admit native SensibLaw/SLR candidate through the actual S29/Postgres/ITIR pipeline, with revision and access receipts. PR #513 provides code and tests but not a live admission receipt.
-- W22-07: execute the Golden Agda check, source-linked ledger/adapter checks and canonical Biology root on the **exact branch head**, plus focused SensibLaw `pytest`. This GitHub-only work has not executed these checks.
+- W22-06: check the native scientific-evidence and conditional stoichiometric theorem-owner bridge in DASHI; no external ontology runtime.
+- W22-07: run focused Golden core, source adapter, evidence ledger, scientific-metabolic bridge and Biology root Agda checks, plus DASHI-only Python regressions. No kernel or pytest acceptance is claimed by GitHub readback.
 
 Attribution: paper discoveries and measurements belong to Wong and colleagues. Molecular registry assertions belong to PubChem/ChEBI curators. Existing formal/ontology machinery retains its original DASHI, SensibLaw, SLR and ITIR owners. The new finite guards, candidate projection and documentation are DASHI/SensibLaw integrations and make no new wet-lab or biological-discovery claim.
+
+## 2026-11-03 DASHI-only scientific/metabolic continuation
+
+The evidence and chemistry bridge is now `DASHI.Biology.Wong2022ScientificMetabolicBridgeExact`. It imports the preexisting `ScientificMechanismEvidenceBidiExact` scientific status vocabulary and the `MetabolicStoichiometricConservation` theorem owner. Article endpoints are experimental reports, while the paper's larger-scale discussion is a source interpretation rather than a measured industrial result.
+
+The new Golden finite-core review-tier and identity-carrier gates prevent paper-only evidence from inhabiting an independent-validation receipt, and prevent a registry-only identity tag from being treated as an experimental specimen or receptor-ligand identity. These are finite syntactic type distinctions. They are not chemical identity or replication proofs.
+
+`scripts/check_wong2022_scientific_evidence.py` is a fail-closed static source-integrity checker with an explicit optional Agda execution flag. `tests/test_wong2022_scientific_evidence.py` exercises positive and negative cases. Neither file is a substitute for a real Agda acceptance receipt.
+
+Active research residuals: verified source-data and supplement hashes; exact replicate values and uncertainty; external analytical adjudication; stereochemical and experimental sample same-object evidence; justified same-organism/compartment/time rate and transport data; exact-head Agda/Python execution. The separate runtime connector is excluded from this cut.
