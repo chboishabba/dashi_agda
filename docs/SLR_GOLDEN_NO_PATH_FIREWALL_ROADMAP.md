@@ -94,3 +94,14 @@ The new Phase 3 changes have not been independently type-checked in this session
 
 ### Phase 4 changelog
 2026-11-03: Added `DASHI/Interop/ITIRMCPFullRegistryCoverageExact.agda` and `DASHI/Interop/SLRFullWorkspaceCrateCoverageExact.agda`. This closes the finite name-inventory drafting task only. Exact runtime parity remains open. No Python, Rust or ESD changes.
+
+## Restorative referee correction — 2026-11-03
+- [x] Replace all 119 ITIR/re_gpt underscored Agda constructor names with non-mixfix camelCase identifiers. Canonical runtime string names remain unchanged.
+- [x] Replace 31 SLR crate underscored constructors with camelCase and both descriptive string carriers with the 36 named `SLRCarrierKind` constructors.
+- [ ] Apply the referee-supplied exact 93-tool per-runtime authority profile table. The existing conservative defaults are not yet a source-verified authority model.
+- [ ] Add explicit `BackingSubsystem`, `hasExplicitAuthorityProfile`, and the mutating-re_gpt no-retry theorem.
+- [ ] Re-run local `agda --safe` checks on the two edited modules and TOE roots; do not transfer prior revision receipts to these commits.
+- [ ] Verify the supplied crate-carrier assignments against the live Rust sources; typed inventory alone does not prove same-object implementation correspondence.
+
+### Changelog
+2026-11-03: Restorative parse fix and typed SLR carrier correction pushed. Exact ITIR authority parity and new referee acceptance remain open.
