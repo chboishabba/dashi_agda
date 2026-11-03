@@ -128,9 +128,8 @@ def inspect_source_contract(sources: Mapping[str, str]) -> list[str]:
         core = sources[CORE]
         if not core.startswith("{-# OPTIONS --safe #-}"):
             failures.append("Golden finite core is not safe")
-        for symbol in ("postulate", "{-# TERMINATING"):
-            if symbol in core:
-                failures.append(f"unsafe Golden source: {symbol}")
+        # Trust escapes are checked by the anchored BAD_AGDA patterns below.
+        # Comments mentioning 'postulates' must not trigger a false positive.
     for path in (CORE, ADAPTER):
         if path not in sources:
             continue
