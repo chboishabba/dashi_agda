@@ -262,3 +262,4 @@ import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact
 import DASHI.Biology.AvianMagnetoreceptionStreamFiniteCore
 import DASHI.Biology.AvianMagnetoreceptionThoughtEmporiumEvidenceExact
 import DASHI.Biology.GenBankInterpretationInteropExact
+import DASHI.Biology.GenBankCanonicalDNAFibreIndexExact
