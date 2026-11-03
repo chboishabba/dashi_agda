@@ -1,3 +1,5 @@
+{-# OPTIONS --safe #-}
+
 module DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact where
 
 ------------------------------------------------------------------------
@@ -39,7 +41,7 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
-import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
+import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Golden
 
 formulaVariables : Cook.BooleanFormula → List Nat
 formulaVariables (Cook.variable i) = i ∷ []
@@ -233,14 +235,14 @@ compatibleCookObservations :
   (Nat × Bool) → (Nat × Bool) → Bool
 compatibleCookObservations (index , bit) (other , otherBit)
   with NatP._≟_ index other
-... | yes _ = Sparse.boolEqual bit otherBit
+... | yes _ = Golden.boolEqual bit otherBit
 ... | no _ = true
 
 oneCookObservationAgainst :
   (Nat × Bool) → List (Nat × Bool) → Bool
 oneCookObservationAgainst observation [] = true
 oneCookObservationAgainst observation (other ∷ rest) =
-  Sparse.andBool
+  Golden.andBool
     (compatibleCookObservations observation other)
     (oneCookObservationAgainst observation rest)
 
@@ -248,7 +250,7 @@ allCookObservationsConsistent :
   List (Nat × Bool) → Bool
 allCookObservationsConsistent [] = true
 allCookObservationsConsistent (observation ∷ rest) =
-  Sparse.andBool
+  Golden.andBool
     (oneCookObservationAgainst observation rest)
     (allCookObservationsConsistent rest)
 
@@ -258,7 +260,7 @@ projectedCookPairCompatible :
     (index , assignment index) (other , assignment other) ≡ true
 projectedCookPairCompatible assignment index other
   with NatP._≟_ index other
-... | yes refl = Sparse.boolEqualSelf (assignment index)
+... | yes refl = Golden.boolEqualSelf (assignment index)
 ... | no _ = refl
 
 projectedCookObservationAgainst :
