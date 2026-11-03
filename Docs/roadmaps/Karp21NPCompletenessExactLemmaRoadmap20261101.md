@@ -1,5 +1,23 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-03 E20 image-only exceptional encoded-word closure
+
+`Karp21EncodedFixedGraphWordsExact.agda` is imported into the focused root. It source-writes `encodedFixedUnitWordAccepts` (literal gamma-encoded original +1 edge / W=1 target has a true/false cut), `encodedFixedNoWordRejects` (same +1 edge / W=2 rejects all four cuts after the actual binary graph decoder), and `fixedUnitWordFaithful` (BIDI on the source-owned unit graph). No alternative target truth marker is used.
+
+`Karp21SignedPartitionActualGraphWordBoundaryExact.E20ImageWordReceipts` now contains exactly one *open semantic output-image field*: `scaledCompleteWordFaithful` for `Source.scaledCompletePositive parts nonzero`. Its unit-YES and malformed fixed-NO cases are directly source-filled by `FixedWords`. The `EncodedE20` total reduction retains the concrete signed PARTITION gamma decoder, concrete gamma graph encoder, concrete graph acceptance language, and fixed-NO output. Its remaining proof wall is the general sorted complete-graph parser/encoder acceptance transport (including threshold and signed weights), plus a real machine polynomial clock, all unkernelled.
+
+**Exact next max-cut lemmas (source-first, reusing original owners):**
+- `gammaReadEncodeRoundTrip`, then `partitionWordDecodeEncode`;
+- `sourceIndexedCompleteGraphUpperPairLexSorted` and `completeGraphGammaGraphDecodeSameObject` for the actual `completeScaledPairEdges` output; perform proof-field-independent cut-verifier transport;
+- `scaledCompleteWordFaithful` to instantiate `E20ImageWordReceipts` *without any conditional faithfulness field*;
+- show the parser's extra sparse-bit guard redundant for all valid Python graph words;
+- `n21SparseVerifierBitTapePolynomialClock`, `e20EncodedPolynomialReduction` against a concrete nondegenerate bit-machine cost model;
+- P0 strict SAT verifier clock and universal Cook–Levin root, E01–E19 full encoded reductions and 21 `InNP` instances, then `CertifiedKarpNetwork` and Agda kernel receipt.
+
+**Verification:** new `{-# OPTIONS --safe #-}` source imports have no explicit postulate/metavariable markers by static scan; the source has **not** received independent Agda compiler/kernel acceptance in this session. Zero genuinely kernel-accepted new full Karp-21 reductions / NP-complete terminals are claimed.
+
+
+
 ## 2026-11-03 exact gamma/zigzag Python wire-model source implementation (unchecked Agda)
 
 **Actual PR #1445 source additions (all `{-# OPTIONS --safe #-}`):**
