@@ -1,3 +1,4 @@
+- Added executable reference generator `scripts/check_ym_native_c3_adjacent_swap_word.py` for the original spatial C3 1024-link permutation; 46,592 minimal adjacent swaps and independent integer-action/cube checks. The Agda program/certificate remains OPEN.
 ## 2026-11-03 — canonical YM exact-lemma reconciliation and single-vector C3 certificate
 
 - Audited live PR #1444 owners and the original Clay-facing proof contracts; added `Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md` with stable R443/R445/R320/R333/Clay/TRUST lemma IDs, explicit SOURCE/CONDITIONAL/OPEN/TRUST classes and precise next theorem terms. The canonical 219-item submission cutset, four-family frozen research cut and literal Clay solution contract are **different levels**; none is closed by finite C3 or periodic-block geometry.
