@@ -61,6 +61,9 @@ MARKERS: dict[str, tuple[str, ...]] = {
         "replicateCountReportedInFigureCaption",
         '"CHEBI:6604"',
         "rawMeasurementTableReviewedIsFalse",
+        "ZAGRKAFMISFKIO-QMTHXVAHSA-N",
+        "ZAGRKAFMISFKIO-IAPIXIRKSA-N",
+        "normalisedStereochemicalMatchPaidIsFalse",
     ),
     SCIENTIFIC: (
         "import DASHI.Core.ScientificMechanismEvidenceBidiExact as Science",
