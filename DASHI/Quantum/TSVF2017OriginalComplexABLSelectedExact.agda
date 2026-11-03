@@ -39,6 +39,7 @@ import DASHI.Quantum.TSVFComplexGammaProductBornExact as Gamma
 import DASHI.Quantum.TSVF2017ComplexEnvironmentRobustnessExact as Env
 import DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact as OriginalBidi
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
+import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as Structural
 
 ------------------------------------------------------------------------
 -- Native two-dimensional RATIONAL-COMPLEX Hilbert inner-product carrier.
@@ -414,13 +415,40 @@ projectorOfAdmittedHistory OriginalBidi.excludedHistory ()
 actualComplexSelectedBidiSource :
   (gammas : List C.RationalComplex)
   (right wrong : Env.ComplexPointerRecord) (k : Nat) →
-  -- The selected Q.TSVFEnsemble and joint admissible Bidi fibre agree.
-  Env.ComplexPointerRecord
-actualComplexSelectedBidiSource gammas right wrong k =
-  Env.pointerRecord
-    (Env.rightAmplitude [])
-    (Env.wrongAmplitude gammas right wrong k)
+  Structural.AdmissibleTSVFQuantumSource
+    OriginalBidi.jointAdmissibleHistoryFibre
+    finiteComplexQuantum
+    (finiteComplexEnsemble [] gammas right wrong k)
+actualComplexSelectedBidiSource gammas right wrong k = record
+  { initial = tt
+  ; final = tt
+  ; rightHistory = OriginalBidi.admittedRightHistory
+  ; wrongHistory = OriginalBidi.admittedWrongHistory
+  ; rightAllowed = OriginalBidi.admittedRightProof
+  ; wrongAllowed = OriginalBidi.admittedWrongProof
+  ; projectorOf = projectorOfAdmittedHistory
+  }
 
--- The final mapping to the selected original Bidi record is supplied by
--- the original source's proof-carrying admittedHistoryProjector above;
--- this module does not claim a physical observer/world from that record.
+-- Exact commuting square from ORIGINAL bidirectional history proof to
+-- ORIGINAL TSVF transition amplitude to the finite complex environment.
+originalAdmissibleRightAmplitudeIsComplexSource :
+  (gammas : List C.RationalComplex)
+  (right wrong : Env.ComplexPointerRecord) (k : Nat) →
+  Structural.rightAmplitude
+    (actualComplexSelectedBidiSource gammas right wrong k)
+  ≡ Env.rightAmplitude []
+originalAdmissibleRightAmplitudeIsComplexSource gammas right wrong k =
+  rightOriginalTransitionAmplitude [] gammas right wrong k
+
+originalAdmissibleWrongAmplitudeIsComplexSource :
+  (gammas : List C.RationalComplex)
+  (right wrong : Env.ComplexPointerRecord) (k : Nat) →
+  Structural.wrongAmplitude
+    (actualComplexSelectedBidiSource gammas right wrong k)
+  ≡ Env.wrongAmplitude gammas right wrong k
+originalAdmissibleWrongAmplitudeIsComplexSource gammas right wrong k =
+  wrongOriginalTransitionAmplitude [] gammas right wrong k
+
+-- This is an actual *finite complex selected TSVF* same-source theorem.
+-- It is NOT yet a physical N-body apparatus, continuum selection, observed
+-- Lorentzian generator or OS reconstructed Hamiltonian.
