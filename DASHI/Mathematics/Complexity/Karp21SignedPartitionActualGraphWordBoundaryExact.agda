@@ -47,6 +47,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact as
 import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphEndpointOrderExact as Order
 import DASHI.Mathematics.Complexity.Karp21UpperPairStructuralLexOrderExact as PairLex
 import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictLexExact as StrictLex
+import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictAfterExact as StrictAfter
 import DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExact as Indexed
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact as FixedWords
@@ -83,6 +84,21 @@ graphOfPositiveTarget (Source.scaledCompletePositive parts nonzero) =
 -- has a strictly lexicographically smaller (u,v) numeric pair than
 -- every later edge. This is stronger than a no-duplicate receipt.
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- The ORIGINAL graph parser's Bool strictAfter guard is satisfied by
+-- every earlier/later pair from E20's actual scaled complete graph.
+-- This is stronger than independent endpoint validity and no-repeat.
+------------------------------------------------------------------------
+
+e20ActualScaledGraphPassesStrictAfter :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts)) →
+  PairLex.StrictSorted StrictAfter.ParserStrictlyAfterEdge
+    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+e20ActualScaledGraphPassesStrictAfter parts nonzero =
+  StrictAfter.sourceIndexedScaledGraphPassesStrictAfter
+    (Indexed.vectorOfList parts)
 
 e20ActualScaledGraphStrictLex :
   (parts : List ℤ)
