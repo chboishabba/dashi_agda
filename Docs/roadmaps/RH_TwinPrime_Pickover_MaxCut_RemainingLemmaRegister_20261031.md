@@ -1615,3 +1615,162 @@ Dirichlet, Bishop & Bridges, Zachary Murray, Viktor Csimma
 and the preexisting DASHI proof owners. Source-written
 conditional reductions must not be promoted to theorem
 completion without proving their exact input predicates.
+
+
+## 2026-11-03 K04d/K05 source-native order repair and noninteger-complex region compiler
+
+Branch `feat/twin-prime-six-wheel-bounded-gap-reuse-20261028`,
+PR #1408. Explicitly searched original theorem owners and followed
+the vendored Bishop `RealProperties`, `Sequence`, `Inverse`,
+finite exp/binomial Cauchy coefficient, Round11 signed-factorial
+series, source complex exponential, Machin arctan/quarter window,
+Bishop norm-square reflection, Moonshine unit phase and selected
+Riemann half-plane interfaces. NO CI / NO AGDA ELABORATION; all
+new status here is **SOURCE-WRITTEN**.
+
+### Corrected invalid earlier Bishop left-setoid order orientations
+
+Earlier source code was NOT ready to be called kernel accepted.
+The exact pinned vendor signature is
+`≤-respˡ-≃ : _≤_ Respectsˡ _≃_`. A proof of
+`y ≃ z` and `y ≤ x` yields `z ≤ x`, not the reverse
+direction. Earlier code used the symmetric orientation in several
+source lemmas, so *we did not simply append another layer*.
+
+- `127406c51087a64924e3d6b75aa21b5ab918c07a` repairs
+  `BishopNegativeLogGeometricSourceConvergenceExact`
+  at the absolute source-term bound, double-absolute
+  geometric comparison, monotone prefix, and first-prefix
+  to-log-limit order.
+- `2a205d3cde69486db23dad33811cf2de1a516117` repairs
+  `BishopNatRealReciprocalSquareBaselExact`
+  power-product transport to `q^(2+k) ≤ q²`.
+- `30cfa68e9fcbf14dd2848bd8325c261d21030418`
+  repairs `BishopRiemannDirichletExponentialTermExact`
+  negative exponential unit order, scalar integer Basel bounds
+  and literal complex real/imag Basel component orders.
+
+These are source-level repairs based on *actual* vendor
+definition, not postulates. Agda elaboration is still outstanding.
+
+### K04d-LOG genuine source-native order theorem
+
+Commit `f41ee599504d07fc4018ac5b6f34884d1e892497`
+adds original canonical power-series
+`sourceNegativeLogTermMonotone`,
+`sourceNegativeLogPartialMonotone` and
+`sourceNegativeLogMonotone`:
+for `0<x≤y<1`, the *same actual Bishop series limits*
+satisfy `L(x)≤L(y)`. This uses
+`Sequence.x≤y∧nonNegx⇒xⁿ≤yⁿ`,
+the original nonnegative reciprocal coefficient,
+`Sequence.∑₀-mono-≤`, and
+`Sequence.xₙ≤yₙ⇒limxₙ≤limyₙ`.
+Neither native exponential inversion nor the arbitrary
+Round11 log record is assumed.
+
+**Still open:** `exp_B(L(x)) = 1/(1-x)` for the canonical
+series (at least each Nat argument) and general equality with
+an arbitrarily preselected Round11 negative-log coefficient family.
+
+### K04d-REGION new all noninteger complex-s comparison compiler
+
+Commit `ae2aacf1b1bd744e6955c66772f7d6a765a0a095`
+extends `BishopRiemannDirichletExponentialTermExact` with
+`sourceRealExponentAboveTwoFactor`,
+`sourceAboveTwoExtraFactorPositive`,
+`sourceAboveTwoExtraFactorBelowOne`,
+`sourceRealExponentAboveTwoBasel`, and
+`sourceCanonicalNonintegerRealBaselTail`.
+The original **real** Bishop exp product is split exactly:
+`exp_B(-σ L_n) ≃ exp_B(-2 L_n)*exp_B(-(σ-2)L_n)`.
+For all `σ>2` and `L_n>0`, the second factor is
+strictly below one using the *already proved* original
+global negative exponential theorem. Thus the scalar
+Basel bound works for every **noninteger Bishop real**
+`σ>2`, not just the earlier integer fibre.
+
+Commit `015678d7d878cabcaf01a168a9a8b94d75134b57`
+adds `BishopRound11TrigModulusFromPythagoreanExact.agda`.
+The repo already owns the ACTUAL Bishop phase
+`cos_B θ + i sin_B θ`, constructive norm-square/component
+comparison, and nonnegative square-order reflection.
+The new `round11ModulusFromPythagorean` proves
+`|cos_B θ|≤1` and `|sin_B θ|≤1`
+from the *same-object original Round11*
+`cos_B² θ+sin_B² θ≃1`. It does not assume those
+separate modulus facts in an opaque record.
+
+Commits `0fa51db0c4dc7e362b9942ca09ebd1fb8ac85a5d`
+and `150477bf2ecc8a89d73e71a3b16812dc2bc96b4f`
+add `BishopRiemannComplexAboveTwoBaselExact.agda`.
+The new
+`sourceComplexAboveTwoCoordinateBounds`,
+`sourceComplexAboveTwoMajorant` and
+`sourceComplexAboveTwoConverges` prove the literal
+ORIGINAL variable-complex-s term bound and actual
+Bishop coordinate convergence throughout
+`Re(s)>2` (arbitrary imaginary component), for every
+positive successor n, **conditional on** the genuine
+canonical Nat exp/log inverse and original Round11
+Pythagorean at the actual source phase. No synthetic
+integer-exponent term family or replacement complex exp.
+
+Commits `43fb31f013de75c81796448c2a5116136a6de850`
+and `fe091fba3d691b222545fbefc312184581cecb84`
+extend the same owner: `sourceComplexZeroRealIsOne`,
+`sourceComplexZeroImagIsZero`, and
+`sourceComplexZeroBaselBound` handle literal
+`log(1)=0` and source `exp_C(-s·0)=(1,0)`.
+`sourceComplexAboveTwoMajorantAllIndices`
+then supplies the all-index comparison. The genuine
+`sourceRegionWideBaselCertificate` converts two explicit
+mathematical hypotheses (canonical exp/log inverse for
+all n; native Round11 all-angle Pythagorean) into a
+region-wide `RegionBaselDomination` for the **same
+actual original Bishop variable-s complex Dirichlet series**.
+`sourceRegionUniformDirichletValue` and
+`sourceRegionUniformLimitError` reuse the existing
+Bishop comparison compiler to produce the TRUE
+one-cutoff uniform coordinate limit errors over all
+complex `s` with `Re(s)>2`.
+
+All three TOE import roots now import the new proof owners.
+**These statements remain CONDITIONAL** on the original
+native inverse and Pythagorean theorems; the missing
+assumptions have been reduced to independently named
+same-object analytic facts, not made to vanish.
+No kernel elaboration has occurred.
+
+### Exact final mathematical cut (not closed)
+
+1. **L-INV:** actual canonical Bishop
+   `exp_B(L((n+1)/(n+2))) ≃ n+2`, all n; independently
+   identify the previous arbitrary selected Round11
+   negative-log coefficient family where required.
+2. **T-PYTH / MIXED-CAUCHY:** original signed-factorial
+   complex imaginary exponential coefficient convolution,
+   rectangle/triangle limit transport and full
+   pure-imaginary multiplicativity. From this obtain actual
+   Round11 `sinAdd`, `cosAdd` and `sin²+cos²=1`.
+3. **K04d REGION:** now **closed conditionally in source**
+   for all complex Re(s)>2 including n=0 and a common
+   uniform to-limit modulus, subject to 1 and 2. No
+   unconditional neighborhood result yet.
+4. **CONTINUITY:** original native termwise exp/sin/cos
+   continuity, resulting sum continuity via the new
+   source uniform errors, real-half-plane predicate
+   identification, and same-object equality with the
+   original opaque `ZetaHalfPlaneLayer.zetaHalfPlane`
+   and completed zeta.
+5. **K05-ATAN-PI:** source rational arctan-tangent
+   law, analytic quarter branch and independently
+   characterized first positive trigonometric π uniqueness.
+6. **KERNEL:** SOURCE-WRITTEN only. A repository file
+   and absence of a literal Agda `postulate` or `{! !}`
+   is not a typecheck or a proof of a mathematical proposition.
+
+Citations/credit: Machin; Dirichlet; Riemann; Bishop and
+Bridges; Zachary Murray; Viktor Csimma's pinned Bishop
+gitlink; and existing DASHI foundational/analytic
+theorem owners. The new compositions belong to DASHI.
