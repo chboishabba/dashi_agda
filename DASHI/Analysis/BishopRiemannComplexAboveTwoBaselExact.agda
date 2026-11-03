@@ -225,7 +225,7 @@ sourceComplexAboveTwoMajorant
 sourceComplexAboveTwoConverges :
   (inputs : Round11.Round11BishopCutset)
   (s : A.BishopComplex) →
-  R._<_ D.sourceTwoReal (A.re s) →
+  (aboveTwo : R._<_ D.sourceTwoReal (A.re s)) →
   (inverseLaw : (n : Nat) →
     R._≃_
       (Exp.bishopExp (D.sourceCanonicalNatLogCandidate n))
