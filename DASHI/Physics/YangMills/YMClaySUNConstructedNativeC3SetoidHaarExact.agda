@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as Gibbs
 import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClayNativeSideFourC3VectorWeldExact as NativeC3
+import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateExact as Single
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClaySUNNativeSetoidBondProductHaarExact as Setoid
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
@@ -64,6 +65,18 @@ module _
         ≡ NativeC3.forwardVector vector
 
   open ExactC3AdjacentSwapWitness public
+
+  -- R443 finite C3 no longer demands a ∀ Link-vector premise:
+  -- check ONE original-bond-label vector, then derive all-Link naturality.
+  adjacentSwapFromOneVector :
+    Single.SingleVectorC3PermutationCertificate →
+    ExactC3AdjacentSwapWitness
+  adjacentSwapFromOneVector certificate = record
+    { ExactC3AdjacentSwapWitness.program =
+        Single.program certificate
+    ; ExactC3AdjacentSwapWitness.matchesNativeVector =
+        Single.singleVectorC3ImpliesAllVectors certificate
+    }
 
   originalNativeC3SetoidCodec :
     ExactC3AdjacentSwapWitness →
@@ -111,3 +124,33 @@ module _
     Setoid.nativeSUNPhysicalGibbsSetoidHaarC3
       theory traceData exponential beta
       source (originalNativeC3SetoidCodec witness)
+
+  -- Exact same physical original native codec; the only finite source
+  -- input is now one program and its equality on the canonical label Vec.
+  originalNativeC3SetoidCodecFromOneVector :
+    Single.SingleVectorC3PermutationCertificate →
+    Setoid.SUNNativeSetoidBondCodec theory Count
+  originalNativeC3SetoidCodecFromOneVector certificate =
+    originalNativeC3SetoidCodec (adjacentSwapFromOneVector certificate)
+
+  originalNativeC3GibbsHaarInvariantFromOneVector :
+    (traceData : Trace.SUNMatrixRealTrace {Scalar = ℝ} theory)
+    (exponential : Exp.StrictPositiveRealExponential)
+    (beta : ℝ)
+    (certificate : Single.SingleVectorC3PermutationCertificate) →
+    Setoid.nativeSetoidProductHaar source
+      (originalNativeC3SetoidCodecFromOneVector certificate)
+      (λ links →
+        Gibbs.nativeSUNWilsonGibbsDensity
+          theory traceData exponential beta
+          (Weld.nativeForwardC3Bonds links))
+    ≡
+    Setoid.nativeSetoidProductHaar source
+      (originalNativeC3SetoidCodecFromOneVector certificate)
+      (Gibbs.nativeSUNWilsonGibbsDensity
+        theory traceData exponential beta)
+  originalNativeC3GibbsHaarInvariantFromOneVector
+      traceData exponential beta certificate =
+    originalNativeC3GibbsHaarInvariant
+      traceData exponential beta
+      (adjacentSwapFromOneVector certificate)
