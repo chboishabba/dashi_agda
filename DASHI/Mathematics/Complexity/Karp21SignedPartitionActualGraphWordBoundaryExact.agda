@@ -12,7 +12,8 @@ module DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundary
 --
 -- The unprovided representation premise is the real graph binary codec,
 -- their faithful parser-to-word correspondence, and
--- the genuine polynomial-time machine clock. The finite reduction
+-- the genuine polynomial-time machine clock. The target language
+-- is now fixed to the literal gamma/zigzag graph decoder. The finite reduction
 -- and both directions of its word-level semantic correctness are
 -- independently source-written here.
 --
@@ -36,6 +37,7 @@ import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as N21
 import DASHI.Mathematics.Complexity.Karp21MalformedWordTotalReductionExact as Malformed
 import DASHI.Mathematics.Complexity.Karp21WeightedMaxCutFixedNoGraphExact as FixedNo
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Gamma
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as GraphWord
 
 graphAccepts : N21.GraphInstance → Set
 graphAccepts graph =
@@ -93,11 +95,10 @@ e20SignedPartitionActualGraphIff parts =
 record E20GraphWordBoundary : Set₁ where
   field
     encodeGraph : N21.GraphInstance → Word.BitWord
-    graphLanguage : PR.Language Word.BitWord
     faithfulGraphWord :
       (graph : N21.GraphInstance) →
       PR.Iff (graphAccepts graph)
-        (PR.accepts graphLanguage (encodeGraph graph))
+        (PR.accepts GraphWord.concreteGraphWordLanguage (encodeGraph graph))
 
 open E20GraphWordBoundary public
 
@@ -113,7 +114,7 @@ module EncodedE20
       FixedNo.fixedNoGraphInstance
       FixedNo.fixedNoGraphInstanceRejects
       (encodeGraph boundary)
-      (graphLanguage boundary)
+      GraphWord.concreteGraphWordLanguage
       e20SignedPartitionActualGraphIff
       (faithfulGraphWord boundary)
 
@@ -127,7 +128,7 @@ module EncodedE20
   e20EncodedSignedPartitionDecisionIff :
     (word : Word.BitWord) →
     PR.Iff (PR.accepts sourceLanguage word)
-      (PR.accepts (graphLanguage boundary)
+      (PR.accepts GraphWord.concreteGraphWordLanguage
         (totalE20WordReduction word))
   e20EncodedSignedPartitionDecisionIff =
     Total.totalMalformedReductionIff
@@ -138,6 +139,6 @@ module EncodedE20
     (cost : PR.PolynomialCostModel Word.BitWord) →
     PR.polynomialTimeMap cost totalE20WordReduction →
     PR.PolynomialManyOneReduction
-      cost sourceLanguage (graphLanguage boundary)
+      cost sourceLanguage GraphWord.concreteGraphWordLanguage
   e20EncodedPolynomialReductionFromClock =
     Total.makeCostedTotalReduction
