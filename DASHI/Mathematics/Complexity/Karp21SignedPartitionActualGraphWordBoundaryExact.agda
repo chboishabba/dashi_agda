@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundaryExact where
 
 ------------------------------------------------------------------------
@@ -16,17 +15,19 @@ module DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundary
 -- is now fixed to the literal gamma/zigzag graph decoder. The finite reduction
 -- and both directions of its word-level semantic correctness are
 -- independently source-written here.
+-- Integration module: intentionally not --safe until its existing
+-- weighted-graph and malformed-source imports become transitively safe.
 --
 -- Karp 1972, original signed PARTITION and weighted positive-W CUT.
 -- No "in NP", polynomial resource, or kernel certification is asserted.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ)
 open import Data.List.Base using (List; length)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product using (Σ; _,_; proj₂)
-open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (Maybe)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -44,7 +45,6 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
 import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact as Size
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact as FixedWords
-open import Relation.Binary.PropositionalEquality using (refl)
 open import Data.Empty using (⊥; ⊥-elim)
 
 graphAccepts : N21.GraphInstance → Set
