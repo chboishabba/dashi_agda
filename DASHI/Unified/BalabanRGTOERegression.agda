@@ -944,6 +944,8 @@ import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNV
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as SUNVariableGaugeHaar
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as SUNBondCodec
 import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as SUNConstructedGauge
+import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact as SUNFiniteSafe
+import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
@@ -1234,3 +1236,31 @@ open SUNConstructedGauge public using
   ; actualPeriodicGaugeHaar
   ; actualPeriodicGaugeNormalized
   ; actualSixDeficitGaugeNormalized)
+
+------------------------------------------------------------------------
+-- 2026-11-03 R443/R445: separate finite Golden construction from
+-- analysis-authority-dependent moving-cutoff physical Gibbs family.
+-- The parent theorem graph does NOT import downstream Lorentz/KK PR #1460.
+------------------------------------------------------------------------
+
+-- No real scalar/Haar assumptions are imported by this finite theorem
+-- itself: the canonical bond codec plus group laws prove naturality.
+open SUNFiniteSafe public using
+  (originalGaugeDecodedAt
+  ; encodeGaugeNatural
+  ; vectorGaugeDecodedAt)
+
+-- Actual periodic side increases with n; old fixed-side-four beta-only
+-- families do not constitute a lattice-changing UV limit.
+open SUNMovingFamily public using
+  (finiteCutoffLinks
+  ; linksAt
+  ; gaugeAt
+  ; physicalFiniteCutoffMeasure
+  ; finiteCutoffLinkCountFormula
+  ; physicalFiniteDensitySameWilson
+  ; physicalFinitePartitionSameWilson
+  ; physicalFinitePartitionPositive
+  ; physicalSixDeficitGaugeExpectation
+  ; physicalWilsonActionAt
+  ; physicalWilsonActionGauge)
