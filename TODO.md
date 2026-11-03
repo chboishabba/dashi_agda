@@ -17502,3 +17502,15 @@ Cleanup
 
 
 - [x] Attach the concrete original Bishop `exp(−s · negativeLogOneMinus(rational n/(n+1)))` source terms, not an arbitrary term oracle, to both original completed-zeta stage/limit coordinate squares (source-written; original equality witnesses still open).
+
+
+### 2026-11-03 — Bishop K04d/K05 source-native max-cut (Agda golden)
+
+- [x] Audit actual Bishop exponential Cauchy, finite reindexing, Round11 trig, Nat-log, Dirichlet Basel and original Riemann zeta source owners.
+- [x] Source-write native Round11 sine/cosine `2 * bishopMachinPi` period as conditional output of the ONE pure-imaginary product and actual quarter equality; connect all three TOE import roots.
+- [x] Reconcile exact lemma ownership in `Docs/roadmaps/BishopK04dK05SourceNativeMaxCut20261103.md`.
+- [ ] K05-PRODUCT: native all-x,y mixed signed-factorial Cauchy coefficient theorem and the actual imaginary exponential addition law; derive Pythagorean and both trig additions as its consumers.
+- [ ] K04d-LOG: native exp of the original negative-log sum equals successor Nat (n≥1); do not use arbitrary log or classical carrier as same-object evidence.
+- [ ] K04d-CONTINUITY: finite-source term continuity, regional uniform-limit continuity, selected original ZetaHalfPlaneLayer/completed-zeta same-object identification.
+- [ ] K05-PI: actual Bishop atan/tangent quarter equality, independent first-positive-zero/least-positive-period trigonometric pi uniqueness.
+- [ ] Exact Agda `--safe` kernel type-check of new module, focused dependency root and full TOE imports, with zero postulates, holes and termination bypasses. No Agda executable available in this pass.
