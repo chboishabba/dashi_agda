@@ -1,3 +1,16 @@
+### 2026-11-03 — YM authoritative exact-lemma max-cut / acceptance (PR #1444)
+
+- [x] Reconcile current R443/R445/R320/R333 producer families against `YangMillsSubmissionExactCutset` (191 theorem + 28 foundations/gauge = 219 field inventory), `BalabanClayFrozenFourCompletionContractExact` (four physically OPEN research families), and the literal `YangMillsClayProblemContractExact.ClayYangMillsSolution` endpoint.
+- [x] Create `Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md` as source-pinned canonical current exact-lemma status/owner map with stable R443/R445/R320/R333/Clay/TRUST IDs. Preserve historical roadmaps as archaeology; no invented row completion.
+- [x] Source-write `YMClayNativeC3SingleVectorPermutationCertificateExact`: canonical original 1024-label Vec, map naturality and `singleVectorC3ImpliesAllVectors`; import into `YMClaySUNConstructedNativeC3SetoidHaarExact`, attach same native original SU(N) Gibbs/C3 consumer and re-export by `DASHI.Unified.BalabanRGTOERegression`.
+- [ ] R443.F07: construct concrete `Product.LinkPermutation 1024` (generated from the **original** C3 bond-label action) and certify its one `onCanonicalLabels` equality. No general all-Link-vector invariant may be taken as an external axiom.
+- [ ] R443.P01–P05: construct physical compact continuous SU(N) Haar on selected measurable `Integrable` test algebra, matrix/real weld and actual CMP119 E/R/B/V source; distinguish Lean SU2 Haar donor from same-object Golden acceptance.
+- [ ] R445.P01–P09: complete original group-valued blocked-link ordered path holonomy, gauge-equivariant map, physical Gibbs pushforward/reopening, reflection-compatible cylinders, beta(a)/volume and uniform continuum/infinite-volume limits, nontriviality.
+- [ ] R320.P01–P06: same-source CMP116 mixed-J differentiated logZ, uniform analytic radii, rooted-shell decay and physical transport; no unrelated covariance surrogate.
+- [ ] R333.P01–P07 and CLAY.P01–P03: selected physical Wilson OS positivity, same reconstruction/Hamiltonian time generator and strictly positive dimensionful gap surviving both limits, locality/nontriviality/full compact-simple-group Clay scope.
+- [ ] TRUST.K01–K03: exact-branch `agda --safe` compilation for finite roots, whole physical/TOE compile with strict imported-axiom accounting, pinned independent referee receipts. Historical `RealAnalysisAxioms` and `--safe` labels do NOT clear this.
+- [x] Keep TSVF/KK child PR #1460 as downstream compatibility/negative-control work only; no reverse imports into parent #1444.
+
 ## 2026-11-03 — YM R443 native C3 and R445 physical blocked-lattice max-cut (PR #1444)
 
 **Docs → TODO → code → changelog synchronization.** Parent #1440 is the Route-S R320/R333 consumer; #1444 is the physical four-dimensional Yang–Mills construction; #1460 is a downstream TSFV/history/KK consistency and same-clock comparison only. The 2014/2017 TSVF macroscopic-robustness proposal, branch-reversal and operational time arrows **do not** provide the Osterwalder–Schrader (OS) temporal reflection, a positive Yang–Mills transfer matrix, a physical four-dimensional continuum, or an OS Hamiltonian gap by themselves.
