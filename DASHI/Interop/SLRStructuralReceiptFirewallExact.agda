@@ -147,10 +147,6 @@ postgresOwner = PG.canonicalPostgresWorldPersistenceBoundary
 fleetOwner : Set
 fleetOwner = Fleet.SlotPartition
 
-commitBoundOwner : ∀ {c₁ c₂} →
-  {A : Set} → A → A
-commitBoundOwner _ = λ x → x
-
 productionOwner : Roadmap.ProductionGoldenSplit
 productionOwner = Roadmap.canonicalProductionGoldenSplit
 
