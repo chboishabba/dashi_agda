@@ -40,12 +40,15 @@ import DASHI.Quantum.TSVF2017QuantitativeRateExact as TSVF2017Rate
 import DASHI.Quantum.TSVF2017HeterogeneousEnvironmentABLExact as TSVFHeteroABL
 import DASHI.Quantum.TSVF2017HeterogeneousRateExact as TSVFHeteroRate
 import DASHI.Quantum.TSVF2017ControlledPointerRecordUnitaryExact as TSVFControlled
+import DASHI.Quantum.TSVF2017CorrelatedEnvironmentMarginalNoGoExact as TSVFBellNoGo
 import DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact as TSVFOSClock
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as SUNVariableGaugeHaar
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as SUNBondCodec
+import DASHI.Physics.YangMills.YMClayNativeCyclicFinIsoSafeExact as SUNCyclicFin
+import DASHI.Physics.YangMills.YMClayFiniteNativeBondReindexingSafeExact as SUNNativeReindex
 import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as SUNConstructedGauge
 import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact as SUNFiniteSafe
 
@@ -224,6 +227,21 @@ open TSVFControlled public using
   ; threeFourPulseEmitsOriginalWrongQubit
   ; threeFourPulseOverlap
   ; threeFourPulseBornNineTwentyFifths
+  )
+-- P01 rigorous correlated-state nonpromotion: two Bell sectors with the
+-- same COMPLETE local reduced-density matrices but zero global overlap.
+-- This closes the logical loophole "local marginals imply tensor product".
+open TSVFBellNoGo public using
+  ( firstRightIsIdentity
+  ; firstWrongIsIdentity
+  ; secondRightIsIdentity
+  ; secondWrongIsIdentity
+  ; sameFullLocalReductions
+  ; bothNormSquaresAreTwo
+  ; twoBellStatesGloballyOrthogonal
+  ; globalBornIsZero
+  ; bellStatesDistinct
+  ; noLocalMarginalDecoder
   )
 open TSVFOSClock public using
   ( observerOSClockAllFiniteTimes
@@ -1443,6 +1461,19 @@ open SUNCanonicalWilsonWeld public using
   ; nativeSixAtSiteIsCanonicalSUNWilsonAction)
 
 
+-- R445 native finite site/bond coordinate owners synced from YM PR #1444.
+-- The constructed path-holonomy gauge bridge also depends on legacy
+-- non-safe source modules; it stays in its OWN non-Golden source file and
+-- is not falsely imported as a transitive safe theorem here.
+open SUNCyclicFin public using (cyclicRoundtrip; finRoundtrip)
+open SUNNativeReindex public using
+  ( reindexAt
+  ; reindexIdentity
+  ; reindexCompose
+  ; reindexInverseLeft
+  ; reindexInverseRight
+  ; reindexOrderThree
+  )
 -- Variable-n original periodic SUN Wilson source: n genuinely changes the
 -- four-torus, unlike a beta-only sequence on the fixed side-four source.
 -- All-n local gauge invariance and n=3 source matching are proof terms,
