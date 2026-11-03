@@ -1,5 +1,9 @@
 # Magnetoreception: Thought Emporium (2020) × avian mechanism owners (2019–2026)
 
+## 3 Nov 2026: actual source-byte parsing / parity evidence
+
+The original creator's 18,278-byte GenBank file was reproduced byte-identically from GitHub and independently matched by Git blob SHA `0578ad167666789fbfd3faa849a455c25097b90c`. A local Biopython 1.86 prototype parsed all 11,214 DNA bases and all 22 features; the independent feature type, coordinates, strand/compound order, labels and qualifier comparison reported **0 mismatches**. The source-reopenable candidate graph contains 22 statements and 30 unresolved original-annotation/external-identity holds. See `data/ThoughtEmporiumMagnetoreceptionLocalExecutionReceipt.json`. This verifies the source inventory, **not biological function, a UniProt same-object match or the exact GitHub branch's Agda/pytest acceptance**.
+
 ## Source attribution and version
 
 - **Provided transcript:** The Thought Emporium, **“Genetic Modification To Sense Magnetic Fields – Whose Gene #11”**, livestream of **17 June 2020**, presenter/creator credited as **The Thought Emporium**. The user-supplied plain-text transcript comprises **2,853 lines**; its locally inspected SHA-256 is `59388d04a5e7baa3465f84bcf25d71830e9e5d61c3ebc011d7c8ca05fda758c8`. This digest identifies the **uploaded transcript**, not an independently authenticated YouTube archive or the video's master audio.
