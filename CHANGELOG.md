@@ -1,3 +1,8 @@
+
+
+### 2026-11-03 — YM all-cutoff finite product-Haar bridge (source-written)
+
+Added `YMClaySUNVariablePeriodicProductHaarExact.agda` to the canonical Balaban TOE import graph. It reuses the existing original variable-periodic SU(N) Wilson-Gibbs family, one-link finite product-Haar/Fubini, ordered integration, and strict positivity to derive each finite partition's positivity and physical cylinder integration laws, without a separate all-link integration axiom. Selected native decoder, actual compact Haar, R124 metric source, changing-cutoff uniform bounds, CMP116 source and same-H OS continuum gap remain OPEN. No Agda kernel/CI verification; no Clay promotion. See the Yang–Mills roadmap and exact source ledger.
 ## 2026-11-03 — original native bond setoid/variable-cutoff Wilson and Bishop matrix ReTr
 
 - After explicit functional-extensionality, Bishop and original periodic enum source searches, added `YMClaySUNNativeWilsonBondPointwiseExact` and `YMClaySUNVariablePeriodicBondPointwiseExact`: actual Wilson signed path, plaquettes, all-site six-plane action and Gibbs density respect pointwise original bond equality, including every finite cutoff n. No arbitrary function equality postulated.
