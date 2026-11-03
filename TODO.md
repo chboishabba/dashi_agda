@@ -1,3 +1,10 @@
+### 2026-11-03 P0 complex gamma follow-on (original owner reuse)
+- [x] Reuse original CayleyDicksonRationalComplexQuaternionExact RationalComplex complex multiplication/conjugation/norm and multiplicative norm; original module now declares --safe after a local no-postulate audit, with exact-head Agda still pending.
+- [x] Source-write TSVFComplexGammaProductBornExact: arbitrary finite *complex* gamma_j amplitude products have Born norm squared equal to the product of each norm squared; conjugating every gamma_j or inserting an i phase preserves combined Born weight. Root BalabanRGTOERegression exports source theorem terms.
+- [x] Independent exact rational-complex Python reference passed 10,000 finite complex gamma lists and conjugation/phase controls; GitHub script committed, its own exact-head execution pending.
+- [ ] Construct the literal 2017 source gamma_j as selected environmental branch-state overlaps and compare the original Eq.(25) complex conventions to actual postselected projector probabilities. Cannot relabel finite nonnegative Gamma weights as physical complex amplitudes.
+- [ ] Physically inhabit full complex Hilbert/OS same-clock and the R443/R445/R320/R333 4D YM source; no mass-gap, retrocausal signaling or multiverse promotion.
+
 ### 2026-11-03 P0 max-cut payment — ORIGINAL admissible histories → ORIGINAL quantum TSVF ABL → true finite tensor overlap
 - [x] Explicitly reuse BidirectionallyAdmissibleHistoryFibreExact/admissibleFromBoth, TwoBoundarySystem, and the ORIGINAL DASHI.Quantum.TSVF QuantumSurface/transitionAmplitude/transitionWeight/ABLContext/ablProbability. The former is a logical two-sided history predicate, NOT an automatically nonzero Hilbert amplitude.
 - [x] Declare --safe locally on the original Bidi/TwoBoundary/TSVF modules after no-local-postulate inspection, preserving original source owners; **transitive Agda kernel trust pending**.
