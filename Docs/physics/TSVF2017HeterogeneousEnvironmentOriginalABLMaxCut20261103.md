@@ -16,6 +16,10 @@ This is a continuation of the 186-lemma P00--P11 `Emergent31QuantumYMKKExactLemm
 
 All three are imported/re-exported by `DASHI.Unified.BalabanRGTOERegression` except the script, which is an external checker.
 
+4. [TSVF2017ControlledPointerRecordUnitaryExact.agda](../../DASHI/Quantum/TSVF2017ControlledPointerRecordUnitaryExact.agda) goes beyond supplying record labels. It constructs a bona fide complex-linear controlled rotation on the four-complex-coordinate pointer/environment direct-sum carrier, proves preservation of total Born norm for **every** state from a derived polynomial identity and certified rational circle law, **emits the site records by applying that pulse to a common prepared vacuum**, and uses those emitted sites in the ORIGINAL Q.ablProbability. The exact 3/5--4/5 rational rotation produces the same nonzero site overlap 3/5 and Born weight 9/25 as the predecessor homogeneous proof. Source-written; still not an experimental device, physical interacting many-body Hilbert limit or sourced future boundary. Independent equivalent exact-Fraction tests passed 20,000 four-complex-coordinate norm identities plus the 3/5 and 9/25 emission fixtures. The module is re-exported from the Golden regression root.
+
+
+
 ## Important physical boundaries and falsification
 
 - **Independence is a material premise:** the complex overlap factorizes only on a selected tensor-*product* environment. An entangled or correlated source cannot be replaced by a list of local marginal overlaps. Exact negative control: the two normalized coherent states `(3|00>+4|11>)/5` and `(3|00>-4|11>)/5` have the same one-site diagonal reduced densities, while global Born overlap is `49/625`, not `1`. The actual apparatus must establish the needed product, cluster, or quantitatively controlled approximation hypothesis.
