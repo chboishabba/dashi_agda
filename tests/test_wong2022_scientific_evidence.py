@@ -181,3 +181,39 @@ def test_patent_claim_graph_does_not_implicitly_validate_legal_defect():
         "legalDefectConcludedIsFalse" in failure
         for failure in inspect_source_bundle(bundle)
     )
+
+
+def test_2023_yeast_patent_is_attributed_separately_from_2022_paper():
+    from scripts.check_wong2022_scientific_evidence import PATENT_ATLAS
+
+    bundle = load_source_bundle(ROOT)
+    bundle[PATENT_ATLAS] = bundle[PATENT_ATLAS].replace(
+        "WO2023096577A2", "unlinked_patent"
+    )
+    assert any(
+        "WO2023096577A2" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
+    bundle = load_source_bundle(ROOT)
+    bundle[PATENT_ATLAS] = bundle[PATENT_ATLAS].replace(
+        "exactPatentInventorSetEquals2022AuthorSetIsFalse",
+        "inventors_conflated_with_research_authors"
+    )
+    assert any(
+        "exactPatentInventorSetEquals2022AuthorSetIsFalse" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
+
+
+def test_2023_patent_to_2022_article_is_not_silent_claim_transport():
+    from scripts.check_wong2022_scientific_evidence import PATENT_GOLDEN
+
+    bundle = load_source_bundle(ROOT)
+    bundle[PATENT_GOLDEN] = bundle[PATENT_GOLDEN].replace(
+        "laterPatentToYeastStudyTransportUnpaid",
+        "laterPatentProofAutomaticallyTransferred",
+    )
+    assert any(
+        "laterPatentToYeastStudyTransportUnpaid" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
