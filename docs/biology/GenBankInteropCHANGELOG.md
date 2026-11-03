@@ -12,6 +12,7 @@
 - scripts/genbank_readonly_ingest.py: reusable read-only sequence-free GenBank AST report and candidate graph.
 - scripts/check_genbank_source_inventory.py: independent original Git-blob, coordinate/strand, feature and qualifier parity checks.
 - scripts/genbank_ontology_review.py: candidate-only source reopening and unresolved external protein/ontology identity worklist.
+- scripts/genbank_magnetoreception_crosswalk.py: strict original-source-parity-gated candidate feature-to-2019 vestibular hypothesis link; CRY4/hepatic only contextual.
 - DASHI/Codec/GenBankLocationFiniteCore.agda: Golden generic coordinate/start/strand proof terms.
 - DASHI/Biology/GenBankInterpretationInteropExact.agda: existing DNA, protein, Wikidata/PNF and avian owner bridge.
 - Imported both Agda modules into Codec/Biology/TOE roots; added synthetic regression tests and a source inventory.
