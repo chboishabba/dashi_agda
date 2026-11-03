@@ -212,3 +212,5 @@ monitor surface.
 - Attached new source owner to `EverythingTOESymmetryResolved369.agda`, `Unifier.agda`, and `Unified/Everything.agda`.
 - Added exact theorem-owner audit `Docs/roadmaps/BishopK04dK05SourceNativeMaxCut20261103.md`; synchronized canonical remaining-lemma register and TODO.
 - **Evidence:** source-written and GitHub-committed, not Agda-kernel-checked. Full completion is still blocked by the canonical native exp/log inverse at Nat successors, mixed signed-factorial imaginary exponential Cauchy product, real finite-term/limit zeta continuity with original same-object identification, and independent trigonometric π characterization. The previously separated Pythagorean proof is a *consumer* of the mixed product, not a third gate.
+
+Additional K05 source theorem outputs: `round11SineAtTwoPi` and `round11CosineAtTwoPi` transport the existing Round11 origin values through the new period. They remain conditional and kernel-pending.
