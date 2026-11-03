@@ -34,6 +34,10 @@ import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as T
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
 import DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact as TSVFQubit
 import DASHI.Quantum.TSVFComplexGammaProductBornExact as TSVFGamma
+import DASHI.Quantum.TSVF2017ComplexEnvironmentRobustnessExact as TSVF2017Env
+import DASHI.Quantum.TSVF2017OriginalComplexABLSelectedExact as TSVF2017ABL
+import DASHI.Quantum.TSVF2017QuantitativeRateExact as TSVF2017Rate
+import DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact as TSVFOSClock
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
@@ -138,6 +142,52 @@ open TSVFOverlap public using
   )
 -- Exact complex gamma amplitude/Born factor product using the original
 -- rational Cayley-Dickson complex owner. Physical 2017 Eq25 source OPEN.
+-- P01 selected original complex TSVF/ABL and P07 physical same-H OS core.
+-- The all-k finite theorems and Eq.25 phase falsifier are source-written,
+-- NOT a physical 2017 many-body macro reversal, OS spectrum or Clay proof.
+open TSVF2017Env public using
+  ( complexPowerBornIsBornPower
+  ; environmentOverlapIsProductRate
+  ; rightBornIsComplexGammaWeight
+  ; wrongBornExact2017Factorization
+  ; rightWrongBornRatioCross
+  ; complexBornNonnegative
+  ; rightBornNonnegative
+  ; wrongBornNonnegative
+  ; totalBornNonnegative
+  ; selectedNumeratorsSumToSameTotal
+  ; imaginaryAndUnitGammaHaveSameBornWeight
+  ; imaginaryGammaIsNotUnitComplex
+  )
+open TSVF2017ABL public using
+  ( projectorsComplete
+  ; rightAfterWrongZero
+  ; wrongAfterRightZero
+  ; rightOriginalTransitionAmplitude
+  ; wrongOriginalTransitionAmplitude
+  ; originalABLTotalMatchesBornSum
+  ; positiveSelectedComplexABL
+  ; selectedOriginalABLContext
+  ; selectedOriginalABLNormalizes
+  ; selectedOriginalABLWrongIsFactorizedGammaOverlap
+  ; actualComplexSelectedBidiSource
+  ; originalAdmissibleRightAmplitudeIsComplexSource
+  ; originalAdmissibleWrongAmplitudeIsComplexSource
+  )
+open TSVF2017Rate public using
+  ( doublingRightVsWrongForAllK
+  ; weightedDoublingBound
+  ; wrongProbabilityExponentialDenominatorBound
+  ; adversarialNoGammaControl
+  )
+open TSVFOSClock public using
+  ( observerOSClockAllFiniteTimes
+  ; observerOSAllFiniteReadouts
+  ; selectedOSClockHamiltonian
+  ; selectedTransferIsOfExactlyReconstructedH
+  ; sameClockPhysicalMetricHas31Signature
+  ; identityEmbeddingCannotIntertwineWrongOSStep
+  )
 open TSVFGamma public using
   ( complexGammaBornWeightIsNormOfProduct
   ; complexConjugateBornNormInvariant
