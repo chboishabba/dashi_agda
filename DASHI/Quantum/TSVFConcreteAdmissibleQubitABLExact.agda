@@ -299,6 +299,41 @@ admissibleWrongIsOriginalABLProjector :
   ≡ Q.ProjectiveMeasurement.projector finiteProjectiveMeasurement selectedWrong
 admissibleWrongIsOriginalABLProjector k = refl
 
+-- EXACT SAME-OBJECT COMMUTING CROSS: the selected ABL Born masses
+-- and the independently computed *tensor environment* norm/overlap
+-- are related by one rational squared-overlap equality. This is not a
+-- parameter "matchedWeight" that assumes the desired result.
+selectedABLMatchesActualTensorOverlap :
+  (k : Nat) →
+  numerator (finiteABLWrong k)
+    * (Overlap.tensorDot
+        (Overlap.replicate Overlap.epsRight k)
+        (Overlap.replicate Overlap.epsRight k)
+      * Overlap.tensorDot
+        (Overlap.replicate Overlap.epsWrong k)
+        (Overlap.replicate Overlap.epsWrong k))
+  ≡
+  numerator (finiteABLRight k)
+    * (Overlap.tensorDot
+        (Overlap.replicate Overlap.epsRight k)
+        (Overlap.replicate Overlap.epsWrong k)
+      * Overlap.tensorDot
+        (Overlap.replicate Overlap.epsRight k)
+        (Overlap.replicate Overlap.epsWrong k))
+selectedABLMatchesActualTensorOverlap k
+  rewrite wrongOriginalABLNumerator k
+        | rightOriginalABLNumerator k =
+  trans
+    (sym (Overlap.actualTensorSquaredOverlapIsNineOverTwentyFivePower k))
+    (ℕₚ.*-comm
+      (Overlap.tensorDot
+        (Overlap.replicate Overlap.epsRight k)
+        (Overlap.replicate Overlap.epsWrong k)
+       * Overlap.tensorDot
+        (Overlap.replicate Overlap.epsRight k)
+        (Overlap.replicate Overlap.epsWrong k))
+      (Overlap.rightRaw k))
+
 -- The actual same selected two-boundary ABL model has right/left odds
 -- 25^k : 9^k from k independent surviving environment factors.
 -- It never asserts that every jointly admissible history has nonzero
