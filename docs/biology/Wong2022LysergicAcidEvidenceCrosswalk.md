@@ -142,3 +142,29 @@ The third Golden module `DASHI.Biology.LysergicPatentClaimGraphExact` uses only 
 This is a potentially important source-text anomaly: Google Patents presents claim 28 as depending on itself. It might arise in the filed claim, an amendment, a typographical mistake, or the HTML transcription. `originalClaimFileCompared = false` and `legalDefectConcluded = false` stay recorded. Do not infer invalidity, design-around, or any production method from the anomaly.
 
 The exact-head checker now covers three isolated/new Golden modules (Wong finite core, prior-art finite core, patent claim graph) and all corresponding non-Golden attributed adapters. The negative regressions detect unintended removal of the self-reference or assertion of a legal conclusion. Agda execution and exact official claim-file authentication remain open.
+
+
+## Fourth source: Wong-associated 2023 patent family (2021 priority)
+
+An additional patent source links the 2014–2015 Robinson/Panaccione family to the later Wong yeast paper:
+
+- **International patent:** [WO2023096577A2 — Production of D-lysergic acid](https://patents.google.com/patent/WO2023096577A2/en). Filed as **PCT/SG2022/050840** on **2022-11-18**; claims **2021-11-26** priority; WO A2 publication **2023-06-01**. Google Patents lists the original applicants as **National University of Singapore** and **Imperial College Innovations Ltd**. The associated patent record cites the earlier West Virginia family (EP3155093A4).
+- **Six listed inventors:** Wei Jie Garrett Wong, Li Rong Lim, Maybelle Darlene Kho Go, Wen Shan Yew, Paul S. Freemont and David John Bell. The 2022 Nature Communications research article has **seven authors**, including Yong Quan Tan, who is **not listed as an inventor** on WO2023096577A2. **Do not equate patent inventorship and academic authorship.**
+- **Date ordering:** the 2023 patent's claimed priority (**2021-11-26**) predates the public 2022 scientific article (**2022-02-07**), though its international A2 publication (**2023-06-01**) postdates the article. Priority dates and public disclosures are different chronology coordinates.
+- **Status ceiling:** Google Patents labels this WO application **Ceased** and individually lists several national-family applications (including US, EP, AU, CA, CN and JP) as **Pending**. These are indexed database observations, not an official up-to-date jurisdictional legal opinion; a WO label cannot discharge national family status or freedom to operate.
+
+**Formal owner:** `DASHI.Biology.LysergicPriorArtAttributedCrosswalkExact` now retains `wongAssociatedPatent2023`, a four-source attributed atlas, `yeastPatentFamilyLineageReceipt`, `laterPatentWOStatusAsDisplayed` and explicit non-promotion. The isolated `LysergicPriorArtFiniteCore` also distinguishes `yeastPatentPublication2023` from `yeastArticle2022` and proves that the source-only patent claim type cannot be transported to the research-article claim type.
+
+**Resulting source graph (four distinct evidence objects):**
+
+`Robinson–Panaccione 2014 article` ↔ `WO2015195535A2 (2015 WO publication; 2014 priority)` → *cited prior-art patent family* → `WO2023096577A2 (2023 WO publication; 2021 priority)` ↔ `Wong et al. 2022 journal article`.
+
+These arrows encode **source acknowledgments, inventor overlap and bibliographic/patent-family citation**, not a validated scientific derivation or a legal finding of patent priority, infringement, novelty or inventor entitlement.
+
+**New source-specific remaining gates:**
+
+- **PA23-01:** official original 2021 priority and 2022 filed 2023 published patent text; verify exact source identities and revisions.
+- **PA23-02:** separate six patent inventors from seven article authors and verify any assignment/license facts independently if legally needed.
+- **PA23-03:** perform a genuinely reviewed claim comparison at host/system/chemical-evidence level; patent claims do not replace separate science.
+- **PA23-04:** independently verify national-family legal status from the official registers, instead of assigning blanket status from WO metadata.
+- **PA23-05:** run the expanded exact-head Golden + attributed Agda checker and the DASHI-only Python negative tests. No SensibLaw integration is required.
