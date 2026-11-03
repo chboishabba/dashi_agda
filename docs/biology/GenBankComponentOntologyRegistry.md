@@ -121,7 +121,7 @@ classification document.
 
 ## Verification and remaining proof cut
 
-- Local synthetic registry classifier and negative tests: **16 passed**.
+- Local synthetic registry classifier and negative tests: **17 passed**.
 - Original-file type/count/qualifier inspection: source read from original
   GitHub artifacts. These counts are **not** execution of the new registry
   against their byte-identical `.gb` files.
@@ -135,3 +135,5 @@ classification document.
 **Next exact max-cut:** run exact-head Python regression, run the classifier
 on the original files with blob parity, check Golden Agda, and implement a
 native read-only ITIR/SLR consumer handshake only after validating its contract.
+
+The registry's `parser_location_rendering` is the **Biopython-parsed** view, not a claim of byte-for-byte source location syntax. The original GenBank source is reopened by its raw digest and original file reference; the normalized location AST retains exact coordinate, order and strand meanings.
