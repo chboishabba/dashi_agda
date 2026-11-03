@@ -1,3 +1,5 @@
+**Additional exact source-written tree-level coupling seam:** `inverseCoupling54`, `inverseCoupling43`, `inverseCoupling32` and `treeLevelCouplingTowerCoheres` prove the *algebraic* coherence of `lambda_2 = L_3 L_4 L_5 lambda_5`, where `lambda_d=1/g_d^2`, on the rational zero-mode bookkeeping carrier. These are identities under assumed tree-level circle matching, **not** a nonperturbative threshold calculation, positivity/units receipt or 5D UV completion. Exact-head Agda kernel checking remains pending.
+
 # The strongest DASHI five-sector YM / Lorentz / KK / gravity BIDI steelman
 **Date:** 2026-11-03. **Status:** candidate complete-theory specification + finite source-written Agda proof; physical continuum and Clay claims are NOT closed.
 
