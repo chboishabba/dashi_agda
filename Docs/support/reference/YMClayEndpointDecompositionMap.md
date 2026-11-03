@@ -1,3 +1,5 @@
+> **3 November 2026 exact-status update:** This document explains endpoint/decomposition distinctions. For the live PR #1444 theorem-by-theorem statuses and current max-cut, use [YMClayCurrentExactLemmaLedger20261103.md](../../roadmaps/YMClayCurrentExactLemmaLedger20261103.md). Canonical full submission count remains 219, frozen research count remains four physically open families. R443.F06 now reduces the all-vector C3 adjacent-swap proof to one original 1024-label Vec certificate (still not inhabited). GitHub source written is not Agda kernel acceptance. The #1460 TSFV/KK time-arrow work is downstream and does not prove YM OS positivity or the same-Hamiltonian mass gap.
+
 # Yang–Mills Clay Endpoint / Decomposition / Producer Map
 
 Status: repository navigation and proof-search reference, not theorem authority.
