@@ -1,5 +1,12 @@
 
 
+### 2026-11-03 — R443/R445 every-n native gauge and Haar numerator theorem
+
+Added `YMClaySUNVariablePeriodicGaugeHaarExact.agda` atop the new variable-size product-Haar source. It reuses `YMClaySUNVariablePeriodicGibbsGaugeExact.periodicSUNGibbsDensityGaugeInvariant`, `YMClaySUNProductHaarGaugeFromOneLinkExact.productHaarNativeGaugeInvariant` and `YMClaySUNVariablePeriodicBondPointwiseExact.variableGibbsDensityPointwise`. The owner proves `periodicProductGaugeHaarInvariant`, `periodicGaugeNumeratorInvariant`, and `periodicGaugeNormalizedExpectationInvariant` for every actual periodic cutoff and every explicitly pointwise-congruent cylinder observable. It derives *whole finite product integral* local gauge invariance from one-link left/right invariance without a second independent full-lattice Haar axiom.
+
+`OriginalPeriodicGaugeVectorNaturality.gaugeDecodeAt` remains a typed physical input **at each original positive bond**. The native vector decoder, gauge factors, measurable one-link continuous Haar and same carrier scalar transport are not yet inhabited. This result does **not** establish exact varying-cutoff cylinder refinement, CMP119 E/R/B/V selected metric insertions, uniform R445 moments, physical CMP116 R320 bounds, or R333 continuum OS spectral positivity. Preserve the Golden Agda source-written / kernel-pending boundary.
+
+
 ### 2026-11-03 — original variable-periodic Wilson–Gibbs product-Haar finite cut
 
 New source-written golden owner: `DASHI/Physics/YangMills/YMClaySUNVariablePeriodicProductHaarExact.agda` (on YM PR #1444). Unlike the earlier fixed side-four family, this module is parameterized by **every actual periodic lattice size** `n` and reuses the original `YMClaySUNVariablePeriodicGibbsGaugeExact` six-positive-plane action and Gibbs density. It constructs the finite physical measure from `YMClayFiniteProductHaarPermutationExact.productIntegral` of **one** link source, without an arbitrary independent full-field integral at each n.
