@@ -21,7 +21,7 @@
   replicon-context owners; no postulates, unsolved metas or terminating
   pragmas in authored source. Imported via Codec and Everything roots and
   existing Biology GenBank interpretation adapter.
-- Added `tests/test_genbank_component_registry.py`, **16 local synthetic
+- Added `tests/test_genbank_component_registry.py`, **17 local synthetic
   pytest cases passed**, including explicit mobile types, misc/repeat
   nonpromotion, independent topology/context, conflicting source qualifiers,
   exact compound/reverse locations, integrity/authority failures, and
@@ -42,10 +42,12 @@
 ### Verification ceiling
 
 Source-writing and exact GitHub file readback are **not Agda kernel
-acceptance**. The local 16-test suite was executed on source-equivalent
+acceptance**. The local 17-test suite was executed on source-equivalent
 Python (confirmed by codepoint hash). The exact checked-out GitHub PR
 pytest run, new fixture test execution, original-byte invocation of
 this new taxonomy, and native ITIR/SLR recipient-ABI conformance remain
 outstanding. The Golden core was not checked with an Agda executable.
 The registry does not identify experimental function, select genetic
 elements for engineering, output DNA bases, or change Wikidata.
+
+- Post-write regression: 17 local tests passed, including withheld edit-style source labels. Renamed `original_location_rendering` to `parser_location_rendering` to distinguish normalization from raw original GenBank text. Original source bytes remain referenced, not rewritten.
