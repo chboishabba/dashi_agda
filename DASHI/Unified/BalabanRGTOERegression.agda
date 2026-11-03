@@ -948,6 +948,7 @@ import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact 
 import DASHI.Physics.YangMills.YMClayFiniteNativeBondReindexingSafeExact as SUNFiniteReindex
 import DASHI.Physics.YangMills.YMClayNativeSideFourC3VectorWeldExact as SUNNativeC3Vec
 import DASHI.Physics.YangMills.YMClaySUNConstructedNativeC3SetoidHaarExact as SUNNativeC3Haar
+import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateExact as SUNOneVectorC3
 import DASHI.Physics.YangMills.YMClayNativeCyclicFinIsoSafeExact as SUNNativeFinIso
 import DASHI.Physics.YangMills.YMClayNativeBlockedPeriodicBondWeldExact as SUNNativeBlockWeld
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
@@ -1300,10 +1301,22 @@ open SUNNativeC3Vec public using
   ; backwardForwardVector
   ; forwardVectorOrderThree)
 
+open SUNOneVectorC3 public using
+  (canonicalLabelVector
+  ; reconstructFromCanonicalLabels
+  ; permuteLinksMap
+  ; canonicalC3IsEncodedBondMap
+  ; nativeC3VectorMap
+  ; SingleVectorC3PermutationCertificate
+  ; singleVectorC3ImpliesAllVectors)
+
 open SUNNativeC3Haar public using
   (ExactC3AdjacentSwapWitness
   ; originalNativeC3SetoidCodec
-  ; originalNativeC3GibbsHaarInvariant)
+  ; originalNativeC3GibbsHaarInvariant
+  ; adjacentSwapFromOneVector
+  ; originalNativeC3SetoidCodecFromOneVector
+  ; originalNativeC3GibbsHaarInvariantFromOneVector)
 
 ------------------------------------------------------------------------
 -- R445: same-original-periodic-torus site and positive-bond block codec.
