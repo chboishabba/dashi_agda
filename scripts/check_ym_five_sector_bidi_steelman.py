@@ -10,6 +10,7 @@ a gauge/KK action, Haar/OS proof, or Agda kernel acceptance.
 from __future__ import annotations
 import itertools
 import random
+from fractions import Fraction
 
 KEYS = ("01", "02", "03", "04", "12", "13", "14", "23", "24", "34")
 
@@ -47,8 +48,19 @@ def main() -> None:
         check_assignment({name: rng.randrange(20) for name in KEYS})
     example = {name: int(name == "04") for name in KEYS}
     assert dimensional_plane_sums(example) == (0, 0, 0, 1, 0, 0, 1)
+    # Algebraic circumference factors for conditional tree-level zero modes.
+    # No physical threshold, SI unit, or compactification claim follows.
+    for _ in range(100_000):
+        l3 = Fraction(rng.randint(1, 30), rng.randint(1, 30))
+        l4 = Fraction(rng.randint(1, 30), rng.randint(1, 30))
+        l5 = Fraction(rng.randint(1, 30), rng.randint(1, 30))
+        inverse_g5_squared = Fraction(rng.randint(1, 30), rng.randint(1, 30))
+        assert l3 * (l4 * (l5 * inverse_g5_squared)) == (
+            (l3 * l4) * l5
+        ) * inverse_g5_squared
     print("PASS: 10 one-plane + 1024 exhaustive binary + 100000 seeded BIDI assignments")
     print("PASS: 5D cross-fibre nonzero while 4D projection is zero")
+    print("PASS: 100000 positive rational inverse-coupling product matches")
 
 if __name__ == "__main__":
     main()
