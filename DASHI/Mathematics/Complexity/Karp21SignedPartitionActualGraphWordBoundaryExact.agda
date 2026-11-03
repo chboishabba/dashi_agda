@@ -38,6 +38,9 @@ import DASHI.Mathematics.Complexity.Karp21MalformedWordTotalReductionExact as Ma
 import DASHI.Mathematics.Complexity.Karp21WeightedMaxCutFixedNoGraphExact as FixedNo
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Gamma
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as GraphWord
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
+open import Relation.Binary.PropositionalEquality using (refl)
+open import Data.Empty using (⊥; ⊥-elim)
 
 graphAccepts : N21.GraphInstance → Set
 graphAccepts graph =
@@ -92,31 +95,87 @@ e20SignedPartitionActualGraphIff parts =
 -- for many-one correctness is the actual graph-YES language iff.
 ------------------------------------------------------------------------
 
-record E20GraphWordBoundary : Set₁ where
+------------------------------------------------------------------------
+-- IMPORTANT: the original weighted graph type allows arbitrary
+-- duplicate and unsorted edges. The canonical Python format forbids
+-- them. Hence a ∀ graph encoder/decode equivalence is generally
+-- FALSE. Only the E20 transform IMAGE (complete sorted graph or
+-- fixed unit-YES graph) and the concrete fixed-NO malformed branch
+-- require faithfulness.
+--
+-- The actual encoder is now a DEFINITION, not a caller-supplied map.
+-- Only exact parser/YES equivalence on its two output families and
+-- the genuine machine cost remain to be proved.
+------------------------------------------------------------------------
+
+record E20ImageWordReceipts : Set₁ where
   field
-    encodeGraph : N21.GraphInstance → Word.BitWord
-    faithfulGraphWord :
-      (graph : N21.GraphInstance) →
-      PR.Iff (graphAccepts graph)
-        (PR.accepts GraphWord.concreteGraphWordLanguage (encodeGraph graph))
+    positiveTargetWordFaithful :
+      (target : Source.PositiveCutTarget) →
+      PR.Iff (Actual.ActualPositiveTargetAccepts target)
+        (PR.accepts GraphWord.concreteGraphWordLanguage
+          (Encode.encodeGraphWord (graphOfPositiveTarget target)))
 
-open E20GraphWordBoundary public
+    fixedNoWordRejects :
+      PR.accepts GraphWord.concreteGraphWordLanguage
+        (Encode.encodeGraphWord FixedNo.fixedNoGraphInstance) → ⊥
 
-module EncodedE20
-  (boundary : E20GraphWordBoundary) where
+open E20ImageWordReceipts public
+
+-- A smaller typed target family comprising exactly the output image
+-- of E20 together with its actual malformed-source NO word.
+data E20OutputMode : Set where
+  positiveTarget : Source.PositiveCutTarget → E20OutputMode
+  malformedFixedNo : E20OutputMode
+
+e20OutputAccepts : E20OutputMode → Set
+e20OutputAccepts (positiveTarget target) =
+  Actual.ActualPositiveTargetAccepts target
+e20OutputAccepts malformedFixedNo = ⊥
+
+e20OutputFromPartition : List ℤ → E20OutputMode
+e20OutputFromPartition parts =
+  positiveTarget (Source.totalPartitionToPositiveCut parts)
+
+e20OutputWord : E20OutputMode → Word.BitWord
+e20OutputWord (positiveTarget target) =
+  Encode.encodeGraphWord (graphOfPositiveTarget target)
+e20OutputWord malformedFixedNo =
+  Encode.encodeGraphWord FixedNo.fixedNoGraphInstance
+
+e20SourceOutputModeIff :
+  (parts : List ℤ) →
+  PR.Iff (Source.PartitionYES parts)
+    (e20OutputAccepts (e20OutputFromPartition parts))
+e20SourceOutputModeIff =
+  Actual.sourcePartitionActualPositiveGraphIff
+
+module EncodedE20 (receipts : E20ImageWordReceipts) where
+
+  outputWordFaithful :
+    (target : E20OutputMode) →
+    PR.Iff (e20OutputAccepts target)
+      (PR.accepts GraphWord.concreteGraphWordLanguage
+        (e20OutputWord target))
+  outputWordFaithful (positiveTarget target) =
+    positiveTargetWordFaithful receipts target
+  outputWordFaithful malformedFixedNo =
+    PR.iff
+      (λ ())
+      (λ accepted → fixedNoWordRejects receipts accepted)
 
   module Total =
     Malformed.TotalMalformedSource
       Gamma.decodePartitionWord
       Source.PartitionYES
-      graphAccepts
-      e20ActualGraphOfSignedPartition
-      FixedNo.fixedNoGraphInstance
-      FixedNo.fixedNoGraphInstanceRejects
-      (encodeGraph boundary)
+      e20OutputAccepts
+      e20OutputFromPartition
+      malformedFixedNo
+      (λ ())
+      e20OutputWord
       GraphWord.concreteGraphWordLanguage
-      e20SignedPartitionActualGraphIff
-      (faithfulGraphWord boundary)
+      e20SourceOutputModeIff
+      outputWordFaithful
 
   sourceLanguage : PR.Language Word.BitWord
   sourceLanguage = Total.sourceLanguage
@@ -124,7 +183,8 @@ module EncodedE20
   totalE20WordReduction : Word.BitWord → Word.BitWord
   totalE20WordReduction = Total.totalReduce
 
-  -- Includes all malformed source words, not only canonical PARTITION.
+  -- Includes actual malformed source words using the literal fixed-NO
+  -- encoded graph, not a flag, invented language or guessed witness.
   e20EncodedSignedPartitionDecisionIff :
     (word : Word.BitWord) →
     PR.Iff (PR.accepts sourceLanguage word)
@@ -133,8 +193,6 @@ module EncodedE20
   e20EncodedSignedPartitionDecisionIff =
     Total.totalMalformedReductionIff
 
-  -- Last machine-resource condition is named and explicit; this is not
-  -- a proof that graph output is polynomially bounded or runnable.
   e20EncodedPolynomialReductionFromClock :
     (cost : PR.PolynomialCostModel Word.BitWord) →
     PR.polynomialTimeMap cost totalE20WordReduction →
