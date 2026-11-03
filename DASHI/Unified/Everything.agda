@@ -1,4 +1,5 @@
 module DASHI.Unified.Everything where
+import DASHI.Interop.SLRNoPathFirewallExact
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
