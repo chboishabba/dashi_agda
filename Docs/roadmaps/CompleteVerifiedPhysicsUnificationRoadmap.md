@@ -1,3 +1,9 @@
+## 2026-11-03 future research supplement: the proposed physical (3,1) construction
+
+See [Emergent31QuantumYMKKExactLemmaRoadmap20261103](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md) for the **12-phase, 176-lemma** exact roadmap linking reversible two-boundary histories, operational causal (3,1) emergence, complex J/CCR/Stone/Schrödinger, actual gauge source and physical 4D SU(N) R443/R445/R320/R333, **same-clock OS Hamiltonian**, spacelike 5D KK EFT and lower 2D/3D source tests, with optional positive-G quantum stress/GR channels. It is a **speculative theorem/proof programme**, not a completed physics-unification claim; this document's earlier publication-scope and internal gate authority are unchanged.
+
+The strongest current structural wall is a genuinely selected physical source implementing both P02 clock/metric and P06 OS state, with a kernel-checked physical unitary comparison. The strongest independent Clay wall remains true 4D continuum R443/R445/R320/R333/H6 physical estimates. Newest #1444 finite Haar modules must be integrated into #1460 before they can be imported there.
+
 # Complete And Verified Physics Unification Roadmap
 
 This roadmap plans the path from the current DASHI physics-facing program to a
