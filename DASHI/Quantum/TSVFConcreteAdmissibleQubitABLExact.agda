@@ -34,6 +34,7 @@ module DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as ℕₚ
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
@@ -308,19 +309,45 @@ finiteABLWrongBornPositive k
   rewrite wrongOriginalABLNumerator k =
   Overlap.oneAtMostWrongPower k
 
--- Both boundary constraints genuinely admit BOTH measured histories in
--- this finite selected two-branch source. The original Bidi fibre owner
--- is instantiated, rather than being replaced by a new admissibility idea.
+-- NONTRIVIAL original two-boundary admissible fibre.
+-- The initial/final boundary pair is fixed; two histories are admitted
+-- but a third history is explicitly excluded. Admissibility is a proof,
+-- not the vacuous predicate all histories inhabit.
+data ThreeHistory : Set where
+  admittedRightHistory admittedWrongHistory excludedHistory : ThreeHistory
+
+data ActualJointAdmissible :
+  ⊤ → ⊤ → ThreeHistory → Set where
+  admittedRightProof : ActualJointAdmissible tt tt admittedRightHistory
+  admittedWrongProof : ActualJointAdmissible tt tt admittedWrongHistory
+
 jointAdmissibleHistoryFibre :
   Bidi.BidirectionallyAdmissibleHistoryFibre
 jointAdmissibleHistoryFibre = record
   { InitialBoundary = ⊤
   ; FinalBoundary = ⊤
-  ; History = TwoOutcome
-  ; admissibleFromBoth = λ _ _ _ → ⊤
+  ; History = ThreeHistory
+  ; admissibleFromBoth = ActualJointAdmissible
   ; fibreReading =
-      "Both branches satisfy both boundaries. Born amplitudes, not admissibility alone, determine their relative probabilities."
+      "One fixed pair of initial/final boundaries admits two selected histories and excludes one. Born weights and environmental overlap remain additional quantitative laws."
   }
+
+excludedCannotBeJointlyAdmissible :
+  Bidi.admissibleFromBoth
+    jointAdmissibleHistoryFibre tt tt excludedHistory → ⊥
+excludedCannotBeJointlyAdmissible ()
+
+-- This selects actual physical-outcome coordinate projectors for the two
+-- admissible histories and has no branch for the excluded third.
+admittedHistoryProjector :
+  (h : ThreeHistory) →
+  Bidi.admissibleFromBoth jointAdmissibleHistoryFibre tt tt h →
+  Overlap.QubitNumerator → Overlap.QubitNumerator
+admittedHistoryProjector admittedRightHistory admittedRightProof =
+  rightProjector
+admittedHistoryProjector admittedWrongHistory admittedWrongProof =
+  wrongProjector
+admittedHistoryProjector excludedHistory ()
 
 selectedJointTSVFSource :
   (k : Nat) →
@@ -329,11 +356,11 @@ selectedJointTSVFSource :
 selectedJointTSVFSource k = record
   { initial = tt
   ; final = tt
-  ; rightHistory = selectedRight
-  ; wrongHistory = selectedWrong
-  ; rightAllowed = tt
-  ; wrongAllowed = tt
-  ; projectorOf = λ h _ → selectedProjector h
+  ; rightHistory = admittedRightHistory
+  ; wrongHistory = admittedWrongHistory
+  ; rightAllowed = admittedRightProof
+  ; wrongAllowed = admittedWrongProof
+  ; projectorOf = admittedHistoryProjector
   }
 
 -- This verifies actual SAME-projector SAME-ensemble source transport.
