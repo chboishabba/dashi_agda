@@ -25,7 +25,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (tt)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
@@ -130,7 +130,7 @@ heterogeneousWrongBornFactorization gammas ss =
 -- postselected wrong amplitude is exactly zero.
 heterogeneousWrongBornNonnegative :
   (gammas : List C.RationalComplex) (ss : List EnvironmentSite) →
-  0ℚ Data.Rational.Base.≤ selectedWrongBorn gammas ss
+  0ℚ ≤ selectedWrongBorn gammas ss
 heterogeneousWrongBornNonnegative gammas ss =
   Env.complexBornNonnegative (selectedWrongAmplitude gammas ss)
 
