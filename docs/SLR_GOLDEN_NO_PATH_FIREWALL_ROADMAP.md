@@ -1,6 +1,6 @@
 # SLR Golden Agda No-Path Firewall — Roadmap
 
-Status: original seven-module focused local referee pass reported at 7d0be834. New structural receipt module and root changes await local Agda verification.
+Status: local referee reports focused structural firewall checks passed at b7b34516. Four new feature-set receipt families are source-written and await kernel verification.
 
 ## Objective and owners
 The golden source is `DASHI/Interop/SLRNoPathFirewallExact.agda`.
@@ -59,3 +59,22 @@ Outstanding work is explicit above. No runtime enforcement or kernel acceptance 
 - Runtime counterexamples reported by the local referee: SQLite and regex in `pnf_work_packet_provider.py`; SQLite in `governed_revival.py` and `formal_tools.py`; SQLite and LIKE in `latex_math_bridge.py`; missing adapter-health close; missing canonical SLR .env auto-loading. These are reported observations, not independently executed checks here.
 - No Python, Rust or ESD implementation files changed.
 - Remaining: same-object receipt decoding; source-backed 33-crate parity; kernel checks; Lean mirror; dispatch and DSN runtime enforcement.
+
+## Phase 3 feature-set parity — 2026-11-03
+- [x] Explicit safe headers on protected fleet and actor-critic Agda owners; duplicate fleet import removed.
+- [x] Added source-store deliberation, CFFI lifecycle, multi-parent revival, and macro expansion receipt families.
+- [x] Added 14 constructive contradiction eliminators for invalid feature-set receipt states.
+- [x] Linked the PostgreSQL and production-roadmap canonical owner values and reused the fleet slot partition type.
+- [ ] Add direct typed witness transport for actor-critic commit-bound non-transferability and reviewed-evidence reducer after checking their exact signatures.
+- [ ] Prove that actual runtime receipt decoding produces these fields. Boolean declarations alone do not certify runtime behavior.
+- [ ] Verify new module and all three TOE roots under the local Agda referee configuration.
+- [ ] Confirm the root manifest works with registered dependencies in a clean checkout.
+- [ ] Confirm Python/Rust feature parity against source and attach revision-bound receipts.
+- [ ] Mirror only accepted golden theorems into Lean4.
+
+### Referee receipt
+The user reports exit code 0, no errors or warnings for the structural and no-path modules at `b7b34516`.
+The new Phase 3 changes have not been independently type-checked in this session.
+
+### Changelog
+2026-11-03: Four feature-set receipts and fourteen structural rejection proofs added. No runtime implementation changed.
