@@ -26,6 +26,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Periodic
+import DASHI.Physics.YangMills.BalabanBlockedPeriodicLattice as Blocked
 import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact as Word
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Path
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as Coordinate
@@ -66,19 +68,19 @@ transportBackThere refl site = refl
 
 nativeStart :
   (M L n : Nat) (sameSide : suc n ≡ M * L) →
-  Block.BlockedCube4 M L → Path.Periodic.PeriodicBlock n
+  Blocked.BlockedCube4 M L → Periodic.PeriodicBlock n
 nativeStart M L n sameSide blocked =
   transportBack sameSide (Block.unblockNativeSite M L blocked)
 
 nativeBlock :
   (M L n : Nat) (sameSide : suc n ≡ M * L) →
-  Path.Periodic.PeriodicBlock n → Block.BlockedCube4 M L
+  Periodic.PeriodicBlock n → Blocked.BlockedCube4 M L
 nativeBlock M L n sameSide site =
   Block.blockNativeSite M L (transportThere sameSide site)
 
 nativeStartNativeBlock :
   ∀ M L n (sameSide : suc n ≡ M * L)
-    (site : Path.Periodic.PeriodicBlock n) →
+    (site : Periodic.PeriodicBlock n) →
   nativeStart M L n sameSide
     (nativeBlock M L n sameSide site) ≡ site
 nativeStartNativeBlock M L n sameSide site =
@@ -109,7 +111,7 @@ module _
   where
 
   BlockedSite : Set
-  BlockedSite = Block.BlockedCube4 M L
+  BlockedSite = Blocked.BlockedCube4 M L
 
   BlockedBond : Set
   BlockedBond = Block.BlockedPositiveBond M L
@@ -186,6 +188,24 @@ module _
   -- One-step check: the coarse holonomy for L=1 is literally the
   -- ORIGINAL native positive bond, not an unrelated endpoint proxy.
   -- General L retains the same path multiplication and orientation.
+
+-- A true L=1 regression: the chosen blocked path is the original
+-- positive bond itself, with the original field's SAME group value.
+nativeBlockedOneStepExactlyOriginal :
+  ∀ M n (sameSide : suc n ≡ M * 1)
+    {Value : Set} (group : Path.ExactLinkGroup Value)
+    (realization : Path.PeriodicBondGaugeRealization n Value group)
+    (bond : Block.BlockedPositiveBond M 1) →
+  nativeBlockedPathLink M 1 n sameSide group realization bond
+  ≡ Path.bondField realization
+      (Torus.pair
+        (nativeStart M 1 n sameSide (Torus.first bond))
+        (Torus.second bond))
+nativeBlockedOneStepExactlyOriginal
+    M n sameSide group realization (Torus.pair blocked axis) =
+  Path.identityRight group
+    (Path.bondField realization
+      (Torus.pair (nativeStart M 1 n sameSide blocked) axis))
 
 -- Chosen original Rational SU(2) witness: all group laws, oriented
 -- negative links and endpoint cancellation are constructed in prior owners.
