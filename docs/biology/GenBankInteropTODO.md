@@ -1,65 +1,109 @@
-# GenBank read-only source integration TODO — 2026-11-03
+# Canonical GenBank → Golden DNA codec → read-only ontology max-cut
 
-Owner: DASHI DNA codec × attributed biology × ITIR/SensibLaw candidate repair interop.
-Original source: Justin Atkin / The Thought Emporium. Parser: Biopython.
+Updated 2026-11-03. Source owner: Justin Atkin / The Thought Emporium
+for the original three published GenBank files; Biopython authors own the
+GenBank parser. DASHI existing DNA/Protein/Wikidata theorem owners remain
+canonical. No ESD edits, external ontology edits or operational DNA designs.
 
-## New executed original-source evidence (3 Nov 2026)
+## A. Source-verified and implementation-complete steps
 
-- [x] GB02-REAL local prototype: reconstructed exact original creator Git blob SHA, ran Biopython 1.86 on the original byte-identical file, verified 11,214 bases and all 22 feature/source-coordinate/qualifier signatures with zero mismatches.
-- [x] Candidate-only source projection: 22 statements and 30 source-reopenable identity/annotation review holds; 7 local synthetic pytest cases passed.
-- [ ] GB02-EXACT-HEAD: replay the newly committed GitHub branch's **exact** scripts and tests in its real checked-out runtime; local prototype success is not an exact-head receipt.
-- [ ] GB03-AGDA-KERNEL and GB04-SEMANTIC-FULL-ROUNDTRIP remain open.
-- [ ] GB07-native ITIR/SLR/Wikidata review ABI remains open (the candidate-only report is not native conformance).
-- See `docs/biology/data/ThoughtEmporiumMagnetoreceptionLocalExecutionReceipt.json` for SHA and acceptance evidence.
+- [x] GB01: pinned original magnetoreception creator Git blob SHA, upload
+  commit, CC BY-SA repository notice; raw-versus-normalized identities distinct.
+- [x] GB02-LOCAL: local Biopython 1.86 original magnetoreception byte
+  reconstruction/parse, 11,214 bases, 22/22 feature parity, zero reported
+  source geometry/qualifier mismatches. Local prototype, not exact repo head.
+- [x] GB02-GENERIC: read-only strict GenBank parser, nested exact spans,
+  origin-wrapping compound parts, strand and original ordered qualifiers.
+- [x] GB03-SOURCE: source-written Golden location and component taxonomy
+  owners. No postulates, unsolved metas or TERMINATING pragmas visible in
+  these authored source files; **Agda kernel has not run**.
+- [x] GB03-INDEX: source-written non-Golden all-length canonical DASHI Base
+  vector → existing ChemicalPair/ComplementPhase fibre → Base reconstruction
+  with finite lookup/encoding commutation lemmas.
+- [x] GB04-LOCAL: original magnetoreception Biopython parse→write→parse
+  preserved seven semantic checks. Original 18,278 bytes and normalized
+  serialization 18,377 bytes are intentionally NOT called byte-identical.
+- [x] GB04-MODEL: new Golden finite source-length bounded span,
+  source/in-memory coordinate normalization square, strand involution,
+  and ordered compound-location semantic double-reversal lemmas.
+- [x] GB04-REFERENCE: source-written Python mirror comparison against
+  Biopython 1.86; independent local test matched 2,000 toy feature cases,
+  including 1,471 mixed-strand cases, with zero mismatches. The correct
+  Biopython rule reverses compound parts only if **all** child strands
+  are unspecified; otherwise part order is retained.
+- [x] GB04-ORIGINAL-METADATA: independent source-text coordinate and
+  double-reversal audit of all 95 features across the three original
+  creator files; original Git blob identities and receipt committed.
+  This does not execute the new Python geometry checker on source bytes.
+- [x] GB05-LEDGER: source feature index 8 labeled cacna1d is a
+  misc_feature, NOT one of the two annotated CDS; Nimpf relation is a
+  candidate creator-context link, not empirical protein evidence.
+- [x] GB07-CLASS: generic INSDC key classifier, separate mobile/repeat
+  gene/CDS/regulatory types and topology/replicon source claims; original
+  three-file source inspection reports 22, 53 and 20 feature annotations.
+- [x] GB07-SYNTHETIC: 17 locally passing component taxonomy tests, with
+  negative cases; source-equivalent GitHub readback checked.
+- [x] GB07-ITIR-INPUT: actual ITIR-suite domain_tools.wikidata_review_packet
+  **input contract** adapter source-written, with a call to native function
+  conditional on real ITIR package availability. This is not an executed
+  native acceptance receipt.
 
-## Source-written completion
+## B. Exact remaining acceptance/payment obligations
 
-- [x] Original GitHub GenBank Git blob, commit, attribution and CC BY-SA license pinned.
-- [x] Original file metadata and 22 feature annotations source-inspected without copying bases.
-- [x] Reuse DASHI.Codec.DNAFirstFormalism and DNACarrierFibre; no second base alphabet.
-- [x] Reusable strict read-only Biopython parser: exact positions, join/order and reverse strand, circular topology, source and semantic digest.
-- [x] Independent Git-blob/feature-location/qualifier-order parity checker implemented.
-- [x] Golden Agda GenBankLocationFiniteCore source-written with coordinate reconstruction and strand involution.
-- [x] Non-Golden adapter to DNA, contextual translation, situated protein, avian PNF, Wikidata repair/reopening owners.
-- [x] Candidate-only source-reopenable ontology and protein annotation review worklist implemented.
-- [x] Source-specific creator-file feature-index-8 -> Nimpf vestibular hypothesis crosswalk is source-written and requires full Git-blob parity before emitting candidate links.
-- [x] Source inspection notes gene-like cacna1d source label is misc_feature, NOT one of two CDS.
-- [x] Synthetic tests, read-only boundaries and canonical import roots updated.
+- [ ] GB08-PYTEST: run the PR's **exact current head**, all focused
+  read-only parser, feature geometry, component, source fixture,
+  ontology and native-adapter tests in a real repo checkout. Local
+  synthetic/prototype execution is not a substitute.
+- [ ] GB03-KERNEL: run agda --safe on Golden location, component and
+  feature geometry modules, and check non-Golden DNA-index/biology adapters
+  and canonical roots with the repository's actual stdlib/toolchain.
+  Preserve 0 postulates, 0 unsolved metas, 0 TERMINATING pragmas.
+- [ ] GB04-REFINEMENT: formally connect actual serialized GenBank parser
+  text and arbitrary-length n-ary Biopython compound location ASTs to
+  Golden binary semantic model (including exact child strand/order policy).
+  The present Golden theorem proves the model, not universal parser code.
+- [ ] GB04-REAL-RC: run committed `check_genbank_feature_geometry_square.py`
+  on exact original creator bytes for all three records. Independent
+  original source-string audit is not that same-object execution.
+- [ ] GB05-TRANSCRIPT: align each relevant original video timestamp
+  with the later source artifact's feature labels; locate changes and
+  divergences without manufacturing biological/protein equivalence.
+- [ ] GB06-PROTEIN: independently source-match gene/product annotations to
+  accession, revision, organism, isoform, reading frame, transcript and
+  genetic code before same-object protein classification.
+- [ ] GB07-ITIR-NATIVE: execute the native ITIR-suite
+  itir_mcp.domain_tools.wikidata_review_packet against the exact
+  generated candidate input, verify version, source reopening and
+  non-promotion, and test any additional native SLR/PNF persistence
+  handshake in a read-only fixture. No public Wikidata edits.
+- [ ] GB07-BH4: reconcile external-source identity and review worklist
+  interfaces with unmerged BH4 PR #1454, without replacing that owner.
+- [ ] GB08-REFEREE: attach exact source commit/tree SHA, tool versions,
+  tests, kernel output and explicit remaining empirical assumptions.
+- [ ] GB08-LEAN: optional Lean mirror only after Golden owner has actual
+  kernel acceptance; avoid another parallel DNA base carrier.
+- [ ] W22-01..05: publisher source-data authenticity, stereochemistry,
+  replicate/assay evidence and real metabolic state/kinetic/transport
+  witnesses in separate D-LSA PR #1459. This cannot be paid by reading
+  a GenBank file or by a formal sequence symmetry identity.
 
-## OPEN exact remaining gates
+## Reproduction entrypoints (non-operational/source-read-only)
 
-- [ ] GB02-REAL: execute Biopython parser and original-source parity checker on creator's exact Git blob 0578ad167666789fbfd3faa849a455c25097b90c.
-- [ ] GB02-STRICT: check fuzzy/reverse-joined/exact interval malformed-case negative fixtures; avoid silent acceptance.
-- [ ] GB03-KERNEL: compile Golden and non-Golden exact Agda owners on exact branch head; attach toolchain and 0 postulates/metas/termination escape.
-- [ ] GB04-FULL: complete and test full-record semantic parse/serialize/parse roundtrip (only nested exact feature-location roundtrip now implemented).
-- [ ] GB05-SOURCE: source-align 2020 transcript passages against original 22 feature annotations; no guessed edit provenance.
-- [ ] GB06-PROTEIN: independently source-match accession, organism, isoform, reading frame, genetic code and context to original UniProt/NCBI; no blind translation of misc_feature label.
-- [ ] GB07-ONTOLOGY: bind to native ITIR/SLR S29 interface, run native fixture-backed conformance and attribution/reopen checks; candidate-only JSON is not native acceptance.
-- [ ] GB08-VERIFY: execute exact-head pytest, Agda and optional Lean mirror; inspect and reconcile parallel BH4 ontology PR #1454.
-- [ ] GB08-DOCS: update final referee receipt and paper/roadmap acceptance ledger after kernel/tests run.
+```sh
+python3 -m pip install -r requirements-genbank.txt
+python3 -m pytest -q tests/test_genbank_*.py
+python3 scripts/check_genbank_source_inventory.py /path/to/original.gb
+python3 scripts/check_genbank_semantic_roundtrip.py /path/to/original.gb
+python3 scripts/check_genbank_feature_geometry_square.py /path/to/original.gb
+python3 -m scripts.genbank_component_registry --genbank /path/to/original.gb --output /tmp/components.json
+python3 scripts/genbank_itir_native_review_adapter.py /tmp/components.json --output /tmp/itir-input.json
+python3 scripts/genbank_itir_native_review_adapter.py /tmp/components.json --itir-src /path/to/ITIR-suite/itir-mcp/src --execute-native --output /tmp/itir-native-receipt.json
+agda -i . DASHI/Codec/GenBankFeatureGeometrySymmetryExact.agda
+agda -i . DASHI/Codec/GenBankComponentOntologyFiniteCore.agda
+agda -i . DASHI/Biology/GenBankCanonicalDNAFibreIndexExact.agda
+agda -i . DASHI/Biology/GenBankInterpretationInteropExact.agda
+```
 
-Priority: original same-object parser replay, then Golden kernel, then full-record semantic and ontology ABI.
-No operational human or animal gene editing or delivery protocols in this lane.
-
-
-## GB04 semantic progress
-
-- [x] GB04-LOCAL: actual original GenBank source passed Biopython parse/serialize/parse, with all seven semantic equality checks true; normalized output 18,377 bytes is not the same raw text as original 18,278 bytes.
-- [x] GB04-REUSABLE: committed `scripts/check_genbank_semantic_roundtrip.py` and `tests/test_genbank_semantic_roundtrip.py`.
-- [ ] GB04-FORMAL: obtain a Golden Agda theorem for the parser/serialized AST refinement or appropriately scoped formal certificate; original local finite result does not imply general verified parser.
-
-
-- [x] GB07-SOURCE-FIXTURE: committed 22-feature/30-review-hold source-inspection candidate graph with creator/paper attribution and source-reopenable claim IDs.
-- [ ] GB07-NATIVE-ABI: native ITIR/SLR and external ontology recipient compliance remains an unverified, separately scoped gate.
-
-
-## General component / replicon taxonomy link (2026-11-03)
-
-- [x] Reusable read-only classifier, Golden source-typed taxonomy and 17
-      passing local synthetic tests: see
-      `docs/biology/GenBankComponentOntologyRegistry.md` and
-      `GenBankComponentOntologyTODO.md`.
-- [x] Source-inspected original creator three-file feature-key inventory
-      with original git blob SHA, independent topology/context separation.
-- [ ] Exact-head Agda kernel and actual ITIR/SLR native recipient API conformance
-      are still independent, unpaid acceptance gates.
+**Provenance firewall:** computational source-annotation consistency is NOT
+proof of gene/protein same-object identity, actual mobile-element mobility,
+plasmid replication, construct expression or organism-level phenotype.
