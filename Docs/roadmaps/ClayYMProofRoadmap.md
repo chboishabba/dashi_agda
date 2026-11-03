@@ -1,3 +1,5 @@
+**New finite reversal/descent no-go:** `globalStrictReversalRankImpossible` (same source-written module) refutes a universal strict Nat rank under `FiniteHistoryOrientationExact.reverseHistory` using its fixed history. This tightens the required distinction between microscopic T-reversal and the separate coarse shift/MDL semigroup. The physical same-carrier map is still uninhabited.
+
 ### 2026-11-03: TSFV/KK same-selected-metric weld and UV/OS firewall
 
 New `TSFVKKSameMetricTransportExact` (in #1460, stacked on #1444/#1440) transports the source-indexed observer-filtration arrow's calibrated `3+1` result to the **very same** selected KK-reduced 4D metric, provided the actual physical metric-state selection and four pointwise quadratic-sign equalities. The reversed `1+3` count is excluded for this same calibrated physical orientation. This is exact *conditional* same-metric transport, **not** an inhabited physical construction or an Agda kernel receipt. It is exported from `BalabanRGTOERegression`.
