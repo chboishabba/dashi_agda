@@ -1353,3 +1353,146 @@ sourceCanonicalNatExpNegativeGeometricConverges :
 sourceCanonicalNatExpNegativeGeometricConverges n =
   GeometricSeries.geometricSeriesConvergent
     (sourceCanonicalNatExpNegativeUnitRatio n)
+
+
+------------------------------------------------------------------------
+-- K04d REAL NONINTEGER RE(s)>2 MAJORANT: TRUE BISHOP EXPONENTIAL.
+--
+-- This pays the previous integer-only restriction at the SCALAR
+-- coefficient level for every Bishop real sigma > 2, not merely Nat
+-- sigma. It uses actual exp-additivity, the pinned strict-order
+-- positive product theorem, and the previously built global
+-- negative-exponential unit-interval lemma.
+--
+-- The genuine exp_B(L_n)=n+1 inverse remains an explicit premise.
+-- The imaginary-phase modulus and s-dependent complex factor are
+-- still outstanding before claiming complex-neighborhood domination.
+------------------------------------------------------------------------
+
+sourceTwoReal : R.ℝ
+sourceTwoReal = R._⋆ (+ 2 / 1)
+
+sourceRealExponentAboveTwoFactor :
+  (sigma logPoint : R.ℝ) →
+  R._≃_
+    (Exp.bishopExp (R._*_ (R.- sigma) logPoint))
+    (R._*_
+      (Exp.bishopExp (R._*_ (R.- sourceTwoReal) logPoint))
+      (Exp.bishopExp
+        (R.- (R._*_ (R._-_ sigma sourceTwoReal) logPoint))))
+sourceRealExponentAboveTwoFactor sigma logPoint =
+  RP.≃-trans
+    (ExpCong.bishopExpCongruent
+      (let open RP.ℝ-Solver
+       in solve 2
+         (λ s l →
+           (⊝ s) ⊗ l
+           ⊜
+           ((⊝ Κ (+ 2 / 1)) ⊗ l)
+           ⊕ (⊝ ((s ⊖ Κ (+ 2 / 1)) ⊗ l)))
+         RP.≃-refl sigma logPoint))
+    (ExpAdd.bishopExpAdd
+      (R._*_ (R.- sourceTwoReal) logPoint)
+      (R.- (R._*_ (R._-_ sigma sourceTwoReal) logPoint)))
+
+sourceAboveTwoExtraFactorPositive :
+  (sigma logPoint : R.ℝ) →
+  R._<_ sourceTwoReal sigma →
+  R._<_ R.0ℝ logPoint →
+  R._<_
+    R.0ℝ
+    (R._*_ (R._-_ sigma sourceTwoReal) logPoint)
+sourceAboveTwoExtraFactorPositive
+    sigma logPoint sigmaAboveTwo logPositive =
+  RP.posx⇒0<x
+    (RP.posx,y⇒posx*y
+      (RP.0<x⇒posx
+        (RP.x<y⇒0<y-x
+          sourceTwoReal sigma sigmaAboveTwo))
+      (RP.0<x⇒posx logPositive))
+
+sourceAboveTwoExtraFactorBelowOne :
+  (sigma logPoint : R.ℝ) →
+  R._<_ sourceTwoReal sigma →
+  R._<_ R.0ℝ logPoint →
+  R._<_
+    (Exp.bishopExp
+      (R.- (R._*_ (R._-_ sigma sourceTwoReal) logPoint)))
+    R.1ℝ
+sourceAboveTwoExtraFactorBelowOne
+    sigma logPoint sigmaAboveTwo logPositive =
+  NegativeExp.negativeExpBelowOne
+    (sourceAboveTwoExtraFactorPositive
+      sigma logPoint sigmaAboveTwo logPositive)
+
+sourceRealExponentAboveTwoBasel :
+  (logNat : NatLogCandidate)
+  (n : Nat)
+  (sigma : R.ℝ) →
+  R._<_ sourceTwoReal sigma →
+  R._<_ R.0ℝ (logNat n) →
+  R._≃_ (Exp.bishopExp (logNat n))
+    (NatReal.natReal (suc n)) →
+  R._≤_
+    (Exp.bishopExp (R._*_ (R.- sigma) (logNat n)))
+    (Basel.baselTerm n)
+sourceRealExponentAboveTwoBasel
+    logNat n sigma sigmaAboveTwo logPositive inverseLaw =
+  let
+    l = logNat n
+    expTwo = Exp.bishopExp (R._*_ (R.- sourceTwoReal) l)
+    expTwoIsBasel =
+      negativeTwoNatLogExponentialIsBasel
+        logNat n inverseLaw
+    expTwoNonnegative : R.NonNegative expTwo
+    expTwoNonnegative =
+      RP.0≤x⇒nonNegx
+        (RP.≤-respʳ-≃
+          (RP.≃-symm expTwoIsBasel)
+          (RP.nonNegx⇒0≤x
+            (Basel.baselTermNonnegative n)))
+    extraBelowOne =
+      RP.<⇒≤
+        (sourceAboveTwoExtraFactorBelowOne
+          sigma l sigmaAboveTwo logPositive)
+    productBelowTwo :
+      R._≤_
+        (R._*_ expTwo
+          (Exp.bishopExp
+            (R.- (R._*_ (R._-_ sigma sourceTwoReal) l))))
+        expTwo
+    productBelowTwo =
+      RP.≤-respʳ-≃
+        (RP.*-identityʳ expTwo)
+        (RP.*-monoˡ-≤-nonNeg
+          extraBelowOne expTwoNonnegative)
+  in
+  RP.≤-respˡ-≃
+    (RP.≃-symm
+      (sourceRealExponentAboveTwoFactor sigma l))
+    (RP.≤-trans
+      productBelowTwo
+      (RP.≤-reflexive expTwoIsBasel))
+
+-- A SOURCE-CANONICAL specialization for every log(n+2), n >= 0.
+-- The missing n=0 log(1)=0 term is a single finite head and does
+-- not affect eventual Dirichlet convergence or the Basel tail.
+sourceCanonicalNonintegerRealBaselTail :
+  (n : Nat) (sigma : R.ℝ) →
+  R._<_ sourceTwoReal sigma →
+  R._≃_
+    (Exp.bishopExp (sourceCanonicalNatLogCandidate (suc n)))
+    (NatReal.natReal (suc (suc n))) →
+  R._≤_
+    (Exp.bishopExp
+      (R._*_
+        (R.- sigma)
+        (sourceCanonicalNatLogCandidate (suc n))))
+    (Basel.baselTerm (suc n))
+sourceCanonicalNonintegerRealBaselTail
+    n sigma sigmaAboveTwo inverseLaw =
+  sourceRealExponentAboveTwoBasel
+    sourceCanonicalNatLogCandidate (suc n)
+    sigma sigmaAboveTwo
+    (sourceCanonicalNatLogSuccessorPositive n)
+    inverseLaw
