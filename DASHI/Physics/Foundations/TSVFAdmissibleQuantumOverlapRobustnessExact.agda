@@ -49,7 +49,7 @@ open import Data.Product using (_×_; _,_; Σ)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as ℕₚ
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Agda.Builtin.List using (List) renaming ([] to []ₗ; _∷_ to _∷ₗ_)
+open import Agda.Builtin.List using (List; []; _∷_) renaming ([] to []ₗ; _∷_ to _∷ₗ_)
 open import Data.Nat.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
