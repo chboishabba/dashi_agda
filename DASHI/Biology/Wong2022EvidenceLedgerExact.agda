@@ -184,6 +184,58 @@ paperUnresolvedSourceObjects =
     false refl
     false refl
 
+
+------------------------------------------------------------------------
+-- INDEPENDENT REGISTRY-DESCRIPTOR OBSERVATIONS, NOT A SAME-OBJECT PROOF.
+--
+-- PubChem CID 6717 publicly displays InChIKey
+-- ZAGRKAFMISFKIO-QMTHXVAHSA-N. IUPHAR/BPS Guide to Pharmacology
+-- ligand 139 displays ZAGRKAFMISFKIO-IAPIXIRKSA-N while referencing
+-- PubChem 6717 and CHEBI:6604. Do not guess what accounts for this
+-- stereochemical-key difference, nor equate it to different experimental
+-- specimens without a reviewed, version-bound chemical-structure comparison.
+------------------------------------------------------------------------
+
+iupharLysergicAcidLigand : Source.AttributedSource
+iupharLysergicAcidLigand =
+  Source.mkNoDOISource
+    "IUPHAR/BPS Guide to PHARMACOLOGY"
+    "Lysergic acid ligand 139"
+    "IUPHAR/BPS Guide to PHARMACOLOGY ligand record 139"
+    "current online registry record"
+    "https://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=139"
+    Source.institutionalSource
+    "Registry lists PubChem CID 6717 and ChEBI:6604 but displays a stereochemical InChIKey suffix that does not match the current PubChem-rendered suffix; the source difference requires review, not an automatic identity judgement."
+    Source.publicAttribution
+
+record RegistryDescriptorReviewResidual : Set where
+  constructor registryDescriptorReviewResidual
+  field
+    pubChemSource : Source.AttributedSource
+    iupharSource : Source.AttributedSource
+    pubChemInchiKeyAsDisplayed : String
+    iupharInchiKeyAsDisplayed : String
+    interpretation : String
+
+    normalisedStereochemicalMatchPaid : Bool
+    normalisedStereochemicalMatchPaidIsFalse :
+      normalisedStereochemicalMatchPaid ≡ false
+
+    experimentalSampleSameObjectPaid : Bool
+    experimentalSampleSameObjectPaidIsFalse :
+      experimentalSampleSameObjectPaid ≡ false
+
+registryDescriptorReview : RegistryDescriptorReviewResidual
+registryDescriptorReview =
+  registryDescriptorReviewResidual
+    Wong.pubChemLysergicAcid
+    iupharLysergicAcidLigand
+    "ZAGRKAFMISFKIO-QMTHXVAHSA-N"
+    "ZAGRKAFMISFKIO-IAPIXIRKSA-N"
+    "A source-observed descriptor disagreement; neither a resolved stereochemical conflict nor proof that the paper's sample has a different identity."
+    false refl
+    false refl
+
 paperImportNotIndependentVerification :
   DataReceiptState
 paperImportNotIndependentVerification = supplementaryDataNotInspected
