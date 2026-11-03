@@ -152,3 +152,5 @@ import DASHI.Mathematics.Complexity.Karp21BinaryFinMaterializationCostExact
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact
 
 import DASHI.Mathematics.Complexity.Karp21BinaryRuntimeEverything
+
+import DASHI.Mathematics.Complexity.Karp21CanonicalParsedGraphAcceptanceExact
