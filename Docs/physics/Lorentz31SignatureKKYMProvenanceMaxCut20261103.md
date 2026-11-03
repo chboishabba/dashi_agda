@@ -1,3 +1,34 @@
+## 2026-11-03 — actual same-metric TSFV → KK/YM transport (source-written)
+
+New Golden Agda adapter: `DASHI/Physics/Foundations/TSFVKKSameMetricTransportExact.agda`.
+It **reuses** `TSFVFiltrationArrowLorentzBridgeExact.SelectedTSFVToLorentzPhysicalSource` and `YMClayLorentz31DirectionalKKHodgeExact.SameSourceKKYMContinuation`, rather than defining another signature model.
+
+The key `SameMetricTSFVKK` weld requires:
+1. An explicit map from the **selected reduced KK 4D metric** to the **physical state used by the original two-boundary filtration**.
+2. Equality of that mapped selected metric-state with the **selected TSFV physical state**.
+3. For each of the **four** actual axes, equality of **KK/YM metric signs** with the **TSFV-selected physical quadratic signs** evaluated at that mapped metric-state.
+
+From those requirements and the previously proved TSFV finite conditional sign certificate, `sameMetricKKSignatureFromTSFV` proves that the **KK/YM selected metric** has the *same* `signature 3 1`. `sameMetricKKReversedCountExcluded` then proves that the same selected orientation does not have the 1+3 count. This is a nontrivial **same-metric commuting-sign transport**, **not** evidence that the physical weld record is presently inhabited. The Agda source is written; exact-head kernel acceptance is **not verified**.
+
+### Existing UV and Clay max-cut — no loss of ownership
+
+- `BalabanClayGate4CombinedRGUVIterationExact` owns conditional physical one-step RG norm inequalities, all-scale admissibility and UV stability induction. Its `combinedOneStepAnalyticInputsLevel` and `initialUVStabilityInputsLevel` explicitly remain `conditional`. The verified algebraic induction must not be confused with constructing physical ultraviolet measure limits.
+- `BalabanClayConcreteUVToMassGapDependencyExact` owns the separate **UV → selected continuum OS axioms → reconstructed Hilbert theory → spectral gap → physical mass interlacing** dependency. Its `continuumFromAllScaleUV`, `clusteredOSReconstructionHasGap`, and `physicalInterlacingFromGap` fields are mathematical *inputs*, not instantiated conclusions.
+- This TSFV/KK seam is placed **beside** the selected four-dimensional R443/R445/R320/R333 original YM physical chain. The Agda Golden-safe import does not import the separate older UV modules because their current modules lack `--safe`. Do not mark the UV pathway kernel-checked by inheritance.
+- The current `#1444` stack supplies real finite SU(N) plaquette/Wilson/Gibbs/C3 constructions; actual compact continuous Haar, changing-cutoff R445 bounds, selected R320, same-`H_OS` R333, and the Clay compact-simple-group quantification remain explicit blockers. This adapter neither cures nor bypasses them.
+- The finite `ShiftCollapseChainMDLCompatibility` carries genuine ordered descent **on its own shift carrier**, whereas `FiniteHistoryOrientationExact` carries original reversible-history/no-past-reconstruction. A physical identity between these two separate state/dynamics carriers is still required. Simply pairing their receipts would not prove that collapse potential, coarse history MDL, and YM RG running refer to the same energy, entropy or physical time.
+
+### Exact next lemmas
+
+1. `tsfvShiftSameState`: construct an actual dynamics/observation map from the shift pressure-chain state to the original finite microhistory, preserving transitions, filtered observations and monotone-depth/MDL witnesses. Reject unmatched carriers.
+2. `tsfvObserverToMetric`: construct `SameMetricTSFVKK` from actual measured history/physical quadratic and the KK-reduced metric; establish each of its state and four sign equalities without a preselected mask.
+3. `kkReducedMetricFromSelectedAction`: source native #1241 compactified action/metric, prove dimensional reduction and physical stress agreement, and provide a **physical inhabitant** of the existing KK continuation.
+4. `ymSelectedUVToOSSameMetric`: establish actual selected 4D Wilson/Gibbs/Haar/continuum Schwinger family with R443/R445 changing-cutoff estimates, a compatible OS reconstruction, and that reconstructed Lorentz metric agrees with the same selected 4D KK/TSFV metric. This entails the independent selected R320 and same-`H_OS` R333 gap producers; importing the conditional UV dependency alone does not discharge them.
+
+Attribution: Original TSVF (Aharonov–Bergmann–Lebowitz, Aharonov–Vaidman), original DASHI history/shift and Lorentz proof owners, Bałaban's RG work, Osterwalder–Schrader reconstruction, and historical Lorentz/Hodge/KK geometry remain separately credited. New DASHI content is only the selected same-metric transport and audit.
+
+---
+
 # Lorentz (3,1): directional certification, Yang–Mills and KK — 3 November 2026
 
 ## Result and scope
