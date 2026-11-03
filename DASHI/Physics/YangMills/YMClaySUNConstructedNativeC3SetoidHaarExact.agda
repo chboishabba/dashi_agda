@@ -29,6 +29,8 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
+import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as Gibbs
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClayNativeSideFourC3VectorWeldExact as NativeC3
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
@@ -97,14 +99,13 @@ module _
     Setoid.nativeSetoidProductHaar source
       (originalNativeC3SetoidCodec witness)
       (λ links →
-        let open import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact
-        in nativeSUNWilsonGibbsDensity
+        Gibbs.nativeSUNWilsonGibbsDensity
           theory traceData exponential beta
-          (DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact.nativeForwardC3Bonds links))
+          (Weld.nativeForwardC3Bonds links))
     ≡
     Setoid.nativeSetoidProductHaar source
       (originalNativeC3SetoidCodec witness)
-      (DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact.nativeSUNWilsonGibbsDensity
+      (Gibbs.nativeSUNWilsonGibbsDensity
         theory traceData exponential beta)
   originalNativeC3GibbsHaarInvariant traceData exponential beta witness =
     Setoid.nativeSUNPhysicalGibbsSetoidHaarC3
