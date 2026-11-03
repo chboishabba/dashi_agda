@@ -286,8 +286,8 @@ record YeastPatentFamilyLineage : Set where
     nationalPatentRightStatusIndependentlyVerifiedIsFalse :
       nationalPatentRightStatusIndependentlyVerified ≡ false
 
-yeastPatentFamilyLineage : YeastPatentFamilyLineage
-yeastPatentFamilyLineage =
+yeastPatentFamilyLineageReceipt : YeastPatentFamilyLineage
+yeastPatentFamilyLineageReceipt =
   yeastPatentFamilyLineage
     Wong.wongEtAl2022
     wongAssociatedPatent2023
