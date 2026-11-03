@@ -45,6 +45,7 @@ printf 'Mode: %s\n' "$mode"
 python3 scripts/check_karp21_agda_stdlib_arity.py
 python3 scripts/check_karp21_e20_bitlength_bound.py --max-n 5
 python3 scripts/check_karp_binary_codec.py
+python3 scripts/check_karp21_binary_native_sparse_verifier.py
 
 if [[ "$mode" == "preflight" ]]; then
   echo "PREFLIGHT ONLY: no Agda kernel acceptance or machine clock."
