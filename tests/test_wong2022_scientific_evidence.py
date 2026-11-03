@@ -81,3 +81,16 @@ def test_checker_absence_does_not_masquerade_as_acceptance(monkeypatch):
     state = check_agda(Path(ROOT), required=True)
     assert state["state"] == "unavailable"
     assert state["success"] is False
+
+
+def test_source_stereochemical_descriptor_drift_stays_review_blocking():
+    from scripts.check_wong2022_scientific_evidence import LEDGER
+
+    bundle = load_source_bundle(ROOT)
+    bundle[LEDGER] = bundle[LEDGER].replace(
+        "ZAGRKAFMISFKIO-IAPIXIRKSA-N", "unreviewed-identifier"
+    )
+    assert any(
+        "ZAGRKAFMISFKIO-IAPIXIRKSA-N" in failure
+        for failure in inspect_source_bundle(bundle)
+    )
