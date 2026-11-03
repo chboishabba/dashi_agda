@@ -172,25 +172,11 @@ module _
     ≡
     vectorGauge (leftVector gamma) (rightVector gamma) vector
   encodeGaugeNatural gamma vector =
-    Codec.vecPointwiseEquality
-      (λ index →
-        trans
-          (Codec.listValuesAt
-            (Torus.elements (Codec.originalPositiveBondFinite L))
-            (originalGauge gamma (decode vector)) index)
-          (trans
-            (originalGaugeDecodedAt gamma vector
-              (Codec.listAt
-                (Torus.elements (Codec.originalPositiveBondFinite L))
-                index))
-            (sym
-              (Codec.listValuesAt
-                (Torus.elements (Codec.originalPositiveBondFinite L))
-                (decode
-                  (vectorGauge
-                    (leftVector gamma) (rightVector gamma) vector))
-                index))
-          (cong (λ selected → Vec.lookup selected index)
-            (Codec.originalBondsEncodeDecodeExactly L
-              (vectorGauge
-                (leftVector gamma) (rightVector gamma) vector)))))
+    trans
+      (Codec.originalBondsEncodePointwise L
+        (originalGauge gamma (decode vector))
+        (decode
+          (vectorGauge (leftVector gamma) (rightVector gamma) vector))
+        (originalGaugeDecodedAt gamma vector))
+      (Codec.originalBondsEncodeDecodeExactly L
+        (vectorGauge (leftVector gamma) (rightVector gamma) vector))
