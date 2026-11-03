@@ -126,10 +126,19 @@ Active research residuals: verified source-data and supplement hashes; exact rep
 **Remaining exact max-cut for this prior-art link:**
 
 1. **PA15-01 — Exact patent source revision:** authenticate the filed PCT publication/claim-set revision and official WIPO/PCT/US national records, not only an indexed Google Patents rendering.
-2. **PA15-02 — Claim chart:** extract stable numbered-claim dependencies and amendment lineage *as legal/text metadata only*. Do not turn a method claim into an operational production protocol. Review particular claim scope against the **exact 2014 paper** and **2022 yeast source** separately.
+2. **PA15-02 — Claim chart:** source-write a **bounded claim-number reference check** in `LysergicPatentClaimGraphExact.agda`: the Google Patents HTML renders 35 numbered claims and claim 28 as referring to 26, 27 and 28. The Golden proof `htmlClaim28SelfReference` establishes only that `28` occurs in the captured list; the HTML-derived self-reference is **not** a legal-defect conclusion. Remaining: authenticate original filed claim text, determine if transcription or original-document discrepancy, compare official amendment lineage and develop reviewed claim-level scope comparison against the 2014/2022 papers. No operational protocol.
 3. **PA15-03 — Observed versus asserted:** identify paper-supported experiments, provisional hypotheses and patent claim language as separate source observations. Do not use a patent assertion as a second independent replication.
 4. **PA15-04 — Context-sensitive comparison:** distinguish the 2014/patent filamentous fungal system from the 2022 yeast host; require exact product, analytical, organism, context and scale witnesses before same-object quantitative comparison.
 5. **PA15-05 — Legal-status boundary:** independently verify any relevant national-family legal status in official registers if needed. The Google Patents `Ceased` label does not establish universal expiration, validity, noninfringement or freedom to operate.
 6. **PA15-06 — Exact-head acceptance:** execute both Agda modules and their imported owner graph, and run the updated Python negative tests. Source-written/imported does not mean Agda-kernel accepted.
 
 **Safety and attribution:** The original research belongs to Robinson and Panaccione (2014) and Wong et al. (2022); the patent invention is attributed to Panaccione and Robinson, originally assigned to West Virginia University. This integration does not reproduce sequences, construct designs, step-by-step production methods, compound synthesis or experimental optimisation. Patent claims and chemical precursor nomenclature are not clinical, manufacturing or legal permissions.
+
+
+### PA15-02 source-indexed self-reference receipt
+
+The third Golden module `DASHI.Biology.LysergicPatentClaimGraphExact` uses only Agda builtin equality, natural numbers, lists, strings and booleans. It records `htmlObservedClaimCount = 35` and `htmlClaim28Dependencies = 26 ∷ 27 ∷ 28 ∷ []` from the *public HTML rendering*. Its witness `htmlClaim28SelfReference = there (there here)` is a fully explicit finite membership proof, not a legal conclusion.
+
+This is a potentially important source-text anomaly: Google Patents presents claim 28 as depending on itself. It might arise in the filed claim, an amendment, a typographical mistake, or the HTML transcription. `originalClaimFileCompared = false` and `legalDefectConcluded = false` stay recorded. Do not infer invalidity, design-around, or any production method from the anomaly.
+
+The exact-head checker now covers three isolated/new Golden modules (Wong finite core, prior-art finite core, patent claim graph) and all corresponding non-Golden attributed adapters. The negative regressions detect unintended removal of the self-reference or assertion of a legal conclusion. Agda execution and exact official claim-file authentication remain open.
