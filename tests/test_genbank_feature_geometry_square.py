@@ -48,8 +48,9 @@ def test_join_order_reverses_and_origin_crossing_is_preserved():
     assert observed["kind"] == "compound"
     assert observed["operator"] == "join"
     assert observed["strand"] == -1
-    assert observed["parts"] == [interval(72, 80, -1),
-                                 interval(0, 9, -1)]
+    # In a stranded join, Biopython preserves biological part order.
+    assert observed["parts"] == [interval(0, 9, -1),
+                                 interval(72, 80, -1)]
     assert mirror_geometry(observed, 80) == joined
 
 
@@ -73,3 +74,29 @@ def test_order_qualifier_remains_distinct_from_join():
 def test_invalid_geometry_rejected(bad):
     with pytest.raises(ValueError):
         mirror_geometry(bad, 80)
+
+
+def test_all_none_parts_reverse_source_part_order():
+    joined = {
+        "kind": "compound", "operator": "join", "strand": None,
+        "parts": [interval(71, 80, None), interval(0, 8, None)],
+    }
+    result = mirror_geometry(joined, 80)
+    assert result["parts"] == [
+        interval(72, 80, None), interval(0, 9, None),
+    ]
+    assert mirror_geometry(result, 80) == joined
+
+
+def test_mixed_part_strands_do_not_reverse_order():
+    # Compound .strand is None for a mixture, but Biopython does NOT
+    # reverse the ordered parts unless every child strand is None.
+    joined = {
+        "kind": "compound", "operator": "join", "strand": None,
+        "parts": [interval(2, 4, 1), interval(7, 9, -1)],
+    }
+    result = mirror_geometry(joined, 20)
+    assert result["parts"] == [
+        interval(16, 18, -1), interval(11, 13, 1),
+    ]
+    assert mirror_geometry(result, 20) == joined
