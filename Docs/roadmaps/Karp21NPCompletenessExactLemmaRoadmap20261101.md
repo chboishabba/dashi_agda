@@ -1,5 +1,23 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-03 — E20 actual parsed graph acceptance and N21 Fin-free comparison-count cut
+
+**Source-written in PR #1445; Agda kernel acceptance still OPEN.**
+
+- `Karp21FiniteCompleteGraphGeneratorExact.agda`: repaired an invalid positional second argument to `Data.List.Properties.length-++`. The Agda stdlib lemma takes its second list as an *implicit* argument `{ys = ...}`; this was a concrete typechecking defect in the original triangular upper-edge counting proof.
+- `Karp21CanonicalParsedGraphAcceptanceExact.agda`: `scaledRawParsedGraphAcceptanceBidi` builds the **actual** `Cut.WeightedCutGraph n` from the original `Decode.validateRawEdges` result on `Gen.completeScaledPairEdges`. Its `PR.Iff` is on the original `Cut.WeightedMaxCutYES` predicates and is witnessed by the earlier fieldwise signed cut-score theorem `Karp21DecodedWeightedCutSemanticBidiExact.sameWeightedGraphsAccept`. `e20ScaledCanonicalRawGraphAcceptsIff` specializes this to the original `Actual.sourceIndexedWeightedGraph parts nonzero`. No replacement graph, abstract language/clock receipt, or proof-function equality was introduced. This pays **typed raw-decoder acceptance equivalence**, not full `decodeGraphWord (encodeGraphWord g)` acceptance.
+- `Karp21FinFreeEndpointScanComparisonCountExact.agda`: instrumented the **original** `Karp21FinFreeRawSparseWordVerifierExact.endpointConsistent` on binary-native decoded endpoint numbers. `endpointConsistentValueSame` source-writes Boolean equivalence; `endpointConsistentComparisonCountExact` counts one address comparison per previous occurrence in a complete structural scan. The original function remains the verifier's runtime owner.
+- `Karp21FinFreePairwiseQuadraticCountExact.agda`: `maxAddressComparisons (suc j) = maxAddressComparisons j + 4*j`; `maxAddressComparisonsClosed` source-writes the non-vacuous quadratic bound `2*m*(m∸1)` for a complete `m`-edge scan (two endpoints tested against the `2*j` earlier occurrences). The pure arithmetic owner is marked `{-# OPTIONS --safe #-}`; the function-by-function instrumentation remains non-Golden because it imports the existing Fin-free runtime. The recurrence was independently checked in local Python for `m = 0..10000`; this is finite regression, not Agda acceptance.
+- `Karp21BinaryRuntimeEverything.agda` imports both new N21 owners; `Karp21Everything.agda` imports the typed E20 raw-graph acceptance theorem.
+
+**Open semantic wall:** `completeGraphGammaGraphDecodeSameObject` must still compose the **entire actual** `Graph.decodeGraphWordCertified` nested parser and nonzero gamma threshold/3m/2m guard results, rather than only the raw validator, to prove the encoded E20 image has the original signed graph-YES predicate. Then instantiate `scaledCompleteWordFaithful` in `E20ImageWordReceipts`.
+
+**Open resource wall:** An upper count of *address comparisons* is NOT a polynomial tape clock. Each binary equality compares up to input-length bits; gamma parsing, signed zigzag/accumulation and certificate comparisons require explicit worst-case bit-transition costs, code execution/realization and a true `PR.PolynomialCostModel` witness. The earlier dependent `Fin.fromℕ<` syntax can expand linearly in a binary-encoded endpoint value, which may be exponential in word length; use the source-owned Fin-free runtime for the machine-cost path, not the dependent semantic decoder. `n21SparseVerifierBitTapePolynomialClock`, `scaledPartitionGraphMachineClock`, and `e20EncodedPolynomialReduction` remain OPEN.
+
+**Original global target still OPEN:** P0 strict SAT machine cost and universal Cook–Levin SAT NP-completeness; P2 all E01–E19 executable encodings/costed reductions plus all 21 `InNP` instances; P3 unconditionally instantiate `CertifiedKarpNetwork` with the actual 20 reduction records, node languages, membership receipts and SAT root. No Agda executable, no kernel-accepted proof receipt or CI run was available here. Certified full reductions/terminals remain **0/20 and 0/21**. Preserve Cook 1971, Leonid A. Levin 1973 and Karp 1972 attribution.
+
+
+
 
 ## 2026-11-03 — binary-native N21 polynomial-time representation cut
 
