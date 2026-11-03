@@ -17516,3 +17516,16 @@ Cleanup
 - [ ] Exact Agda `--safe` kernel type-check of new module, focused dependency root and full TOE imports, with zero postulates, holes and termination bypasses. No Agda executable available in this pass.
 
 - [x] K05 source corollaries: conditional `round11SineAtTwoPi ≃ 0` and `round11CosineAtTwoPi ≃ 1` on the original Round11 Bishop series; exact-head Agda elaboration remains pending.
+
+
+### 2026-11-03 — K04d/K05 follow-on max-cut (source proof candidates)
+
+- [x] K04d Agda: source-native reciprocal cancellation reducer from `exp_B(-L(x)) ≃ 1-x` to `exp_B(L(x)) ≃ (1-x)⁻¹`, reusing existing Bishop all-real exp Cauchy and inverse uniqueness.
+- [x] K05 Agda: source Machin pi positive and no-earlier-positive-sine-zero compiler from the original imaginary product, quarter equality and strict sine-on-(0,pi_M) lemma.
+- [x] Connect both Agda owners to all three TOE import roots without editing ESD.
+- [x] Lean companion draft PR #104: original source-term log inverse, source-bound sine/cosine addition, quarter equality/first sine zero, literal Dirichlet exp term, genuine zeta continuity; verify source readback.
+- [ ] Golden native `exp_B(-sourceNegativeLogValue x) ≃ 1-x` from the original factorial/log coefficient composition, not a generic inverse-log authority.
+- [ ] Golden native all-x,y mixed signed factorial Cauchy coefficient and original Bishop sine/cosine exponential limit multiplication; no Lean semantic result substituted.
+- [ ] Golden selected finite-term continuity and uniform-limit actual `ZetaHalfPlaneLayer.zetaHalfPlane` / completed-zeta same-object identification.
+- [ ] Golden original atan-to-sine/cosine Machin quarter equality and strict sine positivity on (0,pi_M), or verified source-faithful proof import.
+- [ ] Exact-head Agda `--safe` kernel checks and zero-postulate/hole/import audit; exact-head Lean checks for all new mirror files. Neither run observed.
