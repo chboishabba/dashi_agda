@@ -20,6 +20,7 @@ module DASHI.Quantum.TSVF2017QuantitativeRateExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Nat.Properties as ℕₚ
+open import Data.Product using (_×_; _,_)
 open import Data.Nat.Base using (_≤_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
