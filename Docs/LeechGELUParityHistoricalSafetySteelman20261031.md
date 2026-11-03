@@ -290,3 +290,60 @@ are source-written in PR #4; none is a new executed training
 result. The full negative-control and ethics/geometry steelman
 above remains necessary. Kernel acceptance unexecuted. No
 claim that orientation sign indicates benevolence/harm.
+
+
+## 3 November 2026: negative matched layer-one quality comparison
+
+The user's **executed, train-only development** comparison
+(three epochs, same reported seed/CPU, nearly identical trainable
+parameter count) gave dense teacher CE **2.513**, guarded
+focused-C2 hybrid **2.486**, strict C2 layer-1 student **2.833**,
+and ordinary dense single-layer GELU control **2.191**.
+C2 odd+even has **1,185,606** trainable parameters versus
+**1,185,413** in the dense control (193 difference).
+The dense control wins by **0.642 nats** against strict focused
+C2. The guarded 0.5 gate retains original dense FFN weights
+and compute; its 2.486 score does NOT certify teacher erasure,
+standalone MoE quality or network Pareto.
+
+**Status correction:** D2 source/ablation and D3 focused training
+have user-executed measurements, but D3 *quality-superiority gate
+FAILS* for this trained candidate. D4 full 12-layer teacher-free
+promotion stays OPEN; D6 remote codec/transport and D7 semantic
+quality should not inherit any quality-win assertion. Existing
+Golden F02a and F07 are conditional/algebraic properties, not
+certificates of learned quality or a measured E8 advantage.
+
+**Steelman caveat from exact source review:** The historical
+C2 focused trainer internally withheld a calibration partition,
+while the ordinary dense control trained over all supplied fit rows.
+It also optimized extra hybrid CE/KL terms and averaged local
+loss over all layers, unlike the dense control's single-layer
+local MSE + direct CE/KL. Thus matched parameters, seed, epochs
+and CPU are not identical optimizer data/loss contracts. The
+observed negative ranking stands for the tested procedures,
+but should not be construed as a causal falsification of
+all history/signed/E8 student architectures.
+
+The original code path remains untouched by default.
+LeechTransformer PR #4 adds an opt-in
+`--matched-control-objective` with one focused layer and
+`--export-optimizer-fit-ids`: directly match the focused
+student-only local MSE + next-token CE + logit KL, revoke
+previous calibration gates before each training epoch and
+export the actual C2 optimizer rows for the dense control.
+This source was written **after** the reported negative
+experiment. It has not been newly executed or verified in
+the GitHub connector session. The concrete rerun instructions
+are at `LeechTransformer/docs/early_layer_quality_rescue_maxcut_20261102.md`.
+The comparison remains limited by different initializations,
+FLOPs, memory, routing and one-seed uncertainty; measure those
+instead of asserting a universal prior advantage.
+
+Original model provenance and attribution: Anatolii Kornienko
+(Leech-LILA; DOI 10.5281/zenodo.18784424), independent
+DASHI/C2/E8 owners as already cited, Ibrahim's Monster
+ownership unchanged. No ESD edits, postulates or theorem
+reclassification. The local JSON files are not available
+through this connector, so these scores are the user's
+reported results rather than independently parsed artifacts.
