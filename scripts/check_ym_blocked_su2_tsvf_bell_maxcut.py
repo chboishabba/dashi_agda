@@ -87,6 +87,32 @@ def verify():
                         assert raw == link(start, axis)
                     count += 1
 
+    # Independently check fully COMPOSED native blocked walks, not only
+    # a single coarse link. M coarse axial steps form one closed torus loop.
+    loop_count = 0
+    for M, L in [(1, 1), (2, 1), (1, 3), (2, 2), (2, 3), (3, 2)]:
+        side = M * L
+        for coarse in product(range(M), repeat=4):
+            for offset in product(range(L), repeat=4):
+                base = fine(coarse, offset, L)
+                for axis in range(4):
+                    raw, transformed, current = ONE, ONE, base
+                    for _ in range(M):
+                        edge, next_site = holonomy(current, axis, L, side)
+                        gauge_edge, next_site2 = holonomy(
+                            current, axis, L, side, True)
+                        assert next_site == next_site2
+                        raw = multiply(raw, edge)
+                        transformed = multiply(transformed, gauge_edge)
+                        current = next_site
+                    assert current == base
+                    assert transformed == multiply(
+                        multiply(gauge(base), raw), inverse(gauge(base)))
+                    # For unit quaternions, real part is invariant under
+                    # conjugation, so this tests a true Q8 Wilson class trace.
+                    assert transformed[0] == raw[0]
+                    loop_count += 1
+
     # Negative controls: path ordering matters in non-Abelian SU(2).
     assert multiply(I, J) == K
     assert multiply(J, I) == tuple(-x for x in K)
@@ -108,6 +134,7 @@ def verify():
     assert sum(x*y for x, y in zip(plus, minus)) == 0
     assert sum(x*x for x in plus) == sum(x*x for x in minus) == 2
     print(f"PASS {count} exact blocked Q8 bond/endpoint/gauge cases, "
+          f"{loop_count} exact closed blocked Wilson-loop cases, "
           "Bell marginal/global no-go and noncommutative negative control")
 
 
