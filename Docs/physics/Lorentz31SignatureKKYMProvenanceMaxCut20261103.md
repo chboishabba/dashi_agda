@@ -1,3 +1,7 @@
+## 2026-11-03 complete theorem roadmap / lemma ledger
+
+The [canonical new P00–P11 cross-lane roadmap](../roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md) enumerates **176 exact lemmas** with phase deliverables, original-source owners, real physical dependencies, negative tests, and criteria for kernel versus physical completion. P07 (same observed clock = OS Hamiltonian on the same metric and quantum state) is the key new cross-domain theorem. P05/P06 remain the independent pure 4D YM Clay route, and P08 spacelike 5D KK remains an optional EFT for Clay but necessary for the proposed five-sector consistency theory. Current #1460 does not yet contain latest #1444 variable-periodic Haar files; a source-controlled merge/rebase and typecheck are explicitly required.
+
 ## New five-sector BIDI steelman and exotic-gravity source map (3 Nov 2026)
 
 [Full physical hypothesis / exact lemma cut](YMClayFiveSectorBidiSteelman20261103.md); new `YMClayFiveSectorBidiSteelmanExact.agda` and independent `scripts/check_ym_five_sector_bidi_steelman.py` on #1460. The key **constructed finite** theorem is `P_d=P_(d-1)+cross_d` plus `P_d=P_(d-1) => cross_d=0` on nonnegative (Nat) curvature-weight sums, including an explicit nonzero 5D fibre which 4D projection misses. Its observable-tower theorem transports only **selected matched** observables, not arbitrary different-dimensional theories. `selectedLorentzian31FromSameMetric` reuses the existing TSFV/KK physical conditional theorem. No arbitrary 5D Euclidean SU2 phase dynamics is identified with KK gravity.
