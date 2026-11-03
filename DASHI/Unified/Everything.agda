@@ -1,6 +1,7 @@
 module DASHI.Unified.Everything where
 import DASHI.Interop.ITIRMCPFullRegistryCoverageExact
 import DASHI.Interop.SLRFullWorkspaceCrateCoverageExact
+import DASHI.Interop.SLRPNFToAgdaPreflightProofJoinPipelineExact
 import DASHI.Interop.SLRStructuralReceiptFirewallExact
 import DASHI.Interop.SLRNoPathFirewallExact
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
