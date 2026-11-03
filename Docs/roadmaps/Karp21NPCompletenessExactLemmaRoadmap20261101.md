@@ -1,5 +1,22 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-03 P1 source-written gamma and signed PARTITION roundtrips
+
+The literal gamma/zigzag proof cut has moved from an open binary-value bridge to source-written same-object codec lemmas. All declarations below must still pass Agda kernel acceptance before being called proved.
+
+- `Karp21GammaZigzagPartitionWordDecodeExact.agda`: `payloadValue`, `readLowBitsAppendExact`, `readGammaZeroPrefixExact`, `readGammaPayloadExact` prove that the actual gamma payload parser reads the exact bit count and retains its unconsumed suffix. The `zigzagUnzigzag` proof now retains `even n ≡ branch` by Agda `with ... in observed`, rather than asserting it via an unsupported `refl` on an abstract `n`.
+- `Karp21GammaBinaryPayloadValueExact.agda`: `payloadValueAppendBit` and `successorBitsNumericValue` connect the real standard-library binary numeral bit sequence to `suc (Bin.toℕ b)`. Uses source-owned `Data.Nat.Binary.Base` and standard-library safe natural-number ring solver, not unary enumeration or an auxiliary syntax language.
+- `Karp21GammaBinaryRoundTripExact.agda`: `zeroPrefixSameObject` pays encoder/decoder prefix equality; `successorPayloadLength` and `successorPayloadNumeric` connect the gamma header to the original binary numeral; `gammaBinaryNumeralReadSuffix` and `gammaReadEncodeSuffix` compose `Data.Nat.Binary.Properties.toℕ-fromℕ` with the literal decoder; terminal `gammaReadEncodeRoundTrip : ∀ n → readGamma (encodeGammaNat n) ≡ just (n , [])` is now **source-written**.
+- `Karp21GammaSignedListRoundTripExact.agda`: `readSignedGammaEncodeSuffix`, `readSignedItemsEncodeSuffix`, `gammaNatHasBit`, `signedListWireLengthLower`, and `partitionWordDecodeEncode` provide the **original signed-element list** gamma/zigzag decoder/encoder roundtrip, including the necessary `length values ≤ encodedTailLength` validation guard and arbitrary repeated/negative/zero source elements.
+- `Karp21GammaZigzagWordEncodeExact.agda`: `encodedSignedValuesSamePure` and `encodedPartitionWordSamePure` prove that its original E20 source serializer agrees with that Golden encoder. Its own terminal `partitionWordDecodeEncode` applies the result to the **actual E20 encoding**, not merely an auxiliary serializer.
+- The focused `Karp21GammaGoldenEverything.agda` and `Karp21Everything.agda` import this exact roundtrip chain. Verification by an Agda executable has **not** been performed; the code is an unaccepted proof proposal until the focused roots typecheck.
+
+**Local finite regression only:** 25,000 natural gamma words with an appended suffix and 25,000 zigzag values in both directions matched an independently written Python reference. This is neither a repo-owned executable receipt nor an Agda kernel acceptance and does not imply the general theorems; the source-written lemmas above carry the universal claims.
+
+**Max-cut after this source slice:** Kernel-check and repair the K00 and gamma Golden roots first. Next P1 same-object leaves: `completeGraphGammaGraphDecodeSameObject` including dependent signed weights/endpoint ordering, `scaledCompleteWordFaithful`, `graphWordSizeGuardRedundantForCanonicalInputs`; actual `n21SparseVerifierBitTapePolynomialClock` and `scaledPartitionGraphMachineClock` on a nondegenerate cost model. P0 `k00StrictSATMachineVerifierClock`, `k00StrictSATInNP`, and universal polynomial `cookLevinSATRoot` remain open, as do E01–E19 / 21 membership certificates and `CertifiedKarpNetwork`. The certified full Karp completion counters remain **0/20 costed edges and 0/21 NP-completeness terminals**.
+
+
+
 ## 2026-11-03 P0 Golden safety cut and exact universe repair
 
 **Referee correction:** Agda `{-# OPTIONS --safe #-}` is coinfective. Previous PR #1445 modules were marked safe while importing older unsafeguarded DASHI modules. That is an **import-time acceptance blocker**, even in the absence of local postulates or holes. The earlier claim that a safe pragma on an importing leaf sufficed was incorrect. Also, `PR.Iff` consumes `Set` propositions, but `Runs.ExactBudgetAcceptingRun` is `Set₁`; the original P0 machine-run BIDI was ill-sorted.
