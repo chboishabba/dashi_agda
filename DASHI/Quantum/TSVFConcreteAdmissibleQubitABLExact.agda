@@ -227,13 +227,23 @@ rightOriginalABLDenominator :
   (k : Nat) →
   denominator (finiteABLRight k)
   ≡ Overlap.rightRaw k + Overlap.wrongRaw k
-rightOriginalABLDenominator = finiteMeasurementDenominator
+rightOriginalABLDenominator k =
+  trans
+    (ℕₚ.*-identityˡ
+      (numerator (Q.ProjectiveMeasurement.totalPathWeight
+        finiteProjectiveMeasurement (finiteEnsemble k))))
+    (finiteMeasurementDenominator k)
 
 wrongOriginalABLDenominator :
   (k : Nat) →
   denominator (finiteABLWrong k)
   ≡ Overlap.rightRaw k + Overlap.wrongRaw k
-wrongOriginalABLDenominator = finiteMeasurementDenominator
+wrongOriginalABLDenominator k =
+  trans
+    (ℕₚ.*-identityˡ
+      (numerator (Q.ProjectiveMeasurement.totalPathWeight
+        finiteProjectiveMeasurement (finiteEnsemble k))))
+    (finiteMeasurementDenominator k)
 
 -- We prove exact normalization for the fractions returned by the
 -- ORIGINAL TSVF.ablProbability, not for a newly invented probability.
