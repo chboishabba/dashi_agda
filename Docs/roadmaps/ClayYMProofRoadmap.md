@@ -1,3 +1,7 @@
+### 2026-11-03 Admissible → TSVF quantum overlap source (additional independent consumer)
+
+[Finite exact original-source ABL/quantum tensor BIDI](../physics/TSVFAdmissibleTensorOverlapABLMaxCut20261103.md) now gives a nontrivial bounded model of selected two-boundary histories, Born-normalized right/wrong alternative outcomes and environmental overlap q=(9/25)^k. This is SOURCE-WRITTEN with no Agda kernel receipt, and **does not** construct R443 continuous Haar, physical R445/R320 or R333 same-H mass gap. Use the populated finite Q.ablProbability as an independent future P07 observer-state/OS comparator once the real physical gauge/quantum source is supplied.
+
 ### 2026-11-03 — Cross-lane emergent (3,1) / quantum / YM / KK exact-lemma phase roadmap
 
 **Read-first cross-lane source:** [Emergent31QuantumYMKKExactLemmaRoadmap20261103](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). It specifies **P00–P11, 186 numbered distinct proof obligations**, per-phase deliverables, original owners, exact R443/R445/R320/R333 source, source-native physical (3,1) time/metric/Hilbert, **same clock = same OS H** and KK/2D/3D/positive-G stress BIDI; it carries kernel/physical/experimental status firewalls and independent negative controls.
