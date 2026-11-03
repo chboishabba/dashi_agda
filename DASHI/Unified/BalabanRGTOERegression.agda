@@ -948,6 +948,8 @@ import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact 
 import DASHI.Physics.YangMills.YMClayFiniteNativeBondReindexingSafeExact as SUNFiniteReindex
 import DASHI.Physics.YangMills.YMClayNativeSideFourC3VectorWeldExact as SUNNativeC3Vec
 import DASHI.Physics.YangMills.YMClaySUNConstructedNativeC3SetoidHaarExact as SUNNativeC3Haar
+import DASHI.Physics.YangMills.YMClayNativeCyclicFinIsoSafeExact as SUNNativeFinIso
+import DASHI.Physics.YangMills.YMClayNativeBlockedPeriodicBondWeldExact as SUNNativeBlockWeld
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
@@ -1302,3 +1304,30 @@ open SUNNativeC3Haar public using
   (ExactC3AdjacentSwapWitness
   ; originalNativeC3SetoidCodec
   ; originalNativeC3GibbsHaarInvariant)
+
+------------------------------------------------------------------------
+-- R445: same-original-periodic-torus site and positive-bond block codec.
+-- It uses the earlier BałabanBlockedPeriodicLattice exact Fin refinement
+-- through the safe CyclicIndex/Fin equivalence. No physical blocking
+-- action/measure, analytic bounds, RG contraction or OS source is inferred.
+------------------------------------------------------------------------
+open SUNNativeFinIso public using
+  (cyclicToFin
+  ; finToCyclic
+  ; cyclicRoundtrip
+  ; finRoundtrip)
+
+open SUNNativeBlockWeld public using
+  (siteToCube
+  ; cubeToSite
+  ; siteCubeRoundtrip
+  ; cubeSiteRoundtrip
+  ; blockNativeSite
+  ; unblockNativeSite
+  ; blockNativeSiteAfterUnblock
+  ; unblockNativeSiteAfterBlock
+  ; BlockedPositiveBond
+  ; blockNativeBond
+  ; unblockNativeBond
+  ; blockNativeBondAfterUnblock
+  ; unblockNativeBondAfterBlock)
