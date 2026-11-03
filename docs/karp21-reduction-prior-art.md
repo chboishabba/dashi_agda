@@ -1,5 +1,13 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+## 2026-11-03 numeric gamma and original signed-partition codec theorem ownership
+
+The source-written P1 proof sequence in PR #1445 is `Karp21GammaZigzagPartitionWordDecodeExact.readGammaPayloadExact` → `Karp21GammaBinaryPayloadValueExact.successorBitsNumericValue` → `Karp21GammaBinaryRoundTripExact.gammaReadEncodeSuffix/gammaReadEncodeRoundTrip` → `Karp21GammaSignedListRoundTripExact.partitionWordDecodeEncode` → `Karp21GammaZigzagWordEncodeExact.encodedPartitionWordSamePure/partitionWordDecodeEncode`. The literal encoder remains the original Agda standard-library binary `fromℕ` path, using its `toℕ-fromℕ` theorem; the literal decoder is the DASHI Agda translation of the existing `scripts/karp21_signed_cut_binary_codec.py` contract. The auxiliary Golden encoder is proved equal to the existing E20 signed-list wire serializer; this is a same-object proof obligation rather than an independent replacement.
+
+Attribution remains distinct: Elias gamma coding (prefix format); signed zigzag integer mapping; Agda standard-library `Data.Nat.Binary.Base/Properties` and `Data.Nat.Tactic.RingSolver` maintainers; Stephen Cook and Leonid Levin for the separate SAT/NP side; Richard Karp (1972) for the historical PARTITION→weighted MAX CUT reduction; DASHI original Agda/Python code and earlier theorem owners. The new construction and proofs are independent source-written DASHI glue. **No actual Agda kernel invocation or polynomial-time complexity certificate has been obtained.** A finite independent Python spot-check (150,000 gamma suffix cases and 7,006 signed-list examples, no mismatches) is regression evidence, not formal acceptance.
+
+
+
 ## 2026-11-03 Golden K00 safety, source-owner reuse and proof-level discipline
 
 The rigorous source import audit found that `--safe` is transitive: a safe-labeled module importing an older non-safe owner is **not kernel-acceptable in safe mode**. This PR now explicitly marks only a checked local dependency cut `--safe` (stdlib-only `FiniteWordSizeExact`, `PolynomialReductionExact`, `KleinGroupActionInvariantExact`; Cook original formula, prefix/binary codec, strict parser, finite witness, strict SAT language). These source owners preserve their existing intellectual attribution: Stephen A. Cook (1971 SAT), Leonid A. Levin (1973 search), Felix Klein (1872 symmetry abstraction), Agda standard-library authors, and DASHI prior formal theorem contributors.
