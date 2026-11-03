@@ -40,7 +40,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 import Data.Fin.Base as Fin
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
@@ -77,6 +77,22 @@ module _ {Value : Set} (group : Bond.ExactLinkGroup Value) where
   positiveHolonomy field site axis (suc k) =
     Bond.multiply group (field (Torus.pair site axis))
       (positiveHolonomy field (Bond.positiveStep site axis) axis k)
+
+  -- Native Wilson bond fields are FUNCTIONS; this avoids any global
+  -- function-extensionality principle when transporting blocked paths.
+  positiveHolonomyPointwise :
+    ∀ {n}
+      (left right : Bond.PeriodicBondField n Value) →
+    (∀ bond → left bond ≡ right bond) →
+    ∀ site axis steps →
+    positiveHolonomy left site axis steps
+    ≡ positiveHolonomy right site axis steps
+  positiveHolonomyPointwise left right same site axis zero = refl
+  positiveHolonomyPointwise left right same site axis (suc k) =
+    cong₂ (Bond.multiply group)
+      (same (Torus.pair site axis))
+      (positiveHolonomyPointwise left right same
+        (Bond.positiveStep site axis) axis k)
 
   -- Prove native gauge covariance for ANY positive path by induction.
   -- No signed-negative inverse covariance record is required here.
@@ -164,6 +180,17 @@ module _
     Bond.PeriodicBondField m Value
   nativeBlockedPositiveLinks fineField (Torus.pair site axis) =
     positiveHolonomy group fineField
+      (fineBlockOrigin site) axis (suc l)
+
+  nativeBlockedPositiveLinksPointwise :
+    (left right : Bond.PeriodicBondField FineTail Value) →
+    (∀ fineBond → left fineBond ≡ right fineBond) →
+    ∀ coarseBond →
+    nativeBlockedPositiveLinks left coarseBond
+    ≡ nativeBlockedPositiveLinks right coarseBond
+  nativeBlockedPositiveLinksPointwise left right same
+      (Torus.pair site axis) =
+    positiveHolonomyPointwise group left right same
       (fineBlockOrigin site) axis (suc l)
 
   nativeBlockedCoarseGauge :
