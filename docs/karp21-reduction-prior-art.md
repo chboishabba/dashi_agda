@@ -1,5 +1,11 @@
 # Karp's 21 NP-complete problems: proof-ownership and reduction plan
 
+## 2026-11-03 literal E20/N21 signed edge triple and ordered-list wire semantics
+
+`Karp21GammaWeightedEdgeListRoundTripExact.agda` source-writes a suffix-preserving correspondence between the **original** `encodeEdgeWord/encodeEdgeWords` and `readOneRawEdge/readRawEdges`. It preserves each numeric `Fin` endpoint address, the original signed integer weight and exact edge list length/order. It uses the original DASHI `gammaReadEncodeSuffix` and `readSignedGammaEncodeSuffix` results, not a new encoding. `Karp21SignedPartitionActualGraphWordBoundaryExact.e20ScaledActualRawEdgeRoundTrip` specializes the result to the original Karp signed PARTITION `Actual.sourceIndexedWeightedGraph` image. The actual canonical sorted-pair validator and `Fin.fromℕ<` reconstruction are still open, as are the cost model, complete E20 reduction and all 21 NP-complete terminals.
+
+Credit Richard M. Karp (1972) for the historical PARTITION and MAX CUT reduction, Elias gamma for the numeral prefix fields, the Agda standard-library authors for binary arithmetic and `Fin` operations, and the prior DASHI graph/codec proof owners. These are DASHI source-written refinements, not external results or kernel-accepted final proofs. The raw proof deliberately avoids asserting propositional equality of dependent `offDiagonal` proof fields. No Agda compiler or CI was run.
+
 ## 2026-11-03 signed graph-word certificate size — actual Karp N21 owners
 
 The new `Karp21EncodedGraphSparseBitBoundExact.agda` is a source-written proof about the literal `Karp21GammaZigzagWordEncodeExact` weighted-graph serializer. It shows each listed edge contributes at least two gamma endpoint bits and therefore that the existing `Karp21SparseEndpointCutCertificateExact.twoPerEdge(length edges)` sparse witness is no longer than the complete encoded graph word. It reuses the existing `WeightedCutGraph`, signed edge weights and prefix encodings. The result is strictly an encoder-size lower bound and does not certify the decoder, graph equivalence, polynomial clock or `InNP`.
