@@ -27,6 +27,6 @@
 ### Verification ceiling
 - Local synthetic parser prototype under Biopython 1.86: 7 tests passed.
 - Local synthetic location roundtrip and Git-blob/feature parity positive and mutation checks passed.
-- Original creator source was inspected via GitHub text, but exact original Biopython replay is not executed.
+- Superseded by the subsequent executed local replay below: the exact original source's raw Git blob was verified and Biopython parsed all features with zero parity mismatches. The GitHub branch's own exact-head test execution remains outstanding.
 - Exact-head repository pytest, Agda kernel and Lean checks are outstanding.
 - Not an in-vivo phenotype, successful gene edit or native ITIR/SLR repair authority.
