@@ -1774,3 +1774,150 @@ Citations/credit: Machin; Dirichlet; Riemann; Bishop and
 Bridges; Zachary Murray; Viktor Csimma's pinned Bishop
 gitlink; and existing DASHI foundational/analytic
 theorem owners. The new compositions belong to DASHI.
+
+
+## 2026-11-03 full theorem-owner archaeology: genuine Bishop vs abstract/logically weaker models
+
+Follow-up to the K04d/K05 source-native max-cut. PR #1408, branch
+`feat/twin-prime-six-wheel-bounded-gap-reuse-20261028`.
+This search was explicit over the ORIGINAL feature branch and the
+default-branch GitHub code index, including:
+`bishopExpLog`, `expLog`, `logExp`, `expOntoPositive`,
+`logOneMinus`, `negativeLog`, `logFromExponential`,
+`exponentialInverse`, `powerSeriesLog`, `inverseLogarithm`,
+`logarithmSeries`, `geometricDerivative`,
+`BishopExponentialCauchy`, `BishopBaselSineProductCoefficient`,
+`BishopTrigonometricAddition`, `TrigonometricFunctionalLaws`,
+`BishopConcreteSine`, `BishopRound11FactorDerivative`,
+`BishopFactorDerivativeAt`, `BishopPowerFirstOrderDifferenceFactorisation`,
+`signedFactorial`, `imaginaryExponential`, `complexCauchy`,
+`complexExponential`, `sinCosAddition`, `Pythagorean`,
+`phaseUnit`, `ZetaHalfPlaneLayer`, `zetaHalfPlane`,
+`analytic zeta`, `DirichletAgreement`, `sameObjectZeta`,
+`Bishop continuity`, `uniformLimit`,
+`uniform convergence continuity`, `firstPositiveZero`,
+`pi uniqueness`, `BishopMachinQuarterAngleBranchExact`.
+No global repository-text exhaustiveness is claimed: GitHub code
+search indexes the default branch and may rate limit; original owner
+files were additionally fetched explicitly from the feature branch.
+
+### Exact source/evidence classification
+
+| Owner | What the exact source provides | Why it does not alone pay the terminal same-object gate |
+| --- | --- | --- |
+| `DASHI/Analysis/InverseLogarithmFromExponential.agda` | Constructed-real exp/log inverse from `expOntoPositive` | `expOntoPositive` is an input field of a separately selected constructed-real exponential; no pinned Bishop instance equating its `log` to the canonical negative-log series |
+| `DASHI/Analysis/OrdinaryTranscendentalRealization.agda` | `PositiveExponentialInverseAuthority` and `TrigonometricPowerSeriesAuthority` compilation | `expLog`, `logExp`, `sinAdd`, `cosAdd`, `pythagorean` are supplied as record fields; not independently generated from the selected Bishop series |
+| `DASHI/Analysis/PowerSeriesTranscendentals.agda` | Formal series-to-exp/trig construction and finite coefficient/limit compiler | `ExponentialOrderLaws.expOntoPositive`, `TrigonometricFunctionalLaws.sinAdd`, `cosAdd`, `pythagorean`, `firstZero` are still input witnesses; not a source-native Bishop Nat-log inverse or source trig Cauchy product |
+| `DASHI/Analysis/TerminalConstructedAnalyticModel.agda` | Actual, no-postulate constructed model with `expLog` and `expOntoPositive` | Explicitly a **one-point** `Real=⊤` model, NOT the Bishop real carrier or standard analytic zeta |
+| `DASHI/Foundations/RealElementaryFunctionsCanonicalInstanceExact.agda` | Legacy compatibility names and postulated elementary authorities | Declares a literal `postulate` block; **not Golden Agda evidence** for a selected Bishop theorem |
+| `DASHI/Foundations/BishopElementaryTailEvidenceExact.agda` | Evidence-bearing interface with `logarithmExponentialInverseEvidence` | This is a *field asking for a proof*, not that proof |
+| `DASHI/Foundations/BishopExponentialCauchyProductExact.agda` | Actual Bishop `bishopExpAdd`, inverse-product and finite Cauchy reindexing | Fully reusable; does not identify `exp_B(L_n)` for the negative-log series |
+| `DASHI/Foundations/BishopExponentialBinomialCoefficientExact.agda` and `BishopExponentialFiniteCauchyCoefficientExact.agda` | True factorial/binomial coefficients and finite exp(x+y) Cauchy identity | Source coefficient proof applies to the real exponential, not yet the signed sine/cosine mixed complex convolution |
+| `DASHI/Analysis/BishopRound11FactorDerivativeInterchangeExact.agda` and `BishopRound11TrigSetoidInterchangeInstanceExact.agda` | True literal sine/cosine finite derivative and pointwise convergence chain | Actual infinite limit-derivative interchange requires `SineInterchangeControlAt` and `CosineInterchangeControlAt`; generic DLMF source is not a native same-object witness |
+| `DASHI/Analysis/BishopRound11ClassicalTrigObjectWeldExact.agda` | Shared source-backed DLMF trigonometry/derivative interface | `SameClassicalAndBishopTrigObject` must still be proved; `sameTrigObjectWeldClosed=false` |
+| `DASHI/Moonshine/JInvariantBishopTrigUnitPhaseExact.agda` and `BishopNonnegativeSquareReflectionExact.agda` | Same Bishop complex norm algebra and constructive square-reflection | Native phase modulus follows from a supplied `BishopTrigPythagoreanAt`; there is no independent Pythagorean inhabitant in that owner |
+| `DASHI/Foundations/BishopBaselSineProductCoefficientBoundaryExact.agda` | Actual same-Bishop Basel/sine coefficient cancellation after a limit witness | `SineProductCoefficientLimit.finiteProductLinearConvergesToSineCoefficient` is a still-unpaid proof field |
+| `DASHI/Analysis/RiemannAnalyticSubstrate.agda` | Original `ZetaHalfPlaneLayer` and `CompletedRiemannZeta` typed interfaces | `ZetaEqualsDirichletSeries : Complex→Set` is unconnected to an equality until an explicit function-value bridge is built; `agreesWithHalfPlane` is a field, not proof that the original zeta is our selected Bishop sum |
+| `DASHI/Analysis/RiemannZetaProgramBoundary.agda`, `Mathematics/NumberTheory/RiemannCompletedZetaBoundary.agda` | Explicit zeta continuation, Euler-product and completed-zeta input contracts | Neither constructs the concrete Bishop Riemann analytic substrate; Abel values and finite results do not pay continuity or selected function identity |
+| `DASHI/Analysis/BishopMachinConfiguredTrigPiExact.agda` | Configured Machin real equals the original Bishop Machin series value and original quarter angle | Explicitly does NOT prove independent first-positive-zero trig π characterization |
+| `DASHI/Analysis/SineNaturalMultiplePiZeroBidiExact.agda` | Forward indexed sine-zero induction on a supplied constructed trig package | Reverse sine-zero classification remains source-backed; the package's trig addition/π zero fields are assumed for that carrier |
+
+### New owned common-cut composition
+
+Created `DASHI/Analysis/BishopRound11ImaginaryProductPythagoreanReuseExact.agda`,
+commit `ddbc0d896e14b139cdb970a7b9aabf23361ab5d4`;
+fixed private Round11 local sine/cosine abbreviation in commit
+`c495358321bea47167b5fce3fe51470af6e48763`.
+
+Its literal `Round11ImaginaryExpMultiplicative inputs`
+is the original Bishop phase product, not a generic Set
+authority for a different carrier.
+
+- `round11PythagoreanFromImaginaryProduct` uses the actual
+  `BishopSetoidComplexExact.imaginaryExponentialProductGivesAddition`,
+  the anti-diagonal source `BishopRound11TrigAtZeroExact.round11PythagoreanFromCosineAdditionOpposite`,
+  and original concrete Round11 parity, proving
+  `sin_B²(theta)+cos_B²(theta) ≃ 1` from a SINGLE genuine
+  signed-factorial imaginary product witness.
+- `round11ModulusFromImaginaryProduct` reuses the already
+  proved native nonnegative-square reflection and Bishop phase
+  norm to derive `|sin_B(theta)|,|cos_B(theta)| ≤ 1` on the
+  exact selected Round11 dataset, without an independent
+  Pythagorean input.
+- `sourceRegionWideFromSingleImaginaryProduct` imports
+  the previous all-index `Re(s)>2` complex Basel compiler.
+  **Only two** genuine source proof families are now
+  independently owed for original complex-s uniform
+  Dirichlet convergence: (i) `exp_B(L_n)=n+1` on
+  the original Bishop canonical Nat log series, and
+  (ii) `expC(i(x+y)) ≈ expC(ix)*expC(iy)` on ALL
+  original Bishop real x,y (the signed-factorial Cauchy
+  product). Pythagorean and phase modulus no longer
+  demand additional independent proof input.
+
+Commit `f80ffe498671ccf5957c16546c7595a4be357d7f`
+and operator-token correction
+`e69bbda2a0ea8b0b687a1dfcf7958179cb99a965`
+extend that **same** source owner:
+
+- `round11DoubleAngleFromImaginaryProduct`: constructs
+  the ORIGINAL `BishopMachinQuarterPhaseQuadruplicationAlgebraExact.Round11BishopDoubleAngle`
+  with sine and cosine projections of the same product.
+- `round11MachinTrigEndpointFromImaginaryProduct`:
+  `sin_B(pi_M) ≃ 0`, `cos_B(pi_M) ≃ -1`
+  using ONLY the common product law and the still-owed
+  **original Machin quarter-angle semantic equality**
+  `cos_B(theta_M) ≃ sin_B(theta_M)`; the Pythagorean
+  premise is derived, not independently passed.
+- `round11SineShiftByMachinPi`,
+  `round11CosineShiftByMachinPi`: source sine/cosine
+  sign changes under translation by the SAME
+  `Machin.bishopMachinPi` from that endpoint and
+  source sine/cosine addition. This is not an
+  independent first-positive-zero π uniqueness proof.
+
+All three TOE roots import the new owner, commits
+`2c3b2f3d015038f829cc801204d682a3c4f49f37`,
+`d990c971b59e06a6f8cf55c0dbdf3d9923cd0e08`,
+`61f60270abb4a7dceed7d98ab7e2160ddabbb295`.
+
+### Exact remaining non-duplicated kernel and math cut
+
+1. **LOG-NATIVE**: prove for the actual Bishop reciprocal
+   power-series `L(x)` the source inverse law
+   `exp_B(L(x))=1/(1-x)` (at least at the required
+   `x=(n+1)/(n+2)`), and compare an arbitrary earlier
+   configured negative-log term family by real termwise equality.
+   The abstract `expOntoPositive` and singleton terminal
+   model do not pay this.
+2. **K05-MIXED**: prove the actual original all-(x,y)
+   signed factorial Cauchy coefficients + limit reindexing
+   for `expC(i(x+y))≈expC(ix)expC(iy)`.
+   Once paid, **all native trig addition, Pythagorean,
+   modulus, double-angle and π-shift** are covered by
+   the new reusable source reductions.
+3. **K04d-CONTINUITY**: prove finite term continuity on
+   the Bishop variable-complex carrier, combine with
+   already owned one-cutoff regional uniform errors to get
+   continuity of the sum, and select a genuine analytic
+   function object on the exact same carrier.
+4. **K04d-ZETA-SAME-OBJECT**: prove actual identity with
+   the original selected `ZetaHalfPlaneLayer.zetaHalfPlane`
+   and `CompletedRiemannZeta.agreesWithHalfPlane`.
+   A `ZetaEqualsDirichletSeries` Set-valued field with a
+   witness of that Set is NOT automatically a function
+   equality; these are independent evidence obligations.
+5. **K05-QUARTER-PI**: actual native atan/tan link giving
+   `cos_B(theta_M)≃sin_B(theta_M)`, establish the branch
+   using the already proved 3/4<theta_M<11/14 window,
+   and prove independent first-positive-zero π uniqueness.
+6. **AGDA-KERNEL**: Source-written terms are NOT kernel receipts.
+   No Agda compiler or CI run was executed. Neither
+   syntactic absence of holes/postulates nor a file name
+   ending in `Exact` certifies a theorem. Audit the
+   Golden `--safe` transitive imports before elevating this
+   source to authoritative proof status.
+
+Attribution retained: Machin (1706), Dirichlet, Riemann,
+Bishop and Bridges, Murray, Viktor Csimma's pinned
+vendor/bishop and all reused in-repo original owner paths.
