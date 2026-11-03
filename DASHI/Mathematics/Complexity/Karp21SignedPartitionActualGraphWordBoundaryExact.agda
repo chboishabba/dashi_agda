@@ -25,10 +25,10 @@ module DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundary
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ)
-open import Data.List.Base using (List; length)
+open import Data.List.Base using (List; _++_; length)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product using (Σ; _,_; proj₂)
-open import Data.Maybe.Base using (Maybe)
+open import Data.Maybe.Base using (Maybe; just)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -43,6 +43,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as GraphWord
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
 import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact as Size
+import DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact as Raw
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact as FixedWords
 open import Data.Empty using (⊥; ⊥-elim)
@@ -59,6 +60,31 @@ graphOfPositiveTarget Source.unitEdgeYesPositive =
   2 , Actual.fixedUnitGraph
 graphOfPositiveTarget (Source.scaledCompletePositive parts nonzero) =
   length parts , Actual.sourceIndexedWeightedGraph parts nonzero
+
+------------------------------------------------------------------------
+-- Same ACTUAL nonzero-total E20 graph: its exact signed edge list
+-- is read back by the original literal gamma RAW parser, without a
+-- separate family of coefficients or a parallel graph definition.
+-- The lexicographic validator and threshold decoder remain open.
+------------------------------------------------------------------------
+
+e20ScaledActualRawEdgeRoundTrip :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts))
+  (suffix : Word.BitWord) →
+  GraphWord.readRawEdges
+    (length (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero)))
+    (Encode.encodeEdgeWords
+      (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+      ++ suffix)
+  ≡ Data.Maybe.Base.just
+      ( Raw.rawOfEdges
+          (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+      , suffix )
+e20ScaledActualRawEdgeRoundTrip parts nonzero suffix =
+  Raw.readActualEdgeListWordSuffix
+    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+    suffix
 
 positiveTargetGraphAcceptsIff :
   (target : Source.PositiveCutTarget) →
