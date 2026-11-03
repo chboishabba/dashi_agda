@@ -8,29 +8,30 @@
 #   bash scripts/referee_karp21_maxcut.sh golden
 #   bash scripts/referee_karp21_maxcut.sh e20
 #   bash scripts/referee_karp21_maxcut.sh all
+#   bash scripts/referee_karp21_maxcut.sh preflight
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 mode="${1:-all}"
 
-if ! command -v agda >/dev/null 2>&1; then
-  echo "BLOCKED: agda executable unavailable. No kernel proof receipt." >&2
-  exit 127
-fi
-
 if ! command -v python3 >/dev/null 2>&1; then
-  echo "BLOCKED: python3 unavailable for Golden static preflight." >&2
+  echo "BLOCKED: python3 unavailable for preflight." >&2
   exit 127
 fi
 
 case "$mode" in
-  golden|e20|all) ;;
+  golden|e20|all|preflight) ;;
   *)
-    echo "Usage: $0 {golden|e20|all}" >&2
+    echo "Usage: $0 {preflight|golden|e20|all}" >&2
     exit 2
     ;;
 esac
+
+if [[ "$mode" != "preflight" ]] && ! command -v agda >/dev/null 2>&1; then
+  echo "BLOCKED: agda executable unavailable. No kernel proof receipt." >&2
+  exit 127
+fi
 
 printf 'Repository: %s\n' "$repo_root"
 printf 'Referee revision: '
@@ -38,6 +39,17 @@ git rev-parse HEAD
 printf 'Agda version: '
 agda --version
 printf 'Mode: %s\n' "$mode"
+
+# This source/bitword preflight is independent of the Agda kernel.
+# It catches actual codec mismatches and stdlib argument-arity mistakes.
+python3 scripts/check_karp21_agda_stdlib_arity.py
+python3 scripts/check_karp21_e20_bitlength_bound.py --max-n 5
+python3 scripts/check_karp_binary_codec.py
+
+if [[ "$mode" == "preflight" ]]; then
+  echo "PREFLIGHT ONLY: no Agda kernel acceptance or machine clock."
+  exit 0
+fi
 
 check_agda() {
   local source="$1"
