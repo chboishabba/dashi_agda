@@ -27,6 +27,8 @@ from karp21_signed_cut_binary_codec import (
 from karp21_binary_native_sparse_verifier import (
     verifies_sparse_word_binary_native,
     pairwise_endpoint_comparison_count,
+    maximum_edges_from_canonical_input_bits,
+    binary_native_pairwise_comparisons_bound,
 )
 
 
@@ -43,6 +45,8 @@ def exhaustive_small() -> int:
             g = partition_to_cut(parts)
             wire = reduction_word(encode_partition(parts))
             assert wire == encode_graph(g)
+            assert len(g.edges) <= maximum_edges_from_canonical_input_bits(len(wire))
+            assert pairwise_endpoint_comparison_count(len(g.edges)) <= binary_native_pairwise_comparisons_bound(len(wire))
             for labels in product((0, 1), repeat=g.vertices):
                 cert = sparse_certificate_from_labels(g, labels)
                 same_word(wire, cert)
@@ -69,6 +73,7 @@ def huge_sparse_and_signed() -> int:
     count = 0
     huge_n = 2**1024
     sparse = CutGraph(huge_n, ((0, huge_n - 1, 3),), 1)
+    assert len(sparse.edges) <= maximum_edges_from_canonical_input_bits(len(encode_graph(sparse)))
     for cert in ((), (0,), (0, 1), (1, 0), (1, 1), (0, 0)):
         same_word(encode_graph(sparse), cert)
         count += 1
