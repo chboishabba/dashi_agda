@@ -1,3 +1,7 @@
+### 2026-11-03 further P01/P03/P07 quantum admissibility payment
+
+[Original TSVF ABL finite source proof](../physics/TSVFAdmissibleTensorOverlapABLMaxCut20261103.md) now connects original joint admissibility with explicit finite two-level original Q.QuantumSurface, Q.TSVFEnsemble, positive Q.ABLContext and actual Q.ablProbability normalization for all k. Its tensor overlap and Born-mass cross identity show exact finite exponential branch robustness when effective disturbance weights are controlled, with counterexamples if not. **Still SOURCE, not Agda accepted or physical Hilbert/Stone/OS**; the real (3,1) P07.05–07 and 2017 complex environment remain OPEN.
+
 ## 2026-11-03 supplement — Emergent (3,1) / quantum-to-YM / KK exact proof network
 
 The [canonical new cross-lane P00–P11 roadmap](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md) contains **186 distinct numbered exact lemma obligations**, acceptance statements, original theorem owners and minimal dependency cuts. It extends but **does not replace** this original eight-gate Paper 1–7 inventory. The direct owner overlaps are Gate 4 non-flat metric and signature, Gate 5 genuine Hilbert/Stone (P03/P07), Gate 3 physical non-Abelian source and Yang–Mills (P04–P06), Gate 1/6 local physical carrier/gauge representations and Gate 8 composition. Finite S8/CCR/signature or conditional compiler receipts must not promote actual spacetime or Clay closure.
