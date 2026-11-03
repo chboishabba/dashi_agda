@@ -23,6 +23,8 @@ module DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundary
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (Bool)
+import Data.Vec.Base as Vec
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ)
 open import Data.List.Base using (List; _++_; length)
@@ -48,6 +50,8 @@ import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphEndpointOrderExact 
 import DASHI.Mathematics.Complexity.Karp21UpperPairStructuralLexOrderExact as PairLex
 import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictLexExact as StrictLex
 import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictAfterExact as StrictAfter
+import DASHI.Mathematics.Complexity.Karp21DecodedWeightedCutSemanticBidiExact as Observed
+import DASHI.Mathematics.Complexity.Karp21FinDecoderIndexBidiExact as FinRound
 import DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExact as Indexed
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact as FixedWords
@@ -90,6 +94,32 @@ graphOfPositiveTarget (Source.scaledCompletePositive parts nonzero) =
 -- every earlier/later pair from E20's actual scaled complete graph.
 -- This is stronger than independent endpoint validity and no-repeat.
 ------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+-- Endpoint reconstruction under the ACTUAL E20 complete-graph cut.
+-- Every label vector sees identical signed edge-list score when the
+-- parser reconstructs Fin n from its numeric endpoint addresses.
+-- This deliberately does not assert equality of offDiagonal proofs.
+------------------------------------------------------------------------
+
+e20ActualScaledGraphReconstructionScoreSame :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts))
+  (labels : Vec.Vec Bool (length parts)) →
+  Cut.edgeListCutValue
+    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+    labels
+  ≡ Cut.edgeListCutValue
+      (Observed.reconstructCanonicalEdges
+        (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+        (e20ActualScaledGraphEndpointBounds parts nonzero))
+      labels
+e20ActualScaledGraphReconstructionScoreSame parts nonzero labels =
+  Observed.reconstructedCanonicalListScoreSame
+    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+    (e20ActualScaledGraphEndpointBounds parts nonzero)
+    labels
 
 e20ActualScaledGraphPassesStrictAfter :
   (parts : List ℤ)
