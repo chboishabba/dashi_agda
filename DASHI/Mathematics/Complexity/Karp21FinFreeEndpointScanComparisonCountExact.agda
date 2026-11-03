@@ -23,7 +23,7 @@ module DASHI.Mathematics.Complexity.Karp21FinFreeEndpointScanComparisonCountExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.List.Base using (List; []; _∷_; length)
@@ -38,8 +38,7 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as F
 endpointConsistentCounted :
   Nat → Bool → List (Nat × Bool) → Bool × Nat
 endpointConsistentCounted vertex selected [] =
-  Boolean.andBool (Boolean.boolEqual selected selected)
-    (FinFree.endpointConsistent vertex selected []) , zero
+  true , zero
 endpointConsistentCounted vertex selected ((other , observed) ∷ rest)
   with NatP._≟_ vertex other
 ... | yes _ with endpointConsistentCounted vertex selected rest
