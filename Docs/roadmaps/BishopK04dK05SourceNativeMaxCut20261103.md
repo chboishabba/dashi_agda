@@ -124,3 +124,49 @@ This round made two **new, narrower proof improvements** on Lean draft [#104](ht
 Lean companion PR #104 has additionally source-written `originalDirichletValue_continuousAt` on all `Re(s)>1`. It proves continuity for the entire `originalDirichletValue = ∑' exp(-s log(n+1))`, not just for finite terms, by the already source-written `originalDirichletValue_eq_riemannZeta` equality on that open domain and the existing Mathlib `differentiableAt_riemannZeta` (no singularity in `Re(s)>1`). This is a stronger **ordinary classical analytic** theorem than a claim limited to a Machin point, with zero new zeta assumptions on that Mathlib target.
 
 **Non-promotion boundary:** the Lean equality does not identify Agda's `RiemannAnalyticSubstrate.ZetaHalfPlaneLayer.zetaHalfPlane` with Mathlib `riemannZeta`; the former is an abstract `Function` component whose `ZetaEqualsDirichletSeries` is an arbitrary `Set` field, not definitionally a concrete term equality. The Agda same-object constructor and genuinely source-native Bishop finite-term continuity/uniform-limit-to-continuity theorem are still **open**. The original `BishopDirichletUniformBaselTailsExact` already supplies uniform-to-limit errors conditional on region-wide actual domination, so do NOT add an invented second tail bound. No Lean/Agda kernel run was observed for this continuation.
+
+
+## 2026-11-04 renewed native Machin source archaeology and proof work
+
+The earlier K05-PI list was **incomplete as source archaeology**: it underemphasized actual in-repo Machin implementations. Re-audit at PR #1408 head explicitly inspected all of the following original theorem owners:
+
+| Existing owner | Proved or provided | Not proved by that owner |
+|---|---|---|
+| `BishopMachinArctanConstructionExact` | Original alternating signed odd-factorial reciprocal-power series, convergence, literal `bishopMachinPi = 16 atan_B(1/5) - 4 atan_B(1/239)` | Original Bishop sine/cosine tangent semantics |
+| `BishopMachinRationalTangentAlgebraExact` | Exact rational tangent double/subtract calculation, terminal formal tangent parameter = 1 | That the real constructed arctangents satisfy the induced sine/cosine tangent operation |
+| `BishopMachinPiRationalWindowExact` + `BishopMachinPiArchimedesWindowExact` | Original constructive intervals 3 < pi_M < 22/7 and stronger Archimedean 223/71 < pi_M < 22/7 | Equality to an independently characterized trigonometric pi |
+| `BishopMachinQuarterAngleBranchExact` | Original theta_M = 4 atan_B(1/5)-atan_B(1/239), `4 theta_M ≃ pi_M`, 3/4 < theta_M < 11/14 | `cos_B(theta_M) ≃ sin_B(theta_M)` |
+| `BishopMachinQuarterPhaseQuadruplicationAlgebraExact` + `BishopRound11ImaginaryProductPythagoreanReuseExact` | Source ring-algebraic fourfold endpoint, conditional on one original pure-imaginary product and quarter sin/cos equality; one product implies Pythagorean and double-angle | The original mixed signed-factorial Cauchy coefficient theorem itself |
+| `BalabanBishopSineTwoBallCubicLowerExact` + `BalabanBishopOuterBrillouinSineGapExact` | Original signed-series sine lower bound on the radius-two chart; on [3/4,11/7], sin_B(t) >= 87/128 | Global sine positivity on (0,pi_M) |
+| `BishopRound11ClassicalTrigObjectWeldExact` + `BishopRound11FactorDerivativeInterchangeExact` | Common source/claim compilation for differentiation/Pythagorean and original finite derivative-term/reindexed convergence | A semantic source-backed weld inhabitant or derivative/limit interchange; these are explicitly still required |
+| `BalabanWilsonFourierMachinPeriodCarrierExact` | Wilson Fourier period parameter is *definitionally chosen* from the original constructed Machin real | Independent proof that this chosen parameter is trigonometric least-positive period |
+| `BishopMachinTwoPiPeriodFromImaginaryProductExact` | Original signed-series 2pi_M periodicity conditional on the one K05 product and theta_M quarter equality | Minimal period and unconditional first sine zero |
+
+### New GOLDEN source theorem owner: Machin complement reflection
+
+`DASHI/Analysis/BishopMachinPiComplementReflectionFromImaginaryProductExact.agda` uses the real selected Round11 parity and previously derived source pi_M anti-periodicity to prove **without any new assumptions beyond the existing K05 product and quarter equality**:
+- `machinComplementAsNegativePlusPi`: exact Bishop ring setoid rearrangement `pi_M-x ≃ (-x)+pi_M`.
+- `machinComplementInvolutive`: original Machin complement as a setoid involution.
+- `round11SineMachinComplement`: `sin_B(pi_M-x) ≃ sin_B(x)` on the actual Round11 terms.
+- `round11CosineMachinComplement`: `cos_B(pi_M-x) ≃ -cos_B(x)` on the same selected terms.
+
+This removes a *separate* reflection-identity obligation from global native sine positivity once K05 PRODUCT and quarter equality are proved. It does not claim the general (0,pi_M) interval split or first-zero theorem by itself.
+
+### New GOLDEN source theorem owner: strict quarter-angle sine positivity
+
+`DASHI/Analysis/BishopMachinQuarterStrictSineFromTwoBallExact.agda` directly instantiates the *existing original* radius-two alternating series source theorem with the original `Round11.round11ConcreteTermIdentification`, **without assuming K05 product, Pythagorean or trig/atan equality**.
+
+The real Machin branch gives `3/4 < theta_M < 11/14`. A direct rational comparison gives `theta_M <= 11/7` and `|theta_M| <= 2`. Hence `BalabanBishopOuterBrillouinSineGapExact.sineAboveEightySevenOverOneTwentyEight` supplies:
+`87/128 <= E.bishopSin (Round11.elementarySeries inputs) theta_M`.
+Positivity of the rational `87/128` then gives `round11MachinQuarterSineStrictPositive`, an **unconditional native signed-series branch result relative to the existing Round11 data**. This removes any separately assumed positive-sine branch at the actual Machin quarter.
+
+Both new files carry `{-# OPTIONS --safe #-}` and are imported into the three TOE roots; **source-written only**. This turn has not observed an exact-head successful Agda kernel check and does not label the theorems accepted.
+
+### Revised smallest FOUR-gate cut (not an invented set of assumptions)
+
+- **K04d LOG:** original Bishop source negative-log exponential inverse `exp_B(-L(x)) ≃ 1-x` at Nat successors (the real exp(x)exp(-x) cancellation, original Nat log convergence and positive Nat rational geometry are already owned). Do not regard the completed Lean faithful-series mirror as an Agda proof importer.
+- **K05 PRODUCT:** original native all-degree *complex* signed factorial Cauchy coefficient + actual Bishop double-series absolute-limit transport. The real-only coefficient proof and Lean shadow do not themselves discharge this. Then original Pythagorean, addition, Machin complement, period follow from existing reducers.
+- **K04d CONTINUITY:** original Bishop finite-term continuity, uniform-limit construction (reuse `BishopDirichletUniformBaselTailsExact`) and genuine same-object identification with the selected `RiemannAnalyticSubstrate.ZetaHalfPlaneLayer` and `CompletedRiemannZeta`. The abstract `ZetaEqualsDirichletSeries : Complex → Set` is not the required equality unless inhabited with its actual semantics.
+- **K05 PI:** first prove actual original atan/tan `cos_B(theta_M)≃sin_B(theta_M)`; the rational tangent arithmetic, theta_M window, **strict positive sine at theta_M**, and fourfold endpoint algebra are now source owners. First positive sine zero further needs positive sine on (0,pi_M); the existing radius-two cubic lower and new pi_M complement reflection may eliminate much of that proof, but the interval argument remains OPEN.
+
+Do not conflate a Fourier period *chosen* to be pi_M with an independent proof that pi_M is the unique trigonometric pi. Preserve the historical attribution (Machin, Archimedes, Bishop/Bridges, Murray/Csimma, Balaban and the original DASHI theorem owners). No source-backed theorem is paid merely by setting a `ProofLevel` field.
