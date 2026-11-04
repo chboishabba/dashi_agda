@@ -3,7 +3,7 @@ module DASHI.Interop.SLRPNFToAgdaPreflightProofJoinPipelineExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _<_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
@@ -12,6 +12,7 @@ import DASHI.Cognition.PNF.EventAlgebra as Event
 import DASHI.Cognition.PNF.CandidateInvalidation as Invalidation
 import DASHI.Cognition.Utterance.AdmissibilityGate as Admissibility
 import DASHI.Interop.SensibLawResidualLattice as Residual
+import DASHI.Interop.PNFResidualConsumerNextObligation as Consumer
 import Ontology.Hecke.PNFResidualBridge as HeckeBridge
 import Ontology.Hecke.QuotientRepresentation as Quotient
 import DASHI.Interop.PNFSpectralFieldCore as SpectralCore
@@ -31,6 +32,16 @@ invalidatedPNFCannotEnterAdmittedFrames :
   (r : Invalidation.PNFInvalidationReceipt) →
   Event.validity (Invalidation.invalidatedCandidate r) ≡ Event.admissible → ⊥
 invalidatedPNFCannotEnterAdmittedFrames = Invalidation.invalidatedCannotBeAdmitted
+
+record AdmittedPNFFramePair : Set where
+  constructor admittedPNFFramePair
+  field
+    leftCandidate : Event.CandidatePNF
+    rightCandidate : Event.CandidatePNF
+    leftIsAdmitted : Event.validity leftCandidate ≡ Event.admissible
+    rightIsAdmitted : Event.validity rightCandidate ≡ Event.admissible
+    leftEmissionReceipt : Residual.PNFEmissionReceipt
+    rightEmissionReceipt : Residual.PNFEmissionReceipt
 
 record StageR2HeckeFibreQuotientSummary : Set where
   constructor stageR2HeckeFibreQuotientSummary
@@ -62,8 +73,23 @@ record PNFObligationDemand : Set where
     demandRef : String
     externalObligationRef : String
     statementDigest : String
+    leftEmissionReceipt : Residual.PNFEmissionReceipt
+    rightEmissionReceipt : Residual.PNFEmissionReceipt
     residualLevel : Residual.ResidualLevel
+    residualComesFromReceiptComputation :
+      residualLevel ≡ Residual.receiptResidual leftEmissionReceipt rightEmissionReceipt
     protection : FleetReduction.Protection String
+
+buildPNFObligationDemandFromReceipts :
+  (demandRef externalObligationRef statementDigest : String) →
+  (leftReceipt rightReceipt : Residual.PNFEmissionReceipt) →
+  (protection : FleetReduction.Protection String) →
+  PNFObligationDemand
+buildPNFObligationDemandFromReceipts
+  demandRef externalObligationRef statementDigest leftReceipt rightReceipt protection =
+  pnfObligationDemand demandRef externalObligationRef statementDigest
+    leftReceipt rightReceipt (Residual.receiptResidual leftReceipt rightReceipt)
+    refl protection
 
 record StageR3LifecycleSummary : Set where
   constructor stageR3LifecycleSummary
@@ -79,13 +105,19 @@ canonicalStageR3Lifecycle : StageR3LifecycleSummary
 canonicalStageR3Lifecycle = stageR3LifecycleSummary 622 600 22 1112 221 refl
 
 data MarchenkoPasturBand : Set where
-  insideMarchenkoPasturBulk : MarchenkoPasturBand
-  aboveMarchenkoPasturBulkEdge : MarchenkoPasturBand
+  insideMarchenkoPasturBulk :
+    (eigenvalueMicros bulkUpperEdgeMicros : Nat) →
+    (eigenvalueMicros < suc bulkUpperEdgeMicros) ≡ true →
+    MarchenkoPasturBand
+  aboveMarchenkoPasturBulkEdge :
+    (eigenvalueMicros bulkUpperEdgeMicros : Nat) →
+    (bulkUpperEdgeMicros < eigenvalueMicros) ≡ true →
+    MarchenkoPasturBand
 
-data ShrinkageOutcome : Set where
-  shrunkToBulkZero : ShrinkageOutcome
-  retainedAsMacroscopicEigenMotif : ShrinkageOutcome
-  retainedByProtectedObligationWitness : ShrinkageOutcome
+data ShrinkageTypedOutcome (A : Set) : Set where
+  shrunkSpectralBulkToZero : A → ShrinkageTypedOutcome A
+  retainedAsMacroscopicEigenMotif : FleetReduction.Retained A → ShrinkageTypedOutcome A
+  retainedByProtectedObligationWitness : FleetReduction.Retained A → ShrinkageTypedOutcome A
 
 record MarchenkoPasturShrinkageSpec : Set where
   constructor marchenkoPasturShrinkageSpec
@@ -95,33 +127,54 @@ record MarchenkoPasturShrinkageSpec : Set where
     bulkNullDimensions : Nat
     macroscopicEigenMotifDimensions : Nat
     bulkPlusSignalExact : featureCountN ≡ bulkNullDimensions + macroscopicEigenMotifDimensions
+    bulkUpperEdgeMicros : Nat
     coordinateRebuildabilityRow : Rebuild.SpectralCoordinateMapRow
     numericABIBinding : SpectralABI.PNFRowMapBinding
 
 canonicalMarchenkoPasturSpec : MarchenkoPasturShrinkageSpec
 canonicalMarchenkoPasturSpec =
-  marchenkoPasturShrinkageSpec 200 120 117 3 refl
+  marchenkoPasturShrinkageSpec 200 120 117 3 refl 3148495
     Rebuild.canonicalSpectralCoordinateMapRow SpectralABI.canonicalPNFRowMapBinding
 
-applyMarchenkoPasturWithProtection : MarchenkoPasturBand → Bool → ShrinkageOutcome
-applyMarchenkoPasturWithProtection aboveMarchenkoPasturBulkEdge _ =
-  retainedAsMacroscopicEigenMotif
-applyMarchenkoPasturWithProtection insideMarchenkoPasturBulk true =
-  retainedByProtectedObligationWitness
-applyMarchenkoPasturWithProtection insideMarchenkoPasturBulk false =
-  shrunkToBulkZero
+applyMarchenkoPasturWithTypedProtection :
+  ∀ {A : Set} → MarchenkoPasturBand →
+  FleetReduction.Protection A → ShrinkageTypedOutcome A
+applyMarchenkoPasturWithTypedProtection (aboveMarchenkoPasturBulkEdge _ _ _) prot =
+  retainedAsMacroscopicEigenMotif (FleetReduction.retain prot)
+applyMarchenkoPasturWithTypedProtection (insideMarchenkoPasturBulk _ _ _) (FleetReduction.spectral x) =
+  shrunkSpectralBulkToZero x
+applyMarchenkoPasturWithTypedProtection (insideMarchenkoPasturBulk _ _ _) (FleetReduction.formallyRequired x) =
+  retainedByProtectedObligationWitness (FleetReduction.retain (FleetReduction.formallyRequired x))
+applyMarchenkoPasturWithTypedProtection (insideMarchenkoPasturBulk _ _ _) (FleetReduction.reviewed x) =
+  retainedByProtectedObligationWitness (FleetReduction.retain (FleetReduction.reviewed x))
 
-marchenkoPasturShrinksUnprotectedBulkToZero :
-  applyMarchenkoPasturWithProtection insideMarchenkoPasturBulk false ≡ shrunkToBulkZero
-marchenkoPasturShrinksUnprotectedBulkToZero = refl
+marchenkoPasturShrinksUnprotectedSpectralBulkToZero :
+  ∀ {A : Set} (eig edge : Nat) (inBulk : (eig < suc edge) ≡ true) (x : A) →
+  applyMarchenkoPasturWithTypedProtection
+    (insideMarchenkoPasturBulk eig edge inBulk) (FleetReduction.spectral x)
+  ≡ shrunkSpectralBulkToZero x
+marchenkoPasturShrinksUnprotectedSpectralBulkToZero _ _ _ _ = refl
 
-protectedFormalOrReviewedSurvivesMarchenkoPasturBulk :
-  applyMarchenkoPasturWithProtection insideMarchenkoPasturBulk true ≡ retainedByProtectedObligationWitness
-protectedFormalOrReviewedSurvivesMarchenkoPasturBulk = refl
+protectedFormalSurvivesMarchenkoPasturBulk :
+  ∀ {A : Set} (eig edge : Nat) (inBulk : (eig < suc edge) ≡ true) (x : A) →
+  applyMarchenkoPasturWithTypedProtection
+    (insideMarchenkoPasturBulk eig edge inBulk) (FleetReduction.formallyRequired x)
+  ≡ retainedByProtectedObligationWitness (FleetReduction.retainedFormal x)
+protectedFormalSurvivesMarchenkoPasturBulk _ _ _ _ = refl
 
-marchenkoPasturCannotDropProtectedSingleton :
-  applyMarchenkoPasturWithProtection insideMarchenkoPasturBulk true ≡ shrunkToBulkZero → ⊥
-marchenkoPasturCannotDropProtectedSingleton ()
+protectedReviewedSurvivesMarchenkoPasturBulk :
+  ∀ {A : Set} (eig edge : Nat) (inBulk : (eig < suc edge) ≡ true) (x : A) →
+  applyMarchenkoPasturWithTypedProtection
+    (insideMarchenkoPasturBulk eig edge inBulk) (FleetReduction.reviewed x)
+  ≡ retainedByProtectedObligationWitness (FleetReduction.retainedReviewed x)
+protectedReviewedSurvivesMarchenkoPasturBulk _ _ _ _ = refl
+
+marchenkoPasturCannotDropFormalSingleton :
+  ∀ {A : Set} (eig edge : Nat) (inBulk : (eig < suc edge) ≡ true) (x y : A) →
+  applyMarchenkoPasturWithTypedProtection
+    (insideMarchenkoPasturBulk eig edge inBulk) (FleetReduction.formallyRequired x)
+  ≡ shrunkSpectralBulkToZero y → ⊥
+marchenkoPasturCannotDropFormalSingleton _ _ _ _ _ ()
 
 data DashiAgdaPreflightOp : Set where
   opDiagnose : DashiAgdaPreflightOp
@@ -247,7 +300,10 @@ record FormalProofJoin
   constructor formalProofJoin
   field
     demandIsNoTypedMeet :
-      PNFObligationDemand.residualLevel demand ≡ Residual.noTypedMeet
+      Residual.receiptResidual
+        (PNFObligationDemand.leftEmissionReceipt demand)
+        (PNFObligationDemand.rightEmissionReceipt demand)
+      ≡ Residual.noTypedMeet
     roundNoiseFiltered :
       AgdaSymbolSearchReceipt.roundSnapshotNoiseHidden search ≡ true
     searchMatchesDetail :
@@ -268,6 +324,34 @@ roundNoiseBlocksFormalProofJoin noiseFalse join
   with FormalProofJoin.roundNoiseFiltered join
 ... | noiseTrue rewrite noiseFalse with noiseTrue
 ... | ()
+
+record EndToEndPNFToAgdaProofJoinPipeline
+    {S Class : Set}
+    (quotient : Quotient.QuotientInterfaceOn S Class)
+    (leftState rightState : S) : Set where
+  constructor endToEndPNFToAgdaProofJoinPipeline
+  field
+    stageR1AdmittedPair : AdmittedPNFFramePair
+    stageR2SameHeckePool : HeckeBridge.SameHeckeCandidatePool quotient leftState rightState
+    stageR3Demand : PNFObligationDemand
+    stageR3LeftReceiptMatchesR1 :
+      PNFObligationDemand.leftEmissionReceipt stageR3Demand
+      ≡ AdmittedPNFFramePair.leftEmissionReceipt stageR1AdmittedPair
+    stageR3RightReceiptMatchesR1 :
+      PNFObligationDemand.rightEmissionReceipt stageR3Demand
+      ≡ AdmittedPNFFramePair.rightEmissionReceipt stageR1AdmittedPair
+    stageR4Band : MarchenkoPasturBand
+    stageR4RetainedWitness : FleetReduction.Retained String
+    stageR4ProtectedSurvivability :
+      applyMarchenkoPasturWithTypedProtection
+        stageR4Band (PNFObligationDemand.protection stageR3Demand)
+      ≡ retainedByProtectedObligationWitness stageR4RetainedWitness
+    stageR5Search : AgdaSymbolSearchReceipt
+    stageR5Detail : AgdaObjectDetailReceipt
+    stageR5Route : ObligationRouteBinding stageR3Demand
+    stageR5Diagnostics : PreflightDiagnosticsReceipt
+    stageR5Join :
+      FormalProofJoin stageR3Demand stageR5Search stageR5Detail stageR5Route stageR5Diagnostics
 
 record StageR5FormalSubtractionSummary : Set where
   constructor stageR5FormalSubtractionSummary
