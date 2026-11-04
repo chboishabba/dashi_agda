@@ -37,6 +37,7 @@ import DASHI.Physics.Foundations.TSFVObservedPhysicalAccessTransportExact as TSF
 import DASHI.Physics.Foundations.TSFVKKSelectedHorizontalMetricSchurExact as TSFVKKHorizontal
 import DASHI.Physics.Foundations.TSFVKKActualSelectedMetricHorizontalWeldExact as TSFVKKPhysicalWeld
 import DASHI.Physics.Foundations.TSFVKKFiveMetricInvertibleShearExact as TSFVKKShear
+import DASHI.Physics.Foundations.TSFVKKHorizontalReductionNoninjectiveBidiExact as TSFVKKBackwardBidi
 import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
 import DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact as TSVFQubit
@@ -205,6 +206,17 @@ open TSFVKKShear public using
   ; kkActualFiveBilinear
   ; kkActualFiveBilinearIsInvertibleShearPullback
   ; kkHorizontalShearHasZeroCirclePart
+  )
+
+-- P08/P11 actual backwards steelman: any two unequal radii remain
+-- indistinguishable by the ORIGINAL 4D horizontal metric, but an
+-- actual unit-vertical observation on the ORIGINAL 5D bilinear
+-- separates them. Real 5D Einstein/radion inhabitants stay OPEN.
+open TSFVKKBackwardBidi public using
+  ( sameOriginalFourBilinearForAnyTwoRadii
+  ; originalFiveMetricVerticalProbeReadsFibreRadius
+  ; originalFiveMetricEqualityForcesSameFibreRadius
+  ; originalFourMetricCannotUniquelyLiftFibreRadius
   )
 
 -- P03/P07: ACTUAL original TSVF/OS clock strongly convergent
