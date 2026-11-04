@@ -170,3 +170,15 @@ Both new files carry `{-# OPTIONS --safe #-}` and are imported into the three TO
 - **K05 PI:** first prove actual original atan/tan `cos_B(theta_M)≃sin_B(theta_M)`; the rational tangent arithmetic, theta_M window, **strict positive sine at theta_M**, and fourfold endpoint algebra are now source owners. First positive sine zero further needs positive sine on (0,pi_M); the existing radius-two cubic lower and new pi_M complement reflection may eliminate much of that proof, but the interval argument remains OPEN.
 
 Do not conflate a Fourier period *chosen* to be pi_M with an independent proof that pi_M is the unique trigonometric pi. Preserve the historical attribution (Machin, Archimedes, Bishop/Bridges, Murray/Csimma, Balaban and the original DASHI theorem owners). No source-backed theorem is paid merely by setting a `ProofLevel` field.
+
+
+### Same-source Machin half-phase compilation (2026-11-04)
+
+New `DASHI/Analysis/BishopMachinHalfPhaseFromImaginaryProductExact.agda` eliminates an additional standalone angle/endpoint equality. The original `Quarter.fourTimesQuarterIsMachinPi`, `Quad.twiceTwiceIsFourTimesQuarter`, `Product.round11DoubleAngleFromImaginaryProduct`, `Product.round11PythagoreanFromImaginaryProduct`, `Quad.sinDoubleIsOneAtEqualUnitPhase`, and `Quad.cosDoubleIsZeroAtEqualPhase` are composed to construct:
+- `doubleMachinHalfIsOriginalPi`: `2*(2theta_M) ≃ pi_M` on the **original** constructed Bishop Machin real, with no new assumptions;
+- `round11MachinHalfSineIsOne`: `sin_B(2theta_M) ≃ 1` on the same Round11 series from the **already single** K05 imaginary product and original quarter equality;
+- `round11MachinHalfCosineIsZero`: `cos_B(2theta_M) ≃ 0` under those same two inputs.
+
+No separate half-phase sign/Pythagorean/double-angle authority is needed. Combined with the new unconditional `sin_B(theta_M)>0` and conditional `sin_B(pi_M-x)=sin_B(x)`, this sharpens the geometric/sign route: establish the native mixed product and actual atan→quarter equality first; obtain local positivity and a constructive interval split covering all `0<x<pi_M` from the **existing radius-two alternating sine lower** plus reflection. A complete locatedness/interval split and local strict cubic positivity beyond the existing quarter fibre are **not yet proved**; no first-positive-zero promotion is claimed.
+
+This module is source-written with `{-# OPTIONS --safe #-}` and imported by all three TOE roots. A successful Agda kernel check has not been observed.
