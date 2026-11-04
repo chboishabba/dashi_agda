@@ -1,3 +1,30 @@
+## 4 November 2026 — further P01/P02/P03/P07/P08 same-source max-cut
+
+**P01/P02 original finite diamond:** New source owner DASHI/Physics/Foundations/TSFVOriginalFiltrationFiniteCausalDiamondNonpromotionExact.agda imports the *existing* DASHI.Geometry.FiniteCausalDiamond, maps all seven original diamond causal edges to the existing observer-visibility preorder, and proves no decoder of only the original three filtration levels can distinguish the genuine diamond x/y spatial branches. The earlier three-element observer information chain is a true finite order, but not a physical measurement or derivation of three spatial dimensions. The original diamond itself supplies three branches as a chosen finite model, not a measured 4D continuum. This new module is intentionally non-Golden because the original diamond owner is not known transitively safe.
+
+**P02/P08 exact KK 5D congruence:** New Golden-candidate owner DASHI/Physics/Foundations/TSFVKKFiveMetricInvertibleShearExact.agda consumes the earlier horizontal KK Schur bilinear and constructs both inverses of the actual coordinate shear. In mathematical notation,
+
+\[
+L_A(v,s)=(v,s+A(v)),\quad L_A^{-1}(v,u)=(v,u-A(v)),\qquad
+G_5(\xi,\eta)=(g_4\oplus b^2)(L_A\xi,L_A\eta).
+\]
+
+The bilinear equality and horizontal internal-coordinate cancellation are proved pointwise for arbitrary rational g4, connection A (including nonzero A) and b². This gives invertible congruence, not merely signature counts; positive physical radion, actual selected smooth 5D metric/bundle, observer-measured physical g4, same-action Einstein source and global index remain UNSUPPLIED. A Lorentzian (1 time, 4 spaces) conclusion requires physically supplied nondegenerate (1 time, 3 spaces) g4 and b²>0 plus inertia theory.
+
+**P03/P07 original real-time generator:** New Golden-candidate owner DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda consumes the ORIGINAL TSVFOSSameSelectedClockIterateExact.OriginalTSVFToOSClock, its actual observer embedding J, and the original OS.hamiltonian reconstruction. It derives the sampled strong-difference-quotient intertwiner from the same real-time evolution intertwinement and linearity; selected strong-limit transport/uniqueness then derives the derivative generator identity (rather than assuming it). A second theorem derives **energy H** intertwinement using source-calibrated complex linearity of J and the factor i*hbar:
+
+\[
+K=\left.\frac{dU(t)}{dt}\right|_{t=0}=-iH/\hbar,\quad H=i\hbar K,\quad
+JH_{\mathrm{observer}}\psi=H_{\mathrm{OS}}J\psi.
+\]
+
+This is CONDITIONAL on physically constructing complete noncollapsed observer/OS Hilbert spaces, real strongly continuous unitaries, the correct difference-quotient/dense domain topology, the meaning of the ORIGINAL OS H as a self-adjoint energy operator, SI time scaling, and Wick spectral continuation. It deliberately does NOT assert real-time U equals Euclidean T on excited states.
+
+**Independent references:** equivalent local Python verified the 27 filtration transitivity triples, all seven original finite-diamond edges, 40,000 exact rational KK horizontal/gauge identities, another 20,000 exact rational invertible KK shear/congruence identities, plus finite C² noncollapsed Hilbert time-unitary/common-generator and Euclidean-contraction *numerical* comparisons. The GitHub reference script scripts/check_tsfv_observer_kk_os_same_source_20261104.py now includes these additions but its exact checkout was not executed. Reference checks are neither physical 4D YM/OS construction nor Agda kernel acceptance.
+
+**Governance and remaining cut:** Original 186 P00–P11 IDs preserved. The non-Golden finite-diamond file stays out of the --safe regression root; two new source-written Golden candidates are exported. No local postulates, holes or termination overrides; no agda compiler in runtime, so KERNEL PENDING. Physically remaining: select genuine observer-based local propagation and 4D causal symbol/dimension; build and verify the same selected 5D Einstein/KK metric/action and observed reduced bilinear; construct actual noncollapsed Hilbert/Stone/OS strong generator, domains, spectrum and continuation. Standalone Yang-Mills R443/R445/R320/R333/Clay remains with the other worker.
+
+
 # 4 November 2026 — original observer → (3,1) → KK horizontal metric → same OS generator
 
 **Owner:** [Agda PR #1460](https://github.com/chboishabba/dashi_agda/pull/1460), `research/lorentz31-directional-kk-ym-20261103`. The independent [YM PR #1444](https://github.com/chboishabba/dashi_agda/pull/1444) worker owns R443/R445/R320/R333/Clay; no child-to-parent imports or duplicated YM analytics.
