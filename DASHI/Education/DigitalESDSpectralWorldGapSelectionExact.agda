@@ -18,6 +18,7 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Information.PNFSpectralGeometry as Spectral
 import DASHI.Education.DigitalESDOpenAxisStudyPartWorldExact as World
@@ -68,9 +69,9 @@ numericEigenEquation :
   (i : Mode family) →
   numericCovarianceAction family (vector family i) ≡
   scalarMultiply family (eigenvalue family i) (vector family i)
-numericEigenEquation family i
-  rewrite covarianceHasSameOperator family (vector family i) =
-  eigenEquation family i
+numericEigenEquation family i =
+  trans (sym (covarianceHasSameOperator family (vector family i)))
+    (eigenEquation family i)
 
 ------------------------------------------------------------------------
 -- SPW02: The statistical null-model law is NOT obtained from a Jacobi
