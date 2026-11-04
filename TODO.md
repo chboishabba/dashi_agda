@@ -17551,3 +17551,14 @@ Cleanup
 - [x] Wire both new modules to all three TOE roots and audit the updated roadmap.
 - [ ] Native Agda K05 mixed signed factorial Cauchy multiplication and actual original atan/tangent quarter equality still independently open; only then first-sine-zero becomes unconditional.
 - [ ] Exact-head Agda --safe kernel check and transitive imports of new modules; no observed kernel receipt.
+
+
+### 2026-11-04 — K05 native complex Cauchy triangle continuation (golden source-written, kernel pending)
+
+- [x] Add `BishopGenericCauchyFromAbsoluteTriangleExact.cauchyTriangleConvergesToActualProduct`: reuse the native real finite rectangle, finite signed wing, double-tail convergence, and vanishing-difference lemmas. No invented Cauchy-product authority.
+- [x] Add actual Bishop setoid-complex triangle/Mertens reindexing and `round11PhaseTriangleConvergesFromFourAbsoluteTriangles`: compile 4 signed real Cauchy triangles to original Round11 complex phase product *when original absolute triangles converge*.
+- [x] Fix the missing `suc` import in the existing Round11 complex rectangle proof owner and expose both new owners in all 3 canonical TOE roots; leave protected ESD unchanged.
+- [x] Independently execute exact rational Gaussian grouped parity/telescope regression on 25 input pairs × 20 degrees: PASS 500/500 (not a kernel or universal proof).
+- [ ] K05-PRODUCT source-specific blockers: construct four actual absolute triangular convergence receipts, prove all-n grouped signed factorial parity coefficient/telescope theorem including the O_N correction, prove O_N→0 on Bishop via factorial majorant, finish original `Round11ImaginaryExpMultiplicative`.
+- [ ] K04d-LOG actual negative-log inverse and Nat specialization; K04d-CONTINUITY finite-term/uniform-limit and same-object original selected zeta; K05-PI actual arctan/trig quarter equality.
+- [ ] Exact-head `agda --safe` proof acceptance and all three TOE root checks; no executable/accepted workflow receipt observed in this pass.
