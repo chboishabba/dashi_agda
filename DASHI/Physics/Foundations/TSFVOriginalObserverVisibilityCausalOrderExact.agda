@@ -27,13 +27,13 @@ module DASHI.Physics.Foundations.TSFVOriginalObserverVisibilityCausalOrderExact 
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
-open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Product using (Σ; _×_; _,_)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Foundations.HistoryWeightFiltrationExact as History
 import DASHI.Physics.Foundations.TSFVOriginalHiddenHistoryFiltrationWeldExact as Original
+import DASHI.Physics.Foundations.FiniteHistoryOrientationExact as Micro
 
 -- The observable order is computed from the SOURCE-owned visibility
 -- of actual event labels. It does not require arbitrary pre-order data.
@@ -129,67 +129,25 @@ observableAccessAntisymmetric :
 observableAccessAntisymmetric
   History.initialFiltration History.initialFiltration _ _ = refl
 observableAccessAntisymmetric
-  History.initialFiltration History.intermediateFiltration ab ba =
-    caseImpossibleIntermediate ba
-  where
-    caseImpossibleIntermediate :
-      History.intermediateFiltration ⊑obs History.initialFiltration →
-      History.initialFiltration ≡ History.intermediateFiltration
-    caseImpossibleIntermediate backwards
-      with intermediateDoesNotAccessPrecedeInitial backwards
-    ... | ()
+  History.initialFiltration History.intermediateFiltration _ ba =
+    ⊥-elim (intermediateDoesNotAccessPrecedeInitial ba)
 observableAccessAntisymmetric
-  History.initialFiltration History.terminalFiltration ab ba =
-    caseImpossibleTerminal ba
-  where
-    caseImpossibleTerminal :
-      History.terminalFiltration ⊑obs History.initialFiltration →
-      History.initialFiltration ≡ History.terminalFiltration
-    caseImpossibleTerminal backwards
-      with terminalDoesNotAccessPrecedeInitial backwards
-    ... | ()
+  History.initialFiltration History.terminalFiltration _ ba =
+    ⊥-elim (terminalDoesNotAccessPrecedeInitial ba)
 observableAccessAntisymmetric
-  History.intermediateFiltration History.initialFiltration ab ba =
-    caseImpossibleInitial ab
-  where
-    caseImpossibleInitial :
-      History.intermediateFiltration ⊑obs History.initialFiltration →
-      History.intermediateFiltration ≡ History.initialFiltration
-    caseImpossibleInitial backwards
-      with intermediateDoesNotAccessPrecedeInitial backwards
-    ... | ()
+  History.intermediateFiltration History.initialFiltration ab _ =
+    ⊥-elim (intermediateDoesNotAccessPrecedeInitial ab)
 observableAccessAntisymmetric
   History.intermediateFiltration History.intermediateFiltration _ _ = refl
 observableAccessAntisymmetric
-  History.intermediateFiltration History.terminalFiltration ab ba =
-    caseImpossibleLate ba
-  where
-    caseImpossibleLate :
-      History.terminalFiltration ⊑obs History.intermediateFiltration →
-      History.intermediateFiltration ≡ History.terminalFiltration
-    caseImpossibleLate backwards
-      with terminalDoesNotAccessPrecedeIntermediate backwards
-    ... | ()
+  History.intermediateFiltration History.terminalFiltration _ ba =
+    ⊥-elim (terminalDoesNotAccessPrecedeIntermediate ba)
 observableAccessAntisymmetric
-  History.terminalFiltration History.initialFiltration ab ba =
-    caseImpossibleEarly ab
-  where
-    caseImpossibleEarly :
-      History.terminalFiltration ⊑obs History.initialFiltration →
-      History.terminalFiltration ≡ History.initialFiltration
-    caseImpossibleEarly backwards
-      with terminalDoesNotAccessPrecedeInitial backwards
-    ... | ()
+  History.terminalFiltration History.initialFiltration ab _ =
+    ⊥-elim (terminalDoesNotAccessPrecedeInitial ab)
 observableAccessAntisymmetric
-  History.terminalFiltration History.intermediateFiltration ab ba =
-    caseImpossibleMiddle ab
-  where
-    caseImpossibleMiddle :
-      History.terminalFiltration ⊑obs History.intermediateFiltration →
-      History.terminalFiltration ≡ History.intermediateFiltration
-    caseImpossibleMiddle backwards
-      with terminalDoesNotAccessPrecedeIntermediate backwards
-    ... | ()
+  History.terminalFiltration History.intermediateFiltration ab _ =
+    ⊥-elim (terminalDoesNotAccessPrecedeIntermediate ab)
 observableAccessAntisymmetric
   History.terminalFiltration History.terminalFiltration _ _ = refl
 
@@ -198,9 +156,9 @@ observableAccessAntisymmetric
 -- time-information relation the 4D physical causal cone must extend.
 selectedEarlyHistoryIndistinguishability :
   Original.actualObserverRecord History.initialFiltration
-    Original.Micro.chooseMinusBoundary
+    Micro.chooseMinusBoundary
   ≡
   Original.actualObserverRecord History.initialFiltration
-    Original.Micro.choosePlusBoundary
+    Micro.choosePlusBoundary
 selectedEarlyHistoryIndistinguishability =
   Original.originalEarlyRecordsIndistinguishable
