@@ -16,7 +16,7 @@ module DASHI.Education.DigitalESDWorldPNFTrialecticControlBridgeExact where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Data.List.Base as List using ()
+open import Data.List.Base as List
 open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDOpenAxisStudyPartWorldExact as World
