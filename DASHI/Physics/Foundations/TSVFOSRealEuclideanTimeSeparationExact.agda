@@ -19,7 +19,8 @@ module DASHI.Physics.Foundations.TSVFOSRealEuclideanTimeSeparationExact where
 -- same selected non-vacuum state.
 --
 -- The correct P07 physical bridge compares the same self-adjoint H,
--- with a real-time unitary U(t) and Euclidean contraction T(tau) related
+-- with a real-time unitary U(t)=exp(-i t H/hbar) and the Euclidean
+-- contraction T(tau)=exp(-tau H/hbar) at physical SI time tau, related
 -- by the justified Wick/OS spectral analytic continuation. One-step
 -- equality does not prove shared generator, analytic continuation,
 -- self-adjointness or domain equality.
