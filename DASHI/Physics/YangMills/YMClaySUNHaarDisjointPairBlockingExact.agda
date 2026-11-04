@@ -186,6 +186,88 @@ module _
       (disjointPairHaarPushforward _)
       (originalUnweightedSpectatorsDisappear observable)
 
+  ----------------------------------------------------------------------
+  -- ALL POSITIVE PATH LENGTHS: right-associated selected Wilson
+  -- holonomy order, zero commutativity assumptions. This specializes
+  -- to the existing exact two-link law and generalizes R445.F13 to L.
+  ----------------------------------------------------------------------
+
+  orderedPositivePath :
+    ∀ {l : Nat} →
+    Vec Link (suc l) → Link
+  orderedPositivePath {zero} (head ∷ []) = head
+  orderedPositivePath {suc l} (head ∷ tail) =
+    SUN.sunMultiply theory head (orderedPositivePath tail)
+
+  -- For EVERY L>=1, an ordered product of L independent original
+  -- one-link Haar variables is itself exactly one-link Haar. No group
+  -- commutativity, no density or new measure. This is stronger than
+  -- a two-link numerical fixture because the induction is symbolic.
+  originalPositivePathHaarPushforward :
+    ∀ {l : Nat} (observable : Link → ℝ) →
+    Product.productIntegral {n = suc l} source
+      (λ path → observable (orderedPositivePath path))
+    ≡ Product.integrateOne source observable
+  originalPositivePathHaarPushforward {zero} observable = refl
+  originalPositivePathHaarPushforward {suc l} observable =
+    trans
+      (Product.integrateCongruent source _ _
+        (λ head →
+          originalPositivePathHaarPushforward {l = l}
+            (λ tail →
+              observable (SUN.sunMultiply theory head tail))))
+      (oneNoncommutativePairPushforward observable)
+
+  -- A finite family of disjoint ordered L-link positive holonomies
+  -- integrates as independent coarse one-link Haar variables.
+  -- The original torus block-path source uses this right-associated
+  -- product order; literal coordinate/index identification still open.
+  disjointPositivePathIntegral :
+    ∀ {paths : Nat} (l : Nat) →
+    (Vec Link paths → ℝ) → ℝ
+  disjointPositivePathIntegral {paths = zero} l observable =
+    observable []
+  disjointPositivePathIntegral {paths = suc n} l observable =
+    Product.productIntegral {n = suc l} source
+      (λ finePath →
+        disjointPositivePathIntegral {paths = n} l
+          (λ coarseTail →
+            observable
+              (orderedPositivePath finePath ∷ coarseTail)))
+
+  disjointPositivePathHaarPushforward :
+    ∀ {paths : Nat} (l : Nat)
+      (observable : Vec Link paths → ℝ) →
+    disjointPositivePathIntegral l observable
+    ≡ Product.productIntegral source observable
+  disjointPositivePathHaarPushforward {paths = zero} l observable =
+    refl
+  disjointPositivePathHaarPushforward {paths = suc n}
+      l observable =
+    trans
+      (IntegralCongruence.productIntegralCongruent source _ _
+        (λ finePath →
+          disjointPositivePathHaarPushforward {paths = n} l
+            (λ coarseTail →
+              observable (orderedPositivePath finePath ∷ coarseTail))))
+      (originalPositivePathHaarPushforward {l = l}
+        (λ coarseLink →
+          Product.productIntegral source
+            (λ coarseTail → observable (coarseLink ∷ coarseTail))))
+
+  originalAllLengthDisjointPathSpectatorPushforward :
+    ∀ {paths spectators : Nat} (l : Nat)
+      (observable : Vec Link paths → ℝ) →
+    disjointPositivePathIntegral l
+      (λ coarse →
+        Product.productIntegral {n = spectators} source
+          (λ _ → observable coarse))
+    ≡ Product.productIntegral source observable
+  originalAllLengthDisjointPathSpectatorPushforward l observable =
+    trans
+      (disjointPositivePathHaarPushforward l _)
+      (originalUnweightedSpectatorsDisappear observable)
+
   -- A chosen concrete sequence of non-Abelian blocked link values is
   -- not supplied here by a guessed Gamma/RG coarse configuration.
   -- Identifying this integration order with the original 1024-bond
