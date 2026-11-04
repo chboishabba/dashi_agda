@@ -1,3 +1,7 @@
+## 2026-11-04 — TSVF correlation-aware global Born error, conditional source theorem
+
+`TSVF2017ControlledComplexOrderedRateBridgeExact` now also exposes `ControlledCorrelationBornError`, `correlatedWrongRateWithError`, `correlatedTwoChannelCrossWithError`: actual global complex wrong Born `W_actual <= W_independent+delta` implies `2^k W_actual <= 1+2^k delta` and `(2^k+1)W_actual <= 1+W_actual+2^k delta`. Explicit delta nonnegative, no factorization from marginal records; actual correlated physical global source and ABL postselection remain unconstructed. 3200 exact-rational independent error-reference cases passed. Agda typecheck pending; no change to Clay or P07 same-H proof status.
+
 ## 2026-11-04 — P01 complex controlled Born → ordered original ABL rate (SOURCE, kernel pending)
 
 `TSVF2017ControlledComplexOrderedRateBridgeExact.agda` reuses the chosen original `TSVF2017ControlledPointerRecordUnitaryExact`, heterogeneous tensor complex/Hermitian overlap, and original `Q.ablProbability` numerators/denominators. Heterogeneous *actual emitted* rational Born factors with explicit `2*siteBorn<=1`, complex gamma squared-product bound `<=1`, and rational monotone multiplication yield `(2^k+1)*wrongABL.numerator <= rightABL.denominator` with the nonzero ABL normalizer already proved in original Hetero. Canonical emitted `3/5` pulse gives exact `9/25` Born factor. No Nat calibration proxy, no independent probability law.
