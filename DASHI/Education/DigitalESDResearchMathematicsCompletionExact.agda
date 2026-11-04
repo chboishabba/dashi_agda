@@ -11,7 +11,7 @@ module DASHI.Education.DigitalESDResearchMathematicsCompletionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _*_; _^_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Membership.Propositional using (_∈_)
@@ -35,8 +35,12 @@ pilotAddressCount = 15 * 7
 pilotAddressCountIs105 : pilotAddressCount ≡ 105
 pilotAddressCountIs105 = refl
 
+_^^_ : Nat → Nat → Nat
+base ^^ zero = 1
+base ^^ suc n = base * (base ^^ n)
+
 eightLabelConfigurationCount : Nat
-eightLabelConfigurationCount = 8 ^ pilotAddressCount
+eightLabelConfigurationCount = 8 ^^ pilotAddressCount
 
 ------------------------------------------------------------------------
 -- RM01. Lossless source decomposition is not just an indexed 7-axis
