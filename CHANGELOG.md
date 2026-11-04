@@ -232,3 +232,10 @@ Additional K05 source theorem outputs: `round11SineAtTwoPi` and `round11CosineAt
 - Imported both into `EverythingTOESymmetryResolved369`, `Unifier`, and `Unified/Everything`. No protected ESD surfaces touched. Both are source-written with no added postulates or unsolved holes; exact Agda `--safe` kernel acceptance not yet observed. K04d/K05 terminal four mathematical obligations remain OPEN.
 
 - `BishopMachinHalfPhaseFromImaginaryProductExact.agda` now composes the original Bishop Machin quarter arithmetic with original Round11 source-double-angle and product-derived Pythagorean: twice the half angle equals π_M, and the actual half-angle sine/cosine become 1/0 under the same existing K05 product and quarter equality. No new analytic premise, no independent π theorem, and no kernel acceptance claim.
+
+## 2026-11-04 — Bishop Machin global sign / first positive sine zero source theorem
+
+- Golden PR #1408 adds `BishopSinePositiveTwoBallFromCubicExact.agda`: strict native sign of actual Round11 Bishop sine for 0<x, |x|≤2 by the existing factorial cubic lower and factor positivity 1−x²/6≥1/3>0; no new sine product, pi or atan assumptions.
+- Adds `BishopMachinPiGlobalSineSignFromTwoBallExact.agda`: original Bishop locatedness `fast-corollary-2-17` splits the real line between 3/2 and 2; pi_M<22/7 ensures the complementary positive angle is below 23/14<2 when x≥3/2; original signed-series π_M reflection transfers radius-two positivity. `round11MachinPiIsFirstPositiveSineZero` composes the already source-written first-zero constructor, with no separately assumed global sign family.
+- This narrows K05-PI to the actual source arctangent/tangent quarter equality and K05-PRODUCT. It is a **conditional original same-series proof** until both independent premises and exact-head Agda kernel checking succeed; do not claim full π completion.
+- Original pinned `viktorcsimma/bishop` `RealProperties.agda` was inspected for exact locatedness and order congruence theorem types; setoid order orientation fixed in the new radius-two and earlier Machin-quarter modules. Both new modules imported into all three TOE roots. No ESD edits.
