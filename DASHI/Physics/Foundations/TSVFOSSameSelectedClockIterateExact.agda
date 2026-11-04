@@ -96,8 +96,23 @@ record OriginalTSVFToOSClock
       ≡ TSVF.QuantumSurface.evolveKet Q
           (TSVF.initialTime E) (TSVF.middleTime E) x
 
-    -- Hard physical interface: the selected original TSVF observed step
-    -- is carried by the SAME OS reconstructed translation semigroup.
+    -- Algebraic interface for the chosen osStep. There is NO
+    -- independent proof here that osStep is the Euclidean OS transfer
+    -- T(tau)=exp(-tau H) or the reconstructed real-time unitary
+    -- U(t)=exp(-i t H/hbar). These are NOT equal on positive-energy
+    -- excitations: a real-time isometry cannot intertwine a strictly
+    -- contracting positive-E Euclidean step under a norm-isometric
+    -- identification. See TSVFOSRealEuclideanTimeSeparationExact.
+    --
+    -- The physical P07 interpretation requires:
+    --  * an actual reconstructed noncollapsed Hilbert state and domain;
+    --  * the SAME self-adjoint reconstructed H, not a mere typed label;
+    --  * real-time U and Euclidean T from the common spectral calculus;
+    --  * the observer's physically calibrated clock and an isometry/
+    --    unitary identification respecting H on a dense common core.
+    --
+    -- Finite one-step iteration below remains correct exactly for
+    -- whatever osStep the source supplies, not for an unproved Wick map.
     oneStepIntertwines :
       (x : TSVF.QuantumSurface.Ket Q) →
       embedObserver (observerStep x)
