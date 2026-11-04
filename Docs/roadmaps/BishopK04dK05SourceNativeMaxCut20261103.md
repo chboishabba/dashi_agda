@@ -268,3 +268,26 @@ including the original Machin `1/5` and `1/239`. This is **not** the Agda
 universal equality, nor a Bishop convergence theorem. It rules out promoting
 the false uncorrected grouped coefficient formula. No exact-head Agda
 elaboration receipt exists; remain kernel-pending.
+
+
+**Sharper analytic target for the residual odd/odd boundary.** For real Bishop
+arguments x,y the absolute value of each coefficient is its usual factorial
+majorant. All summands in the odd/odd convolution correspond to the *subset*
+of the nonnegative binomial terms of total degree `m=2N+2` with odd left
+degree. Consequently the exact mathematical target is
+
+```text
+abs(O_N(x,y))
+ <= sum(k=0..N, |x|^(2k+1)*|y|^(2(N-k)+1)
+                  / ((2k+1)!*(2(N-k)+1)!))
+ <= (|x|+|y|)^(2N+2)/(2N+2)!.
+```
+
+As `N → infinity` this majorant tends to zero because it is a subsequence
+of the terms of the original absolutely convergent Bishop exponential
+series at `|x|+|y|`. To make this native Agda, reuse
+`BishopExponentialFiniteCauchyCoefficientExact` and the original
+factorial/binomial coefficient embedding, with the explicit odd-index
+subsum and nonnegative-sum monotonicity. Then use the pinned
+`Sequence` term-vanishing-from-series-convergence lemma and subsequence
+transport, not an arbitrary complex tail assumption.
