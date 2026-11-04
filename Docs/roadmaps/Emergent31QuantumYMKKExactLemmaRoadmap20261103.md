@@ -1,3 +1,13 @@
+### 4 November 2026 — P01/P02/P03/P07/P08 focused closure and original source reuse
+
+Original 186 roadmap lemma IDs retained. New files:
+- TSFVOriginalFiltrationFiniteCausalDiamondNonpromotionExact — imports the original five-event three-branch finite causal diamond and its genuine causal edges; their natural projection preserves the original observer-access preorder but necessarily collapses all three spatial events. No filtration-only decoder can recover x/y. Non-Golden legacy dependency; physical local propagation remains OPEN.
+- TSFVKKFiveMetricInvertibleShearExact — proves actual rational KK 5-metric shear/inverse and pointwise congruence to the original 4D bilinear plus fibre square, with nonzero connection allowed. Physical selected metric/source, positive radion and actual full 5D Einstein-matter solution remain OPEN.
+- TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact — DERIVES the original observer/OS time derivative generator intertwinement from real-time unitary group intertwinement, J linearity, strong limits and limit uniqueness, then DERIVES physical energy operator intertwinement if the same J is complex-linear for the selected i*hbar scaling. The target consumes the original OS reconstruction's Hamiltonian value, not a second Hamiltonian. Correct SI-time Euclidean semigroup is exp(-tau H/hbar); it is not directly equal to real-time exp(-itH/hbar). Noncollapsed physical Hilbert, strong continuity, densely defined self-adjoint domains, spectral calculus and analytic continuation all OPEN.
+
+Independent equivalent Python reference passed 27 access triples, 7 finite-diamond edges, 40,000 exact rational KK horizontal/gauge equalities, 20,000 exact KK shear equalities, and noncollapsed two-level complex-Hilbert numerical real/Euclidean time controls. Actual committed script not executed from checkout; Agda binary unavailable and kernel acceptance pending. Same technical dossier: Docs/physics/TSFVObserverKKOSSameSourcePhysicalMaxCut20261104.md. Other worker exclusively owns R443/R445/R320/R333 and Clay.
+
+
 ### 4 November 2026 — physical same-source max-cut tightened, parent YM worker independent
 
 **New focused technical dossier:** [original observer, actual KK metric and real-vs-OS generator](../physics/TSFVObserverKKOSSameSourcePhysicalMaxCut20261104.md). After reconciling the other worker's #1444/#1460 attachment, #1460 reused the newly present `TSVF2017ControlledComplexOrderedRateBridgeExact` and `ControlledCorrelationBornError` original Q.ABL sources. We did NOT redo their rate/correlation work or touch the independent YM R443/R445/R320/R333 physical theorem.
