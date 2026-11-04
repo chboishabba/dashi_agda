@@ -76,10 +76,12 @@ decodeGraphWordFromActualFrame :
 decodeGraphWordFromActualFrame
     word n m k afterN afterM afterEdges raw decoded
     readN readM tripleBound readEdges readW validated sparseBound
-  rewrite readN | readM | readEdges | readW | validated
+  rewrite readN | readM
   with NatP._≤?_ (m * suc (suc (suc zero))) (length afterM)
 ... | no violatesTriple = ⊥-elim (violatesTriple tripleBound)
-... | yes _ with NatP._≤?_
+... | yes _
+  rewrite readEdges | readW | validated
+  with NatP._≤?_
     (Sparse.twoPerEdge (length decoded)) (Word.encodingSize word)
 ...   | no violatesSparse = ⊥-elim (violatesSparse sparseBound)
 ...   | yes _ = refl
