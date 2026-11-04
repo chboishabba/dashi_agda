@@ -24,7 +24,7 @@ module DASHI.Analysis.BishopRound11NativeComplexRectangleExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Product.Base using (_×_; _,_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
 import Real as R
 import RealProperties as RP
@@ -152,3 +152,150 @@ round11PhaseSeriesConvergesToOriginalExp inputs x =
     (C.im (C.imaginaryPhase T x) ,
       Route.round11MachinSineConverges inputs x)
     (RP.≃-symm (C.imEquivalent phaseEquality))
+
+------------------------------------------------------------------------
+-- INFINITE RECTANGLE (NOT YET THE INFINITE CAUCHY TRIANGLE).
+--
+-- Constructive finite products already converge to the product of
+-- their Bishop limits by the pinned Sequence multiplication theorem.
+-- The four coordinate products and the two coordinate sums suffice.
+-- The finite rectangle identity transports convergence to the
+-- actual complex rectangular partial sums.  No new analytic input.
+------------------------------------------------------------------------
+
+ComplexFinitePartialConvergesTo :
+  (terms : Nat → C.BishopComplex) →
+  C.BishopComplex → Set
+ComplexFinitePartialConvergesTo terms limit =
+  (Seq._ConvergesTo_
+    (λ n → C.re (complexFinitePartial terms n))
+    (C.re limit))
+  ×
+  (Seq._ConvergesTo_
+    (λ n → C.im (complexFinitePartial terms n))
+    (C.im limit))
+
+complexFinitePartialProductsConverge :
+  (left right : Nat → C.BishopComplex) →
+  (leftLimit rightLimit : C.BishopComplex) →
+  ComplexFinitePartialConvergesTo left leftLimit →
+  ComplexFinitePartialConvergesTo right rightLimit →
+  (Seq._ConvergesTo_
+    (λ n →
+      C.re (C._*C_
+        (complexFinitePartial left n)
+        (complexFinitePartial right n)))
+    (C.re (C._*C_ leftLimit rightLimit)))
+  ×
+  (Seq._ConvergesTo_
+    (λ n →
+      C.im (C._*C_
+        (complexFinitePartial left n)
+        (complexFinitePartial right n)))
+    (C.im (C._*C_ leftLimit rightLimit)))
+complexFinitePartialProductsConverge
+    left right leftLimit rightLimit leftConv rightConv =
+  let
+    realReal =
+      Seq.xₙyₙ→x₀y₀
+        (C.re leftLimit , proj₁ leftConv)
+        (C.re rightLimit , proj₁ rightConv)
+    imagImag =
+      Seq.xₙyₙ→x₀y₀
+        (C.im leftLimit , proj₂ leftConv)
+        (C.im rightLimit , proj₂ rightConv)
+    realImag =
+      Seq.xₙyₙ→x₀y₀
+        (C.re leftLimit , proj₁ leftConv)
+        (C.im rightLimit , proj₂ rightConv)
+    imagReal =
+      Seq.xₙyₙ→x₀y₀
+        (C.im leftLimit , proj₂ leftConv)
+        (C.re rightLimit , proj₁ rightConv)
+  in
+  Seq.xₙ+yₙ→x₀+y₀
+    (R._*_ (C.re leftLimit) (C.re rightLimit) , realReal)
+    (R.-_ (R._*_ (C.im leftLimit) (C.im rightLimit)) ,
+      Seq.-xₙ→-x₀
+        (R._*_ (C.im leftLimit) (C.im rightLimit) , imagImag))
+  ,
+  Seq.xₙ+yₙ→x₀+y₀
+    (R._*_ (C.re leftLimit) (C.im rightLimit) , realImag)
+    (R._*_ (C.im leftLimit) (C.re rightLimit) , imagReal)
+
+complexRectangleConvergesToProduct :
+  (left right : Nat → C.BishopComplex) →
+  (leftLimit rightLimit : C.BishopComplex) →
+  ComplexFinitePartialConvergesTo left leftLimit →
+  ComplexFinitePartialConvergesTo right rightLimit →
+  (Seq._ConvergesTo_
+    (λ n → C.re (complexRectangle left right n n))
+    (C.re (C._*C_ leftLimit rightLimit)))
+  ×
+  (Seq._ConvergesTo_
+    (λ n → C.im (complexRectangle left right n n))
+    (C.im (C._*C_ leftLimit rightLimit)))
+complexRectangleConvergesToProduct
+    left right leftLimit rightLimit leftConv rightConv =
+  let
+    productConv =
+      complexFinitePartialProductsConverge
+        left right leftLimit rightLimit leftConv rightConv
+  in
+  Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc n) →
+      RP.≃-symm
+        (C.reEquivalent
+          (complexFiniteRectangleProduct left right
+            (suc n) (suc n)))})
+    (C.re (C._*C_ leftLimit rightLimit) , proj₁ productConv)
+  ,
+  Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc n) →
+      RP.≃-symm
+        (C.imEquivalent
+          (complexFiniteRectangleProduct left right
+            (suc n) (suc n)))})
+    (C.im (C._*C_ leftLimit rightLimit) , proj₂ productConv)
+
+-- This is now the literal original Bishop/Round11 series PRODUCT
+-- LIMIT (rectangular order).  The remaining K05 proof has to show
+-- that the signed-factorial TRIANGLE at x+y has that same limit.
+round11RectangleConvergesToOriginalExpProduct :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  (Seq._ConvergesTo_
+    (λ n →
+      C.re
+        (complexRectangle
+          (round11PhaseTerms inputs x)
+          (round11PhaseTerms inputs y) n n))
+    (C.re
+      (C._*C_
+        (C.expC (Route.round11MachinTranscendentals inputs)
+          (C.pureImaginary x))
+        (C.expC (Route.round11MachinTranscendentals inputs)
+          (C.pureImaginary y)))))
+  ×
+  (Seq._ConvergesTo_
+    (λ n →
+      C.im
+        (complexRectangle
+          (round11PhaseTerms inputs x)
+          (round11PhaseTerms inputs y) n n))
+    (C.im
+      (C._*C_
+        (C.expC (Route.round11MachinTranscendentals inputs)
+          (C.pureImaginary x))
+        (C.expC (Route.round11MachinTranscendentals inputs)
+          (C.pureImaginary y)))))
+round11RectangleConvergesToOriginalExpProduct inputs x y =
+  complexRectangleConvergesToProduct
+    (round11PhaseTerms inputs x)
+    (round11PhaseTerms inputs y)
+    (C.expC (Route.round11MachinTranscendentals inputs)
+      (C.pureImaginary x))
+    (C.expC (Route.round11MachinTranscendentals inputs)
+      (C.pureImaginary y))
+    (round11PhaseSeriesConvergesToOriginalExp inputs x)
+    (round11PhaseSeriesConvergesToOriginalExp inputs y)
