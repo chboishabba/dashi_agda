@@ -242,6 +242,8 @@ import DASHI.Education.DigitalESDPNFSignedGraphConsumerExact
 
 import DASHI.Education.DigitalESDResearchMathematicsCompletionExact
 
+import DASHI.Education.DigitalESDSourceNumericEvidenceFirewallExact
+
 module DASHI.EverythingDigitalESDReciprocalBraid where
 
 ------------------------------------------------------------------------
