@@ -492,3 +492,219 @@ Original 2014/2017 Aharonov–Cohen–Gruss–Landsberger / Aharonov–Cohen–L
 After each update, report **exact lemma IDs, old versus new minimal dependency cut, source file + full commit SHA, actual Agda kernel status, physical population status, independent negative control and remaining smallest analytic/source premise**. "All gates closed" must never describe a numerical regression or a collection of conditional input records.
 
 **Next concrete work:** finish the full newest #1444/#1460 integration beyond the six source-copied files, compile the focused Golden roots; in parallel begin (A) P02 real causal volume/signature source, (B) P03 Hilbert/Stone physical clock and (C) P05 genuine compact SU(N) one-link Haar/native decoder. Then concentrate P06 actual R445/CMP116/R333 analytic estimates and P07 same-H theorem. Do not postpone source falsification until the end.
+
+
+## Appendix A — complete live status of all 186 exact lemma IDs
+
+**Accounting date: 4 November 2026 · #1460 child lane.** This appendix is deliberately a second *status and provenance index*, **not 186 additional lemmas**; the verbatim exact lemma statements occur once above. Source status is a provenance judgement based on the current in-repo surfaces and does **not** imply Agda kernel acceptance. **All 186 remain PHYSICAL-OPEN and KERNEL-UNVERIFIED at this audited exact head**. In particular these statuses must not override current verification receipts from the separate #1444 YM worker: P05/P06 are delegated and not independently reaudited here. Conditional statement labels are never marked as genuinely inhabited physical witnesses.
+
+**Legend:** `SOURCE partial` = existing finite/conditional/no-go code covers part of that obligation; `Physical proof OPEN` = no completed physical proof in this #1460 audit; `Delegated` = another worker owns the independent YM proof. Every line requires a real selected object, exact source binding, physical domains/limits, and an actual Golden proof receipt before it can become `CLOSED`.
+
+| Exact ID | Owner | Source/kernel/physical state |
+|---|---|---|
+| `P00.L01` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P00.L02` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P00.L03` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P00.L04` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P00.L05` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P00.L06` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P00.L07` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P00.L08` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P00.L09` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P00.L10` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P01.L01` | #1460 | SOURCE partial — original finite reversible histories; continuum source absent · **kernel unverified / physical open** |
+| `P01.L02` | #1460 | SOURCE partial — finite reversal/action involution; refinement naturality absent · **kernel unverified / physical open** |
+| `P01.L03` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P01.L04` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P01.L05` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P01.L06` | #1460 | SOURCE partial — actual source filtration and lossy observer quotient; physical conditional expectations absent · **kernel unverified / physical open** |
+| `P01.L07` | #1460 | SOURCE partial — original hidden-state/visible record weld; physical non-signalling absent · **kernel unverified / physical open** |
+| `P01.L08` | #1460 | SOURCE partial — finite observer access order; physical evolution semigroup absent · **kernel unverified / physical open** |
+| `P01.L09` | #1460 | SOURCE partial — global strict reversal rank no-go; physical thermodynamics separate · **kernel unverified / physical open** |
+| `P01.L10` | #1460 | SOURCE partial — filtration/shift nonpromotion; physical source weld absent · **kernel unverified / physical open** |
+| `P01.L11` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P01.L12` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P01.L13` | #1460 | SOURCE partial — finite controlled emitter/heterogeneous records; actual many-body correlations absent · **kernel unverified / physical open** |
+| `P01.L14` | #1460 | SOURCE partial — original selected finite ABL normalization; physical postselection absent · **kernel unverified / physical open** |
+| `P01.L15` | #1460 | SOURCE partial — complex gamma/Born and bounded correlation-error source; physical uniform error absent · **kernel unverified / physical open** |
+| `P01.L16` | #1460 | SOURCE partial — finite macro branch robustness; real apparatus absent · **kernel unverified / physical open** |
+| `P01.L17` | #1460 | SOURCE partial — finite no-backwards-signalling semantics; physical intervention control absent · **kernel unverified / physical open** |
+| `P01.L18` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P01.L19` | #1460 | SOURCE partial — finite macro source written; kernel receipt absent · **kernel unverified / physical open** |
+| `P02.L01` | #1460 | SOURCE partial — three-level partial order and original diamond edge transport; physical interventions absent · **kernel unverified / physical open** |
+| `P02.L02` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P02.L03` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P02.L04` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P02.L05` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P02.L06` | #1460 | SOURCE partial — original finite causal diamond; real signal bound absent · **kernel unverified / physical open** |
+| `P02.L07` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P02.L08` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P02.L09` | #1460 | SOURCE partial — conditional source quadratic calibration; actual principal symbol absent · **kernel unverified / physical open** |
+| `P02.L10` | #1460 | SOURCE partial — conditional 3+1 signature; actual null-cone equality absent · **kernel unverified / physical open** |
+| `P02.L11` | #1460 | SOURCE partial — conditional exact same KK/TSVF selected arrow; physical source absent · **kernel unverified / physical open** |
+| `P02.L12` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P02.L13` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P02.L14` | #1460 | SOURCE partial — existing finite/intrinsic signature models; same physical model absent · **kernel unverified / physical open** |
+| `P02.L15` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P02.L16` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L01` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L02` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L03` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L04` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L05` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L06` | #1460 | SOURCE partial — finite Weyl/Stone owners; limiting CCR absent · **kernel unverified / physical open** |
+| `P03.L07` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L08` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L09` | #1460 | SOURCE partial — conditional original real-time group/derivative source; actual Hilbert absent · **kernel unverified / physical open** |
+| `P03.L10` | #1460 | SOURCE partial — conditional generator-to-OS equality; physical Stone/self-adjointness absent · **kernel unverified / physical open** |
+| `P03.L11` | #1460 | SOURCE partial — i-hbar energy matching conditional; differentiable Hilbert domain absent · **kernel unverified / physical open** |
+| `P03.L12` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L13` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P03.L14` | #1460 | SOURCE partial — finite Stone/colimit receipts; physical completion explicitly blocked · **kernel unverified / physical open** |
+| `P04.L01` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L02` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L03` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L04` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L05` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L06` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L07` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L08` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L09` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L10` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L11` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P04.L12` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P05.L01` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L02` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L03` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L04` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L05` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L06` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L07` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L08` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L09` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L10` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L11` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L12` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L13` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L14` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L15` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P05.L16` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L01` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L02` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L03` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L04` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L05` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L06` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L07` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L08` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L09` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L10` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L11` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L12` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L13` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L14` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L15` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L16` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L17` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L18` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L19` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P06.L20` | YM #1444 | Delegated; parent receipt required · **kernel unverified / physical open** |
+| `P07.L01` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P07.L02` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P07.L03` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P07.L04` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P07.L05` | #1460 | SOURCE partial — original observer-to-OS embedding is an input, not onto Hilbert isometry · **kernel unverified / physical open** |
+| `P07.L06` | #1460 | SOURCE partial — real-time group intertwiner is a conditional input, not physically sourced · **kernel unverified / physical open** |
+| `P07.L07` | #1460 | SOURCE partial — derived strong difference quotient and i-hbar energy equality conditional on physical Hilbert/H · **kernel unverified / physical open** |
+| `P07.L08` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P07.L09` | #1460 | SOURCE partial — SameMetricTSFVKK + selected bilinear weld conditional; inhabitant absent · **kernel unverified / physical open** |
+| `P07.L10` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P07.L11` | #1460 | SOURCE partial — Euclidean-vs-real-time no-go written; OS continuation uniqueness absent · **kernel unverified / physical open** |
+| `P07.L12` | #1460 | SOURCE partial — finite commutations/source-specific no-go; full physical square absent · **kernel unverified / physical open** |
+| `P07.L13` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P07.L14` | #1460 | SOURCE partial — KK horizontal and same-bilinear theorem conditional on actual metric · **kernel unverified / physical open** |
+| `P07.L15` | #1460 | SOURCE partial — original forward ket on selected conditional domain; macro physical state absent · **kernel unverified / physical open** |
+| `P07.L16` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L01` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L02` | #1460 | SOURCE partial — exact rational KK horizontal ansatz and invertible shear; physical 5D source absent · **kernel unverified / physical open** |
+| `P08.L03` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L04` | #1460 | SOURCE partial — exact horizontal bilinear reduction; full curvature/action reduction absent · **kernel unverified / physical open** |
+| `P08.L05` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L06` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L07` | #1460 | SOURCE partial — tree-level coupling arithmetic present; physical units/loops absent · **kernel unverified / physical open** |
+| `P08.L08` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L09` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L10` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L11` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L12` | #1460 | SOURCE partial — conditional same-observer-bilinear/KK horizontal metric; solution absent · **kernel unverified / physical open** |
+| `P08.L13` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L14` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L15` | #1460 | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P08.L16` | #1460 | SOURCE partial — typed Euclidean-vs-Lorentzian separation negative controls · **kernel unverified / physical open** |
+| `P08.L17` | #1460 | SOURCE partial — finite omitted-fibre curvature no-go; physical 5D curvature absent · **kernel unverified / physical open** |
+| `P09.L01` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L02` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L03` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L04` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L05` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L06` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L07` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L08` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L09` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L10` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L11` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L12` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P09.L13` | Shared | SOURCE partial — matched finite 5→2 composition conditional; physical adjacent matches absent · **kernel unverified / physical open** |
+| `P10.L01` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L02` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L03` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L04` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L05` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L06` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L07` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L08` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L09` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L10` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L11` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L12` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L13` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P10.L14` | #1460 (conditional) | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L01` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L02` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L03` | Shared | SOURCE partial — forward/backward steelman audit source-written; physical reverse reconstructions absent · **kernel unverified / physical open** |
+| `P11.L04` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L05` | Shared | SOURCE partial — conditional commuting squares/negative controls; physical source alignment absent · **kernel unverified / physical open** |
+| `P11.L06` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L07` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L08` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L09` | Shared | SOURCE partial — limit-order requirements documented; no analytic interchange proofs · **kernel unverified / physical open** |
+| `P11.L10` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L11` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L12` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L13` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L14` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L15` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L16` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L17` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+| `P11.L18` | Shared | SOURCE partial — smallest source-family cut S01–S11 documented; terminal physical theorem absent · **kernel unverified / physical open** |
+| `P11.L19` | Shared | Physical proof OPEN; no complete verified source · **kernel unverified / physical open** |
+
+### Non-exhaustive primitive-source leaf map, ordered by Pareto/alpha
+
+| Leaf | Critical physical source not yet constructed | Relevant canonical IDs |
+|---|---|---|
+| S01 | Real micro/observer state and decoherent pointer record | P01.L01–L07,L13–L17 |
+| S02 | Spatially resolving causal interventions, retarded response and signal cone | P01.L08–L12; P02.L01,L06 |
+| S03 | Independent 4D continuum dimension/volume/scale proof | P02.L02–L05,L13–L15 |
+| S04 | Real physical hyperbolic principal symbol, null cone, time orientation | P02.L07–L12 |
+| S05 | Five-dimensional smooth bundle/action/metric/radion/Einstein–matter solution | P08.L01–L06,L10; P10.L01–L05 |
+| S06 | Same selected observer-measured 4-metric = actual KK reduction | P07.L09,L14; P08.L07–L12 |
+| S07 | Genuine physical 4D YM Schwinger/OS self-adjoint H | P06.L07–L18 (YM worker) |
+| S08 | Completed noncollapsed observer Hilbert, Stone and SI-time | P03.L01–L14 |
+| S09 | Unitary onto J, common dense H domain, spectrum/observables/Wick | P07.L05–L08,L10–L16 |
+| S10 | Cutoff/volume/KK radius/history limit matching and errors | P00.L06; P11.L01–L10 |
+| S11 | Exact-head Agda, trust and independent BIDI/referee receipts | P00.L04,L08–L10; P11.L11–L18 |
+
+**Pareto/alpha next:** pay S01→S02 first with *source-specific* observable spatial discrimination and independent retarded response, rather than another signature mask; in parallel pay an actual physical H/OS operator representation S08–S09 (not just abstract time-indexed maps), and P08 S05→S06 physical lift/source fields. Add a native BIDI non-injectivity theorem for the **original** KK horizontal reduction: different fifth-sector connections may have the identical reduced four-metric, so the reverse 4D→5D lift cannot be justified without independent fibre observables. This appendix is not a claim all future analytic lemmas are already known.
+
+**Closure threshold:** source-written only ≠ Agda kernel-accepted ≠ physically inhabited; no checkmark can be set by a Python fixture or a conditional source record. P05/P06 are not re-implemented here.
