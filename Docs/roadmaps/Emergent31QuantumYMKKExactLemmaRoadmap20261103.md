@@ -1,3 +1,7 @@
+### 4 November 2026 — P00 parent/child source-integration warning
+
+At this readback, **YM parent #1444** head `55670ec4089e3eaeab5f4454f5b8db5bbc5f5c27`; **unification child #1460** head before this documentation receipt `015f9a6d8ac1a33920385c5ba1bb5411dda62ec4`. GitHub `compare(parent branch, child branch)` returns **diverged**, child ahead by 263 commits, behind parent by 204 commits (97 changed-file entries in that compare). **P00.L02 remains OPEN:** integration needs a conflict-aware parent→child reconciliation followed by exact-head Golden Agda and regression checks. The other worker's native R443/R445/R320/R333/Clay work must not be overwritten or recast as child code. In particular a source-written #1460 theorem that imports an earlier native YM owner is not automatically typechecked against later parent changes. No clean merge/CI receipt is claimed by this note.
+
 ### 4 November 2026 — Pareto/alpha continuation after full 186-status appendix
 
 **Roadmap coverage:** Canonical P00–P11 statements and the complete 186-ID, owner-annotated, SOURCE/KERNEL/PHYSICAL appendix below. None is promoted to physical closure by a conditional theorem, finite fixture, old parent receipt or Python reference. P05/P06 remain independently owned by the YM worker.
