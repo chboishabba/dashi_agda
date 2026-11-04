@@ -24,6 +24,10 @@ import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Golden
 import DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact as Cook
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Runtime
 import DASHI.Mathematics.Complexity.Karp21FinFreeTypedObservationConsistencyBidiExact as Numeric
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
+import DASHI.Mathematics.Complexity.Karp21RawGraphValidatorObservationExact as Observe
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Graph
+import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
 
 boolEqualSymmetric : (a b : Bool) →
   Golden.boolEqual a b ≡ Golden.boolEqual b a
@@ -185,3 +189,91 @@ chronologicalRuntimeExactlyOriginalAllPairs entries =
   trans
     (chronologicalRuntimeIsCook entries [])
     (chronologicalCookExactlyOriginalAllPairs entries)
+
+------------------------------------------------------------------------
+-- Apply the generic chronological theorem to EXACT TWO endpoints
+-- per original signed raw edge. The raw history after each edge
+-- is (u,a)::(v,b)::history, exactly the original rawSparseScore
+-- implementation. Reverse only the visitation within each edge.
+------------------------------------------------------------------------
+
+reverseOriginalRawEndpointPairs :
+  ∀ {n : Nat}
+    (raw : List Graph.RawEdge)
+    (typed : List (Cut.SignedUndirectedEdge n)) →
+  Observe.RawEdgeListFieldsSame raw typed →
+  Sparse.EdgeBits typed → List (Nat × Bool)
+reverseOriginalRawEndpointPairs [] []
+  Observe.raw-list-nil Sparse.emptyEdgeBits = []
+reverseOriginalRawEndpointPairs
+  (r ∷ rs) (edge ∷ es)
+  (Observe.raw-list-cons fields restFields)
+  (Sparse.addEdgeBits a b restBits) =
+  (Graph.target r , b) ∷ (Graph.source r , a)
+    ∷ reverseOriginalRawEndpointPairs rs es restFields restBits
+
+rawOriginalRuntimeHistoryGuard :
+  ∀ {n : Nat}
+    (raw : List Graph.RawEdge)
+    (typed : List (Cut.SignedUndirectedEdge n)) →
+  Observe.RawEdgeListFieldsSame raw typed →
+  Sparse.EdgeBits typed →
+  List (Nat × Bool) → Bool
+rawOriginalRuntimeHistoryGuard [] []
+  Observe.raw-list-nil Sparse.emptyEdgeBits history = true
+rawOriginalRuntimeHistoryGuard
+  (r ∷ rs) (edge ∷ es)
+  (Observe.raw-list-cons fields restFields)
+  (Sparse.addEdgeBits a b restBits) history =
+  Golden.andBool
+    (Runtime.endpointConsistent (Graph.source r) a history)
+    (Golden.andBool
+      (Runtime.endpointConsistent (Graph.target r) b history)
+      (rawOriginalRuntimeHistoryGuard
+        rs es restFields restBits
+        ((Graph.source r , a) ∷ (Graph.target r , b) ∷ history)))
+
+-- Same acceptance Bool using the actual Runtime two endpoint checks,
+-- even though the ordinary chronological checker visits v then u.
+rawOriginalRuntimeHistoryEqualsChronological :
+  ∀ {n : Nat}
+    (raw : List Graph.RawEdge)
+    (typed : List (Cut.SignedUndirectedEdge n))
+    (fields : Observe.RawEdgeListFieldsSame raw typed)
+    (bits : Sparse.EdgeBits typed)
+    (history : List (Nat × Bool)) →
+  rawOriginalRuntimeHistoryGuard raw typed fields bits history
+    ≡ chronologicalRuntimeCheck
+        (reverseOriginalRawEndpointPairs raw typed fields bits)
+        history
+rawOriginalRuntimeHistoryEqualsChronological [] []
+  Observe.raw-list-nil Sparse.emptyEdgeBits history = refl
+rawOriginalRuntimeHistoryEqualsChronological
+  (r ∷ rs) (edge ∷ es)
+  (Observe.raw-list-cons fields restFields)
+  (Sparse.addEdgeBits a b restBits) history
+  rewrite rawOriginalRuntimeHistoryEqualsChronological
+    rs es restFields restBits
+    ((Graph.source r , a) ∷ (Graph.target r , b) ∷ history) =
+  Numeric.rawPairOldHistoryEqualsSequentialChronology
+    r edge fields a b
+    (chronologicalRuntimeCheck
+      (reverseOriginalRawEndpointPairs rs es restFields restBits)
+      ((Graph.source r , a) ∷ (Graph.target r , b) ∷ history))
+    history
+
+rawOriginalRuntimeHistoryExactlyCookAllPairs :
+  ∀ {n : Nat}
+    (raw : List Graph.RawEdge)
+    (typed : List (Cut.SignedUndirectedEdge n))
+    (fields : Observe.RawEdgeListFieldsSame raw typed)
+    (bits : Sparse.EdgeBits typed) →
+  rawOriginalRuntimeHistoryGuard raw typed fields bits []
+    ≡ Cook.allCookObservationsConsistent
+        (reverseOriginalRawEndpointPairs raw typed fields bits)
+rawOriginalRuntimeHistoryExactlyCookAllPairs raw typed fields bits =
+  trans
+    (rawOriginalRuntimeHistoryEqualsChronological
+      raw typed fields bits [])
+    (chronologicalRuntimeExactlyOriginalAllPairs
+      (reverseOriginalRawEndpointPairs raw typed fields bits))
