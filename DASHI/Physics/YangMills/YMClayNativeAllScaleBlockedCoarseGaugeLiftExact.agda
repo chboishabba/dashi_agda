@@ -22,7 +22,7 @@ module DASHI.Physics.YangMills.YMClayNativeAllScaleBlockedCoarseGaugeLiftExact w
 -- SOURCE-WRITTEN; exact-head Agda kernel acceptance is not claimed.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 import Data.Fin.Base as Fin
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
@@ -82,7 +82,7 @@ module _ {m l : Nat} where
   originalBlockOriginIsGeometric :
     ∀ {Value : Set} (group : Bond.ExactLinkGroup Value) site →
     Block.fineBlockOrigin group site ≡ geometricFineBlockOrigin site
-  originalBlockOriginIsGeometric group site = Agda.Builtin.Equality.refl
+  originalBlockOriginIsGeometric group site = refl
 
   -- The ORIGINAL Block.nativeBlockedCoarseGauge has no loss of coarse
   -- site gauge freedom: the constructed lift restricts to gamma.
